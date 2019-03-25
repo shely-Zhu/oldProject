@@ -53,21 +53,8 @@ module.exports = {
 
 
 
-    //financialPlanner
-    //'./financialPlanner/static/js/plannerIndex': "./src/financialPlanner/static/js/plannerIndex.js",//理财师状态
-    './planner/static/js/plannerSearch': "./src/planner/static/js/plannerSearch.js", //理财师查询
-    //'./financialPlanner/static/js/-planner': "./src/financialPlanner/static/js/planner.js",//二维码理财师查询（非wap站点）
-    //'./financialPlanner/static/js/information': "./src/financialPlanner/static/js/information.js",//二维码理财师查询（非wap站点）
 
 
-    //购买基金
-    './pay/static/js/payFundStepOne': "./src/pay/static/js/payFundStepOne.js",
-    './pay/static/js/pubPayRansom': "./src/pay/static/js/pubPayRansom.js", //公募赎回页面
-    './pay/static/js/prvPayRansom': "./src/pay/static/js/prvPayRansom.js", //私募赎回页面 
-    './pay/static/js/prvPayRansomTwo': "./src/pay/static/js/prvPayRansomTwo.js", //私募赎回页面
-    './pay/static/js/payMX': "./src/pay/static/js/payMX.js", //公募交易明细页面
-    './pay/static/js/payDetail': "./src/pay/static/js/payDetail.js", //公募交易明细页面
-    './pay/static/js/payThemeCash': "./src/pay/static/js/payThemeCash.js", //公募交易主页面+中融货币E
 
 
     //私募
@@ -85,65 +72,16 @@ module.exports = {
     // 产品亮点
     './productPrivate/static/js/prvPic': './src/productPrivate/static/js/prvPic.js',
     //产品列表
-    './productPublic/static/js/productPublic': "./src/productPublic/static/js/productPublic.js",
-    //产品列表查询
-    './productPublic/static/js/pubSearch': "./src/productPublic/static/js/pubSearch.js",
-    //产品详情
-    './productPublic/static/js/productDetail': "./src/productPublic/static/js/productDetail.js",
-    //历史净值
-    './productPublic/static/js/oldIncome': "./src/productPublic/static/js/oldIncome.js",
-    //购买须知
-    './productPublic/static/js/payNotice': "./src/productPublic/static/js/payNotice.js",
+    
 
-    //基金公告
-    './productPublic/static/js/fundFile': "./src/productPublic/static/js/fundFile.js",
-    //基金公告详情
-    './productPublic/static/js/notice': "./src/productPublic/static/js/notice.js",
-
-    //中岩
-    './inrock/static/js/new': './src/inrock/static/js/new.js',
-    './inrock/static/js/newList': './src/inrock/static/js/newList.js',
-    './inrock/static/js/newsDetail': './src/inrock/static/js/newsDetail.js',
-    //融泽
-    './rongze/static/js/new': './src/rongze/static/js/new.js',
-    './rongze/static/js/rzNew': './src/rongze/static/js/rzNew.js',
-    './rongze/static/js/newsDetail': './src/rongze/static/js/newsDetail.js',
-
-    //中融货币E
-    //中融货币E总资产
-    './cashTreasure/static/js/totalAssets': "./src/cashTreasure/static/js/totalAssets.js",
-    //交易明细
-    './cashTreasure/static/js/tradeList': "./src/cashTreasure/static/js/tradeList.js",
-    //转入转出详情页
-    './cashTreasure/static/js/tradeDetail': "./src/cashTreasure/static/js/tradeDetail.js",
-    //转入，转出页
-    './cashTreasure/static/js/treasureTrade': "./src/cashTreasure/static/js/treasureTrade.js",
-    //中融货币E产品协议页面
-    './cashTreasure/static/js/cashXml': "./src/cashTreasure/static/js/cashXml.js",
-
-
-    /*************************************合规改造--投资者分类 start*****************************************/
-    // 分类初始化页面
-    './compliance/static/js/classification': "./src/compliance/static/js/classification.js",
-    // 上传页
-    './compliance/static/js/uploadMaterial': "./src/compliance/static/js/uploadMaterial.js",
-    // 认证结果页
-    './compliance/static/js/certificationResult': "./src/compliance/static/js/certificationResult.js",
-    // 线下邮寄页面
-    // './compliance/static/js/offlineReview' : "./src/compliance/static/js/offlineReview.js",
-    // 资料模板页
-    './compliance/static/js/referanceMaterial': "./src/compliance/static/js/referanceMaterial.js",
-    /*************************************合规改造--投资者分类 end*****************************************/
 
     //风险测评调查问卷
     './personal/static/js/questionnaire': "./src/personal/static/js/questionnaire.js",
 
 
-    //首页
-    './index/static/js/index': "./src/index/static/js/index.js",
+    
 
-    //产品查询
-    './productSearch/static/js/productSearch': "./src/productSearch/static/js/productSearch.js",
+    
 
     //include---协议模板
     './include/js/modelPage/agreementModel': "./src/include/js/modelPage/agreementModel.js",
@@ -163,17 +101,6 @@ module.exports = {
     './recommend/static/js/award': './src/recommend/static/js/award.js',
     './recommend/static/js/awardRotate': './src/recommend/static/js/awardRotate.js',
 
-    //恒乐汇
-    './club/static/js/club': './src/club/static/js/club.js',
-    './club/static/js/activitiesList': './src/club/static/js/activitiesList.js',
-    './club/static/js/activityDetail': './src/club/static/js/activityDetail.js',
-    './club/static/js/entery': './src/club/static/js/entery.js',
-    './club/static/js/member': './src/club/static/js/member.js',
-    './club/static/js/leaguerList': './src/club/static/js/leaguerList.js',
-    './club/static/js/leaguerDetail': './src/club/static/js/leaguerDetail.js',
-
-    //恒天财富首页
-    './mobilePage/static/js/homePage': './src/mobilePage/static/js/homePage.js',
 
     // 百度推广页
     './about/static/js/baidu/consult': './src/about/static/js/baidu/consult.js',
@@ -195,11 +122,6 @@ module.exports = {
     './financialEducation/static/js/growthPlan': './src/financialEducation/static/js/growthPlan.js',
     /*----------------------财商教育end-------------------------------*/
 
-    //webviews下面的js引入
-    './webviews/static/js/regard': './src/webviews/static/js/regard.js',
-    './webviews/static/js/information': './src/webviews/static/js/information.js',
-    './webviews/static/js/helpful': './src/webviews/static/js/helpful.js',
-    './webviews/static/js/detailModel': './src/webviews/static/js/detailModel.js',
 
     //基民教育专题页
     './about/static/js/baseEducation/baseLearning': './src/about/static/js/baseEducation/baseLearning.js',
