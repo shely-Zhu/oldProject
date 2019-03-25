@@ -1,0 +1,144 @@
+<!-- /**  
+ * @Page:  恒小智组合详情页
+ * @Author: songxiaoyu  
+ * @Date:   2018-10-10 13:42:19  
+ * @Last Modified by:   songxiaoyu  
+ * @Last Modified time: 2018-12-05 16:55:27  
+ */ -->
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="applicable-device"
+          content="mobile">
+    <meta name="apple-mobile-web-app-capable"
+          content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style"
+          content="black">
+    <link rel="stylesheet"
+          href="/intelligentInvestment/static/css/combinationDetails.css">
+    <title>恒小智</title>
+</head>
+
+<body>
+    
+    @@include('../../common/views/load.html')
+    @@include('../../common/views/loading/listLoading.html')
+
+    <div class="combinationDetails">
+        <section class="mui-card combiT"></section>
+        <!-- 净值 -->
+        <section class="top mui-card marginTop">
+            <ul class="mui-row">
+                <li class="mui-col-sm-6 mui-col-xs-6">
+                    <span class="nav"></span>
+                    <span class="income">最新净值(<b class="tradingDay"></b>)</span>
+                </li>
+                <li class="mui-col-sm-6 mui-col-xs-6">
+                    <span class="dayRate"></span>
+                    <span >日涨幅(%)</span>
+                </li>
+            </ul>
+        </section>
+        <!-- 净值 end -->
+        <!-- 七日年化走势图 -->
+        <section class="mui-card marginTop drawLine">
+            <div class="mui-card-content">
+                <div class="title">
+                    <div class="lineTitle moneyLineTitle">
+                        <span class="active" type="annYldRat">组合收益走势</span>
+                        <span type="netValueTrend">净值走势</span>
+                    </div>
+                    <div class="right">
+                        <p class="data"></p>
+                        <p class="day"></p>
+                    </div>
+                </div>
+                <div class="lineWrapper">
+                    <!-- 放置饼图 -->
+                </div>
+                <div class="line">
+                    <div class="lineMiddle mui-row">
+                        <!-- 默认为1个月 -->
+                        <div class="timeBtn mui-col-sm-3 mui-col-xs-3 active"
+                             time="1">近1月</div>
+                        <div class="timeBtn mui-col-sm-3 mui-col-xs-3"
+                             time="3">近3月</div>
+                        <div class="timeBtn mui-col-sm-3 mui-col-xs-3"
+                             time="12">近1年</div>
+                        <div class="timeBtn mui-col-sm-3 mui-col-xs-3"
+                             time="20">成立以来</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- 七日年化走势图 end-->
+        <!-- 资产配置  -->
+        <seciton class="mui-card marginTop allocationWrap">
+            <h2>资产配置</h2>
+            <div class="assetRatio">
+            </div>
+        </seciton>
+        <!-- 资产配置  end -->
+        <!-- 最新调仓 -->
+        <div class="adjustmentWrap">
+            @@include('../../common/views/pageModule/adjustmentTable.html')
+        </div>
+        <!-- 最新调仓 end-->
+        <!-- 风险揭示函 -->
+        <div class="tipT">
+            基金投资有风险，基金管理人和基金销售机构不保证本基金一定盈利，也不保证最低收益。投资者在投资前应当认真阅读基金合同、招募说明书和完整的
+            <a class="riskTip" href="javascript:;" onclick="window.location.href=site_url.agreementModel_url+'?id=93';">《风险提示函》</a>。
+        </div>
+        <!-- 风险揭示函 end -->
+        <!-- 立即购买 -->
+        @@include('../../common/views/button/longButton.html',{"arr":[ {"className": "bottom", "txt": "买入"} ]})
+
+        <!-- 暂无数据 -->
+        @@include('../../common/views/noData.html')
+    </div>
+
+    <!--资产配置模板 -->
+    <script id="allocation-template" type="text/x-handlebars-template">
+        <ul>
+        {{#each prdDetailList}}
+
+            <li class="allocationT">
+                <ul>
+                {{!-- 分类 --}}
+                    <li class="aGroup {{colorName}}">
+                        <p class="small">{{prdAttrName}}</p>
+                        <p class="bold">{{totalPercent}}</p>
+                    </li>
+                </ul>
+                <ul>
+                    {{#each prdList}}
+                    {{!-- 基金详情 --}}
+                        <li class="aDetail mui-row">
+                            <div class="mui-col-sm-9 mui-col-xs-9">
+                                <p class="fundN ellipsis">{{fundName}}</p>
+                                <p class="fundC">({{fundCode}})</p>
+                            </div>
+                            <div class="mui-col-sm-3 mui-col-xs-3 percent">
+                                {{prdPercent}}
+                            </div>
+                        </li>
+                    {{/each}}
+                </ul>
+            </li>
+        {{/each}}
+        </ul>
+    </script>
+    <script src="/include/js/vendor/zepto/zepto.js"></script>
+    <script src="/include/js/vendor/root.js"></script>
+    <script src="/include/js/vendor/handlebar/handlebars.js"></script>
+    <script src="/include/js/vendor/mui/mui.min.js"></script>
+     <!-- 添加埋点 -->
+    @@include('@pathInclude/views/header.html')
+    <script src="/intelligentInvestment/static/js/combinationDetails.js"></script>
+</body>
+
+</html>

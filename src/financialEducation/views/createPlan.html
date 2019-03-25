@@ -1,0 +1,70 @@
+<!-- /**  
+ * @Page:  创建成长计划
+ * @Author: songxiaoyu  
+ * @Date:   2018-05-07 14:02:02  
+ * @Last Modified by:   songxiaoyu  
+ * @Last Modified time: 2018-10-19 09:24:09  
+ * @description: 上传图片应用：1，引入webUploader.js
+ *               2.业务js中引入uploadFile.js,并执行
+ *               
+ * @ 添加埋点 
+ * @ author ping 2019-2-20
+ */ -->
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="applicable-device" content="mobile">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="stylesheet" href="/financialEducation/static/css/createPlan.css">
+    <title>创建成长计划</title>
+</head>
+
+<body>
+    <section class="container">
+        <section class="form_wrap">
+            <section class="mui-card upload_wrap" id="complianceMaterial">
+                <div class="mui-card uploadWrap">
+                    <div class="mui-row queueList">
+                        <!-- <div class="mui-col-xs-4 iconWrap">
+                        <p class="imgWrap"></p>
+                    </div> -->
+                        <div class="iconWrap" id="complianceSelect">
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <section class="mui-card marginTop">
+                <div class="form-wrap">
+                    @@include('../../common/views/form/configurableForm/inputAreaPick.html', 
+                    {"configurableArr":[ 
+                        {"type": "textarea", "label": "项目名称", "errortip": "请填写", "placehoder":"请填写","checkType": "planName", "needCheck":true}, 
+                        {"type": "textarea", "label": "孩子姓名", "errortip": "请填写", "checkType": "kidName","placehoder":"请填写","needCheck":true}, 
+                        {"type": "select", "label": "孩子性别", "errortip": "请选择孩子性别", "placehoder":"请填写","checkType": "genderSelect","needCheck":true}, 
+                        {"type": "select", "label": "孩子生日", "errortip": "请选择孩子生日", "placehoder":"请填写","checkType": "birthSelect","needCheck":true}]
+                    })
+                </div>
+            </section>
+            <section class="mui-card marginTop">
+                <div class="form-wrap">
+                    @@include('../../common/views/form/configurableForm/inputAreaPick.html',{"configurableArr":[ {"type": "textarea", "label": "成长寄语", "errortip": "请填写", "checkType": "name","needCheck":false,"maxlength":100} ]})
+                </div>
+            </section>
+        </section>
+        <div class="btn_wrap">
+            <button type="button" class="mui-btn create_btn" id="upload_btn">完成创建</button>
+        </div>
+    </section>
+    <script src="/include/js/vendor/zepto/zepto.js"></script>
+    <script src="/include/js/vendor/root.js"></script>
+    <script src="/include/js/vendor/mui/mui.min.js"></script>
+    <!-- 添加埋点 -->
+    @@include('@pathInclude/views/header.html')
+    <script src="/financialEducation/static/js/createPlan.js"></script>
+    <script src="/include/js/vendor/webuploader/webUploader.js"></script>
+</body>
+
+</html>

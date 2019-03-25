@@ -1,0 +1,56 @@
+/*
+* @page: 恒小智购买页
+* @Author: songxiaoyu
+* @Date:   2018-10-12 16:42:39
+* @Last Modified by:   songxiaoyu
+* @Last Modified time: 2018-10-12 16:42:49
+* @description:
+*/
+
+// 恒小智公用less
+@import url("./common/combineCommon.less");
+
+// 持仓详情表格
+@import url("../../../common/less/components/holdDetails.less");
+//银行卡列表样式
+@import url("../../../common/less/components/bankListCom.less");
+// 交易密码
+@import url("../../../common/less/components/elasticLayerTypeTwo.less");
+
+.buyCombination {
+
+    // 买入金额
+    .amount {
+        padding: 1.2rem 0;
+
+        input[type=text] {
+            width: 60%;
+            text-align: right;
+            font-size:1.8rem;
+
+            &::placeholder{
+                font-size: 1.4rem;
+            }
+        }
+
+        .text {
+            line-height: 4rem;
+        }
+    }
+
+    // 持仓明细
+    .holdingDetail {
+        margin-bottom: 2rem;
+    }
+
+    // 协议
+    .agreement {
+    	padding-left:1.6rem;
+    	margin-bottom: 5.9rem;
+
+       
+
+
+    }
+
+}

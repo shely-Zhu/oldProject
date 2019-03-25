@@ -1,0 +1,50 @@
+/**
+ * 设置页面 样式文件
+ * @author yangjinlai 2017-03-07
+ */
+
+//引入mui
+@import url("../../../include/css/mui.min.css");
+
+@import url("../../../common/less/reset.less");
+@import url("../../../common/less/color.less");
+
+//引入重置mui样式的表单样式文件
+//@import url("../../../common/less/mui/formMUI.less"); 
+@import url("../../../common/less/mui/selectMUI.less"); 
+@import url("../../../common/less/mui/newFormMui.less"); 
+
+@import url("../../../common/less/components/againEnter.less");
+
+//弹出层样式
+@import url("../../../common/less/components/alertBox.less");
+//弹出层样式
+@import url("../../../common/less/components/elasticLayerTypeTwo.less");
+
+@import url("../../../common/less/components/bottomNav.less");
+//合并后的网站交易密码项显示
+.mergeYes{
+	display: none;
+}
+.mui-table-view-cell.noBor{ 
+	&:after{
+		height: 0;
+	}
+}
+
+
+//右侧不是箭头是文字
+.hasWord{
+	&:after{
+		display:none;
+	}
+}
+
+.word{
+	font-size: 1.4rem;
+	color: @c001;
+}
+
+.mui-navigate-right{
+	font-size: 1.4rem;
+}

@@ -1,0 +1,81 @@
+<!-- 
+	实名认证  设置交易密码页面
+	@author yangjinlai 2017-02-14
+
+	*:本页面使用MUI
+-->
+
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+	    <meta name="viewport" id="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+	    <meta name="applicable-device" content="mobile">
+	    <meta name="apple-mobile-web-app-capable" content="yes">
+	    <meta name="apple-mobile-web-app-status-bar-style" content="black"><meta charset="UTF-8">
+		<title>实名认证</title>
+		<link rel="stylesheet" href="/user/static/css/realName.css">
+	</head>
+
+	<body>
+		
+		<p class="txt">网站交易密码用于金服网站交易，非银行卡密码</p>
+
+		<div class="stepAction StepThree">
+			<ul class="flexbox">
+				<li class="flex1">
+					<div class="stepLi">
+						<span>1</span>
+						<p>绑定银行卡</p>
+					</div>
+				</li>
+				<li class="flex1 action">
+					<div class="stepLi">
+						<span>2</span>
+						<p>设置交易密码</p>
+					</div>
+				</li>
+				<li class="flex1 step_3">
+					<div class="stepLi">
+						<span class="mui-icon mui-icon-checkmarkempty"></span>
+						<p>完成</p>
+					</div>
+				</li>
+			</ul>
+		</div>
+		
+		<!--表单区域 -->
+		<div class="stepTwo container">
+			<div class="mui-card marginTop">
+				
+					
+				<div class="form-wrap">
+					
+					<div class="formList formIconRight">
+						@@include('../../../common/views/form/dealPassword/dealPassword.html')
+					</div>
+					
+					<div class="formList formIconRight">
+						@@include('../../../common/views/form/dealPassword/qrDealPassword.html')
+					</div>    
+						
+						
+
+				</div>
+
+			</div>
+
+			@@include('../../../common/views/button/sureBtn.html')
+			
+		</div>
+		<!--表单 end-->
+
+		<script src="/include/js/vendor/zepto/zepto.js"></script>
+		<script src="/include/js/vendor/root.js"></script>
+		<script src="/include/js/vendor/mui/mui.min.js"></script>
+		<script src="/user/static/js/realName/realNameStepThree.js"></script>
+
+	</body>
+
+</html>

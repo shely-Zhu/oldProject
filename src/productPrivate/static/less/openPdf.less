@@ -1,0 +1,40 @@
+
+@import url("../../../include/css/mui.min.css");
+@import url('../../../common/less/mui/resetMUI.less');
+@import url("../../../common/less/reset.less");
+@import url("../../../common/less/color.less"); 
+@import url("../../../common/less/baseClass.less"); 
+html{height: 100%;}
+body{
+	display: -webkit-box;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+	-webkit-box-pack: justify;
+    -ms-flex-pack: justify;
+    -webkit-justify-content: space-between;
+    justify-content: space-between;
+	-webkit-box-orient: vertical;
+    -ms-flex-direction: column;
+    -webkit-flex-direction: column;
+    flex-direction: column;
+	height: 100%;
+	canvas{
+		max-width: 100%;
+	}
+	.btn{
+		height: 4rem /* 80/20 */;
+		line-height: 4rem;
+		font-size: 1.4rem;
+		background: @c001;
+		color: @c005;
+		text-align: center;
+	}
+	.yesBtn{
+		background: @c006;
+	}
+	#openPdf{
+		overflow-y: scroll; 
+	}
+
+}

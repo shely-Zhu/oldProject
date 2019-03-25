@@ -1,0 +1,45 @@
+<!--
+	* 恒小智首页
+	* author:ping
+	* time：2018-10-10
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0,user-scalable=no" name="viewport" id="viewport" />
+	<meta content="telephone=no" name="format-detection" />
+	<meta content="yes" name="apple-mobile-web-app-capable" />
+	<meta name="apple-mobile-web-app-status-bar-style" content="black">
+	<link rel="stylesheet" href="/intelligentInvestment/static/css/investmentIndex.css">
+	<title>恒小智</title>
+<body>
+    @@include('../../common/views/load.html')
+	<!-- 加载中loading -->
+	<!-- @@include('../../common/views/loading/listLoading.html') -->
+
+	<div class="investmentIndex"> 
+		<div class="riskTitle">您的风险承受能力</div>
+		<div class="riskType">***</div>
+		<!-- <img class="images" src=""></img> -->
+		<div class="images"><img src="" alt=""></div>
+		<div class="riskContent">------</div>
+
+		
+	</div>
+
+	@@include('../../common/views/button/buyNowBtn.html',{"arr":[ {"className": "bottom developPlans", "txt": "制定投资方案"} ]})
+	
+
+	<script src="/include/js/vendor/zepto/zepto.js"></script>
+	
+	<script src="/include/js/vendor/handlebar/handlebars.js"></script>
+	<script src="/include/js/vendor/mui/mui.min.js"></script>
+	<script src="/include/js/vendor/root.js"></script>
+	 <!-- 添加埋点 -->
+    @@include('@pathInclude/views/header.html')
+	<script src="/intelligentInvestment/static/js/investmentIndex.js"></script>
+
+</body>
+
+</html>

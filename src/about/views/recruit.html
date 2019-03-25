@@ -1,0 +1,127 @@
+<!--
+	*举贤荐才
+	*zhangyanping 2018/01/22
+-->
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+	<meta name="applicable-device" content="mobile">
+	<meta name="apple-mobile-web-app-capable" content="yes">
+	<meta name="apple-mobile-web-app-status-bar-style" content="black">
+	<title>举贤荐才</title>
+	<link rel="stylesheet" href="/about/static/css/recruit.css">
+</head>
+<body>
+	<div class="recruit">
+		<div class="recomIntro">
+			<div class="recomHeader">被推荐人信息</div>
+			<div class="mui-card marginTop menu">
+
+				<div class="form-wrap">
+
+					<!-- 请输入被推荐人姓名 -->
+					<div class="formList formIconLeft">
+
+						<div class="mui-input-row">
+							<input type="text" class="mui-input-clear" placeholder="请输入被推荐人姓名" needCheck="true" check="recomName">
+						</div>
+
+					</div>
+					
+					<!-- 被推荐人联系方式，11位手机号码 -->
+					<div class="formList formIconLeft">
+
+						<div class="mui-input-row phone">
+							<input type="tel" class="mui-input-clear" placeholder="被推荐人联系方式，11位手机号码" needCheck="true" check="recomPhone" maxlength="11">
+						</div>
+
+					</div>
+					
+					<!-- 被推荐人所在银行 -->
+					<div class="formList formIconLeft">
+
+						<div class="mui-input-row">
+							<input type="text" class="mui-input-clear" placeholder="被推荐人所在银行" needCheck="true" check="recomBank">
+						</div>
+
+					</div>
+					
+					<!-- 被推荐人目前岗位，如理财经理 -->
+					<div class="formList formIconLeft">
+
+						<div class="mui-input-row">
+							<input type="text" class="mui-input-clear" placeholder="被推荐人目前岗位，如理财经理" needCheck="true" check="status">
+						</div>
+
+					</div>
+
+					
+				</div>
+
+			</div>
+		</div>
+
+		<div class="personIntro">
+			<div class="recomHeader">个人信息</div>
+			<div class="mui-card marginTop menu">
+
+				<div class="form-wrap">
+
+					<!-- 您的服务理顾姓名 -->
+					<div class="formList formIconLeft">
+
+						<div class="mui-input-row">
+							<input type="text" class="mui-input-clear" placeholder="您的服务理顾姓名" needCheck="true" check="perName">
+						</div>
+
+					</div>
+					
+					<!-- 您的联系方式，11位手机号码 -->
+					<div class="formList formIconLeft">
+
+						<div class="mui-input-row phone">
+							<input type="tel" class="mui-input-clear" placeholder="您的联系方式，11位手机号码" needCheck="true" check="perPhone" maxlength="11">
+						</div>
+
+					</div>
+					
+					<!-- 服务理顾所在营业部，如浙江第一营业部 -->
+					<div class="formList formIconLeft">
+
+						<div class="mui-input-row">
+							<input type="text" class="mui-input-clear" placeholder="服务理顾所在营业部，如浙江第一营业部" needCheck="true" check="perDepart">
+						</div>
+
+					</div>
+					
+					<ul class="mui-table-view  provinceSelect"> 
+					    <li class="mui-table-view-cell mui-collapse">
+					        <a class="mui-navigate-right" href="javascript:;" needCheck="true" check="provinceSelect" num="" errortip="请输入省份信息">所在省份</a>
+					    </li>
+					</ul>
+					
+				</div>
+
+			</div>
+		</div>
+
+		<div class="submitBtn">提交</div>
+
+		<div class="againEnter"><p class="tipWrapper"></p></div>
+
+	</div>
+
+		<!-- 引入js  -->
+	<script src="@pathIncludJs/vendor/zepto/zepto.js"></script>
+	<script src="@pathIncludJs/vendor/root.js"></script>	
+	<script src="@pathIncludJs/vendor/mui/mui.min.js"></script>
+	<!-- 添加埋点 -->
+	@@include('@pathInclude/views/header.html')
+	<script src="/about/static/js/recruit.js"></script>
+	
+</body>
+
+</html>
+

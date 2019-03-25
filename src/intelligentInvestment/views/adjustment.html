@@ -1,0 +1,55 @@
+<!-- 
+	** 一键调仓页面 ping time:2019-01-07
+ -->
+
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="applicable-device" content="mobile">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="stylesheet" href="/intelligentInvestment/static/css/adjustment.css">
+	<title>调仓</title>
+</head>
+<body>
+
+	<!-- 暂无数据 -->
+	<!--@@include('../../common/views/noData.html') -->
+
+	<div class="mui-content adjustment">
+		<div class="adjustmentTitle">预计调仓结果</div>
+		<header class="mui-row navList">
+			<span class="listDivLeft mui-col-xs-6">基金名称</span>
+			<span class="listDivCenter mui-col-xs-3">调仓前</span>
+			<span class="listDivRight mui-col-xs-3">调仓后</span>
+		</header>
+
+		<div class="adjustmentList">
+        
+    	</div>
+
+
+		@@include('../../common/views/button/buyNowBtn.html',{"arr":[ {"className": "bottom", "txt": "一键调仓"} ]}) 
+		<!-- className 传样式   txt 按钮的样式 -->
+
+
+	</div>
+
+
+	@@include('@pathCommonViews/pageModule/adjustmentTable.html')
+
+	<!-- 返回顶部 -->
+	@@include('../../common/views/goTop.html')
+
+	@@include('../../common/views/webPassword.html')
+</body>
+
+	<script src="/include/js/vendor/zepto/zepto.js"></script>
+	<script src="/include/js/vendor/root.js"></script>
+	<script src="/include/js/vendor/handlebar/handlebars.js"></script>
+	<script src="/include/js/vendor/mui/mui.min.js"></script>
+	@@include('@pathInclude/views/header.html') 
+	<script src="/intelligentInvestment/static/js/adjustment.js"></script>
+</html>

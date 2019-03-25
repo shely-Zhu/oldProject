@@ -1,0 +1,103 @@
+<!-- 预约明细 -->
+
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+	<meta name="applicable-device" content="mobile">
+	<meta name="apple-mobile-web-app-capable" content="yes">
+	<meta name="apple-mobile-web-app-status-bar-style" content="black">
+	<link rel="stylesheet" href="/personal/static/css/detail.css">
+	<title>预约明细</title>
+</head>
+<body>
+	@@include('../../common/views/load.html')
+
+	<section class="container"  id="wrapper">
+
+		<div class="order"  id="scroller">
+
+			<div id="pullBox">
+				<div class="list"   id="pageLists">
+					<!-- <div class="datalist">
+						<h2 class="ellipsis"> 恒天稳利25号中植高科Samba投资基金A类恒天稳利25号中植高科Samba投资</h2>
+						<div class="line"></div>
+						<ul>
+							<li class="first clearfix">
+								<div class="title">理财师</div>
+								<div class="text">余华华</div>
+							</li>
+							<li class="clearfix">
+								<div class="title">预约金额</div>
+								<div class="text"><span>1,100,000.00</span>份</div>
+							</li>
+							<li class="clearfix">
+								<div class="title">预约时间</div>
+								<div class="text">2016-05-20</div>
+							</li>
+						</ul>
+					</div> -->  
+
+				</div>
+				<div class="without" id="emptyBox" style="display:none;">
+					<div class="box vertical center">
+						<p class="iconfont">&#xe603;</p>
+						<p class="text">暂无数据</p>
+					</div>
+				</div>
+			</div>
+
+			@@include('../../common/views/upLoad.html')
+
+		</div>
+
+		<!-- 回到顶部 -->
+		<div class="upTop" id="goTop" style="display:none;">
+			<span class="iconfont">&#xe74a;</span>
+		</div>
+		<!-- 回到顶部 -->
+	</section>  
+	<p class="chtwm-pay chtwm-detail">基金销售服务由北京恒天明泽基金销售有限公司提供</p>
+	<!-- <div class="againEnter">
+	      <button class="tipWrapper"></button>
+	    </div> --> 
+
+	<script id="dataLists" type="text/x-handlebars-template">
+		{{! 左侧页面列表}}
+		{{#each this}}
+			<div href="/productPrivate/views/prdPrvDetails.html?fundCode={{fundCode}}" class="datalist">
+				<h2 class="ellipsis">{{fundName}}</h2>
+				<div class="line"></div>
+				<ul>
+					<li class="first clearfix">
+						<div class="title">理财师</div>
+						<div class="text">{{brokerName}}</div>
+					</li>
+					<li class="clearfix">
+						<div class="title">预约金额</div>
+						<div class="text"><span>{{orderBalance}}</span>元</div>
+					</li>
+					<li class="clearfix">
+						<div class="title">预约时间</div>
+						<div class="text">{{orderTime}}</div>
+					</li>
+				</ul>
+				<div class="line"></div> 
+				{{#if app}}
+					<p class="card-foot"><span class="intro">{{orderDesc}}</span><span class="operate" fundCode="{{fundCode}}" orderNo="{{orderNo}}">取消预约</span></p>
+				{{else}}
+					<p class="card-foot"><span class="intro">{{orderDesc}}</span><span></span></p>
+				{{/if}}
+			</div>
+		{{/each}}
+	</script> 
+
+	<script src="/include/js/vendor/zepto/zepto.js"></script>
+	<script src="/include/js/vendor/root.js"></script>
+	<script src="/include/js/iscroll.js"></script> 
+	<script src="/include/js/vendor/handlebar/handlebars.js"></script>
+	<!-- <script src="/include/js/vendor/base64/base64.js"></script> -->
+	<script src="/personal/static/js/orderDetail.js"></script>
+</body>
+</html>

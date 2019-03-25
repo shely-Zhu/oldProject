@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+	<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+	<meta name="applicable-device" content="mobile">
+	<meta name="apple-mobile-web-app-capable" content="yes">
+	<meta name="apple-mobile-web-app-status-bar-style" content="black">
+	<link rel="stylesheet" href="/personal/static/css/account.css">
+	<title>我的账户</title>
+</head>
+<body>
+	@@include('../../common/views/load.html')
+
+	<section class="container">
+
+		<div class="accountMerge"> 
+
+			<div class="banner">
+				<div class="setting clearfix">
+					<a href="javascript:;" onclick="window.location.href=site_url.mySetUp_url;"><span class="iconfont">&#xe614;</span>设置</a>
+				</div>
+				<div class="icon"><span class="iconfont">&#xe602;</span></div>
+				<div class="name"><span class="nameSec">***</span>，您好！</div>
+			</div>
+	
+			<!-- 公募开户/一键绑定 -->
+			<div class="openDiv openAccountBtn">
+				<div class="itemsLeft">
+					<p class="title">公募开户</p>
+					<p class="text">涓涓细流，可汇江河</p>
+				</div>
+				<div class="button">立即开户</div>
+			</div>
+
+			<div class="openDiv openBind">
+				<div class="itemsLeft">
+					<p class="title">您已开通公募账户</p>
+					<p class="text">绑定可查询公私募全部信息</p>
+				</div>
+				<div class="button">一键绑定</div>
+			</div>
+			<!-- 公募开户/一键绑定 end -->
+
+
+			<div class="information">
+				<a href="javascript:;" class="integral" onclick="window.location.href=site_url.myPots_url;">
+					<p><span class="iconfont">&#xe6a3;</span>我的积分</p>
+					<span class="iconfont integralIcon">&#xe600;</span>
+				</a>
+				<a href="javascript:;" class="bankcard" onclick="window.location.href=site_url.bankCard_url;">
+					<p><span class="iconfont">&#xe60e;</span>我的银行卡</p>
+				</a>
+
+			</div>
+
+
+			<div class="mui-card marginTop items">
+
+				<div class="form-wrap">
+					<div class="form-list">
+						<ul class="mui-table-view">
+							<li class="mui-table-view-cell risk_title">
+								<!-- <a class="mui-navigate-right" href="javascript:;" onclick="window.location.href=site_url.riskAssessment_url;"> -->
+								<a class="mui-navigate-right" href="javascript:;">
+									<span class="iconfont">&#xe611;</span>
+									<span class="text">风险测评</span>
+									<span class="result risk"></span>
+								</a>
+							</li>
+						</ul>
+						<ul class="mui-table-view realName">
+							<li class="mui-table-view-cell">
+								<a class="mui-navigate-right" href="javascript:;">
+									<span class="iconfont">&#xe6a6;</span>
+									<span class="text">实名认证</span>
+									<span class="result"></span>
+								</a>
+							</li>
+						</ul>
+					</div>
+				</div>
+			</div>
+
+			<div class="mui-card marginTop items investDiv">
+				<div class="form-wrap ">
+					<div class="form-list">
+						<!-- <ul class="mui-table-view">
+							<li class="mui-table-view-cell">
+								<a class="mui-navigate-right" href="javascript:;">
+									<span class="iconfont">&#xe612;</span>
+									<span class="text">合格投资者认证</span>
+									<span class="result"></span>
+								</a>
+							</li>
+						</ul> -->
+						<ul class="mui-table-view investType">
+							<li class="mui-table-view-cell">
+								<a class="mui-navigate-right" href="javascript:;">
+									<span class="iconfont">&#xe696;</span>
+									<span class="text">投资者分类认证</span>
+									<span class="result"></span>
+								</a>
+							</li>
+						</ul>
+					</div>
+				</div>
+			</div>
+			
+			
+			<div class="mui-card marginTop items">
+				<div class="form-wrap">
+					<div class="form-list final isBor">
+						<ul class="mui-table-view">
+							<li class="mui-table-view-cell">
+								<a class="mui-navigate-right planner" href="javascript:;" >
+									<span class="iconfont">&#xe618;</span>
+									<span class="text">理财师</span>
+									<span class="result risk"></span>
+								</a>
+							</li>
+						</ul>
+						<ul class="mui-table-view jianGuanMsg">
+							<li class="mui-table-view-cell">
+								<a class="mui-navigate-right" href="javascript:;" onclick="window.location.href=site_url.regulatoryAccounts_url;">
+									<span class="iconfont">&#xe613;</span>
+									<span class="text">公募监管账户</span>
+									<span class="result real"></span>
+								</a>
+							</li>
+						</ul>
+					</div>
+				</div>
+				<!-- <div class="item flexbox v_center final noBor"> 
+					<span class="iconfont">&#xe618;</span><span class="text flex1">理财师</span><a href="javascript:;" class="planner" onclick="window.location.href=site_url.plannerSearch_url;"><span class="goRisk iconfont">&#xe600;</span></a>
+				</div>
+
+				<!-- 合并后显示的 -->
+				<!-- <div class="item v_center jianGuanMsg">
+					<span class="iconfont">&#xe613;</span><span class="text">公募监管账户</span><a href="javascript:;" onclick="window.location.href=site_url.regulatoryAccounts_url;"><span class="goRisk iconfont">&#xe600;</span></a>
+				</div> --> 
+			</div>
+			<!-- 推荐有礼--个人实名可显示 -->
+				<div class="mui-card marginTop items recommend_wrap">
+					<div class="form-wrap ">
+						<div class="form-list">
+							<ul class="mui-table-view recommend">
+								<li class="mui-table-view-cell">
+									<a class="mui-navigate-right" href="javascript:;"  onclick="window.location.href=site_url.recommend_url;">
+										<span class="iconfont">&#xe6c5;</span>
+										<span class="text">推荐有礼</span>
+										<span class="result"></span>
+									</a>
+								</li>
+							</ul>
+						</div>
+					</div>
+				</div>
+		</div>
+	
+		<!-- <div class="mask">
+			<div class="iconfont close">&#xe60c;</div>
+			<div class="elasticWrapper">
+				<span class="iconfont cloud">&#xe68b;</span>
+				<div class="elasticTxt">检测到您已开通恒天私募账户及公募交易账户，立即绑定，体验账户资产统一管理</div>
+				<a href="javascript:;" class="bind">立即绑定</a>
+				<a href="javascript:;" class="noBind">暂不绑定</a>
+			</div>
+		</div>  -->
+
+		<!-- 弹层 -->
+		@@include('../../common/views/accountOrBind.html')
+	</section>
+
+	<!-- 底部导航 -->
+	@@include('../../common/views/bottomNav.html')
+	<script src="/include/js/vendor/zepto/zepto.js"></script>
+	<script src="/include/js/vendor/root.js"></script>
+	<script src="/include/js/vendor/mui/mui.min.js"></script>
+	<script src="/personal/static/js/myAccount.js"></script>
+</body>
+</html>

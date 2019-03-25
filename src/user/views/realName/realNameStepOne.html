@@ -1,0 +1,174 @@
+<!-- 
+	实名认证页面 
+	@author yangjinlai 2017-02-14
+
+	*:本页面使用MUI
+
+	** 实名认证拆分 将原实名认证中实名信息与适当性信息进行剥离
+	** @author zhangyanping 2018-07-06
+-->
+
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" id="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+		<meta name="applicable-device" content="mobile">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black"><meta charset="UTF-8">
+		<title>实名认证</title>
+		<link rel="stylesheet" href="/user/static/css/realName.css">
+	</head>
+
+	<body>
+		@@include('../../../common/views/load.html')
+
+		<div class="stepAction">
+
+			<ul class="mui-row">
+				<li class="mui-col-sm-4 mui-col-xs-4 action">
+					<div class="stepLi">
+						<span>1</span>
+						<p>绑定银行卡</p>
+					</div>
+				</li>
+				<li class="mui-col-sm-4 mui-col-xs-4">
+					<div class="stepLi">
+						<span>2</span>
+						<p>设置交易密码</p>
+					</div>
+				</li>
+				<li class="mui-col-sm-4 mui-col-xs-4">
+					<div class="stepLi">
+						<span class="mui-icon mui-icon-checkmarkempty"></span>
+						<p>完成</p>
+					</div> 
+				</li>
+			</ul>
+		</div>
+
+
+		<!--表单区域 -->
+		<div class="inputWrap">
+			
+			<div class="mui-card">
+				
+				<div class="form-wrap">
+					
+					<!-- 姓名 -->
+					<div class="formList">
+						@@include('../../../common/views/form/name/name.html')
+					</div>
+
+					<!-- 证件类型 -->
+					@@include('../../../common/views/form/idCard/realNameIdType.html')
+					
+					<!-- 证件号 -->
+					<div class="formList">
+						@@include('../../../common/views/form/idCard/idCardNum.html')
+					</div>
+						
+				</div>
+				
+			</div>
+			
+			<div class="mui-card marginTop">
+				<div class="form-wrap">
+					
+					<!-- 银行卡号 -->
+					<div class="formList">
+						@@include('../../../common/views/form/bank/bankNum.html')
+					</div>  
+					<!-- 发卡银行 -->
+					@@include('../../../common/views/form/bank/bankSelect.html')
+					<!-- 开户省 -->
+					@@include('../../../common/views/form/area/bankProvince.html')
+					<!-- 开户市 -->
+					@@include('../../../common/views/form/area/bankArea.html')
+					<!-- 开户支行 -->
+					@@include('../../../common/views/form/bank/branchBank.html')
+					
+				</div>
+			</div>
+
+			<!-- 预留手机号与验证码由实名认证第二步合并到本页面 -->
+			<div class="mui-card marginTop">
+				
+				<div class="form-wrap">
+
+					<!-- 银行预留手机号 -->
+					<div class="formList">
+						@@include('../../../common/views/form/bank/bankPhone.html')
+					</div>
+
+				    <!-- verifyCode class表示当前的表格元素为图文验证码 -->
+					<div class="formList verifyCode">
+						@@include('../../../common/views/form/code/twyzmCode.html')
+					</div>
+
+					<!-- numberCode class表示当前的表格元素为短信验证码 -->
+					<div class="formList numberCode">
+						@@include('../../../common/views/form/code/dxyzmCode.html')
+					</div>
+						
+				</div>
+
+			</div>
+
+			
+			@@include('../../../common/views/button/nextBtn.html')
+
+			<!-- 协议 -->
+			<div class="agreement flexbox">
+				<div class="mui-checkbox mui-left">
+					<div>
+						<a href="javascript:;" class="item1"><span>已阅读并同意</span></a>
+						<span  class="item2">
+							<a href="javascript:;" onclick="window.location.href=site_url.tradeserviceAgreement_url">《基金网上交易服务协议》</a>
+							<a href="javascript:;" onclick="window.location.href=site_url.investorinterests_url">《投资者权益须知》</a>
+						</span>
+					</div>
+					<input name="checkbox1" value="Item 1" type="checkbox" checked="checked" class="iconfont">
+				</div>
+			</div>
+
+		</div>
+		<!--表单 end-->
+		
+		
+		<!-- 支行列表查询区域 -->
+		<section class="branchSearchArea">
+			<div class="branchHeader">
+				<div class="form-wrap">
+					<div class="mui-input-row">
+						<div class="search flexbox">
+							<div class="mui-icon searchicon mui-icon-search"></div>
+							@@include('../../../common/views/form/bank/branchSearchInput.html')
+						</div>
+
+						@@include('../../../common/views/button/closeBtn.html')
+						
+					</div>
+				</div>
+			</div>
+			<div class="branchBody">
+				<div class="haveData">
+					<!-- 放置查询结果 -->
+				</div>
+				<!-- 没有数据 -->
+				@@include('../../../common/views/noData.html')
+				
+			</div>
+		</section>
+		<!-- 支行列表查询区域  end-->
+		
+		<script src="/include/js/vendor/zepto/zepto.js"></script>
+		<script src="/include/js/vendor/root.js"></script>
+		<script src="/include/js/vendor/mui/mui.min.js"></script>
+		<script src="/include/js/vendor/handlebar/handlebars.js"></script>
+		<script src="/user/static/js/realName/realName.js"></script>
+
+	</body>
+
+</html>

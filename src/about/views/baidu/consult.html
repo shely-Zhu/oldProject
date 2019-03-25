@@ -1,0 +1,81 @@
+<!--
+	*baidu推广页
+	*zhangyanping 2017/12/7
+	*
+	* 添加图文验证码 2018-08-06 PING
+-->
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="applicable-device" content="mobile">
+	<meta name ="format-detection" content="telephone = no" />
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+	<title>专业可靠的理财平台-恒天财富</title>
+	<link rel="stylesheet" href="/about/static/css/baidu/baidu.css">
+</head>
+<body>
+	<div class="consult">
+		<div class="content"></div>
+		<div class="mui-card marginTop menu">
+
+			<div class="form-wrap">
+
+				<div class="formList formIconLeft">
+					<span class="iconfont">&#xe628;</span>
+
+					@@include('@pathCommonViews/form/name/name.html')
+				</div>
+				
+				<!-- 手机号 -->
+				<div class="formList formIconLeft">
+					<span class="iconfont">&#xe625;</span>
+
+					@@include('@pathCommonViews/form/phone/phone.html')
+				</div>
+
+				<!-- verifyCode class表示当前的表格元素为图文验证码 -->
+				<div class="formList verifyCode">
+					<span class="iconfont">&#xe6de;</span>
+					@@include('@pathCommonViews/form/code/twyzmCode.html')
+				</div>
+
+
+				<!-- numberCode class表示当前的表格元素为短信验证码 -->
+				<div class="formList formIconLeft numberCode">
+					<span class="iconfont">&#xe62b;</span>
+					
+					<div class="mui-input-row mui-row">
+						<div class="mui-col-sm-7 mui-col-xs-7">
+							<input class="mui-input-clear" type="text" needCheck="true" check="dxyzm" placeholder="请输入验证码"/>
+						</div>
+						<span class="mui-col-sm-5 mui-col-xs-5 dxyzmBtn" checkTop="true">获取验证码</span>
+					</div>
+				</div>
+
+				<!--输入邮箱-->
+				<div class="formList formIconLeft email">
+					<span class="iconfont">&#xe62c;</span>
+
+					<div class="mui-input-row">
+						<input type="email" class="mui-input-clear" placeholder="请输入邮箱" needCheck="true" check="email">
+					</div>
+				</div>
+				
+			</div>
+
+			<div class="submitBtn">立即提交</div>
+
+			<div class="tip">我们将在24小时内联系您，来电为010-56623000</div>
+
+		</div>
+	</div>
+	
+</body>
+	<script src="@pathIncludJs/vendor/zepto/zepto.js"></script>
+	<script src="@pathIncludJs/vendor/root.js"></script>	
+	<script src="/about/static/js/baidu/consult.js"></script>
+</html>
+

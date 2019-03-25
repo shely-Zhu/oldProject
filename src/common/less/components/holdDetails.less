@@ -1,0 +1,71 @@
+/**  
+ * @Page:  持仓明细表格
+ * @Author: songxiaoyu  
+ * @Date:   2018-10-11 10:39:01  
+ * @Last Modified by:   songxiaoyu  
+ * @Last Modified time: 2018-10-11 15:04:50  
+ *
+ * 恒小智我的组合页面
+ */
+
+// 持仓详情
+.holdingDetail {
+    padding: 0 1.6rem 0.8rem 1.6rem;
+    color: @c002;
+    text-align: right;
+    margin-bottom: 7.5rem;
+
+    h2 {
+        font-size: 1.4rem;
+        padding-bottom: 0.5rem;
+        padding-top:1.6rem;
+    }
+
+    .mui-row {
+        position: relative;
+        height: 4.9rem;
+
+        &>span {
+            line-height: 4.9rem;
+            font-size:1.2rem;
+        }
+
+        &:after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: -3rem;
+            width: 200%;
+            border-bottom: 1px solid @c008;
+        }
+
+        &:last-child {
+            &:after {
+                content: none;
+            }
+        }
+
+        .fundN {
+            padding-top: 0.8rem;
+        }
+    }
+
+    .detailT {
+        text-align: right;
+        position: relative;
+        line-height: 3.6rem;
+        color: @c003;
+        font-size:1.2rem;
+
+        span{
+            &:first-child{
+                text-align:left;
+            }
+        }
+    }
+
+    .listDiv .ellipsis {
+        display: block;
+        font-size:1.2rem;
+    }
+}

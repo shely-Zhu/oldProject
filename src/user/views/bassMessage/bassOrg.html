@@ -1,0 +1,111 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+	   <meta name="viewport" id="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+	    <meta name="applicable-device" content="mobile">
+	    <meta name="apple-mobile-web-app-capable" content="yes">
+	    <meta name="apple-mobile-web-app-status-bar-style" content="black"><meta charset="UTF-8">
+		<title>基本信息</title>
+		<link rel="stylesheet" href="/user/static/css/realName.css">
+	</head>
+
+	<body>
+		@@include('../../../common/views/load.html')
+		<div class="container"> 
+			<div class="org">
+				<div class="bassTip"><span class="iconfont">&#xe6dc;</span>应监管要求，需要您补充以下信息：</div>
+				<div class="mui-card">
+					<div class="mui-card-head">
+						机构基本信息
+					</div>
+					<div class="form-wrap"> 
+						<div class="formBox line6">
+							<label>机构名称</label>
+							<div class="formList fontName">
+								
+							</div>
+						</div>
+						<div class="formBox line6">
+							<label>机构类型</label>
+							<div class="formList lineSelect">
+								@@include('../../../common/views/form/orgType/orgType.html')
+							</div>
+						</div>
+						<div class="formBox line6 hasPad">
+							<label>注册地址</label>
+							<div class="formList">
+								@@include('../../../common/views/form/regAddress/regAddress.html')
+							</div>
+						</div>
+						<div class="formBox line6 hasPad">
+							<label>办公地址</label>
+							<div class="formList">
+								@@include('../../../common/views/form/doAddress/doAddress.html')
+							</div>
+						</div>
+						<div class="formBox line6 hasPad noBor">
+							<label>经营范围</label>
+							<div class="formList">
+								@@include('../../../common/views/form/busCope/busCope.html')
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="mui-card marginTop">
+					<div class="mui-card-head">
+						授权代理人信息
+					</div>
+					<div class="form-wrap"> 
+						<div class="formBox line6">
+							<label>姓名</label>
+							<div class="formList contactName">
+								
+							</div>
+						</div> 
+						<div class="formBox line6">
+							<label>出生日期</label>
+							<div class="formList lineSelect">
+								@@include('../../../common/views/form/birth/birth.html')
+							</div>
+						</div>
+						<div class="formBox line6  noBor">
+							<label>职业</label>
+							<div class="formList lineSelect">
+								@@include('../../../common/views/form/vocationType/vocationType.html')
+							</div>
+						</div>
+					</div>
+				</div>	
+				<div class="mui-card marginTop">
+					<div class="mui-card-head">
+						投资控制及收益情况
+					</div>
+					<div class="form-wrap">
+						@@include('../../../common/views/form/investSure/investSure.html')
+						<div class="outside investIntro">
+							<div class="introBox">说闽南歌书打电话大家好大家都花回到家回到家打电话大家好大家都花就</div>
+						</div>
+						@@include('../../../common/views/form/relationship/relationship.html')
+						<div class="outside shipIntro">
+							<div class="introBox">说闽南歌书</div>
+						</div>
+						@@include('../../../common/views/form/badRecord/badRecord.html')
+						<div class="outside badCoreIntro">
+							<div class="introBox">说闽南歌书</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="btnButton bassBtn">
+		      	<button type="button" class="mui-btn keep">确定</button>
+		 	</div>
+		</div>
+		<script src="/include/js/vendor/zepto/zepto.js"></script>
+		<script src="/include/js/vendor/root.js"></script>
+		<script src="/include/js/vendor/mui/mui.min.js"></script>
+		<script src="/user/static/js/bassMessage/bassOrg.js"></script>
+	</body>
+
+</html>

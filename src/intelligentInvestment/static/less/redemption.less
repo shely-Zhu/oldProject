@@ -1,0 +1,139 @@
+ //引入mui
+ @import url("../../../include/css/mui.min.css");
+ @import url("../../../common/less/reset.less");
+ @import url("../../../common/less/color.less");
+ @import url("../../../common/less/mui/resetMUI.less");
+ //黑色提示框的样式
+ @import url("../../../common/less/components/againEnter.less");
+ @import url("../../../common/less/components/alertBox.less");
+ @import url("../../../common/less/components/elasticLayerTypeTwo.less");
+.redemption{
+	.tit{
+		font-size: 1.6rem;
+		line-height: 4.0rem;
+		margin-bottom: 0.8rem;
+		color: @c002;
+	}
+	.bank{
+		padding-top: 1.0rem;
+		height: 6.5rem;
+		font-size: 1.4rem;
+		line-height:1.4rem;
+		color: @c002;
+		background: @c005;
+		box-sizing: border-box;
+		.bank_txt{
+			margin-top: 1.8rem;
+		}
+	}
+	.ratio{
+		margin-top: 0.8rem;
+		padding-right: 1.6rem;
+		padding-top: 1.75rem;
+		// padding-bottom: 0.4rem;
+		background: @c005;
+		height: 15.4rem;
+		.ratio_tix{
+			font-size: 1.4rem;
+			line-height: 1.4rem;
+			color: @c002;
+			.marketVal{
+				margin-left: 1.2rem;
+				font-size: 1.2rem;
+				color: @c003;
+			}
+		}
+		.range_box{
+			margin-top: 2rem;
+			.num{
+				display: flex;
+				justify-content: space-between;
+				margin-top: -0.4rem;
+
+			}
+			.mui-hidden{
+				display: block!important;
+			}
+		}
+		.hint{
+			margin-top: 1.6rem;
+			font-size: 1.2rem;
+			color: @c003;
+		}
+		// 重置mui样式
+		.mui-input-range input[type=range]{
+			height: 0.5rem;
+			background: @c008;
+		}
+		.mui-input-range input[type='range']::-webkit-slider-thumb{
+		    background-color: @c006;
+		    width: 1.7rem;
+		    height: 1.7rem;
+		    border: 0;
+		    background-image: linear-gradient(90deg, invalid gradient);
+			box-shadow: 0 2px 6px 1px rgba(245,166,35,0.64);
+		}
+		.mui-input-range .mui-tooltip{
+			font-size: 1.5rem;
+			width: 2.2rem;
+			height: 3.2rem;
+			line-height: 3.2rem;
+			text-align: left;
+			top: -2rem;
+			border: none;
+			background-color: transparent;
+		}
+		.mui-input-row.mui-input-range{
+			padding-right: 0;
+		}
+	}
+	.fund_box{
+		margin-top: 0.8rem;
+		font-size:1.2rem;
+		line-height: 1.2rem;
+		.fund_tit{
+			margin-bottom: 0.05rem;
+			padding-right: 1.6rem;
+			padding-left: 1.6rem;
+			padding-top: 1.35rem;
+			padding-bottom: 1.0rem;
+			border-bottom: 1px solid @c008;
+			display: flex;
+			justify-content: space-between;
+			background: @c005;
+			font-size:1.2rem;
+			line-height: 1.2rem;
+			color: @c003;
+			
+		}
+		.fund{
+			padding-right: 1.6rem;
+			padding-left: 1.6rem;
+			height: 4.9rem;
+			display: flex;
+			justify-content: space-between;
+			align-items: center;
+			background: @c005;
+			border-bottom: 1px solid @c008;
+
+			.fund_name{
+				p{
+					color: @c002;
+					line-height: 1.8rem;
+				}
+			}
+		}
+
+	}
+	.agreement{
+		margin-top: 2.1rem;
+		margin-bottom: 8rem;
+		padding-right: 1.5rem;
+		padding-left: 1.5rem;
+		font-size: 1.0rem;
+		color: @c003;
+		.see{
+			color: #151515;
+		}
+	}
+}

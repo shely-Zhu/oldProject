@@ -1,0 +1,90 @@
+
+// 资产赎回详情和资产买入详情页公共样式
+
+
+@import url("../../../include/css/mui.min.css");
+@import url("../../../common/less/reset.less");
+@import url("../../../common/less/color.less");
+@import url("../../../common/less/mui/resetMUI.less");
+@import url("../../../common/less/components/againEnter.less");
+
+.redemptionDetails{
+ 	font-size: 1.4rem;
+ 	color: @c002;
+ 	line-height: 1.4rem;
+ 	.commonStyle{
+ 		margin-top: 0.8rem;
+ 		padding: 1.6rem 0 1.6rem 1.6rem;
+ 		background: @c005;
+		h4{
+			color: @c002;
+		}
+		h4:after{
+			content: "";
+			display: block;
+			margin-top: 1.2rem;
+			height: 1px;
+			background: @c008;
+		}
+		.discrib{
+			padding: 1.2rem 1.6rem 0 0;
+			.status{
+				display: flex;
+				justify-content: space-between;
+				span:first-child{
+					color: @c003;
+				}
+			}
+			.statusTop{
+				margin-top: 1.2rem;
+			}
+		}
+		.mui-table-view-cell>a:not(.mui-btn).mui-active{
+			background: transparent;
+		}
+		.mui-table-view:before{
+			height: 0;
+		}
+		.mui-table-view-cell{
+			padding-bottom: 0.45rem;
+		}
+		.mui-table-view-cell:after{
+			height: 0;
+		}
+		.mui-table-view:after{
+			height: 0;
+		}
+		.mui-table-view-cell>a:not(.mui-btn){
+			padding-left: 0;
+			padding-right: 0;
+			margin: -10px -15px;
+		}
+		.mui-navigate-right:after, .mui-push-right:after{
+			right: 1px;
+		}
+		.mui-navigate-right{
+			span:first-child{
+				float: left;
+				color: @c003;
+			}
+			span:last-child{
+				float: right;
+				margin-right: 2rem;
+			}
+		}
+		.mui-table-view-cell.mui-active{
+			background-color: transparent;
+		}
+		.mui-table-view-cell.mui-collapse .mui-collapse-content{
+			padding: 0 0 1.2rem 0;
+			background-color: @c008;
+			p{
+				display: flex;
+				justify-content: space-between;
+				padding: 0 0.8rem;
+				margin-top: 1.2rem;
+			}
+		}
+
+ 	}
+ }

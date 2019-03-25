@@ -1,0 +1,66 @@
+<!-- 
+	老带新  注册页面
+	@author yangjinlai 2017-06-21
+-->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta name="applicable-device" content="mobile">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="stylesheet" href="/user/static/css/user.css">
+    <title>注册</title>
+</head>
+
+<body type="10">
+    <section class="container register">
+        <!-- <div class="register"> -->
+        <div class="banner_wrap"><img src=""></div>
+        <div class="mui-card">
+            <div class="form-wrap">
+                <!-- 手机号 -->
+                <div class="formList formIconLeft">
+                    <span class="iconfont">&#xe665;</span> @@include('../../common/views/form/phone/phone.html')
+                </div>
+                <!-- verifyCode class表示当前的表格元素为图文验证码 -->
+                <div class="formList formIconLeft verifyCode">
+                    <span class="iconfont">&#xe663;</span> @@include('../../common/views/form/code/twyzmCode.html')
+                </div>
+                <!-- numberCode class表示当前的表格元素为短信验证码 -->
+                <div class="formList formIconLeft numberCode">
+                    <span class="iconfont">&#xe663;</span> @@include('../../common/views/form/code/dxyzmCode.html')
+                </div>
+                <!-- password class表示当前的表格元素为密码 -->
+                <div class="formList formIconLeft formIconRight">
+                    <span class="iconfont ">&#xe666;</span> @@include('../../common/views/form/loginPassword/newLoginPassword.html')
+                </div>
+                <!-- 再次输入密码 -->
+                <div class="formList formIconLeft formIconRight">
+                    <span class="iconfont ">&#xe666;</span> @@include('../../common/views/form/loginPassword/qrLoginPassword.html')
+                </div>
+            </div>
+            <!-- </div> -->
+        </div>
+        <!-- 收不到验证码 -->
+        @@include('../../common/views/form/code/voiceCode.html')
+        <div class="btnButton">
+            <button type="button" class="mui-btn nextBtn" id="btn">注册</button>
+        </div>
+        <div class="agreement">
+            <span class="item1"><a href="/include/views/agreementModel.html?id=84">《恒天财富服务协议》</a> <a href="/include/views/agreementModel.html?id=80">《合格投资者承诺》</a></span>
+            <a href="javascript:;" class="item2"><span class="iconfont">&#xe668;</span><span>已阅读并同意</span></a>
+        </div>
+        <!-- <div class="goLogin box">
+				<a class="ckLogin next" href="javascript:;">立即登录</a>
+			</div> -->
+    </section>
+    <script src="/include/js/vendor/zepto/zepto.js"></script>
+    <script src="/include/js/vendor/root.js"></script>
+    <script src="/include/js/vendor/mui/mui.min.js"></script>
+    <script src="/user/static/js/recommendRegister.js"></script>
+</body>
+
+</html>

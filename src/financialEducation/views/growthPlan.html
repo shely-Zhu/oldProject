@@ -1,0 +1,167 @@
+<!-- /**  
+ * @Page:  专属成长计划
+ * @Author: songxiaoyu  
+ * @Date:   2018-05-07 14:02:28  
+ * @Last Modified by:   songxiaoyu  
+ * @Last Modified time: 2018-05-29 22:22:28  
+
+ * @ 添加埋点 
+ * @ author ping 2019-2-20
+ */ -->
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="applicable-device" content="mobile">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="stylesheet" href="/financialEducation/static/css/growthPlan.css">
+    <title>专属成长计划</title>
+</head>
+
+<body>
+
+    <section class="container">
+        <!-- 孩子信息 start -->
+        <section class="mui-card part_one">
+            <!-- 有用户信息 start -->
+            <div class="kid_have">
+               <img src="" alt="" class="kid_img">
+                <div class="kid_info">
+                    <span class="kid_edit">编辑</span>
+                </div>
+                <div class="kid_message">
+                    <span class="margin_r08">成长寄语</span>
+                </div>
+                <span class="kid_tutorial iconfont">点击查看教程</span>
+            </div>
+            <!-- 有用户信息 end -->
+            <!-- 没有用户信息 start -->
+            <div class="kid_no hide">
+                <img src="/financialEducation/static/img/kid.png" class="kid_img">
+                <div class="kid_message">
+                    <p class="">您还没有创建宝宝的专属计划,</p>
+                    <p>马上去创建…</p>
+                </div>
+                <sapn class="kid_edit kid_create">创建宝宝专属计划</sapn>
+            </div>
+            <!-- 没有用户信息 end -->
+        </section>
+        <!-- 孩子信息 end -->
+        <!-- 投资金额 start -->
+        <section class="mui-card marginTop  part_two">
+        </section>
+        <!-- 投资金额 end -->
+        <!-- 已投资基金 start -->
+        <section class="investment_fund">
+            <div class="part_title">成长计划已投资基金</div>
+            <div class="mui-card fund_list_wrap">
+            </div>
+        </section>
+        <!-- 已投资基金 end -->
+        <!-- 基金推荐 start -->
+        <section class=" fund_recommend">
+            <div class="part_title">为您和孩子臻选更多优质基金，点击购买</div>
+            <div class="mui-card ">
+                <ul>
+                    <li class="recommend_list">
+                    </li>
+                </ul>
+            </div>
+        </section>
+        <!-- 基金推荐 end -->
+        <section class="layer_wrap hide">
+            <img src="/financialEducation/static/img/layer_pic.jpg" alt="查看教程">
+            <i class="iconfont close_layer">&#xe6ca;</i>
+        </section>
+    </section>
+    <!-- 孩子信息模板 start -->
+    <script id="kid_template" type="text/x-handlebars-template">
+        {{#if kidGender}}
+        <i class="iconfont kid_icon_boy">&#xe6c6;</i> {{else}}
+        <i class="iconfont kid_icon_girl">&#xe6c7;</i> {{/if}}
+        <span class="kid_name ellipsis">{{kidName}}</span>
+        <span class="kid_age">{{kidAge}}</span>
+    </script>
+    <!-- 孩子信息模板 end -->
+    <!-- 投资金额 start -->
+    <script id="investment_amout_template" type="text/x-handlebars-template">
+        {{#if fundPositionList}}
+        <div class="align_center investment_tip investment_total iconfont">{{myTotalAsset}}</div>
+        <div class="align_center color_7d">总资产(元)</div>
+        {{else}}
+        <div class="align_center investment_tip">快开始您为孩子的第一笔投资吧</div>
+        {{/if}}
+        <ul class="mui-row investment_amount span_common">
+            <li class="mui-col-sm-6 mui-col-xs-6 li_left">
+                <p class="profit_com income">{{yesterdayProfitMask}}</p>
+                <p class="color_7d">昨日收益(元)</p>
+            </li>
+            <li class="mui-col-sm-6 mui-col-xs-6 li_right">
+                <p class="profit_com income">{{cumulativeProfitMask}}</p>
+                <p class="color_7d">持有收益(元)</p>
+            </li>
+        </ul>
+    </script>
+    <!-- 投资金额 end -->
+    <!-- 已持仓基金 start -->
+    <script id="fund_list_template" type="text/x-handlebars-template">
+        {{#each this}}
+        <div class="fund_list">
+            <div class="fund_title">{{fundName}}</div>
+            {{#if isMoneyFund}}
+            <p class="color_7d">七日年化收益率<span class="fund_rate">{{sevenDayYield}}%</span><span class="fund_rate">万份收益(元)</span><span class="fund_rate">{{unitYld}}</span></p>
+            {{else}}
+            <p class="color_7d">最新净值(元)<span class="fund_rate">{{nav}}</span><span class="fund_rate">日涨幅</span><span class="fund_rate">{{dayChgRat}}%</span></p>
+            {{/if}}
+            <ul class="mui-row span_common">
+                <li class="mui-col-sm-4 mui-col-xs-4 yes_li">
+                    <p class="income">{{incomeMask}}</p>
+                    <p class="color_7d">昨日收益(元)</p>
+                </li>
+                <li class="mui-col-sm-4 mui-col-xs-4 ">
+                    <p class="balckColor">{{totalMoneyMask}}</p>
+                    <p class="color_7d">金额(元)</p>
+                </li>
+                <li class="mui-col-sm-4 mui-col-xs-4 ">
+                    <p class="income">{{addupIncomeMask}}</p>
+                    <p class="color_7d">持有收益(元)</p>
+                </li>
+            </ul>
+            <p class="fundBtn">
+                <span class="fund_btn buy_btn" fund-code={{fundCode}}>存一笔</span>
+                <span class="fund_btn sale_btn">取出</span>
+            </p>
+        </div>
+        {{/each}}
+    </script>
+    <!-- 已持仓基金 end -->
+    <!-- 推荐基金 start -->
+    <script id="recommend_list_template" type="text/x-handlebars-template">
+        {{#each this}}
+        <ul class="mui-row span_common fund_detail" fund-code={{fundCode}}>
+            <li class="mui-col-sm-4 mui-col-xs-4">
+                <p class="income">{{incomeData}}</p>
+                <p class="color_7d marginT">{{incomeIndex}}</p>
+            </li>
+            <li class="mui-col-sm-8 mui-col-xs-8 ">
+                <p class="balckColor">{{fundName}}</p>
+                <p class="color_7d marginT"><span>{{fundTypeDesc}}</span><span>{{purchaseMoney}}元起购</span><span>{{fundRiskLevelDescription}}</span></p>
+            </li>
+        </ul>
+        {{/each}}
+    </script>
+    <!-- 推荐基金 end -->
+    <script src="/include/js/vendor/zepto/zepto.js"></script>
+    <script src="/include/js/vendor/root.js"></script>
+    <script src="/include/js/iscroll.js"></script>
+    <script src="/include/js/vendor/handlebar/handlebars.js"></script>
+    <script src="/include/js/vendor/mui/mui.min.js"></script>
+    <!-- 添加埋点 -->
+    @@include('@pathInclude/views/header.html')
+    <script src="/financialEducation/static/js/growthPlan.js"></script>
+</body>
+
+</html>

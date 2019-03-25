@@ -1,0 +1,317 @@
+/*
+* @page: 专属成长计划
+* @Author: songxiaoyu
+* @Date:   2018-05-15 10:48:29
+* @Last Modified by:   songxiaoyu
+* @Last Modified time: 2018-05-15 17:40:22
+* @description:
+*/
+
+//引入mui
+@import url("../../../include/css/mui.min.css");
+@import url('../../../common/less/mui/resetMUI.less');
+@import url("../../../common/less/reset.less");
+@import url("../../../common/less/color.less");
+@import url("../../../common/less/components/againEnter.less");
+@import url("../../../common/less/components/alertBox.less");
+
+p{
+	color: @c035;
+}
+.container {
+	padding-top:2.7rem;
+	/* ----------------------孩子信息 start-------------------------- */
+	.part_one {
+		position: relative;
+		overflow: inherit;
+		padding: 1.6rem;
+
+		.kid_img {
+			position: absolute;
+			top: -2rem;
+			width: 6rem;
+			height: 6rem;
+			border-radius: 50%;
+			-webkit-box-shadow:0 0 10px rgba(249,173,86,0.2);  
+			-moz-box-shadow:0 0 10px rgba(249,173,86,0.2);  
+			box-shadow:0 0 10px rgba(249,173,86,0.2); 
+		} // 没有用户信息
+		.kid_no {
+			text-align: center;
+			.kid_message {
+				margin: 0 5rem 2.4rem 7rem;
+				font-size: 1.2rem;
+				color: @c002;
+				p{
+					color: @c002;
+				}
+			}
+			.kid_create {
+				width: 18rem;
+				height: 3rem;
+				line-height: 3rem;
+				color: @c006;
+				border: 1px solid @c006;
+				border-radius: 0.4rem;
+				display: inline-block;
+			}
+		} // 有用户信息
+		.kid_have {
+			.kid_info{
+				display: table;
+				height: 2rem;
+			}
+			.kid_icon_boy,
+			.kid_icon_girl {
+				margin-left: 6.5rem;
+				margin-right: 0.2rem;
+				color: transparent;
+			}
+			.kid_icon_boy {
+				background-image: linear-gradient(46deg, #81C8FA 0%, #468CDF 100%);
+				-webkit-background-clip: text;
+			}
+			.kid_icon_girl {
+				background-image: linear-gradient(48deg, #FFAC96 0%, #FF6868 100%);
+				-webkit-background-clip: text;
+			}
+			.kid_name,
+			.kid_age {
+				display:table-cell;
+				vertical-align: middle;
+				font-size: 1.4rem;
+				// line-height: 1.4rem;
+				color: @c002;
+			}
+
+			.kid_name{
+				width: 6rem;
+				display: inline-block;
+			}
+
+			.kid_age {
+				margin-right: 3rem;
+			}
+			.kid_edit {
+				position: absolute;
+				top: 1.6rem;
+				right: 1.6rem;
+				border: 1px solid @c006;
+				border-radius: 0.2rem;
+				font-size: 1.2rem;
+				color: @c006;
+				padding: 0.3rem 0.8rem;
+			} // 成长寄语
+			.kid_message {
+				margin-top: 1.3rem;
+				font-size: 1.2rem;
+				word-wrap:break-word;
+
+				.margin_r08 {
+					margin-right: 0.8rem;
+				}
+			}
+			.kid_tutorial {
+				font-size: 1.2rem;
+				font-weight: bold;
+				margin-top: 1.1rem;
+
+				&:before {
+					content: '\e6c9';
+					padding-right: 1rem;
+					color: @c003;
+					opacity: 0.7;
+				}
+			}
+		}
+	}
+	/* ----------------------孩子信息 end ----------------------------*/
+	/* ----------------------投资金额 start --------------------------*/
+	.part_two {
+		padding: 0;
+		height: 12.75rem;
+		background: url(/financialEducation/static/img/amountBg.png);
+		background-repeat: no-repeat;
+		background-size: 100% 100%;
+
+		.investment_tip {
+			margin: 2.5rem 0 0.2rem 0;
+		}
+		.investment_total {
+			margin: 2.4rem 0 0.2rem 0;
+			font-size: 2.4rem;
+			font-weight: bold;
+
+			&:after{
+				display: inline-block;
+				width: 2rem;
+				content:'\e600';
+				padding-left: 0.2rem;
+				color: @c001;
+				font-size: 1.2rem;
+			};
+		}
+
+		.investment_amount {
+			margin-top: 1.2rem;
+			height: 3.5rem;
+
+			.profit_com{
+				font-size: 1.8rem;
+				font-weight: bold;
+				line-height: 1.8rem;
+				margin-bottom: 0.2rem;
+			}
+		}
+
+		.li_left {
+			padding-left: 4.5rem;
+		}
+		.li_right {
+			padding-left: 4rem;
+		}
+
+		.investment_amount li {
+			border-right: 0.1rem solid @c008;
+			&:last-child {
+				border-right: 0;
+			}
+		}
+	}
+	/* ----------------------孩子信息 end ----------------------------*/
+	/* ----------------------已投资基金 start ------------------------*/
+	.investment_fund {
+		.fund_list{
+			border-bottom: 1px solid @c008;
+			&.last-child{
+				border: none;
+			}
+		}
+
+
+		.fund_title {
+			font-weight: bold;
+			line-height: 1.4rem;
+			margin: 1.5rem 1.6rem 0.8rem 0;
+		}
+
+		.fund_rate {
+			margin: 0 0 0 0.8rem;
+			display: inline-block;
+		}
+		
+		.fundBtn{
+			text-align: right;
+			margin-top: 1.6rem;
+			margin: 1.6rem 1.6rem 1.6rem 0;
+		}
+
+		.fund_btn {
+			display: inline-block;
+			text-align: center;
+			line-height: 3rem;
+			width: 7rem;
+			height: 3rem;
+			color: @c006;
+			border: 1px solid @c006;
+			border-radius: 0.4rem;
+		}
+
+		.buy_btn {
+			margin-right: 1.6rem;
+		}
+
+		.investment_total {
+			&:after {
+				content: '\e67d';
+				padding-left: 1rem;
+			}
+			;
+		}
+		.fund_list_wrap{
+			// padding-right: 1.6rem;
+		}
+	}
+	/* ----------------------已投资基金 end --------------------------*/
+	/* ----------------------基金推荐 start --------------------------*/
+	.fund_recommend {}
+	/* ----------------------基金推荐 end ----------------------------*/
+	/* ----------------------蒙层 start---------------------------- -*/
+	.layer_wrap {
+		position: fixed;
+		z-index: 2;
+		height: 100%;
+		overflow: scroll;
+		top: 0;
+		left: 0;
+
+		.close_layer{
+			position: absolute;
+			width: 2rem;
+			height: 2rem;
+			right: 1rem;
+			top: 0rem;
+			font-size: 2.5rem;
+			color: @c006;
+
+		}
+	}
+	/* ----------------------蒙层 end------------------------------- */
+	/* ----------------------公用样式 start-------------------------- */
+	.mui-card {
+		font-size: 1.6rem;
+	}
+	.align_center {
+		text-align: center;
+	}
+	.color_7d {
+		color: @c003;
+		font-size: 1.2rem;
+	}
+	.part_title {
+		font-size: 1.6rem;
+		line-height: 1.7rem;
+		margin: 0.8rem 0 0.8rem 1.6rem;
+	}
+
+	.balckColor{
+		color: @c002;
+	}
+
+
+	.marginT {
+		margin-top: 0.5rem;
+		span{
+			display: inline;
+			margin-right: 1rem;
+		}
+	}
+
+	.color_red {
+		color: @c035;
+	}
+	.color_green {
+		color: @c013;
+	}
+
+	.red {
+		color: @c035;
+	}
+	.green {
+		color: @c013;
+	}
+			
+	.margin_r08 {
+		margin-right: 0.8rem;
+	}
+	.hide {
+		display: none;
+	}
+	.fund_detail {
+		border-bottom: 1px solid @c008;
+		padding: 1.5rem 0;
+		font-weight: normal;
+
+	}
+	/* ----------------------公用样式 end-----------------------------*/
+}

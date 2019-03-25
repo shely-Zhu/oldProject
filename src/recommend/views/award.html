@@ -1,0 +1,168 @@
+<!-- 
+	荣耀月
+	@author zhangyanping
+	@time 2018-01-08
+
+	@老带新抽奖活动
+	@author ping 2018-07-19
+--> 
+<!doctype html>
+
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+    <meta content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0,user-scalable=no" name="viewport" id="viewport" />
+    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0;" name="viewport" />
+    <meta content="telephone=no" name="format-detection" />
+    <meta content="yes" name="apple-mobile-web-app-capable" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+	<link rel="stylesheet" href="/recommend/static/css/award.css">
+	<title>启新十年 悦享礼遇</title>
+</head>
+<body>
+	<!-- 内容区域 -->
+	<div class='container'>
+		<!-- <div class='award-01'></div> -->
+		<div class='award-02'>
+			<div class='award-02-inner'>
+				<p class="awardDate">抽奖时间：<span class="startDate"></span>-<span class="endDate"></span></p>
+				<p class="awardLogin">您还有<span class="awardTimes"></span>次抽奖机会</p>
+			</div>
+		</div>
+		<div class='award-03'>
+			<div class='award-03-inner'>
+				<div class="turntable-bg">
+					<div class="pointer"><img src="" alt="pointer"/></div>
+					<div class="rotate" ><img id="rotate" src="" alt="turntable"/></div>
+					<div class="integral">
+						<div class='close'>
+							<a href="javascript:;"><img src="" alt=""></a>
+						</div>
+						<img id="integralImg" src="" alt="">
+					</div>
+					<div class="noOpen status">
+						<div class="noTitle">很抱歉，抽奖时间还未开始</div>
+						<div class="awarding">抽奖时间：<span class="startTime"></span>至<span class="endTime"></span></div>
+						<!-- <div class="awardTime"><span class="startTime"></span>至<span class="endTime"></span></div> -->
+					</div>
+					<div class="finish status">
+						<div class="noTitle">很抱歉，抽奖时间已结束</div>
+						<div class="awarding">抽奖时间：<span class="startTime"></span>至<span class="endTime"></span></div>
+						<!-- <div class="awardTime"><span class="startTime"></span>至<span class="endTime"></span></div> -->
+					</div>
+
+				</div>
+			</div>
+		</div>
+		<div class='award-04'>
+			<div class='award-04-inner'>
+				<div class='btns'>
+					<a class='btn-01' href="javascript:;">我的中奖记录</a>
+					<a class='btn-02' href="javascript:;">抽奖活动规则</a>
+				</div>
+			</div>
+		</div>
+		<div class='award-05'>
+			<div class='award-05-inner'>
+				<div class="images"><img src="" alt=""></div>
+				<div class="award-05-innerList">
+					<ul class="innerList">
+						<li>
+							<!-- <p class='number'>00000****836</p>
+							<p class='score'>1积分</p> -->
+						</li>
+					</ul>
+				</div>
+			</div>
+		</div>
+		<div class='award-mask'></div>
+
+		<!-- 抽奖活动规则弹出框 -->
+		<div class='pop popRule'>
+			<div class='close closeOne'>
+				<a href="javascript:;"><img src="" alt=""></a>
+			</div>
+			<div class='rule'></div>
+		</div>
+
+		<!-- 我的中奖纪录弹出框 -->
+		<div class='pop five-pop'>
+			<div class='close closeTwo'>
+				<a href="javascript:;"><img src="" alt=""></a>
+			</div>
+			<div class='award-pop'>
+				<div class="popHead"></div>
+				<div class="listHead">
+					<span class="winnerDate">中奖日期</span>
+					<span class="winnerPrize">奖项</span>
+					<span class="winnerGift">中奖礼品</span>
+				</div>
+				<div class='award-list'>
+					<!-- <div class='award-title'>
+						<span class='award-list-name'>奖项</span>
+						<span class='award-list-content'>中奖积分</span>
+					</div> -->
+					<ul>
+						
+						
+					</ul>
+				</div>
+			</div>
+		</div>
+		<div class='award-score'>
+			<ul>
+				<li num='1'>iPhoneX 64G</li>
+				<li num='2'>whirlpool智能机器人吸尘器</li>
+				<li num='3'>新秀丽四轮拉杆箱 20寸</li>
+				<li num='4'>膳魔师电水壶</li>
+				<li num='5'>TSK-G9908智享·榨汁机</li>
+				<li num='6'>新秀丽时尚休闲包</li>
+			</ul>
+		</div>
+		<div class='award-name'>
+			<ul>
+				<li num='1'>一等奖</li>
+				<li num='2'>二等奖</li>
+				<li num='3'>三等奖</li>
+				<li num='4'>四等奖</li>
+				<li num='5'>五等奖</li>
+				<li num='6'>六等奖</li>
+			</ul>
+		</div>
+		<div class="againEnter"><p class="tipWrapper"></p></div>
+	</div>
+	<!-- 引入js  -->
+	<script src="/include/js/vendor/zepto/zepto.js"></script>
+	<script src="/include/js/vendor/jquery/jquery1.12.3.js"></script>
+	<script type="text/javascript">
+	    //同时使用zepto和jquery,对jquery做conflict的处理，防止冲突，此后使用jquery的时候，不能使用$，
+	    //而是用jquery
+	    $.noConflict();
+	</script>
+	<script src="/include/js/vendor/root.js"></script> 
+	<script src="/include/js/vendor/handlebar/handlebars.js"></script>
+	<script type="text/javascript" src='/recommend/static/js/awardRotate.js'></script>
+	<script type="text/javascript" src='/recommend/static/js/award.js'></script> 
+	
+	<script id="manage-template" type="text/x-handlebars-template">
+		{{#each this}}
+	     	<li>
+				<p class='number'>{{telphone}}</p>
+				<p class='score'>{{awardName}}</p>
+			</li>
+		{{/each}}
+	</script> 
+	<!-- 我的中奖纪录 -->
+	
+	<script id="award_list_con" type="text/x-handlebars-template">
+		{{#each this}}
+	     	<li>
+	     		<span class='award-list-date'>{{createtime}}</span>
+				<span class='award-list-name'>{{awardName}}</span>
+				<div class='award-list-contentD'><span>{{awardScore}}</span></div>
+			</li>
+		{{/each}}
+	</script>  
+
+</body>
+</html>

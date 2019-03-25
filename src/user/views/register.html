@@ -1,0 +1,100 @@
+<!-- 
+    修改：整体修改为mui结构
+    @author yangjinlai 2017-05-04 
+-->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta name="applicable-device" content="mobile">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="stylesheet" href="/user/static/css/user.css">
+    <title>注册</title>
+</head>
+<body type="10">
+    <section class="container register">
+        <!-- <div class="register"> -->
+        <div class="mui-card marginTop">
+            <div class="form-wrap">
+                <!-- 手机号 -->
+                <div class="formList formIconLeft">
+                    <span class="iconfont">&#xe665;</span>
+                    @@include('../../common/views/form/phone/phone.html')
+                </div>
+                <!-- verifyCode class表示当前的表格元素为图文验证码 -->
+                <div class="formList formIconLeft verifyCode">
+                    <span class="iconfont">&#xe663;</span>
+                    @@include('../../common/views/form/code/twyzmCode.html')
+                </div>
+                <!-- numberCode class表示当前的表格元素为短信验证码 -->
+                <div class="formList formIconLeft numberCode">
+                    <span class="iconfont">&#xe663;</span>
+                    @@include('../../common/views/form/code/dxyzmCode.html')
+                </div>
+                <!-- password class表示当前的表格元素为密码 -->
+                <div class="formList formIconLeft formIconRight">
+                    <span class="iconfont ">&#xe666;</span>
+                    @@include('../../common/views/form/loginPassword/newLoginPassword.html')
+                </div>
+                <!-- 再次输入密码 -->
+                <div class="formList formIconLeft formIconRight">
+                    <span class="iconfont ">&#xe666;</span>
+                    @@include('../../common/views/form/loginPassword/qrLoginPassword.html')
+                </div>
+                <!-- fina class表示当前的表格元素为理财师工号 -->
+                <div class="formList formIconLeft fina">
+                    <span class="iconfont">&#xe662;</span>
+                    @@include('../../common/views/form/fina/fina.html')
+                </div>
+            </div>
+            <!-- </div> -->
+        </div>
+        <!-- 服务理财师模块 -->
+  
+        <div class="brokerContent">
+  
+        </div>
+        <!-- 收不到验证码 -->
+        @@include('../../common/views/form/code/voiceCode.html')
+        <div class="btnButton">
+            <button type="button" class="mui-btn nextBtn" id="btn" htmdEvt="register_btn_register">注册</button>
+        </div>
+        <div class="agreement">
+            <span  class="item1"><a href="/include/views/agreementModel.html?id=84">《恒天财富服务协议》</a> <a href="/include/views/agreementModel.html?id=80">《合格投资者承诺》</a></span>
+            <a href="javascript:;" class="item2"><span class="iconfont">&#xe668;</span><span>已阅读并同意</span></a>
+        </div>
+        <div class="goLogin box">
+            <a class="ckLogin next" href="javascript:;">立即登录</a>
+        </div>
+    </section>
+     <!-- 理财师信息 -->
+  
+    <script id="broker-template" type="text/x-handlebars-template">
+        <div class="mui-card marginTop brokerWrap">
+            <h3>服务理财师<span>他/她是推荐您注册恒天财富账户的理财师</span></h3>
+            <div class="infoWrap">
+                {{#if photo}}
+                    <div class="infoPic" style="background:url({{getImage}}?photoUrl={{photo}}&code={{broker_account}}) center no-repeat;background-size: cover;"></div>
+                {{else}}
+                    <img class="infoPic" src="/user/static/img/default.png">
+                {{/if}}
+                <div class="info">
+                    <p class="pName">{{name}}</p>
+                    <p class="pNumber">{{broker_account}}</p>
+                </div>
+            </div>
+        </div>
+    </script>
+    <script src="/include/js/vendor/zepto/zepto.js"></script>
+    <script src="/include/js/vendor/root.js"></script>
+    <script src="/include/js/vendor/handlebar/handlebars.js"></script>
+    <script src="/include/js/vendor/mui/mui.min.js"></script>
+    <!-- 添加埋点 -->
+    @@include('@pathInclude/views/header.html')
+    <script src="/user/static/js/register.js"></script>
+</body>
+
+</html>

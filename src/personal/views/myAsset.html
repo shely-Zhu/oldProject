@@ -1,0 +1,166 @@
+<!-- 私募我的资产 -->
+
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <meta name="applicable-device" content="mobile">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="stylesheet" href="/personal/static/css/detail.css">
+	<title>我的资产</title>
+</head>
+<body>
+
+	@@include('../../common/views/load.html')
+	<!-- @@include('../../common/views/privateOrPublic.html') -->
+
+	<!-- <div class="banner flexbox">
+	
+		<div class="bannerTop flex3">
+	
+	
+			<div class="level">
+				<div class="icon"><span class="iconfont">&#xe602;</span></div>
+				<span class="grade"></span>
+			</div>
+			<div class="sum">总资产（元）</div>
+			<div class="amount" id="totalCount">2,150,000.00</div>	
+		</div>
+		<div class="bannerRight flex1">
+			<a href="/personal/views/myDetail.html"><span class="iconfont">&#xe601;</span>明细</a>
+		</div>
+	</div> -->
+	<section class="container">
+		@@include('../../common/views/privateOrPublicTwo.html')
+		<div class="banner clearfix">
+		    <div class="bannerTop">
+		        <div class="sum">私募总资产（元）</div>
+		        <div class="amount" id="totalCount">--</div> 
+		    </div>
+		    <div class="bannerRight">
+		        <a onclick="window.location.href='/personal/views/myDetail.html'" href="javascript:;"><span class="iconfont">&#xe601;</span>明细</a>
+		    </div>
+	    </div>
+		<!-- 按钮 -->
+
+	<!-- @@include('../../common/views/privateOrPublic.html') -->
+		<div id="wrapper">
+			<div class="myAsset" id="scroller">
+				<!-- <div id="pullDown">
+					<span class="pullDownIcon"></span><span class="pullDownLabel">下拉刷新...</span>
+				</div> -->
+				<div id="pullBox">
+	
+					<div class="list"  id="pageLists">
+						<!-- <div class="datalist">
+							<h2 class="ellipsis"> 恒天稳利25号中植高科Samba投资基金A类恒天稳利25号中植高科Samba投资</h2>
+							<div class="line"></div>
+							<ul>
+								<li class="clearfix">
+									<div class="title">持仓金额</div>
+									<div class="text"><span>200,000.00</span>元</div>
+								</li>
+								<li class="clearfix">
+									<div class="title">持仓份额</div>
+									<div class="text"><span>100,000.00</span>份</div>
+								</li>
+							</ul>
+							<div class="line"></div>
+							<div class="date">成立日期<span>2016-04-09</span></div>
+						</div> -->
+					</div>	
+				</div>
+				
+				@@include('../../common/views/upLoad.html')
+
+				<!-- 回到顶部 -->
+				<div class="upTop" id="goTop" style="display:none;">
+					<span class="iconfont">&#xe74a;</span>
+				</div>
+				<!-- 回到顶部 -->
+			</div>
+			<div class="without asset" id="emptyBox" style="display:none;">
+				<div class="box vertical center">
+					<p class="iconfont">&#xe603;</p>
+					<p class="text">您还没有预约的产品！</p>
+				</div>
+				<div type="button" class="aptn">去预约<span>&gt;&gt;</span></div>
+			</div>
+		</div>
+		<!-- 加载中loading -->
+		@@include('../../common/views/loading/listLoading.html')
+		<!-- <div class="bind" id="btnBind">
+			<span class="iconfont">&#xe60b;</span>
+			<p>退出登录</p>
+		</div> -->
+	</section>	
+	<!-- 弹层 -->
+	@@include('../../common/views/accountOrBind.html')
+
+	<p class="chtwm-pay chtwm-asset">基金销售服务由北京恒天明泽基金销售有限公司提供</p>
+	<div class="againEnter">
+      <button class="tipWrapper"></button>
+   	</div>
+	<script id="dataLists" type="text/x-handlebars-template">
+		{{! 左侧页面列表}}
+		{{#each this}}
+			<div class="datalist clearfix" fundCode="{{fundCode}}"> 
+				<h2 class="ellipsis">{{fundName}}</h2>
+				<div class="line"></div>
+				<ul>
+					<li class="clearfix">
+						<div class="title">持仓金额</div>
+						<div class="text"><span>{{totalAssets}}</span>元</div>
+					</li>
+					<li class="clearfix">
+						<div class="title">持仓份额</div>
+						<div class="text"><span>{{totalShare}}</span>份</div>
+					</li>
+					<li class="clearfix">
+						<div class="title">可用份额</div>
+						<!--todo********-->
+						<div class="text"><span>{{allowRedemptionShare}}</span>份</div>
+					</li>
+					{{#if showTime}}
+						<li class="clearfix">
+							<div class="title">赎回申请开始提交时间</div>
+							<!--todo********-->
+							<div class="text"><span>{{beginRedemptionTime}}</span></div>
+						</li>
+						<li class="clearfix">
+							<div class="title">赎回申请结束提交时间</div>
+							<!--todo********-->
+							<div class="text"><span>{{endRedemptionTime}}</span></div>
+						</li>
+					{{else}}
+					{{/if}}	
+				</ul> 
+				<!--todo 此处做判断，确定是否有赎回按钮-->
+				{{#if shuhui}}
+					<div class="line"></div>
+					<p class="card-foot flexbox">
+						{{#if showIncome}}
+							<span class="intro" description="{{benefitsFormula}}">收益计算规则<i class="iconfont incomeIcon">&#xe60a;</i></span>
+						{{else}}
+							<span class="intro"></span>
+						{{/if}}	
+						<span class="operate" cmsProductType="{{cmsProductType}}" fundCode="{{fundCode}}" fundName="{{fundName}}" allowRedemptionShare="{{allowRedemptionShare}}">赎回</span>
+					</p>
+				{{else}}
+				{{/if}}	
+			</div>
+		{{/each}}
+	</script> 
+
+	<!-- 底部导航 -->
+		@@include('../../common/views/bottomNav.html') 
+
+	<script src="/include/js/vendor/zepto/zepto.js"></script>
+	<script src="/include/js/vendor/root.js"></script>
+	<script src="/include/js/iscroll.js"></script>
+	<script src="/include/js/vendor/handlebar/handlebars.js"></script>
+	<script src="/personal/static/js/myAsset.js"></script>
+</body>
+</html>

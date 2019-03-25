@@ -1,0 +1,75 @@
+/*
+* @page: 恒小智调仓记录页面
+* @Author: songxiaoyu
+* @Date:   2018-10-12 16:42:39
+* @Last Modified by:   songxiaoyu
+* @description:
+*/
+
+// 恒小智公用less
+@import url("./common/combineCommon.less");
+// 调仓表格
+@import url("@pathCommonLessCom/adjustmentTable.less");
+// 没有数据
+@import url("@pathCommonLessCom/noData.less");
+
+// 样式重置
+.adjustmentRecord {
+    .contentWrapper {
+        height: 100%;
+        overflow: hidden;
+
+        .recordList {
+            padding: 0;
+
+			// 最后一个list样式被遮了
+            &>ul:last-child{
+            	margin-bottom: 1rem;
+            }
+        }
+    }
+
+    .mui-card {
+        padding-left: 0;
+    }
+
+    .mui-table-view-cell.mui-active {
+        background-color: @c005;
+    }
+
+    .mui-table-view-cell>a:not(.mui-btn).mui-active {
+        background-color: @c005;
+    }
+
+    .latestAdjustment.mui-card {
+        box-shadow: none;
+    }
+
+    .mui-table-view-cell.mui-collapse .mui-collapse-content {
+        margin-top: 0;
+    }
+
+    .mui-table-view:after {
+        height: 0;
+    }
+
+    .mui-table-view-cell:after {
+        height: 0;
+    }
+
+
+
+
+
+    // 隐藏头部
+    h2 {
+        display: none;
+    }
+
+    .reason {
+        &:after {
+            .leftIndentLine();
+        }
+    }
+
+}

@@ -1,0 +1,80 @@
+<!-- 
+	买入—买入完成
+	@author sunfuping 2018-10-10
+
+	*:本页面使用MUI
+-->
+<!doctype html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <meta name="applicable-device" content="mobile">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta charset="UTF-8">
+    <title>详情</title>
+    <link rel="stylesheet" href="/intelligentInvestment/static/css/buyAndRedemptionDetails.css">
+</head>
+
+<body>
+	@@include('../../common/views/load.html')
+	<div class="goingBox">
+	    <div class="going mui-card">
+			<div class="iconfont"></div>
+			<div class="goingTxt"></div>
+	    </div>
+	    <div class="positionDetails mui-card">
+			<h4> </h4>
+			<div>
+				<span>产品名称 </span>
+				<span class="js_smartName"></span>
+			</div>
+			<div>
+				<span>业务类型</span>
+				<span class="js_businessType"></span>
+			</div>
+			<div>
+				<span class="js_businessMoney"></span>
+				<span class="js_businessMoneyTxt"></span>
+			</div>
+			<div>
+				<span class="js_paystatus">支付方式 </span>
+				<span class="js_bankName"></span>
+			</div>
+			<div>
+				<span>申请时间</span>
+				<span class="js_time"></span>
+			</div>
+	    </div>
+	    <div class="buySure mui-card">
+			<h4></h4>
+			<div>
+				<span class="js_sureBusiness"></span>
+				<span class="js_sureBusinessNum"></span>
+			</div>
+			<div>
+				<span>手续费</span>
+				<span class="js_serviceCharge"></span>
+			</div>
+			<div>
+				<span>确认日期</span>
+				<span class="js_sureDate"></span>
+			</div>
+	    </div>
+	    <div class="assetPurchaseDetails mui-card">
+			<span class="js_details"></span>
+			<span class="iconfont"> &#xe67d; </span>
+	    </div>
+	</div>
+
+    <script src="/include/js/vendor/zepto/zepto.js"></script> 
+    <script src="/include/js/vendor/mui/mui.min.js"></script>
+    <script src="/include/js/vendor/root.js"></script>
+     <!-- 添加埋点 -->
+    @@include('@pathInclude/views/header.html')
+    <script src="/intelligentInvestment/static/js/buyAndRedemptionDetails.js"></script>  
+</body>
+
+</html>

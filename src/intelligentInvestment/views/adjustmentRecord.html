@@ -1,0 +1,49 @@
+<!-- /**  
+ * @Page:  调仓记录页面
+ * @Author: songxiaoyu  
+ * @Date:   2019-01-07 17:38:06  
+ * @Last Modified by:   songxiaoyu  
+ */ -->
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="applicable-device" content="mobile">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="stylesheet" href="/intelligentInvestment/static/css/adjustmentRecord.css">
+    <title>调仓记录</title>
+</head>
+
+<body>
+    
+    @@include('@pathCommonViews/load.html')
+    @@include('@pathCommonViews/noData.html')
+    @@include('@pathCommonViews/loading/listLoading.html')
+    <div class="adjustmentRecord">
+        <div class="list">
+            <div class="contentWrapper">
+                <ul class="mui-table-view">
+                    <li class="mui-table-view-cell recordList">
+                        <!--放置列表-->
+                    </li>
+                    <!-- 返回顶部 -->
+                    @@include('../../common/views/goTop.html')
+                </ul>
+            </div>
+        </div>
+    </div>
+    @@include('@pathCommonViews/pageModule/adjustmentTable.html')
+    <script src="/include/js/vendor/zepto/zepto.js"></script>
+    <script src="/include/js/vendor/root.js"></script>
+    <script src="/include/js/iscroll.js"></script>
+    <script src="/include/js/vendor/handlebar/handlebars.js"></script>
+    <script src="/include/js/vendor/mui/mui.min.js"></script>
+     <!-- 添加埋点 -->
+    @@include('@pathInclude/views/header.html')
+    <script src="/intelligentInvestment/static/js/adjustmentRecord.js"></script>
+</body>
+
+</html>

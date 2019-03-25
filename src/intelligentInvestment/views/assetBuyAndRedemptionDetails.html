@@ -1,0 +1,257 @@
+<!-- 
+	资产买入/赎回详情
+	@author sunfuping 2018-10-10
+
+	*:本页面使用MUI
+-->
+<!doctype html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <meta name="applicable-device" content="mobile">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta charset="UTF-8">
+    <title></title>
+    <link rel="stylesheet" href="/intelligentInvestment/static/css/assetBuyAndRedemptionDetails.css">
+</head>
+
+<body>
+	@@include('../../common/views/load.html')
+	<div class="redemptionDetails" id="redemptionDetails">
+		<!-- handlebar容器 -->
+	</div>
+
+    <script src="/include/js/vendor/zepto/zepto.js"></script> 
+    <script src="/include/js/vendor/mui/mui.min.js"></script>
+    <script src="/include/js/vendor/handlebar/handlebars.js"></script>
+    <script src="/include/js/vendor/root.js"></script>
+    <!-- 添加埋点 -->
+    @@include('@pathInclude/views/header.html')
+    <script src="/intelligentInvestment/static/js/assetBuyAndRedemptionDetails.js"></script>
+    
+    <!-- 买入 -->
+    <script id="redemptionDetails_buy_template" type="text/x-handlebars-template">
+        {{#each this}}
+        	{{#compare confirmFlag}}
+        	<div class="identifySucc commonStyle mui-card">
+				<h4>{{fundName}}（{{fundCode}}）</h4>
+				<div class="discrib">
+					<div class="status">
+						<span>交易状态</span>
+						<span>{{confirmFlagMask}}</span>
+					</div>
+					<ul class="mui-table-view"> 
+				        <li class="mui-table-view-cell mui-collapse">
+				            <a class="mui-navigate-right" href="#"><span>申请金额</span><span>{{applySumMask}}元</span></a>
+				            <div class="mui-collapse-content">
+				                <p>
+									<span>确认份额</span>
+									<span>{{tradeConfirmShareMask}}</span>
+				                </p>
+				                <p>
+									<span>确认净值</span>
+									<span>{{tradeConfirmNetvalue}}</span>
+				                </p>
+				                <p>
+									<span>手续费(元)</span>
+									<span>{{fareSx}}</span>
+				                </p>
+				                <p>
+									<span>确认时间</span>
+									<span>{{affirmDate}}</span>
+				                </p>
+				            </div>
+				        </li>
+				    </ul>
+	    		</div>
+			</div>
+			{{else}}
+			{{#transformat confirmFlag}}
+			<div class="commonStyle mui-card">
+				<h4>{{fundName}}（{{fundCode}}）</h4>
+				<div class="discrib">
+					<div class="status">
+						<span>交易状态</span>
+						<span>{{confirmFlagMask}}</span>
+					</div>
+	    		</div>
+			</div>
+			{{else}}
+			<div class="commonStyle mui-card">
+				<h4>{{fundName}}（{{fundCode}}）</h4>
+				<div class="discrib">
+					<div class="status">
+						<span>交易状态</span>
+						<span>{{confirmFlagMask}}</span>
+					</div>
+					<div class="status statusTop">
+						<span>申请金额</span>
+						<span>{{applySumMask}}元</span>
+					</div>
+	    		</div>
+			</div>
+			{{/transformat}}
+			{{/compare}}
+        {{/each}}
+    </script>
+    <!-- 赎回 -->
+    <script id="redemptionDetails_redemption_template" type="text/x-handlebars-template">
+        {{#each this}}
+        	{{#compare confirmFlag}}
+        	<div class="identifySucc commonStyle mui-card">
+				<h4>{{fundName}}（{{fundCode}}）</h4>
+				<div class="discrib">
+					<div class="status">
+						<span>交易状态</span>
+						<span>{{confirmFlagMask}}</span>
+					</div>
+					<ul class="mui-table-view"> 
+				        <li class="mui-table-view-cell mui-collapse">
+				            <a class="mui-navigate-right" href="#"><span>申请份额</span><span>{{applyShareMask}}份</span></a>
+				            <div class="mui-collapse-content">
+				                <p>
+									<span>确认份额(份)</span>
+									<span>{{tradeConfirmShareMask}}</span>
+				                </p>
+				                <p>
+									<span>确认净值</span>
+									<span>{{tradeConfirmNetvalue}}</span>
+				                </p>
+				                <p>
+									<span>确认金额(元)</span>
+									<span>{{tradeConfirmBalance}}</span>
+				                </p>
+				                <p>
+									<span>手续费(元)</span>
+									<span>{{fareSx}}</span>
+				                </p>
+				                <p>
+									<span>确认时间</span>
+									<span>{{affirmDate}}</span>
+				                </p>
+				            </div>
+				        </li>
+				    </ul>
+	    		</div>
+			</div>
+			{{else}}
+			{{#transformat confirmFlag}}
+			<div class="commonStyle mui-card">
+				<h4>{{fundName}}（{{fundCode}}）</h4>
+				<div class="discrib">
+					<div class="status">
+						<span>交易状态</span>
+						<span>{{confirmFlagMask}}</span>
+					</div>
+	    		</div>
+			</div>
+			{{else}}
+			<div class="commonStyle mui-card">
+				<h4>{{fundName}}（{{fundCode}}）</h4>
+				<div class="discrib">
+					<div class="status">
+						<span>交易状态</span>
+						<span>{{confirmFlagMask}}</span>
+					</div>
+					<div class="status statusTop">
+						<span>申请份额</span>
+						<span>{{applyShareMask}}份</span>
+					</div>
+	    		</div>
+			</div>
+			{{/transformat}}
+			{{/compare}}
+        {{/each}}
+    </script>
+
+    <!-- 调仓 -->
+    <script id="adjustmentDetails_redemption_template" type="text/x-handlebars-template">
+        {{#each this}}
+        	
+        	<div class="identifySucc commonStyle mui-card">
+        		{{#compare redeemInfo.confirmFlag}}
+				<h4>{{redeemInfo.fundName}}→{{purchaseInfo.fundName}}</h4>
+				{{else}}
+				<h4>{{redeemInfo.fundName}}</h4>
+				{{/compare}}
+				<div class="discrib">
+					{{#compare redeemInfo.confirmFlag}}
+					<ul class="mui-table-view"> 
+				        <li class="mui-table-view-cell mui-collapse">
+
+				            <a class="mui-navigate-right" href="#"><span>赎回-{{redeemInfo.confirmFlagMask}}</span><span>确认金额(元)：{{redeemInfo.tradeConfirmBalanceMask}}</span></a>
+				            <div class="mui-collapse-content">
+				                <p>
+									<span>确认份额(份)</span>
+									<span>{{redeemInfo.tradeConfirmShareMask}}</span>
+				                </p>
+				                <p>
+									<span>确认净值</span>
+									<span>{{redeemInfo.tradeConfirmNetvalue}}</span>
+				                </p>
+				                <p>
+									<span>手续费(元)</span>
+									<span>{{redeemInfo.fareSx}}</span>
+				                </p>
+				                <p>
+									<span>确认时间</span>
+									<span>{{redeemInfo.affirmDate}}</span>
+				                </p>
+				            </div>
+				        </li>
+				    </ul>
+				    {{else}}
+				    <div class="status">
+						<span>赎回-{{redeemInfo.confirmFlagMask}}</span>
+						<span>申请份额(份)：{{redeemInfo.applyShareMask}}</span>
+					</div>
+					{{/compare}}
+				</div>
+
+				{{#compare redeemInfo.confirmFlag}}
+				<div class="discrib">
+					{{#compare purchaseInfo.confirmFlag}}
+					<ul class="mui-table-view"> 
+				        <li class="mui-table-view-cell mui-collapse">
+
+				            <a class="mui-navigate-right" href="#"><span>买入-{{purchaseInfo.confirmFlagMask}}</span><span>确认金额(元)：{{purchaseInfo.tradeConfirmBalanceMask}}</span></a>
+
+				            <div class="mui-collapse-content">
+				                <p>
+									<span>确认份额(份)</span>
+									<span>{{purchaseInfo.tradeConfirmShareMask}}</span>
+				                </p>
+				                <p>
+									<span>确认净值</span>
+									<span>{{purchaseInfo.tradeConfirmNetvalue}}</span>
+				                </p>
+				                <p>
+									<span>手续费(元)</span>
+									<span>{{purchaseInfo.fareSx}}</span>
+				                </p>
+				                <p>
+									<span>确认时间</span>
+									<span>{{purchaseInfo.affirmDate}}</span>
+				                </p>
+				            </div>
+				        </li>
+				    </ul>
+				    {{else}}
+				    <div class="status">
+						<span>买入-{{purchaseInfo.confirmFlagMask}}</span>
+						<span>申请金额(元)：{{purchaseInfo.applySumMask}}</span>
+					</div>
+					{{/compare}}
+				</div>
+				{{else}}
+
+				{{/compare}}
+			</div>
+        {{/each}}
+    </script>
+</body>
+
+</html>

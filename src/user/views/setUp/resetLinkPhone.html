@@ -1,0 +1,59 @@
+<!-- 
+	设置 - 更换手机号码
+	@author yangjinlai 2017-02-14
+
+	*:本页面使用MUI
+-->
+
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+	    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+	    <meta name="applicable-device" content="mobile">
+	    <meta name="apple-mobile-web-app-capable" content="yes">
+	    <meta name="apple-mobile-web-app-status-bar-style" content="black"><meta charset="UTF-8">
+		<title>更换手机号码</title>
+		<link rel="stylesheet" href="/user/static/css/setUp.css">
+	</head>
+
+	<body>
+		
+		<div class="mui-card marginTop">
+
+			<div class="form-wrap">
+					
+				<!-- 手机号 -->
+				<div class="formList formIconRight">
+					@@include('../../../common/views/form/phone/newLinkPhone.html')
+				</div>
+
+				<!-- verifyCode class表示当前的表格元素为图文验证码 -->
+				<div class="formList verifyCode">
+					@@include('../../../common/views/form/code/twyzmCode.html')
+				</div>
+
+				<!-- numberCode class表示当前的表格元素为短信验证码 -->
+				<div class="formList numberCode">
+					@@include('../../../common/views/form/code/dxyzmCode.html')
+				</div>
+
+			</div>
+
+			
+		</div>
+
+		@@include('../../../common/views/form/code/voiceCode.html')
+
+		@@include('../../../common/views/button/sureBtn.html')
+
+		
+		<script src="/include/js/vendor/zepto/zepto.js"></script>
+		<script src="/include/js/vendor/root.js"></script>
+		<script src="/include/js/vendor/mui/mui.min.js"></script>
+		<script src="/user/static/js/setUp/resetLinkPhone.js"></script>
+
+	</body>
+
+</html>

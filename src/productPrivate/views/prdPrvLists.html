@@ -1,0 +1,192 @@
+<!-- 
+	产品——公募列表
+	@author yangjinlai 2017-03-03
+
+	*:本页面使用MUI
+
+	* 私募接口改造
+ 	* @time 2018-09-25  ping
+
+ 	* 添加埋点 
+	@ author ping 2019-2-20
+-->
+
+<!doctype html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+	    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+	    <meta name="applicable-device" content="mobile">
+	    <meta name="apple-mobile-web-app-capable" content="yes">
+	    <meta name="apple-mobile-web-app-status-bar-style" content="black"><meta charset="UTF-8">
+		<title>私募超市</title>
+		<link rel="stylesheet" href="/productPrivate/static/css/prdPrv.css">
+	</head>
+
+	<body>
+		
+		@@include('../../common/views/load.html')
+		<div class="productName">
+			<div class="productInput">
+				<div class="iconfont">&#xe66f;</div>
+				<div class="text">请输入私募基金名称</div>
+			</div>
+		</div>
+		
+		<div class="mui-content prdPrvList">
+			  
+			  
+		</div>
+
+		@@include('../../common/views/noData.html')
+
+		<!-- 私募产品列表表格模板 -->
+		<script id="productList-list-template" type="text/x-handlebars-template">
+			<div class="mui-other-area">
+				<!-- <img src=""> -->  
+			</div>
+
+			{{! 列表 内容 使用mui的上拉加载}}
+			<div class="list">
+				{{! list是包裹上拉加载区域的，在js中计算当前页面中的list高度，不能超出一屏}}
+
+				{{! 初始化上拉加载区域，使用contentWrapper class}}
+				{{! contentWrapper 需要添加样式，具体见less文件}}
+
+				<div class="contentWrapper">
+
+					<ul class="mui-table-view">
+						<li class="mui-table-view-cell">
+						{{! 所有内容  需要放在这个li里，且里面不能再用Li元素}}
+						
+						{{{content}}}
+
+						</li>
+					</ul>
+
+					<!-- 返回顶部 -->
+					@@include('../../common/views/goTop.html')
+					
+				</div>
+
+				
+			</div>
+			
+		</script>	
+		<!-- 公募产品列表表格模板 -->
+		<script id="productList-template" type="text/x-handlebars-template">
+			{{#each this}}
+				{{#if solid}}
+					<a href="/productPrivate/views/prdPrvDetails.html?fundCode={{fundCode}}" class="mui-card" htmdEvt="privateList_detail">
+						<div class="card-head">
+							{{fundName}}
+						</div>
+						<div class="card-theme noBor">
+							<div class="mui-row mar15">
+								<div class="mui-col-xs-5 left">
+									<p class="inv invCore">{{expectedProfitMin}}%
+									{{#if expectedProfitMax}}
+										<span class="profitMax">~{{expectedProfitMax}}%</span>
+									{{/if}}
+									</p>
+								</div>
+								<div class="mui-col-xs-3 center">
+									<p class="inv">{{prodTerm}}</p>
+								</div>
+								<div class="mui-col-xs-4 right">
+									<p class="inv invStart">{{personMinBalance}}</p>
+								</div>
+							</div>
+							<div class="mui-row">
+
+								<div class="mui-col-xs-5 left">								
+									<p class="text">业绩比较基准</p>
+								</div>
+								<div class="mui-col-xs-3 center">						
+									<p class="text">投资期限({{prodTermUnit}})</p>
+								</div>
+								<div class="mui-col-xs-4 right">								
+									<p class="text">起投金额(万)</p>
+								</div>
+							</div>
+						</div>
+						{{#if features}}
+							<div class="card-foot feature"><i class="iconfont">&#xe6c2;</i>{{features}}</div>
+						{{else}}
+						{{/if}}
+					</a>
+				{{else}}
+					<a href="/productPrivate/views/prdPrvDetails.html?fundCode={{fundCode}}" class="mui-card" htmdEvt="privateList_detail">
+						<div class="card-head">
+							{{fundName}}
+						</div>
+						<div class="card-theme noBor">
+							<div class="mui-row mar15">
+							{{#if netValue}}
+								<div class="mui-col-xs-5 left">
+									<p class="inv invCore">{{netValue}}<span>({{netValueDate}})</span></p>
+								</div>
+								<div class="mui-col-xs-3 center">
+									<p class="inv">{{prodTerm}}</p>
+								</div>
+								<div class="mui-col-xs-4 right">
+									<p class="inv invStart">{{personMinBalance}}</p>
+								</div>
+							</div>
+							<div class="mui-row">
+								<div class="mui-col-xs-5 left">						
+									<p class="text">单位净值</p>
+								</div>
+								<div class="mui-col-xs-3 center">								
+									<p class="text">封闭期({{prodTermUnit}})</p>
+								</div>
+								<div class="mui-col-xs-4 right">								
+									<p class="text">起投金额(万)</p>
+								</div>
+							</div>
+							{{else}}
+								<div class="mui-col-xs-5 left">
+									<p class="inv invCore float">{{issueEndDate}}</p>
+								</div>
+								<div class="mui-col-xs-3 center">
+									<p class="inv">{{prodTerm}}</p>
+								</div>
+								<div class="mui-col-xs-4 right">
+									<p class="inv invStart">{{personMinBalance}}</p>
+								</div>
+							</div>
+							<div class="mui-row">
+								<div class="mui-col-xs-5 left">						
+									<p class="text">募集截止日</p>
+								</div>
+								<div class="mui-col-xs-3 center">								
+									<p class="text">封闭期(月)</p>
+								</div>
+								<div class="mui-col-xs-4 right">								
+									<p class="text">起投金额(万)</p>
+								</div>
+							</div>
+							{{/if}}
+						</div>
+						{{#if features}}
+							<div class="card-foot feature"><i class="iconfont">&#xe6c2;</i>{{features}}</div>
+						{{else}}
+						{{/if}}
+					</a>	
+				{{/if}}	
+			{{/each}}
+		</script>
+		<!-- 加载中loading -->
+		@@include('../../common/views/loading/listLoading.html')
+		<!-- 底部导航 -->
+		@@include('../../common/views/bottomNav.html')	
+		<script src="/include/js/vendor/zepto/zepto.js"></script>
+		<script src="/include/js/vendor/handlebar/handlebars.js"></script>
+		<script src="/include/js/vendor/mui/mui.min.js"></script>
+		<script src="/include/js/vendor/root.js"></script>
+		<!-- 添加埋点 -->
+    	@@include('@pathInclude/views/header.html') 
+		<script src="/productPrivate/static/js/prdPrv.js"></script>
+	</body>
+
+</html>

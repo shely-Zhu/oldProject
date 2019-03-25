@@ -1,0 +1,74 @@
+//引入mui
+@import url("../../../include/css/mui.min.css");
+@import url("../../../common/less/reset.less");
+@import url("../../../common/less/color.less");
+@import url("../../../common/less/mui/resetMUI.less");
+@import url("../../../common/less/components/againEnter.less");
+
+ .goingBox{
+ 	.going{
+ 		margin-top: 0.8rem;
+ 		margin-bottom: 0.8rem;
+ 		height: 10.6rem;
+ 		padding-top: 1.7rem;
+ 		background: @c005;
+ 		div{
+ 			text-align: center;
+ 		}
+ 		.iconfont{
+ 			font-size: 4.6rem;
+ 			color: @c006;
+ 		}
+ 		div:last-child{
+ 			margin-top: 0.4rem;
+ 			font-size: 1.4rem;
+ 			color: @c002;
+ 		}
+ 	}
+ 	.mui-card{
+ 		padding-left: 0;
+ 	}
+ 	.buySure{
+ 		display: none;
+ 	}
+ 	.buySure,.positionDetails,.redemptionSure{
+ 		
+ 		margin-top: 0.8rem;
+ 		padding: 1.6rem 1.6rem;
+ 		background: @c005;
+ 		font-size: 1.4rem;
+ 		color: @c002;
+ 		line-height: 1.4rem;
+ 		h4{
+ 			margin-bottom: 2.1rem;
+ 			font-size: 1.4rem;
+ 			color: @c002;
+ 		}
+ 		div{
+ 			display: flex;
+ 			justify-content: space-between;
+ 			span:first-child{
+ 				color: @c003;
+ 			}
+ 		}
+ 		div:not(:first-child){
+ 			margin-top: 1.6rem;
+ 		}
+ 	}
+ 	
+ 	.assetPurchaseDetails{
+ 		margin-top: 0.8rem;
+ 		padding: 0 1.6rem;
+ 		background: @c005;
+ 		display: flex;
+ 		justify-content: space-between;
+ 		line-height: 4.0rem;
+ 		font-size: 1.4rem;
+ 		span:first-child{
+ 			color: @c002;
+ 		}
+ 		span:last-child{
+ 			color: @c003;
+ 		}
+ 	}
+ }

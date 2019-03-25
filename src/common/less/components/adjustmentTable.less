@@ -1,0 +1,111 @@
+/**  
+ * @Page:  调仓记录表格
+ * @Author: songxiaoyu  
+ * @Date:   2019-1-3 10:39:01  
+ * @Last Modified by:   songxiaoyu  
+ * @Last Modified time: 2019-1-3 
+ *
+ * 恒小智我的组合页面
+ */
+
+// 持仓详情
+.latestAdjustment {
+    padding: 0 1.6rem 0.8rem 1.6rem;
+    color: @c002;
+    text-align: left;
+    margin-bottom: 2rem;
+    font-size: 1.4rem;
+
+    h2 {
+        height: 4.8rem;
+        line-height: 4.8rem;
+        font-size: 1.6rem;
+        // padding-bottom: 0.7rem;
+        // padding-top: 1.4rem;
+
+        .date {
+            font-size: 1.2rem;
+            margin-left: 0.8rem;
+        }
+
+        .more {
+            padding-top: 0.3rem;
+            float: right;
+            font-size: 1.2rem;
+            color: @c003;
+            vertical-align: middle;
+            .iconfont{
+                font-size: 1.2rem;
+            }
+        }
+    }
+
+    .reason {
+        padding-top: 0.8rem;
+        padding-bottom: 0.8rem;
+        color: @c003;
+        position: relative;
+
+
+        &:before {
+            .fullLine();
+            height: 0;
+            top: 0;
+        }
+    }
+
+    .mui-row {
+        position: relative;
+        height: 4.9rem;
+
+        span {
+            padding-top: 0.8rem;
+            font-size: 1.2rem;
+        }
+
+        &:after {
+            .leftIndentLine();
+        }
+
+        &:last-child {
+            &:after {
+                content: none;
+            }
+
+        }
+
+        // 红色
+        .redColor {
+            color: @c010;
+        }
+
+        .greenColor {
+            color: @c051;
+        }
+    }
+
+    .detailT {
+        text-align: right;
+        position: relative;
+        line-height: 3.6rem;
+        color: @c003;
+        font-size: 1.2rem;
+
+        span {
+            &:first-child {
+                text-align: left;
+            }
+        }
+    }
+
+    .listDiv .ellipsis {
+        display: block;
+        font-size: 1.4rem;
+    }
+
+    .listDiv{
+        .alignR, .alignC {
+            padding-top:1rem;
+        }
+    } 
+}

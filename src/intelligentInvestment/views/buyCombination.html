@@ -1,0 +1,87 @@
+<!-- /**  
+ * @Page:  恒小智购买页
+ * @Author: songxiaoyu  
+ * @Date:   2018-10-12 16:00:42  
+ * @Last Modified by:   songxiaoyu  
+ * @Last Modified time: 2019-01-03 16:01:59  
+ */ -->
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="applicable-device" content="mobile">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="stylesheet" href="/intelligentInvestment/static/css/buyCombination.css">
+    <title>买入</title>
+</head>
+
+<body>
+
+    @@include('../../common/views/load.html')
+
+    <div class="buyCombination">
+        <section class="mui-card combiT"></section>
+        <!-- 选择银行卡  -->
+        <div class="mui-card marginTop cardList">
+            <!--银行卡-->
+            <div class="mui-card-content openWrap dealCard">
+                <p class="title">在线支付</p>
+                <div class="form-wrap">
+                    <div class="form-list bankList bankList_1" operationType="0">
+                        <!-- 放置银行卡列表的模板 -->
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- 选择银行卡  end -->
+        <!-- 买入金额  -->
+        <div class="mui-card marginTop">
+            <!-- 输入金额 -->
+            <div class="mui-row amount">
+                <label class="mui-col-xs-4 text">买入金额</label>
+                <input type="text" class="mui-col-xs-8 inputTurnIn" />
+            </div>
+        </div>
+        <!-- 买入金额end -->
+        <!-- 持仓详情 -->
+        <div class="marginTop mui-card holdingDetail">
+        </div>
+        <!-- 持仓详情 end -->
+        <!-- 协议 -->
+        <div class="agreement flexbox">
+            <div class="mui-checkbox mui-left">
+                <div>
+                    <a href="javascript:;" class="item1"><span>已阅读并同意</span></a>
+                    <span  class="item2">
+                        <a href="javascript:;" onclick="window.location.href=site_url.agreementModel_url+'?id=135';">《相关协议》</a>
+                    </span>
+                </div>
+                <input name="checkbox1" value="Item 1" type="checkbox" checked="checked" class="iconfont">
+            </div>
+        </div>
+        <!-- 协议 end -->
+        <!-- 底部按钮 -->
+        @@include('../../common/views/button/buyNowBtn.html',{"arr":[ {"className": "bottom", "txt": "确定"} ]})
+        <!-- 底部按钮 end -->
+
+        <!-- 银行卡模板 -->
+        @@include('../../common/views/bankList.html')
+        <!-- 持仓表格 -->
+        @@include('../../common/views/pageModule/holdingTable.html')
+        <!-- 交易密码 -->
+        @@include('../../common/views/webPassword.html')
+
+    </div>
+    <script src="/include/js/vendor/zepto/zepto.js"></script>
+    <script src="/include/js/vendor/root.js"></script>
+    <script src="/include/js/vendor/handlebar/handlebars.js"></script>
+    <script src="/include/js/vendor/mui/mui.min.js"></script>
+     <!-- 添加埋点 -->
+    @@include('@pathInclude/views/header.html')
+    <script src="/intelligentInvestment/static/js/buyCombination.js"></script>
+</body>
+
+</html>

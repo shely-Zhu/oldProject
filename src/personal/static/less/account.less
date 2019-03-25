@@ -1,0 +1,450 @@
+// 我的账户（合并、未合并）
+
+//引入mui
+@import url("../../../include/css/mui.min.css");
+@import url("../../../common/less/reset.less");
+@import url("../../../common/less/color.less");
+@import url("../../../common/less/mui/resetMUI.less"); 
+@import url("../../../common/less/mui/selectMUI.less");
+@import url("../../../common/less/mui/newFormMui.less");
+@import url("../../../common/less/components/alertBox.less");
+//@import url("../../../common/less/app.less");
+@import url("../../../common/less/components/againEnter.less");
+@import url("../../../common/less/components/bottomNav.less");
+@import url("../../../common/less/components/elasticLayerThree.less");
+@import url("../../../common/less/components/elasticLayerTypeTwo.less");
+
+
+//引入重置mui样式的表单样式文件 
+//@import url("../../../common/less/mui/formMUI.less"); 
+
+
+.container{
+	position: relative;
+	padding-bottom: 5.7rem;
+}
+
+.accountMerge{
+
+	.banner{
+		width:100%;
+		background: url("/personal/static/img/my_banner3.png");
+		background-size: 100% 100%;
+		position: relative;
+		.icon{
+			text-align: center;
+			//margin-top: 0.5rem;
+			padding-top: 3rem;
+			padding-bottom: 1.7rem;
+			.iconfont{
+				font-size: 4rem;
+				color:@c005;
+			}
+		}
+		.name{
+			padding-bottom: 5.6rem;
+			text-align: center;
+			color:@c005;
+			font-size:1.6rem;
+			max-width:16rem;
+            margin:0 auto;
+		}
+		.setting{
+			position: absolute;
+			top: 1.5rem;
+			right: 1.6rem;
+			font-size: 1.2rem;
+			a{
+				display: block;
+				color: @c005;
+			}
+			span{
+				margin-right: 0.8rem;
+				font-size: 1.6rem;
+				vertical-align: middle;
+			}
+		}
+	}
+
+	.information{
+		width: 100%;
+		height: 4rem;
+		margin-top: 0.8rem;
+		background-color: @c005;
+
+		a{
+			display: inline-block;
+			width: 49%;
+			line-height: 4rem;
+			font-size: 1.4rem;
+			vertical-align: middle;
+			p{
+				margin-left: 1.6rem;
+				display: inline-block;
+				color: @c002;
+
+				span{
+					margin-right: 0.8rem;
+					color: @c003;
+					width: 1.7rem;
+					display: inline-block;
+    				vertical-align: middle;
+				}
+			}
+			.integralIcon{
+				display: none;
+				float: right;
+				margin-right: 1.2rem;
+				color: #bbb;
+			}
+		}
+		.bankcard{
+			display: none;
+			border-left: 1px solid @c001;
+			line-height: 2rem;
+			vertical-align: middle;
+		}
+	}
+
+	.items{
+		a{
+			height: 4rem;
+		}
+		.iconfont{
+			font-size: 1.7rem;
+    		width: 1.7rem;
+    		vertical-align: middle;
+		}
+
+		.text{
+			margin-left: 0.8rem;
+			color: @c002;
+			vertical-align: middle;
+		}
+
+		.result{
+			margin-right: 2.6rem;
+			font-size: 1.4rem;
+			float: right;
+		}
+
+		//有数据
+		.non{
+			float: right;
+			margin-right: 2.6rem;
+			font-size: 1.4rem;
+			color: @c001;
+		}
+
+		.jianGuanMsg{
+			display: none;
+		}
+	}
+
+	.openDiv{
+		display: none;
+		position: relative;
+		margin-top:0.8rem;
+		background-color:@c005;
+		padding-left:1.6rem;
+		box-shadow:0 0.1rem 0.4rem 0 rgba(0,0,0,0.1);
+		.itemsLeft{
+			display: inline-block;
+			padding-top: 1.6rem;
+			.title{
+				font-size: 1.4rem;
+				color: @c002;
+			}
+			.text{
+				margin: 1rem 0 1.6rem;
+				font-size: 1.2rem;
+				color: @c003;
+			}
+		}
+		.button{
+			position: absolute;
+			right: 1.6rem;
+			top: 50%;
+			margin-top: -1.2rem;
+			width: 7.5rem;
+			height: 2.5rem;
+			line-height: 2.5rem;
+			font-size: 1.4rem;
+			color: @c006;
+			background: @c005;
+			border: 1px solid @c006;
+			border-radius: 0.2rem;
+			text-align: center;
+		}
+	}
+	
+	// 推荐有礼入口
+	.recommend_wrap{
+		display: none;
+	}
+}
+
+// 银行卡
+.bankCard{
+	background: @c005;
+	padding: 0.8rem 1.2rem 0;
+	.bankCardList{
+		position: relative;
+		a{
+			display: block;
+			// height: 10rem;
+			padding-left: 1.6rem;
+			padding-bottom: 1rem;
+			margin-bottom: 0.8rem;
+			background-image: url("/personal/static/img/yinhangka2.png");
+			// background-size: 100% 100%;
+			background-size: cover;
+			border-radius: 0.5rem;
+			-webkit-border-radius: 0.5rem;
+			.bankcardTitle{
+				font-size: 1.2rem;
+				color: @c005;
+				padding-top: 1.9rem;
+				span{
+					font-size: 1.6rem;
+					color: @c002;
+					margin-right: 0.8rem;
+				}
+			}
+			.bankcardNumber{
+				margin-top: 2.4rem;
+				font-size: 1.8rem;
+				color: @c012;
+			}
+			.publicTrade{
+				margin-top: 0.5rem;
+				font-size: 1rem;
+				color: @c002;
+				span{
+					font-size: 1rem;
+					margin-right: 0.5rem;
+				}
+			}
+			.haveOpened{
+				margin-top: 0.5rem;
+				font-size: 1rem;
+				color: @c026;
+				span{
+					font-size: 1rem;
+					margin-right: 0.5rem;
+				}
+			}
+			.square{
+				position: absolute;
+				bottom: 1.8rem;
+				right: 1.6rem;
+				.point{
+					display: inline-block;
+					margin-left: 0.5rem;
+					width: 0.5rem;
+					height: 0.5rem;
+					border-radius: 0.1rem;
+					background: rgba(125,124,125, 0.3);
+				}
+			}
+		}
+	}
+}
+
+// 银行卡详情
+.bankcardDetail{
+	padding: 3.8rem 1.2rem 0;
+	.icon{
+		color: @c001;
+		text-align: center;
+	}
+	.iconfont{
+		font-size: 4rem;
+	}
+	.bankName{
+		margin: 1.8rem 0;
+		font-size: 1.6rem;
+		color: @c002;
+		text-align: center;
+	}
+	.bankcardNumber{
+		font-size: 1.6rem;
+		color: @c003;
+		text-align: center;
+	}
+
+	// 银行支付限额
+	.payLimit{
+		width: 100%;
+		margin-top: 2.5rem;
+		font-size: 1.2rem;
+		color: @c002;
+		// 单笔限额
+		.payTitle{
+			margin-bottom: 1.2rem;
+			padding-top: 1.5rem;
+			// margin: 1.5rem 0 1.2rem;
+			font-size: 1.4rem;
+			color: @c003;
+		}
+		// 单笔限额
+		.payNumber{
+			padding-bottom: 1rem;
+			p{
+				display: inline-block;
+				float: right;
+				margin-right: 1.2rem;
+				color: @c002;
+			}
+		}
+		//每日限额
+		.dailyLimit{
+			padding-bottom: 1.2rem;
+			p{
+				display: inline-block;
+				float: right;
+				margin-right: 1.2rem;
+				color: @c002;
+			}
+		}
+	}
+	// .buttons{
+	// 	margin-top: 4rem;
+	// 	button{
+	// 		display: none;
+	// 	}
+	// 	.recommend{
+	// 		margin-top: 1.2rem;
+	// 		font-size: 1.2rem;
+	// 		color: @c003;
+	// 		span{
+	// 			font-size: 1.3rem;
+	// 			color: @c002;
+	// 		}
+	// 	}
+	// }
+}
+
+// 公募监管账户
+.regulatoryAccounts{
+	margin-top: 0.8rem;
+	// 恒天明泽归集账户。
+	.accountName{
+		height: 4rem;
+		line-height: 4rem;
+		font-size: 1.6rem;
+		color: @c002;
+		border-bottom: 1px solid @c004;
+	}
+	// 账户的详细信息
+	.accountDetail{
+		margin-top: 1.2rem;
+		font-size: 1.4rem;
+		color: @c003;
+		p{
+			padding-bottom: 1.2rem;
+			overflow: auto;
+			span{
+				width: 70%;
+				text-align: right;
+				float: right;
+				margin-right: 1.6rem;
+				max-width: 19.9rem;
+			}
+		}
+	}
+	// 提示
+	.prompt{
+		padding: 0.8rem 1.6rem 0;
+		font-size: 1rem;
+		.tip{
+			color: @c002;
+		}
+		.content{
+			color: @c003;
+			line-height: 1.8rem;
+		}
+	}
+}
+
+
+// 交易公募持仓绑定
+.publicbind{
+	margin-top: 6.3rem;
+	.cloud{
+		font-size: 6.6rem;
+		color: @c004;
+	}
+	.elasticWrapper{
+		margin: 0 auto;
+		width: 72%;
+		text-align: center;
+		.elasticTxt{
+			padding: 3.4rem 1.6rem 0 1.6rem;
+			font-size: 1.2rem;
+			color: @c003;
+			line-height: 2.2rem;
+			border-top: 1px solid @c004;
+		}
+	}
+	a{
+		display: block;
+		width: 14rem;
+		height: 3rem;
+		line-height: 3rem;
+		margin: 0 auto;
+		font-size: 1.4rem;
+		border-radius: 0.2rem;
+	}
+	.bind{
+		margin-top: 3.8rem;
+		color: @c005;
+		background-color: @c006;
+	}
+}
+
+// 公募交易持仓开户
+.publicOpen{
+	margin-top: 9.4rem;
+	.public{
+		font-size: 1.6rem;
+		color: @c002;
+	}
+	.elasticWrapper{
+		margin: 0 auto;
+		width: 72%;
+		text-align: center;
+		.elasticTxt{
+			margin-top: 2.4rem;
+			padding: 2rem 1.6rem 2.8rem;
+			font-size: 1.2rem;
+			color: @c003;
+			line-height: 2.2rem;
+			border-top: 1px solid @c004;
+		}
+	}
+	a{
+		display: block;
+		width: 14rem;
+		height: 3rem;
+		line-height: 3rem;
+		margin: 0 auto;
+		font-size: 1.4rem;
+		border-radius: 0.2rem;
+	}
+	.open{
+		color: @c005;
+		background-color: @c006;
+	}
+}
+
+.intro{
+	background: @c005;
+	padding: 1.2rem 0 0 1.2rem;
+	font-size: 1.2rem;
+	color: @c003;
+	span{
+		font-size: 1.3rem;
+		color: @c002;
+	}
+}

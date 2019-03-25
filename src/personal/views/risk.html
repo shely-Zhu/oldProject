@@ -1,0 +1,37 @@
+<!--
+*风险评测结果
+*author:purpleZhao
+*time：2017/2/15
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0,user-scalable=no" name="viewport" id="viewport" />
+	<meta content="telephone=no" name="format-detection" />
+	<meta content="yes" name="apple-mobile-web-app-capable" />
+	<meta name="apple-mobile-web-app-status-bar-style" content="black">
+	<link rel="stylesheet" href="/personal/static/css/risk.css">
+	<title>投资者风险承受能力</title>
+<body>
+	@@include('../../common/views/load.html')
+	<div class="content">
+		<div class="risk">
+			<p>理财有风险，投资需谨慎</p>
+			<div><img class="picture" src="/personal/static/img/risk.png" alt=""><span id="lader">***</span></div>
+			<section id="text"></section>
+			<p class="reminder_txt">
+				<span class="time_out1"><span class="iconfont">&#xe6dc;</span> 您的风险测评结果有效期至：<span class="day"></span></span>
+				<span class="time_out2"><span class="iconfont">&#xe6dc;</span> 您的测评结果已于<span class="day day_color"></span>过期，请重新测评！</span>
+			</p>
+			<p class="fifth btn"><a class="location" href="javascript:;">重新测评</a></p>
+			<p class="six btn"><a class="product" href="javascript:;">返回首页</a></p>
+		</div>		
+	</div> 
+	
+</body>
+<script src="/include/js/vendor/zepto/zepto.js"></script>
+<script src="/include/js/vendor/root.js"></script> 
+<script src="/personal/static/js/risk.js"></script>
+
+</html>

@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+	<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+	<meta name="applicable-device" content="mobile">
+	<meta content="telephone=no" name="format-detection"/>
+	<meta name="apple-mobile-web-app-capable" content="yes">
+	<meta name="apple-mobile-web-app-status-bar-style" content="black">
+	<link rel="stylesheet" href="/personal/static/css/account.css">
+	<title>公募监管账户</title>
+</head>
+<body>
+	@@include('../../common/views/load.html')
+	<section class="container">
+		<div class="regulatoryAccounts">
+			<div class="mui-card">
+				<div class="accountName" id="accountName"></div>
+				<div class="accountDetail">
+					<p class="name clearfix" id="name">户&nbsp;&nbsp;&nbsp;名<span></span></p>
+					<p class="number clearfix" id="number">账&nbsp;&nbsp;&nbsp;号<span></span></p>
+					<p class="linenum clearfix" id="linenum">行&nbsp;&nbsp;&nbsp;号<span></span></p>
+					<p class="openingBank clearfix" id="openingBank">开户行<span></span></p>
+				</div>
+			</div>
+			<div class="prompt">
+				<div class="tip">提示</div>
+				<section class="content" id="content"></section>
+			</div>
+		</div>
+	</section>
+	<script src="/include/js/vendor/zepto/zepto.js"></script>
+	<script src="/include/js/vendor/root.js"></script>
+	<script src="/include/js/vendor/mui/mui.min.js"></script>
+	<script src="/personal/static/js/regulatoryAccounts.js"></script>
+</body>
+</html>

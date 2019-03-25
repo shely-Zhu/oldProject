@@ -1,0 +1,229 @@
+<!-- 
+	产品——私募首页
+	@author 张卫鹏  2017-07-05
+
+	* 添加埋点 
+	@ author ping 2019-2-20
+-->
+
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+	    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+	    <meta name="applicable-device" content="mobile">
+	    <meta name="apple-mobile-web-app-capable" content="yes">
+	    <meta name="apple-mobile-web-app-status-bar-style" content="black"><meta charset="UTF-8">
+		<title>私募产品</title>
+		<link rel="stylesheet" href="/productPrivate/static/css/prvIndex.css">
+	</head>
+	<body>
+		
+		@@include('../../common/views/load.html')
+		<!-- 按钮 -->
+		@@include('../../common/views/privateOrPublic.html')
+		<div class="prvIndex">
+			<!-- @@include("../../common/views/company.html",{"name":"北京恒天明泽基金销售有限公司"}) -->
+			<div class="mui-card public reset">
+				<div class="mui-scroll-wrapper mui-slider-indicator mui-segmented-control mui-segmented-control-inverted">
+				    <div class="mui-scroll">
+				        <!--<a class="mui-control-item">
+				        	<img src="../static/img/banner.png" />
+				        </a><a class="mui-control-item">
+				            <img src="../static/img/banner.png" />
+				        </a><a class="mui-control-item">
+				            <img src="../static/img/banner.png" />
+				        </a><a class="mui-control-item">
+				            <img src="../static/img/banner.png" />
+				        </a><a class="mui-control-item">
+				            <img src="../static/img/banner.png" />
+				        </a><a class="mui-control-item">
+				            <img src="../static/img/banner.png" />
+				        </a>-->
+				    </div>
+				</div>
+			</div>
+			<div class="mui-card marginTop market">
+				<a href="javascript:;" class="list" htmdEvt= "privateIndex_supermarket">
+					<i class="iconfont listIcon">&#xe6b3;</i>
+					<span class="intro">私募超市</span>
+				</a><span class="line"></span><a href="javascript:;" class="movie">
+					<i class="iconfont movieIcon">&#xe6b5;</i>
+					<span class="intro">视频直播</span>
+				</a>
+			</div>
+			<div class="mui-card marginTop public highlight">
+				<div class="card-head">
+					恒天特色
+				</div>
+				<div class="mui-scroll-wrapper mui-slider-indicator mui-segmented-control mui-segmented-control-inverted">
+				    <div class="mui-scroll">
+				        
+				    </div>
+				</div>
+			</div>
+			<div class="mui-card marginTop public recommend">
+				<div class="card-head">
+					精品推荐
+				</div>
+				<div class="mui-scroll-wrapper mui-slider-indicator mui-segmented-control mui-segmented-control-inverted">				 
+				    <div class="mui-scroll">
+			    		
+				    </div>
+				</div>
+			</div>
+			<div class="mui-card marginTop public like">
+				<div class="card-head">
+					猜你喜欢
+				</div>
+				<div class="likeBox" htmdEvt = "privateIndex_guessLike">
+					<img src="../static/img/like.png" alt="" />
+					<div class="user">
+						<div class="itemBox">
+							<p class="userName">--</p>
+							<p class="likeIntro">适合您的产品在这里</p>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="mui-card marginTop public hot">
+				<div class="card-head">
+					热门私募
+				</div>
+				<div class="hotWrap">
+					
+				</div>
+			</div>
+			<div class="bottom-text">
+				<h2>基金销售服务由北京恒天明泽基金销售有限公司提供</h2>
+				<p>投资前请您认真阅读基金合同、招募说明书、风险揭示书等法律文件、了解产品风险，基金过往业绩不预示其未来表现、理财有风险，投资需谨慎</p>
+			</div>
+
+
+			<!-- 底部导航 -->
+			@@include('../../common/views/bottomNav.html')
+		</div>
+		<script id="banner-template" type="text/x-handlebars-template">
+			{{#each this}}
+				<div class="mui-control-item" url="{{linkUrl}}"	 isShare="{{isShare}}">
+		        	<img src={{imgUrl}} />
+		        </div>
+			{{/each}}	
+		</script>
+		<script id="highlight-template" type="text/x-handlebars-template">
+			{{#each this}}
+				<div class="mui-control-item" name="{{name}}">
+		        	<img src={{imgUrl}} htmdEvt= "privateIndex_feature" />
+		        </div>
+			{{/each}}	
+		</script>
+		<script id="recommend-template" type="text/x-handlebars-template">
+			{{#each this.pageList}}
+				{{#if ../isLogin}}
+					{{#if ../isRiskAppraisal}}
+						<div class="mui-control-item" code="{{code}}" htmdEvt="privateIndex_recommend">
+				        	<div class="itemBox">
+			    				<p class="title ellipsis">{{recommend}}</p>
+			    				{{#if isSolid}}
+			    					{{#if noMax}}
+				        			<p class="profit"><span class="num">{{pefExpectedProfitMin}}</span>%</p>
+				        			{{else}}
+				        			<p class="profit"><span class="num">{{pefExpectedProfitMin}}</span>%~<span class="num">{{pefExpectedProfitMax}}</span>%</p>
+				        			{{/if}}	
+				        		<p class="profitIntro">业绩比较基准</p>
+				        		{{else}}
+				        		<p class="profit"><span class="num">{{pefNetValue}}</span></p>
+				        		<p class="profitIntro">单位净值<span class="netDate">({{pefNetValueDate}})</span></p>
+				        		{{/if}}
+				        		<p class="recName ellipsis_two">{{name}}</p>
+			    			</div>
+				        </div>
+				    {{else}}
+				    	<div class="mui-control-item" code="{{code}}" htmdEvt= "privateIndex_recommend">
+			        		<p class="title ellipsis">{{recommend}}</p>
+			        		<p class="limit"><span>风测可见</span></p>
+				        </div>
+				    {{/if}}  
+				{{else}}
+					<div class="mui-control-item" htmdEvt= "privateIndex_recommend">
+		        		<p class="title ellipsis">{{recommend}}</p>
+		        		<p class="limit"><span>登录可见</span></p>
+			        </div> 
+			    {{/if}} 
+			{{/each}}	 
+		</script>
+		<script id="hot-template" type="text/x-handlebars-template">
+			{{#each this.pageList}}
+				{{#if ../isLogin}} 
+					{{#if ../isRiskAppraisal}}
+						<div class="hotList" code="{{code}}" htmdEvt= "privateIndex_hotSpot">
+							<p class="hotHead ellipsis">{{recommend}}</p>
+							<ul class="hotPrd clearfix">
+								<li class="theme">
+									{{#if isSolid}}
+									<div class="hotProfit">
+										{{#if noMax}}
+					        			<span class="hotNum">{{pefExpectedProfitMin}}</span><span class="hotUnit">%</span>
+					        			{{else}}
+					        			<span class="hotNum">{{pefExpectedProfitMin}}</span><span class="hotUnit">%~</span><span class="hotNum">{{pefExpectedProfitMax}}</span><span class="hotUnit">%</span>
+					        			{{/if}}	
+									</div>
+									<div class="hotIntro">
+										业绩比较基准
+									</div>
+									{{else}}
+									<div class="hotProfit">
+										<span class="hotNum">{{pefNetValue}}</span>
+									</div>
+									<div class="hotIntro">
+										单位净值<span>({{pefNetValueDate}})</span>
+									</div>
+									{{/if}}
+								</li>
+								<li class="themeIntro">
+									<div class="hotName ellipsis">{{name}}</div>
+									<div class="hotKey ellipsis_two">
+										<span class="ellipsis_two">{{productFeature}}</span>
+										<!--{{#each productFeature}}
+										<span>{{this}}</span>
+										{{/each}}-->
+									</div>
+								</li>
+							</ul>
+						</div>
+				    {{else}}
+				    	<div class="hotList" code="{{code}}" htmdEvt= "privateIndex_hotSpot">
+							<p class="hotHead ellipsis">{{recommend}}</p>
+							<p class="center"><span class="ing">风测可见</span></p>
+							<p class="hotKey center ellipsis_two">
+								<span class="ellipsis_two">{{productFeature}}</span>
+								<!--{{#each productFeature}}
+								<span>{{this}}</span>
+								{{/each}}-->
+							</p>
+						</div>
+				    {{/if}}  
+				{{else}}
+					<div class="hotList" htmdEvt= "privateIndex_hotSpot">
+						<p class="hotHead ellipsis">{{recommend}}</p>
+						<p class="center"><span class="ing">登录可见</span></p>
+						<p class="hotKey center ellipsis_two">
+							<span class="ellipsis_two">{{productFeature}}</span>
+							<!--{{#each productFeature}}
+							<span>{{this}}</span>
+							{{/each}}-->
+						</p>
+					</div>
+			    {{/if}}    
+			{{/each}}	
+		</script>
+
+		<script src="/include/js/vendor/zepto/zepto.js"></script>
+		<script src="/include/js/vendor/root.js"></script>
+		<script src="/include/js/vendor/handlebar/handlebars.js"></script>
+		<script src="/include/js/vendor/mui/mui.min.js"></script>
+		<!-- 添加埋点 -->
+		@@include('@pathInclude/views/header.html') 
+		<script src="/productPrivate/static/js/prvIndex.js"></script>
+	</body>
+</html>

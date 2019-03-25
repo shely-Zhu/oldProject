@@ -1,0 +1,49 @@
+@charset "utf-8";
+//自定义引入
+@import url("../../../common/less/reset.less");
+@import url("../../../common/less/color.less");
+//错误提示
+
+// 投资者类型
+.investType{
+	margin-top: 0.8rem;
+	background: @c005;
+	box-shadow: 0 0.1rem 0.4rem 0 rgba(0,0,0,0.1);
+
+	a{
+		display: block;
+		width: 95%;
+		height: 4rem;
+		font-size: 1.4rem;
+		color: @c002;
+		margin-left: 1.6rem;
+		border-bottom: 1px solid @c004;
+		// border-bottom: 0.05rem solid @c004;
+		p{
+			line-height: 4rem;
+			span{
+				float: right;
+				color: @c001;
+				margin-right: 1.2rem;
+			}
+			.result{
+				margin-right: 0.2rem;
+				vertical-align: middle;
+			}
+			.category{
+				display: inline-block;
+				position: relative;
+				margin-right: 0.4rem;
+			}
+		}
+	}
+
+	.gongMuInvest{
+		display: none;
+	}
+
+	a:nth-last-of-type(1){
+		border: 0;
+	}
+
+}

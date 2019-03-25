@@ -1,0 +1,194 @@
+@import url("../../../include/css/mui.min.css");
+@import url('../../../common/less/mui/resetMUI.less');
+@import url("../../../common/less/reset.less");
+@import url("../../../common/less/color.less"); 
+@import url("../../../common/less/baseClass.less"); 
+
+
+
+
+
+html,body{
+	height: 100%;
+}
+
+.mui-segmented-control.mui-scroll-wrapper{
+	height: 100%;
+	.mui-scroll{
+		height: 100%;
+		.mui-control-item{
+			//width: 27.6rem;
+			height: 100%;
+			margin-left: 1.4rem;
+			padding: 0 ;
+			vertical-align: top;
+			
+			&:last-child{
+				margin-right:1.4rem;
+			}
+		}
+		
+	}
+}
+.mui-segmented-control.mui-scroll-wrapper .mui-scroll{
+	font-size: 0;
+}
+.mui-segmented-control.mui-segmented-control-inverted .mui-control-item.mui-active{
+	border-bottom: 0;
+}
+.imgBox_vip1{
+	color: @c049;
+}
+.imgBox_vip2{
+	color: @c002;
+}
+.imgBox_vip3{
+	color: @c050;
+}
+.imgBox_vip4{
+	color: @c003;
+}
+.imgBox_vip5{
+	color: @c006;
+}
+.imgBox_vip6{
+	color: @c002;
+}
+.imgBox_vip7{
+	color: @c005;
+}
+.imgBox{
+	position: relative;
+	z-index: 500;
+	padding-left: 1.4rem;
+	padding-top: 1.6rem;
+	width: 25.0rem;
+	margin: 2.0rem auto 0;
+	height: 14.0rem;
+	background-repeat: no-repeat;
+	background-position: center;
+	background-size: 26rem 14rem;
+	// box-shadow: 0 2px 1px 0 rgba(0,0,0,0.20);
+	border-radius: 0.4rem;
+	.rightsName{
+		font-size: 1.6rem;
+		line-height: 1.6rem;
+		font-weight: bold;
+		text-align: left;
+	}
+	.rightsRank{
+		font-size: 1.5rem;
+		line-height: 1.2rem;
+		text-align: left;
+		margin-top: 0.1rem;
+	}
+	.rightsHint{
+		margin-top: 1.2rem;
+		font-size: 1.0rem;
+		line-height: 1.0rem;
+		text-align: left;
+	}
+	.rightsNo{
+		margin-top: 5.3rem;
+		font-size: 1.2rem;
+		line-height: 1.2rem;
+		text-align: left;
+	}
+}
+.bigBox{
+	width: 26.0rem;
+	height: 100%;
+}
+.icoBox{
+	display: block;
+	width: 26rem;
+	
+}
+.ico{
+	width: 4.6rem;
+	height: 4.6rem;
+	img{
+		border-radius: 0.6rem;
+		height: 100%;
+	}
+}
+.rightsIn{
+	height: 4.2rem;
+	position: relative;
+	top: -4.2rem;
+	z-index: 1;
+	background-color: @c005;
+	border-radius:  0.8rem 0.8rem 0 0;
+}
+.rightsBox{
+	padding-top: 2rem;
+
+	position: relative;
+	height: 70%;
+	overflow-y: scroll;
+	//-webkit-overflow-scrolling: touch;
+	box-sizing: border-box;
+    top: -4.2rem;
+    z-index: 1;
+	background-color: @c005;
+	border-radius:0 0 0.8rem 0.8rem;
+	// padding-bottom: 1rem;
+	.tit{
+		margin-bottom: 1.6rem;
+		font-size: 1.4rem;
+		color: @c002;
+		line-height: 1.4rem;
+		font-weight: 700;
+	}
+}
+.rightsBox::-webkit-scrollbar {/*滚动条整体样式*/
+    width: 0;     /*高宽分别对应横竖滚动条的尺寸*/
+    height: 0;
+}
+.rightsBox::-webkit-scrollbar-track {/*滚动条里面轨道*/
+	-webkit-box-shadow: inset 0 0 0 rgba(0,0,0,0);
+	border-radius: 0;
+	background: rgba(0,0,0,0);
+}
+.rightsBox::-webkit-scrollbar-thumb {/*滚动条里面小方块*/
+	border-radius: 0;
+	-webkit-box-shadow: inset 0 0 0x rgba(0,0,0,0);
+	background: rgba(0,0,0,0);
+}
+
+.rights{
+	display: flex;
+	display: -webkit-flex; /* Chrome 21+, Safari 6.1+, iOS Safari 7+, Opera 15/16 */
+	display: -moz-flex; /* Firefox 18+ */
+	display: -ms-flexbox; /* IE 10 */
+	
+
+	-webkit-flex-wrap: wrap;
+	// -moz-flex-wrap: wrap;
+	// -ms-flex-wrap: wrap;
+	// -o-flex-wrap: wrap;
+	flex-wrap:wrap;
+	// height: 100%;
+	padding-bottom: 2rem;
+	
+	.icoBox{
+		width: 8.65rem;
+		height: 8.4rem;
+		
+		display: flex;
+		display: -webkit-flex; /* Chrome 21+, Safari 6.1+, iOS Safari 7+, Opera 15/16 */
+		display: -moz-flex; /* Firefox 18+ */
+		display: -ms-flexbox; /* IE 10 */
+		
+		flex-direction: column;
+		-webkit-flex-direction: column;
+
+		align-items: center;
+		-webkit-align-items: center;
+	}
+
+}
+.discrb{
+	font-size: 1.0rem;
+	color: @c002;
+}

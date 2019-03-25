@@ -1,0 +1,89 @@
+<!-- 
+	赎回
+	@author sunfuping 2018-10-9
+
+	*:本页面使用MUI
+-->
+<!doctype html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <meta name="applicable-device" content="mobile">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta charset="UTF-8">
+    <title>赎回</title>
+    <link rel="stylesheet" href="/intelligentInvestment/static/css/redemption.css">
+</head>
+
+<body>
+    @@include('../../common/views/load.html')
+    <div class="redemption">
+        <div class="mui-card marginTop tit">
+            <div class="title"></div>
+        </div>
+        <div class="bank mui-card">
+            <div>赎回至</div>
+            <div class="bank_txt"></div>
+        </div>
+        <div class="ratio mui-card">
+            <div class="ratio_tix">
+                <span>赎回比例</span>
+                <span class="marketVal">
+                    <span>当前资产市值：</span>
+                    <span class="js_marketNum"></span>
+                    <span>元</span>
+                </span>
+            </div>
+            <div class="range_box">
+                <div class="mui-input-row mui-input-range">
+                    <input type="range" id="block-range" value="10" step="10" min="10" max="100">
+                </div>
+                <div class="num">
+                    <span>10%</span>
+                    <span>100%</span>
+                </div>
+            </div>
+            <div class="hint">按照资产配置比例进行赎回，保证资产的配置保持在平衡状态。</div>
+        </div>
+        <div class="fund_box">
+            <div class="fund_tit">
+                <span>基金名称</span>
+                <span>赎回份额(份)</span>
+            </div>
+            <div class="fund_list" id="fund_list">
+                <!-- handlebar模板 -->
+            </div>
+        </div>
+        <div class="agreement">
+            <span>重要通知：根据证监会要求，自2018年4月1日起，除货币市场基金与交易型开放式指数基金（ETF）外的开放式基金，持有少于7日（不含）时，需要收取不低于1.5%的赎回费 。</span>
+            <a class="see" href="https://wap.chtwm.com/include/views/agreementModel.html?id=134">查看详情></a>
+        </div>
+    </div>
+
+    @@include('../../common/views/button/longButton.html',{"arr":[ {"className": "bottom redemptionBtn", "txt": "确定"} ]})
+    @@include('../../common/views/webPassword.html')
+    <script src="/include/js/vendor/zepto/zepto.js"></script> 
+    <script src="/include/js/vendor/mui/mui.min.js"></script>
+    <script src="/include/js/vendor/handlebar/handlebars.js"></script>
+    <script src="/include/js/vendor/root.js"></script>
+    <!-- 添加埋点 -->
+    @@include('@pathInclude/views/header.html')
+    <script src="/intelligentInvestment/static/js/redemption.js"></script>
+    
+    <script id="fund_list_template" type="text/x-handlebars-template">
+        {{#each this}}
+        <div class="fund">
+            <div class="fund_name">
+                <p>{{fundName}}</p>
+                <p>({{fundCode}})</p>
+            </div>
+            <div class="fund_share"></div> 
+        </div>
+        {{/each}}
+    </script>
+</body>
+
+</html>

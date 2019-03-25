@@ -1,0 +1,108 @@
+<!-- 
+	赎回结果
+	@author sunfuping 2018-10-10
+
+	** 赎回结果和买入结果合并成一个页面 ping 2018-10-19
+
+	*:本页面使用MUI
+-->
+<!doctype html>
+<html>
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+	<meta name="applicable-device" content="mobile">
+	<meta name="apple-mobile-web-app-capable" content="yes">
+	<meta name="apple-mobile-web-app-status-bar-style" content="black">
+	<meta charset="UTF-8">
+	<title></title>
+	<link rel="stylesheet" href="/intelligentInvestment/static/css/result.css">
+</head>
+
+<body>
+    
+	@@include('../../common/views/load.html')
+	<!-- 加载中loading -->
+	<!-- @@include('../../common/views/loading/listLoading.html') -->
+
+	<div class="result_box">
+		<div class="result mui-card">
+			<div class="iconfont">&#xe604;</div>
+			<div>申请受理成功</div>
+		</div>
+		<div class="resultDetails">
+			
+		</div>
+	   
+	</div>
+	@@include('../../common/views/button/longButton.html',{"arr":[ {"className": "bottom sureBtn", "txt": "完成"} ]})
+
+	<script id="redemption-list-template" type="text/x-handlebars-template">
+		{{#if redemption}}
+			<div class="detail_box mui-card redemption">
+				<div>
+					<span>产品名称</span>
+					<span class="js_name">{{combName}}</span>
+				</div>
+				<div>
+					<span>赎回比例</span>
+					<span class="js_num">{{inputVal}}%</span>
+				</div>
+				<div>
+					<span>赎回至</span>
+					<span class="js_bankName">{{bankName}}({{bankNo}})</span>
+				</div>
+				<div>
+					<span>申请时间</span>
+					<span class="js_time">{{applyTime}}</span>
+				</div>
+			</div>
+		{{/if}}
+
+		{{#if buyCheckoutSuccess}}
+			<div class="detail_box mui-card buyCheckoutSuccess">
+				<div>
+					<span>产品名称</span>
+					<span>{{combName}}</span>
+				</div>
+				<div>
+					<span>买入金额</span>
+					<span>{{applySum}}元</span>
+				</div>
+				<div>
+					<span>支付方式</span>
+					<span>{{payTypeMask}}-{{bankName}}({{bankNo}})</span>
+				</div>
+				<div>
+					<span>申请时间</span>
+					<span>{{applyTime}}</span>
+				</div>
+			</div>			
+		{{/if}}
+		{{#if adjustment}}
+			<div class="detail_box mui-card buyCheckoutSuccess">
+				<div>
+					<span>产品名称</span>
+					<span>{{combName}}</span>
+				</div>
+				<div>
+					<span>申请时间</span>
+					<span>{{applyTime}}</span>
+				</div>
+			</div>			
+		{{/if}}
+		
+	</script>
+
+	<script src="/include/js/vendor/zepto/zepto.js"></script> 
+	<script src="/include/js/vendor/mui/mui.min.js"></script>
+	<script src="/include/js/vendor/handlebar/handlebars.js"></script>
+	<script src="/include/js/vendor/root.js"></script>  
+	<!-- 添加埋点 -->
+    @@include('@pathInclude/views/header.html')
+	<script src="/intelligentInvestment/static/js/transactionResult.js"></script>
+	
+</body>
+
+</html>

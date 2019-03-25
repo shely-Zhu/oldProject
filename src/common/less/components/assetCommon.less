@@ -1,0 +1,67 @@
+/**  
+ * @Page:  总资产
+ * @Author: songxiaoyu  
+ * @Date:   2018-10-11 10:39:01  
+ * @Last Modified by:   songxiaoyu  
+ * @Last Modified time: 2018-10-11 15:04:50  
+ *
+ * 现金宝总资产页
+ * 恒小智我的持仓页面
+ */
+.top {
+    height: 17rem;
+    margin-bottom: 1rem;
+    background: @c005;
+    box-shadow: 0 0.1rem 0.4rem 0 rgba(0, 0, 0, 0.1);
+
+    .totalAmount {
+        position: relative;
+        padding-top: 1.8rem;
+        padding-bottom: 1.3rem;
+        text-align: center;
+        font-size: 1.5rem;
+
+        .tradeDetail {
+            position: absolute;
+            top: 2rem;
+            right: 1.6rem;
+            font-size: 1.3rem;
+            color: @c002;
+
+            &:before {
+                content: '\e601';
+                font-size: 1.3rem;
+                padding-right: 0.6rem;
+            }
+        }
+    }
+
+    .totalMoney {
+        padding-bottom: 1.6rem;
+        text-align: center;
+        font-size: 3.2rem;
+        color: @c006;
+    }
+
+    .mui-row li {
+        height: 3rem;
+        text-align: center;
+        border-right: 0.1rem solid @c008;
+
+        span {
+            display: block;
+            font-size: 1.6rem;
+            color: @c006;
+
+            &:first-child {
+                padding-bottom: 1rem;
+                color: @c003;
+                font-size: 1.2rem;
+            }
+        }
+
+        &:last-child {
+            border-right: 0;
+        }
+    }
+}

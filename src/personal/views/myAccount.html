@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+	<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+	<meta name="applicable-device" content="mobile">
+	<meta name="apple-mobile-web-app-capable" content="yes">
+	<meta name="apple-mobile-web-app-status-bar-style" content="black">
+	<link rel="stylesheet" href="/personal/static/css/detail.css">
+	<title>我的账户</title>
+</head>
+<body>
+	@@include('../../common/views/load.html')
+	<section class="container">
+		<div class="myAccount"> 
+			<div class="banner">
+				<div class="icon"><span class="iconfont">&#xe602;</span></div>
+				<div class="name"><span class="nameSec">***</span>，您好！</div>
+			</div>
+			<div class="items">
+				<div class="item flexbox v_center">
+					<span class="iconfont">&#xe611;</span><span class="text flex1">私募风险测评</span><a href="javascript:;"><span class="risk"></span><span class="goRisk iconfont">&#xe600;</span></a>
+				</div>
+				<div class="item flexbox v_center">
+					<span class="iconfont">&#xe65e;</span><span class="text flex1">实名认证</span><a href="javascript:;"><span class="real"></span><span class="goRisk iconfont">&#xe600;</span></a>
+				</div>
+			</div>
+		</div> 
+		<div class="exit">退出登录</div>
+		@@include('../../common/views/appDown.html')
+		<div class="againEnter">
+			<button class="tipWrapper"></button>
+		<div>
+	</section>
+	<script src="/include/js/vendor/zepto/zepto.js"></script>
+	<script src="/include/js/vendor/root.js"></script>
+	<script src="/include/js/vendor/config.js"></script>
+	<script src="/personal/static/js/myAccount.js"></script>
+</body>
+</html>

@@ -1,0 +1,102 @@
+<!-- 
+	实名认证  认证成功页面
+	@author zhangweipeng 2017-06-02
+
+	*:本页面使用MUI
+-->
+
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+	    <meta name="viewport" id="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+	    <meta name="applicable-device" content="mobile">
+	    <meta name="apple-mobile-web-app-capable" content="yes">
+	    <meta name="apple-mobile-web-app-status-bar-style" content="black"><meta charset="UTF-8">
+		<title>实名认证</title>
+		<link rel="stylesheet" href="/user/static/css/realName.css">
+	</head>
+
+	<body>
+		<div class="mui-card marginTop">
+			<div class="stepAction stepFour">
+				<ul class="flexbox">
+					<li class="flex1">
+						<div class="stepLi">
+							<span>1</span>
+							<p>绑定银行卡</p>
+						</div>
+					</li>
+					<li class="flex1">
+						<div class="stepLi">
+							<span>2</span>
+							<p>设置交易密码</p>
+						</div>
+					</li>
+					<li class="flex1 step_3 action">
+						<div class="stepLi">
+							<span class="mui-icon mui-icon-checkmarkempty"></span>
+							<p>完成</p>
+						</div>
+					</li>
+				</ul>
+			</div>
+			<div class="stepSuccess">
+				<p class="stepIcon"><i class="iconfont">&#xe604;</i></p>
+				<p class="stepText">您已成功完成实名认证</p>
+				<div class="btnButton stepBtn">
+			      	<button type="button" class="mui-btn">返回</button>
+			 	</div>
+			</div>
+
+			<div class="complete">
+				<div class="message"><span class="iconfont">&#xe6d2;</span>完善基本信息</div>
+				<div class="messageTip">应监管要求，需填写您的适当性身份信息</div>
+				<a class="immediatelyGo" href="javascript:;">立即完善</a>
+			</div>
+		</div>
+
+		<!--风险测评区域 -->
+		<!-- <div class="mui-card marginTop risk">
+			<div class="riskIntro">
+				<p>以下为您的风险测评结果，</p>
+				<p class="mar">如果不是您本人操作，请您重新进行风险测评</p>
+				<div class="riskBox pra">
+					<div class="riskHead">
+						<span class="line"></span>
+						<span>私募风险测评结果</span>
+						<span class="line"></span>
+					</div>
+					<div class="riskResult">
+						***
+					</div>
+					<div class="riskBtn">
+						<a href="site_url.questionnairePer_url">重新测评</a>
+					</div>
+				</div>
+				<div class="riskBox pub">
+					<div class="riskHead">
+						<span class="line"></span>
+						<span>公募风险测评结果</span>
+						<span class="line"></span>
+					</div>
+					<div class="riskResult">
+						***
+					</div>
+					<div class="riskBtn">
+						<a href="javascript:;">重新测评</a>
+					</div>
+				</div>
+			</div>
+		</div> -->
+		<!--表单 end-->
+
+		<script src="/include/js/vendor/zepto/zepto.js"></script>
+		<script src="/include/js/vendor/root.js"></script>
+		<script src="/include/js/vendor/mui/mui.min.js"></script>
+		<script src="/user/static/js/realName/realNameStepFour.js"></script>
+
+	</body>
+
+</html>

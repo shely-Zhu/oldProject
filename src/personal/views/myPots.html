@@ -1,0 +1,83 @@
+<!-- 我的积分 -->
+
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+	<meta name="applicable-device" content="mobile">
+	<meta name="apple-mobile-web-app-capable" content="yes">
+	<meta name="apple-mobile-web-app-status-bar-style" content="black">
+	<link rel="stylesheet" href="/personal/static/css/detail.css">
+	<title>我的积分</title>
+</head>
+<body>
+	
+	@@include('../../common/views/load.html')
+
+	<section class="container">
+
+		<div class="myPots">
+			<div class="banner">  
+				<div class="title">当前积分</div>
+				<div class="num" id="pointsBalance"><!-- 21,659 --></div>
+				<div class="integral clearfix">
+					<p class="inteLeft">即将到期的积分<span id="toDuePoint"><!-- 0 --></span></p>
+					<a href="/include/views/imgModel.html?adPosition=appPointsRule&title=积分规则说明" class="inteRight">
+						积分规则说明
+						<span class="iconfont">&#xe600;</span>
+					</a>
+				</div>
+			</div>
+			<div class="list" id="wrapper">
+				<div class="contentWrapper"  id="scroller">
+					<div id="pullBox">
+						<ul class="inteDetail" id="pageLists">
+							
+						</ul>
+					</div>	
+					@@include('../../common/views/upLoad.html')
+					<!-- 回到顶部 -->
+					<div class="upTop" id="goTop" style="display:none;">
+						<span class="iconfont">&#xe74a;</span>
+					</div>
+					<!-- 回到顶部 -->
+				</div>
+			</div>
+			<div class="without" id="emptyBox" style="display:none;">
+				<div class="box vertical center">
+					<p class="iconfont">&#xe603;</p>
+					<p class="text">暂无数据</p>
+				</div>
+			</div>
+			<!-- <a href="javascript:;" class="exchange" id="piontBtn">
+				<span class="iconfont">&#xe65b;</span>
+				<p>立即兑换</p>
+			</a> -->
+		</div>
+	</section>
+
+	<!-- @@include('../../common/views/appDown.html') --> 
+	
+	<div class="againEnter">
+      <button class="tipWrapper"></button>
+    </div>
+	<script id="template-pot" type="text/x-handlebars-template">
+		{{#each this}}
+			<li class="data clearfix">
+				<div class="dataList">
+					<p class="title ellipsis" ><!-- 生日积分兑换礼品 -->{{desceiption}}</p>
+					<p class="date"><!-- 2016-01-25 -->{{changeDate}}</p>
+				</div>
+				<div class="num"><!-- +1,000 -->{{add operate count}}</div>
+			</li>
+		{{/each}}
+	</script>
+	<script src="/include/js/vendor/zepto/zepto.js"></script>
+	<script src="/include/js/vendor/root.js"></script>
+	<script src="/include/js/iscroll.js"></script>
+	<script src="/include/js/vendor/handlebar/handlebars.js"></script>
+	<script src="/personal/static/js/myPots.js"></script>
+
+</body>
+</html>

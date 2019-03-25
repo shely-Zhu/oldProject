@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+	<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+	<meta name="applicable-device" content="mobile">
+	<meta content="telephone=no" name="format-detection" />
+	<meta name="apple-mobile-web-app-capable" content="yes">
+	<meta name="apple-mobile-web-app-status-bar-style" content="black">
+	<link rel="stylesheet" href="/personal/static/css/pledge.css">
+	<title>定融/定投</title>
+</head>
+<body>
+	<!-- @@include('../../common/views/load.html') -->
+	@@include('../../common/views/privateOrPublicTwo.html')
+
+	<section class="pledge">
+		<div class="banner">
+			<div class="total">总资产</div>
+			<div class="totalNum">--</div>
+			<div class="introduce">定融定投总资产(元) <span>--</span></div>
+		</div>
+		<div class="lists">
+			
+			@@include('../../common/views/noData.html')
+			@@include('../../common/views/loading/listLoading.html')
+		</div>
+
+		<div class="tip">定融/定投信息由财富恒天投资管理有限公司提供</div>
+		<!-- 弹层 -->
+		@@include('../../common/views/accountOrBind.html')
+	</section>
+
+	<!-- 底部导航 -->
+	@@include('../../common/views/bottomNav.html')
+	
+	<script id="list-template" type="text/x-handlebars-template">
+		{{#each this}}
+			<div class="listDetail">
+				<h2>{{prjName}}</h2>
+				<div class="line"></div>
+				<ul>
+					<li class="clearfix">
+						<div class="title">总资产</div>
+						<div class="text"><span>{{balance}}</span>元</div>
+					</li>
+					<li class="clearfix">
+						<div class="title">票面利率</div>
+						<div class="text"><span>{{profit}}</span></div>
+					</li>
+					<li class="clearfix">
+						<div class="title">成立日期</div>
+						<div class="text">{{setupDate}}</div>
+					</li>
+					<li class="clearfix">
+						<div class="title">产品期限</div>
+						<div class="text"><span>{{deadLine}}</span></div>
+					</li>
+				</ul>
+			</div>
+		{{/each}}
+	</script>
+	<script src="/include/js/vendor/zepto/zepto.js"></script>
+	<script src="/include/js/vendor/root.js"></script>
+	 <script src="/include/js/vendor/handlebar/handlebars.js"></script>
+	<script src="/include/js/vendor/mui/mui.min.js"></script>
+	<script src="/personal/static/js/pledge.js"></script>
+</body>
+</html>

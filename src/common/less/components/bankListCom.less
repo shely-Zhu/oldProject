@@ -1,0 +1,193 @@
+/*
+* @page: 展开收起银行卡样式
+* @Author: songxiaoyu
+* @Date:   2018-10-12 16:42:39
+* @Last Modified by:   songxiaoyu
+* @Last Modified time: 2018-10-12 16:42:49
+* @description:
+*
+* 公募购买页面
+* 恒小智购买页
+*
+* 赎回页面，私募预约页面--银行卡样式使用重置后的样式2
+*/
+
+@import url("../color.less");
+@import url("./openOrClose.less");
+
+.mui-card-content {
+
+    .form-wrap .mui-table-view .mui-table-view-cell {
+        padding: 0;
+        width: 100%;
+
+        &:after {
+            height: 1px;
+            left: 0;
+        }
+        &.mui-active {
+            background-color: @c005;
+        }
+    }
+    
+    // 去掉最后一个元素的下划线
+    .mui-table-view{
+        &:last-child{
+            .mui-table-view-cell{
+                &:after{
+                    height: 0;
+                }
+            }
+        }
+
+    }
+
+    padding-top: 1.2rem;
+    position: relative;
+    line-height: 2.8rem;
+
+    &.fundTitle {
+        padding-right: 1.6rem;
+        padding-bottom: 1.2rem;
+
+        .title {
+            font-size: 1.6rem;
+
+            span {
+                color: @c003;
+                margin-left: 1rem;
+            }
+        }
+    }
+
+    .title {
+        color: @c002;
+        font-size: 1.4rem;
+    }
+
+    .actionBtn {
+        padding: 1.2rem 0;
+        text-align: center;
+        font-size: 1rem;
+        line-height: 1;
+        color: @c003;
+    }
+
+    .actionList {
+        &.noMoreList {
+            &:last-child {
+                border-bottom: 0;
+            }
+        }
+
+        &:last-child {
+            border-bottom: 0.1rem solid @c004;
+        }
+
+        .limitMoney {
+            font-size: 1.2rem;
+            transform: scale(0.875);
+            transform-origin: left;
+        }
+    }
+
+    //汇款银行卡区域
+    &.postCard {
+        display: none;
+    }
+
+    &.moneyMsg {
+        // padding-right: 1.6rem;
+        padding-bottom: 0;
+        padding-right: 0;
+
+        .title {
+            padding-bottom: 1.2rem;
+            height: 4rem;
+            line-height: 4rem;
+        }
+
+        .moneyUl {
+            border-top: 0.1rem solid @c004;
+            padding: 1.3rem 0;
+            font-size: 1.2rem;
+
+            li {
+                overflow: hidden;
+                line-height: 1;
+                margin-bottom: 1.9rem;
+                margin-right: 1.6rem;
+
+                &:last-child {
+                    margin-bottom: 0;
+                }
+
+                .float_l {
+                    color: @c001;
+                }
+            }
+        }
+    }
+}
+
+
+// 没有限额的样式--赎回和私募预约样式重置
+
+// 银行卡样式
+.resetCard.cardList  {
+    .mui-table-view-cell.mui-active {
+        background-color: @c005;
+
+    }
+
+    .mui-table-view-cell:after {
+        content: none;
+    }
+
+    &.noTop {
+        margin-top: -1.2rem;
+        box-shadow: 0 0.3rem 0.4rem 0 rgba(0, 0, 0, 0.1);
+
+        .mui-table-view-cell:after {
+            content: none;
+        }
+    }
+
+    .mui-card-content {
+        padding-top: 0.5rem;
+    }
+
+    .limitMoney {
+        transform: none;
+
+        .floatRight {
+            float: right;
+            margin-right: 1.5rem;
+        }
+    }
+
+    .mui-table-view-cell:after {
+        left: 0;
+    }
+
+    .mui-radio input[type=radio] {
+        top: auto;
+        transform: none;
+
+        &:before {
+            font-size: 1.2rem;
+        }
+    }
+
+    .mui-radio label {
+        p:last-child {
+            color: @c003;
+            font-size: 1.4rem;
+        }
+
+        p.dark {
+            color: @c002;
+        }
+
+    }
+}

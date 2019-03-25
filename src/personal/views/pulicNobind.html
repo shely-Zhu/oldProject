@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+	<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+	<meta name="applicable-device" content="mobile">
+	<meta name="apple-mobile-web-app-capable" content="yes">
+	<meta name="apple-mobile-web-app-status-bar-style" content="black">
+	<link rel="stylesheet" href="/personal/static/css/account.css">
+	<title>公募持仓绑定</title>
+</head>
+<body>
+	@@include('../../common/views/load.html')
+
+	<!-- 按钮 -->
+	@@include('../../common/views/privateOrPublic.html')
+
+	<section class="container">
+		<div class="publicbind">
+			<div class="elasticWrapper">
+				<span class="iconfont cloud">&#xe66d;</span>
+				<div class="elasticTxt">检测到您已开通恒天私募账户及公募交易账户，立即绑定，体验账户资产统一管理</div>
+				<a href="javascript:;" class="bind">立即绑定</a>
+			</div>
+		</div> 
+		<div class="againEnter">
+			<button class="tipWrapper"></button>
+		<div>
+	</section>
+	<!-- 底部导航 -->
+	@@include('../../common/views/bottomNav.html')
+
+	<script src="/include/js/vendor/zepto/zepto.js"></script>
+	<script src="/include/js/vendor/root.js"></script>
+	<script src="/personal/static/js/myAccount.js"></script>
+</body>
+</html>

@@ -1,0 +1,133 @@
+<!-- 活动专题服务协议模板 -->
+<!-- author: zhangyanping
+	time:2017/7/18 -->
+
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+	<meta name="applicable-device" content="mobile">
+	<meta name="apple-mobile-web-app-capable" content="yes">
+	<meta name="apple-mobile-web-app-status-bar-style" content="black">
+	<link rel="stylesheet" href="/include/css/activityModel.css">
+	<title></title>
+</head>
+<body>
+
+	<section class="container">
+		<!-- 图片模板 start -->
+		<div class="content contentImg" id="contentImg">
+			<img src="" alt="">
+		</div>
+		<!-- 图片模板 end -->
+
+
+		<!-- 公私募模板 start -->
+		<div class="content contentBox" id="contentBox">
+
+			<!-- 图片 -->
+			<div class="images">
+				<img src="" alt="">
+			</div>
+
+			<!-- 公私募募基金列表 start -->
+			<div class="mui-content pdtItems">
+				<div class="list">
+					<div class="contentWrapper">
+						<ul class="mui-table-view">
+							<li class="mui-tabli-view-cell" id="modelBox">
+							</li>
+						</ul>
+					</div>
+				</div>
+			</div>
+			<script id="productList-template" type="text/x-handlebars-template">
+					{{#each this}}
+						{{#if type}}
+							{{#if solid}}
+								<a href="javascript:;" class="mui-card priLocal">
+									<div class="card-head">{{productName}}</div>
+									<div class="card-theme noBor">
+										<div class="mui-row">
+											<div class="mui-col-xs-4 left">
+												<p class="inv">{{pefTerm}}</p>
+											</div>
+											<div class="mui-col-xs-4 center"> 
+												<p class="inv">{{pefMinBalance}}</p>
+											</div>
+											<div class="mui-col-xs-4 right">
+												<p class="inv invCore">{{pefExpectedProfitMin}}%~{{pefExpectedProfitMax}}%</p>
+											</div>
+										</div>
+										<div class="mui-row">
+											<div class="mui-col-xs-4 left text">投资期限(月)</div>
+											<div class="mui-col-xs-4 center text">投资起点(万)</div>
+											<div class="mui-col-xs-4 right text">业绩比较基准</div>
+										</div>
+									</div>
+								</a>
+							{{else}}
+								<a href="javascript:;" class="mui-card priLocal">
+									<div class="card-head">{{productName}}</div>
+									<div class="card-theme noBor">
+										<div class="mui-row">
+											<div class="mui-col-xs-4 left">
+												<p class="inv">{{pefTerm}}</p>
+											</div>
+											<div class="mui-col-xs-4 center"> 
+												<p class="inv">{{pefNetValueDate}}</p>
+											</div>
+											<div class="mui-col-xs-4 right">
+												<p class="inv invCore">{{pefNetValue}}</p>
+											</div>
+										</div>
+										<div class="mui-row">
+											<div class="mui-col-xs-4 left text">封闭期(月)</div>
+											<div class="mui-col-xs-4 center text">净值日期</div>
+											<div class="mui-col-xs-4 right text">单位净值(元)</div>
+										</div>
+									</div>
+								</a>
+							{{/if}}
+						{{else}}
+							<a href="javascript:;" class="mui-card pubLocal">
+								<div class="card-theme noBor">
+									<div class="mui-row">
+										<div class="mui-col-xs-8 left part">
+											<p class="inv">{{productName}}</p>
+										</div>
+										<div class="mui-col-xs-4 right">
+											<p class="inv invCore">{{pofGains}}%</p>
+										</div>
+									</div>
+									<div class="mui-row">
+										<div class="mui-col-xs-8 left num part">{{productCode}}</div>
+										<div class="mui-col-xs-4 right num">近一年涨幅</div>
+									</div>
+								</div>
+							</a>	
+						{{/if}}	
+					{{/each}}
+			</script>
+
+			<!-- 底部提示 start -->
+			<div class="footer">
+				<p class="text">本页面非任何法律文件，投资前需认真阅读基金合同、招募说明书及其更新。基金历史业绩不代表未来收益，理财有风险，投资需谨慎。</p>
+			</div>
+			<!-- 底部提示 end -->
+
+		</div>
+		<!-- 公私募模板 end -->
+		
+	</section>
+
+	
+</body>
+<script src="/include/js/vendor/zepto/zepto.js"></script>
+<script src="/include/js/vendor/handlebar/handlebars.js"></script>
+<script src="/include/js/vendor/root.js"></script>
+<!-- 添加埋点 -->
+@@include('@pathInclude/views/header.html')
+<script src="/include/js/modelPage/activityModel.js"></script>
+</html>

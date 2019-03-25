@@ -1,0 +1,121 @@
+<!--
+*风险评测调查问卷
+-->
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0,user-scalable=no" name="viewport" id="viewport" />
+    <meta content="telephone=no" name="format-detection" />
+    <meta content="yes" name="apple-mobile-web-app-capable" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <title>风险测评调查问卷</title>
+    <link rel="stylesheet" type="text/css" href="/personal/static/css/question.css">
+</head>
+
+<body>
+    @@include('../../common/views/load.html')
+    <section class="questionnaire">
+        <section class="content inputWrap">
+            <section class="appraisal">
+                <!-- 私募个人提示语 -->
+                <div class="noticePer tip">
+                    <p class="prompt-info"><span>风险提示：</span>金融产品投资需承担各类风险，本金可能遭受损失。同时，金融产品投资还要考虑市场风险、信用风险、流动性风险、操作风险等各类投资风险。您在金融产品认购过程中应当注意核对自己的风险识别和风险承受能力，选择与自己风险识别能力和风险承受能力相匹配的金融产品。
+                    </p>
+                    <p class="prompt-info">以下一系列问题可在您选择合适的金融产品前，协助评估您的风险承受能力、理财方式及投资目标。 </p>
+                </div>
+                <!-- 私募提示语 -->
+                <!-- 私募机构提示语 -->
+                <div class="noticeOrg tip">
+                    <p class="prompt-info"><span>风险提示：</span>金融产品投资需承担各类风险，本金可能遭受损失。同时，金融产品投资还要考虑市场风险、信用风险、流动性风险、操作风险等各类投资风险。贵单位在金融产品认购过程中应当注意核对自己的风险识别和风险承受能力，选择与自己风险识别能力和风险承受能力相匹配的金融产品。
+                    </p>
+                    <p class="prompt-info">以下一系列问题可在贵单位选择合适的金融产品前，协助评估贵单位的风险承受能力、理财方式及投资目标。 </p>
+                </div>
+                <!-- 私募机构提示语 -->
+                <!-- 公募提示语 -->
+                <div class="noticePub tip">
+                    <p class="prompt-info">金融产品投资需承担各类风险，本金可能遭受损失。同时，金融产品投资还要考虑市场风险、信用风险、流动性风险、操作风险等各类投资风险。您在金融产品认购过程中应当注意核对自己的风险识别和风险承受能力，选择与自己风险识别能力和风险承受能力相匹配的金融产品。
+                    </p>
+                    <p class="prompt-info">以下一系列问题可在您选择合适的金融产品前，协助评估您的风险承受能力、理财方式及投资目标。 </p>
+                </div>
+                <!-- 公募提示语 -->
+                <!-- 投资者测试提示语 -->
+                <div class="noticeInvestor tip">
+                    <p class="prompt-info">尊敬的投资者:</p>
+                    <p class="prompt-info">根据监管要求,您(贵单位)向北京恒天明泽基金销售有限公司(简称“我司”)申请由普通投资者转化为专业投资者,我司需要对您 (贵单位)进行投资知识测试,作为评估您(贵单位)是否适合转化为专业投资者的参考要素,请您(贵单位)判断以下说法是否正确:</p>
+                </div>
+                <!-- 投资者测试提示语 -->
+                <div class="dividingLine">
+                </div>
+                <div class="queryQuestion">
+                </div>
+                <div class="investorTip">
+                    很遗憾，您未能通过投资知识测试，不能申请转化为专业投资者
+                </div>
+                <section class="testInvestor">
+                    <button type="button" class="mui-btn investorSubmit">提交</button>
+                    <button type="button" class="mui-btn investorCancel">取消</button>
+                </section>
+            </section>
+        </section>
+    </section>
+    <button type="button" class="mui-btn bottom" id="submit" class="on">提交</button>
+    <!-- <div class="submit"><a href="javascript:;" id="submit" class="on">提交</a></div> -->
+    <section class="mui-backdrop mask" style="display:none;"></section>
+    <section class="alertBox">
+        <h3>投资者风险测评结果</h3>
+        <div class="boxContent">
+            <p id="grade">稳健型</p>
+            <div>
+                <p id="getScore">
+                    以上问题总得分为<span id="totalScore">100</span>分，根据您所选择的问题答案，您对投资风险的整体承受程度及您的风险偏好总得分为:<span id="endScore">0</span>分
+                </p>
+                <p id="textPd">
+                    <b class="title">风险提醒 <i class="iconfont">&#xe6c0;</i></b>
+                    <b class="pdContent">
+                    尊敬的投资者，您好: <br />
+                    因您信息变化而进行重新风险测评后，您的风险承受能力发生了变更，与如下产品等级不匹配： <br />
+                    <span class="pdDetail">
+                        
+                    </span>
+                    请您确认
+                </b>
+                </p>
+            </div>
+        </div>
+        <p class="goback"><a href="javascript:;" class="knowBtn">确定</a></p>
+        <p class="gomine"><a href="javascript:;" class="knowBtn">我知道了</a><a href="javascript:;" id="linkBtn">查看详情</a></p>
+    </section>
+</body>
+<script id="question-list-template" type="text/x-handlebars-template">
+    {{! 题目列表 父模板 内容}} {{#each this}}
+    <div class="choice" id={{questionNo}}>
+        <a href="javascript:;" id=type{{number}} style="width: 0;height: 0;position: absolute;top:-10px;"></a>
+        <h3><a href="#" class="index sequence">{{number}}</a> .{{questionContent}}</h3> {{{content}}}
+    </div>
+    {{/each}}
+</script>
+<script id="question-list-con-template" type="text/x-handlebars-template">
+    {{! 选项列表 子模板 内容}} {{#each optionInfo}}
+    <div class="mui-input-row mui-radio mui-left define_input">
+        <label>{{optionContent}}</label>
+        <input name={{questionNo}} type="radio" optionNo={{optionNo}} >
+    </div>
+    {{/each}}
+</script>
+<script id="prvDetail-list-template" type="text/x-handlebars-template">
+    {{! 题目列表 父模板 内容}} {{#each productList}}
+    <i>{{addOne @index}}、{{this}}</i> {{/each}}
+</script>
+<script id="pubDetail-list-template" type="text/x-handlebars-template">
+    {{! 题目列表 父模板 内容}} {{#each newFundInfoList}}
+    <i>{{addOne @index}}、{{this.fundName}}</i> {{/each}}
+</script>
+<script src="/include/js/vendor/zepto/zepto.js"></script>
+<script src="/include/js/vendor/root.js"></script>
+<script src="/include/js/vendor/mui/mui.min.js"></script>
+<script src="/personal/static/js/questionnaire.js"></script>
+<script src="/include/js/vendor/handlebar/handlebars.js"></script>
+
+</html>

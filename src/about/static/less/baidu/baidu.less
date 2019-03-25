@@ -1,0 +1,310 @@
+/** baidu推广页
+	zhangyanping 2017/12/5
+		
+	@修改：添加图文验证码 2018-08-06
+
+**/
+@import url("@pathInclude/css/mui.min.css");
+@import url('@pathCommonLess/mui/resetMUI.less');
+@import url("@pathCommonLess/reset.less");
+@import url("@pathCommonLess/color.less"); 
+@import url("@pathCommonLess/baseClass.less"); 
+ //黑色提示框的样式
+@import url("@pathCommonLessCom/againEnter.less");
+@import url("@pathCommonLessCom/alertBox.less");
+
+@import url("@pathCommonLess/mui/newFormMui.less");
+
+.mui-card{
+	padding-left: 1rem;
+	background: transparent;
+	box-shadow: none;
+}
+
+.mui-segmented-control.mui-segmented-control-inverted .mui-control-item.mui-active{
+	border: none;
+}
+
+.form-wrap .formList.verifyCode .mui-input-row{
+	left: 2.1rem;
+}
+
+body{
+	position: relative;
+}
+
+.baidu{
+	background: @c005;
+	position: relative;
+	.resource{
+		width: 100%;
+		padding: 0 0.5rem;
+		.images{
+			margin: 2.5rem 0 1.5rem;
+			.text{
+				padding: 1.5rem 1.5rem 0;
+				font-size: 1.2rem;
+				line-height: 1.8rem;
+				color: @c002;
+				text-align: center;
+			}
+		}
+		.deploy{
+			position: relative;
+			width: 50%;
+			display: inline-block;
+			float: left;
+			.btn{
+				position: absolute;
+				top: 65%;
+				left: 50%;
+				margin-left: -5rem;
+				display: inline-block;
+				width: 10rem;
+				height: 2.1rem;
+				font-size: 1.2rem;
+				line-height: 2.1rem;
+				text-align: center;
+				color: @c005;
+				border-radius: 0.1rem;
+				background: @c006;
+			}
+		}
+		.resource_01,.resource_03{
+			padding-right: 0.1rem;
+		}
+		.resource_02,.resource_04{
+			padding-left: 0.1rem;
+		}
+		.resource_03,.resource_04{
+			margin-top: 0.2rem;
+		}
+	}
+	.joinClub{
+		margin-top: 1.5rem;
+		width: 100%;
+		height: 28.4rem;
+		background: url('/about/static/img/baidu/joinClub.png');
+		background-size: 100% 100%;
+		.clubImg{
+			padding-top: 2.5rem;
+			width: 90%;
+			margin: 0 auto;
+		}
+		.text{
+			width: 80%;
+			margin: 1rem auto;
+			// padding-top: 1.5rem;
+			text-align: center;
+			color: @c002;
+		}
+		.club{
+			width: 100%;
+			padding: 1rem;
+		}
+		.public{
+			.mui-scroll-wrapper{
+				width:100%;
+				height:16rem;
+				.mui-scroll{
+					height:100%;
+					left:0;
+					font-size:0;
+					.mui-control-item {
+						font-size:1.4rem;
+						padding:0;
+						margin:0;
+						margin-right: 1rem;
+						position: relative;
+						img{
+		                    width:12rem;
+		                    height:7.7rem;
+		                }
+					}    
+				}
+				.clubBottom{
+					margin-top: 0.7rem;
+				}
+			} 
+
+		}
+	}
+	.report{
+		margin-top: 2.5rem;
+		text-align: center;
+		.text{
+			width: 80%;
+			margin: 1.2rem auto 0;
+		}
+	}
+	.partner{
+		margin-top: 1rem;
+		padding-bottom: 1.5rem;
+		text-align: center;
+	}
+
+	.button{
+		display: inline-block;
+		width: 90%;
+		height: 3rem;
+		margin: 1.5rem auto;
+		line-height: 3rem;
+		font-size: 1.4rem;
+		text-align: center;
+		border-radius: 0.3rem;
+		background: @c006;
+		color: @c005;
+		// border-radius: 1.5rem;
+	}
+}
+
+.number{
+	display: none;
+}
+
+.baiFoot{
+	margin: 1.2rem 0 1rem;
+	padding-bottom: 4rem;
+	text-align: center;
+	font-size: 1rem;
+	.copyRight{
+		margin-top: 0.3rem;
+	}
+}
+
+.interact{
+	position: fixed;
+	bottom: 0;
+	width: 100%;
+	height: 4rem;
+	line-height: 4rem;
+	text-align: center;
+	background: url('/about/static/img/baidu/interact.jpg');
+	background-size: 100% 100%;
+	// background: @c002;
+	z-index: 100;
+	a{
+		display: inline-block;
+		margin: 1rem 0;
+		height: 2rem;
+		line-height: 2rem;
+		width: 48%;
+		color: @c006;
+		span{
+			margin-right: 0.7rem;
+		}
+	}
+	.contact{
+		border-right: 1px solid @c006;
+	}
+}
+
+// 预约咨询页面
+.consult{
+	position: fixed;
+	top: 0;
+	right: 0;
+	bottom: 0;
+	left: 0;
+	background: url('/about/static/img/baidu/consult.jpg');
+	background-size: 100% 100%;
+	.content{
+		margin-top: 4.5rem;
+		color: @c006;
+		text-align: center;
+		font-size: 1.8rem;
+
+	}
+
+	.mui-card{
+		padding: 0 1.6rem;
+		.mui-input-row{
+			input{
+				background: transparent;
+				padding-left: 1rem;
+				color: @c006;
+			}	
+		}
+	}
+	.menu{
+		margin-top: 4.7rem;
+		.formList{
+			height: 4rem;
+			line-height: 4rem;
+			border-bottom: 1px solid @c006;
+			.iconfont{
+				color: @c006;
+			}
+
+			.dxyzmBtn{
+				height: 4rem;
+				line-height: 4rem;
+			}
+		}
+	}
+
+	.submitBtn{
+		width: 90%;
+		height: 3rem;
+		margin: 5rem auto 2rem;
+		font-size: 1.5rem;
+		color: @c002;
+		line-height: 3rem;
+		text-align: center;
+		border-radius: 1.5rem;
+		background: @c006;
+	}
+
+	.tip{
+		font-size: 1rem;
+		color: @c005;
+		text-align: center;
+	}
+}
+
+
+// 预约成功页
+.result{
+	position: fixed;
+	top: 0;
+	right: 0;
+	bottom: 0;
+	left: 0;
+	background: url('/about/static/img/baidu/result.jpg');
+	background-size: 100% 100%;
+	.orderSuc{
+		width: 72%;
+		margin: 10rem auto 0;
+		border-radius: 0.5rem;
+		background: @c005;
+		text-align: center;
+		// border-bottom: 1px solid @c004;
+		.iconfont{
+			padding-top: 1.1rem;
+			font-size: 2.8rem;
+			color: @c013;
+		}
+		.textHead{
+			margin: 2rem auto 1.5rem;
+			font-size: 1.4rem;
+			color: @c002;
+		}
+		.content{
+			font-size: 1.2rem;
+			color: @c003;
+			line-height: 2rem;
+			span{
+				color: @c002;
+			}
+		}
+		.knowBtn{
+			display: block;
+			margin-top: 1.5rem;
+			height: 4rem;
+			line-height: 4rem;
+			font-size: 1.4rem;
+			color: @c002;
+			border-top: 1px solid @c004;
+		}
+	}
+}

@@ -1,0 +1,72 @@
+<!--
+	* 恒小智收益明细
+	* author:ping
+	* time：2018-10-10
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0,user-scalable=no" name="viewport" id="viewport" />
+	<meta content="telephone=no" name="format-detection" />
+	<meta content="yes" name="apple-mobile-web-app-capable" />
+	<meta name="apple-mobile-web-app-status-bar-style" content="black">
+	<link rel="stylesheet" href="/intelligentInvestment/static/css/incomeDetail.css">
+	<title>收益明细</title>
+<body>
+
+    @@include('../../common/views/load.html')
+	<!-- 加载中loading -->
+	<!-- @@include('../../common/views/loading/listLoading.html') -->
+
+	<!-- 暂无数据 -->
+	@@include('../../common/views/noData.html')
+
+	<div class="content"> 
+
+		<!-- 历史净值 -->
+		<div class="incomeDetail before">
+			<header class="nav mui-row" id="nav">
+				<span class="listDivLeft mui-col-xs-6">日期</span>
+				<span class="listDivRight mui-col-xs-6">收益(元)</span>
+			</header>
+
+			<div class="list">
+				<div class="contentWrapper">
+					<ul class="mui-table-view">
+						<li class="mui-table-view-cell">
+							<!--放置列表-->
+						</li>
+					</ul>
+					<!-- 返回顶部 -->
+					@@include('../../common/views/goTop.html')
+				</div>
+			</div>
+
+		</div>	
+		<!-- 历史净值 -->
+	</div>
+
+	<!-- 列表模板 -->
+	<script id="productList-list-template" type="text/x-handlebars-template">
+		{{#each combinIncomeList}}
+			<div class='listDiv mui-row'>
+				<span class="listDivLeft mui-col-xs-6">{{incomeDate}}</span>
+				<span class="listDivRight mui-col-xs-6">{{todayIncome}}</span>
+			</div>
+		{{/each}}
+	</script>
+	
+
+	<script src="/include/js/vendor/zepto/zepto.js"></script>
+	
+	<script src="/include/js/vendor/handlebar/handlebars.js"></script>
+	<script src="/include/js/vendor/mui/mui.min.js"></script>
+	<script src="/include/js/vendor/root.js"></script>
+	 <!-- 添加埋点 -->
+    @@include('@pathInclude/views/header.html')
+	<script src="/intelligentInvestment/static/js/incomeDetail.js"></script>
+
+</body>
+
+</html>

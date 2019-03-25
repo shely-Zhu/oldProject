@@ -1,0 +1,233 @@
+ /**  
+ * @Page:  恒小智我的组合
+ * @Author: songxiaoyu  
+ * @Date:   2018-10-11 10:39:01  
+ * @Last Modified by:   songxiaoyu  
+ * @Last Modified time: 2018-10-12 16:35:15  
+*/
+
+
+ // 恒小智公用less
+ @import url("./common/combineCommon.less");
+ // 总资产
+ @import url("../../../common/less/components/assetCommon.less");
+ // 持仓详情表格
+ @import url("../../../common/less/components/holdDetails.less");
+
+
+ .myCombination {
+     position: relative;
+     width: 100%;
+     color: @c002;
+     font-size: 1.2rem;
+
+     // 标题
+     .combiT {
+         font-size: 1.6rem;
+         line-height: 4rem;
+     }
+
+     // 资产市值
+     .top {
+         height: 21rem;
+         margin-top: 0.8rem;
+         overflow: hidden;
+
+         // 组合详情icon
+         .tradeDetail {
+             right: 3.05rem;
+             top: 2.1rem;
+
+             &:before {
+                 content: none;
+             }
+
+             ;
+
+             &:after {
+                 content: '\e67d';
+                 font-size: 2rem;
+                 position: absolute;
+                 top: -0.1rem;
+                 right: -1.5rem;
+             }
+
+             ;
+         }
+
+
+
+         .mui-row {
+
+             // 昨日收益
+             &:nth-child(3) {
+                 position: relative;
+                 height: 5rem;
+
+                 &:after {
+                     .fullLine();
+                 }
+             }
+
+             // 收益明细
+             &:nth-child(4) {
+                 line-height: 5rem;
+
+                 li {
+                     border-right: none;
+                     height: inherit;
+
+                     &:before {
+                         .iconBase();
+                         left: 4rem;
+                         content: '\e6e5';
+
+                     }
+
+                     // 交易记录
+                     &:last-child {
+                         &:before {
+
+                             content: '\e6e6';
+                         }
+                     }
+                 }
+
+             }
+
+             li {
+                 span:first-child {
+                     padding-bottom: 0.2rem;
+                 }
+             }
+
+             .addupIncome,
+             .income,
+             .totalMoney {
+                 color: @c002;
+                 font-weight: bold;
+             }
+         }
+     }
+
+     // 待确认金额
+     .amountCom,
+     .amountShare {
+         font-size: 1.4rem;
+         height: 5rem;
+         line-height: 5rem;
+         color: @c002;
+         vertical-align: middle;
+
+         span:last-child {
+             font-size: 1.8rem;
+             float: right;
+             padding-right: 1.6rem;
+         }
+     }
+
+
+     // 持仓详情
+     .holdingDetail {
+         margin-bottom: 20rem;
+     }
+
+     // 调仓
+     .followAdjustment {
+         position: fixed;
+         bottom: 4rem;
+         padding: 3.3rem 1.6rem 2.4rem 1.6rem;
+         background-color: @c052;
+         line-height: 2.1rem;
+         font-size: 1.4rem;
+         line-height: 2.1rem;
+         display: none;
+
+         // 关闭按钮
+         .close {
+             position: absolute;
+             top: 1.2rem;
+             right: 1.2rem;
+             width: 1.2rem;
+             height: 1.2rem;
+             color: @c001;
+
+         }
+
+         // 产看详情
+         .viewDetails {
+             color: @c053;
+             float: right;
+             position: relative;
+             padding-right: 2.25rem;
+
+             .details {
+                 position: absolute;
+                 top: 0.15rem;
+             }
+         }
+
+         // 按钮
+         .buttonWrap {
+             text-align: right;
+             margin-top: 2.4rem;
+
+             button {
+                 width: 7.5rem;
+                 line-height: 2.3rem;
+                 border: 1px solid @c002;
+                 border-radius: 0.2rem;
+                 background-color: @c052;
+                 color: @c002;
+                 margin-right: 0.5rem;
+             }
+
+             .giveUp {
+                 margin-right: 2.1rem;
+                 border: 1px solid @c001;
+                 color: @c003;
+             }
+         }
+
+         // 公共样式
+         .alignL {
+             text-align: left;
+         }
+
+         .alignR {
+             text-align: right;
+         }
+     }
+
+     // 买入赎回按钮
+     .dealBtn {
+         position: fixed;
+         bottom: 0;
+         width: 100%;
+
+         button {
+             display: inline-block;
+         }
+
+         .redemption {
+             width: 50%;
+             background-color: @c005;
+             color: @c006;
+             // display: none;
+         }
+        
+        // 不可用状态
+         .redemption.disable {
+             background: rgb(204, 204, 204);
+             opacity: 1;
+             color:@c005;
+         }
+
+
+         .buyBtn {
+             width: 50%;
+             float: right;
+         }
+     }
+
+ }

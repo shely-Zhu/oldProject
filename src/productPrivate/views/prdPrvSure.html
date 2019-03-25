@@ -1,0 +1,102 @@
+<!-- 私募详情确认预约页 -->
+<!-- 2018.11.21 songxiaoyu  预约订单增加受益账户 -->
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="applicable-device" content="mobile">
+    <meta content="telephone=no" name="format-detection" />
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="stylesheet" href="/productPrivate/static/css/prdPrv.css">
+    <title>产品详情</title>
+</head>
+
+<body>
+    @@include('../../common/views/load.html')
+    <section class="container">
+        <div class="prdPrvSure">
+            <div class="mui-card">
+                <div class="card-head title ">
+                    --
+                </div>
+            </div>
+            <div class="mui-card appCash">
+                <div class="card-head">
+                    <span>预约金额</span>
+                    <div class="cashInput"><input type="text" onkeyup="this.value=this.value.replace(/\D/g,'')" onafterpaste="this.value=this.value.replace(/\D/g,'')" /><span class="text">万元</span></div>
+                </div>
+            </div>
+            <div class="cashTip">递增金额为<span class="cashStart">--</span>万元</div>
+            <!-- 受益账户信息 -->
+            <div class="mui-card cardList resetCard">
+                <div class="beneTitle">受益账户信息
+                <p class="beneTip">此账户为签署合同及转账汇款的银行账户</p>
+                </div>
+                <div class="beneName">姓名<span class="customerName"></span></div>
+                <div class="choice">选择汇款银行</div>
+                <!--银行卡-->
+                <div class="mui-card-content openWrap dealCard">
+                    <div class="form-wrap">
+                        <div class="form-list bankList">
+                            <!-- 放置银行卡列表的模板 -->
+                        </div>
+                    </div>
+                </div>
+                <!-- 银行卡end -->
+            </div>
+            <!-- 受益账户信息 end-->
+            <div class="prdInfo marginTop">
+                <p class="head">服务理财师</p>
+                <div class="form-wrap">
+                    <div class="form-list">
+                    </div>
+                </div>
+            </div>
+            <div class="mui-btn bottom">确认预约</div>
+    </section>
+    <div class="againEnter">
+        <button class="tipWrapper"></button>
+    </div>
+    
+    <!-- 银行卡模板 -->
+    @@include('../../common/views/bankList.html')
+
+
+    <!-- 理财师 -->
+    <script id="finacialMore" type="text/x-handlebars-template">
+        {{! 左侧页面列表}}
+    {{#each this}}
+      <div class="finacial mui-input-row mui-radio dealRadio">
+        <div class="mui-card">
+          <div class="card-head">
+            <label for=""><span class="iconfont">&#xe685;</span><span class="name">{{broker_name}}</span></label>
+            {{#if check}}
+              <input type="radio" name="radio1" checked="checked"/>
+            {{else}}
+              <input type="radio" name="radio1"/>
+            {{/if}}   
+          </div>
+          <div class="card-theme noBor">
+            <ul>
+              <li class="clearfix"><span class="invRange">工号</span><span class="invResult account">{{broker_account}}</span></li>
+              <!-- <li class="clearfix"><span class="invRange">手机</span><span class="invResult">{{mobile_tel}}</span></li> -->
+              <li class="clearfix noBot"><span class="invRange">所属公司</span><span class="invResult">{{dpt_name}}</span></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    {{/each}}
+  </script>
+
+    <script src="/include/js/vendor/zepto/zepto.js"></script>
+    <script src="/include/js/vendor/root.js"></script>
+    <script src="/include/js/iscroll.js"></script>
+    <script src="/include/js/vendor/handlebar/handlebars.js"></script>
+    <script src="/include/js/vendor/mui/mui.min.js"></script>
+    <script src="/productPrivate/static/js/prvSure.js"></script>
+</body>
+
+</html>

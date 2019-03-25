@@ -1,0 +1,94 @@
+<!-- 
+	设置 页面 
+	@author yangjinlai 2017-02-14
+
+	*:本页面使用MUI
+-->
+
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+	    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+	    <meta name="applicable-device" content="mobile">
+	    <meta name="apple-mobile-web-app-capable" content="yes">
+	    <meta name="apple-mobile-web-app-status-bar-style" content="black"><meta charset="UTF-8">
+		<title>设置</title>
+		<link rel="stylesheet" href="/user/static/css/setUp.css">
+	</head>
+
+	<body>
+		
+		@@include('../../../common/views/load.html')
+		
+		<div class="mui-card marginTop">
+			<!--内容区-->
+			<!-- <div class="mui-card-content"> -->
+
+				<ul class="mui-table-view">
+					<li class="mui-table-view-cell accountPhone">
+						<a class="mui-navigate-right hasWord " href="javascript:;">登录账号</a>
+						<span class="word"></span>
+					</li>
+					<li class="mui-table-view-cell changePhone">
+						<a class="mui-navigate-right" href="javascript:;" onclick="window.location.href=site_url.resetLinkPhone_url;">更换手机号码</a>
+						<span class="word hasRight"></span>
+					</li>
+				</ul> 
+					  
+			<!-- </div> -->
+		</div>
+		
+		<div class="mui-card marginTop bassInfo">
+			<!--内容区-->
+			<!-- <div class="mui-card-content"> -->
+				<ul class="mui-table-view">
+					<li class="mui-table-view-cell noBor">
+						<a class="mui-navigate-right" href="javascript:;">基本信息</a>
+					</li>
+				</ul>  
+			<!-- </div> -->
+		</div>
+		
+		<div class="mui-card marginTop">
+			<!--内容区-->
+			<!-- <div class="mui-card-content"> -->
+				<ul class="mui-table-view">
+					<li class="mui-table-view-cell noBor">
+						<a class="mui-navigate-right" href="javascript:;" onclick="window.location.href=site_url.resetLoginPassword_url;">登录密码</a>
+					</li>
+					<li class="mui-table-view-cell mergeYes">
+						<a class="mui-navigate-right" href="javascript:;" onclick="window.location.href=site_url.changeDealPassword_url;">网站交易密码</a>
+					</li>
+				</ul>  
+			<!-- </div> -->
+		</div>
+
+		
+
+		<div class="mui-card marginTop">
+			<!--内容区-->
+			<!-- <div class="mui-card-content"> -->
+				<ul class="mui-table-view">
+					<li class="mui-table-view-cell">
+						<a class="mui-navigate-right goRemember" href="javascript:;" onclick="window.location.href=site_url.aboutJF_url;">关于明泽</a>
+					</li>				
+				</ul> 					  
+			<!-- </div> -->
+		</div>
+
+
+		<!-- 退出登录按钮 -->
+		@@include('../../../common/views/button/quiteBtn.html')
+		
+		<!-- 底部导航 -->
+		@@include('../../../common/views/bottomNav.html')  
+		<script src="/include/js/vendor/zepto/zepto.js"></script>
+		<script src="/include/js/vendor/root.js"></script>
+		<script src="/include/js/vendor/mui/mui.min.js"></script>
+		<script src="/user/static/js/setUp/setUp.js"></script>
+
+	</body>
+
+</html>

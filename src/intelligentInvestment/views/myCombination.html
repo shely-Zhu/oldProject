@@ -1,0 +1,94 @@
+<!-- /**  
+ * @Page:  我的组合
+ * @Author: songxiaoyu  
+ * @Date:   2018-10-11 10:39:01  
+ * @Last Modified by:   songxiaoyu  
+ * @Last Modified time: 2019-01-03 16:02:10  
+ */ -->
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="applicable-device" content="mobile">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="stylesheet" href="/intelligentInvestment/static/css/myCombination.css">
+    <title>恒小智</title>
+</head>
+
+<body>
+    
+    @@include('../../common/views/load.html')
+    <div class="myCombination">
+        <section class="mui-card combiT"></section>
+        <!-- 头部总金额 -->
+        <section class="top">
+            <h2 class="totalAmount">
+                资产市值(元)
+                <span class="tradeDetail iconfont">组合详情</span>
+            </h2>
+            <p class="totalMoney"></p>
+            <ul class="mui-row">
+                <li class="mui-col-sm-6 mui-col-xs-6">
+                    <span>昨日收益(元)</span>
+                    <span class="income"></span>
+                </li>
+                <li class="mui-col-sm-6 mui-col-xs-6">
+                    <span>累计收益(元)</span>
+                    <span class="addupIncome"></span>
+                </li>
+            </ul>
+            <ul class="mui-row">
+                <li class="mui-col-sm-6 mui-col-xs-6 incomeDetail">收益明细</li>
+                <li class="mui-col-sm-6 mui-col-xs-6 record">交易记录</li>
+            </ul>
+        </section>
+        <!-- 头部总金额 end -->
+        <!-- 待确认金额 start -->
+        <seciton class="mui-card marginTop amountCom">
+            <span class="leftTxt">待确认金额</span>
+            <span class="alignR"></span>
+        </seciton>
+        <seciton class="mui-card marginTop amountShare">
+            <span class="leftTxt">待确认份额</span>
+            <span class="alignR"></span>
+        </seciton>
+        <!-- 待确认金额  end -->
+        <!-- 持仓详情 -->
+        <div class="marginTop mui-card holdingDetail">
+            <h2 class="alignL">持仓详情</h2>
+        </div>
+        <!-- 持仓详情 end -->
+        <!-- 一键调仓 -->
+        <div class="followAdjustment">
+            <i class="iconfont close">&#xe607;</i>
+            <div class="">
+                由于市场形势变化，我们针对当前的配置资产配比进行了调整，您可根据自主意愿，进行是否跟随调仓。
+                <span class="viewDetails">查看详情<i class="iconfont details">&#xe600;</i></span>
+            </div>
+            <div class="buttonWrap">
+                <button class="giveUp">放弃跟调</button>
+                <button class="keyAdjustment">一键调仓</button>
+            </div>
+        </div>
+        <!-- 一键调仓 end -->
+        <!-- 持仓表格 -->
+        @@include('../../common/views/pageModule/holdingTable.html')
+        <!-- 底部按钮 -->
+        <div class="dealBtn">
+            @@include('../../common/views/button/buyNowBtn.html',{"arr":[{"className": "redemption", "txt": "赎回"},{"className": "buyBtn", "txt": "买入"} ]})
+        </div>
+        <!-- 底部按钮 end -->
+    </div>
+    <script src="/include/js/vendor/zepto/zepto.js"></script>
+    <script src="/include/js/vendor/root.js"></script>
+    <script src="/include/js/vendor/handlebar/handlebars.js"></script>
+    <script src="/include/js/vendor/mui/mui.min.js"></script>
+    <!-- 添加埋点 -->
+    @@include('@pathInclude/views/header.html')
+    <script src="/intelligentInvestment/static/js/myCombination.js"></script>
+</body>
+
+</html>

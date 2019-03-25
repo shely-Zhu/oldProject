@@ -1,0 +1,53 @@
+//引入mui
+ @import url("../../../include/css/mui.min.css");
+ @import url("../../../common/less/reset.less");
+ @import url("../../../common/less/color.less");
+ @import url("../../../common/less/mui/resetMUI.less");
+
+.mui-card{
+	padding: 0;
+}
+
+.result_box{
+
+	.result{
+		margin-top: 0.8rem;
+		margin-bottom: 0.8rem;
+		padding-top: 2.0rem;
+		height: 10.6rem;
+		background: @c005;
+		box-sizing: border-box;
+		div{
+			text-align: center;
+		}
+		div:nth-child(2){
+			margin-top: 1.2rem;
+			font-size: 1.4rem;
+			color: @c002;
+		}
+		.iconfont{
+			font-size: 4.0rem;
+			color: @c013;
+		}
+	}
+	.detail_box{
+		padding: 1.6rem 1.6rem;
+		// height: 13.6rem;
+		background: @c005;
+		box-sizing: border-box;
+		font-size: 1.4rem;
+		line-height: 1.4rem;
+		color: @c002;
+		div{
+			display: flex;
+			justify-content: space-between;
+			span:nth-child(1){
+				color: @c003;
+			}
+		}
+		div:not(:first-child){
+			margin-top: 1.6rem;
+			
+		}
+	}
+}

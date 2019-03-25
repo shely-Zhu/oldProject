@@ -1,0 +1,73 @@
+<!-- 登录 -->
+
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <meta name="applicable-device" content="mobile">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="stylesheet" href="/user/static/css/user.css">
+	<title>积分商城-登录</title>
+</head>
+<body>
+	<section class="container login">
+
+		<!-- <div class="login"> -->
+
+			<div class="overHead">
+				<span class="iconfont">&#xe602;</span>
+				<p class="title">一日托付，一心呵护</p>
+			</div>
+
+
+			<div class="mui-card marginTop">
+
+				<div class="form-wrap">
+
+					<!-- 下拉选择 -->
+					<div class="selectWrapper idType">
+					    
+					    <p  class="selectCopy" num="1" >
+					    	<span class="select_txt selectResult">自然人</span>
+					   	</p>
+
+						<ul class="optionCopy" style="display:none;"> 
+							<li num="1" class="liSelect">自然人</li>
+							<li num="0">授权代理人</li>
+						</ul>
+					</div>
+
+					<!-- 手机号 -->
+					<div class="formList formIconLeft">
+						<span class="iconfont">&#xe665;</span>
+
+						@@include('../../common/views/form/phone/phone.html')
+					</div>
+
+					<!-- 登陆密码 -->
+					<div class="formList formIconLeft formIconRight">
+						<span class="iconfont">&#xe666;</span>
+
+						@@include('../../common/views/form/loginPassword/loginPassword.html')
+					</div>
+					
+				</div>
+
+			</div>
+
+			<div class="btnButton">
+				<button type="button" class="mui-btn nextBtn"  id="btn">登录</button>
+			</div>
+			
+		</div>
+		
+	</section>
+
+	<script src="/include/js/vendor/zepto/zepto.js"></script>
+	<script src="/include/js/vendor/root.js"></script>
+	<script src="/include/js/vendor/mui/mui.min.js"></script>
+	<script src="/user/static/js/mallLogin.js"></script>	
+</body>
+</html>

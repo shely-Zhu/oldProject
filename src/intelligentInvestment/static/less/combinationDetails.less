@@ -1,0 +1,261 @@
+/**  
+ * @Page:  恒小智组合详情
+ * @Author: songxiaoyu  
+ * @Date:   2018-10-11 10:39:01  
+ * @Last Modified by:   songxiaoyu  
+ * @Last Modified time: 2018-10-12 16:35:15  
+**/
+
+// 恒小智公用less
+@import url("./common/combineCommon.less");
+// 折线图
+@import url("@pathCommonLessCom/foldLine.less");
+// 调仓表格
+@import url("@pathCommonLessCom/adjustmentTable.less");
+
+
+.combinationDetails {
+    position: relative;
+    width: 100%;
+    color: @c002;
+    font-size: 1.2rem;
+
+    // 净值
+    .top {
+        padding: 1.6rem 0;
+
+        .mui-row li {
+            text-align: justify;
+            border-right: 0.1rem solid @c008;
+
+            &:last-child {
+                border-right: 0;
+                padding-left: 3rem;
+            }
+
+            .spanWrap {
+                margin: 0 auto;
+            }
+
+            span {
+                padding-left: 3.3rem;
+                display: block;
+                font-size: 1.2rem;
+                color: @c003;
+
+                &:first-child {
+                    padding-bottom: 0.8rem;
+                    color: @c002;
+                    font-size: 2rem;
+                }
+
+                b {
+                    font-weight: normal;
+                }
+
+            }
+
+        }
+    }
+
+    // 折线图
+    .drawLine .lineTitle {
+        span {
+            &:first-child {
+                border-right: 1px solid @c008;
+            }
+            &:nth-child(2) {
+                padding-left: 0.8rem;
+            }
+
+        }
+
+    }
+
+    // 资产配置
+    .allocationWrap {
+        padding-left: 0;
+        padding-bottom: 1.6rem;
+
+        // 标题
+        h2 {
+            position: relative;
+            padding-left: 1.6rem;
+            height: 4.8rem;
+            line-height: 4.8rem;
+            color: @c002;
+            font-size: 1.6rem;
+
+            &:after {
+                position: absolute;
+                content: '';
+                left: 0;
+                bottom: 0;
+                width: 100%;
+                border-bottom: 1px solid @c008;
+            }
+        }
+
+        // 占比
+        .assetRatio {
+            padding-left: 1.6rem;
+            color: @c002;
+
+            .allocationT {
+                li {
+                    border-bottom: 1px solid @c008;
+                    padding-bottom: 0.8rem;
+                    padding-top: 0.8rem;
+                    font-size: 1.4rem;
+                }
+
+                // 组名
+                .aGroup {
+                    margin-top: 1.2rem;
+                    position: relative;
+                    padding-left: 1.3rem;
+
+                    &:before {
+                        position: absolute;
+                        content: '';
+                        left: 0;
+                        height: 3.2rem;
+                        width: 0.8rem;
+                        margin-right: 0.5rem;
+                        background-color: @c042;
+                    }
+
+                    .small {
+                        font-size: 1.2rem;
+                        color: @c003;
+                    }
+
+                    .bold {
+                        font-weight: bold;
+                        color: @c002;
+                    }
+                }
+
+                // 大盘股
+                .color1 {
+                    &:before {
+                        background-color: @c042;
+                    }
+                }
+
+                // 中盘股
+                .color2 {
+                    &:before {
+                        background-color: fade(@c042, 70%);
+                    }
+                }
+
+                // 小盘股
+                .color3 {
+                    &:before {
+                        background-color: fade(@c042, 40%);
+                    }
+                }
+
+                // 利率债
+                .color4 {
+                    &:before {
+                        background-color: @c043;
+                    }
+                }
+
+                // 黄金
+                .color5 {
+                    &:before {
+                        background-color: @c044;
+                    }
+                }
+
+                // 成熟市场股票
+                .color6 {
+                    &:before {
+                        background-color: @c045;
+                    }
+                }
+
+                // 新兴市场股票
+                .color7 {
+                    &:before {
+                        background-color: fade(@c045, 50%);
+                    }
+                }
+
+                // 信用债
+                .color8 {
+                    &:before {
+                        background-color: fade(@c043, 50%);
+                    }
+                }
+
+                // 房地产
+                .color9 {
+                    &:before {
+                        background-color: @c046;
+                    }
+                }
+
+                // 全球资源
+                .color10 {
+                    &:before {
+                        background-color: @c047;
+                    }
+                }
+
+                // 国内货币
+                .color11 {
+                    &:before {
+                        background-color: fade(@c048, 50%);
+                    }
+                }
+
+                // 组内基金
+                .aDetail {
+                    color: @c002;
+                    padding-right: 1.6rem;
+
+
+                    .fundN {
+                        color: @c002;
+                        line-height: 2.1rem;
+                    }
+
+                    .fundC {
+                        color: @c040;
+                        line-height: 2.1rem;
+                    }
+
+                    .percent {
+                        height: 4.2rem;
+                        line-height: 4.2rem;
+                        text-align: right;
+
+                    }
+
+
+                }
+
+            }
+        }
+    }
+
+    .tipT {
+        font-size: 1rem;
+        line-height: 1.6rem;
+        color: @c003;
+        margin: 2.1rem 1.6rem 6.5rem 1.6rem;
+
+        .riskTip {
+            color: @c040;
+            font-weight: bold;
+        }
+    }
+
+    .bottom {
+        display: none;
+    }
+}

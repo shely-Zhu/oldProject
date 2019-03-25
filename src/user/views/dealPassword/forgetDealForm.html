@@ -1,0 +1,141 @@
+<!-- 
+	忘记网站交易密码，选择银行卡之后的表单
+	@author yangjinlai 2017-02-23
+
+	*: 本页面使用MUI
+-->
+
+<!doctype html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+	    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+	    <meta name="applicable-device" content="mobile">
+	    <meta name="apple-mobile-web-app-capable" content="yes">
+	    <meta name="apple-mobile-web-app-status-bar-style" content="black"><meta charset="UTF-8">
+		<title>修改网站交易密码</title>
+		<link rel="stylesheet" href="/user/static/css/changeDealPassword.css">
+	</head>
+
+	<body> 
+
+		@@include('../../../common/views/load.html')
+
+		<!-- 忘记原交易密码 -->
+		<section class="forgetAction">
+			
+			<p class="txt">请通过银行卡信息验证身份</p>
+
+			
+			<!-- 银行卡列表 -->
+			<div class="mui-card selectBank">
+				<!--内容区-->
+				<!-- <div class="mui-card-content"> -->
+					<div class="form-wrap">
+						<div class="branchList">
+							<!-- 存放银行列表的模板 -->
+						</div>
+					</div>
+				<!-- </div> -->
+			</div>
+			<!-- 银行卡列表 end -->
+
+			
+			<div class="nextAction forgetForm">
+				<div class="mui-card">
+					<!--内容区-->
+					<!-- <div class="mui-card-content"> -->
+						<div class="form-wrap">
+							<!-- <div class="form-list"> -->
+
+							<!-- 姓名 -->
+							<div class="formList">
+								@@include('../../../common/views/form/name/name.html')
+							</div>
+
+
+							<!-- 证件号 -->
+							<div class="formList">
+								@@include('../../../common/views/form/idCard/idCardNum.html')
+							</div>  
+
+							<!-- 银行卡号 -->
+							<div class="formList">
+								@@include('../../../common/views/form/bank/bankNum.html')
+							</div>  	
+								
+							<!-- 银行预留手机号 -->
+							<div class="formList">
+								@@include('../../../common/views/form/bank/bankPhone.html')
+							</div>	
+
+						    <!-- verifyCode class表示当前的表格元素为图文验证码 -->
+							<div class="formList verifyCode">
+								@@include('../../../common/views/form/code/twyzmCode.html')
+							</div>
+
+							<!-- numberCode class表示当前的表格元素为短信验证码 -->
+							<div class="formList numberCode">
+								@@include('../../../common/views/form/code/dxyzmCode.html')
+							</div>	
+
+							<!-- </div> -->
+						</div>
+					<!-- </div> -->
+					
+				</div>
+
+				@@include('../../../common/views/button/nextBtn.html')
+			<div>
+
+		</section>
+		
+		
+		<!-- 密码填写区域 -->
+		<section class="nextAction">
+			<p class="txt">网站交易密码为6位不连续、不重复的数字，非银行卡密码</p>
+			
+			<div class="mui-card forgetPasswordForm">
+				<!--内容区-->
+				<!-- <div class="mui-card-content"> -->
+					<div class="form-wrap">
+						<!-- <div class="form-list"> -->
+							
+							<div class="formList formIconRight">
+								@@include('../../../common/views/form/dealPassword/newDealPassword.html')
+							</div>
+
+							<div class="formList formIconRight">
+								@@include('../../../common/views/form/dealPassword/qrNewDealPassword.html')
+							</div>	
+						    
+						<!-- </div> -->
+					</div>
+				<!-- </div> -->
+			</div>
+
+			@@include('../../../common/views/button/sureBtn.html')
+
+		</section>
+		<!-- 密码填写区域end -->
+
+		<!-- 银行列表模板 -->
+		<script id="branchList-template" type="text/x-handlebars-template">
+			{{#each this}}
+			<div class="formList mui-radio mui-left" accountName="{{accountNameMask}}" idNo="{{idNo}}" bankAccount="{{bankAccount}}" bankAccountMask="{{bankAccountMask}}" bankNo="{{bankNo}}" tradeAcco="{{tradeAcco}}" idNoMask="{{idNoMask}}" capitalMode="{{capitalMode}}" branchNo="{{branchNo}}">
+				<label>{{bankName}}</label>
+				<input name="bankName" type="radio" bankNo="{{bankNo}}" >
+			</div>
+			{{/each}}
+
+		</script>
+		 
+		<script src="/include/js/vendor/zepto/zepto.js"></script>
+		<script src="/include/js/vendor/handlebar/handlebars.js"></script>
+		<script src="/include/js/vendor/root.js"></script>
+		<script src="/include/js/vendor/mui/mui.min.js"></script>
+		<script src="/user/static/js/dealPassword/forgetDealForm.js"></script>
+
+	</body>
+
+</html>

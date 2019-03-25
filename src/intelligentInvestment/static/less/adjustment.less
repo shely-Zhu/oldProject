@@ -1,0 +1,169 @@
+/* 
+** 一键调仓页面 ping time:2019-01-07
+*/
+
+@import url("../../../include/css/mui.min.css");
+@import url('@pathCommonLess/mui/resetMUI.less');
+@import url("@pathCommonLess/reset.less");
+@import url("@pathCommonLess/color.less");
+
+@import url("@pathCommonLessCom/noData.less");
+
+//回到顶部的样式
+@import url("@pathCommonLessCom/goTopMui.less");
+
+@import url("@pathCommonLessCom/againEnter.less");
+@import url("@pathCommonLessCom/alertBox.less");
+@import url("@pathCommonLessCom/elasticLayerTypeTwo.less");
+
+// 恒小智公用less
+// @import url("./common/combineCommon.less");
+
+.mui-table-view{
+	&:before, &:after{
+		height: 0;
+	}
+}
+
+.mui-table-view-cell:after{
+    height:0;
+}
+.mui-card.marginTop{
+	margin-top: 0;
+}
+
+.adjustment{
+	position: relative;
+	background:@c005;
+	font-size: 1.4rem;
+	overflow: hidden;
+	color: @c003;
+	margin-bottom: 4rem;
+	.adjustmentTitle{
+		height: 4rem;
+		width: 100%;
+		padding-left:1.6rem;
+		color: @c002;
+		line-height: 4rem;
+		font-size: 1.4rem;
+		background:@c012;
+	}
+
+	.navList{
+		padding: 0 1.6rem;
+	}
+	
+	.listDivRight{
+		text-align: right;
+	}
+	.listDivCenter{
+		text-align: right;
+	}
+
+	header{ 
+		// padding-left: 1.6rem;
+		height: 3.4rem;
+		line-height: 3.4rem;
+		border-bottom:0.1rem solid @c008;
+		background: @c005;
+		position: relative;
+		// z-index: 200; 
+	}
+    .mui-card{
+		padding-left:0;
+	}
+	.mui-table-view-cell.mui-active{
+		background-color: @c005;
+	}
+	.mui-table-view-cell>a:not(.mui-btn).mui-active{
+		background-color: @c005;
+	}
+	.latestAdjustment.mui-card{
+		box-shadow: none;
+	}
+	.mui-table-view-cell.mui-collapse .mui-collapse-content{
+		margin-top: 0;
+	}
+	// 隐藏头部
+	h2{
+		display: none;
+	}
+	.reason{
+		display: none;
+	}
+	.adjustmentList{
+		padding-left: 1.6rem;
+	}
+}
+
+.latestAdjustment {
+    padding: 0 1.6rem 0.8rem 1.6rem;
+    color: @c002;
+    text-align: left;
+    font-size: 1.4rem;
+    border-bottom: 1px solid @c008;
+
+    .mui-row {
+        position: relative;
+        height: 4.9rem;
+
+        span {
+            padding-top: 0.8rem;
+            font-size: 1.2rem;
+        }
+
+        &:after {
+            .leftIndentLine();
+        }
+
+        &:last-child {
+            &:after {
+                content: none;
+            }
+        }
+
+        // 红色
+        .redColor {
+            color: @c010;
+        }
+
+        .greenColor {
+            color: @c051;
+        }
+    }
+
+    .detailT {
+        text-align: right;
+        position: relative;
+        line-height: 3.6rem;
+        color: @c003;
+        font-size: 1.2rem;
+
+        span {s
+            &:first-child {
+                text-align: left;
+            }
+        }
+    }
+
+    .listDiv .ellipsis {
+        display: block;
+        font-size: 1.4rem;
+    }
+}
+
+// 左对齐
+.alignL {
+    text-align: left;
+}
+
+// 右对齐
+.adjustment span.alignR {
+    text-align: right;
+}
+.adjustment span.alignC{
+	visibility:hidden;
+}
+
+
+

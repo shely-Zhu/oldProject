@@ -1,0 +1,77 @@
+<!-- 手机验证 -->
+
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <meta name="applicable-device" content="mobile">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="stylesheet" href="/user/static/css/user.css">
+	<title>手机验证</title>
+</head>
+<body>
+	<section class="container">
+		
+		<div class="mui-card marginTop">
+
+			<div class="form-wrap">
+
+		
+				<!-- 下拉选择 -->
+				<div class="selectWrapper idType">
+				    
+				    <p  class="selectCopy" num="" needCheck="true" check="userTypeSelect" errorTip="请选择客户类型">
+				    	<span class="select_txt">自然人/授权代理人</span>
+				   	</p>
+					
+					<ul class="optionCopy" style="display:none;">
+						<li num="1">自然人</li>
+						<li num="0">授权代理人</li>
+					</ul>
+				</div>
+
+				<!-- 手机号 -->
+				<div class="formList formIconLeft">
+					<span class="iconfont">&#xe665;</span>
+
+					@@include('../../../common/views/form/phone/phone.html')
+				</div>
+
+				<!-- verifyCode class表示当前的表格元素为图文验证码 -->
+				<div class="formList formIconLeft verifyCode">
+					<span class="iconfont">&#xe663;</span>
+					
+					@@include('../../../common/views/form/code/twyzmCode.html')
+				</div>
+
+				<!-- numberCode class表示当前的表格元素为短信验证码 -->
+				<div class="formList formIconLeft numberCode">
+					<span class="iconfont">&#xe663;</span>
+					
+					@@include('../../../common/views/form/code/dxyzmCode.html')
+				</div>
+
+			</div>
+
+
+		</div>
+
+		<!-- 收不到验证码 -->
+		@@include('../../../common/views/form/code/voiceCode.html')
+
+		<!-- 下一步 -->
+		@@include('../../../common/views/button/nextBtn.html')
+
+
+	</section>	
+
+
+	<script src="/include/js/vendor/zepto/zepto.js"></script>
+	<script src="/include/js/vendor/root.js"></script>
+	<script src="/include/js/vendor/mui/mui.min.js"></script>
+	<script src="/user/static/js/forgetLoginPassword/findpwd.js"></script>	
+
+</body>
+</html>

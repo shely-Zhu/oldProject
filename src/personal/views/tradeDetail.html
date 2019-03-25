@@ -1,0 +1,117 @@
+<!-- 交易明细 -->
+
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <meta name="applicable-device" content="mobile">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="stylesheet" href="/personal/static/css/detail.css">
+	<title>交易明细</title>
+</head>
+<body>
+
+	@@include('../../common/views/load.html')	
+
+	<section class="container" id="wrapper">
+
+		<section class="tradeDetail" id="scroller">
+
+			<div id="pullBox">
+
+				<div class="list"  id="pageLists">
+					<!-- <div class="datalist">
+						<h2 class="ellipsis"> 恒天稳利25号中植高科Samba投资基金A类恒天稳利25号中植高科Samba投资</h2>
+						<div class="line"></div>
+						<ul>
+							<li class="clearfix">
+								<div class="title">确认净值</div>
+								<div class="text">
+									<p>1.23459<span>(2016-11-21)</span></p>
+								</div>
+							</li>
+							<li class="clearfix">
+								<div class="title">持仓份额</div>
+								<div class="text"><p>200.00</p>份</div>
+							</li>
+							<li class="clearfix">
+								<div class="title">持仓金额</div>
+								<div class="text"><p>246.90</p>元</div>
+							</li>
+						</ul>
+						<div class="line"></div>
+						<div class="date clearfix">
+							<div class="title">业务类型</div>
+							<div class="text">申购</div>
+						</div>
+					</div> -->
+				</div>
+				<div class="without" id="emptyBox" style="display:none;">
+					<div class="box vertical center">
+						<p class="iconfont">&#xe603;</p>
+						<p class="text">暂无数据</p>
+					</div>
+				</div>
+
+			</div>
+
+			@@include('../../common/views/upLoad.html')
+		</section>
+
+
+		<!-- 回到顶部 -->
+		<div class="upTop" id="goTop" style="display:none;">
+			<span class="iconfont">&#xe74a;</span>
+		</div>
+		<!-- 回到顶部 -->
+		
+	</section>	
+
+	<!-- <div class="againEnter">
+	      <button class="tipWrapper"></button>
+	    </div> -->
+	<p class="chtwm-pay chtwm-detail">基金销售服务由北京恒天明泽基金销售有限公司提供</p>
+	<script id="dataLists" type="text/x-handlebars-template">
+		{{! 左侧页面列表}}
+		{{#each this}}
+			<div class="datalist">
+				<h2 class="ellipsis"> {{fundName}}</h2>
+				<div class="line"></div>
+				<ul>
+					<li class="clearfix">
+						<div class="title">确认净值</div>
+						<div class="text">
+							<p>{{netValue}}<span>({{confirmDate}})</span></p>
+						</div>
+					</li>
+					<li class="clearfix">
+						<div class="title">确认份额</div>
+						<div class="text"><p>{{confirmType}}</p>份</div>
+					</li>
+					<li class="clearfix">
+						<div class="title">确认金额</div>
+						<div class="text"><p>{{confirmBalance}}</p>元</div>
+					</li>
+				</ul>
+				<div class="line"></div>
+				<div class="date clearfix">
+					<div class="title">业务类型</div>
+					<div class="text">{{businName}}
+						{{#if showIncome}}
+							<i class="iconfont" description="{{benefitsFormula}}">&#xe60a;</i>
+						{{else}}
+						{{/if}}
+					</div>
+				</div>
+			</div>
+		{{/each}}
+	</script>
+	<script src="/include/js/vendor/zepto/zepto.js"></script>
+	<script src="/include/js/vendor/root.js"></script>
+	<script src="/include/js/iscroll.js"></script>
+	<script src="/include/js/vendor/handlebar/handlebars.js"></script>
+	<script src="/personal/static/js/tradeDetail.js"></script>
+</body>
+</html>

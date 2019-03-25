@@ -1,0 +1,135 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+	    <meta name="viewport" id="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+	    <meta name="applicable-device" content="mobile">
+	    <meta name="apple-mobile-web-app-capable" content="yes">
+	    <meta name="apple-mobile-web-app-status-bar-style" content="black"><meta charset="UTF-8">
+		<title>基本信息</title>
+		<link rel="stylesheet" href="/user/static/css/realName.css">
+	</head>
+
+	<body>
+		@@include('../../../common/views/load.html') 
+		<div class="container"> 
+			<div class="per"> 
+				<div class="bassTip"><span class="iconfont">&#xe6dc;</span>应监管要求，需要您补充以下信息：</div>
+				<div class="mui-card">
+					<div class="form-wrap"> 
+						<div class="formBox line6">
+							<label>客户姓名</label>
+							<div class="formList fontName">
+								
+							</div>
+						</div>
+						<div class="formBox line6">
+							<label>性别</label>
+							<div class="formList lineSelect">
+								<!--性别-->
+								@@include('../../../common/views/form/gender/gender.html')
+							</div>
+						</div>
+						<div class="formBox line6">
+							<label>出生日期</label>
+							<div class="formList lineSelect">
+								@@include('../../../common/views/form/birth/birth.html')
+							</div>
+						</div>
+						<div class="formBox line6">
+							<label>国籍</label>
+							<div class="formList lineSelect">
+								<!--国籍-->  	
+								@@include('../../../common/views/form/nationality/nationality.html')
+							</div>
+						</div>
+						<div class="formBox line10">
+							<label>证件有效期</label>
+							<div class="formList lineSelect">
+								<!--证件有效期-->
+								@@include('../../../common/views/form/idtimeType/idtimeType.html')
+							</div>
+						</div>
+						<div class="formBox line10">
+							<label>证件有效期至</label>
+							<div class="formList lineSelect">
+								<!--证件有效期至-->
+								@@include('../../../common/views/form/idtime/idtime.html')
+							</div>
+						</div>
+						<div class="formBox line6">
+							<label>职业</label>
+							<div class="formList lineSelect">
+								@@include('../../../common/views/form/vocationType/vocationType.html')
+							</div>
+						</div>
+						<div class="formBox line6 hasPad noBor">
+							<label>通讯地址</label>
+							<div class="formList">
+								@@include('../../../common/views/form/address/address.html',{"address":"perAddress","length":"101"})
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="mui-card marginTop">
+					<div class="form-wrap">
+						@@include('../../../common/views/form/investSure/investSure.html')
+						
+						@@include('../../../common/views/form/relationship/relationship.html')
+						
+						@@include('../../../common/views/form/badRecord/badRecord.html')
+					</div>
+				</div>
+			</div>
+			<div class="btnButton bassBtn">
+		      	<button type="button" class="mui-btn keep">确定</button>
+		 	</div>
+		</div>
+		<!--国籍查询-->
+	    <section class="nationality">
+	    	<div class="mui-card">	
+	    		<div class="mui-table-view"> 
+					<li class="mui-table-view-cell">
+						<a class="mui-navigate-right" href="javascript:;" num="156">中国</a>
+					</li>
+					<li class="mui-table-view-cell">
+						<a class="mui-navigate-right" href="javascript:;" num="1513">中国香港</a>
+					</li>
+					<li class="mui-table-view-cell">
+						<a class="mui-navigate-right" href="javascript:;" num="1508">中国澳门</a>
+					</li>
+					<li class="mui-table-view-cell" id="mui-nation">
+						<a class="mui-navigate-right" href="javascript:;" num="158">中国台湾</a>
+					</li>	
+				</div>
+				<ul class="mui-table-view mui-table-view-nation"> 
+				    
+				</ul>
+	    	</div>
+	    	<!-- 加载中loading -->
+			@@include('../../../common/views/loading/listLoading.html')
+	    </section>
+	    <script id="nation-list-templete" type="text/x-handlebars-template">
+	    	{{#each this}}
+	    		<li class="mui-table-view-cell">
+	    			{{#if this.select}}
+				        <a class="mui-navigate-right selectNation" href="javascript:;" num="{{this.value}}">
+				        	{{this.text}}
+				        </a>
+				    {{else}}
+				    	<a class="mui-navigate-right" href="javascript:;" num="{{this.value}}">
+				        	{{this.text}}
+				        </a>
+				    {{/if}}    
+			    </li>
+	    	{{/each}}
+	    </script>
+		<script src="/include/js/vendor/zepto/zepto.js"></script>
+		<script src="/include/js/vendor/root.js"></script>
+		<script src="/include/js/vendor/mui/mui.min.js"></script>
+		<script src="/include/js/vendor/handlebar/handlebars.js"></script>
+		<script src="/user/static/js/bassMessage/bassPer.js"></script>
+	</body>
+
+</html>

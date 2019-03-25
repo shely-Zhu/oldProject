@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+	<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+	<meta name="applicable-device" content="mobile">
+	<meta content="telephone=no" name="format-detection" />
+	<meta name="apple-mobile-web-app-capable" content="yes">
+	<meta name="apple-mobile-web-app-status-bar-style" content="black">
+	<link rel="stylesheet" href="/personal/static/css/account.css">
+	<title>银行卡</title>
+</head>
+<body>
+	@@include('../../common/views/load.html')
+	<section class="container">
+		<div class="intro">什么是开通公募交易? <span class="iconfont help">&#xe60a;</span></div> 
+		<div class="bankCard">
+			<!-- <a href="/personal/views/bankcardDetail.html">
+				<div class="bankcardTitle" id="bankcardTitle"><span>建设银行</span>储蓄卡</div>
+				<div class="bankcardNumber"id="bankcardNumber">****&nbsp;****&nbsp;****&nbsp;2009</div>
+			</a>
+			<a href="javascript:;">
+				<div class="bankcardTitle"><span>招商银行</span>储蓄卡</div>
+				<div class="bankcardNumber">****&nbsp;****&nbsp;****&nbsp;2009</div>
+			</a>
+			<a href="javascript:;">
+				<div class="bankcardTitle"><span>农行银行</span>储蓄卡</div>
+				<div class="bankcardNumber">****&nbsp;****&nbsp;****&nbsp;2009</div>
+			</a>
+			<a href="javascript:;">
+				<div class="bankcardTitle"><span>交通银行</span>储蓄卡</div>
+				<div class="bankcardNumber">****&nbsp;****&nbsp;****&nbsp;2009</div>
+			</a>
+			<a href="javascript:;">
+				<div class="bankcardTitle"><span>建设银行</span>储蓄卡</div>
+				<div class="bankcardNumber">****&nbsp;****&nbsp;****&nbsp;2009</div>
+			</a> -->
+		</div>
+		<div class="againEnter">
+			<button class="tipWrapper"></button>
+		<div>
+	</section>
+	<script id="bankCards" type="text/x-handlebars-template">
+		{{! 银行卡页面列表}}
+		{{#each this}}
+				<div class="bankCardList clearfix" singleNum="{{singleNum}}" oneDayNum="{{oneDayNum}}" > 
+					<a href="javascript:;" class="cardsDetail">
+						<div class="bankcardTitle" id="bankcardTitle"><span>{{bankName}}</span>储蓄卡</div>
+						<div class="bankcardNumber" id="bankcardNumber"><span>{{bankAccountMask}}</span></div>
+						{{#if isPub}}
+						<div class="haveOpened" id="haveOpened"><span class="iconfont">&#xe6bf;</span>已开通公募交易</div>
+						{{else}}
+						<div class="publicTrade" id="publicTrade"><span class="iconfont">&#xe6be;</span>未开通公募交易</div>
+						{{/if}}
+						<div class="square"><span class="point"></span><span class="point"></span><span class="point"></span><span class="point"></span><span class="point"></span></div>
+					</a>
+				</div>
+		{{/each}}
+	</script> 
+	<script src="/include/js/vendor/zepto/zepto.js"></script>
+	<script src="/include/js/vendor/root.js"></script>
+	<script src="/include/js/vendor/mui/mui.min.js"></script>
+	<script src="/include/js/vendor/handlebar/handlebars.js"></script>
+	<script src="/personal/static/js/bankCard.js"></script>
+</body>
+</html>
