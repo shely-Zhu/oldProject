@@ -109,8 +109,8 @@ var host = {
         wap: 8008,
         mock: 8088
     }, //端口号配置入口
-    // ip: localIp, //本地ip
-    ip: '172.16.191.168', //本地ip
+    ip: localIp, //本地ip
+    // ip: '172.16.191.168', //本地ip
     middle: 'middle/',
     //middleCssPath: 'middle/middleCss/' , //打包css文件的备份
     middleHtmlPath: 'middle/middleHtml/', //打包html文件的备份
