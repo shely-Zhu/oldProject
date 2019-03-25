@@ -475,7 +475,7 @@ gulp.task("includeJs", ['htmd'], function() {
                     //此处不处理
                     var fileCon = file.contents.toString();
 
-                    // fileCon = fileCon.replace(/localIp/g, localIp);
+                    fileCon = fileCon.replace(/localIp/g, localIp);
 
                     fileCon = 'var env = ' + options.env + ';\n' + 'var envOrigin = ' +
                         options.envOrigin + ';\n' + fileCon.substring(fileCon.indexOf('//'));

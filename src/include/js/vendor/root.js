@@ -43,7 +43,8 @@ if ((pathname.indexOf('//apps.') != -1 || (pathname.indexOf('//pofapp.') != -1))
  *
  *
  */
-var mock_server = "http://172.16.191.168:8089", //前端本地开发时，接口调用的地址
+// var mock_server = "http://172.16.191.168:8089", //前端本地开发时，接口调用的地址
+var mock_server = "http://localIp:8089", //前端本地开发时，接口调用的地址
 
     /*股份www.chtwm.com所对应所有环境的域名*/
     chtwm_local = "https://wap.chtwmlocal.com",
