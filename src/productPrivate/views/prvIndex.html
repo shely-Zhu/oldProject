@@ -217,11 +217,8 @@
 			    {{/if}}    
 			{{/each}}	
 		</script>
-
-		<script src="/include/js/vendor/zepto/zepto.js"></script>
-		<script src="/include/js/vendor/root.js"></script>
-		<script src="/include/js/vendor/handlebar/handlebars.js"></script>
-		<script src="/include/js/vendor/mui/mui.min.js"></script>
+		
+		@@include('@pathInclude/views/footer.html') 
 		<!-- 添加埋点 -->
 		@@include('@pathInclude/views/header.html') 
 		<script src="/productPrivate/static/js/prvIndex.js"></script>

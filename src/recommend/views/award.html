@@ -132,15 +132,15 @@
 		<div class="againEnter"><p class="tipWrapper"></p></div>
 	</div>
 	<!-- 引入js  -->
-	<script src="/include/js/vendor/zepto/zepto.js"></script>
+	 
 	<script src="/include/js/vendor/jquery/jquery1.12.3.js"></script>
 	<script type="text/javascript">
 	    //同时使用zepto和jquery,对jquery做conflict的处理，防止冲突，此后使用jquery的时候，不能使用$，
 	    //而是用jquery
 	    $.noConflict();
 	</script>
-	<script src="/include/js/vendor/root.js"></script> 
-	<script src="/include/js/vendor/handlebar/handlebars.js"></script>
+	 @@include('@pathInclude/views/footer.html') 
+	 
 	<script type="text/javascript" src='/recommend/static/js/awardRotate.js'></script>
 	<script type="text/javascript" src='/recommend/static/js/award.js'></script> 
 	

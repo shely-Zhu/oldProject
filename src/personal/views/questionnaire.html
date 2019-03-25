@@ -112,10 +112,10 @@
     {{! 题目列表 父模板 内容}} {{#each newFundInfoList}}
     <i>{{addOne @index}}、{{this.fundName}}</i> {{/each}}
 </script>
-<script src="/include/js/vendor/zepto/zepto.js"></script>
-<script src="/include/js/vendor/root.js"></script>
-<script src="/include/js/vendor/mui/mui.min.js"></script>
+ 
+ @@include('@pathInclude/views/footer.html')
+ 
 <script src="/personal/static/js/questionnaire.js"></script>
-<script src="/include/js/vendor/handlebar/handlebars.js"></script>
+ 
 
 </html>
