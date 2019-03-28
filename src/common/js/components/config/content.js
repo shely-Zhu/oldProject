@@ -9,4 +9,6 @@ module.exports = function() {
     this.uploadApi = http_url.content_url + '/file/mount/upload';
     // 图片下载
     this.downloadApi = http_url.content_url + '/file/mount/download';
+    // 图片删除
+    this.removeApi = http_url.content_url + '/file/mount/remove.action';
 }

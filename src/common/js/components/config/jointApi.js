@@ -34,7 +34,7 @@ module.exports = function() {
     // 图片下载
     // this.downloadApi = http_url.joint_url + '/image/download.action';
     // 图片删除
-    this.removeApi = http_url.joint_url + '/image/remove.action';
+    // this.removeApi = http_url.joint_url + '/image/remove.action';
     
     //webviews接口
     this.h5FindContentDetailById_api = http_url.joint_url + "/content/h5/h5FindContentDetailById.action";
