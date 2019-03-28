@@ -1,12 +1,12 @@
 /*
-* @page: 针对app服务器里面，私募访问公募接口的情况
+* @page: 账户相关接口
 * @Author: songxiaoyu
-* @Date:   2018-05-17 15:15:29
+* @Date:   2019-03-28 
 * @Last Modified by:   songxiaoyu
-* @Last Modified time: 2018-05-17 15:35:44
 * @description:
 */
 
+//获取当前页面地址
 module.exports = function() {
     
     //获取客户信息

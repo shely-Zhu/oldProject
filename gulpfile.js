@@ -6,6 +6,8 @@
  * 金服：4000--股份、5000--明泽，mock端口号为4589
  *
  * wap: 8000，mock端口号为8089
+ *
+ * app: 8008 mock是8088
  */
 
 var gulp = require('gulp'),
