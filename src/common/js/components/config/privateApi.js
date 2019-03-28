@@ -113,7 +113,7 @@ module.exports = function() {
 
 
     // 首页
-    this.findBannerByPosition_api = http_url.pef_url + '/index/banners/findBannerByPosition.action';
+    // this.findBannerByPosition_api = http_url.pef_url + '/index/banners/findBannerByPosition.action';
     // 内容管理接口
     this.findContentByCategory_api = http_url.pef_url + '/index/content/findContentByCategory.action';
 

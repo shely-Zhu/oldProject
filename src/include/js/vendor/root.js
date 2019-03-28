@@ -118,9 +118,11 @@ var d_url_local = '.htjf4.com',
  * 1. originFund_public 存放公募域名
  * 2. originFund_private 存放私募域名
  * 3. oauth_url 存放oauth2域名
+ * 4. originFund_content 存放内容域名
  */
 var originFund_public = '', //公募
     originFund_private = '', //私募
+    originFund_content = '',//内容
     oauth_url = '', //oauth2域名
     d_url = ''; //app时，存储到本地cookie的domain
 /************************************************************************************/
@@ -164,6 +166,7 @@ window.go_url = {
 if (env == 0) {
     originFund_public = mock_server; //前端本地开发时，公募模拟数据请求地址
     originFund_private = mock_server; //前端本地开发时，私募模拟数据请求地址
+    originFund_content = mock_server;//前端本地开发时，内容模块数据请求地址
     oauth_url = oauth_local_test; //oauth_url授权登陆  本地不配置接口，直接使用测试环境的
 
     //明泽页面跳转域名
@@ -429,8 +432,9 @@ if (!window.currentIsApp) {
  */
 
 window.http_url = {
-    pof_url: '/wap/pof', //公募接口
-    pef_url: '/wap/pef', //私募接口
+    pof_url: originFund_public + '/wap/pof', //公募接口
+    pef_url: originFund_private + '/wap/pef', //私募接口
+    content_url: originFund_content + '/wap/content', //内容接口
     joint_url: '/apis/common',
     cross_url: '', // app里私募掉公募接口
     pub_pri_url: originFund_public + '/apis/wap', // app里公募掉私募接口--目前getuserinfo接口

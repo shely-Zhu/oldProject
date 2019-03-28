@@ -16,6 +16,8 @@ var jointApi = require('../../../common/js/components/config/jointApi.js');
 // app里面私募掉公募接口
 var crossApi = require('../../../common/js/components/config/crossInterface.js');
 
+//内容接口
+var contentApi = require('../../../common/js/components/config/content.js');
 
 //声明site_url
 window.site_url = { 
@@ -40,4 +42,5 @@ publicApi.call(site_url);
 privateApi.call(site_url);
 jointApi.call(site_url);
 crossApi.call(site_url);
+contentApi.call(site_url);
 

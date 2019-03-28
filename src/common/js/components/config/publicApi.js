@@ -185,18 +185,18 @@ module.exports = function() {
     /* app改版-begin */
     
     /*------------------------------财商教育start------------------------------------------*/
+    
     // 是否展示推广信息
-    this.ifShowPromotionApi = http_url.pof_url + '/fqEducation/ifShowPromotion.action';
+    this.ifShowPromotionApi = http_url.pof_url + '/fqEducation/ifShowPromotion';
     // 初始化财商教育记录
-    this.initApi = http_url.pof_url + '/fqEducation/init.action';
+    this.initApi = http_url.pof_url + '/fqEducation/init';
     // 查询财商教育记录
-    this.findApi = http_url.pof_url + '/fqEducation/find.action';
+    this.findApi = http_url.pof_url + '/fqEducation/find';
     // 更新财商教育记录
-    this.updateApi = http_url.pof_url + '/fqEducation/update.action';
-    /*------------------------------财商教育end--------------------------------------------*/
-    /*------------------------------财商教育start------------------------------------------*/
+    this.updateApi = http_url.pof_url + '/fqEducation/update';
     // 财商总资产
-    this.myFinancialEducationInfoApi = http_url.pof_url + '/pof/myAssetInfo/myFinancialEducationInfo.action';
+    this.myFinancialEducationInfoApi = http_url.pof_url + '/myAssetInfo/myFinancialEducationInfo';
+    
     /*------------------------------财商教育end------------------------------------------*/
 
      /* app改版-begin */
