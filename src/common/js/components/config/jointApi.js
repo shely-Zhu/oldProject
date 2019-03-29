@@ -21,7 +21,7 @@ module.exports = function() {
     //crm字典查询
     this.queryCrmDataDictionary_api = http_url.joint_url + '/crm/queryCrmDataDictionary.action';
 
-    this.queryReourceLabels_api = http_url.joint_url +"/product/details/queryReourceLabels.action"; //获取私募产品材料标签
+    // this.queryReourceLabels_api = http_url.joint_url +"/product/details/queryReourceLabels.action"; //获取私募产品材料标签
 
     //老带新微信
     this.share_api = http_url.joint_url + '/weixin/share.action';
@@ -59,7 +59,7 @@ module.exports = function() {
     //  投资者分类申请  
     this.applyForClassification_api = http_url.joint_url + '/account/investor/applyForClassification.action';
     //  投资者分类查询
-    this.queryClassification_api = http_url.joint_url + '/account/investor/queryClassification.action';
+    // this.queryClassification_api = http_url.joint_url + '/account/investor/queryClassification.action';
     //  投资者分类撤销
     this.repealForClassification_api = http_url.joint_url + '/account/investor/repealForClassification.action';
     
@@ -99,7 +99,7 @@ module.exports = function() {
     //私募接口改造
     this.prvFundQuery_api = http_url.joint_url + '/product/list/fundQuery.action'; //私募列表查询
     this.prvApplyForRedemption_api = http_url.joint_url + '/account/redemption/redemptionApply.action';  //产品赎回申请
-    this.prvReource_api = http_url.joint_url + '/product/details/queryReourceList.action'; //产品材料接口
+    // this.prvReource_api = http_url.joint_url + '/product/details/queryReourceList.action'; //产品材料接口
 
 
     // 中秋活动 我已完成学习按钮点击请求的接口
@@ -132,7 +132,7 @@ module.exports = function() {
     this.getMessageByPages_api = http_url.joint_url + '/account/myMessage/getMessageByPages.action';
 
     // 未读消息数量
-    this.queryFreezeStatus_api = http_url.joint_url + '/account/freezeStatus/queryFreezeStatus.action';
+    // this.queryFreezeStatus_api = http_url.joint_url + '/account/freezeStatus/queryFreezeStatus.action';
 
     // 先校验验证码，后校验手机号
     this.phoneCodeCheckout_api = http_url.joint_url + '/verify/phoneCodeCheckout.action';

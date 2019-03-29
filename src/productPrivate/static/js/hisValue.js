@@ -84,10 +84,10 @@ $(function() {
                     params: { //请求的参数信息
                         pageNo: that.page, // 当前页
                         pageSize: 20, //每页记录数
-                        productCode: that.setting.fundCode, // 基金代码
+                        projectId: that.setting.fundCode, // 基金代码
                         days: "",
-                        netValueBeginDate: "", // 查询起始日期(非必须)
-                        netValueEndDate: "" // 查询结束日期(非必须)
+                        // netValueBeginDate: "", // 查询起始日期(非必须)
+                        // netValueEndDate: "" // 查询结束日期(非必须)
                     }
                 },
                 needDataEmpty: false,

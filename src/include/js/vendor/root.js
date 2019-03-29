@@ -427,34 +427,35 @@ if (!window.currentIsApp) {
  * 因此先声明一个http_url，其中的api_url是公募接口的路径，默认为空
  * 然后根据env的不同，分别设置不同的http_url.api_url
  */
-
+var linkUrl=''
+if(env == 0){
+    linkUrl = mock_server
+}
 window.http_url = {
-    api_url: '', //公募接口
-    apis_url: originFund_private + '/apis/wap', //私募接口
-    joint_url: '/apis/common',
-    oauth_url: go_url.oauth_url, // oauth域名
-    cross_url: '', // app里私募掉公募接口
-    pub_pri_url: originFund_public + '/apis/wap', // app里公募掉私募接口--目前getuserinfo接口
-    sso_url: go_url.sso_url
+    pof_url:linkUrl+ '/wap/pof', //公募接口
+    pef_url:linkUrl+ '/wap/pef', //私募接口
+    content_url:linkUrl+ '/wap/content', // 内容接口
+    account_url:linkUrl+ '/wap/account', // 账户接口
+    sso_url:go_url.sso_url, // 账户接口
 }
 
-if (env == 0) {
-    //前端本地开发时的公募接口路径
-    http_url.api_url = originFund_public + '/api/wap';
-    http_url.cross_url = originFund_public + '/api/wap';
-    http_url.joint_url = mock_server + '/apis/common';
-} else {
-    if (window.currentIsApp) {
-        //app里，不需要/pof
-        http_url.api_url = originFund_public + '/api/wap';
-        http_url.cross_url = originFund_private + '/api/wap';
-    } else {
-        //其他情况时的公募接口路径
-        http_url.api_url = originFund_public + '/pof/api/wap';
-        http_url.cross_url = originFund_public + '/pof/api/wap';
-    }
+// if (env == 0) {
+//     //前端本地开发时的公募接口路径
+//     http_url.api_url = originFund_public + '/api/wap';
+//     http_url.cross_url = originFund_public + '/api/wap';
+//     http_url.joint_url = mock_server + '/apis/common';
+// } else {
+//     if (window.currentIsApp) {
+//         //app里，不需要/pof
+//         http_url.api_url = originFund_public + '/api/wap';
+//         http_url.cross_url = originFund_private + '/api/wap';
+//     } else {
+//         //其他情况时的公募接口路径
+//         http_url.api_url = originFund_public + '/pof/api/wap';
+//         http_url.cross_url = originFund_public + '/pof/api/wap';
+//     }
 
-}
+// }
 
 /*****************************各环境接口格式配置  end**************************************/
 

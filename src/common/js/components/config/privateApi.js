@@ -71,11 +71,11 @@ module.exports = function() {
     this.TNDay_api = http_url.apis_url + '/account/redemption/queryTNDay.action';
 
 
-    this.prvDetail_api = http_url.apis_url + '/product/details/queryProductDetail.action'; //私募详情查询
+    // this.prvDetail_api = http_url.apis_url + '/product/details/queryProductDetail.action'; //私募详情查询
     // this.prvNewValue_api = http_url.apis_url + '/product/details/queryNetValue.action'; //最新净值查询
-    this.prvLight_api = http_url.apis_url + '/product/details/queryProductImage.action'; //产品亮点查询
-    this.prvLevel_api = http_url.apis_url + '/product/details/queryBenefitLevel.action'; //受益级别查询
-    this.prvHisValue_api = http_url.apis_url + '/product/details/queryHistoryNetValue.action'; //历史净值查询
+    // this.prvLight_api = http_url.apis_url + '/product/details/queryProductImage.action'; //产品亮点查询
+    // this.prvLevel_api = http_url.apis_url + '/product/details/queryBenefitLevel.action'; //受益级别查询
+    // this.prvHisValue_api = http_url.apis_url + '/product/details/queryHistoryNetValue.action'; //历史净值查询
     this.prvResCancel_api = http_url.apis_url + '/product/trade/fundReserveCancel.action'; //取消预约接口
 
     this.prvReserve_api = http_url.apis_url + '/product/trade/fundReserve.action'; //确定预约接口
@@ -171,4 +171,20 @@ module.exports = function() {
 
     // 二维码计数接口
     this.qrCodeDetails_api = http_url.apis_url + '/qrcode/qrCodeDetails.action';
+
+
+    // app改版 2019.3.27
+    this.prvDetail_api = http_url.pef_url + '/queryProductDetail'; //私募详情查询
+    this.prvLevel_api = http_url.pef_url + '/queryBenefitLevel'; //受益级别查询
+    this.prvHisValue_api = http_url.pef_url + '/queryHistoryNetValue'; //历史净值查询
+    this.prvLight_api = http_url.pef_url + '/queryProductImage'; //产品亮点查询
+    this.queryReourceLabels_api = http_url.pef_url +"/queryReourceLabels"; //获取私募产品材料标签
+    this.prvReource_api = http_url.pef_url + '/queryReourceList'; //产品材料接口
+    //获取客户信息
+    this.user_api = http_url.account_url + '/getUserInfo';
+    this.custBro_api = http_url.account_url + '/broker/custBroRelQuery'; //理财师查询与客户关系接口
+    this.queryClassification_api = http_url.account_url + '/queryClassification'; //投资者分类审核状态查询
+    this.applyForClassification_api = http_url.account_url + '/investor/applyForClassification'; //投资者分类申请
+    this.queryFreezeStatus_api = http_url.account_url + '/freezeStatus/queryFreezeStatus';  //账户冻结
+
 };
