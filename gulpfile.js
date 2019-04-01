@@ -15,6 +15,7 @@ var gulp = require('gulp'),
 
     webpackConfig = require('./webpack.config.js'),
     webpackList = require('./src/common/js/webpackList.js'),
+    connect = require('gulp-connect'),
     proxy = require('http-proxy-middleware'),
     //删除文件
     del = require('del'), //删除旧版本文件
@@ -173,8 +174,8 @@ gulp.task('mock', function() {
 
 gulp.task('proxyTask', function() {
     plugins.connect.server({
-        root: options.path,
-        port: options.port.server,
+        root: host.path,
+        port: host.port.wap,
         livereload: true,
         middleware: function(connect, opt) {
             return [
@@ -193,6 +194,43 @@ gulp.task('proxyTask', function() {
     });
 })
 
+gulp.task('mockProxy', function() {
+    plugins.connect.server({
+        root: host.path,
+        port: host.port.wap,
+        livereload: true,
+        middleware: function(connect, opt) {
+            return [
+                proxy('/wap',  {
+                    target: 'http://172.16.191.165:8088',
+                    changeOrigin:true,
+                    secure: false,
+                }),
+            ]
+        }
+    });
+})
+
+// gulp.task('proxyTask', function() {
+//     connect.server({
+//         root: options.path,
+//         port: 8888,
+//         livereload: true,
+//         middleware: function(connect, opt) {
+//             return [
+//                 proxy('/api',  {
+//                     target: 'http://localhost:8080',
+//                     changeOrigin:true
+//                 }),
+//                 proxy('/otherServer', {
+//                     target: 'http://IP:Port',
+//                     changeOrigin:true
+//                 })
+//             ]
+//         }
+
+//     });
+// });
 
 //zip做服务器部署的时候讲我们打包出的文件压缩成一个zip包
 gulp.task('zip', ['initialTask'], function() {
@@ -207,10 +245,10 @@ if (options.env === '0' ) { //当开发环境的时候构建命令执行mock服�
 
     console.log("开发环境执行mock模拟数据服务器");
 
-    gulp.task('default', ['initialTask', 'connect', 'mock'])
+    gulp.task('default', ['initialTask', 'mockProxy', 'mock'])
 
 } else if (options.env === '5'){
-    gulp.task('default', ['initialTask', 'proxyTask','mock'])
+    gulp.task('default', ['initialTask', 'proxyTask'])
 
 } else {
     console.log("不启动服务器，做运维环境部署打包用");
@@ -494,8 +532,8 @@ gulp.task("includeJs", ['htmd'], function() {
         //对root.js做一些修改
         .pipe(
             through.obj(function(file, enc, cb) {
-                // if (file.path.indexOf('root.js') != -1 && (options.env == '0' || options.env == "1")) {
-                if (file.path.indexOf('root.js') != -1 && (options.env == '0')) {
+                if (file.path.indexOf('root.js') != -1 && (options.env == '0' || options.env == "5")) {
+                // if (file.path.indexOf('root.js') != -1 && (options.env == '0')) {
                     //如果是本地或联调环境，修改env和envOrigin的值
                     //且替换root.js里的本地ip
                     //因测试、预生产、生产环境的root需运维在发版时在对应环境上修改

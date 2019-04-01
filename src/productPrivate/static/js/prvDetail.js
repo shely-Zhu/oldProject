@@ -76,9 +76,10 @@ var prvDetail = {
     init: function() {
         var that = this;
         //检查是否登录及风险测评
-        $.userCheck(true, function() {
-            that.getData();
-        });
+        // $.userCheck(true, function() {
+            
+        // });
+        that.getData();
         
         that.events();
     },

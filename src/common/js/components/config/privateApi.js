@@ -82,7 +82,7 @@ module.exports = function() {
     this.custBro_api = http_url.apis_url + '/account/broker/custBroRelQuery.action'; //理财师查询与客户关系接口
     //私募首页--检查是否登录
     //私募首页--产品推荐
-    this.recommend_api = http_url.apis_url + '/index/recommand/recommand.action';
+    //this.recommend_api = http_url.apis_url + '/index/recommand/recommand.action';
     
     //鉴权时私募客户信息回显及客户基本信息完善查询接口
     this.queryUserInfoToAuth_api = http_url.apis_url + '/account/certification/queryUserInfoToAuth.action';

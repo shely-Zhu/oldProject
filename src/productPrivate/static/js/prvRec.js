@@ -59,24 +59,24 @@ var prvRec = {
                 needDataEmpty: false,
                 callbackDone: function(data) {
                     var jsonData = data.data;
-                    if (jsonData.isCertification == "2") { //是否实名认证
-                        that.maskName = jsonData.maskName;
+                    if (jsonData.isCertification == "1") { //是否实名认证
+                        that.name = jsonData.name;
                         if (jsonData.certType == "0") { //身份证
-                            if (jsonData.maskCertNo.length == "15") {
-                                jsonData.maskCertNo.substring(14, 15) % 2 == 0 ? that.gender = "女士" : that.gender = "先生";
-                            } else if (jsonData.maskCertNo.length == "18") {
-                                jsonData.maskCertNo.substring(16, 17) % 2 == 0 ? that.gender = "女士" : that.gender = "先生";
+                            if (jsonData.identityNo.length == "15") {
+                                jsonData.identityNo.substring(14, 15) % 2 == 0 ? that.gender = "女士" : that.gender = "先生";
+                            } else if (jsonData.identityNo.length == "18") {
+                                jsonData.identityNo.substring(16, 17) % 2 == 0 ? that.gender = "女士" : that.gender = "先生";
                             }
-                            $(".user .userName").html('<span class="name">' + that.maskName + '</span> <span class="gender">' + that.gender + '</span>');
+                            $(".user .userName").html('<span class="name">' + that.name + '</span> <span class="gender">' + that.gender + '</span>');
                         } else {
-                            $(".user .userName").html('<span class="name">' + that.maskName + '</span>');
+                            $(".user .userName").html('<span class="name">' + that.name + '</span>');
                         }
                     } else {
                         $(".user .userName").html('<span class="name">尊敬的客户</span>');
                     }
                 },
                 callbackFail: function(data) {
-                    tipAction(data.msg);
+                    tipAction(data.message);
                 }
             },
             {

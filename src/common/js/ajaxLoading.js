@@ -88,7 +88,7 @@ var splitUrl = require('./components/splitUrl.js')();
     $.extend($, {
 
         ajaxLoading: function(param) {
-
+            
             //默认配置
             var defaults = {
                 url: '',
@@ -132,7 +132,7 @@ var splitUrl = require('./components/splitUrl.js')();
 
             //发送ajax请求
             var ajaxFunc = function(obj) {
-
+                document.cookie = "testCookie=1C341CD2700412D7EEB82473F8DF1873;domain="+window.location.hostname+";path=/"
                 var ajax = $.Deferred(); //声明一个deferred对象
 
                 //设置ajax请求的contentType  data数据添加JSON.stringify
