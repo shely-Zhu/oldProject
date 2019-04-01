@@ -120,7 +120,7 @@ module.exports = function() {
     this.findBannerLikePosition_api = http_url.joint_url + '/banner/findBannerLikePosition.action';
 
     // 会员权益查询
-    this.queryRightsByLevel_api = http_url.joint_url + '/account/gingkoRights/queryRightsByLevel.action';
+    // this.queryRightsByLevel_api = http_url.joint_url + '/account/gingkoRights/queryRightsByLevel.action';
 
     // 未读消息数量
     this.unreadMsgCount_api = http_url.joint_url + '/account/myMessage/unreadMsgCount.action';

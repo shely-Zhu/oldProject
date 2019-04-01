@@ -163,7 +163,7 @@ gulp.task('mock', function() {
     gulp.src('.')
         .pipe(plugins.mockServer({
             //livereload: false,
-            // host: host.ip,
+            host: host.ip,
             directoryListing: true,
             port: host.port.mock,
             open: false,
@@ -189,6 +189,11 @@ gulp.task('proxyTask', function() {
                     changeOrigin:true,
                     secure: false,
                 }),
+                proxy('/wap/account',  {
+                    target: 'http://172.16.191.210:8080',
+                    changeOrigin:true,
+                    secure: false,
+                }),
             ]
         }
     });
@@ -202,7 +207,7 @@ gulp.task('mockProxy', function() {
         middleware: function(connect, opt) {
             return [
                 proxy('/wap',  {
-                    target: 'http://' + localIp + ':8088',
+                    target: 'http://'+localIp+':8088',
                     changeOrigin:true,
                     secure: false,
                 }),
@@ -211,7 +216,26 @@ gulp.task('mockProxy', function() {
     });
 })
 
+// gulp.task('proxyTask', function() {
+//     connect.server({
+//         root: options.path,
+//         port: 8888,
+//         livereload: true,
+//         middleware: function(connect, opt) {
+//             return [
+//                 proxy('/api',  {
+//                     target: 'http://localhost:8080',
+//                     changeOrigin:true
+//                 }),
+//                 proxy('/otherServer', {
+//                     target: 'http://IP:Port',
+//                     changeOrigin:true
+//                 })
+//             ]
+//         }
 
+//     });
+// });
 
 //zip做服务器部署的时候讲我们打包出的文件压缩成一个zip包
 gulp.task('zip', ['initialTask'], function() {

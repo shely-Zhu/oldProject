@@ -14,6 +14,6 @@ module.exports = function() {
     this.custBro_api = http_url.account_url + '/broker/custBroRelQuery'; //理财师查询与客户关系接口
     this.queryClassification_api = http_url.account_url + '/queryClassification'; //投资者分类审核状态查询
     this.applyForClassification_api = http_url.account_url + '/investor/applyForClassification'; //投资者分类申请
-    this.queryFreezeStatus_api = http_url.account_url + '/freezeStatus/queryFreezeStatus';
+    this.queryFreezeStatus_api = http_url.account_url + '/freezeStatus/queryFreezeStatus'; // 账户冻结
     
 };
