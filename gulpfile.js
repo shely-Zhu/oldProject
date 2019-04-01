@@ -85,6 +85,7 @@ if( options.env == '0' ){
 
 //获取当前电脑的ip
 var localIp = getLocalIp();
+console.log('小宇',localIp);
 
 function getLocalIp() {
     var osNet = os.networkInterfaces();
@@ -202,7 +203,7 @@ gulp.task('mockProxy', function() {
         middleware: function(connect, opt) {
             return [
                 proxy('/wap',  {
-                    target: localIp + ':8088',
+                    target: 'http://'+localIp + ':8088',
                     changeOrigin:true,
                     secure: false,
                 }),
