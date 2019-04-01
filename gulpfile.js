@@ -85,7 +85,6 @@ if( options.env == '0' ){
 
 //获取当前电脑的ip
 var localIp = getLocalIp();
-console.log('小宇',localIp);
 
 function getLocalIp() {
     var osNet = os.networkInterfaces();
