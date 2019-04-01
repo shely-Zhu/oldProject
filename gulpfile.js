@@ -163,7 +163,7 @@ gulp.task('mock', function() {
     gulp.src('.')
         .pipe(plugins.mockServer({
             //livereload: false,
-            // host: host.ip,
+            host: host.ip,
             directoryListing: true,
             port: host.port.mock,
             open: false,
@@ -226,7 +226,7 @@ if (options.env === '0' ) { //当开发环境的时候构建命令执行mock服�
 
     console.log("开发环境执行mock模拟数据服务器");
 
-    gulp.task('default', ['initialTask', 'mockProxy', 'mock'])
+    gulp.task('default', ['initialTask','mock', 'mockProxy'])
 
 } else if (options.env === '5'){
     gulp.task('default', ['initialTask', 'proxyTask'])

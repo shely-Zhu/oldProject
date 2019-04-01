@@ -37,7 +37,7 @@ var tradeList = {
 		var that = this;
 		
 		var obj = [{
-			url: site_url.user_api_two,
+			url: site_url.user_api,
 			data: {
 				hmac: "", //预留的加密信息     
 				params: {
@@ -65,6 +65,7 @@ var tradeList = {
 
 			},
 			callbackFail: function(json){
+				debugger;
 				tipAction(json.msg);
 
 				window.location.href = site_url.programFail_url;
