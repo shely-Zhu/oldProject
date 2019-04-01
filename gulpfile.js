@@ -202,7 +202,7 @@ gulp.task('mockProxy', function() {
         middleware: function(connect, opt) {
             return [
                 proxy('/wap',  {
-                    target: localIp + ':8088',
+                    target: 'http://' + localIp + ':8088',
                     changeOrigin:true,
                     secure: false,
                 }),
