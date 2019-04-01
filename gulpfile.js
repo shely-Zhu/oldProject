@@ -15,16 +15,15 @@ var gulp = require('gulp'),
 
     webpackConfig = require('./webpack.config.js'),
     webpackList = require('./src/common/js/webpackList.js'),
-
+    connect = require('gulp-connect'),
+    proxy = require('http-proxy-middleware'),
     //删除文件
     del = require('del'), //删除旧版本文件
-
     through = require('through2'),
     path = require('path'),
     fs = require('fs'),
     os = require('os'),
     minimist = require('minimist'), //命令行替换变量   
-
     //其他所需文件
     erudaFile = fs.readFileSync('conf/eruda.js', 'utf-8'), //读取eruda.js内容
     CustomEventIeFile = fs.readFileSync('conf/CustomEventIE.js', 'utf-8'), //读取CustomEventIE.js文件内容
@@ -105,7 +104,7 @@ function getLocalIp() {
 
 //web本地服务器配置
 var host = {
-    path: "", //打包文件输出路径目录也是服务器访问的文件目录
+    path: "/dist", //打包文件输出路径目录也是服务器访问的文件目录
     zip_name: "", //用于zip包的压缩文件名
     port: {
         wap: 8008,
@@ -142,6 +141,9 @@ if (options.env === '0') {
     //生产的包进ht_production
     host.path = 'ht_production/';
     host.zip_name = 'ht_production';
+}else if (options.env === '5') {
+    //生产的包进ht_production
+    host.path = 'dist/';
 }
 
 
@@ -161,7 +163,7 @@ gulp.task('mock', function() {
     gulp.src('.')
         .pipe(plugins.mockServer({
             //livereload: false,
-            host: host.ip,
+            // host: host.ip,
             directoryListing: true,
             port: host.port.mock,
             open: false,
@@ -169,6 +171,46 @@ gulp.task('mock', function() {
             allowCrossOrigin: true
         }));
 });
+
+gulp.task('proxyTask', function() {
+    plugins.connect.server({
+        root: host.path,
+        port: host.port.wap,
+        livereload: true,
+        middleware: function(connect, opt) {
+            return [
+                proxy('/wap/pef',  {
+                    target: 'http://172.16.191.122:8080',
+                    changeOrigin:true,
+                    secure: false,
+                }),
+                proxy('/wap/pof',  {
+                    target: 'http://172.16.191.210:8080',
+                    changeOrigin:true,
+                    secure: false,
+                }),
+            ]
+        }
+    });
+})
+
+gulp.task('mockProxy', function() {
+    plugins.connect.server({
+        root: host.path,
+        port: host.port.wap,
+        livereload: true,
+        middleware: function(connect, opt) {
+            return [
+                proxy('/wap',  {
+                    target: localIp + ':8088',
+                    changeOrigin:true,
+                    secure: false,
+                }),
+            ]
+        }
+    });
+})
+
 
 
 //zip做服务器部署的时候讲我们打包出的文件压缩成一个zip包
@@ -184,8 +226,10 @@ if (options.env === '0' ) { //当开发环境的时候构建命令执行mock服�
 
     console.log("开发环境执行mock模拟数据服务器");
 
-    gulp.task('default', ['initialTask', 'connect', 'mock'])
+    gulp.task('default', ['initialTask', 'mockProxy', 'mock'])
 
+} else if (options.env === '5'){
+    gulp.task('default', ['initialTask', 'proxyTask'])
 
 } else {
     console.log("不启动服务器，做运维环境部署打包用");
@@ -245,88 +289,88 @@ var isWatch = false;
 
 
 /***************************watch监听打包任务******************************/
-// if (options.env === '0' || options.env === '1') { //当开发环境的时候执行监听打包，上线部署的时候只执行一次打包
+if (options.env === '0' || options.env === '5') { //当开发环境的时候执行监听打包，上线部署的时候只执行一次打包
 // if (options.env === '0') { //当开发环境的时候执行监听打包，上线部署的时候只执行一次打包
-//     gulp.watch('src/**/*', function(event) {
+    gulp.watch('src/**/*', function(event) {
 
 
-//         //监听到的修改的文件
-//         var filePath = event.path;
+        //监听到的修改的文件
+        var filePath = event.path;
 
-//         //将此变量设置为true，表示进入watch监听状态
-//         isWatch = true;
+        //将此变量设置为true，表示进入watch监听状态
+        isWatch = true;
 
-//         console.log('当前修改文件：' + filePath);
+        console.log('当前修改文件：' + filePath);
 
-//         //判断是html/js/less文件
-//         if (filePath.indexOf('.html') != -1) {
-//             //是html，打包所有html文件
-//             console.log('打包所有html文件：');
+        //判断是html/js/less文件
+        if (filePath.indexOf('.html') != -1) {
+            //是html，打包所有html文件
+            console.log('打包所有html文件：');
 
-//             revChangeSrc = revChangeSrcStatic_1;
-//             plugins.sequence('cleanHtmlMiddleRev', 'html', 'rev', function() {});
-//         } else if (filePath.indexOf('.js') != -1 && filePath.indexOf('.json') == -1) {
+            revChangeSrc = revChangeSrcStatic_1;
+            plugins.sequence('cleanHtmlMiddleRev', 'html', 'rev', function() {});
+        } else if (filePath.indexOf('.js') != -1 && filePath.indexOf('.json') == -1) {
 
-//             revChangeSrc = revChangeSrcStatic_2;
+            revChangeSrc = revChangeSrcStatic_2;
 
-//             // 因include里面有业务js，故先判断webpackList中
-//             if (filePath.indexOf('\\include\\') != -1) {
-//                 //include下的
-//                 var file = filePath.substring(filePath.indexOf('src\\') + 4, filePath.lastIndexOf('.')).replace(/\\/g, '/');
+            // 因include里面有业务js，故先判断webpackList中
+            if (filePath.indexOf('\\include\\') != -1) {
+                //include下的
+                var file = filePath.substring(filePath.indexOf('src\\') + 4, filePath.lastIndexOf('.')).replace(/\\/g, '/');
 
-//                 if (file.indexOf('modelPage') != -1) {
-//                     //include中的业务js走webpack任务
-//                     file = "./" + file;
-//                     webpackConfig.entry = webpackList[file]
-//                     plugins.sequence('cleanRev', 'webpack', 'rev', function() {});
-//                 } else {
-//                     // 非业务js走includeJs任务
-//                     jsIncludeSrc = 'src/include/**/*' + filePath.substring(filePath.lastIndexOf('\\') + 1);
-//                     plugins.sequence('cleanRev', 'includeJs', 'rev', function() {});
-//                 }
-//             } else {
-//                 //其他情况，先判断是否在webpackList中
-//                 var hasFile = false,
-//                     file = filePath.substring(filePath.indexOf('src\\') + 4, filePath.lastIndexOf('.')).replace(/\\/g, '/');
+                if (file.indexOf('modelPage') != -1) {
+                    //include中的业务js走webpack任务
+                    file = "./" + file;
+                    webpackConfig.entry = webpackList[file]
+                    plugins.sequence('cleanRev', 'webpack', 'rev', function() {});
+                } else {
+                    // 非业务js走includeJs任务
+                    jsIncludeSrc = 'src/include/**/*' + filePath.substring(filePath.lastIndexOf('\\') + 1);
+                    plugins.sequence('cleanRev', 'includeJs', 'rev', function() {});
+                }
+            } else {
+                //其他情况，先判断是否在webpackList中
+                var hasFile = false,
+                    file = filePath.substring(filePath.indexOf('src\\') + 4, filePath.lastIndexOf('.')).replace(/\\/g, '/');
 
-//                 for (var i in webpackList) {
-//                     if (i.indexOf(file) != -1) {
-//                         //在webpackList中，只打包该文件
-//                         hasFile = true;
-//                         webpackConfig.entry = {};
-//                         webpackConfig.entry[i] = webpackList[i];
+                for (var i in webpackList) {
+                    if (i.indexOf(file) != -1) {
+                        //在webpackList中，只打包该文件
+                        hasFile = true;
+                        webpackConfig.entry = {};
+                        webpackConfig.entry[i] = webpackList[i];
 
-//                         console.log('打包js文件：' + webpackList[i]);
-//                         plugins.sequence('cleanRev', 'webpack', 'rev', function() {});
-//                     }
-//                 }
-//                 if (!hasFile) {
-//                     //不在webpackList中
-//                     webpackConfig.entry = webpackList;
-//                     console.log('打包所有js文件');
-//                     plugins.sequence('cleanRev', 'webpack', 'rev', function() {});
-//                 }
-//             }
-//         } else if (filePath.indexOf('.less') != -1) {
-//             //打包所有less文件
-//             console.log('打包所有less文件');
+                        console.log('打包js文件：' + webpackList[i]);
+                        plugins.sequence('cleanRev', 'webpack', 'rev', function() {});
+                    }
+                }
+                if (!hasFile) {
+                    //不在webpackList中
+                    webpackConfig.entry = webpackList;
+                    console.log('打包所有js文件');
+                    plugins.sequence('cleanRev', 'webpack', 'rev', function() {});
+                }
+            }
+        } else if (filePath.indexOf('.less') != -1) {
+            //打包所有less文件
+            console.log('打包所有less文件');
 
-//             revChangeSrc = revChangeSrcStatic_2;
-//             plugins.sequence('cleanRev', 'cssToHost', 'rev', function() {});
-//         } else if (filePath.indexOf('.css') != -1) {
-//             //打包所有css文件
-//             //includeCssSrc = filePath.substring( filePath.indexOf('src') ).replace(/\\/g, '/');
-//             //console.log( '打包css文件：' + includeCssSrc);
+            revChangeSrc = revChangeSrcStatic_2;
+            plugins.sequence('cleanRev', 'cssToHost', 'rev', function() {});
+        } else if (filePath.indexOf('.css') != -1) {
+            //打包所有css文件
+            //includeCssSrc = filePath.substring( filePath.indexOf('src') ).replace(/\\/g, '/');
+            //console.log( '打包css文件：' + includeCssSrc);
 
-//             gulp.run('includeCss');
-//         } else if (filePath.indexOf('\\img\\') != -1) {
-//             //打包所有图片
-//             console.log('打包所有图片');
-//             gulp.run('images');
-//         }
+            gulp.run('includeCss');
+        } else if (filePath.indexOf('\\img\\') != -1) {
+            //打包所有图片
+            console.log('打包所有图片');
+            gulp.run('images');
+        }
 
-//     })
-// }
+    })
+}
 /***************************watch监听打包任务  end******************************/
 
 
@@ -469,8 +513,8 @@ gulp.task("includeJs", ['htmd'], function() {
         //对root.js做一些修改
         .pipe(
             through.obj(function(file, enc, cb) {
-                // if (file.path.indexOf('root.js') != -1 && (options.env == '0' || options.env == "1")) {
-                if (file.path.indexOf('root.js') != -1 && (options.env == '0')) {
+                if (file.path.indexOf('root.js') != -1 && (options.env == '0' || options.env == "5")) {
+                // if (file.path.indexOf('root.js') != -1 && (options.env == '0')) {
                     //如果是本地或联调环境，修改env和envOrigin的值
                     //且替换root.js里的本地ip
                     //因测试、预生产、生产环境的root需运维在发版时在对应环境上修改
