@@ -33,7 +33,6 @@ var data = Mock.mock({
 		'email|1':["2222@124.com","234234234@ee.com"],//邮箱地址
 		'phone|1':["111****111",'33****4555'],//联系人手机号【加*】------linkPhone
 		'address|1':["sdfsdfsf未发生大幅度",'撒打发斯蒂芬事发地点时发的发斯蒂芬阿斯蒂芬',"asdfasdfsdf是法师打发斯蒂芬"],//联系地址----------linkAddress
-		'investFavour|1':["1","2","3","4","5"],//投资偏好【参照备注】
 		"orgContractName|1": ["sdf","234"],//机构联系人---------organLinkMan
         "ticket": ['SDER'], //私募跳转公募信息解密口令
 		"pubNo|1": ["123"], //公募客户编号，空代表未开户------------clientId  
@@ -44,6 +43,8 @@ var data = Mock.mock({
         "pofExpired":"",  // 公募风险评测是否过期 0-风险测评没有过期  1-风险测评已过期
         "customerNo":"123456",//统一客户编号
         "newcomer": "0", //是否新手账号
+        "riskLevel":"", // 风险承受能力
+        "endurePri":"", //投资偏好---------之前是investFavour
 
 
         "maskCertNo": "341221198906102008", //证件号【加*】---------接口文档没有出

@@ -49,7 +49,7 @@ var tradeList = {
 			callbackDone: function(json){
 				var jsonData = json.data;
 
-				riskLevel = Number(jsonData.investFavour);
+				riskLevel = Number(jsonData.endurePri);
 				var src = '/intelligentInvestment/static/img/'+ riskLevel + '.png';
 				// 风险等级对应的参数
 				that.typeSelect(riskLevel);
@@ -85,7 +85,6 @@ var tradeList = {
 
 				$this.attr("disabled", true).addClass('disable');
            		that.combinFundList($this);
-            
         });
 
 	},
@@ -123,16 +122,12 @@ var tradeList = {
 		var that = this;
 
 		var obj = [{
-			url: site_url.findContentByCategory_joint_api,
+			url: site_url.findContentByCategory_api,
 			data: {
-				hmac: "", //预留的加密信息     
-				params: {
-					category:that.typeObj.category,//类型（标志位）
-					curPage :"1",// 当前页码 
-					pageSize:"1",//每页显示条数     
-
-					groupType:"contentCategory",//组类型（信息网站来源）【请参照备注】 
-				}
+				category:that.typeObj.category,//类型（标志位）
+				groupType:"contentCategory",//组类型（信息网站来源）【请参照备注】 
+				curPage :"1",// 当前页码 
+				pageSize:"1",//每页显示条数     
 			},
 			needLogin: true,
 			needDataEmpty: false, //需要判断data是否为空

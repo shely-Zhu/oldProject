@@ -10,5 +10,5 @@
 module.exports = function() {
     
     //获取客户信息
-    // this.user_api = http_url.content_url + '/getUserInfo';
+    this.findContentByCategory_api = http_url.content_url + '/frontend/findContentByCategory';
 };

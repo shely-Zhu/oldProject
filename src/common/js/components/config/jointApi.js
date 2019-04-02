@@ -14,7 +14,7 @@ module.exports = function() {
     //图片拼接查询模板
     this.imgModel_api = http_url.joint_url + '/banner/findBannerByPosition.action';
     // 内容管理接口
-    this.findContentByCategory_joint_api = http_url.joint_url + '/content/findContentByCategory.action'
+    // this.findContentByCategory_joint_api = http_url.joint_url + '/content/findContentByCategory.action'
 
     //消息平台
     this.message_api = http_url.joint_url + '/message/productMessageQueue.action'
