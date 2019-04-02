@@ -194,6 +194,18 @@ gulp.task('proxyTask', function() {
                     changeOrigin:true,
                     secure: false,
                 }),
+                /*张雪飞 */
+                proxy('/wap/account',  {
+                    target: 'http://172.16.191.60:8088',
+                    changeOrigin:true,
+                    secure: false,
+                }),
+                /*王晖 */
+                proxy('/wap/content',  {
+                    target: 'http://172.16.191.227:8080',
+                    changeOrigin:true,
+                    secure: false,
+                }),
             ]
         }
     });

@@ -10,7 +10,7 @@ module.exports = function() {
     //检查是否登录,sso后换成jsonp
     this.checkUserInfo_api = http_url.sso_url + '/checkUserInfo.action';
     // app内检测登录状态接口
-    this.checkLogin_api = http_url.pef_url + '/isLogin.action';
+    // this.checkLogin_api = http_url.pef_url + '/isLogin.action';
 
     //接口API
     this.login_api = http_url.pef_url + '/user/login.action'; //登录并绑定salesForce账户
@@ -126,7 +126,7 @@ module.exports = function() {
     
     
     //产品专题
-    this.activity_api = http_url.pef_url + '/index/special/getSpecialById.action';
+    // this.activity_api = http_url.pef_url + '/index/special/getSpecialById.action';
 
 
     //老带新

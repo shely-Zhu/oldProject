@@ -13,4 +13,5 @@ module.exports = function() {
     // this.user_api = http_url.content_url + '/getUserInfo';
     this.findBannerLikePosition_api = http_url.content_url + '/frontend/findBannerLikePosition'; //获取页面背景及其他图片素材
     this.queryRightsByLevel_api = http_url.content_url + '/queryRightsByLevel';  //用户权益查询
+    this.activity_api = http_url.content_url + '/frontend/findSpecialById'; //产品专题
 };
