@@ -28,13 +28,11 @@ $(function() {
             var that = this;
 
             var obj = [{
+                parameterType:1,
                 url: site_url.findBannerByPosition_api,
                 data: {
-                    hmac: "", //预留的加密信息
-                    params: { //请求的参数信息
-                        adPosition: "appFQHome", //类型（标志位）【请参照备注】 
-                        limitCount: "1", //展示幅数    
-                    }
+                    adPosition: "appFQHome", //类型（标志位）【请参照备注】 
+                    limitCount: "1", //展示幅数    
                 },
                 //async: false,
                 // needLogin:true,

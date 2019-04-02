@@ -189,6 +189,18 @@ gulp.task('proxyTask', function() {
                     changeOrigin:true,
                     secure: false,
                 }),
+                /*王晖*/
+                proxy('/wap/content',  {
+                    target: 'http://172.16.191.227:8080',
+                    changeOrigin:true,
+                    secure: false,
+                }),
+                /*程珑*/
+                proxy('/wap/content',  {
+                    target: 'http://172.16.191.67:8080',
+                    changeOrigin:true,
+                    secure: false,
+                })
             ]
         }
     });
@@ -203,7 +215,6 @@ gulp.task('mockProxy', function() {
             return [
                 proxy('/wap',  {
                     target: 'http://' +localIp + ':8088',
-                    // target: '172.16.191.165:8088',
                     changeOrigin:true,
                     secure: false,
                 }),

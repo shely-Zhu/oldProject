@@ -137,8 +137,16 @@ var splitUrl = require('./components/splitUrl.js')();
 
                 //设置ajax请求的contentType  data数据添加JSON.stringify
                 var contentType = env == 0 ? 'application/x-www-form-urlencoded; charset=UTF-8' : 'application/json; charset=UTF-8',
-
                     data = env != 0 && !obj.formData ? JSON.stringify(obj.data) : obj.data;
+                
+                //parameterType = 0 表示后台接口要求application/x-www-form-urlencoded; charset=UTF-8
+                //parameterType = 1 表示后台接口要求application/json; charset=UTF-8
+                if(obj.parameterType == 0){
+                    var contentType = 'application/x-www-form-urlencoded; charset=UTF-8',
+                    data = obj.data;
+                }else if(obj.parameterType == 1){
+                    var contentType = 'application/json; charset=UTF-8'
+                }
 
                 if (obj.formData) {
                     //使用formData格式上传
