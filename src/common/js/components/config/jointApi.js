@@ -52,7 +52,7 @@ module.exports = function() {
     // 附件上传（暂时用于投资者分类、合格投资者、可多文件上传）
     this.upload_api = http_url.joint_url + '/file/upload.action';
     // 附件下载（暂时用于投资者分类、合格投资者）
-    this.download_api = http_url.joint_url + '/file/download.action';
+    //this.download_api = http_url.joint_url + '/file/download.action';
 
 
     /*---------------------------------------------------投资者分类 start-------------------------------------------------*/

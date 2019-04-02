@@ -90,12 +90,10 @@ var prvDetail = {
         var obj = [{
             url: site_url.prvDetail_api, // queryProductDetail
             data: {
-                hmac: "", //预留的加密信息
-                params: { //请求的参数信息
-                    projectId: arg["fundCode"] // 产品代码
-                }
+                 projectId: arg["fundCode"] // 产品代码
             },
             async: false,
+            contentTypeSearch: true,
             needLogin: true,
             callbackDone: function(data) {
                 var json = data.data,

@@ -189,6 +189,11 @@ gulp.task('proxyTask', function() {
                     changeOrigin:true,
                     secure: false,
                 }),
+                proxy('/wap/account',  {
+                    target: 'http://172.16.191.210:8080',
+                    changeOrigin:true,
+                    secure: false,
+                }),
             ]
         }
     });
@@ -202,7 +207,7 @@ gulp.task('mockProxy', function() {
         middleware: function(connect, opt) {
             return [
                 proxy('/wap',  {
-                    target: 'http://172.16.191.165:8088',
+                    target: 'http://'+localIp+':8088',
                     changeOrigin:true,
                     secure: false,
                 }),
