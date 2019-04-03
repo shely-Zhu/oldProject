@@ -113,9 +113,9 @@ module.exports = function() {
 
 
     // 首页
-    this.findBannerByPosition_api = http_url.pef_url + '/index/banners/findBannerByPosition.action';
+    //this.findBannerByPosition_api = http_url.pef_url + '/index/banners/findBannerByPosition.action';
     // 内容管理接口
-    this.findContentByCategory_api = http_url.pef_url + '/index/content/findContentByCategory.action';
+    //this.findContentByCategory_api = http_url.pef_url + '/index/content/findContentByCategory.action';
 
     //明细
     this.posDetail_api = http_url.pef_url + '/account/detailed/queryAssetsDetailByPages.action'; //持仓明细接口
@@ -130,7 +130,7 @@ module.exports = function() {
 
 
     //老带新
-    this.oldRecommendNew_api = http_url.pef_url + '/user/oldRecommendNew.action';
+   // this.oldRecommendNew_api = http_url.pef_url + '/user/oldRecommendNew.action';
     //
     this.oldAndNewRegist_api = http_url.pef_url + '/account/user/oldAndNewRegist.action';
 

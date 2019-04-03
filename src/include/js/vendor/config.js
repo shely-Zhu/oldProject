@@ -7,6 +7,8 @@
 require('../../../common/js/components/config/windowConfig.js');
 //跳转链接
 var goUrl = require('../../../common/js/components/config/goUrl.js'); 
+// 公共接口
+var webApi = require('../../../common/js/components/config/webApi.js');
 //私募接口
 var pefApi = require('../../../common/js/components/config/pefApi.js');
 // var privateApi = require('../../../common/js/components/config/privateApi.js');
@@ -42,6 +44,7 @@ window.site_url = {
 
 //将各接口和跳转链接附到site_url上
 goUrl.call(site_url);
+webApi.call(site_url);
 pefApi.call(site_url);
 pofApi.call(site_url);
 accountApi.call(site_url);

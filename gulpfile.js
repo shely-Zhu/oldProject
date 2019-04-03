@@ -163,7 +163,7 @@ gulp.task('mock', function() {
     gulp.src('.')
         .pipe(plugins.mockServer({
             //livereload: false,
-            // host: host.ip,
+            host: host.ip,
             directoryListing: true,
             port: host.port.mock,
             open: false,
@@ -178,14 +178,41 @@ gulp.task('proxyTask', function() {
         port: host.port.wap,
         livereload: true,
         middleware: function(connect, opt) {
+            // return [
+            //     proxy('/wap/pef',  {
+            //         target: 'http://172.16.191.122:8080',
+            //         changeOrigin:true,
+            //         secure: false,
+            //     }),
+            //     proxy('/wap/pof',  {
+            //         target: 'http://172.16.191.210:8080',
+            //         changeOrigin:true,
+            //         secure: false,
+            //     }),
+            //     proxy('/wap/account',  {
+            //         target: 'http://172.16.191.60:8088',
+            //         changeOrigin:true,
+            //         secure: false,
+            //     }),
+            //     proxy('/wap/content',  {
+            //         target: 'http://172.16.191.227:8080',
+            //         changeOrigin:true,
+            //         secure: false,
+            //     }),
+            //     proxy('/web',  {
+            //         target: 'http://172.16.191.122:8080',
+            //         changeOrigin:true,
+            //         secure: false,
+            //     }),
+            // ]
             return [
-                proxy('/wap/pef',  {
-                    target: 'http://172.16.191.122:8080',
+                proxy('/wap',  {
+                    target: 'https://wwwnew.htjf4.com',
                     changeOrigin:true,
                     secure: false,
                 }),
-                proxy('/wap/pof',  {
-                    target: 'http://172.16.191.210:8080',
+                proxy('/web',  {
+                    target: 'https://wwwnew.htjf4.com',
                     changeOrigin:true,
                     secure: false,
                 }),
@@ -202,7 +229,7 @@ gulp.task('mockProxy', function() {
         middleware: function(connect, opt) {
             return [
                 proxy('/wap',  {
-                    target: 'http://' + localIp + ':8088',
+                    target: 'http://'+localIp+':8088',
                     changeOrigin:true,
                     secure: false,
                 }),
@@ -211,7 +238,26 @@ gulp.task('mockProxy', function() {
     });
 })
 
+// gulp.task('proxyTask', function() {
+//     connect.server({
+//         root: options.path,
+//         port: 8888,
+//         livereload: true,
+//         middleware: function(connect, opt) {
+//             return [
+//                 proxy('/api',  {
+//                     target: 'http://localhost:8080',
+//                     changeOrigin:true
+//                 }),
+//                 proxy('/otherServer', {
+//                     target: 'http://IP:Port',
+//                     changeOrigin:true
+//                 })
+//             ]
+//         }
 
+//     });
+// });
 
 //zip做服务器部署的时候讲我们打包出的文件压缩成一个zip包
 gulp.task('zip', ['initialTask'], function() {
