@@ -17,6 +17,8 @@ var pofApi = require('../../../common/js/components/config/pofApi.js');
 var contentApi = require('../../../common/js/components/config/contentApi.js');
 // 账户相关
 var accountApi = require('../../../common/js/components/config/accountApi.js');
+// 公共接口
+var webApi = require('../../../common/js/components/config/webApi.js');
 //
 // var jointApi = require('../../../common/js/components/config/jointApi.js');
 // app里面私募掉公募接口
@@ -46,5 +48,6 @@ pefApi.call(site_url);
 pofApi.call(site_url);
 accountApi.call(site_url);
 contentApi.call(site_url);
+webApi.call(site_url);
 // crossApi.call(site_url);
 
