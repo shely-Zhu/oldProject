@@ -6,8 +6,6 @@
 
 */
 
-console.log(124);
-
 // 使用 Mock
 var Mock = require('mockjs');
 

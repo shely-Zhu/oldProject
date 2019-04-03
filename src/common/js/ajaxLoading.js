@@ -136,9 +136,11 @@ var splitUrl = require('./components/splitUrl.js')();
                 var ajax = $.Deferred(); //声明一个deferred对象
 
                 //设置ajax请求的contentType  data数据添加JSON.stringify
-                var contentType = env == 0 ? 'application/x-www-form-urlencoded; charset=UTF-8' : 'application/json; charset=UTF-8',
+                // var contentType = env == 0 ? 'application/x-www-form-urlencoded; charset=UTF-8' : 'application/json; charset=UTF-8',
+                var contentType = 'application/json; charset=UTF-8',
 
-                    data = env != 0 && !obj.formData ? JSON.stringify(obj.data) : obj.data;
+                    // data = env != 0 && !obj.formData ? JSON.stringify(obj.data) : obj.data;
+                    data = JSON.stringify(obj.data);
 
                 if (obj.formData) {
                     //使用formData格式上传

@@ -20,7 +20,6 @@ var tradeList = {
 
 	typeObj:{},
 	riskLevel:'',
-
 	init: function(){  //初始化函数
 		var that = this;
 		
@@ -49,6 +48,7 @@ var tradeList = {
 			callbackDone: function(json){
 				var jsonData = json.data;
 
+
 				riskLevel = Number(jsonData.endurePri);
 				var src = '/intelligentInvestment/static/img/'+ riskLevel + '.png';
 				// 风险等级对应的参数
@@ -65,14 +65,12 @@ var tradeList = {
 
 			},
 			callbackFail: function(json){
-				debugger;
 				tipAction(json.msg);
 
 				window.location.href = site_url.programFail_url;
 			},
 			callbackNoData: function(json){
 			}
-
 		}];
 		$.ajaxLoading(obj);
 	},
@@ -164,7 +162,6 @@ var tradeList = {
 			needDataEmpty: false, //需要判断data是否为空
 			async: false, 
 			callbackDone: function(json){
-
 				if(!!json.data){
 					window.location.href = site_url.combinationDetails_url + '?riskLevel=' + riskLevel;
 				}else{

@@ -175,7 +175,7 @@ $(function() {
 
                 // 风险评测是否过期
                 obj = [{
-                    url: site_url.user_api_two,
+                    url: site_url.user_api,
                     data: {
                         hmac: "", //预留的加密信息     
                         params: { //请求的参数信息 
@@ -187,7 +187,7 @@ $(function() {
 
                         var jsonData = json.data;
                         // 冻结账户弹窗提示
-                        var result = frozenAccount("buyFreeze", window.location.href, jsonData.custType);
+                        var result = frozenAccount("buyFreeze", window.location.href, jsonData.accountType);
                         if( !!result ){
                             return false;
                         };

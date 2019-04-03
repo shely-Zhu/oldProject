@@ -114,7 +114,7 @@ $(function(){
 			mui("body").on('tap', '.bottom', function() {
 				var $this = $(this);
 				obj = [{
-					url: site_url.user_api_two,
+					url: site_url.user_api,
 					data: {
 						hmac: "", //预留的加密信息     
 						params: { //请求的参数信息 
@@ -126,7 +126,7 @@ $(function(){
 
 						var jsonData = json.data;
 
-						that.riskLevel = Number(jsonData.investFavour);
+						that.riskLevel = Number(jsonData.endurePri);
 						if (jsonData.pofExpired == 1) {
 							tipAction('风险测评已过期，请重新测评')
 						} else {

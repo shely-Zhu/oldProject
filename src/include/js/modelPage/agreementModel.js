@@ -66,7 +66,7 @@ $(function() {
                     }]; 
                 }else if(splitUrl()['cash'] == 'true'){  //现金产品的协议
                     var obj = [{
-                        url: site_url.findProtocolById_api, //协议接口
+                        url: site_url.findProtocolContent_api, //协议接口
                         needLogin: true, //需要判断是否登陆
                         data: {
                             "hmac": "", //预留的加密信息
@@ -89,7 +89,7 @@ $(function() {
 
                 } else{ // 除权益中心页面执行以下操作
                     var obj = [{
-                        url: site_url.queryProtocols_api, //协议接口
+                        url: site_url.findInvestorClassification_api, //协议接口
                         needLogin: true, //需要判断是否登陆
                         data: {
                             "hmac": "", //预留的加密信息

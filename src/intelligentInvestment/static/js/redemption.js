@@ -52,7 +52,7 @@ $(function() {
                 }
             }];
             obj.push({
-                url: site_url.myShare_api, // 组合持仓列表
+                url: site_url.shareList_api, // 组合持仓列表
                 data: {
                     hmac: "", //预留的加密信息
                     params: { //请求的参数信息

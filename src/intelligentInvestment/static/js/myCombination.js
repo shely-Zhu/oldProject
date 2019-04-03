@@ -101,7 +101,7 @@ $(function() {
 					tipAction(json.msg);
 				}
 			}, { // 恒小智-组合持仓列表
-				url: site_url.myShare_api,
+				url: site_url.shareList_api,
 				data: {
 					hmac: "", //预留的加密信息
 					params: { //请求的参数信息

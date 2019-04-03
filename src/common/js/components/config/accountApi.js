@@ -8,12 +8,16 @@
 
 //获取当前页面地址
 module.exports = function() {
+    this.login_url =  '/app/account/frontend/loginCheck'; //登录
     
-    //获取客户信息
-    this.user_api = http_url.account_url + '/getUserInfo';
     this.custBro_api = http_url.account_url + '/broker/custBroRelQuery'; //理财师查询与客户关系接口
     this.queryClassification_api = http_url.account_url + '/queryClassification'; //投资者分类审核状态查询
     this.applyForClassification_api = http_url.account_url + '/investor/applyForClassification'; //投资者分类申请
-    this.queryFreezeStatus_api = http_url.account_url + '/freezeStatus/queryFreezeStatus';
+
+
+    // 恒小智-组合收益明细查询
+    this.incomeList_api = http_url.account_url + '/smartInvestment/incomeList';
+    // 恒小智-组合基金持仓中
+    this.shareList_api = http_url.account_url + '/smartInvestment/shareList';
     
 };

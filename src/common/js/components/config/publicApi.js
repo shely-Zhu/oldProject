@@ -132,7 +132,7 @@ module.exports = function() {
 
     /*------------------------------------------------------恒小智接口  start----------------------------------------------*/
 
-    // 组合详情
+    /*// 组合详情
     this.combinFundList_api = http_url.api_url + '/pof/smartInvestment/combinFundList.action';
     // 组合详情信息查询
     this.combinFundDetails_api = http_url.api_url + '/pof/smartInvestment/combinFundDetails.action';
@@ -177,7 +177,7 @@ module.exports = function() {
     // 放弃跟调接口
     this.combinTransferGiveUp_api = http_url.api_url + '/pof/smartInvestment/combinTransferGiveUp.action';
     // 调仓
-    this.combinTransfer_api = http_url.api_url + '/pof/smartInvestment/combinTransfer.action';
+    this.combinTransfer_api = http_url.api_url + '/pof/smartInvestment/combinTransfer.action';*/
 
     /*------------------------------------------------------恒小智接口  end----------------------------------------------*/
 

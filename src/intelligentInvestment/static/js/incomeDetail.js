@@ -58,7 +58,7 @@
  			that.ajaxFail = false;
 
  			var obj = [{
- 				url: site_url.combinFundIncomeList_api,
+ 				url: site_url.incomeList_api,
  				data:{
 				    hmac:"", //预留的加密信息
 				    params:{//请求的参数信息

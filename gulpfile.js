@@ -189,6 +189,11 @@ gulp.task('proxyTask', function() {
                     changeOrigin:true,
                     secure: false,
                 }),
+                proxy('/app',  {
+                    target: 'https://app.htjf4.com/',
+                    changeOrigin:true,
+                    secure: false,
+                }),
             ]
         }
     });
@@ -203,6 +208,16 @@ gulp.task('mockProxy', function() {
             return [
                 proxy('/wap',  {
                     target: 'http://'+localIp + ':8088',
+                    changeOrigin:true,
+                    secure: false,
+                }),
+                proxy('/web',  {
+                    target: 'http://'+localIp + ':8088',
+                    changeOrigin:true,
+                    secure: false,
+                }),
+                proxy('/app',  {
+                    target: 'https://app.htjf4.com/',
                     changeOrigin:true,
                     secure: false,
                 }),
