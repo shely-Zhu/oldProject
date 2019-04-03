@@ -59,7 +59,7 @@ module.exports = function() {
     this.voice_api = http_url.pef_url + '/voicemsg/voiceMsgVerify.action';
 
     //获取客户信息
-    this.user_api = http_url.pef_url + '/account/user/getUserInfo.action';
+    // this.user_api = http_url.pef_url + '/account/user/getUserInfo.action';
     // app里面公募调用私募getuserinfo接口
     this.user_api_two = http_url.pub_pri_url + '/account/user/getUserInfo.action';
 
@@ -113,7 +113,7 @@ module.exports = function() {
 
 
     // 首页
-    this.findBannerByPosition_api = http_url.pef_url + '/index/banners/findBannerByPosition.action';
+    // this.findBannerByPosition_api = http_url.pef_url + '/index/banners/findBannerByPosition.action';
     // 内容管理接口
     this.findContentByCategory_api = http_url.pef_url + '/index/content/findContentByCategory.action';
 

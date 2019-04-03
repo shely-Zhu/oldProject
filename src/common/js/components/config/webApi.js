@@ -9,5 +9,7 @@
 
 module.exports = function() {
     this.user_api = http_url.web_url + '/account/getUserInfo'; //用户信息查询
+     // 首页
+     this.findBannerByPosition_api = http_url.web_url + '/content/frontend/findBannerByPosition';
    
 };
