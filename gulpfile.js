@@ -178,19 +178,41 @@ gulp.task('proxyTask', function() {
         port: host.port.wap,
         livereload: true,
         middleware: function(connect, opt) {
+            // return [
+            //     proxy('/wap/pef',  {
+            //         target: 'http://172.16.191.122:8080',
+            //         changeOrigin:true,
+            //         secure: false,
+            //     }),
+            //     proxy('/wap/pof',  {
+            //         target: 'http://172.16.191.210:8080',
+            //         changeOrigin:true,
+            //         secure: false,
+            //     }),
+            //     proxy('/wap/account',  {
+            //         target: 'http://172.16.191.60:8088',
+            //         changeOrigin:true,
+            //         secure: false,
+            //     }),
+            //     proxy('/wap/content',  {
+            //         target: 'http://172.16.191.227:8080',
+            //         changeOrigin:true,
+            //         secure: false,
+            //     }),
+            //     proxy('/web',  {
+            //         target: 'http://172.16.191.122:8080',
+            //         changeOrigin:true,
+            //         secure: false,
+            //     }),
+            // ]
             return [
-                proxy('/wap/pef',  {
-                    target: 'http://172.16.191.122:8080',
+                proxy('/wap',  {
+                    target: 'https://wwwnew.htjf4.com',
                     changeOrigin:true,
                     secure: false,
                 }),
-                proxy('/wap/pof',  {
-                    target: 'http://172.16.191.210:8080',
-                    changeOrigin:true,
-                    secure: false,
-                }),
-                proxy('/wap/account',  {
-                    target: 'http://172.16.191.210:8080',
+                proxy('/web',  {
+                    target: 'https://wwwnew.htjf4.com',
                     changeOrigin:true,
                     secure: false,
                 }),

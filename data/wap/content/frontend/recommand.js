@@ -12,7 +12,7 @@ var pOver = Mock.mock({
 	"code": "CS0000", 
 	"msg": "处理成功！", 
 	"data": { 
-		pageList:[{ 
+		list:[{ 
 			groupType:"",//产品类别 
 			recommend:"打新基金",//产品推荐文案 
 			name:"恒天财富私募投资基金稳金5号",//产品名称

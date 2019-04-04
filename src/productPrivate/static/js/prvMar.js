@@ -52,10 +52,7 @@ var prvMar = {
         var obj = [{
             url: site_url.queryReourceLabels_api, //私募产品标签 queryReourceLabels.action
             data: {
-                hmac: "", //预留的加密信息
-                params: { //请求的参数信息
-                    projectId: that.status.fundCode, // 产品代码
-                }
+                projectId: that.status.fundCode, // 产品代码
             },
             needLogin: true, //需要判断是否登陆
             async: false,
@@ -168,11 +165,8 @@ var prvMar = {
         obj = [{ //获取产品列表
             url: site_url.prvReource_api, //私募产品列表  queryReourceList.action
             data: {
-                hmac: "", //预留的加密信息 非必填项
-                params: { //请求的参数信息
-                    projectId: that.status.fundCode, // 产品代码
-                    fileType: fileType,
-                }
+                projectId: that.status.fundCode, // 产品代码
+                fileType: fileType,
             },
             needLogin: true,
             needDataEmpty: true,

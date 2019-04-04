@@ -50,7 +50,9 @@ var prvDetail = {
     drawArr: [], //保存画图数据
     xArr: [],
     dataArr: [],
-    investFavour: '', //投资者偏好
+    // investFavour: '', //投资者偏好
+    endurePri:'', //投资偏好
+    investFavour: '', //投资者分类
     unitNetValue: '', //产品净值（单位：元）
     netValueDate: '', //净值日期【yyyy-MM-dd】
     projectDownTime:'', //产品募集截止日期
@@ -93,7 +95,6 @@ var prvDetail = {
                  projectId: arg["fundCode"] // 产品代码
             },
             async: false,
-            contentTypeSearch: true,
             needLogin: true,
             callbackDone: function(data) {
                 var json = data.data,
@@ -104,7 +105,7 @@ var prvDetail = {
 
                 that.unitNetValue = json.unitNetValue;
                 that.netValueDate = json.netValueDate;
-                that.incomeMode = json.incomeMode; //存放受益类型
+                that.incomeMode = json.incomeMode; //存放受益类型  0代表类固收，其它代表浮收
                 // that.reserveId = json.reserveId;
                 that.isNewcomer = (isNewcomer == "1") ? 1 : 0; // 新手产品
                 that.isElecContract = (isElecContract == "1") ? 1 : 0;
@@ -116,14 +117,14 @@ var prvDetail = {
                 $(".blackoutPeriod span").html(json.projectTermUnit); //"月",//产品期限单位
 
 
-                if (json.incomeMode == "2") { //固收类产品
+                if (json.incomeMode == "0") { //固收类产品
                     $(".invSolid").show();
                     if (Number(businessCompareReferenceMax) <= Number(businessCompareReferenceMin)) {
                         $(".invSolid .invCore").html(businessCompareReferenceMin + "%");
                     } else {
                         $(".invSolid .invCore").html(businessCompareReferenceMin + "%~" + businessCompareReferenceMax + "%");
                     }
-                } else if (json.incomeMode == "3") {
+                } else {
                     $(".invFloat").show();
                 }
                 var lightStar = Number(json.productRiskLevel); //获取黄星星的个数
@@ -203,6 +204,7 @@ var prvDetail = {
                 }
             },
             needLogin: true,
+            contentTypeSearch: false,
             //needEmptyData:true,
             callbackDone: function(data) {
                 var json = data.data;
@@ -230,13 +232,11 @@ var prvDetail = {
         }, {
             url: site_url.prvLight_api, //queryProductImage
             data: {
-                hmac: "", //预留的加密信息
-                params: { //请求的参数信息
-                    projectId: arg["fundCode"], // 产品代码
-                    limitNum: "1" // 限制数（只显示N张）
-                }
+                projectId: arg["fundCode"], // 产品代码
+                limitNum: "1" // 限制数（只显示N张）
             },
             needLogin: true,
+            contentTypeSearch: false,
             //needEmptyData:true,
             callbackDone: function(data) {
                 var json = data.data[0];
@@ -277,14 +277,11 @@ var prvDetail = {
         //     }
         // }];
         // $.ajaxLoading(msgObj);
-        if (that.incomeMode == "2") {
+        if (that.incomeMode == "0") {   //代表类固收
             var objSolid = [{
                 url: site_url.prvLevel_api,
                 data: {
-                    hmac: "", //预留的加密信息
-                    params: { //请求的参数信息
-                        projectId: arg["fundCode"] // 产品代码
-                    }
+                    projectId: arg["fundCode"] // 产品代码
                 },
                 needLogin: true,
                 callbackDone: function(data) {
@@ -297,6 +294,7 @@ var prvDetail = {
                             el.bool = true;
                         }
                     })
+                    $('.invSolid').show();
                     var tplm = $("#prvLevel").html();
                     var template = Handlebars.compile(tplm);
                     $(".levelBox").html(template(json));
@@ -307,7 +305,7 @@ var prvDetail = {
                 }
             }]
             $.ajaxLoading(objSolid);
-        } else if (that.incomeMode == "3") {
+        } else{
             if (that.unitNetValue) {
                 that.ifDraw = true;
                 $(".invDraw").show();
@@ -322,14 +320,12 @@ var prvDetail = {
             var objFloat = [{
                 url: site_url.prvLight_api, //queryProductImage
                 data: {
-                    hmac: "", //预留的加密信息
-                    params: { //请求的参数信息
-                        projectId: that.status.fundCode, // 产品代码
-                        productModule: "unitNetValueCycleAPP",
-                        limitNum: "1", // 
-                    }
+                    projectId: that.status.fundCode, // 产品代码
+                    productModule: "unitNetValueCycleAPP",
+                    limitNum: "1", // 
                 },
                 needLogin: true,
+                contentTypeSearch: false,
                 callbackDone: function(data) {
                     var json = data.data[0],
                         features = json.features;
@@ -361,13 +357,10 @@ var prvDetail = {
         var obj = { //画图
             url: site_url.prvHisValue_api,
             data: {
-                hmac: "", //预留的加密信息
-                params: { //请求的参数信息
-                    projectId: arg["fundCode"], // 基金代码
-                    days: num, // 数据范围  //默认开始是30天
-                    // unitNetValueBeginDate: "", // 查询起始日期
-                    // unitNetValueEndDate: "" // 查询结束日期
-                }
+                projectId: arg["fundCode"], // 基金代码
+                days: num, // 数据范围  //默认开始是30天
+                // unitNetValueBeginDate: "", // 查询起始日期
+                // unitNetValueEndDate: "" // 查询结束日期   
             },
             needDataEmpty: true,
             async: false,
@@ -554,14 +547,15 @@ var prvDetail = {
             },
             needLogin: true,
             async: false,
+            contentTypeSearch: false,
             needDataEmpty: false, //需要判断data是否为空
             callbackDone: function(json) {
                 var jsonData = json.data,
                     isPerfect = jsonData.isPerfect, //基本信息是否完善
                     newcomer = jsonData.newComer;
 
-                that.investFavour = jsonData.investFavour; // 投资偏好
-                that.investorClassify = jsonData.investorClassify; // 投资者分类
+                that.endurePri = jsonData.endurePri; // 投资偏好
+                that.investFavour = jsonData.investFavour; // 投资者分类
                 that.newcomer = (newcomer == "1") ? 1 : 0; // 是否是新手客户 0否1是
                 that.age = jsonData.age; // 客户年龄
 
@@ -732,10 +726,10 @@ var prvDetail = {
                     });
                     $this.removeClass("stop");
                 } else if (that.isInvest) { // 需要判断投资者分类标签
-                    if (that.investorClassify == "1") { // 专业投资者
+                    if (that.investFavour == "1") { // 专业投资者
                         $this.removeClass("stop");
                         window.location.href = site_url.prdPrvSure_url + '?fundCode=' + arg["fundCode"];
-                    } else if (that.investorClassify == "0") { // 普通投资者
+                    } else if (that.investFavour == "0") { // 普通投资者
                         // 售前告知书按客户65岁进行区分展示
                         var fileType = '10', // 售前告知书 没有年龄的，使用普通
                             fileName = ''; // 告知书名称

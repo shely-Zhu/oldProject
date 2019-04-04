@@ -441,6 +441,7 @@ var linkUrl=''
 
 
 window.http_url = {
+    web_url: '/web', //公共接口
     pof_url: '/wap/pof', //公募接口
     pef_url: '/wap/pef', //私募接口
     content_url: '/wap/content', // 内容接口

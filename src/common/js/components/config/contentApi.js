@@ -12,5 +12,5 @@ module.exports = function() {
     //获取客户信息
     // this.user_api = http_url.content_url + '/getUserInfo';
     this.recommend_api = http_url.content_url + '/frontend/productRecommend';  //私募首页--产品推荐
-    this.download_api = http_url.content_url + '/file/fastDFS/download'; //文件下载
+    // this.download_api = http_url.content_url + '/file/fastDFS/download'; //文件下载
 };
