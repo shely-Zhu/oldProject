@@ -46,7 +46,7 @@ $(function() {
 			var that = this;
 
 			var obj = [{ // 组合资产详情
-				url: site_url.combinFundTotalAsset_api,
+				url: site_url.totalAssets_api,
 				data: {
 					hmac: "", //预留的加密信息
 					params: { //请求的参数信息

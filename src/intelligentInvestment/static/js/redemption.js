@@ -68,7 +68,7 @@ $(function() {
                 }
             });
             obj.push({
-                url: site_url.combinFundTotalAsset_api, // 组合资产
+                url: site_url.totalAssets_api, // 组合资产
                 data: {
                     pageNum: "", //当前页
                     pagesize: "" //每页显示条数

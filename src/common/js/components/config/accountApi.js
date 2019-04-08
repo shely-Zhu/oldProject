@@ -21,5 +21,7 @@ module.exports = function() {
     this.shareList_api = http_url.account_url + '/smartInvestment/shareList';
     // 银行卡列表
     this.smartList_api = http_url.account_url + '/bankCard/smartList';
+    // 组合资产详情
+    this.totalAssets_api = http_url.account_url + '/smartInvestment/totalAssets';
     
 };

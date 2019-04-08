@@ -17,8 +17,7 @@ module.exports = function() {
     this.combinFundList_api = http_url.pof_url + '/smartInvestment/combinFundList';
     // 组合详情信息查询
     this.combinFundDetails_api = http_url.pof_url + '/smartInvestment/combinFundDetails';
-    // 组合资产详情
-    this.combinFundTotalAsset_api = http_url.pof_url + '/smartInvestment/combinFundTotalAsset';
+    
     // 银行卡列表
     this.smartCardList_api = http_url.pof_url + '/smartInvestment/cardList';
     // 恒小智-组合产品买入占比列表
