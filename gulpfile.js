@@ -179,30 +179,41 @@ gulp.task('proxyTask', function() {
         livereload: true,
         middleware: function(connect, opt) {
             return [
-                proxy('/wap/pef',  {
-                    target: 'http://172.16.191.122:8080',
+                // proxy('/wap/pef',  {
+                //     target: 'http://172.16.191.122:8080',
+                //     changeOrigin:true,
+                //     secure: false,
+                // }),
+                // proxy('/wap/pof',  {
+                //     target: 'http://172.16.191.210:8080',
+                //     changeOrigin:true,
+                //     secure: false,
+                // }),
+                // proxy('/wap/account',  {
+                //     target: 'http://172.16.191.210:8080',
+                //     changeOrigin:true,
+                //     secure: false,
+                // }),
+                // /*张雪飞 */
+                // proxy('/wap/account',  {
+                //     target: 'http://172.16.191.60:8088',
+                //     changeOrigin:true,
+                //     secure: false,
+                // }),
+                // /*王晖 */
+                // proxy('/wap/content',  {
+                //     target: 'http://172.16.191.227:8080',
+                //     changeOrigin:true,
+                //     secure: false,
+                // }),
+                /**开发服务器 */
+                proxy('/wap',  {
+                    target: 'https://h5.htjf4.com',
                     changeOrigin:true,
                     secure: false,
                 }),
-                proxy('/wap/pof',  {
-                    target: 'http://172.16.191.210:8080',
-                    changeOrigin:true,
-                    secure: false,
-                }),
-                proxy('/wap/account',  {
-                    target: 'http://172.16.191.210:8080',
-                    changeOrigin:true,
-                    secure: false,
-                }),
-                /*张雪飞 */
-                proxy('/wap/account',  {
-                    target: 'http://172.16.191.60:8088',
-                    changeOrigin:true,
-                    secure: false,
-                }),
-                /*王晖 */
-                proxy('/wap/content',  {
-                    target: 'http://172.16.191.227:8080',
+                proxy('/web',  {
+                    target: 'https://h5.htjf4.com',
                     changeOrigin:true,
                     secure: false,
                 }),
