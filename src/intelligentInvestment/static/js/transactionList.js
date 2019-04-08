@@ -186,7 +186,6 @@ var tradeList = {
 		var obj = [{
 			url: that.setting.apiUrlArr,
 			data: {   
-			    hmac:"", //预留的加密信息 非必填项
 			    params: that.setting.ajaxArr[that.setting.current_index] 
 			},
 			needLogin: true,

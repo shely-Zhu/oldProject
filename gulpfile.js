@@ -92,7 +92,7 @@ function getLocalIp() {
         var iface = osNet[devName];
         for (var i = 0; i < iface.length; i++) {
             var alias = iface[i];
-            if (alias.family === 'IPv4' && (devName == '本地连接' || devName == '以太网')) {
+            if (alias.family === 'IPv4' && (devName == '本地连接' || devName == '以太网' || devName=="WLAN")) {
                 console.log('当前本地ip：' + alias.address);
                 return alias.address;
             }
@@ -179,13 +179,13 @@ gulp.task('proxyTask', function() {
         livereload: true,
         middleware: function(connect, opt) {
             return [
-                proxy('/wap/pef',  {
-                    target: 'http://172.16.191.122:8080',
+                proxy('/wap',  {
+                    target: 'https://h5.htjf4.com',
                     changeOrigin:true,
                     secure: false,
                 }),
-                proxy('/wap/pof',  {
-                    target: 'http://172.16.191.210:8080',
+                proxy('/web',  {
+                    target: 'https://h5.htjf4.com',
                     changeOrigin:true,
                     secure: false,
                 }),

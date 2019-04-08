@@ -129,6 +129,7 @@ var splitUrl = require('./components/splitUrl.js')();
                 obj.push($.extend({}, defaults, el));
             })
 
+            document.cookie = "APPSESSIONID=24897c7a-e9d0-48bd-b9f1-9d44b1210497;domain="+window.location.hostname+";path=/"
 
             //发送ajax请求
             var ajaxFunc = function(obj) {
@@ -138,9 +139,11 @@ var splitUrl = require('./components/splitUrl.js')();
                 //设置ajax请求的contentType  data数据添加JSON.stringify
                 // var contentType = env == 0 ? 'application/x-www-form-urlencoded; charset=UTF-8' : 'application/json; charset=UTF-8',
                 var contentType = 'application/json; charset=UTF-8',
+                // var contentType = 'application/x-www-form-urlencoded',
 
                     // data = env != 0 && !obj.formData ? JSON.stringify(obj.data) : obj.data;
                     data = JSON.stringify(obj.data);
+                    // data = obj.data;
 
                 if (obj.formData) {
                     //使用formData格式上传

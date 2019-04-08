@@ -64,13 +64,10 @@ $(function() {
             }
 
             var obj = [{ // 银行卡列表---默认返回公募开卡的银行卡
-                url: site_url.smartCardList_api,
+                url: site_url.smartList_api,
                 data: {
-                    hmac: "", //预留的加密信息
-                    params: { //请求的参数信息
-                        "groupCode": that.gV.groupCode, //组合代码
-                        "additional": additional
-                    }
+                    "groupCode": that.gV.groupCode, //组合代码
+                    "additional": additional
                 },
                 //async: false,
                 // needDataEmpty: false,
@@ -92,10 +89,7 @@ $(function() {
             }, { // 持仓详情
                 url: site_url.combinFundProportionList_api,
                 data: {
-                    hmac: "", //预留的加密信息
-                    params: { //请求的参数信息
-                        "groupCode": that.gV.groupCode //组合代码
-                    }
+                    "groupCode": that.gV.groupCode //组合代码
                 },
                 //async: false,
                 // needDataEmpty: false,
@@ -177,9 +171,6 @@ $(function() {
                 obj = [{
                     url: site_url.user_api,
                     data: {
-                        hmac: "", //预留的加密信息     
-                        params: { //请求的参数信息 
-                        }
                     },
                     needLogin: true,
                     async: false,
@@ -230,14 +221,11 @@ $(function() {
                 ajaxObj = [{
                     url: site_url.combinFundBuy_api,
                     data: {
-                        hmac: "", //预留的加密信息 非必填项
-                        params: { //请求的参数信息
-                            "buyBalance": Number($('.inputTurnIn').val()), //购买金额
-                            "capitalMode": $bankCard.attr('capitalMode'), //资金方式
-                            "combCode": that.gV.groupCode, //组合编号
-                            "password": passwordVal, //密码
-                            "tradeAcco": $bankCard.attr('tradeAcco') //普通交易账号
-                        }
+                        "buyBalance": Number($('.inputTurnIn').val()), //购买金额
+                        "capitalMode": $bankCard.attr('capitalMode'), //资金方式
+                        "combCode": that.gV.groupCode, //组合编号
+                        "password": passwordVal, //密码
+                        "tradeAcco": $bankCard.attr('tradeAcco') //普通交易账号
                     },
                     needLogin: true,
                     // needDataEmpty: false,

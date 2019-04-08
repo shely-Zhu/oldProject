@@ -42,10 +42,7 @@ $(function() {
             var obj = [{
                 url: site_url.queryCombinFundTradeDetail_api,
                 data: {
-                    hmac: "", //预留的加密信息
-                    params: {
-                    	combRequestNo:splitUrl()['allotNo'],//组合申请编号
-                    }
+                    combRequestNo:splitUrl()['allotNo'],//组合申请编号
                 },
                 needLogin: true,
                 needDataEmpty: false,

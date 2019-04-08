@@ -49,6 +49,7 @@ $(function() {
                 var obj = [{ // 组合详情信息查询
                     url: site_url.login_url,
                     data:{"mobile":"13364639011", "password":"123456","accountType":1},
+                    // data:{"mobile":"15130000491", "password":"aa1234","accountType":1},
                     //async: false,
                     needDataEmpty: true,
                     callbackDone: function(json) {

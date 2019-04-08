@@ -34,8 +34,6 @@ $(function() {
             var obj = [{
                 url: site_url.combinAccList_api, // 交易账号查询
                 data: {
-                    hmac: "", //预留的加密信息
-                    params: {}
                 },
                 needDataEmpty: false,
                 async: false, //同步
@@ -54,10 +52,6 @@ $(function() {
             obj.push({
                 url: site_url.shareList_api, // 组合持仓列表
                 data: {
-                    hmac: "", //预留的加密信息
-                    params: { //请求的参数信息
-
-                    }
                 },
                 callbackDone: function(json) {
                     var jsonData = json.data.comShareList;
@@ -76,11 +70,8 @@ $(function() {
             obj.push({
                 url: site_url.combinFundTotalAsset_api, // 组合资产
                 data: {
-                    hmac: "", //预留的加密信息
-                    params: { //请求的参数信息
-                        pageNum: "", //当前页
-                        pagesize: "" //每页显示条数
-                    }
+                    pageNum: "", //当前页
+                    pagesize: "" //每页显示条数
                 },
                 callbackDone: function(json) {
                     // totalAmountMask总资产即当前资产市值
@@ -147,13 +138,10 @@ $(function() {
                 var obj = [{
                     url: site_url.combinFundRedempInfo_api, // 赎回
                     data: {
-                        hmac: "", //预留的加密信息 非必填项
-                        params: {
-                            combCode: that.combCode, //组合编号
-                            tradeAcco: that.tradeAcco, //交易账号
-                            password: $('.payPassword .passInput').val(), //客户支付密码 必填项
-                            combinRedemRatio: that.inputVal, //赎回比例
-                        }, //请求的参数信息
+                        combCode: that.combCode, //组合编号
+                        tradeAcco: that.tradeAcco, //交易账号
+                        password: $('.payPassword .passInput').val(), //客户支付密码 必填项
+                        combinRedemRatio: that.inputVal, //赎回比例
                     },
                     needLogin: true,
                     needDataEmpty: false,

@@ -38,9 +38,6 @@ var tradeList = {
 		var obj = [{
 			url: site_url.user_api,
 			data: {
-				hmac: "", //预留的加密信息     
-				params: {
-				}
 			},
 			needLogin: true,
 			needDataEmpty: false, //需要判断data是否为空
@@ -153,10 +150,7 @@ var tradeList = {
 		var obj = [{
 			url: site_url.combinFundList_api,
 			data: {
-				hmac: "", //预留的加密信息     
-				params: {
-					"riskLevel":riskLevel//客户风险等级 
-				}
+				"riskLevel":riskLevel//客户风险等级 
 			},
 			needLogin: true,
 			needDataEmpty: false, //需要判断data是否为空

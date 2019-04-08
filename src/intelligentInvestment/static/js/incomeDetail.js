@@ -60,11 +60,8 @@
  			var obj = [{
  				url: site_url.incomeList_api,
  				data:{
-				    hmac:"", //预留的加密信息
-				    params:{//请求的参数信息
-				        "pageCurrent":"1",//页码
-				        "pageSize":"50"//每页记录数
-				    }
+			        "pageCurrent":"1",//页码
+			        "pageSize":"50"//每页记录数
 				},
 				needDataEmpty: true,
 				callbackDone: function(json){

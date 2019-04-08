@@ -57,10 +57,7 @@ $(function(){
 			var obj = [{
 				url: site_url.holdChange_api,
 				data:{
-					hmac:"", //预留的加密信息
-					params:{//请求的参数信息
-						"combCode":that.combCode,
-					}
+					"combCode":that.combCode,
 				},
 				needDataEmpty: true,
 				callbackDone: function(json){
@@ -116,9 +113,6 @@ $(function(){
 				obj = [{
 					url: site_url.user_api,
 					data: {
-						hmac: "", //预留的加密信息     
-						params: { //请求的参数信息 
-						}
 					},
 					needLogin: true,
 					async: false, 
@@ -133,10 +127,7 @@ $(function(){
 							var obj = [{
 								url: site_url.combinFundDetails_api,
 								data:{
-									hmac:"", //预留的加密信息
-									params:{//请求的参数信息
-										"groupCode":that.combCode,
-									}
+									"groupCode":that.combCode,
 								},
 								needLogin: true,
 								async: false, 
@@ -219,12 +210,9 @@ $(function(){
 				ajaxObj = [{
 					url: site_url.combinTransfer_api,
 					data: {
-						hmac: "", //预留的加密信息 非必填项
-						params: { //请求的参数信息
-							"combCode": that.combCode, //组合编号
-							"password": passwordVal, //密码
-							"tradeAcco": that.tradeAcco, //普通交易账号
-						}
+						"combCode": that.combCode, //组合编号
+						"password": passwordVal, //密码
+						"tradeAcco": that.tradeAcco, //普通交易账号
 					},
 					needLogin: true,
 					// needDataEmpty: false,

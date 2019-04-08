@@ -43,10 +43,7 @@ $(function() {
             var obj = [{
                 url: site_url.queryCombinFundTradeDetail_api, //组合交易详情(买入/赎回)
                 data: {
-                    hmac: "", //预留的加密信息
-                    params: {
-                        combRequestNo:splitUrl()['combRequestNo'],//组合申请编号
-                    }
+                    combRequestNo:splitUrl()['combRequestNo'],//组合申请编号
                 },
                 needDataEmpty: false,
                 async: false, //同步

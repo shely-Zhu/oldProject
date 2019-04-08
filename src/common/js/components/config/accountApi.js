@@ -19,5 +19,7 @@ module.exports = function() {
     this.incomeList_api = http_url.account_url + '/smartInvestment/incomeList';
     // 恒小智-组合基金持仓中
     this.shareList_api = http_url.account_url + '/smartInvestment/shareList';
+    // 银行卡列表
+    this.smartList_api = http_url.account_url + '/bankCard/smartList';
     
 };
