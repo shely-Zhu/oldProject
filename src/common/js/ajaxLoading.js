@@ -133,7 +133,7 @@ var splitUrl = require('./components/splitUrl.js')();
 
             //发送ajax请求
             var ajaxFunc = function(obj) {
-                document.cookie = "APPSESSIONID=cea5c742-ca4d-40d8-9a31-5570c75aea64;domain="+window.location.hostname+";path=/"
+                document.cookie = "APPSESSIONID=2f979596-1364-4240-8e05-6d6509f256cd;domain="+window.location.hostname+";path=/"
                 var ajax = $.Deferred(); //声明一个deferred对象
 
                 //设置ajax请求的contentType  data数据添加JSON.stringify
