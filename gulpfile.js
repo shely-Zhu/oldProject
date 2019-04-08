@@ -203,12 +203,12 @@ gulp.task('proxyTask', function() {
                 // }),
                 /*开发服务器*/
                 proxy('/wap',  {
-                    target: 'https://wwwnew.htjf4.com',
+                    target: 'https://h5.htjf4.com',
                     changeOrigin:true,
                     secure: false,
                 }),
                 proxy('/web',  {
-                    target: 'https://wwwnew.htjf4.com',
+                    target: 'https://h5.htjf4.com',
                     changeOrigin:true,
                     secure: false,
                 }),

@@ -28,7 +28,6 @@ $(function() {
             var that = this;
 
             var obj = [{
-                parameterType:1,
                 url: site_url.findBannerByPosition_api,
                 data: {
                     adPosition: "appFQHome", //类型（标志位）【请参照备注】 
