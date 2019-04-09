@@ -123,14 +123,13 @@ $(function() {
                 url: site_url.updateApi,
                 data: {
                     hmac: "", //预留的加密信息
-                    params: { //请求的参数信息
-                        imgUrl: json.data.fileName || that.imgUrl, // 封面图片
-                        planName: $("[check=planName]").val(), // 项目名称
-                        kidName: $("[check=kidName]").val(), // 孩子名称
-                        kidGender: $('[check=genderSelect]').attr('num'), // 性别
-                        kidBirthday: $("[check=birthSelect]").html().replace(/[-]/g, ""), //出生日期 8位19900505
-                        kidMessage: $("[check=name]").val() || '请填写', // 成长寄语
-                    }
+                    //请求的参数信息
+                    imgUrl: json.data.fileName || that.imgUrl, // 封面图片
+                    planName: $("[check=planName]").val(), // 项目名称
+                    kidName: $("[check=kidName]").val(), // 孩子名称
+                    kidGender: $('[check=genderSelect]').attr('num'), // 性别
+                    kidBirthday: $("[check=birthSelect]").html().replace(/[-]/g, ""), //出生日期 8位19900505
+                    kidMessage: $("[check=name]").val() || '请填写', // 成长寄语
                 },
                 //async: false,
                 needLogin: true,
@@ -148,9 +147,8 @@ $(function() {
                 url: site_url.removeApi,
                 data: {
                     hmac: "", //预留的加密信息
-                    params: { //请求的参数信息
-                        fileName: that.imgUrl,
-                    },
+                    //请求的参数信息
+                    fileName: that.imgUrl,
                 },
                 //async: false,
                 needLogin: true,

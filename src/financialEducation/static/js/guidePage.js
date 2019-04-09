@@ -33,10 +33,9 @@ $(function() {
                 url: site_url.findBannerByPosition_api,
                 data: {
                     hmac: "", //预留的加密信息
-                    params: { //请求的参数信息
-                        adPosition: "appFQPromotion", //类型（标志位）【请参照备注】 
-                        limitCount: "3", //展示幅数    
-                    }
+                    //请求的参数信息
+                    adPosition: "appFQPromotion", //类型（标志位）【请参照备注】 
+                    limitCount: "3", //展示幅数    
                 },
                 // async: false,
                 // needLogin:true,
