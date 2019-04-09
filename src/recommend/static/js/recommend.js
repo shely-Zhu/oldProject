@@ -126,36 +126,26 @@ $(function() {
             var that = this;
             // 理财师接口传参
             var custBroData = {
-                hmac: "", //预留的加密信息    
-                params: { //请求的参数信息 
-                    broker_account: "", //工号    
-                    type: "0", // 只掉私募接口
-                }
+                brokerAccount: "", //工号    
+                type: "0", // 只掉私募接口  0：私募  1： 公募
             };
             // 微信sdk所需数据的接口参数
             var shareData = {
-                hmac: "", //预留的加密信息    
-                params: { //请求的参数信息 
-                    url: window.location.href
-                }
+                url: window.location.href
             };
             // 查看规则接口参数
             var ruleData = {
-                hmac: "", //预留的加密信息    
-                params: { //请求的参数信息 
-                    category: "appRuleOldAndNew",
-                    curPage: "1",
-                    pageSize: "1"
-                }
+                category: "appRuleOldAndNew",
+                groupType:'',
+                curPage: "1",
+                pageSize: "1"
             };
             // 微信分享接口参数
             var wxData = {
-                hmac: "", //预留的加密信息    
-                params: { //请求的参数信息 
-                    category: "appShareOldAndNew",
-                    curPage: "1",
-                    pageSize: "1"
-                }
+                category: "appShareOldAndNew",
+                groupType:'',
+                curPage: "1",
+                pageSize: "1"
             };
 
             // 如果是微信浏览器
@@ -171,7 +161,7 @@ $(function() {
                 // 请求微信分享内容接口
                 that.generateAjaxObj(site_url.findContentByCategory_api, wxData, function(data) {
                     // 将数据存储起来，待一会生成链接使用，为性能，提前请求接口
-                    var data = data.pageList[0];
+                    var data = data.list[0];
 
                     that.setting.weixinConf = Object.assign(that.setting.weixinConf, Object(data));
                     // 确保3个接口（鉴权，分享内容，分享链接）都请求成功，再设置分享链接
@@ -190,8 +180,8 @@ $(function() {
             })
 
             // 规则说明
-            that.generateAjaxObj(site_url.findContentByCategory_joint_api, ruleData, function(data) {
-                $('.rule_des_cont').html(data.pageList[0] && data.pageList[0].content)
+            that.generateAjaxObj(site_url.findContentByCategory_api, ruleData, function(data) {
+                $('.rule_des_cont').html(data.list[0] && data.list[0].content)
             })
 
             that.getData();
@@ -218,15 +208,15 @@ $(function() {
                 //循环数据
                 $.each(advisor, function(i, el) {
                     that.list.push({
-                        text: '<span>' + el.broker_name + '</span><span>' + el.broker_account + '</span>',
-                        value: el.broker_account
+                        text: '<span>' + el.brokerName + '</span><span>' + el.brokerAccount + '</span>',
+                        value: el.brokerAccount
                     })
                 })
             } else {
                 // 有专属理财师或者只有一位普通理财师
-                $('.manager_show_wrap .manager_show').html(advisor[0].broker_name + advisor[0].broker_account)
+                $('.manager_show_wrap .manager_show').html(advisor[0].brokerName + advisor[0].brokerAccount)
                 that.getElements.manager_show_wrap.show();
-                that.generateShareLink(advisor[0].broker_account);
+                that.generateShareLink(advisor[0].brokerAccount);
             }
         },
         /**

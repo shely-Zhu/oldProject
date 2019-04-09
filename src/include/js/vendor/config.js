@@ -7,6 +7,8 @@
 require('../../../common/js/components/config/windowConfig.js');
 //跳转链接
 var goUrl = require('../../../common/js/components/config/goUrl.js'); 
+// 公共接口
+var webApi = require('../../../common/js/components/config/webApi.js');
 //私募接口
 var pefApi = require('../../../common/js/components/config/pefApi.js');
 // var privateApi = require('../../../common/js/components/config/privateApi.js');
@@ -19,7 +21,6 @@ var contentApi = require('../../../common/js/components/config/contentApi.js');
 var accountApi = require('../../../common/js/components/config/accountApi.js');
 // pc和wap共用文件
 var webApi = require('../../../common/js/components/config/webApi.js');
-//
 // var jointApi = require('../../../common/js/components/config/jointApi.js');
 // app里面私募掉公募接口
 // var crossApi = require('../../../common/js/components/config/crossInterface.js');
@@ -29,15 +30,12 @@ var webApi = require('../../../common/js/components/config/webApi.js');
 window.site_url = { 
 
 	//这里是非公募，非私募，非joint，非跳转的接口和跳转链接配置
-
 	//积分商城登录
   	authorization_api : http_url.oauth_url + '/authorization',
   	//积分商城确认登录
   	confirmLogin_api : http_url.oauth_url + '/confirmLogin',
-  	
   	//我的账户退出成功跳转链接
   	goMyAccount_url : http_url.htjf_url+'/getAuthURL.action?redirect_uri:'+http_url.htjf_url+'/apis/wx/user/toMyAccount.action',
-	
   	//产品查询
   	productSearch_api : 'http://jjs.chtwm.com/prdtq.do',
 },

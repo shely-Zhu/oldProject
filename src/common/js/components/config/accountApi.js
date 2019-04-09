@@ -14,7 +14,6 @@ module.exports = function() {
     this.queryClassification_api = http_url.account_url + '/queryClassification'; //投资者分类审核状态查询
     this.applyForClassification_api = http_url.account_url + '/investor/applyForClassification'; //投资者分类申请
 
-
     // 恒小智-组合收益明细查询
     this.incomeList_api = http_url.account_url + '/smartInvestment/incomeList';
     // 恒小智-组合基金持仓中
@@ -23,5 +22,4 @@ module.exports = function() {
     this.smartList_api = http_url.account_url + '/smartInvestment/smartList';
     // 组合资产详情
     this.totalAssets_api = http_url.account_url + '/smartInvestment/totalAssets';
-    
 };

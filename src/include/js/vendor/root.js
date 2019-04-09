@@ -161,19 +161,19 @@ window.go_url = {
 
 //env=0  -------  前端本地开发
 //此时无论app还是wap，域名都是一样的
-if (env == 0) {
-    originFund_public = mock_server; //前端本地开发时，公募模拟数据请求地址
-    originFund_private = mock_server; //前端本地开发时，私募模拟数据请求地址
-    oauth_url = oauth_local_test; //oauth_url授权登陆  本地不配置接口，直接使用测试环境的
+// if (env == 0) {
+//     originFund_public = mock_server; //前端本地开发时，公募模拟数据请求地址
+//     originFund_private = mock_server; //前端本地开发时，私募模拟数据请求地址
+//     oauth_url = oauth_local_test; //oauth_url授权登陆  本地不配置接口，直接使用测试环境的
 
-    //明泽页面跳转域名
-    //go_url.wap_url = mock_server;
-    go_url.sso_url = mock_server;
-    go_url.apps_url = apps_test; //app没有本地开发环境，所以暂时引入测试域名，开发的时候只要保证域名跳转正确即可
-    go_url.pofapp_url = pofapp_test; //app没有本地开发环境，所以暂时引入测试域名，开发的时候只要保证域名跳转正确即可
-    go_url.oauth_url = oauth_local_test; //oauth_url授权登陆  本地不配置接口，直接使用测试环境的
-    go_url.onlineCustomer_url = onlineCustomer_test; // 在线客服
-}
+//     //明泽页面跳转域名
+//     //go_url.wap_url = mock_server;
+//     go_url.sso_url = mock_server;
+//     go_url.apps_url = apps_test; //app没有本地开发环境，所以暂时引入测试域名，开发的时候只要保证域名跳转正确即可
+//     go_url.pofapp_url = pofapp_test; //app没有本地开发环境，所以暂时引入测试域名，开发的时候只要保证域名跳转正确即可
+//     go_url.oauth_url = oauth_local_test; //oauth_url授权登陆  本地不配置接口，直接使用测试环境的
+//     go_url.onlineCustomer_url = onlineCustomer_test; // 在线客服
+// }
 
 if (!window.currentIsApp) {
     //此时为wap，不是app
@@ -427,15 +427,27 @@ if (!window.currentIsApp) {
  * 因此先声明一个http_url，其中的api_url是公募接口的路径，默认为空
  * 然后根据env的不同，分别设置不同的http_url.api_url
  */
+var linkUrl=''
+// if(env == 0){
+//     linkUrl = mock_server
+// }
+// window.http_url = {
+//     pof_url:linkUrl+ '/wap/pof', //公募接口
+//     pef_url:linkUrl+ '/wap/pef', //私募接口
+//     content_url:linkUrl+ '/wap/content', // 内容接口
+//     account_url:linkUrl+ '/wap/account', // 账户接口
+//     sso_url:go_url.sso_url, // 账户接口
+// }
+
 
 window.http_url = {
+
     pof_url: '/wap/pof', //公募接口
     pef_url: '/wap/pef', //私募接口
     content_url: '/wap/content', // 内容接口
     account_url: '/wap/account', // 账户接口
     web_url: '/web', // 账户接口
 }
-
 
 /*****************************各环境接口格式配置  end**************************************/
 

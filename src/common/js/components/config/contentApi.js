@@ -11,7 +11,7 @@ module.exports = function() {
     
     //获取客户信息
     this.findContentByCategory_api = http_url.content_url + '/frontend/findContentByCategory';
-
     //协议查询
     this.findInvestorClassification_api = http_url.content_url + '/findInvestorClassification';
+
 };

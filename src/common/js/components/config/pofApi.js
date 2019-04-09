@@ -10,7 +10,6 @@
 module.exports = function() {
     this.prvDetail_api = http_url.pof_url + '/queryProductDetail'; //私募详情查询
 
-
     /*------------------------------------------------------恒小智接口  start----------------------------------------------*/
 
     // 组合详情
@@ -54,5 +53,4 @@ module.exports = function() {
     this.combinTransfer_api = http_url.pof_url + '/smartInvestment/combinTransfer';
 
     /*------------------------------------------------------恒小智接口  end----------------------------------------------*/
-   
 };
