@@ -92,7 +92,7 @@ function getLocalIp() {
         var iface = osNet[devName];
         for (var i = 0; i < iface.length; i++) {
             var alias = iface[i];
-            if (alias.family === 'IPv4' && (devName == '本地连接' || devName == '以太网')) {
+            if (alias.family === 'IPv4' && (devName == '本地连接' || devName == '以太网' || devName=="WLAN")) {
                 console.log('当前本地ip：' + alias.address);
                 return alias.address;
             }
@@ -178,41 +178,19 @@ gulp.task('proxyTask', function() {
         port: host.port.wap,
         livereload: true,
         middleware: function(connect, opt) {
-            // return [
-            //     proxy('/wap/pef',  {
-            //         target: 'http://172.16.191.122:8080',
-            //         changeOrigin:true,
-            //         secure: false,
-            //     }),
-            //     proxy('/wap/pof',  {
-            //         target: 'http://172.16.191.210:8080',
-            //         changeOrigin:true,
-            //         secure: false,
-            //     }),
-            //     proxy('/wap/account',  {
-            //         target: 'http://172.16.191.60:8088',
-            //         changeOrigin:true,
-            //         secure: false,
-            //     }),
-            //     proxy('/wap/content',  {
-            //         target: 'http://172.16.191.227:8080',
-            //         changeOrigin:true,
-            //         secure: false,
-            //     }),
-            //     proxy('/web',  {
-            //         target: 'http://172.16.191.122:8080',
-            //         changeOrigin:true,
-            //         secure: false,
-            //     }),
-            // ]
             return [
                 proxy('/wap',  {
-                    target: 'https://wwwnew.htjf4.com',
+                    target: 'https://h5.htjf4.com',
                     changeOrigin:true,
                     secure: false,
                 }),
                 proxy('/web',  {
-                    target: 'https://wwwnew.htjf4.com',
+                    target: 'https://h5.htjf4.com',
+                    changeOrigin:true,
+                    secure: false,
+                }),
+                proxy('/app',  {
+                    target: 'https://app.htjf4.com/',
                     changeOrigin:true,
                     secure: false,
                 }),
@@ -229,7 +207,17 @@ gulp.task('mockProxy', function() {
         middleware: function(connect, opt) {
             return [
                 proxy('/wap',  {
-                    target: 'http://'+localIp+':8088',
+                    target: 'http://'+localIp + ':8088',
+                    changeOrigin:true,
+                    secure: false,
+                }),
+                proxy('/web',  {
+                    target: 'http://'+localIp + ':8088',
+                    changeOrigin:true,
+                    secure: false,
+                }),
+                proxy('/app',  {
+                    target: 'https://app.htjf4.com/',
                     changeOrigin:true,
                     secure: false,
                 }),
@@ -238,26 +226,7 @@ gulp.task('mockProxy', function() {
     });
 })
 
-// gulp.task('proxyTask', function() {
-//     connect.server({
-//         root: options.path,
-//         port: 8888,
-//         livereload: true,
-//         middleware: function(connect, opt) {
-//             return [
-//                 proxy('/api',  {
-//                     target: 'http://localhost:8080',
-//                     changeOrigin:true
-//                 }),
-//                 proxy('/otherServer', {
-//                     target: 'http://IP:Port',
-//                     changeOrigin:true
-//                 })
-//             ]
-//         }
 
-//     });
-// });
 
 //zip做服务器部署的时候讲我们打包出的文件压缩成一个zip包
 gulp.task('zip', ['initialTask'], function() {
@@ -272,7 +241,7 @@ if (options.env === '0' ) { //当开发环境的时候构建命令执行mock服�
 
     console.log("开发环境执行mock模拟数据服务器");
 
-    gulp.task('default', ['initialTask', 'mockProxy', 'mock'])
+    gulp.task('default', ['initialTask','mock', 'mockProxy'])
 
 } else if (options.env === '5'){
     gulp.task('default', ['initialTask', 'proxyTask'])
