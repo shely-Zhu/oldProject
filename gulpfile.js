@@ -207,12 +207,12 @@ gulp.task('proxyTask', function() {
             // ]
             return [
                 proxy('/wap',  {
-                    target: 'https://wwwnew.htjf4.com',
+                    target: 'https://h5.htjf4.com',
                     changeOrigin:true,
                     secure: false,
                 }),
                 proxy('/web',  {
-                    target: 'https://wwwnew.htjf4.com',
+                    target: 'https://h5.htjf4.com',
                     changeOrigin:true,
                     secure: false,
                 }),

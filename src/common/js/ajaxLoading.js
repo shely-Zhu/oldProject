@@ -133,7 +133,7 @@ var splitUrl = require('./components/splitUrl.js')();
 
             //发送ajax请求
             var ajaxFunc = function(obj) {
-                document.cookie = "APPSESSIONID=cea5c742-ca4d-40d8-9a31-5570c75aea64;domain="+window.location.hostname+";path=/"
+                document.cookie = "APPSESSIONID=3c20905e-11d1-41f8-b664-1db50f3e6107;domain="+window.location.hostname+";path=/"
                 var ajax = $.Deferred(); //声明一个deferred对象
 
                 //设置ajax请求的contentType  data数据添加JSON.stringify
@@ -241,64 +241,48 @@ var splitUrl = require('./components/splitUrl.js')();
                     ajax = $.ajax(ajaxJson);
                 }
                 ajax.done(function(data) {
-
-                    //如果是app，需要做以下处理
-                    if (window.currentIsApp) {
-
-                        if (obj.needLogin && data.code == 'CF0004') {
-                            if (obj.loginNotJump) {
-                                //如果未登录，且不需要跳转
-                                obj.callbackLoginFunc();
-                                return false;
-                            } else {
-                                $('#script_login').attr('src', 'appHref://appLogOut');
-                                return false;
-                            }
-                        }
-                    } else {
-                        if (obj.needLogin) {
-                            if (obj.loginNotJump && data.data.isLogin == '2') { //如果未登录，且不需要跳转,sso接口未登录code也是cf0004,需要通过islogin判断
-                                //未登录状态下，不跳转页面，执行对应函数
-                                obj.callbackLoginFunc(data);
-                                return false;
-
-                            } else { //未登录，需要跳转
-
-                                //微信判断登录状态
-                                if (data.code == 'WF0010') {
-                                    tipAction(data.msg, function() {
-                                        //跳转到微信授权登陆页
-                                        window.location.href = go_url.wx_login_url + window.location.origin + window.location.pathname;
-                                    })
-                                    return false;
-                                } else if (obj.dataType == 'jsonp' && data.data.isLogin == '2') {
-                                    // sso接口未登录，需跳转
-                                    manualTriggerLogin.locationFunc(data);
-                                    //防止window.location.href在执行完请求里的所有代码之后再跳转
-                                    throw 'jump login';
-                                    return false;
-                                } else if (data.code == 'CF0004') {
-                                    // 其他黑名单接口未登录，跳转data.data
-                                    manualTriggerLogin.locationFunc(data);
-                                    //防止window.location.href在执行完请求里的所有代码之后再跳转
-                                    throw 'jump login';
-                                    return false;
-                                }
-                            }
-                        }
-
-                        //判断是否风险测评
-                        //if( obj.needRisk && data.code == 'RE0004'){
-                        if (data.code == 'RE0004') {
-                            //执行风险测评的回调函数
-                            //obj.callbackRisk(data);
-                            tipAction('风险测评过期', function() {
-                                //跳转到风险测评页，使用接口返回的链接
-                                window.location.href = window.location.origin + data.data;
-                            })
+                    if (obj.needLogin) {
+                        if (obj.loginNotJump && data.data.isLogin == '2') { //如果未登录，且不需要跳转,sso接口未登录code也是cf0004,需要通过islogin判断
+                            //未登录状态下，不跳转页面，执行对应函数
+                            obj.callbackLoginFunc(data);
                             return false;
 
+                        } else { //未登录，需要跳转
+
+                            //微信判断登录状态
+                            if (data.code == 'WF0010') {
+                                tipAction(data.msg, function() {
+                                    //跳转到微信授权登陆页
+                                    window.location.href = go_url.wx_login_url + window.location.origin + window.location.pathname;
+                                })
+                                return false;
+                            } else if (obj.dataType == 'jsonp' && data.data.isLogin == '2') {
+                                // sso接口未登录，需跳转
+                                manualTriggerLogin.locationFunc(data);
+                                //防止window.location.href在执行完请求里的所有代码之后再跳转
+                                throw 'jump login';
+                                return false;
+                            } else if (data.status == '4007') {
+                                // 其他黑名单接口未登录，跳转data.data
+                                manualTriggerLogin.locationFunc(data);
+                                //防止window.location.href在执行完请求里的所有代码之后再跳转
+                                throw 'jump login';
+                                return false;
+                            }
                         }
+                    }
+
+                    //判断是否风险测评
+                    //if( obj.needRisk && data.code == 'RE0004'){
+                    if (data.code == 'RE0004') {
+                        //执行风险测评的回调函数
+                        //obj.callbackRisk(data);
+                        tipAction('风险测评过期', function() {
+                            //跳转到风险测评页，使用接口返回的链接
+                            window.location.href = window.location.origin + data.data;
+                        })
+                        return false;
+
                     }
 
                     if (data.status == 1) {
@@ -332,7 +316,6 @@ var splitUrl = require('./components/splitUrl.js')();
                         obj.callbackDone(data);
                     }
                 })
-
                 //ajax错误的情况
                 ajax.fail(function(data, result, msg) {
                     obj.callbackFail(data);
