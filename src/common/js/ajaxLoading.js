@@ -96,7 +96,7 @@ var splitUrl = require('./components/splitUrl.js')();
                 type: 'POST',
                 dataType: 'json',
                 async: true, //true-异步  false-同步
-                contentTypeSearch: true, //false: application/json,入参data为json字符串  , true:  application/x-www-form-urlencoded ，入参data为json对象
+                contentTypeSearch: false, //false: application/json,入参data为json字符串  , true:  application/x-www-form-urlencoded ，入参data为json对象
                 //因wap中部分页面黑名单接口没有加needLogin=true参数，导致股份首次跳明泽时，
                 //（明泽首次跳转股份也可能有此问题）
                 //因本地没有cookie，接口会返回code为CF0004，又没有设置此参数，不判断是否CF0004，
@@ -133,7 +133,7 @@ var splitUrl = require('./components/splitUrl.js')();
 
             //发送ajax请求
             var ajaxFunc = function(obj) {
-                // document.cookie = "APPSESSIONID=7f49fe11-9f88-41e3-84fc-76d8ec5ad981;domain="+window.location.hostname+";path=/"
+                // document.cookie = "APPSESSIONID=cb13107f-232e-4723-9930-ec3c53874797;domain="+window.location.hostname+";path=/"
                 var ajax = $.Deferred(); //声明一个deferred对象
 
                 //设置ajax请求的contentType  data数据添加JSON.stringify

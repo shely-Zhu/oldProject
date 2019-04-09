@@ -88,6 +88,7 @@ $(function() {
                     // netValueEndDate: "" // 查询结束日期(非必须)
                 },
                 needDataEmpty: false,
+                contentTypeSearch: true,
                 callbackDone: function(json) {
 
                     that.jsonData = json.data;

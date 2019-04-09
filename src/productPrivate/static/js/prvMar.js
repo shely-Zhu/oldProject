@@ -56,6 +56,7 @@ var prvMar = {
             },
             needLogin: true, //需要判断是否登陆
             async: false,
+            contentTypeSearch: true,
             needDataEmpty: true, //需要判断data是否为空
             callbackDone: function(json) {
                 var labelArr = json.data;
@@ -170,6 +171,7 @@ var prvMar = {
             },
             needLogin: true,
             needDataEmpty: true,
+            contentTypeSearch: true,
             async: false,
             callbackDone: function(json) {
                 var json = json.data;

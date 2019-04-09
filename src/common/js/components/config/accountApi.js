@@ -11,8 +11,6 @@ module.exports = function() {
     
     //获取客户信息
     
-    this.queryClassification_api = http_url.account_url + '/queryClassification'; //投资者分类审核状态查询
-    this.applyForClassification_api = http_url.account_url + '/investor/applyForClassification'; //投资者分类申请
-    this.queryFreezeStatus_api = http_url.account_url + '/freezeStatus/queryFreezeStatus'; //账户冻结
+    // this.queryClassification_api = http_url.account_url + '/queryClassification'; //投资者分类审核状态查询
     
 };

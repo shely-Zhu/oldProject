@@ -95,6 +95,7 @@ var prvDetail = {
                  projectId: arg["fundCode"] // 产品代码
             },
             async: false,
+            contentTypeSearch: true,
             needLogin: true,
             callbackDone: function(data) {
                 var json = data.data,
@@ -196,15 +197,11 @@ var prvDetail = {
         }, {
             url: site_url.custBro_api,
             data: {
-                hmac: "", //预留的加密信息    
-                params: { //请求的参数信息 
-                    brokerAccount: "", //工号    
-                    type: "0",
-                    isCertificate: "Y", //是否通过基金从业考试 Y：通过 N：未通过（新增）
-                }
+                brokerAccount: "", //工号    
+                type: "0",
+                isCertificate: "Y", //是否通过基金从业考试 Y：通过 N：未通过（新增）
             },
             needLogin: true,
-            contentTypeSearch: false,
             //needEmptyData:true,
             callbackDone: function(data) {
                 var json = data.data;
@@ -236,7 +233,6 @@ var prvDetail = {
                 limitNum: "1" // 限制数（只显示N张）
             },
             needLogin: true,
-            contentTypeSearch: false,
             //needEmptyData:true,
             callbackDone: function(data) {
                 var json = data.data[0];
@@ -284,6 +280,7 @@ var prvDetail = {
                     projectId: arg["fundCode"] // 产品代码
                 },
                 needLogin: true,
+                contentTypeSearch: true,
                 callbackDone: function(data) {
                     var json = data.data;
 
@@ -325,7 +322,6 @@ var prvDetail = {
                     limitNum: "1", // 
                 },
                 needLogin: true,
-                contentTypeSearch: false,
                 callbackDone: function(data) {
                     var json = data.data[0],
                         features = json.features;
@@ -363,6 +359,7 @@ var prvDetail = {
                 // unitNetValueEndDate: "" // 查询结束日期   
             },
             needDataEmpty: true,
+            contentTypeSearch: true,
             async: false,
             callbackDone: function(json) {
                 //请求成功
@@ -540,14 +537,9 @@ var prvDetail = {
         var obj = [{
             url: site_url.user_api,
             data: {
-                hmac: "", //预留的加密信息     
-                params: {
-
-                }
             },
             needLogin: true,
             async: false,
-            contentTypeSearch: false,
             needDataEmpty: false, //需要判断data是否为空
             callbackDone: function(json) {
                 var jsonData = json.data,
@@ -744,13 +736,11 @@ var prvDetail = {
                         var riskMarObj = [{
                             url: site_url.prvReource_api, // 产品材料接口 queryReourceList
                             data: {
-                                hmac: "", //预留的加密信息
-                                params: { //请求的参数信息
-                                    projectId: arg["fundCode"], // 产品代码
-                                    fileType: fileType
-                                }
+                                projectId: arg["fundCode"], // 产品代码
+                                fileType: fileType    
                             },
                             needLogin: true,
+                            contentTypeSearch: true,
                             async: false,
                             needDataEmpty: false, //需要判断data是否为空
                             callbackDone: function(data) {
@@ -802,10 +792,7 @@ var prvDetail = {
                         var investObj = [{
                             url: site_url.queryClassification_api, //investor/queryClassification.action
                             data: {
-                                hmac: "", //预留的加密信息     
-                                params: {
-
-                                }
+                            
                             },
                             needLogin: true,
                             async: false,
@@ -924,11 +911,8 @@ var prvDetail = {
                     var applyObj = [{
                         url: site_url.applyForClassification_api,
                         data: {
-                            hmac: "", //预留的加密信息      
-                            params: { //请求的参数信息  
-                                investType: "0", //投资转换类型： 0普通投资者申请  1 专业投资者申请  2普转专  3专转普 
-                                attacmentsId: [], //所有附件id 
-                            }
+                            investType: "0", //投资转换类型： 0普通投资者申请  1 专业投资者申请  2普转专  3专转普 
+                            attacmentsId: [], //所有附件id 
                         },
                         async: false,
                         needLogin: true,

@@ -20,5 +20,8 @@ module.exports = function() {
     this.prvReource_api = http_url.web_url + '/pef/queryReourceList'; //产品材料接口
 
     this.user_api = http_url.web_url + '/account/getUserInfo'; //用户信息查询
-    this.custBro_api = http_url.web_url + '/account/broker/custBroRelQuery'; //理财师查询与客户关系接口
+    this.custBro_api = http_url.web_url + '/account/custBroRelQuery'; //理财师查询与客户关系接口
+    this.queryFreezeStatus_api = http_url.web_url + '/account/freezeStatus/queryFreezeStatus'; //账户冻结
+    this.queryClassification_api = http_url.web_url + '/account/queryClassification'; //投资者分类审核状态查询
+    this.applyForClassification_api = http_url.web_url + '/account/investor/applyForClassification'; //投资者分类申请
 };
