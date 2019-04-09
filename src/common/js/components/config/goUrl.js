@@ -6,7 +6,7 @@
 
 module.exports = function() {
 
-    this.login_html_url = go_url.no_url + '/login.action';  //手动触发登录,需将redirectUrl值传回去
+    this.login_html_url = go_url.no_url + '/login';  //手动触发登录,需将redirectUrl值传回去
     this.logOut_html_url = go_url.no_url +'/logout.action';  //退出登录
     this.registerUrl = go_url.cft_url + '/user/views/register.html';  //注册页面
 
