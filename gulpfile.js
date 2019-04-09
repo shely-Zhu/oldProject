@@ -206,6 +206,12 @@ gulp.task('proxyTask', function() {
                 //     changeOrigin:true,
                 //     secure: false,
                 // }),
+                // /*管清泉 */
+                // proxy('/web',  {
+                //     target: 'http://172.16.191.225:8080',
+                //     changeOrigin:true,
+                //     secure: false,
+                // }),
                 /**开发服务器 */
                 proxy('/wap',  {
                     target: 'https://h5.htjf4.com',

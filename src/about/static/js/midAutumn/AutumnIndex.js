@@ -30,11 +30,10 @@ $(function() {
 				url: site_url.findBannerByPosition_api,
 				data: {
 					hmac:"", //预留的加密信息   非必填项
-					params:{ //请求的参数信息  非必填项
-						adPosition :"AutumnIndexAPP",//类型（标志位）【请参照备注】
-						limitCount:"8", //展示条数
-						groupType:"bannerCategoryGF",
-					}
+					//请求的参数信息  非必填项
+					adPosition :"AutumnIndexAPP",//类型（标志位）【请参照备注】
+					limitCount:"8", //展示条数
+					groupType:"bannerCategoryGF",
 				},
 				// needCrossDomain: true,
 				needLoading: true,
