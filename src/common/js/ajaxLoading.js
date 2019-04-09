@@ -316,6 +316,8 @@ var splitUrl = require('./components/splitUrl.js')();
                         obj.callbackDone(data);
                     }
                 })
+                
+
                 //ajax错误的情况
                 ajax.fail(function(data, result, msg) {
                     obj.callbackFail(data);
