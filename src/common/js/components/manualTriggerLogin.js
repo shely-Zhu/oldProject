@@ -27,7 +27,7 @@ var manualTriggerLogin = {
         return false;
     },
     locationFunc: function(data) {
-        if (data && typeof(data.data) == 'string') {
+        if (data && typeof(data.data) == 'string' && (data.data!='')) {
             // 调用黑名单接口，直接跳转data.data
             window.location.href = data.data;
         } else {
