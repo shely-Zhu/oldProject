@@ -24,7 +24,7 @@ module.exports = function() {
     this.queryReourceLabels_api = http_url.joint_url +"/product/details/queryReourceLabels.action"; //获取私募产品材料标签
 
     //老带新微信
-    this.share_api = http_url.joint_url + '/weixin/share.action';
+    // this.share_api = http_url.joint_url + '/weixin/share.action';
 
     //举贤荐才专题
     this.talentRecommend_api = http_url.joint_url + "/account/topicality/talentRecommend.action";
@@ -42,11 +42,11 @@ module.exports = function() {
     this.RRById_api = http_url.joint_url +"/ginkgo/RRById.action";//这个接口挪到了公募的api下面了，可以去publicApi中找
 
     //抽奖活动专题
-    this.award_api = http_url.joint_url + "/activity/querytimes.action"; // 抽奖次数查询
-    this.queryallrecordlist_api = http_url.joint_url + "/activity/queryallrecordlist.action"; // 抽奖流水接口查询
-    this.queryrecord_api = http_url.joint_url + "/activity/queryrecord.action"; // 我的抽奖记录查询
-    this.drawintegral_api = http_url.joint_url + "/activity/drawintegral.action"; // 抽奖借口
-    this.gettoken_api = http_url.joint_url + "/activity/gettoken.action"; //获取唯一的token值
+    //this.award_api = http_url.joint_url + "/activity/querytimes.action"; // 抽奖次数查询
+    //this.queryallrecordlist_api = http_url.joint_url + "/activity/queryallrecordlist.action"; // 抽奖流水接口查询
+    //this.queryrecord_api = http_url.joint_url + "/activity/queryrecord.action"; // 我的抽奖记录查询
+    //this.drawintegral_api = http_url.joint_url + "/activity/drawintegral.action"; // 抽奖借口
+    //this.gettoken_api = http_url.joint_url + "/activity/gettoken.action"; //获取唯一的token值
 
     
     // 附件上传（暂时用于投资者分类、合格投资者、可多文件上传）

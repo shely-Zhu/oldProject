@@ -63,10 +63,8 @@ $(function(){
 			{  //获取微信sdk所需数据
 				url: site_url.share_api,
 				data: {   
-				 	hmac:"", //预留的加密信息    
-				  	params:{//请求的参数信息 
-						url: window.location.href                                  
-				}},    
+					url: window.location.href                                  
+				},    
 				needLogin: true,
 				needDataEmpty: false,
 				callbackDone: function(jsonData){

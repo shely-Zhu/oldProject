@@ -96,10 +96,7 @@ $(function() {
             var obj = [{ // 判断是否已认证
                 url: site_url.oldRecommendNew_api,
                 data: {
-                    hmac: "", //预留的加密信息    
-                    params: { //请求的参数信息 
-                        brokerAccount: '' //理财师工号
-                    }
+                    brokerAccount: '' //理财师工号
                 },
                 needLogin: true,
                 // needDataEmpty: true,
@@ -161,7 +158,7 @@ $(function() {
                 // 请求微信分享内容接口
                 that.generateAjaxObj(site_url.findContentByCategory_api, wxData, function(data) {
                     // 将数据存储起来，待一会生成链接使用，为性能，提前请求接口
-                    var data = data.list[0];
+                    var data = data.pageList[0];
 
                     that.setting.weixinConf = Object.assign(that.setting.weixinConf, Object(data));
                     // 确保3个接口（鉴权，分享内容，分享链接）都请求成功，再设置分享链接
@@ -181,7 +178,7 @@ $(function() {
 
             // 规则说明
             that.generateAjaxObj(site_url.findContentByCategory_api, ruleData, function(data) {
-                $('.rule_des_cont').html(data.list[0] && data.list[0].content)
+                $('.rule_des_cont').html(data.pageList[0] && data.pageList[0].content)
             })
 
             that.getData();
@@ -231,10 +228,7 @@ $(function() {
             that.setting.ajaxArr.push({
                 url: site_url.oldRecommendNew_api,
                 data: {
-                    hmac: "", //预留的加密信息     
-                    params: { //请求的参数信息 
-                        brokerAccount: num || '' //理财师工号
-                    }
+                    brokerAccount: num || '' //理财师工号
                 },
                 async: false, // 同步请求
                 needLogin: true,
