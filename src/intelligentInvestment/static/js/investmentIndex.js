@@ -125,6 +125,7 @@ var tradeList = {
 				pageSize:"1",//每页显示条数     
 			},
 			needLogin: true,
+			contentTypeSearch:true,
 			needDataEmpty: false, //需要判断data是否为空
 			async: false, 
 			callbackDone: function(json){
