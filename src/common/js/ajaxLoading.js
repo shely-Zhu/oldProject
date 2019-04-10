@@ -143,14 +143,12 @@ var splitUrl = require('./components/splitUrl.js')();
                     // data = env != 0 && !obj.formData ? JSON.stringify(obj.data) : obj.data;
                     data = JSON.stringify(obj.data);
                     // data = obj.data;
-                
                 if(obj.contentTypeSearch){
                     contentType='application/x-www-form-urlencoded; charset=UTF-8';
                     data=obj.data;
                 }else{
                     contentType='application/json; charset=UTF-8';
                 }
-
                 if (obj.formData) {
                     //使用formData格式上传
                     var ajaxJson = {

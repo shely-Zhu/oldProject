@@ -1,11 +1,6 @@
 /*
-<<<<<<< HEAD
 * @page: pc wap 端共用接口
 * @Author: chengqingqing
-=======
-* @page: 内容相关接口
-* @Author: songxiaoyu
->>>>>>> feature/recommend
 * @Date:   2019-03-28 
 * @Last Modified by:   songxiaoyu
 * @description:

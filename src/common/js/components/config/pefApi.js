@@ -18,6 +18,6 @@ module.exports = function() {
     this.prvReource_api = http_url.pef_url + 'queryReourceList'; //产品材料接口
     //老带新
     this.oldRecommendNew_api = http_url.pef_url + '/user/oldRecommendNew.action';
-     //老带新微信
+    //老带新微信
     this.share_api = http_url.joint_url + '/weixin/share.action';
 };

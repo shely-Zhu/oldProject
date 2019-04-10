@@ -21,6 +21,7 @@ var contentApi = require('../../../common/js/components/config/contentApi.js');
 var accountApi = require('../../../common/js/components/config/accountApi.js');
 // pc和wap共用文件
 var webApi = require('../../../common/js/components/config/webApi.js');
+
 // var jointApi = require('../../../common/js/components/config/jointApi.js');
 // app里面私募掉公募接口
 // var crossApi = require('../../../common/js/components/config/crossInterface.js');

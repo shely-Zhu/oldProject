@@ -71,7 +71,7 @@ module.exports = function(callback, imgDefault) {
             //可选择的类型
             fileSizeLimit: 1024 * 1024 * 5, //5M
             formData: {
-                pictureSource: "CSJY" //提交到服务器的参数-财商教育
+                pictureSource: "10" //提交到服务器的参数-财商教育,由以前的CSJY 改为10
             },
             uploadUrl: site_url.uploadApi, //上传路径
             fileVal: 'file',

@@ -19,7 +19,6 @@ var pOver = Mock.mock({
 		"linkUrl": "",//链接URL（跳转URL）
 		"isShare": "",//是否可分享 0否 1是
 		"description": "",//描述
-
 		},{
 		"id": "2",  //主键ID
 		"imgUrl":"/about/static/img/midAutumn/public_02.jpg",//图片URL

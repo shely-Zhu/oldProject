@@ -24,5 +24,7 @@ module.exports = function() {
     this.smartList_api = http_url.account_url + '/smartInvestment/smartList';
     // 组合资产详情
     this.totalAssets_api = http_url.account_url + '/smartInvestment/totalAssets';
-
+    
+    //获取客户信息
+    this.user_api = http_url.account_url + '/getUserInfo';
 };
