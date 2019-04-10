@@ -96,10 +96,7 @@ $(function() {
             var obj = [{ // 判断是否已认证
                 url: site_url.oldRecommendNew_api,
                 data: {
-                    hmac: "", //预留的加密信息    
-                    params: { //请求的参数信息 
-                        brokerAccount: '' //理财师工号
-                    }
+                    empNo: '' //理财师工号
                 },
                 needLogin: true,
                 // needDataEmpty: true,
@@ -115,7 +112,7 @@ $(function() {
                     }
                 },
                 callbackFail: function(json) {
-                    tipAction(json.msg);
+                    tipAction(json.message);
                 }
             }];
             $.ajaxLoading(obj);
@@ -126,8 +123,9 @@ $(function() {
             var that = this;
             // 理财师接口传参
             var custBroData = {
-                brokerAccount: "", //工号    
-                type: "0", // 只掉私募接口  0：私募  1： 公募
+                empNo: "", //工号    
+                fundType: "0", // 只掉私募接口  0：私募  1： 公募
+                isPass:'', //是否通过基金从业考试 Y：通过 N：未通过
             };
             // 微信sdk所需数据的接口参数
             var shareData = {
@@ -161,12 +159,12 @@ $(function() {
                 // 请求微信分享内容接口
                 that.generateAjaxObj(site_url.findContentByCategory_api, wxData, function(data) {
                     // 将数据存储起来，待一会生成链接使用，为性能，提前请求接口
-                    var data = data.list[0];
+                    var data = data.pageList[0];
 
                     that.setting.weixinConf = Object.assign(that.setting.weixinConf, Object(data));
                     // 确保3个接口（鉴权，分享内容，分享链接）都请求成功，再设置分享链接
                     that.asyncAll();
-                })
+                },function(){},true)
             }
 
             // 获取理财师的接口
@@ -181,8 +179,8 @@ $(function() {
 
             // 规则说明
             that.generateAjaxObj(site_url.findContentByCategory_api, ruleData, function(data) {
-                $('.rule_des_cont').html(data.list[0] && data.list[0].content)
-            })
+                $('.rule_des_cont').html(data.pageList[0] && data.pageList[0].content)
+            },function(){},true)
 
             that.getData();
         },
@@ -208,15 +206,15 @@ $(function() {
                 //循环数据
                 $.each(advisor, function(i, el) {
                     that.list.push({
-                        text: '<span>' + el.brokerName + '</span><span>' + el.brokerAccount + '</span>',
-                        value: el.brokerAccount
+                        text: '<span>' + el.codeName + '</span><span>' + el.empNo + '</span>',
+                        value: el.empNo
                     })
                 })
             } else {
                 // 有专属理财师或者只有一位普通理财师
-                $('.manager_show_wrap .manager_show').html(advisor[0].brokerName + advisor[0].brokerAccount)
+                $('.manager_show_wrap .manager_show').html(advisor[0].codeName + advisor[0].empNo)
                 that.getElements.manager_show_wrap.show();
-                that.generateShareLink(advisor[0].brokerAccount);
+                that.generateShareLink(advisor[0].empNo);
             }
         },
         /**
@@ -231,10 +229,7 @@ $(function() {
             that.setting.ajaxArr.push({
                 url: site_url.oldRecommendNew_api,
                 data: {
-                    hmac: "", //预留的加密信息     
-                    params: { //请求的参数信息 
-                        brokerAccount: num || '' //理财师工号
-                    }
+                    empNo: num || '' //理财师工号
                 },
                 async: false, // 同步请求
                 needLogin: true,
@@ -274,7 +269,7 @@ $(function() {
                 },
                 callbackFail: function(json) {
                     $this.removeClass('disable').removeAttr('disabled');
-                    tipAction(json.msg);
+                    tipAction(json.message);
                 }
             })
             that.getData();
@@ -442,13 +437,13 @@ $(function() {
             })
 
             //点击隐藏弹层
-            $('.shareMask').on('click', function(e) {
-                if (!$(e.target).hasClass('shareWrap')) {
-                    $('.shareMask').removeClass('show');
-                    $('.closeElastic').show();
-                    $('.btnButton .txt').removeClass('disable').removeAttr('disabled');
-                }
-            })
+            // $('.shareMask').on('click', function(e) {
+            //     if (!$(e.target).hasClass('shareWrap')) {
+            //         $('.shareMask').removeClass('show');
+            //         $('.closeElastic').show();
+            //         $('.btnButton .txt').removeClass('disable').removeAttr('disabled');
+            //     }
+            // })
 
             // 关闭所有弹层
             $('.closeElastic').on('click', function(e) {
@@ -472,7 +467,7 @@ $(function() {
          * @param  {[type]}   sync       [同步请求]
          * @param  {Function} callback   [回掉函数--处理数据]
          */
-        generateAjaxObj: function(url, data, callback, callbackFail) {
+        generateAjaxObj: function(url, data, callback, callbackFail,contentTypeSearch) {
             var that = this;
 
             that.setting.ajaxArr.push({
@@ -481,6 +476,7 @@ $(function() {
                 // async: false,
                 needLogin: true,
                 needDataEmpty: true,
+                contentTypeSearch: contentTypeSearch,
                 callbackDone: function(json) {
                     var jsonData = json.data;
                     //隐藏loading
@@ -489,7 +485,7 @@ $(function() {
                 },
                 callbackFail: function(json) {
                     // that.getElements.listLoading.hide();
-                    tipAction(json.msg);
+                    tipAction(json.message);
                     callbackFail && callbackFail();
                 },
             });

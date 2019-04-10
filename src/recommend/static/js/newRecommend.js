@@ -57,16 +57,14 @@ $(function(){
 					$('.btn_wrap img').attr('src',json.data[2].imgUrl);
 				},
 				callbackFail: function( json ){
-					tipAction( json.msg );
+					tipAction( json.message );
 				}
 			},
 			{  //获取微信sdk所需数据
 				url: site_url.share_api,
 				data: {   
-				 	hmac:"", //预留的加密信息    
-				  	params:{//请求的参数信息 
-						url: window.location.href                                  
-				}},    
+					url: window.location.href                                  
+				},    
 				needLogin: true,
 				needDataEmpty: false,
 				callbackDone: function(jsonData){
@@ -139,7 +137,7 @@ $(function(){
 				},
 				callbackFail: function( jsonData){
 					$('.btnButton .mui-btn').removeClass('disable').removeAttr('disabled');
-					tipAction( jsonData.msg );
+					tipAction( jsonData.message );
 				}
 			}];
 			$.ajaxLoading(obj);

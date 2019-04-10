@@ -9,14 +9,18 @@
 //获取当前页面地址
 module.exports = function() {
     /*-------------------账户相关------------------------------*/
+    //检查是否登录,sso后换成jsonp
+    this.checkUserInfo_api = http_url.web_url + '/account/frontend/isLogin';
     //获取客户信息
     this.user_api = http_url.web_url + '/account/getUserInfo';
     // 客户冻结状态查询
     this.queryFreezeStatus_api = http_url.web_url + '/account/freezeStatus/queryFreezeStatus';
-    this.custBro_api = http_url.web_url + '/account/broker/custBroRelQuery'; //理财师查询与客户关系接口
+    this.custBro_api = http_url.web_url + '/account/custBroRelQuery'; //理财师查询与客户关系接口
     this.queryFreezeStatus_api = http_url.web_url + '/account/freezeStatus/queryFreezeStatus'; //账户冻结
     this.queryClassification_api = http_url.web_url + '/account/queryClassification'; //投资者分类审核状态查询
     this.applyForClassification_api = http_url.web_url + '/account/investor/applyForClassification'; //投资者分类申请
+    this.share_api = http_url.web_url + '/account/frontend/weixin/share';  //老带新微信分享
+    this.oldRecommendNew_api = http_url.web_url + '/account/oldRecommendNew'; //    微信公众号获取参数
 
     
     /*-------------------账户相关 end ------------------------------*/
@@ -37,6 +41,8 @@ module.exports = function() {
     // 内容管理接口
     this.findContentByCategory_api = http_url.web_url + '/content/frontend/findContentByCategory'; // 内容管理接口
     
+    this.findContentByCategory_api = http_url.web_url + '/content/frontend/findContentByCategory'; // 内容管理接口
+    
     /*-------------------内容相关 end ------------------------------*/
 
 
@@ -52,22 +58,22 @@ module.exports = function() {
 
     /*-------------------公募相关------------------------------*/
     /*-------------------公募相关 end ------------------------------*/
-=======
-* @page: 公募相关接口
-* @Author: chengqingqing
-* @Date:   2019-03-28 
-* @Last Modified by:   chengqingqing
-* @description:
-*/
 
 
-module.exports = function() {
-    // app内检测登录状态接口
-    this.checkLogin_api = http_url.web_url + '/account/frontend/isLogin';
-    this.user_api = http_url.web_url + '/account/getUserInfo'; //用户信息查询
-     // 首页
-     this.findBannerByPosition_api = http_url.web_url + '/content/frontend/findBannerByPosition';
-     
+    /*-------------------营销相关  ------------------------------*/
+    this.award_api = http_url.web_url + "/marketing/getAwardTimes"; // 抽奖次数查询
+    this.getToken_api = http_url.web_url + "/marketing/getToken"; //获取唯一的token值
+    this.getAwardRecords_api = http_url.web_url + "/marketing/getAwardRecords"; // 我的抽奖记录查询
+    this.getDrawRecords_api = http_url.web_url + "/marketing/frontend/getDrawRecords"; // 抽奖流水接口查询
+    this.draw_api = http_url.web_url + "/marketing/draw"; // 抽奖借口
+
+    /*-------------------营销相关 end ------------------------------*/
+
+
    
->>>>>>> 741cb20d59e0cce9aab32d3252ce578ec2fe4ae8
+    
+   
+
+    
+    
 };

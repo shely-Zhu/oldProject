@@ -8,7 +8,7 @@ var pathname = window.location.href;
 
 module.exports = function() {
     //检查是否登录,sso后换成jsonp
-    this.checkUserInfo_api = http_url.sso_url + '/checkUserInfo.action';
+    //this.checkUserInfo_api = http_url.sso_url + '/checkUserInfo.action';
     // app内检测登录状态接口
     // this.checkLogin_api = http_url.pef_url + '/isLogin.action';
 
