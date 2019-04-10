@@ -52,13 +52,11 @@ var prvMar = {
         var obj = [{
             url: site_url.queryReourceLabels_api, //私募产品标签 queryReourceLabels.action
             data: {
-                hmac: "", //预留的加密信息
-                params: { //请求的参数信息
-                    productCode: that.status.fundCode, // 产品代码
-                }
+                projectId: that.status.fundCode, // 产品代码
             },
             needLogin: true, //需要判断是否登陆
             async: false,
+            contentTypeSearch: true,
             needDataEmpty: true, //需要判断data是否为空
             callbackDone: function(json) {
                 var labelArr = json.data;
@@ -168,27 +166,25 @@ var prvMar = {
         obj = [{ //获取产品列表
             url: site_url.prvReource_api, //私募产品列表  queryReourceList.action
             data: {
-                hmac: "", //预留的加密信息 非必填项
-                params: { //请求的参数信息
-                    productCode: that.status.fundCode, // 产品代码
-                    fileType: fileType,
-                }
+                projectId: that.status.fundCode, // 产品代码
+                fileType: fileType,
             },
             needLogin: true,
             needDataEmpty: true,
+            contentTypeSearch: true,
             async: false,
             callbackDone: function(json) {
                 var json = json.data;
 
                 $.each(json, function(i, el) {
-                    el.name = el.resName.substring(0, el.resName.indexOf("】") + 1);
-                    el.marName = el.resName.substring(el.resName.indexOf("】") + 1);
-                    if (el.resName.indexOf(".pdf") != -1) {
+                    el.name = el.fileName.substring(0, el.fileName.indexOf("】") + 1);
+                    el.marName = el.fileName.substring(el.fileName.indexOf("】") + 1);
+                    if (el.fileName.indexOf(".pdf") != -1) {
                         el.line = true; //线上可预览
-                        el.href = site_url.download_api + "?filePath=" + el.fileUrl + "&fileName=" + new Base64().encode(el.resName) + "&groupName=" + el.groupName + "&show=1";
+                        el.href = site_url.download_api + "?filePath=" + el.fileUrl + "&fileName=" + new Base64().encode(el.fileName) + "&groupName=" + el.groupName + "&show=1";
                     } else {
                         el.line = false; //需下载
-                        el.href = site_url.download_api + "?filePath=" + el.fileUrl + "&fileName=" + new Base64().encode(el.resName) + "&groupName=" + el.groupName;
+                        el.href = site_url.download_api + "?filePath=" + el.fileUrl + "&fileName=" + new Base64().encode(el.fileName) + "&groupName=" + el.groupName;
                     }
                 })
 

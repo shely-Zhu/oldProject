@@ -5,7 +5,7 @@
 
 -->
 
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -202,9 +202,9 @@
 	  {{! 左侧页面列表}}
 	  {{#each this}}
 	  		{{#if bool}}
-	    		<li><span class="invRange">{{amountMin}}万(含)-{{amountMax}}万</span><span class="invResult">{{profit}}%</span></li>
+	    		<li><span class="invRange">{{benifitLowerLimit}}万(含)-{{benifitUpperLimit}}万</span><span class="invResult">{{benifitRate}}%</span></li>
 	  		{{else}}
-	  			<li><span class="invRange">{{amountMin}}万(含)以上</span><span class="invResult">{{profit}}%</span></li>
+	  			<li><span class="invRange">{{benifitLowerLimit}}万(含)以上</span><span class="invResult">{{benifitRate}}%</span></li>
 	  		{{/if}}
 	  {{/each}}
   </script> 
@@ -213,13 +213,13 @@
 	  {{#each this}}
 	    <div class="mui-card bor">
 			<div class="card-head">
-				<span class="iconfont">&#xe685;</span><span class="name">{{broker_name}}</span>
+				<span class="iconfont">&#xe685;</span><span class="name">{{brokerName}}</span>
 			</div>
 			<div class="card-theme noBor">
 				<ul>
-					<li class="clearfix"><span class="invRange">工号</span><span class="invResult">{{broker_account}}</span></li>
+					<li class="clearfix"><span class="invRange">工号</span><span class="invResult">{{brokerAccount}}</span></li>
 					<!-- <li class="clearfix"><span class="invRange">手机</span><a href="tel:{{mobile_tel}}" class="invResult tel"><img src="/productPrivate/static/img/tel.gif"/>{{mobile_tel}}</a></li> -->
-					<li class="clearfix noBot"><span class="invRange">所属公司</span><span class="invResult">{{dpt_name}}</span></li>
+					<li class="clearfix noBot"><span class="invRange">所属公司</span><span class="invResult">{{dptName}}</span></li>
 				</ul>
 			</div>
 		</div>

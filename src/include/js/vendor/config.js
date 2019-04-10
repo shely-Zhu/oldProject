@@ -7,8 +7,6 @@
 require('../../../common/js/components/config/windowConfig.js');
 //跳转链接
 var goUrl = require('../../../common/js/components/config/goUrl.js'); 
-// 公共接口
-var webApi = require('../../../common/js/components/config/webApi.js');
 //私募接口
 var pefApi = require('../../../common/js/components/config/pefApi.js');
 // var privateApi = require('../../../common/js/components/config/privateApi.js');

@@ -70,7 +70,6 @@ module.exports = function() {
     //查询T+N日
     this.TNDay_api = http_url.pef_url + '/account/redemption/queryTNDay.action';
 
-
     this.prvDetail_api = http_url.pef_url + '/product/details/queryProductDetail.action'; //私募详情查询
     // this.prvNewValue_api = http_url.pef_url + '/product/details/queryNetValue.action'; //最新净值查询
     this.prvLight_api = http_url.pef_url + '/product/details/queryProductImage.action'; //产品亮点查询
@@ -78,11 +77,13 @@ module.exports = function() {
     this.prvHisValue_api = http_url.pef_url + '/product/details/queryHistoryNetValue.action'; //历史净值查询
     this.prvResCancel_api = http_url.pef_url + '/product/trade/fundReserveCancel.action'; //取消预约接口
 
+
     this.prvReserve_api = http_url.pef_url + '/product/trade/fundReserve.action'; //确定预约接口
     this.custBro_api = http_url.pef_url + '/account/broker/custBroRelQuery.action'; //理财师查询与客户关系接口
     //私募首页--检查是否登录
     //私募首页--产品推荐
     this.recommend_api = http_url.pef_url + '/index/recommand/recommand.action';
+
     
     //鉴权时私募客户信息回显及客户基本信息完善查询接口
     this.queryUserInfoToAuth_api = http_url.pef_url + '/account/certification/queryUserInfoToAuth.action';
@@ -153,4 +154,5 @@ module.exports = function() {
 
     // 二维码计数接口
     this.qrCodeDetails_api = http_url.pef_url + '/qrcode/qrCodeDetails.action';
+
 };

@@ -25,9 +25,10 @@ var prvRec = {
         //检查是否登录及风险测评
         $.userCheck(true, function() {
 
-            that.beforeFunc();
-            that.initMui();
+            
         });
+        that.beforeFunc();
+        that.initMui();
         that.events();
     },
     beforeFunc: function() {
@@ -52,42 +53,36 @@ var prvRec = {
         var obj = [{
                 url: site_url.user_api,
                 data: {
-                    hmac: "", //预留的加密信息     
-                    params: { //请求的参数信息
-                    }
                 },
                 needDataEmpty: false,
                 callbackDone: function(data) {
                     var jsonData = data.data;
-                    if (jsonData.isCertification == "2") { //是否实名认证
-                        that.maskName = jsonData.maskName;
+                    if (jsonData.isCertification == "1") { //是否实名认证
+                        that.name = jsonData.name;
                         if (jsonData.certType == "0") { //身份证
-                            if (jsonData.maskCertNo.length == "15") {
-                                jsonData.maskCertNo.substring(14, 15) % 2 == 0 ? that.gender = "女士" : that.gender = "先生";
-                            } else if (jsonData.maskCertNo.length == "18") {
-                                jsonData.maskCertNo.substring(16, 17) % 2 == 0 ? that.gender = "女士" : that.gender = "先生";
+                            if (jsonData.identityNo.length == "15") {
+                                jsonData.identityNo.substring(14, 15) % 2 == 0 ? that.gender = "女士" : that.gender = "先生";
+                            } else if (jsonData.identityNo.length == "18") {
+                                jsonData.identityNo.substring(16, 17) % 2 == 0 ? that.gender = "女士" : that.gender = "先生";
                             }
-                            $(".user .userName").html('<span class="name">' + that.maskName + '</span> <span class="gender">' + that.gender + '</span>');
+                            $(".user .userName").html('<span class="name">' + that.name + '</span> <span class="gender">' + that.gender + '</span>');
                         } else {
-                            $(".user .userName").html('<span class="name">' + that.maskName + '</span>');
+                            $(".user .userName").html('<span class="name">' + that.name + '</span>');
                         }
                     } else {
                         $(".user .userName").html('<span class="name">尊敬的客户</span>');
                     }
                 },
                 callbackFail: function(data) {
-                    tipAction(data.msg);
+                    tipAction(data.message);
                 }
             },
             {
                 url: site_url.recommend_api, //私募产品列表
                 data: {
-                    hmac: "", //预留的加密信息     
-                    params: { //请求的参数信息
-                        groupType: "wouldlike_" + splitUrl()["invest"], //类型（参考备注）
-                        curPage: "1", // 当前页码 
-                        pageSize: "10" //每页显示条数      
-                    },
+                    groupType: "wouldlike_" + splitUrl()["invest"], //类型（参考备注）
+                    curPage: "1", // 当前页码 
+                    pageSize: "10" //每页显示条数      
                 },
                 needDataEmpty: false,
                 needLogin: true,
@@ -95,10 +90,10 @@ var prvRec = {
 
                     that.jsonData = json.data;
 
-                    if (!$.util.objIsEmpty(that.jsonData.pageList)) {
+                    if (!$.util.objIsEmpty(that.jsonData.list)) {
                         //有数据，拼模板
 
-                        $.each(that.jsonData.pageList, function(i, el) {
+                        $.each(that.jsonData.list, function(i, el) {
 
                             if (el.pefType == "2") {
                                 if (el.pefExpectedProfitMax == "0" || el.pefExpectedProfitMax == '') {
@@ -133,11 +128,11 @@ var prvRec = {
                         var tplm = $("#productList-template").html(),
                             template = Handlebars.compile(tplm);
 
-                        that.html = template(that.jsonData.pageList);
+                        that.html = template(that.jsonData.list);
 
                         setTimeout(function() {
 
-                            if (that.jsonData.pageList.length < 10) {
+                            if (that.jsonData.list.length < 10) {
                                 t.endPullupToRefresh(true);
 
                             } else {

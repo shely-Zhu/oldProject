@@ -88,7 +88,7 @@ var splitUrl = require('./components/splitUrl.js')();
     $.extend($, {
 
         ajaxLoading: function(param) {
-
+            
             //默认配置
             var defaults = {
                 url: '',
@@ -96,6 +96,7 @@ var splitUrl = require('./components/splitUrl.js')();
                 type: 'POST',
                 dataType: 'json',
                 async: true, //true-异步  false-同步
+                contentTypeSearch: false, //false: application/json,入参data为json字符串  , true:  application/x-www-form-urlencoded ，入参data为json对象
                 //因wap中部分页面黑名单接口没有加needLogin=true参数，导致股份首次跳明泽时，
                 //（明泽首次跳转股份也可能有此问题）
                 //因本地没有cookie，接口会返回code为CF0004，又没有设置此参数，不判断是否CF0004，
@@ -118,10 +119,10 @@ var splitUrl = require('./components/splitUrl.js')();
                 //formData
                 formData: false, //判断是否需要使用formData上传
 
-                loginNotJump: false, //判断CF0004后是否需要跳转到登录页面，true--不跳转, false---跳转
+                loginNotJump: false, //判断CF0004后是否需要跳转到登录页面，true--不跳转, false---跳转 
                 callbackLoginFunc: function() {}, //如果未登录不需要跳转，执行此函数 
                 appRisk: false, //当需要与app交互时
-            };
+            };                     
 
             //合并配置
             var obj = [];
@@ -132,7 +133,7 @@ var splitUrl = require('./components/splitUrl.js')();
 
             //发送ajax请求
             var ajaxFunc = function(obj) {
-
+                // document.cookie = "APPSESSIONID=cb13107f-232e-4723-9930-ec3c53874797;domain="+window.location.hostname+";path=/"
                 var ajax = $.Deferred(); //声明一个deferred对象
 
                 //设置ajax请求的contentType  data数据添加JSON.stringify
@@ -143,12 +144,12 @@ var splitUrl = require('./components/splitUrl.js')();
                     // data = env != 0 && !obj.formData ? JSON.stringify(obj.data) : obj.data;
                     data = JSON.stringify(obj.data);
                     // data = obj.data;
+
                 if(obj.contentTypeSearch){
                     contentType='application/x-www-form-urlencoded; charset=UTF-8';
                     data=obj.data;
-                }else{
-                    contentType='application/json; charset=UTF-8';
                 }
+                
                 if (obj.formData) {
                     //使用formData格式上传
                     var ajaxJson = {
@@ -169,7 +170,7 @@ var splitUrl = require('./components/splitUrl.js')();
                     //     }
                     // }
                     ajax = $.ajax(ajaxJson);
-                } else if (obj.needCrossDomain) {
+                }else if (obj.needCrossDomain) {
                     var ajaxJson = {};
                     // 跨域请求sso checkuserinfo接口
                     if (window.currentIsApp) {
@@ -318,6 +319,7 @@ var splitUrl = require('./components/splitUrl.js')();
                         obj.callbackDone(data);
                     }
                 })
+                
 
                 //ajax错误的情况
                 ajax.fail(function(data, result, msg) {

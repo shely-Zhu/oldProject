@@ -8,6 +8,7 @@
 
 //获取当前页面地址
 module.exports = function() {
+<<<<<<< HEAD
     this.login_url =  '/app/account/frontend/loginCheck'; //登录
     // 判断登录状态
     this.checkLogin_api = http_url.account_url + '/isLogin';

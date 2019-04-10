@@ -427,18 +427,6 @@ if (!window.currentIsApp) {
  * 因此先声明一个http_url，其中的api_url是公募接口的路径，默认为空
  * 然后根据env的不同，分别设置不同的http_url.api_url
  */
-var linkUrl=''
-// if(env == 0){
-//     linkUrl = mock_server
-// }
-// window.http_url = {
-//     pof_url:linkUrl+ '/wap/pof', //公募接口
-//     pef_url:linkUrl+ '/wap/pef', //私募接口
-//     content_url:linkUrl+ '/wap/content', // 内容接口
-//     account_url:linkUrl+ '/wap/account', // 账户接口
-//     sso_url:go_url.sso_url, // 账户接口
-// }
-
 
 window.http_url = {
     pof_url: '/wap/pof', //公募接口
@@ -447,6 +435,10 @@ window.http_url = {
     account_url: '/wap/account', // 账户接口
     web_url: '/web', // 账户接口
 }
+
+
+
+
 
 /*****************************各环境接口格式配置  end**************************************/
 

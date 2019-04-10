@@ -67,4 +67,5 @@ module.exports = function() {
     // 财商总资产
     this.myFinancialEducationInfoApi = http_url.pof_url + '/myAssetInfo/myFinancialEducationInfo';
     /*------------------------------财商教育end------------------------------------------*/
+
 };

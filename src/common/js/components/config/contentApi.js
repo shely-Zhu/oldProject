@@ -12,4 +12,7 @@ module.exports = function() {
     this.findContentByCategory_api = http_url.content_url + '/frontend/findContentByCategory';
     //协议查询
     this.findInvestorClassification_api = http_url.content_url + '/findInvestorClassification';
+
+    this.recommend_api = http_url.content_url + '/frontend/productRecommend';  //私募首页--产品推荐
+    // this.download_api = http_url.content_url + '/file/fastDFS/download'; //文件下载
 };

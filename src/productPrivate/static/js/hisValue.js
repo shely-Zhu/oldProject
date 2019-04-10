@@ -80,17 +80,15 @@ $(function() {
             var obj = [{
                 url: site_url.prvHisValue_api,
                 data: {
-                    hmac: "", //预留的加密信息
-                    params: { //请求的参数信息
-                        pageNo: that.page, // 当前页
-                        pageSize: 20, //每页记录数
-                        productCode: that.setting.fundCode, // 基金代码
-                        days: "",
-                        netValueBeginDate: "", // 查询起始日期(非必须)
-                        netValueEndDate: "" // 查询结束日期(非必须)
-                    }
+                    pageNo: that.page, // 当前页
+                    pageSize: 20, //每页记录数
+                    projectId: that.setting.fundCode, // 基金代码
+                    days: "",
+                    // netValueBeginDate: "", // 查询起始日期(非必须)
+                    // netValueEndDate: "" // 查询结束日期(非必须)
                 },
                 needDataEmpty: false,
+                contentTypeSearch: true,
                 callbackDone: function(json) {
 
                     that.jsonData = json.data;

@@ -194,6 +194,7 @@ gulp.task('proxyTask', function() {
                     changeOrigin:true,
                     secure: false,
                 }),
+
             ]
         }
     });
@@ -226,8 +227,6 @@ gulp.task('mockProxy', function() {
     });
 })
 
-
-
 //zip做服务器部署的时候讲我们打包出的文件压缩成一个zip包
 gulp.task('zip', ['initialTask'], function() {
     return gulp.src(host.path + '**')
@@ -238,16 +237,12 @@ gulp.task('zip', ['initialTask'], function() {
 //默认任务  
 // if (options.env === '0' || options.env === '1') { //当开发环境的时候构建命令执行mock服务
 if (options.env === '0' ) { //当开发环境的时候构建命令执行mock服务
-
     console.log("开发环境执行mock模拟数据服务器");
     gulp.task('default', ['initialTask','mock', 'mockProxy'])
-
 } else if (options.env === '5'){
     gulp.task('default', ['initialTask', 'proxyTask'])
-
 } else {
     console.log("不启动服务器，做运维环境部署打包用");
-
     gulp.task('default', ['zip'])
 
 }
