@@ -25,4 +25,6 @@ module.exports = function() {
     this.totalAssets_api = http_url.account_url + '/smartInvestment/totalAssets';
     //获取客户信息
     this.user_api = http_url.account_url + '/getUserInfo';
+    // 恒小智-交易列表
+    this.recordList_api = http_url.account_url + '/smartInvestment/recordList';
 };

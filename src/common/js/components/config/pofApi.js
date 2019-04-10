@@ -35,8 +35,7 @@ module.exports = function() {
 
     // 恒小智-组合交易详情(买入/赎回)
     this.queryCombinFundTradeDetail_api = http_url.pof_url + '/smartInvestment/queryCombinFundTradeDetail';
-    // 组合交易记录
-    this.myRecord_api = http_url.pof_url + '/smartInvestment/myRecord';
+    
     // 恒小智-组合详情折线图(收益走势/净值走势)
     this.trendGraphInfo_api = http_url.pof_url + '/smartInvestment/trendGraphInfo';
     // 一键调仓 
