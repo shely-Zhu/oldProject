@@ -68,7 +68,7 @@ $(function(){
 			var that = this;
 			var obj = [
 				{
-					url: site_url.checkLogin_api,
+					url: site_url.login_url,
 					data:null,
 					async: true,
 					needDataEmpty:false,

@@ -10,7 +10,7 @@
 module.exports = function() {
     /*-------------------账户相关------------------------------*/
     //检查是否登录,sso后换成jsonp
-    this.checkUserInfo_api = http_url.web_url + '/account/frontend/isLogin';
+    // this.checkUserInfo_api = http_url.web_url + '/account/frontend/isLogin';
     //获取客户信息
     this.user_api = http_url.web_url + '/account/getUserInfo';
     // 客户冻结状态查询
