@@ -36,11 +36,10 @@ $(function() {
 				url: site_url.findBannerByPosition_api,
 				data: {
 					hmac:"", //预留的加密信息   非必填项
-					params:{ //请求的参数信息  非必填项
-						adPosition :"publicActivityAPP",//类型（标志位）【请参照备注】
-						groupType:"bannerCategoryGF",
-						limitCount:"4" //展示条数
-					}
+					//请求的参数信息  非必填项
+					adPosition :"publicActivityAPP",//类型（标志位）【请参照备注】
+					groupType:"bannerCategoryGF",
+					limitCount:"4" //展示条数
 				},
 				// needCrossDomain: true,
 				needLoading: true,
@@ -74,11 +73,11 @@ $(function() {
 		checkLogin:function(params,callback){
 			var that = this;
             var obj = [{
-                url: site_url.checkUserInfo_api,
+                url: site_url.checkLogin_api,
 					data:null,
-					async: false,
-					dataType: 'jsonp',
-            		needCrossDomain: true,
+					// async: false,
+					// dataType: 'jsonp',
+            		// needCrossDomain: true,
 					needDataEmpty:false,
 					loginNotJump:params, //true不跳，false--跳
 					needLogin:true,//需要判断是否登录
@@ -123,10 +122,10 @@ $(function() {
                 url: site_url.eBusinessRecord_api,
                 data: {
                     hmac: "", //预留的加密信息   非必填项
-                    params: { //请求的参数信息  非必填项
-                        communityActId: "1002", //活动id，communityActId参数说明 1001 基民教育 1002 中秋电商活动
-                    }
-                },
+                    //请求的参数信息  非必填项
+                    communityActId: "1002", //活动id，communityActId参数说明 1001 基民教育 1002 中秋电商活动
+				},
+				contentTypeSearch:true,
                 async: false,
                 needDataEmpty: false,
                 needLogin: true, //需要判断是否登录

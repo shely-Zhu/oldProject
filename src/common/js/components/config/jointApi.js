@@ -103,7 +103,7 @@ module.exports = function() {
 
 
     // 中秋活动 我已完成学习按钮点击请求的接口
-    this.eBusinessRecord_api = http_url.joint_url + '/index/communityActivitiesEnroll/eBusinessRecord.action';
+    // this.eBusinessRecord_api = http_url.joint_url + '/index/communityActivitiesEnroll/eBusinessRecord.action';
     //鉴权/开户接口整合
     this.sms_two_api = http_url.joint_url + '/account/certification/pefFirstAuthForSmsCode.action';
     //实名认证，第二步页面提交数据
@@ -120,7 +120,7 @@ module.exports = function() {
     this.findBannerLikePosition_api = http_url.joint_url + '/banner/findBannerLikePosition.action';
 
     // 会员权益查询
-    this.queryRightsByLevel_api = http_url.joint_url + '/account/gingkoRights/queryRightsByLevel.action';
+    // this.queryRightsByLevel_api = http_url.joint_url + '/account/gingkoRights/queryRightsByLevel.action';
 
     // 未读消息数量
     this.unreadMsgCount_api = http_url.joint_url + '/account/myMessage/unreadMsgCount.action';

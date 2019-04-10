@@ -10,7 +10,7 @@ module.exports = function() {
     //检查是否登录,sso后换成jsonp
     this.checkUserInfo_api = http_url.sso_url + '/checkUserInfo.action';
     // app内检测登录状态接口
-    this.checkLogin_api = http_url.pef_url + '/isLogin.action';
+    // this.checkLogin_api = http_url.pef_url + '/isLogin.action';
 
     //接口API
     this.login_api = http_url.pef_url + '/user/login.action'; //登录并绑定salesForce账户
@@ -59,7 +59,7 @@ module.exports = function() {
     this.voice_api = http_url.pef_url + '/voicemsg/voiceMsgVerify.action';
 
     //获取客户信息
-    this.user_api = http_url.pef_url + '/account/user/getUserInfo.action';
+    // this.user_api = http_url.pef_url + '/account/user/getUserInfo.action';
     // app里面公募调用私募getuserinfo接口
     this.user_api_two = http_url.pub_pri_url + '/account/user/getUserInfo.action';
 
@@ -115,6 +115,7 @@ module.exports = function() {
 
     // 首页
     //this.findBannerByPosition_api = http_url.pef_url + '/index/banners/findBannerByPosition.action';
+
     // 内容管理接口
     //this.findContentByCategory_api = http_url.pef_url + '/index/content/findContentByCategory.action';
 
@@ -127,7 +128,7 @@ module.exports = function() {
     
     
     //产品专题
-    this.activity_api = http_url.pef_url + '/index/special/getSpecialById.action';
+    // this.activity_api = http_url.pef_url + '/index/special/getSpecialById.action';
 
 
     //老带新

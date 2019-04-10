@@ -52,4 +52,22 @@ module.exports = function() {
 
     /*-------------------公募相关------------------------------*/
     /*-------------------公募相关 end ------------------------------*/
+=======
+* @page: 公募相关接口
+* @Author: chengqingqing
+* @Date:   2019-03-28 
+* @Last Modified by:   chengqingqing
+* @description:
+*/
+
+
+module.exports = function() {
+    // app内检测登录状态接口
+    this.checkLogin_api = http_url.web_url + '/account/frontend/isLogin';
+    this.user_api = http_url.web_url + '/account/getUserInfo'; //用户信息查询
+     // 首页
+     this.findBannerByPosition_api = http_url.web_url + '/content/frontend/findBannerByPosition';
+     
+   
+>>>>>>> 741cb20d59e0cce9aab32d3252ce578ec2fe4ae8
 };

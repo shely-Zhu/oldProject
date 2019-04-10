@@ -227,6 +227,7 @@ gulp.task('mockProxy', function() {
     });
 })
 
+
 //zip做服务器部署的时候讲我们打包出的文件压缩成一个zip包
 gulp.task('zip', ['initialTask'], function() {
     return gulp.src(host.path + '**')

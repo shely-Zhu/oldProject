@@ -130,26 +130,20 @@ var splitUrl = require('./components/splitUrl.js')();
                 obj.push($.extend({}, defaults, el));
             })
             document.cookie = "APPSESSIONID=c3a498d4-0220-4d35-903e-beccc917895e;domain="+window.location.hostname+";path=/"
-
             //发送ajax请求
             var ajaxFunc = function(obj) {
                 // document.cookie = "APPSESSIONID=cb13107f-232e-4723-9930-ec3c53874797;domain="+window.location.hostname+";path=/"
                 var ajax = $.Deferred(); //声明一个deferred对象
 
                 //设置ajax请求的contentType  data数据添加JSON.stringify
-                // var contentType = env == 0 ? 'application/x-www-form-urlencoded; charset=UTF-8' : 'application/json; charset=UTF-8',
                 var contentType = 'application/json; charset=UTF-8',
-                // var contentType = 'application/x-www-form-urlencoded',
-
-                    // data = env != 0 && !obj.formData ? JSON.stringify(obj.data) : obj.data;
                     data = JSON.stringify(obj.data);
-                    // data = obj.data;
 
                 if(obj.contentTypeSearch){
                     contentType='application/x-www-form-urlencoded; charset=UTF-8';
                     data=obj.data;
                 }
-                
+
                 if (obj.formData) {
                     //使用formData格式上传
                     var ajaxJson = {
@@ -308,7 +302,6 @@ var splitUrl = require('./components/splitUrl.js')();
                             return false;
                         }
                     }
-
                     //数据请求成功且不为空，执行成功的回调函数
                     if (window.currentIsApp && obj.appRisk) {
                         obj.callbackDone(data, function() {

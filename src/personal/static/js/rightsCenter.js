@@ -44,7 +44,7 @@ $(function(){
 					params:{//请求的参数信息
 						adPosition :"vip",//类型（标志位）
 						seqNo:"4",//显示顺序
-						limitCount:"",//展示幅数
+						limitCount:"7",//展示幅数
 					} 
                 },
                 //needLogin:true,//需要判断是否登陆
