@@ -13,6 +13,8 @@
 
 //获取当前页面地址
 module.exports = function() {
+    //检查是否登录,sso后换成jsonp
+    this.checkUserInfo_api = http_url.web_url + '/account/frontend/isLogin';
     //获取客户信息
     this.user_api = http_url.web_url + '/account/getUserInfo';
     // 客户冻结状态查询
@@ -36,13 +38,13 @@ module.exports = function() {
     this.queryReourceLabels_api = http_url.web_url +"/pef/queryReourceLabels"; //获取私募产品材料标签
     this.prvReource_api = http_url.web_url + '/pef/queryReourceList'; //产品材料接口
     this.findContentByCategory_api = http_url.web_url + '/content/frontend/findContentByCategory'; // 内容管理接口
-    this.custBro_api = http_url.web_url + '/account/broker/custBroRelQuery'; //理财师查询与客户关系接口
+    this.custBro_api = http_url.web_url + '/account/custBroRelQuery'; //理财师查询与客户关系接口
 
     this.share_api = http_url.web_url + '/account/frontend/weixin/share';  //老带新微信分享
     this.oldRecommendNew_api = http_url.web_url + '/account/oldRecommendNew'; //	微信公众号获取参数
-    this.award_api = http_url.web_url + "/activity/getAwardTimes"; // 抽奖次数查询
-    this.getToken_api = http_url.web_url + "/activity/getToken"; //获取唯一的token值
-    this.getAwardRecords_api = http_url.web_url + "/activity/getAwardRecords"; // 我的抽奖记录查询
-    this.getDrawRecords_api = http_url.web_url + "/activity/frontend/getDrawRecords"; // 抽奖流水接口查询
-    this.draw_api = http_url.web_url + "/activity/draw"; // 抽奖借口
+    this.award_api = http_url.web_url + "/marketing/getAwardTimes"; // 抽奖次数查询
+    this.getToken_api = http_url.web_url + "/marketing/getToken"; //获取唯一的token值
+    this.getAwardRecords_api = http_url.web_url + "/marketing/getAwardRecords"; // 我的抽奖记录查询
+    this.getDrawRecords_api = http_url.web_url + "/marketing/frontend/getDrawRecords"; // 抽奖流水接口查询
+    this.draw_api = http_url.web_url + "/marketing/draw"; // 抽奖借口
 };

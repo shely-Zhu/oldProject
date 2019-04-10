@@ -77,7 +77,7 @@ $(function(){
 					dataType: 'jsonp',
             		needCrossDomain: true,
 					callbackDone: function(json){
-						that.code = json.code;
+						//that.code = json.code;
 
 						if(that.isLogin==1){//初始化
 							that.award();
@@ -156,7 +156,7 @@ $(function(){
 						jumpParam=true;
 					},
 					callbackFail:function(json){
-						tipAction(json.msg);
+						tipAction(json.message);
 					},
 					callbackNoData:function(){
 						console.log('我在nodata里面')
@@ -267,7 +267,7 @@ $(function(){
 
 					},
 					callbackFail: function (json) {
-						tipAction(json.msg);
+						tipAction(json.message);
 						that.isRotate = false;
 					}
 				}
@@ -328,7 +328,7 @@ $(function(){
 
 				},
 				callbackFail: function (json) {
-					tipAction(json.msg);
+					tipAction(json.message);
 				}
 			}];
 			$.ajaxLoading(obj);
@@ -416,7 +416,7 @@ $(function(){
 
 				},
 				callbackFail: function (json) {
-					tipAction(json.msg);
+					tipAction(json.message);
 					that.isRotate = false;
 				}
 				// console.log(item);
@@ -501,10 +501,12 @@ $(function(){
 				// 		window.location.href=site_url.login_html_url+'?originUrl=' + new Base64().encode(window.location.href);
 				// 	}
 				// }
-				 that.checkLogin(false, function() {
-                	// jsonp请求需放在回掉函数中
-	                that.judge();
-	            });
+				//  that.checkLogin(false, function() {
+				// 	 debugger
+                // 	// jsonp请求需放在回掉函数中
+	            //     that.judge();
+				// });
+				 that.checkLogin(false);
 				
 			});
 

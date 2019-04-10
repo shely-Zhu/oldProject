@@ -48,7 +48,7 @@ $(function() {
                     $('.btn_wrap img').attr('src', json.data[2].imgUrl);
                 },
                 callbackFail: function(json) {
-                    tipAction(json.msg);
+                    tipAction(json.message);
                 }
             }];
             $.ajaxLoading(obj);

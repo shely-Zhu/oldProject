@@ -57,7 +57,7 @@ $(function(){
 					$('.btn_wrap img').attr('src',json.data[2].imgUrl);
 				},
 				callbackFail: function( json ){
-					tipAction( json.msg );
+					tipAction( json.message );
 				}
 			},
 			{  //获取微信sdk所需数据
@@ -137,7 +137,7 @@ $(function(){
 				},
 				callbackFail: function( jsonData){
 					$('.btnButton .mui-btn').removeClass('disable').removeAttr('disabled');
-					tipAction( jsonData.msg );
+					tipAction( jsonData.message );
 				}
 			}];
 			$.ajaxLoading(obj);

@@ -96,6 +96,7 @@ var splitUrl = require('./components/splitUrl.js')();
                 type: 'POST',
                 dataType: 'json',
                 async: true, //true-异步  false-同步
+                contentTypeSearch: false, //false: application/json,入参data为json字符串  , true:  application/x-www-form-urlencoded ，入参data为json对象
                 //因wap中部分页面黑名单接口没有加needLogin=true参数，导致股份首次跳明泽时，
                 //（明泽首次跳转股份也可能有此问题）
                 //因本地没有cookie，接口会返回code为CF0004，又没有设置此参数，不判断是否CF0004，
@@ -128,7 +129,7 @@ var splitUrl = require('./components/splitUrl.js')();
             $.each(param, function(i, el) {
                 obj.push($.extend({}, defaults, el));
             })
-            document.cookie = "APPSESSIONID=259d1407-042b-4aca-87fd-d963bb3c167e;domain="+window.location.hostname+";path=/"
+            document.cookie = "APPSESSIONID=6c07abbd-5269-4ab7-a66b-eabada686a03;domain="+window.location.hostname+";path=/"
 
             //发送ajax请求
             var ajaxFunc = function(obj) {
