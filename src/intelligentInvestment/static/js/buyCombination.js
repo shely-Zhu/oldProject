@@ -75,8 +75,10 @@ $(function() {
                     var data = json.data;
 
                     that.gV.lowGroupBuyAmount = data.lowGroupBuyAmount; // 组合购买最小限额
+                    that.gV.lowGroupBuyAmount = 1000; // 组合购买最小限额
                     that.gV.lowGroupBuyAmountMask = data.lowGroupBuyAmountMask; // 组合购买最小限额
                     that.gV.highGroupBuyAmount = data.highGroupBuyAmount; // 组合购买最大限额  
+                    that.gV.highGroupBuyAmount = 100000; // 组合购买最大限额  
                     $('.inputTurnIn').attr('placeholder', that.gV.lowGroupBuyAmountMask + '起投');
 
                     // 银行卡列表渲染
@@ -166,6 +168,7 @@ $(function() {
                     tipAction('请阅读并勾选协议')
                     return false;
                 }
+
 
                 // 风险评测是否过期
                 obj = [{
