@@ -128,8 +128,7 @@ var splitUrl = require('./components/splitUrl.js')();
             $.each(param, function(i, el) {
                 obj.push($.extend({}, defaults, el));
             })
-            debugger;
-            document.cookie = "APPSESSIONID=259d1407-042b-4aca-87fd-d963bb3c167e;domain="+window.location.hostname+";path=/"
+            document.cookie = "APPSESSIONID=c3a498d4-0220-4d35-903e-beccc917895e;domain="+window.location.hostname+";path=/"
 
             //发送ajax请求
             var ajaxFunc = function(obj) {
@@ -267,7 +266,7 @@ var splitUrl = require('./components/splitUrl.js')();
                                 //防止window.location.href在执行完请求里的所有代码之后再跳转
                                 throw 'jump login';
                                 return false;
-                            } else if (data.status == '4007') {
+                            } else if (data.status == '4008') {
                                 // 其他黑名单接口未登录，跳转data.data
                                 manualTriggerLogin.locationFunc(data);
                                 //防止window.location.href在执行完请求里的所有代码之后再跳转

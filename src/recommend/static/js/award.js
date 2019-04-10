@@ -68,13 +68,12 @@ $(function(){
 			var that = this;
 			var obj = [
 				{
-					url: site_url.checkUserInfo_api,
+					url: site_url.checkLogin_api,
 					data:null,
 					async: true,
 					needDataEmpty:false,
 					loginNotJump:params, //true不跳，false--跳
 					needLogin:true,//需要判断是否登录
-					dataType: 'jsonp',
             		needCrossDomain: true,
 					callbackDone: function(json){
 						that.code = json.code;
