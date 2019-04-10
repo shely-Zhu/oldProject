@@ -124,7 +124,8 @@ $(function() {
                     hmac: "", //预留的加密信息   非必填项
                     //请求的参数信息  非必填项
                     communityActId: "1002", //活动id，communityActId参数说明 1001 基民教育 1002 中秋电商活动
-                },
+				},
+				contentTypeSearch:true,
                 async: false,
                 needDataEmpty: false,
                 needLogin: true, //需要判断是否登录
