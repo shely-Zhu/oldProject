@@ -71,7 +71,6 @@ $(function() {
 		},
 		// 判断是否登录
 		checkLogin:function(params,callback){
-			debugger
 			var that = this;
             var obj = [{
                 url: site_url.checkLogin_api,
@@ -79,7 +78,7 @@ $(function() {
 					// async: false,
 					// dataType: 'jsonp',
             		// needCrossDomain: true,
-					// needDataEmpty:false,
+					needDataEmpty:false,
 					loginNotJump:params, //true不跳，false--跳
 					needLogin:true,//需要判断是否登录
 					callbackDone: function(json){

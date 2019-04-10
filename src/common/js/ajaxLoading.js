@@ -129,7 +129,7 @@ var splitUrl = require('./components/splitUrl.js')();
                 obj.push($.extend({}, defaults, el));
             })
 
-            document.cookie = "APPSESSIONID=d6854e01-bd2d-48b6-874d-c32ef63ac03b;domain="+window.location.hostname+";path=/"
+            document.cookie = "APPSESSIONID=25ea0aaf-aaf8-435b-879e-f4604d0f4c8b;domain="+window.location.hostname+";path=/"
 
             //发送ajax请求
             var ajaxFunc = function(obj) {
@@ -239,7 +239,6 @@ var splitUrl = require('./components/splitUrl.js')();
                     ajax = $.ajax(ajaxJson);
                 }
                 ajax.done(function(data) {
-                    debugger
                     if (obj.needLogin) {
                         if (obj.loginNotJump && data.data.isLogin == '2') { //如果未登录，且不需要跳转,sso接口未登录code也是cf0004,需要通过islogin判断
                             //未登录状态下，不跳转页面，执行对应函数
@@ -304,7 +303,6 @@ var splitUrl = require('./components/splitUrl.js')();
                             return false;
                         }
                     }
-
                     //数据请求成功且不为空，执行成功的回调函数
                     if (window.currentIsApp && obj.appRisk) {
                         obj.callbackDone(data, function() {
