@@ -197,9 +197,9 @@ var prvDetail = {
         }, {
             url: site_url.custBro_api,
             data: {
-                brokerAccount: "", //工号    
-                type: "0",
-                isCertificate: "Y", //是否通过基金从业考试 Y：通过 N：未通过（新增）
+                empNo: "", //工号    
+                fundType: "0",
+                isPass: "Y", //是否通过基金从业考试 Y：通过 N：未通过（新增）
             },
             needLogin: true,
             //needEmptyData:true,
@@ -213,7 +213,7 @@ var prvDetail = {
                     $.each(json.advisor, function(i, el) {
                         if (el.isMain == "1") {
                             $(".existMain").show().find(".main .tel").attr("href", "tel:" + el.mobileTel).html(el.mobileTel);
-                            $(".existMain .name").html(el.brokerName);
+                            $(".existMain .name").html(el.codeName);
                             $(".existMain .main").show();
                         }
                     })
@@ -298,7 +298,7 @@ var prvDetail = {
 
                 },
                 callbackFail: function(data) {
-                    tipAction(data.msg);
+                    tipAction(data.message);
                 }
             }]
             $.ajaxLoading(objSolid);
@@ -372,7 +372,7 @@ var prvDetail = {
                 }
             },
             callbackFail: function(json) {
-                tipAction(json.msg);
+                tipAction(json.message);
             },
             callbackNoData: function(json) {
 
@@ -841,7 +841,7 @@ var prvDetail = {
                                 }
                             },
                             callbackFail: function(data) {
-                                tipAction(data.msg, function() {
+                                tipAction(data.message, function() {
                                     $this.removeClass("stop");
                                 })
                             }
@@ -927,7 +927,7 @@ var prvDetail = {
                         callbackFail: function(data) {
                             elasticLayerFourHide();
                             $('.elasticLayerFour .sureBtn').removeAttr('disabled').removeClass('disable');
-                            tipAction(data.msg, function() {
+                            tipAction(data.message, function() {
                                 $(other).removeClass("nokick");
                             });
                         }
