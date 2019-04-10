@@ -33,14 +33,14 @@ var tradeList = {
 			{type: '调仓',num: '2'},
 		],
 		ajaxParams : {
-			pageNum: 1,
-			pagesize: 10,
+			pageNo: 1,
+			pageSize: 10,
 			tradeType: 0,  //0是买入，1是赎回，
 		},
 		current_index: 0,  //左右滑动区域的索引
 		list_template: '',  //列表的模板，生成后存放在这里
 		ajaxArr: [],  //存放每一个ajax请求的传参数据
-		apiUrlArr: site_url.myRecord_api,  //存放每一个ajax请求的url地址
+		apiUrlArr: site_url.recordList_api,  //存放每一个ajax请求的url地址
 	},	 
 	html: '',  //存放生成的html
 	init: function(){  //初始化函数
@@ -75,8 +75,8 @@ var tradeList = {
 			
 		$.each( that.setting.navList, function(i, el){
 			that.setting.ajaxArr[el.num] = {
-				pageNum: that.setting.ajaxParams.pageNum,  //当前第几页(默认为1) 非必填项, 默认设置成第一页
-	            pagesize: that.setting.ajaxParams.pagesize,  //每页显示几条数据(默认10) 非必填项， 默认设置成20
+				pageNum: that.setting.ajaxParams.pageNo,  //当前第几页(默认为1) 非必填项, 默认设置成第一页
+	            pagesize: that.setting.ajaxParams.pageSize,  //每页显示几条数据(默认10) 非必填项， 默认设置成20
 			}
 
 			if ( el.num == 0 ){

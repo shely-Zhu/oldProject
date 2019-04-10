@@ -48,9 +48,7 @@ $(function() {
 			var obj = [{ // 组合资产详情
 				url: site_url.totalAssets_api,
 				data: {
-					hmac: "", //预留的加密信息
-					params: { //请求的参数信息
-					}
+					
 				},
 				//async: false,
 				// needDataEmpty: true,
@@ -103,9 +101,6 @@ $(function() {
 			}, { // 恒小智-组合持仓列表
 				url: site_url.shareList_api,
 				data: {
-					hmac: "", //预留的加密信息
-					params: { //请求的参数信息
-					}
 				},
 				//async: false,
 				needDataEmpty: true,
