@@ -68,7 +68,7 @@ $(function(){
 			var that = this;
 			var obj = [
 				{
-					url: site_url.login_url,
+					url: site_url.checkLogin_api,
 					data:null,
 					// async: true,
 					needDataEmpty:false,
@@ -89,7 +89,6 @@ $(function(){
 								//如果抽奖次数大于0去调抽奖结果
 								//获取token
 								that.gettoken();
-
 								if(window.currentIsApp){
 									that.source = 'app';
 								}else{
