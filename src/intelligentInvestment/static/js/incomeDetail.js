@@ -68,7 +68,7 @@
 					
 					that.jsonData = json.data;
 
-					if( !$.util.objIsEmpty( that.jsonData.combinIncomeList) ){
+					if( !$.util.objIsEmpty( that.jsonData) ){
 						//有数据，拼模板
 
 							var source = $('#productList-list-template').html(),
@@ -76,7 +76,7 @@
 			            	that.html = template( that.jsonData );
 			            	
 			            	setTimeout(function(){						
-								if( that.jsonData.combinIncomeList.length <  20 ){
+								if( that.jsonData.length <  20 ){
 				        			//当数据少于that.setting.ajaxParams.pageSize时	
 				        			t.endPullupToRefresh(true);	
 				        		}else{

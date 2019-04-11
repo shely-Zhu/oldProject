@@ -12,7 +12,7 @@ module.exports = function() {
 
 
     /*------------------------------------------------------恒小智接口  start----------------------------------------------*/
-    // 组合详情
+    // 组合列表查询
     this.combinFundList_api = http_url.pof_url + '/smartInvestment/combinFundList';
     // 组合详情信息查询
     this.combinFundDetails_api = http_url.pof_url + '/smartInvestment/combinFundDetails';

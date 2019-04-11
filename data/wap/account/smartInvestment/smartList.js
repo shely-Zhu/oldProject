@@ -23,7 +23,7 @@ var data = Mock.mock({
         "lowGroupBuyAmountMask": "10,000", //组合购买最小限额千分位
         "highGroupBuyAmount": "1000000", //组合购买最大限额       
         "highGroupBuyAmountMask": "10,000", //组合购买最大限额千分位
-        "bankList": [{
+        "pageList": [{
             "profession": "0", //业务场景 0-电子合同手动输入银行卡 “”-其他业务场景
             "bankAccountSecret": "NjIzMDIyMTExMTEwMTA2Mg==", //银行卡加密字段，base64加密
             "bankAccount": "6230221111101062", //银行卡号

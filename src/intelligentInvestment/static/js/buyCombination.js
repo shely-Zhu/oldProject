@@ -219,7 +219,6 @@ $(function() {
                 }
 
                 $this.attr('disabled', 'disabled').addClass('disabled');
-                debugger
 
                 ajaxObj = [{
                     url: site_url.combinFundBuy_api,

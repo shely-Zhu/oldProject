@@ -92,10 +92,7 @@ $(function() {
                         url: site_url.findInvestorClassification_api, //协议接口
                         needLogin: true, //需要判断是否登陆
                         data: {
-                            "hmac": "", //预留的加密信息
-                            "params": { //请求的参数信息
-                                "ids": splitUrl()['id'], //内容ID
-                            }
+                            "ids": splitUrl()['id'], //内容ID
                         },
                         callbackDone: function(json) { //成功后执行的函数
 
