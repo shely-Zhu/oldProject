@@ -39,14 +39,14 @@ $(function() {
                 async: false, //同步
                 callbackDone: function(json) {
                     var jsonData = json.data;
-                    var bankAccount = jsonData.combinAccList[0].bankAccount;
+                    var bankAccount = jsonData[0].bankAccount;
                     var bankNo = bankAccount.substring(bankAccount.length - 4);
-                    var text = jsonData.combinAccList[0].bankName + "（" + bankNo + "）";
+                    var text = jsonData[0].bankName + "（" + bankNo + "）";
                     $(".bank_txt").html(text);
-                    that.tradeAcco = jsonData.combinAccList[0].tradeAcco;
+                    that.tradeAcco = jsonData[0].tradeAcco;
                 },
                 callbackFail: function(json) {
-                    tipAction(json.msg);
+                    tipAction(json.message);
                 }
             }];
             obj.push({
@@ -75,7 +75,7 @@ $(function() {
                 },
                 callbackDone: function(json) {
                     // totalAmountMask总资产即当前资产市值
-                    var combinTotalAsset = json.data.combinTotalAsset;
+                    var combinTotalAsset = json.data;
 
                     $(".js_marketNum").html(combinTotalAsset.totalAmountMask);
                     // 组合编号
