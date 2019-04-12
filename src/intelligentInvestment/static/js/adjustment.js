@@ -57,7 +57,8 @@ $(function(){
 			var obj = [{
 				url: site_url.holdChange_api,
 				data:{
-					"combCode":that.combCode,
+					combCode:that.combCode,
+					channel: 'wap'
 				},
 				needDataEmpty: true,
 				callbackDone: function(json){

@@ -35,7 +35,7 @@ module.exports = function() {
     // 图片删除
     this.removeApi = http_url.web_url + '/content/file/mount/remove';
     //协议查询
-    this.findInvestorClassification_api = http_url.web_url + '/content/findInvestorClassification';
+    this.findInvestorClassification_api = http_url.web_url + '/content/frontend/findInvestorClassification';
     //文件下载
     this.download_api = http_url.web_url + '/content/file/fastDFS/download'; //文件下载
     // 内容管理接口
