@@ -91,6 +91,7 @@ $(function() {
                     var obj = [{
                         url: site_url.findInvestorClassification_api, //协议接口
                         needLogin: true, //需要判断是否登陆
+                        contentTypeSearch: true,
                         data: {
                             "ids": splitUrl()['id'], //内容ID
                         },
