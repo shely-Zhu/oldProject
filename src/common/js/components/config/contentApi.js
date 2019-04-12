@@ -13,7 +13,7 @@ module.exports = function() {
     //协议查询
     this.findInvestorClassification_api = http_url.content_url + '/findInvestorClassification';
     this.recommend_api = http_url.content_url + '/frontend/productRecommend';  //私募首页--产品推荐
-    this.findBannerLikePosition_api = http_url.content_url + '/frontend/findBannerLikePosition'; //获取页面背景及其他图片素材
+    // this.findBannerLikePosition_api = http_url.content_url + '/frontend/findBannerLikePosition'; //获取页面背景及其他图片素材
     this.queryRightsByLevel_api = http_url.content_url + '/queryRightsByLevel';  //用户权益查询
     this.activity_api = http_url.content_url + '/frontend/findSpecialById'; //产品专题
     // 中秋活动 我已完成学习按钮点击请求的接口

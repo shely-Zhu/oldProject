@@ -15,7 +15,7 @@ var pOver = Mock.mock({
 	"data": {
 		"pageNum": 1, //总页数
 		"pageSize": 1,// 每页数量
-		"list|2":[ 
+		"pageList|2":[ 
 			{ 
 				"category":"appspecial",//类型（标志位） 
 				"id": 16,//主键ID 

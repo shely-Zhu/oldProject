@@ -10,7 +10,7 @@
 module.exports = function() {
     this.login_url =  '/app/account/frontend/loginCheck'; //登录
     // 判断登录状态
-    this.checkLogin_api = http_url.account_url + '/isLogin';
+    // this.checkLogin_api = http_url.account_url + '/isLogin';
     this.custBro_api = http_url.account_url + '/broker/custBroRelQuery'; //理财师查询与客户关系接口
     this.queryClassification_api = http_url.account_url + '/queryClassification'; //投资者分类审核状态查询
     this.applyForClassification_api = http_url.account_url + '/investor/applyForClassification'; //投资者分类申请
@@ -25,4 +25,6 @@ module.exports = function() {
     this.totalAssets_api = http_url.account_url + '/smartInvestment/totalAssets';
     //获取客户信息
     this.user_api = http_url.account_url + '/getUserInfo';
+    // 恒小智-交易列表
+    this.recordList_api = http_url.account_url + '/smartInvestment/recordList';
 };

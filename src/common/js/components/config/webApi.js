@@ -10,7 +10,7 @@
 module.exports = function() {
     /*-------------------账户相关------------------------------*/
     //检查是否登录,sso后换成jsonp
-    this.checkUserInfo_api = http_url.web_url + '/account/frontend/isLogin';
+    this.checkLogin_api = http_url.web_url + '/account/frontend/isLogin';
     //获取客户信息
     this.user_api = http_url.web_url + '/account/getUserInfo';
     // 客户冻结状态查询
@@ -21,7 +21,7 @@ module.exports = function() {
     this.applyForClassification_api = http_url.web_url + '/account/investor/applyForClassification'; //投资者分类申请
     this.share_api = http_url.web_url + '/account/frontend/weixin/share';  //老带新微信分享
     this.oldRecommendNew_api = http_url.web_url + '/account/oldRecommendNew'; //    微信公众号获取参数
-
+    this.findBannerLikePosition_api = http_url.web_url + '/content/frontend/findBannerLikePosition'; //获取页面背景及其他图片素材
     
     /*-------------------账户相关 end ------------------------------*/
 
@@ -35,7 +35,7 @@ module.exports = function() {
     // 图片删除
     this.removeApi = http_url.web_url + '/content/file/mount/remove';
     //协议查询
-    this.findInvestorClassification_api = http_url.web_url + '/content/findInvestorClassification';
+    this.findInvestorClassification_api = http_url.web_url + '/content/frontend/findInvestorClassification';
     //文件下载
     this.download_api = http_url.web_url + '/content/file/fastDFS/download'; //文件下载
     // 内容管理接口
@@ -65,7 +65,7 @@ module.exports = function() {
     this.getToken_api = http_url.web_url + "/marketing/getToken"; //获取唯一的token值
     this.getAwardRecords_api = http_url.web_url + "/marketing/getAwardRecords"; // 我的抽奖记录查询
     this.getDrawRecords_api = http_url.web_url + "/marketing/frontend/getDrawRecords"; // 抽奖流水接口查询
-    this.draw_api = http_url.web_url + "/marketing/draw"; // 抽奖借口
+    this.draw_api = http_url.web_url + "/marketing/draw"; // 抽奖接口
 
     /*-------------------营销相关 end ------------------------------*/
 

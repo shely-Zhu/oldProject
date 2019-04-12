@@ -12,7 +12,7 @@ module.exports = function() {
 
 
     /*------------------------------------------------------恒小智接口  start----------------------------------------------*/
-    // 组合详情
+    // 组合列表查询
     this.combinFundList_api = http_url.pof_url + '/smartInvestment/combinFundList';
     // 组合详情信息查询
     this.combinFundDetails_api = http_url.pof_url + '/smartInvestment/combinFundDetails';
@@ -35,8 +35,7 @@ module.exports = function() {
 
     // 恒小智-组合交易详情(买入/赎回)
     this.queryCombinFundTradeDetail_api = http_url.pof_url + '/smartInvestment/queryCombinFundTradeDetail';
-    // 组合交易记录
-    this.myRecord_api = http_url.pof_url + '/smartInvestment/myRecord';
+    
     // 恒小智-组合详情折线图(收益走势/净值走势)
     this.trendGraphInfo_api = http_url.pof_url + '/smartInvestment/trendGraphInfo';
     // 一键调仓 

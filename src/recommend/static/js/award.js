@@ -70,14 +70,13 @@ $(function(){
 				{
 					url: site_url.checkLogin_api,
 					data:null,
-					async: true,
+					// async: true,
 					needDataEmpty:false,
 					loginNotJump:params, //true不跳，false--跳
 					needLogin:true,//需要判断是否登录
-            		needCrossDomain: true,
+            		// needCrossDomain: true,
 					callbackDone: function(json){
 						//that.code = json.code;
-
 						if(that.isLogin==1){//初始化
 							that.award();
 							that.queryrecord();
@@ -85,11 +84,11 @@ $(function(){
 
 							// 每次点击抽奖次数查询一次接口
 							that.award();
+							
 							if(that.dataTimes > 0){
 								//如果抽奖次数大于0去调抽奖结果
 								//获取token
 								that.gettoken();
-
 								if(window.currentIsApp){
 									that.source = 'app';
 								}else{

@@ -66,7 +66,7 @@ $(function() {
             var obj = [{ // 银行卡列表---默认返回公募开卡的银行卡
                 url: site_url.smartList_api,
                 data: {
-                    "groupCode": that.gV.groupCode, //组合代码
+                    "code": that.gV.groupCode, //组合代码
                     "additional": additional
                 },
                 //async: false,
@@ -168,10 +168,9 @@ $(function() {
                     tipAction('请阅读并勾选协议')
                     return false;
                 }
-
-
+                $('.payPassword').show();
                 // 风险评测是否过期
-                obj = [{
+               /* obj = [{
                     url: site_url.user_api,
                     data: {
                     },
@@ -197,7 +196,7 @@ $(function() {
                         tipAction(json.msg);
                     }
                 }];
-                $.ajaxLoading(obj);
+                $.ajaxLoading(obj);*/
             })
 
             //点击密码弹出框的确定按钮

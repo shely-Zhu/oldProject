@@ -34,7 +34,6 @@ var tradeList = {
 	//获取客户风险等级
 	getUserInfo: function(){
 		var that = this;
-		
 		var obj = [{
 			url: site_url.user_api,
 			data: {

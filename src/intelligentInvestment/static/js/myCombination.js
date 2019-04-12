@@ -101,7 +101,6 @@ $(function() {
 			}, { // 恒小智-组合持仓列表
 				url: site_url.shareList_api,
 				data: {
-					
 				},
 				//async: false,
 				needDataEmpty: true,
