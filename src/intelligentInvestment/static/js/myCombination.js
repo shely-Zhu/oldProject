@@ -53,7 +53,7 @@ $(function() {
 				//async: false,
 				// needDataEmpty: true,
 				callbackDone: function(json) {
-					var data = json.data.combinTotalAsset,
+					var data = json.data,
 						totalAmountMask = data.totalAmountMask, // 总资产
 						yesterdayIncomeMask = data.yesterdayIncomeMask, // 昨日收益
 						accumIncomeMask = data.accumIncomeMask, // 累计收益
