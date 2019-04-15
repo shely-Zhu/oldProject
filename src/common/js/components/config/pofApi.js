@@ -28,7 +28,7 @@ module.exports = function() {
     this.combinFundRedempInfo_api = http_url.pof_url + '/smartInvestment/combinFundRedempInfo';
 
     // 恒小智-组合交易账号查询
-    this.combinAccList_api = http_url.pof_url + '/smartInvestment/combinAccList';
+    //this.combinAccList_api = http_url.pof_url + '/smartInvestment/combinAccList';
     
     // 恒小智-组合资产交易详情(买入/赎回)
     this.combinTradeDetailsList_api = http_url.pof_url + '/smartInvestment/combinTradeDetailsList';

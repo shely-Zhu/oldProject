@@ -1,0 +1,40 @@
+@charset"utf-8";
+//当用到后台富文本编辑器的时候只需要引入baseClass.less不需要引入reset.less
+@import url("../../../common/less/baseClass.less");
+//错误提示
+@import url("../../../common/less/components/againEnter.less");
+body{
+	word-break: break-all;
+	padding-bottom: 7rem;
+}
+.container{
+	width: 94%;
+	padding:0 3%;
+}
+.container .title{
+	margin:2rem 0 1.5rem;
+	
+	font-size: 1.8rem;
+	color:@c002;
+	width: 100%;
+	/* text-align: center; */
+}
+.content{
+	text-align: justify;
+}
+.content img{
+    width:100%;
+}
+
+.des{
+    margin:1.2rem 0 2rem;
+    font-size: 1.2rem;
+    color:@c001;
+}
+.des span:nth-of-type(2){
+    
+    float: right;
+
+}
+
+

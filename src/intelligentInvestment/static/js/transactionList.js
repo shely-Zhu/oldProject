@@ -76,7 +76,7 @@ var tradeList = {
 		$.each( that.setting.navList, function(i, el){
 			that.setting.ajaxArr[el.num] = {
 				pageNum: that.setting.ajaxParams.pageNo,  //当前第几页(默认为1) 非必填项, 默认设置成第一页
-	            pagesize: that.setting.ajaxParams.pageSize,  //每页显示几条数据(默认10) 非必填项， 默认设置成20
+	            pageSize: that.setting.ajaxParams.pageSize,  //每页显示几条数据(默认10) 非必填项， 默认设置成20
 			}
 
 			if ( el.num == 0 ){
@@ -185,9 +185,7 @@ var tradeList = {
 		//获取产品列表
 		var obj = [{
 			url: that.setting.apiUrlArr,
-			data: {   
-			    params: that.setting.ajaxArr[that.setting.current_index] 
-			},
+			data: that.setting.ajaxArr[that.setting.current_index] ,
 			needLogin: true,
 			needDataEmpty: true, 
 			async: false, 
@@ -225,7 +223,7 @@ var tradeList = {
 				//有数据
 	        	setTimeout(function(){
 
-	        		if( that.listLength <  that.setting.ajaxParams.pagesize ){
+	        		if( that.listLength <  that.setting.ajaxParams.pageSize ){
 
 	        			if( that.setting.ajaxArr[that.setting.current_index].pageNum == 1){
 	        				//第一页时
