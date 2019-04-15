@@ -171,4 +171,8 @@ module.exports = {
 
     
     './productPrivate/static/js/openPdf': './src/productPrivate/static/js/openPdf.js', 
+
+    //银杏研究
+    './webviews/static/js/detailModel': './src/webviews/static/js/detailModel.js', 
+    './webviews/static/js/information': './src/webviews/static/js/information.js', 
 }
