@@ -184,7 +184,7 @@ gulp.task('proxyTask', function() {
                     changeOrigin:true,
                     secure: false,
                 }),
-                proxy('/web',  {
+                proxy('/web/',  {
                     target: 'https://h5.htjf4.com',
                     changeOrigin:true,
                     secure: false,
@@ -212,7 +212,7 @@ gulp.task('mockProxy', function() {
                     changeOrigin:true,
                     secure: false,
                 }),
-                proxy('/web',  {
+                proxy('/web/',  {
                     target: 'http://'+localIp + ':8088',
                     changeOrigin:true,
                     secure: false,
