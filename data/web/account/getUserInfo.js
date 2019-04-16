@@ -36,7 +36,8 @@ var data = Mock.mock({
         "customerNo":"123456",//统一客户编号
         "newcomer": "0", //是否新手账号
         "riskLevel":"", // 风险承受能力
-        "endurePri":"", //投资偏好---------之前是investFavour
+        "endurePri":"", //投资偏好---------之前是investFavour\
+        "endurePubIsold":'0' ,// 公募风险评测是否过期 0-否 1-是    -----------------------pofExpired
 
 
         "maskCertNo": "341221198906102008", //证件号【加*】---------接口文档没有出

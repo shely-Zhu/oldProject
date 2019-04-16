@@ -35,6 +35,7 @@ $(function(){
 		tradeAcco: splitUrl()['tradeAcco'],
 		comFundLevel: '',
 		riskLevel:'',
+		custType:'', //客户类型
 		$e: {
             adjustmentRecord: $('.adjustmentList'), // 调仓距离
             adjustmentTemp: $('#adjustment-template'), // 最新调仓模板
@@ -121,7 +122,8 @@ $(function(){
 						var jsonData = json.data;
 
 						that.riskLevel = Number(jsonData.endurePri);
-						if (jsonData.pofExpired == 1) {
+						that.custType = jsonData.accountType;
+						if (jsonData.endurePubIsold == 1) {
 							tipAction('风险测评已过期，请重新测评')
 						} else {
 							var obj = [{
