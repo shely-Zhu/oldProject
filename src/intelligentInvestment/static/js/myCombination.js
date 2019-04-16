@@ -107,7 +107,7 @@ $(function() {
 				callbackDone: function(json) {
 					var data = {};
 
-					data.list = json.data.comShareList;
+					data.list = json.data.pageList;
 					data.title = that.gV.tableTitle;
 					data['myCombination'] = true; // 表格渲染的时候区分
 

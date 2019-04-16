@@ -41,7 +41,8 @@ module.exports = function() {
     // 内容管理接口
     this.findContentByCategory_api = http_url.web_url + '/content/frontend/findContentByCategory'; // 内容管理接口
     
-    this.findContentByCategory_api = http_url.web_url + '/content/frontend/findContentByCategory'; // 内容管理接口
+    this.findContentDetailById_api = http_url.web_url + '/content/frontend/findContentDetailById'; // 内容详情展示
+    this.findYXResearchReportDetailById_api = http_url.web_url + "/content/frontend/findYXResearchReportDetailById"; // 银杏研究报告详情
     
     /*-------------------内容相关 end ------------------------------*/
 
@@ -70,8 +71,8 @@ module.exports = function() {
     /*-------------------营销相关 end ------------------------------*/
 
 
-   
-    
+   /*-------------------银杏研究相关 ------------------------------*/
+  
    
 
     
