@@ -72,7 +72,6 @@
 
 
 require('./components/utils.js');
-
 //黑色提示条的显示和隐藏
 var tipAction = require("./components/tipAction.js");
 var Base64 = require('../../include/js/vendor/base64/base64.js');
@@ -261,11 +260,12 @@ var splitUrl = require('./components/splitUrl.js')();
                                 throw 'jump login';
                                 return false;
                             } else if (data.status == '4007') {
-                                // 其他黑名单接口未登录，跳转data.data
-                                manualTriggerLogin.locationFunc(data);
-                                //防止window.location.href在执行完请求里的所有代码之后再跳转
-                                throw 'jump login';
-                                return false;
+                                // // 其他黑名单接口未登录，跳转data.data
+                                // manualTriggerLogin.locationFunc(data);
+                                // //防止window.location.href在执行完请求里的所有代码之后再跳转
+                                // throw 'jump login';
+                                // return false;
+                                tipAction('请在APP端登录')
                             }
                         }
                     }
