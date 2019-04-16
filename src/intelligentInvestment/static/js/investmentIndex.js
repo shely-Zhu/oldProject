@@ -62,7 +62,6 @@ var tradeList = {
 			},
 			callbackFail: function(json){
 				tipAction(json.msg);
-
 				window.location.href = site_url.programFail_url;
 			},
 			callbackNoData: function(json){

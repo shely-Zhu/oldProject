@@ -40,25 +40,23 @@ $(function(){
 
             //请求页面数据
             var obj = [{
-                url: site_url.RRById_api,
+                url: site_url.findYXResearchReportDetailById_api,
                 data: {
-                    hmac: "", //预留的加密信息     
-                    params: {
-                        "id":splitUrl['id'],//内容ID
-                    }
+                    "id":splitUrl['id'],//内容ID
                 },
                 needDataEmpty: false, //不判断data是否为空
+                contentTypeSearch: true, //false: application/json,入参data为json字符串  , true:  application/x-www-form-urlencoded ，入参data为json对象
                 callbackDone: function(json){
 
                     var json = json.data;
 
                     $(".title").html(json.title);//title
-                    $("#time").html(json.releaseDateString);//releaseDate
+                    $("#time").html(json.releaseDate);//releaseDate
                     $("#resource").html(json.source);//source
                     $(".content").html(json.content);//内容区
                 },
                 callbackFail: function(json){
-                    tipAction(json.msg);
+                    tipAction(json.message);
                 }
             }]
             $.ajaxLoading(obj);

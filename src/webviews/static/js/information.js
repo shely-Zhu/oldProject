@@ -35,14 +35,12 @@ $(function(){
 
             //请求页面数据
             var obj = [{
-                url: site_url.h5FindContentDetailById_api,
+                url: site_url.findContentDetailById_api,
                 data: {
-                    hmac: "", //预留的加密信息     
-                    params: {
-                        "contentId":splitUrl['id'],//内容ID
-                    }
+                    "contentId":splitUrl['id'],//内容ID
                 },
-                needDataEmpty: false, //不判断data是否为空
+                needDataEmpty: false, //不判断data是否为
+                contentTypeSearch: true,
                 callbackDone: function(json){
 
                     var json = json.data;
@@ -53,7 +51,7 @@ $(function(){
                     $(".content").html(json.content);//内容区
                 },
                 callbackFail: function(json){
-                    tipAction(json.msg);
+                    tipAction(json.message);
                 }
             }]
             $.ajaxLoading(obj);
