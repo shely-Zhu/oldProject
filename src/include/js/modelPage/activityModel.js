@@ -54,10 +54,7 @@ $(function() {
                 url: site_url.activity_api, //接口
                 //needLogin:true,//需要判断是否登陆
                 data: {
-                    "hmac": "", //预留的加密信息
-                    "params": { //请求的参数信息
-                        "id": splitUrl()['id'], //id 
-                    }
+                    "id": splitUrl()['id'], //id 
                 },
                 callbackDone: function(json) { //成功后执行的函数
 
