@@ -73,7 +73,7 @@ var prvDetail = {
         isNewcomer: '', //是否新手专享产品【0.否 1.是】
         isElecContract: 0, //是否适用于电子合同【0.否 1.是】
         fundCode: arg['fundCode'],
-        unitNetValueDes: '每周五更新最新净值，节假日顺延',
+        unitNetValueDes: '每周五更新上周净值',
     },
     init: function() {
         var that = this;
@@ -318,7 +318,7 @@ var prvDetail = {
                 url: site_url.prvLight_api, //queryProductImage
                 data: {
                     projectId: that.status.fundCode, // 产品代码
-                    productModule: "unitNetValueCycleAPP",
+                    productModule: "netValueCycleAPP",
                     limitNum: "1", // 
                 },
                 needLogin: true,
