@@ -58,12 +58,12 @@ author: sunfuping 2018-12-5
 	{{#compareTwo enjoy}}
 	<a class="icoBox"  onclick="window.location.href=site_url.agreementModel_url+'?id={{id}}&rightsCenter';">
 		<div class="ico"><img src="{{iconUnlock}}" alt=""></div>
-		<div class="discrb">{{benefitName}}</div>
+		<div class="discrb">{{rightName}}</div>
 	</a>
 	{{else}}
 	<a class="icoBox" onclick="window.location.href=site_url.agreementModel_url+'?id={{id}}&rightsCenter';">
 		<div class="ico"><img src="{{iconLocked}}" alt=""></div>
-		<div class="discrb">{{benefitName}}</div>
+		<div class="discrb">{{rightName}}</div>
 	</a>
 	{{/compareTwo}}
 {{/each}}

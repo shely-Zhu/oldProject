@@ -53,7 +53,7 @@ $(function() {
 
                             var result = json.data[0];
                             //给页面title赋值
-                            window.document.title = result.benefitName;
+                            window.document.title = result.rightName;
                             $(".content").html(result.content); //内容区
                         },
                     }]; 
