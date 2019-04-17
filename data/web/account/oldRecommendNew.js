@@ -9,7 +9,7 @@ var Mock = require('mockjs');
 //这里直接返回的就是JSON格式
 var mymessage = Mock.mock({
     "hmac": "hmac",
-    "status": "0",
+    "status": "0000",
     "code": "CS0000",
 	"msg": "1111111111",
 	"data":{

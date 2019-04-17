@@ -23,10 +23,11 @@ require('./ajaxLoading.js');;
                 url: site_url.checkLogin_api,
                 data: null,
                 needLogin: true,
-                dataType: 'jsonp',
-                needCrossDomain: true,
+                //dataType: 'jsonp',
+                //needCrossDomain: true,
                 needDataEmpty: false,
                 callbackDone: function(data) {
+                    console.log(123);
                     // 登录状态
                     if (isRisk) { //根据参数判断需不需要风险测评
                         var userObj = [{
@@ -61,7 +62,7 @@ require('./ajaxLoading.js');;
                     }
                 },
                 callbackFail: function(data) {
-                    tipAction(data.msg);
+                    tipAction(data.message);
                 }
             }]
             $.ajaxLoading(obj);
