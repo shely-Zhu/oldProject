@@ -54,9 +54,7 @@ $(function() {
 					$('.public_04 img').attr('src',jsonData[3].imgUrl);
 
 				},
-				callbackFail: function() {
-					console.log("失败");
-				}
+				    
 			}];
 			$.ajaxLoading(obj);
 		},
@@ -85,9 +83,7 @@ $(function() {
                     that.eBusinessRecord();
                     // (typeof(callback) == 'function') && callback();
 					},
-					callbackFail:function(json){
-						tipAction(json.msg);
-					},
+					   
 					callbackNoData:function(){
 						console.log('我在nodata里面')
 					},
@@ -132,9 +128,7 @@ $(function() {
                 callbackDone: function(json) {
                     window.location.href = that.clickBtn;
                 },
-                callbackFail: function(json) {
-                    tipAction(json.msg);
-                },
+                     ,
 
 
             }];

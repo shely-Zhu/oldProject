@@ -25,9 +25,6 @@ function isLogin(comeUrl) {
         callbackDone: function() {
             isCustType(comeUrl);
         },
-        callbackFail: function(data) {
-            tipAction(data.msg);
-        }
     }]
     $.ajaxLoading(obj);
 };
@@ -51,9 +48,6 @@ function isCustType(comeUrl) {
             var value = (jsonData.custType == "0" || jsonData.custType == "2") ? true : false; //机构为true
             alertMsg(value, comeUrl);
         },
-        callbackFail: function(data) {
-            tipAction(data.msg);
-        }
     }]
     $.ajaxLoading(userObj);
 };
@@ -113,16 +107,10 @@ function alertMsg(value, comeUrl) {
                         }
                         $.elasticLayer(idDateObj);
                     },
-                    callbackFail: function(data) {
-                        tipAction(data.msg);
-                    }
                 }];
                 $.ajaxLoading(getMessageByPages);
             }
         },
-        callbackFail: function(data) {
-            tipAction(data.msg);
-        }
     }];
     $.ajaxLoading(obj);
 };
@@ -146,9 +134,6 @@ function readed(msgId) {
         callbackDone: function(data) {
 
         },
-        callbackFail: function(data) {
-            tipAction(data.msg);
-        }
     }];
     $.ajaxLoading(alterMsgStatus);
 }

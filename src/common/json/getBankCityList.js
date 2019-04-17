@@ -40,9 +40,6 @@ module.exports = function() {
                 })
 
             },
-            callbackFail: function(json) {
-
-            }
         }];
         $.ajaxLoading(obj);
     }

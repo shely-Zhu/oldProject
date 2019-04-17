@@ -103,9 +103,6 @@
 	        			}			        
 					}
 				},
-				callbackFail: function(json){
-					tipAction(json.msg);
-				},
 				callbackNoData: function(json){
 					if( that.page == 1){
         				//第一页时

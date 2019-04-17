@@ -32,9 +32,7 @@ function isCustTypeOne(outdateFreezeStatus, lawFreezeStatus, url, custType) {
                 // 获取客户是机构客户还是个人客户
                 f = elasticLayer(outdateFreezeStatus, lawFreezeStatus, url, jsonData.accountType); // 调用弹框
             },
-            callbackFail: function(data) {
-                tipAction(data.msg);
-            }
+             
         }]
         $.ajaxLoading(userObj);
         return f;

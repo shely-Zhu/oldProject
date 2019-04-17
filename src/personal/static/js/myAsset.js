@@ -111,9 +111,6 @@ $(function(){
 
 
                 },
-                callbackFail:function(data){
-                    tipAction(data.msg);
-                },
                 callbackNoData:function(json){
  
                 }
@@ -167,10 +164,7 @@ $(function(){
                         that.getElements.emptyBox.show();//没有数据显示状态
                     }
 
-               },
-               callbackFail:function(data){
-                    tipAction(data.msg);
-                }
+               }
             },{
                 url: site_url.JJSTotalAsset_api,
                 data: {    
@@ -185,9 +179,7 @@ $(function(){
                         $(".dingBtn").hide();
                     }
                 },
-                callbackFail: function(data) {
-                    tipAction(data.msg);
-                }
+                     
             }];
             $.ajaxLoading(obj);
         },
@@ -270,9 +262,7 @@ $(function(){
 
                         $('#pullUp').css('visibility', 'hidden');          
                     },
-                    callbackFail:function(data){
-                        tipAction(data.msg);
-                    }
+                    
                 }];
                 $.ajaxLoading(obj);  
             }

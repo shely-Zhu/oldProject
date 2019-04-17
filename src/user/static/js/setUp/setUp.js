@@ -77,9 +77,7 @@ $(function(){
 						$('.changePhone .word').html(json.data.linkPhone);
 					}
 				},
-				callbackFail: function(json){
-
-				}
+				     
 			}]
 			$.ajaxLoading(obj);
 		},

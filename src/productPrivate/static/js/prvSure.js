@@ -70,9 +70,7 @@ var prvSure = {
                     that.getCardList();
                 }
             },
-            callbackFail: function(data) {
-                tipAction(data.msg);
-            }
+             
         }, {
             url: site_url.custBro_api, // 理财师
             data: {
@@ -118,9 +116,7 @@ var prvSure = {
                     $(".prdPrvSure .prdInfo").show();
                 }
             },
-            callbackFail: function(data) {
-                tipAction(data.msg);
-            }
+             
         }];
 
         $.ajaxLoading(obj)

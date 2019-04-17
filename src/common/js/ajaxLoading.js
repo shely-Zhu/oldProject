@@ -87,7 +87,6 @@ var splitUrl = require('./components/splitUrl.js')();
     $.extend($, {
 
         ajaxLoading: function(param) {
-            
             //默认配置
             var defaults = {
                 url: '',
@@ -107,18 +106,15 @@ var splitUrl = require('./components/splitUrl.js')();
                 //这里将needLogin改为true，让所有接口都会去判断code是否等于CF0004
                 //yangjinlai 2018-10-12
                 needLogin: true, //需要判断登录是否过期
-
                 needCrossDomain: false, //true-跨域, false-不跨域
                 needDataEmpty: true, //需要判断data是否为空
                 needLoading: false, //不需要显示loading遮罩
                 callbackDone: function() {},
                 callbackFail: function() {},
                 callbackNoData: function() {},
-
                 //formData
                 formData: false, //判断是否需要使用formData上传
-
-                loginNotJump: false, //判断CF0004后是否需要跳转到登录页面，true--不跳转, false---跳转 
+                loginNotJump: false, //判断40007后是否需要跳转到登录页面，true--不跳转, false---跳转 
                 callbackLoginFunc: function() {}, //如果未登录不需要跳转，执行此函数 
                 appRisk: false, //当需要与app交互时
             };                     
@@ -128,11 +124,9 @@ var splitUrl = require('./components/splitUrl.js')();
             $.each(param, function(i, el) {
                 obj.push($.extend({}, defaults, el));
             })
-            document.cookie = "APPSESSIONID=ab3fa1e1-9205-4a9a-9397-3ac4546dc4a3;domain="+window.location.hostname+";path=/"
 
             //发送ajax请求
             var ajaxFunc = function(obj) {
-                // document.cookie = "APPSESSIONID=cb13107f-232e-4723-9930-ec3c53874797;domain="+window.location.hostname+";path=/"
                 var ajax = $.Deferred(); //声明一个deferred对象
 
                 //设置ajax请求的contentType  data数据添加JSON.stringify
@@ -144,27 +138,7 @@ var splitUrl = require('./components/splitUrl.js')();
                     data=obj.data;
                 }
 
-                if (obj.formData) {
-                    //使用formData格式上传
-                    var ajaxJson = {
-                        url: obj.url,
-                        data: data,
-                        contentType: contentType,
-                        type: obj.type,
-                        dataType: obj.dataType,
-                        async: obj.async,
-                        contentType: false,
-                        processData: false
-                    };
-
-                    // // 如果是app，header中添加newapp参数，为了app提前审核
-                    // if (window.currentIsApp) {
-                    //     ajaxJson["headers"] = {
-                    //         "newapp": splitUrl['newapp']
-                    //     }
-                    // }
-                    ajax = $.ajax(ajaxJson);
-                }else if (obj.needCrossDomain) {
+                if (obj.needCrossDomain) {
                     var ajaxJson = {};
                     // 跨域请求sso checkuserinfo接口
                     if (window.currentIsApp) {
@@ -172,20 +146,11 @@ var splitUrl = require('./components/splitUrl.js')();
                         ajaxJson = {
                             url: site_url.checkLogin_api,
                             data: {
-                                hmac: "", //预留的加密信息     
-                                params: { //请求的参数信息
-                                }
                             },
                             contentType: contentType,
                             type: obj.type,
                             dataType: 'json',
                             async: false,
-                            // beforeSend: function(xhr) {
-                            //     xhr.setRequestHeader("newapp");
-                            // },
-                            // headers: {
-                            //     "newapp": splitUrl['newapp']
-                            // }
                         };
                     } else {
                         // wap 使用jsonp请求接口
@@ -224,21 +189,13 @@ var splitUrl = require('./components/splitUrl.js')();
                         async: obj.async,
                     };
 
-                    // 如果是app，header中添加newapp参数，为了app提前审核
-                    // if (window.currentIsApp) {
-                    //     var appurl = splitUrl['appurl'];
-
-                    //     // 如果是app，header中添加newapp参数，为了app提前审核
-                    //     if (window.currentIsApp) {
-                    //         ajaxJson["headers"] = {
-                    //             "newapp": splitUrl['newapp']
-                    //         }
-                    //     }
-                    // }
                     ajax = $.ajax(ajaxJson);
                 }
+
+                
                 ajax.done(function(data) {
-                    if (obj.needLogin) {
+                    
+                    if (obj.needLogin) { // 需要登录
                         if (obj.loginNotJump && data.status == '4007') { //如果未登录，且不需要跳转,sso接口未登录code也是cf0004,需要通过islogin判断
                             //未登录状态下，不跳转页面，执行对应函数
                             obj.callbackLoginFunc(data);
@@ -270,25 +227,15 @@ var splitUrl = require('./components/splitUrl.js')();
                         }
                     }
 
-                    //判断是否风险测评
-                    //if( obj.needRisk && data.code == 'RE0004'){
-                    if (data.code == 'RE0004') {
-                        //执行风险测评的回调函数
-                        //obj.callbackRisk(data);
-                        tipAction('风险测评过期', function() {
-                            //跳转到风险测评页，使用接口返回的链接
-                            window.location.href = window.location.origin + data.data;
-                        })
-                        return false;
-
-                    }
 
                     if (data.status != '0000' && data.status != '4007' && data.status != '1000') {
                         //数据请求失败的情况
                         if (!data.msg) {
                             data.msg = '系统异常';
                         }
-                        obj.callbackFail(data);
+
+                        obj.callbackFail ? obj.callbackFail(data) : tipAction(data.msg);
+
                         return false;
                     }
 
@@ -303,6 +250,7 @@ var splitUrl = require('./components/splitUrl.js')();
                             return false;
                         }
                     }
+
                     //数据请求成功且不为空，执行成功的回调函数
                     if (window.currentIsApp && obj.appRisk) {
                         obj.callbackDone(data, function() {
@@ -317,7 +265,7 @@ var splitUrl = require('./components/splitUrl.js')();
 
                 //ajax错误的情况
                 ajax.fail(function(data, result, msg) {
-                    obj.callbackFail(data);
+                    obj.callbackFail ? obj.callbackFail(data) : tipAction("接口请求失败")
                     tipAction("接口请求失败");
                 })
 

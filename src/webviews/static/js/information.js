@@ -50,9 +50,6 @@ $(function(){
                     $("#resource").html(json.reportSource);//source
                     $(".content").html(json.content);//内容区
                 },
-                callbackFail: function(json){
-                    tipAction(json.message);
-                }
             }]
             $.ajaxLoading(obj);
 

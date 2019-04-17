@@ -82,9 +82,6 @@ $(function() {
                     callbackNoData: function() { // 没查询到理顾什么都不做
 
                     },
-                    callbackFail: function(json) {
-                        tipAction(json.msg);
-                    }
                 }];
                 $.ajaxLoading(obj);
             }

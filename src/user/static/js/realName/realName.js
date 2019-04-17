@@ -138,9 +138,6 @@ $(function(){
 				        	autoTextarea(el);// 调用
 				       	})
 					},
-					callbackFail: function(json){
-
-					}
 				}];
 				$.ajaxLoading(obj);
 			};

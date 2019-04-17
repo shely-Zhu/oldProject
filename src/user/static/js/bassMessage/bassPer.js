@@ -121,9 +121,6 @@ $(function(){
 										  .attr('num',1);
 					            	}
 					            },
-					            callbackFail: function(json) {
-					            	tipAction(data.msg);
-					            }
 					        }];
 					        $.ajaxLoading(queryFreezeStatus);
 						}
@@ -172,9 +169,7 @@ $(function(){
 			        	autoTextarea(el);// 调用
 			        })
 				},
-				callbackFail: function(json){
-
-				}
+				     
 			}];
 			$.ajaxLoading(obj);
 		},

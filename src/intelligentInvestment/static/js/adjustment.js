@@ -75,9 +75,6 @@ $(function(){
 
 					}
 				},
-				callbackFail: function(json){
-					tipAction(json.msg);
-				},
 			}]
 			$.ajaxLoading(obj);
 		},
@@ -173,17 +170,11 @@ $(function(){
 
 									
 								},
-								callbackFail: function(json){
-									tipAction(json.msg);
-								},
 							}]
 							$.ajaxLoading(obj);
 
 						}
 					},
-					callbackFail: function(json) {
-						tipAction(json.msg);
-					}
 				}];
 				$.ajaxLoading(obj);
 			})

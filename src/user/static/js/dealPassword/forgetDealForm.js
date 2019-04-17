@@ -81,9 +81,7 @@ $(function() {
 
                     }
                 },
-                callbackFail: function(json) {
-                    tipAction(json.msg);
-                }
+                     
             }]
             $.ajaxLoading(obj);
 

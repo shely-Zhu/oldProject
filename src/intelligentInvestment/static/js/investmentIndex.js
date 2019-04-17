@@ -132,9 +132,6 @@ var tradeList = {
 				$('.riskContent').html(jsonData.pageList[0].introduction);
 
 			},
-			callbackFail: function(json){
-				tipAction(json.msg);
-			},
 			callbackNoData: function(json){
  
 			}

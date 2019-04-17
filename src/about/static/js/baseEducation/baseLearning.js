@@ -63,11 +63,7 @@ $(function(){
 					});
 					
 				},
-				callbackFail: function(json){  //失败后执行的函数
-
-					tipAction(json.msg);
-
-				}
+				
 			}];
 			$.ajaxLoading(obj);
 
@@ -102,9 +98,7 @@ $(function(){
 						that.fundEducationRecord();
 						(typeof(callback) == 'function') && callback();						
 					},
-					callbackFail:function(json){
-						tipAction(json.msg);
-					},
+					   
 					callbackNoData:function(){
 						console.log('我在nodata里面')
 					},
@@ -148,9 +142,7 @@ $(function(){
 					callbackDone: function(json){
 						window.location.href = site_url.baseResult_url;
 					},
-					callbackFail:function(json){
-						tipAction(json.msg);
-					},
+					   
 				}
 			];
 			$.ajaxLoading(obj);
