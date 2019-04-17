@@ -40,12 +40,9 @@ $(function(){
             var obj = [{
                 url: site_url.findBannerLikePosition_api, //会员卡片图片文案
                 data: {//请求的参数信息
-                	hmac:"", //预留的加密信息     
-					params:{//请求的参数信息
-						adPosition :"vip",//类型（标志位）
-						seqNo:"4",//显示顺序
-						limitCount:"7",//展示幅数
-					} 
+										adPosition :"vip",//类型（标志位）
+										seqNo:"4",//显示顺序
+										limitCount:"7",//展示幅数
                 },
                 //needLogin:true,//需要判断是否登陆
                 //needDataEmpty: false,//不需要判断data是否为空
@@ -138,11 +135,8 @@ $(function(){
         	var that=this;
         	var obj = [{
             	url: site_url.queryRightsByLevel_api, //会员权益查询
-                data: {//请求的参数信息 
-                    hmac:"", //预留的加密信息     
-					params:{//请求的参数信息
-						level: i+1 ,//会员等级
-					}
+                data: {//请求的参数信息    
+										level: i+1 ,//会员等级
                 },
                 callbackDone: function(json){//成功后执行的函数
                     var data = json.data;
