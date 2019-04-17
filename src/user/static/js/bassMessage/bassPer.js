@@ -264,7 +264,7 @@ $(function(){
 						window.location.href = new Base64().decode(splitUrl()["originUrl"]);
 					},
 					callbackFail:function(data){
-						tipAction(data.msg,function(){
+						tipAction(data.message,function(){
 							$this.removeClass("disable");
 						});
 					}

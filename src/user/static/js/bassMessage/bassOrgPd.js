@@ -275,7 +275,7 @@ $(function(){
 						}
 					},
 					callbackFail:function(data){
-						tipAction(data.msg,function(){
+						tipAction(data.message,function(){
 							$this.removeClass("disable");
 						});
 					}

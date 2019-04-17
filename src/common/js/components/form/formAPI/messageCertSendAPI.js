@@ -82,7 +82,7 @@ module.exports = function(phone) {
         callbackFail: function(json) {
 
             timeCount.dxyzmReset();
-            tipAction(json.msg);
+            tipAction(json.message);
 
             getTwyzm();
         }

@@ -298,7 +298,7 @@ $(function(){
 						}
 					},
 					callbackFail: function(json){
-						tipAction(json.msg, function(){
+						tipAction(json.message, function(){
 							getNewTwyzm();
 							$this.removeAttr("disabled").removeClass('disable');
 						});

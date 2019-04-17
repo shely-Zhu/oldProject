@@ -227,7 +227,7 @@ var prvSure = {
                                 },
                                 callbackFail: function(data) {
                                     t.hide();
-                                    tipAction(data.msg, function() {
+                                    tipAction(data.message, function() {
                                         t.$yes.removeAttr("disabled");
                                     });
                                 }
@@ -286,7 +286,7 @@ var prvSure = {
                             },
                             callbackFail: function(data) {
                                 t.hide();
-                                tipAction(data.msg, function() {
+                                tipAction(data.message, function() {
                                     t.$yes.removeAttr("disabled");
                                 });
                             }

@@ -148,7 +148,7 @@ var search={
 		      	}, 200);
 			},
 			callbackFail: function(json){
-				tipAction(json.msg);
+				tipAction(json.message);
 			}
 		}]  
 		$.ajaxLoading(obj);

@@ -38,7 +38,7 @@ module.exports = function(phone ){
 	    callbackFail: function(json){
 	        //显示错误提示
 	        timeCount.dxyzmReset();
-	        tipAction( json.msg );
+	        tipAction( json.message );
 
 	        getTwyzm();
 	    }

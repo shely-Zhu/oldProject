@@ -76,7 +76,7 @@ module.exports = function(){
 
 	                t.$yes.removeAttr('disabled').removeClass('disable');
 
-	                tipAction(json.msg);
+	                tipAction(json.message);
 
 	                getTwyzm();
 

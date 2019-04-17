@@ -270,7 +270,7 @@ var prvDetail = {
 
         //     },
         //     callbackFail: function(data) {
-        //         tipAction(data.msg);
+        //         tipAction(data.message);
         //     }
         // }];
         // $.ajaxLoading(msgObj);

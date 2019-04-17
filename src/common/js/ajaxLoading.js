@@ -205,7 +205,7 @@ var splitUrl = require('./components/splitUrl.js')();
 
                             //微信判断登录状态
                             if (data.code == 'WF0010') {
-                                tipAction(data.msg, function() {
+                                tipAction(data.message, function() {
                                     //跳转到微信授权登陆页
                                     window.location.href = go_url.wx_login_url + window.location.origin + window.location.pathname;
                                 })
@@ -230,11 +230,11 @@ var splitUrl = require('./components/splitUrl.js')();
 
                     if (data.status != '0000' && data.status != '4007' && data.status != '1000') {
                         //数据请求失败的情况
-                        if (!data.msg) {
-                            data.msg = '系统异常';
+                        if (!data.message) {
+                            data.message = '系统异常';
                         }
 
-                        obj.callbackFail ? obj.callbackFail(data) : tipAction(data.msg);
+                        obj.callbackFail ? obj.callbackFail(data) : tipAction(data.message);
 
                         return false;
                     }
@@ -264,7 +264,7 @@ var splitUrl = require('./components/splitUrl.js')();
                 
 
                 //ajax错误的情况
-                ajax.fail(function(data, result, msg) {
+                ajax.fail(function(data, result, message) {
                     obj.callbackFail ? obj.callbackFail(data) : tipAction("接口请求失败");
                 })
 

@@ -124,7 +124,7 @@ var pledge = {
                 },
                 callbackFail: function(json) {
                     that.getElements.listLoading.hide();
-                    tipAction(json.msg);
+                    tipAction(json.message);
                 }
             }]
             $.ajaxLoading(obj);

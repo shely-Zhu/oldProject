@@ -110,7 +110,7 @@ $(function(){
 				},
 				callbackNoData:function(){
 
-					tipAction(json.msg);
+					tipAction(json.message);
 				}
 			}];
 			$.ajaxLoading(obj);

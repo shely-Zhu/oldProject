@@ -276,7 +276,7 @@ module.exports = function(callback, imgDefault) {
 
             //显示错误信息
 
-            tipAction(json.msg);
+            tipAction(json.message);
         },
 
         //上传成功后的处理函数

@@ -102,7 +102,7 @@ module.exports = function(value, url, custType) {
 	
         },
         callbackFail: function(json) {
-            tipAction(json.msg);
+            tipAction(json.message);
             r = true;
         }
     }];

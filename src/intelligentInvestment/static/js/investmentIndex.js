@@ -61,7 +61,7 @@ var tradeList = {
 
 			},
 			callbackFail: function(json){
-				tipAction(json.msg);
+				tipAction(json.message);
 				window.location.href = site_url.programFail_url;
 			},
 			callbackNoData: function(json){
@@ -160,7 +160,7 @@ var tradeList = {
 								
 			},
 			callbackFail: function(json){
-				tipAction(json.msg);
+				tipAction(json.message);
 				$e.removeAttr("disabled").removeClass('disable');			
 			},
 

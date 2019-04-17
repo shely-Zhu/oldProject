@@ -194,7 +194,7 @@ $(function() {
                 },
                 callbackFail: function(json) {
                     that.$e.listLoading.hide();
-                    tipAction(json.msg);
+                    tipAction(json.message);
 
                 },
                 callbackNoData: function(json) {

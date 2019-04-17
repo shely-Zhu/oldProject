@@ -137,7 +137,7 @@ $(function() {
                     window.location.href = site_url.growthPlanUrl;
                 },
                 callbackFail: function(json) {
-                    tipAction(json.msg);
+                    tipAction(json.message);
                     
                     that.ele.createBtn.removeAttr("disabled").removeClass('disable');
                 }

@@ -173,7 +173,7 @@ $(function() {
                         }
                     },
                     callbackFail: function(json) {
-                        that.$e.errorTip.show().find('.tipWrapper').html(json.msg);
+                        that.$e.errorTip.show().find('.tipWrapper').html(json.message);
                         setTimeout(function() {
                             //黑色条隐藏
                             that.$e.errorTip.hide();

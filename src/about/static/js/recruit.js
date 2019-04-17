@@ -183,7 +183,7 @@ $(function(){
 								window.location.href=site_url.login_html_url+'?originUrl=' + new Base64().encode(window.location.href);
 							}
 						}	
-						that.getElements.errorTip.show().find('.tipWrapper').html(json.msg);
+						that.getElements.errorTip.show().find('.tipWrapper').html(json.message);
 						setTimeout(function(){
 							//黑色条隐藏
 							that.getElements.errorTip.hide();

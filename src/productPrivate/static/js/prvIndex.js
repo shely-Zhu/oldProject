@@ -66,7 +66,7 @@ var index = {
             },
             callbackFail: function(data) {
                 that.isLogin = null;
-                tipAction(data.msg);
+                tipAction(data.message);
             }
         }]
         $.ajaxLoading(obj);

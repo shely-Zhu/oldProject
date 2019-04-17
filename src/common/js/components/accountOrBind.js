@@ -60,7 +60,7 @@
                         },
                         callbackFail: function(json){
                             $('.elasticLayerThree').hide();
-                            tipAction( json.msg , function(){
+                            tipAction( json.message , function(){
                                 $('.elasticLayerThree').show();
                             });
                         }
