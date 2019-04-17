@@ -164,7 +164,7 @@ $(function() {
                     that.setting.weixinConf = Object.assign(that.setting.weixinConf, Object(data));
                     // 确保3个接口（鉴权，分享内容，分享链接）都请求成功，再设置分享链接
                     that.asyncAll();
-                }, function() {}, true)
+                }, function() {}, function(){}, true)
             }
 
             // 获取理财师的接口
@@ -188,7 +188,7 @@ $(function() {
                     $('.rule_des_wrap').show();
                     $('.rule_des_cont').html(data.pageList[0].content);
                 }
-            }, function() {}, true)
+            }, function() {},function(){}, true)
 
             that.getData();
         },

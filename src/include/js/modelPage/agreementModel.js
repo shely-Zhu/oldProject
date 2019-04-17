@@ -47,21 +47,18 @@ $(function() {
                         url: site_url.queryRightsByLevel_api, //协议接口
                         needLogin: true, //需要判断是否登陆
                         data: {
-                            "hmac": "", //预留的加密信息
-                            "params": { //请求的参数信息
-                                "id": splitUrl()['id'], //内容ID
-                            }
+                            "id": splitUrl()['id'], //内容ID
                         },
                         callbackDone: function(json) { //成功后执行的函数
 
                             var result = json.data[0];
                             //给页面title赋值
-                            window.document.title = result.rightName;
+                            window.document.title = result.benefitName;
                             $(".content").html(result.content); //内容区
 
                         },
                         callbackFail: function(json) { //失败后执行的函数
-                            tipAction(json.msg);
+                            tipAction(json.message);
                         }
                     }]; 
                 }else if(splitUrl()['cash'] == 'true'){  //现金产品的协议
