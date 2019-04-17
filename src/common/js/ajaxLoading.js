@@ -265,8 +265,7 @@ var splitUrl = require('./components/splitUrl.js')();
 
                 //ajax错误的情况
                 ajax.fail(function(data, result, msg) {
-                    obj.callbackFail ? obj.callbackFail(data) : tipAction("接口请求失败")
-                    tipAction("接口请求失败");
+                    obj.callbackFail ? obj.callbackFail(data) : tipAction("接口请求失败");
                 })
 
                 return ajax;
