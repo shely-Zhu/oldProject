@@ -23,10 +23,7 @@ module.exports = function( str ){
 		callbackDone: function(json){
 			r = true;
 		},
-		callbackFail: function(json){
-			//输入错误，显示提示信息
-			tipAction(json.msg);
-		}
+		    
 	}]
 	$.ajaxLoading(obj);
 

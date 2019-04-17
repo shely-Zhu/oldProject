@@ -161,9 +161,6 @@ $(function() {
                         //$('.items .real').html('已认证').addClass('non').parent().attr('href', resultUrl);
                     }
                 },
-                callbackFail: function(json) {
-
-                }
             }];
             $.ajaxLoading(obj);
         },
@@ -187,9 +184,6 @@ $(function() {
                     // 已请求过qureyClassification接口
                     that.isQueryApi = true;
                 },
-                callbackFail: function(json) {
-
-                }
             }];
             $.ajaxLoading(obj);
 

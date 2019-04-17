@@ -49,9 +49,7 @@ $(function() {
                     Slider($('.landing_img'), imgArr, 0, false, true);
 
                 },
-                callbackFail: function(json) {
-                    tipAction(json.msg);
-                }
+                     
             }];
             $.ajaxLoading(obj);
         },
@@ -70,9 +68,7 @@ $(function() {
                 callbackDone: function(json) {
                     window.location.href = site_url.createPlanUrl;
                 },
-                callbackFail: function(json) {
-                    tipAction(json.msg);
-                }
+                     
             }];
             $.ajaxLoading(obj);
         },

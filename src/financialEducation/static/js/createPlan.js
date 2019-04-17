@@ -100,9 +100,7 @@ $(function() {
                 callbackNoData: function() { //没有初始化过页面
                     window.location.href = site_url.guidePageUrl;
                 },
-                callbackFail: function(json) {
-                    tipAction(json.msg);
-                }
+                     
             }];
             $.ajaxLoading(obj);
         },

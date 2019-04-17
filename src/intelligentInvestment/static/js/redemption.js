@@ -63,9 +63,7 @@ $(function() {
                     // 赎回份额
                     that.changeVal();
                 },
-                callbackFail: function(json) {
-                    tipAction(json.msg);
-                }
+                     
             });
             obj.push({
                 url: site_url.totalAssets_api, // 组合资产
@@ -83,9 +81,7 @@ $(function() {
                     // 组合名称
                     $(".tit .title").html(combinTotalAsset.combName);
                 },
-                callbackFail: function(json) {
-                    tipAction(json.msg);
-                }
+                     
             });
             $.ajaxLoading(obj);
         },

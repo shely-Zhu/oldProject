@@ -60,9 +60,7 @@ $(function() {
                             $(".content").html(result.content); //内容区
 
                         },
-                        callbackFail: function(json) { //失败后执行的函数
-                            tipAction(json.msg);
-                        }
+                             
                     }]; 
                 }else if(splitUrl()['cash'] == 'true'){  //现金产品的协议
                     var obj = [{
@@ -82,9 +80,7 @@ $(function() {
                             $(".content").html(result.content); //内容区
 
                         },
-                        callbackFail: function(json) { //失败后执行的函数
-                            tipAction(json.msg);
-                        }
+                             
                     }]; 
 
                 } else{ // 除权益中心页面执行以下操作
@@ -103,9 +99,7 @@ $(function() {
                             $(".content").html(result.content); //内容区
 
                         },
-                        callbackFail: function(json) { //失败后执行的函数
-                            tipAction(json.msg);
-                        }
+                             
                     }]; 
                 }
                 

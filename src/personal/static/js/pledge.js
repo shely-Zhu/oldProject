@@ -43,9 +43,7 @@ var pledge = {
                 callbackDone: function(data) {
                     $(".totalNum").html(data.data.allTotalAssets);
                 },
-                callbackFail: function(data) {
-                    tipAction(data.msg);
-                }
+                     
             }, {
                 url: site_url.JJSTotalAsset_api,
                 data: {    
@@ -58,9 +56,7 @@ var pledge = {
                 callbackDone: function(data) {
                     $(".introduce span").html(data.data.totalAssets);
                 },
-                callbackFail: function(data) {
-                    tipAction(data.msg);
-                }
+                     
             },
             {
                 url: site_url.JJSDetail_api,
@@ -85,9 +81,7 @@ var pledge = {
                         $(".without").show();
                     }
                 },
-                callbackFail: function(data) {
-                    tipAction(data.msg);
-                }
+                     
             }
         ]
         $.ajaxLoading(obj);

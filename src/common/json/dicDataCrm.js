@@ -60,9 +60,6 @@ module.exports=function(dicNo,num,namelist){
 				}		
 				return namelist
 			},
-			callbackFail: function(json){
-				
-			}	
 		}];
 		$.ajaxLoading(obj);
 	}

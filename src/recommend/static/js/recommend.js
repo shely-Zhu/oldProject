@@ -111,9 +111,6 @@ $(function() {
                         that.initialPage()
                     }
                 },
-                callbackFail: function(json) {
-                    tipAction(json.message);
-                }
             }];
             $.ajaxLoading(obj);
         },

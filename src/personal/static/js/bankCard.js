@@ -108,11 +108,6 @@ $(function(){
 					// 	$('.haveOpened').show();
 					// }
 				},
-				callbackFail: function(json){  //失败后执行的函数
-
-					tipAction(json.msg);
-
-				},
 				callbackNoData:function(){
 
 					tipAction(json.msg);

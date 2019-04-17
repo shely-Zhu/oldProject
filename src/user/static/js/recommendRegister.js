@@ -62,9 +62,7 @@ $(function() {
                     var imgUrl = json.data[0].imgUrl;
                     $('.banner_wrap img').attr('src', imgUrl)
                 },
-                callbackFail: function(json) {
-
-                },
+               
             }]
             $.ajaxLoading(obj);
         },

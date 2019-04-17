@@ -99,9 +99,7 @@ $(function() {
 						$(".complete a").attr("href");
 					}
 				},
-				callbackFail: function(json){
-
-				}
+				     
 			}]
 			$.ajaxLoading(obj);
 

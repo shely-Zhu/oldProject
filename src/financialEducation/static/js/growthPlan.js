@@ -75,9 +75,7 @@ $(function() {
                 callbackNoData: function() { // 没有初始化用户，去初始化
                     window.location.href = site_url.guidePageUrl;
                 },
-                callbackFail: function(json) {
-                    tipAction(json.msg);
-                }
+                     
             }];
             $.ajaxLoading(obj);
         },
@@ -119,9 +117,7 @@ $(function() {
                         that.ele.fundRecommend.hide();
                     }
                 },
-                callbackFail: function(json) {
-                    tipAction(json.msg);
-                }
+                     
             }];
             $.ajaxLoading(obj);
         },

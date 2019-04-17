@@ -41,9 +41,7 @@ $(function() {
                     $('.container .landing_img').attr('src', data.imgUrl)
 
                 },
-                callbackFail: function(json) {
-                    tipAction(json.msg);
-                }
+                     
             }];
             $.ajaxLoading(obj);
         },
@@ -69,9 +67,7 @@ $(function() {
                         window.location.href = site_url.growthPlanUrl;
                     }
                 },
-                callbackFail: function(json) {
-                    tipAction(json.msg);
-                }
+                     
             }];
             $.ajaxLoading(obj);
         },

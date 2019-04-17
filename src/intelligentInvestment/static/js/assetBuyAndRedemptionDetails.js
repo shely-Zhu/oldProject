@@ -63,9 +63,7 @@ $(function() {
                     $('#redemptionDetails').html(myTemplate(combinTradeDetailsList));
                     
                 },
-                callbackFail: function(json) {
-                    tipAction(json.msg);
-                }
+                     
             }];
             // 调仓
             var obj2 = [{
@@ -93,9 +91,7 @@ $(function() {
                     
                     $('#redemptionDetails').html(myTemplate(data)); 
                 },
-                callbackFail: function(json) {
-                    tipAction(json.msg);
-                }
+                     
             }];
           	
           	$.ajaxLoading(that.tradeType == 3 ?obj2 : obj1);

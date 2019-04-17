@@ -95,9 +95,7 @@ $(function() {
 
 					}
 				},
-				callbackFail: function(json) {
-					tipAction(json.msg);
-				}
+				     
 			}, { // 恒小智-组合持仓列表
 				url: site_url.shareList_api,
 				data: {
@@ -114,9 +112,7 @@ $(function() {
 					// 持仓表格渲染
 					holdingTable(data);
 				},
-				callbackFail: function(json) {
-					tipAction(json.msg);
-				}
+				     
 			}];
 			$.ajaxLoading(obj);
 		},
@@ -139,9 +135,7 @@ $(function() {
 					that.$e.followAdjustment.hide();
 
 				},
-				callbackFail: function(json) {
-					tipAction(json.msg);
-				}
+				     
 			}];
 			$.ajaxLoading(obj);
 

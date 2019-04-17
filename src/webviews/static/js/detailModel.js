@@ -55,9 +55,7 @@ $(function(){
                     $("#resource").html(json.source);//source
                     $(".content").html(json.content);//内容区
                 },
-                callbackFail: function(json){
-                    tipAction(json.message);
-                }
+                
             }]
             $.ajaxLoading(obj);
 
