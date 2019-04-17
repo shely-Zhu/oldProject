@@ -175,6 +175,10 @@ $(function() {
             }, function() {
                 //设置立即邀请好友的按钮状态为不可点
                 $('.btnButton .txt').addClass('disable').attr('disabled', 'disabled');
+            },function(){
+                // 没有理财师，生成包含客户信息的二维码
+                // 同步请求加密接口，拿到加密信息,通知app,生成二维码
+                that.generateShareLink();
             })
 
             // 规则说明
@@ -188,18 +192,13 @@ $(function() {
 
             that.getData();
         },
-        // 根据理财师处理页面逻辑
+        // 有数据返回的   根据理财师处理页面逻辑
         dealManagerLogic: function(data) {
             var that = this,
                 shareUrl = '', // 分享出去链接
                 existMain = data.existMain,
                 advisor = data.advisor;
-
-            if ($.util.objIsEmpty(advisor)) {
-                // 没有理财师，生成包含客户信息的二维码
-                // 同步请求加密接口，拿到加密信息,通知app,生成二维码
-                that.generateShareLink();
-            } else if (existMain == 0 && advisor.length > 1) {
+            if (existMain == 0 && advisor.length > 1) {
                 //无专属且理财师多于1位
 
                 //显示理财师选择
@@ -221,6 +220,7 @@ $(function() {
                 that.generateShareLink(advisor[0].empNo);
             }
         },
+
         /**
          * [queryAesEncrypt  同步请求加密接口，拿到加密信息,通知app,生成二维码]
          * @author songxiaoyu 2018-07-18
@@ -471,7 +471,7 @@ $(function() {
          * @param  {[type]}   sync       [同步请求]
          * @param  {Function} callback   [回掉函数--处理数据]
          */
-        generateAjaxObj: function(url, data, callback, callbackFail, contentTypeSearch) {
+        generateAjaxObj: function(url, data, callback, callbackFail, callbackNoData, contentTypeSearch) {
             var that = this;
 
             that.setting.ajaxArr.push({
@@ -492,6 +492,9 @@ $(function() {
                     tipAction(json.message);
                     callbackFail && callbackFail();
                 },
+                callbackNoData:function(){
+                    callbackNoData(); 
+                }
             });
         },
         /**

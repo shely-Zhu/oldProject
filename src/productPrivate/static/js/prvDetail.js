@@ -202,14 +202,11 @@ var prvDetail = {
                 isPass: "Y", //是否通过基金从业考试 Y：通过 N：未通过（新增）
             },
             needLogin: true,
-            //needEmptyData:true,
+            needEmptyData:true,
             callbackDone: function(data) {
                 var json = data.data;
 
-                if ($.util.objIsEmpty(json.advisor)) {
-                    $(".existMain").show();
-                    $(".existMain .server").show().find(".tel").attr("href", "tel:" + commonSetting.serverPhone).html(commonSetting.serverPhone);
-                } else if (json.existMain == "1" && !$.util.objIsEmpty(json.advisor)) {
+                if (json.existMain == "1" && !$.util.objIsEmpty(json.advisor)) {
                     $.each(json.advisor, function(i, el) {
                         if (el.isMain == "1") {
                             $(".existMain").show().find(".main .tel").attr("href", "tel:" + el.mobileTel).html(el.mobileTel);
@@ -225,6 +222,10 @@ var prvDetail = {
             },
             callbackFail: function(data) {
                 tipAction(data.message);
+            },
+            callbackNoData:function(){
+                $(".existMain").show();
+                $(".existMain .server").show().find(".tel").attr("href", "tel:" + commonSetting.serverPhone).html(commonSetting.serverPhone);
             }
         }, {
             url: site_url.prvLight_api, //queryProductImage

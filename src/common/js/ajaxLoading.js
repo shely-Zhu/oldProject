@@ -128,7 +128,7 @@ var splitUrl = require('./components/splitUrl.js')();
             $.each(param, function(i, el) {
                 obj.push($.extend({}, defaults, el));
             })
-            document.cookie = "APPSESSIONID=478bfa51-2719-47d6-8975-33ac55ca9888;domain="+window.location.hostname+";path=/"
+            document.cookie = "APPSESSIONID=ab3fa1e1-9205-4a9a-9397-3ac4546dc4a3;domain="+window.location.hostname+";path=/"
 
             //发送ajax请求
             var ajaxFunc = function(obj) {
@@ -239,7 +239,7 @@ var splitUrl = require('./components/splitUrl.js')();
                 }
                 ajax.done(function(data) {
                     if (obj.needLogin) {
-                        if (obj.loginNotJump && data.data.isLogin == '2') { //如果未登录，且不需要跳转,sso接口未登录code也是cf0004,需要通过islogin判断
+                        if (obj.loginNotJump && data.status == '4007') { //如果未登录，且不需要跳转,sso接口未登录code也是cf0004,需要通过islogin判断
                             //未登录状态下，不跳转页面，执行对应函数
                             obj.callbackLoginFunc(data);
                             return false;
@@ -253,7 +253,7 @@ var splitUrl = require('./components/splitUrl.js')();
                                     window.location.href = go_url.wx_login_url + window.location.origin + window.location.pathname;
                                 })
                                 return false;
-                            } else if (obj.dataType == 'jsonp' && data.data.isLogin == '2') {
+                            } else if (obj.dataType == 'jsonp' && data.status == '4007') {
                                 // sso接口未登录，需跳转
                                 manualTriggerLogin.locationFunc(data);
                                 //防止window.location.href在执行完请求里的所有代码之后再跳转
@@ -283,7 +283,7 @@ var splitUrl = require('./components/splitUrl.js')();
 
                     }
 
-                    if (data.status == 1) {
+                    if (data.status != '0000' && data.status != '4007' && data.status != '1000') {
                         //数据请求失败的情况
                         if (!data.msg) {
                             data.msg = '系统异常';
@@ -295,7 +295,7 @@ var splitUrl = require('./components/splitUrl.js')();
                     //数据请求成功的情况
                     var json = data.data;
 
-                    if (obj.needDataEmpty) {
+                    if (obj.needDataEmpty || data.status != '1000') {
                         //需要判断数据是否为空
                         if ($.util.objIsEmpty(json)) {
                             //数据为空，如果有传callbackNoData，执行
