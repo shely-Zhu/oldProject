@@ -295,7 +295,7 @@ var splitUrl = require('./components/splitUrl.js')();
                     //数据请求成功的情况
                     var json = data.data;
 
-                    if (obj.needDataEmpty || data.status != '1000') {
+                    if (obj.needDataEmpty || data.status == '1000') {
                         //需要判断数据是否为空
                         if ($.util.objIsEmpty(json)) {
                             //数据为空，如果有传callbackNoData，执行
