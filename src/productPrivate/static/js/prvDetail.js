@@ -78,9 +78,9 @@ var prvDetail = {
     init: function() {
         var that = this;
         //检查是否登录及风险测评
-        $.userCheck(true, function() {
+        // $.userCheck(true, function() {
             
-        });
+        // });
         that.getData();
         
         that.events();
@@ -116,8 +116,12 @@ var prvDetail = {
                 $(".invStart").html(json.investStart);
                 $(".invDate").html(json.projectTerm); //获取产品的投资期限或者封闭期
                 $(".blackoutPeriod span").html(json.projectTermUnit); //"月",//产品期限单位
-
-
+                //0 债权投资;1 证券投资（二级市场）;2 股权投资;3 海外投资;4 其他
+                if(investDirect == "0" || investDirect == "2" || investDirect == "4") { // 债权投资、股权投资、其他服务不展示
+                    that.getElements.$tipIcon.hide();
+                } else if(investDirect == "1" || investDirect == "3"){ // 海外投资  二级市场展示
+                    that.getElements.$tipIcon.show();
+                };
                 if (json.incomeMode == "0") { //固收类产品
                     $(".invSolid").show();
                     if (Number(businessCompareReferenceMax) <= Number(businessCompareReferenceMin)) {
@@ -149,7 +153,6 @@ var prvDetail = {
                 } else if (json.isInvestClassifyRequired == 2) {
                     that.isInvest = true;
                 }
-
                 switch (json.productStatus) {
                     case "1": //尚未预约，可以预约
                         $(".bg").show().find(".btn").html("立即预约");
