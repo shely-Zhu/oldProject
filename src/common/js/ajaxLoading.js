@@ -217,12 +217,12 @@ var splitUrl = require('./components/splitUrl.js')();
                                 throw 'jump login';
                                 return false;
                             } else if (data.status == '4007') {
-                                // // 其他黑名单接口未登录，跳转data.data
-                                // manualTriggerLogin.locationFunc(data);
-                                // //防止window.location.href在执行完请求里的所有代码之后再跳转
-                                // throw 'jump login';
-                                // return false;
-                                tipAction('请在APP端登录')
+                                // 其他黑名单接口未登录，跳转data.data
+                                manualTriggerLogin.locationFunc(data);
+                                //防止window.location.href在执行完请求里的所有代码之后再跳转
+                                throw 'jump login';
+                                return false;
+                                // tipAction('请在APP端登录')
                             }
                         }
                     }
