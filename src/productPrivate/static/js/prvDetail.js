@@ -117,9 +117,9 @@ var prvDetail = {
                 $(".invDate").html(json.projectTerm); //获取产品的投资期限或者封闭期
                 $(".blackoutPeriod span").html(json.projectTermUnit); //"月",//产品期限单位
                 //0 债权投资;1 证券投资（二级市场）;2 股权投资;3 海外投资;4 其他
-                if(investDirect == "0" || investDirect == "2" || investDirect == "4") { // 债权投资、股权投资、其他服务不展示
+                if(json.investDirect == "0" || json.investDirect == "2" || json.investDirect == "4") { // 债权投资、股权投资、其他服务不展示
                     that.getElements.$tipIcon.hide();
-                } else if(investDirect == "1" || investDirect == "3"){ // 海外投资  二级市场展示
+                } else if(json.investDirect == "1" || json.investDirect == "3"){ // 海外投资  二级市场展示
                     that.getElements.$tipIcon.show();
                 };
                 if (json.incomeMode == "0") { //固收类产品
