@@ -128,7 +128,7 @@ var splitUrl = require('./components/splitUrl.js')();
             $.each(param, function(i, el) {
                 obj.push($.extend({}, defaults, el));
             })
-            document.cookie = "APPSESSIONID=ab3fa1e1-9205-4a9a-9397-3ac4546dc4a3;domain="+window.location.hostname+";path=/"
+            // document.cookie = "APPSESSIONID=ab3fa1e1-9205-4a9a-9397-3ac4546dc4a3;domain="+window.location.hostname+";path=/"
 
             //发送ajax请求
             var ajaxFunc = function(obj) {
@@ -260,12 +260,12 @@ var splitUrl = require('./components/splitUrl.js')();
                                 throw 'jump login';
                                 return false;
                             } else if (data.status == '4007') {
-                                // // 其他黑名单接口未登录，跳转data.data
-                                // manualTriggerLogin.locationFunc(data);
-                                // //防止window.location.href在执行完请求里的所有代码之后再跳转
-                                // throw 'jump login';
-                                // return false;
-                                tipAction('请在APP端登录')
+                                // 其他黑名单接口未登录，跳转data.data
+                                manualTriggerLogin.locationFunc(data);
+                                //防止window.location.href在执行完请求里的所有代码之后再跳转
+                                throw 'jump login';
+                                return false;
+                                // tipAction('请在APP端登录')
                             }
                         }
                     }
