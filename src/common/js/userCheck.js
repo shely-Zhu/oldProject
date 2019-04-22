@@ -39,7 +39,7 @@ require('./ajaxLoading.js');;
                             appRisk: true,
                             callbackDone: function(data, fnc) {
 
-                                if (data.data.endurePubIsold == "1") {   //是   0-否 1-是
+                                if (data.data.isRiskEndure == "1") {   //是   0-否 1-是
                                     // 处理完之后再走页面逻辑
                                     (typeof(callbackFunc) == 'function') && callbackFunc();
                                 } else{   //否
