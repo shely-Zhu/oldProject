@@ -42,7 +42,7 @@ require('./ajaxLoading.js');;
                                 if (data.data.endurePubIsold == "1") {   //是   0-否 1-是
                                     // 处理完之后再走页面逻辑
                                     (typeof(callbackFunc) == 'function') && callbackFunc();
-                                } else if (data.data.endurePubIsold == "0") {   //否
+                                } else{   //否
                                     // 没有做过风险评测
                                     if (window.currentIsApp) {
                                         fnc();
