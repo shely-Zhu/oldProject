@@ -128,7 +128,6 @@ var splitUrl = require('./components/splitUrl.js')();
             $.each(param, function(i, el) {
                 obj.push($.extend({}, defaults, el));
             })
-            // document.cookie = "APPSESSIONID=ab3fa1e1-9205-4a9a-9397-3ac4546dc4a3;domain="+window.location.hostname+";path=/"
 
             //发送ajax请求
             var ajaxFunc = function(obj) {
