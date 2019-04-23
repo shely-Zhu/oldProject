@@ -7,7 +7,7 @@ var Mock = require('mockjs');
 
 var data=Mock.mock({ 
 	"hmac": "hmac", 
-	"status": "0", 
+	"status": "0000", 
 	"code": "CS0000", 
 	"message": "处理成功！", 
 	"data":[ 
