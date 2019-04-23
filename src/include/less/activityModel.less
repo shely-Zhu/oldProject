@@ -3,12 +3,12 @@
 author zhangyanping
 time 2017/7/18
 */
-@import url("../../common/less/reset.less");
-@import url("../../common/less/color.less");
-@import url("../../common/less/components/againEnter.less");
-@import url('../../common/less/mui/resetMUI.less');
+@import url("@pathCommonLess/reset.less");
+@import url("@pathCommonLess/color.less");
+@import url("@pathCommonLess/components/againEnter.less");
+@import url('@pathCommonLess/mui/resetMUI.less');
 @import url("../css/mui.min.css");
-
+@import url("@pathCommonLessCom/elasticLayerTypeTwo.less");
 .container{
 	position: relative;
 }
@@ -83,6 +83,30 @@ body{
 		}
 	}
 
+}
+
+.contentH5Public{
+	width: 100%;
+	padding-bottom:4rem;
+	.buttonBuy{
+		position:fixed;
+		bottom: 0;
+		width: 100%;
+		height: 4rem;
+		a{
+			display: block;
+			background:@c054;
+			font-size: 1.5rem;
+			color: @c005;
+			text-align: center;
+			line-height: 4rem;
+		}
+		img{
+			width: 100%;
+			height: 4rem;
+		}
+		
+	}
 }
 
 // 底部文案的样式
@@ -179,7 +203,3 @@ body{
 .form-wrap .mui-input-row{
 	height:auto;
 }
-
-
-
-
