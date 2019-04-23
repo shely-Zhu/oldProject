@@ -56,7 +56,7 @@ $(function() {
             //发送ajax请求
             if(splitUrl()['type'] == 'H5Public'){
 				var obj = [{
-					url: site_url.findBannerById_api, //接口
+					url: site_url.findBannerGeneratorById_api, //接口
 					// needLogin:true,//需要判断是否登陆
 					data: {
 						"hmac": "", //预留的加密信息
