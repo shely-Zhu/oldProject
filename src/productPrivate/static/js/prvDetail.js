@@ -78,9 +78,9 @@ var prvDetail = {
     init: function() {
         var that = this;
         //检查是否登录及风险测评
-        $.userCheck(true, function() {
+        // $.userCheck(true, function() {
             
-        });
+        // });
         that.getData();
         
         that.events();
@@ -312,6 +312,7 @@ var prvDetail = {
                 $(".invDraw").show();
                 $(".invFloat .invCore").html(that.unitNetValue + "<span>(" + that.netValueDate.substr(that.netValueDate.indexOf("-") + 1, ) + ")</span>");
                 $(".invFloat .applyBuy").html("单位净值(元)");
+                that.getDrawData(180);
             } else {
                 $(".invFloat .invCore").addClass("float").html(that.projectDownTime.replace(/\//g, "-"));
                 $(".invFloat .applyBuy").html("募集截止日");
@@ -340,21 +341,23 @@ var prvDetail = {
             }];
             $.ajaxLoading(objFloat);
 
-            if (that.ifDraw) {
-                var objDraw = [];
-                //添加画图接口，参数为1/3/6/12
-                objDraw.push(that.getDrawData(180));
-                objDraw.push(that.getDrawData(360));
-                objDraw.push(that.getDrawData(""));
-                $.ajaxLoading(objDraw);
-            }
+            // if (that.ifDraw) {
+            //     var objDraw = [];
+            //     //添加画图接口，参数为1/3/6/12
+            //     objDraw.push(that.getDrawData(180));
+            //     objDraw.push(that.getDrawData(360));
+            //     objDraw.push(that.getDrawData(""));
+            //     $.ajaxLoading(objDraw);
+            // }
         }
     },
     //请求画图接口
     getDrawData: function(num) { //num为传进来的数据范围
         var that = this;
-
-        var obj = { //画图
+        if(num=='9999'){
+            num=''
+        }
+        var obj = [{ //画图
             url: site_url.prvHisValue_api,
             data: {
                 projectId: arg["fundCode"], // 基金代码
@@ -368,11 +371,19 @@ var prvDetail = {
             callbackDone: function(json) {
                 //请求成功
                 //画图
-                that.draw(json.data.pageList, num);
+                if(num==''){
+                    that.draw(json.data.pageList, 9999);
+                }else{
+                    that.draw(json.data.pageList, num);
+                }
+                
 
                 // 有且只有第一个接口返回时，画第一个图
                 if (num == 180) {
                     that.drawAction(180);
+                }
+                if(num==''){
+                    that.drawAction(9999);
                 }
             },
             callbackFail: function(json) {
@@ -381,8 +392,10 @@ var prvDetail = {
             callbackNoData: function(json) {
 
             }
-        };
+        }];
+        $.ajaxLoading(obj);
         return obj;
+        
     },
     draw: function(jsonData, num) {
         var that = this;
@@ -876,9 +889,14 @@ var prvDetail = {
         // 折线图时间按钮
         $('.timeBtn').on('click tap', function() {
             var time = $(this).attr('time');
-
+            //画图,已经有数据的不再请求
+            if (typeof(that.drawArr[time]) == 'object') {
+                that.drawAction(time);
+            } else { 
+                that.getDrawData(Number(time)); 
+            }
             //画图
-            that.drawAction(time);
+            // that.drawAction(time);
 
             //改变对应的颜色
             $(this).siblings('.timeBtn').removeClass('active');

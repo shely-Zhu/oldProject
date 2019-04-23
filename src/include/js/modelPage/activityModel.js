@@ -32,9 +32,12 @@ $(function() {
 
         getElements: {
             contentImg: $("#contentImg"), //图片
-            contentBox: $('#contentBox'), //有产品模板
-            priLocal: $(".priLocal"), //私募产品列表跳转链接
-            pubLocal: $(".pubLocal"), //公募产品列表跳转链接
+			contentBox: $('#contentBox'), //有产品模板
+			contentH5Public : $("#contentH5Public"),  //h5公募基金模板
+			priLocal: $(".priLocal"), //私募产品列表跳转链接
+			pubLocal: $(".pubLocal"), //公募产品列表跳转链接
+			custType: "", // 客户类型【0.机构 1.个人】 
+			linkUrl: "", //立即购买按钮跳转链接
         },
         webInit: function() {
 			var that = this;
