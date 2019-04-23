@@ -44,15 +44,13 @@ require('./ajaxLoading.js');;
                                     (typeof(callbackFunc) == 'function') && callbackFunc();
                                 } else{   //否
                                     // 没有做过风险评测
-                                    if (window.currentIsApp) {
-                                        fnc();
-                                    } else {
+                                   
                                         if (data.data.accountType == "0" || data.data.accountType == "2") { //机构
                                             window.location.href = site_url.questionnaireOrg_url + '&originUrl=' + new Base64().encode(window.location.href);
                                         } else if (data.data.accountType == "1") { //个人
                                             window.location.href = site_url.questionnairePer_url + '&originUrl=' + new Base64().encode(window.location.href);
                                         }
-                                    }
+                                    
                                 }
                             }
                         }]
