@@ -44,6 +44,7 @@ module.exports = function() {
     this.findContentDetailById_api = http_url.web_url + '/content/frontend/findContentDetailById'; // 内容详情展示
     this.findYXResearchReportDetailById_api = http_url.web_url + "/content/frontend/findYXResearchReportDetailById"; // 银杏研究报告详情
     this.queryRightsByLevel_api = http_url.web_url + '/content/findBenefitByLevel';  //用户权益查询
+    this.findBannerByPosition_api = http_url.web_url + '/content/frontend/findBannerById';  //根据idhuoqu banner信息
     
     /*-------------------内容相关 end ------------------------------*/
 

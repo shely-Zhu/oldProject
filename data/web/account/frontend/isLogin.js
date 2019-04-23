@@ -8,11 +8,11 @@ var Mock = require('mockjs');
 //1. 积分
 var pOver = Mock.mock({
   "hmac": "hmac",
-  "status":0,
+  "status":'0000',
   "code": "CS0000",
   "msg": "保存成功",
   "data":{
-        //"uuid": "E02187CAF8E25822D5E52B761014369D" //
+        "uuid": "E02187CAF8E25822D5E52B761014369D" //
     }
 });
 

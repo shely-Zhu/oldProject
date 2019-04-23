@@ -9,7 +9,7 @@ var Mock = require('mockjs');
 
 var pOver = Mock.mock({ 
 	"hmac": "hmac", 
-	"status": "0", 
+	"status": "0000", 
 	"code": "CS0000", 
 	"msg": "处理成功！", 
 	"data": {

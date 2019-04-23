@@ -8,7 +8,7 @@ var Mock = require('mockjs');
 var data=Mock.mock({ 
 	hmac:"", 
 	code:"",//错误码     
-	status:"",     
+	status:"0000",     
 	msg:"success", 
 	total_conut:"",//总记录数 
 	total_page:"",//总页数
