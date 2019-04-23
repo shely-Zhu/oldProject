@@ -23,6 +23,7 @@ require('../../../common/js/components/utils.js');
 require('../../../common/js/ajaxLoading.js');
 var splitUrl = require('../../../common/js/components/splitUrl.js');
 require('../../../common/js/userCheck.js');
+require('../../../common/js/components/elasticLayerTypeTwo.js');
 
 require('../../../common/js/components/app/requireAppDown.js');
 
@@ -37,7 +38,7 @@ $(function() {
 			priLocal: $(".priLocal"), //私募产品列表跳转链接
 			pubLocal: $(".pubLocal"), //公募产品列表跳转链接
 			custType: "", // 客户类型【0.机构 1.个人】 
-			linkUrl: "", //立即购买按钮跳转链接
+            linkUrl: "", //立即购买按钮跳转链接
         },
         webInit: function() {
 			var that = this;
@@ -87,7 +88,7 @@ $(function() {
 							$('.buttonBuy').append(buyImg);
 							$('.buttonBuy a').remove();
 						}
-						$('.buttonBuy img').on('click',function(){
+						$('.buttonBuy').on('click',function(){
 							if (window.currentIsApp) {
 								window.location.href = '/productPublic/views/comDetail.html?url='+ that.getElements.linkUrl;
 							} else {

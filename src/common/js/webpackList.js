@@ -8,7 +8,7 @@ module.exports = {
     './personal/static/js/tradeDetail': "./src/personal/static/js/tradeDetail.js",
     './personal/static/js/myAccount': "./src/personal/static/js/myAccount.js",
     './personal/static/js/risk': "./src/personal/static/js/risk.js", //风险评测结果
-    './personal/static/js/test': "./src/personal/static/js/test.js", //风险评测结果
+    // './personal/static/js/test': "./src/personal/static/js/test.js", //风险评测结果
 
     //公募监管账户
     './personal/static/js/regulatoryAccounts': "./src/personal/static/js/regulatoryAccounts.js",

@@ -128,8 +128,6 @@ $(function() {
                 callbackDone: function(json) {
                     window.location.href = that.clickBtn;
                 },
-                     ,
-
 
             }];
             $.ajaxLoading(obj);
