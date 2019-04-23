@@ -33,9 +33,7 @@ if( window.location.href.indexOf('realNameStepOne') != -1 || window.location.hre
 				})
 			}
 		},
-		callbackFail: function(json){
-			
-		}	
+		     	
 	}];
 	$.ajaxLoading(obj);
 	module.exports = list;

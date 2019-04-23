@@ -102,11 +102,11 @@ $(function(){
                     },
                     callbackFail: function(json){
 
-                        tipAction( json.msg, function(){
+                        tipAction( json.message, function(){
                             $this.removeAttr("disabled").removeClass('disable');
                         })
 
-                     //    that.getElements.errorTip.show().find('.tipWrapper').html(json.msg);
+                     //    that.getElements.errorTip.show().find('.tipWrapper').html(json.message);
                      //    setTimeout(function(){
                     	// 	//黑色条隐藏
                     	// 	that.getElements.errorTip.hide();

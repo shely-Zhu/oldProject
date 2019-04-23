@@ -100,9 +100,7 @@ $(function() {
                 callbackNoData: function() { //没有初始化过页面
                     window.location.href = site_url.guidePageUrl;
                 },
-                callbackFail: function(json) {
-                    tipAction(json.msg);
-                }
+                     
             }];
             $.ajaxLoading(obj);
         },
@@ -139,7 +137,7 @@ $(function() {
                     window.location.href = site_url.growthPlanUrl;
                 },
                 callbackFail: function(json) {
-                    tipAction(json.msg);
+                    tipAction(json.message);
                     
                     that.ele.createBtn.removeAttr("disabled").removeClass('disable');
                 }

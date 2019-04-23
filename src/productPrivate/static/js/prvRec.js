@@ -188,9 +188,7 @@ var prvRec = {
                         that.getElements.listLoading.hide();
                     }, 200);
                 },
-                callbackFail: function(json) {
-                    tipAction(json.msg);
-                }
+                     
             }
         ]
         $.ajaxLoading(obj);

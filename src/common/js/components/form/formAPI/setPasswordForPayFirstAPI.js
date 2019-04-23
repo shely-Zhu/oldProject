@@ -48,7 +48,7 @@ module.exports = function() {
         callbackFail: function(json) {
 
             timeCount.dxyzmReset();
-            tipAction(json.msg)
+            tipAction(json.message)
             //重置图文验证码
             getTwyzm();
         },

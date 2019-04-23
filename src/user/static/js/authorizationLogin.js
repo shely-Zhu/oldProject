@@ -57,7 +57,7 @@ $(function(){
 					},
 					callbackFail: function(json){
 						//请求失败
-						tipAction( json.msg, function(){
+						tipAction( json.message, function(){
                             $this.removeAttr("disabled").removeClass('disable');
                         });
 					}

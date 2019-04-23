@@ -69,9 +69,7 @@ $(function() {
 					});
 
 				},
-				callbackFail: function() {
-					console.log("失败");
-				}
+				    
 			}];
 			$.ajaxLoading(obj);
 		},

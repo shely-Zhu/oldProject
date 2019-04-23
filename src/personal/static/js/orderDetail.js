@@ -227,7 +227,7 @@ $(function(){
 		                        	callbackFail:function(data){
 		                        		t.$yes.removeAttr("disabled");
 		                        		$("#cancel").hide();
-		                        		tipAction(data.msg);  
+		                        		tipAction(data.message);  
 		                        	}
 		                        }]
 		                        $.ajaxLoading(obj);

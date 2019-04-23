@@ -87,9 +87,7 @@ $(function() {
                     // 请求资产配置接口
                     that.getCombinFundDetails();
                 },
-                callbackFail: function(json) {
-                    tipAction(json.msg);
-                }
+                     
             }];
             $.ajaxLoading(obj);
         },
@@ -123,9 +121,7 @@ $(function() {
                     // 基金分组渲染
                     generateTemplate(data, that.$e.assetRatio, that.$e.allocationTemp);
                 },
-                callbackFail: function(json) {
-                    tipAction(json.msg);
-                }
+                     
             }, { // 系统调仓记录列表
                 url: site_url.combinTransferList_api,
                 data: {
@@ -158,9 +154,7 @@ $(function() {
                     // 最新调仓渲染
                     generateTemplate(data, that.$e.adjustmentWrap, that.$e.adjustmentTemp);
                 },
-                callbackFail: function(json) {
-                    tipAction(json.msg);
-                }
+                     
             }];
 
             // 组合收益走势曲线图 1
@@ -200,7 +194,7 @@ $(function() {
                 },
                 callbackFail: function(json) {
                     that.$e.listLoading.hide();
-                    tipAction(json.msg);
+                    tipAction(json.message);
 
                 },
                 callbackNoData: function(json) {

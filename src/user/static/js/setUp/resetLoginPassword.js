@@ -77,7 +77,7 @@ $(function(){
 					},
 					callbackFail: function(json){
 						
-						tipAction(json.msg, function(){
+						tipAction(json.message, function(){
 							$this.removeAttr("disabled").removeClass('disable');
 						});
 					}

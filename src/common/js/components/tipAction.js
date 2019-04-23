@@ -14,9 +14,9 @@ $('body').append(html);
 
 //msg为黑色提示条需要显示的文案
 //callback为倒计时2s后，黑色提示条隐藏，需要执行的回调函数
-module.exports = function( msg, callback, time){
+module.exports = function( message, callback, time){
 	var time = time || 3000;
-	$('.againEnter').show().find('.tipWrapper').html(msg);
+	$('.againEnter').show().find('.tipWrapper').html(message);
 	setTimeout(function(){
         $('.againEnter').hide();
         

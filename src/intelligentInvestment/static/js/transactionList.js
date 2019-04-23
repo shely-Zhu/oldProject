@@ -271,7 +271,7 @@ var tradeList = {
 				//隐藏loading
 				//that.getElements.listLoading.hide();
 				//显示错误提示
-				tipAction( json.msg );
+				tipAction( json.message );
 
 				t.endPullupToRefresh(false);	
 				$('.contentWrapper').find('.mui-pull-bottom-pocket').removeClass('mui-hidden');

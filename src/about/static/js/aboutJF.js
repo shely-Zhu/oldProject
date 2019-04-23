@@ -78,11 +78,7 @@ $(function(){
                         $("#appaboutht").html(result.content);//富文本内容
                         
                     },
-                    callbackFail: function(json){  //失败后执行的函数
-    
-                        tipAction(json.msg);
-    
-                    }
+                    
                 }];
                 $.ajaxLoading(obj);
 

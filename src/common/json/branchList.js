@@ -45,7 +45,7 @@ module.exports = function (){
 			},
 			callbackFail: function(json){
 				//失败
-				$('.againEnter').show().find('.tipWrapper').html(json.msg);
+				$('.againEnter').show().find('.tipWrapper').html(json.message);
 				setTimeout(function(){
 		            $('.againEnter').hide();
 		        }, 2000);

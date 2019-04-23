@@ -61,9 +61,6 @@ require('./ajaxLoading.js');;
                         (typeof(callbackFunc) == 'function') && callbackFunc();
                     }
                 },
-                callbackFail: function(data) {
-                    tipAction(data.message);
-                }
             }]
             $.ajaxLoading(obj);
         },

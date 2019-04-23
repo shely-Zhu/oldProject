@@ -61,9 +61,6 @@ $(function(){
 	                    });
 	 
 	                },
-	                callbackFail: function(json){  //失败后执行的函数
-							tipAction(json.msg);
-	                }
 	            }];
 	            $.ajaxLoading(obj);        		
         	}

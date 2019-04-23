@@ -62,9 +62,7 @@ $(function() {
                     var imgUrl = json.data[0].imgUrl;
                     $('.banner_wrap img').attr('src', imgUrl)
                 },
-                callbackFail: function(json) {
-
-                },
+               
             }]
             $.ajaxLoading(obj);
         },
@@ -140,7 +138,7 @@ $(function() {
 
                     },
                     callbackFail: function(json) {
-                        tipAction(json.msg);
+                        tipAction(json.message);
                         $this.removeAttr("disabled").removeClass('disable');
                     }
                 }]

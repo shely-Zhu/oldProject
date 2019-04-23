@@ -29,7 +29,7 @@ window.env = env;
 var pathname = window.location.href;
 
 var appId = splitUrl()['appId']; //表示当前为app，必须传1
-if ((pathname.indexOf('//apps.') != -1 || (pathname.indexOf('//pofapp.') != -1)) && (appId || getCookie('appId'))) {
+if (appId || getCookie('appId')) {
     //是，设置全局变量currentIsApp为true
     window.currentIsApp = true;
 }

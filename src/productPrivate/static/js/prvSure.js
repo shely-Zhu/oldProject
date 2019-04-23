@@ -70,9 +70,7 @@ var prvSure = {
                     that.getCardList();
                 }
             },
-            callbackFail: function(data) {
-                tipAction(data.msg);
-            }
+             
         }, {
             url: site_url.custBro_api, // 理财师
             data: {
@@ -118,9 +116,7 @@ var prvSure = {
                     $(".prdPrvSure .prdInfo").show();
                 }
             },
-            callbackFail: function(data) {
-                tipAction(data.msg);
-            }
+             
         }];
 
         $.ajaxLoading(obj)
@@ -231,7 +227,7 @@ var prvSure = {
                                 },
                                 callbackFail: function(data) {
                                     t.hide();
-                                    tipAction(data.msg, function() {
+                                    tipAction(data.message, function() {
                                         t.$yes.removeAttr("disabled");
                                     });
                                 }
@@ -290,7 +286,7 @@ var prvSure = {
                             },
                             callbackFail: function(data) {
                                 t.hide();
-                                tipAction(data.msg, function() {
+                                tipAction(data.message, function() {
                                     t.$yes.removeAttr("disabled");
                                 });
                             }

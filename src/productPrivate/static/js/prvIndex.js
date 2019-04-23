@@ -66,7 +66,7 @@ var index = {
             },
             callbackFail: function(data) {
                 that.isLogin = null;
-                tipAction(data.msg);
+                tipAction(data.message);
             }
         }]
         $.ajaxLoading(obj);
@@ -117,9 +117,7 @@ var index = {
                 }
                 that.getData();
             },
-            callbackFail: function(data) {
-                tipAction(data.msg);
-            }
+             
         }]
         $.ajaxLoading(userObj);
     },
@@ -146,9 +144,7 @@ var index = {
                 }
 
             },
-            callbackFail: function(data) {
-                tipAction(data.msg)
-            }
+              
         }, {
             url: site_url.recommend_api,
             data: {
@@ -169,9 +165,7 @@ var index = {
                     $(".highlight .mui-scroll").html(template(jsonData.pageList));
                 }
             },
-            callbackFail: function(data) {
-                tipAction(data.msg)
-            }
+              
         }, {
             url: site_url.recommend_api,
             data: {
@@ -236,9 +230,7 @@ var index = {
                     $(".recommend .mui-scroll").html(template(jsonData));
                 }
             },
-            callbackFail: function(data) {
-                tipAction(data.msg)
-            }
+              
         }, {
             url: site_url.recommend_api,
             data: {
@@ -301,9 +293,7 @@ var index = {
                     $(".hot .hotWrap").html(template(jsonData));
                 }
             },
-            callbackFail: function(data) {
-                tipAction(data.msg)
-            }
+              
         }]
         $.ajaxLoading(initObj);
 

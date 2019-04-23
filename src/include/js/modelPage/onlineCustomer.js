@@ -38,9 +38,7 @@ $(function() {
                     // 跳转第三方客服地址
                     window.location.href = site_url.onlineCustomer_url + '&token=' + token;
                 },
-                callbackFail: function(json) {
-                    tipAction(json.msg);
-                }
+                     
             }];
             $.ajaxLoading(obj);
         },

@@ -175,9 +175,7 @@ $(function(){
 			        	autoTextarea(el);// 调用
 			        })
 				},
-				callbackFail: function(json){
-
-				}
+				     
 			}];
 			$.ajaxLoading(obj);
 		},
@@ -277,7 +275,7 @@ $(function(){
 						}
 					},
 					callbackFail:function(data){
-						tipAction(data.msg,function(){
+						tipAction(data.message,function(){
 							$this.removeClass("disable");
 						});
 					}

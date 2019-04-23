@@ -60,7 +60,7 @@
                         },
                         callbackFail: function(json){
                             $('.elasticLayerThree').hide();
-                            tipAction( json.msg , function(){
+                            tipAction( json.message , function(){
                                 $('.elasticLayerThree').show();
                             });
                         }
@@ -69,9 +69,6 @@
                 }
             }
         },  
-        callbackFail: function(json){
-            tipAction( json.msg );
-        }
     }];
     $.ajaxLoading(obj);
  }

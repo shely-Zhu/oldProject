@@ -56,9 +56,6 @@ $(function(){
 					$('.content img').attr('src',json.data[1].imgUrl);
 					$('.btn_wrap img').attr('src',json.data[2].imgUrl);
 				},
-				callbackFail: function( json ){
-					tipAction( json.message );
-				}
 			},
 			{  //获取微信sdk所需数据
 				url: site_url.share_api,
