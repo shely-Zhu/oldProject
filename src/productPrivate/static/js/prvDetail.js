@@ -396,6 +396,7 @@ var prvDetail = {
             },
             needDataEmpty: true,
             contentTypeSearch: true,
+            needLoading: true,
             // async: false,
             callbackDone: function(json) {
                 //请求成功
