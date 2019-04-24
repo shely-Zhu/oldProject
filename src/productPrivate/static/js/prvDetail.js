@@ -57,6 +57,7 @@ var prvDetail = {
     netValueDate: '', //净值日期【yyyy-MM-dd】
     projectDownTime:'', //产品募集截止日期
     productName:'', //产品名称
+    timer:'', //定时器
     getElements: {
         clickBtn: $(".bg .btn"), //可点击状态按钮
         noBtn: $(".over"), //不可点击按钮
@@ -111,7 +112,7 @@ var prvDetail = {
                 that.isNewcomer = (isNewcomer == "1") ? 1 : 0; // 新手产品
                 that.isElecContract = (isElecContract == "1") ? 1 : 0;
 
-                that.getUserInfo() //新客判断
+                // that.getUserInfo() //新客判断
 
                 $(".invStart").html(json.investStart);
                 $(".invDate").html(json.projectTerm); //获取产品的投资期限或者封闭期
@@ -146,8 +147,8 @@ var prvDetail = {
                 $(".fundName").html(json.productName);
                 $(".prdInfo .prdNum").html(arg["fundCode"]); //获取产品代码
 
-                that.goRealName = json.isCertification; //存储是否实名认证
-                that.customerType = json.customerType; //存储个人或机构投资
+                // that.goRealName = json.isCertification; //存储是否实名认证
+                // that.customerType = json.customerType; //存储个人或机构投资
                 if (json.isInvestClassifyRequired == 1) { //是否需要判断投资者分类标签【1.不需要 2.需要（私募或资管）】
                     that.isInvest = false;
                 } else if (json.isInvestClassifyRequired == 2) {
@@ -157,7 +158,8 @@ var prvDetail = {
                     case "1": //尚未预约，可以预约
                         $(".bg").show().find(".btn").html("立即预约");
                         $(".over").hide();
-                        that.checkNewPorduct(); //新客页面展示
+                        // that.checkNewPorduct(); //新客页面展示
+                        that.timer=setInterval(that.checkNewPorduct(),10) ;//新客页面展示
                         break;
                     case "2": //可以预约，但是会告知要联系理财师
                         $(".bg").show().find(".btn").html("立即预约");
@@ -197,7 +199,34 @@ var prvDetail = {
             callbackFail: function(data) {
                 tipAction(data.message);
             }
-        }, {
+        },{
+            url: site_url.user_api,
+            data: {
+            },
+            needLogin: true,
+            // async: false,
+            needDataEmpty: false, //需要判断data是否为空
+            callbackDone: function(json) {
+                var jsonData = json.data,
+                    isPerfect = jsonData.isPerfect, //基本信息是否完善
+                    newcomer = jsonData.newComer;
+                that.goRealName = jsonData.idnoCheckflag; //存储是否实名认证   0-否 1-是
+                that.customerType = jsonData.accountType; //存储个人或机构投资  1-个人  0-机构
+                that.endurePri = jsonData.endurePri; // 投资偏好
+                that.investFavour = jsonData.investFavour; // 投资者分类
+                that.newcomer = (newcomer == "1") ? 1 : 0; // 是否是新手客户 0否1是
+                that.age = jsonData.age; // 客户年龄
+
+                if (isPerfect == 0) { //基本信息是否完善  不完善     0否1是
+                    that.isPerfect = true;
+                } else if (isPerfect == 1) { //完善 
+                    that.isPerfect = false;
+                }
+            },
+            callbackFail: function(data) {
+                tipAction(data.message);
+            }
+        },{
             url: site_url.custBro_api,
             data: {
                 empNo: "", //工号    
@@ -367,7 +396,7 @@ var prvDetail = {
             },
             needDataEmpty: true,
             contentTypeSearch: true,
-            async: false,
+            // async: false,
             callbackDone: function(json) {
                 //请求成功
                 //画图
@@ -542,11 +571,13 @@ var prvDetail = {
     },
     checkNewPorduct: function() {
         var that = this;
-
-        if (that.isNewcomer && that.newcomer) { // 是新用户，并且是新手产品
-            that.getElements.clickBtn.html("新客专享 立即预约").addClass('newcomer');
-        } else if (that.isNewcomer && !that.newcomer) { // 是新手产品不是新用户
-            that.getElements.clickBtn.html("新客专享").addClass('stop');
+        if(that.newcomer!=''){
+            if (that.isNewcomer && that.newcomer) { // 是新用户，并且是新手产品
+                that.getElements.clickBtn.html("新客专享 立即预约").addClass('newcomer');
+            } else if (that.isNewcomer && !that.newcomer) { // 是新手产品不是新用户
+                that.getElements.clickBtn.html("新客专享").addClass('stop');
+            }
+            clearInterval(that.timer);
         }
     },
     getUserInfo: function() {
@@ -562,7 +593,8 @@ var prvDetail = {
                 var jsonData = json.data,
                     isPerfect = jsonData.isPerfect, //基本信息是否完善
                     newcomer = jsonData.newComer;
-
+                that.goRealName = jsonData.idnoCheckflag; //存储是否实名认证   0-否 1-是
+                that.customerType = jsonData.accountType; //存储个人或机构投资  1-个人  0-机构
                 that.endurePri = jsonData.endurePri; // 投资偏好
                 that.investFavour = jsonData.investFavour; // 投资者分类
                 that.newcomer = (newcomer == "1") ? 1 : 0; // 是否是新手客户 0否1是
@@ -616,7 +648,7 @@ var prvDetail = {
                     return;
                 } else {
                     $this.addClass("stop");
-                    that.getUserInfo();
+                    // that.getUserInfo();
 
                     if (!that.newcomer) {
                         $.elasticLayer(obj)
