@@ -31,7 +31,9 @@ require('./ajaxLoading.js');;
                     // 登录状态
                     if (isRisk) { //根据参数判断需不需要风险测评
                         var userObj = [{
-                            url: site_url.user_api,
+                            //优化getUserInfo接口
+                            //url: site_url.user_api,
+                            url: site_url.queryUserAuthInfo_api,
                             data: {
                             },
                             async: false,
