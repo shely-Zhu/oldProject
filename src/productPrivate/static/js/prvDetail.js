@@ -953,6 +953,14 @@ var prvDetail = {
             window.location.href = $(this).attr("href");
         });
 
+        $('.invMartical2').on('click', function() {
+            window.location.href = $(this).attr("href");
+        });
+
+        $('.invMartical3').on('click tap', function() {
+            window.location.href = $(this).attr("href");
+        });
+
         function averageWrapFun() { // 普通
             var other = this;
             if ($(other).hasClass("nokick")) {
