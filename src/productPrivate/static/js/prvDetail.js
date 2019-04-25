@@ -90,6 +90,8 @@ var prvDetail = {
         var that = this;
 
         $(".invMartical").attr("href", "/productPrivate/views/PrvMarticial.html?fundCode=" + arg["fundCode"]);
+        $(".invMartical2").attr("href", "/productPrivate/views/PrvMarticial.html?fundCode=" + arg["fundCode"]);
+        $(".invMartical3").attr("href", "/productPrivate/views/PrvMarticial.html?fundCode=" + arg["fundCode"]);
         var obj = [{
             url: site_url.prvDetail_api, // queryProductDetail
             data: {
