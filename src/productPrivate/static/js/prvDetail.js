@@ -937,7 +937,7 @@ var prvDetail = {
         })
 
         // 历史净值
-        $('.beforeValue').on('click', function() {
+        $('.beforeValue').on('tap', function() {
             window.location.href = "/productPrivate/views/hisValue.html?fundCode=" + arg["fundCode"];
         })
 
