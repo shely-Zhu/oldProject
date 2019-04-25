@@ -90,8 +90,6 @@ var prvDetail = {
         var that = this;
 
         $(".invMartical").attr("href", "/productPrivate/views/PrvMarticial.html?fundCode=" + arg["fundCode"]);
-        $(".invMartical2").attr("href", "/productPrivate/views/PrvMarticial.html?fundCode=" + arg["fundCode"]);
-        $(".invMartical3").attr("href", "/productPrivate/views/PrvMarticial.html?fundCode=" + arg["fundCode"]);
         var obj = [{
             url: site_url.prvDetail_api, // queryProductDetail
             data: {
@@ -635,7 +633,7 @@ var prvDetail = {
         var that = this;
 
         // 立即预约或取消预约按钮点击
-        that.getElements.clickBtn.on("click tap", function(e) {
+        that.getElements.clickBtn.on("tap", function(e) {
             var $this = $(this);
 
             // 冻结账户弹窗提示
@@ -909,7 +907,7 @@ var prvDetail = {
         });
 
         // 咨询按钮
-        that.getElements.help.on("click tap", function(e) {
+        that.getElements.help.on("tap", function(e) {
             //that.getElements.help.on("tap",function(e){
             $(".mask").addClass("in");
             $("body").css({
@@ -922,7 +920,7 @@ var prvDetail = {
         });
 
         // 折线图时间按钮
-        $('.timeBtn').on('click tap', function() {
+        $('.timeBtn').on('tap', function() {
             var time = $(this).attr('time');
             //画图,已经有数据的不再请求
             if (typeof(that.drawArr[time]) == 'object') {
@@ -943,7 +941,7 @@ var prvDetail = {
             window.location.href = "/productPrivate/views/hisValue.html?fundCode=" + arg["fundCode"];
         })
 
-        $('.mask').on('click tap', function(e) {
+        $('.mask').on('tap', function(e) {
             if (e.srcElement == $(".mask")[0] || e.target == $(".mask")[0]) {
                 $(this).removeClass("in");
                 $("body").css("position", "");
@@ -952,14 +950,6 @@ var prvDetail = {
 
         // 产品材料
         $('.invMartical').on('tap', function() {
-            window.location.href = $(this).attr("href");
-        });
-
-        $('.invMartical2').on('click', function() {
-            window.location.href = $(this).attr("href");
-        });
-
-        $('.invMartical3').on('click tap', function() {
             window.location.href = $(this).attr("href");
         });
 
@@ -1016,12 +1006,12 @@ var prvDetail = {
         };
 
         // 投资者分类弹窗--取消
-        $('.elasticLayerFour .close,.elasticLayerFour .cancleBtn').on('click tap', function() {
+        $('.elasticLayerFour .close,.elasticLayerFour .cancleBtn').on('tap', function() {
             elasticLayerFourHide();
         })
 
         // 投资者分类弹窗--专业投资者
-        $('.elasticLayerFour .averageWrap,.elasticLayerFour .professionalWrap').on('click tap', function() {
+        $('.elasticLayerFour .averageWrap,.elasticLayerFour .professionalWrap').on('tap', function() {
             var $this = $(this);
             $('.btnWrap').find('.iconfont').removeClass('highlight');
             $this.children().eq(0).addClass('highlight');
@@ -1035,7 +1025,7 @@ var prvDetail = {
         })
 
         // 投资者分类弹窗--确定
-        $('.elasticLayerFour .sureBtn').on('click tap', function() {
+        $('.elasticLayerFour .sureBtn').on('tap', function() {
             if (that.status.ordinary) { //普通
                 $(this).attr("disabled", true).addClass('disable');
                 averageWrapFun()
@@ -1051,11 +1041,11 @@ var prvDetail = {
         })
 
         // 查看明细
-        that.getElements.$detail.on('click tap', function() {
+        that.getElements.$detail.on('tap', function() {
             window.location.href = site_url.orderDetail_url;
         })
 
-        that.getElements.$tipIcon.on('click tap', function() {
+        that.getElements.$tipIcon.on('tap', function() {
             $.elasticLayerTypeTwo({
                 id: "unitNetValueDesTip",
                 title: '帮助', //如果不传默认为'尊敬的用户'
