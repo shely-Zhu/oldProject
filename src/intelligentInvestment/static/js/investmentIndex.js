@@ -35,17 +35,16 @@ var tradeList = {
 	getUserInfo: function(){
 		var that = this;
 		var obj = [{
-			url: site_url.user_api,
-			data: {
-			},
+			url: site_url.queryUserAuthInfo_api,
 			needLogin: true,
 			needDataEmpty: false, //需要判断data是否为空
 			async: false, 
 			callbackDone: function(json){
 				var jsonData = json.data;
 
+				
+				riskLevel = Number(jsonData.endurePri); // 风险承受能力
 
-				riskLevel = Number(jsonData.endurePri);
 				var src = '/intelligentInvestment/static/img/'+ riskLevel + '.png';
 				// 风险等级对应的参数
 				that.typeSelect(riskLevel);

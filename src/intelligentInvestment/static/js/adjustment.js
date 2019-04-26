@@ -109,9 +109,7 @@ $(function(){
 			mui("body").on('tap', '.bottom', function() {
 				var $this = $(this);
 				obj = [{
-					url: site_url.user_api,
-					data: {
-					},
+					url: site_url.queryUserAuthInfo_api, 
 					needLogin: true,
 					async: false, 
 					callbackDone: function(json) {

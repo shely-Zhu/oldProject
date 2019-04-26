@@ -10,6 +10,8 @@
  *
  * 修改：售前告知书按客户65岁进行区分展示换
  * @author songxiaoyu 2018-11-21 
+ *
+ * 后台自己处理不需要前端请求,删除message_api请求
  */
 
 require('@pathIncludJs/vendor/config.js');
@@ -79,18 +81,21 @@ var prvDetail = {
     init: function() {
         var that = this;
         //检查是否登录及风险测评
-        // $.userCheck(true, function() {
+        $.userCheck(true, function() {
             
-        // });
+        });
         that.getData();
         
         that.events();
     },
     getData: function() {
-        var that = this;
+        var that = this,
+            userObj = that.getUserObj();
+            obj = [];
 
         $(".invMartical").attr("href", "/productPrivate/views/PrvMarticial.html?fundCode=" + arg["fundCode"]);
-        var obj = [{
+
+        obj = [{
             url: site_url.prvDetail_api, // queryProductDetail
             data: {
                  projectId: arg["fundCode"] // 产品代码
@@ -111,8 +116,6 @@ var prvDetail = {
                 // that.reserveId = json.reserveId;
                 that.isNewcomer = (isNewcomer == "1") ? 1 : 0; // 新手产品
                 that.isElecContract = (isElecContract == "1") ? 1 : 0;
-
-                // that.getUserInfo() //新客判断
 
                 $(".invStart").html(json.investStart);
                 $(".invDate").html(json.projectTerm); //获取产品的投资期限或者封闭期
@@ -158,7 +161,6 @@ var prvDetail = {
                     case "1": //尚未预约，可以预约
                         $(".bg").show().find(".btn").html("立即预约");
                         $(".over").hide();
-                        // that.checkNewPorduct(); //新客页面展示
                         that.timer=setInterval(that.checkNewPorduct(),10) ;//新客页面展示
                         break;
                     case "2": //可以预约，但是会告知要联系理财师
@@ -199,34 +201,7 @@ var prvDetail = {
             callbackFail: function(data) {
                 tipAction(data.message);
             }
-        },{
-            url: site_url.user_api,
-            data: {
-            },
-            needLogin: true,
-            // async: false,
-            needDataEmpty: false, //需要判断data是否为空
-            callbackDone: function(json) {
-                var jsonData = json.data,
-                    isPerfect = jsonData.isPerfect, //基本信息是否完善
-                    newcomer = jsonData.newComer;
-                that.goRealName = jsonData.idnoCheckflag; //存储是否实名认证   0-否 1-是
-                that.customerType = jsonData.accountType; //存储个人或机构投资  1-个人  0-机构
-                that.endurePri = jsonData.endurePri; // 投资偏好
-                that.investFavour = jsonData.investFavour; // 投资者分类
-                that.newcomer = (newcomer == "1") ? 1 : 0; // 是否是新手客户 0否1是
-                that.age = jsonData.age; // 客户年龄
-
-                if (isPerfect == 0) { //基本信息是否完善  不完善     0否1是
-                    that.isPerfect = true;
-                } else if (isPerfect == 1) { //完善 
-                    that.isPerfect = false;
-                }
-            },
-            callbackFail: function(data) {
-                tipAction(data.message);
-            }
-        },{
+        },userObj,{
             url: site_url.custBro_api,
             data: {
                 empNo: "", //工号    
@@ -284,28 +259,9 @@ var prvDetail = {
                 tipAction(data.message);
             }
         }]
+        
         $.ajaxLoading(obj);
-
-        // 后台自己处理不需要前端请求
-        // var msgObj = [{
-        //     url: site_url.message_api,
-        //     data: {
-        //         hmac: "", //预留的加密信息     
-        //         params: {
-        //             proCode: arg["fundCode"], //产品代码 
-        //             proName: that.productName
-        //         }
-        //     },
-        //     needLogin: true,
-        //     needDataEmpty: false, //需要判断data是否为空
-        //     callbackDone: function(data) {
-
-        //     },
-        //     callbackFail: function(data) {
-        //         tipAction(data.message);
-        //     }
-        // }];
-        // $.ajaxLoading(msgObj);
+        
         if (that.incomeMode == "0") {   //代表类固收
             var objSolid = [{
                 url: site_url.prvLevel_api,
@@ -380,6 +336,46 @@ var prvDetail = {
             // }
         }
     },
+    getUserObj:function(){
+        var that = this;
+        var obj = {
+            url: site_url.user_api,
+            data: {
+            },
+            needLogin: true,
+            async: false,
+            needDataEmpty: false, //需要判断data是否为空
+            callbackDone: function(json) {
+                var jsonData = json.data,
+                    isPerfect = jsonData.isPerfect, //基本信息是否完善
+                    newcomer = jsonData.newComer;
+                that.goRealName = jsonData.idnoCheckflag; //存储是否实名认证   0-否 1-是
+                that.customerType = jsonData.accountType; //存储个人或机构投资  1-个人  0-机构
+                that.endurePri = jsonData.endurePri; // 投资偏好
+                that.investFavour = jsonData.investFavour; // 投资者分类
+                that.newcomer = (newcomer == "1") ? 1 : 0; // 是否是新手客户 0否1是
+                that.age = jsonData.age; // 客户年龄
+
+                if (isPerfect == 0) { //基本信息是否完善  不完善     0否1是
+                    that.isPerfect = true;
+                } else if (isPerfect == 1) { //完善 
+                    that.isPerfect = false;
+                }
+            },
+            callbackFail: function(data) {
+                tipAction(data.message);
+            }
+        };
+        return obj;
+    },
+    getUserData: function() {
+        var that = this,
+            arr = [];
+
+        arr.push(that.getUserObj());
+
+        $.ajaxLoading(arr);
+    },
     //请求画图接口
     getDrawData: function(num) { //num为传进来的数据范围
         var that = this;
@@ -425,7 +421,6 @@ var prvDetail = {
         }];
         $.ajaxLoading(obj);
         return obj;
-        
     },
     draw: function(jsonData, num) {
         var that = this;
@@ -581,38 +576,6 @@ var prvDetail = {
             clearInterval(that.timer);
         }
     },
-    getUserInfo: function() {
-        var that = this;
-        var obj = [{
-            url: site_url.user_api,
-            data: {
-            },
-            needLogin: true,
-            async: false,
-            needDataEmpty: false, //需要判断data是否为空
-            callbackDone: function(json) {
-                var jsonData = json.data,
-                    isPerfect = jsonData.isPerfect, //基本信息是否完善
-                    newcomer = jsonData.newComer;
-                that.goRealName = jsonData.idnoCheckflag; //存储是否实名认证   0-否 1-是
-                that.customerType = jsonData.accountType; //存储个人或机构投资  1-个人  0-机构
-                that.endurePri = jsonData.endurePri; // 投资偏好
-                that.investFavour = jsonData.investFavour; // 投资者分类
-                that.newcomer = (newcomer == "1") ? 1 : 0; // 是否是新手客户 0否1是
-                that.age = jsonData.age; // 客户年龄
-
-                if (isPerfect == 0) { //基本信息是否完善  不完善     0否1是
-                    that.isPerfect = true;
-                } else if (isPerfect == 1) { //完善 
-                    that.isPerfect = false;
-                }
-            },
-            callbackFail: function(data) {
-                tipAction(data.message);
-            }
-        }];
-        $.ajaxLoading(obj);
-    },
     showNewComerTip: function() {
         var obj = {
             id: "newcomer",
@@ -649,7 +612,7 @@ var prvDetail = {
                     return;
                 } else {
                     $this.addClass("stop");
-                    // that.getUserInfo();
+                    that.getUserData();
 
                     if (!that.newcomer) {
                         $.elasticLayer(obj)
