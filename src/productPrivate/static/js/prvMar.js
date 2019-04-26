@@ -181,12 +181,10 @@ var prvMar = {
                     el.marName = el.fileName.substring(el.fileName.indexOf("】") + 1);
                     if (el.fileName.indexOf(".pdf") != -1) {
                         el.line = true; //线上可预览
-                        el.href ='https://www.baidu.com/'
-                        // el.href = site_url.download_api + "?filePath=" + el.fileUrl + "&fileName=" + new Base64().encode(el.fileName) + "&groupName=" + el.groupName + "&show=1";
+                        el.href = site_url.download_api + "?filePath=" + el.fileUrl + "&fileName=" + new Base64().encode(el.fileName) + "&groupName=" + el.groupName + "&show=1";
                     } else {
                         el.line = false; //需下载
-                        el.href ='https://www.baidu.com/'
-                        // el.href = site_url.download_api + "?filePath=" + el.fileUrl + "&fileName=" + new Base64().encode(el.fileName) + "&groupName=" + el.groupName;
+                        el.href = site_url.download_api + "?filePath=" + el.fileUrl + "&fileName=" + new Base64().encode(el.fileName) + "&groupName=" + el.groupName;
                     }
                 })
 
