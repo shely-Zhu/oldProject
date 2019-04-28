@@ -69,7 +69,7 @@ $(function(){
 			var obj = [
 				{
 					url: site_url.checkLogin_api,
-					data:null,
+					// data:null,
 					// async: true,
 					needDataEmpty:false,
 					loginNotJump:params, //true不跳，false--跳

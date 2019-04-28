@@ -38,18 +38,25 @@ body{
 
 			}
 			.awardLogin{
+				// display:table;
 				margin: 3.6rem auto 0;
 				text-align: center;
 				font-size: 1.1rem;
 				color: @c005;
 				span{
+					// display: table-cell;
 					padding: 0 0.5rem;
 					border: 1px solid #fff;
 					font-size: 1rem;
 					color: @c006;
-					line-height: 1rem;
+					// line-height: 100%;
 					margin: 0 0.5rem;
 					border-radius: 0.2rem;
+					line-height: 1;
+					vertical-align:middle;
+					&.awardTimes{
+						padding-top: 1px;
+					}
 				}
 			}
 		}

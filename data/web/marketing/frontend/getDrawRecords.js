@@ -15,7 +15,7 @@ var Mock = require('mockjs');
 //1. 接口数据
 var data = Mock.mock({
 	"hmac": "hmac", 
-	"status": "0", 
+	"status": "0000", 
 	"code": "", 
 	"msg": "success", 
 	"data":{
