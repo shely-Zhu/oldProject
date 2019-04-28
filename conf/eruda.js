@@ -9,7 +9,7 @@
  */
 
 (function () { 
-    if( window.env != 4 && window.location.href.indexOf('eruda=true') != -1){
+    if( (window.env != 3 && window.env != 4) && window.location.href.indexOf('eruda=true') != -1){
         //非生产环境且url上eruda参数为true
         var script = document.createElement('script'); 
         script.src="//cdn.jsdelivr.net/npm/eruda"; 
