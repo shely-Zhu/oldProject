@@ -164,8 +164,35 @@ $(function() {
                     tipAction('请阅读并勾选协议')
                     return false;
                 }
-                $('.payPassword').show();
-                
+
+                // 风险评测是否过期
+                obj = [{
+                    url: site_url.queryUserBaseInfo_api,
+                    data: {
+                    },
+                    needLogin: true,
+                    async: false,
+                    callbackDone: function(json) {
+
+                        var jsonData = json.data;
+                        // 冻结账户弹窗提示
+                        var result = frozenAccount("buyFreeze", window.location.href, jsonData.accountType);
+                        if( !!result ){
+                            return false;
+                        };
+                        if (jsonData.pofExpired == 1) {
+                            tipAction('风险测评已过期，请重新测评')
+                        } else {
+                            // 弹出交易密码
+                            $('.payPassword').show();
+                        }
+                        
+                    },
+                    callbackFail: function(json) {
+                        tipAction(json.msg);
+                    }
+                }];
+                $.ajaxLoading(obj);
             })
 
             //点击密码弹出框的确定按钮
