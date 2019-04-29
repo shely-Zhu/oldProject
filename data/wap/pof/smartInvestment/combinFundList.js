@@ -12,10 +12,11 @@ var Mock = require('mockjs');
 //注册
 var data = Mock.mock({
     "hmac": "hmac",
-    "status": "0",
+    // "status": "0",
+    "status": "1000",
     "code": "CS0000",
-    // "code": "CF0001",
     "msg": "error",
+    // "data":''
     "data": {
         "combinFundList": [{
             "groupCode": "000001", //组合编号
