@@ -242,13 +242,13 @@ var splitUrl = require('./components/splitUrl.js')();
                     //数据请求成功的情况
                     var json = data.data;
 
-                    if (obj.needDataEmpty || data.status == '1000') {
+                    if (obj.needDataEmpty && data.status == '1000') { // 返回1000代表没有数据，走callbackNodata
                         //需要判断数据是否为空
-                        if ($.util.objIsEmpty(json)) {
+                        // if ($.util.objIsEmpty(json)) {
                             //数据为空，如果有传callbackNoData，执行
                             obj.callbackNoData();
                             return false;
-                        }
+                        // }
                     }
 
                     //数据请求成功且不为空，执行成功的回调函数

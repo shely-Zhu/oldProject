@@ -15,7 +15,9 @@ var tipAction = require('./tipAction.js');
 function isCustTypeOne(outdateFreezeStatus, lawFreezeStatus, url, custType) {
     var f = false;
     var userObj = [{
-            url: site_url.user_api,
+            //由于恒小智-赎回用到了，改成新接口
+            //url: site_url.user_api,
+            url: site_url.queryUserBaseInfo_api,
             data: {
                 hmac: "", //预留的加密信息     
                 params: { //请求的参数信息

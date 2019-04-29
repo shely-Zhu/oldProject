@@ -13,6 +13,12 @@ module.exports = function() {
     this.checkLogin_api = http_url.web_url + '/account/frontend/isLogin';
     //获取客户信息
     this.user_api = http_url.web_url + '/account/getUserInfo';
+    // 查询用户基本信息
+    this.queryUserBaseInfo_api = http_url.web_url + '/account/queryUserBaseInfo';
+    // 查询用户特有信息
+    this.queryUserPeculiarInfo_api = http_url.web_url + '/account/queryUserPeculiarInfo';
+    // 查询用户认证信息
+    this.queryUserAuthInfo_api = http_url.web_url + '/account/queryUserAuthInfo';
     // 客户冻结状态查询
     this.queryFreezeStatus_api = http_url.web_url + '/account/freezeStatus/queryFreezeStatus';
     this.custBro_api = http_url.web_url + '/account/custBroRelQuery'; //理财师查询与客户关系接口
