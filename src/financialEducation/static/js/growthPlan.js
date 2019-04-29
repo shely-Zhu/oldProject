@@ -85,7 +85,7 @@ $(function() {
             var obj = [{
                 url: site_url.myFinancialEducationInfoApi,
                 data: {
-                    hmac: "" //预留的加密信息
+                    // hmac: "" //预留的加密信息
                 },
                 //async: false,
                 needLogin: true,

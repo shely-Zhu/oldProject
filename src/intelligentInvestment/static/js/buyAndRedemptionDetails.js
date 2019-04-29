@@ -66,8 +66,8 @@ $(function() {
                         $assetPurchaseDetails = $(".assetPurchaseDetails");
                     $(".js_smartName").html(combinTradeInfo.combName);
 
-                    // todo 待改成bankAccountMask
-                    var bankNo = combinTradeInfo.bankAccount.substring(combinTradeInfo.bankAccount.length - 4);
+                    // 待改成bankAccountMask
+                    var bankNo = combinTradeInfo.bankAccount.substring(combinTradeInfo.bankAccountMask.length - 4);
                     
                     $(".js_time").html(combinTradeInfo.applyTime);
                     if(that.tradeType == 1) {//买入
