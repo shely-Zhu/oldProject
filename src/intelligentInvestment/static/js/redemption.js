@@ -156,7 +156,6 @@ $(function() {
         },
         // 封装动态变化赎回份额
         changeVal: function() {
-            debugger;
             var that = this;
             var $fund_share = $(".fund_box .fund_share");
             $.each($fund_share, function(i, el) {
