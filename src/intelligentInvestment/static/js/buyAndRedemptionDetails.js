@@ -65,7 +65,9 @@ $(function() {
                         $js_details = $(".js_details"),
                         $assetPurchaseDetails = $(".assetPurchaseDetails");
                     $(".js_smartName").html(combinTradeInfo.combName);
-                    var bankNo = combinTradeInfo.bankAccount.substring(combinTradeInfo.bankAccount.length - 4);
+
+                    var bankNo = combinTradeInfo.bankAccountMask.substring(combinTradeInfo.bankAccountMask.length - 4);
+                    
                     $(".js_time").html(combinTradeInfo.applyTime);
                     if(that.tradeType == 1) {//买入
                         $(".js_bankName").html(combinTradeInfo.payTypeMask +'-'+ combinTradeInfo.bankName + "(" + bankNo + ")");

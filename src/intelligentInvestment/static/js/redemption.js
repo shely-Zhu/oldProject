@@ -39,8 +39,8 @@ $(function() {
                 async: false, //同步
                 callbackDone: function(json) {
                     var jsonData = json.data;
-                    var bankAccount = jsonData[0].bankAccount;
-                    var bankNo = bankAccount.substring(bankAccount.length - 4);
+                    var bankAccountMask = jsonData[0].bankAccountMask;
+                    var bankNo = bankAccountMask.substring(bankAccountMask.length - 4);
                     var text = jsonData[0].bankName + "（" + bankNo + "）";
                     $(".bank_txt").html(text);
                     that.tradeAcco = jsonData[0].tradeAcco;

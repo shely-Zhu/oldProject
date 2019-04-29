@@ -66,7 +66,7 @@ $(function(){
 
 	                $('#accountName').html(json.data.title);
 	                $('#name span').html(json.data.accountName);
-	                $('#number span').html(json.data.bankAccount);
+	                $('#number span').html(json.data.bankAccountMask);
 	                $('#linenum span').html(json.data.bankNo);
 	                $('#openingBank span').html(json.data.bankAccountName);
 

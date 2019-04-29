@@ -13,21 +13,21 @@ var Mock = require('mockjs');
 
 //注册
 var data = Mock.mock({
-    "hmac": "hmac",
-    "status": "0",
-    "code": "CS0000",
-    "msg": "处理成功！",
     "data": {
-        "combinFundProportionList|2": [{
-            "fundCode": "000837", //产品代码
-            "fundName": "智能投顾1号", //产品名称
-            "prdPercent": "0.5" //占比
-        },{
-            "fundCode": "9999", //产品代码
-            "fundName": "智能投顾2号", //产品名称
-            "prdPercent": "50.00" //占比
-        }]
-    }
+        "combinFundProportionList": [{
+                "fundCode": "000846",
+                "fundName": "中融货币A",
+                "prdPercent": "50.00"
+            },
+            {
+                "fundCode": "000847",
+                "fundName": "中融货币C",
+                "prdPercent": "50.00"
+            }
+        ]
+    },
+    "message": "操作成功！",
+    "status": "0000"
 });
 
 //把生成的假数据当做模块输出

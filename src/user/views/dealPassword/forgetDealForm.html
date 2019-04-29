@@ -122,7 +122,7 @@
 		<!-- 银行列表模板 -->
 		<script id="branchList-template" type="text/x-handlebars-template">
 			{{#each this}}
-			<div class="formList mui-radio mui-left" accountName="{{accountNameMask}}" idNo="{{idNo}}" bankAccount="{{bankAccount}}" bankAccountMask="{{bankAccountMask}}" bankNo="{{bankNo}}" tradeAcco="{{tradeAcco}}" idNoMask="{{idNoMask}}" capitalMode="{{capitalMode}}" branchNo="{{branchNo}}">
+			<div class="formList mui-radio mui-left" accountName="{{accountNameMask}}" idNo="{{idNo}}" bankAccount="{{bankAccountSecret}}" bankAccountMask="{{bankAccountMask}}" bankNo="{{bankNo}}" tradeAcco="{{tradeAcco}}" idNoMask="{{idNoMask}}" capitalMode="{{capitalMode}}" branchNo="{{branchNo}}">
 				<label>{{bankName}}</label>
 				<input name="bankName" type="radio" bankNo="{{bankNo}}" >
 			</div>

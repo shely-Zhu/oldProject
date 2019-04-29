@@ -26,7 +26,7 @@ module.exports = function(data, $ele, $id) {
             if (i > (2 - 1)) {
                 el.hide = 1;
             }
-            var ba = el.bankAccount;
+            var ba = el.bankAccountMask;
             el.banknum = ba.substring(ba.length - 4);
         })
 
