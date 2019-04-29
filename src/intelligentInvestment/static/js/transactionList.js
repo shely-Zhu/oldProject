@@ -40,7 +40,6 @@ var tradeList = {
 		current_index: 0,  //左右滑动区域的索引
 		list_template: '',  //列表的模板，生成后存放在这里
 		ajaxArr: [],  //存放每一个ajax请求的传参数据
-		apiUrlArr: site_url.recordList_api,  //存放每一个ajax请求的url地址
 	},	 
 	html: '',  //存放生成的html
 	init: function(){  //初始化函数
@@ -184,7 +183,7 @@ var tradeList = {
 
 		//获取产品列表
 		var obj = [{
-			url: that.setting.apiUrlArr,
+			url: site_url.recordList_api,
 			data: that.setting.ajaxArr[that.setting.current_index] ,
 			needLogin: true,
 			needDataEmpty: true, 
@@ -192,7 +191,7 @@ var tradeList = {
 			callbackDone: function(json){
 				var jsonData = json.data;
 
-				var comRradeRecordList = jsonData.comRradeRecordList;
+				var comRradeRecordList = jsonData.pageList;
 				var data = {};
 
 				if( !$.util.objIsEmpty(comRradeRecordList) ){

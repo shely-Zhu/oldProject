@@ -10,9 +10,7 @@ var Mock = require('mockjs');
 
 //注册
 var data = Mock.mock({
-    "hmac": "hmac",
-    "status": "0",
-    "code": "CS0000",
+    "status": "0000",
     "msg": "处理成功！",
     "data": {
         "combinTotalAsset": {
