@@ -51,10 +51,8 @@ $(function() {
             }];
             obj.push({
                 url: site_url.shareList_api, // 组合持仓列表
-                data: {
-                },
                 callbackDone: function(json) {
-                    var jsonData = json.data.comShareList;
+                    var jsonData = json.data.pageList;
                     var myTemplate = Handlebars.compile($("#fund_list_template").html());
                     $('#fund_list').html(myTemplate(jsonData));
                     $.each(jsonData, function(i, el) {
@@ -63,7 +61,6 @@ $(function() {
                     // 赎回份额
                     that.changeVal();
                 },
-                     
             });
             obj.push({
                 url: site_url.totalAssets_api, // 组合资产
@@ -159,6 +156,7 @@ $(function() {
         },
         // 封装动态变化赎回份额
         changeVal: function() {
+            debugger;
             var that = this;
             var $fund_share = $(".fund_box .fund_share");
             $.each($fund_share, function(i, el) {

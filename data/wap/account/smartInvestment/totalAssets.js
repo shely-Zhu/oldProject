@@ -10,27 +10,26 @@ var Mock = require('mockjs');
 
 //注册
 var data = Mock.mock({
-    "status": "0000",
-    "msg": "处理成功！",
     "data": {
-        "combinTotalAsset": {
-            "combCode": "012", //组合编号
-            "combName": "组合产品21", //组合名称
-            "yesterdayIncome": "100.71", //昨日收益"
-            "yesterdayIncomeMask": "100.71", //昨日收益千分位展示"
-            "accumIncome": "1000", //累计收益
-            "accumIncomeMask": "1,000", //累计收益千分位展示
-            "totalAmount": "10000.00", //总资产
-            "totalAmountMask": "10,000.00", //总资产千分位展示
-            "valueOnway": "", //在途金额
-            "valueOnwayMask": "5,000.00", //在途金额千分位展示
-            "valueOnwayShare": "5000.00", //在途份额
-            "valueOnwayShareMask": "", //在途份额千分位展示
-            "tradeAcco": "12457841545646546", //组合交易账号
-            "transferRemind": "1", //弹框提示
-            "transferDate": "2019-01-02" //调仓时间"
-        }
-    }
+        "accumIncome": "14.72",
+        "accumIncomeMask": "14.72",
+        "combCode": "0370",
+        "combName": "",
+        "enableShares": "5050.00",
+        "totalAmount": "5050.00",
+        "totalAmountMask": "5,050.00",
+        "tradeAcco": "ZHLC000000003983",
+        "transferDate": null,
+        "transferRemind": "0",
+        "valueOnway": "0.00",
+        "valueOnwayMask": "0.00",
+        "valueOnwayShare": "0.00",
+        "valueOnwayShareMask": "0.00",
+        "yesterdayIncome": "0.35",
+        "yesterdayIncomeMask": "0.35"
+    },
+    "message": "操作成功！",
+    "status": "0000"
 });
 
 //把生成的假数据当做模块输出
