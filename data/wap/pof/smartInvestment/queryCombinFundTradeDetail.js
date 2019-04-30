@@ -8,8 +8,7 @@ var Mock = require('mockjs');
 
 var data = Mock.mock({ 
 	"hmac": "hmac", 
-	"status": "0", 
-	"code": "CS0000", 
+	"status": "0000", 
 	"msg": "success", 
 	"data": {
 	    "combinTradeInfo": 
@@ -24,7 +23,8 @@ var data = Mock.mock({
 				"payTypeMask":"在线支付",//支付方式名称
                 "payType":"1",//支付方式
                 "bankName":"光大银行",//银行名称
-                "bankAccount":"654128512315645",//银行卡号
+                "bankAccount":"",//银行卡号
+                "bankAccountMask":"6547**********5645",//银行卡号
                 "applyTime":"2018-10-14 12:35:55",//申请时间
                 "tradeConfirmBalance":"511",//确认金额
                 "tradeConfirmBalanceMask":"165",//确认金额千分位
