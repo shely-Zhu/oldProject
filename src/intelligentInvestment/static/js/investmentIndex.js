@@ -149,7 +149,6 @@ var tradeList = {
             needLogin: true,
             async: false,
             callbackDone: function(json) {
-            	debugger;
                 window.location.href = site_url.combinationDetails_url + '?riskLevel=' + riskLevel;
             },
             callbackNoData: function() { // 没有匹配
