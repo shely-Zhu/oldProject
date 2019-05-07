@@ -173,6 +173,9 @@ $(function() {
                     } else if (el.pefType == "3") { //浮收
                         el.solid = false;
                     }
+                    if(el.pofGains==''){
+                        el.pofGains='--';
+                    }
                 });
 
                 var tplm = $("#productList-template").html();

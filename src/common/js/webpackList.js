@@ -175,4 +175,8 @@ module.exports = {
     //银杏研究
     './webviews/static/js/detailModel': './src/webviews/static/js/detailModel.js', 
     './webviews/static/js/information': './src/webviews/static/js/information.js', 
+    // 帮助中心
+    './webviews/static/js/helpful': './src/webviews/static/js/helpful.js', 
+    './webviews/static/js/regard': './src/webviews/static/js/regard.js', 
+
 }
