@@ -65,7 +65,7 @@ $(function(){
                     $('.'+param).html(json.content);//content
                 },
                 callbackFail: function(json){
-                    tipAction(json.msg);
+                    tipAction(json.message);
                 }
             }]
             $.ajaxLoading(obj);
