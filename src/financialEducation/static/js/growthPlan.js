@@ -47,9 +47,6 @@ $(function() {
             var obj = [{
                 url: site_url.findApi,
                 data: {
-                    hmac: "", //预留的加密信息
-                    params: { //请求的参数信息
-                    }
                 },
                 //async: false,
                 needLogin: true,

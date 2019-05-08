@@ -12,7 +12,6 @@ module.exports = function() {
     this.findContentByCategory_api = http_url.content_url + '/frontend/findContentByCategory';
     //协议查询
     this.findInvestorClassification_api = http_url.content_url + '/findInvestorClassification';
-    this.recommend_api = http_url.content_url + '/frontend/productRecommend';  //私募首页--产品推荐
     // this.findBannerLikePosition_api = http_url.content_url + '/frontend/findBannerLikePosition'; //获取页面背景及其他图片素材
     
     this.activity_api = http_url.content_url + '/frontend/findSpecialById'; //产品专题

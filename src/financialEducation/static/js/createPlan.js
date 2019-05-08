@@ -46,8 +46,7 @@ $(function() {
             var obj = [{
                 url: site_url.findApi,
                 data: {
-                    hmac: "", //预留的加密信息
-                    params: {} //请求的参数信息        
+                       
                 },
                 needLogin: true,
                 needDataEmpty: true,
@@ -120,7 +119,7 @@ $(function() {
             var obj = [{
                 url: site_url.updateApi,
                 data: {
-                    hmac: "", //预留的加密信息
+                    
                     //请求的参数信息
                     imgUrl: json.data.fileName || that.imgUrl, // 封面图片
                     planName: $("[check=planName]").val(), // 项目名称
@@ -144,7 +143,7 @@ $(function() {
             }, {
                 url: site_url.removeApi,
                 data: {
-                    hmac: "", //预留的加密信息
+                    
                     //请求的参数信息
                     fileName: that.imgUrl,
                 },

@@ -48,7 +48,7 @@ module.exports = function() {
     this.findContentByCategory_api = http_url.web_url + '/content/frontend/findContentByCategory'; // 内容管理接口
     
     this.findContentDetailById_api = http_url.web_url + '/content/frontend/findContentDetailById'; // 内容详情展示
-    this.findYXResearchReportDetailById_api = http_url.web_url + "/content/frontend/findYXResearchReportDetailById"; // 银杏研究报告详情
+    this.findYXResearchReportDetailById_api = http_url.web_url + "/content/findYXResearchReportDetailById"; // 银杏研究报告详情
     this.queryRightsByLevel_api = http_url.web_url + '/content/findBenefitByLevel';  //用户权益查询
     this.findBannerGeneratorById_api = http_url.web_url + '/content/frontend/findBannerGeneratorById ';  //根据idhuoqu banner信息
     this.findLatestContentByCategory_api = http_url.web_url + '/content/frontend/findLatestContentByCategory';

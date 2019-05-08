@@ -35,7 +35,7 @@ var pOver = Mock.mock({
                 "productCode": "0003FE",//产品代码
                 "productName": "恒天财富稳盛23号私募投资基金（九期）",//产品名称
                 "pofType":"",//公募产品类型
-                "pofGains": "-2.32",//公募近一年收益（%）
+                "pofGains": "",//公募近一年收益（%）
                 "pefType": "2",//私募收益类型
                 "pefTerm": "3",//私募投资期限（月）
                 "pefMinBalance": "100",//私募起投金额（万元）
