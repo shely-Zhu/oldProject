@@ -167,7 +167,7 @@ $(function() {
 
                 // 风险评测是否过期
                 obj = [{
-                    url: site_url.queryUserBaseInfo_api,
+                    url: site_url.queryUserAuthInfo_api,
                     data: {
                     },
                     needLogin: true,
@@ -180,7 +180,7 @@ $(function() {
                         if( !!result ){
                             return false;
                         };
-                        if (jsonData.pofExpired == 1) {
+                        if (jsonData.endurePubIsold == 1) {   //公募风险评测是否过期 0:否 1:是
                             tipAction('风险测评已过期，请重新测评')
                         } else {
                             // 弹出交易密码

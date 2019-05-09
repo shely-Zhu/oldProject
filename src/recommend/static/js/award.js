@@ -153,7 +153,12 @@ $(function(){
 						jumpParam=true;
 					},
 					callbackFail:function(json){
-						tipAction(json.message);
+						if(!!json.message){
+							tipAction(json.message);
+						}else{
+							tipAction('网络不可用，请检查网络');
+						}
+						
 					},
 					callbackNoData:function(){
 						console.log('我在nodata里面')
