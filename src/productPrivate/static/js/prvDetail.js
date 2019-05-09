@@ -410,6 +410,8 @@ var prvDetail = {
                 }
                 if(num==''){
                     that.drawAction(9999);
+                }else{
+                    that.drawAction(num)
                 }
             },
             callbackFail: function(json) {
