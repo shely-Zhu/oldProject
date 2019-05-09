@@ -45,6 +45,7 @@ $(function(){
                     "id":splitUrl['id'],//内容ID
                 },
                 needDataEmpty: false, //不判断data是否为空
+                needLogin:true, //需要判断是否登录
                 contentTypeSearch: true, //false: application/json,入参data为json字符串  , true:  application/x-www-form-urlencoded ，入参data为json对象
                 callbackDone: function(json){
 
