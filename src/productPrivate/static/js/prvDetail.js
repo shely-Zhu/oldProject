@@ -116,9 +116,13 @@ var prvDetail = {
                 // that.reserveId = json.reserveId;
                 that.isNewcomer = (isNewcomer == "1") ? 1 : 0; // 新手产品
                 that.isElecContract = (isElecContract == "1") ? 1 : 0;
-
-                $(".invStart").html(json.investStart);
-                $(".invDate").html(json.projectTerm); //获取产品的投资期限或者封闭期
+                
+                if(json.investStart != ''){
+                    $(".invStart").html(json.investStart);
+                }
+                if(json.projectTerm != ''){
+                    $(".invDate").html(json.projectTerm); //获取产品的投资期限或者封闭期
+                }
                 $(".blackoutPeriod span").html(json.projectTermUnit); //"月",//产品期限单位
                 //0 债权投资;1 证券投资（二级市场）;2 股权投资;3 海外投资;4 其他
                 if(json.investDirect == "0" || json.investDirect == "2" || json.investDirect == "4") { // 债权投资、股权投资、其他服务不展示
@@ -129,7 +133,9 @@ var prvDetail = {
                 if (json.incomeMode == "0") { //固收类产品
                     $(".invSolid").show();
                     if (Number(businessCompareReferenceMax) <= Number(businessCompareReferenceMin)) {
-                        $(".invSolid .invCore").html(businessCompareReferenceMin + "%");
+                        if(businessCompareReferenceMin != ''){
+                            $(".invSolid .invCore").html(businessCompareReferenceMin + "%");
+                        }
                     } else {
                         $(".invSolid .invCore").html(businessCompareReferenceMin + "%~" + businessCompareReferenceMax + "%");
                     }
