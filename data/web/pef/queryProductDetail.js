@@ -19,7 +19,7 @@ var data = Mock.mock({
 		"projectTerm": "12",//产品期限（单位：个月）
 		"projectTermUnit": "12",//产品期限单位：个月
 		"projectUpTime": "2016/01/12",//募集开始日期【yyyy/MM/dd】
-		"projectDownTime": "2017/03/12",//募集结束日期【yyyy/MM/dd】
+		"projectDownTime": "",//募集结束日期【yyyy/MM/dd】
 		"productRiskLevelDesc": "成长级",//产品风险级别描述
 		"productRiskLevel": "2",//产品风险级别【原值】
 		"productStatus": "1",//产品状态【参照备注】
@@ -38,7 +38,7 @@ var data = Mock.mock({
 		"businessCompareReferenceMax": "7.8",//最高预期收益率【百分比】
 		"isCertification": "2",//是否实名认证【1.否 2.是】   
 		"isInvestClassifyRequired" : "2" , //是否需要判断投资者分类标签  【1.否 2.是】
-		"unitNetValue" : "2211" , //最新净值
+		"unitNetValue" : "" , //最新净值
 		"netValueDate" : "2019-09-09" , //最新净值日期
 		"accuNetValue" : "286786" , //累计净值
 		"isNewcomer" : "0" , //是否是新手推荐产品【0.否 1.是】
