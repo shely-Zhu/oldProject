@@ -45,7 +45,7 @@ var data=Mock.mock({
 		    }, 
 	 	], 
 	 	// advisor:[],
-		existMain: "0"  ,  //1：有专属 0：无专属 
+		existMain: "1"  ,  //1：有专属 0：无专属 
 		mobile:'18600754301'
 	}, 
 });
