@@ -90,10 +90,10 @@ var prvRec = {
 
                     that.jsonData = json.data;
 
-                    if (!$.util.objIsEmpty(that.jsonData.pageList)) {
+                    if (!$.util.objIsEmpty(that.jsonData.list)) {
                         //有数据，拼模板
 
-                        $.each(that.jsonData.pageList, function(i, el) {
+                        $.each(that.jsonData.list, function(i, el) {
 
                             if (el.pefType == "2") {
                                 if (el.pefExpectedProfitMax == "0" || el.pefExpectedProfitMax == '') {
