@@ -81,7 +81,7 @@ var prvRec = {
                 url: site_url.recommend_api, //私募产品列表
                 data: {
                     groupType: "wouldlike_" + splitUrl()["invest"], //类型（参考备注）
-                    curPage: "1", // 当前页码 
+                    pageNum: "1", // 当前页码 
                     pageSize: "10" //每页显示条数      
                 },
                 needDataEmpty: false,
