@@ -148,7 +148,7 @@ var prvDetail = {
                 }
                 $(".risk span").html(json.productRiskLevelDesc); //获取产品风险等级
                 $(".office").html(json.projectIssuer); //获取管理机构
-                $(".size").html(json.issuanceSize + "万"); //获取产品规模
+                $(".size").html(json.formatIssuanceSize + "万"); //获取产品规模
                 $(".getDate").html(json.projectUpTime + "~" + json.projectDownTime); //获取产品募集日期
                 that.projectDownTime = json.projectDownTime;
                 $(".prdInfo .head").html(json.productName); //获取产品名称
