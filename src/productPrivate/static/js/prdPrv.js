@@ -287,7 +287,7 @@ var prdPrv = {
                 //隐藏loading
                 that.getElements.listLoading.hide();
                 //显示错误提示
-                tipAction(json.msg);
+                tipAction(json.message);
             }
         }]
         $.ajaxLoading(obj);
@@ -335,7 +335,7 @@ var prdPrv = {
             callbackFail: function(json) {
                 //请求失败，
                 //显示错误提示
-                tipAction(json.msg);
+                tipAction(json.message);
             }
         }]
         $.ajaxLoading(obj);

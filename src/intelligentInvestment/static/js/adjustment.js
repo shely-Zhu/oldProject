@@ -35,6 +35,7 @@ $(function(){
 		tradeAcco: splitUrl()['tradeAcco'],
 		comFundLevel: '',
 		riskLevel:'',
+		custType:'', //客户类型
 		$e: {
             adjustmentRecord: $('.adjustmentList'), // 调仓距离
             adjustmentTemp: $('#adjustment-template'), // 最新调仓模板
@@ -57,10 +58,7 @@ $(function(){
 			var obj = [{
 				url: site_url.holdChange_api,
 				data:{
-					hmac:"", //预留的加密信息
-					params:{//请求的参数信息
-						"combCode":that.combCode,
-					}
+					combCode:that.combCode,
 				},
 				needDataEmpty: true,
 				callbackDone: function(json){
@@ -76,9 +74,6 @@ $(function(){
 						generateTemplate(data, that.$e.adjustmentRecord, that.$e.adjustmentTemp);
 
 					}
-				},
-				callbackFail: function(json){
-					tipAction(json.msg);
 				},
 			}]
 			$.ajaxLoading(obj);
@@ -114,29 +109,22 @@ $(function(){
 			mui("body").on('tap', '.bottom', function() {
 				var $this = $(this);
 				obj = [{
-					url: site_url.user_api_two,
-					data: {
-						hmac: "", //预留的加密信息     
-						params: { //请求的参数信息 
-						}
-					},
+					url: site_url.queryUserAuthInfo_api, 
 					needLogin: true,
 					async: false, 
 					callbackDone: function(json) {
 
 						var jsonData = json.data;
 
-						that.riskLevel = Number(jsonData.investFavour);
-						if (jsonData.pofExpired == 1) {
+						that.riskLevel = Number(jsonData.endurePri);
+						that.custType = jsonData.accountType;
+						if (jsonData.endurePubIsold == 1) {
 							tipAction('风险测评已过期，请重新测评')
 						} else {
 							var obj = [{
 								url: site_url.combinFundDetails_api,
 								data:{
-									hmac:"", //预留的加密信息
-									params:{//请求的参数信息
-										"groupCode":that.combCode,
-									}
+									"groupCode":that.combCode,
 								},
 								needLogin: true,
 								async: false, 
@@ -180,17 +168,11 @@ $(function(){
 
 									
 								},
-								callbackFail: function(json){
-									tipAction(json.msg);
-								},
 							}]
 							$.ajaxLoading(obj);
 
 						}
 					},
-					callbackFail: function(json) {
-						tipAction(json.msg);
-					}
 				}];
 				$.ajaxLoading(obj);
 			})
@@ -219,12 +201,9 @@ $(function(){
 				ajaxObj = [{
 					url: site_url.combinTransfer_api,
 					data: {
-						hmac: "", //预留的加密信息 非必填项
-						params: { //请求的参数信息
-							"combCode": that.combCode, //组合编号
-							"password": passwordVal, //密码
-							"tradeAcco": that.tradeAcco, //普通交易账号
-						}
+						"combCode": that.combCode, //组合编号
+						"password": passwordVal, //密码
+						"tradeAcco": that.tradeAcco, //普通交易账号
 					},
 					needLogin: true,
 					// needDataEmpty: false,

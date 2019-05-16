@@ -47,9 +47,6 @@ $(function() {
             var obj = [{
                 url: site_url.findApi,
                 data: {
-                    hmac: "", //预留的加密信息
-                    params: { //请求的参数信息
-                    }
                 },
                 //async: false,
                 needLogin: true,
@@ -75,9 +72,7 @@ $(function() {
                 callbackNoData: function() { // 没有初始化用户，去初始化
                     window.location.href = site_url.guidePageUrl;
                 },
-                callbackFail: function(json) {
-                    tipAction(json.msg);
-                }
+                     
             }];
             $.ajaxLoading(obj);
         },
@@ -87,9 +82,7 @@ $(function() {
             var obj = [{
                 url: site_url.myFinancialEducationInfoApi,
                 data: {
-                    hmac: "", //预留的加密信息
-                    params: { //请求的参数信息
-                    }
+                    // hmac: "" //预留的加密信息
                 },
                 //async: false,
                 needLogin: true,
@@ -121,9 +114,7 @@ $(function() {
                         that.ele.fundRecommend.hide();
                     }
                 },
-                callbackFail: function(json) {
-                    tipAction(json.msg);
-                }
+                     
             }];
             $.ajaxLoading(obj);
         },

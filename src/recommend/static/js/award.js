@@ -68,17 +68,14 @@ $(function(){
 			var that = this;
 			var obj = [
 				{
-					url: site_url.checkUserInfo_api,
-					data:null,
-					async: true,
+					url: site_url.checkLogin_api,
+					// async: true,
 					needDataEmpty:false,
 					loginNotJump:params, //true不跳，false--跳
 					needLogin:true,//需要判断是否登录
-					dataType: 'jsonp',
-            		needCrossDomain: true,
+            		// needCrossDomain: true,
 					callbackDone: function(json){
-						that.code = json.code;
-
+						//that.code = json.code;
 						if(that.isLogin==1){//初始化
 							that.award();
 							that.queryrecord();
@@ -86,11 +83,11 @@ $(function(){
 
 							// 每次点击抽奖次数查询一次接口
 							that.award();
+							
 							if(that.dataTimes > 0){
 								//如果抽奖次数大于0去调抽奖结果
 								//获取token
 								that.gettoken();
-
 								if(window.currentIsApp){
 									that.source = 'app';
 								}else{
@@ -156,7 +153,12 @@ $(function(){
 						jumpParam=true;
 					},
 					callbackFail:function(json){
-						tipAction(json.msg);
+						if(!!json.message){
+							tipAction(json.message);
+						}else{
+							tipAction('网络不可用，请检查网络');
+						}
+						
 					},
 					callbackNoData:function(){
 						console.log('我在nodata里面')
@@ -197,10 +199,7 @@ $(function(){
 				{ 
 					url: site_url.award_api,
 					data:{
-						hmac:"", //预留的加密信息
-						params:{//请求的参数信息
-								  
-						}
+					
 					},
 					needLogin:true,  //需要判断是否登陆
 					callbackDone:function(json){
@@ -212,7 +211,11 @@ $(function(){
 
 					},
 					callbackFail: function (json) {
-						tipAction(json.msg);
+						if(!!json.message){
+							tipAction(json.message);
+						}else{
+							tipAction('网络不可用，请检查网络');
+						}
 					}
 				}
 			];
@@ -225,12 +228,9 @@ $(function(){
 			var obj = [
 			//获取唯一的token
 				{
-					url: site_url.gettoken_api,
+					url: site_url.getToken_api,
 					data: {
-						hmac: "", //预留的加密信息
-						params: {//请求的参数信息
-
-						}
+						
 					},
 					async:false,
 					needLogin: true, //需要判断是否登陆
@@ -239,7 +239,11 @@ $(function(){
 						// console.log(that.token);
 					},
 					callbackFail: function (json) {
-						tipAction(json.msg);
+						if(!!json.message){
+							tipAction(json.message);
+						}else{
+							tipAction('网络不可用，请检查网络');
+						};
 						that.isRotate = false;
 					}
 				}
@@ -252,12 +256,9 @@ $(function(){
 			var that = this;
 			var obj = [
 				{
-					url: site_url.queryrecord_api,
+					url: site_url.getAwardRecords_api,
 					data:{
-						hmac:"", //预留的加密信息
-						params:{//请求的参数信息
-								  
-						}
+						
 					},
 					needLogin:true,  //需要判断是否登陆
 					callbackDone:function(json){
@@ -276,7 +277,11 @@ $(function(){
 
 					},
 					callbackFail: function (json) {
-						tipAction(json.msg);
+						if(!!json.message){
+							tipAction(json.message);
+						}else{
+							tipAction('网络不可用，请检查网络');
+						}
 						that.isRotate = false;
 					}
 				}
@@ -289,12 +294,9 @@ $(function(){
 			var that = this;
 			// console.log(that);
 			var obj = [{
-				url: site_url.queryallrecordlist_api,
+				url: site_url.getDrawRecords_api,
 				data:{
-					hmac:"",  //预留的加密信息
-					params:{  //请求的参数信息
-							  
-					}
+					
 				},
 				callbackDone:function(json){
 			
@@ -340,7 +342,7 @@ $(function(){
 
 				},
 				callbackFail: function (json) {
-					tipAction(json.msg);
+					tipAction(json.message);
 				}
 			}];
 			$.ajaxLoading(obj);
@@ -350,13 +352,10 @@ $(function(){
 		resultScores:function(){
 			var that = this;
 			var obj = [{
-				url: site_url.drawintegral_api,
+				url: site_url.draw_api,
 				data: {
-					hmac: "", //预留的加密信息
-					params: { //请求的参数信息
-						token: that.token,
-						source: that.source,  //信息的来源
-					}
+					token: that.token,
+					source: that.source,  //信息的来
 				},
 				// dataType : 'jsonp',
 				needLogin: true, //需要判断是否登录
@@ -431,7 +430,7 @@ $(function(){
 
 				},
 				callbackFail: function (json) {
-					tipAction(json.msg);
+					tipAction(json.message);
 					that.isRotate = false;
 				}
 				// console.log(item);
@@ -516,10 +515,12 @@ $(function(){
 				// 		window.location.href=site_url.login_html_url+'?originUrl=' + new Base64().encode(window.location.href);
 				// 	}
 				// }
-				 that.checkLogin(false, function() {
-                	// jsonp请求需放在回掉函数中
-	                that.judge();
-	            });
+				//  that.checkLogin(false, function() {
+				// 	 debugger
+                // 	// jsonp请求需放在回掉函数中
+	            //     that.judge();
+				// });
+				 that.checkLogin(false);
 				
 			});
 
@@ -593,11 +594,8 @@ $(function(){
 			var obj = [{
 				url: site_url.findBannerLikePosition_api,
 				data:{
-					hmac:"", //预留的加密信息
-					params:{//请求的参数信息
-						adPosition :"LotteryWAP",//类型（标志位）【请参照备注】
-						groupType:"bannerCategoryGF"//  组类型（非必填，默认明泽）		  
-					}
+					adPosition :"LotteryWAP",//类型（标志位）【请参照备注】
+					groupType:"bannerCategoryGF"//  组类型（非必填，默认明泽）		  	
 				},
 				needLogin:true,  //需要判断是否登陆
 				callbackDone:function(json){

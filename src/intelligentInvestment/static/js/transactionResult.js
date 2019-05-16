@@ -42,10 +42,7 @@ $(function() {
             var obj = [{
                 url: site_url.queryCombinFundTradeDetail_api,
                 data: {
-                    hmac: "", //预留的加密信息
-                    params: {
-                    	combRequestNo:splitUrl()['allotNo'],//组合申请编号
-                    }
+                    combRequestNo:splitUrl()['allotNo'],//组合申请编号
                 },
                 needLogin: true,
                 needDataEmpty: false,
@@ -57,7 +54,7 @@ $(function() {
                 	//组合名称
                 	that.combinationName = combinTradeInfo.combName;
                 	//银行卡后四位
-                	combinTradeInfo.bankNo = combinTradeInfo.bankAccount.substring(combinTradeInfo.bankAccount.length - 4);
+                	combinTradeInfo.bankNo = combinTradeInfo.bankAccountMask.substring(combinTradeInfo.bankAccountMask.length - 4);
                 	//赎回比例--从上页面带入
                 	combinTradeInfo.inputVal = splitUrl()['inputVal'];
                 	

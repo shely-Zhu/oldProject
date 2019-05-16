@@ -138,9 +138,6 @@ $(function(){
 				        	autoTextarea(el);// 调用
 				       	})
 					},
-					callbackFail: function(json){
-
-					}
 				}];
 				$.ajaxLoading(obj);
 			};
@@ -301,7 +298,7 @@ $(function(){
 						}
 					},
 					callbackFail: function(json){
-						tipAction(json.msg, function(){
+						tipAction(json.message, function(){
 							getNewTwyzm();
 							$this.removeAttr("disabled").removeClass('disable');
 						});

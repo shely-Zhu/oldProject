@@ -92,7 +92,7 @@ function getLocalIp() {
         var iface = osNet[devName];
         for (var i = 0; i < iface.length; i++) {
             var alias = iface[i];
-            if (alias.family === 'IPv4' && (devName == '本地连接' || devName == '以太网')) {
+            if (alias.family === 'IPv4' && (devName == '本地连接' || devName == '以太网' || devName=="WLAN")) {
                 console.log('当前本地ip：' + alias.address);
                 return alias.address;
             }
@@ -163,7 +163,7 @@ gulp.task('mock', function() {
     gulp.src('.')
         .pipe(plugins.mockServer({
             //livereload: false,
-            // host: host.ip,
+            host: host.ip,
             directoryListing: true,
             port: host.port.mock,
             open: false,
@@ -179,16 +179,22 @@ gulp.task('proxyTask', function() {
         livereload: true,
         middleware: function(connect, opt) {
             return [
-                proxy('/wap/pef',  {
-                    target: 'http://172.16.191.122:8080',
+                proxy('/wap',  {
+                    target: 'https://h5.htjf4.com',
                     changeOrigin:true,
                     secure: false,
                 }),
-                proxy('/wap/pof',  {
-                    target: 'http://172.16.191.210:8080',
+                proxy('/web/',  {
+                    target: 'https://h5.htjf4.com',
                     changeOrigin:true,
                     secure: false,
                 }),
+                proxy('/app',  {
+                    target: 'https://app.htjf4.com/',
+                    changeOrigin:true,
+                    secure: false,
+                }),
+
             ]
         }
     });
@@ -202,7 +208,17 @@ gulp.task('mockProxy', function() {
         middleware: function(connect, opt) {
             return [
                 proxy('/wap',  {
-                    target: 'http://' + localIp + ':8088',
+                    target: 'http://'+localIp + ':8088',
+                    changeOrigin:true,
+                    secure: false,
+                }),
+                proxy('/web/',  {
+                    target: 'http://'+localIp + ':8088',
+                    changeOrigin:true,
+                    secure: false,
+                }),
+                proxy('/app',  {
+                    target: 'https://app.htjf4.com/',
                     changeOrigin:true,
                     secure: false,
                 }),
@@ -210,7 +226,6 @@ gulp.task('mockProxy', function() {
         }
     });
 })
-
 
 
 //zip做服务器部署的时候讲我们打包出的文件压缩成一个zip包
@@ -223,17 +238,12 @@ gulp.task('zip', ['initialTask'], function() {
 //默认任务  
 // if (options.env === '0' || options.env === '1') { //当开发环境的时候构建命令执行mock服务
 if (options.env === '0' ) { //当开发环境的时候构建命令执行mock服务
-
     console.log("开发环境执行mock模拟数据服务器");
-
-    gulp.task('default', ['initialTask', 'mockProxy', 'mock'])
-
+    gulp.task('default', ['initialTask','mock', 'mockProxy'])
 } else if (options.env === '5'){
     gulp.task('default', ['initialTask', 'proxyTask'])
-
 } else {
     console.log("不启动服务器，做运维环境部署打包用");
-
     gulp.task('default', ['zip'])
 
 }

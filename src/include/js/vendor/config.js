@@ -17,7 +17,9 @@ var pofApi = require('../../../common/js/components/config/pofApi.js');
 var contentApi = require('../../../common/js/components/config/contentApi.js');
 // 账户相关
 var accountApi = require('../../../common/js/components/config/accountApi.js');
-//
+// pc和wap共用文件
+var webApi = require('../../../common/js/components/config/webApi.js');
+
 // var jointApi = require('../../../common/js/components/config/jointApi.js');
 // app里面私募掉公募接口
 // var crossApi = require('../../../common/js/components/config/crossInterface.js');
@@ -27,15 +29,12 @@ var accountApi = require('../../../common/js/components/config/accountApi.js');
 window.site_url = { 
 
 	//这里是非公募，非私募，非joint，非跳转的接口和跳转链接配置
-
 	//积分商城登录
   	authorization_api : http_url.oauth_url + '/authorization',
   	//积分商城确认登录
   	confirmLogin_api : http_url.oauth_url + '/confirmLogin',
-  	
   	//我的账户退出成功跳转链接
   	goMyAccount_url : http_url.htjf_url+'/getAuthURL.action?redirect_uri:'+http_url.htjf_url+'/apis/wx/user/toMyAccount.action',
-	
   	//产品查询
   	productSearch_api : 'http://jjs.chtwm.com/prdtq.do',
 },
@@ -46,5 +45,6 @@ pefApi.call(site_url);
 pofApi.call(site_url);
 accountApi.call(site_url);
 contentApi.call(site_url);
+webApi.call(site_url);
 // crossApi.call(site_url);
 

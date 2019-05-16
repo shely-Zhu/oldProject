@@ -24,11 +24,8 @@ $(function() {
             var obj1 = [{
                 url: site_url.combinTradeDetailsList_api, // 组合资产交易详情(买入/赎回)
                 data: {
-                    hmac: "", //预留的加密信息
-                    params: {
-                    	combRequestNo: splitUrl()['combRequestNo'],//组合申请编号
-                    	// fundBusinCode: that.tradeType == 1 ? "01" : "02",//01申购，02赎回
-                    }
+                	combRequestNo: splitUrl()['combRequestNo'],//组合申请编号
+                	// fundBusinCode: that.tradeType == 1 ? "01" : "02",//01申购，02赎回
                 },
                 needDataEmpty: false,
                 async: false, //同步
@@ -66,18 +63,13 @@ $(function() {
                     $('#redemptionDetails').html(myTemplate(combinTradeDetailsList));
                     
                 },
-                callbackFail: function(json) {
-                    tipAction(json.msg);
-                }
+                     
             }];
             // 调仓
             var obj2 = [{
                 url: site_url.combinTransferDetail_api, // 组合资产调仓详情
                 data: {
-                    hmac: "", //预留的加密信息
-                    params: {
-                    	combRequestNo: splitUrl()['combRequestNo'],//组合申请编号
-                    }
+                    combRequestNo: splitUrl()['combRequestNo'],//组合申请编号
                 },
                 needDataEmpty: false,
                 async: false, //同步
@@ -99,9 +91,7 @@ $(function() {
                     
                     $('#redemptionDetails').html(myTemplate(data)); 
                 },
-                callbackFail: function(json) {
-                    tipAction(json.msg);
-                }
+                     
             }];
           	
           	$.ajaxLoading(that.tradeType == 3 ?obj2 : obj1);

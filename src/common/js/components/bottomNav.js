@@ -92,7 +92,7 @@ $('.bottomNav .bottomEleAsset, .bottomNav .bottomEleMine').on('click', function(
 		},
 		callbackFail: function(json){
 			clickBottom = false;
-			tipAction( json.msg );
+			tipAction( json.message );
 		}
 	}]
 	$.ajaxLoading(obj);

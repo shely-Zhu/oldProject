@@ -201,9 +201,6 @@ $(function() {
                     var htmlParent = templateParent(json.data);
                     $(".queryQuestion").html(htmlParent);
                 },
-                callbackFail: function(json) { //失败后执行的函数
-                    tipAction(json.msg);
-                }
             }];
             $.ajaxLoading(obj);
         },
@@ -355,7 +352,7 @@ $(function() {
 
                 },
                 callbackFail: function(json) { //失败后执行的函数
-                    tipAction(json.msg);
+                    tipAction(json.message);
                     $ele.removeAttr("disabled").removeClass('disable').addClass('on');
                 }
             }];

@@ -99,9 +99,7 @@ $(function(){
 					
 
 				},
-				callbackFail: function(json){
-
-				}
+				     
 			}];
 			$.ajaxLoading(obj);
 			

@@ -29,7 +29,7 @@ window.env = env;
 var pathname = window.location.href;
 
 var appId = splitUrl()['appId']; //表示当前为app，必须传1
-if ((pathname.indexOf('//apps.') != -1 || (pathname.indexOf('//pofapp.') != -1)) && (appId || getCookie('appId'))) {
+if (appId || getCookie('appId')) {
     //是，设置全局变量currentIsApp为true
     window.currentIsApp = true;
 }
@@ -161,19 +161,19 @@ window.go_url = {
 
 //env=0  -------  前端本地开发
 //此时无论app还是wap，域名都是一样的
-if (env == 0) {
-    originFund_public = mock_server; //前端本地开发时，公募模拟数据请求地址
-    originFund_private = mock_server; //前端本地开发时，私募模拟数据请求地址
-    oauth_url = oauth_local_test; //oauth_url授权登陆  本地不配置接口，直接使用测试环境的
+// if (env == 0) {
+//     originFund_public = mock_server; //前端本地开发时，公募模拟数据请求地址
+//     originFund_private = mock_server; //前端本地开发时，私募模拟数据请求地址
+//     oauth_url = oauth_local_test; //oauth_url授权登陆  本地不配置接口，直接使用测试环境的
 
-    //明泽页面跳转域名
-    //go_url.wap_url = mock_server;
-    go_url.sso_url = mock_server;
-    go_url.apps_url = apps_test; //app没有本地开发环境，所以暂时引入测试域名，开发的时候只要保证域名跳转正确即可
-    go_url.pofapp_url = pofapp_test; //app没有本地开发环境，所以暂时引入测试域名，开发的时候只要保证域名跳转正确即可
-    go_url.oauth_url = oauth_local_test; //oauth_url授权登陆  本地不配置接口，直接使用测试环境的
-    go_url.onlineCustomer_url = onlineCustomer_test; // 在线客服
-}
+//     //明泽页面跳转域名
+//     //go_url.wap_url = mock_server;
+//     go_url.sso_url = mock_server;
+//     go_url.apps_url = apps_test; //app没有本地开发环境，所以暂时引入测试域名，开发的时候只要保证域名跳转正确即可
+//     go_url.pofapp_url = pofapp_test; //app没有本地开发环境，所以暂时引入测试域名，开发的时候只要保证域名跳转正确即可
+//     go_url.oauth_url = oauth_local_test; //oauth_url授权登陆  本地不配置接口，直接使用测试环境的
+//     go_url.onlineCustomer_url = onlineCustomer_test; // 在线客服
+// }
 
 if (!window.currentIsApp) {
     //此时为wap，不是app
@@ -433,7 +433,11 @@ window.http_url = {
     pef_url: '/wap/pef', //私募接口
     content_url: '/wap/content', // 内容接口
     account_url: '/wap/account', // 账户接口
+    web_url: '/web', // 账户接口
 }
+
+
+
 
 
 /*****************************各环境接口格式配置  end**************************************/

@@ -1,0 +1,71 @@
+@charset"utf-8";
+//引入mui
+@import url("../../../include/css/mui.min.css");
+//当用到后台富文本编辑器的时候只需要引入baseClass.less不需要引入reset.less
+@import url("../../../common/less/baseClass.less");
+//错误提示
+@import url("../../../common/less/components/againEnter.less");
+.container {
+  position: relative;
+}
+.helpful {
+  
+  background: @c005;
+  width: 100%;
+  box-shadow: 0px 0.2rem 0.4rem 0 rgba(0,0,0,0.10);
+}
+.helpful .overview {
+  background: @c005;
+  margin-left: 2rem;
+}
+.helpful .overview .slide_title {
+  /*display: inline-block;*/
+  font-size: 1.6rem;
+
+  background: @c005;
+  color: @c002;
+  /*height: 50px;*/
+  line-height: 3.5rem;
+  border-bottom: .1rem solid #dcdcdc;
+}
+.overview .tell{
+  display: block;
+
+  font-size: 1.6rem;
+  background: @c005;
+  color: @c002;
+  height: 5rem;
+  line-height: 5rem;
+  margin-top: 1rem;
+  box-shadow: 0 .2rem .4rem 0 rgba(0,0,0,0.10);
+  padding-left: 2.4rem;
+  text-decoration: none;
+  outline: none;
+  border: none;
+  -webkit-tap-highlight-color: rgba(255, 0, 0, 0);
+}
+.overview .tell span{
+  float: right;
+  margin-right: 1rem;
+  color: @c006;
+  font-size: 1.4rem;
+  font-weight: normal;
+}
+/*# sourceMappingURL=setting.css.map */
+.container .helpful .overview .slidebox .text{
+  /* text-align: justify; */
+  padding-right:1.5rem;
+}
+.container .helpful .overview .slidebox .text img{
+  width:100%;
+}
+
+.mui-table-view-cell{
+  padding-left: 0;
+}
+.mui-table-view-cell>a:not(.mui-btn){
+  margin-left: 0;
+}
+iframe{
+  display: none;
+}

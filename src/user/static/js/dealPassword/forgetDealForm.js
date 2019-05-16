@@ -81,9 +81,7 @@ $(function() {
 
                     }
                 },
-                callbackFail: function(json) {
-                    tipAction(json.msg);
-                }
+                     
             }]
             $.ajaxLoading(obj);
 
@@ -199,7 +197,7 @@ $(function() {
                     callbackFail: function(json) {
 
                         //2s后改变按钮样式
-                        tipAction(json.msg, function() {
+                        tipAction(json.message, function() {
                             $this.removeAttr("disabled").removeClass('disable');
                         });
                     }
@@ -255,7 +253,7 @@ $(function() {
                     callbackFail: function(json) {
 
                         //2s后改变按钮样式
-                        tipAction(json.msg, function() {
+                        tipAction(json.message, function() {
                             $this.removeAttr("disabled").removeClass('disable');
                         });
                     }

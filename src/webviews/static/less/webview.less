@@ -1,0 +1,524 @@
+@charset "utf-8";
+* {
+  box-sizing: border-box;
+}
+html {
+  font-size: 62.5%;
+}
+body,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+ul,
+li,
+img,
+i,
+iframe,
+a,
+input,
+button {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  text-decoration: none;
+  font-family: "Microsoft yahei";
+  font-weight: normal;
+}
+ul,
+li,
+i {
+  list-style: none;
+}
+.clear {
+  clear: both;
+}
+.clear:after {
+  content: '';
+  display: block;
+  clear: both;
+}
+i {
+  font-style: normal;
+}
+.clearfix {
+  zoom: 1;
+}
+.clearfix:before,
+.clearfix:after {
+  content: "";
+  display: table;
+}
+.clearfix:after {
+  clear: both;
+}
+img {
+  border: none;
+  vertical-align: top;
+}
+a img,
+a {
+  border: none;
+}
+a,
+button,
+input,
+.collection,
+li,
+i,
+textarea,
+select {
+  -webkit-tap-highlight-color: rgba(255, 0, 0, 0);
+  background: none;
+  outline: none;
+}
+select,
+input[type="tel"],
+input[type="submit"],
+input[type="reset"],
+input[type="file"],
+input[type="data"],
+input[type="button"],
+input[type="search"],
+input[type="text"],
+input[type="number"],
+button,
+textarea {
+  -webkit-appearance: none;
+}
+input::-webkit-input-placeholder {
+  color: #1e1e1e;
+}
+textarea::-webkit-input-placeholder {
+  color: #fb9f20;
+}
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none !important;
+  margin: 0;
+}
+/* public */
+/* .font{
+  font:1.6rem/1 "Simhei",'microsoft yahei',Verdana,Arial,Helvetica,sans-serif;
+} */
+@media screen and (min-width: 800px) {
+  .container_fixed,
+  .container {
+    width: 640px;
+    position: absolute;
+    left: 50%;
+    margin-left: -320px;
+  }
+  .footer .prev_btn {
+    margin-right: -35% !important;
+  }
+  .footer .next_btn {
+    margin-left: -35% !important;
+  }
+  .bottom ul,
+  .help_nav,
+  .bottom,
+  .topnav ul {
+    width: 640px !important;
+  }
+  .topnav ul {
+    margin: 10px 0 !important;
+  }
+}
+/* public */
+.font {
+  font: 1.6rem/1 'microsoft yahei', "Simhei", Verdana, Arial, Helvetica, sans-serif;
+}
+/*单选按钮（常规方）*/
+@font-face {
+  font-family: 'iconfont';
+  src: url('//at.alicdn.com/t/font_1460602779_904549.eot');
+  /* IE9*/
+  src: url('//at.alicdn.com/t/font_1460602779_904549.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */ url('//at.alicdn.com/t/font_1460602779_904549.woff') format('woff'), /* chrome、firefox */ url('//at.alicdn.com/t/font_1460602779_904549.ttf') format('truetype'), /* chrome、firefox、opera、Safari, Android, iOS 4.2+*/ url('//at.alicdn.com/t/font_1460602779_904549.svg#iconfont') format('svg');
+  /* iOS 4.1- */
+}
+.iconfont {
+  font-family: "iconfont";
+  -webkit-font-smoothing: antialiased;
+  font-style: normal;
+}
+.questionnaire {
+  width: 100%;
+  background: #fff;
+  /* main绝对定位，进行内部滚动 */
+  position: absolute;
+  top: 0px;
+  bottom: 50px;
+  /* 使之可以滚动 */
+  overflow-y: scroll;
+  /* 增加该属性，可以增加弹性，是滑动更加顺畅 */
+  -webkit-overflow-scrolling: touch;
+}
+.questionnaire .content {
+  margin: 10px 3% 50px 3%;
+}
+.questionnaire .content .appraisal {
+  position: relative;
+}
+.questionnaire .content .appraisal .prompt-info {
+  font: 1.6rem/1 'microsoft yahei', "Simhei", Verdana, Arial, Helvetica, sans-serif;
+  font-size: 1.2rem;
+  /*transform:scale(0.875);*/
+  color: #969696;
+  line-height: 1.5;
+}
+.questionnaire .content .appraisal .prompt-info span {
+  color: #f4cf5c;
+}
+.questionnaire .content .appraisal .prompt-on {
+  font: 1.6rem/1 'microsoft yahei', "Simhei", Verdana, Arial, Helvetica, sans-serif;
+  margin-top: 15px;
+  margin-bottom: 10px;
+  font-size: 1.2rem;
+  color: #e32b2d;
+  line-height: 1.5;
+}
+.questionnaire .content .appraisal .queryQuestion h2 {
+  font: 1.6rem/1 'microsoft yahei', "Simhei", Verdana, Arial, Helvetica, sans-serif;
+  width: 106%;
+  height: 30px;
+  line-height: 30px;
+  font-size: 1.6rem;
+  font-weight: normal;
+  color: #333;
+  margin-left: -3%;
+  padding-left: 3%;
+  background: #f5f5f5;
+}
+.questionnaire .content .appraisal .queryQuestion .choice {
+  font: 1.6rem/1 'microsoft yahei', "Simhei", Verdana, Arial, Helvetica, sans-serif;
+  font-size: 1.4rem;
+  color: #1e1e1e;
+  position: relative;
+}
+.questionnaire .content .appraisal .queryQuestion .choice h3 {
+  font: 1.6rem/1 'microsoft yahei', "Simhei", Verdana, Arial, Helvetica, sans-serif;
+  font-size: 1.6rem;
+  color: #333;
+  font-weight: normal;
+  margin: 20px 0 10px;
+  line-height: 1.5;
+}
+.questionnaire .content .appraisal .queryQuestion .choice h3 a {
+  color: #1e1e1e;
+}
+.questionnaire .content .appraisal .queryQuestion .choice label {
+  /*display: -webkit-box;
+              display:box;*/
+  position: relative;
+}
+.questionnaire .content .appraisal .queryQuestion .choice label input {
+  width: 18px;
+  position: absolute;
+  left: 0;
+  top: 0;
+  outline: none;
+}
+.questionnaire .content .appraisal .queryQuestion .choice label span {
+  /*box-flex:1;
+              -webkit-box-flex:1;*/
+  display: block;
+  margin-left: 23px;
+  font: 1.6rem/1 'microsoft yahei', "Simhei", Verdana, Arial, Helvetica, sans-serif;
+  font-size: 1.4rem;
+  line-height: 1.5;
+  vertical-align: top;
+  color: #7d7c7d;
+  margin-bottom: 10px;
+}
+.questionnaire .content .appraisal .queryQuestion .text {
+  margin-top: 20px;
+  position: relative;
+}
+.questionnaire .content .appraisal .queryQuestion .text div {
+  font: 1.6rem/1 'microsoft yahei', "Simhei", Verdana, Arial, Helvetica, sans-serif;
+  color: #333;
+  margin-bottom: 10px;
+  width: 100%;
+  position: relative;
+}
+.questionnaire .content .appraisal .queryQuestion .text div a {
+  color: #333;
+  float: left;
+}
+.questionnaire .content .appraisal .queryQuestion .text div a:visited {
+  color: #333;
+}
+.questionnaire .content .appraisal .queryQuestion .text div span {
+  width: 100px;
+  text-align: right;
+  display: inline-block;
+  font-size: 1.6rem;
+  float: left;
+  height: 40px;
+  line-height: 40px;
+  margin-right: 5px;
+}
+.questionnaire .content .appraisal .queryQuestion .text div p {
+  float: left;
+  width: 178px;
+  height: 40px;
+  line-height: 40px;
+  border-radius: 3px;
+  padding-left: 5px;
+  border: 1px solid #c8c8c8;
+  vertical-align: top;
+}
+.questionnaire .content .appraisal .queryQuestion .text div p input {
+  /*width: 178px;*/
+  font: 1.6rem/1 'microsoft yahei', "Simhei", Verdana, Arial, Helvetica, sans-serif;
+  background: none;
+  border: none;
+  /*margin-left: 10px;*/
+  font-size: 1.4rem;
+  /*height: 40px;*/
+  /*line-height: 38px;*/
+  color: #333;
+  outline: none;
+  /*box-sizing: border-box;*/
+  /*line-height: 32px;*/
+  text-decoration: none;
+  /*display: inline-block;*/
+  border-radius: 0;
+  /*background: #f00;*/
+  vertical-align: middle;
+}
+.questionnaire .content .appraisal .queryQuestion .text div p select {
+  font: 1.6rem/1 'microsoft yahei', "Simhei", Verdana, Arial, Helvetica, sans-serif;
+  font-size: 1.4rem;
+  width: 178px;
+  height: 38px;
+  line-height: 38px;
+  background: rgba(0, 0, 0, 0);
+  -webkit-appearance: none;
+  color: #1e1e1e;
+  outline: none;
+  padding: 0;
+  border: none;
+  border-radius: 0;
+  display: inline-block;
+  vertical-align: top;
+  /*background: #f00;*/
+  position: relative;
+  z-index: 2;
+}
+.questionnaire .content .appraisal .queryQuestion .text div p select option {
+  font: 1.6rem/1 'microsoft yahei', "Simhei", Verdana, Arial, Helvetica, sans-serif;
+  /*width: 178px;*/
+  font-size: 1.4rem;
+  padding: 0;
+  margin: 0;
+}
+.questionnaire .content .appraisal .queryQuestion .text div i {
+  width: 40px;
+  height: 40px;
+  position: absolute;
+  left: 245px;
+  top: 0;
+}
+.questionnaire .content .appraisal .queryQuestion .text div i img {
+  width: 40px;
+  height: 40px;
+  position: relative;
+  z-index: 1;
+}
+.submit {
+  width: 94%;
+  position: fixed;
+  bottom: 10px;
+  left: 3%;
+  z-index: 99999;
+}
+.submit a {
+  font: 1.6rem/1 'microsoft yahei', "Simhei", Verdana, Arial, Helvetica, sans-serif;
+  display: block;
+  line-height: 40px;
+  background: none;
+  width: 100%;
+  height: 40px;
+  text-align: center;
+  background: #f4cf5c;
+  border-radius: 5px;
+  font-size: 1.8rem;
+  border: none;
+  color: #fff;
+}
+.option-input {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  -ms-appearance: none;
+  -o-appearance: none;
+  appearance: none;
+  width: 18px;
+  height: 18px;
+  background: #f0f0f0;
+  border: none;
+  color: #fff;
+  cursor: pointer;
+  display: inline-block;
+  outline: none;
+  position: relative;
+  z-index: 1000;
+  border: 1px solid #ddd;
+}
+.option-input:hover {
+  background: #f0f0f0;
+}
+.option-input:checked {
+  background: #f0f0f0;
+}
+.option-input:checked::before {
+  width: 8px;
+  height: 8px;
+  position: absolute;
+  content: '';
+  display: inline-block;
+  font-size: 2.8rem;
+  top: 50%;
+  left: 50%;
+  margin: -4px 0 0 -4px;
+  background: #f4cf5c;
+  color: #f4cf5c;
+  border-radius: 50%;
+}
+.option-input:checked::after {
+  background: #40e0d0;
+  content: '';
+  display: block;
+  position: relative;
+  z-index: 100;
+}
+.option-input.radio {
+  border-radius: 50%;
+}
+.option-input.radio::after {
+  border-radius: 50%;
+}
+/*错误提示*/
+.error_tip,
+.error_name_tip {
+  color: #e32b2d;
+  display: none;
+  font-size: 1.4rem;
+}
+.mask {
+  display: none;
+  position: fixed;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  z-index: 99999;
+  background: rgba(0, 0, 0, 0.5);
+}
+.alertBox {
+  display: none;
+  width: 94%;
+  position: fixed;
+  top: 50%;
+  height: 290px;
+  margin: -145px 3% 0 3%;
+  background: #fff;
+  z-index: 999999;
+  padding: 20px;
+  border-radius: 5px;
+  -webkit-border-radius: 5px;
+}
+.alertBox h3 {
+  font-size: 1.8rem;
+  line-height: 2.7rem;
+  text-align: center;
+  color:#333;
+}
+.alertBox p {
+  text-align: center;
+  font-size: 1.4rem;
+  line-height: 1.5;
+  color:#7d7c7d;
+}
+.alertBox p span {
+  font-size: 20px;
+  color: #fc0202;
+  display: inline-block;
+  /* border-bottom: 1px solid #fc0202; */
+  padding: 0 3px;
+}
+.alertBox p:nth-of-type(1) {
+  font-size: 3rem;
+  line-height: 3rem;
+  color: #f4cf5c;
+  margin: 25px 0;
+}
+.alertBox p:nth-of-type(3) {
+  text-align: center;
+}
+.alertBox p:nth-of-type(3) a {
+  display: inline-block;
+  width: 80%;
+  height: 40px;
+  line-height: 40px;
+  font-size: 1.6rem;
+  border-radius: 3px;
+  color: #fff;
+  text-align: center;
+  background: #f4cf5c;
+  margin-top: 20px;
+}
+.alertBox p:nth-of-type(3) a:visited {
+  color: #fff;
+}
+.tips {
+  display: none;
+  font: 1.6rem/1 'microsoft yahei', "Simhei", Verdana, Arial, Helvetica, sans-serif;
+  width: 200px;
+  height: 34px;
+  line-height: 34px;
+  background: rgba(0, 0, 0, 0.5);
+  position: fixed;
+  bottom: 70px;
+  left: 50%;
+  margin-left: -100px;
+  text-align: center;
+  color: #fff;
+  font-size: 1.4rem;
+}
+.dotting {
+  display: inline-block;
+  min-width: 2px;
+  min-height: 2px;
+  box-shadow: 2px 0 currentColor, 6px 0 currentColor, 10px 0 currentColor;
+  -webkit-animation: dot 4s infinite step-start both;
+  animation: dot 1.5s infinite step-start both;
+}
+@-webkit-keyframes dot {
+  25% {
+    box-shadow: none;
+  }
+  50% {
+    box-shadow: 2px 0 currentColor;
+  }
+  75% {
+    box-shadow: 2px 0 currentColor, 6px 0 currentColor;
+  }
+}
+@keyframes dot {
+  25% {
+    box-shadow: none;
+  }
+  50% {
+    box-shadow: 2px 0 currentColor;
+  }
+  75% {
+    box-shadow: 2px 0 currentColor, 6px 0 currentColor;
+  }
+}
+
+/*# sourceMappingURL=webview.css.map */

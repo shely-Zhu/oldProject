@@ -17,7 +17,7 @@ var data = Mock.mock({
 	"hmac": "hmac", 
 	"status": "0", 
 	"code": "", 
-	"msg": "success", 
+	"message": "success", 
 	"data":{
 		"times":"2",
 		"startflag":"0", //0-活动中，1-活动未开始，2-活动已结束

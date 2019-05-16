@@ -10,6 +10,8 @@
  *
  * 修改：售前告知书按客户65岁进行区分展示换
  * @author songxiaoyu 2018-11-21 
+ *
+ * 后台自己处理不需要前端请求,删除message_api请求
  */
 
 require('@pathIncludJs/vendor/config.js');
@@ -46,13 +48,18 @@ var prvDetail = {
     goRisk1: false, //风测过期  是否可以风测
     goRealName: null, //是否实名认证
     /*cancel:false,  //是否可以取消预约*/
-    bonusTypeOri: null, //存放受益类型
+    incomeMode: null, //存放受益类型
     drawArr: [], //保存画图数据
     xArr: [],
     dataArr: [],
-    investFavour: '', //投资者偏好
-    netValue: '', //产品净值（单位：元）
-    netValDate: '', //净值日期【yyyy-MM-dd】
+    // investFavour: '', //投资者偏好
+    endurePri:'', //投资偏好
+    investFavour: '', //投资者分类
+    unitNetValue: '', //产品净值（单位：元）
+    netValueDate: '', //净值日期【yyyy-MM-dd】
+    projectDownTime:'', //产品募集截止日期
+    productName:'', //产品名称
+    timer:'', //定时器
     getElements: {
         clickBtn: $(".bg .btn"), //可点击状态按钮
         noBtn: $(".over"), //不可点击按钮
@@ -66,91 +73,101 @@ var prvDetail = {
         ordinary: 0,
         professional: 0,
         newcomer: '', //是否是新手用户【0.否 1.是
-        forNewcomer: '', //是否新手专享产品【0.否 1.是】
-        forElecContract: 0, //是否适用于电子合同【0.否 1.是】
+        isNewcomer: '', //是否新手专享产品【0.否 1.是】
+        isElecContract: 0, //是否适用于电子合同【0.否 1.是】
         fundCode: arg['fundCode'],
-        netValueDes: '每周五更新最新净值，节假日顺延',
+        unitNetValueDes: '每周五更新上周净值',
     },
     init: function() {
         var that = this;
         //检查是否登录及风险测评
         $.userCheck(true, function() {
-            that.getData();
+            
         });
+        that.getData();
+        
         that.events();
     },
     getData: function() {
-        var that = this;
+        var that = this,
+            userObj = that.getUserObj();
+            obj = [];
 
         $(".invMartical").attr("href", "/productPrivate/views/PrvMarticial.html?fundCode=" + arg["fundCode"]);
-        var obj = [{
+
+        obj = [{
             url: site_url.prvDetail_api, // queryProductDetail
             data: {
-                hmac: "", //预留的加密信息
-                params: { //请求的参数信息
-                    productCode: arg["fundCode"] // 产品代码
-                }
+                 projectId: arg["fundCode"] // 产品代码
             },
             async: false,
+            contentTypeSearch: true,
             needLogin: true,
             callbackDone: function(data) {
                 var json = data.data,
-                    expectedProfitMin = json.expectedProfitMin,
-                    expectedProfitMax = json.expectedProfitMax,
-                    forNewcomer = json.forNewcomer,
-                    forElecContract = json.forElecContract;
+                    businessCompareReferenceMin = json.businessCompareReferenceMin,
+                    businessCompareReferenceMax = json.businessCompareReferenceMax,
+                    isNewcomer = json.isNewcomer,
+                    isElecContract = json.isElecContract;
 
-                that.netValue = json.netValue;
-                that.netValDate = json.netValDate;
-                that.bonusTypeOri = json.bonusTypeOri; //存放受益类型
-                that.orderNo = json.orderNo;
-                that.forNewcomer = (forNewcomer == "1") ? 1 : 0; // 新手产品
-                that.forElecContract = (forElecContract == "1") ? 1 : 0;
-
-                that.getUserInfo() //新客判断
-
-                $(".invStart").html(json.personMinBalance);
-                $(".invDate").html(json.prodTerm); //获取产品的投资期限或者封闭期
-                $(".blackoutPeriod span").html(json.prodTermUnit); //"月",//产品期限单位
-
-
-                if (json.bonusTypeOri == "2") { //固收类产品
+                that.unitNetValue = json.unitNetValue;
+                that.netValueDate = json.netValueDate;
+                that.incomeMode = json.incomeMode; //存放受益类型  0代表类固收，其它代表浮收
+                // that.reserveId = json.reserveId;
+                that.isNewcomer = (isNewcomer == "1") ? 1 : 0; // 新手产品
+                that.isElecContract = (isElecContract == "1") ? 1 : 0;
+                
+                if(json.investStart != ''){
+                    $(".invStart").html(json.investStart);
+                }
+                if(json.projectTerm != ''){
+                    $(".invDate").html(json.projectTerm); //获取产品的投资期限或者封闭期
+                }
+                $(".blackoutPeriod span").html(json.projectTermUnit); //"月",//产品期限单位
+                //0 债权投资;1 证券投资（二级市场）;2 股权投资;3 海外投资;4 其他
+                if(json.investDirect == "0" || json.investDirect == "2" || json.investDirect == "4") { // 债权投资、股权投资、其他服务不展示
+                    that.getElements.$tipIcon.hide();
+                } else if(json.investDirect == "1" || json.investDirect == "3"){ // 海外投资  二级市场展示
+                    that.getElements.$tipIcon.show();
+                };
+                if (json.incomeMode == "0") { //固收类产品
                     $(".invSolid").show();
-                    if (Number(expectedProfitMax) <= Number(expectedProfitMin)) {
-                        $(".invSolid .invCore").html(json.expectedProfitMin + "%");
+                    if (Number(businessCompareReferenceMax) <= Number(businessCompareReferenceMin)) {
+                        if(businessCompareReferenceMin != ''){
+                            $(".invSolid .invCore").html(businessCompareReferenceMin + "%");
+                        }
                     } else {
-                        $(".invSolid .invCore").html(json.expectedProfitMin + "%~" + json.expectedProfitMax + "%");
+                        $(".invSolid .invCore").html(businessCompareReferenceMin + "%~" + businessCompareReferenceMax + "%");
                     }
-                } else if (json.bonusTypeOri == "3") {
+                } else {
                     $(".invFloat").show();
                 }
-                var lightStar = Number(json.riskLevelOri); //获取黄星星的个数
+                var lightStar = Number(json.productRiskLevel); //获取黄星星的个数
                 for (var i = 0; i < lightStar; i++) { //根据风险等级渲染星星颜色
                     $($(".risk i")[i]).addClass("on");
                 }
-                $(".risk span").html(json.riskLevel); //获取产品风险等级
-                $(".office").html(json.managerName); //获取管理机构
-                $(".size").html(json.issueScale + "万"); //获取产品规模
-                $(".getDate").html(json.issueDate + "~" + json.issueEndDate); //获取产品募集日期
-                that.issueEndDate = json.issueEndDate;
+                $(".risk span").html(json.productRiskLevelDesc); //获取产品风险等级
+                $(".office").html(json.projectIssuer); //获取管理机构
+                $(".size").html(json.formatIssuanceSize + "万"); //获取产品规模
+                $(".getDate").html(json.projectUpTime + "~" + json.projectDownTime); //获取产品募集日期
+                that.projectDownTime = json.projectDownTime;
                 $(".prdInfo .head").html(json.productName); //获取产品名称
                 that.productName = json.productName;
                 $(".fundName").html(json.productName);
                 $(".prdInfo .prdNum").html(arg["fundCode"]); //获取产品代码
 
-                that.goRealName = json.isCertification; //存储是否实名认证
-                that.custType = json.custType; //存储个人或机构投资
+                // that.goRealName = json.isCertification; //存储是否实名认证
+                // that.customerType = json.customerType; //存储个人或机构投资
                 if (json.isInvestClassifyRequired == 1) { //是否需要判断投资者分类标签【1.不需要 2.需要（私募或资管）】
                     that.isInvest = false;
                 } else if (json.isInvestClassifyRequired == 2) {
                     that.isInvest = true;
                 }
-
                 switch (json.productStatus) {
                     case "1": //尚未预约，可以预约
                         $(".bg").show().find(".btn").html("立即预约");
                         $(".over").hide();
-                        that.checkNewPorduct(); //新客页面展示
+                        that.timer=setInterval(that.checkNewPorduct(),10) ;//新客页面展示
                         break;
                     case "2": //可以预约，但是会告知要联系理财师
                         $(".bg").show().find(".btn").html("立即预约");
@@ -188,31 +205,25 @@ var prvDetail = {
 
             },
             callbackFail: function(data) {
-                tipAction(data.msg);
+                tipAction(data.message);
             }
-        }, {
+        },userObj,{
             url: site_url.custBro_api,
             data: {
-                hmac: "", //预留的加密信息    
-                params: { //请求的参数信息 
-                    broker_account: "", //工号    
-                    type: "0",
-                    isCertificate: "Y", //是否通过基金从业考试 Y：通过 N：未通过（新增）
-                }
+                empNo: "", //工号    
+                fundType: "0",
+                isPass: "Y", //是否通过基金从业考试 Y：通过 N：未通过（新增）
             },
             needLogin: true,
-            //needEmptyData:true,
+            needEmptyData:true,
             callbackDone: function(data) {
                 var json = data.data;
 
-                if ($.util.objIsEmpty(json.advisor)) {
-                    $(".existMain").show();
-                    $(".existMain .server").show().find(".tel").attr("href", "tel:" + commonSetting.serverPhone).html(commonSetting.serverPhone);
-                } else if (json.existMain == "1" && !$.util.objIsEmpty(json.advisor)) {
+                if (json.existMain == "1" && !$.util.objIsEmpty(json.advisor)) {
                     $.each(json.advisor, function(i, el) {
-                        if (el.is_main == "1") {
-                            $(".existMain").show().find(".main .tel").attr("href", "tel:" + el.mobile_tel).html(el.mobile_tel);
-                            $(".existMain .name").html(el.broker_name);
+                        if (el.isMain == "1") {
+                            $(".existMain").show().find(".main .tel").attr("href", "tel:" + el.mobileTel).html(el.mobileTel);
+                            $(".existMain .name").html(el.codeName);
                             $(".existMain .main").show();
                         }
                     })
@@ -223,16 +234,17 @@ var prvDetail = {
                 }
             },
             callbackFail: function(data) {
-                tipAction(data.msg);
+                tipAction(data.message);
+            },
+            callbackNoData:function(){
+                $(".existMain").show();
+                $(".existMain .server").show().find(".tel").attr("href", "tel:" + commonSetting.serverPhone).html(commonSetting.serverPhone);
             }
         }, {
             url: site_url.prvLight_api, //queryProductImage
             data: {
-                hmac: "", //预留的加密信息
-                params: { //请求的参数信息
-                    productCode: arg["fundCode"], // 产品代码
-                    limitNum: "1" // 限制数（只显示N张）
-                }
+                projectId: arg["fundCode"], // 产品代码
+                limitNum: "1" // 限制数（只显示N张）
             },
             needLogin: true,
             //needEmptyData:true,
@@ -240,8 +252,8 @@ var prvDetail = {
                 var json = data.data[0];
 
                 if (!json.imgPath) {
-                    if (json.description) {
-                        $(".card-foot.noPic").show().find(".lightText").html(json.description);
+                    if (json.features) {
+                        $(".card-foot.noPic").show().find(".lightText").html(json.features);
                     } else {
                         return false;
                     }
@@ -250,67 +262,50 @@ var prvDetail = {
                 }
             },
             callbackFail: function(data) {
-                tipAction(data.msg);
+                tipAction(data.message);
             }
         }]
+        
         $.ajaxLoading(obj);
-        var msgObj = [{
-            url: site_url.message_api,
-            data: {
-                hmac: "", //预留的加密信息     
-                params: {
-                    proCode: arg["fundCode"], //产品代码 
-                    proName: that.productName
-                }
-            },
-            needLogin: true,
-            needDataEmpty: false, //需要判断data是否为空
-            callbackDone: function(data) {
-
-            },
-            callbackFail: function(data) {
-                tipAction(data.msg);
-            }
-        }];
-        $.ajaxLoading(msgObj);
-        if (that.bonusTypeOri == "2") {
+        
+        if (that.incomeMode == "0") {   //代表类固收
             var objSolid = [{
                 url: site_url.prvLevel_api,
                 data: {
-                    hmac: "", //预留的加密信息
-                    params: { //请求的参数信息
-                        productCode: arg["fundCode"] // 产品代码
-                    }
+                    projectId: arg["fundCode"] // 产品代码
                 },
                 needLogin: true,
+                contentTypeSearch: true,
                 callbackDone: function(data) {
                     var json = data.data;
 
                     $.each(json, function(i, el) {
-                        if (el.amountMax == "0" || !el.amountMax) {
+                        if (el.benifitUpperLimit == "0" || !el.benifitUpperLimit) {
                             el.bool = false;
                         } else {
                             el.bool = true;
                         }
                     })
+                    $('.invSolid').show();
                     var tplm = $("#prvLevel").html();
                     var template = Handlebars.compile(tplm);
                     $(".levelBox").html(template(json));
 
                 },
                 callbackFail: function(data) {
-                    tipAction(data.msg);
+                    tipAction(data.message);
                 }
             }]
             $.ajaxLoading(objSolid);
-        } else if (that.bonusTypeOri == "3") {
-            if (that.netValue) {
+        } else{
+            if (that.unitNetValue) {
                 that.ifDraw = true;
                 $(".invDraw").show();
-                $(".invFloat .invCore").html(that.netValue + "<span>(" + that.netValDate.substr(that.netValDate.indexOf("-") + 1, ) + ")</span>");
+                $(".invFloat .invCore").html(that.unitNetValue + "<span>(" + that.netValueDate.substr(that.netValueDate.indexOf("-") + 1, ) + ")</span>");
                 $(".invFloat .applyBuy").html("单位净值(元)");
+                that.getDrawData(180);
             } else {
-                $(".invFloat .invCore").addClass("float").html(that.issueEndDate.replace(/\//g, "-"));
+                $(".invFloat .invCore").addClass("float").html(that.projectDownTime.replace(/\//g, "-"));
                 $(".invFloat .applyBuy").html("募集截止日");
                 $(".invFloat .tipIcon").hide()
                 that.ifDraw = false;
@@ -318,72 +313,121 @@ var prvDetail = {
             var objFloat = [{
                 url: site_url.prvLight_api, //queryProductImage
                 data: {
-                    hmac: "", //预留的加密信息
-                    params: { //请求的参数信息
-                        productCode: that.status.fundCode, // 产品代码
-                        productModule: "netValueCycleAPP",
-                        limitNum: "1", // 
-                    }
+                    projectId: that.status.fundCode, // 产品代码
+                    productModule: "netValueCycleAPP",
+                    limitNum: "1", // 
                 },
                 needLogin: true,
                 callbackDone: function(data) {
                     var json = data.data[0],
-                        description = json.description;
+                        features = json.features;
 
-                    if (description) {
-                        that.status.netValueDes = description;
+                    if (features) {
+                        that.status.unitNetValueDes = features;
                     }
                 },
                 callbackFail: function(data) {
-                    tipAction(data.msg);
+                    tipAction(data.message);
                 }
             }];
             $.ajaxLoading(objFloat);
 
-            if (that.ifDraw) {
-                var objDraw = [];
-                //添加画图接口，参数为1/3/6/12
-                objDraw.push(that.getDrawData(180));
-                objDraw.push(that.getDrawData(360));
-                objDraw.push(that.getDrawData(""));
-                $.ajaxLoading(objDraw);
-            }
+            // if (that.ifDraw) {
+            //     var objDraw = [];
+            //     //添加画图接口，参数为1/3/6/12
+            //     objDraw.push(that.getDrawData(180));
+            //     objDraw.push(that.getDrawData(360));
+            //     objDraw.push(that.getDrawData(""));
+            //     $.ajaxLoading(objDraw);
+            // }
         }
+    },
+    getUserObj:function(){
+        var that = this;
+        var obj = {
+            url: site_url.user_api,
+            data: {
+            },
+            needLogin: true,
+            async: false,
+            needDataEmpty: false, //需要判断data是否为空
+            callbackDone: function(json) {
+                var jsonData = json.data,
+                    isPerfect = jsonData.isPerfect, //基本信息是否完善
+                    newcomer = jsonData.newComer;
+                that.goRealName = jsonData.idnoCheckflag; //存储是否实名认证   0-否 1-是
+                that.customerType = jsonData.accountType; //存储个人或机构投资  1-个人  0-机构
+                that.endurePri = jsonData.endurePri; // 投资偏好
+                that.investFavour = jsonData.investFavour; // 投资者分类
+                that.newcomer = (newcomer == "1") ? 1 : 0; // 是否是新手客户 0否1是
+                that.age = jsonData.age; // 客户年龄
+
+                if (isPerfect == 0) { //基本信息是否完善  不完善     0否1是
+                    that.isPerfect = true;
+                } else if (isPerfect == 1) { //完善 
+                    that.isPerfect = false;
+                }
+            },
+            callbackFail: function(data) {
+                tipAction(data.message);
+            }
+        };
+        return obj;
+    },
+    getUserData: function() {
+        var that = this,
+            arr = [];
+
+        arr.push(that.getUserObj());
+
+        $.ajaxLoading(arr);
     },
     //请求画图接口
     getDrawData: function(num) { //num为传进来的数据范围
         var that = this;
-
-        var obj = { //画图
+        if(num=='9999'){
+            num=''
+        }
+        var obj = [{ //画图
             url: site_url.prvHisValue_api,
             data: {
-                hmac: "", //预留的加密信息
-                params: { //请求的参数信息
-                    productCode: arg["fundCode"], // 基金代码
-                    days: num, // 数据范围  //默认开始是30天
-                    netValueBeginDate: "", // 查询起始日期
-                    netValueEndDate: "" // 查询结束日期
-                }
+                projectId: arg["fundCode"], // 基金代码
+                days: num, // 数据范围  //默认开始是30天
+                // unitNetValueBeginDate: "", // 查询起始日期
+                // unitNetValueEndDate: "" // 查询结束日期   
             },
             needDataEmpty: true,
-            async: false,
+            contentTypeSearch: true,
+            needLoading: true,
+            // async: false,
             callbackDone: function(json) {
                 //请求成功
                 //画图
-                that.draw(json.data.pageList, num);
+                if(num==''){
+                    that.draw(json.data.pageList, 9999);
+                }else{
+                    that.draw(json.data.pageList, num);
+                }
+                
 
                 // 有且只有第一个接口返回时，画第一个图
                 if (num == 180) {
                     that.drawAction(180);
                 }
+                if(num==''){
+                    that.drawAction(9999);
+                }else{
+                    that.drawAction(num)
+                }
             },
             callbackFail: function(json) {
-                tipAction(json.msg);
+                tipAction(json.message);
             },
             callbackNoData: function(json) {
 
             }
-        };
+        }];
+        $.ajaxLoading(obj);
         return obj;
     },
     draw: function(jsonData, num) {
@@ -397,7 +441,7 @@ var prvDetail = {
         //处理jsonData
         $.each(jsonData, function(i, el) {
 
-            that.drawArr[num].unitNavArr.push(el.netValue);
+            that.drawArr[num].unitNavArr.push(el.unitNetValue);
 
             //x轴数据
             that.drawArr[num].xArr.push({
@@ -531,47 +575,14 @@ var prvDetail = {
     },
     checkNewPorduct: function() {
         var that = this;
-
-        if (that.forNewcomer && that.newcomer) {
-            that.getElements.clickBtn.html("新客专享 立即预约").addClass('newcomer');
-        } else if (that.forNewcomer && !that.newcomer) {
-            that.getElements.clickBtn.html("新客专享").addClass('stop');
-        }
-    },
-    getUserInfo: function() {
-        var that = this;
-        var obj = [{
-            url: site_url.user_api,
-            data: {
-                hmac: "", //预留的加密信息     
-                params: {
-
-                }
-            },
-            needLogin: true,
-            async: false,
-            needDataEmpty: false, //需要判断data是否为空
-            callbackDone: function(json) {
-                var jsonData = json.data,
-                    infoTotallyStatus = jsonData.infoTotallyStatus,
-                    newcomer = jsonData.newcomer;
-
-                that.investFavour = jsonData.investFavour; // 投资偏好
-                that.investorClassify = jsonData.investorClassify; // 投资者分类
-                that.newcomer = (newcomer == "1") ? 1 : 0; // 是否是新手客户 0否1是
-                that.age = jsonData.age; // 客户年龄
-
-                if (infoTotallyStatus == 1) { //基本信息是否完善  不完善
-                    that.infoTotallyStatus = true;
-                } else if (infoTotallyStatus == 0) { //完善 
-                    that.infoTotallyStatus = false;
-                }
-            },
-            callbackFail: function(data) {
-                tipAction(data.msg);
+        if(that.newcomer!=''){
+            if (that.isNewcomer && that.newcomer) { // 是新用户，并且是新手产品
+                that.getElements.clickBtn.html("新客专享 立即预约").addClass('newcomer');
+            } else if (that.isNewcomer && !that.newcomer) { // 是新手产品不是新用户
+                that.getElements.clickBtn.html("新客专享").addClass('stop');
             }
-        }];
-        $.ajaxLoading(obj);
+            clearInterval(that.timer);
+        }
     },
     showNewComerTip: function() {
         var obj = {
@@ -593,7 +604,7 @@ var prvDetail = {
         var that = this;
 
         // 立即预约或取消预约按钮点击
-        that.getElements.clickBtn.on("click tap", function(e) {
+        that.getElements.clickBtn.on("tap", function(e) {
             var $this = $(this);
 
             // 冻结账户弹窗提示
@@ -602,14 +613,14 @@ var prvDetail = {
                 return false;
             };
 
-            if (that.forNewcomer) { // 新产品，老用户，弹窗
+            if (that.isNewcomer) { // 新产品，老用户，弹窗
 
                 if (!that.newcomer) {
                     that.showNewComerTip()
                     return;
                 } else {
                     $this.addClass("stop");
-                    that.getUserInfo();
+                    that.getUserData();
 
                     if (!that.newcomer) {
                         $.elasticLayer(obj)
@@ -619,9 +630,9 @@ var prvDetail = {
                     }
                 }
             }
-            if (that.forElecContract) { // 电子合同
+            if (that.isElecContract) { // 电子合同
                 $.elasticLayerTypeTwo({
-                    id: "forElecContractTip",
+                    id: "isElecContractTip",
                     title: '提示', //如果不传默认为'尊敬的用户'
                     p: '该产品为电子合同产品，请您前往恒天财富网站或App进行产品预约',
                     buttonTxt: '知道了',
@@ -661,7 +672,7 @@ var prvDetail = {
                         callbackCel: $.noop,
                         callback: function() {
 
-                            if (that.custType == "1") {
+                            if (that.customerType == "1") {
                                 window.location.href = site_url.questionnairePer_url + '&originUrl=' + new Base64().encode(window.location.href);
                             } else {
                                 window.location.href = site_url.questionnaireOrg_url + '&originUrl=' + new Base64().encode(window.location.href);
@@ -681,7 +692,7 @@ var prvDetail = {
                         callbackCel: $.noop,
                         callback: function() {
 
-                            if (that.custType == "1") {
+                            if (that.customerType == "1") {
                                 window.location.href = site_url.questionnairePer_url + '&originUrl=' + new Base64().encode(window.location.href);
                             } else {
                                 window.location.href = site_url.questionnaireOrg_url + '&originUrl=' + new Base64().encode(window.location.href);
@@ -689,7 +700,7 @@ var prvDetail = {
                         }
                     })
                     $this.removeClass("stop");
-                } else if (that.goRealName == "1") { // 去实名
+                } else if (that.goRealName == "0") { // 去实名
                     $.elasticLayer({
                         id: "goRisk",
                         title: '提示', //如果不传默认为'尊敬的用户'
@@ -705,7 +716,7 @@ var prvDetail = {
                         }
                     })
                     $this.removeClass("stop");
-                } else if (that.goRealName == "2" && that.infoTotallyStatus) { // 信息补全
+                } else if (that.goRealName == "1" && that.isPerfect) { // 信息补全
 
                     $.elasticLayer({
                         id: "goMsg",
@@ -717,10 +728,10 @@ var prvDetail = {
                         yesButtonPosition: 'right',
                         callbackCel: $.noop,
                         callback: function() {
-                            if (that.custType == "0" || that.custType == "2") {
+                            if (that.customerType == "0" || that.customerType == "2") {
                                 $this.removeClass("stop");
                                 window.location.href = site_url.orgBass_url + '?originUrl=' + new Base64().encode(window.location.href);
-                            } else if (that.custType == "1") {
+                            } else if (that.customerType == "1") {
                                 $this.removeClass("stop");
                                 window.location.href = site_url.perBass_url + '?originUrl=' + new Base64().encode(window.location.href);
                             }
@@ -728,15 +739,15 @@ var prvDetail = {
                     });
                     $this.removeClass("stop");
                 } else if (that.isInvest) { // 需要判断投资者分类标签
-                    if (that.investorClassify == "1") { // 专业投资者
+                    if (that.investFavour == "1") { // 专业投资者
                         $this.removeClass("stop");
                         window.location.href = site_url.prdPrvSure_url + '?fundCode=' + arg["fundCode"];
-                    } else if (that.investorClassify == "0") { // 普通投资者
+                    } else if (that.investFavour == "0") { // 普通投资者
                         // 售前告知书按客户65岁进行区分展示
                         var fileType = '10', // 售前告知书 没有年龄的，使用普通
-                            resName = ''; // 告知书名称
+                            fileName = ''; // 告知书名称
 
-                        if (that.custType == '1') { // 自然人，判断年龄65
+                        if (that.customerType == '1') { // 自然人，判断年龄65
                             if (that.age) { // 19  产品售前风险告知书65岁及以上; 20 产品售前风险告知书65岁及以下,传2个参数目的是，产品无65岁以上或以下版本时，展示普通
                                 fileType = (Number(that.age) > 64) ? '19,10' : '20,10';
                             }
@@ -746,13 +757,11 @@ var prvDetail = {
                         var riskMarObj = [{
                             url: site_url.prvReource_api, // 产品材料接口 queryReourceList
                             data: {
-                                hmac: "", //预留的加密信息
-                                params: { //请求的参数信息
-                                    productCode: arg["fundCode"], // 产品代码
-                                    fileType: fileType
-                                }
+                                projectId: arg["fundCode"], // 产品代码
+                                fileType: fileType    
                             },
                             needLogin: true,
+                            contentTypeSearch: true,
                             async: false,
                             needDataEmpty: false, //需要判断data是否为空
                             callbackDone: function(data) {
@@ -760,13 +769,13 @@ var prvDetail = {
                                     var json = data.data[0];
 
                                     if (!$.util.objIsEmpty(json)) {
-                                        if (json.resName.indexOf(".pdf") != -1) { //在线预览
-                                            that.marUrl = site_url.download_api + "?filePath=" + json.fileUrl + "&fileName=" + new Base64().encode(json.resName) + "&groupName=" + json.groupName + "&show=1";
+                                        if (json.fileName.indexOf(".pdf") != -1) { //在线预览
+                                            that.marUrl = site_url.download_api + "?filePath=" + json.fileUrl + "&fileName=" + new Base64().encode(json.fileName) + "&groupName=" + json.groupName + "&show=1";
                                         } else { //下载
-                                            that.marUrl = site_url.download_api + "?filePath=" + json.fileUrl + "&fileName=" + new Base64().encode(json.resName) + "&groupName=" + json.groupName;
+                                            that.marUrl = site_url.download_api + "?filePath=" + json.fileUrl + "&fileName=" + new Base64().encode(json.fileName) + "&groupName=" + json.groupName;
                                         }
                                         // 产品材料名称
-                                        resName = json.resName;
+                                        fileName = json.fileName;
                                     } else {
                                         throw '售前告知书为空，需配置';
                                         return false;
@@ -775,7 +784,7 @@ var prvDetail = {
 
                             },
                             callbackFail: function(data) {
-                                tipAction(data.msg, function() {
+                                tipAction(data.message, function() {
                                     $this.removeClass("stop");
                                 });
                             }
@@ -786,7 +795,7 @@ var prvDetail = {
                         $.elasticLayer({
                             id: "msgTip",
                             title: '提示', //如果不传默认为'尊敬的用户'
-                            p: '当前的投资者类型为普通投资者，普通投资者在信息告知、风险警示、适当性匹配等方面享有特殊保护，请您认真阅读<a class="tipTxt" href="javaScript:;" target="_blank">' + resName + '</a>，确认后继续预约产品。',
+                            p: '当前的投资者类型为普通投资者，普通投资者在信息告知、风险警示、适当性匹配等方面享有特殊保护，请您认真阅读<a class="tipTxt" href="javaScript:;" target="_blank">' + fileName + '</a>，确认后继续预约产品。',
                             yesTxt: '去阅读',
                             celTxt: '取消',
                             zIndex: 60,
@@ -804,10 +813,7 @@ var prvDetail = {
                         var investObj = [{
                             url: site_url.queryClassification_api, //investor/queryClassification.action
                             data: {
-                                hmac: "", //预留的加密信息     
-                                params: {
-
-                                }
+                            
                             },
                             needLogin: true,
                             async: false,
@@ -815,7 +821,7 @@ var prvDetail = {
                             callbackDone: function(data) {
                                 var json = data.data;
                                 if (json.auditStatus == "0") { //待审核--审核中
-                                    if (that.custType == "1") { //自然人投资者
+                                    if (that.customerType == "1") { //自然人投资者
                                         $.elasticLayerTypeTwo({
                                             id: "applyTip",
                                             title: '提示', //如果不传默认为'尊敬的用户'
@@ -823,7 +829,7 @@ var prvDetail = {
                                             buttonTxt: '知道了',
                                             zIndex: 60
                                         });
-                                    } else if (that.custType == "0" || that.custType == "2") { //机构投资者
+                                    } else if (that.customerType == "0" || that.customerType == "2") { //机构投资者
                                         if (json.investType == "1") { //申请专业投资者
                                             $.elasticLayerTypeTwo({
                                                 id: "applyTip",
@@ -846,7 +852,7 @@ var prvDetail = {
                                 } else {
                                     //todo 出现普通投资者和专业投资者弹框
                                     $(".elasticLayerFour").show();
-                                    if (that.custType == "0" || that.custType == "2") {
+                                    if (that.customerType == "0" || that.customerType == "2") {
                                         $(".elasticLayerFour .material .org").show();
                                     } else {
                                         $(".elasticLayerFour .material .praPer").show();
@@ -856,7 +862,7 @@ var prvDetail = {
                                 }
                             },
                             callbackFail: function(data) {
-                                tipAction(data.msg, function() {
+                                tipAction(data.message, function() {
                                     $this.removeClass("stop");
                                 })
                             }
@@ -872,7 +878,7 @@ var prvDetail = {
         });
 
         // 咨询按钮
-        that.getElements.help.on("click tap", function(e) {
+        that.getElements.help.on("tap", function(e) {
             //that.getElements.help.on("tap",function(e){
             $(".mask").addClass("in");
             $("body").css({
@@ -885,11 +891,16 @@ var prvDetail = {
         });
 
         // 折线图时间按钮
-        $('.timeBtn').on('click tap', function() {
+        $('.timeBtn').on('tap', function() {
             var time = $(this).attr('time');
-
+            //画图,已经有数据的不再请求
+            if (typeof(that.drawArr[time]) == 'object') {
+                that.drawAction(time);
+            } else { 
+                that.getDrawData(Number(time)); 
+            }
             //画图
-            that.drawAction(time);
+            // that.drawAction(time);
 
             //改变对应的颜色
             $(this).siblings('.timeBtn').removeClass('active');
@@ -897,11 +908,11 @@ var prvDetail = {
         })
 
         // 历史净值
-        $('.beforeValue').on('click tap', function() {
+        $('.beforeValue').on('tap', function() {
             window.location.href = "/productPrivate/views/hisValue.html?fundCode=" + arg["fundCode"];
         })
 
-        $('.mask').on('click tap', function(e) {
+        $('.mask').on('tap', function(e) {
             if (e.srcElement == $(".mask")[0] || e.target == $(".mask")[0]) {
                 $(this).removeClass("in");
                 $("body").css("position", "");
@@ -909,7 +920,7 @@ var prvDetail = {
         });
 
         // 产品材料
-        $('.invMartical').on('click tap', function() {
+        $('.invMartical').on('tap', function() {
             window.location.href = $(this).attr("href");
         });
 
@@ -919,18 +930,15 @@ var prvDetail = {
                 return false;
             } else {
                 $(other).addClass("nokick");
-                if (that.custType == "0" || that.custType == "2") { //机构用户
+                if (that.customerType == "0" || that.customerType == "2") { //机构用户
                     $(other).removeClass("nokick");
                     window.location.href = site_url.uploadMaterial_url + "?from=3&investType=1";
                 } else {
                     var applyObj = [{
                         url: site_url.applyForClassification_api,
                         data: {
-                            hmac: "", //预留的加密信息      
-                            params: { //请求的参数信息  
-                                investType: "0", //投资转换类型： 0普通投资者申请  1 专业投资者申请  2普转专  3专转普 
-                                attacmentsId: [], //所有附件id 
-                            }
+                            investType: "0", //投资转换类型： 0普通投资者申请  1 专业投资者申请  2普转专  3专转普 
+                            attacmentsId: [], //所有附件id 
                         },
                         async: false,
                         needLogin: true,
@@ -945,7 +953,7 @@ var prvDetail = {
                         callbackFail: function(data) {
                             elasticLayerFourHide();
                             $('.elasticLayerFour .sureBtn').removeAttr('disabled').removeClass('disable');
-                            tipAction(data.msg, function() {
+                            tipAction(data.message, function() {
                                 $(other).removeClass("nokick");
                             });
                         }
@@ -956,7 +964,7 @@ var prvDetail = {
         };
 
         function professionalWrapFun() {
-            if (that.custType == "0" || that.custType == "2") {
+            if (that.customerType == "0" || that.customerType == "2") {
                 window.location.href = site_url.uploadMaterial_url + "?from=4&investType=0";
             } else {
                 window.location.href = site_url.uploadMaterial_url + "?from=1&investType=0";
@@ -969,12 +977,12 @@ var prvDetail = {
         };
 
         // 投资者分类弹窗--取消
-        $('.elasticLayerFour .close,.elasticLayerFour .cancleBtn').on('click tap', function() {
+        $('.elasticLayerFour .close,.elasticLayerFour .cancleBtn').on('tap', function() {
             elasticLayerFourHide();
         })
 
         // 投资者分类弹窗--专业投资者
-        $('.elasticLayerFour .averageWrap,.elasticLayerFour .professionalWrap').on('click tap', function() {
+        $('.elasticLayerFour .averageWrap,.elasticLayerFour .professionalWrap').on('tap', function() {
             var $this = $(this);
             $('.btnWrap').find('.iconfont').removeClass('highlight');
             $this.children().eq(0).addClass('highlight');
@@ -988,7 +996,7 @@ var prvDetail = {
         })
 
         // 投资者分类弹窗--确定
-        $('.elasticLayerFour .sureBtn').on('click tap', function() {
+        $('.elasticLayerFour .sureBtn').on('tap', function() {
             if (that.status.ordinary) { //普通
                 $(this).attr("disabled", true).addClass('disable');
                 averageWrapFun()
@@ -1004,15 +1012,15 @@ var prvDetail = {
         })
 
         // 查看明细
-        that.getElements.$detail.on('click tap', function() {
+        that.getElements.$detail.on('tap', function() {
             window.location.href = site_url.orderDetail_url;
         })
 
-        that.getElements.$tipIcon.on('click tap', function() {
+        that.getElements.$tipIcon.on('tap', function() {
             $.elasticLayerTypeTwo({
-                id: "netValueDesTip",
+                id: "unitNetValueDesTip",
                 title: '帮助', //如果不传默认为'尊敬的用户'
-                p: that.status.netValueDes,
+                p: that.status.unitNetValueDes,
                 buttonTxt: '知道了',
                 zIndex: 60
             });

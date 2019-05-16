@@ -26,7 +26,7 @@ $(function(){
     var rightsCenter = {
 
     	cardLenght: '',
-    	nowRank: splitUrl()['adPosition'],
+			nowRank: splitUrl()['adPosition'],
 
         webinit:function(){  
             var that=this;  
@@ -36,16 +36,12 @@ $(function(){
 
         getList:function(){
             var that=this;
-
             var obj = [{
                 url: site_url.findBannerLikePosition_api, //会员卡片图片文案
                 data: {//请求的参数信息
-                	hmac:"", //预留的加密信息     
-					params:{//请求的参数信息
-						adPosition :"vip",//类型（标志位）
-						seqNo:"4",//显示顺序
-						limitCount:"",//展示幅数
-					} 
+										adPosition :"vip",//类型（标志位）
+										seqNo:"4",//显示顺序
+										limitCount:"7",//展示幅数
                 },
                 //needLogin:true,//需要判断是否登陆
                 //needDataEmpty: false,//不需要判断data是否为空
@@ -54,82 +50,83 @@ $(function(){
                     that.cardLenght = data.lenght;
                     // 根据adPosition展示不同级别会员
                    	Handlebars.registerHelper("transformat",function(value){
-			          if(value == "vip1") {
-			            return "银杏级会员";
-			          }else if(value == "vip2") {
-			            return "白银级会员";
-			          }else if(value == "vip3") {
-			            return "黄金级会员";
-			          }else if(value == "vip4") {
-			            return "白金级会员";
-			          }else if(value == "vip5") {
-			            return "黑金级会员";
-			          }else if(value == "vip6") {
-			            return "钻石级会员";
-			          }else if(value == "vip7") {
-			            return "黑钻级会员";
-			          }
-				    });
+												if(value == "vip1") {
+													return "银杏级会员";
+												}else if(value == "vip2") {
+													return "白银级会员";
+												}else if(value == "vip3") {
+													return "黄金级会员";
+												}else if(value == "vip4") {
+													return "白金级会员";
+												}else if(value == "vip5") {
+													return "黑金级会员";
+												}else if(value == "vip6") {
+													return "钻石级会员";
+												}else if(value == "vip7") {
+													return "黑钻级会员";
+												}
+										});
 				    
-				    // 当前等级卡片提示语
-				    Handlebars.registerHelper("compare",function(value,options) {
-			          if(value == that.nowRank) {
-			          	 return options.fn(this);
-			          }else{
-			          	return options.inverse(this);
-			          }
-				    });
+										// 当前等级卡片提示语
+										Handlebars.registerHelper("compare",function(value,options) {
+												if(value == that.nowRank) {
+													return options.fn(this);
+												}else{
+													return options.inverse(this);
+												}
+										});
 
-				    Handlebars.registerHelper("compareOne",function(value,options) {
-				    // 已超过的等级卡片提示语
-			          if(value < that.nowRank) {
-			          	 return options.fn(this);
-			          }else{
-			        // 未达到的等级卡片提示语
-			          	return options.inverse(this);
-			          }
-				    });
-				    // 已超过的等级卡片提示具体是什么等级会员
-				    Handlebars.registerHelper("transformatOne",function(value) {
-				      
-				      	if(that.nowRank == "vip1") {
-				            return "银杏级会员";
-				          }else if(that.nowRank == "vip2") {
-				            return "白银级会员";
-				          }else if(that.nowRank == "vip3") {
-				            return "黄金级会员";
-				          }else if(that.nowRank == "vip4") {
-				            return "白金级会员";
-				          }else if(that.nowRank == "vip5") {
-				            return "黑金级会员";
-				          }else if(that.nowRank == "vip6") {
-				            return "钻石级会员";
-				          }else if(that.nowRank == "vip7") {
-				            return "黑钻级会员";
-				          }
-				      
-				    });
-				    
+										Handlebars.registerHelper("compareOne",function(value,options) {
+										// 已超过的等级卡片提示语
+												if(value < that.nowRank) {
+													return options.fn(this);
+												}else{
+											// 未达到的等级卡片提示语
+													return options.inverse(this);
+												}
+										});
+										// 已超过的等级卡片提示具体是什么等级会员
+										Handlebars.registerHelper("transformatOne",function(value) {
+											
+												if(that.nowRank == "vip1") {
+														return "银杏级会员";
+													}else if(that.nowRank == "vip2") {
+														return "白银级会员";
+													}else if(that.nowRank == "vip3") {
+														return "黄金级会员";
+													}else if(that.nowRank == "vip4") {
+														return "白金级会员";
+													}else if(that.nowRank == "vip5") {
+														return "黑金级会员";
+													}else if(that.nowRank == "vip6") {
+														return "钻石级会员";
+													}else if(that.nowRank == "vip7") {
+														return "黑钻级会员";
+													}
+											
+										});
+										
 
-				    Handlebars.registerHelper("compareTwo",function(value,options) {
-			          if(value == 1) {
-			          	 return options.fn(this);
-			          }else{
-			          	return options.inverse(this);
-			          }
-				    });
+										Handlebars.registerHelper("compareTwo",function(value,options) {
+												if(value == 1) {
+													return options.fn(this);
+												}else{
+													return options.inverse(this);
+												}
+										});
 
-				    var myTemplate = Handlebars.compile($("#scroll_box_template").html());
-                    $('#scroll_box').html(myTemplate(data));
+										var myTemplate = Handlebars.compile($("#scroll_box_template").html());
+														$('#scroll_box').html(myTemplate(data));
 
-                    // 根据卡片加载对应权益
-				    $.each(data,function(i,el) {
-				    	(function(i){
-				    		that.rightsFunction(i)
-				    	})(i);
-				    	
-				    });
-                }
+														// 根据卡片加载对应权益
+										$.each(data,function(i,el) {
+											(function(i){
+												that.rightsFunction(i)
+											})(i);
+											
+										});
+								}
+								
             }];
 
             $.ajaxLoading(obj);
@@ -138,11 +135,8 @@ $(function(){
         	var that=this;
         	var obj = [{
             	url: site_url.queryRightsByLevel_api, //会员权益查询
-                data: {//请求的参数信息 
-                    hmac:"", //预留的加密信息     
-					params:{//请求的参数信息
-						level: i+1 ,//会员等级
-					}
+                data: {//请求的参数信息    
+										level: i+1 ,//会员等级
                 },
                 callbackDone: function(json){//成功后执行的函数
                     var data = json.data;

@@ -82,9 +82,6 @@ $(function() {
                     callbackNoData: function() { // 没查询到理顾什么都不做
 
                     },
-                    callbackFail: function(json) {
-                        tipAction(json.msg);
-                    }
                 }];
                 $.ajaxLoading(obj);
             }
@@ -176,7 +173,7 @@ $(function() {
                         }
                     },
                     callbackFail: function(json) {
-                        that.$e.errorTip.show().find('.tipWrapper').html(json.msg);
+                        that.$e.errorTip.show().find('.tipWrapper').html(json.message);
                         setTimeout(function() {
                             //黑色条隐藏
                             that.$e.errorTip.hide();

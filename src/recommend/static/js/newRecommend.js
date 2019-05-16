@@ -41,11 +41,9 @@ $(function(){
 			var obj = [{ //获取背景图片
 				url: site_url.findBannerByPosition_api,
 				data: {   
-				 	hmac:"", //预留的加密信息    
-				  	params:{//请求的参数信息 
-						adPosition : 'oldNewLetter' ,//类型（标志位）【请参照备注】 
-					  	limitCount: 3,//展示幅数    
-				}},
+					adPosition : 'oldNewLetter' ,//类型（标志位）【请参照备注】 
+					limitCount: 3,//展示幅数    
+				},
 				needLogin: true,
 				needDataEmpty: true,
 				callbackDone: function( json ){
@@ -58,17 +56,12 @@ $(function(){
 					$('.content img').attr('src',json.data[1].imgUrl);
 					$('.btn_wrap img').attr('src',json.data[2].imgUrl);
 				},
-				callbackFail: function( json ){
-					tipAction( json.msg );
-				}
 			},
 			{  //获取微信sdk所需数据
 				url: site_url.share_api,
 				data: {   
-				 	hmac:"", //预留的加密信息    
-				  	params:{//请求的参数信息 
-						url: window.location.href                                  
-				}},    
+					url: window.location.href                                  
+				},    
 				needLogin: true,
 				needDataEmpty: false,
 				callbackDone: function(jsonData){
@@ -141,7 +134,7 @@ $(function(){
 				},
 				callbackFail: function( jsonData){
 					$('.btnButton .mui-btn').removeClass('disable').removeAttr('disabled');
-					tipAction( jsonData.msg );
+					tipAction( jsonData.message );
 				}
 			}];
 			$.ajaxLoading(obj);

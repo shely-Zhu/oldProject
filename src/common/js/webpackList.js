@@ -8,6 +8,7 @@ module.exports = {
     './personal/static/js/tradeDetail': "./src/personal/static/js/tradeDetail.js",
     './personal/static/js/myAccount': "./src/personal/static/js/myAccount.js",
     './personal/static/js/risk': "./src/personal/static/js/risk.js", //风险评测结果
+    // './personal/static/js/test': "./src/personal/static/js/test.js", //风险评测结果
 
     //公募监管账户
     './personal/static/js/regulatoryAccounts': "./src/personal/static/js/regulatoryAccounts.js",
@@ -170,4 +171,12 @@ module.exports = {
 
     
     './productPrivate/static/js/openPdf': './src/productPrivate/static/js/openPdf.js', 
+
+    //银杏研究
+    './webviews/static/js/detailModel': './src/webviews/static/js/detailModel.js', 
+    './webviews/static/js/information': './src/webviews/static/js/information.js', 
+    // 帮助中心
+    './webviews/static/js/helpful': './src/webviews/static/js/helpful.js', 
+    './webviews/static/js/regard': './src/webviews/static/js/regard.js', 
+
 }

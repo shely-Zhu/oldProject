@@ -47,10 +47,7 @@ $(function() {
                         url: site_url.queryRightsByLevel_api, //协议接口
                         needLogin: true, //需要判断是否登陆
                         data: {
-                            "hmac": "", //预留的加密信息
-                            "params": { //请求的参数信息
-                                "id": splitUrl()['id'], //内容ID
-                            }
+                            "id": splitUrl()['id'], //内容ID
                         },
                         callbackDone: function(json) { //成功后执行的函数
 
@@ -58,15 +55,11 @@ $(function() {
                             //给页面title赋值
                             window.document.title = result.rightName;
                             $(".content").html(result.content); //内容区
-
                         },
-                        callbackFail: function(json) { //失败后执行的函数
-                            tipAction(json.msg);
-                        }
                     }]; 
                 }else if(splitUrl()['cash'] == 'true'){  //现金产品的协议
                     var obj = [{
-                        url: site_url.findProtocolById_api, //协议接口
+                        url: site_url.findProtocolContent_api, //协议接口
                         needLogin: true, //需要判断是否登陆
                         data: {
                             "hmac": "", //预留的加密信息
@@ -82,20 +75,16 @@ $(function() {
                             $(".content").html(result.content); //内容区
 
                         },
-                        callbackFail: function(json) { //失败后执行的函数
-                            tipAction(json.msg);
-                        }
+                             
                     }]; 
 
                 } else{ // 除权益中心页面执行以下操作
                     var obj = [{
-                        url: site_url.queryProtocols_api, //协议接口
+                        url: site_url.findInvestorClassification_api, //协议接口
                         needLogin: true, //需要判断是否登陆
+                        contentTypeSearch: true,
                         data: {
-                            "hmac": "", //预留的加密信息
-                            "params": { //请求的参数信息
-                                "ids": splitUrl()['id'], //内容ID
-                            }
+                            "ids": splitUrl()['id'], //内容ID
                         },
                         callbackDone: function(json) { //成功后执行的函数
 
@@ -105,9 +94,7 @@ $(function() {
                             $(".content").html(result.content); //内容区
 
                         },
-                        callbackFail: function(json) { //失败后执行的函数
-                            tipAction(json.msg);
-                        }
+                             
                     }]; 
                 }
                 

@@ -43,7 +43,7 @@ module.exports = function(json) {
     } else {
         //隐藏网站交易密码弹框
         $('.payPassword').hide();
-        tipAction(json.msg, function() {
+        tipAction(json.message, function() {
             //隐藏网站交易密码弹框
             $('.payPassword').show();
         });

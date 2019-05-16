@@ -46,10 +46,6 @@ module.exports = function(phone) {
             // 请求成功，说明验证码正确，手机号已注册
 
         },
-        callbackFail: function(json) {
-            tipAction(json.msg);
-        }
-
     }];
     $.ajaxLoading(phoneCodeObj);
 };

@@ -111,9 +111,6 @@ $(function(){
 
 
                 },
-                callbackFail:function(data){
-                    tipAction(data.msg);
-                },
                 callbackNoData:function(json){
  
                 }
@@ -167,10 +164,7 @@ $(function(){
                         that.getElements.emptyBox.show();//没有数据显示状态
                     }
 
-               },
-               callbackFail:function(data){
-                    tipAction(data.msg);
-                }
+               }
             },{
                 url: site_url.JJSTotalAsset_api,
                 data: {    
@@ -185,9 +179,7 @@ $(function(){
                         $(".dingBtn").hide();
                     }
                 },
-                callbackFail: function(data) {
-                    tipAction(data.msg);
-                }
+                     
             }];
             $.ajaxLoading(obj);
         },
@@ -270,9 +262,7 @@ $(function(){
 
                         $('#pullUp').css('visibility', 'hidden');          
                     },
-                    callbackFail:function(data){
-                        tipAction(data.msg);
-                    }
+                    
                 }];
                 $.ajaxLoading(obj);  
             }
@@ -326,7 +316,7 @@ $(function(){
                     },
                     callbackFail:function(json){
                          that.getElements.listLoading.hide();
-                         tipAction(json.msg);
+                         tipAction(json.message);
                     }
                 }]
                 $.ajaxLoading(obj);
@@ -429,7 +419,7 @@ $(function(){
                         },
                         callbackFail: function(json){
                             that.getElements.listLoading.hide();
-                            tipAction( json.msg );
+                            tipAction( json.message );
                         }, 
                     }]
                     $.ajaxLoading(obj);
@@ -477,7 +467,7 @@ $(function(){
                     t.$yes.removeAttr('disabled').removeClass('disable');
 
                     that.getElements.errorTip.show();
-                    that.getElements.errorTip.find(".tipWrapper").html(json.msg);//登录超时提示
+                    that.getElements.errorTip.find(".tipWrapper").html(json.message);//登录超时提示
 
                     setTimeout(function(){
                         that.getElements.errorTip.hide();

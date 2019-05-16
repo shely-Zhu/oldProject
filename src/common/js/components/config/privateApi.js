@@ -8,9 +8,9 @@ var pathname = window.location.href;
 
 module.exports = function() {
     //检查是否登录,sso后换成jsonp
-    this.checkUserInfo_api = http_url.sso_url + '/checkUserInfo.action';
+    //this.checkUserInfo_api = http_url.sso_url + '/checkUserInfo.action';
     // app内检测登录状态接口
-    this.checkLogin_api = http_url.pef_url + '/isLogin.action';
+    // this.checkLogin_api = http_url.pef_url + '/isLogin.action';
 
     //接口API
     this.login_api = http_url.pef_url + '/user/login.action'; //登录并绑定salesForce账户
@@ -59,7 +59,7 @@ module.exports = function() {
     this.voice_api = http_url.pef_url + '/voicemsg/voiceMsgVerify.action';
 
     //获取客户信息
-    this.user_api = http_url.pef_url + '/account/user/getUserInfo.action';
+    // this.user_api = http_url.pef_url + '/account/user/getUserInfo.action';
     // app里面公募调用私募getuserinfo接口
     this.user_api_two = http_url.pub_pri_url + '/account/user/getUserInfo.action';
 
@@ -70,7 +70,6 @@ module.exports = function() {
     //查询T+N日
     this.TNDay_api = http_url.pef_url + '/account/redemption/queryTNDay.action';
 
-
     this.prvDetail_api = http_url.pef_url + '/product/details/queryProductDetail.action'; //私募详情查询
     // this.prvNewValue_api = http_url.pef_url + '/product/details/queryNetValue.action'; //最新净值查询
     this.prvLight_api = http_url.pef_url + '/product/details/queryProductImage.action'; //产品亮点查询
@@ -78,11 +77,13 @@ module.exports = function() {
     this.prvHisValue_api = http_url.pef_url + '/product/details/queryHistoryNetValue.action'; //历史净值查询
     this.prvResCancel_api = http_url.pef_url + '/product/trade/fundReserveCancel.action'; //取消预约接口
 
+
     this.prvReserve_api = http_url.pef_url + '/product/trade/fundReserve.action'; //确定预约接口
     this.custBro_api = http_url.pef_url + '/account/broker/custBroRelQuery.action'; //理财师查询与客户关系接口
     //私募首页--检查是否登录
     //私募首页--产品推荐
     this.recommend_api = http_url.pef_url + '/index/recommand/recommand.action';
+
     
     //鉴权时私募客户信息回显及客户基本信息完善查询接口
     this.queryUserInfoToAuth_api = http_url.pef_url + '/account/certification/queryUserInfoToAuth.action';
@@ -113,9 +114,10 @@ module.exports = function() {
 
 
     // 首页
-    this.findBannerByPosition_api = http_url.pef_url + '/index/banners/findBannerByPosition.action';
+    //this.findBannerByPosition_api = http_url.pef_url + '/index/banners/findBannerByPosition.action';
+
     // 内容管理接口
-    this.findContentByCategory_api = http_url.pef_url + '/index/content/findContentByCategory.action';
+    //this.findContentByCategory_api = http_url.pef_url + '/index/content/findContentByCategory.action';
 
     //明细
     this.posDetail_api = http_url.pef_url + '/account/detailed/queryAssetsDetailByPages.action'; //持仓明细接口
@@ -126,11 +128,11 @@ module.exports = function() {
     
     
     //产品专题
-    this.activity_api = http_url.pef_url + '/index/special/getSpecialById.action';
+    // this.activity_api = http_url.pef_url + '/index/special/getSpecialById.action';
 
 
     //老带新
-    this.oldRecommendNew_api = http_url.pef_url + '/user/oldRecommendNew.action';
+   // this.oldRecommendNew_api = http_url.pef_url + '/user/oldRecommendNew.action';
     //
     this.oldAndNewRegist_api = http_url.pef_url + '/account/user/oldAndNewRegist.action';
 
@@ -153,4 +155,5 @@ module.exports = function() {
 
     // 二维码计数接口
     this.qrCodeDetails_api = http_url.pef_url + '/qrcode/qrCodeDetails.action';
+
 };

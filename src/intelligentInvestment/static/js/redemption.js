@@ -34,33 +34,25 @@ $(function() {
             var obj = [{
                 url: site_url.combinAccList_api, // 交易账号查询
                 data: {
-                    hmac: "", //预留的加密信息
-                    params: {}
                 },
                 needDataEmpty: false,
                 async: false, //同步
                 callbackDone: function(json) {
                     var jsonData = json.data;
-                    var bankAccount = jsonData.combinAccList[0].bankAccount;
-                    var bankNo = bankAccount.substring(bankAccount.length - 4);
-                    var text = jsonData.combinAccList[0].bankName + "（" + bankNo + "）";
+                    var bankAccountMask = jsonData[0].bankAccountMask;
+                    var bankNo = bankAccountMask.substring(bankAccountMask.length - 4);
+                    var text = jsonData[0].bankName + "（" + bankNo + "）";
                     $(".bank_txt").html(text);
-                    that.tradeAcco = jsonData.combinAccList[0].tradeAcco;
+                    that.tradeAcco = jsonData[0].tradeAcco;
                 },
                 callbackFail: function(json) {
-                    tipAction(json.msg);
+                    tipAction(json.message);
                 }
             }];
             obj.push({
-                url: site_url.myShare_api, // 组合持仓列表
-                data: {
-                    hmac: "", //预留的加密信息
-                    params: { //请求的参数信息
-
-                    }
-                },
+                url: site_url.shareList_api, // 组合持仓列表
                 callbackDone: function(json) {
-                    var jsonData = json.data.comShareList;
+                    var jsonData = json.data.pageList;
                     var myTemplate = Handlebars.compile($("#fund_list_template").html());
                     $('#fund_list').html(myTemplate(jsonData));
                     $.each(jsonData, function(i, el) {
@@ -69,22 +61,16 @@ $(function() {
                     // 赎回份额
                     that.changeVal();
                 },
-                callbackFail: function(json) {
-                    tipAction(json.msg);
-                }
             });
             obj.push({
-                url: site_url.combinFundTotalAsset_api, // 组合资产
+                url: site_url.totalAssets_api, // 组合资产
                 data: {
-                    hmac: "", //预留的加密信息
-                    params: { //请求的参数信息
-                        pageNum: "", //当前页
-                        pagesize: "" //每页显示条数
-                    }
+                    pageNum: "", //当前页
+                    pagesize: "" //每页显示条数
                 },
                 callbackDone: function(json) {
                     // totalAmountMask总资产即当前资产市值
-                    var combinTotalAsset = json.data.combinTotalAsset;
+                    var combinTotalAsset = json.data;
 
                     $(".js_marketNum").html(combinTotalAsset.totalAmountMask);
                     // 组合编号
@@ -92,9 +78,7 @@ $(function() {
                     // 组合名称
                     $(".tit .title").html(combinTotalAsset.combName);
                 },
-                callbackFail: function(json) {
-                    tipAction(json.msg);
-                }
+                     
             });
             $.ajaxLoading(obj);
         },
@@ -147,13 +131,10 @@ $(function() {
                 var obj = [{
                     url: site_url.combinFundRedempInfo_api, // 赎回
                     data: {
-                        hmac: "", //预留的加密信息 非必填项
-                        params: {
-                            combCode: that.combCode, //组合编号
-                            tradeAcco: that.tradeAcco, //交易账号
-                            password: $('.payPassword .passInput').val(), //客户支付密码 必填项
-                            combinRedemRatio: that.inputVal, //赎回比例
-                        }, //请求的参数信息
+                        combCode: that.combCode, //组合编号
+                        tradeAcco: that.tradeAcco, //交易账号
+                        password: $('.payPassword .passInput').val(), //客户支付密码 必填项
+                        combinRedemRatio: that.inputVal, //赎回比例
                     },
                     needLogin: true,
                     needDataEmpty: false,

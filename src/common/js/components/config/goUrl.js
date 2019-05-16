@@ -6,7 +6,7 @@
 
 module.exports = function() {
 
-    this.login_html_url = go_url.no_url + '/login.action';  //手动触发登录,需将redirectUrl值传回去
+    this.login_html_url = go_url.no_url + '/login';  //手动触发登录,需将redirectUrl值传回去
     this.logOut_html_url = go_url.no_url +'/logout.action';  //退出登录
     this.registerUrl = go_url.cft_url + '/user/views/register.html';  //注册页面
 
@@ -169,7 +169,7 @@ module.exports = function() {
     // 老带新二维码页面--股份和明泽离得推荐有礼都跳转明泽
     this.recommend_url = go_url.wap_url + '/recommend/views/recommend.html';
     // 分享页面
-    this.newRecommend_url = window.location.origin.replace('apps', 'wap') + '/recommend/views/newRecommend.html';
+    this.newRecommend_url = window.location.origin.replace('h5', 'wap') + '/recommend/views/newRecommend.html';
     // 老带新注册页面
     this.recommendRegister_url = go_url.no_url + '/user/views/recommendRegister.html';
     // 恭喜页面

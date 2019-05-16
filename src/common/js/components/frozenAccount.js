@@ -15,7 +15,9 @@ var tipAction = require('./tipAction.js');
 function isCustTypeOne(outdateFreezeStatus, lawFreezeStatus, url, custType) {
     var f = false;
     var userObj = [{
-            url: site_url.user_api,
+            //由于恒小智-赎回用到了，改成新接口
+            //url: site_url.user_api,
+            url: site_url.queryUserBaseInfo_api,
             data: {
                 hmac: "", //预留的加密信息     
                 params: { //请求的参数信息
@@ -30,11 +32,9 @@ function isCustTypeOne(outdateFreezeStatus, lawFreezeStatus, url, custType) {
                 
                 var jsonData = data.data;
                 // 获取客户是机构客户还是个人客户
-                f = elasticLayer(outdateFreezeStatus, lawFreezeStatus, url, jsonData.custType); // 调用弹框
+                f = elasticLayer(outdateFreezeStatus, lawFreezeStatus, url, jsonData.accountType); // 调用弹框
             },
-            callbackFail: function(data) {
-                tipAction(data.msg);
-            }
+             
         }]
         $.ajaxLoading(userObj);
         return f;
@@ -104,7 +104,7 @@ module.exports = function(value, url, custType) {
 	
         },
         callbackFail: function(json) {
-            tipAction(json.msg);
+            tipAction(json.message);
             r = true;
         }
     }];

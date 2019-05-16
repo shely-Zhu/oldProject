@@ -56,7 +56,7 @@ module.exports = function(phone) {
 
         },
         callbackFail: function(json) {
-            tipAction(json.msg);
+            tipAction(json.message);
             dxyzmCheck = false;
         }
     }];

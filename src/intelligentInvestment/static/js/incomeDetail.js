@@ -58,20 +58,17 @@
  			that.ajaxFail = false;
 
  			var obj = [{
- 				url: site_url.combinFundIncomeList_api,
+ 				url: site_url.incomeList_api,
  				data:{
-				    hmac:"", //预留的加密信息
-				    params:{//请求的参数信息
-				        "pageCurrent":"1",//页码
-				        "pageSize":"50"//每页记录数
-				    }
+			        "pageCurrent":"1",//页码
+			        "pageSize":"50"//每页记录数
 				},
 				needDataEmpty: true,
 				callbackDone: function(json){
 					
 					that.jsonData = json.data;
 
-					if( !$.util.objIsEmpty( that.jsonData.combinIncomeList) ){
+					if( !$.util.objIsEmpty( that.jsonData) ){
 						//有数据，拼模板
 
 							var source = $('#productList-list-template').html(),
@@ -79,7 +76,7 @@
 			            	that.html = template( that.jsonData );
 			            	
 			            	setTimeout(function(){						
-								if( that.jsonData.combinIncomeList.length <  20 ){
+								if( that.jsonData.length <  20 ){
 				        			//当数据少于that.setting.ajaxParams.pageSize时	
 				        			t.endPullupToRefresh(true);	
 				        		}else{
@@ -105,9 +102,6 @@
 	        				$('.contentWrapper').find('.mui-pull-bottom-pocket').removeClass('mui-hidden');
 	        			}			        
 					}
-				},
-				callbackFail: function(json){
-					tipAction(json.msg);
 				},
 				callbackNoData: function(json){
 					if( that.page == 1){

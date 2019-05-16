@@ -108,7 +108,7 @@ $(function(){
                         window.location.href = json.data.redirectUrl;
                     },
                     callbackFail: function(json){
-                        tipAction( json.msg, function(){
+                        tipAction( json.message, function(){
                             $this.removeAttr("disabled").removeClass('disable');
                         });
                     }

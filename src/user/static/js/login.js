@@ -108,7 +108,7 @@ $(function() {
                     },
                     callbackFail: function(json) {
                         //借口失败执行一下逻辑
-                        tipAction(json.msg, function() {
+                        tipAction(json.message, function() {
                             $this.removeAttr("disabled").removeClass('disable');
                         });
                     }

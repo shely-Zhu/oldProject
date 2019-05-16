@@ -132,8 +132,8 @@ module.exports = function() {
 
     /*------------------------------------------------------恒小智接口  start----------------------------------------------*/
 
-    // 组合详情
-    this.combinFundList_api = http_url.pof_url + '/pof/smartInvestment/combinFundList.action';
+    /*// 组合详情
+    this.combinFundList_api = http_url.api_url + '/pof/smartInvestment/combinFundList.action';
     // 组合详情信息查询
     this.combinFundDetails_api = http_url.pof_url + '/pof/smartInvestment/combinFundDetails.action';
     // 组合资产详情
@@ -177,7 +177,8 @@ module.exports = function() {
     // 放弃跟调接口
     this.combinTransferGiveUp_api = http_url.pof_url + '/pof/smartInvestment/combinTransferGiveUp.action';
     // 调仓
-    this.combinTransfer_api = http_url.pof_url + '/pof/smartInvestment/combinTransfer.action';
+    this.combinTransfer_api = http_url.api_url + '/pof/smartInvestment/combinTransfer.action';*/
+
 
     /*------------------------------------------------------恒小智接口  end----------------------------------------------*/
 
@@ -185,18 +186,18 @@ module.exports = function() {
     /* app改版-begin */
     
     /*------------------------------财商教育start------------------------------------------*/
-    // 是否展示推广信息
-    this.ifShowPromotionApi = http_url.pof_url + '/fqEducation/ifShowPromotion.action';
-    // 初始化财商教育记录
-    this.initApi = http_url.pof_url + '/fqEducation/init.action';
-    // 查询财商教育记录
-    this.findApi = http_url.pof_url + '/fqEducation/find.action';
-    // 更新财商教育记录
-    this.updateApi = http_url.pof_url + '/fqEducation/update.action';
-    /*------------------------------财商教育end--------------------------------------------*/
-    /*------------------------------财商教育start------------------------------------------*/
-    // 财商总资产
-    this.myFinancialEducationInfoApi = http_url.pof_url + '/pof/myAssetInfo/myFinancialEducationInfo.action';
+    
+    // // 是否展示推广信息
+    // this.ifShowPromotionApi = http_url.pof_url + '/fqEducation/ifShowPromotion';
+    // // 初始化财商教育记录
+    // this.initApi = http_url.pof_url + '/fqEducation/init';
+    // // 查询财商教育记录
+    // this.findApi = http_url.pof_url + '/fqEducation/find';
+    // // 更新财商教育记录
+    // this.updateApi = http_url.pof_url + '/fqEducation/update';
+    // // 财商总资产
+    // this.myFinancialEducationInfoApi = http_url.pof_url + '/myAssetInfo/myFinancialEducationInfo';
+    
     /*------------------------------财商教育end------------------------------------------*/
 
      /* app改版-begin */

@@ -102,7 +102,7 @@
                      callbackFail: function(json) {
 
                          //显示错误提示
-                         tipAction(json.msg, function() {
+                         tipAction(json.message, function() {
                              $this.removeAttr("disabled").removeClass('disable');
                          })
 

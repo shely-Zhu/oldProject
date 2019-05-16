@@ -72,10 +72,7 @@ $(function() {
             var obj = [{ // 组合产品列表
                 url: site_url.combinFundList_api,
                 data: {
-                    hmac: "", //预留的加密信息
-                    params: { //请求的参数信息
-                        "riskLevel": that.gV.riskLevel, //客户风险等级 
-                    }
+                    "riskLevel": that.gV.riskLevel, //客户风险等级 
                 },
                 async: false, // 同步
                 needDataEmpty: true,
@@ -90,9 +87,7 @@ $(function() {
                     // 请求资产配置接口
                     that.getCombinFundDetails();
                 },
-                callbackFail: function(json) {
-                    tipAction(json.msg);
-                }
+                     
             }];
             $.ajaxLoading(obj);
         },
@@ -102,10 +97,7 @@ $(function() {
             var obj = [{ // 组合详情信息查询
                 url: site_url.combinFundDetails_api,
                 data: {
-                    hmac: "", //预留的加密信息
-                    params: { //请求的参数信息
-                        "groupCode": that.gV.groupCode, //组合代码 
-                    }
+                    "groupCode": that.gV.groupCode, //组合代码 
                 },
                 //async: false,
                 needDataEmpty: true,
@@ -129,18 +121,13 @@ $(function() {
                     // 基金分组渲染
                     generateTemplate(data, that.$e.assetRatio, that.$e.allocationTemp);
                 },
-                callbackFail: function(json) {
-                    tipAction(json.msg);
-                }
+                     
             }, { // 系统调仓记录列表
                 url: site_url.combinTransferList_api,
                 data: {
-                    hmac: "", //预留的加密信息
-                    params: { //请求的参数信息
-                        "combCode": that.gV.groupCode, //组合代码 
-                        // "pageNo": "1", //非必须，默认为1
-                        // "pageSize": "10" //非必须，默认为10
-                    }
+                    "combCode": that.gV.groupCode, //组合代码 
+                    // "pageNo": "1", //非必须，默认为1
+                    // "pageSize": "10" //非必须，默认为10
                 },
                 //async: false,
                 needDataEmpty: true,
@@ -167,9 +154,7 @@ $(function() {
                     // 最新调仓渲染
                     generateTemplate(data, that.$e.adjustmentWrap, that.$e.adjustmentTemp);
                 },
-                callbackFail: function(json) {
-                    tipAction(json.msg);
-                }
+                     
             }];
 
             // 组合收益走势曲线图 1
@@ -193,11 +178,8 @@ $(function() {
             var obj = { //画图
                 url: site_url.trendGraphInfo_api,
                 data: {
-                    hmac: "", //预留的加密信息
-                    params: { //请求的参数信息
-                        groupCode: that.gV.groupCode, // 组合编号
-                        dataRange: num || '', // 数据范围  //默认开始是一个月
-                    }
+                    groupCode: that.gV.groupCode, // 组合编号
+                    dataRange: num || '', // 数据范围  //默认开始是一个月
                 },
                 // needDataEmpty: true,
                 needLogin: true,
@@ -212,7 +194,7 @@ $(function() {
                 },
                 callbackFail: function(json) {
                     that.$e.listLoading.hide();
-                    tipAction(json.msg);
+                    tipAction(json.message);
 
                 },
                 callbackNoData: function(json) {

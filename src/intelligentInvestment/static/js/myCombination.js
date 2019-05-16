@@ -46,16 +46,14 @@ $(function() {
 			var that = this;
 
 			var obj = [{ // 组合资产详情
-				url: site_url.combinFundTotalAsset_api,
+				url: site_url.totalAssets_api,
 				data: {
-					hmac: "", //预留的加密信息
-					params: { //请求的参数信息
-					}
+					
 				},
 				//async: false,
 				// needDataEmpty: true,
 				callbackDone: function(json) {
-					var data = json.data.combinTotalAsset,
+					var data = json.data,
 						totalAmountMask = data.totalAmountMask, // 总资产
 						yesterdayIncomeMask = data.yesterdayIncomeMask, // 昨日收益
 						accumIncomeMask = data.accumIncomeMask, // 累计收益
@@ -97,31 +95,24 @@ $(function() {
 
 					}
 				},
-				callbackFail: function(json) {
-					tipAction(json.msg);
-				}
+				     
 			}, { // 恒小智-组合持仓列表
-				url: site_url.myShare_api,
+				url: site_url.shareList_api,
 				data: {
-					hmac: "", //预留的加密信息
-					params: { //请求的参数信息
-					}
 				},
 				//async: false,
 				needDataEmpty: true,
 				callbackDone: function(json) {
 					var data = {};
 
-					data.list = json.data.comShareList;
+					data.list = json.data.pageList;
 					data.title = that.gV.tableTitle;
 					data['myCombination'] = true; // 表格渲染的时候区分
 
 					// 持仓表格渲染
 					holdingTable(data);
 				},
-				callbackFail: function(json) {
-					tipAction(json.msg);
-				}
+				     
 			}];
 			$.ajaxLoading(obj);
 		},
@@ -144,9 +135,7 @@ $(function() {
 					that.$e.followAdjustment.hide();
 
 				},
-				callbackFail: function(json) {
-					tipAction(json.msg);
-				}
+				     
 			}];
 			$.ajaxLoading(obj);
 

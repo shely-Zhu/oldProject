@@ -2,6 +2,9 @@
  *根据地址栏中的src，展示图片
  *time 2018/5/31 zhangyanping
  */
+//zepto模块
+// require('@pathIncludJs/vendor/zepto/callback.js');
+// require('@pathIncludJs/vendor/zepto/deferred.js');
 
 var splitUrl = require('../../../common/js/components/splitUrl.js');
 
@@ -11,7 +14,8 @@ var prvPic={
 
 		var	src=splitUrl()['src'];
 
-			$("img").attr("src",src);
+			var dom=document.getElementsByClassName('pic_img');
+			    dom[0].setAttribute("src",src);
 	
 	},
 }

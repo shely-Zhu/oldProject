@@ -23,6 +23,7 @@ require('../../../common/js/components/utils.js');
 require('../../../common/js/ajaxLoading.js');
 var splitUrl = require('../../../common/js/components/splitUrl.js');
 require('../../../common/js/userCheck.js');
+require('../../../common/js/components/elasticLayerTypeTwo.js');
 
 require('../../../common/js/components/app/requireAppDown.js');
 
@@ -32,11 +33,18 @@ $(function() {
 
         getElements: {
             contentImg: $("#contentImg"), //图片
-            contentBox: $('#contentBox'), //有产品模板
-            priLocal: $(".priLocal"), //私募产品列表跳转链接
-            pubLocal: $(".pubLocal"), //公募产品列表跳转链接
+			contentBox: $('#contentBox'), //有产品模板
+			contentH5Public : $("#contentH5Public"),  //h5公募基金模板
+			priLocal: $(".priLocal"), //私募产品列表跳转链接
+			pubLocal: $(".pubLocal"), //公募产品列表跳转链接
+			custType: "", // 客户类型【0.机构 1.个人】 
+            linkUrl: "", //立即购买按钮跳转链接
         },
         webInit: function() {
+			var that = this;
+			that.getDate();
+		},
+        getDate: function() {
 
             var that = this;
 
@@ -50,38 +58,94 @@ $(function() {
             }*/
 
             //发送ajax请求
-            var obj = [{
-                url: site_url.activity_api, //接口
-                //needLogin:true,//需要判断是否登陆
-                data: {
-                    "hmac": "", //预留的加密信息
-                    "params": { //请求的参数信息
+            if(splitUrl()['type'] == 'H5Public'){
+				var obj = [{
+					url: site_url.findBannerGeneratorById_api, //接口
+					// needLogin:true,//需要判断是否登陆
+					data: {
+						"id": splitUrl()['id'], //id 
+					},
+					callbackDone: function(json) { //成功后执行的函数
+						var jsonData = json.data;
+						// 专题名称
+						document.title =jsonData.bannerName;
+
+						$.each(jsonData.pictures,function(i,el){
+
+							var img = "";
+
+							img += "<img src='" + el +"'>" ;
+							$(".contentH5Public .images").append(img);
+							
+						});
+						// H5公募基金模板 显示
+						that.getElements.contentH5Public.show();
+						// 立即购买按钮跳转链接
+						that.getElements.linkUrl = jsonData.url; 
+						// “立即购买”按钮处理
+						if(!!jsonData.pictureButton){
+							var buyImg = "<img src='" + jsonData.pictureButton +"'>" ;
+							$('.buttonBuy').append(buyImg);
+							$('.buttonBuy a').remove();
+						}
+						$('.buttonBuy').on('click',function(){
+							if (window.currentIsApp) {
+								window.location.href = '/productPublic/views/comDetail.html?url='+ that.getElements.linkUrl;
+							} else {
+
+								$.elasticLayerTypeTwo({
+									id: "tip",
+									title: '帮助',
+									p: '请下载恒天财富APP进行体验本功能',
+									buttonTxt: '去下载',
+									zIndex: 100,
+									callback: function() {
+										//点击去下载按钮，跳转到相应的下载页面
+		                                window.location.href=window.commonSetting.downAppUrl;
+
+		                            }
+								})
+
+							}
+						})
+					},
+					callbackFail: function(json) { //失败后执行的函数
+						tipAction(json.message);
+					}
+				}];
+				$.ajaxLoading(obj);
+			}else{
+                var obj = [{
+                    url: site_url.activity_api, //接口
+                    //needLogin:true,//需要判断是否登陆
+                    data: {
                         "id": splitUrl()['id'], //id 
+                    },
+                    callbackDone: function(json) { //成功后执行的函数
+    
+                        var data = json.data;
+                        window.document.title = data.name;
+    
+                        if (data.isCheckLogin == "1" && data.isCheckRisk == "0") { //需要登录不需要判断风测
+                            $.userCheck(false, function() {
+                                that.pageRendering(data)
+                            });
+                        } else if (data.isCheckLogin == "1" && data.isCheckRisk == "1") { //需要登录，需要判断风测
+                            $.userCheck(true, function() {
+                                that.pageRendering(data)
+                            });
+                        } else {
+                            // 其他情况页面渲染
+                            that.pageRendering(data);
+                        }
+                    },
+                    callbackFail: function(json) { //失败后执行的函数
+                        tipAction(json.message);
                     }
-                },
-                callbackDone: function(json) { //成功后执行的函数
-
-                    var data = json.data;
-                    window.document.title = data.name;
-
-                    if (data.isCheckLogin == "1" && data.isCheckRisk == "0") { //需要判断是否评测
-                        $.userCheck(false, function() {
-                            that.pageRendering(data)
-                        });
-                    } else if (data.isCheckLogin == "1" && data.isCheckRisk == "1") { //需要判断是否评测
-                        $.userCheck(true, function() {
-                            that.pageRendering(data)
-                        });
-                    } else {
-                        // 其他情况页面渲染
-                        that.pageRendering(data);
-                    }
-                },
-                callbackFail: function(json) { //失败后执行的函数
-                    tipAction(json.msg);
-                }
-            }];
-            $.ajaxLoading(obj);
+                }];
+                $.ajaxLoading(obj);
+            }
+            
         },
         pageRendering: function(data) {
             var that = this;
@@ -108,6 +172,9 @@ $(function() {
                         el.solid = true;
                     } else if (el.pefType == "3") { //浮收
                         el.solid = false;
+                    }
+                    if(el.pofGains==''){
+                        el.pofGains='--';
                     }
                 });
 

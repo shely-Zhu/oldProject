@@ -133,7 +133,7 @@ $(function(){
 						window.location.href ="/about/views/baidu/result.html";
 					},
 					callbackFail: function(json){
-						that.getElements.errorTip.show().find('.tipWrapper').html(json.msg);
+						that.getElements.errorTip.show().find('.tipWrapper').html(json.message);
 						setTimeout(function(){
 							//黑色条隐藏
 							that.getElements.errorTip.hide();

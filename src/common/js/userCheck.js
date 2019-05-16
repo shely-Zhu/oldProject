@@ -20,41 +20,31 @@ require('./ajaxLoading.js');;
     $.extend($, {
         userCheck: function(isRisk, callbackFunc) {
             var obj = [{
-                url: site_url.checkUserInfo_api,
-                data: null,
+                url: site_url.checkLogin_api,
                 needLogin: true,
-                dataType: 'jsonp',
-                needCrossDomain: true,
                 needDataEmpty: false,
                 callbackDone: function(data) {
                     // 登录状态
                     if (isRisk) { //根据参数判断需不需要风险测评
                         var userObj = [{
-                            url: site_url.user_api,
-                            data: {
-                                hmac: "", //预留的加密信息     
-                                params: { //请求的参数信息
-                                }
-                            },
+                            url: site_url.queryUserAuthInfo_api,
                             async: false,
                             needDataEmpty: false,
                             appRisk: true,
                             callbackDone: function(data, fnc) {
 
-                                if (data.data.isRiskAppraisal == "2") {
+                                if (data.data.isRiskEndure == "1") { //是   0-否 1-是
                                     // 处理完之后再走页面逻辑
                                     (typeof(callbackFunc) == 'function') && callbackFunc();
-                                } else if (data.data.isRiskAppraisal == "1") {
+                                } else { //否
                                     // 没有做过风险评测
-                                    if (window.currentIsApp) {
-                                        fnc();
-                                    } else {
-                                        if (data.data.custType == "0" || data.data.custType == "2") { //机构
-                                            window.location.href = site_url.questionnaireOrg_url + '&originUrl=' + new Base64().encode(window.location.href);
-                                        } else if (data.data.custType == "1") { //个人
-                                            window.location.href = site_url.questionnairePer_url + '&originUrl=' + new Base64().encode(window.location.href);
-                                        }
+
+                                    if (data.data.accountType == "0" || data.data.accountType == "2") { //机构
+                                        window.location.href = site_url.questionnaireOrg_url + '&originUrl=' + new Base64().encode(window.location.href);
+                                    } else if (data.data.accountType == "1") { //个人
+                                        window.location.href = site_url.questionnairePer_url + '&originUrl=' + new Base64().encode(window.location.href);
                                     }
+
                                 }
                             }
                         }]
@@ -63,9 +53,6 @@ require('./ajaxLoading.js');;
                         (typeof(callbackFunc) == 'function') && callbackFunc();
                     }
                 },
-                callbackFail: function(data) {
-                    tipAction(data.msg);
-                }
             }]
             $.ajaxLoading(obj);
         },

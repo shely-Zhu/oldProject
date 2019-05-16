@@ -16,9 +16,9 @@ module.exports = function(data, $ele, $id) {
         $ele = $ele || $('.dealCard .bankList'),
         $id = $id || $('#bankList-template');
 
-    if (!$.util.objIsEmpty(data.bankList)) {
+    if (!$.util.objIsEmpty(data.pageList)) {
         //有银行卡数据
-        var bankList = data.bankList;
+        var bankList = data.pageList;
 
         //hide:1 ，表示这一条是隐藏起来的
         $.each(bankList, function(i, el) {
@@ -26,7 +26,7 @@ module.exports = function(data, $ele, $id) {
             if (i > (2 - 1)) {
                 el.hide = 1;
             }
-            var ba = el.bankAccount;
+            var ba = el.bankAccountMask;
             el.banknum = ba.substring(ba.length - 4);
         })
 

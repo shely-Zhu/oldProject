@@ -32,11 +32,10 @@ $(function() {
 				url: site_url.findBannerByPosition_api,
 				data: {
 					hmac:"", //预留的加密信息   非必填项
-					params:{ //请求的参数信息  非必填项
-						adPosition :"privateActivityAPP",//类型（标志位）【请参照备注】
-						groupType:"bannerCategoryGF",
-						limitCount:"6" //展示条数
-					}
+					//请求的参数信息  非必填项
+					adPosition :"privateActivityAPP",//类型（标志位）【请参照备注】
+					groupType:"bannerCategoryGF",
+					limitCount:"6" //展示条数
 				},
 				// needCrossDomain: true,
 				needLoading: true,
@@ -67,9 +66,7 @@ $(function() {
 
 
 				},
-				callbackFail: function() {
-					console.log("失败");
-				}
+				    
 			}];
 			$.ajaxLoading(obj);
 		},

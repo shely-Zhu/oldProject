@@ -91,12 +91,9 @@ $(function() {
             var obj = [{ // 系统调仓记录列表
                 url: site_url.combinTransferList_api,
                 data: {
-                    hmac: "", //预留的加密信息
-                    params: { //请求的参数信息
-                        "combCode": that.gV.groupCode, //组合代码 
-                        "pageCurrent": that.gV.pageCurrent, //非必须，默认为1
-                        "pageSize": "10" //非必须，默认为10
-                    }
+                    "combCode": that.gV.groupCode, //组合代码 
+                    "pageCurrent": that.gV.pageCurrent, //非必须，默认为1
+                    "pageSize": "10" //非必须，默认为10
                 },
                 //async: false,
                 needDataEmpty: true,
@@ -150,9 +147,7 @@ $(function() {
                     }, 200)
 
                 },
-                callbackFail: function(json) {
-                    tipAction(json.msg);
-                }
+                     
             }];
             $.ajaxLoading(obj);
         },

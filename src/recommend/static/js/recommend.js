@@ -96,10 +96,7 @@ $(function() {
             var obj = [{ // 判断是否已认证
                 url: site_url.oldRecommendNew_api,
                 data: {
-                    hmac: "", //预留的加密信息    
-                    params: { //请求的参数信息 
-                        brokerAccount: '' //理财师工号
-                    }
+                    empNo: '' //理财师工号
                 },
                 needLogin: true,
                 // needDataEmpty: true,
@@ -114,9 +111,6 @@ $(function() {
                         that.initialPage()
                     }
                 },
-                callbackFail: function(json) {
-                    tipAction(json.msg);
-                }
             }];
             $.ajaxLoading(obj);
         },
@@ -126,36 +120,27 @@ $(function() {
             var that = this;
             // 理财师接口传参
             var custBroData = {
-                hmac: "", //预留的加密信息    
-                params: { //请求的参数信息 
-                    broker_account: "", //工号    
-                    type: "0", // 只掉私募接口
-                }
+                empNo: "", //工号    
+                fundType: "0", // 只掉私募接口  0：私募  1： 公募
+                isPass: '', //是否通过基金从业考试 Y：通过 N：未通过
             };
             // 微信sdk所需数据的接口参数
             var shareData = {
-                hmac: "", //预留的加密信息    
-                params: { //请求的参数信息 
-                    url: window.location.href
-                }
+                url: window.location.href
             };
             // 查看规则接口参数
             var ruleData = {
-                hmac: "", //预留的加密信息    
-                params: { //请求的参数信息 
-                    category: "appRuleOldAndNew",
-                    curPage: "1",
-                    pageSize: "1"
-                }
+                category: "appRuleOldAndNew",
+                groupType: '',
+                curPage: "1",
+                pageSize: "1"
             };
             // 微信分享接口参数
             var wxData = {
-                hmac: "", //预留的加密信息    
-                params: { //请求的参数信息 
-                    category: "appShareOldAndNew",
-                    curPage: "1",
-                    pageSize: "1"
-                }
+                category: "appShareOldAndNew",
+                groupType: '',
+                curPage: "1",
+                pageSize: "1"
             };
 
             // 如果是微信浏览器
@@ -176,7 +161,7 @@ $(function() {
                     that.setting.weixinConf = Object.assign(that.setting.weixinConf, Object(data));
                     // 确保3个接口（鉴权，分享内容，分享链接）都请求成功，再设置分享链接
                     that.asyncAll();
-                })
+                }, function() {}, function(){}, true)
             }
 
             // 获取理财师的接口
@@ -187,27 +172,30 @@ $(function() {
             }, function() {
                 //设置立即邀请好友的按钮状态为不可点
                 $('.btnButton .txt').addClass('disable').attr('disabled', 'disabled');
+            },function(){
+                // 没有理财师，生成包含客户信息的二维码
+                // 同步请求加密接口，拿到加密信息,通知app,生成二维码
+                that.generateShareLink();
             })
 
             // 规则说明
-            that.generateAjaxObj(site_url.findContentByCategory_joint_api, ruleData, function(data) {
-                $('.rule_des_cont').html(data.pageList[0] && data.pageList[0].content)
-            })
+            that.generateAjaxObj(site_url.findContentByCategory_api, ruleData, function(data) {
+
+                if (data.pageList[0]) {
+                    $('.rule_des_wrap').show();
+                    $('.rule_des_cont').html(data.pageList[0].content);
+                }
+            }, function() {},function(){}, true)
 
             that.getData();
         },
-        // 根据理财师处理页面逻辑
+        // 有数据返回的   根据理财师处理页面逻辑
         dealManagerLogic: function(data) {
             var that = this,
                 shareUrl = '', // 分享出去链接
                 existMain = data.existMain,
                 advisor = data.advisor;
-
-            if ($.util.objIsEmpty(advisor)) {
-                // 没有理财师，生成包含客户信息的二维码
-                // 同步请求加密接口，拿到加密信息,通知app,生成二维码
-                that.generateShareLink();
-            } else if (existMain == 0 && advisor.length > 1) {
+            if (existMain == 0 && advisor.length > 1) {
                 //无专属且理财师多于1位
 
                 //显示理财师选择
@@ -218,17 +206,18 @@ $(function() {
                 //循环数据
                 $.each(advisor, function(i, el) {
                     that.list.push({
-                        text: '<span>' + el.broker_name + '</span><span>' + el.broker_account + '</span>',
-                        value: el.broker_account
+                        text: '<span>' + el.codeName + '</span><span>' + el.empNo + '</span>',
+                        value: el.empNo
                     })
                 })
             } else {
                 // 有专属理财师或者只有一位普通理财师
-                $('.manager_show_wrap .manager_show').html(advisor[0].broker_name + advisor[0].broker_account)
+                $('.manager_show_wrap .manager_show').html(advisor[0].codeName + advisor[0].empNo)
                 that.getElements.manager_show_wrap.show();
-                that.generateShareLink(advisor[0].broker_account);
+                that.generateShareLink(advisor[0].empNo);
             }
         },
+
         /**
          * [queryAesEncrypt  同步请求加密接口，拿到加密信息,通知app,生成二维码]
          * @author songxiaoyu 2018-07-18
@@ -241,10 +230,7 @@ $(function() {
             that.setting.ajaxArr.push({
                 url: site_url.oldRecommendNew_api,
                 data: {
-                    hmac: "", //预留的加密信息     
-                    params: { //请求的参数信息 
-                        brokerAccount: num || '' //理财师工号
-                    }
+                    empNo: num || '' //理财师工号
                 },
                 async: false, // 同步请求
                 needLogin: true,
@@ -284,7 +270,7 @@ $(function() {
                 },
                 callbackFail: function(json) {
                     $this.removeClass('disable').removeAttr('disabled');
-                    tipAction(json.msg);
+                    tipAction(json.message);
                 }
             })
             that.getData();
@@ -452,13 +438,13 @@ $(function() {
             })
 
             //点击隐藏弹层
-            $('.shareMask').on('click', function(e) {
-                if (!$(e.target).hasClass('shareWrap')) {
-                    $('.shareMask').removeClass('show');
-                    $('.closeElastic').show();
-                    $('.btnButton .txt').removeClass('disable').removeAttr('disabled');
-                }
-            })
+            // $('.shareMask').on('click', function(e) {
+            //     if (!$(e.target).hasClass('shareWrap')) {
+            //         $('.shareMask').removeClass('show');
+            //         $('.closeElastic').show();
+            //         $('.btnButton .txt').removeClass('disable').removeAttr('disabled');
+            //     }
+            // })
 
             // 关闭所有弹层
             $('.closeElastic').on('click', function(e) {
@@ -482,7 +468,7 @@ $(function() {
          * @param  {[type]}   sync       [同步请求]
          * @param  {Function} callback   [回掉函数--处理数据]
          */
-        generateAjaxObj: function(url, data, callback, callbackFail) {
+        generateAjaxObj: function(url, data, callback, callbackFail, callbackNoData, contentTypeSearch) {
             var that = this;
 
             that.setting.ajaxArr.push({
@@ -491,6 +477,7 @@ $(function() {
                 // async: false,
                 needLogin: true,
                 needDataEmpty: true,
+                contentTypeSearch: contentTypeSearch,
                 callbackDone: function(json) {
                     var jsonData = json.data;
                     //隐藏loading
@@ -499,9 +486,12 @@ $(function() {
                 },
                 callbackFail: function(json) {
                     // that.getElements.listLoading.hide();
-                    tipAction(json.msg);
+                    tipAction(json.message);
                     callbackFail && callbackFail();
                 },
+                callbackNoData:function(){
+                    callbackNoData(); 
+                }
             });
         },
         /**

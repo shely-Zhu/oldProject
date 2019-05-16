@@ -101,11 +101,6 @@ $(function(){
                     }
 
                 },
-                callbackFail: function(json){  //失败后执行的函数
-
-                    console.log(json.msg);
-
-                },
                 callbackNoData:function(json){
  
                 }
@@ -118,11 +113,6 @@ $(function(){
 
                     console.log(JSON.stringify(json)); 
                     that.getElements.pointsBalance.html(json.data.count);//剩余积分数据填充
-
-                },
-                callbackFail: function(json){  //失败后执行的函数
-
-                    console.log(json.msg);
 
                 },
                 callbackNoData:function(json){
@@ -140,11 +130,6 @@ $(function(){
                     console.log(JSON.stringify(json)); 
                     that.getElements.toDuePoint.html(json.data.count);//剩余积分数据填充
 
-                },
-                callbackFail: function(json){  //失败后执行的函数
-
-                    console.log(json.msg);
-                    
                 },
                 callbackNoData:function(json){
 
@@ -221,9 +206,6 @@ $(function(){
                         $('#pullUp').css('visibility', 'hidden'); 
                     	
                     },
-                    callbackFail:function(data){
-						tipAction(data.msg);
-					}
                 }];
                 $.ajaxLoading(obj);  
             }

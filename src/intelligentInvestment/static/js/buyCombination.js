@@ -64,13 +64,10 @@ $(function() {
             }
 
             var obj = [{ // 银行卡列表---默认返回公募开卡的银行卡
-                url: site_url.smartCardList_api,
+                url: site_url.smartList_api,
                 data: {
-                    hmac: "", //预留的加密信息
-                    params: { //请求的参数信息
-                        "groupCode": that.gV.groupCode, //组合代码
-                        "additional": additional
-                    }
+                    "code": that.gV.groupCode, //组合代码
+                    "additional": additional
                 },
                 //async: false,
                 // needDataEmpty: false,
@@ -78,24 +75,21 @@ $(function() {
                     var data = json.data;
 
                     that.gV.lowGroupBuyAmount = data.lowGroupBuyAmount; // 组合购买最小限额
+                    // that.gV.lowGroupBuyAmount = 1000; // 组合购买最小限额
                     that.gV.lowGroupBuyAmountMask = data.lowGroupBuyAmountMask; // 组合购买最小限额
                     that.gV.highGroupBuyAmount = data.highGroupBuyAmount; // 组合购买最大限额  
+                    // that.gV.highGroupBuyAmount = 100000; // 组合购买最大限额  
                     $('.inputTurnIn').attr('placeholder', that.gV.lowGroupBuyAmountMask + '起投');
 
                     // 银行卡列表渲染
                     renderBankList(data);
 
                 },
-                callbackFail: function(json) {
-                    tipAction(json.msg);
-                }
+                     
             }, { // 持仓详情
                 url: site_url.combinFundProportionList_api,
                 data: {
-                    hmac: "", //预留的加密信息
-                    params: { //请求的参数信息
-                        "groupCode": that.gV.groupCode //组合代码
-                    }
+                    "groupCode": that.gV.groupCode //组合代码
                 },
                 //async: false,
                 // needDataEmpty: false,
@@ -109,9 +103,7 @@ $(function() {
                     // 表格渲染
                     holdingTable(data);
                 },
-                callbackFail: function(json) {
-                    tipAction(json.msg);
-                }
+                     
             }];
             $.ajaxLoading(obj);
         },
@@ -175,11 +167,8 @@ $(function() {
 
                 // 风险评测是否过期
                 obj = [{
-                    url: site_url.user_api_two,
+                    url: site_url.queryUserAuthInfo_api,
                     data: {
-                        hmac: "", //预留的加密信息     
-                        params: { //请求的参数信息 
-                        }
                     },
                     needLogin: true,
                     async: false,
@@ -187,11 +176,11 @@ $(function() {
 
                         var jsonData = json.data;
                         // 冻结账户弹窗提示
-                        var result = frozenAccount("buyFreeze", window.location.href, jsonData.custType);
+                        var result = frozenAccount("buyFreeze", window.location.href, jsonData.accountType);
                         if( !!result ){
                             return false;
                         };
-                        if (jsonData.pofExpired == 1) {
+                        if (jsonData.endurePubIsold == 1) {   //公募风险评测是否过期 0:否 1:是
                             tipAction('风险测评已过期，请重新测评')
                         } else {
                             // 弹出交易密码
@@ -200,7 +189,7 @@ $(function() {
                         
                     },
                     callbackFail: function(json) {
-                        tipAction(json.msg);
+                        tipAction(json.message);
                     }
                 }];
                 $.ajaxLoading(obj);
@@ -230,14 +219,11 @@ $(function() {
                 ajaxObj = [{
                     url: site_url.combinFundBuy_api,
                     data: {
-                        hmac: "", //预留的加密信息 非必填项
-                        params: { //请求的参数信息
-                            "buyBalance": Number($('.inputTurnIn').val()), //购买金额
-                            "capitalMode": $bankCard.attr('capitalMode'), //资金方式
-                            "combCode": that.gV.groupCode, //组合编号
-                            "password": passwordVal, //密码
-                            "tradeAcco": $bankCard.attr('tradeAcco') //普通交易账号
-                        }
+                        "buyBalance": Number($('.inputTurnIn').val()), //购买金额
+                        "capitalMode": $bankCard.attr('capitalMode'), //资金方式
+                        "combCode": that.gV.groupCode, //组合编号
+                        "password": passwordVal, //密码
+                        "tradeAcco": $bankCard.attr('tradeAcco') //普通交易账号
                     },
                     needLogin: true,
                     // needDataEmpty: false,

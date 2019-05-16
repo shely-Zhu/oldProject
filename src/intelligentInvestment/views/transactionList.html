@@ -54,7 +54,7 @@
 	<!-- 列表模板 -->
 	<script id="transaction-list-template" type="text/x-handlebars-template">
 		{{#if isIn}}
-			{{#each comRradeRecordList}}
+			{{#each pageList}}
 				<div class="card-theme goTradeDetail" combRequestNo="{{combRequestNo}}" tradeType="1">
 					<div class="mui-row">
 						<div class="mui-col-xs-6">
@@ -71,7 +71,7 @@
 		{{/if}}
 
 		{{#if isOut}}
-			{{#each comRradeRecordList}}
+			{{#each pageList}}
 				<div class="card-theme goTradeDetail" combRequestNo="{{combRequestNo}}" tradeType="2"combinRedemRatio="{{combinRedemRatio}}">
 					<div class="mui-row">
 						<div class="mui-col-xs-6">
@@ -88,7 +88,7 @@
 		{{/if}}
 
 		{{#if adjustment}}
-			{{#each comRradeRecordList}}
+			{{#each pageList}}
 				<div class="card-theme goTradeDetail" combRequestNo="{{combRequestNo}}" tradeType="3">
 					<div class="mui-row">
 						<div class="mui-col-xs-6">
