@@ -173,11 +173,14 @@ $(function() {
                     } else if (el.pefType == "3") { //浮收
                         el.solid = false;
                     }
-                    if(el.pofGains==''){
-                        el.pofGains='--';
+                });
+                Handlebars.registerHelper('checkEmpty',function(option){
+                    if(option == ''){
+                        return option = '--';
+                    }else{
+                        return option ;   
                     }
                 });
-
                 var tplm = $("#productList-template").html();
                 //预编译模板 
                 var template = Handlebars.compile(tplm);
@@ -225,7 +228,7 @@ $(function() {
 
                 that.getElements.contentBox.show(); //模板显示
             }
-        }
+        },
     };
 
     //调用数据
