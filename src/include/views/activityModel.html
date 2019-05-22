@@ -47,17 +47,17 @@
 						{{#if type}}
 							{{#if solid}}
 								<a href="javascript:;" class="mui-card priLocal">
-									<div class="card-head">{{productName}}</div>
+									<div class="card-head">{{checkEmpty productName}}</div>
 									<div class="card-theme noBor">
 										<div class="mui-row">
 											<div class="mui-col-xs-4 left">
-												<p class="inv">{{pefTerm}}</p>
+												<p class="inv">{{checkEmpty pefTerm}}</p>
 											</div>
 											<div class="mui-col-xs-4 center"> 
-												<p class="inv">{{pefMinBalance}}</p>
+												<p class="inv">{{checkEmpty pefMinBalance}}</p>
 											</div>
 											<div class="mui-col-xs-4 right">
-												<p class="inv invCore">{{pefExpectedProfitMin}}%~{{pefExpectedProfitMax}}%</p>
+												<p class="inv invCore">{{checkEmpty pefExpectedProfitMin}}%~{{checkEmpty pefExpectedProfitMax}}%</p>
 											</div>
 										</div>
 										<div class="mui-row">
@@ -69,17 +69,17 @@
 								</a>
 							{{else}}
 								<a href="javascript:;" class="mui-card priLocal">
-									<div class="card-head">{{productName}}</div>
+									<div class="card-head">{{checkEmpty productName}}</div>
 									<div class="card-theme noBor">
 										<div class="mui-row">
 											<div class="mui-col-xs-4 left">
-												<p class="inv">{{pefTerm}}</p>
+												<p class="inv">{{checkEmpty pefTerm}}</p>
 											</div>
 											<div class="mui-col-xs-4 center"> 
-												<p class="inv">{{pefNetValueDate}}</p>
+												<p class="inv">{{checkEmpty pefNetValueDate}}</p>
 											</div>
 											<div class="mui-col-xs-4 right">
-												<p class="inv invCore">{{pefNetValue}}</p>
+												<p class="inv invCore">{{checkEmpty pefNetValue}}</p>
 											</div>
 										</div>
 										<div class="mui-row">
@@ -95,14 +95,14 @@
 								<div class="card-theme noBor">
 									<div class="mui-row">
 										<div class="mui-col-xs-8 left part">
-											<p class="inv">{{productName}}</p>
+											<p class="inv">{{checkEmpty productName}}</p>
 										</div>
 										<div class="mui-col-xs-4 right">
-											<p class="inv invCore">{{pofGains}}%</p>
+											<p class="inv invCore">{{checkEmpty pofGains}}%</p>
 										</div>
 									</div>
 									<div class="mui-row">
-										<div class="mui-col-xs-8 left num part">{{productCode}}</div>
+										<div class="mui-col-xs-8 left num part">{{checkEmpty productCode}}</div>
 										<div class="mui-col-xs-4 right num">近一年涨幅</div>
 									</div>
 								</div>
