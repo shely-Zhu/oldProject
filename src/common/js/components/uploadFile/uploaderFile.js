@@ -214,9 +214,21 @@ module.exports = function(callback, imgDefault) {
                     });
                     //return;
                 } else {
-                    //预览正常，显示图片
-                    var img = $('<img src="' + src + '">');
-                    $wrap.empty().append(img); //每次先清空再插入新图片
+                    if(window.location.href.indexOf('createPlan') != -1){
+                        //预览正常，显示图片
+                        var img = $('<img src="' + src + '">');
+                        var width=elements.upLoadWrap.width();
+                        var height=elements.upLoadWrap.height();
+                        img.css({
+                            'width': width+'px',
+                            'height': height+'px',
+                        })
+                        $wrap.empty().append(img); //每次先清空再插入新图片
+                    }else{
+                        //预览正常，显示图片
+                        var img = $('<img src="' + src + '">');
+                        $wrap.empty().append(img); //每次先清空再插入新图片
+                    }
                 }
 
                 //显示预览部分
