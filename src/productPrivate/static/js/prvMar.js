@@ -231,7 +231,11 @@ var prvMar = {
     },
     events: function() {
         mui("body").on("tap", ".mui-box", function() {
-            window.open($(this).attr("href"));
+            if(window.currentIsApp){
+                window.location.href($(this).attr("href"));
+            }else{
+                window.open($(this).attr("href"));
+            }
         })
     }
 }
