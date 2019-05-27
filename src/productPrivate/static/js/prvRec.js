@@ -51,15 +51,15 @@ var prvRec = {
         that.ajaxFail = false;
 
         var obj = [{
-                url: site_url.user_api,
+                url: site_url.queryUserBaseInfo_api,
                 data: {
                 },
                 needDataEmpty: false,
                 callbackDone: function(data) {
                     var jsonData = data.data;
-                    if (jsonData.isCertification == "1") { //是否实名认证
+                    if (jsonData.idnoCheckflag == "1") { //是否实名认证
                         that.name = jsonData.name;
-                        if (jsonData.certType == "0") { //身份证
+                        if (jsonData.identityType == "0") { //身份证
                             if (jsonData.identityNo.length == "15") {
                                 jsonData.identityNo.substring(14, 15) % 2 == 0 ? that.gender = "女士" : that.gender = "先生";
                             } else if (jsonData.identityNo.length == "18") {
