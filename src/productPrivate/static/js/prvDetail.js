@@ -155,6 +155,7 @@ var prvDetail = {
                 that.productName = json.productName;
                 $(".fundName").html(json.productName);
                 $(".prdInfo .prdNum").html(arg["fundCode"]); //获取产品代码
+                $('.projectTermUnit p').html('投资期限('+json.projectTermUnit+')');
 
                 // that.goRealName = json.isCertification; //存储是否实名认证
                 // that.customerType = json.customerType; //存储个人或机构投资
