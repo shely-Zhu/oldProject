@@ -41,7 +41,7 @@ $(function(){
                     "category":"appaboutht",//新手必读 appmustread 注册开户：appregister 投资操作：appinvest
                 },
                 needDataEmpty: false, //不判断data是否为空
-                contentTypeSearch: false,
+                contentTypeSearch: true,
                 callbackDone: function(json){
 
                 	var json = json.data;
