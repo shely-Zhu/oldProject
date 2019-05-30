@@ -16,14 +16,16 @@ $('body').append(html);
 //callback为倒计时2s后，黑色提示条隐藏，需要执行的回调函数
 module.exports = function( message, callback, time){
 	var time = time || 3000;
-	$('.againEnter').show().find('.tipWrapper').html(message);
-	setTimeout(function(){
-        $('.againEnter').hide();
-        
-        if ( callback ){
-        	callback();
-        }
-        
-    }, time);
+	if(!!message){
+		$('.againEnter').show().find('.tipWrapper').html(message);
+		setTimeout(function(){
+			$('.againEnter').hide();
+			
+			if ( callback ){
+				callback();
+			}
+			
+		}, time);
+	}
 }
 
