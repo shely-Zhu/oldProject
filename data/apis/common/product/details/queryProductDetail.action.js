@@ -36,6 +36,7 @@ var data = Mock.mock({
 		"expectedProfitMax": "7.8",//最高预期收益率【百分比】
 		"isCertification": "2",//是否实名认证【1.否 2.是】
 		"isInvestClassifyRequired" : "2" , //是否需要判断投资者分类标签
+        "unitNetValue" : "2" , 
 	}	
 });
 module.exports=data;
