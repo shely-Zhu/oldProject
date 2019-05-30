@@ -68,6 +68,7 @@ var prvDetail = {
         $reservation: $('.reservation'), //已预约状态
         $detail: $('.reservation .detail'), //查看明细
         $tipIcon: $(".invFloat .tipIcon"), //净值披露信息
+        listLoading: $('.listLoading'),  //所有数据区域，第一次加载的loading结构
     },
     status: {
         ordinary: 0,
@@ -386,6 +387,8 @@ var prvDetail = {
     //请求画图接口
     getDrawData: function(num) { //num为传进来的数据范围
         var that = this;
+        //显示loading
+        that.getElements.listLoading.show();
         if(num=='9999'){
             num=''
         }
@@ -399,9 +402,11 @@ var prvDetail = {
             },
             needDataEmpty: true,
             contentTypeSearch: true,
-            needLoading: true,
+            // needLoading: true,
             // async: false,
             callbackDone: function(json) {
+                //隐藏loading
+            	that.getElements.listLoading.hide();
                 //请求成功
                 //画图
                 if(num==''){
@@ -422,9 +427,13 @@ var prvDetail = {
                 }
             },
             callbackFail: function(json) {
+                //隐藏loading
+            	that.getElements.listLoading.hide();
                 tipAction(json.message);
             },
             callbackNoData: function(json) {
+                //隐藏loading
+            	that.getElements.listLoading.hide();
 
             }
         }];
