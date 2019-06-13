@@ -18,16 +18,39 @@
 	<section class="container">
 		<!-- 我的成长值页面的占比 -->
 		<div class="box">
-			<diiv class="lineWrapper">
+			<canvas class="lineWrapper" id="canvas"></canvas> 
 		  		<!--净值曲线-->
-		  	</diiv>
 		</div>
-		
+		<div class="title">
+			成长值记录
+		</div>
+		<div class="list">
+
+			<div class="without" id="emptyBox" style="display:none;">
+				<div class="box vertical center">
+					<p class="iconfont">&#xe603;</p>
+					<p class="text">暂无数据</p>
+				</div>
+			</div>
+
+		</div>
 	</section>
 
 	 
-	 @@include('@pathInclude/views/footer.html')
-	 
+	@@include('@pathInclude/views/footer.html')
+
+	<script id="template-pot" type="text/x-handlebars-template">
+		{{#each this}}
+			<li class="data clearfix">
+				<div class="dataList">
+					
+				</div>
+				
+			</li>
+		{{/each}}
+	</script>
+	
+	<script src="/include/js/vendor/circleProcess/circleProcess.min.js"></script>
 	<script src="/personal/static/js/growthValue.js"></script>
 </body>
 </html>

@@ -12,14 +12,16 @@ require('@pathIncludJs/vendor/zepto/deferred.js');
 require('@pathIncludJs/vendor/config.js'); 
 //黑色提示条
 var tipAction = require('@pathCommonJsCom/tipAction.js');
+//画进度
+//require('@pathIncludJs/vendor/circleProcess/circleProcess.min.js'); 
 
 //echarts图表
-var echarts = require('echarts/lib/echarts');
-require('echarts/lib/chart/gauge');
-require('echarts/lib/component/tooltip');
-require('echarts/lib/component/title');
-require('echarts/lib/component/legend');
-require('zrender/lib/vml/vml');
+// var echarts = require('echarts/lib/echarts');
+// require('echarts/lib/chart/gauge');
+// require('echarts/lib/component/tooltip');
+// require('echarts/lib/component/title');
+// require('echarts/lib/component/legend');
+// require('zrender/lib/vml/vml');
 
 $(function(){
 
@@ -32,10 +34,68 @@ $(function(){
 		webinit:function(){  
 			var that = this;
 
-			that.drawAction();
-			that.events();
+			//请求成长值数据
+			that.getData();
 
+			//
+			//that.drawAction();
+
+
+			that.events();
 		},
+
+		getData: function(){
+			var that = this;
+
+			
+			var obj = [{ //成长值查询
+			    url: site_url.queryGrowthValue_api,
+			    data: {},
+			    needLogin:true, //需要判断是否登陆
+			    needDataEmpty: false, //不需要判断data是否为空
+			    callbackDone: function(json){  //成功后执行的函数
+
+			        //展示成长值并画图
+			        CircleProcess(
+			        	document.getElementById("canvas"),{
+			        	"size": "half",
+			            "percent": 40,
+			            "process": 0, 
+			            "startSmallCircle":{"show": false},
+			            "endSmallCircle":{"show": false},
+			            "processText": {"show": true, }
+			        });
+
+			    }
+			},{ //成长值流水
+			    url: site_url.queryGrowthDetailList_api,
+			    data: {},
+			    needLogin:true, //需要判断是否登陆
+			    needDataEmpty: false, //不需要判断data是否为空
+			    callbackDone: function(json){  //成功后执行的函数
+
+			    	var data = json.data,
+			    		pageList = data.growthDetailList;
+
+			    	if( pageList.length ){
+				        //展示列表
+	                    var tplm = $("#template-pot").html(),
+						template = Handlebars.compile(tplm);
+		            	html = template( pageList );
+		            	//输入模板 
+	                    $('.list').append(html);
+			    	}
+
+			        
+
+
+			    }
+			}];
+
+
+			$.ajaxLoading(obj);
+		},
+
 		drawAction:function() {
 			var that = this;
 			var timeTicket;
