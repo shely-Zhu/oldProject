@@ -52,12 +52,6 @@ module.exports = {
     //关于金服
     './about/static/js/aboutJF': "./src/about/static/js/aboutJF.js",
 
-
-
-
-
-
-
     //私募
     './productPrivate/static/js/prdPrv': './src/productPrivate/static/js/prdPrv.js', //私募产品列表JS
     './productPrivate/static/js/search': './src/productPrivate/static/js/search.js', //搜索页面JS
@@ -74,15 +68,8 @@ module.exports = {
     './productPrivate/static/js/prvPic': './src/productPrivate/static/js/prvPic.js',
     //产品列表
     
-
-
     //风险测评调查问卷
     './personal/static/js/questionnaire': "./src/personal/static/js/questionnaire.js",
-
-
-    
-
-    
 
     //include---协议模板
     './include/js/modelPage/agreementModel': "./src/include/js/modelPage/agreementModel.js",
@@ -90,7 +77,6 @@ module.exports = {
     './include/js/modelPage/imgModel': "./src/include/js/modelPage/imgModel.js",
     //include---专题模板
     './include/js/modelPage/activityModel': './src/include/js/modelPage/activityModel.js',
-
 
     //老带新
     './user/static/js/recommendRegister': "./src/user/static/js/recommendRegister.js", //注册
@@ -101,7 +87,6 @@ module.exports = {
     //抽奖活动
     './recommend/static/js/award': './src/recommend/static/js/award.js',
     './recommend/static/js/awardRotate': './src/recommend/static/js/awardRotate.js',
-
 
     // 百度推广页
     './about/static/js/baidu/consult': './src/about/static/js/baidu/consult.js',
@@ -122,7 +107,6 @@ module.exports = {
     // 成长计划详情
     './financialEducation/static/js/growthPlan': './src/financialEducation/static/js/growthPlan.js',
     /*----------------------财商教育end-------------------------------*/
-
 
     //基民教育专题页
     './about/static/js/baseEducation/baseLearning': './src/about/static/js/baseEducation/baseLearning.js',
@@ -167,8 +151,6 @@ module.exports = {
 
     // 权益中心
     './personal/static/js/rightsCenter' : './src/personal/static/js/rightsCenter.js',
-
-
     
     './productPrivate/static/js/openPdf': './src/productPrivate/static/js/openPdf.js', 
 
@@ -178,5 +160,8 @@ module.exports = {
     // 帮助中心
     './webviews/static/js/helpful': './src/webviews/static/js/helpful.js', 
     './webviews/static/js/regard': './src/webviews/static/js/regard.js', 
+
+    // 我的成长值
+    './personal/static/js/growthValue' : './src/personal/static/js/growthValue.js',
 
 }
