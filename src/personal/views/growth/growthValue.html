@@ -10,7 +10,7 @@
 	<meta content="telephone=no" name="format-detection" />
 	<meta name="apple-mobile-web-app-capable" content="yes">
 	<meta name="apple-mobile-web-app-status-bar-style" content="black">
-	<link rel="stylesheet" href="/personal/static/css/growthValue.css">
+	<link rel="stylesheet" href="/personal/static/css/growth/growthValue.css">
 	<title>我的成长值</title>
 </head>
 <body>
@@ -18,6 +18,7 @@
 	<section class="container">
 		<!-- 我的成长值页面的占比 -->
 		<div class="box">
+			<span class="regSpan">成长值规则</span>
 			<canvas class="lineWrapper" id="canvas"></canvas> 
 		  		<!--净值曲线-->
 		</div>
@@ -40,17 +41,26 @@
 	@@include('@pathInclude/views/footer.html')
 
 	<script id="template-pot" type="text/x-handlebars-template">
+		<ul>
 		{{#each this}}
 			<li class="data clearfix">
 				<div class="dataList">
-					
+					<div class="left">
+						<span class="desc">{{growthDesc}}</span>
+						<span class="time">{{growthDate}}</span>
+					</div>
+					<div class="right">
+						<span class="detail">{{growthDetail}}</span>
+						<span class="inDate">有效期：{{growthIndate}}</span>
+					</div>
 				</div>
 				
 			</li>
 		{{/each}}
+		</ul>
 	</script>
 	
 	<script src="/include/js/vendor/circleProcess/circleProcess.min.js"></script>
-	<script src="/personal/static/js/growthValue.js"></script>
+	<script src="/personal/static/js/growth/growthValue.js"></script>
 </body>
 </html>

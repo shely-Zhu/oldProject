@@ -32,5 +32,6 @@ module.exports = function() {
     this.queryGrowthValue_api = http_url.account_url + '/queryGrowthValue';
     //成长值流水
     this.queryGrowthDetailList_api = http_url.account_url + '/queryGrowthDetailList';
-    
+    //成长值区间
+    this.selectCustomerGrowthTier_api = http_url.account_url + '/selectCustomerGrowthTier';
 };

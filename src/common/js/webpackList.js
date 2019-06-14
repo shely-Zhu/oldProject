@@ -162,6 +162,7 @@ module.exports = {
     './webviews/static/js/regard': './src/webviews/static/js/regard.js', 
 
     // 我的成长值
-    './personal/static/js/growthValue' : './src/personal/static/js/growthValue.js',
-
+    './personal/static/js/growth/growthValue' : './src/personal/static/js/growth/growthValue.js',
+    //成长值规则
+    './personal/static/js/growth/growthReg' : './src/personal/static/js/growth/growthReg.js',
 }

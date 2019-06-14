@@ -53,19 +53,41 @@ $(function(){
 			    data: {},
 			    needLogin:true, //需要判断是否登陆
 			    needDataEmpty: false, //不需要判断data是否为空
+			    async: false,
 			    callbackDone: function(json){  //成功后执行的函数
 
-			        //展示成长值并画图
-			        CircleProcess(
-			        	document.getElementById("canvas"),{
-			        	"size": "half",
-			            "percent": 40,
-			            "process": 0, 
-			            "startSmallCircle":{"show": false},
-			            "endSmallCircle":{"show": false},
-			            "processText": {"show": true, }
-			        });
+			    	var num = json.data;
 
+			    	var n_obj = [{ //成长值区间查询
+					    url: site_url.selectCustomerGrowthTier_api,
+					    data: {},
+					    needLogin:true, //需要判断是否登陆
+					    needDataEmpty: false, //不需要判断data是否为空
+					    callbackDone: function(json){  //成功后执行的函数
+
+					    	var data = json.data;
+
+					    	if( data.length ){
+						        //判断区间
+						        $.each( data, function(i, el){
+						        	if( num <= el.valueUp && num >= el.valueDown ){
+						        		//展示成长值并画图
+						        		CircleProcess(
+						        			document.getElementById("canvas"),{
+						        			"size": "half",
+						        		    "percent": 40,
+						        		    "process": 0, 
+						        		    "startSmallCircle":{"show": false},
+						        		    "endSmallCircle":{"show": false},
+						        		    "processText": {"show": true, }
+						        		});
+						        	}
+						        })
+			                    
+					    	}
+					    }
+					}]
+					$.ajaxLoading(n_obj);
 			    }
 			},{ //成长值流水
 			    url: site_url.queryGrowthDetailList_api,
@@ -85,10 +107,6 @@ $(function(){
 		            	//输入模板 
 	                    $('.list').append(html);
 			    	}
-
-			        
-
-
 			    }
 			}];
 
@@ -188,7 +206,11 @@ $(function(){
 		events:function(){
 			var that=this;
 			
-		
+			//点击成长值规则
+			$('.regSpan').on('click', function() {
+			    window.location.href = '/personal/views/growth/growthReg.html';
+			})
+
 		}
 	};
 	growthValue.webinit();
