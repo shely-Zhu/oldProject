@@ -91,7 +91,10 @@ $(function(){
 			    }
 			},{ //成长值流水
 			    url: site_url.queryGrowthDetailList_api,
-			    data: {},
+			    data: {
+			    	pageNo: 1,
+			    	pageSize: 10
+			    },
 			    needLogin:true, //需要判断是否登陆
 			    needDataEmpty: false, //不需要判断data是否为空
 			    callbackDone: function(json){  //成功后执行的函数
