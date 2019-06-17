@@ -14,10 +14,12 @@
 	<title>我的成长值</title>
 </head>
 <body>
-	<!-- @@include('../../common/views/load.html') -->
+	@@include('../../../common/views/load.html')
+	<!-- 加载中loading -->
+	<!-- @@include('../../../common/views/loading/listLoading.html') -->
 	<section class="container">
 		<!-- 我的成长值页面的占比 -->
-		<div class="box">
+		<div class="boxWrap">
 			<span class="regSpan">成长值规则</span>
 			<canvas class="lineWrapper" id="canvas"></canvas> 
 		  		<!--净值曲线-->
@@ -25,20 +27,23 @@
 		<div class="title">
 			成长值记录
 		</div>
+		
+
 		<div class="list">
-
-			<div class="without" id="emptyBox" style="display:none;">
-				<div class="box vertical center">
-					<p class="iconfont">&#xe603;</p>
-					<p class="text">暂无数据</p>
-				</div>
+			<div class="contentWrapper">
+				<ul class="mui-table-view">
+					<li class="mui-table-view-cell">
+						<!--放置列表-->
+					</li>
+				</ul>
+				@@include('../../../common/views/goTop.html')
 			</div>
-
 		</div>
 	</section>
 
 	 
 	@@include('@pathInclude/views/footer.html')
+	
 
 	<script id="template-pot" type="text/x-handlebars-template">
 		<ul>
