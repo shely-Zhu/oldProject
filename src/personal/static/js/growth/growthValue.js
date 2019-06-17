@@ -37,9 +37,7 @@ $(function(){
 			//请求成长值数据
 			that.getData();
 
-			//
-			//that.drawAction();
-
+			
 
 			that.events();
 		},
@@ -56,7 +54,7 @@ $(function(){
 			    async: false,
 			    callbackDone: function(json){  //成功后执行的函数
 
-			    	var num = json.data;
+			    	var num = json.data.growthValue;
 
 			    	var n_obj = [{ //成长值区间查询
 					    url: site_url.selectCustomerGrowthTier_api,
@@ -71,16 +69,50 @@ $(function(){
 						        //判断区间
 						        $.each( data, function(i, el){
 						        	if( num <= el.valueUp && num >= el.valueDown ){
+
+						        		$('.num').html(num);
+
+						        		//角度计算
+						        		var deg = (Number(num) - Number(el.valueDown))/(Number(el.valueUp) - Number(el.valueDown));
+
+						        		//原始角度0.85-2.15
+						        		
+						        		deg = 0.85 + (2.15-0.85)*(Number(deg));
+
+						        		that.drawAction( deg );
+
+						        		//画线
+						        		that.drawLine( deg );
+
+						        		//设置角度
+						        		// var deg = (Number(num) - Number(el.valueDown))/(Number(el.valueUp) - Number(el.valueDown))
+
+						        		// deg = Number(deg) * 180; 
+
+						        		// deg = -135 + deg;
+
+						        		// if( deg > -135 && deg <= 45 ){
+						        		// 	//在这个角度内的时候旋转
+						        		// 	$('.circleWrapper .leftcircle').css('-webkit-transform', 'rotate('+ deg + 'deg);')
+						        		// }
+
+						        		// if( deg <= -135){
+						        		// 	//在这个角度内，表示为0
+						        		// 	$('.circleWrapper .circleLeft').css('background', '#FFF3D1')
+						        		// }
+
+						        		
+
 						        		//展示成长值并画图
-						        		CircleProcess(
-						        			document.getElementById("canvas"),{
-						        			"size": "half",
-						        		    "percent": 40,
-						        		    "process": 0, 
-						        		    "startSmallCircle":{"show": false},
-						        		    "endSmallCircle":{"show": false},
-						        		    "processText": {"show": true, }
-						        		});
+						        		// CircleProcess(
+						        		// 	document.getElementById("canvas"),{
+						        		// 	"size": "half",
+						        		//     "percent": 40,
+						        		//     "process": 0, 
+						        		//     "startSmallCircle":{"show": false},
+						        		//     "endSmallCircle":{"show": false},
+						        		//     "processText": {"show": true, }
+						        		// });
 						        	}
 						        })
 			                    
@@ -117,93 +149,89 @@ $(function(){
 			$.ajaxLoading(obj);
 		},
 
-		drawAction:function() {
+		drawAction:function( deg ) {
 			var that = this;
-			var timeTicket;
+			var bg = document.getElementById('xxb');
+			var ctx = bg.getContext('2d');
 
-			// var name = '单位净值';
+			//红色
+			ctx.beginPath();
+			//在(100,100)处逆时针画一个半径为50，角度从0到180°的弧线
+			//ctx.arc(100,100,50,0*Math.PI,1*Math.PI,true);
+			ctx.lineWidth= 8;
+			ctx.strokeStyle='#FFF3D1';
+			var grd = ctx.createLinearGradient(0,0,100,0);//从左到右
+			grd.addColorStop(0,"#E5942F"); //起始颜色
+			grd.addColorStop(1,"#FFF3D1"); //终点颜色
+			//ctx.strokeStyle=grd;
+			//ctx.stroke();
+			//ctx.fillStyle='#00ff00';
+			ctx.fillStyle=grd;
+			//在(100,100)出逆时针画一个半径为50的实心圆
+			//ctx.arc(100,100,50,0*Math.PI,2*Math.PI,true);
+			//ctx.fill();
+			//在(100,100)出顺时针画一个半径为50的3/4圆弧
+			ctx.arc(100,100,52,0.85*Math.PI,2.15*Math.PI,false);
+			//ctx.arc(100,75,50,0,1.5*Math.PI)
+			ctx.stroke();
 
-			// 基于准备好的dom，初始化echarts实例 
-			var myChart = echarts.init($('.lineWrapper')[0]);
+			//黑色
+			ctx.beginPath();
+			//在(100,100)处逆时针画一个半径为50，角度从0到180°的弧线
+			//ctx.arc(100,100,50,0*Math.PI,1*Math.PI,true);
+			ctx.lineWidth= 8;
+			ctx.strokeStyle='#E5942F';
+			var grd = ctx.createLinearGradient(0,0,100,0);//从左到右
+			grd.addColorStop(0,"#E5942F"); //起始颜色
+			grd.addColorStop(1,"#FFF3D1"); //终点颜色
+			//ctx.strokeStyle=grd;
+			//ctx.stroke();
+			//ctx.fillStyle='#00ff00';
+			ctx.fillStyle=grd;
+			//在(100,100)出逆时针画一个半径为50的实心圆
+			//ctx.arc(100,100,50,0*Math.PI,2*Math.PI,true);
+			//ctx.fill();
+			//在(100,100)出顺时针画一个半径为50的3/4圆弧
+			
+			ctx.arc(100,100,52,0.85*Math.PI, Number(deg)*Math.PI,false);
+			
+			//ctx.arc(100,75,50,0*Math.PI,1.5*Math.PI)
+			ctx.stroke();
 
-			var option = {
 
-				tooltip : {
-					formatter: "{a} <br/>{b} : {c}%"
-				},
-				 toolbox: {
-					show : true,
-					feature : {
-						mark : {show: true},
-						restore : {show: true},
-						saveAsImage : {show: true}
-					}
-				},
-				series : [
-					{
-						name:'成长值',
-						type:'gauge',
-						splitNumber: 10,       // 分割段数，默认为5
-						radius:'75%',          //仪表盘半径，可以是相对于容器高宽中较小的一项的一半的百分比，也可以是绝对的数值。
-						min:'0',
-						max:'800',
-						axisLine: {            // 坐标轴线
-							lineStyle: {       // 属性lineStyle控制线条样式
-								color: [[0.2, '#228b22'],[0.8, '#48b'],[1, '#ff4500']], 
-								width: 8
-							}
-						},
-						axisTick: {            // 坐标轴小标记
-							splitNumber: 10,   // 每份split细分多少段
-							length :12,        // 属性length控制线长
-							lineStyle: {       // 属性lineStyle控制线条样式
-								color: 'auto'
-							}
-						},
-						axisLabel: {           // 坐标轴文本标签，详见axis.axisLabel
-							textStyle: {       // 其余属性默认使用全局文本样式，详见TEXTSTYLE
-								color: 'auto'
-							},
-						},
-						splitLine: {           // 分隔线
-							show: true,        // 默认显示，属性show控制显示与否
-							length :30,         // 属性length控制线长
-							lineStyle: {       // 属性lineStyle（详见lineStyle）控制线条样式
-								color: 'auto'
-							}
-						},
-						pointer : {
-							width : 5
-						},
-						title : {
-							show : true,
-							offsetCenter: [0, '-40%'],       // x, y，单位px
-							textStyle: {       // 其余属性默认使用全局文本样式，详见TEXTSTYLE
-								fontWeight: 'bolder'
-							}
-						},
-						detail : {
-							formatter:'{value}%',
-							textStyle: {       // 其余属性默认使用全局文本样式，详见TEXTSTYLE
-								color: 'auto',
-								fontWeight: 'bolder'
-							}
-						},
-						emphasis: {
-							borderWidth: 5,
-						},
-						data:[{value:20, name: '完成率'}]
-					}
-				]
-			};
-			clearInterval(timeTicket);
-
-			timeTicket = setInterval(function (){
-			    option.series[0].data[0].value = (Math.random()*100).toFixed(2) - 0;
-			    myChart.setOption(option,true);
-			},2000)
-				                 
+			// for(var i=0;i<12;i++){
+			//     ctx.beginPath();
+			//     ctx.moveTo(400+(Math.sin(i*30*deg)*200),400-(Math.cos(i*30*deg)*200));
+			//     ctx.lineTo(400+(Math.sin(i*30*deg)*(200+20)),400-(Math.cos(i*30*deg)*(200+20)));
+			//     ctx.stroke()
+			//   } 
 		},
+
+		drawLine: function(){
+			var that = this;
+
+			var bg = document.getElementById('line');
+			var ctx = bg.getContext('2d');
+			ctx.lineWidth = 7;
+			var radius = bg.width / 2;
+
+			ctx.translate(radius, radius); // 改变旋转中心
+			ctx.beginPath();
+			// ctx.arc(0, 0, radius * 2 / 3, 0, Math.PI / 30);
+			ctx.strokeStyle = '#E5942F';
+			ctx.stroke();
+
+			ctx.closePath();
+			for (var i = 0; i < 60; i++) {
+			    ctx.beginPath();
+			    ctx.rotate(8 * Math.PI / 180);
+			    ctx.arc(0, 0, radius / 3 + 6, 0, Math.PI / 100);
+			    ctx.strokeStyle = (i < 18 || i > 47) ? 'transparent' : '#E5942F';
+			    ctx.stroke();
+			    ctx.closePath();
+			}
+		},
+
 
 
 		events:function(){
