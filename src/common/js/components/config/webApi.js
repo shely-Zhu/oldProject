@@ -84,7 +84,12 @@ module.exports = function() {
    /*-------------------银杏研究相关 ------------------------------*/
   
    
-
+    //成长值查询
+    this.queryGrowthValue_api = http_url.web_url + '/account/queryGrowthValue';
+    //成长值流水
+    this.queryGrowthDetailList_api = http_url.web_url + '/account/queryGrowthDetailList';
+    //成长值区间
+    this.selectCustomerGrowthTier_api = http_url.web_url + '/account/selectCustomerGrowthTier';
     
     
 };

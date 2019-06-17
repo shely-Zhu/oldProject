@@ -100,7 +100,7 @@ $(function(){
 			    callbackDone: function(json){  //成功后执行的函数
 
 			    	var data = json.data,
-			    		pageList = data.growthDetailList;
+			    		pageList = data.pageList;
 
 			    	if( pageList.length ){
 				        //展示列表

@@ -32,7 +32,6 @@ $(function(){
 			//请求成长值规则
 			that.getData();
 
-			that.events();
 		},
 
 		getData: function(){
