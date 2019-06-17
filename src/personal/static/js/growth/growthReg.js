@@ -40,14 +40,15 @@ $(function(){
 
 			//成长值规则查询
 			var obj = [{ 
-			    url: site_url.queryGrowthValue_api,
-			    data: {},
-			    needLogin:true, //需要判断是否登陆
+			    url: site_url.findLatestContentByCategory_api,
+			    data: {
+                    "category": "rule_growthValue",
+                },
+			    contentTypeSearch: true, 
 			    needDataEmpty: false, //不需要判断data是否为空
-			    async: false,
 			    callbackDone: function(json){  //成功后执行的函数
 
-			    	var num = json.data;
+			    	var num = json.data.content;
 
 			    	$('.txt').html(num);
 			    }
