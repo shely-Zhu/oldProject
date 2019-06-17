@@ -243,59 +243,33 @@ $(function(){
 			var bg = document.getElementById('xxb');
 			var ctx = bg.getContext('2d');
 
+			//线头变圆
+			ctx.lineCap="round";
+
 			//红色
 			ctx.beginPath();
-			//在(100,100)处逆时针画一个半径为50，角度从0到180°的弧线
-			//ctx.arc(100,100,50,0*Math.PI,1*Math.PI,true);
 			ctx.lineWidth= 8;
 			ctx.strokeStyle='#FFF3D1';
 			var grd = ctx.createLinearGradient(0,0,100,0);//从左到右
 			grd.addColorStop(0,"#E5942F"); //起始颜色
 			grd.addColorStop(1,"#FFF3D1"); //终点颜色
-			//ctx.strokeStyle=grd;
-			//ctx.stroke();
-			//ctx.fillStyle='#00ff00';
 			ctx.fillStyle=grd;
-			//在(100,100)出逆时针画一个半径为50的实心圆
-			//ctx.arc(100,100,50,0*Math.PI,2*Math.PI,true);
-			//ctx.fill();
-			//在(100,100)出顺时针画一个半径为50的3/4圆弧
 			ctx.arc(100,100,52,0.85*Math.PI,2.15*Math.PI,false);
-			//ctx.arc(100,75,50,0,1.5*Math.PI)
 			ctx.stroke();
 
 			//黑色
 			ctx.beginPath();
-			//在(100,100)处逆时针画一个半径为50，角度从0到180°的弧线
-			//ctx.arc(100,100,50,0*Math.PI,1*Math.PI,true);
 			ctx.lineWidth= 8;
 			ctx.strokeStyle='#E5942F';
 			var grd = ctx.createLinearGradient(0,0,100,0);//从左到右
 			grd.addColorStop(0,"#E5942F"); //起始颜色
 			grd.addColorStop(1,"#FFF3D1"); //终点颜色
-			//ctx.strokeStyle=grd;
-			//ctx.stroke();
-			//ctx.fillStyle='#00ff00';
 			ctx.fillStyle=grd;
-			//在(100,100)出逆时针画一个半径为50的实心圆
-			//ctx.arc(100,100,50,0*Math.PI,2*Math.PI,true);
-			//ctx.fill();
-			//在(100,100)出顺时针画一个半径为50的3/4圆弧
-			
 			ctx.arc(100,100,52,0.85*Math.PI, Number(deg)*Math.PI,false);
-			
-			//ctx.arc(100,75,50,0*Math.PI,1.5*Math.PI)
 			ctx.stroke();
-
-
-			// for(var i=0;i<12;i++){
-			//     ctx.beginPath();
-			//     ctx.moveTo(400+(Math.sin(i*30*deg)*200),400-(Math.cos(i*30*deg)*200));
-			//     ctx.lineTo(400+(Math.sin(i*30*deg)*(200+20)),400-(Math.cos(i*30*deg)*(200+20)));
-			//     ctx.stroke()
-			//   } 
 		},
 
+		//画转圈的直线
 		drawLine: function(){
 			var that = this;
 
