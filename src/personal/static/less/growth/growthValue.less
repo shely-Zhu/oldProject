@@ -104,10 +104,19 @@ html,body{
 			position: relative;
 
 			& > .mui-table-view{
+
+				&:after{
+					height: 0;
+				}
+				
 				& > li{
 					padding-left: 0;
 					padding-right: 0;
 					padding-top: 0;
+
+					&:after{
+						height: 0;
+					}
 				}
 			}
 		}
