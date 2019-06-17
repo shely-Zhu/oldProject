@@ -1,10 +1,12 @@
 // 我的成长值  zyping 2019-6-11
 
-@import url("../../../include/css/mui.min.css");
+@import url("../../../../include/css/mui.min.css");
 @import url('@pathCommonLess/mui/resetMUI.less');
 @import url("@pathCommonLess/reset.less");
 @import url("@pathCommonLess/color.less"); 
 @import url("@pathCommonLess/baseClass.less"); 
+//回到顶部的样式
+@import url("@pathCommonLess/components/goTopMui.less");
 
 html,body{
 	width: 100%;
@@ -35,57 +37,11 @@ html,body{
 	z-index: 105;
 }
 
-// .circleProgress_wrapper{
-// 	width: 400px;
-// 	overflow: hidden;
-// 	position: relative;
-// 	height: 200px;
-
-// 	.wrapper{
-// 	    width: 200px;
-// 	    height: 200px;
-// 	    position: absolute;
-// 	    top:0;
-// 	    overflow: hidden;
-// 	}
-// 	.right{
-// 	    right:0;
-// 	    transform: rotate(-90deg);
-// 	}
-// 	.left{
-// 	    left:0;
-// 	}
-
-// 	.circleProgress{
-// 	    width: 160px;
-// 	    height: 160px;
-// 	    border:20px solid transparent;
-// 	    border-radius: 50%;
-// 	    position: absolute;
-// 	    top:0;
-// 	    -webkit-transform: rotate(45deg);
-// 	}
-// 	.leftcircle{
-// 	    border-bottom:20px solid green;
-// 	    border-left:20px solid green;
-// 	    left:0;
-// 	}
-// 	.rightcircle{
-// 	    border-top:20px solid green;
-// 	    border-right:20px solid green;
-// 	    right:0;
-// 	}
-
-
-
-// }
-
-
 .container{
 	position: relative;
 	width: 100%;
 
-	.box{
+	.boxWrap{
 		//background: #ccc;
     	height: 15rem;
     	background: url('/personal/static/img/growth/bg.png');
@@ -279,8 +235,17 @@ html,body{
 		padding-left: 1.6rem;
 	}
 
+
 	.list{
+		position: relative;
 		background: #fff;
+		overflow: hidden;
+
+
+		.contentWrapper{
+			height: inherit;
+			position: relative;
+		}
 
 		.data{
 			padding-left: 1.6rem;

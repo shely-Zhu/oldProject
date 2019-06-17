@@ -124,7 +124,6 @@ var splitUrl = require('./components/splitUrl.js')();
             $.each(param, function(i, el) {
                 obj.push($.extend({}, defaults, el));
             })
-
             //发送ajax请求
             var ajaxFunc = function(obj) {
                 var ajax = $.Deferred(); //声明一个deferred对象
