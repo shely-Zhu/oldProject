@@ -63,7 +63,7 @@ $(function(){
 			    url: site_url.queryGrowthValue_api,
 			    data: {},
 			    needLogin:true, //需要判断是否登陆
-			    needDataEmpty: false, //不需要判断data是否为空
+			    //needDataEmpty: false, //不需要判断data是否为空
 			    async: false,
 			    callbackDone: function(json){  //成功后执行的函数
 
@@ -133,6 +133,10 @@ $(function(){
 					    }
 					}]
 					$.ajaxLoading(n_obj);
+			    },
+			    callbackNoData: function( json ){
+			    	//数据为空
+			    	
 			    }
 			}];
 
@@ -148,47 +152,52 @@ $(function(){
 						pageSize: 10
 					},
 					needLogin:true, //需要判断是否登陆
-					needDataEmpty: false, //不需要判断data是否为空
+					//needDataEmpty: false, //不需要判断data是否为空
 					callbackDone: function(json){  //成功后执行的函数
 	
 						that.jsonData = json.data;
 
-                    if (!$.util.objIsEmpty(that.jsonData.pageList)) {
-                        //有数据，拼模板
+	                    if (!$.util.objIsEmpty(that.jsonData.pageList)) {
+	                        //有数据，拼模板
 
-                        var source = $('#template-pot').html(),
-                            template = Handlebars.compile(source);
-                        that.html = template(that.jsonData.pageList);
+	                        var source = $('#template-pot').html(),
+	                            template = Handlebars.compile(source);
+	                        that.html = template(that.jsonData.pageList);
 
-                        setTimeout(function() {
-                            if (that.jsonData.pageList.length < 20) {
-                                //当数据少于that.setting.ajaxParams.pageSize时	
-                                t.endPullupToRefresh(true);
-                            } else {
-                                t.endPullupToRefresh(false);
-                                //去掉mui-pull-bottom-pocket的mui-hidden
-                                //$('.contentWrapper').find('.mui-pull-bottom-pocket').removeClass('mui-hidden');
-                            }
-                            that.page++;
-							$('.list').find('.contentWrapper .mui-table-view-cell').append(that.html);
-							$('.contentWrapper').find('.mui-pull-bottom-pocket').removeClass('mui-hidden');
-							$('.contentWrapper').find('.mui-pull-bottom-pocket').removeClass('mui-hidden');
-                        }, 2000)
+	                        setTimeout(function() {
+	                            if (that.jsonData.pageList.length < 20) {
+	                                //当数据少于that.setting.ajaxParams.pageSize时	
+	                                t.endPullupToRefresh(true);
+	                            } else {
+	                                t.endPullupToRefresh(false);
+	                                //去掉mui-pull-bottom-pocket的mui-hidden
+	                                //$('.contentWrapper').find('.mui-pull-bottom-pocket').removeClass('mui-hidden');
+	                            }
+	                            that.page++;
+								$('.list').find('.contentWrapper .mui-table-view-cell').append(that.html);
+								$('.contentWrapper').find('.mui-pull-bottom-pocket').removeClass('mui-hidden');
+								$('.contentWrapper').find('.mui-pull-bottom-pocket').removeClass('mui-hidden');
+	                        }, 2000)
 
-                    } else {
-                        //显示没有数据
-                        //没有数据
-                        if (that.page == 1) {
-                            //第一页时
-                            $('.list .mui-table-view-cell').html(that.getElements.noData).css("boxShadow", "none");
-                            $('.list').find('.noData').show();
-                        } else {
-                            //其他页
-                            t.endPullupToRefresh(true);
-                            $('.contentWrapper').find('.mui-pull-bottom-pocket').removeClass('mui-hidden');
-                        }
-                    }
-					}
+	                    } else {
+	                        //显示没有数据
+	                        //没有数据
+	                        if (that.page == 1) {
+	                            //第一页时
+	                            $('.list .mui-table-view-cell').html(that.getElements.noData).css("boxShadow", "none");
+	                            $('.list').find('.noData').show();
+	                        } else {
+	                            //其他页
+	                            t.endPullupToRefresh(true);
+	                            $('.contentWrapper').find('.mui-pull-bottom-pocket').removeClass('mui-hidden');
+	                        }
+	                    }
+					},
+				    callbackNoData: function( json ){
+				    	//数据为空，显示暂无数据图标
+				    	$('.without').show();
+				    	$('.list').hide();
+				    }
 
 			}];
 			$.ajaxLoading(obj);

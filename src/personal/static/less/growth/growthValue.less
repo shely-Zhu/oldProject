@@ -13,6 +13,10 @@ html,body{
 	height: 100%;
 }
 
+body{
+	background: #fff;
+}
+
 #xxb{
 	width: 310px;
 	height: 310px;
@@ -90,6 +94,11 @@ html,body{
 		height: 4rem;
 		line-height: 4rem;
 		padding-left: 1.6rem;
+
+	}
+
+	& > .title{
+		background: #f2f2f2;
 	}
 
 
@@ -170,5 +179,21 @@ html,body{
 		}
 		
 	}
+
+		
+	//无数据
+	.without{
+		margin-top: 11.2rem;
+		color: @c001;
+		.iconfont{
+			font-size: 5.1rem;
+			color: @c001;
+		}
+		.text{
+			margin-top: 2rem;
+			font-size: 1.4rem;
+		}		
+	}
+
 
 }
