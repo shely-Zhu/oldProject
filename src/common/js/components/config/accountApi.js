@@ -27,4 +27,6 @@ module.exports = function() {
     this.recordList_api = http_url.account_url + '/smartInvestment/recordList';
     // 恒小智-组合交易账号查询
     this.combinAccList_api = http_url.account_url + '/smartInvestment/tradAcctList';
+
+    
 };
