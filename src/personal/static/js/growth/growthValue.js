@@ -27,6 +27,9 @@ var tipAction = require('@pathCommonJsCom/tipAction.js');
 
 $(function(){
 
+	var wrapHeight = $('.boxWrap').height(),
+		wrapWidth = $('.boxWrap').width();
+
 	var growthValue={
 
 		page : 1,
@@ -36,8 +39,15 @@ $(function(){
 			pullUp : $("#pullUp"),//上拉加载按钮
 			emptyBox : $('#emptyBox'),
 			listLoading: $('.listLoading'), //所有数据区域，第一次加载的loading结构
-
 		}, 
+
+		wrapNum: {
+			height: wrapHeight ,
+			width: wrapWidth ,
+			r: ( Number( wrapWidth ) * 0.16) ,  //画圆半径 
+			hr : Number( wrapHeight / 2 ),   //圆心位置y
+			wr : Number( wrapWidth / 2 )  //圆心位置x
+		},
 
 		webinit:function(){  
 			var that = this;
@@ -46,6 +56,8 @@ $(function(){
             if (!$('.list').hasClass('setHeight')) {
                 $('.list').height(height).addClass('setHeight');
             }
+
+            $('#xxb, #line').attr('height', that.wrapNum.height ).attr('width', that.wrapNum.width );
 
 			//请求成长值数据
 			that.getData();
@@ -255,6 +267,11 @@ $(function(){
 			//线头变圆
 			ctx.lineCap="round";
 
+			//圆心半径
+			
+
+
+
 			//红色
 			ctx.beginPath();
 			ctx.lineWidth= 8;
@@ -263,7 +280,7 @@ $(function(){
 			grd.addColorStop(0,"#E5942F"); //起始颜色
 			grd.addColorStop(1,"#FFF3D1"); //终点颜色
 			ctx.fillStyle=grd;
-			ctx.arc(100,100,52,0.85*Math.PI,2.15*Math.PI,false);
+			ctx.arc(that.wrapNum.wr, that.wrapNum.hr + 20, that.wrapNum.r, 0.85*Math.PI,2.15*Math.PI,false);
 			ctx.stroke();
 
 			//黑色
@@ -274,7 +291,7 @@ $(function(){
 			grd.addColorStop(0,"#E5942F"); //起始颜色
 			grd.addColorStop(1,"#FFF3D1"); //终点颜色
 			ctx.fillStyle=grd;
-			ctx.arc(100,100,52,0.85*Math.PI, Number(deg)*Math.PI,false);
+			ctx.arc(that.wrapNum.wr, that.wrapNum.hr + 20, that.wrapNum.r, 0.85*Math.PI, Number(deg)*Math.PI,false);
 			ctx.stroke();
 		},
 
@@ -287,7 +304,7 @@ $(function(){
 			ctx.lineWidth = 7;
 			var radius = bg.width / 2;
 
-			ctx.translate(radius, radius); // 改变旋转中心
+			ctx.translate(that.wrapNum.wr, that.wrapNum.hr + 20); // 改变旋转中心
 			ctx.beginPath();
 			// ctx.arc(0, 0, radius * 2 / 3, 0, Math.PI / 30);
 			ctx.strokeStyle = '#E5942F';
@@ -297,7 +314,7 @@ $(function(){
 			for (var i = 0; i < 60; i++) {
 			    ctx.beginPath();
 			    ctx.rotate(8 * Math.PI / 180);
-			    ctx.arc(0, 0, radius / 3 + 6, 0, Math.PI / 100);
+			    ctx.arc(0, 0, that.wrapNum.r - 14, 0, Math.PI / 100);
 			    ctx.strokeStyle = (i < 18 || i > 47) ? 'transparent' : '#E5942F';
 			    ctx.stroke();
 			    ctx.closePath();
