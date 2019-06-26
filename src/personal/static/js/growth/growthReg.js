@@ -42,6 +42,7 @@ $(function(){
 			    url: site_url.findLatestContentByCategory_api,
 			    data: {
                     "category": "rule_growthValue",
+                    "groupType":"contentCategory"
                 },
 			    contentTypeSearch: true, 
 			    needDataEmpty: false, //不需要判断data是否为空
