@@ -310,7 +310,7 @@ $(function(){
 			var that=this;
 			
 			//点击成长值规则
-			$('.regSpan').on('click', function() {
+			mui("body").on('tap', '.regSpan' , function() {
 			    window.location.href = '/personal/views/growth/growthReg.html';
 			})
 

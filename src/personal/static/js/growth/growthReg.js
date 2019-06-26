@@ -41,8 +41,7 @@ $(function(){
 			var obj = [{ 
 			    url: site_url.findLatestContentByCategory_api,
 			    data: {
-                    "category": "rule_growthValue",
-                    "groupType":"contentCategory"
+                    "category": "rule_growthValue"
                 },
 			    contentTypeSearch: true, 
 			    needDataEmpty: false, //不需要判断data是否为空
