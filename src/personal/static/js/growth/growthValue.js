@@ -44,7 +44,7 @@ $(function(){
 		wrapNum: {
 			height: wrapHeight ,
 			width: wrapWidth ,
-			r: ( Number( wrapWidth ) * 0.16) ,  //画圆半径 
+			r: ( Number( wrapWidth ) * 0.16) + (Number( $('.boxWrap .num').width() )/2) ,  //画圆半径 
 			hr : Number( wrapHeight / 2 ),   //圆心位置y
 			wr : Number( wrapWidth / 2 )  //圆心位置x
 		},
@@ -97,47 +97,25 @@ $(function(){
 
 						        		$('.num').html(num);
 
+						        		//重新计算圆圈半径
+						        		that.wrapNum.r = ( Number( wrapWidth ) * 0.16) + (Number( $('.boxWrap .num').width() ) / 2 * 0.16);
+
 						        		//角度计算
-						        		var deg = (Number(num) - Number(el.valueDown))/(Number(el.valueUp) - Number(el.valueDown));
+						        		var deg = (Number(num) - Number(el.valueDown))/(Number(el.valueUp) - Number(el.valueDown)),
+						        			newDeg = 0.85 + (2.15-0.85)*(Number(deg));
 
 						        		//原始角度0.85-2.15
 						        		
-						        		deg = 0.85 + (2.15-0.85)*(Number(deg));
-
-						        		that.drawAction( deg );
+						        		if( deg == 0 ){
+						        			//为0时，不画黑线
+						        			that.drawAction( 0 );
+						        		}
+						        		else{
+						        			that.drawAction( newDeg );
+						        		}
 
 						        		//画线
-						        		that.drawLine( deg );
-
-						        		//设置角度
-						        		// var deg = (Number(num) - Number(el.valueDown))/(Number(el.valueUp) - Number(el.valueDown))
-
-						        		// deg = Number(deg) * 180; 
-
-						        		// deg = -135 + deg;
-
-						        		// if( deg > -135 && deg <= 45 ){
-						        		// 	//在这个角度内的时候旋转
-						        		// 	$('.circleWrapper .leftcircle').css('-webkit-transform', 'rotate('+ deg + 'deg);')
-						        		// }
-
-						        		// if( deg <= -135){
-						        		// 	//在这个角度内，表示为0
-						        		// 	$('.circleWrapper .circleLeft').css('background', '#FFF3D1')
-						        		// }
-
-						        		
-
-						        		//展示成长值并画图
-						        		// CircleProcess(
-						        		// 	document.getElementById("canvas"),{
-						        		// 	"size": "half",
-						        		//     "percent": 40,
-						        		//     "process": 0, 
-						        		//     "startSmallCircle":{"show": false},
-						        		//     "endSmallCircle":{"show": false},
-						        		//     "processText": {"show": true, }
-						        		// });
+						        		that.drawLine( );
 						        	}
 						        })
 			                    
@@ -267,11 +245,6 @@ $(function(){
 			//线头变圆
 			ctx.lineCap="round";
 
-			//圆心半径
-			
-
-
-
 			//红色
 			ctx.beginPath();
 			ctx.lineWidth= 8;
@@ -283,16 +256,19 @@ $(function(){
 			ctx.arc(that.wrapNum.wr, that.wrapNum.hr + 20, that.wrapNum.r, 0.85*Math.PI,2.15*Math.PI,false);
 			ctx.stroke();
 
-			//黑色
-			ctx.beginPath();
-			ctx.lineWidth= 8;
-			ctx.strokeStyle='#E5942F';
-			var grd = ctx.createLinearGradient(0,0,100,0);//从左到右
-			grd.addColorStop(0,"#E5942F"); //起始颜色
-			grd.addColorStop(1,"#FFF3D1"); //终点颜色
-			ctx.fillStyle=grd;
-			ctx.arc(that.wrapNum.wr, that.wrapNum.hr + 20, that.wrapNum.r, 0.85*Math.PI, Number(deg)*Math.PI,false);
-			ctx.stroke();
+			if( deg != 0){
+				//黑色
+				ctx.beginPath();
+				ctx.lineWidth= 8;
+				ctx.strokeStyle='#E5942F';
+				var grd = ctx.createLinearGradient(0,0,100,0);//从左到右
+				grd.addColorStop(0,"#E5942F"); //起始颜色
+				grd.addColorStop(1,"#FFF3D1"); //终点颜色
+				ctx.fillStyle=grd;
+				ctx.arc(that.wrapNum.wr, that.wrapNum.hr + 20, that.wrapNum.r, 0.85*Math.PI, Number(deg)*Math.PI,false);
+				ctx.stroke();
+			}
+			
 		},
 
 		//画转圈的直线
@@ -311,6 +287,7 @@ $(function(){
 			ctx.stroke();
 
 			ctx.closePath();
+
 			for (var i = 0; i < 60; i++) {
 			    ctx.beginPath();
 			    ctx.rotate(8 * Math.PI / 180);

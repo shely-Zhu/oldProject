@@ -8,7 +8,7 @@ var Mock = require('mockjs');
 
 var incomeDetail = Mock.mock({ 
 	"data": {
-        "growthValue": "400",
+        "growthValue": "0",
     },
     "message": "操作成功！",
     "status": "0000"
