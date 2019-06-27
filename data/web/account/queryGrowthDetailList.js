@@ -15,7 +15,7 @@ var incomeDetail = Mock.mock({
         	"growthDetail": 1,
         	"growthDesc": "成长值描述",
         	"growthDate": "2019-08-22",
-        	"growthIndate": '成长值有效期'
+        	"growthIndate": ''
         }],
     },
     "message": "操作成功！",
