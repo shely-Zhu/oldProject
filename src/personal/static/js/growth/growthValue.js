@@ -152,11 +152,12 @@ $(function(){
 
 	                        var source = $('#template-pot').html(),
 	                            template = Handlebars.compile(source);
+	                        
 	                        that.html = template(that.jsonData.pageList);
 
-	                        setTimeout(function() {
-	                            if (that.jsonData.pageList.length < 20) {
-	                                //当数据少于that.setting.ajaxParams.pageSize时	
+	                        //setTimeout(function() {
+	                            if (that.page == that.jsonData.pageItems.totalPages ) {
+	                                //最后一页
 	                                t.endPullupToRefresh(true);
 	                            } else {
 	                                t.endPullupToRefresh(false);
@@ -167,7 +168,7 @@ $(function(){
 								$('.list').find('.contentWrapper .mui-table-view-cell').append(that.html);
 								$('.contentWrapper').find('.mui-pull-bottom-pocket').removeClass('mui-hidden');
 								$('.contentWrapper').find('.mui-pull-bottom-pocket').removeClass('mui-hidden');
-	                        }, 2000)
+	                        //}, 2000)
 
 	                    } else {
 	                        //显示没有数据
