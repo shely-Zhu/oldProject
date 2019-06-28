@@ -175,8 +175,8 @@ $(function(){
 	                        //没有数据
 	                        if (that.page == 1) {
 	                            //第一页时
-	                            $('.list .mui-table-view-cell').html(that.getElements.noData).css("boxShadow", "none");
-	                            $('.list').find('.noData').show();
+	                            $('.list').hide();
+	                            $('.without').show();
 	                        } else {
 	                            //其他页
 	                            t.endPullupToRefresh(true);
