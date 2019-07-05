@@ -165,4 +165,6 @@ module.exports = {
     './personal/static/js/growth/growthValue' : './src/personal/static/js/growth/growthValue.js',
     //成长值规则
     './personal/static/js/growth/growthReg' : './src/personal/static/js/growth/growthReg.js',
+    //jjs持仓明细
+    './commonResources/static/js/jjsAssets' : './src/commonResources/static/js/jjsAssets.js',
 }
