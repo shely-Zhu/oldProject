@@ -86,17 +86,7 @@ $(function () {
                         $("#pageLists").html(html);
 
                         var pageList = json.data.pageList;
-
-                        if(json.status == '1000'){
-                            //返回状态码为1000 无更多数据
-                            console.log("加载结束最后一页");
-
-                            that.flag = true;
-
-                        }else{
-                            that.page++ ;
-                        }
-
+                        that.page++ ;
                     }
                     else{
                         that.getElements.pullUp.hide();//上拉加载区域隐藏
@@ -104,6 +94,11 @@ $(function () {
                         that.getElements.emptyBox.show();//没有数据显示状态
                     }
 
+               },
+               callbackNoData: function(json){
+                    that.getElements.pullUp.hide();//上拉加载区域隐藏
+                    that.getElements.pageLists.hide();//展示数据区域隐藏
+                    that.getElements.emptyBox.show();//没有数据显示状态
                }
             },{
                 url: site_url.totalAssets_api,//查询总资产 从中拿到jjs的资产
