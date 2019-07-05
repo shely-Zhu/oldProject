@@ -114,7 +114,7 @@ $(function () {
 
                     }
                 },
-                callbackDone: function(data) {
+                callbackDone: function(json) {
                     console.log(JSON.stringify(json));
                     //拿到jjs资产并填充界面
                     that.getElements.totalCount.html(json.data.jJSAssets);
@@ -134,9 +134,6 @@ $(function () {
                 var height = windowHeight - $('.banner').height() - $('.bottomNav').height();
             }
             $('#wrapper').height(height).css('top', $('.banner').height() + 'px');
-
-            $('.publicOrPrivateBtn').removeClass('mui-active');
-            $('.smBtn').addClass('mui-active');
 
             //下拉加载更多
             var obj = {

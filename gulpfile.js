@@ -218,7 +218,7 @@ gulp.task('mockProxy', function() {
                     secure: false,
                 }),
                 proxy('/app',  {
-                    target: 'https://app.htjf4.com/',
+                    target: 'http://'+localIp + ':8088',
                     changeOrigin:true,
                     secure: false,
                 }),

@@ -19,6 +19,8 @@ var contentApi = require('../../../common/js/components/config/contentApi.js');
 var accountApi = require('../../../common/js/components/config/accountApi.js');
 // pc和wap共用文件
 var webApi = require('../../../common/js/components/config/webApi.js');
+// app相关
+var appApi = require('../../../common/js/components/config/appApi.js')
 
 // var jointApi = require('../../../common/js/components/config/jointApi.js');
 // app里面私募掉公募接口
@@ -37,10 +39,6 @@ window.site_url = {
   	goMyAccount_url : http_url.htjf_url+'/getAuthURL.action?redirect_uri:'+http_url.htjf_url+'/apis/wx/user/toMyAccount.action',
   	//产品查询
 	productSearch_api : 'http://jjs.chtwm.com/prdtq.do',
-	//jjs持仓明细查询
-	jjsAssetsDetail_api:http_url+'/app/account/jjs/queryAssetsDetailByPages',
-	//总资产查询 （公募+私募+金交所+组合+恒小智）
-	totalAssets_api: http_url+'/app/account/jjs/getTotalAssets',
 },
 
 //将各接口和跳转链接附到site_url上
@@ -50,5 +48,6 @@ pofApi.call(site_url);
 accountApi.call(site_url);
 contentApi.call(site_url);
 webApi.call(site_url);
+appApi.call(site_url);
 // crossApi.call(site_url);
 
