@@ -734,7 +734,7 @@ gulp.task('rootEnv', function() {
 
     if (options.env != '0' ) {
         //按照索引，0-明泽，1-股份，2-中岩，3-融泽，与root.js中的envOrigin参数对应
-        var rootName = ['chtfund', 'chtwm' , 'cathayrock', 'rongze'];
+        var rootName = ['chtfund', 'chtwm' , 'cathayrock', 'rongze', 'wealthhengtian'];
 
         for( var i = 0; i < rootName.length; i++){
 
