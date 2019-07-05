@@ -40,7 +40,7 @@ $(function () {
         //元素获取
         getElements: {
             pageLists: $("#pageLists"),//数据展示区域
-            emptyBox: $('#emptyBox'), //没有数据默认显示区块
+            noDaata: $('.noData'), //没有数据默认显示区块
             totalCount: $("#totalCount"),//总金额
             container: $(".container"),
             btnBind: $("#btnBind"),//解绑按钮
@@ -78,27 +78,18 @@ $(function () {
                     //jjs列表数据请求成功
                     console.log(JSON.stringify(json.data.pageList));
 
-                    if(!$.util.objIsEmpty(json.data.pageList) ){
-                        //加载模板数据
-                        var tplm = $("#dataLists").html(); 
-                        var template = Handlebars.compile(tplm);
-                        var html = template(json.data.pageList); 
-                        $("#pageLists").html(html);
-
-                        var pageList = json.data.pageList;
-                        that.page++ ;
-                    }
-                    else{
-                        that.getElements.pullUp.hide();//上拉加载区域隐藏
-                        that.getElements.pageLists.hide();//展示数据区域隐藏
-                        that.getElements.emptyBox.show();//没有数据显示状态
-                    }
+                    //加载模板数据
+                    var tplm = $("#dataLists").html(); 
+                    var template = Handlebars.compile(tplm);
+                    var html = template(json.data.pageList); 
+                    $("#pageLists").html(html);
+                    that.page++ ;
 
                },
-               callbackNoData: function(json){
+               callbackNoData: function(){
                     that.getElements.pullUp.hide();//上拉加载区域隐藏
                     that.getElements.pageLists.hide();//展示数据区域隐藏
-                    that.getElements.emptyBox.show();//没有数据显示状态
+                    that.getElements.noDaata.show();//没有数据显示状态
                }
             },{
                 url: site_url.totalAssets_api,//查询总资产 从中拿到jjs的资产
@@ -121,15 +112,6 @@ $(function () {
 
         pageAction: function () {
             var that = this;
-
-            //设置可拉动区域的高度
-            if (envOrigin == 1) {
-                var height = windowHeight - $('.banner').height() - $('.bottomNav').height() - $(".chtwm-pay").height();
-            } else {
-                var height = windowHeight - $('.banner').height() - $('.bottomNav').height();
-            }
-            $('#wrapper').height(height).css('top', $('.banner').height() + 'px');
-
             //下拉加载更多
             var obj = {
 
@@ -160,25 +142,22 @@ $(function () {
                     },
                     async: false, //同步
 
-                    callbackDone: function (json) {
-                        var tplm = $("#dataLists").html();
+                    callbackDone: function(json){  //成功后执行的函数
+                        //jjs列表数据请求成功
+                        console.log(JSON.stringify(json.data.pageList));
+    
+                        //加载模板数据
+                        var tplm = $("#dataLists").html(); 
                         var template = Handlebars.compile(tplm);
-                        var html = template(json.data.pageList);
-                        //输入模板 
-                        $("#pageLists").append(html);
-                        var pageList = json.data.pageList;
-
-                        if (json.status == '1000') {
-                            //状态码为1000 无更多数据
-                            console.log("加载结束最后一页");
-                            that.flag = true;
-
-                        } else {
-                            that.page++;
-                        }
-
-                        $('#pullUp').css('visibility', 'hidden');
-                    },
+                        var html = template(json.data.pageList); 
+                        $("#pageLists").html(html);
+                        that.page++ ;
+                   },
+                   callbackNoData: function(){
+                        that.getElements.pullUp.hide();//上拉加载区域隐藏
+                        that.getElements.pageLists.hide();//展示数据区域隐藏
+                        that.getElements.noDaata.show();//没有数据显示状态
+                   }
 
                 }];
                 $.ajaxLoading(obj);
