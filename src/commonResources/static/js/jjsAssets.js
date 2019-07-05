@@ -74,11 +74,8 @@ $(function () {
                 url: site_url.jjsAssetsDetail_api,//jjs持仓明细列表
                 data: param,
                 needLogin:true,//需要判断是否登陆
-                //needDataEmpty: false,//不需要判断data是否为空
                 callbackDone: function(json){  //成功后执行的函数
-
                     //jjs列表数据请求成功
-
                     console.log(JSON.stringify(json.data.pageList));
 
                     if(!$.util.objIsEmpty(json.data.pageList) ){
@@ -109,7 +106,7 @@ $(function () {
 
                }
             },{
-                url: site_url.JJSTotalAsset_api,//jjs资产查询
+                url: site_url.totalAssets_api,//查询总资产 从中拿到jjs的资产
                 data: {    
                     hmac: "",
                       //预留的加密信息   
@@ -119,7 +116,7 @@ $(function () {
                 },
                 callbackDone: function(data) {
                     console.log(JSON.stringify(json));
-
+                    //拿到jjs资产并填充界面
                     that.getElements.totalCount.html(json.data.jJSAssets);
                 },
 

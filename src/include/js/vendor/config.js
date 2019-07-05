@@ -37,8 +37,10 @@ window.site_url = {
   	goMyAccount_url : http_url.htjf_url+'/getAuthURL.action?redirect_uri:'+http_url.htjf_url+'/apis/wx/user/toMyAccount.action',
   	//产品查询
 	productSearch_api : 'http://jjs.chtwm.com/prdtq.do',
-	//20190704 新增其他资产(JJS)持仓列表查询接口
-	jjsAssetsDetail_api:http_url.account_url+'/jjs/queryAssetsDetailByPages' 
+	//jjs持仓明细查询
+	jjsAssetsDetail_api:http_url+'/app/account/jjs/queryAssetsDetailByPages',
+	//总资产查询 （公募+私募+金交所+组合+恒小智）
+	totalAssets_api: http_url+'/app/account/jjs/getTotalAssets',
 },
 
 //将各接口和跳转链接附到site_url上
