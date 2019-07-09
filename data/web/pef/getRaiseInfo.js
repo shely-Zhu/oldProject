@@ -11,10 +11,10 @@ var data=Mock.mock({
 	"code": "CS0000", 
 	"message": "处理成功！", 
 	"data":{
-		"accountName": "按实际法令阿雷规划局",//账户名称
-		"account": "3456895670954",//账户
-		"bankName": "阿双方各很快就额可怜人",//银行名称
-		"branchBankName": "阿然后搞卡尔太模糊了",//支行名称
+		"accountName": "招商证券恒天财富银杏尊享私募投资基金募集专户",//账户名称
+		"account": "3110310005174005501",//账户
+		"bankName": "中信银行",//银行名称
+		"branchBankName": "中信银行经济技术开发区支行",//支行名称
 		}
 });
 

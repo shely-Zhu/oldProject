@@ -59,7 +59,7 @@ $(function () {
 						document.addEventListener('copy',save);
 						document.execCommand('copy');
 						document.removeEventListener('copy',save);
-						alert('复制成功')
+						tipAction('复制成功');
 					}
 					$('.copy_btn').on("tap", function(){
 						//复制募集账户信息
@@ -67,23 +67,6 @@ $(function () {
 					})
 				},
 			}];
-
-			//点击复制 复制内容到剪贴板上
-			function Copy(str){
-				var save = function(e){
-					e.clipboardData.setData('text/plain',str);
-					e.preventDefault();
-				}
-				document.addEventListener('copy',save);
-				document.execCommand('copy');
-				document.removeEventListener('copy',save);
-				tipAction('复制成功');
-			}
-			$('.copy_btn').on("tap", function(){
-				//复制募集账户信息
-				Copy($('.collect_accont').text())
-			})
-
 			$.ajaxLoading(obj);
 		},
 
