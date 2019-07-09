@@ -19,6 +19,7 @@ var tipAction = require('../../../common/js/components/tipAction.js');
 require('../../../common/js/components/goTopMui.js');
 var splitUrl = require('../../../common/js/components/splitUrl.js');
 require('../../../common/js/components/goTopMui.js');
+var arg = require('@pathCommonJsCom/splitUrl.js')();
 
 $(function () {
 
@@ -40,7 +41,7 @@ $(function () {
 				data: {
 					hmac: "", //预留的加密信息
 					params: { //请求的参数信息
-						fundCode: that.fundCode	//产品代码
+						projectId: arg["fundCode"] // 产品代码
 					}
 				},
 				needLogin: true,//需要判断是否登陆
