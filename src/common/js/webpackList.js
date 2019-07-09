@@ -66,6 +66,8 @@ module.exports = {
     './productPrivate/static/js/prvRec': './src/productPrivate/static/js/prvRec.js',
     // 产品亮点
     './productPrivate/static/js/prvPic': './src/productPrivate/static/js/prvPic.js',
+    // 私募募集账户信息
+    './productPrivate/static/js/collectAcco': './src/productPrivate/static/js/collectAcco.js',
     //产品列表
     
     //风险测评调查问卷
