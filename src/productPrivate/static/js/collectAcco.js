@@ -39,10 +39,7 @@ $(function () {
 			var obj = [{
 				url: site_url.collect_info_api,
 				data: {
-					hmac: "", //预留的加密信息
-					params: { //请求的参数信息
-						projectId: arg["fundCode"] // 产品代码
-					}
+					projectId: arg["fundCode"] // 产品代码
 				},
 				needLogin: true,//需要判断是否登陆
 				callbackDone: function (json) {  //成功后执行的函数

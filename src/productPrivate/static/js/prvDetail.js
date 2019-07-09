@@ -95,7 +95,7 @@ var prvDetail = {
             obj = [];
 
         $(".invMartical").attr("href", "/productPrivate/views/PrvMarticial.html?fundCode=" + arg["fundCode"]);
-        $(".accMartical").attr("href", "/productPrivate/views/collectAcco.html");
+        $(".accMartical").attr("href", "/productPrivate/views/collectAcco.html?fundCode=" + arg["fundCode"]);
 
         obj = [{
             url: site_url.prvDetail_api, // queryProductDetail
