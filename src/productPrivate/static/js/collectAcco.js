@@ -38,6 +38,7 @@ $(function () {
 			var that = this;
 			var obj = [{
 				url: site_url.collect_info_api,
+				contentTypeSearch:true,
 				data: {
 					projectId: arg["fundCode"] // 产品代码
 				},
