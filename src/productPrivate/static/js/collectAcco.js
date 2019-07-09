@@ -60,7 +60,7 @@ $(function () {
 						document.removeEventListener('copy',save);
 						alert('复制成功')
 					}
-					$('.copy_btn').click(function(){
+					$('.copy_btn').on("tap", function(){
 						//复制募集账户信息
 						Copy($('.collect_accont').text())
 					})
