@@ -95,6 +95,7 @@ var prvDetail = {
             obj = [];
 
         $(".invMartical").attr("href", "/productPrivate/views/PrvMarticial.html?fundCode=" + arg["fundCode"]);
+        $(".accMartical").attr("href", "/productPrivate/views/collectAcco.html?fundCode=" + arg["fundCode"]);
 
         obj = [{
             url: site_url.prvDetail_api, // queryProductDetail
@@ -931,6 +932,11 @@ var prvDetail = {
 
         // 产品材料
         $('.invMartical').on('tap', function() {
+            window.location.href = $(this).attr("href");
+        });
+
+        // 募集账户
+        $('.accMartical').on('tap', function() {
             window.location.href = $(this).attr("href");
         });
 

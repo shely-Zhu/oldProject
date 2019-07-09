@@ -1,0 +1,58 @@
+<!--/**
+ * 募集账户页面
+ * @author  shiyunrui 2019-7-8
+ */-->
+
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="applicable-device" content="mobile">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="stylesheet" href="/productPrivate/static/css/prdPrv.css">
+    <title>募集账户</title>
+</head>
+
+<body>
+    @@include('../../common/views/load.html')
+    <!-- 加载中loading -->
+    @@include('../../common/views/loading/listLoading.html')
+
+    <!-- 暂无数据 -->
+    @@include('../../common/views/noData.html')
+
+    <!-- 募集账户 -->
+    <div class="account-con">
+        <table>
+            <tr>
+                <td class="title">募集户名</td>
+                <td class="content collect_userName">--</td>
+            </tr>
+            <tr>
+                <td class="title">募集账户</td>
+                <td >
+                    <span class="content collect_accont">--</span>
+                    <span class="copy_btn">复制</span>
+                </td>
+            </tr>
+            <tr>
+                <td class="title">开户银行</td>
+                <td class="content collect_prodName">--</td>
+            </tr>
+            <tr>
+                <td class="title">开户支行</td>
+                <td class="content collect_branch">--</td>
+            </tr>
+
+
+        </table>
+    </div>
+
+    @@include('@pathInclude/views/footer.html')
+
+
+    <script src="/productPrivate/static/js/collectAcco.js"></script>
+</body>

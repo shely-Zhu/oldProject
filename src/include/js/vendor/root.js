@@ -24,7 +24,7 @@ window.env = env;
  *要求var env = 0; var    envOrigin = 0;此条语句必须这样写，为了线上部署构建时监听 
  */
 //var env = 0;  //环境变量，判断是本地开发0/调试1/测试2/预生产3/生产4
-//var   envOrigin = 0; //判断明泽还是财富 0-明泽  1-财富  2-中岩  3-融泽 4-oauth,
+//var   envOrigin = 0; //判断明泽还是财富 0-明泽  1-财富  2-中岩  3-融泽  4-财富恒天  5-oauth,
 /*********************************这里判断是否为app****************************************/
 var pathname = window.location.href;
 
@@ -434,6 +434,7 @@ window.http_url = {
     content_url: '/wap/content', // 内容接口
     account_url: '/wap/account', // 账户接口
     web_url: '/web', // 账户接口
+    app_url: '/app'// App接口
 }
 
 
