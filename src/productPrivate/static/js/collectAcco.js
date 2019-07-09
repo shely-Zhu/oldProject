@@ -76,7 +76,7 @@ $(function () {
 				document.addEventListener('copy',save);
 				document.execCommand('copy');
 				document.removeEventListener('copy',save);
-				alert('复制成功')
+				tipAction('复制成功');
 			}
 			$('.copy_btn').on("tap", function(){
 				//复制募集账户信息
