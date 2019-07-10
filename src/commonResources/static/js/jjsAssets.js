@@ -143,7 +143,6 @@ $(function () {
                     that.getElements.pullUp.hide();
                 },
                 callbackNoData: function () {
-                    that.getElements.pullUp.hide();//上拉加载区域隐藏
                     console.log("这是最后一页");
                     console.log($(".pullUpLabel").html());
                     $("#pullUp").removeClass('loading');
