@@ -62,12 +62,8 @@ $(function () {
 
             //请求jjs持仓明细入参
             var param = {
-                hmac: "", //预留的加密信息   
-                params: {//请求的参数信息 
-                    pageNo: "1",// 当前页 
-                    pageSize: "10",//每页记录数
-                    //uuid:that.uuid//token
-                }
+                pageNo: "1",// 当前页 
+                pageSize: "10",//每页记录数
             };
 
             var obj = [{
@@ -129,12 +125,8 @@ $(function () {
             var obj = [{
                 url: site_url.jjsAssetsDetail_api,//jjs持仓明细列表
                 data: {
-                    hmac: "", //预留的加密信息   
-                    params: {//请求的参数信息 
-                        pageNo: that.page,// 当前页 
-                        pageSize: "10",//每页记录数
-                        //uuid:that.uuid//token
-                    }
+                    pageNo: that.page,// 当前页 
+                    pageSize: "10",//每页记录数
                 },
                 async: false, //同步
 
