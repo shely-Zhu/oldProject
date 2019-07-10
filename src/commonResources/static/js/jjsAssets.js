@@ -83,8 +83,6 @@ $(function () {
                     var template = Handlebars.compile(tplm);
                     var html = template(json.data.pageList); 
                     $("#pageLists").html(html);
-                    that.page++ ;
-
                },
                callbackNoData: function(){
                     that.getElements.pullUp.hide();//上拉加载区域隐藏
@@ -131,7 +129,7 @@ $(function () {
             if (that.flag == false) {
 
                 var obj = [{
-                    url: site_url.posDetail_api,
+                    url: site_url.jjsAssetsDetail_api,//jjs持仓明细列表
                     data: {
                         hmac: "", //预留的加密信息   
                         params: {//请求的参数信息 
@@ -150,8 +148,9 @@ $(function () {
                         var tplm = $("#dataLists").html(); 
                         var template = Handlebars.compile(tplm);
                         var html = template(json.data.pageList); 
-                        $("#pageLists").html(html);
+                        $("#pageLists").append(html);
                         that.page++ ;
+                        that.getElements.pullUp.hide();   
                    },
                    callbackNoData: function(){
                         that.getElements.pullUp.hide();//上拉加载区域隐藏

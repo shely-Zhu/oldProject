@@ -38,7 +38,7 @@ $(function () {
 			var that = this;
 			var obj = [{
 				url: site_url.collect_info_api,
-				contentTypeSearch:true,
+				contentTypeSearch: true,
 				data: {
 					projectId: arg["fundCode"] // 产品代码
 				},
@@ -50,21 +50,22 @@ $(function () {
 					that.getElements.collect_prodName.html(data.bankName);
 					that.getElements.collect_branch.html(data.branchBankName);
 
-					//点击复制 复制内容到剪贴板上
-					function Copy(str){
-						var save = function(e){
-							e.clipboardData.setData('text/plain',str);
-							e.preventDefault();
-						}
-						document.addEventListener('copy',save);
-						document.execCommand('copy');
-						document.removeEventListener('copy',save);
-						tipAction('复制成功');
-					}
-					$('.copy_btn').on("tap", function(){
-						//复制募集账户信息
-						Copy($('.collect_accont').text())
-					})
+					//复制相关逻辑
+					$(".copy_btn").click(function () {
+						//实例化clipboard
+						var clipboard = new Clipboard('.copy_btn', {
+							text: function () {
+								return data.account;
+							}
+						});
+						clipboard.on("success", function (e) {
+							tipAction("复制成功");
+						});
+						clipboard.on("error", function (e) {
+							tipAction("请选择“拷贝”进行复制!");
+						});
+
+					});
 				},
 			}];
 			$.ajaxLoading(obj);

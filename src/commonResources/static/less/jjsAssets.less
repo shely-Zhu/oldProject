@@ -14,50 +14,30 @@
 @import url("../../../common/less/components/elasticLayerThree.less");
 @import url("../../../common/less/components/elasticLayerTypeTwo.less");
 @import url("../../../common/less/chtwm.less");
+
+html, body{
+	height: 100%;
+}
+
 .container{
-	position: relative;
-}
-.card-foot{
-    height:4rem; 
-    padding-right:1.6rem;
-    padding-left:1.6rem;
-    font-size: 1.2rem;
-    position: relative;
-    .intro{
-        color:@c003;
-        line-height: 4rem;
-        .incomeIcon{
-            margin-left:0.6rem;
-            vertical-align: middle;
-            font-size: 1.4rem;
-        }
-    }
-}
-.operate{  
-    position: absolute;
-    top:50%;
-    right:1.6rem;
-    transform: translateY(-48%);
-    -webkit-transform:translateY(-48%) ; 
-    width:7.0rem;
-    height:2.5rem;
-    line-height: 2.5rem;
-    color:@c006;
-    text-align: center;
-    border:1px solid @c006;
-    border-radius: 2px;
-    font-size: 1.2rem;
-    &.noEvent{
-      border: none;
-    }         
+	height: 100%;
+	width: 100%;
+	display: flex;
+	flex-direction: column;
+
+	#wrapper {
+		flex: 1;
+		height: 100%;
+		position: unset;
+		overflow: hidden;
+	}
 }
 // 其他资产
 .banner{
 	width: 100%;
 	height: 14rem;
     background: url("/commonResources/static/img/banner.png");
-    background-size: 100% 100%;
-	position:relative;
+	background-size: 100% 100%;
 
     .bannerTop{
 	  color: @c005;
