@@ -58,47 +58,48 @@ $(function () {
         },
 
         getList: function () {
-            var that=this;
+            var that = this;
 
             //请求jjs持仓明细入参
             var param = {
-                    hmac:"", //预留的加密信息   
-                    params:{//请求的参数信息 
-                        page_no :"1",// 当前页 
-                        page_size:"10",//每页记录数
-                        //uuid:that.uuid//token
-                    }
+                hmac: "", //预留的加密信息   
+                params: {//请求的参数信息 
+                    page_no: "1",// 当前页 
+                    page_size: "10",//每页记录数
+                    //uuid:that.uuid//token
+                }
             };
 
             var obj = [{
                 url: site_url.jjsAssetsDetail_api,//jjs持仓明细列表
                 data: param,
-                needLogin:true,//需要判断是否登陆
-                callbackDone: function(json){  //成功后执行的函数
+                needLogin: true,//需要判断是否登陆
+                callbackDone: function (json) {  //成功后执行的函数
                     //jjs列表数据请求成功
                     console.log(JSON.stringify(json.data.pageList));
 
                     //加载模板数据
-                    var tplm = $("#dataLists").html(); 
+                    var tplm = $("#dataLists").html();
                     var template = Handlebars.compile(tplm);
-                    var html = template(json.data.pageList); 
+                    var html = template(json.data.pageList);
+                    that.page++;
                     $("#pageLists").html(html);
-               },
-               callbackNoData: function(){
+                },
+                callbackNoData: function () {
                     that.getElements.pullUp.hide();//上拉加载区域隐藏
                     that.getElements.pageLists.hide();//展示数据区域隐藏
                     that.getElements.noDaata.show();//没有数据显示状态
-               }
-            },{
+                }
+            }, {
                 url: site_url.totalAssets_api,//查询总资产 从中拿到jjs的资产
-                data: {    
+                data: {
                     hmac: "",
-                      //预留的加密信息   
-                    params: { //请求的参数信息 
+                    //预留的加密信息   
+                    params: { //请求的参数信息 
 
                     }
                 },
-                callbackDone: function(json) {
+                callbackDone: function (json) {
                     console.log(JSON.stringify(json));
                     //拿到jjs资产并填充界面
                     that.getElements.totalCount.html(json.data.jJSAssets);
@@ -125,58 +126,46 @@ $(function () {
         },
         upPage: function () {
             var that = this;
+            var obj = [{
+                url: site_url.jjsAssetsDetail_api,//jjs持仓明细列表
+                data: {
+                    hmac: "", //预留的加密信息   
+                    params: {//请求的参数信息 
+                        page_no: that.page,// 当前页 
+                        page_size: "10",//每页记录数
+                        //uuid:that.uuid//token
+                    }
+                },
+                async: false, //同步
 
-            if (that.flag == false) {
+                callbackDone: function (json) {  //成功后执行的函数
+                    //jjs列表数据请求成功
+                    console.log(JSON.stringify(json.data.pageList));
 
-                var obj = [{
-                    url: site_url.jjsAssetsDetail_api,//jjs持仓明细列表
-                    data: {
-                        hmac: "", //预留的加密信息   
-                        params: {//请求的参数信息 
-                            page_no: that.page,// 当前页 
-                            page_size: "10",//每页记录数
-                            //uuid:that.uuid//token
-                        }
-                    },
-                    async: false, //同步
+                    //加载模板数据
+                    var tplm = $("#dataLists").html();
+                    var template = Handlebars.compile(tplm);
+                    var html = template(json.data.pageList);
+                    $("#pageLists").append(html);
+                    that.page++;
+                    that.getElements.pullUp.hide();
+                },
+                callbackNoData: function () {
+                    that.getElements.pullUp.hide();//上拉加载区域隐藏
+                    console.log("这是最后一页");
+                    console.log($(".pullUpLabel").html());
+                    $("#pullUp").removeClass('loading');
+                    $(".pullUpIcon").html("");
+                    $(".pullUpLabel").html("没有更多了")
+                }
 
-                    callbackDone: function(json){  //成功后执行的函数
-                        //jjs列表数据请求成功
-                        console.log(JSON.stringify(json.data.pageList));
-    
-                        //加载模板数据
-                        var tplm = $("#dataLists").html(); 
-                        var template = Handlebars.compile(tplm);
-                        var html = template(json.data.pageList); 
-                        $("#pageLists").append(html);
-                        that.page++ ;
-                        that.getElements.pullUp.hide();   
-                   },
-                   callbackNoData: function(){
-                        that.getElements.pullUp.hide();//上拉加载区域隐藏
-                        that.getElements.pageLists.hide();//展示数据区域隐藏
-                        that.getElements.noDaata.show();//没有数据显示状态
-                   }
+            }];
+            $.ajaxLoading(obj);
 
-                }];
-                $.ajaxLoading(obj);
-            }
-            else {
-
-                console.log("这是最后一页");
-                console.log($(".pullUpLabel").html());
-
-                $("#pullUp").removeClass('loading');
-
-                $(".pullUpIcon").html("");
-
-                $(".pullUpLabel").html("没有更多了")
-            }
         },
     };
 
     dataLists.webinit();//页面初始化
     dataLists.pageAction();//下拉加载
-    
-})
 
+})
