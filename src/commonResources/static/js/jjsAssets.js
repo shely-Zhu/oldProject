@@ -139,8 +139,6 @@ $(function() {
         upPage: function() {
             var that = this;
 
-
-
             if (that.flag == false) {
                 var obj = [{
                     url: site_url.jjsAssetsDetail_api, //jjs持仓明细列表
