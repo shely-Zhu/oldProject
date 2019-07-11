@@ -327,7 +327,12 @@
         }
 
         .data {
-            //margin-top: 1.2rem;
+            // margin-top: 1.2rem;
+        }
+
+        .accMartical {
+            margin-top: 0.8rem;
+            // border-top: 0.1rem solid @c007;
         }
     }
 
@@ -393,6 +398,17 @@
         height: 1rem;
         color: @c003;
         margin-left: .5rem;
+    }
+
+    .product-bottom {
+        position: relative;
+        .divide-line {
+            position: absolute;
+            top: 4rem;
+            height: 0.1rem;
+            width: 100%;
+            background-color: @c004;
+        }
     }
 }
 
@@ -1326,6 +1342,32 @@
             display: inline-block;
             font-size: 1.2rem;
         }
+    }
+}
+//募集账户相关
+.account-con {
+    background: url('/productPrivate/static/img/collect_acco_bg.png');
+    background-size: 100% 100%;
+    margin: 0.8rem 1.6rem 0 1.6rem;
+    padding: 0.4rem 1.6rem 1.6rem 1.6rem;
+    font-size: 1.3rem;
+    td {
+        padding-top: 1.2rem;
+    }
+    .copy_btn {
+        white-space:nowrap;
+        float: right;
+        color: @c056;
+    }
+    .title {
+        white-space:nowrap;
+        vertical-align: top;
+        color: @c055;
+    }
+    .content {
+        color: @c056;
+        padding-left: 2rem;
+        text-align: left;
     }
 }
 
