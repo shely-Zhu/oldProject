@@ -105,7 +105,7 @@ $(function() {
                     tipAction(data.msg);
                 }
             }, {
-                url: site_url.totalAssets_api, //查询总资产 从中拿到jjs的资产
+                url: site_url.totalAssets_appApi, //查询总资产 从中拿到jjs的资产
                 data: {},
                 callbackDone: function(json) {
                     console.log(JSON.stringify(json));
