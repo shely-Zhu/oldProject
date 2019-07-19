@@ -160,5 +160,16 @@ var pathList = {
 	"/user/views/realName/realNameStepThree.html" : { evtid: '153', topic: '实名认证', info: ''} ,
 	"/user/views/setUp/resetLinkPhone.html" : { evtid: '154', topic: '更换手机号码', info: ''} ,
 	"/user/views/setUp/resetLoginPassword.html" : { evtid: '155', topic: '更换登录密码', info: ''} ,
-	"/user/views/setUp/setUp.html" : { evtid: '156', topic: '设置', info: ''} 
+	"/user/views/setUp/setUp.html" : { evtid: '156', topic: '设置', info: ''},
+    "//toLogin.action": { evtid: '157', topic: '登录', info: ''} ,
+    "/login.action" :{ evtid: '158', topic: '登录', info: ''} ,
+    // 合规
+    "/compliance/views/certificationFile.html" :{ evtid: '159', topic: '投资者认证材料', info: ''},
+    "/compliance/views/certificationMiddle.html" :{ evtid: '160', topic: '投资者分类认证', info: ''},
+
+    "/personal/views/growth/growthValue.html" :{ evtid: '161', topic: '成长值', info: ''} ,
+    "/personal/views/growth/growthReg.html" :{ evtid: '162', topic: '成长规则', info: ''} ,
+
+    "/commonResources/views/jjsAssets.html" :{ evtid: '163', topic: '其他资产', info: ''} ,
+    "/productPrivate/views/collectAcco.html" :{ evtid: '164', topic: '募集账户', info: ''} 
 }
