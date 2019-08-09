@@ -67,4 +67,10 @@ module.exports = function() {
     this.myFinancialEducationInfoApi = http_url.pof_url + '/myAssetInfo/myFinancialEducationInfo';
     /*------------------------------财商教育end------------------------------------------*/
 
+
+    /*------------------------------基金诊断start------------------------------------------*/
+    //通用-热门基金查询
+    this.fundRecommend = http_url.pof_url + '/index/fundRecommend';
+    /*------------------------------基金诊断end------------------------------------------*/
+
 };

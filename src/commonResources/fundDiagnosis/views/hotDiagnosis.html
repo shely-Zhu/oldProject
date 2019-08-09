@@ -18,8 +18,86 @@
 </head>
 
 <body>
-    <section class="container">
+    <section class="hotDiagnosis ">
+        <div class="fixedWrap">
+            <!-- 搜索 -->
+            <div class="branchSearchArea">
+                <div class="branchHeader">
+                    <div class="form-wrap">
+                        <div class="mui-input-row">
+                            <div class="search">
+                                <div class="mui-icon searchicon mui-icon-search"></div>
+                                <input type="text" class="mui-input-clear branchSearchInput" placeholder="请输入基金代码/基金名称">
+                                <button type="button" class="mui-btn close">取消</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <h2 class="h2_title">热门诊断</h2>
+        </div>
+        <div class="card-theme ">
+            <div class="mui-row">
+                <div class="mui-col-xs-1">
+                    <p class="fontNum">4</p>
+                </div>
+                <div class="mui-col-xs-10">
+                    <p class="fontBold">沧江精选增强混合A</p>
+                    <p class="lightColor">001234</p>
+                </div>
+                <div class="mui-col-xs-1 right">
+                    <p class="fontBold">></p>
+                </div>
+            </div>
+        </div>
+        <div class="hotFundList">
+            <div class="haveData list">
+                <div class="contentWrapper">
+                    <ul class="mui-table-view">
+                        <li class="mui-table-view-cell">
+                            <div class="card-theme">
+                                <!--放置列表-->
+                            </div>
+                        </li>
+                    </ul>
+                    <!-- 返回顶部 -->
+                    @@include('@pathCommonViews/goTop.html')
+                </div>
+            </div>
+            <!-- 没有数据 -->
+            @@include('@pathCommonViews/noData.html')
+            <!-- 加载中loading -->
+            @@include('@pathCommonViews/loading/listLoading.html')
+        </div>
+        <!-- 底部按钮 -->
+        <div class="mui-row btnBottom">
+            <div class="mui-col-xs-1">
+                <p class="fontBold">4</p>
+            </div>
+            <div class="mui-col-xs-10">
+                <p class="fontBold">点击获取专属诊断报告</p>
+            </div>
+            <div class="mui-col-xs-1 right">
+                <p class="fontBold">></p>
+            </div>
+        </div>
     </section>
+    <script id="fundList-template" type="text/x-handlebars-template">
+        {{#each this}}
+                <div class="mui-row">
+                    <div class="mui-col-xs-1">
+                        <p class="fontNum">{{serialNumber}}</p>
+                    </div>
+                    <div class="mui-col-xs-10">
+                        <p class="fontBold">{{fundName}}</p>
+                        <p class="lightColor">{{fundCode}}</p>
+                    </div>
+                    <div class="mui-col-xs-1 right">
+                        <p class="fontBold">></p>
+                    </div>
+                </div>
+            {{/each}}
+        </script>
     @@include('@pathInclude/views/footer.html')
     <!-- 添加埋点 -->
     @@include('@pathInclude/views/header.html')
