@@ -13,18 +13,54 @@ body {
     height: 100%;
 }
 
+
+.clearfix {
+    &:after {
+        display: block;
+        width: 0;
+        height: 0;
+        content: "";
+        clear: both;
+        visibility: hidden;
+    }
+
+}
+
 .hotDiagnosis {
     height: 100%;
     font-family: 'Arial, Microsoft YaHei", "Helvetica';
     background-color: @c005;
 
-    // 固定区域
+
+    // 重置
+    .mui-table-view {
+
+        &:after,
+        &:before {
+            content: none;
+        }
+
+        .mui-table-view-cell {
+
+            &:after {
+                content: none;
+            }
+
+            &.mui-active {
+                background-color: @c005;
+            }
+
+            padding: 0 1.7rem;
+        }
+    }
+
+    // 顶部固定区域
     .fixedWrap {
         position: fixed;
         width: 100%;
         height: 8rem;
-        top:0;
-        z-index:1000;
+        top: 0;
+        z-index: 1000;
 
 
         //搜索
@@ -36,23 +72,20 @@ body {
                 width: 100%;
 
                 .mui-input-row {
-                    height: 2.8rem;
+                    height: 3.3rem;
                 }
 
                 .search {
                     background-color: @f7f7f7;
                     border: 1px solid @c008;
-                    height: 2.5rem;
                     border-radius: 0.2rem;
                     position: relative;
 
-
-
                     .branchSearchInput {
-                        color: @c005;
+                        color: @3c3c3c;
                         display: inline-block;
                         font-size: 1.2rem;
-                        height: 2.4rem;
+                        height: 3.3rem;
                         background: transparent;
                         width: 80%;
                     }
@@ -70,6 +103,14 @@ body {
                         font-size: 1.4rem;
                         line-height: 2.5rem;
                         margin: 0;
+                        width: 3rem;
+                        top: 0.4rem;
+
+                        &:before {
+                            content: '取消';
+                            color: @ff6905;
+                            font-size: 1.2rem;
+                        }
                     }
                 }
 
@@ -154,6 +195,23 @@ body {
             }
         }
 
+        // 搜索结果
+        .resultWrap {
+            height: 5.1rem;
+            background: @f7f7f7;
+
+            .searchResult {
+                background: @c005;
+                height: 4rem;
+                line-height: 4rem;
+                font-size: 1.2rem;
+                color: @858d9d;
+                padding: 0 1.7rem;
+                border-top: 1px solid @edeff3;
+            }
+        }
+
+        // 热门诊断
         .h2_title {
             padding: 0 1.7rem;
             color: @3c3c3c;
@@ -163,49 +221,59 @@ body {
         }
     }
 
-    // 列表
-    .card-theme {
-        padding: 0rem 1.7rem;
+    // 热门列表
+    .hotFundList {
+        overflow: hidden;
+        margin-top: 8rem;
 
-        .mui-row {
-            padding: 1.4rem 0;
-            border-bottom: 1px solid @edeff3;
+        .card-theme {
+            .mui-row {
+                padding: 1.4rem 0;
+                border-bottom: 1px solid @edeff3;
 
-            .fontNum {
-                color: @3c3c3c;
-                font-size: 0.9rem;
+                .imgNum {
+                    width: 1.5rem;
+                    padding-top: 0.5rem;
+                }
+
+                .fontNum {
+                    color: @3c3c3c;
+                    font-size: 0.9rem;
+                    line-height: 2.3rem;
+                    margin-left: 0.4rem;
+                }
+
+                .fontBold {
+                    color: @2d2f46;
+                    font-size: 1.3rem;
+                    line-height: 2.3rem;
+
+                }
+
+                .lightColor {
+                    font-size: 1rem;
+                    line-height: 2rem;
+                    color: @999999;
+                }
             }
 
-            .fontBold {
-                color: @2d2f46;
-                font-size: 1.3rem;
-                line-height: 2.3rem;
 
+
+            .small {
+                color: @c001;
+                font-size: 1.2rem;
+                margin-top: 0.5rem;
             }
 
-            .lightColor {
+            .red {
+                color: @c010;
                 font-size: 1rem;
-                line-height: 2rem;
-                color: @999999;
+                margin-top: 0.5rem;
             }
-        }
-
-
-
-        .small {
-            color: @c001;
-            font-size: 1.2rem;
-            margin-top: 0.5rem;
-        }
-
-        .red {
-            color: @c010;
-            font-size: 1rem;
-            margin-top: 0.5rem;
         }
     }
 
-    // 底部按钮
+    // 底部按钮     
     .btnBottom {
         position: absolute;
         bottom: 1.7rem;
@@ -219,9 +287,17 @@ body {
         box-shadow: 0 0.1rem 0.4rem 0 rgba(0, 0, 0, 0.1);
         padding: 0 1.8rem 0 1rem;
         color: @837046;
+
+        .imgBottom {
+            margin-top: 0.8rem;
+            width: 2.4rem;
+        }
+
+        .fontBold {
+            padding-left: 1rem;
+            color: @837046;
+        }
     }
-
-
 
     // 公共
     .right {

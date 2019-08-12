@@ -14,25 +14,33 @@ var Mock = require('mockjs');
 
 //1. 接口数据
 var data = Mock.mock({
-    status: "0",
+    status: "0000",
     message: '成功',
     data: {
-        "totalCount": "200",
-        "fundRecommendList": [{
+        "totalCount": "8",
+        "fundRecommendList|6": [{
             "recomTypeNumber":"12345", // 推荐类型编号
             "fundCode":"54321", // 基金代码
-            "fundName":"基金名称", // 基金名称
+            "fundName":"基金名称1", // 基金名称
             "serialNumber":"1", // 基金推荐序号
             "copyWriting":"宣传文案", // 宣传文案
         },{
             "recomTypeNumber":"12345", // 推荐类型编号
             "fundCode":"54321", // 基金代码
-            "fundName":"基金名称", // 基金名称
-            "serialNumber":"1", // 基金推荐序号
+            "fundName":"基金名称2", // 基金名称
+            "serialNumber":"2", // 基金推荐序号
+            "copyWriting":"宣传文案", // 宣传文案
+        },{
+            "recomTypeNumber":"12345", // 推荐类型编号
+            "fundCode":"54321", // 基金代码
+            "fundName":"基金名称3", // 基金名称
+            "serialNumber":"3", // 基金推荐序号
             "copyWriting":"宣传文案", // 宣传文案
         }]
     }
 });
+
+
 
 
 

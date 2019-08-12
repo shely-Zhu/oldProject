@@ -18,7 +18,7 @@
 </head>
 
 <body>
-    <section class="hotDiagnosis ">
+    <section class="hotDiagnosis clearfix">
         <div class="fixedWrap">
             <!-- 搜索 -->
             <div class="branchSearchArea">
@@ -27,29 +27,19 @@
                         <div class="mui-input-row">
                             <div class="search">
                                 <div class="mui-icon searchicon mui-icon-search"></div>
-                                <input type="text" class="mui-input-clear branchSearchInput" placeholder="请输入基金代码/基金名称">
-                                <button type="button" class="mui-btn close">取消</button>
+                                <input type="text" id="searchInput" class="mui-input-clear branchSearchInput" placeholder="请输入基金代码/基金名称">
+                                <!-- <button type="button" class="mui-btn close">取消</button> -->
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
+            <div class="resultWrap">
+                <p class="searchResult">已为您找到 <span>780</span>个<span>123</span></p>
+            </div>
             <h2 class="h2_title">热门诊断</h2>
         </div>
-        <div class="card-theme ">
-            <div class="mui-row">
-                <div class="mui-col-xs-1">
-                    <p class="fontNum">4</p>
-                </div>
-                <div class="mui-col-xs-10">
-                    <p class="fontBold">沧江精选增强混合A</p>
-                    <p class="lightColor">001234</p>
-                </div>
-                <div class="mui-col-xs-1 right">
-                    <p class="fontBold">></p>
-                </div>
-            </div>
-        </div>
+        <!--热门诊断-->
         <div class="hotFundList">
             <div class="haveData list">
                 <div class="contentWrapper">
@@ -72,7 +62,7 @@
         <!-- 底部按钮 -->
         <div class="mui-row btnBottom">
             <div class="mui-col-xs-1">
-                <p class="fontBold">4</p>
+                <img class="imgBottom" src="/commonResources/fundDiagnosis/static/img/baogao.png">
             </div>
             <div class="mui-col-xs-10">
                 <p class="fontBold">点击获取专属诊断报告</p>
@@ -85,9 +75,23 @@
     <script id="fundList-template" type="text/x-handlebars-template">
         {{#each this}}
                 <div class="mui-row">
-                    <div class="mui-col-xs-1">
-                        <p class="fontNum">{{serialNumber}}</p>
-                    </div>
+                    {{#if first}}
+                        <div class="mui-col-xs-1">
+                                <img class="imgNum" src="/commonResources/fundDiagnosis/static/img/first.png" >
+                        </div>
+                    {{else if second}}
+                        <div class="mui-col-xs-1">
+                                <img class="imgNum" src="/commonResources/fundDiagnosis/static/img/second.png" >
+                        </div>
+                    {{else if third}}
+                        <div class="mui-col-xs-1">
+                            <img class="imgNum" src="/commonResources/fundDiagnosis/static/img/third.png" >
+                        </div>
+                    {{else}}
+                        <div class="mui-col-xs-1">
+                            <p class="fontNum">{{serialNumber}}</p>
+                        </div>
+                    {{/if}}
                     <div class="mui-col-xs-10">
                         <p class="fontBold">{{fundName}}</p>
                         <p class="lightColor">{{fundCode}}</p>
