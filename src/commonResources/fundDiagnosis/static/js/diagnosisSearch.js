@@ -1,5 +1,5 @@
 /*
- * @page: 基金诊断
+ * @page: 基金诊断搜索
  * @Author: songxiaoyu
  * @Date:   2019-08-09 11:54:51
  * @Last Modified by:   songxiaoyu
@@ -60,8 +60,6 @@ $(function() {
                         contentrefresh: '拼命加载中',
                         contentnomore: '没有更多了', //可选，请求完毕若没有更多数据时显示的提醒内容；
                         callback: function() {
-
-                            // 热门诊断
                             that.getData(this);
                         }
                     }
@@ -81,19 +79,16 @@ $(function() {
                 //这一句初始化并第一次执行mui上拉加载的callback函数
                 mui('.contentWrapper').pullRefresh().pullupLoading();
 
-                //隐藏loading，调试接口时需要去掉
-                //setTimeout(function(){
                 that.$e.listLoading.hide();
-                //}, 2000);
-
 
                 //为$id添加hasPullUp  class
                 $('.list').addClass('hasPullUp');
             });
         },
+        // 获取搜索数据
         getData: function(t) {
             var that = this;
-
+            debugger;
             mui('.contentWrapper').pullRefresh().pullupLoading();
 
             var obj = [{
@@ -114,24 +109,6 @@ $(function() {
                         dataList = json.data.fundRecommendList;
                     }
 
-                    // 给data添加图片
-                    $.each(dataList, function(i, el) {
-                        // 只有前3个需要加，大于3直接退出
-                        if (i > 3) {
-                            return false;
-                        }
-                        switch (el.serialNumber) {
-                            case '1':
-                                el.first = true;
-                                break;
-                            case '2':
-                                el.second = true;
-                                break;
-                            case '3':
-                                el.third = true;
-                                break;
-                        }
-                    })
 
                     setTimeout(function() {
 
@@ -171,12 +148,28 @@ $(function() {
             }]
             $.ajaxLoading(obj);
         },
+        // 防抖
+        debounce: function(fn, wait) {
+            var timeout = null;
+            var that = this;
+            that.gV.search = true;
+
+            return function() {
+                console.log(that);
+                console.log(timeout);
+                if (timeout !== null) clearTimeout(timeout);
+
+                timeout = setTimeout(fn.apply(that), wait);
+            }
+        },
         events: function() {
             var that = this;
+            debugger;
 
-            mui("body").on("tap", ".branchSearchArea", function() {
-                window.location.href = site_url.diagnosisSearch_url;
-            });
+            // 搜索框
+            var $searchInput = document.getElementById("searchInput");
+
+            $searchInput.oninput = that.debounce(that.initMui, 300);
         },
     };
     hotDiagnosis.init();

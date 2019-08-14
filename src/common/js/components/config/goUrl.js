@@ -294,4 +294,13 @@ module.exports = function() {
 
     // 私募售前告知书
     this.openPdf_url = go_url.no_url + '/productPrivate/views/openPdf.html';
+
+
+
+    /*-------------------------------基金诊断 start -----------------------*/
+    // 热门诊断
+    this.hotDiagnosis_url = go_url.no_url + '/commonResources/fundDiagnosis/views/hotDiagnosis_url.html';
+    // 诊断搜索页面
+    this.diagnosisSearch_url = go_url.no_url + '/commonResources/fundDiagnosis/views/diagnosisSearch.html';
+    /*-------------------------------基金诊断 end -----------------------*/
 };

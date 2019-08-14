@@ -1,0 +1,90 @@
+<!-- /**  
+ * @Page:  诊断详情
+ * @Author: songxiaoyu  
+ * @Date:   2019-08-08 17:44:32  
+ * @Last Modified by:   songxiaoyu  
+ */ -->
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="applicable-device" content="mobile">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="stylesheet" href="/commonResources/fundDiagnosis/static/css/diagnosisDetail.css">
+    <title>诊断详情</title>
+</head>
+
+<body>
+    <section class="diagnosisDetail">
+        <!-- 顶部 -->
+        <div class="mui-card">
+            <div class="card-head fundName">华夏成长混合   010000</div>
+            <div>标签1  标签2</div>
+            <div class="card-theme invSolid mui-row noBor">
+                <div class="mui-col-xs-4 left">
+                    <p class="inv invCore">1.0909</p>
+                </div>
+                <div class="mui-col-xs-4 center">
+                    <p class="inv invDate center">0.08%</p>
+                </div>
+                <div class="mui-col-xs-4 right">
+                    <p class="inv invStart">6%</p>
+                </div>
+            </div>
+            <div class="card-theme invSolid mui-row noBor">
+                <div class="mui-col-xs-4 left">
+                    <p class="text">最新净值(09-09)</p>
+                </div>
+                <div class="mui-col-xs-4 center projectTermUnit">
+                    <p class="text">最新日涨幅</p>
+                </div>
+                <div class="mui-col-xs-4 right">
+                    <p class="text">成立以来年化收益率</p>
+                </div>
+            </div>
+        </div>
+        <!-- 综合评分 -->
+        <div class="mui-card">
+            <h3>综合评分<span>数据统计截止</span><span>2019-09-09</span></h3>
+            <div class="mui-row">
+                <div class="mui-col-xs-3">短期一年</div>
+                <div class="mui-col-xs-3">中期3年</div>
+                <div class="mui-col-xs-3">长期5年</div>
+            </div>
+            <div>
+                雷达图
+            </div>
+
+        </div>
+        <!-- 综合定性评价 -->
+        <div class="mui-card">
+            <h3>综合定性评价<span>数据统计截止</span><span>2019-09-09</span></h3>
+            <div>
+                1.风险收益能力：基金近三年收益战胜_百分比_的同类基金，收益能力_收益能力_，风险控制能力_风险控制能力_；
+            </div>
+        </div>
+        <!-- 累计收益曲线 -->
+        <div class="mui-card">
+            <h3>累计收益曲线<span>数据统计截止</span><span>2019-09-09</span></h3>
+            <div>曲线图</div>
+            <div>近一月 近一年 成立以来</div>
+        </div>
+        <!-- 底部备注 -->
+        <div>
+            <div>注：</div>
+            <div>上述数据仅供参考</div>
+            <div>风险自担</div>
+        </div>
+    </section>
+    
+    @@include('@pathInclude/views/footer.html')
+    <!-- 添加埋点 -->
+    @@include('@pathInclude/views/header.html')
+    <script src="/include/js/iscroll.js"></script>
+    <script src="/commonResources/fundDiagnosis/static/js/diagnosisDetail.js"></script>
+</body>
+
+</html>

@@ -62,30 +62,8 @@ body {
         top: 0;
         z-index: 1000;
 
-        // 诊断页面搜索区域
-        .topSearch {
-            background-color: @c005;
-            padding: 0.5rem 1.3rem;
 
-            .tip {
-                height: 2.8rem;
-                background-color: @f7f7f7;
-                color: @878787;
-                font-size: 1.1rem;
-                line-height: 2.8rem;
-                width: 100%;
-                border-radius: 0.2rem;
-            }
-
-            .mui-icon-search:before {
-                font-size: 1.4rem;
-                margin-left: 0.9rem;
-                margin-right: 0.9rem;
-            }
-        }
-
-
-        //搜索页面-搜索
+        //搜索
         .branchSearchArea {
 
             .branchHeader {
@@ -94,33 +72,30 @@ body {
                 width: 100%;
 
                 .mui-input-row {
-                    height: 2.8rem;
+                    height: 3.3rem;
                 }
 
                 .search {
                     background-color: @f7f7f7;
+                    border: 1px solid @c008;
                     border-radius: 0.2rem;
                     position: relative;
 
                     .branchSearchInput {
-                        color: @878787;
+                        color: @3c3c3c;
                         display: inline-block;
-                        font-size: 1.1rem;
-                        height: 2.8rem;
-                        background-color: @f7f7f7;
+                        font-size: 1.2rem;
+                        height: 3.3rem;
+                        background: transparent;
                         width: 80%;
-
-                        &::placeholder {
-                            color: @878787;
-                        }
                     }
 
                     .searchicon {
-                        font-size: 1.4rem;
+                        font-size: 1.6rem;
                         margin-left: 0.7rem;
                         margin-right: 0.4rem;
                         display: inline-block;
-                        color: @878787;
+                        color: @c001;
                     }
 
                     .mui-icon-clear {
@@ -251,8 +226,7 @@ body {
         overflow: hidden;
         margin-top: 8rem;
 
-        .card-theme,
-        .search-list {
+        .card-theme {
             .mui-row {
                 padding: 1.4rem 0;
                 border-bottom: 1px solid @edeff3;

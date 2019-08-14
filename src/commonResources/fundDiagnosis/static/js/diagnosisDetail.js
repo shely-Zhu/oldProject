@@ -51,6 +51,7 @@ $(function() {
         },
         //初始化mui的上拉加载
         initMui: function() {
+            debugger
             var that = this;
             mui.init({
                 pullRefresh: {
@@ -60,9 +61,14 @@ $(function() {
                         contentrefresh: '拼命加载中',
                         contentnomore: '没有更多了', //可选，请求完毕若没有更多数据时显示的提醒内容；
                         callback: function() {
+                            debugger;
 
-                            // 热门诊断
-                            that.getData(this);
+                            if (that.gV.search) { // 搜索数据
+                                that.getSearchData(this);
+                            } else { // 热门诊断
+                                that.getData(this);
+                            }
+
                         }
                     }
                 }
@@ -93,7 +99,7 @@ $(function() {
         },
         getData: function(t) {
             var that = this;
-
+            debugger;
             mui('.contentWrapper').pullRefresh().pullupLoading();
 
             var obj = [{
@@ -105,17 +111,19 @@ $(function() {
                 },
                 needDataEmpty: false,
                 callbackDone: function(json) {
-                    var dataList;
+                    var joinData = {};
+                    // 热门推荐，区分推荐还是搜索
+                    joinData.hot = true;
 
                     if (json.data.totalCount == 0) { // 没有记录不展示
                         that.$e.noData.show();
                         return false;
                     } else {
-                        dataList = json.data.fundRecommendList;
+                        joinData.list = json.data.fundRecommendList;
                     }
 
                     // 给data添加图片
-                    $.each(dataList, function(i, el) {
+                    $.each(joinData.list, function(i, el) {
                         // 只有前3个需要加，大于3直接退出
                         if (i > 3) {
                             return false;
@@ -135,11 +143,11 @@ $(function() {
 
                     setTimeout(function() {
 
-                        if (dataList.length < that.gV.pageSize) {
+                        if (joinData.list.length < that.gV.pageSize) {
 
                             if (that.gV.pageCurrent == 1) { //第一页时
 
-                                if (dataList.length == 0) {
+                                if (joinData.list.length == 0) {
                                     // 暂无数据显示
                                     that.$e.noData.show();
                                     return false;
@@ -161,7 +169,78 @@ $(function() {
                         //去掉mui-pull-bottom-pocket的mui-hidden
                         $('.contentWrapper').find('.mui-pull-bottom-pocket').removeClass('mui-hidden');
                         // 将列表插入到页面上
-                        generateTemplate(dataList, that.$e.hotFundList, that.$e.fundListTemp);
+                        generateTemplate(joinData, that.$e.hotFundList, that.$e.fundListTemp);
+                    }, 200)
+
+                },
+                callbackFail: function(json) {
+                    tipAction(json.msg);
+                }
+            }]
+            $.ajaxLoading(obj);
+        },
+        // 防抖
+        debounce: function(fn, wait) {
+            var timeout = null;
+            var that = this;
+
+            return function() {
+                console.log(timeout);
+                if (timeout !== null) clearTimeout(timeout);
+
+                timeout = setTimeout(fn.apply(this), wait);
+            }
+        },
+        // 获取搜索数据
+        getSearchData: function(t,that) {
+
+            var obj = [{
+                url: site_url.fundRecommend, //私募产品列表
+                data: {
+                    "pageCurrent": that.page,
+                    "pageSize": 10,
+
+                },
+                needDataEmpty: false,
+                callbackDone: function(json) {
+                    var joinData = {};
+
+                    if (json.data.totalCount == 0) { // 没有记录不展示
+                        that.$e.noData.show();
+                        return false;
+                    } else {
+                        joinData.list = json.data.fundRecommendList;
+                    }
+
+                    setTimeout(function() {
+
+                        if (joinData.list.length < that.gV.pageSize) {
+
+                            if (that.gV.pageCurrent == 1) { //第一页时
+
+                                if (joinData.list.length == 0) {
+                                    // 暂无数据显示
+                                    that.$e.noData.show();
+                                    return false;
+
+                                } else { // 没有更多数据了
+                                    t.endPullupToRefresh(true);
+                                }
+                            } else {
+                                //其他页-没有更多数据
+                                t.endPullupToRefresh(true);
+                            }
+                        } else { // 还有更多数据
+                            t.endPullupToRefresh(false);
+                        }
+
+                        // 页面++
+                        that.gV.pageCurrent++;
+
+                        //去掉mui-pull-bottom-pocket的mui-hidden
+                        $('.contentWrapper').find('.mui-pull-bottom-pocket').removeClass('mui-hidden');
+                        // 将列表插入到页面上
+                        generateTemplate(joinData, that.$e.hotFundList, that.$e.fundListTemp);
                     }, 200)
 
                 },
@@ -174,9 +253,10 @@ $(function() {
         events: function() {
             var that = this;
 
-            mui("body").on("tap", ".branchSearchArea", function() {
-                window.location.href = site_url.diagnosisSearch_url;
-            });
+            // 搜索框
+            var $searchInput = document.getElementById("searchInput");
+
+            // $searchInput.oninput = that.debounce(that.initMui.apply(that), 300);
         },
     };
     hotDiagnosis.init();

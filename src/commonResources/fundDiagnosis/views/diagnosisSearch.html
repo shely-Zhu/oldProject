@@ -1,5 +1,5 @@
 <!-- /**  
- * @Page:  基金诊断
+ * @Page:  基金
  * @Author: songxiaoyu  
  * @Date:   2019-08-08 17:44:32  
  * @Last Modified by:   songxiaoyu  
@@ -21,11 +21,22 @@
     <section class="hotDiagnosis clearfix">
         <div class="fixedWrap">
             <!-- 搜索 -->
-            <div class="topSearch">
-                <div class="tip mui-icon mui-icon-search">请输入基金代码/基金名称</div>
-                
+            <div class="branchSearchArea">
+                <div class="branchHeader">
+                    <div class="form-wrap">
+                        <div class="mui-input-row">
+                            <div class="search">
+                                <div class="mui-icon searchicon mui-icon-search"></div>
+                                <input type="text" id="searchInput" class="mui-input-clear branchSearchInput" placeholder="请输入基金代码/基金名称">
+                                <!-- <button type="button" class="mui-btn close">取消</button> -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
-            <h2 class="h2_title">热门诊断</h2>
+            <div class="resultWrap">
+                <p class="searchResult">已为您找到 <span>780</span>个<span>123</span></p>
+            </div>
         </div>
         <!--热门诊断-->
         <div class="hotFundList">
@@ -34,7 +45,7 @@
                     <ul class="mui-table-view">
                         <li class="mui-table-view-cell">
                             <div class="card-theme">
-                                <!--放置热门列表-->
+                                <!--放置列表-->
                             </div>
                         </li>
                     </ul>
@@ -46,18 +57,6 @@
             @@include('@pathCommonViews/noData.html')
             <!-- 加载中loading -->
             @@include('@pathCommonViews/loading/listLoading.html')
-        </div>
-        <!-- 底部按钮 -->
-        <div class="mui-row btnBottom">
-            <div class="mui-col-xs-1">
-                <img class="imgBottom" src="/commonResources/fundDiagnosis/static/img/baogao.png">
-            </div>
-            <div class="mui-col-xs-10">
-                <p class="fontBold">点击获取专属诊断报告</p>
-            </div>
-            <div class="mui-col-xs-1 right">
-                <p class="fontBold">></p>
-            </div>
         </div>
     </section>
     <script id="fundList-template" type="text/x-handlebars-template">
@@ -88,7 +87,7 @@
     <!-- 添加埋点 -->
     @@include('@pathInclude/views/header.html')
     <script src="/include/js/iscroll.js"></script>
-    <script src="/commonResources/fundDiagnosis/static/js/hotDiagnosis.js"></script>
+    <script src="/commonResources/fundDiagnosis/static/js/diagnosisSearch.js"></script>
 </body>
 
 </html>
