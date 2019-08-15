@@ -1,5 +1,5 @@
 <!-- /**  
- * @Page:  基金
+ * @Page:  基金诊断搜索
  * @Author: songxiaoyu  
  * @Date:   2019-08-08 17:44:32  
  * @Last Modified by:   songxiaoyu  
@@ -35,7 +35,7 @@
                 </div>
             </div>
             <div class="resultWrap">
-                <p class="searchResult">已为您找到 <span>780</span>个<span>123</span></p>
+                <p class="searchResult">已为您找到 <span class="total"></span>个<span class="word"></span></p>
             </div>
         </div>
         <!--热门诊断-->
@@ -62,20 +62,9 @@
     <script id="fundList-template" type="text/x-handlebars-template">
     {{#each this}}
         <div class="mui-row">
-            <div class="mui-col-xs-1">
-                {{#if first}}
-                    <img class="imgNum" src="/commonResources/fundDiagnosis/static/img/first.png" >
-                {{else if second}}
-                    <img class="imgNum" src="/commonResources/fundDiagnosis/static/img/second.png" >
-                {{else if third}}
-                    <img class="imgNum" src="/commonResources/fundDiagnosis/static/img/third.png" >
-                {{else}}
-                    <p class="fontNum">{{serialNumber}}</p>
-                {{/if}}
-            </div>
-            <div class="mui-col-xs-10">
-                <p class="fontBold">{{fundName}}</p>
-                <p class="lightColor">{{fundCode}}</p>
+            <div class="mui-col-xs-11">
+                <p class="fontBold">{{secuSht}}</p>
+                <p class="lightColor">{{trdCode}}</p>
             </div>
             <div class="mui-col-xs-1 right">
                 <p class="fontBold">></p>

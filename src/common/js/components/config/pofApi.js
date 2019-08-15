@@ -70,7 +70,7 @@ module.exports = function() {
 
     /*------------------------------基金诊断start------------------------------------------*/
     //通用-热门基金查询
-    this.fundRecommend = http_url.pof_url + '/index/fundRecommend';
+    this.fundRecommend_api = http_url.pof_url + '/fundDiagnosis/fundRecommend';
     /*------------------------------基金诊断end------------------------------------------*/
 
 };

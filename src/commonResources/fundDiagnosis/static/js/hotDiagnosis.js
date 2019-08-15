@@ -97,7 +97,7 @@ $(function() {
             mui('.contentWrapper').pullRefresh().pullupLoading();
 
             var obj = [{
-                url: site_url.fundRecommend, //私募产品列表
+                url: site_url.fundRecommend_api, //热门诊断推荐
                 data: {
                     "pageCurrent": that.page,
                     "pageSize": 10,
@@ -174,7 +174,7 @@ $(function() {
         events: function() {
             var that = this;
 
-            mui("body").on("tap", ".branchSearchArea", function() {
+            mui("body").on("tap", ".topSearch", function() {
                 window.location.href = site_url.diagnosisSearch_url;
             });
         },

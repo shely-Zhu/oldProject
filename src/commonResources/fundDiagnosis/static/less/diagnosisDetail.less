@@ -8,302 +8,84 @@
 @import url("@pathCommonLess/components/againEnter.less");
 
 
-html,
-body {
-    height: 100%;
-}
 
-
-.clearfix {
-    &:after {
-        display: block;
-        width: 0;
-        height: 0;
-        content: "";
-        clear: both;
-        visibility: hidden;
-    }
-
-}
-
-.hotDiagnosis {
-    height: 100%;
+.diagnosisDetail {
     font-family: 'Arial, Microsoft YaHei", "Helvetica';
-    background-color: @c005;
-
-
-    // 重置
-    .mui-table-view {
-
-        &:after,
-        &:before {
-            content: none;
-        }
-
-        .mui-table-view-cell {
-
-            &:after {
-                content: none;
-            }
-
-            &.mui-active {
-                background-color: @c005;
-            }
-
-            padding: 0 1.7rem;
-        }
-    }
-
-    // 顶部固定区域
-    .fixedWrap {
-        position: fixed;
-        width: 100%;
-        height: 8rem;
-        top: 0;
-        z-index: 1000;
-
-
-        //搜索
-        .branchSearchArea {
-
-            .branchHeader {
-                padding: 0.5rem 1.3rem;
-                background-color: @c005;
-                width: 100%;
-
-                .mui-input-row {
-                    height: 3.3rem;
-                }
-
-                .search {
-                    background-color: @f7f7f7;
-                    border: 1px solid @c008;
-                    border-radius: 0.2rem;
-                    position: relative;
-
-                    .branchSearchInput {
-                        color: @3c3c3c;
-                        display: inline-block;
-                        font-size: 1.2rem;
-                        height: 3.3rem;
-                        background: transparent;
-                        width: 80%;
-                    }
-
-                    .searchicon {
-                        font-size: 1.6rem;
-                        margin-left: 0.7rem;
-                        margin-right: 0.4rem;
-                        display: inline-block;
-                        color: @c001;
-                    }
-
-                    .mui-icon-clear {
-                        right: 0.6rem;
-                        font-size: 1.4rem;
-                        line-height: 2.5rem;
-                        margin: 0;
-                        width: 3rem;
-                        top: 0.4rem;
-
-                        &:before {
-                            content: '取消';
-                            color: @ff6905;
-                            font-size: 1.2rem;
-                        }
-                    }
-                }
-
-                .close {
-                    color: @ff6905;
-                    border: none;
-                    font-size: 1.2rem;
-                    width: 2.6rem;
-                    text-align: center;
-                    position: absolute;
-                    right: 0.9rem;
-                    top: -0.2rem;
-                    padding: 0;
-                    line-height: 2.7rem;
-                    margin: 0;
-                    height: 2.5rem;
-                    background: transparent;
-                }
-            }
-
-            .branchBody {
-                margin-top: 4.1rem;
-                overflow: hidden;
-
-                .mui-card {
-                    .card-head {
-                        padding: 1rem 0;
-                        border-bottom: 1px solid @c008;
-                        font-size: 1.6rem;
-
-                        .num {
-                            color: @c003;
-                            margin-right: 2.5rem;
-                        }
-
-                        .num,
-                        .name {
-                            font-size: 1.2rem;
-                        }
-                    }
-
-                    .card-theme {
-                        margin: 1.6rem 0 1.2rem;
-                        padding-right: 1.6rem;
-
-                        .mar15 {
-                            margin-bottom: 1.5rem;
-                        }
-
-                        .inv {
-                            font-size: 1.6rem;
-                            color: @c002;
-
-                            &.invCore {
-                                color: @c006;
-
-                                span {
-                                    font-size: 1.3rem;
-                                }
-
-                                span.profitMax {
-                                    font-size: 1.6rem;
-                                }
-                            }
-
-                            &.float {
-                                font-size: 1.4rem;
-                                line-height: 1.7;
-                            }
-
-                            .profitMax {
-                                font-size: 1.6rem;
-                            }
-                        }
-
-                        .text {
-                            font-size: 1.2rem;
-                            color: @c001;
-                        }
-                    }
-                }
-            }
-        }
-
-        // 搜索结果
-        .resultWrap {
-            height: 5.1rem;
-            background: @f7f7f7;
-
-            .searchResult {
-                background: @c005;
-                height: 4rem;
-                line-height: 4rem;
-                font-size: 1.2rem;
-                color: @858d9d;
-                padding: 0 1.7rem;
-                border-top: 1px solid @edeff3;
-            }
-        }
-
-        // 热门诊断
-        .h2_title {
-            padding: 0 1.7rem;
-            color: @3c3c3c;
-            font-size: 1.4rem;
-            line-height: 4.3rem;
-            background-color: @f7f7f7;
-        }
-    }
-
-    // 热门列表
-    .hotFundList {
-        overflow: hidden;
-        margin-top: 8rem;
-
-        .card-theme {
-            .mui-row {
-                padding: 1.4rem 0;
-                border-bottom: 1px solid @edeff3;
-
-                .imgNum {
-                    width: 1.5rem;
-                    padding-top: 0.5rem;
-                }
-
-                .fontNum {
-                    color: @3c3c3c;
-                    font-size: 0.9rem;
-                    line-height: 2.3rem;
-                    margin-left: 0.4rem;
-                }
-
-                .fontBold {
-                    color: @2d2f46;
-                    font-size: 1.3rem;
-                    line-height: 2.3rem;
-
-                }
-
-                .lightColor {
-                    font-size: 1rem;
-                    line-height: 2rem;
-                    color: @999999;
-                }
-            }
-
-
-
-            .small {
-                color: @c001;
-                font-size: 1.2rem;
-                margin-top: 0.5rem;
-            }
-
-            .red {
-                color: @c010;
-                font-size: 1rem;
-                margin-top: 0.5rem;
-            }
-        }
-    }
-
-    // 底部按钮     
-    .btnBottom {
-        position: absolute;
-        bottom: 1.7rem;
-        margin: 2.5%;
-        height: 3.9rem;
-        line-height: 3.9rem;
-        width: 95%;
-        border-radius: 0.3rem;
-        border: solid 0.1rem @ededed;
-        background-color: @c005;
-        box-shadow: 0 0.1rem 0.4rem 0 rgba(0, 0, 0, 0.1);
-        padding: 0 1.8rem 0 1rem;
-        color: @837046;
-
-        .imgBottom {
-            margin-top: 0.8rem;
-            width: 2.4rem;
-        }
-
-        .fontBold {
-            padding-left: 1rem;
-            color: @837046;
-        }
-    }
+    background-color: @f7f7f7; 
 
     // 公共
     .right {
         text-align: right;
     }
 
+    .dd_fr{
+        float: right;
+    }
 
+    .dd_card{
+        background: @c005;
+        padding:1.7rem;
+        margin-top: 0.9rem;
+
+        .dd_h3{
+            font-size: 1.4rem;
+            color:@3c3c3c;
+            margin-bottom: 2.4rem;
+        }
+
+        .dd_small{
+            font-size: 0.9rem;
+            color: @878787;
+            margin-left: 0.9rem;
+        }
+    }
+
+    // 顶部
+    .dd_top {
+        height: 13.8rem;
+        padding: 1.7rem 1.7rem 1.4rem 1.7rem;
+        background: @f75348;
+        color: @c005;
+
+        .dd_name {
+            font-size: 1.4rem;
+        }
+
+        .dd_tag_wrap {
+            margin-top: 0.7rem;
+            margin-bottom: 3.2rem;
+
+            .dd_tag {
+                padding: 0.1rem 0.5rem;
+                font-size: 0.8rem;
+                margin-right: 0.4rem;
+                border: 1px solid @c005;
+
+            }
+
+        }
+
+        .dd_value{
+            color:@c005;
+            font-size: 1.7rem;
+            margin-bottom: 0.3rem;
+        }
+
+        .dd_text{
+            color:@c005;
+            opacity:0.7;
+            font-size: 1rem;
+            line-height: 1.2rem;
+        }
+    }
+
+    // 综合评分
+    .dd_score{
+        .dd_choice_1{
+            font-size: 1.2rem;
+            color:@4d3a12;
+            margin-bottom: 1.9rem;
+        }
+    }
 
 }

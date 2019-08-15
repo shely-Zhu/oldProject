@@ -1,5 +1,4 @@
-//基金诊断页面
-
+//基金诊断页面,基金诊断搜索页
 
 @import url("@pathInclude/css/mui.min.css");
 @import url("@pathCommonLess/reset.less");
@@ -23,7 +22,6 @@ body {
         clear: both;
         visibility: hidden;
     }
-
 }
 
 .hotDiagnosis {
@@ -155,73 +153,11 @@ body {
                     background: transparent;
                 }
             }
-
-            .branchBody {
-                margin-top: 4.1rem;
-                overflow: hidden;
-
-                .mui-card {
-                    .card-head {
-                        padding: 1rem 0;
-                        border-bottom: 1px solid @c008;
-                        font-size: 1.6rem;
-
-                        .num {
-                            color: @c003;
-                            margin-right: 2.5rem;
-                        }
-
-                        .num,
-                        .name {
-                            font-size: 1.2rem;
-                        }
-                    }
-
-                    .card-theme {
-                        margin: 1.6rem 0 1.2rem;
-                        padding-right: 1.6rem;
-
-                        .mar15 {
-                            margin-bottom: 1.5rem;
-                        }
-
-                        .inv {
-                            font-size: 1.6rem;
-                            color: @c002;
-
-                            &.invCore {
-                                color: @c006;
-
-                                span {
-                                    font-size: 1.3rem;
-                                }
-
-                                span.profitMax {
-                                    font-size: 1.6rem;
-                                }
-                            }
-
-                            &.float {
-                                font-size: 1.4rem;
-                                line-height: 1.7;
-                            }
-
-                            .profitMax {
-                                font-size: 1.6rem;
-                            }
-                        }
-
-                        .text {
-                            font-size: 1.2rem;
-                            color: @c001;
-                        }
-                    }
-                }
-            }
         }
 
         // 搜索结果
         .resultWrap {
+            display: none;
             height: 5.1rem;
             background: @f7f7f7;
 
@@ -329,7 +265,4 @@ body {
     .right {
         text-align: right;
     }
-
-
-
 }

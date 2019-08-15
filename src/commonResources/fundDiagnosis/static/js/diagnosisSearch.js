@@ -16,12 +16,11 @@ var tipAction = require('@pathCommonJs/components/tipAction.js');
 var splitUrl = require('@pathCommonJs/components/splitUrl.js')();
 var generateTemplate = require('@pathCommonJsComBus/generateTemplate.js');
 
-
 $(function() {
-
     var hotDiagnosis = {
         $e: {
-            hotFundList: $('.hotFundList .card-theme'), // 热门列表
+            hotFundList: $('.hotFundList .card-theme'), // 搜索列表
+            resultWrap: $('.resultWrap'), // 搜索结果
             fundListTemp: $('#fundList-template'), // 基金区域
             listLoading: $('.listLoading'), //所有数据区域，第一次加载的loading结构
             noData: $('.noData'), //没有数据的结构
@@ -30,12 +29,14 @@ $(function() {
             pageCurrent: 1, //当前页码，默认为1
             pageSize: 10,
             search: false, // 搜索
+            key:'',
         },
         page: 1,
+
         init: function() {
             var that = this;
             that.beforeFunc();
-            that.initMui(); // 兼容下面函数调用
+            that.initMui();
             that.events();
         },
         beforeFunc: function(t) {
@@ -49,7 +50,7 @@ $(function() {
                 $('.list, .contentWrapper').height(height).addClass('setHeight');
             }
         },
-        //初始化mui的上拉加载
+        // 初始化mui的上拉加载
         initMui: function() {
             var that = this;
             mui.init({
@@ -60,13 +61,13 @@ $(function() {
                         contentrefresh: '拼命加载中',
                         contentnomore: '没有更多了', //可选，请求完毕若没有更多数据时显示的提醒内容；
                         callback: function() {
-                            that.getData(this);
+                            that.getData(that.gV.key, this);
                         }
                     }
                 }
             });
 
-            mui.ready(function() { //init后需要执行ready函数，才能够初始化出来
+            /*mui.ready(function() { //init后需要执行ready函数，才能够初始化出来
 
                 //隐藏当前的加载中loading
                 if (!$('.list').hasClass('hasPullUp')) {
@@ -83,19 +84,20 @@ $(function() {
 
                 //为$id添加hasPullUp  class
                 $('.list').addClass('hasPullUp');
-            });
+            });*/
         },
         // 获取搜索数据
-        getData: function(t) {
+        getData: function(key, t) {
             var that = this;
             debugger;
             mui('.contentWrapper').pullRefresh().pullupLoading();
 
             var obj = [{
-                url: site_url.fundRecommend, //私募产品列表
+                url: site_url.query_api, //
                 data: {
                     "pageCurrent": that.page,
                     "pageSize": 10,
+                    "publicFundsKeyWords": key, ////产品检索关键字（简称、代码）非必填项   
 
                 },
                 needDataEmpty: false,
@@ -106,7 +108,10 @@ $(function() {
                         that.$e.noData.show();
                         return false;
                     } else {
-                        dataList = json.data.fundRecommendList;
+                        that.$e.resultWrap.find('.total').html(json.data.totalCount);
+                        that.$e.resultWrap.find('.word').html(key);
+                        dataList = json.data.pageList;
+                        that.$e.resultWrap.show()
                     }
 
 
@@ -135,6 +140,23 @@ $(function() {
                         // 页面++
                         that.gV.pageCurrent++;
 
+
+                        if( $('.list').hasClass('refresh') ){
+                            //当前为重新搜索，模板结构需要html进去
+                            generateTemplate(dataList, that.$e.hotFundList, that.$e.fundListTemp,true);
+                            
+                            //去掉list的refresh class
+                            $('.list').removeClass('refresh');
+
+                            //隐藏回到顶部按钮
+                            $('.goTopBtn').hide();
+
+                        }else{
+                            //非重新搜索，即上拉发起的请求，结果append进去
+                            $('.branchBody').find('.contentWrapper .mui-table-view-cell .mui-card').append(that.html);  
+
+                        }
+
                         //去掉mui-pull-bottom-pocket的mui-hidden
                         $('.contentWrapper').find('.mui-pull-bottom-pocket').removeClass('mui-hidden');
                         // 将列表插入到页面上
@@ -162,6 +184,48 @@ $(function() {
                 timeout = setTimeout(fn.apply(that), wait);
             }
         },
+        // 页面是否初始化过
+        judgePage: function() {
+            var that =this;
+            var key = $.util.regList.removeAllSpace($(".branchSearchInput").val());
+
+            that.gV.key = key;
+
+            if (that.gV.key) {
+
+                if (!$('.list').hasClass('hasPullUp')) { // 未初始化过
+                    debugger;
+
+                    //初始化后，隐藏上拉文字
+                    $('.list').find('.mui-pull-bottom-pocket').addClass('mui-hidden');
+
+                    //请求第一次数据
+                    mui('.contentWrapper').pullRefresh().pullupLoading();
+
+                    $('.list').addClass('hasPullUp');
+                } else {
+                    //已初始化，
+                    //refresh表示当前为搜索新数据，该class会在数据插入页面后去掉
+                    $('.list').addClass('refresh');
+
+                    //清空当前页面
+                    that.$e.hotFundList.html('');
+
+                    //清空页面后重置上拉加载，使回到顶部
+                    mui('.contentWrapper').pullRefresh().refresh(true);
+
+                    //隐藏上拉文字
+                    $('.list').find('.mui-pull-bottom-pocket').addClass('mui-hidden');
+                    debugger;
+
+                    //重设当前页码为1
+                    that.gV.currentPage = 1;
+
+                    //上拉，发送ajax请求
+                    mui('.contentWrapper').pullRefresh().pullupLoading();
+                }
+            } 
+        },
         events: function() {
             var that = this;
             debugger;
@@ -169,7 +233,7 @@ $(function() {
             // 搜索框
             var $searchInput = document.getElementById("searchInput");
 
-            $searchInput.oninput = that.debounce(that.initMui, 300);
+            $searchInput.oninput = that.debounce(that.judgePage, 300);
         },
     };
     hotDiagnosis.init();
