@@ -14,6 +14,8 @@ require('@pathCommonJs/ajaxLoading.js');
 require('@pathCommonJs/components/elasticLayer.js');
 var tipAction = require('@pathCommonJs/components/tipAction.js');
 var splitUrl = require('@pathCommonJs/components/splitUrl.js')();
+var radarChart = require('@pathCommonJsCom/echartCom/radarChart.js');
+var lineChart = require('@pathCommonJsCom/echartCom/lineChart.js');
 var generateTemplate = require('@pathCommonJsComBus/generateTemplate.js');
 
 
@@ -21,8 +23,10 @@ $(function() {
 
     var hotDiagnosis = {
         $e: {
-            hotFundList: $('.hotFundList .card-theme'), // 热门列表
-            fundListTemp: $('#fundList-template'), // 基金区域
+            ddTop: $('.dd_top'), // 顶部区域
+            ddEvaluate: $('.dd_evaluate'), // 评价
+            ddLine: $('.dd_line'), // 折现图
+            firstTemp: $('#first-template'), // 基金区域
             listLoading: $('.listLoading'), //所有数据区域，第一次加载的loading结构
             noData: $('.noData'), //没有数据的结构
         },
@@ -34,215 +38,76 @@ $(function() {
         page: 1,
         init: function() {
             var that = this;
-            /*that.beforeFunc();
-            that.initMui(); // 兼容下面函数调用
-            that.events();*/
+            that.getData();
+           
         },
-        beforeFunc: function(t) {
-            var that = this;
-
-            //设置切换区域的高度
-            //计算节点高度并设置
-            var height = windowHeight - $('.fixedWrap').height();
-
-            if (!$('.list .contentWrapper').hasClass('setHeight')) {
-                $('.list, .contentWrapper').height(height).addClass('setHeight');
-            }
-        },
-        //初始化mui的上拉加载
-        initMui: function() {
-            debugger
-            var that = this;
-            mui.init({
-                pullRefresh: {
-                    container: '.contentWrapper',
-                    up: {
-                        //auto: false,
-                        contentrefresh: '拼命加载中',
-                        contentnomore: '没有更多了', //可选，请求完毕若没有更多数据时显示的提醒内容；
-                        callback: function() {
-                            debugger;
-
-                            if (that.gV.search) { // 搜索数据
-                                that.getSearchData(this);
-                            } else { // 热门诊断
-                                that.getData(this);
-                            }
-
-                        }
-                    }
-                }
-            });
-
-            mui.ready(function() { //init后需要执行ready函数，才能够初始化出来
-
-                //隐藏当前的加载中loading
-                if (!$('.list').hasClass('hasPullUp')) {
-                    $('.list').find('.mui-pull-bottom-pocket').addClass('mui-hidden');
-                }
-
-                //显示loading
-                that.$e.listLoading.show();
-
-                //这一句初始化并第一次执行mui上拉加载的callback函数
-                mui('.contentWrapper').pullRefresh().pullupLoading();
-
-                //隐藏loading，调试接口时需要去掉
-                //setTimeout(function(){
-                that.$e.listLoading.hide();
-                //}, 2000);
-
-
-                //为$id添加hasPullUp  class
-                $('.list').addClass('hasPullUp');
-            });
-        },
+        
         getData: function(t) {
             var that = this;
-            debugger;
-            mui('.contentWrapper').pullRefresh().pullupLoading();
 
             var obj = [{
-                url: site_url.fundRecommend, //私募产品列表
+                url: site_url.queryFundBaseInfo_api, //基金诊断-基金基本信息
                 data: {
-                    "pageCurrent": that.page,
-                    "pageSize": 10,
-
+                    "fundCode": '001050',
                 },
-                needDataEmpty: false,
+                // needDataEmpty: false,
                 callbackDone: function(json) {
-                    var joinData = {};
-                    // 热门推荐，区分推荐还是搜索
-                    joinData.hot = true;
+                    var dataInfo = json.data;
 
-                    if (json.data.totalCount == 0) { // 没有记录不展示
-                        that.$e.noData.show();
-                        return false;
-                    } else {
-                        joinData.list = json.data.fundRecommendList;
-                    }
-
-                    // 给data添加图片
-                    $.each(joinData.list, function(i, el) {
-                        // 只有前3个需要加，大于3直接退出
-                        if (i > 3) {
-                            return false;
-                        }
-                        switch (el.serialNumber) {
-                            case '1':
-                                el.first = true;
-                                break;
-                            case '2':
-                                el.second = true;
-                                break;
-                            case '3':
-                                el.third = true;
-                                break;
-                        }
-                    })
-
-                    setTimeout(function() {
-
-                        if (joinData.list.length < that.gV.pageSize) {
-
-                            if (that.gV.pageCurrent == 1) { //第一页时
-
-                                if (joinData.list.length == 0) {
-                                    // 暂无数据显示
-                                    that.$e.noData.show();
-                                    return false;
-
-                                } else { // 没有更多数据了
-                                    t.endPullupToRefresh(true);
-                                }
-                            } else {
-                                //其他页-没有更多数据
-                                t.endPullupToRefresh(true);
-                            }
-                        } else { // 还有更多数据
-                            t.endPullupToRefresh(false);
-                        }
-
-                        // 页面++
-                        that.gV.pageCurrent++;
-
-                        //去掉mui-pull-bottom-pocket的mui-hidden
-                        $('.contentWrapper').find('.mui-pull-bottom-pocket').removeClass('mui-hidden');
-                        // 将列表插入到页面上
-                        generateTemplate(joinData, that.$e.hotFundList, that.$e.fundListTemp);
-                    }, 200)
-
+                    generateTemplate(dataInfo, that.$e.ddTop, that.$e.firstTemp);
                 },
                 callbackFail: function(json) {
                     tipAction(json.msg);
                 }
-            }]
-            $.ajaxLoading(obj);
-        },
-        // 防抖
-        debounce: function(fn, wait) {
-            var timeout = null;
-            var that = this;
-
-            return function() {
-                console.log(timeout);
-                if (timeout !== null) clearTimeout(timeout);
-
-                timeout = setTimeout(fn.apply(this), wait);
-            }
-        },
-        // 获取搜索数据
-        getSearchData: function(t,that) {
-
-            var obj = [{
-                url: site_url.fundRecommend, //私募产品列表
+            },{
+                url: site_url.queryRadarChartList_api, //基金诊断-雷达图
                 data: {
-                    "pageCurrent": that.page,
-                    "pageSize": 10,
+                    "fundCode": '001050',
+                },
+                // needDataEmpty: false,
+                callbackDone: function(json) {
+                    debugger;
+                    var dataList = json.data;
+                    var echartData = [[],[],[]]; //将数据按顺序传入
 
+                    $.each(dataList,function(i,j){ // 将数据组装成雷达图需要的数据
+                        echartData[i].push(j.stability); // 稳定性
+                        echartData[i].push(j.earningPower); // 收益表现
+                        echartData[i].push(j.decisionCapability); //择股择时能力
+                        echartData[i].push(j.companyPower); // 基金公司实力
+                        echartData[i].push(j.antiRiskCapability); // 抗风险性
+                    })
+
+                    // todo,有没有可能没有值
+                    radarChart(echartData);
+                    
+                },
+                callbackFail: function(json) {
+                    tipAction(json.msg);
+                }
+            },{
+                url: site_url.querySynthesizeQualitativeEvaluate_api, //基金诊断-综合定性评价
+                data: {
+                    "fundCode": 'G10006',
                 },
                 needDataEmpty: false,
                 callbackDone: function(json) {
-                    var joinData = {};
-
-                    if (json.data.totalCount == 0) { // 没有记录不展示
-                        that.$e.noData.show();
-                        return false;
-                    } else {
-                        joinData.list = json.data.fundRecommendList;
-                    }
-
-                    setTimeout(function() {
-
-                        if (joinData.list.length < that.gV.pageSize) {
-
-                            if (that.gV.pageCurrent == 1) { //第一页时
-
-                                if (joinData.list.length == 0) {
-                                    // 暂无数据显示
-                                    that.$e.noData.show();
-                                    return false;
-
-                                } else { // 没有更多数据了
-                                    t.endPullupToRefresh(true);
-                                }
-                            } else {
-                                //其他页-没有更多数据
-                                t.endPullupToRefresh(true);
-                            }
-                        } else { // 还有更多数据
-                            t.endPullupToRefresh(false);
-                        }
-
-                        // 页面++
-                        that.gV.pageCurrent++;
-
-                        //去掉mui-pull-bottom-pocket的mui-hidden
-                        $('.contentWrapper').find('.mui-pull-bottom-pocket').removeClass('mui-hidden');
-                        // 将列表插入到页面上
-                        generateTemplate(joinData, that.$e.hotFundList, that.$e.fundListTemp);
-                    }, 200)
-
+                    that.$e.ddEvaluate.html(json.data.content);
+                },
+                callbackFail: function(json) {
+                    tipAction(json.msg);
+                }
+            },{
+                url: site_url.queryCumulativeProfitCurveList_api, //基金诊断-累计收益曲线
+                data: {
+                    "fundCode": '001050',
+                    "timeSection": '1',/// 时间区间（1：近一月，2：近一年，3：成立以来）
+                },
+                // needDataEmpty: false,
+                callbackDone: function(json) {
+                    console.log(json.data);
+                    
+                    
                 },
                 callbackFail: function(json) {
                     tipAction(json.msg);
@@ -252,11 +117,7 @@ $(function() {
         },
         events: function() {
             var that = this;
-
-            // 搜索框
-            var $searchInput = document.getElementById("searchInput");
-
-            // $searchInput.oninput = that.debounce(that.initMui.apply(that), 300);
+           
         },
     };
     hotDiagnosis.init();

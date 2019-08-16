@@ -107,11 +107,19 @@ $(function() {
                 callbackDone: function(json) {
                     var dataList;
 
-                    if (json.data.totalCount == 0) { // 没有记录不展示
+                    // 待定
+                    /*if (json.data.totalCount == 0) { // 没有记录不展示
                         that.$e.noData.show();
                         return false;
                     } else {
                         dataList = json.data.fundRecommendList;
+                    }*/
+
+                    if (json.data.pageItems.totalCount == 0) { // 没有记录不展示
+                        that.$e.noData.show();
+                        return false;
+                    } else {
+                        dataList = json.data.pageList;
                     }
 
                     // 给data添加图片

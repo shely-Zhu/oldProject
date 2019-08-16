@@ -180,17 +180,20 @@ gulp.task('proxyTask', function() {
         middleware: function(connect, opt) {
             return [
                 proxy('/wap',  {
-                    target: 'https://h5.htjf4.com',
+                    // target: 'https://h5.htjf4.com',
+                    target: 'http://192.168.50.254:8083',
                     changeOrigin:true,
                     secure: false,
                 }),
                 proxy('/web/',  {
-                    target: 'https://h5.htjf4.com',
+                    target: 'http://192.168.50.254:8083',
+                    // target: 'https://h5.htjf4.com',
                     changeOrigin:true,
                     secure: false,
                 }),
                 proxy('/app',  {
-                    target: 'https://app.htjf4.com/',
+                    target: 'http://192.168.50.254:8083',
+                    // target: 'https://app.htjf4.com/',
                     changeOrigin:true,
                     secure: false,
                 }),

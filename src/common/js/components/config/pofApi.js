@@ -69,8 +69,16 @@ module.exports = function() {
 
 
     /*------------------------------基金诊断start------------------------------------------*/
+    //基金诊断-基金基本信息
+    this.queryFundBaseInfo_api = http_url.pof_url + '/frontend/fundDiagnosis/queryFundBaseInfo';
     //通用-热门基金查询
-    this.fundRecommend_api = http_url.pof_url + '/fundDiagnosis/fundRecommend';
+    this.fundRecommend_api = http_url.pof_url + '/frontend/fundDiagnosis/fundRecommend';
+    // 基金诊断-指标雷达图
+    this.queryRadarChartList_api = http_url.pof_url + '/frontend/fundDiagnosis/queryRadarChartList';
+    // 基金诊断-综合定性评价
+    this.querySynthesizeQualitativeEvaluate_api = http_url.pof_url + '/frontend/fundDiagnosis/querySynthesizeQualitativeEvaluate';
+    // 基金诊断-累计收益曲线
+    this.queryCumulativeProfitCurveList_api = http_url.pof_url + '/frontend/fundDiagnosis/queryCumulativeProfitCurveList';
     /*------------------------------基金诊断end------------------------------------------*/
 
 };
