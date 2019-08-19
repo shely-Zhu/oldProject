@@ -93,14 +93,14 @@ $(function() {
             mui('.contentWrapper').pullRefresh().pullupLoading();
 
             var obj = [{
-                url: site_url.query_api, //
+                url: site_url.query_api, //搜索接口
                 data: {
                     "pageCurrent": that.page,
                     "pageSize": 10,
                     "publicFundsKeyWords": key, ////产品检索关键字（简称、代码）非必填项   
 
                 },
-                needDataEmpty: false,
+                // needDataEmpty: false,
                 callbackDone: function(json) {
                     var dataList;
 

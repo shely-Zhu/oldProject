@@ -53,6 +53,7 @@ $(function() {
                 // needDataEmpty: false,
                 callbackDone: function(json) {
                     var dataInfo = json.data;
+                    debugger;
 
                     generateTemplate(dataInfo, that.$e.ddTop, that.$e.firstTemp);
                 },

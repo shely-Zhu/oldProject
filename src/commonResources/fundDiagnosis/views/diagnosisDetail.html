@@ -69,7 +69,6 @@
 
     <!-- 顶部 -->
     <script id="first-template" type="text/x-handlebars-template">
-    {{#each this}}
         <div class="dd_name">{{fundName}}  {{fundCode}}</div>
         <div class="dd_tag_wrap">
             <span class="dd_tag">{{type}}</span> 
@@ -100,7 +99,6 @@
                 <i>成立以来年化收益率</i>
             </div>
         </div>
-    {{/each}}
     </script>
     
     @@include('@pathInclude/views/footer.html')
