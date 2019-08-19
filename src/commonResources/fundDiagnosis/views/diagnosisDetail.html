@@ -18,6 +18,10 @@
 </head>
 
 <body>
+    <!-- 加载中loading -->
+    @@include('@pathCommonViews/loading/listLoading.html')
+    <!-- 暂无数据 -->
+    @@include('@pathCommonViews/noData.html')
     <section class="diagnosisDetail">
         <!-- 顶部 -->
         <div class="dd_top">
@@ -26,32 +30,32 @@
         <div class="dd_score dd_card">
             <h3 class="dd_h3">
                 综合评分
-                <span class="dd_small">数据统计截止<i class="dd_date_1">2019-09-09</i></span>
+                <span class="dd_small">数据统计截止<i class="dd_date_1">--</i></span>
                 <span class="dd_icon dd_fr">i</span>
             </h3>
             <div class="mui-row dd_choice_1">
-                <div class="mui-col-xs-3">短期一年</div>
+                <div class="mui-col-xs-3 active">短期一年</div>
                 <div class="mui-col-xs-3">中期3年</div>
                 <div class="mui-col-xs-3">长期5年</div>
             </div>
             <!-- 雷达图 -->
             <div class="dd_radar chartWrapper">
+                <i></i>
             </div>
         </div>
         <!-- 综合定性评价 --> 
         <div class="dd_card">
             <h3 class="dd_h3">
                 综合定性评价
-                <span class="dd_small">数据统计截止<i class="dd_date_1">2019-09-09</i></span>
+                <span class="dd_small">数据统计截止<i class="dd_date_2">--</i></span>
                 <span class="dd_icon dd_fr">i</span>
             </h3>
             <div class="dd_evaluate">
-                
             </div>
         </div>
         <!-- 累计收益曲线 -->
         <div class="dd_card">
-            <h3 class="dd_h3">累计收益曲线<span class="dd_small">数据统计截止<i class="dd_date_1">2019-09-09</i></span><span class="dd_icon dd_fr">i</span></h3>
+            <h3 class="dd_h3">累计收益曲线<span class="dd_small">数据统计截止<i class="dd_date_3">--</i></span><span class="dd_icon dd_fr">i</span></h3>
             <div class="dd_line"></div>
             <div class="mui-row dd_choice_1">
                 <div class="mui-col-xs-3">近一月</div>
@@ -82,10 +86,10 @@
                 <i>{{newNetValue}}</i>
             </div>
             <div class="mui-col-xs-4 center">
-                <i>{{newOneDayGains}}</i>
+                <i>{{newOneDayGains}}%</i>
             </div>
             <div class="mui-col-xs-4 right">
-                <i>{{yearEarnRate}}</i>
+                <i>{{yearEarnRate}}%</i>
             </div>
         </div>
         <div class="mui-row dd_text">
@@ -100,6 +104,8 @@
             </div>
         </div>
     </script>
+
+    
     
     @@include('@pathInclude/views/footer.html')
     <!-- 添加埋点 -->

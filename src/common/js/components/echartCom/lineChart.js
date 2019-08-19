@@ -15,57 +15,176 @@ require('echarts/lib/component/title');
 require('echarts/lib/component/legend');
 require('zrender/lib/vml/vml');*/
 
-module.exports = function(echartData,$e) {
-    debugger;
+/**
+ * [exports 折线图]
+ * @author songxiaoyu 2019-08-19
+ * @param  {[type]} lineChartData [折线图数据]
+ * @param  {[type]} num           [时间段]
+ * @param  {[type]} noData        [无数据集合]
+ * @param  {[type]} tip           [划过tooltip提示]
+ * @param  {[type]} $e            [折线图区域，默认chartWrapper]
+ * @return {[type]}               [description]
+ */
+module.exports = function(lineChartData,num,noData,tip, $e) {
     var ele = $e || $('.chartWrapper');
-    var myChart = echarts.init($e[0]);
+    var myChart = echarts.init(ele[0]);
+
+    var showData = true;
+
+   /* $.each(that.noData, function(i, el) {
+        if (el.num == num && el.hasData == false) {
+            //无数据，显示暂无数据
+            $('.lineWrapper').html(that.$e.noData.clone(false)).find('.noData').show();
+            showData = false;
+        }
+    })*/
+
+    /*if (!showData) {
+        //不画图
+        that.$e.listLoading.hide();
+        return false;
+    }
+*/
+    // $('.lineWrapper').html(that.$e.noData.clone(false)).find('.noData').show();
+
+    var xArr = lineChartData[num].xArr;
+    // 累计净值
+    var first = lineChartData[num]["first"];
+    var second = lineChartData[num]["second"];
+    var third = lineChartData[num]["third"];
+    var name = tip;
 
     var option = {
+
+        tooltip: {
+            trigger: 'axis',
+            // formatter: "日期：{b} <br/>{a}: {c}%",
+            formatter: function(params) {
+                var data = params[0];
+                if (type == 'navArr') { // 净值
+                    return '日期：' + data["name"] + '<br/>' + data["seriesName"] + '：' + data["value"]
+                } else {
+                    return '日期：' + data["name"] + '<br/>' + data["seriesName"] + '：' + data["value"] + '%'
+                }
+            },
+            backgroundColor: 'rgba(229,229,229,0.6)',
+            confine: true,
+            padding: 8,
+            textStyle: {
+                color: '#7d7c7d'
+            },
+        },
         title: {
-            text: '雷达'
+            show: false,
         },
-         legend: {
-            x: 'center',
-            data:['雷达']
+        grid: {
+            show: true,
+            left: 0,
+            right: "12%",
+            containLabel: true,
         },
-        radar: [
-            {
-                indicator: [
-                    { text: '稳定性' , max: 100},
-                    { text: '收益表现' , max: 100},
-                    { text: '择股择时能力', max: 100 },
-                    { text: '基金公司实力', max: 100 },
-                    { text: '抗风险性' , max: 100},
-                ],
-                center: ['50%', '50%'],
-                radius: 90
-            }
-        ],
-        series: [
-            {
-                type: 'radar',
-                tooltip: {
-                    trigger: 'item'
+        xAxis: [{
+            //position:'bottom',
+            type: 'category',
+            data: xArr,
+            axisLabel: {
+                //show: false,
+                interval: xArr.length - 2,
+                margin: 14,
+                textStyle: {
+                    color: '#7d7c7d'
+                }
+            },
+            axisTick: {
+                show: false
+            },
+            splitLine: {
+                show: true,
+                interval: Math.ceil(xArr.length / 6)
+            },
+            axisLine: {
+                lineStyle: {
+                    color: '#ccc'
+                }
+            },
+        }],
+        yAxis: {
+            type: 'value',
+            precision: 4,
+            axisTick: {
+                show: false
+            },
+            min: "dataMin",
+            axisLine: {
+                lineStyle: {
+                    color: '#ccc'
+                }
+            },
+            axisLabel: {
+                textStyle: {
+                    color: '#7d7c7d'
                 },
-                name: '雷达',
-                itemStyle: {normal: {areaStyle: {type: 'default'}}},
-                data: [
-                    {
-                        value: echartData[0],
-                        name: '雷达'
-                    },
-                    {
-                        value: echartData[1],
-                        name: '雷达'
-                    },
-                    {
-                        value: echartData[2],
-                        name: '雷达'
+                formatter: function(value, index) {
+                    if (value == 0) {
+                        return value;
+                    }else{
+                        return value.toFixed(2) + '%';
+
                     }
-                ]
+                }
             }
-        ]
+        },
+        series: [{
+            name: name,
+            type: 'line',
+            smooth: true,
+            data: first,
+            //clipOverflow: false,
+            lineStyle: {
+                normal: {
+                    color: '#fb685c'
+                }
+            },
+            itemStyle: {
+                normal: {
+                    borderColor: '#f4cf5c',
+                },
+            }
+        },{
+            name: name,
+            type: 'line',
+            smooth: true,
+            data: second,
+            //clipOverflow: false,
+            lineStyle: {
+                normal: {
+                    color: '#ffc363'
+                }
+            },
+            itemStyle: {
+                normal: {
+                    borderColor: '#f4cf5c',
+                },
+            }
+        },{
+            name: name,
+            type: 'line',
+            smooth: true,
+            data: third,
+            //clipOverflow: false,
+            lineStyle: {
+                normal: {
+                    color: '#60b0e0'
+                }
+            },
+            itemStyle: {
+                normal: {
+                    borderColor: '#f4cf5c',
+                },
+            }
+        }]
     };
 
     myChart.setOption(option);
+    // $e.listLoading.hide();
 }

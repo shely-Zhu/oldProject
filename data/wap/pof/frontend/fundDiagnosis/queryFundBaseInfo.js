@@ -22,12 +22,11 @@ var data = Mock.mock({
         "fundName": "基金名称", //基金名称
         "newNetValue": "1", //最新净值
         "newOneDayGains": "2", //最新日涨幅
-        "yearEarnRate": "", //年化收益率
-        "type": "" //,
-        "fundState": "", //基金状态
-        "grade": "", //评级
+        "yearEarnRate": "12", //年化收益率
+        "type": "", //,
+        "fundState": "12", //基金状态
+        "grade":"5", //评级
         "fundLableList": [{
-            "标签1"
         }] //基金标签
 
     }

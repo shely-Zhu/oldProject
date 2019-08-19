@@ -10,61 +10,42 @@
 //echarts图表
 var echarts = require('echarts/lib/echarts');
 require('echarts/lib/chart/radar');
-/*require('echarts/lib/component/tooltip');
+require('echarts/lib/component/tooltip');
 require('echarts/lib/component/title');
 require('echarts/lib/component/legend');
-require('zrender/lib/vml/vml');*/
+require('zrender/lib/vml/vml');
 
-module.exports = function(echartData) {
-    debugger;
-
-    var myChart = echarts.init($('.chartWrapper')[0]);
+module.exports = function(echartData, $e) {
+    var ele = $e || $('.chartWrapper');
+    var myChart = echarts.init(ele[0]);
 
     var option = {
-        title: {
-            text: '雷达'
+        legend: {
         },
-         legend: {
-            x: 'center',
-            data:['雷达']
-        },
-        radar: [
-            {
-                indicator: [
-                    { text: '稳定性' , max: 100},
-                    { text: '收益表现' , max: 100},
-                    { text: '择股择时能力', max: 100 },
-                    { text: '基金公司实力', max: 100 },
-                    { text: '抗风险性' , max: 100},
-                ],
-                center: ['50%', '50%'],
-                radius: 90
-            }
-        ],
-        series: [
-            {
-                type: 'radar',
-                tooltip: {
-                    trigger: 'item'
-                },
-                name: '雷达',
-                itemStyle: {normal: {areaStyle: {type: 'default'}}},
-                data: [
-                    {
-                        value: echartData[0],
-                        name: '雷达'
-                    },
-                    {
-                        value: echartData[1],
-                        name: '雷达'
-                    },
-                    {
-                        value: echartData[2],
-                        name: '雷达'
-                    }
-                ]
-            }
-        ]
+        radar: [{
+            indicator: [
+                { text: '稳定性', max: 100 },
+                { text: '收益表现', max: 100 },
+                { text: '择股择时能力', max: 100 },
+                { text: '基金公司实力', max: 100 },
+                { text: '抗风险性', max: 100 },
+            ],
+            center: ['50%', '50%'],
+            radius: 90
+        }],
+        series: [{
+            type: 'radar',
+            tooltip: {
+                trigger: 'item'
+            },
+            // name:'雷达',
+            // itemStyle: { normal: { areaStyle: { type: 'default' } } },
+            data: [{
+                    value: echartData,
+                    name: '短期一年'
+                }
+            ]
+        }]
     };
 
     myChart.setOption(option);

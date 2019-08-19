@@ -14,8 +14,10 @@ var Mock = require('mockjs');
 
 //1. 接口数据
 var data = Mock.mock({
+    // "status": "1000",
     "status": "0000",
     "msg": "处理成功！",
+    // "data":null,
     "data": [{
         "earningPower": "20", //收益表现
         "antiRiskCapability": "30", //抗风险性
