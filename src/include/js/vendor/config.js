@@ -9,10 +9,8 @@ require('../../../common/js/components/config/windowConfig.js');
 var goUrl = require('../../../common/js/components/config/goUrl.js'); 
 //私募接口
 var pefApi = require('../../../common/js/components/config/pefApi.js');
-// var privateApi = require('../../../common/js/components/config/privateApi.js');
 //公募接口
 var pofApi = require('../../../common/js/components/config/pofApi.js');
-// var publicApi = require('../../../common/js/components/config/publicApi.js');
 // 内容接口
 var contentApi = require('../../../common/js/components/config/contentApi.js');
 // 账户相关
@@ -21,11 +19,6 @@ var accountApi = require('../../../common/js/components/config/accountApi.js');
 var webApi = require('../../../common/js/components/config/webApi.js');
 // app相关
 var appApi = require('../../../common/js/components/config/appApi.js')
-
-// var jointApi = require('../../../common/js/components/config/jointApi.js');
-// app里面私募掉公募接口
-// var crossApi = require('../../../common/js/components/config/crossInterface.js');
-
 
 //声明site_url
 window.site_url = { 

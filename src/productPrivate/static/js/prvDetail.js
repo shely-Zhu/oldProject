@@ -98,7 +98,7 @@ var prvDetail = {
         $(".accMartical").attr("href", "/productPrivate/views/collectAcco.html?fundCode=" + arg["fundCode"]);
 
         obj = [{
-            url: site_url.prvDetail_api, // queryProductDetail
+            url: site_url.prvDetail_api, // queryFundDetail
             data: {
                  projectId: arg["fundCode"] // 产品代码
             },
@@ -110,7 +110,8 @@ var prvDetail = {
                     businessCompareReferenceMin = json.businessCompareReferenceMin,
                     businessCompareReferenceMax = json.businessCompareReferenceMax,
                     isNewcomer = json.isNewcomer,
-                    isElecContract = json.isElecContract;
+                    isElecContract = json.isElecContract,
+                    orderConditionEnum = json.orderConditionEnum; //预约资质
 
                 that.unitNetValue = json.unitNetValue;
                 that.netValueDate = json.netValueDate;
@@ -118,6 +119,17 @@ var prvDetail = {
                 // that.reserveId = json.reserveId;
                 that.isNewcomer = (isNewcomer == "1") ? 1 : 0; // 新手产品
                 that.isElecContract = (isElecContract == "1") ? 1 : 0;
+                debugger;
+
+
+                // 预约条件
+                if(orderConditionEnum == '1'){
+                    $('.pd_condition i').html('预约资质：私募合格投资者或资管合格投资者')
+                    $('.pd_condition').show();
+                } else if(orderConditionEnum == '2'){
+                    $('.pd_condition i').html('预约资质：资管合格投资者')
+                    $('.pd_condition').show();
+                }
                 
                 if(json.investStart != ''){
                     $(".invStart").html(json.investStart);

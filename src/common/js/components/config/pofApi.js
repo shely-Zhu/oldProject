@@ -8,9 +8,6 @@
 
 
 module.exports = function() {
-    this.prvDetail_api = http_url.pof_url + '/queryProductDetail'; //私募详情查询
-
-
     /*------------------------------------------------------恒小智接口  start----------------------------------------------*/
     // 组合列表查询
     this.combinFundList_api = http_url.pof_url + '/smartInvestment/combinFundList';
@@ -79,6 +76,11 @@ module.exports = function() {
     this.querySynthesizeQualitativeEvaluate_api = http_url.pof_url + '/frontend/fundDiagnosis/querySynthesizeQualitativeEvaluate';
     // 基金诊断-累计收益曲线
     this.queryCumulativeProfitCurveList_api = http_url.pof_url + '/frontend/fundDiagnosis/queryCumulativeProfitCurveList';
+    // 基金诊断-点击获取专属诊断报告
+    this.exclusiveDiagnosisReport_api = http_url.pof_url + '/fundDiagnosis/exclusiveDiagnosisReport';
+    // 基金诊断字典接口
+    this.queryDictionary_api = http_url.pof_url + '/frontend/fundDiagnosis/queryDictionary';
+
     /*------------------------------基金诊断end------------------------------------------*/
 
 };

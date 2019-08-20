@@ -31,8 +31,6 @@ $(function() {
             search: false, // 搜索
             key:'',
         },
-        page: 1,
-
         init: function() {
             var that = this;
             that.beforeFunc();
@@ -95,7 +93,7 @@ $(function() {
             var obj = [{
                 url: site_url.query_api, //搜索接口
                 data: {
-                    "pageCurrent": that.page,
+                    "pageCurrent": that.gV.pageCurrent,
                     "pageSize": 10,
                     "publicFundsKeyWords": key, ////产品检索关键字（简称、代码）非必填项   
 

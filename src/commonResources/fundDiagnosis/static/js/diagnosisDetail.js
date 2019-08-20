@@ -12,6 +12,7 @@ require('@pathIncludJs/vendor/zepto/deferred.js');
 require('@pathCommonJs/components/utils.js');
 require('@pathCommonJs/ajaxLoading.js');
 require('@pathCommonJs/components/elasticLayer.js');
+require('@pathCommonJs/components/elasticLayerTypeTwo.js');
 var tipAction = require('@pathCommonJs/components/tipAction.js');
 var splitUrl = require('@pathCommonJs/components/splitUrl.js')();
 var echarts = require('echarts/lib/echarts');
@@ -38,9 +39,15 @@ $(function() {
             search: false, // 搜索
             drawArr: [], //保存画图数据
             noData: [], //保存画图数据
-            echartData:[[],[],[]] // 雷达数据
+            echartData: [
+                [],
+                [],
+                []
+            ], // 雷达数据
+            fundCode: splitUrl['fundCode'],
+            tipArr: [], // 提示集合
+            noDataArr: ['暂无数据，成立时间不满1年', '暂无数据，成立时间不满3年', '暂无数据，成立时间不满5年']
         },
-        page: 1,
         init: function() {
             var that = this;
             that.getData();
@@ -53,12 +60,15 @@ $(function() {
             var obj = [{
                 url: site_url.queryFundBaseInfo_api, //基金诊断-基金基本信息
                 data: {
-                    "fundCode": '001050',
+                    "fundCode": that.gV.fundCode,
                 },
                 // needDataEmpty: false,
                 callbackDone: function(json) {
-                    var dataInfo = json.data;
+                    var dataInfo = json.data,
+                        fundLableList_new = dataInfo.fundLableList[0];
 
+                    dataInfo["fundLableList_new"] = fundLableList_new; // 标签只展示第一个处理
+                    // 模板输出
                     generateTemplate(dataInfo, that.$e.ddTop, that.$e.firstTemp);
                 },
                 callbackFail: function(json) {
@@ -67,11 +77,12 @@ $(function() {
             }, {
                 url: site_url.queryRadarChartList_api, //基金诊断-雷达图
                 data: {
-                    "fundCode": '001050',
+                    "fundCode": that.gV.fundCode,
                 },
                 needDataEmpty: true,
                 callbackDone: function(json) {
-                    var dataList = json.data;
+                    var dataList = json.data,
+                        standardDate = dataList && dataList[0] && dataList[0].standardDate || '--';
 
                     $.each(dataList, function(i, j) { // 将数据组装成雷达图需要的数据
                         that.gV.echartData[i].push(j.stability); // 稳定性
@@ -85,22 +96,36 @@ $(function() {
                     radarChart(that.gV.echartData[0]);
 
                     // 日期赋值
-                    $('.dd_date_1').html((dataList && dataList[0].standardDate))
+                    $('.dd_date_1,.dd_date_2').html(standardDate)
                 },
                 callbackFail: function(json) {
                     tipAction(json.msg);
                 },
                 callbackNoData: function(json) { // 暂无数据
-                    $('.chartWrapper i').html('暂无数据，成立时间不满1年')
+                    $('.chartWrapper i').html(that.gV.noDataArr[0])
                 }
             }, {
                 url: site_url.querySynthesizeQualitativeEvaluate_api, //基金诊断-综合定性评价
                 data: {
-                    "fundCode": 'G10006',
+                    "fundCode": that.gV.fundCode,
                 },
                 needDataEmpty: false,
                 callbackDone: function(json) {
                     that.$e.ddEvaluate.html(json.data.content);
+                },
+                callbackFail: function(json) {
+                    tipAction(json.msg);
+                }
+            }, {
+                url: site_url.queryDictionary_api, //基金诊断-字典接口
+                data: {
+                    "dicType": 'fundDiagnosisKey',
+                },
+                // needDataEmpty: false,
+                callbackDone: function(json) {
+                    var jsonData = json.data.list;
+
+                    that.gV.tipArr = jsonData;
                 },
                 callbackFail: function(json) {
                     tipAction(json.msg);
@@ -117,35 +142,29 @@ $(function() {
             var obj = { //画图
                 url: site_url.queryCumulativeProfitCurveList_api, //基金诊断-累计收益曲线
                 data: {
-                    "fundCode": '001050',
-                    "timeSection": '1', /// 时间区间（1：近一月，2：近一年，3：成立以来）
+                    "fundCode": that.gV.fundCode,
+                    "timeSection": '2', /// 时间区间（1：近一月，2：近一年，3：成立以来）
                 },
                 callbackDone: function(json) {
+
+                    var jsonData = json.data,
+                        time = jsonData.time; // 统计时间
                     // 将空(成立以来)转为20，
-                    (num == '') ? num = 20: num;
+                    // (num == '') ? num = 20: num;
 
+                    // 画图
                     that.dealData(json.data.fundProfitRateSection, num);
-
                     lineChart(that.gV.drawArr, num, that.gV.noData, '收益率', that.$e.ddLine);
+
+                    // 时间赋值
+                    $('.dd_date_3').html(time)
 
                 },
                 callbackFail: function(json) {
                     that.$e.listLoading.hide();
                     tipAction(json.message);
-
                 },
-                callbackNoData: function(json) {
-                    //显示暂无数据
-                    $('.lineWrapper').html(that.$e.noData.clone(false))
-                        .find('.noData').show();
 
-                    that.$e.listLoading.hide();
-                    //设置暂无数据
-                    that.gV.noData.push({
-                        num: num,
-                        hasData: false
-                    })
-                }
             };
             return obj;
         },
@@ -179,11 +198,28 @@ $(function() {
             var that = this;
 
             mui("body").on('tap', '.dd_choice_1 .mui-col-xs-3', function(e) { // 一年，3年，5年
-                debugger;
                 var i = $(this).index();
                 $(this).addClass('active').siblings().removeClass('active');
-                radarChart(that.gV.echartData[i]);
+                // 切换图表
+                if (that.gV.echartData[i].length != 0) {
+                    radarChart(that.gV.echartData[i]);
+                } else {
+                    $('.chartWrapper i').html(that.gV.noDataArr[i])
+                }
+            })
 
+            // 文案提示
+            mui("body").on('tap', '.dd_icon', function() {
+                var i = $(this).attr('num');
+                var value = that.gV.tipArr[i] && that.gV.tipArr[i].value;
+
+                $.elasticLayerTypeTwo({
+                    id: "tip",
+                    title: '提示',
+                    p: '<p>' + value + '</p>',
+                    buttonTxt: '知道了',
+                    zIndex: 100,
+                });
             })
         },
     };

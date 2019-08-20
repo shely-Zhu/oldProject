@@ -12,9 +12,11 @@ require('@pathIncludJs/vendor/zepto/deferred.js');
 require('@pathCommonJs/components/utils.js');
 require('@pathCommonJs/ajaxLoading.js');
 require('@pathCommonJs/components/elasticLayer.js');
+require('@pathCommonJs/components/elasticLayerTypeTwo.js');
 var tipAction = require('@pathCommonJs/components/tipAction.js');
 var splitUrl = require('@pathCommonJs/components/splitUrl.js')();
 var generateTemplate = require('@pathCommonJsComBus/generateTemplate.js');
+require('@pathCommonJs/components/elasticLayerTypeTwo.js');
 
 
 $(function() {
@@ -31,7 +33,6 @@ $(function() {
             pageSize: 10,
             search: false, // 搜索
         },
-        page: 1,
         init: function() {
             var that = this;
             that.beforeFunc();
@@ -99,7 +100,7 @@ $(function() {
             var obj = [{
                 url: site_url.fundRecommend_api, //热门诊断推荐
                 data: {
-                    "pageCurrent": that.page,
+                    "pageCurrent": that.gV.pageCurrent,
                     "pageSize": 10,
 
                 },
@@ -172,11 +173,44 @@ $(function() {
             }]
             $.ajaxLoading(obj);
         },
+        // 获取专属报告
+        getReport: function() {
+            var obj = [{
+                url: site_url.exclusiveDiagnosisReport_api, //基金诊断-获取专属诊断报告
+                needDataEmpty: false,
+                callbackDone: function(json) {
+                    $.elasticLayerTypeTwo({
+                        id: "tip",
+                        title: '提示',
+                        p: '<p>提交申请成功！该功能暂未开发查询功能，稍后我们会尽快将专属诊断报告发送至您的专属理顾</p>',
+                        buttonTxt: '知道了',
+                        zIndex: 100,
+                    })
+                },
+                callbackFail: function(json) {
+                    tipAction(json.msg);
+                }
+            }];
+            $.ajaxLoading(obj);
+
+        },
         events: function() {
             var that = this;
 
             mui("body").on("tap", ".topSearch", function() {
                 window.location.href = site_url.diagnosisSearch_url;
+            });
+
+            // 跳转详情页
+            mui("body").on("tap", ".hd_to_detail", function(e) {
+                var fundCode = $($(this).find('.lightColor')[0]).html();
+                window.location.href = site_url.diagnosisDetail_url + '?fundCode=' + fundCode;
+            });
+
+            // 获取专属报告
+            mui("body").on("tap", ".btnBottom", function() {
+                debugger;
+                that.getReport();
             });
         },
     };

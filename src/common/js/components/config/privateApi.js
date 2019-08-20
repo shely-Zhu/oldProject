@@ -70,7 +70,8 @@ module.exports = function() {
     //查询T+N日
     this.TNDay_api = http_url.pef_url + '/account/redemption/queryTNDay.action';
 
-    this.prvDetail_api = http_url.pef_url + '/product/details/queryProductDetail.action'; //私募详情查询
+    // 废弃
+    // this.prvDetail_api = http_url.pef_url + '/product/details/queryProductDetail.action'; //私募详情查询
     // this.prvNewValue_api = http_url.pef_url + '/product/details/queryNetValue.action'; //最新净值查询
     this.prvLight_api = http_url.pef_url + '/product/details/queryProductImage.action'; //产品亮点查询
     this.prvLevel_api = http_url.pef_url + '/product/details/queryBenefitLevel.action'; //受益级别查询
