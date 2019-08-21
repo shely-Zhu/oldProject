@@ -137,20 +137,17 @@ $(function() {
         },
         getDrawData: function(num) { //num为传进来的数据范围
             var that = this;
-            (num == 20) ? num = '': num; //成立以来 入参传20
 
             var obj = { //画图
                 url: site_url.queryCumulativeProfitCurveList_api, //基金诊断-累计收益曲线
                 data: {
                     "fundCode": that.gV.fundCode,
-                    "timeSection": '2', /// 时间区间（1：近一月，2：近一年，3：成立以来）
+                    "timeSection": num, /// 时间区间（1：近一月，2：近一年，3：成立以来）
                 },
                 callbackDone: function(json) {
 
                     var jsonData = json.data,
                         time = jsonData.time; // 统计时间
-                    // 将空(成立以来)转为20，
-                    // (num == '') ? num = 20: num;
 
                     // 画图
                     that.dealData(json.data.fundProfitRateSection, num);
@@ -167,6 +164,9 @@ $(function() {
 
             };
             return obj;
+        },
+        sendAjax:function(obj){
+            $.ajaxLoading([obj]);
         },
         dealData: function(jsonData, num) {
             var that = this;
@@ -197,7 +197,8 @@ $(function() {
         events: function() {
             var that = this;
 
-            mui("body").on('tap', '.dd_choice_1 .mui-col-xs-3', function(e) { // 一年，3年，5年
+            // 雷达图一年，3年，5年
+            mui("body").on('tap', '.dd_choice_1 .mui-col-xs-3', function(e) {
                 var i = $(this).index();
                 $(this).addClass('active').siblings().removeClass('active');
                 // 切换图表
@@ -206,6 +207,15 @@ $(function() {
                 } else {
                     $('.chartWrapper i').html(that.gV.noDataArr[i])
                 }
+            })
+
+
+            // 折线图 一月，一年，成立以来
+            mui("body").on('tap', '.dd_choice_2 span', function(e) {
+                var num = $(this).attr('num');
+                $(this).addClass('active').siblings().removeClass('active');
+                // 画图
+                that.sendAjax(that.getDrawData(num))
             })
 
             // 文案提示

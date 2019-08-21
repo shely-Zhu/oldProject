@@ -43,6 +43,15 @@
             .dd_icon {
                 width: 1.4rem;
                 height: 1.4rem;
+                position: relative;
+
+                &:after {
+                    position: absolute;
+                    content: '\e649';
+                    font-size: 2rem;
+                    right: 0;
+                    color: @dbc69a;
+                }
             }
 
             .dd_small {
@@ -146,23 +155,31 @@
             height: 25rem;
         }
 
-        .dd_choice_2{
-            width: 27.9rem;
+        .dd_choice_2 {
+            width: 27.2rem;
             height: 2.2rem;
             line-height: 2.2rem;
             border: 1px solid @868e9e;
             border-radius: 11rem;
             color: @dbc69a;
             margin: 0 auto;
+            overflow: hidden;
 
-            span{
+            span {
                 width: 8.9rem;
                 text-align: center;
                 display: inline-block;
                 border-right: 1px solid @868e9e;
+                float: left;
 
-                &:last-child{
+
+                &:last-child {
                     border-right: none;
+                }
+
+                &.active {
+                    background: @fcfaf5;
+                    color: @2a2315;
                 }
             }
         }
@@ -171,20 +188,20 @@
     }
 
     // 收益曲线
-    .dd_income{
+    .dd_income {
         font-size: 0.9rem;
 
-        .dd_font_10{
+        .dd_font_10 {
             font-size: 1rem;
         }
 
-        .dd_legend{
+        .dd_legend {
             text-align: right;
             margin-left: 3rem;
             float: right;
             position: relative;
 
-            &:before{
+            &:before {
                 width: 0.9rem;
                 height: 0.9rem;
                 content: '';
@@ -195,19 +212,18 @@
             }
         }
 
-        .dd_red{
-            &:before{
-            }
+        .dd_red {
+            &:before {}
         }
 
-        .dd_yellow{
-            &:before{
+        .dd_yellow {
+            &:before {
                 background: @ffc363,
             }
         }
 
-        .dd_blue{
-            &:before{
+        .dd_blue {
+            &:before {
                 background: @60b0e0;
             }
         }

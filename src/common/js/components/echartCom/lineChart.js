@@ -61,11 +61,7 @@ module.exports = function(lineChartData,num,noData,tip, $e) {
             // formatter: "日期：{b} <br/>{a}: {c}%",
             formatter: function(params) {
                 var data = params[0];
-                if (type == 'navArr') { // 净值
-                    return '日期：' + data["name"] + '<br/>' + data["seriesName"] + '：' + data["value"]
-                } else {
-                    return '日期：' + data["name"] + '<br/>' + data["seriesName"] + '：' + data["value"] + '%'
-                }
+                return '日期：' + data["name"] + '<br/>' + data["seriesName"] + '：' + data["value"] + '%'
             },
             backgroundColor: 'rgba(229,229,229,0.6)',
             confine: true,
