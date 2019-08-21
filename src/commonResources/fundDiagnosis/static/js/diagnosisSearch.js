@@ -58,7 +58,6 @@ $(function() {
                         contentrefresh: '拼命加载中',
                         contentnomore: '没有更多了', //可选，请求完毕若没有更多数据时显示的提醒内容；
                         callback: function() {
-                            console.log('我在getdata中');
                             that.getData(that.gV.key, this);
                         }
                     }
@@ -168,7 +167,6 @@ $(function() {
             that.gV.search = true;
 
             return function() {
-                console.log(timeout);
                 if (timeout !== null) clearTimeout(timeout);
 
                 timeout = setTimeout(fn.apply(that), wait);
@@ -187,7 +185,6 @@ $(function() {
                 that.$e.listLoading.show();
 
                 if (!$('.list').hasClass('hasPullUp')) { // 未初始化过
-                    console.log('未初始化');
 
                     that.initMui();
 
@@ -199,7 +196,6 @@ $(function() {
 
                     $('.list').addClass('hasPullUp');
                 } else {
-                    console.log('已初始化');
                     //已初始化，
                     //refresh表示当前为搜索新数据，该class会在数据插入页面后去掉
                     $('.list').addClass('refresh');

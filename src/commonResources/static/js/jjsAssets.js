@@ -73,9 +73,6 @@ $(function() {
                 needLogin: true, //需要判断是否登陆
                 callbackDone: function(json) { //成功后执行的函数
                     //jjs列表数据请求成功
-                    console.log(JSON.stringify(json.data.pageList));
-
-
                     if (!$.util.objIsEmpty(json.data.pageList)) {
 
                         var tplm = $("#dataLists").html();
@@ -86,10 +83,6 @@ $(function() {
                         var pageList = json.data.pageList;
 
                         if (json.data.pageItems.totalPages == that.page) {
-                            //$(".load").hide();
-
-                            console.log("加载结束最后一页");
-
                             that.flag = true;
 
                         } else {
@@ -108,7 +101,6 @@ $(function() {
                 url: site_url.getTotalAssets_api, //查询总资产 从中拿到jjs的资产
                 data: {},
                 callbackDone: function(json) {
-                    console.log(JSON.stringify(json));
                     //拿到jjs资产并填充界面
                     that.getElements.totalCount.html(json.data.jJSAssets);
                 },
@@ -149,8 +141,6 @@ $(function() {
                     async: false, //同步
                     callbackDone: function(json) { //成功后执行的函数
                         //jjs列表数据请求成功
-                        console.log(JSON.stringify(json.data.pageList));
-
                         var tplm = $("#dataLists").html();
                         var template = Handlebars.compile(tplm);
                         var html = template(json.data.pageList);
@@ -159,7 +149,6 @@ $(function() {
                         var pageList = json.data.pageList;
 
                         if (json.data.pageItems.totalPages == that.page) {
-                            console.log("加载结束最后一页");
                             that.flag = true;
 
                         } else {
