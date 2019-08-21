@@ -34,7 +34,6 @@ $(function() {
         init: function() {
             var that = this;
             that.beforeFunc();
-            that.initMui();
             that.events();
         },
         beforeFunc: function(t) {
@@ -59,6 +58,7 @@ $(function() {
                         contentrefresh: '拼命加载中',
                         contentnomore: '没有更多了', //可选，请求完毕若没有更多数据时显示的提醒内容；
                         callback: function() {
+                            console.log('我在getdata中');
                             that.getData(that.gV.key, this);
                         }
                     }
@@ -68,7 +68,6 @@ $(function() {
         // 获取搜索数据
         getData: function(key, t) {
             var that = this;
-            mui('.contentWrapper').pullRefresh().pullupLoading();
 
             var obj = [{
                 url: site_url.query_api, //搜索接口
@@ -139,7 +138,21 @@ $(function() {
                         $('.contentWrapper').find('.mui-pull-bottom-pocket').removeClass('mui-hidden');
                         // 将列表插入到页面上
                         generateTemplate(dataList, that.$e.hotFundList, that.$e.fundListTemp);
+
+                        that.highlightFunc(key);
+
+                        that.$e.listLoading.hide();
+
                     }, 200)
+
+                },
+                callbackNoData:function(){
+                    that.$e.resultWrap.find('.total').html(0);
+                    that.$e.listLoading.hide()
+                    t.endPullupToRefresh(true);
+                        
+                    //隐藏回到顶部按钮
+                    $('.goTopBtn').hide();
 
                 },
                 callbackFail: function(json) {
@@ -155,7 +168,6 @@ $(function() {
             that.gV.search = true;
 
             return function() {
-                console.log(that);
                 console.log(timeout);
                 if (timeout !== null) clearTimeout(timeout);
 
@@ -166,12 +178,18 @@ $(function() {
         judgePage: function() {
             var that =this;
             var key = $.util.regList.removeAllSpace($(".branchSearchInput").val());
+            that.$e.resultWrap.find('.total').html('--');
+            that.$e.resultWrap.find('.word').html(key);
 
             that.gV.key = key;
 
             if (that.gV.key) {
+                that.$e.listLoading.show();
 
                 if (!$('.list').hasClass('hasPullUp')) { // 未初始化过
+                    console.log('未初始化');
+
+                    that.initMui();
 
                     //初始化后，隐藏上拉文字
                     $('.list').find('.mui-pull-bottom-pocket').addClass('mui-hidden');
@@ -181,6 +199,7 @@ $(function() {
 
                     $('.list').addClass('hasPullUp');
                 } else {
+                    console.log('已初始化');
                     //已初始化，
                     //refresh表示当前为搜索新数据，该class会在数据插入页面后去掉
                     $('.list').addClass('refresh');
@@ -195,12 +214,25 @@ $(function() {
                     $('.list').find('.mui-pull-bottom-pocket').addClass('mui-hidden');
 
                     //重设当前页码为1
-                    that.gV.currentPage = 1;
+                    that.gV.pageCurrent = 1;
 
                     //上拉，发送ajax请求
                     mui('.contentWrapper').pullRefresh().pullupLoading();
                 }
             } 
+        },
+        // 将搜索到的数据标红
+        highlightFunc:function(key){
+            var array = key.split('');
+            var allName = $('.fontBold'); // 获取所有的基金名称和代码
+
+            for(var i = 0;i<allName.length;i++){
+                for(var j = 0;j<array.length;j++){
+                    // 创建表达式
+                    var reg = new RegExp("(" + array[j].replace(/,/, "|") + ")", "g")
+                    allName[i].innerHTML =allName[i].innerHTML.replace(reg,"<font color='#ff6905'>$1</font>");
+                }
+            }
         },
         events: function() {
             var that = this;
@@ -208,7 +240,7 @@ $(function() {
             // 搜索框
             var $searchInput = document.getElementById("searchInput");
 
-            $searchInput.oninput = that.debounce(that.judgePage, 300);
+            $searchInput.oninput = that.debounce(that.judgePage, 500);
         },
     };
     hotDiagnosis.init();

@@ -230,6 +230,7 @@ $(function() {
                     buttonTxt: '知道了',
                     zIndex: 100,
                 });
+
             })
         },
     };
