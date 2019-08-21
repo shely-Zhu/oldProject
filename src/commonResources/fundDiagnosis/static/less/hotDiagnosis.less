@@ -170,6 +170,11 @@ body {
                 color: @858d9d;
                 padding: 0 1.7rem;
                 border-top: 1px solid @edeff3;
+
+                .total{
+                    margin-left: 0.2rem;
+                    margin-right: 0.2rem;
+                }
             }
         }
 
@@ -274,10 +279,26 @@ body {
             padding-left: 1rem;
             color: @837046;
         }
+
+        .jumpIcon {
+            position: relative;
+
+            &:after {
+                position: absolute;
+                content: '\e67d';
+                font-size: 2rem;
+                right: 0;
+                color: @999999;
+            }
+        }
     }
 
     // 公共
     .right {
         text-align: right;
+    }
+
+    .red{
+        color: @ff6905;
     }
 }
