@@ -64,30 +64,10 @@ $(function() {
                     }
                 }
             });
-
-            /*mui.ready(function() { //init后需要执行ready函数，才能够初始化出来
-
-                //隐藏当前的加载中loading
-                if (!$('.list').hasClass('hasPullUp')) {
-                    $('.list').find('.mui-pull-bottom-pocket').addClass('mui-hidden');
-                }
-
-                //显示loading
-                that.$e.listLoading.show();
-
-                //这一句初始化并第一次执行mui上拉加载的callback函数
-                mui('.contentWrapper').pullRefresh().pullupLoading();
-
-                that.$e.listLoading.hide();
-
-                //为$id添加hasPullUp  class
-                $('.list').addClass('hasPullUp');
-            });*/
         },
         // 获取搜索数据
         getData: function(key, t) {
             var that = this;
-            debugger;
             mui('.contentWrapper').pullRefresh().pullupLoading();
 
             var obj = [{
@@ -192,7 +172,6 @@ $(function() {
             if (that.gV.key) {
 
                 if (!$('.list').hasClass('hasPullUp')) { // 未初始化过
-                    debugger;
 
                     //初始化后，隐藏上拉文字
                     $('.list').find('.mui-pull-bottom-pocket').addClass('mui-hidden');
@@ -214,7 +193,6 @@ $(function() {
 
                     //隐藏上拉文字
                     $('.list').find('.mui-pull-bottom-pocket').addClass('mui-hidden');
-                    debugger;
 
                     //重设当前页码为1
                     that.gV.currentPage = 1;
@@ -226,7 +204,6 @@ $(function() {
         },
         events: function() {
             var that = this;
-            debugger;
 
             // 搜索框
             var $searchInput = document.getElementById("searchInput");

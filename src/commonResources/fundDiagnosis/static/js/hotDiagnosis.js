@@ -209,7 +209,6 @@ $(function() {
 
             // 获取专属报告
             mui("body").on("tap", ".btnBottom", function() {
-                debugger;
                 that.getReport();
             });
         },

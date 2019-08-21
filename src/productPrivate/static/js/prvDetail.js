@@ -119,8 +119,6 @@ var prvDetail = {
                 // that.reserveId = json.reserveId;
                 that.isNewcomer = (isNewcomer == "1") ? 1 : 0; // 新手产品
                 that.isElecContract = (isElecContract == "1") ? 1 : 0;
-                debugger;
-
 
                 // 预约条件
                 if(orderConditionEnum == '1'){
