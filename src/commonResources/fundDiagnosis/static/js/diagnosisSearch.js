@@ -131,12 +131,12 @@ $(function() {
                             //非重新搜索，即上拉发起的请求，结果append进去
                             $('.branchBody').find('.contentWrapper .mui-table-view-cell .mui-card').append(that.html);  
 
+                            generateTemplate(dataList, that.$e.hotFundList, that.$e.fundListTemp);
                         }
 
                         //去掉mui-pull-bottom-pocket的mui-hidden
                         $('.contentWrapper').find('.mui-pull-bottom-pocket').removeClass('mui-hidden');
                         // 将列表插入到页面上
-                        generateTemplate(dataList, that.$e.hotFundList, that.$e.fundListTemp);
 
                         that.highlightFunc(key);
 
@@ -174,7 +174,7 @@ $(function() {
         },
         // 页面是否初始化过
         judgePage: function() {
-            var that =this;
+            var that = this;
             var key = $.util.regList.removeAllSpace($(".branchSearchInput").val());
             that.$e.resultWrap.find('.total').html('--');
             that.$e.resultWrap.find('.word').html(key);
@@ -230,13 +230,20 @@ $(function() {
                 }
             }
         },
-        events: function() {
+        events: function () {
             var that = this;
 
             // 搜索框
             var $searchInput = document.getElementById("searchInput");
-
+            //为li标签点击事件委托
             $searchInput.oninput = that.debounce(that.judgePage, 500);
+            // mui("body").on("tap", ".card-theme ", function (event) {
+            //     if (event.target) {
+            //         debugger
+            //         // window.location.href = site_url.diagnosisDetail_url+'?&fundCode='+'';
+            //     }
+                
+            // });
         },
     };
     hotDiagnosis.init();
