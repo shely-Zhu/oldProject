@@ -24,11 +24,11 @@ module.exports = function(echartData, $e) {
         },
         radar: [{
             indicator: [
-                { text: '稳定性', max: 100 },
-                { text: '收益表现', max: 100 },
-                { text: '择股择时能力', max: 100 },
-                { text: '基金公司实力', max: 100 },
-                { text: '抗风险性', max: 100 },
+                { text: '稳定性', max: 100},
+                { text: '收益表现', max: 100},
+                { text: '择股择时能力', max: 100},
+                { text: '基金公司实力', max: 100},
+                { text: '抗风险性', max: 100},
             ],
             center: ['50%', '50%'],
             radius: 90
@@ -40,6 +40,11 @@ module.exports = function(echartData, $e) {
             },
             // name:'雷达',
             // itemStyle: { normal: { areaStyle: { type: 'default' } } },
+            areaStyle: {
+                normal: {
+                    color:"red"
+                }
+            },
             data: [{
                     value: echartData,
                     name: '短期一年'
