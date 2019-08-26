@@ -171,5 +171,8 @@ var pathList = {
     "/personal/views/growth/growthReg.html" :{ evtid: '162', topic: '成长规则', info: ''} ,
 
     "/commonResources/views/jjsAssets.html" :{ evtid: '163', topic: '其他资产', info: ''} ,
-    "/productPrivate/views/collectAcco.html" :{ evtid: '164', topic: '募集账户', info: ''} 
+    "/productPrivate/views/collectAcco.html" :{ evtid: '164', topic: '募集账户', info: ''} ,
+    "/commonResources/fundDiagnosis/views/diagnosisDetail.html" :{ evtid: '165', topic: '基金诊断详情', info: ''} ,
+    "/commonResources/fundDiagnosis/views/diagnosisSearch.html" :{ evtid: '166', topic: '基金诊断搜索', info: ''} ,
+    "/commonResources/fundDiagnosis/views/hotDiagnosis.html" :{ evtid: '167', topic: '基金诊断热门', info: ''} ,
 }
