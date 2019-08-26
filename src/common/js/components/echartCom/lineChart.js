@@ -107,6 +107,7 @@ module.exports = function(lineChartData,num,noData,tip, $e) {
         yAxis: {
             type: 'value',
             precision: 4,
+            splitNumber: 3,
             axisTick: {
                 show: false
             },
