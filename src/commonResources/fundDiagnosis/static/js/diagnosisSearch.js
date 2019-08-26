@@ -241,6 +241,12 @@ $(function() {
             var $searchInput = document.getElementById("searchInput");
             
             $searchInput.oninput = that.debounce(that.judgePage, 500);
+        
+            mui("body").on("tap", ".mui-icon-clear", function (event) {
+                that.$e.hotFundList.html('');
+                that.$e.resultWrap.find('.total').html('--');
+                that.$e.resultWrap.find('.word').html(key);
+            })
             //为li标签点击事件委托
             mui("body").on("tap", ".card-theme ", function (event) {
                 if (event.target) {
