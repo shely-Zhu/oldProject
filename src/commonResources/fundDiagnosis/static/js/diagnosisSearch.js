@@ -215,7 +215,10 @@ $(function() {
                     //上拉，发送ajax请求
                     mui('.contentWrapper').pullRefresh().pullupLoading();
                 }
-            } 
+            } else {
+                //当数据清空时
+                that.$e.hotFundList.html('');
+            }
         },
         // 将搜索到的数据标红
         highlightFunc:function(key){
@@ -226,6 +229,7 @@ $(function() {
                 for(var j = 0;j<array.length;j++){
                     // 创建表达式
                     var reg = new RegExp("(" + array[j].replace(/,/, "|") + ")", "g")
+                    
                     allName[i].innerHTML =allName[i].innerHTML.replace(reg,"<font color='#ff6905'>$1</font>");
                 }
             }
@@ -235,15 +239,16 @@ $(function() {
 
             // 搜索框
             var $searchInput = document.getElementById("searchInput");
-            //为li标签点击事件委托
+            
             $searchInput.oninput = that.debounce(that.judgePage, 500);
-            // mui("body").on("tap", ".card-theme ", function (event) {
-            //     if (event.target) {
-            //         debugger
-            //         // window.location.href = site_url.diagnosisDetail_url+'?&fundCode='+'';
-            //     }
+            //为li标签点击事件委托
+            mui("body").on("tap", ".card-theme ", function (event) {
+                if (event.target) {
+                    var fundCode = $($(this).find('.lightColor')[0]).attr("fundCode");
+                    window.location.href = site_url.diagnosisDetail_url+'?fundCode='+fundCode;
+                }
                 
-            // });
+            });
         },
     };
     hotDiagnosis.init();
