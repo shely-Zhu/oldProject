@@ -122,10 +122,10 @@ var prvDetail = {
 
                 // 预约条件
                 if(orderConditionEnum == '1'){
-                    $('.pd_condition i').html('预约资质：私募合格投资者或资管合格投资者')
+                    $('.pd_condition i').html('预约条件：私募合格投资者或资管合格投资者')
                     $('.pd_condition').show();
                 } else if(orderConditionEnum == '2'){
-                    $('.pd_condition i').html('预约资质：资管合格投资者')
+                    $('.pd_condition i').html('预约条件：资管合格投资者')
                     $('.pd_condition').show();
                 }
                 
