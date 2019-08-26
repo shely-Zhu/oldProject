@@ -68,6 +68,9 @@ $(function() {
                         fundLableList_new = dataInfo.fundLableList[0];
 
                     dataInfo["fundLableList_new"] = fundLableList_new; // 标签只展示第一个处理
+                    dataInfo.newNetValue= dataInfo.newNetValue ? dataInfo.newNetValue : "--"
+                    dataInfo.newOneDayGains= dataInfo.newOneDayGains ? dataInfo.newOneDayGains : "--"
+                    dataInfo.yearEarnRate= dataInfo.yearEarnRate ? dataInfo.yearEarnRate : "--"
                     // 模板输出
                     generateTemplate(dataInfo, that.$e.ddTop, that.$e.firstTemp);
                 },
@@ -95,6 +98,7 @@ $(function() {
                     })
 
                     // todo,有没有可能没有值
+                    // echarts.init(document.getElementByclassName('main'))
                     radarChart(that.gV.echartData[0]);
 
                     // 日期赋值
