@@ -83,13 +83,15 @@ $(function() {
                 callbackDone: function(json) {
                     var dataList = json.data,
                         standardDate = dataList && dataList[0] && dataList[0].standardDate || '--';
-
-                    $.each(dataList, function(i, j) { // 将数据组装成雷达图需要的数据
-                        that.gV.echartData[i].push(j.stability); // 稳定性
-                        that.gV.echartData[i].push(j.earningPower); // 收益表现
-                        that.gV.echartData[i].push(j.decisionCapability); //择股择时能力
-                        that.gV.echartData[i].push(j.companyPower); // 基金公司实力
-                        that.gV.echartData[i].push(j.antiRiskCapability); // 抗风险性
+                    
+                    $.each(dataList, function (i, j) { // 将数据组装成雷达图需要的数据
+                        //根据ageLimit来分类
+                        var index = j.ageLimit == 1 ? 0: j.ageLimit == 3 ? 1 : 2;
+                        that.gV.echartData[index].push(j.stability); // 稳定性
+                        that.gV.echartData[index].push(j.earningPower); // 收益表现
+                        that.gV.echartData[index].push(j.decisionCapability); //择股择时能力
+                        that.gV.echartData[index].push(j.companyPower); // 基金公司实力
+                        that.gV.echartData[index].push(j.antiRiskCapability); // 抗风险性
                     })
 
                     // todo,有没有可能没有值
