@@ -20,36 +20,51 @@ module.exports = function(echartData, $e) {
     var myChart = echarts.init(ele[0]);
 
     var option = {
+        title: {
+            text: '综合评分', // 最后一个值是总分
+            subtext: echartData[echartData.length-1], // 最后一个值是总分
+            top:'40%',
+            left:'center',
+            textStyle: {
+                color: '#333',
+                fontSize: 14,
+            },
+            subtextStyle:{
+                color: '#fff',
+                fontSize: 20,
+            }
+        },
         legend: {
+        },
+        tooltip: {
+            trigger: 'item',
+            textStyle:{
+                align:'left',
+            }
         },
         radar: [{
             indicator: [
-                { text: '稳定性', max: 100},
-                { text: '收益表现', max: 100},
-                { text: '择股择时能力', max: 100},
-                { text: '基金公司实力', max: 100},
-                { text: '抗风险性', max: 100},
+                { text: '稳定性', max: 100 },
+                { text: '收益表现', max: 100 },
+                { text: '择股择时能力', max: 100 },
+                { text: '基金公司实力', max: 100 },
+                { text: '抗风险性', max: 100 },
             ],
             center: ['50%', '50%'],
             radius: 90
         }],
         series: [{
             type: 'radar',
-            tooltip: {
-                trigger: 'item'
-            },
-            // name:'雷达',
-            // itemStyle: { normal: { areaStyle: { type: 'default' } } },
+
             areaStyle: {
                 normal: {
-                    color:"red"
+                    color: "red"
                 }
             },
             data: [{
-                    value: echartData,
-                    name: '短期一年'
-                }
-            ]
+                value: echartData,
+                // name: '某软件'
+            }]
         }]
     };
 

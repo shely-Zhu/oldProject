@@ -31,22 +31,6 @@ module.exports = function(lineChartData,num,noData,tip, $e) {
 
     var showData = true;
 
-   /* $.each(that.noData, function(i, el) {
-        if (el.num == num && el.hasData == false) {
-            //无数据，显示暂无数据
-            $('.lineWrapper').html(that.$e.noData.clone(false)).find('.noData').show();
-            showData = false;
-        }
-    })*/
-
-    /*if (!showData) {
-        //不画图
-        that.$e.listLoading.hide();
-        return false;
-    }
-*/
-    // $('.lineWrapper').html(that.$e.noData.clone(false)).find('.noData').show();
-
     var xArr = lineChartData[num].xArr;
     // 累计净值
     var first = lineChartData[num]["first"];
@@ -91,11 +75,13 @@ module.exports = function(lineChartData,num,noData,tip, $e) {
                     color: '#7d7c7d'
                 }
             },
+            splitNumber:3,
+            interval:3,
             axisTick: {
                 show: false
             },
             splitLine: {
-                show: true,
+                show: false,
                 interval: Math.ceil(xArr.length / 6)
             },
             axisLine: {
@@ -121,12 +107,14 @@ module.exports = function(lineChartData,num,noData,tip, $e) {
                     color: '#7d7c7d'
                 },
                 formatter: function(value, index) {
-                    if (value == 0) {
+                    /*if (value == 0) {
                         return value;
                     }else{
                         return value.toFixed(2) + '%';
 
-                    }
+                    }*/
+
+                    return value.toFixed(2) + '%';
                 }
             }
         },
@@ -154,7 +142,7 @@ module.exports = function(lineChartData,num,noData,tip, $e) {
             //clipOverflow: false,
             lineStyle: {
                 normal: {
-                    color: '#ffc363'
+                    color: '#60b0e0'
                 }
             },
             itemStyle: {
@@ -170,7 +158,7 @@ module.exports = function(lineChartData,num,noData,tip, $e) {
             //clipOverflow: false,
             lineStyle: {
                 normal: {
-                    color: '#60b0e0'
+                    color: '#ffc363'
                 }
             },
             itemStyle: {
