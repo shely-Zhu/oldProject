@@ -32,6 +32,7 @@ module.exports = function(lineChartData,num,noData,tip, $e) {
     var showData = true;
 
     var xArr = lineChartData[num].xArr;
+    var dateArr = lineChartData[num].dateArr;
     // 累计净值
     var first = lineChartData[num]["first"];
     var second = lineChartData[num]["second"];
@@ -59,9 +60,14 @@ module.exports = function(lineChartData,num,noData,tip, $e) {
         },
         grid: {
             show: true,
-            left: 0,
-            right: "12%",
+            /*left: 0,
+            right: "5px",*/
             containLabel: true,
+            x:5,
+            y:30,
+            x2:5,
+            y2:30,
+            borderWidth:0//此处去掉那个白色边框
         },
         xAxis: [{
             //position:'bottom',
@@ -69,7 +75,7 @@ module.exports = function(lineChartData,num,noData,tip, $e) {
             data: xArr,
             axisLabel: {
                 //show: false,
-                interval: xArr.length - 2,
+                interval:Math.ceil(xArr.length / 3),
                 margin: 14,
                 textStyle: {
                     color: '#7d7c7d'
@@ -81,7 +87,7 @@ module.exports = function(lineChartData,num,noData,tip, $e) {
                 show: false
             },
             splitLine: {
-                show: false,
+                show: true,
                 interval: Math.ceil(xArr.length / 6)
             },
             axisLine: {
@@ -93,6 +99,7 @@ module.exports = function(lineChartData,num,noData,tip, $e) {
         yAxis: {
             type: 'value',
             precision: 4,
+            splitNumber:3,
             axisTick: {
                 show: false
             },
