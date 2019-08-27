@@ -8,12 +8,14 @@
 
 
 //echarts图表
-var echarts = require('echarts/lib/echarts');
-require('echarts/lib/chart/radar');
-require('echarts/lib/component/tooltip');
-require('echarts/lib/component/title');
-require('echarts/lib/component/legend');
-require('zrender/lib/vml/vml');
+
+var echarts = require('./echarts.min.js');
+//var echarts = require('echarts/lib/echarts');
+//require('echarts/lib/chart/radar');
+//require('echarts/lib/component/tooltip');
+//require('echarts/lib/component/title');
+//require('echarts/lib/component/legend');
+//require('zrender/lib/vml/vml');
 
 module.exports = function(echartData, $e) {
     var ele = $e || $('.chartWrapper');
@@ -26,7 +28,7 @@ module.exports = function(echartData, $e) {
             top:'40%',
             left:'center',
             textStyle: {
-                color: '#333',
+                color: '#fff',
                 fontSize: 14,
             },
             subtextStyle:{
@@ -44,16 +46,24 @@ module.exports = function(echartData, $e) {
         },
         radar: [{
             indicator: [
-                { text: '稳定性', max: 100 },
-                { text: '收益表现', max: 100 },
-                { text: '择股择时能力', max: 100 },
-                { text: '基金公司实力', max: 100 },
-                { text: '抗风险性', max: 100 },
+                { name: '稳定性', max: 100 },
+                { name: '收益表现', max: 100 },
+                { name: '择股择时能力', max: 100 },
+                { name: '基金公司实力', max: 100 },
+                { name: '抗风险性', max: 100 },
             ],
+            name:{
+                formatter:function(v){
+                    console.log(v);
+                    return v;
+                }
+            },
+            triggerEvent: true,
             center: ['50%', '50%'],
             radius: 90
         }],
         series: [{
+        	name:'',
             type: 'radar',
 
             areaStyle: {
@@ -68,5 +78,13 @@ module.exports = function(echartData, $e) {
         }]
     };
 
+
     myChart.setOption(option);
+	myChart.on('click',(params) => {
+//	    console.log(option.radar[0].indicator[params.event.topTarget.__dimIdx].name);
+	    if(!!params.event.topTarget.__dimIdx){
+	    		    option.series[0].data[0].value = echartData[params.event.topTarget.__dimIdx];
+	    }
+//	    option.series[0].data[0].value = echartData[echartData.length-1][params.event.topTarget.__dimIdx].name];
+	});
 }

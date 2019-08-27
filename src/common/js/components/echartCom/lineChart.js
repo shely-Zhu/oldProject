@@ -8,8 +8,9 @@
 
 
 //echarts图表
-var echarts = require('echarts/lib/echarts');
-require('echarts/lib/chart/line');
+var echarts = require('./echarts.min.js');
+//var echarts = require('echarts/lib/echarts');
+//require('echarts/lib/chart/line');
 /*require('echarts/lib/component/tooltip');
 require('echarts/lib/component/title');
 require('echarts/lib/component/legend');
