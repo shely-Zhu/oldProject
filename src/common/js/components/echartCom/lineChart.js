@@ -75,13 +75,12 @@ module.exports = function(lineChartData,num,noData,tip, $e) {
             axisLabel: {
                 //show: false,
                 interval:Math.ceil(xArr.length / 3),
+                //interval: xArr.length - 2,
                 margin: 14,
                 textStyle: {
                     color: '#7d7c7d'
                 }
             },
-            splitNumber:3,
-            interval:3,
             axisTick: {
                 show: false
             },
