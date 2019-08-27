@@ -44,6 +44,7 @@ $(function() {
                 [],
                 []
             ], // 雷达数据
+            standardDate: [],// 雷达开始日期
             fundCode: splitUrl['fundCode'],
             tipArr: [], // 提示集合
             noDataArr: ['暂无数据，成立时间不满1年', '暂无数据，成立时间不满3年', '暂无数据，成立时间不满5年']
@@ -86,8 +87,7 @@ $(function() {
                 },
                 needDataEmpty: true,
                 callbackDone: function(json) {
-                    var dataList = json.data,
-                        standardDate = dataList && dataList[0] && dataList[0].standardDate || '--';
+                    var dataList = json.data;
                     
                     $.each(dataList, function (i, j) { // 将数据组装成雷达图需要的数据
                         //根据ageLimit来分类
@@ -98,13 +98,15 @@ $(function() {
                         that.gV.echartData[index].push(j.companyPower); // 基金公司实力
                         that.gV.echartData[index].push(j.antiRiskCapability); // 抗风险性
                         that.gV.echartData[index].push(j.totalScore); // 总分
+                        that.gV.echartData[index].push(j.standardDate); // 开始时间
+                        that.gV.standardDate.push(j.standardDate);
                     })
 
                     // todo,有没有可能没有值
                     radarChart(that.gV.echartData[0]);
 
                     // 日期赋值
-                    $('.dd_date_1').html(standardDate)
+                    $('.dd_date_1').html(that.gV.standardDate[0]);
                 },
                 callbackFail: function(json) {
                     tipAction(json.msg);
@@ -185,7 +187,8 @@ $(function() {
                 first: [], // 基金收益
                 second: [], // 上证指数累计收益
                 third: [], // 沪深300指数累计收益
-                xArr: [] //x轴数据
+                xArr: [], //x轴数据
+                dateArr: [] //x轴数据
             };
 
             //处理jsonData
@@ -201,6 +204,13 @@ $(function() {
                     value: el.currentDate,
                     textStyle: { fontSize: 10 }
                 })
+                if (i==0 || i == (jsonData.length-1) || i == Math.ceil((jsonData.length-1)/2)) {
+                    that.gV.drawArr[num].dateArr.push({
+                        value: el.currentDate,
+                        textStyle: { fontSize: 10 }
+                    })
+                }
+                
 
             })
         },
@@ -214,9 +224,14 @@ $(function() {
                 // 切换图表
                 if (that.gV.echartData[i].length != 0) {
                     radarChart(that.gV.echartData[i]);
+                    var standardDate = that.gV.echartData[i].standardDate;
+                    $('.dd_date_1').html(that.gV.standardDate[i]);
                 } else {
-                    $('.chartWrapper i').html(that.gV.noDataArr[i])
+                    $('.chartWrapper').html(that.gV.noDataArr[i]);
+                    $('.dd_date_1').html('--');
+                    
                 }
+                
             })
 
 

@@ -22,23 +22,7 @@ var data = Mock.mock({
         "time": "", //时间
         "maxEarnRate": "1", //最大收益率
         "minEarnRate": "", //最小收益率
-        "fundProfitRateSection": [{
-            "fundProfitRate": '1', //基金收益率
-            "shanghaiCompositeIndexAvgreturnRate": '2', //上证指数累计收益率
-            "hs300IndexAvgreturnRate": '-3', //沪深300指数累计收益率   
-            "currentDate": "2019-4-1", //当前时间
-        },
-        {
-            "fundProfitRate": '3', //基金收益率
-            "shanghaiCompositeIndexAvgreturnRate": '4', //上证指数累计收益率
-            "hs300IndexAvgreturnRate": '-5', //沪深300指数累计收益率   
-            "currentDate": "2019-5-1", //当前时间
-        },{
-            "fundProfitRate": '5', //基金收益率
-            "shanghaiCompositeIndexAvgreturnRate": '6', //上证指数累计收益率
-            "hs300IndexAvgreturnRate": '7', //沪深300指数累计收益率   
-            "currentDate": "2019-6-1", //当前时间
-        }]
+        "fundProfitRateSection": [{"currentDate":"2019-07-29","fundProfitRate":0.00,"hs300IndexAvgreturnRate":0.00,"shanghaiCompositeIndexAvgreturnRate":0.00},{"currentDate":"2019-07-30","fundProfitRate":0.00,"hs300IndexAvgreturnRate":0.00,"shanghaiCompositeIndexAvgreturnRate":0.00},{"currentDate":"2019-07-31","fundProfitRate":0.00,"hs300IndexAvgreturnRate":0.00,"shanghaiCompositeIndexAvgreturnRate":0.00},{"currentDate":"2019-08-01","fundProfitRate":-1.00,"hs300IndexAvgreturnRate":1.00,"shanghaiCompositeIndexAvgreturnRate":0.00},{"currentDate":"2019-08-02","fundProfitRate":-3.00,"hs300IndexAvgreturnRate":1.00,"shanghaiCompositeIndexAvgreturnRate":0.00},{"currentDate":"2019-08-05","fundProfitRate":-4.00,"hs300IndexAvgreturnRate":1.00,"shanghaiCompositeIndexAvgreturnRate":0.00},{"currentDate":"2019-08-06","fundProfitRate":-5.00,"hs300IndexAvgreturnRate":1.00,"shanghaiCompositeIndexAvgreturnRate":1.00},{"currentDate":"2019-08-07","fundProfitRate":-5.00,"hs300IndexAvgreturnRate":1.00,"shanghaiCompositeIndexAvgreturnRate":1.00},{"currentDate":"2019-08-08","fundProfitRate":-4.00,"hs300IndexAvgreturnRate":2.00,"shanghaiCompositeIndexAvgreturnRate":1.00},{"currentDate":"2019-08-09","fundProfitRate":-6.00,"hs300IndexAvgreturnRate":2.00,"shanghaiCompositeIndexAvgreturnRate":1.00},{"currentDate":"2019-08-12","fundProfitRate":-4.00,"hs300IndexAvgreturnRate":2.00,"shanghaiCompositeIndexAvgreturnRate":1.00},{"currentDate":"2019-08-13","fundProfitRate":-5.00,"hs300IndexAvgreturnRate":2.00,"shanghaiCompositeIndexAvgreturnRate":1.00},{"currentDate":"2019-08-14","fundProfitRate":-4.00,"hs300IndexAvgreturnRate":2.00,"shanghaiCompositeIndexAvgreturnRate":1.00},{"currentDate":"2019-08-19","fundProfitRate":-1.00,"hs300IndexAvgreturnRate":3.00,"shanghaiCompositeIndexAvgreturnRate":1.00},{"currentDate":"2019-08-20","fundProfitRate":-1.00,"hs300IndexAvgreturnRate":3.00,"shanghaiCompositeIndexAvgreturnRate":1.00},{"currentDate":"2019-08-21","fundProfitRate":-1.00,"hs300IndexAvgreturnRate":3.00,"shanghaiCompositeIndexAvgreturnRate":1.00},{"currentDate":"2019-08-22","fundProfitRate":-1.00,"hs300IndexAvgreturnRate":3.00,"shanghaiCompositeIndexAvgreturnRate":1.00},{"currentDate":"2019-08-26","fundProfitRate":-1.00,"hs300IndexAvgreturnRate":null,"shanghaiCompositeIndexAvgreturnRate":null}]
 
     }
 });

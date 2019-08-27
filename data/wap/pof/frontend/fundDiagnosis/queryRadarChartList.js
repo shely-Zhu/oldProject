@@ -23,7 +23,7 @@ var data = Mock.mock({
         "stability": "99.00",
         "standardDate": "2019-08-23",
         "totalScore": "74.92"
-    }, {
+    }/*, {
         "ageLimit": "3",
         "antiRiskCapability": "41.74",
         "companyPower": "98.00",
@@ -41,7 +41,7 @@ var data = Mock.mock({
         "stability": "97.00",
         "standardDate": "2019-08-23",
         "totalScore": "67.45"
-    }],
+    }*/],
     "message": "操作成功！",
     "status": "0000"
 });
