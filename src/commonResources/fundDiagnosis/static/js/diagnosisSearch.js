@@ -251,6 +251,8 @@ $(function() {
             mui("body").on("tap", ".card-theme ", function (event) {
                 if (event.target) {
                     var fundCode = $($(this).find('.lightColor')[0]).attr("fundCode");
+                    $("#searchInput").val("");
+
                     window.location.href = site_url.diagnosisDetail_url+'?fundCode='+fundCode;
                 }
                 
