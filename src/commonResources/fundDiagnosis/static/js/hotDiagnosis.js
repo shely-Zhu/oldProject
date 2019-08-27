@@ -188,7 +188,7 @@ $(function() {
                     })
                 },
                 callbackFail: function(json) {
-                    tipAction(json.msg);
+                    tipAction(json.message);
                 }
             }];
             $.ajaxLoading(obj);

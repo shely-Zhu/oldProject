@@ -33,7 +33,6 @@ module.exports = function(lineChartData,num,noData,tip, $e) {
     var showData = true;
 
     var xArr = lineChartData[num].xArr;
-    var dateArr = lineChartData[num].dateArr;
     // 累计净值
     var first = lineChartData[num]["first"];
     var second = lineChartData[num]["second"];
@@ -77,23 +76,22 @@ module.exports = function(lineChartData,num,noData,tip, $e) {
             axisLabel: {
                 //show: false,
                 interval:Math.ceil(xArr.length / 3),
+                //interval: xArr.length - 2,
                 margin: 14,
                 textStyle: {
                     color: '#7d7c7d'
                 }
             },
-            splitNumber:3,
-            interval:3,
             axisTick: {
                 show: false
             },
             splitLine: {
-                show: true,
-                interval: Math.ceil(xArr.length / 6)
+                show: false,
+                //interval: Math.ceil(xArr.length / 6)
             },
             axisLine: {
                 lineStyle: {
-                    color: '#ccc'
+                    color: '#eee'
                 }
             },
         }],
@@ -107,7 +105,12 @@ module.exports = function(lineChartData,num,noData,tip, $e) {
             min: "dataMin",
             axisLine: {
                 lineStyle: {
-                    color: '#ccc'
+                    color: '#eee'
+                }
+            },
+            splitLine: {
+                lineStyle: {
+                    color: '#eee'
                 }
             },
             axisLabel: {

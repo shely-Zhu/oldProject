@@ -99,7 +99,6 @@ $(function() {
                         that.gV.echartData[index].push(j.companyPower); // 基金公司实力
                         that.gV.echartData[index].push(j.antiRiskCapability); // 抗风险性
                         that.gV.echartData[index].push(j.totalScore); // 总分
-                        that.gV.echartData[index].push(j.standardDate); // 开始时间
                         that.gV.standardDate.push(j.standardDate);
                     })
 
@@ -189,7 +188,6 @@ $(function() {
                 second: [], // 上证指数累计收益
                 third: [], // 沪深300指数累计收益
                 xArr: [], //x轴数据
-                dateArr: [] //x轴数据
             };
 
             //处理jsonData
@@ -205,14 +203,6 @@ $(function() {
                     value: el.currentDate,
                     textStyle: { fontSize: 10 }
                 })
-                if (i==0 || i == (jsonData.length-1) || i == Math.ceil((jsonData.length-1)/2)) {
-                    that.gV.drawArr[num].dateArr.push({
-                        value: el.currentDate,
-                        textStyle: { fontSize: 10 }
-                    })
-                }
-                
-
             })
         },
         events: function() {
