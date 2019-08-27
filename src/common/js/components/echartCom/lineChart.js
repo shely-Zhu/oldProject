@@ -65,7 +65,7 @@ module.exports = function(lineChartData,num,noData,tip, $e) {
             containLabel: true,
             x:5,
             y:30,
-            x2:5,
+            x2:30,
             y2:30,
             borderWidth:0//此处去掉那个白色边框
         },
@@ -75,12 +75,12 @@ module.exports = function(lineChartData,num,noData,tip, $e) {
             data: xArr,
             axisLabel: {
                 //show: false,
-                interval:Math.ceil(xArr.length / 3),
-                //interval: xArr.length - 2,
+                //interval:Math.ceil(xArr.length / 3),
+                interval: xArr.length - 2,
                 margin: 14,
                 textStyle: {
                     color: '#7d7c7d'
-                }
+                },
             },
             axisTick: {
                 show: false
