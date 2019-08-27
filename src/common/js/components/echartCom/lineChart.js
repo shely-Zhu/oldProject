@@ -32,7 +32,6 @@ module.exports = function(lineChartData,num,noData,tip, $e) {
     var showData = true;
 
     var xArr = lineChartData[num].xArr;
-    var dateArr = lineChartData[num].dateArr;
     // 累计净值
     var first = lineChartData[num]["first"];
     var second = lineChartData[num]["second"];
