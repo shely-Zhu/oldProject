@@ -73,6 +73,8 @@ $(function() {
                     dataInfo.yearEarnRate= dataInfo.yearEarnRate ? dataInfo.yearEarnRate : "--"
                     // 模板输出
                     generateTemplate(dataInfo, that.$e.ddTop, that.$e.firstTemp);
+                    // 基金曲线名称赋值
+                    $('.dd_line_legend .dd_red').html(dataInfo.fundName);
                 },
                 callbackFail: function(json) {
                     tipAction(json.msg);
@@ -95,14 +97,14 @@ $(function() {
                         that.gV.echartData[index].push(j.decisionCapability); //择股择时能力
                         that.gV.echartData[index].push(j.companyPower); // 基金公司实力
                         that.gV.echartData[index].push(j.antiRiskCapability); // 抗风险性
+                        that.gV.echartData[index].push(j.totalScore); // 总分
                     })
 
                     // todo,有没有可能没有值
-                    // echarts.init(document.getElementByclassName('main'))
                     radarChart(that.gV.echartData[0]);
 
                     // 日期赋值
-                    $('.dd_date_1,.dd_date_2').html(standardDate)
+                    $('.dd_date_1').html(standardDate)
                 },
                 callbackFail: function(json) {
                     tipAction(json.msg);
@@ -118,6 +120,8 @@ $(function() {
                 needDataEmpty: false,
                 callbackDone: function(json) {
                     that.$e.ddEvaluate.html(json.data.content);
+                    // 日期赋值
+                    $('.dd_date_2').html(json.data.standardDate)
                 },
                 callbackFail: function(json) {
                     tipAction(json.msg);
@@ -157,7 +161,7 @@ $(function() {
 
                     // 画图
                     that.dealData(json.data.fundProfitRateSection, num);
-                    lineChart(that.gV.drawArr, num, that.gV.noData, '收益率', that.$e.ddLine);
+                    lineChart(that.gV.drawArr, num, that.gV.noData, '基金收益率', that.$e.ddLine);
 
                     // 时间赋值
                     $('.dd_date_3').html(time)
@@ -190,7 +194,7 @@ $(function() {
                 that.gV.drawArr[num].first.push(isNaN(el.fundProfitRate) ? 0 : el.fundProfitRate);
                 // 上证指数累计收益
                 that.gV.drawArr[num].second.push(isNaN(el.shanghaiCompositeIndexAvgreturnRate) ? 0 : el.shanghaiCompositeIndexAvgreturnRate);
-                // 沪深300指数累计收益
+                // 沪深300指数累计收益--同类基金
                 that.gV.drawArr[num].third.push(isNaN(el.hs300IndexAvgreturnRate) ? 0 : el.hs300IndexAvgreturnRate);
                 //x轴数据
                 that.gV.drawArr[num].xArr.push({

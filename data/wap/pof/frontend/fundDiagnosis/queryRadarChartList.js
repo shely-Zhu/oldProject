@@ -14,38 +14,36 @@ var Mock = require('mockjs');
 
 //1. 接口数据
 var data = Mock.mock({
-    // "status": "1000",
-    "status": "0000",
-    "msg": "处理成功！",
-    // "data":null,
     "data": [{
-        "earningPower": "20", //收益表现
-        "antiRiskCapability": "30", //抗风险性
-        "stability": "40", //稳定性
-        "decisionCapability": "50", //择股择时能力
-        "companyPower": "60", //基金公司实力
-        "totalScore": "70", //总分，
-        "ageLimit": "", //成立时间年限
-        "standardDate": "", //计算基准日期
-    },{
-        "earningPower": "40", //收益表现
-        "antiRiskCapability": "40", //抗风险性
-        "stability": "40", //稳定性
-        "decisionCapability": "40", //择股择时能力
-        "companyPower": "40", //基金公司实力
-        "totalScore": "40", //总分，
-        "ageLimit": "", //成立时间年限
-        "standardDate": "", //计算基准日期
-    },{
-        "earningPower": "70", //收益表现
-        "antiRiskCapability": "70", //抗风险性
-        "stability": "70", //稳定性
-        "decisionCapability": "70", //择股择时能力
-        "companyPower": "70", //基金公司实力
-        "totalScore": "70", //总分，
-        "ageLimit": "", //成立时间年限
-        "standardDate": "", //计算基准日期
-    }]
+        "ageLimit": "1",
+        "antiRiskCapability": "37.54",
+        "companyPower": "99.00",
+        "decisionCapability": "99.00",
+        "earningPower": "59.72",
+        "stability": "99.00",
+        "standardDate": "2019-08-23",
+        "totalScore": "74.92"
+    }, {
+        "ageLimit": "3",
+        "antiRiskCapability": "41.74",
+        "companyPower": "98.00",
+        "decisionCapability": "98.00",
+        "earningPower": "10.46",
+        "stability": "98.00",
+        "standardDate": "2019-08-23",
+        "totalScore": "60.48"
+    }, {
+        "ageLimit": "5",
+        "antiRiskCapability": "90.22",
+        "companyPower": "97.00",
+        "decisionCapability": "97.00",
+        "earningPower": "3.02",
+        "stability": "97.00",
+        "standardDate": "2019-08-23",
+        "totalScore": "67.45"
+    }],
+    "message": "操作成功！",
+    "status": "0000"
 });
 
 
