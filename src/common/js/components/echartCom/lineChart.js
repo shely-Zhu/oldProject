@@ -87,8 +87,8 @@ module.exports = function(lineChartData,num,noData,tip, $e) {
                 show: false
             },
             splitLine: {
-                show: true,
-                interval: Math.ceil(xArr.length / 6)
+                show: false,
+                //interval: Math.ceil(xArr.length / 6)
             },
             axisLine: {
                 lineStyle: {
