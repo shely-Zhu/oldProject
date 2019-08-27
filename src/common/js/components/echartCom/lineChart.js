@@ -92,7 +92,7 @@ module.exports = function(lineChartData,num,noData,tip, $e) {
             },
             axisLine: {
                 lineStyle: {
-                    color: '#ccc'
+                    color: '#eee'
                 }
             },
         }],
@@ -106,7 +106,12 @@ module.exports = function(lineChartData,num,noData,tip, $e) {
             min: "dataMin",
             axisLine: {
                 lineStyle: {
-                    color: '#ccc'
+                    color: '#eee'
+                }
+            },
+            splitLine: {
+                lineStyle: {
+                    color: '#eee'
                 }
             },
             axisLabel: {
