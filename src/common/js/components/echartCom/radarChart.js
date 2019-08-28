@@ -60,7 +60,7 @@ module.exports = function(echartData, $e) {
             },
             triggerEvent: true,
             center: ['50%', '50%'],
-            radius: 90
+            radius: 80
         }],
         series: [{
         	name:'',
