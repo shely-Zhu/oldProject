@@ -134,6 +134,7 @@ module.exports = function(lineChartData,num,noData,tip, $e) {
             type: 'line',
             smooth: true,
             data: first,
+            symbol: 'none',
             //clipOverflow: false,
             lineStyle: {
                 normal: {
@@ -150,6 +151,7 @@ module.exports = function(lineChartData,num,noData,tip, $e) {
             type: 'line',
             smooth: true,
             data: second,
+            symbol: 'none',
             //clipOverflow: false,
             lineStyle: {
                 normal: {
@@ -166,6 +168,7 @@ module.exports = function(lineChartData,num,noData,tip, $e) {
             type: 'line',
             smooth: true,
             data: third,
+            symbol: 'none',
             //clipOverflow: false,
             lineStyle: {
                 normal: {
