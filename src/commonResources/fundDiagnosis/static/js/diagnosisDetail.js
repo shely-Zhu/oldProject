@@ -89,7 +89,6 @@ $(function() {
                 needDataEmpty: true,
                 callbackDone: function(json) {
                     var dataList = json.data;
-                    
                     $.each(dataList, function (i, j) { // 将数据组装成雷达图需要的数据
                         //根据ageLimit来分类
                         var index = j.ageLimit == 1 ? 0: j.ageLimit == 3 ? 1 : 2;
@@ -214,11 +213,15 @@ $(function() {
                 $(this).addClass('active').siblings().removeClass('active');
                 // 切换图表
                 if (that.gV.echartData[i].length != 0) {
+                    $('.radarEchart').css({"display": "block"})
+                    $('.NoDataRada').css({"display": "none"});
                     radarChart(that.gV.echartData[i]);
                     var standardDate = that.gV.echartData[i].standardDate;
                     $('.dd_date_1').html(that.gV.standardDate[i]);
                 } else {
-                    $('.chartWrapper').html(that.gV.noDataArr[i]);
+                    $('.radarEchart').css({ "display":"none"})
+                    $('.NoDataRada').css({"display": "block"});
+                    $('.NoDataRada').html(that.gV.noDataArr[i]);
                     $('.dd_date_1').html('--');
                     
                 }
