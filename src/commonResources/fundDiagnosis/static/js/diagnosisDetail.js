@@ -38,14 +38,22 @@ $(function() {
             pageCurrent: 1, //当前页码，默认为1
             pageSize: 10,
             search: false, // 搜索
-            drawArr: [], //保存画图数据
-            noData: [], //保存画图数据
+            drawArr: {
+                1: {},
+                2: {} ,
+                3: {} 
+            }, //保存画图数据
+            noData: [
+                [],
+                [],
+                []
+            ], //保存画图数据
             echartData: [
                 [],
                 [],
                 []
             ], // 雷达数据
-            standardDate: [],// 雷达开始日期
+            standardDate: [[],[],[]],// 雷达开始日期
             fundCode: splitUrl['fundCode'],
             tipArr: [], // 提示集合
             noDataArr: ['暂无数据，成立时间不满1年', '暂无数据，成立时间不满3年', '暂无数据，成立时间不满5年']
@@ -98,7 +106,7 @@ $(function() {
                         that.gV.echartData[index].push(j.companyPower); // 基金公司实力
                         that.gV.echartData[index].push(j.antiRiskCapability); // 抗风险性
                         that.gV.echartData[index].push(j.totalScore); // 总分
-                        that.gV.standardDate.push(j.standardDate);
+                        that.gV.standardDate[index]=j.standardDate;
                     })
 
                     // todo,有没有可能没有值
@@ -157,15 +165,15 @@ $(function() {
                 },
                 callbackDone: function(json) {
 
-                    var jsonData = json.data,
-                        time = jsonData.time; // 统计时间
+                    that.gV.drawArr[num] = json.data;
+                    // that.gV.drawArr[num].time = jsonData.time; // 统计时间
 
                     // 画图
                     that.dealData(json.data.fundProfitRateSection, num);
                     lineChart(that.gV.drawArr, num, that.gV.noData, '基金收益率', that.$e.ddLine);
 
                     // 时间赋值
-                    $('.dd_date_3').html(time)
+                    $('.dd_date_3').html(that.gV.drawArr[num].time)
 
                 },
                 callbackFail: function(json) {
@@ -234,7 +242,15 @@ $(function() {
                 var num = $(this).attr('num');
                 $(this).addClass('active').siblings().removeClass('active');
                 // 画图
-                that.sendAjax(that.getDrawData(num))
+                if (that.gV.drawArr[num] && that.gV.drawArr[num] != {}&&that.gV.drawArr[num].xArr&&that.gV.drawArr[num].xArr.length > 0) {
+                    // 画图
+                    lineChart(that.gV.drawArr, num, that.gV.noData, '基金收益率', that.$e.ddLine);
+
+                    // 时间赋值
+                    $('.dd_date_3').html( that.gV.drawArr[num].time)
+                } else {
+                    that.sendAjax(that.getDrawData(num))
+                }
             })
 
             // 文案提示
