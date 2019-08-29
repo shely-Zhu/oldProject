@@ -137,7 +137,9 @@ $(function() {
                 callbackDone: function(json) {
                     that.$e.ddEvaluate.html(json.data.content);
                     // 日期赋值
-                    $('.dd_date_2').html(json.data.standardDate)
+                    if (json.data.standardDate) {
+                        $('.dd_date_2').html(json.data.standardDate)
+                    }
                 },
                 callbackFail: function(json) {
                     tipAction(json.msg);
@@ -171,8 +173,9 @@ $(function() {
                     "timeSection": num, /// 时间区间（1：近一月，2：近一年，3：成立以来）
                 },
                 callbackDone: function(json) {
-
                     that.gV.drawArr[num] = json.data;
+                    $('.dd_line').css({ "display":"block"})
+                    $('.dd_lineNodata').css({ "display":"none"})
                     // that.gV.drawArr[num].time = jsonData.time; // 统计时间
 
                     // 画图
@@ -183,10 +186,16 @@ $(function() {
                     $('.dd_date_3').html(that.gV.drawArr[num].time)
 
                 },
-                callbackFail: function(json) {
+                callbackFail: function (json) {
                     that.$e.listLoading.hide();
                     tipAction(json.message);
+                    $('.dd_line').css({ "display":"none"})
+                    $('.dd_lineNodata').css({ "display":"block"})
                 },
+                callbackNoData: function (json) {
+                    $('.dd_line').css({ "display":"none"})
+                    $('.dd_lineNodata').css({ "display":"block"})
+                }
 
             };
             return obj;
