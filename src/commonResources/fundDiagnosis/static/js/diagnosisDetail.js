@@ -43,11 +43,6 @@ $(function() {
                 2: {} ,
                 3: {} 
             }, //保存画图数据
-            drawArrTime: {
-                1: "",
-                2: "",
-                3: ""
-            },//折线图时间
             noData: [
                 [],
                 [],
@@ -113,18 +108,25 @@ $(function() {
                         that.gV.echartData[index].push(j.totalScore); // 总分
                         that.gV.standardDate[index]=j.standardDate;
                     })
-
-                    // todo,有没有可能没有值
-                    radarChart(that.gV.echartData[0]);
-
+                    if (that.gV.echartData[0].length>0) {
+                        // todo,有没有可能没有值
+                        radarChart(that.gV.echartData[0]);
+                        $('.dd_date_1').html(that.gV.standardDate[0]);
+                    } else {
+                        $('.radarEchart').css({ "display":"none"})
+                        $('.NoDataRada').html(that.gV.noDataArr[0]);
+                        $('.NoDataRada').css({"display": "block"});
+                        $('.dd_date_1').html('--');
+                    }
                     // 日期赋值
-                    $('.dd_date_1').html(that.gV.standardDate[0]);
                 },
                 callbackFail: function(json) {
                     tipAction(json.msg);
                 },
-                callbackNoData: function(json) { // 暂无数据
-                    $('.chartWrapper i').html(that.gV.noDataArr[0])
+                    callbackNoData: function (json) { // 暂无数据
+                        $('.radarEchart').css({ "display":"none"})
+                        $('.NoDataRada').html(that.gV.noDataArr[0]);
+                        $('.NoDataRada').css({"display": "block"});
                 }
             }, {
                 url: site_url.querySynthesizeQualitativeEvaluate_api, //基金诊断-综合定性评价
@@ -171,14 +173,14 @@ $(function() {
                 callbackDone: function(json) {
 
                     that.gV.drawArr[num] = json.data;
-                    that.gV.drawArrTime[num] = that.gV.drawArr[num].time; // 统计时间
+                    // that.gV.drawArr[num].time = jsonData.time; // 统计时间
 
                     // 画图
                     that.dealData(json.data.fundProfitRateSection, num);
                     lineChart(that.gV.drawArr, num, that.gV.noData, '基金收益率', that.$e.ddLine);
 
                     // 时间赋值
-                    $('.dd_date_3').html(that.gV.drawArrTime[num])
+                    $('.dd_date_3').html(that.gV.drawArr[num].time)
 
                 },
                 callbackFail: function(json) {
@@ -252,7 +254,7 @@ $(function() {
                     lineChart(that.gV.drawArr, num, that.gV.noData, '基金收益率', that.$e.ddLine);
 
                     // 时间赋值
-                    $('.dd_date_3').html(that.gV.drawArrTime[num])
+                    $('.dd_date_3').html( that.gV.drawArr[num].time)
                 } else {
                     that.sendAjax(that.getDrawData(num))
                 }
