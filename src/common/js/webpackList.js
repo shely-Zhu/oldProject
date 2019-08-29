@@ -169,4 +169,12 @@ module.exports = {
     './personal/static/js/growth/growthReg' : './src/personal/static/js/growth/growthReg.js',
     //jjs持仓明细
     './commonResources/static/js/jjsAssets' : './src/commonResources/static/js/jjsAssets.js',
+
+
+    // 基金诊断
+    './commonResources/fundDiagnosis/static/js/hotDiagnosis' : './src/commonResources/fundDiagnosis/static/js/hotDiagnosis.js',
+    // 诊断详情
+    './commonResources/fundDiagnosis/static/js/diagnosisDetail' : './src/commonResources/fundDiagnosis/static/js/diagnosisDetail.js',
+    // 基金诊断搜索页
+    './commonResources/fundDiagnosis/static/js/diagnosisSearch' : './src/commonResources/fundDiagnosis/static/js/diagnosisSearch.js',
 }

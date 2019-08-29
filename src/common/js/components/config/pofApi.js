@@ -8,9 +8,6 @@
 
 
 module.exports = function() {
-    this.prvDetail_api = http_url.pof_url + '/queryProductDetail'; //私募详情查询
-
-
     /*------------------------------------------------------恒小智接口  start----------------------------------------------*/
     // 组合列表查询
     this.combinFundList_api = http_url.pof_url + '/smartInvestment/combinFundList';
@@ -66,5 +63,24 @@ module.exports = function() {
     // 财商总资产
     this.myFinancialEducationInfoApi = http_url.pof_url + '/myAssetInfo/myFinancialEducationInfo';
     /*------------------------------财商教育end------------------------------------------*/
+
+
+    /*------------------------------基金诊断start------------------------------------------*/
+    //基金诊断-基金基本信息
+    this.queryFundBaseInfo_api = http_url.pof_url + '/frontend/fundDiagnosis/queryFundBaseInfo';
+    //通用-热门基金查询
+    this.fundRecommend_api = http_url.pof_url + '/frontend/fundDiagnosis/fundRecommend';
+    // 基金诊断-指标雷达图
+    this.queryRadarChartList_api = http_url.pof_url + '/frontend/fundDiagnosis/queryRadarChartList';
+    // 基金诊断-综合定性评价
+    this.querySynthesizeQualitativeEvaluate_api = http_url.pof_url + '/frontend/fundDiagnosis/querySynthesizeQualitativeEvaluate';
+    // 基金诊断-累计收益曲线
+    this.queryCumulativeProfitCurveList_api = http_url.pof_url + '/frontend/fundDiagnosis/queryCumulativeProfitCurveList';
+    // 基金诊断-点击获取专属诊断报告
+    this.exclusiveDiagnosisReport_api = http_url.pof_url + '/fundDiagnosis/exclusiveDiagnosisReport';
+    // 基金诊断字典接口
+    this.queryDictionary_api = http_url.pof_url + '/frontend/fundDiagnosis/queryDictionary';
+
+    /*------------------------------基金诊断end------------------------------------------*/
 
 };

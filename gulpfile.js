@@ -179,22 +179,13 @@ gulp.task('proxyTask', function() {
         livereload: true,
         middleware: function(connect, opt) {
             return [
-                proxy('/wap',  {
-                    target: 'https://h5.htjf4.com',
+                proxy(['/wap','/web/','/app'],  {
+                    // target: 'https://h5.htjf4.com',
+                    // target: 'http://192.168.50.254:8085', 
+                    target: 'https://h5.chtfundtest.com',
                     changeOrigin:true,
                     secure: false,
                 }),
-                proxy('/web/',  {
-                    target: 'https://h5.htjf4.com',
-                    changeOrigin:true,
-                    secure: false,
-                }),
-                proxy('/app',  {
-                    target: 'https://app.htjf4.com/',
-                    changeOrigin:true,
-                    secure: false,
-                }),
-
             ]
         }
     });
@@ -207,17 +198,7 @@ gulp.task('mockProxy', function() {
         livereload: true,
         middleware: function(connect, opt) {
             return [
-                proxy('/wap',  {
-                    target: 'http://'+localIp + ':8088',
-                    changeOrigin:true,
-                    secure: false,
-                }),
-                proxy('/web/',  {
-                    target: 'http://'+localIp + ':8088',
-                    changeOrigin:true,
-                    secure: false,
-                }),
-                proxy('/app',  {
+                proxy(['/wap','/web/','/app'],  {
                     target: 'http://'+localIp + ':8088',
                     changeOrigin:true,
                     secure: false,

@@ -285,7 +285,6 @@ $(function() {
                     // formatter: "日期：{b} <br/>{a}: {c}%",
                     formatter: function(params) {
                         var data = params[0];
-                        console.log(data)
                         if (type == 'navArr') { // 净值
                             return '日期：' + data["name"] + '<br/>' + data["seriesName"] + '：' + data["value"]
                         } else {

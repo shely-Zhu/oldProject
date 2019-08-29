@@ -10,7 +10,6 @@
 
 //获取当前页面地址
 module.exports = function() {
-    this.prvDetail_api = http_url.pef_url + '/queryProductDetail'; //私募详情查询
     this.prvLevel_api = http_url.pef_url + '/queryBenefitLevel'; //受益级别查询
     this.prvHisValue_api = http_url.pef_url + '/queryHistoryNetValue'; //历史净值查询
     this.prvLight_api = http_url.pef_url + '/queryProductImage'; //产品亮点查询
