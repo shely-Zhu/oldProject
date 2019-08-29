@@ -92,10 +92,18 @@
     <script id="first-template" type="text/x-handlebars-template">
         <div class="dd_name">{{fundName}}  {{fundCode}}</div>
         <div class="dd_tag_wrap">
+            {{#if type}}
             <span class="dd_tag">{{type}}</span> 
+            {{/if}}
+            {{#if fundLableList_new}}
             <span class="dd_tag">{{fundLableList_new}}</span>
+            {{/if}}
+            {{#if fundState}}
             <span class="dd_tag">{{fundState}}</span>
+            {{/if}}
+            {{#if grade}}
             <span class="dd_tag">{{grade}}</span>
+            {{/if}}
         </div>
         <div class="mui-row dd_value">
             <div class="mui-col-xs-4 left">
