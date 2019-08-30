@@ -169,12 +169,11 @@ $(function() {
             return function() {
                 if (timeout !== null) clearTimeout(timeout);
 
-                timeout = setTimeout(fn.apply(that), wait);
+                timeout = setTimeout(fn, wait,that);
             }
         },
         // 页面是否初始化过
-        judgePage: function() {
-            var that = this;
+        judgePage: function(that) {
             var key = $.util.regList.removeAllSpace($(".branchSearchInput").val());
             that.$e.resultWrap.find('.total').html('--');
             that.$e.resultWrap.find('.word').html(key);
@@ -240,13 +239,16 @@ $(function() {
             // 搜索框
             var $searchInput = document.getElementById("searchInput");
             
-            $searchInput.oninput = that.debounce(that.judgePage, 500);
-        
+            $searchInput.oninput = that.debounce(that.judgePage, 600); 
+
+
+            // 搜索取消按钮
             mui("body").on("tap", ".mui-icon-clear", function (event) {
                 that.$e.hotFundList.html('');
                 that.$e.resultWrap.find('.total').html('--');
-                that.$e.resultWrap.find('.word').html(key);
+                that.$e.resultWrap.find('.word').html('');
             })
+            
             //为li标签点击事件委托
             mui("body").on("tap", ".card-theme ", function (event) {
                 if (event.target) {

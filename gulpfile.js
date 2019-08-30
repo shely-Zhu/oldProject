@@ -560,11 +560,11 @@ gulp.task("webpack", function() {
         )
 
         //预上线环境时，去掉Log并压缩
-        .pipe(plugins.if(options.env === '3' || options.env === '4', plugins.removelogs()))
-        .pipe(plugins.if(options.env === '3' || options.env === '4', plugins.uglify({ //压缩
-            mangle: false, //类型：Boolean 默认：true 是否修改变量名
-            compress: false
-        })))
+//      .pipe(plugins.if(options.env === '3' || options.env === '4', plugins.removelogs()))
+//      .pipe(plugins.if(options.env === '3' || options.env === '4', plugins.uglify({ //压缩
+//          mangle: false, //类型：Boolean 默认：true 是否修改变量名
+//          compress: false
+//      })))
 
         //与host.path中的内容做比对
         .pipe(plugins.changed(host.path, { hasChanged: plugins.changed.compareSha1Digest }))
