@@ -16,7 +16,7 @@ require('@pathCommonJs/components/elasticLayerTypeTwo.js');
 var tipAction = require('@pathCommonJs/components/tipAction.js');
 var splitUrl = require('@pathCommonJs/components/splitUrl.js')();
 //var echarts = require('echarts/lib/echarts');
-var echarts = require('@pathCommonJsCom/echartCom/echarts.min.js');
+//var echarts = require('@pathCommonJsCom/echartCom/echarts.min.js');
 var radarChart = require('@pathCommonJsCom/echartCom/radarChart.js');
 var lineChart = require('@pathCommonJsCom/echartCom/lineChart.js');
 var generateTemplate = require('@pathCommonJsComBus/generateTemplate.js');
