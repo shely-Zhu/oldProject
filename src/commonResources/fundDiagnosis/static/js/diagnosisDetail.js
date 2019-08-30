@@ -38,14 +38,22 @@ $(function() {
             pageCurrent: 1, //当前页码，默认为1
             pageSize: 10,
             search: false, // 搜索
-            drawArr: [], //保存画图数据
-            noData: [], //保存画图数据
+            drawArr: {
+                1: {},
+                2: {} ,
+                3: {} 
+            }, //保存画图数据
+            noData: [
+                [],
+                [],
+                []
+            ], //保存画图数据
             echartData: [
                 [],
                 [],
                 []
             ], // 雷达数据
-            standardDate: [],// 雷达开始日期
+            standardDate: [[],[],[]],// 雷达开始日期
             fundCode: splitUrl['fundCode'],
             tipArr: [], // 提示集合
             noDataArr: ['暂无数据，成立时间不满1年', '暂无数据，成立时间不满3年', '暂无数据，成立时间不满5年']
@@ -89,7 +97,6 @@ $(function() {
                 needDataEmpty: true,
                 callbackDone: function(json) {
                     var dataList = json.data;
-                    
                     $.each(dataList, function (i, j) { // 将数据组装成雷达图需要的数据
                         //根据ageLimit来分类
                         var index = j.ageLimit == 1 ? 0: j.ageLimit == 3 ? 1 : 2;
@@ -99,20 +106,27 @@ $(function() {
                         that.gV.echartData[index].push(j.companyPower); // 基金公司实力
                         that.gV.echartData[index].push(j.antiRiskCapability); // 抗风险性
                         that.gV.echartData[index].push(j.totalScore); // 总分
-                        that.gV.standardDate.push(j.standardDate);
+                        that.gV.standardDate[index]=j.standardDate;
                     })
-
-                    // todo,有没有可能没有值
-                    radarChart(that.gV.echartData[0]);
-
+                    if (that.gV.echartData[0].length>0) {
+                        // todo,有没有可能没有值
+                        radarChart(that.gV.echartData[0]);
+                        $('.dd_date_1').html(that.gV.standardDate[0]);
+                    } else {
+                        $('.radarEchart').css({ "display":"none"})
+                        $('.NoDataRada').html(that.gV.noDataArr[0]);
+                        $('.NoDataRada').css({"display": "block"});
+                        $('.dd_date_1').html('--');
+                    }
                     // 日期赋值
-                    $('.dd_date_1').html(that.gV.standardDate[0]);
                 },
                 callbackFail: function(json) {
                     tipAction(json.msg);
                 },
-                callbackNoData: function(json) { // 暂无数据
-                    $('.chartWrapper i').html(that.gV.noDataArr[0])
+                    callbackNoData: function (json) { // 暂无数据
+                        $('.radarEchart').css({ "display":"none"})
+                        $('.NoDataRada').html(that.gV.noDataArr[0]);
+                        $('.NoDataRada').css({"display": "block"});
                 }
             }, {
                 url: site_url.querySynthesizeQualitativeEvaluate_api, //基金诊断-综合定性评价
@@ -123,7 +137,9 @@ $(function() {
                 callbackDone: function(json) {
                     that.$e.ddEvaluate.html(json.data.content);
                     // 日期赋值
-                    $('.dd_date_2').html(json.data.standardDate)
+                    if (json.data.standardDate) {
+                        $('.dd_date_2').html(json.data.standardDate)
+                    }
                 },
                 callbackFail: function(json) {
                     tipAction(json.msg);
@@ -157,22 +173,29 @@ $(function() {
                     "timeSection": num, /// 时间区间（1：近一月，2：近一年，3：成立以来）
                 },
                 callbackDone: function(json) {
-
-                    var jsonData = json.data,
-                        time = jsonData.time; // 统计时间
+                    that.gV.drawArr[num] = json.data;
+                    $('.dd_line').css({ "display":"block"})
+                    $('.dd_lineNodata').css({ "display":"none"})
+                    // that.gV.drawArr[num].time = jsonData.time; // 统计时间
 
                     // 画图
                     that.dealData(json.data.fundProfitRateSection, num);
                     lineChart(that.gV.drawArr, num, that.gV.noData, '基金收益率', that.$e.ddLine);
 
                     // 时间赋值
-                    $('.dd_date_3').html(time)
+                    $('.dd_date_3').html(that.gV.drawArr[num].time)
 
                 },
-                callbackFail: function(json) {
+                callbackFail: function (json) {
                     that.$e.listLoading.hide();
                     tipAction(json.message);
+                    $('.dd_line').css({ "display":"none"})
+                    $('.dd_lineNodata').css({ "display":"block"})
                 },
+                callbackNoData: function (json) {
+                    $('.dd_line').css({ "display":"none"})
+                    $('.dd_lineNodata').css({ "display":"block"})
+                }
 
             };
             return obj;
@@ -214,11 +237,15 @@ $(function() {
                 $(this).addClass('active').siblings().removeClass('active');
                 // 切换图表
                 if (that.gV.echartData[i].length != 0) {
+                    $('.radarEchart').css({"display": "block"})
+                    $('.NoDataRada').css({"display": "none"});
                     radarChart(that.gV.echartData[i]);
                     var standardDate = that.gV.echartData[i].standardDate;
                     $('.dd_date_1').html(that.gV.standardDate[i]);
                 } else {
-                    $('.chartWrapper').html(that.gV.noDataArr[i]);
+                    $('.radarEchart').css({ "display":"none"})
+                    $('.NoDataRada').css({"display": "block"});
+                    $('.NoDataRada').html(that.gV.noDataArr[i]);
                     $('.dd_date_1').html('--');
                     
                 }
@@ -231,7 +258,15 @@ $(function() {
                 var num = $(this).attr('num');
                 $(this).addClass('active').siblings().removeClass('active');
                 // 画图
-                that.sendAjax(that.getDrawData(num))
+                if (that.gV.drawArr[num] && that.gV.drawArr[num] != {}&&that.gV.drawArr[num].xArr&&that.gV.drawArr[num].xArr.length > 0) {
+                    // 画图
+                    lineChart(that.gV.drawArr, num, that.gV.noData, '基金收益率', that.$e.ddLine);
+
+                    // 时间赋值
+                    $('.dd_date_3').html( that.gV.drawArr[num].time)
+                } else {
+                    that.sendAjax(that.getDrawData(num))
+                }
             })
 
             // 文案提示

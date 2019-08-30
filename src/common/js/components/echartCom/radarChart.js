@@ -28,12 +28,12 @@ module.exports = function(echartData, $e) {
             top:'40%',
             left:'center',
             textStyle: {
-                color: '#fff',
-                fontSize: 14,
+                color: '#f2d8d8',
+                fontSize: 14
             },
             subtextStyle:{
-                color: '#fff',
-                fontSize: 20,
+                color: '#f2d8d8',
+                fontSize: 20
             }
         },
         legend: {
@@ -54,18 +54,17 @@ module.exports = function(echartData, $e) {
             ],
             name:{
                 formatter:function(v){
-                    console.log(v);
                     return v;
-                }
+                },
+                color:"#0b0b0d"
             },
             triggerEvent: true,
             center: ['50%', '50%'],
-            radius: 90
+            radius: 80
         }],
         series: [{
         	name:'',
             type: 'radar',
-
             areaStyle: {
                 normal: {
                     color: "red"
