@@ -24,16 +24,20 @@ module.exports = function(echartData, $e) {
     var option = {
         title: {
             text: '综合评分', // 最后一个值是总分
-            subtext: echartData[echartData.length-1], // 最后一个值是总分
             top:'40%',
             left:'center',
             textStyle: {
                 color: '#f2d8d8',
-                fontSize: 14
+                fontSize: 14,
+                textBorderColor: "#f75348",
+                textBorderWidth:3
             },
+            subtext: echartData[echartData.length-1], // 最后一个值是总分
             subtextStyle:{
                 color: '#f2d8d8',
-                fontSize: 20
+                fontSize: 20,
+                textBorderColor: "#f75348",
+                textBorderWidth:3
             }
         },
         legend: {
@@ -67,7 +71,7 @@ module.exports = function(echartData, $e) {
             type: 'radar',
             areaStyle: {
                 normal: {
-                    color: "red"
+                    color: "#fe8982"
                 }
             },
             data: [{
