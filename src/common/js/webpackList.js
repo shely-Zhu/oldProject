@@ -177,4 +177,5 @@ module.exports = {
     './commonResources/fundDiagnosis/static/js/diagnosisDetail' : './src/commonResources/fundDiagnosis/static/js/diagnosisDetail.js',
     // 基金诊断搜索页
     './commonResources/fundDiagnosis/static/js/diagnosisSearch' : './src/commonResources/fundDiagnosis/static/js/diagnosisSearch.js',
+    './commonResources/appMd/headerMd' : './src/commonResources/appMd/headerMd.js',
 }

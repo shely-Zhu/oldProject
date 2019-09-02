@@ -176,3 +176,6 @@ var pathList = {
     "/commonResources/fundDiagnosis/views/diagnosisSearch.html" :{ evtid: '166', topic: '基金诊断搜索', info: ''} ,
     "/commonResources/fundDiagnosis/views/hotDiagnosis.html" :{ evtid: '167', topic: '基金诊断热门', info: ''} ,
 }
+
+
+module.exports = pathList;

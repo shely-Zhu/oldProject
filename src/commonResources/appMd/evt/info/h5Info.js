@@ -72,3 +72,6 @@ h5Info = function(href,htmdEvt,type){
 
 	return h5_info;
 }
+
+
+module.exports = h5Info;

@@ -152,3 +152,5 @@ var clickList = {
 	"privateList_detail" : { type:'click', evtid: '6', topic: '私募列表页-产品详情', info: ''} ,
 	
 }
+
+module.exports = clickList;
