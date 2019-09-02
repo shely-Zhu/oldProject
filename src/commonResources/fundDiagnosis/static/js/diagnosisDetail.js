@@ -43,6 +43,11 @@ $(function() {
                 2: {} ,
                 3: {} 
             }, //保存画图数据
+            drawArrTime: {
+                1:"",
+                2: "",
+                3:""
+            },//折线图截止时间
             noData: [
                 [],
                 [],
@@ -176,14 +181,14 @@ $(function() {
                     that.gV.drawArr[num] = json.data;
                     $('.dd_line').css({ "display":"block"})
                     $('.dd_lineNodata').css({ "display":"none"})
-                    // that.gV.drawArr[num].time = jsonData.time; // 统计时间
+                    that.gV.drawArrTime[num] = json.data.time; // 统计时间
 
                     // 画图
                     that.dealData(json.data.fundProfitRateSection, num);
                     lineChart(that.gV.drawArr, num, that.gV.noData, '基金收益率', that.$e.ddLine);
 
                     // 时间赋值
-                    $('.dd_date_3').html(that.gV.drawArr[num].time)
+                    $('.dd_date_3').html(that.gV.drawArrTime[num])
 
                 },
                 callbackFail: function (json) {
@@ -263,7 +268,7 @@ $(function() {
                     lineChart(that.gV.drawArr, num, that.gV.noData, '基金收益率', that.$e.ddLine);
 
                     // 时间赋值
-                    $('.dd_date_3').html( that.gV.drawArr[num].time)
+                    $('.dd_date_3').html(that.gV.drawArrTime[num])
                 } else {
                     that.sendAjax(that.getDrawData(num))
                 }
