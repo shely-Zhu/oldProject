@@ -17,9 +17,7 @@ module.exports = {
     module: {
         //各种加载器，即让各种文件格式可用require引用
         loaders: [
-          { test: /\.js$/, loader: 'babel', exclude: /node_modules/ },
-          { test: /vux.src.*?js$/,loader: 'babel'},
-          { test: /\.vue$/, loader: 'vue'}
+          { test: /\.js$/, loader: 'babel', exclude: /node_modules/ ,query: {compact: false}}
           // {test: /\.less$/, loader: 'style-loader!css-loader?minimize&-autoprefixer!postcss-loader!less-loader'}
         ]
     },
