@@ -1,0 +1,53 @@
+<!-- /**  
+ * @Page:  标普资产模型
+ * @Author: songxiaoyu  
+ * @Date:   2019-09-03 14:21:28  
+ * @Last Modified by:   songxiaoyu  
+ */ -->
+
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+        <meta name="applicable-device" content="mobile">
+        <meta name="apple-mobile-web-app-capable" content="yes">
+        <meta name="apple-mobile-web-app-status-bar-style" content="black">
+        <link rel="stylesheet" href="/personal/static/css/spAssetModel.css">
+        <title>标普资产模型</title>
+    </head>
+    <body>
+        <section class="spAssetModel">
+            <!-- 标普提示 -->
+            <div class="sp_tip">
+                "标准普尔家庭资产配置模型，是世界公认的、最具权威性的家庭资产配置准则，其核心理念为以“1234”的规则对资产进行分类配置，目标是追求资产的长期稳健增长。
+            </div>
+            <!-- 标普提示 end-->
+            
+            <!-- 四象限 -->
+            <div class="sp_four">
+                <ul>
+                    <li>消费型资产</li>
+                    <li>保障型资产</li>
+                    <li>增值型资产</li>
+                    <li>保值型资产</li>
+                </ul>
+            </div>
+            <!-- 四象限 end--> 
+
+            <!-- 配置建议 -->
+            <div class="sp_allocation">
+                <div class="sp_text">"标普资产象限"为通用型的资产配置模型，恒天财富基于强大而专业的投研和风控能力，以及丰富的产品线和财富管理经验，可为您提供完全个性化定制的资产配置方案，详情请垂询您的专属理财师或客服专线4009890618。</div>
+                <div class="sp_allo_btn">
+                    配置建议
+                </div>
+            </div>
+            <!-- 配置建议 end-->
+        </section>
+        @@include('@pathInclude/views/footer.html')
+        <!-- 添加埋点 -->
+        @@include('@pathInclude/views/header.html')
+        <script src="/personal/static/js/spAssetModel.js"></script>
+        
+    </body>
+</html>

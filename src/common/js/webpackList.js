@@ -169,4 +169,9 @@ module.exports = {
     './personal/static/js/growth/growthReg' : './src/personal/static/js/growth/growthReg.js',
     //jjs持仓明细
     './commonResources/static/js/jjsAssets' : './src/commonResources/static/js/jjsAssets.js',
+
+    // 标普模型
+    './personal/static/js/spAssetModel': "./src/personal/static/js/spAssetModel.js",
+    // 资产配置建议书
+    './personal/static/js/assetAllocation': "./src/personal/static/js/assetAllocation.js",
 }
