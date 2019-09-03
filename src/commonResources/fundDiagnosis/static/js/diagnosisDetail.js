@@ -16,7 +16,7 @@ require('@pathCommonJs/components/elasticLayerTypeTwo.js');
 var tipAction = require('@pathCommonJs/components/tipAction.js');
 var splitUrl = require('@pathCommonJs/components/splitUrl.js')();
 //var echarts = require('echarts/lib/echarts');
-var echarts = require('@pathCommonJsCom/echartCom/echarts.min.js');
+// var echarts = require('@pathCommonJsCom/echartCom/echarts.min.js');
 var radarChart = require('@pathCommonJsCom/echartCom/radarChart.js');
 var lineChart = require('@pathCommonJsCom/echartCom/lineChart.js');
 var generateTemplate = require('@pathCommonJsComBus/generateTemplate.js');
@@ -139,8 +139,12 @@ $(function() {
                     "fundCode": that.gV.fundCode,
                 },
                 needDataEmpty: false,
-                callbackDone: function(json) {
-                    that.$e.ddEvaluate.html(json.data.content);
+                    callbackDone: function (json) {
+                        if (json.data.content) {
+                            that.$e.ddEvaluate.html(json.data.content);
+                        } else {
+                            that.$e.ddEvaluate.html("暂无数据");
+                        }
                     // 日期赋值
                     if (json.data.standardDate) {
                         $('.dd_date_2').html(json.data.standardDate)
@@ -148,6 +152,9 @@ $(function() {
                 },
                 callbackFail: function(json) {
                     tipAction(json.msg);
+                },
+                callbackNoData: function(json) {
+                    that.$e.ddEvaluate.html("暂无数据");
                 }
             }, {
                 url: site_url.queryDictionary_api, //基金诊断-字典接口
