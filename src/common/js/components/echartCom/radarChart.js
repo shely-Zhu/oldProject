@@ -9,7 +9,7 @@
 
 //echarts图表
 
-var echarts = require('./echarts.min.js');
+// var echarts = require('./echarts.js');
 //var echarts = require('echarts/lib/echarts');
 //require('echarts/lib/chart/radar');
 //require('echarts/lib/component/tooltip');
