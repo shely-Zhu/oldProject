@@ -83,7 +83,7 @@ module.exports = function(echartData, $e) {
 
 
     myChart.setOption(option);
-	myChart.on('click',(params) => {
+	myChart.on('click',function(params){//gulp打包禁止使用es6语法。否则打包不过去
 //	    console.log(option.radar[0].indicator[params.event.topTarget.__dimIdx].name);
 	    if(!!params.event.topTarget.__dimIdx){
 	    		    option.series[0].data[0].value = echartData[params.event.topTarget.__dimIdx];
