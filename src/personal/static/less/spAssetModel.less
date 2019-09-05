@@ -5,12 +5,175 @@
 * @Last Modified by:   songxiaoyu
 * @description:
 */
+@charset "utf-8";
+//MUI引入 
+@import url("../../../include/css/mui.min.css");
+@import url("../../../include/css/mui.picker.css");
+@import url("../../../include/css/mui.poppicker.css");
 
-.spAssetModel{
-    padding:1.6rem;
-    
-    // 提示
-    .sp_tip{
+//自定义引入
+@import url("../../../common/less/reset.less");
+@import url("../../../common/less/color.less"); 
+//引入重置mui样式的表单样式文件
+//@import url("../../../common/less/mui/formMUI.less");
+@import url('../../../common/less/mui/resetMUI.less');
+//引入重置mui下拉列表样式文件
+@import url("../../../common/less/mui/selectMUI.less");
+@import url("../../../common/less/components/againEnter.less");
 
+//重置MUI的poppicker样式
+@import url("../../../common/less/mui/resetMuiPop.less");
+//弹出层样式
+@import url("../../../common/less/components/alertBox.less");
+body{
+    margin:0;
+    background: #ffffff;
+    min-width: 320px;
+    max-width: 640px;
+    // font-family: "Microsoft YaHei", Arial, "Helvetica";
+    color: #333;
+    padding:0;
+    .spAssetModel{
+        padding:0.9rem 1.35rem;
+        // 提示
+        .sp_tip{
+            width: 100%;
+            padding:0.6rem 0.9rem;
+            padding-right:2.5rem;
+            line-height: 2rem;
+            box-sizing: border-box;
+            background:#ffffff ;
+            border-radius: 0.3rem;
+            font-size:0.85rem;
+            color:#a48e5f;
+            box-shadow: #f5f5f5 0px 0px 30px 10px ;
+            position: relative;
+            .triangle{
+                position: absolute;
+                top:-0.9rem;
+                left:7rem;
+                width: 0;
+                height: 0;
+                border: 0.45rem solid transparent;
+                border-style: dashed dashed solid dashed;
+                border-bottom-color: #fff;
+            }
+            .corners{
+                width:2rem;
+                height: 2rem;
+                padding-right:0.5rem;
+                position: absolute;
+                top:0;
+                right:0;
+                border-bottom-left-radius: 100%;
+                border-top-right-radius: 0.3rem;
+                background-color:#f7f4eb;
+                text-align: right;
+                font-size: 0rem;
+                i{
+                    font-size: 0.85rem;
+                    display: inline-block;
+                    position: absolute;
+                    top: -0.1rem;
+                    left: 0.8rem;
+                }
+
+            }
+        }
+        .sp_four{
+            overflow: hidden;
+            background: url(../img/sp_four.png) 0 0 no-repeat;
+            background-size: cover;
+            margin-top:1.3rem;
+            .sp_four_item{
+               width: 50%;
+               height: 14.6rem;
+               float: left;
+               padding-left:0.9rem;
+               padding-top:1.25rem;
+               p{
+                   line-height: 0;
+               }
+               .sp_four_item_title{
+                   font-size: 1.6rem;
+                   font-weight: 600;
+                   color:#292317;
+                   line-height: 1.6rem;
+               }
+               .sp_four_item_advice{
+                line-height: 0.85rem;
+                font-size:0.85rem;
+                color:#695a37;
+                margin-top:3.3rem;
+               }
+               .sp_four_item_type{
+                line-height: 0.85rem;
+                font-size:0.85rem;
+                color:#ac986d;
+                margin-top:0.7rem;
+                margin-top:0.7rem;
+               }
+               .sp_four_item_present{
+                font-size:0rem;
+                height: 0.85rem;
+                margin-top:1.6rem;
+                span{
+                    font-size:0.85rem;
+                    line-height: 0.85rem;
+                    color:#ac986d;
+                    float: left;
+                }
+                ul{
+                    float: left;
+                    overflow: hidden;
+                    margin-left:0.3rem;
+                    li{
+                        float: left;
+                        width: 0.4rem;
+                        height: 0.8rem;
+                        border-radius: 0.3rem;
+                        background-color:#dbc69a;
+                        margin-right:0.2rem;
+                    }
+                    li.active{
+                        background-color:#d75e33;
+                    }
+                }
+               }
+               .sp_four_item_price{
+                   color:#d75e33;
+                   margin-top:0.9rem;
+                   font-weight: 600;
+                   font-size:0.85rem;
+                   line-height: 0.85rem;
+               }
+            }
+        }
+        .sp_allocation{
+            background: url(../img/ConfigurationBg.png) 0 0 no-repeat;
+            background-size:cover;
+            border-radius: 0.25rem;
+            margin-top:1.25rem;
+            padding:1.3rem 1.3rem;
+            height:10.95rem ;
+            position: relative;
+            .sp_text{
+                font-size:1rem;
+                color:#5c4921;
+                line-height:1.6rem;
+            }
+            .sp_allo_btn1{
+                width:6.85rem;
+                height:2.4rem;
+                line-height:2.35rem; 
+                position: absolute;
+                right:0.85rem;
+                bottom:0.85rem;
+                background:#333333;
+                color:#eacf95;
+                padding:0 1.25rem;
+                border-radius: 1.2rem
+            }
+        }
     }
 }

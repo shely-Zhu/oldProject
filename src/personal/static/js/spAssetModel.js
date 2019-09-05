@@ -23,6 +23,14 @@ $(function() {
         },
         gV: {
         },
+         //元素获取
+         getElements: {
+            tip:$(".sp_tip"),//普标提示区域
+            expense : $('#expense'), //四象限消费型资产显示区块
+            safeguard : $("#safeguard"),////四象限保障型资产显示区块
+            appreciation : $(".appreciation"),//四象限增值型资产显示区块
+            hedging : $("#hedging"),////四象限保值型资产显示区块
+        }, 
         init: function() {
             var that = this;
             that.getData();
@@ -30,7 +38,6 @@ $(function() {
         },
         getData: function() {
             var that = this;
-
             var obj = [{
                 url: site_url.findcommunityActivities_api,
                 data: {
@@ -52,6 +59,10 @@ $(function() {
             $.ajaxLoading(obj);
         },
         events: function() {
+           var that=this;
+           $(document).on('click','.sp_tip i',function(){
+            somePage.getElements.tip.hide()
+           })
 
         },
     };
