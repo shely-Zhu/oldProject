@@ -170,6 +170,17 @@ module.exports = {
     //jjs持仓明细
     './commonResources/static/js/jjsAssets' : './src/commonResources/static/js/jjsAssets.js',
 
+    
+
+    // 基金诊断
+    './commonResources/fundDiagnosis/static/js/hotDiagnosis' : './src/commonResources/fundDiagnosis/static/js/hotDiagnosis.js',
+    // 诊断详情
+    './commonResources/fundDiagnosis/static/js/diagnosisDetail' : './src/commonResources/fundDiagnosis/static/js/diagnosisDetail.js',
+    // 基金诊断搜索页
+    './commonResources/fundDiagnosis/static/js/diagnosisSearch' : './src/commonResources/fundDiagnosis/static/js/diagnosisSearch.js',
+    './commonResources/appMd/headerMd' : './src/commonResources/appMd/headerMd.js',
+
+
     // 标普模型
     './personal/static/js/spAssetModel': "./src/personal/static/js/spAssetModel.js",
     // 资产配置建议书

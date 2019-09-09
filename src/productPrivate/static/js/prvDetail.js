@@ -77,7 +77,7 @@ var prvDetail = {
         isNewcomer: '', //是否新手专享产品【0.否 1.是】
         isElecContract: 0, //是否适用于电子合同【0.否 1.是】
         fundCode: arg['fundCode'],
-        unitNetValueDes: '每周五更新上周净值',
+        unitNetValueDes: '每周五24:00前更新上周净值',
     },
     init: function() {
         var that = this;
@@ -98,7 +98,7 @@ var prvDetail = {
         $(".accMartical").attr("href", "/productPrivate/views/collectAcco.html?fundCode=" + arg["fundCode"]);
 
         obj = [{
-            url: site_url.prvDetail_api, // queryProductDetail
+            url: site_url.prvDetail_api, // queryFundDetail
             data: {
                  projectId: arg["fundCode"] // 产品代码
             },
@@ -110,7 +110,8 @@ var prvDetail = {
                     businessCompareReferenceMin = json.businessCompareReferenceMin,
                     businessCompareReferenceMax = json.businessCompareReferenceMax,
                     isNewcomer = json.isNewcomer,
-                    isElecContract = json.isElecContract;
+                    isElecContract = json.isElecContract,
+                    orderConditionEnum = json.orderConditionEnum; //预约资质
 
                 that.unitNetValue = json.unitNetValue;
                 that.netValueDate = json.netValueDate;
@@ -118,6 +119,15 @@ var prvDetail = {
                 // that.reserveId = json.reserveId;
                 that.isNewcomer = (isNewcomer == "1") ? 1 : 0; // 新手产品
                 that.isElecContract = (isElecContract == "1") ? 1 : 0;
+
+                // 预约条件
+                if(orderConditionEnum == '1'){
+                    $('.pd_condition i').html('预约条件：私募合格投资者或资管合格投资者')
+                    $('.pd_condition').show();
+                } else if(orderConditionEnum == '2'){
+                    $('.pd_condition i').html('预约条件：资管合格投资者')
+                    $('.pd_condition').show();
+                }
                 
                 if(json.investStart != ''){
                     $(".invStart").html(json.investStart);
@@ -129,7 +139,7 @@ var prvDetail = {
                 //0 债权投资;1 证券投资（二级市场）;2 股权投资;3 海外投资;4 其他
                 if(json.investDirect == "0" || json.investDirect == "2" || json.investDirect == "4") { // 债权投资、股权投资、其他服务不展示
                     that.getElements.$tipIcon.hide();
-                } else if(json.investDirect == "1" || json.investDirect == "3"){ // 海外投资  二级市场展示
+                } else if(json.investDirect == "1" || json.investDirect == "3"){ // 海外投资  （证券投资）二级市场展示
                     that.getElements.$tipIcon.show();
                 };
                 if (json.incomeMode == "0") { //固收类产品

@@ -12,9 +12,10 @@ var Mock = require('mockjs');
 
 var data = Mock.mock({
     "hmac": "hmac",
-    "status": "0",
-    "code": "CS0000",
+    "status": "1000",
+    // "status": "0000",
     "msg": "success",
+    "data":[],
     "data|2": [{
         "nav": "1.45", //组合净值
         "totalDayRate": "125.52",//组合累计收益

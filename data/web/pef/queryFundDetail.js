@@ -42,6 +42,7 @@ var data = Mock.mock({
 		"netValueDate" : "2019-09-09" , //最新净值日期
 		"accuNetValue" : "286786" , //累计净值
 		"isNewcomer" : "0" , //是否是新手推荐产品【0.否 1.是】
+        "orderConditionEnum" : "" , //(1:私募合格投资者，2:资管合格投资者) 空没有标签
 	}	
 });
 module.exports=data;

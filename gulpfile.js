@@ -17,6 +17,7 @@ var gulp = require('gulp'),
     webpackList = require('./src/common/js/webpackList.js'),
     connect = require('gulp-connect'),
     proxy = require('http-proxy-middleware'),
+    pump = require('pump'),
     //删除文件
     del = require('del'), //删除旧版本文件
     through = require('through2'),
@@ -179,22 +180,13 @@ gulp.task('proxyTask', function() {
         livereload: true,
         middleware: function(connect, opt) {
             return [
-                proxy('/wap',  {
-                    target: 'https://h5.htjf4.com',
+                proxy(['/wap','/web/','/app'],  {
+                    // target: 'https://h5.htjf4.com',
+                    // target: 'http://192.168.50.254:8085', 
+                    target: 'https://h5.chtfundtest.com',
                     changeOrigin:true,
                     secure: false,
                 }),
-                proxy('/web/',  {
-                    target: 'https://h5.htjf4.com',
-                    changeOrigin:true,
-                    secure: false,
-                }),
-                proxy('/app',  {
-                    target: 'https://app.htjf4.com/',
-                    changeOrigin:true,
-                    secure: false,
-                }),
-
             ]
         }
     });
@@ -207,17 +199,7 @@ gulp.task('mockProxy', function() {
         livereload: true,
         middleware: function(connect, opt) {
             return [
-                proxy('/wap',  {
-                    target: 'http://'+localIp + ':8088',
-                    changeOrigin:true,
-                    secure: false,
-                }),
-                proxy('/web/',  {
-                    target: 'http://'+localIp + ':8088',
-                    changeOrigin:true,
-                    secure: false,
-                }),
-                proxy('/app',  {
+                proxy(['/wap','/web/','/app'],  {
                     target: 'http://'+localIp + ':8088',
                     changeOrigin:true,
                     secure: false,
@@ -561,39 +543,40 @@ gulp.task("includeJs", ['htmd'], function() {
 
 
 //非include文件夹下的js文件打包
-gulp.task("webpack", function() {
+gulp.task("webpack", function(cb) {
 
     //测试环境
-    return gulp.src(['src/*'])
-        .pipe(plugins.webpack(webpackConfig))
+    pump([
+        gulp.src(['src/*']),
+        plugins.webpack(webpackConfig),
 
         //添加changeLocalHistory、eruda和CustomEventIeFile的文件内容
-        .pipe(
-            through.obj(function(file, enc, cb) {
-                var fileCon = file.contents.toString();
-                fileCon = changeLocalHistoryFile + fileCon + erudaFile + CustomEventIeFile;
-                file.contents = new Buffer(fileCon);
-                this.push(file);
-                cb()
-            })
-        )
+        through.obj(function(file, enc, cb) {
+            var fileCon = file.contents.toString();
+            fileCon = changeLocalHistoryFile + fileCon + erudaFile + CustomEventIeFile;
+            file.contents = new Buffer(fileCon);
+            this.push(file);
+            cb()
+        }),
 
         //预上线环境时，去掉Log并压缩
-        .pipe(plugins.if(options.env === '3' || options.env === '4', plugins.removelogs()))
-        .pipe(plugins.if(options.env === '3' || options.env === '4', plugins.uglify({ //压缩
+        plugins.if(options.env === '3' || options.env === '4', plugins.removelogs()),
+        plugins.if(options.env === '3' || options.env === '4', plugins.uglify({ //压缩
             mangle: false, //类型：Boolean 默认：true 是否修改变量名
             compress: false
-        })))
+        })),
 
-        //与host.path中的内容做比对
-        .pipe(plugins.changed(host.path, { hasChanged: plugins.changed.compareSha1Digest }))
-        .pipe(plugins.debug({ title: 'js-有变动的文件:' }))
+        //与host.path中的内容做比对,
+        plugins.changed(host.path, { hasChanged: plugins.changed.compareSha1Digest }),
+        plugins.debug({ title: 'js-有变动的文件:' }),
 
-        .pipe(gulp.dest(host.path))
+        gulp.dest(host.path),
 
-        .pipe(plugins.rev())
-        .pipe(plugins.rev.manifest())
-        .pipe(gulp.dest(host.path + 'rev/js'))
+        plugins.rev(),
+        plugins.rev.manifest(),
+        gulp.dest(host.path + 'rev/js')
+
+    ], cb)
 });
 
 //html文件打包
