@@ -21,7 +21,7 @@
     <section class="assetReport">
         <!-- 封皮 begin -->
         <div class="firstPage">
-            <img src="/zcpz/static/img/first.png" alt="">
+            <img src="/personal/static/img/first.png" alt="">
         </div>
         <!-- 封皮 end-->
         <!-- 至客户  begin-->
@@ -34,7 +34,7 @@
                     Our Mission Statement
                 </div>
                 <div class="statementTit">
-                    尊敬的{{AssetData.customerName}}先生/女士：
+                    尊敬的<span class="name"></span>先生/女士：
                 </div>
                 <div class="statementTit">
                     感谢您抽出宝贵的时间配合，我们承诺对您的信息严格保密。本《建议书》包含 4 部分内容：
@@ -49,9 +49,9 @@
                     富。
                     我们建议您结合自身的资产状况及市场变动情况，定期分析资产配置现状，动态掌握您的投资状况。
                     如果您对《建议书》有任何问题或者需求，欢迎您随时与恒天财富管理团队联系。
-                    联系电话{{AssetData.telephone}}，电子邮箱{{AssetData.email}}。
+                    联系电话<span class="telephone"></span>，电子邮箱<span class="email"></span>。
                 </div>
-                <div class="statementTime">报告日期：{{AssetData.reportDate}}</div>
+                <div class="statementTime">报告日期：<span class="reportDate"></span></div>
             </div>
         </div>
         <!-- 至客户  end-->
@@ -65,27 +65,27 @@
                         恒天财富将投资者的资产量级分为 500 万元以下、500-1000 万元、1000-3000 万元、3000 万-1亿元、1 亿元以上。
                     </div>
                     <div class="dimensionTxt1">
-                        您的资产量级为：{{AssetData.assetClass}} 万元；属于 {{AssetData.assetClassRange}} 万元以下
+                        您的资产量级为：<span class="assetClass"> </span>万元；属于 <span class="assetClassRange"></span> 万元以下
                     </div>
                     <div class="dimension">维度二：生命周期</div>
                     <div class="dimensionTxt">
                         恒天财富根据生命周期理论，将投资者的生命周期分为单身期、家庭形成期、家庭成长期、家庭成熟期和老年期。
                     </div>
                     <div class="dimensionTxt1">
-                        您的生命周期处于：{{AssetData.lifeCycle}}
+                        您的生命周期处于：<span class="lifeCycle"></span>
                     </div>
                     <div class="fontRed">
-                        <div>{{AssetData.lifeTermContent}}</div>
+                        <div><span class="lifeTermContent"></span></div>
                     </div>
                     <div class="dimension">维度三：风险偏好</div>
                     <div class="dimensionTxt">
                         恒天财富根据投资者的风险承受能力，将投资者分为保守型、稳健型、平衡型、成长型、进取型。
                     </div>
                     <div class="dimensionTxt1">
-                        您的投资类型为：{{AssetData.investmentType}}
+                        您的投资类型为：<span class="investmentType"></span>
                     </div>
                     <div class="fontRed">
-                        <div>{{AssetData.riskTypeContent}}</div>
+                        <div ></div>
                     </div>
                 </div>
             </div>
@@ -94,7 +94,7 @@
         <!-- 根据您的风险承受能力 建议您的资产配置如下 begin -->
         <div class="proposalPieContent">
             <div class="proposalPie" v-if="imageData.assetRecommendPieChart">
-                <div class="portrayalTit portrayalTitMarginBottom">根据您的风险承受能力 建议您的资产配置如下2221221</div>
+                <div class="portrayalTit portrayalTitMarginBottom">根据您的风险承受能力 建议您的资产配置如下</div>
                 <img :src="imageData.assetRecommendPieChart" alt="">
             </div>
             <!-- 根据您的风险承受能力 建议您的资产配置如下 end----->
@@ -104,8 +104,49 @@
                 <div class="proposalTableTop mui-scroll-wrapper mui-slider-indicator mui-segmented-control mui-segmented-control-inverted" style="min-height:160px;">
                     <div class="wrapper mui-scroll">
                         <div class="proposalTableContent mui-control-item">
-                            <tablea class="tableOne" :listTable="listTable" v-if="flag"></tablea>
-                            <tablea class="tableTwo" :listTable="listTable1" v-if="flag1"></tablea>
+                            <div class="tableOne">
+                                <table class="table">
+                                    <thead>
+                                      <!-- <tr v-for="(items,i) in newArr" :key="i">
+                                          <th v-for="(item,j) in items" :key="j" :rowspan="item.rowspan" :colspan="item.colspan">{{item.title}}</th>
+                                      </tr> -->
+                                      <tr></tr>
+                                    </thead>
+                                    <tbody></tbody>
+                                    <!-- <tbody v-if="dataList">
+                                        <tr v-for="(items,index) in dataList" :key="index">
+                                            <td v-for="(item,i) in items.tdList" :key="i" :rowspan="resetRowSpan(index,item)">{{items[item]}}</td>
+                                        </tr>
+                                    </tbody>
+                                    <tbody v-else>
+                                      <tr v-for="(items,index) in dataList" :key="index">
+                                          <td v-for="(item,j) in colKeyList" :key="j">{{items[item]}}</td>
+                                      </tr>
+                                    </tbody> -->
+                                </table>
+                            </div>
+                            <div class="tableTwo">
+                                <table class="table">
+                                    <thead>
+                                        <tr></tr>
+                                    </thead>
+                                    <!-- <thead>
+                                      <tr v-for="(items,i) in newArr" :key="i">
+                                          <th v-for="(item,j) in items" :key="j" :rowspan="item.rowspan" :colspan="item.colspan">{{item.title}}</th>
+                                      </tr>
+                                    </thead>
+                                    <tbody v-if="dataList">
+                                        <tr v-for="(items,index) in dataList" :key="index">
+                                            <td v-for="(item,i) in items.tdList" :key="i" :rowspan="resetRowSpan(index,item)">{{items[item]}}</td>
+                                        </tr>
+                                    </tbody>
+                                    <tbody v-else>
+                                      <tr v-for="(items,index) in dataList" :key="index">
+                                          <td v-for="(item,j) in colKeyList" :key="j">{{items[item]}}</td>
+                                      </tr>
+                                    </tbody> -->
+                                </table>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -127,7 +168,7 @@
         <!-- 附录  begin-->
         <div class="appendix">
             <div class="portrayalTit appendixMargin">附录</div>
-            <div class="appendixTxt" v-html="AssetData.macroEconomyContent"></div>
+            <div class="appendixTxt"></div>
         </div>
         <!-- 附录  end---->
         <!-- 免责声明 begin -->

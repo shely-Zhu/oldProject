@@ -9,6 +9,13 @@
 //获取当前页面地址
 module.exports = function() {
     /*-------------------账户相关------------------------------*/
+      //资普
+    this.standardPoor_api = http_url.web_url + '/account/standardPoor/getTotalAssets';
+    //资普 查询客户是否有理顾宝推送资产报告
+    this.hasAssetReport_api = http_url.web_url + '/account/standardPoor/hasAssetReport';
+    //资普 配置建议书
+    this.ReportData_api = http_url.web_url + '/account/getAssetConfigReportData';
+
     //检查是否登录,sso后换成jsonp
     this.checkLogin_api = http_url.web_url + '/account/frontend/isLogin';
     //获取客户信息
