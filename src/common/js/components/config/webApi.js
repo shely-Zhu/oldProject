@@ -15,6 +15,12 @@ module.exports = function() {
     this.hasAssetReport_api = http_url.web_url + '/account/standardPoor/hasAssetReport';
     //资普 配置建议书
     this.ReportData_api = http_url.web_url + '/account/getAssetConfigReportData';
+     //资普 配置建议书获取echarts数据
+     this.getCustomerAssetCharts_api = http_url.web_url + '/account/getCustomerAssetCharts';
+     //资普 配置建议书获取配置详情
+     this.getCustomerAssetDetailById_api = http_url.web_url + '/account/getCustomerAssetDetailById';
+      //资普 配置建议书获数据字典
+      this.getCustomerAssetDictionary_api = http_url.web_url + '/account/getCustomerAssetDictionary';
 
     //检查是否登录,sso后换成jsonp
     this.checkLogin_api = http_url.web_url + '/account/frontend/isLogin';

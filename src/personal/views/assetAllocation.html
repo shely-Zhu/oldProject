@@ -95,7 +95,11 @@
         <div class="proposalPieContent">
             <div class="proposalPie" v-if="imageData.assetRecommendPieChart">
                 <div class="portrayalTit portrayalTitMarginBottom">根据您的风险承受能力 建议您的资产配置如下</div>
-                <img :src="imageData.assetRecommendPieChart" alt="">
+                <div class="echartWrap">
+                    <!-- 遮罩  盖住底下的图 -->
+                    <div class="echartMask"></div>
+                    <div id="tjPie" class="myChart" style="height: 33.8rem;"></div>
+                </div>
             </div>
             <!-- 根据您的风险承受能力 建议您的资产配置如下 end----->
             <!-- 根据您的产品选择 建议您的产品配置如下 begin -->
@@ -107,22 +111,9 @@
                             <div class="tableOne">
                                 <table class="table">
                                     <thead>
-                                      <!-- <tr v-for="(items,i) in newArr" :key="i">
-                                          <th v-for="(item,j) in items" :key="j" :rowspan="item.rowspan" :colspan="item.colspan">{{item.title}}</th>
-                                      </tr> -->
                                       <tr></tr>
                                     </thead>
                                     <tbody></tbody>
-                                    <!-- <tbody v-if="dataList">
-                                        <tr v-for="(items,index) in dataList" :key="index">
-                                            <td v-for="(item,i) in items.tdList" :key="i" :rowspan="resetRowSpan(index,item)">{{items[item]}}</td>
-                                        </tr>
-                                    </tbody>
-                                    <tbody v-else>
-                                      <tr v-for="(items,index) in dataList" :key="index">
-                                          <td v-for="(item,j) in colKeyList" :key="j">{{items[item]}}</td>
-                                      </tr>
-                                    </tbody> -->
                                 </table>
                             </div>
                             <div class="tableTwo">
@@ -130,21 +121,7 @@
                                     <thead>
                                         <tr></tr>
                                     </thead>
-                                    <!-- <thead>
-                                      <tr v-for="(items,i) in newArr" :key="i">
-                                          <th v-for="(item,j) in items" :key="j" :rowspan="item.rowspan" :colspan="item.colspan">{{item.title}}</th>
-                                      </tr>
-                                    </thead>
-                                    <tbody v-if="dataList">
-                                        <tr v-for="(items,index) in dataList" :key="index">
-                                            <td v-for="(item,i) in items.tdList" :key="i" :rowspan="resetRowSpan(index,item)">{{items[item]}}</td>
-                                        </tr>
-                                    </tbody>
-                                    <tbody v-else>
-                                      <tr v-for="(items,index) in dataList" :key="index">
-                                          <td v-for="(item,j) in colKeyList" :key="j">{{items[item]}}</td>
-                                      </tr>
-                                    </tbody> -->
+                                    <tbody></tbody>
                                 </table>
                             </div>
                         </div>
@@ -154,15 +131,23 @@
         </div>
         <!-- 根据您的产品选择 建议您的产品配置如下 end ---->
         <!-- 产品资产配置现状分析 begin -->
-        <div class="analysis" v-if="imageData.assetNowPieChart">
+        <div class="analysis">
             <div class="portrayalTit analysisMargin">客户资产配置现状分析</div>
-            <img :src="imageData.assetNowPieChart" alt="">
+            <div class="echartWrap">
+                <!-- 遮罩  盖住底下的图 -->
+                <div class="echartMask"></div>
+                <div id="xzPie" class="myChart" style="height: 33.8rem;"></div>
+            </div>
         </div>
         <!-- 产品资产配置现状分析 end-- -->
         <!-- 户资产配置调整建议 begin -->
-        <div class="adjust" v-if="imageData.assetRecommendLineChart">
+        <div class="adjust">
             <div class="portrayalTit">客户资产配置调整建议</div>
-            <img :src="imageData.assetRecommendLineChart" alt="">
+            <div class="echartWrap">
+                <!-- 遮罩  盖住底下的图 -->
+                <div class="echartMask"></div>
+                <div id="bar" class="myChart" style="height: 33.8rem;"></div>
+            </div>
         </div>
         <!-- 户资产配置调整建议 end----->
         <!-- 附录  begin-->
