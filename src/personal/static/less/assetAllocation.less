@@ -7,7 +7,15 @@
 @import url("@pathCommonLess/components/elasticLayerTypeTwo.less");
 
 
+* {
+    box-sizing: border-box;
 
+    //去掉Unable to preventDefault inside passive event listener due to target being treated as passive的错误提示
+    //google浏览器上
+    touch-action: pan-y;
+
+    vertical-align: middle;
+}
 body{
     background: #f5f7f6 importent!;
 }
