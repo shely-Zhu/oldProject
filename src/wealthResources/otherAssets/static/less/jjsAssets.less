@@ -5,154 +5,218 @@
 @import url("@pathCommonLess/reset.less");
 @import url("@pathCommonLess/chtwm.less");
 @import url("@pathCommonLess/app.less");
-@import url("@pathCommonLessCom/bottomNav.less");
 @import url("@pathCommonLessCom/againEnter.less");
 @import url("@pathCommonLessCom/alertBox.less");
-@import url("@pathCommonLessCom/publicOrPrivate.less");
-@import url("@pathCommonLessCom/elasticLayerTypeTwo.less");
-@import url("@pathCommonLessCom/elasticLayerThree.less");
+@import url("@pathCommonLessCom/tabScroll.less");
 
-html, body{
-	height: 100%;
+html,
+body {
+    height: 100%;
 }
 
-.container{
-	height: 100%;
-	width: 100%;
-	display: flex;
-	flex-direction: column;
+.container {
+    height: 100%;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
 
-	#wrapper {
-		flex: 1;
-		height: 100%;
-		position: unset;
-		overflow: hidden;
-	}
-}
-// 其他资产
-.banner{
-	width: 100%;
-	height: 14rem;
-    background: url("/commonResources/static/img/banner.png");
-	background-size: 100% 100%;
-
-    .bannerTop{
-	  color: @c005;
-	  text-align: center;
-      .sum{
-		margin-top: 1rem;
-        font-size: 1rem;
-      }
-      .amount{
-        margin: 1.3rem 0 1.4rem;
-        font-size: 3rem;
-		line-height: 3.2rem;
-      }   
+    #wrapper {
+        flex: 1;
+        height: 100%;
+        overflow: hidden;
     }
-  }
+}
+
+// 其他资产
+.banner {
+    position: relative;
+    width: 100%;
+    height: 14rem;
+    background: url("/wealthResources/otherAssets/static/img/banner.jpg");
+    background-size: 100% 100%;
+
+    .bannerTop {
+        color: @c005;
+        text-align: center;
+
+        .sum {
+            margin-top: 1rem;
+            font-size: 1rem;
+        }
+
+        .amount {
+            margin: 1.3rem 0 1.4rem;
+            font-size: 3rem;
+            line-height: 3.2rem;
+        }
+    }
+    
+    // 已持仓
+    .jjs_type  {
+        background-color: @c005;
+        height: 6.4rem;
+        border-radius: 0.3rem;
+        width: 91.5%;
+        position: absolute;
+        bottom: -2.5rem;
+        left: 4.375%;
+        text-align: center;
+        padding-top: 1.4rem;
+        border-radius: 0 0.1rem 0.4rem 0 rgba(0, 0, 0, 0.1);
+        color:@999999;
+        font-size: 0.9rem;
+        line-height: 1.2rem;
+        
+        // 线
+        .j_left{
+            &:after{
+                position: absolute;
+                height: 4.3rem;
+                top: -0.7rem;
+                right: 0;
+                content: '';
+                border-right: 1px solid @c008;
+            }
+        }
+
+        li {
+            span {
+                display: block;
+
+                &:first-child{
+                    padding-bottom: 0.2rem;
+                }
+            };
+        }
+        
+        .j_already,.j_tobe{
+            font-size: 1.2rem;
+            margin-top: 1rem;
+        }
+
+        .j_already{
+            color:@695a37;
+        }
+
+        .j_tobe{
+            color:@d75e33;
+        }
+
+    }
+}
 
 // 其他资产列表
-.myAsset{
-	.list{
-		width: 100%;
-		.datalist{
-			margin: 0.8rem auto 0;
-			color: @c002;
-			background: @c005;
-			box-shadow: 0 0.1rem 0.4rem 0 rgba(0,0,0,0.1);
-			h2{
-				width: 90%;
-				margin: 0 auto;
-				font-size: 1.6rem;
-				line-height: 3rem;
-			}
-			.line{
-				width: 95%;
-				margin-left: 1.6rem;
-				border-bottom: 1px solid @c004;
-			}
-			ul{
-				width: 90%;
-				margin: 0 auto;
-				font-size: 1.2rem;
-				line-height: 1.2rem;
-				padding: 0.1rem 0 1.5rem;
-				li{
-					margin-top: 1.4rem;
-					.title{
-						float: left;
-						color: @c003;
-					}
-					.text{
-						float: right;
-					}
-				}
-			}
-			.date{
-				margin-left: 1.6rem;
-				height: 3.2rem;
-				line-height: 3.2rem;
-				font-size: 1.2rem;
-				color: @c003;
-				span{
-					margin-left: 1.1rem;
-				}
-			}
-		}
-	}
+.myAsset {
+    margin-top: 6.7rem;
+    .list {
+        width: 100%;
+
+        .datalist {
+            margin: 0.8rem auto 0;
+            color: @c002;
+            background: @c005;
+            border-radius: 0.3rem;
+            padding:1.6rem 1.4rem 1rem;
+
+            h2 {
+                font-size: 1.2rem;
+                line-height: 2rem;
+                text-align: center;
+                color:@3c3c3c;
+                margin-bottom: 1.2rem;
+            }
+
+            ul {
+                font-size: 1rem;
+
+                li {
+                    line-height: 2.5rem;
+                    margin-bottom: 0.3rem;
+                    background-color:@fbfaf5;
+                    padding:0 0.7rem;
+
+                    .title {
+                        color: @a48e5f;
+                    }
+
+                    .text {
+                        color:@695a37;
+                        float: right;
+                    }
+                }
+            }
+
+            .date {
+                margin-left: 1.6rem;
+                height: 3.2rem;
+                line-height: 3.2rem;
+                font-size: 1.2rem;
+                color: @c003;
+
+                span {
+                    margin-left: 1.1rem;
+                }
+            }
+        }
+    }
 
 }
 
 // 向上按钮，返回顶部
-.upTop{
-	position: fixed;
-	bottom: 2.3rem;
-	right: 1.6rem;
-	width: 2.7rem;
-	height: 2.7rem;
-	border-radius: 1.35rem;
-	background: rgba(51,51,51,0.85);
-	// background: @c002;
-	// opacity: 0.85;
-	span{
-		display: block;
-		text-align: center;
-		margin-top: 0.35rem;
-		font-size: 1.8rem;
-		color: @c005;
-	}
-	&.chtwm-upTop{
-	    bottom: 4.5rem;
-	}
+.upTop {
+    position: fixed;
+    bottom: 2.3rem;
+    right: 1.6rem;
+    width: 2.7rem;
+    height: 2.7rem;
+    border-radius: 1.35rem;
+    background: rgba(51, 51, 51, 0.85);
+
+    // background: @c002;
+    // opacity: 0.85;
+    span {
+        display: block;
+        text-align: center;
+        margin-top: 0.35rem;
+        font-size: 1.8rem;
+        color: @c005;
+    }
+
+    &.chtwm-upTop {
+        bottom: 4.5rem;
+    }
 }
 
 //iscroll上拉加载重置
-#pullUp{
-	line-height: 2.8rem;
-	padding: 0;
-	
-	span{
-		display: inline-block;
-		vertical-align: middle;
-	}
+#pullUp {
+    line-height: 2.8rem;
+    padding: 0;
+
+    span {
+        display: inline-block;
+        vertical-align: middle;
+    }
 }
 
-.openOrClose{
-	.bind{
-		margin-bottom: 2rem;
-	}
+.openOrClose {
+    .bind {
+        margin-bottom: 2rem;
+    }
 }
+
 /**
 *   无数据区域的样式
  */
- .without{
+.without {
     margin-top: 16.5rem;
     color: @c001;
-    .iconfont{
+
+    .iconfont {
         font-size: 5.1rem;
     }
-    .text{
+
+    .text {
         margin-top: 2rem;
         font-size: 1.4rem;
-    }       
+    }
 }

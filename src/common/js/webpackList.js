@@ -167,8 +167,7 @@ module.exports = {
     './personal/static/js/growth/growthValue' : './src/personal/static/js/growth/growthValue.js',
     //成长值规则
     './personal/static/js/growth/growthReg' : './src/personal/static/js/growth/growthReg.js',
-    //jjs持仓明细
-    './commonResources/static/js/jjsAssets' : './src/commonResources/static/js/jjsAssets.js',
+ 
 
     
 
@@ -178,11 +177,17 @@ module.exports = {
     './commonResources/fundDiagnosis/static/js/diagnosisDetail' : './src/commonResources/fundDiagnosis/static/js/diagnosisDetail.js',
     // 基金诊断搜索页
     './commonResources/fundDiagnosis/static/js/diagnosisSearch' : './src/commonResources/fundDiagnosis/static/js/diagnosisSearch.js',
-    './commonResources/appMd/headerMd' : './src/commonResources/appMd/headerMd.js',
 
 
     // 标普模型
     './personal/static/js/spAssetModel': "./src/personal/static/js/spAssetModel.js",
     // 资产配置建议书
     './personal/static/js/assetAllocation': "./src/personal/static/js/assetAllocation.js",
+
+       //jjs持仓明细
+    './wealthResources/otherAssets/static/js/jjsAssets' : './src/wealthResources/otherAssets/static/js/jjsAssets.js',
+
+    // 埋点
+    './allServerResources/appMd/headerMd' : './src/allServerResources/appMd/headerMd.js',
+
 }
