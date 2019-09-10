@@ -15,7 +15,7 @@
 
 <body>
 
-    @@include('../../common/views/load.html')
+    @@include('@pathCommonViews/load.html')
 
     <section class="container">
         <div class="banner clearfix">
@@ -34,7 +34,7 @@
                     </div>
                 </div>
 
-                @@include('../../common/views/upLoad.html')
+                @@include('@pathCommonViews/upLoad.html')
 
                 <!-- 回到顶部 -->
                 <div class="upTop" id="goTop" style="display:none;">
@@ -51,9 +51,9 @@
             </div>
         </div>
         <!-- 加载中loading -->
-        @@include('../../common/views/loading/listLoading.html')
+        @@include('@pathCommonViews/loading/listLoading.html')
         <!-- 暂无数据 -->
-        @@include('../../common/views/noData.html')
+        @@include('@pathCommonViews/noData.html')
     </section>
     <script id="dataLists" type="text/x-handlebars-template">
 		{{! 左侧页面列表}}
