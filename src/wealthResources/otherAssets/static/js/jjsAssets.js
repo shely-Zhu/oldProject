@@ -40,8 +40,8 @@ $(function() {
         },
         gV: { //一些设置
             navList: [ //导航
-                { type: '已持仓资产', num: '0' }, 
-                { type: '待确认资产', num: '1' },
+            { type: '已持仓资产', num: '0' },
+            { type: '待确认资产', num: '1' },
             ],
             aP: {
                 pageNo: 1,
@@ -51,6 +51,8 @@ $(function() {
             current_index: 0, //左右滑动区域的索引
             list_template: '', //列表的模板，生成后存放在这里
             ajaxArr: [], //存放每一个ajax请求的传参数据
+            listToTop: '', // 滑动区域距离顶部距离
+            navToTop:'', // 滑动nav距离顶部距离
         },
         html: '', //存放生成的html
         init: function() { //初始化函数
@@ -72,16 +74,16 @@ $(function() {
 
             // list内容模板
             var source = $('#second-template').html(),
-                template = Handlebars.compile(source),
-                list_html = template();
+            template = Handlebars.compile(source),
+            list_html = template();
 
             //将生成的模板内容存到that.list_template上
             that.gV.list_template = template;
 
             // 外容器优先加载
             var wrap_source = $('#first-template').html(),
-                wrap_template = Handlebars.compile(wrap_source),
-                wrap_html = wrap_template({ content: list_html });
+            wrap_template = Handlebars.compile(wrap_source),
+            wrap_html = wrap_template({ content: list_html });
 
             $.each(that.gV.navList, function(i, el) {
                 that.gV.ajaxArr[el.num] = {
@@ -93,7 +95,7 @@ $(function() {
                     that.gV.ajaxArr[el.num].tradeType = 1; //
                 } else if (el.num == 1) {
                     that.gV.ajaxArr[el.num].tradeType = 2; // 
-                } 
+                }
 
                 contentArr.push({
                     id: i,
@@ -133,18 +135,23 @@ $(function() {
             //设置切换区域的高度
             //计算节点高度并设置
             if (!that.height) {
-                var height = windowHeight - document.getElementById('scroll1').getBoundingClientRect().top;
-                that.height = height - $('.banner').height() - 50;
+                that.gV.listToTop = document.getElementById('scroll1').getBoundingClientRect().top;
+                that.gV.navToTop = document.getElementById('slider').getBoundingClientRect().top;
+                that.height = windowHeight - that.gV.listToTop;
+
             }
-            if (!$('.list').hasClass('setHeight')) {
+            /*if (!$('.list').hasClass('setHeight')) {
                 $('.list').height(that.height).addClass('setHeight');
-            }
+            }*/
+
+            // 为实现滚动区域滚动到顶部，定位，添加遮罩层
+            $('.scroll_mask').css('top', that.gV.listToTop)
         },
 
         initMui: function($id) {
             var that = this;
             w = $id.attr('id'),
-                s = '#' + w + ' .contentWrapper';
+            s = '#' + w + ' .contentWrapper';
 
             mui.init({
                 pullRefresh: {
@@ -155,6 +162,7 @@ $(function() {
                         callback: function() {
                             //执行ajax请求
                             that.commonAjax($id, this, 'more');
+
                         }
                     }
                 }
@@ -173,6 +181,8 @@ $(function() {
                 //这一句初始化并第一次执行mui上拉加载的callback函数
                 mui(s).pullRefresh().pullupLoading();
 
+                mui(s).pullRefresh().disablePullupToRefresh();
+
                 //为$id添加hasPullUp  class
                 $($id).addClass('hasPullUp');
             });
@@ -188,7 +198,7 @@ $(function() {
                 needLogin: true,
                 callbackDone: function(json) {
                     var jsonData = json.data,
-                        pageList = jsonData.pageList;
+                    pageList = jsonData.pageList;
                     var data = {};
 
                     if (!$.util.objIsEmpty(pageList)) {
@@ -305,6 +315,31 @@ $(function() {
                     window.location.href = site_url.buyAndRedemptionDetails_url + '?combRequestNo=' + $(this).attr('combRequestNo') + '&tradeType=' + $(this).attr('tradeType');
                 }
             })
+
+            // 
+            $(window).scroll(function(event){
+                var e = $(window).scrollTop();
+                console.log('e',e);
+                console.log('navToTop',that.gV.navToTop);
+
+                if(e>that.gV.navToTop){
+                    $('.nav-wrapper').addClass('nav_fixed');
+                    $('.scroll_mask').hide();
+
+                    // 设置滚动区域高度
+                    if (!$('.list').hasClass('setHeight')) {
+                        console.log('nav距离顶部距离',document.getElementsByClassName('nav-wrapper')[0].getBoundingClientRect().top);
+                        console.log('滑动区域距离顶部距离',document.getElementById('slider').getBoundingClientRect().top);
+                        $('.list').height(620).addClass('setHeight');
+                    }
+                } else{
+                    $('.nav-wrapper').removeClass('nav_fixed');
+                    $('.scroll_mask').show();
+                }
+
+            });
+
+
 
         }
     };

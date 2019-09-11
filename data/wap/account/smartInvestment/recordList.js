@@ -9,7 +9,7 @@ var Mock = require('mockjs');
 var data = Mock.mock({
     "data": {
         "pageItems": { "totalCount": 1, "totalPages": 1 },
-        "pageList": [{
+        "pageList|20": [{
             "applyDate": "2019-01-15",
             "applySum": "30000.00",
             "applySumMask": "30,000.00",
