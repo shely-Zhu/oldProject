@@ -44,12 +44,7 @@ $(function() {
             var that = this;
             var obj = [{
                 url: site_url.standardPoor_api,
-                data: {
-                    // hmac: "", //预留的加密信息
-                    // params: { //请求的参数信息
-                        
-                    // }
-                },
+                data: {},
                 // async: false,
                 // needLogin:true,
                 // needDataEmpty: true,
@@ -122,12 +117,7 @@ $(function() {
            })
            var obj = [{
             url: site_url.hasAssetReport_api,
-            data: {
-                // hmac: "", //预留的加密信息
-                // params: { //请求的参数信息
-                    
-                // }
-            },
+            data: {},
             //async: false,
             // needLogin:true,
             needDataEmpty: true,

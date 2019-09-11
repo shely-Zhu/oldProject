@@ -369,7 +369,7 @@ $(function() {
               {
                 url: site_url.getCustomerAssetDetailById_api, //
                 params: {
-                  id: argId //资产配置id
+                  // id: argId //资产配置id
                 },
                 needLogin: true, //需要判断是否登陆
                 //needDataEmpty: false,//不需要判断data是否为空
