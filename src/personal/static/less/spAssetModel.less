@@ -83,17 +83,17 @@ body{
         .sp_four{
             overflow: hidden;
             width:100%;
-            height: 29.35rem;
-            background-image: url(../img/sp_four.png);
-            background-size: 100% 29.35rem ;
-            background-repeat: no-repeat;
+            // height: 29.35rem;
+            background: url(../img/sp_four.png) center center no-repeat;
+            background-size: 100% 100%;
             margin-top:1.3rem;
             .sp_four_item{
                width: 50%;
-               height: 14.6rem;
+               height: auto;
                float: left;
-               padding-left:0.9rem;
+               padding-left:0.95rem;
                padding-top:1.25rem;
+               padding-bottom:1.75rem;
                p{
                    line-height: 0;
                }
@@ -107,49 +107,65 @@ body{
                 line-height: 0.85rem;
                 font-size:0.85rem;
                 color:#695a37;
-                margin-top:3.3rem;
+                margin-top:3rem;
                }
                .sp_four_item_type{
-                line-height: 0.85rem;
+                line-height: 1.15rem;
                 font-size:0.85rem;
                 color:#ac986d;
-                margin-top:0.7rem;
                 margin-top:0.7rem;
                }
                .sp_four_item_present{
                 font-size:0rem;
-                height: 0.85rem;
-                margin-top:1.6rem;
+                // height: 0.85rem;
+                margin-top:1.15rem;
+                overflow: hidden;
                 span{
                     font-size:0.85rem;
-                    line-height: 0.85rem;
+                    line-height:  1.15rem;
                     color:#ac986d;
-                    float: left;
+                    display: inline-block;
+                    vertical-align: middle;
+                }
+                span:last-of-type{
+                    margin-right:0.2rem;
                 }
                 ul{
-                    float: left;
+                    display: inline-block;
                     overflow: hidden;
-                    margin-left:0.3rem;
+                    vertical-align: middle;
+                    height:0.85rem;
                     li{
                         float: left;
-                        width: 0.3rem;
+                        width: 0.35rem;
                         height: 0.8rem;
+                        line-height:  1.15rem;
                         border-radius: 0.3rem;
                         background-color:#dbc69a;
-                        margin-right:0.2rem;
+                        margin-right:0.15rem;
                     }
                     li.active{
                         background-color:#d75e33;
+                    }
+                    li:last-of-type{
+                        margin-right:0;
                     }
                 }
                }
                .sp_four_item_price{
                    color:#d75e33;
-                   margin-top:0.9rem;
+                   margin-top:0.6rem;
                    font-weight: 600;
                    font-size:0.85rem;
                    line-height: 0.85rem;
                }
+            }
+            #safeguard,#hedging{
+                padding-left:1.2rem;
+            }
+            #appreciation,#hedging{
+                padding-top:1.7rem;
+                padding-bottom: 1.3rem;
             }
         }
         .sp_allocation{
