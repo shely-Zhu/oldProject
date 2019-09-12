@@ -231,6 +231,8 @@ $(function() {
           }
           return 1;
         }
+      }else{
+        return 1
       }
     },
     gerMaxCol(items) {
