@@ -60,15 +60,15 @@ $(function() {
             key: "cplb",
             hasrowspan: true
           },
-          {
-            title: "产品名称",
-            key: "cpmc",
-            hasrowspan: true
-          },
-          {
-            title: "金额（万元）",
-            key: "je"
-          },
+          // {
+          //   title: "产品名称",
+          //   key: "cpmc",
+          //   hasrowspan: true
+          // },
+          // {
+          //   title: "金额（万元）",
+          //   key: "je"
+          // },
           {
             title: "配置比例",
             key: "pzbl"
@@ -231,6 +231,8 @@ $(function() {
           }
           return 1;
         }
+      }else{
+        return 1
       }
     },
     gerMaxCol(items) {

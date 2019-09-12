@@ -28,5 +28,5 @@ module.exports = function() {
     // 恒小智-组合交易账号查询
     this.combinAccList_api = http_url.account_url + '/smartInvestment/tradAcctList';
     //标普资产信息
-    this.getTotalAssets_api = http_url.account_url + '/standardPoor/getTotalAssets';
+    // this.getTotalAssets_api = http_url.account_url + '/standardPoor/getTotalAssets';
 };
