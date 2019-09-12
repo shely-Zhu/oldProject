@@ -138,8 +138,6 @@
 
             //监听mui的tab滑动事件
             document.getElementById('slider').addEventListener('slide', function(e) {
-                debugger;
-
                 console.log('当前索引    ' + e.detail.slideNumber);
 
                 //有内容，不执行
