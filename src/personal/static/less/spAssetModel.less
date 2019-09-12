@@ -1,8 +1,8 @@
 /*
 * @page: 标普资产模型
-* @Author: songxiaoyu
-* @Date:   2019-09-03 14:21:52
-* @Last Modified by:   songxiaoyu
+* @Author: fangyangfan
+* @Date:   2019-09-12 14:21:52
+* @Last Modified by:   fangyangfan
 * @description:
 */
 @charset "utf-8";
@@ -114,14 +114,22 @@ body {
           }
           .sp_four_item_type {
             line-height: 1.15rem;
-            font-size: 0.85rem;
+            font-size: 0;
             color: #ac986d;
             margin-top: 0.7rem;
+            span{
+              // line-height: 1.15rem;
+              font-size: 0.85rem;
+              margin-right:0.4rem;
+            }
+            span:last-of-type{
+              margin-right:0;
+            }
           }
           .sp_four_item_present {
             font-size: 0rem;
             // height: 0.85rem;
-            margin-top: 1.15rem;
+            margin-top: 1rem;
             overflow: hidden;
             span {
               font-size: 0.85rem;
@@ -137,11 +145,11 @@ body {
               display: inline-block;
               overflow: hidden;
               vertical-align: middle;
-              height: 0.85rem;
+              height: 0.7rem;
               li {
                 float: left;
                 width: 0.35rem;
-                height: 0.8rem;
+                height: 0.7rem;
                 line-height: 1.15rem;
                 border-radius: 0.3rem;
                 background-color: #dbc69a;
@@ -157,10 +165,10 @@ body {
           }
           .sp_four_item_price {
             color: #d75e33;
-            margin-top: 0.6rem;
+            margin-top: 0.8rem;
             font-weight: 600;
-            font-size: 0.85rem;
-            line-height: 0.85rem;
+            font-size: 1rem;
+            line-height: 1rem;
           }
         }
         #expense {
