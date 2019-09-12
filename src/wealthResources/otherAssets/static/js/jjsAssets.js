@@ -27,9 +27,9 @@ require('@pathCommonJsCom/elasticLayer.js');
 require('@pathCommonJsCom/chtwm/ifChtwm.js');
 // 切换
 require('@pathCommonJsCom/tabScroll.js');
+require('@pathCommonJsCom/goTopMui.js');
 //黑色提示条的显示和隐藏
 var tipAction = require('@pathCommonJsCom/tipAction.js');
-var Base64 = require('@pathIncludJs/vendor/base64/base64.js');
 
 
 $(function() {
@@ -40,8 +40,8 @@ $(function() {
         },
         gV: { //一些设置
             navList: [ //导航
-            { type: '已持仓资产', num: '0' },
-            { type: '待确认资产', num: '1' },
+                { type: '已持仓资产', num: '0' },
+                { type: '待确认资产', num: '1' },
             ],
             aP: {
                 pageNo: 1,
@@ -51,8 +51,10 @@ $(function() {
             current_index: 0, //左右滑动区域的索引
             list_template: '', //列表的模板，生成后存放在这里
             ajaxArr: [], //存放每一个ajax请求的传参数据
+            siteUrlArr: [site_url.jjsAssetsDetail_api, site_url.getJJSInTransitAssets_api], //存放ajax请求地址
             listToTop: '', // 滑动区域距离顶部距离
-            navToTop:'', // 滑动nav距离顶部距离
+            navToTop: '', // 滑动nav距离顶部距离
+            totalCount: $("#totalCount"), //总金额
         },
         html: '', //存放生成的html
         init: function() { //初始化函数
@@ -64,6 +66,8 @@ $(function() {
             //初始化第一屏区域的上拉加载
             that.initMui($('#scroll1'));
 
+            that.getData();
+
             //事件监听
             that.events();
         },
@@ -74,16 +78,16 @@ $(function() {
 
             // list内容模板
             var source = $('#second-template').html(),
-            template = Handlebars.compile(source),
-            list_html = template();
+                template = Handlebars.compile(source),
+                list_html = template();
 
             //将生成的模板内容存到that.list_template上
             that.gV.list_template = template;
 
             // 外容器优先加载
             var wrap_source = $('#first-template').html(),
-            wrap_template = Handlebars.compile(wrap_source),
-            wrap_html = wrap_template({ content: list_html });
+                wrap_template = Handlebars.compile(wrap_source),
+                wrap_html = wrap_template({ content: list_html });
 
             $.each(that.gV.navList, function(i, el) {
                 that.gV.ajaxArr[el.num] = {
@@ -92,9 +96,9 @@ $(function() {
                 }
 
                 if (el.num == 0) {
-                    that.gV.ajaxArr[el.num].tradeType = 1; //
+                    that.gV.ajaxArr[el.num].tradeType = 1; // 已持仓
                 } else if (el.num == 1) {
-                    that.gV.ajaxArr[el.num].tradeType = 2; // 
+                    that.gV.ajaxArr[el.num].tradeType = 2; // 待确认
                 }
 
                 contentArr.push({
@@ -104,7 +108,7 @@ $(function() {
             })
 
             var obj = {
-                wrapper: $('.tabScroll'), //存放整个组件的区域
+                wrapper: $('.myAsset'), //存放整个组件的区域
                 needNavAction: false,
                 //needBlock: true,
                 navList: that.gV.navList, //导航
@@ -138,20 +142,20 @@ $(function() {
                 that.gV.listToTop = document.getElementById('scroll1').getBoundingClientRect().top;
                 that.gV.navToTop = document.getElementById('slider').getBoundingClientRect().top;
                 that.height = windowHeight - that.gV.listToTop;
-
             }
-            /*if (!$('.list').hasClass('setHeight')) {
+
+            if (!$('.list').hasClass('setHeight')) {
                 $('.list').height(that.height).addClass('setHeight');
-            }*/
+            }
 
             // 为实现滚动区域滚动到顶部，定位，添加遮罩层
-            $('.scroll_mask').css('top', that.gV.listToTop)
+            // $('.scroll_mask').css('top', that.gV.listToTop)
         },
 
         initMui: function($id) {
             var that = this;
             w = $id.attr('id'),
-            s = '#' + w + ' .contentWrapper';
+                s = '#' + w + ' .contentWrapper';
 
             mui.init({
                 pullRefresh: {
@@ -175,38 +179,38 @@ $(function() {
                     $id.find('.mui-pull-bottom-pocket').addClass('mui-hidden');
                 }
 
+                mui(".mui-slider").slider();
+
                 //显示loading
                 that.getElements.listLoading.show();
 
                 //这一句初始化并第一次执行mui上拉加载的callback函数
                 mui(s).pullRefresh().pullupLoading();
 
-                mui(s).pullRefresh().disablePullupToRefresh();
-
                 //为$id添加hasPullUp  class
                 $($id).addClass('hasPullUp');
             });
-        },
 
+            // mui('.mui-slider').slider().stopped = true;
+        },
         commonAjax: function($id, t) { // 获取产品数据的公用ajax方法;$id为各区域的 scroll+num id
             var that = this;
 
             //获取产品列表
             var obj = [{
-                url: site_url.jjsAssetsDetail_api,
+                url: that.gV.siteUrlArr[that.gV.current_index],
                 data: that.gV.ajaxArr[that.gV.current_index],
                 needLogin: true,
                 callbackDone: function(json) {
                     var jsonData = json.data,
-                    pageList = jsonData.pageList;
-                    var data = {};
+                        pageList = jsonData.pageList;
 
                     if (!$.util.objIsEmpty(pageList)) {
 
-                        jsonData.isIn = that.gV.current_index == 0 ? 1 : 0;
-                        jsonData.isOut = that.gV.current_index == 1 ? 1 : 0;
+                        jsonData.already = that.gV.current_index == 0 ? 1 : 0;
+                        jsonData.tobe = that.gV.current_index == 1 ? 1 : 0;
 
-                        var list_html = that.gV.list_template(pageList);
+                        var list_html = that.gV.list_template(jsonData);
 
                         //设置这两参数，在initMui()中使用
                         //判断是否显示没有更多了等逻辑，以及插入新数据
@@ -296,11 +300,21 @@ $(function() {
                         that.getElements.listLoading.hide();
                     }, 100);
                 }
-
             }]
             $.ajaxLoading(obj);
         },
-
+        getData: function() {
+            var that = this;
+            var obj = [{
+                url: site_url.getTotalAssets_api, //查询总资产 从中拿到jjs的资产
+                data: {},
+                callbackDone: function(json) {
+                    //拿到jjs资产并填充界面
+                    that.gV.totalCount.html(json.data.jJSAssets);
+                },
+            }];
+            $.ajaxLoading(obj);
+        },
         events: function() { //绑定事件
             var that = this;
 
@@ -317,27 +331,23 @@ $(function() {
             })
 
             // 
-            $(window).scroll(function(event){
+            /*$(window).scroll(function(event){
                 var e = $(window).scrollTop();
-                console.log('e',e);
-                console.log('navToTop',that.gV.navToTop);
+
+                mui("#scroll1").scroll({
+                    scrollY:false,
+                })
 
                 if(e>that.gV.navToTop){
                     $('.nav-wrapper').addClass('nav_fixed');
                     $('.scroll_mask').hide();
-
-                    // 设置滚动区域高度
-                    if (!$('.list').hasClass('setHeight')) {
-                        console.log('nav距离顶部距离',document.getElementsByClassName('nav-wrapper')[0].getBoundingClientRect().top);
-                        console.log('滑动区域距离顶部距离',document.getElementById('slider').getBoundingClientRect().top);
-                        $('.list').height(620).addClass('setHeight');
-                    }
                 } else{
-                    $('.nav-wrapper').removeClass('nav_fixed');
-                    $('.scroll_mask').show();
+                    mui(".mui-scroll-wrapper").scroll({
+                        scrollY:false,
+                    })
                 }
 
-            });
+            });*/
 
 
 

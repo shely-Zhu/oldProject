@@ -31,8 +31,8 @@
                 </li>
             </ul>
         </div>
-        <div class="scroll_mask"></div>
-        <div class="mui-content tabScroll myAsset">
+        <!-- <div class="scroll_mask"></div> -->
+        <div class="mui-content  myAsset">
         <!-- 放置页面内容 -->
         </div>
 
@@ -67,34 +67,66 @@
     </script>
     <script id="second-template" type="text/x-handlebars-template">
         {{! 左侧页面列表}}
-        {{#each this}}
-            <div class="datalist" fundCode="{{fundCode}}"> 
-                <h2>{{projectName}}</h2>
-                <ul>
-                    <li class="">
-                        <span class="title">总资产</span>
-                        <span class="text"><span>{{balanceStr}}</span>元</span>
-                    </li>
-                    <li class="">
-                        <span class="title">票面利率</span>
-                        <span class="text"><i>{{profitStr}}</i></span>
-                    </li>
-                    <li class="">
-                        <span class="title">成立日期</span>
-                        <span class="text"><i>{{establishDateStr}}</i></span>
-                    </li>
-                    <li class="">
-                        <span class="title">产品期限</span>
-                        <span class="text"><i>{{deadLine}}</i></span>
-                    </li>
-                </ul> 
-            </div>
-        {{/each}}
+        {{#if already}}
+            {{#each pageList}}
+                <div class="datalist" fundCode="{{fundCode}}"> 
+                    <h2>{{projectName}}</h2>
+                    <ul>
+                        <li>
+                            <span class="title">总资产</span>
+                            <span class="text"><span>{{balanceStr}}</span>元</span>
+                        </li>
+                        <li>
+                            <span class="title">票面利率</span>
+                            <span class="text"><i>{{profitStr}}</i></span>
+                        </li>
+                        <li>
+                            <span class="title">成立日期</span>
+                            <span class="text"><i>{{establishDateStr}}</i></span>
+                        </li>
+                        <li>
+                            <span class="title">产品期限</span>
+                            <span class="text"><i>{{deadLine}}</i></span>
+                        </li>
+                    </ul> 
+                </div>
+            {{/each}}
+        {{/if}}
+
+
+        {{#if tobe}}
+            {{#each pageList}}
+                <div class="datalist" fundCode="{{fundCode}}"> 
+                    <h2>{{projectName}}</h2>
+                    <ul>
+                        <li>
+                            <span class="title">预约金额</span>
+                            <span class="text"><span>{{besAmountMask}}</span>元</span>
+                        </li>
+                        <li>
+                            <span class="title">预约时间</span>
+                            <span class="text"><i>{{besTimeStr}}</i></span>
+                        </li>
+                        <li>
+                            <span class="title">到账金额</span>
+                            <span class="text"><i>{{transAmountMask}}</i></span>
+                        </li>
+                        <li>
+                            <span class="title">到账时间</span>
+                            <span class="text"><i>{{transDateStr}}</i></span>
+                        </li>
+                        <li>
+                            <span class="title">到账状态</span>
+                            <span class="text"><i>{{accountStatus}}</i></span>
+                        </li>
+                    </ul> 
+                </div>               
+            {{/each}}
+        {{/if}}
     </script>
     @@include('@pathInclude/views/footer.html')
     <!-- 添加埋点 -->
     @@include('@pathInclude/views/header.html')
-    <script src="/include/js/iscroll.js"></script>
     <script src="/wealthResources/otherAssets/static/js/jjsAssets.js"></script>
 </body>
 

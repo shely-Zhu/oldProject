@@ -13,7 +13,7 @@ var mymessage = Mock.mock({
             "totalCount":20,
             "totalPages":15
         },
-        "pageList":[
+        "pageList|4":[
             {
                 "balance":1000000,
                 "deadLine":"12月",
