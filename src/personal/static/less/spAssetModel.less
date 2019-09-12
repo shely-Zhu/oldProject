@@ -6,17 +6,17 @@
 * @description:
 */
 @charset "utf-8";
-//MUI引入 
+//MUI引入
 @import url("../../../include/css/mui.min.css");
 @import url("../../../include/css/mui.picker.css");
 @import url("../../../include/css/mui.poppicker.css");
 
 //自定义引入
 @import url("../../../common/less/reset.less");
-@import url("../../../common/less/color.less"); 
+@import url("../../../common/less/color.less");
 //引入重置mui样式的表单样式文件
 //@import url("../../../common/less/mui/formMUI.less");
-@import url('../../../common/less/mui/resetMUI.less');
+@import url("../../../common/less/mui/resetMUI.less");
 //引入重置mui下拉列表样式文件
 @import url("../../../common/less/mui/selectMUI.less");
 @import url("../../../common/less/components/againEnter.less");
@@ -25,174 +25,199 @@
 @import url("../../../common/less/mui/resetMuiPop.less");
 //弹出层样式
 @import url("../../../common/less/components/alertBox.less");
-body{
-    margin:0;
-    background: #ffffff;
-    min-width: 320px;
-    max-width: 640px;
-    // font-family: "Microsoft YaHei", Arial, "Helvetica";
-    color: #333;
-    padding:0;
-    .spAssetModel{
-        padding:0.9rem 1.35rem;
-        // 提示
-        .sp_tip{
-            width: 100%;
-            padding:0.45rem 2.4rem 0.5rem 0.9rem;
-            line-height: 1.8rem;
-            box-sizing: border-box;
-            background:#ffffff ;
-            border-radius: 0.3rem;
-            font-size:1rem;
-            color:#a48e5f;
-            box-shadow: #f5f5f5 0px 0px 30px 10px ;
-            position: relative;
-            .triangle{
-                position: absolute;
-                top:-0.9rem;
-                left:7rem;
-                width: 0;
-                height: 0;
-                border: 0.45rem solid transparent;
-                border-style: dashed dashed solid dashed;
-                border-bottom-color: #fff;
-            }
-            .corners{
-                width:2rem;
-                height: 2rem;
-                padding-right:0.5rem;
-                position: absolute;
-                top:0;
-                right:0;
-                border-bottom-left-radius: 100%;
-                border-top-right-radius: 0.3rem;
-                background-color:#f7f4eb;
-                text-align: right;
-                font-size: 0rem;
-                i{
-                    font-size: 0.85rem;
-                    display: inline-block;
-                    position: absolute;
-                    top: -0.1rem;
-                    left: 0.8rem;
-                }
-
-            }
+body {
+  margin: 0;
+  background: #ffffff;
+  min-width: 320px;
+  max-width: 640px;
+  // font-family: "Microsoft YaHei", Arial, "Helvetica";
+  color: #333;
+  padding: 0;
+  .spAssetModel {
+    padding: 0.9rem 1.35rem;
+    // 提示
+    .sp_tip {
+      width: 100%;
+      padding: 0.45rem 2.4rem 0.5rem 0.9rem;
+      line-height: 1.8rem;
+      box-sizing: border-box;
+      background: #ffffff;
+      border-radius: 0.3rem;
+      font-size: 1rem;
+      color: #a48e5f;
+      box-shadow: #f5f5f5 0px 0px 30px 10px;
+      position: relative;
+      .triangle {
+        position: absolute;
+        top: -0.9rem;
+        left: 7rem;
+        width: 0;
+        height: 0;
+        border: 0.45rem solid transparent;
+        border-style: dashed dashed solid dashed;
+        border-bottom-color: #fff;
+      }
+      .corners {
+        width: 2rem;
+        height: 2rem;
+        padding-right: 0.5rem;
+        position: absolute;
+        top: 0;
+        right: 0;
+        border-bottom-left-radius: 100%;
+        border-top-right-radius: 0.3rem;
+        background-color: #f7f4eb;
+        text-align: right;
+        font-size: 0rem;
+        i {
+          font-size: 0.85rem;
+          display: inline-block;
+          position: absolute;
+          top: -0.1rem;
+          left: 0.8rem;
         }
-        .sp_four{
-            overflow: hidden;
-            width:100%;
-            // height: 29.35rem;
-            background: url(../img/sp_four.png) center center no-repeat;
-            background-size: 100% 100%;
-            margin-top:1.3rem;
-            .sp_four_item{
-               width: 50%;
-               height: auto;
-               float: left;
-               padding-left:0.95rem;
-               padding-top:1.25rem;
-               padding-bottom:1.75rem;
-               p{
-                   line-height: 0;
-               }
-               .sp_four_item_title{
-                   font-size: 1.35rem;
-                   font-weight: 600;
-                   color:#292317;
-                   line-height: 1.35rem;
-               }
-               .sp_four_item_advice{
-                line-height: 1.1rem;
-                font-size:1.1rem;
-                color:#695a37;
-                margin-top:2.875rem;
-                font-weight: 600
-               }
-               .sp_four_item_type{
-                line-height: 1.15rem;
-                font-size:0.85rem;
-                color:#ac986d;
-                margin-top:0.7rem;
-               }
-               .sp_four_item_present{
-                font-size:0rem;
-                // height: 0.85rem;
-                margin-top:1.15rem;
-                overflow: hidden;
-                span{
-                    font-size:0.85rem;
-                    line-height:  1.15rem;
-                    color:#ac986d;
-                    display: inline-block;
-                    vertical-align: middle;
-                }
-                span:last-of-type{
-                    margin-right:0.2rem;
-                }
-                ul{
-                    display: inline-block;
-                    overflow: hidden;
-                    vertical-align: middle;
-                    height:0.85rem;
-                    li{
-                        float: left;
-                        width: 0.35rem;
-                        height: 0.8rem;
-                        line-height:  1.15rem;
-                        border-radius: 0.3rem;
-                        background-color:#dbc69a;
-                        margin-right:0.15rem;
-                    }
-                    li.active{
-                        background-color:#d75e33;
-                    }
-                    li:last-of-type{
-                        margin-right:0;
-                    }
-                }
-               }
-               .sp_four_item_price{
-                   color:#d75e33;
-                   margin-top:0.6rem;
-                   font-weight: 600;
-                   font-size:0.85rem;
-                   line-height: 0.85rem;
-               }
-            }
-            #safeguard,#hedging{
-                padding-left:1.2rem;
-            }
-            #appreciation,#hedging{
-                padding-top:1.7rem;
-                padding-bottom: 1.3rem;
-            }
-        }
-        .sp_allocation{
-            background: url(../img/ConfigurationBg.png) 0 0 no-repeat;
-            background-size:cover;
-            border-radius: 0.25rem;
-            margin-top:1.25rem;
-            padding:0.9rem 1.3rem 3.1rem 1.3rem;
-            position: relative;
-            .sp_text{
-                font-size:1rem;
-                color:#5c4921;
-                line-height:1.8rem;
-            }
-            .sp_allo_btn1{
-                width:6.85rem;
-                height:2.4rem;
-                line-height:2.4rem; 
-                position: absolute;
-                right:0.85rem;
-                bottom:0.85rem;
-                background:#333333;
-                color:#eacf95;
-                padding:0 1.25rem;
-                border-radius: 1.2rem;
-                display: none;
-            }
-        }
+      }
     }
+    .sp_four {
+      overflow: hidden;
+      width: 100%;
+      // height: 29.35rem;
+      // background: url(../img/sp_four.png) center center no-repeat;
+      background: url(../img/line.png) center center no-repeat;
+      background-size: 100% 100%;
+      margin-top: 1.3rem;
+      div {
+        overflow: hidden;
+        width: 100%;
+        .sp_four_item {
+          width: 50%;
+          height: auto;
+          float: left;
+          padding-left: 0.95rem;
+          padding-top: 1.25rem;
+          padding-bottom: 1.25rem;
+          p {
+            line-height: 0;
+          }
+          .sp_four_item_title {
+            font-size: 1.35rem;
+            font-weight: 600;
+            color: #292317;
+            line-height: 1.35rem;
+          }
+          .sp_four_item_advice {
+            line-height: 1.1rem;
+            font-size: 1.1rem;
+            color: #695a37;
+            margin-top: 2.875rem;
+            font-weight: 600;
+          }
+          .sp_four_item_type {
+            line-height: 1.15rem;
+            font-size: 0.85rem;
+            color: #ac986d;
+            margin-top: 0.7rem;
+          }
+          .sp_four_item_present {
+            font-size: 0rem;
+            // height: 0.85rem;
+            margin-top: 1.15rem;
+            overflow: hidden;
+            span {
+              font-size: 0.85rem;
+              line-height: 1.15rem;
+              color: #ac986d;
+              display: inline-block;
+              vertical-align: middle;
+            }
+            span:last-of-type {
+              margin-right: 0.2rem;
+            }
+            ul {
+              display: inline-block;
+              overflow: hidden;
+              vertical-align: middle;
+              height: 0.85rem;
+              li {
+                float: left;
+                width: 0.35rem;
+                height: 0.8rem;
+                line-height: 1.15rem;
+                border-radius: 0.3rem;
+                background-color: #dbc69a;
+                margin-right: 0.15rem;
+              }
+              li.active {
+                background-color: #d75e33;
+              }
+              li:last-of-type {
+                margin-right: 0;
+              }
+            }
+          }
+          .sp_four_item_price {
+            color: #d75e33;
+            margin-top: 0.6rem;
+            font-weight: 600;
+            font-size: 0.85rem;
+            line-height: 0.85rem;
+          }
+        }
+        #expense {
+          background: url(../img/four1.png) center center no-repeat;
+          background-size: 100% 100%;
+        }
+        #safeguard {
+          background: url(../img/four2.png) center center no-repeat;
+          background-size: 100% 100%;
+          margin-left: 0.9rem;
+        }
+        #appreciation {
+          background: url(../img/four3.png) center center no-repeat;
+          background-size: 100% 100%;
+        }
+        #hedging {
+          background: url(../img/four4.png) center center no-repeat;
+          background-size: 100% 100%;
+          margin-left: 0.9rem;
+        }
+        // #safeguard,#hedging{
+        //     padding-left:1.2rem;
+        // }
+        // #appreciation,#hedging{
+        //     padding-top:1.7rem;
+        //     padding-bottom: 1.3rem;
+        // }
+      }
+      .sp_four_box:last-of-type{
+          margin-top:0.9rem;
+      }
+    }
+    .sp_allocation {
+      background: url(../img/ConfigurationBg.png) 0 0 no-repeat;
+      background-size: cover;
+      border-radius: 0.25rem;
+      margin-top: 1.25rem;
+      padding: 0.9rem 1.3rem 3.1rem 1.3rem;
+      position: relative;
+      .sp_text {
+        font-size: 1rem;
+        color: #5c4921;
+        line-height: 1.8rem;
+      }
+      .sp_allo_btn1 {
+        width: 6.85rem;
+        height: 2.4rem;
+        line-height: 2.4rem;
+        position: absolute;
+        right: 0.85rem;
+        bottom: 0.85rem;
+        background: #333333;
+        color: #eacf95;
+        padding: 0 1.25rem;
+        border-radius: 1.2rem;
+        display: none;
+      }
+    }
+  }
 }
