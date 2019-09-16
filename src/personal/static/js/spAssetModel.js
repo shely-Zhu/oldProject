@@ -45,9 +45,6 @@ $(function() {
             var obj = [{
                 url: site_url.standardPoor_api,
                 data: {},
-                // async: false,
-                // needLogin:true,
-                // needDataEmpty: true,
                 callbackDone: function(json) {
                     var jsonData = json.data;
                     var consumption={
@@ -60,7 +57,7 @@ $(function() {
                     if(consumption.data != '0' && consumption.data) {
                         that.methods.Accounted(consumption)
                     }else{
-                        that.getElements.expense.addClass("expense_noData")
+                        // that.getElements.expense.addClass("expense_noData")  此版本暂不处理标红
                     }
                     var guarantee={
                         name:'guarantee',
@@ -72,7 +69,7 @@ $(function() {
                     if(guarantee.data != '0' && guarantee.data){
                         that.methods.Accounted(guarantee)
                     }else{
-                        that.getElements.safeguard.addClass("safeguard_noData")
+                        // that.getElements.safeguard.addClass("safeguard_noData")
                     }
                     var valueAdded={
                         name:'valueAdded',
@@ -84,7 +81,7 @@ $(function() {
                     if(valueAdded.data != '0' && valueAdded.data){
                         that.methods.Accounted(valueAdded)
                     }else {
-                        that.getElements.appreciation.addClass("appreciation_noData")
+                        // that.getElements.appreciation.addClass("appreciation_noData")
                     }
                     var valuePreserving={
                         name:'valuePreserving',
@@ -96,7 +93,7 @@ $(function() {
                     if(valuePreserving.data != '0' && valuePreserving.data){
                         that.methods.Accounted(valuePreserving)
                     }else {
-                        that.getElements.appreciation.addClass("hedging_noData")
+                        // that.getElements.appreciation.addClass("hedging_noData")
                     }
 
                 },
