@@ -55,40 +55,48 @@ $(function() {
                         el:that.getElements.expenseli,
                         data:jsonData.consumptionProportion
                     }
-                    if(consumption.data.length > 0) {
-                        that.getElements.expense.find('.sp_four_item_present span:nth-child(2)').html(jsonData.consumptionProportion + '%')
-                        that.getElements.expense.find('.sp_four_item_price').html('￥' + jsonData.consumptionAssets )
+                    that.getElements.expense.find('.sp_four_item_present span:nth-child(2)').html(jsonData.consumptionProportion + '%')
+                    that.getElements.expense.find('.sp_four_item_price').html('￥' + jsonData.consumptionAssets )
+                    if(consumption.data != '0' && consumption.data) {
                         that.methods.Accounted(consumption)
+                    }else{
+                        that.getElements.expense.addClass("expense_noData")
                     }
                     var guarantee={
                         name:'guarantee',
                         el:that.getElements.safeguardli,
                         data:jsonData.guaranteeProportion
                     }
-                    if(guarantee.data.length > 0){
-                        that.getElements.safeguard.find('.sp_four_item_present span:nth-child(2)').html(jsonData.guaranteeProportion + '%')
-                        that.getElements.safeguard.find('.sp_four_item_price').html('￥' + jsonData.guaranteeAssets )
+                    that.getElements.safeguard.find('.sp_four_item_present span:nth-child(2)').html(jsonData.guaranteeProportion + '%')
+                    that.getElements.safeguard.find('.sp_four_item_price').html('￥' + jsonData.guaranteeAssets )
+                    if(guarantee.data != '0' && guarantee.data){
                         that.methods.Accounted(guarantee)
+                    }else{
+                        that.getElements.safeguard.addClass("safeguard_noData")
                     }
                     var valueAdded={
                         name:'valueAdded',
                         el:that.getElements.appreciationli,
                         data:jsonData.valueAddedProportion
                     }
-                    if(valueAdded.data.length > 0){
-                        that.getElements.appreciation.find('.sp_four_item_present span:nth-child(2)').html(jsonData.valueAddedProportion + '%')
-                        that.getElements.appreciation.find('.sp_four_item_price').html('￥' + jsonData.valueAddedAssets )
+                    that.getElements.appreciation.find('.sp_four_item_present span:nth-child(2)').html(jsonData.valueAddedProportion + '%')
+                    that.getElements.appreciation.find('.sp_four_item_price').html('￥' + jsonData.valueAddedAssets )
+                    if(valueAdded.data != '0' && valueAdded.data){
                         that.methods.Accounted(valueAdded)
+                    }else {
+                        that.getElements.appreciation.addClass("appreciation_noData")
                     }
                     var valuePreserving={
                         name:'valuePreserving',
                         el:that.getElements.hedgingli,
                         data:jsonData.valuePreservingProportion
                     }
-                    if(valuePreserving.data.length > 0){
-                        that.getElements.hedging.find('.sp_four_item_present span:nth-child(2)').html(jsonData.valuePreservingProportion + '%')
-                        that.getElements.hedging.find('.sp_four_item_price').html('￥' + jsonData.valuePreservingAssets )
+                    that.getElements.hedging.find('.sp_four_item_present span:nth-child(2)').html(jsonData.valuePreservingProportion + '%')
+                    that.getElements.hedging.find('.sp_four_item_price').html('￥' + jsonData.valuePreservingAssets )
+                    if(valuePreserving.data != '0' && valuePreserving.data){
                         that.methods.Accounted(valuePreserving)
+                    }else {
+                        that.getElements.appreciation.addClass("hedging_noData")
                     }
 
                 },

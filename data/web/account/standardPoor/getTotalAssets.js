@@ -11,8 +11,8 @@ var mymessage = Mock.mock({
     "data": {
       "consumptionAssets": "100,000.00",
       "consumptionProportion": "50.55",
-      "guaranteeAssets": "25,000.00",
-      "guaranteeProportion": "12.45",
+      "guaranteeAssets": "0",
+      "guaranteeProportion": "0",
       "valueAddedAssets": "35.000.00",
       "valueAddedProportion": "16.25",
       "valuePreservingAssets": "45.000.00",
