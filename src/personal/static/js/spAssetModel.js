@@ -45,6 +45,7 @@ $(function() {
             var obj = [{
                 url: site_url.standardPoor_api,
                 data: {},
+                needLoading: true,
                 callbackDone: function(json) {
                     var jsonData = json.data;
                     var consumption={

@@ -116,9 +116,8 @@ $(function() {
               //请求的参数信息
             }
           },
-          //async: false,
-          // needLogin:true,
           needDataEmpty: true,
+          needLoading: true,
           callbackDone: function(json) {
             var jsonData = json.data;
             $(".statementTit span.name").html(jsonData.customerName);
