@@ -1,0 +1,185 @@
+<!-- /**  
+ * @Page:  
+ * @Author: songxiaoyu  
+ * @Date:   2019-09-03 15:33:59  
+ * @Last Modified by:   songxiaoyu  
+ */ -->
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="applicable-device" content="mobile">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="stylesheet" href="/personal/static/css/assetAllocation.css">
+    <title>资产配置建议书></title>
+</head>
+
+<body>
+    @@include('../../common/views/load.html')
+    <section class="assetReport">
+        <!-- 封皮 begin -->
+        <div class="firstPage">
+            <img src="/personal/static/img/first.png" alt="">
+        </div>
+        <!-- 封皮 end-->
+        <!-- 至客户  begin-->
+        <div class="statementContent">
+            <div class="statementBox">
+                <div class="statement">
+                    致客户
+                </div>
+                <div class="statementEn">
+                    Our Mission Statement
+                </div>
+                <div class="statementTit">
+                    尊敬的<span class="name"></span>先生/女士：
+                </div>
+                <div class="statementTit">
+                    感谢您抽出宝贵的时间配合，我们承诺对您的信息严格保密。本《建议书》包含 4 部分内容：
+                    1、投资者画像测评。从生命周期、资产量级、风险偏好这三个维度，依据您所提供的信息，生成您
+                    的自然人投资者画像。 2、投资者资产配置及投资建议。基于上述结果以及各类资产的属性特征，为您定制详尽的资产配置
+                    方案。当然，您也可以根据个人信息的更迭，调整您的资产配置组合。
+                    3、投资者资产配置现状分析及调整方案。通过对您及家人资产情况的信息收集与测算，全面分析解
+                    读您目前的资产配置现状。 4、附录。 附录内容为 2019 年二季度宏观经济展望及大类资产投资建议。由恒天财富研究院专家团
+                    队从宏观层面把握资本市场的总体变动趋势，判断资产的投资价值，从而为投资者提供在宏观背景下
+                    的大类资产配置建议。
+                    我们相信通过这套科学的分析系统，可以帮助您优化投资的风险收益比，更加合理有效地管理您的财
+                    富。
+                    我们建议您结合自身的资产状况及市场变动情况，定期分析资产配置现状，动态掌握您的投资状况。
+                    如果您对《建议书》有任何问题或者需求，欢迎您随时与恒天财富管理团队联系。
+                    联系电话<span class="telephone"></span>，电子邮箱<span class="email"></span>。
+                </div>
+                <div class="statementTime">报告日期：<span class="reportDate"></span></div>
+            </div>
+        </div>
+        <!-- 至客户  end-->
+        <!-- 投资者画像 begin -->
+        <div class="portrayalContent">
+            <div class="portrayalBox">
+                <div class="portrayalTit">投资者画像测评</div>
+                <div class="padingL">
+                    <div class="dimension">维度一：资产量级</div>
+                    <div class="dimensionTxt">
+                        恒天财富将投资者的资产量级分为 500 万元以下、500-1000 万元、1000-3000 万元、3000 万-1亿元、1 亿元以上。
+                    </div>
+                    <div class="dimensionTxt1">
+                        您的资产量级为：<span class="assetClass"> </span>万元；属于 <span class="assetClassRange"></span> 万元以下
+                    </div>
+                    <div class="dimension">维度二：生命周期</div>
+                    <div class="dimensionTxt">
+                        恒天财富根据生命周期理论，将投资者的生命周期分为单身期、家庭形成期、家庭成长期、家庭成熟期和老年期。
+                    </div>
+                    <div class="dimensionTxt1">
+                        您的生命周期处于：<span class="lifeCycle"></span>
+                    </div>
+                    <div class="fontRed">
+                        <div><span class="lifeTermContent"></span></div>
+                    </div>
+                    <div class="dimension">维度三：风险偏好</div>
+                    <div class="dimensionTxt">
+                        恒天财富根据投资者的风险承受能力，将投资者分为保守型、稳健型、平衡型、成长型、进取型。
+                    </div>
+                    <div class="dimensionTxt1">
+                        您的投资类型为：<span class="investmentType"></span>
+                    </div>
+                    <div class="fontRed">
+                        <div ></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- 投资者画像 end-->
+        <!-- 根据您的风险承受能力 建议您的资产配置如下 begin -->
+        <div class="proposalPieContent">
+            <div class="proposalPie" v-if="imageData.assetRecommendPieChart">
+                <div class="portrayalTit portrayalTitMarginBottom">根据您的风险承受能力 建议您的资产配置如下</div>
+                <div class="echartWrap">
+                    <!-- 遮罩  盖住底下的图 -->
+                    <div class="echartMask"></div>
+                    <div id="tjPie" class="myChart" style="height: 33.8rem;"></div>
+                </div>
+            </div>
+            <!-- 根据您的风险承受能力 建议您的资产配置如下 end----->
+            <!-- 根据您的产品选择 建议您的产品配置如下 begin -->
+            <div class="proposalTable">
+                <div class="portrayalTit">根据您的产品选择 建议您的产品配置如下</div>
+                <div class="proposalTableTop mui-scroll-wrapper mui-slider-indicator mui-segmented-control mui-segmented-control-inverted" style="min-height:160px;">
+                    <div class="wrapper mui-scroll">
+                        <div class="proposalTableContent mui-control-item">
+                            <div class="tableOne">
+                                <table class="table">
+                                    <thead>
+                                      <tr></tr>
+                                    </thead>
+                                    <tbody></tbody>
+                                </table>
+                            </div>
+                            <div class="tableTwo">
+                                <table class="table">
+                                    <thead>
+                                        <tr></tr>
+                                    </thead>
+                                    <tbody></tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- 根据您的产品选择 建议您的产品配置如下 end ---->
+        <!-- 产品资产配置现状分析 begin -->
+        <div class="analysis">
+            <div class="portrayalTit analysisMargin">客户资产配置现状分析</div>
+            <div class="echartWrap">
+                <!-- 遮罩  盖住底下的图 -->
+                <div class="echartMask"></div>
+                <div id="xzPie" class="myChart" style="height: 33.8rem;"></div>
+            </div>
+        </div>
+        <!-- 产品资产配置现状分析 end-- -->
+        <!-- 户资产配置调整建议 begin -->
+        <div class="adjust">
+            <div class="portrayalTit">客户资产配置调整建议</div>
+            <div class="echartWrap">
+                <!-- 遮罩  盖住底下的图 -->
+                <div class="echartMask"></div>
+                <div id="bar" class="myChart" style="height: 33.8rem;"></div>
+            </div>
+        </div>
+        <!-- 户资产配置调整建议 end----->
+        <!-- 附录  begin-->
+        <div class="appendix">
+            <div class="portrayalTit appendixMargin">附录</div>
+            <div class="appendixTxt"></div>
+        </div>
+        <!-- 附录  end---->
+        <!-- 免责声明 begin -->
+        <div class="disclaimer">
+            <div class="portrayalTit">免责声明</div>
+            <div class="disclaimerTxt">
+                本报告内容仅供一般参考，不应被当作投资策略建议，也不构成针对任何证券或其它金融工具的邀
+                约、推荐或建议。本文件只作一般评估，并未考虑任何特定人士或群体的具体投资目标、财务状况、
+                特定需求等，亦非专为任何特定人士或群体编制。虽然本文所使用的信息来源可靠，但“恒天财富”
+                并不保证其准确性和完整性，也不对使用本报告所包含的材料产生的任何直接或间接损失以及信息遗
+                漏负责。本报告中涉及的投资性产品的过去绩效并不代表其未来表现，任何证券或其他金融工具均可
+                能存在重大风险，可能不适用于所有投资者。本报告涉及的证券或金融工具的价格、价值以及收益会
+                受到经济环境的影响而波动，报告中的观点、预测并不是未来实际表现，“恒天财富”可以在不发出
+                通知的情况下做出更改，同时“恒天财富”并不承担提示这些注意事项的责任。本报告中的任何观点
+                与预测，仅反映“恒天财富”研究院在发布该报告当日的分析师判断，并不代表“恒天财富”任何部
+                门。未经“恒天财富”事先书面授权，任何人不得以任何目的复制、发送或销售本报告。“恒天财
+                富”版权所有，保留一切权利。
+            </div>
+        </div>
+        <!-- 免责声明 end----->
+    </section>
+    @@include('@pathInclude/views/footer.html')
+    <!-- 添加埋点 -->
+    @@include('@pathInclude/views/header.html')
+    <script src="/personal/static/js/assetAllocation.js"></script>
+</body>
+
+</html>

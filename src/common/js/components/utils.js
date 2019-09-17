@@ -143,7 +143,16 @@ $.extend($, {
 
             return n1;
         },
+        //元-万
+        toThousand:function(num) {
+            if (num) {
+                var n = num / 10000;
+                return n;
+            } else {
+                return num;
+            }
 
+        },
         //给数字添加颜色
         numberAddColor: function(ele) {
             var that = this;
