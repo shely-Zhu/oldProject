@@ -372,7 +372,7 @@ $(function() {
             var objx=[
               {
                 url: site_url.getCustomerAssetDetailById_api, //
-                params: {
+                data: {
                   // id: argId //资产配置id
                 },
                 needLogin: true, //需要判断是否登陆
