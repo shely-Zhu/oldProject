@@ -6,7 +6,6 @@
  * @description:
  * 2019-9-10 待确认资产添加
  */
-//ajax调用
 require('@pathCommonJsCom/utils.js');
 //ajax调用
 require('@pathCommonJs/ajaxLoading.js');
@@ -46,15 +45,17 @@ $(function() {
             aP: {
                 pageNo: 1,
                 pageSize: 10,
-                tradeType: 0, //0是已持仓资产，1是赎回，
             },
             current_index: 0, //左右滑动区域的索引
             list_template: '', //列表的模板，生成后存放在这里
             ajaxArr: [], //存放每一个ajax请求的传参数据
-            siteUrlArr: [site_url.jjsAssetsDetail_api, site_url.getJJSInTransitAssets_api], //存放ajax请求地址
+            // 存放ajax请求地址  已持仓  待确认
+            siteUrlArr: [site_url.queryAssetsDetailByPages_api, site_url.getJJSInTransitAssets_api], 
             listToTop: '', // 滑动区域距离顶部距离
             navToTop: '', // 滑动nav距离顶部距离
-            totalCount: $("#totalCount"), //总金额
+            totalCount: $(".totalCount"), //总资产
+            jAlready: $(".j_already"), //已持仓
+            jTobe: $(".j_tobe"), //待确认
         },
         html: '', //存放生成的html
         init: function() { //初始化函数
@@ -306,11 +307,13 @@ $(function() {
         getData: function() {
             var that = this;
             var obj = [{
-                url: site_url.getTotalAssets_api, //查询总资产 从中拿到jjs的资产
+                url: site_url.getJJSAssets_api, //查询总资产 从中拿到jjs的资产
                 data: {},
                 callbackDone: function(json) {
                     //拿到jjs资产并填充界面
-                    that.gV.totalCount.html(json.data.jJSAssets);
+                    that.gV.totalCount.html(json.data.jjsTotalAssetMask);
+                    that.gV.jAlready.html('+'+json.data.jjsHoldAssetMask);
+                    that.gV.jTobe.html(json.data.jjsInTransitAssetMask);
                 },
             }];
             $.ajaxLoading(obj);
