@@ -115,9 +115,26 @@ $(function() {
         },
         events: function() {
            var that=this;
-           $(document).on('click','.sp_tip i',function(){
+           //关闭文案
+           $(".sp_tip i").click(function(){
             somePage.getElements.tip.hide()
            })
+
+           //进入详情
+           $("#expense").click(function(){
+            if($(this).has(".price").length) return;
+            window.location.href = site_url.payThemeCash_url;
+           })
+           $("#appreciation").click(function(){
+            if($(this).has(".price").length) return;
+            window.location.href = site_url.smMyAsset_url;
+           })
+           $("#hedging").click(function(){
+            if($(this).has(".price").length) return;
+            window.location.href = site_url.smMyAsset_url;
+           })
+
+           //进入配置页面
            $(document).on('click','.sp_allo_btn1',function(){
             window.location.href="/personal/views/assetAllocation.html"
            })
