@@ -54,7 +54,7 @@ $(function() {
                         data:jsonData.consumptionProportion
                     }
                     that.getElements.expense.find('.sp_four_item_present span:nth-child(2)').html(jsonData.consumptionProportion + '%')
-                    that.getElements.expense.find('.sp_four_item_price').html('￥' + (jsonData.consumptionAssets ? jsonData.consumptionAssets : '0.00' ))
+                    that.getElements.expense.find('.sp_four_item_price').html(jsonData.consumptionAssets ? ('￥' + jsonData.consumptionAssets) : ('<span class="price">￥0.00</span>'))
                     if(consumption.data != '0' && consumption.data) {
                         that.methods.Accounted(consumption)
                     }else{
@@ -66,7 +66,7 @@ $(function() {
                         data:jsonData.guaranteeProportion
                     }
                     that.getElements.safeguard.find('.sp_four_item_present span:nth-child(2)').html(jsonData.guaranteeProportion + '%')
-                    that.getElements.safeguard.find('.sp_four_item_price').html('￥' + (jsonData.guaranteeAssets ? jsonData.guaranteeAssets : '0.00') )
+                    that.getElements.safeguard.find('.sp_four_item_price').html(jsonData.guaranteeAssets ? ('￥' +  jsonData.guaranteeAssets) : ('<span class="price">￥0.00</span>') )
                     if(guarantee.data != '0' && guarantee.data){
                         that.methods.Accounted(guarantee)
                     }else{
@@ -78,7 +78,7 @@ $(function() {
                         data:jsonData.valueAddedProportion
                     }
                     that.getElements.appreciation.find('.sp_four_item_present span:nth-child(2)').html(jsonData.valueAddedProportion + '%')
-                    that.getElements.appreciation.find('.sp_four_item_price').html('￥' + (jsonData.valueAddedAssets ? jsonData.valueAddedAssets : '0.00') )
+                    that.getElements.appreciation.find('.sp_four_item_price').html(jsonData.valueAddedAssets ? ('￥' + jsonData.valueAddedAssets) : ('<span class="price">￥0.00</span>') )
                     if(valueAdded.data != '0' && valueAdded.data){
                         that.methods.Accounted(valueAdded)
                     }else {
@@ -90,7 +90,7 @@ $(function() {
                         data:jsonData.valuePreservingProportion
                     }
                     that.getElements.hedging.find('.sp_four_item_present span:nth-child(2)').html(jsonData.valuePreservingProportion + '%')
-                    that.getElements.hedging.find('.sp_four_item_price').html('￥' + (jsonData.valuePreservingAssets ? jsonData.valuePreservingAssets : '0.00')  )
+                    that.getElements.hedging.find('.sp_four_item_price').html(jsonData.valuePreservingAssets ? ('￥' + jsonData.valuePreservingAssets) : ('<span class="price">￥0.00</span>') )
                     if(valuePreserving.data != '0' && valuePreserving.data){
                         that.methods.Accounted(valuePreserving)
                     }else {
