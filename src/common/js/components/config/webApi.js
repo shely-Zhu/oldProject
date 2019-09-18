@@ -42,6 +42,10 @@ module.exports = function() {
     this.oldRecommendNew_api = http_url.web_url + '/account/oldRecommendNew'; // 微信公众号获取参数
     // 其他资产
     this.getJJSInTransitAssets_api = http_url.web_url + '/account/jjs/getJJSInTransitAssets'; // 查询金交所在途资产 
+    // 查询金交持仓资产、在途资产、总资产
+    this.getJJSAssets_api = http_url.web_url + '/account/jjs/getJJSAssets'; 
+    // jjs持仓明细查询
+    this.queryAssetsDetailByPages_api = http_url.web_url + '/account/jjs/queryAssetsDetailByPages'
 
     
     /*-------------------账户相关 end ------------------------------*/
