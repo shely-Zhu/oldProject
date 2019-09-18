@@ -135,31 +135,34 @@ $(function() {
             );
             $(".fontRed div").html(jsonData.riskTypeContent);
             $(".appendix .appendixTxt").html(jsonData.macroEconomyContent);
+            if(jsonData.assetConfigReportProduct){
+              that.data.columns = that.data.listTable1.columns;
+              that.data.dataList = jsonData.assetConfigReportProduct.products;
+              that.data.maxHeight = that.getMaxFloor(that.data.columns); //1. 计算出表头一共需要多少行
+              that.columnsHandle(that.data.columns); //2. 对表头进行处理
+              that.dataHandle(that.data.dataList, that.data.needRowSpan); // 3. 对数据进行处理（传入参数： 具体数据，需要跨行列的（key））
 
-            that.data.columns = that.data.listTable1.columns;
-            that.data.dataList = jsonData.assetConfigReportProduct.products;
-            that.data.maxHeight = that.getMaxFloor(that.data.columns); //1. 计算出表头一共需要多少行
-            that.columnsHandle(that.data.columns); //2. 对表头进行处理
-            that.dataHandle(that.data.dataList, that.data.needRowSpan); // 3. 对数据进行处理（传入参数： 具体数据，需要跨行列的（key））
-
-            var tableOneThead = jsonData.assetConfigReportProduct.titles;
-            var tableOneTbody = jsonData.assetConfigReportProduct.products;
-            if (tableOneThead.length > 0) {
-              that.setThead(that.data.newArr, that.getElements.tableOneThead);
-              that.setTbody(tableOneTbody, that.getElements.tableOneTbody);
-            }
-            var tableTwoThead = jsonData.assetConfigReportProduct.hwTitles;
-            var tableTwoTbody = jsonData.assetConfigReportProduct.hwProducts;
-            that.data.listTable1.dataList = tableTwoTbody;
-            if (tableTwoThead.length > 0) {
-              that.setThead(that.data.newArr, that.getElements.tableTwoThead);
-              that.setTbody(tableTwoTbody, that.getElements.tableTwoTbody);
-              let timer = setTimeout(function() {
-                let wrapperHeight = $(".proposalTableContent").height();
-                $(".proposalTableTop").height(wrapperHeight + 30);
-                $(".wrapper").height(wrapperHeight + 30);
-                clearTimeout(timer);
-              }, 500);
+              var tableOneThead = jsonData.assetConfigReportProduct.titles;
+              var tableOneTbody = jsonData.assetConfigReportProduct.products;
+              if (tableOneThead.length > 0) {
+                that.setThead(that.data.newArr, that.getElements.tableOneThead);
+                that.setTbody(tableOneTbody, that.getElements.tableOneTbody);
+              }
+              var tableTwoThead = jsonData.assetConfigReportProduct.hwTitles;
+              var tableTwoTbody = jsonData.assetConfigReportProduct.hwProducts;
+              that.data.listTable1.dataList = tableTwoTbody;
+              if (tableTwoThead.length > 0) {
+                that.setThead(that.data.newArr, that.getElements.tableTwoThead);
+                that.setTbody(tableTwoTbody, that.getElements.tableTwoTbody);
+                let timer = setTimeout(function() {
+                  let wrapperHeight = $(".proposalTableContent").height();
+                  $(".proposalTableTop").height(wrapperHeight + 30);
+                  $(".wrapper").height(wrapperHeight + 30);
+                  clearTimeout(timer);
+                }, 500);
+              }
+            }else {
+              $(".proposalTable").hide()
             }
           },
           callbackFail: function(json) {
