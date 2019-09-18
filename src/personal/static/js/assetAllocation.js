@@ -354,6 +354,7 @@ $(function() {
           url: site_url.getCustomerAssetDictionary_api, 
           data:["1001", "1002","1003", "1004"], 
           needLogin: true, //需要判断是否登陆
+          async: false, //同步
           //needDataEmpty: false,//不需要判断data是否为空
           callbackDone: function(res) {
            /* 1000是与否
