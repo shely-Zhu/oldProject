@@ -96,12 +96,6 @@ $(function() {
                     pageSize: that.gV.aP.pageSize, //每页显示几条数据(默认10) 非必填项， 默认设置成20
                 }
 
-                if (el.num == 0) {
-                    that.gV.ajaxArr[el.num].tradeType = 1; // 已持仓
-                } else if (el.num == 1) {
-                    that.gV.ajaxArr[el.num].tradeType = 2; // 待确认
-                }
-
                 contentArr.push({
                     id: i,
                     content: wrap_html
