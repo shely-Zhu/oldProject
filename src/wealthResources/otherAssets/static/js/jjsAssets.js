@@ -17,16 +17,11 @@ require('@pathIncludJs/vendor/zepto/deferred.js');
 require('@pathIncludJs/vendor/config.js');
 //下拉加载更多
 require('@pathCommonJs/scrollFullPage.js');
-//立即绑定/暂不绑定弹层
-require('@pathCommonJsCom/accountOrBind.js');
-require('@pathCommonJsCom/bottomNav.js');
-//下拉加载
-require('@pathCommonJsCom/elasticLayer.js');
-//恒天财富部分组件判断显示与隐藏
-require('@pathCommonJsCom/chtwm/ifChtwm.js');
 // 切换
 require('@pathCommonJsCom/tabScroll.js');
 require('@pathCommonJsCom/goTopMui.js');
+require('@pathCommonJs/components/elasticLayer.js');
+require('@pathCommonJs/components/elasticLayerTypeFive.js');
 //黑色提示条的显示和隐藏
 var tipAction = require('@pathCommonJsCom/tipAction.js');
 
@@ -323,19 +318,7 @@ $(function() {
         events: function() { //绑定事件
             var that = this;
 
-            //跳转到转入转出详情页
-            mui("body").on('tap', '.goTradeDetail', function() {
-
-                if ($(this).attr('tradeType') == 1) { //买入
-                    window.location.href = site_url.buyAndRedemptionDetails_url + '?combRequestNo=' + $(this).attr('combRequestNo') + '&tradeType=' + $(this).attr('tradeType');
-                } else if ($(this).attr('tradeType') == 2) { //赎回
-                    window.location.href = site_url.buyAndRedemptionDetails_url + '?combRequestNo=' + $(this).attr('combRequestNo') + '&tradeType=' + $(this).attr('tradeType') + '&combinRedemRatio=' + $(this).attr('combinRedemRatio');
-                } else if ($(this).attr('tradeType') == 3) {
-                    window.location.href = site_url.buyAndRedemptionDetails_url + '?combRequestNo=' + $(this).attr('combRequestNo') + '&tradeType=' + $(this).attr('tradeType');
-                }
-            })
-
-            // 
+            // 交互效果
             $(window).scroll(function(event){
                 var e = $(window).scrollTop();
 
@@ -353,6 +336,27 @@ $(function() {
                     $(window).scrollTop(0);
                 }
             }) 
+
+            // 文案提示
+            mui("body").on('tap', '.j_icon', function() {
+                console.log(1);
+
+                $.elasticLayerTypeFive({
+                    id: "tip",
+                    title: '其他总资产',
+                    p1:{
+                        b:'私募总资产：',
+                        t:'已成立确认的资产加上您的待确认资产',
+                    },
+                    p2:{
+                        b:'待确认资产：',
+                        t:'即您的在途资产，产品成立后将归入已确认资产',
+                    },
+                    buttonTxt: '确定',
+                    zIndex: 100,
+                });
+
+            })
         }
     };
     data.init();

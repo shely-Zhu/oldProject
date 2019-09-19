@@ -11,6 +11,7 @@
 @import url("@pathCommonLessCom/tabScroll.less");
 //回到顶部的样式
 @import url("@pathCommonLessCom/goTopMui.less");
+@import url("@pathCommonLess/components/elasticLayerTypeFive.less");
 
 html,
 body {
@@ -36,8 +37,29 @@ body {
             .sum {
                 padding-top: 1.6rem;
                 font-size: 1rem;
-                opacity: 0.5;
+
+                .j_text {
+                    opacity: 0.5;
+
+                }
+
+                .j_icon {
+                    width: 1.4rem;
+                    height: 1.4rem;
+                    position: relative;
+                    opacity: 0.7;
+
+                    &:after {
+                        position: absolute;
+                        content: '\e649';
+                        font-size: 1.4rem;
+                        left: 0;
+                        top:0.3rem;
+                    }
+                }
             }
+
+
 
             .amount {
                 margin: 1.3rem 0 1.4rem;
@@ -135,14 +157,14 @@ body {
             background: none;
             box-shadow: none;
             color: @3c3c3c;
-        
-        
-        
+
+
+
             .mui-scroll .mui-control-item.mui-active {
                 color: @3c3c3c;
                 font-weight: bold;
                 position: relative;
-        
+
                 &:after {
                     position: absolute;
                     height: 0.25rem;
@@ -153,7 +175,7 @@ body {
                     background: @ed722f;
                     border-radius: .5rem;
                 }
-        
+
             }
         }
 
