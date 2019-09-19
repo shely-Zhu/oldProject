@@ -67,6 +67,9 @@ module.exports = function() {
     //公墓资产+中融货币E页面
     this.payThemeCash_url = go_url.no_url + '/pay/views/payThemeCash.html';
 
+     //标普配置页面
+     this.assetAllocation_url = go_url.no_url + '/personal/views/assetAllocation.html';
+
     //我的
     this.mine_url = go_url.no_url + '/personal/views/accountMerge.html';
 
