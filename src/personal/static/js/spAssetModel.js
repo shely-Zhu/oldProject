@@ -135,9 +135,10 @@ $(function() {
            })
 
            //进入配置页面
-           $(document).on('click','.sp_allo_btn1',function(){
-            window.location.href="/personal/views/assetAllocation.html"
+           $(".sp_allo_btn1").click(function(){
+            window.location.href=site_url.assetAllocation_url
            })
+           
            var obj = [{
             url: site_url.hasAssetReport_api,
             data: {},
