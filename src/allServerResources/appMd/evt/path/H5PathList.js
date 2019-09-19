@@ -175,6 +175,9 @@ var pathList = {
     "/commonResources/fundDiagnosis/views/diagnosisDetail.html" :{ evtid: '165', topic: '基金诊断详情', info: ''} ,
     "/commonResources/fundDiagnosis/views/diagnosisSearch.html" :{ evtid: '166', topic: '基金诊断搜索', info: ''} ,
     "/commonResources/fundDiagnosis/views/hotDiagnosis.html" :{ evtid: '167', topic: '基金诊断热门', info: ''} ,
+    "/wealthResources/otherAssets/views/jjsAssets.html" :{ evtid: '168', topic: '其他资产', info: ''} ,
+    "/personal/views/spAssetModel.html" :{ evtid: '169', topic: '标普资产', info: ''} ,
+    "/personal/views/assetAllocation.html" :{ evtid: '170', topic: '资产配置建议书', info: ''} ,
 }
 
 
