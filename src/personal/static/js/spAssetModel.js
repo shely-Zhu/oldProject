@@ -116,30 +116,29 @@ $(function() {
         events: function() {
            var that=this;
            //关闭文案
-           $(document).on('touchstart', '.sp_tip i', function(e) {
-            somePage.getElements.tip.hide()
+           mui("body").on('tap', '.sp_tip i', function() {
+                somePage.getElements.tip.hide()
            })
 
            //进入详情
-           $(document).on('touchstart', '#expense', function(e) {
+           mui("body").on('tap', '#expense', function() {
             if($(this).has(".price").length) return;
             window.location.href = site_url.payThemeCash_url;
-           })
+          })
 
-           $(document).on('touchstart', '#appreciation', function(e) {
+          mui("body").on('tap', '#appreciation', function() {
             if($(this).has(".price").length) return;
             window.location.href = site_url.smMyAsset_url;
-           })
-
-           $(document).on('touchstart', '#hedging', function(e) {
+          })
+          mui("body").on('tap', '#hedging', function() {
             if($(this).has(".price").length) return;
             window.location.href = site_url.smMyAsset_url;
-           })
+          })
 
            //进入配置页面
-           $(document).on('touchstart', '.sp_allo_btn1', function(e) {
+           mui("body").on('tap', '.sp_allo_btn1', function() {
             window.location.href=site_url.assetAllocation_url
-           })
+          })
            
            var obj = [{
             url: site_url.hasAssetReport_api,
