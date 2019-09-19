@@ -6,7 +6,7 @@
  * @description:
  * 2019-9-10 待确认资产添加
  */
-require('@pathCommonJsCom/utils.js');
+ require('@pathCommonJsCom/utils.js');
 //ajax调用
 require('@pathCommonJs/ajaxLoading.js');
 //zepto模块--callback
@@ -39,8 +39,8 @@ $(function() {
         },
         gV: { //一些设置
             navList: [ //导航
-                { type: '已持仓资产', num: '0' },
-                { type: '待确认资产', num: '1' },
+            { type: '已持仓资产', num: '0' },
+            { type: '待确认资产', num: '1' },
             ],
             aP: {
                 pageNo: 1,
@@ -53,6 +53,7 @@ $(function() {
             siteUrlArr: [site_url.queryAssetsDetailByPages_api, site_url.getJJSInTransitAssets_api], 
             listToTop: '', // 滑动区域距离顶部距离
             navToTop: '', // 滑动nav距离顶部距离
+            navHeight:'', // nav高度
             totalCount: $(".totalCount"), //总资产
             jAlready: $(".j_already"), //已持仓
             jTobe: $(".j_tobe"), //待确认
@@ -79,16 +80,16 @@ $(function() {
 
             // list内容模板
             var source = $('#second-template').html(),
-                template = Handlebars.compile(source),
-                list_html = template();
+            template = Handlebars.compile(source),
+            list_html = template();
 
             //将生成的模板内容存到that.list_template上
             that.gV.list_template = template;
 
             // 外容器优先加载
             var wrap_source = $('#first-template').html(),
-                wrap_template = Handlebars.compile(wrap_source),
-                wrap_html = wrap_template({ content: list_html });
+            wrap_template = Handlebars.compile(wrap_source),
+            wrap_html = wrap_template({ content: list_html });
 
             $.each(that.gV.navList, function(i, el) {
                 that.gV.ajaxArr[el.num] = {
@@ -136,21 +137,23 @@ $(function() {
             if (!that.height) {
                 that.gV.listToTop = document.getElementById('scroll1').getBoundingClientRect().top;
                 that.gV.navToTop = document.getElementById('slider').getBoundingClientRect().top;
+                that.gV.navHeight = that.gV.listToTop-that.gV.navToTop;
                 that.height = windowHeight - that.gV.listToTop;
+                that.highHeight = windowHeight-that.gV.navHeight;
             }
 
             if (!$('.list').hasClass('setHeight')) {
-                $('.list').height(that.height).addClass('setHeight');
+                $('.list').height(that.highHeight).addClass('setHeight');
             }
 
             // 为实现滚动区域滚动到顶部，定位，添加遮罩层
-            // $('.scroll_mask').css('top', that.gV.listToTop)
+            $('.scroll_mask').css('top', that.gV.listToTop)
         },
 
         initMui: function($id) {
             var that = this;
             w = $id.attr('id'),
-                s = '#' + w + ' .contentWrapper';
+            s = '#' + w + ' .contentWrapper';
 
             mui.init({
                 pullRefresh: {
@@ -184,6 +187,8 @@ $(function() {
 
                 //为$id添加hasPullUp  class
                 $($id).addClass('hasPullUp');
+
+                // mui(s).pullRefresh().disablePullupToRefresh()
             });
 
             // mui('.mui-slider').slider().stopped = true;
@@ -198,7 +203,7 @@ $(function() {
                 needLogin: true,
                 callbackDone: function(json) {
                     var jsonData = json.data,
-                        pageList = jsonData.pageList;
+                    pageList = jsonData.pageList;
 
                     if (!$.util.objIsEmpty(pageList)) {
 
@@ -268,6 +273,9 @@ $(function() {
                         }, 100);
 
                     }, 200)
+
+
+
                 },
                 callbackFail: function(json) {
                     //请求失败，
@@ -328,26 +336,23 @@ $(function() {
             })
 
             // 
-            /*$(window).scroll(function(event){
+            $(window).scroll(function(event){
                 var e = $(window).scrollTop();
-
-                mui("#scroll1").scroll({
-                    scrollY:false,
-                })
 
                 if(e>that.gV.navToTop){
                     $('.nav-wrapper').addClass('nav_fixed');
                     $('.scroll_mask').hide();
-                } else{
-                    mui(".mui-scroll-wrapper").scroll({
-                        scrollY:false,
-                    })
+                    $('.list').height(that.highHeight);
                 }
+            });
 
-            });*/
-
-
-
+            document.querySelector('#scroll1').addEventListener('scroll', function (e ) { 
+                if(e.detail.lastY>0){
+                    $('.nav-wrapper').removeClass('nav_fixed');
+                    $('.scroll_mask').show();
+                    $(window).scrollTop(0);
+                }
+            }) 
         }
     };
     data.init();
