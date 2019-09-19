@@ -12,11 +12,11 @@ var Mock = require('mockjs');
 var mymessage = Mock.mock({
     data: {
         "jjsHoldAsset": '200000', // 持仓资产
-        "jjsHoldAssetMask": '200,000', // 持仓资产千分位
+        "jjsHoldAssetMask": '200,000.00', // 持仓资产千分位
         "jjsInTransitAsset": '300000', // 在途资产
-        "jjsInTransitAssetMask": '300,000', // 在途资产
+        "jjsInTransitAssetMask": '300,000.00', // 在途资产
         "jjsTotalAsset": '500000', // 总资产
-        "jjsTotalAssetMask": '500,000', // 总资产 千分位
+        "jjsTotalAssetMask": '500,000.00', // 总资产 千分位
     },
 
     "message": "操作成功！",

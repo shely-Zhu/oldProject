@@ -38,6 +38,7 @@ body {
             .sum {
                 padding-top: 1.6rem;
                 font-size: 1rem;
+                opacity: 0.5;
             }
 
             .amount {
@@ -58,7 +59,7 @@ body {
             left: 4.375%;
             text-align: center;
             padding-top: 1.4rem;
-            border-radius: 0 0.1rem 0.4rem 0 rgba(0, 0, 0, 0.1);
+            box-shadow: 0 0.1rem 0.4rem 0 rgba(0, 0, 0, 0.1);
             color: @999999;
             font-size: 0.9rem;
             line-height: 1.2rem;
@@ -68,7 +69,7 @@ body {
                 &:after {
                     position: absolute;
                     height: 4.3rem;
-                    top: -0.7rem;
+                    top: -0.4rem;
                     right: 0;
                     content: '';
                     border-right: 1px solid @c008;
@@ -90,7 +91,8 @@ body {
             .j_already,
             .j_tobe {
                 font-size: 1.2rem;
-                margin-top: 1rem;
+                margin-top: 0.8rem;
+                font-weight: bold;
             }
 
             .j_already {
@@ -103,9 +105,9 @@ body {
 
         }
     }
-    
+
     // 遮罩层
-    .scroll_mask{
+    .scroll_mask {
         width: 100%;
         height: 60rem;
         background: red;
@@ -115,11 +117,11 @@ body {
         z-index: 2;
     }
 
-    .nav_fixed{
+    .nav_fixed {
         position: fixed;
-        top:0;
-        left:0;
-        z-index:3;
+        top: 0;
+        left: 0;
+        z-index: 3;
     }
 
 
@@ -127,6 +129,39 @@ body {
     // 其他资产列表
     .myAsset {
         margin-top: 3rem;
+
+
+        // nav重置
+        /* .mui-slider .mui-segmented-control.mui-scroll-wrapper {
+            background: none;
+            box-shadow: none;
+            color: @3c3c3c;
+        
+        
+        
+            .mui-scroll .mui-control-item.mui-active {
+                color: @3c3c3c;
+                font-weight: bold;
+                position: relative;
+        
+                &:after {
+                    position: absolute;
+                    height: 0.25rem;
+                    bottom: 0.3rem;
+                    left: 5.8rem;
+                    content: '';
+                    width: 3.9rem;
+                    background: @ed722f;
+                    border-radius: .5rem;
+                }
+        
+            }
+        } */
+
+
+        .mui-table-view-cell {
+            padding-top: 0;
+        }
 
         .list {
             width: 100%;
@@ -144,6 +179,7 @@ body {
                     text-align: center;
                     color: @3c3c3c;
                     margin-bottom: 1.2rem;
+                    font-weight: bold;
                 }
 
                 ul {
@@ -162,6 +198,12 @@ body {
                         .text {
                             color: @695a37;
                             float: right;
+                        }
+
+                        &:first-child {
+                            .text {
+                                font-weight: bold;
+                            }
                         }
                     }
                 }
@@ -182,7 +224,7 @@ body {
 
     }
 
-    .contentWrapper{
+    .contentWrapper {
         height: 100%;
     }
 
