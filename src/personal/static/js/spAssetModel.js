@@ -54,7 +54,7 @@ $(function() {
                         data:jsonData.consumptionProportion
                     }
                     that.getElements.expense.find('.sp_four_item_present span:nth-child(2)').html(jsonData.consumptionProportion + '%')
-                    that.getElements.expense.find('.sp_four_item_price').html(jsonData.consumptionAssets ? ('￥' + jsonData.consumptionAssets) : ('<span class="price">￥0.00</span>'))
+                    that.getElements.expense.find('.sp_four_item_price').html(jsonData.consumptionAssets != '0.00' ? ('￥' + jsonData.consumptionAssets) : ('<span class="price">￥0.00</span>'))
                     if(consumption.data != '0' && consumption.data) {
                         that.methods.Accounted(consumption)
                     }else{
@@ -66,7 +66,7 @@ $(function() {
                         data:jsonData.guaranteeProportion
                     }
                     that.getElements.safeguard.find('.sp_four_item_present span:nth-child(2)').html(jsonData.guaranteeProportion + '%')
-                    that.getElements.safeguard.find('.sp_four_item_price').html(jsonData.guaranteeAssets ? ('￥' +  jsonData.guaranteeAssets) : ('<span class="price">￥0.00</span>') )
+                    that.getElements.safeguard.find('.sp_four_item_price').html(jsonData.guaranteeAssets != '0.00' ? ('￥' +  jsonData.guaranteeAssets) : ('<span class="price">￥0.00</span>') )
                     if(guarantee.data != '0' && guarantee.data){
                         that.methods.Accounted(guarantee)
                     }else{
@@ -78,7 +78,7 @@ $(function() {
                         data:jsonData.valueAddedProportion
                     }
                     that.getElements.appreciation.find('.sp_four_item_present span:nth-child(2)').html(jsonData.valueAddedProportion + '%')
-                    that.getElements.appreciation.find('.sp_four_item_price').html(jsonData.valueAddedAssets ? ('￥' + jsonData.valueAddedAssets) : ('<span class="price">￥0.00</span>') )
+                    that.getElements.appreciation.find('.sp_four_item_price').html(jsonData.valueAddedAssets != '0.00' ? ('￥' + jsonData.valueAddedAssets) : ('<span class="price">￥0.00</span>') )
                     if(valueAdded.data != '0' && valueAdded.data){
                         that.methods.Accounted(valueAdded)
                     }else {
@@ -90,7 +90,7 @@ $(function() {
                         data:jsonData.valuePreservingProportion
                     }
                     that.getElements.hedging.find('.sp_four_item_present span:nth-child(2)').html(jsonData.valuePreservingProportion + '%')
-                    that.getElements.hedging.find('.sp_four_item_price').html(jsonData.valuePreservingAssets ? ('￥' + jsonData.valuePreservingAssets) : ('<span class="price">￥0.00</span>') )
+                    that.getElements.hedging.find('.sp_four_item_price').html(jsonData.valuePreservingAssets != '0.00' ? ('￥' + jsonData.valuePreservingAssets) : ('<span class="price">￥0.00</span>') )
                     if(valuePreserving.data != '0' && valuePreserving.data){
                         that.methods.Accounted(valuePreserving)
                     }else {
@@ -116,26 +116,28 @@ $(function() {
         events: function() {
            var that=this;
            //关闭文案
-           $(".sp_tip i").click(function(){
+           $(document).on('touchstart', '.sp_tip i', function(e) {
             somePage.getElements.tip.hide()
            })
 
            //进入详情
-           $("#expense").click(function(){
+           $(document).on('touchstart', '#expense', function(e) {
             if($(this).has(".price").length) return;
             window.location.href = site_url.payThemeCash_url;
            })
-           $("#appreciation").click(function(){
+
+           $(document).on('touchstart', '#appreciation', function(e) {
             if($(this).has(".price").length) return;
             window.location.href = site_url.smMyAsset_url;
            })
-           $("#hedging").click(function(){
+
+           $(document).on('touchstart', '#hedging', function(e) {
             if($(this).has(".price").length) return;
             window.location.href = site_url.smMyAsset_url;
            })
 
            //进入配置页面
-           $(".sp_allo_btn1").click(function(){
+           $(document).on('touchstart', '.sp_allo_btn1', function(e) {
             window.location.href=site_url.assetAllocation_url
            })
            
