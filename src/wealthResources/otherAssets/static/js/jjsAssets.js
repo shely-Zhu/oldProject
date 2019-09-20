@@ -16,7 +16,7 @@ require('@pathIncludJs/vendor/zepto/deferred.js');
 //路径配置文件
 require('@pathIncludJs/vendor/config.js');
 //下拉加载更多
-require('@pathCommonJs/scrollFullPage.js');
+// require('@pathCommonJs/scrollFullPage.js');
 // 切换
 require('@pathCommonJsCom/tabScroll.js');
 require('@pathCommonJsCom/goTopMui.js');
@@ -134,7 +134,10 @@ $(function() {
                 that.gV.navToTop = document.getElementById('slider').getBoundingClientRect().top;
                 that.gV.navHeight = that.gV.listToTop-that.gV.navToTop;
                 that.height = windowHeight - that.gV.listToTop;
-                that.highHeight = windowHeight-that.gV.navHeight;
+                
+                //that.highHeight = windowHeight-that.gV.navHeight;
+            
+                that.highHeight = $('html').height()  - $('.nav-wrapper').height();
             }
 
             if (!$('.list').hasClass('setHeight')) {
@@ -329,12 +332,122 @@ $(function() {
                 }
             });
 
-            document.querySelector('#scroll1').addEventListener('scroll', function (e ) { 
-                if(e.detail.lastY>0){
-                    $('.nav-wrapper').removeClass('nav_fixed');
-                    $('.scroll_mask').show();
-                    $(window).scrollTop(0);
+            //监听上拉手势
+            // mui("#move_0")[0].addEventListener("dragend", function(e) {  
+                
+            //     var listToTop = $('.nav-wrapper')[0].getBoundingClientRect().top;
+
+            //     if( (e.detail.deltaY < 0 ) && listToTop != 0){ 
+            //         //上拉
+            //         $(window).scrollTop(that.gV.listToTop);
+            //     }
+                
+            // });
+
+            var startY;
+
+            mui("#move_0")[0].addEventListener("touchstart", function(e) {  
+                
+                //e.preventDefault();
+                //e.stopPropagation();
+
+                startY = e.changedTouches[0].clientY;
+                
+            });
+
+            var toTop = false;
+
+            mui("#move_0")[0].addEventListener("touchmove", function(e) {  
+
+                //e.preventDefault();
+                //e.stopPropagation();
+
+                var moveEndY = e.changedTouches[0].clientY,
+                    Y = moveEndY - startY;
+
+
+                var listToTop = $('.nav-wrapper')[0].getBoundingClientRect().top,
+                    sTop = $('#move_0 .mui-table-view')[0].getBoundingClientRect().top - $('.nav-wrapper').height() ;
+
+                if( ( Y < -50 ) && listToTop != 0){ 
+                    //上拉
+                    
+                    $(window).scrollTop(that.gV.listToTop);
+
+                    toTop = true;
+
+                    //isTouch = false;
                 }
+                // else if( ( Y > 30) && listToTop >= 0 && sTop >= 0 ){
+
+                //     //下拉
+                //     // isScroll = false;
+                //     // //下拉
+                //     // $(window).scrollTop(0);
+
+                //     toTop = false;
+
+                //     // console.log( '回归' );
+                // }
+                else{
+                    toTop = false;
+                }
+                
+            });
+
+
+            // mui("#move_0")[0].addEventListener("touchend", function(e) {  
+                
+            //     //e.preventDefault();
+            //     //e.stopPropagation();
+
+            //     isTouch = false;
+                
+            // });
+
+            // var startY;
+            // 　$("body").on("touchstart", function(e) {
+
+            // 　　　　e.preventDefault();
+            // 　　　　startY = e.touches[0].pageY;
+            // 　　});
+            // 　　$("body").on("touchend", function(e) {
+            // 　　　　e.preventDefault();
+            // 　　　　var moveEndY = e.touches[0].pageY,
+            // 　　　　　　Y = moveEndY - startY;
+
+            // 　　　　if ( Y > 0) {
+            // 　　　　　　alert("top 2 bottom");
+            // 　　　　}
+            // 　　　　else if ( Y < 0 ) {
+            // 　　　　　　alert("bottom 2 top");
+            // 　　　　}
+            // 　　});
+
+            //监听滚动事件，做下拉判断
+            document.querySelector('#scroll1').addEventListener('scroll', function (e, event ) { 
+
+                if( toTop ){
+                    return false;
+                }
+                
+                var listToTop = $('.nav-wrapper')[0].getBoundingClientRect().top;
+
+                // if( (e.detail.lastY < 0 ) && listToTop != 0){ 
+                //     //上拉
+                //     isScroll = true;
+                //     $(window).scrollTop(that.gV.listToTop);
+                //     console.log( '置顶' );
+                // }
+                if( (e.detail.lastY >= 0 ) && listToTop >= 0){  
+
+                    //下拉
+                    $(window).scrollTop(0);
+
+                    console.log( '回归' );
+                }
+                
+                
             }) 
 
             // 文案提示

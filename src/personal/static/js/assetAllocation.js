@@ -60,15 +60,45 @@ $(function() {
             key: "cplb",
             hasrowspan: true
           },
-          // {
-          //   title: "产品名称",
-          //   key: "cpmc",
-          //   hasrowspan: true
-          // },
-          // {
-          //   title: "金额（万元）",
-          //   key: "je"
-          // },
+          {
+            title: "配置比例",
+            key: "pzbl"
+          }
+        ],
+        dataList: [] //tbody具体数据
+      },
+      listTable2: {
+        columns: [
+          {
+            title: "资产分类",
+            key: "zcfl",
+            hasrowspan: true
+          },
+          {
+            title: "投资比例",
+            key: "tzbl",
+            hasrowspan: true
+          },
+          {
+            title: "投资金额（万美元）",
+            key: "tzje",
+            hasrowspan: true
+          },
+          {
+            title: "资产类别",
+            key: "zclb",
+            hasrowspan: true
+          },
+          {
+            title: "产品类型",
+            key: "cplx",
+            hasrowspan: true
+          },
+          {
+            title: "产品类别",
+            key: "cplb",
+            hasrowspan: true
+          },
           {
             title: "配置比例",
             key: "pzbl"
@@ -77,12 +107,19 @@ $(function() {
         dataList: [] //tbody具体数据
       },
       columns: [], //表头原始参数
+      columns2: [], //表头原始参数
       newArr: [[]], //表头
+      newArr2: [[]], //表头
       maxHeight: 1, //表头总共占的行数
+      maxHeight2: 1, //表头总共占的行数
       colKeyList: [], //所有的key
+      colKeyList2: [], //所有的key
       dataList: [], //tbody具体数据
+      dataList2: [], //tbody具体数据
       needRowSpan: [], //tbody需要跨行的key
+      needRowSpan2: [], //tbody需要跨行的key
       span: {} ,//所跨的行数
+      span2: {} ,//所跨的行数
       echartsData:{
         descArr: {      
           lifeTermDic: null, //生命周期
@@ -137,27 +174,27 @@ $(function() {
             $(".appendix .appendixTxt").html(jsonData.macroEconomyContent);
             if(jsonData.assetConfigReportProduct){
               that.data.columns = that.data.listTable1.columns;
+              that.data.columns2 = that.data.listTable2.columns;
               that.data.dataList = jsonData.assetConfigReportProduct.products;
-              that.data.maxHeight = that.getMaxFloor(that.data.columns); //1. 计算出表头一共需要多少行
-              that.columnsHandle(that.data.columns); //2. 对表头进行处理
-             
-
-              var tableOneThead = jsonData.assetConfigReportProduct.titles;
+              that.data.dataList2 = jsonData.assetConfigReportProduct.hwProducts;
               var tableOneTbody = jsonData.assetConfigReportProduct.products;
-              if (tableOneTbody.length > 0) {
-                that.dataHandle(tableOneTbody, that.data.needRowSpan); // 3. 对数据进行处理（传入参数： 具体数据，需要跨行列的（key））
+              if (tableOneTbody.length > 0 ) {
+                that.data.maxHeight = that.getMaxFloor(that.data.columns); //1. 计算出表头一共需要多少行
+                that.columnsHandle(that.data.columns,1); //2. 对表头进行处理
+                that.dataHandle(tableOneTbody, that.data.needRowSpan,1); // 3. 对数据进行处理（传入参数： 具体数据，需要跨行列的（key））
                 that.setThead(that.data.newArr, that.getElements.tableOneThead);
-                that.setTbody(tableOneTbody, that.getElements.tableOneTbody);
+                that.setTbody(tableOneTbody, that.getElements.tableOneTbody,that.data.span,that.data.dataList);
               }else {
                 $(".tableOne").hide()
               }
-              var tableTwoThead = jsonData.assetConfigReportProduct.hwTitles;
               var tableTwoTbody = jsonData.assetConfigReportProduct.hwProducts;
               that.data.listTable1.dataList = tableTwoTbody;
               if (tableTwoTbody.length > 0) {
-                that.dataHandle(tableTwoTbody, that.data.needRowSpan); // 3. 对数据进行处理（传入参数： 具体数据，需要跨行列的（key））
-                that.setThead(that.data.newArr, that.getElements.tableTwoThead);
-                that.setTbody(tableTwoTbody, that.getElements.tableTwoTbody);
+                that.data.maxHeight2 = that.getMaxFloor(that.data.columns2); //1. 计算出表头一共需要多少行
+                that.columnsHandle(that.data.columns2,2); //2. 对表头进行处理
+                that.dataHandle(tableTwoTbody, that.data.needRowSpan2,2); // 3. 对数据进行处理（传入参数： 具体数据，需要跨行列的（key））
+                that.setThead(that.data.newArr2, that.getElements.tableTwoThead);
+                that.setTbody(tableTwoTbody, that.getElements.tableTwoTbody,that.data.span2,that.data.dataList2);
                 let timer = setTimeout(function() {
                   let wrapperHeight = $(".proposalTableContent").height();
                   $(".proposalTableTop").height(wrapperHeight + 30);
@@ -166,6 +203,10 @@ $(function() {
                 }, 500);
               }else {
                 $(".tableTwo").hide()
+              }
+
+              if(tableOneTbody.length === 0 && tableTwoTbody.length === 0){
+                $(".proposalTable").hide()
               }
             }else {
               $(".proposalTable").hide()
@@ -192,7 +233,7 @@ $(function() {
       }
       el.append(ths);
     },
-    setTbody: function(data, el) {
+    setTbody: function(data, el,span,dataList) {
       // debugger
       var that = this;
       var trs = "";
@@ -203,7 +244,7 @@ $(function() {
             for (var j = 0; j < data[i].tdList.length; j++) {
               trs +=
                 "<td rowspan=" +
-                that.resetRowSpan(i, data[i].tdList[j]) +
+                that.resetRowSpan(i, data[i].tdList[j],span,dataList) +
                 ">" +
                 data[i][data[i].tdList[j]] +
                 "</td>";
@@ -218,34 +259,37 @@ $(function() {
 
       el.append(trs);
     },
-    resetRowSpan(row, key) {
-      if (this.data.span[key] && this.data.span[key][row]) {
-        if (
-          this.data.dataList[row] &&
-          this.data.dataList[row + 1] &&
-          this.data.dataList[row]["zcfl"] == this.data.dataList[row + 1]["zcfl"]
-        ) {
-          var zcfl = this.data.dataList[row]["zcfl"];
-          var list = this.data.dataList.filter(function(item) {
-            return item["zcfl"] == zcfl;
-          });
-
-          if (this.data.span[key][row] > list.length) {
-            this.data.span[key][row + list.length] =
-              this.data.span[key][row] - list.length;
-            return list.length;
+    resetRowSpan(row, key,span,dataList) {
+      
+        if (span[key] && span[key][row]) {
+          if (
+            dataList[row] &&
+            dataList[row + 1] &&
+            dataList[row]["zcfl"] ==dataList[row + 1]["zcfl"]
+          ) {
+            var zcfl = dataList[row]["zcfl"];
+            var list = dataList.filter(function(item) {
+              return item["zcfl"] == zcfl;
+            });
+  
+            if (span[key][row] > list.length) {
+              span[key][row + list.length] =
+              span[key][row] - list.length;
+              return list.length;
+            } else {
+              return span[key][row];
+            }
           } else {
-            return this.data.span[key][row];
+            if (span[key][row] > 1) {
+                span[key][row + 1] = span[key][row] - 1;
+            }
+            return 1;
           }
-        } else {
-          if (this.data.span[key][row] > 1) {
-            this.data.span[key][row + 1] = this.data.span[key][row] - 1;
-          }
+        }else {
           return 1;
         }
-      }else{
-        // return 1
-      }
+ 
+      
     },
     gerMaxCol(items) {
       var max = 0;
@@ -278,14 +322,22 @@ $(function() {
       each(treeData, 1);
       return max;
     },
-    columnsHandle(treeData) {
+    columnsHandle(treeData,type) {
       var that = this;
-      var maxFloor = this.data.maxHeight;
+      var maxFloor = type === 1 ? this.data.maxHeight : this.data.maxHeight2;
       var keyList = [];
       function each(data, index) {
-        if (that.data.newArr[index] === undefined) {
-          that.data.newArr[index] = [];
+        if(type === 1){
+          if (that.data.newArr[index] === undefined) {
+            that.data.newArr[index] = [];
+          }
         }
+        if(type === 2){
+          if (that.data.newArr2[index] === undefined) {
+            that.data.newArr2[index] = [];
+          }
+        }
+        
         data.forEach(function(e) {
           var obj = {
             title: e.title,
@@ -298,13 +350,30 @@ $(function() {
             obj.colspan = that.gerMaxCol(e.children);
             obj.rowspan = maxFloor - that.getMaxFloor(e.children);
           } else {
-            that.data.colKeyList.push(e.key);
+            if(type === 1){
+              that.data.colKeyList.push(e.key);
+            }
+            if(type === 2){
+              that.data.colKeyList2.push(e.key);
+            }
             if (e.hasrowspan) {
               //  如果存在hasrowspan属性并且值为true，则表明该key列存在跨行
-              that.data.needRowSpan.push(e.key);
+              if(type === 1){
+                that.data.needRowSpan.push(e.key);
+              }
+              if(type === 2){
+                that.data.needRowSpan2.push(e.key);
+              }
+              
             }
           }
-          that.data.newArr[index].push(obj);
+          if(type === 1){
+            that.data.newArr[index].push(obj);
+          }
+          if(type === 2){
+            that.data.newArr2[index].push(obj);
+          }
+          
           if (e.children && e.children.length > 0) {
             each(e.children, index + 1);
           }
@@ -312,7 +381,7 @@ $(function() {
       }
       each(treeData, 0);
     },
-    dataHandle(dataList, needRowSpan) {
+    dataHandle(dataList, needRowSpan,type) {
       var that = this;
       needRowSpan.forEach(function(key) {
         var sum = {};
@@ -326,9 +395,17 @@ $(function() {
               tdList.push(item);
             });
           } else {
-            that.data.colKeyList.forEach(function(item) {
-              tdList.push(item);
-            });
+            if(type === 1){
+              that.data.colKeyList.forEach(function(item) {
+                tdList.push(item);
+              });
+            }
+            if(type === 2){
+              that.data.colKeyList2.forEach(function(item) {
+                tdList.push(item);
+              });
+            }
+           
           }
           if (
             dataList[j - 1] &&
@@ -353,7 +430,12 @@ $(function() {
             sum[k] = i;
           }
         }
-        that.data.span[key] = sum;
+        if(type === 1){
+          that.data.span[key] = sum;
+        }
+        if(type === 2){
+          that.data.span2[key] = sum;
+        }
       });
     },
     getDrawData: function() {
