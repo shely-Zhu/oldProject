@@ -178,7 +178,7 @@ $(function() {
               that.data.dataList = jsonData.assetConfigReportProduct.products;
               that.data.dataList2 = jsonData.assetConfigReportProduct.hwProducts;
               var tableOneTbody = jsonData.assetConfigReportProduct.products;
-              if (tableOneTbody.length > 0) {
+              if (tableOneTbody.length > 0 ) {
                 that.data.maxHeight = that.getMaxFloor(that.data.columns); //1. 计算出表头一共需要多少行
                 that.columnsHandle(that.data.columns,1); //2. 对表头进行处理
                 that.dataHandle(tableOneTbody, that.data.needRowSpan,1); // 3. 对数据进行处理（传入参数： 具体数据，需要跨行列的（key））
@@ -203,6 +203,10 @@ $(function() {
                 }, 500);
               }else {
                 $(".tableTwo").hide()
+              }
+
+              if(tableOneTbody.length === 0 && tableTwoTbody.length === 0){
+                $(".proposalTable").hide()
               }
             }else {
               $(".proposalTable").hide()
