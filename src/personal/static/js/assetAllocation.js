@@ -140,18 +140,22 @@ $(function() {
               that.data.dataList = jsonData.assetConfigReportProduct.products;
               that.data.maxHeight = that.getMaxFloor(that.data.columns); //1. 计算出表头一共需要多少行
               that.columnsHandle(that.data.columns); //2. 对表头进行处理
-              that.dataHandle(that.data.dataList, that.data.needRowSpan); // 3. 对数据进行处理（传入参数： 具体数据，需要跨行列的（key））
+             
 
               var tableOneThead = jsonData.assetConfigReportProduct.titles;
               var tableOneTbody = jsonData.assetConfigReportProduct.products;
-              if (tableOneThead.length > 0) {
+              if (tableOneTbody.length > 0) {
+                that.dataHandle(tableOneTbody, that.data.needRowSpan); // 3. 对数据进行处理（传入参数： 具体数据，需要跨行列的（key））
                 that.setThead(that.data.newArr, that.getElements.tableOneThead);
                 that.setTbody(tableOneTbody, that.getElements.tableOneTbody);
+              }else {
+                $(".tableOne").hide()
               }
               var tableTwoThead = jsonData.assetConfigReportProduct.hwTitles;
               var tableTwoTbody = jsonData.assetConfigReportProduct.hwProducts;
               that.data.listTable1.dataList = tableTwoTbody;
-              if (tableTwoThead.length > 0) {
+              if (tableTwoTbody.length > 0) {
+                that.dataHandle(tableTwoTbody, that.data.needRowSpan); // 3. 对数据进行处理（传入参数： 具体数据，需要跨行列的（key））
                 that.setThead(that.data.newArr, that.getElements.tableTwoThead);
                 that.setTbody(tableTwoTbody, that.getElements.tableTwoTbody);
                 let timer = setTimeout(function() {
@@ -160,6 +164,8 @@ $(function() {
                   $(".wrapper").height(wrapperHeight + 30);
                   clearTimeout(timer);
                 }, 500);
+              }else {
+                $(".tableTwo").hide()
               }
             }else {
               $(".proposalTable").hide()
@@ -187,6 +193,7 @@ $(function() {
       el.append(ths);
     },
     setTbody: function(data, el) {
+      // debugger
       var that = this;
       var trs = "";
       if (data.length > 0) {
@@ -237,7 +244,7 @@ $(function() {
           return 1;
         }
       }else{
-        return 1
+        // return 1
       }
     },
     gerMaxCol(items) {
@@ -359,7 +366,7 @@ $(function() {
           // needLogin: true, //需要判断是否登陆
           async: false, //同步
           needDataEmpty: true,
-          
+          // dataType: '',
           callbackDone: function(res) {
            /* 1000是与否
           `1001生命周期阶段
@@ -413,15 +420,6 @@ $(function() {
             };
             $.getEchartsData(echartsData);
           },
-          callbackNoData:function(){
-            console.log("callbackNoData")
-          },
-          callbackLoginFunc:function(){
-            console.log("callbackLoginFunc")
-          },
-          callbackFail: function(json) {
-            tipAction(json.msg);
-          }
         },
         
       ];
