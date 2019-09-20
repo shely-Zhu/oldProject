@@ -192,14 +192,17 @@ $(function() {
       if (data.length > 0) {
         for (var i = 0; i < data.length; i++) {
           trs += "<tr>";
-          for (var j = 0; j < data[i].tdList.length; j++) {
-            trs +=
-              "<td rowspan=" +
-              that.resetRowSpan(i, data[i].tdList[j]) +
-              ">" +
-              data[i][data[i].tdList[j]] +
-              "</td>";
+          if(data[i].tdList){
+            for (var j = 0; j < data[i].tdList.length; j++) {
+              trs +=
+                "<td rowspan=" +
+                that.resetRowSpan(i, data[i].tdList[j]) +
+                ">" +
+                data[i][data[i].tdList[j]] +
+                "</td>";
+            }
           }
+          
           trs += "</tr>";
         }
       } else {
@@ -353,9 +356,10 @@ $(function() {
           name:'获取字典',
           url: site_url.getCustomerAssetDictionary_api, 
           data:["1001", "1002","1003", "1004"], 
-          needLogin: true, //需要判断是否登陆
+          // needLogin: true, //需要判断是否登陆
           async: false, //同步
-          //needDataEmpty: false,//不需要判断data是否为空
+          needDataEmpty: true,
+          
           callbackDone: function(res) {
            /* 1000是与否
           `1001生命周期阶段
@@ -376,7 +380,7 @@ $(function() {
                 data: {
                   // id: argId //资产配置id
                 },
-                needLogin: true, //需要判断是否登陆
+                // needLogin: true, //需要判断是否登陆
                 //needDataEmpty: false,//不需要判断data是否为空
                 callbackDone: function(res) {
                   //成功后执行的函数
@@ -408,6 +412,15 @@ $(function() {
               data:that.data.echartsData
             };
             $.getEchartsData(echartsData);
+          },
+          callbackNoData:function(){
+            console.log("callbackNoData")
+          },
+          callbackLoginFunc:function(){
+            console.log("callbackLoginFunc")
+          },
+          callbackFail: function(json) {
+            tipAction(json.msg);
           }
         },
         

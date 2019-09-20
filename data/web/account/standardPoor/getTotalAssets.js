@@ -15,8 +15,8 @@ var mymessage = Mock.mock({
       "guaranteeProportion": "0",
       "valueAddedAssets": "35.000.00",
       "valueAddedProportion": "16.25",
-      "valuePreservingAssets": "0.00",
-      "valuePreservingProportion": "0"
+      "valuePreservingAssets": "25.000.00",
+      "valuePreservingProportion": "35.75"
     },
     "message":"操作成功！",
     "status":"0000"
