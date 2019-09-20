@@ -128,7 +128,7 @@ var splitUrl = require('./components/splitUrl.js')();
             var ajaxFunc = function(obj) {
             
                 var ajax = $.Deferred(); //声明一个deferred对象
-                
+                // debugger
                 //设置ajax请求的contentType  data数据添加JSON.stringify
                 var contentType = 'application/json; charset=UTF-8',
                     data = JSON.stringify(obj.data);

@@ -174,7 +174,7 @@ var splitUrl = require("./components/splitUrl.js")();
                 }
               });
               //画推荐饼图时，有金额推荐比例，拼画图需要的legend和series数据
-         
+        //  debugger
               if (course.assetRecommend != 0 && course.assetRecommend != null) {
                 //饼图的数据
                 defaultData.assetRecommendObj.legendData.push(
@@ -225,16 +225,21 @@ var splitUrl = require("./components/splitUrl.js")();
                 defaultData.barObj.data2.push(0);
               }
             });
-
             //画推荐饼图
             if (defaultData.assetRecommendObj.seriesData.length != 0) {
               //这时设置title
               defaultData.assetRecommendObj.title = param.data.title;
+              console.log('defaultData.assetRecommendObj',defaultData.assetRecommendObj)
               drawPie(defaultData.assetRecommendObj);
+            }else {
+              $(".proposalPieContent").hide()
             }
             //画现状饼图
             if (defaultData.assetNowObj.seriesData.length != 0) {
+              console.log('defaultData.assetNowObj',defaultData.assetNowObj)
                 drawPie(defaultData.assetNowObj);
+            }else {
+              $(".analysis").hide()
             }
             var barNow = false;
             defaultData.barObj.data1.forEach((m, n, p) => {
@@ -245,14 +250,17 @@ var splitUrl = require("./components/splitUrl.js")();
             });
             //现状有数据的时候，才画图
             if (barNow) {
+              console.log('defaultData.barObj',defaultData.barObj)
                 drawBar(defaultData.barObj);
               //添加之前清除data1 data2的数组数据
               //this.defaultData.barObj.data1=[]
               //this.defaultData.barObj.data2=[]
+            }else{
+              $(".adjust").hide()
             }
           },
           callbackFail: function(json) {
-            tipAction(data.msg);
+            tipAction(json.message);
           }
         }
       ];
