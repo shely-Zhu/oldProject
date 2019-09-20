@@ -12,7 +12,7 @@ var mymessage = Mock.mock({
     data: {
         "totalInTransitAsset": '200000', // 在途资产汇总
         "totalInTransitAssetMask": '200,00', // 在途资产汇总 千分位
-        "pageList": [{
+        "pageList|20": [{
             "projectName": "项目名称", // 项目名称
             "besTime": "50.55", // 预约时间
             "besTimeStr": "-----", // 预约时间 yyyy-MM-dd格式
@@ -29,7 +29,7 @@ var mymessage = Mock.mock({
     },
 
     "message": "操作成功！",
-    // "status": "0000"
-    "status": "1000"
+    "status": "0000"
+    // "status": "1000"
 });
 module.exports = mymessage;
