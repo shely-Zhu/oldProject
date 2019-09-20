@@ -21,6 +21,7 @@ body {
 .container {
     height: 100%;
     width: 100%;
+    background: @f4f4f4;
 
     // 其他资产
     .banner {
@@ -62,7 +63,7 @@ body {
 
 
             .amount {
-                margin: 1.3rem 0 1.4rem;
+                margin: 0.8rem 0 1.4rem;
                 font-size: 3rem;
                 line-height: 3.2rem;
             }
@@ -79,7 +80,7 @@ body {
             bottom: -2.5rem;
             left: 4.375%;
             text-align: center;
-            padding-top: 1.4rem;
+            padding-top: 1.6rem;
             box-shadow: 0 0.1rem 0.4rem 0 rgba(0, 0, 0, 0.1);
             color: @999999;
             font-size: 0.9rem;
@@ -90,11 +91,11 @@ body {
                 &:after {
                     position: absolute;
                     height: 4.3rem;
-                    top: -0.4rem;
+                    top: -0.3rem;
                     right: 0;
                     content: '';
                     border-right: 1px solid @c008;
-                }
+                } 
             }
 
             li {
@@ -112,7 +113,7 @@ body {
             .j_already,
             .j_tobe {
                 font-size: 1.2rem;
-                margin-top: 0.8rem;
+                margin-top: 0.4rem;
                 font-weight: bold;
             }
 
@@ -132,7 +133,7 @@ body {
         width: 100%;
         height: 60rem;
         background: @c005;
-        opacity: 0.2;
+        opacity: 0;
         position: absolute;
         top: 38%;
         z-index: 3;
@@ -150,6 +151,10 @@ body {
     // 其他资产列表
     .myAsset {
         margin-top: 3rem;
+
+        #slider{
+            background: @f4f4f4;
+        }
 
 
         // nav重置
@@ -294,18 +299,18 @@ body {
 
     /**
 *   无数据区域的样式
- */
-    .without {
-        margin-top: 16.5rem;
-        color: @c001;
+*/
+.without {
+    margin-top: 16.5rem;
+    color: @c001;
 
-        .iconfont {
-            font-size: 5.1rem;
-        }
-
-        .text {
-            margin-top: 2rem;
-            font-size: 1.4rem;
-        }
+    .iconfont {
+        font-size: 5.1rem;
     }
+
+    .text {
+        margin-top: 2rem;
+        font-size: 1.4rem;
+    }
+}
 }
