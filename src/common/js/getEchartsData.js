@@ -91,7 +91,6 @@ var splitUrl = require("./components/splitUrl.js")();
 (function($) {
   $.extend($, {
     getEchartsData: function(param) {
-      console.log("this", this);
       var defaultData = {
           assetNowObj: {
           el: "xzPie",
@@ -229,14 +228,12 @@ var splitUrl = require("./components/splitUrl.js")();
             if (defaultData.assetRecommendObj.seriesData.length != 0) {
               //这时设置title
               defaultData.assetRecommendObj.title = param.data.title;
-              console.log('defaultData.assetRecommendObj',defaultData.assetRecommendObj)
               drawPie(defaultData.assetRecommendObj);
             }else {
               $(".proposalPieContent").hide()
             }
             //画现状饼图
             if (defaultData.assetNowObj.seriesData.length != 0) {
-              console.log('defaultData.assetNowObj',defaultData.assetNowObj)
                 drawPie(defaultData.assetNowObj);
             }else {
               $(".analysis").hide()
@@ -250,7 +247,6 @@ var splitUrl = require("./components/splitUrl.js")();
             });
             //现状有数据的时候，才画图
             if (barNow) {
-              console.log('defaultData.barObj',defaultData.barObj)
                 drawBar(defaultData.barObj);
               //添加之前清除data1 data2的数组数据
               //this.defaultData.barObj.data1=[]
