@@ -127,34 +127,42 @@ body {
             }
           }
           .sp_four_item_present {
-            font-size: 0rem;
-            // height: 0.85rem;
+            font-size: 0;
+            line-height: 0;
             margin-top: 1rem;
             overflow: hidden;
             span {
               font-size: 0.85rem;
               line-height: 1.15rem;
+              height: 1.15rem;
               color: #ac986d;
-              display: inline-block;
+              // display: inline-block;
+              float: left;
               vertical-align: middle;
             }
             span:last-of-type {
               margin-right: 0.2rem;
             }
             ul {
-              display: inline-block;
+              // display: inline-block;
+              float: left;
               overflow: hidden;
               vertical-align: middle;
-              height: 0.7rem;
-              line-height: 0.7rem;
+              line-height: 1.15rem;
+              height: 1.15rem;
+              padding:0.2rem 0;
+              font-size: 0;
               li {
-                float: left;
+                display: inline-block;
+                // float: left;
                 width: 0.35rem;
-                height: 0.7rem;
-                line-height: 1.15rem;
+                height: 0.75rem;
                 border-radius: 0.3rem;
                 background-color: #dbc69a;
                 margin-right: 0.15rem;
+                vertical-align:unset;
+                margin-top:-0.95px;
+                
               }
               li.active {
                 background-color: #d75e33;
@@ -179,36 +187,20 @@ body {
           background: url(../img/four1.png) center center no-repeat;
           background-size: 100% 100%;
         }
-        // #expense.expense_noData {
-        //   background: url(../img/four1.png) center center no-repeat;
-        //   background-size: 100% 100%;
-        // }
         #safeguard {
           background: url(../img/four2.png) center center no-repeat;
           background-size: 100% 100%;
           margin-left: 0.9rem;
         }
-        // #safeguard.safeguard_noData {
-        //   background: url(../img/four2_r.png) center center no-repeat;
-        //   background-size: 100% 100%;
-        // }
         #appreciation {
           background: url(../img/four3.png) center center no-repeat;
           background-size: 100% 100%;
         }
-        // #appreciation.appreciation_noData {
-        //   background: url(../img/four3.png) center center no-repeat;
-        //   background-size: 100% 100%;
-        // }
         #hedging {
           background: url(../img/four4.png) center center no-repeat;
           background-size: 100% 100%;
           margin-left: 0.9rem;
         }
-        // #hedging.hedging_noData  {
-        //   background: url(../img/four4.png) center center no-repeat;
-        //   background-size: 100% 100%;
-        // }
       }
       .sp_four_box:last-of-type{
           margin-top:0.9rem;
