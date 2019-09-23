@@ -23,6 +23,7 @@ $(function() {
         },
         gV: {
         },
+        empNo:'',   //理顾编号
          //元素获取
          getElements: {
             tip:$(".sp_tip"),//普标提示区域
@@ -137,7 +138,7 @@ $(function() {
 
            //进入配置页面
            mui("body").on('tap', '.sp_allo_btn1', function() {
-            window.location.href=site_url.assetAllocation_url
+            window.location.href=site_url.assetAllocation_url +'?empNo=' + that.empNo 
           })
            
            var obj = [{
@@ -148,6 +149,7 @@ $(function() {
             needDataEmpty: true,
             callbackDone: function(json) {
                 var jsonData = json.data;
+                that.empNo = jsonData.empNo
                 if(jsonData.hasAssetReport == '1'){
                     $('.sp_allo_btn1').show()
                 }else {
