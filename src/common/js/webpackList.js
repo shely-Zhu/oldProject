@@ -186,6 +186,8 @@ module.exports = {
 
        //jjs持仓明细
     './wealthResources/otherAssets/static/js/jjsAssets' : './src/wealthResources/otherAssets/static/js/jjsAssets.js',
+    // demo
+    './wealthResources/otherAssets/static/js/demo' : './src/wealthResources/otherAssets/static/js/demo.js',
     // 老版-待删除
     './commonResources//static/js/jjsAssets' : './src/commonResources/static/js/jjsAssets.js',
 

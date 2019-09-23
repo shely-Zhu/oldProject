@@ -128,29 +128,30 @@ body {
           }
           .sp_four_item_present {
             font-size: 0rem;
-            line-height: 1.15rem;
+            height: 1.15rem;
             margin-top: 1rem;
             overflow: hidden;
+            display: table;
+            vertical-align: middle;
+
+            position: relative;
+
             span {
+              display: table-cell;
               font-size: 0.85rem;
-              line-height: 1.15rem;
-              height: 1.15rem;
               color: #ac986d;
-              display: inline-block;
-              vertical-align: middle;
+              
             }
             span:last-of-type {
               margin-right: 0.2rem;
+              min-width: 2.4rem;
             }
             ul {
-              display: inline-block;
+                display: table-cell;
               overflow: hidden;
-              vertical-align: middle;
-              line-height: 1.15rem;
-              height: 1.15rem;
-              padding:0.2rem 0;
+
               li {
-                display: inline-block;
+                float: left;
                 width: 0.35rem;
                 height: 0.75rem;
                 border-radius: 0.3rem;
