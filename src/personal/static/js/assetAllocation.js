@@ -184,6 +184,12 @@ $(function() {
                 that.dataHandle(tableOneTbody, that.data.needRowSpan,1); // 3. 对数据进行处理（传入参数： 具体数据，需要跨行列的（key））
                 that.setThead(that.data.newArr, that.getElements.tableOneThead);
                 that.setTbody(tableOneTbody, that.getElements.tableOneTbody,that.data.span,that.data.dataList);
+                let timer = setTimeout(function() {
+                  let wrapperHeight = $(".proposalTableContent").height();
+                  $(".proposalTableTop").height(wrapperHeight + 30);
+                  $(".wrapper").height(wrapperHeight + 30);
+                  clearTimeout(timer);
+                }, 500);
               }else {
                 $(".tableOne").hide()
               }

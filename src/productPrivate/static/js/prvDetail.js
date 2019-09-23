@@ -316,7 +316,7 @@ var prvDetail = {
                 $(".invDraw").show();
                 $(".invFloat .invCore").html(that.unitNetValue + "<span>(" + that.netValueDate.substr(that.netValueDate.indexOf("-") + 1, ) + ")</span>");
                 $(".invFloat .applyBuy").html("单位净值(元)");
-                that.getDrawData(180);
+                that.getDrawData(360);
             } else {
                 $(".invFloat .invCore").addClass("float").html(that.projectDownTime.replace(/\//g, "-"));
                 $(".invFloat .applyBuy").html("募集截止日");
@@ -344,15 +344,6 @@ var prvDetail = {
                 }
             }];
             $.ajaxLoading(objFloat);
-
-            // if (that.ifDraw) {
-            //     var objDraw = [];
-            //     //添加画图接口，参数为1/3/6/12
-            //     objDraw.push(that.getDrawData(180));
-            //     objDraw.push(that.getDrawData(360));
-            //     objDraw.push(that.getDrawData(""));
-            //     $.ajaxLoading(objDraw);
-            // }
         }
     },
     getUserObj:function(){
@@ -400,6 +391,7 @@ var prvDetail = {
         var that = this;
         //显示loading
         that.getElements.listLoading.show();
+        // num = 9999代表成立依赖
         if(num=='9999'){
             num=''
         }
@@ -428,8 +420,8 @@ var prvDetail = {
                 
 
                 // 有且只有第一个接口返回时，画第一个图
-                if (num == 180) {
-                    that.drawAction(180);
+                if (num == 360) {
+                    that.drawAction(360);
                 }
                 if(num==''){
                     that.drawAction(9999);
@@ -920,8 +912,6 @@ var prvDetail = {
             } else { 
                 that.getDrawData(Number(time)); 
             }
-            //画图
-            // that.drawAction(time);
 
             //改变对应的颜色
             $(this).siblings('.timeBtn').removeClass('active');
