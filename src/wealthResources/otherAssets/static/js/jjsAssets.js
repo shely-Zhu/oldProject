@@ -135,6 +135,9 @@ $(function() {
                 that.gV.navHeight = that.gV.listToTop-that.gV.navToTop;
                 that.height = windowHeight - that.gV.listToTop;
                 
+
+                console.log( '距顶部距离：' + that.gV.listToTop );
+
                 //that.highHeight = windowHeight-that.gV.navHeight;
             
                 that.highHeight = $('html').height()  - $('.nav-wrapper').height();
@@ -322,15 +325,15 @@ $(function() {
             var that = this;
 
             // 交互效果
-            $(window).scroll(function(event){
-                var e = $(window).scrollTop();
+            // $(window).scroll(function(event){
+            //     var e = $(window).scrollTop();
 
-                if(e>that.gV.navToTop){
-                    $('.nav-wrapper').addClass('nav_fixed');
-                    $('.scroll_mask').hide();
-                    $('.list').height(that.highHeight);
-                }
-            });
+            //     if(e>that.gV.navToTop){
+            //         $('.nav-wrapper').addClass('nav_fixed');
+            //         $('.scroll_mask').hide();
+            //         $('.list').height(that.highHeight);
+            //     }
+            // });
 
             //监听上拉手势
             // mui("#move_0")[0].addEventListener("dragend", function(e) {  
@@ -343,57 +346,69 @@ $(function() {
             //     }
                 
             // });
+            
 
-            var startY;
-
-            mui("#move_0")[0].addEventListener("touchstart", function(e) {  
+            // mui("#move_0")[0].addEventListener("scrollstart", function(e) {  
                 
-                //e.preventDefault();
-                //e.stopPropagation();
+            //     //e.preventDefault();
+            //     //e.stopPropagation();
 
-                startY = e.changedTouches[0].clientY;
+            //     console.log( $("#move_0 .mui-table-view").css('transform') );
                 
-            });
-
-            var toTop = false;
-
-            mui("#move_0")[0].addEventListener("touchmove", function(e) {  
-
-                //e.preventDefault();
-                //e.stopPropagation();
-
-                var moveEndY = e.changedTouches[0].clientY,
-                    Y = moveEndY - startY;
+            // });
 
 
-                var listToTop = $('.nav-wrapper')[0].getBoundingClientRect().top,
-                    sTop = $('#move_0 .mui-table-view')[0].getBoundingClientRect().top - $('.nav-wrapper').height() ;
 
-                if( ( Y < -50 ) && listToTop != 0){ 
-                    //上拉
+            // var startY;
+
+            // mui("#move_0")[0].addEventListener("touchstart", function(e) {  
+                
+            //     //e.preventDefault();
+            //     //e.stopPropagation();
+
+            //     startY = e.changedTouches[0].clientY;
+                
+            // });
+
+            // var toTop = false;
+
+            // mui("#move_0")[0].addEventListener("touchmove", function(e) {  
+
+            //     //e.preventDefault();
+            //     //e.stopPropagation();
+
+            //     var moveEndY = e.changedTouches[0].clientY,
+            //         Y = moveEndY - startY;
+
+
+            //     var listToTop = $('.nav-wrapper')[0].getBoundingClientRect().top,
+            //         sTop = $('#move_0 .mui-table-view')[0].getBoundingClientRect().top - $('.nav-wrapper').height() ;
+
+            //     if( ( Y < -50 ) && listToTop != 0){ 
+            //         //上拉
                     
-                    $(window).scrollTop(that.gV.listToTop);
+            //         //$(window).scrollTop(that.gV.listToTop);
 
-                    toTop = true;
+            //         toTop = true;
 
-                    //isTouch = false;
-                }
-                // else if( ( Y > 30) && listToTop >= 0 && sTop >= 0 ){
+            //         //isTouch = false;
+            //     }
+            //     // else if( ( Y > 30) && listToTop >= 0 && sTop >= 0 ){
 
-                //     //下拉
-                //     // isScroll = false;
-                //     // //下拉
-                //     // $(window).scrollTop(0);
+            //     //     //下拉
+            //     //     // isScroll = false;
+            //     //     // //下拉
+            //     //     // $(window).scrollTop(0);
 
-                //     toTop = false;
+            //     //     toTop = false;
 
-                //     // console.log( '回归' );
-                // }
-                else{
-                    toTop = false;
-                }
+            //     //     // console.log( '回归' );
+            //     // }
+            //     else{
+            //         toTop = false;
+            //     }
                 
-            });
+            // });
 
 
             // mui("#move_0")[0].addEventListener("touchend", function(e) {  
@@ -425,13 +440,42 @@ $(function() {
             // 　　});
 
             //监听滚动事件，做下拉判断
-            document.querySelector('#scroll1').addEventListener('scroll', function (e, event ) { 
+            var move = true;
 
-                if( toTop ){
-                    return false;
+            document.querySelector('#slider').addEventListener('scroll', function (e, event ) { 
+
+                //获取当前展示的tab的索引
+                var index = $('#slider .tab-scroll-wrap .mui-active').index();
+
+                var transformUl = $("#move_"+index+" .mui-table-view").css('transform') ;
+
+                // var bodyTransformUl = $("body").css('transform') ;
+
+                // var bodyTrans = bodyTransformUl.substring( bodyTransformUl.indexOf(',') );
+
+                // var bodyTransformNum = bodyTrans.substring( 2, bodyTrans.indexOf('px'));
+
+                //move为true，表示
+                if( move && e.detail.lastY < 0){
+                    
+                    $('body').css('transform', transformUl );
+
+                    var t = $('.nav-wrapper')[0].getBoundingClientRect().top;
+
+                    console.log('t:' + t);
+
+                    if( t <= 10 ){
+                        $('body').css('transform', 'translate3d(0px, -201px, 0px) translateZ(0px)' );
+                        move = false;
+                    }
                 }
+
+
+                // if( toTop ){
+                //     return false;
+                // }
                 
-                var listToTop = $('.nav-wrapper')[0].getBoundingClientRect().top;
+                //var listToTop = $('.nav-wrapper')[0].getBoundingClientRect().top;
 
                 // if( (e.detail.lastY < 0 ) && listToTop != 0){ 
                 //     //上拉
@@ -439,13 +483,46 @@ $(function() {
                 //     $(window).scrollTop(that.gV.listToTop);
                 //     console.log( '置顶' );
                 // }
-                if( (e.detail.lastY >= 0 ) && listToTop >= 0){  
-
+                
+                console.log( 'e.detail.lastY:' + e.detail.lastY )
+                
+                if( e.detail.lastY == 0 ){  
                     //下拉
-                    $(window).scrollTop(0);
+                    
+                    //body的
+                    
 
-                    console.log( '回归' );
+                    // if( bodyTransformNum == 0){
+                    //     move = false;
+                    //     return false;
+                    // }
+
+                    //var transformUl = $("#move_"+index+" .mui-table-view").css('transform') ;
+
+                    var trans = transformUl.substring( transformUl.indexOf(',') );
+
+                    var transformNum = trans.substring( 2, trans.indexOf('px'));
+
+                    if( Number(transformNum) > -201 ){
+
+                        $('body').css('transform', transformUl );
+
+                        $('#slider .mui-slider-item').each( function(i, el){
+                            if( i != index){
+                                $(el).find('.goTopBtn').trigger('tap');
+                            }
+                        })
+
+                        //其他的tab区域，也都回到滚动到顶部的位置
+                        //$("#move_"+index+" .mui-table-view").css('transform')
+
+                        move = true;
+                        
+                    }
                 }
+
+
+                
                 
                 
             }) 
