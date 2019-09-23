@@ -24,6 +24,7 @@ $(function() {
   var arg = splitUrl();
   var argType = arg['type'];
   var argId = arg['id']; //上一步带过来的资产配置id
+  var empNo = arg['empNo'];
   var somePage = {
     $e: {},
     gV: {},
@@ -149,8 +150,8 @@ $(function() {
           url: site_url.ReportData_api,
           data: {
             hmac: "", //预留的加密信息
-            params: {
-              //请求的参数信息
+            params: {//请求的参数信息
+              empNo:empNo
             }
           },
           needDataEmpty: true,
@@ -170,7 +171,7 @@ $(function() {
             $(".dimensionTxt1 span.investmentType").html(
               jsonData.investmentType
             );
-            $(".fontRed div").html(jsonData.riskTypeContent);
+            $(".fontRed span.riskTypeContent").html(jsonData.riskTypeContent);
             $(".appendix .appendixTxt").html(jsonData.macroEconomyContent);
             if(jsonData.assetConfigReportProduct){
               that.data.columns = that.data.listTable1.columns;

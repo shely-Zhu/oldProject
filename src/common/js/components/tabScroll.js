@@ -171,6 +171,9 @@
             var tab_scroll = new tabAction(options);
             tab_scroll.init();
 
+            // if( window.location.href.indexOf('/wealthResources/otherAssets/views/jjsAssets.html') != -1){
+            //     $('#slider .tab-scroll-action').removeClass('mui-slider-group');
+            // }
         }
     })
 

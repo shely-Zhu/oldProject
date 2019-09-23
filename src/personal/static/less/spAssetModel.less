@@ -93,7 +93,7 @@ body {
           width: 50%;
           height: auto;
           float: left;
-          padding-left: 0.95rem;
+          padding-left: 0.6rem;
           padding-top: 1.25rem;
           padding-bottom: 1.25rem;
           p {
@@ -127,39 +127,42 @@ body {
             }
           }
           .sp_four_item_present {
-            font-size: 0rem;
-            height: 1.15rem;
             margin-top: 1rem;
             overflow: hidden;
             display: table;
             vertical-align: middle;
 
-            position: relative;
-
             span {
-              display: table-cell;
               font-size: 0.85rem;
+              height: 0.85rem;
               color: #ac986d;
-              
+              display: table-cell;
             }
             span:last-of-type {
               margin-right: 0.2rem;
-              min-width: 2.4rem;
+              min-width:2.4rem;
             }
             ul {
                 display: table-cell;
-              overflow: hidden;
-
+              font-size: 0;
+              padding:0.25rem 0;
               li {
-                float: left;
-                width: 0.35rem;
-                height: 0.75rem;
-                border-radius: 0.3rem;
                 background-color: #dbc69a;
+                display: inline-block;
+                width: 0.35rem;
+                height: 0.7rem;
+                border-radius: 0.3rem;
                 margin-right: 0.15rem;
+                vertical-align:unset;
               }
               li.active {
                 background-color: #d75e33;
+                display: inline-block;
+                width: 0.35rem;
+                height: 0.7rem;
+                border-radius: 0.3rem;
+                margin-right: 0.15rem;
+                vertical-align:unset;
               }
               li:last-of-type {
                 margin-right: 0;
