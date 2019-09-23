@@ -1,0 +1,134 @@
+<!-- 其他(jjs)资产 -->
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <meta name="applicable-device" content="mobile">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="stylesheet" href="/wealthResources/otherAssets/static/css/demo.css">
+    <title>其他资产</title>
+</head>
+
+<body>
+    <!-- @@include('@pathCommonViews/load.html') -->
+    <section class="container">
+        <div class="banner">
+            <div class="bannerTop">
+                <div class="sum"><span class="j_text">总资产（元）</span><span class="j_icon iconfont"></span></div>
+                <div class="amount totalCount" >--</div>
+                
+            </div>
+            <ul class="mui-row jjs_type">
+                <li class="mui-col-sm-6 mui-col-xs-6 j_left">
+                    <span>已持仓(元）</span>
+                    <span class="j_already">--</span>
+                </li>
+                <li class="mui-col-sm-6 mui-col-xs-6">
+                    <span>待确认(元）</span>
+                    <span class="j_tobe">--</span>
+                </li>
+            </ul>
+        </div>
+        <!-- <div class="scroll_mask"></div> -->
+        <div class="mui-content  myAsset">
+        <!-- 放置页面内容 -->
+        </div>
+
+        <!-- 加载中loading -->
+        @@include('@pathCommonViews/loading/listLoading.html')
+        <!-- 暂无数据 -->
+        @@include('@pathCommonViews/noData.html')
+    </section>
+
+    <script id="first-template" type="text/x-handlebars-template">
+        {{! 列表 内容 使用mui的上拉加载}}
+        <div class="list">
+            {{! list是包裹上拉加载区域的，在js中计算当前页面中的list高度，不能超出一屏}}
+
+            {{! 初始化上拉加载区域，使用contentWrapper class}}
+            {{! contentWrapper 需要添加样式，具体见less文件}}
+            <div class="contentWrapper">
+
+                <ul class="mui-table-view">
+                    <li class="mui-table-view-cell">
+                    {{! 所有内容  需要放在这个li里，且里面不能再用Li元素}}
+                    {{{content}}}
+
+                    </li>
+                </ul>
+
+                <!-- 返回顶部 -->
+                @@include('@pathCommonViews/goTop.html')
+                
+            </div>
+        </div>
+    </script>
+    <script id="second-template" type="text/x-handlebars-template">
+        {{! 左侧页面列表}}
+        {{#if already}}
+            {{#each pageList}}
+                <div class="datalist" fundCode="{{fundCode}}"> 
+                    <h2>{{projectName}}</h2>
+                    <ul>
+                        <li>
+                            <span class="title">总资产</span>
+                            <span class="text"><span>{{balanceStr}}</span>元</span>
+                        </li>
+                        <li>
+                            <span class="title">票面利率</span>
+                            <span class="text"><i>{{profitStr}}</i></span>
+                        </li>
+                        <li>
+                            <span class="title">成立日期</span>
+                            <span class="text"><i>{{establishDateStr}}</i></span>
+                        </li>
+                        <li>
+                            <span class="title">产品期限</span>
+                            <span class="text"><i>{{deadLine}}</i></span>
+                        </li>
+                    </ul> 
+                </div>
+            {{/each}}
+        {{/if}}
+
+
+        {{#if tobe}}
+            {{#each pageList}}
+                <div class="datalist" fundCode="{{fundCode}}"> 
+                    <h2>{{projectName}}</h2>
+                    <ul>
+                        <li>
+                            <span class="title">预约金额</span>
+                            <span class="text"><span>{{besAmountMask}}</span>元</span>
+                        </li>
+                        <li>
+                            <span class="title">预约时间</span>
+                            <span class="text"><i>{{besTimeStr}}</i></span>
+                        </li>
+                        <li>
+                            <span class="title">到账金额</span>
+                            <span class="text"><i>{{transAmountMask}}</i></span>
+                        </li>
+                        <li>
+                            <span class="title">到账时间</span>
+                            <span class="text"><i>{{transDateStr}}</i></span>
+                        </li>
+                        <li>
+                            <span class="title">到账状态</span>
+                            <span class="text"><i>{{accountStatus}}</i></span>
+                        </li>
+                    </ul> 
+                </div>               
+            {{/each}}
+        {{/if}}
+    </script>
+    @@include('@pathInclude/views/footer.html')
+    <!-- 添加埋点 -->
+    @@include('@pathInclude/views/header.html')
+    <script src="/wealthResources/otherAssets/static/js/demo.js"></script>
+</body>
+
+</html>

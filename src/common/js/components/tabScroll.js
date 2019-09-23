@@ -138,7 +138,6 @@
 
             //监听mui的tab滑动事件
             document.getElementById('slider').addEventListener('slide', function(e) {
-
                 console.log('当前索引    ' + e.detail.slideNumber);
 
                 //有内容，不执行
@@ -172,6 +171,9 @@
             var tab_scroll = new tabAction(options);
             tab_scroll.init();
 
+            // if( window.location.href.indexOf('/wealthResources/otherAssets/views/jjsAssets.html') != -1){
+            //     $('#slider .tab-scroll-action').removeClass('mui-slider-group');
+            // }
         }
     })
 

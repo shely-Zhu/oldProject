@@ -1,8 +1,8 @@
 /*
-* @page: 请求app接口
+* @page: 请求app接口---待app强升后删除v3.12.0
 * @Author: shiyunrui
 * @Date:   2019-07-5 
-* @Last Modified by:   shiyunrui
+* @Last Modified by:   songxiaoyu
 * @description:
 */
 

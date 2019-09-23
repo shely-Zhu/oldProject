@@ -126,8 +126,9 @@ var splitUrl = require('./components/splitUrl.js')();
             })
             //发送ajax请求
             var ajaxFunc = function(obj) {
+            
                 var ajax = $.Deferred(); //声明一个deferred对象
-
+                // debugger
                 //设置ajax请求的contentType  data数据添加JSON.stringify
                 var contentType = 'application/json; charset=UTF-8',
                     data = JSON.stringify(obj.data);
@@ -193,7 +194,7 @@ var splitUrl = require('./components/splitUrl.js')();
 
                 
                 ajax.done(function(data) {
-                    
+                   
                     if (obj.needLogin) { // 需要登录
                         if (obj.loginNotJump && data.status == '4007') { //如果未登录，且不需要跳转,sso接口未登录code也是cf0004,需要通过islogin判断
                             //未登录状态下，不跳转页面，执行对应函数
@@ -232,6 +233,7 @@ var splitUrl = require('./components/splitUrl.js')();
                         if (!data.message) {
                             data.message = '系统异常';
                         }
+                        
 
                         obj.callbackFail ? obj.callbackFail(data) : tipAction(data.message);
 
@@ -249,7 +251,7 @@ var splitUrl = require('./components/splitUrl.js')();
                             return false;
                         // }
                     }
-
+                    
                     //数据请求成功且不为空，执行成功的回调函数
                     if (window.currentIsApp && obj.appRisk) {
                         obj.callbackDone(data, function() {
@@ -258,12 +260,14 @@ var splitUrl = require('./components/splitUrl.js')();
                         });
                     } else {
                         obj.callbackDone(data);
+                      
                     }
                 })
                 
 
                 //ajax错误的情况
                 ajax.fail(function(data, result, message) {
+               
                     obj.callbackFail ? obj.callbackFail(data) : tipAction("接口请求失败");
                 })
 

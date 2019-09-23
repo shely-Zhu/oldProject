@@ -181,9 +181,9 @@ gulp.task('proxyTask', function() {
         middleware: function(connect, opt) {
             return [
                 proxy(['/wap','/web/','/app'],  {
-                    // target: 'https://h5.htjf4.com',
+                    //  target: 'https://h5.htjf4.com',
                     // target: 'http://192.168.50.254:8085', 
-                    target: 'https://h5.chtfundtest.com',
+                     target: 'https://h5.chtfundtest.com',
                     changeOrigin:true,
                     secure: false,
                 }),

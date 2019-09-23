@@ -7,13 +7,13 @@
 require('../../../common/js/components/config/windowConfig.js');
 //跳转链接
 var goUrl = require('../../../common/js/components/config/goUrl.js'); 
-//私募接口
+// wap私募接口
 var pefApi = require('../../../common/js/components/config/pefApi.js');
-//公募接口
+// wap公募接口
 var pofApi = require('../../../common/js/components/config/pofApi.js');
-// 内容接口
+// wap内容接口
 var contentApi = require('../../../common/js/components/config/contentApi.js');
-// 账户相关
+// wap账户相关
 var accountApi = require('../../../common/js/components/config/accountApi.js');
 // pc和wap共用文件
 var webApi = require('../../../common/js/components/config/webApi.js');
