@@ -122,16 +122,16 @@ $(function() {
 
            //进入详情
            mui("body").on('tap', '#expense', function() {
-            if($(this).has(".price").length) return;
+            // if($(this).has(".price").length) return;
             window.location.href = site_url.payThemeCash_url;
           })
 
           mui("body").on('tap', '#appreciation', function() {
-            if($(this).has(".price").length) return;
+            // if($(this).has(".price").length) return;
             window.location.href = site_url.smMyAsset_url;
           })
           mui("body").on('tap', '#hedging', function() {
-            if($(this).has(".price").length) return;
+            // if($(this).has(".price").length) return;
             window.location.href = site_url.smMyAsset_url;
           })
 
