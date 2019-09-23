@@ -170,7 +170,7 @@ $(function() {
             $(".dimensionTxt1 span.investmentType").html(
               jsonData.investmentType
             );
-            $(".fontRed div").html(jsonData.riskTypeContent);
+            $(".fontRed span.riskTypeContent").html(jsonData.riskTypeContent);
             $(".appendix .appendixTxt").html(jsonData.macroEconomyContent);
             if(jsonData.assetConfigReportProduct){
               that.data.columns = that.data.listTable1.columns;
