@@ -186,8 +186,8 @@ $(function() {
                             that.dataHandle(tableOneTbody, that.data.needRowSpan, 1); // 3. 对数据进行处理（传入参数： 具体数据，需要跨行列的（key））
                             that.setThead(that.data.newArr, that.getElements.tableOneThead);
                             that.setTbody(tableOneTbody, that.getElements.tableOneTbody, that.data.span, that.data.dataList);
-                            let timer = setTimeout(function() {
-                                let wrapperHeight = $(".proposalTableContent").height();
+                            var timer = setTimeout(function() {
+                                var wrapperHeight = $(".proposalTableContent").height();
                                 $(".proposalTableTop").height(wrapperHeight + 30);
                                 $(".wrapper").height(wrapperHeight + 30);
                                 clearTimeout(timer);
@@ -203,8 +203,8 @@ $(function() {
                             that.dataHandle(tableTwoTbody, that.data.needRowSpan2, 2); // 3. 对数据进行处理（传入参数： 具体数据，需要跨行列的（key））
                             that.setThead(that.data.newArr2, that.getElements.tableTwoThead);
                             that.setTbody(tableTwoTbody, that.getElements.tableTwoTbody, that.data.span2, that.data.dataList2);
-                            let timer = setTimeout(function() {
-                                let wrapperHeight = $(".proposalTableContent").height();
+                            var timer = setTimeout(function() {
+                                var wrapperHeight = $(".proposalTableContent").height();
                                 $(".proposalTableTop").height(wrapperHeight + 30);
                                 $(".wrapper").height(wrapperHeight + 30);
                                 clearTimeout(timer);
