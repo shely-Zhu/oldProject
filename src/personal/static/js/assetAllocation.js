@@ -143,7 +143,7 @@ $(function() {
         init: function() {
             var that = this;
             that.getData();
-            that.getDrawData();
+           
         },
         getData: function() {
             var that = this;
@@ -219,6 +219,8 @@ $(function() {
                     } else {
                         $(".proposalTable").hide()
                     }
+
+                    that.getDrawData();
                 },
                 callbackFail: function(json) {
                     tipAction(json.msg);
