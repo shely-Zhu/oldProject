@@ -418,122 +418,8 @@ $(function() {
         events: function() { //绑定事件
             var that = this;
 
-            // 交互效果
-            $(window).scroll(function(event){
-                var e = $(window).scrollTop();
-
-                if(e>that.gV.navToTop){
-                    $('.nav-wrapper').addClass('nav_fixed');
-                }
-            });
-
-            //监听上拉手势
-            // mui("#move_0")[0].addEventListener("dragend", function(e) {  
-
-            //     var listToTop = $('.nav-wrapper')[0].getBoundingClientRect().top;
-
-            //     if( (e.detail.deltaY < 0 ) && listToTop != 0){ 
-            //         //上拉
-            //         $(window).scrollTop(that.gV.listToTop);
-            //     }
-
-            // });
-
-
-            // mui("#move_0")[0].addEventListener("scrollstart", function(e) {  
-
-            //     //e.preventDefault();
-            //     //e.stopPropagation();
-
-            //     console.log( $("#move_0 .mui-table-view").css('transform') );
-
-            // });
-
-
-
-            // var startY;
-
-            // mui("#move_0")[0].addEventListener("touchstart", function(e) {  
-
-            //     //e.preventDefault();
-            //     //e.stopPropagation();
-
-            //     startY = e.changedTouches[0].clientY;
-
-            // });
-
-            // var toTop = false;
-
-            // mui("#move_0")[0].addEventListener("touchmove", function(e) {  
-
-            //     //e.preventDefault();
-            //     //e.stopPropagation();
-
-            //     var moveEndY = e.changedTouches[0].clientY,
-            //         Y = moveEndY - startY;
-
-
-            //     var listToTop = $('.nav-wrapper')[0].getBoundingClientRect().top,
-            //         sTop = $('#move_0 .mui-table-view')[0].getBoundingClientRect().top - $('.nav-wrapper').height() ;
-
-            //     if( ( Y < -50 ) && listToTop != 0){ 
-            //         //上拉
-
-            //         //$(window).scrollTop(that.gV.listToTop);
-
-            //         toTop = true;
-
-            //         //isTouch = false;
-            //     }
-            //     // else if( ( Y > 30) && listToTop >= 0 && sTop >= 0 ){
-
-            //     //     //下拉
-            //     //     // isScroll = false;
-            //     //     // //下拉
-            //     //     // $(window).scrollTop(0);
-
-            //     //     toTop = false;
-
-            //     //     // console.log( '回归' );
-            //     // }
-            //     else{
-            //         toTop = false;
-            //     }
-
-            // });
-
-
-            // mui("#move_0")[0].addEventListener("touchend", function(e) {  
-
-            //     //e.preventDefault();
-            //     //e.stopPropagation();
-
-            //     isTouch = false;
-
-            // });
-
-            // var startY;
-            // 　$("body").on("touchstart", function(e) {
-
-            // 　　　　e.preventDefault();
-            // 　　　　startY = e.touches[0].pageY;
-            // 　　});
-            // 　　$("body").on("touchend", function(e) {
-            // 　　　　e.preventDefault();
-            // 　　　　var moveEndY = e.touches[0].pageY,
-            // 　　　　　　Y = moveEndY - startY;
-
-            // 　　　　if ( Y > 0) {
-            // 　　　　　　alert("top 2 bottom");
-            // 　　　　}
-            // 　　　　else if ( Y < 0 ) {
-            // 　　　　　　alert("bottom 2 top");
-            // 　　　　}
-            // 　　});
-
+            // 下拉
             mui("body")[0].addEventListener("swipedown", function(e) {
-
-                console.log('下拉');
 
                 //获取当前展示的tab的索引
                 var index = $('#slider .tab-scroll-wrap .mui-active').index();
@@ -548,13 +434,6 @@ $(function() {
                         }
                     })
                 }
-
-                if(that.gV.navToTop>10){
-                    $('.nav-wrapper').removeClass('nav_fixed');
-                } else{
-                    $('.nav-wrapper').addClass('nav_fixed');
-                }
-
             });
 
 
@@ -565,18 +444,11 @@ $(function() {
 
                 //获取当前展示的tab的索引
                 var index = $('#slider .tab-scroll-wrap .mui-active').index();
-
-
-
                 var transformUl = $("#move_" + index + " .mui-table-view").css('transform');
+                var t = $('.nav-wrapper')[0].getBoundingClientRect().top;
 
-                // var bodyTransformUl = $("body").css('transform') ;
 
-                // var bodyTrans = bodyTransformUl.substring( bodyTransformUl.indexOf(',') );
-
-                // var bodyTransformNum = bodyTrans.substring( 2, bodyTrans.indexOf('px'));
-
-                //move为true，表示
+                //move为true，
                 if (move && e.detail.lastY < 0) {
 
                     if ($("#move_" + index + " .list").hasClass('noMove')) {
@@ -587,30 +459,17 @@ $(function() {
 
                     var t = $('.nav-wrapper')[0].getBoundingClientRect().top;
 
-                    console.log('t:' + t);
-
                     if (t <= 10) {
                         $('.nav-wrapper').addClass('nav_fixed');
                         $('body').css('transform', 'translate3d(0px, -201px, 0px) translateZ(0px)');
                         move = false;
                     }
+                } else if(!move && (e.detail.lastY>-30 && e.detail.lastY!=0)){
+                    console.log(move);
+                    console.log(e.detail.lastY);
+                    $('.nav-wrapper').removeClass('nav_fixed');
+
                 }
-
-
-                // if( toTop ){
-                //     return false;
-                // }
-
-                //var listToTop = $('.nav-wrapper')[0].getBoundingClientRect().top;
-
-                // if( (e.detail.lastY < 0 ) && listToTop != 0){ 
-                //     //上拉
-                //     isScroll = true;
-                //     $(window).scrollTop(that.gV.listToTop);
-                //     console.log( '置顶' );
-                // }
-
-                console.log('e.detail.lastY:' + e.detail.lastY)
 
                 if (e.detail.lastY == 0) {
                     //下拉
@@ -620,9 +479,7 @@ $(function() {
                         var transformNum = trans.substring(2, trans.indexOf('px'));
 
                         if (Number(transformNum) > -201) {
-                            $('.nav-wrapper').removeClass('nav_fixed');
-
-                            //$(window).scrollTop(0);
+                            // 切换tab
 
                             $('body').css('transform', transformUl);
 
@@ -632,25 +489,17 @@ $(function() {
                                 }
                             })
 
-                            //其他的tab区域，也都回到滚动到顶部的位置
-                            //$("#move_"+index+" .mui-table-view").css('transform')
-
                             move = true;
-
                         }
                     }
-                }
-
-                if(that.gV.navToTop>10){
-                    $('.nav-wrapper').removeClass('nav_fixed');
                 }
             })
 
             // 文案提示
             mui("body").on('tap', '.j_icon', function(e) {
                 $("body").css({
-                    'height':windowHeight,
-                    'overflow-y':"hidden"
+                    'height': windowHeight,
+                    'overflow-y': "hidden"
                 });
 
                 $.elasticLayerTypeFive({
