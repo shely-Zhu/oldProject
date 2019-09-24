@@ -144,6 +144,11 @@
                     var that = this;
                     that.$close.on('click', function() {
 
+                        $("body").css({
+                            'height':'auto',
+                            'overflow-y':"initial"
+                        });
+
                         that.options.callback(that);
                         //关闭按钮事件即隐藏当前弹层
                         if (that.options.isHide) {

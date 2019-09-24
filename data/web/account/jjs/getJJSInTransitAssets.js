@@ -12,7 +12,7 @@ var mymessage = Mock.mock({
     data: {
         "totalInTransitAsset": '200000', // 在途资产汇总
         "totalInTransitAssetMask": '200,00', // 在途资产汇总 千分位
-        "pageList|0": [{
+        "pageList|3": [{
             "projectName": "项目名称", // 项目名称
             "besTime": "50.55", // 预约时间
             "besTimeStr": "-----", // 预约时间 yyyy-MM-dd格式

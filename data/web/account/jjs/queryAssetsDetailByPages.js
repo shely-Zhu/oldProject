@@ -36,6 +36,6 @@ var mymessage = Mock.mock({
         // "pageList":[]
     },
     "message":"操作成功！",
-    "status":"0000"
+    "status":"1000"
 });
 module.exports=mymessage;
