@@ -143,7 +143,7 @@ $(function() {
         init: function() {
             var that = this;
             that.getData();
-           
+
         },
         getData: function() {
             var that = this;
@@ -186,8 +186,8 @@ $(function() {
                             that.dataHandle(tableOneTbody, that.data.needRowSpan, 1); // 3. 对数据进行处理（传入参数： 具体数据，需要跨行列的（key））
                             that.setThead(that.data.newArr, that.getElements.tableOneThead);
                             that.setTbody(tableOneTbody, that.getElements.tableOneTbody, that.data.span, that.data.dataList);
-                            let timer = setTimeout(function() {
-                                let wrapperHeight = $(".proposalTableContent").height();
+                            var timer = setTimeout(function() {
+                                var wrapperHeight = $(".proposalTableContent").height();
                                 $(".proposalTableTop").height(wrapperHeight + 30);
                                 $(".wrapper").height(wrapperHeight + 30);
                                 clearTimeout(timer);
@@ -203,8 +203,8 @@ $(function() {
                             that.dataHandle(tableTwoTbody, that.data.needRowSpan2, 2); // 3. 对数据进行处理（传入参数： 具体数据，需要跨行列的（key））
                             that.setThead(that.data.newArr2, that.getElements.tableTwoThead);
                             that.setTbody(tableTwoTbody, that.getElements.tableTwoTbody, that.data.span2, that.data.dataList2);
-                            let timer = setTimeout(function() {
-                                let wrapperHeight = $(".proposalTableContent").height();
+                            var timer = setTimeout(function() {
+                                var wrapperHeight = $(".proposalTableContent").height();
                                 $(".proposalTableTop").height(wrapperHeight + 30);
                                 $(".wrapper").height(wrapperHeight + 30);
                                 clearTimeout(timer);
@@ -268,22 +268,17 @@ $(function() {
 
             el.append(trs);
         },
-        resetRowSpan(row, key, span, dataList) {
+        resetRowSpan:function(row, key, span, dataList) {
 
             if (span[key] && span[key][row]) {
-                if (
-                    dataList[row] &&
-                    dataList[row + 1] &&
-                    dataList[row]["zcfl"] == dataList[row + 1]["zcfl"]
-                ) {
+                if (dataList[row] && dataList[row + 1] && dataList[row]["zcfl"] == dataList[row + 1]["zcfl"]) {
                     var zcfl = dataList[row]["zcfl"];
                     var list = dataList.filter(function(item) {
                         return item["zcfl"] == zcfl;
                     });
 
                     if (span[key][row] > list.length) {
-                        span[key][row + list.length] =
-                            span[key][row] - list.length;
+                        span[key][row + list.length] = span[key][row] - list.length;
                         return list.length;
                     } else {
                         return span[key][row];
@@ -297,10 +292,8 @@ $(function() {
             } else {
                 return 1;
             }
-
-
         },
-        gerMaxCol(items) {
+        gerMaxCol:function(items) {
             var max = 0;
 
             function each(data) {
@@ -316,7 +309,7 @@ $(function() {
             each(items);
             return max;
         },
-        getMaxFloor(treeData) {
+        getMaxFloor:function(treeData) {
             var that = this;
             var max = 0;
 
@@ -333,7 +326,7 @@ $(function() {
             each(treeData, 1);
             return max;
         },
-        columnsHandle(treeData, type) {
+        columnsHandle:function(treeData, type) {
             var that = this;
             var maxFloor = type === 1 ? this.data.maxHeight : this.data.maxHeight2;
             var keyList = [];
@@ -393,7 +386,7 @@ $(function() {
             }
             each(treeData, 0);
         },
-        dataHandle(dataList, needRowSpan, type) {
+        dataHandle:function(dataList, needRowSpan, type) {
             var that = this;
             needRowSpan.forEach(function(key) {
                 var sum = {};
@@ -419,10 +412,7 @@ $(function() {
                         }
 
                     }
-                    if (
-                        dataList[j - 1] &&
-                        (dataList[j][key] === dataList[j - 1][key] || !dataList[j][key])
-                    ) {
+                    if (dataList[j - 1] && (dataList[j][key] === dataList[j - 1][key] || !dataList[j][key])) {
                         if (dataList[j]["zcfl"] == dataList[j - 1]["zcfl"]) {
                             var index = tdList.indexOf(key);
                             if (index > -1) {
@@ -514,7 +504,6 @@ $(function() {
 
             ];
             $.ajaxLoading(obj);
-
         },
         events: function() {}
     };

@@ -80109,7 +80109,7 @@ extendComponentView({
         };
         textEl.setStyle(alignStyle);
         subTextEl.setStyle(alignStyle);
-
+        
         // Render background
         // Get groupRect again because textAlign has been changed
         groupRect = group.getBoundingRect();
