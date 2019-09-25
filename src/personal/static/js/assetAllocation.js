@@ -12,12 +12,9 @@ require("@pathIncludJs/vendor/zepto/deferred.js");
 require("@pathCommonJs/components/utils.js");
 require("@pathCommonJs/ajaxLoading.js");
 require("@pathCommonJs/components/elasticLayer.js");
-require("@pathIncludJs/vendor/echarts.min.js");
 require("@pathCommonJs/getEchartsData.js");
 var tipAction = require("@pathCommonJs/components/tipAction.js");
 var splitUrl = require("@pathCommonJs/components/splitUrl.js");
-// debugger
-// var splitUrl = require('../../../common/js/components/splitUrl.js');
 
 $(function() {
     //url上参数

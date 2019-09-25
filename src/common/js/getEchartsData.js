@@ -89,325 +89,315 @@ var splitUrl = require("./components/splitUrl.js")();
 //var appIsLogin = require("./components/app/needLogin.js");
 
 (function($) {
-  $.extend($, {
-    getEchartsData: function(param) {
-      var defaultData = {
-          assetNowObj: {
-          el: "xzPie",
-          titleText: "客户资产配置现状",
-          color: [
-            "#968c8a",
-            "#94b6d1",
-            "#dd8045",
-            "#a4ab82",
-            "#d7b15c",
-            "#7ca59d",
-            "75c2ee",
-            "ad76dc"
-          ],
-          legendData: [],
-          seriesData: []
-        },
+    $.extend($, {
+        getEchartsData: function(param) {
+            var defaultData = {
+                assetNowObj: {
+                    el: "xzPie",
+                    titleText: "客户资产配置现状",
+                    color: [
+                        "#968c8a",
+                        "#94b6d1",
+                        "#dd8045",
+                        "#a4ab82",
+                        "#d7b15c",
+                        "#7ca59d",
+                        "75c2ee",
+                        "ad76dc"
+                    ],
+                    legendData: [],
+                    seriesData: []
+                },
 
-        //推荐饼状图配置
-        assetRecommendObj: {
-          el: "tjPie",
-          //titleText: this.title,
-          color: [
-            "#968c8a",
-            "#94b6d1",
-            "#dd8045",
-            "#a4ab82",
-            "#d7b15c",
-            "#7ca59d",
-            "75c2ee",
-            "ad76dc"
-          ],
-          legendData: [],
-          seriesData: []
-        },
+                //推荐饼状图配置
+                assetRecommendObj: {
+                    el: "tjPie",
+                    //titleText: this.title,
+                    color: [
+                        "#968c8a",
+                        "#94b6d1",
+                        "#dd8045",
+                        "#a4ab82",
+                        "#d7b15c",
+                        "#7ca59d",
+                        "75c2ee",
+                        "ad76dc"
+                    ],
+                    legendData: [],
+                    seriesData: []
+                },
 
-        //柱状图配置
-        barObj: {
-          el: "bar",
-          titleText: "",
-          color: ["#fed95c", "#ff6905"],
-          xAxisData: [],
-          data1: [],
-          data2: []
-        }
-      };
-      //请求画图数据
-      var obj = [
-        {
-          url: site_url[param.url],
-          data: {},
-          //async: false,
-          // needLogin:true,
-          needDataEmpty: true,
-          callbackDone: function(res) {
-            var data = res.data;
-            //先把这些数据清空
-            defaultData.assetRecommendObj.legendData = [];
-            defaultData.assetRecommendObj.seriesData = [];
-            defaultData.assetNowObj.legendData = [];
-            defaultData.assetNowObj.seriesData = [];
-            defaultData.barObj.xAxisData = [];
-            defaultData.barObj.data1 = [];
-            defaultData.barObj.data2 = [];
-
-            data.forEach((course, index, arr) => {
-              //这里的数据都是字典值，需要添加对应的文案
-              //资产分类
-              param.data.descArr.assetClassifyDic.forEach(
-                (list, i, listArr) => {
-                  if (list.keyNo == course.assetClassify) {
-                    course.assetClassifyText = list.keyValue;
-                  }
+                //柱状图配置
+                barObj: {
+                    el: "bar",
+                    titleText: "",
+                    color: ["#fed95c", "#ff6905"],
+                    xAxisData: [],
+                    data1: [],
+                    data2: []
                 }
-              );
-              //资产类别
-              param.data.descArr.assetTypeDic.forEach((list, i, listArr) => {
-                if (list.keyNo == course.assetType) {
-                  course.assetTypeText = list.keyValue;
+            };
+            //请求画图数据
+            var obj = [{
+                url: site_url[param.url],
+                data: {},
+                //async: false,
+                // needLogin:true,
+                needDataEmpty: true,
+                callbackDone: function(res) {
+                    var data = res.data;
+                    //先把这些数据清空
+                    defaultData.assetRecommendObj.legendData = [];
+                    defaultData.assetRecommendObj.seriesData = [];
+                    defaultData.assetNowObj.legendData = [];
+                    defaultData.assetNowObj.seriesData = [];
+                    defaultData.barObj.xAxisData = [];
+                    defaultData.barObj.data1 = [];
+                    defaultData.barObj.data2 = [];
+
+                    data.forEach(function(course, index, arr){
+                        //这里的数据都是字典值，需要添加对应的文案
+                        //资产分类
+                        param.data.descArr.assetClassifyDic.forEach(function(list, i, listArr){
+                                if (list.keyNo == course.assetClassify) {
+                                    course.assetClassifyText = list.keyValue;
+                                }
+                            }
+                        );
+                        //资产类别
+                        param.data.descArr.assetTypeDic.forEach(function(list, i, listArr){
+                            if (list.keyNo == course.assetType) {
+                                course.assetTypeText = list.keyValue;
+                            }
+                        });
+                        //画推荐饼图时，有金额推荐比例，拼画图需要的legend和series数据
+                        //  debugger
+                        if (course.assetRecommend != 0 && course.assetRecommend != null) {
+                            //饼图的数据
+                            defaultData.assetRecommendObj.legendData.push(
+                                course.assetTypeText
+                            );
+                            defaultData.assetRecommendObj.seriesData.push({
+                                value: course.assetRecommend,
+                                name: course.assetTypeText
+                            });
+                        }
+
+                        //画现状饼图时，有金额现状比例，拼画图需要的legend和series数据
+                        if (course.assetNowRatio != 0 && course.assetNowRatio != null) {
+                            defaultData.assetNowObj.legendData.push(course.assetTypeText);
+
+                            defaultData.assetNowObj.seriesData.push({
+                                value: course.assetNowRatio,
+                                name: course.assetTypeText
+                            });
+                        }
+
+                        //柱状图数据
+                        defaultData.barObj.xAxisData.push(course.assetTypeText);
+
+                        //判断有没有现状数据
+                        if (course.assetNow != 0 && course.assetNow != null) {
+                            var an = $.util.toThousand(course.assetNow) + "";
+                            //判断有没有小数点
+                            // if( an.indexOf('.') != -1){
+                            //  an = an.substring( 0, an.indexOf('.'));
+                            // }
+                            an = Math.round(an);
+                            defaultData.barObj.data1.push(Number(an));
+                        } else {
+                            defaultData.barObj.data1.push(0);
+                        }
+
+                        //判断有没有推荐数据
+                        if (course.assetRecommend != 0 && course.assetRecommend != null) {
+                            var ar = $.util.toThousand(course.assetRecommend) + "";
+                            //判断有没有小数点
+                            // if( ar.indexOf('.') != -1){
+                            //  ar = ar.substring( 0, ar.indexOf('.'));
+                            // }
+                            ar = Math.round(ar);
+                            defaultData.barObj.data2.push(Number(ar));
+                        } else {
+                            defaultData.barObj.data2.push(0);
+                        }
+                    });
+                    //画推荐饼图
+                    if (defaultData.assetRecommendObj.seriesData.length != 0) {
+                        //这时设置title
+                        defaultData.assetRecommendObj.title = param.data.title;
+                        drawPie(defaultData.assetRecommendObj);
+                    } else {
+                        $(".proposalPieContent").hide()
+                    }
+                    //画现状饼图
+                    if (defaultData.assetNowObj.seriesData.length != 0) {
+                        drawPie(defaultData.assetNowObj);
+                    } else {
+                        $(".analysis").hide()
+                    }
+                    var barNow = false;
+                    defaultData.barObj.data1.forEach(function(m, n, p){
+                        //0和null都不展示
+                        if (m != null && m != 0) {
+                            barNow = true;
+                        }
+                    });
+                    //现状有数据的时候，才画图
+                    if (barNow) {
+                        drawBar(defaultData.barObj);
+                        //添加之前清除data1 data2的数组数据
+                        //this.defaultData.barObj.data1=[]
+                        //this.defaultData.barObj.data2=[]
+                    } else {
+                        $(".adjust").hide()
+                    }
+                },
+                callbackFail: function(json) {
+                    tipAction(json.message);
                 }
-              });
-              //画推荐饼图时，有金额推荐比例，拼画图需要的legend和series数据
-        //  debugger
-              if (course.assetRecommend != 0 && course.assetRecommend != null) {
-                //饼图的数据
-                defaultData.assetRecommendObj.legendData.push(
-                  course.assetTypeText
-                );
-                defaultData.assetRecommendObj.seriesData.push({
-                  value: course.assetRecommend,
-                  name: course.assetTypeText
+            }];
+            $.ajaxLoading(obj);
+
+            //画饼图
+            function drawPie(obj) {
+                // 基于准备好的dom，初始化echarts实例
+                var myChart = echarts.init(document.getElementById(obj.el));
+                var normal = {
+                    borderColor: "#FFF",
+                    borderWidth: 1
+                };
+
+                // 绘制图表
+                if (obj.seriesData.length == 1) {
+                    normal = {
+                        borderColor: "",
+                        borderWidth: 0
+                    };
+                }
+
+                myChart.setOption({
+                    color: obj.color,
+                    backgroundColor: "#fff",
+                    title: {
+                        text: obj.titleText ? obj.titleText : param.data.title, //配置了就用配置的，否则用外部设置的title
+                        x: "center",
+                        textStyle: {
+                            fontSize: 18,
+                            color: "#e5e5e5",
+                            fontWeight: "lighter"
+                        }
+                    },
+
+                    legend: {
+                        selectedMode: false,
+                        orient: "horizontal",
+                        bottom: "30",
+                        data: obj.legendData,
+                        padding: [5, 50],
+                        itemWidth: 10,
+                        itemHeight: 10
+                    },
+
+                    series: [{
+                        type: "pie",
+                        legendHoverLink: false,
+                        hoverAnimation: false,
+                        animation: false,
+                        radius: "55%",
+                        center: ["50%", "40%"],
+                        label: {
+                            normal: {
+                                position: "outside",
+                                formatter: "{d}%",
+                                fontSize: 6,
+                                color: "#999"
+                            }
+                        },
+                        labelLine: {
+                            normal: {
+                                show: true
+                            }
+                        },
+                        data: obj.seriesData,
+                        itemStyle: {
+                            normal: normal
+                        }
+                    }]
                 });
-              }
-
-              //画现状饼图时，有金额现状比例，拼画图需要的legend和series数据
-              if (course.assetNowRatio != 0 && course.assetNowRatio != null) {
-                defaultData.assetNowObj.legendData.push(course.assetTypeText);
-
-                defaultData.assetNowObj.seriesData.push({
-                  value: course.assetNowRatio,
-                  name: course.assetTypeText
+                return myChart.getDataURL();
+            }
+            //绘制柱状图
+            function drawBar(obj) {
+                var myChart = echarts.init(document.getElementById(obj.el));
+                myChart.setOption({
+                    backgroundColor: "",
+                    color: obj.color,
+                    title: {
+                        text: obj.titleText
+                    },
+                    tooltip: {
+                        trigger: "axis"
+                    },
+                    legend: {
+                        data: ["资产配置现状", "建议资产配置"],
+                        bottom: "bottom",
+                        itemWidth: 10,
+                        itemHeight: 10
+                    },
+                    calculable: true,
+                    grid: {
+                        left: "10%",
+                        bottom: "35%",
+                        containLabel: true
+                    },
+                    xAxis: [{
+                        type: "category",
+                        data: obj.xAxisData,
+                        axisLabel: {
+                            interval: 0,
+                            rotate: 30,
+                            align: "right",
+                            margin: 10,
+                            fontSize: 8
+                        }
+                    }],
+                    yAxis: [{
+                        type: "value",
+                        name: "(万元)"
+                    }],
+                    series: [{
+                            name: "资产配置现状",
+                            type: "bar",
+                            data: obj.data1,
+                            label: {
+                                normal: {
+                                    show: true,
+                                    position: "top",
+                                    textStyle: {
+                                        color: "#999"
+                                    }
+                                }
+                            }
+                        },
+                        {
+                            name: "建议资产配置",
+                            type: "bar",
+                            data: obj.data2,
+                            label: {
+                                //offset: [20,50],
+                                normal: {
+                                    show: true,
+                                    position: "top",
+                                    textStyle: {
+                                        color: "#999"
+                                    }
+                                }
+                            }
+                        }
+                    ]
                 });
-              }
-
-              //柱状图数据
-              defaultData.barObj.xAxisData.push(course.assetTypeText);
-
-              //判断有没有现状数据
-              if (course.assetNow != 0 && course.assetNow != null) {
-                var an = $.util.toThousand(course.assetNow) + "";
-                //判断有没有小数点
-                // if( an.indexOf('.') != -1){
-                //  an = an.substring( 0, an.indexOf('.'));
-                // }
-                an = Math.round(an);
-                defaultData.barObj.data1.push(Number(an));
-              } else {
-                defaultData.barObj.data1.push(0);
-              }
-
-              //判断有没有推荐数据
-              if (course.assetRecommend != 0 && course.assetRecommend != null) {
-                var ar = $.util.toThousand(course.assetRecommend) + "";
-                //判断有没有小数点
-                // if( ar.indexOf('.') != -1){
-                //  ar = ar.substring( 0, ar.indexOf('.'));
-                // }
-                ar = Math.round(ar);
-                defaultData.barObj.data2.push(Number(ar));
-              } else {
-                defaultData.barObj.data2.push(0);
-              }
-            });
-            //画推荐饼图
-            if (defaultData.assetRecommendObj.seriesData.length != 0) {
-              //这时设置title
-              defaultData.assetRecommendObj.title = param.data.title;
-              drawPie(defaultData.assetRecommendObj);
-            }else {
-              $(".proposalPieContent").hide()
             }
-            //画现状饼图
-            if (defaultData.assetNowObj.seriesData.length != 0) {
-                drawPie(defaultData.assetNowObj);
-            }else {
-              $(".analysis").hide()
-            }
-            var barNow = false;
-            defaultData.barObj.data1.forEach((m, n, p) => {
-              //0和null都不展示
-              if (m != null && m != 0) {
-                barNow = true;
-              }
-            });
-            //现状有数据的时候，才画图
-            if (barNow) {
-                drawBar(defaultData.barObj);
-              //添加之前清除data1 data2的数组数据
-              //this.defaultData.barObj.data1=[]
-              //this.defaultData.barObj.data2=[]
-            }else{
-              $(".adjust").hide()
-            }
-          },
-          callbackFail: function(json) {
-            tipAction(json.message);
-          }
         }
-      ];
-      $.ajaxLoading(obj);
-
-      //画饼图
-      function drawPie(obj) {
-        // 基于准备好的dom，初始化echarts实例
-        let myChart = echarts.init(document.getElementById(obj.el));
-        let normal = {
-          borderColor: "#FFF",
-          borderWidth: 1
-        };
-
-        // 绘制图表
-        if (obj.seriesData.length == 1) {
-          normal = {
-            borderColor: "",
-            borderWidth: 0
-          };
-        }
-
-        myChart.setOption({
-          color: obj.color,
-          backgroundColor: "#fff",
-          title: {
-            text: obj.titleText ? obj.titleText : param.data.title, //配置了就用配置的，否则用外部设置的title
-            x: "center",
-            textStyle: {
-              fontSize: 18,
-              color: "#e5e5e5",
-              fontWeight: "lighter"
-            }
-          },
-
-          legend: {
-            selectedMode: false,
-            orient: "horizontal",
-            bottom: "30",
-            data: obj.legendData,
-            padding: [5, 50],
-            itemWidth: 10,
-            itemHeight: 10
-          },
-
-          series: [
-            {
-              type: "pie",
-              legendHoverLink: false,
-              hoverAnimation: false,
-              animation: false,
-              radius: "55%",
-              center: ["50%", "40%"],
-              label: {
-                normal: {
-                  position: "outside",
-                  formatter: "{d}%",
-                  fontSize: 6,
-                  color: "#999"
-                }
-              },
-              labelLine: {
-                normal: {
-                  show: true
-                }
-              },
-              data: obj.seriesData,
-              itemStyle: {
-                normal: normal
-              }
-            }
-          ]
-        });
-        return myChart.getDataURL();
-      }
-      //绘制柱状图
-      function drawBar(obj) {
-        let myChart = echarts.init(document.getElementById(obj.el));
-        myChart.setOption({
-          backgroundColor: "",
-          color: obj.color,
-          title: {
-            text: obj.titleText
-          },
-          tooltip: {
-            trigger: "axis"
-          },
-          legend: {
-            data: ["资产配置现状", "建议资产配置"],
-            bottom: "bottom",
-            itemWidth: 10,
-            itemHeight: 10
-          },
-          calculable: true,
-          grid: {
-            left: "10%",
-            bottom: "35%",
-            containLabel: true
-          },
-          xAxis: [
-            {
-              type: "category",
-              data: obj.xAxisData,
-              axisLabel: {
-                interval: 0,
-                rotate: 30,
-                align: "right",
-                margin: 10,
-                fontSize: 8
-              }
-            }
-          ],
-          yAxis: [
-            {
-              type: "value",
-              name: "(万元)"
-            }
-          ],
-          series: [
-            {
-              name: "资产配置现状",
-              type: "bar",
-              data: obj.data1,
-              label: {
-                normal: {
-                  show: true,
-                  position: "top",
-                  textStyle: {
-                    color: "#999"
-                  }
-                }
-              }
-            },
-            {
-              name: "建议资产配置",
-              type: "bar",
-              data: obj.data2,
-              label: {
-                //offset: [20,50],
-                normal: {
-                  show: true,
-                  position: "top",
-                  textStyle: {
-                    color: "#999"
-                  }
-                }
-              }
-            }
-          ]
-        });
-      }
-    }
-  });
+    });
 })(Zepto);
