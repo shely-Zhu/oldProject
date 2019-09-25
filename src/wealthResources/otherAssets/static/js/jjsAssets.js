@@ -464,11 +464,8 @@ $(function() {
                         $('body').css('transform', 'translate3d(0px, -201px, 0px) translateZ(0px)');
                         move = false;
                     }
-                } else if(!move && (e.detail.lastY>-30 && e.detail.lastY!=0)){
-                    console.log(move);
-                    console.log(e.detail.lastY);
+                } else if(!move && (e.detail.lastY>-30 && e.detail.lastY!=0)){ // 等于0是tab切换
                     $('.nav-wrapper').removeClass('nav_fixed');
-
                 }
 
                 if (e.detail.lastY == 0) {
