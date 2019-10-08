@@ -40,6 +40,8 @@ body {
         }
 
         .mui-table-view-cell {
+            padding:0;
+
 
             &:after {
                 content: none;
@@ -49,7 +51,10 @@ body {
                 background-color: @c005;
             }
 
-            padding: 0 1.7rem;
+            .card-theme{
+                padding-top:1px;
+            }
+
         }
     }
 
@@ -196,8 +201,12 @@ body {
         .card-theme,
         .search-list {
             .mui-row {
-                padding: 1.4rem 0;
+                padding: 1.4rem 1.7rem;
                 border-bottom: 1px solid @f6f9ff;
+
+                &:first-child{
+                    padding-top: 2.2rem;
+                }
 
                 .imgNum {
                     width: 1.5rem;

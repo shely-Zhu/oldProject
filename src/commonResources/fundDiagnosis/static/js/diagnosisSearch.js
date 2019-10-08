@@ -250,7 +250,7 @@ $(function() {
             })
             
             //为li标签点击事件委托
-            mui("body").on("tap", ".card-theme ", function (event) {
+            mui("body").on("tap", ".mui-row", function (event) {
                 if (event.target) {
                     var fundCode = $($(this).find('.lightColor')[0]).attr("fundCode");
                     $("#searchInput").val("");
