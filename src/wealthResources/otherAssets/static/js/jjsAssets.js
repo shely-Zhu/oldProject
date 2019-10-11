@@ -88,7 +88,7 @@ $(function() {
 
             $.each(that.gV.navList, function(i, el) {
                 that.gV.ajaxArr[el.num] = {
-                    pageNum: that.gV.aP.pageNo, //当前第几页(默认为1) 非必填项, 默认设置成第一页
+                    pageNo: that.gV.aP.pageNo, //当前第几页(默认为1) 非必填项, 默认设置成第一页
                     pageSize: that.gV.aP.pageSize, //每页显示几条数据(默认10) 非必填项， 默认设置成20
                 }
 
@@ -250,7 +250,7 @@ $(function() {
                         //重设当前页码
                         if (!$.util.objIsEmpty(pageList)) {
                             //设置每个ajax传参数据中的当前页码
-                            that.gV.ajaxArr[that.gV.current_index].pageNum++;
+                            that.gV.ajaxArr[that.gV.current_index].pageNo++;
                         }
                     } else {
                         //没有数据
@@ -263,7 +263,7 @@ $(function() {
 
                         if (that.listLength < that.gV.aP.pageSize) {
 
-                            if (that.gV.ajaxArr[that.gV.current_index].pageNum == 1) {
+                            if (that.gV.ajaxArr[that.gV.current_index].pageNo == 1) {
                                 //第一页时
                                 if (that.listLength == 0) {
                                     //没有数据
@@ -305,7 +305,7 @@ $(function() {
 
                         $id.find('.contentWrapper .mui-pull-bottom-pocket').removeClass('mui-hidden');
 
-                        if (that.gV.ajaxArr[that.gV.current_index].pageNum == 1) {
+                        if (that.gV.ajaxArr[that.gV.current_index].pageNo == 1) {
                             //第一屏
                             $id.find('.contentWrapper .mui-table-view-cell').html(that.html);
                         } else {
