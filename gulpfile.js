@@ -24,7 +24,7 @@ var gulp = require('gulp'),
     path = require('path'),
     fs = require('fs'),
     os = require('os'),
-    minimist = require('minimist'), //命令行替换变量   
+    minimist = require('minimist'), //命令行替换变量
     //其他所需文件
     erudaFile = fs.readFileSync('conf/eruda.js', 'utf-8'), //读取eruda.js内容
     CustomEventIeFile = fs.readFileSync('conf/CustomEventIE.js', 'utf-8'), //读取CustomEventIE.js文件内容
@@ -49,7 +49,7 @@ var gulp = require('gulp'),
 * 添加了明泽/股份的默认root.js中envOrigin的打包
 * envOrigin， 默认为1，表示股份
 *
-* 因此环境命令使用变为： 
+* 因此环境命令使用变为：
 * * gulp ，此时打包本地股份代码
 * * gulp --envOrigin 0, 打包本地明泽代码
 * * gulp --env 1, 打包联调股份代码
@@ -67,7 +67,7 @@ var knownOptions = {
     string: 'env', //设置环境变量
     default: {
         env: process.env.NODE_ENV || '0', //默认开发环境
-        envOrigin: 0 //默认股份 
+        envOrigin: 0 //默认股份
     }
 };
 
@@ -180,10 +180,10 @@ gulp.task('proxyTask', function() {
         livereload: true,
         middleware: function(connect, opt) {
             return [
-                proxy(['/wap','/web/','/app'],  {
+                proxy(['/wap','/web/','/app','jf'],  {
                     //  target: 'https://h5.htjf4.com',
-                    // target: 'http://192.168.50.254:8085', 
-                     target: 'https://h5.chtfundtest.com',
+                    // target: 'http://192.168.50.254:8085',
+                    target: 'https://h5.chtfundtest.com',
                     changeOrigin:true,
                     secure: false,
                 }),
@@ -199,7 +199,7 @@ gulp.task('mockProxy', function() {
         livereload: true,
         middleware: function(connect, opt) {
             return [
-                proxy(['/wap','/web/','/app'],  {
+                proxy(['/wap','/web/','/app','/api'],  {
                     target: 'http://'+localIp + ':8088',
                     changeOrigin:true,
                     secure: false,
@@ -210,6 +210,7 @@ gulp.task('mockProxy', function() {
 })
 
 
+
 //zip做服务器部署的时候讲我们打包出的文件压缩成一个zip包
 gulp.task('zip', ['initialTask'], function() {
     return gulp.src(host.path + '**')
@@ -217,7 +218,7 @@ gulp.task('zip', ['initialTask'], function() {
         .pipe(gulp.dest(host.path));
 });
 
-//默认任务  
+//默认任务
 // if (options.env === '0' || options.env === '1') { //当开发环境的时候构建命令执行mock服务
 if (options.env === '0' ) { //当开发环境的时候构建命令执行mock服务
     console.log("开发环境执行mock模拟数据服务器");
@@ -485,7 +486,7 @@ gulp.task("htmd", function() {
     return gulp.src(['src/include/js/vendor/buriedPoint/**/*.js'])
         .pipe(gulp.dest(host.path + 'include/js/vendor/buriedPoint/'))
 
-}) 
+})
 
 //不使用webpack的 js文件打包
 gulp.task("includeJs", ['htmd'], function() {
@@ -681,7 +682,7 @@ gulp.task('dataFile', function() {
 
                 fp = fp.substring( fp.indexOf('src\\')+4 ).replace(/\\/g, '/');
 
-                //获得当前文件路径，作为key    
+                //获得当前文件路径，作为key
                 //if( contentArr.length == 0){
                     //第一条时前面不加,
                     contentArr.push('\n\"' + fp + '\" : \"{ evtid: \'' + beginId + '\'\, topic: \'页面加载\'\, info: \'\'}\" ');
@@ -701,9 +702,9 @@ gulp.task('dataFile', function() {
                     contentArr = contentArr.join();
 
                     //将contentArr写入文件并收尾
-                    fs.appendFileSync( filePath , contentArr + '\n}', 'utf8'); 
+                    fs.appendFileSync( filePath , contentArr + '\n}', 'utf8');
                 }
-            
+
                 //this.push(file);
                 cb()
             })
@@ -728,10 +729,10 @@ gulp.task('rootEnv', function() {
                             //if (options.env != '0' ) {
                                 //非本地环境时
                                 var fileCon = file.contents.toString();
-                                
+
                                 //替换真正的env和envOrigin变量，是根据root.js文件中第一行注释的//截取内容的，所以
                                 //root.js中，envOrigin那一句后面，一定要有//的注释。。。。。
-                                fileCon = 'var env = ' + options.env + ';\n' + 'var envOrigin = ' + i + ';\n' 
+                                fileCon = 'var env = ' + options.env + ';\n' + 'var envOrigin = ' + i + ';\n'
                                             + fileCon.substring( fileCon.indexOf('//'));
 
                                 file.contents = new Buffer(fileCon);
@@ -744,7 +745,7 @@ gulp.task('rootEnv', function() {
                     .pipe( plugins.rename(function(path){
                         console.log( rootName[i] );
                         //如果图片是common中的
-                        path.basename = path.basename + '_' + rootName[i]; 
+                        path.basename = path.basename + '_' + rootName[i];
 
                         console.log(path);
                     }))
@@ -762,7 +763,7 @@ gulp.task('rootEnv', function() {
                     //替换后的文件修改文件名，打出到middle/root文件夹中
                     .pipe(gulp.dest(host.middle + 'root'))
             })(i)
-            
+
         }
     }
 });
