@@ -6,140 +6,10 @@
 @import url("@pathCommonLess/reset.less");
 @import url("@pathCommonLess/color.less");
 
-@import url("@pathCommonLessCom/againEnter.less");
-@import url("@pathCommonLessCom/alertBox.less");
+@import url("@pathCommonLessCom/againEnter_750.less");
+@import url("@pathCommonLessCom/alertBox_750.less");
 
 
-// 持仓详情
-.latestAdjustment {
-    padding: 0 1.6rem 0.8rem 1.6rem;
-    color: @c002;
-    text-align: left;
-    margin-bottom: 2rem;
-    font-size: 1.4rem;
-
-    h2 {
-        height: 4.8rem;
-        line-height: 4.8rem;
-        font-size: 1.6rem;
-        // padding-bottom: 0.7rem;
-        // padding-top: 1.4rem;
-
-        .date {
-            font-size: 1.2rem;
-            margin-left: 0.8rem;
-        }
-
-        .more {
-            padding-top: 0.3rem;
-            float: right;
-            font-size: 1.2rem;
-            color: @c003;
-            vertical-align: middle;
-            .iconfont{
-                font-size: 1.2rem;
-            }
-        }
-    }
-
-    .reason {
-        padding-top: 0.8rem;
-        padding-bottom: 0.8rem;
-        color: @c003;
-        position: relative;
-
-
-        &:before {
-            .fullLine();
-            height: 0;
-            top: 0;
-        }
-    }
-
-    .mui-row {
-        position: relative;
-        height: 4.9rem;
-
-        span {
-            padding-top: 0.8rem;
-            font-size: 1.2rem;
-        }
-
-        &:after {
-            .leftIndentLine();
-        }
-
-        &:last-child {
-            &:after {
-                content: none;
-            }
-
-        }
-
-        // 红色
-        .redColor {
-            color: @c010;
-        }
-
-        .greenColor {
-            color: @c051;
-        }
-    }
-
-    .detailT {
-        text-align: right;
-        position: relative;
-        line-height: 3.6rem;
-        color: @c003;
-        font-size: 1.2rem;
-
-        span {
-            &:first-child {
-                text-align: left;
-            }
-        }
-    }
-
-    .listDiv .ellipsis {
-        display: block;
-        font-size: 1.4rem;
-    }
-
-    .listDiv{
-        .alignR, .alignC {
-            padding-top:1rem;
-        }
-    } 
-}
-
-// 标题
-.combiT {
-    font-size: 1.6rem;
-    line-height: 4rem;
-    margin-top: 0.8rem;
-}
-
-.iconBase() {
-    font-family: "iconfont";
-    content: '\e600';
-    position: absolute;
-    top: 0;
-    left: 0;
-    color: @c002;
-}
-
-// 左对齐
-.alignL {
-    text-align: left;
-}
-
-// 右对齐
-.alignR {
-    text-align: right;
-}
-.alignC{
-    text-align: center;
-}
 // 样式重置
 .adjustmentRecord {
     .contentWrapper {
@@ -151,7 +21,7 @@
 
 			// 最后一个list样式被遮了
             &>ul:last-child{
-            	margin-bottom: 1rem;
+            	margin-bottom: 0.2rem;
             }
         }
     }
@@ -199,4 +69,135 @@
         }
     }
 
+}
+
+// 持仓详情
+.latestAdjustment {
+    padding: 0 0.32rem 0.16rem 0.32rem;
+    color: @c002;
+    text-align: left;
+    margin-bottom: 0.4rem;
+    font-size: 0.28rem;
+
+    h2 {
+        height: 0.96rem;
+        line-height: 0.96rem;
+        font-size: 0.32rem;
+        // padding-bottom: 0.14rem;
+        // padding-top: 0.28rem;
+
+        .date {
+            font-size: 0.24rem;
+            margin-left: 0.16rem;
+        }
+
+        .more {
+            padding-top: 0.06rem;
+            float: right;
+            font-size: 0.24rem;
+            color: @c003;
+            vertical-align: middle;
+            .iconfont{
+                font-size: 0.24rem;
+            }
+        }
+    }
+
+    .reason {
+        padding-top: 0.16rem;
+        padding-bottom: 0.16rem;
+        color: @c003;
+        position: relative;
+
+
+        &:before {
+            .fullLine();
+            height: 0;
+            top: 0;
+        }
+    }
+
+    .mui-row {
+        position: relative;
+        height: 0.98rem;
+
+        span {
+            padding-top: 0.16rem;
+            font-size: 0.24rem;
+        }
+
+        &:after {
+            .leftIndentLine();
+        }
+
+        &:last-child {
+            &:after {
+                content: none;
+            }
+
+        }
+
+        // 红色
+        .redColor {
+            color: @c010;
+        }
+
+        .greenColor {
+            color: @c051;
+        }
+    }
+
+    .detailT {
+        text-align: right;
+        position: relative;
+        line-height: 0.72rem;
+        color: @c003;
+        font-size: 0.24rem;
+
+        span {
+            &:first-child {
+                text-align: left;
+            }
+        }
+    }
+
+    .listDiv .ellipsis {
+        display: block;
+        font-size: 0.28rem;
+    }
+
+    .listDiv{
+        .alignR, .alignC {
+            padding-top:0.2rem;
+        }
+    } 
+}
+
+// 标题
+.combiT {
+    font-size: 0.32rem;
+    line-height: 0.8rem;
+    margin-top: 0.16rem;
+}
+
+.iconBase() {
+    font-family: "iconfont";
+    content: '\e600';
+    position: absolute;
+    top: 0;
+    left: 0;
+    color: @c002;
+}
+
+// 左对齐
+.alignL {
+    text-align: left;
+}
+
+// 右对齐
+.alignR {
+    text-align: right;
+}
+.alignC{
+    text-align: center;
 }
