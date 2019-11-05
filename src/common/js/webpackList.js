@@ -198,4 +198,7 @@ module.exports = {
     //musubpage里面所有的二级页面
     './mysubpage/static/js/regulatoryAccounts' : './src/mysubpage/static/js/regulatoryAccounts.js',
 
+    // 月度报告列表页
+    './mysubpage/static/js/monthReportList' : './src/mysubpage/static/js/monthReportList.js',
+
 }

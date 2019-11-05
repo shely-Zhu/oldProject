@@ -1,0 +1,202 @@
+// 月度报告列表页
+// @author zhangyanping 2019-11-01
+
+@import url("../../../include/css/mui.min.css");
+@import url('@pathCommonLess/mui/resetMUI.less');
+@import url("@pathCommonLess/reset.less");
+@import url("@pathCommonLess/color.less");
+
+@import url("@pathCommonLessCom/againEnter.less");
+@import url("@pathCommonLessCom/alertBox.less");
+
+
+// 持仓详情
+.latestAdjustment {
+    padding: 0 1.6rem 0.8rem 1.6rem;
+    color: @c002;
+    text-align: left;
+    margin-bottom: 2rem;
+    font-size: 1.4rem;
+
+    h2 {
+        height: 4.8rem;
+        line-height: 4.8rem;
+        font-size: 1.6rem;
+        // padding-bottom: 0.7rem;
+        // padding-top: 1.4rem;
+
+        .date {
+            font-size: 1.2rem;
+            margin-left: 0.8rem;
+        }
+
+        .more {
+            padding-top: 0.3rem;
+            float: right;
+            font-size: 1.2rem;
+            color: @c003;
+            vertical-align: middle;
+            .iconfont{
+                font-size: 1.2rem;
+            }
+        }
+    }
+
+    .reason {
+        padding-top: 0.8rem;
+        padding-bottom: 0.8rem;
+        color: @c003;
+        position: relative;
+
+
+        &:before {
+            .fullLine();
+            height: 0;
+            top: 0;
+        }
+    }
+
+    .mui-row {
+        position: relative;
+        height: 4.9rem;
+
+        span {
+            padding-top: 0.8rem;
+            font-size: 1.2rem;
+        }
+
+        &:after {
+            .leftIndentLine();
+        }
+
+        &:last-child {
+            &:after {
+                content: none;
+            }
+
+        }
+
+        // 红色
+        .redColor {
+            color: @c010;
+        }
+
+        .greenColor {
+            color: @c051;
+        }
+    }
+
+    .detailT {
+        text-align: right;
+        position: relative;
+        line-height: 3.6rem;
+        color: @c003;
+        font-size: 1.2rem;
+
+        span {
+            &:first-child {
+                text-align: left;
+            }
+        }
+    }
+
+    .listDiv .ellipsis {
+        display: block;
+        font-size: 1.4rem;
+    }
+
+    .listDiv{
+        .alignR, .alignC {
+            padding-top:1rem;
+        }
+    } 
+}
+
+// 标题
+.combiT {
+    font-size: 1.6rem;
+    line-height: 4rem;
+    margin-top: 0.8rem;
+}
+
+.iconBase() {
+    font-family: "iconfont";
+    content: '\e600';
+    position: absolute;
+    top: 0;
+    left: 0;
+    color: @c002;
+}
+
+// 左对齐
+.alignL {
+    text-align: left;
+}
+
+// 右对齐
+.alignR {
+    text-align: right;
+}
+.alignC{
+    text-align: center;
+}
+// 样式重置
+.adjustmentRecord {
+    .contentWrapper {
+        height: 100%;
+        overflow: hidden;
+
+        .recordList {
+            padding: 0;
+
+			// 最后一个list样式被遮了
+            &>ul:last-child{
+            	margin-bottom: 1rem;
+            }
+        }
+    }
+
+    .mui-card {
+        padding-left: 0;
+    }
+
+    .mui-table-view-cell.mui-active {
+        background-color: @c005;
+    }
+
+    .mui-table-view-cell>a:not(.mui-btn).mui-active {
+        background-color: @c005;
+    }
+
+    .latestAdjustment.mui-card {
+        box-shadow: none;
+    }
+
+    .mui-table-view-cell.mui-collapse .mui-collapse-content {
+        margin-top: 0;
+    }
+
+    .mui-table-view:after {
+        height: 0;
+    }
+
+    .mui-table-view-cell:after {
+        height: 0;
+    }
+
+
+
+
+
+    // 隐藏头部
+    h2 {
+        display: none;
+    }
+
+    .reason {
+        &:after {
+            .leftIndentLine();
+        }
+    }
+
+}

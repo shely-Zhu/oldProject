@@ -1,0 +1,80 @@
+<!-- 月度报告列表页
+ @author zhangyanping 2019-11-01
+-->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+	<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+	<meta name="applicable-device" content="mobile">
+	<meta content="telephone=no" name="format-detection"/>
+	<meta name="apple-mobile-web-app-capable" content="yes">
+	<meta name="apple-mobile-web-app-status-bar-style" content="black">
+	<link rel="stylesheet" href="/mysubpage/static/css/monthReportList.css">
+	<script type="text/javascript" src="/include/js/adaptation_750ui.js"></script>
+	<title>月度报告列表页</title>
+</head>
+<body>
+	
+	@@include('@pathCommonViews/load.html')
+	@@include('@pathCommonViews/noData.html')
+	@@include('@pathCommonViews/loading/listLoading.html')
+	<div class="adjustmentRecord">
+		<div class="list">
+			<div class="contentWrapper">
+				<ul class="mui-table-view">
+					<li class="mui-table-view-cell recordList">
+						<!--放置列表-->
+					</li>
+					<!-- 返回顶部 -->
+					@@include('../../common/views/goTop.html')
+				</ul>
+			</div>
+		</div>
+	</div>
+	
+	<script id="adjustment-template" type="text/x-handlebars-template">
+	{{#each this}}
+		{{#if recordPage}}
+		{{!-- 调仓记录页，折叠 --}}
+		 <ul class="mui-card mui-table-view marginTop">
+				<li class="mui-table-view-cell mui-collapse">
+					<a class="mui-navigate-right" href="#">{{transferDate}}</a>
+				
+		{{/if}}
+
+		<div class="mui-card marginTop latestAdjustment mui-collapse-content">
+			<h2>最新调仓<span class="date">{{transferDate}}</span><span class="more">查看更多<span class='iconfont'>&#xe600;</span></span></h2>
+			<div class="reason">{{transferCause}}</div>
+			{{#each fundList}}
+			<div class='listDiv mui-row'>
+				<div class="mui-col-xs-6 fundN">
+					<span class="ellipsis">{{fundName}}</span>
+					<span>({{fundCode}})</span>
+				</div>
+				<span class="mui-col-xs-3 alignR">{{fundOriginalScale}}%</span>
+				<span class="mui-col-xs-1 alignC iconfont">&#xe6f4;</span>
+				<span class="mui-col-xs-2 alignR {{colorName}}">{{fundNewScale}}%</span>
+			</div>
+			{{/each}}
+		</div>
+
+		{{#if recordPage}}
+			</li>
+		</ul>
+		{{/if}}
+	{{/each}}
+</script>
+	 
+	 @@include('@pathInclude/views/footer.html')
+	<script src="/include/js/iscroll.js"></script>
+	 
+	 
+	 <!-- 添加埋点 -->
+	@@include('@pathInclude/views/header.html')
+	 <!-- <script src="/intelligentInvestment/static/js/adjustmentRecord.js"></script> -->
+	<script src="/mysubpage/static/js/monthReportList.js"></script>
+
+</body>
+</html>
