@@ -18,6 +18,8 @@ require('../../../common/js/ajaxLoading.js');
 require('../../../common/js/components/elasticLayer.js');
 
 var splitUrl = require('../../../common/js/components/splitUrl.js');
+//引入复制功能
+var Clipboard = require('clipboard');
 
 
 $(function(){
@@ -93,18 +95,26 @@ $(function(){
         events: function() {
             var that = this;
 
-            //点击公募开户
-            $('.copy_btn').on('tap', function() {
 
-            	console.log($(this).parent('p').find("span").eq(0).text());
+            //点击复制按钮
+            $('.copy_btn').on('tap', function(el) {
+            	var $this = $(this);
 
-			//实例化clipboard
+            	//console.log($(this).parent('p').find("span").eq(1).text());
+
+            	var copyText = $this.siblings('span').text()
+
+			    //实例化clipboard
 				var clipboard = new Clipboard('.copy_btn', {
 					text: function () {
-						return $(this).parent('p').find("span").eq(0).text();
+
+						console.log(copyText);
+						return copyText;
 					}
 				});
+
 				clipboard.on("success", function (e) {
+					//text = '';
 					tipAction("复制成功");
 				});
 				clipboard.on("error", function (e) {
