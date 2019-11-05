@@ -3,11 +3,11 @@
 
 @import url("../../../include/css/mui.min.css");
 @import url('@pathCommonLess/mui/resetMUI.less');
-@import url("@pathCommonLess/reset_750.less");
+@import url("@pathCommonLess/reset.less");
 @import url("@pathCommonLess/color.less");
 
-@import url("@pathCommonLessCom/againEnter_750.less");
-@import url("@pathCommonLessCom/alertBox_750.less");
+@import url("@pathCommonLessCom/againEnter.less");
+@import url("@pathCommonLessCom/alertBox.less");
 
 
 // 样式重置
@@ -28,10 +28,18 @@
 
     .mui-card {
         padding-left: 0;
+        font-size: 0.5rem
+    }
+
+    .mui-table-view-cell{
+    	padding: 30px 15px;
     }
 
     .mui-table-view-cell.mui-active {
         background-color: @c005;
+    }
+    .mui-table-view-cell>a:not(.mui-btn){
+    	margin: -30px -15px;
     }
 
     .mui-table-view-cell>a:not(.mui-btn).mui-active {
@@ -44,6 +52,7 @@
 
     .mui-table-view-cell.mui-collapse .mui-collapse-content {
         margin-top: 0;
+        padding: 30px 15px;
     }
 
     .mui-table-view:after {
