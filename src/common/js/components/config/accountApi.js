@@ -29,4 +29,7 @@ module.exports = function() {
     this.combinAccList_api = http_url.account_url + '/smartInvestment/tradAcctList';
     //标普资产信息
     // this.getTotalAssets_api = http_url.account_url + '/standardPoor/getTotalAssets';
+
+    // 月度报告
+    this.queryMonthlyReport_api = http_url.account_url + '/queryMonthlyReport';
 };

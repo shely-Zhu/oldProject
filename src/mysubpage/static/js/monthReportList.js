@@ -92,12 +92,8 @@ $(function() {
             var that = this;
 
             var obj = [{ // 系统调仓记录列表
-                url: site_url.combinTransferList_api,
-                data: {
-                    "combCode": that.gV.groupCode, //组合代码 
-                    "pageCurrent": that.gV.pageCurrent, //非必须，默认为1
-                    "pageSize": "10" //非必须，默认为10
-                },
+                url: site_url.queryMonthlyReport_api,
+                data: {},
                 //async: false,
                 needDataEmpty: true,
                 callbackDone: function(json) {
@@ -107,12 +103,8 @@ $(function() {
                         that.$e.noData.show();
                         return false;
                     } else {
-                        data = json.data.transferRecordList;
+                        data = json.data;
                     }
-
-                    // 判断调仓升降，添加颜色
-                    data = that.dealData(data);
-
 
                     setTimeout(function() {
 
@@ -154,24 +146,23 @@ $(function() {
             }];
             $.ajaxLoading(obj);
         },
-        dealData: function(data) {
-            $.each(data, function(a, b) {
-                b['recordPage'] = true;
+        events: function() {
+        	var that = this;
 
-                $.each(b.fundList, function(i, j) {
-                    var m = Number(j.fundOriginalScale),
-                        n = Number(j.fundNewScale);
+   //      	mui("body").trigger('tap', '.mui-table-view-cell .mui-table-view', function() {
+   //      		var $this = $(this);
+   //      		// $this.addClass('dropDown');
+			// 	// var muiActive=$this.find('.mui-collapse').addClass('mui-active');;
+			// 	if($this.find('mui-active')){
+			// 		$this.find('.mui-collapse').removeClass('mui-active');
+			// 		$this.removeClass('pickUp');
+			// 	}else{
+			// 		$this.find('.mui-collapse').addClass('mui-active');
+			// 		$this.addClass('pickUp');
+			// 	}
+			// })
 
-                    if (m > n) {
-                        j['colorName'] = 'greenColor';
-                    } else if (m < n) {
-                        j['colorName'] = 'redColor';
-                    }
-                })
-            })
-            return data;
         },
-        events: function() {},
     };
     somePage.init();
 });
