@@ -24,6 +24,7 @@ module.exports = {
 
     //user
     './user/static/js/login': "./src/user/static/js/login.js", //登陆
+    './user/static/js/htjf4Login': "./src/user/static/js/htjf4Login.js", //联调环境登陆
     './user/static/js/forgetLoginPassword/findpwd': "./src/user/static/js/forgetLoginPassword/findpwd.js", //手机验证
     './user/static/js/forgetLoginPassword/resetPassword': "./src/user/static/js/forgetLoginPassword/resetPassword.js", //重设密码
     './user/static/js/mallLogin': "./src/user/static/js/mallLogin.js", //登陆
