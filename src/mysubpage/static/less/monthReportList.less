@@ -12,6 +12,12 @@
 .mui-table-view:before{
 	height: 0;
 }
+.mui-pull{
+	position:static;
+}
+.mui-pull-bottom-pocket{
+	overflow: visible;
+}
 
 // 样式重置
 .adjustmentRecord {
@@ -116,14 +122,23 @@
 
 // 持仓详情
 .latestAdjustment {
+	position:relative;
 	padding: 0 0.32rem 0.16rem 0.32rem;
 	color: @c002;
 	text-align: left;
 	margin-bottom: 0.4rem;
 	font-size: 0.28rem;
+	border-top:1px solid @F7FAFD;
 	border-bottom-right-radius: 0.3rem;
 	border-bottom-left-radius: 0.3rem;
-
+	.circle_left{
+		position:absolute;
+		width: 0.15rem;
+		height: 0.3rem;
+		color:#000;
+		border-top-right-radius: 0.15rem;
+		border-bottom-right-radius: 0.15rem;
+	}
 	h2 {
 		height: 0.96rem;
 		line-height: 0.96rem;
@@ -254,4 +269,36 @@
 		font-size: 0.24rem;
 		color: @9B9B9B;
 	}
+}
+
+.noData{
+	width: 100%;
+	padding-top:1.1rem;
+	.box{
+		margin: 0.6rem auto 0;
+		text-align: center;
+		font-size: 0.32rem;
+		color: @9B9B9B;
+		img{
+			width: 2.18rem;
+			height: 2.18rem;
+		}
+		.tipText{
+			margin-bottom: 0.3rem;
+		}
+		.tipAdvise{
+			font-size: 0.24rem;
+		}
+	}
+	.productBtn{
+		margin: 0.4rem auto 0;
+		width: 4.1rem;
+		height: 0.8rem;
+		line-height: 0.8rem;
+		font-size: 0.32rem;
+		border-radius: 0.04rem;
+		text-align: center;
+		background-image: linear-gradient(135deg, #F1CDA8 0%, #B57E45 100%);
+	}
+
 }

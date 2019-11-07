@@ -99,8 +99,9 @@ $(function() {
                 callbackDone: function(json) {
                     var data;
 
-                    if (json.data.totalCount == 0) { // 没有记录不展示
+                    if (json.data.length == 0) { // 没有记录不展示
                         that.$e.noData.show();
+                        $('.adjustmentRecord').hide();
                         return false;
                     } else {
                         data = json.data;

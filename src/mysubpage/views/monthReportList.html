@@ -18,8 +18,21 @@
 <body>
 	
 	@@include('@pathCommonViews/load.html')
-	@@include('@pathCommonViews/noData.html')
+	<!--@@include('@pathCommonViews/noData.html')  -->
 	@@include('@pathCommonViews/loading/listLoading.html')
+	<!-- 暂无数据 -->
+	<div class="without noData" id="emptyBox" style="display:none;">
+		<div class="box vertical center">
+			<img src="/mysubpage/static/img/noneList.png">
+			<!-- <p class="iconfont">&#xe603;</p> -->
+			<p class="tipText">您暂无月度投资报告</p>
+			<p class="tipAdvise">持仓产品后可获得定制化个性投资分析报告</p>
+			<p class="tipAdvise">立即查看产品进行持仓</p>
+		</div>
+		<div class="productBtn">去浏览产品</div>
+	</div>
+
+
 	<div class="adjustmentRecord">
 		<div class="list">
 			<div class="contentWrapper">
@@ -41,6 +54,8 @@
 				<a class="monthYear mui-navigate-right" href="#">{{years}}</a>
 
 				<div class="mui-card marginTop latestAdjustment mui-collapse-content">
+					<div class='circle_left'></div>
+					<div class='circle_right'></div>
 					{{#each monthReportsList}}
 						<a href="javascript:;" class='monthlyReport'> 
 							<span class='reportName'>{{reportName}}</span>

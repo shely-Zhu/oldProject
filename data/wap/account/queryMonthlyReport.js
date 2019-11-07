@@ -124,6 +124,7 @@ var incomeDetail = Mock.mock({
 
         }]
     }],
+ 	// "data":[],
     "message": "操作成功！",
     "status": "0000"
 });
