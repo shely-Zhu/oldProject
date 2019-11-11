@@ -204,4 +204,7 @@ module.exports = {
     // 月度报告列表页
     './mysubpage/static/js/monthReportList' : './src/mysubpage/static/js/monthReportList.js',
 
+    // 会员权益成长值记录
+    './mysubpage/static/js/membershipInterestsRecord' : './src/mysubpage/static/js/membershipInterestsRecord.js',
+
 }
