@@ -183,14 +183,14 @@ gulp.task('proxyTask', function() {
                 proxy('/app',  {
                      target: 'https://app.htjf4.com',
                     // target: 'http://192.168.50.254:8085',
-                    // target: 'https://h5.chtfundtest.com',
+                    // target: 'https://app.chtfundtest.com',
                     changeOrigin:true,
                     secure: false,
                 }),
 
                 proxy(['/wap','/web/','jf'],  {
                      target: 'https://h5.htjf4.com',
-                    // target: 'http://192.168.50.254:8085',
+                    // target: 'http://172.16.187.245:8080',
                     // target: 'https://h5.chtfundtest.com',
                     changeOrigin:true,
                     secure: false,

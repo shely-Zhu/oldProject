@@ -19,13 +19,22 @@ var pdfModel={
 
 		// pdf转canvas
 		// var url = '/productPrivate/static/img/demo.pdf';
-		var marUrl = splitUrl()["type"]
+		var marUrl = splitUrl()["type"];
+		var pageUrl = window.location.href;
+		var pdfId;
 		var objUrl,dataPdf;
+
+		if(pageUrl.indexOf('protocol') != -1){
+			pdfId = '';
+		}
+		else if(pageUrl.indexOf('policy') != -1){
+			pdfId = 132;
+		}
 		
 		var obj = [{
 			url: site_url.findInvestorClassification_api,
 			data:{
-				ids: '',
+				ids: pdfId,
 				custType:'',
 				investType:'',
 				applyType:'',
@@ -84,24 +93,24 @@ var pdfModel={
 				// 获取第i页
 				//
 				pdf.getPage(i).then(function getPageHelloWorld(page) {
-				var scale = 1.5;
-				var viewport = page.getViewport(scale);
+					var scale = 1.5;
+					var viewport = page.getViewport(scale);
 
-				//
-				// Prepare canvas using PDF page dimensions
-				//
-				var canvas = document.createElement('canvas');
-				var context = canvas.getContext('2d');
-				canvas.height = viewport.height;
-				canvas.width = viewport.width;
+					//
+					// Prepare canvas using PDF page dimensions
+					//
+					var canvas = document.createElement('canvas');
+					var context = canvas.getContext('2d');
+					canvas.height = viewport.height;
+					canvas.width = viewport.width;
 
-				// 这里拿body当pdf容器
-				document.getElementById('canvasBox').appendChild(canvas);
+					// 这里拿body当pdf容器
+					document.getElementById('canvasBox').appendChild(canvas);
 
-				
-				// Render PDF page into canvas context
-				//
-				page.render({canvasContext: context, viewport: viewport});
+					
+					// Render PDF page into canvas context
+					//
+					page.render({canvasContext: context, viewport: viewport});
 				});
 			}
 			

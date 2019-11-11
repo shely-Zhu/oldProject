@@ -93,7 +93,7 @@ $(function() {
 
             var obj = [{ // 月度报告列表
                 url: site_url.queryMonthlyReport_api,
-                // data: {},
+                data: {},
                 //async: false,
                 needDataEmpty: true,
                 callbackDone: function(json) {
