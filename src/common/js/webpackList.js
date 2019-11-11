@@ -201,5 +201,7 @@ module.exports = {
 
     // 月度报告列表页
     './mysubpage/static/js/monthReportList' : './src/mysubpage/static/js/monthReportList.js',
+    // 登录日志查询页面
+    './mysubpage/static/js/journal':'./src/mysubpage/static/js/journal.js',
 
 }
