@@ -198,15 +198,15 @@ module.exports = {
     './allServerResources/appMd/headerMd' : './src/allServerResources/appMd/headerMd.js',
 
 
-    //musubpage里面所有的二级页面
-    './mysubpage/static/js/regulatoryAccounts' : './src/mysubpage/static/js/regulatoryAccounts.js',
+    //mine里面所有的二级页面
+    './mine/static/js/regulatoryAccounts' : './src/mine/static/js/regulatoryAccounts.js',
 
     // 月度报告列表页
-    './mysubpage/static/js/monthReportList' : './src/mysubpage/static/js/monthReportList.js',
+    './mine/static/js/monthReport/monthReportList' : './src/mine/static/js/monthReport/monthReportList.js',
     // 登录日志查询页面
-    './mysubpage/static/js/journal':'./src/mysubpage/static/js/journal.js',
+    './mine/static/js/journal':'./src/mine/static/js/journal.js',
 
     // 会员权益成长值记录
-    './mysubpage/static/js/membershipInterestsRecord' : './src/mysubpage/static/js/membershipInterestsRecord.js',
+    './mine/static/js/membershipInterestsRecord' : './src/mine/static/js/membershipInterestsRecord.js',
 
 }
