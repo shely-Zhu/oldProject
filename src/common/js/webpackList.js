@@ -80,6 +80,8 @@ module.exports = {
     './include/js/modelPage/imgModel': "./src/include/js/modelPage/imgModel.js",
     //include---专题模板
     './include/js/modelPage/activityModel': './src/include/js/modelPage/activityModel.js',
+    // pdfModel
+    './include/js/modelPage/pdfModel': './src/include/js/modelPage/pdfModel.js',
 
     //老带新
     './user/static/js/recommendRegister': "./src/user/static/js/recommendRegister.js", //注册
