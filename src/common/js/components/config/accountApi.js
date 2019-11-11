@@ -31,5 +31,5 @@ module.exports = function() {
     // this.getTotalAssets_api = http_url.account_url + '/standardPoor/getTotalAssets';
 
     // 月度报告
-    this.queryMonthlyReport_api = http_url.account_url + '/queryMonthlyReport';
+    this.queryMonthlyReport_api = http_url.account_url + '/frontend/queryMonthlyReport';
 };

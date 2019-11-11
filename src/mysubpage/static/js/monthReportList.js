@@ -91,9 +91,9 @@ $(function() {
         getData: function(t) {
             var that = this;
 
-            var obj = [{ // 系统调仓记录列表
+            var obj = [{ // 月度报告列表
                 url: site_url.queryMonthlyReport_api,
-                data: {},
+                // data: {},
                 //async: false,
                 needDataEmpty: true,
                 callbackDone: function(json) {

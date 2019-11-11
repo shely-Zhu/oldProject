@@ -114,6 +114,9 @@ module.exports = function() {
     this.queryGrowthDetailList_api = http_url.web_url + '/account/queryGrowthDetailList';
     //成长值区间
     this.selectCustomerGrowthTier_api = http_url.web_url + '/account/selectCustomerGrowthTier';
+    
+
+    this.findProtocolContent_api = http_url.web_url + '/content/frontend/findProtocolContent';
 
 
 };
