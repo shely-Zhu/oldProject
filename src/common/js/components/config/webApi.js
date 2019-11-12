@@ -117,6 +117,7 @@ module.exports = function() {
     
 
     this.findProtocolContent_api = http_url.web_url + '/content/frontend/findProtocolContent';
-
+    //会员权益详情-获取会员权益详情
+    this.findBenefitByLevel_api=http_url.web_url + '/content/findBenefitByLevel';
 
 };
