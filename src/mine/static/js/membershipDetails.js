@@ -10,7 +10,7 @@ require('@pathIncludJs/vendor/zepto/deferred.js');
 
 require('@pathCommonJsCom/utils.js');
 require('@pathCommonJs/ajaxLoading.js');
-
+require("@pathCommonJsCom/headBarConfig.js")
 $(function(){
 	let somePage = {
 		//获取页面元素
