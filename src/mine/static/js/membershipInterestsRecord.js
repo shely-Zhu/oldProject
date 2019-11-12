@@ -1,28 +1,41 @@
 //  会员权益成长值记录
 // @author caoqiahi 2019-11-11 
 
+
+
+require('@pathIncludJs/vendor/config.js');
+require('@pathIncludJs/vendor/zepto/callback.js');
+require('@pathIncludJs/vendor/zepto/deferred.js');
+require('@pathCommonJs/components/utils.js');
+require('@pathCommonJs/ajaxLoading.js');
+require('@pathCommonJs/components/elasticLayer.js');
+require('@pathCommonJs/components/elasticLayerTypeTwo.js');
+var tipAction = require('@pathCommonJs/components/tipAction.js');
+var splitUrl = require('@pathCommonJs/components/splitUrl.js')();
 var generateTemplate = require('@pathCommonJsComBus/generateTemplate.js');
 
 $(function(){
     var regulatory = {
         $e:{
             hotFundList: $('.content .li'), // 列表
-            fundListTemp: $('#fundList-template'), // 模板赋值
+            fundListTemp: $('#List-template'), // 模板赋值
             listLoading: $('.listLoading'), //所有数据区域，第一次加载的loading结构
             noData: $('.noData'), //没有数据的结构
         },
         gV: {
-            pageCurrent: 1, //当前页码，默认为1
+            pageNo: 1, //当前页码，默认为1
             pageSize: 10,
             search: false, // 搜索
         },
         init:function(){
             var that = this;
             
-            mui("#mui-progressbar").progressbar({progress:20}).show();
+            mui("#mui-progressbar").progressbar({progress:80}).show();
 
             that.beforeFunc();
             that.initMui(); // 兼容下面函数调用
+
+            that.getDataNum();
 
 			//
 			// that.events();
@@ -33,7 +46,6 @@ $(function(){
             //设置切换区域的高度
             //计算节点高度并设置
             var height = window.innerHeight - $('.banner').height();
-            console.log($('.content').hasClass('setHeight'))
 
             if (!$('.content').hasClass('setHeight')) {
                 $('.content').height(height).addClass('setHeight');
@@ -82,12 +94,95 @@ $(function(){
                 $('.content').addClass('hasPullUp');
             });
         },
+        getDataNum:function () {
+            var that = this;
+
+            var obj = [{ //成长值查询
+			    url: site_url.queryGrowthValue_api,
+			    data: {},
+			    needLogin:true, //需要判断是否登陆
+			    //needDataEmpty: false, //不需要判断data是否为空
+			    async: false,
+			    callbackDone: function(json){  //成功后执行的函数
+
+			    	var num = json.data.growthValue;
+
+                    $('.positwoleft').html(num);
+			    },
+			    callbackNoData: function( json ){
+			    	//数据为空
+			    	
+			    }
+			}];
+
+
+			$.ajaxLoading(obj);
+        },
             //数据初始化
-		getData:function(){
+		getData:function(t){
             
+            var that = this
 
+            mui('.content').pullRefresh().pullupLoading();
 	       
+            
+            var obj = [{
+                url: site_url.queryGrowthDetailList_api, //成长值流水
+                data: {
+                    "pageNo": that.gV.pageNo,
+                    "pageSize": 10,
 
+                },
+                needDataEmpty: false,
+                callbackDone: function(json) {
+                    var dataList;
+                    console.log(json)
+
+                    // 待定
+                    if (json.data.totalCount == 0) { // 没有记录不展示
+                        that.$e.noData.show();
+                        return false;
+                    } else {
+                        dataList = json.data.pageList;
+                    }
+
+                    setTimeout(function() {
+
+                        if (dataList.length < that.gV.pageSize) {
+
+                            if (that.gV.pageCurrent == 1) { //第一页时
+
+                                if (dataList.length == 0) {
+                                    // 暂无数据显示
+                                    that.$e.noData.show();
+                                    return false;
+
+                                } else { // 没有更多数据了
+                                    t.endPullupToRefresh(true);
+                                }
+                            } else {
+                                //其他页-没有更多数据
+                                t.endPullupToRefresh(true);
+                            }
+                        } else { // 还有更多数据
+                            t.endPullupToRefresh(false);
+                        }
+
+                        // 页面++
+                        that.gV.pageNo++;
+
+                        //去掉mui-pull-bottom-pocket的mui-hidden
+                        $('.content').find('.mui-pull-bottom-pocket').removeClass('mui-hidden');
+                        // 将列表插入到页面上
+                        generateTemplate(dataList, that.$e.hotFundList, that.$e.fundListTemp);
+                    }, 200)
+
+                },
+                callbackFail: function(json) {
+                    tipAction(json.msg);
+                }
+            }]
+            $.ajaxLoading(obj);
 
 		},
     }
