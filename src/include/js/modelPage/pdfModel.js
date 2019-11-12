@@ -28,7 +28,7 @@ var pdfModel={
 			pdfId = '';
 		}
 		else if(pageUrl.indexOf('policy') != -1){
-			pdfId = '132';
+			pdfId = '131';
 		}
 		
 		var obj = [{
