@@ -208,5 +208,6 @@ module.exports = {
 
     // 会员权益成长值记录
     './mine/static/js/membershipInterestsRecord' : './src/mine/static/js/membershipInterestsRecord.js',
-
+    // 会员权益详情
+    './mine/static/js/membershipDetails' : './src/mine/static/js/membershipDetails.js',
 }
