@@ -210,4 +210,6 @@ module.exports = {
     './mine/static/js/membershipInterestsRecord' : './src/mine/static/js/membershipInterestsRecord.js',
     // 会员权益详情
     './mine/static/js/membershipDetails' : './src/mine/static/js/membershipDetails.js',
+    // 我的奖励
+    './mine/static/js/rewards' : './src/mine/static/js/rewards.js',
 }
