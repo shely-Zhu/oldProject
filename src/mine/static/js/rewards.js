@@ -1,5 +1,7 @@
-// 我的抽奖的奖励
-
+/*
+ * 我的奖励 
+ * @author zhangyanping 2019-11-12
+*/
 require('@pathIncludJs/vendor/config.js');
 
 //zepto模块

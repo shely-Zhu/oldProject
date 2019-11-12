@@ -28,23 +28,19 @@ var pdfModel={
 			pdfId = '';
 		}
 		else if(pageUrl.indexOf('policy') != -1){
-			pdfId = 132;
+			pdfId = '132';
 		}
 		
 		var obj = [{
 			url: site_url.findInvestorClassification_api,
 			data:{
 				ids: pdfId,
-				custType:'',
-				investType:'',
-				applyType:'',
-				clientType:'',
 			},
+			contentTypeSearch:true,
 			needLogin: true,
 			needDataEmpty:false,//不需要判断data是否为空
 			callbackDone:function(json){
 				var jsonData = json.data;
-				debugger
 				// 服务协议和隐私政策公用一个接口，需先判断返回的content（富文本）是否有内容，优先展示富文本，富文本无内容时展示PDF
 				if(jsonData[0].content){
 
