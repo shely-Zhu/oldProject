@@ -5,14 +5,9 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
-	<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-	<meta name="applicable-device" content="mobile">
-	<meta content="telephone=no" name="format-detection"/>
-	<meta name="apple-mobile-web-app-capable" content="yes">
-	<meta name="apple-mobile-web-app-status-bar-style" content="black">
-	<link rel="stylesheet" href="/mysubpage/static/css/monthReport/monthReportList.css">
-	<script type="text/javascript" src="/include/js/adaptation_750ui.js"></script>
+	
+	@@include('@pathInclude/views/meta.html')
+	<link rel="stylesheet" href="/mine/static/css/monthReport/monthReportList.css">
 	<title>月度报告列表页</title>
 </head>
 <body>
@@ -24,7 +19,6 @@
 	<div class="without noData" id="emptyBox" style="display:none;">
 		<div class="box vertical center">
 			<img src="/mine/static/img/noneList.png">
-			<!-- <p class="iconfont">&#xe603;</p> -->
 			<p class="tipText">您暂无月度投资报告</p>
 			<p class="tipAdvise">持仓产品后可获得定制化个性投资分析报告</p>
 			<p class="tipAdvise">立即查看产品进行持仓</p>

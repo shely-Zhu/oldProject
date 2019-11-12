@@ -58,12 +58,19 @@ $(function(){
                     },
                     touchMove: function() {
                         // this.controller.control = .01 > this.progress ? "" : swiperBg
+                        
                     },
                     touchEnd: function(e) {
                         // -1515 > this.translate && alert("\u8df3\u8f6c")
-                        console.log(this)
+                        
+                        
                     },
+                    slideChangeTransitionEnd: function(){
+                        console.log(this.activeIndex%5);//切换结束时，告诉我现在是第几个slide
+                        console.log($('.swiper-slide').eq(this.activeIndex%5).attr('data-text'));
+                        // $('.membershipDetailsContentBox').text($('.swiper-slide').eq(this.activeIndex%5).attr('data-text'))
 
+                    },
 
                 }
             });

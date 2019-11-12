@@ -1,4 +1,3 @@
-require('../../../include/js/vendor/mui/mui.picker.min.js');
 
 
 $(function(){
