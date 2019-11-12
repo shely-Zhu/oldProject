@@ -12,7 +12,6 @@ var tipAction = require('@pathCommonJs/components/tipAction.js');
 var splitUrl = require('@pathCommonJs/components/splitUrl.js')();
 var generateTemplate = require('@pathCommonJsComBus/generateTemplate.js');
 
-
 $(function(){
 	let somePage = {
 		//获取页面元素
