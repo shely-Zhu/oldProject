@@ -3,19 +3,21 @@
 * @author liuhongyu 2019-11-12
 */
 require('@pathIncludJs/vendor/config.js');
-
-//zepto模块
-require('@pathIncludJs/vendor/zepto/callback.js'); 
-require('@pathIncludJs/vendor/zepto/deferred.js'); 
-
-require('@pathCommonJsCom/utils.js');
+require('@pathIncludJs/vendor/zepto/callback.js');
+require('@pathIncludJs/vendor/zepto/deferred.js');
+require('@pathCommonJs/components/utils.js');
 require('@pathCommonJs/ajaxLoading.js');
-require("@pathCommonJsCom/headBarConfig.js")
+
+var tipAction = require('@pathCommonJs/components/tipAction.js');
+var splitUrl = require('@pathCommonJs/components/splitUrl.js')();
+var generateTemplate = require('@pathCommonJsComBus/generateTemplate.js');
+
 $(function(){
 	let somePage = {
 		//获取页面元素
 		$e:{
-			
+            membershipDetailsSilderBox:$('.membershipDetailsSilderBox'),//swiper会员权益盒子
+            membershipDetailsList:$('#membershipDetailsList-template'),//swiper会员权益模板Id
 		},
 		//全局变量
 		gV:{},
@@ -23,10 +25,12 @@ $(function(){
 		init:function(){
             var that=this;
             that.events();
-		},
-		//注册事件
-		events: function(){
-			var xPX=100*($('body').width()/750)*0.5;
+            
+            that.getMembershipDetailsData();
+        },
+        //滑动初始化
+        swiperInit(n){
+            var xPX=100*($('body').width()/750)*0.5;
             // $('.swiper-wrapper').css('transform','translate3d('+xPX+'px, 0px, 0px)');
             var marW=100*($('body').width()/750)*0.4;
             // $('.swiper-slide').css('margin-right',marW);
@@ -37,6 +41,7 @@ $(function(){
                 spaceBetween: marW,
                 resistanceRatio: 1,
                 loop : true,
+                initialSlide:n,
                 on: {
                     progress: function(b) {
                         
@@ -66,14 +71,45 @@ $(function(){
                         
                     },
                     slideChangeTransitionEnd: function(){
-                        console.log(this.activeIndex%5);//切换结束时，告诉我现在是第几个slide
-                        console.log($('.swiper-slide').eq(this.activeIndex%5).attr('data-text'));
-                        // $('.membershipDetailsContentBox').text($('.swiper-slide').eq(this.activeIndex%5).attr('data-text'))
-
+                        console.log(this.activeIndex%12)
+                        // console.log(this.activeIndex);//切换结束时，告诉我现在是第几个slide
+                        var index=this.activeIndex%12;
+                        var text=$('.swiper-slide').eq(index).attr('data-text');
+                        var link=$('.swiper-slide').eq(index).attr('data-link');
+                        var name=$('.swiper-slide').eq(index).attr('data-name');
+                        $('.membershipDetailsContentBox h2').text(name);
+                        $('.membershipDetailsContentBox p').text(text);
+                        $('.linkBtnBox a').attr('href',link);
                     },
 
                 }
             });
+        },
+        //获取会员权益详情
+        getMembershipDetailsData:function(){
+            var that=this;
+            var obj=[{
+                url: site_url.findBenefitByLevel_api,
+                //async: false,
+                needDataEmpty: true,
+                callbackDone: function(json) {
+                    console.log(json) 
+                    var data=json.data;
+  
+                    generateTemplate(data,that.$e.membershipDetailsSilderBox,that.$e.membershipDetailsList); 
+                    var n=0;
+                    that.swiperInit(n);               
+                },
+                callbackFail: function(json) {
+                    console.log(json.message)
+                    tipAction(json.message);
+                }
+            }];                        
+            $.ajaxLoading(obj);         
+        },
+		//注册事件
+		events: function(){
+			
 		}
 	};
 	somePage.init();
