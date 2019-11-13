@@ -1,0 +1,99 @@
+// 月度报告列表页
+// @author 蔡文琦  2019-11-11
+
+@import url("../../../include/css/mui.min.css");
+@import url('@pathCommonLess/mui/resetMUI.less');
+@import url("@pathCommonLess/reset.less");
+@import url("@pathCommonLess/color.less");
+
+@import url("@pathCommonLessCom/againEnter.less");
+@import url("@pathCommonLessCom/alertBox.less");
+body{
+    max-width: 7.5rem;
+}
+#membershipDetailsBox{
+    width: 7.5rem;
+    background: white;
+    background-size: 7.5rem 3.2rem;
+    .membershipDetailsHeaderBox{
+        height: .88rem;
+        font-family: PingFangSC-Semibold;
+        font-size: .34rem;
+        color: black;
+        text-align: center;
+        position: relative;
+        line-height: .88rem;
+
+        a{
+            position: absolute;
+            width: .88rem;
+            height: .88rem;
+            left: 0;
+            top: 0;
+            font-size: 0.36rem;
+            color: black;
+        }
+    }
+}
+.tips{
+    img{
+        width: .244rem;
+        height: .244rem;
+        display: inline-block;
+        margin-right: .06rem;
+        line-height: .244rem;
+    }
+    font-size:.24rem;
+    line-height:.6rem;
+    background-color: #FFF9F0;
+    color: #9B9B9B;
+    width: 7.5rem;
+    height: .6rem;
+    text-indent:.329rem;
+}
+.list-time{
+    font-size: .24rem;
+    color: #9B9B9B;
+    letter-spacing: 0;
+    text-indent:.329rem;
+    text-align: justify;
+}
+.list-wrap{
+    height: 1.36rem;
+    background-color: white;
+    position: relative;
+}
+
+.equipment-name{
+    font-size: .32rem;
+    color: #9B9B9B;
+    position: absolute;
+    top: .24rem;
+    left: .3rem;
+}
+.islogin{
+    font-size: .32rem;
+    position: absolute;
+    top: .24rem;
+    right: .3rem;
+}
+.address{
+    font-size: .24rem;
+    color: #9B9B9B;
+    position: absolute;
+    bottom: .24rem;
+    left: .3rem;
+}
+.login-time{
+    font-size: .24rem;
+    color: #9B9B9B;
+    position: absolute;
+    bottom: .24rem;
+    right: .3rem;
+}
+.red{
+    color: red;
+}
+.mui-table-view-cell{
+    padding: 0;
+}

@@ -1,0 +1,46 @@
+/*
+ * pdf 模板
+ * @author zhangyanping 2019-11-08
+*/
+
+@import url("@pathCommonLess/reset.less");
+@import url("@pathCommonLess/color.less");
+
+html{height: 100%;}
+body{
+	display: -webkit-box;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+	-webkit-box-pack: justify;
+    -ms-flex-pack: justify;
+    -webkit-justify-content: space-between;
+    justify-content: space-between;
+	-webkit-box-orient: vertical;
+    -ms-flex-direction: column;
+    -webkit-flex-direction: column;
+    flex-direction: column;
+	height: 100%;
+	canvas{
+		max-width: 100%;
+	}
+
+}
+
+.container{
+	position: relative;
+	.hraderTitle{
+		width: 100%;
+		height: 0.88rem;
+		line-height: 0.88rem;
+		font-size: 0.34rem;
+		text-align: center;
+	}
+	.iconfont{
+		position:absolute;
+		top: 0;
+		left: 4%;
+		font-size: 0.36rem;
+		float: left;
+	}
+}

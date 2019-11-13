@@ -114,6 +114,13 @@ module.exports = function() {
     this.queryGrowthDetailList_api = http_url.web_url + '/account/queryGrowthDetailList';
     //成长值区间
     this.selectCustomerGrowthTier_api = http_url.web_url + '/account/selectCustomerGrowthTier';
+    
 
+    this.findProtocolContent_api = http_url.web_url + '/content/frontend/findProtocolContent';
+    //caiwenqi
+    this.getUserTrackRecord_api = http_url.web_url + '/account/getUserTrackRecord';
+
+    //会员权益详情-获取会员权益详情
+    this.findBenefitByLevel_api=http_url.web_url + '/content/findBenefitByLevel';
 
 };

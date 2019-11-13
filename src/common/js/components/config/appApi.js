@@ -12,5 +12,7 @@ module.exports = function() {
     //jjs持仓明细查询
     this.jjsAssetsDetail_api = http_url.app_url + '/account/jjs/queryAssetsDetailByPages',
 	//总资产查询 （公募+私募+金交所+组合+恒小智）
-	this.getTotalAssets_api = http_url.app_url + '/account/jjs/getTotalAssets'
+    this.getTotalAssets_api = http_url.app_url + '/account/jjs/getTotalAssets'
+    
+    
 };

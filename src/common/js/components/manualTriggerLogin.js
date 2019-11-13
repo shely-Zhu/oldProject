@@ -12,27 +12,36 @@
 var splitUrl = require('./splitUrl.js');
 
 var manualTriggerLogin = {
+    judgeLogin:function(){
+        var loginLInk = site_url.login_html_url;
+        if(env == 5){
+            loginLInk = '/user/views/htjf4Login.html';
+        }
+        return loginLInk;
+    },
     // 1.
     splitFunc: function() {
+        var that = this;
         if (splitUrl()['redirectUrl']) {
             // 1
-            window.location.href = site_url.login_html_url + '?redirectUrl=' + splitUrl()['redirectUrl'];
+            window.location.href = that.judgeLogin() + '?redirectUrl=' + splitUrl()['redirectUrl'];
 
         } else {
             // 3.如果没有来源，默认跳转我的页面
-            window.location.href = site_url.login_html_url + '?redirectUrl=' + encodeURI(encodeURI(site_url.mine_url));
+            window.location.href = that.judgeLogin() + '?redirectUrl=' + encodeURI(encodeURI(site_url.mine_url));
         }
         //防止window.location.href在执行完请求里的所有代码之后再跳转
         throw 'jump login';
         return false;
     },
     locationFunc: function(data) {
+        var that = this;
         if (data && typeof(data.data) == 'string' && (data.data!='')) {
             // 调用黑名单接口，直接跳转data.data
             window.location.href = data.data;
         } else {
             // 2.类似私募产品页面 ，页面未登录，手动触发登录，将当前地址，window.locatin.href传到redirectUrl
-            window.location.href = site_url.login_html_url + '?redirectUrl=' + encodeURI(encodeURI(window.location.href));
+            window.location.href = that.judgeLogin() + '?redirectUrl=' + encodeURI(encodeURI(window.location.href));
         }
 
         //防止window.location.href在执行完请求里的所有代码之后再跳转
