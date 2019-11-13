@@ -24,7 +24,7 @@
         width: 100%;
         height:3.2rem;
         // background: url("/mine/membershipInterests/static/img/banner.jpg");
-        background: linear-gradient(to right, #32457e 0%,#04154a 100%);
+        background: linear-gradient(to right, @32457e 0%, @04154a 100%);
         background-size: 100% 100%;
         // margin-bottom: 1.1rem;
         z-index: 100;
@@ -32,10 +32,9 @@
             height:.88rem;
             font-family:PingFangSC-Semibold;
             font-size:.34rem;
-            color:#FFFFFF;
+            color:@c005;
             text-align:center;
             line-height:.88rem;
-            // background-color:#31447d;
             
             .iconback{
                 position:absolute;
@@ -44,15 +43,17 @@
                 left:0;
                 top:0;
                 font-size:0.36rem;
-                color:#fff;
+                color:@c005;
             }
         }
         .bannerposi{
+            position: relative;
             width: 91.7333%;
             height: 3rem;
             margin: 0 auto;
             background: url("/mine/static/img/mine_bg_hyqy@2x.png");
             background-size: 100% 100%;
+            z-index:150 ;
             // position: relative;
             // top:.4rem;
             .posione{
@@ -60,7 +61,7 @@
                 justify-content:space-between;
                 .posioneleft{
                     font-size: .22rem;
-                    color: #4b1d00;
+                    color: @4b1d00;
                     margin-top: .5rem;
                     margin-left: .32rem;
                     line-height: .5rem;
@@ -71,7 +72,7 @@
                     background: url("/mine/static/img/bg_grxx@3x.png");
                     background-size: 100% 100%;
                     font-size: .22rem;
-                    color: #fff;
+                    color: @c005;
                     margin-top: .5rem;
                     text-align: center;
                     line-height: .5rem;
@@ -81,7 +82,7 @@
                     }
                     .iconone{
                         font-size: .14rem;
-                        color: #fff;
+                        color: @c005;
                     }
                 }
                 
@@ -93,7 +94,7 @@
                 .positwoleft{
                     font-size: .5rem;
                     font-weight: bold;
-                    background: linear-gradient(to right, #683c0b, #ab7c4b);
+                    background: linear-gradient(to right, @683c0b, @ab7c4b);
                     -webkit-background-clip:text;
                     color: transparent;
                     margin-left: .32rem;
@@ -104,9 +105,9 @@
                     height:.32rem;
                     line-height: .32rem;
                     font-size: .2rem;
-                    color: #fff;
-                    background: #bca685;
-                    border: 1px solid #b49d7b;
+                    color: @c005;
+                    background: @bca685;
+                    border: 1px solid @b49d7b;
                     box-sizing:border-box;
                     border-radius: 5px;
                     margin-left: .1rem;
@@ -121,7 +122,7 @@
                 }
                 .positworight2{
                     font-size: .22rem;
-                    color: #4b1d00;
+                    color: @4b1d00;
                     font-weight: bold;
                     margin-right: .34rem;
                     margin-top: .25rem;
@@ -130,20 +131,20 @@
             .mui-progressbar{
                 width: 90%;
                 margin: .3rem auto .15rem;
-                background: #e2cfb2;
-                border: 1px solid #dfcaac;
+                background: @e2cfb2;
+                border: 1px solid @dfcaac;
                 height:.1rem;
                 border-radius: 10px;
                 span{
                     height:.2rem;
-                    background: #c2905b;
+                    background: @c2905b;
                 }
             }
             .posifour{
                 display: flex;
                 justify-content:flex-end ;
                 font-size: .22rem;
-                color: #4b1d00;
+                color: @4b1d00;
                 .posifourright{
                     font-weight: bold;
                     margin-right: .34rem;
@@ -158,22 +159,25 @@
 
     .zhanwei{
         position: fixed;
-        margin-top: 3.2rem;
+        // margin-top: 3.2rem;
+        top:3.2rem;
         width: 100%;
         height:1.1rem;
-        background: #f5f7f8;
+        background: @f5f7f8;
         z-index: 10;
     }
 
     .content{
         // margin-top: 4.3rem;
-        position: relative;
+        position: absolute;
         top:4.3rem;
+        left: 0;
+        right: 0;
         ul>li{
-            background: #fff;
+            background: @c005;
             .lione{
                 font-size: .3rem;
-                color: #070707;
+                color: @070707;
                 font-weight: bold;
                 display: flex;
                 justify-content:space-between;
@@ -184,14 +188,14 @@
             }
             .litwo{
                 font-size: .22rem;
-                color: #7e7e7e;
+                color: @7e7e7e;
                 display: flex;
                 justify-content:space-between;
                 // margin: 0 .4rem;
                 margin-left: .4rem;
                 padding-right: .4rem;
                 padding-bottom: .3rem;
-                border-bottom: 1px solid #eaebef;
+                border-bottom: 1px solid @eaebef;
             }
         }
     }

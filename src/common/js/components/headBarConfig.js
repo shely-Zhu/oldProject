@@ -17,6 +17,10 @@ var pathTitle=[
     {
         pathName:"权益详情3",
         pathUrl:"eruda3" 
+    },
+    {
+        pathName:"登录日志查询",
+        pathUrl:"eruda3" 
     }
 ]
 $(function(){
@@ -42,7 +46,7 @@ $(function(){
          ClearStyle()
         $(window).scroll(function(){
             var tops=$(this).scrollTop();
-            if(tops>50){//当window的scrolltop距离大于1时，go to top按钮淡出，反之淡入
+            if(tops>50){//当window的scrolltop距离大于50时，
                 $("#HeadBarConfigBox").animate({"background-image":"linear-gradient(to right,"+colors[0]+" 40%, "+colors[1]+" 60%)","color":"#fff"},'slow', 'ease-out')
                 $("#HeadBarConfigBox a").css({"color":"#fff"});
             }else{
@@ -52,7 +56,10 @@ $(function(){
     }else{
 
     }
-
+    //返回上一页
+    $("#goBack").on("click",function(){
+        location.href="javascript:history.go(-1)";
+    })
     
 })
 //字符串截取

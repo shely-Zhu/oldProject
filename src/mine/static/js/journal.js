@@ -10,6 +10,7 @@ require('@pathIncludJs/vendor/zepto/deferred.js');
 
 require('@pathCommonJsCom/utils.js');
 require('@pathCommonJs/ajaxLoading.js');
+require('@pathCommonJs/components/headBarConfig.js');
 var generateTemplate = require('@pathCommonJsComBus/generateTemplate.js');
 
 $(function(){
@@ -27,8 +28,9 @@ $(function(){
 		gV:{
 			groupCode: splitUrl['groupCode'], // 组合编号，从我的持仓进
             pageNo: 1, //当前页码，默认为1
-            pageSize: 10,
+            pageSize: 1,
             listLength: 0,
+            pageCurrent:1
 		},
 		//页面初始化函数
 		init:function(){
@@ -50,6 +52,7 @@ $(function(){
             var that = this;
             //设置切换区域的高度
             //计算节点高度并设置
+            console.log($('#membershipDetailsBox').height())
             var height = window.innerHeight - $('#membershipDetailsBox').height();
 
             if (!$('.contentWrapper').hasClass('setHeight')) {
@@ -106,7 +109,7 @@ $(function(){
                 url: site_url.getUserTrackRecord_api,
                 data: { 
                 	"pageNo": that.gV.pageNo,
-                    "pageSize": 2
+                    "pageSize": 1
                 },
                 //async: false,
                 needDataEmpty: false,
@@ -133,7 +136,7 @@ $(function(){
                                     return false;
 
                                 } else { // 没有更多数据了
-                                    t.endPullupToRefresh(false);
+                                    t.endPullupToRefresh(true);
                                 }
                             } else {
                                 //其他页-没有更多数据
