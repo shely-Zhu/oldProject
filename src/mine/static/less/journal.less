@@ -8,18 +8,19 @@
 
 @import url("@pathCommonLessCom/againEnter.less");
 @import url("@pathCommonLessCom/alertBox.less");
+@import url("@pathCommonLessCom/headBarConfig.less");
 body{
     max-width: 7.5rem;
 }
 #membershipDetailsBox{
     width: 7.5rem;
-    background: white;
+    background-color: @c005;
     background-size: 7.5rem 3.2rem;
     .membershipDetailsHeaderBox{
         height: .88rem;
         font-family: PingFangSC-Semibold;
         font-size: .34rem;
-        color: black;
+        color: @c009;
         text-align: center;
         position: relative;
         line-height: .88rem;
@@ -31,7 +32,7 @@ body{
             left: 0;
             top: 0;
             font-size: 0.36rem;
-            color: black;
+            color: @c009;
         }
     }
 }
@@ -45,15 +46,15 @@ body{
     }
     font-size:.24rem;
     line-height:.6rem;
-    background-color: #FFF9F0;
-    color: #9B9B9B;
+    background-color: @FFF9F0;
+    color: @9B9B9B;
     width: 7.5rem;
     height: .6rem;
     text-indent:.329rem;
 }
 .list-time{
     font-size: .24rem;
-    color: #9B9B9B;
+    color: @9B9B9B;
     letter-spacing: 0;
     text-indent:.329rem;
     text-align: justify;
@@ -66,7 +67,7 @@ body{
 
 .equipment-name{
     font-size: .32rem;
-    color: #9B9B9B;
+    color: @9B9B9B;
     position: absolute;
     top: .24rem;
     left: .3rem;
@@ -79,20 +80,20 @@ body{
 }
 .address{
     font-size: .24rem;
-    color: #9B9B9B;
+    color: @9B9B9B;
     position: absolute;
     bottom: .24rem;
     left: .3rem;
 }
 .login-time{
     font-size: .24rem;
-    color: #9B9B9B;
+    color: @9B9B9B;
     position: absolute;
     bottom: .24rem;
     right: .3rem;
 }
 .red{
-    color: red;
+    color: @c010;
 }
 .mui-table-view-cell{
     padding: 0;

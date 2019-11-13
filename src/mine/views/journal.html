@@ -14,12 +14,13 @@
 		@@include('@pathCommonViews/load.html') 
 		@@include('@pathCommonViews/noData.html')
 		@@include('@pathCommonViews/loading/listLoading.html')
-		<div id="membershipDetailsBox">
+		<!--<div id="membershipDetailsBox">
 			<div class="membershipDetailsHeaderBox">
 				<a class="iconfont" href="javascript:;">&#xe634;</a>
 				登录日志查询
-			</div>
-		</div>
+			</div>-->
+			@@include('@pathCommonViews/headBarConfig.html',{"pathName":"登录日志查询"})
+		<!--</div>-->
 		<!--提示部分-->
 		<div class="tips">
 			<img src="../static/img/login_zhuyi@2x.png" />温馨提示:地点信息仅供参考
