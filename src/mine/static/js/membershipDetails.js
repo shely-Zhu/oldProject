@@ -80,6 +80,7 @@ $(function(){
                         var name=$('.swiper-slide').eq(index).attr('data-name');
                         $('.membershipDetailsContentBox h2').text(name);
                         $('.membershipDetailsContentBox p').text(text);
+                        
                         $('.linkBtnBox a').attr('href',link);
                     },
 
