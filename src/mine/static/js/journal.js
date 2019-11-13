@@ -137,7 +137,7 @@ $(function(){
                                 }
                             } else {
                                 //其他页-没有更多数据
-                                t.endPullupToRefresh(true);
+                                t.endPullupToRefresh(false);
                             }
                         } else { // 还有更多数据
                             t.endPullupToRefresh(false);
