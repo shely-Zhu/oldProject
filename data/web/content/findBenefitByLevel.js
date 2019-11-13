@@ -1,176 +1,124 @@
 /*
-    会员权益查询
- */
+
+  会员权益详情
+
+*/
 
 // 使用 Mock
 var Mock = require('mockjs');
 
-//这里直接返回的就是JSON格式
-var queryClassification1 = Mock.mock({
-    "hmac": "hmac",
-    "status": "0000",
-    "code": "CS0000",
-    "msg": "处理成功！",
-    "data|20":  [{ 
-    	"id":"1",//权益唯一编号 
-		"enjoy|1":["1","0"],//是否享有 0否 1是
-		"rightName":"权益名称",//权益名称
-		"iconUnlock":"https://s.chtfundtest.com//upload/htmall/images/content/64ba8d33-5eb5-4bec-9e33-5ef63a2339f7.png",//解锁图标
-		"iconLocked":"https://s.chtfundtest.com//upload/htmall/images/content/8eea9d9f-0409-4ac5-bc79-6b1837298e7a.png",//锁定图标
-		"content":"",//富文本
-		}
-	]
+var data = Mock.mock({
+    "data":[
+        {
+            id:"1",//权益唯一编号
+            enjoy:"0",//是否享有 0否 1是
+            rightName:"度假疗养",//权益名称
+            iconUnlock:"/mine/static/img/home_icon_rxsm@2x.png",//解锁图标链接
+            iconLocked:"1",//锁定图标链接
+            content:"集休闲、疗养、观光于一身的健康之旅,精选国内外空气清新,风景优美,各具特色的疗养圣地,配以调理方案,使客户身心放松,消除疲劳、增强体质。恒天财富恒乐汇帮您一键式预约国内外精选酒店及机票,让您在另一座城市,找到家的温馨。1",//富文本
+            linkUrl:"www.baidu.com",//跳转链接
+        },
+        {
+            id:"1",//权益唯一编号
+            enjoy:"0",//是否享有 0否 1是
+            rightName:"SPA护理",//权益名称
+            iconUnlock:"/mine/static/img/home_icon_gmzt@2x.png",//解锁图标链接
+            iconLocked:"1",//锁定图标链接
+            content:"集休闲、疗养、观光于一身的健康之旅,精选国内外空气清新,风景优美,各具特色的疗养圣地,配以调理方案,使客户身心放松,消除疲劳、增强体质。恒天财富恒乐汇帮您一键式预约国内外精选酒店及机票,让您在另一座城市,找到家的温馨。2",//富文本
+            linkUrl:"www.baidu.com",//跳转链接
+        },
+        {
+            id:"1",//权益唯一编号
+            enjoy:"0",//是否享有 0否 1是
+            rightName:"私人牙医",//权益名称
+            iconUnlock:"/mine/static/img/home_icon_xejx@2x.png",//解锁图标链接
+            iconLocked:"1",//锁定图标链接
+            content:"集休闲、疗养、观光于一身的健康之旅,精选国内外空气清新,风景优美,各具特色的疗养圣地,配以调理方案,使客户身心放松,消除疲劳、增强体质。恒天财富恒乐汇帮您一键式预约国内外精选酒店及机票,让您在另一座城市,找到家的温馨。3",//富文本
+            linkUrl:"www.baidu.com",//跳转链接
+        },
+        {
+            id:"1",//权益唯一编号
+            enjoy:"0",//是否享有 0否 1是
+            rightName:"高尔夫畅打",//权益名称
+            iconUnlock:"/mine/static/img/home_icon_gmzh@2x.png",//解锁图标链接
+            iconLocked:"1",//锁定图标链接
+            content:"集休闲、疗养、观光于一身的健康之旅,精选国内外空气清新,风景优美,各具特色的疗养圣地,配以调理方案,使客户身心放松,消除疲劳、增强体质。恒天财富恒乐汇帮您一键式预约国内外精选酒店及机票,让您在另一座城市,找到家的温馨。4",//富文本
+            linkUrl:"www.baidu.com",//跳转链接
+        },
+        {
+            id:"1",//权益唯一编号
+            enjoy:"0",//是否享有 0否 1是
+            rightName:"运动至上",//权益名称
+            iconUnlock:"/mine/static/img/mine_icon_wdhd@2x.png",//解锁图标链接
+            iconLocked:"1",//锁定图标链接
+            content:"集休闲、疗养、观光于一身的健康之旅,精选国内外空气清新,风景优美,各具特色的疗养圣地,配以调理方案,使客户身心放松,消除疲劳、增强体质。恒天财富恒乐汇帮您一键式预约国内外精选酒店及机票,让您在另一座城市,找到家的温馨。5",//富文本
+            linkUrl:"www.baidu.com",//跳转链接
+        },
+        {
+            id:"1",//权益唯一编号
+            enjoy:"0",//是否享有 0否 1是
+            rightName:"生日积分",//权益名称
+            iconUnlock:"/mine/static/img/mine_icon_bzzx@2x.png",//解锁图标链接
+            iconLocked:"1",//锁定图标链接
+            content:"集休闲、疗养、观光于一身的健康之旅,精选国内外空气清新,风景优美,各具特色的疗养圣地,配以调理方案,使客户身心放松,消除疲劳、增强体质。恒天财富恒乐汇帮您一键式预约国内外精选酒店及机票,让您在另一座城市,找到家的温馨。6",//富文本
+            linkUrl:"www.baidu.com",//跳转链接
+        },
+        {
+            id:"1",//权益唯一编号
+            enjoy:"0",//是否享有 0否 1是
+            rightName:"折扣换礼",//权益名称
+            iconUnlock:"/mine/static/img/mine_icon_dzd@2x.png",//解锁图标链接
+            iconLocked:"1",//锁定图标链接
+            content:"集休闲、疗养、观光于一身的健康之旅,精选国内外空气清新,风景优美,各具特色的疗养圣地,配以调理方案,使客户身心放松,消除疲劳、增强体质。恒天财富恒乐汇帮您一键式预约国内外精选酒店及机票,让您在另一座城市,找到家的温馨。7",//富文本
+            linkUrl:"www.baidu.com",//跳转链接
+        },
+        {
+            id:"1",//权益唯一编号
+            enjoy:"0",//是否享有 0否 1是
+            rightName:"感恩礼遇",//权益名称
+            iconUnlock:"/mine/static/img/home_icon_rxsm@2x.png",//解锁图标链接
+            iconLocked:"1",//锁定图标链接
+            content:"集休闲、疗养、观光于一身的健康之旅,精选国内外空气清新,风景优美,各具特色的疗养圣地,配以调理方案,使客户身心放松,消除疲劳、增强体质。恒天财富恒乐汇帮您一键式预约国内外精选酒店及机票,让您在另一座城市,找到家的温馨。8",//富文本
+            linkUrl:"www.baidu.com",//跳转链接
+        },
+        {
+            id:"1",//权益唯一编号
+            enjoy:"0",//是否享有 0否 1是
+            rightName:"生日礼遇",//权益名称
+            iconUnlock:"/mine/static/img/mine_icon_zcpz@2x.png",//解锁图标链接
+            iconLocked:"1",//锁定图标链接
+            content:"集休闲、疗养、观光于一身的健康之旅,精选国内外空气清新,风景优美,各具特色的疗养圣地,配以调理方案,使客户身心放松,消除疲劳、增强体质。恒天财富恒乐汇帮您一键式预约国内外精选酒店及机票,让您在另一座城市,找到家的温馨。9",//富文本
+            linkUrl:"www.baidu.com",//跳转链接
+        },
+        {
+            id:"1",//权益唯一编号
+            enjoy:"0",//是否享有 0否 1是
+            rightName:"荣耀年会",//权益名称
+            iconUnlock:"/mine/static/img/mine_icon_wdyq@2x.png",//解锁图标链接
+            iconLocked:"1",//锁定图标链接
+            content:"集休闲、疗养、观光于一身的健康之旅,精选国内外空气清新,风景优美,各具特色的疗养圣地,配以调理方案,使客户身心放松,消除疲劳、增强体质。恒天财富恒乐汇帮您一键式预约国内外精选酒店及机票,让您在另一座城市,找到家的温馨。10",//富文本
+            linkUrl:"www.baidu.com",//跳转链接
+        },
+        {
+            id:"1",//权益唯一编号
+            enjoy:"0",//是否享有 0否 1是
+            rightName:"积分定制",//权益名称
+            iconUnlock:"/mine/static/img/home_icon_rxsm@2x.png",//解锁图标链接
+            iconLocked:"1",//锁定图标链接
+            content:"集休闲、疗养、观光于一身的健康之旅,精选国内外空气清新,风景优美,各具特色的疗养圣地,配以调理方案,使客户身心放松,消除疲劳、增强体质。恒天财富恒乐汇帮您一键式预约国内外精选酒店及机票,让您在另一座城市,找到家的温馨。11",//富文本
+            linkUrl:"www.baidu.com",//跳转链接
+        },
+        {
+            id:"1",//权益唯一编号
+            enjoy:"0",//是否享有 0否 1是
+            rightName:"积分定制",//权益名称
+            iconUnlock:"/mine/static/img/financing_icon_rxgm@2x.png",//解锁图标链接
+            iconLocked:"1",//锁定图标链接
+            content:"集休闲、疗养、观光于一身的健康之旅,精选国内外空气清新,风景优美,各具特色的疗养圣地,配以调理方案,使客户身心放松,消除疲劳、增强体质。恒天财富恒乐汇帮您一键式预约国内外精选酒店及机票,让您在另一座城市,找到家的温馨。12",//富文本
+            linkUrl:"www.baidu.com",//跳转链接
+        },
+    ],
+    "message":"操作成功！",
+    "status":"0000"
 });
-
-var queryClassification2 = Mock.mock({
-    "hmac": "hmac",
-    "status": "0000",
-    "code": "CS0000",
-    "msg": "处理成功！",
-    "data":  [{ 
-    	"id":"1",//权益唯一编号 
-		"enjoy":"1",//是否享有 0否 1是
-		"rightName":"权益名称",//权益名称
-		"iconUnlock":"https://s.chtfundtest.com//upload/htmall/images/content/8eea9d9f-0409-4ac5-bc79-6b1837298e7a.png",//解锁图标
-		"iconLocked":"https://s.chtfundtest.com//upload/htmall/images/content/8eea9d9f-0409-4ac5-bc79-6b1837298e7a.png",//锁定图标
-		"content":"",//富文本
-		},{
-		"id":"1",//权益唯一编号 
-		"enjoy":"1",//是否享有 0否 1是
-		"rightName":"权益名称",//权益名称
-		"iconUnlock":"https://s.chtfundtest.com//upload/htmall/images/content/8eea9d9f-0409-4ac5-bc79-6b1837298e7a.png",//解锁图标
-		"iconLocked":"https://s.chtfundtest.com//upload/htmall/images/content/8eea9d9f-0409-4ac5-bc79-6b1837298e7a.png",//锁定图标
-		"content":"",//富文本
-		},{ 
-    	"id":"1",//权益唯一编号 
-		"enjoy":"1",//是否享有 0否 1是
-		"rightName":"权益名称",//权益名称
-		"iconUnlock":"https://s.chtfundtest.com//upload/htmall/images/content/8eea9d9f-0409-4ac5-bc79-6b1837298e7a.png",//解锁图标
-		"iconLocked":"https://s.chtfundtest.com//upload/htmall/images/content/8eea9d9f-0409-4ac5-bc79-6b1837298e7a.png",//锁定图标
-		"content":"",//富文本
-		},{
-		"id":"1",//权益唯一编号 
-		"enjoy":"1",//是否享有 0否 1是
-		"rightName":"权益名称",//权益名称
-		"iconUnlock":"https://s.chtfundtest.com//upload/htmall/images/content/8eea9d9f-0409-4ac5-bc79-6b1837298e7a.png",//解锁图标
-		"iconLocked":"https://s.chtfundtest.com//upload/htmall/images/content/8eea9d9f-0409-4ac5-bc79-6b1837298e7a.png",//锁定图标
-		"content":"",//富文本
-		},{ 
-    	"id":"1",//权益唯一编号 
-		"enjoy":"1",//是否享有 0否 1是
-		"rightName":"权益名称",//权益名称
-		"iconUnlock":"https://s.chtfundtest.com//upload/htmall/images/content/8eea9d9f-0409-4ac5-bc79-6b1837298e7a.png",//解锁图标
-		"iconLocked":"https://s.chtfundtest.com//upload/htmall/images/content/8eea9d9f-0409-4ac5-bc79-6b1837298e7a.png",//锁定图标
-		"content":"",//富文本
-		},{
-		"id":"1",//权益唯一编号 
-		"enjoy":"1",//是否享有 0否 1是
-		"rightName":"权益名称",//权益名称
-		"iconUnlock":"https://s.chtfundtest.com//upload/htmall/images/content/8eea9d9f-0409-4ac5-bc79-6b1837298e7a.png",//解锁图标
-		"iconLocked":"https://s.chtfundtest.com//upload/htmall/images/content/8eea9d9f-0409-4ac5-bc79-6b1837298e7a.png",//锁定图标
-		"content":"",//富文本
-		},{ 
-    	"id":"1",//权益唯一编号 
-		"enjoy":"1",//是否享有 0否 1是
-		"rightName":"权益名称",//权益名称
-		"iconUnlock":"https://s.chtfundtest.com//upload/htmall/images/content/8eea9d9f-0409-4ac5-bc79-6b1837298e7a.png",//解锁图标
-		"iconLocked":"https://s.chtfundtest.com//upload/htmall/images/content/8eea9d9f-0409-4ac5-bc79-6b1837298e7a.png",//锁定图标
-		"content":"",//富文本
-		},{
-		"id":"1",//权益唯一编号 
-		"enjoy":"1",//是否享有 0否 1是
-		"rightName":"权益名称",//权益名称
-		"iconUnlock":"https://s.chtfundtest.com//upload/htmall/images/content/8eea9d9f-0409-4ac5-bc79-6b1837298e7a.png",//解锁图标
-		"iconLocked":"https://s.chtfundtest.com//upload/htmall/images/content/8eea9d9f-0409-4ac5-bc79-6b1837298e7a.png",//锁定图标
-		"content":"",//富文本
-		},{ 
-    	"id":"1",//权益唯一编号 
-		"enjoy":"0",//是否享有 0否 1是
-		"rightName":"权益名称",//权益名称
-		"iconUnlock":"https://s.chtfundtest.com//upload/htmall/images/content/8eea9d9f-0409-4ac5-bc79-6b1837298e7a.png",//解锁图标
-		"iconLocked":"https://s.chtfundtest.com//upload/htmall/images/content/8eea9d9f-0409-4ac5-bc79-6b1837298e7a.png",//锁定图标
-		"content":"",//富文本
-		},
-
-	]
-});
-var queryClassification3 = Mock.mock({
-    "hmac": "hmac",
-    "status": "0000",
-    "code": "CS0000",
-    "msg": "处理成功！",
-    "data":  [{
-    	"id":"1",//权益唯一编号 
-		"enjoy":"1",//是否享有 0否 1是
-		"rightName":"权益名称",//权益名称
-		"iconUnlock":"https://s.chtfundtest.com//upload/htmall/images/content/8eea9d9f-0409-4ac5-bc79-6b1837298e7a.png",//解锁图标
-		"iconLocked":"https://s.chtfundtest.com//upload/htmall/images/content/8eea9d9f-0409-4ac5-bc79-6b1837298e7a.png",//锁定图标
-		"content":"",//富文本
-		},{ 
-		"id":"1",//权益唯一编号 	
-		"enjoy":"1",//是否享有 0否 1是
-		"rightName":"权益名称",//权益名称
-		"iconUnlock":"https://s.chtfundtest.com//upload/htmall/images/content/8eea9d9f-0409-4ac5-bc79-6b1837298e7a.png",//解锁图标
-		"iconLocked":"https://s.chtfundtest.com//upload/htmall/images/content/8eea9d9f-0409-4ac5-bc79-6b1837298e7a.png",//锁定图标
-		"content":"",//富文本
-		},{ 
-		"id":"1",//权益唯一编号 	
-		"enjoy":"1",//是否享有 0否 1是
-		"rightName":"权益名称",//权益名称
-		"iconUnlock":"https://s.chtfundtest.com//upload/htmall/images/content/8eea9d9f-0409-4ac5-bc79-6b1837298e7a.png",//解锁图标
-		"iconLocked":"https://s.chtfundtest.com//upload/htmall/images/content/8eea9d9f-0409-4ac5-bc79-6b1837298e7a.png",//锁定图标
-		"content":"",//富文本
-		},{
-		"id":"1",//权益唯一编号  
-		"enjoy":"0",//是否享有 0否 1是
-		"rightName":"权益名称",//权益名称
-		"iconUnlock":"https://s.chtfundtest.com//upload/htmall/images/content/8eea9d9f-0409-4ac5-bc79-6b1837298e7a.png",//解锁图标
-		"iconLocked":"https://s.chtfundtest.com//upload/htmall/images/content/8eea9d9f-0409-4ac5-bc79-6b1837298e7a.png",//锁定图标
-		}
-
-	]
-});
-var content1 = Mock.mock({
-    "hmac": "hmac",
-    "status": "0000",
-    "code": "CS0000",
-    "msg": "处理成功！",
-    "data":  [{ 
-		"enjoy":"1",//是否享有 0否 1是
-		"rightName":"权益名称",//权益名称
-		"iconUnlock":"",//解锁图标
-		"iconLocked":"",//锁定图标
-		"content":"富文本",//富文本
-		}
-
-	]
-});
-// module.exports = [
-// 	{
-// 	  params: {
-// 	  	'params[level]' : '1'   //要在左边的对比参数上加[]，不然比对不上
-// 	  	//console.log(params); 
-// 	  },
-//   	response: queryClassification1
-// 	},
-// 	{
-// 	  params: {
-// 	  	'params[level]' : '2'   //要在左边的对比参数上加[]，不然比对不上
-// 	  },
-//   	response: queryClassification2
-// 	},{
-// 	  params: {
-// 	  	'params[level]' : '3'   //要在左边的对比参数上加[]，不然比对不上
-// 	  },
-//   	response: queryClassification2
-// 	},
-// 	{
-// 	  params: {
-// 	  	'params[id]' : '1'   //要在左边的对比参数上加[]，不然比对不上
-// 	  },
-//   	response: content1
-// 	},
-	
-
-// ]
-module.exports= queryClassification2;
+module.exports=data;

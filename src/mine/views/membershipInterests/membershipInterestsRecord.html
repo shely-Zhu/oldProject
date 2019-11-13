@@ -1,0 +1,112 @@
+ <!-- 会员权益成长值记录
+ @author caoqiahi 2019-11-11 -->
+
+
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        @@include('@pathInclude/views/meta.html')
+        <link rel="stylesheet" href="/mine/static/css/membershipInterestsRecord.css">
+
+        <title>会员权益成长值记录</title>
+    </head>
+<body>
+    <div class="container">
+        <div class="banner">
+            <div class="headbox">
+                 <a class="iconfont iconback"  href="javascript:;">&#xe634;</a>
+                成长值记录
+            </div>
+            <div class="bannerposi">
+                <div class="posione">
+                    <div class="posioneleft">当前值</div>
+                    <div class="posioneright">
+                        <span>规则说明</span>
+                        <a class="iconfont iconone" href="javascript:;">&#xe67d;</a>
+                    </div>
+                </div>
+                <div class="positwo">
+                    <div class="positwoleft"></div>
+                    <!-- <div class="positworight">
+                        <img src="/mine/static/img/icon_sheng@3x.png" alt="">
+                        <span>100</span> 
+                    </div> -->
+                    <div class="positworight2">
+                        <span>晋级值</span>
+                        <span>2000</span>
+                    </div>
+                </div>
+                <div id="mui-progressbar" class="mui-progressbar">
+                    <span></span>
+                </div>
+                <!-- <div class="posifour">
+                    <div class="posifourleft">晋级值</div>
+                    <div class="posifourright">2000</div>
+                </div> -->
+                
+            </div>
+            
+        </div>
+        <div class="zhanwei"></div>
+        <div class="content">
+            <ul>
+                <li class="li">
+                    <!-- <div class="lione">
+                        <div>
+                            预约奖励
+                        </div>
+                        <div>
+                            +100
+                        </div>
+                    </div>
+                    <div class="litwo">
+                        <div>
+                            2019-04-30
+                        </div>
+                        <div>
+                            有效期至&nbsp;2019-05-30
+                        </div>
+                    </div> -->
+                </li>
+                <!-- 返回顶部 -->
+                @@include('@pathCommonViews/goTop.html')
+            </ul>
+            <!-- 没有数据 -->
+            @@include('@pathCommonViews/noData.html')
+            <!-- 加载中loading -->
+            @@include('@pathCommonViews/loading/listLoading.html')
+        </div>
+    </div>
+
+    <script id="List-template" type="text/x-handlebars-template">
+        {{#each this}}
+        <div class="lione">
+            <div>
+                {{growthDesc}}
+            </div>
+            <div>
+                {{growthDetail}}
+            </div>
+        </div>
+        <div class="litwo">
+            <div>
+                {{growthDate}}
+            </div>
+            {{#if growthIndate}}
+            <div>
+                有效期至&nbsp;{{growthIndate}}
+            </div>
+            {{/if}}
+        </div>
+        {{/each}}
+    </script>
+
+    @@include('@pathInclude/views/footer.html')
+    <script src="/include/js/iscroll.js"></script>
+    <script src="/mine/static/js/membershipInterestsRecord.js"></script>
+
+
+
+
+</body>
+</html>
