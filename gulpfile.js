@@ -92,8 +92,9 @@ function getLocalIp() {
     for (var devName in osNet) {
         var iface = osNet[devName];
         for (var i = 0; i < iface.length; i++) {
+            debugger
             var alias = iface[i];
-            if (alias.family === 'IPv4' && (devName == '本地连接' || devName == '以太网' || devName=="WLAN")) {
+            if (alias.family === 'IPv4' && (devName == '本地连接' || devName == '以太网' || devName=="WLAN" || devName=='无线网络连接' || devName=='本地连接 2')) {
                 console.log('当前本地ip：' + alias.address);
                 return alias.address;
             }
@@ -188,9 +189,8 @@ gulp.task('proxyTask', function() {
                     secure: false,
                 }),
 
-                proxy(['/wap','/web/','jf'],  {
+                proxy(['/wap','/web/','/jf/'],  {
                      target: 'https://h5.htjf4.com',
-                    // target: 'http://172.16.187.245:8080',
                     // target: 'https://h5.chtfundtest.com',
                     changeOrigin:true,
                     secure: false,

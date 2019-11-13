@@ -8,44 +8,92 @@
 
 @import url("@pathCommonLessCom/againEnter.less");
 @import url("@pathCommonLessCom/alertBox.less");
-
-.header{
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
-    background-color: white;
-    height: .88rem;
-    a{
-//      font-family: PingFangSC-Semibold;
-        font-size: .36rem;
-    }
-    .title{
-        font-size: .44rem;
-    }
+body{
+    max-width: 7.5rem;
 }
-.list-wrap{
-    .timeTitle{
-//      margin-top: .5rem;
-        height: .5rem;
-        line-height: .5rem;
-        padding-left: .5rem;
-        font-size: .11rem;
-        background-color: rgb(250,252,254);
-    }
-    .mui-table-view{
-        font-size: .11rem;
-        background-color: white;
-    }
-    .mui-table-view-cell{
-        p{
-            display: flex;
-            justify-content: space-between;
+#membershipDetailsBox{
+    width: 7.5rem;
+    background: white;
+    background-size: 7.5rem 3.2rem;
+    .membershipDetailsHeaderBox{
+        height: .88rem;
+        font-family: PingFangSC-Semibold;
+        font-size: .34rem;
+        color: black;
+        text-align: center;
+        position: relative;
+        line-height: .88rem;
+
+        a{
+            position: absolute;
+            width: .88rem;
+            height: .88rem;
+            left: 0;
+            top: 0;
+            font-size: 0.36rem;
+            color: black;
         }
     }
-    a{
-        font-size:.11rem;
-    }
 }
-.isLogin{
-    font-size: .40rem;
+.tips{
+    img{
+        width: .244rem;
+        height: .244rem;
+        display: inline-block;
+        margin-right: .06rem;
+        line-height: .244rem;
+    }
+    font-size:.24rem;
+    line-height:.6rem;
+    background-color: #FFF9F0;
+    color: #9B9B9B;
+    width: 7.5rem;
+    height: .6rem;
+    text-indent:.329rem;
+}
+.list-time{
+    font-size: .24rem;
+    color: #9B9B9B;
+    letter-spacing: 0;
+    text-indent:.329rem;
+    text-align: justify;
+}
+.list-wrap{
+    height: 1.36rem;
+    background-color: white;
+    position: relative;
+}
+
+.equipment-name{
+    font-size: .32rem;
+    color: #9B9B9B;
+    position: absolute;
+    top: .24rem;
+    left: .3rem;
+}
+.islogin{
+    font-size: .32rem;
+    position: absolute;
+    top: .24rem;
+    right: .3rem;
+}
+.address{
+    font-size: .24rem;
+    color: #9B9B9B;
+    position: absolute;
+    bottom: .24rem;
+    left: .3rem;
+}
+.login-time{
+    font-size: .24rem;
+    color: #9B9B9B;
+    position: absolute;
+    bottom: .24rem;
+    right: .3rem;
+}
+.red{
+    color: red;
+}
+.mui-table-view-cell{
+    padding: 0;
 }

@@ -117,6 +117,8 @@ module.exports = function() {
     
 
     this.findProtocolContent_api = http_url.web_url + '/content/frontend/findProtocolContent';
+    //caiwenqi
+    this.getUserTrackRecord_api = http_url.web_url + '/account/getUserTrackRecord';
 
 
 };
