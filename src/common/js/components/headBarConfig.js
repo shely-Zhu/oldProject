@@ -36,7 +36,7 @@ $(function(){
     }else{
         $("#HeadBarpathName").show()
     }
-    //传人样式
+    //传人样式判断展示形式 
     if($("#HeadBarConfigBox").attr('showType')=='1'){
         var colors=$("#HeadBarConfigBox").attr('bgColors').split(",")
          ClearStyle()
@@ -44,9 +44,7 @@ $(function(){
             var tops=$(this).scrollTop();
             if(tops>50){//当window的scrolltop距离大于1时，go to top按钮淡出，反之淡入
                 $("#HeadBarConfigBox").animate({"background-image":"linear-gradient(to right,"+colors[0]+" 40%, "+colors[1]+" 60%)","color":"#fff"},'slow', 'ease-out')
-                // $("#HeadBarConfigBox").css({"background-image":"linear-gradient(to right,#000,blue"})
                 $("#HeadBarConfigBox a").css({"color":"#fff"});
-                // $("#HeadBarConfigBox").fadeIn(3000);
             }else{
                 ClearStyle()
             }
@@ -57,6 +55,7 @@ $(function(){
 
     
 })
+//字符串截取
 function GetRequest() { 
     var url = location.search; //获取url中"?"符后的字串 
     var theRequest = new Object(); 
@@ -69,6 +68,7 @@ function GetRequest() {
     } 
     return theRequest; 
     }
+//格式化样式
 function ClearStyle(){
     $("#HeadBarConfigBox").css({"background":"none","color":"#fff"});
     $("#HeadBarConfigBox a").css({"color":"#fff"});

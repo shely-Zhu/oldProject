@@ -4,72 +4,75 @@
 
 <!DOCTYPE html>
 <html lang="en">
-<head>
-	
-	@@include('@pathInclude/views/meta.html')
-	<link rel="stylesheet" href="/mine/static/css/monthReport/monthReportList.css">
-	<title>月度报告列表页</title>
-</head>
-<body>
-	
-	@@include('@pathCommonViews/load.html')
-	<!--@@include('@pathCommonViews/noData.html')  -->
-	@@include('@pathCommonViews/loading/listLoading.html')
-	<!-- 暂无数据 -->
-	<div class="without noData" id="emptyBox" style="display:none;">
-		<div class="box vertical center">
-			<img src="/mine/static/img/noneList.png">
-			<p class="tipText">您暂无月度投资报告</p>
-			<p class="tipAdvise">持仓产品后可获得定制化个性投资分析报告</p>
-			<p class="tipAdvise">立即查看产品进行持仓</p>
+
+	<head>
+
+		@@include('@pathInclude/views/meta.html')
+		<link rel="stylesheet" href="/mine/static/css/monthReport/monthReportList.css">
+		<title>月度报告列表页</title>
+	</head>
+
+	<body>
+
+		@@include('@pathCommonViews/load.html')
+		<!--@@include('@pathCommonViews/noData.html')  -->
+		@@include('@pathCommonViews/loading/listLoading.html')
+		<!-- 暂无数据 -->
+		<div class="without noData" id="emptyBox" style="display:none;">
+			<div class="box vertical center">
+				<img src="/mine/static/img/noneList.png">
+				<p class="tipText">您暂无月度投资报告</p>
+				<p class="tipAdvise">持仓产品后可获得定制化个性投资分析报告</p>
+				<p class="tipAdvise">立即查看产品进行持仓</p>
+			</div>
+			<div class="productBtn">去浏览产品</div>
 		</div>
-		<div class="productBtn">去浏览产品</div>
-	</div>
 
-
-	<div class="adjustmentRecord">
-		<div class="list">
-			<div class="contentWrapper">
-				<ul class="mui-table-view">
-					<li class="mui-table-view-cell recordList">
-						<!--放置列表-->
-					</li>
-					<!-- 返回顶部 -->
-					@@include('@pathCommonViews/goTop.html')
-				</ul>
+		<div class="adjustmentRecord">
+			<div class="list">
+				<div class="contentWrapper">
+					<ul class="mui-table-view">
+						<li class="mui-table-view-cell recordList">
+							<!--放置列表-->
+						</li>
+						<!-- 返回顶部 -->
+						@@include('@pathCommonViews/goTop.html')
+					</ul>
+				</div>
 			</div>
 		</div>
-	</div>
-	
-	<script id="adjustment-template" type="text/x-handlebars-template">
-	{{#each this}}
-		<ul class="mui-card mui-table-view marginTop">
-			<li class="mui-table-view-cell mui-collapse">
-				<a class="monthYear mui-navigate-right" href="#">{{years}}</a>
 
-				<div class="mui-card marginTop latestAdjustment mui-collapse-content">
-					<div class='circle_left'></div>
-					<div class='circle_right'></div>
-					{{#each monthReportsList}}
-						<a href="javascript:;" class='monthlyReport'> 
+		<script id="adjustment-template" type="text/x-handlebars-template">
+			{{#each this}}
+			<ul class="mui-card mui-table-view marginTop">
+				<li class="mui-table-view-cell mui-collapse">
+					<a class="monthYear mui-navigate-right" href="#">{{years}}</a>
+
+					<div class="mui-card marginTop latestAdjustment mui-collapse-content">
+						<div class='circle_left'></div>
+						<div class='circle_right'></div>
+						{{#each monthReportsList}}
+						<a href="javascript:;" class='monthlyReport'>
 							<span class='reportName'>{{reportName}}</span>
 							<span class='reportTime'>{{reportTime}}</span>
 							<span class='iconfont detailLink'>&#xe600;</span>
 						</a>
-					{{/each}}
-				</div>
+						{{/each}}
+					</div>
 
-			</li>
-			{{!--<a class="mui-navigate-right" href="#"></a> --}}
-		</ul>
-	{{/each}}
-</script>
-	 
-	@@include('@pathInclude/views/footer.html')
-	<script src="/include/js/iscroll.js"></script>
-	<!-- 添加埋点 -->
-	@@include('@pathInclude/views/header.html')
-	<script src="/mine/static/js/monthReport/monthReportList.js"></script>
+				</li>
+				{{!--
+				<a class="mui-navigate-right" href="#"></a> --}}
+			</ul>
+			{{/each}}
+		</script>
 
-</body>
+		@@include('@pathInclude/views/footer.html')
+		<script src="/include/js/iscroll.js"></script>
+		<!-- 添加埋点 -->
+		@@include('@pathInclude/views/header.html')
+		<script src="/mine/static/js/monthReport/monthReportList.js"></script>
+
+	</body>
+
 </html>
