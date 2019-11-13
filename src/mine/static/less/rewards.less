@@ -24,11 +24,45 @@
 			margin-right: 0.08rem;
 		}
 	}
-}
-
-.mui-card-media{
-	width: 100%;
-	height: 2.2rem;
-	background: url("/mine/static/img/rewards/kapian_bg1@3x.png");
-    background-size: 100% 100%;
+	.rewardWrapper{
+		.entity{
+			width: 100%;
+			height: 2.2rem;
+			background: url("/mine/static/img/rewards/kapian_bg1@3x.png");
+		    background-size: 100% 100%;
+		}
+		.virtual{
+			margin-top: 0.3rem;
+			width: 100%;
+			height: 2.2rem;
+			background: url("/mine/static/img/rewards/kapian_bg2@3x.png");
+		    background-size: 100% 100%;
+		}
+		.rewardType{
+			display: block;
+			width: 1.2rem;
+			height: 0.36rem;
+			height: 0.36rem;
+			font-size: 0.24rem;
+			color: @FFCE9A;
+			border-radius: 0.12rem 0 1rem 0;
+			opacity: 0.8;
+			text-align: center;
+			background-image: -webkit-linear-gradient(top right, #6C83C9 0%, #0E246C 100%);
+			background-image: -o-linear-gradient(top right, #6C83C9 0%, #0E246C 100%);
+			background-image: linear-gradient(to bottom left, #6C83C9 0%, #0E246C 100%);
+		}
+		.rewardDetail{
+			margin: 0.32rem 0 0 0.32rem;
+			.rewardName{
+				font-size: 0.44rem;
+				color: @272727;
+			}
+			.rewardTime{
+				margin-top: 0.19rem;
+				font-size: 0.24rem;
+				color: @9B9B9B;
+			}
+		}
+	}
 }
