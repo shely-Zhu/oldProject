@@ -32,7 +32,11 @@ window.site_url = {
   	goMyAccount_url : http_url.htjf_url+'/getAuthURL.action?redirect_uri:'+http_url.htjf_url+'/apis/wx/user/toMyAccount.action',
   	//产品查询
 	productSearch_api : 'http://jjs.chtwm.com/prdtq.do',
-},
+
+	// 营销活动
+	onlineCustomer_url: http_url.onlineCustomer_url + '/api/brand/index.html?activityId=pWhA5xJTKF4Zfst%2B9ycHqQ%3D%3D&channel=3',
+
+};
 
 //将各接口和跳转链接附到site_url上
 goUrl.call(site_url);

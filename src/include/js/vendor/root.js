@@ -102,7 +102,12 @@ var mock_server = "http://localIp:8088", //前端本地开发时，接口调用�
     // 在线客服
     onlineCustomer_test = "http://172.16.196.43:9080",
     onlineCustomer_haomaojf = "http://zxkf.haomalljf.com",
-    onlineCustomer_online = "http://zxkf.chtwm.com";
+    onlineCustomer_online = "http://zxkf.chtwm.com",
+
+    // 营销活动
+    recommend_test = "http://172.16.162.190:8011",
+    recommend_haomaojf = "http://wx.uata.haomalljf.com",
+    recommend_online = "http://wx.chtwm.com";
 
 
 //这是app时，存储本地cookie时的domain
@@ -226,6 +231,7 @@ if (!window.currentIsApp) {
         go_url.cft_url = chtwm_test; //恒天财富的域名
         go_url.oauth_url = oauth_local_test; // oauth域名
         go_url.onlineCustomer_url = onlineCustomer_test; // 在线客服
+        go_url.marketCampaign_url = recommend_test;  // 营销活动
 
 
         if (envOrigin == 0) {
@@ -270,6 +276,7 @@ if (!window.currentIsApp) {
         go_url.cft_url = chtwm_haomaojf; //恒天财富的域名
         go_url.oauth_url = oauth_haomaojf;
         go_url.onlineCustomer_url = onlineCustomer_haomaojf; // 在线客服
+        go_url.marketCampaign_url = recommend_haomaojf;  // 营销活动
 
         if (envOrigin == 0) {
             //明泽
@@ -314,6 +321,7 @@ if (!window.currentIsApp) {
         go_url.cft_url = chtwm_online; //恒天财富的域名
         go_url.oauth_url = oauth_online; // oauth域名
         go_url.onlineCustomer_url = onlineCustomer_online; // 在线客服
+        go_url.marketCampaign_url = recommend_online;  // 营销活动
 
         if (envOrigin == 0) {
             //明泽

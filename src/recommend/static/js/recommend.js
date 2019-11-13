@@ -48,10 +48,13 @@ $(function() {
         list: [], // 存放接口里获取的理财师数据
         phone: '', // 存放用户信息接口里取出来的脱敏手机号
         isWeiXin: true, // 标志是否在微信内打开，默认为true--是
+        customerNo:'',
         // 各图片的标志位类型
         // 按顺序为：老带新首页，老带新积分有礼，老带新规则说明，老带新二维码
         init: function() {
             var that = this;
+
+            that.getUserInfor();
 
             // 页面所处位置判断，逻辑处理
             that.judgePageLocation();
@@ -64,6 +67,30 @@ $(function() {
 
             //绑定事件
             that.events();
+        },
+        getUserInfor:function(){
+            var that = this;
+            var userObj = [{
+                url: site_url.queryUserBaseInfo_api,
+                data: {
+                    hmac: "", //预留的加密信息     
+                    params: { //请求的参数信息
+                    }
+                },
+                async: false,
+                riskIsData: true,
+                appRisk: true,
+                needDataEmpty: false,
+                needLogin: true,
+                callbackDone: function(json) {
+                    
+                    var jsonData = json.data;
+                    that.customerNo = jsonData.customerNo;
+                },
+                 
+            }]
+            $.ajaxLoading(userObj);
+
         },
         /**
          * [judgePageLocation 页面所处位置判断--微信，app中对应逻辑处理]
@@ -247,7 +274,7 @@ $(function() {
                         aesEncrypt = json.data.aesEncrypt;
 
                         //拼分享出去的链接
-                        shareUrl = site_url.newRecommend_url + '?url=' + aesEncrypt;
+                        shareUrl = site_url.onlineCustomer_url + '&shareCustomerNo=' + that.customerNo;
 
                         // 生成二维码
                         that.generateQrcode(shareUrl)
