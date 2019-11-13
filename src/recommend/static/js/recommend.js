@@ -68,6 +68,7 @@ $(function() {
             //绑定事件
             that.events();
         },
+        // 先请求接口，获取客户比那好
         getUserInfor:function(){
             var that = this;
             var userObj = [{
@@ -78,9 +79,6 @@ $(function() {
                     }
                 },
                 async: false,
-                riskIsData: true,
-                appRisk: true,
-                needDataEmpty: false,
                 needLogin: true,
                 callbackDone: function(json) {
                     
