@@ -48,11 +48,13 @@
             }
         }
         .bannerposi{
+            position: relative;
             width: 91.7333%;
             height: 3rem;
             margin: 0 auto;
             background: url("/mine/static/img/mine_bg_hyqy@2x.png");
             background-size: 100% 100%;
+            z-index:150 ;
             // position: relative;
             // top:.4rem;
             .posione{
@@ -158,7 +160,8 @@
 
     .zhanwei{
         position: fixed;
-        margin-top: 3.2rem;
+        // margin-top: 3.2rem;
+        top:3.2rem;
         width: 100%;
         height:1.1rem;
         background: #f5f7f8;
@@ -167,8 +170,10 @@
 
     .content{
         // margin-top: 4.3rem;
-        position: relative;
+        position: absolute;
         top:4.3rem;
+        left: 0;
+        right: 0;
         ul>li{
             background: #fff;
             .lione{
