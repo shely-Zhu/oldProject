@@ -17,6 +17,10 @@ var pathTitle=[
     {
         pathName:"权益详情3",
         pathUrl:"eruda3" 
+    },
+    {
+        pathName:"登录日志查询",
+        pathUrl:"eruda3" 
     }
 ]
 $(function(){
