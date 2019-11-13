@@ -1,0 +1,35 @@
+<!-- 我的奖励
+ @author zhangyanping 2019-11-12
+-->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	
+	@@include('@pathInclude/views/meta.html')
+	<link rel="stylesheet" href="/mine/static/css/rewards.css">
+	<title>我的奖励</title>
+</head>
+<body>
+	
+	<!-- @@include('@pathCommonViews/load.html') -->
+	<!-- @@include('@pathCommonViews/loading/listLoading.html') -->
+
+	<div class="reward">
+		<div class="contentHeader"><span class="iconfont">&#xe635;</span>实体奖我们将在48小时内发放，如未收到，请联系您的理财师</div>
+		<div class="rewardWrapper">
+			<ul class="rewardList">
+				
+			</ul>
+		</div>
+		
+	</div>
+
+	 
+	@@include('@pathInclude/views/footer.html')
+	<!-- 添加埋点 -->
+	@@include('@pathInclude/views/header.html')
+	<script src="/mine/static/js/rewards.js"></script>
+
+</body>
+</html>

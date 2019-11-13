@@ -1,7 +1,6 @@
 <!-- 会员权益-会员权益详情
  @author liuhongyu 2019-11-11
 -->
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -10,7 +9,7 @@
     <link rel="stylesheet" href="/mine/static/css/membershipDetails.css">
     
     <script type="text/javascript" src="/include/js/swiper.min.js"></script>
-
+    
 	<title>会员权益-会员权益详情</title>
 </head>
 <body>
@@ -19,20 +18,15 @@
 	<!--@@include('@pathCommonViews/noData.html')  -->
 	@@include('@pathCommonViews/loading/listLoading.html')
     <div id="membershipDetailsBox">
-        <div class="membershipDetailsSilderBgBox">
-
-        </div>
-        <div class="membershipDetailsHeaderBox">
+        <!-- <div class="membershipDetailsHeaderBox">
             <a class="iconfont" href="javascript:;">&#xe634;</a>
             权益详情
-        </div>
-
+        </div> -->
+    @@include('@pathCommonViews/headBarConfig.html',{"bgColors":"#2C3E77,#273971","showType":"1"})    
         <div class="membershipDetailsSilderBox">
-            
-            
-                
         </div>
-        
+        <div class="membershipDetailsSilderBox">
+        </div>
     </div>
     <script id="membershipDetailsList-template" type="text/x-handlebars-template">
         <div class="swiper-container show-swiper swiper-container-horizontal swiper-container-ios">
