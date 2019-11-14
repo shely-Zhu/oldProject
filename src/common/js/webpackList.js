@@ -214,4 +214,6 @@ module.exports = {
     './mine/static/js/rewards' : './src/mine/static/js/rewards.js',
     //联系我们
     './mine/static/js/concatUs' : './src/mine/static/js/concatUs.js',
+    //文件上传
+    './mine/static/js/uploadMaterial' : './src/mine/static/js/uploadMaterial.js',
 }
