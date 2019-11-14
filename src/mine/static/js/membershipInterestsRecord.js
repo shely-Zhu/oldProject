@@ -64,7 +64,7 @@ $(function(){
                         contentrefresh: '拼命加载中',
                         contentnomore: '没有更多了', //可选，请求完毕若没有更多数据时显示的提醒内容；
                         callback: function() {
-                
+                            
                             // 热门诊断
                             that.getData(this);
                         }

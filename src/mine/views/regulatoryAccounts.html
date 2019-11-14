@@ -26,7 +26,7 @@
 			<transition name='fade'>
 				<div class="topcontent">
 					<div class="topc" id="topc">
-						监管账户是为了保障买卖双方的交易资金安全、维护买卖双方的权益，从而开立的银行监管账户，委托银行对指定账户的特定用途资金进行专项管理和使用；为保证正常交易，注意使用购买时所选银行账户进行汇款，汇款信息确保准确无误，汇款用途可填写“认购、申请**基金”，也可不填。
+						<!-- 监管账户是为了保障买卖双方的交易资金安全、维护买卖双方的权益，从而开立的银行监管账户，委托银行对指定账户的特定用途资金进行专项管理和使用；为保证正常交易，注意使用购买时所选银行账户进行汇款，汇款信息确保准确无误，汇款用途可填写“认购、申请**基金”，也可不填。 -->
 					</div>
 					<img class="topimg" src="/mine/static/img/close@2x.png" alt="">
 				</div>
@@ -38,28 +38,28 @@
 				<li>
 					<div class="title">户名</div>
 					<div class="copy">
-						<div id="name">北京恒天明泽基金销售有限公司公募代销账户</div>
+						<div id="name"></div>
 						<span class="copy_btn">复制</span>
 					</div>
 				</li>
 				<li>
 					<div class="title">账号</div>
 					<div class="copy">
-						<div id="number">3101000000261</div>
+						<div id="number"></div>
 						<span class="copy_btn">复制</span>
 					</div>
 				</li>
 				<li>
 					<div class="title">行号</div>
 					<div class="copy">
-						<div id="linenum">3101000000261</div>
+						<div id="linenum"></div>
 						<span class="copy_btn">复制</span>
 					</div>
 				</li>
 				<li class="bordernone">
 					<div class="title">开户行</div>
 					<div class="copy">
-						<div id="openingBank">上海浦东发展银行北京菜户营支行</div>
+						<div id="openingBank"></div>
 						<span class="copy_btn">复制</span>
 					</div>
 				</li>
@@ -67,7 +67,10 @@
 		</div>
 		
 	</section>
-	 @@include('@pathInclude/views/footer.html')
+	<!-- 加载中loading -->
+	@@include('@pathCommonViews/load.html')
+
+	@@include('@pathInclude/views/footer.html')
 	<!-- 添加埋点 -->
 	@@include('@pathInclude/views/header.html')
 	<script src="/include/js/vendor/clipboard/clipboard.js"></script>
