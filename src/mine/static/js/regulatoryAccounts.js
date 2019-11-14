@@ -11,6 +11,8 @@ require('../../../include/js/vendor/mui/mui.picker.min.js');
 require('../../../include/js/vendor/zepto/callback.js');
 require('../../../include/js/vendor/zepto/deferred.js');
 
+require('@pathCommonJs/components/headBarConfig.js');
+
 //黑色提示条
 var tipAction = require('../../../common/js/components/tipAction.js');
 require('../../../common/js/components/utils.js');
@@ -19,7 +21,7 @@ require('../../../common/js/components/elasticLayer.js');
 
 var splitUrl = require('../../../common/js/components/splitUrl.js');
 //引入复制功能
-var Clipboard = require('clipboard');
+// var Clipboard = require('clipboard');
 
 
 $(function(){
@@ -28,17 +30,17 @@ $(function(){
 
 		getElements : {
 			accountName : $('#accountName'),  //公共账户名称
-			name        : $('#number span'),  //公募账户名
-			number      : $('#number span'),  //账号
-			linenum     : $('#linenum span'), //行号
+			name        : $('#name'),  //公募账户名
+			number      : $('#number'),  //账号
+			linenum     : $('#linenum'), //行号
 			openingBank : $("#openingBank"),  //开户行
-			prompt      : $('#prompt'),       //提示信息
+			topc      : $('#topc'),       //提示信息
 		},
 
 		webinit:function(){
 			var that = this;
 
-			//that.getData();
+			that.getData();
 			//
 			that.events();
 
@@ -50,31 +52,29 @@ $(function(){
 
 			var param = {
 
-					hmac:"", //预留的加密信息
+					// hmac:"", //预留的加密信息
 
-					params:{//请求的参数信息
+					// params:{//请求的参数信息
 
-					}
+					// }
 
 				};
 
 			//发送ajax请求
 	        var obj = [{
-	            url: site_url.pubregulatory_api,
+	            url: site_url.findSuperviseBank_api,
 	            data: param,
 	            needLogin:true,//需要判断是否登陆
 	            //needDataEmpty: false,//不需要判断data是否为空
 	            callbackDone: function(json){  //成功后执行的函数
 
-	                console.log(JSON.stringify(json));
-
 	                $('#accountName').html(json.data.title);
-	                $('#name span').html(json.data.accountName);
-	                $('#number span').html(json.data.bankAccount);
-	                $('#linenum span').html(json.data.bankNo);
-	                $('#openingBank span').html(json.data.bankAccountName);
+	                $('#name').html(json.data.accountName);
+	                $('#number').html(json.data.bankAccount);
+	                $('#linenum').html(json.data.bankNo);
+	                $('#openingBank').html(json.data.bankAccountName);
 
-	                $('#content').html(json.data.remarks);
+					$('#topc').html(json.data.remarks);
 
 
 	            },
@@ -99,20 +99,14 @@ $(function(){
             //点击复制按钮
             $('.copy_btn').on('tap', function(el) {
             	var $this = $(this);
-
-            	//console.log($(this).parent('p').find("span").eq(1).text());
-
-            	var copyText = $this.siblings('span').text()
-
+				var copyText = $this.siblings('div').text()
 			    //实例化clipboard
 				var clipboard = new Clipboard('.copy_btn', {
 					text: function () {
 
-						console.log(copyText);
 						return copyText;
 					}
 				});
-
 				clipboard.on("success", function (e) {
 					//text = '';
 					tipAction("复制成功");
@@ -120,10 +114,15 @@ $(function(){
 				clipboard.on("error", function (e) {
 					tipAction("请选择“拷贝”进行复制!");
 				});
-
-
-
-            })
+			})
+			
+			$('.toptitle').on('tap',function(){
+				$('.topcontent').addClass('mui-active').removeClass('mui-hidden');
+			})
+			
+			$('.topimg').on('tap',function(){
+				$('.topcontent').addClass('mui-hidden').removeClass('mui-active');
+			})
 
         },
 

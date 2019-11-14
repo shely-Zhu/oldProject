@@ -10,6 +10,7 @@ require('@pathCommonJs/components/utils.js');
 require('@pathCommonJs/ajaxLoading.js');
 require('@pathCommonJs/components/elasticLayer.js');
 require('@pathCommonJs/components/elasticLayerTypeTwo.js');
+require('@pathCommonJs/components/headBarConfig.js');
 var tipAction = require('@pathCommonJs/components/tipAction.js');
 var splitUrl = require('@pathCommonJs/components/splitUrl.js')();
 var generateTemplate = require('@pathCommonJsComBus/generateTemplate.js');
@@ -38,7 +39,7 @@ $(function(){
             that.getDataNum();
 
 			//
-			// that.events();
+			that.events();
 
         },
         beforeFunc: function(t) {
@@ -136,7 +137,6 @@ $(function(){
                 needDataEmpty: false,
                 callbackDone: function(json) {
                     var dataList;
-                    console.log(json)
 
                     // 待定
                     if (json.data.totalCount == 0) { // 没有记录不展示
@@ -183,6 +183,18 @@ $(function(){
                 }
             }]
             $.ajaxLoading(obj);
+
+        },
+        events: function(targetUrl) {
+			var that = this;
+
+
+
+			mui("body").on('tap','.posioneright', function(){
+                console.log(123132)
+				// window.location.href = site_url.privateActivity_url;
+				// window.open(site_url.privateActivity_url);
+			});
 
 		},
     }
