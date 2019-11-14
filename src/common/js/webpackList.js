@@ -222,5 +222,7 @@ module.exports = {
      //mui索引列表插件 
      './mine/static/js/memberClub/mui.indexedlist': "./src/mine/static/js/memberClub/mui.indexedlist.js",
      //活动详情
-     './mine/static/js/memberClub/activityDetails': "./src/mine/static/js/memberClub/activityDetails.js"
+     './mine/static/js/memberClub/activityDetails': "./src/mine/static/js/memberClub/activityDetails.js",
+    //文件上传
+    './mine/static/js/uploadMaterial' : './src/mine/static/js/uploadMaterial.js',
 }
