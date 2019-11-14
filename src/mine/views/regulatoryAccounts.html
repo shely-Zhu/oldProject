@@ -1,46 +1,76 @@
+<!-- /**  
+ * @Page:  公募监管账户
+ * @Author: caoqihai  
+ * @Date:   2019-11-14
+ * 
+ */ -->
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
-	<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-	<meta name="applicable-device" content="mobile">
-	<meta content="telephone=no" name="format-detection"/>
-	<meta name="apple-mobile-web-app-capable" content="yes">
-	<meta name="apple-mobile-web-app-status-bar-style" content="black">
+	@@include('@pathInclude/views/meta.html')
 	<link rel="stylesheet" href="/mine/static/css/account.css">
 	<title>公募监管账户</title>
 </head>
 <body>
 	<!-- @@include('../../common/views/load.html') -->
+	
 	<section class="container">
-		<div class="regulatoryAccounts">
-			<div class="mui-card">
-				<div class="accountName">公募监管账户</div>
-				<div class="accountDetail">
-					<p class="name">户&nbsp;&nbsp;&nbsp;名<span class="copy_btn">复制</span><span>北京恒天明泽基金销售有限公司</span></p>
-					<p class="number">账&nbsp;&nbsp;&nbsp;号<span class="copy_btn">复制</span><span>111222233334445566777</span></p>
-					<p class="linenum">行&nbsp;&nbsp;&nbsp;号<span class="copy_btn">复制</span><span>31353246363</span></p>
-					<p class="openingBank">开户行<span class="copy_btn">复制</span><span>大康师傅客户卡复活卡奥卡福卡福</span></p>
+		@@include('@pathCommonViews/headBarConfig.html',{"pathName":"公募监管账户"}) 
+		<div class="br"></div>
+		<div class="top">
+			<div class="toptitle">
+				<img src="/mine/static/img/zhuyi@2x.png" alt="">
+				<span>监管账户说明</span>
+			</div>
+			<transition name='fade'>
+				<div class="topcontent">
+					<div class="topc" id="topc">
+						监管账户是为了保障买卖双方的交易资金安全、维护买卖双方的权益，从而开立的银行监管账户，委托银行对指定账户的特定用途资金进行专项管理和使用；为保证正常交易，注意使用购买时所选银行账户进行汇款，汇款信息确保准确无误，汇款用途可填写“认购、申请**基金”，也可不填。
+					</div>
+					<img class="topimg" src="/mine/static/img/close@2x.png" alt="">
 				</div>
-			</div>
-			<div class="mui-card">
-				<div class="accountName">私募监管账户</div>
-				<div class="accountDetail">
-					<p class="name">户&nbsp;&nbsp;&nbsp;名<span class="copy_btn">复制</span><span>111</span></p>
-					<p class="number">账&nbsp;&nbsp;&nbsp;号<span class="copy_btn">复制</span><span>222</span></p>
-					<p class="linenum">行&nbsp;&nbsp;&nbsp;号<span class="copy_btn">复制</span><span>333</span></p>
-					<p class="openingBank">开户行<span class="copy_btn">复制</span><span>444</span></p>
-				</div>
-			</div>
-			<div class="prompt">
-				<div class="tip">提示</div>
-				<section class="content" id="content"></section>
-			</div>
+			</transition>
 		</div>
+
+		<div class="content">
+			<ul>
+				<li>
+					<div class="title">户名</div>
+					<div class="copy">
+						<div id="name">北京恒天明泽基金销售有限公司公募代销账户</div>
+						<span class="copy_btn">复制</span>
+					</div>
+				</li>
+				<li>
+					<div class="title">账号</div>
+					<div class="copy">
+						<div id="number">3101000000261</div>
+						<span class="copy_btn">复制</span>
+					</div>
+				</li>
+				<li>
+					<div class="title">行号</div>
+					<div class="copy">
+						<div id="linenum">3101000000261</div>
+						<span class="copy_btn">复制</span>
+					</div>
+				</li>
+				<li class="bordernone">
+					<div class="title">开户行</div>
+					<div class="copy">
+						<div id="openingBank">上海浦东发展银行北京菜户营支行</div>
+						<span class="copy_btn">复制</span>
+					</div>
+				</li>
+			</ul>
+		</div>
+		
 	</section>
 	 @@include('@pathInclude/views/footer.html')
 	<!-- 添加埋点 -->
-    @@include('@pathInclude/views/header.html')
+	@@include('@pathInclude/views/header.html')
+	<script src="/include/js/vendor/clipboard/clipboard.js"></script>
 	<script src="/mine/static/js/regulatoryAccounts.js"></script>
 
 </body>
