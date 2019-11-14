@@ -100,7 +100,7 @@ $(function() {
             var ua = navigator.userAgent.toLowerCase();
             if (ua.match(/MicroMessenger/i) != "micromessenger") {
                 //不是微信浏览器，隐藏微信分享按钮
-                that.isWeiXin = false;
+                that.isWeiXin = true;
                 // 二维码下的提示文案，只有普通浏览器显示，微信和app内都不显示
                 $('.qrcode_wrap .code_tip').show();
             }
@@ -270,9 +270,8 @@ $(function() {
                     } else {
                         // 已实名认证
                         aesEncrypt = json.data.aesEncrypt;
-                        var onlineCustomerUrl = 'http://wx.chtwm.com/api/brand/index.html?activityId=pWhA5xJTKF4Zfst%2B9ycHqQ%3D%3D&channel=3'
                         //拼分享出去的链接
-                        shareUrl = onlineCustomerUrl + '&shareCustomerNo=' + that.customerNo;
+                        shareUrl = 'http://wx.chtwm.com/api/brand/index.html?activityId=pWhA5xJTKF4Zfst%2B9ycHqQ%3D%3D&channel=3&shareCustomerNo=' + that.customerNo;
 
                         // 生成二维码
                         that.generateQrcode(shareUrl)
