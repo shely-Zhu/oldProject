@@ -1,7 +1,9 @@
-/**
-*公募监管账户
-* @author zhangyanping 2017-03-13
-*/
+ /**  
+ * @Page:  公募监管账户
+ * @Author: caoqihai  
+ * @Date:   2019-11-14
+ * 
+ */ 
 
 require('../../../include/js/vendor/config.js');
 
