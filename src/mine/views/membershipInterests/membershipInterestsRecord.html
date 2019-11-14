@@ -14,9 +14,10 @@
     <div class="container">
         <div class="banner">
             <div class="headbox">
-                 <a class="iconfont iconback"  href="javascript:;">&#xe634;</a>
+                 <a class="iconfont iconback"  id="goBack" href="javascript:;">&#xe634;</a>
                 成长值记录
             </div>
+            <!-- @@include('@pathCommonViews/headBarConfig.html',{"bgColors":"#32457e,#04154a","showType":"1","pathName":"成长值记录"})     -->
             <div class="bannerposi">
                 <div class="posione">
                     <div class="posioneleft">当前值</div>
@@ -74,7 +75,7 @@
             <!-- 没有数据 -->
             @@include('@pathCommonViews/noData.html')
             <!-- 加载中loading -->
-            @@include('@pathCommonViews/loading/listLoading.html')
+            @@include('@pathCommonViews/load.html')
         </div>
     </div>
 

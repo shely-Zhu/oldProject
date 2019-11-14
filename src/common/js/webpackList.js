@@ -214,4 +214,17 @@ module.exports = {
     './mine/static/js/rewards' : './src/mine/static/js/rewards.js',
     // 文章模板
     './mine/static/js/examplePage':'./src/mine/static/js/examplePage.js',
+    //联系我们
+    './mine/static/js/concatUs' : './src/mine/static/js/concatUs.js',
+
+     //会员俱乐部
+     './mine/static/js/memberClub/activityList': "./src/mine/static/js/memberClub/activityList.js",
+     //会员俱乐部-暂无数据mine
+     './mine/static/js/memberClub/activityNoList': "./src/mine/static/js/memberClub/activityNoList.js",
+     //mui索引列表插件 
+     './mine/static/js/memberClub/mui.indexedlist': "./src/mine/static/js/memberClub/mui.indexedlist.js",
+     //活动详情
+     './mine/static/js/memberClub/activityDetails': "./src/mine/static/js/memberClub/activityDetails.js",
+    //文件上传
+    './mine/static/js/uploadMaterial' : './src/mine/static/js/uploadMaterial.js',
 }
