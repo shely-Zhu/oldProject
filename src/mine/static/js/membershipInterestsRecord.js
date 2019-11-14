@@ -194,7 +194,12 @@ $(function(){
                 console.log(123132)
 				// window.location.href = site_url.privateActivity_url;
 				// window.open(site_url.privateActivity_url);
-			});
+            });
+            
+            //返回上一页
+    $("#goBack").on("click",function(){
+        location.href="javascript:history.go(-1)";
+    })
 
 		},
     }
