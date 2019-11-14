@@ -108,7 +108,7 @@ $(function() {
             //如果是app，在页面上添加iframe
             //用来设置分享链接给app
             //因ios和安卓拦截到的ldxShare为小写，这里同步改为ldxshare
-            if (window.curntIsApp) {
+            if (window.currentIsApp) {
                 $('body').append('<iframe src="ldxshare://" id="ldx_share" style="position:absolute;z-index:1000;height:0;width:0;"></iframe>');
                 // 二维码下的提示文案，只有普通浏览器显示，微信和app内都不显示
                 $('.qrcode_wrap .code_tip').hide();
