@@ -212,4 +212,6 @@ module.exports = {
     './mine/static/js/membershipDetails' : './src/mine/static/js/membershipDetails.js',
     // 我的奖励
     './mine/static/js/rewards' : './src/mine/static/js/rewards.js',
+    // 文章模板
+    './mine/static/js/examplePage':'./src/mine/static/js/examplePage.js',
 }

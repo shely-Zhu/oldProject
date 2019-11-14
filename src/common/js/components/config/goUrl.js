@@ -307,5 +307,12 @@ module.exports = function() {
     this.diagnosisSearch_url = go_url.no_url + '/commonResources/fundDiagnosis/views/diagnosisSearch.html';
     // 诊断详情页
     this.diagnosisDetail_url = go_url.no_url + '/commonResources/fundDiagnosis/views/diagnosisDetail.html';
+    
     /*-------------------------------基金诊断 end -----------------------*/
+    /*-------------------------------我的页面 start -----------------------*/
+   //登录日志查询页面
+   	this.journal_url = go_url.no_url + '/mine/views/journal.html'
+   //承接h5的模板页地址
+    this.examplePage_url = go_url.no_url + '/mine/views/examplePage.html';
+    /*-------------------------------我的页面 end -----------------------*/
 };

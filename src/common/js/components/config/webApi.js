@@ -117,10 +117,12 @@ module.exports = function() {
     
 
     this.findProtocolContent_api = http_url.web_url + '/content/frontend/findProtocolContent';
-    //caiwenqi
+    //登录日志查询接口
     this.getUserTrackRecord_api = http_url.web_url + '/account/getUserTrackRecord';
 
     //会员权益详情-获取会员权益详情
     this.findBenefitByLevel_api=http_url.web_url + '/content/findBenefitByLevel';
+    //文章模板接口
+    this.articleExample_api = http_url.web_url + '/account/articleExample';	
 
 };
