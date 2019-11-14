@@ -118,7 +118,7 @@ $(function(){
 				});
 			})
 			
-			$('.toptitle').on('tap',function(){
+			$('.toptitle span,.toptitle img').on('tap',function(){
 				$('.topcontent').addClass('mui-active').removeClass('mui-hidden');
 			})
 			
