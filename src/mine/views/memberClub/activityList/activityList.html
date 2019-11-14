@@ -1,0 +1,91 @@
+<!--/**
+ * 会员俱乐部-活动列表
+ * @author  liuhongyu 2019-10-31
+ */-->
+
+ <!doctype html>
+ <html lang="en">
+ 
+ <head>
+     <meta charset="UTF-8">
+     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+     <meta name="applicable-device" content="mobile">
+     <meta name="apple-mobile-web-app-capable" content="yes">
+     <meta name="apple-mobile-web-app-status-bar-style" content="black">
+     <meta name="format-detection" content="telephone=no,date=no,address=no,email=no,url=no"/>
+     <link rel="stylesheet" href="/mine/static/css/activityList.css">
+     <link rel="stylesheet" href="/mine/static/css/mui.indexedlist.css">
+     <title>会员俱乐部-活动列表</title>
+     <script src="/include/js/adaptation_750ui.js"></script>
+     <script src="/include/js/moment.js"></script>
+ </head>
+ 
+ <body>
+    @@include('@pathCommonViews/load.html')
+    @@include('@pathCommonViews/loading/listLoading.html')
+    <div id="cityListBox">
+
+    </div>
+    
+    <div id="activityDataBox">
+        <!-- 活动列表搜索开始 -->
+        <section id="activitySearch">
+            <a href="javascript:;" class=""></a>
+            <!-- 搜索 -->
+            <div class="mui-input-row mui-search activitySearchInput">
+                <input type="search" class="mui-input-clear" placeholder="请输入活动名称">
+            </div>
+            <div class="activityCityBox">
+                <span id="locationCity" data-code="120000" data-parentId="120000">天津</span>
+                <i></i>
+            </div>
+        </section>
+        <!-- 活动列表搜索结束 -->
+        <!-- 活动列表有数据开始 -->
+        <div class="activityListDataBox">        
+            <section id="activityList">
+                <div class="activityList">
+                    <div class="contentWrapper ">
+                        <ul class="mui-table-view" id="activityDataList">
+                            <li class="mui-table-view-cell recordList">
+                                <!--放置列表-->
+                            </li>
+                            <!-- 返回顶部 -->
+                            
+                        </ul>
+                        @@include('@pathCommonViews/goTop.html')
+                        <!-- <a href="javascript:;" class="goTopBtn4"></a> -->
+                    </div>
+                </div>
+                
+            </section>
+        </div>
+        <!-- 活动列表有数据结束 -->
+        <!-- 活动列表没有数据开始 -->
+        <div class="activityListDataNoBox">
+            <section id="activityList" style="background-color: #fff;">
+                <div class="activityNoListBox">
+                    <img src="/mine/static/img/Life_none_Empty state@1x.png" alt="">
+                    <p>抱歉！没有搜索到相关内容</p>
+                </div>
+                <div class="activityList activityNoList">
+                    <h3>推荐活动</h3>
+                    <div class="activityNoListBox2">
+
+                    </div>
+                </div>
+                
+            </section>    
+        </div>
+        <!-- 活动列表没有数据结束 -->
+    </div>
+    
+    @@include('@pathCommonViews/activityList.html')
+    @@include('@pathCommonViews/cityList.html')
+    @@include('@pathInclude/views/footer.html')
+   
+    <script src="/include/js/iscroll.js"></script>
+    <script src="/mine/static/js/memberClub/mui.indexedlist.js"></script>
+    <script src="/mine/static/js/memberClub/activityList.js"></script> 
+
+ </body>

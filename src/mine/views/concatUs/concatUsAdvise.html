@@ -6,6 +6,7 @@
 <head>
 	@@include('@pathInclude/views/meta.html')
     <link rel="stylesheet" href="/mine/static/css/concatUs.css">
+    <link rel="stylesheet" href="/mine/static/css/uploadMaterial.css">
 	<title>联系我们-意见反馈</title>
 </head>
 <body>
@@ -14,7 +15,7 @@
     <!--头部  -->
      @@include('@pathCommonViews/headBarConfig.html',{"pathName":"意见反馈"})    
     <!--身体  -->
-     <section class="concatUsAdvisePageMain">
+     <div class="concatUsAdvisePageMain  uploadMaterial">
             <div class="concatUsAdvisePageMainQuestion">
                     <ul class="mui-table-view">
                             <li class="mui-input-row mui-table-view-cell mui-radio mui-right list">
@@ -44,27 +45,50 @@
                         <textarea maxlength="101" placeholder="请输入1-200字的描述" needCheck="true" check="regAddress"></textarea>
                     </div>
                     <h3 class="concatUsAdvisePageMainAdviceTitle">请您提供对应问题截图或照片</h3> 
-                    <div class="uw_2">
-                            <div class="uw_2_1">上传资料</div>
-                            <div class="up_tip">支持上传图片，可多个文件同时上传，单个大小不超过10M，单类最多可上传4个文件。
-                            </div>
-                            <div class="mui-row queueList uploadArea">
-                                <div class="mui-col-sm-6 iconWrap addBtn" id="complianceSelect" >
-                                    <div class="iconfont addIcon">&#xe71f;</div>
+                    <section class="content_wrap" id="complianceMaterial">
+                            <div class="uploadWrap" >
+                                    <div class="uw_2">
+                                        <div class="mui-row queueList uploadArea">
+                                            <div class="mui-col-sm-6 iconWrap addBtn" id="complianceSelect" >
+                                                <div class="iconfont addIcon">&#xe71f;</div>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
-                            </div>
-                    </div>
+                    </section>
+                    
             </div>
-     </section>
+     </div>
     </div>
 	
 	 
 	@@include('@pathInclude/views/footer.html')
 	<!-- <script src="/include/js/iscroll.js"></script> -->
 	<!-- 添加埋点 -->
-	@@include('@pathInclude/views/header.html')
+    @@include('@pathInclude/views/header.html')
+    <!-- 提交材料页面展示 -->
+    <script id="content-temp" type="text/x-handlebars-template">
+        <!-- 上传区域 个人金融资产证明 -->
+        
+        <!-- 模板下载 -->
+        {{#if accessorys}}
+        <div class="temp">
+            <h3>模板下载：</h3>
+            {{#each accessorys}}
+            <a class="tempName" onclick="window.open(site_url.fileDownLoadOrDisplay_api+'?url={{accessoryUrl}}&isDownLoad=2&name='+encodeURI(encodeURI('{{accessoryName}}')))">{{accessoryName}}</a> 
+            {{/each}}
+        </div>
+        {{/if}}
+        <!-- 提交按钮,不需要上传资料的提交 -->
+        {{#if submitBtn}}
+            <div class="btnButton">
+                <button type="button" class="mui-btn submitBtn">提交认证</button>
+            </div>
+        {{/if}}
+    </script>
     <script src="/mine/static/js/concatUs.js"></script>
-
+    <!-- <script src="/mine/static/js/uploaderFile.js"></script> -->
+    <script src="/include/js/vendor/webuploader/webUploader.js"></script>
 </body>
 <script>
     
