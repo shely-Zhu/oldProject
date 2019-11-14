@@ -131,38 +131,43 @@ $(function() {
                     needDataEmpty: true,
                     callbackDone: function(data) {
                         $('.activityBottomBtnBox').removeClass('disabled');
+
                         if (data.status == "0000") {
                             successTitle = data.message;
-                            if (data.data.actStyle == 4) {
-                                //是老带新
-                                if (data.data.brandPrizeVo.isHave == 0) {
-                                    //没有奖品
-                                    that.successNoConNewOpen(successTitle);
-                                } else if (data.data.brandPrizeVo.isHave == 1) {
-                                    //有奖品
-                                    if (data.data.brandPrizeVo.prizeType == 1) {
-                                        //实物
-                                        that.successSwConNewOpen(successTitle, data.data.brandPrizeVo.prizeName);
-                                    } else if (data.data.brandPrizeVo.prizeType == 2) {
-                                        //虚拟
-                                        that.successDzConNewOpen(successTitle, data.data.brandPrizeVo.prizeName);
+                            if (that.gV.actType == 1) { //线上活动
+                                if (data.data.actStyle == 4) {
+                                    //是老带新
+                                    if (data.data.brandPrizeVo.isHave == 0) {
+                                        //没有奖品
+                                        that.successNoConNewOpen(successTitle);
+                                    } else if (data.data.brandPrizeVo.isHave == 1) {
+                                        //有奖品
+                                        if (data.data.brandPrizeVo.prizeType == 1) {
+                                            //实物
+                                            that.successSwConNewOpen(successTitle, data.data.brandPrizeVo.prizeName);
+                                        } else if (data.data.brandPrizeVo.prizeType == 2) {
+                                            //虚拟
+                                            that.successDzConNewOpen(successTitle, data.data.brandPrizeVo.prizeName);
+                                        }
+                                    }
+                                } else {
+                                    //非老带新
+                                    if (data.data.brandPrizeVo.isHave == 0) {
+                                        //没有奖品
+                                        that.successNoConOpen(successTitle);
+                                    } else if (data.data.brandPrizeVo.isHave == 1) {
+                                        //有奖品
+                                        if (data.data.brandPrizeVo.prizeType == 1) {
+                                            //实物
+                                            that.successSwConOpen(successTitle, data.data.brandPrizeVo.prizeName);
+                                        } else if (data.data.brandPrizeVo.prizeType == 2) {
+                                            //虚拟
+                                            that.successDzConOpen(successTitle, data.data.brandPrizeVo.prizeName);
+                                        }
                                     }
                                 }
-                            } else {
-                                //非老带新
-                                if (data.data.brandPrizeVo.isHave == 0) {
-                                    //没有奖品
-                                    that.successNoConOpen(successTitle);
-                                } else if (data.data.brandPrizeVo.isHave == 1) {
-                                    //有奖品
-                                    if (data.data.brandPrizeVo.prizeType == 1) {
-                                        //实物
-                                        that.successSwConOpen(successTitle, data.data.brandPrizeVo.prizeName);
-                                    } else if (data.data.brandPrizeVo.prizeType == 2) {
-                                        //虚拟
-                                        that.successDzConOpen(successTitle, data.data.brandPrizeVo.prizeName);
-                                    }
-                                }
+                            } else if (that.gV.actType == 2) { //线下活动
+                                that.successNoConOpen(successTitle);
                             }
 
                         }
@@ -314,7 +319,6 @@ $(function() {
                     if (!$(this).hasClass('disabled')) {
                         that.signUp();
                     }
-
                 });
                 //弹框取消方法-两个按钮取消
                 mui('body').on('tap', '.cancel', function() {
@@ -334,6 +338,11 @@ $(function() {
                 //分享好友
                 mui('body').on('tap', '.toShare', function() {
                     that.shareInfo();
+                });
+                //我知道了按钮
+                mui('body').on('tap', '.knowBtn', function() {
+                    $('#notOldToNewNoPrize').hide();
+                    $('.mask').hide();
                 });
             }
         }
