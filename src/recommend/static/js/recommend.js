@@ -108,7 +108,7 @@ $(function() {
             //如果是app，在页面上添加iframe
             //用来设置分享链接给app
             //因ios和安卓拦截到的ldxShare为小写，这里同步改为ldxshare
-            if (window.currentIsApp) {
+            if (window.curntIsApp) {
                 $('body').append('<iframe src="ldxshare://" id="ldx_share" style="position:absolute;z-index:1000;height:0;width:0;"></iframe>');
                 // 二维码下的提示文案，只有普通浏览器显示，微信和app内都不显示
                 $('.qrcode_wrap .code_tip').hide();
@@ -270,9 +270,9 @@ $(function() {
                     } else {
                         // 已实名认证
                         aesEncrypt = json.data.aesEncrypt;
-
+                        var onlineCustomerUrl = 'http://wx.chtwm.com/api/brand/index.html?activityId=pWhA5xJTKF4Zfst%2B9ycHqQ%3D%3D&channel=3'
                         //拼分享出去的链接
-                        shareUrl = site_url.onlineCustomer_url + '&shareCustomerNo=' + that.customerNo;
+                        shareUrl = onlineCustomerUrl + '&shareCustomerNo=' + that.customerNo;
 
                         // 生成二维码
                         that.generateQrcode(shareUrl)
