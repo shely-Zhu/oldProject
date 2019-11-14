@@ -216,6 +216,8 @@ module.exports = {
     './mine/static/js/examplePage':'./src/mine/static/js/examplePage.js',
     //联系我们
     './mine/static/js/concatUs' : './src/mine/static/js/concatUs.js',
+    //联系我们-意见反馈
+    './mine/static/js/concatUsAdvise' : './src/mine/static/js/concatUsAdvise.js',
 
      //会员俱乐部
      './mine/static/js/memberClub/activityList': "./src/mine/static/js/memberClub/activityList.js",
