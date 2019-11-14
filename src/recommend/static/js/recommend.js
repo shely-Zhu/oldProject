@@ -100,7 +100,7 @@ $(function() {
             var ua = navigator.userAgent.toLowerCase();
             if (ua.match(/MicroMessenger/i) != "micromessenger") {
                 //不是微信浏览器，隐藏微信分享按钮
-                that.isWeiXin = true;
+                that.isWeiXin = false;
                 // 二维码下的提示文案，只有普通浏览器显示，微信和app内都不显示
                 $('.qrcode_wrap .code_tip').show();
             }
