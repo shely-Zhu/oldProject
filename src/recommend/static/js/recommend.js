@@ -276,11 +276,6 @@ $(function() {
                         // 生成二维码
                         that.generateQrcode(shareUrl)
 
-                        //如果是app--设置ldxShare的值--- 需要拼凑对应的链接
-                        if (window.currentIsApp) {
-                            $('#ldx_share').attr('src', 'ldxShare://' + shareUrl);
-                        }
-
                         //如果是微信内打开--处理微信分享
                         if (that.isWeiXin) {
                             var obj = { "shareUrl": shareUrl };
@@ -289,6 +284,13 @@ $(function() {
                             // 确保3个接口（鉴权，分享内容，分享链接）都请求成功，再设置分享链接
                             that.getElements.inviting_friend_wrap.show();
                             that.asyncAll();
+                        }
+
+                        //如果是app--设置ldxShare的值--- 需要拼凑对应的链接
+                        if (window.currentIsApp) {
+                            $('#ldx_share').attr('src', 'ldxShare://' + shareUrl);
+                            // ios里显示了邀请按钮，做下隐藏
+                            that.getElements.inviting_friend_wrap.hide();
                         }
                     }
                 },
