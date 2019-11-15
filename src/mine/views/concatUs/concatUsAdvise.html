@@ -1,0 +1,80 @@
+<!-- 会员权益-会员权益详情
+ @author liuhongyu 2019-11-11
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	@@include('@pathInclude/views/meta.html')
+    <link rel="stylesheet" href="/mine/static/css/concatUsAdvise.css">
+    <link rel="stylesheet" href="/mine/static/css/uploadMaterial.css">
+	<title>联系我们-意见反馈</title>
+</head>
+<body>
+	@@include('@pathCommonViews/loading/listLoading.html')
+    <div class="concatUsAdvisePage" id="concatUsAdvise">
+    <!--头部  -->
+     @@include('@pathCommonViews/headBarConfig.html',{"pathName":"意见反馈"})    
+    <!--身体  -->
+     <div class="concatUsAdvisePageMain  uploadMaterial">
+            <div class="concatUsAdvisePageMainQuestion">
+                    <ul class="mui-table-view">
+                            <li class="mui-input-row mui-table-view-cell mui-radio mui-right list">
+                                <label class="blod">请选择您的反馈类型</label>
+                            </li>
+                            <li class="mui-input-row  mui-table-view-cell mui-radio mui-right list ">
+                                <label>功能异常</label>
+                                <input name="radio1" type="radio">
+                            </li>
+                            <li class="mui-input-row mui-table-view-cell mui-radio mui-right list">
+                                <label>安全问题</label>
+                                <input name="radio1" type="radio">
+                            </li>
+                            <li class="mui-input-row mui-table-view-cell mui-radio mui-right list">
+                                <label>产品建议</label>
+                                <input name="radio1" type="radio">
+                            </li>
+                            <li class="mui-input-row mui-table-view-cell mui-radio mui-right list">
+                                <label>其他问题</label>
+                                <input name="radio1" type="radio">
+                            </li>
+                        </ul>
+            </div>
+            <div class="concatUsAdvisePageMainAdvice">
+                   <h3 class="concatUsAdvisePageMainAdviceTitle">请您补充详细问题或意见</h3>
+                   <div class="mui-input-row concatUsAdvisePageMainAdviceContent" >
+                        <textarea maxlength="101" placeholder="请输入1-200字的描述" needCheck="true" check="regAddress"></textarea>
+                    </div>
+                    <h3 class="concatUsAdvisePageMainAdviceTitle">请您提供对应问题截图或照片</h3> 
+                    <section class="content_wrap" id="complianceMaterial">
+                            <div class="uploadWrap" >
+                                    <div class="uw_2">
+                                        <div class="mui-row queueList uploadArea">
+                                            <div class="mui-col-sm-6 iconWrap addBtn" id="complianceSelect" >
+                                                <div class="iconfont addIcon">&#xe71f;</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                    </section>
+            </div>
+     </div>
+     <div class="btnButton">
+        <button type="button" class="mui-btn " id="upload_btn">提交</button>
+    </div>
+    </div>
+	
+	 
+	@@include('@pathInclude/views/footer.html')
+	<!-- <script src="/include/js/iscroll.js"></script> -->
+	<!-- 添加埋点 -->
+    @@include('@pathInclude/views/header.html')
+
+    <script src="/mine/static/js/concatUsAdvise.js"></script>
+    <!-- <script src="/mine/static/js/uploaderFile.js"></script> -->
+    <script src="/include/js/vendor/webuploader/webUploader.js"></script>
+</body>
+<script>
+    
+    
+</script>
+</html>
