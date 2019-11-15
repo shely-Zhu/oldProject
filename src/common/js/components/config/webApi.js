@@ -128,13 +128,10 @@ module.exports = function() {
 
     //会员权益详情-获取会员权益详情
     this.findBenefitByLevel_api=http_url.web_url + '/content/findBenefitByLevel';
-<<<<<<< HEAD
  
-=======
     //文章模板接口
     this.articleExample_api = http_url.web_url + '/account/articleExample';	
 
->>>>>>> d76b0427a89ebd79992b09d98f35c160be2555c5
     //监管账户（老接口）
     this.findSuperviseBank_api = http_url.web_url + '/content/frontend/findSuperviseBank';
 
