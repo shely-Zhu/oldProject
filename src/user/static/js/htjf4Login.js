@@ -89,8 +89,21 @@ $(function() {
                             mobile: phoneValue, //账号
                             password: pwdValue, //密码
                             channelType:"2",
-                            deviceId:"e8897a465998cb70f974dac3197b91f2"
-                            //openId: that.beforeSet.openId //'oe7KJxLcDy57TLNpYTzi2k44467o' 微信Id,打开登录页面链接带过来的参数openId
+                            deviceId:"864684039820036",
+                           
+                            
+    
+                            // "registerId": "140fe1da9efb5800e07",
+                            
+                            // "netType": 1,
+                            // //openId: that.beforeSet.openId //'oe7KJxLcDy57TLNpYTzi2k44467o' 微信Id,打开登录页面链接带过来的参数openId
+                            // "password": "123456",
+						    // "deviceId": "864684039820036",
+						    // "channelType": "2",
+						    // "mobile": "13700051325",
+						    // "registerId": "140fe1da9efb5800e07",
+						    // "accountType": "1",
+						    // "netType": 1
                     },
                     needDataEmpty: false, //不判断data是否为空
                     callbackDone: function(json) {

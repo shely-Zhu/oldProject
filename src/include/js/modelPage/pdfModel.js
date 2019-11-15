@@ -25,7 +25,7 @@ var pdfModel={
 		var objUrl,dataPdf;
 
 		if(pageUrl.indexOf('protocol') != -1){
-			pdfId = '';
+			pdfId = '132';
 		}
 		else if(pageUrl.indexOf('policy') != -1){
 			pdfId = '131';

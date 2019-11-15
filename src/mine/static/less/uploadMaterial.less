@@ -1,0 +1,213 @@
+/**
+ * 上传页面
+ * @author songxiaoyu 2017.5.24
+ */
+
+@import url("@pathCommonLess/reset.less");
+@import url("@pathCommonLess/color.less");
+@import url("../../../include/css/mui.min.css");
+@import url('@pathCommonLess/mui/resetMUI.less');
+
+//黑色提示框的样式
+@import url("@pathCommonLess/components/againEnter.less");
+@import url("@pathCommonLess/components/elasticLayerTypeTwo.less");
+
+
+.uploadMaterial {
+    font-size: 1.4rem;
+    color: @c002;
+
+    .title {
+        padding: 1rem 1.6rem;
+        color: @D2A311;
+        display: block;
+        background: @FCFBF2;
+
+        .iconfont {
+            float: right;
+            margin-top: 0.1rem;
+        }
+    }
+
+    .content_wrap {
+
+        // 头像
+        .avatar {
+            text-align: center;
+            background: @c005;
+            height: 14.6rem;
+
+            .iconfont {
+                display: inline-block;
+                margin-top: 2rem;
+                margin-bottom: 1.2rem;
+                font-size: 6rem;
+
+                color: @c006;
+            }
+
+            h3 {
+                font-size: 1.5rem;
+                color: @c002;
+            }
+        }
+
+        // 解释
+        .tip {
+            font-size: 1.4rem;
+            color: @c003;
+            line-height: 2.1rem;
+            padding: 3rem 1.6rem 0;
+        }
+
+        // 第一个上传区域
+        .uploadWrap,
+        .uploadWrap2 {
+            min-height: 12rem;
+            padding: 0 .3rem  .3rem .3rem;
+            background-color: @c005;
+            .uw_1 {
+                border-bottom: 1px solid @c008;
+                color: @c003;
+
+
+            }
+
+            .uw_2 {
+                // padding-right: 1.6rem;
+                padding-top: 0.1rem;
+
+
+
+
+                .uw_2_1 {
+                    margin-top: 1rem;
+                    margin-bottom: 0.4rem;
+                }
+
+                .uw_2_2 {
+                    margin-bottom: 2rem;
+
+                    &:last-child {
+                        margin-bottom: 0;
+                    }
+
+                    .checkHide {
+                        input:before {
+                            display: none;
+                        }
+
+                        label {
+                            font-size: 1.3rem;
+                            color: @c002;
+                            line-height: 1.8rem;
+                            margin-bottom: 0.7rem;
+                        }
+                    }
+                }
+
+                .up_tip {
+                    font-size: 1.2rem;
+                    margin-bottom: 1.2rem;
+                    line-height: 1.7rem;
+                    color: @999;
+                }
+
+
+                .iconWrap {
+                    text-align: center;
+                    width: 2.1rem;
+                    height: 2.1rem;
+                    margin-right: .26rem;
+                    margin-bottom: .3rem;
+                    div {
+                        width: 2.1rem;
+                        height: 2.1rem;
+                        background-color: @F8FBFF;
+                    }
+                    &:nth-child(3n) {
+                        // margin-top: .3rem;
+                        margin-right: 0px;
+                    }    
+                    // &:nth-child(n+3) {
+                    //     margin-top: .3rem;
+                    // }
+                    .imgWrap {
+                        position: relative;
+                        width: 2.1rem;
+                        height: 2.1rem;
+                        background: @c031;
+                        img {
+                            position: absolute;
+                            top: 0;
+                            bottom: 0;
+                            left: 0;
+                            right: 0;
+                            max-width: 100%;
+                            max-height: 100%;
+                            width: auto;
+                            margin: auto;
+                        }
+                    }
+
+                    .closeIcon {
+                        font-size: .3rem;
+                        position: absolute;
+                        top: -0.15rem;
+                        right: -0.15rem;
+                        color: #F52323;
+                    }
+
+                    .addIcon {
+                        font-size: .92rem;
+                        color: @9BBDEA;
+                        // border: .1rem dotted @E8EBEF;
+                        width: 2.1rem;
+                        height: 2.1rem;
+                    }
+                }
+            }
+
+            .yellow {
+                color: @DEAD15;
+            }
+        }
+
+        // 资料下载
+        .temp {
+            padding: 0.8rem 1.6rem 0rem;
+
+            h3 {
+                font-size: 1.4rem;
+                color: @c002;
+                margin-bottom: 0.5rem;
+            }
+
+            .tempName {
+                color: @4A90E2;
+                line-height: 2.5rem;
+                display: block;
+            }
+        }
+    }
+
+    .needMaterial{
+        display: none;
+    }
+
+
+
+    .highlight {
+        color: @c006;
+    }
+
+    .hide {
+        display: none;
+    }
+}
+
+.elasticLayerTypeTwo {
+    .fontBold {
+        color: @c002;
+    }
+}

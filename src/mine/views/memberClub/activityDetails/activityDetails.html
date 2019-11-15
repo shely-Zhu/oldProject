@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="/mine/static/css/activityDetails.css">
+    <script src="/include/js/adaptation_750ui.js"></script>
+    <title>活动详情</title>
+</head>
+
+<body>
+    <!-- @@include('@pathCommonViews/load.html')
+    @@include('@pathCommonViews/noData.html')
+    @@include('@pathCommonViews/loading/listLoading.html') -->
+    <header>
+        <a href="javascript:;" class="goblack"></a>
+        活动详情
+    </header>
+    <section id="activityDetailsBox">
+        <img id="bgimg" src="/mine/static/img/Life_bg_picturer@2x.png" alt="">
+        <div class="activityDetailsBox">
+            <div class="activityDetailsTopBox">
+                <h3 class="actName">女性婚姻财富保全与花艺沙龙</h3>
+                <div class="activityDetailsDivBox">
+                    <p><i class="locationIcon"></i><span>活动举办城市:</span></p>
+                    <p class="city">北京市</p>
+                </div>
+                <div class="activityDetailsDivBox">
+                    <p><i class="activityTimeIcon"></i><span>活动报名时间:</span></p>
+                    <p class="startTimeOrendTime">2019年10月18日 08:00–10月18日22:00</p>
+                </div>
+            </div>
+            <div class="activityIntroduceBox">
+                <h4>活动介绍</h4>
+                <div class="activityIntroduce">
+
+                </div>
+                <!-- <img src="/mine/static/img/Life_picturer_1@2x.png" alt="">  
+                <p class="actIntroduce">通过邀请客户参加高端红酒活动，从而为客户带来不一样的活动体验并对公司留下深刻印象，品尝全酒宴，满足客户体验，增加客户与理财师交流，对于客户增信、签单有很大的促进作用</p> -->
+                <!-- <img src="/mine/static/img/Life_picturer_1@2x.png" alt="">  
+                <p>通过邀请客户参加高端红酒活动，从而为客户带来不一样的活动体验并对公司留下深刻印象，品尝全酒宴，满足客户体验，增加客户与理财师交流，对于客户增信、签单有很大的促进作用</p> -->
+            </div>
+        </div>
+
+    </section>
+    <div class="activityBottomBtnBox">
+        <a href="javascript:;">立即报名</a>
+    </div>
+    <div class="activityBottomBox">
+        <a href="javascript:;"></a>
+    </div>
+    <div class="mask"></div>
+    <!-- 弹框类型-淡黄色背景两个按钮 -->
+    <div class="tipContainer" id="tipCon">
+        <p class="titleText">抱歉，您不符合活动参与条件</p>
+        <div class="tipCon">本活动仅限合格投资者参加，请先完成合格投资者认证</div>
+        <div class="buttonCon">
+            <a class="cancel">取消</a>
+            <a href="" class="todo">合格投资者认证</a>
+        </div>
+    </div>
+    <!-- 弹框类型-淡黄色背景两个按钮 -->
+    <!-- 弹框类型-淡黄色背景一个按钮 -->
+    <div class="tipContainer" id="tipConOne">
+        <p class="titleText">不可重复报名</p>
+        <div class="tipCon">您已经报名成功，不可以重复报名</div>
+        <div class="buttonOne">我明白了</div>
+    </div>
+    <!-- 弹框类型-淡黄色背景一个按钮 -->
+    <!-- 老带新实物奖品弹框 -->
+    <div class="successBigCon" id="oldToNewPrizesw">
+        <div class="successBox">
+            <!-- 标题 -->
+            <div class="successTit">恭喜您报名成功</div>
+            <!-- 奖品名称 -->
+            <div class="prizeName">恭喜您获得<span>京东100元购物卡</span></div>
+            <!-- 邀请好友 -->
+            <div class="shareTip clearfix">
+                <span></span>
+                <p>邀请新好友获得更多奖励</p>
+                <span></span>
+            </div>
+            <!-- 邮寄提示 -->
+            <div class="postTip">*请您保持手机畅通，我们工作人员将与您联系并给您邮寄奖品，谢谢您的参与*</div>
+            <!-- 分享按钮 -->
+            <div class="shareBtn toShare">分享给好友</div>
+            <!-- 查看奖励 -->
+            <a href="" class="seePrize">查看奖励></a>
+        </div>
+        <span class="iconfont closeBtn">&#xe637;</span>
+    </div>
+    <!-- 老带新实物奖品弹框 -->
+
+
+    <!-- 老带新电子奖品弹框 -->
+    <div class="successMidCon" id="oldToNewPrizedz">
+        <div class="successBox">
+            <!-- 标题 -->
+            <div class="successTit">恭喜您报名成功</div>
+            <!-- 奖品名称 -->
+            <div class="prizeName">恭喜您获得<span>京东100元购物卡</span></div>
+            <!-- 邀请好友 -->
+            <div class="shareTip clearfix">
+                <span></span>
+                <p>邀请新好友获得更多奖励</p>
+                <span></span>
+            </div>
+            <!-- 分享按钮 -->
+            <div class="shareBtn toShare">分享给好友</div>
+            <!-- 查看奖励 -->
+            <a href="" class="seePrize">查看奖励></a>
+        </div>
+        <span class="iconfont closeBtn">&#xe637;</span>
+    </div>
+    <!-- 老带新电子奖品弹框 -->
+    <!-- 老带新无奖品 -->
+    <div class="successSmallCon" id="oldToNewNoPrize">
+        <div class="successBox">
+            <!-- 标题 -->
+            <div class="successTit">恭喜您报名成功</div>
+            <!-- 成功提示内容 -->
+            <div class="shareCon">邀请好友，将有机会获得奖励</div>
+            <!-- 分享按钮 -->
+            <div class="shareBtn toShare">分享给好友</div>
+        </div>
+        <span class="iconfont closeBtn">&#xe637;</span>
+    </div>
+    <!-- 老带新无奖品 -->
+    <!-- 老带新不满足邀请条件 -->
+    <div class="successMidCon" id="oldToNewTip">
+        <div class="successBox">
+            <!-- 标题 -->
+            <div class="successTit">温馨提示</div>
+            <!-- 提示信息 -->
+            <div class="prizeName"></div>
+            <!-- 邀请好友 -->
+            <div class="shareTip clearfix">
+                <span></span>
+                <p>邀请新好友获得更多奖励</p>
+                <span></span>
+            </div>
+            <!-- 分享按钮 -->
+            <div class="shareBtn toShare">分享给好友</div>
+        </div>
+        <span class="iconfont closeBtn">&#xe637;</span>
+    </div>
+    <!-- 老带新不满足邀请条件 -->
+    <!-- 非老带新实物奖品弹框 -->
+    <div class="successMidCon" id="notOldToNewPrizesw">
+        <div class="successBox">
+            <!-- 标题 -->
+            <div class="successTit">恭喜您报名成功</div>
+            <!-- 奖品名称 -->
+            <div class="prizeName">恭喜您获得<span>京东100元购物卡</span></div>
+            <!-- 邮寄提示 -->
+            <div class="postTip">*请您保持手机畅通，我们工作人员将与您联系并给您邮寄奖品，谢谢您的参与*</div>
+            <!-- 分享按钮 -->
+            <div class="shareBtn">查看奖励</div>
+        </div>
+        <span class="iconfont closeBtn">&#xe637;</span>
+    </div>
+    <!-- 非老带新实物奖品弹框 -->
+    <!-- 非老带新电子奖品弹框 -->
+    <div class="successSmallCon" id="notOldToNewPrizedz">
+        <div class="successBox">
+            <!-- 标题 -->
+            <div class="successTit">恭喜您报名成功</div>
+            <!-- 成功提示内容 -->
+            <div class="prizeName">恭喜您获得<span>京东100元购物卡</span></div>
+            <!-- 分享按钮 -->
+            <div class="shareBtn">查看奖励</div>
+        </div>
+        <span class="iconfont closeBtn">&#xe637;</span>
+    </div>
+    <!-- 非老带新电子奖品弹框 -->
+    <!-- 非老带新无奖品 -->
+    <div class="successSmallCon" id="notOldToNewNoPrize">
+        <div class="successBox">
+            <!-- 标题 -->
+            <div class="successTit">恭喜您报名成功</div>
+            <!-- 成功提示内容 -->
+            <div class="successContent">稍后您的理财师将会与您沟通具体活动事宜，请保持手机畅通</div>
+            <!-- 分享按钮 -->
+            <div class="shareBtn knowBtn">我知道了</div>
+        </div>
+        <span class="iconfont closeBtn">&#xe637;</span>
+    </div>
+    <!-- 非老带新无奖品 -->
+
+
+    @@include('@pathInclude/views/footer.html')
+</body>
+<script src="/mine/static/js/memberClub/activityDetails.js"></script>
+
+</html>
