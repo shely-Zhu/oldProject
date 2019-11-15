@@ -87,8 +87,8 @@ $(function(){
             var that = this;
             
             var obj = [{ // 系统调仓记录列表
-                // url: site_url.getActivitiesList_api,
-                url:'http://172.16.187.164:8081/web/marketing/activity/getActivitiesList',
+                url: site_url.getActivitiesList_api,
+                // url:'http://172.16.187.164:8081/web/marketing/activity/getActivitiesList',
                 data: {
                         // "combCode": that.gV.groupCode, //组合代码 
                         // "pageCurrent": that.gV.pageCurrent, //非必须，默认为1
@@ -191,8 +191,8 @@ $(function(){
         getCityListData:function(){
 
             var obj=[{
-                // url: site_url.cityList_api,
-                url:'http://172.16.187.164:8081/web/marketing/activity/cityList',
+                url: site_url.cityList_api,
+                // url:'http://172.16.187.164:8081/web/marketing/activity/cityList',
                 //async: false,
                 needDataEmpty: true,
                 callbackDone: function(json) {
@@ -242,8 +242,8 @@ $(function(){
         getCity:function(){
             var that=this;
             var obj=[{
-                // url: site_url.getCity_api,
-                url:'http://172.16.187.164:8081/web/marketing/frontend/getCity',
+                url: site_url.getCity_api,
+                // url:'http://172.16.187.164:8081/web/marketing/frontend/getCity',
                 //async: false,
                 needDataEmpty: true,
                 callbackDone: function(json) {
