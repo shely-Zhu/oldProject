@@ -1,6 +1,5 @@
 /*
  * @page: 模拟登录日志查询
- * @Author: songxiaoyu
  * @Date:   2019-11-12
  * @Last Modified by:   Caiwenqi
  * @Last Modified time: 2018-09-25 15:27:45

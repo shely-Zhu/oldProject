@@ -64,7 +64,7 @@ $(function(){
                         contentrefresh: '拼命加载中',
                         contentnomore: '没有更多了', //可选，请求完毕若没有更多数据时显示的提醒内容；
                         callback: function() {
-                
+                            
                             // 热门诊断
                             that.getData(this);
                         }
@@ -191,10 +191,15 @@ $(function(){
 
 
 			mui("body").on('tap','.posioneright', function(){
-                console.log(123132)
-				// window.location.href = site_url.privateActivity_url;
+
+				window.location.href = site_url.examplePage_url;
 				// window.open(site_url.privateActivity_url);
-			});
+            });
+            
+            //返回上一页
+            $("#goBack").on("click",function(){
+                location.href="javascript:history.go(-1)";
+            })
 
 		},
     }

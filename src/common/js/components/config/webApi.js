@@ -43,11 +43,11 @@ module.exports = function() {
     // 其他资产
     this.getJJSInTransitAssets_api = http_url.web_url + '/account/jjs/getJJSInTransitAssets'; // 查询金交所在途资产 
     // 查询金交持仓资产、在途资产、总资产
-    this.getJJSAssets_api = http_url.web_url + '/account/jjs/getJJSAssets'; 
+    this.getJJSAssets_api = http_url.web_url + '/account/jjs/getJJSAssets';
     // jjs持仓明细查询
     this.queryAssetsDetailByPages_api = http_url.web_url + '/account/jjs/queryAssetsDetailByPages'
 
-    
+
     /*-------------------账户相关 end ------------------------------*/
 
     /*-------------------内容相关------------------------------*/
@@ -104,7 +104,13 @@ module.exports = function() {
 
     /*-------------------营销相关 end ------------------------------*/
 
+    /*-------------------生活-会员俱乐部 ------------------------------*/
+    this.getActivitiesList_api = http_url.web_url + '/marketing/activity/getActivitiesList'; //会员俱乐部-活动列表
+    this.getDetailActivity_api = http_url.web_url + '/marketing/activity/getDetailActivity'; //会员俱乐部-活动详情
+    this.activityApply_api = http_url.web_url + '/marketing/activityApply'; //会员俱乐部-立即报名
+    this.shareInfo_api = http_url.web_url + '/marketing/activity/shareInfo'; //会员俱乐部-分享给好友
 
+    /*-------------------生活-会员俱乐部 end ------------------------------*/
     /*-------------------银杏研究相关 ------------------------------*/
 
 
@@ -114,17 +120,23 @@ module.exports = function() {
     this.queryGrowthDetailList_api = http_url.web_url + '/account/queryGrowthDetailList';
     //成长值区间
     this.selectCustomerGrowthTier_api = http_url.web_url + '/account/selectCustomerGrowthTier';
-    
+
 
     this.findProtocolContent_api = http_url.web_url + '/content/frontend/findProtocolContent';
-    //caiwenqi
+    //登录日志查询接口
     this.getUserTrackRecord_api = http_url.web_url + '/account/getUserTrackRecord';
 
     //会员权益详情-获取会员权益详情
     this.findBenefitByLevel_api=http_url.web_url + '/content/findBenefitByLevel';
+<<<<<<< HEAD
  
+=======
+    //文章模板接口
+    this.articleExample_api = http_url.web_url + '/account/articleExample';	
+
+>>>>>>> d76b0427a89ebd79992b09d98f35c160be2555c5
     //监管账户（老接口）
-    this.findSuperviseBank_api=http_url.web_url + '/content/frontend/findSuperviseBank';
+    this.findSuperviseBank_api = http_url.web_url + '/content/frontend/findSuperviseBank';
 
     //会员俱乐部-活动列表
     this.getActivitiesList_api = http_url.web_url + '/marketing/activity/getActivitiesList',

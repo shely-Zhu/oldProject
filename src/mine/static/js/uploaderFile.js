@@ -18,8 +18,8 @@ module.exports = function(callback, preThis, type) {
         compliance: $('#complianceMaterial'), //合规改造上传图片区域
         uploadBtn: $('#upload_btn'), //上传图片按钮
         ratio: window.devicePixelRatio || 1, // 优化retina, 在retina下这个值是2
-        width: 252, //预览的图片宽高
-        height: 189,
+        width: 100, //预览的图片宽高
+        height: 100,
     };
 
     /*
@@ -33,7 +33,7 @@ module.exports = function(callback, preThis, type) {
             $queue: elements.compliance.find('.queueList'), // 图片选择后显示的位置
             $uploadBtn: elements.uploadBtn, //上传按钮
             $select: elements.compliance.find('#complianceSelect'), // 选择按钮
-            fileNumLimit: 4, //
+            fileNumLimit: 9, //
             multiple: true,
             errorTip: '只能上传4张照片',
             acceptTitle: 'compliance',
@@ -281,7 +281,6 @@ module.exports = function(callback, preThis, type) {
         //上传成功后的处理函数
         UploadSuccess: function(uploader, file, json) {
             var that = this;
-
             // 这张图片所属的类型
             var idTypeArr = [];
 
