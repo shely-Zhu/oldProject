@@ -1,4 +1,10 @@
-// 其他资产(定融定投)界面
+/*
+ * @page: 其他资产
+ * @Author: peicongcong
+ * @Date:   2019-11-15songxiaoyu
+ * @description:
+ */
+
 @import url("@pathInclude/css/mui.min.css");
 @import url("@pathCommonLess/mui/resetMUI.less");
 @import url("@pathCommonLess/color.less");
@@ -9,120 +15,103 @@
 @import url("@pathCommonLessCom/againEnter.less");
 @import url("@pathCommonLessCom/alertBox.less");
 @import url("@pathCommonLessCom/tabScroll.less");
-@import url("@pathCommonLessCom/headBarConfig.less");
+
 //回到顶部的样式
 @import url("@pathCommonLessCom/goTopMui.less");
 @import url("@pathCommonLess/components/elasticLayerTypeFive.less");
-
+@import url("@pathCommonLessCom/headBarConfig.less");
 html {
     height: 100%;
 }
-
+.fl{
+    float: left;
+}
+.fr{
+    float: right;
+}
+body,.mui-content{
+    background: @F7FAFD !important;
+}
 .container {
     height: 100%;
     width: 100%;
-    background: @f4f4f4;
+    background: @F7FAFD;
 
     // 其他资产
     .banner {
         position: relative;
         width: 100%;
-        height: 14rem;
-        background: url("/wealthResources/otherAssets/static/img/banner.jpg");
+        height: 4.3rem;
+        background: url("/account/static/img/banner.png");
         background-size: 100% 100%;
 
         .bannerTop {
-            color: @c005;
-            text-align: center;
-
+            color: @F7DDCF;
+            margin: 0 0.3rem;
+            padding-top: 1.54rem;
             .sum {
-                padding-top: 1.6rem;
-                font-size: 1rem;
-
-                .j_text {
-                    opacity: 0.5;
-
-                }
-
+                
+                font-size: 0.26rem;
                 .j_icon {
-                    width: 1.4rem;
-                    height: 1.4rem;
-                    position: relative;
-                    opacity: 0.7;
-
-                    &:after {
-                        position: absolute;
-                        content: '\e649';
-                        font-size: 1.4rem;
-                        left: 0;
-                        top:0.3rem;
-                    }
+                    width: 0.36rem;
+                    height: 0.36rem;
+                    margin-left: 0.2rem;
+                    background: url("/account/static/img/eyesee.png");
+                    background-size: 100% 100%;
+                    display: inline-block;
+                    vertical-align: middle;
                 }
+                .j_icon.eyecose{
+                    background: url("/account/static/img/eyeclose.png");
+                    background-size: 100% 100%;
+                }
+                
             }
-
-
-
-            .amount {
-                margin: 0.8rem 0 1.4rem;
-                font-size: 3rem;
-                line-height: 3.2rem;
+            .assetsBtn{
+                width: 1.5rem;
+                height: 0.4rem;
+                background: rgba(255, 255, 255, 0.1);
+                border-radius: 0.25rem;
+                font-size: 0.2rem;
+                text-align: center;
+                color: @c005;
+                opacity: 0.8;
+                line-height: 0.4rem;
             }
+            
         }
-
+        //金额
+        .totalM{
+            font-size: 0.68rem;
+            line-height: 0.8rem;
+            margin: 0.1rem 0.3rem 0.22rem;
+            font-weight:bold;
+            color:rgba(153,81,0,1);
+            background:linear-gradient(360deg, rgba(186,140,112,1) 0%, rgba(244,210,192,1) 100%);
+            -webkit-background-clip:text;
+            -webkit-text-fill-color:transparent;
+        }
         // 已持仓
         .jjs_type {
-            background-color: @c005;
-            height: 6.4rem;
-            border-radius: 0.3rem;
-            width: 91.5%;
-            position: absolute;
-            z-index: none;
-            bottom: -2.5rem;
-            left: 4.375%;
-            text-align: center;
-            padding-top: 1.6rem;
-            box-shadow: 0 0.1rem 0.4rem 0 rgba(0, 0, 0, 0.1);
-            color: @999999;
-            font-size: 0.9rem;
-            line-height: 1.2rem;
-
-            // 线
-            .j_left {
-                &:after {
-                    position: absolute;
-                    height: 4.3rem;
-                    top: -0.3rem;
-                    right: 0;
-                    content: '';
-                    border-right: 1px solid @c008;
-                } 
-            }
-
+            width: 100%;
+            margin: 0 0.3rem;
             li {
                 span {
                     display: block;
-
+                    color: @c005;
+                    opacity: 0.7;
+                    font-size: 0.26rem;
                     &:first-child {
                         padding-bottom: 0.2rem;
                     }
                 }
-
-                ;
             }
 
             .j_already,
             .j_tobe {
-                font-size: 1.2rem;
-                margin-top: 0.4rem;
-                font-weight: bold;
-            }
-
-            .j_already {
-                color: @695a37;
-            }
-
-            .j_tobe {
-                color: @d75e33;
+                font-size: 0.38rem;
+                opacity: 1;
+                color: @c005;
             }
 
         }
@@ -150,10 +139,8 @@ html {
 
     // 其他资产列表
     .myAsset {
-        margin-top: 3rem;
-
         #slider{
-            background: @f4f4f4;
+            background: @F7FAFD !important;
         }
 
 
@@ -162,23 +149,29 @@ html {
             background: none;
             box-shadow: none;
             color: @3c3c3c;
-
-
-
+            padding-top: 0;
+            height: 0.84rem;
+            .mui-scroll .mui-control-item{
+                font-size: 0.32rem;
+                line-height: 0.84rem;
+                padding:0;
+                text-align: center;
+            }
             .mui-scroll .mui-control-item.mui-active {
-                color: @3c3c3c;
-                font-weight: bold;
+                color: @272727;
                 position: relative;
+                border: none;
 
                 &:after {
                     position: absolute;
-                    height: 0.25rem;
-                    bottom: 0.3rem;
-                    left: 5.8rem;
+                    height: 0.06rem;
+                    bottom: 0rem;
+                    left: 50%;
+                    margin-left: -0.6rem;
                     content: '';
-                    width: 3.9rem;
-                    background: @ed722f;
-                    border-radius: .5rem;
+                    width: 1.2rem;
+                    background: @D58D65;
+                    border-radius: 1rem;
                 }
 
             }
@@ -199,11 +192,11 @@ html {
                 padding: 1.6rem 1.4rem 1rem;
 
                 h2 {
-                    font-size: 1.2rem;
-                    line-height: 2rem;
+                    font-size: 0.32rem;
+                    line-height: 0.45rem;
                     text-align: center;
                     color: @3c3c3c;
-                    margin-bottom: 1.2rem;
+                    margin-bottom: 0.2rem;
                     font-weight: bold;
                 }
 

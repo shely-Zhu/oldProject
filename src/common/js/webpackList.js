@@ -232,5 +232,5 @@ module.exports = {
     //明星理财师-理财师列表
     './starFinancialPlanner/static/js/starFinancialPlannerList': "./src/starFinancialPlanner/static/js/starFinancialPlannerList.js",
     //其他资产
-    './account/static/js/otherAssets': './account/static/js/otherAssets.js'
+    './account/static/js/otherAssets': './src/account/static/js/otherAssets.js'
 }

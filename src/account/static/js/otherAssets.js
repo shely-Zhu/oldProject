@@ -35,7 +35,7 @@ $(function() {
         },
         gV: { //一些设置
             navList: [ //导航
-                { type: '已持仓资产', num: '0' },
+                { type: '持有资产', num: '0' },
                 { type: '待确认资产', num: '1' },
             ],
             aP: {
@@ -495,26 +495,12 @@ $(function() {
 
             // 文案提示
             mui("body").on('tap', '.j_icon', function(e) {
-                $("body").css({
-                    'height': windowHeight,
-                    'overflow-y': "hidden"
-                });
-
-                $.elasticLayerTypeFive({
-                    id: "tip",
-                    title: '其他总资产',
-                    p1: {
-                        b: '其他总资产：',
-                        t: '已成立确认的资产加上您的待确认资产',
-                    },
-                    p2: {
-                        b: '待确认资产：',
-                        t: '即您的在途资产，产品成立后将归入已确认资产',
-                    },
-                    buttonTxt: '确定',
-                    zIndex: 100,
-                });
-
+                $('.totalM').html('****')
+                $(this).addClass('eyecose');
+            })
+            mui("body").on('tap', '.eyecose', function(e) {
+                $('.totalM').html('10,000,000.00')
+                $(this).removeClass('eyecose');
             })
         }
     };
