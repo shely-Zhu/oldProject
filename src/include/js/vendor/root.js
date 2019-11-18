@@ -105,9 +105,9 @@ var mock_server = "http://localIp:8088", //前端本地开发时，接口调用�
     onlineCustomer_online = "http://zxkf.chtwm.com",
 
     // 营销活动
-    recommend_test = "http://172.16.162.190:8011",
-    recommend_haomaojf = "http://wx.uata.haomalljf.com",
-    recommend_online = "http://wx.chtwm.com";
+    recommend_test = "https://172.16.162.190:8011",
+    recommend_haomaojf = "https://wx.uata.haomalljf.com",
+    recommend_online = "https://wx.chtwm.com";
 
 
 //这是app时，存储本地cookie时的domain
