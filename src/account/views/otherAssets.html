@@ -40,7 +40,7 @@
         <!-- 加载中loading -->
         @@include('@pathCommonViews/loading/listLoading.html')
         <!-- 暂无数据 -->
-        @@include('@pathCommonViews/noData.html')
+        @@include('@pathCommonViews/noData.html',{"tipText":"暂无数据"})
     </section>
 
     <script id="first-template" type="text/x-handlebars-template">
@@ -65,7 +65,11 @@
     <script id="second-template" type="text/x-handlebars-template">
         {{! 左侧页面列表}} {{#if already}} {{#each pageList}}
         <div class="datalist" fundCode="{{fundCode}}">
-            <h2>{{projectName}}</h2>
+            <div class="proName">
+                <span class="proNameBefore"></span>
+                <p class="proNameCon">{{projectName}}</p>
+                <span class="proNameAfter"></span>
+            </div>
             <ul>
                 <li>
                     <span class="title">总资产</span>
@@ -87,29 +91,26 @@
         </div>
         {{/each}} {{/if}} {{#if tobe}} {{#each pageList}}
         <div class="datalist" fundCode="{{fundCode}}">
-            <h2>{{projectName}}</h2>
-            <ul>
-                <li>
-                    <span class="title">预约金额</span>
-                    <span class="text"><span>{{besAmountMask}}</span>元</span>
-                </li>
-                <li>
-                    <span class="title">预约时间</span>
-                    <span class="text"><i>{{besTimeStr}}</i></span>
-                </li>
-                <li>
-                    <span class="title">到账金额</span>
-                    <span class="text"><i>{{transAmountMask}}</i></span>
-                </li>
-                <li>
-                    <span class="title">到账时间</span>
-                    <span class="text"><i>{{transDateStr}}</i></span>
-                </li>
-                <li>
-                    <span class="title">到账状态</span>
-                    <span class="text"><i>{{accountStatus}}</i></span>
-                </li>
-            </ul>
+            <div class="proName clearfix">
+                <span class="proNameBefore"></span>
+                <p class="proNameCon">{{projectName}}</p>
+                <span class="proNameAfter"></span>
+            </div>
+            <div class="fundCon clearfix">
+                <p>到账金额(元)</p>
+                <div class="fundCenter">
+                    <span class="money">100,000,000.00</span>
+                    <span class="date">2019-7-23 12:35:20</span>
+                </div>
+            </div>
+            <div class="fundCon">
+                <p>预约金额(元)</p>
+                <div class="fundCenter clearfix">
+                    <span class="money">100,000,000.00</span>
+                    <span class="date">2019-7-23 12:35:20</span>
+                    <span class="tip part">部分到账</span>
+                </div>
+            </div>
         </div>
         {{/each}} {{/if}}
     </script>

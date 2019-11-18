@@ -493,7 +493,7 @@ $(function() {
                 }
             })
 
-            // 文案提示
+            // 头部文案提示(金钱展示隐藏)
             mui("body").on('tap', '.j_icon', function(e) {
                 $('.totalM').html('****')
                 $(this).addClass('eyecose');

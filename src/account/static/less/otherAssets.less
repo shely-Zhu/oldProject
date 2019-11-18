@@ -20,6 +20,7 @@
 @import url("@pathCommonLessCom/goTopMui.less");
 @import url("@pathCommonLess/components/elasticLayerTypeFive.less");
 @import url("@pathCommonLessCom/headBarConfig.less");
+@import url("@pathCommonLessCom/noData.less");
 html {
     height: 100%;
 }
@@ -178,63 +179,80 @@ body,.mui-content{
         }
 
         .mui-table-view-cell {
-            padding-top: 0;
+            padding: 0;
         }
 
         .list {
             width: 100%;
 
             .datalist {
-                margin: 0.8rem auto 0;
+                margin: 0.3rem auto 0;
                 color: @c002;
                 background: @c005;
-                border-radius: 0.3rem;
-                padding: 1.6rem 1.4rem 1rem;
-
-                h2 {
-                    font-size: 0.32rem;
-                    line-height: 0.45rem;
-                    text-align: center;
-                    color: @3c3c3c;
-                    margin-bottom: 0.2rem;
-                    font-weight: bold;
-                }
-
-                ul {
-                    font-size: 1rem;
-
-                    li {
-                        line-height: 2.5rem;
-                        margin-bottom: 0.3rem;
-                        background-color: @fbfaf5;
-                        padding: 0 0.7rem;
-
-                        .title {
-                            color: @a48e5f;
-                        }
-
-                        .text {
-                            color: @695a37;
-                            float: right;
-                        }
-
-                        &:first-child {
-                            .text {
-                                font-weight: bold;
-                            }
-                        }
+                padding: 0.4rem 0.3rem;
+                .proName{
+                   
+                    .proNameBefore{
+                        width: 0.06rem;
+                        height: 0.26rem;
+                        background:linear-gradient(180deg,rgba(252,192,158,1) 0%,rgba(213,141,101,1) 100%);
+                        border-radius:0.04rem;
+                        float: left;
+                        margin-top: 0.03rem;
+                        margin-right: 0.2rem;
+                    }
+                    .proNameCon{
+                        width: 6.4rem;
+                        font-size: 0.28rem;
+                        line-height: 0.32rem;
+                        color: @272727;
+                        float: left;
+                    }
+                    .proNameAfter{
+                        width: 0.2rem;
+                        height: 0.2rem;
+                        background: url("/account/static/img/right.png");
+                        background-size: 100% 100%;
+                        margin-top: 0.03rem;
+                        float: right;
                     }
                 }
-
-                .date {
-                    margin-left: 1.6rem;
-                    height: 3.2rem;
-                    line-height: 3.2rem;
-                    font-size: 1.2rem;
-                    color: @c003;
-
-                    span {
-                        margin-left: 1.1rem;
+                .fundCon{
+                    margin-left: 0.1rem;
+                    margin-top: 0.4rem;
+                    p{
+                        font-size: 0.24rem;
+                        color: @9B9B9B;
+                        margin-bottom: 0.12rem;
+                    }
+                    .fundCenter{
+                        .money{
+                            font-size: 0.32rem;
+                            color: @272727;
+                            margin-right: 0.4rem;
+                            float: left;
+                        }
+                        .date{
+                            font-size: 0.26rem;
+                            color: @818181;
+                            float: left;
+                        }
+                        .tip{
+                            width: 1.4rem;
+                            height: 0.38rem;
+                            line-height: 0.38rem;
+                            border-radius: 0.04rem;
+                            text-align: center;
+                            float: right;
+                        }
+                        .tip.all{
+                            background:linear-gradient(220deg,rgba(245,236,213,1) 0%,rgba(248,234,201,1) 100%);
+                            color: @C4925E;
+                        }
+                        .tip.part{
+                            background:rgba(227,232,241,1);
+                            color: @9B9B9B;
+                        }
                     }
                 }
             }
@@ -252,9 +270,9 @@ body,.mui-content{
     .upTop {
         position: fixed;
         bottom: 2.3rem;
-        right: 1.6rem;
-        width: 2.7rem;
-        height: 2.7rem;
+        right: 0.3rem;
+        width: 0.7rem;
+        height: 0.7rem;
         border-radius: 1.35rem;
         background: rgba(51, 51, 51, 0.85);
 
@@ -293,17 +311,4 @@ body,.mui-content{
     /**
 *   无数据区域的样式
  */
-    .without {
-        padding-top: 16.5rem;
-        color: @c001;
-
-        .iconfont {
-            font-size: 5.1rem;
-        }
-
-        .text {
-            margin-top: 2rem;
-            font-size: 1.4rem;
-        }
-    }
 }
