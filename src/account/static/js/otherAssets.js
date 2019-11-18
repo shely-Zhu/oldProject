@@ -499,8 +499,18 @@ $(function() {
                 $(this).addClass('eyecose');
             })
             mui("body").on('tap', '.eyecose', function(e) {
-                $('.totalM').html('10,000,000.00')
-                $(this).removeClass('eyecose');
+                    $('.totalM').html('10,000,000.00')
+                    $(this).removeClass('eyecose');
+                })
+                //打开资产组成说明
+            mui("body").on('tap', '.assetsBtn', function(e) {
+                    $('.mask').show();
+                    $('.tipContainer').show();
+                })
+                //关闭资产组成说明
+            mui("body").on('tap', '.buttonOne', function(e) {
+                $('.mask').hide();
+                $('.tipContainer').hide();
             })
         }
     };
