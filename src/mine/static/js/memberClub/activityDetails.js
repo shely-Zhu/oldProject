@@ -41,7 +41,7 @@ $(function() {
                 that.events();
                 that.getData();
                 that.getUserInfo();
-                $('body').append('<iframe src="ldxshare://" id="activity_share" style="position:absolute;z-index:1000;height:0;width:0;"></iframe>');
+                $('body').append('<iframe src="activityShare://" id="activity_share" style="position:absolute;z-index:1000;height:0;width:0;"></iframe>');
             },
 
             //获取活动详情数据
