@@ -86,7 +86,7 @@ $(function() {
             if (window.currentIsApp) {
                 $('body').append('<iframe src="ldxshare://" id="ldx_share" style="position:absolute;z-index:1000;height:0;width:0;"></iframe>');
                 // 二维码下的提示文案，只有普通浏览器显示，微信和app内都不显示
-                $('.qrcode_wrap .code_tip').hide();
+                $('.qrcode_wrap .code_tip').hide();;
             }
         },
         // 是否实名认证判断
@@ -161,18 +161,18 @@ $(function() {
                     that.setting.weixinConf = Object.assign(that.setting.weixinConf, Object(data));
                     // 确保3个接口（鉴权，分享内容，分享链接）都请求成功，再设置分享链接
                     that.asyncAll();
-                }, function() {}, function(){}, true)
+                }, function() {}, function() {}, true)
             }
 
             // 获取理财师的接口
             that.generateAjaxObj(site_url.custBro_api, custBroData, function(data) {
                 console.log('获取理财师的接口callback')
-                // 根据理财师处理页面逻辑
+                    // 根据理财师处理页面逻辑
                 that.dealManagerLogic(data);
             }, function() {
                 //设置立即邀请好友的按钮状态为不可点
                 $('.btnButton .txt').addClass('disable').attr('disabled', 'disabled');
-            },function(){
+            }, function() {
                 // 没有理财师，生成包含客户信息的二维码
                 // 同步请求加密接口，拿到加密信息,通知app,生成二维码
                 that.generateShareLink();
@@ -185,7 +185,7 @@ $(function() {
                     $('.rule_des_wrap').show();
                     $('.rule_des_cont').html(data.pageList[0].content);
                 }
-            }, function() {},function(){}, true)
+            }, function() {}, function() {}, true)
 
             that.getData();
         },
@@ -262,7 +262,7 @@ $(function() {
                             var obj = { "shareUrl": shareUrl };
                             // 设置分享url
                             that.setting.weixinConf = Object.assign(that.setting.weixinConf, obj)
-                            // 确保3个接口（鉴权，分享内容，分享链接）都请求成功，再设置分享链接
+                                // 确保3个接口（鉴权，分享内容，分享链接）都请求成功，再设置分享链接
                             that.getElements.inviting_friend_wrap.show();
                             that.asyncAll();
                         }
@@ -433,8 +433,8 @@ $(function() {
                 // jQuery("#code").qrcode.clear();
                 // 生成新的二维码
                 that.generateShareLink(num)
-                // 二维码显示
-                // that.getElements.qrcode_wrap.show();
+                    // 二维码显示
+                    // that.getElements.qrcode_wrap.show();
             })
 
             //点击隐藏弹层
@@ -489,8 +489,8 @@ $(function() {
                     tipAction(json.message);
                     callbackFail && callbackFail();
                 },
-                callbackNoData:function(){
-                    callbackNoData(); 
+                callbackNoData: function() {
+                    callbackNoData();
                 }
             });
         },

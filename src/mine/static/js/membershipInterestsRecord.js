@@ -31,7 +31,6 @@ $(function(){
         init:function(){
             var that = this;
             
-            mui("#mui-progressbar").progressbar({progress:80}).show();
 
             that.beforeFunc();
             that.initMui(); // 兼容下面函数调用
@@ -107,8 +106,14 @@ $(function(){
 			    callbackDone: function(json){  //成功后执行的函数
 
 			    	var num = json.data.growthValue;
-
+                    var num1 = json.data.levelUpValue;
+                    var promotionname = '满级'
                     $('.positwoleft').html(num);
+                    $('.promotionvalue').html(num1);
+                    if(!json.data.levelUpValue){
+                        $('.promotionname').html(promotionname);
+                    }
+                    mui("#mui-progressbar").progressbar({progress:json.data.percent}).show();
 			    },
 			    callbackNoData: function( json ){
 			    	//数据为空

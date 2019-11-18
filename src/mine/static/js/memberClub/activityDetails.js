@@ -11,6 +11,7 @@ require('@pathIncludJs/vendor/zepto/callback.js');
 require('@pathIncludJs/vendor/zepto/deferred.js');
 require('@pathCommonJs/components/utils.js');
 require('@pathCommonJs/ajaxLoading.js');
+require('@pathCommonJs/components/headBarConfig.js');
 var tipAction = require('@pathCommonJs/components/tipAction.js');
 var splitUrl = require('@pathCommonJs/components/splitUrl.js')();
 var generateTemplate = require('@pathCommonJsComBus/generateTemplate.js');
@@ -40,6 +41,7 @@ $(function() {
                 that.events();
                 that.getData();
                 that.getUserInfo();
+                $('body').append('<iframe src="ldxshare://" id="activity_share" style="position:absolute;z-index:1000;height:0;width:0;"></iframe>');
             },
 
             //获取活动详情数据
@@ -178,16 +180,16 @@ $(function() {
                         $('.activityBottomBtnBox').removeClass('disabled');
                         if (data.status == "20003") {
                             //需要风测
-                            that.tipConOpen('温馨提示', data.message, '风险测评', 'www.baidi.com');
+                            that.tipConOpen('温馨提示', data.message, '风险测评', site_url.riskAppraisal_url);
                         } else if (data.status == "20010") {
                             //需要进行合格投资者信息认证
-                            that.tipConOpen('温馨提示', data.message, '合格投资者认证', 'www.baidi.com');
+                            that.tipConOpen('温馨提示', data.message, '合格投资者认证', site_url.qualifiedInvestor_url);
                         } else if (data.status == "22011") {
                             //客户未成交
-                            that.tipConOpen('温馨提示', data.message, '查看产品', 'www.baidi.com')
+                            that.tipConOpen('温馨提示', data.message, '查看产品', site_url.wealthIndex_url);
                         } else if (data.status == "20007") {
                             //去实名
-                            that.tipConOpen('温馨提示', data.message, '实名认证', 'www.baidi.com')
+                            that.tipConOpen('温馨提示', data.message, '实名认证', site_url.rewards_url);
                         } else if (data.status == "10003") {
                             //重复报名--已报名
                             that.tipConOpenOne('不可重复报名', data.message);
@@ -221,7 +223,7 @@ $(function() {
                     needDataEmpty: true,
                     callbackDone: function(json) {
                         var data = json.data;
-
+                        $('#activity_share').attr('src', 'activityShare://' + data);
 
                     },
                     callbackFail: function(json) {
@@ -237,7 +239,8 @@ $(function() {
                 $('#tipCon').find('.titleText').text(title);
                 $('#tipCon').find('.tipCon').text(tipcontent);
                 $('#tipCon').find('.todo').text(btnText);
-                $('#tipCon').find('.todo').attr('src', btnUrl);
+                // $('#tipCon').find('.todo').attr('src', btnUrl);
+                window.location.href = btnUrl;
                 $('#tipCon').show();
                 $('.mask').show();
             },

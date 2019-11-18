@@ -98,8 +98,27 @@ $(function(){
 
 
             //点击复制按钮
-            $('.copy_btn').on('tap', function(el) {
-            	var $this = $(this);
+            // $('.copy_btn').on('tap', function(el) {
+            // 	var $this = $(this);
+			// 	var copyText = $this.siblings('div').text()
+			//     //实例化clipboard
+			// 	var clipboard = new Clipboard('.copy_btn', {
+			// 		text: function () {
+
+			// 			return copyText;
+			// 		}
+			// 	});
+			// 	clipboard.on("success", function (e) {
+			// 		//text = '';
+			// 		tipAction("复制成功");
+			// 	});
+			// 	clipboard.on("error", function (e) {
+			// 		tipAction("请选择“拷贝”进行复制!");
+			// 	});
+			// })
+
+			$(".copy_btn").click(function () {
+				var $this = $(this);
 				var copyText = $this.siblings('div').text()
 			    //实例化clipboard
 				var clipboard = new Clipboard('.copy_btn', {
@@ -115,7 +134,8 @@ $(function(){
 				clipboard.on("error", function (e) {
 					tipAction("请选择“拷贝”进行复制!");
 				});
-			})
+
+			});
 			
 			$('.toptitle span,.toptitle img').on('tap',function(){
 				$('.topcontent').addClass('mui-active').removeClass('mui-hidden');
