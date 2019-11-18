@@ -307,21 +307,16 @@ module.exports = function() {
     this.diagnosisSearch_url = go_url.no_url + '/commonResources/fundDiagnosis/views/diagnosisSearch.html';
     // 诊断详情页
     this.diagnosisDetail_url = go_url.no_url + '/commonResources/fundDiagnosis/views/diagnosisDetail.html';
-    
-    /*-------------------------------基金诊断 end -----------------------*/
 
-<<<<<<< HEAD
-    /*-------------------------------活动列表 start -----------------------*/
-=======
+    /*-------------------------------基金诊断 end -----------------------*/
     /*-------------------------------我的页面 start -----------------------*/
-   //登录日志查询页面
-   	this.journal_url = go_url.no_url + '/mine/views/journal.html'
-   //承接h5的模板页地址
+    //登录日志查询页面
+    this.journal_url = go_url.no_url + '/mine/views/journal.html'
+        //承接h5的模板页地址
     this.examplePage_url = go_url.no_url + '/mine/views/examplePage.html';
     /*-------------------------------我的页面 end -----------------------*/
 
-     /*-------------------------------活动列表 start -----------------------*/
->>>>>>> 389afc9c66c2bc79db55763b343d101faa7d1da9
+    /*-------------------------------活动列表 start -----------------------*/
     // 活动详情
     this.activityDetails_url = go_url.no_url + '/mine/views/memberClub/activityDetails/activityDetails.html';
     // 活动列表
@@ -329,9 +324,9 @@ module.exports = function() {
     //活动详情->实名
     this.realName_url = go_url.no_url + '/mine/views/realName/realName.html';
     //活动详情->风测
-    this.riskAppraisal_url = go_url.no_url + '/mine/views/riskAppraisal/riskAppraisal.html?type=2';
+    this.riskAppraisal_url = go_url.no_url + '/mine/views/riskAppraisal/riskAppraisal.html?type=private';
     //活动详情->合格投资者认证
-    this.qualifiedInvestor_url = go_url.no_url + '/mine/views/qualifiedInvestor/qualifiedInvestor.html?type=2';
+    this.qualifiedInvestor_url = go_url.no_url + '/mine/views/qualifiedInvestor/qualifiedInvestor.html?type=private';
     //活动详情->去成交
     this.wealthIndex_url = go_url.no_url + '/financial/views/wealthIndex.html';
     //活动详情->我的奖励
