@@ -147,7 +147,8 @@ window.go_url = {
     cft_url: '', // 股份(财富)域名
     wm_url: '', // 股份(财富)二级页面跳转域名
     rock_url: '', //中岩域名
-    sso_url: ''
+    sso_url: '',
+    marketCampaign_url:'',
 }
 /***********************跳转链接 域名配置 end*****************************/
 
@@ -188,6 +189,7 @@ if (!window.currentIsApp) {
         go_url.cft_url = chtwm_local; // 财富域名
         go_url.oauth_url = oauth_local_test; // 跳转地址需要
         go_url.onlineCustomer_url = onlineCustomer_test; // 在线客服
+        go_url.marketCampaign_url = recommend_test;  // 营销活动
 
         if (envOrigin == 0) {
             //明泽

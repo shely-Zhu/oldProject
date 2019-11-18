@@ -31,10 +31,10 @@ window.site_url = {
   	//我的账户退出成功跳转链接
   	goMyAccount_url : http_url.htjf_url+'/getAuthURL.action?redirect_uri:'+http_url.htjf_url+'/apis/wx/user/toMyAccount.action',
   	//产品查询
-	productSearch_api : 'http://jjs.chtwm.com/prdtq.do',
+	  productSearch_api : 'http://jjs.chtwm.com/prdtq.do',
 
 	// 营销活动
-	onlineCustomer_url: http_url.onlineCustomer_url + '/api/brand/index.html?activityId=pWhA5xJTKF4Zfst%2B9ycHqQ%3D%3D&channel=3',
+	marketCampaign_url: http_url.marketCampaign_url + '/api/brand/index.html?activityId=pWhA5xJTKF4Zfst%2B9ycHqQ%3D%3D&channel=3',
 
 };
 
