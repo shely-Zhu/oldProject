@@ -309,7 +309,7 @@ module.exports = function() {
     this.diagnosisDetail_url = go_url.no_url + '/commonResources/fundDiagnosis/views/diagnosisDetail.html';
     
     /*-------------------------------基金诊断 end -----------------------*/
-    
+
     /*-------------------------------我的页面 start -----------------------*/
    //登录日志查询页面
    	this.journal_url = go_url.no_url + '/mine/views/journal.html'
