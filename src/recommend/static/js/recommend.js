@@ -271,7 +271,6 @@ $(function() {
                         // 已实名认证
                         aesEncrypt = json.data.aesEncrypt;
                         //拼分享出去的链接
-                        debugger
                         shareUrl = site_url.marketCampaign_url + '&shareCustomerNo=' + that.customerNo;
 
                         // 生成二维码
