@@ -37,19 +37,16 @@ $(function() {
     var model = {
 
         getElements: {
-            contentImg: $("#contentImg"), //图片
-			contentBox: $('#contentBox'), //有产品模板
-			contentH5Public : $("#contentH5Public"),  //h5公募基金模板
-			priLocal: $(".priLocal"), //私募产品列表跳转链接
-			pubLocal: $(".pubLocal"), //公募产品列表跳转链接
-			custType: "", // 客户类型【0.机构 1.个人】 
-            linkUrl: "", //立即购买按钮跳转链接
-            islogin:$(".islogin"),
-			adjustmentRecord: $('.adjustmentRecord'), // 调仓记录
-            recordList: $('.recordList'), // 调仓记录
-            adjustmentTemp: $('#adjustment-template'), // 模板赋值
-            noData: $('.noData'), //没有数据的结构
-            listLoading: $('.listLoading'),
+        	applyType:$(".applyType"),//应用方式
+        	articleTitle:$('.articleTitle'),//文章标题
+            a:$('#aaaa'),
+            video:$('#video'),//视频的容器
+            articleTime:$('.articleTime'),//文章时间
+			author:$('.author'),//文章作者
+            
+        },
+        gV:{
+        	showData:{}
         },
         webInit: function() {
 			var that = this;
@@ -66,15 +63,42 @@ $(function() {
             }else{//非app中引入专题时产品列表跳转到wap服务器的详情页
 
             }*/
+           
+           //获取地址栏的数据
+           	let arg = [];
+           	let path = window.location.href;
+           	var s = path.substring(path.indexOf('?') + 1);
+           	var ss = s.split('&');
+           	for( var i = 0; i< ss.length; i++){
+				var index = ss[i].indexOf('=');
+				if( index != -1 ){
+					if( !arg[ ss[i].substring(0, index) ] ){
+						//地址栏url上可能有经过base64加密的参数，此处不处理
+						arg[ ss[i].substring(0, index) ] = ss[i].substring( index+1 );
+					}
+				}
+			}
+           	console.log(arg)
 			var obj = [{
-				url: site_url.articleExample_api,
+				url: site_url.getArticle_api,
 				data:{id:9},
 				callbackDone: function(json) {
-					console.log("!111111111")
-					console.log(json.data)
+					console.log(json.data.data)
+					that.gV.showData.applyType = json.data.data.applyType == 0 
+					? "h5自主生成"
+					: "原生";
+					that.gV.showData.articleTitle = json.data.data.title;
+					that.gV.showData.articleTime = json.data.data.updateTimeStr;
+					console.log(that.gV.showData);
+					that.getElements.applyType.html(that.gV.showData.applyType);
+					that.getElements.articleTitle.html(that.gV.showData.articleTitle);
+//					that.getElements.a.attr({"href":json.data.data.videoAttachUrl})
+					let src = json.data.data.videoAttachUrl;
+					let sourceDom = $("<source src=\""+ src +"\">");
+					that.getElements.video.append(sourceDom);
+					that.getElements.video[0].play();
 					
-//					generateTemplate(json.data, that.getElements.recordList, that.getElements.adjustmentTemp);
-//					that.getElements.contentImg.html(json.data[0].content)
+//					that.getElements.aaaa.html("快点点我")
 //					that.getElements.contentImg.attr({"src":json.data[0].content})
 				},
 				callbackFail: function(json) { //失败后执行的函数

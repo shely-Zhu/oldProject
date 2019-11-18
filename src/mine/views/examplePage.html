@@ -11,7 +11,7 @@
 
 	<body>
 		<!--加载图标-->
-		<!--@@include('@pathCommonViews/load.html')--> 
+		@@include('@pathCommonViews/load.html') 
 		<!--没有数据显示图标-->
 		<!--@@include('@pathCommonViews/noData.html')-->
 		<!--列表加载显示图标-->
@@ -20,69 +20,21 @@
 		@@include('@pathCommonViews/headBarConfig.html',{"pathName":"h5生成模板页面"})
 		<!--页面容器-->
 		<div class="container">
-			<!--<div class="applyType">应用方式</div>
-			<div class="articleTitle">文章标题</div>-->
+			<div class="applyType"></div>
+			<div class="articleTitle"></div>
+			<div class="articleTime"></div>
+			<div class="author"></div>
 			<!-- 图片模板 start -->
-			<div class="content contentImg" id="contentImg">
-			</div>
-				<img id="" src=""/>
+			<img id="contentImg" src=""/>
 			<!-- 图片模板 end -->
+			<!--视频展示位置-->
+			<video id="video" width="320" height="240" controls></video>
 			<!--富文本位置开始-->
 			<div class="richText">
-				
+				<a id="aaaa" href="">点我</a>
 			</div>
 			<!--富文本位置结束-->
 		</div>
-		<section class="container">
-
-		<!-- 公私募模板 start -->
-		<div class="content contentBox" id="contentBox">
-
-			<!-- 图片 -->
-			<div class="images">
-				<img src="" alt="">
-			</div>
-
-			<!-- 公私募募基金列表 start -->
-			<div class="mui-content pdtItems">
-				<div class="list">
-					<div class="contentWrapper">
-						<ul class="mui-table-view">
-							<li class="mui-tabli-view-cell" id="modelBox">
-								
-							</li>
-						</ul>
-					</div>
-				</div>
-			</div>
-			<div class="adjustmentRecord">
-				<div class="list">
-					<div class="contentWrapper">
-						<ul class="mui-table-view">
-							<li class="mui-table-view-cell recordList">
-								<!--放置列表-->
-							</li>
-							<!-- 返回顶部 -->
-							@@include('@pathCommonViews/goTop.html')
-						</ul>
-					</div>
-				</div>
-			</div>
-			<script id="adjustment-template" type="text/x-handlebars-template">
-				{{#each this}}
-					<div class="list-time">
-						{{time}}
-					</div>
-					<div class="list-wrap mui-table-view recordList">
-						{{content}}
-					</div>
-				{{/each}}
-			</script>
-			
-
-		</div>
-		
-	</section>
 		@@include('@pathInclude/views/footer.html')
 		<script src="/mine/static/js/examplePage.js"></script>
 	</body>
