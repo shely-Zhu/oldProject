@@ -16,7 +16,8 @@ var data = Mock.mock({
 		"externalUrl": null,
 		"videoAttachId": null,
 		"voiceAttachId": null,
-		"content": "<img src=\"../static/img/dachangtu.jpg\"/>",
+		"imageAttachId":null,
+		"content": "<p><img src=\"../static/img/dachangtu.jpg\"/></p>",
 		"seqNo": null
 	},{
 		"id": null,

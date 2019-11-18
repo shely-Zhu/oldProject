@@ -129,7 +129,7 @@ module.exports = function() {
     //会员权益详情-获取会员权益详情
     this.findBenefitByLevel_api=http_url.web_url + '/content/findBenefitByLevel';
     //文章模板接口
-    this.articleExample_api = http_url.web_url + '/account/articleExample';	
+    this.getArticle_api = http_url.web_url + '/content/frontend/getArticle';	
 
     //监管账户（老接口）
     this.findSuperviseBank_api = http_url.web_url + '/content/frontend/findSuperviseBank';
