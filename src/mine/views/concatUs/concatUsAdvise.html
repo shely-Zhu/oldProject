@@ -5,7 +5,7 @@
 <html lang="en">
 <head>
 	@@include('@pathInclude/views/meta.html')
-    <link rel="stylesheet" href="/mine/static/css/concatUs.css">
+    <link rel="stylesheet" href="/mine/static/css/concatUsAdvise.css">
     <link rel="stylesheet" href="/mine/static/css/uploadMaterial.css">
 	<title>联系我们-意见反馈</title>
 </head>
@@ -56,9 +56,11 @@
                                     </div>
                                 </div>
                     </section>
-                    
             </div>
      </div>
+     <div class="btnButton">
+        <button type="button" class="mui-btn " id="upload_btn">提交</button>
+    </div>
     </div>
 	
 	 
@@ -66,27 +68,8 @@
 	<!-- <script src="/include/js/iscroll.js"></script> -->
 	<!-- 添加埋点 -->
     @@include('@pathInclude/views/header.html')
-    <!-- 提交材料页面展示 -->
-    <script id="content-temp" type="text/x-handlebars-template">
-        <!-- 上传区域 个人金融资产证明 -->
-        
-        <!-- 模板下载 -->
-        {{#if accessorys}}
-        <div class="temp">
-            <h3>模板下载：</h3>
-            {{#each accessorys}}
-            <a class="tempName" onclick="window.open(site_url.fileDownLoadOrDisplay_api+'?url={{accessoryUrl}}&isDownLoad=2&name='+encodeURI(encodeURI('{{accessoryName}}')))">{{accessoryName}}</a> 
-            {{/each}}
-        </div>
-        {{/if}}
-        <!-- 提交按钮,不需要上传资料的提交 -->
-        {{#if submitBtn}}
-            <div class="btnButton">
-                <button type="button" class="mui-btn submitBtn">提交认证</button>
-            </div>
-        {{/if}}
-    </script>
-    <script src="/mine/static/js/concatUs.js"></script>
+
+    <script src="/mine/static/js/concatUsAdvise.js"></script>
     <!-- <script src="/mine/static/js/uploaderFile.js"></script> -->
     <script src="/include/js/vendor/webuploader/webUploader.js"></script>
 </body>

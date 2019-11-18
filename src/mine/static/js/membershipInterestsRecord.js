@@ -31,7 +31,6 @@ $(function(){
         init:function(){
             var that = this;
             
-            mui("#mui-progressbar").progressbar({progress:80}).show();
 
             that.beforeFunc();
             that.initMui(); // 兼容下面函数调用
@@ -64,7 +63,7 @@ $(function(){
                         contentrefresh: '拼命加载中',
                         contentnomore: '没有更多了', //可选，请求完毕若没有更多数据时显示的提醒内容；
                         callback: function() {
-                
+                            
                             // 热门诊断
                             that.getData(this);
                         }
@@ -107,8 +106,14 @@ $(function(){
 			    callbackDone: function(json){  //成功后执行的函数
 
 			    	var num = json.data.growthValue;
-
+                    var num1 = json.data.levelUpValue;
+                    var promotionname = '满级'
                     $('.positwoleft').html(num);
+                    $('.promotionvalue').html(num1);
+                    if(!json.data.levelUpValue){
+                        $('.promotionname').html(promotionname);
+                    }
+                    mui("#mui-progressbar").progressbar({progress:json.data.percent}).show();
 			    },
 			    callbackNoData: function( json ){
 			    	//数据为空
@@ -191,10 +196,15 @@ $(function(){
 
 
 			mui("body").on('tap','.posioneright', function(){
-                console.log(123132)
-				// window.location.href = site_url.privateActivity_url;
+
+				window.location.href = site_url.examplePage_url;
 				// window.open(site_url.privateActivity_url);
-			});
+            });
+            
+            //返回上一页
+            $("#goBack").on("click",function(){
+                location.href="javascript:history.go(-1)";
+            })
 
 		},
     }

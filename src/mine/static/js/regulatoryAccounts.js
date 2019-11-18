@@ -5,23 +5,23 @@
  * 
  */ 
 
-require('../../../include/js/vendor/config.js');
+require('@pathIncludJs/vendor/config.js');
 
-require('../../../include/js/vendor/mui/mui.picker.min.js');
+require('@pathIncludJs/vendor/mui/mui.picker.min.js');
 
 //zepto模块
-require('../../../include/js/vendor/zepto/callback.js');
-require('../../../include/js/vendor/zepto/deferred.js');
+require('@pathIncludJs/vendor/zepto/callback.js');
+require('@pathIncludJs/vendor/zepto/deferred.js');
 
 require('@pathCommonJs/components/headBarConfig.js');
 
 //黑色提示条
-var tipAction = require('../../../common/js/components/tipAction.js');
-require('../../../common/js/components/utils.js');
-require('../../../common/js/ajaxLoading.js');
-require('../../../common/js/components/elasticLayer.js');
+var tipAction = require('@pathCommonJs/components/tipAction.js');
+require('@pathCommonJs/components/utils.js');
+require('@pathCommonJs/ajaxLoading.js');
+require('@pathCommonJs/components/elasticLayer.js');
 
-var splitUrl = require('../../../common/js/components/splitUrl.js');
+var splitUrl = require('@pathCommonJs/components/splitUrl.js');
 //引入复制功能
 // var Clipboard = require('clipboard');
 
@@ -51,7 +51,6 @@ $(function(){
 	        //数据初始化
 		getData:function(){
 			var that = this;
-
 			var param = {
 
 					// hmac:"", //预留的加密信息
@@ -69,7 +68,7 @@ $(function(){
 	            needLogin:true,//需要判断是否登陆
 	            //needDataEmpty: false,//不需要判断data是否为空
 	            callbackDone: function(json){  //成功后执行的函数
-
+					
 	                $('#accountName').html(json.data.title);
 	                $('#name').html(json.data.accountName);
 	                $('#number').html(json.data.bankAccount);
@@ -99,8 +98,27 @@ $(function(){
 
 
             //点击复制按钮
-            $('.copy_btn').on('tap', function(el) {
-            	var $this = $(this);
+            // $('.copy_btn').on('tap', function(el) {
+            // 	var $this = $(this);
+			// 	var copyText = $this.siblings('div').text()
+			//     //实例化clipboard
+			// 	var clipboard = new Clipboard('.copy_btn', {
+			// 		text: function () {
+
+			// 			return copyText;
+			// 		}
+			// 	});
+			// 	clipboard.on("success", function (e) {
+			// 		//text = '';
+			// 		tipAction("复制成功");
+			// 	});
+			// 	clipboard.on("error", function (e) {
+			// 		tipAction("请选择“拷贝”进行复制!");
+			// 	});
+			// })
+
+			$(".copy_btn").click(function () {
+				var $this = $(this);
 				var copyText = $this.siblings('div').text()
 			    //实例化clipboard
 				var clipboard = new Clipboard('.copy_btn', {
@@ -116,7 +134,8 @@ $(function(){
 				clipboard.on("error", function (e) {
 					tipAction("请选择“拷贝”进行复制!");
 				});
-			})
+
+			});
 			
 			$('.toptitle span,.toptitle img').on('tap',function(){
 				$('.topcontent').addClass('mui-active').removeClass('mui-hidden');
