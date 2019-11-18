@@ -65,29 +65,29 @@
     <script id="second-template" type="text/x-handlebars-template">
         {{! 左侧页面列表}} {{#if already}} {{#each pageList}}
         <div class="datalist" fundCode="{{fundCode}}">
-            <div class="proName">
+            <div class="proName clearfix">
                 <span class="proNameBefore"></span>
                 <p class="proNameCon">{{projectName}}</p>
                 <span class="proNameAfter"></span>
             </div>
-            <ul>
-                <li>
-                    <span class="title">总资产</span>
-                    <span class="text"><span>{{balanceStr}}</span>元</span>
-                </li>
-                <li>
-                    <span class="title">票面利率</span>
-                    <span class="text"><i>{{profitStr}}</i></span>
-                </li>
-                <li>
-                    <span class="title">成立日期</span>
-                    <span class="text"><i>{{establishDateStr}}</i></span>
-                </li>
-                <li>
-                    <span class="title">产品期限</span>
-                    <span class="text"><i>{{deadLine}}</i></span>
-                </li>
-            </ul>
+            <div class="haveFundCon clearfix">
+                <div class="total fl">
+                    <p>总资产(元)</p>
+                    <span>*****</span>
+                </div>
+                <div class="interestRate fl">
+                    <p>票面利率</p>
+                    <span>9.8%</span>
+                </div>
+                <div class="term fl">
+                    <p>产品期限</p>
+                    <span>6个月</span>
+                </div>
+                <div class="date fl">
+                    <p>成立日期</p>
+                    <span>2019-7-23</span>
+                </div>
+            </div>
         </div>
         {{/each}} {{/if}} {{#if tobe}} {{#each pageList}}
         <div class="datalist" fundCode="{{fundCode}}">
@@ -112,21 +112,7 @@
                 </div>
             </div>
         </div>
-        <div class="datalist" fundCode="{{fundCode}}">
-            <div class="proName clearfix">
-                <span class="proNameBefore"></span>
-                <p class="proNameCon">{{projectName}}</p>
-                <span class="proNameAfter"></span>
-            </div>
-            <div class="haveFundCon clearfix">
-                <div class="total fl">
 
-                </div>
-                <div>
-
-                </div>
-            </div>
-        </div>
         {{/each}} {{/if}}
     </script>
     @@include('@pathInclude/views/footer.html')
