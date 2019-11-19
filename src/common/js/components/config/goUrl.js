@@ -6,12 +6,12 @@
 
 module.exports = function() {
 
-    this.login_html_url = go_url.no_url + '/login';  //手动触发登录,需将redirectUrl值传回去
-    this.logOut_html_url = go_url.no_url +'/logout.action';  //退出登录
-    this.registerUrl = go_url.cft_url + '/user/views/register.html';  //注册页面
+    this.login_html_url = go_url.no_url + '/login'; //手动触发登录,需将redirectUrl值传回去
+    this.logOut_html_url = go_url.no_url + '/logout.action'; //退出登录
+    this.registerUrl = go_url.cft_url + '/user/views/register.html'; //注册页面
 
     // oauth登录页面地址
-    this.oauth_url = go_url.oauth_url + '/user/views/toAuthLogin.html'; 
+    this.oauth_url = go_url.oauth_url + '/user/views/toAuthLogin.html';
 
     //我的账户：
     this.myAccount_url = go_url.no_url + '/personal/views/myAccount.html';
@@ -67,8 +67,8 @@ module.exports = function() {
     //公墓资产+中融货币E页面
     this.payThemeCash_url = go_url.no_url + '/pay/views/payThemeCash.html';
 
-     //标普配置页面
-     this.assetAllocation_url = go_url.no_url + '/personal/views/assetAllocation.html';
+    //标普配置页面
+    this.assetAllocation_url = go_url.no_url + '/personal/views/assetAllocation.html';
 
     //我的
     this.mine_url = go_url.no_url + '/personal/views/accountMerge.html';
@@ -164,9 +164,9 @@ module.exports = function() {
     this.perBass_url = go_url.no_url + '/user/views/bassMessage/bassPer.html';
     //产品机构基本信息
     this.pdBass_url = go_url.no_url + '/user/views/bassMessage/bassOrgPd.html';
-    
 
-    
+
+
 
     //老带新
     // 老带新二维码页面--股份和明泽离得推荐有礼都跳转明泽
@@ -191,44 +191,44 @@ module.exports = function() {
 
     //恒天财富
     this.homePage_url = go_url.no_url + '/mobilePage/views/homePage.html';
-    this.about_com_intro = go_url.wm_url + '/website-app/about_com_intro.do?type=1';  //公司介绍
-    this.about_honor = go_url.wm_url + '/website-app/about_honor.do';  //荣誉奖项
-    this.about_com_intro_2 = go_url.wm_url + '/website-app/about_com_intro.do?type=2';  //股东介绍
-    this.about_manage_team = go_url.wm_url + '/website-app/about_manage_team.do';  //管理团队
-    this.about_com_intro_3 = go_url.wm_url + '/website-app/about_com_intro.do?type=3';  //董事长致辞
-    this.about_com_intro_4 = go_url.wm_url + '/website-app/about_com_intro.do?type=4';  //企业文化
-    this.htcf_chnl_media_news_1 = go_url.wm_url + '/website-app/htcf_chnl_media_news.do?ind=01';  //公司新闻
-    this.htcf_chnl_media_news_5 = go_url.wm_url + '/website-app/htcf_chnl_media_news.do?ind=05';  //公司公告
-    this.business_2 = go_url.wm_url + '/website-app/business.do?kind=2';  //资产管理
-    this.business_1 = go_url.wm_url + '/website-app/business.do?kind=1';  //财富管理
-    this.business_5 = go_url.wm_url + '/website-app/business.do?kind=5';  //教育服务
-    this.risk_controll_sys = go_url.wm_url + '/website-app/risk_controll_sys.do';  //风控体系
-    this.chtfund_url = go_url.wap_url;  //恒天金服
-    this.rock_url = go_url.rock_url;  //恒天资管
-    this.institute_1 = go_url.wm_url + '/website-app/htcf_chnl_institute_news.do?ind=1';  //研究观点
-    this.institute_2 = go_url.wm_url + '/website-app/htcf_chnl_institute_news.do?ind=2';  //研究团队
-	this.contactUs = go_url.wm_url + '/website-app/recruit.do';  //加入我们
-	this.copyIntro = go_url.wm_url + '/website-app/a_copyright.do';  //版权声明
-	
-	//恒天明泽在恒天财富中的链接
-	this.htcf_paytheme_url = go_url.wap_url + '/pay/views/payThemeCash.html';
-	this.htcf_asset_url = go_url.wap_url + '/personal/views/myAsset.html';
-	this.htcf_accountMerge_url = go_url.wap_url + '/personal/views/accountMerge.html';
-	this.htcf_riskMent_url  = go_url.wap_url + '/personal/views/riskAssessment.html';
-	this.htcf_publicList_url = go_url.wap_url + '/productPublic/views/publicList.html';
+    this.about_com_intro = go_url.wm_url + '/website-app/about_com_intro.do?type=1'; //公司介绍
+    this.about_honor = go_url.wm_url + '/website-app/about_honor.do'; //荣誉奖项
+    this.about_com_intro_2 = go_url.wm_url + '/website-app/about_com_intro.do?type=2'; //股东介绍
+    this.about_manage_team = go_url.wm_url + '/website-app/about_manage_team.do'; //管理团队
+    this.about_com_intro_3 = go_url.wm_url + '/website-app/about_com_intro.do?type=3'; //董事长致辞
+    this.about_com_intro_4 = go_url.wm_url + '/website-app/about_com_intro.do?type=4'; //企业文化
+    this.htcf_chnl_media_news_1 = go_url.wm_url + '/website-app/htcf_chnl_media_news.do?ind=01'; //公司新闻
+    this.htcf_chnl_media_news_5 = go_url.wm_url + '/website-app/htcf_chnl_media_news.do?ind=05'; //公司公告
+    this.business_2 = go_url.wm_url + '/website-app/business.do?kind=2'; //资产管理
+    this.business_1 = go_url.wm_url + '/website-app/business.do?kind=1'; //财富管理
+    this.business_5 = go_url.wm_url + '/website-app/business.do?kind=5'; //教育服务
+    this.risk_controll_sys = go_url.wm_url + '/website-app/risk_controll_sys.do'; //风控体系
+    this.chtfund_url = go_url.wap_url; //恒天金服
+    this.rock_url = go_url.rock_url; //恒天资管
+    this.institute_1 = go_url.wm_url + '/website-app/htcf_chnl_institute_news.do?ind=1'; //研究观点
+    this.institute_2 = go_url.wm_url + '/website-app/htcf_chnl_institute_news.do?ind=2'; //研究团队
+    this.contactUs = go_url.wm_url + '/website-app/recruit.do'; //加入我们
+    this.copyIntro = go_url.wm_url + '/website-app/a_copyright.do'; //版权声明
+
+    //恒天明泽在恒天财富中的链接
+    this.htcf_paytheme_url = go_url.wap_url + '/pay/views/payThemeCash.html';
+    this.htcf_asset_url = go_url.wap_url + '/personal/views/myAsset.html';
+    this.htcf_accountMerge_url = go_url.wap_url + '/personal/views/accountMerge.html';
+    this.htcf_riskMent_url = go_url.wap_url + '/personal/views/riskAssessment.html';
+    this.htcf_publicList_url = go_url.wap_url + '/productPublic/views/publicList.html';
     this.htcf_prvIndex_url = go_url.wap_url + '/productPrivate/views/prvIndex.html';
-	
-	//恒天中岩及明泽的风控体系---PC配置
-	this.cathayrock_url = "http://www.cathayrock.com";
-	this.rongzeAsset_url = "http://www.rongzeasset.com";
-	
-	//恒天明泽跳转恒天财富的首页
+
+    //恒天中岩及明泽的风控体系---PC配置
+    this.cathayrock_url = "http://www.cathayrock.com";
+    this.rongzeAsset_url = "http://www.rongzeasset.com";
+
+    //恒天明泽跳转恒天财富的首页
     this.cft_index_url = go_url.cft_url + '/mobilePage/views/homePage.html';
     //理财师  ---由明泽域名下放到财富域名下
     this.cft_plannerSearch_url = go_url.cft_url + '/planner/views/plannerSearch.html';
 
     //新客专享产品立即邀请跳转连接
-	this.newcomer_url = 'http://tg.chtwm.com/app04/gift.html';
+    this.newcomer_url = 'http://tg.chtwm.com/app04/gift.html';
 
     // 预约明细
     this.orderDetail_url = go_url.no_url + '/personal/views/orderDetail.html';
@@ -254,10 +254,10 @@ module.exports = function() {
     this.baseResult_url = go_url.no_url + '/about/views/baseEducation/baseResult.html';
 
     //中秋活动专题
-    this.AutumnIndex_url = go_url.no_url + '/about/views/midAutumn/AutumnIndex.html';  //主会场
-    this.privateActivity_url = go_url.no_url + '/about/views/midAutumn/privateActivity.html';  //私募会场
-    this.publicActivityOne_url = go_url.no_url + '/about/views/midAutumn/publicActivityOne.html';  //公募会场 第一页
-//我的明细
+    this.AutumnIndex_url = go_url.no_url + '/about/views/midAutumn/AutumnIndex.html'; //主会场
+    this.privateActivity_url = go_url.no_url + '/about/views/midAutumn/privateActivity.html'; //私募会场
+    this.publicActivityOne_url = go_url.no_url + '/about/views/midAutumn/publicActivityOne.html'; //公募会场 第一页
+    //我的明细
     this.myDetail_url = go_url.no_url + '/personal/views/myDetail.html';
 
     /*-------------------------------恒小智 start -----------------------*/
@@ -266,7 +266,7 @@ module.exports = function() {
     // 买入
     this.buyCombination_url = go_url.no_url + '/intelligentInvestment/views/buyCombination.html';
     // 我的组合
-    this.myCombination_url = go_url.no_url + '/intelligentInvestment/views/myCombination.html';  
+    this.myCombination_url = go_url.no_url + '/intelligentInvestment/views/myCombination.html';
     //恒小智方案制定失败页面
     this.programFail_url = go_url.no_url + '/intelligentInvestment/views/programFail.html';
     //智能组合详情页
@@ -289,9 +289,9 @@ module.exports = function() {
 
 
     // 在线客服-第三方地址
-    this.onlineCustomer_url = go_url.onlineCustomer_url+'/webchat/jsp/standard/interfacePools.jsp?queue=106&device=mobile';
+    this.onlineCustomer_url = go_url.onlineCustomer_url + '/webchat/jsp/standard/interfacePools.jsp?queue=106&device=mobile';
     // 在线客服中转页
-    this.onlineCustomerTransfer_url = go_url.cft_url+ '/include/views/onlineCustomer.html';
+    this.onlineCustomerTransfer_url = go_url.cft_url + '/include/views/onlineCustomer.html';
     // app中私募首页，视频直播跳转路径
     this.videoPlay_url = go_url.no_url + '/productPrivate/views/videoPlay.html';
 
@@ -307,19 +307,29 @@ module.exports = function() {
     this.diagnosisSearch_url = go_url.no_url + '/commonResources/fundDiagnosis/views/diagnosisSearch.html';
     // 诊断详情页
     this.diagnosisDetail_url = go_url.no_url + '/commonResources/fundDiagnosis/views/diagnosisDetail.html';
-    
+
     /*-------------------------------基金诊断 end -----------------------*/
     /*-------------------------------我的页面 start -----------------------*/
-   //登录日志查询页面
-   	this.journal_url = go_url.no_url + '/mine/views/journal.html'
-   //承接h5的模板页地址
+    //登录日志查询页面
+    this.journal_url = go_url.no_url + '/mine/views/journal.html'
+        //承接h5的模板页地址
     this.examplePage_url = go_url.no_url + '/mine/views/examplePage.html';
     /*-------------------------------我的页面 end -----------------------*/
 
-     /*-------------------------------活动列表 start -----------------------*/
+    /*-------------------------------活动列表 start -----------------------*/
     // 活动详情
     this.activityDetails_url = go_url.no_url + '/mine/views/memberClub/activityDetails/activityDetails.html';
     // 活动列表
     this.activityList_url = go_url.no_url + '/mine/views/memberClub/activityList/activityList.html';
+    //活动详情->实名
+    this.realName_url = go_url.no_url + '/mine/views/realName/realName.html';
+    //活动详情->风测
+    this.riskAppraisal_url = go_url.no_url + '/mine/views/riskAppraisal/riskAppraisal.html?type=private';
+    //活动详情->合格投资者认证
+    this.qualifiedInvestor_url = go_url.no_url + '/mine/views/qualifiedInvestor/qualifiedInvestor.html?type=private';
+    //活动详情->去成交
+    this.wealthIndex_url = go_url.no_url + '/financial/views/wealthIndex.html';
+    //活动详情->我的奖励
+    this.rewards_url = go_url.no_url + '/mine/views/rewards.html';
     /*-------------------------------活动列表 end -----------------------*/
 };

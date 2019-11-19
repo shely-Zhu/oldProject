@@ -11,7 +11,6 @@ var tipAction = require('../../../common/js/components/tipAction.js');
 var splitUrl = require('../../../common/js/components/splitUrl.js');
 
 module.exports = function(callback, preThis, type) {
-
     /****************************初始默认配置******************************/
 
     var elements = { //uploaderFile配置中需要的参数
@@ -35,7 +34,7 @@ module.exports = function(callback, preThis, type) {
             $select: elements.compliance.find('#complianceSelect'), // 选择按钮
             fileNumLimit: 9, //
             multiple: true,
-            errorTip: '只能上传4张照片',
+            errorTip: '最多只能上传九张照片',
             acceptTitle: 'compliance',
             extensions: 'jpg,jpeg,png',
             mimeTypes: 'image/*,Camera/*', // word格式--application/vnd.openxmlformats-officedocument.wordprocessingml.document,application/msword,
@@ -50,7 +49,7 @@ module.exports = function(callback, preThis, type) {
             fileSizeLimit: 1024 * 1024 * 10, //图片大小限制10M
             success: 0, //上传成功的张数，预设为0
             //hasError : false, //是否有上传文件格式不正确的情况，true为有，false为没有
-            uploadUrl: site_url.upload_api, //上传路径
+            uploadUrl:  site_url.upload_api, //insertFeedback_api 上传路径
             thumbnailWidth: elements.width * elements.ratio, // 预览图大小，根据上面设置的宽高计算
             thumbnailHeight: elements.height * elements.ratio,
             swfUrl: '/include/js/vendor/webuploader/Uploader.swf', //swf文件路径
@@ -82,7 +81,6 @@ module.exports = function(callback, preThis, type) {
                 // allowMagnify: true
             },
             formData: {
-                businessType: 'tzzfl' //业务类型 tzzfl 投资者分类, hgtzz 合格投资者
             },
             fileVal: 'file',
             fileNumLimit: source.fileNumLimit, //只能上传5张
@@ -130,17 +128,8 @@ module.exports = function(callback, preThis, type) {
             };
 
             that.source.$uploadBtn.on('click', function(e) {
-                console.log(11111);
                 var condition = true; 
                 var a = $('.uploadMaterial').find('.uploadArea').length; // 上传区域个数
-                var b = $('.uploadMaterial').find('input[type=radio]:checked').length;
-
-                if(a!=b){
-                    condition = false;
-                    tipAction('请完善认证资料');
-                    return false;
-                }
-
                 $('.uploadArea').each(function(i,obj){
                     if($(obj).find('.imgNum').length==0){
                         condition = false;
@@ -149,9 +138,9 @@ module.exports = function(callback, preThis, type) {
                 })
 
                 if (condition) {
-                    console.log(222222222222);
                     // 如果校验通过，执行上传
-                    $('.listLoading').show();
+                    // $('.listLoading').show();
+                    // debugger
                     that.uploader.upload();
                 } else {
                     tipAction('请完善认证资料');
@@ -171,7 +160,6 @@ module.exports = function(callback, preThis, type) {
         //预览图片
         addFile: function(file, uploader, errorTip, $source) {
             var that = this;
-
             if ($('.filelist li').length == 1) {
                 //已经有1张了，把新文件从队列里删除并提示
                 tipAction(errorTip)
@@ -240,7 +228,6 @@ module.exports = function(callback, preThis, type) {
         //将文件加入队列的错误发生时
         queuedError: function(type, $source, tip) {
             var that = this;
-
             /*if (type == 'Q_EXCEED_SIZE_LIMIT') {
                 //上传总文件文件大小超出限制
                 tipAction('上传总文件不得超出90M，请重新上传')
@@ -281,18 +268,8 @@ module.exports = function(callback, preThis, type) {
         //上传成功后的处理函数
         UploadSuccess: function(uploader, file, json) {
             var that = this;
-            // 这张图片所属的类型
-            var idTypeArr = [];
-
-            // 机构图片类型取值
-            var orgType = that.source.$queue.siblings().find('input[type=radio]:checked').attr('idType');
-            // 个人图片类型取值
-            var perType = that.source.$queue.parent().siblings().find('input[type=radio]:checked').attr('idType');
-            // 如果是机构，那2个type都有值，但是第一个是正确的值，所有位置不能调换
-            idTypeArr[0] = orgType || perType;
-
             //判断登录是否失效
-            console.log('callback------UploadSuccess', callback)
+            console.log('callback------  ', callback)
             // 上传成功不移除文件
             // uploader.removeFile(file, true);
 
@@ -301,7 +278,8 @@ module.exports = function(callback, preThis, type) {
                 uploader.onUploadError(file, json);
                 return false;
             }
-            callback.call(preThis, json, idTypeArr)
+            debugger
+            callback.call(preThis, json)
         },
     };
 
