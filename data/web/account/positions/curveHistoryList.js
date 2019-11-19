@@ -13,16 +13,19 @@ var data=Mock.mock({
             "incomeUnit":"1.2304" ,//万份收益
             "curveDate": "2016-08-09",
             "sevenYearYield": "1.2304", //七日年化率
+            "status":"0",
         },
         {
             "incomeUnit":"1.2304" ,//万份收益
             "curveDate": "2016-08-09",
             "sevenYearYield": "1.2304", //七日年化率
+            "status":"1"
         },
         {
             "incomeUnit":"1.2304" ,//万份收益
             "curveDate": "2016-08-09",
             "sevenYearYield": "1.2304", //七日年化率
+            "status":"2"
         },
     ]
     
