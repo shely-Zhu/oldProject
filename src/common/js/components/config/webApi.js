@@ -134,6 +134,11 @@ module.exports = function() {
     //监管账户（老接口）
     this.findSuperviseBank_api = http_url.web_url + '/content/frontend/findSuperviseBank';
 
+    /*-------------------明星理财师开始 ------------------------------*/
 
+    //明星理财师-列表
+    this.queryFinancialer_api = http_url.web_url + '/account/home/frontend/queryFinancialer';
+
+    /*-------------------明星理财师结束 ------------------------------*/
 
 };

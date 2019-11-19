@@ -1,0 +1,79 @@
+<!-- 消息中心
+ @author yanruiting 2019-11-15
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	@@include('@pathInclude/views/meta.html') 
+	<link rel="stylesheet" href="/homePage/static/css/noticeCenter.css">  
+	<title>消息中心</title>
+</head>
+<body>
+	<!-- @@include('@pathCommonViews/load.html') -->
+	<!--@@include('@pathCommonViews/noData.html')  -->
+	<!-- @@include('@pathCommonViews/loading/listLoading.html') -->
+    <div id="noticeBox">
+    	@@include('@pathCommonViews/headBarConfig.html',{"bgColors":"#2C3E77,#273971","showType":"0","pathName":"消息中心"})    
+        <div id="noticeCon">
+        	<div class="noticeItem">
+        		<div class="itemImgCon">
+        			<img class="itemImg" src="/homePage/static/img/home_icon_system@2x.png" alt="">
+        			<img class="itemBadge" src="/homePage/static/img/home_icon_Badge@2x.png" alt="">
+        		</div>
+        		<div class="itemCon">
+        			<div class="noticeTitle">系统通知</div>
+        			<div class="noticeContent">关于恒天财富APP升级的公告，尊敬的客户897777777777</div>
+        		</div>
+        	</div>
+        	<div class="noticeItem">
+        		<div class="itemImgCon">
+        			<img class="itemImg" src="/homePage/static/img/home_icon_product@2x.png" alt="">
+        			<img class="itemBadge" src="/homePage/static/img/home_icon_Badge@2x.png" alt="">
+        		</div>
+        		<div class="itemCon">
+        			<div class="noticeTitle">产品公告</div>
+        			<div class="noticeContent">防范金融诈骗特别提示，尊敬的客户：为了回4556666666666666666666</div>
+        		</div>
+        	</div>
+        	<div class="noticeItem">
+        		<div class="itemImgCon">
+        			<img class="itemImg" src="/homePage/static/img/home_icon_system@2x.png" alt="">
+        			<img class="itemBadge" src="/homePage/static/img/home_icon_Badge@2x.png" alt="">
+        		</div>
+        		<div class="itemCon">
+        			<div class="noticeTitle">活动通知</div>
+        			<div class="noticeContent">“锦绣好礼，恒天赠送”，尊敬的客户：为了回888888888888888</div>
+        		</div>
+        	</div>
+        	<div class="noticeItem">
+        		<div class="itemImgCon">
+        			<img class="itemImg" src="/homePage/static/img/home_icon_activity@2x.png" alt="">
+        			<img class="itemBadge" src="/homePage/static/img/home_icon_Badge@2x.png" alt="">
+        		</div>
+        		<div class="itemCon">
+        			<div class="noticeTitle">交易动态</div>
+        			<div class="noticeContent">您于2019年10月19日买入1,000,000.00元中融888888888888888</div>
+        		</div>
+        	</div>
+        </div>   
+    </div>
+
+    <!--<script id="noticeItemList-template" type="text/x-handlebars-template">
+    	{{#each this}}
+        <div class="noticeItem">
+    		<div class="itemImgCon">
+    			<img class="itemImg" src="/homePage/static/img/home_icon_activity@2x.png" alt="">
+    			<img class="itemBadge" src="/homePage/static/img/home_icon_Badge@2x.png" alt="">
+    		</div>
+    		<div class="itemCon">
+    			<div class="noticeTitle">交易动态</div>
+    			<div class="noticeContent">您于2019年10月19日买入1,000,000.00元中融888888888888888</div>
+    		</div>
+    	</div>
+    	{{/each}}
+    </script>-->
+
+	@@include('@pathInclude/views/footer.html')
+    <script src="/homePage/static/js/noticeCenter.js"></script>
+</body>
+</html>

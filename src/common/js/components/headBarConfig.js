@@ -21,6 +21,9 @@ var pathTitle=[
     {
         pathName:"登录日志查询",
         pathUrl:"eruda3" 
+    },
+    {
+        pathName:"消息中心" 
     }
 ]
 $(function(){
