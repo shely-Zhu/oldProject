@@ -19,9 +19,8 @@
 //回到顶部的样式
 @import url("@pathCommonLessCom/goTopMui.less");
 @import url("@pathCommonLess/components/elasticLayerTypeFive.less");
-@import url("@pathCommonLessCom/noData.less");
 @import url("@pathCommonLessCom/headBarConfig.less");
-
+@import url("@pathCommonLessCom/noData.less");
 html {
     height: 100%;
 }
@@ -34,22 +33,25 @@ html {
 body,.mui-content{
     background: @F7FAFD !important;
 }
+.hide{
+    display: none;
+}
 .container {
     height: 100%;
     width: 100%;
     background: @F7FAFD;
 
-    // 其他资产
+    // 公募资产
     .banner {
         position: relative;
         width: 100%;
-        height: 4.3rem;
-        background: url("/account/static/img/banner.png");
+        height: 5.3rem;
+        background: url("/account/static/img/public_account_bg.png");
         background-size: 100% 100%;
+        padding: 0 0.28rem;
 
         .bannerTop {
             color: @F7DDCF;
-            margin: 0 0.3rem;
             padding-top: 1.54rem;
             .sum {
                 
@@ -86,37 +88,71 @@ body,.mui-content{
         .totalM{
             font-size: 0.68rem;
             line-height: 0.8rem;
-            margin: 0.1rem 0.3rem 0.22rem;
+            margin-top: 0.1rem;
             font-weight:bold;
             color:rgba(153,81,0,1);
             background:linear-gradient(360deg, rgba(186,140,112,1) 0%, rgba(244,210,192,1) 100%);
             -webkit-background-clip:text;
             -webkit-text-fill-color:transparent;
         }
-        // 已持仓
-        .jjs_type {
+        //待确认金额
+        .be_confirmed_amount {
+            height: 0.95rem;
             width: 100%;
-            margin: 0 0.3rem;
-            li {
-                span {
-                    display: block;
-                    color: @c005;
-                    opacity: 0.7;
-                    font-size: 0.26rem;
-                    &:first-child {
-                        padding-bottom: 0.2rem;
-                    }
-                }
+            padding-top: 0.14rem;
+            .title {
+                font-size: 0.26rem;
+                color: @FFFFFF;
+                margin-top: 0.08rem;
             }
-
-            .j_already,
-            .j_tobe {
+            .value {
+                margin-left: 0.1rem;
                 font-size: 0.38rem;
-                opacity: 1;
-                color: @c005;
+                color: #EDC99B;
             }
-
         }
+        //收益金额相关
+        .first_h_profit_box {
+            width: 3.58rem;
+        }
+        .h_profit {
+            font-size: 0.26rem;
+            color: rgba(255, 255, 255, 0.7);
+        }
+        .h_profit_value {
+            font-size: 0.38rem;
+            color: @FFFFFF;
+            margin-top: 0.1rem;
+        }
+        
+    }
+
+    //银行卡筛选
+    .bank_screen {
+        width: 100%;
+        padding: 0.2rem 0.28rem 0 0.2rem;
+        height: 0.8rem;
+        color: @272727;
+        .bank_screen_name {
+            font-size: 0.28rem;
+            margin-right: 0.2rem;
+        }
+        .iconfont {
+            font-size: 0.24rem;
+            line-height: 0.4rem;
+        }
+    }
+    .bank_list {
+        .bank_screen .iconfont {
+            font-size: 0.30rem;
+        }
+    }
+
+    //分隔段
+    .divider {
+        width: 100%;
+        height: 0.3rem;
+        background-color: @F7FAFD;
     }
 
     // 遮罩层
@@ -153,31 +189,7 @@ body,.mui-content{
             color: @3c3c3c;
             padding-top: 0;
             height: 0.84rem;
-            background-color: @F7FAFD;
-            .mui-scroll .mui-control-item{
-                font-size: 0.32rem;
-                line-height: 0.84rem;
-                padding:0;
-                text-align: center;
-            }
-            .mui-scroll .mui-control-item.mui-active {
-                color: @272727;
-                position: relative;
-                border: none;
 
-                &:after {
-                    position: absolute;
-                    height: 0.06rem;
-                    bottom: 0rem;
-                    left: 50%;
-                    margin-left: -0.6rem;
-                    content: '';
-                    width: 1.2rem;
-                    background: @D58D65;
-                    border-radius: 1rem;
-                }
-
-            }
         }
 
         .mui-table-view-cell {
@@ -228,13 +240,11 @@ body,.mui-content{
                         margin-bottom: 0.12rem;
                     }
                     .fundCenter{
-                        line-height: 0.4rem;
                         .money{
                             font-size: 0.32rem;
                             color: @272727;
                             margin-right: 0.4rem;
                             float: left;
-                            min-width: 2rem;
                         }
                         .date{
                             font-size: 0.26rem;
@@ -246,7 +256,6 @@ body,.mui-content{
                             height: 0.38rem;
                             line-height: 0.38rem;
                             border-radius: 0.04rem;
-                            font-size: 0.24rem;
                             text-align: center;
                             float: right;
                         }
@@ -273,7 +282,7 @@ body,.mui-content{
                         font-size: 0.26rem;
                     }
                     .total{
-                        width: 35%;
+                        width: 40%;
                     }
                     .interestRate{
                         width: 20%;
@@ -282,7 +291,7 @@ body,.mui-content{
                         width: 20%;
                     }
                     .date{
-                        width: 25%;
+                        width: 20%;
                     }
                 }
             }
@@ -291,92 +300,9 @@ body,.mui-content{
 
 
     }
-    .mask{
-        width: 100%;
-        height: 100%;
-        position: fixed;
-        top: 0;
-        left: 0;
-        opacity: 0.6;
-        background: #000000;
-        z-index: 9;
-        display: none;
-    }
-    // 淡黄色背景弹框
-    .tipContainer{
-        width: 5.4rem;
-        height: 5.7rem;
-        background-image: linear-gradient(220deg, #F5ECD5 0%, #F0DFBA 100%);
-        border-radius: 0.14rem;
-        position: fixed;
-        top: 50%;
-        left: 50%;
-        margin-left: -2.7rem;
-        margin-top: -2.85rem;
-        display: none;
-        z-index: 10;
-        // 弹框标题
-        .titleText{
-            font-size: 0.32rem;
-            color: @272727;
-            letter-spacing: 0;
-            text-align: center;
-            line-height: 0.45rem;
-            font-weight: bold;
-            margin: 0.43rem 0.4rem 0.3rem;
-        }
-        // 弹框提示内容
-        .tipCon{
-            font-size: 0.26rem;
-            color: @272727;
-            text-align: left;
-            line-height: 0.45rem;
-            margin: 0 0.4rem 0.4rem;
-        }
-        //淡黄色背景只有一个按钮
-        .buttonOne{
-            height: 1rem;
-            background: #FDF3DD;
-            border-bottom-left-radius: 0.14rem;
-            border-bottom-right-radius: 0.14rem;
-            font-size: 0.34rem;
-            position: absolute;
-            bottom: 0;
-            width: 100%;
-            color: @272727;
-            text-align: center;
-            line-height: 1rem;
-        }
-        
-        
-    }
+
     .contentWrapper {
         height: 100%;
-    }
-
-    // 向上按钮，返回顶部
-    .upTop {
-        position: fixed;
-        bottom: 2.3rem;
-        right: 0.3rem;
-        width: 0.7rem;
-        height: 0.7rem;
-        border-radius: 1.35rem;
-        background: rgba(51, 51, 51, 0.85);
-
-        // background: @c002;
-        // opacity: 0.85;
-        span {
-            display: block;
-            text-align: center;
-            margin-top: 0.35rem;
-            font-size: 1.8rem;
-            color: @c005;
-        }
-
-        &.chtwm-upTop {
-            bottom: 4.5rem;
-        }
     }
 
     //iscroll上拉加载重置
@@ -399,73 +325,4 @@ body,.mui-content{
     /**
 *   无数据区域的样式
  */
-}
-.HeadBarConfigBox{
-    z-index: 8;
-}
-.fixedHead{
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 0.88rem;
-    display: none;
-}
-.mask{
-    width: 100%;
-    height: 100%;
-    position: fixed;
-    top: 0;
-    left: 0;
-    opacity: 0.6;
-    background: #000000;
-    z-index: 9;
-    display: none;
-}
-// 淡黄色背景弹框
-.tipContainer{
-    width: 5.4rem;
-    height: 5.7rem;
-    background-image: linear-gradient(220deg, #F5ECD5 0%, #F0DFBA 100%);
-    border-radius: 0.14rem;
-    position: fixed;
-    top: 3.8rem;
-    left: 50%;
-    margin-left: -2.7rem;
-    display: none;
-    z-index: 10;
-    // 弹框标题
-    .titleText{
-        font-size: 0.32rem;
-        color: @272727;
-        letter-spacing: 0;
-        text-align: center;
-        line-height: 0.45rem;
-        font-weight: bold;
-        margin: 0.43rem 0.4rem 0.3rem;
-    }
-    // 弹框提示内容
-    .tipCon{
-        font-size: 0.26rem;
-        color: @272727;
-        text-align: left;
-        line-height: 0.45rem;
-        margin: 0 0.4rem 0.4rem;
-    }
-    //淡黄色背景只有一个按钮
-    .buttonOne{
-        height: 1rem;
-        background: #FDF3DD;
-        border-bottom-left-radius: 0.14rem;
-        border-bottom-right-radius: 0.14rem;
-        font-size: 0.34rem;
-        position: absolute;
-        bottom: 0;
-        width: 100%;
-        color: @272727;
-        text-align: center;
-        line-height: 1rem;
-    }
-    
-    
 }

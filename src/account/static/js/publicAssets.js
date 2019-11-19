@@ -1,10 +1,9 @@
 /*
- * @page: 其他资产(定融定投)
+ * @page: 公募资产
  * @Author: shiyunrui
- * @Date:   2019-7-3 11:54:51
- * @Last Modified by:   songxiaoyu
+ * @Date:   2019-11-19
  * @description:
- * 2019-9-10 待确认资产添加
+ * 新版App的公募资产页面
  */
 require('@pathCommonJsCom/utils.js');
 //ajax调用
@@ -34,8 +33,10 @@ $(function() {
             listLoading: $('.listLoading'), //所有数据区域，第一次加载的loading结构
         },
         gV: { //一些设置
+            showBankList: false,//当前是否展示银行卡列表
+
             navList: [ //导航
-                { type: '持有资产', num: '0' },
+                // { type: '持有资产', num: '0' },
                 { type: '待确认资产', num: '1' },
             ],
             aP: {
@@ -50,17 +51,12 @@ $(function() {
             listToTop: '', // 滑动区域距离顶部距离
             navToTop: '', // 滑动nav距离顶部距离
             navHeight: '', // nav高度
-            totalCount: $(".totalM"), //总资产
+            totalCount: $(".totalCount"), //总资产
             jAlready: $(".j_already"), //已持仓
             jTobe: $(".j_tobe"), //待确认
-            jjsTotalAssetMask: null,
-            jjsHoldAssetMask: null,
-            jjsInTransitAssetMask: null
-
         },
         html: '', //存放生成的html
         init: function() { //初始化函数
-
             var that = this;
 
             //拼模板，初始化左右滑动mui组件
@@ -97,6 +93,7 @@ $(function() {
                     pageNo: that.gV.aP.pageNo, //当前第几页(默认为1) 非必填项, 默认设置成第一页
                     pageSize: that.gV.aP.pageSize, //每页显示几条数据(默认10) 非必填项， 默认设置成20
                 }
+
                 contentArr.push({
                     id: i,
                     content: wrap_html
@@ -161,23 +158,6 @@ $(function() {
 
                 that.highHeight = $('html').height() - that.gV.listToTop;
             }
-
-            // if (!$('.list').hasClass('setHeight')) {
-
-            //     $('.list').each( function( i, el){
-
-            //         //判断当前ul高度
-            //         var ulHeight = $(el).find(".mui-table-view").height();
-
-            //         if( ulHeight < that.highHeight){
-            //             $(el).height(that.highHeight).addClass('setHeight').addClass('noMove');
-            //         }
-            //         else{
-            //             $(el).height(that.htmlHeight).addClass('setHeight');
-            //         }
-
-            //     })
-            // }
 
             // 为实现滚动区域滚动到顶部，定位，添加遮罩层
             $('.scroll_mask').css('top', that.gV.listToTop)
@@ -386,22 +366,6 @@ $(function() {
                         $list = $("#move_" + index + " .list");
 
                     $list.addClass('noMove');
-
-
-                    //如果是其他资产页面
-                    //if( window.location.href.indexOf('/wealthResources/otherAssets/views/jjsAssets.html') != -1){
-
-                    //获取当前展示的tab的索引
-                    //var index = $('#slider .tab-scroll-wrap .mui-active').index();
-
-                    // if( $("#move_"+index+" .noData").length ){
-                    //     //已经暂无数据了
-                    //     $('html').addClass('hidden');
-                    // }
-                    // else{
-                    //     $('html').removeClass('hidden');
-                    // }
-                    //}
                 }
             }]
             $.ajaxLoading(obj);
@@ -413,9 +377,6 @@ $(function() {
                 data: {},
                 callbackDone: function(json) {
                     //拿到jjs资产并填充界面
-                    that.gV.jjsHoldAssetMask = json.data.jjsHoldAssetMask;
-                    that.gV.jjsInTransitAssetMask = json.data.jjsInTransitAssetMask;
-                    that.gV.jjsTotalAssetMask = json.data.jjsTotalAssetMask;
                     that.gV.totalCount.html(json.data.jjsTotalAssetMask);
                     that.gV.jAlready.html('+' + json.data.jjsHoldAssetMask);
                     that.gV.jTobe.html(json.data.jjsInTransitAssetMask);
@@ -425,6 +386,18 @@ $(function() {
         },
         events: function() { //绑定事件
             var that = this;
+            //点击筛选银行卡
+            $('#bank_screen').on('click', function(e) {
+                that.showBankList = !that.showBankList;
+                if (that.showBankList){
+                    $('.bank_list').show();
+                    $('#bank_screen iconfont').html('&#xe62a;');
+                } else {
+                    $('.bank_list').hide();
+                    $('#bank_screen iconfont').html('&#xe62a;');
+                }
+                
+            })
 
             // 下拉
             mui("body")[0].addEventListener("swipedown", function(e) {
@@ -434,7 +407,7 @@ $(function() {
 
                 if ($("#move_" + index + " .noData").length) {
                     //已经暂无数据了
-                    // $('body').css('transform', 'translate3d(0px, 0px, 0px) translateZ(0px)');
+                    $('body').css('transform', 'translate3d(0px, 0px, 0px) translateZ(0px)');
 
                     $('#slider .mui-slider-item').each(function(i, el) {
                         if (i != index) {
@@ -466,9 +439,10 @@ $(function() {
                     $('body').css('transform', transformUl);
 
                     var t = $('.nav-wrapper')[0].getBoundingClientRect().top;
-                    if (t < 0) {
+
+                    if (t <= 10) {
                         $('.nav-wrapper').addClass('nav_fixed');
-                        // $('body').css('transform', 'translate3d(0px, -201px, 0px) translateZ(0px)');
+                        $('body').css('transform', 'translate3d(0px, -201px, 0px) translateZ(0px)');
                         move = false;
                     }
                 } else if (!move && (e.detail.lastY > -30 && e.detail.lastY != 0)) { // 等于0是tab切换
@@ -501,26 +475,12 @@ $(function() {
 
             // 头部文案提示(金钱展示隐藏)
             mui("body").on('tap', '.j_icon', function(e) {
-                data.gV.totalCount.html('****');
-                data.gV.jAlready.html('****');
-                data.gV.jTobe.html('****');
+                $('.totalM').html('****')
                 $(this).addClass('eyecose');
             })
             mui("body").on('tap', '.eyecose', function(e) {
-                    data.gV.totalCount.html(data.gV.jjsTotalAssetMask);
-                    data.gV.jAlready.html('+' + data.gV.jjsHoldAssetMask);
-                    data.gV.jTobe.html(data.gV.jjsInTransitAssetMask);
-                    $(this).removeClass('eyecose');
-                })
-                //打开资产组成说明
-            mui("body").on('tap', '.assetsBtn', function(e) {
-                    $('.mask').show();
-                    $('.tipContainer').show();
-                })
-                //关闭资产组成说明
-            mui("body").on('tap', '.buttonOne', function(e) {
-                $('.mask').hide();
-                $('.tipContainer').hide();
+                $('.totalM').html('10,000,000.00')
+                $(this).removeClass('eyecose');
             })
         }
     };
