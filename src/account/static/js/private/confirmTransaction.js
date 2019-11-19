@@ -33,6 +33,8 @@ $(function() {
         getElements: {
             noData: $('.noData'), //没有数据的结构
             listLoading: $('.listLoading'), //所有数据区域，第一次加载的loading结构
+            transTemp: $('#trans-template'), //模板
+            contentWrap: $('.contentWrap'), //内容区域
         },
         gV: { //一些设置
             aP: {
@@ -43,6 +45,7 @@ $(function() {
             listToTop: '', // 滑动区域距离顶部距离
             navToTop: '', // 滑动nav距离顶部距离
 
+
         },
         html: '', //存放生成的html
         init: function() { //初始化函数
@@ -52,7 +55,6 @@ $(function() {
             //初始化第一屏区域的上拉加载
             that.initMui();
 
-            that.getData();
 
             //事件监听
             that.events();
@@ -67,6 +69,7 @@ $(function() {
             if (!$('.list').hasClass('setHeight')) {
                 $('.list').height(height).addClass('setHeight');
             }
+
 
             mui.init({
                 pullRefresh: {
@@ -95,7 +98,7 @@ $(function() {
                 that.getElements.listLoading.show();
 
                 //这一句初始化并第一次执行mui上拉加载的callback函数
-                mui('.contentWrapper').pullRefresh().pullupLoading();
+                mui('.contentWrapper').pullRefresh();
 
                 //隐藏loading，调试接口时需要去掉
                 //setTimeout(function(){
@@ -113,7 +116,7 @@ $(function() {
             var obj = [{ // 系统调仓记录列表
                 url: site_url.curveHistoryList_api,
                 data: {
-                    "pageNo": that.gV.pageCurrent, //非必须，默认为1
+                    "pageNo": that.gV.pageNo, //非必须，默认为1
                     "pageSize": "10" //非必须，默认为10
                 },
                 //async: false,
@@ -122,20 +125,19 @@ $(function() {
                     var data;
                     if (json.data.length == 0) { // 没有记录不展示
                         $(".list").hide()
-                        that.$e.noData.show();
+                        that.getElements.noData.show();
                         return false;
                     } else {
                         data = json.data;
                     }
                     setTimeout(function() {
+                        if (data.length < that.gV.aP.pageSize) {
 
-                        if (data.length < that.gV.pageSize) {
-
-                            if (that.gV.pageCurrent == 1) { //第一页时
+                            if (that.gV.aP.pageNo == 1) { //第一页时
 
                                 if (data.length == 0) {
                                     // 暂无数据显示
-                                    that.$e.noData.show();
+                                    that.getElements.noData.show();
                                     return false;
 
                                 } else { // 没有更多数据了
@@ -151,12 +153,12 @@ $(function() {
                         }
 
                         // 页面++
-                        that.gV.pageCurrent++;
+                        that.gV.aP.pageNo++;
 
                         // 将列表插入到页面上
-                        // generateTemplate(data, that.$e.recordList, that.$e.adjustmentTemp);
+                        generateTemplate(data, that.getElements.contentWrap, that.getElements.transTemp);
 
-                    }, 200)
+                    }, 2000)
 
                 },
 

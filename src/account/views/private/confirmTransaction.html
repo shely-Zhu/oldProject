@@ -209,10 +209,40 @@
     </div>
 
 </body>
-<script>
+<script id="trans-template" type="text/x-handlebars-template">
+    {{#each this}}
+    <!-- 预约 -->
+    <div class="transList">
+        <div class="statusTip">预约过期</div>
+        <!-- 名称 -->
+        <div class="listName mt30">(DZ银杏1162号)恒天稳谊16号私募投资基 ZYFG恒天稳谊16号私募投资基ZYFG</div>
+        <!-- 名称 -->
+        <!-- 金额 -->
+        <div class="clearfix listCon">
+            <div class="listItem">
+                <p>预约金额(元)</p>
+                <span>10,000,000.00</span>
+            </div>
+            <div class="listItem">
+                <p>预约时间</p>
+                <span>2019-09-10</span>
+            </div>
+            <div class="listItem">
+                <p>理财师</p>
+                <span>范星星</span>
+            </div>
+        </div>
+        <!-- 金额 -->
+        <!-- 预约图片 -->
+        <div class="typeImg yy"></div>
+        <!-- 预约图片 -->
+    </div>
+    <!-- 预约 -->
+    {{/each}}
 </script>
 @@include('@pathInclude/views/footer.html')
 <!-- 添加埋点 -->
+<script src="/include/js/iscroll.js"></script>
 <script src="/account/static/js/private/confirmTransaction.js"></script>
 
 </html>
