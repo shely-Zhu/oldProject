@@ -59,25 +59,33 @@ $(function() {
         },
 
 
+        //初始化mui的上拉加载
         initMui: function() {
             var that = this;
 
+            var height = windowHeight - $(".topTitle").height();
+            if (!$('.list').hasClass('setHeight')) {
+                $('.list').height(height).addClass('setHeight');
+            }
+
             mui.init({
                 pullRefresh: {
-                    container: $('.contentWrapper'),
+                    container: '.contentWrapper',
                     up: {
+                        //auto: false,
                         contentrefresh: '拼命加载中',
                         contentnomore: '没有更多了', //可选，请求完毕若没有更多数据时显示的提醒内容；
                         callback: function() {
                             //执行ajax请求
                             that.getData(this);
-
                         }
                     }
                 }
             });
 
-            mui.ready(function() { //init后需要执行ready函数，才能够初始化出来
+            //init后需要执行ready函数，才能够初始化出来
+            mui.ready(function() {
+
                 //隐藏当前的加载中loading
                 if (!$('.list').hasClass('hasPullUp')) {
                     $('.list').find('.mui-pull-bottom-pocket').addClass('mui-hidden');
@@ -97,11 +105,7 @@ $(function() {
 
                 //为$id添加hasPullUp  class
                 $('.list').addClass('hasPullUp');
-
-                // mui(s).pullRefresh().disablePullupToRefresh()
             });
-
-            // mui('.mui-slider').slider().stopped = true;
         },
         getData: function(t) {
             var that = this;
