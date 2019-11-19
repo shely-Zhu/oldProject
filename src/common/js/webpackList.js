@@ -237,5 +237,7 @@ module.exports = {
     // 消息中心
     './homePage/static/js/noticeCenter': './src/homePage/static/js/noticeCenter.js',
     // 消息中心-系统通知
-    './homePage/static/js/systemInforms': './src/homePage/static/js/systemInforms.js'
+    './homePage/static/js/systemInforms': './src/homePage/static/js/systemInforms.js',
+    // 消息中心-通知详情
+    './homePage/static/js/noticeDetail': './src/homePage/static/js/noticeDetail.js'
 }

@@ -141,4 +141,17 @@ module.exports = function() {
 
     /*-------------------明星理财师结束 ------------------------------*/
 
+    /*------------------- 消息中心 start ------------------------------*/
+
+    // 消息中心
+    this.getNoticeTypeList_api = http_url.web_url + '/account/account/getNoticeTypeList';
+    // 通知消息列表
+    this.systemNotificationList_api = http_url.web_url + '/account/account/systemNotificationList';
+    // 非通知消息列表
+    this.getNoticeAndTransDynamic_api = http_url.web_url + '/account/account/getNoticeAndTransDynamic';
+    // 通知详情
+    this.getSystemNotification_api = http_url.web_url + '/account/account/getSystemNotification';
+
+    /*------------------- 消息中心 end ------------------------------*/
+
 };
