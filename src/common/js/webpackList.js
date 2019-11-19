@@ -189,6 +189,8 @@ module.exports = {
 
        //jjs持仓明细
     './wealthResources/otherAssets/static/js/jjsAssets' : './src/wealthResources/otherAssets/static/js/jjsAssets.js',
+    //信息披露
+    './acount/static/js/informationDisclosure' : './src/acount/static/js/informationDisclosure.js',
     // demo
     './wealthResources/otherAssets/static/js/demo' : './src/wealthResources/otherAssets/static/js/demo.js',
     // 老版-待删除
@@ -229,4 +231,5 @@ module.exports = {
      './mine/static/js/memberClub/activityDetails': "./src/mine/static/js/memberClub/activityDetails.js",
     //文件上传
     './mine/static/js/uploadMaterial' : './src/mine/static/js/uploadMaterial.js',
+    
 }
