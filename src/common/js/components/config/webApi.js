@@ -159,10 +159,12 @@ module.exports = function() {
     this.getNoticeTypeList_api = http_url.web_url + '/account/account/getNoticeTypeList';
     // 通知消息列表
     this.systemNotificationList_api = http_url.web_url + '/account/account/systemNotificationList';
-    // 非通知消息列表
-    this.getNoticeAndTransDynamic_api = http_url.web_url + '/account/account/getNoticeAndTransDynamic';
+    // 非通知消息列表  
+    this.noticeAndTransDynamicList_api = http_url.web_url + '/account/account/noticeAndTransDynamicList';
     // 通知详情
     this.getSystemNotification_api = http_url.web_url + '/account/account/getSystemNotification';
+    // 非通知详情
+    this.getNoticeAndTransDynamic_api = http_url.web_url + '/account/account/getNoticeAndTransDynamic';
 
     /*------------------- 消息中心 end ------------------------------*/
 

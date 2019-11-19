@@ -252,6 +252,12 @@ module.exports = {
     './homePage/static/js/noticeCenter': './src/homePage/static/js/noticeCenter.js',
     // 消息中心-系统通知
     './homePage/static/js/systemInforms': './src/homePage/static/js/systemInforms.js',
+
+    // 已报名活动
+    './mine/static/js/memberClub/activityEnrolment': './src/mine/static/js/memberClub/activityEnrolment.js',
     // 消息中心-通知详情
-    './homePage/static/js/noticeDetail': './src/homePage/static/js/noticeDetail.js'
+    './homePage/static/js/noticeDetail': './src/homePage/static/js/noticeDetail.js',
+
+    // 了解恒天
+    './homePage/static/js/understandHT': './src/homePage/static/js/understandHT.js',
 }
