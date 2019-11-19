@@ -205,6 +205,8 @@ module.exports = {
 
     // 月度报告列表页
     './mine/static/js/monthReport/monthReportList': './src/mine/static/js/monthReport/monthReportList.js',
+    // 月度报告详情页
+    './mine/static/js/monthReport/monthReportDetail': './src/mine/static/js/monthReport/monthReportDetail.js',
     // 登录日志查询页面
     './mine/static/js/journal': './src/mine/static/js/journal.js',
 
