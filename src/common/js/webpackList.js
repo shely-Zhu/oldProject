@@ -249,5 +249,8 @@ module.exports = {
     // 消息中心-系统通知
     './homePage/static/js/systemInforms': './src/homePage/static/js/systemInforms.js',
     // 消息中心-通知详情
-    './homePage/static/js/noticeDetail': './src/homePage/static/js/noticeDetail.js'
+    './homePage/static/js/noticeDetail': './src/homePage/static/js/noticeDetail.js',
+    
+	//include---富文本模板
+    './include/js/modelPage/rich_template': './src/include/js/modelPage/rich_template.js',
 }
