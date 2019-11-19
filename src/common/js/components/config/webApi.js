@@ -128,8 +128,10 @@ module.exports = function() {
 
     //会员权益详情-获取会员权益详情
     this.findBenefitByLevel_api=http_url.web_url + '/content/findBenefitByLevel';
+ 
     //文章模板接口
-    this.articleExample_api = http_url.web_url + '/account/articleExample';	
+//  this.getArticle_api = http_url.web_url + '/account/articleExample';
+    this.getArticle_api = http_url.web_url + '/content/frontend/getArticle';	
 
     //监管账户（老接口）
     this.findSuperviseBank_api = http_url.web_url + '/content/frontend/findSuperviseBank';
@@ -140,6 +142,13 @@ module.exports = function() {
     this.queryFinancialer_api = http_url.web_url + '/account/home/frontend/queryFinancialer';
 
     /*-------------------明星理财师结束 ------------------------------*/
+    //会员俱乐部-活动列表
+    this.getActivitiesList_api = http_url.web_url + '/marketing/activity/getActivitiesList';
+    //会员俱乐部-活动-城市定位列表-根据城市类型或者首字母获取城市list
+    this.cityList_api = http_url.web_url + '/marketing/activity/cityList';
+
+    //会员俱乐部-活动列表-获取城市定位
+    this.getCity_api = http_url.web_url + '/marketing/frontend/getCity';
 
     //私募历史明细
     this.curveHistoryList_api =http_url.web_url +'/account/positions/curveHistoryList' ;
