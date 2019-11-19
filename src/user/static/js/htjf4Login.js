@@ -90,9 +90,6 @@ $(function() {
                             password: pwdValue, //密码
                             channelType:"2",
                             deviceId:"864684039820036",
-                           
-                            
-    
                             // "registerId": "140fe1da9efb5800e07",
                             
                             // "netType": 1,

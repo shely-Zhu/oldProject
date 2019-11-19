@@ -136,15 +136,17 @@ module.exports = function(callback, preThis, type) {
                         return false;
                     }
                 })
-
-                if (condition) {
+                console.log(preThis.gD.idArr)
+                debugger
+                // if (condition) {
                     // 如果校验通过，执行上传
                     // $('.listLoading').show();
                     // debugger
-                    that.uploader.upload();
-                } else {
-                    tipAction('请完善认证资料');
-                }
+                    // that.uploader.upload();
+                // } else {
+                //     tipAction('请完善认证资料');
+                         preThis.submitAdvise()
+                // }
                 
             });
         },
@@ -201,7 +203,7 @@ module.exports = function(callback, preThis, type) {
                 //显示预览部分
                 // $source.find('.queueList').show();
                 // $source.$queue.show();
-
+                that.uploader.upload();
             }, uploaderFile.allDeploy.thumbnailWidth, uploaderFile.allDeploy.thumbnailHeight);
 
             $btns.on('click', function() {
@@ -250,7 +252,7 @@ module.exports = function(callback, preThis, type) {
             }
             if (type == 'NO_FILE') {
                 //
-                tipAction('请上传专业投资者审核材料,哈哈哈')
+                tipAction('文件上传失败，请重新上传  ')
             }
         },
 
@@ -278,7 +280,7 @@ module.exports = function(callback, preThis, type) {
                 uploader.onUploadError(file, json);
                 return false;
             }
-            debugger
+            // debugger
             callback.call(preThis, json)
         },
     };
