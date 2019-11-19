@@ -233,6 +233,8 @@ module.exports = {
     './starFinancialPlanner/static/js/starFinancialPlannerList': "./src/starFinancialPlanner/static/js/starFinancialPlannerList.js",
     //其他资产
     './account/static/js/otherAssets': './src/account/static/js/otherAssets.js',
+    //公募资产
+    './account/static/js/publicAssets': './src/account/static/js/publicAssets.js',
 
     // 消息中心
     './homePage/static/js/noticeCenter': './src/homePage/static/js/noticeCenter.js',
