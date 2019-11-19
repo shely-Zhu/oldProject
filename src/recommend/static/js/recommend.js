@@ -271,7 +271,9 @@ $(function() {
                         // 已实名认证
                         aesEncrypt = json.data.aesEncrypt;
                         //拼分享出去的链接
-                        shareUrl = 'http://wx.chtwm.com/api/brand/index.html?activityId=pWhA5xJTKF4Zfst%2B9ycHqQ%3D%3D&channel=3&shareCustomerNo=' + that.customerNo;
+                        
+                        // shareUrl = 'https://wx.chtwm.com/api/brand/index.html?activityId=pWhA5xJTKF4Zfst%2B9ycHqQ%3D%3D&channel=3&shareCustomerNo=' + that.customerNo;
+                        shareUrl = site_url.marketCampaign_url + '&shareCustomerNo=' + that.customerNo;
 
                         // 生成二维码
                         that.generateQrcode(shareUrl)
