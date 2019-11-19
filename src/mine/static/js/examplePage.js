@@ -23,7 +23,7 @@ require('@pathCommonJs/components/headBarConfig.js');
 var generateTemplate = require('@pathCommonJsComBus/generateTemplate.js');
 
 //黑色提示条
-//var tipAction = require('../../../common/js/components/tipAction.js');
+var tipAction = require('@pathCommonJs/components/tipAction.js');
 //require('../../../common/js/components/utils.js');
 //require('../../../common/js/ajaxLoading.js');
 //var splitUrl = require('../../../common/js/components/splitUrl.js');
@@ -37,26 +37,22 @@ $(function() {
     var model = {
 
         getElements: {
-            contentImg: $("#contentImg"), //图片
-			contentBox: $('#contentBox'), //有产品模板
-			contentH5Public : $("#contentH5Public"),  //h5公募基金模板
-			priLocal: $(".priLocal"), //私募产品列表跳转链接
-			pubLocal: $(".pubLocal"), //公募产品列表跳转链接
-			custType: "", // 客户类型【0.机构 1.个人】 
-            linkUrl: "", //立即购买按钮跳转链接
-            islogin:$(".islogin"),
-			adjustmentRecord: $('.adjustmentRecord'), // 调仓记录
-            recordList: $('.recordList'), // 调仓记录
-            adjustmentTemp: $('#adjustment-template'), // 模板赋值
-            noData: $('.noData'), //没有数据的结构
-            listLoading: $('.listLoading'),
+        	applyType:$(".applyType"),//应用方式
+        	articleTitle:$('.articleTitle'),//文章标题
+            a:$('#aaaa'),
+            video:$('#video'),//视频的容器
+            articleTime:$('.articleTime'),//文章时间
+			author:$('.author'),//文章作者
+            
+        },
+        gV:{
+        	showData:{}
         },
         webInit: function() {
 			var that = this;
 			that.getDate();
 		},
         getDate: function() {
-			console.log("Qqqqqqqqqqqqqqqqqqqqqq")
             var that = this;
 
             /*if(splitUrl()['appActivity'] == "1"){//app中引入专题时产品列表跳转到app服务器的详情页
@@ -67,18 +63,46 @@ $(function() {
             }else{//非app中引入专题时产品列表跳转到wap服务器的详情页
 
             }*/
+           
+           //获取地址栏的数据
+           	let arg = [];
+           	let path = window.location.href;
+           	var s = path.substring(path.indexOf('?') + 1);
+           	var ss = s.split('&');
+           	for( var i = 0; i< ss.length; i++){
+				var index = ss[i].indexOf('=');
+				if( index != -1 ){
+					if( !arg[ ss[i].substring(0, index) ] ){
+						//地址栏url上可能有经过base64加密的参数，此处不处理
+						arg[ ss[i].substring(0, index) ] = ss[i].substring( index+1 );
+					}
+				}
+			}
+           	console.log(arg)
 			var obj = [{
-				url: site_url.articleExample_api,
-				data:{},
+				url: site_url.getArticle_api,
+				data:{id:9},
 				callbackDone: function(json) {
-					console.log("!111111111")
-					console.log(json.data[0].content)
-//					generateTemplate(json.data, that.getElements.recordList, that.getElements.adjustmentTemp);
-					that.getElements.contentImg.html(json.data[0].content)
+					console.log(json.data.data)
+					that.gV.showData.applyType = json.data.data.applyType == 0 
+					? "h5自主生成"
+					: "原生";
+					that.gV.showData.articleTitle = json.data.data.title;
+					that.gV.showData.articleTime = json.data.data.updateTimeStr;
+					console.log(that.gV.showData);
+					that.getElements.applyType.html(that.gV.showData.applyType);
+					that.getElements.articleTitle.html(that.gV.showData.articleTitle);
+//					that.getElements.a.attr({"href":json.data.data.videoAttachUrl})
+					let src = json.data.data.videoAttachUrl;
+					let sourceDom = $("<source src=\""+ src +"\">");
+					that.getElements.video.append(sourceDom);
+					that.getElements.video[0].play();
+					
+//					that.getElements.aaaa.html("快点点我")
 //					that.getElements.contentImg.attr({"src":json.data[0].content})
 				},
 				callbackFail: function(json) { //失败后执行的函数
-//					tipAction(json.message);	
+					tipAction(json.message);	
 					console.log(json.message)
 					console.log("22222")
 				}
@@ -174,88 +198,6 @@ $(function() {
 //          }
             
         },
-//      pageRendering: function(data) {
-//          var that = this;
-//          if (splitUrl()['type'] == "others") { //图片模板
-//
-//              that.getElements.contentImg.find("img").attr("src", data.imgUrlFeatureDetail)
-//              that.getElements.contentImg.show(); //图片显示
-//
-//          } else { //公私募列表模板
-//
-//              that.getElements.contentBox.find("img").attr("src", data.imgUrlFeatureDetail);
-//
-//              $.each(data.productFeatureList, function(i, el) {
-//
-//                  if (splitUrl()['type'] == "privatePlacement") {
-//                      el.type = true; //私募模板
-//
-//                  } else if (el.bonusTypeOri == "publicOffering") {
-//
-//                      el.type = false; //公募模板
-//
-//                  }
-//                  if (el.pefType == "2") { //固收
-//                      el.solid = true;
-//                  } else if (el.pefType == "3") { //浮收
-//                      el.solid = false;
-//                  }
-//              });
-//              Handlebars.registerHelper('checkEmpty',function(option){
-//                  if(option == ''){
-//                      return option = '--';
-//                  }else{
-//                      return option ;   
-//                  }
-//              });
-//              var tplm = $("#productList-template").html();
-//              //预编译模板 
-//              var template = Handlebars.compile(tplm);
-//              var html = template(data.productFeatureList);
-//              //输入模板 
-//              $("#modelBox").html(html);
-//
-//              $.each(data.productFeatureList, function(i, el) {
-//                  var domainName;
-//                  var domainName;
-//
-//                  //在跳转模板的时候。首先判断是否是apps域名下的
-//
-//                  if (window.location.hostname.indexOf('apps.') == 0) {
-//                      if (splitUrl()['type'] == "publicOffering") {
-//                          domainName = go_url.pofapp_url;
-//                      }
-//                  } else if (envOrigin == '1') {
-//                      domainName = go_url.wap_url;
-//                  } else {
-//                      domainName = '';
-//                  }
-//
-//                  //如果域名用的是私募的apps.chtfund.com但是参数type=publicOffering前端需要将详情页定位到app的公募的域名上面去
-//                  //之所以这么做是因为后台程龙代码做转发的时候banner配置的路径只转发了wap和apps的，无法转发apppof的，所以前端暂时控制
-//                  if (splitUrl()['type'] == "publicOffering") { //是apppof
-//
-//                      $(".pubLocal").eq(i).attr("href", domainName + "/productPublic/views/productDetail.html?fundCode=" + el.productCode + "&fundStatus=" + el.fundStatus);
-//
-//                  } else if (splitUrl()['type'] == "privatePlacement") {
-//
-//                      //私募模板全部相处路径跳转（不区分app还是wap）//反之跳转wap对应的产品详情
-//                      $(".priLocal").eq(i).attr("href", domainName + "/productPrivate/views/prdPrvDetails.html?fundCode=" + el.productCode);
-//
-//                  } else if (splitUrl()['type'] == "others") { //出图片不做处理
-//
-//                      console.log("type is others");
-//
-//
-//                  } else { //type=publicOffering和wap的域名的时候的跳转路径
-//
-//                      $(".pubLocal").eq(i).attr("href", domainName + "/productPublic/views/productDetail.html?fundCode=" + el.productCode + "&fundStatus=" + el.fundStatus);
-//                  }
-//              });
-//
-//              that.getElements.contentBox.show(); //模板显示
-//          }
-//      },
     };
 
     //调用数据
