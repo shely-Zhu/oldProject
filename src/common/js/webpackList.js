@@ -188,9 +188,9 @@ module.exports = {
     './personal/static/js/assetAllocation': "./src/personal/static/js/assetAllocation.js",
 
     //jjs持仓明细
-    './wealthResources/otherAssets/static/js/jjsAssets' : './src/wealthResources/otherAssets/static/js/jjsAssets.js',
+    './wealthResources/otherAssets/static/js/jjsAssets': './src/wealthResources/otherAssets/static/js/jjsAssets.js',
     //信息披露
-    './acount/static/js/informationDisclosure' : './src/acount/static/js/informationDisclosure.js',
+    './acount/static/js/informationDisclosure': './src/acount/static/js/informationDisclosure.js',
     // demo
     './wealthResources/otherAssets/static/js/demo': './src/wealthResources/otherAssets/static/js/demo.js',
     // 老版-待删除
@@ -243,6 +243,8 @@ module.exports = {
 
     //其他资产
     './account/static/js/otherAssets': './src/account/static/js/otherAssets.js',
+    //已确认交易
+    './account/static/js/private/confirmTransaction': './src/account/static/js/private/confirmTransaction.js',
     //公募资产
     './account/static/js/publicAssets': './src/account/static/js/publicAssets.js',
 

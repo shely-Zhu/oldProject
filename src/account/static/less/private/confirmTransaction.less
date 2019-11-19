@@ -1,0 +1,156 @@
+/*
+ * @page: 已确认交易
+ * @Author: peicongcong
+ * @Date:   2019-11-19
+ * @description:
+ */
+
+ @import url("@pathInclude/css/mui.min.css");
+ @import url("@pathCommonLess/mui/resetMUI.less");
+ @import url("@pathCommonLess/color.less");
+ @import url("@pathCommonLess/reset.less");
+ 
+ @import url("@pathCommonLess/chtwm.less");
+ @import url("@pathCommonLess/app.less");
+ @import url("@pathCommonLessCom/againEnter.less");
+ @import url("@pathCommonLessCom/alertBox.less");
+ @import url("@pathCommonLessCom/tabScroll.less");
+ 
+ //回到顶部的样式
+ @import url("@pathCommonLessCom/goTopMui.less");
+ @import url("@pathCommonLess/components/elasticLayerTypeFive.less");
+ @import url("@pathCommonLessCom/noData.less");
+ @import url("@pathCommonLessCom/headBarConfig.less");
+ 
+ body{
+   background-color: @F7FAFD;
+ }
+ .warp{
+   margin-top: 0.88rem;
+   padding-bottom: 0.5rem;
+ }
+ .contentWrapper{
+    width: 100%;
+    height: 100%;
+   overflow: hidden;
+ }
+//  已确认交易列表
+ .transList{
+    width: 100%;
+    min-height: 2.47rem;
+    background-color: @c005;
+    margin-top: 0.3rem;
+    padding: 0.3rem;
+    position: relative;
+    .mt30{
+      margin-top: 0.3rem;
+    }
+    .statusTip{
+      width:2rem;
+      height:0.3rem;
+      background:linear-gradient(90deg,rgba(255,233,204,1) 0%,rgba(242,217,188,1) 100%);
+      border-radius:0 0 1rem 0;
+      line-height: 0.3rem;
+      color: @834A08;
+      font-size: 0.2rem;
+      text-align: center;
+      position: absolute;
+      top: 0;
+      left: 0;
+    }
+    .listName{
+      width: 5.5rem;
+      font-size: 0.28rem;
+      line-height: 0.4rem;
+      color: @272727;
+      font-weight: bold;
+      margin-bottom: 0.26rem;
+    }
+    .listCon{
+      p{
+        color: @9B9B9B;
+        font-size: 0.24rem;
+        margin-bottom: 0.15rem;
+      }
+      span{
+        font-size: 0.26rem;
+        color: @272727;
+      }
+      .listItem{
+        width: 33%;
+        float: left;
+        
+      }
+      .listItemHalf{
+        width: 50%;
+        float: left;
+      }
+    }
+    .creatTime{
+      margin-top: 0.3rem;
+      color: @9B9B9B;
+      font-size: 0.24rem;
+    }
+    .typeImg{
+      position: absolute;
+      width: 1.8rem;
+      height: 1.8rem;
+      background-size: 100% 100%;
+      top:0;
+      right: 0;
+      z-index: 2;
+    }
+    .typeImg.sg{
+      background-image: url("/account/static/img/shengou.png");
+    }
+    .typeImg.sh{
+      background-image: url("/account/static/img/shuhui.png");
+    }
+    .typeImg.fh{
+      background-image: url("/account/static/img/fenhong.png");
+    }
+    .typeImg.yy{
+      background-image: url("/account/static/img/yuyue.png");
+    }
+    .typeImg.zr{
+      background-image: url("/account/static/img/zhuanr.png");
+    }
+    .typeImg.sr{
+      background-image: url("/account/static/img/shourang.png");
+    }
+    .toolCon{
+      margin-top: 0.4rem;
+      line-height: 0.5rem;
+      .tipImg{
+        width: 0.32rem;
+        height: 0.32rem;
+        background-image: url("/account/static/img/tishi.png");
+        background-size: 100% 100%;
+        float: left;
+        margin-top: 0.09rem;
+        margin-right: 0.05rem;
+
+      }
+      span{
+        color: @272727;
+        font-size: 0.24rem;
+        float: left;
+      }
+      a{
+        float: left;
+        margin-left: 0.05rem;
+        color: @0E246C;
+      }
+      .toDetail{
+        width:1.2rem;
+        height:0.5rem;
+        background:linear-gradient(135deg,rgba(108,131,201,1) 0%,rgba(6,29,106,1) 100%);
+        border-radius:0.25rem;
+        float: right;
+        color: @c005;
+        font-size: 0.24rem;
+        text-align: center;
+        line-height: 0.5rem;
+      }
+    }
+ }
