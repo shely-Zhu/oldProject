@@ -24,6 +24,9 @@ var pathTitle=[
     },
     {
         pathName:"消息中心" 
+    },
+    {
+        pathName:"了解恒天" 
     }
 ]
 $(function(){

@@ -73,24 +73,24 @@
             <div class="proName clearfix">
                 <span class="proNameBefore"></span>
                 <p class="proNameCon">{{projectName}}</p>
-                <span class="proNameAfter"></span>
+                <!-- <span class="proNameAfter"></span> -->
             </div>
             <div class="haveFundCon clearfix">
                 <div class="total fl">
                     <p>总资产(元)</p>
-                    <span>*****</span>
+                    <span>{{balance}}</span>
                 </div>
                 <div class="interestRate fl">
                     <p>票面利率</p>
-                    <span>9.8%</span>
+                    <span>{{profit}}%</span>
                 </div>
                 <div class="term fl">
                     <p>产品期限</p>
-                    <span>6个月</span>
+                    <span>{{deadLine}}</span>
                 </div>
                 <div class="date fl">
                     <p>成立日期</p>
-                    <span>2019-7-23</span>
+                    <span>{{establishDateStr}}</span>
                 </div>
             </div>
         </div>
@@ -99,21 +99,21 @@
             <div class="proName clearfix">
                 <span class="proNameBefore"></span>
                 <p class="proNameCon">{{projectName}}</p>
-                <span class="proNameAfter"></span>
+                <!-- <span class="proNameAfter"></span> -->
             </div>
             <div class="fundCon clearfix">
                 <p>到账金额(元)</p>
-                <div class="fundCenter">
-                    <span class="money">100,000,000.00</span>
-                    <span class="date">2019-7-23 12:35:20</span>
+                <div class="fundCenter clearfix">
+                    <span class="money">{{transAmountMask}}</span>
+                    <span class="date">{{transDateStr}}</span>
                 </div>
             </div>
             <div class="fundCon">
                 <p>预约金额(元)</p>
                 <div class="fundCenter clearfix">
-                    <span class="money">100,000,000.00</span>
-                    <span class="date">2019-7-23 12:35:20</span>
-                    <span class="tip part">部分到账</span>
+                    <span class="money">{{besAmountMask}}</span>
+                    <span class="date">{{besTimeStr}}</span> {{#if accountStatus}}<span class="tip all">足额到账</span>{{else}} <span class="tip part">部分到账</span> {{/if}}
+
                 </div>
             </div>
         </div>
