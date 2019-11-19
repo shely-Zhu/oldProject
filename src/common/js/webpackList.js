@@ -237,5 +237,8 @@ module.exports = {
     // 消息中心
     './homePage/static/js/noticeCenter': './src/homePage/static/js/noticeCenter.js',
     // 消息中心-系统通知
-    './homePage/static/js/systemInforms': './src/homePage/static/js/systemInforms.js'
+    './homePage/static/js/systemInforms': './src/homePage/static/js/systemInforms.js',
+
+    // 已报名活动
+    './mine/static/js/memberClub/activityEnrolment': './src/mine/static/js/memberClub/activityEnrolment.js'
 }
