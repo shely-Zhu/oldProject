@@ -308,4 +308,7 @@ module.exports = function() {
     // 诊断详情页
     this.diagnosisDetail_url = go_url.no_url + '/commonResources/fundDiagnosis/views/diagnosisDetail.html';
     /*-------------------------------基金诊断 end -----------------------*/
+
+    // 营销活动
+    this.marketCampaign_url = go_url.marketCampaign_url + '/api/brand/index.html?activityId=pWhA5xJTKF4Zfst%2B9ycHqQ%3D%3D&channel=3';
 };
