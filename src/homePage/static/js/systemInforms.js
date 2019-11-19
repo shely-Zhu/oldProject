@@ -12,3 +12,158 @@ require('@pathCommonJs/ajaxLoading.js');
 var tipAction = require('@pathCommonJs/components/tipAction.js');
 var splitUrl = require('@pathCommonJs/components/splitUrl.js')();
 var generateTemplate = require('@pathCommonJsComBus/generateTemplate.js');
+
+$(function(){
+	let somePage = {
+		//获取页面元素
+		$e:{
+			informsListWrapperId: $("#informsListWrapper"), // 消息列表盒子
+			informsListTemp: $('#informsList-template'), // 消息列表模板
+			noData: $('.noData'), //没有数据的结构
+            listLoading: $('.listLoading'), //所有数据区域，第一次加载的loading结构
+		},
+		//全局变量
+		gV:{
+			pageCurrent: 1, //当前页码，默认为1
+            pageSize: 10,
+            mesType: splitUrl['mesType'] // 1产品公告；2活动通知；3交易动态4;系统通知
+		},
+		//页面初始化函数
+		init:function(){
+            var that=this;
+            that.initMui();
+            this.getTitle()  
+            this.events()
+        },
+        getTitle() {
+            switch(this.gV.mesType) {
+                case '1': $("#HeadBarpathName").html("产品公告");break;
+                case '2': $("#HeadBarpathName").html("活动通知");break;
+                case '3': $("#HeadBarpathName").html("交易动态");break;
+                case '4': $("#HeadBarpathName").html("系统通知");break;
+            }
+        },
+        //初始化mui的上拉加载
+        initMui: function() {
+            var that = this;
+            var height = windowHeight - $(".HeadBarConfigBox").height();
+            if (!$('.list').hasClass('setHeight')) {
+                $('.list').height(height).addClass('setHeight');
+            }
+            mui.init({
+                pullRefresh: {
+                    container: '.contentWrapper',
+                    up: {
+                        contentrefresh: '拼命加载中',
+                        contentnomore: '没有更多了', //可选，请求完毕若没有更多数据时显示的提醒内容；
+                        callback: function() {
+                            //执行ajax请求
+                            that.getInformsListData(this);
+                        }
+                    }
+                }
+            });
+
+            //init后需要执行ready函数，才能够初始化出来
+            mui.ready(function() {
+
+                //隐藏当前的加载中loading
+                if (!$('.list').hasClass('hasPullUp')) {
+                    $('.list').find('.mui-pull-bottom-pocket').addClass('mui-hidden');
+                }
+
+                //显示loading
+                that.$e.listLoading.show();
+
+                //这一句初始化并第一次执行mui上拉加载的callback函数
+                mui('.contentWrapper').pullRefresh().pullupLoading();
+
+                //隐藏loading，调试接口时需要去掉
+                //setTimeout(function(){
+                that.$e.listLoading.hide();
+                //}, 2000);
+
+                //为$id添加hasPullUp  class
+                $('.list').addClass('hasPullUp');
+            });
+        },
+        // 获取消息中心列表
+        getInformsListData(t) {
+        	var that=this;
+            if(that.gV.mesType == 4) { // 消息通知列表
+                var ajaxUrl = site_url.systemNotificationList_api
+                var params = {
+                    "pageNo": that.gV.pageCurrent, //非必须，默认为1
+                    "pageSize": "10" //非必须，默认为10
+                }
+            } else if (that.gV.mesType == 1 || that.gV.mesType == 2 || that.gV.mesType == 3) { // 非通知消息列表
+                var ajaxUrl = site_url.getNoticeAndTransDynamic_api
+                var params = {
+                    "pageNo": that.gV.pageCurrent, //非必须，默认为1
+                    "pageSize": "10", //非必须，默认为10
+                    "mesType": that.gV.mesType
+                }
+            }
+            var obj=[{
+                url: ajaxUrl,
+                data: params,
+                needDataEmpty: true,
+                callbackDone: function(json) {
+                    var data;
+                    console.log(json)
+                    if (json.data.total == 0) { // 没有记录不展示
+                        that.$e.noData.show();
+                        return false;
+                    } else {
+                        data = json.data.list;
+                    }
+                    // 处理日期
+                    data = that.dealData(data);
+                    setTimeout(function() {
+                        if (data.length < that.gV.pageSize) {
+                            if (that.gV.pageCurrent == 1) { //第一页时
+                                if (data.length == 0) {
+                                    // 暂无数据显示
+                                    that.$e.noData.show();
+                                    return false;
+                                } else { // 没有更多数据了
+                                    t.endPullupToRefresh(true);
+                                }
+                            } else {
+                                //其他页-没有更多数据
+                                t.endPullupToRefresh(true);
+                            }
+                        } else { // 还有更多数据
+                            t.endPullupToRefresh(false);
+                        }
+
+                        // 页面++
+                        that.gV.pageCurrent++;
+                        // 将消息列表插入到页面上
+                        generateTemplate(data, that.$e.informsListWrapperId, that.$e.informsListTemp);
+
+                    }, 200)
+
+                }
+            }];                        
+            $.ajaxLoading(obj); 
+        },
+        dealData(data) {
+            $.each(data, function(a, b) {
+                b.date = b.createTimeStr.split(" ")[0]
+                b.time = b.createTimeStr.split(" ")[1]
+            })
+            return data;
+        },
+        events: function(){
+            var that = this;
+
+            //跳转到通知详情页面
+            mui("body").on('tap', '.systemInformItem' , function(){
+                window.location.href = site_url.noticeDetails_url + '?noticeId=' + $(this).attr('noticeId') + '&mesType=' + that.gV.mesType;
+            })
+
+        }
+	};
+	somePage.init();
+});

@@ -128,8 +128,10 @@ module.exports = function() {
 
     //会员权益详情-获取会员权益详情
     this.findBenefitByLevel_api=http_url.web_url + '/content/findBenefitByLevel';
+ 
     //文章模板接口
-    this.articleExample_api = http_url.web_url + '/account/articleExample';	
+//  this.getArticle_api = http_url.web_url + '/account/articleExample';
+    this.getArticle_api = http_url.web_url + '/content/frontend/getArticle';	
 
     //监管账户（老接口）
     this.findSuperviseBank_api = http_url.web_url + '/content/frontend/findSuperviseBank';
@@ -140,5 +142,28 @@ module.exports = function() {
     this.queryFinancialer_api = http_url.web_url + '/account/home/frontend/queryFinancialer';
 
     /*-------------------明星理财师结束 ------------------------------*/
+    //会员俱乐部-活动列表
+    this.getActivitiesList_api = http_url.web_url + '/marketing/activity/getActivitiesList';
+    //会员俱乐部-活动-城市定位列表-根据城市类型或者首字母获取城市list
+    this.cityList_api = http_url.web_url + '/marketing/activity/cityList';
+
+    //会员俱乐部-活动列表-获取城市定位
+    this.getCity_api = http_url.web_url + '/marketing/frontend/getCity';
+
+    //私募历史明细
+    this.curveHistoryList_api =http_url.web_url +'/account/positions/curveHistoryList' ;
+
+    /*------------------- 消息中心 start ------------------------------*/
+
+    // 消息中心
+    this.getNoticeTypeList_api = http_url.web_url + '/account/account/getNoticeTypeList';
+    // 通知消息列表
+    this.systemNotificationList_api = http_url.web_url + '/account/account/systemNotificationList';
+    // 非通知消息列表
+    this.getNoticeAndTransDynamic_api = http_url.web_url + '/account/account/getNoticeAndTransDynamic';
+    // 通知详情
+    this.getSystemNotification_api = http_url.web_url + '/account/account/getSystemNotification';
+
+    /*------------------- 消息中心 end ------------------------------*/
 
 };

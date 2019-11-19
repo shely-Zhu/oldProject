@@ -188,7 +188,9 @@ module.exports = {
     './personal/static/js/assetAllocation': "./src/personal/static/js/assetAllocation.js",
 
     //jjs持仓明细
-    './wealthResources/otherAssets/static/js/jjsAssets': './src/wealthResources/otherAssets/static/js/jjsAssets.js',
+    './wealthResources/otherAssets/static/js/jjsAssets' : './src/wealthResources/otherAssets/static/js/jjsAssets.js',
+    //信息披露
+    './acount/static/js/informationDisclosure' : './src/acount/static/js/informationDisclosure.js',
     // demo
     './wealthResources/otherAssets/static/js/demo': './src/wealthResources/otherAssets/static/js/demo.js',
     // 老版-待删除
@@ -231,6 +233,12 @@ module.exports = {
     './mine/static/js/uploadMaterial': './src/mine/static/js/uploadMaterial.js',
     //明星理财师-理财师列表
     './starFinancialPlanner/static/js/starFinancialPlannerList': "./src/starFinancialPlanner/static/js/starFinancialPlannerList.js",
+
+    //历史明细
+    './account/static/js/historyDetail': "./src/account/static/js/historyDetail.js",
+    //交易明细
+    './account/static/js/transactionDetail': "./src/account/static/js/transactionDetail.js",
+
     //其他资产
     './account/static/js/otherAssets': './src/account/static/js/otherAssets.js',
     //公募资产
@@ -239,5 +247,7 @@ module.exports = {
     // 消息中心
     './homePage/static/js/noticeCenter': './src/homePage/static/js/noticeCenter.js',
     // 消息中心-系统通知
-    './homePage/static/js/systemInforms': './src/homePage/static/js/systemInforms.js'
+    './homePage/static/js/systemInforms': './src/homePage/static/js/systemInforms.js',
+    // 消息中心-通知详情
+    './homePage/static/js/noticeDetail': './src/homePage/static/js/noticeDetail.js'
 }
