@@ -231,4 +231,8 @@ module.exports = {
     './mine/static/js/uploadMaterial' : './src/mine/static/js/uploadMaterial.js',
     //明星理财师-理财师列表
     './starFinancialPlanner/static/js/starFinancialPlannerList': "./src/starFinancialPlanner/static/js/starFinancialPlannerList.js",
+    //历史明细
+    './account/static/js/historyDetail': "./src/account/static/js/historyDetail.js",
+    //交易明细
+    './account/static/js/transactionDetail': "./src/account/static/js/transactionDetail.js",
 }

@@ -141,4 +141,7 @@ module.exports = function() {
 
     /*-------------------明星理财师结束 ------------------------------*/
 
+    //私募历史明细
+    this.curveHistoryList_api =http_url.web_url +'/account/positions/curveHistoryList' ;
+
 };
