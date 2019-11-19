@@ -143,5 +143,12 @@ module.exports = function() {
 
     //会员俱乐部-活动列表-获取城市定位
     this.getCity_api = http_url.web_url + '/marketing/frontend/getCity'
+    //新增客户反馈
+    this.insertFeedback_api = http_url.web_url + '/account/insertFeedback'
+    //上传图片
+    this.upload_api = http_url.web_url + '/content/file/upYun/upload'
+
+
+
 
 };
