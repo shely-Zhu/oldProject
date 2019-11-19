@@ -8,7 +8,7 @@ var Mock = require('mockjs');
 var incomeDetail = Mock.mock({ 
 	"hmac":"hmac",
 	"status":"0",
-	"code":"CS0000",
+	"code":"0000",
 	"msg":"处理成功！",
 	// "data":null,
 	"data": {

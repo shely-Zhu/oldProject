@@ -188,7 +188,9 @@ module.exports = {
     './personal/static/js/assetAllocation': "./src/personal/static/js/assetAllocation.js",
 
     //jjs持仓明细
-    './wealthResources/otherAssets/static/js/jjsAssets': './src/wealthResources/otherAssets/static/js/jjsAssets.js',
+    './wealthResources/otherAssets/static/js/jjsAssets' : './src/wealthResources/otherAssets/static/js/jjsAssets.js',
+    //信息披露
+    './acount/static/js/informationDisclosure' : './src/acount/static/js/informationDisclosure.js',
     // demo
     './wealthResources/otherAssets/static/js/demo': './src/wealthResources/otherAssets/static/js/demo.js',
     // 老版-待删除
@@ -203,6 +205,8 @@ module.exports = {
 
     // 月度报告列表页
     './mine/static/js/monthReport/monthReportList': './src/mine/static/js/monthReport/monthReportList.js',
+    // 月度报告详情页
+    './mine/static/js/monthReport/monthReportDetail': './src/mine/static/js/monthReport/monthReportDetail.js',
     // 登录日志查询页面
     './mine/static/js/journal': './src/mine/static/js/journal.js',
 
@@ -231,8 +235,16 @@ module.exports = {
     './mine/static/js/uploadMaterial': './src/mine/static/js/uploadMaterial.js',
     //明星理财师-理财师列表
     './starFinancialPlanner/static/js/starFinancialPlannerList': "./src/starFinancialPlanner/static/js/starFinancialPlannerList.js",
+
+    //历史明细
+    './account/static/js/historyDetail': "./src/account/static/js/historyDetail.js",
+    //交易明细
+    './account/static/js/transactionDetail': "./src/account/static/js/transactionDetail.js",
+
     //其他资产
-    './account/static/js/otherAssets': './account/static/js/otherAssets.js',
+    './account/static/js/otherAssets': './src/account/static/js/otherAssets.js',
+    //公募资产
+    './account/static/js/publicAssets': './src/account/static/js/publicAssets.js',
 
     // 消息中心
     './homePage/static/js/noticeCenter': './src/homePage/static/js/noticeCenter.js',
@@ -240,5 +252,7 @@ module.exports = {
     './homePage/static/js/systemInforms': './src/homePage/static/js/systemInforms.js',
 
     // 已报名活动
-    './mine/static/js/memberClub/activityEnrolment': './src/mine/static/js/memberClub/activityEnrolment.js'
+    './mine/static/js/memberClub/activityEnrolment': './src/mine/static/js/memberClub/activityEnrolment.js',
+    // 消息中心-通知详情
+    './homePage/static/js/noticeDetail': './src/homePage/static/js/noticeDetail.js'
 }

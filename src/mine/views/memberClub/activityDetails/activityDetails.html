@@ -14,11 +14,12 @@
     <!-- @@include('@pathCommonViews/load.html')
     @@include('@pathCommonViews/noData.html')
     @@include('@pathCommonViews/loading/listLoading.html') -->
-    <header>
+    <!-- <header>
         <a href="javascript:;" class="goblack"></a>
         活动详情
-    </header>
+    </header> -->
     <section id="activityDetailsBox">
+        @@include('@pathCommonViews/headBarConfig.html',{"pathName":"活动详情"}) 
         <img id="bgimg" src="/mine/static/img/Life_bg_picturer@2x.png" alt="">
         <div class="activityDetailsBox">
             <div class="activityDetailsTopBox">
@@ -58,7 +59,7 @@
         <div class="tipCon">本活动仅限合格投资者参加，请先完成合格投资者认证</div>
         <div class="buttonCon">
             <a class="cancel">取消</a>
-            <a href="" class="todo">合格投资者认证</a>
+            <a class="todo">合格投资者认证</a>
         </div>
     </div>
     <!-- 弹框类型-淡黄色背景两个按钮 -->

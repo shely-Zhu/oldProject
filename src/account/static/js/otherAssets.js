@@ -50,12 +50,17 @@ $(function() {
             listToTop: '', // 滑动区域距离顶部距离
             navToTop: '', // 滑动nav距离顶部距离
             navHeight: '', // nav高度
-            totalCount: $(".totalCount"), //总资产
+            totalCount: $(".totalM"), //总资产
             jAlready: $(".j_already"), //已持仓
             jTobe: $(".j_tobe"), //待确认
+            jjsTotalAssetMask: null,
+            jjsHoldAssetMask: null,
+            jjsInTransitAssetMask: null
+
         },
         html: '', //存放生成的html
         init: function() { //初始化函数
+
             var that = this;
 
             //拼模板，初始化左右滑动mui组件
@@ -92,7 +97,6 @@ $(function() {
                     pageNo: that.gV.aP.pageNo, //当前第几页(默认为1) 非必填项, 默认设置成第一页
                     pageSize: that.gV.aP.pageSize, //每页显示几条数据(默认10) 非必填项， 默认设置成20
                 }
-
                 contentArr.push({
                     id: i,
                     content: wrap_html
@@ -409,6 +413,9 @@ $(function() {
                 data: {},
                 callbackDone: function(json) {
                     //拿到jjs资产并填充界面
+                    that.gV.jjsHoldAssetMask = json.data.jjsHoldAssetMask;
+                    that.gV.jjsInTransitAssetMask = json.data.jjsInTransitAssetMask;
+                    that.gV.jjsTotalAssetMask = json.data.jjsTotalAssetMask;
                     that.gV.totalCount.html(json.data.jjsTotalAssetMask);
                     that.gV.jAlready.html('+' + json.data.jjsHoldAssetMask);
                     that.gV.jTobe.html(json.data.jjsInTransitAssetMask);
@@ -427,7 +434,7 @@ $(function() {
 
                 if ($("#move_" + index + " .noData").length) {
                     //已经暂无数据了
-                    $('body').css('transform', 'translate3d(0px, 0px, 0px) translateZ(0px)');
+                    // $('body').css('transform', 'translate3d(0px, 0px, 0px) translateZ(0px)');
 
                     $('#slider .mui-slider-item').each(function(i, el) {
                         if (i != index) {
@@ -459,10 +466,9 @@ $(function() {
                     $('body').css('transform', transformUl);
 
                     var t = $('.nav-wrapper')[0].getBoundingClientRect().top;
-
-                    if (t <= 10) {
+                    if (t < 0) {
                         $('.nav-wrapper').addClass('nav_fixed');
-                        $('body').css('transform', 'translate3d(0px, -201px, 0px) translateZ(0px)');
+                        // $('body').css('transform', 'translate3d(0px, -201px, 0px) translateZ(0px)');
                         move = false;
                     }
                 } else if (!move && (e.detail.lastY > -30 && e.detail.lastY != 0)) { // 等于0是tab切换
@@ -493,14 +499,28 @@ $(function() {
                 }
             })
 
-            // 文案提示
+            // 头部文案提示(金钱展示隐藏)
             mui("body").on('tap', '.j_icon', function(e) {
-                $('.totalM').html('****')
+                data.gV.totalCount.html('****');
+                data.gV.jAlready.html('****');
+                data.gV.jTobe.html('****');
                 $(this).addClass('eyecose');
             })
             mui("body").on('tap', '.eyecose', function(e) {
-                $('.totalM').html('10,000,000.00')
-                $(this).removeClass('eyecose');
+                    data.gV.totalCount.html(data.gV.jjsTotalAssetMask);
+                    data.gV.jAlready.html('+' + data.gV.jjsHoldAssetMask);
+                    data.gV.jTobe.html(data.gV.jjsInTransitAssetMask);
+                    $(this).removeClass('eyecose');
+                })
+                //打开资产组成说明
+            mui("body").on('tap', '.assetsBtn', function(e) {
+                    $('.mask').show();
+                    $('.tipContainer').show();
+                })
+                //关闭资产组成说明
+            mui("body").on('tap', '.buttonOne', function(e) {
+                $('.mask').hide();
+                $('.tipContainer').hide();
             })
         }
     };
