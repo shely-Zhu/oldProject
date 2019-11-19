@@ -321,5 +321,22 @@ module.exports = function() {
     this.activityDetails_url = go_url.no_url + '/mine/views/memberClub/activityDetails/activityDetails.html';
     // 活动列表
     this.activityList_url = go_url.no_url + '/mine/views/memberClub/activityList/activityList.html';
+    //活动详情->实名
+    this.realName_url = go_url.no_url + '/mine/views/realName/realName.html';
+    //活动详情->风测
+    this.riskAppraisal_url = go_url.no_url + '/mine/views/riskAppraisal/riskAppraisal.html?type=private';
+    //活动详情->合格投资者认证
+    this.qualifiedInvestor_url = go_url.no_url + '/mine/views/qualifiedInvestor/qualifiedInvestor.html?type=private';
+    //活动详情->去成交
+    this.wealthIndex_url = go_url.no_url + '/financial/views/wealthIndex.html';
+    //活动详情->我的奖励
+    this.rewards_url = go_url.no_url + '/mine/views/rewards.html';
     /*-------------------------------活动列表 end -----------------------*/
+
+    /*-------------------------------消息中心 start -----------------------*/
+    // 通知详情
+    this.noticeDetails_url = go_url.no_url + '/homePage/views/notice/noticeDetail.html';
+    this.systemInforms_url = go_url.no_url + '/homePage/views/notice/systemInforms.html';
+    /*-------------------------------消息中心 end -----------------------*/
+
 };

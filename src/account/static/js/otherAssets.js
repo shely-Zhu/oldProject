@@ -501,7 +501,6 @@ $(function() {
 
             // 头部文案提示(金钱展示隐藏)
             mui("body").on('tap', '.j_icon', function(e) {
-
                 data.gV.totalCount.html('****');
                 data.gV.jAlready.html('****');
                 data.gV.jTobe.html('****');
