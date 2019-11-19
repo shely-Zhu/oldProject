@@ -205,6 +205,8 @@ module.exports = {
 
     // 月度报告列表页
     './mine/static/js/monthReport/monthReportList': './src/mine/static/js/monthReport/monthReportList.js',
+    // 月度报告详情页
+    './mine/static/js/monthReport/monthReportDetail': './src/mine/static/js/monthReport/monthReportDetail.js',
     // 登录日志查询页面
     './mine/static/js/journal': './src/mine/static/js/journal.js',
 
@@ -241,11 +243,16 @@ module.exports = {
 
     //其他资产
     './account/static/js/otherAssets': './src/account/static/js/otherAssets.js',
+    //公募资产
+    './account/static/js/publicAssets': './src/account/static/js/publicAssets.js',
 
     // 消息中心
     './homePage/static/js/noticeCenter': './src/homePage/static/js/noticeCenter.js',
     // 消息中心-系统通知
     './homePage/static/js/systemInforms': './src/homePage/static/js/systemInforms.js',
+
+    // 已报名活动
+    './mine/static/js/memberClub/activityEnrolment': './src/mine/static/js/memberClub/activityEnrolment.js',
     // 消息中心-通知详情
     './homePage/static/js/noticeDetail': './src/homePage/static/js/noticeDetail.js',
 
