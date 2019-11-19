@@ -150,8 +150,12 @@ module.exports = function() {
     //会员俱乐部-活动列表-获取城市定位
     this.getCity_api = http_url.web_url + '/marketing/frontend/getCity';
 
+   /*------------------- 私募 start ------------------------------*/
     //私募历史明细
     this.curveHistoryList_api =http_url.web_url +'/account/positions/curveHistoryList' ;
+    this.dealDetailList_api =http_url.web_url +'/account/positions/dealDetailList' ;
+
+     /*------------------- 消息中心 end ------------------------------*/
 
     /*------------------- 消息中心 start ------------------------------*/
 
