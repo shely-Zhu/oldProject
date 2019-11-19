@@ -188,7 +188,9 @@ module.exports = {
     './personal/static/js/assetAllocation': "./src/personal/static/js/assetAllocation.js",
 
     //jjs持仓明细
-    './wealthResources/otherAssets/static/js/jjsAssets': './src/wealthResources/otherAssets/static/js/jjsAssets.js',
+    './wealthResources/otherAssets/static/js/jjsAssets' : './src/wealthResources/otherAssets/static/js/jjsAssets.js',
+    //信息披露
+    './acount/static/js/informationDisclosure' : './src/acount/static/js/informationDisclosure.js',
     // demo
     './wealthResources/otherAssets/static/js/demo': './src/wealthResources/otherAssets/static/js/demo.js',
     // 老版-待删除
@@ -231,8 +233,14 @@ module.exports = {
     './mine/static/js/uploadMaterial': './src/mine/static/js/uploadMaterial.js',
     //明星理财师-理财师列表
     './starFinancialPlanner/static/js/starFinancialPlannerList': "./src/starFinancialPlanner/static/js/starFinancialPlannerList.js",
+
+    //历史明细
+    './account/static/js/historyDetail': "./src/account/static/js/historyDetail.js",
+    //交易明细
+    './account/static/js/transactionDetail': "./src/account/static/js/transactionDetail.js",
+
     //其他资产
-    './account/static/js/otherAssets': './account/static/js/otherAssets.js',
+    './account/static/js/otherAssets': './src/account/static/js/otherAssets.js',
 
     // 消息中心
     './homePage/static/js/noticeCenter': './src/homePage/static/js/noticeCenter.js',

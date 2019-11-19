@@ -20,6 +20,7 @@
 @import url("@pathCommonLessCom/goTopMui.less");
 @import url("@pathCommonLess/components/elasticLayerTypeFive.less");
 @import url("@pathCommonLessCom/headBarConfig.less");
+@import url("@pathCommonLessCom/noData.less");
 html {
     height: 100%;
 }
@@ -178,63 +179,105 @@ body,.mui-content{
         }
 
         .mui-table-view-cell {
-            padding-top: 0;
+            padding: 0;
         }
 
         .list {
             width: 100%;
 
             .datalist {
-                margin: 0.8rem auto 0;
+                margin: 0.3rem auto 0;
                 color: @c002;
                 background: @c005;
-                border-radius: 0.3rem;
-                padding: 1.6rem 1.4rem 1rem;
-
-                h2 {
-                    font-size: 0.32rem;
-                    line-height: 0.45rem;
-                    text-align: center;
-                    color: @3c3c3c;
-                    margin-bottom: 0.2rem;
-                    font-weight: bold;
+                padding: 0.4rem 0.3rem;
+                .proName{
+                   
+                    .proNameBefore{
+                        width: 0.06rem;
+                        height: 0.26rem;
+                        background:linear-gradient(180deg,rgba(252,192,158,1) 0%,rgba(213,141,101,1) 100%);
+                        border-radius:0.04rem;
+                        float: left;
+                        margin-top: 0.03rem;
+                        margin-right: 0.2rem;
+                    }
+                    .proNameCon{
+                        width: 6.4rem;
+                        font-size: 0.28rem;
+                        line-height: 0.32rem;
+                        color: @272727;
+                        float: left;
+                    }
+                    .proNameAfter{
+                        width: 0.2rem;
+                        height: 0.2rem;
+                        background: url("/account/static/img/right.png");
+                        background-size: 100% 100%;
+                        margin-top: 0.03rem;
+                        float: right;
+                    }
                 }
-
-                ul {
-                    font-size: 1rem;
-
-                    li {
-                        line-height: 2.5rem;
-                        margin-bottom: 0.3rem;
-                        background-color: @fbfaf5;
-                        padding: 0 0.7rem;
-
-                        .title {
-                            color: @a48e5f;
+                .fundCon{
+                    margin-left: 0.1rem;
+                    margin-top: 0.4rem;
+                    p{
+                        font-size: 0.24rem;
+                        color: @9B9B9B;
+                        margin-bottom: 0.12rem;
+                    }
+                    .fundCenter{
+                        .money{
+                            font-size: 0.32rem;
+                            color: @272727;
+                            margin-right: 0.4rem;
+                            float: left;
                         }
-
-                        .text {
-                            color: @695a37;
+                        .date{
+                            font-size: 0.26rem;
+                            color: @818181;
+                            float: left;
+                        }
+                        .tip{
+                            width: 1.4rem;
+                            height: 0.38rem;
+                            line-height: 0.38rem;
+                            border-radius: 0.04rem;
+                            text-align: center;
                             float: right;
                         }
-
-                        &:first-child {
-                            .text {
-                                font-weight: bold;
-                            }
+                        .tip.all{
+                            background:linear-gradient(220deg,rgba(245,236,213,1) 0%,rgba(248,234,201,1) 100%);
+                            color: @C4925E;
+                        }
+                        .tip.part{
+                            background:rgba(227,232,241,1);
+                            color: @9B9B9B;
                         }
                     }
                 }
-
-                .date {
-                    margin-left: 1.6rem;
-                    height: 3.2rem;
-                    line-height: 3.2rem;
-                    font-size: 1.2rem;
-                    color: @c003;
-
-                    span {
-                        margin-left: 1.1rem;
+                .haveFundCon{
+                    margin-top: 0.5rem;
+                    margin-left: 0.1rem;
+                    p{
+                        color: @9B9B9B;
+                        font-size: 0.24rem;
+                        margin-bottom: 0.15rem;
+                    }
+                    span{
+                        color: @272727;
+                        font-size: 0.26rem;
+                    }
+                    .total{
+                        width: 40%;
+                    }
+                    .interestRate{
+                        width: 20%;
+                    }
+                    .term{
+                        width: 20%;
+                    }
+                    .date{
+                        width: 20%;
                     }
                 }
             }
@@ -243,7 +286,65 @@ body,.mui-content{
 
 
     }
-
+    .mask{
+        width: 100%;
+        height: 100%;
+        position: fixed;
+        top: 0;
+        left: 0;
+        opacity: 0.6;
+        background: #000000;
+        z-index: 9;
+        display: none;
+    }
+    // 淡黄色背景弹框
+    .tipContainer{
+        width: 5.4rem;
+        height: 5.7rem;
+        background-image: linear-gradient(220deg, #F5ECD5 0%, #F0DFBA 100%);
+        border-radius: 0.14rem;
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        margin-left: -2.7rem;
+        margin-top: -2.85rem;
+        display: none;
+        z-index: 10;
+        // 弹框标题
+        .titleText{
+            font-size: 0.32rem;
+            color: @272727;
+            letter-spacing: 0;
+            text-align: center;
+            line-height: 0.45rem;
+            font-weight: bold;
+            margin: 0.43rem 0.4rem 0.3rem;
+        }
+        // 弹框提示内容
+        .tipCon{
+            font-size: 0.26rem;
+            color: @272727;
+            text-align: left;
+            line-height: 0.45rem;
+            margin: 0 0.4rem 0.4rem;
+        }
+        //淡黄色背景只有一个按钮
+        .buttonOne{
+            height: 1rem;
+            background: #FDF3DD;
+            border-bottom-left-radius: 0.14rem;
+            border-bottom-right-radius: 0.14rem;
+            font-size: 0.34rem;
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+            color: @272727;
+            text-align: center;
+            line-height: 1rem;
+        }
+        
+        
+    }
     .contentWrapper {
         height: 100%;
     }
@@ -252,9 +353,9 @@ body,.mui-content{
     .upTop {
         position: fixed;
         bottom: 2.3rem;
-        right: 1.6rem;
-        width: 2.7rem;
-        height: 2.7rem;
+        right: 0.3rem;
+        width: 0.7rem;
+        height: 0.7rem;
         border-radius: 1.35rem;
         background: rgba(51, 51, 51, 0.85);
 
@@ -293,17 +394,65 @@ body,.mui-content{
     /**
 *   无数据区域的样式
  */
-    .without {
-        padding-top: 16.5rem;
-        color: @c001;
-
-        .iconfont {
-            font-size: 5.1rem;
-        }
-
-        .text {
-            margin-top: 2rem;
-            font-size: 1.4rem;
-        }
+}
+.HeadBarConfigBox{
+    z-index: 8;
+}
+.mask{
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    opacity: 0.6;
+    background: #000000;
+    z-index: 9;
+    display: none;
+}
+// 淡黄色背景弹框
+.tipContainer{
+    width: 5.4rem;
+    height: 5.7rem;
+    background-image: linear-gradient(220deg, #F5ECD5 0%, #F0DFBA 100%);
+    border-radius: 0.14rem;
+    position: fixed;
+    top: 3.8rem;
+    left: 50%;
+    margin-left: -2.7rem;
+    display: none;
+    z-index: 10;
+    // 弹框标题
+    .titleText{
+        font-size: 0.32rem;
+        color: @272727;
+        letter-spacing: 0;
+        text-align: center;
+        line-height: 0.45rem;
+        font-weight: bold;
+        margin: 0.43rem 0.4rem 0.3rem;
     }
+    // 弹框提示内容
+    .tipCon{
+        font-size: 0.26rem;
+        color: @272727;
+        text-align: left;
+        line-height: 0.45rem;
+        margin: 0 0.4rem 0.4rem;
+    }
+    //淡黄色背景只有一个按钮
+    .buttonOne{
+        height: 1rem;
+        background: #FDF3DD;
+        border-bottom-left-radius: 0.14rem;
+        border-bottom-right-radius: 0.14rem;
+        font-size: 0.34rem;
+        position: absolute;
+        bottom: 0;
+        width: 100%;
+        color: @272727;
+        text-align: center;
+        line-height: 1rem;
+    }
+    
+    
 }

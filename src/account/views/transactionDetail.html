@@ -1,0 +1,43 @@
+<!--
+	
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    @@include('@pathInclude/views/meta.html')
+	<link rel="stylesheet" href="/account/static/css/transactionDetail.css">
+	<title>交易明细</title>
+<body>
+    @@include('@pathCommonViews/headBarConfig.html',{"bgColors":"#2C3E77,#273971","showType":"0","pathName":"交易明细"})
+    <!-- @@include('@pathCommonViews/load.html')
+    @@include('@pathCommonViews/noData.html')
+    @@include('@pathCommonViews/loading/listLoading.html') -->
+     <div class="wrap">
+        <div class="contentWrap">
+            <div class="leftPhoto">
+        
+            </div>
+            <div class="rightContent">
+                <ul>
+                   <li>交易金额(元)</li>
+                   <li>350,000.00</li>
+                </ul>
+                <ul>
+                    <li>2019-01-20</li>
+                    <li class="chengeColor">申请日</li>
+                </ul>
+                <ul>
+                    <li>普通赎回</li>
+                    <li class="chengeColor" >赎回方式</li>
+                </ul>
+            </div>
+        </div>
+     </div>
+     <!-- 返回顶部 -->
+     @@include('../../common/views/goTop.html')
+     
+	@@include('@pathInclude/views/footer.html')
+    <!-- <script src="/account/static/js/historyDetail.js"></script> -->
+</body>
+
+</html>
