@@ -150,13 +150,11 @@ $(function() {
                             }
                         } else { // 还有更多数据
                             console.log(999)
-                                // t.endPullupToRefresh(false);
+                            t.endPullupToRefresh(false);
                         }
-
                         // 页面++
                         that.gV.aP.pageNo++;
-                        console.log(that.gV.aP.pageNo)
-                            // 将列表插入到页面上
+                        // 将列表插入到页面上
                         generateTemplate(data, that.getElements.contentWrap, that.getElements.transTemp);
 
                     }, 200)
@@ -168,8 +166,16 @@ $(function() {
         },
         events: function() { //绑定事件
             var that = this;
-
-
+            mui("body").on('tap', '.hopper', function(e) {
+                $('.mask').show();
+                $('.hopperCon').show();
+                aq
+            })
+            mui("body").on('tap', '.hopperCon li', function(e) {
+                $(this).addClass('active').siblings('li').removeClass('active');
+                $('.mask').hide();
+                $('.hopperCon').hide();
+            })
         }
     };
     data.init();
