@@ -94,7 +94,6 @@ $(function() {
                 needDataEmpty: true,
                 callbackDone: function(json) {
                     var data;
-                    console.log(json)
                     if (json.data.pageList.length == 0) { // 没有记录不展示
                         $(".list").hide()
                         that.$e.noData.show();
@@ -103,7 +102,6 @@ $(function() {
                         data = json.data.pageList;
                     }
                     setTimeout(function() {
-
                         if (data.length < that.gV.pageSize) {
 
                             if (that.gV.pageCurrent == 1) { //第一页时
@@ -148,11 +146,11 @@ $(function() {
                         generateTemplate(data, that.$e.recordList, that.$e.adjustmentTemp);
                         for(var i =0;i<len.length;i++){
                             if(len[i].tradeType == "认购"){
-                                $(".photoleft").eq(i) .addClass("test")
+                                $(".photoleft").eq(i).addClass("test")
                             }else if(len[i].tradeType == "申购"){                               
-                                $(".photoleft").eq(i) .addClass("testone")
+                                $(".photoleft").eq(i).addClass("testone")
                             }else if(len[i].tradeType == "分红"){
-                                $(".photoleft").eq(i) .addClass("testoneo")
+                                $(".photoleft").eq(i).addClass("testoneo")
 
                             }
                         }

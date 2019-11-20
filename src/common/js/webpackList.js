@@ -240,6 +240,8 @@ module.exports = {
     './account/static/js/historyDetail': "./src/account/static/js/historyDetail.js",
     //交易明细
     './account/static/js/transactionDetail': "./src/account/static/js/transactionDetail.js",
+    //产品档案
+    './account/static/js/productFiles': "./src/account/static/js/productFiles.js",
 
     //其他资产
     './account/static/js/otherAssets': './src/account/static/js/otherAssets.js',
