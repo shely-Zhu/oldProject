@@ -209,7 +209,10 @@ module.exports = {
     './mine/static/js/monthReport/monthReportDetail': './src/mine/static/js/monthReport/monthReportDetail.js',
     // 登录日志查询页面
     './mine/static/js/journal': './src/mine/static/js/journal.js',
-
+    // 交易明细页面
+    './mine/static/js/transactionDetails': './src/mine/static/js/transactionDetails.js',
+    //修改分红方式页面
+    './mine/static/js/bonusMethod': './src/mine/static/js/bonusMethod.js',
     // 会员权益成长值记录
     './mine/static/js/membershipInterestsRecord': './src/mine/static/js/membershipInterestsRecord.js',
     // 会员权益详情
@@ -242,11 +245,12 @@ module.exports = {
     './account/static/js/transactionDetail': "./src/account/static/js/transactionDetail.js",
     //产品档案
     './account/static/js/productFiles': "./src/account/static/js/productFiles.js",
-
+    //信息披露
+    './account/static/js/informationDisclosure': "./src/account/static/js/informationDisclosure.js",
     //其他资产
     './wealthResources/otherAssets/static/js/otherAssets': './src/wealthResources/otherAssets/static/js/otherAssets.js',
-    //已确认交易
-    './account/static/js/private/confirmTransaction': './src/account/static/js/private/confirmTransaction.js',
+    //已确认交易 公共js
+    './account/static/js/common/transcationTem': './src/account/static/js/common/transcationTem.js',
     //待确认交易
     './account/static/js/private/tobeConfirmTransaction': './src/account/static/js/private/tobeConfirmTransaction.js',
     //公募资产

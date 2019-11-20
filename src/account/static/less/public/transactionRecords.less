@@ -16,6 +16,9 @@ body{
 .HeadBarConfigBox {
 	box-shadow:0px 0px 4px 0px rgba(135,135,135,0.5);
 }
+#loading {
+    top: 2.08rem!important;
+}
 #recordBox {
 	#recordSearch {
 		height: .8rem;
@@ -96,9 +99,11 @@ body{
 		}
 	}
 	.list {
-		background: @FFFFFF;
 		.contentWrapper {
+			height: 100%;
+    		overflow: hidden;
 			#recordListWraper {
+				background: @FFFFFF;
 				.recordItem {
 					padding: .28rem .3rem;
 					height: 1.36rem;
@@ -142,5 +147,13 @@ body{
 				}
 			}
 		}
+	}
+	.noDataCon {
+		text-align:center;
+		font-size: .24rem;
+		color: #9B9B9B;
+		line-height: .8rem;
+		height: .8rem;
+		display: none;
 	}
 }
