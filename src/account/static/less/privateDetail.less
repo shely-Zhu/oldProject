@@ -25,10 +25,17 @@ body{
 	}
 
 	.topContent{
-		
-		background: @c005;
 
-		.banner{
+		//按钮点击 打开状态
+		&.open{
+			background: @c005;
+
+			.openWrap{
+				display: block;
+			}
+		}
+
+		.typeWrap{
 
 			.con{
 				background: url("/account/static/img/productDetail/banner.png");
@@ -41,22 +48,7 @@ body{
 				    padding-top: 1.54rem;
 
 				    .sum {
-				        
 				        font-size: 0.26rem;
-				        .j_icon {
-				            width: 0.36rem;
-				            height: 0.36rem;
-				            margin-left: 0.2rem;
-				            background: url("/account/static/img/eyesee.png");
-				            background-size: 100% 100%;
-				            display: inline-block;
-				            vertical-align: middle;
-				        }
-				        .j_icon.eyecose{
-				            background: url("/account/static/img/eyeclose.png");
-				            background-size: 100% 100%;
-				        }
-				        
 				    }
 				    .assetsBtn{
 				        width: 1.5rem;
@@ -115,18 +107,44 @@ body{
 				height: 0.3rem;
 				width: 2.3rem;
 				margin: 0 auto;
+
+
+				//展开状态
+				&.open{
+					background: url("/account/static/img/productDetail/openButton_open.png");
+				}
 			}
 
 		}
 
-		
+		.openWrap{
+			height: 1.65rem;
+			line-height: 1.65rem;
+			background: @c005;
+			margin-bottom: 0.3rem;
+			display: none;
+
+			.openDiv{
+				
+				.num{
+					font-size: 0.3rem;
+					color: @4A4A4A;
+				}
+
+				.txt{
+					font-size: 0.26rem;
+					color: @9B9B9B;
+				}
+			}
+		}
 	}
 
 	.actionWrap{
-		padding-top: 0.2rem;
 		height: 1.4rem;
 		text-align: center;
 		line-height: 1.4rem;
+		background: @c005;
+		margin-bottom: 0.3rem;
 
 		.img{
 			height: 0.6rem;
@@ -143,10 +161,11 @@ body{
 	}
 
 	.titleWrap{
-		height: 0.6rem;
-		line-height: 0.6rem;
+		height: 1rem;
+		line-height: 1rem;
 		padding-left: 0.3rem;
 		padding-right: 0.3rem;
+		background: @c005;
 		color: @272727;
 		font-size: 0.32rem;
 
@@ -173,11 +192,15 @@ body{
 	}
 
 	.lineWrap{
-		padding-top: 0.5rem;
-		//height: 6.7rem;
+		background: @c005;
+		    padding-top: 0.3rem;
+		padding-bottom: 0.3rem;
+		margin-bottom: 0.3rem;
 
 		.titleWrap{
 			color: @8A8A8A;
+			height: 0.6rem;
+			line-height: 0.6rem;
 
 			.title{
 
@@ -238,8 +261,17 @@ body{
 	}
 
 	.dealReg{
-		padding-top: 0.5rem;
-		
+		background: @c005;
+		margin-bottom: 0.3rem;
+
+		.titleWrap{
+			border-bottom: 1px solid @E7E9ED;
+		}
+
+		.dealRegMid{
+			padding-left: 0.3rem;
+		}
+
 		.nav{
 			margin-top: 0.6rem;
 			text-align: center;
@@ -264,8 +296,6 @@ body{
 		}
 
 		.line{
-			padding-left: 0.3rem;
-			padding-right: 0.3rem;
 			font-size: 0.28rem;
 			color: @9B9B9B;
 			margin-bottom: 0.3rem;
