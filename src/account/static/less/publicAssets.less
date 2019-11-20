@@ -132,7 +132,7 @@ body,.mui-content{
         width: 100%;
         padding: 0.2rem 0.28rem 0 0.2rem;
         height: 0.8rem;
-        color: @272727;
+        background-color: @FFFFFF;
         .bank_screen_name {
             font-size: 0.28rem;
             margin-right: 0.2rem;
@@ -155,6 +155,207 @@ body,.mui-content{
         background-color: @F7FAFD;
     }
 
+    //列表item
+    .hold_item {
+        width: 100%;
+        background-color: @FFFFFF;
+        .be_confirmed_tag {
+            width: 2.07rem;
+            height: 0.36rem;
+            background: url("/account/static/img/be_confirmed_tag.png");
+            background-size: cover;
+            color: @6C4517;
+            font-size: 0.2rem;
+            padding: 0.04rem 0 0 0.37rem;
+        }
+        .text_gray {
+            color: @9B9B9B;
+            font-size: 0.24rem;
+        }
+        .text_black {
+            color: @272727;
+            font-size: 0.24rem;
+        }
+        .text_red {
+            color: @F52323;
+            font-size: 0.24rem;
+        }
+        .text_green {
+            color: @008000;
+            font-size: 0.24rem;
+        }
+        .title {
+            position: relative;
+            width: 100%;
+            margin-top: 0.4rem;
+            .divider_tag {
+                position: absolute;
+                left: 0.3rem;
+                width: 0.06rem;
+                height: 0.28rem;
+                top: 0.1rem;
+                background: linear-gradient(@FBE2BD, @E2B580);
+            }
+            .hold_name {
+                position: absolute;
+                left: 0.45rem;
+                font-size: 0.28rem;
+                color: @272727;
+                top: 0.04rem;
+                font-weight:bold;
+            }
+            .iconfont {
+                position: absolute;
+                right: 0.3rem;
+                top: 0.1rem;
+                font-size: 0.20rem;
+                color: @CBCBCB;
+            }
+        }
+        .content {
+            width: 100%;
+            margin-top: 0.8rem;
+            padding-left: 0.45rem; 
+        }
+        .content_header {
+            padding-top: 0.3rem;
+        }
+        .content_bottom {
+            position: relative;
+            padding-top: 0.2rem;
+            height: 1.91rem;
+            width: 100%;
+            .position_c {
+                position: absolute;
+            }
+            .position_d {
+                position: absolute;
+                left: 2.3rem;
+            }
+            .position_e {
+                position: absolute;
+                left: 4.5rem;
+            }
+            .position_f {
+                position: absolute;
+                top: 0.65rem;
+            }
+            .position_g {
+                position: absolute;
+                top: 0.65rem;
+                left: 2.3rem;
+            }
+            .position_h {
+                position: absolute;
+                top: 0.65rem;
+                left: 4.5rem;
+            }
+            .tip {
+                position: absolute;
+                top: 1.25rem;
+                height: 0.36rem;
+                line-height: 0.36rem;
+                color: @BB8E5F;
+                font-size: 0.2rem;
+                padding: 0 0.1rem;
+                background: linear-gradient(to right, @F5ECD5, @F0DFBA);
+                border-radius: 0.05rem;
+            }
+            .redeem_btn {
+                border: 0.02rem solid @C4925E;
+                margin: 1.05rem 0.3rem 0 0;
+                width: 1.2rem;
+                height: 0.5rem;
+                line-height: 0.5rem;
+                padding-left: 0.36rem;
+                border-radius: 0.25rem;
+                color: @C4925E;
+            }
+            .buy_btn {
+                margin: 1.05rem 0.3rem 0 0;
+                width: 1.2rem;
+                height: 0.5rem;
+                line-height: 0.5rem;
+                padding-left: 0.36rem;
+                background: linear-gradient(to right, @6C83C9, @061D6A);
+                border-radius: 0.25rem;
+                color: @FFFFFF;
+                font-size: 0.24rem;
+            }
+            .closed {
+                position: absolute;
+                width: 1.4rem;
+                height: 1.33rem;
+                right: 0;
+                bottom: 0;
+                background: url("/account/static/img/account_closed_date.png");
+                background-size: 100% 100%;
+            }
+        }
+    }
+
+
+    .mask{
+        width: 100%;
+        height: 100%;
+        position: fixed;
+        top: 0;
+        left: 0;
+        opacity: 0.6;
+        background: #000000;
+        z-index: 9;
+        display: none;
+    }
+    // 淡黄色背景弹框
+    .tipContainer{
+        width: 5.4rem;
+        height: 5.7rem;
+        background-image: linear-gradient(220deg, #F5ECD5 0%, #F0DFBA 100%);
+        border-radius: 0.14rem;
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        margin-left: -2.7rem;
+        margin-top: -2.85rem;
+        display: none;
+        z-index: 10;
+        // 弹框标题
+        .titleText{
+            font-size: 0.32rem;
+            color: @272727;
+            letter-spacing: 0;
+            text-align: center;
+            line-height: 0.45rem;
+            font-weight: bold;
+            margin: 0.43rem 0.4rem 0.3rem;
+        }
+        // 弹框提示内容
+        .tipCon{
+            font-size: 0.26rem;
+            color: @272727;
+            text-align: left;
+            line-height: 0.45rem;
+            margin: 0 0.4rem 0.4rem;
+        }
+        //淡黄色背景只有一个按钮
+        .buttonOne{
+            height: 1rem;
+            background: #FDF3DD;
+            border-bottom-left-radius: 0.14rem;
+            border-bottom-right-radius: 0.14rem;
+            font-size: 0.34rem;
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+            color: @272727;
+            text-align: center;
+            line-height: 1rem;
+        }
+    }
+
+
+
+
     // 遮罩层
     .scroll_mask {
         width: 100%;
@@ -166,7 +367,6 @@ body,.mui-content{
         z-index: 3;
     }
 
-
     .nav_fixed {
         position: static;
         top: 0;
@@ -175,131 +375,7 @@ body,.mui-content{
         background: @c005;
     }
 
-    // 其他资产列表
-    .myAsset {
-        #slider{
-            background: @F7FAFD !important;
-        }
-
-
-        // nav重置
-        .mui-slider .mui-segmented-control.mui-scroll-wrapper {
-            background: none;
-            box-shadow: none;
-            color: @3c3c3c;
-            padding-top: 0;
-            height: 0.84rem;
-
-        }
-
-        .mui-table-view-cell {
-            padding: 0;
-        }
-
-        .list {
-            width: 100%;
-
-            .datalist {
-                margin: 0.3rem auto 0;
-                color: @c002;
-                background: @c005;
-                padding: 0.4rem 0.3rem;
-                .proName{
-                   
-                    .proNameBefore{
-                        width: 0.06rem;
-                        height: 0.26rem;
-                        background:linear-gradient(180deg,rgba(252,192,158,1) 0%,rgba(213,141,101,1) 100%);
-                        border-radius:0.04rem;
-                        float: left;
-                        margin-top: 0.03rem;
-                        margin-right: 0.2rem;
-                    }
-                    .proNameCon{
-                        width: 6.4rem;
-                        font-size: 0.28rem;
-                        line-height: 0.32rem;
-                        color: @272727;
-                        float: left;
-                    }
-                    .proNameAfter{
-                        width: 0.2rem;
-                        height: 0.2rem;
-                        background: url("/account/static/img/right.png");
-                        background-size: 100% 100%;
-                        margin-top: 0.03rem;
-                        float: right;
-                    }
-                }
-                .fundCon{
-                    margin-left: 0.1rem;
-                    margin-top: 0.4rem;
-                    p{
-                        font-size: 0.24rem;
-                        color: @9B9B9B;
-                        margin-bottom: 0.12rem;
-                    }
-                    .fundCenter{
-                        .money{
-                            font-size: 0.32rem;
-                            color: @272727;
-                            margin-right: 0.4rem;
-                            float: left;
-                        }
-                        .date{
-                            font-size: 0.26rem;
-                            color: @818181;
-                            float: left;
-                        }
-                        .tip{
-                            width: 1.4rem;
-                            height: 0.38rem;
-                            line-height: 0.38rem;
-                            border-radius: 0.04rem;
-                            text-align: center;
-                            float: right;
-                        }
-                        .tip.all{
-                            background:linear-gradient(220deg,rgba(245,236,213,1) 0%,rgba(248,234,201,1) 100%);
-                            color: @C4925E;
-                        }
-                        .tip.part{
-                            background:rgba(227,232,241,1);
-                            color: @9B9B9B;
-                        }
-                    }
-                }
-                .haveFundCon{
-                    margin-top: 0.5rem;
-                    margin-left: 0.1rem;
-                    p{
-                        color: @9B9B9B;
-                        font-size: 0.24rem;
-                        margin-bottom: 0.15rem;
-                    }
-                    span{
-                        color: @272727;
-                        font-size: 0.26rem;
-                    }
-                    .total{
-                        width: 40%;
-                    }
-                    .interestRate{
-                        width: 20%;
-                    }
-                    .term{
-                        width: 20%;
-                    }
-                    .date{
-                        width: 20%;
-                    }
-                }
-            }
-        }
-
-
-
-    }
+    
 
     .contentWrapper {
         height: 100%;
