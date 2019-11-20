@@ -9,9 +9,9 @@
 	<title>交易记录</title>
 </head>
 <body>
-	<!-- @@include('@pathCommonViews/load.html')
-        @@include('@pathCommonViews/noData.html')
-        @@include('@pathCommonViews/loading/listLoading.html') -->
+	@@include('@pathCommonViews/load.html')
+    <!-- @@include('@pathCommonViews/noData.html') -->
+    @@include('@pathCommonViews/loading/listLoading.html')
     @@include('@pathCommonViews/headBarConfig.html',{"bgColors":"#2C3E77,#273971","showType":"0","pathName":"交易记录"}) 
     <div id="recordBox">
         <div id="recordSearch">
@@ -19,9 +19,10 @@
             <div id="recordSearchDetail"></div>
         </div>
         <div class="list">
+            <div class="noDataCon">暂无更多内容</div>
             <div class="contentWrapper">
                 <div id="recordListWraper">
-                    <div class="recordItem">
+                    <!-- <div class="recordItem">
                         <div class="recordLogoCon">
                             <img class="recordLogo" src="/account/static/img/public/account_icon_mairu@2x.png" alt="">
                         </div>
@@ -35,146 +36,11 @@
                                 <div class="recordStatus">交易失败</div>
                             </div>
                         </div>
-                    </div>
-                    <div class="recordItem">
-                        <div class="recordLogoCon">
-                            <img class="recordLogo" src="/account/static/img/public/account_icon_mairu@2x.png" alt="">
-                        </div>
-                        <div class="recordCon">
-                            <div class="recordTop">
-                                <div class="recordName">中融货币A</div>
-                                <div class="recordMoney">350,000.00元</div>
-                            </div>
-                            <div class="recordBottom">
-                                <div class="recordDate">2019-09-23 11:00:35</div>
-                                <div class="recordStatus">交易失败</div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="recordItem">
-                        <div class="recordLogoCon">
-                            <img class="recordLogo" src="/account/static/img/public/account_icon_mairu@2x.png" alt="">
-                        </div>
-                        <div class="recordCon">
-                            <div class="recordTop">
-                                <div class="recordName">中融货币A</div>
-                                <div class="recordMoney">350,000.00元</div>
-                            </div>
-                            <div class="recordBottom">
-                                <div class="recordDate">2019-09-23 11:00:35</div>
-                                <div class="recordStatus">交易失败</div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="recordItem">
-                        <div class="recordLogoCon">
-                            <img class="recordLogo" src="/account/static/img/public/account_icon_mairu@2x.png" alt="">
-                        </div>
-                        <div class="recordCon">
-                            <div class="recordTop">
-                                <div class="recordName">中融货币A</div>
-                                <div class="recordMoney">350,000.00元</div>
-                            </div>
-                            <div class="recordBottom">
-                                <div class="recordDate">2019-09-23 11:00:35</div>
-                                <div class="recordStatus">交易失败</div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="recordItem">
-                        <div class="recordLogoCon">
-                            <img class="recordLogo" src="/account/static/img/public/account_icon_mairu@2x.png" alt="">
-                        </div>
-                        <div class="recordCon">
-                            <div class="recordTop">
-                                <div class="recordName">中融货币A</div>
-                                <div class="recordMoney">350,000.00元</div>
-                            </div>
-                            <div class="recordBottom">
-                                <div class="recordDate">2019-09-23 11:00:35</div>
-                                <div class="recordStatus">交易失败</div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="recordItem">
-                        <div class="recordLogoCon">
-                            <img class="recordLogo" src="/account/static/img/public/account_icon_mairu@2x.png" alt="">
-                        </div>
-                        <div class="recordCon">
-                            <div class="recordTop">
-                                <div class="recordName">中融货币A</div>
-                                <div class="recordMoney">350,000.00元</div>
-                            </div>
-                            <div class="recordBottom">
-                                <div class="recordDate">2019-09-23 11:00:35</div>
-                                <div class="recordStatus">交易失败</div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="recordItem">
-                        <div class="recordLogoCon">
-                            <img class="recordLogo" src="/account/static/img/public/account_icon_mairu@2x.png" alt="">
-                        </div>
-                        <div class="recordCon">
-                            <div class="recordTop">
-                                <div class="recordName">中融货币A</div>
-                                <div class="recordMoney">350,000.00元</div>
-                            </div>
-                            <div class="recordBottom">
-                                <div class="recordDate">2019-09-23 11:00:35</div>
-                                <div class="recordStatus">交易失败</div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="recordItem">
-                        <div class="recordLogoCon">
-                            <img class="recordLogo" src="/account/static/img/public/account_icon_mairu@2x.png" alt="">
-                        </div>
-                        <div class="recordCon">
-                            <div class="recordTop">
-                                <div class="recordName">中融货币A</div>
-                                <div class="recordMoney">350,000.00元</div>
-                            </div>
-                            <div class="recordBottom">
-                                <div class="recordDate">2019-09-23 11:00:35</div>
-                                <div class="recordStatus">交易失败</div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="recordItem">
-                        <div class="recordLogoCon">
-                            <img class="recordLogo" src="/account/static/img/public/account_icon_mairu@2x.png" alt="">
-                        </div>
-                        <div class="recordCon">
-                            <div class="recordTop">
-                                <div class="recordName">中融货币A</div>
-                                <div class="recordMoney">350,000.00元</div>
-                            </div>
-                            <div class="recordBottom">
-                                <div class="recordDate">2019-09-23 11:00:35</div>
-                                <div class="recordStatus">交易失败</div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="recordItem">
-                        <div class="recordLogoCon">
-                            <img class="recordLogo" src="/account/static/img/public/account_icon_mairu@2x.png" alt="">
-                        </div>
-                        <div class="recordCon">
-                            <div class="recordTop">
-                                <div class="recordName">中融货币A</div>
-                                <div class="recordMoney">350,000.00元</div>
-                            </div>
-                            <div class="recordBottom">
-                                <div class="recordDate">2019-09-23 11:00:35</div>
-                                <div class="recordStatus">交易失败</div>
-                            </div>
-                        </div>
-                    </div>
+                    </div> -->
                 </div>
                 @@include('../../../common/views/goTop.html')   
             </div>
-        </div> 
+        </div>
     </div>
 
     <script id="searchTitleList-template" type="text/x-handlebars-template">
@@ -200,14 +66,26 @@
 
     <script id="recordList-template" type="text/x-handlebars-template">
         {{#each this}}
-        <div class="searchItem">
-            <span class="screeningWord">全部</span>
-            <img class="screeningBtn" src="/account/static/img/public/account_icon_xiala@2x.png" alt="">
+        <div class="recordItem">
+            <div class="recordLogoCon">
+                <img class="recordLogo" src="/account/static/img/public/account_icon_mairu@2x.png" alt="">
+            </div>
+            <div class="recordCon">
+                <div class="recordTop">
+                    <div class="recordName">中融货币A</div>
+                    <div class="recordMoney">{{buyAmount}}元</div>
+                </div>
+                <div class="recordBottom">
+                    <div class="recordDate">2019-09-23 11:00:35</div>
+                    <div class="recordStatus">交易失败</div>
+                </div>
+            </div>
         </div>
         {{/each}}
     </script>
 
 	@@include('@pathInclude/views/footer.html')
+    <script src="/include/js/iscroll.js"></script>
     <script src="/account/static/js/public/transactionRecords.js"></script>
 </body>
 </html>
