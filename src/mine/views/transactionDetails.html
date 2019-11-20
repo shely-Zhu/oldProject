@@ -1,0 +1,36 @@
+<!-- h5承接页面模板 -->
+<!-- author: caiwenqi
+	time:2019/11/13 -->
+    <!DOCTYPE html>
+    <html>
+        <head>
+            @@include('@pathInclude/views/meta.html')
+            <link rel="stylesheet" href="/mine/static/css/transactionDetails.css">
+            <title>交易明细</title>
+        </head>
+    
+        <body>
+            <!--加载图标-->
+            <!-- @@include('@pathCommonViews/load.html')  -->
+            <!--没有数据显示图标-->
+            <!--@@include('@pathCommonViews/noDataImg.html')-->
+            <!--列表加载显示图标-->
+            <!--@@include('@pathCommonViews/loading/listLoading.html')-->
+            <!--公共页面头部-->
+            @@include('@pathCommonViews/headBarConfig.html',{"pathName":"交易明细"})
+            <!--页面容器-->
+            <div class="container">
+              <ul class="wrap">
+                  <li><img src="../static/img/transactionDetails/home_icon_rxsm.png" alt="">私募交易明细<a class="iconfont iconone" href="javascript:;">&#xe67d;</a></li>
+                  <li><img src="../static/img/transactionDetails/icon_fxcp.png" alt="">公募自选交易明细<a class="iconfont iconone" href="javascript:;">&#xe67d;</a></li>
+                  <li><img src="../static/img/transactionDetails/home_icon_gmzh.png" alt="">公募组合交易明细<a class="iconfont iconone" href="javascript:;">&#xe67d;</a></li>
+                  <li><img src="../static/img/transactionDetails/home_icon_gmzt.png" alt="">公募智投交易明细<a class="iconfont iconone" href="javascript:;">&#xe67d;</a></li>
+              </ul>
+            </div>
+            @@include('@pathInclude/views/footer.html')
+            <!-- 添加埋点 -->
+            @@include('@pathInclude/views/header.html')
+            <script src="/mine/static/js/transactionDetails.js"></script>
+        </body>
+    </html>
+    
