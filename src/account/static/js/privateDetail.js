@@ -50,13 +50,37 @@ $(function() {
 
 			if( that.data.projectType == 0 ){ 
 				//稳金类
+				$('.type_0').show();
+				//折线图
+				$('.lineWrap').show();
+				//展示折线图的万份收益按钮
+				$('.lineWrap .wfsy').removeClass('hidden');
+			}
+			else if ( that.data.projectType == 1 ){
+				//稳裕
 				$('.type_1').show();
+				//折线图
+				$('.lineWrap').show();
+			}
+			else if(that.data.projectType == 2){
+				//债权类
+				$('.type_2').show()
+			}
+			else if( that.data.projectType == 3 ){
+				//股权
+				$('.type_3').show()
+			}
+			else if( that.data.projectType == 4 ){
+				//证券
+				$('.type_4').show()
 			}
 
 			that.getData();
 
 			that.event();
 		},
+
+		
 
 		//获取初始数据
 		getData: function(){
@@ -77,11 +101,13 @@ $(function() {
 			    	that.setDomData( jsonData );
 
 			    	
-			    	if( that.data.projectType == 0 ){ 
+			    	if( (that.data.projectType == 0) || (that.data.projectType == 1) ){ 
 			    		//稳金类项目，请求折线图
 			    		that.getLineData();
 			    		//请求快速赎回和普通赎回的文案
 			    		that.getTxt();
+			    		//人气产品
+			    		that.getDurationPopProduct();
 			    	}
 
 			    },
@@ -89,6 +115,26 @@ $(function() {
 			$.ajaxLoading(obj);
 
 			
+		},
+
+		getDurationPopProduct: function(){
+			var that = this;
+
+			var obj = [{
+			    url: site_url.assetsDetail_api, 
+			    data: {
+			    	projectId: "url上取的projectId"
+			    },
+			    needLogin: true,
+			    callbackDone: function(json) {
+			    	var jsonData = json.data;
+
+			    
+
+			    },
+			}];
+			$.ajaxLoading(obj);
+
 		},
 
 		getLineData: function( ){
@@ -107,7 +153,9 @@ $(function() {
 			       	
 			       	//拼数据
 			       	$.each( jsonData, function(i, el){
-			       		that.data.sevenIncomeRate.push( el.sevenIncomeRate );
+			       		that.data.sevenIncomeRate.push( {
+			       			value: el.sevenIncomeRate
+			       		} );
 			       		that.data.profitThoudDate.push( el.profitThoudDate);
 			       		that.data.profitThoudValue.push( el.profitThoudValue);
 			       	})
@@ -119,7 +167,7 @@ $(function() {
 					myChart.setOption({
 					    tooltip: {
 					    	trigger: 'axis',
-					    	formatter: '<p style="font-size:0.36rem;color:#BB8E5F;">{c}%</p><p style="font-size:0.24rem;color:#4A4A4A">{b}</p>',
+					    	formatter: '<p style="font-size:0.36rem;color: #DAB57C;">{c}%</p><p style="font-size:0.24rem;color:#4A4A4A">{b}</p>',
 					    	backgroundColor: 'rgba(218,181,124, 0.1)',
 					    	renderMode : 'richText', 
 					    	extraCssText: [7, 15, 15, 15],
@@ -137,11 +185,11 @@ $(function() {
 				    				    x2: 0,
 				    				    y2: 1,
 				    				    colorStops: [{
-				    				        offset: 0, color: 'transparent' // 0% 处的颜色
+				    				        offset: 0, color: '#fff' // 0% 处的颜色
 				    				    }, {
-				    				        offset: 0.5, color: '#D2B280' // 0% 处的颜色
+				    				        offset: 0.5, color: '#F1CDA8' // 0% 处的颜色
 				    				    },{
-				    				        offset: 1, color: '#FADFBB' // 100% 处的颜色
+				    				        offset: 1, color: '#D2B280' // 0% 处的颜色
 				    				    }],
 				    				    global: false // 缺省为 false
 					    			}
@@ -157,25 +205,29 @@ $(function() {
 					    },
 					    color:  '#FADFBB',
 					    xAxis: {
+					    	type: 'category',
 					        data: that.data.profitThoudDate,
 					        axisLine: {
 					        	lineStyle: {
 					        		color: '#FADFBB'
 					        	}
 					        },
-					        axisLabel:{
-					        	show: true,
-					        	color: '#FADFBB',
-					        	fontSize: '0.24rem',
-					        	margin: 20,
-					        	align: 'left'
-					        },
+					        axisLabel: {
+		                        show: true,
+		                        textStyle: {
+		                          color: 'red'   //这里用参数代替了
+		                        },
+		                        mrgin: 20
+		                    },
 					        axisTick: {
 					        	show: false
 					        }
 					    },
 
 					    yAxis: {
+					  //   	max: function(value) {
+							//     return value.max + 20;
+							// },
 					    	axisTick:{
 					    		show: false
 					    	},
@@ -189,15 +241,47 @@ $(function() {
 					    	},
 					    	axisLabel:{
 					    		show: true,
+					    		normal: {
+					    			color:'#9B9B9B',
+					    			fontSize: '0.24rem',
+					    		},
+					    		label: {
+					    			color:  '#FADFBB'
+					    		},
+					    		color:  '#FADFBB',
+					    		textStyle: {
+					    			color:  '#FADFBB'
+					    		},
+					    		fontStyle: {
+					    			color:  '#FADFBB'
+					    		},
 					    		formatter: '{value}%',
-					    		fontSize: '0.24rem',
-					    		color: '#9B9B9B',
 					    	},
 					    },
 					    series: [{
 					    	type: 'line',
 					    	lineStyle: {
 					    		color: '#FADFBB'
+					    	},
+					    	itemStyle: {
+					    		show: false
+					    	},
+					    	areaStyle: {
+					    		normal: {
+					    			color: {
+					    			    type: 'linear',
+					    			    x: 0,
+					    			    y: 0,
+					    			    x2: 0,
+					    			    y2: 1,
+					    			    colorStops: [{
+					    			        offset: 0, color: '#F2E3CA' // 0% 处的颜色
+					    			    }, {
+					    			        offset: 1, color: '#fff' // 100% 处的颜色
+					    			    }],
+					    			    global: false // 缺省为 false
+					    			}
+					    		}
 					    	},
 					        data: that.data.sevenIncomeRate
 					    }]
@@ -217,21 +301,59 @@ $(function() {
 		setDomData: function( jsonData){
 			var that = this;
 
+			//项目名称
+    		$('#HeadBarpathName').html( jsonData.projectName );
+
 	    	if( that.data.projectType == 0 ){ //稳金类项目
-	    		//项目名称
-    			$('#HeadBarpathName').html( jsonData.projectName );
-
+	    		
     			//当前市值
-    			$('.totalM').html( jsonData.capitalisation );
-
+    			$('.typeWrap .totalM').html( jsonData.capitalisation );
     		   	//持有份额
-    		   	$('.topContent .totalShare').html( jsonData.totalShare );
-
+    		   	$('.typeWrap .topContent .totalShare').html( jsonData.totalShare );
     		   	//七日年化
-    		   	$('.sevenYearYield').html( jsonData.sevenYearYield);
-
-    		   	//画折线图
-    		   	
+    		   	$('.typeWrap .sevenYearYield').html( jsonData.sevenYearYield);
+    		   	//可赎回份额
+    		   	$('.typeWrap .kshfe').html( jsonData.allowRedemptionShare);
+    		   	//万份收益
+    		   	$('.typeWrap .wfsy').html( jsonData.incomeUnit);
+	    	}
+	    	else if( that.data.projectType == 1){ //稳裕类	    		
+	    		//当前市值
+	    		$('.typeWrap .totalM').html( jsonData.capitalisation );
+	    		//持有份额
+	    		$('.typeWrap .topContent .totalShare').html( jsonData.totalShare );
+	    		//七日年化
+	    		$('.typeWrap .sevenYearYield').html( jsonData.sevenYearYield);
+	    		//可赎回份额
+    		   	$('.typeWrap .kshfe').html( jsonData.allowRedemptionShare);
+    		   	//赎回开放日
+    		   	$('.typeWrap .shkfr').html( jsonData.redemptionOpenDay);
+    		   	//可提交赎回申请时间
+    		   	$('.typeWrap .ketjsh').html( (jsonData.beginRedemptionTime ? jsonData.beginRedemptionTime : '') + '至' + ( jsonData.endRedemptionTime ? jsonData.endRedemptionTime : '') );
+	    	}
+	    	else if( that.data.projectType == 2){ //债权类	    		
+	    		//当前持仓
+	    		$('.typeWrap .totalM').html( jsonData.totalShare );
+	    		//收益分配
+	    		$('.typeWrap .syfp').html( jsonData.incomeAssign );
+	    		//持有天数
+	    		$('.typeWrap .cyts').html( jsonData.holdDays);
+	    		//业绩比较基准
+    		   	$('.typeWrap .yjbjjz').html( jsonData.expectedProfit);
+    		   	//成立日
+    		   	$('.typeWrap .clr').html( jsonData.setupDate);
+    		   	//到期日
+    		   	$('.typeWrap .dqr').html( jsonData.endDate ? jsonData.endDate : '' );
+	    	}
+	    	else if( that.data.projectType == 3){ //股权类	    		
+	    		//认购金额
+	    		$('.typeWrap .totalM').html( jsonData.buyAmount );
+	    		//收益分配
+	    		$('.typeWrap .syfp').html( jsonData.incomeAssign );
+	    		//成立日
+	    		$('.typeWrap .clr').html( jsonData.setupDate);
+	    		//产品期限
+    		   	$('.typeWrap .cpqx').html( jsonData.prodTerm);
 	    	}
 
 		},
@@ -239,13 +361,28 @@ $(function() {
 		//点击展开按钮
 		event: function(){
 			
+			//按钮点击展开收起
 			mui("body").on('tap', '.openButton', function(e) {
-                
-				$('.topContent').addClass('open');
 
-				$('.typeWrap openWrap').show();
+				if( $('.topContent.open').length ){
+					//收起
+					$('.topContent').removeClass('open');
+
+					$('.typeWrap openWrap').hide();
+				}
+				else{
+					//展开
+					$('.topContent').addClass('open');
+
+					$('.typeWrap openWrap').show();
+				}
             })
 
+            //折线图点击请求数据
+			mui("body").on('tap', '.lineDraw .time', function(e) {
+
+				that.getLineData( $(this) );
+            })
 		},
 
 
