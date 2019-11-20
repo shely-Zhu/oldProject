@@ -1,8 +1,8 @@
 /*
  * @page: pc wap 端共用接口
  * @Author: chengqingqing
- * @Date:   2019-03-28 
- * @Last Modified by:   songxiaoyu
+ * @Date:   2019-03-28
+ * @Last Modified by:   Marte
  * @description:
  */
 
@@ -41,7 +41,7 @@ module.exports = function() {
     this.share_api = http_url.web_url + '/account/frontend/weixin/share'; //老带新微信分享
     this.oldRecommendNew_api = http_url.web_url + '/account/oldRecommendNew'; // 微信公众号获取参数
     // 其他资产
-    this.getJJSInTransitAssets_api = http_url.web_url + '/account/jjs/getJJSInTransitAssets'; // 查询金交所在途资产 
+    this.getJJSInTransitAssets_api = http_url.web_url + '/account/jjs/getJJSInTransitAssets'; // 查询金交所在途资产
     // 查询金交持仓资产、在途资产、总资产
     this.getJJSAssets_api = http_url.web_url + '/account/jjs/getJJSAssets';
     // jjs持仓明细查询
@@ -128,10 +128,10 @@ module.exports = function() {
 
     //会员权益详情-获取会员权益详情
     this.findBenefitByLevel_api=http_url.web_url + '/content/findBenefitByLevel';
- 
+
     //文章模板接口
 //  this.getArticle_api = http_url.web_url + '/account/articleExample';
-    this.getArticle_api = http_url.web_url + '/content/frontend/getArticle';	
+    this.getArticle_api = http_url.web_url + '/content/frontend/getArticle';
 
     //监管账户（老接口）
     this.findSuperviseBank_api = http_url.web_url + '/content/frontend/findSuperviseBank';
@@ -140,6 +140,9 @@ module.exports = function() {
     this.getActivitiesList_api = http_url.web_url + '/marketing/activity/getActivitiesList',
     //会员俱乐部-活动-城市定位列表-根据城市类型或者首字母获取城市list
     this.cityList_api = http_url.web_url + '/marketing/activity/cityList',
+    //我的奖励
+    this.getPrizeInfo_api = http_url.web_url + "/account/myPrize/getPrizeInfo",
+
 
     //会员俱乐部-活动列表-获取城市定位
     this.getCity_api = http_url.web_url + '/marketing/frontend/getCity'

@@ -1,23 +1,37 @@
 /*
- * 我的奖励 
+ * 我的奖励
  * @author zhangyanping 2019-11-12
 */
 require('@pathIncludJs/vendor/config.js');
 
 //zepto模块
-require('@pathIncludJs/vendor/zepto/callback.js'); 
-require('@pathIncludJs/vendor/zepto/deferred.js'); 
+require('@pathIncludJs/vendor/zepto/callback.js');
+require('@pathIncludJs/vendor/zepto/deferred.js');
 
 require('@pathCommonJsCom/utils.js');
 require('@pathCommonJs/ajaxLoading.js');
 
-var splitUrl = require('@pathCommonJsCom/splitUrl.js');
-var Base64 = require('@pathIncludJs/vendor/base64/base64.js');
+var tipAction = require('../../../common/js/components/tipAction.js');
+
+var generateTemplate = require('@pathCommonJsComBus/generateTemplate.js');
 
 $(function() {
 
     var reward = {
-       
+        $e: {
+            adjustmentRecord: $('.adjustmentRecord'), // 调仓记录
+            recordList: $('.recordList'), // 调仓记录
+            rewardTemp: $('#reward-template'), // 最新调仓模板
+            noData: $('.noData'), //没有数据的结构
+            listLoading: $('.listLoading'), //
+
+        },
+        gV: { // 全局变量
+
+            pageCurrent: 1, //当前页码，默认为1
+            pageSize: 10,
+            listLength: 0,
+        },
         init: function() {
             var that = this;
             that.initMui();
@@ -33,7 +47,7 @@ $(function() {
             }
             mui.init({
                 pullRefresh: {
-                    container: '.contentWrapper',
+                    container: '.rewardWrapper',
                     up: {
                         //auto: false,
                         contentrefresh: '拼命加载中',
@@ -58,7 +72,7 @@ $(function() {
                 that.$e.listLoading.show();
 
                 //这一句初始化并第一次执行mui上拉加载的callback函数
-                mui('.contentWrapper').pullRefresh().pullupLoading();
+                mui('.rewardWrapper').pullRefresh().pullupLoading();
 
                 //隐藏loading，调试接口时需要去掉
                 //setTimeout(function(){
@@ -73,19 +87,24 @@ $(function() {
             var that = this;
 
             var obj = [{ // 月度报告列表
-                url: site_url.queryMonthlyReport_api,
-                data: {},
+                url: site_url.getPrizeInfo_api,
+                data: {
+                    "pageNum": that.gV.pageCurrent,
+                    "pageSize": that.gV.pageSize
+                },
                 //async: false,
                 needDataEmpty: true,
                 callbackDone: function(json) {
                     var data;
 
-                    if (json.data.length == 0) { // 没有记录不展示
+                    console.log(JSON.stringify(json.data.list.length));
+
+                    if (json.data.list.length == 0) { // 没有记录不展示
                         that.$e.noData.show();
-                        $('.adjustmentRecord').hide();
+                        //$('.reward').hide();
                         return false;
                     } else {
-                        data = json.data;
+                        data = json.data.list;
                     }
 
                     setTimeout(function() {
@@ -113,18 +132,44 @@ $(function() {
                         // 页面++
                         that.gV.pageCurrent++;
 
+                        $.each(data, function(i, el) {
+
+                            if (el.isAvailable == "0") {
+                                el.AvailableValue = true; //有效
+                                
+                                el.xnParentClass = "virtual";
+                                el.xnChildClass = "virRewardDetail";
+
+                            } else if (el.isAvailable == "1") {
+
+                                el.AvailableValue = false; //无效
+                                el.imgvalue = true; //显示无效图片
+
+                                el.xnParentClass = "invalid";
+                                el.xnChildClass = "invalidRewardDetail";
+
+                            }
+                            if (el.prizeType == "1") { //实物奖品
+                                el.prizeValue = true;
+                            } else if (el.prizeType == "2") { //虚拟奖品
+                                el.prizeValue = false;
+                            }
+                        });
+                        console.log(JSON.stringify(data));
+
+
                         //去掉mui-pull-bottom-pocket的mui-hidden
-                        $('.contentWrapper').find('.mui-pull-bottom-pocket').removeClass('mui-hidden');
+                        $('.rewardWrapper').find('.mui-pull-bottom-pocket').removeClass('mui-hidden');
                         // 将列表插入到页面上
-                        generateTemplate(data, that.$e.recordList, that.$e.adjustmentTemp);
+                        generateTemplate(data, that.$e.recordList, that.$e.rewardTemp);
 
                         // 第一个调仓记录默认展开
-                        $('.recordList').find('ul').eq(0).find('.mui-collapse').addClass('mui-active');
+                        //$('.recordList').find('ul').eq(0).find('.mui-collapse').addClass('mui-active');
 
                     }, 200)
 
                 },
-                     
+
             }];
             $.ajaxLoading(obj);
         },
