@@ -1,3 +1,14 @@
+/**
+ * 私募资产详情页
+ *
+ * @author yangjinlai 20191120
+ *
+ * 需要从资产列表页带参数： projectType--项目类型  projectId--项目id
+ *
+ * projectType: 
+ * 0：稳金（对应type_1)  1：稳裕 2：债权 3：股权 4：证券
+ */
+
 
 require('@pathCommonJsCom/utils.js');
 //ajax调用
@@ -19,11 +30,16 @@ require('echarts/lib/chart/line');
 require('echarts/lib/component/tooltip');
 require('echarts/lib/component/title');
 
+var splitUrl = require('@pathCommonJs/components/splitUrl.js')();
+
 $(function() {
 
 	var privateDetail = {
 
 		data: {
+			projectType : splitUrl['projectType'],
+			projectId: splitUrl['projectId'],
+
 			sevenIncomeRate: [], //存放折线图七日年化
 			profitThoudDate: [], //存放折线图收益日期
 			profitThoudValue: [], //存放折线图万份收益
@@ -32,11 +48,15 @@ $(function() {
 		init: function(){
 			var that = this;
 
-			that.getData()
-				//
-			$('.type_1').show();
-		},
+			if( that.data.projectType == 0 ){ 
+				//稳金类
+				$('.type_1').show();
+			}
 
+			that.getData();
+
+			that.event();
+		},
 
 		//获取初始数据
 		getData: function(){
@@ -46,23 +66,40 @@ $(function() {
 			//产品详情接口
 			var obj = [{
 			    url: site_url.assetsDetail_api, 
-			    data: {},
+			    data: {
+			    	projectId: "url上取的projectId"
+			    },
 			    needLogin: true,
 			    callbackDone: function(json) {
 			    	var jsonData = json.data;
-			       	//持有份额
-			       	$('.topContent .totalShare').html( jsonData.totalShare )
+
+			    	//设置数据到页面上
+			    	that.setDomData( jsonData );
+
+			    	
+			    	if( that.data.projectType == 0 ){ 
+			    		//稳金类项目，请求折线图
+			    		that.getLineData();
+			    		//请求快速赎回和普通赎回的文案
+			    		that.getTxt();
+			    	}
+
 			    },
 			}];
 			$.ajaxLoading(obj);
+
+			
+		},
+
+		getLineData: function( ){
+			var that = this;
 
 			//七日年化
 			var obj = [{
 			    url: site_url.earningCurve_api, 
 			    data: {
 			    	projectId: '1312',
-			    	pageSize: 10,
-			    	pageNo: 1
+			    	profitRange: 0 //默认请求近一个月的数据
 			    },
 			    needLogin: true,
 			    callbackDone: function(json) {
@@ -170,7 +207,49 @@ $(function() {
 			    },
 			}];
 			$.ajaxLoading(obj);
-		}
+		},
+
+		getTxt: function(){
+			var that = this;
+
+		},
+
+		setDomData: function( jsonData){
+			var that = this;
+
+	    	if( that.data.projectType == 0 ){ //稳金类项目
+	    		//项目名称
+    			$('#HeadBarpathName').html( jsonData.projectName );
+
+    			//当前市值
+    			$('.totalM').html( jsonData.capitalisation );
+
+    		   	//持有份额
+    		   	$('.topContent .totalShare').html( jsonData.totalShare );
+
+    		   	//七日年化
+    		   	$('.sevenYearYield').html( jsonData.sevenYearYield);
+
+    		   	//画折线图
+    		   	
+	    	}
+
+		},
+
+		//点击展开按钮
+		event: function(){
+			
+			mui("body").on('tap', '.openButton', function(e) {
+                
+				$('.topContent').addClass('open');
+
+				$('.typeWrap openWrap').show();
+            })
+
+		},
+
+
+
 	}
 
 	privateDetail.init();
