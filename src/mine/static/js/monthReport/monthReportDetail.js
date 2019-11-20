@@ -21,6 +21,14 @@ var tipAction = require('@pathCommonJsCom/tipAction.js');
 var splitUrl = require('@pathCommonJs/components/splitUrl.js')();
 var generateTemplate = require('@pathCommonJsComBus/generateTemplate.js');
 
+//echarts图表
+var echarts = require('echarts/lib/echarts');
+require('echarts/lib/chart/pie');
+require('echarts/lib/component/tooltip');
+require('echarts/lib/component/title');
+require('echarts/lib/component/legend');;
+require('zrender/lib/vml/vml')
+
 
 var monthReportDetail = {
 	getElements: {
@@ -42,13 +50,14 @@ var monthReportDetail = {
 		var that = this;
 		
 		//拼模板，初始化左右滑动mui组件
-		that.beforeFunc();
+		// that.beforeFunc();
 
 		//初始化第一屏区域的上拉加载
 		that.getData($('#scroll1'));
 
 		//事件监听
-		that.events();
+		// that.events();
+		that.bingtu();
 	},
 
 	beforeFunc: function(){  //拼模板，初始化左右滑动mui组件
@@ -252,8 +261,227 @@ var monthReportDetail = {
 
 	events: function(){  //绑定事件
 		var that = this;
+		//跳转到转入转出详情页
+		
 
-	}
+	},
+	bingtu:function(){
+        // app.title = '环形图';
+        var pieChart = echarts.init($('.circle')[0]);
+        // var pieChartOne = echarts.init($('.circleOne')[0]);
+        // var colorArr=['#f4cf5c', '#7d7c7d','#bbb','#ec9b32','#f76a2c'];
+        
+        // 指定图表的配置项和数据
+        option = {
+            // tooltip: {
+            //     // trigger: 'item',
+            //     // formatter: "{a} <br/>{b}: {c} ({d}%)"
+            // },
+            legend: {
+                orient: 'vertical',
+                x: 'left',
+                data:['直接访问','邮件营销','联盟广告','视频广告','搜索引擎'],
+                icon: "roundRect",   //  这个字段控制形状  类型包括 circle，rect ，roundRect，triangle，diamond，pin，arrow，none
+
+                itemWidth: 10,  // 设置宽度
+
+				itemHeight: 10, // 设置高度
+				itemGap: 10 ,//设置间距
+				x: '70%',
+				y: '35%'
+
+            },
+            series: [
+                {
+                    name:'访问来源',
+                    type:'pie',
+					radius: ['49%', '70%'],
+					center: ['35%', '47%'],
+                    // selectedMode: 'single',
+                    avoidLabelOverlap: false,
+                    hoverAnimation:false,
+                    label: {
+                        // normal: {
+                        //     show: false,
+                        //     position: 'center'
+                        // },
+                        // emphasis: {
+                        //     show: true,
+                        //     textStyle: {
+                        //         fontSize: '30',
+                        //         fontWeight: 'bold'
+                        //     }
+                        // }
+                        normal: {
+                            show:false, //去掉引导线
+                            formatter: '{a|{a}}{abg|}\n{hr|}\n  {b|{b}：}{c}  {per|{d}%}  ',
+                            backgroundColor: '#eee',
+                            borderColor: '#aaa',
+                            borderWidth: 1,
+                            borderRadius: 4,
+                            // shadowBlur:3,
+                            // shadowOffsetX: 2,
+                            // shadowOffsetY: 2,
+                            // shadowColor: '#999',
+                            // padding: [0, 7],
+                            rich: {
+                                a: {
+                                    color: '#999',
+                                    lineHeight: 22,
+                                    align: 'center'
+                                },
+                                // abg: {
+                                //     backgroundColor: '#333',
+                                //     width: '100%',
+                                //     align: 'right',
+                                //     height: 22,
+                                //     borderRadius: [4, 4, 0, 0]
+                                // },
+                                hr: {
+                                    borderColor: '#aaa',
+                                    width: '100%',
+                                    borderWidth: 0.5,
+                                    height: 0
+                                },
+                                b: {
+                                    fontSize: 16,
+                                    lineHeight: 33
+                                },
+                                per: {
+                                    color: '#eee',
+                                    backgroundColor: '#334455',
+                                    padding: [2, 4],
+                                    borderRadius: 2
+                                }
+                            }
+                        }
+                    },
+                    labelLine: {
+                        normal: {
+                            show: false
+                        }
+                    },
+                    data:[
+                        {value:335, name:'直接访问',
+                        itemStyle: {
+                            normal: {
+                                color: new echarts.graphic.LinearGradient(
+                                    0, 0, 1, 1,
+                                    [
+                                        {offset: 0, color: '#182F7A'},
+                                        // {offset: 0.5, color: '#0CB9FF'},
+                                        {offset: 1, color: '#7286C1'}
+                                    ]
+                                )
+                            }
+                        }},
+                        {value:310, name:'邮件营销',
+                        itemStyle: {
+                            normal: {
+                                color: new echarts.graphic.LinearGradient(
+                                    0, 0, 1, 1,
+                                    [
+                                        {offset: 0, color: '#FBE2BD'},
+                                        // {offset: 0.5, color: '#0CB9FF'},
+                                        {offset: 1, color: '#D69549'}
+                                    ]
+                                ),
+                            }
+                        }},
+                        {value:234, name:'联盟广告',itemStyle: {
+                            normal: {
+                                color: new echarts.graphic.LinearGradient(
+                                    0, 0, 1, 1,
+                                    [
+                                        {offset: 0, color: '#AA6545'},
+                                        // {offset: 0.5, color: '#0CB9FF'},
+                                        {offset: 1, color: '#EDA377'}
+                                    ]
+                                ),
+                            }
+                        }},
+
+                    ]
+                },
+                {
+                    name:'访问来源',
+                    type:'pie',
+                    hoverAnimation:false,
+					radius: ['40%', '50%'],
+					center: ['35%', '47%'],
+                    avoidLabelOverlap: false,
+                    
+                    label: {
+                        // normal: {
+                        //     show: false,
+                        //     position: 'center'
+                        // },
+                        // emphasis: {
+                        //     show: true,
+                        //     textStyle: {
+                        //         fontSize: '30',
+                        //         fontWeight: 'bold'
+                        //     }
+                        // }
+                        normal: {
+                            show:false,
+                            position: 'inner'
+                        }
+
+                    },
+                    labelLine: {
+                        normal: {
+                            show: false
+                        }
+                    },
+                    data:[
+                        {value:335, name:'直接访问',
+                        itemStyle: {
+                            normal: {
+                                color: new echarts.graphic.LinearGradient(
+                                    0, 0, 1, 1,
+                                    [
+                                        {offset: 0, color: '#172c6f'},
+                                        // {offset: 0.5, color: '#0CB9FF'},
+                                        {offset: 1, color: '#4a5d96'}
+                                    ]
+                                )
+                            }
+                        }},
+                        {value:310, name:'邮件营销',
+                        itemStyle: {
+                            normal: {
+                                color: new echarts.graphic.LinearGradient(
+                                    0, 0, 1, 1,
+                                    [
+                                        {offset: 0, color: '#dcc19b'},
+                                        // {offset: 0.5, color: '#0CB9FF'},
+                                        {offset: 1, color: '#c69152'},
+                                    ]
+                                ),
+                            }
+                        }},
+                        {value:234, name:'联盟广告',itemStyle: {
+                            normal: {
+                                color: new echarts.graphic.LinearGradient(
+                                    0, 0, 1, 1,
+                                    [
+                                        
+                                        {offset: 0, color: '#a56747'},
+                                        // {offset: 0.5, color: '#0CB9FF'},
+                                        {offset: 1, color: '#cb8a64'}
+                                    ]
+                                ),
+                            }
+                        }},
+
+                    ]
+                }
+            ]
+        };
+        // 绘制图表
+        pieChart.setOption(option); 
+    }
 }
 
 monthReportDetail.init();
