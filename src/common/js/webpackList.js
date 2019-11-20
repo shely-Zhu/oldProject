@@ -247,6 +247,8 @@ module.exports = {
     './wealthResources/otherAssets/static/js/otherAssets': './src/wealthResources/otherAssets/static/js/otherAssets.js',
     //已确认交易
     './account/static/js/private/confirmTransaction': './src/account/static/js/private/confirmTransaction.js',
+    //待确认交易
+    './account/static/js/private/tobeConfirmTransaction': './src/account/static/js/private/tobeConfirmTransaction.js',
     //公募资产
     './account/static/js/publicAssets': './src/account/static/js/publicAssets.js',
 
