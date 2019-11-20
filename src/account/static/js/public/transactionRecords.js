@@ -73,7 +73,7 @@ $(function(){
         //初始化mui的上拉加载
         initMui: function() {
             var that = this;
-            var height = windowHeight - $(".HeadBarConfigBox").height();
+            var height = windowHeight - $(".HeadBarConfigBox").height() - $("#recordSearch").height();
             if (!$('.list').hasClass('setHeight')) {
                 $('.list').height(height).addClass('setHeight');
             }
@@ -84,7 +84,6 @@ $(function(){
                         contentrefresh: '拼命加载中',
                         contentnomore: '没有更多了', //可选，请求完毕若没有更多数据时显示的提醒内容；
                         callback: function() {
-                            //执行ajax请求
                             //that.getInformsListData(this);
                         }
                     }
@@ -93,24 +92,12 @@ $(function(){
 
             //init后需要执行ready函数，才能够初始化出来
             mui.ready(function() {
-
-                //隐藏当前的加载中loading
                 if (!$('.list').hasClass('hasPullUp')) {
                     $('.list').find('.mui-pull-bottom-pocket').addClass('mui-hidden');
                 }
-
-                //显示loading
                 that.$e.listLoading.show();
-
-                //这一句初始化并第一次执行mui上拉加载的callback函数
                 mui('.contentWrapper').pullRefresh().pullupLoading();
-
-                //隐藏loading，调试接口时需要去掉
-                //setTimeout(function(){
                 that.$e.listLoading.hide();
-                //}, 2000);
-
-                //为$id添加hasPullUp  class
                 $('.list').addClass('hasPullUp');
             });
         },
