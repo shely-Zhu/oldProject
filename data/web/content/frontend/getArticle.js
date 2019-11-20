@@ -23,7 +23,7 @@ var data = Mock.mock({
 			"articleBelong": "1",
 			"id": 9,
 			"h5Title":"模板qwe",//h5模板标题
-			"h5Type":"2",//h5模板类型 1图片 2其他
+			"h5Type":"1",//h5模板类型 1图片 2其他
 			"videoAttachUrl": "http://172.16.163.99:85/group2/M00/02/8A/rBCjQ13DgFCAERifAAKKTERYCgk339.mp4",
 			"createTimeStr": "2019-11-07 08:41:03",
 			"updateTimeStr": "2019-11-08 12:39:25",
