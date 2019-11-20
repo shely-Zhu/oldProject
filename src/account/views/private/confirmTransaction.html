@@ -8,14 +8,32 @@
 <head>
     @@include('@pathInclude/views/meta.html')
     <link rel="stylesheet" href="/account/static/css/private/confirmTransaction.css">
-    <title>其他资产</title>
+    <title>已确认交易</title>
 </head>
 
 <body>
     <div class="topTitle">
         @@include('@pathInclude/views/header.html') @@include('@pathCommonViews/headBarConfig.html',{"pathName":"已确认交易","bgColors":"#3E3C3C,#3E3C3C"})
+        <!-- 筛选 -->
+        <div class="hopper"></div>
+        <!-- 筛选 -->
+        <!-- 筛选区域 -->
+        <div class="hopperCon">
+            <ul>
+                <li class="active">全部</li>
+                <li>申购</li>
+                <li>赎回</li>
+                <li>分红</li>
+                <li>预约撤单</li>
+                <li>预约过期</li>
+                <li>转让已完成</li>
+                <li>受让已完成</li>
+            </ul>
+        </div>
+        <!-- 筛选区域 -->
     </div>
     <div class="warp">
+
         <div class="list">
             <div class="contentWrapper">
                 <div class="contentWrap">
@@ -205,9 +223,9 @@
         <!-- 加载中loading -->
         @@include('@pathCommonViews/loading/listLoading.html')
         <!-- 暂无数据 -->
-        @@include('@pathCommonViews/noData.html',{"tipText":"暂无数据"})
+        @@include('@pathCommonViews/noDataImg.html',{"tipText":"暂无数据"})
     </div>
-
+    <div class="mask"></div>
 </body>
 <script id="trans-template" type="text/x-handlebars-template">
     {{#each this}}
