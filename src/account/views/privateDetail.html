@@ -266,10 +266,10 @@
 	 			<div class="lineDraw">
 	 				<div id="line"></div>
 	 				<div class='mui-row tab'>
-	 					<span class="mui-col-sm-3 mui-col-xs-3 time active">近一个月</span>
-	 					<span class="mui-col-sm-3 mui-col-xs-3 time">近三个月</span>
-	 					<span class="mui-col-sm-3 mui-col-xs-3 time">近一年</span>
-	 					<span class="mui-col-sm-3 mui-col-xs-3 time">成立至今</span>
+	 					<span class="mui-col-sm-3 mui-col-xs-3 time active" num="0">近一个月</span>
+	 					<span class="mui-col-sm-3 mui-col-xs-3 time" num="1">近三个月</span>
+	 					<span class="mui-col-sm-3 mui-col-xs-3 time" num="3">近一年</span>
+	 					<span class="mui-col-sm-3 mui-col-xs-3 time" num="4">成立至今</span>
 	 				</div>
 	 			</div>
 
@@ -328,6 +328,7 @@
 
 	@@include('@pathInclude/views/footer.html')
 
+	<script src="/include/js/vendor/echarts/echarts.min.js"></script>
 	<script src="/account/static/js/privateDetail.js"></script>
 
 </body>

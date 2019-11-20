@@ -23,12 +23,12 @@ require('@pathIncludJs/vendor/config.js');
 require('@pathCommonJs/components/headBarConfig.js');
 
 // 引入 ECharts 主模块
-var echarts = require('echarts/lib/echarts');
-// 引入柱状图
-require('echarts/lib/chart/line');
-// 引入提示框和标题组件
-require('echarts/lib/component/tooltip');
-require('echarts/lib/component/title');
+// var echarts = require('echarts/lib/echarts');
+// // 引入柱状图
+// require('echarts/lib/chart/line');
+// // 引入提示框和标题组件
+// require('echarts/lib/component/tooltip');
+// require('echarts/lib/component/title');
 
 var splitUrl = require('@pathCommonJs/components/splitUrl.js')();
 
@@ -102,8 +102,8 @@ $(function() {
 
 			    	
 			    	if( (that.data.projectType == 0) || (that.data.projectType == 1) ){ 
-			    		//稳金类项目，请求折线图
-			    		that.getLineData();
+			    		//稳金类项目，请求七日年化/万份收益折线图
+			    		that.getTypeOneData(0);
 			    		//请求快速赎回和普通赎回的文案
 			    		that.getTxt();
 			    		//人气产品
@@ -137,7 +137,8 @@ $(function() {
 
 		},
 
-		getLineData: function( ){
+		//请求七日年化/万份收益数据
+		getTypeOneData: function( num ){
 			var that = this;
 
 			//七日年化
@@ -145,7 +146,7 @@ $(function() {
 			    url: site_url.earningCurve_api, 
 			    data: {
 			    	projectId: '1312',
-			    	profitRange: 0 //默认请求近一个月的数据
+			    	profitRange: num 
 			    },
 			    needLogin: true,
 			    callbackDone: function(json) {
@@ -160,137 +161,128 @@ $(function() {
 			       		that.data.profitThoudValue.push( el.profitThoudValue);
 			       	})
 
-			       	//画折线图
-			       	// 基于准备好的dom，初始化echarts实例
-					var myChart = echarts.init(document.getElementById('line'));
-
-					myChart.setOption({
-					    tooltip: {
-					    	trigger: 'axis',
-					    	formatter: '<p style="font-size:0.36rem;color: #DAB57C;">{c}%</p><p style="font-size:0.24rem;color:#4A4A4A">{b}</p>',
-					    	backgroundColor: 'rgba(218,181,124, 0.1)',
-					    	renderMode : 'richText', 
-					    	extraCssText: [7, 15, 15, 15],
-					    	textStyle: {
-					    		color:  '#FADFBB'
-					    	},
-					    	confine: true,
-					    	axisPointer: {
-					    		type: 'line',
-					    		lineStyle: {
-					    			color: {
-					    				type: 'linear',
-				    				    x: 0,
-				    				    y: 0,
-				    				    x2: 0,
-				    				    y2: 1,
-				    				    colorStops: [{
-				    				        offset: 0, color: '#fff' // 0% 处的颜色
-				    				    }, {
-				    				        offset: 0.5, color: '#F1CDA8' // 0% 处的颜色
-				    				    },{
-				    				        offset: 1, color: '#D2B280' // 0% 处的颜色
-				    				    }],
-				    				    global: false // 缺省为 false
-					    			}
-					    		}
-					    	}
-					    },
-					    grid:{
-					    	top: '10%',
-					    	left: '5%',
-					    	right: '5%',
-					    	bottom: '10%',
-					    	containLabel: true
-					    },
-					    color:  '#FADFBB',
-					    xAxis: {
-					    	type: 'category',
-					        data: that.data.profitThoudDate,
-					        axisLine: {
-					        	lineStyle: {
-					        		color: '#FADFBB'
-					        	}
-					        },
-					        axisLabel: {
-		                        show: true,
-		                        textStyle: {
-		                          color: 'red'   //这里用参数代替了
-		                        },
-		                        mrgin: 20
-		                    },
-					        axisTick: {
-					        	show: false
-					        }
-					    },
-
-					    yAxis: {
-					  //   	max: function(value) {
-							//     return value.max + 20;
-							// },
-					    	axisTick:{
-					    		show: false
-					    	},
-					    	axisLine: {
-					    		show: false
-					    	},
-					    	splitLine:{
-					    		lineStyle: {
-					    			color: '#FADFBB'
-					    		}
-					    	},
-					    	axisLabel:{
-					    		show: true,
-					    		normal: {
-					    			color:'#9B9B9B',
-					    			fontSize: '0.24rem',
-					    		},
-					    		label: {
-					    			color:  '#FADFBB'
-					    		},
-					    		color:  '#FADFBB',
-					    		textStyle: {
-					    			color:  '#FADFBB'
-					    		},
-					    		fontStyle: {
-					    			color:  '#FADFBB'
-					    		},
-					    		formatter: '{value}%',
-					    	},
-					    },
-					    series: [{
-					    	type: 'line',
-					    	lineStyle: {
-					    		color: '#FADFBB'
-					    	},
-					    	itemStyle: {
-					    		show: false
-					    	},
-					    	areaStyle: {
-					    		normal: {
-					    			color: {
-					    			    type: 'linear',
-					    			    x: 0,
-					    			    y: 0,
-					    			    x2: 0,
-					    			    y2: 1,
-					    			    colorStops: [{
-					    			        offset: 0, color: '#F2E3CA' // 0% 处的颜色
-					    			    }, {
-					    			        offset: 1, color: '#fff' // 100% 处的颜色
-					    			    }],
-					    			    global: false // 缺省为 false
-					    			}
-					    		}
-					    	},
-					        data: that.data.sevenIncomeRate
-					    }]
-					});
+			       	that.drawLine();
 			       	
-
 			    },
 			}];
 			$.ajaxLoading(obj);
+		},
+
+		drawLine: function () {
+			var that = this;
+
+	       	//画折线图
+	       	// 基于准备好的dom，初始化echarts实例
+			var myChart = echarts.init(document.getElementById('line'));
+
+			myChart.setOption({
+			    tooltip: {
+			    	trigger: 'axis',
+			    	formatter: '<p style="font-size:0.36rem;color: #DAB57C;">{c}%</p><p style="font-size:0.24rem;color:#4A4A4A">{b}</p>',
+			    	backgroundColor: 'rgba(218,181,124, 0.1)',
+			    	// renderMode : 'richText', 
+			    	extraCssText: [7, 15, 15, 15],
+			    	textStyle: {
+			    		color:  '#FADFBB'
+			    	},
+			    	confine: true,
+			    	axisPointer: {
+			    		type: 'line',
+			    		lineStyle: {
+			    			color: {
+			    				type: 'linear',
+		    				    x: 0,
+		    				    y: 0,
+		    				    x2: 0,
+		    				    y2: 1,
+		    				    colorStops: [{
+		    				        offset: 0, color: '#fff' // 0% 处的颜色
+		    				    }, {
+		    				        offset: 0.5, color: '#F1CDA8' // 0% 处的颜色
+		    				    },{
+		    				        offset: 1, color: '#D2B280' // 0% 处的颜色
+		    				    }],
+		    				    global: false // 缺省为 false
+			    			}
+			    		}
+			    	}
+			    },
+			    grid:{
+			    	top: '10%',
+			    	left: '5%',
+			    	right: '5%',
+			    	bottom: '10%',
+			    	containLabel: true
+			    },
+			    xAxis: {
+			    	type: 'category',
+			        data: that.data.profitThoudDate,
+			        axisLine: {
+			        	lineStyle: {
+			        		color: '#FADFBB'
+			        	}
+			        },
+			        axisLabel: {
+                        show: true,
+                        color: '#9B9B9B',   //这里用参数代替了
+                        margin: 20
+                    },
+			        axisTick: {
+			        	show: false
+			        }
+			    },
+
+			    yAxis: {
+			  //   	max: function(value) {
+					//     return value.max + 20;
+					// },
+			    	axisTick:{
+			    		show: false
+			    	},
+			    	axisLine: {
+			    		show: false
+			    	},
+			    	splitLine:{
+			    		lineStyle: {
+			    			color: '#FADFBB'
+			    		}
+			    	},
+			    	axisLabel:{
+			    		show: true,
+			    		color:  '#9B9B9B',
+			    		formatter: '{value}%',
+			    	},
+			    },
+			    series: [{
+			    	type: 'line',
+			    	lineStyle: {
+			    		color: '#FADFBB'
+			    	},
+			    	itemStyle: {
+			    		show: false
+			    	},
+			    	symbol: 'none',
+			    	areaStyle: {
+			    		normal: {
+			    			color: {
+			    			    type: 'linear',
+			    			    x: 0,
+			    			    y: 0,
+			    			    x2: 0,
+			    			    y2: 1,
+			    			    colorStops: [{
+			    			        offset: 0, color: '#F2E3CA' // 0% 处的颜色
+			    			    }, {
+			    			        offset: 1, color: '#fff' // 100% 处的颜色
+			    			    }],
+			    			    global: false // 缺省为 false
+			    			}
+			    		}
+			    	},
+			        data: that.data.sevenIncomeRate
+			    }]
+			});
+
 		},
 
 		getTxt: function(){
@@ -378,10 +370,16 @@ $(function() {
 				}
             })
 
-            //折线图点击请求数据
+            //折线图点击月份请求数据
 			mui("body").on('tap', '.lineDraw .time', function(e) {
 
-				that.getLineData( $(this) );
+				that.getTypeOneData( $(this).attr('num') );
+            })
+
+            //折线图点击七日年化/万份收益切换区域
+			mui("body").on('tap', '.lineDraw .time', function(e) {
+
+				
             })
 		},
 
