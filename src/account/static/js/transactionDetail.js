@@ -123,8 +123,7 @@ $(function() {
                             t.endPullupToRefresh(false);
                         }
 
-                        // 页面++
-                        that.gV.pageCurrent++;
+
                         var len = json.data.pageList;
                         for(var i =0;i<len.length;i++){
                             if(len[i].redemptionType == 0){
@@ -144,16 +143,32 @@ $(function() {
                         }
                         // 将列表插入到页面上
                         generateTemplate(data, that.$e.recordList, that.$e.adjustmentTemp);
-                        for(var i =0;i<len.length;i++){
-                            if(len[i].tradeType == "认购"){
-                                $(".photoleft").eq(i).addClass("test")
-                            }else if(len[i].tradeType == "申购"){                               
-                                $(".photoleft").eq(i).addClass("testone")
-                            }else if(len[i].tradeType == "分红"){
-                                $(".photoleft").eq(i).addClass("testoneo")
-
+                        console.log(that.gV.pageCurrent)
+                        if(that.gV.pageCurrent == 1){
+                            for(var i =0;i<len.length;i++){
+                                if(len[i].tradeType == "认购"){
+                                    $(".photoleft").eq(i).addClass("test")
+                                }else if(len[i].tradeType == "申购"){                               
+                                    $(".photoleft").eq(i).addClass("testone")
+                                }else if(len[i].tradeType == "分红"){
+                                    $(".photoleft").eq(i).addClass("testoneo")
+    
+                                }
+                            }
+                        }else{
+                            for(var i =0;i<len.length;i++){
+                                if(len[i].tradeType == "认购"){
+                                    $(".photoleft").eq(i+15*that.gV.pageCurrent-15).addClass("test")
+                                }else if(len[i].tradeType == "申购"){                               
+                                    $(".photoleft").eq(i+15*that.gV.pageCurrent-15).addClass("testone")
+                                }else if(len[i].tradeType == "分红"){
+                                    $(".photoleft").eq(i+15*that.gV.pageCurrent-15).addClass("testoneo")
+    
+                                }
                             }
                         }
+                        // 页面++
+                        that.gV.pageCurrent++;
                     }, 200)
                 },
                      
