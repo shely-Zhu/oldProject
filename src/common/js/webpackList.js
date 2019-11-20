@@ -271,4 +271,6 @@ module.exports = {
 
     // 自选公募交易记录
     './account/static/js/public/transactionRecords': './src/account/static/js/public/transactionRecords.js',
+    // 自选公募交易明细
+    './account/static/js/public/transactionDetail': './src/account/static/js/public/transactionDetail.js',
 }

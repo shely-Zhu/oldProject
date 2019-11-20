@@ -1,0 +1,71 @@
+<!-- 自选公募-交易记录
+ @author wangjiajia 2019-11-19
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	@@include('@pathInclude/views/meta.html') 
+	<link rel="stylesheet" href="/account/static/css/public/transactionDetail.css">  
+	<title>交易记录</title>
+</head>
+<body>
+	<!-- @@include('@pathCommonViews/load.html')
+        @@include('@pathCommonViews/noData.html')
+        @@include('@pathCommonViews/loading/listLoading.html') -->
+    @@include('@pathCommonViews/headBarConfig.html',{"bgColors":"#2C3E77,#273971","showType":"0","pathName":"交易记录"}) 
+
+        <div class="mui-slider" id="tabbar">
+            <div class="title">
+                <div class="mui-slider-indicator mui-segmented-control mui-segmented-control-inverted">
+                        <a class="mui-control-item mui-active"  href="#item1">买入<b class="borderBottom"></b></a>
+                        <a class="mui-control-item" href="#item2">定投<b></b></a>
+                        <a class="mui-control-item" href="#item3">分红<b></b></a>
+                        <a class="mui-control-item" href="#item4">赎回<b></b></a>
+                </div>
+            </div>
+		    <div class="mui-slider-group" id="drapUpWrapper">
+		        <div id="item1" class="mui-slider-item mui-control-content mui-active">
+						<div class="list">
+							<div class="contentWrapper">
+								<div class="contentWrap">
+									<!-- 放置列表 -->
+								</div>
+								@@include('@pathCommonViews/goTop.html')
+							</div>
+						</div>          
+		        </div>
+		        <div id="item2" class="mui-slider-item mui-control-content">
+					这是重要公告及通知区域
+		        </div>
+		        <div id="item3" class="mui-slider-item mui-control-content">
+					这是恒天简报区域
+                </div>  
+                <div id="item4" class="mui-slider-item mui-control-content">
+                        这是恒天简报区域
+                </div>                   
+			</div>
+			
+
+			<script id="adjustment-template" type="text/x-handlebars-template">
+				{{#each this}}
+				<div class="content">
+						<ul class="contentUl">
+							<li>中融货币A</li>
+							<li class="changeColor">{{curveDate}}</li>
+						</ul>
+						<ul class="contentUl rightUl">
+							<li>2,019.00元</li>
+							<li class="changeColor">等待确认</li>
+						</ul>
+					</div>
+				{{/each}}
+			</script>
+			<!-- <footer>
+				暂无更多数据
+			</footer> -->
+		</div>
+
+	@@include('@pathInclude/views/footer.html')
+    <script src="/account/static/js/public/transactionDetail.js"></script>
+</body>
+</html>
