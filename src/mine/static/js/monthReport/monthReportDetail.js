@@ -298,14 +298,17 @@ var monthReportDetail = {
                 itemWidth: 10,  // 设置宽度
 
 				itemHeight: 10, // 设置高度
-				itemGap: 5 //设置间距
+				itemGap: 10 ,//设置间距
+				x: '70%',
+				y: '35%'
 
             },
             series: [
                 {
                     name:'访问来源',
                     type:'pie',
-                    radius: ['49%', '70%'],
+					radius: ['49%', '70%'],
+					center: ['35%', '47%'],
                     // selectedMode: 'single',
                     avoidLabelOverlap: false,
                     hoverAnimation:false,
@@ -416,7 +419,8 @@ var monthReportDetail = {
                     name:'访问来源',
                     type:'pie',
                     hoverAnimation:false,
-                    radius: ['40%', '50%'],
+					radius: ['40%', '50%'],
+					center: ['35%', '47%'],
                     avoidLabelOverlap: false,
                     
                     label: {
