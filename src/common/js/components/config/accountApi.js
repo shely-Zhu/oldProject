@@ -32,4 +32,10 @@ module.exports = function() {
 
     // 月度报告
     this.queryMonthlyReport_api = http_url.account_url + '/queryMonthlyReport';
+
+    //资产详情
+    this.assetsDetail_api = http_url.account_url + '/positions/assetsDetail';
+
+    //七日年化
+    this.earningCurve_api = http_url.account_url + '/positions/earningCurve'
 };

@@ -83,7 +83,7 @@ $(function() {
 
             var obj = [{ // 系统调仓记录列表
                 url: site_url.curveHistoryList_api,
-                data: { 
+                data: {
                     "pageNo": that.gV.pageCurrent, //非必须，默认为1
                     "pageSize": "10" //非必须，默认为10
                 },
@@ -130,7 +130,7 @@ $(function() {
                     }, 200)
 
                 },
-                     
+
             }];
             $.ajaxLoading(obj);
         },

@@ -1,0 +1,40 @@
+/**
+* 了解恒天
+* @author yanruiting 2019-11-19
+*/
+@import url("../../../include/css/mui.min.css");
+@import url('@pathCommonLess/mui/resetMUI.less');
+@import url("@pathCommonLess/reset.less");
+@import url("@pathCommonLess/color.less");
+
+@import url("@pathCommonLessCom/againEnter.less");
+@import url("@pathCommonLessCom/alertBox.less");
+@import url("@pathCommonLessCom/headBarConfig.less");
+
+.HeadBarConfigBox {
+	background:linear-gradient(116deg,rgba(56,74,129,1) 0%,rgba(42,60,112,1) 100%)!important;
+}
+.mui-slider .mui-segmented-control.mui-segmented-control-inverted~.mui-slider-group .mui-slider-item {
+	border: none!important;
+}
+#tabHT {
+	.mui-slider-indicator {
+		height: .88rem;
+		background:linear-gradient(116deg,rgba(56,74,129,1) 0%,rgba(42,60,112,1) 100%)!important;
+		.mui-control-item {
+			color: @c005;
+			line-height: 34px;
+			.borderBottom {
+			  	display: block;
+			    width: 1.06rem;
+			    height: 0.03rem;
+			    background:linear-gradient(135deg,rgba(247,208,164,1) 0%,rgba(241,198,154,1) 100%);
+				border-radius:1px;
+				margin: 0 auto;
+			}
+		}
+		.mui-active {
+			color: #F7D0A4;
+		}
+	}
+}
