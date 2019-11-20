@@ -1,0 +1,146 @@
+/**
+* 自选公募交易记录
+* @author yanruiting 2019-11-19
+*/
+@import url("../../../../../include/css/mui.min.css");
+@import url('@pathCommonLess/mui/resetMUI.less');
+@import url("@pathCommonLess/reset.less");
+@import url("@pathCommonLess/color.less");
+
+@import url("@pathCommonLessCom/againEnter.less");
+@import url("@pathCommonLessCom/alertBox.less");
+@import url("@pathCommonLessCom/headBarConfig.less");
+body{
+    max-width: 7.5rem;
+}
+.HeadBarConfigBox {
+	box-shadow:0px 0px 4px 0px rgba(135,135,135,0.5);
+}
+#recordBox {
+	#recordSearch {
+		height: .8rem;
+		background: @FFFFFF;
+		margin-bottom: .15rem;
+		position: relative;
+		z-index: 999;
+		#recordSearchWrapper {
+			display: flex;
+			height: .8rem;
+			.searchItem {
+				flex: 1;
+				display: flex;
+				justify-content: center;
+				align-items: center;
+				.screeningWord {
+					font-size: .28rem;
+					line-height: .28rem;
+					color: @272727;
+				}
+				.screeningBtn {
+					width: .24rem;
+					height: .24rem;
+					margin-left: .1rem;
+				}
+				.xiaLaLogo {
+					display: block;
+				}
+				.shouQiLogo {
+					display: none;
+				}
+				&.searchItemActive {
+					.screeningWord {
+						font-weight: 600;
+					}
+					.xiaLaLogo {
+						display: none;
+					}
+					.shouQiLogo {
+						display: block;
+					}
+				}
+			}
+			
+		}
+		#recordSearchDetail {
+			position: absolute;
+			background: @FFFFFF;
+			padding-left: .3rem;
+			width: 100%;
+			display: none;
+			.detailItem {
+				display: flex;
+				justify-content: space-between;
+				padding: .3rem .3rem .3rem 0;
+				border-bottom:1px solid #E7E9ED;
+				.detailValue {
+					font-size: .28rem;
+					line-height: .46rem;
+					color: @272727;
+				}
+				.detailStatus {
+					display: none;
+					.detailStatusLogo {
+						width: .46rem;
+						height: .46rem;
+					}
+				}
+				&.detailActive {
+					.detailValue {
+						color: @364D97;
+					}
+					.detailStatus {
+						display: block;
+					}
+				}
+			}
+		}
+	}
+	.list {
+		background: @FFFFFF;
+		.contentWrapper {
+			#recordListWraper {
+				.recordItem {
+					padding: .28rem .3rem;
+					height: 1.36rem;
+					display: flex;
+					border-bottom: 1px solid @E7E9ED;
+					.recordLogoCon {
+						display: flex;
+						justify-content: center;
+						align-items: center;
+						.recordLogo {
+							width: .6rem;
+							height: .6rem;
+						}	
+					}
+					.recordCon {
+						flex: 1;
+						padding-left: .3rem;
+						.recordTop {
+							display: flex;
+							justify-content: space-between;
+							color: @272727;
+							font-weight: 600;
+							margin-bottom: .04rem;
+							.recordName {
+								font-size: .28rem;
+								line-height: .4rem;
+							}
+							.recordMoney {
+								font-size: .32rem;
+								line-height: .45rem;
+							}
+						}
+						.recordBottom {
+							display: flex;
+							justify-content: space-between;
+							font-size: .24rem;
+							line-height: .33rem;
+							color: @9B9B9B;
+						}
+					}
+				}
+			}
+		}
+	}
+}
