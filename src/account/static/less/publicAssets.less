@@ -1,0 +1,328 @@
+/*
+ * @page: 其他资产
+ * @Author: peicongcong
+ * @Date:   2019-11-15songxiaoyu
+ * @description:
+ */
+
+@import url("@pathInclude/css/mui.min.css");
+@import url("@pathCommonLess/mui/resetMUI.less");
+@import url("@pathCommonLess/color.less");
+@import url("@pathCommonLess/reset.less");
+
+@import url("@pathCommonLess/chtwm.less");
+@import url("@pathCommonLess/app.less");
+@import url("@pathCommonLessCom/againEnter.less");
+@import url("@pathCommonLessCom/alertBox.less");
+@import url("@pathCommonLessCom/tabScroll.less");
+
+//回到顶部的样式
+@import url("@pathCommonLessCom/goTopMui.less");
+@import url("@pathCommonLess/components/elasticLayerTypeFive.less");
+@import url("@pathCommonLessCom/headBarConfig.less");
+@import url("@pathCommonLessCom/noDataImg.less");
+html {
+    height: 100%;
+}
+.fl{
+    float: left;
+}
+.fr{
+    float: right;
+}
+body,.mui-content{
+    background: @F7FAFD !important;
+}
+.hide{
+    display: none;
+}
+.container {
+    height: 100%;
+    width: 100%;
+    background: @F7FAFD;
+
+    // 公募资产
+    .banner {
+        position: relative;
+        width: 100%;
+        height: 5.3rem;
+        background: url("/account/static/img/public_account_bg.png");
+        background-size: 100% 100%;
+        padding: 0 0.28rem;
+
+        .bannerTop {
+            color: @F7DDCF;
+            padding-top: 1.54rem;
+            .sum {
+                
+                font-size: 0.26rem;
+                .j_icon {
+                    width: 0.36rem;
+                    height: 0.36rem;
+                    margin-left: 0.2rem;
+                    background: url("/account/static/img/eyesee.png");
+                    background-size: 100% 100%;
+                    display: inline-block;
+                    vertical-align: middle;
+                }
+                .j_icon.eyecose{
+                    background: url("/account/static/img/eyeclose.png");
+                    background-size: 100% 100%;
+                }
+                
+            }
+            .assetsBtn{
+                width: 1.5rem;
+                height: 0.4rem;
+                background: rgba(255, 255, 255, 0.1);
+                border-radius: 0.25rem;
+                font-size: 0.2rem;
+                text-align: center;
+                color: @c005;
+                opacity: 0.8;
+                line-height: 0.4rem;
+            }
+            
+        }
+        //金额
+        .totalM{
+            font-size: 0.68rem;
+            line-height: 0.8rem;
+            margin-top: 0.1rem;
+            font-weight:bold;
+            color:rgba(153,81,0,1);
+            background:linear-gradient(360deg, rgba(186,140,112,1) 0%, rgba(244,210,192,1) 100%);
+            -webkit-background-clip:text;
+            -webkit-text-fill-color:transparent;
+        }
+        //待确认金额
+        .be_confirmed_amount {
+            height: 0.95rem;
+            width: 100%;
+            padding-top: 0.14rem;
+            .title {
+                font-size: 0.26rem;
+                color: @FFFFFF;
+                margin-top: 0.08rem;
+            }
+            .value {
+                margin-left: 0.1rem;
+                font-size: 0.38rem;
+                color: #EDC99B;
+            }
+        }
+        //收益金额相关
+        .first_h_profit_box {
+            width: 3.58rem;
+        }
+        .h_profit {
+            font-size: 0.26rem;
+            color: rgba(255, 255, 255, 0.7);
+        }
+        .h_profit_value {
+            font-size: 0.38rem;
+            color: @FFFFFF;
+            margin-top: 0.1rem;
+        }
+        
+    }
+
+    //银行卡筛选
+    .bank_screen {
+        width: 100%;
+        padding: 0.2rem 0.28rem 0 0.2rem;
+        height: 0.8rem;
+        color: @272727;
+        .bank_screen_name {
+            font-size: 0.28rem;
+            margin-right: 0.2rem;
+        }
+        .iconfont {
+            font-size: 0.24rem;
+            line-height: 0.4rem;
+        }
+    }
+    .bank_list {
+        .bank_screen .iconfont {
+            font-size: 0.30rem;
+        }
+    }
+
+    //分隔段
+    .divider {
+        width: 100%;
+        height: 0.3rem;
+        background-color: @F7FAFD;
+    }
+
+    // 遮罩层
+    .scroll_mask {
+        width: 100%;
+        height: 60rem;
+        background: @c005;
+        opacity: 0;
+        position: absolute;
+        top: 38%;
+        z-index: 3;
+    }
+
+
+    .nav_fixed {
+        position: static;
+        top: 0;
+        left: 0;
+        z-index: 4;
+        background: @c005;
+    }
+
+    // 其他资产列表
+    .myAsset {
+        #slider{
+            background: @F7FAFD !important;
+        }
+
+
+        // nav重置
+        .mui-slider .mui-segmented-control.mui-scroll-wrapper {
+            background: none;
+            box-shadow: none;
+            color: @3c3c3c;
+            padding-top: 0;
+            height: 0.84rem;
+
+        }
+
+        .mui-table-view-cell {
+            padding: 0;
+        }
+
+        .list {
+            width: 100%;
+
+            .datalist {
+                margin: 0.3rem auto 0;
+                color: @c002;
+                background: @c005;
+                padding: 0.4rem 0.3rem;
+                .proName{
+                   
+                    .proNameBefore{
+                        width: 0.06rem;
+                        height: 0.26rem;
+                        background:linear-gradient(180deg,rgba(252,192,158,1) 0%,rgba(213,141,101,1) 100%);
+                        border-radius:0.04rem;
+                        float: left;
+                        margin-top: 0.03rem;
+                        margin-right: 0.2rem;
+                    }
+                    .proNameCon{
+                        width: 6.4rem;
+                        font-size: 0.28rem;
+                        line-height: 0.32rem;
+                        color: @272727;
+                        float: left;
+                    }
+                    .proNameAfter{
+                        width: 0.2rem;
+                        height: 0.2rem;
+                        background: url("/account/static/img/right.png");
+                        background-size: 100% 100%;
+                        margin-top: 0.03rem;
+                        float: right;
+                    }
+                }
+                .fundCon{
+                    margin-left: 0.1rem;
+                    margin-top: 0.4rem;
+                    p{
+                        font-size: 0.24rem;
+                        color: @9B9B9B;
+                        margin-bottom: 0.12rem;
+                    }
+                    .fundCenter{
+                        .money{
+                            font-size: 0.32rem;
+                            color: @272727;
+                            margin-right: 0.4rem;
+                            float: left;
+                        }
+                        .date{
+                            font-size: 0.26rem;
+                            color: @818181;
+                            float: left;
+                        }
+                        .tip{
+                            width: 1.4rem;
+                            height: 0.38rem;
+                            line-height: 0.38rem;
+                            border-radius: 0.04rem;
+                            text-align: center;
+                            float: right;
+                        }
+                        .tip.all{
+                            background:linear-gradient(220deg,rgba(245,236,213,1) 0%,rgba(248,234,201,1) 100%);
+                            color: @C4925E;
+                        }
+                        .tip.part{
+                            background:rgba(227,232,241,1);
+                            color: @9B9B9B;
+                        }
+                    }
+                }
+                .haveFundCon{
+                    margin-top: 0.5rem;
+                    margin-left: 0.1rem;
+                    p{
+                        color: @9B9B9B;
+                        font-size: 0.24rem;
+                        margin-bottom: 0.15rem;
+                    }
+                    span{
+                        color: @272727;
+                        font-size: 0.26rem;
+                    }
+                    .total{
+                        width: 40%;
+                    }
+                    .interestRate{
+                        width: 20%;
+                    }
+                    .term{
+                        width: 20%;
+                    }
+                    .date{
+                        width: 20%;
+                    }
+                }
+            }
+        }
+
+
+
+    }
+
+    .contentWrapper {
+        height: 100%;
+    }
+
+    //iscroll上拉加载重置
+    #pullUp {
+        line-height: 2.8rem;
+        padding: 0;
+
+        span {
+            display: inline-block;
+            vertical-align: middle;
+        }
+    }
+
+    .openOrClose {
+        .bind {
+            margin-bottom: 2rem;
+        }
+    }
+
+    /**
+*   无数据区域的样式
+ */
+}

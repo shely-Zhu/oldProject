@@ -1,0 +1,162 @@
+<!-- 
+@page 公募资产
+@author shiyunrui 2019-11-18
+-->
+<!doctype html>
+<html lang="en">
+
+<head>
+    @@include('@pathInclude/views/meta.html')
+    <link rel="stylesheet" href="/account/static/css/publicAssets.css">
+    <title>公募资产</title>
+</head>
+
+<body>
+    @@include('@pathInclude/views/header.html') @@include('@pathCommonViews/headBarConfig.html',{"pathName":"公募资产","bgColors":"#3E3C3C,#3E3C3C","showType":"1"})
+    <!-- @@include('@pathCommonViews/load.html') -->
+    <section class="container">
+        <div class="banner">
+            <div class="bannerTop clearfix">
+                <div class="sum fl"><span class="j_text">自选总资产(元)</span><span class="j_icon"></span></div>
+                <div class="assetsBtn fr">资产组成说明</div>
+            </div>
+            <div class="totalM">10,000,000.00</div>
+            <div class="be_confirmed_amount">
+                <div class="title fl">待确认金额(元)</div>
+                <div class="value fl">100,000.00</div>
+            </div>
+            <div>
+                <div class="first_h_profit_box fl">
+                    <div class="h_profit">昨日总收益(元)</div>
+                    <div class="h_profit_value">+100,000.00</div>
+                </div>
+                <div class="fl">
+                    <p class="h_profit">持有总收益(元)</p>
+                    <p class="h_profit_value">+100,000.00</p>
+                </div>
+            </div>
+        </div>
+        <div class="divider"></div>
+        <div id="bank_screen" class="bank_screen">
+            <div class="bank_screen_name fl">全部持有</div>
+            <span class="iconfont fl">&#xe609;</span>
+        </div>
+        <ul class="bank_list hide">
+            <li>
+                <div class="bank_screen">
+                    <div class="bank_screen_name fl">全部</div>
+                    <span class="iconfont fr">&#xe626;</span>
+                </div>
+            </li>
+            <li>
+                <div class="bank_screen">
+                    <div class="bank_screen_name fl">华夏银行 - 0622</div>
+                    <span class="iconfont fr hide">&#xe626;</span>
+                </div>
+            </li>
+            <li>
+                <div class="bank_screen">
+                    <div class="bank_screen_name fl">中国招商银行 - 3568</div>
+                    <span class="iconfont fr hide">&#xe626;</span>
+                </div>
+            </li>
+        </ul>
+
+
+
+
+        <!-- <div class="scroll_mask"></div> -->
+        <div class="mui-content  myAsset">
+            <!-- 放置页面内容 -->
+            <div class="list">
+                    <div class="contentWrapper">
+                        <ul class="mui-table-view">
+                            <li class="mui-table-view-cell">
+                                <div class="datalist" fundCode="{{fundCode}}">
+                                        <div class="proName clearfix">
+                                            <span class="proNameBefore"></span>
+                                            <p class="proNameCon">{{projectName}}</p>
+                                            <span class="proNameAfter"></span>
+                                        </div>
+                                        <div class="haveFundCon clearfix">
+                                            <div class="total fl">
+                                                <p>总资产(元)</p>
+                                                <span>*****</span>
+                                            </div>
+                                            <div class="interestRate fl">
+                                                <p>票面利率</p>
+                                                <span>9.8%</span>
+                                            </div>
+                                            <div class="term fl">
+                                                <p>产品期限</p>
+                                                <span>6个月</span>
+                                            </div>
+                                            <div class="date fl">
+                                                <p>成立日期</p>
+                                                <span>2019-7-23</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+        </div>
+
+        <!-- 加载中loading -->
+        @@include('@pathCommonViews/loading/listLoading.html')
+        <!-- 暂无数据 -->
+        @@include('@pathCommonViews/noDataImg.html',{"tipText":"暂无数据"})
+    </section>
+
+    <script id="first-template" type="text/x-handlebars-template">
+        {{! 列表 内容 使用mui的上拉加载}}
+        <div class="list">
+            {{! list是包裹上拉加载区域的，在js中计算当前页面中的list高度，不能超出一屏}} {{! 初始化上拉加载区域，使用contentWrapper class}} {{! contentWrapper 需要添加样式，具体见less文件}}
+            <div class="contentWrapper">
+
+                <ul class="mui-table-view">
+                    <li class="mui-table-view-cell">
+                        {{! 所有内容 需要放在这个li里，且里面不能再用Li元素}} {{{content}}}
+                        <div class="datalist" fundCode="{{fundCode}}">
+                                <div class="proName clearfix">
+                                    <span class="proNameBefore"></span>
+                                    <p class="proNameCon">{{projectName}}</p>
+                                    <span class="proNameAfter"></span>
+                                </div>
+                                <div class="haveFundCon clearfix">
+                                    <div class="total fl">
+                                        <p>总资产(元)</p>
+                                        <span>*****</span>
+                                    </div>
+                                    <div class="interestRate fl">
+                                        <p>票面利率</p>
+                                        <span>9.8%</span>
+                                    </div>
+                                    <div class="term fl">
+                                        <p>产品期限</p>
+                                        <span>6个月</span>
+                                    </div>
+                                    <div class="date fl">
+                                        <p>成立日期</p>
+                                        <span>2019-7-23</span>
+                                    </div>
+                                </div>
+                            </div>
+                    </li>
+                </ul>
+
+                <!-- 返回顶部 -->
+                @@include('@pathCommonViews/goTop.html')
+
+            </div>
+        </div>
+    </script>
+
+    @@include('@pathInclude/views/footer.html')
+    <!-- 添加埋点 -->
+
+    <script src="/account/static/js/publicAssets.js"></script>
+</body>
+
+</html>
