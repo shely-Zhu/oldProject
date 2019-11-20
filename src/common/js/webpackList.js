@@ -211,6 +211,8 @@ module.exports = {
     './mine/static/js/journal': './src/mine/static/js/journal.js',
     // 交易明细页面
     './mine/static/js/transactionDetails': './src/mine/static/js/transactionDetails.js',
+    //修改分红方式页面
+    './mine/static/js/bonusMethod': './src/mine/static/js/bonusMethod.js',
     // 会员权益成长值记录
     './mine/static/js/membershipInterestsRecord': './src/mine/static/js/membershipInterestsRecord.js',
     // 会员权益详情

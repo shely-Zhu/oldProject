@@ -35,15 +35,30 @@ $(function() {
 		//注册事件
 		events: function() {
             let that = this;
-            $.each(mui(".wrap li"),(e,i)=>{
-                $(i).on("tap",function(){
-                    console.log(e)
-                })
-            })
+            // $.each(mui(".wrap li"),(e,i)=>{
+            //     $(i).on("tap",function(){
+            //         console.log(e)
+            //     })
+            // })
             // this.$e.lis[0].onclick = function(){
             //     console.log("点击了第一个li标签")
-            //     // window.location.href =
+            //     window.location.href = site_url.journal_url
             // }
+            // mui('body').on('tap','li',function(a){
+            //     console.log(a)
+            //     if(a.srcElement.childNodes[1].data == "私募交易明细"){
+            //         // window.location.href =
+            //     }else if(a.srcElement.childNodes[1].data == "公募自选交易明细"){
+            //         // window.location.href =
+            //     }else if(a.srcElement.childNodes[1].data == "公募组合交易明细"){
+            //         // window.location.href =
+            //     }else{
+            //         // window.location.href =
+            //     }
+            // })
+            mui("li").on('tap',(a)=>{
+                console.log(a)
+            })
             // mui(".wrap li").eq(0).on("tap",function(){
             //     console.log(111)
             // })
