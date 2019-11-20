@@ -79,6 +79,7 @@ $(function() {
                         contentrefresh: '拼命加载中',
                         contentnomore: '没有更多了', //可选，请求完毕若没有更多数据时显示的提醒内容；
                         callback: function() {
+                            // debugger
                             //执行ajax请求
                             that.getData(this);
                         }
@@ -98,7 +99,7 @@ $(function() {
                 that.getElements.listLoading.show();
 
                 //这一句初始化并第一次执行mui上拉加载的callback函数
-                mui('.contentWrapper').pullRefresh();
+                mui('.contentWrapper').pullRefresh().pullupLoading();
 
                 //隐藏loading，调试接口时需要去掉
                 //setTimeout(function(){
@@ -116,7 +117,7 @@ $(function() {
             var obj = [{ // 系统调仓记录列表
                 url: site_url.curveHistoryList_api,
                 data: {
-                    "pageNo": that.gV.pageNo, //非必须，默认为1
+                    "pageNo": that.gV.aP.pageNo, //非必须，默认为1
                     "pageSize": "10" //非必须，默认为10
                 },
                 //async: false,
@@ -154,11 +155,11 @@ $(function() {
 
                         // 页面++
                         that.gV.aP.pageNo++;
-
-                        // 将列表插入到页面上
+                        console.log(that.gV.aP.pageNo)
+                            // 将列表插入到页面上
                         generateTemplate(data, that.getElements.contentWrap, that.getElements.transTemp);
 
-                    }, 2000)
+                    }, 200)
 
                 },
 
