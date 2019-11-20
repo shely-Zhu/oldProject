@@ -1,0 +1,278 @@
+<!-- 
+@page 已确认交易
+@author peicongcong 2019-11-19
+-->
+<!doctype html>
+<html lang="en">
+
+<head>
+    @@include('@pathInclude/views/meta.html')
+    <link rel="stylesheet" href="/account/static/css/private/tobeConfirmTransaction.css">
+    <title>待确认交易</title>
+</head>
+
+<body>
+    <div class="topTitle">
+        @@include('@pathInclude/views/header.html') @@include('@pathCommonViews/headBarConfig.html',{"pathName":"已确认交易","bgColors":"#3E3C3C,#3E3C3C"})
+        <!-- 筛选 -->
+        <div class="hopper"></div>
+        <!-- 筛选 -->
+        <!-- 筛选区域 -->
+        <div class="hopperCon">
+            <ul>
+                <li class="active">全部</li>
+                <li>申购</li>
+                <li>赎回</li>
+                <li>分红</li>
+                <li>预约撤单</li>
+                <li>预约过期</li>
+                <li>转让已完成</li>
+                <li>受让已完成</li>
+            </ul>
+        </div>
+        <!-- 筛选区域 -->
+    </div>
+    <div class="warp">
+
+        <div class="list">
+            <div class="contentWrapper">
+                <div class="contentWrap">
+                    <!-- 放置列表 -->
+                    <!-- 申购 -->
+                    <div class="transList">
+                        <!-- 名称 -->
+                        <div class="listName">(DZ银杏1162号)恒天稳谊16号私募投资基 ZYFG恒天稳谊16号私募投资基ZYFG</div>
+                        <!-- 名称 -->
+                        <!-- 金额 -->
+                        <div class="clearfix listCon">
+                            <div class="listItem">
+                                <p>确认份额(份)</p>
+                                <span>10,000,000.00</span>
+                            </div>
+                            <div class="listItem">
+                                <p>确认金额(元)</p>
+                                <span>10,000,000.00</span>
+                            </div>
+                            <div class="listItem">
+                                <p>确认日期</p>
+                                <span>2019-09-10</span>
+                            </div>
+                        </div>
+                        <!-- 金额 -->
+                        <!-- 申购图片 -->
+                        <div class="typeImg sg"></div>
+                        <!-- 申购图片 -->
+
+                    </div>
+                    <!-- 申购 -->
+                    <!-- 赎回 -->
+                    <div class="transList">
+                        <!-- 名称 -->
+                        <div class="listName">(DZ银杏1162号)恒天稳谊16号私募投资基 ZYFG恒天稳谊16号私募投资基ZYFG</div>
+                        <!-- 名称 -->
+                        <!-- 金额 -->
+                        <div class="clearfix listCon">
+                            <div class="listItemHalf">
+                                <p>赎回份额(份)</p>
+                                <span>10,000,000.00</span>
+                            </div>
+                            <div class="listItem">
+                                <p>赎回申请日期</p>
+                                <span>2019-09-10</span>
+                            </div>
+                        </div>
+                        <!-- 金额 -->
+                        <!-- 赎回图片 -->
+                        <div class="typeImg sh"></div>
+                        <!-- 赎回图片 -->
+                    </div>
+                    <!-- 赎回 -->
+                    <!-- 分红 -->
+                    <div class="transList">
+                        <!-- 名称 -->
+                        <div class="listName">(DZ银杏1162号)恒天稳谊16号私募投资基 ZYFG恒天稳谊16号私募投资基ZYFG</div>
+                        <!-- 名称 -->
+                        <!-- 金额 -->
+                        <div class="clearfix listCon">
+                            <div class="listItem">
+                                <p>确认份额(份)</p>
+                                <span>10,000,000.00</span>
+                            </div>
+                            <div class="listItem">
+                                <p>确认金额(元)</p>
+                                <span>10,000,000.00</span>
+                            </div>
+                            <div class="listItem">
+                                <p>确认日期</p>
+                                <span>2019-09-10</span>
+                            </div>
+                        </div>
+                        <!-- 金额 -->
+                        <!-- 分红图片 -->
+                        <div class="typeImg fh"></div>
+                        <!-- 分红图片 -->
+                    </div>
+                    <!-- 分红 -->
+                    <!-- 预约 -->
+                    <div class="transList">
+                        <div class="statusTip">预约过期</div>
+                        <!-- 名称 -->
+                        <div class="listName mt30">(DZ银杏1162号)恒天稳谊16号私募投资基 ZYFG恒天稳谊16号私募投资基ZYFG</div>
+                        <!-- 名称 -->
+                        <!-- 金额 -->
+                        <div class="clearfix listCon">
+                            <div class="listItem">
+                                <p>预约金额(元)</p>
+                                <span>10,000,000.00</span>
+                            </div>
+                            <div class="listItem">
+                                <p>预约时间</p>
+                                <span>2019-09-10</span>
+                            </div>
+                            <div class="listItem">
+                                <p>理财师</p>
+                                <span>范星星</span>
+                            </div>
+                        </div>
+                        <!-- 金额 -->
+                        <!-- 预约图片 -->
+                        <div class="typeImg yy"></div>
+                        <!-- 预约图片 -->
+                    </div>
+                    <!-- 预约 -->
+                    <!-- 转让 -->
+                    <div class="transList">
+                        <div class="statusTip">转让申请驳回</div>
+                        <!-- 名称 -->
+                        <div class="listName mt30">(DZ银杏1162号)恒天稳谊16号私募投资基 ZYFG恒天稳谊16号私募投资基ZYFG</div>
+                        <!-- 名称 -->
+                        <!-- 金额 -->
+                        <div class="clearfix listCon">
+                            <div class="listItem">
+                                <p>转让份额(份)</p>
+                                <span>10,000,000.00</span>
+                            </div>
+                            <div class="listItem">
+                                <p>拟转让价格(元)</p>
+                                <span>2019-09-10</span>
+                            </div>
+                            <div class="listItem">
+                                <p>成交价格</p>
+                                <span>1000</span>
+                            </div>
+                        </div>
+                        <!-- 金额 -->
+                        <!-- 创建时间 -->
+                        <div class="creatTime">创建时间：2018-12-10 11:10:00</div>
+                        <!-- 创建时间 -->
+                        <!-- 进度 -->
+                        <div class="toolCon clearfix">
+                            <span class="tipImg"></span>
+                            <span>当前进度已截止</span>
+                            <a href="">查看具体情况</a>
+                            <div class="toDetail">详情</div>
+                        </div>
+                        <!-- 进度 -->
+                        <!-- 转让图片 -->
+                        <div class="typeImg zr"></div>
+                        <!-- 转让图片 -->
+                    </div>
+                    <!-- 转让 -->
+                    <!-- 受让 -->
+                    <div class="transList">
+                        <!-- 左上角小框 -->
+                        <div class="statusTip">转受让撮合驳回</div>
+                        <!-- 左上角小框 -->
+                        <!-- 右上角文字 -->
+                        <div class="textTip">
+                            <span>转让方：</span>
+                            <span>未双录</span>
+                            <span>受让方：</span>
+                            <span>已双录</span>
+
+                        </div>
+                        <!-- 右上角文字 -->
+                        <!-- 名称 -->
+                        <div class="listName mt30">(DZ银杏1162号)恒天稳谊16号私募投资基 ZYFG恒天稳谊16号私募投资基ZYFG</div>
+                        <!-- 名称 -->
+                        <!-- 金额 -->
+                        <div class="clearfix listCon">
+                            <div class="listItem">
+                                <p>受让份额(份)</p>
+                                <span>10,000,000.00</span>
+                            </div>
+                            <div class="listItem">
+                                <p>拟交易价格(元)</p>
+                                <span>2019-09-10</span>
+                            </div>
+                            <div class="listItem">
+                                <p>成交价格</p>
+                                <span>1000</span>
+                            </div>
+                        </div>
+                        <!-- 金额 -->
+                        <!-- 创建时间 -->
+                        <div class="creatTime">创建时间：2018-12-10 11:10:00</div>
+                        <!-- 创建时间 -->
+                        <!-- 进度 -->
+                        <div class="toolCon clearfix">
+                            <span class="tipImg"></span>
+                            <span>当前进度已截止</span>
+                            <a href="">查看具体情况</a>
+                            <div class="toDetail">详情</div>
+                            <div class="cancelBtn">取消转让</div>
+                        </div>
+                        <!-- 进度 -->
+                        <!-- 受让图片 -->
+                        <div class="typeImg sr"></div>
+                        <!-- 受让图片 -->
+                    </div>
+                    <!-- 受让 -->
+                </div>
+                @@include('@pathCommonViews/goTop.html')
+            </div>
+        </div>
+        <!-- 加载中loading -->
+        @@include('@pathCommonViews/loading/listLoading.html')
+        <!-- 暂无数据 -->
+        @@include('@pathCommonViews/noDataImg.html',{"tipText":"暂无数据"})
+    </div>
+    <div class="mask"></div>
+</body>
+<script id="trans-template" type="text/x-handlebars-template">
+    {{#each this}}
+    <!-- 预约 -->
+    <div class="transList">
+        <div class="statusTip">预约过期</div>
+        <!-- 名称 -->
+        <div class="listName mt30">(DZ银杏1162号)恒天稳谊16号私募投资基 ZYFG恒天稳谊16号私募投资基ZYFG</div>
+        <!-- 名称 -->
+        <!-- 金额 -->
+        <div class="clearfix listCon">
+            <div class="listItem">
+                <p>预约金额(元)</p>
+                <span>10,000,000.00</span>
+            </div>
+            <div class="listItem">
+                <p>预约时间</p>
+                <span>2019-09-10</span>
+            </div>
+            <div class="listItem">
+                <p>理财师</p>
+                <span>范星星</span>
+            </div>
+        </div>
+        <!-- 金额 -->
+        <!-- 预约图片 -->
+        <div class="typeImg yy"></div>
+        <!-- 预约图片 -->
+    </div>
+    <!-- 预约 -->
+    {{/each}}
+</script>
+@@include('@pathInclude/views/footer.html')
+<!-- 添加埋点 -->
+<script src="/include/js/iscroll.js"></script>
+<script src="/account/static/js/private/tobeConfirmTransaction.js"></script>
+
+</html>
