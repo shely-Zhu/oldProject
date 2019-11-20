@@ -1,17 +1,17 @@
-<!-- 消息中心
+<!-- 自选公募-交易记录
  @author yanruiting 2019-11-19
 -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
 	@@include('@pathInclude/views/meta.html') 
-	<link rel="stylesheet" href="/publicOfferingSelf/static/css/transactionRecords.css">  
+	<link rel="stylesheet" href="/account/static/css/public/transactionRecords.css">  
 	<title>交易记录</title>
 </head>
 <body>
-	@@include('@pathCommonViews/load.html')
+	<!-- @@include('@pathCommonViews/load.html')
         @@include('@pathCommonViews/noData.html')
-        @@include('@pathCommonViews/loading/listLoading.html')
+        @@include('@pathCommonViews/loading/listLoading.html') -->
     @@include('@pathCommonViews/headBarConfig.html',{"bgColors":"#2C3E77,#273971","showType":"0","pathName":"交易记录"}) 
     <div id="recordBox">
         <div id="recordSearch">
@@ -23,7 +23,7 @@
                 <div id="recordListWraper">
                     <div class="recordItem">
                         <div class="recordLogoCon">
-                            <img class="recordLogo" src="/publicOfferingSelf/static/img/account_icon_mairu@2x.png" alt="">
+                            <img class="recordLogo" src="/account/static/img/public/account_icon_mairu@2x.png" alt="">
                         </div>
                         <div class="recordCon">
                             <div class="recordTop">
@@ -38,7 +38,7 @@
                     </div>
                     <div class="recordItem">
                         <div class="recordLogoCon">
-                            <img class="recordLogo" src="/publicOfferingSelf/static/img/account_icon_mairu@2x.png" alt="">
+                            <img class="recordLogo" src="/account/static/img/public/account_icon_mairu@2x.png" alt="">
                         </div>
                         <div class="recordCon">
                             <div class="recordTop">
@@ -53,7 +53,7 @@
                     </div>
                     <div class="recordItem">
                         <div class="recordLogoCon">
-                            <img class="recordLogo" src="/publicOfferingSelf/static/img/account_icon_mairu@2x.png" alt="">
+                            <img class="recordLogo" src="/account/static/img/public/account_icon_mairu@2x.png" alt="">
                         </div>
                         <div class="recordCon">
                             <div class="recordTop">
@@ -68,7 +68,7 @@
                     </div>
                     <div class="recordItem">
                         <div class="recordLogoCon">
-                            <img class="recordLogo" src="/publicOfferingSelf/static/img/account_icon_mairu@2x.png" alt="">
+                            <img class="recordLogo" src="/account/static/img/public/account_icon_mairu@2x.png" alt="">
                         </div>
                         <div class="recordCon">
                             <div class="recordTop">
@@ -83,7 +83,7 @@
                     </div>
                     <div class="recordItem">
                         <div class="recordLogoCon">
-                            <img class="recordLogo" src="/publicOfferingSelf/static/img/account_icon_mairu@2x.png" alt="">
+                            <img class="recordLogo" src="/account/static/img/public/account_icon_mairu@2x.png" alt="">
                         </div>
                         <div class="recordCon">
                             <div class="recordTop">
@@ -98,7 +98,7 @@
                     </div>
                     <div class="recordItem">
                         <div class="recordLogoCon">
-                            <img class="recordLogo" src="/publicOfferingSelf/static/img/account_icon_mairu@2x.png" alt="">
+                            <img class="recordLogo" src="/account/static/img/public/account_icon_mairu@2x.png" alt="">
                         </div>
                         <div class="recordCon">
                             <div class="recordTop">
@@ -113,7 +113,7 @@
                     </div>
                     <div class="recordItem">
                         <div class="recordLogoCon">
-                            <img class="recordLogo" src="/publicOfferingSelf/static/img/account_icon_mairu@2x.png" alt="">
+                            <img class="recordLogo" src="/account/static/img/public/account_icon_mairu@2x.png" alt="">
                         </div>
                         <div class="recordCon">
                             <div class="recordTop">
@@ -128,7 +128,7 @@
                     </div>
                     <div class="recordItem">
                         <div class="recordLogoCon">
-                            <img class="recordLogo" src="/publicOfferingSelf/static/img/account_icon_mairu@2x.png" alt="">
+                            <img class="recordLogo" src="/account/static/img/public/account_icon_mairu@2x.png" alt="">
                         </div>
                         <div class="recordCon">
                             <div class="recordTop">
@@ -143,7 +143,7 @@
                     </div>
                     <div class="recordItem">
                         <div class="recordLogoCon">
-                            <img class="recordLogo" src="/publicOfferingSelf/static/img/account_icon_mairu@2x.png" alt="">
+                            <img class="recordLogo" src="/account/static/img/public/account_icon_mairu@2x.png" alt="">
                         </div>
                         <div class="recordCon">
                             <div class="recordTop">
@@ -158,22 +158,7 @@
                     </div>
                     <div class="recordItem">
                         <div class="recordLogoCon">
-                            <img class="recordLogo" src="/publicOfferingSelf/static/img/account_icon_mairu@2x.png" alt="">
-                        </div>
-                        <div class="recordCon">
-                            <div class="recordTop">
-                                <div class="recordName">中融货币A</div>
-                                <div class="recordMoney">350,000.00元</div>
-                            </div>
-                            <div class="recordBottom">
-                                <div class="recordDate">2019-09-23 11:00:35</div>
-                                <div class="recordStatus">交易失败</div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="recordItem">
-                        <div class="recordLogoCon">
-                            <img class="recordLogo" src="/publicOfferingSelf/static/img/account_icon_mairu@2x.png" alt="">
+                            <img class="recordLogo" src="/account/static/img/public/account_icon_mairu@2x.png" alt="">
                         </div>
                         <div class="recordCon">
                             <div class="recordTop">
@@ -187,7 +172,7 @@
                         </div>
                     </div>
                 </div>
-                @@include('../../common/views/goTop.html')   
+                @@include('../../../common/views/goTop.html')   
             </div>
         </div> 
     </div>
@@ -196,8 +181,8 @@
         {{#each this}}
         <div class="searchItem" titleId="{{titleId}}">
             <span class="screeningWord">{{title}}</span>
-            <img class="screeningBtn xiaLaLogo" src="/publicOfferingSelf/static/img/account_icon_xiala@2x.png" alt="">
-            <img class="screeningBtn shouQiLogo" src="/publicOfferingSelf/static/img/account_icon_shouqi@2x.png" alt="">
+            <img class="screeningBtn xiaLaLogo" src="/account/static/img/public/account_icon_xiala@2x.png" alt="">
+            <img class="screeningBtn shouQiLogo" src="/account/static/img/public/account_icon_shouqi@2x.png" alt="">
         </div>
         {{/each}}
     </script>
@@ -207,7 +192,7 @@
             <div class="detailItem" searchType="{{searchType}}" detailId="{{detailId}}">
                 <div class="detailValue">{{title}}</div>
                 <div class="detailStatus">
-                    <img class="detailStatusLogo" src="/publicOfferingSelf/static/img/account_icon_check@2x.png" alt="">
+                    <img class="detailStatusLogo" src="/account/static/img/public/account_icon_check@2x.png" alt="">
                 </div>
             </div>
         {{/each}}
@@ -217,12 +202,12 @@
         {{#each this}}
         <div class="searchItem">
             <span class="screeningWord">全部</span>
-            <img class="screeningBtn" src="/publicOfferingSelf/static/img/account_icon_xiala@2x.png" alt="">
+            <img class="screeningBtn" src="/account/static/img/public/account_icon_xiala@2x.png" alt="">
         </div>
         {{/each}}
     </script>
 
 	@@include('@pathInclude/views/footer.html')
-    <script src="/publicOfferingSelf/static/js/transactionRecords.js"></script>
+    <script src="/account/static/js/public/transactionRecords.js"></script>
 </body>
 </html>

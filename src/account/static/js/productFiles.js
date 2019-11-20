@@ -23,14 +23,18 @@ $(function() {
 
   }
   $(".openOff").click(function(){
-      if($(".openOff").text() != "收起"){
+      if($(".openOff .open").text() != "收起"){
         $(".productCostDetail").addClass("openStyle")
         $(".productCostDetail").removeClass("productCostDetail");
-        $(".openOff").text("收起")
+        $(".openOff .open").text("收起")
+        $(".openOff .imgWrap .img").addClass("changeImg")
+        $(".openOff .imgWrap .img").removeClass("img")
       }else{
         $(".openStyle").addClass("productCostDetail")
-        $(".openStyle").removeClass("openStyle ");
-        $(".openOff").text("展开")
+        $(".openStyle").removeClass("openStyle");
+        $(".openOff .open").text("展开")
+        $(".openOff .imgWrap .changeImg").addClass("img")
+        $(".openOff .imgWrap .changeImg").removeClass("changeImg")
       }
   }) 
 })

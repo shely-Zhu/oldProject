@@ -43,8 +43,8 @@ $(function(){
                 callbackDone: function(json) {
                 	var resData = json.data.data;
 //                  console.log(json.data)
-					if(!resData.h5Title){//标题
-						that.$e.contentWrap.text(resData.h5Title);
+					if(!!resData.h5Title){//标题
+						that.$e.HeadBarpathName.text(resData.h5Title);
 					}
 					that.$e.contentWrap.html(resData.content);
 					if(resData.h5Type == "2") { //标题 h5模板类型 1图片 2其他
