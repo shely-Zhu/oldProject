@@ -263,4 +263,7 @@ module.exports = {
     './include/js/modelPage/rich_template': './src/include/js/modelPage/rich_template.js',
     // 了解恒天
     './homePage/static/js/understandHT': './src/homePage/static/js/understandHT.js',
+
+    //私募资产详情
+    './account/static/js/privateDetail': './src/account/static/js/privateDetail.js',
 }
