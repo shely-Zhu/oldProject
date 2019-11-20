@@ -1,6 +1,6 @@
 /**
 * 消息中心
-* @author yanruiting 2019-11-15
+* @author yanruiting 2019-11-18
 */
 require('@pathIncludJs/vendor/config.js');
 require('@pathIncludJs/vendor/zepto/callback.js');
@@ -9,7 +9,7 @@ require('@pathCommonJs/components/utils.js');
 require('@pathCommonJs/components/headBarConfig.js');
 require('@pathCommonJs/ajaxLoading.js');
 
-var tipAction = require('@pathCommonJs/components/tipAction.js');
+//var tipAction = require('@pathCommonJs/components/tipAction.js');
 var splitUrl = require('@pathCommonJs/components/splitUrl.js')();
 var generateTemplate = require('@pathCommonJsComBus/generateTemplate.js');
 
@@ -17,7 +17,7 @@ $(function(){
 	let somePage = {
 		//获取页面元素
 		$e:{
-			noticeDetailConId: $("#informsDetailWrapper"),
+			noticeDetailConId: $("#informsDetailCon"),
             informsDetailTemplateId:$('#informsDetail-template'),//消息中心模板Id
 		},
 		//全局变量
@@ -42,19 +42,24 @@ $(function(){
         // 获取通知详情
         getInformsDetail() {
         	var that=this;
+            if(that.gV.mesType == 4) { // 消息通知列表
+                var ajaxUrl = site_url.getSystemNotification_api
+            } else if (that.gV.mesType == 1 || that.gV.mesType == 2 || that.gV.mesType == 3) { // 非通知消息列表
+                var ajaxUrl = site_url.getNoticeAndTransDynamic_api
+            }
             var obj=[{
-                url: site_url.getSystemNotification_api,
+                url: ajaxUrl,
                 data:{
                     id: that.gV.noticeId
                 },
                 needDataEmpty: true,
                 callbackDone: function(json) {
                     var data=json.data; 
-                    $("#informsDetailWrapper")[0].innerHTML = data.mesContent
+                    $("#informsDetailContent")[0].innerHTML = data.mesContent
                      //generateTemplate(data,that.$e.noticeConTemplateId,that.$e.noticeItemListTemplateId);               
                 },
                 callbackFail: function(json) {
-                    tipAction(json.message);
+                    //tipAction(json.message);
                 }
             }];                        
             $.ajaxLoading(obj); 

@@ -150,8 +150,12 @@ module.exports = function() {
     //会员俱乐部-活动列表-获取城市定位
     this.getCity_api = http_url.web_url + '/marketing/frontend/getCity';
 
+   /*------------------- 私募 start ------------------------------*/
     //私募历史明细
     this.curveHistoryList_api =http_url.web_url +'/account/positions/curveHistoryList' ;
+    this.dealDetailList_api =http_url.web_url +'/account/positions/dealDetailList' ;
+
+     /*------------------- 消息中心 end ------------------------------*/
 
     /*------------------- 消息中心 start ------------------------------*/
 
@@ -159,10 +163,14 @@ module.exports = function() {
     this.getNoticeTypeList_api = http_url.web_url + '/account/account/getNoticeTypeList';
     // 通知消息列表
     this.systemNotificationList_api = http_url.web_url + '/account/account/systemNotificationList';
-    // 非通知消息列表
-    this.getNoticeAndTransDynamic_api = http_url.web_url + '/account/account/getNoticeAndTransDynamic';
+    // 非通知消息列表  
+    this.noticeAndTransDynamicList_api = http_url.web_url + '/account/account/noticeAndTransDynamicList';
     // 通知详情
     this.getSystemNotification_api = http_url.web_url + '/account/account/getSystemNotification';
+    //查询单条文章(APPCMS后台)
+    this.getArticle_api = http_url.web_url + '/content/frontend/getArticle';
+    // 非通知详情
+    this.getNoticeAndTransDynamic_api = http_url.web_url + '/account/account/getNoticeAndTransDynamic';
 
     /*------------------- 消息中心 end ------------------------------*/
 

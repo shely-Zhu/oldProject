@@ -97,7 +97,7 @@ $(function(){
                     "pageSize": "10" //非必须，默认为10
                 }
             } else if (that.gV.mesType == 1 || that.gV.mesType == 2 || that.gV.mesType == 3) { // 非通知消息列表
-                var ajaxUrl = site_url.getNoticeAndTransDynamic_api
+                var ajaxUrl = site_url.noticeAndTransDynamicList_api
                 var params = {
                     "pageNo": that.gV.pageCurrent, //非必须，默认为1
                     "pageSize": "10", //非必须，默认为10
