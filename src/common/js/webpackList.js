@@ -240,9 +240,11 @@ module.exports = {
     './account/static/js/historyDetail': "./src/account/static/js/historyDetail.js",
     //交易明细
     './account/static/js/transactionDetail': "./src/account/static/js/transactionDetail.js",
+    //产品档案
+    './account/static/js/productFiles': "./src/account/static/js/productFiles.js",
 
     //其他资产
-    './account/static/js/otherAssets': './src/account/static/js/otherAssets.js',
+    './wealthResources/otherAssets/static/js/otherAssets': './src/wealthResources/otherAssets/static/js/otherAssets.js',
     //已确认交易
     './account/static/js/private/confirmTransaction': './src/account/static/js/private/confirmTransaction.js',
     //公募资产
@@ -257,10 +259,13 @@ module.exports = {
     './mine/static/js/memberClub/activityEnrolment': './src/mine/static/js/memberClub/activityEnrolment.js',
     // 消息中心-通知详情
     './homePage/static/js/noticeDetail': './src/homePage/static/js/noticeDetail.js',
-
+    //include---富文本模板
+    './include/js/modelPage/rich_template': './src/include/js/modelPage/rich_template.js',
     // 了解恒天
     './homePage/static/js/understandHT': './src/homePage/static/js/understandHT.js',
 
     // 自选公募交易记录
     './publicOfferingSelf/static/js/transactionRecords': './src/publicOfferingSelf/static/js/transactionRecords.js',
+    //私募资产详情
+    './account/static/js/privateDetail': './src/account/static/js/privateDetail.js',
 }

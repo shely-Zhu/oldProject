@@ -11,23 +11,73 @@
 </head>
 <body>
 	<!-- @@include('@pathCommonViews/load.html') -->
-	<!--@@include('@pathCommonViews/noData.html')  -->
+	<!--@@include('@pathCommonViews/noDataImg.html')  -->
 	<!-- @@include('@pathCommonViews/loading/listLoading.html') -->
 	
 	<!-- 月度报告详情 -->
 	<div class="monthReportDetail">
-		@@include('@pathCommonViews/headBarConfig.html',{"pathName":"月度报告详情"}) 
+		<!-- 月度报告详情页头部 -->
+		@@include('@pathCommonViews/headBarConfig.html',{"pathName":"月度报告详情页","bgColors":"#475A95,#051445","showType":"1"})
 
+		<!-- 预读报告头部客户信息  start -->
 		<div class="reportDetailHeader">
+			<div class="reportClientInfo">
+				<div class="mui-row clientNameInfo">
+					<div class="mui-col-xs-9">
+						<p class="clientTitle">客户名称</p>
+						<p class="clientName">这里是机构名称这里</p>
+					</div>
+					<div class="mui-col-xs-3 clientLevel">
+
+					</div>
+				</div>
+				<div class="mui-row clientMonth">
+					<div class="mui-col-xs-6">
+						<p>报告月份</p>
+						<p class="reportMonth">2019年5月</p>
+					</div>
+					<div class="mui-col-xs-6">
+						<p>客户编号</p>
+						<p class="reportMonth">01088808008</p>
+					</div>
+				</div>
+
+			</div>
 			
 		</div>
+		<!-- 预读报告头部客户信息  end -->
 
+		<!-- 月末持仓总览、本月交易明细 start -->
+		<div class="reportContainer mui-content">
+			
+			
 
+		</div>
+		<!-- 月末持仓总览、本月交易明细 end -->
+
+		<script id="transaction-template" type="text/x-handlebars-template">
+			{{! 列表 内容 使用mui的上拉加载}}
+			<div class="list">
+				{{! list是包裹上拉加载区域的，在js中计算当前页面中的list高度，不能超出一屏}}
+
+				{{! 初始化上拉加载区域，使用contentWrapper class}}
+				{{! contentWrapper 需要添加样式，具体见less文件}}
+				<div class="contentWrapper">
+
+					<ul class="mui-table-view">
+						<li class="mui-table-view-cell">
+						{{! 所有内容  需要放在这个li里，且里面不能再用Li元素}}
+						{{{content}}}
+
+						</li>
+					</ul>
+
+				</div>
+			</div>
+		</script>
 		
 
 	</div>
-
-
 
 
 	@@include('@pathInclude/views/footer.html')

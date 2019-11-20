@@ -23,18 +23,50 @@ $(function(){
 		$e:{
 			noData: $('.noData'), //没有数据的结构
             listLoading: $('.listLoading'), //所有数据区域，第一次加载的loading结构
-            activityListTemp:$('#activityList-template'),//公共推荐活动模板类名
+            ListSlot:$('.listHasData'),//插入已报名活动位置
+            listTemp:$('#activityEn-template'),//已报名活动模板类名          
 		},
 		gV:{
 			ListData: [
                 [],
                 []
             ], // 有活动的数据
+            search: false, // 搜索
 		},
 		init: function() {
             var that = this;
-            // that.getData();
+            that.getData();
             that.events();
+        },
+        getData:function(){
+            var that = this
+
+
+            var obj = [{
+                url: site_url.queryGrowthDetailList_api, //成长值流水
+                data: {},
+                needDataEmpty: false,
+                callbackDone: function(json) {
+                    var dataList;
+                    console.log(json.data)
+                    // 待定
+                    if (json.data.pageItems.totalCount == 0) { // 没有记录不展示
+                        that.$e.noData.show();
+                        return false;
+                    } else {
+                        dataList = json.data.pageList;
+                    }
+                    setTimeout(function() {
+                        // 将列表插入到页面上
+                        generateTemplate(dataList, that.$e.ListSlot, that.$e.listTemp);
+                    }, 200)
+
+                },
+                callbackFail: function(json) {
+                    tipAction(json.msg);
+                }
+            }]
+            $.ajaxLoading(obj);
         },
 		events:function(){
 			var that = this

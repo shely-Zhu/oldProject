@@ -167,6 +167,8 @@ module.exports = function() {
     this.noticeAndTransDynamicList_api = http_url.web_url + '/account/account/noticeAndTransDynamicList';
     // 通知详情
     this.getSystemNotification_api = http_url.web_url + '/account/account/getSystemNotification';
+    //查询单条文章(APPCMS后台)
+    this.getArticle_api = http_url.web_url + '/content/frontend/getArticle';
     // 非通知详情
     this.getNoticeAndTransDynamic_api = http_url.web_url + '/account/account/getNoticeAndTransDynamic';
 

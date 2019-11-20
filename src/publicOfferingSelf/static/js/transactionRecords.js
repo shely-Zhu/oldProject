@@ -23,6 +23,8 @@ $(function(){
             searchDetailListTemplateId:$('#searchDetailList-template'),//筛选详细内容模板Id
             recordListWraperBoxId: $("#recordListWraper"), // 交易列表容器
             recordListTemplateId:$('#recordList-template'),//交易列表模板Id
+            noData: $('.noData'), //没有数据的结构
+            listLoading: $('.listLoading'), //所有数据区域，第一次加载的loading结构
 		},
 		//全局变量
 		gV:{
@@ -54,6 +56,7 @@ $(function(){
 		init:function(){
             var that=this;
             this.initMask();
+            this.initMui();
             this.setSearchTitle()
             this.events()        
         },
@@ -82,7 +85,7 @@ $(function(){
                         contentnomore: '没有更多了', //可选，请求完毕若没有更多数据时显示的提醒内容；
                         callback: function() {
                             //执行ajax请求
-                            that.getInformsListData(this);
+                            //that.getInformsListData(this);
                         }
                     }
                 }
@@ -149,8 +152,11 @@ $(function(){
                 	generateTemplate(that.gV.searchDetailList[titleId],that.$e.recordSearchDetailBoxId,that.$e.searchDetailListTemplateId)
                 	$(this).addClass("searchItemActive").siblings('.searchItem').removeClass('searchItemActive');
                 	that.$e.recordSearchDetailBoxId.css("display", "block")
-                	if(titleId == 0) {
-                		that.$e.recordSearchDetailBoxId.find(".detailItem").eq(that.gV.selectedAll).addClass("detailActive").siblings('.detailItem').removeClass('detailActive')
+                	switch(titleId) {
+                		case '0': that.$e.recordSearchDetailBoxId.find(".detailItem").eq(that.gV.selectedAll).addClass("detailActive").siblings('.detailItem').removeClass('detailActive');break;
+                		case '1': that.$e.recordSearchDetailBoxId.find(".detailItem").eq(that.gV.selectedstatus).addClass("detailActive").siblings('.detailItem').removeClass('detailActive');break;
+                		case '2': that.$e.recordSearchDetailBoxId.find(".detailItem").eq(that.gV.selectedTime).addClass("detailActive").siblings('.detailItem').removeClass('detailActive');break;
+                		case '3': that.$e.recordSearchDetailBoxId.find(".detailItem").eq(that.gV.selectedBankCard).addClass("detailActive").siblings('.detailItem').removeClass('detailActive');break;
                 	}
                 	//that.$e.recordSearchDetailBoxId.find(".detailItem").eq()
                 	that.gV.mask.show()
@@ -162,8 +168,11 @@ $(function(){
             	var searchType = $(this).attr("searchType")
                 if(!$(this).is('.detailActive')) {
                 	$(this).addClass("detailActive").siblings('.detailItem').removeClass('detailActive');
-                	if(searchType == 0) {
-                		that.gV.selectedAll = detailId
+                	switch(searchType) {
+                		case '1': that.gV.selectedAll = detailId - 1;break;
+                		case '2': that.gV.selectedstatus = detailId - 1;break;
+                		case '3': that.gV.selectedTime = detailId - 1;break;
+						case '4': that.gV.selectedBankCard = detailId - 1;break;
                 	}
                 	$('.searchItem').removeClass("searchItemActive")
                 	that.$e.recordSearchDetailBoxId.css("display", "none")
