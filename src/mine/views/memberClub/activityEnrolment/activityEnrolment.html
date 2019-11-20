@@ -19,11 +19,11 @@
         </div>
         <!-- @@include('@pathCommonViews/load.html') -->
         @@include('@pathCommonViews/noDataImg.html')
-        <!-- @@include('@pathCommonViews/loading/listLoading.html') -->
+        @@include('@pathCommonViews/loading/listLoading.html')
         <!-- 有活动 -->
         <div class="dd_radar HasData">
-            <ul>
-                <li>
+            <ul class="listHasData">
+                <!-- <li>
                     <img src="/mine/static/img/Life_bg_picturer@2x.png" alt="">
                     <p>恒天豪礼，中秋试手气恒天豪礼，中秋试手气恒天豪礼，中秋试手气</p>
                     <div class="sign">
@@ -45,7 +45,7 @@
                         <div class="timeco">报名时间&nbsp;2019-09-10&nbsp;12:00</div>
                         <div class="timeBtn">分享给好友</div>
                     </div>
-                </li>
+                </li> -->
             </ul>
         </div>
         <!-- 无数据时显示 -->
@@ -55,7 +55,7 @@
         </div>
 
         <!-- 更多精彩活动 -->
-        <div class="more" id="activityList">
+        <div class="more">
             <div class="title">
                 <p class="firstp"></p>
                 <div>更多精彩活动</div>
@@ -87,6 +87,22 @@
             </ul>
         </div>
    </div>
+
+   <script id="activityEn-template" type="text/x-handlebars-template">
+    {{#each this}}
+        <li>
+            <img src="/mine/static/img/Life_bg_picturer@2x.png" alt="">
+            <p>恒天豪礼，中秋试手气恒天豪礼，中秋试手气恒天豪礼，中秋试手气</p>
+            <div class="sign">
+                <span class="no">未签到</span>
+            </div> 
+            <div class="time">
+                <div class="timeco">报名时间&nbsp;2019-09-10&nbsp;12:00</div> 
+                <div class="timeBtn">分享给好友</div>
+            </div>
+        </li>
+    {{/each}}
+    </script>
 
     @@include('@pathInclude/views/footer.html')
     <script src="/include/js/iscroll.js"></script>
