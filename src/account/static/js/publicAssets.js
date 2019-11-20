@@ -5,14 +5,12 @@
  * @description:
  * 公募持仓页面
  */
-
 require('../../../include/js/vendor/config.js');
 require('../../../include/js/vendor/zepto/callback.js');
 require('../../../include/js/vendor/zepto/deferred.js');
 require('../../../common/js/components/utils.js');
 require('../../../common/js/ajaxLoading.js');
-var splitUrl = require('@pathCommonJs/components/splitUrl.js')();
-var generateTemplate = require('@pathCommonJsComBus/generateTemplate.js');
+require('@pathCommonJs/components/headBarConfig.js');
 
 $(function () {
 
@@ -52,6 +50,10 @@ $(function () {
                             return options.inverse(this);
                         }
                     });
+                    //设置将数字转为中文的方法
+                    Handlebars.registerHelper("noToChinese", function (value, options) {
+                        return that.noToChinese(value);
+                    });
                     //列表渲染
                     var tplm = $("#dataLists").html();
                     var template = Handlebars.compile(tplm);
@@ -71,12 +73,21 @@ $(function () {
                 that.gV.showBankList = !that.gV.showBankList;
                 if (that.gV.showBankList) {
                     $('.bank_list').show();
-                    $('#bank_screen iconfont').html('&#xe62a;');
+                    $('#bank_screen .iconfont').html('&#xe62a;');
                 } else {
                     $('.bank_list').hide();
-                    $('#bank_screen iconfont').html('&#xe62a;');
+                    $('#bank_screen .iconfont').html('&#xe609;');
                 }
-
+            })
+            //银行卡列表点击
+            $('.bank_list .bank_screen').on('click', function(){
+                $(this).find('.iconfont').removeClass('hide');
+                $(this).siblings().find('.iconfont').addClass('hide');
+                $('#bank_screen .bank_screen_name').html($(this).find('.bank_screen_name').html());
+                //选择后将列表关闭
+                that.gV.showBankList = !that.gV.showBankList;
+                $('.bank_list').hide();
+                $('#bank_screen .iconfont').html('&#xe609;');
             })
 
             // 头部文案提示(金钱展示隐藏)
@@ -112,6 +123,43 @@ $(function () {
                 $('.mask').hide();
                 $('.tipContainer').hide();
             })
+        },
+        //数字转中文 例如1转为一
+        noToChinese: function (num) {
+            if (!/^\d*(\.\d*)?$/.test(num)) {
+                alert("Number is wrong!");
+                return "Number is wrong!";
+            }
+            var AA = new Array("零", "一", "二", "三", "四", "五", "六", "七", "八", "九");
+            var BB = new Array("", "十", "百", "千", "万", "亿", "点", "");
+            var a = ("" + num).replace(/(^0*)/g, "").split("."),
+                k = 0,
+                re = "";
+            for (var i = a[0].length - 1; i >= 0; i--) {
+                switch (k) {
+                    case 0:
+                        re = BB[7] + re;
+                        break;
+                    case 4:
+                        if (!new RegExp("0{4}\\d{" + (a[0].length - i - 1) + "}$").test(a[0]))
+                            re = BB[4] + re;
+                        break;
+                    case 8:
+                        re = BB[5] + re;
+                        BB[7] = BB[5];
+                        k = 0;
+                        break;
+                }
+                if (k % 4 == 2 && a[0].charAt(i + 2) != 0 && a[0].charAt(i + 1) == 0) re = AA[0] + re;
+                if (a[0].charAt(i) != 0) re = AA[a[0].charAt(i)] + BB[k % 4] + re;
+                k++;
+            }
+            if (a.length > 1) //加上小数部分(如果有小数部分) 
+            {
+                re += BB[6];
+                for (var i = 0; i < a[1].length; i++) re += AA[a[1].charAt(i)];
+            }
+            return re;
         },
     };
     somePage.init();

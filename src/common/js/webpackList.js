@@ -249,8 +249,8 @@ module.exports = {
     './account/static/js/informationDisclosure': "./src/account/static/js/informationDisclosure.js",
     //其他资产
     './wealthResources/otherAssets/static/js/otherAssets': './src/wealthResources/otherAssets/static/js/otherAssets.js',
-    //已确认交易
-    './account/static/js/private/confirmTransaction': './src/account/static/js/private/confirmTransaction.js',
+    //已确认交易 公共js
+    './account/static/js/common/transcationTem': './src/account/static/js/common/transcationTem.js',
     //待确认交易
     './account/static/js/private/tobeConfirmTransaction': './src/account/static/js/private/tobeConfirmTransaction.js',
     //公募资产

@@ -92,7 +92,7 @@ var mymessage = Mock.mock({
 
                 "invTypCom": "10300",//基金类型
 
-                "inTransitNum": "0", // 待确认交易笔数
+                "inTransitNum": "1", // 待确认交易笔数
 
                 "trDate": "2018-04-08", //净值日期
 
@@ -181,7 +181,7 @@ var mymessage = Mock.mock({
 
                 "invTypCom": "10300",//基金类型
 
-                "inTransitNum": "0", // 待确认交易笔数
+                "inTransitNum": "3", // 待确认交易笔数
 
                 "trDate": "2018-04-08", //净值日期
 
@@ -354,7 +354,7 @@ var mymessage = Mock.mock({
 
                 "invTypCom": "10300",//基金类型
 
-                "inTransitNum": "0", // 待确认交易笔数
+                "inTransitNum": "5", // 待确认交易笔数
 
                 "trDate": "2018-04-08", //净值日期
 
