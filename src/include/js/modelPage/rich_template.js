@@ -12,12 +12,10 @@ require('../vendor/zepto/callback.js');
 require('../vendor/zepto/deferred.js');
 //黑色提示条
 var tipAction = require('../../../common/js/components/tipAction.js');
-//require('../../../common/js/components/utils.js');
 require('@pathCommonJs/components/utils.js');
 require('@pathCommonJs/components/headBarConfig.js');
 require('@pathCommonJs/ajaxLoading.js');
 
-//var tipAction = require('@pathCommonJs/components/tipAction.js');
 var splitUrl = require('@pathCommonJs/components/splitUrl.js')();
 
 
@@ -51,8 +49,8 @@ $(function(){
 					that.$e.contentWrap.html(resData.content);
 					if(resData.h5Type == "2") { //标题 h5模板类型 1图片 2其他
 						that.$e.contentWrap.css({
-							"margin":"1rem 0 0",
-							"padding":".5rem"
+//							"margin":"1rem 0 0",
+							"padding":".5rem .5rem 0"
 						})
 					}
 					
