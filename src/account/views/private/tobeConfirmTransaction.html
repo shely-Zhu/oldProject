@@ -7,8 +7,8 @@
 
 <head>
     @@include('@pathInclude/views/meta.html')
-    <link rel="stylesheet" href="/account/static/css/private/confirmTransaction.css">
-    <title>已确认交易</title>
+    <link rel="stylesheet" href="/account/static/css/private/tobeConfirmTransaction.css">
+    <title>待确认交易</title>
 </head>
 
 <body>
@@ -180,7 +180,18 @@
                     <!-- 转让 -->
                     <!-- 受让 -->
                     <div class="transList">
+                        <!-- 左上角小框 -->
                         <div class="statusTip">转受让撮合驳回</div>
+                        <!-- 左上角小框 -->
+                        <!-- 右上角文字 -->
+                        <div class="textTip">
+                            <span>转让方：</span>
+                            <span>未双录</span>
+                            <span>受让方：</span>
+                            <span>已双录</span>
+
+                        </div>
+                        <!-- 右上角文字 -->
                         <!-- 名称 -->
                         <div class="listName mt30">(DZ银杏1162号)恒天稳谊16号私募投资基 ZYFG恒天稳谊16号私募投资基ZYFG</div>
                         <!-- 名称 -->
@@ -209,6 +220,7 @@
                             <span>当前进度已截止</span>
                             <a href="">查看具体情况</a>
                             <div class="toDetail">详情</div>
+                            <div class="cancelBtn">取消转让</div>
                         </div>
                         <!-- 进度 -->
                         <!-- 受让图片 -->
@@ -261,6 +273,6 @@
 @@include('@pathInclude/views/footer.html')
 <!-- 添加埋点 -->
 <script src="/include/js/iscroll.js"></script>
-<script src="/account/static/js/private/confirmTransaction.js"></script>
+<script src="/account/static/js/private/tobeConfirmTransaction.js"></script>
 
 </html>
