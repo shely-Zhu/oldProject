@@ -209,7 +209,8 @@ module.exports = {
     './mine/static/js/monthReport/monthReportDetail': './src/mine/static/js/monthReport/monthReportDetail.js',
     // 登录日志查询页面
     './mine/static/js/journal': './src/mine/static/js/journal.js',
-
+    // 交易明细页面
+    './mine/static/js/transactionDetails': './src/mine/static/js/transactionDetails.js',
     // 会员权益成长值记录
     './mine/static/js/membershipInterestsRecord': './src/mine/static/js/membershipInterestsRecord.js',
     // 会员权益详情
@@ -242,7 +243,8 @@ module.exports = {
     './account/static/js/transactionDetail': "./src/account/static/js/transactionDetail.js",
     //产品档案
     './account/static/js/productFiles': "./src/account/static/js/productFiles.js",
-
+    //信息披露
+    './account/static/js/informationDisclosure': "./src/account/static/js/informationDisclosure.js",
     //其他资产
     './wealthResources/otherAssets/static/js/otherAssets': './src/wealthResources/otherAssets/static/js/otherAssets.js',
     //已确认交易 公共js
@@ -266,8 +268,9 @@ module.exports = {
     // 了解恒天
     './homePage/static/js/understandHT': './src/homePage/static/js/understandHT.js',
 
-    // 自选公募交易记录
-    './publicOfferingSelf/static/js/transactionRecords': './src/publicOfferingSelf/static/js/transactionRecords.js',
     //私募资产详情
     './account/static/js/privateDetail': './src/account/static/js/privateDetail.js',
+
+    // 自选公募交易记录
+    './account/static/js/public/transactionRecords': './src/account/static/js/public/transactionRecords.js',
 }

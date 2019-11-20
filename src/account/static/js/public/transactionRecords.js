@@ -23,11 +23,13 @@ $(function(){
             searchDetailListTemplateId:$('#searchDetailList-template'),//筛选详细内容模板Id
             recordListWraperBoxId: $("#recordListWraper"), // 交易列表容器
             recordListTemplateId:$('#recordList-template'),//交易列表模板Id
-            noData: $('.noData'), //没有数据的结构
+            noData: $('.noDataCon'), //没有数据的结构
             listLoading: $('.listLoading'), //所有数据区域，第一次加载的loading结构
 		},
 		//全局变量
 		gV:{
+            pageCurrent: 1, //当前页码，默认为1
+            pageSize: 10,
 			mask: null,
 			searchTitleList: [{
 				title: '全部',
@@ -73,7 +75,7 @@ $(function(){
         //初始化mui的上拉加载
         initMui: function() {
             var that = this;
-            var height = windowHeight - $(".HeadBarConfigBox").height();
+            var height = windowHeight - $(".HeadBarConfigBox").height() - $("#recordSearch").height()-8;
             if (!$('.list').hasClass('setHeight')) {
                 $('.list').height(height).addClass('setHeight');
             }
@@ -84,8 +86,7 @@ $(function(){
                         contentrefresh: '拼命加载中',
                         contentnomore: '没有更多了', //可选，请求完毕若没有更多数据时显示的提醒内容；
                         callback: function() {
-                            //执行ajax请求
-                            //that.getInformsListData(this);
+                            that.getRecordsData(this);
                         }
                     }
                 }
@@ -93,50 +94,59 @@ $(function(){
 
             //init后需要执行ready函数，才能够初始化出来
             mui.ready(function() {
-
-                //隐藏当前的加载中loading
                 if (!$('.list').hasClass('hasPullUp')) {
                     $('.list').find('.mui-pull-bottom-pocket').addClass('mui-hidden');
                 }
-
-                //显示loading
                 that.$e.listLoading.show();
-
-                //这一句初始化并第一次执行mui上拉加载的callback函数
                 mui('.contentWrapper').pullRefresh().pullupLoading();
-
-                //隐藏loading，调试接口时需要去掉
-                //setTimeout(function(){
                 that.$e.listLoading.hide();
-                //}, 2000);
-
-                //为$id添加hasPullUp  class
                 $('.list').addClass('hasPullUp');
             });
         },
         // 查询交易记录列表
-        searchRecordList() {
+        getRecordsData(t) {
         	var that=this;
-            /*if(that.gV.mesType == 4) { // 消息通知列表
-                var ajaxUrl = site_url.getSystemNotification_api
-            } else if (that.gV.mesType == 1 || that.gV.mesType == 2 || that.gV.mesType == 3) { // 非通知消息列表
-                var ajaxUrl = site_url.getNoticeAndTransDynamic_api
-            }
             var obj=[{
-                url: ajaxUrl,
-                data:{
-                    id: that.gV.noticeId
-                },
+                url: site_url.dealDetailList_api,
+                data:{},
                 needDataEmpty: true,
                 callbackDone: function(json) {
-                    var data=json.data; 
-                     //generateTemplate(data,that.$e.noticeConTemplateId,that.$e.noticeItemListTemplateId);               
+                    var data;
+                    /*if (json.data.pageItems.totalCount == 0) { // 没有记录不展示
+                        that.$e.noData.show();
+                        return false;
+                    } else {
+                        data = json.data.pageList;
+                    }*/
+                    data = json.data.pageList
+                    setTimeout(function() {
+                        if (data.length < that.gV.pageSize) {
+                            if (that.gV.pageCurrent == 1) { //第一页时
+                                if (data.length == 0) {
+                                    that.$e.noData.show();
+                                    return false;
+                                } else {
+                                    t.endPullupToRefresh(true);
+                                }
+                            } else {
+                                t.endPullupToRefresh(true);
+                            }
+                        } else {
+                            t.endPullupToRefresh(false);
+                        }
+
+                        // 页面++
+                        that.gV.pageCurrent++;
+                        // 将交易记录列表插入到页面上
+                        generateTemplate(data,that.$e.recordListWraperBoxId,that.$e.recordListTemplateId);
+
+                    }, 200)             
                 },
                 callbackFail: function(json) {
-                    //tipAction(json.message);
+                    tipAction(json.message);
                 }
             }];                        
-            $.ajaxLoading(obj); */
+            $.ajaxLoading(obj);
         },
         events() {
         	var that = this;
@@ -158,7 +168,6 @@ $(function(){
                 		case '2': that.$e.recordSearchDetailBoxId.find(".detailItem").eq(that.gV.selectedTime).addClass("detailActive").siblings('.detailItem').removeClass('detailActive');break;
                 		case '3': that.$e.recordSearchDetailBoxId.find(".detailItem").eq(that.gV.selectedBankCard).addClass("detailActive").siblings('.detailItem').removeClass('detailActive');break;
                 	}
-                	//that.$e.recordSearchDetailBoxId.find(".detailItem").eq()
                 	that.gV.mask.show()
                 }
             })
