@@ -23,10 +23,13 @@ var pathTitle=[
         pathUrl:"eruda3" 
     },
     {
-        pathName:"消息中心" 
+        pathName:"消息中心"
     },
     {
         pathName:"了解恒天" 
+    },
+    {
+        pathName:"交易记录" 
     }
 ]
 $(function(){

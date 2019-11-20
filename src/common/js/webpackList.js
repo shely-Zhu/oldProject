@@ -260,4 +260,7 @@ module.exports = {
 
     // 了解恒天
     './homePage/static/js/understandHT': './src/homePage/static/js/understandHT.js',
+
+    // 自选公募交易记录
+    './publicOfferingSelf/static/js/transactionRecords': './src/publicOfferingSelf/static/js/transactionRecords.js',
 }

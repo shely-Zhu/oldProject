@@ -1,0 +1,130 @@
+<!-- 消息中心
+ @author yanruiting 2019-11-19
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	@@include('@pathInclude/views/meta.html') 
+	<link rel="stylesheet" href="/publicOfferingSelf/static/css/transactionRecords.css">  
+	<title>交易记录</title>
+</head>
+<body>
+	<!-- @@include('@pathCommonViews/load.html')
+        @@include('@pathCommonViews/noData.html')
+        @@include('@pathCommonViews/loading/listLoading.html') -->
+    @@include('@pathCommonViews/headBarConfig.html',{"bgColors":"#2C3E77,#273971","showType":"0","pathName":"交易记录"}) 
+    <div id="recordBox">
+        <div id="recordSearch">
+            <div id="recordSearchWrapper">
+                <!-- <div class="searchItem">
+                    <span class="screeningWord">全部</span>
+                    <img class="screeningBtn xiaLaLogo" src="/publicOfferingSelf/static/img/account_icon_xiala@2x.png" alt="">
+                    <img class="screeningBtn shouQiLogo" src="/publicOfferingSelf/static/img/account_icon_shouqi@2x.png" alt="">
+                </div>
+                <div class="searchItem">
+                    <span class="screeningWord">状态</span>
+                    <img class="screeningBtn xiaLaLogo" src="/publicOfferingSelf/static/img/account_icon_xiala@2x.png" alt="">
+                    <img class="screeningBtn shouQiLogo" src="/publicOfferingSelf/static/img/account_icon_shouqi@2x.png" alt="">
+                </div>
+                <div class="searchItem">
+                    <span class="screeningWord">时间</span>
+                    <img class="screeningBtn xiaLaLogo" src="/publicOfferingSelf/static/img/account_icon_xiala@2x.png" alt="">
+                    <img class="screeningBtn shouQiLogo" src="/publicOfferingSelf/static/img/account_icon_shouqi@2x.png" alt="">
+                </div>
+                <div class="searchItem">
+                    <span class="screeningWord">银行卡</span>
+                    <img class="screeningBtn xiaLaLogo" src="/publicOfferingSelf/static/img/account_icon_xiala@2x.png" alt="">
+                    <img class="screeningBtn shouQiLogo" src="/publicOfferingSelf/static/img/account_icon_shouqi@2x.png" alt="">
+                </div> -->
+            </div>
+            <div id="recordSearchDetail">
+                <!-- <div class="detailItem detailActive">
+                    <div class="detailValue">全部</div>
+                    <div class="detailStatus">
+                        <img class="detailStatusLogo" src="/publicOfferingSelf/static/img/account_icon_check@2x.png" alt="">
+                    </div>
+                </div>
+                <div class="detailItem">
+                    <div class="detailValue">买入</div>
+                    <div class="detailStatus">
+                        <img class="detailStatusLogo" src="/publicOfferingSelf/static/img/account_icon_check@2x.png" alt="">
+                    </div>
+                </div>
+                <div class="detailItem">
+                    <div class="detailValue">定投</div>
+                    <div class="detailStatus">
+                        <img class="detailStatusLogo" src="/publicOfferingSelf/static/img/account_icon_check@2x.png" alt="">
+                    </div>
+                </div>
+                <div class="detailItem">
+                    <div class="detailValue">分红</div>
+                    <div class="detailStatus">
+                        <img class="detailStatusLogo" src="/publicOfferingSelf/static/img/account_icon_check@2x.png" alt="">
+                    </div>
+                </div>
+                <div class="detailItem">
+                    <div class="detailValue">卖出</div>
+                    <div class="detailStatus">
+                        <img class="detailStatusLogo" src="/publicOfferingSelf/static/img/account_icon_check@2x.png" alt="">
+                    </div>
+                </div> -->
+            </div>
+        </div>
+        <div class="list">
+            <div class="contentWrapper">
+                <div id="recordListWraper">
+                    <div class="recordItem">
+                        <div class="recordLogoCon">
+                            <img class="recordLogo" src="/publicOfferingSelf/static/img/account_icon_mairu@2x.png" alt="">
+                        </div>
+                        <div class="recordCon">
+                            <div class="recordTop">
+                                <div class="recordName">中融货币A</div>
+                                <div class="recordMoney">350,000.00元</div>
+                            </div>
+                            <div class="recordBottom">
+                                <div class="recordDate">2019-09-23 11:00:35</div>
+                                <div class="recordStatus">交易失败</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                @@include('../../common/views/goTop.html')   
+            </div>
+        </div> 
+    </div>
+
+    <script id="searchTitleList-template" type="text/x-handlebars-template">
+        {{#each this}}
+        <div class="searchItem" titleId="{{titleId}}">
+            <span class="screeningWord">{{title}}</span>
+            <img class="screeningBtn xiaLaLogo" src="/publicOfferingSelf/static/img/account_icon_xiala@2x.png" alt="">
+            <img class="screeningBtn shouQiLogo" src="/publicOfferingSelf/static/img/account_icon_shouqi@2x.png" alt="">
+        </div>
+        {{/each}}
+    </script>
+
+    <script id="searchDetailList-template" type="text/x-handlebars-template">
+        {{#each this}}
+            <div class="detailItem" searchType="{{searchType}}" detailId="{{detailId}}">
+                <div class="detailValue">{{title}}</div>
+                <div class="detailStatus">
+                    <img class="detailStatusLogo" src="/publicOfferingSelf/static/img/account_icon_check@2x.png" alt="">
+                </div>
+            </div>
+        {{/each}}
+    </script>
+
+    <script id="recordList-template" type="text/x-handlebars-template">
+        {{#each this}}
+        <div class="searchItem">
+            <span class="screeningWord">全部</span>
+            <img class="screeningBtn" src="/publicOfferingSelf/static/img/account_icon_xiala@2x.png" alt="">
+        </div>
+        {{/each}}
+    </script>
+
+	@@include('@pathInclude/views/footer.html')
+    <script src="/publicOfferingSelf/static/js/transactionRecords.js"></script>
+</body>
+</html>
