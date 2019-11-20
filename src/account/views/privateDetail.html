@@ -1,0 +1,152 @@
+<!-- 
+	私募产品详情页
+
+	@author yangjinlai 20191119
+
+	type_1 对应 稳金
+
+-->
+
+<!doctype html>
+<html lang="en">
+
+<head>
+    @@include('@pathInclude/views/meta.html')
+    <link rel="stylesheet" href="/account/static/css/privateDetail.css">
+    <title></title>
+</head>
+
+<body>
+
+	<div class="privateDetail">
+
+		<div class="topContent">
+	 		@@include('@pathInclude/views/header.html') 
+
+	 		@@include('@pathCommonViews/headBarConfig.html',{"bgColors":"#595E6F, #1C2135","showType":"1"})
+
+	 		<div class="hide banner type_1">
+	 			<!-- 类型一 -->	
+	 			<div class="con">
+		 			<div class="bannerTop clearfix">
+		 			    <div class="sum fl"><span class="j_text">当前市值(元)</span><span class="j_icon"></span></div>
+		 			</div>
+		 			<div class="totalM">10,000,000.00</div>
+		 			<ul class="mui-row type">
+		 			    <li class="mui-col-sm-6 mui-col-xs-6">
+		 			        <span>持有份额</span>
+		 			        <span class="num totalShare"></span>
+		 			    </li>
+		 			    <li class="mui-col-sm-6 mui-col-xs-6">
+		 			        <span>七日年化</span>
+		 			        <span class="num sevenYearYield">--</span>
+		 			    </li>
+		 			</ul>
+		 		</div>
+
+	 			<!-- 展开按钮  -->
+	 			<div class="openButton"></div> 
+		 		
+	 		</div>
+
+	 	</div>
+
+	 	<div class="midContent">
+	 			
+	 		<div class="mui-row actionWrap">
+	 		    <div class="mui-col-sm-6 mui-col-xs-6">
+	 		    	<img class="img" src="/account/static/img/productDetail/type_1_left.png">
+	 		        <span class="txt">交易明细</span>
+	 		    </div>
+	 		    <div class="mui-col-sm-6 mui-col-xs-6">
+	 		       	<img class="img" src="/account/static/img/productDetail/type_1_right.png">
+	 		        <span class="txt">基金确认书</span>
+	 		    </div>
+	 		</div>	
+
+	 		<div class="lineWrap">
+	 			<div class="clearfix titleWrap">
+	 				<span class="title active">七日年化</span>
+	 				<span class="title">万份收益</span>
+	 				
+	 				<div class="arrow">
+	 					<span class="img"></span>
+	 				</div>
+
+	 				<span class="rightTitle">历史明细</span>
+	 			</div>
+	 			<div class="lineDraw">
+	 				<div id="line"></div>
+	 				<div class='mui-row tab'>
+	 					<span class="mui-col-sm-3 mui-col-xs-3 time active">近一个月</span>
+	 					<span class="mui-col-sm-3 mui-col-xs-3 time">近三个月</span>
+	 					<span class="mui-col-sm-3 mui-col-xs-3 time">近一年</span>
+	 					<span class="mui-col-sm-3 mui-col-xs-3 time">成立至今</span>
+	 				</div>
+	 			</div>
+
+	 		</div>
+
+	 		<div class="dealReg">
+ 				<div class="titleWrap">交易规则
+ 					<div class="arrow">
+	 					<span class="img"></span>
+	 				</div></div>
+ 				<div class="nav">
+ 					<span class="navSpan quick active">快速赎回</span>
+ 					<span class="navSpan normal">普通赎回</span>
+ 				</div>
+ 				<div class="line">
+ 					<div class="clearfix line_title">
+	 					<span class="top_l">赎回申请</span>
+	 					<span class="top_r">付款</span>
+	 				</div>
+ 					<img class="lineDiv" src="/account/static/img/productDetail/regLine.png">
+ 					<div class="clearfix line_bottom">
+	 					<span class="bottom_l">T日（交易日）</span>
+	 					<span class="bottom_r">T日（交易日）</span>
+	 				</div>
+ 				</div>
+ 				<ul class="detail">
+ 					<li>10:50前为T日，10:：50后不支持快速赎回</li>
+ 					<li>快速赎回手续费为111</li>
+ 				</ul>
+ 			</div>
+
+ 			<div class="titleWrap">产品档案
+ 				<div class="arrow">
+ 					<span class="img"></span>
+ 				</div>
+ 			</div>
+
+ 			<div class="titleWrap">信息披露
+ 				<div class="arrow">
+ 					<span class="img"></span>
+ 				</div>
+ 			</div>
+
+ 			<div class="titleWrap">人气产品
+ 				<div class="arrow">
+ 					<span class="img"></span>
+ 				</div>
+ 			</div>
+
+ 			<div class="recommend">
+ 				
+ 			</div>
+
+ 			<div class="footer">
+ 				<div class="mui-col-sm-6 mui-col-xs-6">赎回</div>
+ 				<div class="mui-col-sm-6 mui-col-xs-6">申购</div>
+ 			</div>
+
+	 	</div>
+	</div>
+
+	@@include('@pathInclude/views/footer.html')
+
+	<script src="/account/static/js/privateDetail.js"></script>
+
+</body>
+
+</html>

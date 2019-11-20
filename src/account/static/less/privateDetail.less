@@ -1,0 +1,287 @@
+/**
+ * 私募资产详情页
+ *
+ * @author yangjinlai 20191119
+ */
+
+@import url("@pathInclude/css/mui.min.css");
+@import url("@pathCommonLess/mui/resetMUI.less");
+@import url("@pathCommonLess/color.less");
+@import url("@pathCommonLess/reset.less");
+
+@import url("@pathCommonLess/chtwm.less");
+@import url("@pathCommonLess/app.less");
+
+@import url("@pathCommonLessCom/headBarConfig.less");
+
+body{
+	background: @F7FAFD
+}
+
+.privateDetail{
+
+	.hide{
+		display: none;
+	}
+
+	.topContent{
+		
+		background: @c005;
+
+		.banner{
+
+			.con{
+				background: url("/account/static/img/productDetail/banner.png");
+				height: 4.5rem;
+				background-size: 100% 100%;
+
+				.bannerTop {
+				    color: @F7DDCF;
+				    margin: 0 0.3rem;
+				    padding-top: 1.54rem;
+
+				    .sum {
+				        
+				        font-size: 0.26rem;
+				        .j_icon {
+				            width: 0.36rem;
+				            height: 0.36rem;
+				            margin-left: 0.2rem;
+				            background: url("/account/static/img/eyesee.png");
+				            background-size: 100% 100%;
+				            display: inline-block;
+				            vertical-align: middle;
+				        }
+				        .j_icon.eyecose{
+				            background: url("/account/static/img/eyeclose.png");
+				            background-size: 100% 100%;
+				        }
+				        
+				    }
+				    .assetsBtn{
+				        width: 1.5rem;
+				        height: 0.4rem;
+				        background: rgba(255, 255, 255, 0.1);
+				        border-radius: 0.25rem;
+				        font-size: 0.2rem;
+				        text-align: center;
+				        color: @c005;
+				        opacity: 0.8;
+				        line-height: 0.4rem;
+				    }
+				    
+				}
+
+				//金额
+				.totalM{
+				    font-size: 0.68rem;
+				    line-height: 0.8rem;
+				    margin: 0.1rem 0.3rem 0.22rem;
+				    font-weight:bold;
+				    color:rgba(153,81,0,1);
+				    background:linear-gradient(360deg, rgba(186,140,112,1) 0%, rgba(244,210,192,1) 100%);
+				    -webkit-background-clip:text;
+				    -webkit-text-fill-color:transparent;
+				}
+
+				// 已持仓
+				.type {
+				    width: 100%;
+				    margin: 0 0.3rem;
+				    li {
+				        span {
+				            display: block;
+				            color: @c005;
+				            opacity: 0.7;
+				            font-size: 0.26rem;
+				            &:first-child {
+				                padding-bottom: 0.2rem;
+				            }
+				        }
+				    }
+
+				    .num{
+				        font-size: 0.38rem;
+				        opacity: 1;
+				        color: @c005;
+				    }
+
+				}
+			}
+			
+			.openButton{
+				background: url("/account/static/img/productDetail/openButton.png");
+				background-size: 100% 100%;
+				height: 0.3rem;
+				width: 2.3rem;
+				margin: 0 auto;
+			}
+
+		}
+
+		
+	}
+
+	.actionWrap{
+		padding-top: 0.2rem;
+		height: 1.4rem;
+		text-align: center;
+		line-height: 1.4rem;
+
+		.img{
+			height: 0.6rem;
+			width: 0.6rem;
+			display: inline-block;
+			margin-right: 0.15rem;
+			vertical-align: middle;
+		}
+
+		.txt{
+			vertical-align: middle;
+			font-size: 0.28rem;
+		}
+	}
+
+	.titleWrap{
+		height: 0.6rem;
+		line-height: 0.6rem;
+		padding-left: 0.3rem;
+		padding-right: 0.3rem;
+		color: @272727;
+		font-size: 0.32rem;
+
+		.title{
+			display: inline-block;
+		}
+
+		.arrow{
+			float: right;
+			width: 0.3rem;
+			height: 0.6rem;
+
+			.img{
+				background: url("/account/static/img/productDetail/arrow.png");
+				background-size: 100% 100%;
+				height: 0.3rem;
+				width: 0.3rem;
+				display: block;
+				position: relative;
+				top: 50%;
+				transform: translateY(-50%);
+			}
+		}
+	}
+
+	.lineWrap{
+		padding-top: 0.5rem;
+		//height: 6.7rem;
+
+		.titleWrap{
+			color: @8A8A8A;
+
+			.title{
+
+				&:first-child{
+					margin-right: 0.6rem;
+				} 
+
+				&.active{
+					color: @272727;
+					border-bottom: 0.06rem solid @C8AB7D;
+				}
+			}
+
+			
+
+			.rightTitle{ 
+
+				float: right;
+			}
+		}
+
+		.lineDraw{
+			padding-left: 0.3rem;
+			padding-right: 0.3rem;
+
+			#line{
+				height: 4.5rem;
+			}
+
+			.tab{
+				height: 0.56rem;
+				line-height: 0.56rem;
+				font-size: 0.24rem;
+				border: 0.02rem solid @C8AB7D;
+				border-radius: 0.08rem;
+				box-sizing: content-box;
+
+				.time{
+					color: @C8AB7D;
+    				text-align: center;
+    				border-right: 0.02rem solid @C8AB7D;
+
+					&:last-child{
+						border-right: 0;
+					}
+
+					&.active{
+						background: @C8AB7D;
+						color: @c005;
+
+					}
+				}
+				
+
+				
+			}
+		}
+	}
+
+	.dealReg{
+		padding-top: 0.5rem;
+		
+		.nav{
+			margin-top: 0.6rem;
+			text-align: center;
+		    font-size: 0.28rem;
+		    color: @272727;
+		    margin-bottom: 0.6rem;
+			
+		    .navSpan{
+
+		    	padding-bottom: 0.1rem;
+		    	display: inline-block;
+
+		    	&:first-child{
+		    		margin-right: 0.3rem;
+		    	}
+
+		    	&.active{
+		    		color: @272727;
+		    		border-bottom: 0.06rem solid @C8AB7D;
+		    	}
+		    }
+		}
+
+		.line{
+			padding-left: 0.3rem;
+			padding-right: 0.3rem;
+			font-size: 0.28rem;
+			color: @9B9B9B;
+			margin-bottom: 0.3rem;
+
+			.img{
+				
+			}
+
+			.top_r, .bottom_r{
+				float: right;
+			}
+		}
+
+		.detail{
+			padding-left: 0.3rem;
+			padding-right: 0.3rem;
+		}
+	}
+}

@@ -239,5 +239,10 @@ module.exports = {
     // 消息中心
     './homePage/static/js/noticeCenter': './src/homePage/static/js/noticeCenter.js',
     // 消息中心-系统通知
-    './homePage/static/js/systemInforms': './src/homePage/static/js/systemInforms.js'
+    './homePage/static/js/systemInforms': './src/homePage/static/js/systemInforms.js',
+
+
+
+    //私募资产详情
+    './account/static/js/privateDetail': './src/account/static/js/privateDetail.js',
 }
