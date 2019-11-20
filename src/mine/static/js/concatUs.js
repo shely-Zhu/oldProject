@@ -7,3 +7,7 @@ require('@pathIncludJs/vendor/zepto/callback.js');
 require('@pathIncludJs/vendor/zepto/deferred.js');
 require('@pathCommonJs/components/utils.js');
 require('@pathCommonJs/components/headBarConfig.js');
+
+$(function(){
+
+})
