@@ -58,7 +58,23 @@ $(function(){
     }
     //返回上一页
     $("#goBack").on("click",function(){
-        location.href="javascript:history.go(-1)";
+        //从原生页面到H5页面document.referrer的值为''
+        if(document.referrer == ''){
+            var u = navigator.userAgent, app = navigator.appVersion;
+            var isAndroid = u.indexOf('Android') > -1 || u.indexOf('Linux') > -1; //g
+            var isIOS = !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/); //ios终端
+            if (isAndroid) {
+               //这个是安卓操作系统
+               window.jsObj.backNative();
+            }
+            if (isIOS) {
+        　　　　//这个是ios操作系统
+                window.webkit.messageHandlers.backNative.postMessage('backNative');
+            }
+        }else{
+            location.href = "javascript:history.go(-1)"
+        }
+
     })
     
 })
