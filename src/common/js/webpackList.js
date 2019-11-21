@@ -266,4 +266,10 @@ module.exports = {
 
     //私募资产详情
     './account/static/js/privateDetail': './src/account/static/js/privateDetail.js',
+
+    //自选公募-交易记录
+    './account/static/js/public/transactionRecord': './src/account/static/js/public/transactionRecord.js',
+
+    //超宝基金产品-交易记录
+    './account/static/js/super/superRecord': './src/account/static/js/super/superRecord.js',
 }
