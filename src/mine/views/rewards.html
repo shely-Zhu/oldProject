@@ -16,7 +16,7 @@
 <body>
 
 	@@include('@pathCommonViews/load.html')
-	<!-- @@include('@pathCommonViews/noDataImg.html') -->
+	@@include('@pathCommonViews/noDataImg.html')
 
 	@@include('@pathCommonViews/loading/listLoading.html')
 
@@ -27,9 +27,16 @@
 		<div class="list">
 
 			<div class="rewardWrapper">
-				<div class="mui-card recordList">
+				<!-- <div class="mui-card recordList"> -->
+                    <ul class="mui-table-view">
+                        <li class="mui-table-view-cell mui-card recordList">
+                            <!--放置列表-->
+                        </li>
+                        <!-- 返回顶部 -->
+                        @@include('../../common/views/goTop.html')
+                    </ul>
 					<!--内容区-->
-					<!-- <div class="mui-card-conten mui-card-media entity ">
+					<!-- <div class="mui-card-content mui-card-media entity ">
 						<span class="rewardType">实体奖</span>
 						<div class="rewardDetail">
 							<p class="rewardName">火熊钓鱼竿一支</p>
@@ -37,7 +44,7 @@
 						</div>
 					</div>
 
-					<div class="mui-card-conten mui-card-media virtual ">
+					<div class="mui-card-content mui-card-media virtual ">
 						<div class="virRewardDetail">
 							<p class="rewardName">30元京东购物卡</p>
 							<p class="rewardTime">有效期至：2019-09-09 12:49:00</p>
@@ -45,7 +52,7 @@
 						</div>
 					</div>
 
-					<div class="mui-card-conten mui-card-media Invalid ">
+					<div class="mui-card-content mui-card-media Invalid ">
 						<div class="invalidRewardDetail">
 							<p class="rewardName">30元京东购物卡</p>
 							<p class="rewardTime">有效期至：2019-09-09 12:49:00</p>
@@ -53,8 +60,7 @@
 							<img class="invalidImg" src="/mine/static/img/rewards/yishixiao@3x.png">
 						</div>
 					</div> -->
-				</div>
-				@@include('../../common/views/goTop.html')
+				<!-- </div> -->
 			</div>
 
 		</div>
@@ -87,14 +93,13 @@
         </div>
          <!-- 弹框区域 -->
 
-e
 	</div>
 
 	<script id="reward-template" type="text/x-handlebars-template">
 		{{#each this}}
 		{{#if prizeValue}}
 		{{! 实体奖励}}
-			<div class="mui-card-conten mui-card-media entity ">
+			<div class="mui-card-content mui-card-media entity ">
 				<span class="rewardType ">实体奖</span>
 				<div class="rewardDetail">
 					<p class="rewardName ellipsis">{{prizeName}}</p>
@@ -105,7 +110,7 @@ e
 		{{else}}
 		{{! 虚拟奖励}
 		{{! 区分生效和失效状态}}
-			<div class="mui-card-conten mui-card-media {{xnParentClass}}">
+			<div class="mui-card-content mui-card-media {{xnParentClass}}">
 				<div class="{{xnChildClass}}">
 					<p class="rewardName ellipsis">{{prizeName}}</p>
 					<p class="rewardTime" start-data={{startTime}} end-data={{endTime}} create-data={{createTime}}>有效期至：{{endTime}}</p>

@@ -167,7 +167,7 @@ $(function() {
                                 el.prizeValue = false;
                             }
                         });
-                        console.log(JSON.stringify(data));
+                        /*console.log(JSON.stringify(data));*/
 
 
                         //去掉mui-pull-bottom-pocket的mui-hidden
