@@ -17,9 +17,11 @@ $(function() {
 	let somePage = {
 		//获取页面元素
 		$e: {
+            
 		},
 		//全局变量
 		gV: {
+            flag:1
 		},
 		//页面初始化函数
 		init: function() {
@@ -27,7 +29,6 @@ $(function() {
 
 			this.events()
 			this.initMui()
-			this.beforeFunc()
 		},
 		//初始化mui的上拉加载
 		initMui: function() {
