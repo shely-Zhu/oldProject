@@ -251,6 +251,8 @@ module.exports = {
     './account/static/js/common/transcationTem': './src/account/static/js/common/transcationTem.js',
     //待确认交易
     './account/static/js/private/tobeConfirmTransaction': './src/account/static/js/private/tobeConfirmTransaction.js',
+    //收益分配明细
+    './account/static/js/private/incomeDistribution': './src/account/static/js/private/incomeDistribution.js',
     //公募资产
     './account/static/js/publicAssets': './src/account/static/js/publicAssets.js',
 
