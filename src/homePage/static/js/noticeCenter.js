@@ -46,10 +46,10 @@ $(function(){
         dealData(data) {
             $.each(data, function(a, b) {
                 switch(b.mesType) {
+                    case 0: b.logoSrc = '/homePage/static/img/home_icon_system@2x.png';break;
                     case 1: b.logoSrc = '/homePage/static/img/home_icon_product@2x.png';break;
                     case 2: b.logoSrc = '/homePage/static/img/home_icon_activity@2x.png';break;
                     case 3: b.logoSrc = '/homePage/static/img/home_icon_transaction@2x.png';break;
-                    case 4: b.logoSrc = '/homePage/static/img/home_icon_system@2x.png';break;
                 }
                 if(b.readStatus == 0) {
                     b.badgeSrc = '/homePage/static/img/home_icon_Badge@2x.png'
@@ -61,7 +61,7 @@ $(function(){
         },
         events() {
             var that = this;
-            //跳转到各类通知页面 mesType 1产品公告；2活动通知；3交易动态4;系统通知 
+            //跳转到各类通知页面 mesType 0系统通知，1产品公告，2活动通知，3交易动态 
             mui("body").on('tap', '.noticeItem' , function(){
                 window.location.href = site_url.systemInforms_url + '?mesType=' + $(this).attr('mesType');
             })

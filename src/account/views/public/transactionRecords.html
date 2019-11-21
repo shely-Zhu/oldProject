@@ -10,7 +10,6 @@
 </head>
 <body>
 	@@include('@pathCommonViews/load.html')
-    <!-- @@include('@pathCommonViews/noData.html') -->
     @@include('@pathCommonViews/loading/listLoading.html')
     @@include('@pathCommonViews/headBarConfig.html',{"bgColors":"#2C3E77,#273971","showType":"0","pathName":"交易记录"}) 
     <div id="recordBox">
@@ -19,9 +18,9 @@
             <div id="recordSearchDetail"></div>
         </div>
         <div class="list">
-            <div class="noDataCon">暂无更多内容</div>
             <div class="contentWrapper">
                 <div id="recordListWraper">
+                    @@include('@pathCommonViews/noDataImg.html', {"tipText": "暂无数据"})
                     <!-- <div class="recordItem">
                         <div class="recordLogoCon">
                             <img class="recordLogo" src="/account/static/img/public/account_icon_mairu@2x.png" alt="">
@@ -85,7 +84,8 @@
     </script>
 
 	@@include('@pathInclude/views/footer.html')
-    <script src="/include/js/iscroll.js"></script>
+    <!-- 添加埋点 -->
+    @@include('@pathInclude/views/header.html')
     <script src="/account/static/js/public/transactionRecords.js"></script>
 </body>
 </html>

@@ -30,6 +30,9 @@ var pathTitle=[
     },
     {
         pathName:"交易记录" 
+    },
+    {
+        pathName:"收益明细" 
     }
 ]
 $(function(){

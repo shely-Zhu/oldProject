@@ -161,16 +161,12 @@ module.exports = function() {
 
     // 消息中心
     this.getNoticeTypeList_api = http_url.web_url + '/account/account/getNoticeTypeList';
-    // 通知消息列表
-    this.systemNotificationList_api = http_url.web_url + '/account/account/systemNotificationList';
-    // 非通知消息列表  
+    // 消息列表  
     this.noticeAndTransDynamicList_api = http_url.web_url + '/account/account/noticeAndTransDynamicList';
-    // 通知详情
-    this.getSystemNotification_api = http_url.web_url + '/account/account/getSystemNotification';
+    // 消息详情
+    this.getNoticeAndTransDynamic_api = http_url.web_url + '/account/account/getNoticeAndTransDynamic';
     //查询单条文章(APPCMS后台)
     this.getArticle_api = http_url.web_url + '/content/frontend/getArticle';
-    // 非通知详情
-    this.getNoticeAndTransDynamic_api = http_url.web_url + '/account/account/getNoticeAndTransDynamic';
 
     /*------------------- 消息中心 end ------------------------------*/
 
