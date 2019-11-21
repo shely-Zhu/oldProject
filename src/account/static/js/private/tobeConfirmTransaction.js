@@ -23,8 +23,11 @@ require('@pathCommonJs/components/elasticLayer.js');
 require('@pathCommonJs/components/elasticLayerTypeFive.js');
 require('@pathCommonJs/components/headBarConfig.js');
 //黑色提示条的显示和隐藏
+var splitUrl = require('@pathCommonJs/components/splitUrl.js')();
 var tipAction = require('@pathCommonJsCom/tipAction.js');
-var generateTemplate = require('@pathCommonJsComBus/generateTemplate.js');
+// var generateTemplate = require('@pathCommonJsComBus/generateTemplate.js');
+var transcationTem = require('../common/transcationTem.js');
+
 
 
 
@@ -44,14 +47,13 @@ $(function() {
             list_template: '', //列表的模板，生成后存放在这里
             listToTop: '', // 滑动区域距离顶部距离
             navToTop: '', // 滑动nav距离顶部距离
-
-
+            isConfirm: splitUrl['isConfirm'], //是否确认
+            businessType: $('.hopperCon li.active').attr('data'),
         },
         html: '', //存放生成的html
         init: function() { //初始化函数
 
             var that = this;
-
             //初始化第一屏区域的上拉加载
             that.initMui();
 
@@ -116,10 +118,12 @@ $(function() {
             var that = this;
 
             var obj = [{ // 系统调仓记录列表
-                url: site_url.curveHistoryList_api,
+                url: site_url.getConfirmTrade_api,
                 data: {
                     "pageNo": that.gV.aP.pageNo, //非必须，默认为1
-                    "pageSize": "10" //非必须，默认为10
+                    "pageSize": "10", //非必须，默认为10
+                    isConfirm: that.gV.isConfirm,
+                    businessType: Number(that.gV.businessType),
                 },
                 //async: false,
                 needDataEmpty: true,
@@ -130,7 +134,7 @@ $(function() {
                         that.getElements.noData.show();
                         return false;
                     } else {
-                        data = json.data;
+                        data = json.data.tradeList;
                     }
                     setTimeout(function() {
                         if (data.length < that.gV.aP.pageSize) {
@@ -150,13 +154,12 @@ $(function() {
                                 t.endPullupToRefresh(true);
                             }
                         } else { // 还有更多数据
-                            console.log(999)
                             t.endPullupToRefresh(false);
                         }
                         // 页面++
                         that.gV.aP.pageNo++;
                         // 将列表插入到页面上
-                        generateTemplate(data, that.getElements.contentWrap, that.getElements.transTemp);
+                        transcationTem(data, that.getElements.contentWrap, that.getElements.transTemp)
 
                     }, 200)
 
@@ -170,12 +173,14 @@ $(function() {
             mui("body").on('tap', '.hopper', function(e) {
                 $('.mask').show();
                 $('.hopperCon').show();
-                aq
+
             })
             mui("body").on('tap', '.hopperCon li', function(e) {
                 $(this).addClass('active').siblings('li').removeClass('active');
                 $('.mask').hide();
                 $('.hopperCon').hide();
+                that.gV.businessType = $(this).attr('data');
+                that.getData();
             })
         }
     };

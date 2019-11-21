@@ -25,7 +25,7 @@
 				<div class="mui-row clientNameInfo">
 					<div class="mui-col-xs-9">
 						<p class="clientTitle">客户名称</p>
-						<p class="clientName">这里是机构名称这里</p>
+						<p class="clientName"></p>
 					</div>
 					<div class="mui-col-xs-3 clientLevel">
 
@@ -34,11 +34,11 @@
 				<div class="mui-row clientMonth">
 					<div class="mui-col-xs-6">
 						<p>报告月份</p>
-						<p class="reportMonth">2019年5月</p>
+						<p class="reportComent reportMonth"></p>
 					</div>
 					<div class="mui-col-xs-6">
 						<p>客户编号</p>
-						<p class="reportMonth">01088808008</p>
+						<p class="reportComent monthReportNum"></p>
 					</div>
 				</div>
 
@@ -56,8 +56,22 @@
 		<!-- 资产情况分析 start -->
 		<div class="assetAnalysis">
 			<div class="assetAnalysisTitle">资产情况分析</div>
+			<p class="monthReportTipContent"></p>
+			<p class="tipInfo">本报告统计截止日期为<span class="endDate"></span>，如有信息变更，请以最新信息为准。如因系统，网络以及其他非明泽销售公司原因导致邮件显示发送，送达等出现错误，恒天明泽基金销售有限公司不承担相应责任。</p>
+			<p class="holdStatus">您当前可能是处于<span class="lifeTerm"></span>，保持流动性的同时又能实现财富增值是您当前最主要的理财目标，你的风险等级是<span class="riskLevel"></span>，对风险有清晰的认识，并且您具备一定的投资经验，因此建议您增加<span class="addTypes"></span>资产配比，让您的资产更能抵御市场风险。</p>
+
+			<div class="holdProduct">
+				<p class="holdProduct">您当前的资产配比</p>
+				<div class='pieBox'>
+					<div class='circle'></div>
+				</div>
+			</div>
+
 			
 		</div>
+		<!-- <div class='pieBox'>
+			<div class='circle'></div>
+		</div> -->
 		<!-- 资产情况分析 end -->
 
 		<script id="transaction-template" type="text/x-handlebars-template">
