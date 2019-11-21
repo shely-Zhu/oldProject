@@ -1,7 +1,7 @@
 /*
- * @page: 已确认交易(定融定投)
- * @Author: peicongcong
- * @Date:   2019-11-19
+ * @page: 收益分配明细
+ * @Author: liliang
+ * @Date:   2019-11-20
  * @Last Modified by:   
  * @description:
  */
@@ -34,12 +34,13 @@ $(function() {
             noData: $('.noData'), //没有数据的结构
             listLoading: $('.listLoading'), //所有数据区域，第一次加载的loading结构
             transTemp: $('#trans-template'), //模板
-            contentWrap: $('.contentWrap'), //内容区域
+            contentWrapper: $('.contentWrapper'), //内容区域
+            recordList: $('.recordList'), // 调仓记录
         },
         gV: { //一些设置
             aP: {
                 pageNo: 1,
-                pageSize: 10,
+                pageSize: 3,
             },
             list_template: '', //列表的模板，生成后存放在这里
             listToTop: '', // 滑动区域距离顶部距离
@@ -64,58 +65,54 @@ $(function() {
         //初始化mui的上拉加载
         initMui: function() {
             var that = this;
-
             var height = windowHeight - $(".topTitle").height();
             if (!$('.list').hasClass('setHeight')) {
                 $('.list').height(height).addClass('setHeight');
+                $('.box').height(height);
             }
-
-
-            mui.init({
-                pullRefresh: {
-                    container: '.contentWrapper',
-                    up: {
-                        //auto: false,
-                        contentrefresh: '拼命加载中',
-                        contentnomore: '没有更多了', //可选，请求完毕若没有更多数据时显示的提醒内容；
-                        callback: function() {
-                            // debugger
+            var that = this;
+			mui.init({
+				pullRefresh: {
+					container: '.contentWrapper',
+					up: {
+						//auto: false,
+						contentrefresh: '拼命加载中',
+						contentnomore: '没有更多了', //可选，请求完毕若没有更多数据时显示的提醒内容；
+						callback: function() {
                             //执行ajax请求
-                            that.getData(this);
-                        }
-                    }
-                }
-            });
+							that.getData(this);
+						}
+					}
+				}
+			});
 
-            //init后需要执行ready函数，才能够初始化出来
-            mui.ready(function() {
+			//init后需要执行ready函数，才能够初始化出来
+			mui.ready(function() {
 
-                //隐藏当前的加载中loading
-                if (!$('.list').hasClass('hasPullUp')) {
-                    $('.list').find('.mui-pull-bottom-pocket').addClass('mui-hidden');
-                }
+				//隐藏当前的加载中loading
+				if(!$('.list').hasClass('hasPullUp')) {
+					$('.list').find('.mui-pull-bottom-pocket').addClass('mui-hidden');
+				}
 
                 //显示loading
-                that.getElements.listLoading.show();
+				that.getElements.listLoading.show();
 
-                //这一句初始化并第一次执行mui上拉加载的callback函数
-                mui('.contentWrapper').pullRefresh().pullupLoading();
+				//这一句初始化并第一次执行mui上拉加载的callback函数
+				mui('.contentWrapper').pullRefresh().pullupLoading();
 
-                //隐藏loading，调试接口时需要去掉
-                //setTimeout(function(){
-                that.getElements.listLoading.hide();
-                //}, 2000);
+				//隐藏loading，调试接口时需要去掉
+				//setTimeout(function(){
+				that.getElements.listLoading.hide();
+				//}, 2000);
 
-
-                //为$id添加hasPullUp  class
-                $('.list').addClass('hasPullUp');
-            });
+				//为$id添加hasPullUp  class
+				$('.list').addClass('hasPullUp');
+			});
         },
         getData: function(t) {
             var that = this;
-
             var obj = [{ // 系统调仓记录列表
-                url: site_url.curveHistoryList_api,
+                url: site_url.getUserTrackRecord_api,
                 data: {
                     "pageNo": that.gV.aP.pageNo, //非必须，默认为1
                     "pageSize": that.gV.aP.pageSize//非必须，默认为10
@@ -123,13 +120,14 @@ $(function() {
                 //async: false,
                 needDataEmpty: true,
                 callbackDone: function(json) {
+                    console.log(json)
                     var data;
                     if (json.data.length == 0) { // 没有记录不展示
                         $(".list").hide()
                         that.getElements.noData.show();
                         return false;
                     } else {
-                        data = json.data;
+                        data = json.data.dataList;
                     }
                     setTimeout(function() {
                         if (data.length < that.gV.aP.pageSize) {
@@ -150,14 +148,15 @@ $(function() {
                             }
                         } else { // 还有更多数据
                             console.log(999)
-                                // t.endPullupToRefresh(false);
+                                t.endPullupToRefresh(false);
                         }
 
                         // 页面++
                         that.gV.aP.pageNo++;
-                        console.log(that.gV.aP.pageNo)
+                        console.log('我是几',that.gV.aP.pageNo)
+                        console.log('我是内容',data)
                             // 将列表插入到页面上
-                        generateTemplate(data, that.getElements.contentWrap, that.getElements.transTemp);
+                        generateTemplate(data, that.getElements.recordList, that.getElements.transTemp);
 
                     }, 200)
 

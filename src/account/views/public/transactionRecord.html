@@ -1,0 +1,262 @@
+<!-- /**  
+ * @Page:  自选公募-交易记录
+ * @Author: caoqihai  
+ * @Date:   2019-11-20
+ * 
+ */ -->
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    @@include('@pathInclude/views/meta.html')
+    <link rel="stylesheet" href="/account/static/css/public/transactionRecord.css">
+    <title>自选公募-交易记录</title>
+</head>
+
+<body>
+
+    <section class="container">
+        @@include('@pathCommonViews/headBarConfig.html',{"pathName":"交易记录"})
+        <div class="br"></div>
+        <div class="nav mui-row">
+            <div class="mui-col-xs-3">
+                全部
+                <img class="down" src="/account/static/img/account_icon_xiala.png" alt="">
+                <img class="up" src="/account/static/img/account_icon_shouqi.png" alt="">
+            </div>
+            <div class="mui-col-xs-3">
+                状态
+                <img class="down" src="/account/static/img/account_icon_xiala.png" alt="">
+                <img class="up" src="/account/static/img/account_icon_shouqi.png" alt="">
+            </div>
+            <div class="mui-col-xs-3">
+                时间
+                <img class="down" src="/account/static/img/account_icon_xiala.png" alt="">
+                <img class="up" src="/account/static/img/account_icon_shouqi.png" alt="">
+            </div>
+            <div class="mui-col-xs-3">
+                银行卡
+                <img class="down" src="/account/static/img/account_icon_xiala.png" alt="">
+                <img class="up" src="/account/static/img/account_icon_shouqi.png" alt="">
+            </div>
+        </div>
+        <div class="whole">
+            <div class="whole0">
+                <ul>
+                    <li>
+                        <div class="con">
+                            <div>全部</div>
+                            <img class="img" src="/account/static/img/account_icon_check.png" alt="">
+                        </div>
+                    </li>
+                    <li>
+                        <div class="con">
+                            <div>买入</div>
+                            <img class="img" src="/account/static/img/account_icon_check.png" alt="">
+                        </div>
+                    </li>
+                    <li>
+                        <div class="con">
+                            <div>定投</div>
+                            <img class="img" src="/account/static/img/account_icon_check.png" alt="">
+                        </div>
+                    </li>
+                    <li>
+                        <div class="con">
+                            <div>分红</div>
+                            <img class="img" src="/account/static/img/account_icon_check.png" alt="">
+                        </div>
+                    </li>
+                    <li>
+                        <div class="con">
+                            <div>卖出</div>
+                            <img class="img" src="/account/static/img/account_icon_check.png" alt="">
+                        </div>
+                    </li>
+                </ul>
+                <div class="other"></div>
+            </div>
+            <div class="whole1">
+                <ul>
+                    <li>
+                        <div class="con">
+                            <div>全部</div>
+                            <img class="img" src="/account/static/img/account_icon_check.png" alt="">
+                        </div>
+                    </li>
+                    <li>
+                        <div class="con">
+                            <div>成功</div>
+                            <img class="img" src="/account/static/img/account_icon_check.png" alt="">
+                        </div>
+                    </li>
+                    <li>
+                        <div class="con">
+                            <div>失败</div>
+                            <img class="img" src="/account/static/img/account_icon_check.png" alt="">
+                        </div>
+                    </li>
+                    <li>
+                        <div class="con">
+                            <div>待确认</div>
+                            <img class="img" src="/account/static/img/account_icon_check.png" alt="">
+                        </div>
+                    </li>
+                    <li>
+                        <div class="con">
+                            <div>已撤单</div>
+                            <img class="img" src="/account/static/img/account_icon_check.png" alt="">
+                        </div>
+                    </li>
+                </ul>
+                <div class="other"></div>
+            </div>
+            <div class="whole2">
+                <ul>
+                    <li>
+                        <div class="con">
+                            <div>全部</div>
+                            <img class="img" src="/account/static/img/account_icon_check.png" alt="">
+                        </div>
+                    </li>
+                    <li>
+                        <div class="con">
+                            <div>近一个月</div>
+                            <img class="img" src="/account/static/img/account_icon_check.png" alt="">
+                        </div>
+                    </li>
+                    <li>
+                        <div class="con">
+                            <div>近三个月</div>
+                            <img class="img" src="/account/static/img/account_icon_check.png" alt="">
+                        </div>
+                    </li>
+                    <li>
+                        <div class="con">
+                            <div>近半年</div>
+                            <img class="img" src="/account/static/img/account_icon_check.png" alt="">
+                        </div>
+                    </li>
+                    <li>
+                        <div class="con">
+                            <div>近1年</div>
+                            <img class="img" src="/account/static/img/account_icon_check.png" alt="">
+                        </div>
+                    </li>
+                    <li>
+                        <div class="con">
+                            <div>近3年</div>
+                            <img class="img" src="/account/static/img/account_icon_check.png" alt="">
+                        </div>
+                    </li>
+                </ul>
+                <div class="other"></div>
+            </div>
+            <div class="whole3">
+                <ul>
+                    <li>
+                        <div class="con">
+                            <div>全部</div>
+                            <img class="img" src="/account/static/img/account_icon_check.png" alt="">
+                        </div>
+                    </li>
+                    <li>
+                        <div class="con">
+                            <div>华夏银行 - 0622</div>
+                            <img class="img" src="/account/static/img/account_icon_check.png" alt="">
+                        </div>
+                    </li>
+                    <li>
+                        <div class="con">
+                            <div>中国招商银行 - 3568</div>
+                            <img class="img" src="/account/static/img/account_icon_check.png" alt="">
+                        </div>
+                    </li>
+                    <li>
+                        <div class="con">
+                            <div>贵州银行 - 5555</div>
+                            <img class="img" src="/account/static/img/account_icon_check.png" alt="">
+                        </div>
+                    </li>
+                </ul>
+                <div class="other"></div>
+            </div>
+        </div>
+        <div class="content">
+            <ul>
+                <li>
+                    <div class="conone">
+                        <div class="payin">买入</div>
+                    </div>
+                    <div class="contwo">
+                        <div class="first">
+                            <div class="tit">中融货币A</div>
+                            <div class="mon">350,000.00元</div>
+                        </div>
+                        <div class="second">
+                            <div class="tim">2019-09-23 11:00:35</div>
+                            <div class="statrue">交易成功</div>
+                        </div>
+                    </div>
+                </li>
+                <li>
+                    <div class="conone">
+                        <div class="payout">买出</div>
+                    </div>
+                    <div class="contwo">
+                        <div class="first">
+                            <div class="tit">中融货币A</div>
+                            <div class="mon">1,000.00份</div>
+                        </div>
+                        <div class="second">
+                            <div class="tim">2019-09-23 11:00:35</div>
+                            <div class="statrue">交易成功</div>
+                        </div>
+                    </div>
+                </li>
+                <li>
+                    <div class="conone">
+                        <div class="payred">分红</div>
+                    </div>
+                    <div class="contwo">
+                        <div class="first">
+                            <div class="tit">中融货币A</div>
+                            <div class="mon">1,000.00份</div>
+                        </div>
+                        <div class="second">
+                            <div class="tim">2019-09-23 11:00:35</div>
+                            <div class="stafalse">交易失败</div>
+                        </div>
+                    </div>
+                </li>
+                <li>
+                    <div class="conone">
+                        <div class="payfix">定投</div>
+                    </div>
+                    <div class="contwo">
+                        <div class="first">
+                            <div class="tit">中融货币A</div>
+                            <div class="mon">1,000.00份</div>
+                        </div>
+                        <div class="second">
+                            <div class="tim">2019-09-23 11:00:35</div>
+                            <div class="stafalse">交易失败</div>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </section>
+    <!-- 加载中loading -->
+    <!-- @@include('@pathCommonViews/load.html') -->
+
+
+
+    @@include('@pathInclude/views/footer.html')
+    <script src="/include/js/iscroll.js"></script>
+    <script src="/account/static/js/public/transactionRecord.js"></script>
+
+</body>
+
+</html>

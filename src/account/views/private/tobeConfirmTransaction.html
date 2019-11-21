@@ -20,14 +20,14 @@
         <!-- 筛选区域 -->
         <div class="hopperCon">
             <ul>
-                <li class="active">全部</li>
-                <li>申购</li>
-                <li>赎回</li>
-                <li>分红</li>
-                <li>预约撤单</li>
-                <li>预约过期</li>
-                <li>转让已完成</li>
-                <li>受让已完成</li>
+                <li class="active" data=''>全部</li>
+                <li data="1">申购</li>
+                <li data="2">赎回</li>
+                <li data="3">分红</li>
+                <li data="4">预约撤单</li>
+                <li data="5">预约过期</li>
+                <li data="6">转让已完成</li>
+                <li data="7">受让已完成</li>
             </ul>
         </div>
         <!-- 筛选区域 -->
@@ -239,9 +239,10 @@
     </div>
     <div class="mask"></div>
 </body>
-@@include('../common/transcationTem.html'); @@include('@pathInclude/views/footer.html')
+@@include('../common/transcationTem.html') @@include('@pathInclude/views/footer.html')
 <!-- 添加埋点 -->
 <script src="/include/js/iscroll.js"></script>
 <script src="/account/static/js/private/tobeConfirmTransaction.js"></script>
+<script src="/account/static/js/common/transcationTem.js"></script>
 
 </html>

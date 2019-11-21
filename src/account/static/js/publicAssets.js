@@ -22,7 +22,6 @@ $(function () {
         },
         init: function () {
             var that = this;
-            that.events();
             that.getData();
         },
         getData: function (t) {
@@ -59,6 +58,10 @@ $(function () {
                     var template = Handlebars.compile(tplm);
                     var html = template(that.data.fundDetailList);
                     $("#pageLists").html(html);
+                    //模板渲染完毕后展示没有更多数据的样式
+                    $('footer').removeClass('hide');
+                    //渲染完模板后再添加事件
+                    that.events();
                 },
                 callbackFail: function (data) {
                     console.log('加载失败');
@@ -89,7 +92,22 @@ $(function () {
                 $('.bank_list').hide();
                 $('#bank_screen .iconfont').html('&#xe609;');
             })
-
+            //item的点击 进入持仓详情
+            $('.hold_item').on('click', function(){
+                //todo 跳转
+            })
+            //点击持仓列表的感叹号 进入持仓明细
+            $('.position_tip').on('click', function(){
+                //todo 跳转
+            })
+            //购买
+            $('.buy_btn').on('click', function(){
+                //todo 跳转
+            })
+            //赎回
+            $('.redeem_btn').on('click', function(){
+                //todo 跳转
+            })
             // 头部文案提示(金钱展示隐藏)
             mui("body").on('tap', '.j_icon', function (e) {
                 //总资产
@@ -124,6 +142,7 @@ $(function () {
                 $('.tipContainer').hide();
             })
         },
+        
         //数字转中文 例如1转为一
         noToChinese: function (num) {
             if (!/^\d*(\.\d*)?$/.test(num)) {
