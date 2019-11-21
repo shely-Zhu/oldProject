@@ -20,23 +20,31 @@ $(function() {
 		$e: {
 			typeOne:$('.type_one'),
 			typeTwo:$('.type_two'),
-			bonusType:$('.bonusType')
+			bonusType:$('.bonusType'),
+			duigou:$('.duigou'),
 		},
 		//全局变量
 		gV: {
-            flag:2
+			flag:1,
+			bonusType:"红利再投资",
 		},
 		//页面初始化函数
 		init: function() {
 			var that = this;
-			console.log(this.$e.bonusType.eq(1))
 			if(this.gV.flag == 1){
 				console.log("1111")
-				this.$e.typeOne.append('<b id="duigou" class="iconfont iconone">&#xe626;</b>')
-				this.$e.bonusType.eq(0).text(this.$e.bonusType.eq(0).text()+"(当前分红方式)")
+				this.$e.duigou.eq(0).css('display','block');
+				this.$e.duigou.eq(1).css('display','none');
+				this.$e.bonusType.eq(0).text("现金分红(当前分红方式)");
+				this.$e.bonusType.eq(1).text("红利再投资");
+				this.gV.bonusType = "红利再投资";
 			}else{
-				this.$e.typeTwo.append('<b id="duigou" class="iconfont iconone">&#xe626;</b>')
-				this.$e.bonusType.eq(1).text(this.$e.bonusType.eq(1).text()+"(当前分红方式)")
+				this.$e.duigou.eq(0).css('display','none');
+				console.log("我到这里了")
+				this.$e.duigou.eq(1).css('display','block');
+				this.$e.bonusType.eq(0).text("现金分红");
+				this.$e.bonusType.eq(1).text("红利再投资(当前分红方式)");
+				this.gV.bonusType = "现金分红";
 			}
 			this.events()
 			this.initMui()
@@ -88,27 +96,40 @@ $(function() {
 			var that = this
 			// $.ajaxLoading(obj);
 		},
-		tishi:function(t){
-			console.log("aaaa")
+		changeBonusType:function(t){
+			console.log(somePage.gV.flag)
+
+			somePage.init()
+			// t.init();
+			console.log("aaaa");
+			// this.gV.flag = !this.gV.flag;
 		},
 		//注册事件
 		events: function() {
 			let that = this;
-			// console.log(mui('.type_one').eq(0))
 			mui('body').on("tap",".type_one",function(e){
-				console.log(11111)
-				// $('#elasticLayer').show();
-				// console.log($.elasticLayer())
+				that.gV.flag = 1;
 				$.elasticLayer({
 					id: "tip",
                     title: '',
-					p: '<p>' + '修改分红方式为' + '</p>',
+					p: '<p>' + '修改分红方式为“<span>'+ that.gV.bonusType +'</span>”<br>分红方式确认前将不能再次修改</p>',
 					yesTxt: '确定', 
 					celTxt: '取消',
-					zIndex: 100
-					// callback:that.tishi
-                });
-				console.log("下面的部分")
+					zIndex: 100,
+					callback:that.changeBonusType
+				});
+			})
+			mui('body').on("tap",".type_two",function(e){
+				that.gV.flag = 2;
+				$.elasticLayer({
+					id: "tip",
+                    title: '',
+					p: '<p>' + '修改分红方式为“<span>'+ that.gV.bonusType +'</span>”<br>分红方式确认前将不能再次修改</p>',
+					yesTxt: '确定', 
+					celTxt: '取消',
+					zIndex: 100,
+					callback:that.changeBonusType
+				});
 			})
 		}
 	};
