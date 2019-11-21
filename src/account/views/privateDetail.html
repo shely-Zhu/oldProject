@@ -264,42 +264,51 @@
 	 				<span class="rightTitle">历史明细</span>
 	 			</div>
 	 			<div class="lineDraw">
-	 				<div id="line"></div>
+	 				<!-- 七日年化折线图 -->
+	 				<div id="qrnhLine" class="line"></div>
+	 				<!-- 万份收益折线图 -->
+	 				<div id="wfsyLine" class="hide line"></div>
 	 				<div class='mui-row tab'>
-	 					<span class="mui-col-sm-3 mui-col-xs-3 time active">近一个月</span>
-	 					<span class="mui-col-sm-3 mui-col-xs-3 time">近三个月</span>
-	 					<span class="mui-col-sm-3 mui-col-xs-3 time">近一年</span>
-	 					<span class="mui-col-sm-3 mui-col-xs-3 time">成立至今</span>
+	 					<span class="mui-col-sm-3 mui-col-xs-3 time oneMonth active" num="0">近一个月</span>
+	 					<span class="mui-col-sm-3 mui-col-xs-3 time threeMonth" num="1">近三个月</span>
+	 					<span class="mui-col-sm-3 mui-col-xs-3 time newYear" num="3">近一年</span>
+	 					<span class="mui-col-sm-3 mui-col-xs-3 time sinceNow" num="4">成立至今</span>
 	 				</div>
 	 			</div>
 
 	 		</div>
 
 	 		<div class="dealReg">
- 				<div class="titleWrap">交易规则
- 					<div class="arrow">
-	 					<span class="img"></span>
-	 				</div></div>
-	 			<div class="dealRegMid">
-	 				<div class="nav">
-	 					<span class="navSpan quick active">快速赎回</span>
-	 					<span class="navSpan normal">普通赎回</span>
-	 				</div>
-	 				<div class="line">
-	 					<div class="clearfix line_title">
-		 					<span class="top_l">赎回申请</span>
-		 					<span class="top_r">付款</span>
+
+	 			<div class="hide dealMid">
+	 				<div class="titleWrap">交易规则
+	 					<div class="arrow">
+		 					<span class="img"></span>
+		 				</div></div>
+		 			<div class="dealRegMid">
+		 				<div class="nav">
+		 					<span class="navSpan quick active">快速赎回</span>
+		 					<span class="navSpan normal">普通赎回</span>
 		 				</div>
-	 					<img class="lineDiv" src="/account/static/img/productDetail/regLine.png">
-	 					<div class="clearfix line_bottom">
-		 					<span class="bottom_l">T日（交易日）</span>
-		 					<span class="bottom_r">T日（交易日）</span>
+		 				<div class="line">
+		 					<div class="clearfix line_title">
+			 					<span class="top_l">赎回申请</span>
+			 					<span class="top_r">付款</span>
+			 				</div>
+		 					<img class="lineDiv" src="/account/static/img/productDetail/regLine.png">
+		 					<div class="clearfix line_bottom">
+			 					<span class="bottom_l">T日（交易日）</span>
+			 					<span class="bottom_r">T日（交易日）</span>
+			 				</div>
 		 				</div>
-	 				</div>
-	 				<ul class="detail">
-	 					<li>10:50前为T日，10:：50后不支持快速赎回</li>
-	 					<li>快速赎回手续费为111</li>
-	 				</ul>
+		 				<ul class="detail">
+		 					<li>10:50前为T日，10:：50后不支持快速赎回</li>
+		 					<li>快速赎回手续费为111</li>
+		 				</ul>
+		 			</div>
+		 		</div>
+
+		 		<div class="dealBottom">
 
 	 				<div class="titleWrap">产品档案
 	 					<div class="arrow">
@@ -313,6 +322,7 @@
 	 					</div>
 	 				</div>
 	 			</div>
+	 			
  				
  			</div>
 
@@ -328,6 +338,7 @@
 
 	@@include('@pathInclude/views/footer.html')
 
+	<script src="/include/js/vendor/echarts/echarts.min.js"></script>
 	<script src="/account/static/js/privateDetail.js"></script>
 
 </body>

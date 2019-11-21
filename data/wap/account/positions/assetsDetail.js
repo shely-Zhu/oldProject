@@ -17,7 +17,7 @@ var data = Mock.mock({
 
         "sevenYearYield":"4%", //七日年化收益率
 
-        "sevenYearYieldUpdateDate":"01.22", //七日年化收益率更新时间 mm.dd
+        "sevenYearYieldUpdateDate":"2019.33", //七日年化收益率更新时间 mm.dd
 
         "capitalisation":"100.00", //当前市值
 

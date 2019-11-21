@@ -174,4 +174,22 @@ module.exports = function() {
 
     /*------------------- 消息中心 end ------------------------------*/
 
+
+    /*------------------- 月度报告 start ------------------------------*/
+
+    //  持仓总览
+    this.queryInvestProdHoldShareList_api = http_url.web_url + '/account/report/queryInvestProdHoldShareList';
+    // 交易明细
+    this.queryInvestTradeDetail_api = http_url.web_url + '/account/report/queryInvestTradeDetail';
+    // 当前资产配置列表
+    this.queryInvestAssetAnalyse_api = http_url.web_url + '/account/report/queryInvestAssetAnalyse';
+    // 建议资产配置列表
+    this.queryInvestAssetConfigureAdvise_api = http_url.web_url + '/account/report/queryInvestAssetConfigureAdvise';
+    // 报告分析（报告明细）
+    this.queryInvestReportDetail_api = http_url.web_url + '/account/report/queryInvestReportDetail';
+   
+    /*------------------- 月度报告 end ------------------------------*/
+
+
+
 };
