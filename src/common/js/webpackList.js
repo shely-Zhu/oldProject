@@ -268,6 +268,9 @@ module.exports = {
 
     //私募资产详情
     './account/static/js/privateDetail': './src/account/static/js/privateDetail.js',
+    
+    //自选公募资产详情
+    './account/static/js/optionalPublicDetail': './src/account/static/js/optionalPublicDetail.js',
 
     // 自选公募交易记录
     './account/static/js/public/transactionRecords': './src/account/static/js/public/transactionRecords.js',
