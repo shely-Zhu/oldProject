@@ -1,6 +1,7 @@
 /**
-* 消息中心
+* 消息中心-通知详情
 * @author yanruiting 2019-11-18
+* 从通知列表页面携带参数   noticeId 消息id mesType 0系统通知，1产品公告，2活动通知，3交易动态
 */
 require('@pathIncludJs/vendor/config.js');
 require('@pathIncludJs/vendor/zepto/callback.js');
@@ -33,22 +34,17 @@ $(function(){
         },
         getTitle() {
             switch(this.gV.mesType) {
+                case '0': $("#HeadBarpathName").html("系统通知详情");break;
                 case '1': $("#HeadBarpathName").html("产品公告详情");break;
                 case '2': $("#HeadBarpathName").html("活动通知详情");break;
                 case '3': $("#HeadBarpathName").html("交易动态详情");break;
-                case '4': $("#HeadBarpathName").html("系统通知详情");break;
             }
         },
         // 获取通知详情
         getInformsDetail() {
         	var that=this;
-            if(that.gV.mesType == 4) { // 消息通知列表
-                var ajaxUrl = site_url.getSystemNotification_api
-            } else if (that.gV.mesType == 1 || that.gV.mesType == 2 || that.gV.mesType == 3) { // 非通知消息列表
-                var ajaxUrl = site_url.getNoticeAndTransDynamic_api
-            }
             var obj=[{
-                url: ajaxUrl,
+                url: site_url.getNoticeAndTransDynamic_api,
                 data:{
                     id: that.gV.noticeId
                 },

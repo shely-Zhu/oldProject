@@ -23,7 +23,7 @@ $(function(){
             searchDetailListTemplateId:$('#searchDetailList-template'),//筛选详细内容模板Id
             recordListWraperBoxId: $("#recordListWraper"), // 交易列表容器
             recordListTemplateId:$('#recordList-template'),//交易列表模板Id
-            noData: $('.noDataCon'), //没有数据的结构
+            noData: $('.noData'), //没有数据的结构
             listLoading: $('.listLoading'), //所有数据区域，第一次加载的loading结构
 		},
 		//全局变量
@@ -112,12 +112,12 @@ $(function(){
                 needDataEmpty: true,
                 callbackDone: function(json) {
                     var data;
-                    /*if (json.data.pageItems.totalCount == 0) { // 没有记录不展示
+                    if (json.data.pageItems.totalCount == 0) { // 没有记录不展示
                         that.$e.noData.show();
                         return false;
                     } else {
                         data = json.data.pageList;
-                    }*/
+                    }
                     data = json.data.pageList
                     setTimeout(function() {
                         if (data.length < that.gV.pageSize) {
