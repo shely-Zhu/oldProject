@@ -1,27 +1,35 @@
 <!-- 我的奖励
  @author zhangyanping 2019-11-12
+
+ js逻辑添加
+ @author purpleZhao 2019-11-18
 -->
 
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	
+
 	@@include('@pathInclude/views/meta.html')
 	<link rel="stylesheet" href="/mine/static/css/rewards.css">
 	<title>我的奖励</title>
 </head>
 <body>
-	
+
 	@@include('@pathCommonViews/load.html')
+	<!-- @@include('@pathCommonViews/noDataImg.html') -->
+
 	@@include('@pathCommonViews/loading/listLoading.html')
 
 	<div class="reward">
 		<div class="contentHeader"><span class="iconfont">&#xe635;</span>实体奖我们将在48小时内发放，如未收到，请联系您的理财师</div>
+
+
 		<div class="list">
+
 			<div class="rewardWrapper">
-				<div class="mui-card">
+				<div class="mui-card recordList">
 					<!--内容区-->
-					<div class="mui-card-conten mui-card-media entity">
+					<!-- <div class="mui-card-conten mui-card-media entity ">
 						<span class="rewardType">实体奖</span>
 						<div class="rewardDetail">
 							<p class="rewardName">火熊钓鱼竿一支</p>
@@ -29,7 +37,7 @@
 						</div>
 					</div>
 
-					<div class="mui-card-conten mui-card-media virtual">
+					<div class="mui-card-conten mui-card-media virtual ">
 						<div class="virRewardDetail">
 							<p class="rewardName">30元京东购物卡</p>
 							<p class="rewardTime">有效期至：2019-09-09 12:49:00</p>
@@ -37,23 +45,90 @@
 						</div>
 					</div>
 
-					<div class="mui-card-conten mui-card-media Invalid">
+					<div class="mui-card-conten mui-card-media Invalid ">
 						<div class="invalidRewardDetail">
 							<p class="rewardName">30元京东购物卡</p>
 							<p class="rewardTime">有效期至：2019-09-09 12:49:00</p>
 							<a href="javascript:;" class="viewDetails">查看详情<span class="iconfont">&#xe636;</span></a>
 							<img class="invalidImg" src="/mine/static/img/rewards/yishixiao@3x.png">
 						</div>
-					</div>
+					</div> -->
 				</div>
+				@@include('../../common/views/goTop.html')
 			</div>
+
 		</div>
+
+
+        <!-- 弹框区域 -->
+        <div class="tipBox">
+            <div class="alertcontent">
+                <img class="bgPicture" src="/mine/static/img/alertBox.png" alt="">
+                <ul>
+                    <li class="firstli commonval ellipsis"><!-- 39元京东卡39元京东卡 --></li>
+                    <li class="secondliNum secondli commonval"><span>卡号：</span><span><!-- 2294928492294928498438 --></span></li>
+                    <li class="secondliPwd secondli commonval"><span>密码：</span><span><!-- 22949284922984 --></span></li>
+                    <li class="thirdli commonval clearfix">
+                        <p>使用期限</p>
+                        <p><span><!-- 2019-08-08 --></span>至<span><!-- 2010-01-01 --></span></p>
+                    </li>
+                    <li class="fourli commonval">
+                        <p>奖品描述</p>
+                        <p class="ellipsis_two"><!-- 描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述 --></p>
+                    </li>
+                    <li class="fiveli commonval">
+                        <p>奖励时间</p>
+                        <p><!-- 2019-09-09 --></p>
+                    </li>
+                </ul>
+                <i class="iconfont closeBtn">&#xe637;</i>
+            </div>
+
+        </div>
+         <!-- 弹框区域 -->
+
+e
 	</div>
 
-	 
+	<script id="reward-template" type="text/x-handlebars-template">
+		{{#each this}}
+		{{#if prizeValue}}
+		{{! 实体奖励}}
+			<div class="mui-card-conten mui-card-media entity ">
+				<span class="rewardType ">实体奖</span>
+				<div class="rewardDetail">
+					<p class="rewardName ellipsis">{{prizeName}}</p>
+					<p class="rewardTime">奖励时间：{{createTime}}</p>
+				</div>
+			</div>
+
+		{{else}}
+		{{! 虚拟奖励}
+		{{! 区分生效和失效状态}}
+			<div class="mui-card-conten mui-card-media {{xnParentClass}}">
+				<div class="{{xnChildClass}}">
+					<p class="rewardName ellipsis">{{prizeName}}</p>
+					<p class="rewardTime" start-data={{startTime}} end-data={{endTime}} create-data={{createTime}}>有效期至：{{endTime}}</p>
+					<a href="javascript:;" class="viewDetails"  data-id="{{prizeDetailId}}" data-memo={{memo}}>查看详情<span class="iconfont">&#xe636;</span></a>
+					{{#if imgvalue}}
+					<img class="invalidImg" src="/mine/static/img/rewards/yishixiao@3x.png">
+					{{/if}}
+				</div>
+			</div>
+		{{/if}}
+		{{/each}}
+
+	</script>
+
+
+
+
 	@@include('@pathInclude/views/footer.html')
+	<script src="/include/js/iscroll.js"></script>
+
 	<!-- 添加埋点 -->
 	@@include('@pathInclude/views/header.html')
+
 	<script src="/mine/static/js/rewards.js"></script>
 
 </body>

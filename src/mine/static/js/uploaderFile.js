@@ -137,7 +137,7 @@ module.exports = function(callback, preThis, type) {
                     }
                 })
                 console.log(preThis.gD.idArr)
-                debugger
+                // debugger
                 // if (condition) {
                     // 如果校验通过，执行上传
                     // $('.listLoading').show();
@@ -225,6 +225,11 @@ module.exports = function(callback, preThis, type) {
             $li.off().find('.file-panel').off();
             $li.remove();
             that.source.$select.show();
+            debugger
+            var indexs=file.id.split("_")    
+            preThis.gD.idArr.splice(indexs[2],1)
+            // console.log(indexs,'+++++++++++++++++++',preThis.gD.idArr)
+
         },
 
         //将文件加入队列的错误发生时
@@ -251,8 +256,8 @@ module.exports = function(callback, preThis, type) {
                 tipAction('上传格式有误，请上传jpg，png格式文件')
             }
             if (type == 'NO_FILE') {
-                //
-                tipAction('文件上传失败，请重新上传  ')
+                // debugger
+                // tipAction('文件上传失败，请重新上传  ')
             }
         },
 

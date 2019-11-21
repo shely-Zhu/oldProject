@@ -35,11 +35,11 @@ $(function () {
             var that = this;
             that.gD.imgNum = $('.uploadMaterial').find('.imgNum').length;
             // that.gD.idArr.push(1);
-            that.gD.idArr.push.apply(that.gD.idArr, idJson.data.fileId);
-            if (that.gD.idArr.length === that.gD.imgNum) {
-                that.submitAdvise()
-            }
-            console.log(idJson)
+            that.gD.idArr.push.apply(that.gD.idArr, idJson.data);
+            // if (that.gD.idArr.length === that.gD.imgNum) {
+            //     that.submitAdvise()
+            // }
+            // console.log(idJson)
         },
         event: function () {
             var that = this;
