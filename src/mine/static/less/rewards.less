@@ -151,11 +151,14 @@
 		    	position:absolute;
 		    	left:0;
 		    	top:0;
-				 margin:0.32rem 0.33rem 0;
+				padding:0.32rem 0.33rem 0;
+		        max-width: 100%;
+		        min-width: 6.27rem;
 		    	display: table-cell;
 		    	/* z-index: 9999; */
 		    	li{
 		    		font-size:0.26rem;
+
 		    	}
 		    	.commonval{
 					color: #382918;
@@ -179,8 +182,11 @@
 					padding:0.09rem 0.14rem 0.07rem 0.12rem;
 					font-size: 0.26rem;
 					color: #000000;
-					span:nth-child(2){
+					span{
+						display:inline-block;
+						max-width: 100%;
 						word-break:break-all;
+						overflow:hidden;
 					}
 				}
 				.secondliNum{
