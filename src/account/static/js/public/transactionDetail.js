@@ -53,6 +53,31 @@ $(function() {
 					$("b").eq(e.detail.slideNumber).addClass('borderBottom')
 					// console.log(e.srcElement,"2")
 					console.log(event.detail.slideNumber)
+					if(event.detail.slideNumber === 1){
+						$("#item1").empty()
+						$("#item3").empty()
+						$("#item4").empty()
+						$("#item2").prepend($("<div class='list'><div class='contentWrapper'><div class='contentWrap'></div><div class='goTopBtn iconfont'></div></div></div>"))						   
+					}else if(event.detail.slideNumber === 2){
+						$("#item1").empty()
+						$("#item2").empty()
+						$("#item4").empty()
+						$("#item3").prepend($("<div class='list'><div class='contentWrapper'><div class='contentWrap'></div><div class='goTopBtn iconfont'></div></div></div>"))
+					}else if(event.detail.slideNumber === 3){
+						$("#item1").empty()
+						$("#item2").empty()
+						$("#item3").empty()
+						$("#item4").prepend($("<div class='list'><div class='contentWrapper'><div class='contentWrap'></div><div class='goTopBtn iconfont'></div></div></div>"))
+					}else if(event.detail.slideNumber === 0){
+						$("#item2").empty()
+						$("#item3").empty()
+						$("#item4").empty()
+						$("#item1").prepend($("<div class='list'><div class='contentWrapper'><div class='contentWrap'></div><div class='goTopBtn iconfont'></div></div></div>"))
+					}
+
+					// that.getData()
+					that.initMui()
+
 				})
 				var height = windowHeight - $(".title").height() - $(".topTitle").height();
 				if (!$('.list').hasClass('setHeight')) {
@@ -106,7 +131,8 @@ $(function() {
                 url: site_url.curveHistoryList_api,
                 data: {
                     "pageNo": that.gV.pageCurrent, //非必须，默认为1
-                    "pageSize": "10" //非必须，默认为10
+					"pageSize": "10",//非必须，默认为10
+					"projectId":"12776",//项目编号
                 },
                 //async: false,
                 needDataEmpty: true,
@@ -147,7 +173,8 @@ $(function() {
                         that.gV.pageCurrent++;
 
                         // 将列表插入到页面上
-                        generateTemplate(data, that.$e.recordList, that.$e.adjustmentTemp);
+                        // generateTemplate(data, that.$e.recordList, that.$e.adjustmentTemp);
+                        generateTemplate(data, $(".contentWrap"), that.$e.adjustmentTemp);
 
                     }, 200)
 
