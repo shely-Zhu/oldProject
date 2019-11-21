@@ -266,7 +266,7 @@ module.exports = {
     // 消息中心-通知详情
     './homePage/static/js/noticeDetail': './src/homePage/static/js/noticeDetail.js',
     //include---富文本模板
-    './include/js/modelPage/rich_template': './src/include/js/modelPage/rich_template.js',
+    './include/js/modelPage/articleTemplate': './src/include/js/modelPage/articleTemplate.js',
     // 了解恒天
     './homePage/static/js/understandHT': './src/homePage/static/js/understandHT.js',
 
