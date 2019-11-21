@@ -266,7 +266,7 @@ module.exports = {
     // 消息中心-通知详情
     './homePage/static/js/noticeDetail': './src/homePage/static/js/noticeDetail.js',
     //include---富文本模板
-    './include/js/modelPage/rich_template': './src/include/js/modelPage/rich_template.js',
+    './include/js/modelPage/articleTemplate': './src/include/js/modelPage/articleTemplate.js',
     // 了解恒天
     './homePage/static/js/understandHT': './src/homePage/static/js/understandHT.js',
 
@@ -286,6 +286,10 @@ module.exports = {
     './account/static/js/public/transactionRecords': './src/account/static/js/public/transactionRecords.js',
     // 自选公募交易明细
     './account/static/js/public/transactionDetail': './src/account/static/js/public/transactionDetail.js',
+
+    // 自选公募--超宝详情
+    './account/static/js/public/superStreasureDetail': './src/account/static/js/public/superStreasureDetail.js',
+
     // 现金宝详情页
      './account/static/js/public/cashTreasure': './src/account/static/js/public/cashTreasure.js',
 }
