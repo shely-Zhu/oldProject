@@ -1,0 +1,131 @@
+/**
+* 自选公募交易记录
+* @author wangjiajia 2019-11-20
+*/
+@import url("../../../../../include/css/mui.min.css");
+@import url('@pathCommonLess/mui/resetMUI.less');
+@import url("@pathCommonLess/reset.less");
+@import url("@pathCommonLess/color.less");
+
+@import url("@pathCommonLessCom/againEnter.less");
+@import url("@pathCommonLessCom/alertBox.less");
+@import url("@pathCommonLessCom/headBarConfig.less");
+
+body{
+    max-width: 7.5rem;
+    background-color: @F7FAFD;
+}
+span{display: inline-block}
+#tabbar{
+    background-color: @c005;
+}
+.mui-segmented-control{
+    border: .01rem;
+}
+.mui-segmented-control-inverted{
+    border: .01rem;
+    border-top: solid .01rem;
+}
+#drapUpWrapper{
+    margin-top: .18rem;
+}
+.fileLabel{
+    width:1.4rem;
+    height:.38rem;
+    margin-top: .3rem;
+    background:linear-gradient(220deg,rgba(245,236,213,1) 0%,rgba(248,234,201,1) 100%);
+    border-radius:.04rem;
+    font-size: .24rem;
+    font-weight: 400;
+    // color: red;
+    text-align: center;
+    margin-left: .31rem;
+    padding: .02rem 0;
+}
+.fileName{
+    margin-top: .1rem;
+    margin-left: .31rem;
+    color: @c009;
+    // color: red;
+    font-size: .32rem;
+    position: relative;
+}
+#fontSize{
+    font-size: .32rem;
+    position: absolute;
+    top: .15rem;
+    right: .3rem;
+}
+.fileTime{
+    margin-left: .31rem;
+    font-size: .24rem;
+    color:@9B9B9B;
+    margin-bottom: .3rem;
+}
+.borderBottom{
+    display:block;
+    margin-left: 0.7rem;
+    width: 0.5rem;
+    height: 0.06rem;;
+    background:linear-gradient(135deg,rgba(108,131,201,1) 0%,rgba(6,29,106,1) 100%);
+    border-radius:.03rem;
+}
+footer{
+    margin-top: .3rem;
+    text-align: center;
+    font-size: .24rem;
+    font-family:PingFangSC-Regular,PingFang SC;
+    font-weight:400;
+}
+
+.mui-slider .mui-segmented-control.mui-segmented-control-inverted~.mui-slider-group .mui-slider-item {
+    border-bottom: 0;
+    border-top: 0;
+}
+.mui-segmented-control.mui-segmented-control-inverted .mui-control-item.mui-active{
+    color: @272727;
+    font-weight: 600;
+}
+
+
+.title{
+    width: 100%;
+    height: 1rem;
+    position: fixed;
+    background: #fff;
+    z-index: 999;
+}
+#drapUpWrapper{
+    margin-top:0;
+}
+.list {
+    margin-top: 1rem;
+    .contentWrapper{
+        width: 100%;
+        height: 100%;
+        overflow: hidden;
+        .content{
+            width: 100%;
+            height: 1.36rem;
+            border-bottom:0.01rem solid @c004;
+            display: flex;
+            justify-content: space-between;
+            padding:0.2rem 0.3rem;
+            font-size:0.26rem;
+            font-family:PingFangSC-Regular,PingFang SC;
+            font-weight:400;
+            color:@000000;
+            line-height: 0.4rem;
+            .contentUl{
+                width: 100%;
+                height: 100%;
+                .changeColor{
+                    color: @9B9B9B;
+                }             
+            }
+            .rightUl{
+                text-align: right;
+            }
+        }
+    }
+}
