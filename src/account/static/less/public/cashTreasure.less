@@ -1,7 +1,7 @@
 /**
  * 私募资产详情页
  *
- * @author tianjunguo 20191120
+ * @author yangjinlai 20191119
  */
 
 @import url("@pathInclude/css/mui.min.css");
@@ -74,19 +74,23 @@ body{
 
 			.con{
 				background: url("/account/static/img/public_account_bg.png");
-				height: 4.94rem;
+				height: 4.5rem;
 				background-size: 100% 100%;
-
+				.projectId{
+					padding-top: 1.1rem;
+					div{
+						color: @FFFFFF;
+						font-size: 0.2rem;
+						text-align: center;
+					}
+				}
 				.bannerTop {
 				    color: @F7DDCF;
 				    margin: 0 0.3rem;
-				    padding-top: 1.54rem;
+				    padding-top: 0.2rem;
 
 				    .sum {
 				        font-size: 0.26rem;
-				        .j_text{
-				            line-height: .37rem;
-				        }
 				    }
 				    .assetsBtn{
 				        width: 1.5rem;
@@ -106,36 +110,26 @@ body{
 				.totalM{
 				    font-size: 0.68rem;
 				    line-height: 0.8rem;
-				    margin: 0.1rem 0.3rem 0;
-                    font-weight:bold;
-                    color:rgba(255,255,255,1);  
+				    margin: 0.1rem 0.3rem 0.22rem;
+				    font-weight:bold;
+				    color:rgba(153,81,0,1);
 				    background:linear-gradient(360deg, rgba(186,140,112,1) 0%, rgba(244,210,192,1) 100%);
 				    -webkit-background-clip:text;
 				    -webkit-text-fill-color:transparent;
 				}
-                .toConfirm{
-                    margin: .1rem .31rem .39rem;
-                    font-size: .26rem;
-                    color: @c002;
-                    .confirmMoney{
-                        margin-left: .16rem;
-                        color:rgba(237,201,155,1);
-                        font-size: .38rem;
-                    }
-                }
+
 				// 已持仓
 				.type {
 				    width: 100%;
-				    margin: 0 0.39rem;
+				    margin: 0 0.3rem;
 				    li {
 				        span {
 				            display: block;
-//				            color: @c005;
-				            color:rgba(255,255,255,1);
+				            color: @c005;
 				            opacity: 0.7;
 				            font-size: 0.26rem;
 				            &:first-child {
-				                padding-bottom: 0.06rem;
+				                padding-bottom: 0.2rem;
 				            }
 				        }
 				    }
@@ -176,6 +170,10 @@ body{
 			.openDiv{
 				position: relative;
 				
+				&:last-child{
+					padding-left: 0.4rem;
+				}
+
 				.num{
 					font-size: 0.3rem;
 					color: @4A4A4A;
@@ -254,14 +252,11 @@ body{
 		.title{
 			display: inline-block;
 		}
-        .dividend{
-            float: right;
-            
-        }
+
 		.arrow{
 			float: right;
 			width: 0.3rem;
-			height: 1rem;
+			height: 0.6rem;
 
 			.img{
 				background: url("/account/static/img/productDetail/arrow.png");
@@ -286,9 +281,7 @@ body{
 			color: @8A8A8A;
 			height: 0.6rem;
 			line-height: 0.6rem;
-            .arrow{
-                height:0.6rem;
-            }
+
 			.title{
 
 				&:first-child{
@@ -297,7 +290,7 @@ body{
 
 				&.active{
 					color: @272727;
-					border-bottom: 0.06rem solid @C8AB7D;
+					// border-bottom: 0.06rem solid @C8AB7D;
 				}
 			}
 
@@ -321,20 +314,20 @@ body{
 				height: 0.56rem;
 				line-height: 0.56rem;
 				font-size: 0.24rem;
-				border: 0.02rem solid @C8AB7D;
+				border: 0.02rem solid @364D97;
 				border-radius: 0.08rem;
 
 				.time{
-					color: @C8AB7D;
+					color: @364D97;
     				text-align: center;
-    				border-right: 0.02rem solid @C8AB7D;
+    				border-right: 0.02rem solid @364D97;
 
 					&:last-child{
 						border-right: 0;
 					}
 
 					&.active{
-						background: @C8AB7D;
+						background-image: linear-gradient(to right, @6C83C9, @061D6A);
 						color: @c005;
 
 					}
@@ -348,24 +341,81 @@ body{
 
 	.dealReg{
 		background: @c005;
-		margin-bottom: 0.3rem;
-
+		// margin-bottom: 0.3rem;
+		margin-bottom: 1.28rem;
 		.titleWrap{
-			border-bottom: 1px solid @E7E9ED;
+			// border-bottom: 1px solid @E7E9ED;
+			color: @272727;
+			font-size: 0.32rem;
+
+		}
+
+		.dealRegMid{
+			padding:0 0.3rem;
+			font-size: 0.28rem;
+			color: @4E4E4E;
+			text-align: justify;
+			padding-bottom: 0.3rem;
+		}
+
+		.nav{
+			margin-top: 0.6rem;
+			text-align: center;
+		    font-size: 0.28rem;
+		    color: @272727;
+		    margin-bottom: 0.6rem;
+			
+		    .navSpan{
+
+		    	padding-bottom: 0.1rem;
+		    	display: inline-block;
+
+		    	&:first-child{
+		    		margin-right: 0.3rem;
+		    	}
+
+		    	&.active{
+		    		color: @272727;
+		    		border-bottom: 0.06rem solid @C8AB7D;
+		    	}
+		    }
+		}
+
+		.line{
+			font-size: 0.28rem;
+			color: @9B9B9B;
+			margin-bottom: 0.3rem;
+
+			// .img{
+				
+			// }
+
+			.top_r, .bottom_r{
+				float: right;
+			}
+		}
+
+		.detail{
+			padding-left: 0.3rem;
+			padding-right: 0.3rem;
 		}
 	}
-	.footer{
-	    display: none;
-	    .buttonStyle{
-	        line-height: .98rem;
-	        text-align: center;
-	        height:.98rem;
-	        font-size: .32rem;
-	        color: #0E246C;
-	        &:last-child{
-	            color: @c002;
-	            background:linear-gradient(135deg,rgba(108,131,201,1) 0%,rgba(6,29,106,1) 100%);
-	        }
-	    }
+}
+.footer{
+	height: 0.98rem;
+	background: @FFFFFF;
+	position: fixed;
+	bottom: 0;
+	width: 100%;
+	.footerBtnLeft,.footerBtnRight{
+		height: 0.98rem;
+		line-height: 0.98rem;
+		font-size: 0.32rem;
+		text-align: center;
+		color: @0E246C;
+	}
+	.footerBtnRight{
+		background-image: linear-gradient(to right, @6C83C9, @061D6A);
+		color: @FFFFFF;
 	}
 }

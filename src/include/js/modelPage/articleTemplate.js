@@ -37,7 +37,7 @@ $(function(){
             var obj=[{
                 url: site_url.getArticle_api,
                 data:{
-                	id:splitUrl['id']
+                	articleBelong:splitUrl['articleBelong']
                 },
                 needDataEmpty: true,
                 callbackDone: function(json) {

@@ -16,10 +16,10 @@ require('@pathCommonJsCom/headBarConfig.js');
 require('@pathCommonJsCom/tabScroll.js');
 
 //黑色提示条的显示和隐藏
-var tipAction = require('@pathCommonJsCom/tipAction.js');
+// var tipAction = require('@pathCommonJsCom/tipAction.js');
 
 var splitUrl = require('@pathCommonJs/components/splitUrl.js')();
-var generateTemplate = require('@pathCommonJsComBus/generateTemplate.js');
+// var generateTemplate = require('@pathCommonJsComBus/generateTemplate.js');
 
 //echarts图表
 var echarts = require('echarts/lib/echarts');
@@ -50,14 +50,18 @@ var monthReportDetail = {
 		var that = this;
 		
 		//拼模板，初始化左右滑动mui组件
-		// that.beforeFunc();
+		that.beforeFunc();
 
 		//初始化第一屏区域的上拉加载
 		that.getData($('#scroll1'));
+		// 资产情况分析
+		that.assetAnalysis();
+
+		// 环形图
+		that.bingtu();
 
 		//事件监听
 		// that.events();
-		that.bingtu();
 	},
 
 	beforeFunc: function(){  //拼模板，初始化左右滑动mui组件
@@ -70,7 +74,7 @@ var monthReportDetail = {
 			list_html = template();
 
 		//将生成的模板内容存到that.list_template上
-		that.setting.list_template = template;
+	 	that.setting.list_template = template;
 
 		// 外容器优先加载
 		var wrap_source = $('#transaction-template').html(),
@@ -110,19 +114,33 @@ var monthReportDetail = {
 			}
 		}
 		$.tabScroll(obj);
-
-		//设置切换区域的高度
-		//计算节点高度并设置
-		// var height = windowHeight - document.getElementById('scroll1').getBoundingClientRect().top;
-		// if (!$('.list').hasClass('setHeight')) {
-		// 	$('.list').height(height).addClass('setHeight');
-		// }
 	},
 	getData: function($id, t) {
 
 		var that = this;
 
 		var obj = [{
+			url: site_url.queryInvestReportDetail_api,   // 报告分析（报告明细）
+			data: {
+				reportId: that.getElements.reportId
+			},
+			needLogin: true,
+			needDataEmpty: true,
+			contentTypeSearch: true,
+			async: false,
+			callbackDone: function(json) {
+				
+
+			},
+			callbackFail: function(json) {
+				//请求失败，
+				//显示错误提示
+				tipAction(json.message);
+
+			},
+			
+
+		},{
 			url: site_url.queryInvestProdHoldShareList_api,   // 持仓总览
 			data: {
 				reportId: that.getElements.reportId
@@ -257,6 +275,166 @@ var monthReportDetail = {
 
 		}]
 		$.ajaxLoading(obj);
+	},
+
+	assetAnalysis: function(){
+		var that = this;
+
+		//当前资产配置比数组
+		that.monthHoldShareList = [];
+		//建议资产配置比数组
+		that.recommendList = [];
+		
+		//当前资产配置比列表
+		var obj = [{
+			url: site_url.queryInvestAssetAnalyse_api,
+			data: {
+				reportId: that.getElements.reportId, //报告id
+			},
+			needLogin:true, 
+			needDataEmpty: false,
+			async:false,//同步，newcomer字段在产品详情的结构会用于其他逻辑判断
+			callbackDone: function(json){
+				//判断是否已实名认证
+				var data = json.data;
+				// var assetPerHtml;
+
+				var lastMonth = Number(that.getElements.month)-1;
+
+				if ( data.monthHoldShareList.length) {
+					//有数据
+					that.monthHoldShareList = data.monthHoldShareList;
+
+					//调用画图方法
+					// that.drawImage();
+
+					// that.typeCompare();
+				}
+
+				if(!$.util.objIsEmpty(data)){
+					var result = data.monthHoldShareList;
+
+					if(data.monthHoldShareList.length !=0){
+						var assetPerHtmlArr = [];
+						$.each(result,function(i,el){
+							el.confirmValuePercentNum = $.util.multiplying(el.confirmValuePercent,100);
+							var assetPerHtml = el.assetTypeDesc + '占比' + el.confirmValuePercentNum + '%'; 
+							assetPerHtmlArr.push(assetPerHtml);
+						})
+						that.getElements.assetPerHtml = assetPerHtmlArr.join('，');
+					}
+					
+                    // 对null做转换,转为''
+                    if($.util.isNull(data.currentMonthTotalValue)){
+                        data.currentMonthTotalValue = '';
+                    }
+
+                    if($.util.isNull(data.lastMonthTotalHoldValue)){
+                        data.lastMonthTotalHoldValue = '';
+                    }
+
+					if(data.currentMonthTotalValue != '' && data.lastMonthTotalHoldValue != ''){
+						var diff,diffHtml;
+						
+						if(Number(data.currentMonthTotalValue) < Number(data.lastMonthTotalHoldValue)){
+							diff = $.util.numberSub( Number(data.lastMonthTotalHoldValue), Number(data.currentMonthTotalValue));
+							diffHtml = '减少' + diff;
+							// $('.lastTotal').html(diffHtml)
+						}else{
+							diff = $.util.numberSub( Number(data.currentMonthTotalValue), Number(data.lastMonthTotalHoldValue));
+							diffHtml = '增加' + diff;
+							// $('.lastTotal').html(diffHtml)
+						}
+
+						var noPosition = '<p class="tipPosition">您在<span class="monthReportTime">'+ that.getElements.monthReportTime +'</span>，投资的 <span class="property">'+ that.getElements.assetPerHtml +'</span>。</p>'+
+									'<p class="tipCompare">截止'+ that.getElements.reportTime +'，您的总持仓金额为<span class="monthTotal">'+ data.currentMonthTotalValue+'</span>元，同比'+lastMonth+'月份<span class="lastTotal">'+ diffHtml +'</span>元。</p>';
+
+						$('.monthReportTipContent').html(noPosition);
+
+					}
+
+					
+				}
+				if(data.currentMonthTotalValue == '' && data.lastMonthTotalHoldValue != ''){
+					var noPosition = '<p class="tipPosition">您在<span class="monthReportTime">'+ that.getElements.monthReportTime +'</span>，您暂无持仓。</p>'+
+									'<p>同比'+ lastMonth +'月份减少'+ data.lastMonthTotalHoldValue +'。</p>';
+									// '<p class="tipCompare">截止'+ that.getElements.reportTime +'，您的总持仓金额为<span class="monthTotal">'+ data.currentMonthTotalValue +'</span>元。</p>'
+					$('.monthReportTipContent').html(noPosition);
+				}
+				if(data.lastMonthTotalHoldValue == '' && data.currentMonthTotalValue != ''){
+					var noPosition = '<p class="tipPosition">您在<span class="monthReportTime">'+ that.getElements.monthReportTime +'</span>，投资的 <span class="property">'+ that.getElements.assetPerHtml +'</span>。</p>'+
+									'<p class="tipCompare">截止'+ that.getElements.reportTime +'，您的总持仓金额为<span class="monthTotal">'+ data.currentMonthTotalValue +'</span>元。</p>'
+				}
+				if(data.currentMonthTotalValue == '' && data.lastMonthTotalHoldValue == ''){
+					var noPosition = '<p class="tipCompare">截止'+ that.getElements.reportTime +'，您暂无持仓。</p>'
+				}
+                
+				$('.monthReportTipContent').html(noPosition);
+
+
+			}
+		},{
+			url: site_url.queryInvestAssetConfigureAdvise_api,
+			data: {
+				reportId: that.getElements.reportId, //报告id
+			},
+			needLogin:true, 
+			needDataEmpty: false,
+			callbackDone: function(json){
+				//判断是否已实名认证
+				var data = json.data;
+				// var flag;
+
+				if ( data.length) {
+					//有数据
+					that.recommendList = data;
+
+					//调用画图方法
+					// that.drawImage();
+
+					// that.typeCompare();
+				}
+				// 循环遍历数据
+				for(var index in data){
+
+					var result = data[index].productList;
+
+					data[index].assetRatioDesc = $.util.multiplying(data[index].assetRatio,100);
+
+					$.each(result,function(i,el){
+
+						for(var m in result){
+							if(result[m].productType == '173'){
+								result[m].flag2 = true;
+							}
+							else if(result[m].productType == '177'){
+								result[m].flag3 = true;
+							}else{
+								result[m].flag1 = true;
+							}
+
+							result[m].allocationRatiodesc = (Number(result[m].allocationRatio)*100).toFixed(2);
+							result[m].allocationAmountdesc = parseFloat(result[m].allocationAmount) / 10000;
+
+						}
+
+					})
+					
+				}
+				// if(!$.util.objIsEmpty(data)){
+				// 	var template = Handlebars.compile($("#optimizationList").html());
+				// 	//匹配json内容
+				// 	var html = template(data);
+				// 	//输入模板
+				// 	$('.optimizationList').append(html);
+				// }
+				
+				
+			}
+		}]
+		$.ajaxLoading(obj);
+
+
 	},
 
 	events: function(){  //绑定事件
