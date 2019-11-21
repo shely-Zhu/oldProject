@@ -14,12 +14,9 @@ require('@pathCommonJs/ajaxLoading.js');
 require('@pathCommonJsCom/headBarConfig.js');
 
 require('@pathCommonJsCom/tabScroll.js');
-
-//黑色提示条的显示和隐藏
-// var tipAction = require('@pathCommonJsCom/tipAction.js');
-
 var splitUrl = require('@pathCommonJs/components/splitUrl.js')();
-// var generateTemplate = require('@pathCommonJsComBus/generateTemplate.js');
+
+var moment = require('moment');
 
 //echarts图表
 var echarts = require('echarts/lib/echarts');
@@ -46,6 +43,7 @@ var monthReportDetail = {
 		ajaxArr: [site_url.queryInvestProdHoldShareList_api, site_url.queryInvestTradeDetail_api],  //存放每一个ajax请求的传参数据
 	},
 	html: '',  //存放生成的html
+	pieChartData:'', // 画图的title
 	init: function(){  //初始化函数
 		var that = this;
 		
@@ -57,8 +55,8 @@ var monthReportDetail = {
 		// 资产情况分析
 		that.assetAnalysis();
 
-		// 环形图
-		that.bingtu();
+		// // 环形图
+		// that.bingtu();
 
 		//事件监听
 		// that.events();
@@ -74,7 +72,7 @@ var monthReportDetail = {
 			list_html = template();
 
 		//将生成的模板内容存到that.list_template上
-	 	that.setting.list_template = template;
+		that.setting.list_template = template;
 
 		// 外容器优先加载
 		var wrap_source = $('#transaction-template').html(),
@@ -120,6 +118,26 @@ var monthReportDetail = {
 		var that = this;
 
 		var obj = [{
+			url: site_url.user_api,
+			data: {
+				hmac:"", //预留的加密信息   非必填项
+				params:{//请求的参数信息
+
+				}
+			},
+			needLogin:true,//需要判断是否登陆
+			needLoading:true,
+			callbackDone:function(data){
+				var json=data.data;
+
+				$('.clientName').html(json.name);
+				// 客户编号
+				$('.monthReportNum').html(json.customerNo);
+			},
+			callbackNoData: function(json){ //没有数据的情况
+				console.log(json.msg);
+			}
+		},{
 			url: site_url.queryInvestReportDetail_api,   // 报告分析（报告明细）
 			data: {
 				reportId: that.getElements.reportId
@@ -129,6 +147,33 @@ var monthReportDetail = {
 			contentTypeSearch: true,
 			async: false,
 			callbackDone: function(json) {
+				var json=json.data;
+				// 报告名称
+				$('.clientName').html(json.reportName)
+				// 报告月份
+				that.getElements.monthReportTime = json.month;
+				$('.reportMonth').html(json.month);
+				
+				// 客户内容的富文本
+				// $('.textBox').html(json.content);
+				// 生命周期
+				$('.lifeTerm').html(json.lifeTerm);
+				// 风险等级
+				$('.riskLevel').html(json.riskLevel);
+				// 报告日期
+				$('.reportTime').html(json.reportTime);
+				that.getElements.reportTime = json.reportTime;
+
+				var dateStr = json.reportTime;
+					dateStr = dateStr.replace(/年/g,"-");
+					dateStr = dateStr.replace(/月/g,"-");
+					dateStr = dateStr.replace(/日/g,"");
+				var now=moment(dateStr).format('YYYY-MM-DD');
+
+				var year = now.substring(0,4);
+				var month = now.substring(5,7);
+				that.getElements.month = month;
+				that.getMonthDateRange(year,month);
 				
 
 			},
@@ -180,8 +225,8 @@ var monthReportDetail = {
 					$id.find('.contentWrapper .mui-table-view-cell').append(that.setting.html);
 				}
 
-                that.getElements.listLoading.hide();
-                $id.addClass('hasPullUp');
+				that.getElements.listLoading.hide();
+				$id.addClass('hasPullUp');
 
 			},
 			callbackFail: function(json) {
@@ -284,6 +329,7 @@ var monthReportDetail = {
 		that.monthHoldShareList = [];
 		//建议资产配置比数组
 		that.recommendList = [];
+		that.pieChartData = [];
 		
 		//当前资产配置比列表
 		var obj = [{
@@ -305,8 +351,12 @@ var monthReportDetail = {
 					//有数据
 					that.monthHoldShareList = data.monthHoldShareList;
 
+					$.each(data.monthHoldShareList,function(i,el){
+						that.pieChartData[i] = el.assetTypeDesc;
+					})
+
 					//调用画图方法
-					// that.drawImage();
+					that.bingtu();
 
 					// that.typeCompare();
 				}
@@ -324,14 +374,14 @@ var monthReportDetail = {
 						that.getElements.assetPerHtml = assetPerHtmlArr.join('，');
 					}
 					
-                    // 对null做转换,转为''
-                    if($.util.isNull(data.currentMonthTotalValue)){
-                        data.currentMonthTotalValue = '';
-                    }
+					// 对null做转换,转为''
+					if($.util.isNull(data.currentMonthTotalValue)){
+						data.currentMonthTotalValue = '';
+					}
 
-                    if($.util.isNull(data.lastMonthTotalHoldValue)){
-                        data.lastMonthTotalHoldValue = '';
-                    }
+					if($.util.isNull(data.lastMonthTotalHoldValue)){
+						data.lastMonthTotalHoldValue = '';
+					}
 
 					if(data.currentMonthTotalValue != '' && data.lastMonthTotalHoldValue != ''){
 						var diff,diffHtml;
@@ -368,7 +418,7 @@ var monthReportDetail = {
 				if(data.currentMonthTotalValue == '' && data.lastMonthTotalHoldValue == ''){
 					var noPosition = '<p class="tipCompare">截止'+ that.getElements.reportTime +'，您暂无持仓。</p>'
 				}
-                
+				
 				$('.monthReportTipContent').html(noPosition);
 
 
@@ -436,230 +486,212 @@ var monthReportDetail = {
 
 
 	},
+	getMonthDateRange: function(year, month) {
+		// month in moment is 0 based, so 9 is actually october, subtract 1 to compensate
+		// array is 'year', 'month', 'day', etc
+		var startDate = moment([year, month - 1]);
 
-	events: function(){  //绑定事件
-		var that = this;
-		//跳转到转入转出详情页
-		
+		// Clone the value before .endOf()
+		var endDate = moment(startDate).endOf('month');
+
+		// just for demonstration:
+		console.log(startDate.toDate());
+		console.log(endDate.toDate());
+		// make sure to call toDate() for plain JavaScript date type
+
+
+		$('.startDate').html(moment(startDate).format('YYYY-MM-DD'));
+
+		$('.endDate').html(moment(endDate).format('YYYY-MM-DD'));
+
+		return { start: startDate, end: endDate };
 
 	},
-	bingtu:function(){
-        // app.title = '环形图';
-        var pieChart = echarts.init($('.circle')[0]);
-        // var pieChartOne = echarts.init($('.circleOne')[0]);
-        // var colorArr=['#f4cf5c', '#7d7c7d','#bbb','#ec9b32','#f76a2c'];
-        
-        // 指定图表的配置项和数据
-        option = {
-            // tooltip: {
-            //     // trigger: 'item',
-            //     // formatter: "{a} <br/>{b}: {c} ({d}%)"
-            // },
-            legend: {
-                orient: 'vertical',
-                x: 'left',
-                data:['直接访问','邮件营销','联盟广告','视频广告','搜索引擎'],
-                icon: "roundRect",   //  这个字段控制形状  类型包括 circle，rect ，roundRect，triangle，diamond，pin，arrow，none
 
-                itemWidth: 10,  // 设置宽度
+	bingtu:function(){
+		// vatr tha
+		// app.title = '环形图';
+		var pieChart = echarts.init($('.circle')[0]);
+		
+		// 指定图表的配置项和数据
+		option = {
+			legend: {
+				orient: 'vertical',
+				x: 'left',
+				data:that.pieChartData,
+				icon: "roundRect",   //  这个字段控制形状  类型包括 circle，rect ，roundRect，triangle，diamond，pin，arrow，none
+
+				itemWidth: 10,  // 设置宽度
 
 				itemHeight: 10, // 设置高度
 				itemGap: 10 ,//设置间距
 				x: '70%',
 				y: '35%'
 
-            },
-            series: [
-                {
-                    name:'访问来源',
-                    type:'pie',
+			},
+			series: [
+				{
+					name:'访问来源',
+					type:'pie',
 					radius: ['49%', '70%'],
 					center: ['35%', '47%'],
-                    // selectedMode: 'single',
-                    avoidLabelOverlap: false,
-                    hoverAnimation:false,
-                    label: {
-                        // normal: {
-                        //     show: false,
-                        //     position: 'center'
-                        // },
-                        // emphasis: {
-                        //     show: true,
-                        //     textStyle: {
-                        //         fontSize: '30',
-                        //         fontWeight: 'bold'
-                        //     }
-                        // }
-                        normal: {
-                            show:false, //去掉引导线
-                            formatter: '{a|{a}}{abg|}\n{hr|}\n  {b|{b}：}{c}  {per|{d}%}  ',
-                            backgroundColor: '#eee',
-                            borderColor: '#aaa',
-                            borderWidth: 1,
-                            borderRadius: 4,
-                            // shadowBlur:3,
-                            // shadowOffsetX: 2,
-                            // shadowOffsetY: 2,
-                            // shadowColor: '#999',
-                            // padding: [0, 7],
-                            rich: {
-                                a: {
-                                    color: '#999',
-                                    lineHeight: 22,
-                                    align: 'center'
-                                },
-                                // abg: {
-                                //     backgroundColor: '#333',
-                                //     width: '100%',
-                                //     align: 'right',
-                                //     height: 22,
-                                //     borderRadius: [4, 4, 0, 0]
-                                // },
-                                hr: {
-                                    borderColor: '#aaa',
-                                    width: '100%',
-                                    borderWidth: 0.5,
-                                    height: 0
-                                },
-                                b: {
-                                    fontSize: 16,
-                                    lineHeight: 33
-                                },
-                                per: {
-                                    color: '#eee',
-                                    backgroundColor: '#334455',
-                                    padding: [2, 4],
-                                    borderRadius: 2
-                                }
-                            }
-                        }
-                    },
-                    labelLine: {
-                        normal: {
-                            show: false
-                        }
-                    },
-                    data:[
-                        {value:335, name:'直接访问',
-                        itemStyle: {
-                            normal: {
-                                color: new echarts.graphic.LinearGradient(
-                                    0, 0, 1, 1,
-                                    [
-                                        {offset: 0, color: '#182F7A'},
-                                        // {offset: 0.5, color: '#0CB9FF'},
-                                        {offset: 1, color: '#7286C1'}
-                                    ]
-                                )
-                            }
-                        }},
-                        {value:310, name:'邮件营销',
-                        itemStyle: {
-                            normal: {
-                                color: new echarts.graphic.LinearGradient(
-                                    0, 0, 1, 1,
-                                    [
-                                        {offset: 0, color: '#FBE2BD'},
-                                        // {offset: 0.5, color: '#0CB9FF'},
-                                        {offset: 1, color: '#D69549'}
-                                    ]
-                                ),
-                            }
-                        }},
-                        {value:234, name:'联盟广告',itemStyle: {
-                            normal: {
-                                color: new echarts.graphic.LinearGradient(
-                                    0, 0, 1, 1,
-                                    [
-                                        {offset: 0, color: '#AA6545'},
-                                        // {offset: 0.5, color: '#0CB9FF'},
-                                        {offset: 1, color: '#EDA377'}
-                                    ]
-                                ),
-                            }
-                        }},
+					// selectedMode: 'single',
+					avoidLabelOverlap: false,
+					hoverAnimation:false,
+					label: {
+						normal: {
+							show:false, //去掉引导线
+							formatter: '{a|{a}}{abg|}\n{hr|}\n  {b|{b}：}{c}  {per|{d}%}  ',
+							backgroundColor: '#eee',
+							borderColor: '#aaa',
+							borderWidth: 1,
+							borderRadius: 4,
+							rich: {
+								a: {
+									color: '#999',
+									lineHeight: 22,
+									align: 'center'
+								},
+								hr: {
+									borderColor: '#aaa',
+									width: '100%',
+									borderWidth: 0.5,
+									height: 0
+								},
+								b: {
+									fontSize: 16,
+									lineHeight: 33
+								},
+								per: {
+									color: '#eee',
+									backgroundColor: '#334455',
+									padding: [2, 4],
+									borderRadius: 2
+								}
+							}
+						}
+					},
+					labelLine: {
+						normal: {
+							show: false
+						}
+					},
+					data:[
+						{value:335, name:'直接访问',
+						itemStyle: {
+							normal: {
+								color: new echarts.graphic.LinearGradient(
+									0, 0, 1, 1,
+									[
+										{offset: 0, color: '#182F7A'},
+										// {offset: 0.5, color: '#0CB9FF'},
+										{offset: 1, color: '#7286C1'}
+									]
+								)
+							}
+						}},
+						{value:310, name:'邮件营销',
+						itemStyle: {
+							normal: {
+								color: new echarts.graphic.LinearGradient(
+									0, 0, 1, 1,
+									[
+										{offset: 0, color: '#FBE2BD'},
+										// {offset: 0.5, color: '#0CB9FF'},
+										{offset: 1, color: '#D69549'}
+									]
+								),
+							}
+						}},
+						{value:234, name:'联盟广告',itemStyle: {
+							normal: {
+								color: new echarts.graphic.LinearGradient(
+									0, 0, 1, 1,
+									[
+										{offset: 0, color: '#AA6545'},
+										// {offset: 0.5, color: '#0CB9FF'},
+										{offset: 1, color: '#EDA377'}
+									]
+								),
+							}
+						}},
 
-                    ]
-                },
-                {
-                    name:'访问来源',
-                    type:'pie',
-                    hoverAnimation:false,
+					]
+				},
+				{
+					name:'访问来源',
+					type:'pie',
+					hoverAnimation:false,
 					radius: ['40%', '50%'],
 					center: ['35%', '47%'],
-                    avoidLabelOverlap: false,
-                    
-                    label: {
-                        // normal: {
-                        //     show: false,
-                        //     position: 'center'
-                        // },
-                        // emphasis: {
-                        //     show: true,
-                        //     textStyle: {
-                        //         fontSize: '30',
-                        //         fontWeight: 'bold'
-                        //     }
-                        // }
-                        normal: {
-                            show:false,
-                            position: 'inner'
-                        }
+					avoidLabelOverlap: false,
+					
+					label: {
+						normal: {
+							show:false,
+							position: 'inner'
+						}
 
-                    },
-                    labelLine: {
-                        normal: {
-                            show: false
-                        }
-                    },
-                    data:[
-                        {value:335, name:'直接访问',
-                        itemStyle: {
-                            normal: {
-                                color: new echarts.graphic.LinearGradient(
-                                    0, 0, 1, 1,
-                                    [
-                                        {offset: 0, color: '#172c6f'},
-                                        // {offset: 0.5, color: '#0CB9FF'},
-                                        {offset: 1, color: '#4a5d96'}
-                                    ]
-                                )
-                            }
-                        }},
-                        {value:310, name:'邮件营销',
-                        itemStyle: {
-                            normal: {
-                                color: new echarts.graphic.LinearGradient(
-                                    0, 0, 1, 1,
-                                    [
-                                        {offset: 0, color: '#dcc19b'},
-                                        // {offset: 0.5, color: '#0CB9FF'},
-                                        {offset: 1, color: '#c69152'},
-                                    ]
-                                ),
-                            }
-                        }},
-                        {value:234, name:'联盟广告',itemStyle: {
-                            normal: {
-                                color: new echarts.graphic.LinearGradient(
-                                    0, 0, 1, 1,
-                                    [
-                                        
-                                        {offset: 0, color: '#a56747'},
-                                        // {offset: 0.5, color: '#0CB9FF'},
-                                        {offset: 1, color: '#cb8a64'}
-                                    ]
-                                ),
-                            }
-                        }},
+					},
+					labelLine: {
+						normal: {
+							show: false
+						}
+					},
+					data:[
+						{value:335, name:'直接访问',
+						itemStyle: {
+							normal: {
+								color: new echarts.graphic.LinearGradient(
+									0, 0, 1, 1,
+									[
+										{offset: 0, color: '#172c6f'},
+										// {offset: 0.5, color: '#0CB9FF'},
+										{offset: 1, color: '#4a5d96'}
+									]
+								)
+							}
+						}},
+						{value:310, name:'邮件营销',
+						itemStyle: {
+							normal: {
+								color: new echarts.graphic.LinearGradient(
+									0, 0, 1, 1,
+									[
+										{offset: 0, color: '#dcc19b'},
+										// {offset: 0.5, color: '#0CB9FF'},
+										{offset: 1, color: '#c69152'},
+									]
+								),
+							}
+						}},
+						{value:234, name:'联盟广告',itemStyle: {
+							normal: {
+								color: new echarts.graphic.LinearGradient(
+									0, 0, 1, 1,
+									[
+										
+										{offset: 0, color: '#a56747'},
+										// {offset: 0.5, color: '#0CB9FF'},
+										{offset: 1, color: '#cb8a64'}
+									]
+								),
+							}
+						}},
 
-                    ]
-                }
-            ]
-        };
-        // 绘制图表
-        pieChart.setOption(option); 
-    }
+					]
+				}
+			]
+		};
+		// 绘制图表
+		pieChart.setOption(option); 
+	},
+	events: function(){  //绑定事件
+		var that = this;
+		//跳转到转入转出详情页
+		
+
+	},
 }
 
 monthReportDetail.init();

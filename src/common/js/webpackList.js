@@ -286,6 +286,10 @@ module.exports = {
     './account/static/js/public/transactionRecords': './src/account/static/js/public/transactionRecords.js',
     // 自选公募交易明细
     './account/static/js/public/transactionDetail': './src/account/static/js/public/transactionDetail.js',
+
+    // 自选公募--超宝详情
+    './account/static/js/public/superStreasureDetail': './src/account/static/js/public/superStreasureDetail.js',
+
     // 现金宝详情页
      './account/static/js/public/cashTreasure': './src/account/static/js/public/cashTreasure.js',
 }
