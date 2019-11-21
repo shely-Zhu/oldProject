@@ -4,8 +4,8 @@
 @import url("../../../include/css/mui.min.css");
 @import url("../../../common/less/reset.less");
 @import url("../../../common/less/color.less");
-@import url("../../../common/less/components/alertBox.less");
-@import url("../../../common/less/components/againEnter.less");
+// @import url("../../../common/less/components/alertBox.less");
+// @import url("../../../common/less/components/againEnter.less");
 
 //@import url("../../../common/less/components/form.less");
 //引入重置mui样式的表单样式文件
@@ -15,20 +15,27 @@
 //下拉列表框
 @import url("../../../common/less/components/select.less");
 
-
-
+.mui-card {
+    margin: 0;
+    padding-left: 0.32rem;
+    border-radius: 0;
+    box-shadow: 0 0.1rem 0.4rem 0 rgba(0, 0, 0, 0.1);
+    font-size: 0.28rem;
+    background: #fff;
+    display: block;
+}
 //公用跳转样式，例如：——————立即登录——————
 .box {
     text-align: center;
     width: 90%;
-    margin: 4rem auto;
+    margin: 0.8rem auto;
     height: 1px;
     background-color: @c004;
     position: relative;
 
     .next {
         display: block;
-        width: 6.4rem;
+        width: 1.28rem;
         background-color: @c011;
         position: absolute;
         left: 50%;
@@ -47,19 +54,19 @@
     background-color: @c011;
 
     .overHead {
-        margin-top: 2.4rem;
-        margin-bottom: 0.8rem;
+        margin-top: 0.48rem;
+        margin-bottom: 0.16rem;
 
         span {
             display: block;
-            font-size: 4rem;
+            font-size: 0.8rem;
             color: @c006;
             text-align: center;
         }
 
         .title {
-            margin-top: 1.5rem;
-            font-size: 1.4rem;
+            margin-top: 0.3rem;
+            font-size: 0.28rem;
             color: @c003;
             text-align: center;
         }
@@ -68,8 +75,8 @@
     // 忘记密码
     .forgot {
         float: right;
-        margin: 0.8rem 1.2rem 2.6rem;
-        font-size: 1.4rem;
+        margin: 0.16rem 0.24rem 0.52rem;
+        font-size: 0.28rem;
         color: @c006;
     }
 
@@ -86,13 +93,13 @@
 
         .item2 {
             display: block;
-            margin-top: 1.2rem;
+            margin-top: 0.24rem;
             color: @c003;
             text-align: center;
 
             .iconfont {
-                font-size: 1.6rem;
-                margin-right: 0.6rem;
+                font-size: 0.32rem;
+                margin-right: 0.12rem;
                 vertical-align: middle;
 
                 &.check {
@@ -104,27 +111,27 @@
 
     // 理财师区域
     .brokerWrap {
-        padding: 0.2rem 0 1rem 1.6rem;
+        padding: 0.04rem 0 0.2rem 0.32rem;
 
         h3 {
-            font-size: 1.4rem;
+            font-size: 0.32rem;
             color: @c002;
-            line-height: 3.9rem;
+            line-height: 0.74rem;
             border-bottom: 1px solid @c008;
 
             span {
-                padding-left: 0.8rem;
-                font-size: 1rem;
+                padding-left: 0.16rem;
+                font-size: 0.2rem;
                 color: @c003;
             }
         }
 
         .infoWrap {
-        	padding-top:1.5rem;
+        	padding-top:0.3rem;
             .infoPic {
-                width: 3.8rem;
-                height: 5.7rem;
-                margin-right: 1.4rem;
+                width: 0.76rem;
+                height: 1.12rem;
+                margin-right: 0.28rem;
                 vertical-align: bottom;
                 float: left;
             }
@@ -136,7 +143,7 @@
                 }
                 .pNumber {
                     color: @c002;
-                    margin-top: 0.8rem;
+                    margin-top: 0.16rem;
                 }
             }
         }
@@ -149,5 +156,5 @@
 // 重置登录密码
 .resetPassword {
     //width: 100%;
-    margin-top: 0.8rem;
+    margin-top: 0.16rem;
 }
