@@ -13,6 +13,8 @@
  </head>
  
  <body>
+     <!--加载图标-->
+	@@include('@pathCommonViews/load.html') 
     <div class="topTitle">
      @@include('@pathCommonViews/headBarConfig.html',{"bgColors":"#2C3E77,#273971","showType":"0","pathName":"收益分配明细"})
     </div>
@@ -32,12 +34,12 @@
    <script id="trans-template" type="text/x-handlebars-template">
     {{#each this}} 
         {{#each list}}
-        <li class="list-wrap mui-table-view recordList">
-                <h2>2018-01-20</h2>
+            <li class="list-wrap mui-table-view recordList">
+                <h2>--</h2>
                 <div class="content">
-                    <p><span>金额(元)</span><b>100,100,000.00</b></p>
-                    <p><span>分配类型</span><b>红利再投资</b></p>
-                    <p><span>公式</span><b>公式文案公式文案公式文案公式文案公式文案公式文案公式文案公式文案公式文案公式文案公式文案公式文案</b></p>
+                    <p><span>--</span><b>--</b></p>
+                    <p><span>--</span><b>--</b></p>
+                    <p><span>--</span><b>--</b></p>
                 </div>
             </li>
         {{/each}}
@@ -47,8 +49,9 @@
     @@include('@pathCommonViews/loading/listLoading.html')
     <!-- 暂无数据 -->
     @@include('@pathCommonViews/noDataImg.html',{"tipText":"暂无数据"})
-   @@include('@pathInclude/views/footer.html')
-    <script src="/include/js/iscroll.js"></script>
+    @@include('@pathInclude/views/footer.html')
+   <!-- 添加埋点 -->
+	@@include('@pathInclude/views/header.html')
     <script src="/account/static/js/private/incomeDistribution.js"></script>
 
  </body>

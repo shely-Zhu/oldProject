@@ -6,7 +6,7 @@
 @import url('@pathCommonLess/mui/resetMUI.less');
 @import url("@pathCommonLess/reset.less");
 @import url("@pathCommonLess/color.less");
-
+@import url("@pathCommonLess/components/noDataImg.less");
 @import url("@pathCommonLessCom/againEnter.less");
 @import url("@pathCommonLessCom/alertBox.less");
 @import url("@pathCommonLessCom/headBarConfig.less");
@@ -14,10 +14,14 @@ body{
     max-width: 7.5rem;
 }
 .HeadBarConfigBox {
-	box-shadow:0px 0px 4px 0px rgba(135,135,135,0.5);
+	border-bottom: 1px solid #ddd;
 }
 #loading {
     top: 2.08rem!important;
+}
+.without {
+	margin-top: 0;
+	padding: .5rem;
 }
 #recordBox {
 	#recordSearch {

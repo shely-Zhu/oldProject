@@ -23,6 +23,7 @@ require('@pathCommonJs/components/elasticLayer.js');
 require('@pathCommonJs/components/elasticLayerTypeFive.js');
 require('@pathCommonJs/components/headBarConfig.js');
 //黑色提示条的显示和隐藏
+var splitUrl = require('@pathCommonJs/components/splitUrl.js')();
 var tipAction = require('@pathCommonJsCom/tipAction.js');
 // var generateTemplate = require('@pathCommonJsComBus/generateTemplate.js');
 var transcationTem = require('../common/transcationTem.js');
@@ -46,17 +47,23 @@ $(function() {
             list_template: '', //列表的模板，生成后存放在这里
             listToTop: '', // 滑动区域距离顶部距离
             navToTop: '', // 滑动nav距离顶部距离
-            isConfirm: 0, //是否确认
+            type: splitUrl['type'], //是否确认
             businessType: $('.hopperCon li.active').attr('data'),
         },
         html: '', //存放生成的html
         init: function() { //初始化函数
 
             var that = this;
-
             //初始化第一屏区域的上拉加载
             that.initMui();
-
+            // 如果是已确认交易展示筛选漏斗
+            if (that.gV.type == 'confirmed') {
+                $('.hopper').show();
+                $('#HeadBarpathName').attr("data", '已完成交易').html('已完成交易');
+            } else if (that.gV.type == 'toBeConfirmed') {
+                $('.hopper').hide();
+                $('#HeadBarpathName').attr("data", '待确认交易').html('待确认交易');
+            }
 
             //事件监听
             that.events();
@@ -129,12 +136,12 @@ $(function() {
                 needDataEmpty: true,
                 callbackDone: function(json) {
                     var data;
-                    if (json.data.length == 0) { // 没有记录不展示
+                    if (json.data.tradeList.length == 0) { // 没有记录不展示
                         $(".list").hide()
                         that.getElements.noData.show();
                         return false;
                     } else {
-                        data = json.data;
+                        data = json.data.tradeList;
                     }
                     setTimeout(function() {
                         if (data.length < that.gV.aP.pageSize) {
@@ -154,7 +161,6 @@ $(function() {
                                 t.endPullupToRefresh(true);
                             }
                         } else { // 还有更多数据
-                            console.log(999)
                             t.endPullupToRefresh(false);
                         }
                         // 页面++
@@ -181,6 +187,8 @@ $(function() {
                 $('.mask').hide();
                 $('.hopperCon').hide();
                 that.gV.businessType = $(this).attr('data');
+                // $('.contentWrap').html('');
+                that.gV.aP.pageNo = 1;
                 that.getData();
             })
         }

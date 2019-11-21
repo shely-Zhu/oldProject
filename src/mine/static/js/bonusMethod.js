@@ -40,7 +40,6 @@ $(function() {
 				this.gV.bonusType = "红利再投资";
 			}else{
 				this.$e.duigou.eq(0).css('display','none');
-				console.log("我到这里了")
 				this.$e.duigou.eq(1).css('display','block');
 				this.$e.bonusType.eq(0).text("现金分红");
 				this.$e.bonusType.eq(1).text("红利再投资(当前分红方式)");

@@ -26,13 +26,11 @@ $(function() {
 		},
 		//全局变量
 		gV: {
-			groupCode: splitUrl['groupCode'], // 组合编号，从我的持仓进
 			pageNo: 1, //当前页码，默认为1
 			pageSize: 10,
 			listLength: 0,
 			pageCurrent: 1,
 			tempArr: [],
-			//			afterData:[],
 		},
 		//页面初始化函数
 		init: function() {
@@ -106,7 +104,6 @@ $(function() {
 		//获取数据函数
 		getData: function(t) {
 			var that = this
-			//			let tempArr = [];
 			var afterData = [];
 			var obj = [{ // 登录日志模拟数据
 				url: site_url.getUserTrackRecord_api,
@@ -118,16 +115,14 @@ $(function() {
 				contentTypeSearch: true,
 				needDataEmpty: false,
 				callbackDone: function(json) {
-
-					//                  let obj = {}
 					if(json.data.length == 0) { // 没有记录不展示
 						that.$e.noData.show();
 						$('.adjustmentRecord').hide();
 						return false;
 					} else {
-						beforeData = json.data.list;
-						console.log(beforeData)
-						console.log(that.gV.tempArr[that.gV.tempArr.length - 1])
+						if(json.data.list&&json.data.list.length){
+							var beforeData = json.data.list;
+						}
 						for(let i = 0; i < beforeData.length; i++) {
 							//拿到页面要显示的时间
 							beforeData[i].createTime1 = beforeData[i].createTime.split(" ")[1];
@@ -157,16 +152,12 @@ $(function() {
 						}
 					}
 					setTimeout(function() {
-						//
 						if(beforeData.length < that.gV.pageSize) {
-
 							if(that.gV.pageCurrent == 1) { //第一页时
-
 								if(beforeData.length == 0) {
 									// 暂无数据显示
 									that.$e.noData.show();
 									return false;
-
 								} else { // 没有更多数据了
 									t.endPullupToRefresh(true);
 								}
@@ -177,32 +168,19 @@ $(function() {
 						} else { // 还有更多数据
 							t.endPullupToRefresh(false);
 						}
-
 						// 页面++
 						that.gV.pageCurrent++;
-
-						//                        去掉mui-pull-bottom-pocket的mui-hidden
+						//去掉mui-pull-bottom-pocket的mui-hidden
 						$('.contentWrapper').find('.mui-pull-bottom-pocket').removeClass('mui-hidden');
 						// 将列表插入到页面上
 						generateTemplate(afterData, that.$e.recordList, that.$e.adjustmentTemp);
-
-						// 第一个调仓记录默认展开
-						//                      $('.recordList').find('ul').eq(0).find('.mui-collapse').addClass('mui-active');
-
 					}, 200)
-
 				},
-
 			}];
 			$.ajaxLoading(obj);
 		},
 		//注册事件
-		events: function() {
-			let that = this;
-			$('.iconfont').on('tap', function(el) {
-				console.log("1111111")
-			});
-		}
+		events: function() {}
 	};
 	somePage.init();
 });

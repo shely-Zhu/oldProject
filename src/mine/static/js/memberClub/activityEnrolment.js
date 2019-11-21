@@ -24,6 +24,7 @@ $(function(){
 			noData: $('.noData'), //没有数据的结构
             listLoading: $('.listLoading'), //所有数据区域，第一次加载的loading结构
             ListSlot:$('.listHasData'),//插入已报名活动位置
+            ListSlot1:$('.listHasData1'),//插入已报名活动位置
             listTemp:$('#activityEn-template'),//已报名活动模板类名          
 		},
 		gV:{
@@ -31,37 +32,46 @@ $(function(){
             ], // 有活动的数据
             search: false, // 搜索
             // 存放ajax请求地址  已进行  已结束
-            siteUrlArr: [site_url.queryGrowthDetailList_api, site_url.getJJSInTransitAssets_api],
-            current_index: 0, //左右滑动区域的索引
             ajaxArr: [], //存放每一个ajax请求的传参数据
 		},
 		init: function() {
             var that = this;
-            that.getData();
+            that.getData(site_url.queryGrowthDetailList_api,{},0);
+            that.getData(site_url.getJJSInTransitAssets_api,{},1);
             that.events();
         },
-        getData:function(){
+        getData:function(ur,dat,num){
             var that = this
 
 
             var obj = [{
-                url: that.gV.siteUrlArr[that.gV.current_index], //成长值流水
-                data: that.gV.ajaxArr[that.gV.current_index],//传调用参数
+                url: ur, 
+                data: dat,
                 needDataEmpty: false,
                 callbackDone: function(json) {
                     var dataList;
                     console.log(json.data)
                     // 待定
                     if (json.data.pageList.length == 0) { // 没有记录不展示
-                        that.$e.noData.show();
-                        return false;
+                        if(num == 0){
+                            $('.listHasData .noData').show();
+                            return false;
+                        }else{
+                            $('.listHasData1 .noData').show();
+                            return false;
+                        }
+                        
                     } else {
                         dataList = json.data.pageList;
-                        that.gV.ListData = dataList
                     }
                     setTimeout(function() {
                         // 将列表插入到页面上
-                        generateTemplate(dataList, that.$e.ListSlot, that.$e.listTemp);
+                        if(ur == site_url.queryGrowthDetailList_api){
+                            generateTemplate(dataList, that.$e.ListSlot, that.$e.listTemp);
+                        }else{
+                            generateTemplate(dataList, that.$e.ListSlot1, that.$e.listTemp);
+                        }
+                        
                     }, 200)
 
                 },
@@ -76,11 +86,16 @@ $(function(){
 
 			// tab 切换
             mui("body").on('tap', '.choice .mui-col-xs-6', function(e) {
-                that.$e.noData.hide();
                 var i = $(this).index();
                 $(this).addClass('active').siblings().removeClass('active');
-                that.gV.current_index = i 
-                that.getData()
+                window.scroll(0,0)
+                if(i == 0){
+                    $('.listHasData').show()
+                    $('.listHasData1').hide()
+                }else{
+                    $('.listHasData').hide()
+                    $('.listHasData1').show()
+                }
             })
 		}
 

@@ -1,0 +1,65 @@
+<!-- 自选公募-超宝详情
+ @author wangjiajia 2019-11-19
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	@@include('@pathInclude/views/meta.html') 
+	<link rel="stylesheet" href="/account/static/css/public/superStreasureDetail.css">  
+	<title>交易记录</title>
+</head>
+<body>
+        @@include('@pathInclude/views/header.html')
+        @@include('@pathCommonViews/headBarConfig.html',{"pathName":"泰达宏利活期友货币A","bgColors":"#475A95,#475A95","showType":"1"})
+        <section class="container">
+            <div class="banner">
+                <div class="bannerTop clearfix">
+                    <div class="sum fl"><span class="j_text">总金额(元)</span></div>
+                    <!-- <div class="assetsBtn fr">资产组成说明</div> -->
+                </div>
+                <div class="totalM">903.80</div>
+                <div class="accountWrap">
+                    <div class="first_h_profit_box fl">
+                        <div class="h_profit">昨日总收益(元)</div>
+                        <div class="h_profit_value">+0.07</div>
+                    </div>
+                    <div class="second_h_profit_box fl">
+                        <p class="h_profit">累计收益(元)</p>
+                        <p class="h_profit_value">+3.94</p>
+                    </div>
+                </div>
+            </div>  
+            <div class="lineDraw">
+                <!-- 七日年化折线图 -->
+                <div id="qrnhLine" class="line"></div>
+                <!-- 万份收益折线图 -->
+                <div id="wfsyLine" class="hide line"></div>
+                <div class='mui-row tab'>
+                    <span class="mui-col-sm-3 mui-col-xs-3 time oneMonth active" num="0">近一个月</span>
+                    <span class="mui-col-sm-3 mui-col-xs-3 time threeMonth" num="1">近三个月</span>
+                    <span class="mui-col-sm-3 mui-col-xs-3 time newYear" num="3">近一年</span>
+                    <span class="mui-col-sm-3 mui-col-xs-3 time sinceNow" num="4">成立至今</span>
+                </div>
+            </div>
+            <div class="textWrap">
+               <div class="rulestestWrap">
+                 <div class="rulesTitle">
+                    交易规则
+                 </div>
+               </div>
+            </div>
+
+
+            <!-- 加载中loading -->
+            @@include('@pathCommonViews/loading/listLoading.html')
+            <!-- 暂无数据 -->
+            @@include('@pathCommonViews/noData.html',{"tipText":"暂无数据"})
+    
+    
+        </section>
+
+
+	@@include('@pathInclude/views/footer.html')
+    <script src="/account/static/js/public/superStreasureDetail.js"></script>
+</body>
+</html>
