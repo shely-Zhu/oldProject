@@ -199,11 +199,6 @@ $(function(){
 
 				window.location.href = site_url.articleTemplate_url+ '?articleBelong=5&applyType=0';
             });
-            
-            //返回上一页
-            $("#goBack").on("click",function(){
-                location.href="javascript:history.go(-1)";
-            })
 
 		},
     }
