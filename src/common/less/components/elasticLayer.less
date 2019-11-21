@@ -1,0 +1,57 @@
+@import url("../reset.less");
+@import url("../color.less");
+
+.elasticLayer {
+    // display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 7.5rem;
+    height: 100%;
+    background-color: rgba(51, 51, 51, 0.8);
+    z-index: 9999;
+    .elasticWrapper {
+        // position: relative;
+        // // display: table;
+        // transform: translate(-50%, -50%);
+        // -webkit-transform: translate(-50%, -50%);
+        // top: 50%;
+        // left: 50%;
+        width: 5.4rem;
+        background: @FDF3DD;
+        text-align: center;
+        margin: 0 auto;
+        z-index: 105;
+        border-radius: .14rem;
+        .elasticMid{
+            width: 5.4rem;
+            .elasticTxt{
+                font-size: .28rem;
+                background-color: @F5EBD3;
+                color: @272727;
+                .elasticTitle{
+                    color: @c003;
+                    font-size: 0.2rem;
+                    line-height: 0.44rem;
+                    padding: 0.34rem 0.32rem;
+                    text-align: left;
+                }
+            }
+            .elasticButtons{
+                border-top: solid .01rem @D6BC79;
+                .positionLeft,.elasticCel{
+                    color: @9B9B9B;
+                    font-size: .36rem;
+                    font-weight: 400;
+                    border-right: solid .01rem  @D6BC79;
+
+                }
+                .positionRight,.elasticYes{
+                    color: @272727;
+                    font-weight: 400;
+                    font-size: .36rem;
+                }
+            }
+        }
+    }
+}
