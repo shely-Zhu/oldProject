@@ -428,7 +428,6 @@ $(function() {
 
             //折线图点击月份请求数据
 			$(document).on('click', '.lineWrap .time', function(e) {
-
 				$('.lineDraw .time').removeClass('active');
 				$(this).addClass('active');
 
@@ -437,7 +436,6 @@ $(function() {
 
             //折线图点击七日年化/万份收益切换区域
 			$(document).on('click', '.lineWrap .titleWrap .title', function(e) {
-
 				$('.lineWrap .titleWrap .title').removeClass('active');
 				$(this).addClass('active');
 

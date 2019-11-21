@@ -17,42 +17,20 @@
             <div class="mui-col-xs-6 active"><span>进行中</span><p></p></div>
             <div class="mui-col-xs-6"><span>已结束</span><p></p></div>
         </div>
-        <!-- @@include('@pathCommonViews/load.html') -->
-        @@include('@pathCommonViews/noDataImg.html')
         @@include('@pathCommonViews/loading/listLoading.html')
         <!-- 有活动 -->
         <div class="dd_radar HasData">
             <ul class="listHasData">
-                <!-- <li>
-                    <img src="/mine/static/img/Life_bg_picturer@2x.png" alt="">
-                    <p>恒天豪礼，中秋试手气恒天豪礼，中秋试手气恒天豪礼，中秋试手气</p>
-                    <div class="sign">
-                        <span class="no">未签到</span>
-                    </div> 
-                    <div class="time">
-                        <div class="timeco">报名时间&nbsp;2019-09-10&nbsp;12:00</div> 
-                        <div class="timeBtn">分享给好友</div>
-                    </div>
-                </li>
-                <li>
-                    <img src="/mine/static/img/Life_bg_picturer@2x.png" alt="">
-                    <p>恒天豪礼，中秋试手气</p>
-                    <div class="sign">
-                        <span class="yes">已签到</span>
-                        <div>2019-09-10&nbsp;12:00</div> 
-                    </div>
-                    <div class="time">
-                        <div class="timeco">报名时间&nbsp;2019-09-10&nbsp;12:00</div>
-                        <div class="timeBtn">分享给好友</div>
-                    </div>
-                </li> -->
             </ul>
         </div>
         <!-- 无数据时显示 -->
-        <div class="dd_radar NoData">
+        <!-- <div class="dd_radar NoData">
             <img src="/mine/static/img/Me_huodog_Empty@2x.png" alt="">
             <p>暂无活动信息</p>
-        </div>
+        </div> -->
+
+        <!-- 暂无数据 -->
+        @@include('@pathCommonViews/noDataImg.html',{"tipText":"暂无数据"})
 
         <!-- 更多精彩活动 -->
         <div class="more">
@@ -87,7 +65,7 @@
             </ul>
         </div>
    </div>
-
+   
    <script id="activityEn-template" type="text/x-handlebars-template">
     {{#each this}}
         <li>
@@ -100,7 +78,8 @@
                 <div class="timeco">报名时间&nbsp;2019-09-10&nbsp;12:00</div> 
                 <div class="timeBtn">分享给好友</div>
             </div>
-        </li>
+        </li> 
+       
     {{/each}}
     </script>
 
