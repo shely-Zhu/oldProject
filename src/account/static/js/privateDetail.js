@@ -7,6 +7,7 @@
  *
  * projectType: 
  * 0：稳金（对应type_1)  1：稳裕 2：债权 3：股权 4：证券
+ * 海外类型  已经由后台处理好了  传的都是以上5种数据  前端不需要关心是否为海外类型
  */
 
 
@@ -40,9 +41,13 @@ $(function() {
 			projectType : splitUrl['projectType'],
 			projectId: splitUrl['projectId'],
 
-			sevenIncomeRate: [], //存放折线图七日年化
-			profitThoudDate: [], //存放折线图收益日期
-			profitThoudValue: [], //存放折线图万份收益
+			qrnhWfsy: {
+				oneMonth : {},
+				threeMonth: {},
+				oneYear: {},
+				sinceNow: {}
+			}
+			
 		},
 
 		init: function(){
@@ -52,15 +57,19 @@ $(function() {
 				//稳金类
 				$('.type_0').show();
 				//折线图
-				$('.lineWrap').show();
+				$('.lineWrap').removeClass('hide');
 				//展示折线图的万份收益按钮
 				$('.lineWrap .wfsy').removeClass('hidden');
+				//交易规则
+				$('.dealMid').removeClass('hide');
 			}
 			else if ( that.data.projectType == 1 ){
 				//稳裕
 				$('.type_1').show();
 				//折线图
-				$('.lineWrap').show();
+				$('.lineWrap').removeClass('hide');
+				//交易规则
+				$('.dealMid').removeClass('hide');
 			}
 			else if(that.data.projectType == 2){
 				//债权类
@@ -75,13 +84,14 @@ $(function() {
 				$('.type_4').show()
 			}
 
+			//获取页面初始数据
 			that.getData();
 
-			that.event();
+			//事件绑定
+			that.event();	
 		},
 
 		
-
 		//获取初始数据
 		getData: function(){
 
@@ -91,7 +101,7 @@ $(function() {
 			var obj = [{
 			    url: site_url.assetsDetail_api, 
 			    data: {
-			    	projectId: "url上取的projectId"
+			    	projectId: that.data.projectId
 			    },
 			    needLogin: true,
 			    callbackDone: function(json) {
@@ -100,14 +110,12 @@ $(function() {
 			    	//设置数据到页面上
 			    	that.setDomData( jsonData );
 
-			    	
+			    	//请求其他接口
 			    	if( (that.data.projectType == 0) || (that.data.projectType == 1) ){ 
 			    		//稳金类项目，请求七日年化/万份收益折线图
-			    		that.getTypeOneData(0);
+			    		that.getTypeOneData();
 			    		//请求快速赎回和普通赎回的文案
 			    		that.getTxt();
-			    		//人气产品
-			    		that.getDurationPopProduct();
 			    	}
 
 			    },
@@ -117,31 +125,51 @@ $(function() {
 			
 		},
 
-		getDurationPopProduct: function(){
-			var that = this;
-
-			var obj = [{
-			    url: site_url.assetsDetail_api, 
-			    data: {
-			    	projectId: "url上取的projectId"
-			    },
-			    needLogin: true,
-			    callbackDone: function(json) {
-			    	var jsonData = json.data;
-
-			    
-
-			    },
-			}];
-			$.ajaxLoading(obj);
-
-		},
-
 		//请求七日年化/万份收益数据
 		getTypeOneData: function( num ){
 			var that = this;
 
-			//七日年化
+			num = num ? num : 0;
+
+			var newData = {
+				sevenIncomeRate: [], //存放折线图七日年化
+				profitThoudDate: [], //存放折线图收益日期
+				profitThoudValue: [] //存放折线图万份收益
+			}
+
+			//判断当前画的是七日年化还是万份收益
+			if( $('.lineWrap .titleWrap .active').hasClass('qrnh') ){
+				//七日年化
+				var type = 'qrnh';
+			}
+			else{
+				var type = 'wfsy';
+			}
+
+			//判断是否已经有数据了，有的话不再请求接口
+			if( num == 0 && that.data['qrnhWfsy'].oneMonth.profitThoudDate && that.data['qrnhWfsy'].oneMonth.profitThoudDate.length){
+	       		//请求的是近一个月的数据
+	       		that.drawLine( type, that.data['qrnhWfsy'].oneMonth );
+	       		return false;
+	       	}
+	       	else if( num == 1 && that.data['qrnhWfsy'].threeMonth.profitThoudDate && that.data['qrnhWfsy'].threeMonth.profitThoudDate.length){
+	       		//近三个月
+	       		that.drawLine( type, that.data['qrnhWfsy'].threeMonth );
+	       		return false;
+	       	}
+	       	else if( num == 3 && that.data['qrnhWfsy'].oneYear.profitThoudDate && that.data['qrnhWfsy'].oneYear.profitThoudDate.length ){
+	       		//近一年
+	       		that.drawLine( type, that.data['qrnhWfsy'].oneYear );
+	       		return false;
+	       	}
+	       	else if( num == 4 && that.data['qrnhWfsy'].sinceNow.profitThoudDate && that.data['qrnhWfsy'].sinceNow.profitThoudDate.length){
+	       		//成立至今
+	       		that.drawLine( type, that.data['qrnhWfsy'].sinceNow );
+	       		return false;
+	       	}
+			
+
+			//没有数据，请求接口
 			var obj = [{
 			    url: site_url.earningCurve_api, 
 			    data: {
@@ -151,29 +179,57 @@ $(function() {
 			    needLogin: true,
 			    callbackDone: function(json) {
 			    	var jsonData = json.data;
-			       	
-			       	//拼数据
+
+			    	//拼数据
 			       	$.each( jsonData, function(i, el){
-			       		that.data.sevenIncomeRate.push( {
-			       			value: el.sevenIncomeRate
-			       		} );
-			       		that.data.profitThoudDate.push( el.profitThoudDate);
-			       		that.data.profitThoudValue.push( el.profitThoudValue);
+			       		newData.sevenIncomeRate.push( el.sevenIncomeRate);
+			       		newData.profitThoudDate.push( el.profitThoudDate);
+			       		newData.profitThoudValue.push( el.profitThoudValue);
 			       	})
 
-			       	that.drawLine();
+			       	if( num == 0){
+			       		//请求的是近一个月的数据
+			       		that.data['qrnhWfsy'].oneMonth = newData ;
+			       	}
+			       	else if( num == 1){
+			       		//近三个月
+			       		that.data['qrnhWfsy'].threeMonth = newData ;
+			       	}
+			       	else if( num == 3){
+			       		//近一年
+			       		that.data['qrnhWfsy'].oneYear = newData ;
+			       	}
+			       	else if( num == 4){
+			       		//成立至今
+			       		that.data['qrnhWfsy'].sinceNow = newData ;
+			       	}
+
+			       	that.drawLine( type, newData);
 			       	
 			    },
 			}];
 			$.ajaxLoading(obj);
 		},
 
-		drawLine: function () {
+		//画折线图
+		//type必传
+		drawLine: function ( type, data) {
 			var that = this;
 
-	       	//画折线图
-	       	// 基于准备好的dom，初始化echarts实例
-			var myChart = echarts.init(document.getElementById('line'));
+			if( type == 'qrnh'){
+				//画的是七日年化折线图
+				var chartId = $('#qrnhLine')[0],
+					xAxisData = data.profitThoudDate,
+					seriesData = data.sevenIncomeRate;
+			}
+			else if( type == 'wfsy'){
+				//画的是万份收益折线图
+				var chartId = $('#wfsyLine')[0],
+					xAxisData = data.profitThoudDate,
+					seriesData = data.profitThoudValue;
+			}
+
+			var myChart = echarts.init( chartId );
 
 			myChart.setOption({
 			    tooltip: {
@@ -216,7 +272,7 @@ $(function() {
 			    },
 			    xAxis: {
 			    	type: 'category',
-			        data: that.data.profitThoudDate,
+			        data: xAxisData,
 			        axisLine: {
 			        	lineStyle: {
 			        		color: '#FADFBB'
@@ -233,9 +289,6 @@ $(function() {
 			    },
 
 			    yAxis: {
-			  //   	max: function(value) {
-					//     return value.max + 20;
-					// },
 			    	axisTick:{
 			    		show: false
 			    	},
@@ -279,7 +332,7 @@ $(function() {
 			    			}
 			    		}
 			    	},
-			        data: that.data.sevenIncomeRate
+			        data: seriesData
 			    }]
 			});
 
@@ -297,11 +350,10 @@ $(function() {
     		$('#HeadBarpathName').html( jsonData.projectName );
 
 	    	if( that.data.projectType == 0 ){ //稳金类项目
-	    		
     			//当前市值
     			$('.typeWrap .totalM').html( jsonData.capitalisation );
     		   	//持有份额
-    		   	$('.typeWrap .topContent .totalShare').html( jsonData.totalShare );
+    		   	$('.typeWrap .totalShare').html( jsonData.totalShare );
     		   	//七日年化
     		   	$('.typeWrap .sevenYearYield').html( jsonData.sevenYearYield);
     		   	//可赎回份额
@@ -313,7 +365,7 @@ $(function() {
 	    		//当前市值
 	    		$('.typeWrap .totalM').html( jsonData.capitalisation );
 	    		//持有份额
-	    		$('.typeWrap .topContent .totalShare').html( jsonData.totalShare );
+	    		$('.typeWrap .totalShare').html( jsonData.totalShare );
 	    		//七日年化
 	    		$('.typeWrap .sevenYearYield').html( jsonData.sevenYearYield);
 	    		//可赎回份额
@@ -347,14 +399,18 @@ $(function() {
 	    		//产品期限
     		   	$('.typeWrap .cpqx').html( jsonData.prodTerm);
 	    	}
+	    	else if( that.data.projectType == 4){ //证券类    		
+
+	    	}
 
 		},
 
 		//点击展开按钮
 		event: function(){
-			
+			var that = this;
+
 			//按钮点击展开收起
-			mui("body").on('tap', '.openButton', function(e) {
+			$(document).on('click', '.openButton', function(e) {
 
 				if( $('.topContent.open').length ){
 					//收起
@@ -371,15 +427,35 @@ $(function() {
             })
 
             //折线图点击月份请求数据
-			mui("body").on('tap', '.lineDraw .time', function(e) {
+			$(document).on('click', '.lineWrap .time', function(e) {
+
+				$('.lineDraw .time').removeClass('active');
+				$(this).addClass('active');
 
 				that.getTypeOneData( $(this).attr('num') );
             })
 
             //折线图点击七日年化/万份收益切换区域
-			mui("body").on('tap', '.lineDraw .time', function(e) {
+			$(document).on('click', '.lineWrap .titleWrap .title', function(e) {
 
-				
+				$('.lineWrap .titleWrap .title').removeClass('active');
+				$(this).addClass('active');
+
+				//判断当前画的是七日年化还是万份收益
+				if( $('.lineWrap .titleWrap .active').hasClass('qrnh') ){
+					//七日年化
+					$('#qrnhLine').removeClass('hide');
+					$('#wfsyLine').addClass('hide');
+				}
+				else{
+					$('#wfsyLine').removeClass('hide');
+					$('#qrnhLine').addClass('hide');
+				}
+
+				$('.lineDraw .time').removeClass('active');
+				$('.lineDraw .oneMonth').addClass('active');
+
+				that.drawLine( 'wfsy', that.data['qrnhWfsy'].oneMonth );
             })
 		},
 
