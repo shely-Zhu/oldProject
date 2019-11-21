@@ -12,132 +12,39 @@ var Mock = require('mockjs');
 //1. 积分
 var data = Mock.mock({
 	"data": {
-		"pages": 10,
-		"total": 100,
-		"dataList": [{
-			"data": "2019-11-11",
-			"list": [{
-				"type": 1,
-				"channel": 0,
-				"userAgent": "MI note1",
-				"clientIp": "182.50.117.176",
-				"createTime": "16:22:46",
-				"typeDes": 1,
-				"channelDes": 0,
-				"ipArea": "北京市"
-			}, {
-				"type": 1,
-				"channel": 1,
-				"userAgent": "MI note2",
-				"clientIp": "182.50.117.176",
-				"createTime": "16:22:46",
-				"typeDes": 1,
-				"channelDes": 0,
-				"ipArea": "北京市"
-			}, {
-				"type": 1,
-				"channel": 1,
-				"userAgent": "MI note3",
-				"clientIp": "182.50.117.176",
-				"createTime": "16:22:46",
-				"typeDes": 1,
-				"channelDes": 0,
-				"ipArea": "北京市"
-			}]
-		},{
-			"data": "2019-12-13",
-			"list": [{
-				"type": 1,
-				"channel": 0,
-				"userAgent": "MI note1",
-				"clientIp": "182.50.117.176",
-				"createTime": "16:22:46",
-				"typeDes": 1,
-				"channelDes": 0,
-				"ipArea": "上海"
-			}, {
-				"type": 1,
-				"channel": 1,
-				"userAgent": "oppo",
-				"clientIp": "182.50.117.176",
-				"createTime": "16:33:46",
-				"typeDes": 1,
-				"channelDes": 0,
-				"ipArea": "南京"
-			}, {
-				"type": 1,
-				"channel": 1,
-				"userAgent": "MI note3",
-				"clientIp": "182.50.117.176",
-				"createTime": "16:22:46",
-				"typeDes": 1,
-				"channelDes": 0,
-				"ipArea": "北京市"
-			}]
-		},{
-			"data": "2019-12-13",
-			"list": [{
-				"type": 1,
-				"channel": 0,
-				"userAgent": "MI note1",
-				"clientIp": "182.50.117.176",
-				"createTime": "16:22:46",
-				"typeDes": 1,
-				"channelDes": 0,
-				"ipArea": "上海"
-			}, {
-				"type": 1,
-				"channel": 1,
-				"userAgent": "oppo",
-				"clientIp": "182.50.117.176",
-				"createTime": "16:33:46",
-				"typeDes": 1,
-				"channelDes": 0,
-				"ipArea": "南京"
-			}, {
-				"type": 1,
-				"channel": 1,
-				"userAgent": "MI note3",
-				"clientIp": "182.50.117.176",
-				"createTime": "16:22:46",
-				"typeDes": 1,
-				"channelDes": 0,
-				"ipArea": "北京市"
-			}]
-		},{
-			"data": "2019-12-13",
-			"list": [{
-				"type": 1,
-				"channel": 0,
-				"userAgent": "MI note1",
-				"clientIp": "182.50.117.176",
-				"createTime": "16:22:46",
-				"typeDes": 1,
-				"channelDes": 0,
-				"ipArea": "上海"
-			}, {
-				"type": 1,
-				"channel": 1,
-				"userAgent": "oppo",
-				"clientIp": "182.50.117.176",
-				"createTime": "16:33:46",
-				"typeDes": 1,
-				"channelDes": 0,
-				"ipArea": "南京"
-			}, {
-				"type": 1,
-				"channel": 1,
-				"userAgent": "MI note3",
-				"clientIp": "182.50.117.176",
-				"createTime": "16:22:46",
-				"typeDes": 1,
-				"channelDes": 0,
-				"ipArea": "北京市"
-			}]
-		}
-		]
+		"endRow": 10,
+		"firstPage": 0,
+		"hasNextPage": true,
+		"hasPreviousPage": false,
+		"isFirstPage": true,
+		"isLastPage": false,
+		"lastPage": 0,
+		"list": [
+			{ "channel": 2, "channelDes": "ANDROID", "clientIp": "172.16.187.77", "createTime": "2019-11-21 16:20:24", "customerNo": 264801, "deviceId": "864684039820036", "ipArea": "局域网", "netType": "", "sysFrom": 1, "type": 1, "typeDes": "登录", "userAgent": "Android客户端" },
+			{ "channel": 2, "channelDes": "ANDROID", "clientIp": "172.16.187.77", "createTime": "2019-11-21 16:19:59", "customerNo": 264801, "deviceId": "864684039820036", "ipArea": "局域网", "netType": "", "sysFrom": 1, "type": 1, "typeDes": "登录", "userAgent": "Android客户端" },
+			{ "channel": 2, "channelDes": "ANDROID", "clientIp": "172.16.187.77", "createTime": "2019-11-21 16:19:37", "customerNo": 264801, "deviceId": "864684039820036", "ipArea": "局域网", "netType": "", "sysFrom": 1, "type": 1, "typeDes": "登录", "userAgent": "Android客户端" },
+			{ "channel": 2, "channelDes": "ANDROID", "clientIp": "172.16.187.77", "createTime": "2019-11-21 16:19:26", "customerNo": 264801, "deviceId": "864684039820036", "ipArea": "局域网", "netType": "", "sysFrom": 1, "type": 1, "typeDes": "登录", "userAgent": "Android客户端" },
+			{ "channel": 2, "channelDes": "ANDROID", "clientIp": "172.16.187.77", "createTime": "2019-11-21 16:15:59", "customerNo": 264801, "deviceId": "864684039820036", "ipArea": "局域网", "netType": "", "sysFrom": 1, "type": 1, "typeDes": "登录", "userAgent": "Android客户端" },
+			{ "channel": 2, "channelDes": "ANDROID", "clientIp": "172.16.187.77", "createTime": "2019-11-21 16:14:13", "customerNo": 264801, "deviceId": "864684039820036", "ipArea": "局域网", "netType": "", "sysFrom": 1, "type": 1, "typeDes": "登录", "userAgent": "Android客户端" },
+			{ "channel": 2, "channelDes": "ANDROID", "clientIp": "172.16.187.77", "createTime": "2019-11-21 16:14:11", "customerNo": 264801, "deviceId": "864684039820036", "ipArea": "局域网", "netType": "", "sysFrom": 1, "type": 1, "typeDes": "登录", "userAgent": "Android客户端" },
+			{ "channel": 2, "channelDes": "ANDROID", "clientIp": "172.16.187.77", "createTime": "2019-11-21 16:14:07", "customerNo": 264801, "deviceId": "864684039820036", "ipArea": "局域网", "netType": "", "sysFrom": 1, "type": 1, "typeDes": "登录", "userAgent": "Android客户端" },
+			{ "channel": 2, "channelDes": "ANDROID", "clientIp": "172.16.187.77", "createTime": "2019-11-21 16:11:03", "customerNo": 264801, "deviceId": "864684039820036", "ipArea": "局域网", "netType": "", "sysFrom": 1, "type": 1, "typeDes": "登录", "userAgent": "Android客户端" },
+			{ "channel": 2, "channelDes": "ANDROID", "clientIp": "172.16.187.77", "createTime": "2019-11-21 16:10:58", "customerNo": 264801, "deviceId": "864684039820036", "ipArea": "局域网", "netType": "", "sysFrom": 1, "type": 1, "typeDes": "登录", "userAgent": "Android客户端" }
+		],
+		"navigateFirstPage": 0,
+		"navigateLastPage": 0,
+		"navigatePages": 8,
+		"navigatepageNums": [1, 2, 3, 4, 5, 6, 7, 8],
+		"nextPage": 2,
+		"pageNum": 1,
+		"pageSize": 10,
+		"pages": 17,
+		"prePage": 0,
+		"size": 10,
+		"startRow": 1,
+		"total": 166
 	},
-	"message": "successful",
+	"message": "操作成功！",
 	"status": "0000"
 });
 

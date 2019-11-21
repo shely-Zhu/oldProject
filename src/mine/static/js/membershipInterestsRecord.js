@@ -197,8 +197,7 @@ $(function(){
 
 			mui("body").on('tap','.posioneright', function(){
 
-				window.location.href = site_url.examplePage_url;
-				// window.open(site_url.privateActivity_url);
+				window.location.href = site_url.articleTemplate_url+ '?articleBelong=5&applyType=0';
             });
             
             //返回上一页
