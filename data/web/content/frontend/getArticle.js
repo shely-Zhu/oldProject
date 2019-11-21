@@ -22,9 +22,13 @@ var data = Mock.mock({
 			"intro": "视频加i外部",
 			"articleBelong": "1",
 			"id": 9,
+			"h5Title":"模板qwe",//h5模板标题
+			"h5Type":"1",//h5模板类型 1图片 2其他
 			"videoAttachUrl": "http://172.16.163.99:85/group2/M00/02/8A/rBCjQ13DgFCAERifAAKKTERYCgk339.mp4",
 			"createTimeStr": "2019-11-07 08:41:03",
-			"updateTimeStr": "2019-11-08 12:39:25"
+			"updateTimeStr": "2019-11-08 12:39:25",
+			"content|1":['<div class="itemCon"><div class="noticeTitle">活动通知</div><div class="noticeContent">“锦绣好礼，恒天赠送”，尊敬的客户：为了回888888888888888</div></div>'
+			,'<img class="itemBadge" src="../../../about/static/img/appIndex/managementTeam.jpg" alt="">']
 		},
 		"message": "成功",
 		"status": "0000",

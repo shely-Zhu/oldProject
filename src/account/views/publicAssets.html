@@ -1,0 +1,135 @@
+<!-- 
+@page 公募资产
+@author shiyunrui 2019-11-18
+-->
+<!doctype html>
+<html lang="en">
+
+<head>
+    @@include('@pathInclude/views/meta.html')
+    <link rel="stylesheet" href="/account/static/css/publicAssets.css">
+    <title>公募资产</title>
+</head>
+
+<body>
+    @@include('@pathInclude/views/header.html')
+    @@include('@pathCommonViews/headBarConfig.html',{"pathName":"自选公募","bgColors":"#475A95,#475A95","showType":"1"})
+    <section class="container">
+        <div class="banner">
+            <div class="bannerTop clearfix">
+                <div class="sum fl"><span class="j_text">自选总资产(元)</span><span class="j_icon"></span></div>
+                <div class="assetsBtn fr">资产组成说明</div>
+            </div>
+            <div class="totalM">0</div>
+            <div class="be_confirmed_amount">
+                <div class="title fl">待确认金额(元)</div>
+                <div class="value fl">0</div>
+            </div>
+            <div>
+                <div class="first_h_profit_box fl">
+                    <div class="h_profit">昨日总收益(元)</div>
+                    <div class="h_profit_value">0</div>
+                </div>
+                <div class="second_h_profit_box fl">
+                    <p class="h_profit">持有总收益(元)</p>
+                    <p class="h_profit_value">0</p>
+                </div>
+            </div>
+        </div>
+        <div class="divider"></div>
+        <div id="bank_screen" class="bank_screen">
+            <div class="bank_screen_name fl">全部</div>
+            <span class="iconfont fl">&#xe609;</span>
+        </div>
+        <div class="bank_list hide">
+            <div class="bank_screen">
+                <div class="bank_screen_name fl">全部</div>
+                <span class="iconfont fr">&#xe626;</span>
+            </div>
+            <div class="bank_screen">
+                <div class="bank_screen_name fl">华夏银行 - 0622</div>
+                <span class="iconfont fr hide">&#xe626;</span>
+            </div>
+            <div class="bank_screen">
+                <div class="bank_screen_name fl">中国招商银行 - 3568</div>
+                <span class="iconfont fr hide">&#xe626;</span>
+            </div>
+        </div>
+        <div class="list" id="pageLists"></div>
+        <footer class="hide">
+            暂无更多数据
+        </footer>
+
+        <div class="mask"></div>
+        <div class="tipContainer">
+            <h2 class="titleText">自选资产组成说明</h2>
+            <p class="tipCon">自选总资产是指已成立确认的资产加上您的待确认资产</p>
+            <p class="tipCon">待确认资产是指您的在途资产，产品成立后将归入已确认资产。</p>
+            <div class="buttonOne">我明白了</div>
+        </div>
+
+        <!-- 加载中loading -->
+        @@include('@pathCommonViews/loading/listLoading.html')
+        <!-- 暂无数据 -->
+        @@include('@pathCommonViews/noData.html',{"tipText":"暂无数据"})
+
+
+    </section>
+
+    <!-- 持仓列表内容模板 -->
+    <script id="dataLists" type="text/x-handlebars-template">
+		{{! 左侧页面列表}}
+		{{#each this}}
+        <div class="hold_item">
+            <div class="divider"></div>
+            {{#if_than_0 inTransitNum}}
+                <div class="be_confirmed_tag fr">{{noToChinese inTransitNum}}笔待确认交易</div>
+            {{/if_than_0}}
+            <div class="title">
+                <div class="divider_tag"></div>
+                <div class="hold_name">{{fundName}}</div>
+                <span class="iconfont fr">&#xe636;</span>
+            </div>
+            <div class="content">
+                {{#if_than_0 onwayAssetTotal}}
+                    <div class="content_header">
+                        <span class="text_gray">待确认金额   </span>
+                        <span class="text_balck">{{onwayAssetTotal}}元</span>
+                    </div>
+                {{/if_than_0}}
+                <div class="content_bottom">
+                    <div class="text_gray position_c">金额(元)</div>
+                    <div class="text_gray position_d">昨日收益(元)</div>
+                    <div class="position_tip"></div>
+                    <div class="text_gray position_e">持有收益(元)</div>
+                    <div class="text_black position_f">{{totalMoneyMask}}</div>
+                    <div class="text_black position_g">{{incomeMask}}</div>
+                    {{#if_than_0 addupIncome}}
+                        <div class="text_red position_h">+{{addupIncomeMask}}</div>
+                    {{else}}
+                        <div class="text_green position_h">{{addupIncomeMask}}</div>
+                    {{/if_than_0}}
+                    {{#if canBeSpentMsg}}
+                        <div class="tip">{{canBeSpentMsg}}</div>
+                    {{/if}}
+                    <!-- todo 需要判断字段来是否显示 -->
+                    <div class="buy_btn fr">买入</div>
+                    <div class="redeem_btn fr">赎回</div>
+                    <div class="closed"></div>
+                </div>
+            </div>
+            
+        </div>
+		{{/each}}
+	</script>
+
+
+    @@include('@pathInclude/views/footer.html')
+
+    <!-- 添加埋点 -->
+    @@include('@pathInclude/views/header.html')
+
+    <script src="/account/static/js/publicAssets.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,77 @@
+@import url("../../../include/css/mui.min.css");
+@import url('@pathCommonLess/mui/resetMUI.less');
+@import url("@pathCommonLess/reset.less");
+@import url("@pathCommonLess/color.less");
+
+@import url("@pathCommonLessCom/againEnter.less");
+@import url("@pathCommonLessCom/alertBox.less");
+@import url("@pathCommonLessCom/headBarConfig.less");
+body{
+    max-width: 7.5rem;
+    background:@c005;
+}
+html{
+    height: 100%;   
+}
+.wrap{
+     width: 100%;
+     .topTitle{
+        //  height: 0.88rem;
+     } 
+    .title{
+        width: 100%;
+        position: fixed;
+        .titleContent{
+            width: 100%;
+            height: 1rem;
+            border-bottom:0.01rem solid @c008;
+            border-top:0.01rem solid @c008;
+            // margin-top: 0.9rem;
+            display: flex;
+            font-size:0.28rem;
+            font-family:PingFangSC-Semibold,PingFang SC;
+            font-weight:600;
+            color:@DEAD15;
+            background:@c005;
+            li{
+                width: 33.33%;
+                line-height: 0.9rem;
+                text-align: center;
+            }
+        }
+    }
+    .list {
+        margin-top: 1rem;
+        .contentWrapper{
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            .contentWrapUl{
+                width:100%;
+                display: flex;
+                font-size:0.28rem;
+                font-family:PingFangSC-Regular,PingFang SC;
+                font-weight:400;
+                color:@c009;
+                li{
+                    width: 33.33%;
+                    line-height: 0.9rem;
+                    text-align: center;
+                }
+            }
+        }
+    }
+    .noDataMore{
+        width: 100%;
+        font-size:0.24rem;
+        font-family:PingFangSC-Regular,PingFang SC;
+        font-weight:400;
+        color:@9B9B9B;
+        line-height:1.4rem;
+        text-align: center;
+        margin-top:2rem;
+    }
+}
+.v_center{
+    margin-top:4rem;
+}

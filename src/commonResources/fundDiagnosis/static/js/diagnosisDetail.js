@@ -246,7 +246,7 @@ $(function() {
             // 雷达图一年，3年，5年
             mui("body").on('tap', '.dd_choice_1 .mui-col-xs-3', function(e) {
                 var i = $(this).index();
-                $(this).addClass('active').siblings().removeClass('active');
+                $(".mui-control-item").addClass('active').siblings().removeClass('active');
                 // 切换图表
                 if (that.gV.echartData[i].length != 0) {
                     $('.radarEchart').css({"display": "block"})

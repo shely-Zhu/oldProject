@@ -21,6 +21,15 @@ var pathTitle=[
     {
         pathName:"登录日志查询",
         pathUrl:"eruda3" 
+    },
+    {
+        pathName:"消息中心"
+    },
+    {
+        pathName:"了解恒天" 
+    },
+    {
+        pathName:"交易记录" 
     }
 ]
 $(function(){
@@ -44,6 +53,7 @@ $(function(){
     if($("#HeadBarConfigBox").attr('showType')=='1'){
         var colors=$("#HeadBarConfigBox").attr('bgColors').split(",")
          ClearStyle()
+        $('.zhanweifu').css('display','none')
         $(window).scroll(function(){
             var tops=$(this).scrollTop();
             if(tops>50){//当window的scrolltop距离大于50时，

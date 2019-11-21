@@ -1,0 +1,416 @@
+/*
+ * @page: 其他资产
+ * @Author: peicongcong
+ * @Date:   2019-11-15songxiaoyu
+ * @description:
+ */
+
+@import url("@pathInclude/css/mui.min.css");
+@import url("@pathCommonLess/mui/resetMUI.less");
+@import url("@pathCommonLess/color.less");
+@import url("@pathCommonLess/reset.less");
+
+@import url("@pathCommonLess/chtwm.less");
+@import url("@pathCommonLess/app.less");
+@import url("@pathCommonLessCom/againEnter.less");
+@import url("@pathCommonLessCom/alertBox.less");
+@import url("@pathCommonLessCom/tabScroll.less");
+
+//回到顶部的样式
+@import url("@pathCommonLessCom/goTopMui.less");
+@import url("@pathCommonLess/components/elasticLayerTypeFive.less");
+@import url("@pathCommonLessCom/headBarConfig.less");
+@import url("@pathCommonLessCom/noDataImg.less");
+html {
+    height: 100%;
+}
+.fl{
+    float: left;
+}
+.fr{
+    float: right;
+}
+body,.mui-content{
+    background: @F7FAFD !important;
+}
+.hide{
+    display: none;
+}
+.container {
+    height: 100%;
+    width: 100%;
+    background: @F7FAFD;
+
+    // 公募资产
+    .banner {
+        position: relative;
+        width: 100%;
+        height: 5.3rem;
+        background: url("/account/static/img/public_account_bg.png");
+        background-size: 100% 100%;
+        padding: 0 0.28rem;
+
+        .bannerTop {
+            color: @F7DDCF;
+            padding-top: 1.54rem;
+            .sum {
+                
+                font-size: 0.26rem;
+                .j_icon {
+                    width: 0.36rem;
+                    height: 0.36rem;
+                    margin-left: 0.2rem;
+                    background: url("/account/static/img/eyesee.png");
+                    background-size: 100% 100%;
+                    display: inline-block;
+                    vertical-align: middle;
+                }
+                .j_icon.eyecose{
+                    background: url("/account/static/img/eyeclose.png");
+                    background-size: 100% 100%;
+                }
+                
+            }
+            .assetsBtn{
+                width: 1.5rem;
+                height: 0.4rem;
+                background: rgba(255, 255, 255, 0.1);
+                border-radius: 0.25rem;
+                font-size: 0.2rem;
+                text-align: center;
+                color: @c005;
+                opacity: 0.8;
+                line-height: 0.4rem;
+            }
+            
+        }
+        //金额
+        .totalM{
+            font-size: 0.68rem;
+            line-height: 0.8rem;
+            margin-top: 0.1rem;
+            font-weight:bold;
+            color:rgba(153,81,0,1);
+            background:linear-gradient(360deg, rgba(186,140,112,1) 0%, rgba(244,210,192,1) 100%);
+            -webkit-background-clip:text;
+            -webkit-text-fill-color:transparent;
+        }
+        //待确认金额
+        .be_confirmed_amount {
+            height: 0.95rem;
+            width: 100%;
+            padding-top: 0.14rem;
+            .title {
+                font-size: 0.26rem;
+                color: @FFFFFF;
+                margin-top: 0.08rem;
+            }
+            .value {
+                margin-left: 0.1rem;
+                font-size: 0.38rem;
+                color: #EDC99B;
+            }
+        }
+        //收益金额相关
+        .first_h_profit_box {
+            width: 3.58rem;
+        }
+        .h_profit {
+            font-size: 0.26rem;
+            color: rgba(255, 255, 255, 0.7);
+        }
+        .h_profit_value {
+            font-size: 0.38rem;
+            color: @FFFFFF;
+            margin-top: 0.1rem;
+        }
+    }
+
+    //银行卡筛选
+    .bank_screen {
+        width: 100%;
+        padding: 0.2rem 0.28rem 0 0.2rem;
+        height: 0.8rem;
+        background-color: @FFFFFF;
+        .bank_screen_name {
+            font-size: 0.28rem;
+            margin-right: 0.2rem;
+        }
+        .iconfont {
+            font-size: 0.24rem;
+            line-height: 0.4rem;
+        }
+    }
+    .bank_list {
+        .bank_screen .iconfont {
+            font-size: 0.30rem;
+        }
+    }
+
+    //分隔段
+    .divider {
+        width: 100%;
+        height: 0.3rem;
+        background-color: @F7FAFD;
+    }
+
+    //列表item
+    .hold_item {
+        width: 100%;
+        background-color: @FFFFFF;
+        .be_confirmed_tag {
+            width: 2.07rem;
+            height: 0.36rem;
+            background: url("/account/static/img/be_confirmed_tag.png");
+            background-size: cover;
+            color: @6C4517;
+            font-size: 0.2rem;
+            padding: 0.08rem 0 0 0.37rem;
+        }
+        .text_gray {
+            color: @9B9B9B;
+            font-size: 0.24rem;
+        }
+        .text_black {
+            color: @272727;
+            font-size: 0.24rem;
+        }
+        .text_red {
+            color: @F52323;
+            font-size: 0.24rem;
+        }
+        .text_green {
+            color: @008000;
+            font-size: 0.24rem;
+        }
+        .title {
+            position: relative;
+            width: 100%;
+            margin-top: 0.4rem;
+            .divider_tag {
+                position: absolute;
+                left: 0.3rem;
+                width: 0.06rem;
+                height: 0.28rem;
+                top: 0.1rem;
+                background: linear-gradient(@FBE2BD, @E2B580);
+            }
+            .hold_name {
+                position: absolute;
+                left: 0.45rem;
+                font-size: 0.28rem;
+                color: @272727;
+                top: 0.04rem;
+                font-weight:bold;
+            }
+            .iconfont {
+                position: absolute;
+                right: 0.3rem;
+                top: 0.1rem;
+                font-size: 0.20rem;
+                color: @CBCBCB;
+            }
+        }
+        .content {
+            width: 100%;
+            margin-top: 0.8rem;
+            padding-left: 0.45rem; 
+        }
+        .content_header {
+            padding-top: 0.3rem;
+        }
+        .content_bottom {
+            position: relative;
+            padding-top: 0.2rem;
+            height: 1.91rem;
+            width: 100%;
+            .position_c {
+                position: absolute;
+            }
+            .position_d {
+                position: absolute;
+                left: 2.3rem;
+            }
+            .position_tip {
+                position: absolute;
+                left: 3.7rem;
+                top: 0.25rem;
+                width: 0.24rem;
+                height: 0.24rem;
+                background: url("/account/static/img/account_tip_icon.png");
+                background-size: 100%;
+            }
+            .position_e {
+                position: absolute;
+                left: 4.5rem;
+            }
+            .position_f {
+                position: absolute;
+                top: 0.65rem;
+            }
+            .position_g {
+                position: absolute;
+                top: 0.65rem;
+                left: 2.3rem;
+            }
+            .position_h {
+                position: absolute;
+                top: 0.65rem;
+                left: 4.5rem;
+            }
+            .tip {
+                position: absolute;
+                top: 1.25rem;
+                height: 0.36rem;
+                line-height: 0.36rem;
+                color: @BB8E5F;
+                font-size: 0.2rem;
+                padding: 0 0.1rem;
+                background: linear-gradient(to right, @F5ECD5, @F0DFBA);
+                border-radius: 0.05rem;
+            }
+            .redeem_btn {
+                border: 0.02rem solid @C4925E;
+                margin: 1.05rem 0.3rem 0 0;
+                width: 1.2rem;
+                height: 0.5rem;
+                line-height: 0.5rem;
+                padding-left: 0.36rem;
+                border-radius: 0.25rem;
+                color: @C4925E;
+            }
+            .buy_btn {
+                margin: 1.05rem 0.3rem 0 0;
+                width: 1.2rem;
+                height: 0.5rem;
+                line-height: 0.5rem;
+                padding-left: 0.36rem;
+                background: linear-gradient(to right, @6C83C9, @061D6A);
+                border-radius: 0.25rem;
+                color: @FFFFFF;
+                font-size: 0.24rem;
+            }
+            .closed {
+                position: absolute;
+                width: 1.4rem;
+                height: 1.33rem;
+                right: 0;
+                bottom: 0;
+                background: url("/account/static/img/account_closed_date.png");
+                background-size: 100% 100%;
+            }
+        }
+    }
+
+
+    .mask{
+        width: 100%;
+        height: 100%;
+        position: fixed;
+        top: 0;
+        left: 0;
+        opacity: 0.6;
+        background: #000000;
+        z-index: 9;
+        display: none;
+    }
+    // 淡黄色背景弹框
+    .tipContainer{
+        width: 5.4rem;
+        height: 5.7rem;
+        background-image: linear-gradient(220deg, #F5ECD5 0%, #F0DFBA 100%);
+        border-radius: 0.14rem;
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        margin-left: -2.7rem;
+        margin-top: -2.85rem;
+        display: none;
+        z-index: 10;
+        // 弹框标题
+        .titleText{
+            font-size: 0.32rem;
+            color: @272727;
+            letter-spacing: 0;
+            text-align: center;
+            line-height: 0.45rem;
+            font-weight: bold;
+            margin: 0.43rem 0.4rem 0.3rem;
+        }
+        // 弹框提示内容
+        .tipCon{
+            font-size: 0.26rem;
+            color: @272727;
+            text-align: left;
+            line-height: 0.45rem;
+            margin: 0 0.4rem 0.4rem;
+        }
+        //淡黄色背景只有一个按钮
+        .buttonOne{
+            height: 1rem;
+            background: #FDF3DD;
+            border-bottom-left-radius: 0.14rem;
+            border-bottom-right-radius: 0.14rem;
+            font-size: 0.34rem;
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+            color: @272727;
+            text-align: center;
+            line-height: 1rem;
+        }
+    }
+
+
+
+
+    // 遮罩层
+    .scroll_mask {
+        width: 100%;
+        height: 60rem;
+        background: @c005;
+        opacity: 0;
+        position: absolute;
+        top: 38%;
+        z-index: 3;
+    }
+
+    .nav_fixed {
+        position: static;
+        top: 0;
+        left: 0;
+        z-index: 4;
+        background: @c005;
+    }
+
+    
+
+    .contentWrapper {
+        height: 100%;
+    }
+
+    //iscroll上拉加载重置
+    #pullUp {
+        line-height: 2.8rem;
+        padding: 0;
+
+        span {
+            display: inline-block;
+            vertical-align: middle;
+        }
+    }
+
+    .openOrClose {
+        .bind {
+            margin-bottom: 2rem;
+        }
+    }
+    footer{
+        height: 0.5rem;
+        line-height: 0.5rem;
+        text-align: center;
+        font-size: .24rem;
+        font-family:PingFangSC-Regular,PingFang SC;
+        font-weight:400;
+    }
+}

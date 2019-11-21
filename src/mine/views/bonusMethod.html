@@ -1,0 +1,57 @@
+<!-- 修改分红方式页面 -->
+<!-- author: caiwenqi
+	time:2019/11/20 -->
+<!DOCTYPE html>
+<html>
+
+<head>
+    @@include('@pathInclude/views/meta.html')
+    <link rel="stylesheet" href="/mine/static/css/bonusMethod.css">
+    <title>修改分红方式</title>
+</head>
+
+<body>
+    <!--加载图标-->
+    <!-- @@include('@pathCommonViews/load.html')  -->
+    <!--没有数据显示图标-->
+    <!--@@include('@pathCommonViews/noDataImg.html')-->
+    <!--列表加载显示图标-->
+    <!--@@include('@pathCommonViews/loading/listLoading.html')-->
+    <!--公共页面头部-->
+    @@include('@pathCommonViews/headBarConfig.html',{"pathName":"修改分红方式"})
+    <p class="tips">
+        <i class="iconfont iconone">&#xe635;</i>
+        分红方式修改将在下一个交易日生效，每日仅可修改一次
+    </p>
+    <div class="wrap">
+        <div class="inner">
+            <div class="type_one">
+                <span class="bonusType">
+                    现金分红
+                </span> 
+                <span class="describe">
+                    分红金额直接兑付至关联银行卡
+                </span>
+                <!-- <b id="duigou" class="iconfont iconone">
+                        &#xe626;
+                </b>                -->
+            </div>
+            <div class="type_two">
+                <span class="bonusType">
+                    红利再投资
+                </span> 
+                <span class="describe">
+                    分红金额转换成基金份额，免交易手续费和所
+                </span> 
+            </div>
+        </div>
+    </div>
+    <p class="footer">基金销售服务由北京恒天明泽基金销售有限公司提供</p>
+
+    @@include('@pathInclude/views/footer.html')
+    <!-- 添加埋点 -->
+    @@include('@pathInclude/views/header.html')
+    <script src="/mine/static/js/bonusMethod.js"></script>
+</body>
+
+</html>

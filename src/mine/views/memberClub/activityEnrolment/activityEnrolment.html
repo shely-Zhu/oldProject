@@ -1,0 +1,115 @@
+ <!-- 已报名活动
+ @author caoqiahi 2019-11-18 -->
+
+
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        @@include('@pathInclude/views/meta.html')
+        <link rel="stylesheet" href="/mine/static/css/activityEnrolment.css">
+
+        <title>已报名活动</title>
+    </head>
+<body>
+   <div class="container">
+        @@include('@pathCommonViews/headBarConfig.html',{"pathName":"已报名活动"})    
+        <div class="mui-row choice">
+            <div class="mui-col-xs-6 active"><span>进行中</span><p></p></div>
+            <div class="mui-col-xs-6"><span>已结束</span><p></p></div>
+        </div>
+        <!-- @@include('@pathCommonViews/load.html') -->
+        @@include('@pathCommonViews/noDataImg.html')
+        @@include('@pathCommonViews/loading/listLoading.html')
+        <!-- 有活动 -->
+        <div class="dd_radar HasData">
+            <ul class="listHasData">
+                <!-- <li>
+                    <img src="/mine/static/img/Life_bg_picturer@2x.png" alt="">
+                    <p>恒天豪礼，中秋试手气恒天豪礼，中秋试手气恒天豪礼，中秋试手气</p>
+                    <div class="sign">
+                        <span class="no">未签到</span>
+                    </div> 
+                    <div class="time">
+                        <div class="timeco">报名时间&nbsp;2019-09-10&nbsp;12:00</div> 
+                        <div class="timeBtn">分享给好友</div>
+                    </div>
+                </li>
+                <li>
+                    <img src="/mine/static/img/Life_bg_picturer@2x.png" alt="">
+                    <p>恒天豪礼，中秋试手气</p>
+                    <div class="sign">
+                        <span class="yes">已签到</span>
+                        <div>2019-09-10&nbsp;12:00</div> 
+                    </div>
+                    <div class="time">
+                        <div class="timeco">报名时间&nbsp;2019-09-10&nbsp;12:00</div>
+                        <div class="timeBtn">分享给好友</div>
+                    </div>
+                </li> -->
+            </ul>
+        </div>
+        <!-- 无数据时显示 -->
+        <div class="dd_radar NoData">
+            <img src="/mine/static/img/Me_huodog_Empty@2x.png" alt="">
+            <p>暂无活动信息</p>
+        </div>
+
+        <!-- 更多精彩活动 -->
+        <div class="more">
+            <div class="title">
+                <p class="firstp"></p>
+                <div>更多精彩活动</div>
+                <p class="secondp"></p>
+            </div>
+            <ul>
+                <li style="background: url('/mine/static/img/Life_banner_bg1@2x.png') 100% 100%">
+                    <div class="top">
+                        <span>参与赠送30元电话卡30元电话卡</span>
+                    </div>
+                    <p>恒天豪礼 中秋试手气</p>
+                    <div class="footer">
+                        <span>报名时间</span>
+                        <div>9月10日 至 9月15日</div>
+                    </div>
+                    <div></div>
+                </li>
+                <li style="background: url('/mine/static/img/Life_banner_bg2@2x.png') 100% 100%">
+                    <div class="top">
+                        <span>参与赠送30元电话卡30元电话卡</span>
+                    </div>
+                    <p>注册恒乐汇会员 享受“一对一”咨询服务</p>
+                    <div class="footer">
+                        <span>报名时间</span>
+                        <div>9月10日 至 9月15日</div>
+                    </div>
+                    <div></div>
+                </li>
+            </ul>
+        </div>
+   </div>
+
+   <script id="activityEn-template" type="text/x-handlebars-template">
+    {{#each this}}
+        <li>
+            <img src="/mine/static/img/Life_bg_picturer@2x.png" alt="">
+            <p>恒天豪礼，中秋试手气恒天豪礼，中秋试手气恒天豪礼，中秋试手气</p>
+            <div class="sign">
+                <span class="no">未签到</span>
+            </div> 
+            <div class="time">
+                <div class="timeco">报名时间&nbsp;2019-09-10&nbsp;12:00</div> 
+                <div class="timeBtn">分享给好友</div>
+            </div>
+        </li>
+    {{/each}}
+    </script>
+
+    @@include('@pathInclude/views/footer.html')
+    <script src="/include/js/iscroll.js"></script>
+    <script src="/mine/static/js/memberClub/activityEnrolment.js"></script>
+
+
+
+
+</body>
+</html>

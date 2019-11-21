@@ -136,10 +136,16 @@ module.exports = function() {
     //监管账户（老接口）
     this.findSuperviseBank_api = http_url.web_url + '/content/frontend/findSuperviseBank';
 
+    /*-------------------明星理财师开始 ------------------------------*/
+
+    //明星理财师-列表
+    this.queryFinancialer_api = http_url.web_url + '/account/home/frontend/queryFinancialer';
+
+    /*-------------------明星理财师结束 ------------------------------*/
     //会员俱乐部-活动列表
-    this.getActivitiesList_api = http_url.web_url + '/marketing/activity/getActivitiesList',
+    this.getActivitiesList_api = http_url.web_url + '/marketing/activity/getActivitiesList';
     //会员俱乐部-活动-城市定位列表-根据城市类型或者首字母获取城市list
-    this.cityList_api = http_url.web_url + '/marketing/activity/cityList',
+    this.cityList_api = http_url.web_url + '/marketing/activity/cityList';
 
     //会员俱乐部-活动列表-获取城市定位
     this.getCity_api = http_url.web_url + '/marketing/frontend/getCity'
@@ -148,7 +154,45 @@ module.exports = function() {
     //上传图片
     this.upload_api = http_url.web_url + '/content/file/upYun/upload'
 
+    this.getCity_api = http_url.web_url + '/marketing/frontend/getCity';
+
+   /*------------------- 私募 start ------------------------------*/
+    //私募历史明细
+    this.curveHistoryList_api =http_url.web_url +'/account/positions/curveHistoryList' ;
+    this.dealDetailList_api =http_url.web_url +'/account/positions/dealDetailList' ;
+
+     /*------------------- 消息中心 end ------------------------------*/
+
+    /*------------------- 消息中心 start ------------------------------*/
+
+    // 消息中心
+    this.getNoticeTypeList_api = http_url.web_url + '/account/account/getNoticeTypeList';
+    // 通知消息列表
+    this.systemNotificationList_api = http_url.web_url + '/account/account/systemNotificationList';
+    // 非通知消息列表  
+    this.noticeAndTransDynamicList_api = http_url.web_url + '/account/account/noticeAndTransDynamicList';
+    // 通知详情
+    this.getSystemNotification_api = http_url.web_url + '/account/account/getSystemNotification';
+    //查询单条文章(APPCMS后台)
+    this.getArticle_api = http_url.web_url + '/content/frontend/getArticle';
+    // 非通知详情
+    this.getNoticeAndTransDynamic_api = http_url.web_url + '/account/account/getNoticeAndTransDynamic';
+
+    /*------------------- 消息中心 end ------------------------------*/
 
 
+    /*------------------- 月度报告 start ------------------------------*/
 
+    //  持仓总览
+    this.queryInvestProdHoldShareList_api = http_url.web_url + '/account/report/queryInvestProdHoldShareList';
+    // 交易明细
+    this.queryInvestTradeDetail_api = http_url.web_url + '/account/report/queryInvestTradeDetail';
+    // 当前资产配置列表
+    this.queryInvestAssetAnalyse_api = http_url.web_url + '/account/report/queryInvestAssetAnalyse';
+    // 建议资产配置列表
+    this.queryInvestAssetConfigureAdvise_api = http_url.web_url + '/account/report/queryInvestAssetConfigureAdvise';
+    // 报告分析（报告明细）
+    this.queryInvestReportDetail_api = http_url.web_url + '/account/report/queryInvestReportDetail';
+   
+    /*------------------- 月度报告 end ------------------------------*/
 };
