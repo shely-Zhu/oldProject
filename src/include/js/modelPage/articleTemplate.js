@@ -37,7 +37,8 @@ $(function(){
             var obj=[{
                 url: site_url.getArticle_api,
                 data:{
-                	id:splitUrl['id']
+                	articleBelong:splitUrl['articleBelong'],
+                	applyType:splitUrl['applyType']*1,
                 },
                 needDataEmpty: true,
                 callbackDone: function(json) {
@@ -64,7 +65,6 @@ $(function(){
         },
         events() {
             var that = this;
-
         },
 	};
 	templatePage.init();

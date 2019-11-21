@@ -201,6 +201,7 @@
                     that.$yes.on('click', function() {
                         //调用的是callback回调函数
                         that.options.callback(that);
+                        $(this).parents('.elasticLayer').hide();
                     })
                 },
 
