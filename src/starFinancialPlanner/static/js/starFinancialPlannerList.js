@@ -97,7 +97,7 @@ $(function(){
                     console.log('我是内容',json);
                     var data=json.data.financialerList;
                     console.log(data)
-                    if(1==1){
+                    if(json.data.matchedFinancialer=='0'){
                         t.endPullupToRefresh(true);
                         that.$e.activityListDataBox.hide();
                         that.$e.activityListDataNoBox.show();

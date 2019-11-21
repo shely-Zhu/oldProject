@@ -58,6 +58,8 @@ $(function () {
                     var template = Handlebars.compile(tplm);
                     var html = template(that.data.fundDetailList);
                     $("#pageLists").html(html);
+                    //模板渲染完毕后展示没有更多数据的样式
+                    $('footer').removeClass('hide');
                     //渲染完模板后再添加事件
                     that.events();
                 },
