@@ -189,8 +189,6 @@ module.exports = {
 
     //jjs持仓明细
     './wealthResources/otherAssets/static/js/jjsAssets': './src/wealthResources/otherAssets/static/js/jjsAssets.js',
-    //信息披露
-    './acount/static/js/informationDisclosure': './src/acount/static/js/informationDisclosure.js',
     // demo
     './wealthResources/otherAssets/static/js/demo': './src/wealthResources/otherAssets/static/js/demo.js',
     // 老版-待删除
@@ -211,6 +209,8 @@ module.exports = {
     './mine/static/js/journal': './src/mine/static/js/journal.js',
     // 交易明细页面
     './mine/static/js/transactionDetails': './src/mine/static/js/transactionDetails.js',
+    //修改分红方式页面
+    './mine/static/js/bonusMethod': './src/mine/static/js/bonusMethod.js',
     // 会员权益成长值记录
     './mine/static/js/membershipInterestsRecord': './src/mine/static/js/membershipInterestsRecord.js',
     // 会员权益详情
@@ -247,8 +247,8 @@ module.exports = {
     './account/static/js/informationDisclosure': "./src/account/static/js/informationDisclosure.js",
     //其他资产
     './wealthResources/otherAssets/static/js/otherAssets': './src/wealthResources/otherAssets/static/js/otherAssets.js',
-    //已确认交易
-    './account/static/js/private/confirmTransaction': './src/account/static/js/private/confirmTransaction.js',
+    //已确认交易 公共js
+    './account/static/js/common/transcationTem': './src/account/static/js/common/transcationTem.js',
     //待确认交易
     './account/static/js/private/tobeConfirmTransaction': './src/account/static/js/private/tobeConfirmTransaction.js',
     //公募资产
@@ -273,4 +273,6 @@ module.exports = {
 
     // 自选公募交易记录
     './account/static/js/public/transactionRecords': './src/account/static/js/public/transactionRecords.js',
+    // 自选公募交易明细
+    './account/static/js/public/transactionDetail': './src/account/static/js/public/transactionDetail.js',
 }
