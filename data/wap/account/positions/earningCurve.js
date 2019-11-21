@@ -8,7 +8,7 @@ var Mock = require('mockjs');
 var incomeDetail = Mock.mock({ 
 	"data|10":[
 		{
-	        "profitThoudValue": "5000", //历史收益
+	        "profitThoudValue|1": ["5000", "33", "2222" ], //历史收益
 	        "profitThoudDate" : '2019-11-10',  //收益日期
 	        "sevenIncomeRate|1": ['0', '2', '4.999']  //七日年化
 	        

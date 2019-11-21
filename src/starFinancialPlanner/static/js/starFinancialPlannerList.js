@@ -88,16 +88,16 @@ $(function(){
                 url: site_url.queryFinancialer_api,
                 // url:'http://172.16.187.164:8081/web/marketing/activity/getActivitiesList',
                 data: {
-                        
-                    
+                    code:$('.mui-input-clear').val(),    
+                    cityName:''
                 },
                 //async: false,
                 needDataEmpty: true,
                 callbackDone: function(json) {
-                    
-                    console.log(json);
+                    console.log('我是内容',json);
                     var data=json.data.financialerList;
-                    if(!data.length){
+                    console.log(data)
+                    if(json.data.matchedFinancialer=='0'){
                         t.endPullupToRefresh(true);
                         that.$e.activityListDataBox.hide();
                         that.$e.activityListDataNoBox.show();
@@ -147,8 +147,8 @@ $(function(){
                 url: site_url.queryFinancialer_api,
                 // url:'http://172.16.187.164:8081/web/marketing/activity/getActivitiesList',
                 data: {
-                        
-                    
+                    code:$('.mui-input-clear').val(),    
+                    cityName:''    
                 },
                 //async: false,
                 needDataEmpty: true,

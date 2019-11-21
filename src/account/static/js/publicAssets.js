@@ -1,488 +1,185 @@
 /*
- * @page: 公募资产
+ * @page: 公募自选总资产
  * @Author: shiyunrui
  * @Date:   2019-11-19
  * @description:
- * 新版App的公募资产页面
+ * 公募持仓页面
  */
-require('@pathCommonJsCom/utils.js');
-//ajax调用
-require('@pathCommonJs/ajaxLoading.js');
-//zepto模块--callback
-require('@pathIncludJs/vendor/zepto/callback.js');
-//zepto模块--deferred
-require('@pathIncludJs/vendor/zepto/deferred.js');
-//路径配置文件
-require('@pathIncludJs/vendor/config.js');
-//下拉加载更多
-// require('@pathCommonJs/scrollFullPage.js');
-// 切换
-require('@pathCommonJsCom/tabScroll.js');
-require('@pathCommonJsCom/goTopMui.js');
-require('@pathCommonJs/components/elasticLayer.js');
-require('@pathCommonJs/components/elasticLayerTypeFive.js');
+require('../../../include/js/vendor/config.js');
+require('../../../include/js/vendor/zepto/callback.js');
+require('../../../include/js/vendor/zepto/deferred.js');
+require('../../../common/js/components/utils.js');
+require('../../../common/js/ajaxLoading.js');
 require('@pathCommonJs/components/headBarConfig.js');
-//黑色提示条的显示和隐藏
-var tipAction = require('@pathCommonJsCom/tipAction.js');
 
+$(function () {
 
-$(function() {
-    var data = {
-        getElements: {
-            noData: $('.noData'), //没有数据的结构
-            listLoading: $('.listLoading'), //所有数据区域，第一次加载的loading结构
+    var somePage = {
+        gV: { // 全局变量
+            showBankList: false,
+            //请求到的总资产data
+            data: '',
         },
-        gV: { //一些设置
-            showBankList: false,//当前是否展示银行卡列表
-
-            navList: [ //导航
-                // { type: '持有资产', num: '0' },
-                { type: '待确认资产', num: '1' },
-            ],
-            aP: {
-                pageNo: 1,
-                pageSize: 10,
-            },
-            current_index: 0, //左右滑动区域的索引
-            list_template: '', //列表的模板，生成后存放在这里
-            ajaxArr: [], //存放每一个ajax请求的传参数据
-            // 存放ajax请求地址  已持仓  待确认
-            siteUrlArr: [site_url.queryAssetsDetailByPages_api, site_url.getJJSInTransitAssets_api],
-            listToTop: '', // 滑动区域距离顶部距离
-            navToTop: '', // 滑动nav距离顶部距离
-            navHeight: '', // nav高度
-            totalCount: $(".totalCount"), //总资产
-            jAlready: $(".j_already"), //已持仓
-            jTobe: $(".j_tobe"), //待确认
-        },
-        html: '', //存放生成的html
-        init: function() { //初始化函数
+        init: function () {
             var that = this;
-
-            //拼模板，初始化左右滑动mui组件
-            that.beforeFunc();
-
-            //初始化第一屏区域的上拉加载
-            that.initMui($('#scroll1'));
-
             that.getData();
-
-            //事件监听
-            that.events();
         },
-
-        beforeFunc: function() { //拼模板，初始化左右滑动mui组件
-            var that = this,
-                contentArr = []; //传给tabScroll组件的contentList参数的数组
-
-            // list内容模板
-            var source = $('#second-template').html(),
-                template = Handlebars.compile(source),
-                list_html = template();
-
-            //将生成的模板内容存到that.list_template上
-            that.gV.list_template = template;
-
-            // 外容器优先加载
-            var wrap_source = $('#first-template').html(),
-                wrap_template = Handlebars.compile(wrap_source),
-                wrap_html = wrap_template({ content: list_html });
-
-            $.each(that.gV.navList, function(i, el) {
-                that.gV.ajaxArr[el.num] = {
-                    pageNo: that.gV.aP.pageNo, //当前第几页(默认为1) 非必填项, 默认设置成第一页
-                    pageSize: that.gV.aP.pageSize, //每页显示几条数据(默认10) 非必填项， 默认设置成20
-                }
-
-                contentArr.push({
-                    id: i,
-                    content: wrap_html
-                })
-            })
-
-            var obj = {
-                wrapper: $('.myAsset'), //存放整个组件的区域
-                needNavAction: false,
-                //needBlock: true,
-                navList: that.gV.navList, //导航
-                contentLength: that.gV.navList.length, //左右滑动的区域个数，即导航数组长度
-                contentList: contentArr, //此时只有框架，实际列表内容还未请求
-                callback: function(t) { //t返回的是 id 为 scroll1 / scroll2 这样的切换后当前区域中的节点
-
-                    //data-scroll属性即当前左右切换区域的索引
-                    var index = t.attr('data-scroll');
-
-                    //data-scroll属性即当前左右切换区域的索引
-                    that.gV.current_index = index;
-
-                    //判断当前区域是否已经初始化出来上拉加载
-                    if (t.hasClass('hasPullUp')) {
-                        //有这个class，表示已经初始化，不再执行下一步
-                        //但需要重置html的overflow
-
-                        //var index = $('#slider .tab-scroll-wrap .mui-active').index();
-
-                        // if( $("#move_"+that.gV.current_index+" .noData").length ){
-                        //     //已经暂无数据了
-                        //     $('html').addClass('hidden');
-                        // }
-                        // else{
-                        //     $('html').removeClass('hidden');
-                        // }
-                        return false;
-                    }
-
-                    //没有hasPullUp class，表示没有初始化，调用initMui，进行初始化
-                    //并请求第一次数据
-                    that.initMui(t);
-                }
-            }
-            $.tabScroll(obj);
-
-            //此时所有切换区域的内容都是空的
-            //设置切换区域的高度
-            //计算节点高度并设置
-            if (!that.height) {
-
-                that.gV.listToTop = document.getElementById('scroll1').getBoundingClientRect().top;
-                that.gV.navToTop = document.getElementById('slider').getBoundingClientRect().top;
-                that.gV.navHeight = that.gV.listToTop - that.gV.navToTop;
-                that.height = windowHeight - that.gV.listToTop;
-
-                that.htmlHeight = $('html').height() - $('.nav-wrapper').height();
-
-
-                console.log('距顶部距离：' + that.gV.listToTop);
-
-                //that.highHeight = windowHeight-that.gV.navHeight;
-
-                that.highHeight = $('html').height() - that.gV.listToTop;
-            }
-
-            // 为实现滚动区域滚动到顶部，定位，添加遮罩层
-            $('.scroll_mask').css('top', that.gV.listToTop)
-        },
-
-        initMui: function($id) {
+        getData: function (t) {
             var that = this;
-            w = $id.attr('id'),
-                s = '#' + w + ' .contentWrapper';
-
-            mui.init({
-                pullRefresh: {
-                    container: s,
-                    up: {
-                        contentrefresh: '拼命加载中',
-                        contentnomore: '没有更多了', //可选，请求完毕若没有更多数据时显示的提醒内容；
-                        callback: function() {
-                            //执行ajax请求
-                            that.commonAjax($id, this, 'more');
-
-                        }
-                    }
-                }
-            });
-
-            mui.ready(function() { //init后需要执行ready函数，才能够初始化出来
-
-                //隐藏当前的加载中loading
-                if (!$id.hasClass('hasPullUp')) {
-                    $id.find('.mui-pull-bottom-pocket').addClass('mui-hidden');
-                }
-
-                mui(".mui-slider").slider();
-
-                //显示loading
-                that.getElements.listLoading.show();
-
-                //这一句初始化并第一次执行mui上拉加载的callback函数
-                mui(s).pullRefresh().pullupLoading();
-
-                //为$id添加hasPullUp  class
-                $($id).addClass('hasPullUp');
-
-
-
-                // mui(s).pullRefresh().disablePullupToRefresh()
-            });
-
-            // mui('.mui-slider').slider().stopped = true;
-        },
-        commonAjax: function($id, t) { // 获取产品数据的公用ajax方法;$id为各区域的 scroll+num id
-            var that = this;
-
-            //获取产品列表
-            var obj = [{
-                url: that.gV.siteUrlArr[that.gV.current_index],
-                data: that.gV.ajaxArr[that.gV.current_index],
-                needLogin: true,
-                callbackDone: function(json) {
-                    var jsonData = json.data,
-                        pageList = jsonData.pageList;
-
-                    if (!$.util.objIsEmpty(pageList)) {
-
-                        jsonData.already = that.gV.current_index == 0 ? 1 : 0;
-                        jsonData.tobe = that.gV.current_index == 1 ? 1 : 0;
-
-                        var list_html = that.gV.list_template(jsonData);
-
-                        //设置这两参数，在initMui()中使用
-                        //判断是否显示没有更多了等逻辑，以及插入新数据
-                        that.listLength = pageList.length;
-                        that.html = list_html;
-
-                        //重设当前页码
-                        if (!$.util.objIsEmpty(pageList)) {
-                            //设置每个ajax传参数据中的当前页码
-                            that.gV.ajaxArr[that.gV.current_index].pageNo++;
-                        }
-                    } else {
-                        //没有数据
-                        that.listLength = 0;
-                        that.html = '';
-                    }
-
-                    //有数据
-                    setTimeout(function() {
-
-                        if (that.listLength < that.gV.aP.pageSize) {
-
-                            if (that.gV.ajaxArr[that.gV.current_index].pageNo == 1) {
-                                //第一页时
-                                if (that.listLength == 0) {
-                                    //没有数据
-                                    $id.find('.list').html(that.getElements.noData.clone(false)).addClass('noCon');
-                                    $id.find('.noData').show();
-
-                                    //隐藏loading，调试接口时需要去掉
-                                    setTimeout(function() {
-                                        that.getElements.listLoading.hide();
-                                    }, 100);
-                                    t.endPullupToRefresh(true);
-
-                                    //获取当前展示的tab的索引
-                                    var index = $('#slider .tab-scroll-wrap .mui-active').index(),
-                                        $list = $("#move_" + index + " .list");
-
-                                    $list.height(that.highHeight).addClass('noMove');
-
-                                    // if( $("#move_"+index+" .noData").length ){
-                                    //     //已经暂无数据了
-                                    //     $('html').addClass('hidden');
-                                    // }
-                                    // else{
-                                    //     $('html').removeClass('hidden');
-                                    // }
-
-                                    return false;
-                                } else {
-                                    //有数据，没有更多了
-                                    t.endPullupToRefresh(true);
-                                }
-                            } else {
-                                //其他页，没有更多了
-                                t.endPullupToRefresh(true);
-                            }
-                        } else {
-                            t.endPullupToRefresh(false);
-                        }
-
-                        $id.find('.contentWrapper .mui-pull-bottom-pocket').removeClass('mui-hidden');
-
-                        if (that.gV.ajaxArr[that.gV.current_index].pageNo == 1) {
-                            //第一屏
-                            $id.find('.contentWrapper .mui-table-view-cell').html(that.html);
-                        } else {
-                            $id.find('.contentWrapper .mui-table-view-cell').append(that.html);
-                        }
-
-                        //获取当前展示的tab的索引
-                        var index = $('#slider .tab-scroll-wrap .mui-active').index(),
-                            $list = $("#move_" + index + " .list");
-
-                        if (!$list.hasClass('setHeight')) {
-
-                            //$('.list').each( function( i, el){
-
-                            //判断当前ul高度
-                            var ulHeight = $list.find(".mui-table-view").height();
-
-                            if (ulHeight < that.htmlHeight) {
-
-                                $list.height(that.highHeight).addClass('setHeight').addClass('noMove');
-                            } else {
-                                $list.height(that.htmlHeight).addClass('setHeight');
-                            }
-
-                            //})
-                        }
-
-                        //隐藏loading
-                        setTimeout(function() {
-                            that.getElements.listLoading.hide();
-                        }, 100);
-
-                    }, 200)
-
-
-
-                },
-                callbackFail: function(json) {
-                    //请求失败，
-                    //隐藏loading
-                    //that.getElements.listLoading.hide();
-                    //显示错误提示
-                    tipAction(json.message);
-
-                    t.endPullupToRefresh(false);
-                    $('.contentWrapper').find('.mui-pull-bottom-pocket').removeClass('mui-hidden');
-
-                    //隐藏loading，调试接口时需要去掉
-                    setTimeout(function() {
-                        that.getElements.listLoading.hide();
-                    }, 100);
-
-                    //获取当前展示的tab的索引
-                    // var index = $('#slider .tab-scroll-wrap .mui-active').index(),
-                    //     $list = $("#move_"+index+" .list");
-
-                    // $list.addClass('noMove');
-
-                    //return false;
-                },
-                callbackNoData: function(json) {
-
-                    //没有数据
-                    $id.find('.mui-scroll .list').html(that.getElements.noData.clone(false)).addClass('noCon');
-                    $id.find('.noData').show();
-
-                    setTimeout(function() {
-                        that.getElements.listLoading.hide();
-                    }, 100);
-
-                    //获取当前展示的tab的索引
-                    var index = $('#slider .tab-scroll-wrap .mui-active').index(),
-                        $list = $("#move_" + index + " .list");
-
-                    $list.addClass('noMove');
-                }
-            }]
-            $.ajaxLoading(obj);
-        },
-        getData: function() {
-            var that = this;
-            var obj = [{
-                url: site_url.getJJSAssets_api, //查询总资产 从中拿到jjs的资产
+            var obj = [{ // 公募总资产
+                url: site_url.totalAssets_api,
                 data: {},
-                callbackDone: function(json) {
-                    //拿到jjs资产并填充界面
-                    that.gV.totalCount.html(json.data.jjsTotalAssetMask);
-                    that.gV.jAlready.html('+' + json.data.jjsHoldAssetMask);
-                    that.gV.jTobe.html(json.data.jjsInTransitAssetMask);
+                //async: false,
+                needDataEmpty: true,
+                callbackDone: function (json) {
+                    that.data = json.data;
+                    //总资产
+                    $('.totalM').html(that.data.myAssetTotalMask);
+                    //待确认金额
+                    $('.be_confirmed_amount .value').html(that.data.inTransitTotal);
+                    //昨日总收益
+                    $('.first_h_profit_box .h_profit_value').html(that.data.inTransitTotal);
+                    //持仓总收益
+                    $('.second_h_profit_box .h_profit_value').html(that.data.inTransitTotal);
+                    //设置比较器
+                    Handlebars.registerHelper("if_than_0", function (value, options) {
+                        if (value > 0) {
+                            return options.fn(this);
+                        } else {
+                            return options.inverse(this);
+                        }
+                    });
+                    //设置将数字转为中文的方法
+                    Handlebars.registerHelper("noToChinese", function (value, options) {
+                        return that.noToChinese(value);
+                    });
+                    //列表渲染
+                    var tplm = $("#dataLists").html();
+                    var template = Handlebars.compile(tplm);
+                    var html = template(that.data.fundDetailList);
+                    $("#pageLists").html(html);
+                    //模板渲染完毕后展示没有更多数据的样式
+                    $('footer').removeClass('hide');
+                    //渲染完模板后再添加事件
+                    that.events();
                 },
+                callbackFail: function (data) {
+                    console.log('加载失败');
+                }
             }];
             $.ajaxLoading(obj);
         },
-        events: function() { //绑定事件
+        events: function () { //绑定事件
             var that = this;
             //点击筛选银行卡
-            $('#bank_screen').on('click', function(e) {
-                that.showBankList = !that.showBankList;
-                if (that.showBankList){
+            $('#bank_screen').on('click', function (e) {
+                that.gV.showBankList = !that.gV.showBankList;
+                if (that.gV.showBankList) {
                     $('.bank_list').show();
-                    $('#bank_screen iconfont').html('&#xe62a;');
+                    $('#bank_screen .iconfont').html('&#xe62a;');
                 } else {
                     $('.bank_list').hide();
-                    $('#bank_screen iconfont').html('&#xe62a;');
-                }
-                
-            })
-
-            // 下拉
-            mui("body")[0].addEventListener("swipedown", function(e) {
-
-                //获取当前展示的tab的索引
-                var index = $('#slider .tab-scroll-wrap .mui-active').index();
-
-                if ($("#move_" + index + " .noData").length) {
-                    //已经暂无数据了
-                    $('body').css('transform', 'translate3d(0px, 0px, 0px) translateZ(0px)');
-
-                    $('#slider .mui-slider-item').each(function(i, el) {
-                        if (i != index) {
-                            $(el).find('.goTopBtn').trigger('tap');
-                        }
-                    })
-                }
-            });
-
-
-            //监听滚动事件，做下拉判断
-            var move = true;
-
-            document.querySelector('#slider').addEventListener('scroll', function(e, event) {
-
-                //获取当前展示的tab的索引
-                var index = $('#slider .tab-scroll-wrap .mui-active').index();
-                var transformUl = $("#move_" + index + " .mui-table-view").css('transform');
-                var t = $('.nav-wrapper')[0].getBoundingClientRect().top;
-
-
-                //move为true，
-                if (move && e.detail.lastY < 0) {
-
-                    if ($("#move_" + index + " .list").hasClass('noMove')) {
-                        return false
-                    }
-
-                    $('body').css('transform', transformUl);
-
-                    var t = $('.nav-wrapper')[0].getBoundingClientRect().top;
-
-                    if (t <= 10) {
-                        $('.nav-wrapper').addClass('nav_fixed');
-                        $('body').css('transform', 'translate3d(0px, -201px, 0px) translateZ(0px)');
-                        move = false;
-                    }
-                } else if (!move && (e.detail.lastY > -30 && e.detail.lastY != 0)) { // 等于0是tab切换
-                    $('.nav-wrapper').removeClass('nav_fixed');
-                }
-
-                if (e.detail.lastY == 0) {
-                    //下拉
-                    if (transformUl) {
-                        var trans = transformUl.substring(transformUl.indexOf(','));
-
-                        var transformNum = trans.substring(2, trans.indexOf('px'));
-
-                        if (Number(transformNum) > -201) {
-                            // 切换tab
-
-                            $('body').css('transform', transformUl);
-
-                            $('#slider .mui-slider-item').each(function(i, el) {
-                                if (i != index) {
-                                    $(el).find('.goTopBtn').trigger('tap');
-                                }
-                            })
-
-                            move = true;
-                        }
-                    }
+                    $('#bank_screen .iconfont').html('&#xe609;');
                 }
             })
-
+            //银行卡列表点击
+            $('.bank_list .bank_screen').on('click', function(){
+                $(this).find('.iconfont').removeClass('hide');
+                $(this).siblings().find('.iconfont').addClass('hide');
+                $('#bank_screen .bank_screen_name').html($(this).find('.bank_screen_name').html());
+                //选择后将列表关闭
+                that.gV.showBankList = !that.gV.showBankList;
+                $('.bank_list').hide();
+                $('#bank_screen .iconfont').html('&#xe609;');
+            })
+            //item的点击 进入持仓详情
+            $('.hold_item').on('click', function(){
+                //todo 跳转
+            })
+            //点击持仓列表的感叹号 进入持仓明细
+            $('.position_tip').on('click', function(){
+                //todo 跳转
+            })
+            //购买
+            $('.buy_btn').on('click', function(){
+                //todo 跳转
+            })
+            //赎回
+            $('.redeem_btn').on('click', function(){
+                //todo 跳转
+            })
             // 头部文案提示(金钱展示隐藏)
-            mui("body").on('tap', '.j_icon', function(e) {
-                $('.totalM').html('****')
+            mui("body").on('tap', '.j_icon', function (e) {
+                //总资产
+                $('.totalM').html("****");
+                //待确认金额
+                $('.be_confirmed_amount .value').html("****");
+                //昨日总收益
+                $('.first_h_profit_box .h_profit_value').html("****");
+                //持仓总收益
+                $('.second_h_profit_box .h_profit_value').html("****");
                 $(this).addClass('eyecose');
             })
-            mui("body").on('tap', '.eyecose', function(e) {
-                $('.totalM').html('10,000,000.00')
+            mui("body").on('tap', '.eyecose', function (e) {
+                //总资产
+                $('.totalM').html(that.data.myAssetTotalMask);
+                //待确认金额
+                $('.be_confirmed_amount .value').html(that.data.inTransitTotal);
+                //昨日总收益
+                $('.first_h_profit_box .h_profit_value').html(that.data.inTransitTotal);
+                //持仓总收益
+                $('.second_h_profit_box .h_profit_value').html(that.data.inTransitTotal);
                 $(this).removeClass('eyecose');
             })
-        }
+            //打开资产组成说明
+            mui("body").on('tap', '.assetsBtn', function (e) {
+                $('.mask').show();
+                $('.tipContainer').show();
+            })
+            //关闭资产组成说明
+            mui("body").on('tap', '.buttonOne', function (e) {
+                $('.mask').hide();
+                $('.tipContainer').hide();
+            })
+        },
+        
+        //数字转中文 例如1转为一
+        noToChinese: function (num) {
+            if (!/^\d*(\.\d*)?$/.test(num)) {
+                alert("Number is wrong!");
+                return "Number is wrong!";
+            }
+            var AA = new Array("零", "一", "二", "三", "四", "五", "六", "七", "八", "九");
+            var BB = new Array("", "十", "百", "千", "万", "亿", "点", "");
+            var a = ("" + num).replace(/(^0*)/g, "").split("."),
+                k = 0,
+                re = "";
+            for (var i = a[0].length - 1; i >= 0; i--) {
+                switch (k) {
+                    case 0:
+                        re = BB[7] + re;
+                        break;
+                    case 4:
+                        if (!new RegExp("0{4}\\d{" + (a[0].length - i - 1) + "}$").test(a[0]))
+                            re = BB[4] + re;
+                        break;
+                    case 8:
+                        re = BB[5] + re;
+                        BB[7] = BB[5];
+                        k = 0;
+                        break;
+                }
+                if (k % 4 == 2 && a[0].charAt(i + 2) != 0 && a[0].charAt(i + 1) == 0) re = AA[0] + re;
+                if (a[0].charAt(i) != 0) re = AA[a[0].charAt(i)] + BB[k % 4] + re;
+                k++;
+            }
+            if (a.length > 1) //加上小数部分(如果有小数部分) 
+            {
+                re += BB[6];
+                for (var i = 0; i < a[1].length; i++) re += AA[a[1].charAt(i)];
+            }
+            return re;
+        },
     };
-    data.init();
+    somePage.init();
 });

@@ -36,7 +36,7 @@ $(function() {
 			$(".mui-slider").on("slide",function(e){
 				$("b").removeClass('borderBottom')
 				$("b").eq(e.detail.slideNumber).addClass('borderBottom')
-				console.log($.tabScroll({}))
+				// console.log($.tabScroll({}))
 				// .addClass('borderBottom').siblings().removeClass('borderBottom');
 				console.log(e.srcElement,"2")
 			})

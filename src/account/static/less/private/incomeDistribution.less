@@ -1,0 +1,59 @@
+@import url("@pathInclude/css/mui.min.css");
+@import url('@pathCommonLess/mui/resetMUI.less');
+@import url("@pathCommonLess/reset.less");
+@import url("@pathCommonLess/color.less");
+
+@import url("@pathCommonLessCom/againEnter.less");
+@import url("@pathCommonLessCom/alertBox.less");
+@import url("@pathCommonLessCom/headBarConfig.less");
+@import url("@pathCommonLessCom/goTopMui.less");
+* { touch-action: none; }
+body{
+    background-color: @F7FAFD;
+}
+.box{
+    padding:0.3rem 0.3rem 0.3rem 0.34rem;
+}
+.box ul li{
+    border-left:0.04rem solid @BC965A;
+    border-radius: 16px 0 0 16px;
+    overflow: hidden;
+    background-color: @FFFFFF;
+    margin-bottom:0.3rem;
+}
+.box li h2{
+    width:100%;
+    height:0.8rem;
+    line-height:0.8rem;
+    padding-left:0.22rem;
+    font-size:0.32rem;
+    color:#C4925E;
+    background-image: linear-gradient(to right, @FFEDD3 ,@FFFFFF);
+    background-color:rgba(196,146,94,.5)
+}
+.box ul li .content {
+    padding:0.3rem 0.3rem  0.3rem 0.16rem;
+}
+.box ul li .content p{
+    display:-webkit-box;
+}
+.box ul li .content span{
+    font-size:0.28rem;
+    color:@9B9B9B;
+    width:1.12rem;
+    margin-bottom:0.2rem;
+    display:block;
+    margin-right:0.27rem;
+}
+.box li .content b{
+    -webkit-box-flex:1;
+    color:@272727;
+    font-size:0.28rem;
+    word-wrap: break-word;
+    word-break: break-all;
+    font-weight: normal;
+    display: block;
+}
+.box li .content b:first-child{
+   font-weight:bold;
+}
