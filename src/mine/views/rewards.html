@@ -60,23 +60,25 @@
 
         <div class="tipBox">
             <div class="alertcontent">
-            <img class="bgPicture" src="/mine/static/img/alertBox.png" alt="">
+                <img class="bgPicture" src="/mine/static/img/alertBox.png" alt="">
                 <ul>
-                    <li class="firstli commonval">39元京东卡39元京东卡</li>
-                    <li class="secondli commonval"><span>卡号：</span><span>229492849229492849849393822949284984939388493938</span></li>
-                    <li class="thirdli commonval">
+                    <li class="firstli commonval"><!-- 39元京东卡39元京东卡 --></li>
+                    <li class="secondliNum secondli commonval"><span>卡号：</span><span><!-- 2294928492294928498438 --></span></li>
+                    <li class="secondliPwd secondli commonval"><span>密码：</span><span><!-- 22949284922984 --></span></li>
+                    <li class="thirdli commonval clearfix">
                         <p>使用期限</p>
-                        <p><span>2019-08-08</span>至<span>2010-01-01</span></p>
+                        <p><span><!-- 2019-08-08 --></span>至<span><!-- 2010-01-01 --></span></p>
                     </li>
                     <li class="fourli commonval">
                         <p>奖品描述</p>
-                        <p>描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述</p>
+                        <p><!-- 描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述 --></p>
                     </li>
                     <li class="fiveli commonval">
                         <p>奖励时间</p>
-                        <p>2019-09-09</p>
+                        <p><!-- 2019-09-09 --></p>
                     </li>
                 </ul>
+                <i class="iconfont closeBtn">&#xe637;</i>
             </div>
 
         </div>
@@ -102,8 +104,8 @@
 			<div class="mui-card-conten mui-card-media {{xnParentClass}}">
 				<div class="{{xnChildClass}}">
 					<p class="rewardName">{{prizeName}}</p>
-					<p class="rewardTime">有效期至：{{endTime}}</p>
-					<a href="javascript:;" class="viewDetails"  data-id="{{prizeDetailId}}">查看详情<span class="iconfont">&#xe636;</span></a>
+					<p class="rewardTime" start-data={{startTime}} end-data={{endTime}} create-data={{createTime}}>有效期至：{{endTime}}</p>
+					<a href="javascript:;" class="viewDetails"  data-id="{{prizeDetailId}}" data-memo={{memo}}>查看详情<span class="iconfont">&#xe636;</span></a>
 					{{#if imgvalue}}
 					<img class="invalidImg" src="/mine/static/img/rewards/yishixiao@3x.png">
 					{{/if}}

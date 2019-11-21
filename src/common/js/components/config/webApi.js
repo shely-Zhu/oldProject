@@ -142,6 +142,8 @@ module.exports = function() {
     this.cityList_api = http_url.web_url + '/marketing/activity/cityList',
     //我的奖励
     this.getPrizeInfo_api = http_url.web_url + "/account/myPrize/getPrizeInfo",
+    //我的奖励查看详情
+    this.getPrizeDetail_api = http_url.web_url + "/account/myPrize/getPrizeDetail",
 
 
     //会员俱乐部-活动列表-获取城市定位
