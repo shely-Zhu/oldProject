@@ -217,6 +217,7 @@ $(function() {
                     },
                     //async: false,
                     needDataEmpty: true,
+                    contentTypeSearch: true,
                     callbackDone: function(json) {
                         var data = json.data;
 
