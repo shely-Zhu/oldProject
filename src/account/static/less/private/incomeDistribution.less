@@ -23,7 +23,7 @@ body{
         line-height:0.8rem;
         padding-left:0.22rem;
         font-size:0.32rem;
-        color:#C4925E;
+        color:@C4925E;
         background-image: linear-gradient(to right, @FFEDD3 ,@FFFFFF);
         background-color:rgba(196,146,94,.5)
     }
@@ -47,10 +47,10 @@ body{
                 word-break: break-all;
                 font-weight: normal;
                 display: block;
+                &:first-child{
+                    font-weight:bold;
+                }
             }
         }
     }
-}
-.box li .content b:first-child{
-   font-weight:bold;
 }

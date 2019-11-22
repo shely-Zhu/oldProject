@@ -211,6 +211,8 @@ module.exports = {
     './mine/static/js/transactionDetails': './src/mine/static/js/transactionDetails.js',
     //修改分红方式页面
     './mine/static/js/bonusMethod': './src/mine/static/js/bonusMethod.js',
+    //私募资产净值明细页面
+    './mine/static/js/priNetWorthDetails': './src/mine/static/js/priNetWorthDetails.js',
     // 会员权益成长值记录
     './mine/static/js/membershipInterestsRecord': './src/mine/static/js/membershipInterestsRecord.js',
     // 会员权益详情
@@ -260,7 +262,8 @@ module.exports = {
     './homePage/static/js/noticeCenter': './src/homePage/static/js/noticeCenter.js',
     // 消息中心-系统通知
     './homePage/static/js/systemInforms': './src/homePage/static/js/systemInforms.js',
-
+    // 明星理财师-列表
+    './homePage/static/js/starFinancialPlannerList': './src/homePage/static/js/starFinancialPlannerList.js',
     // 已报名活动
     './mine/static/js/memberClub/activityEnrolment': './src/mine/static/js/memberClub/activityEnrolment.js',
     // 消息中心-通知详情
@@ -271,14 +274,14 @@ module.exports = {
     './homePage/static/js/understandHT': './src/homePage/static/js/understandHT.js',
 
     //私募资产详情
-    './account/static/js/privateDetail': './src/account/static/js/privateDetail.js',
+    './account/static/js/private/privateDetail': './src/account/static/js/private/privateDetail.js',
 
     //自选公募-交易记录
-    './account/static/js/public/transactionRecord': './src/account/static/js/public/transactionRecord.js',
+    // './account/static/js/public/transactionRecord': './src/account/static/js/public/transactionRecord.js',
 
     //超宝基金产品-交易记录
     './account/static/js/super/superRecord': './src/account/static/js/super/superRecord.js',
-    
+
     //自选公募资产详情
     './account/static/js/optionalPublicDetail': './src/account/static/js/optionalPublicDetail.js',
 
@@ -291,5 +294,7 @@ module.exports = {
     './account/static/js/public/superStreasureDetail': './src/account/static/js/public/superStreasureDetail.js',
 
     // 现金宝详情页
-     './account/static/js/public/cashTreasure': './src/account/static/js/public/cashTreasure.js',
+     './account/static/js/public/cashTreasure':   './src/account/static/js/public/cashTreasure.js',
+    // 基金确认书
+     './account/static/js/private/privateFundPdf':   './src/account/static/js/private/privateFundPdf.js',
 }
