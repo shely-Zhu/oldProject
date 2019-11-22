@@ -183,7 +183,10 @@ module.exports = function() {
     this.queryInvestAssetConfigureAdvise_api = http_url.web_url + '/account/report/queryInvestAssetConfigureAdvise';
     // 报告分析（报告明细）
     this.queryInvestReportDetail_api = http_url.web_url + '/account/report/queryInvestReportDetail';
-   
+    // 公募总资产（包含资产交易明细）
+    this.totalAssets_api = http_url.web_url + '/account/pof/totalAssets';
+    // 金服WEB-详情页-基金净值走势图查询
+    this.fundNetWorthTrendChart_api = http_url.web_url + '/pof/fundDetails/frontend/fundNetWorthTrendChart';
     /*------------------- 月度报告 end ------------------------------*/
 
 
