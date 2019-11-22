@@ -45,7 +45,7 @@ $(function() {
 
 		init: function(){
 			var that = this;
-			that.data.publicFundDetail = sessionStorage.getItem("publicFundDetail");
+			that.data.publicFundDetail = JSON.parse(sessionStorage.getItem("publicFundDetail"));
 			
 			//设置数据到页面上
 			that.setDomData(that.data.publicFundDetail);
