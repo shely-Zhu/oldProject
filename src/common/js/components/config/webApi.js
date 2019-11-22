@@ -132,6 +132,10 @@ module.exports = function() {
     //文章模板接口
 //  this.getArticle_api = http_url.web_url + '/account/articleExample';
     this.getArticle_api = http_url.web_url + '/content/frontend/getArticle';	
+    //信息披露
+    this.queryReourceLabels_api = http_url.web_url + '/pef/queryReourceLabels';	
+    this.queryReourceList_api = http_url.web_url + '/pef/queryReourceList';
+
 
     //监管账户（老接口）
     this.findSuperviseBank_api = http_url.web_url + '/content/frontend/findSuperviseBank';
@@ -154,6 +158,7 @@ module.exports = function() {
     //私募历史明细
     this.curveHistoryList_api =http_url.web_url +'/account/positions/curveHistoryList' ;
     this.dealDetailList_api =http_url.web_url +'/account/positions/dealDetailList' ;
+    this.queryHistoryNetValue_api =http_url.web_url +'/account/positions/queryHistoryNetValue' ;
 
      /*------------------- 消息中心 end ------------------------------*/
 

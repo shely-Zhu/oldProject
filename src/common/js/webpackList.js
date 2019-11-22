@@ -211,6 +211,8 @@ module.exports = {
     './mine/static/js/transactionDetails': './src/mine/static/js/transactionDetails.js',
     //修改分红方式页面
     './mine/static/js/bonusMethod': './src/mine/static/js/bonusMethod.js',
+    //私募资产净值明细页面
+    './mine/static/js/priNetWorthDetails': './src/mine/static/js/priNetWorthDetails.js',
     // 会员权益成长值记录
     './mine/static/js/membershipInterestsRecord': './src/mine/static/js/membershipInterestsRecord.js',
     // 会员权益详情
