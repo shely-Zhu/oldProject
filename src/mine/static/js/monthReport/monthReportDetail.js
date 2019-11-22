@@ -84,6 +84,8 @@ var monthReportDetail = {
 			contentLength: that.setting.navList.length,  //左右滑动的区域个数，即导航数组长度
 			contentList: contentArr, //此时只有框架，实际列表内容还未请求
 			callback: function(t){  //t返回的是 id 为 scroll1 / scroll2 这样的切换后当前区域中的节点
+					var w = $('#scroll1').attr('id'),
+					s = '#'+w+' .contentWrapper';
 
 				  //data-scroll属性即当前左右切换区域的索引
 				var index = t.attr('data-scroll');
@@ -97,7 +99,7 @@ var monthReportDetail = {
 					return false;
 				}
 				//没有初始化，请求第一次数据
-				that.commonAjax(t);
+				that.commonAjax($('#scroll1'), this);
 			}
 		}
 		$.tabScroll(obj);
