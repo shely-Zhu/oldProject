@@ -194,6 +194,8 @@ module.exports = function() {
     this.fundNetWorthTrendChart_api = http_url.web_url + '/pof/fundDetails/frontend/fundNetWorthTrendChart';
     /*------------------- 月度报告 end ------------------------------*/
 
-
+    /*------------------- 基金确认书 start ------------------------------*/
+    this.downloadFile_api = http_url.web_url + '/content/file/mount/download'; //下载pdf
+    this.sendMailForConfirmBill_api = http_url.web_url + '/account/positions/sendMailForConfirmBill'; //下载pdf
 
 };
