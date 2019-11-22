@@ -90,6 +90,7 @@ module.exports = function() {
 
     /*-------------------公募相关------------------------------*/
     this.query_api = http_url.web_url + '/pof/frontend/fund/query'; //热门诊断基金列表搜索
+    this.pofTotalAssets_api = http_url.web_url + '/pof/totalAssets';// 公募总资产
 
 
     /*-------------------公募相关 end ------------------------------*/
@@ -132,6 +133,11 @@ module.exports = function() {
     //文章模板接口
 //  this.getArticle_api = http_url.web_url + '/account/articleExample';
     this.getArticle_api = http_url.web_url + '/content/frontend/getArticle';	
+    //信息披露
+    this.queryReourceLabels_api = http_url.web_url + '/pef/queryReourceLabels';	
+    this.queryReourceList_api = http_url.web_url + '/pef/queryReourceList';
+    //修改分红方式接口
+    this.updateDividend_api = http_url.web_url + '/pof/dividend/updateDividend';
 
     //监管账户（老接口）
     this.findSuperviseBank_api = http_url.web_url + '/content/frontend/findSuperviseBank';
@@ -187,9 +193,14 @@ module.exports = function() {
     this.queryInvestAssetConfigureAdvise_api = http_url.web_url + '/account/report/queryInvestAssetConfigureAdvise';
     // 报告分析（报告明细）
     this.queryInvestReportDetail_api = http_url.web_url + '/account/report/queryInvestReportDetail';
-   
+    // 公募总资产（包含资产交易明细）
+    this.totalAssets_api = http_url.web_url + '/account/pof/totalAssets';
+    // 金服WEB-详情页-基金净值走势图查询
+    this.fundNetWorthTrendChart_api = http_url.web_url + '/pof/fundDetails/frontend/fundNetWorthTrendChart';
     /*------------------- 月度报告 end ------------------------------*/
 
-
+    /*------------------- 基金确认书 start ------------------------------*/
+    this.downloadFile_api = http_url.web_url + '/content/file/mount/download'; //下载pdf
+    this.sendMailForConfirmBill_api = http_url.web_url + '/account/positions/sendMailForConfirmBill'; //下载pdf
 
 };

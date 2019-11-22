@@ -194,8 +194,12 @@ var splitUrl = require('./components/splitUrl.js')();
 
                 
                 ajax.done(function(data) {
+<<<<<<< HEAD
                     //debugger
                     
+=======
+                    // debugger;
+>>>>>>> da716830d456a97ae3c042ef50ad201f74c0cbad
                     if (obj.needLogin) { // 需要登录
                         if (obj.loginNotJump && data.status == '4007') { //如果未登录，且不需要跳转,sso接口未登录code也是cf0004,需要通过islogin判断
                             //未登录状态下，不跳转页面，执行对应函数
