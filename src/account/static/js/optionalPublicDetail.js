@@ -31,7 +31,7 @@ $(function() {
 
 		data: {
 			publicFundDetail:"",//从列表页带过来的数据
-			projectType : splitUrl['projectType'],
+			projectType : "",//基金类型。货币10300、非货币除10300其他
 			projectId: splitUrl['projectId'],
 			supportFixedFlag: splitUrl['supportFixedFlag'],//是否支持定投
 			qrnhWfsy: {
@@ -46,10 +46,10 @@ $(function() {
 		init: function(){
 			var that = this;
 			that.data.publicFundDetail = JSON.parse(sessionStorage.getItem("publicFundDetail"));
-			
+			that.data.projectType = that.data.publicFundDetail.invTypCom;
 			//设置数据到页面上
 			that.setDomData(that.data.publicFundDetail);
-			if( that.data.projectType == 0 ){ 
+			if( that.data.projectType == "10300" ){//10300货币类型
 				//货币基金
 				$('.type_0').show();
 				//折线图
@@ -57,7 +57,7 @@ $(function() {
 				//展示折线图的万份收益按钮
 				$('.lineWrap .wfsy').removeClass('hidden');
 			}
-			else if ( that.data.projectType == 1 ){
+			else{
 				//非货币基金
 				$('.type_1').show();
 				//折线图
@@ -94,7 +94,7 @@ $(function() {
 			    	//设置数据到页面上
 //			    	that.setDomData( jsonData );
 			    	//请求其他接口
-			    	if( (that.data.projectType == 0) || (that.data.projectType == 1) ){ 
+			    	if( (that.data.projectType == 10300)){ 
 			    		//稳金类项目，请求七日年化/万份收益折线图
 			    		that.getTypeOneData();
 			    		//请求快速赎回和普通赎回的文案
@@ -188,12 +188,12 @@ $(function() {
 			myChart.setOption({
 			    tooltip: {
 			    	trigger: 'axis',
-			    	formatter: '<p style="font-size:0.36rem;color: #DAB57C;">{c}%</p><p style="font-size:0.24rem;color:#4A4A4A">{b}</p>',
+			    	formatter: '<p style="font-size:0.36rem;color: #677EC4;">{c}%</p><p style="font-size:0.24rem;color:#4A4A4A">{b}</p>',
 			    	backgroundColor: 'rgba(218,181,124, 0.1)',
 			    	// renderMode : 'richText', 
 			    	extraCssText: [7, 15, 15, 15],
 			    	textStyle: {
-			    		color:  '#FADFBB'
+			    		color:  '#677EC4'
 			    	},
 			    	confine: true,
 			    	axisPointer: {
@@ -206,11 +206,11 @@ $(function() {
 		    				    x2: 0,
 		    				    y2: 1,
 		    				    colorStops: [{
-		    				        offset: 0, color: '#fff' // 0% 处的颜色
+		    				        offset: 0, color: '#677EC4' // 0% 处的颜色
 		    				    }, {
-		    				        offset: 0.5, color: '#F1CDA8' // 0% 处的颜色
+		    				        offset: 0.5, color: '#677EC4' // 0% 处的颜色
 		    				    },{
-		    				        offset: 1, color: '#D2B280' // 0% 处的颜色
+		    				        offset: 1, color: '#677EC4' // 0% 处的颜色
 		    				    }],
 		    				    global: false // 缺省为 false
 			    			}
@@ -229,7 +229,7 @@ $(function() {
 			        data: xAxisData,
 			        axisLine: {
 			        	lineStyle: {
-			        		color: '#FADFBB'
+			        		color: '#677EC4'
 			        	}
 			        },
 			        axisLabel: {
@@ -262,7 +262,7 @@ $(function() {
 			    series: [{
 			    	type: 'line',
 			    	lineStyle: {
-			    		color: '#FADFBB'
+			    		color: '#061D6A'
 			    	},
 			    	itemStyle: {
 			    		show: false
@@ -277,7 +277,7 @@ $(function() {
 			    			    x2: 0,
 			    			    y2: 1,
 			    			    colorStops: [{
-			    			        offset: 0, color: '#F2E3CA' // 0% 处的颜色
+			    			        offset: 0, color: '#677EC4' // 0% 处的颜色
 			    			    }, {
 			    			        offset: 1, color: '#fff' // 100% 处的颜色
 			    			    }],
@@ -302,7 +302,7 @@ $(function() {
 			//项目名称
     		$('#HeadBarpathName').html( jsonData.fundName );
 
-	    	if( that.data.projectType == 0 ){ //货币基金
+	    	if( that.data.projectType == "10300" ){ //货币基金
 	    		
     			//总金额
     			$('.typeWrap .totalM').html( jsonData.totalMoney );
@@ -325,7 +325,7 @@ $(function() {
 
     		   	
 	    	}
-	    	else if( that.data.projectType == 1){ //非货币基金	    		
+	    	else{ //非货币基金	    		
 	    		//当前市值
 	    		$('.typeWrap .totalM').html( jsonData.capitalisation );
 	    		//持有份额
