@@ -19,7 +19,7 @@
      @@include('@pathCommonViews/headBarConfig.html',{"bgColors":"#2C3E77,#273971","showType":"0","pathName":"收益分配明细"})
     </div>
    <div class="box">
-       <div class="list">
+       <div class="list" style="width:100%;">
         <section class="contentWrapper">
             <ul class="mui-table-view" id="activityDataList">
                 <div class="mui-table-view-cell recordList">
@@ -33,16 +33,14 @@
    </div>
    <script id="trans-template" type="text/x-handlebars-template">
     {{#each this}} 
-        {{#each list}}
             <li class="list-wrap mui-table-view recordList">
-                <h2>--</h2>
+                <h2>{{yieldDate}}</h2>
                 <div class="content">
-                    <p><span>--</span><b>--</b></p>
-                    <p><span>--</span><b>--</b></p>
-                    <p><span>--</span><b>--</b></p>
+                    <p><span>金额(元)</span><b>{{yieldSum}}</b></p>
+                    <p><span>分配类型</span><b>{{assignType}}</b></p>
+                    <p><span>公式</span><b>{{assignFormula}}</b></p>
                 </div>
             </li>
-        {{/each}}
     {{/each}}
    </script>
     <!-- 加载中loading -->
