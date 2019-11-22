@@ -18,14 +18,6 @@ var splitUrl = require('@pathCommonJs/components/splitUrl.js')();
 
 var moment = require('moment');
 
-//echarts图表
-var echarts = require('echarts/lib/echarts');
-require('echarts/lib/chart/pie');
-require('echarts/lib/component/tooltip');
-require('echarts/lib/component/title');
-require('echarts/lib/component/legend');;
-require('zrender/lib/vml/vml')
-
 
 var monthReportDetail = {
 	getElements: {
@@ -54,9 +46,6 @@ var monthReportDetail = {
 		that.getData($('#scroll1'));
 		// 资产情况分析
 		that.assetAnalysis();
-
-		// // 环形图
-		// that.bingtu();
 
 		//事件监听
 		// that.events();
@@ -117,7 +106,7 @@ var monthReportDetail = {
 
 		var that = this;
 
-		var obj = [{
+		var obj = [{    // 获取客户的姓名和编号
 			url: site_url.user_api,
 			data: {
 				hmac:"", //预留的加密信息   非必填项
@@ -138,7 +127,7 @@ var monthReportDetail = {
 				console.log(json.msg);
 			}
 		},{
-			url: site_url.queryInvestReportDetail_api,   // 报告分析（报告明细）
+			url: site_url.queryInvestReportDetail_api,   // 报告分析（报告明细）  获取报告的相关信息
 			data: {
 				reportId: that.getElements.reportId
 			},
@@ -154,8 +143,6 @@ var monthReportDetail = {
 				that.getElements.monthReportTime = json.month;
 				$('.reportMonth').html(json.month);
 				
-				// 客户内容的富文本
-				// $('.textBox').html(json.content);
 				// 生命周期
 				$('.lifeTerm').html(json.lifeTerm);
 				// 风险等级
@@ -186,7 +173,7 @@ var monthReportDetail = {
 			
 
 		},{
-			url: site_url.queryInvestProdHoldShareList_api,   // 持仓总览
+			url: site_url.queryInvestProdHoldShareList_api,   // 持仓总览  报告的月末持仓总览
 			data: {
 				reportId: that.getElements.reportId
 			},
@@ -274,8 +261,8 @@ var monthReportDetail = {
 
 				if( !$.util.objIsEmpty(comRradeRecordList) ){
 					
-					jsonData.isIn = that.setting.current_index == 0 ? 1 : 0;
-					jsonData.isOut = that.setting.current_index == 1 ? 1 : 0;
+					jsonData.holdPosition = that.setting.current_index == 0 ? 1 : 0;
+					jsonData.tradeDtail = that.setting.current_index == 1 ? 1 : 0;
 					
 					var list_html = that.setting.list_template(jsonData);
 
@@ -330,6 +317,7 @@ var monthReportDetail = {
 		//建议资产配置比数组
 		that.recommendList = [];
 		that.pieChartData = [];
+		that.pieChartDataDetail = [];
 		
 		//当前资产配置比列表
 		var obj = [{
@@ -353,12 +341,45 @@ var monthReportDetail = {
 
 					$.each(data.monthHoldShareList,function(i,el){
 						that.pieChartData[i] = el.assetTypeDesc;
+
+						if(el.assetType == '203'){
+							el.colorStart = '#182F7A';
+							el.colorStop = '#7286C1';
+						}
+						else if(el.assetType == '205'){
+							el.colorStart = '#FBE2BD';
+							el.colorStop = '#D69549';
+						}
+						else if(el.assetType == '204'){
+							el.colorStart = '#AA6545';
+							el.colorStop = '#EDA377';
+						}
+						else if(el.assetType == '200'){
+							el.colorStart = '#AA6545';
+							el.colorStop = '#EDA377';
+						}
+
+
+						var dataDetail = {value:el.confirmValuePercent, name:el.assetTypeDesc,itemStyle: {
+							normal: {
+								color: new echarts.graphic.LinearGradient(
+									0, 0, 1, 1,
+									[
+										{offset: 0, color: el.colorStart},
+										{offset: 1, color: el.colorStop}
+									]
+								)
+							}
+						}}
+
+						that.pieChartDataDetail.push(dataDetail) ;
+
+
 					})
 
 					//调用画图方法
-					that.bingtu();
+					that.bingtu(0);
 
-					// that.typeCompare();
 				}
 
 				if(!$.util.objIsEmpty(data)){
@@ -389,11 +410,9 @@ var monthReportDetail = {
 						if(Number(data.currentMonthTotalValue) < Number(data.lastMonthTotalHoldValue)){
 							diff = $.util.numberSub( Number(data.lastMonthTotalHoldValue), Number(data.currentMonthTotalValue));
 							diffHtml = '减少' + diff;
-							// $('.lastTotal').html(diffHtml)
 						}else{
 							diff = $.util.numberSub( Number(data.currentMonthTotalValue), Number(data.lastMonthTotalHoldValue));
 							diffHtml = '增加' + diff;
-							// $('.lastTotal').html(diffHtml)
 						}
 
 						var noPosition = '<p class="tipPosition">您在<span class="monthReportTime">'+ that.getElements.monthReportTime +'</span>，投资的 <span class="property">'+ that.getElements.assetPerHtml +'</span>。</p>'+
@@ -408,7 +427,6 @@ var monthReportDetail = {
 				if(data.currentMonthTotalValue == '' && data.lastMonthTotalHoldValue != ''){
 					var noPosition = '<p class="tipPosition">您在<span class="monthReportTime">'+ that.getElements.monthReportTime +'</span>，您暂无持仓。</p>'+
 									'<p>同比'+ lastMonth +'月份减少'+ data.lastMonthTotalHoldValue +'。</p>';
-									// '<p class="tipCompare">截止'+ that.getElements.reportTime +'，您的总持仓金额为<span class="monthTotal">'+ data.currentMonthTotalValue +'</span>元。</p>'
 					$('.monthReportTipContent').html(noPosition);
 				}
 				if(data.lastMonthTotalHoldValue == '' && data.currentMonthTotalValue != ''){
@@ -439,10 +457,46 @@ var monthReportDetail = {
 					//有数据
 					that.recommendList = data;
 
-					//调用画图方法
-					// that.drawImage();
+					$.each(that.recommendList,function(i,el){
+						that.pieChartData[i] = el.assetTypeDesc;
 
-					// that.typeCompare();
+						if(el.assetType == '203'){
+							el.colorStart = '#182F7A';
+							el.colorStop = '#7286C1';
+						}
+						else if(el.assetType == '205'){
+							el.colorStart = '#FBE2BD';
+							el.colorStop = '#D69549';
+						}
+						else if(el.assetType == '204'){
+							el.colorStart = '#AA6545';
+							el.colorStop = '#EDA377';
+						}
+						else if(el.assetType == '200'){
+							el.colorStart = '#AA6545';
+							el.colorStop = '#EDA377';
+						}
+
+
+						var dataDetail = {value:el.confirmValuePercent, name:el.assetTypeDesc,itemStyle: {
+							normal: {
+								color: new echarts.graphic.LinearGradient(
+									0, 0, 1, 1,
+									[
+										{offset: 0, color: el.colorStart},
+										{offset: 1, color: el.colorStop}
+									]
+								)
+							}
+						}}
+
+						that.pieChartDataDetail.push(dataDetail) ;
+
+
+					})
+
+					//调用画图方法
+					that.bingtu(1);
 				}
 				// 循环遍历数据
 				for(var index in data){
@@ -471,13 +525,13 @@ var monthReportDetail = {
 					})
 					
 				}
-				// if(!$.util.objIsEmpty(data)){
-				// 	var template = Handlebars.compile($("#optimizationList").html());
-				// 	//匹配json内容
-				// 	var html = template(data);
-				// 	//输入模板
-				// 	$('.optimizationList').append(html);
-				// }
+				if(!$.util.objIsEmpty(data)){
+					var template = Handlebars.compile($("#optimizationList").html());
+					//匹配json内容
+					var html = template(data);
+					//输入模板
+					$('.optimizationList').append(html);
+				}
 				
 				
 			}
@@ -508,16 +562,17 @@ var monthReportDetail = {
 
 	},
 
-	bingtu:function(){
-		// vatr tha
+	bingtu:function(i){
+		var that = this;
 		// app.title = '环形图';
-		var pieChart = echarts.init($('.circle')[0]);
+		var pieChart = echarts.init($('.circle')[i]);
 		
 		// 指定图表的配置项和数据
 		option = {
 			legend: {
 				orient: 'vertical',
 				x: 'left',
+				// data:['联盟广告','视频广告','搜索引擎'],
 				data:that.pieChartData,
 				icon: "roundRect",   //  这个字段控制形状  类型包括 circle，rect ，roundRect，triangle，diamond，pin，arrow，none
 
@@ -531,7 +586,7 @@ var monthReportDetail = {
 			},
 			series: [
 				{
-					name:'访问来源',
+					name:'您当前的资产配比',
 					type:'pie',
 					radius: ['49%', '70%'],
 					center: ['35%', '47%'],
@@ -576,47 +631,7 @@ var monthReportDetail = {
 							show: false
 						}
 					},
-					data:[
-						{value:335, name:'直接访问',
-						itemStyle: {
-							normal: {
-								color: new echarts.graphic.LinearGradient(
-									0, 0, 1, 1,
-									[
-										{offset: 0, color: '#182F7A'},
-										// {offset: 0.5, color: '#0CB9FF'},
-										{offset: 1, color: '#7286C1'}
-									]
-								)
-							}
-						}},
-						{value:310, name:'邮件营销',
-						itemStyle: {
-							normal: {
-								color: new echarts.graphic.LinearGradient(
-									0, 0, 1, 1,
-									[
-										{offset: 0, color: '#FBE2BD'},
-										// {offset: 0.5, color: '#0CB9FF'},
-										{offset: 1, color: '#D69549'}
-									]
-								),
-							}
-						}},
-						{value:234, name:'联盟广告',itemStyle: {
-							normal: {
-								color: new echarts.graphic.LinearGradient(
-									0, 0, 1, 1,
-									[
-										{offset: 0, color: '#AA6545'},
-										// {offset: 0.5, color: '#0CB9FF'},
-										{offset: 1, color: '#EDA377'}
-									]
-								),
-							}
-						}},
-
-					]
+					data: that.pieChartDataDetail,
 				},
 				{
 					name:'访问来源',
@@ -638,48 +653,7 @@ var monthReportDetail = {
 							show: false
 						}
 					},
-					data:[
-						{value:335, name:'直接访问',
-						itemStyle: {
-							normal: {
-								color: new echarts.graphic.LinearGradient(
-									0, 0, 1, 1,
-									[
-										{offset: 0, color: '#172c6f'},
-										// {offset: 0.5, color: '#0CB9FF'},
-										{offset: 1, color: '#4a5d96'}
-									]
-								)
-							}
-						}},
-						{value:310, name:'邮件营销',
-						itemStyle: {
-							normal: {
-								color: new echarts.graphic.LinearGradient(
-									0, 0, 1, 1,
-									[
-										{offset: 0, color: '#dcc19b'},
-										// {offset: 0.5, color: '#0CB9FF'},
-										{offset: 1, color: '#c69152'},
-									]
-								),
-							}
-						}},
-						{value:234, name:'联盟广告',itemStyle: {
-							normal: {
-								color: new echarts.graphic.LinearGradient(
-									0, 0, 1, 1,
-									[
-										
-										{offset: 0, color: '#a56747'},
-										// {offset: 0.5, color: '#0CB9FF'},
-										{offset: 1, color: '#cb8a64'}
-									]
-								),
-							}
-						}},
-
-					]
+					data: that.pieChartDataDetail,
 				}
 			]
 		};
