@@ -26,7 +26,7 @@ $(function() {
 			that.event();	
         },
         event:function(){
-            //折线图点击七日年化/万份收益切换区域
+            //选项卡切换
             $(document).on('click', '.lineDraw .time', function(e) {
                 $('.lineDraw .time').removeClass('active');
                 $(this).addClass('active');
