@@ -250,7 +250,7 @@ module.exports = {
     //已确认交易 公共js
     './account/static/js/common/transcationTem': './src/account/static/js/common/transcationTem.js',
     //待确认交易
-    // './account/static/js/private/tobeConfirmTransaction': './src/account/static/js/private/tobeConfirmTransaction.js',
+    './account/static/js/private/tobeConfirmTransaction': './src/account/static/js/private/tobeConfirmTransaction.js',
     //收益分配明细
     './account/static/js/private/incomeDistribution': './src/account/static/js/private/incomeDistribution.js',
     //公募资产
@@ -279,7 +279,7 @@ module.exports = {
 
     //超宝基金产品-交易记录
     './account/static/js/super/superRecord': './src/account/static/js/super/superRecord.js',
-    
+
     //自选公募资产详情
     './account/static/js/optionalPublicDetail': './src/account/static/js/optionalPublicDetail.js',
 
@@ -292,7 +292,7 @@ module.exports = {
     './account/static/js/public/superStreasureDetail': './src/account/static/js/public/superStreasureDetail.js',
 
     // 现金宝详情页
-     './account/static/js/public/cashTreasure': './src/account/static/js/public/cashTreasure.js',
+     './account/static/js/public/cashTreasure':   './src/account/static/js/public/cashTreasure.js',
     // 基金确认书
-     './account/static/js/private/privateFundPdf': './src/account/static/js/private/privateFundPdf.js',
+     './account/static/js/private/privateFundPdf':   './src/account/static/js/private/privateFundPdf.js',
 }
