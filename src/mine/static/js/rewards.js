@@ -105,11 +105,12 @@ $(function() {
                     "pageSize": that.gV.pageSize
                 },
                 //async: false,
-                //needDataEmpty: false,
+                contentTypeSearch: true, //
+                needDataEmpty: true,
                 callbackDone: function(json) {
                     var data;
 
-                    console.log(JSON.stringify(json.data.list.length));
+                    //console.log(JSON.stringify(json.data.list.length));
 
                     if (json.data.list.length == 0) { // 没有记录不展示
                         that.$e.noData.show();
@@ -187,6 +188,11 @@ $(function() {
 
                     tipAction(json.message);
 
+                },
+                callbackNoData:function(json){
+                    var that = this;
+                        that.$e.noData.show();
+                        $('.reward').hide();
                 }
 
             }];
