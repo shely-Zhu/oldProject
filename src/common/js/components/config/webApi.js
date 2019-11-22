@@ -90,6 +90,7 @@ module.exports = function() {
 
     /*-------------------公募相关------------------------------*/
     this.query_api = http_url.web_url + '/pof/frontend/fund/query'; //热门诊断基金列表搜索
+    this.pofTotalAssets_api = http_url.web_url + '/pof/totalAssets';// 公募总资产
 
 
     /*-------------------公募相关 end ------------------------------*/

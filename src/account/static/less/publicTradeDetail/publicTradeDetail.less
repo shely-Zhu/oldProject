@@ -1,0 +1,109 @@
+/*
+* @page: 公募交易记录详情
+* @Author: shiyunrui
+* @Date:   2019-11-22
+* @description:
+*/
+
+@import url("@pathInclude/css/mui.min.css");
+@import url("@pathCommonLess/mui/resetMUI.less");
+@import url("@pathCommonLess/color.less");
+@import url("@pathCommonLess/reset.less");
+
+@import url("@pathCommonLess/chtwm.less");
+@import url("@pathCommonLess/app.less");
+@import url("@pathCommonLessCom/againEnter.less");
+@import url("@pathCommonLessCom/alertBox.less");
+@import url("@pathCommonLessCom/tabScroll.less");
+
+//回到顶部的样式
+@import url("@pathCommonLessCom/goTopMui.less");
+@import url("@pathCommonLess/components/elasticLayerTypeFive.less");
+@import url("@pathCommonLessCom/headBarConfig.less");
+@import url("@pathCommonLessCom/noDataImg.less");
+html {
+    height: 100%;
+}
+.fl{
+    float: left;
+}
+.fr{
+    float: right;
+}
+.hide{
+    display: none;
+}
+.container {
+    background-color: @FFFFFF;
+    .header {
+        width: 100%;
+        height: 3.1rem;
+        border-top: 0.01rem solid @F7FAFD;
+        border-bottom: 0.01rem solid @F7FAFD;
+        text-align: center;
+        .amount_area {
+            margin: 0.9rem auto 0;
+            color: #0E246C;
+            .amount {
+                font-size: 0.68rem;
+                font-weight: bold;
+            }
+            .yuan {
+                font-size: 0.32rem;
+            }
+        }
+        .trade_status {
+            margin-top: 0.1rem;
+            font-size: 0.32rem;
+            color: #272727;
+        }
+        .trade_status_des {
+            margin-top: 0.08rem;
+            font-size: 0.28rem;
+            color: #4A4A4A;
+        }
+    }
+    .trade_status_area{
+        width: 100%;
+        height: 2.4rem;
+        .trade_status_item {
+            width: 100%;
+            height: 0.8rem;
+            padding: 0.2rem 0.3rem 0 0.3rem;
+            .trade_status_icon {
+                width: 0.38rem;
+                height: 0.38rem;
+                background: url('/account/static/img/publicTradeDetail/public_trade_detail_check.png');
+                background-size: 100%;
+            }
+            .trade_status_desc {
+                margin-left: 0.1rem;
+                font-size: 0.28rem;
+                color: @272727;
+            }
+            .trade_status_date {
+                font-size: 0.28rem;
+                color: @9B9B9B;
+            }
+        }
+    }
+    .item_header {
+        height: 0.88rem;
+        background-color: @F7FAFD;
+        padding: 0 0.3rem;
+        line-height: 0.88rem;
+        color: @272727;
+        font-size: 0.28rem;
+    }
+    .item {
+        height: 1rem;
+        width: 100%;
+        font-size: 0.32rem;
+        color: @272727;
+        line-height: 1rem;
+        padding: 0 0.3rem;
+    }
+    .font_size_28 {
+        font-size: 0.28rem;
+    }
+}

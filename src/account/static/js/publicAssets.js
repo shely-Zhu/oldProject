@@ -27,20 +27,20 @@ $(function () {
         getData: function (t) {
             var that = this;
             var obj = [{ // 公募总资产
-                url: site_url.totalAssets_api,
+                url: site_url.pofTotalAssets_api,
                 data: {},
                 //async: false,
                 needDataEmpty: true,
                 callbackDone: function (json) {
-                    that.data = json.data;
+                    that.gV.data = json.data;
                     //总资产
-                    $('.totalM').html(that.data.myAssetTotalMask);
+                    $('.totalM').html(that.gV.data.myAssetTotalMask);
                     //待确认金额
-                    $('.be_confirmed_amount .value').html(that.data.inTransitTotal);
+                    $('.be_confirmed_amount .value').html(that.gV.data.inTransitTotal);
                     //昨日总收益
-                    $('.first_h_profit_box .h_profit_value').html(that.data.inTransitTotal);
+                    $('.first_h_profit_box .h_profit_value').html(that.gV.data.inTransitTotal);
                     //持仓总收益
-                    $('.second_h_profit_box .h_profit_value').html(that.data.inTransitTotal);
+                    $('.second_h_profit_box .h_profit_value').html(that.gV.data.inTransitTotal);
                     //设置比较器
                     Handlebars.registerHelper("if_than_0", function (value, options) {
                         if (value > 0) {
@@ -56,7 +56,7 @@ $(function () {
                     //列表渲染
                     var tplm = $("#dataLists").html();
                     var template = Handlebars.compile(tplm);
-                    var html = template(that.data.fundDetailList);
+                    var html = template(that.gV.data.fundDetailList);
                     $("#pageLists").html(html);
                     //模板渲染完毕后展示没有更多数据的样式
                     $('footer').removeClass('hide');
@@ -95,6 +95,8 @@ $(function () {
             //item的点击 进入持仓详情
             $('.hold_item').on('click', function(){
                 //todo 跳转
+                var index = $(this).index();
+                localStorage.publicFundDetail = that.gV.data.fundDetailList[index];
             })
             //点击持仓列表的感叹号 进入持仓明细
             $('.position_tip').on('click', function(){
@@ -122,13 +124,13 @@ $(function () {
             })
             mui("body").on('tap', '.eyecose', function (e) {
                 //总资产
-                $('.totalM').html(that.data.myAssetTotalMask);
+                $('.totalM').html(that.gV.data.myAssetTotalMask);
                 //待确认金额
-                $('.be_confirmed_amount .value').html(that.data.inTransitTotal);
+                $('.be_confirmed_amount .value').html(that.gV.data.inTransitTotal);
                 //昨日总收益
-                $('.first_h_profit_box .h_profit_value').html(that.data.inTransitTotal);
+                $('.first_h_profit_box .h_profit_value').html(that.gV.data.inTransitTotal);
                 //持仓总收益
-                $('.second_h_profit_box .h_profit_value').html(that.data.inTransitTotal);
+                $('.second_h_profit_box .h_profit_value').html(that.gV.data.inTransitTotal);
                 $(this).removeClass('eyecose');
             })
             //打开资产组成说明
