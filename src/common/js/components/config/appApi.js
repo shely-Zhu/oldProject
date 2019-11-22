@@ -11,10 +11,9 @@ module.exports = function() {
     /*-------------------账户相关------------------------------*/
     //jjs持仓明细查询
     this.jjsAssetsDetail_api = http_url.app_url + '/account/jjs/queryAssetsDetailByPages',
+
         //总资产查询 （公募+私募+金交所+组合+恒小智）
         this.getTotalAssets_api = http_url.app_url + '/account/jjs/getTotalAssets'
-        //公募总资产及明细查询
-    this.totalAssets_api = http_url.app_url + '/account/pof/totalAssets'
         //待确认，已确认列表
     this.getConfirmTrade_api = http_url.app_url + '/pef/getConfirmTrade '
 
