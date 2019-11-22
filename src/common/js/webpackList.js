@@ -271,7 +271,7 @@ module.exports = {
     './homePage/static/js/understandHT': './src/homePage/static/js/understandHT.js',
 
     //私募资产详情
-    './account/static/js/privateDetail': './src/account/static/js/privateDetail.js',
+    './account/static/js/private/privateDetail': './src/account/static/js/private/privateDetail.js',
 
     //自选公募-交易记录
     './account/static/js/public/transactionRecord': './src/account/static/js/public/transactionRecord.js',
