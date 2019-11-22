@@ -113,6 +113,10 @@ body{
 				        	span:last-child {
 				        		font-size: .26rem;
 				        	}
+				        	.smallDate {
+				        		color: @c005;
+				            	opacity: 0.7;
+				        	}
 				        }
 				    }
 				    .num{
@@ -194,6 +198,7 @@ body{
 			.single {
 				text-align: left;
 				padding-left: .3rem;
+				display: none;
 				.arrow {
 					.img {
 						background: url(/account/static/img/productDetail/arrow.png);
@@ -207,11 +212,14 @@ body{
 					}
 				}
 			}
+			.double {
+				display: none;
+			}
 			.double>div:first-child {
 				border-right: 1px solid #A9A9A9;
 			}
 			.treble {
-				display: flex;
+				display: none;
 				justify-content: center;
 				align-items: center;
 				.lineVertical {
@@ -268,6 +276,9 @@ body{
 					transform: translateY(-50%);
 				}
 			}
+			&.type5Wrap {
+				display: none;
+			}
 		}
 		.lineWrap{
 			background: @c005;
@@ -288,6 +299,9 @@ body{
 					&.active{
 						color: @272727;
 						border-bottom: 0.06rem solid @C8AB7D;
+					}
+					&.noBorderBottm {
+						border-bottom: none!important;
 					}
 				}
 				.rightTitle{ 
@@ -389,11 +403,13 @@ body{
 				background: @FFFFFF;
 				color: #D2B381;
 				flex: 1;
+				display: none;
 			}
 			.subscribeBtn {
 				background:linear-gradient(90deg,rgba(212,183,136,1) 0%,rgba(188,150,90,1) 100%);
 				color: @FFFFFF;
 				flex: 1;
+				display: none;
 			}
 		}
 	}

@@ -1,10 +1,7 @@
 <!-- 
 	私募产品详情页
-
 	@author yangjinlai 20191119
-
 -->
-
 <!doctype html>
 <html lang="en">
 
@@ -173,8 +170,8 @@
 		 			<div class="totalM">--</div>
 		 			<ul class="mui-row type">
 		 			    <li class="mui-col-sm-6 mui-col-xs-6">
-		 			        <span>持有盈亏(元)</span>
-		 			        <span class="num cyyk">--</span>
+		 			        <span>单位净值</span>
+		 			        <span class="num dwjz">--</span>
 		 			    </li>
 		 			    <li class="mui-col-sm-6 mui-col-xs-6">
 		 			        <span>持有份额</span>
@@ -221,27 +218,27 @@
 
 	 	<div class="midContent">	
 	 		<div class="actionWrap">
-	 			<!-- <div class="mui-row single">
+	 			<div class="mui-row single">
 	 				<div class="mui-col-sm-11 mui-col-xs-11">
-	 					 		    	<img class="img" src="/account/static/img/productDetail/type_1_left.png">
-	 					 		        <span class="txt">交易明细</span>
-	 					 		    </div>
-	 					 		    <div class="mui-col-sm-1 mui-col-xs-1">
-	 					 		    	<div class="arrow">
-	 					 					<span class="img"></span>
-	 					 				</div>
-	 					 		    </div>
-	 			</div> -->
-	 			<!-- <div class="mui-row double">
-	 				<div class="mui-col-sm-6 mui-col-xs-6 jymx">
-	 					 		    	<img class="img" src="/account/static/img/productDetail/type_1_left.png">
-	 					 		        <span class="txt">交易明细</span>
-	 					 		    </div>
-	 					 		    <div class="mui-col-sm-6 mui-col-xs-6 jjqrs">
-	 					 		       	<img class="img" src="/account/static/img/productDetail/type_1_right.png">
-	 					 		        <span class="txt">基金确认书</span>
-	 					 		    </div>
-	 			</div> -->
+		 		    	<img class="img" src="">
+		 		        <span class="txt"></span>
+		 		    </div>
+		 		    <div class="mui-col-sm-1 mui-col-xs-1">
+		 		    	<div class="arrow">
+		 					<span class="img"></span>
+		 				</div>
+		 		    </div>
+	 			</div>
+	 			<div class="mui-row double">
+	 				<div class="mui-col-sm-6 mui-col-xs-6">
+		 		    	<img class="img" src="">
+		 		        <span class="txt"></span>
+		 		    </div>
+		 		    <div class="mui-col-sm-6 mui-col-xs-6">
+		 		       	<img class="img" src="">
+		 		        <span class="txt"></span>
+		 		    </div>
+	 			</div>
 	 			<div class="treble mui-row">
 	 				<div class="actionCon">
 		 		    	<img class="img" src="/account/static/img/productDetail/type_1_left.png">
@@ -254,13 +251,13 @@
 		 		    </div>
 		 		    <div class="lineVertical"></div>
 		 		    <div class="actionCon">
-		 		    	<img class="img" src="/account/static/img/productDetail/type_1_left.png">
+		 		    	<img class="img" src="/account/static/img/productDetail/type_1_right.png">
 	 					<div class="txt">基金确认书</div>
 		 		    </div>
 	 			</div>
 	 		</div>
 	 		<div class="hide lineWrap">
-	 			<div class="clearfix titleWrap">
+	 			<div class="clearfix titleWrap typeNo5Wrap">
 	 				<span class="title qrnh active">七日年化</span>
 	 				<span class="title wfsy hidden">万份收益</span>
 	 				<div class="arrow">
@@ -268,11 +265,23 @@
 	 				</div>
 	 				<span class="rightTitle">历史明细</span>
 	 			</div>
+	 			<div class="clearfix titleWrap type5Wrap">
+	 				<span class="title dwjz active">单位净值</span>
+	 				<span class="title ljjz">累计净值</span>
+	 				<div class="arrow">
+	 					<span class="img"></span>
+	 				</div>
+	 				<span class="rightTitle">净值明细</span>
+	 			</div>
 	 			<div class="lineDraw">
 	 				<!-- 七日年化折线图 -->
 	 				<div id="qrnhLine" class="line"></div>
 	 				<!-- 万份收益折线图 -->
 	 				<div id="wfsyLine" class="hide line"></div>
+	 				<!-- 单位净值折线图 -->
+	 				<div id="dwjzLine" class="hide line"></div>
+	 				<!-- 累计净值折线图 -->
+	 				<div id="ljjzLine" class="hide line"></div>
 	 				<div class='mui-row tab'>
 	 					<span class="mui-col-sm-3 mui-col-xs-3 time oneMonth active" num="0">近一个月</span>
 	 					<span class="mui-col-sm-3 mui-col-xs-3 time threeMonth" num="1">近三个月</span>
