@@ -133,6 +133,11 @@ module.exports = function() {
     //文章模板接口
 //  this.getArticle_api = http_url.web_url + '/account/articleExample';
     this.getArticle_api = http_url.web_url + '/content/frontend/getArticle';	
+    //信息披露
+    this.queryReourceLabels_api = http_url.web_url + '/pef/queryReourceLabels';	
+    this.queryReourceList_api = http_url.web_url + '/pef/queryReourceList';
+    //修改分红方式接口
+    this.updateDividend_api = http_url.web_url + '/pof/dividend/updateDividend';
 
     //监管账户（老接口）
     this.findSuperviseBank_api = http_url.web_url + '/content/frontend/findSuperviseBank';
@@ -194,6 +199,8 @@ module.exports = function() {
     this.fundNetWorthTrendChart_api = http_url.web_url + '/pof/fundDetails/frontend/fundNetWorthTrendChart';
     /*------------------- 月度报告 end ------------------------------*/
 
-
+    /*------------------- 基金确认书 start ------------------------------*/
+    this.downloadFile_api = http_url.web_url + '/content/file/mount/download'; //下载pdf
+    this.sendMailForConfirmBill_api = http_url.web_url + '/account/positions/sendMailForConfirmBill'; //下载pdf
 
 };
