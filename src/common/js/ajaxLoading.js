@@ -1,7 +1,7 @@
 /**
  * ajax请求的封装
- * @author  yangjinlai  
- * 
+ * @author  yangjinlai
+ *
  * 参数说明：
  * 1. obj是传进来的ajax发送请求的配置，是一个数组，里面每一条数据都是一个对象，对应一个ajax请求，
  *      数组里有几个对象，就会发几个请求
@@ -13,7 +13,7 @@
                 ……
             },
             callbackDone: function(){},
-            callbackFail: function(){},  
+            callbackFail: function(){},
             ……
      *    },
      *    {
@@ -30,39 +30,39 @@
  *    accountLeft标识是否是我的资产-左树的接口，true-是，false或不传-不是
  *    在判断整个页面的ajax初始化请求是否完成时，会根据headAjax和accountLeft判断是否有头部/左树接口
  *
- * 
+ *
  * obj中，每一条数据(ajax请求)的默认参数说明：
  *  url: '', //接口地址
     data: {}, //需要传给接口的数据
     type: 'POST', //post/get
-    dataType: 'JSON', 
+    dataType: 'JSON',
     async: true, //true-异步  false-同步
     needLogin: false, //发送请求时，需要判断登录是否过期  true-需要，false-不需要，默认false
     needCrossDomain: false,  //true-跨域, false-不跨域，默认false
     needDataEmpty: true, //需要判断data是否为空  true-需要  false-不需要，默认true
     needLoading: false, //不需要显示loading遮罩  true-需要，false-不需要，默认false
-    
-    callbackDone: function(){},  
+
+    callbackDone: function(){},
     //接口成功的回调函数（如果needDataEmpty=true，则需要判断data.data是否为空，如果为空，不调用
-    callbackDone，而调用callbackNoData） 
-    
-    callbackFail: function(){},  
+    callbackDone，而调用callbackNoData）
+
+    callbackFail: function(){},
     //请求失败，或接口成功但data.status=1时的回调函数
-    
-    callbackNoData: function(){}   
+
+    callbackNoData: function(){}
     //接口成功，但data.data没有数据时的回调函数（此时needDataEmpty=true）
 
 
- *                                   
+ *
  * 3个函数：
  * 1. ajaxFunc  发送请求
  * 2. sendAjax  循环obj 调用ajaxFunc，发送每一次的请求
  * 3. isEmpty 判断data.data是否为空
  *
- * 
+ *
  * 本插件使用方式：
- * $.ajaxLoading(obj);  
- * 
+ * $.ajaxLoading(obj);
+ *
  * 修改：7/18，添加app交互判断登录状态的处理
  *
  * 2018-09-25 私募首页登录状态判断的接口等，因wap做单点登录，需改成sso的checkuserinfo;
@@ -114,10 +114,10 @@ var splitUrl = require('./components/splitUrl.js')();
                 callbackNoData: function() {},
                 //formData
                 formData: false, //判断是否需要使用formData上传
-                loginNotJump: false, //判断40007后是否需要跳转到登录页面，true--不跳转, false---跳转 
-                callbackLoginFunc: function() {}, //如果未登录不需要跳转，执行此函数 
+                loginNotJump: false, //判断40007后是否需要跳转到登录页面，true--不跳转, false---跳转
+                callbackLoginFunc: function() {}, //如果未登录不需要跳转，执行此函数
                 appRisk: false, //当需要与app交互时
-            };                     
+            };
 
             //合并配置
             var obj = [];
@@ -126,7 +126,7 @@ var splitUrl = require('./components/splitUrl.js')();
             })
             //发送ajax请求
             var ajaxFunc = function(obj) {
-            
+
                 var ajax = $.Deferred(); //声明一个deferred对象
                 // debugger
                 //设置ajax请求的contentType  data数据添加JSON.stringify
@@ -192,7 +192,7 @@ var splitUrl = require('./components/splitUrl.js')();
                     ajax = $.ajax(ajaxJson);
                 }
 
-                
+
                 ajax.done(function(data) {
                     // debugger
                     if (obj.needLogin) { // 需要登录
@@ -231,9 +231,9 @@ var splitUrl = require('./components/splitUrl.js')();
                     if (data.status != '0000' && data.status != '4007' && data.status != '1000') {
                         //数据请求失败的情况
                         if (!data.message) {
-                            data.message = '系统异常';
+                            data.message = '处理异常，请联系客服 400-8980-618';
                         }
-                        
+
 
                         obj.callbackFail ? obj.callbackFail(data) : tipAction(data.message);
 
@@ -251,7 +251,7 @@ var splitUrl = require('./components/splitUrl.js')();
                             return false;
                         // }
                     }
-                    
+
                     //数据请求成功且不为空，执行成功的回调函数
                     if (window.currentIsApp && obj.appRisk) {
                         obj.callbackDone(data, function() {
@@ -260,14 +260,14 @@ var splitUrl = require('./components/splitUrl.js')();
                         });
                     } else {
                         obj.callbackDone(data);
-                      
+
                     }
                 })
-                
+
 
                 //ajax错误的情况
                 ajax.fail(function(data, result, message) {
-               
+
                     obj.callbackFail ? obj.callbackFail(data) : tipAction("接口请求失败");
                 })
 

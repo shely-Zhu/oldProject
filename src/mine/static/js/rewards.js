@@ -105,7 +105,7 @@ $(function() {
                     "pageSize": that.gV.pageSize
                 },
                 //async: false,
-                needDataEmpty: true,
+                //needDataEmpty: false,
                 callbackDone: function(json) {
                     var data;
 
@@ -113,7 +113,7 @@ $(function() {
 
                     if (json.data.list.length == 0) { // 没有记录不展示
                         that.$e.noData.show();
-                        //$('.reward').hide();
+                        $('.reward').hide();
                         return false;
                     } else {
                         data = json.data.list;
@@ -127,7 +127,9 @@ $(function() {
 
                                 if (data.length == 0) {
                                     // 暂无数据显示
+                                    $('.reward').hide();
                                     that.$e.noData.show();
+
                                     return false;
 
                                 } else { // 没有更多数据了
@@ -181,6 +183,11 @@ $(function() {
                     }, 200)
 
                 },
+                callbackFail: function(json){  //失败后执行的函数
+
+                    tipAction(json.message);
+
+                }
 
             }];
             $.ajaxLoading(obj);
