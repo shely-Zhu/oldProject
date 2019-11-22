@@ -22,13 +22,6 @@ require('@pathIncludJs/vendor/config.js');
 
 require('@pathCommonJs/components/headBarConfig.js');
 
-// 引入 ECharts 主模块
-var echarts = require('echarts/lib/echarts');
-// 引入柱状图
-require('echarts/lib/chart/line');
-// 引入提示框和标题组件
-require('echarts/lib/component/tooltip');
-require('echarts/lib/component/title');
 
 var splitUrl = require('@pathCommonJs/components/splitUrl.js')();
 
@@ -40,9 +33,12 @@ $(function() {
 			projectType : splitUrl['projectType'],
 			projectId: splitUrl['projectId'],
 			supportFixedFlag: splitUrl['supportFixedFlag'],//是否支持定投
-			sevenIncomeRate: [], //存放折线图七日年化
-			profitThoudDate: [], //存放折线图收益日期
-			profitThoudValue: [], //存放折线图万份收益
+			qrnhWfsy: {
+				oneMonth : {},
+				threeMonth: {},
+				oneYear: {},
+				sinceNow: {}
+			}	
 		},
 
 		init: function(){
