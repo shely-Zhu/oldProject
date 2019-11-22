@@ -153,6 +153,7 @@ module.exports = function() {
    /*------------------- 私募 start ------------------------------*/
     //私募历史明细
     this.curveHistoryList_api =http_url.web_url +'/account/positions/curveHistoryList' ;
+    this.yieldAssignList_api =http_url.web_url +'/account/positions/yieldAssignList' ;
     this.dealDetailList_api =http_url.web_url +'/account/positions/dealDetailList' ;
     this.assetsDetail_api =http_url.web_url +'/account/positions/assetsDetail' ; // 资产详情
     this.earningCurve_api =http_url.web_url +'/account/positions/earningCurve' ; // 收益走势

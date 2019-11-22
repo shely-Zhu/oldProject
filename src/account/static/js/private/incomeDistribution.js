@@ -112,7 +112,7 @@ $(function() {
         getData: function(t) {
             var that = this;
             var obj = [{ // 系统调仓记录列表
-                url: site_url.getUserTrackRecord_api,
+                url: site_url.yieldAssignList_api,
                 data: {
                     "pageNo": that.gV.aP.pageNo, //非必须，默认为1
                     "pageSize": that.gV.aP.pageSize//非必须，默认为10
@@ -127,7 +127,7 @@ $(function() {
                         that.getElements.noData.show();
                         return false;
                     } else {
-                        data = json.data.dataList;
+                        data = json.data
                     }
                     setTimeout(function() {
                         if (data.length < that.gV.aP.pageSize) {
