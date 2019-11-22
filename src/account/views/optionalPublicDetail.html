@@ -19,6 +19,7 @@
 	<div class="privateDetail">
 
 		<div class="topContent">
+			
 	 		@@include('@pathInclude/views/header.html') 
 
 	 		@@include('@pathCommonViews/headBarConfig.html',{"bgColors":"#595E6F, #1C2135","showType":"1"})
@@ -34,23 +35,23 @@
 		 			<ul class="mui-row type">
 		 			    <li class="mui-col-sm-4 mui-col-xs-4">
 		 			        <span>昨日收益 （元）</span>
-		 			        <span class="num totalShare">--</span>
+		 			        <span class="num yesterdayShare">--</span>
 		 			    </li>
 		 			    <li class="mui-col-sm-4 mui-col-xs-4">
 		 			        <span>持有收益 （元）</span>
-		 			        <span class="num sevenYearYield">--</span>
+		 			        <span class="num ownShare">--</span>
 		 			    </li>
 		 			    <li class="mui-col-sm-4 mui-col-xs-4">
 		 			        <span>累计收益 （元）</span>
-		 			        <span class="num sevenYearYield">--</span>
+		 			        <span class="num accumulatedShare">--</span>
 		 			    </li>
 		 			</ul>
 		 		</div>
 
 	 			<!-- 展开按钮  -->
 	 			<div class="openButton">
-	 				<img src="/account/static/img/productDetail/openButton.png" class="img">
-	 				<img src="/account/static/img/productDetail/openButton_open.png" class="openImg">
+	 				<img src="/account/static/img/arrow_down_blue.png" class="img">
+	 				<img src="/account/static/img/arrow_up_blue.png" class="openImg">
 	 			</div> 
 
 	 			<!-- 隐藏区域 -->
@@ -153,13 +154,15 @@
 	 				<span class="rightTitle">历史明细</span>
 	 			</div>
 	 			<div class="lineDraw">
-	 				<div id="line"></div>
+	 				<!-- 七日年化折线图 -->
+	 				<div id="qrnhLine" class="line"></div>
+	 				<!-- 万份收益折线图 -->
+	 				<div id="wfsyLine" class="hide line"></div>
 	 				<div class='mui-row tab'>
-	 					<span class="mui-col-sm-2 mui-col-xs-2 time active">月</span>
-	 					<span class="mui-col-sm-2 mui-col-xs-2 time">季</span>
-	 					<span class="mui-col-sm-2 mui-col-xs-2 time">近半年</span>
-	 					<span class="mui-col-sm-3 mui-col-xs-3 time">近一年</span>
-	 					<span class="mui-col-sm-3 mui-col-xs-3 time">成立至今</span>
+	 					<span class="mui-col-sm-3 mui-col-xs-3 time oneMonth active" num="0">近一个月</span>
+	 					<span class="mui-col-sm-3 mui-col-xs-3 time threeMonth" num="1">近三个月</span>
+	 					<span class="mui-col-sm-3 mui-col-xs-3 time newYear" num="3">近一年</span>
+	 					<span class="mui-col-sm-3 mui-col-xs-3 time sinceNow" num="4">成立至今</span>
 	 				</div>
 	 			</div>
 
@@ -192,7 +195,7 @@
 	</div>
 
 	@@include('@pathInclude/views/footer.html')
-
+	<script src="/include/js/vendor/echarts/echarts.min.js"></script>
 	<script src="/account/static/js/optionalPublicDetail.js"></script>
 
 </body>

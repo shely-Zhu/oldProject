@@ -30,7 +30,6 @@ $(function() {
         init: function() {
             var that = this;
             that.initMui();
-            //that.getData()
             // that.events();
         },
         //初始化mui的上拉加载

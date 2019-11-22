@@ -1,28 +1,21 @@
 <!-- 
 	私募产品详情页
-
 	@author yangjinlai 20191119
-
 -->
-
 <!doctype html>
 <html lang="en">
 
 <head>
     @@include('@pathInclude/views/meta.html')
-    <link rel="stylesheet" href="/account/static/css/privateDetail.css">
+    <link rel="stylesheet" href="/account/static/css/private/privateDetail.css">
     <title></title>
 </head>
 
 <body>
-
+	@@include('@pathCommonViews/load.html') 
 	<div class="privateDetail">
-
-		<div class="topContent">
-	 		@@include('@pathInclude/views/header.html') 
-
+		<div class="topContent"> 
 	 		@@include('@pathCommonViews/headBarConfig.html',{"bgColors":"#595E6F, #1C2135","showType":"1"})
-
 	 		<div class="hide typeWrap type_0">
 	 			<!-- 类型一 稳金-->	
 	 			<div class="con">
@@ -37,29 +30,26 @@
 		 			    </li>
 		 			    <li class="mui-col-sm-6 mui-col-xs-6">
 		 			        <span>七日年化</span>
-		 			        <span class="num sevenYearYield">--</span>
+		 			        <span class="num inlineBlock"><span class="sevenYearYield">--</span><span class="smallDate"></span></span>
 		 			    </li>
 		 			</ul>
 		 		</div>
-
 	 			<!-- 展开按钮  -->
 	 			<div class="openButton">
 	 				<img src="/account/static/img/productDetail/openButton.png" class="img">
 	 				<img src="/account/static/img/productDetail/openButton_open.png" class="openImg">
 	 			</div> 
-
 	 			<!-- 隐藏区域 -->
 	 			<div class="mui-row openWrap">
  					<div class="openDiv mui-col-sm-6 mui-col-xs-6">
-	 						<p class="txt">可赎回份额</p>
-	 						<p class="num kshfe">--</p>
+	 					<p class="txt">可赎回份额</p>
+	 					<p class="num kshfe">--</p>
  					</div>
  					<div class="openDiv mui-col-sm-6 mui-col-xs-6">
-	 						<p class="txt">万份收益(元)</p>
-	 						<p class="num wfsy">--</p>
+	 					<p class="txt">万份收益(元)</p>
+	 					<p class="num wfsy">--</p>
  					</div>
 	 			</div>
-		 		
 	 		</div>
 
 	 		<div class="hide typeWrap type_1">
@@ -76,27 +66,25 @@
 		 			    </li>
 		 			    <li class="mui-col-sm-6 mui-col-xs-6">
 		 			        <span>七日年化</span>
-		 			        <span class="num sevenYearYield">--</span>
+		 			        <span class="num inlineBlock"><span class="sevenYearYield">--</span><span class="smallDate"></span></span>
 		 			    </li>
 		 			</ul>
 		 		</div>
-
 	 			<!-- 展开按钮  -->
 	 			<div class="openButton">
 	 				<img src="/account/static/img/productDetail/openButton.png" class="img">
 	 				<img src="/account/static/img/productDetail/openButton_open.png" class="openImg">
 	 			</div> 
-
 	 			<!-- 隐藏区域 -->
 	 			<div class="openWrap">
 	 				<div class="mui-row openCon">
 	 					<div class="openDiv mui-col-sm-6 mui-col-xs-6">
-		 						<p class="txt">可赎回份额</p>
-		 						<p class="num kshfe">--</p>
+		 					<p class="txt">可赎回份额</p>
+		 					<p class="num kshfe">--</p>
 	 					</div>
 	 					<div class="openDiv mui-col-sm-6 mui-col-xs-6">
-		 						<p class="txt">赎回开放日</p>
-		 						<p class="num shkfr">--</p>
+		 					<p class="txt">赎回开放日</p>
+		 					<p class="num shkfr">--</p>
 	 					</div>
 	 				</div>
 	 				<div class="openCon">
@@ -106,11 +94,9 @@
 			 			</div>
 	 				</div>
 	 			</div>
-		 		
 	 		</div>
-
 	 		<div class="hide typeWrap type_2">
-	 			<!-- 类型二 债权-->	
+	 			<!-- 类型三 债权-->	
 	 			<div class="con">
 		 			<div class="bannerTop clearfix">
 		 			    <div class="sum fl"><span class="j_text">当前持仓(份)</span></div>
@@ -127,13 +113,11 @@
 		 			    </li>
 		 			</ul>
 		 		</div>
-
 	 			<!-- 展开按钮  -->
 	 			<div class="openButton">
 	 				<img src="/account/static/img/productDetail/openButton.png" class="img">
 	 				<img src="/account/static/img/productDetail/openButton_open.png" class="openImg">
 	 			</div>  
-
 	 			<!-- 隐藏区域 -->
 	 			<div class="openWrap">
 	 				<div class="mui-row openCon">
@@ -150,12 +134,10 @@
 		 						<p class="num dqr">--</p>
 	 					</div>
 	 				</div>
-	 			</div>
-		 		
+	 			</div>		 		
 	 		</div>
-
 	 		<div class="hide typeWrap type_3">
-	 			<!-- 类型三 股权-->	
+	 			<!-- 类型四 股权-->	
 	 			<div class="con">
 		 			<div class="bannerTop clearfix">
 		 			    <div class="sum fl"><span class="j_text">认购金额(元)</span></div>
@@ -178,11 +160,9 @@
 		 			    </li>
 		 			</ul>
 		 		</div>
-		 		
 	 		</div>
-
 	 		<div class="hide typeWrap type_4">
-	 			<!-- 类型四 证券-->	
+	 			<!-- 类型五 证券-->	
 	 			<div class="con">
 		 			<div class="bannerTop clearfix">
 		 			    <div class="sum fl"><span class="j_text">当前市值(元)</span></div>
@@ -199,137 +179,169 @@
 		 			    </li>
 		 			</ul>
 		 		</div>
-		 		
 		 		<!-- 展开按钮  -->
 	 			<div class="openButton">
 	 				<img src="/account/static/img/productDetail/openButton.png" class="img">
 	 				<img src="/account/static/img/productDetail/openButton_open.png" class="openImg">
 	 			</div> 
-
 	 			<!-- 隐藏区域 -->
 	 			<div class="openWrap">
 	 				<div class="mui-row openCon">
 	 					<div class="openDiv mui-col-sm-6 mui-col-xs-6">
-		 						<p class="txt">累计净值</p>
-		 						<p class="num ljjz">--</p>
+		 					<p class="txt">累计净值</p>
+		 					<p class="num ljjz">--</p>
 	 					</div>
 	 					<div class="openDiv mui-col-sm-6 mui-col-xs-6">
-		 						<p class="txt">可赎回份额</p>
-		 						<p class="num kshhf">--</p>
+		 					<p class="txt">可赎回份额</p>
+		 					<p class="num kshhf">--</p>
 	 					</div>
 	 				</div>
 	 				<div class="mui-row openCon">
 	 					<div class="openDiv mui-col-sm-6 mui-col-xs-6">
-		 						<p class="txt">持有天数</p>
-		 						<p class="num cyts">--</p>
+		 					<p class="txt">持有天数</p>
+		 					<p class="num cyts">--</p>
 	 					</div>
 	 					<div class="openDiv mui-col-sm-6 mui-col-xs-6">
-		 						<p class="txt">赎回开放日</p>
-		 						<p class="num shkfr">--</p>
+		 					<p class="txt">赎回开放日</p>
+		 					<p class="num shkfr">--</p>
 	 					</div>
 	 				</div>
 	 				<div class="mui-row openCon">
 	 					<div class="openDiv mui-col-sm-12 mui-col-xs-12">
-		 						<p class="txt">可提交赎回申请时间</p>
-		 						<p class="num ktjshsqsj">--</p>
+		 					<p class="txt">可提交赎回申请时间</p>
+		 					<p class="num ktjshsqsj">--</p>
 	 					</div>
 	 				</div>
 	 			</div>
-
 	 		</div>
 	 	</div>
 
-	 	<div class="midContent">
-	 			
-	 		<div class="mui-row actionWrap">
-	 		    <div class="mui-col-sm-6 mui-col-xs-6 jymx">
-	 		    	<img class="img" src="/account/static/img/productDetail/type_1_left.png">
-	 		        <span class="txt">交易明细</span>
-	 		    </div>
-	 		    <div class="mui-col-sm-6 mui-col-xs-6 jjqrs">
-	 		       	<img class="img" src="/account/static/img/productDetail/type_1_right.png">
-	 		        <span class="txt">基金确认书</span>
-	 		    </div>
-	 		</div>	
-
+	 	<div class="midContent">	
+	 		<div class="actionWrap">
+	 			<div class="mui-row single">
+	 				<div class="mui-col-sm-11 mui-col-xs-11">
+		 		    	<img class="img" src="">
+		 		        <span class="txt"></span>
+		 		    </div>
+		 		    <div class="mui-col-sm-1 mui-col-xs-1">
+		 		    	<div class="arrow">
+		 					<span class="img"></span>
+		 				</div>
+		 		    </div>
+	 			</div>
+	 			<div class="mui-row double">
+	 				<div class="mui-col-sm-6 mui-col-xs-6">
+		 		    	<img class="img" src="">
+		 		        <span class="txt"></span>
+		 		    </div>
+		 		    <div class="mui-col-sm-6 mui-col-xs-6">
+		 		       	<img class="img" src="">
+		 		        <span class="txt"></span>
+		 		    </div>
+	 			</div>
+	 			<div class="treble mui-row">
+	 				<div class="actionCon">
+		 		    	<img class="img" src="/account/static/img/productDetail/type_1_left.png">
+	 					<div class="txt">交易明细</div>
+		 		    </div>
+		 		    <div class="lineVertical"></div>
+		 		    <div class="actionCon">
+		 		    	<img class="img" src="/account/static/img/productDetail/account_icon_jymx@2x.png">
+	 					<div class="txt">收益分配明细</div>
+		 		    </div>
+		 		    <div class="lineVertical"></div>
+		 		    <div class="actionCon">
+		 		    	<img class="img" src="/account/static/img/productDetail/type_1_right.png">
+	 					<div class="txt">基金确认书</div>
+		 		    </div>
+	 			</div>
+	 		</div>
 	 		<div class="hide lineWrap">
-	 			<div class="clearfix titleWrap">
+	 			<div class="clearfix titleWrap typeNo5Wrap">
 	 				<span class="title qrnh active">七日年化</span>
 	 				<span class="title wfsy hidden">万份收益</span>
-	 				
 	 				<div class="arrow">
 	 					<span class="img"></span>
 	 				</div>
-
 	 				<span class="rightTitle">历史明细</span>
 	 			</div>
+	 			<div class="clearfix titleWrap type5Wrap">
+	 				<span class="title dwjz active">单位净值</span>
+	 				<span class="title ljjz">累计净值</span>
+	 				<div class="arrow">
+	 					<span class="img"></span>
+	 				</div>
+	 				<span class="rightTitle">净值明细</span>
+	 			</div>
 	 			<div class="lineDraw">
-	 				<div id="line"></div>
+	 				<!-- 七日年化折线图 -->
+	 				<div id="qrnhLine" class="line"></div>
+	 				<!-- 万份收益折线图 -->
+	 				<div id="wfsyLine" class="hide line"></div>
+	 				<!-- 单位净值折线图 -->
+	 				<div id="dwjzLine" class="hide line"></div>
+	 				<!-- 累计净值折线图 -->
+	 				<div id="ljjzLine" class="hide line"></div>
 	 				<div class='mui-row tab'>
-	 					<span class="mui-col-sm-3 mui-col-xs-3 time active" num="0">近一个月</span>
-	 					<span class="mui-col-sm-3 mui-col-xs-3 time" num="1">近三个月</span>
-	 					<span class="mui-col-sm-3 mui-col-xs-3 time" num="3">近一年</span>
-	 					<span class="mui-col-sm-3 mui-col-xs-3 time" num="4">成立至今</span>
+	 					<span class="mui-col-sm-3 mui-col-xs-3 time oneMonth active" num="0">近一个月</span>
+	 					<span class="mui-col-sm-3 mui-col-xs-3 time threeMonth" num="1">近三个月</span>
+	 					<span class="mui-col-sm-3 mui-col-xs-3 time newYear" num="3">近一年</span>
+	 					<span class="mui-col-sm-3 mui-col-xs-3 time sinceNow" num="4">成立至今</span>
 	 				</div>
 	 			</div>
-
 	 		</div>
-
 	 		<div class="dealReg">
- 				<div class="titleWrap">交易规则
- 					<div class="arrow">
-	 					<span class="img"></span>
-	 				</div></div>
-	 			<div class="dealRegMid">
-	 				<div class="nav">
-	 					<span class="navSpan quick active">快速赎回</span>
-	 					<span class="navSpan normal">普通赎回</span>
-	 				</div>
-	 				<div class="line">
-	 					<div class="clearfix line_title">
-		 					<span class="top_l">赎回申请</span>
-		 					<span class="top_r">付款</span>
+	 			<div class="hide dealMid">
+	 				<div class="titleWrap">交易规则
+	 					<div class="arrow">
+		 					<span class="img"></span>
+		 				</div></div>
+		 			<div class="dealRegMid">
+		 				<div class="nav">
+		 					<span class="navSpan quick active">快速赎回</span>
+		 					<span class="navSpan normal">普通赎回</span>
 		 				</div>
-	 					<img class="lineDiv" src="/account/static/img/productDetail/regLine.png">
-	 					<div class="clearfix line_bottom">
-		 					<span class="bottom_l">T日（交易日）</span>
-		 					<span class="bottom_r">T日（交易日）</span>
+		 				<div class="line">
+		 					<div class="clearfix line_title">
+			 					<span class="top_l">赎回申请</span>
+			 					<span class="top_r">付款</span>
+			 				</div>
+		 					<img class="lineDiv" src="/account/static/img/productDetail/regLine.png">
+		 					<div class="clearfix line_bottom">
+			 					<span class="bottom_l">T日（交易日）</span>
+			 					<span class="bottom_r">T日（交易日）</span>
+			 				</div>
 		 				</div>
-	 				</div>
-	 				<ul class="detail">
-	 					<li>10:50前为T日，10:：50后不支持快速赎回</li>
-	 					<li>快速赎回手续费为111</li>
-	 				</ul>
-
+		 				<ul class="detail">
+		 					<li>10:50前为T日，10:50后不支持快速赎回</li>
+		 					<li>快速赎回手续费为111</li>
+		 				</ul>
+		 			</div>
+		 		</div>
+		 		<div class="dealBottom">
 	 				<div class="titleWrap">产品档案
 	 					<div class="arrow">
 	 						<span class="img"></span>
 	 					</div>
 	 				</div>
-
 	 				<div class="titleWrap">信息披露
 	 					<div class="arrow">
 	 						<span class="img"></span>
 	 					</div>
 	 				</div>
 	 			</div>
- 				
  			</div>
-
-
- 		
  			<div class="footer">
- 				<div class="mui-col-sm-6 mui-col-xs-6">赎回</div>
- 				<div class="mui-col-sm-6 mui-col-xs-6">申购</div>
+ 				<div class="redeemBtn">赎回</div>
+ 				<div class="subscribeBtn">申购</div>
  			</div>
-
 	 	</div>
 	</div>
 
 	@@include('@pathInclude/views/footer.html')
-
+	@@include('@pathInclude/views/header.html')
 	<script src="/include/js/vendor/echarts/echarts.min.js"></script>
-	<script src="/account/static/js/privateDetail.js"></script>
+	<script src="/account/static/js/private/privateDetail.js"></script>
 
 </body>
 

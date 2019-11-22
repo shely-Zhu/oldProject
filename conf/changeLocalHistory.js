@@ -5,9 +5,9 @@
  */
 
 
-if( window.env == 0 && window.location.href.indexOf('eruda=') == -1){
-	var href = window.location.href,
-		newUrl = href.indexOf('?') != -1 ? href + '&eruda=true' : href + '?eruda=true';
-	history.replaceState(null, null ,  newUrl );
-}
+// if( window.env == 0 && window.location.href.indexOf('eruda=') == -1){
+// 	var href = window.location.href,
+// 		newUrl = href.indexOf('?') != -1 ? href + '&eruda=true' : href + '?eruda=true';
+// 	history.replaceState(null, null ,  newUrl );
+// }
 
