@@ -87,6 +87,7 @@ $(function() {
 
             var obj = [{ // 系统调仓记录列表
                 url: site_url.queryHistoryNetValue_api,
+                // url: site_url.queryReourceLabels_api,
                 data: {
                     "pageNo": that.gV.pageCurrent, //非必须，默认为1
                     "pageSize": 10,//非必须，默认为10
@@ -96,14 +97,15 @@ $(function() {
                 //async: false,
                 needDataEmpty: true,
                 callbackDone: function(json) {
-                    console.log(json)
+                    console.log(json.data)
+                    // console.log(json.data.pageList)
                     var data;
                     if (json.data.length == 0) { // 没有记录不展示
                         $(".list").hide()
                         that.$e.noData.show();
                         return false;
                     } else {
-                        data = json.data.data.pageList;
+                        data = json.data.pageList
                         console.log(data)
                     }
                     setTimeout(function() {

@@ -135,7 +135,8 @@ module.exports = function() {
     //信息披露
     this.queryReourceLabels_api = http_url.web_url + '/pef/queryReourceLabels';	
     this.queryReourceList_api = http_url.web_url + '/pef/queryReourceList';
-
+    //修改分红方式接口
+    this.updateDividend_api = http_url.web_url + '/pof/dividend/updateDividend';
 
     //监管账户（老接口）
     this.findSuperviseBank_api = http_url.web_url + '/content/frontend/findSuperviseBank';
