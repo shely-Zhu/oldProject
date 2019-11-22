@@ -293,4 +293,6 @@ module.exports = {
 
     // 现金宝详情页
      './account/static/js/public/cashTreasure': './src/account/static/js/public/cashTreasure.js',
+    // 基金确认书
+     './account/static/js/private/privateFundPdf': './src/account/static/js/private/privateFundPdf.js',
 }
