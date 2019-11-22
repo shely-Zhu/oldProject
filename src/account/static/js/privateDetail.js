@@ -181,6 +181,7 @@ $(function() {
 		//type必传
 		drawLine: function ( type, data) {
 			var that = this;
+			console.log($('#qrnhLine')[0])
 			if( type == 'qrnh'){
 				//画的是七日年化折线图
 				var chartId = $('#qrnhLine')[0],

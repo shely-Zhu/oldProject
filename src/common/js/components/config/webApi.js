@@ -91,7 +91,6 @@ module.exports = function() {
     /*-------------------公募相关------------------------------*/
     this.query_api = http_url.web_url + '/pof/frontend/fund/query'; //热门诊断基金列表搜索
 
-
     /*-------------------公募相关 end ------------------------------*/
 
 
@@ -154,7 +153,10 @@ module.exports = function() {
     //私募历史明细
     this.curveHistoryList_api =http_url.web_url +'/account/positions/curveHistoryList' ;
     this.dealDetailList_api =http_url.web_url +'/account/positions/dealDetailList' ;
-
+    //产品档案
+    this.productRecord_api =http_url.web_url +'/account/positions/productRecord' ;
+    //公募交易明细
+    this.queryTradeApplyByCode_api = http_url.web_url + '/account/pof/queryTradeApplyByCode'; //热门诊断基金列表搜索
      /*------------------- 消息中心 end ------------------------------*/
 
     /*------------------- 消息中心 start ------------------------------*/
