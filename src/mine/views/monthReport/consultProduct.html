@@ -1,0 +1,39 @@
+<!-- 产品咨询
+ @author zhangyanping 2019-11-22
+-->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	@@include('@pathInclude/views/meta.html')
+	<link rel="stylesheet" href="/mine/static/css/monthReport/consultProduct.css">
+	<title></title>
+</head>
+<body>
+	<!-- @@include('@pathCommonViews/load.html') -->
+	<!-- @@include('@pathCommonViews/noDataImg.html')   -->
+	<!-- @@include('@pathCommonViews/loading/listLoading.html') -->
+	
+	<!-- 月度报告详情 -->
+	<div class="consultProduct">
+		<!-- 月度报告详情页头部 -->
+		@@include('@pathCommonViews/headBarConfig.html',{"pathName":"产品咨询"})
+
+		<div class="consultTip">尊敬的客户，您好。当前非客服时间，请输入您的咨询问题，我们将在24小时内与您联系</div>
+		<div class="consulPhone">客服在线时间：8:00-20:00</div>
+		<div class="contactForm">
+			<p class="contactFormTitle">咨询内容</p>
+			<textarea id="consultText" class="consultText" placeholder='请填写10个字以上的咨询内容，以便我们为您提供更好的帮助'></textarea>
+		</div>
+
+		<div class="submitBtn">提交</div>
+
+	</div>
+
+
+	@@include('@pathInclude/views/footer.html')
+	<!-- 添加埋点 -->
+	@@include('@pathInclude/views/header.html')
+	<script src="/mine/static/js/monthReport/consultProduct.js"></script>
+</body>
+</html>
