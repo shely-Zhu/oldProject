@@ -17,19 +17,19 @@ var data = Mock.mock({
 	    "monthHoldShareList": [{
 	    	'assetType': "204",
 			'assetTypeDesc': "固收投资产品",
-			'confirmValuePercent': "1.0000",
+			'confirmValuePercent': "0.6971",
 			'holdShareValue': "6500000.00",
 	    	},
 	    	{
 	    	'assetType': "205",
 			'assetTypeDesc': "浮收投资产品",
-			'confirmValuePercent': "0.0000",
+			'confirmValuePercent': "0.2029",
 			'holdShareValue': "0.00",
 	    	},
 	    	{
 	    	'assetType': "203",
 			'assetTypeDesc': "货币类基金",
-			'confirmValuePercent': "0.0000",
+			'confirmValuePercent': "0.1000",
 			'holdShareValue': "0.00",
 	    	},
 	    	// {
