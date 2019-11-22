@@ -13,21 +13,21 @@
 
 <body>
     <div class="topTitle">
-        @@include('@pathInclude/views/header.html') @@include('@pathCommonViews/headBarConfig.html',{"pathName":"已确认交易","bgColors":"#3E3C3C,#3E3C3C"})
+        @@include('@pathInclude/views/header.html') @@include('@pathCommonViews/headBarConfig.html',{"pathName":"待确认交易","bgColors":"#3E3C3C,#3E3C3C"})
         <!-- 筛选 -->
         <div class="hopper"></div>
         <!-- 筛选 -->
         <!-- 筛选区域 -->
         <div class="hopperCon">
             <ul>
-                <li class="active">全部</li>
-                <li>申购</li>
-                <li>赎回</li>
-                <li>分红</li>
-                <li>预约撤单</li>
-                <li>预约过期</li>
-                <li>转让已完成</li>
-                <li>受让已完成</li>
+                <li class="active" data=''>全部</li>
+                <li data="1">申购</li>
+                <li data="2">赎回</li>
+                <li data="3">分红</li>
+                <li data="4">预约撤单</li>
+                <li data="5">预约过期</li>
+                <li data="6">转让已完成</li>
+                <li data="7">受让已完成</li>
             </ul>
         </div>
         <!-- 筛选区域 -->
@@ -195,6 +195,9 @@
                         <!-- 名称 -->
                         <div class="listName mt30">(DZ银杏1162号)恒天稳谊16号私募投资基 ZYFG恒天稳谊16号私募投资基ZYFG</div>
                         <!-- 名称 -->
+                        <!-- 业绩比较基准 -->
+                        <div class="benchmark">业绩比较基准 8.8%~9.8%</div>
+                        <!-- 业绩比较基准 -->
                         <!-- 金额 -->
                         <div class="clearfix listCon">
                             <div class="listItem">
@@ -211,6 +214,7 @@
                             </div>
                         </div>
                         <!-- 金额 -->
+
                         <!-- 创建时间 -->
                         <div class="creatTime">创建时间：2018-12-10 11:10:00</div>
                         <!-- 创建时间 -->
@@ -232,6 +236,7 @@
                 @@include('@pathCommonViews/goTop.html')
             </div>
         </div>
+        @@include('../../../common/views/load.html')
         <!-- 加载中loading -->
         @@include('@pathCommonViews/loading/listLoading.html')
         <!-- 暂无数据 -->
@@ -239,9 +244,9 @@
     </div>
     <div class="mask"></div>
 </body>
-@@include('../common/transcationTem.html'); @@include('@pathInclude/views/footer.html')
+<!-- 公共模板 -->
+@@include('../common/transcationTem.html') @@include('@pathInclude/views/footer.html')
 <!-- 添加埋点 -->
-<script src="/include/js/iscroll.js"></script>
 <script src="/account/static/js/private/tobeConfirmTransaction.js"></script>
 
 </html>

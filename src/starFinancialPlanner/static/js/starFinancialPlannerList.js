@@ -97,7 +97,7 @@ $(function(){
                     console.log('我是内容',json);
                     var data=json.data.financialerList;
                     console.log(data)
-                    if(1==1){
+                    if(json.data.matchedFinancialer=='0'){
                         t.endPullupToRefresh(true);
                         that.$e.activityListDataBox.hide();
                         that.$e.activityListDataNoBox.show();
@@ -148,7 +148,7 @@ $(function(){
                 // url:'http://172.16.187.164:8081/web/marketing/activity/getActivitiesList',
                 data: {
                     code:$('.mui-input-clear').val(),    
-                    cityName:''    
+                    cityName:'' 
                 },
                 //async: false,
                 needDataEmpty: true,
@@ -248,8 +248,8 @@ $(function(){
         getCity:function(){
             var that=this;
             var obj=[{
-                // url: site_url.getCity_api,
-                url:'http://172.16.187.164:8081/web/marketing/frontend/getCity',
+                 url: site_url.getCity_api,
+                //url:'http://172.16.187.164:8081/web/marketing/frontend/getCity',
                 //async: false,
                 needDataEmpty: true,
                 callbackDone: function(json) {
@@ -330,6 +330,7 @@ $(function(){
                 $('.recordList').html('');
                 // $('#loading').show();
                 that.gV.startPage=1;
+                console.log($('.mui-input-clear').val())
                 that.initMui();
                 mui('.contentWrapper').pullRefresh().scrollTo(0, 0, 100); 
             });

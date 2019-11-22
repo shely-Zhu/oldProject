@@ -250,7 +250,9 @@ module.exports = {
     //已确认交易 公共js
     './account/static/js/common/transcationTem': './src/account/static/js/common/transcationTem.js',
     //待确认交易
-    './account/static/js/private/tobeConfirmTransaction': './src/account/static/js/private/tobeConfirmTransaction.js',
+    // './account/static/js/private/tobeConfirmTransaction': './src/account/static/js/private/tobeConfirmTransaction.js',
+    //收益分配明细
+    './account/static/js/private/incomeDistribution': './src/account/static/js/private/incomeDistribution.js',
     //公募资产
     './account/static/js/publicAssets': './src/account/static/js/publicAssets.js',
 
@@ -258,21 +260,39 @@ module.exports = {
     './homePage/static/js/noticeCenter': './src/homePage/static/js/noticeCenter.js',
     // 消息中心-系统通知
     './homePage/static/js/systemInforms': './src/homePage/static/js/systemInforms.js',
-
+    // 明星理财师-列表
+    './homePage/static/js/starFinancialPlannerList': './src/homePage/static/js/starFinancialPlannerList.js',
     // 已报名活动
     './mine/static/js/memberClub/activityEnrolment': './src/mine/static/js/memberClub/activityEnrolment.js',
     // 消息中心-通知详情
     './homePage/static/js/noticeDetail': './src/homePage/static/js/noticeDetail.js',
     //include---富文本模板
-    './include/js/modelPage/rich_template': './src/include/js/modelPage/rich_template.js',
+    './include/js/modelPage/articleTemplate': './src/include/js/modelPage/articleTemplate.js',
     // 了解恒天
     './homePage/static/js/understandHT': './src/homePage/static/js/understandHT.js',
 
     //私募资产详情
-    './account/static/js/privateDetail': './src/account/static/js/privateDetail.js',
+    './account/static/js/private/privateDetail': './src/account/static/js/private/privateDetail.js',
+
+    //自选公募-交易记录
+    // './account/static/js/public/transactionRecord': './src/account/static/js/public/transactionRecord.js',
+
+    //超宝基金产品-交易记录
+    './account/static/js/super/superRecord': './src/account/static/js/super/superRecord.js',
+    
+    //自选公募资产详情
+    './account/static/js/optionalPublicDetail': './src/account/static/js/optionalPublicDetail.js',
 
     // 自选公募交易记录
     './account/static/js/public/transactionRecords': './src/account/static/js/public/transactionRecords.js',
     // 自选公募交易明细
     './account/static/js/public/transactionDetail': './src/account/static/js/public/transactionDetail.js',
+
+    // 自选公募--超宝详情
+    './account/static/js/public/superStreasureDetail': './src/account/static/js/public/superStreasureDetail.js',
+
+    // 现金宝详情页
+     './account/static/js/public/cashTreasure': './src/account/static/js/public/cashTreasure.js',
+    // 基金确认书
+     './account/static/js/private/privateFundPdf': './src/account/static/js/private/privateFundPdf.js',
 }

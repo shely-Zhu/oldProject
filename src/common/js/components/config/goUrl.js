@@ -339,4 +339,8 @@ module.exports = function() {
     this.systemInforms_url = go_url.no_url + '/homePage/views/notice/systemInforms.html';
     /*-------------------------------消息中心 end -----------------------*/
 
+
+    //h5模板页
+    this.articleTemplate_url = go_url.no_url + '/include/views/articleTemplate.html';
+
 };

@@ -1,0 +1,257 @@
+/**
+* 自选公募交易记录
+* @author wangjiajia 2019-11-20
+*/
+@import url("../../../../../include/css/mui.min.css");
+@import url('@pathCommonLess/mui/resetMUI.less');
+@import url("@pathCommonLess/reset.less");
+@import url("@pathCommonLess/color.less");
+
+@import url("@pathCommonLessCom/againEnter.less");
+@import url("@pathCommonLessCom/alertBox.less");
+@import url("@pathCommonLessCom/headBarConfig.less");
+
+body{
+    max-width: 7.5rem;
+    background-color: @F7FAFD;
+}
+ .fl{
+     float: left;
+ }
+ .fr{
+     float: right;
+ }
+ body,.mui-content{
+     background: @F7FAFD !important;
+ }
+ .hide{
+     display: none;
+ }
+ .container {
+     height: 100%;
+     width: 100%;
+     background: @F7FAFD;
+ 
+     // 公募资产
+     .banner {
+         position: relative;
+         width: 100%;
+         height: 4.5rem;
+         background: url("/account/static/img/public_account_bg.png");
+         background-size: 100% 100%;
+         padding: 0 0.28rem;
+ 
+         .bannerTop {
+             color: @F7DDCF;
+             padding-top: 1.54rem;
+             .sum {
+                 
+                 font-size: 0.26rem;
+                 .j_icon {
+                     width: 0.36rem;
+                     height: 0.36rem;
+                     margin-left: 0.2rem;
+                     background: url("/account/static/img/eyesee.png");
+                     background-size: 100% 100%;
+                     display: inline-block;
+                     vertical-align: middle;
+                 }
+                 .j_icon.eyecose{
+                     background: url("/account/static/img/eyeclose.png");
+                     background-size: 100% 100%;
+                 }
+                 
+             }
+             .assetsBtn{
+                 width: 1.5rem;
+                 height: 0.4rem;
+                 background: rgba(255, 255, 255, 0.1);
+                 border-radius: 0.25rem;
+                 font-size: 0.2rem;
+                 text-align: center;
+                 color: @c005;
+                 opacity: 0.8;
+                 line-height: 0.4rem;
+             }
+             
+         }
+         //金额
+         .totalM{
+             font-size: 0.68rem;
+             line-height: 0.8rem;
+             margin-top: 0.1rem;
+             font-weight:bold;
+             color:rgba(153,81,0,1);
+             background:linear-gradient(360deg, rgba(186,140,112,1) 0%, rgba(244,210,192,1) 100%);
+             -webkit-background-clip:text;
+             -webkit-text-fill-color:transparent;
+         }
+         //待确认金额
+         .be_confirmed_amount {
+             height: 0.95rem;
+             width: 100%;
+             padding-top: 0.14rem;
+             .title {
+                 font-size: 0.26rem;
+                 color: @FFFFFF;
+                 margin-top: 0.08rem;
+             }
+             .value {
+                 margin-left: 0.1rem;
+                 font-size: 0.38rem;
+                 color: #EDC99B;
+             }
+         }
+         //收益金额相关
+         .accountWrap{
+             margin-top:0.4rem;
+         }
+         .first_h_profit_box {
+             width: 3.58rem;
+         }
+         .h_profit {
+             font-size: 0.26rem;
+             color: rgba(255, 255, 255, 0.7);
+         }
+         .h_profit_value {
+             font-size: 0.38rem;
+             color: @FFFFFF;
+             margin-top: 0.1rem;
+         }
+     }
+     //收益---记录明细
+     .detailWrap{
+         width: 100%;
+         .detailWrapUl{
+             width: 100%;
+             height: 1.36rem;
+             display: flex;
+             justify-content:space-around;
+             text-align: center;
+             padding: 0 0.3rem;
+             line-height: 1.36rem;
+             font-size:0.28rem;
+            font-family:PingFangSC-Regular,PingFang SC;
+            font-weight:400;
+            color:@272727;
+             .detailLi{
+                 width: 50%;
+                 display:flex;
+                 justify-content:center;
+                 .imgWrap{
+                     padding-top: 0.3rem;
+                     padding-right: 0.1rem;
+                     img{
+                        width: 0.6rem;
+                        height: 0.6rem;
+                    }
+                 }
+               
+             }
+         }
+     }
+    //七日年化
+    .data{
+        width: 100%;
+        height: 1rem;
+        line-height: 1rem;
+        font-size:0.32rem;
+        font-family:PingFangSC-Semibold,PingFang SC;
+        font-weight:600;
+        color:@272727;
+        padding-left: 0.25rem;
+    } 
+     //折线图
+     .lineDraw{
+        padding-left: 0.3rem;
+        padding-right: 0.3rem;
+
+        .line{
+            height: 4.5rem;
+        }
+
+        .tab{
+            height: 0.56rem;
+            line-height: 0.56rem;
+            font-size: 0.24rem;
+            border: 0.02rem solid rgba(54,77,151,1);
+            border-radius: 0.08rem;
+
+            .time{
+                color: rgba(54,77,151,1);
+                text-align: center;
+                border-right: 0.02rem solid rgba(54,77,151,1);
+
+                &:last-child{
+                    border-right: 0;
+                }
+
+                &.active{
+                    background:linear-gradient(135deg,rgba(108,131,201,1) 0%,rgba(6,29,106,1) 100%);
+                    color: @c005;
+
+                }
+            }
+                    
+        }
+    }
+
+    //文字内容
+    .textWrap{
+        width: 100%;
+        height: 100%;
+        padding-bottom: 4rem;
+        .rulestestWrap{
+            width: 100%;
+            padding: 0 0.3rem;
+            font-size:0.32rem;
+            font-family:PingFangSC-Medium,PingFang SC;
+            font-weight:500;
+            color:@272727;
+            .rulesTitle{
+                width: 100%;  
+                padding:0.35rem 0; 
+                margin-top: 0.25rem;           
+            }
+            .rulesContent{
+                font-size:0.28rem;
+                font-family:PingFangSC-Regular,PingFang SC;
+                font-weight:400;
+                color:rgba(78,78,78,1);
+                line-height:0.4rem;
+            }
+        }
+    }
+    .footer{
+        height: 0.98rem;
+        background: @FFFFFF;
+        position: fixed;
+        bottom: 0;
+        width: 100%;
+        .footerBtnLeft,.footerBtnRight{
+            height: 0.98rem;
+            line-height: 0.98rem;
+            font-size: 0.32rem;
+            text-align: center;
+            color: @0E246C;
+        }
+        .footerBtnRight{
+            background-image: linear-gradient(to right, @6C83C9, @061D6A);
+            color: @FFFFFF;
+        }
+    }
+ 
+ 
+ 
+    
+ 
+
+
+     
+ 
+ 
+ 
+  
+ 
+    
+ }

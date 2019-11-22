@@ -24,41 +24,54 @@ $(function(){
 			noData: $('.noData'), //没有数据的结构
             listLoading: $('.listLoading'), //所有数据区域，第一次加载的loading结构
             ListSlot:$('.listHasData'),//插入已报名活动位置
+            ListSlot1:$('.listHasData1'),//插入已报名活动位置
             listTemp:$('#activityEn-template'),//已报名活动模板类名          
 		},
 		gV:{
 			ListData: [
-                [],
-                []
             ], // 有活动的数据
             search: false, // 搜索
+            // 存放ajax请求地址  已进行  已结束
+            ajaxArr: [], //存放每一个ajax请求的传参数据
 		},
 		init: function() {
             var that = this;
-            that.getData();
+            that.getData(site_url.queryGrowthDetailList_api,{},0);
+            that.getData(site_url.getJJSInTransitAssets_api,{},1);
             that.events();
         },
-        getData:function(){
+        getData:function(ur,dat,num){
             var that = this
 
 
             var obj = [{
-                url: site_url.queryGrowthDetailList_api, //成长值流水
-                data: {},
+                url: ur, 
+                data: dat,
                 needDataEmpty: false,
                 callbackDone: function(json) {
                     var dataList;
                     console.log(json.data)
                     // 待定
-                    if (json.data.pageItems.totalCount == 0) { // 没有记录不展示
-                        that.$e.noData.show();
-                        return false;
+                    if (json.data.pageList.length == 0) { // 没有记录不展示
+                        if(num == 0){
+                            $('.listHasData .noData').show();
+                            return false;
+                        }else{
+                            $('.listHasData1 .noData').show();
+                            return false;
+                        }
+                        
                     } else {
                         dataList = json.data.pageList;
                     }
                     setTimeout(function() {
                         // 将列表插入到页面上
-                        generateTemplate(dataList, that.$e.ListSlot, that.$e.listTemp);
+                        if(ur == site_url.queryGrowthDetailList_api){
+                            generateTemplate(dataList, that.$e.ListSlot, that.$e.listTemp);
+                        }else{
+                            generateTemplate(dataList, that.$e.ListSlot1, that.$e.listTemp);
+                        }
+                        
                     }, 200)
 
                 },
@@ -75,15 +88,13 @@ $(function(){
             mui("body").on('tap', '.choice .mui-col-xs-6', function(e) {
                 var i = $(this).index();
                 $(this).addClass('active').siblings().removeClass('active');
-
-                // 切换图表
-                if (that.gV.ListData[i].length != 0) {
-                    $('.HasData').css({"display": "block"})
-                    $('.NoData').css({"display": "none"});
-                } else {
-                    $('.HasData').css({ "display":"none"})
-                    $('.NoData').css({"display": "block"});
-                    
+                window.scroll(0,0)
+                if(i == 0){
+                    $('.listHasData').show()
+                    $('.listHasData1').hide()
+                }else{
+                    $('.listHasData').hide()
+                    $('.listHasData1').show()
                 }
             })
 		}

@@ -1,0 +1,52 @@
+@import url("../reset.less");
+@import url("../color.less");
+
+.elasticLayer {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 7.5rem;
+    // height: 100%;
+    background-color: rgba(51, 51, 51, 0.8);
+    z-index: 9999;
+    .elasticWrapper {
+        width: 5.4rem !important;
+        height: 2.5rem !important;
+        background: @FDF3DD;
+        text-align: center;
+        margin: 0 auto;
+        z-index: 105;
+        border-radius: .14rem;
+        .elasticMid{
+            width: 5.4rem;
+            .elasticTxt{
+                font-size: .28rem !important;
+                line-height: .45rem !important;
+                color: @272727;
+                p{  
+                    text-align: center;
+                    font-family:PingFangSC-Regular,PingFang SC;
+                    font-weight:400;
+                    font-size:.28rem;
+                    color: @272727;
+                }
+            }
+            .elasticButtons{
+                height: .99rem;
+                border-top: 1px solid @D6BC79;
+                .positionLeft,.elasticCel{
+                    color: @9B9B9B;
+                    font-size: .36rem !important;
+                    font-weight: 400;
+                    border-right: none;
+                }
+                .positionRight,.elasticYes{
+                    color: @272727;
+                    font-weight: 400;
+                    font-size: .36rem !important;
+                    border-left: .01rem solid @D6BC79;
+                }
+            }
+        }
+    }
+}

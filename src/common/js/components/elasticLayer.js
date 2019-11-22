@@ -59,7 +59,7 @@
                         yesTxt: '确定', //确定按钮的文案，不传默认为确定
                         celTxt: '取消', //返回按钮的文案，不传默认为返回
                         zIndex: 10000000, //该弹层的z-index，因为不知道有几个弹层和弹层顺序，不传默认为100
-                        yesButtonPosition: 'left', //确定按钮在左边还是在右边，不传的话，默认为'left'，在左边，如果在右边，传'right'
+                        yesButtonPosition: 'right', //确定按钮在左边还是在右边，不传的话，默认为'left'，在左边，如果在右边，传'right'
                         callbackCel: $.noop, //取消按钮的回调函数，默认为空
                         callback: $.noop, //确定按钮的回调函数，默认为空(jQuery的空函数，仅仅想要传递一个空函数的时候可以使用)
                         iconTxt: '', //icon的值
@@ -201,6 +201,7 @@
                     that.$yes.on('click', function() {
                         //调用的是callback回调函数
                         that.options.callback(that);
+                        $(this).parents('.elasticLayer').hide();
                     })
                 },
 

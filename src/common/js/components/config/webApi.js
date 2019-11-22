@@ -154,24 +154,24 @@ module.exports = function() {
    /*------------------- 私募 start ------------------------------*/
     //私募历史明细
     this.curveHistoryList_api =http_url.web_url +'/account/positions/curveHistoryList' ;
+    this.yieldAssignList_api =http_url.web_url +'/account/positions/yieldAssignList' ;
     this.dealDetailList_api =http_url.web_url +'/account/positions/dealDetailList' ;
+    this.assetsDetail_api =http_url.web_url +'/account/positions/assetsDetail' ; // 资产详情
+    this.earningCurve_api =http_url.web_url +'/account/positions/earningCurve' ; // 收益走势
+    this.queryHistoryNetValue_api =http_url.web_url +'/account/positions/queryHistoryNetValue' ; // 净值走势
 
-     /*------------------- 消息中心 end ------------------------------*/
+    /*------------------- 私募 end ------------------------------*/
 
     /*------------------- 消息中心 start ------------------------------*/
 
     // 消息中心
     this.getNoticeTypeList_api = http_url.web_url + '/account/account/getNoticeTypeList';
-    // 通知消息列表
-    this.systemNotificationList_api = http_url.web_url + '/account/account/systemNotificationList';
-    // 非通知消息列表  
+    // 消息列表  
     this.noticeAndTransDynamicList_api = http_url.web_url + '/account/account/noticeAndTransDynamicList';
-    // 通知详情
-    this.getSystemNotification_api = http_url.web_url + '/account/account/getSystemNotification';
+    // 消息详情
+    this.getNoticeAndTransDynamic_api = http_url.web_url + '/account/account/getNoticeAndTransDynamic';
     //查询单条文章(APPCMS后台)
     this.getArticle_api = http_url.web_url + '/content/frontend/getArticle';
-    // 非通知详情
-    this.getNoticeAndTransDynamic_api = http_url.web_url + '/account/account/getNoticeAndTransDynamic';
 
     /*------------------- 消息中心 end ------------------------------*/
 
