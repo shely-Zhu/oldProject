@@ -112,6 +112,7 @@ $(function() {
 
                                 } else { // 没有更多数据了
                                     t.endPullupToRefresh(true);
+                                    $(".noData").show()
                                 }
                             } else {
                                 //其他页-没有更多数据
@@ -124,7 +125,7 @@ $(function() {
 
                         // 页面++
                         that.gV.pageCurrent++;
-                        console.log(that.gV.pageCurrent)
+
                         // 将列表插入到页面上
                         generateTemplate(data, that.$e.recordList, that.$e.adjustmentTemp);
 
