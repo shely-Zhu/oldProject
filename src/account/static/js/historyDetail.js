@@ -112,7 +112,7 @@ $(function() {
 
                                 } else { // 没有更多数据了
                                     t.endPullupToRefresh(true);
-                                    $(".noData").show()
+                                    $(".noDataOne").show()
                                 }
                             } else {
                                 //其他页-没有更多数据
