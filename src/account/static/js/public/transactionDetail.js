@@ -25,7 +25,7 @@ $(function() {
 		},
 		//全局变量
 		gV: {
-			
+			data:[],
 		},
 		//页面初始化函数
 		init: function() {
@@ -57,21 +57,25 @@ $(function() {
 						$("#item1").empty()
 						$("#item3").empty()
 						$("#item4").empty()
-						$("#item2").prepend($("<div class='list'><div class='contentWrapper'><div class='contentWrap'></div><div class='goTopBtn iconfont'></div></div></div>"))						   
+						$("#item2").empty()
+						$("#item2").prepend($("<div class='list'><div class='contentWrapper'><div class='contentWrap'></div><div class='goTopBtn iconfont'></div></div></div>"))						     
 					}else if(event.detail.slideNumber === 2){
 						$("#item1").empty()
 						$("#item2").empty()
 						$("#item4").empty()
+						$("#item3").empty()
 						$("#item3").prepend($("<div class='list'><div class='contentWrapper'><div class='contentWrap'></div><div class='goTopBtn iconfont'></div></div></div>"))
 					}else if(event.detail.slideNumber === 3){
 						$("#item1").empty()
 						$("#item2").empty()
 						$("#item3").empty()
+						$("#item4").empty()
 						$("#item4").prepend($("<div class='list'><div class='contentWrapper'><div class='contentWrap'></div><div class='goTopBtn iconfont'></div></div></div>"))
 					}else if(event.detail.slideNumber === 0){
 						$("#item2").empty()
 						$("#item3").empty()
 						$("#item4").empty()
+						$("#item1").empty()
 						$("#item1").prepend($("<div class='list'><div class='contentWrapper'><div class='contentWrap'></div><div class='goTopBtn iconfont'></div></div></div>"))
 					}
 
@@ -128,23 +132,25 @@ $(function() {
             var that = this;
 
             var obj = [{ // 系统调仓记录列表
-                url: site_url.curveHistoryList_api,
+                url: site_url.queryTradeApplyByCode_api,
                 data: {
-                    "pageNo": that.gV.pageCurrent, //非必须，默认为1
+					"fundCode":"",
+					"tradeNo":"",
+                    "pageCurrent": that.gV.pageCurrent, //非必须，默认为1
 					"pageSize": "10",//非必须，默认为10
-					"projectId":"12776",//项目编号
                 },
                 //async: false,
                 needDataEmpty: true,
                 callbackDone: function(json) {
 					var data;
 					console.log(json)
-                    if (json.data.length == 0) { // 没有记录不展示
+                    if (json.data.pageList.length == 0) { // 没有记录不展示
                         $(".list").hide()
                         // that.$e.noData.show();
                         return false;
                     } else {
-                        data = json.data;
+						// data = json.data.pageList;
+						data = json.data.pageList
                     }
                     setTimeout(function() {
 
@@ -174,8 +180,7 @@ $(function() {
 
                         // 将列表插入到页面上
                         // generateTemplate(data, that.$e.recordList, that.$e.adjustmentTemp);
-                        generateTemplate(data, $(".contentWrap"), that.$e.adjustmentTemp);
-
+						generateTemplate(data, $(".contentWrap"), that.$e.adjustmentTemp);
                     }, 200)
 
                 },

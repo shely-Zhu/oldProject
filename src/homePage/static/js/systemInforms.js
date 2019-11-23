@@ -32,16 +32,17 @@ $(function(){
 		//页面初始化函数
 		init:function(){
             var that=this;
+            this.getTitle()
             that.initMui();
-            this.getTitle()  
             this.events()
         },
         getTitle() {
-            switch(this.gV.mesType) {
-                case '0': $("#HeadBarpathName").html("系统通知");break;
-                case '1': $("#HeadBarpathName").html("产品公告");break;
-                case '2': $("#HeadBarpathName").html("活动通知");break;
-                case '3': $("#HeadBarpathName").html("交易动态");break;
+            var mesType = Number(this.gV.mesType)
+            switch(mesType) {
+                case 0: $("#HeadBarpathName").html("系统通知");break;
+                case 1: $("#HeadBarpathName").html("产品公告");break;
+                case 2: $("#HeadBarpathName").html("活动通知");break;
+                case 3: $("#HeadBarpathName").html("交易动态");break;
             }
         },
         //初始化mui的上拉加载
