@@ -81,7 +81,6 @@ module.exports = function() {
     this.prvLevel_api = http_url.web_url + '/pef/queryBenefitLevel'; //受益级别查询
     this.prvHisValue_api = http_url.web_url + '/pef/queryHistoryNetValue'; //历史净值查询
     this.prvLight_api = http_url.web_url + '/pef/queryProductImage'; //产品亮点查询
-    this.queryReourceLabels_api = http_url.web_url + "/pef/queryReourceLabels"; //获取私募产品材料标签
     this.prvReource_api = http_url.web_url + '/pef/queryReourceList'; //产品材料接口
     this.recommend_api = http_url.web_url + '/pef/frontend/findRecommand'; //私募首页--产品推荐
     this.collect_info_api = http_url.web_url + '/pef/getRaiseInfo'; //查询产品募集信息
@@ -205,6 +204,17 @@ module.exports = function() {
     // 金服WEB-详情页-基金净值走势图查询
     this.fundNetWorthTrendChart_api = http_url.web_url + '/pof/fundDetails/frontend/fundNetWorthTrendChart';
     /*------------------- 月度报告 end ------------------------------*/
+
+
+    // 超宝基金产品-交易记录
+    this.queryTradeList_api = http_url.web_url + '/account/pof/cash/queryTradeList';
+
+    // 公募交易列表查询
+    this.tradeList_api = http_url.web_url + '/account/pof/tradeList';
+
+    // 公募普通产品银行卡列表
+    this.normalPofList_api = http_url.web_url + '/account/bankCard/normalPofList';
+
 
     /*------------------- 基金确认书 start ------------------------------*/
     this.downloadFile_api = http_url.web_url + '/content/file/mount/download'; //下载pdf

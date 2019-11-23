@@ -33,7 +33,9 @@
     <!----- 未确认 ----->
     {{#if notConfirmTrans}}
     <div class="transList">
-        <div class="statusTip">预约过期</div>
+        {{#unlesee appointmentFinished}}
+        <div class="statusTip">{{reserveStatusDesc}}</div>
+        {{/unlesee}}
         <!-- 名称 -->
         <div class="listName mt30">{{projectName}}</div>
         <!-- 名称 -->
@@ -53,6 +55,20 @@
             </div>
         </div>
         <!-- 金额 -->
+        {{#if appointmentFinished}}
+        <!-- 创建时间 -->
+        <div class="creatTime">创建时间：{{reserveTime}}</div>
+        <!-- 创建时间 -->
+        {{/if}}
+        <!-- 进度 -->
+        <div class="toolCon clearfix">
+            {{#if appointmentSuccess}}
+            <span class="tipImg"></span> {{/if}} {{#if appointmentFailed}}
+            <span class="tipImg"></span> {{/if}}
+            <span>{{reserveSubStatus}}</span>
+            <div class="toDetail">详情</div>
+        </div>
+        <!-- 进度 -->
         <!-- 预约图片 -->
         <div class="typeImg yy"></div>
         <!-- 预约图片 -->
@@ -146,50 +162,6 @@
     </div>
     <!---------- 预约状态 ---------->
 
-    {{else if businessType6}}
-    <!---------- 转让状态 ---------->
-    <div class="transList">
-        <div class="statusTip">转让申请驳回</div>
-        <!-- 名称 -->
-        <div class="listName mt30">(DZ银杏1162号)恒天稳谊16号私募投资基 ZYFG恒天稳谊16号私募投资基ZYFG</div>
-        <!-- 名称 -->
-        <div class="benchmark">业绩比较基准{{businessCompareReferenceMin}}%~{{businessCompareReferenceMax}}%</div>
-        <!-- 金额 -->
-        <div class="clearfix listCon">
-            <div class="listItem">
-                <p>转让份额(份)</p>
-                <span>10,000,000.00</span>
-            </div>
-            <div class="listItem">
-                <p>拟转让价格(元)</p>
-                <span>2019-09-10</span>
-            </div>
-            <div class="listItem">
-                <p>成交价格</p>
-                <span>1000</span>
-            </div>
-        </div>
-        <!-- 金额 -->
-        <!-- 创建时间 -->
-        <div class="creatTime">创建时间：2018-12-10 11:10:00</div>
-        <!-- 创建时间 -->
-        <!-- 进度 -->
-        <div class="toolCon clearfix">
-            <span class="tipImg"></span>
-            <span>当前进度已截止</span>
-            <a href="">查看具体情况</a>
-            <div class="toDetail">详情</div>
-        </div>
-        <!-- 进度 -->
-        <!-- 转让图片 -->
-        <div class="typeImg zr"></div>
-        <!-- 转让图片 -->
-    </div>
-    <!---------- 转让状态 ---------->
 
-    {{else if businessType7}}
-    <!---------- 受让状态 ---------->
-
-    <!---------- 受让状态 ---------->
     {{/if}} {{/each}}
 </script>

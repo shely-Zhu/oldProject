@@ -42,8 +42,7 @@ $(function(){
                 },
                 needDataEmpty: true,
                 callbackDone: function(json) {
-                	var resData = json.data.data;
-//                  console.log(json.data)
+                	var resData = json.data;
 					if(!!resData.h5Title){//标题
 						that.$e.HeadBarpathName.text(resData.h5Title);
 					}

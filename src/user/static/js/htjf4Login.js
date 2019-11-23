@@ -90,7 +90,7 @@ $(function() {
                             password: pwdValue, //密码
                             channelType:"2",
 
-                            deviceId:"862169042707406",
+                            deviceId:"863471033880773",
 
                             //deviceId:"864684039820036",
                             //deviceId: "863471033880773"
@@ -106,9 +106,7 @@ $(function() {
                             // //openId: that.beforeSet.openId //'oe7KJxLcDy57TLNpYTzi2k44467o' 微信Id,打开登录页面链接带过来的参数openId
                             // "password": "123456",
 						    // "deviceId": "864684039820036",
-						    // "channelType": "2",
 						    // "mobile": "13700051325",
-						    // "registerId": "140fe1da9efb5800e07",
 						    // "accountType": "1",
 						    // "netType": 1
                     },
