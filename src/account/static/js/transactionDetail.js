@@ -112,14 +112,12 @@ $(function() {
                                     return false;
                                 } else { // 没有更多数据了
                                     t.endPullupToRefresh(false);
-                                    $(".nodata").show()
                                 }
                             } else {
                                 //其他页-没有更多数据
                                 t.endPullupToRefresh(true);
                             }
                         } else { // 还有更多数据
-                            console.log(999)
                             t.endPullupToRefresh(false);
                         }
                         var len = json.data.pageList;

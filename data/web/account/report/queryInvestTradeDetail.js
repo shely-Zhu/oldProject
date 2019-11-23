@@ -82,6 +82,7 @@ var data=Mock.mock({
 		]
 
 	}
+	// data:{}
 });
 
 module.exports=data;
