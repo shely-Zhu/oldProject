@@ -1,5 +1,5 @@
 //  超宝基金产品-交易记录
-// @author caoqiahi 2019-11-20 
+// @author caoqihai 2019-11-20 
 
 require('@pathCommonJsCom/utils.js');
 //ajax调用
@@ -34,14 +34,14 @@ $(function() {
                 { type: '转出', num: '1' },
             ],
             aP: {
-                pageNo: 1,
+                pageCurrent: 1,
                 pageSize: 10,
             },
             current_index: 0, //左右滑动区域的索引
             list_template: '', //列表的模板，生成后存放在这里
             ajaxArr: [], //存放每一个ajax请求的传参数据
             // 存放ajax请求地址  已持仓  待确认
-            siteUrlArr: [site_url.queryAssetsDetailByPages_api, site_url.getJJSInTransitAssets_api],
+            siteUrlArr: [site_url.queryTradeList_api, site_url.queryTradeList_api],
             listToTop: '', // 滑动区域距离顶部距离
             navToTop: '', // 滑动nav距离顶部距离
             navHeight: '', // nav高度
@@ -81,10 +81,12 @@ $(function() {
             var wrap_source = $('#first-template').html(),
                 wrap_template = Handlebars.compile(wrap_source),
                 wrap_html = wrap_template({ content: list_html });  //模板生成
-
             $.each(that.gV.navList, function(i, el) {
+                
                 that.gV.ajaxArr[el.num] = {
-                    pageNo: that.gV.aP.pageNo, //当前第几页(默认为1) 非必填项, 默认设置成第一页
+                    fundCode:'00375',//现金宝基金代码
+                    operationType:i,   //请求类型：0-转入，1-转出
+                    pageCurrent: that.gV.aP.pageCurrent, //当前第几页(默认为1) 非必填项, 默认设置成第一页
                     pageSize: that.gV.aP.pageSize, //每页显示几条数据(默认10) 非必填项， 默认设置成20
                 }
                 contentArr.push({
@@ -140,7 +142,7 @@ $(function() {
                 that.gV.navHeight = that.gV.listToTop - that.gV.navToTop;
                 that.htmlHeight = windowHeight - that.gV.listToTop;
 
-                // that.htmlHeight = $('html').height() - $('.nav-wrapper').height();
+                that.htmlHeight = windowHeight - $('.nav-wrapper').height();
 
 
                 console.log('距顶部距离：' + that.gV.listToTop);
@@ -148,6 +150,7 @@ $(function() {
                 //that.highHeight = windowHeight-that.gV.navHeight;
 
                 // that.highHeight = $('html').height() - that.gV.listToTop;
+                that.highHeight = windowHeight - that.gV.listToTop;
             }
 
 
@@ -169,7 +172,7 @@ $(function() {
                         contentnomore: '暂无更多内容', //可选，请求完毕若没有更多数据时显示的提醒内容；
                         callback: function() {
                             //执行ajax请求
-                            that.commonAjax($id, this, 'more');
+                            that.getData($id, this, 'more');
 
                         }
                     }
@@ -201,7 +204,7 @@ $(function() {
 
             // mui('.mui-slider').slider().stopped = true;
         },
-        commonAjax: function($id, t) { // 获取产品数据的公用ajax方法;$id为各区域的 scroll+num id
+        getData: function($id, t) { // 获取产品数据的公用ajax方法;$id为各区域的 scroll+num id
             var that = this;
             //获取产品列表
             var obj = [{
@@ -210,10 +213,12 @@ $(function() {
                 needLogin: true,
                 callbackDone: function(json) {
                     var jsonData = json.data,
-                        pageList = jsonData.pageList;
+                        pageList = jsonData.list;
 
                     if (!$.util.objIsEmpty(pageList)) {
-              
+
+                        jsonData.tobe = that.gV.current_index == 0 ? 0 : 1;
+
                         var list_html = that.gV.list_template(jsonData);//  把内容  放到  模板里
                         //设置这两参数，在initMui()中使用
                         //判断是否显示没有更多了等逻辑，以及插入新数据
@@ -222,7 +227,7 @@ $(function() {
                         //重设当前页码
                         if (!$.util.objIsEmpty(pageList)) {
                             //设置每个ajax传参数据中的当前页码
-                            that.gV.ajaxArr[that.gV.current_index].pageNo++;
+                            that.gV.ajaxArr[that.gV.current_index].pageCurrent++;
                         }
                     } else {
                         //没有数据
@@ -236,7 +241,7 @@ $(function() {
                         //that.gV.aP.pageSize  是  gV  里面设置的 
                         if (that.listLength < that.gV.aP.pageSize) {
 
-                            if (that.gV.ajaxArr[that.gV.current_index].pageNo == 1) {
+                            if (that.gV.ajaxArr[that.gV.current_index].pageCurrent == 1) {
                                 //第一页时
                                 if (that.listLength == 0) {
                                     //没有数据
@@ -252,7 +257,8 @@ $(function() {
                                     //获取当前展示的tab的索引
                                     var index = $('#slider .tab-scroll-wrap .mui-active').index(),
                                         $list = $("#move_" + index + " .list");
-                                    $list.height(that.highHeight).addClass('noMove');
+                                        $list.height(that.highHeight).addClass('noMove');
+                                        // $list.addClass('noMove');
 
                                     // if( $("#move_"+index+" .noData").length ){
                                     //     //已经暂无数据了
@@ -276,8 +282,7 @@ $(function() {
                         }
 
                         $id.find('.contentWrapper .mui-pull-bottom-pocket').removeClass('mui-hidden');
-
-                        if (that.gV.ajaxArr[that.gV.current_index].pageNo == 1) {
+                        if (that.gV.ajaxArr[that.gV.current_index].pageCurrent == 1) {
                             //第一屏
                             $id.find('.contentWrapper .mui-table-view-cell').html(that.html);
                         } else {
@@ -296,8 +301,10 @@ $(function() {
                             if (ulHeight < that.htmlHeight) {
 
                                 $list.height(that.highHeight).addClass('setHeight').addClass('noMove');
+                                // $list.addClass('setHeight').addClass('noMove');
                             } else {
-                                $list.height(that.htmlHeight).addClass('setHeight');
+                                $list.height(that.highHeight).addClass('setHeight');
+                                // $list.addClass('setHeight');
                             }
 
                             //})
