@@ -106,12 +106,10 @@ $(function() {
 		getTradeRule() {
 			var that = this;
 			var projectType = Number(that.data.projectType)
-			console.log(projectType)
-			/*var params = {category: 'rule_wenjin'}*/
 			switch(projectType) {
-				case 1: var params = {category: 'rule_wenjin'};break;
-				case 2: var params = {category: 'rule_wenyu'};break;
-				case 5: var params = {category: 'rule_zhengquan'};break;
+				case 0: var params = {category: 'rule_wenjin'};break;
+				case 1: var params = {category: 'rule_wenyu'};break;
+				case 4: var params = {category: 'rule_zhengquan'};break;
 			}
 			//产品详情接口
 			var obj = [{
@@ -438,7 +436,7 @@ $(function() {
     		$('#HeadBarpathName').html( jsonData.projectName );
 	    	if ( that.data.projectType == 0 ){ //稳金类项目
     			//当前市值
-    			$('.type_0 .totalM').html( jsonData.capitalisation );
+    			$('#type0TotalM').html( jsonData.capitalisation );
     		   	//持有份额
     		   	$('.type_0 .totalShare').html( jsonData.totalShare );
     		   	//七日年化
@@ -451,7 +449,7 @@ $(function() {
     		   	$('.type_0 .wfsy').html( jsonData.incomeUnit);
 	    	} else if( that.data.projectType == 1){ //稳裕类	   		
 	    		//当前市值
-	    		$('.type_1 .totalM').html( jsonData.capitalisation );
+	    		$('#type1TotalM').html( jsonData.capitalisation );
 	    		//持有份额
 	    		$('.type_1 .totalShare').html( jsonData.totalShare );
 	    		//七日年化
@@ -466,7 +464,7 @@ $(function() {
     		   	$('.type_1 .ketjsh').html( (jsonData.beginRedemptionTime ? jsonData.beginRedemptionTime : '') + ' 至 ' + ( jsonData.endRedemptionTime ? jsonData.endRedemptionTime : '') );
 	    	} else if( that.data.projectType == 2){ //债权类	  		
 	    		//当前持仓
-	    		$('.type_2 .totalM').html( jsonData.totalShare );
+	    		$('#type2TotalM').html( jsonData.totalShare );
 	    		//收益分配
 	    		$('.type_2 .syfp').html( jsonData.incomeAssign );
 	    		//持有天数
@@ -479,16 +477,16 @@ $(function() {
     		   	$('.type_2 .dqr').html( jsonData.endDate ? jsonData.endDate : '' );
 	    	} else if( that.data.projectType == 3){ //股权类	    		
 	    		//认购金额
-	    		$('.type_3 .totalM').html( jsonData.buyAmount );
+	    		$('#type3TotalM').html( jsonData.buyAmount );
 	    		//收益分配
 	    		$('.type_3 .syfp').html( jsonData.incomeAssign );
 	    		//成立日
 	    		$('.type_3 .clr').html( jsonData.setupDate);
 	    		//产品期限
     		   	$('.type_3 .cpqx').html( jsonData.prodTerm);
-	    	} else if( that.data.projectType == 4){ //证券类    		
+	    	} else if( that.data.projectType == 4){ //证券类   		
 	    		//当前市值
-	    		$('.type_4 .totalM').html( jsonData.capitalisation );
+	    		$('#type4TotalM').html( jsonData.capitalisation );
 	    		// 单位净值
 	    		$('.type_4 .dwjz').html( jsonData.navUnit );
 	    		// 持有份额
@@ -540,6 +538,8 @@ $(function() {
 	    		}
 	    	} else if (tradeRecordFlag && incomeAssignFlag && fundConfirmDealFalg) {
 	    		$(".midContent>.actionWrap>.treble").css("display", "flex")
+	    	} else {
+	    		$(".actionWrap").css("display", "none")
 	    	}
 		},
 		//点击展开按钮

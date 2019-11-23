@@ -25,7 +25,7 @@ $(function() {
 		},
 		//全局变量
 		gV: {
-			data:[],
+			data:[1,2],
 		},
 		//页面初始化函数
 		init: function() {
@@ -58,6 +58,7 @@ $(function() {
 						$("#item3").empty()
 						$("#item4").empty()
 						$("#item2").empty()
+						
 						$("#item2").prepend($("<div class='list'><div class='contentWrapper'><div class='contentWrap'></div><div class='goTopBtn iconfont'></div></div></div>"))						     
 					}else if(event.detail.slideNumber === 2){
 						$("#item1").empty()
@@ -78,8 +79,8 @@ $(function() {
 						$("#item1").empty()
 						$("#item1").prepend($("<div class='list'><div class='contentWrapper'><div class='contentWrap'></div><div class='goTopBtn iconfont'></div></div></div>"))
 					}
-
 					// that.getData()
+					// that.gV.data = []
 					that.initMui()
 
 				})
@@ -149,8 +150,10 @@ $(function() {
                         // that.$e.noData.show();
                         return false;
                     } else {
-						// data = json.data.pageList;
 						data = json.data.pageList
+						// that.gV.data = json.data.pageList
+						console.log(1111)
+						console.log(that.gV.data)
                     }
                     setTimeout(function() {
 
@@ -179,10 +182,9 @@ $(function() {
                         that.gV.pageCurrent++;
 
                         // 将列表插入到页面上
-                        // generateTemplate(data, that.$e.recordList, that.$e.adjustmentTemp);
-						generateTemplate(data, $(".contentWrap"), that.$e.adjustmentTemp);
+                        generateTemplate(data, that.$e.recordList, that.$e.adjustmentTemp);
+						// generateTemplate(that.gV.data, $(".contentWrap"), that.$e.adjustmentTemp);
                     }, 200)
-
                 },
 
             }];

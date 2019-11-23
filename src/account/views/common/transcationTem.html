@@ -149,11 +149,11 @@
     {{else if businessType6}}
     <!---------- 转让状态 ---------->
     <div class="transList">
-        <div class="statusTip">转让申请驳回</div>
+        <div class="statusTip">{{reserveStatusDesc}}</div>
         <!-- 名称 -->
         <div class="listName mt30">(DZ银杏1162号)恒天稳谊16号私募投资基 ZYFG恒天稳谊16号私募投资基ZYFG</div>
         <!-- 名称 -->
-        <div class="benchmark">业绩比较基准{{businessCompareReferenceMin}}%~{{businessCompareReferenceMax}}%</div>
+        <div class="benchmark">业绩比较基准{{businessCompareReferenceMask}}</div>
         <!-- 金额 -->
         <div class="clearfix listCon">
             <div class="listItem">
@@ -175,9 +175,9 @@
         <!-- 创建时间 -->
         <!-- 进度 -->
         <div class="toolCon clearfix">
+            {{#if }}
             <span class="tipImg"></span>
-            <span>当前进度已截止</span>
-            <a href="">查看具体情况</a>
+            <span>{{reserveSubStatus}}</span>
             <div class="toDetail">详情</div>
         </div>
         <!-- 进度 -->
