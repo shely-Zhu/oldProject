@@ -31,15 +31,24 @@ var data=Mock.mock({
                 "fundName": "中融货币C",//产品名称
                 "investPerformanceComparison": null,//业绩比较基准
                 "marketValue": 4233.60,//参考市值
-                "netValue": 1.00, //参考净值
+                "netValue": null, //参考净值
                 "totalAssets": 4233.60, //总资产
                 "totalShares": 4233.60 //总份额
             },{
                 "fundCode": "000846", //产品编号
                 "fundName": "中融货币C",//产品名称
-                "investPerformanceComparison": null,//业绩比较基准
+                "investPerformanceComparison": '11.1',//业绩比较基准
                 "marketValue": 4233.60,//参考市值
                 "netValue": 1.00, //参考净值
+                "totalAssets": 4233.60, //总资产
+                "totalShares": 4233.60 //总份额
+            },
+            {
+                "fundCode": "000846", //产品编号
+                "fundName": "中融货币C",//产品名称
+                "investPerformanceComparison": '11.1',//业绩比较基准
+                "marketValue": 4233,//参考市值
+                "netValue": null, //参考净值
                 "totalAssets": 4233.60, //总资产
                 "totalShares": 4233.60 //总份额
             }

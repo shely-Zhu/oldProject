@@ -150,18 +150,11 @@ $(function() {
         events: function() {
         	var that = this;
 
-   //      	mui("body").trigger('tap', '.mui-table-view-cell .mui-table-view', function() {
-   //      		var $this = $(this);
-   //      		// $this.addClass('dropDown');
-			// 	// var muiActive=$this.find('.mui-collapse').addClass('mui-active');;
-			// 	if($this.find('mui-active')){
-			// 		$this.find('.mui-collapse').removeClass('mui-active');
-			// 		$this.removeClass('pickUp');
-			// 	}else{
-			// 		$this.find('.mui-collapse').addClass('mui-active');
-			// 		$this.addClass('pickUp');
-			// 	}
-			// })
+        	mui("body").on('tap', '.monthlyReport', function() {
+        		var $this = $(this);
+                window.location.href = site_url.monthReportDetail_url + '?reportId=' + $this.attr('reportId');
+        		
+			})
 
         },
     };

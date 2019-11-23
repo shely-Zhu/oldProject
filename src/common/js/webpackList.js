@@ -252,7 +252,7 @@ module.exports = {
     //已确认交易 公共js
     './account/static/js/common/transcationTem': './src/account/static/js/common/transcationTem.js',
     //待确认交易
-    './account/static/js/private/tobeConfirmTransaction': './src/account/static/js/private/tobeConfirmTransaction.js',
+    // './account/static/js/private/tobeConfirmTransaction': './src/account/static/js/private/tobeConfirmTransaction.js',
     //收益分配明细
     './account/static/js/private/incomeDistribution': './src/account/static/js/private/incomeDistribution.js',
     //公募资产
@@ -297,4 +297,6 @@ module.exports = {
      './account/static/js/public/cashTreasure':   './src/account/static/js/public/cashTreasure.js',
     // 基金确认书
      './account/static/js/private/privateFundPdf':   './src/account/static/js/private/privateFundPdf.js',
+    //我的定投_定投明细
+    './Financial/static/js/publicPlacement/castSurely_details' : './Financial/static/js/publicPlacement/castSurely_details.js' 
 }

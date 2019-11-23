@@ -119,6 +119,7 @@ $(function() {
 					}
 				}
 			]
+			console.log('发送请求')
 			$.ajaxLoading(obj);
 		},
 		//注册事件
