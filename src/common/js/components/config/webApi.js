@@ -190,6 +190,8 @@ module.exports = function() {
 
     /*------------------- 月度报告 start ------------------------------*/
 
+     // 月度报告
+    this.queryMonthlyReport_api = http_url.web_url + '/account/queryMonthlyReport';
     //  持仓总览
     this.queryInvestProdHoldShareList_api = http_url.web_url + '/account/report/queryInvestProdHoldShareList';
     // 交易明细

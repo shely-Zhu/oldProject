@@ -342,5 +342,7 @@ module.exports = function() {
 
     //h5模板页
     this.articleTemplate_url = go_url.no_url + '/include/views/articleTemplate.html';
+    // 月度报告详情页
+    this.monthReportDetail_url = go_url.no_url + '/mine/views/monthReport/monthReportDetail.html';
 
 };

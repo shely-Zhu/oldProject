@@ -15,6 +15,8 @@ require('@pathCommonJsCom/headBarConfig.js');
 
 require('@pathCommonJsCom/tabScroll.js');
 var splitUrl = require('@pathCommonJs/components/splitUrl.js')();
+//黑色提示条的显示和隐藏
+var tipAction = require('@pathCommonJsCom/tipAction.js');
 
 var moment = require('moment');
 
@@ -135,7 +137,6 @@ var monthReportDetail = {
 			},
 			needLogin: true,
 			needDataEmpty: true,
-			contentTypeSearch: true,
 			async: false,
 			callbackDone: function(json) {
 				var json=json.data;
@@ -181,7 +182,6 @@ var monthReportDetail = {
 			},
 			needLogin: true,
 			needDataEmpty: true,
-			contentTypeSearch: true,
 			async: false,
 			callbackDone: function(json) {
 				var jsonData = json.data;
@@ -190,9 +190,38 @@ var monthReportDetail = {
 				jsonData.holdPosition = true;
 
 				if(!$.util.objIsEmpty(pefSaleList)){
-					jsonData.flag1 = true;
-					jsonData.flag2 = false;
-					jsonData.flag3 = false;
+					jsonData.flag1 = true;  // 展示月末持仓私募基金的标识
+					jsonData.flag2 = false;  // 展示月末持仓公募基金的标识
+					jsonData.flag3 = false;  // 展示月末持仓其他基金的标识
+
+					// 私募数据展示的规则
+					// 看业绩比较基准和净值哪个有值：
+					// （1）若业绩比较基准有值，且没有净值，显示产品名称、持有资产、        业绩比较基准；
+					// （2）若有净值，且业绩比较基准没值，  显示产品名称、持有资产、持有份额、            参考净值；
+					// （3）若业绩比较基准和净值均没有，  则显示产品名称、持有资产、持有份额；
+					// （4）若业绩比较基准和净值均有，    则显示产品名称、持有资产、持有份额、业绩比较基准、参考净值。
+
+					$.each(pefSaleList, function(i,el){
+						pefSaleList.pefSaleFlag1 = true;
+						pefSaleList.pefSaleFlag2 = true;
+						pefSaleList.pefSaleFlag3 = true;
+						
+						if(!$.util.objIsEmpty(el.investPerformanceComparison) && !$.util.objIsEmpty(el.netValue)){
+
+						}
+
+						if(!el.investPerformanceComparison){
+							if(el.netValue){
+
+							}
+
+						}
+
+						
+					})
+
+
+
 
 					that.setting.html = that.setting.list_template(jsonData);
 
@@ -663,6 +692,92 @@ var monthReportDetail = {
 	},
 	events: function(){  //绑定事件
 		var that = this;
+		mui("body").on('tap', '.consult' , function(){
+
+			that.getElements.productName = $(this).attr('productName');
+
+			// var obj = [{
+			// 	url: site_url.search_planner_url,
+			// 	data: {
+			// 		hmac:"",
+			// 		params:{
+			// 		   broker_account:"",//理财师工号
+			// 		   type:"0",//绑定类型    0：私募   1：公募
+			// 		   isCertificate:"", // 显示持证理财师,Y通过，N未通过
+			// 		}
+			// 	},
+			// 	needLogin: true, //需要判断登录情况
+			// 	needDataEmpty: false,//不需要判断data是否为空
+			// 	callbackDone: function(json){
+			// 		var result = json.data.advisor;
+			// 		if(result.length != 0 ){
+			// 			if(json.data.existMain == 1){   //有专属理财师
+			// 				var exclusive = result[0];//专属理财师
+	  //                       that.getElements.plannerName = exclusive.broker_name; 	//理财师姓名
+	  //                       that.getElements.plannerNum = exclusive.broker_account; //理财师工号
+
+			// 			}else if(json.data.existMain == 0){
+			// 				var exclusive = result[0];//服务理财师
+	  //                       that.getElements.plannerName = exclusive.broker_name; 	//理财师姓名
+	  //                       that.getElements.plannerNum = exclusive.broker_account; //理财师工号
+			// 			}
+
+			// 			var obj = {
+			// 				title: '提示', //大标题
+			// 				p: '<p class="elastic_p">非常感谢您选择恒天财富！我们将尽快安排专业人员与您联系，请保持手机畅通！</p>',
+			// 				celTxt : false,
+			// 				callback : function(){ //确定按钮的回调函数
+			// 					$('.elasticLayer').hide();
+			// 				},
+			// 				zIndex: 100, //z-index
+			// 			}
+
+			// 			$.elasticLayer(obj);//弹出层初始化
+
+			// 			var contentObj = [{
+			// 				url: site_url.reportContactNow_api,
+			// 				data: {
+			// 					hmac:"",
+			// 					params:{
+			// 						empNo: that.getElements.plannerNum,  //理顾工号
+			// 						empName: that.getElements.plannerName,  // 理顾姓名
+			// 						productName: that.getElements.productName,  // 产品名称
+			// 					}
+			// 				},
+			// 				needLogin: true, //需要判断登录情况
+			// 				needDataEmpty: false,//不需要判断data是否为空
+			// 				callbackDone: function(json){
+			// 					$(".contactNow").hide();
+			// 					$(".mask").hide();
+			// 					$(".btns .error-tip").html('');
+			// 					$('.btns .save').removeClass("btn_grey").attr('disabled',false);
+							
+			// 				},
+			// 				callbackFail: function(json){
+								
+			// 				},
+			// 			}]
+			// 			$.ajaxLoading(contentObj);
+			// 		}else{
+			// 			var now = new Date();
+			// 			var hh = now.getHours();
+						
+			// 			if(8 <= hh && hh <= 20){
+			// 				window.open(site_url.customerService_url);
+			// 			}else{
+			// 				$('.contactNow').show();
+			// 			}
+
+			// 			//$('.contactNow').show();
+			// 		}
+			// 	},
+			// 	callbackFail: function(json){
+					
+			// 	},
+			// }]
+			// $.ajaxLoading(obj);
+
+		})
 		
 
 	},

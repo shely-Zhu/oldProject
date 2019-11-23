@@ -52,6 +52,10 @@
 
 		</div>
 		<!-- 月末持仓总览、本月交易明细 end -->
+		<!-- 加载中loading -->
+        @@include('@pathCommonViews/loading/listLoading.html')
+        <!-- 暂无数据 -->
+        @@include('@pathCommonViews/noDataImg.html',{"tipText":"暂无数据"})
 		
 		<!-- 资产情况分析 start -->
 		<div class="assetAnalysis">
@@ -124,23 +128,29 @@
 									<span class="proNameBefore"></span>
 									<p class="proNameCon">{{fundName}}</p>
 								</div>
-								<div class="haveFundCon clearfix">
-									<div class="total fl">
-										<p>总资产(元)</p>
-										<span>{{totalAssets}}</span>
+								<div class="haveFundCon mui-row">
+									<div class="mui-col-xs-3">
+										<p>持有资产(元）</p>
+										<p>{{confirmValue}}</p>
 									</div>
-									<div class="interestRate fl">
-										<p>票面利率</p>
-										<span>1.022%</span>
-									</div>
-									<div class="term fl">
-										<p>产品期限</p>
-										<span>1.000</span>
-									</div>
-									<div class="date fl">
-										<p>成立日期</p>
-										<span>1.000</span>
-									</div>
+									{{#if pefSaleFlag1}}
+										<div class="mui-col-xs-3">
+											<p>持有份额</p>
+											<p>{{confirmShare}}</p>
+										</div>
+									{{/if}}
+									{{#if pefSaleFlag2}}
+										<div class="mui-col-xs-3">
+											<p>业绩比较基准</p>
+											<p>{{confirmDate}}</p>
+										</div>
+									{{/if}}
+									{{#if pefSaleFlag3}}
+										<div class="mui-col-xs-3">
+											<p>参考净值</p>
+											<p>{{netValue}}</p>
+										</div>
+									{{/if}}
 								</div>
 							</div>
 						{{/each}} 
@@ -155,16 +165,16 @@
 									<span class="proNameBefore"></span>
 									<p class="proNameCon">{{fundName}}</p>
 								</div>
-								<div class="haveFundCon clearfix">
-									<div class="total fl">
+								<div class="haveFundCon mui-row">
+									<div class="mui-col-xs-4">
 										<p>净值</p>
 										<span>{{netValue}}</span>
 									</div>
-									<div class="interestRate fl">
+									<div class="mui-col-xs-4">
 										<p>市值</p>
 										<span>{{marketValue}}</span>
 									</div>
-									<div class="term fl">
+									<div class="mui-col-xs-4">
 										<p>净值日期</p>
 										<span>{{netDate}}</span>
 									</div>
