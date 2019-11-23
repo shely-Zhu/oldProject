@@ -86,19 +86,18 @@ $(function() {
                 data: {
                     "pageNo": that.gV.pageCurrent, //非必须，默认为1
                     "pageSize": 10,//非必须，默认为10
-                    "projectId":12776,//项目编号
+                    "projectId":20354,//项目编号
                 },
                 //async: false,
                 needDataEmpty: true,
                 callbackDone: function(json) {
                     var data;
-                    if (json.status == "0000") { // 没有记录不展示
-                        data = json.data;
-                        // return false;
-                    }else if(json.status == "1000"){
+                    if (json.data.pageList.length == 0) { // 没有记录不展示
                         $(".list").hide()
                         that.$e.noData.show();
                         return false;
+                    } else if(json.status == "0000"&&json.data.pageList.length > 0){
+                        data = json.data.pageList;
                     }
                     setTimeout(function() {
 
@@ -125,7 +124,7 @@ $(function() {
 
                         // 页面++
                         that.gV.pageCurrent++;
-
+                        console.log(that.gV.pageCurrent)
                         // 将列表插入到页面上
                         generateTemplate(data, that.$e.recordList, that.$e.adjustmentTemp);
 
