@@ -81,7 +81,6 @@ module.exports = function() {
     this.prvLevel_api = http_url.web_url + '/pef/queryBenefitLevel'; //受益级别查询
     this.prvHisValue_api = http_url.web_url + '/pef/queryHistoryNetValue'; //历史净值查询
     this.prvLight_api = http_url.web_url + '/pef/queryProductImage'; //产品亮点查询
-    this.queryReourceLabels_api = http_url.web_url + "/pef/queryReourceLabels"; //获取私募产品材料标签
     this.prvReource_api = http_url.web_url + '/pef/queryReourceList'; //产品材料接口
     this.recommend_api = http_url.web_url + '/pef/frontend/findRecommand'; //私募首页--产品推荐
     this.collect_info_api = http_url.web_url + '/pef/getRaiseInfo'; //查询产品募集信息
@@ -90,7 +89,7 @@ module.exports = function() {
 
     /*-------------------公募相关------------------------------*/
     this.query_api = http_url.web_url + '/pof/frontend/fund/query'; //热门诊断基金列表搜索
-    this.pofTotalAssets_api = http_url.web_url + '/pof/totalAssets';// 公募总资产
+    this.pofTotalAssets_api = http_url.web_url + '/account/pof/totalAssets';// 公募总资产
 
     /*-------------------公募相关 end ------------------------------*/
 
