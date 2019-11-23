@@ -28,8 +28,6 @@ var tipAction = require('@pathCommonJsCom/tipAction.js');
 // var generateTemplate = require('@pathCommonJsComBus/generateTemplate.js');
 var transcationTem = require('../common/transcationTem.js');
 
-
-
 $(function() {
     var data = {
         getElements: {
@@ -67,11 +65,9 @@ $(function() {
             //事件监听
             that.events();
         },
-
         //初始化mui的上拉加载
         initMui: function() {
             var that = this;
-
             var height = windowHeight - $(".topTitle").height();
             if (!$('.list').hasClass('setHeight')) {
                 $('.list').height(height).addClass('setHeight');
