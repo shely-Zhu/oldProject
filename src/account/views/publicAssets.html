@@ -83,7 +83,7 @@
         <div class="hold_item">
             <div class="divider"></div>
             {{#if_than_0 inTransitNum}}
-                <div class="be_confirmed_tag fr">{{noToChinese inTransitNum}}笔待确认交易</div>
+                <div class="be_confirmed_tag fr">{{inTransitNum}}笔待确认交易</div>
             {{/if_than_0}}
             <div class="title">
                 <div class="divider_tag"></div>
@@ -94,7 +94,7 @@
                 {{#if_than_0 onwayAssetTotal}}
                     <div class="content_header">
                         <span class="text_gray">待确认金额   </span>
-                        <span class="text_balck">{{onwayAssetTotal}}元</span>
+                        <span class="text_balck">{{onwayAssetTotal}}元</span> 
                     </div>
                 {{/if_than_0}}
                 <div class="content_bottom">
@@ -115,7 +115,8 @@
                     <!-- todo 需要判断字段来是否显示 -->
                     <div class="buy_btn fr">买入</div>
                     <div class="redeem_btn fr">赎回</div>
-                    <div class="closed"></div>
+                    <!-- 封闭期盖章 本期去掉了 -->
+                    <!-- <div class="closed"></div> -->
                 </div>
             </div>
             
