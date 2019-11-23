@@ -20,3 +20,99 @@
 @import url("@pathCommonLess/components/elasticLayerTypeTwo.less");
 
 @import url("@pathCommonLessCom/headBarConfig.less");
+
+.container{
+    width: 100%;
+    height:100%;
+    background-color: @F7FAFD;
+    padding-bottom: 1rem;
+    .br{
+        border-top:1px solid @e0e0e0;
+        position: fixed;
+        top: 1.28rem;
+        left: 0;
+        right: 0;
+        z-index: 20;
+    }
+    .title{
+        height:1.05rem;
+        font-size:.32rem;
+        font-weight:500;
+        color:@16182A;
+        line-height:1.05rem;
+        background: @c005;
+        padding-left: .3rem;
+        margin-bottom: .3rem;
+    }
+    .money{
+        background: @c005;
+        padding: 0 .3rem .26rem;
+        .mfirst{
+            display: flex;
+            justify-content: space-between;
+            .mfirst-one{
+                height:.45rem;
+                font-size:.32rem;
+                font-weight:400;
+                color:@272727;
+                line-height:.45rem;
+                margin-top: .28rem;
+                margin-bottom: .43rem;
+            }
+            .mfirst-two{
+                height:.28rem;
+                font-size:.28rem;
+                font-weight:400;
+                color:@9B9B9B;
+                line-height:.28rem;
+                margin-top: .37rem;
+                span{
+                    position: relative;
+                    left: .2rem;
+                }
+                .iconone{
+                    color: @9B9B9B;
+                    position: relative;
+                    top:.02rem;
+                }
+            }
+        }
+        .msecond{
+            display: flex;
+            justify-content: space-between;
+            border-bottom: 1px solid @E7E9ED;
+            .msecond-one{
+                height:.8rem;
+                font-size:.6rem;
+                font-weight:bold;
+                color:@272727;
+                line-height:.8rem;
+            }
+            img{
+                width: .36rem;
+                height: .36rem;
+                opacity: .5;
+                margin-top: .14rem;
+            }
+        }
+        .pay{
+            height:.4rem;
+            font-size:.28rem;
+            font-weight:400;
+            color:@9B9B9B;
+            line-height:.4rem;
+            margin-top: .2rem;
+        }
+    }
+    .online{
+        display: flex;
+        justify-content: space-between;
+        .onleft{
+            height:.45rem;
+            font-size:.32rem;
+            font-weight:400;
+            color:@272727;
+            line-height:.45rem;
+        }
+    }
+}
