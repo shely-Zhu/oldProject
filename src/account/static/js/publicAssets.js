@@ -11,6 +11,7 @@ require('../../../include/js/vendor/zepto/deferred.js');
 require('../../../common/js/components/utils.js');
 require('../../../common/js/ajaxLoading.js');
 require('@pathCommonJs/components/headBarConfig.js');
+var tipAction = require('@pathCommonJs/components/tipAction.js');
 
 $(function () {
 
@@ -23,6 +24,41 @@ $(function () {
         init: function () {
             var that = this;
             that.getData();
+            that.getBankList();
+        },
+        getBankList: function () {
+            //查询银行卡列表
+            var that = this;
+            var param = {
+                useEnv: 0
+            };
+
+            //发送ajax请求
+            var obj = [{
+                url: site_url.normalPofList_api,
+                data: param,
+                needLogin: true,//需要判断是否登陆
+                //needDataEmpty: false,//不需要判断data是否为空
+                callbackDone: function (json) {  //成功后执行的函数
+
+                    if (json.data.pageList.length) {
+                        //获取银行卡后四位
+                        Handlebars.registerHelper("get_last_4_value", function (value, options) {
+                            console.log(value.substring(value.length - 4));
+                            return value.substring(value.length - 4)[1];
+                        });
+                        var tplm = $("#bankLists").html();
+                        var template = Handlebars.compile(tplm);
+                        var html = template(json.data.pageList);
+                        $("#bank_list_area").html(html);
+                    }
+                },
+                callbackFail: function (json) {  //失败后执行的函数
+                    tipAction(json.msg);
+                }
+            }];
+            $.ajaxLoading(obj);
+
         },
         getData: function (t) {
             var that = this;

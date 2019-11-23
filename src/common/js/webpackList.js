@@ -275,6 +275,8 @@ module.exports = {
 
     //私募资产详情
     './account/static/js/private/privateDetail': './src/account/static/js/private/privateDetail.js',
+    //公募资产详情
+    './account/static/js/public/publicDetail': './src/account/static/js/public/publicDetail.js',
 
     //自选公募-交易记录
     // './account/static/js/public/transactionRecord': './src/account/static/js/public/transactionRecord.js',
@@ -297,4 +299,6 @@ module.exports = {
      './account/static/js/public/cashTreasure':   './src/account/static/js/public/cashTreasure.js',
     // 基金确认书
      './account/static/js/private/privateFundPdf':   './src/account/static/js/private/privateFundPdf.js',
+    // 公募交易明细
+     './account/static/js/publicTradeDetail/publicTradeDetail':   './src/account/static/js/publicTradeDetail/publicTradeDetail.js',
 }

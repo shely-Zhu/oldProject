@@ -1,0 +1,131 @@
+<!-- 
+	公募产品详情页
+	@author shiyunrui 20191123
+-->
+<!doctype html>
+<html lang="en">
+
+<head>
+    @@include('@pathInclude/views/meta.html')
+    <link rel="stylesheet" href="/account/static/css/public/publicDetail.css">
+    <title></title>
+</head>
+
+<body>
+	<!-- @@include('@pathCommonViews/load.html')  -->
+	<div class="publicDetail">
+		<div class="topContent"> 
+	 		@@include('@pathCommonViews/headBarConfig.html',{"bgColors":"#595E6F, #1C2135","showType":"1"})
+			 <div class="day_gain">日涨幅</div>
+			 <div class="day_gain_value">+0.01%</div>
+			 <div class="new_worth">最新净值(11-01)</div>
+			 <div class="new_worth_value">1.2213</div>
+			 <div class="type_1">稳健型</div>
+			 <div class="type_2">指数型</div>
+	 	</div>
+
+	 	<div class="midContent">	
+	 		<div class="actionWrap">
+	 			<div class="mui-row single">
+	 				<div class="mui-col-sm-11 mui-col-xs-11">
+		 		    	<img class="img" src="">
+		 		        <span class="txt"></span>
+		 		    </div>
+		 		    <div class="mui-col-sm-1 mui-col-xs-1">
+		 		    	<div class="arrow">
+		 					<span class="img"></span>
+		 				</div>
+		 		    </div>
+	 			</div>
+	 			<div class="mui-row double">
+	 				<div class="mui-col-sm-6 mui-col-xs-6">
+		 		    	<img class="img" src="">
+		 		        <span class="txt"></span>
+		 		    </div>
+		 		    <div class="mui-col-sm-6 mui-col-xs-6">
+		 		       	<img class="img" src="">
+		 		        <span class="txt"></span>
+		 		    </div>
+	 			</div>
+	 			<div class="treble mui-row">
+	 				<div class="actionCon">
+		 		    	<img class="img" src="/account/static/img/productDetail/type_1_left.png">
+	 					<div class="txt">交易明细</div>
+		 		    </div>
+		 		    <div class="lineVertical"></div>
+		 		    <div class="actionCon">
+		 		    	<img class="img" src="/account/static/img/productDetail/account_icon_jymx@2x.png">
+	 					<div class="txt">收益分配明细</div>
+		 		    </div>
+		 		    <div class="lineVertical"></div>
+		 		    <div class="actionCon">
+		 		    	<img class="img" src="/account/static/img/productDetail/type_1_right.png">
+	 					<div class="txt">基金确认书</div>
+		 		    </div>
+	 			</div>
+	 		</div>
+	 		<div class="lineWrap">
+				<div class='tab'>
+						<span class="oneMonth active">月</span>
+						<span class="threeMonth">季</span>
+						<span class="newYear">半年</span>
+						<span class="sinceNow">一年</span>
+						<span class="oneMonth">成立以来</span>
+					</div>
+	 		</div>
+	 		<div class="dealReg">
+	 			<div class="dealMid">
+	 				<div class="titleWrap">交易规则
+	 					<div class="arrow">
+		 					<span class="img"></span>
+		 				</div></div>
+		 			<div class="dealRegMid">
+		 				<div class="nav" id="redeemNav">
+		 					<span class="navSpan quick active" type="1">快速赎回</span>
+		 					<span class="navSpan normal" type="2">普通赎回</span>
+		 				</div>
+		 				<div class="line">
+		 					<div class="clearfix line_title">
+			 					<span class="top_l">赎回申请</span>
+			 					<span class="top_r">付款</span>
+			 				</div>
+		 					<img class="lineDiv" src="/account/static/img/productDetail/regLine.png">
+		 					<div class="clearfix line_bottom">
+			 					<span class="bottom_l" id="tradeDatePre">--</span>
+			 					<span class="bottom_r" id="tradeDateNext">--</span>
+			 				</div>
+		 				</div>
+		 				<ul class="detail">
+		 					<li id="tradeExplain"></li>
+		 					<li id="tradeFee"></li>
+		 				</ul>
+		 			</div>
+		 		</div>
+		 		<div class="dealBottom">
+	 				<div class="titleWrap">产品档案
+	 					<div class="arrow">
+	 						<span class="img"></span>
+	 					</div>
+	 				</div>
+	 				<div class="titleWrap">信息披露
+	 					<div class="arrow">
+	 						<span class="img"></span>
+	 					</div>
+	 				</div>
+	 			</div>
+ 			</div>
+ 			<div class="footer">
+ 				<div class="redeemBtn">赎回</div>
+ 				<div class="subscribeBtn">申购</div>
+ 			</div>
+	 	</div>
+	</div>
+
+	@@include('@pathInclude/views/footer.html')
+	@@include('@pathInclude/views/header.html')
+	<script src="/include/js/vendor/echarts/echarts.min.js"></script>
+	<script src="/account/static/js/public/publicDetail.js"></script>
+
+</body>
+
+</html>

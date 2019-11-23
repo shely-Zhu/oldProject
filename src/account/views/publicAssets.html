@@ -46,14 +46,7 @@
                 <div class="bank_screen_name fl">全部</div>
                 <span class="iconfont fr">&#xe626;</span>
             </div>
-            <div class="bank_screen">
-                <div class="bank_screen_name fl">华夏银行 - 0622</div>
-                <span class="iconfont fr hide">&#xe626;</span>
-            </div>
-            <div class="bank_screen">
-                <div class="bank_screen_name fl">中国招商银行 - 3568</div>
-                <span class="iconfont fr hide">&#xe626;</span>
-            </div>
+            <div id="bank_list_area"></div>
         </div>
         <div class="list" id="pageLists"></div>
         <footer class="hide">
@@ -122,6 +115,17 @@
             
         </div>
 		{{/each}}
+    </script>
+
+    <!-- 银行卡列表 -->
+    <script id="bankLists" type="text/x-handlebars-template">
+        {{! 左侧页面列表}}
+		{{#each this}}
+        <div class="bank_screen">
+            <div class="bank_screen_name fl" bankAccount='{{bankAccount}}'>{{bankName}} - {{get_last_4_value bankAccountMask}}</div>
+            <span class="iconfont fr hide">&#xe626;</span>
+        </div>
+        {{/each}}
     </script>
     
     <!-- 添加埋点 -->
