@@ -28,7 +28,7 @@ $(function(){
         gV: { // 全局变量
             groupCode: splitUrl['groupCode'], // 组合编号，从我的持仓进
             startPage: 1, //当前页码，默认为1
-            pageSize: 3,//一页最大返回list个数
+            pageSize: 10,//一页最大返回list个数
             listLength: 0,
             actName:$('.activitySearchInput input').val(), //活动名称
             actProvinceNO:$('#locationCity').attr('data-parentid'), //活动省份编号
@@ -42,7 +42,7 @@ $(function(){
                 'margin-top':'.3rem'
             });
             that.getCity();
-            that.events();  
+            that.events(); 
             
         },
         //初始化mui的上拉加载
@@ -90,7 +90,7 @@ $(function(){
                 data: {
                     code:$('.mui-input-clear').val(),   
                     cityName:$('#locationCity').html(),
-                    "pageNo": that.gV.startPage, //非必须，默认为1
+                    "pageNum": that.gV.startPage, //非必须，默认为1
                     "pageSize":that.gV.pageSize//非必须，默认为10
                 },
                 //async: false,
@@ -103,7 +103,8 @@ $(function(){
                         t.endPullupToRefresh(true);
                         that.$e.activityListDataBox.hide();
                         that.$e.activityListDataNoBox.show();
-                        that.getNoData();
+                        //that.getNoData();
+                        that.getRecommend(data)
                         return false;
                     }
                     that.$e.activityListDataBox.show();
@@ -135,6 +136,31 @@ $(function(){
             }];
             $.ajaxLoading(obj);
         },
+        //推荐列表
+        getRecommend:function(data){
+            var that = this;
+            var topHeitgh=$('#activitySearch').height();
+            var noBox=$('.activityNoListBox').height();
+            var noListM=parseInt(that.getStyle($('.activityNoList')[0],'marginTop'));
+
+            console.log(noListM);
+            var height = windowHeight-topHeitgh-noBox-noListM;
+             //隐藏当前的加载中loading
+             if (!$('.activityList').hasClass('hasPullUp')) {
+                $('.activityList').find('.mui-pull-bottom-pocket').addClass('mui-hidden');
+            }
+            //为$id添加hasPullUp  class
+            $('.activityList').addClass('hasPullUp');
+            setTimeout(function() {
+                //去掉mui-pull-bottom-pocket的mui-hidden
+                $('.contentWrapper').find('.mui-pull-bottom-pocket').removeClass('mui-hidden');
+                // 将列表插入到页面上
+                generateTemplate(data,$('.activityNoListBox2'),$('#starFinancialPlannerList-template'))
+                // 第一个调仓记录默认展开
+                $('.recordList').find('ul').eq(0).find('.mui-collapse').addClass('mui-active');
+            }, 200)
+            
+        },
         //无数据获取列表
         getNoData:function(data){
             var that = this;
@@ -149,8 +175,10 @@ $(function(){
                 url: site_url.queryFinancialer_api,
                 // url:'http://172.16.187.164:8081/web/marketing/activity/getActivitiesList',
                 data: {
-                    code:'',    
-                    cityName:'' 
+                    code:$('.mui-input-clear').val(),   
+                    cityName:$('#locationCity').html(),
+                    "pageNum": that.gV.startPage, //非必须，默认为1
+                    "pageSize":that.gV.pageSize//非必须，默认为10
                 },
                 //async: false,
                 needDataEmpty: true,
