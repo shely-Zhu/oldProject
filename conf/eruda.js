@@ -8,13 +8,13 @@
  * @author yangjinlai 2018-09-06
  */
 
-(function () { 
-    if( window.env != 4 && window.location.href.indexOf('eruda=true') != -1){
-        //非生产环境且url上eruda参数为true
-        var script = document.createElement('script'); 
-        script.src="//cdn.jsdelivr.net/npm/eruda"; 
-        document.body.appendChild(script); 
-        script.onload = function () { eruda.init() } 
-    }
-})();
+// (function () { 
+//     if( window.env != 4 && window.location.href.indexOf('eruda=true') != -1){
+//         //非生产环境且url上eruda参数为true
+//         var script = document.createElement('script'); 
+//         script.src="//cdn.jsdelivr.net/npm/eruda"; 
+//         document.body.appendChild(script); 
+//         script.onload = function () { eruda.init() } 
+//     }
+// })();
 

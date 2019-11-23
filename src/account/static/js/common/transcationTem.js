@@ -9,23 +9,33 @@
 
 var generateTemplate = require('@pathCommonJsComBus/generateTemplate.js');
 var splitUrl = require('@pathCommonJs/components/splitUrl.js')();
-var isConfirm = splitUrl['isConfirm'];
+var isConfirm = splitUrl['type'];
 module.exports = function(data, $ele, $id) {
     var $ele = $ele || $('.contentWrap'),
         $id = $id || $('#trans-template');
-    // 是否确认交易isConfirm 1-确认 0-未确认
-    var isConfirmTrans = isConfirm == 1 ? 1 : 0;
-    var notConfirmTrans = isConfirm == 0 ? 1 : 0;
-    // 申购
-    var businessType1 = data.businessType == 1 ? 1 : 0;
-    console.log(isConfirm)
-        // if (!$.util.objIsEmpty(data.list) && !$.util.objIsEmpty(data.title)) {
-        //     // 根据title数量，设置列的宽度
-        //     data['colName'] = 'mui-col-xs-' + (12 / data.title.length);
-        //     // 有表头，有表格列表
+    for (var i = 0; i < data.length; i++) {
+        // 是否确认交易isConfirm 1-确认 0-未确认
+        data[i].isConfirmTrans = isConfirm == 'confirmed' ? 1 : 0; //已确认
+        data[i].notConfirmTrans = isConfirm == 'toBeConfirmed' ? 1 : 0; //未确认
+        // 申购
+        data[i].businessType1 = data[i].businessType == 1 ? 1 : 0;
+        //待确认的预约
+        data[i].appointmentSigned = data[i].reserveSubStatus == 5 ? 1 : 0; //已签约
+        data[i].appointmentSuccess = data[i].reserveSubStatus == 6 ? 1 : 0; //合同审核成功
+        data[i].appointmentFailed = data[i].reserveSubStatus == 7 ? 1 : 0; //合同审核失败
+        data[i].appointmentFinished = data[i].reserveSubStatus == 6 || 7 ? 1 : 0; //合同成功和失败不展示左上角文字
+        //赎回
+        data[i].businessType2 = data[i].businessType == 2 ? 1 : 0;
+        data[i].redemptionRejected = data[i].redeemStatus == 4 || 5 ? 1 : 0; //已确认审核驳回状态
+        data[i].redemptionAuditSuccess = data[i].redeemStatus == 3 ? 1 : 0; //待确认审核通过状态
+        data[i].redemptionSuccess = data[i].redeemStatus == 7 ? 1 : 0; //待确认审核通过状态
+        //分红
+        data[i].businessType3 = data[i].businessType == 3 ? 1 : 0;
+        //预约
+        data[i].businessType45 = data[i].businessType == (4 || 5) ? 1 : 0;
+
+
+    }
+    //模板渲染页面
     generateTemplate(data, $ele, $id);
-    // } else {
-    //     // 没有数据，隐藏dom
-    //     $('.holdingDetail').hide();
-    // }
 };

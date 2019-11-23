@@ -30,7 +30,6 @@ $(function() {
         init: function() {
             var that = this;
             that.initMui();
-            //that.getData()
             // that.events();
         },
         //初始化mui的上拉加载
@@ -89,7 +88,7 @@ $(function() {
                 data: { 
                     "pageNo": that.gV.pageCurrent, //非必须，默认为1
                     "pageSize": "10",//非必须，默认为10
-                    "projectId": "12776",//项目id
+                    "projectId": "20767",//项目id
                 },
                 //async: false,
                 needDataEmpty: true,
@@ -99,7 +98,7 @@ $(function() {
                         $(".list").hide()
                         that.$e.noData.show();
                         return false;
-                    } else {
+                    } else if(json.status == "0000"&&json.data.pageList.length > 0){
                         data = json.data.pageList;
                     }
                     setTimeout(function() {
@@ -111,9 +110,9 @@ $(function() {
                                     // 暂无数据显示
                                     that.$e.noData.show();
                                     return false;
-
                                 } else { // 没有更多数据了
-                                    t.endPullupToRefresh(true);
+                                    t.endPullupToRefresh(false);
+                                    $(".nodata").show()
                                 }
                             } else {
                                 //其他页-没有更多数据
@@ -123,8 +122,6 @@ $(function() {
                             console.log(999)
                             t.endPullupToRefresh(false);
                         }
-
-
                         var len = json.data.pageList;
                         for(var i =0;i<len.length;i++){
                             if(len[i].redemptionType == 0){
@@ -135,7 +132,7 @@ $(function() {
                         }
                         for(var i =0;i<len.length;i++){
                             if(len[i].tradeType == "0"){
-                                len[i].tradeType = "认购"
+                                len[i].tradeType = "赎回"
                             }else if(len[i].tradeType == "1"){                               
                                 len[i].tradeType = "申购"
                             }else if(len[i].tradeType == "2"){
@@ -147,7 +144,7 @@ $(function() {
                         console.log(that.gV.pageCurrent)
                         if(that.gV.pageCurrent == 1){
                             for(var i =0;i<len.length;i++){
-                                if(len[i].tradeType == "认购"){
+                                if(len[i].tradeType == "赎回"){
                                     $(".photoleft").eq(i).addClass("test")
                                 }else if(len[i].tradeType == "申购"){                               
                                     $(".photoleft").eq(i).addClass("testone")
@@ -158,7 +155,7 @@ $(function() {
                             }
                         }else{
                             for(var i =0;i<len.length;i++){
-                                if(len[i].tradeType == "认购"){
+                                if(len[i].tradeType == "赎回"){
                                     $(".photoleft").eq(i+15*that.gV.pageCurrent-15).addClass("test")
                                 }else if(len[i].tradeType == "申购"){                               
                                     $(".photoleft").eq(i+15*that.gV.pageCurrent-15).addClass("testone")

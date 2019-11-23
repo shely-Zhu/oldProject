@@ -30,7 +30,6 @@ var transcationTem = require('../common/transcationTem.js');
 
 
 
-
 $(function() {
     var data = {
         getElements: {
@@ -47,7 +46,7 @@ $(function() {
             list_template: '', //列表的模板，生成后存放在这里
             listToTop: '', // 滑动区域距离顶部距离
             navToTop: '', // 滑动nav距离顶部距离
-            isConfirm: splitUrl['isConfirm'], //是否确认
+            type: splitUrl['type'], //是否确认
             businessType: $('.hopperCon li.active').attr('data'),
         },
         html: '', //存放生成的html
@@ -56,12 +55,18 @@ $(function() {
             var that = this;
             //初始化第一屏区域的上拉加载
             that.initMui();
-
+            // 如果是已确认交易展示筛选漏斗
+            if (that.gV.type == 'confirmed') {
+                $('.hopper').show();
+                $('#HeadBarpathName').attr("data", '已完成交易').html('已完成交易');
+            } else if (that.gV.type == 'toBeConfirmed') {
+                $('.hopper').hide();
+                $('#HeadBarpathName').attr("data", '待确认交易').html('待确认交易');
+            }
 
             //事件监听
             that.events();
         },
-
 
         //初始化mui的上拉加载
         initMui: function() {
@@ -129,7 +134,7 @@ $(function() {
                 needDataEmpty: true,
                 callbackDone: function(json) {
                     var data;
-                    if (json.data.length == 0) { // 没有记录不展示
+                    if (json.data.tradeList.length == 0) { // 没有记录不展示
                         $(".list").hide()
                         that.getElements.noData.show();
                         return false;
@@ -140,7 +145,6 @@ $(function() {
                         if (data.length < that.gV.aP.pageSize) {
 
                             if (that.gV.aP.pageNo == 1) { //第一页时
-
                                 if (data.length == 0) {
                                     // 暂无数据显示
                                     that.getElements.noData.show();
@@ -180,6 +184,8 @@ $(function() {
                 $('.mask').hide();
                 $('.hopperCon').hide();
                 that.gV.businessType = $(this).attr('data');
+                // $('.contentWrap').html('');
+                that.gV.aP.pageNo = 1;
                 that.getData();
             })
         }

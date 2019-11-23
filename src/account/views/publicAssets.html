@@ -20,19 +20,19 @@
                 <div class="sum fl"><span class="j_text">自选总资产(元)</span><span class="j_icon"></span></div>
                 <div class="assetsBtn fr">资产组成说明</div>
             </div>
-            <div class="totalM">0</div>
+            <div class="totalM">--</div>
             <div class="be_confirmed_amount">
                 <div class="title fl">待确认金额(元)</div>
-                <div class="value fl">0</div>
+                <div class="value fl">--</div>
             </div>
             <div>
                 <div class="first_h_profit_box fl">
                     <div class="h_profit">昨日总收益(元)</div>
-                    <div class="h_profit_value">0</div>
+                    <div class="h_profit_value">--</div>
                 </div>
                 <div class="second_h_profit_box fl">
                     <p class="h_profit">持有总收益(元)</p>
-                    <p class="h_profit_value">0</p>
+                    <p class="h_profit_value">--</p>
                 </div>
             </div>
         </div>
@@ -71,7 +71,7 @@
         <!-- 加载中loading -->
         @@include('@pathCommonViews/loading/listLoading.html')
         <!-- 暂无数据 -->
-        @@include('@pathCommonViews/noData.html',{"tipText":"暂无数据"})
+        @@include('@pathCommonViews/noDataImg.html',{"tipText":"暂无数据"})
 
 
     </section>
@@ -121,12 +121,10 @@
             
         </div>
 		{{/each}}
-	</script>
-
-
-    @@include('@pathInclude/views/footer.html')
-
+    </script>
+    
     <!-- 添加埋点 -->
+    @@include('@pathInclude/views/footer.html')
     @@include('@pathInclude/views/header.html')
 
     <script src="/account/static/js/publicAssets.js"></script>

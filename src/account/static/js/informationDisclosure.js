@@ -24,10 +24,9 @@ $(function() {
 		//页面初始化函数
 		init: function() {
 			//启用事件处理
-			console.log("dsa")
-			
-			this.events()
-			this.initMui()
+			this.getData();
+			this.events();
+			this.initMui();
 		},
 		//初始化mui的上拉加载
 		initMui: function() {
@@ -81,7 +80,18 @@ $(function() {
 		//获取数据函数
 		getData: function(t) {
 			var that = this
-//			$.ajaxLoading(obj);
+			var obj = [{
+				url: site_url.queryReourceLabels_api,
+				// url: site_url.queryReourceList_api,
+				data: {"projectId":21072},
+				// data:{"projectId":21072,"fileType":"1"},
+				//async: false,
+                needDataEmpty: true,
+                callbackDone: function(json) {
+					console.log(json)
+				}
+			}]
+			$.ajaxLoading(obj);
 		},
 		//注册事件
 		events: function() {
