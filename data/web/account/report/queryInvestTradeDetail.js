@@ -82,7 +82,7 @@ var data=Mock.mock({
 	// 	]
 
 	// }
-	data:''
+	data:{}
 });
 
 module.exports=data;

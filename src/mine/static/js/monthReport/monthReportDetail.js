@@ -34,7 +34,6 @@ var monthReportDetail = {
 		],
 		current_index: 0,  //左右滑动区域的索引
 		list_template: '',  //列表的模板，生成后存放在这里
-		ajaxArr: [site_url.queryInvestProdHoldShareList_api, site_url.queryInvestTradeDetail_api],  //存放每一个ajax请求的传参数据
 	},
 	html: '',  //存放生成的html
 	pieChartData:'', // 画图的title
@@ -185,65 +184,75 @@ var monthReportDetail = {
 			async: false,
 			callbackDone: function(json) {
 				var jsonData = json.data;
+				if(!$.util.objIsEmpty(jsonData)){
 
-				var pefSaleList = jsonData.pefSaleList;
-				jsonData.holdPosition = true;
+					var pefSaleList = jsonData.pefSaleList;
+					jsonData.holdPosition = true;
 
-				if(!$.util.objIsEmpty(pefSaleList)){
-					jsonData.flag1 = true;  // 展示月末持仓私募基金的标识
-					jsonData.flag2 = false;  // 展示月末持仓公募基金的标识
-					jsonData.flag3 = false;  // 展示月末持仓其他基金的标识
+					if(!$.util.objIsEmpty(pefSaleList)){
+						jsonData.flag1 = true;  // 展示月末持仓私募基金的标识
+						jsonData.flag2 = false;  // 展示月末持仓公募基金的标识
+						jsonData.flag3 = false;  // 展示月末持仓其他基金的标识
 
-					// 私募数据展示的规则
-					// 看业绩比较基准和净值哪个有值：
-					// （1）若业绩比较基准有值，且没有净值，显示产品名称、持有资产、        业绩比较基准；
-					// （2）若有净值，且业绩比较基准没值，  显示产品名称、持有资产、持有份额、            参考净值；
-					// （3）若业绩比较基准和净值均没有，  则显示产品名称、持有资产、持有份额；
-					// （4）若业绩比较基准和净值均有，    则显示产品名称、持有资产、持有份额、业绩比较基准、参考净值。
+						// 私募数据展示的规则
+						// 看业绩比较基准和净值哪个有值：
+						// （1）若业绩比较基准有值，且没有净值，显示产品名称、持有资产、        业绩比较基准；
+						// （2）若有净值，且业绩比较基准没值，  显示产品名称、持有资产、持有份额、            参考净值；
+						// （3）若业绩比较基准和净值均没有，  则显示产品名称、持有资产、持有份额；
+						// （4）若业绩比较基准和净值均有，    则显示产品名称、持有资产、持有份额、业绩比较基准、参考净值。
 
-					$.each(pefSaleList, function(i,el){
-						pefSaleList.pefSaleFlag1 = true;
-						pefSaleList.pefSaleFlag2 = true;
-						pefSaleList.pefSaleFlag3 = true;
-						
-						if(!$.util.objIsEmpty(el.investPerformanceComparison) && !$.util.objIsEmpty(el.netValue)){
+						$.each(pefSaleList, function(i,el){
+							pefSaleList[i].pefSaleFlag1 = true;
+							pefSaleList[i].pefSaleFlag2 = true;
+							pefSaleList[i].pefSaleFlag3 = true;
 
-						}
+							if(!!el.investPerformanceComparison){  // 业绩比较基准有值时
+								if(!el.netValue){  // 净值没有数据时
+									pefSaleList[i].pefSaleFlag1 = false;
+									pefSaleList[i].pefSaleFlag3 = false;
+								}
 
-						if(!el.investPerformanceComparison){
-							if(el.netValue){
-
+							}else{   // 业绩比较基准没有值时
+								if(!el.netValue){  // 净值没有数据时
+									pefSaleList[i].pefSaleFlag2 = false;
+									pefSaleList[i].pefSaleFlag3 = false;
+								}
+								else{   // 净值有数据时
+									pefSaleList[i].pefSaleFlag2 = false;
+								}
 							}
 
-						}
+						})
 
-						
-					})
+						that.setting.html = that.setting.list_template(jsonData);
 
+						$id.find('.contentWrapper .mui-table-view-cell').html(that.setting.html);
+					}
+					if(!$.util.objIsEmpty(jsonData.pofList)){
+						jsonData.flag2 = true;
+						jsonData.flag1 = false;
+						jsonData.flag3 = false;
+						that.setting.html = that.setting.list_template(jsonData);
 
+						$id.find('.contentWrapper .mui-table-view-cell').append(that.setting.html);
+					}
+					if(!$.util.objIsEmpty(jsonData.generalModelList)){
+						jsonData.flag3 = true;
+						jsonData.flag1 = false;
+						jsonData.flag2 = false;
+						that.setting.html = that.setting.list_template(jsonData);
 
+						$id.find('.contentWrapper .mui-table-view-cell').append(that.setting.html);
+					}
+				}else{
+					//没有数据
+					$id.find('.mui-scroll .list').html(that.getElements.noData.clone(false)).addClass('noCon');
+					$id.find('.noData').show();
 
-					that.setting.html = that.setting.list_template(jsonData);
-
-					$id.find('.contentWrapper .mui-table-view-cell').html(that.setting.html);
+					setTimeout(function() {
+						that.getElements.listLoading.hide();
+					}, 100);
 				}
-				if(!$.util.objIsEmpty(jsonData.pofList)){
-					jsonData.flag2 = true;
-					jsonData.flag1 = false;
-					jsonData.flag3 = false;
-					that.setting.html = that.setting.list_template(jsonData);
-
-					$id.find('.contentWrapper .mui-table-view-cell').append(that.setting.html);
-				}
-				if(!$.util.objIsEmpty(jsonData.generalModelList)){
-					jsonData.generalModelList.flag3 = true;
-					jsonData.flag1 = false;
-					jsonData.flag2 = false;
-					that.setting.html = that.setting.list_template(jsonData.generalModelList);
-
-					$id.find('.contentWrapper .mui-table-view-cell').append(that.setting.html);
-				}
-
 				that.getElements.listLoading.hide();
 				$id.addClass('hasPullUp');
 
@@ -287,21 +296,32 @@ var monthReportDetail = {
 			async: false, 
 			callbackDone: function(json){
 				var jsonData = json.data;
-				jsonData.tradeDtail = true;
+				if(!$.util.objIsEmpty(jsonData)){
+					jsonData.tradeDtail = true;
 
-				if(!$.util.objIsEmpty(jsonData.pefSaleInfoList)){
-					jsonData.flag1 = true;
-					jsonData.flag2 = false;
-					that.setting.html = that.setting.list_template(jsonData);
+					if(!$.util.objIsEmpty(jsonData.pefSaleInfoList)){
+						jsonData.flag1 = true;
+						jsonData.flag2 = false;
+						that.setting.html = that.setting.list_template(jsonData);
 
-					$id.find('.contentWrapper .mui-table-view-cell').html(that.setting.html);
+						$id.find('.contentWrapper .mui-table-view-cell').html(that.setting.html);
+					}
+					if(!$.util.objIsEmpty(jsonData.pofInfoList)){
+						jsonData.flag2 = true;
+						jsonData.flag1 = false;
+						that.setting.html = that.setting.list_template(jsonData);
+
+						$id.find('.contentWrapper .mui-table-view-cell').append(that.setting.html);
+					}
 				}
-				if(!$.util.objIsEmpty(jsonData.pofInfoList)){
-					jsonData.flag2 = true;
-					jsonData.flag1 = false;
-					that.setting.html = that.setting.list_template(jsonData);
+				else{
+					//没有数据
+					$id.find('.mui-scroll .list').html(that.getElements.noData.clone(false)).addClass('noCon');
+					$id.find('.noData').show();
 
-					$id.find('.contentWrapper .mui-table-view-cell').append(that.setting.html);
+					setTimeout(function() {
+						that.getElements.listLoading.hide();
+					}, 100);
 				}
 
 				that.getElements.listLoading.hide();
@@ -327,10 +347,10 @@ var monthReportDetail = {
 			callbackNoData: function(json){
  
 				//没有数据
-				$id.find('.mui-scroll .list').html(that.getElements.noData.clone(false)).addClass('noCon');	
+				$id.find('.mui-scroll .list').html(that.getElements.noData.clone(false)).addClass('noCon');
 				$id.find('.noData').show();
 
-				setTimeout(function(){
+				setTimeout(function() {
 					that.getElements.listLoading.hide();
 				}, 100);
 			}
@@ -411,7 +431,7 @@ var monthReportDetail = {
 					that.bingtu(0);
 
 				}
-
+				// 资产情况分析
 				if(!$.util.objIsEmpty(data)){
 					var result = data.monthHoldShareList;
 
@@ -503,8 +523,8 @@ var monthReportDetail = {
 							el.colorStop = '#EDA377';
 						}
 						else if(el.assetType == '200'){
-							el.colorStart = '#AA6545';
-							el.colorStop = '#EDA377';
+							el.colorStart = '#D8D8D8';
+							el.colorStop = '#D8D8D8';
 						}
 
 
