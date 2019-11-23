@@ -10,6 +10,8 @@
 var generateTemplate = require('@pathCommonJsComBus/generateTemplate.js');
 var splitUrl = require('@pathCommonJs/components/splitUrl.js')();
 var isConfirm = splitUrl['type'];
+var operationNoStr = '';
+var operationNoList = '';
 module.exports = function(data, $ele, $id) {
     var $ele = $ele || $('.contentWrap'),
         $id = $id || $('#trans-template');
@@ -20,10 +22,38 @@ module.exports = function(data, $ele, $id) {
         // 申购
         data[i].businessType1 = data[i].businessType == 1 ? 1 : 0;
         //待确认的预约
-        data[i].appointmentSigned = data[i].reserveSubStatus == 5 ? 1 : 0; //已签约
-        data[i].appointmentSuccess = data[i].reserveSubStatus == 6 ? 1 : 0; //合同审核成功
-        data[i].appointmentFailed = data[i].reserveSubStatus == 7 ? 1 : 0; //合同审核失败
-        data[i].appointmentFinished = data[i].reserveSubStatus == 6 || 7 ? 1 : 0; //合同成功和失败不展示左上角文字
+        // 按钮的字段
+        operationNoStr = data[i].operationNo;
+        if (operationNoStr) {
+            operationNoList = operationNoStr.split(',');
+        }
+        if (operationNoList.length > 0) {
+            for (var j = 0; j < operationNoList.length; j++) {
+                if (operationNoList[j] == '1') {
+                    data[i].appointmentToAuthentication = true; //展示合格投资者认证
+                }
+                if (operationNoList[j] == '2') {
+                    data[i].appointmentCancel = true; //展示取消按钮
+                }
+                if (operationNoList[j] == '4') {
+                    data[i].appointmentToSign = true; //展示去签署合同
+                }
+                if (operationNoList[j] == '5') {
+                    data[i].appointmentToSee = true; //展示查看合同
+                }
+                if (operationNoList[j] == '8') {
+                    data[i].appointmentToUpload = true; //展示上传汇款凭证
+                }
+            }
+        }
+        console.log(operationNoList)
+        data[i].appointmentSigned = data[i].reserveStatus == 3 ? 1 : 0; //已签约
+        data[i].appointmentSuccess = data[i].reserveStatus == 4 ? 1 : 0; //合同审核成功
+        data[i].appointmentFailed = data[i].reserveStatus == 5 ? 1 : 0; //合同审核失败
+        data[i].appointmentFinished = data[i].reserveStatus == 4 || 5 ? 1 : 0; //合同成功和失败
+
+
+
         //赎回
         data[i].businessType2 = data[i].businessType == 2 ? 1 : 0;
         data[i].redemptionRejected = data[i].redeemStatus == 4 || 5 ? 1 : 0; //已确认审核驳回状态
@@ -36,6 +66,7 @@ module.exports = function(data, $ele, $id) {
 
 
     }
-    //模板渲染页面
+    console.log(data)
+        //模板渲染页面
     generateTemplate(data, $ele, $id);
 };
