@@ -9,7 +9,7 @@ var data=Mock.mock({
     status:"0000",     
     message:"success", 
     data: [{
-        mesType: 4,
+        mesType: 0,
         mesTitle: '系统通知',
         mesContent: '关于恒天财富APP升级的公告，尊敬的客户：因为啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦',
         readStatus: 0 // 0未读，1已读

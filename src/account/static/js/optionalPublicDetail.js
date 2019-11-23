@@ -85,25 +85,12 @@ $(function() {
 
 			var that = this;
 
-			//产品详情接口
-//			var obj = [{
-//			    url: site_url.totalAssets_api, 
-//			    data: {},
-//			    needLogin: true,
-//			    callbackDone: function(json) {
-//			    	var jsonData = json.data;
-//			    	//设置数据到页面上
-////			    	that.setDomData( jsonData );
-//			    	//请求其他接口
-//			    	if( (that.data.projectType == 10300)){ 
+
 			    		//稳金类项目，请求七日年化/万份收益折线图
 			    		that.getTypeOneData();
 			    		//请求快速赎回和普通赎回的文案
 			    		that.getTxt();
-//			    	}
-//			    },
-//			}];
-//			$.ajaxLoading(obj);	
+
 
 			
 		},
@@ -116,7 +103,9 @@ $(function() {
 			var newData = {
 				sevenIncomeRate: [], //存放折线图七日年化
 				profitThoudDate: [], //存放折线图收益日期
-				profitThoudValue: [] //存放折线图万份收益
+				profitThoudValue: [], //存放折线图万份收益
+				unitNavValue: [], //单位净值
+				unitYldValue: [] //累计净值
 			}
 			//判断当前画的是七日年化还是万份收益
 			if( $('.lineWrap .titleWrap .active').hasClass('qrnh') ){
@@ -174,6 +163,8 @@ $(function() {
 			       		newData.sevenIncomeRate.push( el.annYldRat);
 			       		newData.profitThoudDate.push( el.trdDt);
 			       		newData.profitThoudValue.push( el.unitYld);
+			       		newData.unitNavValue.push( el.unitNav);//单位净值
+			       		newData.unitYldValue.push( el.unitYld);//累计净值
 			       	})
 			       	switch(num) {
 			       		case 0: that.data['qrnhWfsy'].oneMonth = newData;break;
@@ -192,15 +183,26 @@ $(function() {
 		drawLine: function ( type, data) {
 			var that = this;
 			if( type == 'qrnh'){
-				//画的是七日年化折线图
 				var chartId = $('#qrnhLine')[0],
-					xAxisData = data.profitThoudDate,
-					seriesData = data.sevenIncomeRate;
+					xAxisData = data.profitThoudDate;
+					if( that.data.projectType != "10300" ){ //非货币基金
+//						单位净值
+						var seriesData = data.unitNavValue;
+					}else{//货币基金
+						//画的是七日年化折线图
+					    var seriesData = data.sevenIncomeRate;
+					}
 			} else if( type == 'wfsy'){
 				//画的是万份收益折线图
 				var chartId = $('#wfsyLine')[0],
-					xAxisData = data.profitThoudDate,
-					seriesData = data.profitThoudValue;
+					xAxisData = data.profitThoudDate;
+					if( that.data.projectType != "10300" ){ //非货币基金
+						//累计收益
+						var seriesData = data.unitYldValue;
+					}else{//货币基金
+						//画的是万份受益折线图
+					    var seriesData = data.profitThoudValue;
+					}
 			}
 			var myChart = echarts.init( chartId );
 			myChart.setOption({
@@ -319,43 +321,39 @@ $(function() {
 
 			//项目名称
     		$('#HeadBarpathName').html( jsonData.fundName );
+			//总金额
+			$('.typeWrap .totalM').html( jsonData.totalMoney );
+		   	//待确认金额 接口无
+		   	$('.typeWrap .toConfirm .confirmMoney').html( jsonData.inTransitTotal );
+		   	//昨日收益
+		   	$('.typeWrap .sevenYearYield').html( jsonData.income);
+		   	//持有收益
+		   	$('.typeWrap .ownShare').html( jsonData.addupIncome);
+		   	//累计收益  接口无
+		   	$('.typeWrap .accumulatedShare').html( jsonData.incomeUnit);
+			//持有份额
+			$('.openWrap .cyfe').html( jsonData.currentShare);
+			//可用份额
+			$('.openWrap .kyfe').html( jsonData.enableShares);
 
 	    	if( that.data.projectType == "10300" ){ //货币基金
 	    		
-    			//总金额
-    			$('.typeWrap .totalM').html( jsonData.totalMoney );
-    		   	//待确认金额 接口无
-    		   	$('.typeWrap .toConfirm .confirmMoney').html( jsonData.inTransitTotal );
-    		   	//昨日收益
-    		   	$('.typeWrap .sevenYearYield').html( jsonData.income);
-    		   	//持有收益
-    		   	$('.typeWrap .ownShare').html( jsonData.addupIncome);
-    		   	//累计收益  接口无
-    		   	$('.typeWrap .accumulatedShare').html( jsonData.incomeUnit);
-				//持有份额
-				$('.openWrap .cyfe').html( jsonData.currentShare);
-				//可用份额
-				$('.openWrap .kyfe').html( jsonData.enableShares);
 				//七日年化
 				$('.openWrap .qrnh').html( jsonData.sevenDayYield);
 				//万份受益
 				$('.openWrap .wfsy').html( jsonData.unitYld);
+				
+				$('.qrnh').text("单位净值");
+				$('.wfsy').text("累计净值");
 
     		   	
 	    	}
 	    	else{ //非货币基金	    		
 	    		//当前市值
-	    		$('.typeWrap .totalM').html( jsonData.capitalisation );
-	    		//持有份额
-	    		$('.typeWrap .topContent .totalShare').html( jsonData.totalShare );
-	    		//七日年化
-	    		$('.typeWrap .sevenYearYield').html( jsonData.sevenYearYield);
-	    		//可赎回份额
-    		   	$('.typeWrap .kshfe').html( jsonData.allowRedemptionShare);
-    		   	//赎回开放日
-    		   	$('.typeWrap .shkfr').html( jsonData.redemptionOpenDay);
-    		   	//可提交赎回申请时间
-    		   	$('.typeWrap .ketjsh').html( (jsonData.beginRedemptionTime ? jsonData.beginRedemptionTime : '') + '至' + ( jsonData.endRedemptionTime ? jsonData.endRedemptionTime : '') );
+	    		//日涨幅
+				$('.openWrap .rzf').html( jsonData.unitYld);
+				//最新净值
+				$('.openWrap .zxjz').html( jsonData.sevenDayYield);
 	    	}
 
 		},

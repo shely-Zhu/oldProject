@@ -207,6 +207,17 @@ module.exports = function() {
     this.fundNetWorthTrendChart_api = http_url.web_url + '/pof/fundDetails/frontend/fundNetWorthTrendChart';
     /*------------------- 月度报告 end ------------------------------*/
 
+
+    // 超宝基金产品-交易记录
+    this.queryTradeList_api = http_url.web_url + '/account/pof/cash/queryTradeList';
+
+    // 公募交易列表查询
+    this.tradeList_api = http_url.web_url + '/account/pof/tradeList';
+
+    // 公募普通产品银行卡列表
+    this.normalPofList_api = http_url.web_url + '/account/bankCard/normalPofList';
+
+
     /*------------------- 基金确认书 start ------------------------------*/
     this.downloadFile_api = http_url.web_url + '/content/file/mount/download'; //下载pdf
     this.sendMailForConfirmBill_api = http_url.web_url + '/account/positions/sendMailForConfirmBill'; //下载pdf
