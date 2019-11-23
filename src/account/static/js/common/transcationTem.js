@@ -19,7 +19,8 @@ module.exports = function(data, $ele, $id) {
         data[i].notConfirmTrans = isConfirm == 'toBeConfirmed' ? 1 : 0; //未确认
         // 申购
         data[i].businessType1 = data[i].businessType == 1 ? 1 : 0;
-
+        //待确认的预约
+        data[i].businessTypeTobe1 = data[i].reserveStatus == 4 ? 1 : 0;
         //赎回
         data[i].businessType2 = data[i].businessType == 2 ? 1 : 0;
         data[i].redemptionRejected = data[i].redeemStatus == 4 || 5 ? 1 : 0; //已确认审核驳回状态
