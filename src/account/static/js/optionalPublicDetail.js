@@ -110,7 +110,8 @@ $(function() {
 
 		//请求七日年化/万份收益数据
 		getTypeOneData: function( num ){
-			var that = this;
+			var that = this,
+			dataRange = "";
 			num = num ? num : 0;
 			var newData = {
 				sevenIncomeRate: [], //存放折线图七日年化
@@ -123,6 +124,17 @@ $(function() {
 				var type = 'qrnh';
 			} else{
 				var type = 'wfsy';
+			}
+			if(num == 0){
+				dataRange = 1;
+			}else if(num == 1){
+				dataRange = 3;
+			}else if(num == 2){
+				dataRange = 6;
+			}else if(num == 3){
+				dataRange = 12;
+			}else if(num == 4){
+				dataRange = "";
 			}
 			//判断是否已经有数据了，有的话不再请求接口
 			if( num == 0 && that.data['qrnhWfsy'].oneMonth.profitThoudDate && that.data['qrnhWfsy'].oneMonth.profitThoudDate.length){
@@ -148,20 +160,20 @@ $(function() {
 	       	}
 			//没有数据，请求接口
 			var obj = [{
-			    url: site_url.earningCurve_api, 
+			    url: site_url.fundNetWorthTrendChart_api, 
 			    data: {
 			    	fundCode: that.data.fundCode,
-			    	dataRange: num 
+			    	dataRange: dataRange 
 			    },
 			    needLogin: true,
 			    callbackDone: function(json) {
 			    	var jsonData = json.data;
 
 			    	//拼数据
-			       	$.each( jsonData, function(i, el){
-			       		newData.sevenIncomeRate.push( el.sevenIncomeRate);
-			       		newData.profitThoudDate.push( el.profitThoudDate);
-			       		newData.profitThoudValue.push( el.profitThoudValue);
+			       	$.each( jsonData.pageList, function(i, el){
+			       		newData.sevenIncomeRate.push( el.annYldRat);
+			       		newData.profitThoudDate.push( el.trdDt);
+			       		newData.profitThoudValue.push( el.unitYld);
 			       	})
 			       	switch(num) {
 			       		case 0: that.data['qrnhWfsy'].oneMonth = newData;break;
