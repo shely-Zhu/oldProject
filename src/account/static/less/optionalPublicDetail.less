@@ -116,7 +116,7 @@ body{
                 .toConfirm{
                     margin: .1rem .31rem .39rem;
                     font-size: .26rem;
-                    color: @c002;
+                    color: @FFFFFF;
                     .confirmMoney{
                         margin-left: .16rem;
                         color:rgba(237,201,155,1);
@@ -125,7 +125,7 @@ body{
                 }
 				// 已持仓
 				.type {
-				    width: 100%;
+//				    width: 100%;
 				    margin: 0 0.39rem;
 				    li {
 				        span {
@@ -276,75 +276,59 @@ body{
 		}
 	}
 
-	.lineWrap{
-		background: @c005;
-		    padding-top: 0.3rem;
-		padding-bottom: 0.3rem;
-		margin-bottom: 0.3rem;
-
-		.titleWrap{
-			color: @8A8A8A;
-			height: 0.6rem;
-			line-height: 0.6rem;
-            .arrow{
-                height:0.6rem;
+    .lineWrap {
+        background: @c005;
+        padding-top: 0.3rem;
+        padding-bottom: 0.3rem;
+        margin-bottom: 0.3rem;
+        .titleWrap {
+            color: @8A8A8A;
+            height: 0.6rem;
+            line-height: 0.6rem;
+            .arrow {
+                margin-top: 0;
+                height: .6rem;
             }
-			.title{
-
-				&:first-child{
-					margin-right: 0.6rem;
-				} 
-
-				&.active{
-					color: @272727;
-					border-bottom: 0.06rem solid @C8AB7D;
-				}
-			}
-
-			
-
-			.rightTitle{ 
-
-				float: right;
-			}
-		}
-
-		.lineDraw{
-			padding-left: 0.3rem;
-			padding-right: 0.3rem;
-
-			#line{
-				height: 4.5rem;
-			}
-
-			.tab{
-				height: 0.56rem;
-				line-height: 0.56rem;
-				font-size: 0.24rem;
-				border: 0.02rem solid @C8AB7D;
-				border-radius: 0.08rem;
-
-				.time{
-					color: @C8AB7D;
-    				text-align: center;
-    				border-right: 0.02rem solid @C8AB7D;
-
-					&:last-child{
-						border-right: 0;
-					}
-
-					&.active{
-						background: @C8AB7D;
-						color: @c005;
-
-					}
-				}
-				
-
-				
-			}
-		}
-	}
+            .title {
+                &:first-child {
+                    margin-right: 0.6rem;
+                }
+                &.active {
+                    color: @272727;
+                    border-bottom: 0.06rem solid @061D6A;
+                }
+            }
+            .rightTitle {
+                float: right;
+            }
+        }
+        .lineDraw {
+            padding-left: 0.3rem;
+            padding-right: 0.3rem;
+            .line {
+                height: 4.5rem;
+            }
+            .tab {
+                height: 0.56rem;
+                line-height: 0.56rem;
+                font-size: 0.24rem;
+                border: 0.02rem solid @061D6A;
+                border-radius: 0.08rem;
+                .time {
+                    color: @061D6A;
+                    text-align: center;
+                    border-right: 0.02rem solid @061D6A;
+                    &:last-child {
+                        border-right: 0;
+                    }
+                    &.active {
+                        background: @061D6A;
+                        color: @c005;
+                    }
+                }
+            }
+        }
+    }
 
 	.dealReg{
 		background: @c005;
@@ -356,6 +340,7 @@ body{
 	}
 	.footer{
 	    display: none;
+	    background: @FFFFFF;
 	    .buttonStyle{
 	        line-height: .98rem;
 	        text-align: center;
@@ -363,7 +348,7 @@ body{
 	        font-size: .32rem;
 	        color: #0E246C;
 	        &:last-child{
-	            color: @c002;
+	            color: @FFFFFF;
 	            background:linear-gradient(135deg,rgba(108,131,201,1) 0%,rgba(6,29,106,1) 100%);
 	        }
 	    }

@@ -100,7 +100,7 @@ $(function () {
             $('.hold_item').on('click', function(){
                 //todo 跳转
                 var index = $(this).index();
-                sessionStorage.publicFundDetail = that.gV.data.fundDetailList[index];
+                sessionStorage.setItem("publicFundDetail",JSON.stringify(that.gV.data.fundDetailList[index])) 
             })
             //点击持仓列表的感叹号 进入持仓明细
             $('.position_tip').on('click', function(){

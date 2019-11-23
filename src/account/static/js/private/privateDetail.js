@@ -45,7 +45,8 @@ $(function() {
 				threeMonth: {},
 				oneYear: {},
 				sinceNow: {}
-			}			
+			},
+			redeemRule: []	// 赎回规则  按照=====切割		
 		},
 		init: function(){
 			var that = this;
@@ -58,6 +59,8 @@ $(function() {
 				$('.lineWrap .wfsy').removeClass('hidden');
 				//交易规则
 				$('.dealMid').removeClass('hide');
+				// 获取交易规则内容
+				that.getTradeRule()
 			} else if ( that.data.projectType == 1 ){
 				//稳裕
 				$('.type_1').show();
@@ -66,6 +69,8 @@ $(function() {
 				$(".titleWrap .qrnh").addClass("noBorderBottm")
 				//交易规则
 				$('.dealMid').removeClass('hide');
+				// 获取交易规则内容
+				that.getTradeRule()
 			} else if(that.data.projectType == 2){
 				//债权类
 				$('.type_2').show()
@@ -83,6 +88,8 @@ $(function() {
 				$("#dwjzLine").removeClass("hide")
 				//交易规则
 				$('.dealMid').removeClass('hide');
+				// 获取交易规则内容
+				that.getTradeRule()
 			}
 			// 是否显示可赎回按钮
 			if(that.data.isAllowRedemption == 2) {
@@ -92,14 +99,56 @@ $(function() {
 			}
 			//获取页面初始数据
 			that.getData();
-			// 获取交易规则内容
-			that.getTradeRule()
 			//事件绑定
 			that.event();	
 		},
+		// 获取交易规则内容接口 t 1 稳金 2 稳裕 5 证券
 		getTradeRule() {
-			
-		},	
+			var that = this;
+			var projectType = Number(that.data.projectType)
+			console.log(projectType)
+			/*var params = {category: 'rule_wenjin'}*/
+			switch(projectType) {
+				case 1: var params = {category: 'rule_wenjin'};break;
+				case 2: var params = {category: 'rule_wenyu'};break;
+				case 5: var params = {category: 'rule_zhengquan'};break;
+			}
+			//产品详情接口
+			var obj = [{
+			    url: site_url.findLatestContentByCategory_api, 
+			    data: params,
+			    needLogin: true,
+			    callbackDone: function(json) {
+			    	that.data.redeemRule = json.data.content.split("=====");
+			    	that.setRedeemRule(1) // 1快速赎回 2普通赎回
+			    },
+			}];
+			$.ajaxLoading(obj);	
+		},
+		// 赎回规则数据
+		setRedeemRule(type) {
+			var that = this;
+			var redeemRule = that.data.redeemRule
+			if(type == 1) {
+				if(redeemRule.indexOf("快赎规则") !== -1) {
+		    		$("#tradeDatePre").html(redeemRule[redeemRule.indexOf("快赎规则") + 1].replace("快赎轴前文案", ""))
+		    		$("#tradeDateNext").html(redeemRule[redeemRule.indexOf("快赎规则") + 2].replace("快赎轴后文案", ""))
+		    		$("#tradeExplain").html(redeemRule[redeemRule.indexOf("快赎规则") + 3].replace("快赎交易说明", ""))
+		    		if(redeemRule.indexOf("快赎费率说明")) {
+		    			$("#tradeFee").html(redeemRule[redeemRule.indexOf("快赎规则") + 4].replace("快赎费率说明", ""))
+		    		}
+		    	}
+			} else if (type == 2) {
+				if (redeemRule.indexOf("普赎规则") !== -1)  {
+		    		$("#tradeDatePre").html(redeemRule[redeemRule.indexOf("普赎规则") + 1].replace("普赎轴前文案", ""))
+		    		$("#tradeDateNext").html(redeemRule[redeemRule.indexOf("普赎规则") + 2].replace("普赎轴后文案", ""))
+		    		$("#tradeExplain").html(redeemRule[redeemRule.indexOf("普赎规则") + 3].replace("普赎交易说明", ""))
+		    		if(redeemRule.indexOf("普赎费率说明")) {
+		    			$("#tradeFee").html(redeemRule[redeemRule.indexOf("普赎规则") + 4].replace("普赎费率说明", ""))
+		    		}
+		    	}
+			}
+		},
 		//获取初始数据
 		getData: function(){
 			var that = this;
@@ -172,7 +221,6 @@ $(function() {
 			    needLogin: true,
 			    callbackDone: function(json) {
 			    	var jsonData = json.data;
-
 			    	//拼数据
 			       	$.each( jsonData, function(i, el){
 			       		newData.sevenIncomeRate.push( el.sevenIncomeRate);
@@ -234,7 +282,6 @@ $(function() {
 			    needLogin: true,
 			    callbackDone: function(json) {
 			    	var jsonData = json.data.pageList;
-
 			    	//拼数据
 			       	$.each( jsonData, function(i, el){
 			       		newData.unitAssets.push( el.netValue);
@@ -277,7 +324,6 @@ $(function() {
 					xAxisData = data.assetsDate,
 					seriesData = data.accumulativeAssets;
 			}
-			console.log(xAxisData, seriesData)
 			var myChart = echarts.init( chartId );
 			myChart.setOption({
 			    tooltip: {
@@ -418,8 +464,7 @@ $(function() {
     		   	$('.type_1 .shkfr').html( jsonData.redemptionOpenDay);
     		   	//可提交赎回申请时间
     		   	$('.type_1 .ketjsh').html( (jsonData.beginRedemptionTime ? jsonData.beginRedemptionTime : '') + ' 至 ' + ( jsonData.endRedemptionTime ? jsonData.endRedemptionTime : '') );
-	    	} else if( that.data.projectType == 2){ //债权类	
-	    		console.log(jsonData.capitalisation)     		
+	    	} else if( that.data.projectType == 2){ //债权类	  		
 	    		//当前持仓
 	    		$('.type_2 .totalM').html( jsonData.totalShare );
 	    		//收益分配
@@ -522,7 +567,11 @@ $(function() {
 				} else {
 					that.getTypeOneData( $(this).attr('num') );
 				}
-				
+            })
+            //赎回按钮点击切换
+			$(document).on('click', '#redeemNav .navSpan', function(e) {
+				$(this).addClass("active").siblings().removeClass('active')
+				that.setRedeemRule($(this).attr("type"))
             })
             //折线图点击七日年化/万份收益切换区域
 			$(document).on('click', '.lineWrap .titleWrap .title', function(e) {

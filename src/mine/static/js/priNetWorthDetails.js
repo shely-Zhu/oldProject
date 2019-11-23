@@ -1,23 +1,24 @@
-/*
- * @page:收益明细
- * @Author: wangjiajia
+/**
+ * 私募资产净值明细 js
+ * @author 蔡文琦  2019-11-22
  */
 require('@pathIncludJs/vendor/config.js');
+
+//zepto模块
 require('@pathIncludJs/vendor/zepto/callback.js');
 require('@pathIncludJs/vendor/zepto/deferred.js');
-require('@pathCommonJs/components/utils.js');
-require('@pathCommonJs/components/headBarConfig.js');
-require('@pathCommonJs/ajaxLoading.js');
 
-var tipAction = require('@pathCommonJs/components/tipAction.js');
-var splitUrl = require('@pathCommonJs/components/splitUrl.js')();
+require('@pathCommonJsCom/utils.js');
+require('@pathCommonJs/ajaxLoading.js');
+require('@pathCommonJs/components/headBarConfig.js');
 var generateTemplate = require('@pathCommonJsComBus/generateTemplate.js');
+
 $(function() {
 
     var somePage = {
         $e: {
             adjustmentRecord: $('.adjustmentRecord'), // 调仓记录
-            recordList: $('.contentWrap'), // 模板盒子
+            recordList: $('.contentWrap'), // 调仓记录
             adjustmentTemp: $('#adjustment-template'), // 最新调仓模板
             noData: $('.noData'), //没有数据的结构
             listLoading: $('.listLoading'), //所有数据区域，第一次加载的loading结构
@@ -30,13 +31,14 @@ $(function() {
         init: function() {
             var that = this;
             that.initMui();
+            //that.getData()
             // that.events();
         },
         //初始化mui的上拉加载
         initMui: function() {
             var that = this;
 
-            var height = windowHeight - $(".HeadBarConfigBox").height();
+            var height = windowHeight - $(".title").height() - $(".topTitle").height();
             if (!$('.list').hasClass('setHeight')) {
                 $('.list').height(height).addClass('setHeight');
             }
@@ -84,24 +86,30 @@ $(function() {
             var that = this;
 
             var obj = [{ // 系统调仓记录列表
-                url: site_url.dealDetailList_api,
-                data: { 
+                url: site_url.queryHistoryNetValue_api,
+                // url: site_url.queryReourceLabels_api,
+                data: {
                     "pageNo": that.gV.pageCurrent, //非必须，默认为1
-                    "pageSize": "10",//非必须，默认为10
-                    "projectId": "12776",//项目id
+                    "pageSize": 10,//非必须，默认为10
+                    "projectId":27247,//项目编号
+                    "profitRange":1,//0:近1月 1:近3月 2:近6个月 3:近1年4：成立至今
                 },
                 //async: false,
                 needDataEmpty: true,
                 callbackDone: function(json) {
+                    console.log(json.data)
+                    // console.log(json.data.pageList)
                     var data;
-                    if (json.data.pageList.length == 0) { // 没有记录不展示
+                    if (json.data.length == 0) { // 没有记录不展示
                         $(".list").hide()
                         that.$e.noData.show();
                         return false;
-                    } else if(json.status == "0000"){
-                        data = json.data.pageList;
+                    } else {
+                        data = json.data.pageList
+                        console.log(data)
                     }
                     setTimeout(function() {
+
                         if (data.length < that.gV.pageSize) {
 
                             if (that.gV.pageCurrent == 1) { //第一页时
@@ -123,55 +131,16 @@ $(function() {
                             t.endPullupToRefresh(false);
                         }
 
-
-                        var len = json.data.pageList;
-                        for(var i =0;i<len.length;i++){
-                            if(len[i].redemptionType == 0){
-                                len[i].redemptionType = "普通赎回"
-                            }else if(len[i].redemptionType == 1){
-                                len[i].redemptionType = "快速赎回"
-                            }
-                        }
-                        for(var i =0;i<len.length;i++){
-                            if(len[i].tradeType == "0"){
-                                len[i].tradeType = "认购"
-                            }else if(len[i].tradeType == "1"){                               
-                                len[i].tradeType = "申购"
-                            }else if(len[i].tradeType == "2"){
-                                len[i].tradeType = "分红"
-                            }
-                        }
-                        // 将列表插入到页面上
-                        generateTemplate(data, that.$e.recordList, that.$e.adjustmentTemp);
-                        console.log(that.gV.pageCurrent)
-                        if(that.gV.pageCurrent == 1){
-                            for(var i =0;i<len.length;i++){
-                                if(len[i].tradeType == "认购"){
-                                    $(".photoleft").eq(i).addClass("test")
-                                }else if(len[i].tradeType == "申购"){                               
-                                    $(".photoleft").eq(i).addClass("testone")
-                                }else if(len[i].tradeType == "分红"){
-                                    $(".photoleft").eq(i).addClass("testoneo")
-    
-                                }
-                            }
-                        }else{
-                            for(var i =0;i<len.length;i++){
-                                if(len[i].tradeType == "认购"){
-                                    $(".photoleft").eq(i+15*that.gV.pageCurrent-15).addClass("test")
-                                }else if(len[i].tradeType == "申购"){                               
-                                    $(".photoleft").eq(i+15*that.gV.pageCurrent-15).addClass("testone")
-                                }else if(len[i].tradeType == "分红"){
-                                    $(".photoleft").eq(i+15*that.gV.pageCurrent-15).addClass("testoneo")
-    
-                                }
-                            }
-                        }
                         // 页面++
                         that.gV.pageCurrent++;
+
+                        // 将列表插入到页面上
+                        generateTemplate(data, that.$e.recordList, that.$e.adjustmentTemp);
+
                     }, 200)
+
                 },
-                     
+
             }];
             $.ajaxLoading(obj);
         },

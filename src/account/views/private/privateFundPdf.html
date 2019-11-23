@@ -17,13 +17,12 @@
 <body>
 
 	<div class="fundPdf">
-
-		<div class="topContent">
-	 		<!-- @@include('@pathInclude/views/header.html')  -->
-
-			 @@include('@pathCommonViews/headBarConfig.html',{"pathName":"基金确认书","bgColors":"#fff,#fff","showType":"1","goBackColor":"#272727","titleColor":"#272727"})
-			<div class='headBar'></div>
-			 
+		<div class='headBar'>
+			@@include('@pathCommonViews/headBarConfig.html',{"pathName":"基金确认书","bgColors":"#fff,#fff","showType":"1","goBackColor":"#272727","titleColor":"#272727"})
+			<a class='downLoad' href="javaScript:;">下载</a>
+		</div>
+		<div class='pdfContentBox'>
+			<div class='pdfContent' id='pdfBox'></div>
 		</div>
 
 	</div>
@@ -31,6 +30,8 @@
 	@@include('@pathInclude/views/footer.html')
 
 	<script src="/include/js/vendor/echarts/echarts.min.js"></script>
+	<!-- pdf转canvas -->
+	<script src="/include/js/vendor/pdf/pdf.js"></script>
 	<script src="/account/static/js/private/privateFundPdf.js"></script>
 
 </body>

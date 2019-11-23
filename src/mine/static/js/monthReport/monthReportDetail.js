@@ -48,7 +48,7 @@ var monthReportDetail = {
 		that.assetAnalysis();
 
 		//事件监听
-		// that.events();
+		that.events();
 	},
 
 	beforeFunc: function(){  //拼模板，初始化左右滑动mui组件
@@ -99,7 +99,7 @@ var monthReportDetail = {
 					return false;
 				}
 				//没有初始化，请求第一次数据
-				that.commonAjax($('#scroll1'), this);
+				that.commonAjax(t);
 			}
 		}
 		$.tabScroll(obj);
@@ -187,6 +187,7 @@ var monthReportDetail = {
 				var jsonData = json.data;
 
 				var pefSaleList = jsonData.pefSaleList;
+				jsonData.holdPosition = true;
 
 				if(!$.util.objIsEmpty(pefSaleList)){
 					jsonData.flag1 = true;
@@ -248,7 +249,7 @@ var monthReportDetail = {
 		var that = this;
 		//获取产品列表
 		var obj = [{
-			url: that.setting.ajaxArr[that.setting.current_index],
+			url: site_url.queryInvestTradeDetail_api,
 			data:{
 				reportId: that.getElements.reportId
 			} ,
@@ -257,27 +258,25 @@ var monthReportDetail = {
 			async: false, 
 			callbackDone: function(json){
 				var jsonData = json.data;
+				jsonData.tradeDtail = true;
 
-				var comRradeRecordList = jsonData.pageList;
-				var data = {};
+				if(!$.util.objIsEmpty(jsonData.pefSaleInfoList)){
+					jsonData.flag1 = true;
+					jsonData.flag2 = false;
+					that.setting.html = that.setting.list_template(jsonData);
 
-				if( !$.util.objIsEmpty(comRradeRecordList) ){
-					
-					jsonData.holdPosition = that.setting.current_index == 0 ? 1 : 0;
-					jsonData.tradeDtail = that.setting.current_index == 1 ? 1 : 0;
-					
-					var list_html = that.setting.list_template(jsonData);
-
-					//设置这两参数，在initMui()中使用
-					//判断是否显示没有更多了等逻辑，以及插入新数据
-					that.listLength = comRradeRecordList.length;
-					that.html = list_html;
-
-				}else{
-					//没有数据
-					that.listLength = 0;
-					that.html = '';
+					$id.find('.contentWrapper .mui-table-view-cell').html(that.setting.html);
 				}
+				if(!$.util.objIsEmpty(jsonData.pofInfoList)){
+					jsonData.flag2 = true;
+					jsonData.flag1 = false;
+					that.setting.html = that.setting.list_template(jsonData);
+
+					$id.find('.contentWrapper .mui-table-view-cell').append(that.setting.html);
+				}
+
+				that.getElements.listLoading.hide();
+				$id.addClass('hasPullUp');
 
 			},
 			callbackFail: function(json){
@@ -664,7 +663,6 @@ var monthReportDetail = {
 	},
 	events: function(){  //绑定事件
 		var that = this;
-		//跳转到转入转出详情页
 		
 
 	},

@@ -30,7 +30,6 @@ var transcationTem = require('../common/transcationTem.js');
 
 
 
-
 $(function() {
     var data = {
         getElements: {
@@ -68,7 +67,6 @@ $(function() {
             //事件监听
             that.events();
         },
-
 
         //初始化mui的上拉加载
         initMui: function() {
@@ -147,7 +145,6 @@ $(function() {
                         if (data.length < that.gV.aP.pageSize) {
 
                             if (that.gV.aP.pageNo == 1) { //第一页时
-
                                 if (data.length == 0) {
                                     // 暂无数据显示
                                     that.getElements.noData.show();
