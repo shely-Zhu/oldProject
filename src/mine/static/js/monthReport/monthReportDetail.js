@@ -15,16 +15,10 @@ require('@pathCommonJsCom/headBarConfig.js');
 
 require('@pathCommonJsCom/tabScroll.js');
 var splitUrl = require('@pathCommonJs/components/splitUrl.js')();
+//黑色提示条的显示和隐藏
+var tipAction = require('@pathCommonJsCom/tipAction.js');
 
 var moment = require('moment');
-
-//echarts图表
-var echarts = require('echarts/lib/echarts');
-require('echarts/lib/chart/pie');
-require('echarts/lib/component/tooltip');
-require('echarts/lib/component/title');
-require('echarts/lib/component/legend');;
-require('zrender/lib/vml/vml')
 
 
 var monthReportDetail = {
@@ -40,7 +34,6 @@ var monthReportDetail = {
 		],
 		current_index: 0,  //左右滑动区域的索引
 		list_template: '',  //列表的模板，生成后存放在这里
-		ajaxArr: [site_url.queryInvestProdHoldShareList_api, site_url.queryInvestTradeDetail_api],  //存放每一个ajax请求的传参数据
 	},
 	html: '',  //存放生成的html
 	pieChartData:'', // 画图的title
@@ -55,11 +48,8 @@ var monthReportDetail = {
 		// 资产情况分析
 		that.assetAnalysis();
 
-		// // 环形图
-		// that.bingtu();
-
 		//事件监听
-		// that.events();
+		that.events();
 	},
 
 	beforeFunc: function(){  //拼模板，初始化左右滑动mui组件
@@ -95,6 +85,8 @@ var monthReportDetail = {
 			contentLength: that.setting.navList.length,  //左右滑动的区域个数，即导航数组长度
 			contentList: contentArr, //此时只有框架，实际列表内容还未请求
 			callback: function(t){  //t返回的是 id 为 scroll1 / scroll2 这样的切换后当前区域中的节点
+					var w = $('#scroll1').attr('id'),
+					s = '#'+w+' .contentWrapper';
 
 				  //data-scroll属性即当前左右切换区域的索引
 				var index = t.attr('data-scroll');
@@ -117,7 +109,7 @@ var monthReportDetail = {
 
 		var that = this;
 
-		var obj = [{
+		var obj = [{    // 获取客户的姓名和编号
 			url: site_url.user_api,
 			data: {
 				hmac:"", //预留的加密信息   非必填项
@@ -138,13 +130,12 @@ var monthReportDetail = {
 				console.log(json.msg);
 			}
 		},{
-			url: site_url.queryInvestReportDetail_api,   // 报告分析（报告明细）
+			url: site_url.queryInvestReportDetail_api,   // 报告分析（报告明细）  获取报告的相关信息
 			data: {
 				reportId: that.getElements.reportId
 			},
 			needLogin: true,
 			needDataEmpty: true,
-			contentTypeSearch: true,
 			async: false,
 			callbackDone: function(json) {
 				var json=json.data;
@@ -154,8 +145,6 @@ var monthReportDetail = {
 				that.getElements.monthReportTime = json.month;
 				$('.reportMonth').html(json.month);
 				
-				// 客户内容的富文本
-				// $('.textBox').html(json.content);
 				// 生命周期
 				$('.lifeTerm').html(json.lifeTerm);
 				// 风险等级
@@ -186,45 +175,84 @@ var monthReportDetail = {
 			
 
 		},{
-			url: site_url.queryInvestProdHoldShareList_api,   // 持仓总览
+			url: site_url.queryInvestProdHoldShareList_api,   // 持仓总览  报告的月末持仓总览
 			data: {
 				reportId: that.getElements.reportId
 			},
 			needLogin: true,
 			needDataEmpty: true,
-			contentTypeSearch: true,
 			async: false,
 			callbackDone: function(json) {
 				var jsonData = json.data;
+				if(!$.util.objIsEmpty(jsonData)){
 
-				var pefSaleList = jsonData.pefSaleList;
+					var pefSaleList = jsonData.pefSaleList;
+					jsonData.holdPosition = true;
 
-				if(!$.util.objIsEmpty(pefSaleList)){
-					jsonData.flag1 = true;
-					jsonData.flag2 = false;
-					jsonData.flag3 = false;
+					if(!$.util.objIsEmpty(pefSaleList)){
+						jsonData.flag1 = true;  // 展示月末持仓私募基金的标识
+						jsonData.flag2 = false;  // 展示月末持仓公募基金的标识
+						jsonData.flag3 = false;  // 展示月末持仓其他基金的标识
 
-					that.setting.html = that.setting.list_template(jsonData);
+						// 私募数据展示的规则
+						// 看业绩比较基准和净值哪个有值：
+						// （1）若业绩比较基准有值，且没有净值，显示产品名称、持有资产、        业绩比较基准；
+						// （2）若有净值，且业绩比较基准没值，  显示产品名称、持有资产、持有份额、            参考净值；
+						// （3）若业绩比较基准和净值均没有，  则显示产品名称、持有资产、持有份额；
+						// （4）若业绩比较基准和净值均有，    则显示产品名称、持有资产、持有份额、业绩比较基准、参考净值。
 
-					$id.find('.contentWrapper .mui-table-view-cell').html(that.setting.html);
+						$.each(pefSaleList, function(i,el){
+							pefSaleList[i].pefSaleFlag1 = true;
+							pefSaleList[i].pefSaleFlag2 = true;
+							pefSaleList[i].pefSaleFlag3 = true;
+
+							if(!!el.investPerformanceComparison){  // 业绩比较基准有值时
+								if(!el.netValue){  // 净值没有数据时
+									pefSaleList[i].pefSaleFlag1 = false;
+									pefSaleList[i].pefSaleFlag3 = false;
+								}
+
+							}else{   // 业绩比较基准没有值时
+								if(!el.netValue){  // 净值没有数据时
+									pefSaleList[i].pefSaleFlag2 = false;
+									pefSaleList[i].pefSaleFlag3 = false;
+								}
+								else{   // 净值有数据时
+									pefSaleList[i].pefSaleFlag2 = false;
+								}
+							}
+
+						})
+
+						that.setting.html = that.setting.list_template(jsonData);
+
+						$id.find('.contentWrapper .mui-table-view-cell').html(that.setting.html);
+					}
+					if(!$.util.objIsEmpty(jsonData.pofList)){
+						jsonData.flag2 = true;
+						jsonData.flag1 = false;
+						jsonData.flag3 = false;
+						that.setting.html = that.setting.list_template(jsonData);
+
+						$id.find('.contentWrapper .mui-table-view-cell').append(that.setting.html);
+					}
+					if(!$.util.objIsEmpty(jsonData.generalModelList)){
+						jsonData.flag3 = true;
+						jsonData.flag1 = false;
+						jsonData.flag2 = false;
+						that.setting.html = that.setting.list_template(jsonData);
+
+						$id.find('.contentWrapper .mui-table-view-cell').append(that.setting.html);
+					}
+				}else{
+					//没有数据
+					$id.find('.mui-scroll .list').html(that.getElements.noData.clone(false)).addClass('noCon');
+					$id.find('.noData').show();
+
+					setTimeout(function() {
+						that.getElements.listLoading.hide();
+					}, 100);
 				}
-				if(!$.util.objIsEmpty(jsonData.pofList)){
-					jsonData.flag2 = true;
-					jsonData.flag1 = false;
-					jsonData.flag3 = false;
-					that.setting.html = that.setting.list_template(jsonData);
-
-					$id.find('.contentWrapper .mui-table-view-cell').append(that.setting.html);
-				}
-				if(!$.util.objIsEmpty(jsonData.generalModelList)){
-					jsonData.generalModelList.flag3 = true;
-					jsonData.flag1 = false;
-					jsonData.flag2 = false;
-					that.setting.html = that.setting.list_template(jsonData.generalModelList);
-
-					$id.find('.contentWrapper .mui-table-view-cell').append(that.setting.html);
-				}
-
 				that.getElements.listLoading.hide();
 				$id.addClass('hasPullUp');
 
@@ -259,7 +287,7 @@ var monthReportDetail = {
 		var that = this;
 		//获取产品列表
 		var obj = [{
-			url: that.setting.ajaxArr[that.setting.current_index],
+			url: site_url.queryInvestTradeDetail_api,
 			data:{
 				reportId: that.getElements.reportId
 			} ,
@@ -268,27 +296,36 @@ var monthReportDetail = {
 			async: false, 
 			callbackDone: function(json){
 				var jsonData = json.data;
+				if(!$.util.objIsEmpty(jsonData)){
+					jsonData.tradeDtail = true;
 
-				var comRradeRecordList = jsonData.pageList;
-				var data = {};
+					if(!$.util.objIsEmpty(jsonData.pefSaleInfoList)){
+						jsonData.flag1 = true;
+						jsonData.flag2 = false;
+						that.setting.html = that.setting.list_template(jsonData);
 
-				if( !$.util.objIsEmpty(comRradeRecordList) ){
-					
-					jsonData.isIn = that.setting.current_index == 0 ? 1 : 0;
-					jsonData.isOut = that.setting.current_index == 1 ? 1 : 0;
-					
-					var list_html = that.setting.list_template(jsonData);
+						$id.find('.contentWrapper .mui-table-view-cell').html(that.setting.html);
+					}
+					if(!$.util.objIsEmpty(jsonData.pofInfoList)){
+						jsonData.flag2 = true;
+						jsonData.flag1 = false;
+						that.setting.html = that.setting.list_template(jsonData);
 
-					//设置这两参数，在initMui()中使用
-					//判断是否显示没有更多了等逻辑，以及插入新数据
-					that.listLength = comRradeRecordList.length;
-					that.html = list_html;
-
-				}else{
-					//没有数据
-					that.listLength = 0;
-					that.html = '';
+						$id.find('.contentWrapper .mui-table-view-cell').append(that.setting.html);
+					}
 				}
+				else{
+					//没有数据
+					$id.find('.mui-scroll .list').html(that.getElements.noData.clone(false)).addClass('noCon');
+					$id.find('.noData').show();
+
+					setTimeout(function() {
+						that.getElements.listLoading.hide();
+					}, 100);
+				}
+
+				that.getElements.listLoading.hide();
+				$id.addClass('hasPullUp');
 
 			},
 			callbackFail: function(json){
@@ -310,10 +347,10 @@ var monthReportDetail = {
 			callbackNoData: function(json){
  
 				//没有数据
-				$id.find('.mui-scroll .list').html(that.getElements.noData.clone(false)).addClass('noCon');	
+				$id.find('.mui-scroll .list').html(that.getElements.noData.clone(false)).addClass('noCon');
 				$id.find('.noData').show();
 
-				setTimeout(function(){
+				setTimeout(function() {
 					that.getElements.listLoading.hide();
 				}, 100);
 			}
@@ -330,6 +367,7 @@ var monthReportDetail = {
 		//建议资产配置比数组
 		that.recommendList = [];
 		that.pieChartData = [];
+		that.pieChartDataDetail = [];
 		
 		//当前资产配置比列表
 		var obj = [{
@@ -353,14 +391,47 @@ var monthReportDetail = {
 
 					$.each(data.monthHoldShareList,function(i,el){
 						that.pieChartData[i] = el.assetTypeDesc;
+
+						if(el.assetType == '203'){
+							el.colorStart = '#182F7A';
+							el.colorStop = '#7286C1';
+						}
+						else if(el.assetType == '205'){
+							el.colorStart = '#FBE2BD';
+							el.colorStop = '#D69549';
+						}
+						else if(el.assetType == '204'){
+							el.colorStart = '#AA6545';
+							el.colorStop = '#EDA377';
+						}
+						else if(el.assetType == '200'){
+							el.colorStart = '#AA6545';
+							el.colorStop = '#EDA377';
+						}
+
+
+						var dataDetail = {value:el.confirmValuePercent, name:el.assetTypeDesc,itemStyle: {
+							normal: {
+								color: new echarts.graphic.LinearGradient(
+									0, 0, 1, 1,
+									[
+										{offset: 0, color: el.colorStart},
+										{offset: 1, color: el.colorStop}
+									]
+								)
+							}
+						}}
+
+						that.pieChartDataDetail.push(dataDetail) ;
+
+
 					})
 
 					//调用画图方法
-					that.bingtu();
+					that.bingtu(0);
 
-					// that.typeCompare();
 				}
-
+				// 资产情况分析
 				if(!$.util.objIsEmpty(data)){
 					var result = data.monthHoldShareList;
 
@@ -389,11 +460,9 @@ var monthReportDetail = {
 						if(Number(data.currentMonthTotalValue) < Number(data.lastMonthTotalHoldValue)){
 							diff = $.util.numberSub( Number(data.lastMonthTotalHoldValue), Number(data.currentMonthTotalValue));
 							diffHtml = '减少' + diff;
-							// $('.lastTotal').html(diffHtml)
 						}else{
 							diff = $.util.numberSub( Number(data.currentMonthTotalValue), Number(data.lastMonthTotalHoldValue));
 							diffHtml = '增加' + diff;
-							// $('.lastTotal').html(diffHtml)
 						}
 
 						var noPosition = '<p class="tipPosition">您在<span class="monthReportTime">'+ that.getElements.monthReportTime +'</span>，投资的 <span class="property">'+ that.getElements.assetPerHtml +'</span>。</p>'+
@@ -408,7 +477,6 @@ var monthReportDetail = {
 				if(data.currentMonthTotalValue == '' && data.lastMonthTotalHoldValue != ''){
 					var noPosition = '<p class="tipPosition">您在<span class="monthReportTime">'+ that.getElements.monthReportTime +'</span>，您暂无持仓。</p>'+
 									'<p>同比'+ lastMonth +'月份减少'+ data.lastMonthTotalHoldValue +'。</p>';
-									// '<p class="tipCompare">截止'+ that.getElements.reportTime +'，您的总持仓金额为<span class="monthTotal">'+ data.currentMonthTotalValue +'</span>元。</p>'
 					$('.monthReportTipContent').html(noPosition);
 				}
 				if(data.lastMonthTotalHoldValue == '' && data.currentMonthTotalValue != ''){
@@ -439,10 +507,46 @@ var monthReportDetail = {
 					//有数据
 					that.recommendList = data;
 
-					//调用画图方法
-					// that.drawImage();
+					$.each(that.recommendList,function(i,el){
+						that.pieChartData[i] = el.assetTypeDesc;
 
-					// that.typeCompare();
+						if(el.assetType == '203'){
+							el.colorStart = '#182F7A';
+							el.colorStop = '#7286C1';
+						}
+						else if(el.assetType == '205'){
+							el.colorStart = '#FBE2BD';
+							el.colorStop = '#D69549';
+						}
+						else if(el.assetType == '204'){
+							el.colorStart = '#AA6545';
+							el.colorStop = '#EDA377';
+						}
+						else if(el.assetType == '200'){
+							el.colorStart = '#D8D8D8';
+							el.colorStop = '#D8D8D8';
+						}
+
+
+						var dataDetail = {value:el.confirmValuePercent, name:el.assetTypeDesc,itemStyle: {
+							normal: {
+								color: new echarts.graphic.LinearGradient(
+									0, 0, 1, 1,
+									[
+										{offset: 0, color: el.colorStart},
+										{offset: 1, color: el.colorStop}
+									]
+								)
+							}
+						}}
+
+						that.pieChartDataDetail.push(dataDetail) ;
+
+
+					})
+
+					//调用画图方法
+					that.bingtu(1);
 				}
 				// 循环遍历数据
 				for(var index in data){
@@ -471,13 +575,13 @@ var monthReportDetail = {
 					})
 					
 				}
-				// if(!$.util.objIsEmpty(data)){
-				// 	var template = Handlebars.compile($("#optimizationList").html());
-				// 	//匹配json内容
-				// 	var html = template(data);
-				// 	//输入模板
-				// 	$('.optimizationList').append(html);
-				// }
+				if(!$.util.objIsEmpty(data)){
+					var template = Handlebars.compile($("#optimizationList").html());
+					//匹配json内容
+					var html = template(data);
+					//输入模板
+					$('.optimizationList').append(html);
+				}
 				
 				
 			}
@@ -508,16 +612,17 @@ var monthReportDetail = {
 
 	},
 
-	bingtu:function(){
-		// vatr tha
+	bingtu:function(i){
+		var that = this;
 		// app.title = '环形图';
-		var pieChart = echarts.init($('.circle')[0]);
+		var pieChart = echarts.init($('.circle')[i]);
 		
 		// 指定图表的配置项和数据
 		option = {
 			legend: {
 				orient: 'vertical',
 				x: 'left',
+				// data:['联盟广告','视频广告','搜索引擎'],
 				data:that.pieChartData,
 				icon: "roundRect",   //  这个字段控制形状  类型包括 circle，rect ，roundRect，triangle，diamond，pin，arrow，none
 
@@ -531,7 +636,7 @@ var monthReportDetail = {
 			},
 			series: [
 				{
-					name:'访问来源',
+					name:'您当前的资产配比',
 					type:'pie',
 					radius: ['49%', '70%'],
 					center: ['35%', '47%'],
@@ -576,47 +681,7 @@ var monthReportDetail = {
 							show: false
 						}
 					},
-					data:[
-						{value:335, name:'直接访问',
-						itemStyle: {
-							normal: {
-								color: new echarts.graphic.LinearGradient(
-									0, 0, 1, 1,
-									[
-										{offset: 0, color: '#182F7A'},
-										// {offset: 0.5, color: '#0CB9FF'},
-										{offset: 1, color: '#7286C1'}
-									]
-								)
-							}
-						}},
-						{value:310, name:'邮件营销',
-						itemStyle: {
-							normal: {
-								color: new echarts.graphic.LinearGradient(
-									0, 0, 1, 1,
-									[
-										{offset: 0, color: '#FBE2BD'},
-										// {offset: 0.5, color: '#0CB9FF'},
-										{offset: 1, color: '#D69549'}
-									]
-								),
-							}
-						}},
-						{value:234, name:'联盟广告',itemStyle: {
-							normal: {
-								color: new echarts.graphic.LinearGradient(
-									0, 0, 1, 1,
-									[
-										{offset: 0, color: '#AA6545'},
-										// {offset: 0.5, color: '#0CB9FF'},
-										{offset: 1, color: '#EDA377'}
-									]
-								),
-							}
-						}},
-
-					]
+					data: that.pieChartDataDetail,
 				},
 				{
 					name:'访问来源',
@@ -638,48 +703,7 @@ var monthReportDetail = {
 							show: false
 						}
 					},
-					data:[
-						{value:335, name:'直接访问',
-						itemStyle: {
-							normal: {
-								color: new echarts.graphic.LinearGradient(
-									0, 0, 1, 1,
-									[
-										{offset: 0, color: '#172c6f'},
-										// {offset: 0.5, color: '#0CB9FF'},
-										{offset: 1, color: '#4a5d96'}
-									]
-								)
-							}
-						}},
-						{value:310, name:'邮件营销',
-						itemStyle: {
-							normal: {
-								color: new echarts.graphic.LinearGradient(
-									0, 0, 1, 1,
-									[
-										{offset: 0, color: '#dcc19b'},
-										// {offset: 0.5, color: '#0CB9FF'},
-										{offset: 1, color: '#c69152'},
-									]
-								),
-							}
-						}},
-						{value:234, name:'联盟广告',itemStyle: {
-							normal: {
-								color: new echarts.graphic.LinearGradient(
-									0, 0, 1, 1,
-									[
-										
-										{offset: 0, color: '#a56747'},
-										// {offset: 0.5, color: '#0CB9FF'},
-										{offset: 1, color: '#cb8a64'}
-									]
-								),
-							}
-						}},
-
-					]
+					data: that.pieChartDataDetail,
 				}
 			]
 		};
@@ -688,7 +712,92 @@ var monthReportDetail = {
 	},
 	events: function(){  //绑定事件
 		var that = this;
-		//跳转到转入转出详情页
+		mui("body").on('tap', '.consult' , function(){
+
+			that.getElements.productName = $(this).attr('productName');
+
+			// var obj = [{
+			// 	url: site_url.search_planner_url,
+			// 	data: {
+			// 		hmac:"",
+			// 		params:{
+			// 		   broker_account:"",//理财师工号
+			// 		   type:"0",//绑定类型    0：私募   1：公募
+			// 		   isCertificate:"", // 显示持证理财师,Y通过，N未通过
+			// 		}
+			// 	},
+			// 	needLogin: true, //需要判断登录情况
+			// 	needDataEmpty: false,//不需要判断data是否为空
+			// 	callbackDone: function(json){
+			// 		var result = json.data.advisor;
+			// 		if(result.length != 0 ){
+			// 			if(json.data.existMain == 1){   //有专属理财师
+			// 				var exclusive = result[0];//专属理财师
+	  //                       that.getElements.plannerName = exclusive.broker_name; 	//理财师姓名
+	  //                       that.getElements.plannerNum = exclusive.broker_account; //理财师工号
+
+			// 			}else if(json.data.existMain == 0){
+			// 				var exclusive = result[0];//服务理财师
+	  //                       that.getElements.plannerName = exclusive.broker_name; 	//理财师姓名
+	  //                       that.getElements.plannerNum = exclusive.broker_account; //理财师工号
+			// 			}
+
+			// 			var obj = {
+			// 				title: '提示', //大标题
+			// 				p: '<p class="elastic_p">非常感谢您选择恒天财富！我们将尽快安排专业人员与您联系，请保持手机畅通！</p>',
+			// 				celTxt : false,
+			// 				callback : function(){ //确定按钮的回调函数
+			// 					$('.elasticLayer').hide();
+			// 				},
+			// 				zIndex: 100, //z-index
+			// 			}
+
+			// 			$.elasticLayer(obj);//弹出层初始化
+
+			// 			var contentObj = [{
+			// 				url: site_url.reportContactNow_api,
+			// 				data: {
+			// 					hmac:"",
+			// 					params:{
+			// 						empNo: that.getElements.plannerNum,  //理顾工号
+			// 						empName: that.getElements.plannerName,  // 理顾姓名
+			// 						productName: that.getElements.productName,  // 产品名称
+			// 					}
+			// 				},
+			// 				needLogin: true, //需要判断登录情况
+			// 				needDataEmpty: false,//不需要判断data是否为空
+			// 				callbackDone: function(json){
+			// 					$(".contactNow").hide();
+			// 					$(".mask").hide();
+			// 					$(".btns .error-tip").html('');
+			// 					$('.btns .save').removeClass("btn_grey").attr('disabled',false);
+							
+			// 				},
+			// 				callbackFail: function(json){
+								
+			// 				},
+			// 			}]
+			// 			$.ajaxLoading(contentObj);
+			// 		}else{
+			// 			var now = new Date();
+			// 			var hh = now.getHours();
+						
+			// 			if(8 <= hh && hh <= 20){
+			// 				window.open(site_url.customerService_url);
+			// 			}else{
+			// 				$('.contactNow').show();
+			// 			}
+
+			// 			//$('.contactNow').show();
+			// 		}
+			// 	},
+			// 	callbackFail: function(json){
+					
+			// 	},
+			// }]
+			// $.ajaxLoading(obj);
+
+		})
 		
 
 	},

@@ -13,69 +13,78 @@ var tipAction = require('@pathCommonJs/components/tipAction.js');
 var splitUrl = require('@pathCommonJs/components/splitUrl.js')();
 var generateTemplate = require('@pathCommonJsComBus/generateTemplate.js');
 
-$(function(){
-	let somePage = {
-		//获取页面元素
-		$e:{
-			recordSearchTitleBoxId: $("#recordSearchWrapper"), // 筛选标签容器
-            searchTitleListTemplateId:$('#searchTitleList-template'),//筛选标签模板Id
+$(function () {
+    let somePage = {
+        //获取页面元素
+        $e: {
+            recordSearchTitleBoxId: $("#recordSearchWrapper"), // 筛选标签容器
+            searchTitleListTemplateId: $('#searchTitleList-template'),//筛选标签模板Id
             recordSearchDetailBoxId: $("#recordSearchDetail"), // 筛选详细内容容器
-            searchDetailListTemplateId:$('#searchDetailList-template'),//筛选详细内容模板Id
+            searchDetailListTemplateId: $('#searchDetailList-template'),//筛选详细内容模板Id
             recordListWraperBoxId: $("#recordListWraper"), // 交易列表容器
-            recordListTemplateId:$('#recordList-template'),//交易列表模板Id
-            noData: $('.noDataCon'), //没有数据的结构
+            recordListTemplateId: $('#recordList-template'),//交易列表模板Id
+            noData: $('.noData'), //没有数据的结构
             listLoading: $('.listLoading'), //所有数据区域，第一次加载的loading结构
-		},
-		//全局变量
-		gV:{
-            pageCurrent: 1, //当前页码，默认为1
+        },
+        //全局变量
+        gV: {
+            pageNum: 1, //当前页码，默认为1
             pageSize: 10,
-			mask: null,
-			searchTitleList: [{
-				title: '全部',
-				titleId: 0
-			},{
-				title: '状态',
-				titleId: 1
-			},{
-				title: '时间',
-				titleId: 2
-			},{
-				title: '银行卡',
-				titleId: 3
-			}],
-			// searchType 1 全部 2 状态 3 时间 4 银行卡
-			searchDetailList: [[{title: '全部', detailId: 1, searchType: 1}, {title: '买入', detailId: 2,searchType: 1}, {title: '定投', detailId: 3, searchType: 1}, {title: '分红', detailId: 4, searchType: 1}, {title: '卖出', detailId: 5, searchType: 1}],
-							   [{title: '全部', detailId: 1, searchType: 2}, {title: '成功', detailId: 2, searchType: 2}, {title: '失败', detailId: 3, searchType: 2}, {title: '待确认', detailId: 4, searchType: 2}, {title: '已撤单', detailId: 5, searchType: 2}],
-							   [{title: '全部', detailId: 1, searchType: 3}, {title: '近一个月', detailId: 2, searchType: 3}, {title: '近三个月', detailId: 3, searchType: 3}, {title: '近半年', detailId: 4, searchType: 3}, {title: '近一年', detailId: 5, searchType: 3}, {title: '近三年', detailId: 6, searchType: 3}],
-							   [{title: '全部', detailId: 1, searchType: 4}, {title: '华夏银行 - 0622', detailId: 2, searchType: 4}, {title: '中国招商银行 - 3568', detailId: 3, searchType: 4}, {title: '贵州银行 - 5555', detailId: 4, searchType: 4}]],
-			selectedAll: 0, // 代表选中的类型id值
-			selectedstatus: 0, // 状态
-			selectedTime: 0, // 时间
-			selectedBankCard: 0 // 银行卡
-		},
-		//页面初始化函数
-		init:function(){
-            var that=this;
+            mask: null,
+            searchTitleList: [{
+                title: '全部',
+                titleId: 0
+            }, {
+                title: '状态',
+                titleId: 1
+            }, {
+                title: '时间',
+                titleId: 2
+            }, {
+                title: '银行卡',
+                titleId: 3
+            }],
+            // searchType 1 全部 2 状态 3 时间 4 银行卡
+            searchDetailList: [[{ title: '全部', detailId: 1, searchType: 1, data: "" }, { title: '买入', detailId: 2, searchType: 1, data: 0 }, { title: '定投', detailId: 3, searchType: 1, data: 2 }, { title: '分红', detailId: 4, searchType: 1, data: 3 }, { title: '卖出', detailId: 5, searchType: 1, data: 1 }],
+            [{ title: '全部', detailId: 1, searchType: 2, data: "" }, { title: '成功', detailId: 2, searchType: 2, data: 1 }, { title: '失败', detailId: 3, searchType: 2, data: 0 }, { title: '待确认', detailId: 4, searchType: 2, data: 2 }, { title: '已撤单', detailId: 5, searchType: 2, data: 3 }],
+            [{ title: '全部', detailId: 1, searchType: 3, data: "" }, { title: '近一个月', detailId: 2, searchType: 3, data: 1 }, { title: '近三个月', detailId: 3, searchType: 3, data: 2 }, { title: '近半年', detailId: 4, searchType: 3, data: 3 }, { title: '近一年', detailId: 5, searchType: 3, data: 4 }, { title: '近三年', detailId: 6, searchType: 3, data: 5 }],
+            ],
+            selectedAll: 0, // 代表选中的类型id值  
+            selectedstatus: 0, // 状态
+            selectedTime: 0, // 时间
+            selectedBankCard: 0, // 银行卡
+            ajaxdata: {
+                applyType: '',  //0：购买 1：赎回  2：定投,3:分红
+                tradeApplyStatus: '',//(0:失败，1：成功，2：待确认，3：已撤单)
+                timeNode: '',// * 1：近一个月2：近三个月3：近半年4：近1年 5：近3年
+                tradeAcc: '',//交易账号(从银行卡列表取)
+            }
+        },
+        //页面初始化函数
+        init: function () {
+            var that = this;
             this.initMask();
-            this.initMui();
+            this.initMui(that.gV.ajaxdata);
             this.setSearchTitle()
-            this.events()        
+            //获取银行卡列表
+            this.bankList()
+            this.events()
         },
         setSearchTitle() {
-        	var that = this;
-        	generateTemplate(that.gV.searchTitleList, that.$e.recordSearchTitleBoxId, that.$e.searchTitleListTemplateId);
+            var that = this;
+            generateTemplate(that.gV.searchTitleList, that.$e.recordSearchTitleBoxId, that.$e.searchTitleListTemplateId);
         },
         // 初始化mui上的遮罩层
         initMask() {
-			this.gV.mask = mui.createMask(function(){
-				$("#recordSearchDetail").css("display", "none")
-			});
+            this.gV.mask = mui.createMask(function () {
+                $('.searchItem').removeClass('searchItemActive');
+                $("#recordSearchDetail").css("display", "none")
+            });
         },
         //初始化mui的上拉加载
-        initMui: function() {
+        initMui: function (da) {
             var that = this;
-            var height = windowHeight - $(".HeadBarConfigBox").height() - $("#recordSearch").height()-8;
+            var height = windowHeight - $(".HeadBarConfigBox").height() - $("#recordSearch").height() - 8;
             if (!$('.list').hasClass('setHeight')) {
                 $('.list').height(height).addClass('setHeight');
             }
@@ -85,15 +94,15 @@ $(function(){
                     up: {
                         contentrefresh: '拼命加载中',
                         contentnomore: '没有更多了', //可选，请求完毕若没有更多数据时显示的提醒内容；
-                        callback: function() {
-                            that.getRecordsData(this);
+                        callback: function () {
+                            that.getRecordsData(this, da);
                         }
                     }
                 }
             });
 
             //init后需要执行ready函数，才能够初始化出来
-            mui.ready(function() {
+            mui.ready(function () {
                 if (!$('.list').hasClass('hasPullUp')) {
                     $('.list').find('.mui-pull-bottom-pocket').addClass('mui-hidden');
                 }
@@ -104,24 +113,49 @@ $(function(){
             });
         },
         // 查询交易记录列表
-        getRecordsData(t) {
-        	var that=this;
-            var obj=[{
-                url: site_url.dealDetailList_api,
-                data:{},
+        getRecordsData(t, da) {
+            var that = this;
+            var obj = [{
+                url: site_url.tradeList_api,
+                data: da,
                 needDataEmpty: true,
-                callbackDone: function(json) {
+                callbackDone: function (json) {
                     var data;
-                    /*if (json.data.pageItems.totalCount == 0) { // 没有记录不展示
+                    console.log(json.data.pageItems.totalCount)
+                    if (json.data.pageItems.totalCount == 0) { // 没有记录不展示
                         that.$e.noData.show();
                         return false;
                     } else {
+                        json.data.pageList.map(function(e){
+                            if(e.applyType == 0){
+                                e.payin = true
+                            }else if(e.applyType == 1){
+                                e.payout = true
+                            }else if(e.applyType == 2){
+                                e.payfix = true
+                            }else if(e.applyType == 3){
+                                e.payred = true
+                            }
+
+                            if(e.tradeApplyStatus == 0){
+                                e.tradeApplyStatusName = '交易失败'
+                            }else if(e.tradeApplyStatus == 1){
+                                e.tradeApplyStatusName = '交易成功'
+                            }else if(e.tradeApplyStatus == 2){
+                                e.tradeApplyStatusName = '待确认'
+                            }else if(e.tradeApplyStatus == 3){
+                                e.tradeApplyStatusName = '已撤单'
+                            }
+
+                            e.sta = e.tradeApplyStatus == 1 ? 1 : 0;
+
+                            e.paystatus = e.applyType == 0 || e.applyType == 2 ? 1 : 0;
+                        })
                         data = json.data.pageList;
-                    }*/
-                    data = json.data.pageList
-                    setTimeout(function() {
+                    }
+                    setTimeout(function () {
                         if (data.length < that.gV.pageSize) {
-                            if (that.gV.pageCurrent == 1) { //第一页时
+                            if (that.gV.pageNum == 1) { //第一页时
                                 if (data.length == 0) {
                                     that.$e.noData.show();
                                     return false;
@@ -136,62 +170,106 @@ $(function(){
                         }
 
                         // 页面++
-                        that.gV.pageCurrent++;
+                        that.gV.pageNum++;
                         // 将交易记录列表插入到页面上
-                        generateTemplate(data,that.$e.recordListWraperBoxId,that.$e.recordListTemplateId);
+                        generateTemplate(data, that.$e.recordListWraperBoxId, that.$e.recordListTemplateId);
 
-                    }, 200)             
+                    }, 200)
                 },
-                callbackFail: function(json) {
+                callbackFail: function (json) {
                     tipAction(json.message);
                 }
-            }];                        
+            }];
             $.ajaxLoading(obj);
         },
+        bankList: function () {
+            var that = this;
+            var param = {
+                useEnv: 0
+            };
+
+            //发送ajax请求
+            var obj = [{
+                url: site_url.normalPofList_api,
+                data: param,
+                needLogin: true,//需要判断是否登陆
+                //needDataEmpty: false,//不需要判断data是否为空
+                callbackDone: function (json) {  //成功后执行的函数
+
+                    if (json.data.pageList.length) {
+                        var arr = [{ title: '全部', detailId: 1, searchType: 4, data: "" }]
+                        json.data.pageList.map(function (e, i) {
+                            var obj = {}
+                            obj.title = e.bankName + '-' + e.bankAccountMask.substr(-4)
+                            obj.detailId = i + 2
+                            obj.searchType = 4
+                            obj.data = e.tradeAcco
+                            arr.push(obj)
+                        })
+                        that.gV.searchDetailList.push(arr)
+                    }
+
+
+
+
+                },
+                callbackFail: function (json) {  //失败后执行的函数
+
+                    tipAction(json.msg);
+
+                }
+            }];
+            $.ajaxLoading(obj);
+
+        },
         events() {
-        	var that = this;
-        	// 筛选分类的点击事件
-            mui("body").on('tap', '.searchItem' , function(){
-                if($(this).is('.searchItemActive')) {
-                	$(this).removeClass("searchItemActive").siblings('.searchItem').removeClass('searchItemActive');
-                	that.$e.recordSearchDetailBoxId.css("display", "none")
-                	that.gV.mask.close()
+            var that = this;
+            // 筛选分类的点击事件
+            mui("body").on('tap', '.searchItem', function () {
+                if ($(this).is('.searchItemActive')) {
+                    console.log($(this))
+                    $(this).removeClass("searchItemActive").siblings('.searchItem').removeClass('searchItemActive');
+                    that.$e.recordSearchDetailBoxId.css("display", "none")
+                    that.gV.mask.close()
                 } else {
-                	var titleId = $(this).attr("titleId")
-                	that.$e.recordSearchDetailBoxId.html("")
-                	generateTemplate(that.gV.searchDetailList[titleId],that.$e.recordSearchDetailBoxId,that.$e.searchDetailListTemplateId)
-                	$(this).addClass("searchItemActive").siblings('.searchItem').removeClass('searchItemActive');
-                	that.$e.recordSearchDetailBoxId.css("display", "block")
-                	switch(titleId) {
-                		case '0': that.$e.recordSearchDetailBoxId.find(".detailItem").eq(that.gV.selectedAll).addClass("detailActive").siblings('.detailItem').removeClass('detailActive');break;
-                		case '1': that.$e.recordSearchDetailBoxId.find(".detailItem").eq(that.gV.selectedstatus).addClass("detailActive").siblings('.detailItem').removeClass('detailActive');break;
-                		case '2': that.$e.recordSearchDetailBoxId.find(".detailItem").eq(that.gV.selectedTime).addClass("detailActive").siblings('.detailItem').removeClass('detailActive');break;
-                		case '3': that.$e.recordSearchDetailBoxId.find(".detailItem").eq(that.gV.selectedBankCard).addClass("detailActive").siblings('.detailItem').removeClass('detailActive');break;
-                	}
-                	that.gV.mask.show()
+                    var titleId = $(this).attr("titleId")
+                    that.$e.recordSearchDetailBoxId.html("")
+                    generateTemplate(that.gV.searchDetailList[titleId], that.$e.recordSearchDetailBoxId, that.$e.searchDetailListTemplateId)
+                    $(this).addClass("searchItemActive").siblings('.searchItem').removeClass('searchItemActive');
+                    that.$e.recordSearchDetailBoxId.css("display", "block")
+                    switch (titleId) {
+                        case '0': that.$e.recordSearchDetailBoxId.find(".detailItem").eq(that.gV.selectedAll).addClass("detailActive").siblings('.detailItem').removeClass('detailActive'); break;
+                        case '1': that.$e.recordSearchDetailBoxId.find(".detailItem").eq(that.gV.selectedstatus).addClass("detailActive").siblings('.detailItem').removeClass('detailActive'); break;
+                        case '2': that.$e.recordSearchDetailBoxId.find(".detailItem").eq(that.gV.selectedTime).addClass("detailActive").siblings('.detailItem').removeClass('detailActive'); break;
+                        case '3': that.$e.recordSearchDetailBoxId.find(".detailItem").eq(that.gV.selectedBankCard).addClass("detailActive").siblings('.detailItem').removeClass('detailActive'); break;
+                    }
+                    that.gV.mask.show()
                 }
             })
-        	// 筛选列表内容的点击事件
-            mui("body").on('tap', '.detailItem' , function(){
-            	var detailId = $(this).attr("detailId")
-            	var searchType = $(this).attr("searchType")
-                if(!$(this).is('.detailActive')) {
-                	$(this).addClass("detailActive").siblings('.detailItem').removeClass('detailActive');
-                	switch(searchType) {
-                		case '1': that.gV.selectedAll = detailId - 1;break;
-                		case '2': that.gV.selectedstatus = detailId - 1;break;
-                		case '3': that.gV.selectedTime = detailId - 1;break;
-						case '4': that.gV.selectedBankCard = detailId - 1;break;
-                	}
-                	$('.searchItem').removeClass("searchItemActive")
-                	that.$e.recordSearchDetailBoxId.css("display", "none")
-                	that.gV.mask.close()
+            // 筛选列表内容的点击事件
+            mui("body").on('tap', '.detailItem', function () {
+                var detailId = $(this).attr("detailId")
+                var searchType = $(this).attr("searchType")
+                var data = $(this).attr("data")
+                if (!$(this).is('.detailActive')) {
+                    $(this).addClass("detailActive").siblings('.detailItem').removeClass('detailActive');
+                    switch (searchType) {
+                        case '1': that.gV.selectedAll = detailId - 1; that.gV.ajaxdata.applyType = data; break;
+                        case '2': that.gV.selectedstatus = detailId - 1; that.gV.ajaxdata.tradeApplyStatus = data; break;
+                        case '3': that.gV.selectedTime = detailId; that.gV.ajaxdata.timeNode = data; break;
+                        case '4': that.gV.selectedBankCard = detailId - 1; that.gV.ajaxdata.tradeAcc = data; break;
+                    }
+                    $('.searchItem').removeClass("searchItemActive")
+                    that.$e.recordSearchDetailBoxId.css("display", "none")
+                    that.gV.mask.close()
                 } else {
-                	that.$e.recordSearchDetailBoxId.css("display", "none")
-                	that.gV.mask.close()
+                    that.$e.recordSearchDetailBoxId.css("display", "none")
+                    that.gV.mask.close()
                 }
+                that.$e.recordListWraperBoxId.html('')
+                that.initMui(that.gV.ajaxdata);
             })
         }
-	};
-	somePage.init();
+    };
+    somePage.init();
 });

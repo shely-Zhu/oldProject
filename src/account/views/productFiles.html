@@ -1,5 +1,5 @@
 <!-- /*
- * @page:收益明细
+ * @page:产品档案
  * @Author: wangjiajia
  */ -->
  <!DOCTYPE html>
@@ -19,48 +19,47 @@
                 <div class="content">
                     <ul class="contentUl">
                         <li class="liLeft">产品名称</li>
-                        <li class="liRight">(DZ银杏909号)恒天融泽稳泰3号投资基金(特定资产收益权)</li>
+                        <li class="liRight productName"></li>
                     </ul>
                     <ul class="contentUl">
                         <li class="liLeft">投资策略</li>
-                        <li class="liRight">证券</li>
+                        <li class="liRight investTactics"></li>
                     </ul>
                     <ul class="contentUl">
                         <li class="liLeft">产品期限</li>
-                        <li class="liRight">60个月</li>
+                        <li class="liRight productTerms"></li>
                     </ul>
                     <ul class="contentUl">
                         <li class="liLeft">管理人</li>
-                        <li class="liRight">北京易迪基金管理有限公司</li>
+                        <li class="liRight custodianUser"></li>
                     </ul>
                     <ul class="contentUl">
                         <li class="liLeft">托管机构</li>
-                        <li class="liRight">北京易迪基金管理有限公司</li>
+                        <li class="liRight custodianOrg"></li>
                     </ul>
                     <ul class="contentUl">
                         <li class="liLeft">份额登记机构</li>
-                        <li class="liRight">北京易迪基金管理有限公司</li>
+                        <li class="liRight shareRegisterOrg"></li>
                     </ul>
                     <ul class="contentUl">
                         <li class="liLeft">产品备案号</li>
-                        <li class="liRight">0098088888890000</li>
+                        <li class="liRight productRecord"></li>
                     </ul>
                     <ul class="contentUl">
                         <li class="liLeft">风险等级</li>
-                        <li class="liRight">平衡级</li>
+                        <li class="liRight riskLevel"></li>
                     </ul>
                     <ul class="contentUl">
                         <li class="liLeft">最新规模</li>
-                        <li class="liRight">20,000万</li>
+                        <li class="liRight newScale"></li>
                     </ul>
                 </div>
                 <div class="productCostWrap">
                    <div class="productCostTitle">
                         产品费用
                    </div>
-                   <div class="productCostDetail">
-                        营业部毛利分享比例10%【认购费1.5% (价外收取) 】 +【管理费:前2.5年0.2%/年，一次性提取2.5年，自2.5年起1%/年，剩余管理费按日计提，于基金终止时一次性支付】 + 【后端:超额收益分配比例客户：恒天=9:1 (有限合伙清算时收取) 】
-                        营业部毛利分享比例10%【认购费1.5% (价外收取) 】 +【管理费:前2.5年0.2%/年，一次性提取2.5年，自2.5年起1%/年，剩余管理费按日计提，于基金终止时一次性支付】 + 【后端:超额收益分配比例客户：恒天=9:1 (有限合伙清算时收取) 】
+                   <div class="productCostDetail productCharges">
+                       
                    </div>
                    <div class="openOff">
                      <div class="open">展开</div>
@@ -92,6 +91,8 @@
 
  
      @@include('@pathInclude/views/footer.html')
+     <!-- 添加埋点 -->
+	@@include('@pathInclude/views/header.html')
      <script src="/account/static/js/productFiles.js"></script>
  </body>
  

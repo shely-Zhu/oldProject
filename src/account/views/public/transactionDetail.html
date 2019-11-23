@@ -51,10 +51,10 @@
 				<div class="content">
 						<ul class="contentUl">
 							<li>中融货币A</li>
-							<li class="changeColor">{{curveDate}}</li>
+							<li class="changeColor">{{applyDate}}</li>
 						</ul>
 						<ul class="contentUl rightUl">
-							<li>2,019.00元</li>
+							<li>{{balance}}</li>
 							<li class="changeColor">等待确认</li>
 						</ul>
 					</div>
@@ -66,6 +66,8 @@
 		</div>
 
 	@@include('@pathInclude/views/footer.html')
+	<!-- 添加埋点 -->
+	@@include('@pathInclude/views/header.html')
     <script src="/account/static/js/public/transactionDetail.js"></script>
 </body>
 </html>

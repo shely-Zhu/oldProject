@@ -102,6 +102,24 @@ $(function() {
 			// t.init();
 			console.log("aaaa");
 			// this.gV.flag = !this.gV.flag;
+			var obj = [
+				{
+					url: site_url.updateDividend_api,
+					// url: site_url.queryReourceLabels_api,
+					data: {
+						"tradeAcco": "2729", //交易账号
+						"fundCode": "000847",//基金代码
+						"autoBuy":somePage.gV.flag,//分红方式
+					},
+					//async: false,
+					needLogin:true,
+					needDataEmpty: true,
+					callbackDone: function(json) {
+						console.log(json.data)
+					}
+				}
+			]
+			$.ajaxLoading(obj);
 		},
 		//注册事件
 		events: function() {
@@ -119,7 +137,7 @@ $(function() {
 				});
 			})
 			mui('body').on("tap",".type_two",function(e){
-				that.gV.flag = 2;
+				that.gV.flag = 0;
 				$.elasticLayer({
 					id: "tip",
                     title: '',

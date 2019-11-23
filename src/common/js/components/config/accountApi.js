@@ -10,7 +10,7 @@
 module.exports = function() {
     this.login_url =  '/app/account/frontend/loginCheck'; //登录
     // 判断登录状态
-    // this.checkLogin_api = http_url.account_url + '/isLogin';
+    // this.checkLogin_api = http_url.account_url + '/isLogin';P
     // this.custBro_api = http_url.account_url + '/broker/custBroRelQuery'; //理财师查询与客户关系接口
     this.queryClassification_api = http_url.account_url + '/queryClassification'; //投资者分类审核状态查询
     this.applyForClassification_api = http_url.account_url + '/investor/applyForClassification'; //投资者分类申请
@@ -30,12 +30,9 @@ module.exports = function() {
     //标普资产信息
     // this.getTotalAssets_api = http_url.account_url + '/standardPoor/getTotalAssets';
 
-    // 月度报告
-    this.queryMonthlyReport_api = http_url.account_url + '/queryMonthlyReport';
-
     //资产详情
-    this.assetsDetail_api = http_url.account_url + '/positions/assetsDetail';
+    //this.assetsDetail_api = http_url.account_url + '/positions/assetsDetail';
 
     //七日年化
-    this.earningCurve_api = http_url.account_url + '/positions/earningCurve'
+    //this.earningCurve_api = http_url.account_url + '/positions/earningCurve'
 };

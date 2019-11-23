@@ -81,7 +81,6 @@ module.exports = function() {
     this.prvLevel_api = http_url.web_url + '/pef/queryBenefitLevel'; //受益级别查询
     this.prvHisValue_api = http_url.web_url + '/pef/queryHistoryNetValue'; //历史净值查询
     this.prvLight_api = http_url.web_url + '/pef/queryProductImage'; //产品亮点查询
-    this.queryReourceLabels_api = http_url.web_url + "/pef/queryReourceLabels"; //获取私募产品材料标签
     this.prvReource_api = http_url.web_url + '/pef/queryReourceList'; //产品材料接口
     this.recommend_api = http_url.web_url + '/pef/frontend/findRecommand'; //私募首页--产品推荐
     this.collect_info_api = http_url.web_url + '/pef/getRaiseInfo'; //查询产品募集信息
@@ -90,7 +89,7 @@ module.exports = function() {
 
     /*-------------------公募相关------------------------------*/
     this.query_api = http_url.web_url + '/pof/frontend/fund/query'; //热门诊断基金列表搜索
-
+    this.pofTotalAssets_api = http_url.web_url + '/account/pof/totalAssets';// 公募总资产
 
     /*-------------------公募相关 end ------------------------------*/
 
@@ -131,7 +130,14 @@ module.exports = function() {
 
     //文章模板接口
 //  this.getArticle_api = http_url.web_url + '/account/articleExample';
+
     this.getArticle_api = http_url.web_url + '/content/frontend/getArticle';
+    //信息披露
+    this.queryReourceLabels_api = http_url.web_url + '/pef/queryReourceLabels';
+    this.queryReourceList_api = http_url.web_url + '/pef/queryReourceList';
+    //修改分红方式接口
+    this.updateDividend_api = http_url.web_url + '/pof/dividend/updateDividend';
+
 
     //监管账户（老接口）
     this.findSuperviseBank_api = http_url.web_url + '/content/frontend/findSuperviseBank';
@@ -165,30 +171,45 @@ module.exports = function() {
    /*------------------- 私募 start ------------------------------*/
     //私募历史明细
     this.curveHistoryList_api =http_url.web_url +'/account/positions/curveHistoryList' ;
+    this.yieldAssignList_api =http_url.web_url +'/account/positions/yieldAssignList' ;
     this.dealDetailList_api =http_url.web_url +'/account/positions/dealDetailList' ;
 
+    //产品档案
+    this.productRecord_api =http_url.web_url +'/account/positions/productRecord' ;
+    //公募交易明细
+    this.queryTradeApplyByCode_api = http_url.web_url + '/account/pof/queryTradeApplyByCode'; //热门诊断基金列表搜索
      /*------------------- 消息中心 end ------------------------------*/
+
+    this.assetsDetail_api =http_url.web_url +'/account/positions/assetsDetail' ; // 资产详情
+    this.earningCurve_api =http_url.web_url +'/account/positions/earningCurve' ; // 收益走势
+    this.queryHistoryNetValue_api =http_url.web_url +'/account/positions/queryHistoryNetValue' ; // 净值走势
+
+    /*------------------- 私募 end ------------------------------*/
+
 
     /*------------------- 消息中心 start ------------------------------*/
 
     // 消息中心
     this.getNoticeTypeList_api = http_url.web_url + '/account/account/getNoticeTypeList';
+
     // 通知消息列表
     this.systemNotificationList_api = http_url.web_url + '/account/account/systemNotificationList';
     // 非通知消息列表
+
+    // 消息列表
     this.noticeAndTransDynamicList_api = http_url.web_url + '/account/account/noticeAndTransDynamicList';
-    // 通知详情
-    this.getSystemNotification_api = http_url.web_url + '/account/account/getSystemNotification';
+    // 消息详情
+    this.getNoticeAndTransDynamic_api = http_url.web_url + '/account/account/getNoticeAndTransDynamic';
     //查询单条文章(APPCMS后台)
     this.getArticle_api = http_url.web_url + '/content/frontend/getArticle';
-    // 非通知详情
-    this.getNoticeAndTransDynamic_api = http_url.web_url + '/account/account/getNoticeAndTransDynamic';
 
     /*------------------- 消息中心 end ------------------------------*/
 
 
     /*------------------- 月度报告 start ------------------------------*/
 
+     // 月度报告
+    this.queryMonthlyReport_api = http_url.web_url + '/account/queryMonthlyReport';
     //  持仓总览
     this.queryInvestProdHoldShareList_api = http_url.web_url + '/account/report/queryInvestProdHoldShareList';
     // 交易明细
@@ -199,6 +220,28 @@ module.exports = function() {
     this.queryInvestAssetConfigureAdvise_api = http_url.web_url + '/account/report/queryInvestAssetConfigureAdvise';
     // 报告分析（报告明细）
     this.queryInvestReportDetail_api = http_url.web_url + '/account/report/queryInvestReportDetail';
+
+    // 公募总资产（包含资产交易明细）
+    this.totalAssets_api = http_url.web_url + '/account/pof/totalAssets';
+    // 金服WEB-详情页-基金净值走势图查询
+    this.fundNetWorthTrendChart_api = http_url.web_url + '/pof/fundDetails/frontend/fundNetWorthTrendChart';
+    /*------------------- 月度报告 end ------------------------------*/
+
+
+    // 超宝基金产品-交易记录
+    this.queryTradeList_api = http_url.web_url + '/account/pof/cash/queryTradeList';
+
+    // 公募交易列表查询
+    this.tradeList_api = http_url.web_url + '/account/pof/tradeList';
+
+    // 公募普通产品银行卡列表
+    this.normalPofList_api = http_url.web_url + '/account/bankCard/normalPofList';
+
+
+    /*------------------- 基金确认书 start ------------------------------*/
+    this.downloadFile_api = http_url.web_url + '/content/file/mount/download'; //下载pdf
+    this.sendMailForConfirmBill_api = http_url.web_url + '/account/positions/sendMailForConfirmBill'; //下载pdf
+
 
     /*------------------- 月度报告 end ------------------------------*/
 };

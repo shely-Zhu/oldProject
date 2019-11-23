@@ -86,18 +86,18 @@ $(function() {
                 data: {
                     "pageNo": that.gV.pageCurrent, //非必须，默认为1
                     "pageSize": 10,//非必须，默认为10
-                    "projectId":12776,//项目编号
+                    "projectId":20354,//项目编号
                 },
                 //async: false,
                 needDataEmpty: true,
                 callbackDone: function(json) {
                     var data;
-                    if (json.data.length == 0) { // 没有记录不展示
+                    if (json.data.pageList.length == 0) { // 没有记录不展示
                         $(".list").hide()
                         that.$e.noData.show();
                         return false;
-                    } else {
-                        data = json.data;
+                    } else if(json.status == "0000"&&json.data.pageList.length > 0){
+                        data = json.data.pageList;
                     }
                     setTimeout(function() {
 
@@ -112,6 +112,7 @@ $(function() {
 
                                 } else { // 没有更多数据了
                                     t.endPullupToRefresh(true);
+                                    $(".noDataOne").show()
                                 }
                             } else {
                                 //其他页-没有更多数据

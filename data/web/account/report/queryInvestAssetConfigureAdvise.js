@@ -35,7 +35,7 @@ var data = Mock.mock({
                 "minPurchaseAmount":'100',// 起投金额
                 "investExpiration":'5个月', //投资期限
                 "allocationAmount":'100', // 配置金额
-                "allocationRatio":'35',// 配置比例
+                "allocationRatio":'0.1000',// 配置比例
                 "productType":'173',// 产品类型
                 "subdivisionStrategy":'www',  // 产品类别
                 "sevenYearYield":'32',  // 七日年化收益率
@@ -45,7 +45,7 @@ var data = Mock.mock({
                 "minPurchaseAmount":'100',// 起投金额
                 "investExpiration":'5个月', //投资期限
                 "allocationAmount":'100', // 配置金额
-                "allocationRatio":'35',// 配置比例
+                "allocationRatio":'0.1000',// 配置比例
                 "productType":'173',// 产品类型
                 "subdivisionStrategy":'www',  // 产品类别
                 "sevenYearYield":'32',  // 七日年化收益率
@@ -55,7 +55,7 @@ var data = Mock.mock({
                 "minPurchaseAmount":'100',// 起投金额
                 "investExpiration":'5个月', //投资期限
                 "allocationAmount":'100', // 配置金额
-                "allocationRatio":'35',// 配置比例
+                "allocationRatio":'0.1000',// 配置比例
                 "productType":'177',// 产品类型
                 "subdivisionStrategy":'www',  // 产品类别
                 "sevenYearYield":'32',  // 七日年化收益率
@@ -72,7 +72,7 @@ var data = Mock.mock({
                 "minPurchaseAmount":'100',// 起投金额
                 "investExpiration":'5个月', //投资期限
                 "allocationAmount":'100', // 配置金额
-                "allocationRatio":'35',// 配置比例
+                "allocationRatio":'0.1000',// 配置比例
                 "productType":'177',// 产品类型
                 "subdivisionStrategy":'www',  // 产品类别
                 "sevenYearYield":'32',  // 七日年化收益率
@@ -82,7 +82,7 @@ var data = Mock.mock({
                 "minPurchaseAmount":'100',// 起投金额
                 "investExpiration":'5个月', //投资期限
                 "allocationAmount":'100', // 配置金额
-                "allocationRatio":'35',// 配置比例
+                "allocationRatio":'0.1000',// 配置比例
                 "productType":'200',// 产品类型
                 "subdivisionStrategy":'www',  // 产品类别
                 "sevenYearYield":'32',  // 七日年化收益率
@@ -92,7 +92,7 @@ var data = Mock.mock({
                 "minPurchaseAmount":'100',// 起投金额
                 "investExpiration":'5个月', //投资期限
                 "allocationAmount":'100', // 配置金额
-                "allocationRatio":'35',// 配置比例
+                "allocationRatio":'0.1000',// 配置比例
                 "productType":'200',// 产品类型
                 "subdivisionStrategy":'www',  // 产品类别
                 "sevenYearYield":'32',  // 七日年化收益率
@@ -102,7 +102,7 @@ var data = Mock.mock({
                 "minPurchaseAmount":'100',// 起投金额
                 "investExpiration":'5个月', //投资期限
                 "allocationAmount":'100', // 配置金额
-                "allocationRatio":'35',// 配置比例
+                "allocationRatio":'0.1000',// 配置比例
                 "productType":'200',// 产品类型
                 "subdivisionStrategy":'www',  // 产品类别
                 "sevenYearYield":'32',  // 七日年化收益率
@@ -124,7 +124,7 @@ var data = Mock.mock({
                 "minPurchaseAmount":'100',// 起投金额
                 "investExpiration":'5个月', //投资期限
                 "allocationAmount":'100', // 配置金额
-                "allocationRatio":'35',// 配置比例
+                "allocationRatio":'0.1000',// 配置比例
                 "productType":'200',// 产品类型
                 "subdivisionStrategy":'www',  // 产品类别
                 "sevenYearYield":'32',  // 七日年化收益率
@@ -134,7 +134,7 @@ var data = Mock.mock({
                 "minPurchaseAmount":'100',// 起投金额
                 "investExpiration":'5个月', //投资期限
                 "allocationAmount":'100', // 配置金额
-                "allocationRatio":'35',// 配置比例
+                "allocationRatio":'0.1000',// 配置比例
                 "productType":'200',// 产品类型
                 "subdivisionStrategy":'www',  // 产品类别
                 "sevenYearYield":'32',  // 七日年化收益率
@@ -144,7 +144,7 @@ var data = Mock.mock({
                 "minPurchaseAmount":'100',// 起投金额
                 "investExpiration":'5个月', //投资期限
                 "allocationAmount":'100', // 配置金额
-                "allocationRatio":'35',// 配置比例
+                "allocationRatio":'0.1000',// 配置比例
                 "productType":'200',// 产品类型
                 "subdivisionStrategy":'www',  // 产品类别
                 "sevenYearYield":'32',  // 七日年化收益率
@@ -154,7 +154,7 @@ var data = Mock.mock({
                 "minPurchaseAmount":'100',// 起投金额
                 "investExpiration":'5个月', //投资期限
                 "allocationAmount":'100', // 配置金额
-                "allocationRatio":'35',// 配置比例
+                "allocationRatio":'0.1000',// 配置比例
                 "productType":'200',// 产品类型
                 "subdivisionStrategy":'www',  // 产品类别
                 "sevenYearYield":'32',  // 七日年化收益率

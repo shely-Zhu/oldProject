@@ -104,7 +104,6 @@ $(function() {
 		//获取数据函数
 		getData: function(t) {
 			var that = this
-			//			let tempArr = [];
 			var afterData = [];
 			var obj = [{ // 登录日志模拟数据
 				url: site_url.getUserTrackRecord_api,
@@ -116,8 +115,6 @@ $(function() {
 				contentTypeSearch: true,
 				needDataEmpty: false,
 				callbackDone: function(json) {
-
-					//                  let obj = {}
 					if(json.data.length == 0) { // 没有记录不展示
 						that.$e.noData.show();
 						$('.adjustmentRecord').hide();

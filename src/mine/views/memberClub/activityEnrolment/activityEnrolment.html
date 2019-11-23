@@ -1,5 +1,5 @@
  <!-- 已报名活动
- @author caoqiahi 2019-11-18 -->
+ @author caoqihai 2019-11-18 -->
 
 
 <!DOCTYPE html>
@@ -21,6 +21,12 @@
         <!-- 有活动 -->
         <div class="dd_radar HasData">
             <ul class="listHasData">
+                <!-- 暂无数据 -->
+                @@include('@pathCommonViews/noDataImg.html',{"tipText":"暂无数据"})
+            </ul>
+            <ul class="listHasData1">
+                <!-- 暂无数据 -->
+                @@include('@pathCommonViews/noDataImg.html',{"tipText":"暂无数据"})
             </ul>
         </div>
         <!-- 无数据时显示 -->
@@ -29,8 +35,7 @@
             <p>暂无活动信息</p>
         </div> -->
 
-        <!-- 暂无数据 -->
-        @@include('@pathCommonViews/noDataImg.html',{"tipText":"暂无数据"})
+        
 
         <!-- 更多精彩活动 -->
         <div class="more">
@@ -78,7 +83,6 @@
                 <div class="timeco">报名时间&nbsp;2019-09-10&nbsp;12:00</div> 
                 <div class="timeBtn">分享给好友</div>
             </div>
-        </li> 
        
     {{/each}}
     </script>
