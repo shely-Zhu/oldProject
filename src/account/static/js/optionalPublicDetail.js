@@ -116,7 +116,9 @@ $(function() {
 			var newData = {
 				sevenIncomeRate: [], //存放折线图七日年化
 				profitThoudDate: [], //存放折线图收益日期
-				profitThoudValue: [] //存放折线图万份收益
+				profitThoudValue: [], //存放折线图万份收益
+				unitNavValue: [], //单位净值
+				unitYldValue: [] //累计净值
 			}
 			//判断当前画的是七日年化还是万份收益
 			if( $('.lineWrap .titleWrap .active').hasClass('qrnh') ){
@@ -174,6 +176,8 @@ $(function() {
 			       		newData.sevenIncomeRate.push( el.annYldRat);
 			       		newData.profitThoudDate.push( el.trdDt);
 			       		newData.profitThoudValue.push( el.unitYld);
+			       		newData.unitNavValue.push( el.unitNav);//单位净值
+			       		newData.unitYldValue.push( el.unitYld);//累计净值
 			       	})
 			       	switch(num) {
 			       		case 0: that.data['qrnhWfsy'].oneMonth = newData;break;
@@ -319,23 +323,23 @@ $(function() {
 
 			//项目名称
     		$('#HeadBarpathName').html( jsonData.fundName );
+			//总金额
+			$('.typeWrap .totalM').html( jsonData.totalMoney );
+		   	//待确认金额 接口无
+		   	$('.typeWrap .toConfirm .confirmMoney').html( jsonData.inTransitTotal );
+		   	//昨日收益
+		   	$('.typeWrap .sevenYearYield').html( jsonData.income);
+		   	//持有收益
+		   	$('.typeWrap .ownShare').html( jsonData.addupIncome);
+		   	//累计收益  接口无
+		   	$('.typeWrap .accumulatedShare').html( jsonData.incomeUnit);
+			//持有份额
+			$('.openWrap .cyfe').html( jsonData.currentShare);
+			//可用份额
+			$('.openWrap .kyfe').html( jsonData.enableShares);
 
 	    	if( that.data.projectType == "10300" ){ //货币基金
 	    		
-    			//总金额
-    			$('.typeWrap .totalM').html( jsonData.totalMoney );
-    		   	//待确认金额 接口无
-    		   	$('.typeWrap .toConfirm .confirmMoney').html( jsonData.inTransitTotal );
-    		   	//昨日收益
-    		   	$('.typeWrap .sevenYearYield').html( jsonData.income);
-    		   	//持有收益
-    		   	$('.typeWrap .ownShare').html( jsonData.addupIncome);
-    		   	//累计收益  接口无
-    		   	$('.typeWrap .accumulatedShare').html( jsonData.incomeUnit);
-				//持有份额
-				$('.openWrap .cyfe').html( jsonData.currentShare);
-				//可用份额
-				$('.openWrap .kyfe').html( jsonData.enableShares);
 				//七日年化
 				$('.openWrap .qrnh').html( jsonData.sevenDayYield);
 				//万份受益
@@ -345,17 +349,10 @@ $(function() {
 	    	}
 	    	else{ //非货币基金	    		
 	    		//当前市值
-	    		$('.typeWrap .totalM').html( jsonData.capitalisation );
-	    		//持有份额
-	    		$('.typeWrap .topContent .totalShare').html( jsonData.totalShare );
-	    		//七日年化
-	    		$('.typeWrap .sevenYearYield').html( jsonData.sevenYearYield);
-	    		//可赎回份额
-    		   	$('.typeWrap .kshfe').html( jsonData.allowRedemptionShare);
-    		   	//赎回开放日
-    		   	$('.typeWrap .shkfr').html( jsonData.redemptionOpenDay);
-    		   	//可提交赎回申请时间
-    		   	$('.typeWrap .ketjsh').html( (jsonData.beginRedemptionTime ? jsonData.beginRedemptionTime : '') + '至' + ( jsonData.endRedemptionTime ? jsonData.endRedemptionTime : '') );
+	    		//日涨幅
+				$('.openWrap .wfsy').html( jsonData.unitYld);
+				//最新净值
+				$('.openWrap .qrnh').html( jsonData.sevenDayYield);
 	    	}
 
 		},
