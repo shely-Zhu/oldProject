@@ -105,7 +105,9 @@ $(function() {
 		// 获取交易规则内容接口 t 1 稳金 2 稳裕 5 证券
 		getTradeRule() {
 			var that = this;
-			var projectType = that.data.projectType
+			var projectType = Number(that.data.projectType)
+			console.log(projectType)
+			/*var params = {category: 'rule_wenjin'}*/
 			switch(projectType) {
 				case 1: var params = {category: 'rule_wenjin'};break;
 				case 2: var params = {category: 'rule_wenyu'};break;
@@ -125,6 +127,7 @@ $(function() {
 		},
 		// 赎回规则数据
 		setRedeemRule(type) {
+			var that = this;
 			var redeemRule = that.data.redeemRule
 			if(type == 1) {
 				if(redeemRule.indexOf("快赎规则") !== -1) {
