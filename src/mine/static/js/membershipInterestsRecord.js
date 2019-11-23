@@ -185,7 +185,14 @@ $(function(){
                 },
                 callbackFail: function(json) {
                     tipAction(json.msg);
-                }
+                },
+                callbackNoData:function(json){
+                    $('.content').find('.mui-pull-bottom-pocket').removeClass('mui-hidden');
+                    t.endPullupToRefresh(true);
+                    that.$e.listLoading.hide();
+                    that.$e.noData.show();
+                    
+                },
             }]
             $.ajaxLoading(obj);
 

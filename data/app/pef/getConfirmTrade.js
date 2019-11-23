@@ -22,13 +22,18 @@ var data = Mock.mock({
                 confirmDate: '2019-09-09', //确认日期
                 reserveAmount: 1000, //预约金额
                 reserveTime: '2019-09-09', //预约时间
-                reserveStatus: 1, //预约状态 0:待确认，1：排队中，2：排队成功，3：到账中，4：已到帐，5：预约成功，21：已撤销，22：已过期，23：预约失败
+                reserveStatus: 5, //预约状态 1：排队中，2：排队成功，3：已签约，4：合同审核成功，5：合同审核失败
+                reserveStatusDesc: '排队中', //1：排队中，2：排队成功，3：已签约，4：合同审核成功，5：合同审核失败
+                reserveSubStatus: 3, //预约状态的子状态 1：待理财师确认 2：待合格投资者认证 3：待签署电子合同 4：待上传汇款凭证
+                operationNo: '2', //1 合格投资者确认 2 取消预约 3 重新预约 4 签署电子合同 5 查看电子合同 6 下载电子合同 7 转账及上传凭证
+                //8 上传汇款凭证 9 签署追加申请书 10 查看追加申请书 11 下载追加申请书 12 网银转账
+                reserveSubStatusDesc: '待签署电子合同',
                 redeemPortion: '10,000', //赎回份额
                 redeemStatus: 7, //赎回审核状态 0草稿 1待审核2  撤销3 审核通过 4审核失败  5再次驳回 6待确认 7确认成功8 确认失败
                 redeemStatusDesc: '', //赎回审核状态描述
                 redeemDate: '2019-08-09', //赎回申请时间
                 empNo: 'H0178999', //理财师编号
-                empName: '', //理财师名称
+                empName: '理财师1', //理财师名称
                 assignShare: '', //转让份额
                 assigneeShare: '', //受让份额
                 assignAmount: '', //拟转让价格

@@ -9,7 +9,7 @@ var data=Mock.mock({
 	"status": "0000",
     "message": "操作成功",
 	data: { 
-        "list|11":[
+        "list":[
 
             {
             
