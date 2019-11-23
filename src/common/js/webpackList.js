@@ -298,5 +298,8 @@ module.exports = {
     // 基金确认书
      './account/static/js/private/privateFundPdf':   './src/account/static/js/private/privateFundPdf.js',
     //我的定投_定投明细
-    './Financial/static/js/publicPlacement/castSurely_details' : './Financial/static/js/publicPlacement/castSurely_details.js' 
+    './Financial/static/js/publicPlacement/castSurely_details' : './Financial/static/js/publicPlacement/castSurely_details.js',
+
+    //普通基金产品详情页_定投
+    './Financial/static/js/ordinarySetThrow' : './src/Financial/static/js/ordinarySetThrow.js',
 }
