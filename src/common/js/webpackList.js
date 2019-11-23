@@ -297,4 +297,6 @@ module.exports = {
      './account/static/js/public/cashTreasure':   './src/account/static/js/public/cashTreasure.js',
     // 基金确认书
      './account/static/js/private/privateFundPdf':   './src/account/static/js/private/privateFundPdf.js',
+    //普通基金定投结果
+    './Financial/static/js/publicPlacement/surelyResults': './src/Financial/static/js/publicPlacement/surelyResults.js',
 }

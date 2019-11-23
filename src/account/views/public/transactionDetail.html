@@ -9,9 +9,9 @@
 	<title>交易记录</title>
 </head>
 <body>
-	<!-- @@include('@pathCommonViews/load.html')
+	@@include('@pathCommonViews/load.html')
         @@include('@pathCommonViews/noData.html')
-        @@include('@pathCommonViews/loading/listLoading.html') -->
+        @@include('@pathCommonViews/loading/listLoading.html')
     @@include('@pathCommonViews/headBarConfig.html',{"bgColors":"#2C3E77,#273971","showType":"0","pathName":"交易记录"}) 
 
         <div class="mui-slider" id="tabbar">
@@ -38,10 +38,10 @@
 			           
 		        </div>
 		        <div id="item3" class="mui-slider-item mui-control-content">
-					这是恒天简报区域
+					<!-- 这是恒天简报区域 -->
                 </div>  
                 <div id="item4" class="mui-slider-item mui-control-content">
-                        这是恒天简报区域
+                        <!-- 这是恒天简报区域 -->
                 </div>                   
 			</div>
 			
@@ -50,12 +50,12 @@
 				{{#each this}}
 				<div class="content">
 						<ul class="contentUl">
-							<li>中融货币A</li>
+							<li>{{fundName}}</li>
 							<li class="changeColor">{{applyDate}}</li>
 						</ul>
 						<ul class="contentUl rightUl">
 							<li>{{balance}}</li>
-							<li class="changeColor">等待确认</li>
+							<li class="changeColor">{{tradeApplyDesc}}</li>
 						</ul>
 					</div>
 				{{/each}}
