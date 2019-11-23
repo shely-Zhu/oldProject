@@ -85,25 +85,12 @@ $(function() {
 
 			var that = this;
 
-			//产品详情接口
-//			var obj = [{
-//			    url: site_url.totalAssets_api, 
-//			    data: {},
-//			    needLogin: true,
-//			    callbackDone: function(json) {
-//			    	var jsonData = json.data;
-//			    	//设置数据到页面上
-////			    	that.setDomData( jsonData );
-//			    	//请求其他接口
-//			    	if( (that.data.projectType == 10300)){ 
+
 			    		//稳金类项目，请求七日年化/万份收益折线图
 			    		that.getTypeOneData();
 			    		//请求快速赎回和普通赎回的文案
 			    		that.getTxt();
-//			    	}
-//			    },
-//			}];
-//			$.ajaxLoading(obj);	
+
 
 			
 		},
@@ -196,15 +183,26 @@ $(function() {
 		drawLine: function ( type, data) {
 			var that = this;
 			if( type == 'qrnh'){
-				//画的是七日年化折线图
 				var chartId = $('#qrnhLine')[0],
-					xAxisData = data.profitThoudDate,
-					seriesData = data.sevenIncomeRate;
+					xAxisData = data.profitThoudDate;
+					if( that.data.projectType != "10300" ){ //非货币基金
+//						单位净值
+						var seriesData = data.unitNavValue;
+					}else{//货币基金
+						//画的是七日年化折线图
+					    var seriesData = data.sevenIncomeRate;
+					}
 			} else if( type == 'wfsy'){
 				//画的是万份收益折线图
 				var chartId = $('#wfsyLine')[0],
-					xAxisData = data.profitThoudDate,
-					seriesData = data.profitThoudValue;
+					xAxisData = data.profitThoudDate;
+					if( that.data.projectType != "10300" ){ //非货币基金
+						//累计收益
+						var seriesData = data.unitYldValue;
+					}else{//货币基金
+						//画的是万份受益折线图
+					    var seriesData = data.profitThoudValue;
+					}
 			}
 			var myChart = echarts.init( chartId );
 			myChart.setOption({
@@ -344,15 +342,18 @@ $(function() {
 				$('.openWrap .qrnh').html( jsonData.sevenDayYield);
 				//万份受益
 				$('.openWrap .wfsy').html( jsonData.unitYld);
+				
+				$('.qrnh').text("单位净值");
+				$('.wfsy').text("累计净值");
 
     		   	
 	    	}
 	    	else{ //非货币基金	    		
 	    		//当前市值
 	    		//日涨幅
-				$('.openWrap .wfsy').html( jsonData.unitYld);
+				$('.openWrap .rzf').html( jsonData.unitYld);
 				//最新净值
-				$('.openWrap .qrnh').html( jsonData.sevenDayYield);
+				$('.openWrap .zxjz').html( jsonData.sevenDayYield);
 	    	}
 
 		},

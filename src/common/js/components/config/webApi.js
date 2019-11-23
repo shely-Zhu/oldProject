@@ -189,6 +189,8 @@ module.exports = function() {
 
     /*------------------- 月度报告 start ------------------------------*/
 
+     // 月度报告
+    this.queryMonthlyReport_api = http_url.web_url + '/account/queryMonthlyReport';
     //  持仓总览
     this.queryInvestProdHoldShareList_api = http_url.web_url + '/account/report/queryInvestProdHoldShareList';
     // 交易明细
@@ -204,6 +206,17 @@ module.exports = function() {
     // 金服WEB-详情页-基金净值走势图查询
     this.fundNetWorthTrendChart_api = http_url.web_url + '/pof/fundDetails/frontend/fundNetWorthTrendChart';
     /*------------------- 月度报告 end ------------------------------*/
+
+
+    // 超宝基金产品-交易记录
+    this.queryTradeList_api = http_url.web_url + '/account/pof/cash/queryTradeList';
+
+    // 公募交易列表查询
+    this.tradeList_api = http_url.web_url + '/account/pof/tradeList';
+
+    // 公募普通产品银行卡列表
+    this.normalPofList_api = http_url.web_url + '/account/bankCard/normalPofList';
+
 
     /*------------------- 基金确认书 start ------------------------------*/
     this.downloadFile_api = http_url.web_url + '/content/file/mount/download'; //下载pdf

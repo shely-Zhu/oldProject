@@ -90,7 +90,7 @@ $(function() {
                             password: pwdValue, //密码
                             channelType:"2",
 
-                            deviceId:"863471033880773",
+                            deviceId:"862169042707406",
 
                             //deviceId:"864684039820036",
                             //deviceId: "863471033880773"
