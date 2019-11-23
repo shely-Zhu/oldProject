@@ -114,6 +114,7 @@ $(function() {
             var obj = [{ // 系统调仓记录列表
                 url: site_url.yieldAssignList_api,
                 data: {
+                    "projectId":20356,
                     "pageNo": that.gV.aP.pageNo, //非必须，默认为1
                     "pageSize": that.gV.aP.pageSize//非必须，默认为10
                 },
@@ -127,7 +128,7 @@ $(function() {
                         that.getElements.noData.show();
                         return false;
                     } else {
-                        data = json.data
+                        data = json.data.pageList
                     }
                     setTimeout(function() {
                         if (data.length < that.gV.aP.pageSize) {

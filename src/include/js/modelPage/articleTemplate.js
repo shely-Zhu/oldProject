@@ -11,7 +11,7 @@ require('../vendor/config.js');
 require('../vendor/zepto/callback.js');
 require('../vendor/zepto/deferred.js');
 //黑色提示条
-var tipAction = require('../../../common/js/components/tipAction.js');
+var tipAction = require('@pathCommonJs/components/tipAction.js');
 require('@pathCommonJs/components/utils.js');
 require('@pathCommonJs/components/headBarConfig.js');
 require('@pathCommonJs/ajaxLoading.js');
