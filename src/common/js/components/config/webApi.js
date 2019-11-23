@@ -92,7 +92,6 @@ module.exports = function() {
     this.query_api = http_url.web_url + '/pof/frontend/fund/query'; //热门诊断基金列表搜索
     this.pofTotalAssets_api = http_url.web_url + '/pof/totalAssets';// 公募总资产
 
-
     /*-------------------公募相关 end ------------------------------*/
 
 
@@ -161,11 +160,19 @@ module.exports = function() {
     this.curveHistoryList_api =http_url.web_url +'/account/positions/curveHistoryList' ;
     this.yieldAssignList_api =http_url.web_url +'/account/positions/yieldAssignList' ;
     this.dealDetailList_api =http_url.web_url +'/account/positions/dealDetailList' ;
+
+    //产品档案
+    this.productRecord_api =http_url.web_url +'/account/positions/productRecord' ;
+    //公募交易明细
+    this.queryTradeApplyByCode_api = http_url.web_url + '/account/pof/queryTradeApplyByCode'; //热门诊断基金列表搜索
+     /*------------------- 消息中心 end ------------------------------*/
+
     this.assetsDetail_api =http_url.web_url +'/account/positions/assetsDetail' ; // 资产详情
     this.earningCurve_api =http_url.web_url +'/account/positions/earningCurve' ; // 收益走势
     this.queryHistoryNetValue_api =http_url.web_url +'/account/positions/queryHistoryNetValue' ; // 净值走势
 
     /*------------------- 私募 end ------------------------------*/
+
 
     /*------------------- 消息中心 start ------------------------------*/
 
