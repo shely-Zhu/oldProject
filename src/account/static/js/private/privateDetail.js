@@ -118,22 +118,33 @@ $(function() {
 			    needLogin: true,
 			    callbackDone: function(json) {
 			    	that.data.redeemRule = json.data.content.split("=====");
-			    	that.setRedeemRule(1) // 1快速赎回 2普通赎回
+			    	// 判断是否有快速赎回规则
+			    	if(that.data.redeemRule.indexOf("快赎规则") !== -1) {
+			    		that.setRedeemRule(1)
+			    	} else {  // 只有普通赎回规则
+			    		that.setRedeemRule(2)
+			    		$("#redeemNav .quick").css("display", "none").removeClass('active')
+			    		$("#redeemNav .normal").addClass("active")
+			    	}
 			    },
 			}];
 			$.ajaxLoading(obj);	
 		},
-		// 赎回规则数据
+		// 赎回规则数据 1快速赎回 2普通赎回
 		setRedeemRule(type) {
 			var that = this;
-			var redeemRule = that.data.redeemRule
+			var redeemRule = that.data.redeemRule;
+			console.log(redeemRule)
 			if(type == 1) {
 				if(redeemRule.indexOf("快赎规则") !== -1) {
 		    		$("#tradeDatePre").html(redeemRule[redeemRule.indexOf("快赎规则") + 1].replace("快赎轴前文案", ""))
 		    		$("#tradeDateNext").html(redeemRule[redeemRule.indexOf("快赎规则") + 2].replace("快赎轴后文案", ""))
 		    		$("#tradeExplain").html(redeemRule[redeemRule.indexOf("快赎规则") + 3].replace("快赎交易说明", ""))
-		    		if(redeemRule.indexOf("快赎费率说明")) {
+		    		if(redeemRule[redeemRule.indexOf("快赎规则") + 4].indexOf("快赎费率说明") != -1) {
+		    			$("#tradeFee").css("display", "block")
 		    			$("#tradeFee").html(redeemRule[redeemRule.indexOf("快赎规则") + 4].replace("快赎费率说明", ""))
+		    		} else {
+		    			$("#tradeFee").css("display", "none")
 		    		}
 		    	}
 			} else if (type == 2) {
@@ -141,8 +152,11 @@ $(function() {
 		    		$("#tradeDatePre").html(redeemRule[redeemRule.indexOf("普赎规则") + 1].replace("普赎轴前文案", ""))
 		    		$("#tradeDateNext").html(redeemRule[redeemRule.indexOf("普赎规则") + 2].replace("普赎轴后文案", ""))
 		    		$("#tradeExplain").html(redeemRule[redeemRule.indexOf("普赎规则") + 3].replace("普赎交易说明", ""))
-		    		if(redeemRule.indexOf("普赎费率说明")) {
+		    		if(redeemRule[redeemRule.indexOf("普赎规则") + 4] && redeemRule[redeemRule.indexOf("普赎规则") + 4].indexOf("普赎费率说明") != -1) {
+		    			$("#tradeFee").css("display", "block")
 		    			$("#tradeFee").html(redeemRule[redeemRule.indexOf("普赎规则") + 4].replace("普赎费率说明", ""))
+		    		} else {
+		    			$("#tradeFee").css("display", "none")
 		    		}
 		    	}
 			}
@@ -571,6 +585,7 @@ $(function() {
             //赎回按钮点击切换
 			$(document).on('click', '#redeemNav .navSpan', function(e) {
 				$(this).addClass("active").siblings().removeClass('active')
+				console.log($(this).attr("type"))
 				that.setRedeemRule($(this).attr("type"))
             })
             //折线图点击七日年化/万份收益切换区域
