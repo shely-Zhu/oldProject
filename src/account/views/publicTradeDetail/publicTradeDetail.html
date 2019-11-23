@@ -1,0 +1,135 @@
+<!-- 
+@page 公募资产
+@author shiyunrui 2019-11-18
+-->
+<!doctype html>
+<html lang="en">
+
+<head>
+    @@include('@pathInclude/views/meta.html')
+    <link rel="stylesheet" href="/account/static/css/publicTradeDetail/publicTradeDetail.css">
+    <title>交易记录</title>
+</head>
+
+<body>
+    @@include('@pathInclude/views/header.html')
+    @@include('@pathCommonViews/headBarConfig.html',{"pathName":"交易记录","bgColors":"#475A95,#475A95","showType":"1"})
+    <section class="container">
+        
+        <div class="header">
+            <!-- 顶部 包括金额与交易状态 -->
+            <div class="amount_area">
+                <span class="amount">1,000,000.00</span>
+                <span class="">元</span>
+            </div>
+            <div class="trade_status">待扣款</div>
+            <div class="trade_status_des">等待银行汇款</div>
+        </div>
+        <div class="trade_status_area">
+            <!-- 交易状态具体显示 包括申请已受理 确认 收益等 -->
+            <div class="trade_status_item">
+                <div class="trade_status_icon fl"></div>
+                <div class="trade_status_desc fl">申请已受理</div>
+                <div class="trade_status_date fr">2019-09-01 11:00:35</div>
+            </div>
+            <div class="trade_status_item">
+                <div class="trade_status_icon fl"></div>
+                <div class="trade_status_desc fl">申请已受理</div>
+                <div class="trade_status_date fr">2019-09-01 11:00:35</div>
+            </div>
+            <div class="trade_status_item">
+                <div class="trade_status_icon fl"></div>
+                <div class="trade_status_desc fl">申请已受理</div>
+                <div class="trade_status_date fr">2019-09-01 11:00:35</div>
+            </div>
+        </div>
+        <div class="account_info">
+            <!-- 汇款账户信息 -->
+            <div class="item_header">汇款账号信息</div>
+            <div class="item">
+                <div class="fl">户名</div>
+                <div class="fr font_size_28">北京恒天明泽基金销售有限公司公募代销账号</div>
+            </div>
+            <div class="item">
+                <div class="fl">账户</div>
+                <div class="fr">6217 1000 6273 0000</div>
+            </div>
+            <div class="item">
+                <div class="fl">行号</div>
+                <div class="fr">6217 1000 6273 0000</div>
+            </div>
+            <div class="item">
+                <div class="fl">开户行</div>
+                <div class="fr">浦发银行北京莱户营支行</div>
+            </div>
+        </div>
+        <div class="buy_info">
+            <!-- 买入信息 -->
+            <div class="item_header">买入信息</div>
+            <div class="item">
+                <div class="fl">买入产品</div>
+                <span class="iconfont fr">&#xe636;</span>
+                <div class="fr">中融3-5年信用债A  </div>
+            </div>
+            <div class="item">
+                <div class="fl">买入金额</div>
+                <div class="fr">1,000,000,000.00 元</div>
+            </div>
+            <div class="item">
+                <div class="fl">支付方式</div>
+                <div class="bank_icon fr"></div>
+                <div class="fr">中国建设银行0563</div>
+                <div class="pay_mode fr">汇款支付</div>
+            </div>
+            <div class="item">
+                <div class="fl">买入时间</div>
+                <div class="fr">2019-09-01 11:00:35</div>
+            </div>
+        </div>
+        <div class="redeem_info">
+            <!-- 赎回信息 -->
+            <div class="item_header">赎回信息</div>
+            <div class="item">
+                <div class="fl">赎回产品</div>
+                <div class="fr">中融3-5年信用债A  </div>
+            </div>
+            <div class="item">
+                <div class="fl">赎回份额</div>
+                <div class="fr">1000.00 份</div>
+            </div>
+            <div class="item">
+                <div class="fl">到账银行卡</div>
+                <div class="bank_icon fr"></div>
+                <div class="fr">中国建设银行0563</div>
+            </div>
+            <div class="item">
+                <div class="fl">赎回时间</div>
+                <div class="fr">2019-09-01 11:00:35</div>
+            </div>
+        </div>
+        <div>
+            <!-- 查看定投计划 -->
+            <div class="divider"></div>
+            <div class="item">
+                <div class="fl">查看定投计划</div>
+                <span class="iconfont fr">&#xe636;</span>
+            </div>
+        </div>
+
+        <!-- 加载中loading -->
+        @@include('@pathCommonViews/loading/listLoading.html')
+        <!-- 暂无数据 -->
+        @@include('@pathCommonViews/noData.html',{"tipText":"暂无数据"})
+
+
+    </section>
+
+    @@include('@pathInclude/views/footer.html')
+
+    <!-- 添加埋点 -->
+    @@include('@pathInclude/views/header.html')
+
+    <script src="/account/static/js/publicTradeDetail/publicTradeDetail.js"></script>
+</body>
+
+</html>

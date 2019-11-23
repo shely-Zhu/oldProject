@@ -1,5 +1,5 @@
 //  会员权益成长值记录
-// @author caoqiahi 2019-11-11 
+// @author caoqihai 2019-11-11 
 
 
 
@@ -197,14 +197,8 @@ $(function(){
 
 			mui("body").on('tap','.posioneright', function(){
 
-				window.location.href = site_url.examplePage_url;
-				// window.open(site_url.privateActivity_url);
+				window.location.href = site_url.articleTemplate_url+ '?articleBelong=9&applyType=0';
             });
-            
-            //返回上一页
-            $("#goBack").on("click",function(){
-                location.href="javascript:history.go(-1)";
-            })
 
 		},
     }

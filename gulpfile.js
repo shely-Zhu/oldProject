@@ -191,10 +191,10 @@ gulp.task('proxyTask', function() {
                 }),
 
                 proxy(['/wap', '/web/', '/jf/'], {
-                     target: 'https://h5.htjf4.com',
+                     //target: 'https://h5.htjf4.com',
                     //  target: 'http://172.16.187.129:8080',//李亚楠
                     // target: 'http://172.16.187.164:8081',
-                    // target: 'https://h5.chtfundtest.com',
+                     target: 'https://h5.chtfundtest.com',
                     changeOrigin: true,
                     secure: false,
                 }),

@@ -1,0 +1,57 @@
+<!-- 消息中心-通知详情
+ @author yanruiting 2019-11-18
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	@@include('@pathInclude/views/meta.html') 
+	<link rel="stylesheet" href="/homePage/static/css/noticeDetail.css">  
+	<title>通知详情</title>
+</head>
+<body>
+	@@include('@pathCommonViews/load.html')
+    @@include('@pathCommonViews/noDataImg.html')
+    @@include('@pathCommonViews/loading/listLoading.html')
+    <div id="informsDetailBox">
+    	@@include('@pathCommonViews/headBarConfig.html',{"bgColors":"#2C3E77,#273971","showType":"0","pathName":"系统通知详情"})   
+        <div id="informsDetailWrapper">
+            <div id="informsDetailCon">
+                <div id="informsDetailContent"></div>
+                <img src="/homePage/static/img/home_logo@2x.png" class="noticeLogo" alt="">
+                <!-- <div class="detailTitle">关于恒乐汇商城国庆节发货的通知</div>
+                <div class="detailContentCon">
+                    <div class="detailUser">尊敬的客户：</div>
+                    <div class="detailContent">因国庆庆祝活动在北京举行，2019年9月25日-2019年10月7日期间的订单将延迟发货，2019年10月8日恢复正常发货，延迟发货期间可正常下单，恢复正常发货后将按照订单的先后顺序陆续发货。感谢您的支持和理解！恒乐汇商城提前祝您节日快乐！</div>
+                </div>
+                <div class="detailDateCon">
+                    <div class="detailPublisher">恒乐汇商城</div>
+                    <div class="detailDate">2019年9月24日</div>
+                </div> -->
+            </div>
+        </div>   
+    </div>
+
+    <!-- <script id="informsDetail-template" type="text/x-handlebars-template">
+        {{#each this}}
+        <div id="informsDetailCon">
+            <div class="detailTitle">{{mesTitle}}</div>
+            <div class="detailContentCon">
+                <div class="detailUser">尊敬的客户：</div>
+                <div class="detailContent">{{mesContent}}</div>
+            </div>
+            <div class="detailDateCon">
+                <div class="detailPublisher">{{user}}</div>
+                <div class="detailDate">{{createTimeStr}}</div>
+            </div>
+        </div>
+        {{/each}}
+    </script> -->
+
+    <!-- 添加埋点 -->
+    @@include('@pathInclude/views/header.html')
+	<script src="/include/js/vendor/zepto/zepto.js"></script>
+    <script src="/include/js/vendor/root.js"></script>
+    <script src="/include/js/vendor/handlebar/handlebars.js"></script>
+    <script src="/homePage/static/js/noticeDetail.js"></script>
+</body>
+</html>

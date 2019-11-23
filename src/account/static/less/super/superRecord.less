@@ -1,0 +1,211 @@
+// 超宝基金产品-交易记录
+// @author caoqihai 2019-11-20
+
+@import url("@pathInclude/css/mui.min.css");
+@import url('@pathCommonLess/mui/resetMUI.less');
+@import url("@pathCommonLess/reset.less");
+@import url("@pathCommonLess/color.less");
+
+@import url("@pathCommonLessCom/againEnter.less");
+@import url("@pathCommonLessCom/alertBox.less");
+
+@import url("@pathCommonLessCom/tabScroll.less");
+
+//回到顶部的样式
+@import url("@pathCommonLessCom/goTopMui.less");
+@import url("@pathCommonLess/components/elasticLayerTypeFive.less");
+@import url("@pathCommonLessCom/noDataImg.less");
+@import url("@pathCommonLessCom/headBarConfig.less");
+
+.container{
+    width: 100%;
+    height:100%;
+    background-color: @F7FAFD;
+    .br{
+        height: 1px;
+        background: @e0e0e0;
+    }
+
+    // 遮罩层
+    .scroll_mask {
+        width: 100%;
+        height: 60rem;
+        background: @c005;
+        opacity: 0;
+        position: absolute;
+        top: 38%;
+        z-index: 3;
+    }
+
+
+    .nav_fixed {
+        position: static;
+        top: 0;
+        left: 0;
+        z-index: 4;
+        background: @c005;
+    }
+
+
+    // 其他资产列表
+    .myAsset {
+        #slider{
+            background: @F7FAFD !important;
+        }
+
+
+        // nav重置
+        .mui-slider .mui-segmented-control.mui-scroll-wrapper {
+            background: none;
+            box-shadow: none;
+            color: @9B9B9B;
+            padding-top: 0;
+            height: 0.8rem;
+            background-color: @c005;
+            margin-bottom: .18rem;
+            .mui-scroll .mui-control-item{
+                font-size: 0.28rem;
+                line-height: 0.8rem;
+                padding:0;
+                font-family:PingFangSC-Semibold,PingFang SC;
+                font-weight:400;
+                text-align: center;
+            }
+            .mui-scroll .mui-control-item.mui-active {
+                color: @272727;
+                position: relative;
+                border: none;
+
+                &:after {
+                    position: absolute;
+                    height: 0.06rem;
+                    bottom: 0rem;
+                    left: 50%;
+                    margin-left: -.25rem;
+                    content: '';
+                    width: .5rem;
+                    background: linear-gradient(to right, @6C83C9 0%, @061D6A 100%);
+                    border-radius: .03rem;
+                }
+
+            }
+        }
+
+        .mui-table-view-cell {
+            padding: 0;
+        }
+
+        .list {
+            width: 100%;
+
+            .datalist {
+                background: @c005;
+                padding: .28rem .3rem .31rem;
+                border-bottom: 1px solid @E7E9ED;
+                .first{
+                    display: flex;
+                    justify-content: space-between;
+                    .tit{
+                        color: @272727;
+                        height:.4rem;
+                        font-size:.28rem;
+                        font-family:PingFangSC-Medium,PingFang SC;
+                        font-weight:500;
+                        line-height:.4rem;
+                    }
+                    .mon{
+                        height:.45rem;
+                        font-size:.32rem;
+                        font-family:DIN-Medium,DIN;
+                        font-weight:500;
+                        color:@272727;
+                        line-height:.36rem;
+                    }
+                }
+                .second{
+                    display: flex;
+                    justify-content: space-between;
+                    .tim{
+                        height:.33rem;
+                        font-size:.24rem;
+                        font-family:PingFangSC-Regular,PingFang SC;
+                        font-weight:400;
+                        color:@9B9B9B;
+                        line-height:.33rem;
+                    }
+                    .sta{
+                        height:.34rem;
+                        font-size:.24rem;
+                        font-family:PingFangSC-Regular,PingFang SC;
+                        font-weight:400;
+                        color:@9B9B9B;
+                        line-height:.33rem;
+                    }
+                }
+            }
+        }
+
+
+
+    }
+    .mask{
+        width: 100%;
+        height: 100%;
+        position: fixed;
+        top: 0;
+        left: 0;
+        opacity: 0.6;
+        background: #000000;
+        z-index: 9;
+        display: none;
+    }
+
+    .contentWrapper {
+        height: 100%;
+    }
+
+    // 向上按钮，返回顶部
+    .upTop {
+        position: fixed;
+        bottom: 2.3rem;
+        right: 0.3rem;
+        width: 0.7rem;
+        height: 0.7rem;
+        border-radius: 1.35rem;
+        background: rgba(51, 51, 51, 0.85);
+
+        // background: @c002;
+        // opacity: 0.85;
+        span {
+            display: block;
+            text-align: center;
+            margin-top: 0.35rem;
+            font-size: 1.8rem;
+            color: @c005;
+        }
+
+        &.chtwm-upTop {
+            bottom: 4.5rem;
+        }
+    }
+
+    //iscroll上拉加载重置
+    #pullUp {
+        line-height: 2.8rem;
+        padding: 0;
+
+        span {
+            display: inline-block;
+            vertical-align: middle;
+        }
+    }
+
+    .openOrClose {
+        .bind {
+            margin-bottom: 2rem;
+        }
+    }
+
+    
+    
+}

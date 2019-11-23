@@ -1,0 +1,55 @@
+<!--/**
+ * 收益分配明细-详情页
+ * @author  liliang 2019-11-20
+ */-->
+
+ <!doctype html>
+ <html lang="en">
+ 
+ <head>
+    @@include('@pathInclude/views/meta.html')
+    <link rel="stylesheet" href="/account/static/css/private/incomeDistribution.css">
+     <title>收益分配明细</title>
+ </head>
+ 
+ <body>
+     <!--加载图标-->
+	@@include('@pathCommonViews/load.html') 
+    <div class="topTitle">
+     @@include('@pathCommonViews/headBarConfig.html',{"bgColors":"#2C3E77,#273971","showType":"0","pathName":"收益分配明细"})
+    </div>
+   <div class="box">
+       <div class="list" style="width:100%;">
+        <section class="contentWrapper">
+            <ul class="mui-table-view" id="activityDataList">
+                <div class="mui-table-view-cell recordList">
+
+                </div>
+            </ul>
+            @@include('@pathCommonViews/goTop.html')
+        </section>
+        
+    </div>
+   </div>
+   <script id="trans-template" type="text/x-handlebars-template">
+    {{#each this}} 
+            <li class="list-wrap mui-table-view recordList">
+                <h2>{{yieldDate}}</h2>
+                <div class="content">
+                    <p><span>金额(元)</span><b>{{yieldSum}}</b></p>
+                    <p><span>分配类型</span><b>{{assignType}}</b></p>
+                    <p><span>公式</span><b>{{assignFormula}}</b></p>
+                </div>
+            </li>
+    {{/each}}
+   </script>
+    <!-- 加载中loading -->
+    @@include('@pathCommonViews/loading/listLoading.html')
+    <!-- 暂无数据 -->
+    @@include('@pathCommonViews/noDataImg.html',{"tipText":"暂无数据"})
+    @@include('@pathInclude/views/footer.html')
+   <!-- 添加埋点 -->
+	@@include('@pathInclude/views/header.html')
+    <script src="/account/static/js/private/incomeDistribution.js"></script>
+
+ </body>

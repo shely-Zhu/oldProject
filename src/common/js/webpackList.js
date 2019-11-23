@@ -128,23 +128,23 @@ module.exports = {
     './intelligentInvestment/static/js/myCombination': './src/intelligentInvestment/static/js/myCombination.js', //公募会场 第一页
     './intelligentInvestment/static/js/buyCombination': './src/intelligentInvestment/static/js/buyCombination.js', //公募会场 第一页
     //交易明细
-    './intelligentInvestment/static/js/transactionList' : './src/intelligentInvestment/static/js/transactionList.js',
+    './intelligentInvestment/static/js/transactionList': './src/intelligentInvestment/static/js/transactionList.js',
     //收益明细
-    './intelligentInvestment/static/js/incomeDetail' : './src/intelligentInvestment/static/js/incomeDetail.js',
+    './intelligentInvestment/static/js/incomeDetail': './src/intelligentInvestment/static/js/incomeDetail.js',
     //恒小智首页
-    './intelligentInvestment/static/js/investmentIndex' : './src/intelligentInvestment/static/js/investmentIndex.js',
+    './intelligentInvestment/static/js/investmentIndex': './src/intelligentInvestment/static/js/investmentIndex.js',
     //恒小智详情 买入中、买入完成、赎回中、赎回完成
-    './intelligentInvestment/static/js/buyAndRedemptionDetails' : './src/intelligentInvestment/static/js/buyAndRedemptionDetails.js',
+    './intelligentInvestment/static/js/buyAndRedemptionDetails': './src/intelligentInvestment/static/js/buyAndRedemptionDetails.js',
     // 赎回
-    './intelligentInvestment/static/js/redemption' : './src/intelligentInvestment/static/js/redemption.js',
+    './intelligentInvestment/static/js/redemption': './src/intelligentInvestment/static/js/redemption.js',
     // 交易结果  --  赎回结果和买入结果
-    './intelligentInvestment/static/js/transactionResult' : './src/intelligentInvestment/static/js/transactionResult.js',
+    './intelligentInvestment/static/js/transactionResult': './src/intelligentInvestment/static/js/transactionResult.js',
     // 资产买入/赎回详情
-    './intelligentInvestment/static/js/assetBuyAndRedemptionDetails' : './src/intelligentInvestment/static/js/assetBuyAndRedemptionDetails.js',
+    './intelligentInvestment/static/js/assetBuyAndRedemptionDetails': './src/intelligentInvestment/static/js/assetBuyAndRedemptionDetails.js',
     // 一键调仓
-    './intelligentInvestment/static/js/adjustment' : './src/intelligentInvestment/static/js/adjustment.js',
-// 调仓记录
-    './intelligentInvestment/static/js/adjustmentRecord' : './src/intelligentInvestment/static/js/adjustmentRecord.js',
+    './intelligentInvestment/static/js/adjustment': './src/intelligentInvestment/static/js/adjustment.js',
+    // 调仓记录
+    './intelligentInvestment/static/js/adjustmentRecord': './src/intelligentInvestment/static/js/adjustmentRecord.js',
 
     /*--------------------------------------恒小智 end---------------------------------------------------*/
 
@@ -155,7 +155,7 @@ module.exports = {
     './include/js/modelPage/qrCode': './src/include/js/modelPage/qrCode.js',
 
     // 权益中心
-    './personal/static/js/rightsCenter' : './src/personal/static/js/rightsCenter.js',
+    './personal/static/js/rightsCenter': './src/personal/static/js/rightsCenter.js',
 
     './productPrivate/static/js/openPdf': './src/productPrivate/static/js/openPdf.js',
 
@@ -167,19 +167,19 @@ module.exports = {
     './webviews/static/js/regard': './src/webviews/static/js/regard.js',
 
     // 我的成长值
-    './personal/static/js/growth/growthValue' : './src/personal/static/js/growth/growthValue.js',
+    './personal/static/js/growth/growthValue': './src/personal/static/js/growth/growthValue.js',
     //成长值规则
-    './personal/static/js/growth/growthReg' : './src/personal/static/js/growth/growthReg.js',
+    './personal/static/js/growth/growthReg': './src/personal/static/js/growth/growthReg.js',
 
 
 
 
     // 基金诊断
-    './commonResources/fundDiagnosis/static/js/hotDiagnosis' : './src/commonResources/fundDiagnosis/static/js/hotDiagnosis.js',
+    './commonResources/fundDiagnosis/static/js/hotDiagnosis': './src/commonResources/fundDiagnosis/static/js/hotDiagnosis.js',
     // 诊断详情
-    './commonResources/fundDiagnosis/static/js/diagnosisDetail' : './src/commonResources/fundDiagnosis/static/js/diagnosisDetail.js',
+    './commonResources/fundDiagnosis/static/js/diagnosisDetail': './src/commonResources/fundDiagnosis/static/js/diagnosisDetail.js',
     // 基金诊断搜索页
-    './commonResources/fundDiagnosis/static/js/diagnosisSearch' : './src/commonResources/fundDiagnosis/static/js/diagnosisSearch.js',
+    './commonResources/fundDiagnosis/static/js/diagnosisSearch': './src/commonResources/fundDiagnosis/static/js/diagnosisSearch.js',
 
 
     // 标普模型
@@ -187,46 +187,116 @@ module.exports = {
     // 资产配置建议书
     './personal/static/js/assetAllocation': "./src/personal/static/js/assetAllocation.js",
 
-       //jjs持仓明细
-    './wealthResources/otherAssets/static/js/jjsAssets' : './src/wealthResources/otherAssets/static/js/jjsAssets.js',
+    //jjs持仓明细
+    './wealthResources/otherAssets/static/js/jjsAssets': './src/wealthResources/otherAssets/static/js/jjsAssets.js',
     // demo
-    './wealthResources/otherAssets/static/js/demo' : './src/wealthResources/otherAssets/static/js/demo.js',
+    './wealthResources/otherAssets/static/js/demo': './src/wealthResources/otherAssets/static/js/demo.js',
     // 老版-待删除
-    './commonResources//static/js/jjsAssets' : './src/commonResources/static/js/jjsAssets.js',
+    './commonResources//static/js/jjsAssets': './src/commonResources/static/js/jjsAssets.js',
 
     // 埋点
-    './allServerResources/appMd/headerMd' : './src/allServerResources/appMd/headerMd.js',
+    './allServerResources/appMd/headerMd': './src/allServerResources/appMd/headerMd.js',
 
 
     //mine里面所有的二级页面
-    './mine/static/js/regulatoryAccounts' : './src/mine/static/js/regulatoryAccounts.js',
+    './mine/static/js/regulatoryAccounts': './src/mine/static/js/regulatoryAccounts.js',
 
     // 月度报告列表页
-    './mine/static/js/monthReport/monthReportList' : './src/mine/static/js/monthReport/monthReportList.js',
+    './mine/static/js/monthReport/monthReportList': './src/mine/static/js/monthReport/monthReportList.js',
+    // 月度报告详情页
+    './mine/static/js/monthReport/monthReportDetail': './src/mine/static/js/monthReport/monthReportDetail.js',
     // 登录日志查询页面
-    './mine/static/js/journal':'./src/mine/static/js/journal.js',
-
+    './mine/static/js/journal': './src/mine/static/js/journal.js',
+    // 交易明细页面
+    './mine/static/js/transactionDetails': './src/mine/static/js/transactionDetails.js',
+    //修改分红方式页面
+    './mine/static/js/bonusMethod': './src/mine/static/js/bonusMethod.js',
+    //私募资产净值明细页面
+    './mine/static/js/priNetWorthDetails': './src/mine/static/js/priNetWorthDetails.js',
     // 会员权益成长值记录
-    './mine/static/js/membershipInterestsRecord' : './src/mine/static/js/membershipInterestsRecord.js',
+    './mine/static/js/membershipInterestsRecord': './src/mine/static/js/membershipInterestsRecord.js',
     // 会员权益详情
-    './mine/static/js/membershipDetails' : './src/mine/static/js/membershipDetails.js',
+    './mine/static/js/membershipDetails': './src/mine/static/js/membershipDetails.js',
     // 我的奖励
-    './mine/static/js/rewards' : './src/mine/static/js/rewards.js',
+    './mine/static/js/rewards': './src/mine/static/js/rewards.js',
     // 文章模板
-    './mine/static/js/examplePage':'./src/mine/static/js/examplePage.js',
+    './mine/static/js/examplePage': './src/mine/static/js/examplePage.js',
     //联系我们
-    './mine/static/js/concatUs' : './src/mine/static/js/concatUs.js',
+    './mine/static/js/concatUs': './src/mine/static/js/concatUs.js',
     //联系我们-意见反馈
-    './mine/static/js/concatUsAdvise' : './src/mine/static/js/concatUsAdvise.js',
+    './mine/static/js/concatUsAdvise': './src/mine/static/js/concatUsAdvise.js',
 
-     //会员俱乐部
-     './mine/static/js/memberClub/activityList': "./src/mine/static/js/memberClub/activityList.js",
-     //会员俱乐部-暂无数据mine
-     './mine/static/js/memberClub/activityNoList': "./src/mine/static/js/memberClub/activityNoList.js",
-     //mui索引列表插件 
-     './mine/static/js/memberClub/mui.indexedlist': "./src/mine/static/js/memberClub/mui.indexedlist.js",
-     //活动详情
-     './mine/static/js/memberClub/activityDetails': "./src/mine/static/js/memberClub/activityDetails.js",
+    //会员俱乐部
+    './mine/static/js/memberClub/activityList': "./src/mine/static/js/memberClub/activityList.js",
+    //会员俱乐部-暂无数据mine
+    './mine/static/js/memberClub/activityNoList': "./src/mine/static/js/memberClub/activityNoList.js",
+    //mui索引列表插件 
+    './mine/static/js/memberClub/mui.indexedlist': "./src/mine/static/js/memberClub/mui.indexedlist.js",
+    //活动详情
+    './mine/static/js/memberClub/activityDetails': "./src/mine/static/js/memberClub/activityDetails.js",
     //文件上传
-    './mine/static/js/uploadMaterial' : './src/mine/static/js/uploadMaterial.js',
+    './mine/static/js/uploadMaterial': './src/mine/static/js/uploadMaterial.js',
+    //明星理财师-理财师列表
+    './starFinancialPlanner/static/js/starFinancialPlannerList': "./src/starFinancialPlanner/static/js/starFinancialPlannerList.js",
+
+    //历史明细
+    './account/static/js/historyDetail': "./src/account/static/js/historyDetail.js",
+    //交易明细
+    './account/static/js/transactionDetail': "./src/account/static/js/transactionDetail.js",
+    //产品档案
+    './account/static/js/productFiles': "./src/account/static/js/productFiles.js",
+    //信息披露
+    './account/static/js/informationDisclosure': "./src/account/static/js/informationDisclosure.js",
+    //其他资产
+    './wealthResources/otherAssets/static/js/otherAssets': './src/wealthResources/otherAssets/static/js/otherAssets.js',
+    //已确认交易 公共js
+    './account/static/js/common/transcationTem': './src/account/static/js/common/transcationTem.js',
+    //待确认交易
+    // './account/static/js/private/tobeConfirmTransaction': './src/account/static/js/private/tobeConfirmTransaction.js',
+    //收益分配明细
+    './account/static/js/private/incomeDistribution': './src/account/static/js/private/incomeDistribution.js',
+    //公募资产
+    './account/static/js/publicAssets': './src/account/static/js/publicAssets.js',
+
+    // 消息中心
+    './homePage/static/js/noticeCenter': './src/homePage/static/js/noticeCenter.js',
+    // 消息中心-系统通知
+    './homePage/static/js/systemInforms': './src/homePage/static/js/systemInforms.js',
+    // 明星理财师-列表
+    './homePage/static/js/starFinancialPlannerList': './src/homePage/static/js/starFinancialPlannerList.js',
+    // 已报名活动
+    './mine/static/js/memberClub/activityEnrolment': './src/mine/static/js/memberClub/activityEnrolment.js',
+    // 消息中心-通知详情
+    './homePage/static/js/noticeDetail': './src/homePage/static/js/noticeDetail.js',
+    //include---富文本模板
+    './include/js/modelPage/articleTemplate': './src/include/js/modelPage/articleTemplate.js',
+    // 了解恒天
+    './homePage/static/js/understandHT': './src/homePage/static/js/understandHT.js',
+
+    //私募资产详情
+    './account/static/js/private/privateDetail': './src/account/static/js/private/privateDetail.js',
+
+    //自选公募-交易记录
+    // './account/static/js/public/transactionRecord': './src/account/static/js/public/transactionRecord.js',
+
+    //超宝基金产品-交易记录
+    './account/static/js/super/superRecord': './src/account/static/js/super/superRecord.js',
+
+    //自选公募资产详情
+    './account/static/js/optionalPublicDetail': './src/account/static/js/optionalPublicDetail.js',
+
+    // 自选公募交易记录
+    './account/static/js/public/transactionRecords': './src/account/static/js/public/transactionRecords.js',
+    // 自选公募交易明细
+    './account/static/js/public/transactionDetail': './src/account/static/js/public/transactionDetail.js',
+
+    // 自选公募--超宝详情
+    './account/static/js/public/superStreasureDetail': './src/account/static/js/public/superStreasureDetail.js',
+
+    // 现金宝详情页
+     './account/static/js/public/cashTreasure':   './src/account/static/js/public/cashTreasure.js',
+    // 基金确认书
+     './account/static/js/private/privateFundPdf':   './src/account/static/js/private/privateFundPdf.js',
+    //我的定投_定投明细
+    './Financial/static/js/publicPlacement/castSurely_details' : './Financial/static/js/publicPlacement/castSurely_details.js' 
 }

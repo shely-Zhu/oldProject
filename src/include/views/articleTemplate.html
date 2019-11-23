@@ -1,0 +1,22 @@
+<!-- 富文本通用模板
+ @author 田俊国 2019-11-19
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	@@include('@pathInclude/views/meta.html') 
+	<link rel="stylesheet" href="/include/css/articleTemplate.css">  
+	<title>模板</title>
+</head>
+<body>
+    <div id="richTemplateWrap">
+    	@@include('@pathCommonViews/headBarConfig.html',{"bgColors":"#000,#eee","showType":"0","pathName":"模板"})    
+        <div id="contentWrap">
+        	
+        </div>   
+    </div>
+
+	@@include('@pathInclude/views/footer.html')
+    <script src="/include/js/modelPage/articleTemplate.js"></script>
+</body>
+</html>

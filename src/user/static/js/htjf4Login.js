@@ -2,8 +2,8 @@
  * @page: 登录页面
  * @Author: purpleZhao
  * @Date:   2017-01-06 14:11:34
- * @Last Modified by:   songxiaoyu
- * @Last Modified time: 2018-05-08 13:50:13
+ * @Last Modified by:   Marte
+ * @Last Modified time: 2019-11-23 11:57:26
  * @description: 点击注册，跳转注册页面携带url，财商教育注册完，登录完需跳回财商教育页面
  */
 require('../../../include/js/vendor/config.js');
@@ -46,7 +46,7 @@ $(function() {
                 //做校验
                 var result = $.checkInput();
 
-                if (!result) { //未通过校验   
+                if (!result) { //未通过校验
                     console.log('未通过校验');
                     return false;
                 }
@@ -61,7 +61,7 @@ $(function() {
                 //点击提交按钮变色
                 //$(this).removeClass("save").addClass('saveSubmit').attr("disabled", true);
 
-                //获取表单value值 
+                //获取表单value值
                 $.each(result, function(i, el) {
                     if (el.check == 'phone') {
                         phoneValue = el.result; //手机号
@@ -90,15 +90,22 @@ $(function() {
                             password: pwdValue, //密码
                             channelType:"2",
                             deviceId:"864684039820036",
+
+
+                            //deviceId:"864684039820036",
+                            //deviceId: "863471033880773"
+
+                            //deviceId:"863471033880773",
+
+
+
                             // "registerId": "140fe1da9efb5800e07",
-                            
+
                             // "netType": 1,
                             // //openId: that.beforeSet.openId //'oe7KJxLcDy57TLNpYTzi2k44467o' 微信Id,打开登录页面链接带过来的参数openId
                             // "password": "123456",
 						    // "deviceId": "864684039820036",
-						    // "channelType": "2",
 						    // "mobile": "13700051325",
-						    // "registerId": "140fe1da9efb5800e07",
 						    // "accountType": "1",
 						    // "netType": 1
                     },
@@ -133,7 +140,7 @@ $(function() {
                 }else{
                     window.location.href = site_url.registerUrl;
                 }
-                
+
             });
         }
     };

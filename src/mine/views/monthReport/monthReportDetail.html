@@ -1,0 +1,325 @@
+<!-- 月度报告详情页
+ @author zhangyanping 2019-11-19
+-->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	@@include('@pathInclude/views/meta.html')
+	<link rel="stylesheet" href="/mine/static/css/monthReport/monthReportDetail.css">
+	<title></title>
+</head>
+<body>
+	@@include('@pathCommonViews/load.html')
+	<!-- @@include('@pathCommonViews/noDataImg.html')   -->
+	@@include('@pathCommonViews/loading/listLoading.html')
+	
+	<!-- 月度报告详情 -->
+	<div class="monthReportDetail">
+		<!-- 月度报告详情页头部 -->
+		@@include('@pathCommonViews/headBarConfig.html',{"pathName":"月度报告详情页","bgColors":"#475A95,#051445","showType":"1"})
+
+		<!-- 预读报告头部客户信息  start -->
+		<div class="reportDetailHeader">
+			<div class="reportClientInfo">
+				<div class="mui-row clientNameInfo">
+					<div class="mui-col-xs-9">
+						<p class="clientTitle">客户名称</p>
+						<p class="clientName"></p>
+					</div>
+					<div class="mui-col-xs-3 clientLevel">
+
+					</div>
+				</div>
+				<div class="mui-row clientMonth">
+					<div class="mui-col-xs-6">
+						<p>报告月份</p>
+						<p class="reportComent reportMonth"></p>
+					</div>
+					<div class="mui-col-xs-6">
+						<p>客户编号</p>
+						<p class="reportComent monthReportNum"></p>
+					</div>
+				</div>
+
+			</div>
+			
+		</div>
+		<!-- 预读报告头部客户信息  end -->
+
+		<!-- 月末持仓总览、本月交易明细 start -->
+		<div class="reportContainer mui-content">			
+
+		</div>
+		<!-- 月末持仓总览、本月交易明细 end -->
+		<!-- 加载中loading -->
+        @@include('@pathCommonViews/loading/listLoading.html')
+        <!-- 暂无数据 -->
+        @@include('@pathCommonViews/noDataImg.html',{"tipText":"暂无数据"})
+		
+		<!-- 资产情况分析 start -->
+		<div class="assetAnalysis">
+			<div class="assetAnalysisTitle">资产情况分析</div>
+			<p class="monthReportTipContent"></p>
+			<p class="tipInfo">本报告统计截止日期为<span class="endDate"></span>，如有信息变更，请以最新信息为准。如因系统，网络以及其他非明泽销售公司原因导致邮件显示发送，送达等出现错误，恒天明泽基金销售有限公司不承担相应责任。</p>
+			<p class="holdStatus">您当前可能是处于<span class="lifeTerm"></span>，保持流动性的同时又能实现财富增值是您当前最主要的理财目标，你的风险等级是<span class="riskLevel"></span>，对风险有清晰的认识，并且您具备一定的投资经验，因此建议您增加<span class="addTypes"></span>资产配比，让您的资产更能抵御市场风险。</p>
+
+			<div class="holdProduct">
+				<p class="holdProduct">您当前的资产配比</p>
+				<div class='pieBox'>
+					<div class='circle'></div>
+				</div>
+				<p class="holdProduct">建议您的资产配比</p>
+				<div class='pieBox'>
+					<div class='circle'></div>
+				</div>
+			</div>
+
+			
+		</div>
+		<!-- 资产情况分析 end -->
+
+		<div class="optimization">根据建议配置，为您优选产品</div>
+		<div class="proListCon">
+			<!-- 产品列表 -->
+			<div class="optimizationList">
+				
+			</div>
+			<!-- 产品列表 -->
+		
+			<!-- 温馨提示 -->
+			<div class="tip">
+				<p>温馨提示：</p>
+				<p>本资产配置建议仅为服务信息，不构成对于投资者的实质性建议或承诺，也不作为任何法律文件。基金过往业绩不代表未来表现，市场有风险，投资需谨慎。投资者购买基金时，请仔细阅读《基金合同》和《招募说明书》，自行做出投资选择。</p>
+			</div>
+			<!-- 温馨提示 -->
+		</div>
+
+		<script id="transaction-template" type="text/x-handlebars-template">
+			{{! 列表 内容 使用mui的上拉加载}}
+			<div class="list">
+				{{! list是包裹上拉加载区域的，在js中计算当前页面中的list高度，不能超出一屏}}
+
+				{{! 初始化上拉加载区域，使用contentWrapper class}}
+				{{! contentWrapper 需要添加样式，具体见less文件}}
+				<div class="contentWrapper">
+
+					<ul class="mui-table-view">
+						<li class="mui-table-view-cell">
+						{{! 所有内容  需要放在这个li里，且里面不能再用Li元素}}
+						{{{content}}}
+
+						</li>
+					</ul>
+
+				</div>
+			</div>
+		</script>
+
+		<script id="second-template" type="text/x-handlebars-template">
+			{{! 左侧页面列表}} 
+			{{#if holdPosition}}
+				{{#if flag1}} 
+					<div class="privateFund">
+						<p class="privateFundHeader">私募基金</p>
+						{{#each pefSaleList}}
+							<div class="datalist">
+								<div class="proName clearfix">
+									<span class="proNameBefore"></span>
+									<p class="proNameCon">{{fundName}}</p>
+								</div>
+								<div class="haveFundCon mui-row">
+									<div class="mui-col-xs-3">
+										<p>持有资产(元）</p>
+										<p>{{totalAssets}}</p>
+									</div>
+									{{#if pefSaleFlag1}}
+										<div class="mui-col-xs-3">
+											<p>持有份额</p>
+											<p>{{totalShares}}</p>
+										</div>
+									{{/if}}
+									{{#if pefSaleFlag2}}
+										<div class="mui-col-xs-3">
+											<p>业绩比较基准</p>
+											<p>{{investPerformanceComparison}}</p>
+										</div>
+									{{/if}}
+									{{#if pefSaleFlag3}}
+										<div class="mui-col-xs-3">
+											<p>参考净值</p>
+											<p>{{netValue}}</p>
+										</div>
+									{{/if}}
+								</div>
+							</div>
+						{{/each}} 
+					</div>
+				{{/if}} 
+				{{#if flag2}} 
+					<div class="publicFund">
+						<p class="publicFundHeader">公募基金</p>
+						{{#each pofList}}
+							<div class="datalist">
+								<div class="proName clearfix">
+									<span class="proNameBefore"></span>
+									<p class="proNameCon">{{fundName}}</p>
+								</div>
+								<div class="haveFundCon mui-row">
+									<div class="mui-col-xs-4">
+										<p>净值</p>
+										<span>{{netValue}}</span>
+									</div>
+									<div class="mui-col-xs-4">
+										<p>市值</p>
+										<span>{{marketValue}}</span>
+									</div>
+									<div class="mui-col-xs-4">
+										<p>净值日期</p>
+										<span>{{netDate}}</span>
+									</div>
+								</div>
+							</div>
+						{{/each}} 
+					</div>
+				{{/if}}
+				{{#if flag3}} 
+					<div class="otherAssets">
+						<p class="privateFundHeader">其他持仓</p>
+						<div class="datalist">
+							<div class="proName clearfix">
+								<span class="proNameBefore"></span>
+								<p class="proNameCon">{{fundName}}</p>
+							</div>
+							<div class="haveFundCon clearfix">
+								<div class="total fl">
+									<p>总资产(元)</p>
+									<span>{{totalAssets}}</span>
+								</div>
+							</div>
+						</div>
+						<div class="referenceTip">注：定融定投数据由恒天明泽基金销售有限公司提供，本报告作聚合展示，仅供参考。</div>
+					</div>
+				{{/if}}
+			{{/if}}
+			{{#if tradeDtail}}
+				{{#if flag1}} 
+					<div class="publicFund">
+						<p class="publicFundHeader">私募基金投资流水</p>
+						{{#each pefSaleInfoList}}
+							<div class="datalist" >
+								<div class="proName">
+									<span class="proNameBefore"></span>
+									<p class="proNameCon">{{fundName}}</p>
+								</div>
+								<div class="haveFundCon mui-row">
+									<div class="mui-col-xs-3">
+										<p>确认金额</p>
+										<p>{{confirmValue}}</p>
+									</div>
+									<div class="mui-col-xs-3">
+										<p>确认份额</p>
+										<p>{{confirmShare}}</p>
+									</div>
+									<div class="mui-col-xs-3">
+										<p>日期</p>
+										<p>{{confirmDate}}</p>
+									</div>
+									<div class="mui-col-xs-3">
+										<p>成交净值</p>
+										<p>{{netValue}}</p>
+									</div>
+									
+								</div>
+							</div>
+						{{/each}} 
+					</div>
+				{{/if}}
+				{{#if flag2}} 
+					<div class="publicFund">
+						<p class="publicFundHeader">公募基金投资流水</p>
+						{{#each pofInfoList}}
+							<div class="datalist">
+								<div class="proName">
+									<span class="proNameBefore"></span>
+									<p class="proNameCon">{{fundName}}</p>
+								</div>
+								<div class="haveFundCon mui-row">
+									<div class="mui-col-xs-3">
+										<p>确认金额</p>
+										<p>{{confirmValue}}</p>
+									</div>
+									<div class="mui-col-xs-3">
+										<p>确认份额</p>
+										<p>{{confirmShare}}</p>
+									</div>
+									<div class="mui-col-xs-3">
+										<p>日期</p>
+										<p>{{confirmDate}}</p>
+									</div>
+									<div class="mui-col-xs-3">
+										<p>成交净值</p>
+										<p>{{netValue}}</p>
+									</div>
+								</div>
+							</div>
+						{{/each}} 
+					</div>
+				{{/if}}
+			{{/if}}
+		</script>
+
+		<script id="optimizationList" type="text/x-handlebars-template">
+		{{! 左侧页面列表}}
+		{{#each this}}
+			<div class="assetsCon clearfix">
+				<h2>{{assetTypeDesc}}<span>（投资比例{{assetRatioDesc}}%）</span></h2>
+				<ul class="assetsList">
+					{{#each productList}}
+						<li>
+							<h3>配置比例{{allocationRatiodesc}}%</h3>
+							<div class="assetsCon">
+								{{#if flag1}}
+									<p>{{productTypeDesc}}{{subdivisionStrategyDesc}}</p>
+								{{else}}
+									<p>{{productName}}</p>
+								{{/if}}
+								<div class="assetsConB clearfix">
+									{{#if flag2}}
+										<span>{{subdivisionStrategyDesc}}</span>
+										<span>{{allocationAmountdesc}}万起投</span>
+										<span>{{investExpiration}}</span>
+									{{/if}}
+								</div>
+							</div>
+							{{!-- 私募 --}}
+							{{#if flag2}}
+								<a class="btn_order" href="javascript:;">立即预约</a>
+							{{/if}}
+							{{!-- 其他 --}}
+							{{#if flag1}}
+								<a class="btn_order consult" href="javascript:;" productName="{{productName}}">立即咨询</a>
+							{{/if}}
+							{{!-- 公募 --}}
+							{{#if flag3}}
+								<a class="btn_order" href="javascript:;">立即购买</a>
+							{{/if}}
+						</li>
+					{{/each}}
+					
+				</ul>
+			</div>
+
+		{{/each}}
+	</script>
+
+	</div>
+
+
+	@@include('@pathInclude/views/footer.html')
+	<!-- 添加埋点 -->
+	@@include('@pathInclude/views/header.html')
+	<script src="/include/js/vendor/echarts/echarts.min.js"></script>
+	<script src="/mine/static/js/monthReport/monthReportDetail.js"></script>
+</body>
+</html>

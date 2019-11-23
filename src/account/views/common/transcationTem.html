@@ -1,0 +1,167 @@
+<script id="trans-template" type="text/x-handlebars-template">
+    {{#each this}}
+    <!---------- 申购状态 ---------->
+    <!-- 待确认的预约明细=已确认的申购 -->
+    {{#if businessType1}}
+    <!----- 已确认 ----->
+    {{#if isConfirmTrans}}
+    <div class="transList">
+        <!-- 名称 -->
+        <div class="listName">{{projectName}}</div>
+        <!-- 名称 -->
+        <!-- 金额 -->
+        <div class="clearfix listCon">
+            <div class="listItem">
+                <p>确认份额(份)</p>
+                <span>{{confirmShare}}</span>
+            </div>
+            <div class="listItem">
+                <p>确认金额(元)</p>
+                <span>{{confirmAmount}}</span>
+            </div>
+            <div class="listItem">
+                <p>确认日期</p>
+                <span>{{confirmDate}}</span>
+            </div>
+        </div>
+        <!-- 金额 -->
+        <!-- 申购图片 -->
+        <div class="typeImg sg"></div>
+        <!-- 申购图片 -->
+    </div>
+    {{/if}}
+    <!----- 未确认 ----->
+    {{#if notConfirmTrans}}
+    <div class="transList">
+        {{#unlesee appointmentFinished}}
+        <div class="statusTip">{{reserveStatusDesc}}</div>
+        {{/unlesee}}
+        <!-- 名称 -->
+        <div class="listName mt30">{{projectName}}</div>
+        <!-- 名称 -->
+        <!-- 金额 -->
+        <div class="clearfix listCon">
+            <div class="listItem">
+                <p>预约金额(元)</p>
+                <span>{{reserveAmount}}</span>
+            </div>
+            <div class="listItem">
+                <p>预约时间</p>
+                <span>{{reserveTime}}</span>
+            </div>
+            <div class="listItem">
+                <p>理财师</p>
+                <span>{{empName}}</span>
+            </div>
+        </div>
+        <!-- 金额 -->
+        {{#if appointmentFinished}}
+        <!-- 创建时间 -->
+        <div class="creatTime">创建时间：{{reserveTime}}</div>
+        <!-- 创建时间 -->
+        {{/if}}
+        <!-- 进度 -->
+        <div class="toolCon clearfix">
+            {{#if appointmentSuccess}}
+            <span class="tipImg"></span> {{/if}} {{#if appointmentFailed}}
+            <span class="tipImg"></span> {{/if}}
+            <span>{{reserveSubStatus}}</span>
+            <div class="toDetail">详情</div>
+        </div>
+        <!-- 进度 -->
+        <!-- 预约图片 -->
+        <div class="typeImg yy"></div>
+        <!-- 预约图片 -->
+    </div>
+    {{/if}}
+    <!---------- 申购状态 ---------->
+    <!---------- 赎回状态 ---------->
+    {{else if businessType2}}
+    <!-- 赎回状态分为待确认和已确认共3中状态。待确认只有审核通过一种状态；已确认有两种状态：成功(左上角文字不展示)和审核驳回 -->
+    <div class="transList">
+        {{#if redeemStatusDesc}}
+        <div class="statusTip">{{redeemStatusDesc}}</div>
+        <!-- 有描述 -->
+        <div class="listName mt30">{{projectName}}</div>
+        {{else}}
+        <!-- 无描述 -->
+        <div class="listName">{{projectName}}</div>
+        {{/if}}
+        <!-- 名称 -->
+        <!-- 金额 -->
+        <div class="clearfix listCon">
+            <div class="listItemHalf">
+                <p>赎回份额(份)</p>
+                <span>{{redeemPortion}}</span>
+            </div>
+            <div class="listItem">
+                <p>赎回申请日期</p>
+                <span>{{redeemDate}}</span>
+            </div>
+        </div>
+        <!-- 金额 -->
+        <!-- 赎回图片 -->
+        <div class="typeImg sh"></div>
+        <!-- 赎回图片 -->
+    </div>
+    <!---------- 赎回状态 ---------->
+    <!---------- 分红状态 ---------->
+    <!-- 待确认里没有分红 -->
+    {{else if businessType3}}
+    <div class="transList">
+        <!-- 名称 -->
+        <div class="listName">{{projectName}}</div>
+        <!-- 名称 -->
+        <!-- 金额 -->
+        <div class="clearfix listCon">
+            <div class="listItem">
+                <p>确认份额(份)</p>
+                <span>{{confirmShare}}</span>
+            </div>
+            <div class="listItem">
+                <p>确认金额(元)</p>
+                <span>{{confirmAmount}}</span>
+            </div>
+            <div class="listItem">
+                <p>确认日期</p>
+                <span>{{confirmDate}}</span>
+            </div>
+        </div>
+        <!-- 金额 -->
+        <!-- 分红图片 -->
+        <div class="typeImg fh"></div>
+        <!-- 分红图片 -->
+    </div>
+    <!---------- 分红状态 ---------->
+    <!---------- 预约状态 ---------->
+    {{else if businessType45}}
+    <div class="transList">
+        <div class="statusTip">{{reserveStatusDesc}}</div>
+        <!-- 名称 -->
+        <div class="listName mt30">{{projectName}}</div>
+        <!-- 名称 -->
+        <!-- 金额 -->
+        <div class="clearfix listCon">
+            <div class="listItem">
+                <p>预约金额(元)</p>
+                <span>{{reserveAmount}}</span>
+            </div>
+            <div class="listItem">
+                <p>预约时间</p>
+                <span>{{reserveTime}}</span>
+            </div>
+            <div class="listItem">
+                <p>理财师</p>
+                <span>{{empName}}</span>
+            </div>
+        </div>
+        <!-- 金额 -->
+        <!-- 预约图片 -->
+        <div class="typeImg yy"></div>
+        <!-- 预约图片 -->
+    </div>
+    <!---------- 预约状态 ---------->
+
+
+    {{/if}} {{/each}}
+</script>

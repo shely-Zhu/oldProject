@@ -1,0 +1,43 @@
+<!-- 消息中心-系统通知
+ @author yanruiting 2019-11-15
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	@@include('@pathInclude/views/meta.html') 
+	<link rel="stylesheet" href="/homePage/static/css/systemInforms.css">  
+	<title>系统通知</title>
+</head>
+<body>
+    @@include('@pathCommonViews/load.html')
+    @@include('@pathCommonViews/noDataImg.html')
+    @@include('@pathCommonViews/loading/listLoading.html')
+    <div id="systemInformsBox">
+        @@include('@pathCommonViews/headBarConfig.html',{"bgColors":"#2C3E77,#273971","showType":"0","pathName":""}) 
+        <div id="systemInformsCon">            
+            <div class="list">
+                <div class="contentWrapper">
+                    <div id="informsListWrapper"></div>
+                    @@include('../../../common/views/goTop.html')   
+                </ul>
+                </div>
+            </div>
+        </div>   
+    </div>
+
+    <script id="informsList-template" type="text/x-handlebars-template">
+        {{#each this}}
+        <div class="systemInformItem" noticeId="{{id}}">
+            <div class="itemTitle">{{mesTitle}}</div>
+            <div class="itemContent"><div class="itemContentWord">{{mesContent}}</div></div>
+            <div class="itemDate">{{date}}<span class="dateLeft"></span><span>{{time}}</span></div>
+        </div>
+        {{/each}}
+    </script>
+
+	@@include('@pathInclude/views/footer.html')
+    <!-- 添加埋点 -->
+    @@include('@pathInclude/views/header.html')
+    <script src="/homePage/static/js/systemInforms.js"></script>
+</body>
+</html>

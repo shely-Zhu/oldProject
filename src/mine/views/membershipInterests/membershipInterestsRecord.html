@@ -1,5 +1,5 @@
  <!-- 会员权益成长值记录
- @author caoqiahi 2019-11-11 -->
+ @author caoqihai 2019-11-11 -->
 
 
 <!DOCTYPE html>
@@ -73,7 +73,7 @@
                 @@include('@pathCommonViews/goTop.html')
             </ul>
             <!-- 没有数据 -->
-            @@include('@pathCommonViews/noData.html')
+            @@include('@pathCommonViews/noDataImg.html')
             <!-- 加载中loading -->
             @@include('@pathCommonViews/load.html')
         </div>
@@ -101,9 +101,9 @@
         </div>
         {{/each}}
     </script>
-
+    <!-- 添加埋点 -->
+	@@include('@pathInclude/views/header.html')
     @@include('@pathInclude/views/footer.html')
-    <script src="/include/js/iscroll.js"></script>
     <script src="/mine/static/js/membershipInterestsRecord.js"></script>
 
 

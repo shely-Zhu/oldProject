@@ -1,0 +1,59 @@
+<!-- 
+@page 已确认交易
+@author peicongcong 2019-11-19
+-->
+<!doctype html>
+<html lang="en">
+
+<head>
+    @@include('@pathInclude/views/meta.html')
+    <link rel="stylesheet" href="/account/static/css/private/tobeConfirmTransaction.css">
+    <title>待确认交易</title>
+</head>
+
+<body>
+    <div class="topTitle">
+        @@include('@pathInclude/views/header.html') @@include('@pathCommonViews/headBarConfig.html',{"pathName":"待确认交易","bgColors":"#3E3C3C,#3E3C3C"})
+        <!-- 筛选 -->
+        <div class="hopper"></div>
+        <!-- 筛选 -->
+        <!-- 筛选区域 -->
+        <div class="hopperCon">
+            <ul>
+                <li class="active" data=''>全部</li>
+                <li data="1">申购</li>
+                <li data="2">赎回</li>
+                <li data="3">分红</li>
+                <li data="4">预约撤单</li>
+                <li data="5">预约过期</li>
+                <li data="6">转让已完成</li>
+                <li data="7">受让已完成</li>
+            </ul>
+        </div>
+        <!-- 筛选区域 -->
+    </div>
+    <div class="warp">
+
+        <div class="list">
+            <div class="contentWrapper">
+                <div class="contentWrap">
+                    <!-- 放置列表 -->
+
+                </div>
+                @@include('@pathCommonViews/goTop.html')
+            </div>
+        </div>
+        @@include('../../../common/views/load.html')
+        <!-- 加载中loading -->
+        @@include('@pathCommonViews/loading/listLoading.html')
+        <!-- 暂无数据 -->
+        @@include('@pathCommonViews/noDataImg.html',{"tipText":"暂无数据"})
+    </div>
+    <div class="mask"></div>
+</body>
+<!-- 公共模板 -->
+@@include('../common/transcationTem.html') @@include('@pathInclude/views/footer.html')
+<!-- 添加埋点 -->
+<script src="/account/static/js/private/tobeConfirmTransaction.js"></script>
+
+</html>

@@ -21,6 +21,18 @@ var pathTitle=[
     {
         pathName:"登录日志查询",
         pathUrl:"eruda3" 
+    },
+    {
+        pathName:"消息中心"
+    },
+    {
+        pathName:"了解恒天" 
+    },
+    {
+        pathName:"交易记录" 
+    },
+    {
+        pathName:"收益明细" 
     }
 ]
 $(function(){
@@ -44,6 +56,7 @@ $(function(){
     if($("#HeadBarConfigBox").attr('showType')=='1'){
         var colors=$("#HeadBarConfigBox").attr('bgColors').split(",")
          ClearStyle()
+        $('.zhanweifu').css('display','none')
         $(window).scroll(function(){
             var tops=$(this).scrollTop();
             if(tops>50){//当window的scrolltop距离大于50时，
@@ -53,28 +66,21 @@ $(function(){
                 ClearStyle()
             }
         });
+        // 设置返回按钮和title的颜色
+        var goBackColor = $("#HeadBarConfigBox a").attr('goBackColor');
+        var titleColor = $("#HeadBarConfigBox span").attr('titleColor');
+        if(goBackColor){
+            $("#HeadBarConfigBox a").css({'color':goBackColor});
+        }
+        if(titleColor){
+            $("#HeadBarConfigBox span").css({'color':titleColor});
+        }
     }else{
 
     }
     //返回上一页
     $("#goBack").on("click",function(){
-        //从原生页面到H5页面document.referrer的值为''
-        if(document.referrer == ''){
-            var u = navigator.userAgent, app = navigator.appVersion;
-            var isAndroid = u.indexOf('Android') > -1 || u.indexOf('Linux') > -1; //g
-            var isIOS = !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/); //ios终端
-            if (isAndroid) {
-               //这个是安卓操作系统
-               window.jsObj.backNative();
-            }
-            if (isIOS) {
-        　　　　//这个是ios操作系统
-                window.webkit.messageHandlers.backNative.postMessage('backNative');
-            }
-        }else{
-            location.href = "javascript:history.go(-1)"
-        }
-
+        location.href="javascript:history.go(-1)";
     })
     
 })

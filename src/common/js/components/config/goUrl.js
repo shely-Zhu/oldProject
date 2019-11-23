@@ -332,4 +332,19 @@ module.exports = function() {
     //活动详情->我的奖励
     this.rewards_url = go_url.no_url + '/mine/views/rewards.html';
     /*-------------------------------活动列表 end -----------------------*/
+
+    /*-------------------------------消息中心 start -----------------------*/
+    // 通知详情
+    this.noticeDetails_url = go_url.no_url + '/homePage/views/notice/noticeDetail.html';
+    this.systemInforms_url = go_url.no_url + '/homePage/views/notice/systemInforms.html';
+    /*-------------------------------消息中心 end -----------------------*/
+
+
+    //h5模板页
+    this.articleTemplate_url = go_url.no_url + '/include/views/articleTemplate.html';
+    // 月度报告详情页
+    this.monthReportDetail_url = go_url.no_url + '/mine/views/monthReport/monthReportDetail.html';
+    //自选公募详情页
+    this.optionalPublicDetail_url = go_url.no_url + '/account/views/optionalPublicDetail.html';
+
 };
