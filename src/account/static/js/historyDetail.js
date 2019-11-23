@@ -92,12 +92,13 @@ $(function() {
                 needDataEmpty: true,
                 callbackDone: function(json) {
                     var data;
-                    if (json.data.length == 0) { // 没有记录不展示
+                    if (json.status == "0000") { // 没有记录不展示
+                        data = json.data;
+                        // return false;
+                    }else if(json.status == "1000"){
                         $(".list").hide()
                         that.$e.noData.show();
                         return false;
-                    } else {
-                        data = json.data;
                     }
                     setTimeout(function() {
 

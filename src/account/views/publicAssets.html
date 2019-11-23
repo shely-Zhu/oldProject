@@ -71,7 +71,7 @@
         <!-- 加载中loading -->
         @@include('@pathCommonViews/loading/listLoading.html')
         <!-- 暂无数据 -->
-        @@include('@pathCommonViews/noData.html',{"tipText":"暂无数据"})
+        @@include('@pathCommonViews/noDataImg.html',{"tipText":"暂无数据"})
 
 
     </section>
@@ -121,12 +121,10 @@
             
         </div>
 		{{/each}}
-	</script>
-
-
-    @@include('@pathInclude/views/footer.html')
-
+    </script>
+    
     <!-- 添加埋点 -->
+    @@include('@pathInclude/views/footer.html')
     @@include('@pathInclude/views/header.html')
 
     <script src="/account/static/js/publicAssets.js"></script>

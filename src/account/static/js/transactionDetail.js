@@ -98,7 +98,7 @@ $(function() {
                         $(".list").hide()
                         that.$e.noData.show();
                         return false;
-                    } else {
+                    } else if(json.status == "0000"){
                         data = json.data.pageList;
                     }
                     setTimeout(function() {

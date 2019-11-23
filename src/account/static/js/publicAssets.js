@@ -32,6 +32,10 @@ $(function () {
                 //async: false,
                 needDataEmpty: true,
                 callbackDone: function (json) {
+                    if (json.status == '1000'){
+                        $('.noData').show();
+                        return;
+                    }
                     that.gV.data = json.data;
                     //总资产
                     $('.totalM').html(that.gV.data.myAssetTotalMask);

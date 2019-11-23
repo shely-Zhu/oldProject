@@ -2,7 +2,7 @@
  * @Author: chennn 
  * @Date: 2019-11-22 10:52:18 
  * @Last Modified by: chennn
- * @Last Modified time: 2019-11-22 17:55:14
+ * @Last Modified time: 2019-11-22 18:18:54
  */
 
 require('@pathCommonJsCom/utils.js');
@@ -76,11 +76,11 @@ $(function(){
             //点击下载按钮，显示弹框  
             $('.downLoad').on('click',function(){ 
                 var obj={
-                    title:'ttt',
+                    title:'',
                     // id: 'emailPop',
                     p:'<p class="elastic_p">月度投资报告将发送到您的默认邮箱</p>'+
                         '<p class="elastic_p">'+that.email+'</p>'+
-                        '<p class="elastic_p otherColor">邮箱有变更，去修改</p>',
+                        '<p class="elastic_p otherColor" id="changeMail">邮箱有变更，去修改</p>',
                     yesTxt:'确认',
                     celTxt:'取消',
                     zIndex: 100,
@@ -95,23 +95,25 @@ $(function(){
                                 },
                                 needLogin: true,
                                 callbackDone: function(json) {
-                                    var jsonData = json.data;
-                                    //设置数据到页面上
-                                    // that.setDomData( jsonData );
-                                    //请求其他接口
-                                    // if( (that.data.projectType == 0) || (that.data.projectType == 1) ){ 
-                                    //     //稳金类项目，请求七日年化/万份收益折线图
-                                    //     // that.getTypeOneData();
-                                    //     //请求快速赎回和普通赎回的文案
-                                    //     // that.getTxt();
-                                    // }
+                                    console.log('发送邮件成功')
+                                    
+                                },
+                                callbackFail: function(json) {
+                                    console.log('失败')
+                                    
                                 },
                             }];
                             $.ajaxLoading(obj);	
+                        }else{
+                            alert('请去绑定邮箱')
                         }
                     },      
                 };
                 $.elasticLayer(obj)
+            })
+            // 点击去修改邮箱
+            $document.on('click','#changeMail',function(){
+                // 调用原生方法，或者原生拦截连接
             })
         }
     };
