@@ -19,6 +19,8 @@ var splitUrl = require('@pathCommonJs/components/splitUrl.js')();
 var tipAction = require('@pathCommonJsCom/tipAction.js');
 
 var moment = require('moment');
+//引入弹出层
+require('@pathCommonJs/components/elasticLayerTypeFive.js');
 
 
 var monthReportDetail = {
@@ -742,18 +744,15 @@ var monthReportDetail = {
 	  //                       that.getElements.plannerNum = exclusive.broker_account; //理财师工号
 			// 			}
 
-			// 			var obj = {
-			// 				title: '提示', //大标题
-			// 				p: '<p class="elastic_p">非常感谢您选择恒天财富！我们将尽快安排专业人员与您联系，请保持手机畅通！</p>',
-			// 				celTxt : false,
-			// 				callback : function(){ //确定按钮的回调函数
-			// 					$('.elasticLayer').hide();
-			// 				},
-			// 				zIndex: 100, //z-index
-			// 			}
-
-			// 			$.elasticLayer(obj);//弹出层初始化
-
+			               // $.elasticLayerTypeTwo({
+			               //      id: "tip",
+			               //      title: '提示',
+			               //      p: '<p>' + value + '</p>',
+			               //      buttonTxt: '知道了',
+			               //      zIndex: 100,
+			               //  });
+			               //  };
+			               //  $.elasticLayerTypeTwo(obj)
 			// 			var contentObj = [{
 			// 				url: site_url.reportContactNow_api,
 			// 				data: {
