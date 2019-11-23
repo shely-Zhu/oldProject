@@ -12,6 +12,7 @@ require('@pathCommonJs/ajaxLoading.js');
 var tipAction = require('@pathCommonJs/components/tipAction.js');
 var splitUrl = require('@pathCommonJs/components/splitUrl.js')();
 var generateTemplate = require('@pathCommonJsComBus/generateTemplate.js');
+var splitUrl = require('@pathCommonJs/components/splitUrl.js')();
 $(function() {
 
     var somePage = {
@@ -26,6 +27,7 @@ $(function() {
             pageCurrent: 1, //当前页码，默认为1
             pageSize: 10,
             listLength: 0,
+            projectId: splitUrl['projectId'],
         },
         init: function() {
             var that = this;
@@ -88,7 +90,7 @@ $(function() {
                 data: { 
                     "pageNo": that.gV.pageCurrent, //非必须，默认为1
                     "pageSize": "10",//非必须，默认为10
-                    "projectId": "20767",//项目id
+                    "projectId": that.gV.projectId,//项目id
                 },
                 //async: false,
                 needDataEmpty: true,
@@ -112,14 +114,12 @@ $(function() {
                                     return false;
                                 } else { // 没有更多数据了
                                     t.endPullupToRefresh(false);
-                                    $(".nodata").show()
                                 }
                             } else {
                                 //其他页-没有更多数据
                                 t.endPullupToRefresh(true);
                             }
                         } else { // 还有更多数据
-                            console.log(999)
                             t.endPullupToRefresh(false);
                         }
                         var len = json.data.pageList;

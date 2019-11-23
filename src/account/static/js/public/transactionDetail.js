@@ -26,6 +26,8 @@ $(function() {
 		//全局变量
 		gV: {
 			data:[1,2],
+			pageCurrent:1,
+			applyType:"0",
 		},
 		//页面初始化函数
 		init: function() {
@@ -33,57 +35,50 @@ $(function() {
 			this.events()
 			this.initMui()
 		},
-		//初始化mui的上拉加载
-		// initMui: function() {
-		// 	var that = this;
-		// 	mui.init();
-		// 	$(".mui-slider").on("slide",function(e){
-		// 		$("b").removeClass('borderBottom')
-		// 		$("b").eq(e.detail.slideNumber).addClass('borderBottom')
-        //         console.log(e.srcElement,"2")
-        //         console.log(event.detail.slideNumber)
-		// 	})
-		// },
 		    //初始化mui的上拉加载
 			initMui: function() {
 				var that = this;
 				mui.init();
-				$(".mui-slider").on("slide",function(e){
-					$("b").removeClass('borderBottom')
-					$("b").eq(e.detail.slideNumber).addClass('borderBottom')
-					// console.log(e.srcElement,"2")
-					console.log(event.detail.slideNumber)
-					if(event.detail.slideNumber === 1){
-						$("#item1").empty()
-						$("#item3").empty()
-						$("#item4").empty()
-						$("#item2").empty()
-						
-						$("#item2").prepend($("<div class='list'><div class='contentWrapper'><div class='contentWrap'></div><div class='goTopBtn iconfont'></div></div></div>"))						     
-					}else if(event.detail.slideNumber === 2){
-						$("#item1").empty()
-						$("#item2").empty()
-						$("#item4").empty()
-						$("#item3").empty()
-						$("#item3").prepend($("<div class='list'><div class='contentWrapper'><div class='contentWrap'></div><div class='goTopBtn iconfont'></div></div></div>"))
-					}else if(event.detail.slideNumber === 3){
-						$("#item1").empty()
-						$("#item2").empty()
-						$("#item3").empty()
-						$("#item4").empty()
-						$("#item4").prepend($("<div class='list'><div class='contentWrapper'><div class='contentWrap'></div><div class='goTopBtn iconfont'></div></div></div>"))
-					}else if(event.detail.slideNumber === 0){
-						$("#item2").empty()
-						$("#item3").empty()
-						$("#item4").empty()
-						$("#item1").empty()
-						$("#item1").prepend($("<div class='list'><div class='contentWrapper'><div class='contentWrap'></div><div class='goTopBtn iconfont'></div></div></div>"))
-					}
-					// that.getData()
-					// that.gV.data = []
-					that.initMui()
-
-				})
+				// $(".mui-slider").on("slide",function(e){
+				// 	$("b").removeClass('borderBottom')
+				// 	$("b").eq(e.detail.slideNumber).addClass('borderBottom')
+				// 	// console.log(e.srcElement,"2")
+				// 	console.log(event.detail.slideNumber)
+				// 	if(event.detail.slideNumber === 1){
+				// 		$("#item1").empty()
+				// 		$("#item3").empty()
+				// 		$("#item4").empty()
+				// 		$("#item2").empty()
+				// 		that.gV.pageCurrent = 1
+				// 		that.gV.applyType = 2
+				// 		$("#item2").prepend($("<div class='list'><div class='contentWrapper'><div class='contentWrap'></div><div class='goTopBtn iconfont'></div></div></div>"))						     
+				// 	}else if(event.detail.slideNumber === 2){
+				// 		$("#item1").empty()
+				// 		$("#item2").empty()
+				// 		$("#item4").empty()
+				// 		$("#item3").empty()
+				// 		that.gV.pageCurrent = 1
+				// 		that.gV.applyType = 3
+				// 		$("#item3").prepend($("<div class='list'><div class='contentWrapper'><div class='contentWrap'></div><div class='goTopBtn iconfont'></div></div></div>"))
+				// 	}else if(event.detail.slideNumber === 3){
+				// 		$("#item1").empty()
+				// 		$("#item2").empty()
+				// 		$("#item3").empty()
+				// 		that.gV.pageCurrent = 1
+				// 		that.gV.applyType = 1
+				// 		$("#item4").empty()
+				// 		$("#item4").prepend($("<div class='list'><div class='contentWrapper'><div class='contentWrap'></div><div class='goTopBtn iconfont'></div></div></div>"))
+				// 	}else if(event.detail.slideNumber === 0){
+				// 		$("#item2").empty()
+				// 		$("#item3").empty()
+				// 		$("#item4").empty()
+				// 		that.gV.pageCurrent = 1
+				// 		that.gV.applyType = 0
+				// 		$("#item1").empty()
+				// 		$("#item1").prepend($("<div class='list'><div class='contentWrapper'><div class='contentWrap'></div><div class='goTopBtn iconfont'></div></div></div>"))
+				// 	}
+				// 	that.initMui()
+				// })
 				var height = windowHeight - $(".title").height() - $(".topTitle").height();
 				if (!$('.list').hasClass('setHeight')) {
 					$('.list').height(height).addClass('setHeight');
@@ -135,8 +130,9 @@ $(function() {
             var obj = [{ // 系统调仓记录列表
                 url: site_url.queryTradeApplyByCode_api,
                 data: {
-					"fundCode":"",
-					"tradeNo":"",
+					"fundCode":"000847",//基金代码 
+					"tradeNo":"2968",//交易账号
+					"applyType":that.gV.applyType,//请求类型
                     "pageCurrent": that.gV.pageCurrent, //非必须，默认为1
 					"pageSize": "10",//非必须，默认为10
                 },
@@ -182,8 +178,7 @@ $(function() {
                         that.gV.pageCurrent++;
 
                         // 将列表插入到页面上
-                        generateTemplate(data, that.$e.recordList, that.$e.adjustmentTemp);
-						// generateTemplate(that.gV.data, $(".contentWrap"), that.$e.adjustmentTemp);
+						generateTemplate(data, $(".contentWrap"), that.$e.adjustmentTemp);
                     }, 200)
                 },
 
@@ -192,7 +187,47 @@ $(function() {
         },
 		//注册事件
 		events: function() {
-			
+			var that = this;
+				$(".mui-slider").on("slide",function(e){
+					$("b").removeClass('borderBottom')
+					$("b").eq(e.detail.slideNumber).addClass('borderBottom')
+					// console.log(e.srcElement,"2")
+					console.log(event.detail.slideNumber)
+					if(event.detail.slideNumber === 1){
+						$("#item1").empty()
+						$("#item3").empty()
+						$("#item4").empty()
+						$("#item2").empty()
+						that.gV.pageCurrent = 1
+						that.gV.applyType = 2
+						$("#item2").prepend($("<div class='list'><div class='contentWrapper'><div class='contentWrap'></div><div class='goTopBtn iconfont'></div></div></div>"))						     
+					}else if(event.detail.slideNumber === 2){
+						$("#item1").empty()
+						$("#item2").empty()
+						$("#item4").empty()
+						$("#item3").empty()
+						that.gV.pageCurrent = 1
+						that.gV.applyType = 3
+						$("#item3").prepend($("<div class='list'><div class='contentWrapper'><div class='contentWrap'></div><div class='goTopBtn iconfont'></div></div></div>"))
+					}else if(event.detail.slideNumber === 3){
+						$("#item1").empty()
+						$("#item2").empty()
+						$("#item3").empty()
+						that.gV.pageCurrent = 1
+						that.gV.applyType = 1
+						$("#item4").empty()
+						$("#item4").prepend($("<div class='list'><div class='contentWrapper'><div class='contentWrap'></div><div class='goTopBtn iconfont'></div></div></div>"))
+					}else if(event.detail.slideNumber === 0){
+						$("#item2").empty()
+						$("#item3").empty()
+						$("#item4").empty()
+						that.gV.pageCurrent = 1
+						that.gV.applyType = 0
+						$("#item1").empty()
+						$("#item1").prepend($("<div class='list'><div class='contentWrapper'><div class='contentWrap'></div><div class='goTopBtn iconfont'></div></div></div>"))
+					}
+					that.initMui()
+				})
 		}
 	};
 	somePage.init();

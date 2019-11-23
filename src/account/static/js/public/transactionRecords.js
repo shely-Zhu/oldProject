@@ -108,7 +108,7 @@ $(function () {
                 }
                 that.$e.listLoading.show();
                 mui('.contentWrapper').pullRefresh().pullupLoading();
-                that.$e.listLoading.hide();
+                // that.$e.listLoading.hide();
                 $('.list').addClass('hasPullUp');
             });
         },
@@ -121,8 +121,7 @@ $(function () {
                 needDataEmpty: true,
                 callbackDone: function (json) {
                     var data;
-                    console.log(json.data.pageItems.totalCount)
-                    if (json.data.pageItems.totalCount == 0) { // 没有记录不展示
+                    if (!$.util.objIsEmpty(json.data.pageLis)) { // 没有记录不展示
                         that.$e.noData.show();
                         return false;
                     } else {
@@ -153,6 +152,7 @@ $(function () {
                         })
                         data = json.data.pageList;
                     }
+                    that.$e.listLoading.hide();
                     setTimeout(function () {
                         if (data.length < that.gV.pageSize) {
                             if (that.gV.pageNum == 1) { //第一页时
@@ -169,6 +169,8 @@ $(function () {
                             t.endPullupToRefresh(false);
                         }
 
+                        $('.list').find('.contentWrapper .mui-pull-bottom-pocket').removeClass('mui-hidden');
+
                         // 页面++
                         that.gV.pageNum++;
                         // 将交易记录列表插入到页面上
@@ -177,8 +179,22 @@ $(function () {
                     }, 200)
                 },
                 callbackFail: function (json) {
+                    $('.list').find('.contentWrapper .mui-pull-bottom-pocket').removeClass('mui-hidden');
+                    $('.list').addClass('noMove');
+                    t.endPullupToRefresh(true);
+                    that.$e.listLoading.hide();
                     tipAction(json.message);
-                }
+                    
+                },
+                callbackNoData:function(json){
+                    $('.list').find('.contentWrapper .mui-pull-bottom-pocket').removeClass('mui-hidden');
+                    $('.list').addClass('noMove');
+                    t.endPullupToRefresh(true);
+                    that.$e.listLoading.hide();
+                    that.$e.noData.show();
+                    
+                },
+                
             }];
             $.ajaxLoading(obj);
         },
@@ -266,7 +282,8 @@ $(function () {
                     that.$e.recordSearchDetailBoxId.css("display", "none")
                     that.gV.mask.close()
                 }
-                that.$e.recordListWraperBoxId.html('')
+                that.$e.recordListWraperBoxId.find('.recordItem').remove()
+                that.$e.noData.hide();
                 that.initMui(that.gV.ajaxdata);
             })
         }

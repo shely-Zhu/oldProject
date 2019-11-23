@@ -1,0 +1,82 @@
+<!-- /**  
+ * @Page:  现金管理
+ * @Author: yanruitng  
+ * @Date:   2019-11-23
+ * 
+ */ -->
+
+ <!DOCTYPE html>
+ <html lang="en">
+ <head>
+     @@include('@pathInclude/views/meta.html')
+     <link rel="stylesheet" href="/Financial/static/css/cashManagement.css">
+     <title>公募监管账户</title>
+ </head>
+ <body>
+     <!--加载图标-->
+     <!--@@include('@pathCommonViews/load.html')--> 
+     <!--没有数据显示图标-->
+     <!--@@include('@pathCommonViews/noDataImg.html')-->
+     <!--列表加载显示图标-->
+     <!--@@include('@pathCommonViews/loading/listLoading.html')-->
+     <div id="top">
+          @@include('@pathCommonViews/headBarConfig.html',{"bgColors":"#384A81,#2A3C70","showType":"1","pathName":"现金管理"})
+          <div class="topCon">
+               <div class="totalFundTitle">总资产（元）</div>
+               <div class="totalFund justify_between flex">
+                    <div class="fundValue">12689.56</div>
+                    <div class="fundKnow">了解现金管理 ></div>
+               </div>
+               <div class="profitContent justify_between flex">
+                    <div class="cashProfitCon profitCon">
+                         <div class="profitTitle">昨日收益</div>
+                         <div class="profitValue">+5.25</div>
+                    </div>
+                    <div class="lineVertical"></div>
+                    <div class="cashProfitCon profitCon">
+                         <div class="profitTitle">累计收益</div>
+                         <div class="profitValue">+236.25</div>
+                    </div>
+               </div>
+          </div>
+          <div class="list">
+               <div class="wrapper">
+                    <div id="cashListCon">
+                         <div class="cashItem">
+                              <div class="itemTop">
+                                   <div class="itemTitle"><span>现金宝产品1</span><span class="rightCon"><span class="right"></span></span></div>
+                                   <div class="itemSevenIncome">七日年化：2.264%</div>
+                              </div>
+                              <div class="itemCenter flex">
+                                   <div>
+                                       <div class="centerTitle">资产(元)</div> 
+                                       <div class="centerValue">9999.50</div>
+                                   </div>
+                                   <div>
+                                       <div class="centerTitle">昨日收益(元)</div> 
+                                       <div class="centerValue blue">-0.21</div>
+                                   </div>
+                                   <div>
+                                       <div class="centerTitle">累计收益(元)</div> 
+                                       <div class="centerValue red">+2.00</div>
+                                   </div>
+                              </div>
+                              <div class="itemBottom flex">
+                                   <div class="fundIn">转入</div>
+                                   <div class="fundOut">转出</div>
+                              </div>
+                         </div>
+                    </div>
+               </div>
+          </div>
+     </div>
+ 
+     
+ 
+     @@include('@pathInclude/views/footer.html')
+     <!-- 添加埋点 -->
+     @@include('@pathInclude/views/header.html')
+     <script src="/Financial/static/js/cashManagement.js"></script>
+ 
+ </body>
+ </html>
