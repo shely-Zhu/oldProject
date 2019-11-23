@@ -1,0 +1,106 @@
+/**
+* 现金管理
+* @author yanruiting 2019-11-23
+*/
+@import url("../../../include/css/mui.min.css");
+@import url('@pathCommonLess/mui/resetMUI.less');
+@import url("@pathCommonLess/reset.less");
+@import url("@pathCommonLess/color.less");
+
+@import url("@pathCommonLessCom/againEnter.less");
+@import url("@pathCommonLessCom/alertBox.less");
+@import url("@pathCommonLessCom/headBarConfig.less");
+
+body{
+    max-width: 7.5rem;
+}
+#top {
+	height: 4.92rem;
+	background: url('/Financial/static/img/cash_bg.png') no-repeat;
+	.HeadBarConfigBox {
+		background:linear-gradient(135deg,rgba(71,90,149,1) 0%,rgba(3,19,73,1) 100%);
+	}
+	.topCon {
+		padding: 1.58rem 0 .3rem .3rem;
+		.totalFundTitle {
+			font-size: .32rem;
+			color:rgba(255,255,255,1);
+			line-height:.45rem;
+			background:linear-gradient(180deg, rgba(251,226,189,1) 0%, rgba(226,181,128,1) 100%);
+			-webkit-background-clip:text;
+			-webkit-text-fill-color:transparent;
+			font-weight: 600;
+		}
+		.totalFund {
+			margin-top: .2rem;
+			.fundValue {
+				font-size: .68rem;
+				font-weight:bold;
+				color:rgba(255,255,255,1);
+				line-height:.8rem;
+				background:linear-gradient(180deg, rgba(251,226,189,1) 0%, rgba(226,181,128,1) 100%);
+				-webkit-background-clip:text;
+				-webkit-text-fill-color:transparent;
+			}
+			.fundKnow {
+				width: 1.96rem;
+				height: .56rem;
+				line-height: .56rem;
+				background:linear-gradient(270deg,rgba(251,226,189,0.79) 0%,rgba(226,181,128,1) 100%);
+				border-radius:2rem 0px 0px 2rem;
+				color: #fff;
+				text-align: center;
+				opacity:0.48;
+				margin-top: .12rem;
+			}
+		}
+		.profitContent {
+			margin-top: .5rem;
+			&>div:first-child {
+				width: 2rem;
+			}
+			&>div:last-child {
+				padding-left: .9rem;
+				flex: 1;
+			}
+			.profitCon {
+				.profitTitle {
+					font-size: .26rem;
+					line-height: .26rem;
+					color: #D1D5E0;
+				}
+				.profitValue {
+					color: #FAE0BB;
+					font-size: .38rem;
+					margin-top: .2rem;
+					font-weight: 600;
+				}
+			}
+		}
+	}
+	.list {
+		.wrapper {
+			#cashListCon {
+				.cashItem {
+					padding: .3rem 0 .3rem .3rem;
+				}
+			}
+		}
+	}
+}
+#loading {
+	top: 1.28rem!important;
+}
+.flex {
+	display: flex;
+}
+.justify_between {
+	justify-content: space-between;
+}
+.lineVertical {
+	width:0.01rem;
+	height:0.5rem;
+	background:rgba(255,255,255,1);
+	opacity:0.3;
+	margin-top: .23rem;
+}

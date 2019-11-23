@@ -302,4 +302,7 @@ module.exports = {
 
     //普通基金产品详情页_定投
     './Financial/static/js/ordinarySetThrow' : './src/Financial/static/js/ordinarySetThrow.js',
+
+    // 现金管理
+    './Financial/static/js/cashManagement' : './src/Financial/static/js/cashManagement.js',
 }
