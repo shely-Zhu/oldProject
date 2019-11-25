@@ -252,7 +252,7 @@ module.exports = {
     //已确认交易 公共js
     './account/static/js/common/transcationTem': './src/account/static/js/common/transcationTem.js',
     //待确认交易
-    // './account/static/js/private/tobeConfirmTransaction': './src/account/static/js/private/tobeConfirmTransaction.js',
+    './account/static/js/private/tobeConfirmTransaction': './src/account/static/js/private/tobeConfirmTransaction.js',
     //收益分配明细
     './account/static/js/private/incomeDistribution': './src/account/static/js/private/incomeDistribution.js',
     //公募资产
@@ -307,11 +307,11 @@ module.exports = {
     './Financial/static/js/publicPlacement/surelyResults': './src/Financial/static/js/publicPlacement/surelyResults.js',
 
     //我的定投_定投明细
-    './Financial/static/js/publicPlacement/castSurely_details' : './src/Financial/static/js/publicPlacement/castSurely_details.js',
+    './Financial/static/js/publicPlacement/castSurely_details': './src/Financial/static/js/publicPlacement/castSurely_details.js',
     //我的定投计划
-    './Financial/static/js/publicPlacement/myInvestmentPlan' : './src/Financial/static/js/publicPlacement/myInvestmentPlan.js',
+    './Financial/static/js/publicPlacement/myInvestmentPlan': './src/Financial/static/js/publicPlacement/myInvestmentPlan.js',
     //普通基金产品详情页_定投
-    './Financial/static/js/ordinarySetThrow' : './src/Financial/static/js/ordinarySetThrow.js',
+    './Financial/static/js/ordinarySetThrow': './src/Financial/static/js/ordinarySetThrow.js',
 
     // 现金管理
     './Financial/static/js/cashManagement' : './src/Financial/static/js/cashManagement.js',

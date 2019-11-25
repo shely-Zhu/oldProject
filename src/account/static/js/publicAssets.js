@@ -23,7 +23,7 @@ $(function () {
         },
         init: function () {
             var that = this;
-            that.getData();
+            that.getData('');
             that.getBankList();
         },
         getBankList: function () {
@@ -45,12 +45,14 @@ $(function () {
                         //获取银行卡后四位
                         Handlebars.registerHelper("get_last_4_value", function (value, options) {
                             console.log(value.substring(value.length - 4));
-                            return value.substring(value.length - 4)[1];
+                            return value.substring(value.length - 4);
                         });
                         var tplm = $("#bankLists").html();
                         var template = Handlebars.compile(tplm);
                         var html = template(json.data.pageList);
                         $("#bank_list_area").html(html);
+                        //渲染模板后设置点击事件
+                        that.bankEvents();
                     }
                 },
                 callbackFail: function (json) {  //失败后执行的函数
@@ -60,11 +62,13 @@ $(function () {
             $.ajaxLoading(obj);
 
         },
-        getData: function (t) {
+        getData: function (bankAccount) {
             var that = this;
             var obj = [{ // 公募总资产
                 url: site_url.pofTotalAssets_api,
-                data: {},
+                data: {
+                    bankAccount: bankAccount,
+                },
                 //async: false,
                 needDataEmpty: true,
                 callbackDone: function (json) {
@@ -89,10 +93,7 @@ $(function () {
                             return options.inverse(this);
                         }
                     });
-                    //设置将数字转为中文的方法
-                    Handlebars.registerHelper("noToChinese", function (value, options) {
-                        return that.noToChinese(value);
-                    });
+                    that.chooseTipDesc();
                     //列表渲染
                     var tplm = $("#dataLists").html();
                     var template = Handlebars.compile(tplm);
@@ -109,7 +110,7 @@ $(function () {
             }];
             $.ajaxLoading(obj);
         },
-        events: function () { //绑定事件
+        bankEvents: function () { //绑定事件
             var that = this;
             //点击筛选银行卡
             $('#bank_screen').on('click', function (e) {
@@ -123,18 +124,25 @@ $(function () {
                 }
             })
             //银行卡列表点击
-            $('.bank_list .bank_screen').on('click', function(){
+            $('.bank_item').on('click', function(){
+                console.log('呵呵' + $(this));
                 $(this).find('.iconfont').removeClass('hide');
                 $(this).siblings().find('.iconfont').addClass('hide');
+                //将获取到的名字填充到外部
                 $('#bank_screen .bank_screen_name').html($(this).find('.bank_screen_name').html());
+                //点击后拿到银行卡号去筛选银行卡
+                var bankAccount = $(this).attr('bankAccount');
+                that.getData(bankAccount);
                 //选择后将列表关闭
                 that.gV.showBankList = !that.gV.showBankList;
                 $('.bank_list').hide();
                 $('#bank_screen .iconfont').html('&#xe609;');
             })
+        },
+        events: function () { //绑定事件
+            var that = this;
             //item的点击 进入持仓详情
             $('.hold_item').on('click', function(){
-                //todo 跳转
                 var index = $(this).index();
                 sessionStorage.setItem("publicFundDetail",JSON.stringify(that.gV.data.fundDetailList[index])) 
             })
@@ -184,44 +192,13 @@ $(function () {
                 $('.tipContainer').hide();
             })
         },
-        
-        //数字转中文 例如1转为一
-        noToChinese: function (num) {
-            if (!/^\d*(\.\d*)?$/.test(num)) {
-                alert("Number is wrong!");
-                return "Number is wrong!";
-            }
-            var AA = new Array("零", "一", "二", "三", "四", "五", "六", "七", "八", "九");
-            var BB = new Array("", "十", "百", "千", "万", "亿", "点", "");
-            var a = ("" + num).replace(/(^0*)/g, "").split("."),
-                k = 0,
-                re = "";
-            for (var i = a[0].length - 1; i >= 0; i--) {
-                switch (k) {
-                    case 0:
-                        re = BB[7] + re;
-                        break;
-                    case 4:
-                        if (!new RegExp("0{4}\\d{" + (a[0].length - i - 1) + "}$").test(a[0]))
-                            re = BB[4] + re;
-                        break;
-                    case 8:
-                        re = BB[5] + re;
-                        BB[7] = BB[5];
-                        k = 0;
-                        break;
-                }
-                if (k % 4 == 2 && a[0].charAt(i + 2) != 0 && a[0].charAt(i + 1) == 0) re = AA[0] + re;
-                if (a[0].charAt(i) != 0) re = AA[a[0].charAt(i)] + BB[k % 4] + re;
-                k++;
-            }
-            if (a.length > 1) //加上小数部分(如果有小数部分) 
-            {
-                re += BB[6];
-                for (var i = 0; i < a[1].length; i++) re += AA[a[1].charAt(i)];
-            }
-            return re;
-        },
+        chooseTipDesc: function(){
+            var that = this;
+            that.gV.data.fundDetailList.forEach(element => {
+                //自己处理一下文案的显示
+                element.myTip = element.divideMsg? element.divideMsg: element.canBeSpentMsg? element.canBeSpentMsg: '';
+            });
+        }
     };
     somePage.init();
 });
