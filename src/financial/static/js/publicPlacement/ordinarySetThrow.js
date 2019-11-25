@@ -39,11 +39,16 @@ $(function () {
 			linenum: $('#linenum'), //行号
 			openingBank: $("#openingBank"),  //开户行
 			topc: $('#topc'),       //提示信息
+			fundName:$(".title .fundName") , //基金名称
+			fundCode:$(".title .fundCode") , //基金代码
 		},
-
+		gV:{
+			scheduledProtocolId:splitUrl['scheduledProtocolId'] ? splitUrl['scheduledProtocolId'] : null,
+		},
 		webinit: function () {
 			var that = this;
-
+			this.getElements.fundName.html(this.gV.fundName)
+			this.getElements.fundCode.html(this.gV.fundCode)
 			//
 			that.events();
 
