@@ -6,7 +6,7 @@
 
 <head>
     @@include('@pathInclude/views/meta.html')
-    <link rel="stylesheet" href="/Financial/static/css/castSurely_details.css">
+    <link rel="stylesheet" href="/financial/static/css/castSurely_details.css">
     <title>我的定投_定投详情</title>
 </head>
 
@@ -23,7 +23,6 @@
         <div class="banner">
             <div class="bannerTop clearfix">
                 <span class="j_text">中融货币A 1111</span><span class="posRight"><a class="iconfont iconone" href="javascript:;">&#xe67d;</a></span>
-                <hr>
                 <div class="type">
                     <div>
                         <p>累计定投(元)</p>
@@ -34,7 +33,7 @@
                         <p>999</p>
                     </div>
                 </div>
-                <input class="ipt" type="text" placeholder="下次扣款日期 2020-01-11">
+                <div class="ipt">下次扣款日期 <span>2020-01-11</span></div>
             </div>
         </div>
         <div class="mid">
@@ -42,60 +41,56 @@
                 <div>
                     进行中
                 </div>
+                <span class="fontSize4 posTop">10，000.00 元</span>
+                <span class="fontSize2">含手续费0.00元</span>
             </div>
             <ul>
-                    <li>
-                        <span>定投金额</span><span>10，000.00 元</span>
-                        <span>含手续费0.00元</span>
-                    </li>
-                    <li>
-                        <span>支付方式</span>
-                        <span><img src="" alt="">中国建设银行0563<span>在线支付</span><span>
-                    </li>
-                    <li>
-                        <span>定投周期</span>
-                        <span>每双周 周二</span>
-                    </li>
-                    <li>
-                        <span>协议签订日期</span>
-                        <span>2019-10-11</span>
-                    </li>
-                    <li>
-                        <span>累计定投份额</span>
-                        <span>100.00份</span>
-                    </li>
-                </ul>
+                <li>
+                    <span class="fontSize6">定投金额</span>
+                    
+                </li>
+                <li>
+                    <span class="fontSize6">支付方式</span>
+                    <span class="fontSize4 clearfix"><img src="/src/financial/static/img/account_icon_bank logo@2x.png" alt="">中国建设银行<span class="cardNo">0563</span><span class="onlinePayment">在线支付</spanspan><span>
+                </li>
+                <li>
+                    <span class="fontSize6">定投周期</span>
+                    <span class="fontSize4">每双周 周二</span>
+                </li>
+                <li>
+                    <span class="fontSize6">协议签订日期</span>
+                    <span class="fontSize4">2019-10-11</span>
+                </li>
+                <li>
+                    <span class="fontSize6">累计定投份额</span>
+                    <span class="fontSize4">100.00份</span>
+                </li>
+            </ul>
         </div>    
+        <table>
+            <tr>
+                <td>2019-10-14</td>
+                <td>5000.00元</td>
+                <td class="state_succ">定投成功<a class="iconfont iconone" href="javascript:;">&#xe67d;</a></td>
+            </tr>
+            <tr class="is_fail">
+                <td>2019-10-14</td>
+                <td>5000.00元</td>
+                <td class="state_fail">定投失败<a class="iconfont iconone" href="javascript:;">&#xe67d;</a></td>
+                <!-- 判断如果类名有state_fail就加一行 -->
+                <td class="fail_reason">此处填写定投失败原因</td>
+            </tr>
+            <tr>
+                <td>2019-10-14</td>
+                <td>5000.00元</td>
+                <td class="state_succ">定投成功<a class="iconfont iconone" href="javascript:;">&#xe67d;</a></td>
+            </tr>   
+        </table>
         <!-- 加载中loading -->
         @@include('@pathCommonViews/loading/listLoading.html')
         <!-- 暂无数据 -->
         @@include('@pathCommonViews/noDataImg.html',{"tipText":"暂无数据"})
     </section>
-    <div class="wrap">
-       
-    </div>
-    <div class="content">
-        <div>
-            <p>定投记录</p>
-            <table>
-                <tr>
-                    <td>2019-10-14</td>
-                    <td>5000.00</td>
-                    <td>定投成功</td>
-                </tr>
-                <tr>
-                    <td>2019-10-14</td>
-                    <td>5000.00</td>
-                    <td>定投失败</td>
-                </tr>
-                <tr>
-                    <td>2019-10-14</td>
-                    <td>5000.00</td>
-                    <td>定投成功</td>
-                </tr>
-            </table>
-        </div>
-    </div>
     <div class="footer">
         <div>终止</div>
         <div>暂停</div>
@@ -104,7 +99,7 @@
     @@include('@pathInclude/views/footer.html')
     <!-- 添加埋点 -->
     @@include('@pathInclude/views/header.html')
-    <script src="/Financial/static/js/castSurely_details.js"></script>
+    <script src="/financial/static/js/publicPlacement/castSurely_details.js"></script>
 </body>
 
 </html>
