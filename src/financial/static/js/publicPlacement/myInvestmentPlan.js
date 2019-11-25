@@ -51,7 +51,7 @@ $(function(){
         initMui: function() {
             var that = this;
 
-            var height = windowHeight - $(".title").height() - $(".topTitle").height() - $(".newPlan").height();
+            var height = windowHeight - $(".title").height() - $(".topTitle").height() - $(".newPlan").height() - $(".noDataMore").height();
             if (!$('.list').hasClass('setHeight')) {
                 $('.list').height(height).addClass('setHeight');
             }
