@@ -314,7 +314,7 @@ module.exports = {
     './financial/static/js/ordinarySetThrow' : './src/financial/static/js/ordinarySetThrow.js',
 
     // 现金管理
-    './Financial/static/js/cashManagement' : './src/Financial/static/js/cashManagement.js',
+    './financial/static/js/cashManagement' : './src/financial/static/js/cashManagement.js',
 
     // 基本档案
     './financial/static/js/publicPlacement/fundFile' : './src/financial/static/js/publicPlacement/fundFile.js'
