@@ -317,5 +317,11 @@ module.exports = {
     './financial/static/js/cashManagement' : './src/financial/static/js/cashManagement.js',
 
     // 基本档案
-    './financial/static/js/publicPlacement/fundFile' : './src/financial/static/js/publicPlacement/fundFile.js'
+    './financial/static/js/publicPlacement/fundFile' : './src/financial/static/js/publicPlacement/fundFile.js',
+
+     // 基本档案
+    './financial/static/js/publicPlacement/cashTransformIn' : './src/financial/static/js/publicPlacement/cashTransformIn.js',
+
+     // 基本档案
+    './financial/static/js/publicPlacement/cashTransformOut' : './src/financial/static/js/publicPlacement/cashTransformOut.js'
 }
