@@ -26,15 +26,88 @@
 			<div class="tabsBox">
 				<div class="tabs">
 					<li>基本概括</li>
-					<li>投资组合</li>
+					<li class="active">投资组合</li>
 					<li>历史分红</li>
 					<li>基金公告</li>
 				</div>
 			</div>
 			<div class="wrap">
 				<div class="panel panel1">content1</div>
-				<div class="panel panel2">content2</div>
-				<div class="panel panel3">content3</div>
+				<div class="panel panel2 active">
+					<div class="totalFundCon">
+						<div class="circleTitleCon">
+							<div class="circleTitle">总资产(元)</div>
+							<div class="circleValue">2.12亿</div>
+						</div>
+						<div class="circle"></div>
+					</div>
+					<div class="industryConfiguration">
+						<div class="industryConfigurationTitle">资产配置</div>
+						<div class="industryConfigurationTable">
+							<div class="industryConfigurationHead flex justify_center align_center">
+								<div class="industryConfigurationTd">行业名称</div>
+								<div class="industryConfigurationTd">市值(万元)</div>
+								<div class="industryConfigurationTd">占净值比(%)</div>
+							</div>
+							<div class="industryConfigurationTr flex justify_center align_center">
+								<div class="industryConfigurationTd">行业名称</div>
+								<div class="industryConfigurationTd">100000</div>
+								<div class="industryConfigurationTd">2.34</div>
+							</div>
+							<div class="industryConfigurationTr flex justify_center align_center">
+								<div class="industryConfigurationTd">行业名称</div>
+								<div class="industryConfigurationTd">100000</div>
+								<div class="industryConfigurationTd">2.34</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="panel panel3">
+					<div class="profitItemCon">
+						<div class="profitItem">
+							<div class="itemTitle">分红日期</div>
+							<div class="itemValue">2019-11-11</div>
+						</div>
+						<div class="profitItem">
+							<div class="itemTitle">权益登记</div>
+							<div class="itemValue">1,000,000,000.00</div>
+						</div>
+						<div class="profitItem">
+							<div class="itemTitle">除息日</div>
+							<div class="itemValue">2019-11-11</div>
+						</div>
+						<div class="profitItem">
+							<div class="itemTitle">每份分红</div>
+							<div class="itemValue">1222.00</div>
+						</div>
+						<div class="profitItem">
+							<div class="itemTitle">累计分红</div>
+							<div class="itemValue">1223333.00</div>
+						</div>
+					</div>
+					<div class="profitItemCon">
+						<div class="profitItem">
+							<div class="itemTitle">分红日期</div>
+							<div class="itemValue">2019-11-11</div>
+						</div>
+						<div class="profitItem">
+							<div class="itemTitle">权益登记</div>
+							<div class="itemValue">1,000,000,000.00</div>
+						</div>
+						<div class="profitItem">
+							<div class="itemTitle">除息日</div>
+							<div class="itemValue">2019-11-11</div>
+						</div>
+						<div class="profitItem">
+							<div class="itemTitle">每份分红</div>
+							<div class="itemValue">1222.00</div>
+						</div>
+						<div class="profitItem">
+							<div class="itemTitle">累计分红</div>
+							<div class="itemValue">1223333.00</div>
+						</div>
+					</div>
+				</div>
 				<div class="panel panel4">content4</div>
 			</div>
 		</div>		
@@ -42,5 +115,6 @@
 
 </body>
 @@include('@pathInclude/views/footer.html')
+<script src="/include/js/vendor/echarts/echarts.min.js"></script>
 <script src="/financial/static/js/publicPlacement/fundFile.js"></script>
 </html>
