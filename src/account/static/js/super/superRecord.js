@@ -344,6 +344,7 @@ $(function() {
                     //return false;
                 },
                 callbackNoData: function(json) {
+                    t.endPullupToRefresh(false);
 
                     //没有数据
                     $id.find('.mui-scroll .list').html(that.getElements.noData.clone(false)).addClass('noCon');
@@ -357,7 +358,7 @@ $(function() {
                     var index = $('#slider .tab-scroll-wrap .mui-active').index(),
                         $list = $("#move_" + index + " .list");
 
-                    $list.addClass('noMove');
+                    $list.height(that.highHeight).addClass('noMove');
 
 
                     //如果是其他资产页面

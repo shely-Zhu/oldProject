@@ -33,9 +33,9 @@
     <!----- 未确认 ----->
     {{#if notConfirmTrans}}
     <div class="transList">
-        {{#unlesee appointmentFinished}}
+        {{#if appointmentFinished}} {{else}}
         <div class="statusTip">{{reserveStatusDesc}}</div>
-        {{/unlesee}}
+        {{/if}}
         <!-- 名称 -->
         <div class="listName mt30">{{projectName}}</div>
         <!-- 名称 -->
@@ -63,10 +63,31 @@
         <!-- 进度 -->
         <div class="toolCon clearfix">
             {{#if appointmentSuccess}}
-            <span class="tipImg"></span> {{/if}} {{#if appointmentFailed}}
+            <span class="tipImg success"></span> {{else if appointmentFailed}}
+            <span class="tipImg fail"></span> {{else}}
             <span class="tipImg"></span> {{/if}}
-            <span>{{reserveSubStatus}}</span>
-            <div class="toDetail">详情</div>
+            <!-- 不是成功也不是失败显示文字 -->
+            {{#if appointmentSigned}}{{else}}
+            <span>{{reserveSubStatusDesc}}</span> {{/if}}
+            <!-- 不是成功也不是失败文字 -->
+
+            <!-- 功能按钮 -->
+            {{#if appointmentToAuthentication}}
+            <div class="toDetail">合格投资者认证</div>
+            {{else if appointmentToSign}}
+            <div class="toDetail">签署合同</div>
+            {{else if appointmentToSee}}
+            <div class="toDetail">查看合同</div>
+            {{else if appointmentToUpload}}
+            <div class="toDetail">上传汇款凭证</div>
+            {{/if}}
+            <!-- 功能按钮 -->
+            <!-- 取消预约按钮 -->
+            {{#if appointmentCancel}}
+            <div class="cancelBtn">取消预约</div>
+            {{/if}}
+            <!-- 取消预约按钮 -->
+
         </div>
         <!-- 进度 -->
         <!-- 预约图片 -->
