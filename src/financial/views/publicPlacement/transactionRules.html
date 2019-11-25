@@ -10,51 +10,52 @@
 	<title></title>
 </head>
 <body>
+	<!-- @@include('@pathCommonViews/load.html') -->
+	<!-- @@include('@pathCommonViews/noDataImg.html')   -->
+	<!-- @@include('@pathCommonViews/loading/listLoading.html') -->
 	<div class="transactionRules">
-		<div class="mui-card">
-			<div class="card-theme">
-				<ul>
-					<li>交易状态</li>
-					<li><span class="tradeStatus">申购状态</span><span class="statusRight floatRight">申购申购</span></li>
-					<li><span class="tradeStatus">赎回状态</span><span class="statusRight floatRight">开放赎回</span></li>
-				</ul>
-			</div>
+		@@include('@pathCommonViews/headBarConfig.html',{"pathName":"交易规则"})
+		<!-- 交易状态 -->
+		<div class="tradeState">
+			<div class="tradeStateTitle">交易状态</div>
+			<ul class="tradeStateList">
+				<li><span>申购状态</span><span class="floatRight">申购申购</span></li>
+				<li><span>赎回状态</span><span class="floatRight">开放赎回</span></li>
+			</ul>
 		</div>
 
 		<!-- 购买金额 -->
-		<div class="mui-card">
-			<div class="card-theme">
-				<ul>
-					<li>购买金额</li>
-					<li><span class="tradeStatus">申购起点</span><span class="statusRight floatRight">10000.00元</span></li>
-					<li><span class="tradeStatus">追加购买</span><span class="statusRight floatRight">10000.00元</span></li>
-					<li><span class="tradeStatus">日累计申购金额</span><span class="statusRight floatRight">99999999999.00元</span></li>
-				</ul>
-			</div>
+		<div class="tradeState">
+			<div class="tradeStateTitle">购买金额</div>
+			<ul class="tradeStateList">
+				<li><span>申购起点</span><span class="floatRight">10000.00元</span></li>
+				<li><span>追加购买</span><span class="floatRight">10000.00元</span></li>
+				<li><span>日累计申购金额</span><span class="floatRight">99999999999.00元</span></li>
+			</ul>
 		</div>
-
-		<div class="mui-card">
-			<div class="card-theme">
-				<ul>
-					<li>申购确认</li>
-				</ul>
-			</div>
+		<!-- 申购确认 -->
+		<div class="tradeState">
+			<div class="tradeStateTitle">申购确认</div>
+			<ul class="tradeStateList">
+				
+			</ul>
 		</div>
-
-		<!-- <div class="mui-card">
-			<div class="card-theme">
-				<ul class="tradeRate">
-					<li>交易费率</li>
-					<li>
-						<p>申购费率</p>
-						<p><span>0万元<金额<100.0000万元</span><span>1.50%</span></p>
-					</li>
-				</ul>
-			</div>
+		<!-- 交易费率 -->
+		<!-- <div class="tradeState">
+			<div class="tradeStateTitle">交易费率</div>
+			<ul class="tradeStateList">
+				<li>
+					<p><span>0万元<金额<100.0000万元</span><span>1.50%</span></p>
+					<p><span>100.0000万元≤金额<500</span><span>0.00%</span></p>
+					<p><span>500.0000万元≤金额<100</span><span>每笔1,000.元</span></p>
+				</li>
+				
+			</ul>
 		</div> -->
 
 		
 	</div>
 	
+@@include('@pathInclude/views/footer.html')
 </body>
 </html>

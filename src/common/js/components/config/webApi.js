@@ -205,6 +205,8 @@ module.exports = function() {
     this.totalAssets_api = http_url.web_url + '/account/pof/totalAssets';
     // 金服WEB-详情页-基金净值走势图查询
     this.fundNetWorthTrendChart_api = http_url.web_url + '/pof/fundDetails/frontend/fundNetWorthTrendChart';
+    // 立即咨询
+    this.reportContactNow_api = http_url.web_url + '/account/report/reportContactNow';
     /*------------------- 月度报告 end ------------------------------*/
 
 
