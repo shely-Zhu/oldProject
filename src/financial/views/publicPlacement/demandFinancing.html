@@ -1,0 +1,86 @@
+<!-- /**  
+ * @Page:  活期理财
+ * @Author: liliang 
+ * @Date:   2019-11-25
+ * 
+ */ -->
+
+ <!DOCTYPE html>
+ <html lang="en">
+ <head>
+     @@include('@pathInclude/views/meta.html')
+     <link rel="stylesheet" href="/financial/static/css/demandFinancing.css">
+     <title>活期理财</title>
+ </head>
+ <body>
+     <!--加载图标-->
+     <!--@@include('@pathCommonViews/load.html')--> 
+     <!--没有数据显示图标-->
+     <!--@@include('@pathCommonViews/noDataImg.html')-->
+     <!--列表加载显示图标-->
+     <!--@@include('@pathCommonViews/loading/listLoading.html')-->
+     <div id="top">
+          @@include('@pathCommonViews/headBarConfig.html',{"bgColors":"#384A81,#2A3C70","showType":"1","pathName":"活期理财"})
+          <div class="topCon">
+               <div class="totalFundTitle">活期理财资产（元）</div>
+               <div class="totalFund justify_between flex">
+                    <div class="fundValue">12689.56</div>
+               </div>
+          </div>
+          <div class="list">
+               <div class="wrapper">
+                    <div id="cashListCon">
+                         <div class="cashItem">
+                              <div class="itemTop">
+                                   <div class="itemTitle"><span>现金宝产品1</span><span class="rightCon"><span class="right"></span></span></div>
+                                   <div class="itemSevenIncome">七日年化：2.264%</div>
+                              </div>
+                              <div class="itemCenter flex">
+                                   <div>
+                                       <div class="centerTitle">资产(元)</div> 
+                                       <div class="centerValue red">9999.50</div>
+                                   </div>
+                                   <div>
+                                       <div class="centerTitle">昨日收益(元)</div> 
+                                       <div class="centerValue">-0.21</div>
+                                   </div>
+                                   <div>
+                                       <div class="centerTitle">累计收益(元)</div> 
+                                       <div class="centerValue">+2.00</div>
+                                   </div>
+                              </div>
+                         </div>
+                         <div class="cashItem">
+                            <div class="itemTop">
+                                 <div class="itemTitle"><span>现金宝产品1</span><span class="rightCon"><span class="right"></span></span></div>
+                                 <div class="itemSevenIncome">七日年化：2.264%</div>
+                            </div>
+                            <div class="itemCenter flex">
+                                 <div>
+                                     <div class="centerTitle">资产(元)</div> 
+                                     <div class="centerValue red">9999.50</div>
+                                 </div>
+                                 <div>
+                                     <div class="centerTitle">昨日收益(元)</div> 
+                                     <div class="centerValue">-0.21</div>
+                                 </div>
+                                 <div>
+                                     <div class="centerTitle">累计收益(元)</div> 
+                                     <div class="centerValue">+2.00</div>
+                                 </div>
+                            </div>
+                       </div>
+                    </div>
+               </div>
+          </div>
+     </div>
+ 
+     
+ 
+     @@include('@pathInclude/views/footer.html')
+     <!-- 添加埋点 -->
+     @@include('@pathInclude/views/header.html')
+     <script src="/financial/static/js/publicPlacement/demandFinancing.js"></script>
+ 
+ </body>
+ </html>

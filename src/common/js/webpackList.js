@@ -310,6 +310,8 @@ module.exports = {
     './financial/static/js/publicPlacement/castSurely_detafils' : './src/financial/static/js/publicPlacement/castSurely_details.js',
     //我的定投计划
     './Financial/static/js/publicPlacement/myInvestmentPlan': './src/Financial/static/js/publicPlacement/myInvestmentPlan.js',
+    //活期理财
+    './Financial/static/js/publicPlacement/demandFinancing': './src/Financial/static/js/publicPlacement/demandFinancing.js',
     //普通基金产品详情页_定投
     './financial/static/js/publicPlacement/ordinarySetThrow' : './src/financial/static/js/publicPlacement/ordinarySetThrow.js',
 
