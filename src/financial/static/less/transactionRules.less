@@ -13,6 +13,11 @@
 	float: right;
 	margin-right: 0.3rem;
 }
+.fontWeight{
+	float: right;
+	margin-right: 0.2rem;
+	font-weight: bold;
+}
 
 .transactionRules{
 	.tradeState{
@@ -36,6 +41,34 @@
 			border-bottom: 1px solid rgba(231,233,237,1);
 			color: @272727;
 		}
+	}
+	.tradeRateList{
+		margin-right: 0.3rem;
+		border-bottom: 1px solid rgba(231,233,237,1);
+		.tradeRate{
+			width: 100%;
+			.tradeRateTitle{
+				font-size: 0.28rem;
+				color: @272727;
+				margin: 0.3rem 0;
+			}
+			.tradeRateBuy{
+				width: 100%;
+				height: 0.6rem;
+				line-height: 0.6rem;
+				margin-bottom: 0.1rem;
+				font-size: 0.28rem;
+				color: @4A4A4A;
+				background:rgba(248,249,252,1);
+				border-radius: 0.06rem;
+			}
+		}
+	}
+	.warningTape{
+		margin: 0.3rem auto 0.6rem;
+		font-size: 0.28rem;
+		text-align: center;
+		color:@9B9B9B;
 	}
 
 }

@@ -14,7 +14,7 @@
 	<!-- @@include('@pathCommonViews/noDataImg.html')   -->
 	<!-- @@include('@pathCommonViews/loading/listLoading.html') -->
 	<div class="transactionRules">
-		@@include('@pathCommonViews/headBarConfig.html',{"pathName":"交易规则"})
+		@@include('@pathCommonViews/headBarConfig.html',{"bgColors":"#2C3E77,#273971","showType":"0","pathName":"交易规则"})
 		<!-- 交易状态 -->
 		<div class="tradeState">
 			<div class="tradeStateTitle">交易状态</div>
@@ -41,21 +41,38 @@
 			</ul>
 		</div>
 		<!-- 交易费率 -->
-		<!-- <div class="tradeState">
+		<div class="tradeState">
 			<div class="tradeStateTitle">交易费率</div>
-			<ul class="tradeStateList">
-				<li>
-					<p><span>0万元<金额<100.0000万元</span><span>1.50%</span></p>
-					<p><span>100.0000万元≤金额<500</span><span>0.00%</span></p>
-					<p><span>500.0000万元≤金额<100</span><span>每笔1,000.元</span></p>
+			<ul class="tradeRateList">
+				<li class="tradeRate">
+					<p class="tradeRateTitle">申购费率</p>
+					<p class="tradeRateBuy"><span>0万元&lt;金额&lt;100.0000万元</span><span class="fontWeight">1.50%</span></p>
+					<p class="tradeRateBuy"><span>100.0000万元&lt;金额&lt;500</span><span class="fontWeight">0.00%</span></p>
+					<p class="tradeRateBuy"><span>500.0000万元&lt;金额&lt;100</span><span class="fontWeight">每笔1,000.元</span></p>
+				</li>
+				<li class="tradeRate">
+					<p class="tradeRateTitle">赎回费率</p>
+					<p class="tradeRateBuy"><span>0日&lt;持有时长&lt;7日万元</span><span class="fontWeight">1.50%</span></p>
+					<p class="tradeRateBuy"><span>7日&lt;持有时长&lt;365日</span><span class="fontWeight">0.00%</span></p>
+					<p class="tradeRateBuy"><span>1年&lt;持有时长&lt;2年</span><span class="fontWeight">0.20%</span></p>
+					<p class="tradeRateBuy"><span>2年&lt;持有时长&lt;99,9999</span><span class="fontWeight">0.20%</span></p>
+				</li>
+				<li class="tradeRate">
+					<p class="tradeRateTitle">管理费率</p>
+					<p class="tradeRateBuy"><span>管理费率</span><span class="fontWeight">1.00%(每年)</span></p>
+					<p class="tradeRateBuy"><span>托管费率</span><span class="fontWeight">1.00%(每年)</span></p>
+					<p class="tradeRateBuy"><span>销售服务费率</span><span class="fontWeight">—(每年)</span></p>
 				</li>
 				
 			</ul>
-		</div> -->
+		</div>
+
+		<div class="warningTape">基金销售服务由北京恒天明泽基金销售有限公司提供</div>
 
 		
 	</div>
 	
 @@include('@pathInclude/views/footer.html')
+<script src="/financial/static/js/publicPlacement/transactionRules.js"></script>
 </body>
 </html>
