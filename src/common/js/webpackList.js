@@ -311,7 +311,7 @@ module.exports = {
     //我的定投计划
     './Financial/static/js/publicPlacement/myInvestmentPlan' : './src/Financial/static/js/publicPlacement/myInvestmentPlan.js',
     //普通基金产品详情页_定投
-    './Financial/static/js/ordinarySetThrow' : './src/Financial/static/js/ordinarySetThrow.js',
+    './financial/static/js/ordinarySetThrow' : './src/financial/static/js/ordinarySetThrow.js',
 
     // 现金管理
     './Financial/static/js/cashManagement' : './src/Financial/static/js/cashManagement.js',
