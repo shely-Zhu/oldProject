@@ -19,7 +19,13 @@
         </div>
         <div class="list">
             <div class="contentWrapper">
-                <div id="recordListWraper">
+                    <ul class="mui-table-view">
+                            <li class="mui-table-view-cell" id="recordListWraper">
+                                <!-- 放置列表 -->
+                            </li>
+                            @@include('@pathCommonViews/goTop.html')
+                        </ul>
+                <!-- <div id="recordListWraper"> -->
                     @@include('@pathCommonViews/noDataImg.html', {"tipText": "暂无数据"})
                     <!-- <div class="recordItem">
                         <div class="recordLogoCon">
@@ -36,8 +42,7 @@
                             </div>
                         </div>
                     </div> -->
-                </div>
-                @@include('../../../common/views/goTop.html')   
+                <!-- </div> --> 
             </div>
         </div>
     </div>
