@@ -70,5 +70,74 @@
 		text-align: center;
 		color:@9B9B9B;
 	}
+	.purchaseState{
+		margin-top: 0.3rem;
+		background: @c005;
+		font-size: 0.32rem;
+		.tradeStateTitle{
+			padding-left:0.3rem;
+		}
+	}
+	.line_area {
+		height: 1.78rem;
+		display: flex;
+		width: 100%;
+		padding: 0 0.3rem;
+		position: relative;
+		.line_area_left {
+			flex: 1;
+		}
+		.line_area_mid {
+			flex: 1;
+			text-align: center;
+			.mid {
+				background-position: center;
+			}
+		}
+		.line_area_right {
+			flex: 1;
+			text-align: right;
+			.mid {
+				background-position: right;
+			}
+		}
+		.top {
+			font-size: 0.28rem;
+			color: @9B9B9B;
+			margin-top: .3rem
+		}
+		.mid {
+			height: .3rem;
+			margin-top: 0.08rem;
+			background: url("/financial/static/img/public_detail_point.png")no-repeat;
+			background-size: .3rem;
+		}
+		.bottom {
+			margin-top: 0.08rem;
+			font-size: 0.28rem;
+			color: @272727;
+		}
+		.line_left {
+			position: absolute;
+			height: .06rem;
+			width: 37%;
+			left: .7rem;
+			top: .9rem;
+			background: linear-gradient(to right, @6C83C9, @061D6A);
+		}
+		.line_right {
+			position: absolute;
+			height: .06rem;
+			width: 37%;
+			right: .7rem;
+			top: .9rem;
+			background: linear-gradient(to right, @6C83C9, @061D6A);
+		}
+	}
+	.stateTip{
+		padding:0 0.3rem 0.3rem 0.3rem;
+		font-size: 0.28rem;
+		color:@9B9B9B;
+	}
 
 }
