@@ -324,6 +324,8 @@ module.exports = {
 
     // 基本档案
     './financial/static/js/publicPlacement/fundFile' : './src/financial/static/js/publicPlacement/fundFile.js',
+    //普通基金_基金档单_基金公司
+    './financial/static/js/publicPlacement/fundCompany' : './src/financial/static/js/publicPlacement/fundCompany.js',
 
      // 基本档案
     './financial/static/js/publicPlacement/cashTransformIn' : './src/financial/static/js/publicPlacement/cashTransformIn.js',
