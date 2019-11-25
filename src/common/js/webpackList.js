@@ -304,10 +304,10 @@ module.exports = {
      './account/static/js/publicTradeDetail/publicTradeDetail':   './src/account/static/js/publicTradeDetail/publicTradeDetail.js',
 
     //普通基金定投结果
-    './Financial/static/js/publicPlacement/surelyResults': './src/Financial/static/js/publicPlacement/surelyResults.js',
+    './financial/static/js/publicPlacement/surelyResults': './src/financial/static/js/publicPlacement/surelyResults.js',
 
     //我的定投_定投明细
-    './financial/static/js/publicPlacement/castSurely_details' : './src/financial/static/js/publicPlacement/castSurely_details.js',
+    './financial/static/js/publicPlacement/castSurely_detafils' : './src/financial/static/js/publicPlacement/castSurely_details.js',
     //我的定投计划
     './Financial/static/js/publicPlacement/myInvestmentPlan': './src/Financial/static/js/publicPlacement/myInvestmentPlan.js',
     //普通基金产品详情页_定投
