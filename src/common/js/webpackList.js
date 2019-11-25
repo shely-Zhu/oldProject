@@ -312,7 +312,7 @@ module.exports = {
     './Financial/static/js/publicPlacement/surelyResultsDetail': './src/Financial/static/js/publicPlacement/surelyResultsDetail.js',
 
     //我的定投_定投明细
-    './financial/static/js/publicPlacement/castSurely_detafils': './src/financial/static/js/publicPlacement/castSurely_details.js',
+    './financial/static/js/publicPlacement/castSurely_details': './src/financial/static/js/publicPlacement/castSurely_details.js',
     //我的定投计划
     './Financial/static/js/publicPlacement/myInvestmentPlan': './src/Financial/static/js/publicPlacement/myInvestmentPlan.js',
     //活期理财
