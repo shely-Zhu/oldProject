@@ -346,5 +346,6 @@ module.exports = function() {
     this.monthReportDetail_url = go_url.no_url + '/mine/views/monthReport/monthReportDetail.html';
     //自选公募详情页
     this.optionalPublicDetail_url = go_url.no_url + '/account/views/optionalPublicDetail.html';
-
+    //私募资产净值明细页面
+    this.priNetWorthDetails_url = go_url.no_url + '/account/views/priNetWorthDetails.html';
 };
