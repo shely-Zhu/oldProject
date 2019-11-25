@@ -34,12 +34,11 @@ $(function() {
         //初始化mui的上拉加载
         initMui: function() {
             var that = this;
-
             var height = windowHeight - $(".title").height() - $(".topTitle").height();
             if (!$('.list').hasClass('setHeight')) {
                 $('.list').height(height).addClass('setHeight');
             }
-
+            console.log(height)
             mui.init({
                 pullRefresh: {
                     container: '.contentWrapper',
@@ -126,7 +125,8 @@ $(function() {
 
                         // 页面++
                         that.gV.pageCurrent++;
-
+                        //去掉mui-pull-bottom-pocket的mui-hidden
+                        // $('.contentWrapper').find('.mui-pull-bottom-pocket').removeClass('mui-hidden');
                         // 将列表插入到页面上
                         generateTemplate(data, that.$e.recordList, that.$e.adjustmentTemp);
 
