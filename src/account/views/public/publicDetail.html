@@ -15,7 +15,9 @@
 	<!-- @@include('@pathCommonViews/load.html')  -->
 	<div class="publicDetail">
 		<div class="topContent"> 
-			@@include('@pathCommonViews/headBarConfig.html',{"pathName":"普通基金","bgColors":"#031349,#031349","showType":"1"})
+			@@include('@pathCommonViews/headBarConfig.html',{"pathName":"普通基金","bgColors":"#475A95,#475A95","showType":"1"})
+			<!-- 客服 -->
+			<div class="service"></div>
 			<div class="day_gain">日涨幅</div>
 			<div class="day_gain_value">+0.01%</div>
 			<div class="new_worth">最新净值(11-01)</div>
@@ -131,6 +133,7 @@
 					<div class="line_left"></div>
 					<div class="line_right"></div>
 				</div>
+				<div class="line_desc">15:00后采用转账汇款方式的认申购款将视作下一个工作日的交易款项</div>
 			</div>
 			<div class="titleWrap">
 				<div class="title">
@@ -173,11 +176,23 @@
 					中融基金
 				</div>
 			</div>
- 			<div class="footer">
- 				<div class="redeemBtn">赎回</div>
- 				<div class="subscribeBtn">申购</div>
- 			</div>
-	 	</div>
+			<div class="company_info">
+				基金销售服务由北京恒天明泽基金销售有限公司提供
+			</div>
+			<div class="divider"></div>
+		 </div>
+		 <div class="footer">
+			<div class="share_area">
+				<div class="img"></div>
+				<div class="text">分享</div>
+			</div>
+			<div class="selected_area">
+				<div class="img"></div>
+				<div class="text">加自选</div>
+			</div>
+			<div class="fixed_investement_btn">定投</div>
+			<div class="buy_btn">买入</div>
+		</div>
 	</div>
 
 	@@include('@pathInclude/views/footer.html')
