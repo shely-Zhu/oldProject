@@ -126,20 +126,26 @@ $(function(){
                     x: 'left',
                     data: ['现金', '股票'],
                     icon: "roundRect",
-                    itemWidth: 18,  // 设置宽度
-                    itemHeight: 18, // 设置高度
+                    itemWidth: 10,  // 设置宽度
+                    itemHeight: 10, // 设置高度
                     itemGap: 15 ,//设置间距
-                    x: '65%',
+                    x: '60%',
                     y: '35%',
                     formatter: function(name) {
                         if(name == "现金") {
-                            return name + "  " + Number(that.gV.pieData[0].value)*100 + "%"
+                            return " {title|" + name + "}  {value|" + Number(that.gV.pieData[0].value)*100 + "%}"
                         } else if (name == "股票") {
-                            return name + "  " + Number(that.gV.pieData[1].value)*100 + "%"
+                            return " {title|" + name + "}  {value|" + Number(that.gV.pieData[1].value)*100 + "%}"
                         }
                     },
                     textStyle: {
-                        fontSize: 16
+                        fontSize: 16,
+                        rich: {
+                            value: {
+                                fontSize: 16,
+                                fontWeight: 600
+                            }
+                        }
                     }
                 },
                 series: [
@@ -147,7 +153,7 @@ $(function(){
                         name:'',
                         type:'pie',
                         radius: ['46%', '70%'],
-                        center: ['35%', '47%'],
+                        center: ['30%', '47%'],
                         avoidLabelOverlap: false,
                         hoverAnimation:false,
                         label: {
@@ -194,7 +200,7 @@ $(function(){
                         type:'pie',
                         hoverAnimation:false,
                         radius: ['40%', '46%'],
-                        center: ['35%', '47%'],
+                        center: ['30%', '47%'],
                         avoidLabelOverlap: false, 
                         label: {
                             normal: {

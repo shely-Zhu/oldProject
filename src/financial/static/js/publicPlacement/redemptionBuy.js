@@ -24,6 +24,8 @@ require('@pathCommonJs/components/elasticLayer.js');
 var splitUrl = require('@pathCommonJs/components/splitUrl.js');
 //引入复制功能
 // var Clipboard = require('clipboard');
+var popPicker = require('@pathCommonJsCom/popPicker.js');
+var provinceList = require('../../../../common/json/provinceList.js');
 
 
 $(function () {
@@ -64,19 +66,14 @@ $(function () {
 			}, false);
 
 
+			//选择银行卡
+			document.getElementById('bank').addEventListener('tap', function () {
+				popPicker(1, provinceList, $('.onright .onright-left-one i'))
+			}, false);
 
-
-			$('body').on('tap','.onright-left',function(){
-				$('.popup').css('display','block')
-			}) 
-
-			$('body').on('tap','.popup-close',function(){
-				$('.popup').css('display','none')
-			}) 
-
-			$('body').on('tap','.popup-mask',function(){
-				$('.popup').css('display','none')
-			}) 
+			// $('body').on('tap','.mui-poppicker-btn-cancel',function(){
+			// 	$('.mui-poppicker').css('display','none')
+			// }) 
 
 		},
 

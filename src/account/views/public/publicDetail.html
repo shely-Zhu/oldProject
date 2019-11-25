@@ -52,6 +52,10 @@
 				</div>
 			</div>
 	 		<div class="lineWrap">
+				<div class="nav" id="redeemNav">
+					<span class="navSpan quick active" type="1">快速赎回</span>
+					<span class="navSpan normal" type="2">普通赎回</span>
+				</div>
 				<div class="line_area">
 					<!-- 折线部分 -->
 				</div>
@@ -62,80 +66,113 @@
 						<span class="sinceNow">一年</span>
 						<span class="oneMonth">成立以来</span>
 				</div>
-			 </div>
-			 <div class="history_area">
-				<div class="history_header">
-					<div class="fl">历史净值</div>
-					<div class="fr">查看更多</div>
-					<span class="iconfont fr">&#xe636;</span>
+			</div>
+			<div class="history_area">
+				<div class="titleWrap">
+					<div class="title">
+						历史净值明细
+					</div>
+					<div class="arrow">
+						<span class="img"></span>
+					</div>
+					<div class="desc">
+						查看更多
+					</div>
 				</div>
-				<div class="history_item_name">
-					<div>日期</div>
-					<div>单位净值</div>
-					<div>累计净值</div>
-					<div>日涨幅</div>
+				<div class="history_item">
+					<div class="item_name">日期</div>
+					<div class="item_name">单位净值</div>
+					<div class="item_name">累计净值</div>
+					<div class="item_name">日涨幅</div>
 				</div>
 				<!-- 用handleBar去渲染数据 -->
 				<div class="history_item">
-					<div>2019-10-14</div>
-					<div>2.1232</div>
-					<div>2.1232</div>
-					<div>+1.22%</div>
+					<div class="item_value_1">2019-10-14</div>
+					<div class="item_value_1">2.1232</div>
+					<div class="item_value_1">2.1232</div>
+					<div class="item_value_2 value_red">+1.22%</div>
 				</div>
 				<div class="history_item">
-					<div>2019-10-14</div>
-					<div>2.1232</div>
-					<div>2.1232</div>
-					<div>+1.22%</div>
+					<div class="item_value_1">2019-10-14</div>
+					<div class="item_value_1">2.1232</div>
+					<div class="item_value_1">2.1232</div>
+					<div class="item_value_2 value_red">+1.22%</div>
 				</div>
 				<div class="history_item">
-					<div>2019-10-14</div>
-					<div>2.1232</div>
-					<div>2.1232</div>
-					<div>+1.22%</div>
+					<div class="item_value_1">2019-10-14</div>
+					<div class="item_value_1">2.1232</div>
+					<div class="item_value_1">2.1232</div>
+					<div class="item_value_2 value_red">+1.22%</div>
 				</div>
-			 </div>
-	 		<div class="dealReg">
-	 			<div class="dealMid">
-	 				<div class="titleWrap">交易规则
-	 					<div class="arrow">
-		 					<span class="img"></span>
-		 				</div></div>
-		 			<div class="dealRegMid">
-		 				<div class="nav" id="redeemNav">
-		 					<span class="navSpan quick active" type="1">快速赎回</span>
-		 					<span class="navSpan normal" type="2">普通赎回</span>
-		 				</div>
-		 				<div class="line">
-		 					<div class="clearfix line_title">
-			 					<span class="top_l">赎回申请</span>
-			 					<span class="top_r">付款</span>
-			 				</div>
-		 					<img class="lineDiv" src="/account/static/img/productDetail/regLine.png">
-		 					<div class="clearfix line_bottom">
-			 					<span class="bottom_l" id="tradeDatePre">--</span>
-			 					<span class="bottom_r" id="tradeDateNext">--</span>
-			 				</div>
-		 				</div>
-		 				<ul class="detail">
-		 					<li id="tradeExplain"></li>
-		 					<li id="tradeFee"></li>
-		 				</ul>
-		 			</div>
-		 		</div>
-		 		<div class="dealBottom">
-	 				<div class="titleWrap">产品档案
-	 					<div class="arrow">
-	 						<span class="img"></span>
-	 					</div>
-	 				</div>
-	 				<div class="titleWrap">信息披露
-	 					<div class="arrow">
-	 						<span class="img"></span>
-	 					</div>
-	 				</div>
-	 			</div>
- 			</div>
+			</div>
+	 		<div class="dealRegArea">
+				<div class="titleWrap">
+					<div class="title">交易规则</div>
+						<div class="arrow">
+					<span class="img"></span>
+					</div>
+				</div>
+				<div class="line_area">
+		 			<div class="line_area_left">
+						<div class="top">买入提交</div>
+						<div class="mid"></div>
+						<div class="bottom">今日15点前</div>
+					</div>
+					<div class="line_area_mid">
+						<div class="top">份额确认</div>
+						<div class="mid"></div>
+						<div class="bottom">2019-11-08</div>
+					</div>
+					<div class="line_area_right">
+						<div class="top">查看盈亏</div>
+						<div class="mid"></div>
+						<div class="bottom">2019-11-09</div>
+					</div>
+					<div class="line_left"></div>
+					<div class="line_right"></div>
+				</div>
+			</div>
+			<div class="titleWrap">
+				<div class="title">
+					产品档案
+				</div>
+				<div class="arrow">
+					<span class="img"></span>
+				</div>
+			</div>
+			<div class="titleWrap">
+				<div class="title">
+					基金档案
+				</div>
+				<div class="arrow">
+					<span class="img"></span>
+				</div>
+				<div class="desc">
+					概括、持仓、公告、分红
+				</div>
+			</div>
+			<div class="titleWrap">
+				<div class="title">
+					基金经理
+				</div>
+				<div class="arrow">
+					<span class="img"></span>
+				</div>
+				<div class="desc">
+					朱波 李倩
+				</div>
+			</div>
+			<div class="titleWrap">
+				<div class="title">
+					基金公司
+				</div>
+				<div class="arrow">
+					<span class="img"></span>
+				</div>
+				<div class="desc">
+					中融基金
+				</div>
+			</div>
  			<div class="footer">
  				<div class="redeemBtn">赎回</div>
  				<div class="subscribeBtn">申购</div>
