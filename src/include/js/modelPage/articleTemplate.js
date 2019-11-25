@@ -27,7 +27,7 @@ $(function(){
 			HeadBarpathName:$("#HeadBarpathName")
 		},
 		//页面初始化函数
-		init:function(){         
+		init:function(){
             this.getTemplateData();
             this.events()
         },
@@ -53,14 +53,14 @@ $(function(){
 							"padding":".5rem .5rem 0"
 						})
 					}
-					
-            
+
+
                 },
                 callbackFail: function(json) {
                     tipAction(json.message);
                 }
-            }];                        
-            $.ajaxLoading(obj); 
+            }];
+            $.ajaxLoading(obj);
         },
         events() {
             var that = this;
