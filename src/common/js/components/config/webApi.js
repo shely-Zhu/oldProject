@@ -284,6 +284,11 @@ module.exports = function () {
     this.pofUpdateDividend_api = pre + 'dividend/updateDividend'; // 22.分红方式修改
 
 
+    this.pofGetTotalAssetsCash_api = http_url.web_url + '/account/pof/cash/getTotalAssetsCash'; // 现金宝资产总览查询
+    this.pofGetAssetsCashList_api = http_url.web_url + '/account/pof/cash/getAssetsCashList'; // 现金宝资产列表
 
-    /*------------------- 月度报告 end ------------------------------*/
+
+
+
+    /*------------------- 私募理财fang——le end ------------------------------*/
 };

@@ -4,7 +4,7 @@
 
 
 
-module.exports = function() {
+module.exports = function () {
 
     this.login_html_url = go_url.no_url + '/login'; //手动触发登录,需将redirectUrl值传回去
     this.logOut_html_url = go_url.no_url + '/logout.action'; //退出登录
@@ -312,7 +312,7 @@ module.exports = function() {
     /*-------------------------------我的页面 start -----------------------*/
     //登录日志查询页面
     this.journal_url = go_url.no_url + '/mine/views/journal.html'
-        //承接h5的模板页地址
+    //承接h5的模板页地址
     this.examplePage_url = go_url.no_url + '/mine/views/examplePage.html';
     /*-------------------------------我的页面 end -----------------------*/
 
@@ -347,4 +347,14 @@ module.exports = function() {
     //自选公募详情页
     this.optionalPublicDetail_url = go_url.no_url + '/account/views/optionalPublicDetail.html';
 
+    /*------------------- 私募理财fang——le start ------------------------------*/
+
+    // 转入，转出结果页面，定投结果
+    this.pofSurelyResults_url = go_url.no_url + '/financial/views/publicPlacement/surelyResults.html';
+    // 诊断搜索页面
+    this.diagnosisSearch_url = go_url.no_url + '/commonResources/fundDiagnosis/views/diagnosisSearch.html';
+    // 诊断详情页
+    this.diagnosisDetail_url = go_url.no_url + '/commonResources/fundDiagnosis/views/diagnosisDetail.html';
+
+    /*------------------- 私募理财fang——le end ------------------------------*/
 };
