@@ -231,7 +231,9 @@ $(function(){
                 // url:'http://172.16.187.164:8081/web/marketing/activity/cityList',
                 //async: false,
                 needDataEmpty: true,
+                contentTypeSearch: false, //false: application/json,入参data为json字符串  , true:  application/x-www-form-urlencoded ，入参data为json对象
                 callbackDone: function(json) {
+                    console.log('我是内容',json)
                     $('#loading').hide();
                     console.log(json);
                     var data=json.data;
@@ -256,7 +258,7 @@ $(function(){
                         hotCity:data.hotCityList,
                         cityList:cityList
                     });
-                    console.log(res);
+                    console.log('我是res',res);
                     // 将列表插入到页面上
                     generateTemplate(res,$('#cityListBox'),$('#cityList-template'));
                     //城市索引列表显示
