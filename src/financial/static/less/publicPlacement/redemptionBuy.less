@@ -1,7 +1,7 @@
  /**  
- * @Page:  普通基金产品详情页_定投
- * @Author: caoqihai  
- * @Date:   2019-11-23
+ * @Page:  普通基金产品详情页_赎回
+ * @Author: peicongcong  
+ * @Date:   2019-11-25
 * 
 */ 
 
@@ -26,7 +26,9 @@
 @import url("@pathCommonLess/mui/resetMuiPop.less");
 
 @import url("@pathCommonLessCom/headBarConfig.less");
-
+body{
+    background: @F7FAFD;
+}
 .container{
     width: 100%;
     height:100%;
@@ -49,6 +51,12 @@
         background: @c005;
         padding-left: .3rem;
         margin-bottom: .3rem;
+    }
+    .messageTip{
+        color: @9B9B9B;
+        font-size: 0.24rem;
+        margin-left: 0.3rem;
+        margin-bottom: 0.1rem;
     }
     .money{
         background: @c005;
@@ -89,10 +97,20 @@
             border-bottom: 1px solid @E7E9ED;
             .msecond-one{
                 height:.8rem;
-                font-size:.6rem;
-                font-weight:bold;
-                color:@272727;
+                font-size:.44rem;
+                color:@9B9B9B;
                 line-height:.8rem;
+            }
+            .forAll{
+                width: 0.72rem;
+                text-align: center;
+                color: @c005;
+                font-size: 0.28rem;
+                height: 0.4rem;
+                line-height: 0.4rem;
+                background:linear-gradient(135deg,rgba(241,205,168,1) 0%,rgba(181,126,69,1) 100%);
+                border-radius:0.04rem;
+                margin-top: 0.2rem;
             }
             img{
                 width: .36rem;
@@ -107,26 +125,32 @@
             font-weight:400;
             color:@9B9B9B;
             line-height:.4rem;
-            margin-top: .2rem;
+            margin-top: .3rem;
         }
     }
     .online{
         display: flex;
         justify-content: space-between;
-        margin-top: .2rem;
+        margin-bottom: .3rem;
+        height: 1.36rem;
         background: @c005;
         .onleft{
             height:.45rem;
             font-size:.32rem;
             font-weight:400;
             color:@272727;
-            line-height:.45rem;
-            margin-top: .58rem;
+            line-height:1.36rem;
             margin-left: .3rem;
         }
         .onright{
             display: flex;
             justify-content: space-between;
+            .toChoose{
+                margin-bottom: 0.36rem;
+                font-size: 0.28rem;
+                color: @9B9B9B;
+                line-height: 1.5rem;
+            }
             .onright-left{
                 
                 .onright-left-one{
@@ -161,6 +185,10 @@
                     color:@9B9B9B;
                     line-height:37px;
                     margin-bottom: .36rem;
+                    text-align: right;
+                    span{
+                        color: @4A4A4A;
+                    }
                 }
             }
             .iconone{
@@ -200,6 +228,24 @@
             }
         }
     }
+    .tip{
+        text-align: center;
+        padding: 0 0.3rem 0.3rem;
+        background-color: @c005;
+        p{
+            font-size: 0.26rem;
+            color: #444444;
+            line-height: 0.38rem;
+        }
+        
+        a{
+            color: @C4925E;
+            font-size: 0.3rem;
+            line-height: 0.42rem;
+            display: inline-block;
+            margin-top: 0.1rem;
+        }
+    }
     .p1,.p2{
         height:.33rem;
         font-size:.24rem;
@@ -213,6 +259,7 @@
     .p2{
         display: flex;
         margin-bottom: .9rem;
+        margin-top: 0.3rem;
         img{
             width: .22rem;
             height: .22rem;
@@ -229,7 +276,6 @@
         
     }
     .btn{
-        width:92%;
         margin: 0 auto;
         color: @c005;
         background: linear-gradient(to right, @6C83C9 0%, @061D6A 100%);
@@ -240,7 +286,13 @@
         line-height: .98rem;
         text-align: center;
         letter-spacing: 2px;
-        margin-bottom: .3rem;
+        bottom: 0.3rem;
+        position: fixed;
+        left: 0.3rem;
+        right: 0.3rem;
+    }
+    .btn.disabled{
+        background-image: linear-gradient(135deg, #B1BEE3 0%, #7F8CB4 100%);
     }
     .bottom{
         width: 92%;
