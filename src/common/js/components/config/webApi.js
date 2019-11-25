@@ -244,4 +244,11 @@ module.exports = function() {
 
 
     /*------------------- 月度报告 end ------------------------------*/
+
+    /*------------------- 私募理财fang——le start ------------------------------*/
+    this.protocolList_api = http_url.webPof_url + '/fixedInvestment/protocol/list'; //金服WEB-定投交易- 我的定投协议列表
+    
+
+
+    /*------------------- 月度报告 end ------------------------------*/
 };

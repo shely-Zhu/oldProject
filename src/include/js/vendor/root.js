@@ -434,7 +434,8 @@ window.http_url = {
     content_url: '/wap/content', // 内容接口
     account_url: '/wap/account', // 账户接口
     web_url: '/web', // 账户接口
-    app_url: '/app'// App接口
+    app_url: '/app',// App接口,
+    webPof_url:'/web/pof' //私募理财
 }
 
 
