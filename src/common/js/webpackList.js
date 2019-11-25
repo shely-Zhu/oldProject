@@ -305,6 +305,9 @@ module.exports = {
 
     //普通基金定投结果
     './Financial/static/js/publicPlacement/surelyResults': './src/Financial/static/js/publicPlacement/surelyResults.js',
+ 
+    //普通基金定投结果详情
+    './Financial/static/js/publicPlacement/surelyResultsDetail': './src/Financial/static/js/publicPlacement/surelyResultsDetail.js',   
 
     //我的定投_定投明细
     './Financial/static/js/publicPlacement/castSurely_details' : './src/Financial/static/js/publicPlacement/castSurely_details.js',
