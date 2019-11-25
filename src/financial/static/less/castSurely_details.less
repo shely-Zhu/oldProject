@@ -30,27 +30,49 @@ body,.mui-content{
         position: relative;
         width: 100%;
         height: 4.3rem;
-        background: url("/Financial/static/img/financing_banner_bg01@2x.png");
+        background: url("/financial/static/img/financing_banner_bg01@2x.png");
         background-size: 100% 100%;
         .bannerTop {
             color: @F7DDCF;
             margin: 0 0.3rem;
             padding-top: 1.54rem;
+            .j_text{
+                font-size: .32rem;
+                padding-bottom: .23rem;
+            }
             .posRight{
                 position: absolute;
                 top: 1.4rem;
                 right:.32rem;
+
                 .iconfont{
                     color: @c005;
                 }
             }
             .type{
+                border-top: solid .01rem @23346C;
+                padding-top: .23rem;
                 display: flex;
                 justify-content: space-between;
+                div{
+                    p{
+                        color: @c005;
+                        font-size: .26rem;
+                    }
+                }
             }
             .ipt{
+                width: 6.9rem;
+                height: .7rem;
+                // color: @c005;
+                background:@FFF9F0;
+                line-height: .7rem;
+                text-indent: .2rem;
                 border-radius: .08rem;
                 opacity:0.3;
+                span{
+                    color: @FFE4BD;
+                }
             }
         }
     }
@@ -64,7 +86,7 @@ body,.mui-content{
         div{
             height: .4rem;
             width: 1.33rem;
-            background: url("/Financial/static/img/tag_leftup 2@2x.png");
+            background: url("/financial/static/img/tag_leftup 2@2x.png");
             background-size: cover;
             div{
                 text-align: center;
@@ -72,6 +94,85 @@ body,.mui-content{
                 -webkit-background-clip:text;
                 color: transparent;
             }
+            .posTop{
+                position: absolute;
+                top: .44rem;
+                right: .3rem;     
+                font-size: .32rem;
+                font-weight:400;  
+            }
+            .fontSize2{
+                position: absolute;
+                top: .9rem;
+                right: .3rem;     
+                font-size: .24rem;
+                font-weight:400;
+                color: @9B9B9B;
+            }
+        }
+        ul{
+            width: 6.9rem;
+            margin: 0 auto;
+            li{
+                position: relative;
+                height: 1rem;
+                border-bottom: solid .01rem @E7E9ED;
+                line-height: 1rem;
+                
+                .fontSize6{
+                    font-size: .32rem;
+                    font-weight:600;
+                }
+                .fontSize4{
+                    float: right;
+                    font-size: .32rem;
+                    font-weight:400;
+                    .onlinePayment{
+                        color: @364D97;
+                        background:@EDF1FF;
+                        font-size: .24rem;
+                        line-height: 1rem;
+                    }
+                    .cardNo{
+                        font-size: .36rem;
+                        font-weight:bold;
+                    }
+                }
+            }
+        }
+    }
+    table{
+        width: 7.5rem;
+        tr{
+            width: 2.5rem;
+            text-align: center;
+            td{
+                padding: .3rem 0;
+            }
+            .state_succ{
+                font-size: .24rem;
+                font-weight: 400;
+                background: linear-gradient(to right, @6C83C9, @061D6A);
+                color: transparent;
+                -webkit-background-clip:text;
+                -webkit-text-fill-color:transparent;
+            }
+            .state_fail{
+                font-size: .24rem;
+                font-weight: 400;
+                color: @F52323;
+            }
+        }
+        .is_fail{
+            width: 2.5rem;
+            text-align: center;
+            position: relative;
+            height: .88rem;
+            .fail_reason{
+                position: absolute;
+                top: .85rem;
+                right: .59rem;
+            }    
         }
     }
 }
@@ -87,6 +188,6 @@ body,.mui-content{
         text-align: center;
         width: 2.5rem;
         height: .98rem;
-        border: #E7E9ED solid 1px;
+        border: @E7E9ED solid 1px;
     }
 }
