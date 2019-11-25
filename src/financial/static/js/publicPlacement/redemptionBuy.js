@@ -1,9 +1,9 @@
 /**  
-* @Page:  普通基金产品详情页_定投
-* @Author: caoqihai  
-* @Date:   2019-11-23
-* 
-*/
+ * @Page:  普通基金产品详情页_定投
+ * @Author: caoqihai  
+ * @Date:   2019-11-23
+ * 
+ */
 
 require('@pathIncludJs/vendor/config.js');
 
@@ -28,59 +28,50 @@ var popPicker = require('@pathCommonJsCom/popPicker.js');
 var provinceList = require('../../../../common/json/provinceList.js');
 
 
-$(function () {
+$(function() {
 
-	var regulatory = {
+    var regulatory = {
 
-		getElements: {
-			accountName: $('#accountName'),  //公共账户名称
-			name: $('#name'),  //公募账户名
-			number: $('#number'),  //账号
-			linenum: $('#linenum'), //行号
-			openingBank: $("#openingBank"),  //开户行
-			topc: $('#topc'),       //提示信息
-		},
+        getElements: {
+            accountName: $('#accountName'), //公共账户名称
+            name: $('#name'), //公募账户名
+            number: $('#number'), //账号
+            linenum: $('#linenum'), //行号
+            openingBank: $("#openingBank"), //开户行
+            topc: $('#topc'), //提示信息
+        },
 
-		webinit: function () {
-			var that = this;
+        webinit: function() {
+            var that = this;
 
-			//
-			that.events();
+            //
+            that.events();
 
-		},
+        },
 
         /*
             绑定事件
          */
-		events: function () {
-			var that = this;
+        events: function() {
+            var that = this;
+            $('body').on('tap', '.onright', function() {
+                $('.popup').css('display', 'block')
+            })
 
-			//开始时间
-			document.getElementById('starttime').addEventListener('tap', function () {
-				option = { "type": "date", "beginYear": "1980", "endYear": "2030" };
-				var picker = new mui.DtPicker(option);
-				picker.show(function (rs) {
-					console.log(rs.text)
-					// document.getElementById('starttime').innerHTML = rs.text;
-				});
-			}, false);
+            $('body').on('tap', '.popup-close', function() {
+                $('.popup').css('display', 'none')
+            })
+
+            $('body').on('tap', '.popup-mask', function() {
+                $('.popup').css('display', 'none')
+            })
+
+        },
 
 
-			//选择银行卡
-			document.getElementById('bank').addEventListener('tap', function () {
-				popPicker(1, provinceList, $('.onright .onright-left-one i'))
-			}, false);
 
-			// $('body').on('tap','.mui-poppicker-btn-cancel',function(){
-			// 	$('.mui-poppicker').css('display','none')
-			// }) 
-
-		},
-
-		
-
-	};
-	//调用函数
-	regulatory.webinit();
+    };
+    //调用函数
+    regulatory.webinit();
 
 })
