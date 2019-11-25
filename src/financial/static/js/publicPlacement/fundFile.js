@@ -112,7 +112,6 @@ $(function(){
         //页面初始化函数
         init:function(){
             var that=this;
-            that.drawCircle()
             that.events()
         },
         drawCircle() {
@@ -225,7 +224,10 @@ $(function(){
             //tab点击切换
             mui("body").on('tap', '.tabs>li' , function(){
                 $(this).addClass('active').siblings().removeClass('active');
-                $(".wrap>.panel").eq($(this).index()).addClass('active').siblings().removeClass('active')
+                $(".wrap>.panel").eq($(this).index()).addClass('active').siblings().removeClass('active');
+                if($(this).index() == 1) {
+                    that.drawCircle()
+                }
             })
         }
     };
