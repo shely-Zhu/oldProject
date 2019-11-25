@@ -295,6 +295,8 @@ module.exports = {
 
     // 现金宝详情页
      './account/static/js/public/cashTreasure':   './src/account/static/js/public/cashTreasure.js',
+    // 支付密码
+     './account/static/js/public/payPassword':   './src/account/static/js/public/payPassword.js',
     // 基金确认书
      './account/static/js/private/privateFundPdf':   './src/account/static/js/private/privateFundPdf.js',
     //我的定投_定投明细
