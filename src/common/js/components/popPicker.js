@@ -15,7 +15,6 @@
 
 
 module.exports = function( layer, pickerList, source, callback, type){
-	
 	if( $('.mui-poppicker').length ){
 		return false;
 	}
@@ -55,14 +54,13 @@ module.exports = function( layer, pickerList, source, callback, type){
 	
 	//选择器选择数据后的操作
 	picker.show(function(getSelectedItems){
-
 		//选择的数据
 	    var result = getSelectedItems,
 		    str = '';
 
 		//循环获取，并设置到对应的属性上
 		$.each(result, function(i, el){
-
+			
 			if( type == 'liTwo'){
 				str += '<span>' + el.text + '</span>';
 			}else{

@@ -220,7 +220,7 @@ $(function () {
 
 			// 周期选择
 			$('body').on('tap','#starttime',function(){
-				popPicker(2, list, $('.provinceSelect a'));
+				popPicker(2, list, $('#cycle'));
 			}) 
 
 			// 银行卡 弹出
