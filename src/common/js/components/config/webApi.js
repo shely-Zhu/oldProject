@@ -7,7 +7,7 @@
  */
 
 //获取当前页面地址
-module.exports = function() {
+module.exports = function () {
     /*-------------------账户相关------------------------------*/
     //资普
     this.standardPoor_api = http_url.web_url + '/account/standardPoor/getTotalAssets';
@@ -44,7 +44,7 @@ module.exports = function() {
     this.getJJSInTransitAssets_api = http_url.web_url + '/account/jjs/getJJSInTransitAssets'; // 查询金交所在途资产 
     //待确认，已确认列表
     this.getTradeList_api = http_url.web_url + '/pef/getTradeList'
-        // 查询金交持仓资产、在途资产、总资产
+    // 查询金交持仓资产、在途资产、总资产
     this.getJJSAssets_api = http_url.web_url + '/account/jjs/getJJSAssets';
     // jjs持仓明细查询
     this.queryAssetsDetailByPages_api = http_url.web_url + '/account/jjs/queryAssetsDetailByPages'
@@ -92,6 +92,41 @@ module.exports = function() {
     /*-------------------公募相关------------------------------*/
     this.query_api = http_url.web_url + '/pof/frontend/fund/query'; //热门诊断基金列表搜索
     this.pofTotalAssets_api = http_url.web_url + '/account/pof/totalAssets'; // 公募总资产
+
+    // 前缀
+    const pre = http_url.web_url + '/pof/'
+    const buyFundPre = pre + 'buyFund/'
+    const cashPre = pre + 'cash/'
+    const fixedInvestmentPre = pre + 'fixedInvestment/'
+
+    // wiki地址 http://192.168.6.105:8090/pages/viewpage.action?pageId=9470018
+    this.pofToBuy_api = buyFundPre + 'toBuy'; // 1.金服WEB-下单-进入下单页面
+    this.pofCheckPayType_api = buyFundPre + 'checkPayType'; // 2.金服WEB-下单-校验支付方式
+    this.pofPayment_api = buyFundPre + 'payment'; // 3.金服WEB-下单-支付操作
+
+    this.pofCashList_api = cashPre + 'frontend/getcashfundlist'; // 4.金服WEB-获取现金宝列表
+    this.pofCashToBuy_api = cashPre + 'doCashTreasureToBuy'; // 5.金服WEB-恒添宝-购买页面
+    this.pofCashBuy_api = cashPre + 'doCashTreasureBuy'; // 6.金服WEB-恒添宝-支付操作
+    this.pofCashSell_api = cashPre + 'doCashTreasureSell'; // 7.金服WEB-恒添宝-转出操作
+    this.pofCashDetail_api = cashPre + 'getCashTreasureDetail'; // 8.金服WEB-恒添宝-交易详情查询
+    this.pofCashLimit_api = cashPre + 'frontend/getCashTreasureLimitInfo'; // 9.金服WEB-现金宝-现金宝限额信息查询
+
+
+    this.pofFixedList_api = fixedInvestmentPre + 'rank/frontend/list'; // 10.金服WEB-定投-定投排行列表
+    this.pofFixedSign_api = fixedInvestmentPre + 'sign'; // 11.金服WEB-定投-定投协议签署
+    this.pofFixedDetail_api = fixedInvestmentPre + 'protocol/detail'; // 12.金服WEB-定投-我的定投详情
+    this.pofFixedDeductDay_api = fixedInvestmentPre + 'frontend/firstDeductDay'; // 13.金服WEB-定投-下次扣款日期
+    this.pofFixedChange_api = fixedInvestmentPre + 'protocol/change'; // 14.金服WEB-定投-定投协议变更
+    this.pofFixedLimit_api = fixedInvestmentPre + 'tradeLimitAmout'; // 15.金服WEB-定投-查询基金限额
+
+
+    this.pofTradeApplyInfo_api = pre + 'myAssetInfo/tradeApplyInfo'; // 16.金服WEB-交易详情查询
+    this.pofRedemptionPay_api = pre + 'redemptionPay/redemptionPay'; // 17.金服WEB–基金赎回
+    this.pofShortRedeemInfo_api = pre + 'redemptionPay/shortRedeemInfo'; // 18.金服WEB-短期理财基金赎回详情
+    this.pofUndoTradeApply_api = pre + 'undoTradeApply/undoTradeApply'; // 19.金服WEB-撤单
+    this.pofProtocolList_api = pre + 'fixedInvestment/protocol/list'; // 20.金服WEB-定投交易- 我的定投协议列表
+    this.pofQueryDividendByCode_api = pre + 'dividend/queryDividendByCode'; // 21.单只基金分红方式查询
+    this.pofUpdateDividend_api = pre + 'dividend/updateDividend'; // 22.分红方式修改
 
     /*-------------------公募相关 end ------------------------------*/
 
