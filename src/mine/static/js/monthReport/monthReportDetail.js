@@ -407,8 +407,8 @@ var monthReportDetail = {
 							el.colorStop = '#EDA377';
 						}
 						else if(el.assetType == '200'){
-							el.colorStart = '#AA6545';
-							el.colorStop = '#EDA377';
+							el.colorStart = '#D8D8D8';
+							el.colorStop = '#D8D8D8';
 						}
 
 

@@ -5,3 +5,15 @@
  *
  * 具体可以参考 privateDetail.js
  */
+
+require('@pathCommonJs/components/headBarConfig.js');
+
+
+ //是否大于0的判断器 用于设置涨红跌绿 可以参考publicAssets.js
+ Handlebars.registerHelper("if_than_0", function (value, options) {
+    if (value > 0) {
+        return options.fn(this);
+    } else {
+        return options.inverse(this);
+    }
+});

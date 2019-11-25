@@ -1,0 +1,67 @@
+<!-- /**  
+ * @Page:  财富学院
+ * @Author: liliang 
+ * @Date:   2019-11-25
+ * 
+ */ -->
+
+ <!DOCTYPE html>
+ <html lang="en">
+ <head>
+     @@include('@pathInclude/views/meta.html')
+     <link rel="stylesheet" href="/homePage/static/css/fortuneCollegeList.css">
+     <title>财富学院</title>
+ </head>
+ <body>
+     <!--加载图标-->
+     <!--@@include('@pathCommonViews/load.html')--> 
+     <!--没有数据显示图标-->
+     <!--@@include('@pathCommonViews/noDataImg.html')-->
+     <!--列表加载显示图标-->
+     <!--@@include('@pathCommonViews/loading/listLoading.html')-->
+     <div id="box">
+          @@include('@pathCommonViews/headBarConfig.html',{"bgColors":"#384A81,#2A3C70","showType":"1","pathName":"财富学院"})
+          <div class="list">
+               <div class="wrapper">
+                    <div class="banner">
+                         <div class="mui-slider">
+                              <div class="mui-slider-group mui-slider-loop">
+                                   <!--支持循环，需要重复图片节点-->
+                                   <div class="mui-slider-item mui-slider-item-duplicate"><a href="#"><img src="/homePage/static/img/banner1@2x.png" /></a></div>
+                                   <div class="mui-slider-item"><a href="#"><img src="/homePage/static/img/banner1@2x.png" alt=""></div>
+                                   <div class="mui-slider-item"><a href="#"><img src="/homePage/static/img/banner1@2x.png" alt=""></a></div>
+                                   <div class="mui-slider-item"><a href="#"><img src="/homePage/static/img/banner1@2x.png" alt=""></a></div>
+                                   <div class="mui-slider-item"><a href="#"><img src="/homePage/static/img/banner1@2x.png" alt=""></a></div>
+                                   <!--支持循环，需要重复图片节点-->
+                                   <div class="mui-slider-item mui-slider-item-duplicate"><a href="#"><img src="/homePage/static/img/banner1@2x.png" alt=""></div>
+                              </div>
+                              <!-- <div class="mui-slider-indicator">
+                                   <div class="mui-indicator mui-active"></div>
+                                   <div class="mui-indicator"></div>
+                                   <div class="mui-indicator"></div>
+                                   <div class="mui-indicator"></div>
+                              </div> -->
+                         </div>
+                    </div>
+                    <div class="hotWords">
+                         <div>
+                              <h2>财富翻译官</h2>
+                              <p>查看往期热词</p>
+                         </div>
+                    </div>
+               </div>
+          </div>
+     </div>
+ 
+     
+ 
+     @@include('@pathInclude/views/footer.html')
+     <!-- 添加埋点 -->
+     @@include('@pathInclude/views/header.html')
+     <script src="@pathIncludJs/vendor/zepto/zepto.js"></script>
+	<script src="@pathIncludJs/vendor/root.js"></script>
+	<script src="@pathIncludJs/vendor/mui/mui.min.js"></script>
+     <script src="/financial/static/js/publicPlacement/demandFinancing.js"></script>
+ 
+ </body>
+ </html>
