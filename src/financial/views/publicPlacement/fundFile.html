@@ -1,22 +1,18 @@
 <!--
 *基金档案
-*author:purpleZhao
-*time：2017/3/14
+*author:yanruiting wangjiajia
+*time：2019/11/25
 -->
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
 	@@include('@pathInclude/views/meta.html')
 	<link rel="stylesheet" href="/financial/static/css/fundFile.css">
 	<title>基本档案</title>
-
 <body>
-
 	<!-- @@include('@pathCommonViews/load.html') -->
 	<!-- 加载中loading -->
 	@@include('@pathCommonViews/loading/listLoading.html')
-
 	<!-- 暂无数据 -->
 	@@include('@pathCommonViews/noData.html')
 	@@include('@pathCommonViews/headBarConfig.html',{"bgColors":"#2C3E77,#273971","showType":"0","pathName":"基本档案"})
@@ -102,7 +98,7 @@
 					  </div>
 					</div>
 				</div>
-				<div class="panel panel2 active">
+				<div class="panel panel2">
 					<div class="totalFundCon">
 						<div class="circleTitleCon">
 							<div class="circleTitle">总资产(元)</div>
@@ -211,7 +207,6 @@
 			</div>
 		</div>		
 	</div>
-
 </body>
 @@include('@pathInclude/views/footer.html')
 <script src="/include/js/vendor/echarts/echarts.min.js"></script>
