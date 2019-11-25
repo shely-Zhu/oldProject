@@ -42,7 +42,7 @@
             <span class="iconfont fl">&#xe609;</span>
         </div>
         <div class="bank_list hide">
-            <div class="bank_screen">
+            <div class="bank_screen bank_item">
                 <div class="bank_screen_name fl">全部</div>
                 <span class="iconfont fr">&#xe626;</span>
             </div>
@@ -102,12 +102,16 @@
                     {{else}}
                         <div class="text_green position_h">{{addupIncomeMask}}</div>
                     {{/if_than_0}}
-                    {{#if canBeSpentMsg}}
-                        <div class="tip">{{canBeSpentMsg}}</div>
+                    {{#if myTip}}
+                        <div class="tip">{{myTip}}</div>
                     {{/if}}
                     <!-- todo 需要判断字段来是否显示 -->
-                    <div class="buy_btn fr">买入</div>
-                    <div class="redeem_btn fr">赎回</div>
+                    {{#if isBuyFlag}}
+                        <div class="buy_btn fr">买入</div>
+                    {{/if}}
+                    {{#if isRedemptionFlag}}
+                        <div class="redeem_btn fr">赎回</div>
+                    {{/if}}
                     <!-- 封闭期盖章 本期去掉了 -->
                     <!-- <div class="closed"></div> -->
                 </div>
@@ -121,8 +125,8 @@
     <script id="bankLists" type="text/x-handlebars-template">
         {{! 左侧页面列表}}
 		{{#each this}}
-        <div class="bank_screen">
-            <div class="bank_screen_name fl" bankAccount='{{bankAccount}}'>{{bankName}} - {{get_last_4_value bankAccountMask}}</div>
+        <div class="bank_screen bank_item" bankAccount='{{bankAccount}}'>
+            <div class="bank_screen_name fl">{{bankName}} - {{get_last_4_value bankAccountMask}}</div>
             <span class="iconfont fr hide">&#xe626;</span>
         </div>
         {{/each}}
