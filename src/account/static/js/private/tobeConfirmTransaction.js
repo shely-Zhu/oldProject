@@ -26,7 +26,7 @@ require('@pathCommonJs/components/headBarConfig.js');
 var splitUrl = require('@pathCommonJs/components/splitUrl.js')();
 var tipAction = require('@pathCommonJsCom/tipAction.js');
 var transcationTem = require('../common/transcationTem.js');
-
+// 
 $(function() {
     var data = {
         getElements: {
