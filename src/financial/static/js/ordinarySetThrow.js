@@ -80,20 +80,22 @@ $(function () {
 					value: "fourth",
 					text: "第四项"
 				}, {
-					value: "fifth",
+					value: "fifth", 
 					text: "第五项"
 				}])
 				//picker.pickers[0].setSelectedIndex(4, 2000);
 				picker.pickers[0].setSelectedValue('first', 2000);
 				picker.show(function(SelectedItem) {
 					console.log(SelectedItem);
-					$('.mui-poppicker').css('display','none')
+					// $('.mui-poppicker').css('display','none')
+					picker.hide();
+					picker.dispose();
 				})
 			}, false);
 
-			$('body').on('tap','.mui-poppicker-btn-cancel',function(){
-				$('.mui-poppicker').css('display','none')
-			}) 
+			// $('body').on('tap','.mui-poppicker-btn-cancel',function(){
+			// 	$('.mui-poppicker').css('display','none')
+			// }) 
 
 		},
 
