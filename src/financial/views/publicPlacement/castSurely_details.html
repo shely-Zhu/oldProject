@@ -1,0 +1,110 @@
+<!-- 我的定投_定投详情页面 -->
+<!-- author: caiwenqi
+	time:2019/11/23 -->
+<!DOCTYPE html>
+<html>
+
+<head>
+    @@include('@pathInclude/views/meta.html')
+    <link rel="stylesheet" href="/Financial/static/css/castSurely_details.css">
+    <title>我的定投_定投详情</title>
+</head>
+
+<body>
+    <!--加载图标-->
+    <!-- @@include('@pathCommonViews/load.html')  -->
+    <!--没有数据显示图标-->
+    <!-- @@include('@pathCommonViews/noDataImg.html') -->
+    <!--列表加载显示图标-->
+    <!-- @@include('@pathCommonViews/loading/listLoading.html') -->
+    <!--公共页面头部-->
+    @@include('@pathCommonViews/headBarConfig.html',{"pathName":"定投详情","bgColors":"#3E3C3C,#3E3C3C","showType":"1"})
+    <section class="container">
+        <div class="banner">
+            <div class="bannerTop clearfix">
+                <span class="j_text">中融货币A 1111</span><span class="posRight"><a class="iconfont iconone" href="javascript:;">&#xe67d;</a></span>
+                <hr>
+                <div class="type">
+                    <div>
+                        <p>累计定投(元)</p>
+                        <p>10,00.00</p>
+                    </div>
+                    <div>
+                        <p>已投期数</p>
+                        <p>999</p>
+                    </div>
+                </div>
+                <input class="ipt" type="text" placeholder="下次扣款日期 2020-01-11">
+            </div>
+        </div>
+        <div class="mid">
+            <div>
+                <div>
+                    进行中
+                </div>
+            </div>
+            <ul>
+                    <li>
+                        <span>定投金额</span><span>10，000.00 元</span>
+                        <span>含手续费0.00元</span>
+                    </li>
+                    <li>
+                        <span>支付方式</span>
+                        <span><img src="" alt="">中国建设银行0563<span>在线支付</span><span>
+                    </li>
+                    <li>
+                        <span>定投周期</span>
+                        <span>每双周 周二</span>
+                    </li>
+                    <li>
+                        <span>协议签订日期</span>
+                        <span>2019-10-11</span>
+                    </li>
+                    <li>
+                        <span>累计定投份额</span>
+                        <span>100.00份</span>
+                    </li>
+                </ul>
+        </div>    
+        <!-- 加载中loading -->
+        @@include('@pathCommonViews/loading/listLoading.html')
+        <!-- 暂无数据 -->
+        @@include('@pathCommonViews/noDataImg.html',{"tipText":"暂无数据"})
+    </section>
+    <div class="wrap">
+       
+    </div>
+    <div class="content">
+        <div>
+            <p>定投记录</p>
+            <table>
+                <tr>
+                    <td>2019-10-14</td>
+                    <td>5000.00</td>
+                    <td>定投成功</td>
+                </tr>
+                <tr>
+                    <td>2019-10-14</td>
+                    <td>5000.00</td>
+                    <td>定投失败</td>
+                </tr>
+                <tr>
+                    <td>2019-10-14</td>
+                    <td>5000.00</td>
+                    <td>定投成功</td>
+                </tr>
+            </table>
+        </div>
+    </div>
+    <div class="footer">
+        <div>终止</div>
+        <div>暂停</div>
+        <div class="active">修改</div>
+    </div>
+    @@include('@pathInclude/views/footer.html')
+    <!-- 添加埋点 -->
+    @@include('@pathInclude/views/header.html')
+    <script src="/Financial/static/js/castSurely_details.js"></script>
+</body>
+
+</html>

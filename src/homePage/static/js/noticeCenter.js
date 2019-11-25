@@ -45,11 +45,12 @@ $(function(){
         },
         dealData(data) {
             $.each(data, function(a, b) {
-                switch(b.mesType) {
-                    case 0: b.logoSrc = '/homePage/static/img/home_icon_system@2x.png';break;
-                    case 1: b.logoSrc = '/homePage/static/img/home_icon_product@2x.png';break;
-                    case 2: b.logoSrc = '/homePage/static/img/home_icon_activity@2x.png';break;
-                    case 3: b.logoSrc = '/homePage/static/img/home_icon_transaction@2x.png';break;
+                var mesType = Number(b.mesType)
+                switch(mesType) {
+                    case 0: b.logoSrc = '/homePage/static/img/home_icon_system@2x.png'; b.mesTitle = "系统通知";break;
+                    case 1: b.logoSrc = '/homePage/static/img/home_icon_product@2x.png'; b.mesTitle = "产品公告";break;
+                    case 2: b.logoSrc = '/homePage/static/img/home_icon_activity@2x.png'; b.mesTitle = "活动通知";break;
+                    case 3: b.logoSrc = '/homePage/static/img/home_icon_transaction@2x.png'; b.mesTitle = "交易动态";break;
                 }
                 if(b.readStatus == 0) {
                     b.badgeSrc = '/homePage/static/img/home_icon_Badge@2x.png'
@@ -57,6 +58,7 @@ $(function(){
                     b.badgeSrc = ''
                 }
             })
+            console.log(data)
             return data;
         },
         events() {
