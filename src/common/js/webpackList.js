@@ -325,6 +325,11 @@ module.exports = {
     './financial/static/js/publicPlacement/fundManager' : './src/financial/static/js/publicPlacement/fundManager.js',
 
     // 交易规则
-    './financial/static/js/publicPlacement/transactionRules' : './src/financial/static/js/publicPlacement/transactionRules.js'
+    './financial/static/js/publicPlacement/transactionRules' : './src/financial/static/js/publicPlacement/transactionRules.js',
+
+    
+    // 私募产品详情页
+    './financial/static/js/privatePlacement/privatePlacementDetail' : './src/financial/static/js/privatePlacement/privatePlacementDetail.js'
+
 
 }
