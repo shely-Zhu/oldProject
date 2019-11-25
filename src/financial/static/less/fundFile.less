@@ -289,11 +289,29 @@
 // tab 组件
 .content {
 	display: inline-block;
-	// margin: 50px 50px;
+	width: 100%;
+}
+.tabsBox{
+	width: 100%;
+	display: -webkit-box;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+	-webkit-box-pack: center;
+    -ms-flex-pack: center;
+    -webkit-justify-content: center;
+    justify-content: center;
+	-webkit-box-align: center;
+    -ms-flex-align: center;
+    -webkit-align-items: center;
+    align-items: center;
+	background: #ffffff;
+	height: 1rem;
+	border-top: 1px solid #E7E9ED;
+	border-bottom: 1px solid #E7E9ED;
 }
 .tabs {
 	border: 1px solid rgba(54,77,151,1);
-	// border-bottom: none;
 	border-radius: .08rem;
 }
 .tabs::after {
@@ -328,7 +346,7 @@
 // }
 .panel {
 	height: 150px;
-	padding-left: 15px;
+	// padding-left: 15px;
 }
 .content .panel {
 	display: none;
