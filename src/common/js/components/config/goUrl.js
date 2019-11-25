@@ -352,7 +352,7 @@ module.exports = function() {
     this.transactionDetail_url = go_url.no_url + '/account/views/transactionDetail.html';
     // 历史明细
     this.historyDetail_url = go_url.no_url + '/account/views/historyDetail.html';
-    // 净值明细
+    //私募资产净值明细页面
     this.priNetWorthDetails_url = go_url.no_url + '/account/views/priNetWorthDetails.html';
     // 产品档案
     this.productFiles_url = go_url.no_url + '/account/views/productFiles.html';
