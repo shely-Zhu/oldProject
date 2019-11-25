@@ -24,6 +24,8 @@ require('@pathCommonJs/components/elasticLayer.js');
 var splitUrl = require('@pathCommonJs/components/splitUrl.js');
 //引入复制功能
 // var Clipboard = require('clipboard');
+var popPicker = require('@pathCommonJsCom/popPicker.js');
+var provinceList = require('../../../../common/json/provinceList.js');
 
 
 $(function () {
@@ -66,31 +68,7 @@ $(function () {
 
 			//选择银行卡
 			document.getElementById('bank').addEventListener('tap', function () {
-				var picker = new mui.PopPicker();
-				picker.setData([{
-					value: "first",
-					text: "第一项"
-				}, {
-					value: "second",
-					text: "第二项"
-				}, {
-					value: "third",
-					text: "第三项"
-				}, {
-					value: "fourth",
-					text: "第四项"
-				}, {
-					value: "fifth", 
-					text: "第五项"
-				}])
-				//picker.pickers[0].setSelectedIndex(4, 2000);
-				picker.pickers[0].setSelectedValue('first', 2000);
-				picker.show(function(SelectedItem) {
-					console.log(SelectedItem);
-					// $('.mui-poppicker').css('display','none')
-					picker.hide();
-					picker.dispose();
-				})
+				popPicker(1, provinceList, $('.onright .onright-left-one i'))
 			}, false);
 
 			// $('body').on('tap','.mui-poppicker-btn-cancel',function(){

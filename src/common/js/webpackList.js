@@ -304,18 +304,22 @@ module.exports = {
      './account/static/js/publicTradeDetail/publicTradeDetail':   './src/account/static/js/publicTradeDetail/publicTradeDetail.js',
 
     //普通基金定投结果
-    './Financial/static/js/publicPlacement/surelyResults': './src/Financial/static/js/publicPlacement/surelyResults.js',
+    './financial/static/js/publicPlacement/surelyResults': './src/financial/static/js/publicPlacement/surelyResults.js',
 
     //我的定投_定投明细
-    './financial/static/js/publicPlacement/castSurely_details' : './src/financial/static/js/publicPlacement/castSurely_details.js',
+    './financial/static/js/publicPlacement/castSurely_detafils' : './src/financial/static/js/publicPlacement/castSurely_details.js',
     //我的定投计划
     './Financial/static/js/publicPlacement/myInvestmentPlan': './src/Financial/static/js/publicPlacement/myInvestmentPlan.js',
+    //活期理财
+    './Financial/static/js/publicPlacement/demandFinancing': './src/Financial/static/js/publicPlacement/demandFinancing.js',
     //普通基金产品详情页_定投
-    './financial/static/js/ordinarySetThrow' : './src/financial/static/js/ordinarySetThrow.js',
+    './financial/static/js/publicPlacement/ordinarySetThrow' : './src/financial/static/js/publicPlacement/ordinarySetThrow.js',
 
     // 现金管理
-    './financial/static/js/cashManagement' : './src/financial/static/js/cashManagement.js',
+    './financial/static/js/publicPlacement/cashManagement' : './src/financial/static/js/publicPlacement/cashManagement.js',
 
     // 基本档案
-    './financial/static/js/publicPlacement/fundFile' : './src/financial/static/js/publicPlacement/fundFile.js'
+    './financial/static/js/publicPlacement/fundFile' : './src/financial/static/js/publicPlacement/fundFile.js',
+    // 交易规则
+    './financial/static/js/publicPlacement/transactionRules' : './src/financial/static/js/publicPlacement/transactionRules.js'
 }
