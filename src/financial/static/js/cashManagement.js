@@ -27,8 +27,6 @@ $(function () {
     getData: function () {
       var that = this;
 
-      // //赋值版本号到页面
-      // $("#num").html(splitUrl['version']);
       //请求页面数据
       var obj = [{
         url: site_url.pofGetAssetsCashList_api,

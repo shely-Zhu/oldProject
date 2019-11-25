@@ -351,10 +351,6 @@ module.exports = function () {
 
     // 转入，转出结果页面，定投结果
     this.pofSurelyResults_url = go_url.no_url + '/financial/views/publicPlacement/surelyResults.html';
-    // 诊断搜索页面
-    this.diagnosisSearch_url = go_url.no_url + '/commonResources/fundDiagnosis/views/diagnosisSearch.html';
-    // 诊断详情页
-    this.diagnosisDetail_url = go_url.no_url + '/commonResources/fundDiagnosis/views/diagnosisDetail.html';
 
     /*------------------- 私募理财fang——le end ------------------------------*/
 };
