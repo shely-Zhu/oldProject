@@ -15,64 +15,86 @@
 	<!-- @@include('@pathCommonViews/load.html')  -->
 	<div class="publicDetail">
 		<div class="topContent"> 
-	 		@@include('@pathCommonViews/headBarConfig.html',{"bgColors":"#595E6F, #1C2135","showType":"1"})
-			 <div class="day_gain">日涨幅</div>
-			 <div class="day_gain_value">+0.01%</div>
-			 <div class="new_worth">最新净值(11-01)</div>
-			 <div class="new_worth_value">1.2213</div>
-			 <div class="type_1">稳健型</div>
-			 <div class="type_2">指数型</div>
+			@@include('@pathCommonViews/headBarConfig.html',{"pathName":"普通基金","bgColors":"#031349,#031349","showType":"1"})
+			<div class="day_gain">日涨幅</div>
+			<div class="day_gain_value">+0.01%</div>
+			<div class="new_worth">最新净值(11-01)</div>
+			<div class="new_worth_value">1.2213</div>
+			<div class="type">
+				<div class="type_1">稳健型</div>
+				<div class="type_2">指数型</div>
+				<div class="type_3">10000.0元起购</div>
+			</div>
 	 	</div>
-
 	 	<div class="midContent">	
-	 		<div class="actionWrap">
-	 			<div class="mui-row single">
-	 				<div class="mui-col-sm-11 mui-col-xs-11">
-		 		    	<img class="img" src="">
-		 		        <span class="txt"></span>
-		 		    </div>
-		 		    <div class="mui-col-sm-1 mui-col-xs-1">
-		 		    	<div class="arrow">
-		 					<span class="img"></span>
-		 				</div>
-		 		    </div>
-	 			</div>
-	 			<div class="mui-row double">
-	 				<div class="mui-col-sm-6 mui-col-xs-6">
-		 		    	<img class="img" src="">
-		 		        <span class="txt"></span>
-		 		    </div>
-		 		    <div class="mui-col-sm-6 mui-col-xs-6">
-		 		       	<img class="img" src="">
-		 		        <span class="txt"></span>
-		 		    </div>
-	 			</div>
-	 			<div class="treble mui-row">
-	 				<div class="actionCon">
-		 		    	<img class="img" src="/account/static/img/productDetail/type_1_left.png">
-	 					<div class="txt">交易明细</div>
-		 		    </div>
-		 		    <div class="lineVertical"></div>
-		 		    <div class="actionCon">
-		 		    	<img class="img" src="/account/static/img/productDetail/account_icon_jymx@2x.png">
-	 					<div class="txt">收益分配明细</div>
-		 		    </div>
-		 		    <div class="lineVertical"></div>
-		 		    <div class="actionCon">
-		 		    	<img class="img" src="/account/static/img/productDetail/type_1_right.png">
-	 					<div class="txt">基金确认书</div>
-		 		    </div>
-	 			</div>
-	 		</div>
+			<div class="max_amount_area">
+				<!-- 限大额区域 -->
+				<div class="max_amount fl"></div>
+				<div class="max_amount_value fl">单日单账户限额5000万</div>
+			</div>
+			<div class="net_worth_area">
+				<!-- 净值区域 -->
+				<div class="net_worth_item">
+					<div class="title">近一周</div>
+					<div class="value_red">+6.56%</div>
+				</div>
+				<div class="net_worth_item">
+					<div class="title">近三个月</div>
+					<div class="value_green">-0.35%</div>
+				</div>
+				<div class="net_worth_item">
+					<div class="title">近一年</div>
+					<div class="value_red">+14.56%</div>
+				</div>
+				<div class="net_worth_item">
+					<div class="title">成立来</div>
+					<div class="value_red">+20.56%</div>
+				</div>
+			</div>
 	 		<div class="lineWrap">
+				<div class="line_area">
+					<!-- 折线部分 -->
+				</div>
 				<div class='tab'>
 						<span class="oneMonth active">月</span>
 						<span class="threeMonth">季</span>
 						<span class="newYear">半年</span>
 						<span class="sinceNow">一年</span>
 						<span class="oneMonth">成立以来</span>
-					</div>
-	 		</div>
+				</div>
+			 </div>
+			 <div class="history_area">
+				<div class="history_header">
+					<div class="fl">历史净值</div>
+					<div class="fr">查看更多</div>
+					<span class="iconfont fr">&#xe636;</span>
+				</div>
+				<div class="history_item_name">
+					<div>日期</div>
+					<div>单位净值</div>
+					<div>累计净值</div>
+					<div>日涨幅</div>
+				</div>
+				<!-- 用handleBar去渲染数据 -->
+				<div class="history_item">
+					<div>2019-10-14</div>
+					<div>2.1232</div>
+					<div>2.1232</div>
+					<div>+1.22%</div>
+				</div>
+				<div class="history_item">
+					<div>2019-10-14</div>
+					<div>2.1232</div>
+					<div>2.1232</div>
+					<div>+1.22%</div>
+				</div>
+				<div class="history_item">
+					<div>2019-10-14</div>
+					<div>2.1232</div>
+					<div>2.1232</div>
+					<div>+1.22%</div>
+				</div>
+			 </div>
 	 		<div class="dealReg">
 	 			<div class="dealMid">
 	 				<div class="titleWrap">交易规则
