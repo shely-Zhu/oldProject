@@ -323,9 +323,6 @@ module.exports = {
     './financial/static/js/publicPlacement/cashManagement': './src/financial/static/js/publicPlacement/cashManagement.js',
 
     // 基本档案
-<<<<<<< HEAD
-    './financial/static/js/publicPlacement/fundFile': './src/financial/static/js/publicPlacement/fundFile.js'
-=======
     './financial/static/js/publicPlacement/fundFile' : './src/financial/static/js/publicPlacement/fundFile.js',
 
     // 基金经理
@@ -334,5 +331,4 @@ module.exports = {
     // 交易规则
     './financial/static/js/publicPlacement/transactionRules' : './src/financial/static/js/publicPlacement/transactionRules.js'
 
->>>>>>> 87764af06b1312d8a957ba4570f5078521e11248
 }
