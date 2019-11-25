@@ -307,15 +307,16 @@ module.exports = {
     './financial/static/js/publicPlacement/surelyResults': './src/financial/static/js/publicPlacement/surelyResults.js',
 
     //我的定投_定投明细
-    './financial/static/js/publicPlacement/castSurely_detafils' : './src/financial/static/js/publicPlacement/castSurely_details.js',
+    './financial/static/js/publicPlacement/castSurely_detafils': './src/financial/static/js/publicPlacement/castSurely_details.js',
     //我的定投计划
     './Financial/static/js/publicPlacement/myInvestmentPlan': './src/Financial/static/js/publicPlacement/myInvestmentPlan.js',
     //普通基金产品详情页_定投
-    './financial/static/js/publicPlacement/ordinarySetThrow' : './src/financial/static/js/publicPlacement/ordinarySetThrow.js',
-
+    './financial/static/js/publicPlacement/ordinarySetThrow': './src/financial/static/js/publicPlacement/ordinarySetThrow.js',
+    //普通基金赎回
+    './financial/static/js/publicPlacement/redemptionBuy': './src/financial/static/js/publicPlacement/redemptionBuy.js',
     // 现金管理
-    './financial/static/js/publicPlacement/cashManagement' : './src/financial/static/js/publicPlacement/cashManagement.js',
+    './financial/static/js/publicPlacement/cashManagement': './src/financial/static/js/publicPlacement/cashManagement.js',
 
     // 基本档案
-    './financial/static/js/publicPlacement/fundFile' : './src/financial/static/js/publicPlacement/fundFile.js'
+    './financial/static/js/publicPlacement/fundFile': './src/financial/static/js/publicPlacement/fundFile.js'
 }
