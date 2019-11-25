@@ -311,10 +311,10 @@ module.exports = {
     //我的定投计划
     './Financial/static/js/publicPlacement/myInvestmentPlan': './src/Financial/static/js/publicPlacement/myInvestmentPlan.js',
     //普通基金产品详情页_定投
-    './financial/static/js/ordinarySetThrow' : './src/financial/static/js/ordinarySetThrow.js',
+    './financial/static/js/publicPlacement/ordinarySetThrow' : './src/financial/static/js/publicPlacement/ordinarySetThrow.js',
 
     // 现金管理
-    './financial/static/js/cashManagement' : './src/financial/static/js/cashManagement.js',
+    './financial/static/js/publicPlacement/cashManagement' : './src/financial/static/js/publicPlacement/cashManagement.js',
 
     // 基本档案
     './financial/static/js/publicPlacement/fundFile' : './src/financial/static/js/publicPlacement/fundFile.js'
