@@ -18,6 +18,19 @@ body{
 .fl {
 	float: left;
 }
+.fr {
+	float: right;
+}
+.value_red {
+	margin-top: 0.04rem;
+	font-size: 0.3rem;
+	color: @F52323;
+}
+.value_green {
+	margin-top: 0.04rem;
+	font-size: 0.3rem;
+	color: @008000;
+}
 .publicDetail{
 	.hide{
 		display: none ;
@@ -124,15 +137,33 @@ body{
 					font-size: 0.24rem;
 					color: @9B9B9B;
 				}
-				.value_red {
-					margin-top: 0.04rem;
-					font-size: 0.3rem;
-					color: @F52323;
+			}
+		}
+		.history_area {
+			margin-top: 0.3rem;
+			background-color: @FFFFFF;
+			.history_item {
+				display: flex;
+				height: 1rem;
+				width: 100%;
+				text-align: center;
+				border-bottom: 0.01rem solid @E7E9ED;
+				.item_name {
+					flex: 1;
+					font-size: 0.28rem;
+					color: @9B9B9B;
+					margin-top: 0.25rem;
 				}
-				.value_green {
-					margin-top: 0.04rem;
-					font-size: 0.3rem;
-					color: @008000;
+				.item_value_1 {
+					flex: 1;
+					font-size: 0.26rem;
+					color: @c009;
+					margin-top: 0.25rem;
+				}
+				.item_value_2 {
+					flex: 1;
+					font-size: 0.32rem;
+					margin-top: 0.22rem;
 				}
 			}
 		}
@@ -141,11 +172,19 @@ body{
 			line-height: 1rem;
 			padding-left: 0.3rem;
 			padding-right: 0.3rem;
-			background: @c005;
-			color: @272727;
-			font-size: 0.32rem;
+			background: @FFFFFF;
+			border-bottom: 0.01rem solid @E7E9ED;
 			.title{
-				display: inline-block;
+				float: left;
+				color: @272727;
+				font-size: 0.32rem;
+				font-weight: bold;
+			}
+			.desc {
+				float: right;
+				font-size: 0.28rem;
+				color: @9B9B9B;
+				margin-right: 0.4rem;
 			}
 			.arrow{
 				float: right;
@@ -153,7 +192,7 @@ body{
 				height: 0.6rem;
 				margin-top: .2rem;
 				.img{
-					background: url("/account/static/img/productDetail/arrow.png");
+					background: url("/account/static/img/arrow_right.png");
 					background-size: 100% 100%;
 					height: 0.3rem;
 					width: 0.3rem;
@@ -163,9 +202,6 @@ body{
 					transform: translateY(-50%);
 				}
 			}
-			&.type5Wrap {
-				display: none;
-			}
 		}
 		.lineWrap{
 			//折线区域
@@ -174,6 +210,26 @@ body{
 			position: relative;
 			margin-top: 0.3rem;
 			background-color: @FFFFFF;
+			.nav{
+				position: absolute;
+				top: .2rem;
+				left: .3rem;
+			    font-size: 0.28rem;
+			    color: @272727;			
+			    .navSpan{
+			    	padding-bottom: 0.1rem;
+			    	display: inline-block;
+			    	color: @9B9B9B;
+			    	&:first-child{
+			    		margin-right: 0.3rem;
+			    	}
+			    	&.active{
+			    		color: @272727;
+			    		font-weight: 600;
+			    		border-bottom: 0.06rem solid @061D6A;
+			    	}
+			    }
+			}
 			.tab{
 				position: absolute;
 				bottom: 0.3rem;
@@ -183,6 +239,7 @@ body{
 				line-height: 0.56rem;
 				font-size: 0.24rem;
 				border: 0.02rem solid @364D97;
+				color: @364D97;
 				border-radius: 0.08rem;
 				display: flex;
 				span {
@@ -196,63 +253,69 @@ body{
 				}
 				span:last-child {
 					border-right: none;
-					
 				}	
-					
 			}
 		}
-		.dealReg{
+		.dealRegArea{
 			//交易规则区域
 			background: @c005;
+			margin-top: 0.3rem;
 			margin-bottom: 0.3rem;
-			.titleWrap{
-				border-bottom: 1px solid @E7E9ED;
-			}
-			.dealBottom{
-				padding-left: 0.3rem;
-			}
-			.dealRegMid {
-				padding: 0 .3rem .3rem;
-				border-bottom: 1px solid @E7E9ED;
-				.detail {
-					font-size: .28rem;
-					line-height: .4rem;
-					color: @9B9B9B;
-					li::before {
-						content: '\02022';
-						color: @9B9B9B;
-						padding-right: .2rem;
+			width: 100%;
+			.line_area {
+				height: 1.78rem;
+				display: flex;
+				width: 100%;
+				padding: 0 0.3rem;
+				position: relative;
+				.line_area_left {
+					flex: 1;
+				}
+				.line_area_mid {
+					flex: 1;
+					text-align: center;
+					.mid {
+						background-position: center;
 					}
 				}
-			}
-			.nav{
-				margin: .3rem 0;
-				text-align: center;
-			    font-size: 0.28rem;
-			    color: @272727;			
-			    .navSpan{
-			    	padding-bottom: 0.1rem;
-			    	display: inline-block;
-			    	color: @9B9B9B;
-			    	&:first-child{
-			    		margin-right: 0.3rem;
-			    	}
-			    	&.active{
-			    		color: @272727;
-			    		font-weight: 600;
-			    		border-bottom: 0.06rem solid @C8AB7D;
-			    	}
-			    }
-			}
-			.line{
-				font-size: 0.28rem;
-				color: @9B9B9B;
-				margin-bottom: 0.3rem;
-				.lineDiv {
-					margin: .08rem 0;
+				.line_area_right {
+					flex: 1;
+					text-align: right;
+					.mid {
+						background-position: right;
+					}
 				}
-				.top_r, .bottom_r{
-					float: right;
+				.top {
+					font-size: 0.28rem;
+					color: @9B9B9B;
+					margin-top: .3rem
+				}
+				.mid {
+					height: .3rem;
+					margin-top: 0.08rem;
+					background: url("/account/static/img/public/public_detail_point.png")no-repeat;
+					background-size: .3rem;
+				}
+				.bottom {
+					margin-top: 0.08rem;
+					font-size: 0.28rem;
+					color: @272727;
+				}
+				.line_left {
+					position: absolute;
+					height: .06rem;
+					width: 37%;
+					left: .7rem;
+					top: .9rem;
+					background: linear-gradient(to right, @6C83C9, @061D6A);
+				}
+				.line_right {
+					position: absolute;
+					height: .06rem;
+					width: 37%;
+					right: .7rem;
+					top: .9rem;
+					background: linear-gradient(to right, @6C83C9, @061D6A);
 				}
 			}
 		}

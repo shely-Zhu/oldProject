@@ -310,6 +310,8 @@ module.exports = {
     './financial/static/js/publicPlacement/castSurely_detafils': './src/financial/static/js/publicPlacement/castSurely_details.js',
     //我的定投计划
     './Financial/static/js/publicPlacement/myInvestmentPlan': './src/Financial/static/js/publicPlacement/myInvestmentPlan.js',
+    //活期理财
+    './Financial/static/js/publicPlacement/demandFinancing': './src/Financial/static/js/publicPlacement/demandFinancing.js',
     //普通基金产品详情页_定投
     './financial/static/js/publicPlacement/ordinarySetThrow': './src/financial/static/js/publicPlacement/ordinarySetThrow.js',
     //普通基金赎回
@@ -318,5 +320,16 @@ module.exports = {
     './financial/static/js/publicPlacement/cashManagement': './src/financial/static/js/publicPlacement/cashManagement.js',
 
     // 基本档案
+<<<<<<< HEAD
     './financial/static/js/publicPlacement/fundFile': './src/financial/static/js/publicPlacement/fundFile.js'
+=======
+    './financial/static/js/publicPlacement/fundFile' : './src/financial/static/js/publicPlacement/fundFile.js',
+
+    // 基金经理
+    './financial/static/js/publicPlacement/fundManager' : './src/financial/static/js/publicPlacement/fundManager.js',
+
+    // 交易规则
+    './financial/static/js/publicPlacement/transactionRules' : './src/financial/static/js/publicPlacement/transactionRules.js'
+
+>>>>>>> 87764af06b1312d8a957ba4570f5078521e11248
 }
