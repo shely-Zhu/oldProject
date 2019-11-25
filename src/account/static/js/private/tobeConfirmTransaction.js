@@ -120,7 +120,6 @@ $(function() {
         },
         getData: function(t, type) {
             var that = this;
-            debugger
             var obj = [{
                 url: site_url.getTradeList_api,
                 data: {
