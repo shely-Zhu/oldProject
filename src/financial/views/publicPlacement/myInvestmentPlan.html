@@ -1,0 +1,119 @@
+<!-- 我的定投计划 -->
+<!-- author: 李亮
+	time:2019/11/23 -->
+    <!DOCTYPE html>
+    <html>
+    
+    <head>
+        @@include('@pathInclude/views/meta.html')
+        <link rel="stylesheet" href="/Financial/static/css/myInvestmentPlan.css">
+        <title>我的定投计划</title>
+    </head>
+    
+    <body>
+        <!--加载图标-->
+        <!-- @@include('@pathCommonViews/load.html')  -->
+        <!--没有数据显示图标-->
+        <!-- @@include('@pathCommonViews/noDataImg.html') -->
+        <!--列表加载显示图标-->
+        <!-- @@include('@pathCommonViews/loading/listLoading.html') -->
+        <!--公共页面头部-->
+         <!--加载图标-->
+        <!-- @@include('@pathCommonViews/load.html')  -->
+        <div class="topTitle">
+        @@include('@pathCommonViews/headBarConfig.html',{"bgColors":"#2C3E77,#273971","showType":"0","pathName":"我的定投计划"})
+        </div>
+        <div class="wrap">
+            <div class="list" style="width:100%;">
+                <section class="contentWrapper">
+                    <div class="mui-table-view" id="activityDataList">
+                        <ul class="recordList">
+                            <li>
+                                <div class="content-t">
+                                    <h2>中荣货币A</h2>
+                                    <span>进行中<i class="iconfont">&#xe636;</i></span>
+                                </div>
+                                <div class="content-c"> 
+                                    <p>
+                                        <span class="span-l">累积定投（元）</span>
+                                        <span class="span-r">100.100.1000.00</span>
+                                    </p>
+                                    <p>
+                                        <span class="span-l">已投期数</span>
+                                        <span class="span-r">3</span>
+                                    </p>
+                                    <p>
+
+                                    </p>
+                                </div>
+                                <div class="content-b">
+                                    每日一投定投1000.00元，下次扣款日期：2019-11-13
+                                </div>
+                            </li>
+                            <li>
+                                <div class="content-t">
+                                    <h2>中荣货币A</h2>
+                                    <span>进行中<i class="iconfont">&#xe636;</i></span>
+                                </div>
+                                <div class="content-c"> 
+                                    <p>
+                                        <span class="span-l">累积定投（元）</span>
+                                        <span class="span-r">100.100.1000.00</span>
+                                    </p>
+                                    <p>
+                                        <span class="span-l">已投期数</span>
+                                        <span class="span-r">3</span>
+                                    </p>
+                                    <p>
+
+                                    </p>
+                                </div>
+                                <div class="content-b">
+                                    每日一投定投1000.00元，下次扣款日期：2019-11-13
+                                </div>
+                            </li>
+                            <li>
+                                <div class="content-t">
+                                    <h2>中荣货币A</h2>
+                                    <span class="suspend">已暂停<i class="iconfont">&#xe636;</i></span>
+                                </div>
+                                <div class="content-c"> 
+                                    <p>
+                                        <span class="span-l">累积定投（元）</span>
+                                        <span class="span-r">100.100.1000.00</span>
+                                    </p>
+                                    <p>
+                                        <span class="span-l">已投期数</span>
+                                        <span class="span-r">3</span>
+                                    </p>
+                                    <p>
+
+                                    </p>
+                                </div>
+                                <div class="content-b">
+                                    每日一投定投1000.00元，下次扣款日期：2019-11-13
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                    @@include('@pathCommonViews/goTop.html')
+                </section>    
+            </div>
+            <div class="endPlan">
+                <a href="javascript:;" >查看已终止的定投（3）<i class="iconfont">&#xe636;</i></a>
+            </div>
+            <div class="nothing">
+                <img src="/starFinancialPlanner/static/img/Life_none_Empty state@1x.png" alt="">
+                <p>暂无计划</p>
+            </div>
+            <div class="newPlan">
+                新增定投计划
+            </div>
+        </div>
+        @@include('@pathInclude/views/footer.html')
+        <!-- 添加埋点 -->
+        @@include('@pathInclude/views/header.html')
+        <script src="/Financial/static/js/publicPlacement/myInvestmentPlan.js"></script>
+    </body>
+    
+    </html>

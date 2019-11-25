@@ -324,7 +324,7 @@ $(function() {
 			//总金额
 			$('.typeWrap .totalM').html( jsonData.totalMoney );
 		   	//待确认金额 接口无
-		   	$('.typeWrap .toConfirm .confirmMoney').html( jsonData.inTransitTotal );
+		   	$('.typeWrap .toConfirm .confirmMoney').html( jsonData.onwayAssetTotal );
 		   	//昨日收益
 		   	$('.typeWrap .sevenYearYield').html( jsonData.income);
 		   	//持有收益
@@ -351,9 +351,9 @@ $(function() {
 	    	else{ //非货币基金	    		
 	    		//当前市值
 	    		//日涨幅
-				$('.openWrap .rzf').html( jsonData.unitYld);
+				$('.openWrap .rzf').html( jsonData.dayChgRat);
 				//最新净值
-				$('.openWrap .zxjz').html( jsonData.sevenDayYield);
+				$('.openWrap .zxjz').html( jsonData.nav);
 	    	}
 
 		},
