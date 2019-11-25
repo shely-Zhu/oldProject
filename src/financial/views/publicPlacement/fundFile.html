@@ -7,12 +7,7 @@
 <html lang="en">
 
 <head>
-	<meta charset="UTF-8">
-	<meta content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0,user-scalable=no"
-		name="viewport" id="viewport" />
-	<meta content="telephone=no" name="format-detection" />
-	<meta content="yes" name="apple-mobile-web-app-capable" />
-	<meta name="apple-mobile-web-app-status-bar-style" content="black">
+	@@include('@pathInclude/views/meta.html')
 	<link rel="stylesheet" href="/Financial/static/css/fundFile.css">
 	<title>基本档案</title>
 
@@ -28,21 +23,19 @@
 
 	<div class="mui-content midContent">
 
-		<div id="slider" class="mui-slider" data-slider="1">
-			<div class="nav-wrapper flexbox">
-				<div class=" mui-scroll-wrapper mui-slider-indicator mui-segmented-control mui-segmented-control-inverted"
-					data-scroll="2">
-					<div class="mui-scroll tab-scroll-wrap"
-						style="width: 100%; transform: translate3d(0px, 0px, 0px) translateZ(0px); transition-duration: 0ms; transition-timing-function: cubic-bezier(0.1, 0.57, 0.1, 1);">
-						<a class="mui-control-item mui-active" href="#move_0" code=""
-							style="width: 20%; display: inline-block;">基本概括</a>
-						<a class="mui-control-item" href="#move_1" code=""
-							style="width: 20%; display: inline-block;">投资组合</a>
-						<a class="mui-control-item" href="#move_2" code=""
-							style="width: 20%; display: inline-block;">历史分红</a>
-						<a class="mui-control-item" href="#move_3" code=""
-							style="width: 20%; display: inline-block;">基金公告</a>
-					</div>
+			<div class="content">
+
+				<div class="tabs">
+					<li>tab1</li>
+					<li>tab2</li>
+					<li>tab3</li>
+					<li>tab4</li>
+				</div>
+				<div class="wrap">
+					<div class="panel">content1</div>
+					<div class="panel">content2</div>
+					<div class="panel">content3</div>
+					<div class="panel">content4</div>
 				</div>
 			</div>
 			<div class="mui-slider-group tab-scroll-action"
@@ -534,11 +527,10 @@
 					</div>
 				</div>
 			</div>
-		</div>
+		
 	</div>
 
 </body>
-<script src="/include/js/vendor/zepto/zepto.js"></script>
-<script src="/include/js/vendor/mui/mui.min.js"></script>
-
+@@include('@pathInclude/views/footer.html')
+<script src="/financial/static/js/publicPlacement/fundFile.js"></script>
 </html>
