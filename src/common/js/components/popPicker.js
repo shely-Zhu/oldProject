@@ -60,7 +60,7 @@ module.exports = function( layer, pickerList, source, callback, type){
 
 		//循环获取，并设置到对应的属性上
 		$.each(result, function(i, el){
-			
+		
 			if( type == 'liTwo'){
 				str += '<span>' + el.text + '</span>';
 			}else{
@@ -76,7 +76,8 @@ module.exports = function( layer, pickerList, source, callback, type){
 				source.attr( 'sonDicNo', el.sonDicNo );
 			}
 		})
-		
+		var reg=/undefined/g;//如果子级有空 替换掉
+		str = str.replace(reg,'')
 		//显示获取到的数据
 		source.html(str).addClass('hasSelect');
 		
