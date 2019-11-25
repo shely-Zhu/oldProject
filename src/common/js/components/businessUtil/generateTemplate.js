@@ -7,16 +7,15 @@
  * @param  {[type]} clear  [清除之前的]
  */
 
-module.exports = function(data, $ele, $id,clear) {
+module.exports = function(data, $ele, $id, clear) {
     // 模板
     var that = this,
         source = $id.html(),
         template = Handlebars.compile(source),
         html = template(data);
-
-    if(clear){
+    if (clear) {
         $ele.html(html);
-    }else{
+    } else {
         $ele.append(html);
 
     }
