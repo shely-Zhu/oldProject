@@ -317,5 +317,7 @@ module.exports = {
     './financial/static/js/publicPlacement/cashManagement' : './src/financial/static/js/publicPlacement/cashManagement.js',
 
     // 基本档案
-    './financial/static/js/publicPlacement/fundFile' : './src/financial/static/js/publicPlacement/fundFile.js'
+    './financial/static/js/publicPlacement/fundFile' : './src/financial/static/js/publicPlacement/fundFile.js',
+    //普通基金_基金档单_基金公司
+    './financial/static/js/publicPlacement/fundCompany' : './src/financial/static/js/publicPlacement/fundCompany.js',
 }
