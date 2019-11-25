@@ -14,7 +14,5 @@ module.exports = function() {
 
         //总资产查询 （公募+私募+金交所+组合+恒小智）
         this.getTotalAssets_api = http_url.app_url + '/account/jjs/getTotalAssets'
-        //待确认，已确认列表
-    this.getConfirmTrade_api = http_url.app_url + '/pef/getConfirmTrade '
 
 };
