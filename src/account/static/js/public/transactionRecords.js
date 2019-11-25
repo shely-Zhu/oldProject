@@ -21,7 +21,7 @@ $(function () {
             searchTitleListTemplateId: $('#searchTitleList-template'),//筛选标签模板Id
             recordSearchDetailBoxId: $("#recordSearchDetail"), // 筛选详细内容容器
             searchDetailListTemplateId: $('#searchDetailList-template'),//筛选详细内容模板Id
-            recordListWraperBoxId: $("#recordListWraper"), // 交易列表容器
+            recordListWraperBoxId: $(".mui-table-view-cell"), // 交易列表容器
             recordListTemplateId: $('#recordList-template'),//交易列表模板Id
             noData: $('.noData'), //没有数据的结构
             listLoading: $('.listLoading'), //所有数据区域，第一次加载的loading结构

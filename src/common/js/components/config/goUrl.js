@@ -346,5 +346,20 @@ module.exports = function() {
     this.monthReportDetail_url = go_url.no_url + '/mine/views/monthReport/monthReportDetail.html';
     //自选公募详情页
     this.optionalPublicDetail_url = go_url.no_url + '/account/views/optionalPublicDetail.html';
-
+    // 收益分配明细页
+    this.incomeDistribution_url = go_url.no_url + '/account/views/private/incomeDistribution.html';
+    // 私募交易明细
+    this.transactionDetail_url = go_url.no_url + '/account/views/transactionDetail.html';
+    // 历史明细
+    this.historyDetail_url = go_url.no_url + '/account/views/historyDetail.html';
+    //私募资产净值明细页面
+    this.priNetWorthDetails_url = go_url.no_url + '/account/views/priNetWorthDetails.html';
+    // 产品档案
+    this.productFiles_url = go_url.no_url + '/account/views/productFiles.html';
+    // 基金确认书
+    this.privateFundPdf_url = go_url.no_url + '/account/views/private/privateFundPdf.html';
+    // 交易规则
+    this.transactionRules_url = go_url.no_url + '/financial/views/publicPlacement/transactionRules.html';
+    // 信息披露
+    this.informationDisclosure_url = go_url.no_url + '/account/views/informationDisclosure.html';
 };

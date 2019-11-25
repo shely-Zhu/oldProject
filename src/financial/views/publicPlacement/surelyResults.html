@@ -5,7 +5,7 @@
 <html lang="en">
 <head>
 	@@include('@pathInclude/views/meta.html') 
-	<link rel="stylesheet" href="/Financial/static/css/publicPlacement/surelyResults.css">  
+	<link rel="stylesheet" href="/financial/static/css/publicPlacement/surelyResults.css">  
 	<title>转入结果</title>
 </head>
 <body>
@@ -16,27 +16,27 @@
     <div class="resultsWrap">
       <div class="resultTop">
         <div class="photo">
-            <img src="/Financial/static/img/pic_success@2x.png" alt="">
+            <img src="/financial/static/img/pic_success@2x.png" alt="">
         </div>
-        <div class="succedText">申请成功</div>
+        <div class="succedText">转入中</div>
         <div class="topContent">
           <ul class="topContentUl">
             <li>
-                <img src="" alt="">
+               <img src="/financial/static/img/account_icon_flow_blue@2x.png" alt="">
                 申请时间
             </li>
             <li class="changeTime">2019-09-01 11:00:35</li>
           </ul>
           <ul class="topContentUl">
             <li>
-                <img src="" alt="">
+              <img src="/financial/static/img/account_icon_flow_grey@2x.png" alt="">
                 预计确认份额时间
             </li>
             <li class="changeTime">2019-09-01 11:00:35前</li>
           </ul>
           <ul class="topContentUl">
             <li>
-                <img src="" alt="">
+              <img src="/financial/static/img/account_icon_flow_grey@2x.png" alt="">
                 预计查看收益时间
             </li>
             <li class="changeTime">2019-09-01 11:00:35前</li>
@@ -49,9 +49,9 @@
       </div>
       <div class="resultTopTwo">
             <div class="photo">
-                    <img src="/Financial/static/img/pic_success@2x.png" alt="">
+                    <img src="/financial/static/img/pic_success2@2x.png" alt="">
             </div>
-            <div class="succedText">待扣款</div>
+            <div class="succedText">申请失败</div>
       </div>
       <div class="listWrap">
         <div class="listContent">
@@ -65,13 +65,17 @@
             </ul>
             <ul class="listContentUl">
                 <li class="textcolor">支付方式</li>
-                <li class="bank"> 中国建设银行0563</li>
+                <li class="bank">
+                  <div class="bankOne">
+                      <img src="/financial/static/img/account_icon_bank logo@2x.png" alt=""> 
+                  </div>
+                  中国建设银行0563</li>
                 <li class="onlinePay"><span>在线支付</span></li>
             </ul>
-            <ul class="listContentUl changeNone">
+            <!-- <ul class="listContentUl changeNone">
                 <li class="textcolor">转入时间</li>
                 <li > 2019-09-01 24:00</li>
-            </ul>
+            </ul> -->
         </div>
       </div>
       <!-- 头部完成定位 -->
@@ -83,6 +87,6 @@
 	@@include('@pathInclude/views/footer.html')
 	<!-- 添加埋点 -->
 	@@include('@pathInclude/views/header.html')
-    <script src="/Financial/static/js/publicPlacement/surelyResults.js"></script>
+    <script src="/financial/static/js/publicPlacement/surelyResults.js"></script>
 </body>
 </html>
