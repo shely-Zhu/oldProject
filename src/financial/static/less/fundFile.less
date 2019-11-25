@@ -1,0 +1,279 @@
+/**
+ * 基金档案 样式
+ * @yangjinlai 2017-03-21
+ */
+
+
+ //引入mui
+ @import url("../../../include/css/mui.min.css");
+
+ @import url("../../../common/less/reset.less");
+ @import url("../../../common/less/color.less");
+
+ //引入重置mui样式的表单样式文件 
+ //@import url("../../../common/less/mui/formMUI.less"); 
+@import url('../../../common/less/mui/resetMUI.less');
+//引入重置mui下拉列表样式文件
+@import url("../../../common/less/mui/selectMUI.less");
+ //黑色提示框的样式
+ @import url("../../../common/less/components/againEnter.less");
+
+ @import url("../../../common/less/components/tabScroll.less");
+
+ @import url("../../../common/less/components/noData.less");
+ //回到顶部的样式
+@import url("../../../common/less/components/goTopMui.less");
+
+ .tab-scroll-action{
+	margin-top: 0.8rem;
+}
+
+#move_4{
+	    padding-bottom: 0;
+}
+
+.mui-scroll-wrapper{
+	overflow: visible;
+}
+
+
+.mui-content{
+	margin-top: 0.8rem;
+
+	.listNoCon{ //列表暂无数据的样式
+		height: 100%;
+	}
+	//margin-bottom: 0.8rem;
+
+	.mui-slider-item{
+		padding-bottom: 0.8rem;
+		overflow-y: scroll;
+	}
+
+	.basicCss{
+		padding-top: 1.6rem;
+		padding-right: 1.6rem;
+
+		&.paddingBottom{
+			padding-bottom: 2rem;
+		}
+		
+
+		.title{
+			font-size: 1.4rem;
+			color: @c002;
+			margin-bottom: 1.2rem;
+
+			.time{
+				vertical-align: middle;
+			    line-height: 1.2rem;
+			    margin-left: 1rem;
+			    font-size: 1.2rem;
+			    color: @c001;
+			}
+		}
+
+		//大段落文字
+		.txt{
+			font-size: 1.4rem;
+			line-height: 2.2rem;
+			color: @c003;
+		}
+	}
+
+	//基本概况
+	.basicIntro{
+		//padding-right: 1.6rem;
+		
+		//暂无相关数据
+		.noCon{
+			text-align: center;
+			color: @c001;
+		}
+
+		//基本信息
+		.intro{
+			
+			.tr{
+				display: table;
+				margin-bottom: 1.4rem;
+				min-height: 1.4rem;
+				&:last-child{
+					margin-bottom: 0;
+				}
+
+				p{
+					position: relative;
+					display: table-cell;
+					font-size: 1.4rem;
+					color: @c002;
+					line-height: normal;
+					min-height: 1.4rem;
+					
+					span{
+						display: block;
+						width: 100%;
+						position: absolute;
+						/* line-height: 0.7rem; */
+						top: 0;
+
+						&:after{
+							width: 100%;
+							content: '';
+							display: inline-block;
+							height: 0.1rem;
+						}
+					}
+					
+
+					&.td_left{
+						color: @c003;
+						//padding-right: 3.3rem;
+						//white-space: nowrap;
+						width: 7rem;
+						// text-align: justify;
+					}
+
+					&.td_right{
+						padding-left: 1.8rem;
+						&:after{
+							display:none;
+						}
+					}
+
+					&.name, &.address{
+						line-height: 2rem;
+					}
+
+					// span{
+					// 	width: 100%;
+					// }
+				}
+			}
+
+		}
+	}
+
+	//表格
+	.tableTr{
+		margin-top: 1.2rem;
+		text-align: center;
+		background: @c012;
+		color: @c003;
+		font-size: 1.2rem;
+		margin-bottom: 1.6rem;
+		p{
+			color: @c003;
+		}
+
+		.header{
+			background: @c004;
+		}
+		span{
+
+			display: inline-block;
+			box-sizing: border-box;
+			border-right: 0.1rem solid @c005;
+			border-bottom: 0.1rem solid @c005;
+			height: 3rem;
+			line-height: 3rem;
+
+			&:last-child{
+				border-right: 0;
+			}
+		}
+		
+	}
+}
+
+
+
+//基金经理
+.managerArea{
+	margin-top: -1.6rem;
+	margin-right: -1.6rem;
+
+	.list{
+		border-bottom: 0.1rem solid @c004;
+		padding-bottom: 1.8rem;
+		padding-top: 1.6rem;
+		padding-right: 1.6rem;
+
+		&:last-child{
+			border-bottom: 0;
+		}
+
+		.title{
+			margin-bottom: 1rem;
+		}
+
+		.name{
+			margin-right: 1rem;
+		}
+
+		.intro{
+			font-size: 1.2rem;
+			line-height: 2.2rem;
+		}
+	}
+}
+
+
+//饼图
+.pieWrapper{
+	height: 180px;
+	width: 100%;
+}
+
+//基金公告
+.notileList{
+	.form-wrap{
+		margin-right: -1.6rem;
+		margin-top: -1.6rem;
+
+		.mui-table-view{
+			
+			.mui-table-view-cell{
+				padding-top: 1.8rem;
+				width: 100%;
+			}
+
+			&:last-child{
+				border-bottom: 0.1rem solid @c004;
+			}
+		}	
+	}
+
+	.nameDate{
+		line-height: 1.4rem;
+		overflow: hidden;
+		margin-bottom: 1.2rem;
+
+		.name{
+			color: @c002;
+		}
+
+		.date{
+			float: right;
+			margin-right: 2.9rem;
+			color: @c003;
+		}
+	}
+	
+	.intro{
+		line-height: 1.3rem;
+		margin-bottom: 1.8rem;
+		margin-right: 2.9rem;
+		font-size: 1.2rem; 
+		color: @c003; 
+	}
+
+}
+
+.without{
+	&.jjjl_noData{
+		margin-top: 0;
+		padding-top: 16.5rem;
+	}
+}
+
