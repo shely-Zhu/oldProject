@@ -1,0 +1,135 @@
+<!-- /**  
+ * @Page:  现金管理 - 转入
+ * @Author: yangjinlai  
+ * @Date:   2019-11-25
+ * 
+ */ -->
+
+ <!DOCTYPE html>
+ <html lang="en">
+ <head>
+     @@include('@pathInclude/views/meta.html')
+     <link rel="stylesheet" href="/financial/static/css/publicPlacement/cashTransformIn.css">
+     <title>转入</title>
+ </head>
+ <body>
+     <!-- @@include('../../common/views/load.html') -->
+     
+     <section class="container">
+        @@include('@pathCommonViews/headBarConfig.html',{"pathName":"转入"}) 
+        <div class="br"></div>
+        <div class="title">现金宝产品1</div>
+        <div class="money">
+            <div class="mfirst">
+                <div class="mfirst-one">转入金额</div>
+            </div>
+            <div class="msecond">
+            	<span class="msecond-one">￥</span>
+                <input class="transformInput" type="text">
+                <img src="/financial/static/img/icon_delete@2x.png" alt="">
+             </div>
+             <div class="pay">预计10月12日开始收益，10月22日收益到账</div>
+         </div>
+         <div class="online">
+            <div class="onleft">在线支付</div>
+
+            <!-- 右侧 选择银行卡前样式 -->
+            <div class="onright">
+            	<div class="onright-left pleaseSelect">
+            	    请选择银行卡
+            	</div>
+            	<a class="iconfont iconone" href="javascript:;">&#xe67d;</a>
+            </div>
+
+            <!-- 右侧 选择银行卡后样式 -->
+            <!-- <div class="onright" id="bank"> 
+                <a class="iconfont iconone" href="javascript:;">&#xe67d;</a>
+                <div class="onright-left">
+                    <div class="onright-left-one">
+                        <img src="/financial/static/img/account_icon_bank logo@2x.png" alt="">
+                        <i>中国建设银行</i>
+                        <span>0563</span>
+                    </div>
+                    <div class="onright-left-two">单笔限额5万，单日限额10万</div>
+                </div>
+                
+            </div> -->
+
+         </div>
+
+         <div class="p2">
+            <img src="/financial/static/img/sign up_icon_checkbox_normal@2x.png" alt=""><div>如有内容占位，此处显示内容此处显示内容此处显示内容<span class="file">《xxxx》</span>和<span class="file">《xxxxxx》</span></div>
+         </div>
+         <div class="btn">
+            确定
+         </div>
+     </section>
+
+      <!-- 银行卡弹窗 -->
+    <div class="popup">
+        <div class="popup-mask"></div>
+        <div class="popup-content">
+            <div class="popup-title">
+                <!-- <div class="popup-close"> -->
+                    <img class="popup-close" src="/financial/static/img/Nav Bar_icon_close_black@2x.png" alt="">
+                <!-- </div> -->
+                <div class="tit">选择在线支付银行卡</div> 
+            </div>
+            <ul class="popup-ul">
+                <li class="popup-li">
+                    <img class="bank-img" src="/financial/static/img/account_icon_bank logo@2x.png" alt="">
+                    <div class="div">
+                        <div class="bank-name">中国招商银行储蓄卡(8304)</div>
+                        <div class="bank-pay">单笔限额5万，单日限额10万</div>
+                    </div>
+                    <img class="true" src="/financial/static/img/account_icon_check@2x.png" alt="">
+                </li>
+                <li class="popup-li">
+                        <img class="bank-img" src="/financial/static/img/account_icon_bank logo@2x.png" alt="">
+                        <div class="div">
+                            <div class="bank-name">中国招商银行储蓄卡(8304)</div>
+                            <div class="bank-pay">单笔限额5万，单日限额10万</div>
+                        </div>
+                        <img class="true" src="/financial/static/img/account_icon_check@2x.png" alt="">
+                    </li>
+                    <li class="popup-li">
+                            <img class="bank-img" src="/financial/static/img/account_icon_bank logo@2x.png" alt="">
+                            <div class="div">
+                                <div class="bank-name">中国招商银行储蓄卡(8304)</div>
+                                <div class="bank-pay">单笔限额5万，单日限额10万</div>
+                            </div>
+                            <img class="true" src="/financial/static/img/account_icon_check@2x.png" alt="">
+                        </li>
+                <li class="popup-li">
+                        <img class="bank-img" src="/financial/static/img/account_icon_bank logo@2x.png" alt="">
+                        <div class="div">
+                            <div class="bank-name">中国招商银行储蓄卡(8304)</div>
+                            <div class="bank-pay">单笔限额5万，单日限额10万</div>
+                        </div>
+                        <img class="true" src="/financial/static/img/account_icon_check@2x.png" alt="">
+                    </li>
+                <li class="popup-last">
+                        <img class="last-img" src="/financial/static/img/account_icon_bank logo@2x.png" alt="">
+                        <div class="last-title">
+                            添加银行卡付款
+                        </div>
+                        <a class="iconfont iconone" href="javascript:;">&#xe67d;</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+
+     <!-- 加载中loading -->
+     <!-- @@include('@pathCommonViews/load.html') -->
+ 
+     <!-- 加载中loading -->
+     @@include('@pathCommonViews/loading/listLoading.html')
+ 
+     @@include('@pathInclude/views/footer.html')
+     <!-- 添加埋点 -->
+     @@include('@pathInclude/views/header.html')
+     <script src="/financial/static/js/publicPlacement/cashTransformIn.js"></script>
+ 
+ </body>
+ </html>

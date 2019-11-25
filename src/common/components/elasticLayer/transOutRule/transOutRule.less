@@ -1,0 +1,114 @@
+// 弹出层第五种的样式    多种提示类
+
+@import url("../../../less/reset.less");
+@import url("../../../less/color.less");
+
+
+
+// 弹出层文字介绍
+.elasticLayer.transOutRule{
+
+        position: fixed;
+        background-color: rgba(51, 51, 51, 0.8);
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        display: none;
+
+        .elasticWrapper{
+        	
+            position: absolute;
+            //display: table;
+            //transform: translate(0,-50%);
+            transform: translate(-50%,-50%);
+            -webkit-transform: translate(-50%,-50%);
+            -ms-transform: translate(-50%,-50%);
+            -o-transform: translate(-50%,-50%);
+
+            top: 50%;
+            left: 50%;
+            background: @c005;
+            // width: 352px;
+            //height: 190px;
+            //margin: auto;
+            text-align: center;
+            z-index: 105;
+            border-radius: 0.14rem; 
+            //margin: 0 auto;
+            // max-width: 80%;
+            width: 5.4rem;
+            
+            .elasticMid{
+            	padding: .43rem .4rem 0 .4rem;
+            	background: #F0DFBA;
+            	border-top-left-radius: 0.14rem;
+            	border-top-right-radius: 0.14rem;
+            }
+
+            // min-width: 5.14rem;
+            // display: table;
+
+            // .elasticMid{
+            //     display: table-cell;
+            // }
+
+
+            .elasticTitle{
+                // padding: 0;
+                // height: 1.3rem;
+                // line-height: 1.3rem;
+                font-size: 0.32rem;
+                // margin-top: 0;
+                color: @272727;
+                font-weight: bold;
+              
+            }
+            .elasticContent{
+                
+                font-size: 0.26rem;
+                line-height: 0.44rem;
+                padding-top: 0.28rem;
+                // background: @fbfaf5;
+                text-align: left;
+                padding-bottom: 0.28rem;
+                // height: 4.08rem;
+
+                .elasticP{
+                	color: @272727;               
+    				margin-bottom: .2rem;
+
+                    // margin-top: 0.68rem;
+                    // color: @bba880;
+
+                    // .elasticP_bold{
+                    //     color: @6b5425;
+                    //     font-weight: bold;
+
+                    // }
+
+                }
+
+                //灰色文字
+                span{
+                    color: @c002;
+                    display: inline-block;
+                }
+
+            }
+
+            .elasticButtons{
+                height: 1.46rem;
+                background: #FDF3DD;
+                color: #272727;
+                text-align: center;
+                font-size: 0.36rem;
+                height: 1rem;
+                line-height: 1rem;
+                border-bottom-left-radius: 0.14rem;
+    			border-bottom-right-radius: 0.14rem;
+
+            }
+        }
+}
+// 弹出层 end

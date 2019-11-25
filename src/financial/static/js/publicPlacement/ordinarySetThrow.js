@@ -24,6 +24,10 @@ require('@pathCommonJs/components/elasticLayer.js');
 var splitUrl = require('@pathCommonJs/components/splitUrl.js');
 //引入复制功能
 // var Clipboard = require('clipboard');
+//引入下拉列表选择器
+var popPicker = require('@pathCommonJsCom/popPicker.js');
+
+var provinceList = require('../../../../common/json/cycle.js');
 
 
 $(function () {
@@ -54,22 +58,28 @@ $(function () {
 			var that = this;
 
 			//开始时间
-			document.getElementById('starttime').addEventListener('tap', function () {
-				option = { "type": "date", "beginYear": "1980", "endYear": "2030" };
-				var picker = new mui.DtPicker(option);
-				picker.show(function (rs) {
-					console.log(rs.text)
-					// document.getElementById('starttime').innerHTML = rs.text;
-				});
-			}, false);
+			// document.getElementById('starttime').addEventListener('tap', function () {
+			// 	option = { "type": "date", "beginYear": "1980", "endYear": "2030" };
+			// 	var picker = new mui.DtPicker(option);
+			// 	picker.show(function (rs) {
+			// 		console.log(rs.text)
+			// 		// document.getElementById('starttime').innerHTML = rs.text;
+			// 	});
+			// }, false);
 
 
 
+			// 周期选择
+			$('body').on('tap','#starttime',function(){
+				popPicker(2, provinceList, $('#cycle'));
+			}) 
 
+			// 银行卡 弹出
 			$('body').on('tap','.onright-left',function(){
 				$('.popup').css('display','block')
 			}) 
 
+			// 银行卡 隐藏
 			$('body').on('tap','.popup-close',function(){
 				$('.popup').css('display','none')
 			}) 

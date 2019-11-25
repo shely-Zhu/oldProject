@@ -1,0 +1,122 @@
+/**
+* 
+* @author liliang 2019-11-25
+*/
+@import url("../../../include/css/mui.min.css");
+@import url('@pathCommonLess/mui/resetMUI.less');
+@import url("@pathCommonLess/reset.less");
+@import url("@pathCommonLess/color.less");
+
+@import url("@pathCommonLessCom/againEnter.less");
+@import url("@pathCommonLessCom/alertBox.less");
+@import url("@pathCommonLessCom/headBarConfig.less");
+// .mui-slider-indicator /deep/ .mui-indicator{
+// 	width:0.1rem !important;
+// 	height:0.1rem !important;
+// }
+// /deep/ .mui-active{
+// 	background: #fff !important;
+
+// }
+// .box /deep/ .mui-slider-indicator{
+// 	bottom:0px !important;
+// }
+.box{
+	.hotWords{
+		padding:0.3rem;
+		background:#FFFFFF;
+		margin-bottom:0.3rem;
+		.title {
+			display:-webkit-box;
+			margin-bottom:0.3rem;
+			h2{
+				color:#272727;
+				font-size:0.44rem;
+				-webkit-box-flex:1;
+			}
+			p{
+				a{
+					color:#9B9B9B;
+					font-size:0.28rem;	
+				}
+				
+				-webkit-box-flex:1;
+				text-align: right;
+				line-height:0.6rem;
+				i{
+					color:@9B9B9B;
+                    font-size:0.12rem;
+				}
+			}
+		}
+		.content{
+			background:#F3F5F7;
+			padding:0.16rem 0.3rem 0.16rem 0.3rem;
+			border-radius: 8px;
+			.con-t{
+				display:-webkit-box;
+				span{
+					background-image: linear-gradient(to right, #FBE2BD ,#F6C286);
+					padding:0.02rem 0.06rem 0.03rem 0.06rem;
+					color:#4F5365;
+					font-size:0.24rem;
+					display: block;
+				}
+				b{
+					-webkit-box-flex:1;
+					padding-left:0.2rem;
+					color:#272727;
+					font-size:0.28rem;
+				}
+			}
+			.con-b{
+				color:#272727;
+				font-size:0.24rem;
+				line-height:100%;
+				margin-top:0.15rem;
+				display:-webkit-box;
+				.span-l{
+					width:1.04rem;
+					text-align: right;	
+					display: block;
+				}
+				.span-r{
+					-webkit-box-flex:1;
+					display: block;
+					padding-left:0.2rem;
+				}
+			}
+		}
+	}
+	.fortuneVideo{
+		.fortuneList{
+			ul li{
+				margin-bottom:0.3rem;
+				position: relative;
+				p{
+					i{
+						margin-right:0.1rem;
+						img{
+							width:0.46rem;
+						   height:0.46rem;
+						   display: inline-block;
+						   vertical-align:middle;
+						   margin-top:-0.06rem;
+						}
+					}
+					position: absolute;;
+					left:0;
+					bottom:0;
+					background:rgba(35,35,35,0.6);
+					color:@FFFFFF;
+					font-size:0.28rem;
+					width:100%;
+					padding:0.15rem 0.3rem 0.14rem 0.3rem;
+					overflow: hidden;
+					text-overflow:ellipsis;
+					white-space: nowrap;
+				}
+			}
+		}
+	}
+}

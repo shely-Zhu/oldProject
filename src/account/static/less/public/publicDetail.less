@@ -28,8 +28,18 @@ body{
 }
 .value_green {
 	margin-top: 0.04rem;
-	font-size: 0.3rem;
+	font-size: 0.3rem; 
 	color: @008000;
+}
+.service {
+	position: fixed;
+	top: .63rem;
+	right: .28rem;
+	width: .46rem;
+	height: .42rem;
+	background: url('/account/static/img/public/public_detail_service.png');
+	background-size: 100%;
+	z-index: 999;
 }
 .publicDetail{
 	.hide{
@@ -259,8 +269,7 @@ body{
 		.dealRegArea{
 			//交易规则区域
 			background: @c005;
-			margin-top: 0.3rem;
-			margin-bottom: 0.3rem;
+			margin: 0.3rem 0;
 			width: 100%;
 			.line_area {
 				height: 1.78rem;
@@ -306,7 +315,7 @@ body{
 					height: .06rem;
 					width: 37%;
 					left: .7rem;
-					top: .9rem;
+					top: .85rem;
 					background: linear-gradient(to right, @6C83C9, @061D6A);
 				}
 				.line_right {
@@ -314,33 +323,87 @@ body{
 					height: .06rem;
 					width: 37%;
 					right: .7rem;
-					top: .9rem;
+					top: .85rem;
 					background: linear-gradient(to right, @6C83C9, @061D6A);
 				}
 			}
+			.line_desc {
+				margin:  .3rem;
+				padding-bottom: .3rem;
+				font-size: .28rem;
+				color: @9B9B9B;
+			}
 		}
-		.footer {
-			display: flex;
-			width: 100%;
-			height: .98rem;
-			line-height: .98rem;
-			font-size: .32rem;
-			text-align:center;
-			position: fixed;
-			bottom: 0;
-			.redeemBtn {
-				background: @FFFFFF;
-				color: #D2B381;
-				flex: 1;
-				
-			}
-			.subscribeBtn {
-				background:linear-gradient(90deg,rgba(212,183,136,1) 0%,rgba(188,150,90,1) 100%);
-				color: @FFFFFF;
-				flex: 1;
-				
-			}
+		.company_info {
+			height: .93rem;
+			line-height: .93rem;
+			font-size: .24rem;
+			color: @9B9B9B;
+			text-align: center;
+			background-color: @F7FAFD;
+		}
+		.divider {
+			height: 1.6rem;
+			background-color: @FFFFFF;
 		}
 	}
-	
+	.footer {
+		width: 100%;
+		height: .98rem;
+		text-align:center;
+		position: fixed;
+		bottom: 0;
+		display: flex;
+		border-top: 0.01rem solid @E7E9ED;
+		background-color: @FFFFFF;
+		.share_area {
+			width: 1.25rem;
+			height: 100%;
+			border-right: 0.01rem solid @E7E9ED;
+			.img {
+				margin-top: .14rem;
+				height: .36rem;
+				background: url("/account/static/img/public/public_detail_share.png") no-repeat;
+				background-size: .36rem;
+				background-position: center;
+			}
+			.text {
+				margin-top: .05rem;
+				font-size: .24rem;
+				color: @9B9B9B;
+			}
+		}
+		.selected_area {
+			width: 1.25rem;
+			height: 100%;
+			border-right: 0.01rem solid @E7E9ED;
+			.img {
+				margin-top: .14rem;
+				height: .36rem;
+				background: url("/account/static/img/public/public_detail_selected.png") no-repeat;
+				background-size: .36rem;
+				background-position: center;
+			}
+			.text {
+				margin-top: .05rem;
+				font-size: .24rem;
+				color: @9B9B9B;
+			}
+		}
+		.fixed_investement_btn {
+			border-top: 0.01rem solid @E7E9ED;
+			line-height: .98rem;
+			font-size: .32rem;
+			flex: 1;
+			background: @FFFFFF;
+			color: @0E246C;
+		}
+		.buy_btn {
+			line-height: .98rem;
+			font-size: .32rem;
+			flex: 1;
+			background:linear-gradient(to right,@6C83C9,@061D6A);
+			color: @FFFFFF;
+		}
+	}
 }
