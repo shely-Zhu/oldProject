@@ -18,22 +18,22 @@
     <!--列表加载显示图标-->
     <!-- @@include('@pathCommonViews/loading/listLoading.html') -->
     <!--公共页面头部-->
-    @@include('@pathCommonViews/headBarConfig.html',{"pathName":"定投详情","bgColors":"#3E3C3C,#3E3C3C","showType":"1"})
+    @@include('@pathCommonViews/headBarConfig.html',{"pathName":"定投详情","bgColors":"#384B85,#112258","showType":"1"})
     <section class="container">
         <div class="banner">
             <div class="bannerTop clearfix">
                 <span class="j_text">中融货币A 1111</span><span class="posRight"><a class="iconfont iconone" href="javascript:;">&#xe67d;</a></span>
                 <div class="type">
                     <div>
-                        <p>累计定投(元)</p>
-                        <p>10,00.00</p>
+                        <p class="word_color">累计定投(元)</p>
+                        <p class="num_color">10,00.00</p>
                     </div>
-                    <div>
-                        <p>已投期数</p>
-                        <p>999</p>
+                    <div class="box_right">
+                        <p class="word_color">已投期数</p>
+                        <p class="num_color">999</p>
                     </div>
                 </div>
-                <div class="ipt">下次扣款日期 <span>2020-01-11</span></div>
+                <div class="ipt">下次扣款日期 <span class="date_color">2020-01-11</span></div>
             </div>
         </div>
         <div class="mid">
@@ -49,9 +49,9 @@
                     <span class="fontSize6">定投金额</span>
                     
                 </li>
-                <li>
+                <li class="clearfix">
                     <span class="fontSize6">支付方式</span>
-                    <span class="fontSize4 clearfix"><img src="/src/financial/static/img/account_icon_bank logo@2x.png" alt="">中国建设银行<span class="cardNo">0563</span><span class="onlinePayment">在线支付</spanspan><span>
+                    <span class="fontSize4"><img src="../../static/img/account_icon_bank logo.png" alt="">中国建设银行<span class="cardNo">0563</span><span class="onlinePayment">在线支付</spanspan><span>
                 </li>
                 <li>
                     <span class="fontSize6">定投周期</span>
@@ -66,26 +66,27 @@
                     <span class="fontSize4">100.00份</span>
                 </li>
             </ul>
-        </div>    
-        <table>
-            <tr>
-                <td>2019-10-14</td>
-                <td>5000.00元</td>
-                <td class="state_succ">定投成功<a class="iconfont iconone" href="javascript:;">&#xe67d;</a></td>
-            </tr>
-            <tr class="is_fail">
-                <td>2019-10-14</td>
-                <td>5000.00元</td>
-                <td class="state_fail">定投失败<a class="iconfont iconone" href="javascript:;">&#xe67d;</a></td>
-                <!-- 判断如果类名有state_fail就加一行 -->
-                <td class="fail_reason">此处填写定投失败原因</td>
-            </tr>
-            <tr>
-                <td>2019-10-14</td>
-                <td>5000.00元</td>
-                <td class="state_succ">定投成功<a class="iconfont iconone" href="javascript:;">&#xe67d;</a></td>
-            </tr>   
-        </table>
+        </div>
+        <div class="table_head">定投记录</div>    
+        <div class="table">
+            <div>
+                <span>2019-10-14</span>
+                <span>5000.00元</span>
+                <span class="state_succ">定投成功<a class="iconfont iconone" href="javascript:;">&#xe67d;</a></span>
+            </div>
+            <div class="is_fail">
+                <span>2019-10-14</span>
+                <span>5000.00元</span>
+                <span class="state_fail">定投失败<a class="iconfont iconone" href="javascript:;">&#xe67d;</a>
+                </span>
+                <span class="needPos">此处填写定投失败原因</span>
+            </div>
+            <div>
+                <span>2019-10-14</span>
+                <span>5000.00元</span>
+                <span class="state_succ">定投成功<a class="iconfont iconone" href="javascript:;">&#xe67d;</a></span>
+            </div>   
+        </div>
         <!-- 加载中loading -->
         @@include('@pathCommonViews/loading/listLoading.html')
         <!-- 暂无数据 -->
@@ -93,7 +94,7 @@
     </section>
     <div class="footer">
         <div>终止</div>
-        <div>暂停</div>
+        <div class="cen">暂停</div>
         <div class="active">修改</div>
     </div>
     @@include('@pathInclude/views/footer.html')
