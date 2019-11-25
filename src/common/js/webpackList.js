@@ -315,4 +315,7 @@ module.exports = {
 
     // 现金管理
     './Financial/static/js/cashManagement' : './src/Financial/static/js/cashManagement.js',
+
+    // 基本档案
+    './financial/static/js/publicPlacement/fundFile' : './src/financial/static/js/publicPlacement/fundFile.js'
 }
