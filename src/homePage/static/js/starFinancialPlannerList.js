@@ -227,7 +227,7 @@ $(function(){
         getCityListData:function(){
 
             var obj=[{
-                url: site_url.cityList_api,
+                url: site_url.cityListStar_api,
                 // url:'http://172.16.187.164:8081/web/marketing/activity/cityList',
                 //async: false,
                 needDataEmpty: true,

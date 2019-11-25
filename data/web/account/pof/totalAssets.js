@@ -130,6 +130,14 @@ var mymessage = Mock.mock({
 
                 "g2gestimateArrivalDate": "12-14 周四 15:00之前 ", //赎回到货基 预估到账时间 （到货基持仓的时间）
 
+                "isShowDivideMsg": 1, //0否1是(是否显示分红文案)
+
+                "divideMsg": "最近有分红",
+
+                "isBuyFlag": 0,//是否可购买(0否1是) int类型
+
+                "isRedemptionFlag": 1, //是否可赎回(0否1是) int 类型
+
                 "tradeLimitList": [
 
                     {
@@ -212,6 +220,14 @@ var mymessage = Mock.mock({
                 "bankThumbnailUrl": "",//银行缩略图 
 
                 "shareType": "",//前后端收费方式 
+
+                "isShowDivideMsg": 0, //0否1是(是否显示分红文案)
+
+                "divideMsg": "最近有分红",
+
+                "isBuyFlag": 1,//是否可购买(0否1是) int类型
+
+                "isRedemptionFlag": 0, //是否可赎回(0否1是) int 类型
 
                 "tradeLimitList": [
 
@@ -303,6 +319,10 @@ var mymessage = Mock.mock({
 
                 "g2gestimateArrivalDate": "12-14 周四 15:00之前 ", //赎回到货基 预估到账时间 （到货基持仓的时间）
 
+                "isBuyFlag": 0,//是否可购买(0否1是) int类型
+
+                "isRedemptionFlag": 1, //是否可赎回(0否1是) int 类型
+
                 "tradeLimitList": [
 
                     {
@@ -385,6 +405,10 @@ var mymessage = Mock.mock({
                 "bankThumbnailUrl": "",//银行缩略图 
 
                 "shareType": "",//前后端收费方式 
+
+                "isBuyFlag": 0,//是否可购买(0否1是) int类型
+
+                "isRedemptionFlag": 1, //是否可赎回(0否1是) int 类型
 
                 "tradeLimitList": [
 

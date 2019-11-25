@@ -212,7 +212,7 @@ module.exports = {
     //修改分红方式页面
     './mine/static/js/bonusMethod': './src/mine/static/js/bonusMethod.js',
     //私募资产净值明细页面
-    './mine/static/js/priNetWorthDetails': './src/mine/static/js/priNetWorthDetails.js',
+    './account/static/js/priNetWorthDetails': './src/account/static/js/priNetWorthDetails.js',
     // 会员权益成长值记录
     './mine/static/js/membershipInterestsRecord': './src/mine/static/js/membershipInterestsRecord.js',
     // 会员权益详情
@@ -252,7 +252,7 @@ module.exports = {
     //已确认交易 公共js
     './account/static/js/common/transcationTem': './src/account/static/js/common/transcationTem.js',
     //待确认交易
-    // './account/static/js/private/tobeConfirmTransaction': './src/account/static/js/private/tobeConfirmTransaction.js',
+    './account/static/js/private/tobeConfirmTransaction': './src/account/static/js/private/tobeConfirmTransaction.js',
     //收益分配明细
     './account/static/js/private/incomeDistribution': './src/account/static/js/private/incomeDistribution.js',
     //公募资产
@@ -307,12 +307,15 @@ module.exports = {
     './Financial/static/js/publicPlacement/surelyResults': './src/Financial/static/js/publicPlacement/surelyResults.js',
 
     //我的定投_定投明细
-    './Financial/static/js/publicPlacement/castSurely_details' : './src/Financial/static/js/publicPlacement/castSurely_details.js',
+    './financial/static/js/publicPlacement/castSurely_details' : './src/financial/static/js/publicPlacement/castSurely_details.js',
     //我的定投计划
-    './Financial/static/js/publicPlacement/myInvestmentPlan' : './src/Financial/static/js/publicPlacement/myInvestmentPlan.js',
+    './Financial/static/js/publicPlacement/myInvestmentPlan': './src/Financial/static/js/publicPlacement/myInvestmentPlan.js',
     //普通基金产品详情页_定投
-    './financial/static/js/ordinarySetThrow' : './src/financial/static/js/ordinarySetThrow.js',
+    './Financial/static/js/ordinarySetThrow': './src/Financial/static/js/ordinarySetThrow.js',
 
     // 现金管理
     './Financial/static/js/cashManagement' : './src/Financial/static/js/cashManagement.js',
+
+    // 基本档案
+    './financial/static/js/publicPlacement/fundFile' : './src/financial/static/js/publicPlacement/fundFile.js'
 }

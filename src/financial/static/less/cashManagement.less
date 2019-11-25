@@ -46,12 +46,14 @@ body{
 				width: 1.96rem;
 				height: .56rem;
 				line-height: .56rem;
-				background:linear-gradient(270deg,rgba(251,226,189,0.79) 0%,rgba(226,181,128,1) 100%);
+				background: #7A7074;
 				border-radius:2rem 0px 0px 2rem;
-				color: #fff;
+				color: #E2E1E3;
 				text-align: center;
-				opacity:0.48;
 				margin-top: .12rem;
+				.iconfont {
+					font-size: .24rem;
+				}
 			}
 		}
 		.profitContent {
@@ -84,6 +86,7 @@ body{
 				.cashItem {
 					padding: 0 0 0 .3rem;
 					background: #fff;
+					margin-bottom: .3rem;
 					&>div {
 						padding: .3rem .3rem .3rem 0;
 						border-bottom: 1px solid #E7E9ED;
@@ -91,11 +94,11 @@ body{
 					.itemTop {
 						.itemTitle {
 							font-size: .32rem;
-							line-height: .45rem;
+							line-height: .32rem;
 							color: #000;
 							font-weight: 600;
+							margin-bottom: .13rem;
 							.rightCon {
-								padding-top: .08rem;
 								display: inline-block;
 							}
 						}
@@ -119,8 +122,11 @@ body{
 								font-size: .32rem;
 								line-height: .32rem;
 								font-weight: 600;
-								margin-top: .1rem;
+								margin-top: .13rem;
 							}
+						}
+						&>div:last-child {
+							border: none;
 						}
 					}
 					.itemBottom {
@@ -141,6 +147,9 @@ body{
 							background:linear-gradient(135deg,rgba(108,131,201,1) 0%,rgba(6,29,106,1) 100%);
 						}
 					}
+				}
+				&.cashItem:last-child {
+					margin-bottom: 0;
 				}
 			}
 		}
