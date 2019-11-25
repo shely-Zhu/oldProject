@@ -25,7 +25,6 @@ require('@pathCommonJs/components/headBarConfig.js');
 //黑色提示条的显示和隐藏
 var splitUrl = require('@pathCommonJs/components/splitUrl.js')();
 var tipAction = require('@pathCommonJsCom/tipAction.js');
-// var generateTemplate = require('@pathCommonJsComBus/generateTemplate.js');
 var transcationTem = require('../common/transcationTem.js');
 // 
 $(function() {
@@ -41,10 +40,11 @@ $(function() {
                 pageNo: 1,
                 pageSize: 10,
             },
+            a: null,
             list_template: '', //列表的模板，生成后存放在这里
             listToTop: '', // 滑动区域距离顶部距离
             navToTop: '', // 滑动nav距离顶部距离
-            type: splitUrl['type'], //是否确认
+            type: 0, //是否确认
             businessType: $('.hopperCon li.active').attr('data'),
         },
         html: '', //存放生成的html
@@ -54,17 +54,8 @@ $(function() {
             //初始化第一屏区域的上拉加载
             that.initMui();
             // 如果是已确认交易展示筛选漏斗
-            if (that.gV.type == 'confirmed') {
-                $('.hopper').show();
-                $('#HeadBarpathName').attr("data", '已完成交易').html('已完成交易');
-            } else if (that.gV.type == 'toBeConfirmed') {
-                $('.hopper').hide();
-                $('#HeadBarpathName').attr("data", '待确认交易').html('待确认交易');
-            }
 
-            function openTipCon() {
 
-            }
             //事件监听
             that.events();
         },
@@ -76,8 +67,16 @@ $(function() {
                 $('.list').height(height).addClass('setHeight');
                 $('.warp').height(height);
             }
-
-
+            //地址栏里confirmed代表已确认  toBeConfirmed代表待确认
+            if (splitUrl['type'] == 'confirmed') {
+                $('.hopper').show();
+                $('#HeadBarpathName').attr("data", '已完成交易').html('已完成交易');
+                that.gV.type = 1;
+            } else if (splitUrl['type'] == 'toBeConfirmed') {
+                $('.hopper').hide();
+                $('#HeadBarpathName').attr("data", '待确认交易').html('待确认交易');
+                that.gV.type = 0;
+            }
             mui.init({
                 pullRefresh: {
                     container: '.contentWrapper',
@@ -88,6 +87,7 @@ $(function() {
                         callback: function() {
                             // debugger
                             //执行ajax请求
+                            that.gV.a = this;
                             that.getData(this);
                         }
                     }
@@ -120,13 +120,13 @@ $(function() {
         },
         getData: function(t, type) {
             var that = this;
-
+            debugger
             var obj = [{
                 url: site_url.getTradeList_api,
                 data: {
                     "pageNo": that.gV.aP.pageNo, //非必须，默认为1
                     "pageSize": "10", //非必须，默认为10
-                    isConfirm: that.gV.isConfirm,
+                    isConfirm: that.gV.type,
                     businessType: Number(that.gV.businessType),
                 },
                 //async: false,
@@ -161,10 +161,13 @@ $(function() {
                         }
                         // 页面++
                         that.gV.aP.pageNo++;
+                        //去掉mui-pull-bottom-pocket的mui-hidden
+                        $('.contentWrapper').find('.mui-pull-bottom-pocket').removeClass('mui-hidden');
                         // 将列表插入到页面上
                         transcationTem(data, that.getElements.contentWrap, that.getElements.transTemp, type)
 
                     }, 200)
+
 
                 },
 
@@ -185,7 +188,7 @@ $(function() {
                 that.gV.businessType = $(this).attr('data');
                 // $('.contentWrap').html('');
                 that.gV.aP.pageNo = 1;
-                that.getData(this, 1);
+                that.getData(that.gV.a, 1);
             })
         }
     };

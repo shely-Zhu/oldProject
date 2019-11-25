@@ -64,38 +64,19 @@ $(function () {
 			}, false);
 
 
-			//选择银行卡
-			document.getElementById('bank').addEventListener('tap', function () {
-				var picker = new mui.PopPicker();
-				picker.setData([{
-					value: "first",
-					text: "第一项"
-				}, {
-					value: "second",
-					text: "第二项"
-				}, {
-					value: "third",
-					text: "第三项"
-				}, {
-					value: "fourth",
-					text: "第四项"
-				}, {
-					value: "fifth", 
-					text: "第五项"
-				}])
-				//picker.pickers[0].setSelectedIndex(4, 2000);
-				picker.pickers[0].setSelectedValue('first', 2000);
-				picker.show(function(SelectedItem) {
-					console.log(SelectedItem);
-					// $('.mui-poppicker').css('display','none')
-					picker.hide();
-					picker.dispose();
-				})
-			}, false);
 
-			// $('body').on('tap','.mui-poppicker-btn-cancel',function(){
-			// 	$('.mui-poppicker').css('display','none')
-			// }) 
+
+			$('body').on('tap','.onright-left',function(){
+				$('.popup').css('display','block')
+			}) 
+
+			$('body').on('tap','.popup-close',function(){
+				$('.popup').css('display','none')
+			}) 
+
+			$('body').on('tap','.popup-mask',function(){
+				$('.popup').css('display','none')
+			}) 
 
 		},
 

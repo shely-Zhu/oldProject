@@ -1,5 +1,5 @@
 /**  
-* @Page:  现金管理 -- 转入
+* @Page:  现金管理 -- 转出
 * @Author: yangjinlai
 * @Date:   2019-11-25
 * 

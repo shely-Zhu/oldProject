@@ -20,12 +20,17 @@
 @import url('@pathCommonLess/mui/resetMUI.less');
 //引入重置mui下拉列表样式文件
 @import url("@pathCommonLess/mui/selectMUI.less");
-@import url("@pathCommonLess/components/againEnter.less");
 
 //重置MUI的poppicker样式
 @import url("@pathCommonLess/mui/resetMuiPop.less");
 
 @import url("@pathCommonLessCom/headBarConfig.less");
+
+@import url('@pathCommonCom/elasticLayer/transOutRule/transOutRule.less');
+
+body{
+    background: @F7FAFD;
+}
 
 .container{
     width: 100%;
@@ -51,33 +56,68 @@
         margin-bottom: .3rem;
         color: #272727;
         font-weight: bold;
+        background: @c005;
     }
 
     .tabWrapper{
         text-align: center;
+        padding-left: .3rem;
+        background: @c005;
+        padding: .18rem;
+        font-size: .28rem;
+        margin-bottom: .18rem;
 
         .tab{
             color: @9B9B9B;
-            &.active{
+            
+            span{
+                padding-bottom: .22rem;
+            }
+            
+            .active{
                 color: @272727;
                 font-weight: bold;
+                position: relative;
+
+
+                &:after{
+                    content: '';
+                    width: .5rem;
+                    height: 0.06rem;
+                    background:linear-gradient(135deg,rgba(108,131,201,1) 0%,rgba(6,29,106,1) 100%);
+                    border-radius:3px;
+                    position: absolute;
+                    left: 0;
+                    bottom: 0;
+                    right: 0;
+                    margin: auto;
+                }
             }
         }
     }
 
+    .typeDetail{
+        padding: 0 .3rem;
+        line-height: .4rem;
+        margin-bottom: .18rem;
+    }
+
     .money{
         background: @c005;
-        padding: 0 .3rem .26rem;
+        padding: .3rem .26rem ;
+        margin-bottom: .3rem;
+
         .mfirst{
             display: flex;
             justify-content: space-between;
+
             .mfirst-one{
                 height:.45rem;
                 font-size:.32rem;
                 font-weight:400;
                 color:@272727;
                 line-height:.45rem;
-                margin-top: .28rem;
+                // margin-top: .28rem;
                 margin-bottom: .43rem;
             }
             .mfirst-two{
@@ -102,6 +142,7 @@
             display: flex;
             justify-content: space-between;
             border-bottom: 1px solid @E7E9ED;
+            margin-bottom: .2rem;
 
             .msecond-one, .transformInput{
                 height:.8rem;
@@ -116,44 +157,81 @@
                 opacity: .5;
                 margin-top: .14rem;
             }
+            .button{
+                width: 1rem;
+                height: .4rem;
+                background: linear-gradient(135deg, #f1cda8 0%, #b57e45 100%);
+                border-radius: 0.04rem;
+                line-height: .4rem;
+                color: #fff;
+                text-align: center;
+                margin-left: .2rem;
+                font-size: .28rem;
+                margin-top: .14rem;
+            }
         }
-        .pay{
-            height:.4rem;
-            font-size:.28rem;
-            font-weight:400;
-            color:@9B9B9B;
-            line-height:.4rem;
-            margin-top: .2rem;
+        .explain{
+            color: @9B9B9B;
+            font-size: .24rem;
+
+            .left{
+                float: left;
+            }
+            .right{
+                float: right;
+            }
+
+            .iconfont{
+                font-size: .24rem;
+                margin-left: .05rem;
+            }
         }
     }
     .online{
-        display: flex;
+        position: relative;
+        display: table;
+        width: 100%;
+        // display: flex;
         justify-content: space-between;
         // margin-top: .2rem;
         background: @c005;
-        margin-bottom: .6rem;
+        margin-bottom: .3rem;
+        padding: .3rem;
 
         .onleft{
-            height:.45rem;
+            display: table-cell;
+            // height:.45rem;
             font-size:.32rem;
             font-weight:400;
             color:@272727;
-            line-height:.45rem;
-            margin-top: .58rem;
+            // line-height:.45rem;
+            // margin-top: .58rem;
             margin-left: .3rem;
+            vertical-align: middle;
         }
         .onright{
-            display: flex;
+            display: table;
             justify-content: space-between;
+            width: 100%;
+
             .onright-left{
+                float: right;
+                margin-right: .3rem;
                 
                 .onright-left-one{
-                    display: flex;
+                    // display: flex;
                     justify-content: space-between;
+
+                    img, i, span{
+                        vertical-align: middle;
+                        display: inline-block;
+                    }
+
                     img{
                         width: .32rem;
                         height: .32rem;
-                        margin-top: .36rem;
+
+                        // margin-top: .36rem;
                     }
                     i{
                         height:.45rem;
@@ -161,7 +239,7 @@
                         font-weight:400;
                         color:@272727;
                         line-height:.45rem;
-                        margin-top: .28rem;
+                        // margin-top: .28rem;
                     }
                     span{
                         height:.42rem;
@@ -169,7 +247,7 @@
                         font-weight:bold;
                         color:@272727;
                         line-height:.42rem;
-                        margin-top: .29rem;
+                        // margin-top: .29rem;
                     }
                 }
                 .onright-left-two{
@@ -178,17 +256,26 @@
                     font-weight:400;
                     color:@9B9B9B;
                     line-height:37px;
-                    margin-bottom: .36rem;
+                    // margin-bottom: .36rem;
                 }
 
-                &.pleaseSelect{
-                    margin-top: .58rem;
-                }
+               &.pleaseSelect{
+                   top: 50%;
+                       transform: translateY(-50%);
+                       position: absolute;
+                       right: .3rem;
+                       
+                   // margin-top: .58rem;
+               }
             }
             .iconone{
-                margin-top: .58rem;
-                margin-right: .3rem;
+                // margin-top: .58rem;
+                // margin-right: .3rem;
                 color: @9B9B9B;
+               top: 50%;
+               transform: translateY(-50%);
+               position: absolute;
+               right: .3rem;
             }
         }
     }
@@ -249,3 +336,113 @@
         line-height:.33rem;
     }
 }
+
+ .popup{
+        display: none;
+        width: 100%;
+        height: 100%;
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        z-index: 3000;
+        .popup-mask{
+            height: 40%;
+            background:@c009;
+            opacity: .6;
+        }
+        .popup-content{
+            height: 60%;
+            background: @c005;
+            .popup-title{
+                height: .88rem;
+                line-height: .88rem;
+                display: flex;
+
+                
+                .popup-close{
+                    width: .8rem;
+                    height: .8rem;
+                    line-height: .8rem;
+                    z-index: 4000;
+                }
+                .tit{
+                    width: 100%;
+                    text-align: center;
+                    margin-left: -.8rem;
+                    color: @272727;
+                    font-size:.28rem;
+                    font-weight:400;
+                }
+            }
+            .popup-detail{
+                height: .76rem;
+                line-height: .76rem;
+                background: @F7FAFD; 
+                color: @9B9B9B;
+                font-size: 0.24rem;
+                padding-left: .3rem;
+            }
+            .popup-ul{
+                overflow-y: scroll;
+                height: 80%;
+                .popup-li{
+                    display: flex;
+                    border-bottom: 1px solid @E7E9ED;
+                    .bank-img{ 
+                        width: .7rem;
+                        height: .7rem;
+                        margin: .33rem .2rem .33rem .3rem;
+                    }
+                    .div{
+                        width: 72%;
+                        .bank-name{
+                            height:.45rem;
+                            font-size:.32rem;
+                            font-weight:400;
+                            color:@272727;
+                            line-height:.45rem;
+                            margin-top: .24rem;
+                            margin-bottom: .1rem;
+                        }
+                        .bank-pay{
+                            height:.33rem;
+                            font-size:.24rem;
+                            font-weight:400;
+                            color:@9B9B9B;
+                            line-height:.33rem;
+                            margin-bottom: .23rem;
+                        }
+                    }
+                    
+                    .true{
+                        width: .46rem;
+                        height: .46rem;
+                        margin-top: .45rem;
+                    }
+                }
+                .popup-last{
+                    display: flex;
+                    border-bottom: 1px solid @E7E9ED;
+                    .last-img{
+                        width:.54rem;
+                        height:.41rem;
+                        margin: .48rem .28rem .47rem .38rem;
+                    }
+                    .last-title{
+                        height:.45rem;
+                        font-size:.32rem;
+                        font-weight:400;
+                        color:@272727;
+                        line-height:.45rem;
+                        margin: .46rem 3.46rem .45rem 0;
+                    }
+                    .iconone{
+                        color: @9B9B9B;
+                        margin-top: .53rem;
+                    }
+                }
+            } 
+            
+        }
+    }
