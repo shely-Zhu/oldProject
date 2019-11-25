@@ -18,8 +18,8 @@ var Tabs = (function(){
     Tab.prototype.init = function () {
         this.$tabs = this.$ct.find('.tabs>li')
         this.$panels = this.$ct.find('.wrap>.panel')
-        this.$tabs.first().addClass('active')
-        this.$panels.first().addClass('active')
+        this.$tabs.last().addClass('active')
+        this.$panels.last().addClass('active')
         this.bind()
     }
     Tab.prototype.bind = function () {
