@@ -1,9 +1,9 @@
- /**  
- * @Page:  普通基金产品详情页_定投
- * @Author: caoqihai  
- * @Date:   2019-11-23
- * 
- */ 
+/**  
+* @Page:  普通基金产品详情页_定投
+* @Author: caoqihai  
+* @Date:   2019-11-23
+* 
+*/
 
 require('@pathIncludJs/vendor/config.js');
 
@@ -26,20 +26,20 @@ var splitUrl = require('@pathCommonJs/components/splitUrl.js');
 // var Clipboard = require('clipboard');
 
 
-$(function(){
+$(function () {
 
 	var regulatory = {
 
-		getElements : {
-			accountName : $('#accountName'),  //公共账户名称
-			name        : $('#name'),  //公募账户名
-			number      : $('#number'),  //账号
-			linenum     : $('#linenum'), //行号
-			openingBank : $("#openingBank"),  //开户行
-			topc      : $('#topc'),       //提示信息
+		getElements: {
+			accountName: $('#accountName'),  //公共账户名称
+			name: $('#name'),  //公募账户名
+			number: $('#number'),  //账号
+			linenum: $('#linenum'), //行号
+			openingBank: $("#openingBank"),  //开户行
+			topc: $('#topc'),       //提示信息
 		},
 
-		webinit:function(){
+		webinit: function () {
 			var that = this;
 
 			//
@@ -50,10 +50,56 @@ $(function(){
         /*
             绑定事件
          */
-        events: function() {
-            var that = this;
+		events: function () {
+			var that = this;
 
-        },
+			//开始时间
+			document.getElementById('starttime').addEventListener('tap', function () {
+				option = { "type": "date", "beginYear": "1980", "endYear": "2030" };
+				var picker = new mui.DtPicker(option);
+				picker.show(function (rs) {
+					console.log(rs.text)
+					// document.getElementById('starttime').innerHTML = rs.text;
+				});
+			}, false);
+
+
+			//选择银行卡
+			document.getElementById('bank').addEventListener('tap', function () {
+				var picker = new mui.PopPicker();
+				picker.setData([{
+					value: "first",
+					text: "第一项"
+				}, {
+					value: "second",
+					text: "第二项"
+				}, {
+					value: "third",
+					text: "第三项"
+				}, {
+					value: "fourth",
+					text: "第四项"
+				}, {
+					value: "fifth", 
+					text: "第五项"
+				}])
+				//picker.pickers[0].setSelectedIndex(4, 2000);
+				picker.pickers[0].setSelectedValue('first', 2000);
+				picker.show(function(SelectedItem) {
+					console.log(SelectedItem);
+					// $('.mui-poppicker').css('display','none')
+					picker.hide();
+					picker.dispose();
+				})
+			}, false);
+
+			// $('body').on('tap','.mui-poppicker-btn-cancel',function(){
+			// 	$('.mui-poppicker').css('display','none')
+			// }) 
+
+		},
+
+		
 
 	};
 	//调用函数

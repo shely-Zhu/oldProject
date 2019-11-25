@@ -27,14 +27,14 @@ var splitUrl = require('@pathCommonJs/components/splitUrl.js')();
 var tipAction = require('@pathCommonJsCom/tipAction.js');
 // var generateTemplate = require('@pathCommonJsComBus/generateTemplate.js');
 var transcationTem = require('../common/transcationTem.js');
-
+// 
 $(function() {
     var data = {
         getElements: {
             noData: $('.noData'), //没有数据的结构
             listLoading: $('.listLoading'), //所有数据区域，第一次加载的loading结构
             transTemp: $('#trans-template'), //模板
-            contentWrap: $('.contentWrap'), //内容区域
+            contentWrap: $('.contentWrapper li'), //内容区域
         },
         gV: { //一些设置
             aP: {
@@ -62,6 +62,9 @@ $(function() {
                 $('#HeadBarpathName').attr("data", '待确认交易').html('待确认交易');
             }
 
+            function openTipCon() {
+
+            }
             //事件监听
             that.events();
         },
@@ -115,11 +118,11 @@ $(function() {
                 $('.list').addClass('hasPullUp');
             });
         },
-        getData: function(t) {
+        getData: function(t, type) {
             var that = this;
 
-            var obj = [{ // 系统调仓记录列表
-                url: site_url.getConfirmTrade_api,
+            var obj = [{
+                url: site_url.getTradeList_api,
                 data: {
                     "pageNo": that.gV.aP.pageNo, //非必须，默认为1
                     "pageSize": "10", //非必须，默认为10
@@ -159,7 +162,7 @@ $(function() {
                         // 页面++
                         that.gV.aP.pageNo++;
                         // 将列表插入到页面上
-                        transcationTem(data, that.getElements.contentWrap, that.getElements.transTemp)
+                        transcationTem(data, that.getElements.contentWrap, that.getElements.transTemp, type)
 
                     }, 200)
 
@@ -182,7 +185,7 @@ $(function() {
                 that.gV.businessType = $(this).attr('data');
                 // $('.contentWrap').html('');
                 that.gV.aP.pageNo = 1;
-                that.getData();
+                that.getData(this, 1);
             })
         }
     };

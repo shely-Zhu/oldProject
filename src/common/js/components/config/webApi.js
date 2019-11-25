@@ -42,7 +42,9 @@ module.exports = function() {
     this.oldRecommendNew_api = http_url.web_url + '/account/oldRecommendNew'; // 微信公众号获取参数
     // 其他资产
     this.getJJSInTransitAssets_api = http_url.web_url + '/account/jjs/getJJSInTransitAssets'; // 查询金交所在途资产 
-    // 查询金交持仓资产、在途资产、总资产
+    //待确认，已确认列表
+    this.getTradeList_api = http_url.web_url + '/pef/getTradeList'
+        // 查询金交持仓资产、在途资产、总资产
     this.getJJSAssets_api = http_url.web_url + '/account/jjs/getJJSAssets';
     // jjs持仓明细查询
     this.queryAssetsDetailByPages_api = http_url.web_url + '/account/jjs/queryAssetsDetailByPages'
@@ -89,7 +91,7 @@ module.exports = function() {
 
     /*-------------------公募相关------------------------------*/
     this.query_api = http_url.web_url + '/pof/frontend/fund/query'; //热门诊断基金列表搜索
-    this.pofTotalAssets_api = http_url.web_url + '/account/pof/totalAssets';// 公募总资产
+    this.pofTotalAssets_api = http_url.web_url + '/account/pof/totalAssets'; // 公募总资产
 
     /*-------------------公募相关 end ------------------------------*/
 
@@ -126,13 +128,13 @@ module.exports = function() {
     this.getUserTrackRecord_api = http_url.web_url + '/account/getUserTrackRecord';
 
     //会员权益详情-获取会员权益详情
-    this.findBenefitByLevel_api=http_url.web_url + '/content/findBenefitByLevel';
- 
+    this.findBenefitByLevel_api = http_url.web_url + '/content/findBenefitByLevel';
+
     //文章模板接口
-//  this.getArticle_api = http_url.web_url + '/account/articleExample';
-    this.getArticle_api = http_url.web_url + '/content/frontend/getArticle';	
+    //  this.getArticle_api = http_url.web_url + '/account/articleExample';
+    this.getArticle_api = http_url.web_url + '/content/frontend/getArticle';
     //信息披露
-    this.queryReourceLabels_api = http_url.web_url + '/pef/queryReourceLabels';	
+    this.queryReourceLabels_api = http_url.web_url + '/pef/queryReourceLabels';
     this.queryReourceList_api = http_url.web_url + '/pef/queryReourceList';
     //修改分红方式接口
     this.updateDividend_api = http_url.web_url + '/pof/dividend/updateDividend';
@@ -150,25 +152,27 @@ module.exports = function() {
     this.getActivitiesList_api = http_url.web_url + '/marketing/activity/getActivitiesList';
     //会员俱乐部-活动-城市定位列表-根据城市类型或者首字母获取城市list
     this.cityList_api = http_url.web_url + '/marketing/activity/cityList';
+    //明星理财师-活动-城市定位列表-根据城市类型或者首字母获取城市list
+    this.cityListStar_api = http_url.web_url + '/account/brokerCity/frontend/queryBrokerCity';
 
     //会员俱乐部-活动列表-获取城市定位
     this.getCity_api = http_url.web_url + '/marketing/frontend/getCity';
 
-   /*------------------- 私募 start ------------------------------*/
+    /*------------------- 私募 start ------------------------------*/
     //私募历史明细
-    this.curveHistoryList_api =http_url.web_url +'/account/positions/curveHistoryList' ;
-    this.yieldAssignList_api =http_url.web_url +'/account/positions/yieldAssignList' ;
-    this.dealDetailList_api =http_url.web_url +'/account/positions/dealDetailList' ;
+    this.curveHistoryList_api = http_url.web_url + '/account/positions/curveHistoryList';
+    this.yieldAssignList_api = http_url.web_url + '/account/positions/yieldAssignList';
+    this.dealDetailList_api = http_url.web_url + '/account/positions/dealDetailList';
 
     //产品档案
-    this.productRecord_api =http_url.web_url +'/account/positions/productRecord' ;
+    this.productRecord_api = http_url.web_url + '/account/positions/productRecord';
     //公募交易明细
     this.queryTradeApplyByCode_api = http_url.web_url + '/account/pof/queryTradeApplyByCode'; //热门诊断基金列表搜索
-     /*------------------- 消息中心 end ------------------------------*/
+    /*------------------- 消息中心 end ------------------------------*/
 
-    this.assetsDetail_api =http_url.web_url +'/account/positions/assetsDetail' ; // 资产详情
-    this.earningCurve_api =http_url.web_url +'/account/positions/earningCurve' ; // 收益走势
-    this.queryHistoryNetValue_api =http_url.web_url +'/account/positions/queryHistoryNetValue' ; // 净值走势
+    this.assetsDetail_api = http_url.web_url + '/account/positions/assetsDetail'; // 资产详情
+    this.earningCurve_api = http_url.web_url + '/account/positions/earningCurve'; // 收益走势
+    this.queryHistoryNetValue_api = http_url.web_url + '/account/positions/queryHistoryNetValue'; // 净值走势
 
     /*------------------- 私募 end ------------------------------*/
 
@@ -189,7 +193,7 @@ module.exports = function() {
 
     /*------------------- 月度报告 start ------------------------------*/
 
-     // 月度报告
+    // 月度报告
     this.queryMonthlyReport_api = http_url.web_url + '/account/queryMonthlyReport';
     //  持仓总览
     this.queryInvestProdHoldShareList_api = http_url.web_url + '/account/report/queryInvestProdHoldShareList';

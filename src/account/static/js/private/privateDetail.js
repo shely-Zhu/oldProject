@@ -34,6 +34,8 @@ $(function() {
 			projectType : splitUrl['projectType'],
 			projectId: splitUrl['projectId'],
 			isAllowRedemption: splitUrl['isAllowRedemption'],
+			ecFileName: '',
+			ecFileUrl: '',
 			qrnhWfsy: {
 				oneMonth : {},
 				threeMonth: {},
@@ -107,18 +109,20 @@ $(function() {
 			var that = this;
 			var projectType = Number(that.data.projectType)
 			switch(projectType) {
-				case 0: var params = {category: 'rule_wenjin',operationType: 0};break;
-				case 1: var params = {category: 'rule_wenyu',operationType: 0};break;
-				case 4: var params = {category: 'rule_zhengquan',operssationType: 0};break;
+				case 0: var params = {category: 'rule_wenjin'};break;
+				case 1: var params = {category: 'rule_wenyu'};break;
+				case 4: var params = {category: 'rule_zhengquan'};break;
 			}
 			//产品详情接口
 			var obj = [{
 			    url: site_url.findLatestContentByCategory_api, 
 			    data: params,
 			    needLogin: true,
+			    contentTypeSearch: true,
 			    callbackDone: function(json) {
-			    	that.data.redeemRule = json.data.introduction.split("=====");
+			    	that.data.redeemRule = json.data.introduction.replace(/\r\n/g,"").split("=====");
 			    	// 判断是否有快速赎回规则
+			    	console.log(that.data.redeemRule)
 			    	if(that.data.redeemRule.indexOf("快赎规则") !== -1) {
 			    		that.setRedeemRule(1)
 			    	} else {  // 只有普通赎回规则
@@ -174,6 +178,8 @@ $(function() {
 			    	var jsonData = json.data;
 			    	//设置数据到页面上
 			    	that.setDomData( jsonData );
+			    	that.data.ecFileName = jsonData.ecFileName;
+			    	that.data.ecFileUrl = jsonData.ecFileUrl;
 			    	//请求其他接口
 			    	if( (that.data.projectType == 0) || (that.data.projectType == 1) ){ 
 			    		//稳金类项目，请求七日年化/万份收益折线图
@@ -601,6 +607,54 @@ $(function() {
 					$('.topContent').addClass('open');
 					$('.typeWrap openWrap').show();
 				}
+            })
+            // 交易明细，基金确认书，收益明细等点击跳转
+            $(document).on('click', '.single', function(e) {
+            	if($(this).find(".txt").html() == '交易明细') { // 私募交易明细页面
+            		window.location.href = site_url.transactionDetail_url + '?projectId=' + that.data.projectId;
+            	} else if ($(this).find(".txt").html() == '收益分配明细') { // 私募收益明细页面
+            		window.location.href = site_url.incomeDistribution_url + '?projectId=' + that.data.projectId;
+            	} else if ($(this).find(".txt").html() == '基金确认书') { // 基金确认书页面
+            		window.location.href = site_url.privateFundPdf_url + '?projectId=' + that.data.projectId + '&ecFileName=' + that.data.ecFileName + '&ecFileUrl=' + that.data.ecFileUrl;
+            	}
+            })
+            $(document).on('click', '.double>div', function(e) {
+            	if($(this).find(".txt").html() == '交易明细') { // 私募交易明细页面
+            		window.location.href = site_url.transactionDetail_url + '?projectId=' + that.data.projectId;
+            	} else if ($(this).find(".txt").html() == '收益分配明细') { // 私募收益明细页面
+            		window.location.href = site_url.incomeDistribution_url + '?projectId=' + that.data.projectId;
+            	} else if ($(this).find(".txt").html() == '基金确认书') { // 基金确认书页面
+            		window.location.href = site_url.privateFundPdf_url + '?projectId=' + that.data.projectId + '&ecFileName=' + that.data.ecFileName + '&ecFileUrl=' + that.data.ecFileUrl;
+            	}
+            })
+            $(document).on('click', '.treble>.actionCon', function(e) {
+            	if($(this).find(".txt").html() == '交易明细') { // 私募交易明细页面
+            		window.location.href = site_url.transactionDetail_url + '?projectId=' + that.data.projectId;
+            	} else if ($(this).find(".txt").html() == '收益分配明细') { // 私募收益明细页面
+            		window.location.href = site_url.incomeDistribution_url + '?projectId=' + that.data.projectId;
+            	} else if ($(this).find(".txt").html() == '基金确认书') { // 基金确认书页面
+            		window.location.href = site_url.privateFundPdf_url + '?projectId=' + that.data.projectId + '&ecFileName=' + that.data.ecFileName + '&ecFileUrl=' + that.data.ecFileUrl;
+            	}
+            })
+            // 历史明细点击跳转
+            $(document).on('click', '#historyDetailBtn', function(e) {
+            	window.location.href = site_url.historyDetail_url + '?projectId=' + that.data.projectId;
+            })
+            // 净值明细点击跳转
+            $(document).on('click', '#netValueDetailBtn', function(e) {
+            	window.location.href = site_url.priNetWorthDetails_url + '?projectId=' + that.data.projectId;
+            })
+            // 交易规则点击跳转
+            $(document).on('click', '#transactionRuleBtn', function(e) {
+            	window.location.href = site_url.transactionRules_url + '?projectId=' + that.data.projectId;
+            })
+            // 产品档案点击跳转
+            $(document).on('click', '#productFilesBtn', function(e) {
+            	window.location.href = site_url.productFiles_url + '?projectId=' + that.data.projectId;
+            })
+            // 信息披露点击跳转
+            $(document).on('click', '#productFilesBtn', function(e) {
+            	window.location.href = site_url.informationDisclosure_url + '?projectId=' + that.data.projectId;
             })
             //折线图点击月份请求数据
 			$(document).on('click', '.lineWrap .time', function(e) {
