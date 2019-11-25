@@ -178,8 +178,8 @@ $(function() {
 			    	var jsonData = json.data;
 			    	//设置数据到页面上
 			    	that.setDomData( jsonData );
-			    	jsonData.ecFileName && that.data.ecFileName = jsonData.ecFileName;
-			    	jsonData.ecFileUrl && that.data.ecFileUrl = jsonData.ecFileUrl;
+			    	that.data.ecFileName = jsonData.ecFileName;
+			    	that.data.ecFileUrl = jsonData.ecFileUrl;
 			    	//请求其他接口
 			    	if( (that.data.projectType == 0) || (that.data.projectType == 1) ){ 
 			    		//稳金类项目，请求七日年化/万份收益折线图
