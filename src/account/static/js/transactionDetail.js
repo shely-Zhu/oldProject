@@ -12,6 +12,7 @@ require('@pathCommonJs/ajaxLoading.js');
 var tipAction = require('@pathCommonJs/components/tipAction.js');
 var splitUrl = require('@pathCommonJs/components/splitUrl.js')();
 var generateTemplate = require('@pathCommonJsComBus/generateTemplate.js');
+var splitUrl = require('@pathCommonJs/components/splitUrl.js')();
 $(function() {
 
     var somePage = {
@@ -26,6 +27,7 @@ $(function() {
             pageCurrent: 1, //当前页码，默认为1
             pageSize: 10,
             listLength: 0,
+            projectId: splitUrl['projectId'],
         },
         init: function() {
             var that = this;
@@ -47,7 +49,7 @@ $(function() {
                     up: {
                         //auto: false,
                         contentrefresh: '拼命加载中',
-                        contentnomore: '没有更多了', //可选，请求完毕若没有更多数据时显示的提醒内容；
+                        contentnomore: '暂无更多数据', //可选，请求完毕若没有更多数据时显示的提醒内容；
                         callback: function() {
                             //执行ajax请求
                             that.getData(this);
@@ -88,7 +90,7 @@ $(function() {
                 data: { 
                     "pageNo": that.gV.pageCurrent, //非必须，默认为1
                     "pageSize": "10",//非必须，默认为10
-                    "projectId": "20767",//项目id
+                    "projectId": that.gV.projectId,//项目id
                 },
                 //async: false,
                 needDataEmpty: true,
@@ -137,6 +139,8 @@ $(function() {
                                 len[i].tradeType = "分红"
                             }
                         }
+                          //去掉mui-pull-bottom-pocket的mui-hidden
+                          $('.contentWrapper').find('.mui-pull-bottom-pocket').removeClass('mui-hidden');
                         // 将列表插入到页面上
                         generateTemplate(data, that.$e.recordList, that.$e.adjustmentTemp);
                         console.log(that.gV.pageCurrent)

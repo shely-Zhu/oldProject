@@ -33,6 +33,11 @@ var pathTitle=[
     },
     {
         pathName:"收益明细" 
+    },
+    {
+        pathName:"现金管理" 
+    },{
+        pathName:'交易规则'
     }
 ]
 $(function(){

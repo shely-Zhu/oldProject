@@ -14,13 +14,14 @@
     @@include('@pathCommonViews/loading/listLoading.html')
     <div class="list">
         <div class="contentWrapper">
-            <div class="contentWrap">
-                <!-- 放置列表 -->
-            </div>
-            <div class="nodata">
-                暂无更多内容
-            </div>
-            @@include('@pathCommonViews/goTop.html')
+            <ul class="mui-table-view">
+                <li class="mui-table-view-cell">
+                    <div class="contentWrap">
+                            <!-- 放置列表 -->
+                    </div>
+                </li>
+                @@include('@pathCommonViews/goTop.html')
+            </ul>
         </div>
     </div>
     <div class="noDataMore">

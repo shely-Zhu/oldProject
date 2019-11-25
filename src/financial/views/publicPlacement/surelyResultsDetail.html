@@ -1,0 +1,84 @@
+<!-- 定投结果 
+ @author wangjiajia 2019-11-23
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	@@include('@pathInclude/views/meta.html') 
+	<link rel="stylesheet" href="/Financial/static/css/publicPlacement/surelyResultsDetail.css">  
+	<title>转入结果</title>
+</head>
+<body>
+	<!-- @@include('@pathCommonViews/load.html')
+        @@include('@pathCommonViews/noData.html')
+        @@include('@pathCommonViews/loading/listLoading.html') -->
+    @@include('@pathCommonViews/headBarConfig.html',{"bgColors":"#2C3E77,#273971","showType":"0","pathName":"转入结果"}) 
+    <div class="resultsWrap">
+      <div class="resultTop">
+        <div class="topContent">
+            <div class="buyStatus">
+                <h1>10,000.00 <span>元</span></h1>
+                <p class="buyStatusText">待汇款金额</p>
+            </div>
+        </div>
+      </div>
+      <div class="accountPayee">
+            <div class="accountPayeeTitle">
+                收款账户
+            </div>
+            <div class="mianContenTitle">
+                    请使用 <span>招商银行 尾号8304</span>向以下账户汇款 
+            </div>
+            <div class="mainContent">
+                <dl class="commonElasticLayer">
+                    <dt>户名</dt>
+                    <dd>北京恒天明泽基金销售有限公司公募代销账号</dd>
+                </dl>
+                <dl>
+                    <dt>账户</dt>
+                    <dd>1111 1111 1111 1111</dd>
+                </dl>
+                <dl>
+                    <dt>行号</dt>
+                    <dd>231312323</dd>
+                </dl>
+                <dl>
+                    <dt>开户行</dt>
+                    <dd>浦发银行北京莱户营支行</dd>
+                </dl>
+            </div>
+
+      </div>
+      <div class="listWrap">
+        <div class="listContent">
+            <ul class="listContentUl">
+              <li class="textcolor">买入基金</li>
+              <li>现金宝产品1</li>
+            </ul>
+            <ul class="listContentUl">
+                <li class="textcolor">买入金额</li>
+                <li>10,000.00</li>
+            </ul>
+            <ul class="listContentUl">
+                <li class="textcolor">支付方式</li>
+                <li class="bank"> 中国建设银行0563</li>
+                <li class="onlinePay"><span>在线支付</span></li>
+            </ul>
+            <ul class="listContentUl changeNone">
+                <li class="textcolor">转入时间</li>
+                <li > 2019-09-01 24:00</li>
+            </ul>
+        </div>
+      </div>
+      <!-- 头部完成定位 -->
+      <div class="over">
+           完成
+      </div>
+    </div>
+
+	@@include('@pathInclude/views/footer.html')
+	<!-- 添加埋点 -->
+	@@include('@pathInclude/views/header.html')
+    <script src="/Financial/static/js/publicPlacement/surelyResultsDetail.js"></script>
+</body>
+</html>

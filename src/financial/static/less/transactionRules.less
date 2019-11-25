@@ -1,0 +1,143 @@
+// 交易规则
+// @time 2019-11-23
+
+@import url("../../../include/css/mui.min.css");
+@import url('@pathCommonLess/mui/resetMUI.less');
+@import url("@pathCommonLess/reset.less");
+@import url("@pathCommonLess/color.less");
+
+@import url("@pathCommonLessCom/headBarConfig.less");
+
+
+.floatRight{
+	float: right;
+	margin-right: 0.3rem;
+}
+.fontWeight{
+	float: right;
+	margin-right: 0.2rem;
+	font-weight: bold;
+}
+
+.transactionRules{
+	.tradeState{
+		margin-top: 0.3rem;
+		background: @c005;
+		padding-left: 0.3rem;
+		font-size: 0.32rem;
+	}
+	.tradeStateTitle{
+		width: 100%;
+		height: 1rem;
+		line-height:1rem;
+		border-bottom: 1px solid rgba(231,233,237,1);
+		color: @272727;
+	}
+	.tradeStateList{
+		li{
+			width: 100%;
+			height: 1rem;
+			line-height: 1rem;
+			border-bottom: 1px solid rgba(231,233,237,1);
+			color: @272727;
+		}
+	}
+	.tradeRateList{
+		margin-right: 0.3rem;
+		border-bottom: 1px solid rgba(231,233,237,1);
+		.tradeRate{
+			width: 100%;
+			.tradeRateTitle{
+				font-size: 0.28rem;
+				color: @272727;
+				margin: 0.3rem 0;
+			}
+			.tradeRateBuy{
+				width: 100%;
+				height: 0.6rem;
+				line-height: 0.6rem;
+				margin-bottom: 0.1rem;
+				font-size: 0.28rem;
+				color: @4A4A4A;
+				background:rgba(248,249,252,1);
+				border-radius: 0.06rem;
+			}
+		}
+	}
+	.warningTape{
+		margin: 0.3rem auto 0.6rem;
+		font-size: 0.28rem;
+		text-align: center;
+		color:@9B9B9B;
+	}
+	.purchaseState{
+		margin-top: 0.3rem;
+		background: @c005;
+		font-size: 0.32rem;
+		.tradeStateTitle{
+			padding-left:0.3rem;
+		}
+	}
+	.line_area {
+		height: 1.78rem;
+		display: flex;
+		width: 100%;
+		padding: 0 0.3rem;
+		position: relative;
+		.line_area_left {
+			flex: 1;
+		}
+		.line_area_mid {
+			flex: 1;
+			text-align: center;
+			.mid {
+				background-position: center;
+			}
+		}
+		.line_area_right {
+			flex: 1;
+			text-align: right;
+			.mid {
+				background-position: right;
+			}
+		}
+		.top {
+			font-size: 0.28rem;
+			color: @9B9B9B;
+			margin-top: .3rem
+		}
+		.mid {
+			height: .3rem;
+			margin-top: 0.08rem;
+			background: url("/financial/static/img/public_detail_point.png")no-repeat;
+			background-size: .3rem;
+		}
+		.bottom {
+			margin-top: 0.08rem;
+			font-size: 0.28rem;
+			color: @272727;
+		}
+		.line_left {
+			position: absolute;
+			height: .06rem;
+			width: 37%;
+			left: .7rem;
+			top: .9rem;
+			background: linear-gradient(to right, @6C83C9, @061D6A);
+		}
+		.line_right {
+			position: absolute;
+			height: .06rem;
+			width: 37%;
+			right: .7rem;
+			top: .9rem;
+			background: linear-gradient(to right, @6C83C9, @061D6A);
+		}
+	}
+	.stateTip{
+		padding:0 0.3rem 0.3rem 0.3rem;
+		font-size: 0.28rem;
+		color:@9B9B9B;
+	}
+
+}

@@ -8,7 +8,7 @@ require('@pathCommonJs/ajaxLoading.js');
 var tipAction = require('@pathCommonJs/components/tipAction.js');
 var splitUrl = require('@pathCommonJs/components/splitUrl.js')();
 var generateTemplate = require('@pathCommonJsComBus/generateTemplate.js');
-
+var splitUrl = require('@pathCommonJs/components/splitUrl.js')();
 $(function() {
 
     var somePage = {
@@ -23,6 +23,7 @@ $(function() {
             pageCurrent: 1, //当前页码，默认为1
             pageSize: 10,
             listLength: 0,
+            projectId: splitUrl['projectId'],
         },
         init: function() {
             var that = this;
@@ -33,12 +34,11 @@ $(function() {
         //初始化mui的上拉加载
         initMui: function() {
             var that = this;
-
             var height = windowHeight - $(".title").height() - $(".topTitle").height();
             if (!$('.list').hasClass('setHeight')) {
                 $('.list').height(height).addClass('setHeight');
             }
-
+            console.log(height)
             mui.init({
                 pullRefresh: {
                     container: '.contentWrapper',
@@ -86,7 +86,7 @@ $(function() {
                 data: {
                     "pageNo": that.gV.pageCurrent, //非必须，默认为1
                     "pageSize": 10,//非必须，默认为10
-                    "projectId":20354,//项目编号
+                    "projectId":that.gV.projectId,//项目编号
                 },
                 //async: false,
                 needDataEmpty: true,
@@ -125,7 +125,8 @@ $(function() {
 
                         // 页面++
                         that.gV.pageCurrent++;
-
+                        //去掉mui-pull-bottom-pocket的mui-hidden
+                        // $('.contentWrapper').find('.mui-pull-bottom-pocket').removeClass('mui-hidden');
                         // 将列表插入到页面上
                         generateTemplate(data, that.$e.recordList, that.$e.adjustmentTemp);
 

@@ -1,0 +1,106 @@
+<!-- 我的定投_定投详情页面 -->
+<!-- author: caiwenqi
+	time:2019/11/23 -->
+<!DOCTYPE html>
+<html>
+
+<head>
+    @@include('@pathInclude/views/meta.html')
+    <link rel="stylesheet" href="/financial/static/css/castSurely_details.css">
+    <title>我的定投_定投详情</title>
+</head>
+
+<body>
+    <!--加载图标-->
+    <!-- @@include('@pathCommonViews/load.html')  -->
+    <!--没有数据显示图标-->
+    <!-- @@include('@pathCommonViews/noDataImg.html') -->
+    <!--列表加载显示图标-->
+    <!-- @@include('@pathCommonViews/loading/listLoading.html') -->
+    <!--公共页面头部-->
+    @@include('@pathCommonViews/headBarConfig.html',{"pathName":"定投详情","bgColors":"#384B85,#112258","showType":"1"})
+    <section class="container">
+        <div class="banner">
+            <div class="bannerTop clearfix">
+                <span class="j_text">中融货币A 1111</span><span class="posRight"><a class="iconfont iconone" href="javascript:;">&#xe67d;</a></span>
+                <div class="type">
+                    <div>
+                        <p class="word_color">累计定投(元)</p>
+                        <p class="num_color">10,00.00</p>
+                    </div>
+                    <div class="box_right">
+                        <p class="word_color">已投期数</p>
+                        <p class="num_color">999</p>
+                    </div>
+                </div>
+                <div class="ipt">下次扣款日期 <span class="date_color">2020-01-11</span></div>
+            </div>
+        </div>
+        <div class="mid">
+            <div>
+                <div>
+                    进行中
+                </div>
+                <span class="fontSize4 posTop">10，000.00 元</span>
+                <span class="fontSize2">含手续费0.00元</span>
+            </div>
+            <ul>
+                <li>
+                    <span class="fontSize6">定投金额</span>
+                    
+                </li>
+                <li class="clearfix">
+                    <span class="fontSize6">支付方式</span>
+                    <span class="fontSize4"><img src="../../static/img/account_icon_bank logo.png" alt="">中国建设银行<span class="cardNo">0563</span><span class="onlinePayment">在线支付</spanspan><span>
+                </li>
+                <li>
+                    <span class="fontSize6">定投周期</span>
+                    <span class="fontSize4">每双周 周二</span>
+                </li>
+                <li>
+                    <span class="fontSize6">协议签订日期</span>
+                    <span class="fontSize4">2019-10-11</span>
+                </li>
+                <li>
+                    <span class="fontSize6">累计定投份额</span>
+                    <span class="fontSize4">100.00份</span>
+                </li>
+            </ul>
+        </div>
+        <div class="table_head">定投记录</div>    
+        <div class="table">
+            <div>
+                <span>2019-10-14</span>
+                <span>5000.00元</span>
+                <span class="state_succ">定投成功<a class="iconfont iconone" href="javascript:;">&#xe67d;</a></span>
+            </div>
+            <div class="is_fail">
+                <span>2019-10-14</span>
+                <span>5000.00元</span>
+                <span class="state_fail">定投失败<a class="iconfont iconone" href="javascript:;">&#xe67d;</a>
+                </span>
+                <span class="needPos">此处填写定投失败原因</span>
+            </div>
+            <div>
+                <span>2019-10-14</span>
+                <span>5000.00元</span>
+                <span class="state_succ">定投成功<a class="iconfont iconone" href="javascript:;">&#xe67d;</a></span>
+            </div>   
+        </div>
+        <!-- 加载中loading -->
+        @@include('@pathCommonViews/loading/listLoading.html')
+        <!-- 暂无数据 -->
+        @@include('@pathCommonViews/noDataImg.html',{"tipText":"暂无数据"})
+    </section>
+    <div class="footer">
+        <div>终止</div>
+        <div class="cen">暂停</div>
+        <div class="active">修改</div>
+    </div>
+    @@include('@pathInclude/views/footer.html')
+    <!-- 添加埋点 -->
+    @@include('@pathInclude/views/header.html')
+    <script src="/financial/static/js/publicPlacement/castSurely_details.js"></script>
+</body>
+
+</html>

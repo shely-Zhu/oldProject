@@ -30,7 +30,7 @@ $(function() {
       var obj = [{ // 系统调仓记录列表
           url: site_url.productRecord_api,
           data: {
-            "projectId":"",//项目编号
+            "projectId":"10103",//项目编号
           },
           //async: false,
           needDataEmpty: true,
