@@ -212,7 +212,7 @@ module.exports = {
     //修改分红方式页面
     './mine/static/js/bonusMethod': './src/mine/static/js/bonusMethod.js',
     //私募资产净值明细页面
-    './mine/static/js/priNetWorthDetails': './src/mine/static/js/priNetWorthDetails.js',
+    './account/static/js/priNetWorthDetails': './src/account/static/js/priNetWorthDetails.js',
     // 会员权益成长值记录
     './mine/static/js/membershipInterestsRecord': './src/mine/static/js/membershipInterestsRecord.js',
     // 会员权益详情
@@ -252,7 +252,7 @@ module.exports = {
     //已确认交易 公共js
     './account/static/js/common/transcationTem': './src/account/static/js/common/transcationTem.js',
     //待确认交易
-    // './account/static/js/private/tobeConfirmTransaction': './src/account/static/js/private/tobeConfirmTransaction.js',
+    './account/static/js/private/tobeConfirmTransaction': './src/account/static/js/private/tobeConfirmTransaction.js',
     //收益分配明细
     './account/static/js/private/incomeDistribution': './src/account/static/js/private/incomeDistribution.js',
     //公募资产
@@ -306,13 +306,43 @@ module.exports = {
     //普通基金定投结果
     './Financial/static/js/publicPlacement/surelyResults': './src/Financial/static/js/publicPlacement/surelyResults.js',
 
-    //我的定投_定投明细
-    './Financial/static/js/publicPlacement/castSurely_details' : './src/Financial/static/js/publicPlacement/castSurely_details.js',
-    //我的定投计划
-    './Financial/static/js/publicPlacement/myInvestmentPlan' : './src/Financial/static/js/publicPlacement/myInvestmentPlan.js',
-    //普通基金产品详情页_定投
-    './Financial/static/js/ordinarySetThrow' : './src/Financial/static/js/ordinarySetThrow.js',
+    //普通基金定投结果详情
+    './Financial/static/js/publicPlacement/surelyResultsDetail': './src/Financial/static/js/publicPlacement/surelyResultsDetail.js',
 
+    //我的定投_定投明细
+    './financial/static/js/publicPlacement/castSurely_detafils': './src/financial/static/js/publicPlacement/castSurely_details.js',
+    //我的定投计划
+    './Financial/static/js/publicPlacement/myInvestmentPlan': './src/Financial/static/js/publicPlacement/myInvestmentPlan.js',
+    //活期理财
+    './Financial/static/js/publicPlacement/demandFinancing': './src/Financial/static/js/publicPlacement/demandFinancing.js',
+    //普通基金产品详情页_定投
+    './financial/static/js/publicPlacement/ordinarySetThrow': './src/financial/static/js/publicPlacement/ordinarySetThrow.js',
+    //普通基金赎回
+    './financial/static/js/publicPlacement/redemptionBuy': './src/financial/static/js/publicPlacement/redemptionBuy.js',
     // 现金管理
-    './Financial/static/js/cashManagement' : './src/Financial/static/js/cashManagement.js',
+    './financial/static/js/publicPlacement/cashManagement': './src/financial/static/js/publicPlacement/cashManagement.js',
+
+    // 基本档案
+    './financial/static/js/publicPlacement/fundFile' : './src/financial/static/js/publicPlacement/fundFile.js',
+    //普通基金_基金档单_基金公司
+    './financial/static/js/publicPlacement/fundCompany' : './src/financial/static/js/publicPlacement/fundCompany.js',
+
+     // 基本档案
+    './financial/static/js/publicPlacement/cashTransformIn' : './src/financial/static/js/publicPlacement/cashTransformIn.js',
+
+     // 基本档案
+    './financial/static/js/publicPlacement/cashTransformOut' : './src/financial/static/js/publicPlacement/cashTransformOut.js',
+
+
+    // 基金经理
+    './financial/static/js/publicPlacement/fundManager': './src/financial/static/js/publicPlacement/fundManager.js',
+
+    // 交易规则
+    './financial/static/js/publicPlacement/transactionRules' : './src/financial/static/js/publicPlacement/transactionRules.js',
+
+    
+    // 私募产品详情页
+    './financial/static/js/privatePlacement/privatePlacementDetail' : './src/financial/static/js/privatePlacement/privatePlacementDetail.js'
+
+
 }
