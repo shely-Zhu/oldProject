@@ -346,6 +346,8 @@ module.exports = {
     // 私募产品详情页
     './financial/static/js/privatePlacement/privatePlacementDetail' : './src/financial/static/js/privatePlacement/privatePlacementDetail.js',
     // 财富学院早知道
-    './homePage/static/js/fortuneFlowKnown' : './src/homePage/static/js/fortuneFlowKnown.js'
+    './homePage/static/js/fortuneFlowKnown' : './src/homePage/static/js/fortuneFlowKnown.js',
+    // 财富讲堂
+    './homePage/static/js/fortuneClassroom' : './src/homePage/static/js/fortuneClassroom.js'
 
 }
