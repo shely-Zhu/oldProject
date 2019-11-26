@@ -330,6 +330,9 @@ module.exports = {
      // 基本档案
     './financial/static/js/publicPlacement/cashTransformIn' : './src/financial/static/js/publicPlacement/cashTransformIn.js',
 
+    // 基金买入
+    './financial/static/js/publicPlacement/fundTransformIn' : './src/financial/static/js/publicPlacement/fundTransformIn.js',
+
      // 基本档案
     './financial/static/js/publicPlacement/cashTransformOut' : './src/financial/static/js/publicPlacement/cashTransformOut.js',
 
