@@ -14,7 +14,7 @@
 <body>
     @@include('@pathInclude/views/header.html')
     @@include('@pathCommonViews/headBarConfig.html',{"pathName":"交易记录","bgColors":"#475A95,#475A95","showType":"1"})
-    <div class="cancel_order hide">
+    <div class="cancel_order">
         撤单
     </div>
     <section class="container">
@@ -150,6 +150,7 @@
 
         <!-- 加载中loading -->
         @@include('@pathCommonViews/loading/listLoading.html')
+        @@include('@pathCommonViews/payPassword.html')
         <!-- 暂无数据 -->
         @@include('@pathCommonViews/noData.html',{"tipText":"暂无数据"})
 
@@ -162,6 +163,7 @@
     @@include('@pathInclude/views/header.html')
 
     <script src="/account/static/js/publicTradeDetail/publicTradeDetail.js"></script>
+    <script src="/account/static/js/public/payPassword.js"></script>
 </body>
 
 </html>

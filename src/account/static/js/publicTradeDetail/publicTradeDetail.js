@@ -47,7 +47,7 @@ $(function () {
             })
             $('.cancel_order').on('click', function(){
                 //去撤单 需要先输入交易密码 todo
-                $("#")
+                $("#passwordWrap").show();
                 cancelOrder();
             })
             $('').on('click', function(){
