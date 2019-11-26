@@ -12,15 +12,18 @@ var data = Mock.mock({
         totalPage: 20,
         total: 1000,
         tradeList: [{
+                projectId: 1,
                 projectName: '恒天稳谊16号私募投资基 ZYFG恒天稳谊16号私募投资基ZYFG申购', //项目名称
                 businessCompareReference: '', //业绩比较基准(业务类型为 0:认购 1:申购时精确查找业绩比较基准)
                 businessCompareReferenceMin: '', //业绩比较基准最小值
                 businessCompareReferenceMax: '', //业绩比较基准最大值
-                businessType: 1, //业务类型 1:申购 2：赎回 3：分红 4：预约撤单 5：预约过期 6：转让已完成 7：受让已完成
+                businessType: 3, //业务类型 1:申购 2：赎回 3：转让已完成 4：受让已完成 5：分红 6：预约撤单 7：预约过期
                 confirmAmount: '10,000', //确认金额
                 confirmShare: '1,000', //确认份额
                 confirmDate: '2019-09-09', //确认日期
                 reserveAmount: 1000, //预约金额
+                assignOperationNo: '1', //取消转让按钮
+                assignStep: 1,
                 reserveTime: '2019-09-09', //预约时间
                 reserveStatus: 5, //预约状态 1：排队中，2：排队成功，3：已签约，4：合同审核成功，5：合同审核失败
                 reserveStatusDesc: '排队中', //1：排队中，2：排队成功，3：已签约，4：合同审核成功，5：合同审核失败
@@ -55,6 +58,7 @@ var data = Mock.mock({
                 rollInStatusDesc: '', //受让状态描述
             },
             {
+                projectId: 1,
                 projectName: '恒天稳谊16号私募投资基 ZYFG恒天稳谊16号私募投资基ZYFG赎回', //项目名称
                 businessCompareReference: '', //业绩比较基准(业务类型为 0:认购 1:申购时精确查找业绩比较基准)
                 businessCompareReferenceMin: '', //业绩比较基准最小值
@@ -93,6 +97,7 @@ var data = Mock.mock({
                 rollInStatusDesc: '', //受让状态描述
             },
             {
+                projectId: 3,
                 projectName: '恒天稳谊16号私募投资基 ZYFG恒天稳谊16号私募投资基ZYFG分红', //项目名称
                 businessCompareReference: '', //业绩比较基准(业务类型为 0:认购 1:申购时精确查找业绩比较基准)
                 businessCompareReferenceMin: '', //业绩比较基准最小值
@@ -132,6 +137,7 @@ var data = Mock.mock({
                 rollInStatusDesc: '', //受让状态描述
             },
             {
+                projectId: 4,
                 projectName: '恒天稳谊16号私募投资基 ZYFG恒天稳谊16号私募投资基ZYFG分红', //项目名称
                 businessCompareReference: '', //业绩比较基准(业务类型为 0:认购 1:申购时精确查找业绩比较基准)
                 businessCompareReferenceMin: '', //业绩比较基准最小值
@@ -171,6 +177,7 @@ var data = Mock.mock({
                 rollInStatusDesc: '', //受让状态描述
             },
             {
+                projectId: 5,
                 projectName: '恒天稳谊16号私募投资基 ZYFG恒天稳谊16号私募投资基ZYFG分红', //项目名称
                 businessCompareReference: '', //业绩比较基准(业务类型为 0:认购 1:申购时精确查找业绩比较基准)
                 businessCompareReferenceMin: '', //业绩比较基准最小值
@@ -249,6 +256,7 @@ var data = Mock.mock({
                 rollInStatusDesc: '', //受让状态描述
             },
             {
+                projectId: 1,
                 projectName: '恒天稳谊16号私募投资基 ZYFG恒天稳谊16号私募投资基ZYFG分红', //项目名称
                 businessCompareReference: '', //业绩比较基准(业务类型为 0:认购 1:申购时精确查找业绩比较基准)
                 businessCompareReferenceMin: '3.6', //业绩比较基准最小值

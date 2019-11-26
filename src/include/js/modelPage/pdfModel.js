@@ -21,10 +21,8 @@ var pdfModel={
 
 		// pdf转canvas
 		// var url = '/productPrivate/static/img/demo.pdf';
-		var marUrl = splitUrl()["type"];
 		var pageUrl = window.location.href;
 		var pdfId;
-		var objUrl,dataPdf;
 
 		if(pageUrl.indexOf('protocol') != -1){
 			pdfId = '132';
