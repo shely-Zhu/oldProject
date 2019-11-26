@@ -1,0 +1,73 @@
+<!-- /**  
+ * @Page:  财富流向早知道
+ * @Author: yanruiting 
+ * @Date:   2019-11-26
+ * 
+ */ -->
+ <!DOCTYPE html>
+ <html lang="en">
+ <head>
+     @@include('@pathInclude/views/meta.html')
+     <link rel="stylesheet" href="/homePage/static/css/fortuneClassroom.css">
+     <title>财富讲堂</title>
+ </head>
+ <body>
+     <!--加载图标-->
+     <!--@@include('@pathCommonViews/load.html')--> 
+     <!--没有数据显示图标-->
+     <!--@@include('@pathCommonViews/noDataImg.html')-->
+     <!--列表加载显示图标-->
+     <!--@@include('@pathCommonViews/loading/listLoading.html')-->
+     @@include('@pathCommonViews/headBarConfig.html',{"bgColors":"#384A81,#2A3C70","showType":"0","pathName":"财富讲堂"})
+     <div class="mui-slider" id="tabRoom">
+         <div class="mui-slider-indicator mui-segmented-control mui-segmented-control-inverted">
+               <a class="mui-control-item mui-active" href="#item1" belong="5">大咖直播<b class="borderBottom"></b></a>
+               <a class="mui-control-item" href="#item2" belong="6">知时讲堂<b></b></a>
+         </div>
+         <div class="mui-slider-group" id="drapUpWrapper">
+               <div id="item1" class="mui-slider-item mui-control-content mui-active">
+                    <div class="list">
+                         <div class="wrapper">
+                              <div class="classroomList">
+                                   <div class="classroomItem flex">
+                                       <div class="roomItem liveItem">
+                                             <div class="roomVideo">
+                                                  <img class="play" src="/homePage/static/img/bofang@2x.png" alt="">
+                                             </div>
+                                             <div class="roomTitle">如果牛市来了，你能挣到钱吗？</div>
+                                             <div class="roomContent">李世通·国开证券首席投资顾问</div>
+                                        </div>
+                                        <div class="roomItem item">
+                                             <div class="roomVideo">
+                                                  <img class="play" src="/homePage/static/img/bofang@2x.png" alt="">
+                                             </div>
+                                             <div class="roomTitle">如果牛市来了，你能挣到钱吗？</div>
+                                             <div class="roomContent">李世通·国开证券首席投资顾问</div>
+                                        </div> 
+                                   </div>
+                              </div>
+                         </div>
+                    </div>
+                    <!--  -->
+               </div>
+               <div id="item2" class="mui-slider-item mui-control-content">
+                    <div class="roomItem knowledgeItem">
+                         <div class="roomImg"><img src="/homePage/static/img/banner1@2x.png" alt=""></div>
+                         <div class="roomTitle">股市沉浮，拥有这些投资心态才能盈利</div>
+                         <div class="roomContent">国开证券首席投资顾问李世彤这样说！</div>
+                    </div>
+                    <div class="roomItem knowledgeItem">
+                         <div class="roomImg"><img src="/homePage/static/img/banner1@2x.png" alt=""></div>
+                         <div class="roomTitle">股市沉浮，拥有这些投资心态才能盈利</div>
+                         <div class="roomContent">国开证券首席投资顾问李世彤这样说！</div>
+                    </div>
+               </div>                 
+         </div>
+     </div>
+ 
+     @@include('@pathInclude/views/footer.html')
+     <!-- 添加埋点 -->
+     @@include('@pathInclude/views/header.html')
+     <script src="/homePage/static/js/fortuneClassroom.js"></script>
+</body>
+</html>
