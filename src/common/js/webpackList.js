@@ -275,7 +275,8 @@ module.exports = {
     './include/js/modelPage/articleTemplate': './src/include/js/modelPage/articleTemplate.js',
     // 了解恒天
     './homePage/static/js/understandHT': './src/homePage/static/js/understandHT.js',
-
+    // 财富学院
+    './homePage/static/js/fortuneCollegeList': './src/homePage/static/js/fortuneCollegeList.js',
     //私募资产详情
     './account/static/js/private/privateDetail': './src/account/static/js/private/privateDetail.js',
     //公募资产详情
@@ -300,6 +301,8 @@ module.exports = {
 
     // 现金宝详情页
      './account/static/js/public/cashTreasure':   './src/account/static/js/public/cashTreasure.js',
+    // 支付密码
+     './account/static/js/public/payPassword':   './src/account/static/js/public/payPassword.js',
     // 基金确认书
      './account/static/js/private/privateFundPdf':   './src/account/static/js/private/privateFundPdf.js',
 
@@ -313,7 +316,7 @@ module.exports = {
     './Financial/static/js/publicPlacement/surelyResultsDetail': './src/Financial/static/js/publicPlacement/surelyResultsDetail.js',
 
     //我的定投_定投明细
-    './financial/static/js/publicPlacement/castSurely_detafils': './src/financial/static/js/publicPlacement/castSurely_details.js',
+    './financial/static/js/publicPlacement/castSurely_details': './src/financial/static/js/publicPlacement/castSurely_details.js',
     //我的定投计划
     './Financial/static/js/publicPlacement/myInvestmentPlan': './src/Financial/static/js/publicPlacement/myInvestmentPlan.js',
     //活期理财
@@ -326,12 +329,27 @@ module.exports = {
     './financial/static/js/publicPlacement/cashManagement': './src/financial/static/js/publicPlacement/cashManagement.js',
 
     // 基本档案
-    './financial/static/js/publicPlacement/fundFile': './src/financial/static/js/publicPlacement/fundFile.js',
+    './financial/static/js/publicPlacement/fundFile' : './src/financial/static/js/publicPlacement/fundFile.js',
+    //普通基金_基金档单_基金公司
+    './financial/static/js/publicPlacement/fundCompany' : './src/financial/static/js/publicPlacement/fundCompany.js',
+
+     // 基本档案
+    './financial/static/js/publicPlacement/cashTransformIn' : './src/financial/static/js/publicPlacement/cashTransformIn.js',
+
+     // 基本档案
+    './financial/static/js/publicPlacement/cashTransformOut' : './src/financial/static/js/publicPlacement/cashTransformOut.js',
+
 
     // 基金经理
     './financial/static/js/publicPlacement/fundManager': './src/financial/static/js/publicPlacement/fundManager.js',
 
     // 交易规则
-    './financial/static/js/publicPlacement/transactionRules': './src/financial/static/js/publicPlacement/transactionRules.js'
+    './financial/static/js/publicPlacement/transactionRules' : './src/financial/static/js/publicPlacement/transactionRules.js',
+
+    
+    // 私募产品详情页
+    './financial/static/js/privatePlacement/privatePlacementDetail' : './src/financial/static/js/privatePlacement/privatePlacementDetail.js',
+    // 财富学院早知道
+    './homePage/static/js/fortuneFlowKnown' : './src/homePage/static/js/fortuneFlowKnown.js'
 
 }

@@ -5,24 +5,14 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
-	<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-	<meta name="applicable-device" content="mobile">
-	<meta content="telephone=no" name="format-detection"/>
-	<meta name="apple-mobile-web-app-capable" content="yes">
-	<meta name="apple-mobile-web-app-status-bar-style" content="black">
+	@@include('@pathInclude/views/meta.html')
 	<link rel="stylesheet" href="/include/css/pdfModel.css">
-	<script type="text/javascript" src="/include/js/adaptation_750ui.js"></script>
 	<title></title>
 </head>
 <body>
-	
-	<!-- @@include('@pathCommonViews/load.html') -->
+	@@include('@pathCommonViews/load.html')
 	<div class="container">
-		<div class="hraderTitle">
-			<span class="iconfont">&#xe634;</span>
-			<p id="pdfTitle"></p>
-		</div>
+		@@include('@pathCommonViews/headBarConfig.html',{"pathName":""})
 		<section id="openPdf">
 			
 			<section id="canvasBox">
@@ -40,7 +30,7 @@
 		};
 
 		var pageUrl = window.location.href;
-		var pdfTitle = document.getElementById('pdfTitle');
+		var pdfTitle = document.getElementById('HeadBarpathName');
 		if(pageUrl.indexOf('protocol') != -1){
 			pdfTitle.innerHTML = titleObj.protocol;
 		}

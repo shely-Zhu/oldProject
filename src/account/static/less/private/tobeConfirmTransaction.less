@@ -261,7 +261,7 @@
         font-size: 0.24rem;
         text-align: center;
         line-height: 0.5rem;
-        margin-right: 0.3rem;
+        margin-right: 0.1rem;
         padding: 0 0.36rem;
       }
     }
@@ -269,7 +269,7 @@
  // 淡黄色背景弹框
 .tipContainer{
   width: 5.4rem;
-  height: auto;
+  height: 3.2rem;
   background-image: linear-gradient(-220deg, #F5ECD5 0%, #F0DFBA 100%);
   border-radius: 0.14rem;
   position: fixed;
@@ -277,6 +277,7 @@
   left: 50%;
   margin-left: -2.7rem;
   margin-top: -1.9rem;
+  z-index: 1001;
   display: none;
   // 弹框标题
   .titleText{
@@ -294,7 +295,7 @@
       color: #272727;
       text-align: center;
       line-height: 0.45rem;
-      margin: 0 0.4rem 0.7rem;
+      margin: 0.87rem 0.4rem 0.7rem;
   }
   // 弹框按钮
   .buttonCon{
@@ -303,7 +304,8 @@
       border-bottom-left-radius: 0.14rem;
       border-bottom-right-radius: 0.14rem;
       font-size: 0.34rem;
-      position: relative;
+      position: absolute;
+      bottom: 0;
       a{
           width: 2.7rem;
           float: left;
