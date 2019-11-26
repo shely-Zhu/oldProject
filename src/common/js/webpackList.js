@@ -262,6 +262,9 @@ module.exports = {
     './homePage/static/js/noticeCenter': './src/homePage/static/js/noticeCenter.js',
     // 消息中心-系统通知
     './homePage/static/js/systemInforms': './src/homePage/static/js/systemInforms.js',
+
+    // 财富研究-财富讲堂
+    './homePage/static/js/wealthResearch': './src/homePage/static/js/wealthResearch.js',
     // 明星理财师-列表
     './homePage/static/js/starFinancialPlannerList': './src/homePage/static/js/starFinancialPlannerList.js',
     // 已报名活动
