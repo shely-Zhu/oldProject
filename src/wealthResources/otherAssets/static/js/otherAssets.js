@@ -1,8 +1,8 @@
 /*
  * @page: 其他资产(定融定投)
- * @Author: shiyunrui
- * @Date:   2019-7-3 11:54:51
- * @Last Modified by:   songxiaoyu
+ * @Author: peicc
+ * @Date:   2019-11
+ * @Last Modified by:
  * @description:
  * 2019-9-10 待确认资产添加
  */

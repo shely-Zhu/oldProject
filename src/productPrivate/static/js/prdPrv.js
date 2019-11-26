@@ -231,7 +231,7 @@ var prdPrv = {
                         }
 
                         if (el.netValueDate) {
-                            el.netValueDate = el.netValueDate.substr(el.netValueDate.indexOf("-") + 1, );
+                            el.netValueDate = el.netValueDate.substr(el.netValueDate.indexOf("-") + 1 );
                         }
                         if (Number(el.expectedProfitMax) <= Number(el.expectedProfitMin)) {
                             el.expectedProfitMax = 0;

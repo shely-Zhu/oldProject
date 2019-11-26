@@ -10,8 +10,15 @@
 var generateTemplate = require('@pathCommonJsComBus/generateTemplate.js');
 var splitUrl = require('@pathCommonJs/components/splitUrl.js')();
 var isConfirm = splitUrl['type'];
+// 预约变量
 var reserveOperationNoStr = '';
 var reserveOperationNoList = '';
+// 转让变量
+var assignOperationNoStr = '';
+var assignOperationNoList = '';
+// 受让变量
+var assigneeOperationNoStr = '';
+var assigneeOperationNoList = '';
 module.exports = function(data, $ele, $id, type) {
     var $ele = $ele || $('.contentWrap'),
         $id = $id || $('#trans-template');
@@ -22,7 +29,7 @@ module.exports = function(data, $ele, $id, type) {
         // 申购
         data[i].businessType1 = (data[i].businessType == 1) || (data[i].tobeBussinessType == 1) ? 1 : 0;
         //待确认的预约
-        // 按钮的字段
+        // 预约明细按钮的字段
         reserveOperationNoStr = data[i].reserveOperationNo;
         if (reserveOperationNoStr) {
             reserveOperationNoList = reserveOperationNoStr.split(',');
@@ -46,7 +53,8 @@ module.exports = function(data, $ele, $id, type) {
                 }
             }
         }
-        console.log(reserveOperationNoList)
+
+
         data[i].appointmentSigned = data[i].jfReserveStatus == 3 ? 1 : 0; //已签约
         data[i].appointmentSuccess = data[i].jfReserveStatus == 4 ? 1 : 0; //合同审核成功
         data[i].appointmentFailed = data[i].jfReserveStatus == 5 ? 1 : 0; //合同审核失败
@@ -63,13 +71,45 @@ module.exports = function(data, $ele, $id, type) {
         data[i].businessType67 = data[i].businessType == (6 || 7) ? 1 : 0;
         //转让
         data[i].businessType3 = (data[i].businessType == 3) || (data[i].tobeBussinessType == 3) ? 1 : 0;
+        // 转让按钮的字段
+        assignOperationNoStr = data[i].assignOperationNo;
+        if (assignOperationNoStr) {
+            assignOperationNoList = assignOperationNoStr.split(',');
+        }
+        if (assignOperationNoList.length > 0) {
+            for (var a = 0; a < assignOperationNoList.length; a++) {
+                if (assignOperationNoList[a] == '1') {
+                    data[i].assignCancel = true; //展示取消转让按钮
+                }
+                if (assignOperationNoList[a] == '2') {
+                    data[i].assignObj = true; //展示选择受让方
+                }
+                if (assignOperationNoList[a] == '3') {
+                    data[i].assignToVideo = true; //展示视频双录按钮
+                }
+            }
+        }
         //受让
         data[i].businessType4 = (data[i].businessType == 4) || (data[i].tobeBussinessType == 4) ? 1 : 0;
+        // 转让按钮的字段
+        assigneeOperationNoStr = data[i].assigneeOperationNo;
+        if (assigneeOperationNoStr) {
+            assigneeOperationNoList = assigneeOperationNoStr.split(',');
+        }
+        if (assigneeOperationNoList.length > 0) {
+            for (var b = 0; b < assigneeOperationNoList.length; b++) {
+                if (assignOperationNoList[b] == '1') {
+                    data[i].assigneeCancel = true; //展示取消受让按钮
+                }
+                if (assignOperationNoList[b] == '2') {
+                    data[i].assigneeObj = true; //展示视频双录按钮
+                }
+            }
+        }
         //是否签约中 展示转受让双录状态
         data[i].signing = (data[i].assignSubStatus == '05') || (data[i].assigneeSubStatus == '03') ? 1 : 0;
 
     }
-    console.log(data)
-        //模板渲染页面
+    //模板渲染页面
     generateTemplate(data, $ele, $id, type);
 };

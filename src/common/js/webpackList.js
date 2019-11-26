@@ -262,6 +262,9 @@ module.exports = {
     './homePage/static/js/noticeCenter': './src/homePage/static/js/noticeCenter.js',
     // 消息中心-系统通知
     './homePage/static/js/systemInforms': './src/homePage/static/js/systemInforms.js',
+
+    // 财富研究-财富讲堂
+    './homePage/static/js/wealthResearch': './src/homePage/static/js/wealthResearch.js',
     // 明星理财师-列表
     './homePage/static/js/starFinancialPlannerList': './src/homePage/static/js/starFinancialPlannerList.js',
     // 已报名活动
@@ -272,7 +275,8 @@ module.exports = {
     './include/js/modelPage/articleTemplate': './src/include/js/modelPage/articleTemplate.js',
     // 了解恒天
     './homePage/static/js/understandHT': './src/homePage/static/js/understandHT.js',
-
+    // 财富学院
+    './homePage/static/js/fortuneCollegeList': './src/homePage/static/js/fortuneCollegeList.js',
     //私募资产详情
     './account/static/js/private/privateDetail': './src/account/static/js/private/privateDetail.js',
     //公募资产详情
@@ -285,7 +289,7 @@ module.exports = {
     './account/static/js/super/superRecord': './src/account/static/js/super/superRecord.js',
 
     //自选公募资产详情
-    './account/static/js/optionalPublicDetail': './src/account/static/js/optionalPublicDetail.js',
+    './account/static/js/public/optionalPublicDetail': './src/account/static/js/public/optionalPublicDetail.js',
 
     // 自选公募交易记录
     './account/static/js/public/transactionRecords': './src/account/static/js/public/transactionRecords.js',
@@ -296,7 +300,10 @@ module.exports = {
     './account/static/js/public/superStreasureDetail': './src/account/static/js/public/superStreasureDetail.js',
 
     // 现金宝详情页
-    './account/static/js/public/cashTreasure': './src/account/static/js/public/cashTreasure.js',
+
+     './account/static/js/public/cashTreasure':   './src/account/static/js/public/cashTreasure.js',
+    // 支付密码
+     './account/static/js/public/payPassword':   './src/account/static/js/public/payPassword.js',
     // 基金确认书
     './account/static/js/private/privateFundPdf': './src/account/static/js/private/privateFundPdf.js',
 
@@ -310,7 +317,11 @@ module.exports = {
     './Financial/static/js/publicPlacement/surelyResultsDetail': './src/Financial/static/js/publicPlacement/surelyResultsDetail.js',
 
     //我的定投_定投明细
+<<<<<<< HEAD
     './financial/static/js/publicPlacement/castSurelyDetafils': './src/financial/static/js/publicPlacement/castSurelyDetafils.js',
+=======
+    './Financial/static/js/publicPlacement/castSurelyDetails': './src/Financial/static/js/publicPlacement/castSurelyDetails.js',
+>>>>>>> dfb6456d116893779f0579175947bd46432b09ac
     //我的定投计划
     './Financial/static/js/publicPlacement/myInvestmentPlan': './src/Financial/static/js/publicPlacement/myInvestmentPlan.js',
     //我的定投计划详情
@@ -347,7 +358,15 @@ module.exports = {
 
 
     // 私募产品详情页
+<<<<<<< HEAD
     './financial/static/js/privatePlacement/privatePlacementDetail': './src/financial/static/js/privatePlacement/privatePlacementDetail.js'
 
+=======
+    './financial/static/js/privatePlacement/privatePlacementDetail' : './src/financial/static/js/privatePlacement/privatePlacementDetail.js',
+    // 财富学院早知道
+    './homePage/static/js/fortuneFlowKnown' : './src/homePage/static/js/fortuneFlowKnown.js',
+    // 财富讲堂
+    './homePage/static/js/fortuneClassroom' : './src/homePage/static/js/fortuneClassroom.js'
+>>>>>>> dfb6456d116893779f0579175947bd46432b09ac
 
 }

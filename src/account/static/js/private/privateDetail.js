@@ -98,6 +98,7 @@ $(function() {
 				$(".redeemBtn").css("display", "block")
 			} else {
 				$(".midContent").css("padding-bottom", "0")
+				$(".footer").css("display", "none")
 			}
 			//获取页面初始数据
 			that.getData();
@@ -653,7 +654,7 @@ $(function() {
             	window.location.href = site_url.productFiles_url + '?projectId=' + that.data.projectId;
             })
             // 信息披露点击跳转
-            $(document).on('click', '#productFilesBtn', function(e) {
+            $(document).on('click', '#infoPublishBtn', function(e) {
             	window.location.href = site_url.informationDisclosure_url + '?projectId=' + that.data.projectId;
             })
             //折线图点击月份请求数据

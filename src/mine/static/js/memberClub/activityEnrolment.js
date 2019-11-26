@@ -23,9 +23,10 @@ $(function(){
 		$e:{
 			noData: $('.noData'), //没有数据的结构
             listLoading: $('.listLoading'), //所有数据区域，第一次加载的loading结构
-            ListSlot:$('.listHasData'),//插入已报名活动位置
+            ListSlot:$('.listHasData0'),//插入已报名活动位置
             ListSlot1:$('.listHasData1'),//插入已报名活动位置
             listTemp:$('#activityEn-template'),//已报名活动模板类名          
+            morelistTemp:$('#activityList-template'),//已报名活动模板类名          
 		},
 		gV:{
 			ListData: [
@@ -51,10 +52,10 @@ $(function(){
                 callbackDone: function(json) {
                     var dataList;
                     console.log(json.data)
-                    // 待定
-                    if (json.data.pageList.length == 0) { // 没有记录不展示
+                    // 待定 
+                    if (!$.util.isNull(json.data.pageList)) { // 没有记录不展示
                         if(num == 0){
-                            $('.listHasData .noData').show();
+                            $('.listHasData0 .noData').show();
                             return false;
                         }else{
                             $('.listHasData1 .noData').show();
@@ -77,6 +78,17 @@ $(function(){
                 },
                 callbackFail: function(json) {
                     tipAction(json.msg);
+                },
+                callbackNoData: function() {
+                    console.log(111)
+                    if(num == 0){
+                        $('.listHasData0 .noData').show();
+                        return false;
+                    }else{
+                        $('.listHasData1 .noData').show();
+                        return false;
+                    }
+
                 }
             }]
             $.ajaxLoading(obj);
@@ -90,10 +102,10 @@ $(function(){
                 $(this).addClass('active').siblings().removeClass('active');
                 window.scroll(0,0)
                 if(i == 0){
-                    $('.listHasData').show()
+                    $('.listHasData0').show()
                     $('.listHasData1').hide()
                 }else{
-                    $('.listHasData').hide()
+                    $('.listHasData0').hide()
                     $('.listHasData1').show()
                 }
             })

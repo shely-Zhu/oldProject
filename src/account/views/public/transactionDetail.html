@@ -1,73 +1,81 @@
-<!-- 自选公募-交易记录
- @author wangjiajia 2019-11-19
--->
-<!DOCTYPE html>
-<html lang="en">
-<head>
-	@@include('@pathInclude/views/meta.html') 
-	<link rel="stylesheet" href="/account/static/css/public/transactionDetail.css">  
-	<title>交易记录</title>
-</head>
-<body>
-	@@include('@pathCommonViews/load.html')
-        @@include('@pathCommonViews/noData.html')
-        @@include('@pathCommonViews/loading/listLoading.html')
-    @@include('@pathCommonViews/headBarConfig.html',{"bgColors":"#2C3E77,#273971","showType":"0","pathName":"交易记录"}) 
+<!-- 超宝-交易记录
+ @author wangjiajia 2019-11-20 -->
 
-        <div class="mui-slider" id="tabbar">
-            <div class="title">
-                <div class="mui-slider-indicator mui-segmented-control mui-segmented-control-inverted">
-                        <a class="mui-control-item mui-active"  href="#item1">买入<b class="borderBottom"></b></a>
-                        <a class="mui-control-item" href="#item2">定投<b></b></a>
-                        <a class="mui-control-item" href="#item3">分红<b></b></a>
-                        <a class="mui-control-item" href="#item4">赎回<b></b></a>
-                </div>
-            </div>
-		    <div class="mui-slider-group" id="drapUpWrapper">
-		        <div id="item1" class="mui-slider-item mui-control-content mui-active">				
-					<div class="list">
-						<div class="contentWrapper">
-							<div class="contentWrap">
-								<!-- 放置列表 -->
-							</div>
-							@@include('@pathCommonViews/goTop.html')
-						</div>
-					</div>          
-		        </div>
-		        <div id="item2" class="mui-slider-item mui-control-content">
-			           
-		        </div>
-		        <div id="item3" class="mui-slider-item mui-control-content">
-					<!-- 这是恒天简报区域 -->
-                </div>  
-                <div id="item4" class="mui-slider-item mui-control-content">
-                        <!-- 这是恒天简报区域 -->
-                </div>                   
-			</div>
-			
 
-			<script id="adjustment-template" type="text/x-handlebars-template">
-				{{#each this}}
-				<div class="content">
-						<ul class="contentUl">
-							<li>{{fundName}}</li>
-							<li class="changeColor">{{applyDate}}</li>
-						</ul>
-						<ul class="contentUl rightUl">
-							<li>{{balance}}</li>
-							<li class="changeColor">{{tradeApplyDesc}}</li>
-						</ul>
-					</div>
-				{{/each}}
-			</script>
-			<!-- <footer>
-				暂无更多数据
-			</footer> -->
-		</div>
 
-	@@include('@pathInclude/views/footer.html')
-	<!-- 添加埋点 -->
-	@@include('@pathInclude/views/header.html')
-    <script src="/account/static/js/public/transactionDetail.js"></script>
-</body>
-</html>
+ <!DOCTYPE html>
+ <html lang="en">
+ 
+ <head>
+	 @@include('@pathInclude/views/meta.html')
+	 <link rel="stylesheet" href="/account/static/css/public/transactionDetail.css">
+ 
+	 <title>交易记录</title>
+ </head>
+ 
+ <body>
+	 <div class="container">
+		 @@include('@pathCommonViews/headBarConfig.html',{"pathName":"交易记录"})
+		 <div class="br"></div>
+		 <div class="mui-content  myAsset">
+			 <!-- 放置页面内容 -->
+		 </div>
+		 <!-- 加载中loading -->
+		 @@include('@pathCommonViews/loading/listLoading.html')
+		 <!-- 暂无数据 -->
+		 @@include('@pathCommonViews/noDataImg.html',{"tipText":"暂无数据"})
+	 </div>
+ 
+	 <script id="first-template" type="text/x-handlebars-template">
+	 {{! 列表 内容 使用mui的上拉加载}}
+	 <div class="list">
+		 {{! list是包裹上拉加载区域的，在js中计算当前页面中的list高度，不能超出一屏}} {{! 初始化上拉加载区域，使用contentWrapper class}} {{! contentWrapper 需要添加样式，具体见less文件}}
+		 <div class="contentWrapper">
+ 
+			 <ul class="mui-table-view">
+				 <li class="mui-table-view-cell">
+					 {{! 所有内容 需要放在这个li里，且里面不能再用Li元素}} {{{content}}}
+ 
+				 </li>
+			 </ul>
+ 
+			 <!-- 返回顶部 -->
+			 @@include('@pathCommonViews/goTop.html')
+ 
+		 </div>
+	 </div>
+ </script>
+ 
+	 <script id="second-template" type="text/x-handlebars-template">
+	 {{! 左侧页面列表}}  {{#each pageList}}
+	 <div class="datalist">
+		 <div class="first">
+			 <div class="tit">{{fundName}}</div>
+			 <div class="mon">
+				 {{#if tobe}}
+				 +
+				 {{else}}
+				 -
+				 {{/if}}
+				 {{balance}}元
+			 </div>             
+		 </div>
+		 <div class="second">
+			 <div class="tim">{{originalDate}} {{orderDate}}</div>
+			 <div class="sta">{{tradeApplyDesc}}</div> 
+		 </div>
+	 </div>
+ 
+	 {{/each}} 
+ </script> 
+ <!-- 添加埋点 -->
+ @@include('@pathInclude/views/header.html')
+ @@include('@pathInclude/views/footer.html')
+ <script src="/account/static/js/public/transactionDetail.js"></script>
+ 
+ 
+ 
+ 
+ </body>
+ 
+ </html>
