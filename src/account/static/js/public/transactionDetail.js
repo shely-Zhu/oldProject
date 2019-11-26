@@ -1,5 +1,5 @@
-//  超宝基金产品-交易记录
-// @author caoqihai 2019-11-20 
+//  超宝-交易记录
+// @author wangjiajia 2019-11-20 
 
 require('@pathCommonJsCom/utils.js');
 //ajax调用
@@ -20,6 +20,7 @@ require('@pathCommonJs/components/elasticLayerTypeFive.js');
 require('@pathCommonJs/components/headBarConfig.js');
 //黑色提示条的显示和隐藏
 var tipAction = require('@pathCommonJsCom/tipAction.js');
+var splitUrl = require('@pathCommonJs/components/splitUrl.js')();
 
 
 $(function() {
@@ -37,7 +38,9 @@ $(function() {
             ],
             aP: {
                 pageCurrent: 1,
-                pageSize: 10,
+				pageSize: 10,
+				fundCode: splitUrl['fundCode'],
+				tradeNo: splitUrl['tradeNo'],
             },
             current_index: 0, //左右滑动区域的索引
             list_template: '', //列表的模板，生成后存放在这里
@@ -86,8 +89,8 @@ $(function() {
             $.each(that.gV.navList, function(i, el) {
                 
                 that.gV.ajaxArr[el.num] = {
-					fundCode:'00375',//现金宝基金代码
-					tradeNo:"",
+					fundCode:that.gV.aP.fundCode,//现金宝基金代码
+					tradeNo:that.gV.aP.tradeNo,
                     applyType:i,   //请求类型
                     pageCurrent: that.gV.aP.pageCurrent, //当前第几页(默认为1) 非必填项, 默认设置成第一页
                     pageSize: that.gV.aP.pageSize, //每页显示几条数据(默认10) 非必填项， 默认设置成20
