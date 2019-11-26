@@ -1,0 +1,88 @@
+<!-- /*
+ * @Author: sunfuping 
+ * @Date: 2019-11-25 20:15:39 
+ * @Last Modified by:   sunfuping 
+ * @Last Modified time: 2019-11-25 20:15:39 
+ * 财富研究
+ */ -->
+
+
+<!DOCTYPE html>
+<html>
+
+<head>
+    @@include('@pathInclude/views/meta.html')
+    <link rel="stylesheet" href="/homePage/static/css/wealthResearch.css">
+    <title>财富研究</title>
+</head>
+
+<body>
+    <!--加载图标-->
+    <!--@@include('@pathCommonViews/load.html')-->
+    <!--没有数据显示图标-->
+    <!--@@include('@pathCommonViews/noDataImg.html')-->
+    <!--列表加载显示图标-->
+    <!--@@include('@pathCommonViews/loading/listLoading.html')-->
+    @@include('@pathCommonViews/headBarConfig.html',{"pathName":"财富研究"})
+
+    <div class="mui-slider" id="tabHT">
+        <div class="mui-slider-indicator mui-segmented-control mui-segmented-control-inverted">
+            <a class="mui-control-item mui-active" href="#item1" belong="5">大类资产研究<b class="borderBottom"></b></a>
+            <a class="mui-control-item" href="#item2" belong="6">宏观策略<b></b></a>
+            <a class="mui-control-item" href="#item3" belong="7">宏观策略<b></b></a>
+            <a class="mui-control-item" href="#item4" belong="8">公募研究<b></b></a>
+        </div>
+        <div class="mui-slider-group" id="drapUpWrapper">
+            <div id="item1" class="mui-slider-item mui-control-content mui-active">
+                <ul class="">
+                    <li class="list_item clearfix">
+                        <div class="list_itemL">
+                            <p>QE（量化宽松）接棒降息，黄金能否在飞一程？</p>
+                            <span>2019-08-06</span>
+                        </div>
+                        <div class="list_itemR"><img src="/homePage/static/img/company@2x.png" alt=""></div>
+                    </li>
+                    <li class="list_item clearfix">
+                        <div class="list_itemL">
+                            <p>QE（量化宽松）接棒降息，黄金能否在飞一程？</p>
+                            <span>2019-08-06</span>
+                        </div>
+                        <div class="list_itemR"><img src="/homePage/static/img/company@2x.png" alt=""></div>
+                    </li>
+                    <li class="list_item clearfix">
+                        <div class="list_itemL">
+                            <p>QE（量化宽松）接棒降息，黄金能否在飞一程？</p>
+                            <span>2019-08-06</span>
+                        </div>
+                        <div class="list_itemR"><img src="/homePage/static/img/company@2x.png" alt=""></div>
+                    </li>
+                    <li class="list_item clearfix">
+                        <div class="list_itemL">
+                            <p>QE（量化宽松）接棒降息，黄金能否在飞一程？</p>
+                            <span>2019-08-06</span>
+                        </div>
+                        <div class="list_itemR"><img src="/homePage/static/img/company@2x.png" alt=""></div>
+                    </li>
+                </ul>
+
+            </div>
+            <div id="item2" class="mui-slider-item mui-control-content">
+                这是公司荣誉区域
+            </div>
+            <div id="item3" class="mui-slider-item mui-control-content">
+                这是风控体系区域
+            </div>
+            <div id="item4" class="mui-slider-item mui-control-content">
+                这是安全认证区域
+            </div>
+        </div>
+    </div>
+
+    @@include('@pathInclude/views/footer.html')
+    <!-- 添加埋点 -->
+    @@include('@pathInclude/views/header.html')
+    <script src="/homePage/static/js/wealthResearch.js"></script>
+    <!-- <script src="/acount/static/js/informationDisclosure.js"></script> -->
+</body>
+
+</html>
