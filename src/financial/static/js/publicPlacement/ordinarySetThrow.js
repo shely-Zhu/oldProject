@@ -27,6 +27,8 @@ var splitUrl = require('@pathCommonJs/components/splitUrl.js');
 //引入下拉列表选择器
 var popPicker = require('@pathCommonJsCom/popPicker.js');
 
+var provinceList = require('../../../../common/json/cycle.js');
+
 
 $(function () {
 

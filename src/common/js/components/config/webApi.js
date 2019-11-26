@@ -94,7 +94,6 @@ module.exports = function () {
     this.query_api = http_url.web_url + '/pof/frontend/fund/query'; //热门诊断基金列表搜索
     this.pofTotalAssets_api = http_url.web_url + '/account/pof/totalAssets'; // 公募总资产
 
-
     /*-------------------公募相关 end ------------------------------*/
 
 
@@ -226,14 +225,13 @@ module.exports = function () {
     // 报告分析（报告明细）
     this.queryInvestReportDetail_api = http_url.web_url + '/account/report/queryInvestReportDetail';
 
-    // 公募总资产（包含资产交易明细）
-    this.totalAssets_api = http_url.web_url + '/account/pof/totalAssets';
-    // 金服WEB-详情页-基金净值走势图查询
-    this.fundNetWorthTrendChart_api = http_url.web_url + '/pof/fundDetails/frontend/fundNetWorthTrendChart';
     // 立即咨询
     this.reportContactNow_api = http_url.web_url + '/account/report/reportContactNow';
+    
     /*------------------- 月度报告 end ------------------------------*/
 
+    // 金服WEB-详情页-基金净值走势图查询
+    this.fundNetWorthTrendChart_api = http_url.web_url + '/pof/fundDetails/frontend/fundNetWorthTrendChart';
 
     // 超宝基金产品-交易记录
     this.queryTradeList_api = http_url.web_url + '/account/pof/cash/queryTradeList';
@@ -248,9 +246,6 @@ module.exports = function () {
     /*------------------- 基金确认书 start ------------------------------*/
     this.downloadFile_api = http_url.web_url + '/content/file/mount/download'; //下载pdf
     this.sendMailForConfirmBill_api = http_url.web_url + '/account/positions/sendMailForConfirmBill'; //下载pdf
-
-
-    /*------------------- 月度报告 end ------------------------------*/
 
     /*------------------- 私募理财fang——le start ------------------------------*/
     this.protocolList_api = http_url.webPof_url + '/fixedInvestment/protocol/list'; //金服WEB-定投交易- 我的定投协议列表
@@ -292,4 +287,6 @@ module.exports = function () {
 
 
     /*------------------- 私募理财fang——le end ------------------------------*/
+    /*------------------- 财富学院 start ------------------------------*/
+    this.queryFortuneBanner_api = http_url.web_url + '/account/home/frontend/queryFortuneBanner'; //首页banner
 };

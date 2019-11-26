@@ -12,7 +12,7 @@ require('@pathCommonJsCom/utils.js');
 require('@pathCommonJs/ajaxLoading.js');
 
 var tipAction = require('../../../common/js/components/tipAction.js');
-
+require('@pathCommonJs/components/headBarConfig.js');
 var generateTemplate = require('@pathCommonJsComBus/generateTemplate.js');
 
 $(function() {

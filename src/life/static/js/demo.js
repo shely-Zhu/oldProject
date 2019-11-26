@@ -1,3 +1,6 @@
+
+let a = 1;
+
 require('@pathIncludJs/vendor/mui/mui.picker.min.js');
 
 //引入下拉列表选择器
