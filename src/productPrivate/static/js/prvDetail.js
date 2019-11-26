@@ -314,7 +314,7 @@ var prvDetail = {
             if (that.unitNetValue) {
                 that.ifDraw = true;
                 $(".invDraw").show();
-                $(".invFloat .invCore").html(that.unitNetValue + "<span>(" + that.netValueDate.substr(that.netValueDate.indexOf("-") + 1, ) + ")</span>");
+                $(".invFloat .invCore").html(that.unitNetValue + "<span>(" + that.netValueDate.substr(that.netValueDate.indexOf("-") + 1 ) + ")</span>");
                 $(".invFloat .applyBuy").html("单位净值(元)");
                 that.getDrawData(360);
             } else {

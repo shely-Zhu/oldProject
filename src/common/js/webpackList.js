@@ -289,7 +289,7 @@ module.exports = {
     './account/static/js/super/superRecord': './src/account/static/js/super/superRecord.js',
 
     //自选公募资产详情
-    './account/static/js/optionalPublicDetail': './src/account/static/js/optionalPublicDetail.js',
+    './account/static/js/public/optionalPublicDetail': './src/account/static/js/public/optionalPublicDetail.js',
 
     // 自选公募交易记录
     './account/static/js/public/transactionRecords': './src/account/static/js/public/transactionRecords.js',
@@ -316,7 +316,7 @@ module.exports = {
     './Financial/static/js/publicPlacement/surelyResultsDetail': './src/Financial/static/js/publicPlacement/surelyResultsDetail.js',
 
     //我的定投_定投明细
-    './financial/static/js/publicPlacement/castSurely_details': './src/financial/static/js/publicPlacement/castSurely_details.js',
+    './Financial/static/js/publicPlacement/castSurelyDetails': './src/Financial/static/js/publicPlacement/castSurelyDetails.js',
     //我的定投计划
     './Financial/static/js/publicPlacement/myInvestmentPlan': './src/Financial/static/js/publicPlacement/myInvestmentPlan.js',
     //活期理财
@@ -350,6 +350,8 @@ module.exports = {
     // 私募产品详情页
     './financial/static/js/privatePlacement/privatePlacementDetail' : './src/financial/static/js/privatePlacement/privatePlacementDetail.js',
     // 财富学院早知道
-    './homePage/static/js/fortuneFlowKnown' : './src/homePage/static/js/fortuneFlowKnown.js'
+    './homePage/static/js/fortuneFlowKnown' : './src/homePage/static/js/fortuneFlowKnown.js',
+    // 财富讲堂
+    './homePage/static/js/fortuneClassroom' : './src/homePage/static/js/fortuneClassroom.js'
 
 }

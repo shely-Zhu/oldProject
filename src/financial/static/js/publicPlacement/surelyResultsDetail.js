@@ -10,7 +10,6 @@ require('@pathCommonJs/components/headBarConfig.js');
 require('@pathCommonJs/ajaxLoading.js');
 
 var tipAction = require('@pathCommonJs/components/tipAction.js');
-var commonElasticLayer = require('@pathCommonJs/components/commonElasticLayer.js');
 var splitUrl = require('@pathCommonJs/components/splitUrl.js')();
 var generateTemplate = require('@pathCommonJsComBus/generateTemplate.js');
 
@@ -25,12 +24,6 @@ $(function() {
       init:function(){
         var that = this;
         that.event()
-        var obj={
-          title:"网络不给力，请稍后重试",
-          yesTxt:'重试',
-          noTxt:"取消"
-        }
-        commonElasticLayer(obj,that.objcallback)
       },
       event:function(){
         var a = 1;
