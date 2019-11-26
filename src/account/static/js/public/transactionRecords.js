@@ -108,7 +108,7 @@ $(function () {
                 }
                 that.$e.listLoading.show();
                 mui('.contentWrapper').pullRefresh().pullupLoading();
-                // that.$e.listLoading.hide();
+                that.$e.listLoading.hide();
                 $('.list').addClass('hasPullUp');
             });
         },
@@ -169,7 +169,7 @@ $(function () {
                             t.endPullupToRefresh(false);
                         }
 
-                        $('.list').find('.contentWrapper .mui-pull-bottom-pocket').removeClass('mui-hidden');
+                        $('.list').find('.mui-pull-bottom-pocket').removeClass('mui-hidden');
 
                         // 页面++
                         that.gV.pageNum++;
@@ -179,7 +179,8 @@ $(function () {
                     }, 200)
                 },
                 callbackFail: function (json) {
-                    $('.list').find('.contentWrapper .mui-pull-bottom-pocket').removeClass('mui-hidden');
+
+                    $('.list').find('.mui-pull-bottom-pocket').addClass('mui-hidden');
                     $('.list').addClass('noMove');
                     t.endPullupToRefresh(true);
                     that.$e.listLoading.hide();
@@ -187,7 +188,7 @@ $(function () {
                     
                 },
                 callbackNoData:function(json){
-                    $('.list').find('.contentWrapper .mui-pull-bottom-pocket').removeClass('mui-hidden');
+                    $('.list').find('.mui-pull-bottom-pocket').addClass('mui-hidden');
                     $('.list').addClass('noMove');
                     t.endPullupToRefresh(true);
                     that.$e.listLoading.hide();
@@ -286,6 +287,20 @@ $(function () {
                 that.$e.noData.hide();
                 that.initMui(that.gV.ajaxdata);
             })
+
+
+            //点击列表跳转
+            mui('body').on('tap','.recordItem',function(){
+                var applyId=$(this).attr('data-applyId');
+                var fundCombination=$(this).attr('data-fundCombination');
+                var fundCode=$(this).attr('data-fundCode');
+                var fundBusinCode=$(this).attr('data-fundBusinCode');
+                var allotType=$(this).attr('data-allotType');
+                var Fixbusinflag=$(this).attr('data-Fixbusinflag');
+                window.location.href=site_url.publicTradeDetail_url+'?applyId='+applyId+'&'+'fundCombination='+fundCombination 
+                                        +'fundCode='+fundCode+'fundBusinCode='+fundBusinCode+'allotType='+allotType
+                                        +'Fixbusinflag='+Fixbusinflag;
+            });
         }
     };
     somePage.init();

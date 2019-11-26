@@ -168,12 +168,7 @@ $(function() {
                     }, 200)
 
 
-                },
-                callbackFail: function(json) {
-                    // 暂无数据显示
-                    that.getElements.noData.show();
-
-                },
+                }
 
             }];
             $.ajaxLoading(obj);

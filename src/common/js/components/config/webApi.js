@@ -204,6 +204,8 @@ module.exports = function () {
     this.productRecord_api = http_url.web_url + '/account/positions/productRecord';
     //公募交易明细
     this.queryTradeApplyByCode_api = http_url.web_url + '/account/pof/queryTradeApplyByCode'; //热门诊断基金列表搜索
+    // 超宝详情页面--现金宝资产总览查询
+    this.getTotalAssetsCash_api = http_url.web_url + '/account/pof/cash/getTotalAssetsCash';
     /*------------------- 消息中心 end ------------------------------*/
 
     this.assetsDetail_api = http_url.web_url + '/account/positions/assetsDetail'; // 资产详情
@@ -263,5 +265,7 @@ module.exports = function () {
     /*------------------- 基金确认书 start ------------------------------*/
     this.downloadFile_api = http_url.web_url + '/content/file/mount/download'; //下载pdf
     this.sendMailForConfirmBill_api = http_url.web_url + '/account/positions/sendMailForConfirmBill'; //下载pdf
-
+    /*------------------- 财富学院 start ------------------------------*/
+    this.queryFortuneBanner_api = http_url.web_url + '/account/home/frontend/queryFortuneBanner'; //首页banner
+    this.queryFortuneCollegeFir_api = http_url.web_url + '/account/home/frontend/queryFortuneCollegeFir'; //财富翻译官/早知道
 };
