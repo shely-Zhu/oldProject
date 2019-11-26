@@ -145,6 +145,7 @@ $(function () {
             $('.hold_item').on('click', function(){
                 var index = $(this).index();
                 sessionStorage.setItem("publicFundDetail",JSON.stringify(that.gV.data.fundDetailList[index])) 
+                window.location.href=site_url.optionalPublicDetail_url;
             })
             //点击持仓列表的感叹号 进入持仓明细
             $('.position_tip').on('click', function(){
