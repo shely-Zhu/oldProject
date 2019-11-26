@@ -203,6 +203,8 @@ module.exports = function () {
     this.productRecord_api = http_url.web_url + '/account/positions/productRecord';
     //公募交易明细
     this.queryTradeApplyByCode_api = http_url.web_url + '/account/pof/queryTradeApplyByCode'; //热门诊断基金列表搜索
+    // 超宝详情页面--现金宝资产总览查询
+    this.getTotalAssetsCash_api = http_url.web_url + '/account/pof/cash/getTotalAssetsCash';
     /*------------------- 消息中心 end ------------------------------*/
 
     this.assetsDetail_api = http_url.web_url + '/account/positions/assetsDetail'; // 资产详情
