@@ -301,9 +301,9 @@ module.exports = {
 
     // 现金宝详情页
 
-     './account/static/js/public/cashTreasure':   './src/account/static/js/public/cashTreasure.js',
+    './account/static/js/public/cashTreasure': './src/account/static/js/public/cashTreasure.js',
     // 支付密码
-     './account/static/js/public/payPassword':   './src/account/static/js/public/payPassword.js',
+    './account/static/js/public/payPassword': './src/account/static/js/public/payPassword.js',
     // 基金确认书
     './account/static/js/private/privateFundPdf': './src/account/static/js/private/privateFundPdf.js',
 
@@ -317,11 +317,7 @@ module.exports = {
     './Financial/static/js/publicPlacement/surelyResultsDetail': './src/Financial/static/js/publicPlacement/surelyResultsDetail.js',
 
     //我的定投_定投明细
-<<<<<<< HEAD
     './financial/static/js/publicPlacement/castSurelyDetafils': './src/financial/static/js/publicPlacement/castSurelyDetafils.js',
-=======
-    './Financial/static/js/publicPlacement/castSurelyDetails': './src/Financial/static/js/publicPlacement/castSurelyDetails.js',
->>>>>>> dfb6456d116893779f0579175947bd46432b09ac
     //我的定投计划
     './Financial/static/js/publicPlacement/myInvestmentPlan': './src/Financial/static/js/publicPlacement/myInvestmentPlan.js',
     //我的定投计划详情
@@ -344,10 +340,10 @@ module.exports = {
     './financial/static/js/publicPlacement/cashTransformIn': './src/financial/static/js/publicPlacement/cashTransformIn.js',
 
     // 基金买入
-    './financial/static/js/publicPlacement/fundTransformIn' : './src/financial/static/js/publicPlacement/fundTransformIn.js',
+    './financial/static/js/publicPlacement/fundTransformIn': './src/financial/static/js/publicPlacement/fundTransformIn.js',
 
-     // 基本档案
-    './financial/static/js/publicPlacement/cashTransformOut' : './src/financial/static/js/publicPlacement/cashTransformOut.js',
+    // 基本档案
+    './financial/static/js/publicPlacement/cashTransformOut': './src/financial/static/js/publicPlacement/cashTransformOut.js',
 
 
     // 基金经理
@@ -358,15 +354,10 @@ module.exports = {
 
 
     // 私募产品详情页
-<<<<<<< HEAD
-    './financial/static/js/privatePlacement/privatePlacementDetail': './src/financial/static/js/privatePlacement/privatePlacementDetail.js'
-
-=======
-    './financial/static/js/privatePlacement/privatePlacementDetail' : './src/financial/static/js/privatePlacement/privatePlacementDetail.js',
+    './financial/static/js/privatePlacement/privatePlacementDetail': './src/financial/static/js/privatePlacement/privatePlacementDetail.js',
     // 财富学院早知道
-    './homePage/static/js/fortuneFlowKnown' : './src/homePage/static/js/fortuneFlowKnown.js',
+    './homePage/static/js/fortuneFlowKnown': './src/homePage/static/js/fortuneFlowKnown.js',
     // 财富讲堂
-    './homePage/static/js/fortuneClassroom' : './src/homePage/static/js/fortuneClassroom.js'
->>>>>>> dfb6456d116893779f0579175947bd46432b09ac
+    './homePage/static/js/fortuneClassroom': './src/homePage/static/js/fortuneClassroom.js'
 
 }
