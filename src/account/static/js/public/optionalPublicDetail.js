@@ -433,6 +433,18 @@ $(function() {
 				$('.lineDraw .oneMonth').addClass('active');
 				that.drawLine( 'wfsy', that.data['qrnhWfsy'].oneMonth );
             })
+//			交易记录跳转
+			$('.jyjl').on('click',function(){
+				window.location.href = site_url.transactionDetail_url+"?fundCode=" +that.data.fundCode + "&tradeNo=" + that.data.publicFundDetail.tradeNo;
+			})
+//			历史明细跳转
+			$('.historyDetail').on('click',function(){
+				window.location.href = site_url.historyDetail_url;
+			})
+//			收益明细跳转
+			$('.symx').on('click',function(){
+				window.location.href = site_url.incomeDetail_url;
+			})
 		},
 
 
