@@ -318,6 +318,7 @@ module.exports = {
 
     //我的定投_定投明细
     './financial/static/js/publicPlacement/castSurelyDetafils': './src/financial/static/js/publicPlacement/castSurelyDetafils.js',
+    './Financial/static/js/publicPlacement/castSurelyDetails': './src/Financial/static/js/publicPlacement/castSurelyDetails.js',
     //我的定投计划
     './Financial/static/js/publicPlacement/myInvestmentPlan': './src/Financial/static/js/publicPlacement/myInvestmentPlan.js',
     //我的定投计划详情
@@ -358,6 +359,7 @@ module.exports = {
     // 财富学院早知道
     './homePage/static/js/fortuneFlowKnown': './src/homePage/static/js/fortuneFlowKnown.js',
     // 财富讲堂
-    './homePage/static/js/fortuneClassroom': './src/homePage/static/js/fortuneClassroom.js'
+    './homePage/static/js/fortuneClassroom' : './src/homePage/static/js/fortuneClassroom.js'
+
 
 }
