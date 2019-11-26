@@ -146,7 +146,7 @@ $(function() {
             }];
             $.ajaxLoading(obj);
         },
-        getInformsListData1(t) {
+        getInformsListData1(t, type) {
             var that = this;
             var obj = [{
                 url: site_url.noticeAndTransDynamicList_api,
@@ -184,7 +184,7 @@ $(function() {
                         // 页面++
                         that.gV.pageCurrent++;
                         // 将消息列表插入到页面上
-                        generateTemplate(data, that.$e.contentWrap1, that.$e.temp);
+                        generateTemplate(data, that.$e.contentWrap1, that.$e.temp, type);
 
                     }, 200)
 
@@ -200,8 +200,9 @@ $(function() {
                 $("b").removeClass('borderBottom');
                 $("b").eq(e.detail.slideNumber).addClass('borderBottom');
                 //模板渲染页面
+                that.gV.pageCurrent = 1;
                 if (e.detail.slideNumber == 0) {
-                    that.getInformsListData(that.gV.aThis);
+                    that.getInformsListData(that.gV.aThis, 1);
                     $('#item1').show();
                 } else if (e.detail.slideNumber == 1) {
                     that.getInformsListData1(that.gV.aThis);
