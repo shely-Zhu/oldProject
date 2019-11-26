@@ -285,7 +285,7 @@ module.exports = {
     './account/static/js/super/superRecord': './src/account/static/js/super/superRecord.js',
 
     //自选公募资产详情
-    './account/static/js/optionalPublicDetail': './src/account/static/js/optionalPublicDetail.js',
+    './account/static/js/public/optionalPublicDetail': './src/account/static/js/public/optionalPublicDetail.js',
 
     // 自选公募交易记录
     './account/static/js/public/transactionRecords': './src/account/static/js/public/transactionRecords.js',

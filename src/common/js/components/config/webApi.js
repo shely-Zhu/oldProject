@@ -127,6 +127,7 @@ module.exports = function () {
     this.pofProtocolList_api = pre + 'fixedInvestment/protocol/list'; // 20.金服WEB-定投交易- 我的定投协议列表
     this.pofQueryDividendByCode_api = pre + 'dividend/queryDividendByCode'; // 21.单只基金分红方式查询
     this.pofUpdateDividend_api = pre + 'dividend/updateDividend'; // 22.分红方式修改
+    this.fundNetWorthTrendChart_api = pre + 'fundDetails/frontend/fundNetWorthTrendChart';// 金服WEB-详情页-基金净值走势图查询
 
     /*-------------------公募相关 end ------------------------------*/
 
@@ -242,8 +243,7 @@ module.exports = function () {
     this.queryInvestReportDetail_api = http_url.web_url + '/account/report/queryInvestReportDetail';
     // 公募总资产（包含资产交易明细）
     this.totalAssets_api = http_url.web_url + '/account/pof/totalAssets';
-    // 金服WEB-详情页-基金净值走势图查询
-    this.fundNetWorthTrendChart_api = http_url.web_url + '/pof/fundDetails/frontend/fundNetWorthTrendChart';
+
     // 立即咨询
     this.reportContactNow_api = http_url.web_url + '/account/report/reportContactNow';
     /*------------------- 月度报告 end ------------------------------*/
