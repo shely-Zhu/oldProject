@@ -40,6 +40,8 @@ $(function () {
 		},
 		gV: { // 全局变量
 			fundBusinCode:'022',
+			fundStatus:'', //基金状态
+			balance:0, //发生金额
 			purchaseRate:0,  // 购买费率 
 			discount:'',  //折扣率
 			feeCalcMed:'',  //费率类型
@@ -47,9 +49,13 @@ $(function () {
             fundName:splitUrl['fundName'] ? splitUrl['fundName'] : null,   //基金名称
 			fundCode:splitUrl['fundCode'] ? splitUrl['fundCode'] : '000847',  //基金代码
 			tradeSource:splitUrl['tradeSource'] ? splitUrl['tradeSource'] : null, //交易来源
+			capitalMode:'', //资金方式
 			payType:'' ,   //支付方式（0、在线支付 1、汇款支付）
 			bankName:'',  // 银行名称
-			bankNo:''   //银行编码
+			bankAccountSecret:'', // 银行账号
+			bankNo:'' ,  //银行代码
+			password:"",
+			tradeAcco:''  //交易账号
         },
 		webinit: function () {
 			var that = this;
@@ -81,12 +87,14 @@ $(function () {
 						that.$el.payConfirmDate.html(data.fundConfirmDate)
 						that.$el.brforre15Date.html(data.after15tradeDate)
 						that.gV.discount = Number(data.discount);
-						that.gV.feeRateList = data.fundPurchaseFeeRate.detailList
+						that.gV.feeRateList = data.fundPurchaseFeeRate.detailList;
+						that.gV.fundStatus = data.fundStatus
 						for (var index = 0; index < data.tradeLimitList.length; index++) {
 							if(that.gV.fundBusinCode ==  data.tradeLimitList[index].fundBusinCode){
 							   that.$el.transformInput.attr('placeholder',data.tradeLimitList[index].minValue)
 							   that.$el.transformInput.attr('min',Number(data.tradeLimitList[index].minValue).toFixed(2))
 							   that.$el.transformInput.attr('max',Number(data.tradeLimitList[index].maxValue).toFixed(2))
+							   that.gV.capitalMode = data.tradeLimitList[index].capitalMode
 							}
 							
 						}
@@ -157,6 +165,40 @@ $(function () {
             }];
             $.ajaxLoading(obj);
 		},
+		//获取告知书，招募书链接
+		checkPassword: function() {
+			var that = this;
+
+			var obj = [{ 
+				url: site_url.pofPayment_api,
+				data: {
+					operationType:that.gV.payType,
+					fundStatus:that.gV.fundStatus,
+					fundCode:that.gV.fundCode,
+					fundName:that.gV.fundName,
+					balance:that.gV.balance,
+					bankNo:that.gV.bankNo,
+					bankAccount:that.gV.bankAccountSecret,
+					tradeAcco:that.gV.tradeAcco,
+					capitalMode:that.gV.capitalMode,
+					password:that.gV.password,
+				},
+				//async: false,
+				needDataEmpty: true,
+				callbackDone: function(json) {
+					if(json.status == '0000'){
+						// 将列表插入到页面上
+						var data = [] ;
+						data = json.data;
+						
+						
+					}
+					
+				},
+
+			}];
+			$.ajaxLoading(obj);
+		},
         /*
             绑定事件
          */
@@ -182,6 +224,7 @@ $(function () {
 
 			$('body').on('tap','.popup-mask',function(){
 				$('.popup').css('display','none')
+				$('.popup-password').css('display','none')
 			}) 
 
 
@@ -192,7 +235,7 @@ $(function () {
 			
 			$("#transformInput").on('input propertychange',function(){
 				console.log('this.val',$(this).val())
-				debugger
+				that.gV.balance = $(this).val();
 				for (var i = 0; i < that.gV.feeRateList.length; i++) {
 					//先判断 计算方式
 					if (that.gV.feeRateList[i].feeCalcMed == '1') {//固定费用 (最多有一条此数据)
@@ -229,6 +272,8 @@ $(function () {
 				$(this).find(".true").show()
 				that.gV.bankName = $(this).attr('bankName');
 				that.gV.bankNo = $(this).attr('bankNo');
+				that.gV.tradeAcco = $(this).attr('tradeAcco');
+				that.gV.bankAccountSecret = $(this).attr('bankAccountSecret');
 				var data = []
 				data.push({
 					bankThumbnailUrl:$(this).attr('bankThumbnailUrl'),
@@ -264,6 +309,15 @@ $(function () {
 			$('body').on('tap','.btn_box .btn',function(){
 				$("#passwordWrap").show();
 			}) 
+			$("#pwd-input").on("input", function() {
+				var password = $('#pwd-input').val() //密码
+				if(password.length == 6){
+					that.gV.password = password;
+					// $(".popup-password").show()
+					that.checkPassword()
+
+				}
+			})
 		},
 
 		

@@ -25,7 +25,6 @@ $(function () {
 
     init: function () {
       var that = this;
-      var fundCode
 
       //页面初始化
       that.getData();
@@ -60,7 +59,6 @@ $(function () {
           $('.bankThumbnailUrl').attr('src', json.bankThumbnailUrl);
           $('.totalCfmShareMask').html(json.totalCfmShareMask);
           $('.serviceCharge').html('含手续费' + json.serviceCharge + '元');
-          fundCode = json.fundType
           var fixState, str
           switch (json.fixState) {
             case 'A':
@@ -113,7 +111,7 @@ $(function () {
       // 跳转详情页
       mui("body").on("tap", ".edit", function (e) {
         var scheduledProtocolId = getQueryString('scheduledProtocolId')
-        window.location.href = site_url.pofOrdinarySetThrow_url + '?scheduledProtocolId=' + scheduledProtocolId + '&fundCode=' + fundCode;
+        window.location.href = site_url.pofOrdinarySetThrow_url + '?scheduledProtocolId=' + scheduledProtocolId;
       });
 
       // // 获取专属报告
@@ -125,6 +123,7 @@ $(function () {
 
   }
   /*调用*/
-  regard.init()
+regard.init()
 })
+
 

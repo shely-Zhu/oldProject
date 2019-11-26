@@ -31,12 +31,7 @@ var provinceList = require('../../../../common/json/cycle.js');
 
 
 $(function () {
-	//获取地址栏参数
-	getQueryString = function (name) {
-		var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)");
-		var r = window.location.search.substr(1).match(reg);
-		if (r != null) return unescape(r[2]); return '';
-	};
+
 	var regulatory = {
 
 		getElements: {
@@ -50,9 +45,15 @@ $(function () {
 			fundCode: $(".title .fundCode"), //基金代码
 		},
 		gV: {
+			scheduledProtocolId: splitUrl['scheduledProtocolId'] ? splitUrl['scheduledProtocolId'] : null,
+			// fundName: "22",
+			// fundCode: "2",
 		},
 		webinit: function () {
 			var that = this;
+			// this.getElements.fundName.html(this.gV.fundName)
+			// this.getElements.fundCode.html(this.gV.fundCode)
+			//
 			that.events();
 			that.getData();
 
@@ -250,12 +251,12 @@ $(function () {
 		getData: function () {
 
 			var that = this;
+			var scheduledProtocolId = location
 			//请求页面数据
 			var obj = [{
 				url: site_url.pofFixedDetail_api,
 				data: {
-					scheduledProtocolId: getQueryString('scheduledProtocolId'),
-					fundCode: getQueryString('fundCode'),
+					scheduledProtocolId: getQueryString('scheduledProtocolId')
 				},
 				callbackDone: function (json) {
 					console.log(json);
@@ -321,38 +322,6 @@ $(function () {
 				}
 			}]
 			$.ajaxLoading(obj);
-			var obj1 = [{
-				url: site_url.fundMaterial_api,
-				data: {
-					fundCode: getQueryString('fundCode'),
-				},
-				callbackDone: function (json) {
-					console.log(json);
-					if (json.status == '0000') {
-						// 将列表插入到页面上
-						var data = [];
-						data = json.data;
-						data.forEach(element => {
-							if (element.materialType == '1') {
-								console.log($(".contract"));
-
-								$(".contract").attr('href', element.linkAddress)
-								$(".contract").html('《基金合同》')
-							}
-							if (element.materialType == '2') {
-								$(".recruiting").attr('href', element.linkAddress)
-								$(".recruiting").html('《招募说明书》')
-							}
-						});
-
-					}
-
-				},
-				callbackFail: function (json) {
-					tipAction(json.msg);
-				}
-			}]
-			$.ajaxLoading(obj1);
 		},
 
 
