@@ -33,6 +33,16 @@ html {
 .hide{
     display: none;
 }
+
+.cancel_order {
+    //撤单按钮
+    position: fixed;
+    top: .6rem;
+    right: .3rem;
+    font-size: .3rem;
+    color: @C4925E;
+    z-index: 999;
+}
 .container {
     background-color: @FFFFFF;
     .header {
@@ -127,5 +137,16 @@ html {
         height: 0.3rem;
         width: 100%;
         background-color: @F7FAFD;
+    }
+    footer {
+        position: fixed;
+        bottom: 0;
+        height: .98rem;
+        width: 100%;
+        background: linear-gradient(to right, @6C83C9, @061D6A);
+        text-align: center;
+        color: @FFFFFF;
+        line-height: .98rem;
+        font-size: .32rem;
     }
 }

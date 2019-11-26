@@ -17,38 +17,25 @@
      <!--没有数据显示图标-->
      <!--@@include('@pathCommonViews/noDataImg.html')-->
      <!--列表加载显示图标-->
-     <!--@@include('@pathCommonViews/loading/listLoading.html')-->
+     @@include('@pathCommonViews/loading/listLoading.html')
      @@include('@pathCommonViews/headBarConfig.html',{"bgColors":"#384A81,#2A3C70","showType":"0","pathName":"财富学院早知道"})
      <div class="list">
-          <div class="wrapper">
-               <div class="knownList">
-                    <div class="knownItem flex">
-                         <div class="itemVideo">
-                              <img class="play" src="/homePage/static/img/bofang@2x.png" alt="">
-                         </div>
-                         <div class="itemContent">11.13 | 聪敏赚钱北向资金逆势买进看好节后？月度净流入再创新高啦啦啦啦啦啦啦啦</div>
-                    </div>
-                    <div class="knownItem flex">
-                         <div class="itemVideo">
-                              <img class="play" src="/homePage/static/img/bofang@2x.png" alt="">
-                         </div>
-                         <div class="itemContent">11.12  23万亿元！美国国债规模膨胀难控，美联储再次扩表可能有...</div>
-                    </div>
-                    <div class="knownItem flex">
-                         <div class="itemVideo">
-                              <img class="play" src="/homePage/static/img/bofang@2x.png" alt="">
-                         </div>
-                         <div class="itemContent">11.13 | 聪敏赚钱北向资金逆势买进看好节后？月度净流入再创新高啦啦啦啦啦啦啦啦</div>
-                    </div>
-                    <div class="knownItem flex">
-                         <div class="itemVideo">
-                              <img class="play" src="/homePage/static/img/bofang@2x.png" alt="">
-                         </div>
-                         <div class="itemContent">11.11  新房贷利率转轨正式执行，房价出现拐点？！</div>
-                    </div>
-               </div>
+          <div class="contentWrapper">
+               <div class="knownList"></div>
+               @@include('../../../common/views/goTop.html')
           </div>
      </div>
+
+     <script id="fortuneFlowList-template" type="text/x-handlebars-template">
+          {{#each this}}
+          <div class="knownItem flex">
+               <div class="itemVideo">
+                    <img class="play" src="{{imgSrc}}" alt="">
+               </div>
+               <div class="itemContent">{{date}} | {{content}}</div>
+          </div>
+          {{/each}}
+    </script>
  
      @@include('@pathInclude/views/footer.html')
      <!-- 添加埋点 -->
