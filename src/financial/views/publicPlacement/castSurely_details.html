@@ -75,23 +75,7 @@
         </div>
         <div class="table_head">定投记录</div>
         <div class="table tplBox">
-            <!-- <div>
-                <span>2019-10-14</span>
-                <span>5000.00元</span>
-                <span class="state_succ">定投成功<a class="iconfont iconone" href="javascript:;">&#xe67d;</a></span>
-            </div>
-            <div class="is_fail">
-                <span>2019-10-14</span>
-                <span>5000.00元</span>
-                <span class="state_fail">定投失败<a class="iconfont iconone" href="javascript:;">&#xe67d;</a>
-                </span>
-                <span class="needPos">此处填写定投失败原因</span>
-            </div>
-            <div>
-                <span>2019-10-14</span>
-                <span>5000.00元</span>
-                <span class="state_succ">定投成功<a class="iconfont iconone" href="javascript:;">&#xe67d;</a></span>
-            </div> -->
+
         </div>
         <!-- 加载中loading -->
         @@include('@pathCommonViews/loading/listLoading.html')
@@ -110,7 +94,7 @@
     <script src="/financial/static/js/publicPlacement/castSurelyDetails.js"></script>
 </body>
 <script id="dataLists" type="text/x-handlebars-template">
-
+{{#if tradeRecordStutas}}
     {{#each this}}
     {{#if status}}
     <div>
@@ -128,6 +112,9 @@
     </div>
     {{/if}}
     {{/each}}
+    {{else}}
+    <p class="no-data">暂无数据</p>
+    {{/if}}
 </script>
 
 </html>

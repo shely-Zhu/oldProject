@@ -357,8 +357,8 @@ module.exports = function () {
     this.pofCashTransformOut_url = go_url.no_url + '/financial/views/publicPlacement/cashTransformOut.html';
     // 定投详情
     this.pofCastSurelyDetails_url = go_url.no_url + '/financial/views/publicPlacement/castSurely_details.html';
-    // 新增定投
-    this.pofOrdinarySetThrow_url = go_url.no_url + '/financial/views/publicPlacement/ordinarySetThrow.htmll';
+    // 修改定投
+    this.pofOrdinarySetThrow_url = go_url.no_url + '/financial/views/publicPlacement/ordinarySetThrow.html';
 
     /*------------------- 私募理财fang——le end ------------------------------*/
     // 收益分配明细页

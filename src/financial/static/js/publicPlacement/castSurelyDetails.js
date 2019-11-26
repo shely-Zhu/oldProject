@@ -68,7 +68,7 @@ $(function () {
           switch (json.fixState) {
             case 'A':
               fixState = "进行中"
-              str = '<div>终止</div> <div class="cen ">暂停</div> <div class="active ">修改</div>'
+              str = '<div>终止</div> <div class="cen ">暂停</div> <div class="active edit ">修改</div>'
               break;
 
             case 'H':
@@ -95,6 +95,7 @@ $(function () {
           var tplm = $("#dataLists").html();
           var template = Handlebars.compile(tplm);
           var tradeRecord = json.tradeRecord
+          json.tradeRecordStutas = tradeRecord.length > 0 ? 1 : 0
           tradeRecord.forEach(n => {
             n.tradeTime = n.tradeTime.split(" ")[0]
             n.status = n.status === "1" ? 1 : 0
@@ -112,18 +113,10 @@ $(function () {
     events: function () {
       var that = this;
 
-      mui("body").on("tap", ".fundIn", function () {
-        window.location.href = site_url.pofCashTransformIn_url;
+      // 跳转详情页
+      mui("body").on("tap", ".edit", function (e) {
+        window.location.href = site_url.pofOrdinarySetThrow_url;
       });
-      mui("body").on("tap", ".fundOut", function () {
-        window.location.href = site_url.pofCashTransformOut_url;
-      });
-
-      // // 跳转详情页
-      // mui("body").on("tap", ".hd_to_detail", function (e) {
-      //   var fundCode = $($(this).find('.lightColor')[0]).html();
-      //   window.location.href = site_url.diagnosisDetail_url + '?fundCode=' + fundCode;
-      // });
 
       // // 获取专属报告
       // mui("body").on("tap", ".btnBottom", function () {
