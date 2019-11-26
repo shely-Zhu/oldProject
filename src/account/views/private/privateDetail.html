@@ -8,7 +8,7 @@
 <head>
     @@include('@pathInclude/views/meta.html')
     <link rel="stylesheet" href="/account/static/css/private/privateDetail.css">
-    <title></title>
+    <title>私募产品详情页</title>
 </head>
 
 <body>
@@ -16,6 +16,7 @@
 	<div class="privateDetail">
 		<div class="topContent"> 
 	 		@@include('@pathCommonViews/headBarConfig.html',{"bgColors":"#595E6F, #1C2135","showType":"1"})
+	 		<img class="serviceLogo" src="/account/static/img/productDetail/index_icon_kefu@2x.png" alt="">
 	 		<div class="hide typeWrap type_0">
 	 			<!-- 类型一 稳金-->	
 	 			<div class="con">
@@ -285,9 +286,9 @@
 	 				<!-- 无数据提示 -->
 	 				<div class="hide noDataHintEcharts">暂无数据</div>
 	 				<div class='mui-row tab'>
-	 					<span class="mui-col-sm-3 mui-col-xs-3 time oneMonth active" num="0">近一个月</span>
+	 					<span class="mui-col-sm-3 mui-col-xs-3 time oneMonth" num="0">近一个月</span>
 	 					<span class="mui-col-sm-3 mui-col-xs-3 time threeMonth" num="1">近三个月</span>
-	 					<span class="mui-col-sm-3 mui-col-xs-3 time newYear" num="3">近一年</span>
+	 					<span class="mui-col-sm-3 mui-col-xs-3 time newYear active" num="3">近一年</span>
 	 					<span class="mui-col-sm-3 mui-col-xs-3 time sinceNow" num="4">成立至今</span>
 	 				</div>
 	 			</div>

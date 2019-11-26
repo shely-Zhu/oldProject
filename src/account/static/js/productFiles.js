@@ -15,22 +15,23 @@ var generateTemplate = require('@pathCommonJsComBus/generateTemplate.js');
 $(function() {
   var somePage = {
     $e: {
-  
+      adjustmentTemp: $('#adjustment-template'), // 最新调仓模板
     },
     gV: { // 全局变量
-       
+      projectId: splitUrl['projectId']
     },
     init:function(){
       var that = this;
       that.event()
       that.getData()
+      this.getDataLabels()
     },
     getData: function(t) {
       var that = this;
       var obj = [{ // 系统调仓记录列表
           url: site_url.productRecord_api,
           data: {
-            "projectId":"10103",//项目编号
+            "projectId":that.gV.projectId,//项目编号
           },
           //async: false,
           needDataEmpty: true,
@@ -51,6 +52,43 @@ $(function() {
       }];
       $.ajaxLoading(obj);
   },
+  getDataLabels: function(t) {
+    var that = this;
+    var obj = [{ // 系统调仓记录列表
+        url: site_url.queryReourceLabels_api,
+        data: {
+          "projectId":that.gV.projectId,//项目编号
+        },
+        //async: false,
+        needDataEmpty: true,
+        callbackDone: function(json) {
+          var data = json.data
+          console.log(data)
+          var list = [];
+          for(var i=0,len=data.length;i<len;i++){
+              if(data[i] === 0){
+                data[i] = "风险揭示书"
+              }else if(data[i] === 1){
+                data[i] = "产品信息"
+              }else if(data[i] === 2){
+                data[i] = "管理报告"
+              }else if(data[i] === 3){
+                data[i] = "资金分配"
+              }else if(data[i] === 4){
+                data[i] = "重要公告及通知"
+              }else if(data[i] === 5){
+                data[i] = "恒天简报 "
+              }
+              list.push({
+                  a:data[i]
+              })
+          }
+          console.log(list)
+          generateTemplate(list,$(".materialWrap"), that.$e.adjustmentTemp);
+        },
+    }];
+    $.ajaxLoading(obj);
+},
     event:function(){
       $(".openOff").click(function(){
         if($(".openOff .open").text() != "收起"){
