@@ -568,7 +568,7 @@ gulp.task('jsCpd', function() {
             var fileContent = fs.readFileSync(name, 'utf-8') ;
 
             //获取module.export里的内容
-            fileContent = fileContent.substring( fileContent.indexOf('{'), fileContent.indexOf('}'));
+            fileContent = fileContent.substring( fileContent.indexOf('{'), fileContent.indexOf('}')).replace(/\s/g, "");
 
             //用；拆分
             var fileArr = fileContent.split(';');
