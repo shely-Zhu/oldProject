@@ -125,9 +125,9 @@ $(function() {
 
                         // 页面++
                         that.gV.pageCurrent++;
-                        //去掉mui-pull-bottom-pocket的mui-hidden
                         // 将列表插入到页面上
                         generateTemplate(data, that.$e.recordList, that.$e.adjustmentTemp);
+                        //去掉mui-pull-bottom-pocket的mui-hidden
                         $('.contentWrapper').find('.mui-pull-bottom-pocket').removeClass('mui-hidden');
 
 
