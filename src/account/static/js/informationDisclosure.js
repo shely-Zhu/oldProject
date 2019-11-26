@@ -12,15 +12,24 @@ var generateTemplate = require('@pathCommonJsComBus/generateTemplate.js');
 
 $(function() {
 	let somePage = {
-		//获取页面元素
-		$e: {
-			tab:$('.tabHeader .tab'),
-			tabBody:$('.tabBody .tabContent')
-		},
-		//全局变量
-		gV: {
-			
-		},
+		 getElements: {
+        noData: $('.noData'), //没有数据的结构
+        listLoading: $('.listLoading'), //所有数据区域，第一次加载的loading结构
+        midContent: $('.midContent'), // 导航
+    },
+    setting: { //一些设置
+        navAllList: ['风险揭示书', '产品信息', '管理报告', '资金分配', '重要公告及通知', '恒天简报'],
+        ajaxParamList: ['19,20,10,22', '1', '12,13,28,14', '30', '16,17,31,32,29', '33,34,35,36,37'], // 请求参数
+        navList: [], //导航
+        list_template: '',
+        html: '',
+        pageSize: 10,
+    },
+    status: {
+        fundCode: splitUrl()['fundCode'], // 当前页面的基金代码
+        current_index: 0, //左右滑动区域的索引
+        current_label: 0, //标签对应的编号，ajax请求需要
+    },
 		//页面初始化函数
 		init: function() {
 			//启用事件处理
@@ -88,7 +97,28 @@ $(function() {
 				//async: false,
                 needDataEmpty: true,
                 callbackDone: function(json) {
-					console.log(json)
+					var labelArr = json.data;
+					for (var i =0; i < labelArr.length ; i++) {
+						if(labelArr[i] == -1) {
+							labelArr.splice(i,1);
+						}
+					}
+	
+					if(labelArr.length == 0){
+						$('.without.noData').show();
+					}else{
+						labelArr.map(function(x) {
+							var ele = {};
+	
+							ele.type = that.setting.navAllList[x];
+							ele.code = x;
+	
+							that.setting.navList.push(ele);
+						});
+	
+					//	that.beforeFunc(); //拼模板，初始化左右滑动mui组件
+						// that.getData($('#scroll1')); //初始化第一屏
+					}
 				}
 			}]
 			$.ajaxLoading(obj);

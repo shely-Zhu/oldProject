@@ -347,7 +347,7 @@ module.exports = function() {
     // 月度报告详情页
     this.monthReportDetail_url = go_url.no_url + '/mine/views/monthReport/monthReportDetail.html';
     //自选公募详情页
-    this.optionalPublicDetail_url = go_url.no_url + '/account/views/optionalPublicDetail.html';
+    this.optionalPublicDetail_url = go_url.no_url + '/account/views/public/optionalPublicDetail.html';
     // 收益分配明细页
     this.incomeDistribution_url = go_url.no_url + '/account/views/private/incomeDistribution.html';
     // 私募交易明细
