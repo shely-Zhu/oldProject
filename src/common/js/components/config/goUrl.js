@@ -358,7 +358,7 @@ module.exports = function () {
     // 转出页面	
     this.pofCashTransformOut_url = go_url.no_url + '/financial/views/publicPlacement/cashTransformOut.html';
     // 定投详情
-    this.pofCastSurelyDetails_url = go_url.no_url + '/financial/views/publicPlacement/castSurely_details.html';
+    this.pofCastSurelyDetails_url = go_url.no_url + '/financial/views/publicPlacement/castSurelyDetails.html';
     // 修改定投
     this.pofOrdinarySetThrow_url = go_url.no_url + '/financial/views/publicPlacement/ordinarySetThrow.html';
 

@@ -122,7 +122,7 @@ $(function () {
 
 
   }
+  /*调用*/
+  regard.init()
 })
 
-/*调用*/
-regard.init()
