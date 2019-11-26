@@ -66,6 +66,8 @@ var productPublic = {
         var that = this;
         //轮播图
         that.getData();
+        //翻译早知道
+        that.getFortuneCollegeFir()
         
     },
     getData:function(){
@@ -88,7 +90,6 @@ var productPublic = {
                     console.log(el)
                     imgArr.push({imgUrl: el.imgUrl, linkUrl:el.linkUrl});
                 })
-                console.log(Slider)
                 Slider( $('.banner'), imgArr );
                 
                 //此时所有切换区域的内容都是空的
@@ -118,5 +119,24 @@ var productPublic = {
          }]
         $.ajaxLoading(obj);
     },
+    getFortuneCollegeFir:function(){
+        var that =this;
+        var obj=[{
+             url: site_url.queryFortuneCollegeFir_api,
+             data: {    
+                type:"25", //类型
+            },
+            needDataEmpty: true,
+            callbackDone: function(json){
+                modelData=json.data.ModelVO
+                // 将列表插入到页面上
+                generateTemplate(modelData,$('.translate'),$('#fortune-template'));     						
+            },
+            callbackFail: function(json){
+                console.log(json)
+            },
+         }]
+        $.ajaxLoading(obj);
+    }
 }
 productPublic.init();
