@@ -184,17 +184,17 @@ gulp.task('proxyTask', function() {
         middleware: function(connect, opt) {
             return [
                 proxy('/app', {
-                    // target: 'https://app.htjf4.com',
+                    target: 'https://app.htjf4.com',
                     // target: 'http://192.168.50.254:8085',
-                    target: 'https://app.chtfundtest.com',
+                    // target: 'https://app.chtfundtest.com',
                     changeOrigin: true,
                     secure: false,
                 }),
 
                 proxy(['/wap', '/web/', '/jf/'], {
-                    //  target: 'https://h5.htjf4.com',
+                     target: 'https://h5.htjf4.com',
                     // target: 'http://172.16.187.164:8081',
-                    target: 'https://h5.chtfundtest.com',
+                    // target: 'https://h5.chtfundtest.com',
                     changeOrigin: true,
                     secure: false,
                 }),
@@ -557,99 +557,40 @@ gulp.task("includeJs", ['htmd'], function() {
 //查config.js的重复
 gulp.task('jsCpd', function() {
 
-    var allUrl = path.resolve(__dirname, './src/common/js/components/config/*.js');
+    // var allUrl = path.resolve(__dirname, './src/common/js/components/config/*.js');
 
-    var arr = [];
+    // var arr = [];
 
-    glob.sync(allUrl).forEach(function (name) { 
+    // glob.sync(allUrl).forEach(function (name) { 
 
-        if( name.indexOf('Url') != -1 || name.indexOf('Api') != -1){
+    //     if( name.indexOf('Url') != -1 || name.indexOf('Api') != -1){
 
-            var fileContent = fs.readFileSync(name, 'utf-8') ;
+    //         var fileContent = fs.readFileSync(name, 'utf-8') ;
 
-            //获取module.export里的内容
-            fileContent = fileContent.substring( fileContent.indexOf('{'), fileContent.indexOf('}')).replace(/\s/g, "");
+    //         //获取module.export里的内容
+    //         fileContent = fileContent.substring( fileContent.indexOf('{'), fileContent.indexOf('}')).replace(/\s/g, "");
 
-            //用；拆分
-            var fileArr = fileContent.split(';');
+    //         //用；拆分
+    //         var fileArr = fileContent.split(';');
 
-            //用=拆分
-            for ( var i in fileArr ){
-                var arrKey =  fileArr[i].split('=')[0],
-                    arrValue = fileArr[i].split('=')[1];
+    //         //用=拆分
+    //         for ( var i in fileArr ){
+    //             var arrKey =  fileArr[i].split('=')[0],
+    //                 arrValue = fileArr[i].split('=')[1];
 
-                if( arr[arrKey] ){
-                    //已经有了
-                    console.log(name + '文件的' + arrKey + '重复了')
-                    process.exit();
-                }
-                else{
-                    arr[arrKey] = arrValue;
-                }
-            }
-
-            
-        }
-    })
-
-    // var configList = require('./src/include/js/vendor/configList.js');
-
-    // for( var i in configList ){
-
-    //     if( Object.prototype.toString.call(configList[i]) === '[object String]' ){
-
-    //         for ( var k in configList ){
-
-    //             console.log('k:' + k);
-
-    //             if( configList[k].hasOwnProperty(i) ){
-
-    //                 console.log( '重复的变量： ' + i )
-
+    //             if( arr[arrKey] ){
+    //                 //已经有了
+    //                 console.log(name + '文件的' + arrKey + '重复了')
     //                 process.exit();
     //             }
-    //             else {
-    //                 console.log( k + '里没有' + i )
+    //             else{
+    //                 arr[arrKey] = arrValue;
     //             }
     //         }
+
+            
     //     }
-    //     else{
-    //         for ( var j in configList[i]){
-
-    //             console.log( i + '的' + j);
-
-    //             for ( var k in configList ){
-
-    //                 console.log('k:' + k);
-
-    //                 if( ( i != k ) && configList[k].hasOwnProperty(j)){
-
-    //                     console.log( '重复的变量： ' + j )
-
-    //                     process.exit();
-    //                 }
-    //                 else {
-    //                     console.log( k + '里没有' + j )
-    //                 }
-    //             }
-    //         }
-    //     }
-
-        
-    //}
-
-    // return gulp.src([path.join(__dirname, 'src/common/js/components/config/*.js')]) 
-
-    // // .pipe(plugins.debug({ title: 'js-检查的文件:' }))
-
-    // .pipe(plugins.jscpd({
-    //     languages: ['javascript'],
-    //     'min-lines': 2,
-    //     'min-tokens': 5,
-    //     verbose  : true,
-    //     debug: true,
-    //     // output: 'jsCpd.xml'
-    // }))
+    // })
 
 });
 
