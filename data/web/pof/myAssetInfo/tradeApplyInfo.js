@@ -13,7 +13,7 @@ var data = Mock.mock({
 
         applyId: "",//交易申请编号
 
-        fundName: "",//基金名称
+        fundName: "中融3-5年信用债A",//基金名称
 
         fundCode: "",//基金代码
 
@@ -21,15 +21,15 @@ var data = Mock.mock({
 
         fundStatus: "",//基金交易状态
 
-        fundBusinCode: "",//业务大类
+        fundBusinCode: "020",//业务大类
 
         capitalMode: "",//资金方式
 
-        payModeName: "",//支付方式名称
+        payModeName: "汇款支付",//支付方式名称
 
         tradeShares: "",//交易申请份额(赎回交易使用)
 
-        tradeAmount: "",//交易申请金额(认/申购交易使用)
+        tradeAmount: "1,000,000.00",//交易申请金额(认/申购交易使用)
 
         tradeStatus: "",//交易申请状态
 
@@ -37,7 +37,7 @@ var data = Mock.mock({
 
         debitStatus: "",//扣款状态
 
-        tradeDate: "",//交易申请日期
+        tradeDate: "2019-09-01 11:00:35",//交易申请日期
 
         originalDate: "",//原交易日期
 
@@ -57,13 +57,13 @@ var data = Mock.mock({
 
         tradeNo: "",//交易账号
 
-        bankAccount: "",//银行账户
+        bankAccount: "6230221111111117",//银行账户
 
         bankIdNo: "",//银行编号
 
-        bankLogoUrl: "",//银行logoUrl
+        bankLogoUrl: "https://s.chtfundtest.com/upload/htmall/images/content/b2bece3b-595a-40cf-9fe8-b159f80d3744.png",//银行logoUrl
 
-        bankName: "",//银行名称
+        bankName: "中国工商银行",//银行名称
 
         cancelable: 0,//可撤单标记1-可撤单；0-不可撤单
 
@@ -89,7 +89,7 @@ var data = Mock.mock({
 
                 tradeShares: "",//交易份额
 
-                tradeAmount: "",//交易金额
+                tradeAmount: "1,000,000.00",//交易金额
 
                 confirmDate: "",//确认日期
 
