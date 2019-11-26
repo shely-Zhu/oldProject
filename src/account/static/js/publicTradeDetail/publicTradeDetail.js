@@ -19,10 +19,9 @@ require('@pathCommonJs/components/utils.js');
 require('@pathCommonJs/ajaxLoading.js');
 require('@pathCommonJs/components/headBarConfig.js');
 
-
-
 var tipAction = require('@pathCommonJs/components/tipAction.js');
 var splitUrl = require('@pathCommonJs/components/splitUrl.js');
+var payPass = require('../public/payPassword.js');
 
 $(function () {
     var obj = {
@@ -48,7 +47,8 @@ $(function () {
             $('.cancel_order').on('click', function(){
                 //去撤单 需要先输入交易密码 todo
                 $("#passwordWrap").show();
-                cancelOrder();
+                payPass(that.getData())
+                // cancelOrder();
             })
             $('').on('click', function(){
                 //买入产品条目点击进入公募产品详情
@@ -111,12 +111,9 @@ $(function () {
                             break;
 
                         case "024":
-                            //赎回
-
-                            break;
                         case "098":
-                            //快速赎回
-
+                            //赎回
+                            that.showRedeemStatus()
                             break;
 
                         default:
@@ -146,10 +143,14 @@ $(function () {
             $('.buy_info .fund_amount').html(model.tradeAmount);
             //支付方式
             $('.buy_info .bank_icon').attr('url', model.bankLogoUrl);//银行logo
-            $('.buy_info .bank_name').html(model.bankName);//银行名称
+            $('.buy_info .bank_name').html(model.bankName + model.bankAccount.substring(model.bankAccount.length - 4));//银行名称
             $('.buy_info .pay_mode').html(model.payModeName);//支付方式
             //买入时间
-            $('.buy_info .fund_date').html(model.payModeName);//买入时间
+            $('.buy_info .fund_date').html(model.tradeDate);//买入时间
+
+            //交易状态区域显示
+            $('.trade_status_area').removeClass('hide');
+            
 
             if (true){
                 //todo 增加判断
@@ -204,6 +205,9 @@ $(function () {
 
         },
         showRedeemStatus: function (){
+            //赎回渲染
+            $('.redeem_info').removeClass('hide');
+            
             
         },
         getRemittanceAccount: function () { 
