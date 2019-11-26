@@ -55,6 +55,7 @@
                     this.defaults = {
                         //id :  'elasticLayerTypeFive', //弹层的唯一id 不传默认为elasticLayer，如果多个弹层的话要传，否则区分不了
                         title: '帮助', //如果不传默认为'尊敬的用户'
+                        titleSatus:true,  // 判断title是否展示
                         p: '',
                         buttonTxt: '知道了', //
                         //yesTxt : '确定' , //确定按钮的文案，不传默认为确定
@@ -101,19 +102,33 @@
                 creatDom: function() {
                     var that = this;
 
-                    //弹层DOM结构
-                    var html = '<div class="elasticLayerTypeFive" id="' + that.options.id + '" style="z-index:' + that.options.zIndex + '">' +
-                        '<div class="elasticWrapper">' +
-                        '<div class="elasticMid">' +
-                        '<div class="elasticTitle">' + that.options.title + '</div>' +
-                        '<div class="elasticContent">'+
-                        '<p class="elasticP"><span class="elasticP_bold">'+that.options.p1.b+'</span>'+that.options.p1.t+'</p>'+
-                        '<p class="elasticP"><span class="elasticP_bold">'+that.options.p2.b+'</span>'+that.options.p2.t+'</p>'+
-                        '</div>' +
-                        '<div class="elasticButtons"><button class="elasticYes">' + that.options.buttonTxt + '</button></div>'
-                        '</div>' +
-                        '</div>' +
-                        '</div>';
+                    if(that.options.titleSatus){
+
+                        //弹层DOM结构
+                        var html = '<div class="elasticLayerTypeFive" id="' + that.options.id + '" style="z-index:' + that.options.zIndex + '">' +
+                            '<div class="elasticWrapper">' +
+                            '<div class="elasticMid">' +
+                            '<div class="elasticTitle">' + that.options.title + '</div>' +
+                            '<div class="elasticContent">'+
+                            '<p class="elasticP"><span class="elasticP_bold">'+that.options.p1.b+'</span>'+that.options.p1.t+'</p>'+
+                            '<p class="elasticP"><span class="elasticP_bold">'+that.options.p2.b+'</span>'+that.options.p2.t+'</p>'+
+                            '</div>' +
+                            '<div class="elasticButtons"><button class="elasticYes">' + that.options.buttonTxt + '</button></div>'
+                            '</div>' +
+                            '</div>' +
+                            '</div>';
+                    }
+                    else {
+                        var html = '<div class="elasticLayerTypeSix" id="' + that.options.id + '" style="z-index:' + that.options.zIndex + '">' +
+                            '<div class="elasticWrapper">' +
+                            '<div class="elasticMid">' +
+                            '<div class="elasticContent">' + that.options.p + '</div>' +
+                            '<div class="elasticButtons">' + that.options.buttonTxt + '</div>' +
+                            '</div>' +
+                            '</div>' +
+                            '</div>';
+                    }
+
 
 
                     that.$body.append(html);

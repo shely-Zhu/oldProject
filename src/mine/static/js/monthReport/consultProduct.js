@@ -12,6 +12,8 @@ require('@pathIncludJs/vendor/zepto/deferred.js');
 require('@pathCommonJsCom/utils.js');
 require('@pathCommonJs/ajaxLoading.js');
 
+var splitUrl = require('@pathCommonJsCom/splitUrl.js')();
+
 var monthReportDetail = {
 	
 	init: function(){  //初始化函数
@@ -32,18 +34,18 @@ var monthReportDetail = {
 				data: {
 					hmac:"",
 					params:{
-						empNo: that.getElements.plannerNum,  //理顾工号
-						empName: that.getElements.plannerName,  // 理顾姓名
-						productName: that.getElements.productName,  // 产品名称
+						empNo: splitUrl['empNo'],  //理顾工号
+						empName: splitUrl['empName'],  // 理顾姓名
+						productName: splitUrl['productName'],,  // 产品名称
 					}
 				},
 				needLogin: true, //需要判断登录情况
 				needDataEmpty: false,//不需要判断data是否为空
 				callbackDone: function(json){
-					$(".contactNow").hide();
-					$(".mask").hide();
-					$(".btns .error-tip").html('');
-					$('.btns .save').removeClass("btn_grey").attr('disabled',false);
+					// $(".contactNow").hide();
+					// $(".mask").hide();
+					// $(".btns .error-tip").html('');
+					// $('.btns .save').removeClass("btn_grey").attr('disabled',false);
 				
 				},
 				callbackFail: function(json){

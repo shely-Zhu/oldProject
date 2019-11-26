@@ -14,13 +14,13 @@ require('@pathCommonJs/ajaxLoading.js');
 require('@pathCommonJsCom/headBarConfig.js');
 
 require('@pathCommonJsCom/tabScroll.js');
-var splitUrl = require('@pathCommonJs/components/splitUrl.js')();
+var splitUrl = require('@pathCommonJsCom/splitUrl.js')();
 //黑色提示条的显示和隐藏
 var tipAction = require('@pathCommonJsCom/tipAction.js');
 
 var moment = require('moment');
 //引入弹出层
-require('@pathCommonJs/components/elasticLayerTypeFive.js');
+require('@pathCommonJsCom/elasticLayerTypeFive.js');
 
 
 var monthReportDetail = {
@@ -717,84 +717,80 @@ var monthReportDetail = {
 		mui("body").on('tap', '.consult' , function(){
 
 			that.getElements.productName = $(this).attr('productName');
-
-			// var obj = [{
-			// 	url: site_url.search_planner_url,
-			// 	data: {
-			// 		hmac:"",
-			// 		params:{
-			// 		   broker_account:"",//理财师工号
-			// 		   type:"0",//绑定类型    0：私募   1：公募
-			// 		   isCertificate:"", // 显示持证理财师,Y通过，N未通过
-			// 		}
-			// 	},
-			// 	needLogin: true, //需要判断登录情况
-			// 	needDataEmpty: false,//不需要判断data是否为空
-			// 	callbackDone: function(json){
-			// 		var result = json.data.advisor;
-			// 		if(result.length != 0 ){
-			// 			if(json.data.existMain == 1){   //有专属理财师
-			// 				var exclusive = result[0];//专属理财师
-	  //                       that.getElements.plannerName = exclusive.broker_name; 	//理财师姓名
-	  //                       that.getElements.plannerNum = exclusive.broker_account; //理财师工号
-
-			// 			}else if(json.data.existMain == 0){
-			// 				var exclusive = result[0];//服务理财师
-	  //                       that.getElements.plannerName = exclusive.broker_name; 	//理财师姓名
-	  //                       that.getElements.plannerNum = exclusive.broker_account; //理财师工号
-			// 			}
-
-			               // $.elasticLayerTypeTwo({
-			               //      id: "tip",
-			               //      title: '提示',
-			               //      p: '<p>' + value + '</p>',
-			               //      buttonTxt: '知道了',
-			               //      zIndex: 100,
-			               //  });
-			               //  };
-			               //  $.elasticLayerTypeTwo(obj)
-			// 			var contentObj = [{
-			// 				url: site_url.reportContactNow_api,
-			// 				data: {
-			// 					hmac:"",
-			// 					params:{
-			// 						empNo: that.getElements.plannerNum,  //理顾工号
-			// 						empName: that.getElements.plannerName,  // 理顾姓名
-			// 						productName: that.getElements.productName,  // 产品名称
-			// 					}
-			// 				},
-			// 				needLogin: true, //需要判断登录情况
-			// 				needDataEmpty: false,//不需要判断data是否为空
-			// 				callbackDone: function(json){
-			// 					$(".contactNow").hide();
-			// 					$(".mask").hide();
-			// 					$(".btns .error-tip").html('');
-			// 					$('.btns .save').removeClass("btn_grey").attr('disabled',false);
-							
-			// 				},
-			// 				callbackFail: function(json){
-								
-			// 				},
-			// 			}]
-			// 			$.ajaxLoading(contentObj);
-			// 		}else{
-			// 			var now = new Date();
-			// 			var hh = now.getHours();
-						
-			// 			if(8 <= hh && hh <= 20){
-			// 				window.open(site_url.customerService_url);
-			// 			}else{
-			// 				$('.contactNow').show();
-			// 			}
-
-			// 			//$('.contactNow').show();
-			// 		}
-			// 	},
-			// 	callbackFail: function(json){
+			// 获取理财师
+			var obj = [{
+				url: site_url.queryMyFinancialerList_api,
+				data: {
 					
-			// 	},
-			// }]
-			// $.ajaxLoading(obj);
+				},
+				needLogin: true, //需要判断登录情况
+				needDataEmpty: false,//不需要判断data是否为空
+				callbackDone: function(json){
+					var result = json.data;
+					// 判断是否有专属理财师和服务理财师
+					if(result.exclusiveFinancialerList.length != 0 || result.serviceFinancialerList.length != 0){
+
+						if(result.exclusiveFinancialerList.length != 0){   //有专属理财师
+							var exclusive = result.exclusiveFinancialerList[0];//专属理财师
+							that.getElements.plannerName = exclusive.name; 	//理财师姓名
+							that.getElements.plannerNum = exclusive.code; //理财师工号
+
+						}else if(result.serviceFinancialerList.length != 0 ){
+							var exclusive = result.serviceFinancialerList[0];//服务理财师
+							that.getElements.plannerName = exclusive.name; 	//理财师姓名
+							that.getElements.plannerNum = exclusive.code; //理财师工号
+						}
+
+					   $.elasticLayerTypeFive({
+							id: "tip",
+							title: '提示',
+							titleSatus: false,
+							p: '<p>非常感谢选择恒天财富！我们将尽快安排专业人员与您联系，请保持手机畅通</p>',
+							buttonTxt: '明白了',
+							zIndex: 100,
+						});
+						var contentObj = [{
+							url: site_url.reportContactNow_api,
+							data: {
+								hmac:"",
+								params:{
+									empNo: that.getElements.plannerNum,  //理顾工号
+									empName: that.getElements.plannerName,  // 理顾姓名
+									productName: that.getElements.productName,  // 产品名称
+								}
+							},
+							needLogin: true, //需要判断登录情况
+							needDataEmpty: false,//不需要判断data是否为空
+							callbackDone: function(json){
+								$(".contactNow").hide();
+								$(".mask").hide();
+								$(".btns .error-tip").html('');
+								$('.btns .save').removeClass("btn_grey").attr('disabled',false);
+							
+							},
+							callbackFail: function(json){
+								
+							},
+						}]
+						$.ajaxLoading(contentObj);
+					}else{
+						var now = new Date();
+						var hh = now.getHours();
+						
+						if(8 <= hh && hh <= 20){
+							window.location.href = site_url.consultProduct_url +'?empNo='+ that.getElements.plannerNum + '&empName=' + that.getElements.plannerName + '&productName=' + that.getElements.productName ;
+							// window.open(site_url.customerService_url);
+						}else{
+							$('.contactNow').show();
+						}
+
+					}
+				},
+				callbackFail: function(json){
+					
+				},
+			}]
+			$.ajaxLoading(obj);
 
 		})
 		

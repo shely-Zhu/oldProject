@@ -244,6 +244,8 @@ module.exports = function () {
 
     // 立即咨询
     this.reportContactNow_api = http_url.web_url + '/account/report/reportContactNow';
+    // 我的理财师查询
+    this.queryMyFinancialerList_api = http_url.web_url + '/account/home/queryMyFinancialerList'
     
     /*------------------- 月度报告 end ------------------------------*/
 

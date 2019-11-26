@@ -346,6 +346,8 @@ module.exports = function() {
     this.articleTemplate_url = go_url.no_url + '/include/views/articleTemplate.html';
     // 月度报告详情页
     this.monthReportDetail_url = go_url.no_url + '/mine/views/monthReport/monthReportDetail.html';
+    // 月度报告产品咨询
+    this.consultProduct_url = go_url.no_url + '/mine/views/monthReport/consultProduct.html';
     //自选公募详情页
     this.optionalPublicDetail_url = go_url.no_url + '/account/views/public/optionalPublicDetail.html';
     // 收益分配明细页
