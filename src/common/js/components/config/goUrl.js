@@ -366,4 +366,6 @@ module.exports = function() {
     this.fundCompany_url = go_url.no_url + '/financial/views/publicPlacement/fundCompany.html';
     // 信息披露
     this.informationDisclosure_url = go_url.no_url + '/account/views/informationDisclosure.html';
+    // 公募交易详情查询
+    this.publicTradeDetail_url = go_url.no_url + '/account/views/publicTradeDetail/publicTradeDetail.html';
 };
