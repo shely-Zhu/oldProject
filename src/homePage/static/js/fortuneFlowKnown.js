@@ -12,3 +12,73 @@ require('@pathCommonJs/ajaxLoading.js');
 var tipAction = require('@pathCommonJs/components/tipAction.js');
 var splitUrl = require('@pathCommonJs/components/splitUrl.js')();
 var generateTemplate = require('@pathCommonJsComBus/generateTemplate.js');
+
+$(function() {
+	let somePage = {
+		//获取页面元素
+		$e: {
+			fortuneFlowListWrapper: $(".knownList"), // 财富流向早知道列表容器
+			fortuneFlowListTemp: $("#fortuneFlowList-template"), // 财富流向早知道列表模板
+			listLoading: $('.listLoading') //所有数据区域，第一次加载的loading结构
+		},
+		//全局变量
+		gV: {
+			fortuneFlowList: [{
+				imgSrc: "/homePage/static/img/bofang@2x.png",
+				title: "",
+				date: "11.13",
+				content: "聪敏赚钱北向资金逆势买进看好节后？月度净流入再创新高啦啦啦啦啦啦啦啦"
+			}]
+		},
+		//页面初始化函数
+		init: function() {	
+			var that = this;
+			that.events()
+			that.initMui(".list", ".contentWrapper")
+			generateTemplate(that.gV.fortuneFlowList, that.$e.fortuneFlowListWrapper, that.$e.fortuneFlowListTemp)
+		},
+		//初始化mui的上拉加载
+		initMui: function(listClassName, wrapperName) {
+			var that = this;
+            var height = windowHeight - $(".HeadBarConfigBox").height();
+            if (!$(listClassName).hasClass('setHeight')) {
+                $(listClassName).height(height).addClass('setHeight');
+            }
+            mui.init({
+                pullRefresh: {
+                    container: wrapperName,
+                    up: {
+                        contentrefresh: '拼命加载中',
+                        contentnomore: '没有更多了', //可选，请求完毕若没有更多数据时显示的提醒内容；
+                        callback: function() {
+                            //执行ajax请求
+                            //that.getInformsListData(this);
+                        }
+                    }
+                }
+            });
+            //init后需要执行ready函数，才能够初始化出来
+            mui.ready(function() {
+                //隐藏当前的加载中loading
+                if (!$(listClassName).hasClass('hasPullUp')) {
+                    $(listClassName).find('.mui-pull-bottom-pocket').addClass('mui-hidden');
+                }
+                //显示loading
+                that.$e.listLoading.show();
+                //这一句初始化并第一次执行mui上拉加载的callback函数
+                mui(wrapperName).pullRefresh().pullupLoading();
+                //隐藏loading，调试接口时需要去掉
+                //setTimeout(function(){
+                that.$e.listLoading.hide();
+                //}, 2000);
+                //为$id添加hasPullUp  class
+                $(listClassName).addClass('hasPullUp');
+            });
+		},
+		//注册事件
+		events: function() {
+			
+		}
+	};
+	somePage.init();
+});
