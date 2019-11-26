@@ -11,6 +11,7 @@ require('@pathCommonJs/components/headBarConfig.js');
 var tipAction = require('@pathCommonJs/components/tipAction.js');
 var generateTemplate = require('@pathCommonJsComBus/generateTemplate.js');
 var splitUrl = require('@pathCommonJs/components/splitUrl.js');
+Slider = require('@pathCommonJs/components/sliderMui.js'); // 轮播
 var productPublic = {
     getElements: {
         noData: $('.noData'), //没有数据的结构
@@ -63,39 +64,31 @@ var productPublic = {
     //初始化函数
     init: function(){
         var that = this;
-        // 弹框提示身份证即将到期
-        idDate(true,window.location.href);
-        //拼模板，初始化左右滑动mui组件
-        that.beforeFunc();
-        
+        //轮播图
         that.getData();
-        //初始化第一屏区域的上拉加载
-        that.initMui( $('#scroll1') );
-
-        //事件监听 
-        that.events();
         
     },
     getData:function(){
         var that =this;
         var obj=[{
-             url: site_url.findPofBannerByPosition_api,
+             url: site_url.queryFortuneBanner_api,
              data: {    
                 hmac:"", //预留的加密信息    
                 params:{//请求的参数信息 
                     adPosition : "appWapPofIndexTop",//类型（标志位）【请参照备注】 
-                      limitCount: "5",//展示幅数    
+                    limitCount: "5",//展示幅数    
                 }
             },
             needDataEmpty: true,
             callbackDone: function(json){
-
+                console.log(json)
                 var imgArr = [];
 
-                $.each(json.data, function(i, el){
+                $.each(json.data.bannerList, function(i, el){
+                    console.log(el)
                     imgArr.push({imgUrl: el.imgUrl, linkUrl:el.linkUrl});
                 })
-
+                console.log(Slider)
                 Slider( $('.banner'), imgArr );
                 
                 //此时所有切换区域的内容都是空的
@@ -120,9 +113,10 @@ var productPublic = {
                 }			     						
             },
             callbackFail: function(json){
-
+                console.log(json)
             },
          }]
         $.ajaxLoading(obj);
     },
 }
+productPublic.init();
