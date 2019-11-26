@@ -66,7 +66,10 @@ $(function () {
       var that = this;
 
       mui("body").on("tap", ".fundIn", function () {
-        window.location.href = site_url.pofSurelyResults_url;
+        window.location.href = site_url.pofCashTransformIn_url;
+      });
+      mui("body").on("tap", ".fundOut", function () {
+        window.location.href = site_url.pofCashTransformOut_url;
       });
 
       // // 跳转详情页
