@@ -24,7 +24,7 @@
   },
   "devDependencies": {
     "babel-core": "6.26.0",
-    "babel-loader": "6.4.1",
+    "babel-loader": "7.1.5",
     "babel-preset-es2015": "6.24.1",
     "babel-preset-react": "6.24.1",
     "clipboard": "^2.0.4",
@@ -74,7 +74,7 @@
     "style-loader": "0.13.2",
     "url-loader": "0.5.9",
     "vinyl-source-stream": "1.1.0",
-    "webpack": "1.15.0",
+    "webpack": "3.12.0",
     "webpack-dev-server": "1.16.5",
     "xssfilter": "0.5.3"
   }

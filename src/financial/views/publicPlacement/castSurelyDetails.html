@@ -1,0 +1,120 @@
+<!-- 我的定投_定投详情页面 -->
+<!-- author: caiwenqi
+	time:2019/11/23 -->
+<!DOCTYPE html>
+<html>
+
+<head>
+    @@include('@pathInclude/views/meta.html')
+    <link rel="stylesheet" href="/financial/static/css/castSurelyDetails.css">
+    <title>我的定投_定投详情</title>
+</head>
+
+<body>
+    <!--加载图标-->
+    <!-- @@include('@pathCommonViews/load.html')  -->
+    <!--没有数据显示图标-->
+    <!-- @@include('@pathCommonViews/noDataImg.html') -->
+    <!--列表加载显示图标-->
+    <!-- @@include('@pathCommonViews/loading/listLoading.html') -->
+    <!--公共页面头部-->
+    @@include('@pathCommonViews/headBarConfig.html',{"pathName":"定投详情","bgColors":"#384B85,#112258","showType":"1"})
+    <section class="container">
+        <div class="banner">
+            <div class="bannerTop clearfix">
+                <span class="j_text fundName"></span><span class="posRight"><a class="iconfont
+                        iconone" href="javascript:;">&#xe67d;</a></span>
+                <div class="type">
+                    <div>
+                        <p class="word_color ">累计定投(元)</p>
+                        <p class="num_color totalCfmBalaMask"></p>
+                    </div>
+                    <div class="box_right">
+                        <p class="word_color">已投期数</p>
+                        <p class="num_color totalTradeTimes"></p>
+                    </div>
+                </div>
+                <div class="ipt">下次扣款日期 <span class="date_color nextFixrequestDateMask"></span></div>
+            </div>
+        </div>
+        <div class="mid">
+            <div>
+                <div class="fixState">
+                </div>
+                <span class="fontSize4 posTop balanceMask"></span>
+                <span class="fontSize2 serviceCharge"></span>
+            </div>
+            <ul>
+                <li>
+                    <span class="fontSize6">定投金额</span>
+
+                </li>
+
+                <li class="clearfix">
+                    <span class="fontSize6">支付方式</span>
+                    <span class="fontSize4">
+                        <img class="bankThumbnailUrl" src="" alt="">
+                        <i class="bankName"></i>
+                        <i class="cardNo bankNo"></i>
+                        <i class="onlinePayment capitalModeDesc"></i>
+                        <span>
+                </li>
+                <li>
+                    <span class="fontSize6">定投周期</span>
+                    <span class="fontSize4 fixedPeriodMask"></span>
+                </li>
+                <li>
+                    <span class="fontSize6">协议签订日期</span>
+                    <span class="fontSize4 signDate"></span>
+                </li>
+                <li>
+                    <span class="fontSize6">累计定投份额</span>
+                    <span class="fontSize4 totalCfmShareMask"></span>
+                </li>
+            </ul>
+        </div>
+        <div class="table_head">定投记录</div>
+        <div class="table tplBox">
+
+        </div>
+        <!-- 加载中loading -->
+        @@include('@pathCommonViews/loading/listLoading.html')
+        <!-- 暂无数据 -->
+        @@include('@pathCommonViews/noDataImg.html',{"tipText":"暂无数据"})
+    </section>
+    <div class="footer">
+        <!-- <div>终止</div>
+        <div class="cen ">暂停</div>
+        <div class="active ">修改</div>
+        <div class="active ">续保</div> -->
+    </div>
+    @@include('@pathInclude/views/footer.html')
+    <!-- 添加埋点 -->
+    @@include('@pathInclude/views/header.html')
+    <script src="/financial/static/js/publicPlacement/castSurelyDetails.js"></script>
+</body>
+<script id="dataLists" type="text/x-handlebars-template">
+{{#if tradeRecordStutas}}
+    {{#each this}}
+    {{#if status}}
+    <div>
+        <span>{{tradeTime}}</span>
+        <span>{{balance}}元</span>
+        <span class="state_succ">{{statusDesc}}<a class="iconfont iconone" href="javascript:;">&#xe67d;</a></span>
+    </div>
+    {{else}}
+    <div class="is_fail">
+        <span>{{tradeTime}}</span>
+        <span>{{balance}}元</span>
+        <span class="state_fail">{{statusDesc}}<a class="iconfont iconone" href="javascript:;">&#xe67d;</a>
+        </span>
+        <span class="needPos">此处填写定投失败原因</span>
+    </div>
+    {{/if}}
+    {{/each}}
+    {{else}}
+    <p class="no-data">暂无数据</p>
+    {{/if}}
+</script>
+
+</html>

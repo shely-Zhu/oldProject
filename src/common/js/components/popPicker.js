@@ -15,7 +15,6 @@
 
 
 module.exports = function( layer, pickerList, source, callback, type){
-	
 	if( $('.mui-poppicker').length ){
 		return false;
 	}
@@ -55,14 +54,13 @@ module.exports = function( layer, pickerList, source, callback, type){
 	
 	//选择器选择数据后的操作
 	picker.show(function(getSelectedItems){
-
 		//选择的数据
 	    var result = getSelectedItems,
 		    str = '';
 
 		//循环获取，并设置到对应的属性上
 		$.each(result, function(i, el){
-
+		
 			if( type == 'liTwo'){
 				str += '<span>' + el.text + '</span>';
 			}else{
@@ -78,7 +76,8 @@ module.exports = function( layer, pickerList, source, callback, type){
 				source.attr( 'sonDicNo', el.sonDicNo );
 			}
 		})
-		
+		var reg=/undefined/g;//如果子级有空 替换掉
+		str = str.replace(reg,'')
 		//显示获取到的数据
 		source.html(str).addClass('hasSelect');
 		

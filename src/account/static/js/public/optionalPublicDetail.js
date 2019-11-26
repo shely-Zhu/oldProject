@@ -2,9 +2,7 @@
  * 公募自选资产详情页
  *
  * @author 田俊国 20191120
- *
- * 需要从资产列表页带参数： projectType--货币类型  fundCode--项目id haveSurely--是否有定投
- *
+ * 页面进来数据是从session中拿，所以需要先到自选公募持仓详情页(account/views/publicAssets.html)点某条数据，将数据存到session中，再到这个页面才会有数据
  * projectType: 
  * 0：货币（对应type_1)  1：非货币 
  */
@@ -33,7 +31,9 @@ $(function() {
 			publicFundDetail:"",//从列表页带过来的数据
 			projectType : "",//基金类型。货币10300、非货币除10300其他
 			fundCode: "",//货币代码
-			supportFixedFlag: splitUrl['supportFixedFlag'],//是否支持定投
+			supportFixedFlag: "",//是否支持定投
+			isBuyFlag:"",//是否可购买
+			isRedemptionFlag:"",//是否可赎回
 			qrnhWfsy: {
 				oneMonth : {},
 				threeMonth: {},
@@ -46,8 +46,11 @@ $(function() {
 		init: function(){
 			var that = this;
 			that.data.publicFundDetail = JSON.parse(sessionStorage.getItem("publicFundDetail"));
-			that.data.projectType = that.data.publicFundDetail.invTypCom;
+			that.data.projectType = that.data.publicFundDetail.invTypCom;//基金类型。货币10300、非货币除10300其他
 			that.data.fundCode = that.data.publicFundDetail.fundCode;
+			that.data.isBuyFlag = that.data.publicFundDetail.isBuyFlag;//是否可购买(0否1是) int类型
+			that.data.isRedemptionFlag = that.data.publicFundDetail.isRedemptionFlag; //是否可赎回(0否1是) int 类型
+			that.data.supportFixedFlag = that.data.publicFundDetail.isFixFlag;//是否可定投(0否1是) int 类型
 			//设置数据到页面上
 			that.setDomData(that.data.publicFundDetail);
 			if( that.data.projectType == "10300" ){//10300货币类型
@@ -65,7 +68,7 @@ $(function() {
 				$('.lineWrap').show();
 			}
 			
-			if(!!eval(that.data.supportFixedFlag.toLowerCase())){//支持定投展示定投按钮,true字符串转化为bool值
+			if(that.data.supportFixedFlag == 1){//支持定投展示定投按钮,1支持定投
 				$('.footer').eq(1).show()
 			}else{
 				$('.footer').eq(0).show()
@@ -154,6 +157,7 @@ $(function() {
 			    	fundCode: that.data.fundCode,
 			    	dataRange: dataRange 
 			    },
+			    needLoading: true,
 			    needLogin: true,
 			    callbackDone: function(json) {
 			    	var jsonData = json.data;
@@ -174,6 +178,27 @@ $(function() {
 			       		case 4: that.data['qrnhWfsy'].sinceNow = newData;break;
 			       	}
 			       	that.drawLine( type, newData);			       	
+			    },
+			},{
+			    url: site_url.pofQueryDividendByCode_api, 
+			    data: {
+			    	tradeAcco: that.data.publicFundDetail.tradeNo, 
+			    	fundCode: that.data.fundCode,
+			    },
+			    needLogin: true,
+			    needLoading: true,
+			    callbackDone: function(json) {
+			    	var jsonData = json.data;//防止数据为空下面循环出错
+			    	if(!jsonData.length){
+			    		return false;
+			    	}
+			    	$.each(jsonData, function(i,v) {
+			    		if(v.checkFlag == 1){//如果被选中，拿选中这一条的数据
+			    			$(".dividend").text(v.autoBuyDes)
+			    			return false;
+			    		}
+			    	});
+		       	
 			    },
 			}];
 			$.ajaxLoading(obj);
@@ -315,6 +340,12 @@ $(function() {
 			var that = this;
 
 		},
+		//获取分红方式
+		getDivideData: function(){
+						//没有数据，请求接口
+			var obj = [];
+			$.ajaxLoading(obj);
+		},
 
 		setDomData: function( jsonData){
 			var that = this;
@@ -402,6 +433,18 @@ $(function() {
 				$('.lineDraw .oneMonth').addClass('active');
 				that.drawLine( 'wfsy', that.data['qrnhWfsy'].oneMonth );
             })
+//			交易记录跳转
+			$('.jyjl').on('click',function(){
+				window.location.href = site_url.transactionDetail_url+"?fundCode=" +that.data.fundCode + "&tradeNo=" + that.data.publicFundDetail.tradeNo;
+			})
+//			历史明细跳转
+			$('.historyDetail').on('click',function(){
+				window.location.href = site_url.historyDetail_url;
+			})
+//			收益明细跳转
+			$('.symx').on('click',function(){
+				window.location.href = site_url.incomeDetail_url;
+			})
 		},
 
 

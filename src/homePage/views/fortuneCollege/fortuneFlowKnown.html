@@ -1,0 +1,47 @@
+<!-- /**  
+ * @Page:  财富流向早知道
+ * @Author: yanruiting 
+ * @Date:   2019-11-25
+ * 
+ */ -->
+ <!DOCTYPE html>
+ <html lang="en">
+ <head>
+     @@include('@pathInclude/views/meta.html')
+     <link rel="stylesheet" href="/homePage/static/css/fortuneFlowKnown.css">
+     <title>财富流向早知道</title>
+ </head>
+ <body>
+     <!--加载图标-->
+     <!--@@include('@pathCommonViews/load.html')--> 
+     <!--没有数据显示图标-->
+     <!--@@include('@pathCommonViews/noDataImg.html')-->
+     <!--列表加载显示图标-->
+     @@include('@pathCommonViews/loading/listLoading.html')
+     @@include('@pathCommonViews/headBarConfig.html',{"bgColors":"#384A81,#2A3C70","showType":"0","pathName":"财富学院早知道"})
+     <div class="list">
+          <div class="contentWrapper">
+               <ul class="mui-table-view">
+                    <div class="knownList"></div>
+                    @@include('../../../common/views/goTop.html')
+               </ul>
+          </div>
+     </div>
+
+     <script id="fortuneFlowList-template" type="text/x-handlebars-template">
+          {{#each this}}
+          <div class="knownItem flex">
+               <div class="itemVideo">
+                    <img class="play" src="{{imgSrc}}" alt="">
+               </div>
+               <div class="itemContent">{{date}} | {{content}}</div>
+          </div>
+          {{/each}}
+    </script>
+ 
+     @@include('@pathInclude/views/footer.html')
+     <!-- 添加埋点 -->
+     @@include('@pathInclude/views/header.html')
+     <script src="/homePage/static/js/fortuneFlowKnown.js"></script>
+</body>
+</html>

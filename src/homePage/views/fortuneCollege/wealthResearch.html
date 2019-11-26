@@ -1,0 +1,112 @@
+<!-- /*
+ * @Author: sunfuping 
+ * @Date: 2019-11-25 20:15:39 
+ * @Last Modified by:   sunfuping 
+ * @Last Modified time: 2019-11-25 20:15:39 
+ * 财富研究
+ */ -->
+
+
+<!DOCTYPE html>
+<html>
+
+<head>
+    @@include('@pathInclude/views/meta.html')
+    <link rel="stylesheet" href="/homePage/static/css/wealthResearch.css">
+    <title>财富研究</title>
+</head>
+
+<body>
+    <!--加载图标-->
+    <!--@@include('@pathCommonViews/load.html')-->
+    <!--没有数据显示图标-->
+    <!--@@include('@pathCommonViews/noDataImg.html')-->
+    <!--列表加载显示图标-->
+    <!--@@include('@pathCommonViews/loading/listLoading.html')-->
+    @@include('@pathCommonViews/headBarConfig.html',{"pathName":"财富研究"})
+
+    <div class="mui-slider" id="tabHT">
+        <div class="mui-slider-indicator mui-segmented-control mui-segmented-control-inverted">
+            <a class="mui-control-item mui-active" href="#item1" belong="5">大类资产研究<b class="borderBottom"></b></a>
+            <a class="mui-control-item" href="#item2" belong="6">宏观策略<b></b></a>
+            <a class="mui-control-item" href="#item3" belong="7">宏观策略<b></b></a>
+            <a class="mui-control-item" href="#item4" belong="8">公募研究<b></b></a>
+        </div>
+        <div class="mui-slider-group" id="drapUpWrapper">
+            <div id="item1" class="mui-slider-item mui-control-content mui-active">
+                <div class="list">
+                    <div class="contentWrapper">
+                        <ul class="mui-table-view">
+                            <li class="mui-table-view-cell">
+                                <!-- 放置列表 -->
+                            </li>
+                            @@include('@pathCommonViews/goTop.html')
+                        </ul>
+                    </div>
+                </div>
+
+
+            </div>
+            <div id="item2" class="mui-slider-item mui-control-content">
+                <div class="list1">
+                    <div class="contentWrapper1">
+                        <ul class="mui-table-view">
+                            <li class="mui-table-view-cell">
+                                <!-- 放置列表 -->
+                            </li>
+                            @@include('@pathCommonViews/goTop.html')
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div id="item3" class="mui-slider-item mui-control-content">
+                <div class="list2">
+                    <div class="contentWrapper2">
+                        <ul class="mui-table-view">
+                            <li class="mui-table-view-cell">
+                                <!-- 放置列表 -->
+                            </li>
+                            @@include('@pathCommonViews/goTop.html')
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div id="item4" class="mui-slider-item mui-control-content">
+                <div class="list3">
+                    <div class="contentWrapper3">
+                        <ul class="mui-table-view">
+                            <li class="mui-table-view-cell">
+                                <!-- 放置列表 -->
+                            </li>
+                            @@include('@pathCommonViews/goTop.html')
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    @@include('@pathInclude/views/footer.html')
+    <!-- 添加埋点 -->
+    <!-- @@include('@pathInclude/views/header.html') -->
+    @@include('../../../common/views/load.html')
+    <!-- 加载中loading -->
+    @@include('@pathCommonViews/loading/listLoading.html')
+    <!-- 暂无数据 -->
+    @@include('@pathCommonViews/noDataImg.html',{"tipText":"暂无数据"})
+    <script src="/homePage/static/js/wealthResearch.js"></script>
+    <!-- <script src="/acount/static/js/informationDisclosure.js"></script> -->
+</body>
+<script id="item-template" type="text/x-handlebars-template">
+    {{#each this}}
+    <div class="list_item clearfix">
+        <div class="list_itemL">
+            <p>{{name}}</p>
+            <span>{{date}}</span>
+        </div>
+        <div class="list_itemR"><img src="/homePage/static/img/company@2x.png" alt=""></div>
+    </div>
+    {{/each}}
+</script>
+
+</html>

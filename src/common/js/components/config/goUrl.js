@@ -329,9 +329,11 @@ module.exports = function () {
     this.qualifiedInvestor_url = go_url.no_url + '/mine/views/qualifiedInvestor/qualifiedInvestor.html?type=private';
     //活动详情->去成交
     this.wealthIndex_url = go_url.no_url + '/financial/views/wealthIndex.html';
+    
     //活动详情->我的奖励
     this.rewards_url = go_url.no_url + '/mine/views/rewards.html';
     /*-------------------------------活动列表 end -----------------------*/
+    
 
     /*-------------------------------消息中心 start -----------------------*/
     // 通知详情
@@ -355,8 +357,13 @@ module.exports = function () {
     this.pofCashTransformIn_url = go_url.no_url + '/financial/views/publicPlacement/cashTransformIn.html';
     // 转出页面	
     this.pofCashTransformOut_url = go_url.no_url + '/financial/views/publicPlacement/cashTransformOut.html';
+    // 定投详情
+    this.pofCastSurelyDetails_url = go_url.no_url + '/financial/views/publicPlacement/castSurely_details.html';
+    // 修改定投
+    this.pofOrdinarySetThrow_url = go_url.no_url + '/financial/views/publicPlacement/ordinarySetThrow.html';
 
     /*------------------- 私募理财fang——le end ------------------------------*/
+
     // 收益分配明细页
     this.incomeDistribution_url = go_url.no_url + '/account/views/private/incomeDistribution.html';
     // 私募交易明细
@@ -371,6 +378,10 @@ module.exports = function () {
     this.privateFundPdf_url = go_url.no_url + '/account/views/private/privateFundPdf.html';
     // 交易规则
     this.transactionRules_url = go_url.no_url + '/financial/views/publicPlacement/transactionRules.html';
+    //基金公司
+    this.fundCompany_url = go_url.no_url + '/financial/views/publicPlacement/fundCompany.html';
     // 信息披露
     this.informationDisclosure_url = go_url.no_url + '/account/views/informationDisclosure.html';
+    // 公募交易详情查询
+    this.publicTradeDetail_url = go_url.no_url + '/account/views/publicTradeDetail/publicTradeDetail.html';
 };
