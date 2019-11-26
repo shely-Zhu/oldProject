@@ -34,55 +34,67 @@
         </div>
         <div class="mui-slider-group" id="drapUpWrapper">
             <div id="item1" class="mui-slider-item mui-control-content mui-active">
-                <ul class="">
-                    <li class="list_item clearfix">
-                        <div class="list_itemL">
-                            <p>QE（量化宽松）接棒降息，黄金能否在飞一程？</p>
-                            <span>2019-08-06</span>
-                        </div>
-                        <div class="list_itemR"><img src="/homePage/static/img/company@2x.png" alt=""></div>
-                    </li>
-                    <li class="list_item clearfix">
-                        <div class="list_itemL">
-                            <p>QE（量化宽松）接棒降息，黄金能否在飞一程？</p>
-                            <span>2019-08-06</span>
-                        </div>
-                        <div class="list_itemR"><img src="/homePage/static/img/company@2x.png" alt=""></div>
-                    </li>
-                    <li class="list_item clearfix">
-                        <div class="list_itemL">
-                            <p>QE（量化宽松）接棒降息，黄金能否在飞一程？</p>
-                            <span>2019-08-06</span>
-                        </div>
-                        <div class="list_itemR"><img src="/homePage/static/img/company@2x.png" alt=""></div>
-                    </li>
-                    <li class="list_item clearfix">
-                        <div class="list_itemL">
-                            <p>QE（量化宽松）接棒降息，黄金能否在飞一程？</p>
-                            <span>2019-08-06</span>
-                        </div>
-                        <div class="list_itemR"><img src="/homePage/static/img/company@2x.png" alt=""></div>
-                    </li>
-                </ul>
+                <div class="list">
+                    <div class="contentWrapper">
+                        <ul>
+
+                        </ul>
+                    </div>
+                </div>
+
 
             </div>
             <div id="item2" class="mui-slider-item mui-control-content">
-                这是公司荣誉区域
+                <div class="list1">
+                    <div class="contentWrapper1">
+                        <ul>
+
+                        </ul>
+                    </div>
+                </div>
             </div>
             <div id="item3" class="mui-slider-item mui-control-content">
-                这是风控体系区域
+                <div class="list2">
+                    <div class="contentWrapper2">
+                        <ul>
+
+                        </ul>
+                    </div>
+                </div>
             </div>
             <div id="item4" class="mui-slider-item mui-control-content">
-                这是安全认证区域
+                <div class="list3">
+                    <div class="contentWrapper3">
+                        <ul>
+
+                        </ul>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
 
     @@include('@pathInclude/views/footer.html')
     <!-- 添加埋点 -->
-    @@include('@pathInclude/views/header.html')
+    <!-- @@include('@pathInclude/views/header.html') -->
+    @@include('../../../common/views/load.html')
+    <!-- 加载中loading -->
+    @@include('@pathCommonViews/loading/listLoading.html')
+    <!-- 暂无数据 -->
+    @@include('@pathCommonViews/noDataImg.html',{"tipText":"暂无数据"})
     <script src="/homePage/static/js/wealthResearch.js"></script>
     <!-- <script src="/acount/static/js/informationDisclosure.js"></script> -->
 </body>
+<script id="item-template" type="text/x-handlebars-template">
+    {{#each this}}
+    <li class="list_item clearfix">
+        <div class="list_itemL">
+            <p>{{name}}</p>
+            <span>{{date}}</span>
+        </div>
+        <div class="list_itemR"><img src="/homePage/static/img/company@2x.png" alt=""></div>
+    </li>
+    {{/each}}
+</script>
 
 </html>

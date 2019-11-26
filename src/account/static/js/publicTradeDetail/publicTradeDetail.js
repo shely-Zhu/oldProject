@@ -12,11 +12,11 @@
     allotType	申请类型
     Fixbusinflag	业务辅助代码
  */
-require('../../../include/js/vendor/config.js');
-require('../../../include/js/vendor/zepto/callback.js');
-require('../../../include/js/vendor/zepto/deferred.js');
-require('../../../common/js/components/utils.js');
-require('../../../common/js/ajaxLoading.js');
+require('@pathIncludJs/vendor/config.js');
+require('@pathIncludJs/vendor/zepto/callback.js');
+require('@pathIncludJs/vendor/zepto/deferred.js');
+require('@pathCommonJs/components/utils.js');
+require('@pathCommonJs/ajaxLoading.js');
 require('@pathCommonJs/components/headBarConfig.js');
 var tipAction = require('@pathCommonJs/components/tipAction.js');
 
