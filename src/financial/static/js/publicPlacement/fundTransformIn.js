@@ -38,7 +38,7 @@ $(function () {
 			var that = this;
 
 			/** 下面三个事件： 银行卡列表出现/隐藏 **/
-			$('body').on('tap','.onright-left',function(){
+			$('body').on('tap','.paymoney',function(){
 				$('.popup').css('display','block')
 			}) 
 
