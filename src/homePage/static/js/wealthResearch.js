@@ -25,10 +25,10 @@ $(function() {
         $e: {
             tab: $('.tabHeader .tab'),
             tabBody: $('.tabBody .tabContent'),
-            contentWrap: $('.contentWrapper'),
-            contentWrap1: $('.contentWrapper1'),
-            contentWrap2: $('.contentWrapper2'),
-            contentWrap3: $('.contentWrapper3'),
+            contentWrap: $('.contentWrapper li'),
+            contentWrap1: $('.contentWrapper1 li'),
+            contentWrap2: $('.contentWrapper2 li'),
+            contentWrap3: $('.contentWrapper3 li'),
             item: $('.mui-control-item'),
             temp: $('#item-template'),
             listLoading: $('.listLoading'), //所有数据区域，第一次加载的loading结构

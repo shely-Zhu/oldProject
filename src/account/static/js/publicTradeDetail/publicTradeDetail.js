@@ -18,7 +18,11 @@ require('@pathIncludJs/vendor/zepto/deferred.js');
 require('@pathCommonJs/components/utils.js');
 require('@pathCommonJs/ajaxLoading.js');
 require('@pathCommonJs/components/headBarConfig.js');
+
+
+
 var tipAction = require('@pathCommonJs/components/tipAction.js');
+var splitUrl = require('@pathCommonJs/components/splitUrl.js');
 
 $(function () {
     var obj = {
@@ -39,23 +43,61 @@ $(function () {
             $('footer').on('click', function (param) {
                 //再买一笔 跳转到产品详情页
                 var fundCode = that.gV.data.fundCode;
+                window.location.href=site_url.productPublicDetail_url;
             })
             $('.cancel_order').on('click', function(){
-                //去撤单
-                
+                //去撤单 需要先输入交易密码 todo
+                $("#passwordWrap").show();
+                cancelOrder();
             })
+            $('').on('click', function(){
+                //买入产品条目点击进入公募产品详情
+                var fundCode = that.gV.data.fundCode;
+                window.location.href=site_url.productPublicDetail_url;
+            })
+        },
+        cancelOrder: function (){
+            //撤单的具体逻辑
+            var that = this;
+            var param = {
+                password: 输入的密码,
+                applyId: that.gV.data.applyId,
+                tradeNo: that.gV.data.tradeNo,
+            }
+            var obj = [{
+	            url: site_url.findSuperviseBank_api,
+	            data: param,
+	            needLogin:true,//需要判断是否登陆
+                callbackDone: function(json){  //成功后执行的函数
+                    if (model.fundBusinCode.equals("020") || model.fundBusinCode.equals("022")) {
+                        //认购、申购
+                        tipAction("已撤单，申请金额将退还支付银行卡中");
+                    } else {
+                        tipAction("已撤单，您将继续持有该基金份额");
+                    }
+                    setTimeout(() => {
+                        //2秒后刷新页面
+                        window.location.reload()
+                    }, 2000);
+                    
+	            },
+	            callbackFail: function(json){  //失败后执行的函数
+                    tipAction(json.msg);
+	            }
+	        }];
+	        $.ajaxLoading(obj);
         },
         getData: function () {
             var that = this;
             var obj = [{ // 公募交易详情查询
                 url: site_url.pofTradeApplyInfo_api,
                 data: {
-                    applyId: "",
-                    fundCombination: "",
-                    fundCode: "",
-                    fundBusinCode: "",
-                    allotType: "",
-                    Fixbusinflag: "",
+                    applyId: splitUrl()['applyId'],
+                    fundCombination: splitUrl()['fundCombination'],
+                    fundCode: splitUrl()['fundCode'],
+                    fundBusinCode: splitUrl()['fundBusinCode'],
+                    allotType: splitUrl()['allotType'],
+                    Fixbusinflag: splitUrl()['Fixbusinflag'],
                 },
                 //async: false,
                 needDataEmpty: true,
@@ -103,7 +145,7 @@ $(function () {
             //买入金额
             $('.buy_info .fund_amount').html(model.tradeAmount);
             //支付方式
-            $('.buy_info .bank_icon').url(model.bankThumbnailUrl);//银行logo
+            $('.buy_info .bank_icon').attr('url', model.bankLogoUrl);//银行logo
             $('.buy_info .bank_name').html(model.bankName);//银行名称
             $('.buy_info .pay_mode').html(model.payModeName);//支付方式
             //买入时间
@@ -117,6 +159,14 @@ $(function () {
             } else {
                 //其他情况 展示交易状态
                 $('.trade_status_area').removeClass('hide');
+            }
+
+            if ("9" == model.tradeStatus){
+                //交易待确认
+                if ("1" == model.cancelable){
+                    //允许撤单 显示撤单按钮
+                    $('.cancel_order').removeClass('hide');
+                }
             }
             
             
@@ -153,11 +203,14 @@ $(function () {
 
 
         },
+        showRedeemStatus: function (){
+            
+        },
         getRemittanceAccount: function () { 
             //获取监管账户信息
             var obj = [{
 	            url: site_url.findSuperviseBank_api,
-	            data: param,
+	            data: {},
 	            needLogin:true,//需要判断是否登陆
 	            //needDataEmpty: false,//不需要判断data是否为空
 	            callbackDone: function(json){  //成功后执行的函数
