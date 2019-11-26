@@ -272,7 +272,8 @@ module.exports = {
     './include/js/modelPage/articleTemplate': './src/include/js/modelPage/articleTemplate.js',
     // 了解恒天
     './homePage/static/js/understandHT': './src/homePage/static/js/understandHT.js',
-
+    // 财富学院
+    './homePage/static/js/fortuneCollegeList': './src/homePage/static/js/fortuneCollegeList.js',
     //私募资产详情
     './account/static/js/private/privateDetail': './src/account/static/js/private/privateDetail.js',
     //公募资产详情
