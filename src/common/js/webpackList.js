@@ -317,11 +317,8 @@ module.exports = {
     './Financial/static/js/publicPlacement/surelyResultsDetail': './src/Financial/static/js/publicPlacement/surelyResultsDetail.js',
 
     //我的定投_定投明细
-<<<<<<< HEAD
     './financial/static/js/publicPlacement/castSurelyDetafils': './src/financial/static/js/publicPlacement/castSurelyDetafils.js',
-=======
     './Financial/static/js/publicPlacement/castSurelyDetails': './src/Financial/static/js/publicPlacement/castSurelyDetails.js',
->>>>>>> dfb6456d116893779f0579175947bd46432b09ac
     //我的定投计划
     './Financial/static/js/publicPlacement/myInvestmentPlan': './src/Financial/static/js/publicPlacement/myInvestmentPlan.js',
     //我的定投计划详情
@@ -358,15 +355,12 @@ module.exports = {
 
 
     // 私募产品详情页
-<<<<<<< HEAD
-    './financial/static/js/privatePlacement/privatePlacementDetail': './src/financial/static/js/privatePlacement/privatePlacementDetail.js'
 
-=======
-    './financial/static/js/privatePlacement/privatePlacementDetail' : './src/financial/static/js/privatePlacement/privatePlacementDetail.js',
+    './financial/static/js/privatePlacement/privatePlacementDetail': './src/financial/static/js/privatePlacement/privatePlacementDetail.js',
     // 财富学院早知道
     './homePage/static/js/fortuneFlowKnown' : './src/homePage/static/js/fortuneFlowKnown.js',
     // 财富讲堂
     './homePage/static/js/fortuneClassroom' : './src/homePage/static/js/fortuneClassroom.js'
->>>>>>> dfb6456d116893779f0579175947bd46432b09ac
+
 
 }

@@ -283,8 +283,8 @@ module.exports = function () {
     this.pofGetTotalAssetsCash_api = http_url.web_url + '/account/pof/cash/getTotalAssetsCash'; // 现金宝资产总览查询
     this.pofGetAssetsCashList_api = http_url.web_url + '/account/pof/cash/getAssetsCashList'; // 现金宝资产列表
 
-    this.newfundDetails_api = http_url.web_url + '/fundDetails/frontend/newfundDetails'; //金服WEB-基金详情
-    this.fundMaterial_api = http_url.web_url + '/fundArchives/frontend/fundMaterial'; //金服WEB-基金招募书
+    this.newfundDetails_api = http_url.web_url + '/pof/fundDetails/frontend/newfundDetails'; //金服WEB-基金详情
+    this.fundMaterial_api = http_url.web_url + '/pof/fundArchives/frontend/fundMaterial'; //金服WEB-基金招募书
 
 
     /*------------------- 私募理财fang——le end ------------------------------*/
