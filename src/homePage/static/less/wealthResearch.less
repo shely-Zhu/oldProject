@@ -1,0 +1,45 @@
+/*
+ * @Author: sunfuping 
+ * @Date: 2019-11-25 20:16:26 
+ * @Last Modified by: sunfuping
+ * @Last Modified time: 2019-11-25 21:01:30
+ */
+
+@import url("../../../include/css/mui.min.css");
+@import url('@pathCommonLess/mui/resetMUI.less');
+@import url("@pathCommonLess/reset.less");
+@import url("@pathCommonLess/color.less");
+
+@import url("@pathCommonLessCom/againEnter.less");
+@import url("@pathCommonLessCom/alertBox.less");
+@import url("@pathCommonLessCom/headBarConfig.less");
+
+
+.mui-slider .mui-segmented-control.mui-segmented-control-inverted~.mui-slider-group .mui-slider-item {
+	border: none!important;
+}
+.mui-segmented-control{
+    display: block;
+}
+#tabHT {
+	// margin-top: 1.28rem;
+	.mui-slider-indicator {
+		height: .88rem;
+		background: @c005!important;
+		.mui-control-item {
+			color: @9B9B9B;
+			line-height: 34px;
+			.borderBottom {
+			  	display: block;
+			    width: 1.06rem;
+			    height: 0.03rem;
+			    background:linear-gradient(135deg,rgba(108,131,201,1) 0%,rgba(6,29,106,1) 100%);
+				border-radius:1px;
+				margin: 0 auto;
+			}
+		}
+		.mui-active {
+			color: @272727;
+		}
+	}
+}
