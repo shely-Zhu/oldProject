@@ -289,7 +289,7 @@ module.exports = {
     './account/static/js/super/superRecord': './src/account/static/js/super/superRecord.js',
 
     //自选公募资产详情
-    './account/static/js/optionalPublicDetail': './src/account/static/js/optionalPublicDetail.js',
+    './account/static/js/public/optionalPublicDetail': './src/account/static/js/public/optionalPublicDetail.js',
 
     // 自选公募交易记录
     './account/static/js/public/transactionRecords': './src/account/static/js/public/transactionRecords.js',
@@ -316,7 +316,7 @@ module.exports = {
     './Financial/static/js/publicPlacement/surelyResultsDetail': './src/Financial/static/js/publicPlacement/surelyResultsDetail.js',
 
     //我的定投_定投明细
-    './financial/static/js/publicPlacement/castSurelyDetails': './src/financial/static/js/publicPlacement/castSurelyDetails.js',
+    './Financial/static/js/publicPlacement/castSurelyDetails': './src/Financial/static/js/publicPlacement/castSurelyDetails.js',
     //我的定投计划
     './Financial/static/js/publicPlacement/myInvestmentPlan': './src/Financial/static/js/publicPlacement/myInvestmentPlan.js',
     //活期理财

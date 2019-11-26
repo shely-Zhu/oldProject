@@ -127,6 +127,7 @@ module.exports = function () {
     this.pofProtocolList_api = pre + 'fixedInvestment/protocol/list'; // 20.金服WEB-定投交易- 我的定投协议列表
     this.pofQueryDividendByCode_api = pre + 'dividend/queryDividendByCode'; // 21.单只基金分红方式查询
     this.pofUpdateDividend_api = pre + 'dividend/updateDividend'; // 22.分红方式修改
+    this.fundNetWorthTrendChart_api = pre + 'fundDetails/frontend/fundNetWorthTrendChart';// 金服WEB-详情页-基金净值走势图查询
 
     /*-------------------公募相关 end ------------------------------*/
 
@@ -242,6 +243,7 @@ module.exports = function () {
     this.queryInvestAssetConfigureAdvise_api = http_url.web_url + '/account/report/queryInvestAssetConfigureAdvise';
     // 报告分析（报告明细）
     this.queryInvestReportDetail_api = http_url.web_url + '/account/report/queryInvestReportDetail';
+
     // 立即咨询
     this.reportContactNow_api = http_url.web_url + '/account/report/reportContactNow';
     
@@ -263,5 +265,7 @@ module.exports = function () {
     /*------------------- 基金确认书 start ------------------------------*/
     this.downloadFile_api = http_url.web_url + '/content/file/mount/download'; //下载pdf
     this.sendMailForConfirmBill_api = http_url.web_url + '/account/positions/sendMailForConfirmBill'; //下载pdf
-
+    /*------------------- 财富学院 start ------------------------------*/
+    this.queryFortuneBanner_api = http_url.web_url + '/account/home/frontend/queryFortuneBanner'; //首页banner
+    this.queryFortuneCollegeFir_api = http_url.web_url + '/account/home/frontend/queryFortuneCollegeFir'; //财富翻译官/早知道
 };

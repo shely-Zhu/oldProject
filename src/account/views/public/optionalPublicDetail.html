@@ -10,7 +10,7 @@
 
 <head>
     @@include('@pathInclude/views/meta.html')
-    <link rel="stylesheet" href="/account/static/css/optionalPublicDetail.css">
+    <link rel="stylesheet" href="/account/static/css/public/optionalPublicDetail.css">
     <title></title>
 </head>
 
@@ -151,7 +151,7 @@
 	 					<span class="img"></span>
 	 				</div>
 
-	 				<span class="rightTitle">历史明细</span>
+	 				<span class="rightTitle historyDetail">历史明细</span>
 	 			</div>
 	 			<div class="lineDraw">
 	 				<!-- 七日年化折线图 -->
@@ -174,7 +174,7 @@
  					<div class="arrow">
 	 					<span class="img"></span>
 	 				</div>
-	 				<div class="dividend">现金分红</div>
+	 				<div class="dividend">--</div>
  				</div>
  				
  			</div>
@@ -194,10 +194,12 @@
 
 	 	</div>
 	</div>
-
+	
+	@@include('@pathCommonViews/payPassword.html')
 	@@include('@pathInclude/views/footer.html')
 	<script src="/include/js/vendor/echarts/echarts.min.js"></script>
-	<script src="/account/static/js/optionalPublicDetail.js"></script>
+	<script src="/account/static/js/public/optionalPublicDetail.js"></script>
+	<script src="/account/static/js/public/payPassword.js"></script>
 
 </body>
 
