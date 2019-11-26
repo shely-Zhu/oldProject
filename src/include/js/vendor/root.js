@@ -429,10 +429,11 @@ if (!window.currentIsApp) {
  */
 
 window.http_url = {
-    pof_url: '/wap/pof', //公募接口
-    pef_url: '/wap/pef', //私募接口
-    content_url: '/wap/content', // 内容接口
-    account_url: '/wap/account', // 账户接口
+    wapApi_url:'/wap',
+    // pof_url: '/wap/pof', //公募接口
+    // pef_url: '/wap/pef', //私募接口
+    // content_url: '/wap/content', // 内容接口
+    // account_url: '/wap/account', // 账户接口pef_url
     web_url: '/web', // 账户接口
     app_url: '/app'// App接口
 }
