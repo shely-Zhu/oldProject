@@ -115,7 +115,8 @@ $(function () {
 
       // 跳转详情页
       mui("body").on("tap", ".edit", function (e) {
-        window.location.href = site_url.pofOrdinarySetThrow_url;
+        var scheduledProtocolId = getQueryString('scheduledProtocolId')
+        window.location.href = site_url.pofOrdinarySetThrow_url + '?scheduledProtocolId=' + scheduledProtocolId;
       });
 
       // // 获取专属报告
