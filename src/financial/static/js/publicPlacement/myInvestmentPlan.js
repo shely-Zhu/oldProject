@@ -214,9 +214,9 @@ $(function () {
         events: function () {
             var that = this;
 
-            // mui("body").on("tap", ".fundIn", function () {
-            //     window.location.href = site_url.pofCashTransformIn_url;
-            // });
+            mui("body").on("tap", ".newPlan", function () {
+                window.location.href = site_url.pofOrdinarySetThrow_url;
+            });
             // mui("body").on("tap", ".fundOut", function () {
             //     window.location.href = site_url.pofCashTransformOut_url;
             // });
