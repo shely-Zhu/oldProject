@@ -95,6 +95,37 @@
                               </ul>
                          </div>
                     </div>
+                    <div class="hotWords forum">
+                         <div class="title">
+                              <h2>财富讲堂</h2>
+                              <p><a href="javascript:;" >全部</a><i class="iconfont">&#xe636;</i></p>
+                         </div>
+                         <div class="broadcast">
+                              <b>大咖直播</b>
+                              <strong>|</strong>
+                              <span>知时讲堂</span>
+                         </div>
+                         <div class="forumImg">
+                              <div class="mui-card public reset">
+                                   <div class="mui-scroll-wrapper mui-slider-indicator mui-segmented-control mui-segmented-control-inverted">
+                                       <div class="mui-scroll">
+                                             <a class="mui-control-item" src="javascript:;"> 
+                                                  <img src="/homePage/static/img/picture1_1@2x.png" alt="">
+                                             </a>
+                                             <a class="mui-control-item" src="javascript:;"> 
+                                                  <img src="/homePage/static/img/picture1_1@2x.png" alt="">
+                                             </a>
+                                             <a class="mui-control-item" src="javascript:;"> 
+                                                  <img src="/homePage/static/img/picture1_1@2x.png" alt="">
+                                             </a>
+                                             <a class="mui-control-item" src="javascript:;"> 
+                                                  <img src="/homePage/static/img/picture1_1@2x.png" alt="">
+                                             </a>
+                                       </div>
+                                   </div>
+                              </div>
+                         </div>
+                    </div>
                </div>
           </div>
      </div>
@@ -106,8 +137,13 @@
      @@include('@pathInclude/views/header.html')
      <script src="@pathIncludJs/vendor/zepto/zepto.js"></script>
 	<script src="@pathIncludJs/vendor/root.js"></script>
-	<script src="@pathIncludJs/vendor/mui/mui.min.js"></script>
-     <script src="/financial/static/js/publicPlacement/demandFinancing.js"></script>
+     <script src="@pathIncludJs/vendor/mui/mui.min.js"></script>
+     <script>
+               mui('.mui-scroll-wrapper').scroll({
+               deceleration: 0.0005 //flick 减速系数，系数越大，滚动速度越慢，滚动距离越小，默认值0.0006 
+          });
+          </script>
+     <script src="/homePage/static/js/fortuneCollegeList.js"></script>
  
  </body>
  </html>

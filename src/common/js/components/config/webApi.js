@@ -240,14 +240,13 @@ module.exports = function () {
     this.queryInvestAssetConfigureAdvise_api = http_url.web_url + '/account/report/queryInvestAssetConfigureAdvise';
     // 报告分析（报告明细）
     this.queryInvestReportDetail_api = http_url.web_url + '/account/report/queryInvestReportDetail';
-    // 公募总资产（包含资产交易明细）
-    this.totalAssets_api = http_url.web_url + '/account/pof/totalAssets';
-    // 金服WEB-详情页-基金净值走势图查询
-    this.fundNetWorthTrendChart_api = http_url.web_url + '/pof/fundDetails/frontend/fundNetWorthTrendChart';
     // 立即咨询
     this.reportContactNow_api = http_url.web_url + '/account/report/reportContactNow';
+    
     /*------------------- 月度报告 end ------------------------------*/
 
+    // 金服WEB-详情页-基金净值走势图查询
+    this.fundNetWorthTrendChart_api = http_url.web_url + '/pof/fundDetails/frontend/fundNetWorthTrendChart';
 
     // 超宝基金产品-交易记录
     this.queryTradeList_api = http_url.web_url + '/account/pof/cash/queryTradeList';
