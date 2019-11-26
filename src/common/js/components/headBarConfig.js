@@ -38,6 +38,8 @@ var pathTitle=[
         pathName:"现金管理" 
     },{
         pathName:'交易规则'
+    },{
+        pathName:'财富学院早知道'
     }
 ]
 $(function(){
