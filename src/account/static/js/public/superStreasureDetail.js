@@ -19,14 +19,15 @@ var generateTemplate = require('@pathCommonJsComBus/generateTemplate.js');
 $(function() {
 
     var privateDetail = {
-        data: {
-			
+        gL: {
+			shuju:[1,2,4,2],
+			time:[1,2,3,4]
         },
         init:function(){
             var that = this;
             //事件绑定
             that.event();	
-            // that.getData()
+            that.getData()
             that.drawLine()
         },
         drawLine:function(){
@@ -46,7 +47,7 @@ $(function() {
 			    	// renderMode : 'richText', 
 			    	extraCssText: [7, 15, 15, 15],
 			    	textStyle: {
-			    		color:  '#FADFBB'
+			    		color:  '#5B83FF'
 			    	},
 			    	confine: true,
 			    	axisPointer: {
@@ -63,7 +64,7 @@ $(function() {
 		    				    }, {
 		    				        offset: 0.5, color: '#081F6B' // 0% 处的颜色
 		    				    },{
-		    				        offset: 1, color: '#677EC4' // 0% 处的颜色
+		    				        offset: 1, color: '#5B83FF' // 0% 处的颜色
 		    				    }],
 		    				    global: false // 缺省为 false
 			    			}
@@ -79,7 +80,7 @@ $(function() {
                 },
                 xAxis: {
 			    	type: 'category',
-			        data: [1,2,3,4],
+			        data: that.gL.time,
 			        axisLine: {
 			        	lineStyle: {
 			        		color: '#9B9B9B'
@@ -101,16 +102,16 @@ $(function() {
 			    	axisLine: {
 			    		show: false
 			    	},
-			    	// splitLine:{
-			    	// 	lineStyle: {
-			    	// 		color: '#FADFBB'
-			    	// 	}
-			    	// },
-			    	// axisLabel:{
-			    	// 	show: true,
-			    	// 	color:  '#9B9B9B',
-			    	// 	formatter: '{value}%',
-			    	// },
+			    	splitLine:{
+			    		lineStyle: {
+			    			color: '#e5e5e5'
+			    		}
+			    	},
+			    	axisLabel:{
+			    		show: true,
+			    		color:  '#9B9B9B',
+			    		formatter: '{value}%',
+			    	},
 			    },
                 series: [{
 			    	type: 'line',
@@ -130,7 +131,7 @@ $(function() {
 			    			    x2: 0,
 			    			    y2: 1,
 			    			    colorStops: [{
-			    			        offset: 0, color: '#677EC4' // 0% 处的颜色
+			    			        offset: 0, color: '#5B83FF' // 0% 处的颜色
 			    			    }, {
 			    			        offset: 1, color: '#fff' // 100% 处的颜色
 			    			    }],
@@ -138,43 +139,45 @@ $(function() {
 			    			}
 			    		}
 			    	},
-			        data: [1,3,2,1]
+			        data:that.gL.shuju
 			    }]
             };
 
             // 使用刚指定的配置项和数据显示图表。
             myChart.setOption(option);
         },
-       
 
         // //获取初始数据
-		// getData: function(){
-		// 	var that = this;
-		// 	//产品详情接口
-		// 	var obj = [{
-		// 	    url: site_url.assetsDetail_api, 
-		// 	    data: {
-		// 	    	projectId: that.data.projectId
-		// 	    },
-		// 	    needLogin: true,
-		// 	    callbackDone: function(json) {
-        //             var jsonData = json.data;
-        //             console.log(jsonData)
-		// 	    	//设置数据到页面上
-		// 	    	// that.setDomData( jsonData );
-		// 	    },
-		// 	}];
-		// 	$.ajaxLoading(obj);			
-        // },
+		getData: function(){
+			var that = this;
+			//产品详情接口
+			var obj = [{
+			    url: site_url.getTotalAssetsCash_api, 
+			    data: {
+			    	
+			    },
+			    needLogin: true,
+			    callbackDone: function(json) {
+                    var jsonData = json.data;
+                    console.log(jsonData)
+			    	$(".totalM").text(jsonData.	totalMoneyMask)
+			    	$(".incomeMask").text(jsonData.incomeMask)
+			    	$(".addupIncomeMask").text(jsonData.addupIncomeMask)
+			    },
+			}];
+			$.ajaxLoading(obj);			
+        },
         event:function(){
+			var that = this;
             //选项卡切换
             $(document).on('click', '.lineDraw .time', function(e) {
+				var that = this;
                 $('.lineDraw .time').removeClass('active');
-                $(this).addClass('active');
+				$(this).addClass('active');
+				that.gL.time = [2,3,4,5]
             })
         }
 
-    }
-  
+    } 
     privateDetail.init()
 })

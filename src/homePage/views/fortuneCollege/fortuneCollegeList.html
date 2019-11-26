@@ -45,21 +45,8 @@
                               </div>
                          </div> -->
                     </div>
-                    <div class="hotWords">
-                         <div class="title">
-                              <h2>财富翻译官</h2>
-                              <p><a href="javascript:;" >查看往期热词</a><i class="iconfont">&#xe636;</i></p>
-                         </div>
-                         <div class="content">
-                              <p class="con-t">
-                                   <span>第466期</span><b>词会解读-“戴维斯双击”</b>
-                              </p>
-                              <p class="con-b">
-                                   <!-- <span>中信建投:鉴定看涨A股将迎来戴维斯双击</span> -->
-                                   <span class="span-l">中信建投:</span>
-                                   <span class="span-r">鉴定看涨A股将迎来戴维斯双击</span>
-                              </p>
-                         </div>
+                    <div class="hotWords translate">
+                         
                     </div>
                     <div class="hotWords fortuneVideo">
                          <div class="title">
@@ -149,10 +136,26 @@
                          <div class="tab">
                               <div class="tab-t">
                                    <ol>
-                                        <li class="active">大类资产研究</li>
-                                        <li>宏观策略</li>
-                                        <li>宏观策略</li>
-                                        <li>公募研究</li>
+                                        <li>
+                                             <a href="javascript:;" class="active">
+                                                  大类资产研究
+                                             </a>
+                                        </li>
+                                        <li>
+                                             <a href="javascript:;">
+                                                  宏观策略
+                                             </a>                                   
+                                        </li>
+                                        <li>
+                                             <a href="javascript:;">
+                                                  宏观策略
+                                             </a>
+                                        </li>
+                                        <li>
+                                             <a href="javascript:;">
+                                                  公募研究
+                                             </a>
+                                        </li>
                                    </ol>
                               </div>
                               <div class="tab-b">
@@ -193,6 +196,22 @@
      @@include('@pathInclude/views/footer.html')
      <!-- 添加埋点 -->
      @@include('@pathInclude/views/header.html')
+     <script id="fortune-template" type="text/x-handlebars-template">
+          <div class="title">
+               <h2>{{modelName}}</h2>
+               <p><a href="{{listJumpUrl}}" >查看往期热词</a><i class="iconfont">&#xe636;</i></p>
+          </div>
+          <div class="content">
+               <p class="con-t">
+                    <span>第466期</span><b>{{modelName}}</b>
+               </p>
+               <p class="con-b">
+                    <span>{{modelName}}</span>
+                    <!-- <span class="span-l">中信建投:</span>
+                    <span class="span-r">鉴定看涨A股将迎来戴维斯双击</span> -->
+               </p>
+          </div>
+     </script>
      <!-- <script src="/include/js/vendor/jquery/jquery1.12.3.js"></script> -->
 	<script src="@pathIncludJs/vendor/root.js"></script>
      <script src="@pathIncludJs/vendor/mui/mui.min.js"></script>
