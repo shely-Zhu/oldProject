@@ -10,6 +10,8 @@
  <head>
      @@include('@pathInclude/views/meta.html')
      <link rel="stylesheet" href="/homePage/static/css/fortuneCollegeList.css">
+     <link rel="stylesheet" href="/mine/static/css/swiper.min.css">
+     <script type="text/javascript" src="/include/js/swiper.min.js"></script> 
      <title>财富学院</title>
  </head>
  <body>
@@ -24,24 +26,24 @@
           <div class="list">
                <div class="wrapper">
                     <div class="banner">
-                         <div class="mui-slider">
+                         <!-- <div class="mui-slider">
                               <div class="mui-slider-group mui-slider-loop">
-                                   <!--支持循环，需要重复图片节点-->
+                                  
                                    <div class="mui-slider-item mui-slider-item-duplicate"><a href="#"><img src="/homePage/static/img/banner1@2x.png" /></a></div>
                                    <div class="mui-slider-item"><a href="#"><img src="/homePage/static/img/banner1@2x.png" alt=""></div>
                                    <div class="mui-slider-item"><a href="#"><img src="/homePage/static/img/banner1@2x.png" alt=""></a></div>
                                    <div class="mui-slider-item"><a href="#"><img src="/homePage/static/img/banner1@2x.png" alt=""></a></div>
                                    <div class="mui-slider-item"><a href="#"><img src="/homePage/static/img/banner1@2x.png" alt=""></a></div>
-                                   <!--支持循环，需要重复图片节点-->
+                    
                                    <div class="mui-slider-item mui-slider-item-duplicate"><a href="#"><img src="/homePage/static/img/banner1@2x.png" alt=""></div>
                               </div>
-                              <!-- <div class="mui-slider-indicator">
+                              <div class="mui-slider-indicator">
                                    <div class="mui-indicator mui-active"></div>
                                    <div class="mui-indicator"></div>
                                    <div class="mui-indicator"></div>
                                    <div class="mui-indicator"></div>
-                              </div> -->
-                         </div>
+                              </div>
+                         </div> -->
                     </div>
                     <div class="hotWords">
                          <div class="title">
@@ -106,23 +108,79 @@
                               <span>知时讲堂</span>
                          </div>
                          <div class="forumImg">
-                              <div class="mui-card public reset">
-                                   <div class="mui-scroll-wrapper mui-slider-indicator mui-segmented-control mui-segmented-control-inverted">
-                                       <div class="mui-scroll">
-                                             <a class="mui-control-item" src="javascript:;"> 
-                                                  <img src="/homePage/static/img/picture1_1@2x.png" alt="">
-                                             </a>
-                                             <a class="mui-control-item" src="javascript:;"> 
-                                                  <img src="/homePage/static/img/picture1_1@2x.png" alt="">
-                                             </a>
-                                             <a class="mui-control-item" src="javascript:;"> 
-                                                  <img src="/homePage/static/img/picture1_1@2x.png" alt="">
-                                             </a>
-                                             <a class="mui-control-item" src="javascript:;"> 
-                                                  <img src="/homePage/static/img/picture1_1@2x.png" alt="">
-                                             </a>
-                                       </div>
+                              <div class="swiper-container">
+                                   <div class="swiper-wrapper">
+                                        <div class="swiper-slide">
+                                             <div class="conten">
+                                                  <img src="/homePage/static/img/picture1_3@2x.png" alt="">
+                                                  <div class="con">
+                                                       <h4>如果牛市来了，你能挣到钱吗？1</h4>
+                                                       <p>李世通·国开证券首席投资顾问</p>
+                                                  </div>
+                                             </div>
+                                        </div>
+                                        <div class="swiper-slide">
+                                             <div class="conten">
+                                                  <img src="/homePage/static/img/picture1_3@2x.png" alt="">
+                                                  <div class="con">
+                                                       <h4>如果牛市来了，你能挣到钱吗？2</h4>
+                                                       <p>李世通·国开证券首席投资顾问2</p>
+                                                  </div>
+                                             </div>
+                                        </div>
+                                        <div class="swiper-slide">
+                                             <div class="conten">
+                                                  <img src="/homePage/static/img/picture1_3@2x.png" alt="">
+                                                  <div class="con">
+                                                       <h4>如果牛市来了，你能挣到钱吗？3</h4>
+                                                       <p>李世通·国开证券首席投资顾问3</p>
+                                                  </div>
+                                             </div>
+                                        </div>
                                    </div>
+                              </div>
+                         </div>
+                    </div>
+                    <div class="hotWords tabContent">
+                         <div class="title">
+                              <h2>财富研究</h2>
+                              <p><a href="javascript:;" >查看全部研究</a><i class="iconfont">&#xe636;</i></p>
+                         </div>
+                         <div class="tab">
+                              <div class="tab-t">
+                                   <ol>
+                                        <li class="active">大类资产研究</li>
+                                        <li>宏观策略</li>
+                                        <li>宏观策略</li>
+                                        <li>公募研究</li>
+                                   </ol>
+                              </div>
+                              <div class="tab-b">
+                                  <div>
+                                        <ul>
+                                             <li>
+                                                  <div>
+                                                       <p>牛熊切换，以守代攻 -2019年固收投资策略报告</p>
+                                                       <span>2019-10-02</span>
+                                                  </div>
+                                                  <img src="/homePage/static/img/tab1.png" alt="">
+                                             </li>
+                                             <li>
+                                                  <div>
+                                                       <p>牛熊切换，以守代攻 -2019年固收投资策略报告</p>
+                                                       <span>2019-10-02</span>
+                                                  </div>
+                                                  <img src="/homePage/static/img/tab1.png" alt="">
+                                             </li>
+                                             <li>
+                                                  <div>
+                                                       <p>牛熊切换，以守代攻 -2019年固收投资策略报告</p>
+                                                       <span>2019-10-02</span>
+                                                  </div>
+                                                  <img src="/homePage/static/img/tab1.png" alt="">
+                                             </li>
+                                        </ul>
+                                  </div>
                               </div>
                          </div>
                     </div>
@@ -135,15 +193,20 @@
      @@include('@pathInclude/views/footer.html')
      <!-- 添加埋点 -->
      @@include('@pathInclude/views/header.html')
-     <script src="@pathIncludJs/vendor/zepto/zepto.js"></script>
+     <!-- <script src="/include/js/vendor/jquery/jquery1.12.3.js"></script> -->
 	<script src="@pathIncludJs/vendor/root.js"></script>
      <script src="@pathIncludJs/vendor/mui/mui.min.js"></script>
-     <script>
-               mui('.mui-scroll-wrapper').scroll({
-               deceleration: 0.0005 //flick 减速系数，系数越大，滚动速度越慢，滚动距离越小，默认值0.0006 
-          });
-          </script>
      <script src="/homePage/static/js/fortuneCollegeList.js"></script>
+     <script>
+          var swiper = new Swiper('.swiper-container', {
+          slidesPerView: 'auto',
+          spaceBetween: 30,
+          pagination: {
+               el: '.swiper-pagination',
+               clickable: true,
+          },
+          });
+     </script>
  
  </body>
  </html>

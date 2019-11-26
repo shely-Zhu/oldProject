@@ -1,6 +1,6 @@
 /**
 * 财富学院早知道
-* @author yanruiting 2019-11-25
+* @author yanruiting 2019-11-26
 */
 require('@pathIncludJs/vendor/config.js');
 require('@pathIncludJs/vendor/zepto/callback.js');
@@ -17,30 +17,27 @@ $(function() {
 	let somePage = {
 		//获取页面元素
 		$e: {
-			fortuneFlowListWrapper: $(".knownList"), // 财富流向早知道列表容器
-			fortuneFlowListTemp: $("#fortuneFlowList-template"), // 财富流向早知道列表模板
-			listLoading: $('.listLoading') //所有数据区域，第一次加载的loading结构
+			tab:$('.tabHeader .tab'),
+			tabBody:$('.tabBody .tabContent'),			
+			contentWrap:$('#drapUpWrapper>div'),
+			HeadBarpathName:$("#HeadBarpathName"),
+			listLoading: $('.listLoading'), //所有数据区域，第一次加载的loading结构
 		},
 		//全局变量
 		gV: {
-			fortuneFlowList: [{
-				imgSrc: "/homePage/static/img/bofang@2x.png",
-				title: "",
-				date: "11.13",
-				content: "聪敏赚钱北向资金逆势买进看好节后？月度净流入再创新高啦啦啦啦啦啦啦啦"
-			}]
+			
 		},
 		//页面初始化函数
 		init: function() {	
 			var that = this;
 			that.events()
 			that.initMui(".list", ".contentWrapper")
-			generateTemplate(that.gV.fortuneFlowList, that.$e.fortuneFlowListWrapper, that.$e.fortuneFlowListTemp)
+			that.initMui(".list2", ".contentWrapper2")
 		},
 		//初始化mui的上拉加载
 		initMui: function(listClassName, wrapperName) {
 			var that = this;
-            var height = windowHeight - $(".HeadBarConfigBox").height();
+            var height = windowHeight - $(".HeadBarConfigBox").height() - $(".mui-segmented-control").height();
             if (!$(listClassName).hasClass('setHeight')) {
                 $(listClassName).height(height).addClass('setHeight');
             }
@@ -74,6 +71,12 @@ $(function() {
                 //为$id添加hasPullUp  class
                 $(listClassName).addClass('hasPullUp');
             });
+			//模拟点击对应的type。定位到当前type下
+			$(".mui-slider").on("slide",function(e){
+				var $this = $(this);
+				$("b").removeClass('borderBottom');
+				$("b").eq(e.detail.slideNumber).addClass('borderBottom');
+			})
 		},
 		//注册事件
 		events: function() {

@@ -347,7 +347,7 @@ module.exports = function() {
     // 月度报告详情页
     this.monthReportDetail_url = go_url.no_url + '/mine/views/monthReport/monthReportDetail.html';
     //自选公募详情页
-    this.optionalPublicDetail_url = go_url.no_url + '/account/views/optionalPublicDetail.html';
+    this.optionalPublicDetail_url = go_url.no_url + '/account/views/public/optionalPublicDetail.html';
     // 收益分配明细页
     this.incomeDistribution_url = go_url.no_url + '/account/views/private/incomeDistribution.html';
     // 私募交易明细
@@ -366,4 +366,6 @@ module.exports = function() {
     this.fundCompany_url = go_url.no_url + '/financial/views/publicPlacement/fundCompany.html';
     // 信息披露
     this.informationDisclosure_url = go_url.no_url + '/account/views/informationDisclosure.html';
+    // 公募交易详情查询
+    this.publicTradeDetail_url = go_url.no_url + '/account/views/publicTradeDetail/publicTradeDetail.html';
 };
