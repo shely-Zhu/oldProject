@@ -130,11 +130,11 @@ $(function() {
                         } else { // 还有更多数据
                             t.endPullupToRefresh(false);
                         }
+                        $('.list').find('.contentWrapper .mui-pull-bottom-pocket').removeClass('mui-hidden');
                         // 页面++
                         that.gV.pageCurrent++;
                         // 将消息列表插入到页面上
                         generateTemplate(data, that.$e.informsListWrapperId, that.$e.informsListTemp);
-
                     }, 200)
 
                 }
