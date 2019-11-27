@@ -72,7 +72,7 @@
 			margin-top:-0.2rem;
 			font-size:0.28rem;
 			margin-bottom:0.3rem;
-			b{
+			.getColor{
 				color:@272727;
 			}
 			strong{
@@ -153,6 +153,10 @@
 		}
 	}
 	.forumImg{
+		display: none;
+		&:nth-child(1) {
+			display:block;
+		}
 		div{
 			.swiper-container {
 			width: 100%;
