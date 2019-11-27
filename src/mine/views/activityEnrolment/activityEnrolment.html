@@ -48,7 +48,7 @@
                 <p class="secondp"></p>
             </div>
             <ul>
-                <li style="background: url('/mine/static/img/Life_banner_bg1@2x.png') 100% 100%">
+                <!-- <li style="background: url('/mine/static/img/Life_banner_bg1@2x.png') 100% 100%">
                     <div class="top">
                         <span>参与赠送30元电话卡30元电话卡</span>
                     </div>
@@ -58,8 +58,8 @@
                         <div>9月10日 至 9月15日</div>
                     </div>
                     <div></div>
-                </li>
-                <li style="background: url('/mine/static/img/Life_banner_bg2@2x.png') 100% 100%">
+                </li> -->
+                <!-- <li style="background: url('/mine/static/img/Life_banner_bg2@2x.png') 100% 100%">
                     <div class="top">
                         <span>参与赠送30元电话卡30元电话卡</span>
                     </div>
@@ -69,7 +69,7 @@
                         <div>9月10日 至 9月15日</div>
                     </div>
                     <div></div>
-                </li>
+                </li> -->
             </ul>
         </div>
    </div>
@@ -84,18 +84,34 @@
             <div class="sign">
                 {{#if status}}
                 <span class="yes">已签到</span>
-                <div>2019-10-12-13</div>
+                <div>{{arriveTime}}</div>
                 {{else}}
                 <span class="no">未签到</span>
                 {{/if}}
             </div> 
             <div class="time">
                 <div class="timeco">报名时间&nbsp;{{enterTime}}</div> 
-                <div class="timeBtn">分享给好友</div>
+                {{#if shareflag}}
+                <div class="timeBtn" data-actId={{actId}} data-actType ={{actType}}>分享给好友</div>
+                {{/if}}
             </div>
-       
+        </li>
     {{/each}}
     </script>
+
+    <script id="more-template" type="text/x-handlebars-template">
+        <li style="background: url('{{filePath}}') 100% 100%">
+            <div class="top">
+                <span>{{title}}</span>
+            </div>
+            <p>{{title}}</p>
+            <div class="footer">
+                <span>报名时间</span>
+                <div>9月10日 至 9月15日</div>
+            </div>
+            <div></div>
+        </li>
+        </script>
     
     <!-- 添加埋点 -->
 	@@include('@pathInclude/views/header.html')
