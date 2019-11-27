@@ -53,9 +53,9 @@ $(function(){
                     case 3: b.logoSrc = '/homePage/static/img/home_icon_transaction@2x.png'; b.mesTitle = "交易动态";break;
                 }
                 if(b.readStatus == 0) {
-                    b.badgeSrc = '/homePage/static/img/home_icon_Badge@2x.png'
+                    b.badgeFlag = true
                 } else {
-                    b.badgeSrc = ''
+                    b.badgeFlag = false
                 }
             })
             console.log(data)

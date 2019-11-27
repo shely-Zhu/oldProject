@@ -205,6 +205,8 @@ module.exports = {
     './mine/static/js/monthReport/monthReportList': './src/mine/static/js/monthReport/monthReportList.js',
     // 月度报告详情页
     './mine/static/js/monthReport/monthReportDetail': './src/mine/static/js/monthReport/monthReportDetail.js',
+    // 月度报告产品咨询
+    './mine/static/js/monthReport/consultProduct': './src/mine/static/js/monthReport/consultProduct.js',
     // 登录日志查询页面
     './mine/static/js/journal': './src/mine/static/js/journal.js',
     // 交易明细页面
@@ -227,13 +229,13 @@ module.exports = {
     './mine/static/js/concatUsAdvise': './src/mine/static/js/concatUsAdvise.js',
 
     //会员俱乐部
-    './mine/static/js/memberClub/activityList': "./src/mine/static/js/memberClub/activityList.js",
+    './life/static/js/memberClub/activityList': "./src/life/static/js/memberClub/activityList.js",
     //会员俱乐部-暂无数据mine
-    './mine/static/js/memberClub/activityNoList': "./src/mine/static/js/memberClub/activityNoList.js",
+    './life/static/js/memberClub/activityNoList': "./src/life/static/js/memberClub/activityNoList.js",
     //mui索引列表插件 
-    './mine/static/js/memberClub/mui.indexedlist': "./src/mine/static/js/memberClub/mui.indexedlist.js",
+    './life/static/js/memberClub/mui.indexedlist': "./src/life/static/js/memberClub/mui.indexedlist.js",
     //活动详情
-    './mine/static/js/memberClub/activityDetails': "./src/mine/static/js/memberClub/activityDetails.js",
+    './life/static/js/memberClub/activityDetails': "./src/life/static/js/memberClub/activityDetails.js",
     //文件上传
     './mine/static/js/uploadMaterial': './src/mine/static/js/uploadMaterial.js',
     //明星理财师-理财师列表
@@ -268,7 +270,7 @@ module.exports = {
     // 明星理财师-列表
     './homePage/static/js/starFinancialPlannerList': './src/homePage/static/js/starFinancialPlannerList.js',
     // 已报名活动
-    './mine/static/js/memberClub/activityEnrolment': './src/mine/static/js/memberClub/activityEnrolment.js',
+    './mine/static/js/activityEnrolment': './src/mine/static/js/activityEnrolment.js',
     // 消息中心-通知详情
     './homePage/static/js/noticeDetail': './src/homePage/static/js/noticeDetail.js',
     //include---富文本模板
@@ -298,7 +300,8 @@ module.exports = {
 
     // 自选公募--超宝详情
     './account/static/js/public/superStreasureDetail': './src/account/static/js/public/superStreasureDetail.js',
-
+    // 自选公募--超宝详情--内容
+    './account/static/js/public/superContent': './src/account/static/js/public/superContent.js',
     // 现金宝详情页
 
     './account/static/js/public/cashTreasure': './src/account/static/js/public/cashTreasure.js',
@@ -359,7 +362,11 @@ module.exports = {
     // 财富学院早知道
     './homePage/static/js/fortuneFlowKnown': './src/homePage/static/js/fortuneFlowKnown.js',
     // 财富讲堂
-    './homePage/static/js/fortuneClassroom' : './src/homePage/static/js/fortuneClassroom.js'
+    './homePage/static/js/fortuneClassroom' : './src/homePage/static/js/fortuneClassroom.js',
+    //历史明细
+    './mine/static/js/historyDetail': "./src/mine/static/js/historyDetail.js",
+    //收益明细
+    './mine/static/js/returnsDetail': "./src/mine/static/js/returnsDetail.js",
 
 
 }

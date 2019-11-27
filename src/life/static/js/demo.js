@@ -1,6 +1,4 @@
 
-let a = 1;
-
 require('@pathIncludJs/vendor/mui/mui.picker.min.js');
 
 //引入下拉列表选择器
@@ -8,7 +6,18 @@ var popPicker = require('@pathCommonJsCom/popPicker.js');
 
 var provinceList = require('../../../common/json/provinceList.js');
 
-mui("body").on("tap", ".timeSelect", function (e) {
+
+mui("body").on("tap", '.provinceSelect', function() {
+    $('input,textarea').blur();
+
+    if (!$('[check=provinceSelect]').hasClass('unable')) {
+        popPicker(1, provinceList, $('.provinceSelect a'));
+    }
+})
+
+
+
+mui("body").on("tap", ".timeSelect", function(e) {
     $('input,textarea').blur();
 
     if (!$('[check=timeSelect]').hasClass('unable')) {
@@ -27,10 +36,5 @@ mui("body").on("tap", ".timeSelect", function (e) {
 });
 
 
-mui("body").on("tap", '.provinceSelect', function () {
-    $('input,textarea').blur();
 
-    if (!$('[check=provinceSelect]').hasClass('unable')) {
-        popPicker(1, provinceList, $('.provinceSelect a'));
-    }
-})
+

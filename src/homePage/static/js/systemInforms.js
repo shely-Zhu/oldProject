@@ -137,7 +137,11 @@ $(function() {
                         generateTemplate(data, that.$e.informsListWrapperId, that.$e.informsListTemp);
                     }, 200)
 
-                }
+                },
+                callbackNoData: function(json) {
+                    $(".noDataCon").css("display", "block")
+                    $(".mui-table-view-cell").css("background", "#eeeeee")
+                },
             }];
             $.ajaxLoading(obj);
         },
