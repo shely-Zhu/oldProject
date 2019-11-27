@@ -135,7 +135,6 @@ module.exports = function() {
     this.pofUpdateDividend_api = pre + 'dividend/updateDividend'; // 22.分红方式修改
     this.fundNetWorthTrendChart_api = pre + 'fundDetails/frontend/fundNetWorthTrendChart'; // 金服WEB-详情页-基金净值走势图查询
 
->>>>>>> a60bb4d2881e0ce3e567821cd2fe6cac41a1cfb3
     /*-------------------公募相关 end ------------------------------*/
 
 
@@ -276,10 +275,6 @@ module.exports = function() {
 
     // 我的理财师查询
     this.queryMyFinancialerList_api = http_url.web_url + '/account/home/queryMyFinancialerList'
-<<<<<<< HEAD
-    
-=======
->>>>>>> a60bb4d2881e0ce3e567821cd2fe6cac41a1cfb3
 
     /*------------------- 月度报告 end ------------------------------*/
 
@@ -352,9 +347,7 @@ module.exports = function() {
     //已报名活动
     this.getApplyActivity_api = http_url.web_url + '/marketing/activity/getApplyActivity';
     this.queryFortuneCollegeSec_api = http_url.web_url + '/account/home/frontend/queryFortuneCollegeSec'; //财富讲堂/财富研究
-<<<<<<< HEAD
     this.queryFortuneArticleList_api = http_url.web_url + '/account/home/frontend/queryFortuneArticleList'; //财富文章列表
-=======
 
     /*------------------------------------ 私募接口文档 start -------------------------------------*/
     // 产品详情接口
@@ -363,6 +356,4 @@ module.exports = function() {
 
 
     /*------------------------------------ 私募接口文档 end -------------------------------------*/
-
->>>>>>> a60bb4d2881e0ce3e567821cd2fe6cac41a1cfb3
 };
