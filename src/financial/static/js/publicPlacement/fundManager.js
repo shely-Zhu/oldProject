@@ -45,11 +45,6 @@ $(function () {
 
           var tplm = $("#dataLists").html();
           var template = Handlebars.compile(tplm);
-          // json.tradeRecordStutas = tradeRecord.length > 0 ? 1 : 0
-          // tradeRecord.forEach(n => {
-          //   n.tradeTime = n.tradeTime.split(" ")[0]
-          //   n.status = n.status === "1" ? 1 : 0
-          // });
           var html = template(json);
           $(".tplBox").html(html);
 

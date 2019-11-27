@@ -77,7 +77,7 @@ $(function () {
             });
             // 基金公司
             mui("body").on("tap", ".fundCompany", function (e) {
-                window.location.href = site_url.pofFundCompany_url + '?fundCode=000847'
+                window.location.href = site_url.pofFundCompany_url + '?fundComId=gz04tVwXga'
             });
             // 基金档案
             mui("body").on("tap", ".fundFile", function (e) {
