@@ -5,10 +5,8 @@
  * @description:
  * 公募持仓页面
  */
-require('../../../include/js/vendor/config.js');
-require('../../../include/js/vendor/zepto/callback.js');
-require('../../../include/js/vendor/zepto/deferred.js');
-require('../../../common/js/components/utils.js');
+
+require('@pathIncludJs/base.js');
 require('../../../common/js/ajaxLoading.js');
 require('@pathCommonJs/components/headBarConfig.js');
 var tipAction = require('@pathCommonJs/components/tipAction.js');

@@ -72,7 +72,7 @@
 			margin-top:-0.2rem;
 			font-size:0.28rem;
 			margin-bottom:0.3rem;
-			b{
+			.getColor{
 				color:@272727;
 			}
 			strong{
@@ -153,6 +153,10 @@
 		}
 	}
 	.forumImg{
+		display: none;
+		&:nth-child(1) {
+			display:block;
+		}
 		div{
 			.swiper-container {
 			width: 100%;
@@ -208,6 +212,14 @@
 				ol{
 					display:-webkit-box;
 					li{
+						&:first-child{
+							a{
+								color:@272727;
+								font-weight: bold;
+								font-size:0.28rem;
+								border-bottom:2px solid @061D6A;
+							}
+						}
 						-webkit-box-flex:1;
 						line-height:0.7rem;
 						color:@9B9B9B;
@@ -215,19 +227,28 @@
 						text-align: center;
 						a{
 							padding-bottom:0.2rem;
+							// &:first-child{
+							// 	color:@272727;
+							// 	font-weight: bold;
+							// 	font-size:0.28rem;
+							// 	border-bottom:2px solid @061D6A;
+							// }
 						}
-					}
-					.active{
-						color:@272727;
-						font-weight: bold;
-						font-size:0.28rem;
-						border-bottom:2px solid @061D6A;
+						.active{
+							color:@272727;
+								font-weight: bold;
+								font-size:0.28rem;
+								border-bottom:2px solid @061D6A;
+						}
 					}
 				}
 			}
 			.tab-b{
 				.tab-content{
 					display: none;
+					&:nth-child(1) {
+						display:block;
+					}
 					ul li{
 						background-image: linear-gradient(to right, @6C83C9 ,@061D6A);
 						display:-webkit-box;

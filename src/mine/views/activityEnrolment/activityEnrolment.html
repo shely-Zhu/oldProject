@@ -23,7 +23,7 @@
         </div>
         <!-- 有活动 -->
         <div class="dd_radar HasData">
-            <ul class="listHasData">
+            <ul class="listHasData0">
                 <!-- 暂无数据 -->
                 @@include('@pathCommonViews/noDataImg.html',{"tipText":"暂无数据"})
             </ul>
@@ -47,8 +47,8 @@
                 <div>更多精彩活动</div>
                 <p class="secondp"></p>
             </div>
-            <ul>
-                <li style="background: url('/mine/static/img/Life_banner_bg1@2x.png') 100% 100%">
+            <ul class="moreul">
+                <!-- <li style="background: url('/mine/static/img/Life_banner_bg1@2x.png') 100% 100%">
                     <div class="top">
                         <span>参与赠送30元电话卡30元电话卡</span>
                     </div>
@@ -58,8 +58,8 @@
                         <div>9月10日 至 9月15日</div>
                     </div>
                     <div></div>
-                </li>
-                <li style="background: url('/mine/static/img/Life_banner_bg2@2x.png') 100% 100%">
+                </li> -->
+                <!-- <li style="background: url('/mine/static/img/Life_banner_bg2@2x.png') 100% 100%">
                     <div class="top">
                         <span>参与赠送30元电话卡30元电话卡</span>
                     </div>
@@ -69,7 +69,7 @@
                         <div>9月10日 至 9月15日</div>
                     </div>
                     <div></div>
-                </li>
+                </li> -->
             </ul>
         </div>
    </div>
@@ -77,23 +77,50 @@
    <script id="activityEn-template" type="text/x-handlebars-template">
     {{#each this}}
         <li>
-            <img src="/mine/static/img/Life_bg_picturer@2x.png" alt="">
-            <p>恒天豪礼，中秋试手气恒天豪礼，中秋试手气恒天豪礼，中秋试手气</p>
+            {{#if imgurl}}
+            <img src="{{htjfGeneralizeImgUrl}}" alt="">
+            {{/if}}
+            <p>{{actName}}</p>
             <div class="sign">
+                {{#if status}}
+                <span class="yes">已签到</span>
+                <div>{{arriveTime}}</div>
+                {{else}}
                 <span class="no">未签到</span>
+                {{/if}}
             </div> 
             <div class="time">
-                <div class="timeco">报名时间&nbsp;2019-09-10&nbsp;12:00</div> 
-                <div class="timeBtn">分享给好友</div>
+                <div class="timeco">报名时间&nbsp;{{enterTime}}</div> 
+                {{#if shareflag}}
+                <div class="timeBtn" data-actId={{actId}} data-actType ={{actType}}>分享给好友</div>
+                {{/if}}
             </div>
-       
+        </li>
     {{/each}}
     </script>
+
+    <script id="more-template" type="text/x-handlebars-template">
+        <li style="background: url('{{filePath}}') 100% 100%">
+            {{#if prize}}
+            <div class="top">
+                <span>{{prize}}</span>
+            </div>
+            {{/if}}
+            <p>{{title}}</p>
+            {{#if timeflag}}
+            <div class="footer">
+                <span>报名时间</span>
+                <div>{{actStartDate}} 至 {{actEndDate}}</div>
+            </div>
+            {{/if}}
+            <div></div>
+        </li>
+        </script>
     
     <!-- 添加埋点 -->
 	@@include('@pathInclude/views/header.html')
     @@include('@pathInclude/views/footer.html')
-    <script src="/mine/static/js/memberClub/activityEnrolment.js"></script>
+    <script src="/mine/static/js/activityEnrolment.js"></script>
 
 
 

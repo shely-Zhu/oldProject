@@ -26,9 +26,10 @@ module.exports = function(callback,forgetCall){
 		//将input输入内容依次加到密码输入框里
 		$("#pwd-input").on("input", function() {
 //				将input上的内容赋值到password框上
-			 var payPwd = $(this).val().trim().split('');
+			 var payPwd = $(this).val().trim().split(''),
+			 inputVal = $(this).val();
 			 if(payPwd.length == 6){
-				 callback($(this).val());
+				 callback(inputVal);
 				 return false;
 			 }
 			 
@@ -51,7 +52,7 @@ module.exports = function(callback,forgetCall){
 			},300)
 		})
 		$("#pwd-input").on("blur", function() {
-			that.fixScroll(1)
+			    fixScroll(1)
 		})
 		$(".closeBtn").on('click',function(){
 			$("#passwordWrap").hide();
