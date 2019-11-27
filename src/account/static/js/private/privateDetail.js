@@ -123,7 +123,6 @@ $(function() {
 			    callbackDone: function(json) {
 			    	that.data.redeemRule = json.data.introduction.replace(/\r\n/g,"").split("=====");
 			    	// 判断是否有快速赎回规则
-			    	console.log(that.data.redeemRule)
 			    	if(that.data.redeemRule.indexOf("快赎规则") !== -1) {
 			    		that.setRedeemRule(1)
 			    	} else {  // 只有普通赎回规则
@@ -131,7 +130,7 @@ $(function() {
 			    		$("#redeemNav .quick").css("display", "none").removeClass('active')
 			    		$("#redeemNav .normal").addClass("active")
 			    	}
-			    },
+			    }
 			}];
 			$.ajaxLoading(obj);	
 		},
@@ -484,13 +483,12 @@ $(function() {
 			//项目名称
     		$('#HeadBarpathName').html( jsonData.projectName );
 	    	if ( that.data.projectType == 0 ){ //稳金类项目
-	    		console.log(jsonData.capitalisation)
     			//当前市值
     			$('#type0TotalM').html( jsonData.capitalisation );
     		   	//持有份额
     		   	$('.type_0 .totalShare').html( jsonData.totalShare );
     		   	//七日年化
-    		   	$('.type_0 .sevenYearYield').html( jsonData.sevenYearYield);
+    		   	$('.type_0 .sevenYearYield').html( jsonData.sevenYearYield + '%');
     		   	// 七日年化日期
     		   	$('.type_0 .smallDate').html( " (" + jsonData.sevenYearYieldUpdateDate + ")");
     		   	//可赎回份额
@@ -503,15 +501,19 @@ $(function() {
 	    		//持有份额
 	    		$('.type_1 .totalShare').html( jsonData.totalShare );
 	    		//七日年化
-	    		$('.type_1 .sevenYearYield').html( jsonData.sevenYearYield);
+	    		$('.type_1 .sevenYearYield').html( jsonData.sevenYearYield + '%');
 	    		// 七日年化日期
     		   	$('.type_1 .smallDate').html( " (" + jsonData.sevenYearYieldUpdateDate + ")");
 	    		//可赎回份额
     		   	$('.type_1 .kshfe').html( jsonData.allowRedemptionShare);
     		   	//赎回开放日
-    		   	$('.type_1 .shkfr').html( jsonData.redemptionOpenDay);
+    		   	jsonData.redemptionOpenDay ? $('.type_1 .shkfr').html( jsonData.redemptionOpenDay) : $(".type_1 .shkfr").parent().css("display", "none")
     		   	//可提交赎回申请时间
-    		   	$('.type_1 .ketjsh').html( (jsonData.beginRedemptionTime ? jsonData.beginRedemptionTime : '') + ' 至 ' + ( jsonData.endRedemptionTime ? jsonData.endRedemptionTime : '') );
+	    		if(jsonData.beginRedemptionTime && jsonData.endRedemptionTime) {
+	    			$('.type_1 .ketjsh').html( jsonData.beginRedemptionTime + ' 至 ' + jsonData.endRedemptionTime );
+	    		} else {
+	    			$('.type_1 .ketjsh').parent().parent().css("display", "none")
+	    		}
 	    	} else if( that.data.projectType == 2){ //债权类	  		
 	    		//当前持仓
 	    		$('#type2TotalM').html( jsonData.totalShare );
@@ -538,19 +540,23 @@ $(function() {
 	    		//当前市值
 	    		$('#type4TotalM').html( jsonData.capitalisation );
 	    		// 单位净值
-	    		$('.type_4 .dwjz').html( jsonData.navUnit );
+	    		$('.type_4 .dwjz').html( jsonData.navUnit==''?'--': jsonData.navUnit);
 	    		// 持有份额
 	    		$('.type_4 .cyfe').html( jsonData.totalShare );
 	    		// 累计净值
-	    		$('.type_4 .ljjz').html( jsonData.totalNetValue );
+	    		$('.type_4 .ljjz').html( jsonData.totalNetValue==''?'--':jsonData.totalNetValue );
 	    		// 可赎回份额
 	    		$('.type_4 .kshhf').html( jsonData.allowRedemptionShare );
 	    		// 持有天数
 	    		$('.type_4 .cyts').html( jsonData.holdDays );
-	    		// 赎回开放日
-	    		$('.type_4 .shkfr').html( jsonData.redemptionOpenDay );
-	    		// 可提交赎回申请时间
-	    		$('.type_4 .ktjshsqsj').html( (jsonData.beginRedemptionTime ? jsonData.beginRedemptionTime : '') + ' 至 ' + ( jsonData.endRedemptionTime ? jsonData.endRedemptionTime : '') );
+	    		//赎回开放日
+    		   	jsonData.redemptionOpenDay ? $('.type_4 .shkfr').html( jsonData.redemptionOpenDay) : $(".type_4 .shkfr").parent().css("display", "none")
+    		   	//可提交赎回申请时间
+	    		if(jsonData.beginRedemptionTime && jsonData.endRedemptionTime) {
+	    			$('.type_4 .ktjshsqsj').html( jsonData.beginRedemptionTime + ' 至 ' + jsonData.endRedemptionTime );
+	    		} else {
+	    			$('.type_4 .ktjshsqsj').parent().parent().css("display", "none")
+	    		}
 	    	}
 	    	$(".totalM").css({"background": "linear-gradient(360deg, rgba(186,140,112,1) 0%, rgba(244,210,192,1) 100%)", "-webkit-background-clip": "text", "-webkit-text-fill-color": "transparent"})
 	    	// 显示各明细分类
@@ -642,6 +648,9 @@ $(function() {
             })
             // 净值明细点击跳转
             mui("body").on('tap', '#netValueDetailBtn', function() {
+            	window.location.href = site_url.priNetWorthDetails_url + '?projectId=' + that.data.projectId;
+            })
+            mui("body").on('tap', '#netValueDetailArrow', function() {
             	window.location.href = site_url.priNetWorthDetails_url + '?projectId=' + that.data.projectId;
             })
             // 交易规则点击跳转
