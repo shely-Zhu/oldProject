@@ -18,16 +18,15 @@
     isBuy 是否为现金宝的买入页面
     applyId	  申请编号
  */
-require('@pathIncludJs/vendor/config.js');
-require('@pathIncludJs/vendor/zepto/callback.js');
-require('@pathIncludJs/vendor/zepto/deferred.js');
-require('@pathCommonJs/components/utils.js');
+
+require('@pathIncludJs/base.js');
+
 require('@pathCommonJs/ajaxLoading.js');
 require('@pathCommonJs/components/headBarConfig.js');
 
 var tipAction = require('@pathCommonJs/components/tipAction.js');
 var splitUrl = require('@pathCommonJs/components/splitUrl.js');
-var payPass = require('../public/payPassword.js');
+var payPass = require('@pathCommonJs/components/payPassword.js');
 
 $(function () {
     var obj = {

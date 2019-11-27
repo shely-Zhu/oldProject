@@ -8,7 +8,7 @@
 <head>
     @@include('@pathInclude/views/meta.html')
     <link rel="stylesheet" href="/account/static/css/private/privateDetail.css">
-    <title></title>
+    <title>私募产品详情页</title>
 </head>
 
 <body>
@@ -268,7 +268,7 @@
 	 			<div class="clearfix titleWrap type5Wrap">
 	 				<span class="title dwjz active">单位净值</span>
 	 				<span class="title ljjz">累计净值</span>
-	 				<div class="arrow">
+	 				<div class="arrow" id="netValueDetailArrow">
 	 					<span class="img"></span>
 	 				</div>
 	 				<span class="rightTitle" id="netValueDetailBtn">净值明细</span>
@@ -285,9 +285,9 @@
 	 				<!-- 无数据提示 -->
 	 				<div class="hide noDataHintEcharts">暂无数据</div>
 	 				<div class='mui-row tab'>
-	 					<span class="mui-col-sm-3 mui-col-xs-3 time oneMonth active" num="0">近一个月</span>
+	 					<span class="mui-col-sm-3 mui-col-xs-3 time oneMonth" num="0">近一个月</span>
 	 					<span class="mui-col-sm-3 mui-col-xs-3 time threeMonth" num="1">近三个月</span>
-	 					<span class="mui-col-sm-3 mui-col-xs-3 time newYear" num="3">近一年</span>
+	 					<span class="mui-col-sm-3 mui-col-xs-3 time newYear active" num="3">近一年</span>
 	 					<span class="mui-col-sm-3 mui-col-xs-3 time sinceNow" num="4">成立至今</span>
 	 				</div>
 	 			</div>
@@ -343,7 +343,7 @@
 	</div>
 
 	@@include('@pathInclude/views/footer.html')
-	@@include('@pathInclude/views/header.html')
+
 	<script src="/include/js/vendor/echarts/echarts.min.js"></script>
 	<script src="/account/static/js/private/privateDetail.js"></script>
 

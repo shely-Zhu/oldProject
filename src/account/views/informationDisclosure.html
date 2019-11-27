@@ -1,58 +1,88 @@
-<!--信息披露页面-->
-<!--author:caiwenqi-->
-<!--time：2019-11-15-->
-<!DOCTYPE html>
-<html>
-	<head>
-		@@include('@pathInclude/views/meta.html')
-		<link rel="stylesheet" href="/account/static/css/informationDisclosure.css">
-		<title>信息披露</title>
-	</head>
-	<body>
-		<!--加载图标-->
-		@@include('@pathCommonViews/load.html') 
-		<!--没有数据显示图标-->
-		@@include('@pathCommonViews/noData.html')
-		<!--列表加载显示图标-->
-		@@include('@pathCommonViews/loading/listLoading.html')
-		<!--公共页面头部-->
-		@@include('@pathCommonViews/headBarConfig.html',{"pathName":"信息披露"})
-		
-		<div class="mui-slider" id="tabbar">
-		    <div class="mui-slider-indicator mui-segmented-control mui-segmented-control-inverted">
-		        <a class="mui-control-item mui-active" href="#item1">管理报告<b class="borderBottom"></b></a>
-		        <a class="mui-control-item" href="#item2">重要公告及通知<b></b></a>
-		        <a class="mui-control-item" href="#item3">恒天简报<b></b></a>
-		    </div>
-		    <div class="mui-slider-group" id="drapUpWrapper">
-		        <div id="item1" class="mui-slider-item mui-control-content mui-active">
-		        	<div class="">
-		        		<span class="fileLabel">--</span>
-		        		<p class="fileName">--<a class="iconfont" id="fontSize" href="javascript:;">&#xe636;</a></p>
-		        		<span class="fileTime">--</span>
-		        	</div>
-		        	<div class="">
-        				<span class="fileLabel">--</span>
-        				<p class="fileName">--<a class="iconfont" id="fontSize" href="javascript:;">&#xe636;</a></p>
-        				<span class="fileTime">--</span>
-					</div>
-		        </div>
-		        <div id="item2" class="mui-slider-item mui-control-content">
-					这是重要公告及通知区域
-		        </div>
-		        <div id="item3" class="mui-slider-item mui-control-content">
-					这是恒天简报区域
-		        </div>                    
-		    </div>
-			<footer>
-				暂无更多数据
-			</footer>
-		</div>
-		
-		@@include('@pathInclude/views/footer.html')
-		<script src="/include/js/iscroll.js"></script>
-		<!-- 添加埋点 -->
-		@@include('@pathInclude/views/header.html')
-		<script src="/account/static/js/informationDisclosure.js"></script>
-	</body>
-</html>
+<!--/**
+ * 产品材料列表
+ * @author  zhangweipeng 2017-03-10
+ */-->
+
+ <!doctype html>
+ <html lang="en">
+ <head>
+	@@include('@pathInclude/views/meta.html')
+	 <link rel="stylesheet" href="/account/static/css/informationDisclosure.css">
+	   <title>产品材料</title> 
+ </head>
+ <body>
+	<!-- @@include('@pathCommonViews/load.html')  -->
+	 <!-- 加载中loading -->
+	<!-- @@include('@pathCommonViews/loading/listLoading.html') -->
+ 
+	 <!-- 暂无数据 -->
+	@@include('@pathCommonViews/noData.html')
+ 
+	@@include('@pathCommonViews/headBarConfig.html',{"pathName":"信息披露"})
+ 
+	 <div class="mui-content midContent prvMart"> 
+		 <!-- 放置页面内容 -->
+ 
+	 </div>	
+ 
+	 <script id="wrap-template" type="text/x-handlebars-template">
+		 {{! 列表 内容 使用mui的上拉加载}}
+		 <div class="list">
+			 {{! list是包裹上拉加载区域的，在js中计算当前页面中的list高度，不能超出一屏}}
+ 
+			 {{! 初始化上拉加载区域，使用contentWrapper class}}
+			 {{! contentWrapper 需要添加样式，具体见less文件}}
+			 <div class="contentWrapper">
+ 
+				 <ul class="mui-table-view">
+					 <li class="mui-table-view-cell">
+					 {{! 所有内容  需要放在这个li里，且里面不能再用Li元素}}
+					 {{{content}}}
+ 
+					 </li>
+				 </ul>
+ 
+				 <!-- 返回顶部 -->
+				 @@include('../../common/views/goTop.html')
+				 
+			 </div>
+		 </div>
+	 </script>
+ 
+ 
+	 <!-- 列表模板 -->
+	 <script id="prvMar-template" type="text/x-handlebars-template">
+		 {{#each this}}
+			 {{#if line}}
+				 <div href="{{href}}" class="mui-box">
+					 <div class="marBox">
+						 <div class="clearfix item">
+							 <span class="marName">{{name}}</span>
+						 </div>
+						 <div class="inro ellipsis">{{marName}}</div>
+					 </div>
+					 <i class="iconfont jump">&#xe67d;</i>
+					 <span class="marDate">{{fileDate}}</span>
+				 </div>
+			 {{else}}
+				 <div href="{{href}}" class="mui-box">
+					 <div class="marBox">
+						 <div class="clearfix item">
+							 <span class="marName">{{name}}</span>
+						 </div>
+						 <div class="inro ellipsis">{{marName}}</div>
+					 </div>
+					 <i class="iconfont jump">&#xe67d;</i>
+					 <span class="marDate">{{fileDate}}</span>
+				 </div>
+			 {{/if}}
+		 {{/each}}
+	 </script>
+	   <!-- <script src="/include/js/vendor/zepto/zepto.js"></script>
+	   <script src="/include/js/vendor/root.js"></script>
+	   <script src="/include/js/vendor/handlebar/handlebars.js"></script>
+	   <script src="/include/js/vendor/mui/mui.min.js"></script> -->
+	   @@include('@pathInclude/views/footer.html')  
+
+		 <script src="/account/static/js/informationDisclosure.js"></script>
+ </body>
