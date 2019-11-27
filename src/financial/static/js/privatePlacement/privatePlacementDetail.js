@@ -17,3 +17,27 @@ require('@pathCommonJsCom/headBarConfig.js');
 
 // var splitUrl = require('@pathCommonJs/components/splitUrl.js')();
 // var generateTemplate = require('@pathCommonJsComBus/generateTemplate.js');
+
+
+$(function(){
+    var  privatePlacementDetail = {
+        //获取页面元素
+        $e:{
+            
+        },
+        //页面初始化函数
+        init:function(){
+            var that=this;
+            that.events()
+        },
+        events: function(){
+            var that = this;
+            //tab点击切换
+            mui("body").on('tap', '.tabs>li' , function(){
+                $(this).addClass('active').siblings().removeClass('active');
+                $(".wrap>.panel").eq($(this).index()).addClass('active').siblings().removeClass('active');
+            })
+        }
+    };
+    privatePlacementDetail.init();
+});
