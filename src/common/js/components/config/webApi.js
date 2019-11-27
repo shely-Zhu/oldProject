@@ -270,4 +270,5 @@ module.exports = function () {
     /*------------------- 财富学院 start ------------------------------*/
     this.queryFortuneBanner_api = http_url.web_url + '/account/home/frontend/queryFortuneBanner'; //首页banner
     this.queryFortuneCollegeFir_api = http_url.web_url + '/account/home/frontend/queryFortuneCollegeFir'; //财富翻译官/早知道
+    this.queryFortuneCollegeSec_api = http_url.web_url + '/account/home/frontend/queryFortuneCollegeSec'; //财富讲堂/财富研究
 };

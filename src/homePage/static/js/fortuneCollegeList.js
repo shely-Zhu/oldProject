@@ -26,6 +26,7 @@ var productPublic = {
         //翻译早知道
         that.getFortuneCollegeFir()
         that.getFortuneCollegeFirCf()
+        this.getWealthResearch()
         that.events();
     },
     getData:function(){
@@ -113,6 +114,23 @@ var productPublic = {
                 // 将列表插入到页面上
                 generateTemplate(modelData,$('.fortuneVideo .title'),$('#fortuneCf-template'));     
                 generateTemplate(articleData,$('.fortuneVideo ul'),$('#video-template'));						
+            },
+            callbackFail: function(json){
+                console.log(json)
+            },
+         }]
+        $.ajaxLoading(obj);
+    },
+    getWealthResearch:function(){
+        var that =this;
+        var obj=[{
+             url: site_url.queryFortuneCollegeSec_api,
+             data: {    
+                type:"28", //类型财富研究
+            },
+            needDataEmpty: true,
+            callbackDone: function(json){
+               console.log(json)					
             },
             callbackFail: function(json){
                 console.log(json)
