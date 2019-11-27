@@ -606,6 +606,12 @@ gulp.task("webpack", ['jsCpd'],  function(cb) {
     //测试环境
     pump([
         gulp.src(['src/*']),
+
+        //禁止使用es6
+        // plugins.jshint(),
+
+        // plugins.jshint.reporter('default'),
+
         plugins.webpack(webpackConfig),
 
         //添加changeLocalHistory、eruda和CustomEventIeFile的文件内容
