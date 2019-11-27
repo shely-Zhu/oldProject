@@ -213,6 +213,9 @@
 						color:@9B9B9B;
 						font-size:0.28rem;
 						text-align: center;
+						a{
+							padding-bottom:0.2rem;
+						}
 					}
 					.active{
 						color:@272727;
@@ -223,7 +226,8 @@
 				}
 			}
 			.tab-b{
-				div{
+				.tab-content{
+					display: none;
 					ul li{
 						background-image: linear-gradient(to right, @6C83C9 ,@061D6A);
 						display:-webkit-box;
@@ -249,6 +253,9 @@
 							display: block;
 						}
 					}
+				}
+				.show{
+					display:block;
 				}
 			}
 		}

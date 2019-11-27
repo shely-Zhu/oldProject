@@ -165,6 +165,8 @@ module.exports = function () {
 
     //会员权益详情-获取会员权益详情
     this.findBenefitByLevel_api = http_url.web_url + '/content/findBenefitByLevel';
+    //超宝---根据产品代码查询协议基本信息
+    this.findProtocolBasic_api = http_url.web_url + '/content/findProtocolBasic';
 
     //文章模板接口
     //  this.getArticle_api = http_url.web_url + '/account/articleExample';
@@ -246,11 +248,11 @@ module.exports = function () {
 
     // 立即咨询
     this.reportContactNow_api = http_url.web_url + '/account/report/reportContactNow';
+    // 我的理财师查询
+    this.queryMyFinancialerList_api = http_url.web_url + '/account/home/queryMyFinancialerList'
     
     /*------------------- 月度报告 end ------------------------------*/
 
-    // 金服WEB-详情页-基金净值走势图查询
-    this.fundNetWorthTrendChart_api = http_url.web_url + '/pof/fundDetails/frontend/fundNetWorthTrendChart';
 
     // 超宝基金产品-交易记录
     this.queryTradeList_api = http_url.web_url + '/account/pof/cash/queryTradeList';
@@ -271,4 +273,5 @@ module.exports = function () {
 
     //已报名活动
     this.getApplyActivity_api = http_url.web_url + '/marketing/activity/getApplyActivity'; 
+    this.queryFortuneCollegeSec_api = http_url.web_url + '/account/home/frontend/queryFortuneCollegeSec'; //财富讲堂/财富研究
 };
