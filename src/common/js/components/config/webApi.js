@@ -277,4 +277,5 @@ module.exports = function() {
     //已报名活动
     this.getApplyActivity_api = http_url.web_url + '/marketing/activity/getApplyActivity';
     this.queryFortuneCollegeSec_api = http_url.web_url + '/account/home/frontend/queryFortuneCollegeSec'; //财富讲堂/财富研究
+
 };
