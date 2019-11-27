@@ -8,20 +8,13 @@
  */
 
 
-require('@pathCommonJsCom/utils.js');
+require('@pathIncludJs/base.js');
+
 //ajax调用
 require('@pathCommonJs/ajaxLoading.js');
-//zepto模块--callback
-require('@pathIncludJs/vendor/zepto/callback.js');
-//zepto模块--deferred
-require('@pathIncludJs/vendor/zepto/deferred.js');
-//路径配置文件
-require('@pathIncludJs/vendor/config.js');
 
 require('@pathCommonJs/components/headBarConfig.js');
 
-
-var splitUrl = require('@pathCommonJs/components/splitUrl.js')();
 
 $(function() {
 
