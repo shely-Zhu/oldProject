@@ -2,6 +2,16 @@
  * 通用头部导航条
  * @author chentiancheng  2019-11-12
  */
+
+/**
+ * iconStype:icon的样式，也可以是文字。如果是icon传入对应的码例如：&#xe609;
+ * serviceType：如果是1就显示，如果是0则不显示。主要控制右边图标的显示隐藏
+ * 例如
+ * @@include('@pathCommonViews/headBarConfig.html',{"pathName":"自选公募","bgColors":"#475A95,#475A95","showType":"1","serviceType":"1"})
+ * 
+ * 
+ * 
+  */
 require('../../../include/js/vendor/zepto/fx.js');
 var titleName="";
 //各个页面对应的头部名称
@@ -43,6 +53,7 @@ var pathTitle=[
     }
 ]
 $(function(){
+	var $headBarConfigBox = $("#HeadBarConfigBox");
     //判断传入的值
     if($("#HeadBarpathName").attr("data")=="@@pathName"){
         var Request ={}
@@ -60,14 +71,14 @@ $(function(){
         $("#HeadBarpathName").show()
     }
     //传人样式判断展示形式 
-    if($("#HeadBarConfigBox").attr('showType')=='1'){
-        var colors=$("#HeadBarConfigBox").attr('bgColors').split(",")
+    if($headBarConfigBox.attr('showType')=='1'){
+        var colors=$headBarConfigBox.attr('bgColors').split(",")
          ClearStyle()
         $('.zhanweifu').css('display','none')
         $(window).scroll(function(){
             var tops=$(this).scrollTop();
             if(tops>50){//当window的scrolltop距离大于50时，
-                $("#HeadBarConfigBox").animate({"background-image":"linear-gradient(to right,"+colors[0]+" 40%, "+colors[1]+" 60%)","color":"#fff"},'slow', 'ease-out')
+                $headBarConfigBox.animate({"background-image":"linear-gradient(to right,"+colors[0]+" 40%, "+colors[1]+" 60%)","color":"#fff"},'slow', 'ease-out')
                 $("#HeadBarConfigBox a").css({"color":"#fff"});
             }else{
                 ClearStyle()
@@ -84,6 +95,19 @@ $(function(){
         }
     }else{
 
+    }
+//  判断客服热线是否展示
+    if($headBarConfigBox.attr('serviceType')=='1'){//如果图标显示
+    	if(!!$headBarConfigBox.attr('iconStype') && $headBarConfigBox.attr('iconStype') !== "@@iconStype"){//如果右上角图标有配显示配置的
+    		$("#customerService").show().html($headBarConfigBox.attr('iconStype'));
+    	}else{//负责显示默认的
+    		$("#customerService").show();
+    		//返回上一页
+		    $("#customerService").on("click",function(){
+//		    	客服热线要跳转的链接
+//		        location.href= site_url.historyDetail_url;
+		    })
+    	}
     }
     //返回上一页
     $("#goBack").on("click",function(){
