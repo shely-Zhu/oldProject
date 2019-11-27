@@ -57,7 +57,7 @@ var data = Mock.mock({
 
         tradeNo: "",//交易账号
 
-        bankAccount: "",//银行账户
+        bankAccount: "6230221111111117",//银行账户
 
         bankIdNo: "",//银行编号
 

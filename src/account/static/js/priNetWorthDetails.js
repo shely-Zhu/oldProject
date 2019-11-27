@@ -12,6 +12,7 @@ require('@pathCommonJsCom/utils.js');
 require('@pathCommonJs/ajaxLoading.js');
 require('@pathCommonJs/components/headBarConfig.js');
 var generateTemplate = require('@pathCommonJsComBus/generateTemplate.js');
+var splitUrl = require('@pathCommonJs/components/splitUrl.js')();
 
 $(function() {
 
@@ -27,6 +28,7 @@ $(function() {
             pageCurrent: 1, //当前页码，默认为1
             pageSize: 10,
             listLength: 0,
+            projectId: splitUrl['projectId'],
         },
         init: function() {
             var that = this;
@@ -91,7 +93,7 @@ $(function() {
                 data: {
                     "pageNo": that.gV.pageCurrent, //非必须，默认为1
                     "pageSize": 10,//非必须，默认为10
-                    "projectId":27247,//项目编号
+                    "projectId":that.gV.projectId,//项目编号
                     "profitRange":1,//0:近1月 1:近3月 2:近6个月 3:近1年4：成立至今
                 },
                 //async: false,
@@ -142,6 +144,7 @@ $(function() {
                 },
 
             }];
+            console.log(obj)
             $.ajaxLoading(obj);
         },
     };

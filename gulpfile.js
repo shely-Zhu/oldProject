@@ -184,7 +184,7 @@ gulp.task('proxyTask', function() {
         middleware: function(connect, opt) {
             return [
                 proxy('/app', {
-                    target: 'https://app.htjf4.com',
+                   target: 'https://app.htjf4.com',
                     // target: 'http://192.168.50.254:8085',
                     // target: 'https://app.chtfundtest.com',
                     changeOrigin: true,
@@ -606,6 +606,12 @@ gulp.task("webpack", ['jsCpd'],  function(cb) {
     //测试环境
     pump([
         gulp.src(['src/*']),
+
+        //禁止使用es6
+        // plugins.jshint(),
+
+        // plugins.jshint.reporter('default'),
+
         plugins.webpack(webpackConfig),
 
         //添加changeLocalHistory、eruda和CustomEventIeFile的文件内容

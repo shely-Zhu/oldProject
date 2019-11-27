@@ -80,7 +80,7 @@ $(function() {
                 data[i] = "恒天简报 "
               }
               list.push({
-                  a:data[i]
+                  a:data[i],
               })
           }
           console.log(list)

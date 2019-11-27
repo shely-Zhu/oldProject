@@ -14,7 +14,7 @@ var data = Mock.mock({
     "msg": "处理成功！", 
     "data": {
         "projectName": "恒天问津1号", //项目名称
-        "sevenYearYield":"4%", //七日年化收益率
+        "sevenYearYield":"4", //七日年化收益率
         "sevenYearYieldUpdateDate":"2019.33", //七日年化收益率更新时间 mm.dd
         "capitalisation":"100.00", //当前市值
         "allowRedemptionShare": "12", //可赎回份额
@@ -30,14 +30,14 @@ var data = Mock.mock({
         "investPeriod":"",//投资期
         "quitPeriod":"",//退出期
         "delayPeriod":"",//延长期
-        "navUnit":"1.1111",//单位净值
+        "navUnit":"",//单位净值
         "navUnitDate":"01.22",//单位净值更新日期 mm.dd
         "assetsGainAndLoss":"1.111",//持仓盈亏
         "incomeUnit":"123123",//万份收益
         "incomeUnitDate":"2019-11-19",//万份收益更新日期
         "incomeAssign":"4324",//收益分配
         "holdDays":"23",//持有天数
-        "totalNetValue":"4.54",//累计净值
+        "totalNetValue":"",//累计净值
         "totalNetValueDate":"2019-11-19",//累计净值日期
         "redemptionOpenFrequency":"132%",//赎回开放频率
         "tradeRecordFlag":"1",//是否有交易明细(0否1是)
