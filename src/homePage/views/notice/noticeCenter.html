@@ -22,7 +22,9 @@
         <div class="noticeItem" mesType="{{mesType}}">
     		<div class="itemImgCon">
     			<img class="itemImg" src="{{logoSrc}}" alt="">
-    			<img class="itemBadge" src="{{badgeSrc}}" alt="">
+                {{#if badgeFlag}} 
+                    <img class="itemBadge" src="/homePage/static/img/home_icon_Badge@2x.png" alt="">
+                {{/if}}
     		</div>
     		<div class="itemCon">
     			<div class="noticeTitle">{{mesTitle}}</div>

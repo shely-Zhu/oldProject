@@ -5,7 +5,7 @@
 
  <!doctype html>
  <html lang="en">
- 
+
  <head>
      <meta charset="UTF-8">
      <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
@@ -19,14 +19,14 @@
      <script src="/include/js/adaptation_750ui.js"></script>
      <script src="/include/js/moment.js"></script>
  </head>
- 
+
  <body>
     @@include('@pathCommonViews/load.html')
     @@include('@pathCommonViews/loading/listLoading.html')
     <div id="cityListBox">
 
     </div>
-    
+
     <div id="activityDataBox">
         <!-- 活动列表搜索开始 -->
         <section id="activitySearch">
@@ -42,7 +42,7 @@
         </section>
         <!-- 活动列表搜索结束 -->
         <!-- 活动列表有数据开始 -->
-        <div class="activityListDataBox">        
+        <div class="activityListDataBox">
             <section id="activityList">
                 <div class="activityList">
                     <div class="contentWrapper ">
@@ -51,13 +51,13 @@
                                 <!--放置列表-->
                             </li>
                             <!-- 返回顶部 -->
-                            
+
                         </ul>
                         @@include('@pathCommonViews/goTop.html')
                         <!-- <a href="javascript:;" class="goTopBtn4"></a> -->
                     </div>
                 </div>
-                
+
             </section>
         </div>
         <!-- 活动列表有数据结束 -->
@@ -74,18 +74,23 @@
 
                     </div>
                 </div>
-                
-            </section>    
+
+            </section>
         </div>
         <!-- 活动列表没有数据结束 -->
     </div>
-    
+
     @@include('@pathCommonViews/activityList.html')
     @@include('@pathCommonViews/cityList.html')
     @@include('@pathInclude/views/footer.html')
-   
+
     <script src="/include/js/iscroll.js"></script>
+<<<<<<< HEAD:src/mine/views/memberClub/activityList/activityList.html
+    <script src="/mine/static/js/memberClub/mui.indexedlist.js"></script>
+    <script src="/mine/static/js/memberClub/activityList.js"></script>
+=======
     <script src="/life/static/js/memberClub/mui.indexedlist.js"></script>
     <script src="/life/static/js/memberClub/activityList.js"></script> 
+>>>>>>> a60bb4d2881e0ce3e567821cd2fe6cac41a1cfb3:src/life/views/memberClub/activityList.html
 
  </body>

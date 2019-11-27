@@ -5,7 +5,9 @@
 // 使用 Mock
 var Mock = require('mockjs');
 
-var data=Mock.mock({    
+var data = Mock.mock({"data":"","message":"操作成功,数据为空","status":"1000"})
+
+/*var data=Mock.mock({    
 	status:"0000",     
 	message:"success", 
 	data: { 
@@ -20,6 +22,6 @@ var data=Mock.mock({
             createTimeStr: '2019-10-15 10:25:58'
         }]
 	}, 
-});
+});*/
 
 module.exports=data;
