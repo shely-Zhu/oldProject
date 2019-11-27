@@ -23,6 +23,8 @@ $(function() {
 		},
 		//全局变量
 		gV: {
+            pageCurrent: 1,
+            pageSize: 10,
 			fortuneFlowList: [{
 				imgSrc: "/homePage/static/img/bofang@2x.png",
 				title: "",
@@ -33,10 +35,57 @@ $(function() {
 		//页面初始化函数
 		init: function() {	
 			var that = this;
-			that.events()
 			that.initMui(".list", ".contentWrapper")
-			generateTemplate(that.gV.fortuneFlowList, that.$e.fortuneFlowListWrapper, that.$e.fortuneFlowListTemp)
+            that.events()
+			//
 		},
+        // 获取财富流向早知道的列表
+        getFlowKnownList(t) {
+            var that = this;
+            var obj = [{
+                url: site_url.queryFortuneArticleList_api,
+                data: {
+                    "pageNo": that.gV.pageCurrent, //非必须，默认为1
+                    "pageSize": that.gV.pageSize, //非必须，默认为10
+                    "articleBelong": 1
+                },
+                needDataEmpty: true,
+                callbackDone: function(json) {
+                    var data;
+                    if (json.data.total == 0) { // 没有记录不展示
+                        that.$e.noData.show();
+                        return false;
+                    } else {
+                        data = json.data.pageInfo;
+                    }
+                    setTimeout(function() {
+                        if (data.length < that.gV.pageSize) {
+                            if (that.gV.pageCurrent == 1) { //第一页时
+                                if (data.length == 0) {
+                                    // 暂无数据显示
+                                    that.$e.noData.show();
+                                    return false;
+                                } else { // 没有更多数据了
+                                    t.endPullupToRefresh(true);
+                                }
+                            } else {
+                                //其他页-没有更多数据
+                                t.endPullupToRefresh(true);
+                            }
+                        } else { // 还有更多数据
+                            t.endPullupToRefresh(false);
+                        }
+                        $('.list').find('.contentWrapper .mui-pull-bottom-pocket').removeClass('mui-hidden');
+                        // 页面++
+                        that.gV.pageCurrent++;
+                        // 将消息列表插入到页面上
+                        generateTemplate(data, that.$e.fortuneFlowListWrapper, that.$e.fortuneFlowListTemp)
+                    }, 200)
+
+                }
+            }];
+            $.ajaxLoading(obj); 
+        },
 		//初始化mui的上拉加载
 		initMui: function(listClassName, wrapperName) {
 			var that = this;
@@ -52,7 +101,7 @@ $(function() {
                         contentnomore: '没有更多了', //可选，请求完毕若没有更多数据时显示的提醒内容；
                         callback: function() {
                             //执行ajax请求
-                            //that.getInformsListData(this);
+                            that.getFlowKnownList(this);
                         }
                     }
                 }
