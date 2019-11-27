@@ -128,6 +128,7 @@ module.exports = function () {
     this.pofProtocolList_api = pre + 'fixedInvestment/protocol/list'; // 20.金服WEB-定投交易- 我的定投协议列表
     this.pofQueryDividendByCode_api = pre + 'dividend/queryDividendByCode'; // 21.单只基金分红方式查询
     this.pofUpdateDividend_api = pre + 'dividend/updateDividend'; // 22.分红方式修改
+    this.fundNetWorthTrendChart_api = pre + 'fundDetails/frontend/fundNetWorthTrendChart';// 金服WEB-详情页-基金净值走势图查询
 
     /*-------------------公募相关 end ------------------------------*/
 
@@ -217,6 +218,8 @@ module.exports = function () {
     this.productRecord_api = http_url.web_url + '/account/positions/productRecord';
     //公募交易明细
     this.queryTradeApplyByCode_api = http_url.web_url + '/account/pof/queryTradeApplyByCode'; //热门诊断基金列表搜索
+    // 超宝详情页面--现金宝资产总览查询
+    this.getTotalAssetsCash_api = http_url.web_url + '/account/pof/cash/getTotalAssetsCash';
     /*------------------- 消息中心 end ------------------------------*/
 
     this.assetsDetail_api = http_url.web_url + '/account/positions/assetsDetail'; // 资产详情
@@ -260,14 +263,13 @@ module.exports = function () {
     // 报告分析（报告明细）
     this.queryInvestReportDetail_api = http_url.web_url + '/account/report/queryInvestReportDetail';
 
-    // 公募总资产（包含资产交易明细）
-    this.totalAssets_api = http_url.web_url + '/account/pof/totalAssets';
-    // 金服WEB-详情页-基金净值走势图查询
-    this.fundNetWorthTrendChart_api = http_url.web_url + '/pof/fundDetails/frontend/fundNetWorthTrendChart';
     // 立即咨询
     this.reportContactNow_api = http_url.web_url + '/account/report/reportContactNow';
+    
     /*------------------- 月度报告 end ------------------------------*/
 
+    // 金服WEB-详情页-基金净值走势图查询
+    this.fundNetWorthTrendChart_api = http_url.web_url + '/pof/fundDetails/frontend/fundNetWorthTrendChart';
 
     // 超宝基金产品-交易记录
     this.queryTradeList_api = http_url.web_url + '/account/pof/cash/queryTradeList';
@@ -332,4 +334,7 @@ module.exports = function () {
 
 
     /*------------------- 私募理财fang——le end ------------------------------*/
+    /*------------------- 财富学院 start ------------------------------*/
+    this.queryFortuneBanner_api = http_url.web_url + '/account/home/frontend/queryFortuneBanner'; //首页banner
+    this.queryFortuneCollegeFir_api = http_url.web_url + '/account/home/frontend/queryFortuneCollegeFir'; //财富翻译官/早知道
 };

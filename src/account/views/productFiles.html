@@ -10,8 +10,8 @@
      <title>产品档案</title>
  <body>
      @@include('@pathCommonViews/headBarConfig.html',{"bgColors":"#2C3E77,#273971","showType":"0","pathName":"产品档案"})
-     <!-- @@include('@pathCommonViews/load.html')
-     @@include('@pathCommonViews/loading/listLoading.html') -->
+     @@include('@pathCommonViews/load.html')
+     <!-- @@include('@pathCommonViews/loading/listLoading.html') -->
      <div class="list">
         <div class="contentWrapper">
             <div class="contentWrap">
@@ -71,24 +71,29 @@
                         推荐材料
                    </div>
                    <div class="materialWrap">
-                     <ul class="materialContent">
+                     <!-- <ul class="materialContent">
                          <li>材料名称.PDF</li>
                          <li class="imgLi"><img src="/account/static/img/jiantou.png" alt=""></li>
                      </ul>
                      <ul class="materialContent">
-                        <li>风险揭示书.PDF</li>
+                        <li>材料名称.PDF</li>
                         <li class="imgLi"><img src="/account/static/img/jiantou.png" alt=""></li>
-                    </ul>
-                    <ul class="materialContent">
-                        <li>售前告知书.PDF</li>
-                        <li class="imgLi"><img src="/account/static/img/jiantou.png" alt=""></li>
-                    </ul>
+                    </ul> -->
                    </div>
                 </div>
             </div>
         </div>
     </div>
 
+
+    <script id="adjustment-template" type="text/x-handlebars-template">
+        {{#each this}}
+        <ul class="materialContent">
+            <li>{{a}}</li>
+            <li class="imgLi"><img src="/account/static/img/jiantou.png" alt=""></li>
+        </ul>
+        {{/each}}
+    </script>
  
      @@include('@pathInclude/views/footer.html')
      <!-- 添加埋点 -->

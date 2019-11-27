@@ -21,6 +21,7 @@
 @import url("@pathCommonLess/components/elasticLayerTypeFive.less");
 @import url("@pathCommonLessCom/headBarConfig.less");
 @import url("@pathCommonLessCom/noDataImg.less");
+@import url("@pathCommonLessCom/payPassword.less");
 html {
     height: 100%;
 }
@@ -32,6 +33,16 @@ html {
 }
 .hide{
     display: none;
+}
+
+.cancel_order {
+    //撤单按钮
+    position: fixed;
+    top: .6rem;
+    right: .3rem;
+    font-size: .3rem;
+    color: @C4925E;
+    z-index: 999;
 }
 .container {
     background-color: @FFFFFF;
@@ -119,6 +130,7 @@ html {
         color: @272727;
         line-height: 1rem;
         padding: 0 0.3rem;
+        border-bottom: 0.01rem solid @F7FAFD;
     }
     .font_size_28 {
         font-size: 0.28rem;
@@ -127,5 +139,34 @@ html {
         height: 0.3rem;
         width: 100%;
         background-color: @F7FAFD;
+    }
+    .bank_icon {
+        width: .27rem;
+        height: .27rem;
+        margin: .36rem .18rem 0 0;
+    }
+    .buy_info .pay_mode {
+        background-color: @EDF1FF;
+        margin: .32rem 0 0 .18rem;
+        width: 1.06rem;
+        height: .36rem;
+        line-height: .36rem;
+        text-align: center;
+        color: @364D97;
+        font-size: .24rem;
+    }
+
+
+
+    footer {
+        position: fixed;
+        bottom: 0;
+        height: .98rem;
+        width: 100%;
+        background: linear-gradient(to right, @6C83C9, @061D6A);
+        text-align: center;
+        color: @FFFFFF;
+        line-height: .98rem;
+        font-size: .32rem;
     }
 }

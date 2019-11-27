@@ -20,7 +20,7 @@ function dxyzmBtnReset(){
 
 module.exports = {
 
-    timeCountDown: function (time, $id, voiceTime, ) {
+    timeCountDown: function (time, $id, voiceTime ) {
 
         $('.noCode').addClass('show');
         $('.dxyzmBtn').css({color:"#bbb"});

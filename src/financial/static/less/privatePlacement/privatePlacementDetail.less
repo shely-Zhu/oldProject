@@ -1,7 +1,7 @@
 //  私募基金产品详情
 //  @author zhangyanping 2019-11-25
 
-@import url("../../../include/css/mui.min.css");
+@import url("@pathInclude/css/mui.min.css");
 @import url('@pathCommonLess/mui/resetMUI.less');
 @import url("@pathCommonLess/reset.less");
 @import url("@pathCommonLess/color.less");
@@ -14,7 +14,6 @@
 .privatePlacementDetail{
 	.privateDetailTitle{
 		padding: 1.48rem 0.3rem 0 0.3rem;
-		// width: 100%;
 		height: 5.45rem;
 		background: url('/financial/static/img/privatePlacement/privateBackground.png') no-repeat;
 		.productName{
@@ -30,12 +29,22 @@
 			color: @c005;
 		}
 		.privateDetailList{
+			padding-top:0.3rem;
+			padding-left: 0.3rem;
 			width:100%;
 			height:2.59rem;
 			margin-top: 0.2rem;
-			background:@c005;
+			background:rgba(255,255,255,0.06);
 			border-radius:0.1rem;
-			opacity:0.06;
+			.netValueWord{
+				color: @F7E8CF;
+				font-size: 0.26rem;
+				.iconfont{
+					margin-right: 0.06rem;
+					font-size: 0.28rem;
+
+				}
+			}
 		}
 	}
 

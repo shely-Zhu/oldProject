@@ -25,7 +25,7 @@ require('@pathCommonJs/components/headBarConfig.js');
 //黑色提示条的显示和隐藏
 var splitUrl = require('@pathCommonJs/components/splitUrl.js')();
 var tipAction = require('@pathCommonJsCom/tipAction.js');
-var transcationTem = require('../common/transcationTem.js');
+var transcationTem = require('@pathCommonJsCom/account/transcationTem.js');
 
 $(function() {
     var data = {
@@ -40,7 +40,7 @@ $(function() {
                 pageNo: 1,
                 pageSize: 10,
             },
-            a: null,
+            aThis: null,
             list_template: '', //列表的模板，生成后存放在这里
             listToTop: '', // 滑动区域距离顶部距离
             navToTop: '', // 滑动nav距离顶部距离
@@ -87,7 +87,7 @@ $(function() {
                         callback: function() {
                             // debugger
                             //执行ajax请求
-                            that.gV.a = this;
+                            that.gV.aThis = this;
                             that.getData(this);
                         }
                     }
@@ -168,10 +168,26 @@ $(function() {
                     }, 200)
 
 
-                },
+                }
 
             }];
             $.ajaxLoading(obj);
+        },
+        openTipCon: function(type, content, id) {
+            $('#tipCon .tipCon').html(content);
+            $('.mask').show();
+            $('#tipCon').show();
+            mui("body").on('tap', '.tipContainer .todo', function(e) {
+                if (type == 'assign') {
+                    //转让
+
+                } else if (type == 'assignee') {
+                    //受让
+                }
+                $('.mask').hide();
+                $('#tipCon').hide();
+            })
+
         },
         events: function() { //绑定事件
             var that = this;
@@ -181,13 +197,26 @@ $(function() {
 
             })
             mui("body").on('tap', '.hopperCon li', function(e) {
-                $(this).addClass('active').siblings('li').removeClass('active');
+                    $(this).addClass('active').siblings('li').removeClass('active');
+                    $('.mask').hide();
+                    $('.hopperCon').hide();
+                    that.gV.businessType = $(this).attr('data');
+                    that.gV.aP.pageNo = 1;
+                    that.getData(that.gV.aThis, 1);
+                })
+                //取消受让、取消预约、取消转让
+            mui("body").on('tap', '.cancelBtn', function(e) {
+                var type = $(this).attr('data-type');
+                var id = $(this).attr('data-id');
+                if (type == 'assign') { //转让
+                    that.openTipCon('assign', '您确定要取消转让申请吗？', id);
+                } else if (type == 'assignee')
+                    that.openTipCon('assign', '您确定要取消受让申请吗？', id);
+            })
+            mui("body").on('tap', '.tipContainer .cancel', function(e) {
                 $('.mask').hide();
-                $('.hopperCon').hide();
-                that.gV.businessType = $(this).attr('data');
-                // $('.contentWrap').html('');
-                that.gV.aP.pageNo = 1;
-                that.getData(that.gV.a, 1);
+                $('#tipCon').hide();
+
             })
         }
     };

@@ -84,7 +84,6 @@ $(function() {
         },
         getData: function(t) {
             var that = this;
-
             var obj = [{ // 系统调仓记录列表
                 url: site_url.dealDetailList_api,
                 data: { 
