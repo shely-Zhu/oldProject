@@ -269,11 +269,11 @@ $(function () {
 			$('body').on('tap','.paymoney',function(){
 				$(".imgc").hide()
 				$(".iimg").show()
-				$(this).find(".imgc").show();
-				$(this).find(".iimg").hide();
 				that.gV.payType = $(this).attr('pay-type')
 				var useEnv = $(this).attr('pay-type')
 				$("#loading").show()
+				$(this).find(".imgc").show();
+				$(this).find(".iimg").hide();
 				that.getBankCard(useEnv)
 			}) 
 

@@ -165,12 +165,14 @@ $(function () {
         },
         drawCircle() {
             var that = this;
+            debugger
             var pieChart = echarts.init($('.circle')[0]);
             var optionData = []
             var pieData = that.gV.pieData
             pieData.forEach(n => {
                 optionData.push(n.name)
             })
+            console.log('optionData',optionData)
             // 指定图表的配置项和数据
             option = {
                 legend: {
@@ -272,14 +274,7 @@ $(function () {
                         },
 
                         data: that.gV.pieData,
-                        // data: [
-                        //     {
-                        //         name: "现金",
-                        //         value: "48.14%"
-                        //     },
-                        //     { value: 310, name: '邮件营销' },
-                        //     { value: 234, name: '联盟广告' },
-                        // ]
+                       
                     }
                 ]
             };
@@ -291,7 +286,7 @@ $(function () {
             var obj1 = [{ //基金基本概况查询
                 url: site_url.prfFundBasicProfile_api,
                 data: {
-                    fundCode: getQueryString('fundCode')
+                    fundCode: getQueryString('fundCode') ? getQueryString('fundCode') : '000847'
                 },
                 callbackDone: function (json) {
 
@@ -310,7 +305,7 @@ $(function () {
             var obj2 = [{ //基金投资组合信息查询
                 url: site_url.prfFnvestmentPortfolio_api,
                 data: {
-                    fundCode: getQueryString('fundCode')
+                    fundCode: getQueryString('fundCode')  ? getQueryString('fundCode') : '000847'
                 },
                 callbackDone: function (json) {
 
@@ -341,7 +336,12 @@ $(function () {
                     })
                     console.log(pieData, "99");
 
-                    that.gV.pieData = pieData
+                    that.gV.pieData = pieData;
+                    that.gV.pieData.forEach(function(item){
+                       
+                        item.value = Number(item.value.split("%")[0])
+                    })
+                    
                     // that.gV.pieInnerData = pieData
                     var tplm = $("#dataLists2").html();
                     var template = Handlebars.compile(tplm);
@@ -399,7 +399,7 @@ $(function () {
                 $(this).addClass('active').siblings().removeClass('active');
                 $(".wrap>.panel").eq($(this).index()).addClass('active').siblings().removeClass('active');
                 if ($(this).index() == 1) {
-                    console.log("that.gV.pieData", that.gV.pieData)
+                    
                     that.drawCircle()
                 }
             })
