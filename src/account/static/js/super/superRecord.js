@@ -1,15 +1,12 @@
 //  超宝基金产品-交易记录
 // @author caoqihai 2019-11-20 
 
+require('@pathIncludJs/base.js');
+
 require('@pathCommonJsCom/utils.js');
 //ajax调用
 require('@pathCommonJs/ajaxLoading.js');
-//zepto模块--callback
-require('@pathIncludJs/vendor/zepto/callback.js');
-//zepto模块--deferred
-require('@pathIncludJs/vendor/zepto/deferred.js');
-//路径配置文件
-require('@pathIncludJs/vendor/config.js');
+
 //下拉加载更多
 // require('@pathCommonJs/scrollFullPage.js');
 // 切换

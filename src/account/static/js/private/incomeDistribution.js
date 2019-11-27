@@ -22,6 +22,7 @@ require('@pathCommonJsCom/goTopMui.js');
 // require('@pathCommonJs/components/elasticLayer.js');
 // require('@pathCommonJs/components/elasticLayerTypeFive.js');
 require('@pathCommonJs/components/headBarConfig.js');
+var splitUrl = require('@pathCommonJs/components/splitUrl.js');
 //黑色提示条的显示和隐藏
 // var tipAction = require('@pathCommonJsCom/tipAction.js');
 var generateTemplate = require('@pathCommonJsComBus/generateTemplate.js');
@@ -114,7 +115,7 @@ $(function() {
             var obj = [{ // 系统调仓记录列表
                 url: site_url.yieldAssignList_api,
                 data: {
-                    "projectId":'',
+                    "projectId":splitUrl()["projectId"] ,
                     "pageNo": that.gV.aP.pageNo, //非必须，默认为1
                     "pageSize": that.gV.aP.pageSize//非必须，默认为10
                 },

@@ -7,7 +7,7 @@
  */
 
 //获取当前页面地址
-module.exports = function () {
+module.exports = function() {
     /*-------------------账户相关------------------------------*/
     //资普
     this.standardPoor_api = http_url.web_url + '/account/standardPoor/getTotalAssets';
@@ -44,7 +44,7 @@ module.exports = function () {
     this.getJJSInTransitAssets_api = http_url.web_url + '/account/jjs/getJJSInTransitAssets'; // 查询金交所在途资产 
     //待确认，已确认列表
     this.getTradeList_api = http_url.web_url + '/pef/getTradeList'
-    // 查询金交持仓资产、在途资产、总资产
+        // 查询金交持仓资产、在途资产、总资产
     this.getJJSAssets_api = http_url.web_url + '/account/jjs/getJJSAssets';
     // jjs持仓明细查询
     this.queryAssetsDetailByPages_api = http_url.web_url + '/account/jjs/queryAssetsDetailByPages'
@@ -127,7 +127,7 @@ module.exports = function () {
     this.pofProtocolList_api = pre + 'fixedInvestment/protocol/list'; // 20.金服WEB-定投交易- 我的定投协议列表
     this.pofQueryDividendByCode_api = pre + 'dividend/queryDividendByCode'; // 21.单只基金分红方式查询
     this.pofUpdateDividend_api = pre + 'dividend/updateDividend'; // 22.分红方式修改
-    this.fundNetWorthTrendChart_api = pre + 'fundDetails/frontend/fundNetWorthTrendChart';// 金服WEB-详情页-基金净值走势图查询
+    this.fundNetWorthTrendChart_api = pre + 'fundDetails/frontend/fundNetWorthTrendChart'; // 金服WEB-详情页-基金净值走势图查询
 
     /*-------------------公募相关 end ------------------------------*/
 
@@ -250,7 +250,7 @@ module.exports = function () {
     this.reportContactNow_api = http_url.web_url + '/account/report/reportContactNow';
     // 我的理财师查询
     this.queryMyFinancialerList_api = http_url.web_url + '/account/home/queryMyFinancialerList'
-    
+
     /*------------------- 月度报告 end ------------------------------*/
 
 
@@ -270,5 +270,12 @@ module.exports = function () {
     /*------------------- 财富学院 start ------------------------------*/
     this.queryFortuneBanner_api = http_url.web_url + '/account/home/frontend/queryFortuneBanner'; //首页banner
     this.queryFortuneCollegeFir_api = http_url.web_url + '/account/home/frontend/queryFortuneCollegeFir'; //财富翻译官/早知道
+
+    this.getFortuneTabInfo_api = http_url.web_url + '/account/home/frontend/getFortuneTabInfo'; // 财富讲堂/财富研究 页签查询
+    this.queryFortuneArticleList_api = http_url.web_url + '/account/home/frontend/queryFortuneArticleList'; // 财富文章列表
+
+    //已报名活动
+    this.getApplyActivity_api = http_url.web_url + '/marketing/activity/getApplyActivity';
     this.queryFortuneCollegeSec_api = http_url.web_url + '/account/home/frontend/queryFortuneCollegeSec'; //财富讲堂/财富研究
+
 };

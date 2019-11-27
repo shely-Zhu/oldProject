@@ -7,7 +7,6 @@
 
 require('@pathIncludJs/base.js');
 
-require('@pathCommonJsCom/utils.js');
 //ajax调用
 require('@pathCommonJs/ajaxLoading.js');
 

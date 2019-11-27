@@ -26,7 +26,8 @@ var productPublic = {
         //翻译早知道
         that.getFortuneCollegeFir()
         that.getFortuneCollegeFirCf()
-        this.getWealthResearch()
+        this.getFortuneForum()
+        that.getWealthResearch()
         that.events();
     },
     getData:function(){
@@ -123,6 +124,40 @@ var productPublic = {
          }]
         $.ajaxLoading(obj);
     },
+    //财富讲堂
+    getFortuneForum:function(){
+        var that =this;
+        var obj=[{
+             url: site_url.queryFortuneCollegeSec_api,
+             data: {    
+                type:"27", //类型财富讲堂
+            },
+            needDataEmpty: true,
+            callbackDone: function(json){
+               listData=json.data.list
+               console.log(listData)
+               modelData=json.data.ModelVO
+             const listTitle = listData.map(d => {
+                return {
+                 sonModelName: d.sonModelName,
+                }
+              })
+              const listContent=listData.map(d => {
+                return {
+                 listContent: d.list
+                }
+              })
+              console.log(listContent)
+              generateTemplate(modelData,$('.forum .title'),$('#forum-template'));     
+              generateTemplate(listTitle,$('.broadcast'),$('#forumTitle'));
+              generateTemplate(listContent,$('.forumList'),$('#forumContent'));			
+            },
+            callbackFail: function(json){
+                console.log(json)
+            },
+         }]
+        $.ajaxLoading(obj);
+    },
     //财富研究
     getWealthResearch:function(){
         var that =this;
@@ -133,14 +168,23 @@ var productPublic = {
             },
             needDataEmpty: true,
             callbackDone: function(json){
-               console.log(json)
-               listData=json.data.listData
-               var listTitle=[];
-               for(var i=0;i<listData.length;i++){
-                  listTitle.push(listData[i].sonModelName)   //tab标题
-               }
-               generateTemplate(listTitle,$('.tab-t ul'),$('#titleTab'));
-               console.log(listTitle)				
+               listData=json.data.list
+               console.log(listData)
+               modelData=json.data.ModelVO
+             const listTitle = listData.map(d => {
+                return {
+                 sonModelName: d.sonModelName,
+                }
+              })
+              const listContent=listData.map(d => {
+                return {
+                 listContent: d.list
+                }
+              })
+              console.log(listContent)
+               generateTemplate(modelData,$('.tabContent .title'),$('#tabContent-template'));     
+               generateTemplate(listTitle,$('.tab-t ol'),$('#titleTab'));
+               generateTemplate(listContent,$('.tab-b'),$('#listContent'));			
             },
             callbackFail: function(json){
                 console.log(json)
@@ -150,13 +194,21 @@ var productPublic = {
     },
     //操作事件
     events:function(){
+        //财富讲堂tab切换
+        $('.broadcast').on('tap','span',function(){
+            console.log($(this).index())
+            $('.broadcast .bigspan').removeClass('getColor');
+            $('.broadcast .bigspan').eq($(this).index()).addClass('getColor');
+            $('.forumList .forumImg').css({"display":"none"});
+            $('.forumList .forumImg').eq($(this).index()).css({"display":"block"});
+        });
         //财富研究tab切换
         $('.tab').on('tap','.tab-t li',function(){
             console.log($(this).index())
             $('.tab .tab-t li a').removeClass('active');
             $('.tab .tab-t li a').eq($(this).index()).addClass('active');
-            $('.tab .tab-b .tab-content').removeClass('show');
-            $('.tab .tab-b .tab-content').eq($(this).index()).addClass('show');
+            $('.tab .tab-b .tab-content').css({"display":"none"});
+            $('.tab .tab-b .tab-content').eq($(this).index()).css({"display":"block"});
         });
     }
 }
