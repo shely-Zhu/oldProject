@@ -5,19 +5,16 @@
  * @Last Modified time: 2019-11-22 18:18:54
  */
 
-require('@pathCommonJsCom/utils.js');
+require('@pathIncludJs/base.js');
+
 //ajax调用
 require('@pathCommonJs/ajaxLoading.js');
-//zepto模块--callback
-require('@pathIncludJs/vendor/zepto/callback.js');
-//zepto模块--deferred
-require('@pathIncludJs/vendor/zepto/deferred.js');
-//路径配置文件
-require('@pathIncludJs/vendor/config.js');
+
 require('@pathCommonJs/components/headBarConfig.js');
 //引入弹出层
 require('@pathCommonJs/components/elasticLayer.js');
 var splitUrl = require('@pathCommonJs/components/splitUrl.js')();
+
 $(function(){
     var fundPdf={
         data:{
