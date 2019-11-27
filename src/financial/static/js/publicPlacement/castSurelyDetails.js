@@ -96,7 +96,7 @@ $(function () {
             n.tradeTime = n.tradeTime.split(" ")[0]
             n.status = n.status === "1" ? 1 : 0
           });
-          var html = template(tradeRecord);
+          var html = template(json);
           $(".tplBox").html(html);
 
         },

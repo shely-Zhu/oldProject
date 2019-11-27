@@ -95,7 +95,7 @@
 </body>
 <script id="dataLists" type="text/x-handlebars-template">
 {{#if tradeRecordStutas}}
-    {{#each this}}
+    {{#each tradeRecord}}
     {{#if status}}
     <div>
         <span>{{tradeTime}}</span>
@@ -112,9 +112,9 @@
     </div>
     {{/if}}
     {{/each}}
-    {{else}}
+{{else}}
     <p class="no-data">暂无数据</p>
-    {{/if}}
+{{/if}}
 </script>
 
 </html>
