@@ -4,7 +4,7 @@
  */
 
 /**
- * iconStype:icon的样式，也可以是文字。如果是icon传入对应的码例如：&#xe609;
+ * iconStype:icon的样式，也可以是文字。如果是icon传入对应的码例如：&#xe609;不穿显示客服热线的图标
  * serviceType：如果是1就显示，如果是0则不显示。主要控制右边图标的显示隐藏
  * 例如
  * @@include('@pathCommonViews/headBarConfig.html',{"pathName":"自选公募","bgColors":"#475A95,#475A95","showType":"1","serviceType":"1"})
