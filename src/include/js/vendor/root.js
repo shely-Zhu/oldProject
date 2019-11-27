@@ -437,6 +437,7 @@ window.http_url = {
     // pef_url: '/wap/pef', //私募接口
     // content_url: '/wap/content', // 内容接口
     // account_url: '/wap/account', // 账户接口pef_url
+
 }
 
 

@@ -300,14 +300,15 @@ module.exports = {
     './account/static/js/public/superStreasureDetail': './src/account/static/js/public/superStreasureDetail.js',
 
     // 现金宝详情页
-     './account/static/js/public/cashTreasure':   './src/account/static/js/public/cashTreasure.js',
+
+    './account/static/js/public/cashTreasure': './src/account/static/js/public/cashTreasure.js',
     // 支付密码
-     './account/static/js/public/payPassword':   './src/account/static/js/public/payPassword.js',
+    './account/static/js/public/payPassword': './src/account/static/js/public/payPassword.js',
     // 基金确认书
-     './account/static/js/private/privateFundPdf':   './src/account/static/js/private/privateFundPdf.js',
+    './account/static/js/private/privateFundPdf': './src/account/static/js/private/privateFundPdf.js',
 
     // 公募交易明细
-     './account/static/js/publicTradeDetail/publicTradeDetail':   './src/account/static/js/publicTradeDetail/publicTradeDetail.js',
+    './account/static/js/publicTradeDetail/publicTradeDetail': './src/account/static/js/publicTradeDetail/publicTradeDetail.js',
 
     //普通基金定投结果
     './Financial/static/js/publicPlacement/surelyResults': './src/Financial/static/js/publicPlacement/surelyResults.js',
@@ -316,9 +317,12 @@ module.exports = {
     './Financial/static/js/publicPlacement/surelyResultsDetail': './src/Financial/static/js/publicPlacement/surelyResultsDetail.js',
 
     //我的定投_定投明细
+    './financial/static/js/publicPlacement/castSurelyDetafils': './src/financial/static/js/publicPlacement/castSurelyDetafils.js',
     './Financial/static/js/publicPlacement/castSurelyDetails': './src/Financial/static/js/publicPlacement/castSurelyDetails.js',
     //我的定投计划
     './Financial/static/js/publicPlacement/myInvestmentPlan': './src/Financial/static/js/publicPlacement/myInvestmentPlan.js',
+    //我的定投计划详情
+    './financial/static/js/publicPlacement/castSurelyDetails': './src/financial/static/js/publicPlacement/castSurelyDetails.js',
     //活期理财
     './Financial/static/js/publicPlacement/demandFinancing': './src/Financial/static/js/publicPlacement/demandFinancing.js',
     //普通基金产品详情页_定投
@@ -329,29 +333,33 @@ module.exports = {
     './financial/static/js/publicPlacement/cashManagement': './src/financial/static/js/publicPlacement/cashManagement.js',
 
     // 基本档案
-    './financial/static/js/publicPlacement/fundFile' : './src/financial/static/js/publicPlacement/fundFile.js',
+    './financial/static/js/publicPlacement/fundFile': './src/financial/static/js/publicPlacement/fundFile.js',
     //普通基金_基金档单_基金公司
-    './financial/static/js/publicPlacement/fundCompany' : './src/financial/static/js/publicPlacement/fundCompany.js',
+    './financial/static/js/publicPlacement/fundCompany': './src/financial/static/js/publicPlacement/fundCompany.js',
 
-     // 基本档案
-    './financial/static/js/publicPlacement/cashTransformIn' : './src/financial/static/js/publicPlacement/cashTransformIn.js',
+    // 基本档案
+    './financial/static/js/publicPlacement/cashTransformIn': './src/financial/static/js/publicPlacement/cashTransformIn.js',
 
-     // 基本档案
-    './financial/static/js/publicPlacement/cashTransformOut' : './src/financial/static/js/publicPlacement/cashTransformOut.js',
+    // 基金买入
+    './financial/static/js/publicPlacement/fundTransformIn': './src/financial/static/js/publicPlacement/fundTransformIn.js',
+
+    // 基本档案
+    './financial/static/js/publicPlacement/cashTransformOut': './src/financial/static/js/publicPlacement/cashTransformOut.js',
 
 
     // 基金经理
     './financial/static/js/publicPlacement/fundManager': './src/financial/static/js/publicPlacement/fundManager.js',
 
     // 交易规则
-    './financial/static/js/publicPlacement/transactionRules' : './src/financial/static/js/publicPlacement/transactionRules.js',
+    './financial/static/js/publicPlacement/transactionRules': './src/financial/static/js/publicPlacement/transactionRules.js',
 
-    
+
     // 私募产品详情页
-    './financial/static/js/privatePlacement/privatePlacementDetail' : './src/financial/static/js/privatePlacement/privatePlacementDetail.js',
+    './financial/static/js/privatePlacement/privatePlacementDetail': './src/financial/static/js/privatePlacement/privatePlacementDetail.js',
     // 财富学院早知道
-    './homePage/static/js/fortuneFlowKnown' : './src/homePage/static/js/fortuneFlowKnown.js',
+    './homePage/static/js/fortuneFlowKnown': './src/homePage/static/js/fortuneFlowKnown.js',
     // 财富讲堂
     './homePage/static/js/fortuneClassroom' : './src/homePage/static/js/fortuneClassroom.js'
+
 
 }

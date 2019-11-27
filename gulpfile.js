@@ -603,8 +603,8 @@ gulp.task('jsCpd', function() {
 
 
 //非include文件夹下的js文件打包
-gulp.task("webpack", ['jsCpd'],  function(cb) {
 
+gulp.task("webpack", ['jsCpd'],  function(cb) {
     //测试环境
     pump([
         gulp.src(['src/*']),
