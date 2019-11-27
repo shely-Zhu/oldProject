@@ -92,6 +92,9 @@ module.exports = function() {
     /*-------------------公募相关------------------------------*/
     this.query_api = http_url.web_url + '/pof/frontend/fund/query'; //热门诊断基金列表搜索
     this.pofTotalAssets_api = http_url.web_url + '/account/pof/totalAssets'; // 公募总资产
+    this.fundNetWorthList_api = http_url.web_url + '/pof/fundDetails/frontend/fundNetWorthList'; //历史明细
+    this.queryIncomeList_api = http_url.web_url + '/account/pof/queryIncomeList'; //收益明细
+
 
     // 前缀
     const pre = http_url.web_url + '/pof/'
