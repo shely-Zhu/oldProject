@@ -60,8 +60,7 @@
                     </div>
                     <div class="hotWords forum">
                          <div class="title">
-                              <h2>财富讲堂</h2>
-                              <p><a href="javascript:;" >全部</a><i class="iconfont">&#xe636;</i></p>
+                             
                          </div>
                          <div class="broadcast">
                               <b>大咖直播</b>
@@ -104,8 +103,7 @@
                     </div>
                     <div class="hotWords tabContent">
                          <div class="title">
-                              <h2>财富研究</h2>
-                              <p><a href="javascript:;" >查看全部研究</a><i class="iconfont">&#xe636;</i></p>
+                             
                          </div>
                          <div class="tab">
                               <div class="tab-t">
@@ -114,106 +112,7 @@
                                    </ol>
                               </div>
                               <div class="tab-b">
-                                  <div class="tab-content show">
-                                        <ul>
-                                             <li>
-                                                  <div>
-                                                       <p>牛熊切换，以守代攻 -2019年固收投资策略报告1</p>
-                                                       <span>2019-10-02</span>
-                                                  </div>
-                                                  <img src="/homePage/static/img/tab1.png" alt="">
-                                             </li>
-                                             <li>
-                                                  <div>
-                                                       <p>牛熊切换，以守代攻 -2019年固收投资策略报告1</p>
-                                                       <span>2019-10-02</span>
-                                                  </div>
-                                                  <img src="/homePage/static/img/tab1.png" alt="">
-                                             </li>
-                                             <li>
-                                                  <div>
-                                                       <p>牛熊切换，以守代攻 -2019年固收投资策略报告1</p>
-                                                       <span>2019-10-02</span>
-                                                  </div>
-                                                  <img src="/homePage/static/img/tab1.png" alt="">
-                                             </li>
-                                        </ul>
-                                  </div>
-                                  <div class="tab-content">
-                                        <ul>
-                                             <li>
-                                                  <div>
-                                                       <p>牛熊切换，以守代攻 -2019年固收投资策略报告2</p>
-                                                       <span>2019-10-02</span>
-                                                  </div>
-                                                  <img src="/homePage/static/img/tab1.png" alt="">
-                                             </li>
-                                             <li>
-                                                  <div>
-                                                       <p>牛熊切换，以守代攻 -2019年固收投资策略报告2</p>
-                                                       <span>2019-10-02</span>
-                                                  </div>
-                                                  <img src="/homePage/static/img/tab1.png" alt="">
-                                             </li>
-                                             <li>
-                                                  <div>
-                                                       <p>牛熊切换，以守代攻 -2019年固收投资策略报告2</p>
-                                                       <span>2019-10-02</span>
-                                                  </div>
-                                                  <img src="/homePage/static/img/tab1.png" alt="">
-                                             </li>
-                                        </ul>
-                                  </div>
-                                  <div class="tab-content">
-                                        <ul>
-                                             <li>
-                                                  <div>
-                                                       <p>牛熊切换，以守代攻 -2019年固收投资策略报告3</p>
-                                                       <span>2019-10-02</span>
-                                                  </div>
-                                                  <img src="/homePage/static/img/tab1.png" alt="">
-                                             </li>
-                                             <li>
-                                                  <div>
-                                                       <p>牛熊切换，以守代攻 -2019年固收投资策略报告3</p>
-                                                       <span>2019-10-02</span>
-                                                  </div>
-                                                  <img src="/homePage/static/img/tab1.png" alt="">
-                                             </li>
-                                             <li>
-                                                  <div>
-                                                       <p>牛熊切换，以守代攻 -2019年固收投资策略报告3</p>
-                                                       <span>2019-10-02</span>
-                                                  </div>
-                                                  <img src="/homePage/static/img/tab1.png" alt="">
-                                             </li>
-                                        </ul>
-                                  </div>
-                                  <div class="tab-content">
-                                        <ul>
-                                             <li>
-                                                  <div>
-                                                       <p>牛熊切换，以守代攻 -2019年固收投资策略报告4</p>
-                                                       <span>2019-10-02</span>
-                                                  </div>
-                                                  <img src="/homePage/static/img/tab1.png" alt="">
-                                             </li>
-                                             <li>
-                                                  <div>
-                                                       <p>牛熊切换，以守代攻 -2019年固收投资策略报告4</p>
-                                                       <span>2019-10-02</span>
-                                                  </div>
-                                                  <img src="/homePage/static/img/tab1.png" alt="">
-                                             </li>
-                                             <li>
-                                                  <div>
-                                                       <p>牛熊切换，以守代攻 -2019年固收投资策略报告4</p>
-                                                       <span>2019-10-02</span>
-                                                  </div>
-                                                  <img src="/homePage/static/img/tab1.png" alt="">
-                                             </li>
-                                        </ul>
-                                  </div>
+
                               </div>
                          </div>
                     </div>
@@ -263,13 +162,38 @@
                </li>
           {{/each}}
      </script>
+     <script id="forum-template" type="text/x-handlebars-template">
+          <h2>财富讲堂</h2>
+          <p><a href="{{listJumpUrl}}" >全部</a><i class="iconfont">&#xe636;</i></p>
+     </script>
+     <script id="tabContent-template" type="text/x-handlebars-template">
+          <h2>财富研究</h2>
+          <p><a href="{{listJumpUrl}}" >查看往期热词</a><i class="iconfont">&#xe636;</i></p>
+     </script>
      <script id="titleTab" type="text/x-handlebars-template">
           {{#each this}}
                <li>
-                    <a href="javascript:;" class="active">
-                         大类资产研究
+                    <a href="javascript:;">
+                         {{sonModelName}}
                     </a>
                </li>
+          {{/each}}
+     </script>
+     <script id="listContent" type="text/x-handlebars-template">
+          {{#each this}}
+               <div class="tab-content">
+                    <ul>
+                         {{#each listContent}}
+                         <li>
+                              <div>
+                                   <p>{{intro}}</p>
+                                   <span>{{createTimeStr}}</span>
+                              </div>
+                              <img src="/homePage/static/img/tab1.png" alt="">
+                         </li>
+                         {{/each}}
+                    </ul>
+               </div>
           {{/each}}
      </script>
      <!-- <script src="/include/js/vendor/jquery/jquery1.12.3.js"></script> -->
