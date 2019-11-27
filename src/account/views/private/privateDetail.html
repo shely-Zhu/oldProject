@@ -15,8 +15,7 @@
 	@@include('@pathCommonViews/load.html') 
 	<div class="privateDetail">
 		<div class="topContent"> 
-	 		@@include('@pathCommonViews/headBarConfig.html',{"bgColors":"#595E6F, #1C2135","showType":"1"})
-	 		<img class="serviceLogo" src="/account/static/img/productDetail/index_icon_kefu@2x.png" alt="">
+	 		@@include('@pathCommonViews/headBarConfig.html',{"bgColors":"#595E6F, #1C2135","showType":"1", "serviceType":"1"})
 	 		<div class="hide typeWrap type_0">
 	 			<!-- 类型一 稳金-->	
 	 			<div class="con">
@@ -269,7 +268,7 @@
 	 			<div class="clearfix titleWrap type5Wrap">
 	 				<span class="title dwjz active">单位净值</span>
 	 				<span class="title ljjz">累计净值</span>
-	 				<div class="arrow">
+	 				<div class="arrow" id="netValueDetailArrow">
 	 					<span class="img"></span>
 	 				</div>
 	 				<span class="rightTitle" id="netValueDetailBtn">净值明细</span>
@@ -344,7 +343,7 @@
 	</div>
 
 	@@include('@pathInclude/views/footer.html')
-	@@include('@pathInclude/views/header.html')
+
 	<script src="/include/js/vendor/echarts/echarts.min.js"></script>
 	<script src="/account/static/js/private/privateDetail.js"></script>
 
