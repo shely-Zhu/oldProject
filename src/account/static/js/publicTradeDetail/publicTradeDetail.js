@@ -20,7 +20,7 @@ require('@pathCommonJs/components/headBarConfig.js');
 
 var tipAction = require('@pathCommonJs/components/tipAction.js');
 var splitUrl = require('@pathCommonJs/components/splitUrl.js');
-var payPass = require('../public/payPassword.js');
+var payPass = require('@pathCommonJs/components/payPassword.js');
 
 $(function () {
     var obj = {
@@ -46,7 +46,7 @@ $(function () {
             $('.cancel_order').on('click', function(){
                 //去撤单 需要先输入交易密码 todo
                 $("#passwordWrap").show();
-                payPass(that.getData())
+                payPass(that.getData)
                 // cancelOrder();
             })
             $('').on('click', function(){
