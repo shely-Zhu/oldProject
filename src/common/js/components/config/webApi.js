@@ -79,7 +79,7 @@ module.exports = function () {
 
 
     /*-------------------私募相关  ------------------------------*/
-    this.prvDetail_api = http_url.web_url + '/pef/queryFundDetail'; //私募详情查询
+    // this.prvDetail_api = http_url.web_url + '/pef/queryFundDetail'; //私募详情查询
     this.prvLevel_api = http_url.web_url + '/pef/queryBenefitLevel'; //受益级别查询
     this.prvHisValue_api = http_url.web_url + '/pef/queryHistoryNetValue'; //历史净值查询
     this.prvLight_api = http_url.web_url + '/pef/queryProductImage'; //产品亮点查询
@@ -271,4 +271,14 @@ module.exports = function () {
     this.queryFortuneBanner_api = http_url.web_url + '/account/home/frontend/queryFortuneBanner'; //首页banner
     this.queryFortuneCollegeFir_api = http_url.web_url + '/account/home/frontend/queryFortuneCollegeFir'; //财富翻译官/早知道
     this.queryFortuneCollegeSec_api = http_url.web_url + '/account/home/frontend/queryFortuneCollegeSec'; //财富讲堂/财富研究
+
+    /*------------------------------------ 私募接口文档 start -------------------------------------*/
+    // 产品详情接口
+    this.queryFundDetailV2_api = http_url.web_url + '/pef/queryFundDetailV2';
+
+
+
+    /*------------------------------------ 私募接口文档 end -------------------------------------*/
+
+
 };
