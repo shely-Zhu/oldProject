@@ -77,10 +77,17 @@
    <script id="activityEn-template" type="text/x-handlebars-template">
     {{#each this}}
         <li>
-            {{#if imgurl}}
+            {{#if actTypestatus}}
             <img src="{{htjfGeneralizeImgUrl}}" alt="">
             {{/if}}
             <p>{{actName}}</p>
+            {{#if actTypestatus}}
+            <div class="sign">
+                    {{#if preferential}}
+                    <span class="no">{{preferential}}</span>
+                    {{/if}}
+                </div> 
+            {{else}}
             <div class="sign">
                 {{#if status}}
                 <span class="yes">已签到</span>
@@ -89,6 +96,7 @@
                 <span class="no">未签到</span>
                 {{/if}}
             </div> 
+            {{/if}}
             <div class="time">
                 <div class="timeco">报名时间&nbsp;{{enterTime}}</div> 
                 {{#if shareflag}}
