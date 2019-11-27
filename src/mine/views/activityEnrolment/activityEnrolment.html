@@ -47,7 +47,7 @@
                 <div>更多精彩活动</div>
                 <p class="secondp"></p>
             </div>
-            <ul>
+            <ul class="moreul">
                 <!-- <li style="background: url('/mine/static/img/Life_banner_bg1@2x.png') 100% 100%">
                     <div class="top">
                         <span>参与赠送30元电话卡30元电话卡</span>
@@ -101,14 +101,18 @@
 
     <script id="more-template" type="text/x-handlebars-template">
         <li style="background: url('{{filePath}}') 100% 100%">
+            {{#if prize}}
             <div class="top">
-                <span>{{title}}</span>
+                <span>{{prize}}</span>
             </div>
+            {{/if}}
             <p>{{title}}</p>
+            {{#if timeflag}}
             <div class="footer">
                 <span>报名时间</span>
-                <div>9月10日 至 9月15日</div>
+                <div>{{actStartDate}} 至 {{actEndDate}}</div>
             </div>
+            {{/if}}
             <div></div>
         </li>
         </script>
