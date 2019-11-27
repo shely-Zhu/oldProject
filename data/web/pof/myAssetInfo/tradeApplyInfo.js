@@ -33,27 +33,29 @@ var data = Mock.mock({
 
         tradeStatus: "",//交易申请状态
 
-        tradeApplyDesc: "",//交易状态描述
+        tradeApplyDesc: "待扣款",//交易状态信息
+
+        tradeApplyDescMessage: "等待银行汇款",//交易状态描述
 
         debitStatus: "",//扣款状态
 
-        tradeDate: "2019-09-01 11:00:35",//交易申请日期
+        tradeDate: "2017-09-01 11:00:35",//交易申请日期
 
-        originalDate: "",//原交易日期
+        originalDate: "2016-09-01 11:00:35",//原交易日期
 
-        estimateConfirmDate: "",//预估确认日期
+        estimateConfirmDate: "2018-08-01 11:00:35",//预估确认日期
 
-        estimateArrivalDate: "",//预估到账日期
+        estimateArrivalDate: "2019-09-01 11:00:35",//预估到账日期
 
-        confirmShares: "",//确认份额
+        confirmShares: "1,000份",//确认份额
 
-        confirmAmount: "",//确认金额
+        confirmAmount: "1,000,000.00",//确认金额
 
-        confirmNav: "",//确认净值
+        confirmNav: "1.02",//确认净值
 
-        confirmRate: "",//手续费
+        confirmRate: "120.00",//手续费
 
-        confirmDate: "",//确认日期
+        confirmDate: "2019-09-01 11:00:35",//确认日期
 
         tradeNo: "",//交易账号
 

@@ -300,7 +300,8 @@ module.exports = {
 
     // 自选公募--超宝详情
     './account/static/js/public/superStreasureDetail': './src/account/static/js/public/superStreasureDetail.js',
-
+    // 自选公募--超宝详情--内容
+    './account/static/js/public/superContent': './src/account/static/js/public/superContent.js',
     // 现金宝详情页
      './account/static/js/public/cashTreasure':   './src/account/static/js/public/cashTreasure.js',
     // 支付密码
