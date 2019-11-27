@@ -173,7 +173,7 @@ $(function() {
 	        var obj = [{
 			    url: site_url.fundNetWorthTrendChart_api, 
 			    data: {
-					fundCode:"",
+					fundCode:"000847",
 					dataRange:t||1,
 			    },
 			    needLogin: true,
@@ -216,6 +216,8 @@ $(function() {
 			})
 			$(document).on('click', '.materialContent', function(e) {
 				console.log($(this).attr('data-id'))
+			
+
             })
         }
 

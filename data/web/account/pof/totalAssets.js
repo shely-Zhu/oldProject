@@ -28,31 +28,94 @@ var mymessage = Mock.mock({
 
         "inTransitTotal": "999.23",// 待确认申请金额（申购+认购）
 
-        "cashDetail": { //现金宝持仓明细
+        "cashDetail": [
+            { //现金宝持仓明细
 
-            "opened": true,// 现金宝是否开户 true是开户 false是未开户 
+                "opened": true,// 现金宝是否开户 true是开户 false是未开户 
 
-            "totalMoney": "1059170.16",// 现金宝总资产 
+                "totalMoney": "1059170.16",// 现金宝总资产 
 
-            "totalMoneyMask": "6,878,075.99",//现金宝总资产千分位展示 
+                "totalMoneyMask": "6,878,075.99",//现金宝总资产千分位展示 
 
-            "income": "30.89",// 现金宝昨日收益 
+                "income": "30.89",// 现金宝昨日收益 
 
-            "incomeMask": "21.65",//现金包昨日收益千分位展示 
+                "incomeMask": "21.65",//现金包昨日收益千分位展示 
 
-            "annYldRat": "3.3270",// 7日年化收益率(%) 
+                "annYldRat": "3.3270",// 7日年化收益率(%) 
 
-            "addupIncome": "115.80", // 现金宝持有收益 
+                "addupIncome": "115.80", // 现金宝持有收益 
 
-            "addupIncomeMask": "-2,174.89",//现金包累计收益千分位展示 
+                "addupIncomeMask": "-2,174.89",//现金包累计收益千分位展示 
 
-            "fundCode": "003075",
+                "fundCode": "003075",
 
-            "fundName": "中融货币E",
+                "fundName": "中融货币A",
 
-            "inTransitNum": "0" // 待确认交易笔数
+                "inTransitNum": "0", // 待确认交易笔数
 
-        },
+                "isBuyFlag": 1,//是否可购买(0否1是) int类型
+
+                "isRedemptionFlag": 1, //是否可赎回(0否1是) int 类型
+
+                "holdIncome": 0.2514,//持有收益
+
+                "holdIncomeMask": 0.54564,// 持有收益千分位
+
+                "canBeSpentMsg": "提示:该基金资产可用于购买其他基金产品 ", //支持货基购基提示文案
+
+                "canBeSpent": "0",//支持货基购基  0为支持  1为不支持
+
+                "g2gestimateArrivalDate": "12-14 周四 15:00之前 ", //赎回到货基 预估到账时间 （到货基持仓的时间）
+
+                "isShowDivideMsg": 1, //0否1是(是否显示分红文案)
+
+                "divideMsg": "最近有分红",
+
+            },
+            { //现金宝持仓明细
+
+                "opened": true,// 现金宝是否开户 true是开户 false是未开户 
+
+                "totalMoney": "1059170.16",// 现金宝总资产 
+
+                "totalMoneyMask": "6,878,075.99",//现金宝总资产千分位展示 
+
+                "income": "30.89",// 现金宝昨日收益 
+
+                "incomeMask": "21.65",//现金包昨日收益千分位展示 
+
+                "annYldRat": "3.3270",// 7日年化收益率(%) 
+
+                "addupIncome": "115.80", // 现金宝持有收益 
+
+                "addupIncomeMask": "-2,174.89",//现金包累计收益千分位展示 
+
+                "fundCode": "003075",
+
+                "fundName": "中融货币F",
+
+                "inTransitNum": "0", // 待确认交易笔数
+
+                "isBuyFlag": 1,//是否可购买(0否1是) int类型
+
+                "isRedemptionFlag": 1, //是否可赎回(0否1是) int 类型
+
+                "holdIncome": 0.2514,//持有收益
+
+                "holdIncomeMask": 0.54564,// 持有收益千分位
+
+                "canBeSpentMsg": "提示:该基金资产可用于购买其他基金产品", //支持货基购基提示文案
+
+                "canBeSpent": "0",//支持货基购基  0为支持  1为不支持
+
+                "g2gestimateArrivalDate": "12-14 周四 15:00之前 ", //赎回到货基 预估到账时间 （到货基持仓的时间）
+
+                "isShowDivideMsg": 1, //0否1是(是否显示分红文案)
+
+                "divideMsg": "最近有分红",
+
+            }
+        ],
 
         "fundDetailList": [//普通基金持仓明细
 

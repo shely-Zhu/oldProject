@@ -79,7 +79,7 @@ module.exports = function() {
 
 
     /*-------------------私募相关  ------------------------------*/
-    this.prvDetail_api = http_url.web_url + '/pef/queryFundDetail'; //私募详情查询
+    // this.prvDetail_api = http_url.web_url + '/pef/queryFundDetail'; //私募详情查询
     this.prvLevel_api = http_url.web_url + '/pef/queryBenefitLevel'; //受益级别查询
     this.prvHisValue_api = http_url.web_url + '/pef/queryHistoryNetValue'; //历史净值查询
     this.prvLight_api = http_url.web_url + '/pef/queryProductImage'; //产品亮点查询
@@ -92,6 +92,9 @@ module.exports = function() {
     /*-------------------公募相关------------------------------*/
     this.query_api = http_url.web_url + '/pof/frontend/fund/query'; //热门诊断基金列表搜索
     this.pofTotalAssets_api = http_url.web_url + '/account/pof/totalAssets'; // 公募总资产
+    this.fundNetWorthList_api = http_url.web_url + '/pof/fundDetails/frontend/fundNetWorthList'; //历史明细
+    this.queryIncomeList_api = http_url.web_url + '/account/pof/queryIncomeList'; //收益明细
+
 
     // 前缀
     const pre = http_url.web_url + '/pof/'
@@ -277,5 +280,13 @@ module.exports = function() {
     //已报名活动
     this.getApplyActivity_api = http_url.web_url + '/marketing/activity/getApplyActivity';
     this.queryFortuneCollegeSec_api = http_url.web_url + '/account/home/frontend/queryFortuneCollegeSec'; //财富讲堂/财富研究
+
+    /*------------------------------------ 私募接口文档 start -------------------------------------*/
+    // 产品详情接口
+    this.queryFundDetailV2_api = http_url.web_url + '/pef/queryFundDetailV2';
+
+
+
+    /*------------------------------------ 私募接口文档 end -------------------------------------*/
 
 };

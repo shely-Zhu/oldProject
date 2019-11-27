@@ -300,7 +300,8 @@ module.exports = {
 
     // 自选公募--超宝详情
     './account/static/js/public/superStreasureDetail': './src/account/static/js/public/superStreasureDetail.js',
-
+    // 自选公募--超宝详情--内容
+    './account/static/js/public/superContent': './src/account/static/js/public/superContent.js',
     // 现金宝详情页
      './account/static/js/public/cashTreasure':   './src/account/static/js/public/cashTreasure.js',
     // 支付密码
@@ -354,6 +355,10 @@ module.exports = {
     // 财富学院早知道
     './homePage/static/js/fortuneFlowKnown' : './src/homePage/static/js/fortuneFlowKnown.js',
     // 财富讲堂
-    './homePage/static/js/fortuneClassroom' : './src/homePage/static/js/fortuneClassroom.js'
+    './homePage/static/js/fortuneClassroom' : './src/homePage/static/js/fortuneClassroom.js',
+    //历史明细
+    './mine/static/js/historyDetail': "./src/mine/static/js/historyDetail.js",
+    //收益明细
+    './mine/static/js/returnsDetail': "./src/mine/static/js/returnsDetail.js",
 
 }
