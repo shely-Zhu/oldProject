@@ -154,13 +154,17 @@ $(function() {
 
                         // 页面++
                         that.gV.aP.pageNo++;
-                        console.log('我是几',that.gV.aP.pageNo)
-                        console.log('我是内容',data)
+                        //去掉mui-pull-bottom-pocket的mui-hidden
+                        $('.contentWrapper').find('.mui-pull-bottom-pocket').removeClass('mui-hidden');
                             // 将列表插入到页面上
                         generateTemplate(data, that.getElements.recordList, that.getElements.transTemp);
 
                     }, 200)
 
+                },
+                callbackNoData:function(){
+                   // 暂无数据显示
+                   that.getElements.noData.show();
                 },
 
             }];

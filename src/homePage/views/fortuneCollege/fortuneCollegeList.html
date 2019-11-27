@@ -110,26 +110,7 @@
                          <div class="tab">
                               <div class="tab-t">
                                    <ol>
-                                        <li>
-                                             <a href="javascript:;" class="active">
-                                                  大类资产研究
-                                             </a>
-                                        </li>
-                                        <li>
-                                             <a href="javascript:;">
-                                                  宏观策略
-                                             </a>                                   
-                                        </li>
-                                        <li>
-                                             <a href="javascript:;">
-                                                  宏观策略
-                                             </a>
-                                        </li>
-                                        <li>
-                                             <a href="javascript:;">
-                                                  公募研究
-                                             </a>
-                                        </li>
+                         
                                    </ol>
                               </div>
                               <div class="tab-b">
@@ -278,6 +259,15 @@
                                         {{intro}}
                               </span>
                          </p>
+                    </a>
+               </li>
+          {{/each}}
+     </script>
+     <script id="titleTab" type="text/x-handlebars-template">
+          {{#each this}}
+               <li>
+                    <a href="javascript:;" class="active">
+                         大类资产研究
                     </a>
                </li>
           {{/each}}
