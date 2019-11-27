@@ -305,8 +305,6 @@ module.exports = {
     // 现金宝详情页
 
     './account/static/js/public/cashTreasure': './src/account/static/js/public/cashTreasure.js',
-    // 支付密码
-    './account/static/js/public/payPassword': './src/account/static/js/public/payPassword.js',
     // 基金确认书
     './account/static/js/private/privateFundPdf': './src/account/static/js/private/privateFundPdf.js',
 
@@ -314,20 +312,19 @@ module.exports = {
     './account/static/js/publicTradeDetail/publicTradeDetail': './src/account/static/js/publicTradeDetail/publicTradeDetail.js',
 
     //普通基金定投结果
-    './Financial/static/js/publicPlacement/surelyResults': './src/Financial/static/js/publicPlacement/surelyResults.js',
+    './Financial/static/js/publicPlacement/surelyResults': './src/financial/static/js/publicPlacement/surelyResults.js',
 
     //普通基金定投结果详情
-    './Financial/static/js/publicPlacement/surelyResultsDetail': './src/Financial/static/js/publicPlacement/surelyResultsDetail.js',
+    './Financial/static/js/publicPlacement/surelyResultsDetail': './src/financial/static/js/publicPlacement/surelyResultsDetail.js',
 
     //我的定投_定投明细
     './financial/static/js/publicPlacement/castSurelyDetafils': './src/financial/static/js/publicPlacement/castSurelyDetafils.js',
-    './Financial/static/js/publicPlacement/castSurelyDetails': './src/Financial/static/js/publicPlacement/castSurelyDetails.js',
     //我的定投计划
-    './Financial/static/js/publicPlacement/myInvestmentPlan': './src/Financial/static/js/publicPlacement/myInvestmentPlan.js',
+    './Financial/static/js/publicPlacement/myInvestmentPlan': './src/financial/static/js/publicPlacement/myInvestmentPlan.js',
     //我的定投计划详情
     './financial/static/js/publicPlacement/castSurelyDetails': './src/financial/static/js/publicPlacement/castSurelyDetails.js',
     //活期理财
-    './Financial/static/js/publicPlacement/demandFinancing': './src/Financial/static/js/publicPlacement/demandFinancing.js',
+    './Financial/static/js/publicPlacement/demandFinancing': './src/financial/static/js/publicPlacement/demandFinancing.js',
     //普通基金产品详情页_定投
     './financial/static/js/publicPlacement/ordinarySetThrow': './src/financial/static/js/publicPlacement/ordinarySetThrow.js',
     //普通基金赎回
