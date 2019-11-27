@@ -45,6 +45,10 @@ $(function () {
                 custNo: that.gV.custCode,
                 actStatus: 1
             }, 0);
+            that.getData(site_url.getApplyActivity_api, {
+                custNo: that.gV.custCode,
+                actStatus: 2
+            }, 1);
             that.events();
         },
         //时间转换
@@ -117,18 +121,28 @@ $(function () {
                         json.data.activityVOPageInfo.list.map(function (e) {
                             e.enterTime = that.getMyDate(parseInt(e.enterTime))
                             e.arriveTime = that.getMyDate(parseInt(e.arriveTime))
+                            // 判断是否有图片
                             e.imgurl = e.htjfGeneralizeImgUrl == '' ? 0 : 1;
-
+                            //判断是否显示分享   线上并且是 进行中的
                             e.shareflag = e.actType == 1 && num == 0 ? 1 : 0;
+                            //判断是 线上还是线下
+                            e.actTypestatus = e.actType == 1 ? 1 : 0
                         })
                         dataList = json.data.activityVOPageInfo.list;
                     }
-                    //给推荐活动赋值
+                    if(num == 0){
+                        
+                        //给推荐活动赋值
                     morelist = json.data.defaultRecommend
+                    //判断是否有报名时间
                     if(morelist.actStartDate){
                         morelist.timeflag = true;
                         morelist.actStartDate=morelist.actStartDate?moment(morelist.actStartDate).format('MM月至DD日'):'';
                         morelist.actEndDate=morelist.actEndDate?moment(morelist.actEndDate).format('MM月至DD日'):'';
+                    }
+                    setTimeout(function () {
+                    generateTemplate(morelist, that.$e.moreSlot, that.$e.moreTemp);
+                }, 200)
                     }
                     
                     setTimeout(function () {
@@ -138,7 +152,7 @@ $(function () {
                         } else {
                             generateTemplate(dataList, that.$e.ListSlot1, that.$e.listTemp);
                         }
-                        generateTemplate(morelist, that.$e.moreSlot, that.$e.moreTemp);
+                        
 
                     }, 200)
 
@@ -197,10 +211,6 @@ $(function () {
                     $('.listHasData0').show()
                     $('.listHasData1').hide()
                 } else {
-                    that.getData(site_url.getApplyActivity_api, {
-                        custNo: that.gV.custCode,
-                        actStatus: 2
-                    }, 1);
                     $('.listHasData0').hide()
                     $('.listHasData1').show()
                 }
