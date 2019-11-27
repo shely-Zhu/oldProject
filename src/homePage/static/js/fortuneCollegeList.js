@@ -18,49 +18,6 @@ var productPublic = {
         listLoading: $('.listLoading'),  //所有数据区域，第一次加载的loading结构
     },
 
-    //一些设置
-    setting: {
-        //导航
-        navList: [
-            {type: '全部',code: ''}, //code是当前类型对应的基金类型的代码
-            {type: '货币型',code: '10300'},
-            {type: '债券型',code: '10200'},
-            {type: '混合型',code: '10400'},
-            {type: '股票型',code: '10100'},
-            {type: '指数型',code: '10905'},
-            {type: 'QDII',code: '10901'}
-        ],
-
-        //产品列表的表头
-        listName: {
-            currencyType: [  //货币型
-                {txt: '基金名称'},
-                {sortColumn: 'tenThousandEarnings',txt: '万份收益(元)'},
-                {sortColumn: 'sevenDayYield',txt: '七日年化(%)', select: 1}
-            ],
-            otherType: [ //非货币型
-                {txt: '基金名称'},
-                {sortColumn: 'unitNav',txt: '最新净值(元)'},
-                {sortColumn: 'oneDayGains',txt: '日涨幅(%)', select: 1}
-            ]
-        },
-
-        //请求基金列表所需的参数，公用的在这里设置默认值
-        ajaxParams : {
-            pageCurrent: 1, //当前页码，默认为1
-            pageSize: 20,  //每页显示几条数据，根据需求为20
-            publicFundsType:"",   //基金类型(默认全部)
-        },
-
-        //每条列表的模板，生成后存放在这里，方便后面ajax请求新的数据时重复使用
-        con_template: '',
-
-        //左右拉动时，存放数据的区域的索引，默认为 0，第一个区域
-        //上拉加载mui组件，在切换区域，且第一次请求数据前初始化
-        current_index: 0,
-    },	 
-
-
     //初始化函数
     init: function(){
         var that = this;
@@ -68,7 +25,8 @@ var productPublic = {
         that.getData();
         //翻译早知道
         that.getFortuneCollegeFir()
-        
+        that.getFortuneCollegeFirCf()
+        that.events();
     },
     getData:function(){
         var that =this;
@@ -96,21 +54,21 @@ var productPublic = {
                 //设置切换区域的高度
                 //计算节点高度并设置
                 $(".banner img")[0].onload=function(){
-                    if( !that.height ){
-                        var height = windowHeight - document.getElementById('scroll1').getBoundingClientRect().top;
+                    // if( !that.height ){
+                    //     var height = windowHeight - document.getElementById('scroll1').getBoundingClientRect().top;
         
-                        if( window.currentIsApp ){
-                            //app，没有底部
-                            that.height = height - $('.tableHeader').height();
-                        }else{
-                            //非app
-                            that.height = height - $('.tableHeader').height() - $('.bottomNav').height();
-                        }
+                    //     if( window.currentIsApp ){
+                    //         //app，没有底部
+                    //         that.height = height - $('.tableHeader').height();
+                    //     }else{
+                    //         //非app
+                    //         that.height = height - $('.tableHeader').height() - $('.bottomNav').height();
+                    //     }
                         
-                    }
-                    if( !$('.list').hasClass('setHeight') ){
-                        $('.list').height( that.height ).addClass('setHeight');
-                    }
+                    // }
+                    // if( !$('.list').hasClass('setHeight') ){
+                    //     $('.list').height( that.height ).addClass('setHeight');
+                    // }
                 }			     						
             },
             callbackFail: function(json){
@@ -124,19 +82,54 @@ var productPublic = {
         var obj=[{
              url: site_url.queryFortuneCollegeFir_api,
              data: {    
-                type:"25", //类型
+                type:"25", //类型金牌翻译官
             },
             needDataEmpty: true,
             callbackDone: function(json){
                 modelData=json.data.ModelVO
+                articleData=json.data.ArticleVO
+                
                 // 将列表插入到页面上
-                generateTemplate(modelData,$('.translate'),$('#fortune-template'));     						
+                generateTemplate(modelData,$('.translate'),$('#fortune-template'));     					
             },
             callbackFail: function(json){
                 console.log(json)
             },
          }]
         $.ajaxLoading(obj);
+    },
+    getFortuneCollegeFirCf:function(){
+        var that =this;
+        var obj=[{
+             url: site_url.queryFortuneCollegeFir_api,
+             data: {    
+                type:"26", //类型财富早知道
+            },
+            needDataEmpty: true,
+            callbackDone: function(json){
+                modelData=json.data.ModelVO
+                articleData=json.data.ArticleVO
+                
+                // 将列表插入到页面上
+                generateTemplate(modelData,$('.fortuneVideo .title'),$('#fortuneCf-template'));     
+                generateTemplate(articleData,$('.fortuneVideo ul'),$('#video-template'));						
+            },
+            callbackFail: function(json){
+                console.log(json)
+            },
+         }]
+        $.ajaxLoading(obj);
+    },
+    //操作事件
+    events:function(){
+        //财富研究tab切换
+        $('.tab').on('tap','.tab-t li',function(){
+            console.log($(this).index())
+            $('.tab .tab-t li a').removeClass('active');
+            $('.tab .tab-t li a').eq($(this).index()).addClass('active');
+            $('.tab .tab-b .tab-content').removeClass('show');
+            $('.tab .tab-b .tab-content').eq($(this).index()).addClass('show');
+        });
     }
 }
 productPublic.init();
