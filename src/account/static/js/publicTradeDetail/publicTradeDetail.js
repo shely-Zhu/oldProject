@@ -12,10 +12,9 @@
     allotType	申请类型
     Fixbusinflag	业务辅助代码
  */
-require('@pathIncludJs/vendor/config.js');
-require('@pathIncludJs/vendor/zepto/callback.js');
-require('@pathIncludJs/vendor/zepto/deferred.js');
-require('@pathCommonJs/components/utils.js');
+
+require('@pathIncludJs/base.js');
+
 require('@pathCommonJs/ajaxLoading.js');
 require('@pathCommonJs/components/headBarConfig.js');
 
