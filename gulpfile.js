@@ -185,6 +185,7 @@ gulp.task('proxyTask', function() {
             return [
                 proxy('/app', {
                     target: 'https://app.htjf4.com',
+                    // target: 'https://172.16.187.127:8080',
                     // target: 'http://192.168.50.254:8085',
                     // target: 'https://app.chtfundtest.com',
                     changeOrigin: true,
@@ -192,7 +193,8 @@ gulp.task('proxyTask', function() {
                 }),
 
                 proxy(['/wap', '/web/', '/jf/'], {
-                     target: 'https://h5.htjf4.com',
+                    target: 'https://h5.htjf4.com',
+                    // target: 'https:/172.16.187.127:8080',
                     // target: 'http://172.16.187.164:8081',
                     // target: 'https://h5.chtfundtest.com',
                     changeOrigin: true,
