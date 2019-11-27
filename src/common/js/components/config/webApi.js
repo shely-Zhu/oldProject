@@ -291,6 +291,25 @@ module.exports = function () {
     this.newfundDetails_api = http_url.web_url + '/pof/fundDetails/frontend/newfundDetails'; //金服WEB-基金详情
     this.fundMaterial_api = http_url.web_url + '/pof/fundArchives/frontend/fundMaterial'; //金服WEB-基金招募书
 
+    // 产品类
+    this.prfFundBasicProfile_api = http_url.web_url + '/pof/fundArchives/frontend/fundBasicProfile'; //1.金服WEB-详情页-基金基本概况查询
+    this.prfFundManagerInfo_api = http_url.web_url + '/pof/fundArchives/frontend/fundManagerInfo'; //2.金服WEB-详情页-基金经理信息查询
+    this.prfFundCompanyInfo_api = http_url.web_url + '/pof/fundArchives/frontend/fundCompanyInfo'; //3.金服WEB-详情页-基金公司信息查询
+    this.prfFnvestmentPortfolio_api = http_url.web_url + '/pof/fundArchives/frontend/investmentPortfolio'; //4.金服WEB-详情页-基金投资组合信息查询
+    this.prfFundNoticeList_api = http_url.web_url + '/pof/fundArchives/frontend/fundNoticeList'; //5.金服WEB-详情页-基金公告列表查询
+    this.prfFundNoticeDetails_api = http_url.web_url + '/pof/fundArchives/frontend/fundNoticeDetails'; //6.金服WEB-详情页-基金公告详情查询
+    this.prfFundQuery_api = http_url.web_url + '/pof/fund/frontend/query'; //7.金服WEB-基金大全-公募基金产品列表查询
+    this.prfFundNetWorthTrendChart_api = http_url.web_url + '/pof/fundDetails/frontend/fundNetWorthTrendChart'; //8.金服WEB-详情页-基金净值走势图查询
+    this.prfFundCollectionQuery_api = http_url.web_url + '/pof/fundCollection/query'; //9.金服WEB-自选基金-列表查询
+    this.prfQueryNoLogin_api = http_url.web_url + '/pof/fundCollection/frontend/queryNoLogin'; //10.金服WEB-自选基金-列表查询（未登录状态）
+    this.prfFundCollectionQueryCode_api = http_url.web_url + '/pof/fundCollection/queryCode'; //11.金服WEB-自选基金-代码查询
+    this.prfFundCollectionMG_api = http_url.web_url + '/pof/fundCollection/manage'; //12.金服WEB-自选基金-收藏管理
+    this.prfFundNetWorthList_api = http_url.web_url + '/pof/fundDetails/frontend/fundNetWorthList'; //13.金服WEB-基金历史净值-查询
+    this.prfFundDividendList_api = http_url.web_url + '/pof/fundDetails/frontend/fundDividendList'; //14.金服WEB-基金分红信息-列表查询
+    this.prfFundFeeRate_api = http_url.web_url + '/pof/fundFeeRate/frontend/query'; //15.金服WEB-定投费率-查询
+    this.prfFundList_api = http_url.web_url + '/pof/newIssue/frontend/fundList'; //16.金服WEB-新发基金-列表查询
+    this.prfQuerynewsletter_api = http_url.web_url + '/pof/fundnewsletter/frontend/querynewsletter'; //17.金服WEB-基金时讯-查询
+
 
     /*------------------- 私募理财fang——le end ------------------------------*/
     /*------------------- 财富学院 start ------------------------------*/

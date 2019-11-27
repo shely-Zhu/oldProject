@@ -362,6 +362,12 @@ module.exports = function () {
     this.pofOrdinarySetThrow_url = go_url.no_url + '/financial/views/publicPlacement/ordinarySetThrow.html';
     // 交易规则
     this.pofTransactionRules_url = go_url.no_url + '/financial/views/publicPlacement/transactionRules.html';
+    // 基金档案
+    this.pofFundFile_url = go_url.no_url + '/financial/views/publicPlacement/fundFile.html';
+    // 基金经理
+    this.pofFundManager_url = go_url.no_url + '/financial/views/publicPlacement/fundManager.html';
+    // 基金公司
+    this.pofFundCompany_url = go_url.no_url + '/financial/views/publicPlacement/fundCompany.html';
 
     /*------------------- 私募理财fang——le end ------------------------------*/
     this.optionalPublicDetail_url = go_url.no_url + '/account/views/public/optionalPublicDetail.html';
