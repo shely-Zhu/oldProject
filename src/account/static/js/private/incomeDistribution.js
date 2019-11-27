@@ -22,6 +22,7 @@ require('@pathCommonJsCom/goTopMui.js');
 // require('@pathCommonJs/components/elasticLayer.js');
 // require('@pathCommonJs/components/elasticLayerTypeFive.js');
 require('@pathCommonJs/components/headBarConfig.js');
+var splitUrl = require('@pathCommonJs/components/splitUrl.js');
 //黑色提示条的显示和隐藏
 // var tipAction = require('@pathCommonJsCom/tipAction.js');
 var generateTemplate = require('@pathCommonJsComBus/generateTemplate.js');
@@ -114,7 +115,7 @@ $(function() {
             var obj = [{ // 系统调仓记录列表
                 url: site_url.yieldAssignList_api,
                 data: {
-                    "projectId":20356,
+                    "projectId":splitUrl()["projectId"] ,
                     "pageNo": that.gV.aP.pageNo, //非必须，默认为1
                     "pageSize": that.gV.aP.pageSize//非必须，默认为10
                 },
@@ -154,13 +155,17 @@ $(function() {
 
                         // 页面++
                         that.gV.aP.pageNo++;
-                        console.log('我是几',that.gV.aP.pageNo)
-                        console.log('我是内容',data)
+                        //去掉mui-pull-bottom-pocket的mui-hidden
+                        $('.contentWrapper').find('.mui-pull-bottom-pocket').removeClass('mui-hidden');
                             // 将列表插入到页面上
                         generateTemplate(data, that.getElements.recordList, that.getElements.transTemp);
 
                     }, 200)
 
+                },
+                callbackNoData:function(){
+                   // 暂无数据显示
+                   that.getElements.noData.show();
                 },
 
             }];

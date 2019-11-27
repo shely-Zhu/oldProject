@@ -17,17 +17,35 @@ var Mock = require('mockjs');
 //1. 积分
 var data = Mock.mock({ 
     "hmac": "hmac", 
-    "status": "0", 
+    "status": "0000", 
     "code": "CS0000", 
     "msg": "处理成功！", 
     "data": {
-    	"pageList|10":[{
+    	"pageList|5":[{
 	        "fundType":"10014", //基金类型代码
 			"trdDt":"2019-5-21", //交易日期
 			"unitNav":"100",//份额净值
 			"accuUnitNav":"102.51",//份额累计净值
 			"dayChgRat":"1101",//日涨跌幅（%）
+			"annYldRat":"1.5",//七日年化（%）
+			"unitYld":"2.233",//日涨跌幅（%）
+    		
+    	},{
+	        "fundType":"10014", //基金类型代码
+			"trdDt":"2019-5-22", //交易日期
+			"unitNav":"100",//份额净值
+			"accuUnitNav":"102.51",//份额累计净值
+			"dayChgRat":"1101",//日涨跌幅（%）
 			"annYldRat":"2.32",//七日年化（%）
+			"unitYld":"2.233",//日涨跌幅（%）
+    		
+    	},{
+	        "fundType":"10014", //基金类型代码
+			"trdDt":"2019-5-23", //交易日期
+			"unitNav":"100",//份额净值
+			"accuUnitNav":"102.51",//份额累计净值
+			"dayChgRat":"1101",//日涨跌幅（%）
+			"annYldRat":"1",//七日年化（%）
 			"unitYld":"2.233",//日涨跌幅（%）
     		
     	}]
