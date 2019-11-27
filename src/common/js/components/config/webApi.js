@@ -270,16 +270,11 @@ module.exports = function() {
     /*------------------- 财富学院 start ------------------------------*/
     this.queryFortuneBanner_api = http_url.web_url + '/account/home/frontend/queryFortuneBanner'; //首页banner
     this.queryFortuneCollegeFir_api = http_url.web_url + '/account/home/frontend/queryFortuneCollegeFir'; //财富翻译官/早知道
-    <<
-    << << < HEAD
+
     this.getFortuneTabInfo_api = http_url.web_url + '/account/home/frontend/getFortuneTabInfo'; // 财富讲堂/财富研究 页签查询
     this.queryFortuneArticleList_api = http_url.web_url + '/account/home/frontend/queryFortuneArticleList'; // 财富文章列表
-    ===
-    === =
 
     //已报名活动
     this.getApplyActivity_api = http_url.web_url + '/marketing/activity/getApplyActivity';
     this.queryFortuneCollegeSec_api = http_url.web_url + '/account/home/frontend/queryFortuneCollegeSec'; //财富讲堂/财富研究
-    >>>
-    >>> > dd195ab2465fdc9890e184247c45157dc93bee19
 };
