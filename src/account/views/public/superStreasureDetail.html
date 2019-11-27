@@ -9,7 +9,7 @@
 	<title>交易记录</title>
 </head>
 <body>
-        @@include('@pathInclude/views/header.html')
+
         @@include('@pathCommonViews/headBarConfig.html',{"pathName":"泰达宏利活期友货币A","bgColors":"#475A95,#475A95","showType":"1"})
         <section class="container">
             <div class="banner">
@@ -44,7 +44,7 @@
                         <img src="/account/static/img/account_icon_jyjl.png" alt="">
                     </div>
                     <div>
-                        收益明细 
+                        交易记录 
                     </div>                  
                 </li>
               </ul>
@@ -58,37 +58,38 @@
                 <!-- 万份收益折线图 -->
                 <div id="wfsyLine" class="hide line"></div>
                 <div class='mui-row tab'>
-                    <span class="mui-col-sm-3 mui-col-xs-3 time oneMonth active" num="0">近一个月</span>
-                    <span class="mui-col-sm-3 mui-col-xs-3 time threeMonth" num="1">近三个月</span>
-                    <span class="mui-col-sm-3 mui-col-xs-3 time newYear" num="3">近一年</span>
-                    <span class="mui-col-sm-3 mui-col-xs-3 time sinceNow" num="4">成立至今</span>
+                    <span class="mui-col-sm-3 mui-col-xs-3 time oneMonth active" num="1">近一个月</span>
+                    <span class="mui-col-sm-3 mui-col-xs-3 time threeMonth" num="3">近三个月</span>
+                    <span class="mui-col-sm-3 mui-col-xs-3 time newYear" num="12">近一年</span>
+                    <span class="mui-col-sm-3 mui-col-xs-3 time sinceNow" num="">成立至今</span>
                 </div>
             </div>
             <div class="textWrap">
                <div class="rulestestWrap">
-                 <div class="rulesTitle">
-                    交易规则
-                 </div>
-                 <div class="rulesContent">
-                    这里是内容这里是内容这里是内容这里是内容这里是内容这里是内容这里是内容这里是内容这里是内容这里是内容这里是内容这里是内容这里是内容这里是内容这里是内容这里是内容这里是内容这里是内容这里是内容这里是内容这里是内容这里是内容这里是内容这里是内容这里是内容这里是内容这里是内容
-                 </div>
+                  <!-- 放置列表 -->
                </div>
-               <div class="rulestestWrap">
-                    <div class="rulesTitle">
-                        风险揭示
-                    </div>
-                    <div class="rulesContent">
-                       这里是内容这里是内容这里是内容这里是内容这里是内容这里是内容这里是内容这里是内容这里是内容这里是内容这里是内容这里是内容这里是内容这里是内容这里是内容这里是内容这里是内容这里是内容这里是内容这里是内容这里是内容这里是内容这里是内容这里是内容这里是内容这里是内容这里是内容
-                    </div>
-                </div>
             </div>
             <div class="footer mui-row">
                     <div class="footerBtnLeft mui-col-sm-6 mui-col-xs-6">转出</div>
                     <div class="footerBtnRight mui-col-sm-6 mui-col-xs-6">转入</div>
             </div>
+            <div class="detailText">
+                详情
+            </div>
+            <div class="titleTwo">000847</div>
+            <script id="adjustment-template" type="text/x-handlebars-template">
+                {{#each this}}
+                <ul data-id='{{id}}' class="materialContent">
+                        <li >{{title}}</li>
+                        <li class="imgLi"><img src="/account/static/img/jiantou.png" alt=""></li>
+                    </ul>
+                {{/each}}
+            </script>
+
+
 
             <!-- 加载中loading -->
-            @@include('@pathCommonViews/loading/listLoading.html')
+            <!-- @@include('@pathCommonViews/loading/listLoading.html') -->
             <!-- 暂无数据 -->
             @@include('@pathCommonViews/noData.html',{"tipText":"暂无数据"})
     
