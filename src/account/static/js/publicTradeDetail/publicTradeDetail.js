@@ -56,7 +56,7 @@ $(function () {
                 });
             })
             $('').on('click', function(){
-                //买入产品条目点击进入公募产品详情
+                //todo 买入产品条目点击进入公募产品详情
                 var fundCode = that.gV.data.fundCode;
                 window.location.href=site_url.productPublicDetail_url;
             })
