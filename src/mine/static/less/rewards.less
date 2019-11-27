@@ -1,5 +1,5 @@
 /*
- * 我的奖励 
+ * 我的奖励
  * @author zhangyanping 2019-11-12
 */
 
@@ -7,7 +7,7 @@
 @import url('@pathCommonLess/mui/resetMUI.less');
 @import url("@pathCommonLess/reset.less");
 @import url("@pathCommonLess/color.less");
-
+@import url("@pathCommonLessCom/headBarConfig.less");
 .mui-card{
 	padding: 0 0.3rem;
 	box-shadow: 0 0 0 0;
@@ -28,6 +28,8 @@
 		}
 	}
 	.rewardWrapper{
+		overflow:hidden;
+		height: 100%;
 		.entity{
 			width: 100%;
 			height: 2.2rem;
@@ -41,7 +43,7 @@
 			background: url("/mine/static/img/rewards/kapian_bg2@3x.png");
 		    background-size: 100% 100%;
 		}
-		.Invalid{
+		.invalid{
 			width: 100%;
 			height: 2.2rem;
 			background: url("/mine/static/img/rewards/kapian_bg_zhihui@3x.png");
@@ -114,5 +116,105 @@
 			}
 		}
 
+	}
+	.tipBox{
+	    position: fixed;
+	    top: 0;
+	    left: 0;
+	    width: 100%;
+	    height: 100%;
+	    z-index: 600;
+		background:rgba(0, 0, 0, 0.8);
+		 display:none;
+
+		.alertcontent{
+	        position: relative;
+	        display: table;
+	        top: 50%;
+	        transform: translate(0, -50%);
+	        -webkit-transform: translate(0, -50%);
+	        /* background: @c005; */
+	        /* text-align: center; */
+	        z-index: 105;
+	        margin: 0 auto;
+
+	        max-width: 76%;
+	        min-width: 6.9rem;
+	        min-height:7.24rem;
+	        /* background: url("/mine/static/img/alertBox.png"); */
+	        .bgPicture{
+	        	position: relative;
+	        	left: 0;
+	        	top: 0;
+	        	width:100%;
+	        }
+
+		    ul{
+		    	position:absolute;
+		    	left:0;
+		    	top:0;
+				padding:0.32rem 0.33rem 0;
+		        max-width: 100%;
+		        min-width: 6.27rem;
+		    	display: table-cell;
+		    	/* z-index: 9999; */
+		    	li{
+		    		font-size:0.26rem;
+
+		    	}
+		    	.commonval{
+					color: @382918;
+					P:nth-child(1){
+						font-size:0.28rem;
+						color: @634C32;
+					}
+					P:nth-child(2){
+						font-size: 0.26rem;
+						/* color: #382918; */
+					}
+		    	}
+		    	.firstli{
+					font-size: 0.46rem;
+					color: @94715A;
+					margin-bottom:0.23rem;
+				}
+				.secondli{
+					background: @FFFAEF;
+					border-radius: 0.04rem;
+					padding:0.09rem 0.14rem 0.07rem 0.12rem;
+					font-size: 0.26rem;
+					color: @000000;
+					span{
+						display:inline-block;
+						max-width: 100%;
+						word-break:break-all;
+						/* float: left; */
+						/* overflow:hidden; */
+					}
+				}
+				.secondliNum{
+					margin-bottom:0.01rem;
+				}
+				.thirdli{
+					margin-top:0.69rem;
+
+				}
+				.fourli{
+					margin-top:0.50rem;
+				}
+				.fiveli{
+					margin-top:0.72rem;
+				}
+		    }
+		}
+		.closeBtn{
+			position:absolute;
+			color:@FFFFFF;
+			font-size:0.5rem;
+			left:50%;
+			margin-left:-0.25rem;
+			margin-top:0.36rem;
+
+		}
 	}
 }

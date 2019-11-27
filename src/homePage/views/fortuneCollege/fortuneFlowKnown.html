@@ -32,9 +32,10 @@
           {{#each this}}
           <div class="knownItem flex">
                <div class="itemVideo">
-                    <img class="play" src="{{imgSrc}}" alt="">
+                    <img class="articalImg" src="{{externalUrl}}" alt="">
+                    <img class="play" src="/homePage/static/img/bofang@2x.png" alt="">
                </div>
-               <div class="itemContent">{{date}} | {{content}}</div>
+               <div class="itemContent">{{articleTime}} | {{title}}</div>
           </div>
           {{/each}}
     </script>
