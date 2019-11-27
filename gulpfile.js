@@ -152,7 +152,7 @@ if (options.env === '0') {
 
 
 //gulp服务器
-gulp.task('connect', function() {
+gulp.task('connect', function () {
     plugins.connect.server({
         root: host.path,
         port: host.port.wap,
@@ -163,7 +163,7 @@ gulp.task('connect', function() {
 
 //gulp-mock-server   mock模拟假数据
 
-gulp.task('mock', function() {
+gulp.task('mock', function () {
     gulp.src('.')
         .pipe(plugins.mockServer({
             //livereload: false,
@@ -176,15 +176,16 @@ gulp.task('mock', function() {
         }));
 });
 
-gulp.task('proxyTask', function() {
+gulp.task('proxyTask', function () {
     plugins.connect.server({
         root: host.path,
         port: host.port.wap,
         livereload: true,
-        middleware: function(connect, opt) {
+        middleware: function (connect, opt) {
             return [
                 proxy('/app', {
-                   target: 'https://app.htjf4.com',
+                    target: 'https://app.htjf4.com',
+                    // target: 'http://172.16.187.129:8080',//李亚楠
                     // target: 'http://192.168.50.254:8085',
                     //target: 'https://app.chtfundtest.com',
                     changeOrigin: true,
@@ -192,9 +193,10 @@ gulp.task('proxyTask', function() {
                 }),
 
                 proxy(['/wap', '/web/', '/jf/'], {
-                    target: 'https://h5.htjf4.com',
+                     target: 'https://h5.htjf4.com',
+                    //  target: 'http://172.16.187.129:8080',//李亚楠
                     // target: 'http://172.16.187.164:8081',
-                    //target: 'https://h5.chtfundtest.com',
+                     // target: 'https://h5.chtfundtest.com',
                     changeOrigin: true,
                     secure: false,
                 }),
@@ -204,12 +206,12 @@ gulp.task('proxyTask', function() {
     });
 })
 
-gulp.task('mockProxy', function() {
+gulp.task('mockProxy', function () {
     plugins.connect.server({
         root: host.path,
         port: host.port.wap,
         livereload: true,
-        middleware: function(connect, opt) {
+        middleware: function (connect, opt) {
             return [
                 proxy(['/wap', '/web/', '/app', '/api'], {
                     target: 'http://' + localIp + ':8088',
@@ -224,7 +226,7 @@ gulp.task('mockProxy', function() {
 
 
 //zip做服务器部署的时候讲我们打包出的文件压缩成一个zip包
-gulp.task('zip', ['initialTask'], function() {
+gulp.task('zip', ['initialTask'], function () {
     return gulp.src(host.path + '**')
         .pipe(plugins.zip(host.zip_name + '.zip'))
         .pipe(gulp.dest(host.path));
@@ -244,7 +246,7 @@ if (options.env === '0') { //当开发环境的时候构建命令执行mock服�
 }
 
 /**此任务默认执行，gulp启动时，先将所有文件打包一次**/
-gulp.task('initialTask', function(cb) {
+gulp.task('initialTask', function (cb) {
     plugins.sequence('clean', 'images', 'font', 'includeJs', 'includeCss', 'cssToHost', 'webpack', 'bfRev', 'html', 'rev', 'rootEnv', cb);
 });
 
@@ -296,7 +298,7 @@ var isWatch = false;
 /***************************watch监听打包任务******************************/
 if (options.env === '0' || options.env === '5') { //当开发环境的时候执行监听打包，上线部署的时候只执行一次打包
     // if (options.env === '0') { //当开发环境的时候执行监听打包，上线部署的时候只执行一次打包
-    gulp.watch('src/**/*', function(event) {
+    gulp.watch('src/**/*', function (event) {
 
 
         //监听到的修改的文件
@@ -313,7 +315,7 @@ if (options.env === '0' || options.env === '5') { //当开发环境的时候执�
             console.log('打包所有html文件：');
 
             revChangeSrc = revChangeSrcStatic_1;
-            plugins.sequence('cleanHtmlMiddleRev', 'html', 'rev', function() {});
+            plugins.sequence('cleanHtmlMiddleRev', 'html', 'rev', function () { });
         } else if (filePath.indexOf('.js') != -1 && filePath.indexOf('.json') == -1) {
 
             revChangeSrc = revChangeSrcStatic_2;
@@ -327,11 +329,11 @@ if (options.env === '0' || options.env === '5') { //当开发环境的时候执�
                     //include中的业务js走webpack任务
                     file = "./" + file;
                     webpackConfig.entry = webpackList[file]
-                    plugins.sequence('cleanRev', 'webpack', 'rev', function() {});
+                    plugins.sequence('cleanRev', 'webpack', 'rev', function () { });
                 } else {
                     // 非业务js走includeJs任务
                     jsIncludeSrc = 'src/include/**/*' + filePath.substring(filePath.lastIndexOf('\\') + 1);
-                    plugins.sequence('cleanRev', 'includeJs', 'rev', function() {});
+                    plugins.sequence('cleanRev', 'includeJs', 'rev', function () { });
                 }
             } else {
                 //其他情况，先判断是否在webpackList中
@@ -346,14 +348,14 @@ if (options.env === '0' || options.env === '5') { //当开发环境的时候执�
                         webpackConfig.entry[i] = webpackList[i];
 
                         console.log('打包js文件：' + webpackList[i]);
-                        plugins.sequence('cleanRev', 'webpack', 'rev', function() {});
+                        plugins.sequence('cleanRev', 'webpack', 'rev', function () { });
                     }
                 }
                 if (!hasFile) {
                     //不在webpackList中
                     webpackConfig.entry = webpackList;
                     console.log('打包所有js文件');
-                    plugins.sequence('cleanRev', 'webpack', 'rev', function() {});
+                    plugins.sequence('cleanRev', 'webpack', 'rev', function () { });
                 }
             }
         } else if (filePath.indexOf('.less') != -1) {
@@ -361,7 +363,7 @@ if (options.env === '0' || options.env === '5') { //当开发环境的时候执�
             console.log('打包所有less文件');
 
             revChangeSrc = revChangeSrcStatic_2;
-            plugins.sequence('cleanRev', 'cssToHost', 'rev', function() {});
+            plugins.sequence('cleanRev', 'cssToHost', 'rev', function () { });
         } else if (filePath.indexOf('.css') != -1) {
             //打包所有css文件
             //includeCssSrc = filePath.substring( filePath.indexOf('src') ).replace(/\\/g, '/');
@@ -382,17 +384,17 @@ if (options.env === '0' || options.env === '5') { //当开发环境的时候执�
 
 /*******************************清除打包文件***********************************/
 //清空打包后的文件
-gulp.task('clean', function() {
+gulp.task('clean', function () {
     return del.sync([host.path + '*', host.middle + '*']);
 });
 
 //清空css\js版本号文件
-gulp.task('cleanRev', function() {
+gulp.task('cleanRev', function () {
     return del.sync(host.path + 'rev/');
 });
 
 //清空Html打版本号的备份文件
-gulp.task('cleanHtmlMiddleRev', function() {
+gulp.task('cleanHtmlMiddleRev', function () {
     return del.sync(host.middleHtmlPathRev + '*');
 });
 /*******************************清除打包文件  end***********************************/
@@ -402,11 +404,11 @@ gulp.task('cleanHtmlMiddleRev', function() {
  * 版本号文件的备份
  * 第一次打包时，需要打包css\js文件的rev文件备份，用于后期修改html文件时添加版本号
  */
-gulp.task('bfRev', function() {
-        return gulp.src([host.path + 'rev/**/*.json'])
-            .pipe(gulp.dest(host.middle + 'rev/'))
-    })
-    /*******************************版本号文件的备份 end****************************/
+gulp.task('bfRev', function () {
+    return gulp.src([host.path + 'rev/**/*.json'])
+        .pipe(gulp.dest(host.middle + 'rev/'))
+})
+/*******************************版本号文件的备份 end****************************/
 
 
 
@@ -419,13 +421,13 @@ gulp.task('bfRev', function() {
 
 
 //图片打包任务，全部打包和单独打包可共用
-gulp.task('images', function() {
+gulp.task('images', function () {
     return gulp.src('src/**/img/**/*')
         .pipe(gulp.dest(host.path));
 });
 
 //mui所需的font文件夹打包
-gulp.task('font', function() {
+gulp.task('font', function () {
     return gulp.src('src/include/fonts/*')
         .pipe(gulp.dest(host.path + 'include/fonts'));
 })
@@ -433,43 +435,43 @@ gulp.task('font', function() {
 
 //css文件打包，先经过Less处理，然后比对文件，修改的文件会打包到host.dest中
 //并且生成版本号文件
-gulp.task("cssToHost", function() {
+gulp.task("cssToHost", function () {
 
     //测试环境
     return gulp.src(['src/**/*.less', '!src/common/**/*.less'])
 
-    //通过through处理相对路径
-    .pipe(
-        through.obj(function(file, enc, cb) {
-            file = pathVar.changePathVar(file);
-            this.push(file);
-            cb()
-        })
-    )
+        //通过through处理相对路径
+        .pipe(
+            through.obj(function (file, enc, cb) {
+                file = pathVar.changePathVar(file);
+                this.push(file);
+                cb()
+            })
+        )
 
-    .pipe(plugins.less())
+        .pipe(plugins.less())
 
-    //预上线/线上环境时，压缩css
-    //设置这两个参数，防止去掉浏览器前缀和z-index值的变化
-    .pipe(plugins.if(options.env === '3' || options.env === '4', plugins.cssnano({ autoprefixer: false, zindex: false })))
+        //预上线/线上环境时，压缩css
+        //设置这两个参数，防止去掉浏览器前缀和z-index值的变化
+        .pipe(plugins.if(options.env === '3' || options.env === '4', plugins.cssnano({ autoprefixer: false, zindex: false })))
 
-    //修改当前文件的路径，将less替换为css
-    .pipe(
-        through.obj(function(file, enc, cb) {
-            //修改当前文件的路径到host.path下，且替换路径中的less为css
-            file.path = file.path.replace('less', 'css');
-            this.push(file);
-            cb()
-        })
-    )
+        //修改当前文件的路径，将less替换为css
+        .pipe(
+            through.obj(function (file, enc, cb) {
+                //修改当前文件的路径到host.path下，且替换路径中的less为css
+                file.path = file.path.replace('less', 'css');
+                this.push(file);
+                cb()
+            })
+        )
 
-    //与host.path中的内容做比对
-    .pipe(plugins.changed(host.path, { hasChanged: plugins.changed.compareSha1Digest }))
+        //与host.path中的内容做比对
+        .pipe(plugins.changed(host.path, { hasChanged: plugins.changed.compareSha1Digest }))
         .pipe(plugins.debug({ title: 'css-有变动的文件:' }))
 
-    //修改当前文件的路径，将less替换为css
-    .pipe(
-            through.obj(function(file, enc, cb) {
+        //修改当前文件的路径，将less替换为css
+        .pipe(
+            through.obj(function (file, enc, cb) {
                 //修改当前文件的路径到host.path下，且替换路径中的less为css
                 file.path = file.path.replace('less', 'css');
                 this.push(file);
@@ -478,14 +480,14 @@ gulp.task("cssToHost", function() {
         )
         .pipe(gulp.dest(host.path))
 
-    //打版本号
-    .pipe(plugins.rev())
+        //打版本号
+        .pipe(plugins.rev())
         .pipe(plugins.rev.manifest())
         .pipe(gulp.dest(host.path + 'rev/css/'))
 })
 
 //include css文件打包
-gulp.task("includeCss", function() {
+gulp.task("includeCss", function () {
     return gulp.src(includeCssSrc)
         //也加上压缩处理
         .pipe(plugins.if(options.env === '3' || options.env === '4', plugins.cssnano({ autoprefixer: false, zindex: false })))
@@ -493,7 +495,7 @@ gulp.task("includeCss", function() {
 })
 
 
-gulp.task("htmd", function() {
+gulp.task("htmd", function () {
 
     return gulp.src(['src/include/js/vendor/buriedPoint/**/*.js'])
         .pipe(gulp.dest(host.path + 'include/js/vendor/buriedPoint/'))
@@ -501,48 +503,48 @@ gulp.task("htmd", function() {
 })
 
 //不使用webpack的 js文件打包
-gulp.task("includeJs", ['htmd'], function() {
+gulp.task("includeJs", ['htmd'], function () {
     return gulp.src(jsIncludeSrc)
         //与host.path中的内容做比对
         .pipe(plugins.changed(host.path, { hasChanged: plugins.changed.compareSha1Digest }))
         .pipe(plugins.debug({ title: 'js-有变动的文件:' }))
 
-    .pipe(plugins.if(options.env === '3' || options.env === '4', plugins.uglify({ //压缩
-        mangle: false, //类型：Boolean 默认：true 是否修改变量名
-        compress: false, //类型：Boolean 默认：true 是否完全压缩
-        output: {
-            beautify: true //只去注释，不压缩成一行
-        }
-    })))
-
-    //对root.js做一些修改
-    .pipe(
-        through.obj(function(file, enc, cb) {
-            if (file.path.indexOf('root.js') != -1 && (options.env == '0' || options.env == "5")) {
-                // if (file.path.indexOf('root.js') != -1 && (options.env == '0')) {
-                //如果是本地或联调环境，修改env和envOrigin的值
-                //且替换root.js里的本地ip
-                //因测试、预生产、生产环境的root需运维在发版时在对应环境上修改
-                //此处不处理
-                var fileCon = file.contents.toString();
-
-                fileCon = fileCon.replace(/localIp/g, localIp);
-
-                fileCon = 'var env = ' + options.env + ';\n' + 'var envOrigin = ' +
-                    options.envOrigin + ';\n' + fileCon.substring(fileCon.indexOf('//'));
-
-                file.contents = new Buffer(fileCon);
+        .pipe(plugins.if(options.env === '3' || options.env === '4', plugins.uglify({ //压缩
+            mangle: false, //类型：Boolean 默认：true 是否修改变量名
+            compress: false, //类型：Boolean 默认：true 是否完全压缩
+            output: {
+                beautify: true //只去注释，不压缩成一行
             }
-            this.push(file);
-            cb()
-        })
-    )
+        })))
 
-    .pipe(gulp.dest(host.path + 'include/'))
+        //对root.js做一些修改
+        .pipe(
+            through.obj(function (file, enc, cb) {
+                if (file.path.indexOf('root.js') != -1 && (options.env == '0' || options.env == "5")) {
+                    // if (file.path.indexOf('root.js') != -1 && (options.env == '0')) {
+                    //如果是本地或联调环境，修改env和envOrigin的值
+                    //且替换root.js里的本地ip
+                    //因测试、预生产、生产环境的root需运维在发版时在对应环境上修改
+                    //此处不处理
+                    var fileCon = file.contents.toString();
 
-    //root.js需要打版本号
-    .pipe(
-            through.obj(function(file, enc, cb) {
+                    fileCon = fileCon.replace(/localIp/g, localIp);
+
+                    fileCon = 'var env = ' + options.env + ';\n' + 'var envOrigin = ' +
+                        options.envOrigin + ';\n' + fileCon.substring(fileCon.indexOf('//'));
+
+                    file.contents = new Buffer(fileCon);
+                }
+                this.push(file);
+                cb()
+            })
+        )
+
+        .pipe(gulp.dest(host.path + 'include/'))
+
+        //root.js需要打版本号
+        .pipe(
+            through.obj(function (file, enc, cb) {
                 if (file.path.indexOf('root.js') != -1) {
                     this.push(file);
                 }
@@ -601,8 +603,8 @@ gulp.task('jsCpd', function() {
 
 
 //非include文件夹下的js文件打包
-gulp.task("webpack", ['jsCpd'],  function(cb) {
 
+gulp.task("webpack", ['jsCpd'],  function(cb) {
     //测试环境
     pump([
         gulp.src(['src/*']),
@@ -615,7 +617,7 @@ gulp.task("webpack", ['jsCpd'],  function(cb) {
         plugins.webpack(webpackConfig),
 
         //添加changeLocalHistory、eruda和CustomEventIeFile的文件内容
-        through.obj(function(file, enc, cb) {
+        through.obj(function (file, enc, cb) {
             var fileCon = file.contents.toString();
             fileCon = changeLocalHistoryFile + fileCon + erudaFile + CustomEventIeFile;
             file.contents = new Buffer(fileCon);
@@ -644,20 +646,20 @@ gulp.task("webpack", ['jsCpd'],  function(cb) {
 });
 
 //html文件打包
-gulp.task('html', function() {
+gulp.task('html', function () {
 
     return gulp.src(['src/**/views/**/*.html', '!src/common/views/**/*.html']) //- 读取 rev-manifest.json 文件以及需要进行css名替换的文件
 
-    //处理公共路径变量
-    .pipe(
-        through.obj(function(file, enc, cb) {
-            file = pathVar.changePathVar(file);
-            this.push(file);
-            cb()
-        })
-    )
+        //处理公共路径变量
+        .pipe(
+            through.obj(function (file, enc, cb) {
+                file = pathVar.changePathVar(file);
+                this.push(file);
+                cb()
+            })
+        )
 
-    .pipe(plugins.advancedFileInclude({ //头尾公共部分添加
+        .pipe(plugins.advancedFileInclude({ //头尾公共部分添加
             prefix: '@@',
             //basepath: '@file',
             context: {
@@ -669,61 +671,61 @@ gulp.task('html', function() {
             removeComments: true, //清除HTML注释
         }))
 
-    //与host.middleHtmlPath中的内容做比对
-    .pipe(plugins.changed(host.middleHtmlPath, { hasChanged: plugins.changed.compareSha1Digest }))
+        //与host.middleHtmlPath中的内容做比对
+        .pipe(plugins.changed(host.middleHtmlPath, { hasChanged: plugins.changed.compareSha1Digest }))
         .pipe(plugins.debug({ title: 'html-有变动的文件:' }))
 
-    //输出到middleHtmlPath文件夹，用于再次修改时比对，此时还没有加版本号
-    .pipe(gulp.dest(host.middleHtmlPath))
+        //输出到middleHtmlPath文件夹，用于再次修改时比对，此时还没有加版本号
+        .pipe(gulp.dest(host.middleHtmlPath))
 
-    //输出到host.middleHtmlPathRev文件夹
-    .pipe(gulp.dest(host.middleHtmlPathRev))
+        //输出到host.middleHtmlPathRev文件夹
+        .pipe(gulp.dest(host.middleHtmlPathRev))
 
-    //先打出一份来
-    .pipe(gulp.dest(host.path))
+        //先打出一份来
+        .pipe(gulp.dest(host.path))
 })
 
 
 //打包CSS、JS时的版本号替换，只替换rev文件夹里版本号文件中的版本号
 //并输出到 host.path
-gulp.task('rev', function() {
+gulp.task('rev', function () {
 
     return gulp.src(revChangeSrc) //- 读取 rev-manifest.json 文件
 
 
-    .pipe(plugins.revCollector()) //- 执行html内版本号的替换
+        .pipe(plugins.revCollector()) //- 执行html内版本号的替换
         .pipe(plugins.debug({ title: '替换版本号的文件' }))
 
-    //替换后的文件输出的目录
-    .pipe(gulp.dest(host.path))
+        //替换后的文件输出的目录
+        .pipe(gulp.dest(host.path))
 
-    //如果是监听文件修改的，重启connect
-    .pipe(plugins.if(isWatch, plugins.connect.reload()))
+        //如果是监听文件修改的，重启connect
+        .pipe(plugins.if(isWatch, plugins.connect.reload()))
 });
 
 
-gulp.task('getFileNum', function() {
+gulp.task('getFileNum', function () {
 
     var fileNum = 0;
 
     gulp.src(['src/**/*.html', '!src/common/**/*.html'])
 
-    .pipe(
-        //操作文件
-        through.obj(function(file, enc, cb) {
+        .pipe(
+            //操作文件
+            through.obj(function (file, enc, cb) {
 
-            //beginId加1
-            fileNum++;
-            console.log('文件数量' + fileNum);
-            cb()
-        })
-    )
+                //beginId加1
+                fileNum++;
+                console.log('文件数量' + fileNum);
+                cb()
+            })
+        )
 
 })
 
 //循环项目里所有html页面，配上id，作为埋点的evtList数据
 //title和info暂时写空，后期再配置
-gulp.task('dataFile', function() {
+gulp.task('dataFile', function () {
 
     //文件路径
     var filePath = 'src/include/js/vendor/buriedPoint/evt/H5EvtList.js';
@@ -737,47 +739,47 @@ gulp.task('dataFile', function() {
 
     gulp.src(['src/**/*.html', '!src/common/**/*.html'])
 
-    .pipe(
-        //操作文件
-        through.obj(function(file, enc, cb) {
+        .pipe(
+            //操作文件
+            through.obj(function (file, enc, cb) {
 
-            var fp = file.path;
+                var fp = file.path;
 
-            fp = fp.substring(fp.indexOf('src\\') + 4).replace(/\\/g, '/');
+                fp = fp.substring(fp.indexOf('src\\') + 4).replace(/\\/g, '/');
 
-            //获得当前文件路径，作为key
-            //if( contentArr.length == 0){
-            //第一条时前面不加,
-            contentArr.push('\n\"' + fp + '\" : \"{ evtid: \'' + beginId + '\'\, topic: \'页面加载\'\, info: \'\'}\" ');
-            //}
-            //else {
-            //contentArr.push('\n\"' + fp + '\" : \"{ evtid: \'' + beginId + '\'\, topic: \'页面加载\'\, info: \'\'}\" ');
-            //}
+                //获得当前文件路径，作为key
+                //if( contentArr.length == 0){
+                //第一条时前面不加,
+                contentArr.push('\n\"' + fp + '\" : \"{ evtid: \'' + beginId + '\'\, topic: \'页面加载\'\, info: \'\'}\" ');
+                //}
+                //else {
+                //contentArr.push('\n\"' + fp + '\" : \"{ evtid: \'' + beginId + '\'\, topic: \'页面加载\'\, info: \'\'}\" ');
+                //}
 
-            //beginId加1
-            beginId++;
+                //beginId加1
+                beginId++;
 
-            console.log(beginId);
+                console.log(beginId);
 
-            if (157 == beginId) {
-                //所有文件
-                //去掉最后一个,
-                contentArr = contentArr.join();
+                if (157 == beginId) {
+                    //所有文件
+                    //去掉最后一个,
+                    contentArr = contentArr.join();
 
-                //将contentArr写入文件并收尾
-                fs.appendFileSync(filePath, contentArr + '\n}', 'utf8');
-            }
+                    //将contentArr写入文件并收尾
+                    fs.appendFileSync(filePath, contentArr + '\n}', 'utf8');
+                }
 
-            //this.push(file);
-            cb()
-        })
-    )
+                //this.push(file);
+                cb()
+            })
+        )
 });
 
 
 
 //联调/测试/预生产/生产环境，把root打出对应的环境的四个文件（财富，明泽，中岩，融泽），红硕直接复制
-gulp.task('rootEnv', function() {
+gulp.task('rootEnv', function () {
 
     if (options.env != '0') {
         //按照索引，0-明泽，1-股份，2-中岩，3-融泽，与root.js中的envOrigin参数对应
@@ -785,10 +787,10 @@ gulp.task('rootEnv', function() {
 
         for (var i = 0; i < rootName.length; i++) {
 
-            (function(i) {
+            (function (i) {
                 gulp.src(['src/include/js/vendor/root.js']) //- 读取 rev-manifest.json 文件
                     .pipe(
-                        through.obj(function(file, enc, cb) {
+                        through.obj(function (file, enc, cb) {
                             //if (options.env != '0' ) {
                             //非本地环境时
                             var fileCon = file.contents.toString();
@@ -805,26 +807,26 @@ gulp.task('rootEnv', function() {
                         })
                     )
 
-                .pipe(plugins.rename(function(path) {
-                    console.log(rootName[i]);
-                    //如果图片是common中的
-                    path.basename = path.basename + '_' + rootName[i];
+                    .pipe(plugins.rename(function (path) {
+                        console.log(rootName[i]);
+                        //如果图片是common中的
+                        path.basename = path.basename + '_' + rootName[i];
 
-                    console.log(path);
-                }))
+                        console.log(path);
+                    }))
 
-                //如果是预生产/生产环境，需要去注释
-                .pipe(plugins.if(options.env === '3' || options.env === '4', plugins.uglify({ //压缩
-                    mangle: false, //类型：Boolean 默认：true 是否修改变量名
-                    compress: false, //类型：Boolean 默认：true 是否完全压缩
-                    output: {
-                        beautify: true //只去注释，不压缩成一行
-                    }
-                })))
+                    //如果是预生产/生产环境，需要去注释
+                    .pipe(plugins.if(options.env === '3' || options.env === '4', plugins.uglify({ //压缩
+                        mangle: false, //类型：Boolean 默认：true 是否修改变量名
+                        compress: false, //类型：Boolean 默认：true 是否完全压缩
+                        output: {
+                            beautify: true //只去注释，不压缩成一行
+                        }
+                    })))
 
 
-                //替换后的文件修改文件名，打出到middle/root文件夹中
-                .pipe(gulp.dest(host.middle + 'root'))
+                    //替换后的文件修改文件名，打出到middle/root文件夹中
+                    .pipe(gulp.dest(host.middle + 'root'))
             })(i)
 
         }
