@@ -95,10 +95,6 @@ module.exports = function() {
     this.pofTotalAssets_api = http_url.web_url + '/account/pof/totalAssets'; // 公募总资产
     this.fundNetWorthList_api = http_url.web_url + '/pof/fundDetails/frontend/fundNetWorthList'; //历史明细
     this.queryIncomeList_api = http_url.web_url + '/account/pof/queryIncomeList'; //收益明细
-
-
-<<<<<<< HEAD
-=======
     // 前缀
     const pre = http_url.web_url + '/pof/'
     const buyFundPre = pre + 'buyFund/'
