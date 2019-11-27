@@ -6,7 +6,7 @@
 <html lang="en">
 <head>
 	@@include('@pathInclude/views/meta.html')
-    <link rel="stylesheet" href="/financial/static/css/privatePlacement/privatePlacementDetail.css">
+	<link rel="stylesheet" href="/financial/static/css/privatePlacement/privatePlacementDetail.css">
 	<title></title>
 </head>
 <body>
@@ -14,8 +14,10 @@
 	<div class="privatePlacementDetail">
 		@@include('@pathCommonViews/headBarConfig.html',{"bgColors":"#595E6F,#1C2135","showType":"1","pathName":"产品详情"})
 		<div class="privateDetailTitle">
+			<!-- 产品基金名称 -->
 			<div class="productName">(银杏43号) 恒天财富稳季隆私募投资基金</div>
 			<p class="introduction">这里是一句话产品详情介绍</p>
+			<!-- 单位净值、起投金额、产品期限 -->
 			<div class="privateDetailList">
 				<div class="netValueWord"><span class="iconfont">&#xe60a;</span>单位净值(元)(09-21)</div>
 				<div class="mui-row productInfoList">
@@ -37,11 +39,188 @@
 					<span>可转让</span>
 				</div>
 			</div>
+			<div class="appointment">预约资质：私募合格投资者或资管合格投资者</div>
+		</div>
+		<div class="mui-content midContent">
+			<div class="content">
+				<div class="tabsBox">
+					<div class="tabs">
+						<!-- <li class="active">基本信息</li> -->
+						<li>基本信息</li>
+						<li class="active">交易须知</li>
+						<li>产品材料</li>
+					</div>
+				</div>
+				<div class="wrap">
+					<!-- <div class="panel panel1 active"> -->
+					<div class="panel panel1">
+						<!-- 私募基金产品详情折线图 -->
+						<div class="hide lineWrap">
+				 			<div class="clearfix titleWrap typeNo5Wrap">
+				 				<span class="title qrnh">历史业绩走势</span>
+				 				<div class="arrow">
+				 					<span class="img"></span>
+				 				</div>
+				 				<span class="rightTitle" id="historyDetailBtn">历史明细</span>
+				 			</div>
+				 			<div class="lineDraw">
+				 				<!-- 七日年化折线图 -->
+				 				<div id="qrnhLine" class="line"></div>
+				 				<!-- 无数据提示 -->
+				 				<div class="hide noDataHintEcharts">暂无数据</div>
+				 				<div class='mui-row tab'>
+				 					<span class="mui-col-sm-3 mui-col-xs-3 time oneMonth" num="0">近一个月</span>
+				 					<span class="mui-col-sm-3 mui-col-xs-3 time threeMonth" num="1">近三个月</span>
+				 					<span class="mui-col-sm-3 mui-col-xs-3 time newYear active" num="3">近一年</span>
+				 					<span class="mui-col-sm-3 mui-col-xs-3 time sinceNow" num="4">成立至今</span>
+				 				</div>
+				 			</div>
+				 		</div>
+
+						<div class="basic">
+							<div class="name">产品信息</div>
+							<div class="contentWrap">
+								<div class="content">
+									<ul class="contentUl">
+										<li>剩余额度</li>
+										<li class="changgeRight">3000万</li>
+									</ul>
+									<ul class="contentUl">
+										<li>募集起截止日</li>
+										<li class="changgeRight">2019.10.01～2019.12.1</li>
+									</ul>
+									<ul class="contentUl">
+										<li>管理人</li>
+										<li class="changgeRight">恒天中岩投资管理有限公司</li>
+									</ul>
+									<ul class="contentUl">
+										<li>风险等级</li>
+										<li class="changgeRight">平衡级</li>
+									</ul>
+									<ul class="contentUl">
+										<li>发行规模</li>
+										<li class="changgeRight">20000万</li>
+									</ul>
+									<ul class="contentUl">
+										<li>投资方向</li>
+										<li class="changgeRight">债券投资</li>
+									</ul>
+									<ul class="contentUl">
+										<li>投资领域</li>
+										<li class="changgeRight">长期债券</li>
+									</ul>
+									<ul class="contentUl">
+										<li>投资方式</li>
+										<li class="changgeRight">工商企业</li>
+									</ul>
+									<ul class="contentUl">
+										<li>收益分配方式</li>
+										<li class="changgeRight">类固收</li>
+									</ul>
+								</div>
+								<div class="textContent">
+									<div class="textTitle">产品亮点</div>
+									<div class="detailText">
+										文本占位文本占位文本占位文本占位文本占位
+										文本占位文本占位文本占位文本占位文本占位
+										文本占位文本占位文本占位文本占位文本占位
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="panel panel2 active">
+						<div class="textContent">
+							<div class="textTitle">产品费率</div>
+							<div class="detailText">
+								<div class="content">
+									<p class="contentTitle">产品推介书<span>2019-11-11</span></p>
+									<p class="contentLink">凯丰宏观策略13号证券投资私募基金.pdf</p>
+								</div>
+							</div>
+						</div>
+						<div class="basic">
+							<div class="name">产品信息</div>
+							<div class="contentWrap">
+								<div class="content">
+									<ul class="contentUl">
+										<li>剩余额度</li>
+										<li class="changgeRight">3000万</li>
+									</ul>
+									<ul class="contentUl">
+										<li>募集起截止日</li>
+										<li class="changgeRight">2019.10.01～2019.12.1</li>
+									</ul>
+									<ul class="contentUl">
+										<li>管理人</li>
+										<li class="changgeRight">恒天中岩投资管理有限公司</li>
+									</ul>
+									<ul class="contentUl">
+										<li>风险等级</li>
+										<li class="changgeRight">平衡级</li>
+									</ul>
+									<ul class="contentUl">
+										<li>发行规模</li>
+										<li class="changgeRight">20000万</li>
+									</ul>
+									<ul class="contentUl">
+										<li>投资方向</li>
+										<li class="changgeRight">债券投资</li>
+									</ul>
+									<ul class="contentUl">
+										<li>投资领域</li>
+										<li class="changgeRight">长期债券</li>
+									</ul>
+									<ul class="contentUl">
+										<li>投资方式</li>
+										<li class="changgeRight">工商企业</li>
+									</ul>
+									<ul class="contentUl">
+										<li>收益分配方式</li>
+										<li class="changgeRight">类固收</li>
+									</ul>
+								</div>
+								<div class="textContent">
+									<div class="textTitle">产品亮点</div>
+									<div class="detailText">
+										文本占位文本占位文本占位文本占位文本占位
+										文本占位文本占位文本占位文本占位文本占位
+										文本占位文本占位文本占位文本占位文本占位
+									</div>
+								</div>
+							</div>
+						</div>
+						
+					</div>
+					<div class="panel panel3">
+						<div class="textContent">
+							<div class="textTitle">产品介绍信息</div>
+							<div class="detailText">
+								<div class="content">
+									<p class="contentTitle">产品推介书<span>2019-11-11</span></p>
+									<p class="contentLink">凯丰宏观策略13号证券投资私募基金.pdf</p>
+								</div>
+							</div>
+						</div>
+						<div class="textContent">
+							<div class="textTitle">产品介绍信息</div>
+							<div class="detailText">
+								<div class="content">
+									<p class="contentTitle">产品推介书<span>2019-11-11</span></p>
+									<p class="contentLink">凯丰宏观策略13号证券投资私募基金.pdf</p>
+								</div>
+							</div>
+						</div>
+						
+					</div>
+				</div>
+			</div>		
 		</div>
 		
 	</div>
 	
 </body>
 	@@include('@pathInclude/views/footer.html')
-    <script src="/financial/static/js/privatePlacement/privatePlacementDetail.js"></script>
+	<script src="/include/js/vendor/echarts/echarts.min.js"></script>
+	<script src="/financial/static/js/privatePlacement/privatePlacementDetail.js"></script>
 </html>

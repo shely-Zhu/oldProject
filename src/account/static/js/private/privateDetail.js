@@ -10,24 +10,17 @@
  * 海外类型  已经由后台处理好了  传的都是以上5种数据  前端不需要关心是否为海外类型
  * isAllowRedemption    是否可以赎回【1.否 2.是】
  */
-require('@pathCommonJsCom/utils.js');
+
+
+require('@pathIncludJs/base.js');
+// require('@pathCommonJsCom/utils.js');
 //ajax调用
 require('@pathCommonJs/ajaxLoading.js');
-//zepto模块--callback
-require('@pathIncludJs/vendor/zepto/callback.js');
-//zepto模块--deferred
-require('@pathIncludJs/vendor/zepto/deferred.js');
-//路径配置文件
-require('@pathIncludJs/vendor/config.js');
+
 require('@pathCommonJs/components/headBarConfig.js');
-// 引入 ECharts 主模块
-// var echarts = require('echarts/lib/echarts');
-// // 引入柱状图
-// require('echarts/lib/chart/line');
-// // 引入提示框和标题组件
-// require('echarts/lib/component/tooltip');
-// require('echarts/lib/component/title');
+
 var splitUrl = require('@pathCommonJs/components/splitUrl.js')();
+
 $(function() {
 	var privateDetail = {
 		data: {
