@@ -229,7 +229,7 @@ module.exports = function () {
 
     // 立即咨询
     this.reportContactNow_api = http_url.web_url + '/account/report/reportContactNow';
-    
+
     /*------------------- 月度报告 end ------------------------------*/
 
     // 金服WEB-详情页-基金净值走势图查询
@@ -295,8 +295,5 @@ module.exports = function () {
     /*------------------- 私募理财fang——le end ------------------------------*/
     /*------------------- 财富学院 start ------------------------------*/
     this.queryFortuneBanner_api = http_url.web_url + '/account/home/frontend/queryFortuneBanner'; //首页banner
-<<<<<<< HEAD
     this.queryFortuneCollegeFir_api = http_url.web_url + '/account/home/frontend/queryFortuneCollegeFir'; //财富翻译官/早知道
-=======
->>>>>>> c61f36d676ea35909b532a58515ef8b1476a1ad8
 };

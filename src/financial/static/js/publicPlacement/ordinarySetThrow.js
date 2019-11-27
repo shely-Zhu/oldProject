@@ -322,6 +322,38 @@ $(function () {
 				}
 			}]
 			$.ajaxLoading(obj);
+			var obj1 = [{
+				url: site_url.fundMaterial_api,
+				data: {
+					fundCode: getQueryString('fundCode'),
+				},
+				callbackDone: function (json) {
+					console.log(json);
+					if (json.status == '0000') {
+						// 将列表插入到页面上
+						var data = [];
+						data = json.data;
+						data.forEach(element => {
+							if (element.materialType == '1') {
+								console.log($(".contract"));
+
+								$(".contract").attr('href', element.linkAddress)
+								$(".contract").html('《基金合同》')
+							}
+							if (element.materialType == '2') {
+								$(".recruiting").attr('href', element.linkAddress)
+								$(".recruiting").html('《招募说明书》')
+							}
+						});
+
+					}
+
+				},
+				callbackFail: function (json) {
+					tipAction(json.msg);
+				}
+			}]
+			$.ajaxLoading(obj1);
 		},
 
 
