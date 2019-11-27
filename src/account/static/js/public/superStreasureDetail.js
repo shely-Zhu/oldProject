@@ -2,10 +2,10 @@
 * 自选公募-超宝详情
 * @author wangjiajia 2019-11-20
 */
-require('@pathIncludJs/vendor/config.js');
-require('@pathIncludJs/vendor/zepto/callback.js');
-require('@pathIncludJs/vendor/zepto/deferred.js');
-require('@pathCommonJs/components/utils.js');
+
+
+require('@pathIncludJs/base.js');
+
 require('@pathCommonJs/components/headBarConfig.js');
 require('@pathCommonJs/ajaxLoading.js');
 
