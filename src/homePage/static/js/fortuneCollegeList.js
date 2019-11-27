@@ -148,9 +148,9 @@ var productPublic = {
                 }
               })
               console.log(listContent)
-            generateTemplate(modelData,$('.forum .title'),$('#forum-template'));     
-            //    generateTemplate(listTitle,$('.tab-t ol'),$('#titleTab'));
-            //    generateTemplate(listContent,$('.tab-b'),$('#listContent'));			
+              generateTemplate(modelData,$('.forum .title'),$('#forum-template'));     
+              generateTemplate(listTitle,$('.broadcast'),$('#forumTitle'));
+              generateTemplate(listContent,$('.forumList'),$('#forumContent'));			
             },
             callbackFail: function(json){
                 console.log(json)
@@ -194,6 +194,14 @@ var productPublic = {
     },
     //操作事件
     events:function(){
+        //财富讲堂tab切换
+        $('.broadcast').on('tap','span',function(){
+            console.log($(this).index())
+            $('.broadcast .bigspan').removeClass('getColor');
+            $('.broadcast .bigspan').eq($(this).index()).addClass('getColor');
+            $('.forumList .forumImg').css({"display":"none"});
+            $('.forumList .forumImg').eq($(this).index()).css({"display":"block"});
+        });
         //财富研究tab切换
         $('.tab').on('tap','.tab-t li',function(){
             console.log($(this).index())
