@@ -10,20 +10,20 @@ var data = Mock.mock({
     status: "0000",
     message: "success",
     data: [{
-            tabType: 1,
-            tabName: '大类资产研究1'
+            sonModelType: 1,
+            sonModelName: '大类资产研究1'
         },
         {
-            tabType: 2,
-            tabName: '宏观策略'
+            sonModelType: 2,
+            sonModelName: '宏观策略'
         },
         {
-            tabType: 3,
-            tabName: '宏观策略'
+            sonModelType: 3,
+            sonModelName: '宏观策略'
         },
         {
-            tabType: 4,
-            tabName: '公募研究'
+            sonModelType: 4,
+            sonModelName: '公募研究'
         },
     ]
 

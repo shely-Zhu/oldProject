@@ -218,8 +218,8 @@ $(function() {
                     for (var i = 0; i < json.data.length; i++) {
                         (function(i) {
                             that.gV.navList[i] = {
-                                type: json.data[i].tabName,
-                                num: json.data[i].tabType
+                                type: json.data[i].sonModelName,
+                                num: json.data[i].sonModelType
                             }
                         })(i);
                     }
