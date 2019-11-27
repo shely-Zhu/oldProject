@@ -20,20 +20,21 @@ $(function() {
 
     var privateDetail = {
         gL: {
-			shuju:[1,2,4,2],
-			time:[1,2,3,4]
+			shuju:[],
+			time:[]
         },
         init:function(){
             var that = this;
             //事件绑定
             that.event();	
-            that.getData()
-            that.drawLine()
+			that.getData()
+			that.getTimeReq()
+			that.ruleReq()
         },
         drawLine:function(){
             var that = this;
             // 基于准备好的dom，初始化echarts实例
-            console.log($('#qrnhLine'))
+            // console.log($('#qrnhLine'))
             var myChart = echarts.init($("#qrnhLine")[0]);
             // 指定图表的配置项和数据
             var option = {
@@ -42,7 +43,7 @@ $(function() {
                 },
                 tooltip: {
 			    	trigger: 'axis',
-			    	formatter: '<p style="font-size:0.36rem;color: #DAB57C;">{c}%</p><p style="font-size:0.24rem;color:#4A4A4A">{b}</p>',
+			    	formatter: '<p style="font-size:0.36rem;color: #364D97;">{c}%</p><p style="font-size:0.24rem;color:#4A4A4A">{b}</p>',
 			    	backgroundColor: 'rgba(218,181,124, 0.1)',
 			    	// renderMode : 'richText', 
 			    	extraCssText: [7, 15, 15, 15],
@@ -83,13 +84,13 @@ $(function() {
 			        data: that.gL.time,
 			        axisLine: {
 			        	lineStyle: {
-			        		color: '#9B9B9B'
+			        		color: '#e5e5e5'
 			        	}
 			        },
 			        axisLabel: {
                         show: true,
                         color: '#9B9B9B',   //这里用参数代替了
-                        margin: 20
+						margin: 20,
                     },
 			        axisTick: {
 			        	show: false
@@ -147,7 +148,7 @@ $(function() {
             myChart.setOption(option);
         },
 
-        // //获取初始数据
+        //获取初始数据
 		getData: function(){
 			var that = this;
 			//产品详情接口
@@ -158,23 +159,63 @@ $(function() {
 			    },
 			    needLogin: true,
 			    callbackDone: function(json) {
-                    var jsonData = json.data;
-                    console.log(jsonData)
+					var jsonData = json.data;
 			    	$(".totalM").text(jsonData.	totalMoneyMask)
 			    	$(".incomeMask").text(jsonData.incomeMask)
 			    	$(".addupIncomeMask").text(jsonData.addupIncomeMask)
 			    },
 			}];
 			$.ajaxLoading(obj);			
-        },
+		},
+	
+		getTimeReq:function(t){
+			var that = this;
+	        var obj = [{
+			    url: site_url.fundNetWorthTrendChart_api, 
+			    data: {
+					fundCode:"",
+					dataRange:t||1,
+			    },
+			    needLogin: true,
+			    callbackDone: function(json) {
+					var jsonData = json.data.pageList;
+					that.gL.time = [];
+					that.gL.shuju= [];
+					for(var i =0;i<jsonData.length;i++){
+						that.gL.time.push(jsonData[i].trdDt)
+						that.gL.shuju.push(jsonData[i]. annYldRat)
+					}
+					that.drawLine()
+				},
+			}];
+			$.ajaxLoading(obj);	
+		},
+		ruleReq:function(){
+			var that = this;
+	        var obj = [{
+			    url: site_url.findProtocolBasic_api, 
+			    data: {
+					code:"",
+					template:"0",
+			    },
+			    needLogin: true,
+			    callbackDone: function(json) {
+					var data = json.data;
+					generateTemplate(data,$(".rulestestWrap"), $('#adjustment-template'));
+				},
+			}];
+			$.ajaxLoading(obj);	
+		},
         event:function(){
 			var that = this;
             //选项卡切换
             $(document).on('click', '.lineDraw .time', function(e) {
-				var that = this;
                 $('.lineDraw .time').removeClass('active');
 				$(this).addClass('active');
-				that.gL.time = [2,3,4,5]
+				that.getTimeReq($(this).attr('num'))
+			})
+			$(document).on('click', '.materialContent', function(e) {
+				console.log($(this).attr('data-id'))
             })
         }
 

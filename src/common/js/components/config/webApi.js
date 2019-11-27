@@ -165,6 +165,8 @@ module.exports = function () {
 
     //会员权益详情-获取会员权益详情
     this.findBenefitByLevel_api = http_url.web_url + '/content/findBenefitByLevel';
+    //超宝---根据产品代码查询协议基本信息
+    this.findProtocolBasic_api = http_url.web_url + '/content/findProtocolBasic';
 
     //文章模板接口
     //  this.getArticle_api = http_url.web_url + '/account/articleExample';
@@ -251,8 +253,6 @@ module.exports = function () {
     
     /*------------------- 月度报告 end ------------------------------*/
 
-    // 金服WEB-详情页-基金净值走势图查询
-    this.fundNetWorthTrendChart_api = http_url.web_url + '/pof/fundDetails/frontend/fundNetWorthTrendChart';
 
     // 超宝基金产品-交易记录
     this.queryTradeList_api = http_url.web_url + '/account/pof/cash/queryTradeList';
