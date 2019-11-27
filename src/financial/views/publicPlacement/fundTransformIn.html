@@ -15,8 +15,7 @@
 </head>
 
 <body>
-    <!-- @@include('../../common/views/load.html') -->
-
+    @@include('@pathCommonViews/load.html')
     <section class="container">
         @@include('@pathCommonViews/headBarConfig.html',{"pathName":"买入"})
         <div class="br"></div>
@@ -135,7 +134,7 @@
             </ul>
             <script id="bankList-template" type="text/x-handlebars-template">
                 {{#each this}}
-                <li class="popup-li bank-li" bankThumbnailUrl="{{bankThumbnailUrl}}" tradeAcco="{{tradeAcco}}" bankName="{{bankName}}" bankNo="{{bankNo}}" singleNum="{{singleNum}}"
+                <li class="popup-li bank-li" useEnv="{{useEnv}}" capitalMode="{{capitalMode}}" bankThumbnailUrl="{{bankThumbnailUrl}}" tradeAcco="{{tradeAcco}}" bankName="{{bankName}}" bankNo="{{bankNo}}" singleNum="{{singleNum}}"
                  oneDayNum="{{oneDayNum}}" bankAccountSecret="{{bankAccountSecret}}">
                     <img class="bank-img" src="{{bankThumbnailUrl}}" alt="">
                     <div class="div">
@@ -159,7 +158,8 @@
     <!-- 校验密码弹窗 -->
     <div class="popup-password">
         <div class="elasticMid">
-               <div class="elasticTxt"></div>
+               <div class="elasticTxt">
+               </div>
                <div  class="elasticButtons error1">
                     <button class="elasticCel" type="button">忘记密码</button>
                     <button class="elasticYes" type="button">重新输入</button>
@@ -178,13 +178,10 @@
      <!-- 转出规则 -->
      @@include('@pathCommonCom/elasticLayer/transOutRule/transOutRule.html')
  
-     <!-- 加载中loading -->
-     @@include('@pathCommonViews/loading/listLoading.html')
- 
      @@include('@pathInclude/views/footer.html')
      <!-- 添加埋点 -->
      @@include('@pathInclude/views/header.html')
      <script src="/financial/static/js/publicPlacement/fundTransformIn.js"></script>
-     <script src="/account/static/js/public/payPassword.js"></script>
+     <!-- <script src="/account/static/js/public/payPassword.js"></script> -->
  </body>
  </html>

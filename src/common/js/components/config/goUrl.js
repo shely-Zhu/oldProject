@@ -370,6 +370,14 @@ module.exports = function () {
     this.pofFundManager_url = go_url.no_url + '/financial/views/publicPlacement/fundManager.html';
     // 基金公司
     this.pofFundCompany_url = go_url.no_url + '/financial/views/publicPlacement/fundCompany.html';
+    
+    // 买入结果页面，基金买入结果
+    this.pofSurelyResultsDetail_url = go_url.no_url + '/financial/views/publicPlacement/surelyResultsDetail.html';
+
+    //忘记密码  跳往原生页面
+    this.pofForgotPassword_url = go_url.no_url + '/financial/views/publicPlacement/forgotPassword.html';
+    //找回密码   跳往原生页面
+    this.pofRetrievePassword_url = go_url.no_url + '/financial/views/publicPlacement/retrievePassword.html';
 
     /*------------------- 私募理财fang——le end ------------------------------*/
     this.optionalPublicDetail_url = go_url.no_url + '/account/views/public/optionalPublicDetail.html';

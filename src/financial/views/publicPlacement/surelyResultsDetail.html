@@ -6,68 +6,98 @@
 <head>
 	@@include('@pathInclude/views/meta.html') 
 	<link rel="stylesheet" href="/Financial/static/css/publicPlacement/surelyResultsDetail.css">  
-	<title>转入结果</title>
+	<title>买入结果</title>
 </head>
 <body>
-	<!-- @@include('@pathCommonViews/load.html')
-        @@include('@pathCommonViews/noData.html')
-        @@include('@pathCommonViews/loading/listLoading.html') -->
-    @@include('@pathCommonViews/headBarConfig.html',{"bgColors":"#2C3E77,#273971","showType":"0","pathName":"转入结果"}) 
+	@@include('@pathCommonViews/load.html')
+    <!-- @@include('@pathCommonViews/noData.html') -->
+    <!-- @@include('@pathCommonViews/loading/listLoading.html') -->
+    @@include('@pathCommonViews/headBarConfig.html',{"bgColors":"#2C3E77,#273971","showType":"0","pathName":"买入结果"}) 
     <div class="resultsWrap">
       <div class="resultTop">
         <div class="topContent">
             <div class="buyStatus">
-                <h1>10,000.00 <span>元</span></h1>
+                <h1 class="much"><span class="amount"></span> <span>元</span></h1>
                 <p class="buyStatusText">待汇款金额</p>
             </div>
         </div>
-      </div>
-      <div class="accountPayee">
-            <div class="accountPayeeTitle">
-                收款账户
-            </div>
+        <div class="accountPayee">
             <div class="mianContenTitle">
-                    请使用 <span>招商银行 尾号8304</span>向以下账户汇款 
+                    请使用 <span><span class="bankName"></span>&nbsp;尾号<span class="bankNum"></span></span>&nbsp;汇入下面账户 
             </div>
             <div class="mainContent">
                 <dl class="commonElasticLayer">
                     <dt>户名</dt>
-                    <dd>北京恒天明泽基金销售有限公司公募代销账号</dd>
+                    <dd class="accountName"></dd>
                 </dl>
                 <dl>
                     <dt>账户</dt>
-                    <dd>1111 1111 1111 1111</dd>
+                    <dd class="bankAccount"></dd>
                 </dl>
                 <dl>
                     <dt>行号</dt>
-                    <dd>231312323</dd>
+                    <dd class="bankNo"></dd>
                 </dl>
                 <dl>
                     <dt>开户行</dt>
-                    <dd>浦发银行北京莱户营支行</dd>
+                    <dd class="bankAdress"></dd>
                 </dl>
             </div>
 
+        </div>
+      </div>
+      <div class="resultTopTwo">
+         <div class="photo" >
+            <img src="../../static/img/buy_success.png" alt="">
+            <p class="succedText">申请成功</p>
+         </div>
+         <div class="proessBox">
+             <div class="proess-img"></div>
+             <div class="proess-title">
+                <p class="applyTime time">
+                    <span class="laber-left">申请时间</span>
+                    <span class="laber-right"></span>
+                </p>
+                <p class="shareTime time">
+                    <span class="laber-left">预计确认份额时间</span>
+                    <span class="laber-right"></span>
+                </p>
+                <p class="earningsTime time">
+                    <span class="laber-left">预计查看收益时间</span>
+                    <span class="laber-right"></span>
+                </p>
+             </div>
+         </div>
       </div>
       <div class="listWrap">
         <div class="listContent">
             <ul class="listContentUl">
               <li class="textcolor">买入基金</li>
-              <li>现金宝产品1</li>
+              <li>
+                  <span class="fundName"></span>&nbsp;
+                  <span class="fundCode"> </span>
+                </li>
             </ul>
             <ul class="listContentUl">
                 <li class="textcolor">买入金额</li>
-                <li>10,000.00</li>
+                <li>
+                    <span class="amount"></span>
+                    <span class="unit">元</span>
+                </li>
             </ul>
             <ul class="listContentUl">
                 <li class="textcolor">支付方式</li>
-                <li class="bank"> 中国建设银行0563</li>
-                <li class="onlinePay"><span>在线支付</span></li>
+                <li class="bank">
+                    <img class="banKImg" src="" alt="">
+                    <span class="bankName"></span>
+                    <span class="bankNum"></span>
+                </li>
+                <li class="onlinePay"><span class="payType"></span></li>
             </ul>
-            <ul class="listContentUl changeNone">
+            <!-- <ul class="listContentUl changeNone">
                 <li class="textcolor">转入时间</li>
                 <li > 2019-09-01 24:00</li>
-            </ul>
+            </ul> -->
         </div>
       </div>
       <!-- 头部完成定位 -->
