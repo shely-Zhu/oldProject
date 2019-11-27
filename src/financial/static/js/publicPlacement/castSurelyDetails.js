@@ -20,7 +20,7 @@ getQueryString = function (name) {
   if (r != null) return unescape(r[2]); return '';
 }
 $(function () {
-
+  var fundCode
   var regard = {
 
     init: function () {
@@ -34,7 +34,7 @@ $(function () {
     getData: function () {
 
       var that = this;
-      var fundCode
+
       //请求页面数据
       var obj = [{
         url: site_url.pofFixedDetail_api,
@@ -112,7 +112,6 @@ $(function () {
       // 跳转详情页
       mui("body").on("tap", ".edit", function (e) {
         var scheduledProtocolId = getQueryString('scheduledProtocolId')
-        window.location.href = site_url.pofOrdinarySetThrow_url + '?scheduledProtocolId=' + scheduledProtocolId;
         window.location.href = site_url.pofOrdinarySetThrow_url + '?scheduledProtocolId=' + scheduledProtocolId + '&fundCode=' + fundCode;
       });
 

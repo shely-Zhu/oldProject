@@ -329,11 +329,11 @@ module.exports = function () {
     this.qualifiedInvestor_url = go_url.no_url + '/mine/views/qualifiedInvestor/qualifiedInvestor.html?type=private';
     //活动详情->去成交
     this.wealthIndex_url = go_url.no_url + '/financial/views/wealthIndex.html';
-    
+
     //活动详情->我的奖励
     this.rewards_url = go_url.no_url + '/mine/views/rewards.html';
     /*-------------------------------活动列表 end -----------------------*/
-    
+
 
     /*-------------------------------消息中心 start -----------------------*/
     // 通知详情
@@ -360,6 +360,8 @@ module.exports = function () {
     this.pofCastSurelyDetails_url = go_url.no_url + '/financial/views/publicPlacement/castSurelyDetails.html';
     // 修改定投
     this.pofOrdinarySetThrow_url = go_url.no_url + '/financial/views/publicPlacement/ordinarySetThrow.html';
+    // 交易规则
+    this.pofTransactionRules_url = go_url.no_url + '/financial/views/publicPlacement/transactionRules.html';
 
     /*------------------- 私募理财fang——le end ------------------------------*/
     this.optionalPublicDetail_url = go_url.no_url + '/account/views/public/optionalPublicDetail.html';

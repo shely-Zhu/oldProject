@@ -247,11 +247,16 @@ $(function () {
 				$('.popup').css('display', 'none')
 			})
 
+			$('body').on('tap', '.tradeRule', function () {
+				// 跳转规则页面
+				var fundCode = getQueryString('fundCode')
+				window.location.href = site_url.pofTransactionRules_url + '?fundCode=' + fundCode
+			})
+
 		},
 		getData: function () {
 
 			var that = this;
-			var scheduledProtocolId = location
 			//请求页面数据
 			var obj = [{
 				url: site_url.pofFixedDetail_api,
