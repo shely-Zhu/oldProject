@@ -22,102 +22,140 @@ $(function () {
         },
         //全局变量
         gV: {
+            itemStyle1: {
+                normal: {
+                    color: {
+                        colorStops: [{
+                            offset: 0,
+                            color: "#D8D8D8"
+                        }, {
+                            offset: 1,
+                            color: "#D8D8D8"
+                        }],
+                        global: false,
+                        type: "linear",
+                        x: 0,
+                        x2: 1,
+                        y: 0,
+                        y2: 1
+                    }
+                }
+            },
+            itemStyle2: {
+                normal: {
+                    color: {
+                        colorStops: [{
+                            offset: 0,
+                            color: "#FBE2BD"
+                        }, {
+                            offset: 1,
+                            color: "#D69549"
+                        }],
+                        global: false,
+                        type: "linear",
+                        x: 0,
+                        x2: 1,
+                        y: 0,
+                        y2: 1
+                    }
+                }
+            },
             pieData: [
-                {
-                    name: "现金",
-                    value: "0.2",
-                    itemStyle: {
-                        normal: {
-                            color: {
-                                colorStops: [{
-                                    offset: 0,
-                                    color: "#FBE2BD"
-                                }, {
-                                    offset: 1,
-                                    color: "#D69549"
-                                }],
-                                global: false,
-                                type: "linear",
-                                x: 0,
-                                x2: 1,
-                                y: 0,
-                                y2: 1
-                            }
-                        }
-                    }
-                },
-                {
-                    name: "股票",
-                    value: "0.8",
-                    itemStyle: {
-                        normal: {
-                            color: {
-                                colorStops: [{
-                                    offset: 0,
-                                    color: "#D8D8D8"
-                                }, {
-                                    offset: 1,
-                                    color: "#D8D8D8"
-                                }],
-                                global: false,
-                                type: "linear",
-                                x: 0,
-                                x2: 1,
-                                y: 0,
-                                y2: 1
-                            }
-                        }
-                    }
-                }
+                // {
+                //     name: "现金",
+                //     value: "0.2",
+                //     itemStyle: {
+                //         normal: {
+                //             color: {
+                //                 colorStops: [{
+                //                     offset: 0,
+                //                     color: "#FBE2BD"
+                //                 }, {
+                //                     offset: 1,
+                //                     color: "#D69549"
+                //                 }],
+                //                 global: false,
+                //                 type: "linear",
+                //                 x: 0,
+                //                 x2: 1,
+                //                 y: 0,
+                //                 y2: 1
+                //             }
+                //         }
+                //     }
+                // },
+                // {
+                //     name: "股票",
+                //     value: "0.8",
+                //     itemStyle: {
+                //         normal: {
+                //             color: {
+                //                 colorStops: [{
+                //                     offset: 0,
+                //                     color: "#D8D8D8"
+                //                 }, {
+                //                     offset: 1,
+                //                     color: "#D8D8D8"
+                //                 }],
+                //                 global: false,
+                //                 type: "linear",
+                //                 x: 0,
+                //                 x2: 1,
+                //                 y: 0,
+                //                 y2: 1
+                //             }
+                //         }
+                //     }
+                // }
             ],
-            pieInnerData: [
-                {
-                    name: "现金",
-                    value: "0.2",
-                    itemStyle: {
-                        normal: {
-                            color: {
-                                colorStops: [{
-                                    offset: 0,
-                                    color: "#CB9D65"
-                                }, {
-                                    offset: 1,
-                                    color: "#D69549"
-                                }],
-                                global: false,
-                                type: "linear",
-                                x: 0,
-                                x2: 1,
-                                y: 0,
-                                y2: 1
-                            }
-                        }
-                    }
-                },
-                {
-                    name: "股票",
-                    value: "0.8",
-                    itemStyle: {
-                        normal: {
-                            color: {
-                                colorStops: [{
-                                    offset: 0,
-                                    color: "#C1C1C1"
-                                }, {
-                                    offset: 1,
-                                    color: "#C1C1C1"
-                                }],
-                                global: false,
-                                type: "linear",
-                                x: 0,
-                                x2: 1,
-                                y: 0,
-                                y2: 1
-                            }
-                        }
-                    }
-                }
-            ]
+            // pieInnerData: [
+            // {
+            //     name: "现金",
+            //     value: "0.2",
+            //     itemStyle: {
+            //         normal: {
+            //             color: {
+            //                 colorStops: [{
+            //                     offset: 0,
+            //                     color: "#CB9D65"
+            //                 }, {
+            //                     offset: 1,
+            //                     color: "#D69549"
+            //                 }],
+            //                 global: false,
+            //                 type: "linear",
+            //                 x: 0,
+            //                 x2: 1,
+            //                 y: 0,
+            //                 y2: 1
+            //             }
+            //         }
+            //     }
+            // },
+            // {
+            //     name: "股票",
+            //     value: "0.8",
+            //     itemStyle: {
+            //         normal: {
+            //             color: {
+            //                 colorStops: [{
+            //                     offset: 0,
+            //                     color: "#C1C1C1"
+            //                 }, {
+            //                     offset: 1,
+            //                     color: "#C1C1C1"
+            //                 }],
+            //                 global: false,
+            //                 type: "linear",
+            //                 x: 0,
+            //                 x2: 1,
+            //                 y: 0,
+            //                 y2: 1
+            //             }
+            //         }
+            //     }
+            // }
+            // ]
         },
         //页面初始化函数
         init: function () {
@@ -128,26 +166,34 @@ $(function () {
         drawCircle() {
             var that = this;
             var pieChart = echarts.init($('.circle')[0]);
-            console.log(that.gV.pieData)
+            var optionData = []
+            var pieData = that.gV.pieData
+            pieData.forEach(n => {
+                optionData.push(n.name)
+            })
             // 指定图表的配置项和数据
             option = {
                 legend: {
                     orient: 'vertical',
                     x: 'left',
-                    data: ['现金', '股票'],
+                    data: optionData,
                     icon: "roundRect",
                     itemWidth: 10,  // 设置宽度
                     itemHeight: 10, // 设置高度
                     itemGap: 15,//设置间距
                     x: '60%',
                     y: '35%',
-                    formatter: function (name) {
-                        if (name == "现金") {
-                            return " {title|" + name + "}  {value|" + Number(that.gV.pieData[0].value) * 100 + "%}"
-                        } else if (name == "股票") {
-                            return " {title|" + name + "}  {value|" + Number(that.gV.pieData[1].value) * 100 + "%}"
-                        }
-                    },
+                    // formatter: function (name) {
+                    //     // pieData.forEach((n, i) => {
+                    //     //     console.log(n);
+                    //     //     return " {title|" + n.name + "}  {value|" + Number(pieData[i].value) * 100 + "%}"
+                    //     // })
+                    //     // if (name == "现金") {
+                    //     //     return " {title|" + name + "}  {value|" + Number(that.gV.pieData[0].value) * 100 + "%}"
+                    //     // } else if (name == "股票") {
+                    //     //     return " {title|" + name + "}  {value|" + Number(that.gV.pieData[1].value) * 100 + "%}"
+                    //     // }
+                    // },
                     textStyle: {
                         fontSize: 16,
                         rich: {
@@ -224,7 +270,16 @@ $(function () {
                                 show: false
                             }
                         },
-                        data: that.gV.pieInnerData,
+
+                        data: that.gV.pieData,
+                        // data: [
+                        //     {
+                        //         name: "现金",
+                        //         value: "48.14%"
+                        //     },
+                        //     { value: 310, name: '邮件营销' },
+                        //     { value: 234, name: '联盟广告' },
+                        // ]
                     }
                 ]
             };
@@ -260,8 +315,34 @@ $(function () {
                 callbackDone: function (json) {
 
                     json = json.data
-                    console.log(json)
+                    console.log(json.assetAllocation, "000")
+                    var pieData = []
+                    json.assetAllocation.forEach((n, i) => {
+                        var item
+                        item = {
+                            name: n.assetTypeName,
+                            value: n.assetAllocationRatio + '%',
+                        }
+                        if (i === 0) {
+                            item = {
+                                name: n.assetTypeName,
+                                value: n.assetAllocationRatio + '%',
+                                itemStyle: that.gV.itemStyle1,
+                            }
+                        }
+                        if (i === 1) {
+                            item = {
+                                name: n.assetTypeName,
+                                value: n.assetAllocationRatio + '%',
+                                itemStyle: that.gV.itemStyle2,
+                            }
+                        }
+                        pieData.push(item)
+                    })
+                    console.log(pieData, "99");
 
+                    that.gV.pieData = pieData
+                    // that.gV.pieInnerData = pieData
                     var tplm = $("#dataLists2").html();
                     var template = Handlebars.compile(tplm);
                     json.assetValue = (json.assetValue / 100000000).toFixed(2)
@@ -318,6 +399,7 @@ $(function () {
                 $(this).addClass('active').siblings().removeClass('active');
                 $(".wrap>.panel").eq($(this).index()).addClass('active').siblings().removeClass('active');
                 if ($(this).index() == 1) {
+                    console.log("that.gV.pieData", that.gV.pieData)
                     that.drawCircle()
                 }
             })
