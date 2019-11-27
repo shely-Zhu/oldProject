@@ -218,4 +218,7 @@ window.onload=function(){
     $('.tab-t ol li a').eq(0).addClass('active');
     $('.broadcast .bigspan').eq(0).addClass('getColor');
     $('.broadcast .bigspan').eq(0).css({"paddingLeft":0,"borderLeft":'none'});
+    mui('.mui-scroll-wrapper').scroll({
+        deceleration: 0.0005 //flick 减速系数，系数越大，滚动速度越慢，滚动距离越小，默认值0.0006 
+    });
 }
