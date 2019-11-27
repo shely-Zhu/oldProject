@@ -21,13 +21,20 @@ $(function() {
     var privateDetail = {
         gL: {
 			shuju:[],
-			time:[]
+			time:[],
+			cashFundDetail:"",
         },
         init:function(){
-            var that = this;
+			var that = this;
+			that.gL.cashFundDetail = JSON.parse(sessionStorage.getItem("cashFundDetail"));
+			$(".totalM").text(that.gL.cashFundDetail.totalMoneyMask)
+			$(".incomeMask").text(that.gL.cashFundDetail.incomeMask)
+			$(".addupIncomeMask").text(that.gL.cashFundDetail.addupIncomeMask)
+			$("#HeadBarpathName").text(that.gL.cashFundDetail.fundName)
+			$(".titleTwo").text(that.gL.cashFundDetail.fundCode)
             //事件绑定
             that.event();	
-			that.getData()
+			// that.getData()
 			that.getTimeReq()
 			that.ruleReq()
         },
@@ -215,12 +222,10 @@ $(function() {
 				that.getTimeReq($(this).attr('num'))
 			})
 			$(document).on('click', '.materialContent', function(e) {
-				console.log($(this).attr('data-id'))
-			
-
+				var id = $(this).attr('data-id')
+				window.location.href = `${site_url.superContent_url}?id=${id}`;
             })
         }
-
     } 
     privateDetail.init()
 })

@@ -370,4 +370,8 @@ module.exports = function() {
     this.informationDisclosure_url = go_url.no_url + '/account/views/informationDisclosure.html';
     // 公募交易详情查询
     this.publicTradeDetail_url = go_url.no_url + '/account/views/publicTradeDetail/publicTradeDetail.html';
+    // 超宝详情--内容页
+    this.superContent_url = go_url.no_url + '/account/views/public/superContent.html';
+    //超宝详情页
+    this.superStreasureDetail_url = go_url.no_url + 'account/views/public/superStreasureDetail.html';
 };
