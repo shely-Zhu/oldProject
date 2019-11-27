@@ -217,4 +217,5 @@ productPublic.init();
 window.onload=function(){
     $('.tab-t ol li a').eq(0).addClass('active');
     $('.broadcast .bigspan').eq(0).addClass('getColor');
+    $('.broadcast .bigspan').eq(0).css({"paddingLeft":0,"borderLeft":'none'});
 }
