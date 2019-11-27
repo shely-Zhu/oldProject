@@ -68,42 +68,7 @@
                               <span class="bigspan">知时讲堂</span> -->
                          </div>
                          <div class="forumList">
-                              <div class="forumImg">
-                                   <div style="padding-left:0" class="mui-card marginTop public highlight">
-                                        <div class="mui-scroll-wrapper mui-slider-indicator mui-segmented-control mui-segmented-control-inverted">
-                                             <div class="mui-scroll">
-                                                  <div class="mui-control-item conten">
-                                                       <img style="width:3.2rem;height:3rem;" src="/homePage/static/img/picture1_3@2x.png" alt="">
-                                                       <div class="con">
-                                                            <h4>{{intro}}</h4>
-                                                            <p>李世通·国开证券首席投资顾问</p>
-                                                       </div>
-                                                  </div>
-                                                  <div class="mui-control-item conten">
-                                                       <img style="width:3.2rem;height:3rem;" src="/homePage/static/img/picture1_3@2x.png" alt="">
-                                                       <div class="con">
-                                                            <h4>{{intro}}</h4>
-                                                            <p>李世通·国开证券首席投资顾问</p>
-                                                       </div>
-                                                  </div>
-                                                  <div class="mui-control-item conten">
-                                                       <img style="width:3.2rem;height:3rem;" src="/homePage/static/img/picture1_3@2x.png" alt="">
-                                                       <div class="con">
-                                                            <h4>{{intro}}</h4>
-                                                            <p>李世通·国开证券首席投资顾问</p>
-                                                       </div>
-                                                  </div>
-                                                  <div class="mui-control-item conten">
-                                                       <img style="width:3.2rem;height:3rem;" src="/homePage/static/img/picture1_3@2x.png" alt="">
-                                                       <div class="con">
-                                                            <h4>{{intro}}</h4>
-                                                            <p>李世通·国开证券首席投资顾问</p>
-                                                       </div>
-                                                  </div>
-                                             </div>
-                                        </div>
-                                   </div>
-                             </div>
+                              
                          </div>
                     </div>
                     <div class="hotWords tabContent">
@@ -148,7 +113,7 @@
      </script>
      <script id="fortuneCf-template" type="text/x-handlebars-template">
           <h2>财富流向早知道</h2>
-          <p><a href="{{listJumpUrl}}" >查看往期热词</a><i class="iconfont">&#xe636;</i></p>
+          <p><a href="{{listJumpUrl}}" >播放往期内容</a><i class="iconfont">&#xe636;</i></p>
      </script>
      <script id="video-template" type="text/x-handlebars-template">
           {{#each this}}
@@ -173,33 +138,34 @@
      </script>
      <script id="forumTitle" type="text/x-handlebars-template">
           {{#each this}}
-             <span class="bigspan">{{sonModelName}}</span> |
+             <span class="bigspan">{{sonModelName}}</span>
+               |  
           {{/each}}
      </script>
-     <!-- <script id="forumContent" type="text/x-handlebars-template">
+     <script id="forumContent" type="text/x-handlebars-template">
           {{#each this}}
                <div class="forumImg">
-                    <div class="swiper-container">
-                         <div class="swiper-wrapper">
-                              {{#each listContent}}
-                                   <div class="swiper-slide">
-                                        <div class="conten">
-                                             <img src="/homePage/static/img/picture1_3@2x.png" alt="">
+                    <div style="padding-left:0" class="mui-card marginTop public highlight">
+                         <div class="mui-scroll-wrapper mui-slider-indicator mui-segmented-control mui-segmented-control-inverted">
+                              <div class="mui-scroll">
+                                   {{#each listContent}}
+                                        <div class="mui-control-item conten">
+                                             <img style="width:3.2rem;height:3rem;" src="/homePage/static/img/picture1_3@2x.png" alt="">
                                              <div class="con">
                                                   <h4>{{intro}}</h4>
                                                   <p>李世通·国开证券首席投资顾问</p>
                                              </div>
                                         </div>
-                                   </div>
-                              {{/each}}
+                                   {{/each}}
+                              </div>
                          </div>
                     </div>
                </div>
           {{/each}}
-     </script> -->
+     </script>
      <script id="tabContent-template" type="text/x-handlebars-template">
           <h2>财富研究</h2>
-          <p><a href="{{listJumpUrl}}" >查看往期热词</a><i class="iconfont">&#xe636;</i></p>
+          <p><a href="{{listJumpUrl}}" >查看全部研究</a><i class="iconfont">&#xe636;</i></p>
      </script>
      <script id="titleTab" type="text/x-handlebars-template">
           {{#each this}}
@@ -231,16 +197,6 @@
 	<script src="@pathIncludJs/vendor/root.js"></script>
      <script src="@pathIncludJs/vendor/mui/mui.min.js"></script>
      <script src="/homePage/static/js/fortuneCollegeList.js"></script>
-     <script>
-          var swiper = new Swiper('.swiper-container', {
-          slidesPerView: 'auto',
-          spaceBetween: 30,
-          pagination: {
-               el: '.swiper-pagination',
-               clickable: true 
-          },
-          });
-     </script>
  
  </body>
  </html>
