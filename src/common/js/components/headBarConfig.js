@@ -97,7 +97,7 @@ $(function(){
                window.jsObj.backNative();
             }
             if (isIOS) {
-        　　　　//这个是ios操作系统
+                //这个是ios操作系统
                 window.webkit.messageHandlers.backNative.postMessage('backNative');
             }
         }else{

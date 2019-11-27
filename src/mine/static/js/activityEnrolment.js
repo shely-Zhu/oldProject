@@ -25,8 +25,9 @@ $(function () {
             listLoading: $('.listLoading'), //所有数据区域，第一次加载的loading结构
             ListSlot: $('.listHasData0'),//插入已报名活动位置
             ListSlot1: $('.listHasData1'),//插入已报名活动位置
-            listTemp: $('#activityEn-template'),//已报名活动模板类名          
-            morelistTemp: $('#more-template'),//已报名活动模板类名     
+            listTemp: $('#activityEn-template'),//已报名活动模板类名  
+            moreSlot:$('.moreul'),
+            moreTemp: $('#more-template'),//已报名活动模板类名     
 
         },
         gV: {
@@ -122,6 +123,14 @@ $(function () {
                         })
                         dataList = json.data.activityVOPageInfo.list;
                     }
+                    //给推荐活动赋值
+                    morelist = json.data.defaultRecommend
+                    if(morelist.actStartDate){
+                        morelist.timeflag = true;
+                        morelist.actStartDate=morelist.actStartDate?moment(morelist.actStartDate).format('MM月至DD日'):'';
+                        morelist.actEndDate=morelist.actEndDate?moment(morelist.actEndDate).format('MM月至DD日'):'';
+                    }
+                    
                     setTimeout(function () {
                         // 将列表插入到页面上
                         if (num == 0) {
@@ -129,7 +138,7 @@ $(function () {
                         } else {
                             generateTemplate(dataList, that.$e.ListSlot1, that.$e.listTemp);
                         }
-                        
+                        generateTemplate(morelist, that.$e.moreSlot, that.$e.moreTemp);
 
                     }, 200)
 
