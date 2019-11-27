@@ -78,6 +78,7 @@ var productPublic = {
          }]
         $.ajaxLoading(obj);
     },
+    //金牌翻译官
     getFortuneCollegeFir:function(){
         var that =this;
         var obj=[{
@@ -99,6 +100,7 @@ var productPublic = {
          }]
         $.ajaxLoading(obj);
     },
+    //财富早知道
     getFortuneCollegeFirCf:function(){
         var that =this;
         var obj=[{
@@ -121,6 +123,7 @@ var productPublic = {
          }]
         $.ajaxLoading(obj);
     },
+    //财富研究
     getWealthResearch:function(){
         var that =this;
         var obj=[{
@@ -130,7 +133,14 @@ var productPublic = {
             },
             needDataEmpty: true,
             callbackDone: function(json){
-               console.log(json)					
+               console.log(json)
+               listData=json.data.listData
+               var listTitle=[];
+               for(var i=0;i<listData.length;i++){
+                  listTitle.push(listData[i].sonModelName)   //tab标题
+               }
+               generateTemplate(listTitle,$('.tab-t ul'),$('#titleTab'));
+               console.log(listTitle)				
             },
             callbackFail: function(json){
                 console.log(json)
