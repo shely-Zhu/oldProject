@@ -2,11 +2,9 @@
  * 产品材料
  * @author  zhangweipeng 2017-03-11
  */
-require('@pathIncludJs/vendor/config.js');
-//zepto模块
-require('@pathIncludJs/vendor/zepto/callback.js');
-require('@pathIncludJs/vendor/zepto/deferred.js');
-require('@pathCommonJsCom/utils.js');
+
+require('@pathIncludJs/base.js');
+
 require('@pathCommonJs/ajaxLoading.js');
 require('@pathCommonJs/components/headBarConfig.js');
 require('@pathCommonJsCom/tabScroll.js');
