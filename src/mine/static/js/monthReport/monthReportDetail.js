@@ -728,7 +728,7 @@ var monthReportDetail = {
 				callbackDone: function(json){
 					var result = json.data;
 					// 判断是否有专属理财师和服务理财师
-					if(result.exclusiveFinancialerList.length != 0 || result.serviceFinancialerList.length != 0){
+					if(result.exclusiveFinancialerList || result.serviceFinancialerList ){
 
 						if(result.exclusiveFinancialerList.length != 0){   //有专属理财师
 							var exclusive = result.exclusiveFinancialerList[0];//专属理财师
@@ -778,10 +778,10 @@ var monthReportDetail = {
 						var hh = now.getHours();
 						
 						if(8 <= hh && hh <= 20){
-							window.location.href = site_url.consultProduct_url +'?empNo='+ that.getElements.plannerNum + '&empName=' + that.getElements.plannerName + '&productName=' + that.getElements.productName ;
+							// window.location.href = site_url.consultProduct_url +'?empNo='+ that.getElements.plannerNum + '&empName=' + that.getElements.plannerName + '&productName=' + that.getElements.productName ;
 							// window.open(site_url.customerService_url);
 						}else{
-							$('.contactNow').show();
+							window.location.href = site_url.consultProduct_url +'?empNo='+ that.getElements.plannerNum + '&empName=' + that.getElements.plannerName + '&productName=' + that.getElements.productName ;
 						}
 
 					}

@@ -14,19 +14,21 @@ require('@pathCommonJs/ajaxLoading.js');
 
 var splitUrl = require('@pathCommonJsCom/splitUrl.js')();
 
-var monthReportDetail = {
+var consultProduct = {
 	
 	init: function(){  //初始化函数
 		var that = this;
-		
 		//事件监听
 		that.events();
 	},
 	events: function(){  //绑定事件
 		var that = this;
 		mui("body").on('tap', '.submitBtn' , function(){
+			var empNo =  splitUrl['empNo']? splitUrl['empNo'] :'';
+			var empName =  splitUrl['empName']? splitUrl['empName'] :'';
+			var productName =  splitUrl['productName']? splitUrl['productName'] :'';
 
-			that.getElements.productName = $(this).attr('productName');
+			// that.getElements.productName = $(this).attr('productName');
 
 			var obj = [{
 				
@@ -34,9 +36,9 @@ var monthReportDetail = {
 				data: {
 					hmac:"",
 					params:{
-						empNo: splitUrl['empNo'],  //理顾工号
-						empName: splitUrl['empName'],  // 理顾姓名
-						productName: splitUrl['productName'],,  // 产品名称
+						empNo: empNo,  //理顾工号
+						empName: empName,  // 理顾姓名
+						productName: productName,  // 产品名称
 					}
 				},
 				needLogin: true, //需要判断登录情况
@@ -59,5 +61,5 @@ var monthReportDetail = {
 	},
 }
 
-monthReportDetail.init();
+consultProduct.init();
 

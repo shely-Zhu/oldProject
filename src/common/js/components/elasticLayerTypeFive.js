@@ -166,8 +166,16 @@
 
                         that.options.callback(that);
                         //关闭按钮事件即隐藏当前弹层
-                        if (that.options.isHide) {
-                            $(this).parents('.elasticLayerTypeFive').hide();
+
+                        if(that.options.titleSatus){
+
+                            if (that.options.isHide) {
+                                $(this).parents('.elasticLayerTypeFive').hide();
+                            }
+                        }else{
+                            if (that.options.isHide) {
+                                $(this).parents('.elasticLayerTypeSix').hide();
+                            }
                         }
 
                     })

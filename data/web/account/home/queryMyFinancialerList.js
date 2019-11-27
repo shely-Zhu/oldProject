@@ -32,8 +32,7 @@ var data = Mock.mock({
 			'mobile':'',   //手机号
 			'cityName':'',  // 城市
 		}]
-
-
 	}
+	// 'data':''
 });
 module.exports = data;
