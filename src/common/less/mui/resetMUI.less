@@ -252,6 +252,13 @@ input[type=submit]:enabled:active{
 @import url("../components/privateOrPublicTwo.less");
 
 /* mui下拉刷新有一条灰线重置掉 */
-.mui-table-view:before{
-    height:0;
+.mui-table-view{
+    &:before{
+        height:0;
+    }
+
+    &:after{
+        height:0;
+    }
+
 }
