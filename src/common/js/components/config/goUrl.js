@@ -402,4 +402,11 @@ module.exports = function () {
     this.informationDisclosure_url = go_url.no_url + '/account/views/informationDisclosure.html';
     // 公募交易详情查询
     this.publicTradeDetail_url = go_url.no_url + '/account/views/publicTradeDetail/publicTradeDetail.html';
+    //普通基金-赎回页面
+    this.redemptionBuy_url = go_url.no_url + '/financial/views/publicPlacement/redemptionBuy.html';
+    //普通基金-买入页面
+    this.fundTransformIn_url = go_url.no_url + '/financial/views/publicPlacement/fundTransformIn.html';
+
+    //  //普通基金-定投买入
+    // this.ordinarySetThrow_url = go_url.no_url + '/financial/views/publicPlacement/ordinarySetThrow.html';
 };
