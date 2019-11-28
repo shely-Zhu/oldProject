@@ -334,7 +334,7 @@ module.exports = function() {
 
     /*------------------- 私募理财fang——le end ------------------------------*/
     /*------------------- 财富学院 start ------------------------------*/
-    this.queryFortuneBanner_api = http_url.web_url + '/account/home/frontend/queryFortuneBanner'; //首页banner
+    this.queryBanner_api = http_url.web_url + '/account/home/frontend/queryBanner'; //首页banner
     this.queryFortuneCollegeFir_api = http_url.web_url + '/account/home/frontend/queryFortuneCollegeFir'; //财富翻译官/早知道
 
     this.getFortuneTabInfo_api = http_url.web_url + '/account/home/frontend/getFortuneTabInfo'; // 财富讲堂/财富研究 页签查询
