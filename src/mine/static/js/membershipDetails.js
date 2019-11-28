@@ -9,7 +9,7 @@ require('@pathCommonJs/components/headBarConfig.js');
 require('@pathCommonJs/ajaxLoading.js');
 
 var tipAction = require('@pathCommonJs/components/tipAction.js');
-var splitUrl = require('@pathCommonJs/components/splitUrl.js')();
+var swiperSizeMap = require('@pathCommonJs/components/swiper/swiperSizeMap.js');
 var generateTemplate = require('@pathCommonJsComBus/generateTemplate.js');
 
 $(function(){
@@ -42,20 +42,23 @@ $(function(){
                 loop : true,//是否循环
                 initialSlide:n,//图片滑动到第几个未开始位置
                 on: {
-                    progress: function(b) {                        
-                        for(i = 0; i < this.slides.length; i++){
-                            slide = this.slides.eq(i);
-                            slideProgress = this.slides[i].progress;
-                            prevIndent = 4 == i ? .3228 : .0898;
-                            scale = 1 > Math.abs(slideProgress + prevIndent) ? .4 * (1 - Math.abs(slideProgress + prevIndent)) + 1 : 1;
-                            slide.find(".goods").transform("scale3d(" +scale + "," + scale + ",1)");                            
-                        }                        
+                    progress: function(b) {                    
+                        // for(i = 0; i < this.slides.length; i++){
+                        //     slide = this.slides.eq(i);
+                        //     slideProgress = this.slides[i].progress;
+                        //     prevIndent = 4 == i ? .3228 : .0898;
+                        //     scale = 1 > Math.abs(slideProgress + prevIndent) ? .4 * (1 - Math.abs(slideProgress + prevIndent)) + 1 : 1;
+                        //     slide.find(".goods").transform("scale3d(" +scale + "," + scale + ",1)");                            
+                        // }        
+                        swiperSizeMap(this.slides,'goods')               
                     },
+                    //滑动中
                     setTransition: function(b) {
                         for(var a = 0; a < this.slides.length; a++){
                             this.slides.eq(a).find(".goods").transition(b);
                         }                        
                     },
+                    //滑动结束赋值
                     slideChangeTransitionEnd: function(){
                         var index=this.activeIndex%num;
                         var text=$('.swiper-slide').eq(index).attr('data-text');
@@ -83,7 +86,7 @@ $(function(){
                     var data=json.data; 
                     generateTemplate(data,that.$e.membershipDetailsSilderBox,that.$e.membershipDetailsListTemplateId); 
                     var n=0;
-                    that.swiperInit(n,json.data.length);               
+                    that.swiperInit(n,json.data.length);           
                 },
                 callbackFail: function(json) {
                     tipAction(json.message);

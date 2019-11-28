@@ -63,27 +63,20 @@ $(function() {
             //事件监听
             that.events();
         },
-
         beforeFunc: function() { //拼模板，初始化左右滑动mui组件
             var that = this,
                 contentArr = []; //传给tabScroll组件的contentList参数的数组
-
             // list内容模板
             var source = $('#second-template').html(), //获取 整个模板的html
                 template = Handlebars.compile(source), //转换成方法
                 list_html = template(); //方法执行
-
-            //将生成的模板内容存到that.list_template上
+            // 将生成的模板内容存到that.list_template上
             that.gV.list_template = template;
-
-
-
             // 外容器优先加载
             var wrap_source = $('#first-template').html(),
                 wrap_template = Handlebars.compile(wrap_source),
                 wrap_html = wrap_template({ content: list_html }); //模板生成
             $.each(that.gV.navList, function(i, el) {
-
                 that.gV.ajaxArr[i] = {
                     articleBelong: el.num, //请求类型
                     pageCurrent: that.gV.aP.pageCurrent, //当前第几页(默认为1) 非必填项, 默认设置成第一页
@@ -94,7 +87,6 @@ $(function() {
                     content: wrap_html
                 })
             })
-
             var obj = {
                 wrapper: $('.myAsset'), //存放整个组件的区域
                 needNavAction: false,
@@ -214,7 +206,6 @@ $(function() {
                 needDataEmpty: true,
                 callbackDone: function(json) {
                     that.gV.navList = [];
-
                     for (var i = 0; i < json.data.length; i++) {
                         (function(i) {
                             that.gV.navList[i] = {
@@ -225,10 +216,8 @@ $(function() {
                     }
                     //拼模板，初始化左右滑动mui组件
                     that.beforeFunc();
-
                     //初始化第一屏区域的上拉加载
                     that.initMui($('#scroll1'));
-
                 }
             }];
             $.ajaxLoading(obj);
