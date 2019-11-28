@@ -308,6 +308,9 @@ module.exports = {
     // 基金确认书
     './account/static/js/private/privateFundPdf': './src/account/static/js/private/privateFundPdf.js',
 
+    // 查看已签署材料
+    './account/static/js/private/seeSign': './src/account/static/js/private/seeSign.js',
+
     // 公募交易明细
     './account/static/js/publicTradeDetail/publicTradeDetail': './src/account/static/js/publicTradeDetail/publicTradeDetail.js',
 
