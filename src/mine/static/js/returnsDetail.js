@@ -32,7 +32,7 @@ $(function() {
         //初始化mui的上拉加载
         initMui: function() {
             var that = this;
-            var height = windowHeight - $(".title").height() - $(".topTitle").height();
+            var height = windowHeight - $(".title").height() - $(".topTitle").height()-$(".messageTitle").height();
             if (!$('.list').hasClass('setHeight')) {
                 $('.list').height(height).addClass('setHeight');
             }
@@ -90,7 +90,6 @@ $(function() {
                 needDataEmpty: true,
                 callbackDone: function(json) {
                     var data;
-                    debugger
                     if (json.data.list.length == 0) { // 没有记录不展示
                         $(".list").hide()
                         that.$e.noData.show();

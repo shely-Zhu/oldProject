@@ -46,11 +46,12 @@ var prvMar = {
 			url: site_url.queryReourceLabels_api,
 			// url: site_url.queryReourceList_api,
 			data: {
-                "'projectId'":21072
+                "projectId":21072
             },
             needLogin: true, //需要判断是否登陆
             async: false,
             needDataEmpty: true, //需要判断data是否为空
+            contentTypeSearch: true,
             callbackDone: function(json) {
                 var labelArr = json.data;
                 for (var i =0; i < labelArr.length ; i++) {
