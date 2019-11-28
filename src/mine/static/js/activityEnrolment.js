@@ -18,6 +18,8 @@ var splitUrl = require('@pathCommonJs/components/splitUrl.js')();
 var generateTemplate = require('@pathCommonJsComBus/generateTemplate.js');
 
 
+var moment = require('moment');
+
 $(function () {
     var dataEn = {
         $e: {
