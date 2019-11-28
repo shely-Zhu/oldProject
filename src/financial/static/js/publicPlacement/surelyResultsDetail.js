@@ -40,6 +40,7 @@ $(function() {
         payType:$(".listWrap .payType"),  //支付方式
       },  
       gV: { // 全局变量
+        flag:splitUrl['flag'],
         payType:splitUrl['payType'] || '1',  // 0  在线  1  汇款
         applyId:splitUrl['applyId'],
         fundCode:splitUrl['fundCode'],

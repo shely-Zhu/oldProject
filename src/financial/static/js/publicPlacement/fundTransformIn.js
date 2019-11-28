@@ -223,7 +223,7 @@ $(function () {
 					data = json.data;
 					if(json.status == '0000'){
 					   window.location.href = site_url.pofSurelyResultsDetail_url + '?applyId=' + data.allotNo + '&fundBusinCode=' + 
-					   data.fundBusinCode + "&fundCode=" + that.gV.fundCode + "&payType=" +that.gV.payType;
+					   data.fundBusinCode + "&fundCode=" + that.gV.fundCode + "&payType=" +that.gV.payType + '&flag=buy';
 					}else if(json.status == 'POF1186' || json.status == 'POF1186'){
 						//密码错误
 						$(".elasticButtons.error1").show();
@@ -415,6 +415,12 @@ $(function () {
 			$('body').on('tap','.error2 .elasticYes',function(){
 				//跳往原生页面去修改密码
 				window.location.href = site_url.pofRetrievePassword_url
+			}) ;
+
+			//添加银行卡 -- 跳往原生
+			$('body').on('tap','.popup-last',function(){
+				//跳往原生页面去修改密码
+				window.location.href = site_url.pofAddBankCard_url
 			}) ;
 
 		},
