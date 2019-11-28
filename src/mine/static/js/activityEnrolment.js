@@ -107,7 +107,6 @@ $(function () {
                 contentTypeSearch: true,
                 callbackDone: function (json) {
                     var dataList;
-                    console.log(json)
                     if (num == 0) {
 
                         //给推荐活动赋值

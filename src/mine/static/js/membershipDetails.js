@@ -26,7 +26,7 @@ $(function(){
 		init:function(){
             var that=this;
             that.events();            
-            that.getMembershipDetailsData();
+            that.getMembershipDetailsData();          
         },
         //滑动初始化
         swiperInit(n,num){
@@ -63,7 +63,8 @@ $(function(){
                         var link=$('.swiper-slide').eq(index).attr('data-link');
                         var name=$('.swiper-slide').eq(index).attr('data-name');
                         $('.membershipDetailsContentBox h2').text(name);
-                        $('.membershipDetailsContentBox p').text(text);                        
+                        $('.membershipDetailsContentBox p').text(text);     
+                        $(".tel").attr("href", "tel:" + commonSetting.serverPhone).html(commonSetting.serverPhone)                   
                         $('.linkBtnBox a').attr('href',link);
                     }
                 }
