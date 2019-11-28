@@ -2,13 +2,9 @@
  * 我的奖励
  * @author zhangyanping 2019-11-12
 */
-require('@pathIncludJs/vendor/config.js');
 
-//zepto模块
-require('@pathIncludJs/vendor/zepto/callback.js');
-require('@pathIncludJs/vendor/zepto/deferred.js');
 
-require('@pathCommonJsCom/utils.js');
+require('@pathIncludJs/base.js');
 require('@pathCommonJs/ajaxLoading.js');
 
 var tipAction = require('../../../common/js/components/tipAction.js');
