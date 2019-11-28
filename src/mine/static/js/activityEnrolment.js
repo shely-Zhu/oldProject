@@ -38,17 +38,15 @@ $(function () {
             search: false, // 搜索
             // 存放ajax请求地址  已进行  已结束
             ajaxArr: [], //存放每一个ajax请求的传参数据
-            custCode: 293807
+            custCode: ''
         },
         init: function () {
             var that = this;
             // that.getUserInfo();
             that.getData(site_url.getApplyActivity_api, {
-                custNo: that.gV.custCode,
                 actStatus: 1
             }, 0);
             that.getData(site_url.getApplyActivity_api, {
-                custNo: that.gV.custCode,
                 actStatus: 2
             }, 1);
             that.events();
