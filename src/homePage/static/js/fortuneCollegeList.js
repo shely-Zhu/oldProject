@@ -33,7 +33,7 @@ var productPublic = {
     getData:function(){
         var that =this;
         var obj=[{
-             url: site_url.queryFortuneBanner_api,
+             url: site_url.queryBanner_api,
              data: {    
                 hmac:"", //预留的加密信息    
                 params:{//请求的参数信息 

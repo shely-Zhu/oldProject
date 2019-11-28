@@ -27,11 +27,19 @@ $(function() {
         init:function(){
 			var that = this;
 			that.gL.cashFundDetail = JSON.parse(sessionStorage.getItem("cashFundDetail"));
-			$(".totalM").text(that.gL.cashFundDetail.totalMoneyMask)
-			$(".incomeMask").text(that.gL.cashFundDetail.incomeMask)
-			$(".addupIncomeMask").text(that.gL.cashFundDetail.addupIncomeMask)
-			$("#HeadBarpathName").text(that.gL.cashFundDetail.fundName)
-			$(".titleTwo").text(that.gL.cashFundDetail.fundCode)
+			if(!that.gL.cashFundDetail){
+				$(".totalM").text("--")
+				$(".incomeMask").text("--")
+				$(".addupIncomeMask").text("--")
+				$("#HeadBarpathName").text("")
+				$(".titleTwo").text("")
+			}else{
+				$(".totalM").text(that.gL.cashFundDetail.totalMoneyMask)
+				$(".incomeMask").text(that.gL.cashFundDetail.incomeMask)
+				$(".addupIncomeMask").text(that.gL.cashFundDetail.addupIncomeMask)
+				$("#HeadBarpathName").text(that.gL.cashFundDetail.fundName)
+				$(".titleTwo").text(that.gL.cashFundDetail.fundCode)
+			}
             //事件绑定
             that.event();	
 			that.getTimeReq()
@@ -161,8 +169,8 @@ $(function() {
 	        var obj = [{
 			    url: site_url.fundNetWorthTrendChart_api, 
 			    data: {
-					// fundCode:"000847",
-					fundCode:that.gL.cashFundDetail.fundCode,
+					fundCode:"000847",
+					// fundCode:that.gL.cashFundDetail.fundCode,
 					dataRange:t||1,
 			    },
 			    needLogin: true,
@@ -184,8 +192,8 @@ $(function() {
 	        var obj = [{
 			    url: site_url.findProtocolBasic_api, 
 			    data: {
-					code:that.gL.cashFundDetail.fundCode,
-					// code:"",
+					// code:that.gL.cashFundDetail.fundCode,
+					code:"000847",
 					template:"0",
 			    },
 			    needLogin: true,
@@ -199,15 +207,23 @@ $(function() {
         event:function(){
 			var that = this;
             //选项卡切换
-            $(document).on('click', '.lineDraw .time', function(e) {
-                $('.lineDraw .time').removeClass('active');
+			mui("body").on('tap','.lineDraw .time',function(e){
+				$('.lineDraw .time').removeClass('active');
 				$(this).addClass('active');
 				that.getTimeReq($(this).attr('num'))
 			})
-			$(document).on('click', '.materialContent', function(e) {
+			mui("body").on('tap','.materialContent',function(e){
 				var id = $(this).attr('data-id')
 				window.location.href = `${site_url.superContent_url}?id=${id}`;
-            })
+			})
+			//点击转出跳转
+			mui("body").on('tap','.rollOutBtn',function(e){
+				window.location.href =  site_url.pofCashTransformOut_url;
+			})
+			//点击转入跳转
+			mui("body").on('tap','.shiftToBtn',function(e){
+				window.location.href =  site_url.pofCashTransformIn_url;
+			})
         }
     } 
     privateDetail.init()
