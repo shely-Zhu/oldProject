@@ -2,13 +2,9 @@
  * 修改分红方式页面 js
  * @author 蔡文琦  2019-11-20
  */
-require('@pathIncludJs/vendor/config.js');
 
-//zepto模块
-require('@pathIncludJs/vendor/zepto/callback.js');
-require('@pathIncludJs/vendor/zepto/deferred.js');
+require('@pathIncludJs/base.js');
 
-require('@pathCommonJsCom/utils.js');
 require('@pathCommonJs/ajaxLoading.js');
 require('@pathCommonJs/components/headBarConfig.js');
 require('@pathCommonJs/components/elasticLayer.js');

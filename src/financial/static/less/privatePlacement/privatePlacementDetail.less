@@ -8,9 +8,6 @@
 
 @import url("@pathCommonLessCom/headBarConfig.less");
 
-// @import url("@pathCommonLessCom/againEnter.less");
-// @import url("@pathCommonLessCom/alertBox.less");
-
 .privatePlacementDetail{
 	.privateDetailTitle{
 		padding: 1.28rem 0.3rem 0 0.3rem;
@@ -43,6 +40,9 @@
 					margin-right: 0.06rem;
 					font-size: 0.28rem;
 
+				}
+				.netValueDate{
+					font-size: 0.24rem;
 				}
 			}
 			.netValue{
@@ -82,6 +82,33 @@
 			color: @c005;
 			text-align: center;
 
+		}
+	}
+
+	.investmentTip{
+		font-size: 0.28rem;
+		color: @9B9B9B;
+		padding:0.3rem 0.3rem 1.73rem;
+	}
+
+	.immediatelyBuy{
+		position: fixed;
+		bottom:0;
+		width: 100%;
+		font-size: 0.26rem;
+		text-align: center;
+		.buyRate{
+			height: 0.6rem;
+			line-height: 0.6rem;
+			color: @BB8E5F;
+			background: @c005;
+		}
+		.buyButton{
+			height: 0.98rem;
+			line-height: 0.98rem;
+			font-size: 0.32rem;
+			color: @c005;
+			background:linear-gradient(90deg,rgba(212,183,136,1) 0%,rgba(188,150,90,1) 100%);
 		}
 	}
 

@@ -295,9 +295,9 @@ $(function () {
                 var fundBusinCode=$(this).attr('data-fundBusinCode');
                 var allotType=$(this).attr('data-allotType');
                 var Fixbusinflag=$(this).attr('data-Fixbusinflag');
-                window.location.href=site_url.publicTradeDetail_url+'?applyId='+applyId+'&'+'fundCombination='+fundCombination 
-                                        +'fundCode='+fundCode+'fundBusinCode='+fundBusinCode+'allotType='+allotType
-                                        +'Fixbusinflag='+Fixbusinflag;
+                window.location.href=site_url.publicTradeDetail_url+'?applyId='+applyId+'&fundCombination='+fundCombination 
+                                        +'&fundCode='+fundCode+'&fundBusinCode='+fundBusinCode+'&allotType='+allotType
+                                        +'&Fixbusinflag='+Fixbusinflag;
             });
         }
     };

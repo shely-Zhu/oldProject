@@ -20,6 +20,7 @@
         <div class="mui-content  myAsset">
             <!-- 放置页面内容 -->
         </div>
+        @@include('@pathCommonViews/load.html')
         <!-- 加载中loading -->
         @@include('@pathCommonViews/loading/listLoading.html')
         <!-- 暂无数据 -->
@@ -48,7 +49,7 @@
 
     <script id="second-template" type="text/x-handlebars-template">
     {{! 左侧页面列表}}  {{#each list}}
-    <div class="datalist">
+    <div class="datalist" data-applyId="{{allotNo}}" data-isBuy = "{{tobe}}">
         <div class="first">
             <div class="tit">{{fundName}}</div>
             <div class="mon">

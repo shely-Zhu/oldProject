@@ -21,11 +21,11 @@ var data = Mock.mock({
         "beginRedemptionTime": "2019-11-19", //赎回申请开始时间
         "endRedemptionTime": "2019-11-19", //赎回申请结束时间
         "redemptionOpenDay": "2019-11-19", //赎回开放日
-        "expectedProfit": "1.11", //业绩比较基准(购买时)
-        "endDate": "2019-11-19",//到期日期
-        "totalShare": "1123,556.00", //持仓份额
+        "expectedProfit": "", //业绩比较基准(购买时)
+        "endDate": "",//到期日期
+        "totalShare": "", //持仓份额
         "buyAmount": "100,1000.00", //认购金额
-        "setupDate": "2016-08-09",//成立日期
+        "setupDate": "",//成立日期
         "prodTerm":"2019-11-19",//产品期限-单位（日 月 年）
         "investPeriod":"",//投资期
         "quitPeriod":"",//退出期
@@ -35,7 +35,7 @@ var data = Mock.mock({
         "assetsGainAndLoss":"1.111",//持仓盈亏
         "incomeUnit":"123123",//万份收益
         "incomeUnitDate":"2019-11-19",//万份收益更新日期
-        "incomeAssign":"4324",//收益分配
+        "incomeAssign":"",//收益分配
         "holdDays":"23",//持有天数
         "totalNetValue":"",//累计净值
         "totalNetValueDate":"2019-11-19",//累计净值日期

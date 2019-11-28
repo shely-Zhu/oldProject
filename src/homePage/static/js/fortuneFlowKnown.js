@@ -19,6 +19,7 @@ $(function() {
 		$e: {
 			fortuneFlowListWrapper: $(".knownList"), // 财富流向早知道列表容器
 			fortuneFlowListTemp: $("#fortuneFlowList-template"), // 财富流向早知道列表模板
+            noData: $('.noData'), //没有数据的结构
 			listLoading: $('.listLoading') //所有数据区域，第一次加载的loading结构
 		},
 		//全局变量
@@ -47,7 +48,7 @@ $(function() {
                 data: {
                     "pageNo": that.gV.pageCurrent, //非必须，默认为1
                     "pageSize": that.gV.pageSize, //非必须，默认为10
-                    "articleBelong": 1
+                    "articleBelong": "1"
                 },
                 needDataEmpty: true,
                 callbackDone: function(json) {
@@ -56,7 +57,7 @@ $(function() {
                         that.$e.noData.show();
                         return false;
                     } else {
-                        data = json.data.pageInfo;
+                        data = that.dealTime(json.data.list);
                     }
                     setTimeout(function() {
                         if (data.length < that.gV.pageSize) {
@@ -85,6 +86,12 @@ $(function() {
                 }
             }];
             $.ajaxLoading(obj); 
+        },
+        dealTime(data) {
+            $.each(data, function(a, b) {
+                b.articleTimeStr = b.articleTimeStr.split(" ")[0].split("-")[1] + "." + b.articleTimeStr.split(" ")[0].split("-")[2]
+            })
+            return data;
         },
 		//初始化mui的上拉加载
 		initMui: function(listClassName, wrapperName) {
@@ -126,7 +133,11 @@ $(function() {
 		},
 		//注册事件
 		events: function() {
-			
+            // 列表页跳转到详情页
+			mui("body").on('tap', '.knownItem' , function(){
+                var externalUrl = $(this).attr("externalUrl")
+                window.location.href = externalUrl
+            })
 		}
 	};
 	somePage.init();

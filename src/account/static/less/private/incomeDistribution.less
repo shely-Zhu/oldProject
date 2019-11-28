@@ -7,6 +7,7 @@
 @import url("@pathCommonLessCom/alertBox.less");
 @import url("@pathCommonLessCom/headBarConfig.less");
 @import url("@pathCommonLessCom/goTopMui.less");
+@import url("@pathCommonLessCom/noDataImg.less");
 * { touch-action: none; }
 body{
     background-color: @F7FAFD;
@@ -20,6 +21,9 @@ body{
 }
 .mui-table-view:after{
     background-color:@F7FAFD !important;
+}
+.without{
+    margin-top:0 !important;
 }
 .box ul li{
     border-left:0.04rem solid @BC965A;
@@ -41,13 +45,14 @@ body{
         padding:0.3rem 0.3rem  0.3rem 0.16rem;
         p{
             display:-webkit-box;
+            margin-bottom:0.2rem;
             span{
                 font-size:0.28rem;
                 color:@9B9B9B;
                 width:1.12rem;
-                margin-bottom:0.2rem;
                 display:block;
                 margin-right:0.27rem;
+                line-height:0.35rem;
             }
             b{
                 -webkit-box-flex:1;
