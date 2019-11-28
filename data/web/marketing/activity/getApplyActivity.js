@@ -30,7 +30,7 @@ var data = Mock.mock({
                     arriveTime: null,
                     channelCode: 0,
                     enterTime: 1528270300000,
-                    htjfGeneralizeImgUrl: "",
+                    htjfGeneralizeImgUrl: "http://172.16.163.99:85/group1/M00/06/ED/rBCjPl3V-GCAdzrzAA4bEjEpcqc425.gif",
                     preferential: "面额30元京东E卡",
                     status: 0,
                 }
