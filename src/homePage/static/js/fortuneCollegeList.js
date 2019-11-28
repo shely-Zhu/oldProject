@@ -198,27 +198,27 @@ var productPublic = {
     //操作事件
     events:function(){
         //财富讲堂tab切换
-        $('.broadcast').on('tap','span',function(){
+        mui('.broadcast').on('tap','span',function(){
             console.log($(this).index())
-            $('.broadcast .bigspan').removeClass('getColor');
-            $('.broadcast .bigspan').eq($(this).index()).addClass('getColor');
-            $('.forumList .forumImg').css({"display":"none"});
-            $('.forumList .forumImg').eq($(this).index()).css({"display":"block"});
+            mui('.broadcast .bigspan').removeClass('getColor');
+            mui('.broadcast .bigspan').eq($(this).index()).addClass('getColor');
+            mui('.forumList .forumImg').css({"display":"none"});
+            mui('.forumList .forumImg').eq($(this).index()).css({"display":"block"});
         });
         //财富研究tab切换
-        $('.tab').on('tap','.tab-t li',function(){
+        mui('.tab').on('tap','.tab-t li',function(){
             console.log($(this).index())
-            $('.tab .tab-t li a').removeClass('active');
-            $('.tab .tab-t li a').eq($(this).index()).addClass('active');
-            $('.tab .tab-b .tab-content').css({"display":"none"});
-            $('.tab .tab-b .tab-content').eq($(this).index()).css({"display":"block"});
+            mui('.tab .tab-t li a').removeClass('active');
+            mui('.tab .tab-t li a').eq($(this).index()).addClass('active');
+            mui('.tab .tab-b .tab-content').css({"display":"none"});
+            mui('.tab .tab-b .tab-content').eq($(this).index()).css({"display":"block"});
         });
     }
 }
 productPublic.init();
 
 window.onload=function(){
-    $('.tab-t ol li a').eq(0).addClass('active');
-    $('.broadcast .bigspan').eq(0).addClass('getColor');
-    $('.broadcast .bigspan').eq(0).css({"paddingLeft":0,"borderLeft":'none'});
+    mui('.tab-t ol li a').eq(0).addClass('active');
+    mui('.broadcast .bigspan').eq(0).addClass('getColor');
+    mui('.broadcast .bigspan').eq(0).css({"paddingLeft":0,"borderLeft":'none'});
 }

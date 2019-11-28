@@ -252,8 +252,8 @@ $(function(){
                         
                         
                     }
-                    console.log(cityList)
                     res.push({
+                        namea:'明星理财师',
                         hotCityList:rightListArr,
                         hotCity:data.hotCityList,
                         cityList:cityList
