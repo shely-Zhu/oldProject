@@ -185,11 +185,8 @@ gulp.task('proxyTask', function () {
             return [
                 proxy('/app', {
                     target: 'https://app.htjf4.com',
-<<<<<<< HEAD
                     // target: 'http://172.16.187.129:8080',//李亚楠
-=======
-                    // target: 'https://172.16.187.127:8080',
->>>>>>> a60bb4d2881e0ce3e567821cd2fe6cac41a1cfb3
+
                     // target: 'http://192.168.50.254:8085',
                     //target: 'https://app.chtfundtest.com',
                     changeOrigin: true,
@@ -197,17 +194,11 @@ gulp.task('proxyTask', function () {
                 }),
 
                 proxy(['/wap', '/web/', '/jf/'], {
-<<<<<<< HEAD
-                     target: 'https://h5.htjf4.com',
-                    //  target: 'http://172.16.187.129:8080',//李亚楠
-                    // target: 'http://172.16.187.164:8081',
-                     // target: 'https://h5.chtfundtest.com',
-=======
+
                     target: 'https://h5.htjf4.com',
                     // target: 'https:/172.16.187.127:8080',
                     // target: 'http://172.16.187.164:8081',
                     //target: 'https://h5.chtfundtest.com',
->>>>>>> a60bb4d2881e0ce3e567821cd2fe6cac41a1cfb3
                     changeOrigin: true,
                     secure: false,
                 }),

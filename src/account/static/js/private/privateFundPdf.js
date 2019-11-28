@@ -109,9 +109,9 @@ $(function(){
                 $.elasticLayer(obj)
             })
             // 点击去修改邮箱
-            $document.on('click','#changeMail',function(){
+//          $document.on('click','#changeMail',function(){
                 // 调用原生方法，或者原生拦截连接
-            })
+//          })
         }
     };
     fundPdf.init();
