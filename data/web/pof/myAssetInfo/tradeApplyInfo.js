@@ -33,9 +33,9 @@ var data = Mock.mock({
 
         tradeStatus: "",//交易申请状态
 
-        tradeApplyDesc: "待扣款",//交易状态信息
+        tradeApplyDesc: "等待汇款",//交易状态信息
 
-        tradeApplyDescMessage: "等待银行汇款",//交易状态描述
+        tradeApplyDescMessage: "",//交易状态描述
 
         debitStatus: "",//扣款状态
 
@@ -63,7 +63,7 @@ var data = Mock.mock({
 
         bankIdNo: "",//银行编号
 
-        bankLogoUrl: "https://s.chtfundtest.com/upload/htmall/images/content/b2bece3b-595a-40cf-9fe8-b159f80d3744.png",//银行logoUrl
+        bankLogoUrl: "http://hbimg.b0.upaiyun.com/a9d854a213470cd3805bc9404b03f9179a8532b81b814-RUgwaI_fw658",//银行logoUrl
 
         bankName: "中国工商银行",//银行名称
 
