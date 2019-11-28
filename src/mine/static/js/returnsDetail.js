@@ -1,14 +1,12 @@
-require('@pathIncludJs/vendor/config.js');
-require('@pathIncludJs/vendor/zepto/callback.js');
-require('@pathIncludJs/vendor/zepto/deferred.js');
-require('@pathCommonJs/components/utils.js');
+
+require('@pathIncludJs/base.js');
 require('@pathCommonJs/components/headBarConfig.js');
 require('@pathCommonJs/ajaxLoading.js');
 
 var tipAction = require('@pathCommonJs/components/tipAction.js');
 var splitUrl = require('@pathCommonJs/components/splitUrl.js')();
 var generateTemplate = require('@pathCommonJsComBus/generateTemplate.js');
-var splitUrl = require('@pathCommonJs/components/splitUrl.js')();
+
 $(function() {
 
     var somePage = {
@@ -23,7 +21,7 @@ $(function() {
             pageCurrent: 1, //当前页码，默认为1
             pageSize: 10,
             listLength: 0,
-            projectId: splitUrl['projectId'],
+            fundCode: splitUrl['fundCode'],
         },
         init: function() {
             var that = this;
@@ -86,7 +84,7 @@ $(function() {
                 data: {
                     "pageNo": that.gV.pageCurrent, //非必须，默认为1
                     "pageSize": 10,//非必须，默认为10
-                    "projectId":that.gV.projectId,//项目编号
+                    "fundCode":that.gV.fundCode,//项目编号
                 },
                 //async: false,
                 needDataEmpty: true,
