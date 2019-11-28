@@ -237,7 +237,7 @@ module.exports = {
     //活动详情
     './life/static/js/memberClub/activityDetails': "./src/life/static/js/memberClub/activityDetails.js",
     //文件上传
-    './mine/static/js/uploadMaterial': './src/mine/static/js/uploadMaterial.js',
+    // './mine/static/js/uploadMaterial': './src/mine/static/js/uploadMaterial.js',
     //明星理财师-理财师列表
     './starFinancialPlanner/static/js/starFinancialPlannerList': "./src/starFinancialPlanner/static/js/starFinancialPlannerList.js",
 
