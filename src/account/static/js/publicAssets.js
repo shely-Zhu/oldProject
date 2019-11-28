@@ -145,27 +145,28 @@ $(function () {
         events: function () { //绑定事件
             var that = this;
             //普通基金item的点击 进入持仓详情
-            $('#pageLists .hold_item').on('click', function(){
+            mui("body").on('tap', '#pageLists .hold_item', function (e) {
                 var index = $(this).index();
                 sessionStorage.setItem("publicFundDetail",JSON.stringify(that.gV.data.fundDetailList[index])) 
                 window.location.href=site_url.optionalPublicDetail_url;
             })
             //现金宝基金item的点击 进入持仓详情
-            $('#cashPageLists .hold_item').on('click', function(){
+            mui("body").on('tap', '#cashPageLists .hold_item', function (e) {
                 var index = $(this).index();
                 sessionStorage.setItem("cashFundDetail",JSON.stringify(that.gV.data.cashDetail[index])) 
+                console.log(site_url.superStreasureDetail_url);
                 window.location.href=site_url.superStreasureDetail_url;
             })
             //点击持仓列表的感叹号 进入持仓明细
-            $('.position_tip').on('click', function(){
+            mui("body").on('tap', '.position_tip', function (e) {
                 //todo 跳转
             })
             //购买
-            $('.buy_btn').on('click', function(){
+            mui("body").on('tap', '.buy_btn', function (e) {
                 //todo 跳转
             })
             //赎回
-            $('.redeem_btn').on('click', function(){
+            mui("body").on('tap', '.redeem_btn', function (e) {
                 //todo 跳转
             })
             // 头部文案提示(金钱展示隐藏)

@@ -290,7 +290,7 @@ module.exports = function() {
     this.sendMailForConfirmBill_api = http_url.web_url + '/account/positions/sendMailForConfirmBill'; //下载pdf
 
 
-    /*------------------- 月度报告 end ------------------------------*/
+    /*------------------- 基金确认书 end ------------------------------*/
 
     /*------------------- 私募理财fang——le start ------------------------------*/
     this.protocolList_api = http_url.web_url + '/pof/fixedInvestment/protocol/list'; //金服WEB-定投交易- 我的定投协议列表
@@ -348,6 +348,8 @@ module.exports = function() {
     /*------------------------------------ 私募接口文档 start -------------------------------------*/
     // 产品详情接口
     this.queryFundDetailV2_api = http_url.web_url + '/pef/queryFundDetailV2';
+    // 查询产品募集信息
+    this.getRaiseInfo_api = http_url.web_url + '/pef/getRaiseInfo';
 
 
 

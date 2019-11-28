@@ -103,8 +103,8 @@
      <script id="video-template" type="text/x-handlebars-template">
           {{#each this}}
                <li>
-                    <a href="{{imageUrlShowOnline}}">
-                         <img src="{{imageUrlShowOnline}}" alt="">
+                    <a href="fortuneFlowKnown.html">
+                         <img src="http://172.16.163.99:85/group2/M00/02/89/rBCjQ126kE2AX8h4AAFKebrcAVE188.jpg" alt="">
                          <p>
                               <i class="iconfont">
                                    <img src="/homePage/static/img/bofang@2x.png" alt="">
@@ -119,7 +119,7 @@
      </script>
      <script id="forum-template" type="text/x-handlebars-template">
           <h2>{{modelName}}</h2>
-          <p><a href="{{listJumpUrl}}" >全部</a><i class="iconfont">&#xe636;</i></p>
+          <p><a href="fortuneClassroom.html" >全部</a><i class="iconfont">&#xe636;</i></p>
      </script>
      <script id="forumTitle" type="text/x-handlebars-template">
           {{#each this}}
@@ -133,7 +133,9 @@
                          <div class="mui-scroll-wrapper mui-slider-indicator mui-segmented-control mui-segmented-control-inverted">
                               <div class="mui-scroll">
                                    {{#each listContent}}
+                                   <a href="fortuneClassroom.html">
                                         <div class="mui-control-item conten">
+                                             
                                              <img style="width:3.2rem;height:3rem;" src="/homePage/static/img/picture1_3@2x.png" alt="">
                                              <div class="con">
                                                   <!-- <h4>{{intro}}</h4>
@@ -143,6 +145,7 @@
                                                   </p>
                                              </div>
                                         </div>
+                                   </a>
                                    {{/each}}
                               </div>
                          </div>
@@ -152,7 +155,7 @@
      </script>
      <script id="tabContent-template" type="text/x-handlebars-template">
           <h2>{{modelName}}</h2>
-          <p><a href="{{listJumpUrl}}" >查看全部研究</a><i class="iconfont">&#xe636;</i></p>
+          <p><a href="wealthResearch.html" >查看全部研究</a><i class="iconfont">&#xe636;</i></p>
      </script>
      <script id="titleTab" type="text/x-handlebars-template">
           {{#each this}}
@@ -168,13 +171,17 @@
                <div class="tab-content">
                     <ul>
                          {{#each listContent}}
-                         <li>
-                              <div>
-                                   <p>{{createName}}</p>
-                                   <span>{{createTimeStr}}</span>
-                              </div>
-                              <img src="/homePage/static/img/tab1.png" alt="">
-                         </li>
+                              <a href="wealthResearch.html" >
+                                   <li>
+                                        
+                                        <div>
+                                             <p>{{createName}}</p>
+                                             <span>{{createTimeStr}}</span>
+                                        </div>
+                                        <img src="/homePage/static/img/tab1.png" alt="">
+                                   
+                                   </li>
+                              </a>
                          {{/each}}
                     </ul>
                </div>

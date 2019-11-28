@@ -233,10 +233,24 @@ $(function() {
                 })
                 //点击状态文字出现弹框
             mui("body").on('tap', '.openTip', function(e) {
-                $('.mask').show();
-                $('#tipConOne').show();
-                var conText = $(this).siblings('tipContent').html;
-                that.openTipConOne(conText);
+                    $('.mask').show();
+                    $('#tipConOne').show();
+                    var conText = $(this).siblings('tipContent').html;
+                    that.openTipConOne(conText);
+
+                })
+                //功能按钮
+            mui("body").on('tap', '.toDetail', function(e) {
+                var type = $(this).attr('type');
+                if (type == 'toCertif') { //去合格投资者认证
+
+                } else if (type == 'toSign') { //去签合同
+
+                } else if (type == 'toSee') { //查看合同
+
+                } else if (type == 'toUploadM') { //去上传汇款凭证
+
+                }
 
             })
         }
