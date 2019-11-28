@@ -28,7 +28,7 @@ $(function () {
             ListSlot: $('.listHasData0'),//插入已报名活动位置
             ListSlot1: $('.listHasData1'),//插入已报名活动位置
             listTemp: $('#activityEn-template'),//已报名活动模板类名  
-            moreSlot:$('.moreul'),
+            moreSlot: $('.moreul'),
             moreTemp: $('#more-template'),//已报名活动模板类名     
 
         },
@@ -102,13 +102,29 @@ $(function () {
             var obj = [{
                 url: ur,
                 data: dat,
-                needDataEmpty: false,
+                needDataEmpty: true,
                 needLogin: true,//需要判断是否登陆
                 contentTypeSearch: true,
                 callbackDone: function (json) {
                     var dataList;
+                    console.log(json)
+                    if (num == 0) {
+
+                        //给推荐活动赋值
+                        morelist = json.data.defaultRecommend
+                        //判断是否有报名时间
+                        if (morelist.actStartDate) {
+                            morelist.timeflag = true;
+                            morelist.actStartDate = morelist.actStartDate ? moment(morelist.actStartDate).format('MM月至DD日') : '';
+                            morelist.actEndDate = morelist.actEndDate ? moment(morelist.actEndDate).format('MM月至DD日') : '';
+                        }
+                        setTimeout(function () {
+                            generateTemplate(morelist, that.$e.moreSlot, that.$e.moreTemp);
+                        }, 200)
+                    }
+
                     // 待定 
-                    if ($.util.isNull(json.data.activityVOPageInfo.list)) { // 没有记录不展示
+                    if (json.data.activityVOPageInfo.list.length == 0) { // 没有记录不展示
                         if (num == 0) {
                             $('.listHasData0 .noData').show();
                             return false;
@@ -130,21 +146,8 @@ $(function () {
                         })
                         dataList = json.data.activityVOPageInfo.list;
                     }
-                    if(num == 0){
-                        
-                        //给推荐活动赋值
-                    morelist = json.data.defaultRecommend
-                    //判断是否有报名时间
-                    if(morelist.actStartDate){
-                        morelist.timeflag = true;
-                        morelist.actStartDate=morelist.actStartDate?moment(morelist.actStartDate).format('MM月至DD日'):'';
-                        morelist.actEndDate=morelist.actEndDate?moment(morelist.actEndDate).format('MM月至DD日'):'';
-                    }
-                    setTimeout(function () {
-                    generateTemplate(morelist, that.$e.moreSlot, that.$e.moreTemp);
-                }, 200)
-                    }
-                    
+                   
+
                     setTimeout(function () {
                         // 将列表插入到页面上
                         if (num == 0) {
@@ -152,7 +155,7 @@ $(function () {
                         } else {
                             generateTemplate(dataList, that.$e.ListSlot1, that.$e.listTemp);
                         }
-                        
+
 
                     }, 200)
 
