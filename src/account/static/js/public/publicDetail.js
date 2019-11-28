@@ -35,13 +35,16 @@ $(function () {
     var fundCode
     var regard = {
         gV: {
-            json: {}
+            json: {},
+            isSeven: 1,//1七年 2万份
+            time: 1,// 1月份 3 季度 6半年 12 一年 " "成立以来
         },
         init: function () {
             var that = this;
             //页面初始化
 
             that.getData();
+
 
             that.events();
         },
@@ -81,6 +84,7 @@ $(function () {
 
                     $(".tplBox").html(html);
                     that.getData1();
+                    that.getData2();
                     $.each($(".net_worth_area .net_worth_item .value"), function (i, v) {
                         if (Number($(v).text().slice(0, $(v).text().length - 1)) >= 0) {
                             $(v).addClass('value_red')
@@ -120,7 +124,7 @@ $(function () {
             // 七日年华 万份收益
             mui("body").on("tap", "#redeemNav .navSpan ", function (e) {
                 $(this).addClass('active').siblings().removeClass('active');
-                that.drawLine();
+                that.drawCircle();
             });
             mui("body").on("tap", ".lineWrap .tab span ", function (e) {
                 $(this).addClass('active').siblings().removeClass('active');
@@ -170,33 +174,50 @@ $(function () {
             var that = this;
             // 请求页面数据
             var obj = [{
-                url: site_url.fundNetWorthList_api,
+                url: site_url.prfFundNetWorthTrendChart_api,
                 data: {
                     fundCode: getQueryString('fundCode') ? getQueryString('fundCode') : '000847',
-                    pageCurrent: 1,
-                    pageSize: 3,
+                    dataRange: 1,
                 },
                 callbackDone: function (json) {
                     json = json.data.pageList
-                    var tplm = $("#dataLists1").html();
-                    var template = Handlebars.compile(tplm);
+                    console.log(json);
+                    var newData = {
+                        seven: [], //存放折线图七日年化
+                        date: [], //存放折线图收益日期
+                        big: [] //存放折线图万份收益
+                    }
                     $.each(json, function (i, v) {
-                        if (v.dayChgRat > 0) {
-                            v.dayChgRat = "+" + v.dayChgRat
-                        } else if (v.dayChgRat < 0) {
-                            v.dayChgRat = "-" + v.dayChgRat
-                        }
+                        console.log(i, v);
+                        newData.date.push(v.trdDt)
+                        newData.seven.push(v.annYldRat)
+                        newData.big.push(v.unitYld)
                     })
+                    // newData.date = [json[0].trdDt, json[Math.ceil(json.length / 2)].trdDt, json[json.length - 1].trdDt]
+                    // newData.seven = [json[0].annYldRat, json[Math.ceil(json.length / 2)].annYldRat, json[json.length - 1].annYldRat]
+                    // newData.big = [json[0].unitYld, json[Math.ceil(json.length / 2)].unitYld, json[json.length - 1].unitYld]
+                    console.log(newData, "00");
+                    that.drawLine('qrnh', newData)
+                    // that.drawCircle()
+                    // var tplm = $("#dataLists1").html();
+                    // var template = Handlebars.compile(tplm);
+                    // $.each(json, function (i, v) {
+                    //     if (v.dayChgRat > 0) {
+                    //         v.dayChgRat = "+" + v.dayChgRat
+                    //     } else if (v.dayChgRat < 0) {
+                    //         v.dayChgRat = "-" + v.dayChgRat
+                    //     }
+                    // })
 
-                    var html = template(json);
-                    $(".tplBox1").html(html);
-                    $.each($(".history_item .value"), function (i, v) {
-                        if (Number($(v).text().slice(0, $(v).text().length - 1)) >= 0) {
-                            $(v).addClass('value_red')
-                        } else {
-                            $(v).addClass('value_green')
-                        }
-                    });
+                    // var html = template(json);
+                    // $(".tplBox1").html(html);
+                    // $.each($(".history_item .value"), function (i, v) {
+                    //     if (Number($(v).text().slice(0, $(v).text().length - 1)) >= 0) {
+                    //         $(v).addClass('value_red')
+                    //     } else {
+                    //         $(v).addClass('value_green')
+                    //     }
+                    // });
                 },
                 callbackFail: function (json) {
                     tipAction(json.msg);
@@ -207,36 +228,26 @@ $(function () {
         //画折线图
         //type必传
         drawLine: function (type, data) {
+            console.log(type, data);
+
             var that = this;
             if (type == 'qrnh') {
                 //画的是七日年化折线图
                 $("#qrnhLine").removeClass("hide")
                 $(".noDataHintEcharts").addClass("hide")
                 var chartId = $('#qrnhLine')[0],
-                    xAxisData = data.profitThoudDate,
-                    seriesData = data.sevenIncomeRate;
+                    xAxisData = data.date,
+                    seriesData = data.seven;
             } else if (type == 'wfsy') {
                 //画的是万份收益折线图
                 $("#wfsyLine").removeClass("hide")
                 $(".noDataHintEcharts").addClass("hide")
                 var chartId = $('#wfsyLine')[0],
-                    xAxisData = data.profitThoudDate,
-                    seriesData = data.profitThoudValue;
-            } else if (type == 'dwjz') {
-                //画的是单位净值折线图
-                $("#dwjzLine").removeClass("hide")
-                $(".noDataHintEcharts").addClass("hide")
-                var chartId = $('#dwjzLine')[0],
-                    xAxisData = data.assetsDate,
-                    seriesData = data.unitAssets;
-            } else if (type == 'ljjz') {
-                //画的是累计净值折线图
-                $("#ljjzLine").removeClass("hide")
-                $(".noDataHintEcharts").addClass("hide")
-                var chartId = $('#ljjzLine')[0],
-                    xAxisData = data.assetsDate,
-                    seriesData = data.accumulativeAssets;
+                    xAxisData = data.date,
+                    seriesData = data.big;
             }
+            console.log(chartId);
+
             var myChart = echarts.init(chartId);
             myChart.setOption({
                 tooltip: {
@@ -342,6 +353,7 @@ $(function () {
                 }]
             });
         },
+
     }
     /*调用*/
     regard.init()
