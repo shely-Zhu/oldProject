@@ -114,14 +114,18 @@ $(function() {
 			    needLogin: true,
 			    contentTypeSearch: true,
 			    callbackDone: function(json) {
-			    	that.data.redeemRule = json.data.introduction.replace(/\r\n/g,"").split("=====");
-			    	// 判断是否有快速赎回规则
-			    	if(that.data.redeemRule.indexOf("快赎规则") !== -1) {
-			    		that.setRedeemRule(1)
-			    	} else {  // 只有普通赎回规则
-			    		that.setRedeemRule(2)
-			    		$("#redeemNav .quick").css("display", "none").removeClass('active')
-			    		$("#redeemNav .normal").addClass("active")
+			    	if(json.data.introduction && json.data.introduction!='') {
+			    		that.data.redeemRule = json.data.introduction.replace(/\r\n/g,"").split("=====");
+				    	// 判断是否有快速赎回规则
+				    	if(that.data.redeemRule.indexOf("快赎规则") !== -1) {
+				    		that.setRedeemRule(1)
+				    	} else {  // 只有普通赎回规则
+				    		that.setRedeemRule(2)
+				    		$("#redeemNav .quick").css("display", "none").removeClass('active')
+				    		$("#redeemNav .normal").addClass("active")
+			    		}
+			    	} else {
+			    		$(".dealRegMid").css("display", "none")
 			    	}
 			    }
 			}];
