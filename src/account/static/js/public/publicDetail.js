@@ -40,7 +40,9 @@ $(function () {
         init: function () {
             var that = this;
             //页面初始化
+
             that.getData();
+
             that.events();
         },
         changeVal: function (prop, num, isfalse) {
@@ -66,7 +68,6 @@ $(function () {
                 },
                 callbackDone: function (json) {
                     that.gV.json = json.data
-
                     var tplm = $("#dataLists").html();
                     var template = Handlebars.compile(tplm);
                     that.changeVal('annYldRat', 4)
@@ -76,11 +77,10 @@ $(function () {
                     that.changeVal('chgRat1y', 2)
                     that.changeVal('chgRatBgn', 2)
                     that.gV.json.trDate = that.gV.json.trDate.slice(5)
-                    console.log(that.gV.json);
                     var html = template(that.gV.json);
 
                     $(".tplBox").html(html);
-                    console.log($(".net_worth_area .net_worth_item .value"));
+                    that.getData1();
                     $.each($(".net_worth_area .net_worth_item .value"), function (i, v) {
                         if (Number($(v).text().slice(0, $(v).text().length - 1)) >= 0) {
                             $(v).addClass('value_red')
@@ -119,7 +119,44 @@ $(function () {
             });
 
         },
+        getData1: function () {
+            var that = this;
+            // 请求页面数据
+            var obj = [{
+                url: site_url.fundNetWorthList_api,
+                data: {
+                    fundCode: getQueryString('fundCode') ? getQueryString('fundCode') : '000847',
+                    pageCurrent: 1,
+                    pageSize: 3,
+                },
+                callbackDone: function (json) {
+                    json = json.data.pageList
+                    var tplm = $("#dataLists1").html();
+                    var template = Handlebars.compile(tplm);
+                    $.each(json, function (i, v) {
+                        if (v.dayChgRat > 0) {
+                            v.dayChgRat = "+" + v.dayChgRat
+                        } else if (v.dayChgRat < 0) {
+                            v.dayChgRat = "-" + v.dayChgRat
+                        }
+                    })
 
+                    var html = template(json);
+                    $(".tplBox1").html(html);
+                    $.each($(".history_item .value"), function (i, v) {
+                        if (Number($(v).text().slice(0, $(v).text().length - 1)) >= 0) {
+                            $(v).addClass('value_red')
+                        } else {
+                            $(v).addClass('value_green')
+                        }
+                    });
+                },
+                callbackFail: function (json) {
+                    tipAction(json.msg);
+                }
+            }]
+            $.ajaxLoading(obj);
+        },
 
     }
     /*调用*/

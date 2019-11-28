@@ -25,8 +25,6 @@
 	<script id="dataLists"  type="text/x-handlebars-template">
 		<div >
 		<div class="topContent">
-		
-			<!-- 客服 -->
 			<div class="service"></div>
 			<div class="day_gain">日涨幅</div>
 			<div class="day_gain_value">{{annYldRat}}%</div>
@@ -40,12 +38,10 @@
 		</div>
 		<div class="midContent">
 			<div class="max_amount_area">
-				<!-- 限大额区域 -->
 				<div class="max_amount fl"></div>
 				<div class="max_amount_value fl">单日单账户限额{{tradeLimitAmount}}万</div>
 			</div>
 			<div class="net_worth_area">
-				<!-- 净值区域 -->
 				<div class="net_worth_item">
 					<div class="title">近一周</div>
 					<div class=" value">{{chgRat1w}}%</div>
@@ -69,7 +65,6 @@
 					<span class="navSpan normal" type="2">普通赎回</span>
 				</div>
 				<div class="line_area">
-					<!-- 折线部分 -->
 				</div>
 				<div class='tab'>
 					<span class="oneMonth active">月</span>
@@ -97,24 +92,7 @@
 					<div class="item_name">累计净值</div>
 					<div class="item_name">日涨幅</div>
 				</div>
-				<!-- 用handleBar去渲染数据 -->
-				<div class="history_item">
-					<div class="item_value_1">2019-10-14</div>
-					<div class="item_value_1">2.1232</div>
-					<div class="item_value_1">2.1232</div>
-					<div class="item_value_2 value_red">+1.22%</div>
-				</div>
-				<div class="history_item">
-					<div class="item_value_1">2019-10-14</div>
-					<div class="item_value_1">2.1232</div>
-					<div class="item_value_1">2.1232</div>
-					<div class="item_value_2 value_red">+1.22%</div>
-				</div>
-				<div class="history_item">
-					<div class="item_value_1">2019-10-14</div>
-					<div class="item_value_1">2.1232</div>
-					<div class="item_value_1">2.1232</div>
-					<div class="item_value_2 value_red">+1.22%</div>
+			<div class="tplBox1">
 				</div>
 			</div>
 			<div class="dealRegArea">
@@ -149,9 +127,6 @@
 				<div class="title">
 					产品档案
 				</div>
-				<!-- <div class="arrow">
-					<span class="img"></span>
-				</div> -->
 			</div>
 			<div class="titleWrap">
 				<div class="title">
@@ -204,6 +179,18 @@
 			<div class="buy_btn">买入</div>
 		</div>
 	</div>
+		</script>
+	<script id="dataLists1"  type="text/x-handlebars-template">
+			<div >
+					{{#each this}}
+				<div class="history_item">
+					<div class="item_value_1">{{trdDt}}</div>
+					<div class="item_value_1">{{unitNav}}</div>
+					<div class="item_value_1">{{accuUnitNav}}</div>
+					<div class="item_value_2 value">{{dayChgRat}}%</div>
+				</div>
+				{{/each}}
+				</div>
 		</script>
 </body>
 
