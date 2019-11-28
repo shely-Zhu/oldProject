@@ -403,13 +403,15 @@ $(function() {
             })
 
             //折线图点击月份请求数据
-			$(document).on('click', '.lineWrap .time', function(e) {
+            mui("body").on('tap', '.lineWrap .time', function() {
+//			$(document).on('click', '.lineWrap .time', function(e) {
 				$('.lineDraw .time').removeClass('active');
 				$(this).addClass('active');
 				that.getTypeOneData( $(this).attr('num') );
             })
             //折线图点击七日年化/万份收益切换区域
-			$(document).on('click', '.lineWrap .titleWrap .title', function(e) {
+            mui("body").on('tap', '.lineWrap .titleWrap .title', function() {
+//			$(document).on('click', '.lineWrap .titleWrap .title', function(e) {
 				$('.lineWrap .titleWrap .title').removeClass('active');
 				$(this).addClass('active');
 				//判断当前画的是七日年化还是万份收益
@@ -427,15 +429,15 @@ $(function() {
 				that.drawLine( 'wfsy', that.data['qrnhWfsy'].oneMonth );
             })
 //			交易记录跳转
-			$('.jyjl').on('click',function(){
+			mui("body").on('tap', '.jyjl', function() {
 				window.location.href = site_url.transactionDetail_url+"?fundCode=" +that.data.fundCode + "&tradeNo=" + that.data.publicFundDetail.tradeNo;
 			})
 //			历史明细跳转
-			$('.historyDetail').on('click',function(){
+			mui("body").on('tap', '.historyDetail', function() {
 				window.location.href = site_url.historyDetail_url;
 			})
 //			收益明细跳转
-			$('.symx').on('click',function(){
+			mui("body").on('tap', '.symx', function() {
 				window.location.href = site_url.incomeDetail_url;
 			})
 		},
