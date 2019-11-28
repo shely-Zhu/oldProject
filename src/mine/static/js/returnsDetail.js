@@ -23,7 +23,7 @@ $(function() {
             pageCurrent: 1, //当前页码，默认为1
             pageSize: 10,
             listLength: 0,
-            projectId: splitUrl['projectId'],
+            fundCode: splitUrl['fundCode'],
         },
         init: function() {
             var that = this;
@@ -86,7 +86,7 @@ $(function() {
                 data: {
                     "pageNo": that.gV.pageCurrent, //非必须，默认为1
                     "pageSize": 10,//非必须，默认为10
-                    "projectId":that.gV.projectId,//项目编号
+                    "fundCode":that.gV.fundCode,//项目编号
                 },
                 //async: false,
                 needDataEmpty: true,

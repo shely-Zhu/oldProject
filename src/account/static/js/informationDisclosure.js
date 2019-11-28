@@ -45,7 +45,9 @@ var prvMar = {
         var obj = [{
 			url: site_url.queryReourceLabels_api,
 			// url: site_url.queryReourceList_api,
-			data: {"projectId":21072},
+			data: {
+                "'projectId'":21072
+            },
             needLogin: true, //需要判断是否登陆
             async: false,
             needDataEmpty: true, //需要判断data是否为空
