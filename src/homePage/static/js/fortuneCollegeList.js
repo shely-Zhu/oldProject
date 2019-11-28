@@ -33,13 +33,9 @@ var productPublic = {
     getData:function(){
         var that =this;
         var obj=[{
-             url: site_url.queryFortuneBanner_api,
+             url: site_url.queryBanner_api,
              data: {    
-                hmac:"", //预留的加密信息    
-                params:{//请求的参数信息 
-                    adPosition : "appWapPofIndexTop",//类型（标志位）【请参照备注】 
-                    limitCount: "5",//展示幅数    
-                }
+                type:"8"
             },
             needDataEmpty: true,
             callbackDone: function(json){
@@ -48,7 +44,7 @@ var productPublic = {
 
                 $.each(json.data.bannerList, function(i, el){
                     console.log(el)
-                    imgArr.push({imgUrl: el.imgUrl, linkUrl:el.linkUrl});
+                    imgArr.push({imgUrl: el.imageUrlShowOnline, linkUrl:el.linkUrl});
                 })
                 Slider( $('.banner'), imgArr );
                 
@@ -85,15 +81,16 @@ var productPublic = {
         var obj=[{
              url: site_url.queryFortuneCollegeFir_api,
              data: {    
-                type:"25", //类型金牌翻译官
+                type:"26", //类型金牌翻译官
             },
             needDataEmpty: true,
             callbackDone: function(json){
-                modelData=json.data.ModelVO
-                articleData=json.data.ArticleVO
-                
+                modelData=json.data.modelVO
+                articleData=json.data.list
+                console.log('我是什么',articleData)
                 // 将列表插入到页面上
-                generateTemplate(modelData,$('.translate'),$('#fortune-template'));     					
+                generateTemplate(modelData,$('.translate .title'),$('#fortune-template'));
+                generateTemplate(articleData,$('.translate .content'),$('#content-template'));     					
             },
             callbackFail: function(json){
                 console.log(json)
@@ -107,12 +104,12 @@ var productPublic = {
         var obj=[{
              url: site_url.queryFortuneCollegeFir_api,
              data: {    
-                type:"26", //类型财富早知道
+                type:"27", //类型财富早知道
             },
             needDataEmpty: true,
             callbackDone: function(json){
-                modelData=json.data.ModelVO
-                articleData=json.data.ArticleVO
+                modelData=json.data.modelVO
+                articleData=json.data.list
                 
                 // 将列表插入到页面上
                 generateTemplate(modelData,$('.fortuneVideo .title'),$('#fortuneCf-template'));     
@@ -130,13 +127,13 @@ var productPublic = {
         var obj=[{
              url: site_url.queryFortuneCollegeSec_api,
              data: {    
-                type:"27", //类型财富讲堂
+                type:"28", //类型财富讲堂
             },
             needDataEmpty: true,
             callbackDone: function(json){
                listData=json.data.list
                console.log(listData)
-               modelData=json.data.ModelVO
+               modelData=json.data.modelVO
              const listTitle = listData.map(d => {
                 return {
                  sonModelName: d.sonModelName,
@@ -147,7 +144,8 @@ var productPublic = {
                  listContent: d.list
                 }
               })
-              console.log(listContent)
+              console.log('我是listtitle',listTitle)
+              console.log('我是listContent',listContent)
               generateTemplate(modelData,$('.forum .title'),$('#forum-template'));     
               generateTemplate(listTitle,$('.broadcast'),$('#forumTitle'));
               generateTemplate(listContent,$('.forumList'),$('#forumContent'));	
@@ -167,13 +165,13 @@ var productPublic = {
         var obj=[{
              url: site_url.queryFortuneCollegeSec_api,
              data: {    
-                type:"28", //类型财富研究
+                type:"29", //类型财富研究
             },
             needDataEmpty: true,
             callbackDone: function(json){
                listData=json.data.list
-               console.log(listData)
-               modelData=json.data.ModelVO
+               console.log('我是财富研究',listData)
+               modelData=json.data.modelVO
              const listTitle = listData.map(d => {
                 return {
                  sonModelName: d.sonModelName,
@@ -184,7 +182,7 @@ var productPublic = {
                  listContent: d.list
                 }
               })
-              console.log(listContent)
+              console.log(modelData)
                generateTemplate(modelData,$('.tabContent .title'),$('#tabContent-template'));     
                generateTemplate(listTitle,$('.tab-t ol'),$('#titleTab'));
                generateTemplate(listContent,$('.tab-b'),$('#listContent'));			
@@ -218,7 +216,9 @@ var productPublic = {
 productPublic.init();
 
 window.onload=function(){
-    $('.tab-t ol li a').eq(0).addClass('active');
-    $('.broadcast .bigspan').eq(0).addClass('getColor');
-    $('.broadcast .bigspan').eq(0).css({"paddingLeft":0,"borderLeft":'none'});
+    setTimeout(()=>{
+        $('.tab-t ol li a').eq(0).addClass('active');
+        $('.broadcast .bigspan').eq(0).addClass('getColor');
+        $('.broadcast .bigspan').eq(0).css({"paddingLeft":0,"borderLeft":'none'});
+    },800)
 }

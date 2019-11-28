@@ -1,6 +1,6 @@
 require('./elasticLayer.js');
 module.exports = function( message, callback,callbackCel){
-    //点击下载按钮，显示弹框  
+    //点击下按钮，显示弹框  
     $('.commonElasticLayer').on('click',function(){ 
         var obj={
             title:'',
@@ -17,7 +17,7 @@ module.exports = function( message, callback,callbackCel){
             callbackCel: function(t){
                 if(callbackCel){
                     callbackCel(t)
-                }
+                }  
             },      
         };
         $.elasticLayer(obj)

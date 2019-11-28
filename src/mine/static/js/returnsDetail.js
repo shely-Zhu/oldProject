@@ -1,14 +1,12 @@
-require('@pathIncludJs/vendor/config.js');
-require('@pathIncludJs/vendor/zepto/callback.js');
-require('@pathIncludJs/vendor/zepto/deferred.js');
-require('@pathCommonJs/components/utils.js');
+
+require('@pathIncludJs/base.js');
 require('@pathCommonJs/components/headBarConfig.js');
 require('@pathCommonJs/ajaxLoading.js');
 
 var tipAction = require('@pathCommonJs/components/tipAction.js');
 var splitUrl = require('@pathCommonJs/components/splitUrl.js')();
 var generateTemplate = require('@pathCommonJsComBus/generateTemplate.js');
-var splitUrl = require('@pathCommonJs/components/splitUrl.js')();
+
 $(function() {
 
     var somePage = {
@@ -23,7 +21,7 @@ $(function() {
             pageCurrent: 1, //当前页码，默认为1
             pageSize: 10,
             listLength: 0,
-            projectId: splitUrl['projectId'],
+            fundCode: splitUrl['fundCode'],
         },
         init: function() {
             var that = this;
@@ -86,17 +84,18 @@ $(function() {
                 data: {
                     "pageNo": that.gV.pageCurrent, //非必须，默认为1
                     "pageSize": 10,//非必须，默认为10
-                    "projectId":that.gV.projectId,//项目编号
+                    "fundCode":that.gV.fundCode,//项目编号
                 },
                 //async: false,
                 needDataEmpty: true,
                 callbackDone: function(json) {
                     var data;
-                    if (json.data.pageList.length == 0) { // 没有记录不展示
+                    debugger
+                    if (json.data.list.length == 0) { // 没有记录不展示
                         $(".list").hide()
                         that.$e.noData.show();
                         return false;
-                    } else if(json.status == "0000"&&json.data.pageList.length > 0){
+                    } else if(json.status == "0000"&&json.data.list.length > 0){
                         data = json.data.list;
                     }
                     setTimeout(function() {
@@ -125,6 +124,13 @@ $(function() {
 
                         // 页面++
                         that.gV.pageCurrent++;
+                        Handlebars.registerHelper("if_red", function (value, options) {
+                            if (value > 0) {
+                                return options.fn(this);
+                            } else {
+                                return options.inverse(this);
+                            }
+                        });
                         // 将列表插入到页面上
                         generateTemplate(data, that.$e.recordList, that.$e.adjustmentTemp);
                         //去掉mui-pull-bottom-pocket的mui-hidden

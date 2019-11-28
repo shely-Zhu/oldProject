@@ -25,22 +25,20 @@ $(function(){
 		init:function(){         
             this.getTemplateData();
             this.events()
+            console.log(splitUrl['id'])
         },
         // 获取消息getnoticeItemData中心列表
         getTemplateData() {
         	var that=this;
             var obj=[{
-                url: site_url.getArticle_api,
+                url: site_url.findProtocolContent_api,
                 data:{
-                	articleBelong:splitUrl['articleBelong'],
-                	applyType:splitUrl['applyType']*1,
+                	id:splitUrl['id'],
                 },
                 needDataEmpty: true,
                 callbackDone: function(json) {
                 	var resData = json.data;
-					if(!!resData.h5Title){//标题
-						that.$e.HeadBarpathName.text(resData.h5Title);
-					}
+                    that.$e.HeadBarpathName.text(resData.protocolName);
 					that.$e.contentWrap.html(resData.content);       
                 },
                 callbackFail: function(json) {

@@ -390,4 +390,6 @@ module.exports = function () {
     this.superContent_url = go_url.no_url + '/account/views/public/superContent.html';
     //超宝详情页
     this.superStreasureDetail_url = go_url.no_url + '/account/views/public/superStreasureDetail.html';
+    //修改邮箱
+    this.changeMail_url = go_url.no_url + '/mine/views/mail/changeMail.html';
 };

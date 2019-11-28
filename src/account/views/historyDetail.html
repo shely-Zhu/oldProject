@@ -26,14 +26,6 @@
                 <li>万份收益(元)</li>
             </ul>
         </div>
-        <!-- <div class="list">
-            <div class="contentWrapper">
-                <div class="contentWrap">
-                    放置列表
-                </div>
-                @@include('@pathCommonViews/goTop.html')
-            </div>
-        </div> -->
         <div class="list">
             <div class="contentWrapper">
                 <ul class="mui-table-view">
@@ -56,10 +48,12 @@
             {{/each}}
         </script>
         <div class="noDataMore">
-           @@include('@pathCommonViews/noDataImg.html')
+            @@include('@pathCommonViews/noData.html',{"tipText":"暂无数据"})
         </div>
     </div>
+
     @@include('@pathInclude/views/footer.html')
+    
 
     <script src="/account/static/js/historyDetail.js"></script>
 </body>
