@@ -69,18 +69,18 @@
             <!-- 已签约不显示状态文字 -->
             {{#if appointmentSigned}}{{else}} {{#if qualified}}
             <span>{{reserveSubStatusDesc}}</span> {{else}}
-            <span class="openTip">{{reserveSubStatusDesc}}</span><span style="display:none" class="tipContent">{{reserveStatusTip}}</span> {{/if}} {{/if}}
+            <span class="openTip">{{reserveSubStatusDesc}}</span><span style="display:none" class="tipContent"></span>{{reserveStatusTip}}</span> {{/if}} {{/if}}
             <!-- 已签约不显示状态文字 -->
 
             <!-- 功能按钮 -->
             {{#if appointmentToAuthentication}}
-            <div class="toDetail">合格投资者认证</div>
+            <div class="toDetail" type="toCertif">合格投资者认证</div>
             {{else if appointmentToSign}}
-            <div class="toDetail">签署合同</div>
+            <div class="toDetail" type="toSign">签署合同</div>
             {{else if appointmentToSee}}
-            <div class="toDetail">查看合同</div>
+            <div class="toDetail" type="toSee">查看合同</div>
             {{else if appointmentToUpload}}
-            <div class="toDetail">上传汇款凭证</div>
+            <div class="toDetail" type="toUploadM">上传汇款凭证</div>
             {{/if}}
             <!-- 功能按钮 -->
             <!-- 取消预约按钮 -->
