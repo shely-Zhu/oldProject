@@ -378,6 +378,8 @@ module.exports = function () {
     this.pofForgotPassword_url = go_url.no_url + '/financial/views/publicPlacement/forgotPassword.html';
     //找回密码   跳往原生页面
     this.pofRetrievePassword_url = go_url.no_url + '/financial/views/publicPlacement/retrievePassword.html';
+	//添加银行卡
+    this.pofAddBankCard_url = go_url.no_url + '/mine/views/bankCard/addBankCard.html'
 
     /*------------------- 私募理财fang——le end ------------------------------*/
     this.optionalPublicDetail_url = go_url.no_url + '/account/views/public/optionalPublicDetail.html';
