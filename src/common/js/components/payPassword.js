@@ -28,22 +28,21 @@ module.exports = function(callback,forgetCall){
 //				将input上的内容赋值到password框上
 			 var payPwd = $(this).val().trim().split(''),
 			 inputVal = $(this).val();
-			 if(payPwd.length == 6){
-				 callback(inputVal);
-				 return false;
-			 }
-			 
-
 //			把input=tel的值赋值给password的input框
 			for(var i = 0, len = payPwd.length; i < len; i++) {
 				$(".fake-box input").eq(i).val(payPwd[i]);
-			 }
-			 $(".fake-box input").each(function() {
+			}
+			if(payPwd.length == 6){
+				 callback(inputVal);
+				return false;
+			}
+			 
+			$(".fake-box input").each(function() {
 				 var index = $(this).index();
 				 if(index >= len) {
 					 $(this).val("");
 				 }
-			 });
+			});
 		 })
 	   
 		$("#pwd-input").on("focus", function() {

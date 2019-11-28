@@ -74,8 +74,22 @@ $(function () {
 				//async: false,
 				needDataEmpty: true,
 				callbackDone: function (json) {
-					if (json.status == '0000') {
-						var data = json.data;
+					if (json.status == '0000' || json.status == '4000') {
+						// var data = json.data;
+						var data={
+							"startGainsDayStr":"03月23日",// 预计开始计算收益时间
+							"paymentGainsDayStr":"03月24日",// 预计收益到账时间
+							"purchaseAmount":"10000.00",// 起投金额
+							"purchaseAmountMask":"10,000.00",//起投金额千分位显示
+							"payAgainAmount":"1000.00",// 追加金额
+							"payAgainAmountMask":"1,000.00",//追加金额千分位
+							"fundCode": "003075",
+							"fundName": "恒添宝",  
+							"annYldRat": "3.84",// 七日年化收益率
+							 "unitYld": "0.9723",// 万分收益
+							"trdDt": "2017-04-07" // 万分 年化 发布日期
+						   }
+					
 						$("#loading").hide()
 						that.$el.fundName.html(data.fundName)
 						that.$el.fundCode.html(data.fundCode)
@@ -189,7 +203,7 @@ $(function () {
 			var that = regulatory;
 			regulatory.gV.password = val
 			var obj = [{ 
-				url: site_url.pofCashBuy_api,
+				url: site_url.pofCashBuy_api + '/mock',
 				data: {
 					operationType:that.gV.payType,
 					fundCode:that.gV.fundCode,
@@ -200,7 +214,7 @@ $(function () {
 					tradeAcco:that.gV.tradeAcco,
 					capitalMode:that.gV.capitalMode,
 					password:val,
-					tradeSource:that.gV.tradeSource,
+					tradeSource:that.gV.tradeSource
 				},
 				//async: false,
 				needDataEmpty: true,
@@ -209,41 +223,56 @@ $(function () {
 					// 将列表插入到页面上
 					var data = [] ;
 					data = json.data;
+					console.log('data',data)
 					if(json.status == '0000'){
-					   window.location.href = site_url.pofSurelyResultsDetail_url + '?applyId=' + data.allotNo + '&fundBusinCode=' + 
-					   data.fundBusinCode + "&fundCode=" + that.gV.fundCode + "&payType=" +that.gV.payType;
-					}else if(json.status == 'POF1186' || json.status == 'POF1186'){
-						//密码错误
-						$(".elasticButtons.error1").show();
-						that.$el.elasticTxt.html(json.message)
-					}else if(json.status == 'POF0192' || json.status == 'POF1353'){
-							//密码锁定
-						$(".elasticButtons.error2").show();
-						that.$el.elasticTxt.html(json.message)
-					}else if(json.status == 'POF1101' || json.status == 'POF1907' || json.status == 'POF1152' || json.status == 'POF3123'
-					|| json.status == 'POF4609' || json.status == 'POF7453' || json.status == 'POF7457' || json.status == 'POF9020'
-					|| json.status == 'POF9036'){
-						//余额不足
-						$(".elasticButtons.error2").show();
-						that.$el.elasticTxt.html(json.message)
-					}else if(json.status == 'POF0103'){
-						//基金状态[停止交易],不能做[赎回]交易
-						$(".elasticButtons.error2").show();
-						that.$el.elasticTxt.html(json.message)
-					}else if(json.status == 'POF1217'){
-						//是代表账号锁定 弹后台msg框
-						$(".elasticButtons.error3").show();
-						that.$el.elasticTxt.html(json.message)
-					}else if(json.status == 'POF1857'){
-						//提示单日单账户限额
-						$(".elasticButtons.error3").show();
-						that.$el.elasticTxt.html(json.message)
-				    }else{
-						$(".elasticButtons.error3").show();
-						that.$el.elasticTxt.html(json.message)
+					   window.location.href = site_url.pofSurelyResults_url + '?allotNo=' + data.allotNo + '&flag=into';
 					}
-
 				},
+				callbackNoData:function(json){
+					tipAction(data.message);
+				},
+				callbackFail:function(json){
+					$(".elasticButtons").hide();
+					var data = [] ;
+					data = json.data;
+					if(json.status == 'POF1186' || json.status == 'POF1186'){
+						 //密码错误
+						 $(".popup-password").show();
+						 $(".elasticButtons.error1").show();
+						 that.$el.elasticTxt.html(json.message)
+					 }else if(json.status == 'POF0192' || json.status == 'POF1353'){
+							 //密码锁定
+						 $(".popup-password").show();
+						 $(".elasticButtons.error2").show();
+						 that.$el.elasticTxt.html(json.message)
+					 }else if(json.status == 'POF1101' || json.status == 'POF1907' || json.status == 'POF1152' || json.status == 'POF3123'
+					 || json.status == 'POF4609' || json.status == 'POF7453' || json.status == 'POF7457' || json.status == 'POF9020'
+					 || json.status == 'POF9036'){
+						 //余额不足
+						 $(".popup-password").show();
+						 $(".elasticButtons.error2").show();
+						 that.$el.elasticTxt.html(json.message)
+					 }else if(json.status == 'POF0103'){
+						 //基金状态[停止交易],不能做[赎回]交易
+						 $(".popup-password").show();
+						 $(".elasticButtons.error2").show();
+						 that.$el.elasticTxt.html(json.message)
+					 }else if(json.status == 'POF1217'){
+						 //是代表账号锁定 弹后台msg框
+						 $(".popup-password").show();
+						 $(".elasticButtons.error3").show();
+						 that.$el.elasticTxt.html(json.message)
+					 }else if(json.status == 'POF1857'){
+						 //提示单日单账户限额
+						 $(".popup-password").show();
+						 $(".elasticButtons.error3").show();
+						 that.$el.elasticTxt.html(json.message)
+					 }else{
+						 $(".popup-password").show();
+						 $(".elasticButtons.error3").show();
+						 that.$el.elasticTxt.html(json.message)
+					 }
+				}
 
 			}];
 			$.ajaxLoading(obj);
@@ -281,7 +310,7 @@ $(function () {
 			}) 
 			
 			$("#transformInput").on('input propertychange',function(){
-			
+				that.gV.balance = $(this).val();
 			})
 			//清除输入框数字
 			$('body').on('tap','.deleteNum',function(){
