@@ -5,7 +5,7 @@
 // 使用 Mock
 var Mock = require('mockjs');
 
-var data = Mock.mock({
+var researchData = Mock.mock({
     code: "", //错误码     
     status: "0000",
     message: "success",
@@ -26,8 +26,36 @@ var data = Mock.mock({
             sonModelName: '公募研究'
         },
     ]
-
-
 });
 
-module.exports = data;
+var classData = Mock.mock({
+    code: "", //错误码     
+    status: "0000",
+    message: "success",
+    data: [{
+            sonModelType: 1,
+            sonModelName: '大咖直播'
+        },
+        {
+            sonModelType: 2,
+            sonModelName: '知时讲堂'
+        }
+    ]
+});
+
+/*module.exports = data;*/
+
+module.exports = [
+    {
+        params: {
+            'type' : '28'   //要在左边的对比参数上加[]，不然比对不上 稳金
+        },
+        response: classData
+    },
+    {
+        params: {
+            'type' : '29'   //要在左边的对比参数上加[]，不然比对不上 稳金
+        },
+        response: researchData
+    }
+]

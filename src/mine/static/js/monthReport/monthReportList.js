@@ -3,13 +3,9 @@
 * @author zhangyanping 2019-11-01
 */
 
-require('@pathIncludJs/vendor/config.js');
 
-//zepto模块
-require('@pathIncludJs/vendor/zepto/callback.js'); 
-require('@pathIncludJs/vendor/zepto/deferred.js'); 
+require('@pathIncludJs/base.js');
 
-require('@pathCommonJsCom/utils.js');
 require('@pathCommonJs/ajaxLoading.js');
 
 //黑色提示条的显示和隐藏

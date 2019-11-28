@@ -69,19 +69,16 @@
                </div>
             </div>
             <div class="footer mui-row">
-                    <div class="footerBtnLeft mui-col-sm-6 mui-col-xs-6">转出</div>
-                    <div class="footerBtnRight mui-col-sm-6 mui-col-xs-6">转入</div>
-            </div>
-            <div class="detailText">
-                详情
+                    <div class="footerBtnLeft mui-col-sm-6 mui-col-xs-6 rollOutBtn">转出</div>
+                    <div class="footerBtnRight mui-col-sm-6 mui-col-xs-6 shiftToBtn">转入</div>
             </div>
             <div class="titleTwo"></div>
             <script id="adjustment-template" type="text/x-handlebars-template">
                 {{#each this}}
                 <ul data-id='{{id}}' class="materialContent">
-                        <li >{{title}}</li>
-                        <li class="imgLi"><img src="/account/static/img/jiantou.png" alt=""></li>
-                    </ul>
+                    <li >{{title}}</li>
+                    <li class="imgLi"><img src="/account/static/img/jiantou.png" alt=""></li>
+                 </ul>
                 {{/each}}
             </script>
 
