@@ -92,7 +92,6 @@ $(function () {
         },
         getData: function () {
             var that = this;
-            debugger
             if ('3' == that.gV.allotType){
                 //分红
                 that.shwoBounsStatus();
@@ -147,6 +146,7 @@ $(function () {
             $.ajaxLoading(obj);
         },
         showFundStatus: function (isBuy, model) {
+            debugger
             var that = this;
             //购买状态的处理
             //填充头部信息
@@ -167,8 +167,8 @@ $(function () {
                 });
                 
                 $('.buy_info .fund_amount').html(model.tradeAmount);//买入金额
-                $('.buy_info .bank_icon').css('src', model.bankLogoUrl);//支付方式的银行logo
-                $('.buy_info .bank_name').html(model.bankName + model.bankAccount.substring(model.bankAccount.length - 4));//支付方式的银行名称
+                $('.buy_info .bank_icon').attr('src', model.bankThumbnailUrl);//支付方式的银行logo
+                $('.buy_info .bank_name').html(model.bankName + model.bankAccountMask.substring(model.bankAccountMask.length - 4));//支付方式的银行名称
                 $('.buy_info .pay_mode').html(model.payModeName);//支付方式
                 $('.buy_info .fund_date').html(model.tradeDate);//买入时间
             } else {
@@ -176,8 +176,8 @@ $(function () {
                 $('.redeem_info').removeClass('hide');
                 $('.redeem_info .item_1').html(model.fundName);//赎回产品
                 $('.redeem_info .item_2').html(model.confirmShares);//赎回份额
-                $('.redeem_info .bank_icon').attr('url', model.bankLogoUrl);//到账银行卡icon
-                $('.redeem_info .item_3').html(model.bankName + model.bankAccount.substring(model.bankAccount.length - 4));//到账银行卡描述
+                $('.redeem_info .bank_icon').attr('url', model.bankThumbnailUrl);//到账银行卡icon
+                $('.redeem_info .item_3').html(model.bankName + model.bankAccountMask.substring(model.bankAccountMask.length - 4));//到账银行卡描述
                 $('.redeem_info .item_4').html(model.tradeDate);//赎回时间
             }
             
@@ -211,7 +211,7 @@ $(function () {
                     $('.redeem_confirm_info .confirm_charge').html(model.confirmRate);//手续费
                     $('.redeem_confirm_info .confirm_amount').html(model.confirm_amount);//到账金额
                     $('.redeem_confirm_info .bank_icon').attr('url', model.bankLogoUrl);//银行logo
-                    $('.redeem_confirm_info .bank_name').html(model.bankName + model.bankAccount.substring(model.bankAccount.length - 4));//银行名称
+                    $('.redeem_confirm_info .bank_name').html(model.bankName + model.bankAccountMask.substring(model.bankAccountMask.length - 4));//银行名称
                 }
                 //确定状态显示全部确认的信息
                 that.showTradeArea(true, model);
@@ -292,8 +292,8 @@ $(function () {
                 $('.cash_buy_info').removeClass('hide');
                 $('.cash_buy_info .fund_name').html(model.fundName);//基金名称
                 $('.cash_buy_info .fund_amount').html(model.balanceMask);//买入金额
-                $('.cash_buy_info .bank_icon').css('url', model.bankThumbnailUrl);//todo 需要后台加接口 支付方式的银行logo
-                $('.cash_buy_info .bank_name').html(model.bankName + model.bankAccount.substring(model.bankAccount.length - 4));//支付方式的银行名称
+                $('.cash_buy_info .bank_icon').attr('url', model.bankThumbnailUrl);//todo 需要后台加接口 支付方式的银行logo
+                $('.cash_buy_info .bank_name').html(model.bankName + model.bankAccountMask.substring(model.bankAccountMask.length - 4));//支付方式的银行名称
                 $('.cash_buy_info .pay_mode').html(model.payModeName);//支付方式
                 $('.cash_buy_info .fund_date').html(model.applyDateTime);//买入时间
             } else {
@@ -301,13 +301,12 @@ $(function () {
                 $('.cash_redeem_info').removeClass('hide');
                 $('.cash_redeem_info .item_1').html(model.fundName);//转出产品
                 $('.cash_redeem_info .item_2').html(model.balanceMask);//转出金额
-                $('.buy_info .bank_icon').attr('url', model.bankLogoUrl);//转出至银行卡logo
+                $('.buy_info .bank_icon').attr('url', model.bankThumbnailUrl);//转出至银行卡logo
                 $('.cash_redeem_info .item_3').html(model.bankName);//转出至银行卡描述
                 $('.cash_redeem_info .item_4').html(model.applyDateTime);//转出时间
             }
         },
         shwoBounsStatus: function (){
-            debugger
             //分红没有进度条 隐藏之
             $('.header .amount').html(splitUrl()['shares']);//交易申请份额
             $('.header .yuan').html("份");//更换单位
