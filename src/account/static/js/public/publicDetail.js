@@ -34,37 +34,67 @@ getQueryString = function (name) {
 $(function () {
     var fundCode
     var regard = {
-
+        gV: {
+            json: {}
+        },
         init: function () {
             var that = this;
-
             //页面初始化
             that.getData();
             that.events();
-
+        },
+        changeVal: function (prop, num, isfalse) {
+            isfalse = isfalse === undefined ? true : false
+            key = this.gV.json[prop]
+            var value = key.toFixed(num)
+            if (isfalse) {
+                if (key > 0) {
+                    value = "+" + value
+                } else if (key < 0) {
+                    value = "-" + value
+                }
+            }
+            this.gV.json[prop] = value
         },
         getData: function () {
-
             var that = this;
+            // 请求页面数据
+            var obj = [{
+                url: site_url.newfundDetails_api,
+                data: {
+                    fundCode: getQueryString('fundCode') ? getQueryString('fundCode') : '000847'
+                },
+                callbackDone: function (json) {
+                    that.gV.json = json.data
 
-            //请求页面数据
-            // var obj = [{
-            //     url: site_url.pofFixedDetail_api,
-            //     data: {
-            //         scheduledProtocolId: getQueryString('scheduledProtocolId')
-            //     },
-            //     callbackDone: function (json) {
-            //         console.log(json);
-            //         json = json.data
+                    var tplm = $("#dataLists").html();
+                    var template = Handlebars.compile(tplm);
+                    that.changeVal('annYldRat', 4)
+                    that.changeVal('unitYld', 4, false)
+                    that.changeVal('chgRat1w', 2)
+                    that.changeVal('chgRat3m', 2)
+                    that.changeVal('chgRat1y', 2)
+                    that.changeVal('chgRatBgn', 2)
+                    that.gV.json.trDate = that.gV.json.trDate.slice(5)
+                    console.log(that.gV.json);
+                    var html = template(that.gV.json);
 
-
-
-            //     },
-            //     callbackFail: function (json) {
-            //         tipAction(json.msg);
-            //     }
-            // }]
-            // $.ajaxLoading(obj);
+                    $(".tplBox").html(html);
+                    console.log($(".net_worth_area .net_worth_item .value"));
+                    $.each($(".net_worth_area .net_worth_item .value"), function (i, v) {
+                        if (Number($(v).text().slice(0, $(v).text().length - 1)) >= 0) {
+                            $(v).addClass('value_red')
+                        } else {
+                            $(v).addClass('value_green')
+                        }
+                    });
+                    $("#HeadBarpathName").html(that.gV.json.secuSht);
+                },
+                callbackFail: function (json) {
+                    tipAction(json.msg);
+                }
+            }]
+            $.ajaxLoading(obj);
         },
         events: function () {
             var that = this;
@@ -82,6 +112,10 @@ $(function () {
             // 基金档案
             mui("body").on("tap", ".fundFile", function (e) {
                 window.location.href = site_url.pofFundFile_url + '?fundCode=000847&secuId=000846.OF'
+            });
+            // 交易规则
+            mui("body").on("tap", ".dealRegArea .rule", function (e) {
+                window.location.href = site_url.pofTransactionRules_url + '?fundCode=000847'
             });
 
         },
