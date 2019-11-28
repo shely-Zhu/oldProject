@@ -140,7 +140,8 @@ $(function() {
                 },
                 callbackNoData: function(json) {
                     $(".noDataCon").css("display", "block")
-                    $(".mui-table-view-cell").css("background", "#eeeeee")
+                    $(".mui-table-view").css({"transform": "none!important", "position": "static"})
+                    $(".mui-table-view-cell").css({"background": "#eeeeee"})
                 },
             }];
             $.ajaxLoading(obj);
