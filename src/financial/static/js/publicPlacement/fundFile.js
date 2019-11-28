@@ -68,8 +68,8 @@ $(function () {
             that.events()
             that.getData()
             that.getData2()
-            that.getData3()
-            that.getData4()
+            // that.getData3()
+            // that.getData4()
         },
         drawCircle() {
             var that = this;
@@ -254,25 +254,26 @@ $(function () {
         getData3: function (t) {
             var that = this;
 
-            // var obj3 = [{
-            //     url: site_url.prfFundBasicProfile_api,
-            //     data: {
-            //         fundCode: getQueryString('fundCode')
-            //     },
-            //     callbackDone: function (json) {
+            var obj3 = [{
+                url: site_url.prfFundDividendList_api,
+                data: {
+                    fundCode: getQueryString('fundCode'),
+                    pageCurrent: 1,
+                    pageSize: 20
+                },
+                callbackDone: function (json) {
 
-            //         json = json.data
-            //         console.log(json)
+                    json = json.data.pageList
+                    console.log(json)
 
-            //         var tplm = $("#dataLists1").html();
-            //         var template = Handlebars.compile(tplm);
-            //         json.assetValue = (json.assetValue / 100000000).toFixed(2)
-            //         var html = template(json);
-            //         $(".tplBox1").html(html);
+                    var tplm = $("#dataLists3").html();
+                    var template = Handlebars.compile(tplm);
+                    var html = template(json);
+                    $(".tplBox3").html(html);
 
-            //     },
-            // }];
-            // $.ajaxLoading(obj3);
+                },
+            }];
+            $.ajaxLoading(obj3);
         },
         getData4: function (t) {
             var that = this;
@@ -280,7 +281,9 @@ $(function () {
             var obj4 = [{
                 url: site_url.prfFundNoticeList_api,
                 data: {
-                    secuId: getQueryString('secuId')
+                    secuId: getQueryString('secuId'),
+                    pageCurrent: 1,
+                    pageSize: 10
                 },
                 callbackDone: function (json) {
 

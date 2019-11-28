@@ -37,28 +37,7 @@
 
 				</div>
 				<div class="panel panel3 tplBox3">
-					<div class="profitItemCon">
-						<div class="profitItem">
-							<div class="itemTitle">分红日期</div>
-							<div class="itemValue">2019-11-11</div>
-						</div>
-						<div class="profitItem">
-							<div class="itemTitle">权益登记</div>
-							<div class="itemValue">1,000,000,000.00</div>
-						</div>
-						<div class="profitItem">
-							<div class="itemTitle">除息日</div>
-							<div class="itemValue">2019-11-11</div>
-						</div>
-						<div class="profitItem">
-							<div class="itemTitle">每份分红</div>
-							<div class="itemValue">1222.00</div>
-						</div>
-						<div class="profitItem">
-							<div class="itemTitle">累计分红</div>
-							<div class="itemValue">1223333.00</div>
-						</div>
-					</div>
+
 					<div class="profitItemCon">
 						<div class="profitItem">
 							<div class="itemTitle">分红日期</div>
@@ -170,7 +149,7 @@
 							</div>
 							{{#each industryAllocation}}
 							<div class="industryConfigurationTr flex justify_center align_center">
-								<div class="industryConfigurationTd">{{industryName}}</div>
+								<div class="industryConfigurationTd">{{industryName }}</div>
 								<div class="industryConfigurationTd">{{industryNav}}</div>
 								<div class="industryConfigurationTd">{{industryAllocationRatio}}</div>
 							</div>
@@ -180,7 +159,32 @@
 	</div>
 	</script>
 	<script id="dataLists3"  type="text/x-handlebars-template">
-	33
+	<div>
+		{{#each this}}
+		<div class="profitItemCon">
+			<div class="profitItem">
+				<div class="itemTitle">分红日期</div>
+				<div class="itemValue">{{dividendOfDate}}</div>
+			</div>
+			<div class="profitItem">
+				<div class="itemTitle">权益登记</div>
+				<div class="itemValue">1,000,000,000.00</div>
+			</div>
+			<div class="profitItem">
+				<div class="itemTitle">除息日</div>
+				<div class="itemValue">{{exRdDtOtc}}</div>
+			</div>
+			<div class="profitItem">
+				<div class="itemTitle">每份分红</div>
+				<div class="itemValue">1222.00</div>
+			</div>
+			<div class="profitItem">
+				<div class="itemTitle">累计分红</div>
+				<div class="itemValue">{{accuCash}}</div>
+			</div>
+		</div>
+		{{/each}}
+	</div>
 	</script>
 	<script id="dataLists4"  type="text/x-handlebars-template">
 	<div class="noticeWrap">
