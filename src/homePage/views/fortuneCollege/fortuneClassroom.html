@@ -42,14 +42,24 @@
     </script>
 
     <script id="second-template" type="text/x-handlebars-template">
-        {{! 左侧页面列表}} {{#each this}}
-        <div class="roomItem item">
-            <div class="roomVideo">
-                 <img class="play" src="/homePage/static/img/bofang@2x.png" alt="">
+        {{! 左侧页面列表}} 
+        {{#each this}}
+        {{#if isLive}}
+            <div class="roomItem item">
+                <div class="roomVideo">
+                    <img class="articalImg" src="{{imageAttachId}}" alt="">
+                    <img class="play" src="/homePage/static/img/bofang@2x.png" alt="">
+                </div>
+                <div class="roomTitle">{{title}}</div>
+                <div class="roomContent">{{intro}}</div>
             </div>
-            <div class="roomTitle">{{title}}</div>
-            <div class="roomContent">{{intro}}</div>
-        </div>
+        {{else}}
+            <div class="roomItem knowledgeItem">
+                <div class="roomImg"><img src="{{imageAttachId}}" alt=""></div>
+                <div class="roomTitle">{{title}}</div>
+                <div class="roomContent">{{intro}}</div>
+           </div>
+        {{/if}}
         {{/each}}
     </script>
     @@include('@pathInclude/views/footer.html')
