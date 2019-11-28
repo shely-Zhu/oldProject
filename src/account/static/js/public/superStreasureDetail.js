@@ -169,8 +169,8 @@ $(function() {
 	        var obj = [{
 			    url: site_url.fundNetWorthTrendChart_api, 
 			    data: {
-					fundCode:"000847",
-					// fundCode:that.gL.cashFundDetail.fundCode,
+					// fundCode:"000847",
+					fundCode:that.gL.cashFundDetail.fundCode,
 					dataRange:t||1,
 			    },
 			    needLogin: true,
@@ -192,8 +192,8 @@ $(function() {
 	        var obj = [{
 			    url: site_url.findProtocolBasic_api, 
 			    data: {
-					// code:that.gL.cashFundDetail.fundCode,
-					code:"003075",
+					code:that.gL.cashFundDetail.fundCode,
+					// code:"003075",
 					template:"0",
 			    },
 			    needLogin: true,
