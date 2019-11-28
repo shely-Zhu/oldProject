@@ -21,13 +21,19 @@ $(function() {
     var privateDetail = {
         gL: {
 			shuju:[],
-			time:[]
+			time:[],
+			cashFundDetail:"",
         },
         init:function(){
-            var that = this;
+			var that = this;
+			that.gL.cashFundDetail = JSON.parse(sessionStorage.getItem("cashFundDetail"));
+			$(".totalM").text(that.gL.cashFundDetail.totalMoneyMask)
+			$(".incomeMask").text(that.gL.cashFundDetail.incomeMask)
+			$(".addupIncomeMask").text(that.gL.cashFundDetail.addupIncomeMask)
+			$("#HeadBarpathName").text(that.gL.cashFundDetail.fundName)
+			$(".titleTwo").text(that.gL.cashFundDetail.fundCode)
             //事件绑定
             that.event();	
-			that.getData()
 			that.getTimeReq()
 			that.ruleReq()
         },
@@ -149,31 +155,14 @@ $(function() {
         },
 
         //获取初始数据
-		getData: function(){
-			var that = this;
-			//产品详情接口
-			var obj = [{
-			    url: site_url.getTotalAssetsCash_api, 
-			    data: {
-			    	
-			    },
-			    needLogin: true,
-			    callbackDone: function(json) {
-					var jsonData = json.data;
-			    	$(".totalM").text(jsonData.	totalMoneyMask)
-			    	$(".incomeMask").text(jsonData.incomeMask)
-			    	$(".addupIncomeMask").text(jsonData.addupIncomeMask)
-			    },
-			}];
-			$.ajaxLoading(obj);			
-		},
 	
 		getTimeReq:function(t){
 			var that = this;
 	        var obj = [{
 			    url: site_url.fundNetWorthTrendChart_api, 
 			    data: {
-					fundCode:"000847",
+					// fundCode:"000847",
+					fundCode:that.gL.cashFundDetail.fundCode,
 					dataRange:t||1,
 			    },
 			    needLogin: true,
@@ -195,7 +184,8 @@ $(function() {
 	        var obj = [{
 			    url: site_url.findProtocolBasic_api, 
 			    data: {
-					code:"",
+					code:that.gL.cashFundDetail.fundCode,
+					// code:"",
 					template:"0",
 			    },
 			    needLogin: true,
@@ -215,12 +205,10 @@ $(function() {
 				that.getTimeReq($(this).attr('num'))
 			})
 			$(document).on('click', '.materialContent', function(e) {
-				console.log($(this).attr('data-id'))
-			
-
+				var id = $(this).attr('data-id')
+				window.location.href = `${site_url.superContent_url}?id=${id}`;
             })
         }
-
     } 
     privateDetail.init()
 })

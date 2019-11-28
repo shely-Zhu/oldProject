@@ -92,11 +92,12 @@ $(function() {
                 needDataEmpty: true,
                 callbackDone: function(json) {
                     var data;
-                    if (json.data.pageList.length == 0) { // 没有记录不展示
+                    debugger
+                    if (json.data.list.length == 0) { // 没有记录不展示
                         $(".list").hide()
                         that.$e.noData.show();
                         return false;
-                    } else if(json.status == "0000"&&json.data.pageList.length > 0){
+                    } else if(json.status == "0000"&&json.data.list.length > 0){
                         data = json.data.list;
                     }
                     setTimeout(function() {
@@ -125,6 +126,13 @@ $(function() {
 
                         // 页面++
                         that.gV.pageCurrent++;
+                        Handlebars.registerHelper("if_red", function (value, options) {
+                            if (value > 0) {
+                                return options.fn(this);
+                            } else {
+                                return options.inverse(this);
+                            }
+                        });
                         // 将列表插入到页面上
                         generateTemplate(data, that.$e.recordList, that.$e.adjustmentTemp);
                         //去掉mui-pull-bottom-pocket的mui-hidden

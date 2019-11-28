@@ -48,7 +48,12 @@
             </div>
             <div id="bank_list_area"></div>
         </div>
-        <div class="list" id="pageLists"></div>
+        <div class="list" id="cashPageLists">
+            <!-- 现金宝列表 -->
+        </div>
+        <div class="list" id="pageLists">
+            <!-- 普通基金列表 -->
+        </div>
         <footer class="hide">
             暂无更多数据
         </footer>
@@ -114,6 +119,44 @@
                     {{/if}}
                     <!-- 封闭期盖章 本期去掉了 -->
                     <!-- <div class="closed"></div> -->
+                </div>
+            </div>
+            
+        </div>
+		{{/each}}
+    </script>
+
+    <!-- 现金宝列表 -->
+    <script id="cashLists" type="text/x-handlebars-template">
+		{{! 左侧页面列表}}
+		{{#each this}}
+        <div class="hold_item" fundName={{fundName}} fundCode={{fundCode}}>
+            <div class="divider"></div>
+            <div class="title">
+                <div class="divider_tag"></div>
+                <div class="hold_name">{{fundName}}</div>
+                <span class="iconfont fr">&#xe636;</span>
+            </div>
+            <div class="content">
+                <div class="content_bottom">
+                    <div class="text_gray position_c">金额(元)</div>
+                    <div class="text_gray position_d">昨日收益(元)</div>
+                    <div class="position_tip"></div>
+                    <div class="text_gray position_e">持有收益(元)</div>
+                    <div class="text_black position_f">{{totalMoneyMask}}</div>
+                    <div class="text_black position_g">{{incomeMask}}</div>
+                    {{#if_than_0 holdIncome}}
+                        <div class="text_red position_h">+{{holdIncomeMask}}</div>
+                    {{else}}
+                        <div class="text_green position_h">{{holdIncomeMask}}</div>
+                    {{/if_than_0}}
+                    <!-- todo 需要判断字段来是否显示 -->
+                    {{#if isBuyFlag}}
+                        <div class="buy_btn fr">买入</div>
+                    {{/if}}
+                    {{#if isRedemptionFlag}}
+                        <div class="redeem_btn fr">赎回</div>
+                    {{/if}}
                 </div>
             </div>
             

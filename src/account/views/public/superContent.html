@@ -10,12 +10,14 @@
 </head>
 <body>
         @@include('@pathInclude/views/header.html')
-        @@include('@pathCommonViews/headBarConfig.html',{"bgColors":"#2C3E77,#273971","showType":"0","pathName":""})
-
-      
+        <div id="richTemplateWrap">
+                @@include('@pathCommonViews/headBarConfig.html',{"bgColors":"#000,#eee","showType":"0","pathName":""})    
+                <div id="contentWrap">
+                    
+                </div>   
+            </div>          
 
     @@include('@pathInclude/views/footer.html')
-    <script src="/include/js/vendor/echarts/echarts.min.js"></script>
     <script src="/account/static/js/public/superContent.js"></script>
 </body>
 </html>

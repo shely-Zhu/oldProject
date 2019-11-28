@@ -4,16 +4,21 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	@@include('@pathInclude/views/meta.html') 
-	<link rel="stylesheet" href="/include/css/articleTemplate.css">  
+	@@include('@pathInclude/views/meta.html')
+	<link rel="stylesheet" href="/include/css/articleTemplate.css">
 	<title>模板</title>
 </head>
 <body>
     <div id="richTemplateWrap">
-    	@@include('@pathCommonViews/headBarConfig.html',{"bgColors":"#000,#eee","showType":"0","pathName":"模板"})    
+    	@@include('@pathCommonViews/headBarConfig.html',{"bgColors":"#000,#eee","showType":"0","pathName":"模板"})
         <div id="contentWrap">
-        	
-        </div>   
+
+        </div>
+
+
+        <div class="btnButton">
+            <a href="javascript:;" class="mui-btn btnHref" >立即转入现金管理</a>
+        </div>
     </div>
 
 	@@include('@pathInclude/views/footer.html')

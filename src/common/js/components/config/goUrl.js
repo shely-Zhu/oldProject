@@ -4,7 +4,7 @@
 
 
 
-module.exports = function() {
+module.exports = function () {
 
     this.login_html_url = go_url.no_url + '/login'; //手动触发登录,需将redirectUrl值传回去
     this.logOut_html_url = go_url.no_url + '/logout.action'; //退出登录
@@ -312,7 +312,7 @@ module.exports = function() {
     /*-------------------------------我的页面 start -----------------------*/
     //登录日志查询页面
     this.journal_url = go_url.no_url + '/mine/views/journal.html'
-        //承接h5的模板页地址
+    //承接h5的模板页地址
     this.examplePage_url = go_url.no_url + '/mine/views/examplePage.html';
     /*-------------------------------我的页面 end -----------------------*/
 
@@ -349,7 +349,23 @@ module.exports = function() {
     // 月度报告产品咨询
     this.consultProduct_url = go_url.no_url + '/mine/views/monthReport/consultProduct.html';
     //自选公募详情页
+
+    /*------------------- 私募理财fang——le start ------------------------------*/
+
+    // 转入，转出结果页面，定投结果
+    this.pofSurelyResults_url = go_url.no_url + '/financial/views/publicPlacement/surelyResults.html';
+    // 转入页面
+    this.pofCashTransformIn_url = go_url.no_url + '/financial/views/publicPlacement/cashTransformIn.html';
+    // 转出页面	
+    this.pofCashTransformOut_url = go_url.no_url + '/financial/views/publicPlacement/cashTransformOut.html';
+    // 定投详情
+    this.pofCastSurelyDetails_url = go_url.no_url + '/financial/views/publicPlacement/castSurelyDetails.html';
+    // 修改定投
+    this.pofOrdinarySetThrow_url = go_url.no_url + '/financial/views/publicPlacement/ordinarySetThrow.html';
+
+    /*------------------- 私募理财fang——le end ------------------------------*/
     this.optionalPublicDetail_url = go_url.no_url + '/account/views/public/optionalPublicDetail.html';
+
     // 收益分配明细页
     this.incomeDistribution_url = go_url.no_url + '/account/views/private/incomeDistribution.html';
     // 私募交易明细
@@ -370,4 +386,8 @@ module.exports = function() {
     this.informationDisclosure_url = go_url.no_url + '/account/views/informationDisclosure.html';
     // 公募交易详情查询
     this.publicTradeDetail_url = go_url.no_url + '/account/views/publicTradeDetail/publicTradeDetail.html';
+    // 超宝详情--内容页
+    this.superContent_url = go_url.no_url + '/account/views/public/superContent.html';
+    //超宝详情页
+    this.superStreasureDetail_url = go_url.no_url + '/account/views/public/superStreasureDetail.html';
 };

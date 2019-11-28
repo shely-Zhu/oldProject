@@ -18,8 +18,12 @@
             <div class="list">
                 <div class="contentWrapper">
                     <ul class="mui-table-view">
-                        <li class="mui-table-view-cell" id="informsListWrapper">
-                            <!-- 放置列表 -->
+                        <li class="mui-table-view-cell">
+                            <div id="informsListWrapper"></div>
+                            <div class="noDataCon">
+                                <img class="emptyImg" src="/homePage/static/img/home_Empty.png" alt="">
+                                您暂时没有通知
+                            </div>
                         </li>
                         @@include('@pathCommonViews/goTop.html')
                     </ul> 

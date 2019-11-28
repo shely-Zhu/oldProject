@@ -58,7 +58,7 @@ var prvMar = {
                 }
 
                 if(labelArr.length == 0){
-                    $('.without.noData').show();
+                    $(".noDataOne").show()
                 }else{
                     labelArr.map(function(x) {
                         var ele = {};

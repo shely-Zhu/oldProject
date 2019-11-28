@@ -80,6 +80,11 @@
 			}
 			span{
 				color:@9B9B9B;
+				border-left:1px solid @272727;
+				padding-left:0.04rem;
+				display:inline-block;
+				margin-right:0.04rem;
+				line-height:0.3rem;
 			};
 		}
 		.content{
@@ -159,7 +164,7 @@
 		}
 		div{
 			/deep/ .mui-scroll-wrapper{
-				height:4rem !important;
+				height:3.7rem !important;
 				width:100% !important;
 			}
 			/deep/ .mui-scroll-wrapper img{
@@ -175,6 +180,23 @@
 			.mui-control-item{
 				padding-right:0.3rem !important;
 			}
+			.conten .con{
+				h4{
+					color:#272727;
+					font-size:0.32rem;
+					text-align: left;
+					line-height:0.45rem;;
+					margin-top:0.2rem;
+					margin-bottom:0.1rem;
+					font-weight: bold;
+				}
+				p{
+					color:#272727;
+					font-size:0.26rem;
+					text-align: left;
+					line-height: 0.28rem;
+				}
+			}
 		}
 	}
 	.tabContent{
@@ -185,14 +207,6 @@
 				ol{
 					display:-webkit-box;
 					li{
-						&:first-child{
-							a{
-								color:@272727;
-								font-weight: bold;
-								font-size:0.28rem;
-								border-bottom:2px solid @061D6A;
-							}
-						}
 						-webkit-box-flex:1;
 						line-height:0.7rem;
 						color:@9B9B9B;
@@ -200,18 +214,12 @@
 						text-align: center;
 						a{
 							padding-bottom:0.2rem;
-							// &:first-child{
-							// 	color:@272727;
-							// 	font-weight: bold;
-							// 	font-size:0.28rem;
-							// 	border-bottom:2px solid @061D6A;
-							// }
 						}
 						.active{
 							color:@272727;
-								font-weight: bold;
-								font-size:0.28rem;
-								border-bottom:2px solid @061D6A;
+							font-weight: bold;
+							font-size:0.28rem;
+							border-bottom:2px solid @061D6A;
 						}
 					}
 				}

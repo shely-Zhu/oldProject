@@ -24,10 +24,18 @@ $(function(){
 		//获取页面元素
 		$e:{
 			contentWrap:$('#contentWrap'),
-			HeadBarpathName:$("#HeadBarpathName")
+			HeadBarpathName:$("#HeadBarpathName"),
+            btnButton:$(".btnButton"),
+            btnHref:$(".btnHref"),
+
 		},
+        gV: { // 全局变量
+
+            recomTypes: "", //按钮跳转链接
+
+        },
 		//页面初始化函数
-		init:function(){         
+		init:function(){
             this.getTemplateData();
             this.events()
         },
@@ -52,18 +60,31 @@ $(function(){
 //							"margin":"1rem 0 0",
 							"padding":".5rem .5rem 0"
 						})
-					}
-					
-            
+					}else if(resData.h5Type == "3"){
+
+                        //给底部按钮加文字和跳转链接
+                        that.$e.btnButton.html(resData.buttonLabel).show();
+
+                        that.recomTypes = resData.recomTypes;
+                    }
+
                 },
                 callbackFail: function(json) {
                     tipAction(json.message);
                 }
-            }];                        
-            $.ajaxLoading(obj); 
+            }];
+            $.ajaxLoading(obj);
         },
         events() {
             var that = this;
+
+            that.$e.btnHref.on('tap', function() {
+
+                //1-超级现金宝;2-普通基金;3-私募基金;4-超宝产品列表;5-私募产品列表
+                //后续找小宇确认跳转逻辑和连接
+                if(that.recomTypes == "")
+                window.location.href = "";
+            })
         },
 	};
 	templatePage.init();
