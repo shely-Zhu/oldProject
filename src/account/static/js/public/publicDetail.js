@@ -81,7 +81,7 @@ $(function () {
             });
             // 基金档案
             mui("body").on("tap", ".fundFile", function (e) {
-                window.location.href = site_url.pofFundFile_url + '?fundCode=000847'
+                window.location.href = site_url.pofFundFile_url + '?fundCode=000847&secuId=000846.OF'
             });
 
         },
