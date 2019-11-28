@@ -146,7 +146,7 @@ function GetRequest() {
     }
 //格式化样式
 function ClearStyle(){
-    $("#HeadBarConfigBox").css({"background":"none","color":"#fff"});
+    $("#HeadBarConfigBox").css({"background":"rgba(0,0,0,0)","color":"#fff"});
     $("#HeadBarConfigBox a").css({"color":"#fff"});
 }    
     

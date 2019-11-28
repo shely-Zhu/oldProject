@@ -15,45 +15,46 @@
 		@@include('@pathCommonViews/headBarConfig.html',{"bgColors":"#595E6F,#1C2135","showType":"1","pathName":"产品详情"})
 		<div class="privateDetailTitle">
 			<!-- 产品基金名称 -->
-			<div class="productName">(银杏43号) 恒天财富稳季隆私募投资基金</div>
-			<p class="introduction">这里是一句话产品详情介绍</p>
+			<div class="productName"></div>
+			<p class="introduction"></p>
 			<!-- 单位净值、起投金额、产品期限 -->
 			<div class="privateDetailList">
-				<div class="netValueWord"><span class="iconfont">&#xe60a;</span>单位净值(元)(09-21)</div>
+				<div class="netValueWord"><span class="iconfont">&#xe60a;</span>单位净值(元)(<span class="netValueDate"></span>)</div>
 				<div class="mui-row productInfoList">
+					<!-- 单位净值 -->
 					<div class="mui-col-xs-6">
-						<span class="netValue">1.0000</span>
+						<span class="netValue"></span>
 					</div>
+					<!-- 起投金额 -->
 					<div class="mui-col-xs-3 investmentList">
 						<p class="investmentAmountTip">起投金额</p>
-						<p class="investmentAmountNum">100万</p>
+						<p class="investmentAmountNum"></p>
 					</div>
+					<!-- 产品期限 -->
 					<div class="mui-col-xs-3 investmentList">
 						<p class="productDeadlineTip">产品期限</p>
-						<p class="productDeadlineNum">3个月</p>
+						<p class="productDeadlineNum"></p>
 					</div>
 				</div>
 				<div class="productLabel">
-					<span>关注度高</span>
+					<!-- <span>关注度高</span>
 					<span>电子合同</span>
-					<span>可转让</span>
+					<span>可转让</span> -->
 				</div>
 			</div>
-			<div class="appointment">预约资质：私募合格投资者或资管合格投资者</div>
+			<div class="appointment">预约资质：<span></span></div>
 		</div>
 		<div class="mui-content midContent">
 			<div class="content">
 				<div class="tabsBox">
 					<div class="tabs">
-						<!-- <li class="active">基本信息</li> -->
-						<li>基本信息</li>
-						<li class="active">交易须知</li>
+						<li class="active">基本信息</li>
+						<li>交易须知</li>
 						<li>产品材料</li>
 					</div>
 				</div>
 				<div class="wrap">
-					<!-- <div class="panel panel1 active"> -->
-					<div class="panel panel1">
+					<div class="panel panel1 active">
 						<!-- 私募基金产品详情折线图 -->
 						<div class="hide lineWrap">
 				 			<div class="clearfix titleWrap typeNo5Wrap">
@@ -129,7 +130,7 @@
 							</div>
 						</div>
 					</div>
-					<div class="panel panel2 active">
+					<div class="panel panel2">
 						<div class="textContent">
 							<div class="textTitle">产品费率</div>
 							<div class="detailText">
@@ -215,6 +216,12 @@
 					</div>
 				</div>
 			</div>		
+		</div>
+		<div class="investmentTip">投资前请您认真阅读《基金合同》《招募说明书》《风险揭示书》等法律文件，了解产品风险，基金过往业绩不预示未来表现，理财有风险，投资需谨慎。</div>
+
+		<div class="immediatelyBuy">
+			<div class="buyRate">认购/申购费率 0%</div>
+			<div class="buyButton">立即预约</div>
 		</div>
 		
 	</div>

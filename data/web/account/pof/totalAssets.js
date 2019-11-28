@@ -49,7 +49,7 @@ var mymessage = Mock.mock({
 
                 "fundCode": "003075",
 
-                "fundName": "中融货币A",
+                "fundName": "现金宝产品A",
 
                 "inTransitNum": "0", // 待确认交易笔数
 
@@ -92,7 +92,7 @@ var mymessage = Mock.mock({
 
                 "fundCode": "003075",
 
-                "fundName": "中融货币F",
+                "fundName": "现金宝产品F",
 
                 "inTransitNum": "0", // 待确认交易笔数
 

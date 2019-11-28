@@ -1,0 +1,71 @@
+<!-- 查看已签署材料
+ @author caoqihai 2019-11-28 -->
+
+
+
+ <!DOCTYPE html>
+ <html lang="en">
+ 
+ <head>
+     @@include('@pathInclude/views/meta.html')
+     <link rel="stylesheet" href="/account/static/css/private/seeSign.css">
+ 
+     <title>查看已签署材料</title>
+ </head>
+ 
+ <body>
+     <div class="container">
+         @@include('@pathCommonViews/headBarConfig.html',{"pathName":"查看已签署材料"})
+         <div class="br"></div>
+         <!-- @@include('@pathCommonViews/load.html') -->
+         <!-- 加载中loading -->
+         @@include('@pathCommonViews/loading/listLoading.html')
+
+         <div class="list">
+            <div class="contentWrapper">
+                <ul class="mui-table-view">
+                    <li class="mui-table-view-cell">
+                        <div class="contentWrap">
+                                <!-- 放置列表 -->
+                                <div class="con">
+                                    <div class="con-title">稳裕1号基金稳裕1号基金稳裕1号基金稳裕1号基金</div>
+                                    <a href="javaScript:;" class="iconfont iconone" href="javascript:;">&#xe67d;</a>
+                                </div>
+                                <div class="con">
+                                    <div class="con-title">稳裕1号基金稳裕1号基金稳裕1号基金稳裕1号基金</div>
+                                    <a href="javaScript:;" class="iconfont iconone" href="javascript:;">&#xe67d;</a>
+                                </div>
+                                <div class="con">
+                                    <div class="con-title">稳裕1号基金稳裕1号基金稳裕1号基金稳裕1号基金</div>
+                                    <a href="javaScript:;" class="iconfont iconone" href="javascript:;">&#xe67d;</a>
+                                </div>
+                        </div>
+                    </li>
+                    @@include('@pathCommonViews/goTop.html')
+                </ul>
+            </div>
+        </div>
+
+         <!-- 暂无数据 -->
+         @@include('@pathCommonViews/noDataImg.html',{"tipText":"暂无数据"})
+     </div>
+ 
+     <script id="list-template" type="text/x-handlebars-template">
+        {{#each this}}
+        <div class="con">
+            <div class="con-title">稳裕1号基金稳裕1号基金稳裕1号基金稳裕1号基金</div>
+            <a href="javaScript:;" class="iconfont iconone" href="javascript:;">&#xe67d;</a>
+        </div>
+        {{/each}}
+    </script>
+ 
+ 
+ @@include('@pathInclude/views/footer.html')
+ <script src="/account/static/js/private/seeSign.js"></script>
+ 
+ 
+ 
+ 
+ </body>
+ 
+ </html>
