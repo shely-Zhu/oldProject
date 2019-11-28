@@ -73,9 +73,9 @@ $(function () {
                 var fundCode = that.gV.data.fundCode;
                 window.location.href=site_url.productPublicDetail_url;
             })
+
             mui("body").on('tap', '.cancel_order', function (e) {
                 //去撤单 需要先输入交易密码
-                $("#passwordWrap").show();
                 payPass(function (password){
                     //输入密码的回调
                     that.cancelOrder(password);
