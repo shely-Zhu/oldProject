@@ -49,7 +49,7 @@ $(function () {
             })
             $('.cancel_order').on('click', function(){
                 //去撤单 需要先输入交易密码 todo
-                $("#passwordWrap").show();
+//              $("#passwordWrap").show();
                 payPass(function (password){
                     //输入密码的回调
                     that.cancelOrder(password);
