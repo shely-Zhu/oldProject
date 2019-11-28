@@ -22,119 +22,69 @@ $(function () {
         },
         //全局变量
         gV: {
-            pieData: [
-                {
-                    name: "现金",
-                    value: "0.2",
-                    itemStyle: {
-                        normal: {
-                            color: {
-                                colorStops: [{
-                                    offset: 0,
-                                    color: "#FBE2BD"
-                                }, {
-                                    offset: 1,
-                                    color: "#D69549"
-                                }],
-                                global: false,
-                                type: "linear",
-                                x: 0,
-                                x2: 1,
-                                y: 0,
-                                y2: 1
-                            }
-                        }
-                    }
-                },
-                {
-                    name: "股票",
-                    value: "0.8",
-                    itemStyle: {
-                        normal: {
-                            color: {
-                                colorStops: [{
-                                    offset: 0,
-                                    color: "#D8D8D8"
-                                }, {
-                                    offset: 1,
-                                    color: "#D8D8D8"
-                                }],
-                                global: false,
-                                type: "linear",
-                                x: 0,
-                                x2: 1,
-                                y: 0,
-                                y2: 1
-                            }
-                        }
+            itemStyle1: {
+                normal: {
+                    color: {
+                        colorStops: [{
+                            offset: 0,
+                            color: "#D8D8D8"
+                        }, {
+                            offset: 1,
+                            color: "#D8D8D8"
+                        }],
+                        global: false,
+                        type: "linear",
+                        x: 0,
+                        x2: 1,
+                        y: 0,
+                        y2: 1
                     }
                 }
-            ],
-            pieInnerData: [
-                {
-                    name: "现金",
-                    value: "0.2",
-                    itemStyle: {
-                        normal: {
-                            color: {
-                                colorStops: [{
-                                    offset: 0,
-                                    color: "#CB9D65"
-                                }, {
-                                    offset: 1,
-                                    color: "#D69549"
-                                }],
-                                global: false,
-                                type: "linear",
-                                x: 0,
-                                x2: 1,
-                                y: 0,
-                                y2: 1
-                            }
-                        }
-                    }
-                },
-                {
-                    name: "股票",
-                    value: "0.8",
-                    itemStyle: {
-                        normal: {
-                            color: {
-                                colorStops: [{
-                                    offset: 0,
-                                    color: "#C1C1C1"
-                                }, {
-                                    offset: 1,
-                                    color: "#C1C1C1"
-                                }],
-                                global: false,
-                                type: "linear",
-                                x: 0,
-                                x2: 1,
-                                y: 0,
-                                y2: 1
-                            }
-                        }
+            },
+            itemStyle2: {
+                normal: {
+                    color: {
+                        colorStops: [{
+                            offset: 0,
+                            color: "#FBE2BD"
+                        }, {
+                            offset: 1,
+                            color: "#D69549"
+                        }],
+                        global: false,
+                        type: "linear",
+                        x: 0,
+                        x2: 1,
+                        y: 0,
+                        y2: 1
                     }
                 }
-            ]
+            },
+            pieData: [],
         },
         //页面初始化函数
         init: function () {
             var that = this;
             that.events()
             that.getData()
+            that.getData2()
+            // that.getData3()
+            // that.getData4()
         },
         drawCircle() {
             var that = this;
             var pieChart = echarts.init($('.circle')[0]);
-            console.log(that.gV.pieData)
+            var optionData = []
+            var pieData = that.gV.pieData
+            pieData.forEach(n => {
+                optionData.push(n.name)
+            })
             // 指定图表的配置项和数据
             option = {
                 legend: {
                     orient: 'vertical',
                     x: 'left',
-                    data: ['现金', '股票'],
+                    data: optionData,
                     icon: "roundRect",
                     itemWidth: 10,  // 设置宽度
                     itemHeight: 10, // 设置高度
@@ -142,10 +92,10 @@ $(function () {
                     x: '60%',
                     y: '35%',
                     formatter: function (name) {
-                        if (name == "现金") {
-                            return " {title|" + name + "}  {value|" + Number(that.gV.pieData[0].value) * 100 + "%}"
-                        } else if (name == "股票") {
-                            return " {title|" + name + "}  {value|" + Number(that.gV.pieData[1].value) * 100 + "%}"
+                        for (var i = 0; i < pieData.length; i++) {
+                            if (name === pieData[i].name) {
+                                return " {title|" + name + "}  {value|" + pieData[i].value + "%}"
+                            }
                         }
                     },
                     textStyle: {
@@ -204,7 +154,7 @@ $(function () {
                                 show: false
                             }
                         },
-                        data: that.gV.pieData
+                        data: pieData
                     },
                     {
                         name: '',
@@ -224,7 +174,8 @@ $(function () {
                                 show: false
                             }
                         },
-                        data: that.gV.pieInnerData,
+
+                        data: pieData
                     }
                 ]
             };
@@ -236,13 +187,11 @@ $(function () {
             var obj1 = [{ //基金基本概况查询
                 url: site_url.prfFundBasicProfile_api,
                 data: {
-                    fundCode: getQueryString('fundCode')
+                    fundCode: getQueryString('fundCode') ? getQueryString('fundCode') : '000847'
                 },
                 callbackDone: function (json) {
 
                     json = json.data
-                    console.log(json)
-
                     var tplm = $("#dataLists1").html();
                     var template = Handlebars.compile(tplm);
                     json.assetValue = (json.assetValue / 100000000).toFixed(2)
@@ -252,15 +201,45 @@ $(function () {
                 },
             }];
             $.ajaxLoading(obj1);
+        },
+        getData2: function (t) {
+            var that = this;
             var obj2 = [{ //基金投资组合信息查询
                 url: site_url.prfFnvestmentPortfolio_api,
                 data: {
-                    fundCode: getQueryString('fundCode')
+                    fundCode: getQueryString('fundCode') ? getQueryString('fundCode') : '000847'
                 },
                 callbackDone: function (json) {
 
                     json = json.data
-                    console.log(json)
+                    var pieData = []
+                    json.assetAllocation.forEach((n, i) => {
+                        var item
+                        item = {
+                            name: n.assetTypeName,
+                            value: n.assetAllocationRatio,
+                        }
+                        if (i === 0) {
+                            item = {
+                                name: n.assetTypeName,
+                                value: n.assetAllocationRatio,
+                                itemStyle: that.gV.itemStyle1,
+                            }
+                        }
+                        if (i === 1) {
+                            item = {
+                                name: n.assetTypeName,
+                                value: n.assetAllocationRatio,
+                                itemStyle: that.gV.itemStyle2,
+                            }
+                        }
+                        pieData.push(item)
+                    })
+                    that.gV.pieData = pieData;
+                    that.gV.pieData.forEach(function (item) {
+
+                        item.value = Number(item.value)
+                    })
 
                     var tplm = $("#dataLists2").html();
                     var template = Handlebars.compile(tplm);
@@ -271,44 +250,52 @@ $(function () {
                 },
             }];
             $.ajaxLoading(obj2);
-            // var obj3 = [{
-            //     url: site_url.prfFundBasicProfile_api,
-            //     data: {
-            //         fundCode: getQueryString('fundCode')
-            //     },
-            //     callbackDone: function (json) {
+        },
+        getData3: function (t) {
+            var that = this;
 
-            //         json = json.data
-            //         console.log(json)
+            var obj3 = [{
+                url: site_url.prfFundDividendList_api,
+                data: {
+                    fundCode: getQueryString('fundCode'),
+                    pageCurrent: 1,
+                    pageSize: 20
+                },
+                callbackDone: function (json) {
 
-            //         var tplm = $("#dataLists1").html();
-            //         var template = Handlebars.compile(tplm);
-            //         json.assetValue = (json.assetValue / 100000000).toFixed(2)
-            //         var html = template(json);
-            //         $(".tplBox1").html(html);
+                    json = json.data.pageList
+                    console.log(json)
 
-            //     },
-            // }];
-            // $.ajaxLoading(obj3);
-            // var obj4 = [{
-            //     url: site_url.prfFundBasicProfile_api,
-            //     data: {
-            //         fundCode: getQueryString('fundCode')
-            //     },
-            //     callbackDone: function (json) {
+                    var tplm = $("#dataLists3").html();
+                    var template = Handlebars.compile(tplm);
+                    var html = template(json);
+                    $(".tplBox3").html(html);
 
-            //         json = json.data
-            //         console.log(json)
+                },
+            }];
+            $.ajaxLoading(obj3);
+        },
+        getData4: function (t) {
+            var that = this;
 
-            //         var tplm = $("#dataLists1").html();
-            //         var template = Handlebars.compile(tplm);
-            //         json.assetValue = (json.assetValue / 100000000).toFixed(2)
-            //         var html = template(json);
-            //         $(".tplBox1").html(html);
+            var obj4 = [{
+                url: site_url.prfFundNoticeList_api,
+                data: {
+                    secuId: getQueryString('secuId'),
+                    pageCurrent: 1,
+                    pageSize: 10
+                },
+                callbackDone: function (json) {
 
-            //     },
-            // }];
-            // $.ajaxLoading(obj4);
+                    json = json.data.pageList
+                    var tplm = $("#dataLists4").html();
+                    var template = Handlebars.compile(tplm);
+                    var html = template(json);
+                    $(".tplBox4").html(html);
+
+                },
+            }];
+            $.ajaxLoading(obj4);
         },
         events: function () {
             var that = this;
@@ -319,6 +306,12 @@ $(function () {
                 $(".wrap>.panel").eq($(this).index()).addClass('active').siblings().removeClass('active');
                 if ($(this).index() == 1) {
                     that.drawCircle()
+                }
+                if ($(this).index() == 2) {
+                    that.getData3()
+                }
+                if ($(this).index() == 3) {
+                    that.getData4()
                 }
             })
         }

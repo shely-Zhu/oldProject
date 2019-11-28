@@ -370,6 +370,16 @@ module.exports = function () {
     this.pofFundManager_url = go_url.no_url + '/financial/views/publicPlacement/fundManager.html';
     // 基金公司
     this.pofFundCompany_url = go_url.no_url + '/financial/views/publicPlacement/fundCompany.html';
+    
+    // 买入结果页面，基金买入结果
+    this.pofSurelyResultsDetail_url = go_url.no_url + '/financial/views/publicPlacement/surelyResultsDetail.html';
+
+    //忘记密码  跳往原生页面
+    this.pofForgotPassword_url = go_url.no_url + '/financial/views/publicPlacement/forgotPassword.html';
+    //找回密码   跳往原生页面
+    this.pofRetrievePassword_url = go_url.no_url + '/financial/views/publicPlacement/retrievePassword.html';
+	//添加银行卡
+    this.pofAddBankCard_url = go_url.no_url + '/mine/views/bankCard/addBankCard.html'
 
     /*------------------- 私募理财fang——le end ------------------------------*/
     this.optionalPublicDetail_url = go_url.no_url + '/account/views/public/optionalPublicDetail.html';
@@ -394,4 +404,11 @@ module.exports = function () {
     this.informationDisclosure_url = go_url.no_url + '/account/views/informationDisclosure.html';
     // 公募交易详情查询
     this.publicTradeDetail_url = go_url.no_url + '/account/views/publicTradeDetail/publicTradeDetail.html';
+    //普通基金-赎回页面
+    this.redemptionBuy_url = go_url.no_url + '/financial/views/publicPlacement/redemptionBuy.html';
+    //普通基金-买入页面
+    this.fundTransformIn_url = go_url.no_url + '/financial/views/publicPlacement/fundTransformIn.html';
+
+    //  //普通基金-定投买入
+    // this.ordinarySetThrow_url = go_url.no_url + '/financial/views/publicPlacement/ordinarySetThrow.html';
 };

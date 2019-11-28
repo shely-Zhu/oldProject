@@ -13,18 +13,28 @@
 
 <body>
 	<!-- @@include('@pathCommonViews/load.html')  -->
-	<div class="publicDetail">
+	<div class="publicDetail ">
+		@@include('@pathCommonViews/headBarConfig.html',{"pathName":"普通基金","bgColors":"#475A95,#475A95","showType":"1"})
+		<div class="tplBox"></div>
+	</div>
+
+	@@include('@pathInclude/views/footer.html')
+
+	<script src="/include/js/vendor/echarts/echarts.min.js"></script>
+	<script src="/account/static/js/public/publicDetail.js"></script>
+	<script id="dataLists"  type="text/x-handlebars-template">
+		<div >
 		<div class="topContent">
-			@@include('@pathCommonViews/headBarConfig.html',{"pathName":"普通基金","bgColors":"#475A95,#475A95","showType":"1"})
+		
 			<!-- 客服 -->
 			<div class="service"></div>
 			<div class="day_gain">日涨幅</div>
-			<div class="day_gain_value">+0.01%</div>
-			<div class="new_worth">最新净值(11-01)</div>
-			<div class="new_worth_value">1.2213</div>
+			<div class="day_gain_value">{{annYldRat}}%</div>
+			<div class="new_worth">最新净值({{trDate}})</div>
+			<div class="new_worth_value">{{unitYld}}</div>
 			<div class="type">
-				<div class="type_1">稳健型</div>
-				<div class="type_2">指数型</div>
+				<div class="type_1">{{riskLevelName}}</div>
+				<div class="type_2">{{invTypComDesc}}</div>
 				<div class="type_3">10000.0元起购</div>
 			</div>
 		</div>
@@ -32,25 +42,25 @@
 			<div class="max_amount_area">
 				<!-- 限大额区域 -->
 				<div class="max_amount fl"></div>
-				<div class="max_amount_value fl">单日单账户限额5000万</div>
+				<div class="max_amount_value fl">单日单账户限额{{tradeLimitAmount}}万</div>
 			</div>
 			<div class="net_worth_area">
 				<!-- 净值区域 -->
 				<div class="net_worth_item">
 					<div class="title">近一周</div>
-					<div class="value_red">+6.56%</div>
+					<div class=" value">{{chgRat1w}}%</div>
 				</div>
 				<div class="net_worth_item">
 					<div class="title">近三个月</div>
-					<div class="value_green">-0.35%</div>
+					<div class=" value">{{chgRat3m}}%</div>
 				</div>
 				<div class="net_worth_item">
 					<div class="title">近一年</div>
-					<div class="value_red">+14.56%</div>
+					<div class=" value">{{chgRat1y}}%</div>
 				</div>
 				<div class="net_worth_item">
 					<div class="title">成立来</div>
-					<div class="value_red">+20.56%</div>
+					<div class=" value">{{chgRatBgn}}%</div>
 				</div>
 			</div>
 			<div class="lineWrap">
@@ -110,7 +120,7 @@
 			<div class="dealRegArea">
 				<div class="titleWrap">
 					<div class="title">交易规则</div>
-					<div class="arrow">
+					<div class="arrow rule">
 						<span class="img"></span>
 					</div>
 				</div>
@@ -123,12 +133,12 @@
 					<div class="line_area_mid">
 						<div class="top">份额确认</div>
 						<div class="mid"></div>
-						<div class="bottom">2019-11-08</div>
+						<div class="bottom">{{fundConfirmDate}}</div>
 					</div>
 					<div class="line_area_right">
 						<div class="top">查看盈亏</div>
 						<div class="mid"></div>
-						<div class="bottom">2019-11-09</div>
+						<div class="bottom">{{fundEarnDate}}</div>
 					</div>
 					<div class="line_left"></div>
 					<div class="line_right"></div>
@@ -139,9 +149,9 @@
 				<div class="title">
 					产品档案
 				</div>
-				<div class="arrow">
+				<!-- <div class="arrow">
 					<span class="img"></span>
-				</div>
+				</div> -->
 			</div>
 			<div class="titleWrap">
 				<div class="title">
@@ -162,7 +172,7 @@
 					<span class="img"></span>
 				</div>
 				<div class="desc fundManager">
-					朱波 李倩
+					{{fundManager}}
 				</div>
 			</div>
 			<div class="titleWrap">
@@ -173,7 +183,7 @@
 					<span class="img"></span>
 				</div>
 				<div class="desc fundCompany">
-					中融基金
+					{{fmcComName}}
 				</div>
 			</div>
 			<div class="company_info">
@@ -194,12 +204,7 @@
 			<div class="buy_btn">买入</div>
 		</div>
 	</div>
-
-	@@include('@pathInclude/views/footer.html')
-
-	<script src="/include/js/vendor/echarts/echarts.min.js"></script>
-	<script src="/account/static/js/public/publicDetail.js"></script>
-
+		</script>
 </body>
 
 </html>
