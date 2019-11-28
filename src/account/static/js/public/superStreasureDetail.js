@@ -193,7 +193,7 @@ $(function() {
 			    url: site_url.findProtocolBasic_api, 
 			    data: {
 					// code:that.gL.cashFundDetail.fundCode,
-					code:"000847",
+					code:"003075",
 					template:"0",
 			    },
 			    needLogin: true,
