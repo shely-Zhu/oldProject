@@ -389,5 +389,5 @@ module.exports = function () {
     // 超宝详情--内容页
     this.superContent_url = go_url.no_url + '/account/views/public/superContent.html';
     //超宝详情页
-    this.superStreasureDetail_url = go_url.no_url + 'account/views/public/superStreasureDetail.html';
+    this.superStreasureDetail_url = go_url.no_url + '/account/views/public/superStreasureDetail.html';
 };
