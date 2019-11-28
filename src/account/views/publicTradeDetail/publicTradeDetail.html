@@ -7,12 +7,13 @@
 
 <head>
     @@include('@pathInclude/views/meta.html')
+    <meta name="referrer" content="no-referrer">
     <link rel="stylesheet" href="/account/static/css/publicTradeDetail/publicTradeDetail.css">
     <title>交易记录</title>
 </head>
 
 <body>
-    @@include('@pathCommonViews/headBarConfig.html',{"pathName":"交易记录","bgColors":"#475A95,#475A95","showType":"1"})
+    @@include('@pathCommonViews/headBarConfig.html',{"pathName":"交易记录","bgColors":"#475A95,#475A95","showType":"0"})
     <div class="cancel_order">
         撤单
     </div>
@@ -36,12 +37,12 @@
                 <div class="trade_status_date fr">--</div>
             </div>
             <div class="trade_status_item">
-                <div class="trade_status_icon fl"></div>
+                <div class="trade_status_icon_1 fl"></div>
                 <div class="trade_status_desc fl">预计份额确认</div>
                 <div class="trade_status_date fr">--</div>
             </div>
             <div class="trade_status_item">
-                <div class="trade_status_icon fl"></div>
+                <div class="trade_status_icon_1 fl"></div>
                 <div class="trade_status_desc fl">预计查看收益</div>
                 <div class="trade_status_date fr">--</div>
             </div>
@@ -93,6 +94,26 @@
                 <div class="fund_date fr">资金将退回原银行卡</div>
             </div>
         </div>
+        <div class="bonus_info hide">
+            <!-- 分红信息 -->
+            <div class="item_header">分红信息</div>
+            <div class="item">
+                <div class="fl">分红产品</div>
+                <div class="fund_name fr">--</div>
+            </div>
+            <div class="item">
+                <div class="fl">分红份额</div>
+                <div class="fund_share fr">--</div>
+            </div>
+            <div class="item"> 
+                <div class="fl">分红方式</div>
+                <div class="bonus_mode fr">--</div>           
+            </div>
+            <div class="item">
+                <div class="fl">分红时间</div>
+                <div class="fund_date fr">--</div>
+            </div>
+        </div>
         <div class="redeem_info hide">
             <!-- 普通基金赎回信息 -->
             <div class="item_header">赎回信息</div>
@@ -104,10 +125,10 @@
                 <div class="fl">赎回份额</div>
                 <div class="item_2 fr">--</div>
             </div>
-            <div class="item">
+            <div class="redeem_bank item">
                 <div class="fl">到账银行卡</div>
-                <div class="bank_icon fr"></div>
                 <div class="item_3 fr">--</div>
+                <div class="bank_icon fr"></div>
             </div>
             <div class="item">
                 <div class="fl">赎回时间</div>
@@ -190,7 +211,6 @@
                 <div class="confirm_date fr">资金将退回到原银行卡</div>
             </div>
         </div>
-
         <div class="plan hide">
             <!-- 查看定投计划 -->
             <div class="divider"></div>
@@ -215,7 +235,6 @@
     @@include('@pathInclude/views/footer.html')
 
     <script src="/account/static/js/publicTradeDetail/publicTradeDetail.js"></script>
-    <script src="/account/static/js/public/payPassword.js"></script>
 </body>
 
 </html>

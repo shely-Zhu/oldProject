@@ -27,15 +27,15 @@ var data = Mock.mock({
 
         payModeName: "汇款支付",//支付方式名称
 
-        tradeShares: "",//交易申请份额(赎回交易使用)
+        tradeShares: "1,000,000",//交易申请份额(赎回交易使用)
 
         tradeAmount: "1,000,000.00",//交易申请金额(认/申购交易使用)
 
-        tradeStatus: "",//交易申请状态
+        tradeStatus: "0",//交易申请状态
 
-        tradeApplyDesc: "等待汇款",//交易状态信息
+        tradeApplyDesc: "待扣款",//交易状态信息
 
-        tradeApplyDescMessage: "",//交易状态描述
+        tradeApplyDescMessage: "等待银行汇款",//交易状态描述
 
         debitStatus: "",//扣款状态
 
