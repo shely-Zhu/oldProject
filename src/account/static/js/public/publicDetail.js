@@ -36,8 +36,8 @@ $(function () {
     var regard = {
         gV: {
             json: {},
-            isSeven: 1,//1七年 2万份
-            time: 1,// 1月份 3 季度 6半年 12 一年 " "成立以来
+            type: 'qrnh',//'qrnh'七年 'wfsy'万份
+            time: 1,// 1月份 3 季度 6半年 12 一年 0成立以来
         },
         init: function () {
             var that = this;
@@ -84,7 +84,7 @@ $(function () {
 
                     $(".tplBox").html(html);
                     that.getData1();
-                    that.getData2();
+                    that.getData2('qrnh', 1);
                     $.each($(".net_worth_area .net_worth_item .value"), function (i, v) {
                         if (Number($(v).text().slice(0, $(v).text().length - 1)) >= 0) {
                             $(v).addClass('value_red')
@@ -124,11 +124,22 @@ $(function () {
             // 七日年华 万份收益
             mui("body").on("tap", "#redeemNav .navSpan ", function (e) {
                 $(this).addClass('active').siblings().removeClass('active');
-                that.drawCircle();
+                // that.drawCircle();
+                console.log($(this).attr('type'), "99");
+
             });
+            //月 季 本年 一年 成立以来
             mui("body").on("tap", ".lineWrap .tab span ", function (e) {
                 $(this).addClass('active').siblings().removeClass('active');
 
+                var time = Number($(this).attr('time'))
+                var end = new Date().toLocaleString().split(" ")[0].replace(/\//g, '-')
+                console.log(time, end, "888");
+                if (time) {
+                    that.getData2(that.gV.type, time);
+                } else {
+                    that.getData2(that.gV.type, time, end);
+                }
             });
 
         },
@@ -170,15 +181,19 @@ $(function () {
             }]
             $.ajaxLoading(obj);
         },
-        getData2: function () {
+        getData2: function (type, time, end) {
+            console.log(type, time, end, "00000111");
+            time = time === 0 ? "" : time
             var that = this;
+            var dataOpt = {
+                fundCode: getQueryString('fundCode') ? getQueryString('fundCode') : '000847',
+                dataRange: time,
+                end: end || ""
+            },
             // 请求页面数据
             var obj = [{
                 url: site_url.prfFundNetWorthTrendChart_api,
-                data: {
-                    fundCode: getQueryString('fundCode') ? getQueryString('fundCode') : '000847',
-                    dataRange: 1,
-                },
+                data: dataOpt,
                 callbackDone: function (json) {
                     json = json.data.pageList
                     console.log(json);
@@ -188,7 +203,6 @@ $(function () {
                         big: [] //存放折线图万份收益
                     }
                     $.each(json, function (i, v) {
-                        console.log(i, v);
                         newData.date.push(v.trdDt)
                         newData.seven.push(v.annYldRat)
                         newData.big.push(v.unitYld)
@@ -197,7 +211,7 @@ $(function () {
                     // newData.seven = [json[0].annYldRat, json[Math.ceil(json.length / 2)].annYldRat, json[json.length - 1].annYldRat]
                     // newData.big = [json[0].unitYld, json[Math.ceil(json.length / 2)].unitYld, json[json.length - 1].unitYld]
                     console.log(newData, "00");
-                    that.drawLine('qrnh', newData)
+                    that.drawLine(type, newData)
                     // that.drawCircle()
                     // var tplm = $("#dataLists1").html();
                     // var template = Handlebars.compile(tplm);
