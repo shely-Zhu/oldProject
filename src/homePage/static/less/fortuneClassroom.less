@@ -230,3 +230,38 @@ body{
         text-overflow: ellipsis;
     }
 }
+.knowledgeItem {
+    padding: 0;
+    box-shadow: 0 .02rem .14rem 0 rgba(120,135,182,0.19);
+    border-radius: .16rem;
+    width: 98%;
+    margin: 0 auto .46rem;
+    .roomImg {
+        width: 6.9rem;
+        height: 2.8rem;
+        border-top-left-radius: .16rem;
+        border-top-right-radius: .16rem;
+        overflow: hidden;
+        &>img {
+            width: 98%!important;
+            height: 100%;
+        }
+    }
+    .roomTitle {
+        line-height: .32rem;
+        padding: .24rem .3rem .16rem .3rem;
+        margin: 0;
+        padding-right: .3rem;
+    }
+    .roomContent {
+        font-size: .24rem;
+        line-height: .24rem;
+        padding-left: .3rem;
+        color: @9B9B9B;
+        padding-bottom: .32rem;
+        padding-right: .3rem;
+    }
+}
+#move_1 .mui-table-view{
+    padding: .3rem;
+}

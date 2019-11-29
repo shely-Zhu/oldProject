@@ -107,7 +107,9 @@ $(function(){
                             }];
                             $.ajaxLoading(obj);	
                         }else{
-                            alert('请去绑定邮箱')
+                        	//显示错误提示
+                    		tipAction("请去绑定邮箱");
+//                          alert('请去绑定邮箱')
                         }
                     },      
                 };

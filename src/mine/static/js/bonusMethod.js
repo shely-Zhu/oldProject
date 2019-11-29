@@ -103,7 +103,7 @@ $(function() {
 					url: site_url.updateDividend_api,
 					// url: site_url.queryReourceLabels_api,
 					data: {
-						"tradeAcco": "2729", //交易账号
+						"tradeAcco": "2967", //交易账号
 						"fundCode": "000847",//基金代码
 						"autoBuy":somePage.gV.flag,//分红方式
 					},
@@ -112,6 +112,7 @@ $(function() {
 					needDataEmpty: true,
 					callbackDone: function(json) {
 						console.log(json.data)
+						// window.location.href = 
 					}
 				}
 			]
