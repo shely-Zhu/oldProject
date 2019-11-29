@@ -168,20 +168,23 @@ $(function () {
             mui("body").on('tap', '#cashPageLists .hold_item', function (e) {
                 var index = $(this).index();
                 sessionStorage.setItem("cashFundDetail",JSON.stringify(that.gV.data.cashDetail[index])) 
-                console.log(site_url.superStreasureDetail_url);
                 window.location.href=site_url.superStreasureDetail_url;
             })
             //点击持仓列表的感叹号 进入交易明细明细
             mui("body").on('tap', '.position_tip', function (e) {
-                //todo 跳转到交易明细 完了和晓宇对一下
+                //todo 跳转到收益明细
+                window.location.href = site_url.returnsDetail_url + '?fundCode=' + $(this).attr('data-fundcode');
+                return false;
             })
             //购买
             mui("body").on('tap', '.buy_btn', function (e) {
-                //todo 跳转
+                window.location.href = site_url.fundTransformIn_url;   
+                return false;
             })
             //赎回
             mui("body").on('tap', '.redeem_btn', function (e) {
-                //todo 跳转
+                window.location.href = site_url.redemptionBuy_url;
+                return false;
             })
             // 头部文案提示(金钱展示隐藏)
             mui("body").on('tap', '.j_icon', function (e) {

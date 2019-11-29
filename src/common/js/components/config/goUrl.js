@@ -402,6 +402,9 @@ module.exports = function () {
     this.publicAssets_url = go_url.no_url + '/account/views/publicAssets.html';
     /*------------------- 公募持仓相关 end ------------------------------*/
 
+    //收益明细
+    this.returnsDetail_url = go_url.no_url + '/mine/views/returnsDetail.html';
+
     //现金宝交易记录
     this.superRecord_url = go_url.no_url + '/account/views/super/superRecord.html';
 };

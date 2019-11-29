@@ -39,14 +39,11 @@ var productPublic = {
             },
             needDataEmpty: true,
             callbackDone: function(json){
-                console.log(json)
                 var imgArr = [];
 
                 $.each(json.data.bannerList, function(i, el){
-                    console.log(el)
                     imgArr.push({imgUrl: el.imageUrlShowOnline, linkUrl:el.linkUrl});
                 })
-                console.log(imgArr)
                 Slider( $('.banner'), imgArr );
                 
                 //此时所有切换区域的内容都是空的
@@ -213,7 +210,7 @@ var productPublic = {
             $('.tab .tab-b .tab-content').eq($(this).index()).css({"display":"block"});
         });
         //财富跳转
-        $('.listHref').on('tap',function(){
+        mui("body").on('tap', '.listHref', function() {
             window.location.href =site_url.fortuneClassroom_url;;
         })
     }
