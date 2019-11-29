@@ -13,7 +13,8 @@
 
 <body>
     <div class="topTitle">
-        @@include('@pathInclude/views/header.html') @@include('@pathCommonViews/headBarConfig.html',{"pathName":"待确认交易","bgColors":"#3E3C3C,#3E3C3C"})
+
+        @@include('@pathCommonViews/headBarConfig.html',{"pathName":"待确认交易","bgColors":"#3E3C3C,#3E3C3C"})
         <!-- 筛选 -->
         <div class="hopper"></div>
         <!-- 筛选 -->
@@ -46,9 +47,9 @@
 
             </div>
         </div>
-        @@include('../../../common/views/load.html')
+
         <!-- 加载中loading -->
-        @@include('@pathCommonViews/loading/listLoading.html')
+        @@include('@pathCommonCom/loading/listLoading.html')
         <!-- 暂无数据 -->
         @@include('@pathCommonViews/noDataImg.html',{"tipText":"暂无数据"})
     </div>
@@ -70,7 +71,9 @@
     <!-- 弹框类型-淡黄色背景一个按钮 -->
 </body>
 <!-- 公共模板 -->
-@@include('../common/transcationTem.html') @@include('@pathInclude/views/footer.html')
+@@include('../common/transcationTem.html') 
+
+@@include('@pathInclude/views/footer.html')
 <!-- 添加埋点 -->
 <script src="/account/static/js/private/tobeConfirmTransaction.js"></script>
 
