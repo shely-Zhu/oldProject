@@ -26,16 +26,16 @@ var data = Mock.mock({
         "totalShare": "", //持仓份额
         "buyAmount": "100,1000.00", //认购金额
         "setupDate": "",//成立日期
-        "prodTerm":"2019-11-19",//产品期限-单位（日 月 年）
-        "investPeriod":"",//投资期
-        "quitPeriod":"",//退出期
-        "delayPeriod":"",//延长期
+        "prodTerm":"日",//产品期限-单位（日 月 年）
+        "investPeriod":"2",//投资期
+        "quitPeriod":"1",//退出期
+        "delayPeriod":"3",//延长期
         "navUnit":"",//单位净值
         "navUnitDate":"01.22",//单位净值更新日期 mm.dd
         "assetsGainAndLoss":"1.111",//持仓盈亏
         "incomeUnit":"123123",//万份收益
         "incomeUnitDate":"2019-11-19",//万份收益更新日期
-        "incomeAssign":"",//收益分配
+        "incomeAssign":"0.00",//收益分配
         "holdDays":"23",//持有天数
         "totalNetValue":"",//累计净值
         "totalNetValueDate":"2019-11-19",//累计净值日期
@@ -45,6 +45,7 @@ var data = Mock.mock({
         "fundConfirmDealFalg":"0",//是否有基金确认书(0否1是)
         "ecFileName":"啦啦啦啦啦啦",//电子确认单名称(基金确认单)
         "ecFileUrl":"546545312123153455",//电子确认单文件路径
+        "redemptionOpenFrequency": "小叮当小叮当小叮当" // 赎回开放指引
     }
 });
 
