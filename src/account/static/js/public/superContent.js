@@ -35,6 +35,7 @@ $(function(){
                 data:{
                 	id:splitUrl['id'],
                 },
+                contentTypeSearch: true,
                 needDataEmpty: true,
                 callbackDone: function(json) {
                 	var resData = json.data;

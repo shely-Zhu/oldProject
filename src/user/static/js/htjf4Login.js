@@ -89,7 +89,7 @@ $(function() {
                             mobile: phoneValue, //账号
                             password: pwdValue, //密码
                             channelType:"2",
-                            deviceId:"864684039820036",
+                            deviceId:"862169042707406",
 
 
                             //deviceId:"864684039820036",

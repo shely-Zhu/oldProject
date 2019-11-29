@@ -441,6 +441,12 @@ $(function() {
 			    		color:  '#9B9B9B',
 			    		formatter: '{value}%',
 			    	},
+			    	type : 'value',
+ 					axisLabel: {                   
+						formatter: function (value, index) {           
+							return value.toFixed(4);      
+						}                
+					}
 			    },
 			    series: [{
 			    	type: 'line',
@@ -720,7 +726,7 @@ $(function() {
 					that.getTypeTwoData()
 				}
 				$('.lineDraw .time').removeClass('active');
-				$('.lineDraw .oneMonth').addClass('active');
+				$('.lineDraw .newYear').addClass('active');
             })
 		},
 	}

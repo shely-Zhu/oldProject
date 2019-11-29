@@ -59,6 +59,7 @@ module.exports = function(data, $ele, $id, type) {
         data[i].appointmentSuccess = data[i].jfReserveStatus == 4 ? 1 : 0; //合同审核成功
         data[i].appointmentFailed = data[i].jfReserveStatus == 5 ? 1 : 0; //合同审核失败
         data[i].appointmentFinished = data[i].jfReserveStatus == 4 || 5 ? 1 : 0; //合同成功和失败
+        data[i].qualified = data[i].isQualified == 1 ? 1 : 0; //是否满足合格投资者限制
 
         //赎回
         data[i].businessType2 = (data[i].businessType == 2) || (data[i].tobeBussinessType == 2) ? 1 : 0;

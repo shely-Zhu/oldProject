@@ -295,9 +295,22 @@ $(function () {
                 var fundBusinCode=$(this).attr('data-fundBusinCode');
                 var allotType=$(this).attr('data-allotType');
                 var Fixbusinflag=$(this).attr('data-Fixbusinflag');
-                window.location.href=site_url.publicTradeDetail_url+'?applyId='+applyId+'&fundCombination='+fundCombination 
+                //分红需要传的
+                var shares = $(this).attr('data-shares')
+                var fundName = $(this).attr('data-fundName')
+                var applyDate = $(this).attr('data-applyDate')
+                var autoBuyDesc = $(this).attr('data-autoBuyDesc')
+                if(allotType == 3){
+                    window.location.href=site_url.publicTradeDetail_url+'?applyId='+applyId+'&fundCombination='+fundCombination 
+                                        +'&fundCode='+fundCode+'&fundBusinCode='+fundBusinCode+'&allotType='+allotType
+                                        +'&Fixbusinflag='+Fixbusinflag+'&shares='+shares+'&fundName='+fundName
+                                        +'&applyDate='+applyDate+'&autoBuyDesc='+autoBuyDesc;
+                }else{
+                    window.location.href=site_url.publicTradeDetail_url+'?applyId='+applyId+'&fundCombination='+fundCombination 
                                         +'&fundCode='+fundCode+'&fundBusinCode='+fundBusinCode+'&allotType='+allotType
                                         +'&Fixbusinflag='+Fixbusinflag;
+                }
+                
             });
         }
     };

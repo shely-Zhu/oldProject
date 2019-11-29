@@ -13,6 +13,7 @@ require('@pathCommonJsCom/goTopMui.js');
 require('@pathCommonJs/components/headBarConfig.js');
 //黑色提示条的显示和隐藏
 var tipAction = require('@pathCommonJsCom/tipAction.js');
+var generateTemplate = require('@pathCommonJsComBus/generateTemplate.js');
 
 
     $(function(){
@@ -45,8 +46,8 @@ var tipAction = require('@pathCommonJsCom/tipAction.js');
                 //计算节点高度并设置
                 var height = window.innerHeight - $('.banner').height();
     
-                if (!$('.contentWrap').hasClass('setHeight')) {
-                    $('.contentWrap').height(height).addClass('setHeight');
+                if (!$('.list .contentWrapper').hasClass('setHeight')) {
+                    $('.list .contentWrapper').height(height).addClass('setHeight');
                 }
             },
             //初始化mui的上拉加载
@@ -55,7 +56,7 @@ var tipAction = require('@pathCommonJsCom/tipAction.js');
                 
                 mui.init({
                     pullRefresh: {
-                        container: '.contentWrap',
+                        container: '.contentWrapper',
                         up: {
                             //auto: false,
                             contentrefresh: '拼命加载中',
@@ -72,15 +73,15 @@ var tipAction = require('@pathCommonJsCom/tipAction.js');
                 mui.ready(function() { //init后需要执行ready函数，才能够初始化出来
     
                     //隐藏当前的加载中loading
-                    if (!$('.contentWrap').hasClass('hasPullUp')) {
-                        $('.mui-pull-bottom-pocket').find('.mui-pull-bottom-pocket').addClass('mui-hidden');
+                    if (!$('.list').hasClass('hasPullUp')) {
+                        $('.list').find('.mui-pull-bottom-pocket').addClass('mui-hidden');
                     }
     
                     //显示loading
-                    that.$e.listLoading.show();
+                    // that.$e.listLoading.show();
     
                     //这一句初始化并第一次执行mui上拉加载的callback函数
-                    mui('.contentWrap').pullRefresh().pullupLoading();
+                    mui('.contentWrapper').pullRefresh().pullupLoading();
     
                     //隐藏loading，调试接口时需要去掉
                     //setTimeout(function(){
@@ -89,7 +90,7 @@ var tipAction = require('@pathCommonJsCom/tipAction.js');
     
     
                     //为$id添加hasPullUp  class
-                    $('.contentWrap').addClass('hasPullUp');
+                    $('.list').addClass('hasPullUp');
                 });
             },
                 //数据初始化
@@ -97,7 +98,7 @@ var tipAction = require('@pathCommonJsCom/tipAction.js');
                 
                 var that = this
     
-                mui('.contentWrap').pullRefresh().pullupLoading();
+                mui('.contentWrapper').pullRefresh().pullupLoading();
                
                 
                 var obj = [{
@@ -145,7 +146,7 @@ var tipAction = require('@pathCommonJsCom/tipAction.js');
                             that.gV.pageNo++;
     
                             //去掉mui-pull-bottom-pocket的mui-hidden
-                            $('.contentWrap').find('.mui-pull-bottom-pocket').removeClass('mui-hidden');
+                            $('.contentWrapper').find('.mui-pull-bottom-pocket').removeClass('mui-hidden');
                             // 将列表插入到页面上
                             generateTemplate(dataList, that.$e.listSlot, that.$e.listTemp);
                         }, 200)
@@ -155,7 +156,7 @@ var tipAction = require('@pathCommonJsCom/tipAction.js');
                         tipAction(json.msg);
                     },
                     callbackNoData:function(json){
-                        $('.contentWrap').find('.mui-pull-bottom-pocket').removeClass('mui-hidden');
+                        $('.contentWrapper').find('.mui-pull-bottom-pocket').removeClass('mui-hidden');
                         t.endPullupToRefresh(true);
                         that.$e.listLoading.hide();
                         that.$e.noData.show();

@@ -21,7 +21,7 @@ $(function() {
             pageCurrent: 1, //当前页码，默认为1
             pageSize: 10,
             listLength: 0,
-            projectId: splitUrl['projectId'],
+            fundCode: splitUrl['fundCode'],
         },
         init: function() {
             var that = this;
@@ -32,7 +32,7 @@ $(function() {
         //初始化mui的上拉加载
         initMui: function() {
             var that = this;
-            var height = windowHeight - $(".title").height() - $(".topTitle").height();
+            var height = windowHeight - $(".title").height() - $(".topTitle").height()-$(".messageTitle").height();
             if (!$('.list').hasClass('setHeight')) {
                 $('.list').height(height).addClass('setHeight');
             }
@@ -84,13 +84,12 @@ $(function() {
                 data: {
                     "pageNo": that.gV.pageCurrent, //非必须，默认为1
                     "pageSize": 10,//非必须，默认为10
-                    "projectId":that.gV.projectId,//项目编号
+                    "fundCode":that.gV.fundCode,//项目编号
                 },
                 //async: false,
                 needDataEmpty: true,
                 callbackDone: function(json) {
                     var data;
-                    debugger
                     if (json.data.list.length == 0) { // 没有记录不展示
                         $(".list").hide()
                         that.$e.noData.show();
