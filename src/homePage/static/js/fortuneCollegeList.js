@@ -211,7 +211,7 @@ var productPublic = {
         });
         //财富跳转
         mui("body").on('tap', '.listHref', function() {
-            window.location.href =site_url.fortuneClassroom_url;;
+            window.location.href =site_url.fortuneClassroom_url;
         })
     }
 }
