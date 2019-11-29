@@ -410,14 +410,12 @@ $(function() {
 
             //折线图点击月份请求数据
             mui("body").on('tap', '.lineWrap .time', function() {
-//			$(document).on('click', '.lineWrap .time', function(e) {
 				$('.lineDraw .time').removeClass('active');
 				$(this).addClass('active');
 				that.getTypeOneData( $(this).attr('num') );
             })
             //折线图点击七日年化/万份收益切换区域
             mui("body").on('tap', '.lineWrap .titleWrap .title', function() {
-//			$(document).on('click', '.lineWrap .titleWrap .title', function(e) {
 				$('.lineWrap .titleWrap .title').removeClass('active');
 				$(this).addClass('active');
 				//判断当前画的是七日年化还是万份收益
