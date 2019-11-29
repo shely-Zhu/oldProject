@@ -37,11 +37,11 @@
 
 				</div>
 				<div class="panel panel3 tplBox3">
-
+					{{#each this}}
 					<div class="profitItemCon">
 						<div class="profitItem">
 							<div class="itemTitle">分红日期</div>
-							<div class="itemValue">2019-11-11</div>
+							<div class="itemValue">{{dividendOfDate}}</div>
 						</div>
 						<div class="profitItem">
 							<div class="itemTitle">权益登记</div>
@@ -49,7 +49,7 @@
 						</div>
 						<div class="profitItem">
 							<div class="itemTitle">除息日</div>
-							<div class="itemValue">2019-11-11</div>
+							<div class="itemValue">{{exRdDtOtc}}</div>
 						</div>
 						<div class="profitItem">
 							<div class="itemTitle">每份分红</div>
@@ -60,8 +60,9 @@
 							<div class="itemValue">1223333.00</div>
 						</div>
 					</div>
+					{{/each}}
 				</div>
-				<div class="panel panel4 tplBox4">
+				<div class="panel panel4 tplBox4" style="height:500px">
 
 				</div>
 			</div>
