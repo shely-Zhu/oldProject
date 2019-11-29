@@ -45,6 +45,7 @@ var data = Mock.mock({
         "fundConfirmDealFalg":"0",//是否有基金确认书(0否1是)
         "ecFileName":"啦啦啦啦啦啦",//电子确认单名称(基金确认单)
         "ecFileUrl":"546545312123153455",//电子确认单文件路径
+        "redemptionOpenFrequency": "小叮当小叮当小叮当" // 赎回开放指引
     }
 });
 
