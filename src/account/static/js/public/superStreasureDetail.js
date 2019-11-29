@@ -13,8 +13,7 @@ var tipAction = require('@pathCommonJs/components/tipAction.js');
 var splitUrl = require('@pathCommonJs/components/splitUrl.js')();
 var generateTemplate = require('@pathCommonJsComBus/generateTemplate.js');
 
-//引入 ECharts 主模块
-//var echarts = require('echarts/lib/echarts');
+
 
 $(function() {
 
@@ -22,7 +21,7 @@ $(function() {
         gL: {
 			shuju:[],
 			time:[],
-			cashFundDetail:"",
+			cashFundDetail:""
         },
         init:function(){
 			var that = this;
