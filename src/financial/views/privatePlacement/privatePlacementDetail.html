@@ -10,7 +10,8 @@
 	<title>产品详情</title>
 </head>
 <body>
-
+	<!--加载图标-->
+    <!--@@include('@pathCommonViews/load.html')-->
 	<div class="privatePlacementDetail">
 		@@include('@pathCommonViews/headBarConfig.html',{"bgColors":"#595E6F,#1C2135","showType":"1","pathName":"产品详情"})
 		<div class="privateDetailTitle">
@@ -18,7 +19,32 @@
 			<div class="productName"></div>
 			<p class="introduction"></p>
 			<!-- 单位净值、起投金额、产品期限 -->
-			<div class="privateDetailList">
+			<!-- 类固收产品展示 -->
+			<div class="privateDetailList fixedIncome hide">
+				<div class="netValueWord"><span class="iconfont">&#xe60a;</span>业绩比较基准(<span class="netValueDate"></span>)</div>
+				<div class="mui-row productInfoList">
+					<!-- 单位净值 -->
+					<div class="mui-col-xs-6">
+						<span class="netValue"></span>
+					</div>
+					<!-- 起投金额 -->
+					<div class="mui-col-xs-3 investmentList">
+						<p class="investmentAmountTip">起投金额</p>
+						<p class="investmentAmountNum"></p>
+					</div>
+					<!-- 产品期限 -->
+					<div class="mui-col-xs-3 investmentList">
+						<p class="productDeadlineTip">产品期限</p>
+						<p class="productDeadlineNum"></p>
+					</div>
+				</div>
+				<!-- 产品特点标签 -->
+				<div class="productLabel">
+					
+				</div>
+			</div>
+			<!-- 浮收产品展示 -->
+			<div class="privateDetailList floatProfit">
 				<div class="netValueWord"><span class="iconfont">&#xe60a;</span>单位净值(元)(<span class="netValueDate"></span>)</div>
 				<div class="mui-row productInfoList">
 					<!-- 单位净值 -->
@@ -54,7 +80,7 @@
 				</div>
 				<div class="wrap">
 					<!-- 基本信息 start -->
-					<div class="panel panel1">
+					<div class="panel panel1 active">
 						<!-- 私募基金产品详情折线图 -->
 						<div class="lineWrap">
 				 			<div class="clearfix titleWrap typeNo5Wrap">
@@ -131,7 +157,7 @@
 					<!-- 基本信息 end -->
 
 					<!-- 交易须知 start -->
-					<div class="panel panel2 active">
+					<div class="panel panel2">
 						<div class="textContainner">
 							<div class="textTitle">产品费率</div>
 							<div class="detailText">
@@ -231,24 +257,7 @@
 
 					<!-- 产品材料 start -->
 					<div class="panel panel3">
-						<div class="textContent">
-							<div class="textTitle">产品介绍信息</div>
-							<div class="detailText">
-								<div class="content">
-									<p class="contentTitle">产品推介书<span>2019-11-11</span></p>
-									<p class="contentLink">凯丰宏观策略13号证券投资私募基金.pdf</p>
-								</div>
-							</div>
-						</div>
-						<div class="textContent">
-							<div class="textTitle">产品介绍信息</div>
-							<div class="detailText">
-								<div class="content">
-									<p class="contentTitle">产品推介书<span>2019-11-11</span></p>
-									<p class="contentLink">凯丰宏观策略13号证券投资私募基金.pdf</p>
-								</div>
-							</div>
-						</div>
+
 						
 					</div>
 					<!-- 产品材料 end -->
@@ -263,6 +272,22 @@
 		</div>
 		
 	</div>
+
+	<script id="wrap-template" type="text/x-handlebars-template">
+		{{!-- {{#each this}} --}}
+			<div class="textContent">
+				<div class="textTitle">{{title}}</div>
+				<div class="detailText">
+					{{#each displayGrounp}}
+						<div class="content" href="{{href}}">
+							<p class="contentTitle">{{groupName}}<span>{{fileDate}}</span></p>
+							<p class="contentLink">{{fileName}}</p>
+						</div>
+					{{/each}}
+				</div>
+			</div>
+		{{!-- {{/each}} --}}
+	</script>
 	
 </body>
 	@@include('@pathInclude/views/footer.html')

@@ -350,6 +350,8 @@ module.exports = function() {
     this.queryFundDetailV2_api = http_url.web_url + '/pef/queryFundDetailV2';
     // 查询产品募集信息
     this.getRaiseInfo_api = http_url.web_url + '/pef/getRaiseInfo';
+    // 根据标签号查询产品材料
+    this.queryReourceListByLabel_api = http_url.web_url + '/pef/queryReourceListByLabel';
 
 
 

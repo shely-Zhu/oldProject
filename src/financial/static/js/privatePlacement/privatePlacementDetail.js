@@ -9,21 +9,27 @@ require('@pathCommonJs/ajaxLoading.js');
 require('@pathCommonJsCom/headBarConfig.js');
 
 var splitUrl = require('@pathCommonJs/components/splitUrl.js')();
-// var tipAction = require('@pathCommonJs/components/tipAction.js');
+var tipAction = require('@pathCommonJs/components/tipAction.js');
+var generateTemplate = require('@pathCommonJsComBus/generateTemplate.js');
 
 $(function(){
 	var  privatePlacementDetail = {
 		//获取页面元素
 		$e:{
 			projectId:splitUrl['projectId'],
+			adjustmentTemp: $('#wrap-template'), // 最新调仓模板
 		},
 		getElements : {
-			accountName : $('#accountName'),  //公共账户名称
 			name        : $('#name'),  //公募账户名
 			number      : $('#number'),  //账号
 			linenum     : $('#linenum'), //行号
 			openingBank : $("#openingBank"),  //开户行
 			topc      : $('#topc'),       //提示信息
+		},
+		setting: { //一些设置
+			navAllList: ['风险揭示书', '产品信息', '管理报告', '资金分配', '重要公告及通知', '恒天简报'],
+			ajaxParamList: ['19,20,10,22', '1', '12,13,28,14', '30', '16,17,31,32,29', '33,34,35,36,37'], // 请求参数
+			navList: [], //导航
 		},
 		data:{
 			historicalPerformance: {
@@ -44,6 +50,8 @@ $(function(){
 			that.getTypeOneData();
 			// 募集账户信息
 			that.collectAccount();
+			// 获取标签
+			that.queryReourceListByLabel();
 			that.events();
 		},
 		getData:function(){
@@ -59,6 +67,15 @@ $(function(){
 				callbackDone: function(json) {
 					var jsonData = json.data;
 					var projectLableHtml,projectLableHtmlList;
+					// 根据收益分配方式区分 0固收 1浮收普通 2浮收稳裕 
+					if(jsonData.incomeModeJF == '0'){
+						$('.fixedIncome').removeClass('hide');
+						$('.floatProfit').addClass('hide');
+					}
+					else if(jsonData.incomeModeJF == '1'){
+
+					}
+
 					// 私募产品 产品名称
 					$('.productName').html(jsonData.productName);
 					// 一句话产品详情
@@ -94,9 +111,9 @@ $(function(){
 					// 投资方向
 					$('.direction').html(jsonData.investDirect);
 					// 投资领域
-					$('.investmentArea').html();
+					$('.investmentArea').html(jsonData.investArea);
 					// 投资方式
-					$('.investmentWay').html();
+					$('.investmentWay').html(jsonData.investWay);
 					// 收益分配方式
 					$('.incomeType').html(jsonData.incomeModeDesc);
 
@@ -113,22 +130,22 @@ $(function(){
 					// 预约有效天数
 					$('.reservationDay').html(jsonData.reserveTime);
 					// 打款截止日期
-					$('.paymentDeadline').html();
+					$('.paymentDeadline').html(jsonData.projectDownTime);
 					// 预计成立日期
-					$('.establishment').html();
+					$('.establishment').html(jsonData.setupDate);
 					// 是否需要面签
 					$('.isVideo').html(jsonData.isVideo);
 					// 允许购买客户类型
-					$('.clientType').html();
+					$('.clientType').html(jsonData.customerType);
 					// 允许购买客户等级
 					$('.clientLevel').html(jsonData.customerRiskLevelDesc);
 					// 汇款备注
-					$('.remittance').html();
+					$('.remittance').html('【xxx（姓名）认购（产品）】');
 					// 赎回开放频率
 					$('.redemptionOpenFrequency').html(jsonData.redemptionOpenFrequency);
 
 					// 立即预约上的认购申购费率
-					$('.buyRate span').html(jsonData.buyRate)
+					$('.buyRate span').html(jsonData.buyRate);
 				},
 			}];
 			$.ajaxLoading(obj);
@@ -203,7 +220,7 @@ $(function(){
 				needLogin: true,
 				callbackDone: function(json) {
 					var jsonData = json.data;
-					$(".priceLimit span").html()
+					$(".priceLimit span").html(jsonData.pageList[0].unitNetChangePercent);
 
 					//拼数据
 					$.each( jsonData.pageList, function(i, el){
@@ -358,30 +375,133 @@ $(function(){
 			var that = this;
 
 			//发送ajax请求
-	        var obj = [{
-	            url: site_url.getRaiseInfo_api,
-	            data: {},
-	            contentTypeSearch: true,
-	            needLogin:true,//需要判断是否登陆
-	            callbackDone: function(json){  //成功后执行的函数
+			var obj = [{
+				url: site_url.getRaiseInfo_api,
+				data: {},
+				contentTypeSearch: true,
+				needLogin:true,//需要判断是否登陆
+				callbackDone: function(json){  //成功后执行的函数
 					
-	                $('#name').html(json.data.accountName);
-	                $('#number').html(json.data.account);
-	                $('#linenum').html(json.data.bankName);
-	                $('#openingBank').html(json.data.branchBankName);
+					$('#name').html(json.data.accountName);
+					$('#number').html(json.data.account);
+					$('#linenum').html(json.data.bankName);
+					$('#openingBank').html(json.data.branchBankName);
 
 					$('#topc').html(json.data.remarks);
 
 
-	            },
-	            callbackFail: function(json){  //失败后执行的函数
+				},
+				callbackFail: function(json){  //失败后执行的函数
 					tipAction(json.msg);
 
-	            }
-	        }];
-	        $.ajaxLoading(obj);
+				}
+			}];
+			$.ajaxLoading(obj);
 
 		},
+		queryReourceListByLabel:function(){   //根据标签号查询产品材料
+			var that = this;
+			var labels = '0,1,2,3,4,5'
+
+			var	obj = [{ //根据标签号查询产品材料
+				url: site_url.queryReourceListByLabel_api, //根据标签号查询产品材料   queryReourceListByLabel.action
+				data: {
+					projectId: that.$e.projectId, // 产品代码
+					labels: labels,
+				},
+				needLogin: true,
+				needDataEmpty: true,
+				contentTypeSearch: true,
+				async: false,
+				callbackDone: function(json) {
+					var jsonData = json.data;
+
+					// 风险揭示书
+					if(jsonData.fxjss){
+						jsonData.title = '风险揭示书';
+						that.processData(jsonData.fxjss);
+						jsonData.displayGrounp = jsonData.fxjss;
+						generateTemplate(jsonData,$(".panel3"), that.$e.adjustmentTemp);
+					} 
+					// 产品信息
+					if(jsonData.cpxx){
+						jsonData.title = '产品信息';
+						that.processData(jsonData.cpxx);
+						jsonData.displayGrounp = jsonData.cpxx;
+						generateTemplate(jsonData,$(".panel3"), that.$e.adjustmentTemp);
+					}
+					// 管理报告
+					if(jsonData.glbg){
+						jsonData.title = '管理报告';
+						that.processData(jsonData.glbg);
+						jsonData.displayGrounp = jsonData.glbg;
+						generateTemplate(jsonData,$(".panel3"), that.$e.adjustmentTemp);
+					}
+					// 资金分配
+					if(jsonData.zjfp){
+						jsonData.title = '资金分配';
+						that.processData(jsonData.zjfp);
+						jsonData.displayGrounp = jsonData.zjfp;
+						generateTemplate(jsonData,$(".panel3"), that.$e.adjustmentTemp);
+					}
+					// 重要公告及通知
+					if(jsonData.zyggjtz){
+						jsonData.title = '重要公告及通知';
+						that.processData(jsonData.zyggjtz);
+						jsonData.displayGrounp = jsonData.zyggjtz;
+						generateTemplate(jsonData,$(".panel3"), that.$e.adjustmentTemp);
+					}
+					// 恒天简报
+					if(jsonData.htjb){
+						jsonData.title = '恒天简报';
+						that.processData(jsonData.htjb);
+						jsonData.displayGrounp = jsonData.htjb;
+						generateTemplate(jsonData,$(".panel3"), that.$e.adjustmentTemp);
+					}
+
+				},
+				callbackFail: function(json) {
+					//请求失败，
+					//隐藏loading
+					//that.getElements.listLoading.hide();
+					//显示错误提示
+					tipAction(json.message);
+
+					//隐藏loading，调试接口时需要去掉
+					setTimeout(function() {
+						that.getElements.listLoading.hide();
+					}, 100);
+					//return false;
+				},
+				callbackNoData: function(json) {
+					//没有数据
+					$id.find('.noData').show();
+
+					setTimeout(function() {
+						that.getElements.listLoading.hide();
+					}, 100);
+				}
+
+			}]
+			$.ajaxLoading(obj);
+
+		},
+		// 处理数据
+		processData:function(data){
+			var that = this;
+
+			$.each(data, function(i, el) {
+				if (el.fileName.indexOf(".pdf") != -1) {
+					el.line = true; //线上可预览
+					el.href = site_url.download_api + "?filePath=" + el.fileUrl + "&fileName=" + new Base64().encode(el.fileName) + "&groupName=" + el.groupName + "&show=1";
+				} else {
+					el.line = false; //需下载
+					el.href = site_url.download_api + "?filePath=" + el.fileUrl + "&fileName=" + new Base64().encode(el.fileName) + "&groupName=" + el.groupName;
+				}
+			})
+			return data;
+		},
+
 		events: function(){
 			var that = this;
 			//tab点击切换
@@ -390,20 +510,20 @@ $(function(){
 				$(".wrap>.panel").eq($(this).index()).addClass('active').siblings().removeClass('active');
 			});
 			//折线图点击月份请求数据
-            mui("body").on('tap', '.lineWrap .time', function() {
-            	$('.lineDraw .time').removeClass('active');
+			mui("body").on('tap', '.lineWrap .time', function() {
+				$('.lineDraw .time').removeClass('active');
 				$(this).addClass('active');
 				if(that.data.projectType == 4) {
 					that.getTypeTwoData( $(this).attr('num') );
 				} else {
 					that.getTypeOneData( $(this).attr('num') );
 				}
-            })
-            // 募集账户的信息的拷贝
-            mui("body").on('tap', '.copy_btn', function() {
+			})
+			// 募集账户的信息的拷贝
+			mui("body").on('tap', '.copy_btn', function() {
 				var $this = $(this);
 				var copyText = $this.siblings('div').text()
-			    //实例化clipboard
+				//实例化clipboard
 				var clipboard = new Clipboard('.copy_btn', {
 					text: function () {
 						return copyText;
@@ -417,6 +537,11 @@ $(function(){
 					tipAction("请选择“拷贝”进行复制!");
 				});
 
+			});
+
+			// 立即预约
+			mui("body").on('tap', '.buyButton' , function(){
+				window.location.href = '/financial/views/privatePlacement/electronicContract/orderLimit.html'
 			});
 		},
 	};
