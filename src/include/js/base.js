@@ -5,3 +5,5 @@ require('@pathIncludJs/vendor/zepto/deferred.js');
 
 //路径配置文件
 require('@pathIncludJs/vendor/config.js');
+
+require('@pathCommonJs/components/headBarConfig.js');

@@ -378,7 +378,9 @@ module.exports = function () {
     this.productFiles_url = go_url.no_url + '/account/views/productFiles.html';
     // 基金确认书
     this.privateFundPdf_url = go_url.no_url + '/account/views/private/privateFundPdf.html';
-    // 交易规则
+    // 私募交易规则
+    this.privateTransactionRules_url = go_url.no_url + '/account/views/private/transactionRules.html';
+    // 公募交易规则
     this.transactionRules_url = go_url.no_url + '/financial/views/publicPlacement/transactionRules.html';
     //基金公司
     this.fundCompany_url = go_url.no_url + '/financial/views/publicPlacement/fundCompany.html';
@@ -392,6 +394,17 @@ module.exports = function () {
     this.superStreasureDetail_url = go_url.no_url + '/account/views/public/superStreasureDetail.html';
     //修改邮箱
     this.changeMail_url = go_url.no_url + '/mine/views/mail/changeMail.html';
+
+    /*------------------- 公募持仓相关 start ------------------------------*/
+    //公募交易记录
+    this.transactionRecords_url = go_url.no_url + '/account/views/public/transactionRecords.html';
+    //公募持仓记录
+    this.publicAssets_url = go_url.no_url + '/account/views/publicAssets.html';
+    /*------------------- 公募持仓相关 end ------------------------------*/
+
+    //收益明细
+    this.returnsDetail_url = go_url.no_url + '/mine/views/returnsDetail.html';
+
     //现金宝交易记录
     this.superRecord_url = go_url.no_url + '/account/views/super/superRecord.html';
 };

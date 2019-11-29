@@ -16,8 +16,8 @@ $(function () {
     var somePage = {
         gV: { // 全局变量
             showBankList: false,
-            //请求到的总资产data
-            data: '',
+            data: '',//请求到的总资产data
+            isShowInfo: true//是否展示信息 默认展示
         },
         init: function () {
             var that = this;
@@ -74,14 +74,6 @@ $(function () {
                         return;
                     }
                     that.gV.data = json.data;
-                    //总资产
-                    $('.totalM').html(that.gV.data.myAssetTotalMask);
-                    //待确认金额
-                    $('.be_confirmed_amount .value').html(that.gV.data.inTransitTotal);
-                    //昨日总收益
-                    $('.first_h_profit_box .h_profit_value').html(that.gV.data.inTransitTotal);
-                    //持仓总收益
-                    $('.second_h_profit_box .h_profit_value').html(that.gV.data.inTransitTotal);
                     //设置比较器
                     Handlebars.registerHelper("if_than_0", function (value, options) {
                         if (value > 0) {
@@ -91,21 +83,7 @@ $(function () {
                         }
                     });
                     that.chooseTipDesc();
-
-                    //现金宝列表渲染
-                    var tplm = $("#cashLists").html();
-                    var template = Handlebars.compile(tplm);
-                    var html = template(that.gV.data.cashDetail);
-                    $("#cashPageLists").html(html);
-
-                    //普通基金列表渲染
-                    var tplm = $("#dataLists").html();
-                    var template = Handlebars.compile(tplm);
-                    var html = template(that.gV.data.fundDetailList);
-                    $("#pageLists").html(html);
-                    //模板渲染完毕后展示没有更多数据的样式
-                    $('footer').removeClass('hide');
-                    //渲染完模板后再添加事件
+                    that.renderView(true);
                     that.events();
                 },
                 callbackFail: function (data) {
@@ -113,6 +91,38 @@ $(function () {
                 }
             }];
             $.ajaxLoading(obj);
+        },
+        renderView: function (){
+            var that = this;
+            //渲染整个页面 flag=true 渲染真实数据  flag=false 渲染成为***
+            if (that.gV.isShowInfo){
+                //总资产
+                $('.totalM').html(that.gV.data.myAssetTotalMask);
+                //待确认金额
+                $('.be_confirmed_amount .value').html(that.gV.data.inTransitTotal);
+                //昨日总收益
+                $('.first_h_profit_box .h_profit_value').html(that.addSymbol(that.gV.data.todayProfit, that.gV.data.todayProfitMask));
+                //持仓总收益
+                $('.second_h_profit_box .h_profit_value').html(that.addSymbol(that.gV.data.cumulativeProfit, that.gV.data.cumulativeProfitMask));
+                //现金宝列表渲染
+                var tplm = $("#cashLists").html();
+                var template = Handlebars.compile(tplm);
+                var html = template(that.gV.data.cashDetail);
+                $("#cashPageLists").html(html);
+
+                //普通基金列表渲染
+                var tplm = $("#dataLists").html();
+                var template = Handlebars.compile(tplm);
+                var html = template(that.gV.data.fundDetailList);
+                $("#pageLists").html(html);
+                //模板渲染完毕后展示没有更多数据的样式
+                $('footer').removeClass('hide');
+                //渲染完模板后再添加事件
+            } else {
+                //所有标位显示的区域都更换为****
+                $('.show_item').html('****');
+                $('.position_h').css('color', '#272727');
+            }
         },
         bankEvents: function () { //绑定事件
             var that = this;
@@ -144,6 +154,10 @@ $(function () {
         },
         events: function () { //绑定事件
             var that = this;
+            //交易记录按钮点击 跳转到交易记录
+            mui("body").on('tap', '.trade_list', function (e) {
+                window.location.href = site_url.transactionRecords_url;
+            })
             //普通基金item的点击 进入持仓详情
             mui("body").on('tap', '#pageLists .hold_item', function (e) {
                 var index = $(this).index();
@@ -154,43 +168,34 @@ $(function () {
             mui("body").on('tap', '#cashPageLists .hold_item', function (e) {
                 var index = $(this).index();
                 sessionStorage.setItem("cashFundDetail",JSON.stringify(that.gV.data.cashDetail[index])) 
-                console.log(site_url.superStreasureDetail_url);
                 window.location.href=site_url.superStreasureDetail_url;
             })
-            //点击持仓列表的感叹号 进入持仓明细
+            //点击持仓列表的感叹号 进入交易明细明细
             mui("body").on('tap', '.position_tip', function (e) {
-                //todo 跳转
+                //todo 跳转到收益明细
+                window.location.href = site_url.returnsDetail_url + '?fundCode=' + $(this).attr('data-fundcode');
+                return false;
             })
             //购买
             mui("body").on('tap', '.buy_btn', function (e) {
-                //todo 跳转
+                window.location.href = site_url.fundTransformIn_url;   
+                return false;
             })
             //赎回
             mui("body").on('tap', '.redeem_btn', function (e) {
-                //todo 跳转
+                window.location.href = site_url.redemptionBuy_url;
+                return false;
             })
             // 头部文案提示(金钱展示隐藏)
             mui("body").on('tap', '.j_icon', function (e) {
-                //总资产
-                $('.totalM').html("****");
-                //待确认金额
-                $('.be_confirmed_amount .value').html("****");
-                //昨日总收益
-                $('.first_h_profit_box .h_profit_value').html("****");
-                //持仓总收益
-                $('.second_h_profit_box .h_profit_value').html("****");
-                $(this).addClass('eyecose');
+                $('.j_icon').addClass('eyecose');
+                that.gV.isShowInfo = false;
+                that.renderView();
             })
             mui("body").on('tap', '.eyecose', function (e) {
-                //总资产
-                $('.totalM').html(that.gV.data.myAssetTotalMask);
-                //待确认金额
-                $('.be_confirmed_amount .value').html(that.gV.data.inTransitTotal);
-                //昨日总收益
-                $('.first_h_profit_box .h_profit_value').html(that.gV.data.inTransitTotal);
-                //持仓总收益
-                $('.second_h_profit_box .h_profit_value').html(that.gV.data.inTransitTotal);
-                $(this).removeClass('eyecose');
+                $('.j_icon').removeClass('eyecose');
+                that.gV.isShowInfo = true;
+                that.renderView();
             })
             //打开资产组成说明
             mui("body").on('tap', '.assetsBtn', function (e) {
@@ -202,6 +207,10 @@ $(function () {
                 $('.mask').hide();
                 $('.tipContainer').hide();
             })
+            mui('body').on('tap', '.position_tip', function (e){
+                
+                return false;
+            })
         },
         chooseTipDesc: function(){
             var that = this;
@@ -209,6 +218,16 @@ $(function () {
                 //自己处理一下文案的显示
                 element.myTip = element.divideMsg? element.divideMsg: element.canBeSpentMsg? element.canBeSpentMsg: '';
             });
+        },
+        addSymbol: function (value, valueMask) {
+            //添加正负号
+            if (value > 0){
+                return "+" + valueMask;
+            } else if (value < 0){
+                return "-" + valueMask;
+            } else {
+                return valueMask;
+            }
         }
     };
     somePage.init();
