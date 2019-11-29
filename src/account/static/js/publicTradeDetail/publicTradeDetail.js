@@ -144,7 +144,6 @@ $(function () {
             $.ajaxLoading(obj);
         },
         showFundStatus: function (isBuy, model) {
-            debugger
             var that = this;
             //购买状态的处理
             //填充头部信息
