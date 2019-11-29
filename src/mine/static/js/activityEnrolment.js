@@ -42,7 +42,7 @@ $(function () {
         },
         init: function () {
             var that = this;
-            // that.getUserInfo();
+            that.getUserInfo();
             that.getData(site_url.getApplyActivity_api, {
                 actStatus: 1
             }, 0);
