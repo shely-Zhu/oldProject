@@ -441,6 +441,12 @@ $(function() {
 			    		color:  '#9B9B9B',
 			    		formatter: '{value}%',
 			    	},
+			    	type : 'value',
+ 					axisLabel: {                   
+						formatter: function (value, index) {           
+							return value.toFixed(4);      
+						}                
+					}
 			    },
 			    series: [{
 			    	type: 'line',
@@ -481,28 +487,28 @@ $(function() {
     		$('#HeadBarpathName').html( jsonData.projectName );
 	    	if ( that.data.projectType == 0 ){ //稳金类项目
     			//当前市值
-    			$('#type0TotalM').html( jsonData.capitalisation );
+    			$('#type0TotalM').html( jsonData.capitalisation?jsonData.capitalisation:'--' );
     		   	//持有份额
-    		   	$('.type_0 .totalShare').html( jsonData.totalShare );
+    		   	$('.type_0 .totalShare').html( jsonData.totalShare?jsonData.totalShare:'--' );
     		   	//七日年化
-    		   	$('.type_0 .sevenYearYield').html( jsonData.sevenYearYield + '%');
+    		   	$('.type_0 .sevenYearYield').html( jsonData.sevenYearYield?jsonData.sevenYearYield + '%':'--');
     		   	// 七日年化日期
-    		   	$('.type_0 .smallDate').html( " (" + jsonData.sevenYearYieldUpdateDate + ")");
+    		   	$('.type_0 .smallDate').html( jsonData.sevenYearYieldUpdateDate ?" (" + jsonData.sevenYearYieldUpdateDate + ")":"--");
     		   	//可赎回份额
-    		   	$('.type_0 .kshfe').html( jsonData.allowRedemptionShare);
+    		   	$('.type_0 .kshfe').html( jsonData.allowRedemptionShare?jsonData.allowRedemptionShare:'--');
     		   	//万份收益
-    		   	$('.type_0 .wfsy').html( jsonData.incomeUnit);
+    		   	$('.type_0 .wfsy').html( jsonData.incomeUnit?jsonData.incomeUnit:'--');
 	    	} else if( that.data.projectType == 1){ //稳裕类	   		
 	    		//当前市值
-	    		$('#type1TotalM').html( jsonData.capitalisation );
+	    		$('#type1TotalM').html( jsonData.capitalisation?jsonData.capitalisation:'--'  );
 	    		//持有份额
-	    		$('.type_1 .totalShare').html( jsonData.totalShare );
+	    		$('.type_1 .totalShare').html( jsonData.totalShare?jsonData.totalShare:'--'  );
 	    		//七日年化
-	    		$('.type_1 .sevenYearYield').html( jsonData.sevenYearYield + '%');
+	    		$('.type_1 .sevenYearYield').html( jsonData.sevenYearYield?jsonData.sevenYearYield + '%':'--');
 	    		// 七日年化日期
-    		   	$('.type_1 .smallDate').html( " (" + jsonData.sevenYearYieldUpdateDate + ")");
+    		   	$('.type_1 .smallDate').html(jsonData.sevenYearYieldUpdateDate ?" (" + jsonData.sevenYearYieldUpdateDate + ")":"--");
 	    		//可赎回份额
-    		   	$('.type_1 .kshfe').html( jsonData.allowRedemptionShare);
+    		   	$('.type_1 .kshfe').html( jsonData.allowRedemptionShare?jsonData.allowRedemptionShare:'--');
     		   	//赎回开放日
     		   	jsonData.redemptionOpenDay ? $('.type_1 .shkfr').html( jsonData.redemptionOpenDay) : $(".type_1 .shkfr").parent().css("display", "none")
     		   	//可提交赎回申请时间
@@ -513,39 +519,47 @@ $(function() {
 	    		}
 	    	} else if( that.data.projectType == 2){ //债权类	  		
 	    		//当前持仓
-	    		$('#type2TotalM').html( jsonData.totalShare );
+	    		$('#type2TotalM').html( jsonData.totalShare?jsonData.totalShare:'--');
 	    		//收益分配
-	    		$('.type_2 .syfp').html( jsonData.incomeAssign );
+	    		$('.type_2 .syfp').html( jsonData.incomeAssign?jsonData.incomeAssign:'--');
 	    		//持有天数
-	    		$('.type_2 .cyts').html( jsonData.holdDays);
+	    		$('.type_2 .cyts').html( jsonData.holdDays?jsonData.holdDays:'--');
 	    		//业绩比较基准
-    		   	$('.type_2 .yjbjjz').html( jsonData.expectedProfit);
+    		   	$('.type_2 .yjbjjz').html( jsonData.expectedProfit?jsonData.expectedProfit:'--');
     		   	//成立日
-    		   	$('.type_2 .clr').html( jsonData.setupDate);
+    		   	$('.type_2 .clr').html( jsonData.setupDate?jsonData.setupDate:'--');
     		   	//到期日
-    		   	$('.type_2 .dqr').html( jsonData.endDate ? jsonData.endDate : '' );
+    		   	$('.type_2 .dqr').html( jsonData.endDate ? jsonData.endDate : '--' );
 	    	} else if( that.data.projectType == 3){ //股权类	    		
 	    		//认购金额
-	    		$('#type3TotalM').html( jsonData.buyAmount );
+	    		$('#type3TotalM').html( jsonData.buyAmount ? jsonData.buyAmount : '--' );
 	    		//收益分配
-	    		$('.type_3 .syfp').html( jsonData.incomeAssign );
+	    		if(!jsonData.incomeAssign || jsonData.incomeAssign=='') {
+	    			$('.type_3 .syfp').parent().css("display", "none")
+	    		} else {
+	    			$('.type_3 .syfp').html( jsonData.incomeAssign );
+	    		}
 	    		//成立日
-	    		$('.type_3 .clr').html( jsonData.setupDate);
+	    		if(!jsonData.setupDate || jsonData.setupDate=='') {
+	    			$('.type_3 .clr').parent().css("display", "none")
+	    		} else {
+	    			$('.type_3 .clr').html( jsonData.setupDate);
+	    		}
 	    		//产品期限
-    		   	$('.type_3 .cpqx').html( jsonData.prodTerm);
+    		   	$('.type_3 .cpqx').html( jsonData.prodTerm==''?'--': jsonData.prodTerm);
 	    	} else if( that.data.projectType == 4){ //证券类   		
 	    		//当前市值
-	    		$('#type4TotalM').html( jsonData.capitalisation );
+	    		$('#type4TotalM').html( jsonData.capitalisation ? jsonData.capitalisation : '--'  );
 	    		// 单位净值
-	    		$('.type_4 .dwjz').html( jsonData.navUnit==''?'--': jsonData.navUnit);
+	    		$('.type_4 .dwjz').html( jsonData.navUnit ? jsonData.navUnit : '--' );
 	    		// 持有份额
-	    		$('.type_4 .cyfe').html( jsonData.totalShare );
+	    		$('.type_4 .cyfe').html( jsonData.totalShare ? jsonData.totalShare : '--'  );
 	    		// 累计净值
-	    		$('.type_4 .ljjz').html( jsonData.totalNetValue==''?'--':jsonData.totalNetValue );
+	    		$('.type_4 .ljjz').html( jsonData.totalNetValue ? jsonData.totalNetValue : '--' );
 	    		// 可赎回份额
-	    		$('.type_4 .kshhf').html( jsonData.allowRedemptionShare );
+	    		$('.type_4 .kshhf').html( jsonData.allowRedemptionShare ? jsonData.allowRedemptionShare : '--'  );
 	    		// 持有天数
-	    		$('.type_4 .cyts').html( jsonData.holdDays );
+	    		$('.type_4 .cyts').html( jsonData.holdDays ? jsonData.holdDays : '--'  );
 	    		//赎回开放日
     		   	jsonData.redemptionOpenDay ? $('.type_4 .shkfr').html( jsonData.redemptionOpenDay) : $(".type_4 .shkfr").parent().css("display", "none")
     		   	//可提交赎回申请时间
@@ -712,7 +726,7 @@ $(function() {
 					that.getTypeTwoData()
 				}
 				$('.lineDraw .time').removeClass('active');
-				$('.lineDraw .oneMonth').addClass('active');
+				$('.lineDraw .newYear').addClass('active');
             })
 		},
 	}

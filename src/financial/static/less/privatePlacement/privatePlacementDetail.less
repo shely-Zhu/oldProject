@@ -8,9 +8,9 @@
 
 @import url("@pathCommonLessCom/headBarConfig.less");
 
-// @import url("@pathCommonLessCom/againEnter.less");
-// @import url("@pathCommonLessCom/alertBox.less");
-
+.hide{
+	display: none;
+}
 .privatePlacementDetail{
 	.privateDetailTitle{
 		padding: 1.28rem 0.3rem 0 0.3rem;
@@ -44,6 +44,9 @@
 					font-size: 0.28rem;
 
 				}
+				.netValueDate{
+					font-size: 0.24rem;
+				}
 			}
 			.netValue{
 				font-size: 0.68rem;
@@ -68,6 +71,7 @@
 				margin-top: 0.3rem;
 				span{
 					display: inline-block;
+					margin-right: 0.24rem;
 					padding: 0.06rem 0.2rem;
 					border: 1px solid rgba(255,255,255,0.5);
 					border-radius:0.08rem;
@@ -85,13 +89,37 @@
 		}
 	}
 
+	.investmentTip{
+		font-size: 0.28rem;
+		color: @9B9B9B;
+		padding:0.3rem 0.3rem 1.73rem;
+	}
+
+	.immediatelyBuy{
+		position: fixed;
+		bottom:0;
+		width: 100%;
+		font-size: 0.26rem;
+		text-align: center;
+		.buyRate{
+			height: 0.6rem;
+			line-height: 0.6rem;
+			color: @BB8E5F;
+			background: @c005;
+		}
+		.buyButton{
+			height: 0.98rem;
+			line-height: 0.98rem;
+			font-size: 0.32rem;
+			color: @c005;
+			background:linear-gradient(90deg,rgba(212,183,136,1) 0%,rgba(188,150,90,1) 100%);
+		}
+	}
+
 
 
 }
 
-.hide{
-	display: none;
-}
 .midContent{
 	margin-top: 0.3rem;
 }
@@ -155,22 +183,25 @@
 			&.active {
 				display: block;
 			}
+			
 		}
+		// 基本信息
 		.panel1{
 			width: 100%;
+			margin-top: 0.3rem;
 			.basic{
 				width: 100%;
 				height: 100%;
-				background:@c005;
 				.name{
 					width: 100%;
 					padding-left: 0.3rem;
-					height: 1.4rem;
+					height: 1rem;
 					font-size:0.32rem;
 					font-weight:600;
-					color:rgba(39,39,39,1);
-					line-height:1.5rem;
+					color:@272727;
+					line-height:1rem;
 					border-bottom: 0.01rem solid @c004;
+					background:@c005;
 				}
 				.contentWrap{
 					width: 100%;
@@ -222,12 +253,116 @@
 					}
 				}
 			}
+			.historyTip{
+				margin-left: 0.28rem;
+				font-size: 0.32rem;
+				color: @272727;
+				font-weight: 600;
+			}
+			.priceLimit{
+				float: right;
+				margin-right: 0.32rem;
+				font-size: 0.28rem;
+				color: @9B9B9B;
+			}
+			.history{
+				width: 100%;
+				display: table;
+				span{
+					display:inline-table;
+					width: 20%;
+				}
+			}
 		}
+		// 交易须知
 		.panel2 {
+			margin-top: 0.3rem;
 			.panel1 > .basic;
-			.panel3 > .textContent;
+			.textContainner{
+				width: 100%;
+				height: 100%;
+				margin-bottom: 0.3rem;
+				background:@c005;
+				.textTitle{
+					width: 100%;
+					padding-left: 0.3rem;
+					height: 1rem;
+					font-size:0.32rem;
+					font-weight:600;
+					color:@272727;
+					line-height:1rem;
+					border-bottom: 0.01rem solid @c004;
+				}
+				.detailText{
+					padding:0.3rem;
+					.productRate{
+						width: 100%;
+						height: 0.6rem;
+						margin-bottom: 0.1rem;
+						line-height: 0.6rem;
+						font-size: 0.28rem;
+						color:@4A4A4A;
+						background:rgba(248,249,252,1);
+						border-radius:0.06rem;
+						span{
+							float: right;
+							font-weight: bold;
+						}
+					}
+				}
+			}
+			.collectAccount{
+				width: 100%;
+				height: 5.7rem;
+				padding:0.3rem;
+				background: url('/financial/static/img/privatePlacement/accountBg.png') no-repeat;
+		        ul li{
+		            margin: 0 auto;
+		            .title{
+		                font-size: .28rem;
+		                color: @272727;
+		                letter-spacing: 0;
+		                padding-top: .3rem;
+		                font-weight: 600;
+		            }
+		            .copy{
+		                display: flex;
+		                justify-content: space-between;
+		                padding-bottom: .28rem;
+		                div{
+		                    font-size: .28rem;
+		                    color: @4A4A4A;
+		                }
+		                .copy_btn{
+		                    font-size: .24rem;
+		                    color: @c005;
+		                    letter-spacing: 0;
+		                    display: inline-block;
+		                    width: .72rem;
+		                    height: .4rem;
+		                    line-height: .4rem;
+		                    background:linear-gradient(135deg,rgba(241,205,168,1) 0%,rgba(181,126,69,1) 100%);
+							border-radius:0.04rem;
+		                    text-align: center;
+		                }
+		            }
+		        }
+			}
+	        .copyAll{
+	        	width: 92%;
+	        	height: 0.8rem;
+	        	margin: 0 auto;
+	        	line-height: 0.8rem;
+	        	background:rgba(210,179,129,0.1);
+				border-radius:0 0 0.1rem 0.1rem;
+				font-size: 0.28rem;
+				color: @BB8E5F;
+				text-align: center;
+
+	        }
 			
 		}
+		// 产品材料
 		.panel3 {
 			margin-top: .3rem;
 			.textContent{

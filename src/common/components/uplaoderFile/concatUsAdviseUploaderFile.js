@@ -7,8 +7,8 @@
  * @description:
  */
 
-var tipAction = require('../../../common/js/components/tipAction.js');
-var splitUrl = require('../../../common/js/components/splitUrl.js');
+var tipAction = require('../../js/components/tipAction.js');
+var splitUrl = require('../../js/components/splitUrl.js');
 
 module.exports = function(callback, preThis, type) {
     /****************************初始默认配置******************************/

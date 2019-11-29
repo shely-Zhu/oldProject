@@ -70,8 +70,9 @@
 
     <script id="recordList-template" type="text/x-handlebars-template">
         {{#each this}}
-        <div class="recordItem" data-applyId="{{applyId}}" data-fundCombination="{{fundCombination}}" data-fundCode="{{fundCode}}"
-            data-fundBusinCode="{{fundBusinCode}}" data-allotType="{{allotType}}" data-Fixbusinflag="{{Fixbusinflag}}" >
+        <div class="recordItem" data-applyId="{{allotNo}}" data-fundCombination="{{fundCombination}}" data-fundCode="{{fundCode}}"
+            data-fundBusinCode="{{fundBusinCode}}" data-allotType="{{applyType}}" data-Fixbusinflag="{{fixbusinflag}}"
+            data-shares ="{{shares}}" data-fundName ="{{fundName}}" data-applyDate ="{{applyDate}}" data-autoBuyDesc ="{{autoBuyDesc}}" >
             <div class="recordLogoCon">
                 {{#if payin}} 
                 <div class="recordLogo payin">买入</div>

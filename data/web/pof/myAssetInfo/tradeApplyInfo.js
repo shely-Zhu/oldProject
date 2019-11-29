@@ -27,11 +27,11 @@ var data = Mock.mock({
 
         payModeName: "汇款支付",//支付方式名称
 
-        tradeShares: "",//交易申请份额(赎回交易使用)
+        tradeShares: "1,000,000",//交易申请份额(赎回交易使用)
 
         tradeAmount: "1,000,000.00",//交易申请金额(认/申购交易使用)
 
-        tradeStatus: "",//交易申请状态
+        tradeStatus: "0",//交易申请状态
 
         tradeApplyDesc: "待扣款",//交易状态信息
 
@@ -63,7 +63,7 @@ var data = Mock.mock({
 
         bankIdNo: "",//银行编号
 
-        bankLogoUrl: "https://s.chtfundtest.com/upload/htmall/images/content/b2bece3b-595a-40cf-9fe8-b159f80d3744.png",//银行logoUrl
+        bankLogoUrl: "http://hbimg.b0.upaiyun.com/a9d854a213470cd3805bc9404b03f9179a8532b81b814-RUgwaI_fw658",//银行logoUrl
 
         bankName: "中国工商银行",//银行名称
 

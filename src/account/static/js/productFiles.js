@@ -31,6 +31,8 @@ $(function() {
           url: site_url.productRecord_api,
           data: {
             "projectId":that.gV.projectId,//项目编号
+            // "projectId":"10103",//项目编号
+           
           },
           //async: false,
           needDataEmpty: true,
@@ -54,42 +56,28 @@ $(function() {
   getDataLabels: function(t) {
     var that = this;
     var obj = [{ // 系统调仓记录列表
-        url: site_url.queryReourceLabels_api,
+        url: site_url.queryReourceList_api,
         data: {
-          "projectId":that.gV.projectId,//项目编号
+         //"projectId":that.gV.projectId,//项目编号
+          "projectId":"21970",//项目编号
+          "fileType":"19,20,10,22,1",
         },
+        contentTypeSearch: true,
         //async: false,
         needDataEmpty: true,
         callbackDone: function(json) {
           var data = json.data
-          console.log(data)
-          var list = [];
-          for(var i=0,len=data.length;i<len;i++){
-              if(data[i] === 0){
-                data[i] = "风险揭示书"
-              }else if(data[i] === 1){
-                data[i] = "产品信息"
-              }else if(data[i] === 2){
-                data[i] = "管理报告"
-              }else if(data[i] === 3){
-                data[i] = "资金分配"
-              }else if(data[i] === 4){
-                data[i] = "重要公告及通知"
-              }else if(data[i] === 5){
-                data[i] = "恒天简报 "
-              }
-              list.push({
-                  a:data[i],
-              })
+          if(data.length >0){
+            $(".productCostTitleOne").show()
           }
-          console.log(list)
-          generateTemplate(list,$(".materialWrap"), that.$e.adjustmentTemp);
+          console.log(data)
+          generateTemplate(data,$(".materialWrap"), that.$e.adjustmentTemp);
         },
     }];
     $.ajaxLoading(obj);
 },
     event:function(){
-      $(".openOff").click(function(){
+      mui("body").on('tap','.open',function(e){
         if($(".openOff .open").text() != "收起"){
           $(".productCostDetail").addClass("openStyle")
           $(".productCostDetail").removeClass("productCostDetail");
@@ -103,7 +91,11 @@ $(function() {
           $(".openOff .imgWrap .changeImg").addClass("img")
           $(".openOff .imgWrap .changeImg").removeClass("changeImg")
         }
-      }) 
+			})
+      mui("body").on('tap','.materialContent',function(e){
+        console.log($(this).attr('data-fileUrl'))
+        window.location.href=$(this).attr('data-fileUrl')
+			})
     }
   }
   somePage.init()

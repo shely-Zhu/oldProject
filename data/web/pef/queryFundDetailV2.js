@@ -19,7 +19,7 @@ var data = Mock.mock({
 		"investStart": "100",//个人起投金额（单位：万）
 		"investAdd":"100",  // 个人追加起投金额（单位：万）
 		"projectTerm": "12",//产品期限（单位：个月）
-		"projectTermUnit": "12",//产品期限单位：个月
+		"projectTermUnit": "个月",//产品期限单位：个月
 		"projectUpTime": "2016/01/12",//募集开始日期【yyyy/MM/dd】
 		"projectDownTime": "",//募集结束日期【yyyy/MM/dd】
 		"productRiskLevelDesc": "成长级",//产品风险级别描述
@@ -46,7 +46,8 @@ var data = Mock.mock({
 		"netValueDate" : "2019-09-09" , //最新净值日期
 		"accuNetValue" : "286786" , //累计净值
 		"isNewcomer" : "0" , //是否是新手推荐产品【0.否 1.是】
-        "orderConditionEnum" : "" , //(1:私募合格投资者，2:资管合格投资者) 空没有标签
+        "orderConditionEnum" : "资管合格投资者" , //(1:私募合格投资者，2:资管合格投资者) 空没有标签
+        "orderCondition": "",  
         "isElecContract": "1",  // 是否是电子合同产品【0.否 1.是】
         "isAllowAppend": "1",  //是否可以进行追加操作【0.否 1.是】
         "totalShare": "",  //持仓总份额 千分位展示
@@ -57,8 +58,8 @@ var data = Mock.mock({
         "investDirect": "2",  //0 债权投资;1 证券投资（二级市场）;2 股权投资;3 海外投资;4 其他
         "productCustomerRiskType": "1",  //产品对应客户风险等级类型：1-私募风险等级 2-专项风险等级
         "productRiskLimit": "0",  //是否启用风测限制【0：否，1：是】（V3.13.0）
-        "productLightspot": "",  //一句话介绍（产品亮点）
-        "projectLable":"",  //产品特点标签(‘|’拼接)
+        "productLightspot": "这里是一句话产品详情介绍",  //一句话介绍（产品亮点）
+        "projectLable":"关注度高|电子合同",  //产品特点标签(‘|’拼接)
         "managementFee":"",   //管理费
         "trusteeFee": "",  //托管费
         "isVideo": "",  //是否需要面签 0否 1是

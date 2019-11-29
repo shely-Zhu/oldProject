@@ -237,7 +237,7 @@ module.exports = {
     //活动详情
     './life/static/js/memberClub/activityDetails': "./src/life/static/js/memberClub/activityDetails.js",
     //文件上传
-    './mine/static/js/uploadMaterial': './src/mine/static/js/uploadMaterial.js',
+    // './mine/static/js/uploadMaterial': './src/mine/static/js/uploadMaterial.js',
     //明星理财师-理财师列表
     './starFinancialPlanner/static/js/starFinancialPlannerList': "./src/starFinancialPlanner/static/js/starFinancialPlannerList.js",
 
@@ -300,11 +300,14 @@ module.exports = {
     './account/static/js/public/superStreasureDetail': './src/account/static/js/public/superStreasureDetail.js',
     // 自选公募--超宝详情--内容
     './account/static/js/public/superContent': './src/account/static/js/public/superContent.js',
-    // 现金宝详情页
+    // 现金宝详情页
 
     './account/static/js/public/cashTreasure': './src/account/static/js/public/cashTreasure.js',
-    // 基金确认书
+    // 基金确认书
     './account/static/js/private/privateFundPdf': './src/account/static/js/private/privateFundPdf.js',
+
+    // 查看已签署材料
+    './account/static/js/private/seeSign': './src/account/static/js/private/seeSign.js',
 
     // 公募交易明细
     './account/static/js/publicTradeDetail/publicTradeDetail': './src/account/static/js/publicTradeDetail/publicTradeDetail.js',
