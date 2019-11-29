@@ -48,7 +48,11 @@ $(function() {
             $(".productRecord").text(data.productRecord)
             $(".riskLevel").text(data.riskLevel)
             $(".newScale").text(data.newScale)
-            $(".productCharges").text(data.productCharges)
+            $(".productCostDetail").text(data.productCharges)
+            var rowNum=Math.round($(".productCostDetail").height()/parseFloat($(".productCostDetail").css('line-height')));
+            if(rowNum>=4){
+              $(".openOff").show()
+            }
           },
       }];
       $.ajaxLoading(obj);
@@ -94,7 +98,7 @@ $(function() {
 			})
       mui("body").on('tap','.materialContent',function(e){
         console.log($(this).attr('data-fileUrl'))
-        window.location.href=$(this).attr('data-fileUrl')
+        window.location.href=`/${$(this).attr('data-fileUrl')}`
 			})
     }
   }

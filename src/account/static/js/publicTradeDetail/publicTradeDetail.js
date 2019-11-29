@@ -70,7 +70,7 @@ $(function () {
             var that = this;
             mui("body").on('tap', 'footer', function (e) {
                 //再买一笔 跳转到产品详情页 todo
-                var fundCode = that.gV.data.fundCode;
+                // var fundCode = that.gV.data.fundCode;
                 window.location.href=site_url.productPublicDetail_url;
             })
 
@@ -81,9 +81,9 @@ $(function () {
                     that.cancelOrder(password);
                 });
             })
-            mui("body").on('tap', '', function (e) {
+            mui("body").on('tap', '.buy_info .fund_item', function (e) {
                 //todo 买入产品条目点击进入公募产品详情
-                var fundCode = that.gV.data.fundCode;
+                // var fundCode = that.gV.data.fundCode;
                 window.location.href=site_url.productPublicDetail_url;
             })
             mui("body").on('tap', '.plan', function (e) {

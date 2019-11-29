@@ -81,7 +81,7 @@ $(function() {
             $.each(that.gV.navList, function(i, el) {
                 
                 that.gV.ajaxArr[el.num] = {
-                    fundCode:'00375',//现金宝基金代码
+                    fundCode:'003075',//现金宝基金代码
                     operationType:i,   //请求类型：0-转入，1-转出
                     pageCurrent: that.gV.aP.pageCurrent, //当前第几页(默认为1) 非必填项, 默认设置成第一页
                     pageSize: that.gV.aP.pageSize, //每页显示几条数据(默认10) 非必填项， 默认设置成20
