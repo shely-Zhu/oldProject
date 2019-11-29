@@ -224,6 +224,10 @@ $(function() {
 			mui("body").on('tap','.shiftToBtn',function(e){
 				window.location.href =  site_url.pofCashTransformIn_url;
 			})
+			//点击历史记录
+			mui("body").on('tap','.recordBtn',function(e){
+				window.location.href = `${site_url.superRecord_url}?fundCode=${that.gL.cashFundDetail.fundCode}`;
+			})
         }
     } 
     privateDetail.init()

@@ -12,7 +12,7 @@
     <title>交易记录</title>
 </head>
 
-<body>
+<div>
     @@include('@pathCommonViews/headBarConfig.html',{"pathName":"交易记录","bgColors":"#475A95,#475A95","showType":"0"})
     <div class="cancel_order">
         撤单
@@ -68,9 +68,9 @@
             </div>
         </div>
         <div class="buy_info hide">
-            <!-- 普通基金与现金宝买入信息 -->
+            <!-- 普通基金买入信息 -->
             <div class="item_header">买入信息</div>
-            <div class="item">
+            <div class="item fund_item">
                 <div class="fl">买入产品</div>
                 <span class="iconfont fr">&#xe636;</span>
                 <div class="fund_name fr">--</div>
@@ -87,6 +87,32 @@
             </div>
             <div class="item">
                 <div class="fl">买入时间</div>
+                <div class="fund_date fr">--</div>
+            </div>
+            <div class="item hide fund_type">
+                <div class="fl">资金状态</div>
+                <div class="fund_date fr">资金将退回原银行卡</div>
+            </div>
+        </div>
+        <div class="cash_buy_info hide">
+            <!-- 普通基金与现金宝买入信息 -->
+            <div class="item_header">转入信息</div>
+            <div class="item fund_item">
+                <div class="fl">转入产品</div>
+                <div class="fund_name fr">--</div>
+            </div>
+            <div class="item">
+                <div class="fl">转入金额</div>
+                <div class="fund_amount fr">--</div>
+            </div>
+            <div class="item">
+                <div class="fl">支付方式</div>
+                <div class="pay_mode fr">--</div>
+                <div class="bank_name fr">--</div>
+                <img class="bank_icon fr"></img>                
+            </div>
+            <div class="item">
+                <div class="fl"></div>
                 <div class="fund_date fr">--</div>
             </div>
             <div class="item hide fund_type">
@@ -219,7 +245,7 @@
                 <span class="iconfont fr">&#xe636;</span>
             </div>
         </div>
-        <footer>
+        <footer class="hide">
             再买一笔
         </footer>
 
