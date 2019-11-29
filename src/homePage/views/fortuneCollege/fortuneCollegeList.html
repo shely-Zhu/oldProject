@@ -19,7 +19,7 @@
      <!--@@include('@pathCommonViews/noDataImg.html')-->
      <!--列表加载显示图标-->
      <!--@@include('@pathCommonViews/loading/listLoading.html')-->
-     <div class="box">
+     <div class="boxA">
           @@include('@pathCommonViews/headBarConfig.html',{"bgColors":"#384A81,#2A3C70","showType":"1","pathName":"财富学院"})
           <div class="list">
                <div class="wrapper">
@@ -133,19 +133,17 @@
                          <div class="mui-scroll-wrapper mui-slider-indicator mui-segmented-control mui-segmented-control-inverted">
                               <div class="mui-scroll">
                                    {{#each listContent}}
-                                   <a href="fortuneClassroom.html">
-                                        <div class="mui-control-item conten">
-                                             
-                                             <img style="width:3.2rem;height:3rem;" src="/homePage/static/img/picture1_3@2x.png" alt="">
-                                             <div class="con">
-                                                  <!-- <h4>{{intro}}</h4>
-                                                  <p>李世通·国开证券首席投资顾问</p> -->
-                                                  <p>
-                                                       {{content}}
-                                                  </p>
+                                        <!-- <a href="fortuneClassroom.html" style="width:6.2rem;height:4rem;display: block;position: absolute;;left:0;top:0;" class="mui-control-item"> </a> -->
+                                        <a href="fortuneClassroom.html" class="listHref">
+                                             <div class="mui-control-item conten">
+                                                  
+                                                  <img style="width:3.2rem;height:3rem;" src="/homePage/static/img/picture1_3@2x.png" alt="">
+                                                  <div class="con">
+                                                       <h4>{{title}}</h4>
+                                                       <p>{{intro}}</p>
+                                                  </div>
                                              </div>
-                                        </div>
-                                   </a>
+                                         </a>
                                    {{/each}}
                               </div>
                          </div>
@@ -175,10 +173,10 @@
                                    <li>
                                         
                                         <div>
-                                             <p>{{createName}}</p>
+                                             <p>{{title}}</p>
                                              <span>{{createTimeStr}}</span>
                                         </div>
-                                        <img src="/homePage/static/img/tab1.png" alt="">
+                                        <img src="/homePage/static/img/con1.png" alt="">
                                    
                                    </li>
                               </a>
@@ -187,7 +185,7 @@
                </div>
           {{/each}}
      </script>
-     <!-- <script src="/include/js/vendor/jquery/jquery1.12.3.js"></script> -->
+     <script src="/include/js/iscroll.js"></script>
 	<script src="@pathIncludJs/vendor/root.js"></script>
      <script src="@pathIncludJs/vendor/mui/mui.min.js"></script>
      <script src="/homePage/static/js/fortuneCollegeList.js"></script>

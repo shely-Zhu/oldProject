@@ -329,6 +329,9 @@ module.exports = function() {
     this.queryFortuneCollegeSec_api = http_url.web_url + '/account/home/frontend/queryFortuneCollegeSec'; //财富讲堂/财富研究
     this.queryFortuneArticleList_api = http_url.web_url + '/account/home/frontend/queryFortuneArticleList'; //财富文章列表
 
+     //查询已签署活动
+     this.gquerySignedContract_api = http_url.web_url + '/pef/querySignedContract';
+
     /*------------------------------------ 私募接口文档 start -------------------------------------*/
     // 产品详情接口
     this.queryFundDetailV2_api = http_url.web_url + '/pef/queryFundDetailV2';

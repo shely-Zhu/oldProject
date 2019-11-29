@@ -18,6 +18,7 @@ var path = require('path');
 //从src下面的文件夹开始
 var pathVar = {
     '@pathCommonCom': '/common/components', //include文件夹
+    '@pathCommonBase': '/common/base', //include文件夹
     '@pathInclude': '/include', //include文件夹
     '@pathIncludJs': '/include/js', //include文件夹
     '@pathCommonJs': '/common/js', //common/js

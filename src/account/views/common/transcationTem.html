@@ -228,9 +228,9 @@
             <span>当前进度{{assignStep}}/6</span> {{else}}
             <span>当前进度已截止</span> {{/if}}
             <a href="">查看具体情况</a>
-            <div class="toDetail toView" data-type="assign">详情</div>
+            <div class="blueBgButton toDetail toView" data-type="assign">详情</div>
             {{#if assignCancel}}
-            <div class="cancelBtn" data-type="assign" data-id="{{projectId}}">取消转让</div>
+            <div class="goldBorderButton cancelBtn" data-type="assign" data-id="{{projectId}}">取消转让</div>
             {{/if}} {{#if assignObj}}
             <div class="toDetail chooseObj" data-type="assign" data-id="{{projectId}}">选择受让方</div>
             {{/if}} {{#if assignToVideo}}
@@ -292,9 +292,9 @@
             <span>当前进度{{assigneeStep}}/6</span> {{else}}
             <span>当前进度已截止</span> {{/if}}
             <a href="">查看具体情况</a>
-            <div class="toDetail toView" data-type="assignee">详情</div>
+            <div class="blueBgButton toDetail toView" data-type="assignee">详情</div>
             {{#if assigneeCancel}}
-            <div class="cancelBtn" data-type="assignee" data-id="{{projectId}}">取消受让</div>
+            <div class="goldBorderButton cancelBtn" data-type="assignee" data-id="{{projectId}}">取消受让</div>
             {{/if}} {{#if assigneeToVideo}}
             <div class="toDetail toVideo" data-type="assignee" data-id="{{projectId}}">视频双录</div>
             {{/if}}

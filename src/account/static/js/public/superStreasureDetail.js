@@ -13,8 +13,7 @@ var tipAction = require('@pathCommonJs/components/tipAction.js');
 var splitUrl = require('@pathCommonJs/components/splitUrl.js')();
 var generateTemplate = require('@pathCommonJsComBus/generateTemplate.js');
 
-//引入 ECharts 主模块
-//var echarts = require('echarts/lib/echarts');
+
 
 $(function() {
 
@@ -22,7 +21,7 @@ $(function() {
         gL: {
 			shuju:[],
 			time:[],
-			cashFundDetail:"",
+			cashFundDetail:""
         },
         init:function(){
 			var that = this;
@@ -223,6 +222,10 @@ $(function() {
 			//点击转入跳转
 			mui("body").on('tap','.shiftToBtn',function(e){
 				window.location.href =  site_url.pofCashTransformIn_url;
+			})
+			//点击历史记录
+			mui("body").on('tap','.recordBtn',function(e){
+				window.location.href = `${site_url.superRecord_url}?fundCode=${that.gL.cashFundDetail.fundCode}`;
 			})
         }
     } 
