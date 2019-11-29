@@ -538,7 +538,7 @@ $(function() {
 	    		//认购金额
 	    		$('#type3TotalM').html( jsonData.buyAmount ? jsonData.buyAmount : '--' );
 	    		//收益分配
-	    		if(!jsonData.incomeAssign || jsonData.incomeAssign=='') {
+	    		if(!jsonData.incomeAssign || jsonData.incomeAssign=='' || Number(jsonData.incomeAssign)==0) {
 	    			$('.type_3 .syfp').parent().css("display", "none")
 	    		} else {
 	    			$('.type_3 .syfp').html( jsonData.incomeAssign );

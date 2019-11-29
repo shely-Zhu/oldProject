@@ -35,7 +35,7 @@ var data = Mock.mock({
         "assetsGainAndLoss":"1.111",//持仓盈亏
         "incomeUnit":"123123",//万份收益
         "incomeUnitDate":"2019-11-19",//万份收益更新日期
-        "incomeAssign":"",//收益分配
+        "incomeAssign":"0.00",//收益分配
         "holdDays":"23",//持有天数
         "totalNetValue":"",//累计净值
         "totalNetValueDate":"2019-11-19",//累计净值日期
