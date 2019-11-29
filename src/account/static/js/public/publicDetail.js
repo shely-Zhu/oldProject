@@ -46,7 +46,7 @@ $(function () {
             that.getData();
 
 
-            that.events();
+
         },
         changeVal: function (prop, num, isfalse) {
             isfalse = isfalse === undefined ? true : false
@@ -85,6 +85,7 @@ $(function () {
                     $(".tplBox").html(html);
                     that.getData1();
                     that.getData2('qrnh', 1);
+                    that.events();
                     $.each($(".net_worth_area .net_worth_item .value"), function (i, v) {
                         if (Number($(v).text().slice(0, $(v).text().length - 1)) >= 0) {
                             $(v).addClass('value_red')
@@ -102,24 +103,34 @@ $(function () {
         },
         events: function () {
             var that = this;
-
+            var json = that.gV.json
+            var fundCode = getQueryString('fundCode') ? getQueryString('fundCode') : '000847'
+            var fundComId = json.fmcComId ? json.fmcComId : 'gz04tVwXga'
+            var secuId = json.secuId ? json.secuId : '000846.OF'
+            var fundName = json.chiName ? json.chiName : '中融货币市场基金'
             // 基金经理
             mui("body").on("tap", ".fundManager", function (e) {
-                // var scheduledProtocolId = getQueryString('scheduledProtocolId')
-                // window.location.href = site_url.pofOrdinarySetThrow_url + '?scheduledProtocolId=' + scheduledProtocolId + '&fundCode=' + fundCode;
-                window.location.href = site_url.pofFundManager_url + '?fundCode=000847'
+                window.location.href = site_url.pofFundManager_url + '?fundCode=' + fundCode
             });
             // 基金公司
             mui("body").on("tap", ".fundCompany", function (e) {
-                window.location.href = site_url.pofFundCompany_url + '?fundComId=gz04tVwXga'
+                window.location.href = site_url.pofFundCompany_url + '?fundComId=' + fundComId
             });
             // 基金档案
             mui("body").on("tap", ".fundFile", function (e) {
-                window.location.href = site_url.pofFundFile_url + '?fundCode=000847&secuId=000846.OF'
+                window.location.href = site_url.pofFundFile_url + '?secuId=' + secuId + '&fundCode=' + fundCode;
             });
             // 交易规则
             mui("body").on("tap", ".dealRegArea .rule", function (e) {
-                window.location.href = site_url.pofTransactionRules_url + '?fundCode=000847'
+                window.location.href = site_url.pofTransactionRules_url + '?fundCode=' + fundCode
+            });
+            // 定投
+            mui("body").on("tap", ".footer .fixed_investement_btn", function (e) {
+                window.location.href = site_url.pofOrdinarySetThrow_url + '?fundCode=' + fundCode + '&fundName=' + fundName + '&type=add';
+            });
+            // 买入
+            mui("body").on("tap", ".footer .buy_btn", function (e) {
+                window.location.href = site_url.fundTransformIn_url + '?fundCode=' + fundCode + '&fundName=' + fundName;
             });
             // 七日年华 万份收益
             mui("body").on("tap", "#redeemNav .navSpan ", function (e) {
