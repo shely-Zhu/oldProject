@@ -12,12 +12,10 @@
  */
 
 
-require('@pathIncludJs/base.js');
+require('@pathCommonBase/base.js');
 // require('@pathCommonJsCom/utils.js');
 //ajax调用
 require('@pathCommonJs/ajaxLoading.js');
-
-require('@pathCommonJs/components/headBarConfig.js');
 
 var splitUrl = require('@pathCommonJs/components/splitUrl.js')();
 
