@@ -42,7 +42,6 @@ $(function () {
                     if (json.data.pageList.length) {
                         //获取银行卡后四位
                         Handlebars.registerHelper("get_last_4_value", function (value, options) {
-                            console.log(value.substring(value.length - 4));
                             return value.substring(value.length - 4);
                         });
                         var tplm = $("#bankLists").html();
@@ -92,7 +91,14 @@ $(function () {
                         }
                     });
                     that.chooseTipDesc();
-                    //列表渲染
+
+                    //现金宝列表渲染
+                    var tplm = $("#cashLists").html();
+                    var template = Handlebars.compile(tplm);
+                    var html = template(that.gV.data.cashDetail);
+                    $("#cashPageLists").html(html);
+
+                    //普通基金列表渲染
                     var tplm = $("#dataLists").html();
                     var template = Handlebars.compile(tplm);
                     var html = template(that.gV.data.fundDetailList);
@@ -123,7 +129,6 @@ $(function () {
             })
             //银行卡列表点击
             $('.bank_item').on('click', function(){
-                console.log('呵呵' + $(this));
                 $(this).find('.iconfont').removeClass('hide');
                 $(this).siblings().find('.iconfont').addClass('hide');
                 //将获取到的名字填充到外部
@@ -139,22 +144,29 @@ $(function () {
         },
         events: function () { //绑定事件
             var that = this;
-            //item的点击 进入持仓详情
-            $('.hold_item').on('click', function(){
+            //普通基金item的点击 进入持仓详情
+            mui("body").on('tap', '#pageLists .hold_item', function (e) {
                 var index = $(this).index();
                 sessionStorage.setItem("publicFundDetail",JSON.stringify(that.gV.data.fundDetailList[index])) 
                 window.location.href=site_url.optionalPublicDetail_url;
             })
+            //现金宝基金item的点击 进入持仓详情
+            mui("body").on('tap', '#cashPageLists .hold_item', function (e) {
+                var index = $(this).index();
+                sessionStorage.setItem("cashFundDetail",JSON.stringify(that.gV.data.cashDetail[index])) 
+                console.log(site_url.superStreasureDetail_url);
+                window.location.href=site_url.superStreasureDetail_url;
+            })
             //点击持仓列表的感叹号 进入持仓明细
-            $('.position_tip').on('click', function(){
+            mui("body").on('tap', '.position_tip', function (e) {
                 //todo 跳转
             })
             //购买
-            $('.buy_btn').on('click', function(){
+            mui("body").on('tap', '.buy_btn', function (e) {
                 //todo 跳转
             })
             //赎回
-            $('.redeem_btn').on('click', function(){
+            mui("body").on('tap', '.redeem_btn', function (e) {
                 //todo 跳转
             })
             // 头部文案提示(金钱展示隐藏)

@@ -28,6 +28,7 @@ html{
         padding-bottom: 0.5rem;
         border-top:0.01rem solid @c004;
         background:@c005;
+        display:none;
         .photo{
             width: 100%;
             height:1.8rem;
@@ -47,32 +48,115 @@ html{
             color:@272727;
             margin-bottom: 1.2rem;
         }
-        
-        .topContent{
-            width: 95%;
-            margin:0 auto;
-            font-size:0.28rem;
-            font-family:PingFangSC-Regular,PingFang SC;
-            font-weight:400;
-            color:@272727;
-            .topContentUl{
-                width:100%;
-                display:flex;
-                justify-content:space-between;
-                padding: 0.13rem 0;
-                li  img{
-                    display:inline-block;
-                    width: 0.35rem;
-                    height: 0.35rem;
+        .proessBox{
+            width: 100%;
+            box-sizing: border-box;
+            padding:0 0.3rem;
+            overflow: hidden;
+            display:none;
+            .proess-img{
+                float: left;
+                width:0.36rem;
+                height:1.76rem ;
+                
+                .proess-line{
+                    width: 100%;
+                    height: 0.34rem;
+                    background: url("../../img/proess_line.png") 0 0 no-repeat;
+                    background-size: 100% 100%;
                 }
-                .changeTime{
-                    color:@9B9B9B ;
+                .wait-proess{
+                    width: 100%;
+                    height: 0.36rem;
+                    background: url("../../img/account_icon_flow_grey@2x.png") 0 0 no-repeat;
+                    background-size: 100% 100%;
                 }
-                .cont{
-                    width: 6.4rem;
+                .right-proess{
+                    width: 100%;
+                    height: 0.36rem;
+                    background: url("../../img/account_icon_flow_blue@2x.png") 0 0 no-repeat;
+                    background-size: 100% 100%;
+                }
+            }
+            .proess-title{
+                float: left;
+                width:6.54rem;
+                height:1.76rem ;
+                overflow: hidden;
+                padding-left:0.13rem;
+                box-sizing: border-box;
+                .time{
+                    display: flex;
+                    justify-content: space-between;
+                    font-size:0.26rem;
+                    color: #272727;
+                    font-family: PingFangSC-Regular, PingFang SC;
+                    // .laber-left{
+                    //     float: left;
+                    // }
+                    .laber-right{
+                       color:#9b9b9b
+                    }
+                }
+                .applyTime{
+                    height: 0.36rem;
+                    line-height: 0.36rem;
+                }
+                .shareTime{
+                    height:1.05rem;
+                    line-height: 1.05rem;
+                }
+                .earningsTime{
+                    height: 0.36rem;
+                    line-height: 0.36rem;
                 }
             }
         }
+        .proessBox.cashOut{
+            width: 100%;
+            box-sizing: border-box;
+            padding:0 0.3rem;
+            overflow: hidden;
+            .proess-img{
+                float: left;
+                width:0.36rem;
+                height:1.06rem ;
+                background: url("../../img/process2.png") 0 0 no-repeat;
+                background-size: 100% 100%;
+            }
+            .proess-title{
+                float: left;
+                width:6.54rem;
+                height:1.06rem ;
+                overflow: hidden;
+                padding-left:0.13rem;
+                box-sizing: border-box;
+                .time{
+                    display: flex;
+                    justify-content: space-between;
+                    font-size:0.26rem;
+                    color: #272727;
+                    font-family: PingFangSC-Regular, PingFang SC;
+                    // .laber-left{
+                    //     float: left;
+                    // }
+                    .laber-right{
+                       color:#9b9b9b
+                    }
+                }
+                .applyTime{
+                    height: 0.36rem;
+                    line-height: 0.36rem;
+                    margin-bottom: 0.34rem;
+                }
+                .toTime{
+                    height:1.05rem;
+                    line-height: 1.05rem;
+                }
+               
+            }
+        }
+    
     }
     .listWrap{
         width: 100%;
@@ -81,6 +165,7 @@ html{
         background:@c005;
         .listContent{
             width: 100%;
+            display:none;
             .listContentUl{
                 width: 95%;
                 margin: 0 auto;
@@ -93,22 +178,25 @@ html{
                 font-family:PingFangSC-Regular,PingFang SC;
                 font-weight:500;
                 color:@272727;
-                .textcolor{
-                    color: @364D97;
+                
+                li{
+                    line-height: 1rem;
+                    height: 1rem;
                 }
                 .bank{
                     width:4.2rem;
                     text-align: right;
-                    .bankOne{
+                    .banKImg{
+                        width: .3rem;
+                        height: .3rem;
                         display: inline-block;
-                        width: 0.35rem;
-                        height: 100%;
                     }
-                    img{
+                    span{
                         display: inline-block;
-                        width: 0.35rem;
-                        height: 0.35rem;
-                    };
+                    }
+                }
+                .textcolor{
+                    color: @364D97;
                 }
                 .onlinePay span{
                     height: 0.5rem;
@@ -118,7 +206,7 @@ html{
                 }
             }
             .changeNone{
-                display: none;
+                // display: none;
             }
         }
     }

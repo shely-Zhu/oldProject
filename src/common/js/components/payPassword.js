@@ -21,29 +21,36 @@ var fixScroll = function(num){//ios浏览器需要滚动
 }
 
 module.exports = function(callback,forgetCall){
-
-
+		
+		$("#passwordWrap").show();
 		//将input输入内容依次加到密码输入框里
 		$("#pwd-input").on("input", function() {
 //				将input上的内容赋值到password框上
 			 var payPwd = $(this).val().trim().split(''),
 			 inputVal = $(this).val();
-			 if(payPwd.length == 6){
-				 callback(inputVal);
-				 return false;
-			 }
-			 
 
+			 if(payPwd.length > 6){
+			 	return false;
+			 }
 //			把input=tel的值赋值给password的input框
 			for(var i = 0, len = payPwd.length; i < len; i++) {
 				$(".fake-box input").eq(i).val(payPwd[i]);
-			 }
-			 $(".fake-box input").each(function() {
+			}
+			if(payPwd.length == 6){
+				 callback(inputVal);
+				return false;
+			}
+			 
+			$(".fake-box input").each(function() {
 				 var index = $(this).index();
 				 if(index >= len) {
 					 $(this).val("");
 				 }
 			 });
+			 if(payPwd.length == 6){
+			 	console.log(inputVal)
+				 callback(inputVal);
+			 }
 		 })
 	   
 		$("#pwd-input").on("focus", function() {

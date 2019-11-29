@@ -1,3 +1,10 @@
+/**
+ * 历史明细
+ * chentiancheng 2019 11 27
+ * 
+ */
+
+
 require('@pathIncludJs/vendor/config.js');
 require('@pathIncludJs/vendor/zepto/callback.js');
 require('@pathIncludJs/vendor/zepto/deferred.js');

@@ -23,6 +23,8 @@ var data=Mock.mock({
 			"projectName": "",//产品名称
 			"netValueBeginDate": "",//净值起始日期【yyyy/MM/dd】
 			"netValueEndDate": "",//净值终止日期【yyyy/MM/dd】
+			"unitNetValueGrowthRate":"",  //单位净值增长率
+
 			}
 		] 
 	}

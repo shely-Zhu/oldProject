@@ -7,7 +7,7 @@
 var Mock = require('mockjs');
 
 var data = Mock.mock({
-    "status": "0",
+    "status": "0000",
     "message": "处理成功！",
     "data": {
 

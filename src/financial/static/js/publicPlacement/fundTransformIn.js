@@ -124,6 +124,7 @@ $(function () {
                 //async: false,
                 needDataEmpty: true,
                 callbackDone: function(json) {
+					debugger
 					if(json.status == '0000'){
 						// 将列表插入到页面上
 						var data = [] ;
@@ -134,7 +135,13 @@ $(function () {
 						$('.popup').css('display','block')
 					}
                   
-                },
+				},
+				callbackNoData:function(json){
+					tipAction(json.message);
+				},
+				callbackFail:function(json){
+					tipAction(json.message);
+				},
 
             }];
             $.ajaxLoading(obj);
@@ -214,48 +221,63 @@ $(function () {
 					capitalMode:that.gV.capitalMode,
 					password:val,
 				},
-				//async: false,
+				// async: true,
 				needDataEmpty: true,
 				callbackDone: function(json) {
-					$(".elasticButtons").hide();
 					// 将列表插入到页面上
 					var data = [] ;
 					data = json.data;
+					
 					if(json.status == '0000'){
 					   window.location.href = site_url.pofSurelyResultsDetail_url + '?applyId=' + data.allotNo + '&fundBusinCode=' + 
 					   data.fundBusinCode + "&fundCode=" + that.gV.fundCode + "&payType=" +that.gV.payType + '&flag=buy';
-					}else if(json.status == 'POF1186' || json.status == 'POF1186'){
-						//密码错误
-						$(".elasticButtons.error1").show();
-						that.$el.elasticTxt.html(json.message)
-					}else if(json.status == 'POF0192' || json.status == 'POF1353'){
-							//密码锁定
-						$(".elasticButtons.error2").show();
-						that.$el.elasticTxt.html(json.message)
-					}else if(json.status == 'POF1101' || json.status == 'POF1907' || json.status == 'POF1152' || json.status == 'POF3123'
-					|| json.status == 'POF4609' || json.status == 'POF7453' || json.status == 'POF7457' || json.status == 'POF9020'
-					|| json.status == 'POF9036'){
-						//余额不足
-						$(".elasticButtons.error2").show();
-						that.$el.elasticTxt.html(json.message)
-					}else if(json.status == 'POF0103'){
-						//基金状态[停止交易],不能做[赎回]交易
-						$(".elasticButtons.error2").show();
-						that.$el.elasticTxt.html(json.message)
-					}else if(json.status == 'POF1217'){
-						//是代表账号锁定 弹后台msg框
-						$(".elasticButtons.error3").show();
-						that.$el.elasticTxt.html(json.message)
-					}else if(json.status == 'POF1857'){
-						//提示单日单账户限额
-						$(".elasticButtons.error3").show();
-						that.$el.elasticTxt.html(json.message)
-				    }else{
-						$(".elasticButtons.error3").show();
-						that.$el.elasticTxt.html(json.message)
 					}
-
 				},
+				callbackNoData:function(ison){
+					tipAction(data.message);
+				},
+				callbackFail:function(ison){
+					$(".elasticButtons").hide();
+					var data = [] ;
+					data = json.data;
+					if(json.status == 'POF1186' || json.status == 'POF1186'){
+						 //密码错误
+						 $(".popup-password").show();
+						 $(".elasticButtons.error1").show();
+						 that.$el.elasticTxt.html(json.message)
+					 }else if(json.status == 'POF0192' || json.status == 'POF1353'){
+							 //密码锁定
+						 $(".popup-password").show();
+						 $(".elasticButtons.error2").show();
+						 that.$el.elasticTxt.html(json.message)
+					 }else if(json.status == 'POF1101' || json.status == 'POF1907' || json.status == 'POF1152' || json.status == 'POF3123'
+					 || json.status == 'POF4609' || json.status == 'POF7453' || json.status == 'POF7457' || json.status == 'POF9020'
+					 || json.status == 'POF9036'){
+						 //余额不足
+						 $(".popup-password").show();
+						 $(".elasticButtons.error2").show();
+						 that.$el.elasticTxt.html(json.message)
+					 }else if(json.status == 'POF0103'){
+						 //基金状态[停止交易],不能做[赎回]交易
+						 $(".popup-password").show();
+						 $(".elasticButtons.error2").show();
+						 that.$el.elasticTxt.html(json.message)
+					 }else if(json.status == 'POF1217'){
+						 //是代表账号锁定 弹后台msg框
+						 $(".popup-password").show();
+						 $(".elasticButtons.error3").show();
+						 that.$el.elasticTxt.html(json.message)
+					 }else if(json.status == 'POF1857'){
+						 //提示单日单账户限额
+						 $(".popup-password").show();
+						 $(".elasticButtons.error3").show();
+						 that.$el.elasticTxt.html(json.message)
+					 }else{
+						 $(".popup-password").show();
+						 $(".elasticButtons.error3").show();
+						 that.$el.elasticTxt.html(json.message)
+					 }
+				}
 
 			}];
 			$.ajaxLoading(obj);
@@ -274,6 +296,7 @@ $(function () {
 				$("#loading").show()
 				$(this).find(".imgc").show();
 				$(this).find(".iimg").hide();
+				debugger
 				that.getBankCard(useEnv)
 			}) 
 
@@ -344,8 +367,7 @@ $(function () {
 				})
 
 				if(that.gV.payType == '0'){
-					generateTemplate(data, that.$el.onlinepay, that.$el.bankListCheckTemplate,true);
-					debugger
+					generateTemplate(data, that.$el.onlinepay, that.$el.bankListCheckTemplate,true);		
 					that.$el.remittance.html('')
 				}
 				if(that.gV.payType == '1'){

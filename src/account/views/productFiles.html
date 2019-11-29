@@ -67,7 +67,7 @@
                         <img class="img" src="/account/static/img/jiantou.png" alt="">
                      </div>
                    </div>
-                   <div class="productCostTitle">
+                   <div class="productCostTitle productCostTitleOne">
                         推荐材料
                    </div>
                    <div class="materialWrap">
@@ -88,8 +88,8 @@
 
     <script id="adjustment-template" type="text/x-handlebars-template">
         {{#each this}}
-        <ul class="materialContent">
-            <li>{{a}}</li>
+        <ul data-fileUrl='{{fileUrl}}' class="materialContent">
+            <li class="fileName">{{fileName}}</li>
             <li class="imgLi"><img src="/account/static/img/jiantou.png" alt=""></li>
         </ul>
         {{/each}}

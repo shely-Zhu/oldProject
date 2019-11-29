@@ -16,6 +16,8 @@ var generateTemplate = require('@pathCommonJsComBus/generateTemplate.js');
 $(function() {
     var somePage = {
       $el: {
+        shareTimeP:$(".resultTopTwo .shareTimeP"),   //开始计算收益流程
+        earningsTimeP:$(".resultTopTwo .earningsTimeP"),   //第一笔收益到账流程
         succedText:$(".resultTopTwo .succedText"),  //在线支付标题
         applyTime:$(".applyTime .laber-right"),  //申请时间
         shareTime:$(".shareTime .laber-right"),  //预计确认时间
@@ -74,6 +76,10 @@ $(function() {
                 $(".resultTop").hide()
                 $(".resultTopTwo").show()
                 $(".changeNone").removeClass("changeNone")
+                if(json.data.debitStatus != '1' && json.data.tradeStatus == '5'){
+                  that.$el.shareTimeP.addClass('right-proess')
+                  that.$el.earningsTimeP.addClass('right-proess')
+                }
                 that.$el.succedText.html(json.data.tradeApplyDesc)
                 that.$el.applyTime.html(json.data.originalDate)
                 that.$el.shareTime.html(json.data.estimateConfirmDate)
@@ -136,7 +142,6 @@ $(function() {
       },
       event:function(){
         var that = this;
-        //点击转出规则
         $('body').on('tap','.over',function(){
           //跳往持仓列表页
         }) 

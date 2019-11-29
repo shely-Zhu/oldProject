@@ -214,7 +214,10 @@ $(function() {
 
                     if (!$.util.objIsEmpty(pageList)) {
 
-                        jsonData.tobe = that.gV.current_index == 0 ? 0 : 1;
+                        pageList.map(function(e){
+
+                            e.tobe = that.gV.current_index == 0 ? true : false;
+                        })
 
                         var list_html = that.gV.list_template(jsonData);//  把内容  放到  模板里
                         //设置这两参数，在initMui()中使用
@@ -378,6 +381,14 @@ $(function() {
         },
         events: function() { //绑定事件
             var that = this;
+            //点击列表跳转
+            mui('body').on('tap','.datalist',function(){
+                var applyId=$(this).attr('data-applyId');
+                var isBuy=$(this).attr('data-isBuy');
+                var isCash = true
+                window.location.href=site_url.publicTradeDetail_url+'?applyId='+applyId+'&isBuy='+isBuy 
+                                        +'&isCash='+isCash;
+            });
         }
     };
     data.init();
