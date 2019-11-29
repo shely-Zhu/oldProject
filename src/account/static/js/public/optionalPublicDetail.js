@@ -80,17 +80,44 @@ $(function() {
 		getData: function(){
 
 			var that = this;
-
-
-			    		//稳金类项目，请求七日年化/万份收益折线图
-			    		that.getTypeOneData();
-			    		//请求快速赎回和普通赎回的文案
-			    		that.getTxt();
+						
+			//获取红利
+			that.getDividend();
+    		//稳金类项目，请求七日年化/万份收益折线图
+    		that.getTypeOneData();
+    		//请求快速赎回和普通赎回的文案
+    		that.getTxt();
 
 
 			
 		},
-
+		getDividend:function(){
+			var that = this;
+			var obj = [{
+			    url: site_url.pofQueryDividendByCode_api, 
+			    data: {
+			    	tradeAcco: that.data.publicFundDetail.tradeNo, 
+			    	fundCode: that.data.fundCode,
+			    },
+			    needLogin: true,
+			    needLoading: true,
+			    callbackDone: function(json) {
+			    	var jsonData = json.data;//防止数据为空下面循环出错
+			    	if(!jsonData.length){
+			    		return false;
+			    	}
+			    	$.each(jsonData, function(i,v) {
+			    		if(v.checkFlag == 1){//如果被选中，拿选中这一条的数据
+			    			$(".dividend").text(v.autoBuyDes)
+			    			return false;
+			    		}
+			    	});
+		       	
+			    },
+			}]
+			$.ajaxLoading(obj);
+			
+		},
 		//请求七日年化/万份收益数据
 		getTypeOneData: function( num ){
 			var that = this,
@@ -150,7 +177,7 @@ $(function() {
 			    	fundCode: that.data.fundCode,
 			    	dataRange: dataRange 
 			    },
-			    needLoading: true,
+//			    needLoading: true,
 			    needLogin: true,
 			    callbackDone: function(json) {
 			    	var jsonData = json.data;
@@ -171,27 +198,6 @@ $(function() {
 			       		case 4: that.data['qrnhWfsy'].sinceNow = newData;break;
 			       	}
 			       	that.drawLine( type, newData);			       	
-			    },
-			},{
-			    url: site_url.pofQueryDividendByCode_api, 
-			    data: {
-			    	tradeAcco: that.data.publicFundDetail.tradeNo, 
-			    	fundCode: that.data.fundCode,
-			    },
-			    needLogin: true,
-			    needLoading: true,
-			    callbackDone: function(json) {
-			    	var jsonData = json.data;//防止数据为空下面循环出错
-			    	if(!jsonData.length){
-			    		return false;
-			    	}
-			    	$.each(jsonData, function(i,v) {
-			    		if(v.checkFlag == 1){//如果被选中，拿选中这一条的数据
-			    			$(".dividend").text(v.autoBuyDes)
-			    			return false;
-			    		}
-			    	});
-		       	
 			    },
 			}];
 			$.ajaxLoading(obj);
