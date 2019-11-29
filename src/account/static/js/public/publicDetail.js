@@ -124,9 +124,15 @@ $(function () {
             // 七日年华 万份收益
             mui("body").on("tap", "#redeemNav .navSpan ", function (e) {
                 $(this).addClass('active').siblings().removeClass('active');
-                // that.drawCircle();
-                console.log($(this).attr('type'), "99");
-
+                var type = Number($(this).attr('type')) === 1 ? 'qrnh' : 'wfsy'
+                var time = that.gV.time
+                var end = new Date().toLocaleString().split(" ")[0].replace(/\//g, '-')
+                that.gV.type = type
+                if (time) {
+                    that.getData2(type, time);
+                } else {
+                    that.getData2(type, time, end);
+                }
             });
             //月 季 本年 一年 成立以来
             mui("body").on("tap", ".lineWrap .tab span ", function (e) {
@@ -134,7 +140,7 @@ $(function () {
 
                 var time = Number($(this).attr('time'))
                 var end = new Date().toLocaleString().split(" ")[0].replace(/\//g, '-')
-                console.log(time, end, "888");
+                that.gV.time = time
                 if (time) {
                     that.getData2(that.gV.type, time);
                 } else {
@@ -182,21 +188,19 @@ $(function () {
             $.ajaxLoading(obj);
         },
         getData2: function (type, time, end) {
-            console.log(type, time, end, "00000111");
             time = time === 0 ? "" : time
             var that = this;
             var dataOpt = {
                 fundCode: getQueryString('fundCode') ? getQueryString('fundCode') : '000847',
                 dataRange: time,
                 end: end || ""
-            },
+            };
             // 请求页面数据
             var obj = [{
                 url: site_url.prfFundNetWorthTrendChart_api,
                 data: dataOpt,
                 callbackDone: function (json) {
                     json = json.data.pageList
-                    console.log(json);
                     var newData = {
                         seven: [], //存放折线图七日年化
                         date: [], //存放折线图收益日期
@@ -210,28 +214,9 @@ $(function () {
                     // newData.date = [json[0].trdDt, json[Math.ceil(json.length / 2)].trdDt, json[json.length - 1].trdDt]
                     // newData.seven = [json[0].annYldRat, json[Math.ceil(json.length / 2)].annYldRat, json[json.length - 1].annYldRat]
                     // newData.big = [json[0].unitYld, json[Math.ceil(json.length / 2)].unitYld, json[json.length - 1].unitYld]
-                    console.log(newData, "00");
-                    that.drawLine(type, newData)
-                    // that.drawCircle()
-                    // var tplm = $("#dataLists1").html();
-                    // var template = Handlebars.compile(tplm);
-                    // $.each(json, function (i, v) {
-                    //     if (v.dayChgRat > 0) {
-                    //         v.dayChgRat = "+" + v.dayChgRat
-                    //     } else if (v.dayChgRat < 0) {
-                    //         v.dayChgRat = "-" + v.dayChgRat
-                    //     }
-                    // })
 
-                    // var html = template(json);
-                    // $(".tplBox1").html(html);
-                    // $.each($(".history_item .value"), function (i, v) {
-                    //     if (Number($(v).text().slice(0, $(v).text().length - 1)) >= 0) {
-                    //         $(v).addClass('value_red')
-                    //     } else {
-                    //         $(v).addClass('value_green')
-                    //     }
-                    // });
+                    that.drawLine(type, newData)
+
                 },
                 callbackFail: function (json) {
                     tipAction(json.msg);
@@ -242,8 +227,6 @@ $(function () {
         //画折线图
         //type必传
         drawLine: function (type, data) {
-            console.log(type, data);
-
             var that = this;
             if (type == 'qrnh') {
                 //画的是七日年化折线图
@@ -260,8 +243,6 @@ $(function () {
                     xAxisData = data.date,
                     seriesData = data.big;
             }
-            console.log(chartId);
-
             var myChart = echarts.init(chartId);
             myChart.setOption({
                 tooltip: {
