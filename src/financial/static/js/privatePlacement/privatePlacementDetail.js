@@ -71,10 +71,15 @@ $(function(){
 					if(jsonData.incomeModeJF == '0'){
 						$('.fixedIncome').removeClass('hide');
 						$('.floatProfit').addClass('hide');
+
+						// 基本信息的展示
+						$('.performanceComparison').removeClass('hide');
+						$('.lineWrap').addClass('hide');
 					}
 					else if(jsonData.incomeModeJF == '1'){
 
 					}
+					else if(jsonData.incomeModeJF == '2')
 
 					// 私募产品 产品名称
 					$('.productName').html(jsonData.productName);
