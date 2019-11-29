@@ -28,8 +28,11 @@ $(function () {
 
       //页面初始化
       that.getData();
-      that.events();
 
+
+    },
+    gV: {
+      json: {}
     },
     getData: function () {
 
@@ -42,7 +45,7 @@ $(function () {
           scheduledProtocolId: getQueryString('scheduledProtocolId')
         },
         callbackDone: function (json) {
-          console.log(json);
+
 
           json = json.data
           $('.fundName').html(json.fundName);
@@ -59,7 +62,10 @@ $(function () {
           $('.bankThumbnailUrl').attr('src', json.bankThumbnailUrl);
           $('.totalCfmShareMask').html(json.totalCfmShareMask);
           $('.serviceCharge').html('含手续费' + json.serviceCharge + '元');
-          fundCode = json.fundType
+          fundCode = json.fundCode
+          that.gV.json = json
+          that.events();
+          console.log(that.gV.json);
           var fixState, str
           switch (json.fixState) {
             case 'A':
@@ -108,17 +114,18 @@ $(function () {
     },
     events: function () {
       var that = this;
-
-      // 跳转详情页
+      var fundType = that.gV.json.fundType
+      // 修改
       mui("body").on("tap", ".edit", function (e) {
         var scheduledProtocolId = getQueryString('scheduledProtocolId')
         window.location.href = site_url.pofOrdinarySetThrow_url + '?scheduledProtocolId=' + scheduledProtocolId + '&fundCode=' + fundCode;
       });
 
-      // // 获取专属报告
-      // mui("body").on("tap", ".btnBottom", function () {
-      //   that.getReport();
-      // });
+      // 详情
+      mui("body").on("tap", ".posRight", function () {
+
+        window.location.href = site_url.pofPublicDetail_url + '?fundCode=' + fundCode + '&fundType=' + fundType;
+      });
     },
 
 

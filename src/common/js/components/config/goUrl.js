@@ -370,6 +370,8 @@ module.exports = function () {
     this.pofFundManager_url = go_url.no_url + '/financial/views/publicPlacement/fundManager.html';
     // 基金公司
     this.pofFundCompany_url = go_url.no_url + '/financial/views/publicPlacement/fundCompany.html';
+    // 基金详情
+    this.pofPublicDetail_url = go_url.no_url + '/account/views/public/publicDetail.html';
     
     // 买入结果页面，基金买入结果
     this.pofSurelyResultsDetail_url = go_url.no_url + '/financial/views/publicPlacement/surelyResultsDetail.html';
