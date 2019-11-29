@@ -392,4 +392,13 @@ module.exports = function () {
     this.superStreasureDetail_url = go_url.no_url + '/account/views/public/superStreasureDetail.html';
     //修改邮箱
     this.changeMail_url = go_url.no_url + '/mine/views/mail/changeMail.html';
+
+
+    /*------------------- 公募持仓相关 start ------------------------------*/
+    //公募交易记录
+    this.transactionRecords_url = go_url.no_url + '/account/views/public/transactionRecords.html';
+    //公募持仓记录
+    this.publicAssets_url = go_url.no_url + '/account/views/publicAssets.html';
+    /*------------------- 公募持仓相关 end ------------------------------*/
+
 };
