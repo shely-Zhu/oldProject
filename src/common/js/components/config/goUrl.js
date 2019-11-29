@@ -394,6 +394,8 @@ module.exports = function () {
     this.superStreasureDetail_url = go_url.no_url + '/account/views/public/superStreasureDetail.html';
     //修改邮箱
     this.changeMail_url = go_url.no_url + '/mine/views/mail/changeMail.html';
+    //修改分红方式
+    this.bonusMethod_url = go_url.no_url + '/mine/views/bonusMethod.html';
 
     /*------------------- 公募持仓相关 start ------------------------------*/
     //公募交易记录
