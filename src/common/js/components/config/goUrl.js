@@ -378,7 +378,9 @@ module.exports = function () {
     this.productFiles_url = go_url.no_url + '/account/views/productFiles.html';
     // 基金确认书
     this.privateFundPdf_url = go_url.no_url + '/account/views/private/privateFundPdf.html';
-    // 交易规则
+    // 私募交易规则
+    this.privateTransactionRules_url = go_url.no_url + '/account/views/private/transactionRules.html';
+    // 公募交易规则
     this.transactionRules_url = go_url.no_url + '/financial/views/publicPlacement/transactionRules.html';
     //基金公司
     this.fundCompany_url = go_url.no_url + '/financial/views/publicPlacement/fundCompany.html';
