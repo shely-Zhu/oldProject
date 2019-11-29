@@ -26,10 +26,10 @@ var data = Mock.mock({
         "totalShare": "", //持仓份额
         "buyAmount": "100,1000.00", //认购金额
         "setupDate": "",//成立日期
-        "prodTerm":"2019-11-19",//产品期限-单位（日 月 年）
-        "investPeriod":"",//投资期
-        "quitPeriod":"",//退出期
-        "delayPeriod":"",//延长期
+        "prodTerm":"日",//产品期限-单位（日 月 年）
+        "investPeriod":"2",//投资期
+        "quitPeriod":"1",//退出期
+        "delayPeriod":"3",//延长期
         "navUnit":"",//单位净值
         "navUnitDate":"01.22",//单位净值更新日期 mm.dd
         "assetsGainAndLoss":"1.111",//持仓盈亏
