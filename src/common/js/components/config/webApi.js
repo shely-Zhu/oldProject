@@ -249,6 +249,8 @@ module.exports = function() {
     // 公募普通产品银行卡列表
     this.normalPofList_api = http_url.web_url + '/account/bankCard/normalPofList';
 
+    // 现金宝公募普通产品银行卡列表
+    this.cashList_api = http_url.web_url + '/account/bankCard/cashList';
 
     /*------------------- 基金确认书 start ------------------------------*/
     this.downloadFile_api = http_url.web_url + '/content/file/mount/download'; //下载pdf

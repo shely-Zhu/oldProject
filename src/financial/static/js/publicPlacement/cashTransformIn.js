@@ -43,16 +43,16 @@ $(function () {
 		},
 		gV: { // 全局变量
 			fundBusinCode: '022',
-			tradeSource: splitUrl['tradeSource'] ? splitUrl['tradeSource'] : null, //现金宝标志
 			fundName: splitUrl['fundName'] ? splitUrl['fundName'] : null,   //基金名称
 			fundCode: splitUrl['fundCode'] ? splitUrl['fundCode'] : '000847',  //基金代码
 			capitalMode: '', //资金方式
 			payType: '',   //支付方式（0、在线支付 1、汇款支付）
 			bankName: '',  // 银行名称
-			bankAccountSecret: '', // 银行账号
+			bankAccount: '', // 银行账号
 			bankNo: '',  //银行代码
 			password: "",
-			tradeAcco: ''  //交易账号
+			tradeAcco: '' , //交易账号
+			tradeSource: ''  //交易账号
 		},
 		webinit: function () {
 			var that = this;
@@ -116,12 +116,14 @@ $(function () {
 		},
 
 		//获取银行列表
-		getBankCard: function(useEnv) {
+		getBankCard: function(operationType) {
             var that = this;
             var obj = [{ 
-                url: site_url.normalPofList_api,
+                url: site_url.cashList_api,
                 data: {
-                    useEnv:useEnv
+					operationType:operationType,
+					code:that.gV.fundCode,
+					
                 },
                 //async: false,
                 needDataEmpty: true,
@@ -205,16 +207,15 @@ $(function () {
 			var obj = [{ 
 				url: site_url.pofCashBuy_api + '/mock',
 				data: {
-					operationType:that.gV.payType,
 					fundCode:that.gV.fundCode,
 					fundName:that.gV.fundName,
 					balance:that.gV.balance,
 					bankNo:that.gV.bankNo,
-					bankAccount:that.gV.bankAccountSecret,
+					bankAccount:that.gV.bankAccount,
 					tradeAcco:that.gV.tradeAcco,
 					capitalMode:that.gV.capitalMode,
 					password:val,
-					tradeSource:that.gV.tradeSource
+					tradeSource:that.gV.tradeSource,
 				},
 				//async: false,
 				needDataEmpty: true,
@@ -287,11 +288,11 @@ $(function () {
 				$(".imgc").hide()
 				$(".iimg").show()
 				that.gV.payType = $(this).attr('pay-type')
-				var useEnv = $(this).attr('pay-type')
+				var operationType = $(this).attr('pay-type')
 				$("#loading").show()
 				$(this).find(".imgc").show();
 				$(this).find(".iimg").hide();
-				that.getBankCard(useEnv)
+				that.getBankCard(operationType)
 			}) 
 
 			$('body').on('tap','.popup-close',function(){
@@ -324,7 +325,8 @@ $(function () {
 				that.gV.bankName = $(this).attr('bankName');
 				that.gV.bankNo = $(this).attr('bankNo');
 				that.gV.tradeAcco = $(this).attr('tradeAcco');
-				that.gV.bankAccountSecret = $(this).attr('bankAccountSecret');
+				that.gV.tradeSource = $(this).attr('tradeSource');
+				that.gV.bankAccount = $(this).attr('bankAccount');
 				that.gV.capitalMode = $(this).attr('capitalMode')
 				var data = []
 				data.push({
@@ -353,7 +355,7 @@ $(function () {
 			
 			//确定
 			$('body').on('tap','.btn_box .btn',function(){
-				if(!!that.gV.bankAccountSecret){
+				if(!!that.gV.bankAccount){
 					that.checkPayType()
 					
 				}else{

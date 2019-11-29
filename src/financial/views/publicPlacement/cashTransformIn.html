@@ -37,7 +37,7 @@
                   <p class="payConfirm">预计<span class="startGainsDayStr"></span>开始收益，<span class="date paymentGainsDayStr"></span>收益到账</p>
               </div>
           </div>
-         <div class="onlinepay paymoney" pay-type="0">
+         <div class="onlinepay paymoney" pay-type="2">
              <div class="ff">在线支付</div>
              <div class="paymoney-right">
                  <!-- <img class="imgc" src="/financial/static/img/checkbox／selected+sure@2x.png" alt="">
@@ -98,8 +98,8 @@
              </ul>
              <script id="bankList-template" type="text/x-handlebars-template">
                  {{#each this}}
-                 <li class="popup-li bank-li" useEnv="{{useEnv}}" capitalMode="{{capitalMode}}" bankThumbnailUrl="{{bankThumbnailUrl}}" tradeAcco="{{tradeAcco}}" bankName="{{bankName}}" bankNo="{{bankNo}}" singleNum="{{singleNum}}"
-                  oneDayNum="{{oneDayNum}}" bankAccountSecret="{{bankAccountSecret}}">
+                 <li class="popup-li bank-li" capitalMode="{{capitalMode}}" tradeSource="{{tradeSource}}" bankThumbnailUrl="{{bankThumbnailUrl}}" tradeAcco="{{tradeAcco}}" bankName="{{bankName}}" bankNo="{{bankNo}}" singleNum="{{singleNum}}"
+                  oneDayNum="{{oneDayNum}}" bankAccount="{{bankAccount}}">
                      <img class="bank-img" src="{{bankThumbnailUrl}}" alt="">
                      <div class="div">
                          <div class="bank-name">{{bankName}}({{bankNo}})</div>

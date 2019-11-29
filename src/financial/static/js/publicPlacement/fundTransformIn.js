@@ -53,7 +53,6 @@ $(function () {
 			feeRateList: [], //费率
 			fundName: splitUrl['fundName'] ? splitUrl['fundName'] : null,   //基金名称
 			fundCode: splitUrl['fundCode'] ? splitUrl['fundCode'] : '000847',  //基金代码
-			tradeSource: splitUrl['tradeSource'] ? splitUrl['tradeSource'] : null, //交易来源
 			capitalMode: '', //资金方式
 			payType: '',   //支付方式（0、在线支付 1、汇款支付）
 			bankName: '',  // 银行名称
@@ -78,8 +77,7 @@ $(function () {
 			var obj = [{
 				url: site_url.newfundDetails_api,
 				data: {
-					"fundCode": that.gV.fundCode,
-					"tradeSource": that.gV.tradeSource,
+					"fundCode": that.gV.fundCode
 				},
 				//async: false,
 				needDataEmpty: true,

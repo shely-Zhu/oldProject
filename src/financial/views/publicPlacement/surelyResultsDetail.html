@@ -48,10 +48,12 @@
       </div>
       <div class="resultTopTwo">
          <div class="photo" >
-            <img src="../../static/img/buy_success.png" alt="">
-            <p class="succedText">申请成功</p>
+            <img src="../../static/img/buy_success.png" class="proess-success" alt="">
+            <img src="../../static/img/pic_success@2x.png" class="proess-ongoing" alt="">
+            <img src="../../static/img/pic_success2@2x.png" class="proess-error" alt="">
+            <p class="succedText"></p>
          </div>
-         <div class="proessBox">
+         <div class="proessBox buy-result">
              <div class="proess-img">
                 <div class="right-proess"></div>
                 <div class="proess-line"></div>        
@@ -74,9 +76,55 @@
                 </p>
              </div>
          </div>
+         <div class="proessBox redemption-result">
+            <div class="proess-img">
+               <div class="right-proess"></div>
+               <div class="proess-line"></div>        
+               <div class="wait-proess shareTimeP"></div>    <!-- 流程 -->
+               <div class="proess-line"></div>
+               <div class="wait-proess earningsTimeP"></div>     <!-- 流程 -->
+            </div>
+            <div class="proess-title">
+               <p class="applyTime time">
+                   <span class="laber-left">申请时间</span>
+                   <span class="laber-right"></span>
+               </p>
+               <p class="shareTime time">
+                   <span class="laber-left">预计份额确认日期</span>
+                   <span class="laber-right"></span>
+               </p>
+               <p class="earningsTime time">
+                   <span class="laber-left">预计金额到账日期</span>
+                   <span class="laber-right"></span>
+               </p>
+            </div>
+        </div>
+        <div class="proessBox investmentPlan-result">
+            <div class="proess-img">
+               <div class="right-proess"></div>
+               <div class="proess-line"></div>        
+               <div class="wait-proess shareTimeP"></div>    <!-- 流程 -->
+               <div class="proess-line"></div>
+               <div class="wait-proess earningsTimeP"></div>     <!-- 流程 -->
+            </div>
+            <div class="proess-title">
+               <p class="applyTime time">
+                   <span class="laber-left">申请时间</span>
+                   <span class="laber-right"></span>
+               </p>
+               <p class="shareTime time">
+                   <span class="laber-left">首次扣款时间</span>
+                   <span class="laber-right"></span>
+               </p>
+               <p class="earningsTime time">
+                   <span class="laber-left">后续<span class="cycleDate">每月1日</span>将扣款<span class="amount">10000</span>元，非交易日顺延至下一交易日</span>
+                   <!-- <span class="laber-right"></span> -->
+               </p>
+            </div>
+        </div>
       </div>
       <div class="listWrap">
-        <div class="listContent">
+        <div class="listContent buy-result">
             <ul class="listContentUl">
               <li class="textcolor">买入基金</li>
               <li>
@@ -104,6 +152,65 @@
                 <li class="textcolor">转入时间</li>
                 <li > 2019-09-01 24:00</li>
             </ul> -->
+        </div>
+        <div class="listContent redemption-result">
+            <ul class="listContentUl">
+              <li class="textcolor">赎回基金</li>
+              <li>
+                  <span class="fundName"></span>&nbsp;
+                  <span class="fundCode"> </span>
+                </li>
+            </ul>
+            <ul class="listContentUl">
+                <li class="textcolor">赎回份额</li>
+                <li>
+                    <span class="amount"></span>
+                    <span class="unit">元</span>
+                </li>
+            </ul>
+            <ul class="listContentUl">
+                <li class="textcolor">到账方式</li>
+                <li class="bank">
+                    <img class="banKImg" src="" alt="">
+                    <span class="bankName"></span>
+                    <span class="bankNum"></span>
+                </li>
+                <li class="onlinePay"><span class="payType"></span></li>
+            </ul>
+            <!-- <ul class="listContentUl changeNone">
+                <li class="textcolor">转入时间</li>
+                <li > 2019-09-01 24:00</li>
+            </ul> -->
+        </div>
+        <div class="listContent investmentPlan-result">
+            <ul class="listContentUl">
+              <li class="textcolor">定投基金</li>
+              <li>
+                  <span class="fundName"></span>&nbsp;
+                  <span class="fundCode"> </span>
+                </li>
+            </ul>
+            <ul class="listContentUl">
+                <li class="textcolor">定投金额</li>
+                <li>
+                    <span class="amount"></span>
+                    <span class="unit">元</span>
+                </li>
+            </ul>
+             <ul class="listContentUl">
+                <li class="textcolor">定投周期</li>
+                <li><span class="cycleDate">元</span></li>
+            </ul>
+            <ul class="listContentUl">
+                <li class="textcolor">支付方式</li>
+                <li class="bank">
+                    <img class="banKImg" src="" alt="">
+                    <span class="bankName"></span>
+                    <span class="bankNum"></span>
+                </li>
+                <li class="onlinePay"><span class="payType"></span></li>
+            </ul>
+           
         </div>
       </div>
       <!-- 头部完成定位 -->

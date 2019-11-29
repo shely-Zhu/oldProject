@@ -16,12 +16,34 @@ var generateTemplate = require('@pathCommonJsComBus/generateTemplate.js');
 $(function() {
     var somePage = {
       $el: {
-        shareTimeP:$(".resultTopTwo .shareTimeP"),   //开始计算收益流程
-        earningsTimeP:$(".resultTopTwo .earningsTimeP"),   //第一笔收益到账流程
-        succedText:$(".resultTopTwo .succedText"),  //在线支付标题
-        applyTime:$(".applyTime .laber-right"),  //申请时间
-        shareTime:$(".shareTime .laber-right"),  //预计确认时间
-        earningsTime:$(".earningsTime .laber-right"), //预计查看收益时间
+        succedText:$(".resultTopTwo  .succedText"),  //在线支付标题  buy   redemption   investmentPlan
+        //buy
+        shareTimePBuy:$(".buy-result .shareTimeP"),   //开始计算收益流程
+        earningsTimePBuy:$(".buy-result .earningsTimeP"),   //第一笔收益到账流程
+        applyTimeBuy:$(".buy-result .applyTime .laber-right"),  //申请时间
+        shareTimeBuy:$(".buy-result .shareTime .laber-right"),  //预计确认时间
+        earningsTimeBuy:$(".buy-result .earningsTime .laber-right"), //预计查看收益时间
+        fundNameBuy:$(".listWrap .buy-result .fundName"),  //基金名称
+        fundCodeBuy:$(".listWrap .buy-result .fundCode"),  //基金代码
+        amount2Buy:$(".listWrap .buy-result .amount"),  //买入金额
+        bankName2Buy:$(".listWrap .buy-result .bankName"),  //银行名称
+        bankNum2Buy:$(".listWrap .buy-result .bankNum"),  //银行卡尾号
+        banKImgBuy:$(".listWrap .buy-result .banKImg"),  //银行卡缩略图
+        payTypeBuy:$(".listWrap .buy-result .payType"),  //支付方式
+
+        //redemption
+        shareTimePRedemption:$(".redemption-result .shareTimeP"),   //开始计算收益流程
+        earningsTimePRedemption:$(".redemption-result .earningsTimeP"),   //第一笔收益到账流程
+        applyTimeRedemption:$(".redemption-result .applyTime .laber-right"),  //申请时间
+        shareTimeRedemption:$(".redemption-result .shareTime .laber-right"),  //预计确认时间
+        earningsTimeRedemption:$(".redemption-result .earningsTime .laber-right"), //预计查看收益时间
+        fundNameRedemption:$(".listWrap .redemption-result .fundName"),  //基金名称
+        fundCodeRedemption:$(".listWrap .redemption-result .fundCode"),  //基金代码
+        amount2Redemption:$(".listWrap .redemption-result .amount"),  //买入金额
+        bankName2Redemption:$(".listWrap .redemption-result .bankName"),  //银行名称
+        bankNum2Redemption:$(".listWrap .redemption-result .bankNum"),  //银行卡尾号
+        banKImgRedemption:$(".listWrap .redemption-result .banKImg"),  //银行卡缩略图
+        payTypeRedemption:$(".listWrap .redemption-result .payType"),  //支付方式
         
         amount1:$(".resultTop .amount"),  //汇款支付金额
         buyStatusText:$(".resultTop .buyStatusText"),  //汇款支付标题
@@ -33,29 +55,38 @@ $(function() {
         bankNo:$(".resultTop .bankNo"),  //行号
         bankAdress:$(".resultTop .bankAdress"),  //开户行
 
-        fundName:$(".listWrap .fundName"),  //基金名称
-        fundCode:$(".listWrap .fundCode"),  //基金代码
-        amount2:$(".listWrap .amount"),  //买入金额
-        bankName2:$(".listWrap .bankName"),  //银行名称
-        bankNum2:$(".listWrap .bankNum"),  //银行卡尾号
-        banKImg:$(".listWrap .banKImg"),  //银行卡缩略图
-        payType:$(".listWrap .payType"),  //支付方式
+        
       },  
       gV: { // 全局变量
-        flag:splitUrl['flag'],
-        payType:splitUrl['payType'] || '1',  // 0  在线  1  汇款
-        applyId:splitUrl['applyId'],
-        fundCode:splitUrl['fundCode'],
-        fundBusinCode:splitUrl['fundBusinCode'],
-        // applyId:'20190827005586',
-        // fundCode:'000847',
-        // fundBusinCode:'090',
+        flag:splitUrl['flag'] ? splitUrl['flag'] : 'buy',    // 买入：buy,  赎回：redemption  定投： investmentPlan     
+        payType:splitUrl['payType'] || '0',  // 0  在线  1  汇款
+        // applyId:splitUrl['applyId'],
+        // fundCode:splitUrl['fundCode'],
+        // fundBusinCode:splitUrl['fundBusinCode'],
+        applyId:'20190827005586',
+        fundCode:'000847',
+        fundBusinCode:'090',
       },
       init:function(){
         var that = this;
         $('#loading').show();
+        $('.proess-success').hide();
+        $('.proess-ongoing').hide();
+        $('.proess-error').hide();
+        if(that.gV.flag == 'buy'){   //基金买入
+          $(".buy-result").show()
+          that.getData();  //查询结果可能要根据flag来
+        }
+        if(that.gV.flag == 'redemption'){  //基金赎回
+          $(".redemption-result").show()
+          that.getData();  //查询结果可能要根据flag来
+        }
+        if(that.gV.flag == 'investmentPlan'){   //定投
+          $(".investmentPlan-result").show()
+        }
+        
         that.event()
-        that.getData();
+        
       },
       //获取交易结果
       getData:function(){
@@ -75,18 +106,55 @@ $(function() {
                 $('#loading').hide();
                 $(".resultTop").hide()
                 $(".resultTopTwo").show()
-                $(".changeNone").removeClass("changeNone")
-                if(json.data.debitStatus != '1' && json.data.tradeStatus == '5'){
-                  that.$el.shareTimeP.addClass('right-proess')
-                  that.$el.earningsTimeP.addClass('right-proess')
-                }
                 that.$el.succedText.html(json.data.tradeApplyDesc)
-                that.$el.applyTime.html(json.data.originalDate)
-                that.$el.shareTime.html(json.data.estimateConfirmDate)
-                that.$el.earningsTime.html(json.data.confirmDate)
-                that.$el.payType.html('在线支付')
+                if(that.gV.flag == 'buy'){
+                  if(json.data.debitStatus != '1' && json.data.tradeStatus == '5'){
+                    $(".buy-result").show()
+                    that.$el.shareTimePBuy.addClass('right-proess')
+                    that.$el.earningsTimePBuy.addClass('right-proess')
+                    $(".proess-success").show()
+                  }else{
+                    if(json.data.tradeStatus == '0'){   //申请失败
+                      $(".proess-error").show()
+                      $(".buy-result").hide()
+                    }else if(json.data.tradeStatus == '1'){   //申请成功
+                      $(".proess-success").show()
+                      that.$el.shareTimePBuy.addClass('right-proess')
+                      that.$el.earningsTimePBuy.addClass('right-proess')
+                    }else{
+                      $(".proess-ongoing").show()
+                    }
+                  }
+                  that.$el.applyTimeBuy.html(json.data.originalDate)
+                  that.$el.shareTimeBuy.html(json.data.estimateConfirmDate)
+                  that.$el.earningsTimeBuy.html(json.data.confirmDate)
+                  that.$el.payTypeBuy.html('在线支付')
+                }
+                if(that.gV.flag == 'redemption'){
+                  if(json.data.debitStatus != '1' && json.data.tradeStatus == '5'){
+                    $(".redemption-result").show()
+                    that.$el.shareTimePRedemption.addClass('right-proess')
+                    that.$el.earningsTimePRedemption.addClass('right-proess')
+                    $(".proess-success").show()
+                  }else{
+                    if(json.data.tradeStatus == '0'){  //申请失败
+                      $(".proess-error").show()
+                      $(".buy-result").hide()
+                    }else if(json.data.tradeStatus == '1'){   //申请成功
+                      $(".proess-success").show()
+                      that.$el.shareTimePBuy.addClass('right-proess')
+                      that.$el.earningsTimePBuy.addClass('right-proess')
+                    }else{
+                      $(".proess-ongoing").show()
+                    }
+                  }
+                  that.$el.applyTimeRedemption.html(json.data.originalDate)
+                  that.$el.shareTimeRedemption.html(json.data.estimateConfirmDate)
+                  that.$el.earningsTimeRedemption.html(json.data.confirmDate)
+                  that.$el.payTypeRedemption.html('在线支付')
+                }
               }
-              if(that.gV.payType == '1'){
+              if(that.gV.payType == '1'){   // 买入汇款支付
                 $(".resultTop").show()
                 $(".resultTopTwo").hide()
                 $(".changeNone").addClass("changeNone")
@@ -97,12 +165,23 @@ $(function() {
                 that.$el.bankNum.html(json.data.bankAccountMask.substr(json.data.bankAccountMask.length-4))
                 that.$el.payType.html('汇款支付')
               }
-              that.$el.fundName.html(json.data.fundName)
-              that.$el.fundCode.html(json.data.fundCode)
-              that.$el.amount2.html(json.data.tradeAmount)
-              that.$el.banKImg.attr('src',json.data.bankThumbnailUrl)
-              that.$el.bankName2.html(json.data.bankName)
-              that.$el.bankNum2.html(json.data.bankIdNo)
+              if(that.gV.flag == 'buy'){
+                that.$el.fundNameBuy.html(json.data.fundName)
+                that.$el.fundCodeBuy.html(json.data.fundCode)
+                that.$el.amount2Buy.html(json.data.tradeAmount)
+                that.$el.banKImgBuy.attr('src',json.data.bankThumbnailUrl)
+                that.$el.bankName2Buy.html(json.data.bankName)
+                that.$el.bankNum2Buy.html(json.data.bankIdNo)
+              }
+              if(that.gV.flag == 'redemption'){
+                that.$el.fundNameRedemption.html(json.data.fundName)
+                that.$el.fundCodeRedemption.html(json.data.fundCode)
+                that.$el.amount2Redemption.html(json.data.tradeAmount)
+                that.$el.banKImgRedemption.attr('src',json.data.bankThumbnailUrl)
+                that.$el.bankName2Redemption.html(json.data.bankName)
+                that.$el.bankNum2Redemption.html(json.data.bankIdNo)
+              }
+              
               
             }else{
               tipAction(json.message);
