@@ -12,12 +12,31 @@
     fundBusinCode	业务大类编号
     allotType	申请类型
     Fixbusinflag	业务辅助代码
+    isFixed   是否为定投产品
 
     超宝现金宝需要带入的参数
     isCash 是否为现金宝的标识
     isBuy 是否为现金宝的买入页面
     applyId	  申请编号
+
+    分红需要带入的参数
+    shares  发生份额
+    fundName  分红产品
+    applyDate  分红时间
+    autoBuyDesc  分红方式说明
+    
  */
+
+
+ /**
+  * todo 
+  * 1 新发基金进度条显示和别的不一样 中间那个要改成 等待基金成立确认认购份额
+  * 2 除了交易状态为成功 或者扣款状态为成功 其他的状态值都显示为红色 永丽定的规则
+  * 3 点击定投计划跳转到定投持仓详情
+  * 4 定投计划的跳转还没写
+  * 5 分红页面还没写
+  * 6 怎么区分是否买入成功 确认状态为已确认 扣款状态为已成功   怎么确认是否赎回成功 确认状态为已确认 没有到账状态
+  */
 
 require('@pathIncludJs/base.js');
 
@@ -34,7 +53,14 @@ $(function () {
             fundState: $('.header .trade_status'),//基金状态
         },
         gV: { // 全局变量
-            data: '',//请求到的data
+            allotType: splitUrl()['allotType'],//交易类别 0：购买 1：赎回 2：定投, 3：分红
+            isBuy: splitUrl()['isBuy'],//是否为现金宝购买
+            isCash: splitUrl()['isCash'],//是否为现金宝
+
+            //test
+            // allotType: "3",//交易类别 0：购买 1：赎回 2：定投, 3：分红
+            // isBuy: splitUrl()['isBuy'],//是否为现金宝购买
+            // isCash: true,//是否为现金宝
         },
         init: function () {
             var that = this;
@@ -42,24 +68,317 @@ $(function () {
         },
         events: function (){
             var that = this;
-            $('footer').on('click', function (param) {
-                //再买一笔 跳转到产品详情页
-                var fundCode = that.gV.data.fundCode;
+            mui("body").on('tap', 'footer', function (e) {
+                //再买一笔 跳转到产品详情页 todo
+                // var fundCode = that.gV.data.fundCode;
                 window.location.href=site_url.productPublicDetail_url;
             })
-            $('.cancel_order').on('click', function(){
-                //去撤单 需要先输入交易密码 todo
-                $("#passwordWrap").show();
+
+            mui("body").on('tap', '.cancel_order', function (e) {
+                //去撤单 需要先输入交易密码
                 payPass(function (password){
                     //输入密码的回调
                     that.cancelOrder(password);
                 });
             })
-            $('').on('click', function(){
+            mui("body").on('tap', '.buy_info .fund_item', function (e) {
                 //todo 买入产品条目点击进入公募产品详情
-                var fundCode = that.gV.data.fundCode;
+                // var fundCode = that.gV.data.fundCode;
                 window.location.href=site_url.productPublicDetail_url;
             })
+            mui("body").on('tap', '.plan', function (e) {
+                //定投计划跳转
+            })
+        },
+        getData: function () {
+            var that = this;
+            if ('3' == that.gV.allotType){
+                //分红
+                that.shwoBounsStatus();
+            } else if (that.gV.isCash){
+                //现金宝
+                that.getCashTradeDetail();
+            } else {
+                //普通基金
+                that.getFundTradeDetail();
+            }
+            
+        },
+        getFundTradeDetail: function () {
+            //普通公募交易详情查询
+            var that = this;
+            var obj = [{
+                url: site_url.pofTradeApplyInfo_api,
+                data: {
+                    applyId: splitUrl()['applyId'],
+                    fundCombination: splitUrl()['fundCombination'],
+                    fundCode: splitUrl()['fundCode'],
+                    fundBusinCode: splitUrl()['fundBusinCode'],
+                    allotType: that.gV.allotType,
+                    Fixbusinflag: splitUrl()['Fixbusinflag'],
+                },
+                needDataEmpty: true,
+                callbackDone: function (json) {
+                    that.events();
+                    switch (that.gV.allotType) {
+                        case "0":
+                            //购买
+                            that.showFundStatus(true, json.data);
+                            break
+                        case "1":
+                            //赎回
+                            that.showFundStatus(false, json.data);
+                            break;
+
+                        case "2":
+                            //定投
+                            that.showFundStatus(true, json.data);
+                            //定投展示定投计划
+                            $('.plan').removeClass('hide');
+                            break
+                    }
+
+                },
+                callbackFail: function (data) {
+                    console.log('加载失败');
+                }
+            }];
+            $.ajaxLoading(obj);
+        },
+        showFundStatus: function (isBuy, model) {
+            debugger
+            var that = this;
+            //购买状态的处理
+            //填充头部信息
+            if (isBuy){
+                $('.header .amount').html(model.tradeAmount);//交易申请金额 header中显示的后下面显示的金额都是这个 除了确认信息中的金额显示的是确认金额confirmAmount
+            } else {
+                $('.header .amount').html(model.tradeShares);//交易申请份额
+                $('.header .yuan').html("份");//更换单位
+            }
+            $('.header .trade_status').html(model.tradeApplyDesc);//交易状态 例如待扣款
+            $('.header .trade_status_des').html(model.tradeApplyDescMessage);//交易状态描述信息 例如等待给银行汇款 
+
+            if (isBuy){
+                //展示买入信息区域 并填充
+                $('.buy_info').removeClass('hide');
+                $('.buy_info .fund_name').html(model.fundName).on('click', function () { //买入产品
+                    //todo 公募产品页面 传参 model.fundCode
+                });
+                
+                $('.buy_info .fund_amount').html(model.tradeAmount);//买入金额
+                $('.buy_info .bank_icon').attr('src', model.bankThumbnailUrl);//支付方式的银行logo
+                $('.buy_info .bank_name').html(model.bankName + model.bankAccountMask.substring(model.bankAccountMask.length - 4));//支付方式的银行名称
+                $('.buy_info .pay_mode').html(model.payModeName);//支付方式
+                $('.buy_info .fund_date').html(model.tradeDate);//买入时间
+            } else {
+                //展示赎回信息区域
+                $('.redeem_info').removeClass('hide');
+                $('.redeem_info .item_1').html(model.fundName);//赎回产品
+                $('.redeem_info .item_2').html(model.confirmShares);//赎回份额
+                $('.redeem_info .bank_icon').attr('url', model.bankThumbnailUrl);//到账银行卡icon
+                $('.redeem_info .item_3').html(model.bankName + model.bankAccountMask.substring(model.bankAccountMask.length - 4));//到账银行卡描述
+                $('.redeem_info .item_4').html(model.tradeDate);//赎回时间
+            }
+            
+            /**
+                 * tradeStatus	 交易申请状态
+                    0：确认失败，
+                    1：确认成功，
+                    2：部分确认，
+                    3：实时确认成功，
+                    4：撤单，
+                    5：行为确认，
+                    9：未确认
+                 */
+            if ("1" == model.tradeStatus){
+                //确认状态
+                if (isBuy){
+                    if ("2" == model.debitStatus){
+                        //扣款状态为已扣款 展示确认信息并填充
+                        $('.buy_confirm_info').removeClass('hide');
+                        $('.buy_confirm_info .confirm_amount').html(model.confirmAmount);//确认金额
+                        $('.buy_confirm_info .confirm_share').html(model.confirmShares);//确认份额
+                        $('.buy_confirm_info .confirm_value').html(model.confirmNav);//确认净值中的净值
+                        $('.buy_confirm_info .confirm_charge').html(model.confirmRate);//手续费
+                        $('.buy_confirm_info .confirm_date').html(model.confirmDate);//确认时间
+                    }
+                } else {
+                    //赎回为确认状态 展示赎回确认信息 todo 看永丽是否要和王潮对一下字段
+                    $('.redeem_confirm_info').removeClass('hide');
+                    $('.redeem_confirm_info .confirm_share').html(model.confirmShares);//确认份额
+                    $('.redeem_confirm_info .confirm_value').html(model.confirmNav);//确认净值
+                    $('.redeem_confirm_info .confirm_charge').html(model.confirmRate);//手续费
+                    $('.redeem_confirm_info .confirm_amount').html(model.confirm_amount);//到账金额
+                    $('.redeem_confirm_info .bank_icon').attr('url', model.bankLogoUrl);//银行logo
+                    $('.redeem_confirm_info .bank_name').html(model.bankName + model.bankAccountMask.substring(model.bankAccountMask.length - 4));//银行名称
+                }
+                //确定状态显示全部确认的信息
+                that.showTradeArea(true, model);
+            } else {
+                //其余状态状态展示部分确认的信息
+                that.showTradeArea(false, model);
+                if ("9" == model.tradeStatus){
+                    if (isBuy){
+                        //未确认状态 展示汇款账户信息
+                        $('.account_info').removeClass('hide');
+                        that.getRemittanceAccount();
+                    }
+                } else if ("0" == model.tradeStatus || "4" == model.tradeStatus){
+                    //买入失败和撤单状态需要单独处理一下
+                    //如果是失败状态 将状态文案变为红色
+                    $('.header .trade_status').css('color', '#F52323');
+                    if (isBuy){
+                        //买入状态下显示资金状态将退回原银行卡
+                        $('.buy_info .fund_type').removeClass('hide');
+                    }
+                    if ("4" == model.tradeStatus){
+                        //撤单状态下隐藏掉银行卡信息
+                        $('.buy_info .redeem_bank').addClass('hide');
+                    }
+                }
+            }
+        },
+        getCashTradeDetail: function (){
+            //获取现金宝交易详情
+            var that = this;
+            var obj = [{
+                url: site_url.pofCashDetail_api,
+                data: {
+                    allotNo: splitUrl()['applyId'],
+                },
+                needDataEmpty: true,
+                callbackDone: function (json) {
+                    that.events();
+                    that.showCashStatus(json.data)
+                },
+                callbackFail: function (data) {
+                    console.log('加载失败');
+                }
+            }];
+            $.ajaxLoading(obj);
+        },
+        showCashStatus: function (model) {
+            //现金宝详情
+            var that = this;
+            if ("1" == model.tradeApplyStatus){
+                //确认成功
+                that.showTradeArea(true, model);
+                if ("2" == model.ident && !that.gV.isBuy){
+                    //扣款成功 转出 展示资金状况
+
+                }
+            } else {
+                //确认失败
+                that.showTradeArea(false, model);
+                if ("1" == model.ident){
+                    //扣款状态为失败 将头部文案置为红色
+                    $('.header .trade_status').css('color', '#F52323');
+                    if (that.gV.isBuy){
+                        //转入 且扣款状态为失败 展示资金状态
+                        $('.buy_info .fund_type').removeClass('hide');
+                    }
+                }
+            }
+
+            //填充头部信息
+            var text = that.gV.isBuy? "+": "-" + model.balanceMask + "元";
+            $('.header .amount').html(text);//交易申请金额 header中显示的后下面显示的金额都是这个 除了确认信息中的金额显示的是确认金额confirmAmount
+            $('.header .trade_status').html(model.identDesc);//交易状态 例如待扣款
+            $('.header .trade_status_des').html(model.errorMsg);//交易状态描述信息 例如等待给银行汇款 
+
+            if (that.gV.isBuy){
+                //展示买入信息区域 并填充
+                $('.cash_buy_info').removeClass('hide');
+                $('.cash_buy_info .fund_name').html(model.fundName);//基金名称
+                $('.cash_buy_info .fund_amount').html(model.balanceMask);//买入金额
+                $('.cash_buy_info .bank_icon').attr('url', model.bankThumbnailUrl);//todo 需要后台加接口 支付方式的银行logo
+                $('.cash_buy_info .bank_name').html(model.bankName + model.bankAccountMask.substring(model.bankAccountMask.length - 4));//支付方式的银行名称
+                $('.cash_buy_info .pay_mode').html(model.payModeName);//支付方式
+                $('.cash_buy_info .fund_date').html(model.applyDateTime);//买入时间
+            } else {
+                //展示现金宝赎回信息
+                $('.cash_redeem_info').removeClass('hide');
+                $('.cash_redeem_info .item_1').html(model.fundName);//转出产品
+                $('.cash_redeem_info .item_2').html(model.balanceMask);//转出金额
+                $('.buy_info .bank_icon').attr('url', model.bankThumbnailUrl);//转出至银行卡logo
+                $('.cash_redeem_info .item_3').html(model.bankName);//转出至银行卡描述
+                $('.cash_redeem_info .item_4').html(model.applyDateTime);//转出时间
+            }
+        },
+        shwoBounsStatus: function (){
+            //分红没有进度条 隐藏之
+            $('.header .amount').html(splitUrl()['shares']);//交易申请份额
+            $('.header .yuan').html("份");//更换单位
+            $('.header .trade_status').html('分红成功');//分红的交易状态为分红成功
+
+            $('.trade_status_area').addClass('hide');
+            $('.bonus_info').removeClass('hide');
+            $('.bonus_info .fund_name').html(splitUrl()['fundName']);//分红产品
+            $('.bonus_info .fund_share').html(splitUrl()['shares']);//分红份额
+            $('.bonus_info .bonus_mode').html(splitUrl()['autoBuyDesc']);//分红方式
+            $('.bonus_info .fund_date').html(splitUrl()['applyDate']);//分红时间
+        },
+        getRemittanceAccount: function () { 
+            //获取监管账户信息
+            var that = this;
+            var obj = [{
+	            url: site_url.findSuperviseBank_api,
+	            data: {},
+	            needLogin:true,//需要判断是否登陆
+	            //needDataEmpty: false,//不需要判断data是否为空
+	            callbackDone: function(json){  //成功后执行的函数
+					
+	                $('.accountName').html(json.data.accountName);
+	                $('.bankAccount').html(json.data.bankAccount);
+	                $('.bankNo').html(json.data.bankNo);
+	                $('.bankAccountName').html(json.data.bankAccountName);
+
+	            },
+	            callbackFail: function(json){  //失败后执行的函数
+						tipAction(json.msg);
+	            }
+	        }];
+	        $.ajaxLoading(obj);
+        },
+        showTradeArea: function (isSuccess, model) {//isBuy:是否为买入状态   isSuccess:true 成功状态 全部点亮   false 没有成功 只点亮第一步
+            var that = this;
+            //渲染上方交易进度条区域
+            //展示交易状态 并填充
+            if (isSuccess){
+                //默认全部点亮 所以不用处理
+            } else {
+                //其他情况 均把第一个点亮 其他的置灰
+                $('.trade_status_area .trade_status_icon_1').css('background', 'url(/account/static/img/publicTradeDetail/public_trade_detail_no_check.png)').css('background-size', '100%');
+            }
+            if (that.gV.isCash){//现金宝
+                if (that.gV.isBuy){
+                    $('.trade_status_area .trade_status_desc').eq(0).html("提交转入申请");
+                    $('.trade_status_area .trade_status_desc').eq(1).html("开始计算收益");
+                    $('.trade_status_area .trade_status_desc').eq(2).html("第一笔收益到账");
+
+                    $('.trade_status_area .trade_status_date').eq(0).html(model.applyDateTime);//提交转入申请
+                    $('.trade_status_area .trade_status_date').eq(1).html(model.startGainsDayStr);//开始计算收益
+                    $('.trade_status_area .trade_status_date').eq(2).html(model.paymentGainsDayStr);//第一笔收益到账
+                } else {
+                    //赎回时把进度条最后一个隐藏掉 并且设置对应的样式
+                    $('.trade_status_area .trade_status_item').eq(2).addClass('hide');
+                    $('.trade_status_area .guild_line_2').addClass('hide');
+                    $('.trade_status_area').css('height', '1.7rem');
+                    
+
+                    $('.trade_status_area .trade_status_desc').eq(0).html("提交转出申请");
+                    $('.trade_status_area .trade_status_desc').eq(1).html("到账时间");
+
+                    $('.trade_status_area .trade_status_date').eq(0).html(model.estimateDateStr);//提交转出申请
+                    $('.trade_status_area .trade_status_date').eq(1).html(model.estimateTimeStr);//到账时间
+                }
+            } else {
+                //普通基金赎回不展示进度条 所以不判断
+                $('.trade_status_area .trade_status_date').eq(0).html(model.originalDate);//申请受理时间
+                $('.trade_status_area .trade_status_date').eq(1).html(model.estimateConfirmDate);//预计份额确认时间
+                $('.trade_status_area .trade_status_date').eq(2).html(model.estimateArrivalDate);//预计查看收益时间
+            }
         },
         cancelOrder: function (password){
             //撤单的具体逻辑
@@ -91,225 +410,6 @@ $(function () {
 	            }
 	        }];
 	        $.ajaxLoading(obj);
-        },
-        getData: function () {
-            var that = this;
-            if (splitUrl()['isCash']){
-                //现金宝
-                that.getCashTradeDetail();
-            } else {
-                //普通基金
-                that.getFundTradeDetail();
-            }
-            
-        },
-        getFundTradeDetail: function () {
-            //普通公募交易详情查询
-            var that = this;
-            var obj = [{
-                url: site_url.pofTradeApplyInfo_api,
-                data: {
-                    applyId: splitUrl()['applyId'],
-                    fundCombination: splitUrl()['fundCombination'],
-                    fundCode: splitUrl()['fundCode'],
-                    fundBusinCode: splitUrl()['fundBusinCode'],
-                    allotType: splitUrl()['allotType'],
-                    Fixbusinflag: splitUrl()['Fixbusinflag'],
-                },
-                needDataEmpty: true,
-                callbackDone: function (json) {
-                    that.gV.data = json.data;
-                    that.events();
-                    switch (that.gV.data.fundBusinCode) {
-                        case "024":
-                        case "098":
-                            //赎回
-                            that.showFundRedeemStatus(json.data)
-                            break;
-
-                        default:
-                            //购买
-                            that.showFundBuyStatus(json.data);
-                            break;
-                    }
-
-                },
-                callbackFail: function (data) {
-                    console.log('加载失败');
-                }
-            }];
-            $.ajaxLoading(obj);
-        },
-        showFundBuyStatus: function (isPurchease, model) {
-            var that = this;
-            //购买状态的处理
-            //填充头部信息
-            $('.header .amount').html(model.tradeAmount + "元");//交易申请金额 header中显示的后下面显示的金额都是这个 除了确认信息中的金额显示的是确认金额confirmAmount
-            $('.header .trade_status').html(model.tradeApplyDesc);//交易状态 例如待扣款
-            $('.header .trade_status_des').html(model.tradeApplyDescMessage);//交易状态描述信息 例如等待给银行汇款 
-
-            //展示买入信息区域 并填充
-            $('.buy_info').removeClass('hide');
-            $('.buy_info .fund_name').html(model.fundName).on('click', function () { //买入产品
-                //todo 公募产品页面 传参 model.fundCode
-            });
-            $('.buy_info .fund_amount').html(model.tradeAmount);//买入金额
-            $('.buy_info .bank_icon').attr('url', model.bankLogoUrl);//支付方式的银行logo
-            $('.buy_info .bank_name').html(model.bankName + model.bankAccount.substring(model.bankAccount.length - 4));//支付方式的银行名称
-            $('.buy_info .pay_mode').html(model.payModeName);//支付方式
-            $('.buy_info .fund_date').html(model.tradeDate);//买入时间
-
-            switch (model.tradeStatus) {
-                /**
-                 * tradeStatus	 交易申请状态
-                    0：确认失败，
-                    1：确认成功，
-                    2：部分确认，
-                    3：实时确认成功，
-                    4：撤单，
-                    5：行为确认，
-                    9：未确认
-                 */
-                case "0":
-                case "9":
-                    //未确认状态 展示汇款账户信息
-                    $('.account_info').removeClass('hide');
-                    that.getRemittanceAccount();
-                    break;
-
-                case "1":
-                    //确认状态
-                    if ("2" == model.debitStatus){
-                        //扣款状态为已扣款 展示确认信息并填充
-                        $('confirm_info').removeClass('hide');
-                        $('confirm_info .confirm_amount').html(model.confirmAmount);//确认金额
-                        $('confirm_info .confirm_share').html(model.confirmShares);//确认份额
-                        $('confirm_info .confirm_value').html(model.confirmNav);//确认净值中的净值
-                        $('confirm_info .confirm_charge').html(model.confirmRate);//手续费
-                        $('confirm_info .confirm_date').html(model.confirmDate);//确认时间
-                    }
-                    break;
-            
-                default:
-                    break;
-            }
-        },
-        showFundRedeemStatus: function (){
-            //赎回渲染
-            $('.redeem_info').removeClass('hide');
-            
-            
-        },
-        getCashTradeDetail: function (){
-            //获取现金宝交易详情
-            var that = this;
-            var obj = [{
-                url: site_url.pofCashDetail_api,
-                data: {
-                    allotNo: splitUrl()['applyId'],
-                },
-                needDataEmpty: true,
-                callbackDone: function (json) {
-                    that.events();
-                    if (splitUrl()['isBuy']){
-                        that.showCashBuyStatus(json.data);
-                    } else {
-                        that.showCashRedeemStatus(json.data);
-                    }
-                },
-                callbackFail: function (data) {
-                    console.log('加载失败');
-                }
-            }];
-            $.ajaxLoading(obj);
-        },
-        showCashBuyStatus: function (model) {
-            //现金宝购买详情
-            var that = this;
-            if ("20" == model.tradeApplyStatus){
-                //确认成功
-                that.showTradeArea(true, model);
-            } else {
-                //确认失败
-                that.showTradeArea(false, model);
-            }
-
-            //购买状态的处理
-            //填充头部信息
-            $('.header .amount').html(model.balanceMask + "元");//交易申请金额 header中显示的后下面显示的金额都是这个 除了确认信息中的金额显示的是确认金额confirmAmount
-            $('.header .trade_status').html(model.identDesc);//交易状态 例如待扣款
-            $('.header .trade_status_des').html(model.errorMsg);//交易状态描述信息 例如等待给银行汇款 
-
-            //展示买入信息区域 并填充
-            $('.cash_buy_info').removeClass('hide');
-            $('.cash_buy_info .fund_name').html(model.fundName);//基金名称
-            $('.cash_buy_info .fund_amount').html(model.balanceMask);//买入金额
-            $('.cash_buy_info .bank_icon').css('url', model.bankThumbnailUrl);//todo 需要后台加接口 支付方式的银行logo
-            $('.cash_buy_info .bank_name').html(model.bankName + model.bankAccount.substring(model.bankAccount.length - 4));//支付方式的银行名称
-            $('.cash_buy_info .pay_mode').html(model.payModeName);//支付方式
-            $('.cash_buy_info .fund_date').html(model.applyDateTime);//买入时间
-
-        },
-        showCashRedeemStatus: function (model) {
-            //现金宝赎回详情
-            var that = this;
-        },
-        getRemittanceAccount: function () { 
-            //获取监管账户信息
-            var that = this;
-            var obj = [{
-	            url: site_url.findSuperviseBank_api,
-	            data: {},
-	            needLogin:true,//需要判断是否登陆
-	            //needDataEmpty: false,//不需要判断data是否为空
-	            callbackDone: function(json){  //成功后执行的函数
-					
-	                $('.accountName').html(json.data.accountName);
-	                $('.bankAccount').html(json.data.bankAccount);
-	                $('.bankNo').html(json.data.bankNo);
-	                $('.bankAccountName').html(json.data.bankAccountName);
-
-	            },
-	            callbackFail: function(json){  //失败后执行的函数
-						tipAction(json.msg);
-	            }
-	        }];
-	        $.ajaxLoading(obj);
-        },
-        showTradeArea: function (isSuccess, model) {//isBuy:是否为买入状态   isSuccess:true 成功状态 全部点亮   false 没有成功 只点亮第一步
-            //渲染上方交易进度条区域
-            //展示交易状态 并填充
-            $('.trade_status_area').removeClass('hide');//展示交易进度区域
-            if (isSuccess){
-                //默认全部点亮 所以不用处理
-            } else {
-                //其他情况 均把第一个点亮 其他的置灰
-                $('.trade_status_area .trade_status_icon').eq(0).siblings().css('background', 'url(/account/static/img/publicTradeDetail/public_trade_detail_no_check.png)');
-            }
-            if (splitUrl()['isCash']){//现金宝
-                if (splitUrl()['isBuy']){
-                    $('.trade_status_area .trade_status_desc').eq(0).html("提交转入申请");
-                    $('.trade_status_area .trade_status_desc').eq(1).html("开始计算收益");
-                    $('.trade_status_area .trade_status_desc').eq(2).html("第一笔收益到账");
-
-                    $('.trade_status_area .trade_status_date').eq(0).html(model.applyDateTime);//提交转入申请
-                    $('.trade_status_area .trade_status_date').eq(1).html(model.startGainsDayStr);//开始计算收益
-                    $('.trade_status_area .trade_status_date').eq(2).html(model.paymentGainsDayStr);//第一笔收益到账
-                } else {
-                    //赎回时把进度条最后一个隐藏掉
-                    $('.trade_status_area .trade_status_item').eq(2).addClass('hide');
-                    $('.trade_status_area .trade_status_desc').eq(0).html("提交转出申请");
-                    $('.trade_status_area .trade_status_desc').eq(1).html("到账时间");
-
-                    $('.trade_status_area .trade_status_date').eq(0).html(model.estimateDateStr);//提交转出申请
-                    $('.trade_status_area .trade_status_date').eq(1).html(model.estimateTimeStr);//到账时间
-                }
-            } else {
-                //普通基金赎回不展示进度条 所以不判断
-                $('.trade_status_area .trade_status_date').eq(0).html(model.originalDate);//申请受理时间
-                $('.trade_status_area .trade_status_date').eq(1).html(model.estimateConfirmDate);//预计份额确认时间
-                $('.trade_status_area .trade_status_date').eq(2).html(model.estimateArrivalDate);//预计查看收益时间
-            }
         }
     };
     obj.init();

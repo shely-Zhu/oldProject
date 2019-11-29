@@ -31,7 +31,7 @@ $(function() {
           url: site_url.productRecord_api,
           data: {
             "projectId":that.gV.projectId,//项目编号
-            //"projectId":"10103",//项目编号
+            // "projectId":"10103",//项目编号
            
           },
           //async: false,
@@ -58,14 +58,18 @@ $(function() {
     var obj = [{ // 系统调仓记录列表
         url: site_url.queryReourceList_api,
         data: {
-         // "projectId":that.gV.projectId,//项目编号
-          "projectId":"10103",//项目编号
+         //"projectId":that.gV.projectId,//项目编号
+          "projectId":"21970",//项目编号
           "fileType":"19,20,10,22,1",
         },
+        contentTypeSearch: true,
         //async: false,
         needDataEmpty: true,
         callbackDone: function(json) {
           var data = json.data
+          if(data.length >0){
+            $(".productCostTitleOne").show()
+          }
           console.log(data)
           generateTemplate(data,$(".materialWrap"), that.$e.adjustmentTemp);
         },
@@ -73,7 +77,7 @@ $(function() {
     $.ajaxLoading(obj);
 },
     event:function(){
-      $(".openOff").click(function(){
+      mui("body").on('tap','.open',function(e){
         if($(".openOff .open").text() != "收起"){
           $(".productCostDetail").addClass("openStyle")
           $(".productCostDetail").removeClass("productCostDetail");
@@ -87,7 +91,7 @@ $(function() {
           $(".openOff .imgWrap .changeImg").addClass("img")
           $(".openOff .imgWrap .changeImg").removeClass("changeImg")
         }
-      }) 
+			})
       mui("body").on('tap','.materialContent',function(e){
         console.log($(this).attr('data-fileUrl'))
         window.location.href=$(this).attr('data-fileUrl')

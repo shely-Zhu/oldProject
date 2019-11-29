@@ -34,6 +34,9 @@ html {
 .hide{
     display: none;
 }
+.text_red {
+    color: @F52323;
+}
 
 .cancel_order {
     //撤单按钮
@@ -83,7 +86,7 @@ html {
             width: 100%;
             height: 0.8rem;
             padding: 0.2rem 0.3rem 0 0.3rem;
-            .trade_status_icon {
+            .trade_status_icon, .trade_status_icon_1 {
                 width: 0.38rem;
                 height: 0.38rem;
                 background: url('/account/static/img/publicTradeDetail/public_trade_detail_check.png');
@@ -136,11 +139,6 @@ html {
     .font_size_28 {
         font-size: 0.28rem;
     }
-    .devider {
-        height: 0.3rem;
-        width: 100%;
-        background-color: @F7FAFD;
-    }
     .bank_icon {
         width: .27rem;
         height: .27rem;
@@ -155,6 +153,11 @@ html {
         text-align: center;
         color: @364D97;
         font-size: .24rem;
+    }
+    .divider {
+        height: 0.3rem;
+        width: 100%;
+        background-color: @F7FAFD;
     }
 
 

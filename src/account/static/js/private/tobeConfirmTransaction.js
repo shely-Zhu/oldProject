@@ -175,17 +175,23 @@ $(function() {
             $('#tipCon .tipCon').html(content);
             $('.mask').show();
             $('#tipCon').show();
+            //点击确定
             mui("body").on('tap', '.tipContainer .todo', function(e) {
                 if (type == 'assign') {
-                    //转让
+                    //转让方法
 
                 } else if (type == 'assignee') {
-                    //受让
+                    //受让方法
                 }
                 $('.mask').hide();
                 $('#tipCon').hide();
             })
 
+        },
+        openTipConOne: function(content) {
+            $('.mask').show();
+            $('#tipConOne').show();
+            $('#tipConOne .tipCon').html(content);
         },
         events: function() { //绑定事件
             var that = this;
@@ -204,16 +210,47 @@ $(function() {
                 })
                 //取消受让、取消预约、取消转让
             mui("body").on('tap', '.cancelBtn', function(e) {
-                var type = $(this).attr('data-type');
-                var id = $(this).attr('data-id');
-                if (type == 'assign') { //转让
-                    that.openTipCon('assign', '您确定要取消转让申请吗？', id);
-                } else if (type == 'assignee')
-                    that.openTipCon('assign', '您确定要取消受让申请吗？', id);
-            })
+                    var type = $(this).attr('data-type');
+                    var id = $(this).attr('data-id');
+                    if (type == 'assign') { //转让
+                        that.openTipCon('assign', '您确定要取消转让申请吗？', id);
+                    } else if (type == 'assignee')
+                        that.openTipCon('assign', '您确定要取消受让申请吗？', id);
+                })
+                //点击取消
             mui("body").on('tap', '.tipContainer .cancel', function(e) {
-                $('.mask').hide();
-                $('#tipCon').hide();
+                    $('.mask').hide();
+                    $('#tipCon').hide();
+
+                })
+                // 点击我明白了
+            mui("body").on('tap', '.tipContainer .buttonOne', function(e) {
+                    $('.mask').hide();
+                    $('#tipConOne').hide();
+                    var conText = $(this).siblings('tipContent').html;
+                    that.openTipConOne(conText);
+
+                })
+                //点击状态文字出现弹框
+            mui("body").on('tap', '.openTip', function(e) {
+                    $('.mask').show();
+                    $('#tipConOne').show();
+                    var conText = $(this).siblings('tipContent').html;
+                    that.openTipConOne(conText);
+
+                })
+                //功能按钮
+            mui("body").on('tap', '.toDetail', function(e) {
+                var type = $(this).attr('type');
+                if (type == 'toCertif') { //去合格投资者认证
+
+                } else if (type == 'toSign') { //去签合同
+
+                } else if (type == 'toSee') { //查看合同
+
+                } else if (type == 'toUploadM') { //去上传汇款凭证
+
+                }
 
             })
         }
