@@ -39,11 +39,9 @@ var productPublic = {
             },
             needDataEmpty: true,
             callbackDone: function(json){
-                console.log(json)
                 var imgArr = [];
 
                 $.each(json.data.bannerList, function(i, el){
-                    console.log(el)
                     imgArr.push({imgUrl: el.imageUrlShowOnline, linkUrl:el.linkUrl});
                 })
                 Slider( $('.banner'), imgArr );
@@ -51,23 +49,23 @@ var productPublic = {
                 //此时所有切换区域的内容都是空的
                 //设置切换区域的高度
                 //计算节点高度并设置
-                $(".banner img")[0].onload=function(){
-                    // if( !that.height ){
-                    //     var height = windowHeight - document.getElementById('scroll1').getBoundingClientRect().top;
+                // $(".banner img")[0].onload=function(){
+                //     if( !that.height ){
+                //         var height = windowHeight - document.getElementById('scroll1').getBoundingClientRect().top;
         
-                    //     if( window.currentIsApp ){
-                    //         //app，没有底部
-                    //         that.height = height - $('.tableHeader').height();
-                    //     }else{
-                    //         //非app
-                    //         that.height = height - $('.tableHeader').height() - $('.bottomNav').height();
-                    //     }
+                //         if( window.currentIsApp ){
+                //             //app，没有底部
+                //             that.height = height - $('.tableHeader').height();
+                //         }else{
+                //             //非app
+                //             that.height = height - $('.tableHeader').height() - $('.bottomNav').height();
+                //         }
                         
-                    // }
-                    // if( !$('.list').hasClass('setHeight') ){
-                    //     $('.list').height( that.height ).addClass('setHeight');
-                    // }
-                }			     						
+                //     }
+                //     if( !$('.list').hasClass('setHeight') ){
+                //         $('.list').height( that.height ).addClass('setHeight');
+                //     }
+                // }			     						
             },
             callbackFail: function(json){
                 console.log(json)
@@ -211,6 +209,10 @@ var productPublic = {
             $('.tab .tab-b .tab-content').css({"display":"none"});
             $('.tab .tab-b .tab-content').eq($(this).index()).css({"display":"block"});
         });
+        //财富跳转
+        mui("body").on('tap', '.listHref', function() {
+            window.location.href =site_url.fortuneClassroom_url;;
+        })
     }
 }
 productPublic.init();

@@ -32,7 +32,6 @@ $(function() {
           data: {
             "projectId":that.gV.projectId,//项目编号
             // "projectId":"10103",//项目编号
-           
           },
           //async: false,
           needDataEmpty: true,
@@ -48,7 +47,11 @@ $(function() {
             $(".productRecord").text(data.productRecord)
             $(".riskLevel").text(data.riskLevel)
             $(".newScale").text(data.newScale)
-            $(".productCharges").text(data.productCharges)
+            $(".productCostDetail").text(data.productCharges)
+            var rowNum=Math.round($(".productCostDetail").height()/parseFloat($(".productCostDetail").css('line-height')));
+            if(rowNum>=4){
+              $(".openOff").show()
+            }
           },
       }];
       $.ajaxLoading(obj);
@@ -58,7 +61,7 @@ $(function() {
     var obj = [{ // 系统调仓记录列表
         url: site_url.queryReourceList_api,
         data: {
-         //"projectId":that.gV.projectId,//项目编号
+          //"projectId":that.gV.projectId,//项目编号
           "projectId":"21970",//项目编号
           "fileType":"19,20,10,22,1",
         },
@@ -75,7 +78,7 @@ $(function() {
         },
     }];
     $.ajaxLoading(obj);
-},
+  },
     event:function(){
       mui("body").on('tap','.open',function(e){
         if($(".openOff .open").text() != "收起"){
@@ -94,7 +97,14 @@ $(function() {
 			})
       mui("body").on('tap','.materialContent',function(e){
         console.log($(this).attr('data-fileUrl'))
-        window.location.href=$(this).attr('data-fileUrl')
+        window.location.href=`/${$(this).attr('data-fileUrl')}`
+      //   if ($(this).attr('data-fileUrl').indexOf(".pdf") != -1) {
+      //     el.line = true; //线上可预览
+      //     el.href = site_url.download_api + "?filePath=" + el.fileUrl + "&fileName=" + new Base64().encode(el.fileName) + "&groupName=" + el.groupName + "&show=1";
+      // } else {
+      //     el.line = false; //需下载
+      //     el.href = site_url.download_api + "?filePath=" + el.fileUrl + "&fileName=" + new Base64().encode(el.fileName) + "&groupName=" + el.groupName;
+      // }
 			})
     }
   }

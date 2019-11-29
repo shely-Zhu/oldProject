@@ -366,5 +366,6 @@ module.exports = {
     //收益明细
     './mine/static/js/returnsDetail': "./src/mine/static/js/returnsDetail.js",
 
-
+    // 私募交易规则  
+    './account/static/js/private/transactionRules': "./src/account/static/js/private/transactionRules.js",
 }
