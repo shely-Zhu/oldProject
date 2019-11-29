@@ -47,7 +47,7 @@
         {{#if isLive}}
             <div class="roomItem item">
                 <div class="roomVideo">
-                    <img class="articalImg" src="{{imageAttachId}}" alt="">
+                    <img class="articalImg" src="{{imageUrlShowOnline}}" alt="">
                     <img class="play" src="/homePage/static/img/bofang@2x.png" alt="">
                 </div>
                 <div class="roomTitle">{{title}}</div>
@@ -55,7 +55,7 @@
             </div>
         {{else}}
             <div class="roomItem knowledgeItem">
-                <div class="roomImg"><img src="{{imageAttachId}}" alt=""></div>
+                <div class="roomImg"><img src="{{imageUrlShowOnline}}" alt=""></div>
                 <div class="roomTitle">{{title}}</div>
                 <div class="roomContent">{{intro}}</div>
            </div>
@@ -63,8 +63,6 @@
         {{/each}}
     </script>
     @@include('@pathInclude/views/footer.html')
-    <!-- 添加埋点 -->
-    @@include('@pathInclude/views/header.html') 
     <script src="/homePage/static/js/fortuneClassroom.js"></script>
 </body>
 </html>

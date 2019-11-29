@@ -12,7 +12,9 @@
 </head>
 
 <body>
-
+    <div class="trade_list">
+        交易记录
+    </div>
     @@include('@pathCommonViews/headBarConfig.html',{"pathName":"自选公募","bgColors":"#475A95,#475A95","showType":"1"})
     <section class="container">
         <div class="banner">
@@ -20,19 +22,19 @@
                 <div class="sum fl"><span class="j_text">自选总资产(元)</span><span class="j_icon"></span></div>
                 <div class="assetsBtn fr">资产组成说明</div>
             </div>
-            <div class="totalM">--</div>
+            <div class="totalM show_item">--</div>
             <div class="be_confirmed_amount">
                 <div class="title fl">待确认金额(元)</div>
-                <div class="value fl">--</div>
+                <div class="value fl show_item">--</div>
             </div>
             <div>
                 <div class="first_h_profit_box fl">
                     <div class="h_profit">昨日总收益(元)</div>
-                    <div class="h_profit_value">--</div>
+                    <div class="h_profit_value show_item">--</div>
                 </div>
                 <div class="second_h_profit_box fl">
                     <p class="h_profit">持有总收益(元)</p>
-                    <p class="h_profit_value">--</p>
+                    <p class="h_profit_value show_item">--</p>
                 </div>
             </div>
         </div>
@@ -92,7 +94,7 @@
                 {{#if_than_0 onwayAssetTotal}}
                     <div class="content_header">
                         <span class="text_gray">待确认金额   </span>
-                        <span class="text_balck">{{onwayAssetTotal}}元</span> 
+                        <span class="text_balck show_item">{{onwayAssetTotal}}元</span> 
                     </div>
                 {{/if_than_0}}
                 <div class="content_bottom">
@@ -100,12 +102,12 @@
                     <div class="text_gray position_d">昨日收益(元)</div>
                     <div class="position_tip"></div>
                     <div class="text_gray position_e">持有收益(元)</div>
-                    <div class="text_black position_f">{{totalMoneyMask}}</div>
-                    <div class="text_black position_g">{{incomeMask}}</div>
+                    <div class="text_black position_f show_item">{{totalMoneyMask}}</div>
+                    <div class="text_black position_g show_item">{{incomeMask}}</div>
                     {{#if_than_0 addupIncome}}
-                        <div class="text_red position_h">+{{addupIncomeMask}}</div>
+                        <div class="text_red position_h show_item">+{{addupIncomeMask}}</div>
                     {{else}}
-                        <div class="text_green position_h">{{addupIncomeMask}}</div>
+                        <div class="text_green position_h show_item">{{addupIncomeMask}}</div>
                     {{/if_than_0}}
                     {{#if myTip}}
                         <div class="tip">{{myTip}}</div>
@@ -143,12 +145,12 @@
                     <div class="text_gray position_d">昨日收益(元)</div>
                     <div class="position_tip"></div>
                     <div class="text_gray position_e">持有收益(元)</div>
-                    <div class="text_black position_f">{{totalMoneyMask}}</div>
-                    <div class="text_black position_g">{{incomeMask}}</div>
+                    <div class="text_black position_f show_item">{{totalMoneyMask}}</div>
+                    <div class="text_black position_g show_item">{{incomeMask}}</div>
                     {{#if_than_0 holdIncome}}
-                        <div class="text_red position_h">+{{holdIncomeMask}}</div>
+                        <div class="text_red position_h show_item">+{{holdIncomeMask}}</div>
                     {{else}}
-                        <div class="text_green position_h">{{holdIncomeMask}}</div>
+                        <div class="text_green position_h show_item">{{holdIncomeMask}}</div>
                     {{/if_than_0}}
                     <!-- todo 需要判断字段来是否显示 -->
                     {{#if isBuyFlag}}

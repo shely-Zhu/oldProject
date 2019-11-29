@@ -29,6 +29,8 @@ $(function() {
 			isAllowRedemption: splitUrl['isAllowRedemption'],
 			ecFileName: '',
 			ecFileUrl: '',
+			redemptionOpenFrequency: '', // 赎回开放频率
+			imgUrl: '', // 赎回指引图片路径
 			qrnhWfsy: {
 				oneMonth : {},
 				threeMonth: {},
@@ -114,6 +116,7 @@ $(function() {
 			    needLogin: true,
 			    contentTypeSearch: true,
 			    callbackDone: function(json) {
+			    	that.data.imgUrl = json.data.imgUrl?json.data.imgUrl:''
 			    	if(json.data.introduction && json.data.introduction!='') {
 			    		that.data.redeemRule = json.data.introduction.replace(/\r\n/g,"").split("=====");
 				    	// 判断是否有快速赎回规则
@@ -175,8 +178,9 @@ $(function() {
 			    	var jsonData = json.data;
 			    	//设置数据到页面上
 			    	that.setDomData( jsonData );
-			    	that.data.ecFileName = jsonData.ecFileName;
-			    	that.data.ecFileUrl = jsonData.ecFileUrl;
+			    	that.data.ecFileName = jsonData.ecFileName?jsonData.ecFileName:'';
+			    	that.data.ecFileUrl = jsonData.ecFileUrl?jsonData.ecFileUrl:'';
+			    	that.data.redemptionOpenFrequency = jsonData.redemptionOpenFrequency?jsonData.redemptionOpenFrequency:''
 			    	//请求其他接口
 			    	if( (that.data.projectType == 0) || (that.data.projectType == 1) ){ 
 			    		//稳金类项目，请求七日年化/万份收益折线图
@@ -534,7 +538,7 @@ $(function() {
 	    		//认购金额
 	    		$('#type3TotalM').html( jsonData.buyAmount ? jsonData.buyAmount : '--' );
 	    		//收益分配
-	    		if(!jsonData.incomeAssign || jsonData.incomeAssign=='') {
+	    		if(!jsonData.incomeAssign || jsonData.incomeAssign=='' || Number(jsonData.incomeAssign)==0) {
 	    			$('.type_3 .syfp').parent().css("display", "none")
 	    		} else {
 	    			$('.type_3 .syfp').html( jsonData.incomeAssign );
@@ -666,7 +670,7 @@ $(function() {
             })
             // 交易规则点击跳转
             mui("body").on('tap', '#transactionRuleBtn', function() {
-            	window.location.href = site_url.transactionRules_url + '?projectId=' + that.data.projectId;
+            	window.location.href = site_url.privateTransactionRules_url + '?projectId=' + that.data.projectId + '&redemptionOpenFrequency=' + encodeURI(encodeURI(that.data.redemptionOpenFrequency)) + '&imgUrl=' + that.data.imgUrl;
             })
             // 产品档案点击跳转
             mui("body").on('tap', '#productFilesBtn', function() {
