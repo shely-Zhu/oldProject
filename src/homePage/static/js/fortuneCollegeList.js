@@ -209,10 +209,6 @@ var productPublic = {
             $('.tab .tab-b .tab-content').css({"display":"none"});
             $('.tab .tab-b .tab-content').eq($(this).index()).css({"display":"block"});
         });
-        //财富跳转
-        mui("body").on('tap', '.listHref', function() {
-            window.location.href =site_url.fortuneClassroom_url;
-        })
     }
 }
 productPublic.init();
