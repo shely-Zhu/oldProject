@@ -10,6 +10,9 @@
 @import url("@pathCommonLessCom/againEnter.less");
 @import url("@pathCommonLessCom/alertBox.less");
 @import url("@pathCommonLessCom/headBarConfig.less");
+
+@import url("@pathCommonLessCom/sliderMui.less");
+
 // .mui-slider-indicator /deep/ .mui-indicator{
 // 	width:0.1rem !important;
 // 	height:0.1rem !important;
@@ -25,24 +28,22 @@
 .mui-indicator{
 	margin-right:0.2rem !important;
 }
-.box{
+.boxA{
 	.banner{
-		img{
-			height:3.9rem !important;
-		}
-		.mui-slider-indicator .mui-indicator{
-			width:0.08rem !important;
-			height:0.08rem !important;
-			background:rgba(255,255,255,0.5) !important;
-		}
-		.mui-slider-indicator{
-			bottom:8px !important;
-		}
-		.mui-slider-indicator .mui-indicator.mui-active{
-			width: 0.16rem !important;
-			height:0.08rem !important;
-			background:@FFFFFF !important;
-		}
+		position: relative;
+		// .mui-slider-indicator .mui-indicator{
+		// 	width:0.08rem !important;
+		// 	height:0.08rem !important;
+		// 	background:rgba(255,255,255,0.5) !important;
+		// }
+		// .mui-slider-indicator{
+		// 	bottom:8px !important;
+		// }
+		// .mui-slider-indicator .mui-indicator.mui-active{
+		// 	width: 0.16rem !important;
+		// 	height:0.08rem !important;
+		// 	background:@FFFFFF !important;
+		// }
 	}
 	.hotWords{
 		padding:0.3rem;
@@ -234,14 +235,16 @@
 						display:block;
 					}
 					ul li{
-						background-image: linear-gradient(to right, @6C83C9 ,@061D6A);
-						display:-webkit-box;
-						padding:0.3rem 0.27rem 0.3rem 0.27rem;
+						// background-image: linear-gradient(to right, @6C83C9 ,@061D6A);
+						// padding:0.3rem 0.27rem 0.3rem 0.27rem;
 						border-radius: 0.16rem;
 						margin-bottom:0.3rem;
+						position: relative;
 						div{
-							-webkit-box-flex:1;
-							padding-right:0.2rem;
+							position: absolute;
+							left:0.47rem;
+							top:0.5rem;
+							width:4.2rem;
 							P{
 								color:@FFFFFF;
 								font-size:0.38rem;
@@ -253,8 +256,7 @@
 							}
 						}
 						img{
-							width:1.3rem;
-							height:1.7rem;
+							width:100%;
 							display: block;
 						}
 					}

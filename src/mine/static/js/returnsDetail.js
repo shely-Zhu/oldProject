@@ -82,7 +82,7 @@ $(function() {
             var obj = [{ // 系统调仓记录列表
                 url: site_url.queryIncomeList_api,
                 data: {
-                    "pageNo": that.gV.pageCurrent, //非必须，默认为1
+                    "pageCurrent": that.gV.pageCurrent, //非必须，默认为1
                     "pageSize": 10,//非必须，默认为10
                     "fundCode":that.gV.fundCode,//项目编号
                 },
