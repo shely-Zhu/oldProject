@@ -12,7 +12,7 @@
     fundBusinCode	业务大类编号
     allotType	申请类型
     Fixbusinflag	业务辅助代码
-    isFixed   是否为定投产品
+    scheduledProtocolId   定投编号
 
     超宝现金宝需要带入的参数
     isCash 是否为现金宝的标识
@@ -29,13 +29,10 @@
 
 
  /**
-  * todo 
+  * 永丽定的规则
   * 1 新发基金进度条显示和别的不一样 中间那个要改成 等待基金成立确认认购份额
   * 2 除了交易状态为成功 或者扣款状态为成功 其他的状态值都显示为红色 永丽定的规则
-  * 3 点击定投计划跳转到定投持仓详情
-  * 4 定投计划的跳转还没写
-  * 5 分红页面还没写
-  * 6 怎么区分是否买入成功 确认状态为已确认 扣款状态为已成功   怎么确认是否赎回成功 确认状态为已确认 没有到账状态
+  * 3 怎么区分是否买入成功 确认状态为已确认 扣款状态为已成功   怎么确认是否赎回成功 确认状态为已确认 没有到账状态
   */
 
 require('@pathIncludJs/base.js');
@@ -69,9 +66,8 @@ $(function () {
         events: function (){
             var that = this;
             mui("body").on('tap', 'footer', function (e) {
-                //再买一笔 跳转到产品详情页 todo
-                // var fundCode = that.gV.data.fundCode;
-                window.location.href=site_url.productPublicDetail_url;
+                //再买一笔 跳转到产品详情页
+                window.location.href = site_url.productPublicDetail_url + '?fundCode=' + splitUrl()[fundCode];
             })
 
             mui("body").on('tap', '.cancel_order', function (e) {
@@ -82,12 +78,12 @@ $(function () {
                 });
             })
             mui("body").on('tap', '.buy_info .fund_item', function (e) {
-                //todo 买入产品条目点击进入公募产品详情
-                // var fundCode = that.gV.data.fundCode;
-                window.location.href=site_url.productPublicDetail_url;
+                //买入产品条目点击进入公募产品详情
+                window.location.href = site_url.productPublicDetail_url + '?fundCode=' + splitUrl()[fundCode];
             })
             mui("body").on('tap', '.plan', function (e) {
-                //定投计划跳转
+                //定投计划跳转到定投详情
+                window.location.href = site_url.pofCastSurelyDetails_url + '?scheduledProtocolId=' + splitUrl()[scheduledProtocolId];
             })
         },
         getData: function () {
@@ -107,6 +103,8 @@ $(function () {
         getFundTradeDetail: function () {
             //普通公募交易详情查询
             var that = this;
+            //普通产品展示再买一笔
+            $('footer').removeClass('hide');
             var obj = [{
                 url: site_url.pofTradeApplyInfo_api,
                 data: {
@@ -146,7 +144,6 @@ $(function () {
             $.ajaxLoading(obj);
         },
         showFundStatus: function (isBuy, model) {
-            debugger
             var that = this;
             //购买状态的处理
             //填充头部信息
@@ -162,10 +159,7 @@ $(function () {
             if (isBuy){
                 //展示买入信息区域 并填充
                 $('.buy_info').removeClass('hide');
-                $('.buy_info .fund_name').html(model.fundName).on('click', function () { //买入产品
-                    //todo 公募产品页面 传参 model.fundCode
-                });
-                
+                $('.buy_info .fund_name').html(model.fundName);//买入产品
                 $('.buy_info .fund_amount').html(model.tradeAmount);//买入金额
                 $('.buy_info .bank_icon').attr('src', model.bankThumbnailUrl);//支付方式的银行logo
                 $('.buy_info .bank_name').html(model.bankName + model.bankAccountMask.substring(model.bankAccountMask.length - 4));//支付方式的银行名称
@@ -204,7 +198,7 @@ $(function () {
                         $('.buy_confirm_info .confirm_date').html(model.confirmDate);//确认时间
                     }
                 } else {
-                    //赎回为确认状态 展示赎回确认信息 todo 看永丽是否要和王潮对一下字段
+                    //赎回为确认状态 展示赎回确认信息
                     $('.redeem_confirm_info').removeClass('hide');
                     $('.redeem_confirm_info .confirm_share').html(model.confirmShares);//确认份额
                     $('.redeem_confirm_info .confirm_value').html(model.confirmNav);//确认净值
@@ -261,12 +255,13 @@ $(function () {
         showCashStatus: function (model) {
             //现金宝详情
             var that = this;
+            //转入失败与转出成功展示资金状态
             if ("1" == model.tradeApplyStatus){
                 //确认成功
                 that.showTradeArea(true, model);
                 if ("2" == model.ident && !that.gV.isBuy){
                     //扣款成功 转出 展示资金状况
-
+                    $('.cash_buy_info .fund_type').removeClass('hide');
                 }
             } else {
                 //确认失败
@@ -276,7 +271,7 @@ $(function () {
                     $('.header .trade_status').css('color', '#F52323');
                     if (that.gV.isBuy){
                         //转入 且扣款状态为失败 展示资金状态
-                        $('.buy_info .fund_type').removeClass('hide');
+                        $('.cash_buy_info .fund_type').removeClass('hide');
                     }
                 }
             }
@@ -292,7 +287,7 @@ $(function () {
                 $('.cash_buy_info').removeClass('hide');
                 $('.cash_buy_info .fund_name').html(model.fundName);//基金名称
                 $('.cash_buy_info .fund_amount').html(model.balanceMask);//买入金额
-                $('.cash_buy_info .bank_icon').attr('url', model.bankThumbnailUrl);//todo 需要后台加接口 支付方式的银行logo
+                $('.cash_buy_info .bank_icon').attr('url', model.bankThumbnailUrl);//需要后台加接口 支付方式的银行logo
                 $('.cash_buy_info .bank_name').html(model.bankName + model.bankAccountMask.substring(model.bankAccountMask.length - 4));//支付方式的银行名称
                 $('.cash_buy_info .pay_mode').html(model.payModeName);//支付方式
                 $('.cash_buy_info .fund_date').html(model.applyDateTime);//买入时间
@@ -301,7 +296,7 @@ $(function () {
                 $('.cash_redeem_info').removeClass('hide');
                 $('.cash_redeem_info .item_1').html(model.fundName);//转出产品
                 $('.cash_redeem_info .item_2').html(model.balanceMask);//转出金额
-                $('.buy_info .bank_icon').attr('url', model.bankThumbnailUrl);//转出至银行卡logo
+                $('.cash_redeem_info .bank_icon').attr('url', model.bankThumbnailUrl);//转出至银行卡logo
                 $('.cash_redeem_info .item_3').html(model.bankName);//转出至银行卡描述
                 $('.cash_redeem_info .item_4').html(model.applyDateTime);//转出时间
             }
@@ -376,8 +371,16 @@ $(function () {
             } else {
                 //普通基金赎回不展示进度条 所以不判断
                 $('.trade_status_area .trade_status_date').eq(0).html(model.originalDate);//申请受理时间
-                $('.trade_status_area .trade_status_date').eq(1).html(model.estimateConfirmDate);//预计份额确认时间
-                $('.trade_status_area .trade_status_date').eq(2).html(model.estimateArrivalDate);//预计查看收益时间
+                if ("020" == model.fundBusinCode){
+                    //认购状态
+                    $('.trade_status_area .trade_status_desc').eq(1).html("等待基金成立确认认购份额");//第二步左边名称
+                    $('.trade_status_area .trade_status_desc').eq(2).html("预计查看确认");//第三步左边名称
+                    $('.trade_status_area .trade_status_date').eq(1).html("已基金公司公告为准");//第二步右边描述
+                    $('.trade_status_area .trade_status_date').eq(2).html("基金成立次日");//第三步右边描述
+                } else {
+                    $('.trade_status_area .trade_status_date').eq(1).html(model.estimateConfirmDate);//预计份额确认时间
+                    $('.trade_status_area .trade_status_date').eq(2).html(model.estimateArrivalDate);//预计查看收益时间
+                }
             }
         },
         cancelOrder: function (password){
