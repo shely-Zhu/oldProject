@@ -10,6 +10,7 @@ require('@pathCommonJs/components/headBarConfig.js');
 require('@pathCommonJsCom/tabScroll.js');
 require('@pathCommonJsCom/goTopMui.js');
 //黑色提示条的显示和隐藏
+var splitUrl = require('@pathCommonJs/components/splitUrl.js')();
 var tipAction = require('@pathCommonJs/components/tipAction.js');
 var Base64 = require('@pathIncludJs/vendor/base64/base64.js');
 
@@ -28,7 +29,7 @@ var prvMar = {
         pageSize: 10,
     },
     status: {
-        fundCode: splitUrl()['fundCode'], // 当前页面的基金代码
+        projectId: splitUrl['projectId'], // 当前页面的基金代码
         current_index: 0, //左右滑动区域的索引
         current_label: 0, //标签对应的编号，ajax请求需要
     },
@@ -46,7 +47,7 @@ var prvMar = {
 			url: site_url.queryReourceLabels_api,
 			// url: site_url.queryReourceList_api,
 			data: {
-                "projectId":21072
+                "projectId":that.status.projectId
             },
             needLogin: true, //需要判断是否登陆
             async: false,
@@ -159,16 +160,17 @@ var prvMar = {
 
         obj = [{ //获取产品列表
             url: site_url.prvReource_api, //私募产品列表  queryReourceList.action
-            data: {
-                hmac: "", //预留的加密信息 非必填项
-                params: { //请求的参数信息
-                    productCode: that.status.fundCode, // 产品代码
+            // data: {
+                // hmac: "", //预留的加密信息 非必填项
+                data: { //请求的参数信息
+                    projectId: that.status.projectId, // 产品代码
                     fileType: fileType,
-                }
+                // }
             },
             needLogin: true,
             needDataEmpty: true,
             async: false,
+            contentTypeSearch: true,
             callbackDone: function(json) {
                 var json = json.data;
                 $.each(json, function(i, el) {
@@ -176,7 +178,7 @@ var prvMar = {
                     el.marName = el.fileName.substring(el.fileName.indexOf("】") + 1);
                     if (el.fileName.indexOf(".pdf") != -1) {
                         el.line = true; //线上可预览
-                        el.href = site_url.download_api + "?filePath=" + el.fileUrl + "&fileName=" + new Base64().encode(el.fileName) + "&groupName=" + el.groupName + "&show=1";
+                        el.href = site_url.download_api + "?filePath=" + el.fileUrl + "&fileName=" + new Base64().encode(el.fileName) + "&groupName=" + el.groupName + "&show=1&.pdf";
                     } else {
                         el.line = false; //需下载
                         el.href = site_url.download_api + "?filePath=" + el.fileUrl + "&fileName=" + new Base64().encode(el.fileName) + "&groupName=" + el.groupName;
@@ -226,6 +228,7 @@ var prvMar = {
     },
     events: function() {
         mui("body").on("tap", ".mui-box", function() {
+            // console.log($(this).attr("href"))
             if(window.currentIsApp){
                 window.location.href = $(this).attr("href");
             }else{

@@ -41,7 +41,8 @@ var rule_wenjin = Mock.mock({
         "releaseDate":"2018-02-12",
         "reportDate":null,
         "reportSource":"",
-        "targetUrl":""
+        "targetUrl":"",
+        "imgUrl": "https://www.baidu.com/img/baidu_jgylogo3.gif"
     }
 });
 

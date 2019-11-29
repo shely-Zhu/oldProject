@@ -58,8 +58,7 @@
                    <div class="productCostTitle">
                         产品费用
                    </div>
-                   <div class="productCostDetail productCharges">
-                       
+                   <div class="productCostDetail">
                    </div>
                    <div class="openOff">
                      <div class="open">展开</div>
@@ -84,8 +83,6 @@
             </div>
         </div>
     </div>
-
-
     <script id="adjustment-template" type="text/x-handlebars-template">
         {{#each this}}
         <ul data-fileUrl='{{fileUrl}}' class="materialContent">
@@ -94,10 +91,7 @@
         </ul>
         {{/each}}
     </script>
- 
      @@include('@pathInclude/views/footer.html')
-
      <script src="/account/static/js/productFiles.js"></script>
  </body>
- 
  </html>

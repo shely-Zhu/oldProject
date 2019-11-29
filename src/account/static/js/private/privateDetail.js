@@ -12,12 +12,10 @@
  */
 
 
-require('@pathIncludJs/base.js');
+require('@pathCommonBase/base.js');
 // require('@pathCommonJsCom/utils.js');
 //ajax调用
 require('@pathCommonJs/ajaxLoading.js');
-
-require('@pathCommonJs/components/headBarConfig.js');
 
 var splitUrl = require('@pathCommonJs/components/splitUrl.js')();
 
@@ -29,6 +27,8 @@ $(function() {
 			isAllowRedemption: splitUrl['isAllowRedemption'],
 			ecFileName: '',
 			ecFileUrl: '',
+			redemptionOpenFrequency: '', // 赎回开放频率
+			imgUrl: '', // 赎回指引图片路径
 			qrnhWfsy: {
 				oneMonth : {},
 				threeMonth: {},
@@ -114,6 +114,7 @@ $(function() {
 			    needLogin: true,
 			    contentTypeSearch: true,
 			    callbackDone: function(json) {
+			    	that.data.imgUrl = json.data.imgUrl?json.data.imgUrl:''
 			    	if(json.data.introduction && json.data.introduction!='') {
 			    		that.data.redeemRule = json.data.introduction.replace(/\r\n/g,"").split("=====");
 				    	// 判断是否有快速赎回规则
@@ -175,8 +176,9 @@ $(function() {
 			    	var jsonData = json.data;
 			    	//设置数据到页面上
 			    	that.setDomData( jsonData );
-			    	that.data.ecFileName = jsonData.ecFileName;
-			    	that.data.ecFileUrl = jsonData.ecFileUrl;
+			    	that.data.ecFileName = jsonData.ecFileName?jsonData.ecFileName:'';
+			    	that.data.ecFileUrl = jsonData.ecFileUrl?jsonData.ecFileUrl:'';
+			    	that.data.redemptionOpenFrequency = jsonData.redemptionOpenFrequency?jsonData.redemptionOpenFrequency:''
 			    	//请求其他接口
 			    	if( (that.data.projectType == 0) || (that.data.projectType == 1) ){ 
 			    		//稳金类项目，请求七日年化/万份收益折线图
@@ -534,7 +536,7 @@ $(function() {
 	    		//认购金额
 	    		$('#type3TotalM').html( jsonData.buyAmount ? jsonData.buyAmount : '--' );
 	    		//收益分配
-	    		if(!jsonData.incomeAssign || jsonData.incomeAssign=='') {
+	    		if(!jsonData.incomeAssign || jsonData.incomeAssign=='' || Number(jsonData.incomeAssign)==0) {
 	    			$('.type_3 .syfp').parent().css("display", "none")
 	    		} else {
 	    			$('.type_3 .syfp').html( jsonData.incomeAssign );
@@ -546,7 +548,29 @@ $(function() {
 	    			$('.type_3 .clr').html( jsonData.setupDate);
 	    		}
 	    		//产品期限
-    		   	$('.type_3 .cpqx').html( jsonData.prodTerm==''?'--': jsonData.prodTerm);
+	    		var period = '';
+	    		if(jsonData.investPeriod && jsonData.investPeriod!= '') { // 投资期
+	    			period += jsonData.investPeriod + jsonData.prodTerm + "（投资期）"
+	    		}
+	    		if(jsonData.quitPeriod && jsonData.quitPeriod!= '') { // 退出期
+	    			if(period == '') {
+	    				period += jsonData.quitPeriod + jsonData.prodTerm + "（退出期）"
+	    			} else {
+	    				period = period + "+" + jsonData.quitPeriod + jsonData.prodTerm + "（退出期）"
+	    			}
+	    		}
+	    		if(jsonData.delayPeriod && jsonData.delayPeriod!= '') { // 延长期
+	    			if(period == '') {
+	    				period += jsonData.delayPeriod + jsonData.prodTerm + "（延长期）"
+	    			} else {
+	    				period = period + "+" + jsonData.delayPeriod + jsonData.prodTerm + "（延长期）"
+	    			}
+	    		}
+	    		if(period == '') {
+	    			$('.type_3 .cpqx').parent().parent().remove();
+	    		} else {
+	    			$('.type_3 .cpqx').html( period);
+	    		}
 	    	} else if( that.data.projectType == 4){ //证券类   		
 	    		//当前市值
 	    		$('#type4TotalM').html( jsonData.capitalisation ? jsonData.capitalisation : '--'  );
@@ -666,7 +690,7 @@ $(function() {
             })
             // 交易规则点击跳转
             mui("body").on('tap', '#transactionRuleBtn', function() {
-            	window.location.href = site_url.transactionRules_url + '?projectId=' + that.data.projectId;
+            	window.location.href = site_url.privateTransactionRules_url + '?projectId=' + that.data.projectId + '&redemptionOpenFrequency=' + encodeURI(encodeURI(that.data.redemptionOpenFrequency)) + '&imgUrl=' + that.data.imgUrl;
             })
             // 产品档案点击跳转
             mui("body").on('tap', '#productFilesBtn', function() {

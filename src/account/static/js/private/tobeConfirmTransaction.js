@@ -6,7 +6,7 @@
  * @description:
  */
 
-require('@pathIncludJs/base.js');
+require('@pathCommonBase/base.js');
 
 //ajax调用
 require('@pathCommonJs/ajaxLoading.js');
@@ -17,7 +17,7 @@ require('@pathCommonJs/ajaxLoading.js');
 
 require('@pathCommonJsCom/goTopMui.js');
 
-require('@pathCommonJs/components/headBarConfig.js');
+
 
 //黑色提示条的显示和隐藏
 var splitUrl = require('@pathCommonJs/components/splitUrl.js')();
@@ -126,11 +126,9 @@ $(function() {
                     isConfirm: that.gV.type,
                     businessType: Number(that.gV.businessType),
                 },
-                //async: false,
-                needDataEmpty: true,
                 callbackDone: function(json) {
                     var data;
-                    if (json.data.tradeList.length == 0) { // 没有记录不展示
+                    if (json.data.tradeList && json.data.tradeList.length == 0) { // 没有记录不展示
                         $(".list").hide()
                         that.getElements.noData.show();
                         return false;
@@ -166,6 +164,9 @@ $(function() {
                     }, 200)
 
 
+                },
+                callbackNoData: function() {
+                    that.getElements.noData.show();
                 }
 
             }];
@@ -196,17 +197,28 @@ $(function() {
         events: function() { //绑定事件
             var that = this;
             mui("body").on('tap', '.hopper', function(e) {
-                $('.mask').show();
-                $('.hopperCon').show();
+                    $('.mask').show();
+                    $('.hopperCon').show();
 
-            })
+                })
+                //点击筛选数据
             mui("body").on('tap', '.hopperCon li', function(e) {
                     $(this).addClass('active').siblings('li').removeClass('active');
                     $('.mask').hide();
                     $('.hopperCon').hide();
                     that.gV.businessType = $(this).attr('data');
+                    // 重置上拉加载
+                    mui('.contentWrapper').pullRefresh().refresh(true);
                     that.gV.aP.pageNo = 1;
-                    that.getData(that.gV.aThis, 1);
+                    that.getElements.contentWrap.html('');
+                    //重新初始化
+                    that.initMui();
+                    mui('.contentWrapper').pullRefresh().scrollTo(0, 0, 0);
+                })
+                // 点击遮罩隐藏
+            mui("body").on('tap', '.mask', function(e) {
+                    $('.mask').hide();
+                    $('.hopperCon').hide();
                 })
                 //取消受让、取消预约、取消转让
             mui("body").on('tap', '.cancelBtn', function(e) {
