@@ -1,4 +1,4 @@
-@import url("@pathInclude/css/mui.min.css");
+@import url("../../../include/css/mui.min.css");
 @import url('@pathCommonLess/mui/resetMUI.less');
 @import url("@pathCommonLess/reset.less");
 @import url("@pathCommonLess/color.less");
@@ -21,7 +21,6 @@ html{
     .title{
         width: 100%;
         position: fixed;
-        z-index: 1;
         .titleContent{
             width: 100%;
             height: 1rem;
@@ -86,7 +85,7 @@ html{
 * { touch-action: pan-y; }
 
 .list {
-    margin-top: 0.5rem;
+    margin-top: 1rem;
     .contentWrapper{
         width: 100%;
         height: 100%;
@@ -113,7 +112,7 @@ html{
         }
     }
 }
-.nodataImg{
-    width: 2rem;
-    height: 2rem;
+
+.mui-table-view-cell{
+    padding: 0;
 }

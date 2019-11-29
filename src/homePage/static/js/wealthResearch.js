@@ -86,7 +86,7 @@ $(function() {
 
                 that.gV.ajaxArr[i] = {
                     articleBelong: el.num, //请求类型
-                    pageCurrent: that.gV.aP.pageCurrent, //当前第几页(默认为1) 非必填项, 默认设置成第一页
+                    pageNo: that.gV.aP.pageCurrent, //当前第几页(默认为1) 非必填项, 默认设置成第一页
                     pageSize: that.gV.aP.pageSize, //每页显示几条数据(默认10) 非必填项， 默认设置成20
                 }
                 contentArr.push({
@@ -209,7 +209,7 @@ $(function() {
             var obj = [{
                 url: site_url.getFortuneTabInfo_api,
                 data: {
-                    type: 28
+                    type: 29
                 },
                 needDataEmpty: true,
                 callbackDone: function(json) {
@@ -242,7 +242,7 @@ $(function() {
                 needLogin: true,
                 callbackDone: function(json) {
                     console.log(json.data)
-                    var jsonData = json.data,
+                    var jsonData = json.data.list,
                         pageList = jsonData;
                     if (!$.util.objIsEmpty(pageList)) {
 

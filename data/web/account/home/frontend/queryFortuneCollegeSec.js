@@ -10,7 +10,7 @@ var Mock = require('mockjs');
 var data = Mock.mock({ 
 	"message": "处理成功！", 
 	"data":{
-		ModelVO:{
+		'modelVO':{
 			modelName:'模块名称',
 			isUse:true,
 			listJumpUrl:"www.baidu.com"

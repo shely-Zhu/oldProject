@@ -33,11 +33,11 @@ var classData = Mock.mock({
     status: "0000",
     message: "success",
     data: [{
-            sonModelType: 1,
+            sonModelType: 2,
             sonModelName: '大咖直播'
         },
         {
-            sonModelType: 2,
+            sonModelType: 3,
             sonModelName: '知时讲堂'
         }
     ]

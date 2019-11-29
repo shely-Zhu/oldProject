@@ -9,9 +9,7 @@ require('@pathCommonJs/components/utils.js');
 require('@pathCommonJs/components/headBarConfig.js');
 
 require('@pathCommonJs/ajaxLoading.js');
-// var uploadFile = require('@pathCommonJs/components/uploadFile/uploaderFile.js');
-// var uploadFile = require('@pathCommonJs/components/uploadFile/uploaderFile.js');
-var uploadFile = require('./uploaderFile.js')
+var uploadFile = require('../../../common/components/uplaoderFile/uploaderFile.js')
 
 var tipAction = require('@pathCommonJs/components/tipAction.js');
 var splitUrl = require('@pathCommonJs/components/splitUrl.js')();
