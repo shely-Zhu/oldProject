@@ -19,7 +19,7 @@ $(function(){
 		//获取页面元素
 		$e:{
 			projectId:splitUrl['projectId'],
-			adjustmentTemp: $('#wrap-template'), // 最新调仓模板
+		adjustmentTemp: $('#wrap-template'), // 最新调仓模板
 			lineType:'',
 		},
 		getElements : {
@@ -28,11 +28,6 @@ $(function(){
 			linenum     : $('#linenum'), //行号
 			openingBank : $("#openingBank"),  //开户行
 			topc      : $('#topc'),       //提示信息
-		},
-		setting: { //一些设置
-			navAllList: ['风险揭示书', '产品信息', '管理报告', '资金分配', '重要公告及通知', '恒天简报'],
-			ajaxParamList: ['19,20,10,22', '1', '12,13,28,14', '30', '16,17,31,32,29', '33,34,35,36,37'], // 请求参数
-			navList: [], //导航
 		},
 		data:{
 			custType:"",//客户类型
@@ -95,6 +90,9 @@ $(function(){
 					}
 					else if(jsonData.incomeModeJF == '2'){  //2浮收稳裕   展示七日年化
 						that.$e.lineType = 'qrnh';
+						// $('.lineWrap .wfsy').addClass('hide');
+						// $('.lineWrap .qrnh').removeClass('hide');
+						
 						$("#qrnhLine").addClass("hide");
 						$("#wfsyLine").removeClass("hide");
 						// 折线图
@@ -571,10 +569,10 @@ $(function(){
 			$.each(data, function(i, el) {
 				if (el.fileName.indexOf(".pdf") != -1) {
 					el.line = true; //线上可预览
-					el.href = site_url.download_api + "?filePath=" + el.fileUrl + "&fileName=" + new Base64().encode(el.fileName) + "&groupName=" + el.groupName + "&show=1";
+					el.href = site_url.downloadNew_api + "?filePath=" + el.fileUrl + "&fileName=" + new Base64().encode(el.fileName) + "&groupName=" + el.groupName + "&show=1";
 				} else {
 					el.line = false; //需下载
-					el.href = site_url.download_api + "?filePath=" + el.fileUrl + "&fileName=" + new Base64().encode(el.fileName) + "&groupName=" + el.groupName;
+					el.href = site_url.downloadNew_api + "?filePath=" + el.fileUrl + "&fileName=" + new Base64().encode(el.fileName) + "&groupName=" + el.groupName;
 				}
 			})
 			return data;
