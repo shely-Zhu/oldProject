@@ -223,15 +223,21 @@ var prvMar = {
     getFileType: function() { //获取标签编号
         var that = this;
         that.status.current_label = that.getElements.midContent.find('.nav-wrapper .mui-control-item.mui-active').attr('code');
-        return that.setting.ajaxParamList[that.status.current_label];
+        return that.setting.ajaxParamList[that.status.current_label];  
     },
     events: function() {
         mui("body").on("tap", ".mui-box", function() {
-            if(window.currentIsApp){
-                window.location.href = $(this).attr("href");
-            }else{
-                window.open($(this).attr("href"));
-            }
+            // if(window.currentIsApp){
+            //     window.location.href = $(this).attr("href");
+            // }else{
+            //     window.open($(this).attr("href"));
+            // }
+            // debugger
+            var src=$(this).attr("href")
+            var form = document.createElement('form');
+            form.action = src;
+            document.getElementsByTagName('body')[0].appendChild(form);
+            form.submit();
         })
     }
 }
