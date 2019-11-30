@@ -103,7 +103,7 @@
      <script id="video-template" type="text/x-handlebars-template">
           {{#each this}}
                <li>
-                    <a href="fortuneFlowKnown.html?projectId=1">
+                    <a onclick="window.location.href=site_url.fortuneFlowKnown_url+'?id={{id}}'">
                          <img src="{{imageUrlShowOnline}}" alt="">
                          <p>
                               <i class="iconfont">
@@ -134,7 +134,7 @@
                               <div class="mui-scroll">
                                    {{#each listContent}}
                                         <!-- <a href="fortuneClassroom.html" style="width:6.2rem;height:4rem;display: block;position: absolute;;left:0;top:0;" class="mui-control-item"> </a> -->
-                                        <a onclick="window.location.href=site_url.fortuneClassroom_url+'?id={{id}}&rightsCenter';">
+                                        <a onclick="window.location.href=site_url.fortuneClassroom_url+'?id={{id}}';">
                                              <div class="mui-control-item conten">
                                                   
                                                   <img style="width:3.2rem;height:3rem;" src="{{imageUrlShowOnline}}" alt="">
@@ -169,7 +169,7 @@
                <div class="tab-content">
                     <ul>
                          {{#each listContent}}
-                              <a href="wealthResearch.html?projectId=1" >
+                              <a onclick="window.location.href=site_url.wealthResearch_url+'?id={{id}}'">
                                    <li>
                                         
                                         <div>

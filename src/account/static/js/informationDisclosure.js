@@ -6,7 +6,6 @@
 require('@pathIncludJs/base.js');
 
 require('@pathCommonJs/ajaxLoading.js');
-require('@pathCommonJs/components/headBarConfig.js');
 require('@pathCommonJsCom/tabScroll.js');
 require('@pathCommonJsCom/goTopMui.js');
 //黑色提示条的显示和隐藏

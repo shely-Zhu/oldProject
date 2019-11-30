@@ -6,7 +6,6 @@
 require('@pathIncludJs/base.js');
 
 require('@pathCommonJs/ajaxLoading.js');
-require('@pathCommonJs/components/headBarConfig.js');
 require('@pathCommonJs/components/elasticLayer.js');
 var generateTemplate = require('@pathCommonJsComBus/generateTemplate.js');
 
