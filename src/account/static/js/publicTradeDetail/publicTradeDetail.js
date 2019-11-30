@@ -371,8 +371,16 @@ $(function () {
             } else {
                 //普通基金赎回不展示进度条 所以不判断
                 $('.trade_status_area .trade_status_date').eq(0).html(model.originalDate);//申请受理时间
-                $('.trade_status_area .trade_status_date').eq(1).html(model.estimateConfirmDate);//预计份额确认时间
-                $('.trade_status_area .trade_status_date').eq(2).html(model.estimateArrivalDate);//预计查看收益时间
+                if ("020" == model.fundBusinCode){
+                    //认购状态
+                    $('.trade_status_area .trade_status_desc').eq(1).html("等待基金成立确认认购份额");//第二步左边名称
+                    $('.trade_status_area .trade_status_desc').eq(2).html("预计查看确认");//第三步左边名称
+                    $('.trade_status_area .trade_status_date').eq(1).html("已基金公司公告为准");//第二步右边描述
+                    $('.trade_status_area .trade_status_date').eq(2).html("基金成立次日");//第三步右边描述
+                } else {
+                    $('.trade_status_area .trade_status_date').eq(1).html(model.estimateConfirmDate);//预计份额确认时间
+                    $('.trade_status_area .trade_status_date').eq(2).html(model.estimateArrivalDate);//预计查看收益时间
+                }
             }
         },
         cancelOrder: function (password){
