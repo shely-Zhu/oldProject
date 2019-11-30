@@ -1,0 +1,58 @@
+
+
+
+/*
+  查询客户预约所需条件接口
+*/
+
+// 使用 Mock
+var Mock = require('mockjs');
+//  ========== 
+//  conditionType 条件码(1 实名认证，2 完善基本信息，3 投资者分类认证，4 合格投资者认证，5 风险测评) 
+//  ========== 
+var data=Mock.mock({
+	"hmac": "hmac", 
+	"status": "0", 
+	"code": "CS0000", 
+	"message": "处理成功！", 
+	"data":[  
+		{
+		"conditionType": "1",//条件码（单位：万）
+		"show": "1",//下限金额0否1是
+		"statusDesc": "未实名",//状态描述
+		"isSatisfied": "1",//是否满足
+		"conditionJump": "",//相关跳转
+		"isPopup": "0",//是否弹框（普通投资者买私募产品售前告知书）
+		},{
+		"conditionType": "1",//条件码（单位：万）
+		"show": "1",//下限金额0否1是
+		"statusDesc": "未实名",//状态描述
+		"isSatisfied": "1",//是否满足
+		"conditionJump": "",//相关跳转
+		"isPopup": "0",//是否弹框（普通投资者买私募产品售前告知书）
+		},{
+		"conditionType": "1",//条件码（单位：万）
+		"show": "1",//下限金额0否1是
+		"statusDesc": "未实名",//状态描述
+		"isSatisfied": "1",//是否满足
+		"conditionJump": "",//相关跳转
+		"isPopup": "0",//是否弹框（普通投资者买私募产品售前告知书）
+		},{
+		"conditionType": "1",//条件码（单位：万）
+		"show": "1",//下限金额0否1是
+		"statusDesc": "未实名",//状态描述
+		"isSatisfied": "1",//是否满足
+		"conditionJump": "",//相关跳转
+		"isPopup": "0",//是否弹框（普通投资者买私募产品售前告知书）
+		},{
+		"conditionType": "1",//条件码（单位：万）
+		"show": "1",//下限金额0否1是
+		"statusDesc": "未实名",//状态描述
+		"isSatisfied": "1",//是否满足
+		"conditionJump": "",//相关跳转
+		"isPopup": "0",//是否弹框（普通投资者买私募产品售前告知书）
+		}
+	]
+});
+
+module.exports=data;
