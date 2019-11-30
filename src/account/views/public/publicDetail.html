@@ -1,6 +1,6 @@
 <!-- 
-    公募产品详情页
-    @author shiyunrui 20191123
+	公募产品详情页
+	@author shiyunrui 20191123
 -->
 <!doctype html>
 <html lang="en">
@@ -12,19 +12,17 @@
 </head>
 
 <body>
-	<!-- @@include('@pathCommonCom/loading/listLoading.html')  -->
-	<div class="publicDetail">
-		<div class="topContent">
-			@@include('@pathCommonViews/headBarConfig.html',{"pathName":"普通基金","bgColors":"#475A95,#475A95","showType":"1"})
-			<!-- 客服 -->
-			<div class="tplBox"></div>
-		</div>
+	<!-- @@include('@pathCommonViews/load.html')  -->
+	<div class="publicDetail ">
+		@@include('@pathCommonViews/headBarConfig.html',{"pathName":"普通基金","bgColors":"#475A95,#475A95","showType":"1"})
+		<div class="tplBox"></div>
+	</div>
 
-		@@include('@pathInclude/views/footer.html')
+	@@include('@pathInclude/views/footer.html')
 
-		<script src="/include/js/vendor/echarts/echarts.min.js"></script>
-		<script src="/account/static/js/public/publicDetail.js"></script>
-		<script id="dataLists"  type="text/x-handlebars-template">
+	<script src="/include/js/vendor/echarts/echarts.min.js"></script>
+	<script src="/account/static/js/public/publicDetail.js"></script>
+	<script id="dataLists" type="text/x-handlebars-template">
 		<div >
 		<div class="topContent">
 			<div class="service"></div>
@@ -183,7 +181,7 @@
 		</div>
 	</div>
 		</script>
-		<script id="dataLists1"  type="text/x-handlebars-template">
+	<script id="dataLists1" type="text/x-handlebars-template">
 			<div >
 				{{#if fundType}}
 					{{#each pageList}}
@@ -205,8 +203,6 @@
 				{{/if}}
 				</div>
 		</script>
-</body>
-
 </body>
 
 </html>
