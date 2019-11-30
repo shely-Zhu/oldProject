@@ -3,10 +3,7 @@
  * @author  liuhongyu 2019 10-31
  */
 
-require('@pathIncludJs/vendor/config.js');
-require('@pathIncludJs/vendor/zepto/callback.js');
-require('@pathIncludJs/vendor/zepto/deferred.js');
-require('@pathCommonJs/components/utils.js');
+require('@pathCommonBase/base.js');
 require('@pathCommonJs/ajaxLoading.js');
 
 var tipAction = require('@pathCommonJs/components/tipAction.js');
@@ -324,7 +321,10 @@ $(function(){
                 $('#activityDataBox').show();
                 $('#cityListBox').hide();
                 $('#loading').show();
-                $('.recordList').html('');                
+                $('.recordList').html(''); 
+                if(txt.split('').reverse().join('').charAt(0)=='市'){
+                    txt=txt.substring(0,txt.length-1)
+                }           
                 $('#locationCity').text(txt);
                 $('#locationCity').attr({
                     'data-code':code,
