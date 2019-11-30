@@ -377,9 +377,9 @@ module.exports = function () {
     this.pofSurelyResultsDetail_url = go_url.no_url + '/financial/views/publicPlacement/surelyResultsDetail.html';
 
     //忘记密码  跳往原生页面
-    this.pofForgotPassword_url = go_url.no_url + '/financial/views/publicPlacement/forgotPassword.html';
+    this.pofForgotPassword_url = go_url.no_url + '/minel/views/setting/forgotPassword.html';
     //找回密码   跳往原生页面
-    this.pofRetrievePassword_url = go_url.no_url + '/financial/views/publicPlacement/retrievePassword.html';
+    this.pofRetrievePassword_url = go_url.no_url + '/minel/views/setting/retrievePassword.html';
 	//添加银行卡
     this.pofAddBankCard_url = go_url.no_url + '/mine/views/bankCard/addBankCard.html'
 
@@ -412,7 +412,8 @@ module.exports = function () {
     this.redemptionBuy_url = go_url.no_url + '/financial/views/publicPlacement/redemptionBuy.html';
     //普通基金-买入页面
     this.fundTransformIn_url = go_url.no_url + '/financial/views/publicPlacement/fundTransformIn.html';
-
+    //现金宝管理
+    this.cashManagement_url = go_url.no_url + '/financial/views/publicPlacement/cashManagement.html';
     //  //普通基金-定投买入
     // this.ordinarySetThrow_url = go_url.no_url + '/financial/views/publicPlacement/ordinarySetThrow.html';
     // 超宝详情--内容页

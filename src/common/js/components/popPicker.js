@@ -62,9 +62,9 @@ module.exports = function( layer, pickerList, source, callback, type){
 		$.each(result, function(i, el){
 		
 			if( type == 'liTwo'){
-				str += '<span>' + el.text + '</span>';
+				str += '<span>' + el.text + '</span>' + ' ';
 			}else{
-				str += el.text;  
+				str += el.text + ' ';  
 			}
 			
 			if( layer > 1){

@@ -45,8 +45,7 @@ $(function () {
     },
     gV: { // 全局变量
       allotNo:splitUrl['allotNo'],
-      flag:splitUrl['flag'],  //转出转入标志
-      // flag:'into',   //转出  out     转入  into     注意转出分普通和快速，，目前默认取得都是普通
+      flag:splitUrl['flag'],  // 转出  out     转入  into     注意转出分普通和快速，，目前默认取得都是普通
       outType:splitUrl['outType'] || 'common', //转出类型   普通和快速  common   fast
     },
     init: function () {
@@ -177,17 +176,10 @@ $(function () {
     },
     event: function () {
       var that = this;
-      var a = 1;
-      if (a == 2) {
-       
-      }else{
-        
-      }
-      if(that.gV.flag == 'into'){
-       
-      }else{
-        
-      }
+      $('body').on('tap','.over',function(){
+        //跳往现金宝管理页面
+        window.location.href = site_url.cashManagement_url
+      }) 
     }
   }
   somePage.init()
