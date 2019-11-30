@@ -36,7 +36,7 @@ $(function () {
     var regard = {
         gV: {
             json: {},
-            type: 'qrnh',//'qrnh'七年 'wfsy'万份
+            type: '1',//'1'七年 '2'万份
             time: 1,// 1月份 3 季度 6半年 12 一年 0成立以来
         },
         fundType: getQueryString('fundType') === '10300' ? 1 : 0, //10300 货币基金类型，其余为普通基金类型
@@ -79,11 +79,15 @@ $(function () {
                     var html = template(that.gV.json);
                     $(".tplBox").html(html);
                     that.getData1();
-                    that.getData2('qrnh', 1);
+                    that.getData2('1', 1);
                     that.events();
 
                     var historyStr = that.fundType ? '<div class="item_name">日期</div> <div class="item_name">万份收益</div><div class="item_name">七日年华</div>' : '<div class="item_name">日期</div><div class="item_name">单位净值</div><div class="item_name">累计净值</div><div class="item_name">日涨幅</div>'
                     $('.history_area >.history_item').html(historyStr);
+
+                    var redeemNavArr = that.fundType ? ['七日年华', '万份收益'] : ['单位净值', '累计净值']
+                    $($('#redeemNav span')[0]).text(redeemNavArr[0])
+                    $($('#redeemNav span')[1]).text(redeemNavArr[1])
                     $.each($(".net_worth_area .net_worth_item .value"), function (i, v) {
                         if (Number($(v).text().slice(0, $(v).text().length - 1)) >= 0) {
                             $(v).addClass('value_red')
@@ -133,7 +137,10 @@ $(function () {
             // 七日年华 万份收益
             mui("body").on("tap", "#redeemNav .navSpan ", function (e) {
                 $(this).addClass('active').siblings().removeClass('active');
-                var type = Number($(this).attr('type')) === 1 ? 'qrnh' : 'wfsy'
+                var divs = $('.lineWrap .line_area>div')
+                var index = $(this).index()
+                $(divs[index]).show().siblings().hide()
+                var type = Number($(this).attr('type'))
                 var time = that.gV.time
                 var end = new Date().toLocaleString().split(" ")[0].replace(/\//g, '-')
                 that.gV.type = type
@@ -212,14 +219,19 @@ $(function () {
                 callbackDone: function (json) {
                     json = json.data.pageList
                     var newData = {
-                        seven: [], //存放折线图七日年化
                         date: [], //存放折线图收益日期
-                        big: [] //存放折线图万份收益
+                        seven: [], //存放折线图七日年化  单位净值
+                        big: [],//存放折线图万份收益  累计净值
                     }
                     $.each(json, function (i, v) {
                         newData.date.push(v.trdDt)
-                        newData.seven.push(v.annYldRat)
-                        newData.big.push(v.unitYld)
+                        if (that.fundType) {
+                            newData.seven.push(v.annYldRat)
+                            newData.big.push(v.unitYld)
+                        } else {
+                            newData.seven.push(v.unitNav)
+                            newData.big.push(v.accuUnitNav)
+                        }
                     })
                     // newData.date = [json[0].trdDt, json[Math.ceil(json.length / 2)].trdDt, json[json.length - 1].trdDt]
                     // newData.seven = [json[0].annYldRat, json[Math.ceil(json.length / 2)].annYldRat, json[json.length - 1].annYldRat]
@@ -238,18 +250,14 @@ $(function () {
         //type必传
         drawLine: function (type, data) {
             var that = this;
-            if (type == 'qrnh') {
-                //画的是七日年化折线图
-                $("#qrnhLine").removeClass("hide")
-                $(".noDataHintEcharts").addClass("hide")
-                var chartId = $('#qrnhLine')[0],
+            if (type == '1') {
+                //画的是七日年化折线图 或者单位净值
+                var chartId = $('#line1')[0],
                     xAxisData = data.date,
                     seriesData = data.seven;
-            } else if (type == 'wfsy') {
-                //画的是万份收益折线图
-                $("#wfsyLine").removeClass("hide")
-                $(".noDataHintEcharts").addClass("hide")
-                var chartId = $('#wfsyLine')[0],
+            } else if (type == '2') {
+                //画的是万份收益折线图 或者累计净值
+                var chartId = $('#line2')[0],
                     xAxisData = data.date,
                     seriesData = data.big;
             }
