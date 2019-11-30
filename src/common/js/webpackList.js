@@ -288,7 +288,7 @@ module.exports = {
     // './account/static/js/public/transactionRecord': './src/account/static/js/public/transactionRecord.js',
 
     //超宝基金产品-交易记录
-    './account/static/js/super/superRecord': './src/account/static/js/super/superRecord.js',
+    './account/static/js/public/superRecord': './src/account/static/js/public/superRecord.js',
 
     //自选公募资产详情
     './account/static/js/public/optionalPublicDetail': './src/account/static/js/public/optionalPublicDetail.js',
@@ -355,6 +355,9 @@ module.exports = {
 
     // 交易规则
     './financial/static/js/publicPlacement/transactionRules': './src/financial/static/js/publicPlacement/transactionRules.js',
+
+    // 购买触发提示
+    './financial/static/js/common/authenticationProcess': './src/financial/static/js/common/authenticationProcess.js',
 
 
     // 私募产品详情页

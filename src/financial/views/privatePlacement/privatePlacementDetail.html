@@ -12,6 +12,7 @@
 <body>
 	<!--加载图标-->
     <!--@@include('@pathCommonViews/load.html')-->
+    @@include('@pathCommonCom/loading/listLoading.html')
 	<div class="privatePlacementDetail">
 		@@include('@pathCommonViews/headBarConfig.html',{"bgColors":"#595E6F,#1C2135","showType":"1","pathName":"产品详情"})
 		<div class="privateDetailTitle">
@@ -84,14 +85,19 @@
 						<!-- 私募基金产品详情折线图 -->
 						<div class="lineWrap">
 				 			<div class="clearfix titleWrap typeNo5Wrap">
-				 				<span class="title historyTip">历史业绩走势</span>
+				 				<span class="title qrnh activeLine">七日年化</span>
+	 							<span class="title wfsy hide">历史业绩走势</span>
 				 				<div class="priceLimit">涨跌幅：<span></span></div>
+				 				<div class="arrow">
+				 					<span class="img"></span>
+				 				</div>
+				 				<span class="rightTitle hide" id="historyDetailBtn">历史明细</span>
 				 			</div>
 				 			<div class="lineDraw">
-				 				<!-- 历史业绩走势 -->
-				 				<div id="historyLine" class="line hide"></div>
-				 				<!-- 七日年化折线图 -->
+				 				<!-- 七日年化 折线图 -->
 				 				<div id="qrnhLine" class="line"></div>
+				 				<!-- 历史业绩走势 -->
+				 				<div id="wfsyLine" class="line hide"></div>
 				 				<!-- 无数据提示 -->
 				 				<div class="hide noDataHintEcharts">暂无数据</div>
 				 				<div class='history tab'>
@@ -157,7 +163,9 @@
 								</div>
 								<div class="textContent">
 									<div class="textTitle">产品亮点</div>
-									<div class="detailText">
+									<div class="detailText lightPoint">
+										<img src="">
+										<!-- <a href="javascript:;"></a> -->
 										
 									</div>
 								</div>

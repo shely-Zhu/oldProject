@@ -105,7 +105,7 @@ module.exports = function () {
     //获取客户信息
     this.findContentByCategory_api = http_url.wapApi_url + '/content/frontend/findContentByCategory';
     //协议查询
-    this.findInvestorClassification_api = http_url.wapApi_url + '/content/findInvestorClassification';
+    // this.findInvestorClassification_api = http_url.wapApi_url + '/content/findInvestorClassification';
     // this.findBannerLikePosition_api = http_url.wapApi_url + '/frontend/findBannerLikePosition'; //获取页面背景及其他图片素材
     
     this.activity_api = http_url.wapApi_url + '/content/frontend/findSpecialById'; //产品专题
