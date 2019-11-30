@@ -3,10 +3,7 @@
  * @author  liuhongyu 2019 10-31
  */
 
-require('@pathIncludJs/vendor/config.js');
-require('@pathIncludJs/vendor/zepto/callback.js');
-require('@pathIncludJs/vendor/zepto/deferred.js');
-require('@pathCommonJs/components/utils.js');
+require('@pathCommonBase/base.js');
 require('@pathCommonJs/ajaxLoading.js');
 
 var tipAction = require('@pathCommonJs/components/tipAction.js');
