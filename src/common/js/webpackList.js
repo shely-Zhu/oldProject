@@ -356,6 +356,9 @@ module.exports = {
     // 交易规则
     './financial/static/js/publicPlacement/transactionRules': './src/financial/static/js/publicPlacement/transactionRules.js',
 
+    // 购买触发提示
+    './financial/static/js/common/authenticationProcess': './src/financial/static/js/common/authenticationProcess.js',
+
 
     // 私募产品详情页
     './financial/static/js/privatePlacement/privatePlacementDetail': './src/financial/static/js/privatePlacement/privatePlacementDetail.js',
