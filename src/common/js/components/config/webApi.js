@@ -355,6 +355,8 @@ module.exports = function() {
     this.getRaiseInfo_api = http_url.web_url + '/pef/getRaiseInfo';
     // 根据标签号查询产品材料
     this.queryReourceListByLabel_api = http_url.web_url + '/pef/queryReourceListByLabel';
+    // 查询产品亮点
+    this.queryProductImage_api = http_url.web_url + '/pef/queryProductImage';
 
 
 

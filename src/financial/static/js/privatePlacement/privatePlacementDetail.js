@@ -18,6 +18,7 @@ $(function(){
 		$e:{
 			projectId:splitUrl['projectId'],
 			adjustmentTemp: $('#wrap-template'), // 最新调仓模板
+			lineType:'',
 		},
 		getElements : {
 			name        : $('#name'),  //公募账户名
@@ -32,7 +33,7 @@ $(function(){
 			navList: [], //导航
 		},
 		data:{
-			historicalPerformance: {
+			qrnhWfsy: {
 				oneMonth : {},
 				threeMonth: {},
 				halfYear:{},
@@ -46,12 +47,12 @@ $(function(){
 			var that = this;
 
 			that.getData();
-			// 折线图
-			that.getTypeOneData();
 			// 募集账户信息
 			that.collectAccount();
 			// 获取标签
 			that.queryReourceListByLabel();
+			// 查询产品亮点
+			that.queryProductImage();
 			that.events();
 		},
 		getData:function(){
@@ -76,11 +77,23 @@ $(function(){
 						$('.performanceComparison').removeClass('hide');
 						$('.lineWrap').addClass('hide');
 					}
-					else if(jsonData.incomeModeJF == '1'){
+					else if(jsonData.incomeModeJF == '1'){  //1浮收普通   展示历史业绩走势
+						that.$e.lineType = 'wfsy';
+						$('.lineWrap .wfsy').removeClass('hide');
+						$('.lineWrap .qrnh').addClass('hide');
 
-					}
-					else if(jsonData.incomeModeJF == '2'){
+						$("#qrnhLine").addClass("hide");
+						$("#wfsyLine").removeClass("hide");
+						// 折线图
+						that.getTypeOneData(that.$e.lineType );
 						
+					}
+					else if(jsonData.incomeModeJF == '2'){  //2浮收稳裕   展示七日年化
+						that.$e.lineType = 'qrnh';
+						$("#qrnhLine").addClass("hide");
+						$("#wfsyLine").removeClass("hide");
+						// 折线图
+						that.getTypeOneData(that.$e.lineType );
 					}
 
 					// 私募产品 产品名称
@@ -159,7 +172,7 @@ $(function(){
 
 		},
 		//请求历史业绩走势
-		getTypeOneData: function( num ){
+		getTypeOneData: function( type,num ){
 			var that = this;
 			num = num ? num : 0;
 			var newData = {
@@ -187,39 +200,40 @@ $(function(){
 				// 成立至今
 				days = '';
 			}
-			
+
 			//判断是否已经有数据了，有的话不再请求接口
-			if( num == 0 && that.data['historicalPerformance'].oneMonth.profitThoudDate && that.data['historicalPerformance'].oneMonth.profitThoudDate.length){
+			if( num == 0 && that.data['qrnhWfsy'].oneMonth.profitThoudDate && that.data['qrnhWfsy'].oneMonth.profitThoudDate.length){
 				//请求的是近一个月的数据
-				that.drawLine( that.data['historicalPerformance'].oneMonth );
+				that.drawLine( type, that.data['qrnhWfsy'].oneMonth );
 				return false;
-			}
-			else if( num == 1 && that.data['historicalPerformance'].threeMonth.profitThoudDate && that.data['historicalPerformance'].threeMonth.profitThoudDate.length){
+			} 
+			else if( num == 1 && that.data['qrnhWfsy'].threeMonth.profitThoudDate && that.data['qrnhWfsy'].threeMonth.profitThoudDate.length){
 				//近三个月
-				that.drawLine( that.data['historicalPerformance'].threeMonth );
+				that.drawLine( type, that.data['qrnhWfsy'].threeMonth );
 				return false;
-			}
-			else if( num == 2 && that.data['historicalPerformance'].halfYear.profitThoudDate && that.data['historicalPerformance'].halfYear.profitThoudDate.length){
+			} 
+			else if( num == 2 && that.data['qrnhWfsy'].halfYear.profitThoudDate && that.data['qrnhWfsy'].halfYear.profitThoudDate.length){
 				// 半年
-				that.drawLine( that.data['historicalPerformance'].halfYear );
+				that.drawLine(type, that.data['qrnhWfsy'].halfYear );
 				return false;
 			}
-			else if( num == 3 && that.data['historicalPerformance'].oneYear.profitThoudDate && that.data['historicalPerformance'].oneYear.profitThoudDate.length ){
+			else if( num == 3 && that.data['qrnhWfsy'].oneYear.profitThoudDate && that.data['qrnhWfsy'].oneYear.profitThoudDate.length ){
 				//近一年
-				that.drawLine( that.data['historicalPerformance'].oneYear );
+				that.drawLine( type, that.data['qrnhWfsy'].oneYear );
 				return false;
-			}
-			else if( num == 4 && that.data['historicalPerformance'].sinceNow.profitThoudDate && that.data['historicalPerformance'].sinceNow.profitThoudDate.length){
+			} 
+			else if( num == 4 && that.data['qrnhWfsy'].sinceNow.profitThoudDate && that.data['qrnhWfsy'].sinceNow.profitThoudDate.length){
 				//成立至今
-				that.drawLine( that.data['historicalPerformance'].sinceNow );
+				that.drawLine( type, that.data['qrnhWfsy'].sinceNow );
 				return false;
 			}
+			
 			//没有数据，请求接口
 			var obj = [{
 				url: site_url.prvHisValue_api, 
 				data: {
 					projectId: splitUrl['projectId'],
-					days: days,
+					days: '',
 					pageNo:'',
 					pageSize:'',
 				},
@@ -234,42 +248,40 @@ $(function(){
 						newData.sevenIncomeRate.push( el.unitNetValue);
 						newData.profitThoudDate.push( el.netValueDate);
 					})
-					if( num == 0){
-						//请求的是近一个月的数据
-						that.data['historicalPerformance'].oneMonth = newData ;
+
+					switch(num) {
+						case 0: that.data['qrnhWfsy'].oneMonth = newData;break;
+						case 1: that.data['qrnhWfsy'].threeMonth = newData;break;
+						case 2: that.data['qrnhWfsy'].halfYear = newData;break;
+						case 3: that.data['qrnhWfsy'].oneYear = newData;break;
+						case 4: that.data['qrnhWfsy'].sinceNow = newData;break;
 					}
-					else if( num == 1){
-						//近三个月
-						that.data['historicalPerformance'].threeMonth = newData ;
-					}
-					else if( num == 2){
-						//近半年
-						that.data['historicalPerformance'].halfYear = newData ;
-					}
-					else if( num == 3){
-						//近一年
-						that.data['historicalPerformance'].oneYear = newData ;
-					}
-					else if( num == 4){
-						//成立至今
-						that.data['historicalPerformance'].sinceNow = newData ;
-					}
-					that.drawLine(newData);			       	
+					that.drawLine( type, newData);
 				},
 			}];
 			$.ajaxLoading(obj);
 		},
 		//画折线图
 		//type必传
-		drawLine: function ( data) {
+		drawLine: function ( type,data) {
 			var that = this;
 			console.log($('#qrnhLine')[0])
 
-			$("#qrnhLine").removeClass("hide");
-			$(".noDataHintEcharts").addClass("hide");
-			var chartId = $('#qrnhLine')[0],
-				xAxisData = data.profitThoudDate,
-				seriesData = data.sevenIncomeRate;
+			if( type == 'qrnh'){
+				//画的是七日年化折线图
+				$("#qrnhLine").removeClass("hide")
+				$(".noDataHintEcharts").addClass("hide")
+				var chartId = $('#qrnhLine')[0],
+					xAxisData = data.profitThoudDate,
+					seriesData = data.sevenIncomeRate;
+			} else if( type == 'wfsy'){
+				//画的是万份收益折线图
+				$("#wfsyLine").removeClass("hide")
+				$(".noDataHintEcharts").addClass("hide")
+				var chartId = $('#wfsyLine')[0],
+					xAxisData = data.profitThoudDate,
+					seriesData = data.sevenIncomeRate;
+			} 
 
 			var myChart = echarts.init( chartId );
 			myChart.setOption({
@@ -377,6 +389,42 @@ $(function(){
 			});
 
 		},
+		// 查询产品亮点
+		queryProductImage:function(){
+			var that = this;
+			//发送ajax请求
+			var obj = [{
+				url: site_url.queryProductImage_api,
+				data: {
+					projectId: that.$e.projectId,
+					limitNum:'',
+					productModule:'',
+				},
+				needLogin:true,//需要判断是否登陆
+				callbackDone: function(json){  //成功后执行的函数
+					
+					var json = json.data[0];
+
+					if (!json.imgPath) {
+						if (json.features) {
+							$(".lightPoint").html(json.features);
+						} else {
+							return false;
+						}
+					} else {
+						$(".lightPoint img").attr("src", json.imgPath);
+					}
+
+
+				},
+				callbackFail: function(json){  //失败后执行的函数
+					tipAction(json.msg);
+
+				}
+			}];
+			$.ajaxLoading(obj);
+		},
+
 		// 募集账户信息
 		collectAccount:function(){
 			var that = this;
@@ -384,7 +432,9 @@ $(function(){
 			//发送ajax请求
 			var obj = [{
 				url: site_url.getRaiseInfo_api,
-				data: {},
+				data: {
+					projectId: that.$e.projectId,
+				},
 				contentTypeSearch: true,
 				needLogin:true,//需要判断是否登陆
 				callbackDone: function(json){  //成功后执行的函数
@@ -476,16 +526,16 @@ $(function(){
 
 					//隐藏loading，调试接口时需要去掉
 					setTimeout(function() {
-						that.getElements.listLoading.hide();
+						// that.getElements.listLoading.hide();
 					}, 100);
 					//return false;
 				},
 				callbackNoData: function(json) {
 					//没有数据
-					$id.find('.noData').show();
+					// $id.find('.noData').show();
 
 					setTimeout(function() {
-						that.getElements.listLoading.hide();
+						// that.getElements.listLoading.hide();
 					}, 100);
 				}
 
@@ -520,11 +570,8 @@ $(function(){
 			mui("body").on('tap', '.lineWrap .time', function() {
 				$('.lineDraw .time').removeClass('active');
 				$(this).addClass('active');
-				if(that.data.projectType == 4) {
-					that.getTypeTwoData( $(this).attr('num') );
-				} else {
-					that.getTypeOneData( $(this).attr('num') );
-				}
+				
+				that.getTypeOneData(that.$e.lineType ,$(this).attr('num') );
 			})
 			// 募集账户的信息的拷贝
 			mui("body").on('tap', '.copy_btn', function() {
