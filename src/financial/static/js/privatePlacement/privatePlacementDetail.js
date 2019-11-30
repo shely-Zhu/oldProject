@@ -27,11 +27,6 @@ $(function(){
 			openingBank : $("#openingBank"),  //开户行
 			topc      : $('#topc'),       //提示信息
 		},
-		setting: { //一些设置
-			navAllList: ['风险揭示书', '产品信息', '管理报告', '资金分配', '重要公告及通知', '恒天简报'],
-			ajaxParamList: ['19,20,10,22', '1', '12,13,28,14', '30', '16,17,31,32,29', '33,34,35,36,37'], // 请求参数
-			navList: [], //导航
-		},
 		data:{
 			qrnhWfsy: {
 				oneMonth : {},
@@ -90,6 +85,9 @@ $(function(){
 					}
 					else if(jsonData.incomeModeJF == '2'){  //2浮收稳裕   展示七日年化
 						that.$e.lineType = 'qrnh';
+						// $('.lineWrap .wfsy').addClass('hide');
+						// $('.lineWrap .qrnh').removeClass('hide');
+						
 						$("#qrnhLine").addClass("hide");
 						$("#wfsyLine").removeClass("hide");
 						// 折线图
