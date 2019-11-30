@@ -2,11 +2,7 @@
 * 自选公募-超宝详情--内容
 * @author wangjiajia 2019-11-27
 */
-require('@pathIncludJs/vendor/config.js');
-require('@pathIncludJs/vendor/zepto/callback.js');
-require('@pathIncludJs/vendor/zepto/deferred.js');
-require('@pathCommonJs/components/utils.js');
-require('@pathCommonJs/components/headBarConfig.js');
+require('@pathCommonBase/base.js');
 require('@pathCommonJs/ajaxLoading.js');
 
 var tipAction = require('@pathCommonJs/components/tipAction.js');
