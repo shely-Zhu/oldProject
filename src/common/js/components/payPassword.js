@@ -1,3 +1,11 @@
+/*
+ * @Author: your name
+ * @Date: 2019-11-28 19:07:55
+ * @LastEditTime: 2019-11-30 16:43:45
+ * @LastEditors: Please set LastEditors
+ * @Description: In User Settings Edit
+ * @FilePath: \htjf-app\src\common\js\components\payPassword.js
+ */
 
 
 /**
@@ -63,6 +71,14 @@ module.exports = function(callback,forgetCall){
 		})
 		$(".closeBtn").on('click',function(){
 			$("#passwordWrap").hide();
+			//清空密码
+			var inputList = $(".pwd-box .fake-box input");
+			if(inputList.length>0){
+				for(var i = 0;i<inputList.length;i++){
+					inputList[i].value=""
+				}
+			}
+			
 		})
 		$(".forgetP").on('click',function(){
 			if(!!forgetCall){//如果参数不为空,走传进来的方法
