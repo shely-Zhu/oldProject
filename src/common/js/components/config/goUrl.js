@@ -408,7 +408,7 @@ module.exports = function () {
     this.returnsDetail_url = go_url.no_url + '/mine/views/returnsDetail.html';
 
     //现金宝交易记录
-    this.superRecord_url = go_url.no_url + '/account/views/super/superRecord.html';
+    this.superRecord_url = go_url.no_url + '/account/views/public/superRecord.html';
     //财富早知道
     this.fortuneFlowKnown_url = go_url.no_url + '/homePage/views/fortuneCollege/fortuneFlowKnown.html';
     //财富讲堂
