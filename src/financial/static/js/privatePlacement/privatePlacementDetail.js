@@ -8,6 +8,8 @@ require('@pathCommonJs/ajaxLoading.js');
 
 require('@pathCommonJsCom/headBarConfig.js');
 
+require('@pathCommonJs/components/authenticationProcess.js');
+
 var splitUrl = require('@pathCommonJs/components/splitUrl.js')();
 var tipAction = require('@pathCommonJs/components/tipAction.js');
 var generateTemplate = require('@pathCommonJsComBus/generateTemplate.js');
@@ -33,6 +35,8 @@ $(function(){
 			navList: [], //导航
 		},
 		data:{
+			custType:"",//客户类型
+			fundDetailObj:"",//详情接口拿到的对象
 			qrnhWfsy: {
 				oneMonth : {},
 				threeMonth: {},
@@ -67,6 +71,7 @@ $(function(){
 				needLogin: true,
 				callbackDone: function(json) {
 					var jsonData = json.data;
+					that.data.fundDetailObj = jsonData;
 					var projectLableHtml,projectLableHtmlList;
 					// 根据收益分配方式区分 0固收 1浮收普通 2浮收稳裕 
 					if(jsonData.incomeModeJF == '0'){
@@ -167,7 +172,23 @@ $(function(){
 					// 立即预约上的认购申购费率
 					$('.buyRate span').html(jsonData.buyRate);
 				},
-			}];
+			},{
+                    url: site_url.user_api,
+                    data: {
+                        hmac: "", //预留的加密信息     
+                        params: {
+                            //uuid: sessionStorage.getItem('uuid') //'EE7CA9386715CBF3BAB30CD479697D72' //sessionStorage.getItem('uuid') //客户Id,打开登录页面链接带过来的参数uuid
+                        }
+                    },
+                    needLogin: true,
+                    // async: false, //同步
+                    needDataEmpty: false, //需要判断data是否为空
+                    callbackDone: function(json) {
+                        var jsonData = json.data;
+                        that.data.custType = jsonData.accountType; // 客户类型【0.机构 1.个人】 
+
+                    },
+                }];
 			$.ajaxLoading(obj);
 
 		},
@@ -566,6 +587,10 @@ $(function(){
 				$(this).addClass('active').siblings().removeClass('active');
 				$(".wrap>.panel").eq($(this).index()).addClass('active').siblings().removeClass('active');
 			});
+			//点击一键预约逻辑
+			mui("body").on('tap', '.tips-btn' , function(){
+				
+			});
 			//折线图点击月份请求数据
 			mui("body").on('tap', '.lineWrap .time', function() {
 				$('.lineDraw .time').removeClass('active');
@@ -595,7 +620,35 @@ $(function(){
 
 			// 立即预约
 			mui("body").on('tap', '.buyButton' , function(){
-				window.location.href = '/financial/views/privatePlacement/electronicContract/orderLimit.html'
+				if(that.data.fundDetailObj.isElecContract == "1"){//电子合同逻辑
+					if(that.data.fundDetailObj.isAllowAppend == "1"){//追加商品参数fundCode,
+						//跳转到追加商品链接
+						if(that.data.custType == "1"){//客户类型【0.机构 1.个人】 
+							//跳转到电子合同追加页面
+							window.location.href = "/financial/views/privatePlacement/electronicContract/orderLimit.html?fundCode=" + that.$e.projectId + "&isAllowAppend="
+							+ that.data.fundDetailObj.isAllowAppend;
+						}else{
+							//弹框提示不支持在线追加弹框提示
+						}
+					}else{//预约
+						//跳转到预约产品链接
+						if(that.data.custType == "1"){//客户类型【0.机构 1.个人】 
+							//跳转到电子合同预约页面
+							window.location.href = "/financial/views/privatePlacement/electronicContract/orderLimit.html?fundCode=" + that.$e.projectId + "&isAllowAppend="
+							+ that.data.fundDetailObj.isAllowAppend;
+						}else{
+							//跳转到普通预约
+							window.location.href = "/financial/views/privatePlacement/ordinaryProducts/registration.html" + that.$e.projectId + "&isAllowAppend="
+							+ that.data.fundDetailObj.isAllowAppend;
+							
+						}
+					}
+				}else{//非电子合同
+					
+					window.location.href = "/financial/views/privatePlacement/ordinaryProducts/registration.html" + that.$e.projectId + "&isAllowAppend="
+							+ that.data.fundDetailObj.isAllowAppend;
+					
+				}
 			});
 		},
 	};
