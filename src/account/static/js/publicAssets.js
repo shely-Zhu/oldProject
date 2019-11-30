@@ -8,7 +8,6 @@
 
 require('@pathIncludJs/base.js');
 require('../../../common/js/ajaxLoading.js');
-require('@pathCommonJs/components/headBarConfig.js');
 var tipAction = require('@pathCommonJs/components/tipAction.js');
 
 $(function () {

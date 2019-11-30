@@ -38,7 +38,6 @@
 require('@pathIncludJs/base.js');
 
 require('@pathCommonJs/ajaxLoading.js');
-require('@pathCommonJs/components/headBarConfig.js');
 
 var tipAction = require('@pathCommonJs/components/tipAction.js');
 var splitUrl = require('@pathCommonJs/components/splitUrl.js');
