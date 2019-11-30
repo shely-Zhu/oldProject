@@ -321,7 +321,10 @@ $(function(){
                 $('#activityDataBox').show();
                 $('#cityListBox').hide();
                 $('#loading').show();
-                $('.recordList').html('');                
+                $('.recordList').html(''); 
+                if(txt.split('').reverse().join('').charAt(0)=='市'){
+                    txt=txt.substring(0,txt.length-1)
+                }           
                 $('#locationCity').text(txt);
                 $('#locationCity').attr({
                     'data-code':code,
