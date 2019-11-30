@@ -19,7 +19,7 @@ $(function() {
         $e: {
             adjustmentRecord: $('.adjustmentRecord'), // 调仓记录
             recordList: $('.contentWrap'), // 模板盒子
-            adjustmentTemp: $('#adjustment-template'), // 最新调仓模板
+            adjustmentTemp: $('#adjustment-template'), 
             noData: $('.noData'), //没有数据的结构
             listLoading: $('.listLoading'), //所有数据区域，第一次加载的loading结构
         },

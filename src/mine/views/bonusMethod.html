@@ -25,7 +25,7 @@
     </p>
     <div class="wrap">
         <div class="inner">
-            <div class="type_one">
+            <!-- <div class="type_one">
                 <span class="bonusType">
                     现金分红
                 </span> 
@@ -35,8 +35,8 @@
                 <b id="duigou" class="iconfont iconone duigou">
                         &#xe626;
                 </b>               
-            </div>
-            <div class="type_two">
+            </div> -->
+            <!-- <div class="type_two">
                 <span class="bonusType">
                     红利再投资
                 </span> 
@@ -46,9 +46,25 @@
                 <b id="duigou" class="iconfont iconone duigou">
                     &#xe626;
             </b>    
-            </div>
+            </div> -->
         </div>
     </div>
+    <script id="adjustment-template" type="text/x-handlebars-template">
+        {{#each this}}
+        <div class="type_one">
+            <span class="bonusType">
+                {{autoBuyDes}}
+            </span> 
+            <span class="describe">
+                {{remark}}
+            </span>
+            <b id="duigou" class="iconfont iconone duigou">
+                    &#xe626;
+            </b>               
+        </div>
+        {{/each}}
+    </script>
+   
     <p class="footer">基金销售服务由北京恒天明泽基金销售有限公司提供</p>
 
     @@include('@pathInclude/views/footer.html')

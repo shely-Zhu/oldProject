@@ -9,6 +9,8 @@ require('@pathCommonJs/ajaxLoading.js');
 require('@pathCommonJs/components/headBarConfig.js');
 require('@pathCommonJs/components/elasticLayer.js');
 var generateTemplate = require('@pathCommonJsComBus/generateTemplate.js');
+var manualTriggerLogin = require('../../../common/js/components/manualTriggerLogin.js');
+
 
 $(function() {
 	let somePage = {
@@ -18,17 +20,21 @@ $(function() {
 			typeTwo:$('.type_two'),
 			bonusType:$('.bonusType'),
 			duigou:$('.duigou'),
+			adjustmentTemp: $('#adjustment-template'), //模板
 		},
 		//全局变量
 		gV: {
 			flag:1,
 			bonusType:"红利再投资",
+			publicFundDetail:"",
 		},
 		//页面初始化函数
 		init: function() {
 			var that = this;
+			that.gV.publicFundDetail = JSON.parse(sessionStorage.getItem("publicFundDetail"));
+			that.gV.publicFundDetail.fundCode = that.gV.publicFundDetail.fundCode;
+			that.gV.publicFundDetail.tradeNo = that.gV.publicFundDetail.tradeNo;
 			if(this.gV.flag == 1){
-				console.log("1111")
 				this.$e.duigou.eq(0).css('display','block');
 				this.$e.duigou.eq(1).css('display','none');
 				this.$e.bonusType.eq(0).text("现金分红(当前分红方式)");
@@ -43,6 +49,38 @@ $(function() {
 			}
 			this.events()
 			this.initMui()
+			that.getDividend()
+		},
+
+		getDividend:function(){
+			var that = this;
+			var obj = [{
+			    url: site_url.pofQueryDividendByCode_api, 
+			    data: {
+			    	tradeAcco: that.gV.publicFundDetail.tradeNo, 
+			    	fundCode: that.gV.publicFundDetail.fundCode,
+			    },
+			    needLogin: true,
+			    needLoading: true,
+			    callbackDone: function(json) {
+			    	var jsonData = json.data;//防止数据为空下面循环出错
+			    	if(!jsonData.length){
+			    		return false;
+					}
+					console.log(jsonData)
+					 // 将列表插入到页面上
+					 generateTemplate(jsonData,$(".inner"), that.$e.adjustmentTemp);
+
+			    	// $.each(jsonData, function(i,v) {
+			    	// 	if(v.checkFlag == 1){//如果被选中，拿选中这一条的数据
+			    	// 	 $(".dividend").text(v.autoBuyDes)
+			    	// 		return false;
+			    	// 	}
+			    	// });
+		       	
+			    },
+			}]
+			$.ajaxLoading(obj);			
 		},
 		//初始化mui的上拉加载
 		initMui: function() {
@@ -111,8 +149,12 @@ $(function() {
 					needLogin:true,
 					needDataEmpty: true,
 					callbackDone: function(json) {
-						console.log(json.data)
-						// window.location.href = 
+						console.log(json)	
+						console.log(234)				
+					},
+					callbackFail:function(err){
+					   console.log(err)
+				    // manualTriggerLogin.locationFunc(err.message);
 					}
 				}
 			]

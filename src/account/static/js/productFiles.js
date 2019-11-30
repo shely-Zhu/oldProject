@@ -61,8 +61,8 @@ $(function() {
     var obj = [{ // 系统调仓记录列表
         url: site_url.queryReourceList_api,
         data: {
-          //"projectId":that.gV.projectId,//项目编号
-          "projectId":"21970",//项目编号
+          "projectId":that.gV.projectId,//项目编号
+          //"projectId":"21970",//项目编号
           "fileType":"19,20,10,22,1",
         },
         contentTypeSearch: true,
