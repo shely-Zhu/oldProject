@@ -16,7 +16,6 @@
 
 require('@pathIncludJs/base.js');
 require('@pathCommonJs/ajaxLoading.js');
-require('@pathCommonJs/components/headBarConfig.js');
 var generateTemplate = require('@pathCommonJsComBus/generateTemplate.js');
 
 //黑色提示条

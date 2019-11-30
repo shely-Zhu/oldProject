@@ -14,9 +14,7 @@
    <div class="container">
         @@include('@pathCommonViews/headBarConfig.html',{"pathName":"已报名活动"})    
         <!-- 加载中loading -->
-        @@include('@pathCommonViews/load.html')
-        <!-- 加载中loading -->
-        @@include('@pathCommonViews/loading/listLoading.html')
+        @@include('@pathCommonCom/loading/listLoading.html')
         <div class="mui-row choice">
             <div class="mui-col-xs-6 active"><span>进行中</span><p></p></div>
             <div class="mui-col-xs-6"><span>已结束</span><p></p></div>
@@ -124,9 +122,6 @@
             <div></div>
         </li>
         </script>
-    
-    <!-- 添加埋点 -->
-	@@include('@pathInclude/views/header.html')
     @@include('@pathInclude/views/footer.html')
     <script src="/mine/static/js/activityEnrolment.js"></script>
 
