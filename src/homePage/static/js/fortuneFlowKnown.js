@@ -9,6 +9,7 @@ require('@pathCommonJs/ajaxLoading.js');
 
 var tipAction = require('@pathCommonJs/components/tipAction.js');
 var generateTemplate = require('@pathCommonJsComBus/generateTemplate.js');
+var splitUrl = require('@pathCommonJs/components/splitUrl.js')();
 
 $(function() {
 	let somePage = {
@@ -23,7 +24,8 @@ $(function() {
 		gV: {
             pageCurrent: 1,
             pageSize: 10,
-			fortuneFlowList: []
+			fortuneFlowList: [],
+            articleBelong : splitUrl['articleBelong'] // 文章类型
 		},
 		//页面初始化函数
 		init: function() {	
@@ -39,7 +41,7 @@ $(function() {
                 data: {
                     "pageNo": that.gV.pageCurrent, //非必须，默认为1
                     "pageSize": that.gV.pageSize, //非必须，默认为10
-                    "articleBelong": "1"
+                    "articleBelong": that.gV.articleBelong
                 },
                 needDataEmpty: true,
                 callbackDone: function(json) {
