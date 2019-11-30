@@ -172,7 +172,7 @@ $(function () {
             })
             //点击持仓列表的感叹号 进入交易明细明细
             mui("body").on('tap', '.position_tip', function (e) {
-                //todo 跳转到收益明细
+                //跳转到收益明细
                 window.location.href = site_url.returnsDetail_url + '?fundCode=' + $(this).attr('data-fundcode');
                 return false;
             })
