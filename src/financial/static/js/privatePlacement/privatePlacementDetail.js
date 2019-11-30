@@ -17,7 +17,7 @@ $(function(){
 		//获取页面元素
 		$e:{
 			projectId:splitUrl['projectId'],
-			adjustmentTemp: $('#wrap-template'), // 最新调仓模板
+		adjustmentTemp: $('#wrap-template'), // 最新调仓模板
 			lineType:'',
 		},
 		getElements : {
@@ -548,10 +548,10 @@ $(function(){
 			$.each(data, function(i, el) {
 				if (el.fileName.indexOf(".pdf") != -1) {
 					el.line = true; //线上可预览
-					el.href = site_url.download_api + "?filePath=" + el.fileUrl + "&fileName=" + new Base64().encode(el.fileName) + "&groupName=" + el.groupName + "&show=1";
+					el.href = site_url.downloadNew_api + "?filePath=" + el.fileUrl + "&fileName=" + new Base64().encode(el.fileName) + "&groupName=" + el.groupName + "&show=1";
 				} else {
 					el.line = false; //需下载
-					el.href = site_url.download_api + "?filePath=" + el.fileUrl + "&fileName=" + new Base64().encode(el.fileName) + "&groupName=" + el.groupName;
+					el.href = site_url.downloadNew_api + "?filePath=" + el.fileUrl + "&fileName=" + new Base64().encode(el.fileName) + "&groupName=" + el.groupName;
 				}
 			})
 			return data;
