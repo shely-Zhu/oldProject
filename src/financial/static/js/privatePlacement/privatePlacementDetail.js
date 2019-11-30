@@ -79,7 +79,9 @@ $(function(){
 					else if(jsonData.incomeModeJF == '1'){
 
 					}
-					else if(jsonData.incomeModeJF == '2')
+					else if(jsonData.incomeModeJF == '2'){
+						
+					}
 
 					// 私募产品 产品名称
 					$('.productName').html(jsonData.productName);
