@@ -10,8 +10,7 @@
      <title>产品档案</title>
  <body>
      @@include('@pathCommonViews/headBarConfig.html',{"bgColors":"#2C3E77,#273971","showType":"0","pathName":"产品档案"})
-     @@include('@pathCommonViews/load.html')
-     <!-- @@include('@pathCommonViews/loading/listLoading.html') -->
+     @@include('@pathCommonCom/loading/listLoading.html')
      <div class="list">
         <div class="contentWrapper">
             <div class="contentWrap">
@@ -59,7 +58,6 @@
                         产品费用
                    </div>
                    <div class="productCostDetail">
-                       
                    </div>
                    <div class="openOff">
                      <div class="open">展开</div>
@@ -84,8 +82,6 @@
             </div>
         </div>
     </div>
-
-
     <script id="adjustment-template" type="text/x-handlebars-template">
         {{#each this}}
         <ul data-fileUrl='{{fileUrl}}' class="materialContent">
@@ -94,10 +90,7 @@
         </ul>
         {{/each}}
     </script>
- 
      @@include('@pathInclude/views/footer.html')
-
      <script src="/account/static/js/productFiles.js"></script>
  </body>
- 
  </html>

@@ -1,12 +1,6 @@
-require('@pathIncludJs/vendor/config.js');
-
-//zepto模块
-require('@pathIncludJs/vendor/zepto/callback.js');
-require('@pathIncludJs/vendor/zepto/deferred.js');
+require('@pathCommonBase/base.js');
 require('@pathCommonJsCom/tabScroll.js')
-require('@pathCommonJsCom/utils.js');
 require('@pathCommonJs/ajaxLoading.js');
-require('@pathCommonJs/components/headBarConfig.js');
 //黑色提示条
 var tipAction = require('@pathCommonJs/components/tipAction.js');
 var generateTemplate = require('@pathCommonJsComBus/generateTemplate.js');
@@ -39,14 +33,11 @@ var productPublic = {
             },
             needDataEmpty: true,
             callbackDone: function(json){
-                console.log(json)
                 var imgArr = [];
 
                 $.each(json.data.bannerList, function(i, el){
-                    console.log(el)
                     imgArr.push({imgUrl: el.imageUrlShowOnline, linkUrl:el.linkUrl});
                 })
-                console.log(imgArr)
                 Slider( $('.banner'), imgArr );
                 
                 //此时所有切换区域的内容都是空的
@@ -212,10 +203,6 @@ var productPublic = {
             $('.tab .tab-b .tab-content').css({"display":"none"});
             $('.tab .tab-b .tab-content').eq($(this).index()).css({"display":"block"});
         });
-        //财富跳转
-        $('.listHref').on('tap',function(){
-            window.location.href =site_url.fortuneClassroom_url;;
-        })
     }
 }
 productPublic.init();

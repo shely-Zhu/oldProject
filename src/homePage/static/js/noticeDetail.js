@@ -3,11 +3,7 @@
 * @author yanruiting 2019-11-18
 * 从通知列表页面携带参数   noticeId 消息id mesType 0系统通知，1产品公告，2活动通知，3交易动态
 */
-require('@pathIncludJs/vendor/config.js');
-require('@pathIncludJs/vendor/zepto/callback.js');
-require('@pathIncludJs/vendor/zepto/deferred.js');
-require('@pathCommonJs/components/utils.js');
-require('@pathCommonJs/components/headBarConfig.js');
+require('@pathCommonBase/base.js');
 require('@pathCommonJs/ajaxLoading.js');
 
 //var tipAction = require('@pathCommonJs/components/tipAction.js');

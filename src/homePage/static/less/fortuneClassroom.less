@@ -1,10 +1,7 @@
 // 财富学院
 // @author yanruiting 2019-11-25
-
-@import url("@pathInclude/css/mui.min.css");
-@import url('@pathCommonLess/mui/resetMUI.less');
-@import url("@pathCommonLess/reset.less");
-@import url("@pathCommonLess/color.less");
+@import url("@pathCommonLess/mui/resetMUI.less");
+@import url("@pathCommonLessCom/noDataImg.less");
 @import url("@pathCommonLessCom/againEnter.less");
 @import url("@pathCommonLessCom/alertBox.less");
 @import url("@pathCommonLessCom/tabScroll.less");
@@ -12,7 +9,6 @@
 //回到顶部的样式
 @import url("@pathCommonLessCom/goTopMui.less");
 @import url("@pathCommonLess/components/elasticLayerTypeFive.less");
-@import url("@pathCommonLessCom/noDataImg.less");
 @import url("@pathCommonLessCom/headBarConfig.less");
 body{
 	background-color: @c005;
@@ -234,7 +230,8 @@ body{
     padding: 0;
     box-shadow: 0 .02rem .14rem 0 rgba(120,135,182,0.19);
     border-radius: .16rem;
-    margin-bottom: .46rem;
+    width: 98%;
+    margin: 0 auto .46rem;
     .roomImg {
         width: 6.9rem;
         height: 2.8rem;
@@ -242,7 +239,7 @@ body{
         border-top-right-radius: .16rem;
         overflow: hidden;
         &>img {
-            width: 100%;
+            width: 98%!important;
             height: 100%;
         }
     }
