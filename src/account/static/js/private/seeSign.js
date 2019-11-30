@@ -74,7 +74,6 @@ $(function () {
                 },
                 callbackNoData: function (json) {
                     that.$e.listLoading.hide();
-                    console.log(11111)
                     that.$e.noData.show();
 
                 },
@@ -84,13 +83,6 @@ $(function () {
         },
         events: function (targetUrl) {
             var that = this;
-
-
-
-            mui("body").on('tap', '.posioneright', function () {
-
-                window.location.href = site_url.articleTemplate_url + '?articleBelong=9&applyType=0';
-            });
 
         },
     }

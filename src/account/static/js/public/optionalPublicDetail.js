@@ -435,6 +435,10 @@ $(function() {
 			mui("body").on('tap', '.jyjl', function() {
 				window.location.href = site_url.transactionDetail_url+"?fundCode=" +that.data.fundCode + "&tradeNo=" + that.data.publicFundDetail.tradeNo;
 			})
+//			分红方式跳转
+			mui("body").on('tap', '.dividend', function() {
+				window.location.href = site_url.bonusMethod_url;
+			})
 //			历史明细跳转
 			mui("body").on('tap', '.historyDetail', function() {
 				window.location.href = site_url.historyDetail_url;

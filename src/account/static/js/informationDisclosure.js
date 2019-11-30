@@ -6,7 +6,6 @@
 require('@pathIncludJs/base.js');
 
 require('@pathCommonJs/ajaxLoading.js');
-require('@pathCommonJs/components/headBarConfig.js');
 require('@pathCommonJsCom/tabScroll.js');
 require('@pathCommonJsCom/goTopMui.js');
 //黑色提示条的显示和隐藏
@@ -178,7 +177,7 @@ var prvMar = {
                     el.marName = el.fileName.substring(el.fileName.indexOf("】") + 1);
                     if (el.fileName.indexOf(".pdf") != -1) {
                         el.line = true; //线上可预览
-                        el.href = site_url.download_api + "?filePath=" + el.fileUrl + "&fileName=" + new Base64().encode(el.fileName) + "&groupName=" + el.groupName + "&show=1";
+                        el.href = site_url.download_api + "?filePath=" + el.fileUrl + "&fileName=" + new Base64().encode(el.fileName) + "&groupName=" + el.groupName + "&show=1&.pdf";
                     } else {
                         el.line = false; //需下载
                         el.href = site_url.download_api + "?filePath=" + el.fileUrl + "&fileName=" + new Base64().encode(el.fileName) + "&groupName=" + el.groupName;
@@ -228,6 +227,7 @@ var prvMar = {
     },
     events: function() {
         mui("body").on("tap", ".mui-box", function() {
+            // console.log($(this).attr("href"))
             if(window.currentIsApp){
                 window.location.href = $(this).attr("href");
             }else{

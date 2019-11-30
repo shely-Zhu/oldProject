@@ -1,7 +1,5 @@
 
 require('@pathIncludJs/base.js');
-
-require('@pathCommonJs/components/headBarConfig.js');
 require('@pathCommonJs/ajaxLoading.js');
 
 var tipAction = require('@pathCommonJs/components/tipAction.js');
@@ -88,6 +86,7 @@ $(function() {
                 //async: false,
                 needDataEmpty: true,
                 callbackDone: function(json) {
+                    json.data.pageList=json.data.pageList||[]
                     var data;
                     if (json.data.pageList.length == 0) { // 没有记录不展示
                         $(".list").hide()
@@ -139,10 +138,20 @@ $(function() {
                         generateTemplate(data, that.$e.recordList, that.$e.adjustmentTemp);
                         //去掉mui-pull-bottom-pocket的mui-hidden
                         $('.contentWrapper').find('.mui-pull-bottom-pocket').removeClass('mui-hidden');
-
-
                     }, 200)
-
+                },
+                callbackNoData:function(){
+                    //没有数据时展示暂无数据
+                            $(".list").hide()
+                            $(".title").hide()
+                            that.$e.noData.show();
+                },
+                callbackFail: function(json) {
+                    tipAction(json.message);
+                    //隐藏loading，调试接口时需要去掉
+                       setTimeout(function() {
+                        that.$e.listLoading.hide();
+                    }, 100);
                 },
             }];
             $.ajaxLoading(obj);

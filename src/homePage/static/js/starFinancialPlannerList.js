@@ -3,10 +3,7 @@
  * @author  liuhongyu 2019 10-31
  */
 
-require('@pathIncludJs/vendor/config.js');
-require('@pathIncludJs/vendor/zepto/callback.js');
-require('@pathIncludJs/vendor/zepto/deferred.js');
-require('@pathCommonJs/components/utils.js');
+require('@pathCommonBase/base.js');
 require('@pathCommonJs/ajaxLoading.js');
 
 var tipAction = require('@pathCommonJs/components/tipAction.js');
@@ -288,6 +285,9 @@ $(function(){
                     var data=json.data;
                     var code=data.cityCode;
                     var name=data.cityName;
+                    if(name.split('').reverse().join('').charAt(0)=='市'){
+                        name=name.substring(0,name.length-1)
+                    }
                     var parentid=data.provinceCode;
                     $('#locationCity').text(name);
                     $('#locationCity').attr({
@@ -321,7 +321,10 @@ $(function(){
                 $('#activityDataBox').show();
                 $('#cityListBox').hide();
                 $('#loading').show();
-                $('.recordList').html('');                
+                $('.recordList').html(''); 
+                if(txt.split('').reverse().join('').charAt(0)=='市'){
+                    txt=txt.substring(0,txt.length-1)
+                }           
                 $('#locationCity').text(txt);
                 $('#locationCity').attr({
                     'data-code':code,
@@ -390,6 +393,26 @@ $(function(){
                 console.log(1);
                 $('.activitySearchInput').children('input').focus();
             });
+            //返回上一页
+            $("#goBack").on("click",function(){
+                if(document.referrer == ''){
+                    var u = navigator.userAgent, 
+                        app = navigator.appVersion;
+                    var isAndroid = u.indexOf('Android') > -1 || u.indexOf('Linux') > -1; //g
+                    var isIOS = !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/); //ios终端
+                    if (isAndroid) {
+                    //这个是安卓操作系统
+                    window.jsObj.backNative();
+                    }
+                    if (isIOS) {
+                        //这个是ios操作系统
+                        window.webkit.messageHandlers.backNative.postMessage('backNative');
+                    }
+                }else{
+                    location.href="javascript:history.go(-1)";
+                }
+                
+            })
         }
     }
     //调用初始化函数
