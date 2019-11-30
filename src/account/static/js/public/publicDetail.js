@@ -39,14 +39,11 @@ $(function () {
             type: 'qrnh',//'qrnh'七年 'wfsy'万份
             time: 1,// 1月份 3 季度 6半年 12 一年 0成立以来
         },
+        fundType: getQueryString('fundType') === '10300' ? 1 : 0, //10300 货币基金类型，其余为普通基金类型
         init: function () {
             var that = this;
             //页面初始化
-
             that.getData();
-
-
-
         },
         changeVal: function (prop, num, isfalse) {
             isfalse = isfalse === undefined ? true : false
@@ -78,12 +75,15 @@ $(function () {
                     that.changeVal('chgRat1y', 2)
                     that.changeVal('chgRatBgn', 2)
                     that.gV.json.trDate = that.gV.json.trDate.slice(5)
+                    that.gV.json.fundType = that.fundType
                     var html = template(that.gV.json);
-
                     $(".tplBox").html(html);
                     that.getData1();
                     that.getData2('qrnh', 1);
                     that.events();
+
+                    var historyStr = that.fundType ? '<div class="item_name">日期</div> <div class="item_name">万份收益</div><div class="item_name">七日年华</div>' : '<div class="item_name">日期</div><div class="item_name">单位净值</div><div class="item_name">累计净值</div><div class="item_name">日涨幅</div>'
+                    $('.history_area >.history_item').html(historyStr);
                     $.each($(".net_worth_area .net_worth_item .value"), function (i, v) {
                         if (Number($(v).text().slice(0, $(v).text().length - 1)) >= 0) {
                             $(v).addClass('value_red')
@@ -169,15 +169,18 @@ $(function () {
                     pageSize: 3,
                 },
                 callbackDone: function (json) {
-                    json = json.data.pageList
+                    json = json.data
                     var tplm = $("#dataLists1").html();
                     var template = Handlebars.compile(tplm);
-                    $.each(json, function (i, v) {
+                    $.each(json.pageList, function (i, v) {
                         if (v.dayChgRat > 0) {
                             v.dayChgRat = "+" + v.dayChgRat
                         }
+                        if (v.annYldRat > 0) {
+                            v.annYldRat = "+" + v.annYldRat
+                        }
                     })
-
+                    json.fundType = that.fundType
                     var html = template(json);
                     $(".tplBox1").html(html);
                     $.each($(".history_item .value"), function (i, v) {

@@ -90,11 +90,9 @@
 					</div>
 				</div>
 				<div class="history_item">
-					<div class="item_name">日期</div>
-					<div class="item_name">单位净值</div>
-					<div class="item_name">累计净值</div>
-					<div class="item_name">日涨幅</div>
+				
 				</div>
+				
 			<div class="tplBox1">
 				</div>
 			</div>
@@ -185,16 +183,33 @@
 		</script>
 	<script id="dataLists1"  type="text/x-handlebars-template">
 			<div >
-					{{#each this}}
+				{{#if fundType}}
+					{{#each pageList}}
 				<div class="history_item">
 					<div class="item_value_1">{{trdDt}}</div>
-					<div class="item_value_1">{{unitNav}}</div>
-					<div class="item_value_1">{{accuUnitNav}}</div>
-					<div class="item_value_2 value">{{dayChgRat}}%</div>
+					<div class="item_value_1">{{unitYld}}</div>
+					<div class="item_value_2 value">{{annYldRat}}%</div>
 				</div>
 				{{/each}}
+				{{else}}
+				{{#each pageList}}
+				<div class="history_item">
+					<div class="item_value_1">{{trdDt}}</div>
+						<div class="item_value_1">{{unitNav}}</div>
+						<div class="item_value_1">{{accuUnitNav}}</div>
+						<div class="item_value_2 value">{{dayChgRat}}%</div>
+				</div>
+				{{/each}}
+				{{/if}}
 				</div>
 		</script>
 </body>
 
 </html>
+
+<!-- <div class="history_item">
+	<div class="item_value_1">{{trdDt}}</div>
+	<div class="item_value_1">{{unitNav}}</div>
+	<div class="item_value_1">{{accuUnitNav}}</div>
+	<div class="item_value_2 value">{{dayChgRat}}%</div>
+</div> -->
