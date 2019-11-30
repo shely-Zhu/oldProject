@@ -79,6 +79,7 @@ $(function () {
             case 'H':
               fixState = "已终止"
               str = ""
+              $('.nextFixrequestDateMask').html('已终止');
               break;
 
             case 'P':
@@ -147,7 +148,6 @@ $(function () {
       var fundType = that.gV.json.fundType
       // 详情
       mui("body").on("tap", ".posRight", function () {
-
         window.location.href = site_url.pofPublicDetail_url + '?fundCode=' + fundCode + '&fundType=' + fundType;
       });
       // 修改

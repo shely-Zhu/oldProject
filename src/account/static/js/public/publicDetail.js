@@ -55,8 +55,6 @@ $(function () {
             if (isfalse) {
                 if (key > 0) {
                     value = "+" + value
-                } else if (key < 0) {
-                    value = "-" + value
                 }
             }
             this.gV.json[prop] = value
@@ -177,8 +175,6 @@ $(function () {
                     $.each(json, function (i, v) {
                         if (v.dayChgRat > 0) {
                             v.dayChgRat = "+" + v.dayChgRat
-                        } else if (v.dayChgRat < 0) {
-                            v.dayChgRat = "-" + v.dayChgRat
                         }
                     })
 
