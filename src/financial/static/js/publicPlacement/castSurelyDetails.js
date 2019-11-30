@@ -69,12 +69,11 @@ $(function () {
           fundCode = json.fundCode
           that.gV.json = json
           that.events();
-          console.log(that.gV.json);
           var fixState, str
           switch (json.fixState) {
             case 'A':
               fixState = "进行中"
-              str = '<div class="stop ">终止</div> <div class="cen pause">暂停</div> <div class="active edit ">修改</div>'
+              str = '<div type="1" >终止</div> <div class="cen" type="0"  >暂停</div> <div class="active edit ">修改</div>'
               break;
 
             case 'H':
@@ -84,7 +83,7 @@ $(function () {
 
             case 'P':
               fixState = "暂停"
-              str = '<div class="stop  >终止</div> <div class="active goBuy">续保</div>';
+              str = '<div type="1"  >终止</div> <div class="active" type="2" >续保</div>';
               break;
             case 'D':
               fixState = "删除"
@@ -116,20 +115,24 @@ $(function () {
       }]
       $.ajaxLoading(obj);
     },
-    changeStatus: function (pwd) {
-
+    changeStatus: function (pwd, type) {
+      var tip = ['定投计划已暂停', '定投计划已终止', '续投成功']
+      var fixStateArr = ['P', 'H', 'A']
+      var msg = tip[Number(type)]
       var that = this;
-      that.gV.copyJson.fixState = "P"
+      that.gV.copyJson.fixState = fixStateArr[Number(type)]
       that.gV.copyJson.password = pwd
       //请求页面数据
       var obj = [{
         url: site_url.pofFixedChange_api,
         data: that.gV.copyJson,
         callbackDone: function (json) {
-          tipAction(json.message);
+          tipAction(msg);
           $("#passwordWrap").hide()
           $("#passwordWrap input").val("");
-          
+          setTimeout(function () {
+            window.history.go(-1)
+          }, 800)
         },
         callbackFail: function (json) {
           tipAction(json.message);
@@ -152,28 +155,14 @@ $(function () {
         var scheduledProtocolId = getQueryString('scheduledProtocolId')
         window.location.href = site_url.pofOrdinarySetThrow_url + '?scheduledProtocolId=' + scheduledProtocolId + '&fundCode=' + fundCode;
       });
-      // 终止
-      mui("body").on("tap", ".stop", function (e) {
+      // 终止 暂停 续投
+      mui("body").on("tap", ".footer >div", function (e) {
+        var type = $(this).attr('type')
+        if (!type) return
         $("#passwordWrap").show();
         payPass(function (pwd) {
-          console.log(pwd);
-
-          that.changeStatus(pwd)
+          that.changeStatus(pwd, type)
         });
-        return
-
-        // var scheduledProtocolId = getQueryString('scheduledProtocolId')
-        // window.location.href = site_url.pofOrdinarySetThrow_url + '?scheduledProtocolId=' + scheduledProtocolId + '&fundCode=' + fundCode;
-      });
-      // 暂停
-      mui("body").on("tap", ".pause", function (e) {
-        var scheduledProtocolId = getQueryString('scheduledProtocolId')
-        window.location.href = site_url.pofOrdinarySetThrow_url + '?scheduledProtocolId=' + scheduledProtocolId + '&fundCode=' + fundCode;
-      });
-      // 续投
-      mui("body").on("tap", ".goBuy", function (e) {
-        var scheduledProtocolId = getQueryString('scheduledProtocolId')
-        window.location.href = site_url.pofOrdinarySetThrow_url + '?scheduledProtocolId=' + scheduledProtocolId + '&fundCode=' + fundCode;
       });
 
     },

@@ -213,12 +213,9 @@ $(function () {
         },
         events: function () {
             var that = this;
-
-            mui("body").on("tap", ".newPlan", function () {
-                window.location.href = site_url.pofOrdinarySetThrow_url;
-            });
-            // mui("body").on("tap", ".fundOut", function () {
-            //     window.location.href = site_url.pofCashTransformOut_url;
+            //新增 跳原生定投排行页
+            // mui("body").on("tap", ".newPlan", function () {
+            //     window.location.href = site_url.pofOrdinarySetThrow_url;
             // });
 
             // 跳转详情页
@@ -227,10 +224,6 @@ $(function () {
                 window.location.href = site_url.pofCastSurelyDetails_url + '?scheduledProtocolId=' + scheduledProtocolId;
             });
 
-            // // 获取专属报告
-            // mui("body").on("tap", ".btnBottom", function () {
-            //   that.getReport();
-            // });
         },
     };
     somePage.init();
