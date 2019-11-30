@@ -1,5 +1,5 @@
 //  私募基金产品详情
-//  @author zhangyanping 2019-11-25
+//  @author zhangyanping 2019-11-25 tian
 
 require('@pathIncludJs/base.js');
 
