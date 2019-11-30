@@ -21,7 +21,7 @@ var tipAction = require('@pathCommonJs/components/tipAction.js');
 require('@pathCommonJs/components/utils.js');
 require('@pathCommonJs/components/elasticLayer.js');
 require('@pathCommonJs/components/headBarConfig.js');
-
+var splitUrl = require('@pathCommonJs/components/splitUrl.js')();
 require('@pathCommonCom/elasticLayer/transOutRule/transOutRule.js');
 var popPicker = require('@pathCommonJsCom/popPicker.js');
 var generateTemplate = require('@pathCommonJsComBus/generateTemplate.js');
@@ -38,7 +38,6 @@ $(function () {
 			fundCode: $(".title .fundCode"),   //基金代码
 			transformInput: $("#transformInput"),  //输入金额
 			CostEstimateNum: $(".CostEstimate .num"),  //费用估算
-			CostEstimateRate: $(".CostEstimate .rate"),  //费率
 			popupUl: $('.popup-ul'), // 银行卡模板容器
 			bankListTemplate: $('#bankList-template'), //银行卡模板
 			onlinepay: $('.onlinepay .onright-left'), // 在线支付银行卡模板容器
@@ -58,7 +57,7 @@ $(function () {
 			scheduledProtocolId: splitUrl['scheduledProtocolId'] ? splitUrl['scheduledProtocolId'] : '201911270201',
 			type: splitUrl['type'] ? splitUrl['type'] : 'edit', // add添加  edit 编辑
 			fundName: splitUrl['fundName'] ? splitUrl['fundName'] : null,   //基金名称
-			fundCode: splitUrl['fundCode'] ? splitUrl['fundCode'] : '000847',  //基金代码
+			fundCode: splitUrl['fundCode'] ? splitUrl['fundCode'] : null,  //基金代码
 			capitalMode: '', //资金方式
 			payType: '',   //支付方式（0、在线支付 1、汇款支付）
 			bankName: '',  // 银行名称
@@ -78,6 +77,8 @@ $(function () {
 			expiryDate:'', //终止日期
 
 			//公用
+			minValue:0,  // 起投金额
+			maxValue:0,  //最大金额
 			balance:0,     //   申请金额
 			tradeAcco: '' , //交易账号
 			bankNo: '',  //银行编号
@@ -100,10 +101,10 @@ $(function () {
 			
 			that.getAgreeUrl();
 		},
-		getRate:function(){
+		getRate:function(val){
 			var that = this;
 			var obj = [{
-				url: site_url.prfFundQuery_api,
+				url: site_url.prfFundFeeRate_api,
 				data: {
 					"operationType": '090',
 					"fundCode":that.gV.fundCode
@@ -113,8 +114,51 @@ $(function () {
 				callbackDone: function (json) {
 					if (json.status == '0000') {
 						//费用估算有待完善
-						that.$el.CostEstimateRate.html(Number(json.data.ratio)*100 + '%')
-						that.$el.CostEstimateRate.html(Number(json.data.ratio)*Number(json.data.discount)*that.gV.balance)
+						var data = json.data;
+						var str = '';   // 费率描述
+						var rate = ''; //计算费用的费率
+						var value = 0;  //估算费用
+						var value2 = 0  //实际费率费用
+						var discount = 0 ; //折扣率
+						var newRate = ''; //折扣后的费率
+						var discountMount = 0; //折扣费
+						var feeCalcMed = ''
+						if(Number(val) == 0){
+							str = '0.00' + '元'
+						}else{
+							for (var i = 0; i < data.length; i++) {
+								if(Number(data[i].minFare) > 0){
+									if(Number(val) >= Number(data[i].minBalance)){
+										feeCalcMed = '1';
+										rate  = data[i].minFare;
+									}
+								}else{
+									discount = Number(data[i].discount);
+									if(Number(val) >= Number(data[i].minBalance) && Number(val) <= Number(data[i].maxBalance)){
+										rate  = data[i].ratio;
+										feeCalcMed = '2';
+									}
+								}
+							};
+							if(feeCalcMed == '1'){
+								str = rate + '元'
+							}else{
+								
+								if(discount == 1){
+									str = value + '元' +'(' + (rate*100).toFixed(2) + '%)'
+								}else{
+									newRate = rate * discount*100
+									// value = (Number(val)*Number(newRate)/100).toFixed(2)  // 折扣后的费用
+									// value2 = (Number(val)*Number(rate)).toFixed(2)   // 折扣前的费用
+									value = (Number(val)*(1-1/(1 + Number(newRate)/100))).toFixed(2)
+									value2 = (Number(val)*(1-1/(1 + rate))).toFixed(2)
+									discountMount = (Number(value2) - Number(value)).toFixed(2)
+									str = value + '元&nbsp;' + '(<span class="line-rate">' + (rate*100).toFixed(2) + '%</span>&nbsp;' + newRate.toFixed(2) + '%)省<span class="discount">' + discountMount + '</span>元'
+								}
+							}
+						}
+						
+						that.$el.CostEstimateNum.html(str)
 						
 					}
                   
@@ -137,19 +181,29 @@ $(function () {
 					if (json.status == '0000' || json.status == '4000') {
 						var data = json.data;
 						$("#loading").hide()
-						that.$el.fundName.html(data.chiName)
+						debugger
+						that.$el.fundName.html(data.secuSht)
 						that.$el.fundCode.html(data.trdCode)
-						that.gV.fundName = data.chiName
+						that.gV.fundName = data.secuSht
 						that.gV.fundCode = data.trdCode
+						var tradeLimitList2 = []
 						that.$el.transformInput.attr('placeholder',data.tradeLimitAmount)
 						for (var index = 0; index < data.tradeLimitList.length; index++) {
 							if(that.gV.fundBusinCode ==  data.tradeLimitList[index].fundBusinCode){
-							   that.$el.transformInput.attr('placeholder',data.tradeLimitList[index].minValue)
-							   that.$el.transformInput.attr('min',Number(data.tradeLimitList[index].minValue).toFixed(2))
-							   that.$el.transformInput.attr('max',Number(data.tradeLimitList[index].maxValue).toFixed(2))
+								tradeLimitList2.push(data.tradeLimitList[index])
+							}
+						}
+						for (var i = 0; i < tradeLimitList2.length; i++) {
+							if(i + 1 == tradeLimitList2.length){
+								that.$el.transformInput.attr('placeholder',tradeLimitList2[i].minValue)
+								that.$el.transformInput.attr('min',Number(tradeLimitList2[i].minValue).toFixed(0))
+								that.$el.transformInput.attr('max',Number(tradeLimitList2[i].maxValue).toFixed(0))
+								that.gV.minValue =   Number(tradeLimitList2[i].minValue).toFixed(0)  // 起投金额
+								that.gV.maxValue = Number(tradeLimitList2[i].maxValue).toFixed(0)   // 最大金额
 							}
 							
 						}
+						that.getRate(that.gV.minValue)
 						
 					}
                   
@@ -187,8 +241,8 @@ $(function () {
 						that.gV.expiryDate = data.expiryDate
 						that.$el.cycleDate.html(data.fixedPeriodMask)
 						that.getNextCutPayment();
-						that.getRate();
-						
+						that.getRate(data.balance);
+						that.getBankCard('0')
 					}
                   
                 },
@@ -214,9 +268,36 @@ $(function () {
 						var data = [] ;
 						data = json.data.pageList;
 						console.log('data',data)
-						generateTemplate(data, that.$el.popupUl, that.$el.bankListTemplate,true);
-						$("#loading").hide()
-						$('.popup').css('display','block')
+						if(that.gV.type == 'add'){
+							generateTemplate(data, that.$el.popupUl, that.$el.bankListTemplate,true);
+							$("#loading").hide()
+							$('.popup').css('display','block')
+						}else{
+							for (var index = 0; index < data.length; index++) {
+								if(that.that.gV.bankAccountMask == data[index].bankAccountMask){
+									that.gV.bankName =data[index].bankName;
+									that.gV.bankNo = data[index].bankNo;
+									that.gV.tradeAcco = data[index].tradeAcco;
+									that.gV.bankAccount = data[index].bankAccount;
+									that.gV.bankAccountMask = data[index].bankAccountMask;
+									that.gV.capitalMode = data[index].capitalMode
+									var bankData = []
+									bankData.push({
+										bankThumbnailUrl:data[index].bankThumbnailUrl,
+										bankName:data[index].bankName,
+										bankNo:data[index].bankNo,
+										singleNum:data[index].singleNum,
+										oneDayNum:data[index].oneDayNum
+									});
+									generateTemplate(bankData, that.$el.onlinepay, that.$el.bankListCheckTemplate,true);
+									setTimeout(function(){
+										$('.popup').css('display','none')
+									},500)
+								}
+								
+							}
+						}
+						
 					}
                   
                 },
@@ -271,7 +352,12 @@ $(function () {
 				needDataEmpty: true,
 				callbackDone: function(json) {
 					if(json.status == '0000'){
-						$("#passwordWrap").show();
+						if(that.gV.type == 'add'){
+							payPass(that.checkPassword);
+						}
+						if(that.gV.type == 'edit'){
+							payPass(that.checkPassword_edit);
+						}
 					}else{
 						tipAction(json.message);
 					}
@@ -310,17 +396,14 @@ $(function () {
 					data = json.data;
 					console.log('data',data)
 					if(json.status == '0000'){
-					    window.location.href = site_url.pofSurelyResultsDetail_url + '?applyId=' + data.allotNo + '&fundBusinCode=' + 
-					   data.fundBusinCode + "&fundCode=" + that.gV.fundCode + "&payType=" +that.gV.payType + '&flag=investmentPlan';
+					    window.location.href = site_url.pofCastSurelyDetails_url + '?scheduledProtocolId=' + data.scheduledProtocolId ;
 					}
 				},
 				callbackNoData:function(json){
-					tipAction(data.message);
+					tipAction(json.message);
 				},
 				callbackFail:function(json){
 					$(".elasticButtons").hide();
-					var data = [] ;
-					data = json.data;
 					if(json.status == 'POF1186' || json.status == 'POF1186'){
 						 //密码错误
 						 $(".popup-password").show();
@@ -396,17 +479,14 @@ $(function () {
 					data = json.data;
 					console.log('data',data)
 					if(json.status == '0000'){
-					    window.location.href = site_url.pofSurelyResultsDetail_url + '?applyId=' + data.allotNo + '&fundBusinCode=' + 
-					   data.fundBusinCode + "&fundCode=" + that.gV.fundCode + "&payType=" +that.gV.payType + '&flag=investmentPlan';
+					    window.location.href = site_url.pofSurelyResultsDetail_url + '?scheduledProtocolId=' + data.scheduledProtocolId ;
 					}
 				},
 				callbackNoData:function(json){
-					tipAction(data.message);
+					tipAction(json.message);
 				},
 				callbackFail:function(json){
 					$(".elasticButtons").hide();
-					var data = [] ;
-					data = json.data;
 					if(json.status == 'POF1186' || json.status == 'POF1186'){
 						 //密码错误
 						 $(".popup-password").show();
@@ -451,6 +531,7 @@ $(function () {
 		},
 		//查询下次扣款日期
 		getNextCutPayment:function(){
+			debugger
 			var that = regulatory;
 			var deductingCycleDate = '';
 			var deductingDayDate = ''
@@ -681,20 +762,12 @@ $(function () {
 				}, {
 					value: "130128",
 					text: "28日"
-				}, {
-					value: "130129",
-					text: "29日"
-				}, {
-					value: "130130",
-					text: "30日"
-				}, {
-					value: "130131",
-					text: "31日"
 				}]
 			}, {
 				value: '140000',
 				text: '每日',
 			}]
+			 that.getNextCutPayment()
 			// 周期选择
 			$('body').on('tap', '#starttime', function () {
 				popPicker(2, list, that.$el.cycleDate , that.getNextCutPayment);
@@ -728,7 +801,7 @@ $(function () {
 			
 			$("#transformInput").on('input propertychange',function(){
 				that.gV.balance = $(this).val();
-				that.getRate();
+				that.getRate($(this).val());
 			})
 			//清除输入框数字
 			$('body').on('tap','.deleteNum',function(){
@@ -790,12 +863,7 @@ $(function () {
 
 			// 	}
 			// })
-			if(that.gV.type == 'add'){
-				payPass(that.checkPassword);
-			}
-			if(that.gV.type == 'edit'){
-				payPass(that.checkPassword_edit);
-			}
+			
 			
 
 			//  ---忘记密码
@@ -805,7 +873,7 @@ $(function () {
 			}) ;
 			//密码校验不通过   ---取消
 			$('body').on('tap','.elasticCel',function(){
-				$('.popup').css('display','none')
+				$('#passwordWrap').css('display','none')
 				$('.popup-password').css('display','none')
 			}) ;
 			//密码校验不通过   ---忘记密码
@@ -823,6 +891,12 @@ $(function () {
 			$('body').on('tap','.error2 .elasticYes',function(){
 				//跳往原生页面去修改密码
 				window.location.href = site_url.pofRetrievePassword_url
+			}) ;
+			//密码校验不通过   ---重新输入
+			$('body').on('tap','.error3 .elasticYes',function(){
+				$('.popup-password').css('display','none')
+				$(".pwd-input").val('')
+				$(".fake-box input").val('');
 			}) ;
 
 			//添加银行卡 -- 跳往原生

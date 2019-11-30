@@ -14,7 +14,7 @@ require('@pathIncludJs/vendor/zepto/callback.js');
 require('@pathIncludJs/vendor/zepto/deferred.js');
 
 require('@pathCommonJs/components/headBarConfig.js');
-
+var splitUrl = require('@pathCommonJs/components/splitUrl.js')();
 require('@pathCommonCom/elasticLayer/transOutRule/transOutRule.js');
 var generateTemplate = require('@pathCommonJsComBus/generateTemplate.js');
 //黑色提示条的显示和隐藏
@@ -190,7 +190,7 @@ $(function () {
 				needDataEmpty: true,
 				callbackDone: function(json) {
 					if(json.status == '0000'){
-						$("#passwordWrap").show();
+						payPass(that.checkPassword);
 					}else{
 						tipAction(json.message);
 					}
@@ -230,12 +230,10 @@ $(function () {
 					}
 				},
 				callbackNoData:function(json){
-					tipAction(data.message);
+					tipAction(json.message);
 				},
 				callbackFail:function(json){
 					$(".elasticButtons").hide();
-					var data = [] ;
-					data = json.data;
 					if(json.status == 'POF1186' || json.status == 'POF1186'){
 						 //密码错误
 						 $(".popup-password").show();
@@ -373,7 +371,7 @@ $(function () {
 
 			// 	}
 			// })
-			payPass(that.checkPassword);
+			
 
 			//  ---忘记密码
 			$('body').on('tap','#passwordWrap .forgetP',function(){
@@ -382,7 +380,7 @@ $(function () {
 			}) ;
 			//密码校验不通过   ---取消
 			$('body').on('tap','.elasticCel',function(){
-				$('.popup').css('display','none')
+				$('#passwordWrap').css('display','none')
 				$('.popup-password').css('display','none')
 			}) ;
 			//密码校验不通过   ---忘记密码
@@ -400,6 +398,12 @@ $(function () {
 			$('body').on('tap','.error2 .elasticYes',function(){
 				//跳往原生页面去修改密码
 				window.location.href = site_url.pofRetrievePassword_url
+			}) ;
+			//密码校验不通过   ---重新输入
+			$('body').on('tap','.error3 .elasticYes',function(){
+				$('.popup-password').css('display','none')
+				$(".pwd-input").val('')
+				$(".fake-box input").val('');
 			}) ;
 
 			//添加银行卡 -- 跳往原生

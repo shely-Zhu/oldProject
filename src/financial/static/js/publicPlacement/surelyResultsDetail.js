@@ -8,7 +8,7 @@ require('@pathIncludJs/vendor/zepto/deferred.js');
 require('@pathCommonJs/components/utils.js');
 require('@pathCommonJs/components/headBarConfig.js');
 require('@pathCommonJs/ajaxLoading.js');
-
+var splitUrl = require('@pathCommonJs/components/splitUrl.js')();
 var tipAction = require('@pathCommonJs/components/tipAction.js');
 var splitUrl = require('@pathCommonJs/components/splitUrl.js')();
 var generateTemplate = require('@pathCommonJsComBus/generateTemplate.js');
@@ -16,13 +16,13 @@ var generateTemplate = require('@pathCommonJsComBus/generateTemplate.js');
 $(function() {
     var somePage = {
       $el: {
-        succedText:$(".resultTopTwo  .succedText"),  //在线支付标题  buy   redemption   investmentPlan
+        succedText:$(".resultTopTwo  .succedText"),  //在线支付标题  buy   redemption  
         //buy
-        shareTimePBuy:$(".buy-result .shareTimeP"),   //开始计算收益流程
-        earningsTimePBuy:$(".buy-result .earningsTimeP"),   //第一笔收益到账流程
-        applyTimeBuy:$(".buy-result .applyTime .laber-right"),  //申请时间
-        shareTimeBuy:$(".buy-result .shareTime .laber-right"),  //预计确认时间
-        earningsTimeBuy:$(".buy-result .earningsTime .laber-right"), //预计查看收益时间
+        shareTimePBuy:$(".resultTopTwo .buy-result .shareTimeP"),   //开始计算收益流程
+        earningsTimePBuy:$(".resultTopTwo .buy-result .earningsTimeP"),   //第一笔收益到账流程
+        applyTimeBuy:$(".resultTopTwo .buy-result .applyTime .laber-right"),  //申请时间
+        shareTimeBuy:$(".resultTopTwo .buy-result .shareTime .laber-right"),  //预计确认时间
+        earningsTimeBuy:$(".resultTopTwo .buy-result .earningsTime .laber-right"), //预计查看收益时间
         fundNameBuy:$(".listWrap .buy-result .fundName"),  //基金名称
         fundCodeBuy:$(".listWrap .buy-result .fundCode"),  //基金代码
         amount2Buy:$(".listWrap .buy-result .amount"),  //买入金额
@@ -32,11 +32,11 @@ $(function() {
         payTypeBuy:$(".listWrap .buy-result .payType"),  //支付方式
 
         //redemption
-        shareTimePRedemption:$(".redemption-result .shareTimeP"),   //开始计算收益流程
-        earningsTimePRedemption:$(".redemption-result .earningsTimeP"),   //第一笔收益到账流程
-        applyTimeRedemption:$(".redemption-result .applyTime .laber-right"),  //申请时间
-        shareTimeRedemption:$(".redemption-result .shareTime .laber-right"),  //预计确认时间
-        earningsTimeRedemption:$(".redemption-result .earningsTime .laber-right"), //预计查看收益时间
+        shareTimePRedemption:$(".resultTopTwo .redemption-result .shareTimeP"),   //开始计算收益流程
+        earningsTimePRedemption:$(".resultTopTwo .redemption-result .earningsTimeP"),   //第一笔收益到账流程
+        applyTimeRedemption:$(".resultTopTwo .redemption-result .applyTime .laber-right"),  //申请时间
+        shareTimeRedemption:$(".resultTopTwo .redemption-result .shareTime .laber-right"),  //预计确认时间
+        earningsTimeRedemption:$(".resultTopTwo .redemption-result .earningsTime .laber-right"), //预计查看收益时间
         fundNameRedemption:$(".listWrap .redemption-result .fundName"),  //基金名称
         fundCodeRedemption:$(".listWrap .redemption-result .fundCode"),  //基金代码
         amount2Redemption:$(".listWrap .redemption-result .amount"),  //买入金额
@@ -44,7 +44,7 @@ $(function() {
         bankNum2Redemption:$(".listWrap .redemption-result .bankNum"),  //银行卡尾号
         banKImgRedemption:$(".listWrap .redemption-result .banKImg"),  //银行卡缩略图
         payTypeRedemption:$(".listWrap .redemption-result .payType"),  //支付方式
-        
+
         amount1:$(".resultTop .amount"),  //汇款支付金额
         buyStatusText:$(".resultTop .buyStatusText"),  //汇款支付标题
         bankName:$(".resultTop .bankName"),  //银行名称
@@ -58,14 +58,14 @@ $(function() {
         
       },  
       gV: { // 全局变量
-        flag:splitUrl['flag'] ? splitUrl['flag'] : 'buy',    // 买入：buy,  赎回：redemption  定投： investmentPlan     
+        flag:splitUrl['flag'] ? splitUrl['flag'] : 'buy',    // 买入：buy,  赎回：redemption    
         payType:splitUrl['payType'] || '0',  // 0  在线  1  汇款
-        // applyId:splitUrl['applyId'],
-        // fundCode:splitUrl['fundCode'],
-        // fundBusinCode:splitUrl['fundBusinCode'],
-        applyId:'20190827005586',
-        fundCode:'000847',
-        fundBusinCode:'090',
+        applyId:splitUrl['applyId'],
+        fundCode:splitUrl['fundCode'],
+        fundBusinCode:splitUrl['fundBusinCode'],
+        // applyId:'20190827005586',
+        // fundCode:'000847',
+        // fundBusinCode:'090',
       },
       init:function(){
         var that = this;
@@ -80,9 +80,6 @@ $(function() {
         if(that.gV.flag == 'redemption'){  //基金赎回
           $(".redemption-result").show()
           that.getData();  //查询结果可能要根据flag来
-        }
-        if(that.gV.flag == 'investmentPlan'){   //定投
-          $(".investmentPlan-result").show()
         }
         
         that.event()
@@ -223,6 +220,7 @@ $(function() {
         var that = this;
         $('body').on('tap','.over',function(){
           //跳往持仓列表页
+          window.location.href = site_url.publicAssets_url
         }) 
         
       },

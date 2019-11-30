@@ -76,6 +76,31 @@
      </div>
  
      
+     <script id="cashListConList" type="text/x-handlebars-template">
+          {{#each this}}
+          <div class="cashItem">
+               <div class="itemTop">
+                    <div class="itemTitle"><span>现金宝产品1</span><span class="rightCon"><span class="right"></span></span></div>
+                    <div class="itemSevenIncome">七日年化：2.264%</div>
+               </div>
+               <div class="itemCenter flex">
+                    <div>
+                         <div class="centerTitle">资产(元)</div> 
+                         <div class="centerValue red">9999.50</div>
+                    </div>
+                    <div>
+                         <div class="centerTitle">昨日收益(元)</div> 
+                         <div class="centerValue">-0.21</div>
+                    </div>
+                    <div>
+                         <div class="centerTitle">累计收益(元)</div> 
+                         <div class="centerValue">+2.00</div>
+                    </div>
+               </div>
+          </div>
+          {{/each}}
+  </script>
+
  
      @@include('@pathInclude/views/footer.html')
      <!-- 添加埋点 -->
