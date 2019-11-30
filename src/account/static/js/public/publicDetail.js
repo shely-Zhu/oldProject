@@ -15,6 +15,7 @@ require('@pathIncludJs/vendor/zepto/deferred.js');
 require('@pathCommonJsCom/utils.js');
 require('@pathCommonJs/ajaxLoading.js');
 require('@pathCommonJs/components/headBarConfig.js');
+var authenticationProcess = require('@pathCommonJs/components/authenticationProcess.js');
 var generateTemplate = require('@pathCommonJsComBus/generateTemplate.js');
 var splitUrl = require('@pathCommonJs/components/splitUrl.js');
 //是否大于0的判断器 用于设置涨红跌绿 可以参考publicAssets.js
@@ -31,6 +32,7 @@ getQueryString = function (name) {
     var r = window.location.search.substr(1).match(reg);
     if (r != null) return unescape(r[2]); return '';
 }
+console.log(authenticationProcess, "authenticationProcess");
 $(function () {
     var fundCode
     var regard = {
@@ -38,12 +40,19 @@ $(function () {
             json: {},
             type: '1',//'1'七年 '2'万份
             time: 1,// 1月份 3 季度 6半年 12 一年 0成立以来
+            idnoCheckflagArr: ['未认证', '已认证'],//是否实名认证 0-否 1-是 
+            isRiskEndureArr: ['未风测', '已风测'],//是否风险测评 0-否 1-是    endurePubIsold 公募风险评测是否过期 0-否 1-是
+            isPerfectArr: ['未完善', '已完善'],//是否完善个人信息 0-否 1-是 
+            accreditedInvestorArr: ['未通过', '已通过', '已过期', '未做'],//是否合格投资者 空-未做； 0-未通过；1-已通过； 2-已过期 
+            tipStatus: false,
         },
         fundType: getQueryString('fundType') === '10300' ? 1 : 0, //10300 货币基金类型，其余为普通基金类型
         init: function () {
             var that = this;
             //页面初始化
             that.getData();
+            $('.tips').hide()
+
         },
         changeVal: function (prop, num, isfalse) {
             isfalse = isfalse === undefined ? true : false
@@ -103,6 +112,70 @@ $(function () {
             }]
             $.ajaxLoading(obj);
         },
+        // 获取认证信息
+        getUserInfo: function () {
+            var that = this;
+            // 请求页面数据
+            var obj = [{
+                url: site_url.user_api,
+                data: {
+                },
+                callbackDone: function (json) {
+                    json = json.data
+                    json.isRiskEndure = (json.isRiskEndure === 1 && json.endurePubIsold === 0) ? 1 : 0 //已经风险测评且没有过期 才展示已风测
+                    if (json.idnoCheckflag) {
+                        $($('.tips .tips-li')[0]).hide()
+                    } else {
+                        $($('.tips .bank-status')[0]).text(that.gV.idnoCheckflagArr[json.idnoCheckflag])
+                    }
+                    if (json.isRiskEndure) {
+                        $($('.tips .tips-li')[1]).hide()
+                    } else {
+                        $($('.tips .bank-status')[1]).text(that.gV.isRiskEndureArr[json.isRiskEndure])
+                    }
+                    if (json.isPerfect) {
+                        $($('.tips .tips-li')[2]).hide()
+                    } else {
+                        $($('.tips .bank-status')[2]).text(that.gV.isPerfectArr[json.isPerfect])
+                    }
+                    if (json.accreditedInvestor) {
+                        $($('.tips .tips-li')[3]).hide()
+                    } else {
+                        $($('.tips .bank-status')[3]).text(json.accreditedInvestor ? that.gV.accreditedInvestorArr[json.accreditedInvestor] : '未做')
+                    }
+                    if (json.idnoCheckflag || json.isRiskEndure || json.isPerfect || json.accreditedInvestor) {
+                        $('.tips').show()
+                    } else {
+                        that.gV.tipStatus = true
+
+                    }
+                    // var tplm = $("#dataLists1").html();
+                    // var template = Handlebars.compile(tplm);
+                    // $.each(json.pageList, function (i, v) {
+                    //     if (v.dayChgRat > 0) {
+                    //         v.dayChgRat = "+" + v.dayChgRat
+                    //     }
+                    //     if (v.annYldRat > 0) {
+                    //         v.annYldRat = "+" + v.annYldRat
+                    //     }
+                    // })
+                    // json.fundType = that.fundType
+                    // var html = template(json);
+                    // $(".tplBox1").html(html);
+                    // $.each($(".history_item .value"), function (i, v) {
+                    //     if (Number($(v).text().slice(0, $(v).text().length - 1)) >= 0) {
+                    //         $(v).addClass('value_red')
+                    //     } else {
+                    //         $(v).addClass('value_green')
+                    //     }
+                    // });
+                },
+                callbackFail: function (json) {
+                    tipAction(json.msg);
+                }
+            }]
+            $.ajaxLoading(obj);
+        },
         events: function () {
             var that = this;
             var json = that.gV.json
@@ -126,14 +199,61 @@ $(function () {
             mui("body").on("tap", ".dealRegArea .rule", function (e) {
                 window.location.href = site_url.pofTransactionRules_url + '?fundCode=' + fundCode
             });
+            // // 定投 买入
+            // mui("body").on("tap", ".footer >div", function (e) {
+            //     console.log($(this).attr('type'));
+            //     var type = $(this).attr('type')
+            //     if (type === 1 || type === 2) return
+            //     that.getUserInfo()
+            //     $('.tips').show()
+            //     return
+            //     window.location.href = site_url.pofOrdinarySetThrow_url + '?fundCode=' + fundCode + '&fundName=' + fundName + '&type=add';
+            // });
             // 定投
             mui("body").on("tap", ".footer .fixed_investement_btn", function (e) {
-                window.location.href = site_url.pofOrdinarySetThrow_url + '?fundCode=' + fundCode + '&fundName=' + fundName + '&type=add';
+
+                that.getUserInfo()
+                if (that.gV.tipStatus) {
+                    window.location.href = site_url.pofOrdinarySetThrow_url + '?fundCode=' + fundCode + '&fundName=' + fundName + '&type=add';
+                }
             });
             // 买入
             mui("body").on("tap", ".footer .buy_btn", function (e) {
-                window.location.href = site_url.fundTransformIn_url + '?fundCode=' + fundCode + '&fundName=' + fundName;
+                that.getUserInfo()
+                if (that.gV.tipStatus) {
+                    window.location.href = site_url.fundTransformIn_url + '?fundCode=' + fundCode + '&fundName=' + fundName;
+                }
             });
+            //认证
+            mui("body").on("tap", ".tips .tips-li-right", function (e) {
+                console.log($(this).attr('type'));
+                var type = $(this).attr('type')
+                switch (type) {
+                    case "1":
+                        window.location.href = site_url.realName_url
+                        break;
+
+                    case "2":
+                        window.location.href = site_url.realName_url
+                        break;
+
+                    case "3":
+                        window.location.href = site_url.realName_url
+                        break;
+
+                    case "4":
+                        window.location.href = site_url.realName_url
+                        break;
+
+                    default:
+                        break;
+                }
+            });
+            //一键认证
+            mui("body").on("tap", ".tips .tips-btn", function (e) {
+                window.location.href = site_url.realName_url
+            });
+
             // 七日年华 万份收益
             mui("body").on("tap", "#redeemNav .navSpan ", function (e) {
                 $(this).addClass('active').siblings().removeClass('active');

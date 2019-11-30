@@ -17,7 +17,7 @@
 		@@include('@pathCommonViews/headBarConfig.html',{"pathName":"普通基金","bgColors":"#475A95,#475A95","showType":"1"})
 		<div class="tplBox"></div>
 	</div>
-
+	@@include('@pathCommonViews/authenticationProcess.html',{"pathTitle":"认证信息"})
 	@@include('@pathInclude/views/footer.html')
 
 	<script src="/include/js/vendor/echarts/echarts.min.js"></script>
@@ -168,16 +168,16 @@
 			<div class="divider"></div>
 		</div>
 		<div class="footer">
-			<div class="share_area">
+			<div class="share_area" type="1">
 				<div class="img"></div>
 				<div class="text">分享</div>
 			</div>
-			<div class="selected_area">
+			<div class="selected_area"  type="2">
 				<div class="img"></div>
 				<div class="text">加自选</div>
 			</div>
-			<div class="fixed_investement_btn">定投</div>
-			<div class="buy_btn">买入</div>
+			<div class="fixed_investement_btn"  type="3">定投</div>
+			<div class="buy_btn"  type="4">买入</div>
 		</div>
 	</div>
 		</script>
