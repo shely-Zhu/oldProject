@@ -7,7 +7,6 @@ require('@pathIncludJs/base.js');
 
 require('@pathCommonJsCom/utils.js');
 require('@pathCommonJs/ajaxLoading.js');
-require('@pathCommonJsCom/headBarConfig.js');
 
 require('@pathCommonJsCom/tabScroll.js');
 var splitUrl = require('@pathCommonJsCom/splitUrl.js')();

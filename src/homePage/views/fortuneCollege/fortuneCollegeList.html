@@ -13,12 +13,10 @@
      <title>财富学院</title>
  </head>
  <body>
-     <!--加载图标-->
-     <!--@@include('@pathCommonViews/load.html')--> 
      <!--没有数据显示图标-->
      <!--@@include('@pathCommonViews/noDataImg.html')-->
      <!--列表加载显示图标-->
-     <!--@@include('@pathCommonViews/loading/listLoading.html')-->
+     <!--@@include('@pathCommonCom/loading/listLoading.html')-->
      <div class="boxA">
           @@include('@pathCommonViews/headBarConfig.html',{"bgColors":"#384A81,#2A3C70","showType":"1","pathName":"财富学院"})
           <div class="list">
@@ -103,7 +101,7 @@
      <script id="video-template" type="text/x-handlebars-template">
           {{#each this}}
                <li>
-                    <a href="fortuneFlowKnown.html?projectId=1">
+                    <a onclick="window.location.href=site_url.fortuneFlowKnown_url+'?id={{id}}'">
                          <img src="{{imageUrlShowOnline}}" alt="">
                          <p>
                               <i class="iconfont">
@@ -134,7 +132,7 @@
                               <div class="mui-scroll">
                                    {{#each listContent}}
                                         <!-- <a href="fortuneClassroom.html" style="width:6.2rem;height:4rem;display: block;position: absolute;;left:0;top:0;" class="mui-control-item"> </a> -->
-                                        <a onclick="window.location.href=site_url.fortuneClassroom_url+'?id={{id}}&rightsCenter';">
+                                        <a onclick="window.location.href=site_url.fortuneClassroom_url+'?id={{id}}';">
                                              <div class="mui-control-item conten">
                                                   
                                                   <img style="width:3.2rem;height:3rem;" src="{{imageUrlShowOnline}}" alt="">
@@ -169,7 +167,7 @@
                <div class="tab-content">
                     <ul>
                          {{#each listContent}}
-                              <a href="wealthResearch.html?projectId=1" >
+                              <a onclick="window.location.href=site_url.wealthResearch_url+'?id={{id}}'">
                                    <li>
                                         
                                         <div>

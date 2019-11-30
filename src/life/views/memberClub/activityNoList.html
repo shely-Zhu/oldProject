@@ -7,24 +7,18 @@
  <html lang="en">
  
  <head>
-     <meta charset="UTF-8">
-     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-     <meta name="applicable-device" content="mobile">
-     <meta name="apple-mobile-web-app-capable" content="yes">
-     <meta name="apple-mobile-web-app-status-bar-style" content="black">
-     <meta name="format-detection" content="telephone=no,date=no,address=no,email=no,url=no"/>
+     @@include('@pathInclude/views/meta.html') 
      <link rel="stylesheet" href="/life/static/css/activityList.css">
      <title>会员俱乐部-活动列表-搜索无结果</title>
      <script src="/include/js/adaptation_750ui.js"></script>
  </head>
  
  <body>
-    @@include('@pathCommonViews/load.html')
     @@include('@pathCommonViews/noDataImg.html')
-    @@include('@pathCommonViews/loading/listLoading.html')
+    @@include('@pathCommonCom/loading/listLoading.html')
     <section id="activityList" style="background-color: #fff;">
         <div class="activityNoListBox">
-            <img src="/life/static/img/Life_none_Empty state@1x.png" alt="">
+            <img src="/life/static/img/Life_none_Empty state@2x.png" alt="">
             <p>抱歉！没有搜索到相关内容</p>
         </div>
         <div class="activityList activityNoList">
