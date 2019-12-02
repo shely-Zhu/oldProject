@@ -97,7 +97,7 @@ module.exports = function() {
     this.pofTotalAssets_api = http_url.web_url + '/account/pof/totalAssets'; // 公募总资产
     this.fundNetWorthList_api = http_url.web_url + '/pof/fundDetails/frontend/fundNetWorthList'; //历史明细
     this.queryIncomeList_api = http_url.web_url + '/account/pof/queryIncomeList'; //收益明细
-<<<<<<< HEAD
+
     this.cashQueryIncomeList_api = http_url.web_url + '/account/pof/cash/queryIncomeList'; //超宝收益明细
 
 
