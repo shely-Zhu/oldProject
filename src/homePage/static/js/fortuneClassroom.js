@@ -304,3 +304,10 @@ $(function() {
     };
     data.init();
 });
+
+function attr(name,attribute,value){
+    name.attr(attribute,value)
+}
+setTimeout(()=>{
+    attr($('#slider .tab-scroll-wrap .mui-control-item'),'htmdEvt','sliderTab')
+},1000)
