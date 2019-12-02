@@ -356,7 +356,7 @@ module.exports = function () {
     this.pofSurelyResults_url = go_url.no_url + '/financial/views/publicPlacement/surelyResults.html';
     // 转入页面
     this.pofCashTransformIn_url = go_url.no_url + '/financial/views/publicPlacement/cashTransformIn.html';
-    // 转出页面	
+    // 转出页面
     this.pofCashTransformOut_url = go_url.no_url + '/financial/views/publicPlacement/cashTransformOut.html';
     // 定投详情
     this.pofCastSurelyDetails_url = go_url.no_url + '/financial/views/publicPlacement/castSurelyDetails.html';
@@ -370,9 +370,12 @@ module.exports = function () {
     this.pofFundManager_url = go_url.no_url + '/financial/views/publicPlacement/fundManager.html';
     // 基金公司
     this.pofFundCompany_url = go_url.no_url + '/financial/views/publicPlacement/fundCompany.html';
+    //私募产品详情
+    this.privatePlacementDetail_url = go_url.no_url + '/financial/views/privatePlacement/privatePlacementDetail.html';
+
     // 基金详情
     this.pofPublicDetail_url = go_url.no_url + '/account/views/public/publicDetail.html';
-    
+
     // 买入结果页面，基金买入结果
     this.pofSurelyResultsDetail_url = go_url.no_url + '/financial/views/publicPlacement/surelyResultsDetail.html';
 

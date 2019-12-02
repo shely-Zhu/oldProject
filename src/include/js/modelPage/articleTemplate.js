@@ -133,8 +133,27 @@ $(function(){
 
                 //1-超级现金宝;2-普通基金;3-私募基金;4-超宝产品列表;5-私募产品列表
                 //后续找小宇确认跳转逻辑和连接
-                if(that.recomTypes == "")
-                window.location.href = "";
+                if(that.recomTypes == "1"){//1-超级现金宝
+
+                    window.location.href = site_url.superStreasureDetail_url;
+
+                }else if(that.recomTypes == "2"){
+
+                    //window.location.href = site_url.superStreasureDetail_url;
+
+                }else if(that.recomTypes == "3"){//私募产品详情页
+
+                    window.location.href = site_url.privatePlacementDetail_url;
+
+                }else if(that.recomTypes == "4"){//超宝产品列表
+
+                    //window.location.href = site_url.privatePlacementDetail_url;
+
+                }else if(that.recomTypes == "5"){//私募产品列表
+
+                    //window.location.href = site_url.privatePlacementDetail_url;
+                    //
+                }
             });
 
 
