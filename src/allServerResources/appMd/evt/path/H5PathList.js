@@ -177,7 +177,17 @@ var pathList = {
     "/commonResources/fundDiagnosis/views/hotDiagnosis.html" :{ evtid: '167', topic: '基金诊断热门', info: ''} ,
     "/wealthResources/otherAssets/views/jjsAssets.html" :{ evtid: '168', topic: '其他资产', info: ''} ,
     "/personal/views/spAssetModel.html" :{ evtid: '169', topic: '标普资产', info: ''} ,
-    "/personal/views/assetAllocation.html" :{ evtid: '170', topic: '资产配置建议书', info: ''} ,
+	"/personal/views/assetAllocation.html" :{ evtid: '170', topic: '资产配置建议书', info: ''} ,
+	//homePage
+	"/homePage/views/fortuneCollege/fortuneCollegeList.html" :{ evtid: '', topic: '财富学院首页', info: ''} ,
+	"/homePage/views/fortuneCollege/fortuneFlowKnown.html" :{ evtid: '', topic: '财富流向早知道', info: ''} ,
+	"/homePage/views/fortuneCollege/wealthResearch.html" :{ evtid: '', topic: '财富研究', info: ''} ,
+	"/homePage/views/fortuneCollege/fortuneClassroom.html" :{ evtid: '', topic: '财富讲堂', info: ''} ,
+	"/homePage/views/introduction/understandHT.html" :{ evtid: '', topic: '信息披露页面', info: ''} ,
+	"/homePage/views/notice/noticeCenter.html" :{ evtid: '', topic: '消息中心', info: ''} ,
+	"/homePage/views/notice/noticeDetail.html" :{ evtid: '', topic: '消息中心通知详情', info: ''} ,
+	"/homePage/views/notice/systemInforms.html" :{ evtid: '', topic: '消息中心系统通知', info: ''} ,
+	"/homePage/views/starFinancialPlannerList/starFinancialPlannerList.html" :{ evtid: '', topic: '明星理财师', info: ''} ,
 }
 
 
