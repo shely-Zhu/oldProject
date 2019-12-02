@@ -400,6 +400,9 @@ module.exports = function () {
     /*------------------- 公募持仓相关 start ------------------------------*/
     //公募交易记录
     this.transactionRecords_url = go_url.no_url + '/account/views/public/transactionRecords.html';
+
+    //查看已签署材料
+    this.seeSign_url = go_url.no_url + '/account/views/private/seeSign.html';
     //公募持仓记录
     this.publicAssets_url = go_url.no_url + '/account/views/publicAssets.html';
     /*------------------- 公募持仓相关 end ------------------------------*/
@@ -408,7 +411,7 @@ module.exports = function () {
     this.returnsDetail_url = go_url.no_url + '/mine/views/returnsDetail.html';
 
     //现金宝交易记录
-    this.superRecord_url = go_url.no_url + '/account/views/super/superRecord.html';
+    this.superRecord_url = go_url.no_url + '/account/views/public/superRecord.html';
     //财富早知道
     this.fortuneFlowKnown_url = go_url.no_url + '/homePage/views/fortuneCollege/fortuneFlowKnown.html';
     //财富讲堂
