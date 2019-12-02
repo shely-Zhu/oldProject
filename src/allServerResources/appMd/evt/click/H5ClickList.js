@@ -187,6 +187,23 @@ var clickList = {
 	"cashTransformOut_iconfont" : { type:'click', evtid: '', topic: '现金转出-已阅读并同意', info: ''} ,
 	"cashTransformOut_confirmeDemptionPay" : { type:'click', evtid: '', topic: '现金转出-赎回确认 ', info: ''} ,
 	"cashTransformOut_elasticButtons" : { type:'click', evtid: '', topic: '现金转出-其他总资产点击明白了 ', info: ''} ,
+	//homePage--------------------------------------------------------------分割线
+	//fortuneCollegeList.html
+	"banner" : { type:'click', evtid: '', topic: '轮播图图片', info: ''} ,
+	"slider" : { type:'click', evtid: '', topic: '轮播图小圆点', info: ''} ,
+	"fortune_host" : { type:'click', evtid: '', topic: '查看往期热词', info: ''} ,
+	"fortune_video" : { type:'click', evtid: '', topic: '播放往期内容', info: ''} ,
+	"fortune_videoList" : { type:'click', evtid: '', topic: '播放往期内容列表', info: ''} ,
+	"fortune_videoList" : { type:'click', evtid: '', topic: '播放往期内容列表', info: ''} ,
+	"fortune_all" : { type:'click', evtid: '', topic: '财富讲堂全部', info: ''} ,
+	"fortune_allTab" : { type:'click', evtid: '', topic: '财富讲堂tab', info: ''} ,
+	"fortune_allList" : { type:'click', evtid: '', topic: '财富讲堂全部列表', info: ''} ,
+	"fortune_studies" : { type:'click', evtid: '', topic: '财富研究', info: ''} ,
+	"fortune_studiesList" : { type:'click', evtid: '', topic: '财富研究列表', info: ''} ,
+	"fortune_studiesTab" : { type:'click', evtid: '', topic: '财富研究tab', info: ''} ,
+	//fortuneFlowKnown.html
+	"knownItem" : { type:'click', evtid: '', topic: '轮播图图片', info: ''} ,
+	//fortuneClassroom.html
 	
 }
 
