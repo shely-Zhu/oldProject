@@ -54,6 +54,7 @@ $(function () {
                 tradeApplyStatus: '',//(0:失败，1：成功，2：待确认，3：已撤单)
                 timeNode: '',// * 1：近一个月2：近三个月3：近半年4：近1年 5：近3年
                 tradeAcc: '',//交易账号(从银行卡列表取)
+
             }
         },
         //页面初始化函数
@@ -79,7 +80,7 @@ $(function () {
         },
         //初始化mui的上拉加载
         initMui: function (da) {
-            var that = this;
+            var that = this;         
             var height = windowHeight - $(".HeadBarConfigBox").height() - $("#recordSearch").height() - 8;
             if (!$('.list').hasClass('setHeight')) {
                 $('.list').height(height).addClass('setHeight');
@@ -111,9 +112,16 @@ $(function () {
         // 查询交易记录列表
         getRecordsData(t, da) {
             var that = this;
+            var propdata = {}
+            propdata.applyType = da.applyType
+            propdata.tradeApplyStatus = da.tradeApplyStatus
+            propdata.timeNode = da.timeNode
+            propdata.tradeAcc = da.tradeAcc
+            propdata.pageNum = that.gV.pageNum
+            propdata.pageSize = that.gV.pageSize
             var obj = [{
                 url: site_url.tradeList_api,
-                data: da,
+                data: propdata,
                 needDataEmpty: true,
                 callbackDone: function (json) {
                     var data;
@@ -198,7 +206,7 @@ $(function () {
         bankList: function () {
             var that = this;
             var param = {
-                useEnv: 0
+                useEnv: 1
             };
 
             //发送ajax请求
