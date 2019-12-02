@@ -9,9 +9,8 @@
 	<title>系统通知</title>
 </head>
 <body>
-    @@include('@pathCommonViews/load.html')
     @@include('@pathCommonViews/noDataImg.html')
-    @@include('@pathCommonViews/loading/listLoading.html')
+    @@include('@pathCommonCom/loading/listLoading.html')
     <div id="systemInformsBox">
         @@include('@pathCommonViews/headBarConfig.html',{"bgColors":"#2C3E77,#273971","showType":"0","pathName":""}) 
         <div id="systemInformsCon">            
@@ -44,8 +43,6 @@
     </script>
 
 	@@include('@pathInclude/views/footer.html')
-    <!-- 添加埋点 -->
-    @@include('@pathInclude/views/header.html')
     <script src="/homePage/static/js/systemInforms.js"></script>
 </body>
 </html>

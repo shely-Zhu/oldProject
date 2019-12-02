@@ -5,11 +5,11 @@
 
 
 require('@pathIncludJs/base.js');
-require('@pathCommonJs/components/headBarConfig.js');
 require('@pathCommonJs/ajaxLoading.js');
 
 var tipAction = require('@pathCommonJs/components/tipAction.js');
 var generateTemplate = require('@pathCommonJsComBus/generateTemplate.js');
+var splitUrl = require('@pathCommonJs/components/splitUrl.js')();
 
 $(function() {
 	let somePage = {
@@ -24,19 +24,14 @@ $(function() {
 		gV: {
             pageCurrent: 1,
             pageSize: 10,
-			fortuneFlowList: [{
-				imgSrc: "/homePage/static/img/bofang@2x.png",
-				title: "",
-				date: "11.13",
-				content: "聪敏赚钱北向资金逆势买进看好节后？月度净流入再创新高啦啦啦啦啦啦啦啦"
-			}]
+			fortuneFlowList: [],
+            articleBelong : splitUrl['articleBelong'] // 文章类型
 		},
 		//页面初始化函数
 		init: function() {	
 			var that = this;
 			that.initMui(".list", ".contentWrapper")
             that.events()
-			//
 		},
         // 获取财富流向早知道的列表
         getFlowKnownList(t) {
@@ -46,7 +41,7 @@ $(function() {
                 data: {
                     "pageNo": that.gV.pageCurrent, //非必须，默认为1
                     "pageSize": that.gV.pageSize, //非必须，默认为10
-                    "articleBelong": "1"
+                    "articleBelong": that.gV.articleBelong
                 },
                 needDataEmpty: true,
                 callbackDone: function(json) {
@@ -80,14 +75,29 @@ $(function() {
                         // 将消息列表插入到页面上
                         generateTemplate(data, that.$e.fortuneFlowListWrapper, that.$e.fortuneFlowListTemp)
                     }, 200)
-
-                }
+                },
+                callbackNoData:function(){
+                    //没有数据时展示暂无数据
+                    $(".list").hide()
+                    that.$e.noData.show();
+                },
+                callbackFail: function(json) {
+                    tipAction(json.message);
+                    //隐藏loading，调试接口时需要去掉
+                    setTimeout(function() {
+                        that.$e.listLoading.hide();
+                    }, 100);
+                },
             }];
             $.ajaxLoading(obj); 
         },
         dealTime(data) {
             $.each(data, function(a, b) {
-                b.articleTimeStr = b.articleTimeStr.split(" ")[0].split("-")[1] + "." + b.articleTimeStr.split(" ")[0].split("-")[2]
+                if(b.articleTimeStr && b.articleTimeStr!= '') {
+                    b.articleTimeStr = b.articleTimeStr.split(" ")[0].split("-")[1] + "." + b.articleTimeStr.split(" ")[0].split("-")[2]
+                } else {
+                    b.articleTimeStr = ""
+                }
             })
             return data;
         },

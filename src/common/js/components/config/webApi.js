@@ -67,6 +67,8 @@ module.exports = function() {
     this.findInvestorClassification_api = http_url.web_url + '/content/frontend/findInvestorClassification';
     //文件下载
     this.download_api = http_url.web_url + '/content/file/fastDFS/download'; //文件下载
+    //文件下载新
+    this.downloadNew_api = http_url.web_url + '/content/file/fastDFS/downloadNew'; //文件下载
     // 内容管理接口
     this.findContentByCategory_api = http_url.web_url + '/content/frontend/findContentByCategory'; // 内容管理接口
 
@@ -95,6 +97,9 @@ module.exports = function() {
     this.pofTotalAssets_api = http_url.web_url + '/account/pof/totalAssets'; // 公募总资产
     this.fundNetWorthList_api = http_url.web_url + '/pof/fundDetails/frontend/fundNetWorthList'; //历史明细
     this.queryIncomeList_api = http_url.web_url + '/account/pof/queryIncomeList'; //收益明细
+    this.cashQueryIncomeList_api = http_url.web_url + '/account/pof/cash/queryIncomeList'; //超宝收益明细
+
+
     // 前缀
     const pre = http_url.web_url + '/pof/'
     const buyFundPre = pre + 'buyFund/'
@@ -290,7 +295,7 @@ module.exports = function() {
     this.sendMailForConfirmBill_api = http_url.web_url + '/account/positions/sendMailForConfirmBill'; //下载pdf
 
 
-    /*------------------- 基金确认书 end ------------------------------*/
+    /*------------------- 月度报告 end ------------------------------*/
 
     /*------------------- 私募理财fang——le start ------------------------------*/
     this.protocolList_api = http_url.web_url + '/pof/fixedInvestment/protocol/list'; //金服WEB-定投交易- 我的定投协议列表
@@ -334,7 +339,7 @@ module.exports = function() {
 
     /*------------------- 私募理财fang——le end ------------------------------*/
     /*------------------- 财富学院 start ------------------------------*/
-    this.queryBanner_api = http_url.web_url + '/account/home/frontend/queryBanner'; //首页banner
+    this.queryFortuneBanner_api = http_url.web_url + '/account/home/frontend/queryFortuneBanner'; //首页banner
     this.queryFortuneCollegeFir_api = http_url.web_url + '/account/home/frontend/queryFortuneCollegeFir'; //财富翻译官/早知道
 
     this.getFortuneTabInfo_api = http_url.web_url + '/account/home/frontend/getFortuneTabInfo'; // 财富讲堂/财富研究 页签查询
@@ -345,16 +350,19 @@ module.exports = function() {
     this.queryFortuneCollegeSec_api = http_url.web_url + '/account/home/frontend/queryFortuneCollegeSec'; //财富讲堂/财富研究
     this.queryFortuneArticleList_api = http_url.web_url + '/account/home/frontend/queryFortuneArticleList'; //财富文章列表
 
-     //查询已签署活动
-     this.gquerySignedContract_api = http_url.web_url + '/pef/querySignedContract';
-
     /*------------------------------------ 私募接口文档 start -------------------------------------*/
     // 产品详情接口
     this.queryFundDetailV2_api = http_url.web_url + '/pef/queryFundDetailV2';
     // 查询产品募集信息
     this.getRaiseInfo_api = http_url.web_url + '/pef/getRaiseInfo';
-
+    // 根据标签号查询产品材料
+    this.queryReourceListByLabel_api = http_url.web_url + '/pef/queryReourceListByLabel';
+    // 查询产品亮点
+    this.queryProductImage_api = http_url.web_url + '/pef/queryProductImage';
 
 
     /*------------------------------------ 私募接口文档 end -------------------------------------*/
+
+    // 查看已签署文档
+    this.querySignedContract_api = http_url.web_url + '/pef/querySignedContract';
 };

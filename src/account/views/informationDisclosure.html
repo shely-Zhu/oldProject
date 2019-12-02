@@ -11,9 +11,8 @@
 	   <title>信息披露</title> 
  </head>
  <body>
-	<!-- @@include('@pathCommonViews/load.html')  -->
 	 <!-- 加载中loading -->
-	<!-- @@include('@pathCommonViews/loading/listLoading.html') -->
+	@@include('@pathCommonCom/loading/listLoading.html')
  
 	 <!-- 暂无数据 -->
 	@@include('@pathCommonViews/noData.html')
@@ -78,11 +77,6 @@
 			 {{/if}}
 		 {{/each}}
 	 </script>
-	   <!-- <script src="/include/js/vendor/zepto/zepto.js"></script>
-	   <script src="/include/js/vendor/root.js"></script>
-	   <script src="/include/js/vendor/handlebar/handlebars.js"></script>
-	   <script src="/include/js/vendor/mui/mui.min.js"></script> -->
 	   @@include('@pathInclude/views/footer.html')  
-
 		 <script src="/account/static/js/informationDisclosure.js"></script>
  </body>

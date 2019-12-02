@@ -21,7 +21,7 @@
             <!-- 放置页面内容 -->
         </div>
         <!-- 加载中loading -->
-        @@include('@pathCommonViews/loading/listLoading.html')
+        @@include('@pathCommonCom/loading/listLoading.html')
         <!-- 暂无数据 -->
         @@include('@pathCommonViews/noDataImg.html',{"tipText":"暂无数据"})
     </div>
@@ -58,8 +58,7 @@
 
         {{/each}}
     </script>
-    <!-- 添加埋点 -->
-    @@include('@pathInclude/views/header.html') @@include('@pathInclude/views/footer.html')
+    @@include('@pathInclude/views/footer.html')
     <script src="/homePage/static/js/wealthResearch.js"></script>
 
 

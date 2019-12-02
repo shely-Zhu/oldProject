@@ -2,19 +2,14 @@
 // @author yanruiting 2019-11-26 
 
 require('@pathIncludJs/base.js');
-
 require('@pathCommonJsCom/utils.js');
 //ajax调用
 require('@pathCommonJs/ajaxLoading.js');
-
 // 切换
 require('@pathCommonJsCom/tabScroll.js');
 require('@pathCommonJsCom/goTopMui.js');
-
-require('@pathCommonJs/components/headBarConfig.js');
 //黑色提示条的显示和隐藏
 var tipAction = require('@pathCommonJsCom/tipAction.js');
-
 
 $(function() {
     var data = {
@@ -159,7 +154,21 @@ $(function() {
                     that.beforeFunc();
                     //初始化第一屏区域的上拉加载
                     that.initMui($('#scroll1'));
-                }
+                },
+                callbackNoData:function(){
+                    //没有数据时展示暂无数据
+                    /*$(".list").hide()
+                    $(".title").hide()*/
+                    //that.getElements.listLoading.hide();
+                    that.getElements.noData.show();
+                },
+                callbackFail: function(json) {
+                    tipAction(json.message);
+                    //隐藏loading，调试接口时需要去掉
+                    setTimeout(function() {
+                        that.$e.listLoading.hide();
+                    }, 100);
+                },
             }];
             $.ajaxLoading(obj);
         },

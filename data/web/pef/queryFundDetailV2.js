@@ -67,6 +67,11 @@ var data = Mock.mock({
         "customerRiskLevelDesc": "" ,  //客户风险等级描述 (支持多个 ‘,’隔开 1:保守型;2:稳健型;3:平衡型;4:成长型;5:进取型)
         "redemptionOpenFrequency": "",  // 赎回开放频率
         "surplusLevel": "",  //剩余额度
+        "customerType":"1",   // 客户类型（允许购买客户类型 1.个人 0.机构 ）
+        "incomeModeJF":"2",  //收益分配方式金服（0固收 1浮收普通 2浮收稳裕）
+        "investArea":"投资领域",   // 投资领域
+        "setupDate": "成立日期",   //成立日期yyyy/MM/dd
+        "investWay": "投资方式",   //投资方式
 
 	}	
 });

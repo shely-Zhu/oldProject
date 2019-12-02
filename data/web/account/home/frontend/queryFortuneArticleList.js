@@ -5,6 +5,8 @@
 // 使用 Mock
 var Mock = require('mockjs');
 
+var noData = Mock.mock({"data":"","message":"操作成功,数据为空","status":"1000"})
+
 var liveData=Mock.mock({
     "data": {
         "pageNum": 1,
@@ -110,6 +112,12 @@ var knownData=Mock.mock({
 });
 
 module.exports = [
+    {
+        params: {
+            'articleBelong' : '1'   //要在左边的对比参数上加[]，不然比对不上 稳金
+        },
+        response: liveData
+    },
     {
         params: {
             'articleBelong' : '2'   //要在左边的对比参数上加[]，不然比对不上 稳金

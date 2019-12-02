@@ -5,6 +5,8 @@
 // 使用 Mock
 var Mock = require('mockjs');
 
+var noData = Mock.mock({"data":"","message":"操作成功,数据为空","status":"1000"})
+
 var researchData = Mock.mock({
     code: "", //错误码     
     status: "0000",

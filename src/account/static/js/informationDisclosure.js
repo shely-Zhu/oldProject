@@ -6,7 +6,6 @@
 require('@pathIncludJs/base.js');
 
 require('@pathCommonJs/ajaxLoading.js');
-require('@pathCommonJs/components/headBarConfig.js');
 require('@pathCommonJsCom/tabScroll.js');
 require('@pathCommonJsCom/goTopMui.js');
 //黑色提示条的显示和隐藏
@@ -178,10 +177,10 @@ var prvMar = {
                     el.marName = el.fileName.substring(el.fileName.indexOf("】") + 1);
                     if (el.fileName.indexOf(".pdf") != -1) {
                         el.line = true; //线上可预览
-                        el.href = site_url.download_api + "?filePath=" + el.fileUrl + "&fileName=" + new Base64().encode(el.fileName) + "&groupName=" + el.groupName + "&show=1";
+                        el.href = site_url.downloadNew_api + "?filePath=" + el.fileUrl + "&fileName=" + new Base64().encode(el.fileName) + "&groupName=" + el.groupName + "&show=1";
                     } else {
                         el.line = false; //需下载
-                        el.href = site_url.download_api + "?filePath=" + el.fileUrl + "&fileName=" + new Base64().encode(el.fileName) + "&groupName=" + el.groupName;
+                        el.href = site_url.downloadNew_api + "?filePath=" + el.fileUrl + "&fileName=" + new Base64().encode(el.fileName) + "&groupName=" + el.groupName;
                     }
                 })
 
@@ -224,15 +223,21 @@ var prvMar = {
     getFileType: function() { //获取标签编号
         var that = this;
         that.status.current_label = that.getElements.midContent.find('.nav-wrapper .mui-control-item.mui-active').attr('code');
-        return that.setting.ajaxParamList[that.status.current_label];
+        return that.setting.ajaxParamList[that.status.current_label];  
     },
     events: function() {
         mui("body").on("tap", ".mui-box", function() {
-            if(window.currentIsApp){
-                window.location.href = $(this).attr("href");
-            }else{
-                window.open($(this).attr("href"));
-            }
+            // if(window.currentIsApp){
+            //     window.location.href = $(this).attr("href");
+            // }else{
+            //     window.open($(this).attr("href"));
+            // }
+            // debugger
+            var src=$(this).attr("href")
+            var form = document.createElement('form');
+            form.action = src;
+            document.getElementsByTagName('body')[0].appendChild(form);
+            form.submit();
         })
     }
 }
