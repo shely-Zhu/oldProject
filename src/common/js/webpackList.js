@@ -230,7 +230,7 @@ module.exports = {
     './mine/static/js/memberClub/activityList': "./src/mine/static/js/memberClub/activityList.js",
     //会员俱乐部-暂无数据mine
     './mine/static/js/memberClub/activityNoList': "./src/mine/static/js/memberClub/activityNoList.js",
-    //mui索引列表插件 
+    //mui索引列表插件
     './mine/static/js/memberClub/mui.indexedlist': "./src/mine/static/js/memberClub/mui.indexedlist.js",
     //活动详情
     './mine/static/js/memberClub/activityDetails': "./src/mine/static/js/memberClub/activityDetails.js",
@@ -270,6 +270,7 @@ module.exports = {
     './homePage/static/js/noticeDetail': './src/homePage/static/js/noticeDetail.js',
     //include---富文本模板
     './include/js/modelPage/articleTemplate': './src/include/js/modelPage/articleTemplate.js',
+    './include/js/modelPage/audio': './src/include/js/modelPage/audio.js',
     // 了解恒天
     './homePage/static/js/understandHT': './src/homePage/static/js/understandHT.js',
 
@@ -343,7 +344,7 @@ module.exports = {
     // 交易规则
     './financial/static/js/publicPlacement/transactionRules' : './src/financial/static/js/publicPlacement/transactionRules.js',
 
-    
+
     // 私募产品详情页
     './financial/static/js/privatePlacement/privatePlacementDetail' : './src/financial/static/js/privatePlacement/privatePlacementDetail.js'
 
