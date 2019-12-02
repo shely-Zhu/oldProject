@@ -158,7 +158,7 @@ $(function(){
 
                 }else if(that.recomTypes == "5"){//私募产品列表
 
-                    //window.location.href = site_url.privatePlacementDetail_url;
+                    $('body').append('<iframe src="appHref://privateList" style="position:absolute;z-index:1000;height:0;width:0;"></iframe>');
 
                 }else if(that.recomTypes == "6"){
 
