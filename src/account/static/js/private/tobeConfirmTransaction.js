@@ -11,6 +11,8 @@ require('@pathCommonBase/base.js');
 //ajax调用
 require('@pathCommonJs/ajaxLoading.js');
 
+require('@pathCommonCom/elasticLayer/elasticLayer/elasticLayer.js');
+
 //下拉加载更多
 // require('@pathCommonJs/scrollFullPage.js');
 // 切换
@@ -173,6 +175,9 @@ $(function() {
             $.ajaxLoading(obj);
         },
         openTipCon: function(type, content, id) {
+
+            //弹层
+            
             $('#tipCon .tipCon').html(content);
             $('.mask').show();
             $('#tipCon').show();
@@ -254,10 +259,11 @@ $(function() {
                 //功能按钮
             mui("body").on('tap', '.toDetail', function(e) {
                 var type = $(this).attr('type');
+                var id = $(this).attr('reserveId');
                 if (type == 'toCertif') { //去合格投资者认证
 
                 } else if (type == 'toSign') { //去签合同
-
+                    window.location.href = site_url.seeSign_url + '?reserveId=' + id;
                 } else if (type == 'toSee') { //查看合同
 
                 } else if (type == 'toUploadM') { //去上传汇款凭证

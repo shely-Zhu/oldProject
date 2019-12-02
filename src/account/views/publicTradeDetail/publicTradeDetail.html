@@ -14,7 +14,7 @@
 
 <div>
     @@include('@pathCommonViews/headBarConfig.html',{"pathName":"交易记录","bgColors":"#475A95,#475A95","showType":"0"})
-    <div class="cancel_order">
+    <div class="cancel_order hide">
         撤单
     </div>
     <section class="container">
@@ -245,9 +245,7 @@
                 <span class="iconfont fr">&#xe636;</span>
             </div>
         </div>
-        <footer class="hide">
-            再买一笔
-        </footer>
+        <footer class="hide blueBgButton">再买一笔</footer>
 
         <!-- 加载中loading -->
         @@include('@pathCommonCom/loading/listLoading.html')
