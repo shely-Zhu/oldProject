@@ -96,8 +96,6 @@ $(function() {
 		events: function() {
 			let that = this;
 			mui('body').on("tap",".type_one",function(e){
-				console.log(that.gV.publicFundDetail.tradeNo)
-				console.log(that.gV.publicFundDetail.fundCode)
 				var autoBuy =$(this).attr("data-autoBuy")
 				if($(this).attr("data-checkFlag")!= "1"){
 					$.elasticLayer({

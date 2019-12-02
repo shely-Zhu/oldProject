@@ -370,7 +370,7 @@ module.exports = {
     // 财富学院早知道
     './homePage/static/js/fortuneFlowKnown': './src/homePage/static/js/fortuneFlowKnown.js',
     // 财富讲堂
-    './homePage/static/js/fortuneClassroom' : './src/homePage/static/js/fortuneClassroom.js',
+    './homePage/static/js/fortuneClassroom': './src/homePage/static/js/fortuneClassroom.js',
     //历史明细
     './mine/static/js/historyDetail': "./src/mine/static/js/historyDetail.js",
     //收益明细
@@ -378,4 +378,6 @@ module.exports = {
 
     // 私募交易规则
     './account/static/js/private/transactionRules': "./src/account/static/js/private/transactionRules.js",
+    //私募详情列表页
+    './account/static/js/private/privateDetailList': "./src/account/static/js/private/privateDetailList.js",
 }

@@ -20,7 +20,8 @@ $(function(){
             activityListDataBox:$('.activityListDataBox'),//有数据盒子
             activityListDataNoBox:$('.activityListDataNoBox'),//没有数据盒子
             //插入列表模板ID
-            starFinancialPlannerListTemplateId:$('#starFinancialPlannerList-template')
+            starFinancialPlannerListTemplateId:$('#starFinancialPlannerList-template'),
+            listLoading: $('.listLoading'), //所有数据区域，第一次加载的loading结构
         },
         gV: { // 全局变量
             groupCode: splitUrl['groupCode'], // 组合编号，从我的持仓进
@@ -81,6 +82,7 @@ $(function(){
         //有数据获取列表
         getData: function(t) {
             var that = this;
+            that.$e.listLoading.show();
             var obj = [{ // 系统调仓记录列表
                 url: site_url.queryFinancialer_api,
                 // url:'http://172.16.187.164:8081/web/marketing/activity/getActivitiesList',
@@ -120,6 +122,7 @@ $(function(){
                         
                         // 将列表插入到页面上
                         generateTemplate(data,that.$e.recordList,that.$e.starFinancialPlannerListTemplateId)
+                        that.$e.listLoading.hide();
                         
                     }, 200)
 
@@ -128,7 +131,7 @@ $(function(){
                     
                 },
                 callbackNoData: function(json){
-                    
+                    that.$e.listLoading.hide();
                 }
             }];
             $.ajaxLoading(obj);

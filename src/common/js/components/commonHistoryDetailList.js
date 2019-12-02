@@ -141,6 +141,19 @@ module.exports = function(url){
                     }, 200)
 
                 },
+                callbackNoData:function(){
+                    //没有数据时展示暂无数据
+                            $(".list").hide()
+                            $(".title").hide()
+                            that.$e.noData.show();
+                },
+                callbackFail: function(json) {
+                    tipAction(json.message);
+                    //隐藏loading，调试接口时需要去掉
+                       setTimeout(function() {
+                        that.$e.listLoading.hide();
+                    }, 100);
+                },
 
             }];
             $.ajaxLoading(obj);
