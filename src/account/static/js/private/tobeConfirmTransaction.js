@@ -13,13 +13,13 @@ require('@pathCommonJs/ajaxLoading.js');
 
 require('@pathCommonCom/elasticLayer/elasticLayer/elasticLayer.js');
 
+                
+ 
 //下拉加载更多
 // require('@pathCommonJs/scrollFullPage.js');
 // 切换
 
 require('@pathCommonJsCom/goTopMui.js');
-
-
 
 //黑色提示条的显示和隐藏
 var splitUrl = require('@pathCommonJs/components/splitUrl.js')();
@@ -176,22 +176,25 @@ $(function() {
         },
         openTipCon: function(type, content, id) {
 
+            
+
+
             //弹层
             
-            $('#tipCon .tipCon').html(content);
-            $('.mask').show();
-            $('#tipCon').show();
-            //点击确定
-            mui("body").on('tap', '.tipContainer .todo', function(e) {
-                if (type == 'assign') {
-                    //转让方法
+            // $('#tipCon .tipCon').html(content);
+            // $('.mask').show();
+            // $('#tipCon').show();
+            // //点击确定
+            // mui("body").on('tap', '.tipContainer .todo', function(e) {
+            //     if (type == 'assign') {
+            //         //转让方法
 
-                } else if (type == 'assignee') {
-                    //受让方法
-                }
-                $('.mask').hide();
-                $('#tipCon').hide();
-            })
+            //     } else if (type == 'assignee') {
+            //         //受让方法
+            //     }
+            //     $('.mask').hide();
+            //     $('#tipCon').hide();
+            // })
 
         },
         openTipConOne: function(content) {
@@ -230,9 +233,23 @@ $(function() {
                     var type = $(this).attr('data-type');
                     var id = $(this).attr('data-id');
                     if (type == 'assign') { //转让
-                        that.openTipCon('assign', '您确定要取消转让申请吗？', id);
+                        var obj={
+                            // title: '标题',
+                            p:'<p>您确定要取消转让申请吗？</p>',
+                            yesTxt:'确认',
+                            hideCelButton: true,
+                            zIndex: 100,
+                            callback:function(t){
+                                
+                            },      
+                        };
+                        $.elasticLayer(obj)
+
+                        // that.openTipCon('assign', '您确定要取消转让申请吗？', id);
+
                     } else if (type == 'assignee')
                         that.openTipCon('assign', '您确定要取消受让申请吗？', id);
+
                 })
                 //点击取消
             mui("body").on('tap', '.tipContainer .cancel', function(e) {
