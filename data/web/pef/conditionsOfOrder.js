@@ -12,7 +12,7 @@ var Mock = require('mockjs');
 //  ========== 
 var data=Mock.mock({
 	"hmac": "hmac", 
-	"status": "0", 
+	"status": "0000", 
 	"code": "CS0000", 
 	"message": "处理成功！", 
 	"data":[  
@@ -26,14 +26,14 @@ var data=Mock.mock({
 		},{
 		"conditionType": "1",//条件码（单位：万）
 		"show": "1",//下限金额0否1是
-		"statusDesc": "未实名",//状态描述
+		"statusDesc": "风测已过期",//状态描述
 		"isSatisfied": "1",//是否满足
 		"conditionJump": "",//相关跳转
 		"isPopup": "0",//是否弹框（普通投资者买私募产品售前告知书）
 		},{
 		"conditionType": "1",//条件码（单位：万）
 		"show": "1",//下限金额0否1是
-		"statusDesc": "未实名",//状态描述
+		"statusDesc": "信息未完善",//状态描述
 		"isSatisfied": "1",//是否满足
 		"conditionJump": "",//相关跳转
 		"isPopup": "0",//是否弹框（普通投资者买私募产品售前告知书）
