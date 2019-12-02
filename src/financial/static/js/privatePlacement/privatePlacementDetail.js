@@ -1,5 +1,5 @@
 //  私募基金产品详情
-//  @author zhangyanping 2019-11-25
+//  @author zhangyanping 2019-11-25 tian
 
 require('@pathIncludJs/base.js');
 
@@ -7,6 +7,8 @@ require('@pathIncludJs/base.js');
 require('@pathCommonJs/ajaxLoading.js');
 
 require('@pathCommonJsCom/headBarConfig.js');
+
+require('@pathCommonJs/components/authenticationProcess.js');
 
 var splitUrl = require('@pathCommonJs/components/splitUrl.js')();
 var tipAction = require('@pathCommonJs/components/tipAction.js');
@@ -17,7 +19,7 @@ $(function(){
 		//获取页面元素
 		$e:{
 			projectId:splitUrl['projectId'],
-			adjustmentTemp: $('#wrap-template'), // 最新调仓模板
+		adjustmentTemp: $('#wrap-template'), // 最新调仓模板
 			lineType:'',
 		},
 		getElements : {
@@ -27,12 +29,9 @@ $(function(){
 			openingBank : $("#openingBank"),  //开户行
 			topc      : $('#topc'),       //提示信息
 		},
-		setting: { //一些设置
-			navAllList: ['风险揭示书', '产品信息', '管理报告', '资金分配', '重要公告及通知', '恒天简报'],
-			ajaxParamList: ['19,20,10,22', '1', '12,13,28,14', '30', '16,17,31,32,29', '33,34,35,36,37'], // 请求参数
-			navList: [], //导航
-		},
 		data:{
+			custType:"",//客户类型
+			fundDetailObj:"",//详情接口拿到的对象
 			qrnhWfsy: {
 				oneMonth : {},
 				threeMonth: {},
@@ -67,6 +66,7 @@ $(function(){
 				needLogin: true,
 				callbackDone: function(json) {
 					var jsonData = json.data;
+					that.data.fundDetailObj = jsonData;
 					var projectLableHtml,projectLableHtmlList;
 					// 根据收益分配方式区分 0固收 1浮收普通 2浮收稳裕 
 					if(jsonData.incomeModeJF == '0'){
@@ -90,6 +90,9 @@ $(function(){
 					}
 					else if(jsonData.incomeModeJF == '2'){  //2浮收稳裕   展示七日年化
 						that.$e.lineType = 'qrnh';
+						// $('.lineWrap .wfsy').addClass('hide');
+						// $('.lineWrap .qrnh').removeClass('hide');
+						
 						$("#qrnhLine").addClass("hide");
 						$("#wfsyLine").removeClass("hide");
 						// 折线图
@@ -167,7 +170,23 @@ $(function(){
 					// 立即预约上的认购申购费率
 					$('.buyRate span').html(jsonData.buyRate);
 				},
-			}];
+			},{
+                    url: site_url.user_api,
+                    data: {
+                        hmac: "", //预留的加密信息     
+                        params: {
+                            //uuid: sessionStorage.getItem('uuid') //'EE7CA9386715CBF3BAB30CD479697D72' //sessionStorage.getItem('uuid') //客户Id,打开登录页面链接带过来的参数uuid
+                        }
+                    },
+                    needLogin: true,
+                    // async: false, //同步
+                    needDataEmpty: false, //需要判断data是否为空
+                    callbackDone: function(json) {
+                        var jsonData = json.data;
+                        that.data.custType = jsonData.accountType; // 客户类型【0.机构 1.个人】 
+
+                    },
+                }];
 			$.ajaxLoading(obj);
 
 		},
@@ -550,10 +569,10 @@ $(function(){
 			$.each(data, function(i, el) {
 				if (el.fileName.indexOf(".pdf") != -1) {
 					el.line = true; //线上可预览
-					el.href = site_url.download_api + "?filePath=" + el.fileUrl + "&fileName=" + new Base64().encode(el.fileName) + "&groupName=" + el.groupName + "&show=1";
+					el.href = site_url.downloadNew_api + "?filePath=" + el.fileUrl + "&fileName=" + new Base64().encode(el.fileName) + "&groupName=" + el.groupName + "&show=1";
 				} else {
 					el.line = false; //需下载
-					el.href = site_url.download_api + "?filePath=" + el.fileUrl + "&fileName=" + new Base64().encode(el.fileName) + "&groupName=" + el.groupName;
+					el.href = site_url.downloadNew_api + "?filePath=" + el.fileUrl + "&fileName=" + new Base64().encode(el.fileName) + "&groupName=" + el.groupName;
 				}
 			})
 			return data;
@@ -565,6 +584,10 @@ $(function(){
 			mui("body").on('tap', '.tabs>li' , function(){
 				$(this).addClass('active').siblings().removeClass('active');
 				$(".wrap>.panel").eq($(this).index()).addClass('active').siblings().removeClass('active');
+			});
+			//点击一键预约逻辑
+			mui("body").on('tap', '.tips-btn' , function(){
+				
 			});
 			//折线图点击月份请求数据
 			mui("body").on('tap', '.lineWrap .time', function() {
@@ -595,7 +618,35 @@ $(function(){
 
 			// 立即预约
 			mui("body").on('tap', '.buyButton' , function(){
-				window.location.href = '/financial/views/privatePlacement/electronicContract/orderLimit.html'
+				if(that.data.fundDetailObj.isElecContract == "1"){//电子合同逻辑
+					if(that.data.fundDetailObj.isAllowAppend == "1"){//追加商品参数fundCode,
+						//跳转到追加商品链接
+						if(that.data.custType == "1"){//客户类型【0.机构 1.个人】 
+							//跳转到电子合同追加页面
+							window.location.href = "/financial/views/privatePlacement/electronicContract/orderLimit.html?fundCode=" + that.$e.projectId + "&isAllowAppend="
+							+ that.data.fundDetailObj.isAllowAppend;
+						}else{
+							//弹框提示不支持在线追加弹框提示
+						}
+					}else{//预约
+						//跳转到预约产品链接
+						if(that.data.custType == "1"){//客户类型【0.机构 1.个人】 
+							//跳转到电子合同预约页面
+							window.location.href = "/financial/views/privatePlacement/electronicContract/orderLimit.html?fundCode=" + that.$e.projectId + "&isAllowAppend="
+							+ that.data.fundDetailObj.isAllowAppend;
+						}else{
+							//跳转到普通预约
+							window.location.href = "/financial/views/privatePlacement/ordinaryProducts/registration.html" + that.$e.projectId + "&isAllowAppend="
+							+ that.data.fundDetailObj.isAllowAppend;
+							
+						}
+					}
+				}else{//非电子合同
+					
+					window.location.href = "/financial/views/privatePlacement/ordinaryProducts/registration.html" + that.$e.projectId + "&isAllowAppend="
+							+ that.data.fundDetailObj.isAllowAppend;
+					
+				}
 			});
 		},
 	};
