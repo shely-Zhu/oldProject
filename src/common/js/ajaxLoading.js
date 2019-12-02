@@ -202,7 +202,7 @@ var splitUrl = require('./components/splitUrl.js')();
 
                         } else { //未登录，需要跳转
 
-                            //微信判断登录状态
+                            //微信判断登录状态 
                             if (data.code == 'WF0010') {
                                 tipAction(data.message, function() {
                                     //跳转到微信授权登陆页

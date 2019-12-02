@@ -88,6 +88,7 @@
         <div class="active ">修改</div>
         <div class="active ">续保</div> -->
     </div>
+    @@include('@pathCommonViews/payPassword.html')
     @@include('@pathInclude/views/footer.html')
     <!-- 添加埋点 -->
     @@include('@pathInclude/views/header.html')
@@ -95,7 +96,7 @@
 </body>
 <script id="dataLists" type="text/x-handlebars-template">
 {{#if tradeRecordStutas}}
-    {{#each this}}
+    {{#each tradeRecord}}
     {{#if status}}
     <div>
         <span>{{tradeTime}}</span>
@@ -112,9 +113,9 @@
     </div>
     {{/if}}
     {{/each}}
-    {{else}}
+{{else}}
     <p class="no-data">暂无数据</p>
-    {{/if}}
+{{/if}}
 </script>
 
 </html>

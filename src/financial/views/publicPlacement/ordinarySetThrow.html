@@ -1,141 +1,158 @@
 <!-- /**  
- * @Page:  普通基金产品详情页_定投
- * @Author: caoqihai  
- * @Date:   2019-11-23
+ * @Page:  现金管理 - 转入
+ * @Author: yangjinlai  
+ * @Date:   2019-11-25
  * 
  */ -->
 
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-    @@include('@pathInclude/views/meta.html')
-    <link rel="stylesheet" href="/financial/static/css/publicPlacement/ordinarySetThrow.css">
-    <title>普通基金产品详情页_定投</title>
-</head>
-
-<body>
-    <!-- @@include('../../common/views/load.html') -->
-
-    <section class="container">
-        @@include('@pathCommonViews/headBarConfig.html',{"pathName":"定投"})
-        <div class="br"></div>
-        <div class="title">
-            <span class="fundName"></span>
-            <span class="fundCode"></span>
-        </div>
-        <div class="money">
-            <div class="mfirst">
-                <div class="mfirst-one">定投金额</div>
-                <div class="mfirst-two">
-                    <span>交易规则</span>
-                    <a class="iconfont iconone"  href="javascript:;">&#xe67d;</a>
+ <!DOCTYPE html>
+ <html lang="en">
+ 
+ <head>
+     @@include('@pathInclude/views/meta.html')
+     <link rel="stylesheet" href="/financial/static/css/publicPlacement/ordinarySetThrow.css">
+     <title>定投</title>
+ </head>
+ 
+ <body>
+     @@include('@pathCommonViews/load.html')
+     <section class="container">
+         @@include('@pathCommonViews/headBarConfig.html',{"pathName":"定投"})
+         <div class="br"></div>
+         <div class="title">
+             <span class="fundName"></span>
+             &nbsp;
+             <span class="fundCode"></span>
+         </div>
+         <div class="money">
+             <div class="mfirst">
+                 <div class="mfirst-one">定投金额</div>
+                 <div class="mfirst-two">
+                    <span>交易规则</span> 
+                    <a href="javaScript:;" class="iconfont iconone goRule" href="javascript:;">&#xe67d;</a>
                 </div>
-            </div>
-            <div class="msecond">
-                <div class="msecond-one">￥
-                    <input type="text" placeholder="1000">
-                </div>
-                <a class="iconfont iconclose"  href="javascript:;">&#xe607;</a>
-            </div>
-            <div class="pay">费用估算: 0.00元(0.00%)</div>
-        </div>
-        <div class="online">
-            <div class="onleft">在线支付</div>
-            <div class="onright" id="bank">
-                <div class="onright-left">
-                    <div class="onright-left-one">
-                        <img class="bankThumbnailUrl" src="" alt="">
-                        <i class="bankName"></i>
-                        <span class=" bankNo"></span>
-                    </div>
-                    <div class="onright-left-two">单笔限额5万，单日限额10万</div>
-                </div>
-                <a class="iconfont iconone"  href="javascript:;">&#xe67d;</a>
-            </div>
-        </div>
-        <div class="time">
+             </div>
+             <div class="msecond">
+                 <span class="msecond-one">￥</span>
+                 <input class="transformInput" id="transformInput" type="number">
+                 <img src="/financial/static/img/icon_delete@2x.png" class="deleteNum" alt="">
+              </div>
+              <div class="pay">
+                 <p class="CostEstimate">费用估算：<span class="num">-</span></p>
+              </div>
+          </div>
+         <div class="onlinepay paymoney" pay-type="0">
+             <div class="ff">在线支付</div>
+             <div class="paymoney-right">
+                 <div class="onright-left">
+                 </div>
+                 <a class="iconfont iconone"  href="javascript:;">&#xe67d;</a>
+             </div>
+         </div>
+
+         <div class="time">
             <div class="dtzq">定投周期</div>
             <div class="tim" id="starttime">
-                <span class="fixedPeriodMask" id="cycle">每月1日</span>
-                <a class="iconfont iconone" href="javascript:;">&#xe67d;</a>
+                <span class="fixedPeriodMask" id="cycle">每月 1日</span>
+                <a class="iconfont iconone" href="javascript:;">&#xe67d;</a>
             </div>
         </div>
-        <div class="p1 nextFixrequestDateMask">
-
+        <div class="p1 deductDay">
+            <p>下次扣款日期<span class="next-cut-payment"></span>日，遇非交易日顺延至下一交易日</p>
         </div>
-        <div class="p2">
-            <img src="/financial/static/img/sign up_icon_checkbox_normal@2x.png" alt="">
-            <!-- <div>如有内容占位，此处显示内容此处显示内容此处显示内容<span>《xxxx》</span>和<span>《xxxxxx》</span></div>
-            <div>如有内容占位，此处显示内容此处显示内容此处显示内容<span>《xxxx》</span>和<span>《xxxxxx》</span></div> -->
-            <div>如有内容占位，此处显示内容此处显示内容此处显示内容
-                <a href="" class="contract"></a>
-                和
-                <a href="" class="recruiting"></a>
-            </div>
+         <script id="bankListCheck-template" type="text/x-handlebars-template">
+             {{#each this}}
+             <div class="onright-left-one">
+                 <img src="{{bankThumbnailUrl}}" alt="">
+                 <i>{{bankName}}</i>
+                 <span>{{bankNo}}</span>
+             </div>
+             <div class="onright-left-two">单笔限额{{singleNum}}，单日限额{{oneDayNum}}</div>
+             {{/each}}
+         </script>
+         <div class="p2">
+             <div>
+                 <span class="file">
+                     <a href="javascript:;" class="item2"><span class="iconfont">&#xe668;</span><span>已阅读并同意</span></a>
+                     <a href="/include/views/agreementModel.html?id=47">《公募基金风险揭示及售前告知书》</a>、
+                     <a class="contract" href="javascript:;">《基金合同》</a>、
+                     <a class="recruiting" href="javascript:;">《招募说明书》</a>
+                 </span>
+                 
+             </div>
+         </div>
+        <div class="btn_box">
+             <button class="btn" type="button" disabled>
+                     确定
+             </button>
+             
         </div>
-        <div class="btn">
-            确定
-        </div>
-        <div class="bottom">
-            如有文字占位： 此处按需求添加文字说明此处按照需求添加文字说明此处按照需求添加文字说明此处按照需求添加文字说明
-        </div>
-
-        <!-- 银行卡弹窗 -->
-        <div class="popup">
-            <div class="popup-mask"></div>
-            <div class="popup-content">
-                <div class="popup-title">
-                    <!-- <div class="popup-close"> -->
-                    <a class="iconfont iconpopup-close"  href="javascript:;">&#xe60c;</a>
-                    <!-- </div> -->
-                    <div class="tit">选择在线支付银行卡</div>
+         
+     </section>
+ 
+     <!-- 银行卡弹窗 -->
+     <div class="popup">
+         <div class="popup-mask"></div>
+         <div class="popup-content">
+             <div class="popup-title">
+                 <!-- <div class="popup-close"> -->
+                 <img class="popup-close" src="/financial/static/img/Nav Bar_icon_close_black@2x.png" alt="">
+                 <!-- </div> -->
+                 <div class="tit">选择在线支付银行卡</div>
+             </div>
+             <ul class="popup-ul">
+ 
+             </ul>
+             <script id="bankList-template" type="text/x-handlebars-template">
+                 {{#each this}}
+                 <li class="popup-li bank-li" useEnv="{{useEnv}}" capitalMode="{{capitalMode}}" bankThumbnailUrl="{{bankThumbnailUrl}}" tradeAcco="{{tradeAcco}}" bankName="{{bankName}}" bankNo="{{bankNo}}" singleNum="{{singleNum}}"
+                  oneDayNum="{{oneDayNum}}" bankAccount="{{bankAccount}}" bankAccountMask="{{bankAccountMask}}">
+                     <img class="bank-img" src="{{bankThumbnailUrl}}" alt="">
+                     <div class="div">
+                         <div class="bank-name">{{bankName}}({{bankNo}})</div>
+                         <div class="bank-pay">单笔限额{{singleNum}}，单日限额{{oneDayNum}}</div>
+                     </div>
+                     <img class="true" src="/financial/static/img/account_icon_check@2x.png" alt="">
+                 </li>
+                 {{/each}}
+                 <li class="popup-last">
+                     <img class="last-img" src="/financial/static/img/account_icon_bank logo@2x.png" alt="">
+                     <div class="last-title">
+                         添加银行卡付款
+                     </div>
+                     <a class="iconfont iconone"  href="javascript:;">&#xe67d;</a>
+                 </li>
+             </script>
+         </div>
+     </div>
+ 
+     <!-- 校验密码弹窗 -->
+     <div class="popup-password">
+         <div class="elasticMid">
+                <div class="elasticTxt">
                 </div>
-                <ul class="popup-ul">
-                    <li class="popup-li">
-                        <img class="bank-img" src="/financial/static/img/account_icon_bank logo@2x.png" alt="">
-                        <div class="div">
-                            <div class="bank-name">中国招商银行储蓄卡(8304)</div>
-                            <div class="bank-pay">单笔限额5万，单日限额10万</div>
-                        </div>
-                        <a class="iconfont iconsure"  href="javascript:;">&#xe626;</a>
-                    </li>
-                    <li class="popup-li">
-                        <img class="bank-img" src="/financial/static/img/account_icon_bank logo@2x.png" alt="">
-                        <div class="div">
-                            <div class="bank-name">中国招商银行储蓄卡(8304)</div>
-                            <div class="bank-pay">单笔限额5万，单日限额10万</div>
-                        </div>
-                        <a class="iconfont iconsure"  href="javascript:;">&#xe626;</a>
-                    </li>
-                    <li class="popup-li">
-                        <img class="bank-img" src="/financial/static/img/account_icon_bank logo@2x.png" alt="">
-                        <div class="div">
-                            <div class="bank-name">中国招商银行储蓄卡(8304)</div>
-                            <div class="bank-pay">单笔限额5万，单日限额10万</div>
-                        </div>
-                        <a class="iconfont iconsure"  href="javascript:;">&#xe626;</a>
-                    </li>
-                    <li class="popup-last">
-                        <img class="last-img" src="/financial/static/img/icon _tianjia@2x.png" alt="">
-                        <div class="last-title">
-                            添加银行卡付款
-                        </div>
-                        <a class="iconfont iconone"  href="javascript:;">&#xe67d;</a>
-                    </li>
-                </ul>
-            </div>
-        </div>
-    </section>
-    <!-- 加载中loading -->
-    <!-- @@include('@pathCommonViews/load.html') -->
-
-    <!-- 加载中loading -->
-    @@include('@pathCommonViews/loading/listLoading.html') @@include('@pathInclude/views/footer.html')
-    <!-- 添加埋点 -->
-    @@include('@pathInclude/views/header.html')
-    <script src="/financial/static/js/publicPlacement/ordinarySetThrow.js"></script>
-
-</body>
-
-</html>
+                <div  class="elasticButtons error1">
+                     <button class="elasticCel" type="button">忘记密码</button>
+                     <button class="elasticYes" type="button">重新输入</button>
+                </div>
+                <div  class="elasticButtons error2">
+                     <button class="elasticCel" type="button">取消</button>
+                     <button class="elasticYes" type="button">找回密码</button>
+                </div>
+                <div  class="elasticButtons error3">
+                     <button class="elasticCel" type="button">取消</button>
+                     <button class="elasticYes" type="button">重试</button>
+                </div>
+         </div>
+     </div>
+      @@include('@pathCommonViews/payPassword.html')
+      <!-- 转出规则 -->
+      @@include('@pathCommonCom/elasticLayer/transOutRule/transOutRule.html')
+  
+      @@include('@pathInclude/views/footer.html')
+      <!-- 添加埋点 -->
+      @@include('@pathInclude/views/header.html')
+      <script src="/financial/static/js/publicPlacement/ordinarySetThrow.js"></script>
+      <!-- <script src="/account/static/js/public/payPassword.js"></script> -->
+  </body>
+  </html>

@@ -326,7 +326,6 @@ module.exports = {
     './financial/static/js/publicPlacement/castSurelyDetails': './src/financial/static/js/publicPlacement/castSurelyDetails.js',
     //活期理财
     './financial/static/js/publicPlacement/demandFinancing': './src/financial/static/js/publicPlacement/demandFinancing.js',
-
     //普通基金产品详情页_定投
     './financial/static/js/publicPlacement/ordinarySetThrow': './src/financial/static/js/publicPlacement/ordinarySetThrow.js',
     //普通基金赎回

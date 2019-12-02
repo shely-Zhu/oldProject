@@ -125,12 +125,20 @@ body{
                 height: .4rem;
                 line-height: .4rem;
                 span{
-                    font-weight: 600;
                     color:#272727;
                 }
                 .num{
-                    font-weight: 500;
-                    color:#9B9B9B;
+                    .line-rate{
+                        &::before{
+                            content: "——";
+                            position:absolute;
+                        }
+                    }
+                   
+                    .discount{
+                        color:red;
+                    }
+                    
                 }
             }
             .payConfirm{
@@ -319,7 +327,7 @@ body{
                 height: .44rem;
                 color: @9B9B9B;
                 position: absolute;
-                right: .3rem;
+                right: .6rem;
                 display:none;
             }
             .iimg{
@@ -328,8 +336,9 @@ body{
                 height: .44rem;
                 color: @9B9B9B;
                 position: absolute;
-                right: .3rem;
+                right: .6rem;
             }
+            
         }
 
 
@@ -567,9 +576,7 @@ body{
                 background: @FDF3DD;
             }
         }
-        .elasticButtons.error1{
-            display:block;
-        }
+        
     }
     
 }
