@@ -9,12 +9,13 @@
 
 		@@include('@pathInclude/views/meta.html')
 		<link rel="stylesheet" href="/mine/static/css/monthReport/monthReportList.css">
-		<title>月度报告列表页</title>
+		<title>月度投资报告</title>
 	</head>
 
 	<body>
 		<!--@@include('@pathCommonViews/noDataImg.html')  -->
 		@@include('@pathCommonCom/loading/listLoading.html')
+		@@include('@pathCommonViews/headBarConfig.html',{"pathName":"月度投资报告"})
 		<!-- 暂无数据 -->
 		<div class="without noData" id="emptyBox" style="display:none;">
 			<div class="box vertical center">
