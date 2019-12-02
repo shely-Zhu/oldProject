@@ -286,7 +286,7 @@ module.exports = {
     // './account/static/js/public/transactionRecord': './src/account/static/js/public/transactionRecord.js',
 
     //超宝基金产品-交易记录
-    './account/static/js/super/superRecord': './src/account/static/js/super/superRecord.js',
+    './account/static/js/public/superRecord': './src/account/static/js/public/superRecord.js',
 
     //自选公募资产详情
     './account/static/js/public/optionalPublicDetail': './src/account/static/js/public/optionalPublicDetail.js',

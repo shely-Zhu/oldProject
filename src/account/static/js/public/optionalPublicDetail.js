@@ -407,13 +407,12 @@ $(function() {
 					$('.typeWrap openWrap').show();
 				}
             })
-
             //折线图点击月份请求数据
             mui("body").on('tap', '.lineWrap .time', function() {
 				$('.lineDraw .time').removeClass('active');
 				$(this).addClass('active');
-				that.getTypeOneData( $(this).attr('num') );
-            })
+				that.getTypeOneData( $(this).attr('num') );		
+			})
             //折线图点击七日年化/万份收益切换区域
             mui("body").on('tap', '.lineWrap .titleWrap .title', function() {
 				$('.lineWrap .titleWrap .title').removeClass('active');
@@ -430,8 +429,8 @@ $(function() {
 				}
 				$('.lineDraw .time').removeClass('active');
 				$('.lineDraw .oneMonth').addClass('active');
-				that.drawLine( 'wfsy', that.data['qrnhWfsy'].oneMonth );
-            })
+				that.drawLine( 'wfsy', that.data['qrnhWfsy'].oneMonth );			
+			})
 //			交易记录跳转
 			mui("body").on('tap', '.jyjl', function() {
 				window.location.href = site_url.transactionDetail_url+"?fundCode=" +that.data.fundCode + "&tradeNo=" + that.data.publicFundDetail.tradeNo;
@@ -448,8 +447,20 @@ $(function() {
 			mui("body").on('tap', '.symx', function() {
 				window.location.href = site_url.incomeDetail_url;
 			})
+			//点击赎回
+			mui("body").on('tap', '.backBtn', function(e) {
+				window.location.href = site_url.redemptionBuy_url;			
+			})
+			// //点击买入
+			mui("body").on('tap', '.buyBtn', function(e) {
+				window.location.href = site_url.fundTransformIn_url;			
+			})
+			//点击定投
+			mui("body").on('tap', '.fiedBtn', function(e) {
+				window.location.href = site_url.ordinarySetThrow_url;			
+			})
+			
 		},
-
 
 
 	}

@@ -6,6 +6,7 @@ var popPicker = require('@pathCommonJsCom/popPicker.js');
 
 var provinceList = require('../../../common/json/provinceList.js');
 
+
 mui("body").on("tap", '.provinceSelect', function() {
     $('input,textarea').blur();
 
@@ -26,13 +27,14 @@ mui("body").on("tap", ".timeSelect", function(e) {
             endDate: new Date('2099', '12', '29'), //设置结束日期 
             labels: ['年', '月', '日'], //设置默认标签区域提示语 
         })
-        dtpicker.show(function(selectItems) {
+        dtpicker.show(function (selectItems) {
             //点击确定
             $(".timeSelect a").html(selectItems.text).addClass("hasSelect").attr("num", "1");
             dtpicker.dispose();
         })
     }
 });
+
 
 
 

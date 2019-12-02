@@ -13,6 +13,9 @@ require('@pathCommonJs/ajaxLoading.js');
 require('@pathCommonJs/components/headBarConfig.js');
 var generateTemplate = require('@pathCommonJsComBus/generateTemplate.js');
 var splitUrl = require('@pathCommonJs/components/splitUrl.js');
+var payPass = require('@pathCommonJsCom/payPassword.js');
+//黑色提示条
+var tipAction = require('@pathCommonJs/components/tipAction.js');
 //获取地址栏参数
 getQueryString = function (name) {
   var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)");
@@ -20,7 +23,7 @@ getQueryString = function (name) {
   if (r != null) return unescape(r[2]); return '';
 }
 $(function () {
-
+  var fundCode
   var regard = {
 
     init: function () {
@@ -28,23 +31,27 @@ $(function () {
 
       //页面初始化
       that.getData();
-      that.events();
 
+
+    },
+    gV: {
+      json: {},
+      copyJson: {} //复制一份值做暂停和终止续投
     },
     getData: function () {
 
       var that = this;
-      var fundCode
+      var scheduledProtocolId = getQueryString('scheduledProtocolId')
       //请求页面数据
       var obj = [{
         url: site_url.pofFixedDetail_api,
         data: {
-          scheduledProtocolId: getQueryString('scheduledProtocolId')
+          scheduledProtocolId: scheduledProtocolId
         },
         callbackDone: function (json) {
-          console.log(json);
-
           json = json.data
+          that.gV.copyJson = JSON.parse(JSON.stringify(json))
+          that.gV.copyJson.scheduledProtocolId = scheduledProtocolId
           $('.fundName').html(json.fundName);
           $('.balanceMask').html(json.balanceMask);
           $('.totalTradeTimes').html(json.totalTradeTimes);
@@ -59,22 +66,25 @@ $(function () {
           $('.bankThumbnailUrl').attr('src', json.bankThumbnailUrl);
           $('.totalCfmShareMask').html(json.totalCfmShareMask);
           $('.serviceCharge').html('含手续费' + json.serviceCharge + '元');
-          fundCode = json.fundType
+          fundCode = json.fundCode
+          that.gV.json = json
+          that.events();
           var fixState, str
           switch (json.fixState) {
             case 'A':
               fixState = "进行中"
-              str = '<div>终止</div> <div class="cen ">暂停</div> <div class="active edit ">修改</div>'
+              str = '<div type="1" >终止</div> <div class="cen" type="0"  >暂停</div> <div class="active edit ">修改</div>'
               break;
 
             case 'H':
               fixState = "已终止"
               str = ""
+              $('.nextFixrequestDateMask').html('已终止');
               break;
 
             case 'P':
               fixState = "暂停"
-              str = '<div >终止</div> <div class="active ">续保</div>';
+              str = '<div type="1"  >终止</div> <div class="active" type="2" >续保</div>';
               break;
             case 'D':
               fixState = "删除"
@@ -96,7 +106,7 @@ $(function () {
             n.tradeTime = n.tradeTime.split(" ")[0]
             n.status = n.status === "1" ? 1 : 0
           });
-          var html = template(tradeRecord);
+          var html = template(json);
           $(".tplBox").html(html);
 
         },
@@ -106,20 +116,55 @@ $(function () {
       }]
       $.ajaxLoading(obj);
     },
+    changeStatus: function (pwd, type) {
+      var tip = ['定投计划已暂停', '定投计划已终止', '续投成功']
+      var fixStateArr = ['P', 'H', 'A']
+      var msg = tip[Number(type)]
+      var that = this;
+      that.gV.copyJson.fixState = fixStateArr[Number(type)]
+      that.gV.copyJson.password = pwd
+      //请求页面数据
+      var obj = [{
+        url: site_url.pofFixedChange_api,
+        data: that.gV.copyJson,
+        callbackDone: function (json) {
+          tipAction(msg);
+          $("#passwordWrap").hide()
+          $("#passwordWrap input").val("");
+          setTimeout(function () {
+            window.history.go(-1)
+          }, 800)
+        },
+        callbackFail: function (json) {
+          tipAction(json.message);
+          $("#passwordWrap").hide()
+          $("#passwordWrap input").val("");
+        }
+      }]
+      $.ajaxLoading(obj);
+    },
     events: function () {
       var that = this;
-
-      // 跳转详情页
+      var fundType = that.gV.json.fundType
+      // 详情
+      mui("body").on("tap", ".posRight", function () {
+        window.location.href = site_url.pofPublicDetail_url + '?fundCode=' + fundCode + '&fundType=' + fundType;
+      });
+      // 修改
       mui("body").on("tap", ".edit", function (e) {
         var scheduledProtocolId = getQueryString('scheduledProtocolId')
-        window.location.href = site_url.pofOrdinarySetThrow_url + '?scheduledProtocolId=' + scheduledProtocolId;
         window.location.href = site_url.pofOrdinarySetThrow_url + '?scheduledProtocolId=' + scheduledProtocolId + '&fundCode=' + fundCode;
       });
+      // 终止 暂停 续投
+      mui("body").on("tap", ".footer >div", function (e) {
+        var type = $(this).attr('type')
+        if (!type) return
+        $("#passwordWrap").show();
+        payPass(function (pwd) {
+          that.changeStatus(pwd, type)
+        });
+      });
 
-      // // 获取专属报告
-      // mui("body").on("tap", ".btnBottom", function () {
-      //   that.getReport();
-      // });
     },
 
 
