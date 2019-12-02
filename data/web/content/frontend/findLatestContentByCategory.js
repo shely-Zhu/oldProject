@@ -37,7 +37,7 @@ var rule_wenjin = Mock.mock({
         "subject_tag":"",
         "clicksNum":395,
         "productType":"",
-        "content":"",
+        "content":"=====快赎规则=====快赎轴前文案T日（交易日）=====快赎轴后文案T日（交易日）=====快赎交易说明10:50为T日，10:50后不支持快赎赎回=====快赎费率说明快速赎回手续费为0.1%=====普赎规则=====普赎轴前文案T日（交易日）=====普赎轴后文案T日+1（交易日）=====普赎交易说明13点前为T日，13点后为T+1日赎回",
         "releaseDate":"2018-02-12",
         "reportDate":null,
         "reportSource":"",
