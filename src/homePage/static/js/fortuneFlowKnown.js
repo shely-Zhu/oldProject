@@ -6,11 +6,9 @@
 
 require('@pathIncludJs/base.js');
 require('@pathCommonJs/ajaxLoading.js');
-
 var tipAction = require('@pathCommonJs/components/tipAction.js');
 var generateTemplate = require('@pathCommonJsComBus/generateTemplate.js');
 var splitUrl = require('@pathCommonJs/components/splitUrl.js')();
-
 $(function() {
 	let somePage = {
 		//获取页面元素
@@ -53,6 +51,7 @@ $(function() {
                         data = that.dealTime(json.data.list);
                     }
                     setTimeout(function() {
+                        console.log(data)
                         if (data.length < that.gV.pageSize) {
                             if (that.gV.pageCurrent == 1) { //第一页时
                                 if (data.length == 0) {
@@ -73,7 +72,9 @@ $(function() {
                         // 页面++
                         that.gV.pageCurrent++;
                         // 将消息列表插入到页面上
+                       
                         generateTemplate(data, that.$e.fortuneFlowListWrapper, that.$e.fortuneFlowListTemp)
+                        $(".lazyload").lazyload()
                     }, 200)
                 },
                 callbackNoData:function(){
@@ -146,7 +147,10 @@ $(function() {
                 var externalUrl = $(this).attr("externalUrl")
                 window.location.href = externalUrl
             })
+         
 		}
 	};
-	somePage.init();
+    somePage.init();
+    
 });
+
