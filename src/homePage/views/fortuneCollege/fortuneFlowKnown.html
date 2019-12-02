@@ -30,8 +30,9 @@
           {{#each this}}
           <div class="knownItem flex" externalUrl="{{externalUrl}}">
                <div class="itemVideo">
-                    <img class="articalImg" src="{{imageUrlShowOnline}}" alt="">
+                    <img class="articalImg lazyload" src="/homePage/static/img/lazyImgList.png" data-original="{{imageUrlShowOnline}}" alt="">
                     <img class="play" src="/homePage/static/img/bofang@2x.png" alt="">
+                    <img class="play" src="" alt="">
                </div>
                <div class="itemContent">{{articleTimeStr}} | {{title}}</div>
           </div>
