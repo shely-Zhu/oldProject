@@ -235,6 +235,7 @@ module.exports = {
     './mine/static/js/memberClub/activityNoList': "./src/mine/static/js/memberClub/activityNoList.js",
     //mui索引列表插件
     './mine/static/js/memberClub/mui.indexedlist': "./src/mine/static/js/memberClub/mui.indexedlist.js",
+
     './life/static/js/memberClub/activityNoList': "./src/life/static/js/memberClub/activityNoList.js",
     //mui索引列表插件
     './life/static/js/memberClub/mui.indexedlist': "./src/life/static/js/memberClub/mui.indexedlist.js",
@@ -363,13 +364,9 @@ module.exports = {
     './financial/static/js/common/authenticationProcess': './src/financial/static/js/common/authenticationProcess.js',
 
 
-
     // 私募产品详情页
     './financial/static/js/privatePlacement/privatePlacementDetail' : './src/financial/static/js/privatePlacement/privatePlacementDetail.js'
 
-
-    // 私募产品详情页
-    './financial/static/js/privatePlacement/privatePlacementDetail': './src/financial/static/js/privatePlacement/privatePlacementDetail.js',
     // 财富学院早知道
     './homePage/static/js/fortuneFlowKnown': './src/homePage/static/js/fortuneFlowKnown.js',
     // 财富讲堂
