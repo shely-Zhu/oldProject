@@ -138,7 +138,7 @@ $(function(){
 
             that.$e.btnHref.on('tap', function() {
 
-                //1-超级现金宝;2-普通基金;3-私募基金;4-超宝产品列表;5-私募产品列表
+                //1-超级现金宝;2-货币型普通基金;3-私募基金;4-超宝产品列表;5-私募产品列表；6-非货币型普通基金
                 //后续找小宇确认跳转逻辑和连接
                 if(that.recomTypes == "1"){//1-超级现金宝
 
@@ -146,7 +146,7 @@ $(function(){
 
                 }else if(that.recomTypes == "2"){
 
-                    window.location.href = site_url.pofPublicDetail_url;//后面拼的参数需要找产品确认
+                    window.location.href = site_url.pofPublicDetail_url + "?fundCode="+that.gV.fundCode + "&fundType=10300";//货币型普通基金
 
                 }else if(that.recomTypes == "3"){//私募产品详情页
 
@@ -160,6 +160,9 @@ $(function(){
 
                     //window.location.href = site_url.privatePlacementDetail_url;
 
+                }else if(that.recomTypes == "6"){
+
+                    window.location.href = site_url.pofPublicDetail_url + "?fundCode="+that.gV.fundCode + "&fundType";//非货币型普通基金
                 }
             });
 
