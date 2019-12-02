@@ -340,6 +340,8 @@ module.exports = function () {
     
     //活动详情->我的奖励
     this.rewards_url = go_url.no_url + '/mine/views/rewards.html';
+    //交易明细总页面
+    this.publicTransactionDetails_url = go_url.no_url +'/mine/views/publicTransactionDetails.html'
     /*-------------------------------活动列表 end -----------------------*/
     
 
@@ -378,6 +380,8 @@ module.exports = function () {
     this.incomeDistribution_url = go_url.no_url + '/account/views/private/incomeDistribution.html';
     // 私募交易明细
     this.transactionDetail_url = go_url.no_url + '/account/views/transactionDetail.html';
+    // 私募交易明细
+    this.privateDetailList_url = go_url.no_url + '/account/views/private/privateDetailList.html';
     // 历史明细
     this.historyDetail_url = go_url.no_url + '/account/views/historyDetail.html';
     //私募资产净值明细页面

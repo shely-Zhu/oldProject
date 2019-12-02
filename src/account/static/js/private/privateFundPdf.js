@@ -12,7 +12,7 @@ require('@pathCommonJs/ajaxLoading.js');
 
 require('@pathCommonJs/components/headBarConfig.js');
 //引入弹出层
-require('@pathCommonJs/components/elasticLayer.js');
+require('@pathCommonCom/elasticLayer/elasticLayer/elasticLayer.js');
 var splitUrl = require('@pathCommonJs/components/splitUrl.js')();
 //黑色提示条的显示和隐藏
 var tipAction = require('@pathCommonJsCom/tipAction.js');
@@ -79,9 +79,9 @@ $(function(){
                 var obj={
                     title:'',
                     // id: 'emailPop',
-                    p:'<p class="elastic_p">月度投资报告将发送到您的默认邮箱</p>'+
-                        '<p class="elastic_p">'+that.email+'</p>'+
-                        '<p class="elastic_p otherColor" id="changeMail">邮箱有变更，去修改</p>',
+                    p:'<p class="">月度投资报告将发送到您的默认邮箱</p>'+
+                        '<p class="">'+that.email+'</p>'+
+                        '<p class="otherColor" id="changeMail">邮箱有变更，去修改</p>',
                     yesTxt:'确认',
                     celTxt:'取消',
                     zIndex: 100,

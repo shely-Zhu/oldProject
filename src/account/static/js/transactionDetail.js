@@ -127,11 +127,11 @@ $(function() {
                             }
                         }
                         for(var i =0;i<len.length;i++){
-                            if(len[i].tradeType == "0"){
+                            if(len[i].tradeType == "2"){
                                 len[i].tradeType = "赎回"
                             }else if(len[i].tradeType == "1"){                               
                                 len[i].tradeType = "申购"
-                            }else if(len[i].tradeType == "2"){
+                            }else if(len[i].tradeType == "0"){
                                 len[i].tradeType = "分红"
                             }
                         }

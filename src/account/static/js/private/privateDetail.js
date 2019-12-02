@@ -690,7 +690,7 @@ $(function() {
             })
             // 交易规则点击跳转
             mui("body").on('tap', '#transactionRuleBtn', function() {
-            	window.location.href = site_url.privateTransactionRules_url + '?projectId=' + that.data.projectId + '&redemptionOpenFrequency=' + encodeURI(encodeURI(that.data.redemptionOpenFrequency)) + '&imgUrl=' + that.data.imgUrl;
+            	window.location.href = site_url.privateTransactionRules_url + '?projectType=' + that.data.projectType
             })
             // 产品档案点击跳转
             mui("body").on('tap', '#productFilesBtn', function() {
