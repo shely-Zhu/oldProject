@@ -18,6 +18,7 @@ require('@pathCommonJs/components/headBarConfig.js');
 var authenticationProcess = require('@pathCommonJs/components/authenticationProcess.js');
 var generateTemplate = require('@pathCommonJsComBus/generateTemplate.js');
 var splitUrl = require('@pathCommonJs/components/splitUrl.js');
+var tipAction = require('@pathCommonJs/components/tipAction.js');
 //是否大于0的判断器 用于设置涨红跌绿 可以参考publicAssets.js
 Handlebars.registerHelper("if_than_0", function (value, options) {
     if (value > 0) {
@@ -85,7 +86,8 @@ $(function () {
                     that.changeVal('chgRatBgn', 2)
                     that.gV.json.trDate = that.gV.json.trDate.slice(5)
                     that.gV.json.fundType = that.fundType
-                    var html = template(that.gV.json);
+                    var html = template(that.gV.json); (html, "00");
+
                     $(".tplBox").html(html);
                     that.getData1();
                     that.getData2('1', 1);

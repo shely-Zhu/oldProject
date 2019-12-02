@@ -231,9 +231,15 @@ module.exports = {
     //会员俱乐部
     './life/static/js/memberClub/activityList': "./src/life/static/js/memberClub/activityList.js",
     //会员俱乐部-暂无数据mine
+<<<<<<< HEAD
+    './mine/static/js/memberClub/activityNoList': "./src/mine/static/js/memberClub/activityNoList.js",
+    //mui索引列表插件
+    './mine/static/js/memberClub/mui.indexedlist': "./src/mine/static/js/memberClub/mui.indexedlist.js",
+=======
     './life/static/js/memberClub/activityNoList': "./src/life/static/js/memberClub/activityNoList.js",
     //mui索引列表插件 
     './life/static/js/memberClub/mui.indexedlist': "./src/life/static/js/memberClub/mui.indexedlist.js",
+>>>>>>> 63ed9f3bb55e5d5ef2f299f6b18eb35dc152992a
     //活动详情
     './life/static/js/memberClub/activityDetails': "./src/life/static/js/memberClub/activityDetails.js",
     //文件上传
@@ -273,6 +279,7 @@ module.exports = {
     './homePage/static/js/noticeDetail': './src/homePage/static/js/noticeDetail.js',
     //include---富文本模板
     './include/js/modelPage/articleTemplate': './src/include/js/modelPage/articleTemplate.js',
+    './include/js/modelPage/audio': './src/include/js/modelPage/audio.js',
     // 了解恒天
     './homePage/static/js/understandHT': './src/homePage/static/js/understandHT.js',
     // 财富学院
@@ -357,6 +364,12 @@ module.exports = {
     // 购买触发提示
     './financial/static/js/common/authenticationProcess': './src/financial/static/js/common/authenticationProcess.js',
 
+<<<<<<< HEAD
+
+    // 私募产品详情页
+    './financial/static/js/privatePlacement/privatePlacementDetail' : './src/financial/static/js/privatePlacement/privatePlacementDetail.js'
+=======
+>>>>>>> 63ed9f3bb55e5d5ef2f299f6b18eb35dc152992a
 
     // 私募产品详情页
     './financial/static/js/privatePlacement/privatePlacementDetail': './src/financial/static/js/privatePlacement/privatePlacementDetail.js',

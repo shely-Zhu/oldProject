@@ -214,9 +214,9 @@ $(function () {
         events: function () {
             var that = this;
             //新增 跳原生定投排行页
-            // mui("body").on("tap", ".newPlan", function () {
-            //     window.location.href = site_url.pofOrdinarySetThrow_url;
-            // });
+            mui("body").on("tap", ".newPlan", function () {
+                window.location.href = site_url.investmentPlanRanking_url;
+            });
 
             // 跳转详情页
             mui("body").on("tap", ".investmentPlan-item", function (e) {
