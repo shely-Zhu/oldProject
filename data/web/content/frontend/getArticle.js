@@ -4,23 +4,23 @@ var Mock = require('mockjs');
 
 var data = Mock.mock({
   "data": {
-    "applyType": 2,
-    "articleBelong": "3",
-    "articleTimeStr": "11:34",
-    "author": "自主h5页面",
-    "buttonLabel": "立即转入现金管理",
-    "content": "<p><span style=\"color: rgb(34, 34, 34); font-family: Consolas, &#39;Lucida Console&#39;, monospace; font-size: 12px; line-height: normal; white-space: pre-wrap;\">自主h5页面</span></p >",
+    "applyType": "2",
+    "articleBelong": "3",//文章归属（字典）
+    "articleTimeStr": "11:34",//音频播放时间
+    "author": "purpleZhao",//作者
+    "buttonLabel": "立即转入现金管理",//按钮文案
+    "content": "<p><span style=\"color: rgb(34, 34, 34); font-family: Consolas, &#39;Lucida Console&#39;, monospace; font-size: 12px; line-height: normal; white-space: pre-wrap;\">富文本编辑区域内容</span></p >",
     "createId": "H023512",
     "createName": "",
     "createTime": 1573085434000,
     "createTimeStr": "2019-11-07 08:10:34",
     "externalUrl": "",
-    "h5Title": "模板页面",
-    "h5Type": "1",
+    "h5Title": "模板页面",//模板title
+    "h5Type": "2",//模板类型
     "id": 8,
     "imageAttachId": 56,
     "imageAttachName": "",
-    "imageAttachUrl": "http://172.16.163.99:85/group2/M00/02/88/rBCjRF26j3-AaxveAAFKebrcAVE531.jpg",
+    "imageAttachUrl": "http://172.16.163.99:85/group2/M00/02/88/rBCjRF26j3-AaxveAAFKebrcAVE531.jpg",//在线图片路劲
     "intro": "kaixuan3",
     "isDelete": 0,
     "isUse": 1,
@@ -35,8 +35,8 @@ var data = Mock.mock({
     "recomCodes": "",
     "recomTypes": null,
     "seqNo": null,
-    "source": "自主h5页面",
-    "title": "自主h5页面",
+    "source": "",
+    "title": "文章标题文章标题文章标题文章标题文章标文章标题文章标题文章标题题文章标题",
     "updateId": "H016691",
     "updateName": "",
     "updateTime": 1574937540000,
@@ -45,9 +45,11 @@ var data = Mock.mock({
     "videoAttachName": "",
     "videoAttachUrl": "",
     "voiceAttachId": null,
-    "voiceAttachName": "",
-    "voiceAttachUrl": "",//http://train-vedio.test.upcdn.net/lgb/voice/richgo_15687904592044433.mp3
-    "videoExternalUrl":"",//http://htjj-vod.homecdn.com/50216f89-68b6-4d0a-adb0-03af0df3efe4.m3u8
+    "fileSize":"15.27MB",
+    "imageAttachUrl":"/include/img/arcticleheaderimg.png",
+    "voiceAttachName": "音频附件名音频附件名称音频附件名称音频附件名称音频附件名称音频附件名称称",
+    "voiceAttachUrl": "http://train-vedio.test.upcdn.net/lgb/voice/richgo_15687904592044433.mp3",//http://train-vedio.test.upcdn.net/lgb/voice/richgo_15687904592044433.mp3    z在线视频地址
+    "videoExternalUrl":"htjj-vod.homecdn.com/50216f89-68b6-4d0a-adb0-03af0df3efe4.m3u8",//http://htjj-vod.homecdn.com/50216f89-68b6-4d0a-adb0-03af0df3efe4.m3u8   播放视频url
   },
   "message": "操作成功！",
   "status": "0000"
