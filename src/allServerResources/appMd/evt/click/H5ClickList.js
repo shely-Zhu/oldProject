@@ -164,6 +164,10 @@ var clickList = {
 	"fortune_studies" : { type:'click', evtid: '', topic: '财富研究', info: ''} ,
 	"fortune_studiesList" : { type:'click', evtid: '', topic: '财富研究列表', info: ''} ,
 	"fortune_studiesTab" : { type:'click', evtid: '', topic: '财富研究tab', info: ''} ,
+	//fortuneFlowKnown.html
+	"knownItem" : { type:'click', evtid: '', topic: '轮播图图片', info: ''} ,
+	//fortuneClassroom.html
+	
 }
 
 module.exports = clickList;
