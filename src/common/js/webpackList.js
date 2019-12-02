@@ -357,14 +357,6 @@ module.exports = {
 
     // 购买触发提示
     './financial/static/js/common/authenticationProcess': './src/financial/static/js/common/authenticationProcess.js',
-
-<<<<<<< HEAD
-
-    // 私募产品详情页
-    './financial/static/js/privatePlacement/privatePlacementDetail' : './src/financial/static/js/privatePlacement/privatePlacementDetail.js'
-=======
->>>>>>> 63ed9f3bb55e5d5ef2f299f6b18eb35dc152992a
-
     // 私募产品详情页
     './financial/static/js/privatePlacement/privatePlacementDetail': './src/financial/static/js/privatePlacement/privatePlacementDetail.js',
     // 财富学院早知道
