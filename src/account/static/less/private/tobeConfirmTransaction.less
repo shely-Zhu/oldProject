@@ -5,13 +5,8 @@
  * @description:
  */
 
- @import url("@pathInclude/css/mui.min.css");
- @import url("@pathCommonLess/mui/resetMUI.less");
- @import url("@pathCommonLess/color.less");
- @import url("@pathCommonLess/reset.less");
+@import url("@pathCommonLess/mui/resetMUI.less");
  
- @import url("@pathCommonLess/chtwm.less");
- @import url("@pathCommonLess/app.less");
  @import url("@pathCommonLessCom/againEnter.less");
  @import url("@pathCommonLessCom/alertBox.less");
  @import url("@pathCommonLessCom/tabScroll.less");
@@ -21,6 +16,8 @@
  @import url("@pathCommonLess/components/elasticLayerTypeFive.less");
  @import url("@pathCommonLessCom/noDataImg.less");
  @import url("@pathCommonLessCom/headBarConfig.less");
+
+  @import url("@pathCommonCom/button/button.less");
  
  body{
    background-color: @F7FAFD;
@@ -107,7 +104,6 @@
 
 //  已确认交易列表
  .transList{
-    width: 100%;
     min-height: 2.47rem;
     background-color: @c005;
     margin-top: 0.3rem;
@@ -241,27 +237,20 @@
       .toDetail{
         width:auto;
         height:0.5rem;
-        background:linear-gradient(135deg,rgba(108,131,201,1) 0%,rgba(6,29,106,1) 100%);
         border-radius:0.25rem;
         float: right;
-        color: @c005;
         font-size: 0.24rem;
-        text-align: center;
         line-height: 0.5rem;
         padding: 0 0.36rem;
       }
       .cancelBtn{
         width:auto;
-        height:0.5rem;
-        background:@c005;
-        border: 0.02rem solid #C4925E;
+        height:0.46rem;
         border-radius:0.25rem;
         float: right;
-        color: #C4925E;
         font-size: 0.24rem;
-        text-align: center;
-        line-height: 0.5rem;
-        margin-right: 0.3rem;
+        line-height: 0.46rem;
+        margin-right: 0.1rem;
         padding: 0 0.36rem;
       }
     }
@@ -269,7 +258,7 @@
  // 淡黄色背景弹框
 .tipContainer{
   width: 5.4rem;
-  height: auto;
+  height: 3.2rem;
   background-image: linear-gradient(-220deg, #F5ECD5 0%, #F0DFBA 100%);
   border-radius: 0.14rem;
   position: fixed;
@@ -277,6 +266,7 @@
   left: 50%;
   margin-left: -2.7rem;
   margin-top: -1.9rem;
+  z-index: 1001;
   display: none;
   // 弹框标题
   .titleText{
@@ -294,7 +284,7 @@
       color: #272727;
       text-align: center;
       line-height: 0.45rem;
-      margin: 0 0.4rem 0.7rem;
+      margin: 0.87rem 0.4rem 0.7rem;
   }
   // 弹框按钮
   .buttonCon{
@@ -303,7 +293,8 @@
       border-bottom-left-radius: 0.14rem;
       border-bottom-right-radius: 0.14rem;
       font-size: 0.34rem;
-      position: relative;
+      position: absolute;
+      bottom: 0;
       a{
           width: 2.7rem;
           float: left;

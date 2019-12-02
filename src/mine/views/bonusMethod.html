@@ -11,12 +11,10 @@
 </head>
 
 <body>
-    <!--加载图标-->
-    <!-- @@include('@pathCommonViews/load.html')  -->
     <!--没有数据显示图标-->
-    <!--@@include('@pathCommonViews/noDataImg.html')-->
+    @@include('@pathCommonViews/noDataImg.html')
     <!--列表加载显示图标-->
-    <!--@@include('@pathCommonViews/loading/listLoading.html')-->
+    <!-- @@include('@pathCommonCom/loading/listLoading.html') -->
     <!--公共页面头部-->
     @@include('@pathCommonViews/headBarConfig.html',{"pathName":"修改分红方式"})
     <p class="tips">
@@ -25,7 +23,7 @@
     </p>
     <div class="wrap">
         <div class="inner">
-            <div class="type_one">
+            <!-- <div class="type_one">
                 <span class="bonusType">
                     现金分红
                 </span> 
@@ -35,8 +33,8 @@
                 <b id="duigou" class="iconfont iconone duigou">
                         &#xe626;
                 </b>               
-            </div>
-            <div class="type_two">
+            </div> -->
+            <!-- <div class="type_two">
                 <span class="bonusType">
                     红利再投资
                 </span> 
@@ -46,14 +44,29 @@
                 <b id="duigou" class="iconfont iconone duigou">
                     &#xe626;
             </b>    
-            </div>
+            </div> -->
         </div>
     </div>
+    <script id="adjustment-template" type="text/x-handlebars-template">
+        {{#each this}}
+        <div class="type_one" data-checkFlag='{{checkFlag}}'data-autoBuyDes='{{autoBuyDes}}' data-autoBuy ='{{autoBuy}}'>
+            <span class="bonusType">
+                {{autoBuyDes}}
+            </span> 
+            <span class="describe">
+                {{remark}}
+            </span>
+            <b id="duigou" class="iconfont iconone duigou">
+                    &#xe626;
+            </b>               
+        </div>
+        {{/each}}
+    </script>
+   
     <p class="footer">基金销售服务由北京恒天明泽基金销售有限公司提供</p>
 
     @@include('@pathInclude/views/footer.html')
-    <!-- 添加埋点 -->
-    @@include('@pathInclude/views/header.html')
+
     <script src="/mine/static/js/bonusMethod.js"></script>
 </body>
 

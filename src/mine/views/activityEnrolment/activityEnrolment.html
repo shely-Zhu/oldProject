@@ -1,0 +1,132 @@
+ <!-- 已报名活动
+ @author caoqihai 2019-11-18 -->
+
+
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        @@include('@pathInclude/views/meta.html')
+        <link rel="stylesheet" href="/mine/static/css/activityEnrolment.css">
+
+        <title>已报名活动</title>
+    </head>
+<body>
+   <div class="container">
+        @@include('@pathCommonViews/headBarConfig.html',{"pathName":"已报名活动"})    
+        <!-- 加载中loading -->
+        @@include('@pathCommonCom/loading/listLoading.html')
+        <div class="mui-row choice">
+            <div class="mui-col-xs-6 active"><span>进行中</span><p></p></div>
+            <div class="mui-col-xs-6"><span>已结束</span><p></p></div>
+        </div>
+        <!-- 有活动 -->
+        <div class="dd_radar HasData">
+            <ul class="listHasData0">
+                <!-- 暂无数据 -->
+                @@include('@pathCommonViews/noDataImg.html',{"tipText":"暂无数据"})
+            </ul>
+            <ul class="listHasData1">
+                <!-- 暂无数据 -->
+                @@include('@pathCommonViews/noDataImg.html',{"tipText":"暂无数据"})
+            </ul>
+        </div>
+        <!-- 无数据时显示 -->
+        <!-- <div class="dd_radar NoData">
+            <img src="/mine/static/img/Me_huodog_Empty@2x.png" alt="">
+            <p>暂无活动信息</p>
+        </div> -->
+
+        
+
+        <!-- 更多精彩活动 -->
+        <div class="more">
+            <div class="title">
+                <p class="firstp"></p>
+                <div>更多精彩活动</div>
+                <p class="secondp"></p>
+            </div>
+            <ul class="moreul">
+                <!-- <li style="background: url('/mine/static/img/Life_banner_bg1@2x.png') 100% 100%">
+                    <div class="top">
+                        <span>参与赠送30元电话卡30元电话卡</span>
+                    </div>
+                    <p>恒天豪礼 中秋试手气</p>
+                    <div class="footer">
+                        <span>报名时间</span>
+                        <div>9月10日 至 9月15日</div>
+                    </div>
+                    <div></div>
+                </li> -->
+                <!-- <li style="background: url('/mine/static/img/Life_banner_bg2@2x.png') 100% 100%">
+                    <div class="top">
+                        <span>参与赠送30元电话卡30元电话卡</span>
+                    </div>
+                    <p>注册恒乐汇会员 享受“一对一”咨询服务</p>
+                    <div class="footer">
+                        <span>报名时间</span>
+                        <div>9月10日 至 9月15日</div>
+                    </div>
+                    <div></div>
+                </li> -->
+            </ul>
+        </div>
+   </div>
+   
+   <script id="activityEn-template" type="text/x-handlebars-template">
+    {{#each this}}
+        <li>
+            {{#if actTypestatus}}
+            <img src="{{htjfGeneralizeImgUrl}}" alt="">
+            {{/if}}
+            <p>{{actName}}</p>
+            {{#if actTypestatus}}
+            <div class="sign">
+                    {{#if preferential}}
+                    <span class="no">{{preferential}}</span>
+                    {{/if}}
+                </div> 
+            {{else}}
+            <div class="sign">
+                {{#if status}}
+                <span class="yes">已签到</span>
+                <div>{{arriveTime}}</div>
+                {{else}}
+                <span class="no">未签到</span>
+                {{/if}}
+            </div> 
+            {{/if}}
+            <div class="time">
+                <div class="timeco">报名时间&nbsp;{{enterTime}}</div> 
+                {{#if shareflag}}
+                <div class="timeBtn" data-actId={{actId}} data-actType ={{actType}}>分享给好友</div>
+                {{/if}}
+            </div>
+        </li>
+    {{/each}}
+    </script>
+
+    <script id="more-template" type="text/x-handlebars-template">
+        <li style="background: url('{{filePath}}') 100% 100%">
+            {{#if prize}}
+            <div class="top">
+                <span>{{prize}}</span>
+            </div>
+            {{/if}}
+            <p>{{title}}</p>
+            {{#if timeflag}}
+            <div class="footer">
+                <span>报名时间</span>
+                <div>{{actStartDate}} 至 {{actEndDate}}</div>
+            </div>
+            {{/if}}
+            <div></div>
+        </li>
+        </script>
+    @@include('@pathInclude/views/footer.html')
+    <script src="/mine/static/js/activityEnrolment.js"></script>
+
+
+
+
+</body>
+</html>

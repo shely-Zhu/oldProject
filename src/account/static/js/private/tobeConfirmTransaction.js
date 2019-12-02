@@ -5,27 +5,25 @@
  * @Last Modified by:   
  * @description:
  */
-require('@pathCommonJsCom/utils.js');
+
+require('@pathCommonBase/base.js');
+
 //ajax调用
 require('@pathCommonJs/ajaxLoading.js');
-//zepto模块--callback
-require('@pathIncludJs/vendor/zepto/callback.js');
-//zepto模块--deferred
-require('@pathIncludJs/vendor/zepto/deferred.js');
-//路径配置文件
-require('@pathIncludJs/vendor/config.js');
+
 //下拉加载更多
 // require('@pathCommonJs/scrollFullPage.js');
 // 切换
-require('@pathCommonJsCom/tabScroll.js');
+
 require('@pathCommonJsCom/goTopMui.js');
-require('@pathCommonJs/components/elasticLayer.js');
-require('@pathCommonJs/components/elasticLayerTypeFive.js');
-require('@pathCommonJs/components/headBarConfig.js');
+
+
+
 //黑色提示条的显示和隐藏
 var splitUrl = require('@pathCommonJs/components/splitUrl.js')();
 var tipAction = require('@pathCommonJsCom/tipAction.js');
-var transcationTem = require('../common/transcationTem.js');
+var transcationTem = require('@pathCommonJsCom/account/transcationTem.js');
+
 
 $(function() {
     var data = {
@@ -40,7 +38,7 @@ $(function() {
                 pageNo: 1,
                 pageSize: 10,
             },
-            a: null,
+            aThis: null,
             list_template: '', //列表的模板，生成后存放在这里
             listToTop: '', // 滑动区域距离顶部距离
             navToTop: '', // 滑动nav距离顶部距离
@@ -87,7 +85,7 @@ $(function() {
                         callback: function() {
                             // debugger
                             //执行ajax请求
-                            that.gV.a = this;
+                            that.gV.aThis = this;
                             that.getData(this);
                         }
                     }
@@ -128,11 +126,9 @@ $(function() {
                     isConfirm: that.gV.type,
                     businessType: Number(that.gV.businessType),
                 },
-                //async: false,
-                needDataEmpty: true,
                 callbackDone: function(json) {
                     var data;
-                    if (json.data.tradeList.length == 0) { // 没有记录不展示
+                    if (json.data.tradeList && json.data.tradeList.length == 0) { // 没有记录不展示
                         $(".list").hide()
                         that.getElements.noData.show();
                         return false;
@@ -169,25 +165,105 @@ $(function() {
 
 
                 },
+                callbackNoData: function() {
+                    that.getElements.noData.show();
+                }
 
             }];
             $.ajaxLoading(obj);
         },
+        openTipCon: function(type, content, id) {
+            $('#tipCon .tipCon').html(content);
+            $('.mask').show();
+            $('#tipCon').show();
+            //点击确定
+            mui("body").on('tap', '.tipContainer .todo', function(e) {
+                if (type == 'assign') {
+                    //转让方法
+
+                } else if (type == 'assignee') {
+                    //受让方法
+                }
+                $('.mask').hide();
+                $('#tipCon').hide();
+            })
+
+        },
+        openTipConOne: function(content) {
+            $('.mask').show();
+            $('#tipConOne').show();
+            $('#tipConOne .tipCon').html(content);
+        },
         events: function() { //绑定事件
             var that = this;
             mui("body").on('tap', '.hopper', function(e) {
-                $('.mask').show();
-                $('.hopperCon').show();
+                    $('.mask').show();
+                    $('.hopperCon').show();
 
-            })
+                })
+                //点击筛选数据
             mui("body").on('tap', '.hopperCon li', function(e) {
-                $(this).addClass('active').siblings('li').removeClass('active');
-                $('.mask').hide();
-                $('.hopperCon').hide();
-                that.gV.businessType = $(this).attr('data');
-                // $('.contentWrap').html('');
-                that.gV.aP.pageNo = 1;
-                that.getData(that.gV.a, 1);
+                    $(this).addClass('active').siblings('li').removeClass('active');
+                    $('.mask').hide();
+                    $('.hopperCon').hide();
+                    that.gV.businessType = $(this).attr('data');
+                    // 重置上拉加载
+                    mui('.contentWrapper').pullRefresh().refresh(true);
+                    that.gV.aP.pageNo = 1;
+                    that.getElements.contentWrap.html('');
+                    //重新初始化
+                    that.initMui();
+                    mui('.contentWrapper').pullRefresh().scrollTo(0, 0, 0);
+                })
+                // 点击遮罩隐藏
+            mui("body").on('tap', '.mask', function(e) {
+                    $('.mask').hide();
+                    $('.hopperCon').hide();
+                })
+                //取消受让、取消预约、取消转让
+            mui("body").on('tap', '.cancelBtn', function(e) {
+                    var type = $(this).attr('data-type');
+                    var id = $(this).attr('data-id');
+                    if (type == 'assign') { //转让
+                        that.openTipCon('assign', '您确定要取消转让申请吗？', id);
+                    } else if (type == 'assignee')
+                        that.openTipCon('assign', '您确定要取消受让申请吗？', id);
+                })
+                //点击取消
+            mui("body").on('tap', '.tipContainer .cancel', function(e) {
+                    $('.mask').hide();
+                    $('#tipCon').hide();
+
+                })
+                // 点击我明白了
+            mui("body").on('tap', '.tipContainer .buttonOne', function(e) {
+                    $('.mask').hide();
+                    $('#tipConOne').hide();
+                    var conText = $(this).siblings('tipContent').html;
+                    that.openTipConOne(conText);
+
+                })
+                //点击状态文字出现弹框
+            mui("body").on('tap', '.openTip', function(e) {
+                    $('.mask').show();
+                    $('#tipConOne').show();
+                    var conText = $(this).siblings('tipContent').html;
+                    that.openTipConOne(conText);
+
+                })
+                //功能按钮
+            mui("body").on('tap', '.toDetail', function(e) {
+                var type = $(this).attr('type');
+                if (type == 'toCertif') { //去合格投资者认证
+
+                } else if (type == 'toSign') { //去签合同
+
+                } else if (type == 'toSee') { //查看合同
+
+                } else if (type == 'toUploadM') { //去上传汇款凭证
+
+                }
+
             })
         }
     };

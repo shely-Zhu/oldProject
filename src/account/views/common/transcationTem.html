@@ -66,25 +66,26 @@
             <span class="tipImg success"></span> {{else if appointmentFailed}}
             <span class="tipImg fail"></span> {{else}}
             <span class="tipImg"></span> {{/if}}
-            <!-- 不是成功也不是失败显示文字 -->
-            {{#if appointmentSigned}}{{else}}
-            <span>{{reserveSubStatusDesc}}</span> {{/if}}
-            <!-- 不是成功也不是失败文字 -->
+            <!-- 已签约不显示状态文字 -->
+            {{#if appointmentSigned}}{{else}} {{#if qualified}}
+            <span>{{reserveSubStatusDesc}}</span> {{else}}
+            <span class="openTip">{{reserveSubStatusDesc}}</span><span style="display:none" class="tipContent"></span>{{reserveStatusTip}}</span> {{/if}} {{/if}}
+            <!-- 已签约不显示状态文字 -->
 
             <!-- 功能按钮 -->
             {{#if appointmentToAuthentication}}
-            <div class="toDetail">合格投资者认证</div>
+            <div class="toDetail" type="toCertif">合格投资者认证</div>
             {{else if appointmentToSign}}
-            <div class="toDetail">签署合同</div>
+            <div class="toDetail" type="toSign">签署合同</div>
             {{else if appointmentToSee}}
-            <div class="toDetail">查看合同</div>
+            <div class="toDetail" type="toSee">查看合同</div>
             {{else if appointmentToUpload}}
-            <div class="toDetail">上传汇款凭证</div>
+            <div class="toDetail" type="toUploadM">上传汇款凭证</div>
             {{/if}}
             <!-- 功能按钮 -->
             <!-- 取消预约按钮 -->
             {{#if appointmentCancel}}
-            <div class="cancelBtn">取消预约</div>
+            <div class="cancelBtn" data-type="appointment">取消预约</div>
             {{/if}}
             <!-- 取消预约按钮 -->
 
@@ -188,6 +189,7 @@
         <div class="statusTip">{{businessTypeDesc}}</div>
         <!-- 右上角文字 -->
         <div class="textTip">
+            <!-- 签约中状态里显示 -->
             <span>转让方：</span> {{#if assignVideoStatus}}
             <span>已双录</span> {{else}}
             <span>未双录</span> {{/if}}
@@ -226,7 +228,14 @@
             <span>当前进度{{assignStep}}/6</span> {{else}}
             <span>当前进度已截止</span> {{/if}}
             <a href="">查看具体情况</a>
-            <div class="toDetail">详情</div>
+            <div class="blueBgButton toDetail toView" data-type="assign">详情</div>
+            {{#if assignCancel}}
+            <div class="goldBorderButton cancelBtn" data-type="assign" data-id="{{projectId}}">取消转让</div>
+            {{/if}} {{#if assignObj}}
+            <div class="toDetail chooseObj" data-type="assign" data-id="{{projectId}}">选择受让方</div>
+            {{/if}} {{#if assignToVideo}}
+            <div class="toDetail toVideo" data-type="assign" data-id="{{projectId}}">视频双录</div>
+            {{/if}}
         </div>
         <!-- 进度 -->
         <!-- 转让图片 -->
@@ -244,6 +253,7 @@
         {{#if signing}}
         <!-- 右上角文字 -->
         <div class="textTip">
+            <!-- 签约中状态里显示 -->
             <span>转让方：</span> {{#if assignVideoStatus}}
             <span>已双录</span> {{else}}
             <span>未双录</span> {{/if}}
@@ -282,8 +292,12 @@
             <span>当前进度{{assigneeStep}}/6</span> {{else}}
             <span>当前进度已截止</span> {{/if}}
             <a href="">查看具体情况</a>
-            <div class="toDetail">详情</div>
-            <div class="cancelBtn" data-id="{{projectId}}">取消转让</div>
+            <div class="blueBgButton toDetail toView" data-type="assignee">详情</div>
+            {{#if assigneeCancel}}
+            <div class="goldBorderButton cancelBtn" data-type="assignee" data-id="{{projectId}}">取消受让</div>
+            {{/if}} {{#if assigneeToVideo}}
+            <div class="toDetail toVideo" data-type="assignee" data-id="{{projectId}}">视频双录</div>
+            {{/if}}
         </div>
         <!-- 进度 -->
         <!-- 受让图片 -->

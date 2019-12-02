@@ -1,48 +1,52 @@
 /**
-* 消息中心-系统通知
-* @author yanruiting 2019-11-15
-* 从消息中心页面携带参数   mesType 0系统通知，1产品公告，2活动通知，3交易动态
-*/
-require('@pathIncludJs/vendor/config.js');
-require('@pathIncludJs/vendor/zepto/callback.js');
-require('@pathIncludJs/vendor/zepto/deferred.js');
-require('@pathCommonJs/components/utils.js');
-require('@pathCommonJs/components/headBarConfig.js');
+ * 消息中心-系统通知
+ * @author yanruiting 2019-11-15
+ * 从消息中心页面携带参数   mesType 0系统通知，1产品公告，2活动通知，3交易动态
+ */
+require('@pathCommonBase/base.js');
 require('@pathCommonJs/ajaxLoading.js');
 
 var tipAction = require('@pathCommonJs/components/tipAction.js');
 var splitUrl = require('@pathCommonJs/components/splitUrl.js')();
 var generateTemplate = require('@pathCommonJsComBus/generateTemplate.js');
 
-$(function(){
-	let somePage = {
-		//获取页面元素
-		$e:{
-			informsListWrapperId: $("#informsListWrapper"), // 消息列表盒子
-			informsListTemp: $('#informsList-template'), // 消息列表模板
-			noData: $('.noData'), //没有数据的结构
+$(function() {
+    let somePage = {
+        //获取页面元素
+        $e: {
+            informsListWrapperId: $("#informsListWrapper"), // 消息列表盒子
+            informsListTemp: $('#informsList-template'), // 消息列表模板
+            noData: $('.noData'), //没有数据的结构
             listLoading: $('.listLoading'), //所有数据区域，第一次加载的loading结构
-		},
-		//全局变量
-		gV:{
-			pageCurrent: 1, //当前页码，默认为1
+        },
+        //全局变量
+        gV: {
+            pageCurrent: 1, //当前页码，默认为1
             pageSize: 10,
             mesType: splitUrl['mesType'] // 1产品公告；2活动通知；3交易动态4;系统通知
-		},
-		//页面初始化函数
-		init:function(){
-            var that=this;
+        },
+        //页面初始化函数
+        init: function() {
+            var that = this;
             this.getTitle()
             that.initMui();
             this.events()
         },
         getTitle() {
             var mesType = Number(this.gV.mesType)
-            switch(mesType) {
-                case 0: $("#HeadBarpathName").html("系统通知");break;
-                case 1: $("#HeadBarpathName").html("产品公告");break;
-                case 2: $("#HeadBarpathName").html("活动通知");break;
-                case 3: $("#HeadBarpathName").html("交易动态");break;
+            switch (mesType) {
+                case 0:
+                    $("#HeadBarpathName").html("系统通知");
+                    break;
+                case 1:
+                    $("#HeadBarpathName").html("产品公告");
+                    break;
+                case 2:
+                    $("#HeadBarpathName").html("活动通知");
+                    break;
+                case 3:
+                    $("#HeadBarpathName").html("交易动态");
+                    break;
             }
         },
         //初始化mui的上拉加载
@@ -85,8 +89,8 @@ $(function(){
         },
         // 获取消息中心列表
         getInformsListData(t) {
-        	var that=this;
-            var obj=[{
+            var that = this;
+            var obj = [{
                 url: site_url.noticeAndTransDynamicList_api,
                 data: {
                     "pageNo": that.gV.pageCurrent, //非必须，默认为1
@@ -122,16 +126,21 @@ $(function(){
                         } else { // 还有更多数据
                             t.endPullupToRefresh(false);
                         }
+                        $('.list').find('.contentWrapper .mui-pull-bottom-pocket').removeClass('mui-hidden');
                         // 页面++
                         that.gV.pageCurrent++;
                         // 将消息列表插入到页面上
                         generateTemplate(data, that.$e.informsListWrapperId, that.$e.informsListTemp);
-
                     }, 200)
 
-                }
-            }];                        
-            $.ajaxLoading(obj); 
+                },
+                callbackNoData: function(json) {
+                    $(".noDataCon").css("display", "block")
+                    $(".mui-table-view").css({"transform": "none!important", "position": "static"})
+                    $(".mui-table-view-cell").css({"background": "#eeeeee"})
+                },
+            }];
+            $.ajaxLoading(obj);
         },
         dealData(data) {
             $.each(data, function(a, b) {
@@ -140,13 +149,13 @@ $(function(){
             })
             return data;
         },
-        events: function(){
+        events: function() {
             var that = this;
             //跳转到通知详情页面
-            mui("body").on('tap', '.systemInformItem' , function(){
+            mui("body").on('tap', '.systemInformItem', function() {
                 window.location.href = site_url.noticeDetails_url + '?noticeId=' + $(this).attr('noticeId') + '&mesType=' + that.gV.mesType;
             })
         }
-	};
-	somePage.init();
+    };
+    somePage.init();
 });

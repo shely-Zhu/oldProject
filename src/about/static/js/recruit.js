@@ -41,7 +41,7 @@ $(function(){
 
 		},
 
-		checkLogin : function(params,){
+		checkLogin : function(params){
 			var that = this;
 			var obj = [
 				{

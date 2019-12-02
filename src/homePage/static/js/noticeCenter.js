@@ -2,11 +2,7 @@
 * 消息中心
 * @author yanruiting 2019-11-15
 */
-require('@pathIncludJs/vendor/config.js');
-require('@pathIncludJs/vendor/zepto/callback.js');
-require('@pathIncludJs/vendor/zepto/deferred.js');
-require('@pathCommonJs/components/utils.js');
-require('@pathCommonJs/components/headBarConfig.js');
+require('@pathCommonBase/base.js');
 require('@pathCommonJs/ajaxLoading.js');
 
 var tipAction = require('@pathCommonJs/components/tipAction.js');
@@ -53,9 +49,9 @@ $(function(){
                     case 3: b.logoSrc = '/homePage/static/img/home_icon_transaction@2x.png'; b.mesTitle = "交易动态";break;
                 }
                 if(b.readStatus == 0) {
-                    b.badgeSrc = '/homePage/static/img/home_icon_Badge@2x.png'
+                    b.badgeFlag = true
                 } else {
-                    b.badgeSrc = ''
+                    b.badgeFlag = false
                 }
             })
             console.log(data)

@@ -11,12 +11,10 @@
 	</head>
 
 	<body>
-		<!--加载图标-->
-		@@include('@pathCommonViews/load.html')
 		<!--没有数据显示图标-->
 		@@include('@pathCommonViews/noDataImg.html')
 		<!--列表加载显示图标-->
-		@@include('@pathCommonViews/loading/listLoading.html')
+		@@include('@pathCommonCom/loading/listLoading.html')
 		<!--公共页面头部-->
 		@@include('@pathCommonViews/headBarConfig.html',{"pathName":"登录日志查询"})
 		<!--提示部分-->
@@ -76,8 +74,7 @@
 			{{/each}}
 		</script>
 		@@include('@pathInclude/views/footer.html')
-		<!-- 添加埋点 -->
-		@@include('@pathInclude/views/header.html')
+
 		<script src="/mine/static/js/journal.js"></script>
 	</body>
 

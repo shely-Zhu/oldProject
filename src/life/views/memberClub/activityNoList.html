@@ -1,0 +1,35 @@
+<!--/**
+ * 会员俱乐部-活动列表-搜索无结果
+ * @author  liuhongyu 2019 11-01
+ */-->
+
+ <!doctype html>
+ <html lang="en">
+ 
+ <head>
+     @@include('@pathInclude/views/meta.html') 
+     <link rel="stylesheet" href="/life/static/css/activityList.css">
+     <title>会员俱乐部-活动列表-搜索无结果</title>
+     <script src="/include/js/adaptation_750ui.js"></script>
+ </head>
+ 
+ <body>
+    @@include('@pathCommonViews/noDataImg.html')
+    @@include('@pathCommonCom/loading/listLoading.html')
+    <section id="activityList" style="background-color: #fff;">
+        <div class="activityNoListBox">
+            <img src="/life/static/img/Life_none_Empty state@2x.png" alt="">
+            <p>抱歉！没有搜索到相关内容</p>
+        </div>
+        <div class="activityList activityNoList">
+            <h3>推荐活动</h3>
+            
+        </div>
+        
+    </section>
+    @@include('@pathCommonViews/activityList.html')
+    @@include('@pathInclude/views/footer.html')
+   
+    <script src="/include/js/iscroll.js"></script>
+    <script src="/life/static/js/memberClub/activityNoList.js"></script>
+ </body>

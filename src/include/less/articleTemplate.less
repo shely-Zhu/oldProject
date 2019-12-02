@@ -10,3 +10,107 @@
 @import url("@pathCommonLessCom/alertBox.less");
 @import url("@pathCommonLessCom/headBarConfig.less");
 
+body{
+    background:@FFFFFF;
+}
+.btnButton{
+    width: 100%;
+    height: .98rem;
+    margin: 0;
+    position: fixed;
+    bottom: 0px;
+    display:none;
+
+}
+.mui-btn{
+    height: .98rem;
+    line-height: .98rem;
+    font-size: .32rem;
+    border-radius: 0;
+    background-image: linear-gradient(-135deg, #B57E45 0%, #F1CDA8 100%);
+}
+.artHeaderCont{
+    .artImg{
+        width: 100%;
+        position:relative;
+        img{
+            width: 100%;
+        }
+        span{
+            display:inline-block;
+            background:@FFFFFF;
+            width: 0.4rem;
+            height:0.4rem;
+            position:absolute;
+            top:50%;
+            left: 50%;
+            margin:-0.2rem 0 0 -0.2rem;
+
+        }
+    }
+    .artTitle{
+        padding:0.3rem;
+        p{
+            font-size: 0.44rem;
+            font-weight:500;
+            color:@000000;
+            line-height:0.68rem;
+        }
+    }
+    .videoButton{
+        display:none;
+    }
+    .playIcon{
+        font-size:0.7rem;
+        background:linear-gradient(139deg,rgba(251,226,189,1) 0%,rgba(246,194,134,1) 100%);
+        background-clip: text;
+        -webkit-background-clip: text;
+        text-fill-color: transparent;
+        -webkit-text-fill-color: transparent;
+    }
+    .videoPlayIcon{
+        position:absolute;
+        top:50%;
+        left:50%;
+        margin:-0.35rem 0 0 -0.35rem;
+    }
+    .audioArea{
+        margin:0.3rem 0.3rem 0.15rem;
+        .audioPlay{
+            padding:0.2rem 0.3rem;
+
+            .audiocont{
+               /*  float:left; */
+            }
+            .audioTxt{
+                /* float:left; */
+                overflow:hidden;
+                margin-left: 0.2rem;
+
+            }
+
+            .audioDisc{
+                /* width:0; */
+                margin-bottom:0.11rem;
+                color:@333;
+
+            }
+            .audioTime{
+                span{
+                    display:inline-block;
+                    margin-right:0.2rem;
+                    color:@9B9B9B;
+                }
+            }
+        }
+        .autoTips{
+            font-size:0.24rem;
+            color:@9B9B9B;
+            text-align: center;
+        }
+    }
+}
+
+
+
+

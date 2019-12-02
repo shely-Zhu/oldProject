@@ -13,10 +13,8 @@
 	</head>
 
 	<body>
-
-		@@include('@pathCommonViews/load.html')
 		<!--@@include('@pathCommonViews/noDataImg.html')  -->
-		@@include('@pathCommonViews/loading/listLoading.html')
+		@@include('@pathCommonCom/loading/listLoading.html')
 		<!-- 暂无数据 -->
 		<div class="without noData" id="emptyBox" style="display:none;">
 			<div class="box vertical center">
@@ -68,8 +66,7 @@
 		</script>
 
 		@@include('@pathInclude/views/footer.html')
-		<!-- 添加埋点 -->
-		@@include('@pathInclude/views/header.html')
+
 		<script src="/mine/static/js/monthReport/monthReportList.js"></script>
 
 	</body>

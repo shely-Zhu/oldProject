@@ -25,6 +25,8 @@ var gulp = require('gulp'),
     fs = require('fs'),
     os = require('os'),
     minimist = require('minimist'), //命令行替换变量
+    glob = require('glob'),
+
     //其他所需文件
     erudaFile = fs.readFileSync('conf/eruda.js', 'utf-8'), //读取eruda.js内容
     CustomEventIeFile = fs.readFileSync('conf/CustomEventIE.js', 'utf-8'), //读取CustomEventIE.js文件内容
@@ -185,16 +187,16 @@ gulp.task('proxyTask', function() {
                     target: 'https://app.htjf4.com',
                     // target: 'http://172.16.187.129:8080',//李亚楠
                     // target: 'http://192.168.50.254:8085',
-                    target: 'https://app.chtfundtest.com',
+                    // target: 'https://app.chtfundtest.com',
                     changeOrigin: true,
                     secure: false,
                 }),
 
                 proxy(['/wap', '/web/', '/jf/'], {
-                     target: 'https://h5.htjf4.com',
+                    target: 'https://h5.htjf4.com',
                     //  target: 'http://172.16.187.129:8080',//李亚楠
                     // target: 'http://172.16.187.164:8081',
-                     // target: 'https://h5.chtfundtest.com',
+                    // target: 'https://h5.chtfundtest.com',
                     changeOrigin: true,
                     secure: false,
                 }),
@@ -554,13 +556,63 @@ gulp.task("includeJs", ['htmd'], function() {
         .pipe(gulp.dest(host.path + 'rev/include/js'));
 })
 
+//查config.js的重复
+gulp.task('jsCpd', function () {
+
+    var allUrl = path.resolve(__dirname, './src/common/js/components/config/*.js');
+
+    var arr = [];
+
+    glob.sync(allUrl).forEach(function(name) {
+
+        if (name.indexOf('Url') != -1 || name.indexOf('Api') != -1) {
+
+            var fileContent = fs.readFileSync(name, 'utf-8');
+
+            //获取module.export里的内容
+            fileContent = fileContent.substring(fileContent.indexOf('{'), fileContent.indexOf('}')).replace(/\s/g, "");
+
+            //用；拆分
+            var fileArr = fileContent.split(';');
+
+            //用=拆分
+            for (var i in fileArr) {
+                var arrKey = fileArr[i].split('=')[0],
+                    arrValue = fileArr[i].split('=')[1];
+
+                if (arrKey.indexOf('//') == -1) {
+                    //这条是没有被注释的
+                    if (arr[arrKey]) {
+                        //重复了
+                        console.log(name + '文件的' + arrKey + '重复了')
+                        process.exit();
+                    } else {
+                        arr[arrKey] = arrValue;
+                    }
+                }
+
+
+            }
+
+
+        }
+    })
+
+});
+
 
 //非include文件夹下的js文件打包
-gulp.task("webpack", function(cb) {
 
+gulp.task("webpack", ['jsCpd'], function(cb) {
     //测试环境
     pump([
         gulp.src(['src/*']),
+
+        //禁止使用es6
+        // plugins.jshint(),
+
+        // plugins.jshint.reporter('default'),
+
         plugins.webpack(webpackConfig),
 
         //添加changeLocalHistory、eruda和CustomEventIeFile的文件内容
@@ -593,43 +645,46 @@ gulp.task("webpack", function(cb) {
 });
 
 //html文件打包
-gulp.task('html', function() {
+gulp.task('html', function (cb) {
 
-    return gulp.src(['src/**/views/**/*.html', '!src/common/views/**/*.html']) //- 读取 rev-manifest.json 文件以及需要进行css名替换的文件
+    pump([
+         gulp.src(['src/**/views/**/*.html', '!src/common/views/**/*.html']), //- 读取 rev-manifest.json 文件以及需要进行css名替换的文件
 
-    //处理公共路径变量
-    .pipe(
-        through.obj(function(file, enc, cb) {
+        //处理公共路径变量
+        through.obj(function (file, enc, cb) {
             file = pathVar.changePathVar(file);
             this.push(file);
             cb()
-        })
-    )
+        }),
+        
 
-    .pipe(plugins.advancedFileInclude({ //头尾公共部分添加
+        plugins.advancedFileInclude({ //头尾公共部分添加
             prefix: '@@',
             //basepath: '@file',
             context: {
                 textarea: 'textarea',
                 select: 'select',
             },
-        }))
-        .pipe(plugins.htmlmin({
+        }),
+
+        plugins.htmlmin({
             removeComments: true, //清除HTML注释
-        }))
+        }),
 
-    //与host.middleHtmlPath中的内容做比对
-    .pipe(plugins.changed(host.middleHtmlPath, { hasChanged: plugins.changed.compareSha1Digest }))
-        .pipe(plugins.debug({ title: 'html-有变动的文件:' }))
+        //与host.middleHtmlPath中的内容做比对
+        plugins.changed(host.middleHtmlPath, { hasChanged: plugins.changed.compareSha1Digest }),
 
-    //输出到middleHtmlPath文件夹，用于再次修改时比对，此时还没有加版本号
-    .pipe(gulp.dest(host.middleHtmlPath))
+        plugins.debug({ title: 'html-有变动的文件:' }),
 
-    //输出到host.middleHtmlPathRev文件夹
-    .pipe(gulp.dest(host.middleHtmlPathRev))
+        //输出到middleHtmlPath文件夹，用于再次修改时比对，此时还没有加版本号
+        gulp.dest(host.middleHtmlPath),
 
-    //先打出一份来
-    .pipe(gulp.dest(host.path))
+        //输出到host.middleHtmlPathRev文件夹
+        gulp.dest(host.middleHtmlPathRev),
+
+        //先打出一份来
+        gulp.dest(host.path)
+    ], cb)
 })
 
 

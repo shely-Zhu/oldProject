@@ -8,14 +8,16 @@
 <head>
     @@include('@pathInclude/views/meta.html')
     <link rel="stylesheet" href="/account/static/css/private/privateDetail.css">
-    <title></title>
+    <title>私募产品详情页</title>
 </head>
 
 <body>
-	@@include('@pathCommonViews/load.html') 
+	
+	@@include('@pathCommonCom/loading/listLoading.html')
+
 	<div class="privateDetail">
 		<div class="topContent"> 
-	 		@@include('@pathCommonViews/headBarConfig.html',{"bgColors":"#595E6F, #1C2135","showType":"1"})
+	 		@@include('@pathCommonViews/headBarConfig.html',{"bgColors":"#595E6F, #1C2135","showType":"1", "serviceType":"1"})
 	 		<div class="hide typeWrap type_0">
 	 			<!-- 类型一 稳金-->	
 	 			<div class="con">
@@ -156,7 +158,7 @@
 		 			<ul class="mui-row type">
 		 			    <li class="mui-col-sm-12 mui-col-xs-12">
 		 			        <span>产品期限</span>
-		 			        <span class="num cpqx">--</span>
+		 			        <span class="num cpqx fontSize28">--</span>
 		 			    </li>
 		 			</ul>
 		 		</div>
@@ -268,7 +270,7 @@
 	 			<div class="clearfix titleWrap type5Wrap">
 	 				<span class="title dwjz active">单位净值</span>
 	 				<span class="title ljjz">累计净值</span>
-	 				<div class="arrow">
+	 				<div class="arrow" id="netValueDetailArrow">
 	 					<span class="img"></span>
 	 				</div>
 	 				<span class="rightTitle" id="netValueDetailBtn">净值明细</span>
@@ -285,9 +287,9 @@
 	 				<!-- 无数据提示 -->
 	 				<div class="hide noDataHintEcharts">暂无数据</div>
 	 				<div class='mui-row tab'>
-	 					<span class="mui-col-sm-3 mui-col-xs-3 time oneMonth active" num="0">近一个月</span>
+	 					<span class="mui-col-sm-3 mui-col-xs-3 time oneMonth" num="0">近一个月</span>
 	 					<span class="mui-col-sm-3 mui-col-xs-3 time threeMonth" num="1">近三个月</span>
-	 					<span class="mui-col-sm-3 mui-col-xs-3 time newYear" num="3">近一年</span>
+	 					<span class="mui-col-sm-3 mui-col-xs-3 time newYear active" num="3">近一年</span>
 	 					<span class="mui-col-sm-3 mui-col-xs-3 time sinceNow" num="4">成立至今</span>
 	 				</div>
 	 			</div>
@@ -336,14 +338,14 @@
 	 			</div>
  			</div>
  			<div class="footer">
- 				<div class="redeemBtn">赎回</div>
- 				<div class="subscribeBtn">申购</div>
+ 				<div class="goldTxtButton redeemBtn">赎回</div>
+ 				<div class="goldBgButton subscribeBtn">申购</div>
  			</div>
 	 	</div>
 	</div>
 
 	@@include('@pathInclude/views/footer.html')
-	@@include('@pathInclude/views/header.html')
+
 	<script src="/include/js/vendor/echarts/echarts.min.js"></script>
 	<script src="/account/static/js/private/privateDetail.js"></script>
 

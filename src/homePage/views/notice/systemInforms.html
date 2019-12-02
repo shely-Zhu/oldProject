@@ -9,16 +9,23 @@
 	<title>系统通知</title>
 </head>
 <body>
-    @@include('@pathCommonViews/load.html')
     @@include('@pathCommonViews/noDataImg.html')
-    @@include('@pathCommonViews/loading/listLoading.html')
+    @@include('@pathCommonCom/loading/listLoading.html')
     <div id="systemInformsBox">
         @@include('@pathCommonViews/headBarConfig.html',{"bgColors":"#2C3E77,#273971","showType":"0","pathName":""}) 
         <div id="systemInformsCon">            
             <div class="list">
                 <div class="contentWrapper">
-                    <div id="informsListWrapper"></div>
-                    @@include('../../../common/views/goTop.html')   
+                    <ul class="mui-table-view">
+                        <li class="mui-table-view-cell">
+                            <div id="informsListWrapper"></div>
+                            <div class="noDataCon">
+                                <img class="emptyImg" src="/homePage/static/img/home_Empty.png" alt="">
+                                您暂时没有通知
+                            </div>
+                        </li>
+                        @@include('@pathCommonViews/goTop.html')
+                    </ul> 
                 </ul>
                 </div>
             </div>
@@ -36,8 +43,6 @@
     </script>
 
 	@@include('@pathInclude/views/footer.html')
-    <!-- 添加埋点 -->
-    @@include('@pathInclude/views/header.html')
     <script src="/homePage/static/js/systemInforms.js"></script>
 </body>
 </html>

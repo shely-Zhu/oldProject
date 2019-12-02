@@ -1,0 +1,68 @@
+<!-- /**  
+ * @Page:  财富学院
+ * @Author: yanruiting 
+ * @Date:   2019-11-25
+ * 
+ */ -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    @@include('@pathInclude/views/meta.html')
+    <link rel="stylesheet" href="/homePage/static/css/fortuneClassroom.css">
+    <title>财富学院</title>
+</head>
+
+<body>
+    <div class="container">
+        <!-- 暂无数据 -->
+        @@include('@pathCommonViews/noDataImg.html',{"tipText":"暂无数据"})
+        <!-- 加载中loading -->
+        @@include('@pathCommonCom/loading/listLoading.html')
+        @@include('@pathCommonViews/headBarConfig.html',{"pathName":"财富学院"})
+        <div class="br"></div>
+        <div class="mui-content  myAsset">
+            <!-- 放置页面内容 -->
+        </div>
+    </div>
+
+    <script id="first-template" type="text/x-handlebars-template">
+        {{! 列表 内容 使用mui的上拉加载}}
+        <div class="list">
+            {{! list是包裹上拉加载区域的，在js中计算当前页面中的list高度，不能超出一屏}} {{! 初始化上拉加载区域，使用contentWrapper class}} {{! contentWrapper 需要添加样式，具体见less文件}}
+            <div class="contentWrapper">
+                <ul class="mui-table-view">
+                    <li class="mui-table-view-cell">
+                        {{! 所有内容 需要放在这个li里，且里面不能再用Li元素}} {{{content}}}
+                    </li>
+                </ul>
+                <!-- 返回顶部 -->
+                @@include('@pathCommonViews/goTop.html')
+            </div>
+        </div>
+    </script>
+
+    <script id="second-template" type="text/x-handlebars-template">
+        {{! 左侧页面列表}} 
+        {{#each this}}
+        {{#if isLive}}
+            <div class="roomItem item">
+                <div class="roomVideo">
+                    <img class="articalImg" src="{{imageUrlShowOnline}}" alt="">
+                    <img class="play" src="/homePage/static/img/bofang@2x.png" alt="">
+                </div>
+                <div class="roomTitle">{{title}}</div>
+                <div class="roomContent">{{intro}}</div>
+            </div>
+        {{else}}
+            <div class="roomItem knowledgeItem">
+                <div class="roomImg"><img src="{{imageUrlShowOnline}}" alt=""></div>
+                <div class="roomTitle">{{title}}</div>
+                <div class="roomContent">{{intro}}</div>
+           </div>
+        {{/if}}
+        {{/each}}
+    </script>
+    @@include('@pathInclude/views/footer.html')
+    <script src="/homePage/static/js/fortuneClassroom.js"></script>
+</body>
+</html>

@@ -1,0 +1,346 @@
+/**
+ * 私募资产详情页
+ *
+ * @author tianjunguo 20191120
+ */
+
+@import url("@pathCommonLess/mui/resetMUI.less");
+
+@import url("@pathCommonLess/chtwm.less");
+@import url("@pathCommonLess/app.less");
+
+@import url("@pathCommonLessCom/headBarConfig.less");
+
+@import url("@pathCommonLessCom/payPassword.less");
+
+body{
+	background: @F7FAFD
+}
+
+.privateDetail{
+
+	.hide{
+		display: none ;
+	}
+
+	.hidden{
+		visibility: hidden;
+	}
+
+	.topContent{
+
+		//按钮点击 打开状态
+		&.open{
+			background: @c005;
+
+			.openWrap{
+				display: block;
+			}
+
+			//展开状态
+			.openButton{
+				//background: url("/account/static/img/productDetail/openButton_open.png") !important;
+				//background-size: 100% 100%;
+
+				.img{
+					display: none !important;
+				}
+
+				.openImg{
+					display: block !important;
+				}
+			}
+		}
+
+		.typeWrap{
+
+			&.type_3{
+
+   				margin-bottom: 0.3rem;
+
+				.con{
+					height: 5.6rem;
+				}
+
+				.mui-row.type{
+					margin-bottom:0.22rem;
+
+					&:last-child{
+						margin-bottom: 0;
+					}
+				}
+			}
+
+			.con{
+				background: url("/account/static/img/public_account_bg.png");
+				height: 4.94rem;
+				background-size: 100% 100%;
+
+				.bannerTop {
+				    color: @F7DDCF;
+				    margin: 0 0.3rem;
+				    padding-top: 1.54rem;
+
+				    .sum {
+				        font-size: 0.26rem;
+				        .j_text{
+				            line-height: .37rem;
+				        }
+				    }
+				    .assetsBtn{
+				        width: 1.5rem;
+				        height: 0.4rem;
+				        background: rgba(255, 255, 255, 0.1);
+				        border-radius: 0.25rem;
+				        font-size: 0.2rem;
+				        text-align: center;
+				        color: @c005;
+				        opacity: 0.8;
+				        line-height: 0.4rem;
+				    }
+				    
+				}
+
+				//金额
+				.totalM{
+				    font-size: 0.68rem;
+				    line-height: 0.8rem;
+				    margin: 0.1rem 0.3rem 0;
+                    font-weight:bold;
+                    color:rgba(255,255,255,1);  
+				    background:linear-gradient(360deg, rgba(186,140,112,1) 0%, rgba(244,210,192,1) 100%);
+				    -webkit-background-clip:text;
+				    -webkit-text-fill-color:transparent;
+				}
+                .toConfirm{
+                    margin: .1rem .31rem .39rem;
+                    font-size: .26rem;
+                    color: @FFFFFF;
+                    .confirmMoney{
+                        margin-left: .16rem;
+                        color:rgba(237,201,155,1);
+                        font-size: .38rem;
+                    }
+                }
+				// 已持仓
+				.type {
+//				    width: 100%;
+				    margin: 0 0.39rem;
+				    li {
+				        span {
+				            display: block;
+//				            color: @c005;
+				            color:rgba(255,255,255,1);
+				            opacity: 0.7;
+				            font-size: 0.26rem;
+				            &:first-child {
+				                padding-bottom: 0.06rem;
+				            }
+				        }
+				    }
+
+				    .num{
+				        font-size: 0.38rem;
+				        opacity: 1;
+				        color: @c005;
+				    }
+
+				}
+			}
+			
+			.openButton{
+				//background: url("/account/static/img/productDetail/openButton.png");
+				//background-size: 100% 100%;
+				height: 0.3rem;
+				width: 2.3rem;
+				margin: 0 auto;
+
+				.img{
+					display: block;
+				}
+
+				.openImg{
+					display: none;
+				}
+			}
+
+		}
+
+		.openWrap{
+			display: none;
+			background: @c005;
+			margin-bottom: 0.3rem;
+			padding: 0.4rem;
+
+			.openDiv{
+				position: relative;
+				
+				.num{
+					font-size: 0.3rem;
+					color: @4A4A4A;
+				}
+
+				.txt{
+					font-size: 0.26rem;
+					color: @9B9B9B;
+					margin-bottom: 0.04rem;
+				}
+			}
+		}
+
+		.type_1{
+			.openWrap{
+				height: 1.65rem;
+
+				.openDiv{
+					top: 50%;
+					transform: translateY(-50%); 
+				}
+			}
+		}
+
+		.type_2{
+			.openWrap{
+				padding-top: 0.6rem;
+				padding-bottom: 0.4rem;
+
+				.openCon{
+					margin-bottom: 0.16rem;
+
+					&:last-child{
+						margin-bottom: 0;
+
+						.openDiv{
+							padding-left: 0;
+						}
+					}
+				}
+				
+			}
+		}
+	}
+
+	.actionWrap{
+		height: 1.4rem;
+		text-align: center;
+		line-height: 1.4rem;
+		background: @c005;
+		margin-bottom: 0.3rem;
+
+		.img{
+			height: 0.6rem;
+			width: 0.6rem;
+			display: inline-block;
+			margin-right: 0.15rem;
+			vertical-align: middle;
+		}
+
+		.txt{
+			vertical-align: middle;
+			font-size: 0.28rem;
+		}
+	}
+
+	.titleWrap{
+		height: 1rem;
+		line-height: 1rem;
+		padding-left: 0.3rem;
+		padding-right: 0.3rem;
+		background: @c005;
+		color: @272727;
+		font-size: 0.32rem;
+
+		.title{
+			display: inline-block;
+		}
+        .dividend{
+            float: right;
+            
+        }
+		.arrow{
+			float: right;
+			width: 0.3rem;
+			height: 1rem;
+
+		}
+	}
+
+    .lineWrap {
+        background: @c005;
+        padding-top: 0.3rem;
+        padding-bottom: 0.3rem;
+        margin-bottom: 0.3rem;
+        .titleWrap {
+            color: @8A8A8A;
+            height: 0.6rem;
+            line-height: 0.6rem;
+            .arrow {
+                margin-top: 0;
+                height: .6rem;
+            }
+            .title {
+                &:first-child {
+                    margin-right: 0.6rem;
+                }
+                &.active {
+                    color: @272727;
+                    border-bottom: 0.06rem solid @061D6A;
+                }
+            }
+            .rightTitle {
+                float: right;
+            }
+        }
+        .lineDraw {
+            padding-left: 0.3rem;
+            padding-right: 0.3rem;
+            .line {
+                height: 4.5rem;
+            }
+            .tab {
+                height: 0.56rem;
+                line-height: 0.56rem;
+                font-size: 0.24rem;
+                border: 0.02rem solid @061D6A;
+                border-radius: 0.08rem;
+                .time {
+                    color: @061D6A;
+                    text-align: center;
+                    border-right: 0.02rem solid @061D6A;
+                    width: 20%;
+                    &:last-child {
+                        border-right: 0;
+                    }
+                    &.active {
+                        background: @061D6A;
+                        color: @c005;
+                    }
+                }
+            }
+        }
+    }
+
+	.dealReg{
+		background: @c005;
+		margin-bottom: 0.3rem;
+
+		.titleWrap{
+			border-bottom: 1px solid @E7E9ED;
+		}
+	}
+	.footer{
+	    display: none;
+	    background: @FFFFFF;
+	    .buttonStyle{
+	        line-height: .98rem;
+	        text-align: center;
+	        height:.98rem;
+	        font-size: .32rem;
+	        color: #0E246C;
+	        &:last-child{
+	            color: @FFFFFF;
+	            background:linear-gradient(135deg,rgba(108,131,201,1) 0%,rgba(6,29,106,1) 100%);
+	        }
+	    }
+	}
+}

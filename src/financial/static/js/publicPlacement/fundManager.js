@@ -12,61 +12,48 @@ require('@pathCommonJs/ajaxLoading.js');
 var tipAction = require('@pathCommonJs/components/tipAction.js');
 var splitUrl = require('@pathCommonJs/components/splitUrl.js')();
 var generateTemplate = require('@pathCommonJsComBus/generateTemplate.js');
-$(function() {
+//获取地址栏参数
+getQueryString = function (name) {
+  var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)");
+  var r = window.location.search.substr(1).match(reg);
+  if (r != null) return unescape(r[2]); return '';
+}
+$(function () {
   var somePage = {
     $e: {
-  
+
     },
     gV: { // 全局变量
-       
+
     },
-    init:function(){
+    init: function () {
       var that = this;
-    //   that.event()
-    //   that.getData()
+      that.event()
+      that.getData()
     },
-    getData: function(t) {
+    getData: function (t) {
       var that = this;
-      var obj = [{ // 系统调仓记录列表
-          url: site_url.productRecord_api,
-          data: {
-            "projectId":"10103",//项目编号
-          },
-          //async: false,
-          needDataEmpty: true,
-          callbackDone: function(json) {
-            console.log(json.data)
-            var data = json.data
-            $(".productName").text(data.productName)
-            $(".investTactics").text(data.investTactics)
-            $(".productTerms").text(data.productTerms)
-            $(".custodianUser").text(data.custodianUser)
-            $(".custodianOrg").text(data.custodianOrg)
-            $(".shareRegisterOrg").text(data.shareRegisterOrg)
-            $(".productRecord").text(data.productRecord)
-            $(".riskLevel").text(data.riskLevel)
-            $(".newScale").text(data.newScale)
-            $(".productCharges").text(data.productCharges)
-          },
+      var obj = [{
+        url: site_url.prfFundManagerInfo_api,
+        data: {
+          fundCode: getQueryString('fundCode')
+        },
+        callbackDone: function (json) {
+
+          json = json.data.pageList
+          console.log(json)
+
+          var tplm = $("#dataLists").html();
+          var template = Handlebars.compile(tplm);
+          var html = template(json);
+          $(".tplBox").html(html);
+
+        },
       }];
       $.ajaxLoading(obj);
-  },
-    event:function(){
-    //   $(".openOff").click(function(){
-    //     if($(".openOff .open").text() != "收起"){
-    //       $(".productCostDetail").addClass("openStyle")
-    //       $(".productCostDetail").removeClass("productCostDetail");
-    //       $(".openOff .open").text("收起")
-    //       $(".openOff .imgWrap .img").addClass("changeImg")
-    //       $(".openOff .imgWrap .img").removeClass("img")
-    //     }else{
-    //       $(".openStyle").addClass("productCostDetail")
-    //       $(".openStyle").removeClass("openStyle");
-    //       $(".openOff .open").text("展开")
-    //       $(".openOff .imgWrap .changeImg").addClass("img")
-    //       $(".openOff .imgWrap .changeImg").removeClass("changeImg")
-    //     }
-    //   }) 
+    },
+    event: function () {
+
     }
   }
   somePage.init()
