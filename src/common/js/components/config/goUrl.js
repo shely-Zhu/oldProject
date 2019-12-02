@@ -324,9 +324,17 @@ module.exports = function () {
     //活动详情->实名
     this.realName_url = go_url.no_url + '/mine/views/realName/realName.html';
     //活动详情->风测
-    this.riskAppraisal_url = go_url.no_url + '/mine/views/riskAppraisal/riskAppraisal.html?type=private';
+    this.riskAppraisal_url = go_url.no_url + '/mine/views/riskAppraisal/riskAppraisal.html';
     //活动详情->合格投资者认证
-    this.qualifiedInvestor_url = go_url.no_url + '/mine/views/qualifiedInvestor/qualifiedInvestor.html?type=private';
+    this.qualifiedInvestor_url = go_url.no_url + '/mine/views/qualifiedInvestor/qualifiedInvestor.html';
+    //活动详情->合格投资者认证结果页
+    this.qualifiedInvestorResult_url = go_url.no_url + '/mine/views/qualifiedInvestor/qualifiedInvestorResult.html';
+    //活动详情->信息补全
+    this.completeInformation_url = go_url.no_url + '/mine/views/information/completeInformation.html';
+    //活动详情->投资者分类申请
+    this.investorClassification_url = go_url.no_url + '/mine/views/investorClassification/investorClassification.html';
+    //活动详情->投资者分类结果页
+    this.investorClassificationResult_url = go_url.no_url + '/mine/views/investorClassification/investorClassificationResult.html';
     //活动详情->去成交
     this.wealthIndex_url = go_url.no_url + '/financial/views/wealthIndex.html';
     
