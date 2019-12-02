@@ -127,7 +127,7 @@
                     }
 
                     //显示中间部分文案
-                    html += '<div class="elastic_p">' + that.options.p + '</div></div>' +
+                    html += '<div class="elasticP"><div class="elasticPMiddle">' + that.options.p + '</div></div></div>' +
                         '<div class="elasticButtons">';
 
                     if( that.options.hideCelButton ){
