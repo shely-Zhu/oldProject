@@ -80,8 +80,7 @@ $(function() {
             $.each(that.gV.navList, function(i, el) {
 
                 that.gV.ajaxArr[i] = {
-                    isConfirm: 1, //请求类型
-
+                    isConfirm: el.num, //请求类型
                     pageNo: that.gV.aP.pageCurrent, //当前第几页(默认为1) 非必填项, 默认设置成第一页
                     pageSize: that.gV.aP.pageSize, //每页显示几条数据(默认10) 非必填项， 默认设置成20
                 }
@@ -89,6 +88,13 @@ $(function() {
                     id: i,
                     content: wrap_html
                 })
+                debugger
+                if (el.num == '1') {
+                    $('.hopper').show();
+                } else {
+                    $('.hopper').hide();
+                }
+
             })
 
             var obj = {
@@ -377,6 +383,30 @@ $(function() {
         },
         events: function() { //绑定事件
             var that = this;
+            mui("body").on('tap', '.hopper', function(e) {
+                    $('.mask').show();
+                    $('.hopperCon').show();
+
+                })
+                //点击筛选数据
+            mui("body").on('tap', '.hopperCon li', function(e) {
+                    $(this).addClass('active').siblings('li').removeClass('active');
+                    $('.mask').hide();
+                    $('.hopperCon').hide();
+                    that.gV.businessType = $(this).attr('data');
+                    // 重置上拉加载
+                    mui('.contentWrapper').pullRefresh().refresh(true);
+                    that.gV.aP.pageNo = 1;
+                    that.getElements.contentWrap.html('');
+                    //重新初始化
+                    that.initMui();
+                    mui('.contentWrapper').pullRefresh().scrollTo(0, 0, 0);
+                })
+                // 点击遮罩隐藏
+            mui("body").on('tap', '.mask', function(e) {
+                $('.mask').hide();
+                $('.hopperCon').hide();
+            })
         }
     };
     data.init();
