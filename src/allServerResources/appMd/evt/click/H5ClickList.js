@@ -150,6 +150,33 @@ var clickList = {
 	"privateIndex_guessLike" : { type:'click', evtid: '4', topic: '私募首页-猜你喜欢', info: '' } ,
 	"privateIndex_hotSpot" : { type:'click', evtid: '5', topic: '私募首页-热门私募', info: ''} ,
 	"privateList_detail" : { type:'click', evtid: '6', topic: '私募列表页-产品详情', info: ''} ,
+	/*************************************************************mine文件夹下******************************************************************************************/ 
+	"activitiesEnrolment_ongoing " : { type:'click', evtid: '', topic: '已报名活动-进行中', info: ''} ,
+	"activitiesEnrolment_complete" : { type:'click', evtid: '', topic: '已报名活动-已结束', info: ''} ,
+
+	"feedback_functionalAbnormality" : { type:'click', evtid: '', topic: '意见反馈-功能异常', info: ''} ,
+	"feedback_safetyProblem" : { type:'click', evtid: '', topic: '意见反馈-安全问题', info: ''} ,
+	"feedback_productSuggestion" : { type:'click', evtid: '', topic: '意见反馈-产品建议', info: ''} ,
+	"feedback_otherQuestions" : { type:'click', evtid: '', topic: '意见反馈-其他问题', info: ''} ,
+	"feedback_addImg" : { type:'click', evtid: '', topic: '意见反馈-添加图片', info: ''} ,
+	"feedback_submit" : { type:'click', evtid: '', topic: '意见反馈-提交按钮', info: ''} ,
+
+	"details_understandingDetails" : { type:'click', evtid: '', topic: '权益详情-了解详情', info: ''} ,
+	"privateList_detail" : { type:'click', evtid: '', topic: '', info: ''} ,
+	"privateList_detail" : { type:'click', evtid: '', topic: '', info: ''} ,
+	"privateList_detail" : { type:'click', evtid: '', topic: '', info: ''} ,
+	"privateList_detail" : { type:'click', evtid: '', topic: '', info: ''} ,
+	"privateList_detail" : { type:'click', evtid: '', topic: '', info: ''} ,
+	"privateList_detail" : { type:'click', evtid: '', topic: '', info: ''} ,
+	"privateList_detail" : { type:'click', evtid: '', topic: '', info: ''} ,
+	"privateList_detail" : { type:'click', evtid: '', topic: '', info: ''} ,
+	"privateList_detail" : { type:'click', evtid: '', topic: '', info: ''} ,
+	"privateList_detail" : { type:'click', evtid: '', topic: '', info: ''} ,
+	"privateList_detail" : { type:'click', evtid: '', topic: '', info: ''} ,
+	"privateList_detail" : { type:'click', evtid: '', topic: '', info: ''} ,
+	"privateList_detail" : { type:'click', evtid: '', topic: '', info: ''} ,
+	"privateList_detail" : { type:'click', evtid: '', topic: '', info: ''} ,
+	"privateList_detail" : { type:'click', evtid: '', topic: '', info: ''} ,
 	
 }
 
