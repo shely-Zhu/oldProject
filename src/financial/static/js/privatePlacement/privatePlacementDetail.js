@@ -19,7 +19,9 @@ $(function(){
 		//获取页面元素
 		$e:{
 			projectId:splitUrl['projectId'],
-		adjustmentTemp: $('#wrap-template'), // 最新调仓模板
+			adjustmentTemp: $('#wrap-template'), // 最新调仓模板
+			conditionTemplate: $('#condition-template'), // 最新调仓模板
+			realLi: $('#real-condition>li'), // 条件下的五条
 			lineType:'',
 		},
 		getElements : {
@@ -475,6 +477,39 @@ $(function(){
 			$.ajaxLoading(obj);
 
 		},
+		// 客户预约产品所需条件
+		getConditionsOfOrder:function(){
+			var that = this;
+
+			//发送ajax请求
+			var obj = [{
+				url: site_url.conditionsOfOrder_api,
+				data: {
+					projectId: that.$e.projectId,
+				},
+				needLogin:true,//需要判断是否登陆
+				callbackDone: function(json){  //成功后执行的函数
+					$("#tips-wrap").show();//显示预约条件
+//					generateTemplate(json.data,$("#real-condition"), that.$e.conditionTemplate);
+					var jsonData = json.data;
+					that.$e.realLi.hide();
+					$.each(jsonData, function(e,v) {
+						if(v.show == "1"){//如果显示。show=1
+							that.$e.realLi.eq(e*1-1).show();
+							that.$e.realLi.eq(e*1-1).find(".bank-status").html(v.statusDesc);
+						}
+					});
+
+
+				},
+				callbackFail: function(json){  //失败后执行的函数
+					tipAction(json.msg);
+
+				}
+			}];
+			$.ajaxLoading(obj);
+
+		},
 		queryReourceListByLabel:function(){   //根据标签号查询产品材料
 			var that = this;
 			var labels = '0,1,2,3,4,5'
@@ -618,6 +653,7 @@ $(function(){
 
 			// 立即预约
 			mui("body").on('tap', '.buyButton' , function(){
+				that.getConditionsOfOrder();//获取预约条件
 				if(that.data.fundDetailObj.isElecContract == "1"){//电子合同逻辑
 					if(that.data.fundDetailObj.isAllowAppend == "1"){//追加商品参数fundCode,
 						//跳转到追加商品链接
