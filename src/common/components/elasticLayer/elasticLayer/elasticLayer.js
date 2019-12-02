@@ -54,20 +54,27 @@
                     //默认参数
                     this.defaults = {
                         id: 'elasticLayer', //弹层的唯一id 不传默认为elasticLayer，如果多个弹层的话要传，否则区分不了
-                        title: '尊敬的用户', //如果不传默认为'尊敬的用户'
-                        p: '',
-                        yesTxt: '确定', //确定按钮的文案，不传默认为确定
-                        celTxt: '取消', //返回按钮的文案，不传默认为返回
+                        title: '', //如果不传，默认不显示标题
+                        p: '',  //弹层上文案
                         zIndex: 10000000, //该弹层的z-index，因为不知道有几个弹层和弹层顺序，不传默认为100
+
+                        //yes按钮相关
+                        yesTxt: '确定', //确定按钮的文案，不传默认为确定
                         yesButtonPosition: 'right', //确定按钮在左边还是在右边，不传的话，默认为'left'，在左边，如果在右边，传'right'
-                        callbackCel: $.noop, //取消按钮的回调函数，默认为空
                         callback: $.noop, //确定按钮的回调函数，默认为空(jQuery的空函数，仅仅想要传递一个空函数的时候可以使用)
+                        needYesHref: false, //是否需要把确定按钮改成a标签，默认false
+                        yesHref: 'javascript:;', //确定按钮a链接的默认href
+
+                        //cel按钮相关
+                        celTxt: '取消', //返回按钮的文案，不传默认为返回
+                        callbackCel: $.noop, //取消按钮的回调函数，默认为空
+                        needCelHref: false, //是否需要把取消按钮改成a标签，默认false
+                        celHref: 'javascript:;', //取消按钮a链接的默认href
+
                         iconTxt: '', //icon的值
                         iconType: 'green', //icon的颜色
-                        needYesHref: false, //是否需要把确定按钮改成a标签，默认false
-                        needCelHref: false, //是否需要把取消按钮改成a标签，默认false
-                        yesHref: 'javascript:;', //确定按钮a链接的默认href
-                        celHref: 'javascript:;', //取消按钮a链接的默认href
+                        
+                        hideCelButton: false, //为true时隐藏cel按钮，仅使用yes按钮的所有属性
                     }
 
                 this.options = $.extend({}, this.defaults, opts)
@@ -113,29 +120,38 @@
                     //判断是否需要显示icon
                     if (that.options.iconTxt) {
                         //有icon值，需要显示
-                        html += '<i class="iconfont ' + that.options.iconType + '">' + that.options.iconTxt + '</i>';
-                    } else {
-                        //没有icon的时候，显示标题
-                        html += '<p class="elasticTitle">' + that.options.title + '</p>';
+                        html += '<div class="elasticTitle"><i class="iconfont ' + that.options.iconType + '">' + that.options.iconTxt + '</i></div>';
+                    } else if ( that.options.title) {
+                        //没有icon，有title的时候，显示标题
+                        html += '<div class="elasticTitle"><p class="elasticTitleP">' + that.options.title + '</p></div>';
                     }
 
                     //显示中间部分文案
-                    html += that.options.p + '</div>' +
+                    html += '<div class="elasticP"><div class="elasticPMiddle">' + that.options.p + '</div></div></div>' +
                         '<div class="elasticButtons">';
 
-                    if (that.options.yesButtonPosition == 'left') {
+                    if( that.options.hideCelButton ){
+                        //只有一个按钮
+                        if (that.options.needYesHref) {
+                            //需要变成a链接
+                            html += '<a class="positionMiddle elasticYes" href="' + that.options.yesHref + '">' + that.options.yesTxt + '</a>';
+                        } else {
+                            html += '<button class="positionMiddle elasticYes"><span class="elasticSpan">' + that.options.yesTxt + '</span></button>';
+                        }
+                    }
+                    else if (that.options.yesButtonPosition == 'left') {
                         //确定按钮在左边
                         if (that.options.needYesHref) {
                             //确定按钮需要变成a链接
                             html += '<a class="positionLeft elasticYes" href="' + that.options.yesHref + '">' + that.options.yesTxt + '</a>';
                         } else {
-                            html += '<button class="positionLeft elasticYes">' + that.options.yesTxt + '</button>';
+                            html += '<button class="positionLeft elasticYes"><span class="elasticSpan">' + that.options.yesTxt + '</span></button>';
                         }
                         if (that.options.needCelHref) {
                             //取消按钮需要变成a链接
                             html += '<a class="positionLeft elasticYes" href="' + that.options.yesHref + '">' + that.options.yesTxt + '</a>';
                         } else {
-                            html += '<button class="positionRight elasticCel">' + that.options.celTxt + '</button>';
+                            html += '<button class="positionRight elasticCel"><span class="elasticSpan">' + that.options.celTxt + '</span></button>';
                         }
                     } else {
 
@@ -143,13 +159,13 @@
                             //取消按钮需要变成a链接
                             html += '<a class="positionLeft elasticCel" href="' + that.options.celHref + '">' + that.options.celTxt + '</a>';
                         } else {
-                            html += '<button class="positionLeft elasticCel">' + that.options.celTxt + '</button>';
+                            html += '<button class="positionLeft elasticCel"><span class="elasticSpan">' + that.options.celTxt + '</span></button>';
                         }
                         if (that.options.needYesHref) {
                             //确定按钮需要变成a链接
                             html += '<a class="positionRight elasticYes" href="' + that.options.yesHref + '">' + that.options.yesTxt + '</a>';
                         } else {
-                            html += '<button class="positionRight elasticYes">' + that.options.yesTxt + '</button>';
+                            html += '<button class="positionRight elasticYes"><span class="elasticSpan">' + that.options.yesTxt + '</span></button>';
                         }
                     }
 
