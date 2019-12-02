@@ -375,6 +375,8 @@ module.exports = function() {
     /*------------------------------------ 私募接口文档 start -------------------------------------*/
     // 产品详情接口
     this.queryFundDetailV2_api = http_url.web_url + '/pef/queryFundDetailV2';
+    // 查询客户预约产品所需条件
+    this.conditionsOfOrder_api = http_url.web_url + '/pef/conditionsOfOrder';
     // 查询产品募集信息
     this.getRaiseInfo_api = http_url.web_url + '/pef/getRaiseInfo';
     // 根据标签号查询产品材料

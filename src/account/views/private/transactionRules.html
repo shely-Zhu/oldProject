@@ -1,27 +1,21 @@
 <!-- 私募交易规则
- @author yanruiting 2019-11-29 -->
+@author yanruiting 2019-11-29 -->
 
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    @@include('@pathInclude/views/meta.html')
-    <link rel="stylesheet" href="/account/static/css/private/transactionRules.css">
+    @@include('@pathInclude/views/meta.html') 
+    <link rel="stylesheet" href="/account/static/css/private/transactionRules.css">  
     <title>私募交易规则</title>
 </head>
- 
 <body>
-    @@include('@pathCommonViews/headBarConfig.html',{"bgColors":"#2C3E77,#273971","showType":"0","pathName":"交易规则"})
-    <div class="ruleCon">
-        <div class="title">赎回开放频率</div>
-        <div class="content" id="redemptionOpenFrequency"></div>
-    </div>
-    <div class="ruleCon">
-        <div class="title">赎回指引</div>
-        <div class="content" id="introImgCon">
-            <img id="introImg" src="" alt="">
-        </div>
-    </div>
- 
+    <div id="richTemplateWrap">
+        @@include('@pathCommonViews/headBarConfig.html',{"bgColors":"#000,#eee","showType":"0","pathName":"交易规则"})
+        <!--没有数据显示图标-->
+        @@include('@pathCommonViews/noDataImg.html', {"tipText": "暂无数据"})
+        <div id="contentWrap"></div>   
+    </div>          
+
     @@include('@pathInclude/views/footer.html')
     <script src="/account/static/js/private/transactionRules.js"></script>
 </body>

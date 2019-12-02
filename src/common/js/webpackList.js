@@ -155,7 +155,7 @@ module.exports = {
     './include/js/modelPage/qrCode': './src/include/js/modelPage/qrCode.js',
 
     // 权益中心
-    './personal/static/js/rightsCenter': './src/personal/static/js/rightsCenter.js', 
+    './personal/static/js/rightsCenter': './src/personal/static/js/rightsCenter.js',
 
     './productPrivate/static/js/openPdf': './src/productPrivate/static/js/openPdf.js',
 
@@ -231,8 +231,13 @@ module.exports = {
     //会员俱乐部
     './life/static/js/memberClub/activityList': "./src/life/static/js/memberClub/activityList.js",
     //会员俱乐部-暂无数据mine
+
+    './mine/static/js/memberClub/activityNoList': "./src/mine/static/js/memberClub/activityNoList.js",
+    //mui索引列表插件
+    './mine/static/js/memberClub/mui.indexedlist': "./src/mine/static/js/memberClub/mui.indexedlist.js",
+
     './life/static/js/memberClub/activityNoList': "./src/life/static/js/memberClub/activityNoList.js",
-    //mui索引列表插件 
+    //mui索引列表插件
     './life/static/js/memberClub/mui.indexedlist': "./src/life/static/js/memberClub/mui.indexedlist.js",
     //活动详情
     './life/static/js/memberClub/activityDetails': "./src/life/static/js/memberClub/activityDetails.js",
@@ -281,7 +286,7 @@ module.exports = {
     //私募资产详情
     './account/static/js/private/privateDetail': './src/account/static/js/private/privateDetail.js',
     //公募资产详情
-    './account/static/js/public/publicDetail': './src/account/static/js/public/publicDetail.js',
+    './financial/static/js/publicPlacement/publicDetail': './src/financial/static/js/publicPlacement/publicDetail.js',
 
     //自选公募-交易记录
     // './account/static/js/public/transactionRecord': './src/account/static/js/public/transactionRecord.js',
@@ -357,17 +362,22 @@ module.exports = {
 
     // 购买触发提示
     './financial/static/js/common/authenticationProcess': './src/financial/static/js/common/authenticationProcess.js',
+
+
     // 私募产品详情页
-    './financial/static/js/privatePlacement/privatePlacementDetail': './src/financial/static/js/privatePlacement/privatePlacementDetail.js',
+    './financial/static/js/privatePlacement/privatePlacementDetail' : './src/financial/static/js/privatePlacement/privatePlacementDetail.js',
+
     // 财富学院早知道
     './homePage/static/js/fortuneFlowKnown': './src/homePage/static/js/fortuneFlowKnown.js',
     // 财富讲堂
-    './homePage/static/js/fortuneClassroom' : './src/homePage/static/js/fortuneClassroom.js',
+    './homePage/static/js/fortuneClassroom': './src/homePage/static/js/fortuneClassroom.js',
     //历史明细
     './mine/static/js/historyDetail': "./src/mine/static/js/historyDetail.js",
     //收益明细
     './mine/static/js/returnsDetail': "./src/mine/static/js/returnsDetail.js",
 
-    // 私募交易规则  
+    // 私募交易规则
     './account/static/js/private/transactionRules': "./src/account/static/js/private/transactionRules.js",
+    //私募详情列表页
+    './account/static/js/private/privateDetailList': "./src/account/static/js/private/privateDetailList.js",
 }

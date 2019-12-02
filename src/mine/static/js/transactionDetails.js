@@ -19,55 +19,23 @@ $(function() {
 		//页面初始化函数
 		init: function() {
 			var that = this;  
-			this.events()
-		},
-		//获取数据函数
-		getData: function(t) {
-			var that = this
-			// $.ajaxLoading(obj);
+			that.events()
 		},
 		//注册事件
 		events: function() {
             let that = this;
-            // $.each(mui(".wrap li"),(e,i)=>{
-            //     $(i).on("tap",function(){
-            //         console.log(e)
-            //     })
-            // })
-            // this.$e.lis[0].onclick = function(){
-            //     console.log("点击了第一个li标签")
-            //     window.location.href = site_url.journal_url
-            // }
-            // mui('body').on('tap','li',function(a){
-            //     console.log(a)
-            //     if(a.srcElement.childNodes[1].data == "私募交易明细"){
-            //         // window.location.href =
-            //     }else if(a.srcElement.childNodes[1].data == "公募自选交易明细"){
-            //         // window.location.href =
-            //     }else if(a.srcElement.childNodes[1].data == "公募组合交易明细"){
-            //         // window.location.href =
-            //     }else{
-            //         // window.location.href =
-            //     }
-            // })
-            mui("li").on('tap',(a)=>{
-                console.log(a)
+            mui("body").on('tap','.wrap li',function(e){
+                  var numAtr = $(this).attr('num');
+                  if(numAtr == 1){
+                        window.location.href=site_url.privateDetailList_url
+                  }else if(numAtr == 2){
+                        window.location.href=site_url.transactionRecords_url
+                  }else if(numAtr == 3){
+                        window.location.href=site_url.publicTransactionDetails_url
+                  }else if(numAtr == 4){
+                        window.location.href=site_url.transactionList_url
+                  }           
             })
-            // mui(".wrap li").eq(0).on("tap",function(){
-            //     console.log(111)
-            // })
-            // this.$e.lis[1].onclick = function(){
-            //     console.log("点击了第二个li标签")
-            //      window.location.href =
-            // }
-            // this.$e.lis[2].onclick = function(){
-            //     console.log("点击了第三个li标签")
-            //      window.location.href =
-            // }
-            // this.$e.lis[3].onclick = function(){
-            //     console.log("点击了第三个li标签")
-            //      window.location.href =
-            // }
 		}
 	};
 	somePage.init();

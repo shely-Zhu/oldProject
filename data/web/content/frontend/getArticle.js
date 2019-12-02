@@ -15,7 +15,7 @@ var data = Mock.mock({
     "createTime": 1573085434000,
     "createTimeStr": "2019-11-07 08:10:34",
     "externalUrl": "",
-    "h5Title": "",
+    "h5Title": "模板页面",
     "h5Type": "1",
     "id": 8,
     "imageAttachId": 56,
@@ -46,8 +46,8 @@ var data = Mock.mock({
     "videoAttachUrl": "",
     "voiceAttachId": null,
     "voiceAttachName": "",
-    "voiceAttachUrl": "http://train-vedio.test.upcdn.net/lgb/voice/richgo_15687904592044433.mp3",
-    "videoExternalUrl":"http://htjj-vod.homecdn.com/50216f89-68b6-4d0a-adb0-03af0df3efe4.m3u8"
+    "voiceAttachUrl": "",//http://train-vedio.test.upcdn.net/lgb/voice/richgo_15687904592044433.mp3
+    "videoExternalUrl":"",//http://htjj-vod.homecdn.com/50216f89-68b6-4d0a-adb0-03af0df3efe4.m3u8
   },
   "message": "操作成功！",
   "status": "0000"
