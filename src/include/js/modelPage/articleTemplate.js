@@ -37,14 +37,16 @@ $(function(){
             control:$("#control"),
             audioPlayIcon:$('.audioPlayIcon'),
             audioArea:$(".audioArea"),
-            aud:document.getElementById("aud"),
-            //videoArea:$(".videoArea"),
+            aud:$("#aud"),
+            audioDisc:$(".audioDisc"),
+            audioTime:$(".audioTime"),
             videoButton:$(".videoButton"),
 
         },
         gV: { // 全局变量
 
             recomTypes: "", //按钮跳转链接
+            fundCode:'',//基金代码
             //videoExternalUrl:"",//视频路劲
 
         },
@@ -77,43 +79,48 @@ $(function(){
 
                     that.$e.contentWrap.html(resData.content);
 
-                    if(resData.h5Type == "1"){//1图片
+                    that.$e.artImg.find("img").attr("src",resData.imageAttachUrl);//头部图片
+                    that.$e.artTitle.find("p").html(resData.title);//文章title
+
+                    //如果音频路径不为空的话则隐藏音频dom元素
+                    if(resData.voiceAttachUrl.length !=0){
+
+                        that.$e.audioArea.show();
+                        that.$e.audioDisc.html(resData.voiceAttachName);
+                        that.$e.audioTime.find("span").eq(1).html(resData.fileSize);
+                        that.$e.aud.attr("src",resData.voiceAttachUrl);//音频路径
 
 
+                    }
 
-                    }else if(resData.h5Type == "2") { //标题 h5模板类型 1图片 2文章 3产品推荐
+                    //如果视频路径不为空的话则显示播放按钮，给图片赋值视频地址
+                    if(resData.videoExternalUrl.length !=0){
 
-                        that.$e.artHeaderCont.show();
-                        that.$e.artImg.attr("src",resData.imageAttachUrl);//头部图片
-                        that.$e.artTitle.find("p").html(resData.title);//文章title
+                        //隐藏视频播放按钮
+                        //
+                        that.$e.videoButton.show();
 
-                        //如果音频路径为空的话则隐藏音频dom元素
-                        if(resData.voiceAttachUrl.length ==0){
+                        that.gV.videoExternalUrl = resData.videoExternalUrl;//视频路径
+                    }
+                    if(resData.h5Type == "1"){//标题 h5模板类型 1图片 2文章 3产品推荐
 
-                            that.$e.audioArea.hide();
+                        that.$e.contentWrap.css({//内容去边距不留白
 
-                        }else{
-                            //that.$e.audio.attr("src",resData.voiceAttachUrl);//音频路径
-                            $("#aud").attr("src",resData.voiceAttachUrl);//音频路径
+                            "padding":"0"
+                        })
 
-
-                        }
-
-                        //如果视频路径不为空的话则显示播放按钮，给图片赋值视频地址
-                        if(resData.videoExternalUrl.length !=0){
-
-                            //隐藏视频播放按钮
-                            //
-                            that.$e.videoButton.show();
-
-                            that.gV.videoExternalUrl = resData.videoExternalUrl;//视频路径
-                        }
+                    }/*else if(resData.h5Type == "2") {
 
 
-                    }else if(resData.h5Type == "3"){//产品推荐
+                        //that.$e.artHeaderCont.show();
+
+
+                    }*/else if(resData.h5Type == "3"){//产品推荐
 
                         //给底部按钮加文字和跳转链接
                         that.$e.btnButton.html(resData.buttonLabel).show();
+
+                        that.gV.fundCode = resData.recomCodes;
 
                         that.recomTypes = resData.recomTypes;
                     }
@@ -139,25 +146,25 @@ $(function(){
 
                 }else if(that.recomTypes == "2"){
 
-                    //window.location.href = site_url.superStreasureDetail_url;
+                    window.location.href = site_url.pofPublicDetail_url;//后面拼的参数需要找产品确认
 
                 }else if(that.recomTypes == "3"){//私募产品详情页
 
-                    window.location.href = site_url.privatePlacementDetail_url;
+                    window.location.href = site_url.privatePlacementDetail_url + "?projectId="+that.gV.fundCode;
 
                 }else if(that.recomTypes == "4"){//超宝产品列表
 
-                    //window.location.href = site_url.privatePlacementDetail_url;
+                    window.location.href = site_url.cashManagement_url;
 
                 }else if(that.recomTypes == "5"){//私募产品列表
 
                     //window.location.href = site_url.privatePlacementDetail_url;
-                    //
+
                 }
             });
 
 
-
+            //调用视频播放
             mui("body").on('tap', '.artImg', function() {
                 playVideo(that.gV.videoExternalUrl,"video_wrapper");
             })

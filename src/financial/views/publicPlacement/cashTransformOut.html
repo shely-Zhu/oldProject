@@ -22,10 +22,10 @@
         <div class="title" id="transformProductName">现金宝产品1</div>
 
         <div class="mui-row tabWrapper">
-        	<div class="mui-col-sm-6 mui-col-xs-6 tab" type="fast">
+        	<div class="mui-col-sm-6 mui-col-xs-6 tab" type="fast" htmdEvt="cashTransformOut_fast">
         		<span class="active activeIcon">快速转出<span>
         	</div>
-        	<div class="mui-col-sm-6 mui-col-xs-6 tab" type="common">
+        	<div class="mui-col-sm-6 mui-col-xs-6 tab" type="common" htmdEvt="cashTransformOut_common">
         		<span class="activeIcon">普通转出</span>
         	</div>
         </div>
@@ -47,7 +47,7 @@
 	            </div> -->
 
 	            <!-- 右侧 选择银行卡后样式 -->
-	            <div class="onright" id="bank"> 
+	            <div class="onright" id="bank" htmdEvt="cashTransformOut_bank"> 
 	                <a class="iconfont iconone" href="javascript:;">&#xe67d;</a>
 	                <div class="onright-left">
 	                    <div class="onright-left-one">
@@ -69,14 +69,14 @@
             <div class="msecond">
             	<span class="msecond-one">￥</span>
                 <input class="transformInput" type="text">
-                <img class="clearMoney" src="/financial/static/img/icon_delete@2x.png" alt="">
+                <img class="clearMoney" src="/financial/static/img/icon_delete@2x.png" htmdEvt="cashTransformOut_clearMoney" alt="">
                 <span class="button">全部</span>
              </div>
              <div class="clearfix explain">
              	<div class="left">
              		2小时内到账<span class="iconfont">&#xe635;</span>
              	</div>
-             	<div class="right">
+             	<div class="right" htmdEvt="cashTransformOut_right">
              		<span class="transformRule">现金宝产品1转出规则</span><span class="iconfont">&#xe635;</span>
              	</div>
              </div>
@@ -87,23 +87,23 @@
          <div class="p2">
                 <div class="agreementRuleFooter">
                     <span class="file">
-                        <a href="javascript:;" class="item2"><span class="iconfont">&#xe668;</span><span>已阅读并同意</span></a>
+                        <a href="javascript:;" class="item2"><span class="iconfont" htmdEvt="cashTransformOut_iconfont">&#xe668;</span><span>已阅读并同意</span></a>
                         <a class="agreementRule"></a>
                     </span>
                     
                 </div>
             </div>
             <div class="checkMessage">超出最大转出金额额</div>
-            <button class="conformButton confirmeDemptionPay" disabled>确定</button>
+            <button class="conformButton confirmeDemptionPay" htmdEvt="cashTransformOut_confirmeDemptionPay"  disabled>确定</button>
 
 
           <!-- 银行卡弹窗 -->
          <div class="popup">
-             <div class="popup-mask"></div>
+             <div class="popup-mask" htmdEvt="cashTransformOut_mask"></div>
              <div class="popup-content">
                  <div class="popup-title">
                      <!-- <div class="popup-close"> -->
-                         <img class="popup-close" src="/financial/static/img/Nav Bar_icon_close_black@2x.png" alt="">
+                         <img class="popup-close" src="/financial/static/img/Nav Bar_icon_close_black@2x.png"  htmdEvt="cashTransformOut_close"  alt="">
                      <!-- </div> -->
                      <div class="tit">选择到账银行卡</div> 
                  </div>
@@ -159,7 +159,7 @@
                 </div>
                 
             </div>
-            <div class="elasticButtons">明白了</button>
+            <div class="elasticButtons"  htmdEvt="cashTransformOut_elasticButtons">明白了</button>
             </div>
         </div>
     </div>
@@ -167,7 +167,7 @@
     <!--银行卡弹框模板-->
      <script id="cashTransformOutList" type="text/x-handlebars-template">
         {{#each this}}
-            <li class="popup-li cashCheckItem" bankName={{bankName}} bankLogoUrl={{bankThumbnailUrl}} carNum={{carNum}} singleNum={{singleNum}} oneDayNum={{oneDayNum}} bankNo={{bankNo}} bankAccount={{bankAccountSecret}} tradeAcco={{tradeAcco}} capitalMode={{capitalMode}} singleNumMask={{singleNumMask}} oneDayNumMask={{oneDayNumMask}} >
+            <li class="popup-li cashCheckItem" htmdEvt="cashTransformOut_cashCheckItem" bankName={{bankName}} bankLogoUrl={{bankThumbnailUrl}} carNum={{carNum}} singleNum={{singleNum}} oneDayNum={{oneDayNum}} bankNo={{bankNo}} bankAccount={{bankAccountSecret}} tradeAcco={{tradeAcco}} capitalMode={{capitalMode}} singleNumMask={{singleNumMask}} oneDayNumMask={{oneDayNumMask}} >
                 <img class="bank-img" src={{bankThumbnailUrl}} alt="">
                 <div class="div">
                     <div class="bank-name"><span>{{bankName}}</span><span>(</span><span>{{carNum}}</span><span>)</span></div>
