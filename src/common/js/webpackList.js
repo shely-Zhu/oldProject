@@ -155,7 +155,7 @@ module.exports = {
     './include/js/modelPage/qrCode': './src/include/js/modelPage/qrCode.js',
 
     // 权益中心
-    './personal/static/js/rightsCenter': './src/personal/static/js/rightsCenter.js',
+    './personal/static/js/rightsCenter': './src/personal/static/js/rightsCenter.js', 
 
     './productPrivate/static/js/openPdf': './src/productPrivate/static/js/openPdf.js',
 
