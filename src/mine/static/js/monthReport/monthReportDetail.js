@@ -677,11 +677,22 @@ var monthReportDetail = {
 			$.ajaxLoading(obj);
 
 		})
+		// 公募的立即购买--跳转到公募详情页
+		mui("body").on('tap', '.publicBuy' , function(){
+			window.location.href = site_url.wealthIndex_url;
+		});
 
 		mui("body").on('tap', '.tabs>li' , function(){
 			$(this).addClass('active').siblings().removeClass('active');
 			$(".wrap>.panel").eq($(this).index()).addClass('active').siblings().removeClass('active');
 		});
+
+		mui("body").on('tap', '.investBth' , function(){
+			window.location.href = site_url.wealthIndex_url;
+		});
+
+
+		
 		
 
 	},
