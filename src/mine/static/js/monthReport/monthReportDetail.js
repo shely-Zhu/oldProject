@@ -12,95 +12,28 @@ require('@pathCommonJsCom/tabScroll.js');
 var splitUrl = require('@pathCommonJsCom/splitUrl.js')();
 //黑色提示条的显示和隐藏
 var tipAction = require('@pathCommonJsCom/tipAction.js');
-
 var moment = require('moment');
 //引入弹出层
 require('@pathCommonJsCom/elasticLayerTypeFive.js');
+var generateTemplate = require('@pathCommonJsComBus/generateTemplate.js');
 
 
 var monthReportDetail = {
 	getElements: {
 		noData: $('.noData'), //没有数据的结构
-		listLoading: $('.listLoading'),  //所有数据区域，第一次加载的loading结构
 		reportId:splitUrl['reportId'],   //活动的id
+		adjustmentTemp: $('#second-template'), // 最新调仓模板
 	},
-	setting: {  //一些设置
-		navList: [  //导航
-			{type: '月末持仓总览',num: '0'}, //
-			{type: '本月交易明细',num: '1'},
-		],
-		current_index: 0,  //左右滑动区域的索引
-		list_template: '',  //列表的模板，生成后存放在这里
-	},
-	html: '',  //存放生成的html
 	pieChartData:'', // 画图的title
 	init: function(){  //初始化函数
 		var that = this;
-		
-		//拼模板，初始化左右滑动mui组件
-		that.beforeFunc();
-
-		//初始化第一屏区域的上拉加载
-		that.getData($('#scroll1'));
+		that.getData();
+		// 交易明细
+		that.commonAjax();
 		// 资产情况分析
 		that.assetAnalysis();
-
 		//事件监听
 		that.events();
-	},
-
-	beforeFunc: function(){  //拼模板，初始化左右滑动mui组件
-		var that = this,
-			contentArr = [];  //传给tabScroll组件的contentList参数的数组
-
-		// list内容模板
-		var source = $('#second-template').html(),
-			template = Handlebars.compile(source),
-			list_html = template();
-
-		//将生成的模板内容存到that.list_template上
-		that.setting.list_template = template;
-
-		// 外容器优先加载
-		var wrap_source = $('#transaction-template').html(),
-			wrap_template = Handlebars.compile(wrap_source),
-			wrap_html = wrap_template({content: list_html});
-			
-		$.each( that.setting.navList, function(i, el){
-
-			contentArr.push({
-				id: i,
-				content: wrap_html
-			})
-		})
-
-		var obj = {
-			wrapper: $('.reportContainer'), //存放整个组件的区域
-			needNavAction: false,
-			//needBlock: true,
-			navList: that.setting.navList, //导航
-			contentLength: that.setting.navList.length,  //左右滑动的区域个数，即导航数组长度
-			contentList: contentArr, //此时只有框架，实际列表内容还未请求
-			callback: function(t){  //t返回的是 id 为 scroll1 / scroll2 这样的切换后当前区域中的节点
-					var w = $('#scroll1').attr('id'),
-					s = '#'+w+' .contentWrapper';
-
-				  //data-scroll属性即当前左右切换区域的索引
-				var index = t.attr('data-scroll');
-
-				//data-scroll属性即当前左右切换区域的索引
-				that.setting.current_index = index;
-
-				//判断当前区域是否已经初始化出来上拉加载
-				if (t.hasClass('hasPullUp')) {
-					//有这个class，表示已经初始化，不再执行下一步
-					return false;
-				}
-				//没有初始化，请求第一次数据
-				that.commonAjax(t);
-			}
-		}
-		$.tabScroll(obj);
 	},
 	getData: function($id, t) {
 
@@ -118,10 +51,12 @@ var monthReportDetail = {
 			needLoading:true,
 			callbackDone:function(data){
 				var json=data.data;
-
+				// 客户名称
 				$('.clientName').html(json.name);
 				// 客户编号
 				$('.monthReportNum').html(json.customerNo);
+				// 客户登记
+				$('.clientLevel').html(json.tierDesc);
 			},
 			callbackNoData: function(json){ //没有数据的情况
 				console.log(json.msg);
@@ -136,8 +71,6 @@ var monthReportDetail = {
 			async: false,
 			callbackDone: function(json) {
 				var json=json.data;
-				// 报告名称
-				$('.clientName').html(json.reportName)
 				// 报告月份
 				that.getElements.monthReportTime = json.month;
 				$('.reportMonth').html(json.month);
@@ -148,6 +81,9 @@ var monthReportDetail = {
 				$('.riskLevel').html(json.riskLevel);
 				// 报告日期
 				$('.reportTime').html(json.reportTime);
+
+				// 报告名称
+				$('#HeadBarpathName').html(json.reportName)
 				that.getElements.reportTime = json.reportTime;
 
 				var dateStr = json.reportTime;
@@ -160,17 +96,14 @@ var monthReportDetail = {
 				var month = now.substring(5,7);
 				that.getElements.month = month;
 				that.getMonthDateRange(year,month);
-				
 
 			},
 			callbackFail: function(json) {
 				//请求失败，
 				//显示错误提示
 				tipAction(json.message);
-
 			},
 			
-
 		},{
 			url: site_url.queryInvestProdHoldShareList_api,   // 持仓总览  报告的月末持仓总览
 			data: {
@@ -221,66 +154,46 @@ var monthReportDetail = {
 
 						})
 
-						that.setting.html = that.setting.list_template(jsonData);
+						generateTemplate(jsonData,$(".holdPosition"), that.getElements.adjustmentTemp);
 
-						$id.find('.contentWrapper .mui-table-view-cell').html(that.setting.html);
 					}
 					if(!$.util.objIsEmpty(jsonData.pofList)){
 						jsonData.flag2 = true;
 						jsonData.flag1 = false;
 						jsonData.flag3 = false;
-						that.setting.html = that.setting.list_template(jsonData);
-
-						$id.find('.contentWrapper .mui-table-view-cell').append(that.setting.html);
+						generateTemplate(jsonData,$(".holdPosition"), that.getElements.adjustmentTemp);
 					}
 					if(!$.util.objIsEmpty(jsonData.generalModelList)){
 						jsonData.flag3 = true;
 						jsonData.flag1 = false;
 						jsonData.flag2 = false;
-						that.setting.html = that.setting.list_template(jsonData);
 
-						$id.find('.contentWrapper .mui-table-view-cell').append(that.setting.html);
+						generateTemplate(jsonData,$(".holdPosition"), that.getElements.adjustmentTemp);
 					}
 				}else{
 					//没有数据
-					$id.find('.mui-scroll .list').html(that.getElements.noData.clone(false)).addClass('noCon');
-					$id.find('.noData').show();
+					$('.noData').show();
+					$('.noData .text').html('截止'+that.getElements.reportTime+',您暂无持仓信息');
 
-					setTimeout(function() {
-						that.getElements.listLoading.hide();
-					}, 100);
 				}
-				that.getElements.listLoading.hide();
-				$id.addClass('hasPullUp');
 
 			},
 			callbackFail: function(json) {
 				//请求失败，
-				//隐藏loading
-				//that.getElements.listLoading.hide();
 				//显示错误提示
 				tipAction(json.message);
-
-				//隐藏loading，调试接口时需要去掉
-				setTimeout(function() {
-					that.getElements.listLoading.hide();
-				}, 100);
-				//return false;
 			},
 			callbackNoData: function(json) {
 				//没有数据
-				$id.find('.mui-scroll .list').html(that.getElements.noData.clone(false)).addClass('noCon');
-				$id.find('.noData').show();
+				$('.noData').show();
+				$('.noData .text').html('截止'+that.getElements.reportTime+',您暂无持仓信息');
 
-				setTimeout(function() {
-					that.getElements.listLoading.hide();
-				}, 100);
 			}
 
 		}]
 		$.ajaxLoading(obj);
 	},
-	commonAjax: function( $id, t ){  // 获取产品数据的公用ajax方法;$id为各区域的 scroll+num id
+	commonAjax: function(){  //交易明细
 		var that = this;
 		//获取产品列表
 		var obj = [{
@@ -299,57 +212,33 @@ var monthReportDetail = {
 					if(!$.util.objIsEmpty(jsonData.pefSaleInfoList)){
 						jsonData.flag1 = true;
 						jsonData.flag2 = false;
-						that.setting.html = that.setting.list_template(jsonData);
-
-						$id.find('.contentWrapper .mui-table-view-cell').html(that.setting.html);
+						generateTemplate(jsonData,$(".tradeDtail"), that.getElements.adjustmentTemp);
+						
 					}
 					if(!$.util.objIsEmpty(jsonData.pofInfoList)){
 						jsonData.flag2 = true;
 						jsonData.flag1 = false;
-						that.setting.html = that.setting.list_template(jsonData);
-
-						$id.find('.contentWrapper .mui-table-view-cell').append(that.setting.html);
+						generateTemplate(jsonData,$(".tradeDtail"), that.getElements.adjustmentTemp);
 					}
 				}
 				else{
 					//没有数据
-					$id.find('.mui-scroll .list').html(that.getElements.noData.clone(false)).addClass('noCon');
-					$id.find('.noData').show();
+					$('.noData').show();
+					$('.noData .text').html('截止'+that.getElements.reportTime+',您暂无持仓信息');
 
-					setTimeout(function() {
-						that.getElements.listLoading.hide();
-					}, 100);
 				}
-
-				that.getElements.listLoading.hide();
-				$id.addClass('hasPullUp');
 
 			},
 			callbackFail: function(json){
 				//请求失败，
-				//隐藏loading
-				//that.getElements.listLoading.hide();
 				//显示错误提示
 				tipAction( json.message );
 
-				t.endPullupToRefresh(false);	
-				$('.contentWrapper').find('.mui-pull-bottom-pocket').removeClass('mui-hidden');
-
-				//隐藏loading，调试接口时需要去掉
-				setTimeout(function(){
-					that.getElements.listLoading.hide();
-				}, 100);
-				//return false;
 			},
 			callbackNoData: function(json){
- 
 				//没有数据
-				$id.find('.mui-scroll .list').html(that.getElements.noData.clone(false)).addClass('noCon');
-				$id.find('.noData').show();
-
-				setTimeout(function() {
-					that.getElements.listLoading.hide();
-				}, 100);
+				$('.noData').show();
+				$('.noData .text').html('您'+that.getElements.reportTime+'无交易明细');
 			}
 
 		}]
@@ -788,6 +677,11 @@ var monthReportDetail = {
 			$.ajaxLoading(obj);
 
 		})
+
+		mui("body").on('tap', '.tabs>li' , function(){
+			$(this).addClass('active').siblings().removeClass('active');
+			$(".wrap>.panel").eq($(this).index()).addClass('active').siblings().removeClass('active');
+		});
 		
 
 	},

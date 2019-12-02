@@ -35,7 +35,7 @@
                <div class="totalFundTitle">总资产（元）</div>
                <div class="totalFund justify_between flex">
                     <div class="fundValue"></div>
-                    <div class="fundKnow">了解现金管理<i class="iconfont">&#xe600;</i></div>
+                    <div class="fundKnow" htmdEvt="cashManagement_fundKnow">了解现金管理<i class="iconfont">&#xe600;</i></div>
                </div>
                <div class="profitContent justify_between flex">
                     <div class="cashProfitCon profitCon">
@@ -81,8 +81,8 @@
                     </div>
                </div>
                <div class="itemBottom flex">
-                    <div class="fundIn">转入</div>
-                    <div class="fundOut">转出</div>
+                    <div class="fundIn" htmdEvt="cashManagement_fundIn">转入</div>
+                    <div class="fundOut" htmdEvt="cashManagement_fundOut">转出</div>
                </div>
           </div>
 		{{/each}}
