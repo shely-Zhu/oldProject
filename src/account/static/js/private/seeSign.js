@@ -46,10 +46,10 @@ $(function () {
             var that = this
 
             var obj = [{
-                url: site_url.gquerySignedContract_api, //查询已签署活动
+                url: site_url.querySignedContract_api, //查询已签署活动
                 data: {
-                    // "reserveId": "31504"
-                    "reserveId": that.gV.reserveId
+                    "reserveId": "31504"
+                    // "reserveId": that.gV.reserveId
                 },
                 needDataEmpty: false,
                 contentTypeSearch:true,

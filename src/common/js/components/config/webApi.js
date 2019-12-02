@@ -362,4 +362,7 @@ module.exports = function() {
 
 
     /*------------------------------------ 私募接口文档 end -------------------------------------*/
+
+    // 查看已签署文档
+    this.querySignedContract_api = http_url.web_url + '/pef/querySignedContract';
 };
