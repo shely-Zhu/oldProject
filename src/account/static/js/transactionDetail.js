@@ -46,7 +46,7 @@ $(function() {
                     up: {
                         //auto: false,
                         contentrefresh: '拼命加载中',
-                        contentnomore: '暂无更多数据', //可选，请求完毕若没有更多数据时显示的提醒内容；
+                        contentnomore: '暂无更多内容', //可选，请求完毕若没有更多数据时显示的提醒内容；
                         callback: function() {
                             //执行ajax请求
                             that.getData(this);
@@ -107,9 +107,10 @@ $(function() {
                                 if (data.length == 0) {
                                     // 暂无数据显示
                                     that.$e.noData.show();
+                                    // t.endPullupToRefresh(true);
                                     return false;
                                 } else { // 没有更多数据了
-                                    t.endPullupToRefresh(false);
+                                    t.endPullupToRefresh(true);
                                 }
                             } else {
                                 //其他页-没有更多数据
@@ -120,18 +121,18 @@ $(function() {
                         }
                         var len = json.data.pageList;
                         for(var i =0;i<len.length;i++){
-                            if(len[i].redemptionType == 0){
-                                len[i].redemptionType = "普通赎回"
-                            }else if(len[i].redemptionType == 1){
+                            if(len[i].redemptionType == 0&&len[i].tradeType == 2){
+                                len[i].redemptionType = "普通赎回"                              
+                            }else if(len[i].redemptionType == 1&&len[i].tradeType == 2){
                                 len[i].redemptionType = "快速赎回"
                             }
                         }
                         for(var i =0;i<len.length;i++){
-                            if(len[i].tradeType == "0"){
+                            if(len[i].tradeType == "2"){
                                 len[i].tradeType = "赎回"
                             }else if(len[i].tradeType == "1"){                               
                                 len[i].tradeType = "申购"
-                            }else if(len[i].tradeType == "2"){
+                            }else if(len[i].tradeType == "0"){
                                 len[i].tradeType = "分红"
                             }
                         }
@@ -139,7 +140,7 @@ $(function() {
                           $('.contentWrapper').find('.mui-pull-bottom-pocket').removeClass('mui-hidden');
                         // 将列表插入到页面上
                         generateTemplate(data, that.$e.recordList, that.$e.adjustmentTemp);
-                        console.log(that.gV.pageCurrent)
+                        // console.log(that.gV.pageCurrent)
                         if(that.gV.pageCurrent == 1){
                             for(var i =0;i<len.length;i++){
                                 if(len[i].tradeType == "赎回"){
@@ -163,9 +164,33 @@ $(function() {
                                 }
                             }
                         }
+                        for(var i =0;i<len.length;i++){
+                            if(len[i].redemptionType == 0&&len[i].tradeType == 2){
+                                len[i].redemptionType = "普通赎回"
+                                
+                            }else if(len[i].redemptionType == 1&&len[i].tradeType == 2){
+                                len[i].redemptionType = "快速赎回"
+
+                            }else if(len[i].redemptionType == ""){
+                                $(".rightUl").eq(i).css("display","none")
+                            }
+                        }
                         // 页面++
                         that.gV.pageCurrent++;
                     }, 200)
+                },
+                callbackNoData:function(){
+                    //没有数据时展示暂无数据
+                            $(".list").hide()
+                            $(".title").hide()
+                            that.$e.noData.show();
+                },
+                callbackFail: function(json) {
+                    tipAction(json.message);
+                    //隐藏loading，调试接口时需要去掉
+                       setTimeout(function() {
+                        that.$e.listLoading.hide();
+                    }, 100);
                 },
                      
             }];
