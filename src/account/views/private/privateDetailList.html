@@ -9,13 +9,35 @@
 <head>
     @@include('@pathInclude/views/meta.html')
     <link rel="stylesheet" href="/account/static/css/private/tobeConfirmTransaction.css">
-
+    <link rel="stylesheet" href="/account/static/css/private/privateDetailList.css">
     <title>财富研究</title>
 </head>
 
 <body>
     <div class="container">
-        @@include('@pathCommonViews/headBarConfig.html',{"pathName":"财富研究"})
+        <!-- @@include('@pathCommonViews/headBarConfig.html',{"pathName":"财富研究"}) -->
+        <div class="topTitle">
+            <a class="iconfont backBtn" href="javascript:;" id="goBack" goBackColor='@@goBackColor'>&#xe634;</a>
+            <!-- @@include('@pathCommonViews/headBarConfig.html',{"pathName":"待确认交易","bgColors":"#3E3C3C,#3E3C3C"}) -->
+            <!-- 筛选 -->
+            <div class="hopper"></div>
+            <!-- 筛选 -->
+            <!-- 筛选区域 -->
+            <div class="hopperCon">
+                <ul>
+                    <li class="active" data=''>全部</li>
+                    <li data="1">申购</li>
+                    <li data="2">赎回</li>
+                    <li data="3">分红</li>
+                    <li data="4">预约撤单</li>
+                    <li data="5">预约过期</li>
+                    <li data="6">转让已完成</li>
+                    <li data="7">受让已完成</li>
+                </ul>
+            </div>
+            <!-- 筛选区域 -->
+        </div>
+        <div class="zhanweifu"></div>
         <div class="br"></div>
         <div class="mui-content  myAsset">
             <!-- 放置页面内容 -->
@@ -46,7 +68,7 @@
         </div>
     </script>
 
-    <script id="second-template" type="text/x-handlebars-template">
+    <!-- <script id="second-template" type="text/x-handlebars-template">
         {{! 左侧页面列表}} {{#each this}}
         <div class="list_item clearfix">
             <div class="list_itemL">
@@ -57,8 +79,8 @@
         </div>
 
         {{/each}}
-    </script>
-    @@include('@pathInclude/views/footer.html')
+    </script> -->
+    @@include('../common/transcationTem.html') @@include('@pathInclude/views/footer.html')
     <script src="/account/static/js/private/privateDetailList.js"></script>
 
 
