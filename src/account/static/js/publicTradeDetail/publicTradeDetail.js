@@ -5,12 +5,13 @@
  * @description:
  * 公募交易详情页面
  * 
+ * 
  *  普通基金需要带入的参数 
  *  applyId	  申请编号
     fundCombination	  是否是基金组合交易
     fundCode	基金编号
     fundBusinCode	业务大类编号
-    allotType	申请类型
+    allotType	交易类别 0：购买 1：赎回 2：定投, 3：分红
     Fixbusinflag	业务辅助代码
     scheduledProtocolId   定投编号
 
@@ -20,6 +21,7 @@
     applyId	  申请编号
 
     分红需要带入的参数
+    allotType	交易类别 0：购买 1：赎回 2：定投, 3：分红
     shares  发生份额
     fundName  分红产品
     applyDate  分红时间
@@ -32,7 +34,7 @@
   * 永丽定的规则
   * 1 新发基金进度条显示和别的不一样 中间那个要改成 等待基金成立确认认购份额
   * 2 除了交易状态为成功 或者扣款状态为成功 其他的状态值都显示为红色 永丽定的规则
-  * 3 怎么区分是否买入成功 确认状态为已确认 扣款状态为已成功   怎么确认是否赎回成功 确认状态为已确认 没有到账状态
+  * 3 怎么区分是否买入成功？确认状态为已确认 扣款状态为已成功   怎么确认是否赎回成功？确认状态为已确认 没有到账状态
   */
 
 require('@pathIncludJs/base.js');
@@ -53,11 +55,6 @@ $(function () {
             allotType: splitUrl()['allotType'],//交易类别 0：购买 1：赎回 2：定投, 3：分红
             isBuy: splitUrl()['isBuy'],//是否为现金宝购买
             isCash: splitUrl()['isCash'],//是否为现金宝
-
-            //test
-            // allotType: "3",//交易类别 0：购买 1：赎回 2：定投, 3：分红
-            // isBuy: splitUrl()['isBuy'],//是否为现金宝购买
-            // isCash: true,//是否为现金宝
         },
         init: function () {
             var that = this;
@@ -90,7 +87,7 @@ $(function () {
             var that = this;
             if ('3' == that.gV.allotType){
                 //分红
-                that.shwoBounsStatus();
+                that.showBounsStatus();
             } else if (that.gV.isCash){
                 //现金宝
                 that.getCashTradeDetail();
@@ -301,7 +298,7 @@ $(function () {
                 $('.cash_redeem_info .item_4').html(model.applyDateTime);//转出时间
             }
         },
-        shwoBounsStatus: function (){
+        showBounsStatus: function (){
             //分红没有进度条 隐藏之
             $('.header .amount').html(splitUrl()['shares']);//交易申请份额
             $('.header .yuan').html("份");//更换单位
