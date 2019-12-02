@@ -114,6 +114,10 @@ $(function () {
                 needDataEmpty: true,
                 callbackDone: function (json) {
                     that.events();
+                    if ('1' == json.data.cancelable){
+                        //根据撤单标记来展示撤单按钮
+                        cancel_order.removeClass('hide');
+                    }
                     switch (that.gV.allotType) {
                         case "0":
                             //购买
@@ -303,7 +307,7 @@ $(function () {
             $('.header .yuan').html("份");//更换单位
             $('.header .trade_status').html('分红成功');//分红的交易状态为分红成功
 
-            $('.trade_status_area').addClass('hide');
+            $('.trade_status_area').addClass('hide'); 
             $('.bonus_info').removeClass('hide');
             $('.bonus_info .fund_name').html(splitUrl()['fundName']);//分红产品
             $('.bonus_info .fund_share').html(splitUrl()['shares']);//分红份额
