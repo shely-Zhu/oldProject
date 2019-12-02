@@ -136,8 +136,6 @@ module.exports = function() {
     this.pofQueryDividendByCode_api = pre + 'dividend/queryDividendByCode'; // 21.单只基金分红方式查询
     this.pofUpdateDividend_api = pre + 'dividend/updateDividend'; // 22.分红方式修改
     this.fundNetWorthTrendChart_api = pre + 'fundDetails/frontend/fundNetWorthTrendChart'; // 金服WEB-详情页-基金净值走势图查询
-=======
->>>>>>> feature/v4.0.0-3.0
 
     /*-------------------公募相关 end ------------------------------*/
 
