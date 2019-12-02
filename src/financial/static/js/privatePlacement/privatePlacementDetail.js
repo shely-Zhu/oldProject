@@ -477,6 +477,25 @@ $(function(){
 			$.ajaxLoading(obj);
 
 		},
+		getJumpUrl:function(v){//获取跳转链接
+			var jumpUrl = "";//跳转链接
+			if(v.conditionJump == 1){//跳转到认证中心页面
+				jumpUrl = site_url.realName_url
+			}else if(v.conditionJump == 2){//跳转到专项风测页面
+				jumpUrl = site_url.riskAppraisal_url+"?type=asset"
+			}else if(v.conditionJump == 3){//跳转到完善信息页面
+				jumpUrl = site_url.completeInformation_url
+			}else if(v.conditionJump == 4){//跳转到投资者分类申请页面
+				jumpUrl = site_url.investorClassification_url
+			}else if(v.conditionJump == 5){//跳转到投资者分类结果页页面
+				jumpUrl = site_url.investorClassificationResult_url
+			}else if(v.conditionJump == 6){//跳转到合格投资者申请 页面
+				jumpUrl = site_url.qualifiedInvestor_url
+			}else if(v.conditionJump == 7){//跳转到合格投资者结果页面
+				jumpUrl = site_url.qualifiedInvestorResult_url
+			}
+			return jumpUrl;
+		},
 		// 客户预约产品所需条件
 		getConditionsOfOrder:function(){
 			var that = this;
@@ -491,14 +510,35 @@ $(function(){
 				callbackDone: function(json){  //成功后执行的函数
 					$("#tips-wrap").show();//显示预约条件
 //					generateTemplate(json.data,$("#real-condition"), that.$e.conditionTemplate);
-					var jsonData = json.data;
+					var jsonData = json.data,
+					singleaAuthenPath = "",//一键认证跳转链接
+					singleaAuthen = false;//条件框是否展示
 					that.$e.realLi.hide();
 					$.each(jsonData, function(e,v) {
+						var jumpUrl = "";
 						if(v.show == "1"){//如果显示。show=1
-							that.$e.realLi.eq(e*1-1).show();
-							that.$e.realLi.eq(e*1-1).find(".bank-status").html(v.statusDesc);
+							singleaAuthen = true;
+							that.$e.realLi.eq(e*1).show();
+							that.$e.realLi.eq(e*1).find(".bank-status").html(v.statusDesc);
+							jumpUrl = that.getJumpUrl(v)
 						}
+//						对应的条件认证到哪里
+						that.$e.realLi.eq(e*1).find(".tips-li-right").on('tap',function(){
+							if(v.conditionType == "1" && that.data.custType != "1"){//机构不支持线上开户，弹框提示
+								
+							}else{
+								window.location.href = jumpUrl;
+							}
+						})
+						//一键认证调往哪里
+						mui("body").on('tap', '.tips-btn', function() {
+							window.location.href = jumpUrl;
+						})
+						
 					});
+					if(!singleaAuthen){//如果v.show都是0，则不展示预约框
+						$("#tips-wrap").hide();
+					}
 
 
 				},
@@ -611,6 +651,39 @@ $(function(){
 				}
 			})
 			return data;
+		},
+		//满足条件的后续判断
+		nextStep:function(){
+			var that = this;
+			if(that.data.fundDetailObj.isElecContract == "1") { //电子合同逻辑
+				if(that.data.fundDetailObj.isAllowAppend == "1") { //追加商品参数fundCode,
+					//跳转到追加商品链接
+					if(that.data.custType == "1") { //客户类型【0.机构 1.个人】 
+						//跳转到电子合同追加页面
+						window.location.href = "/financial/views/privatePlacement/electronicContract/orderLimit.html?fundCode=" + that.$e.projectId + "&isAllowAppend=" +
+							that.data.fundDetailObj.isAllowAppend;
+					} else {
+						//弹框提示不支持在线追加弹框提示
+					}
+				} else { //预约
+					//跳转到预约产品链接
+					if(that.data.custType == "1") { //客户类型【0.机构 1.个人】 
+						//跳转到电子合同预约页面
+						window.location.href = "/financial/views/privatePlacement/electronicContract/orderLimit.html?fundCode=" + that.$e.projectId + "&isAllowAppend=" +
+							that.data.fundDetailObj.isAllowAppend;
+					} else {
+						//跳转到普通预约
+						window.location.href = "/financial/views/privatePlacement/ordinaryProducts/registration.html" + that.$e.projectId + "&isAllowAppend=" +
+							that.data.fundDetailObj.isAllowAppend;
+
+					}
+				}
+			} else { //非电子合同
+
+				window.location.href = "/financial/views/privatePlacement/ordinaryProducts/registration.html" + that.$e.projectId + "&isAllowAppend=" +
+					that.data.fundDetailObj.isAllowAppend;
+
+			}
 		},
 
 		events: function(){
