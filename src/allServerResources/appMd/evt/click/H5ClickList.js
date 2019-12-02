@@ -150,7 +150,6 @@ var clickList = {
 	"privateIndex_guessLike" : { type:'click', evtid: '4', topic: '私募首页-猜你喜欢', info: '' } ,
 	"privateIndex_hotSpot" : { type:'click', evtid: '5', topic: '私募首页-热门私募', info: ''} ,
 	"privateList_detail" : { type:'click', evtid: '6', topic: '私募列表页-产品详情', info: ''} ,
-<<<<<<< HEAD
 	/*************************************************************mine文件夹下******************************************************************************************/ 
 	"activitiesEnrolment_ongoing " : { type:'click', evtid: '', topic: '已报名活动-进行中', info: ''} ,
 	"activitiesEnrolment_complete" : { type:'click', evtid: '', topic: '已报名活动-已结束', info: ''} ,
@@ -178,7 +177,6 @@ var clickList = {
 	"privateList_detail" : { type:'click', evtid: '', topic: '', info: ''} ,
 	"privateList_detail" : { type:'click', evtid: '', topic: '', info: ''} ,
 	"privateList_detail" : { type:'click', evtid: '', topic: '', info: ''} ,
-=======
 
 	"privatePlacementDetail_information" : { type:'click', evtid: '', topic: '私募基金产品详情-基本信息', info: ''} ,
 	"privatePlacementDetail_notice" : { type:'click', evtid: '', topic: '私募基金产品详情-交易须知', info: ''} ,
@@ -233,7 +231,6 @@ var clickList = {
 	//fortuneFlowKnown.html
 	"knownItem" : { type:'click', evtid: '', topic: '轮播图图片', info: ''} ,
 	//fortuneClassroom.html
->>>>>>> 4ee3972a94f46d19e989b48b67441994ff480580
 	
 }
 
