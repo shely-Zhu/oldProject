@@ -400,6 +400,9 @@ module.exports = function () {
     /*------------------- 公募持仓相关 start ------------------------------*/
     //公募交易记录
     this.transactionRecords_url = go_url.no_url + '/account/views/public/transactionRecords.html';
+
+    //查看已签署材料
+    this.seeSign_url = go_url.no_url + '/account/views/private/seeSign.html';
     //公募持仓记录
     this.publicAssets_url = go_url.no_url + '/account/views/publicAssets.html';
     /*------------------- 公募持仓相关 end ------------------------------*/
