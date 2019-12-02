@@ -138,6 +138,17 @@ module.exports = function () {
 
     /*------------------------------------------------------原accountApi  end ----------------------------------------------*/
 
-  
-
+  //基金诊断--start
+   // 账户持仓详情
+   this.accountHoldShareDetail_api = http_url.wapApi_url + '/pof/accountDiagnosis/accountHoldShareDetail';
+   // 基金配置比例详情
+   this.fundConfigRatioDetail_api = http_url.wapApi_url + '/pof/accountDiagnosis/fundConfigRatioDetail';
+   // 资产配置比例
+   this.assetConfigRatioDetail_api = http_url.wapApi_url + '/pof/accountDiagnosis/assetConfigRatioDetail';
+   // 重仓行业配置
+   this.heavyIndustryConfigRatioDetail_api = http_url.wapApi_url + '/pof/accountDiagnosis/heavyIndustryConfigRatioDetail';
+   // 组合券种分布
+   this.bondTypeAndValue_api = http_url.wapApi_url + '/pof/accountDiagnosis/bondTypeAndValue';
+   // 诊断结果
+   this.bondTypeAndValue_api = http_url.wapApi_url + '/pof/accountDiagnosis/diagnoseResult';
 };

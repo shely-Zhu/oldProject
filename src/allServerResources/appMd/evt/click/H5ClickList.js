@@ -150,7 +150,20 @@ var clickList = {
 	"privateIndex_guessLike" : { type:'click', evtid: '4', topic: '私募首页-猜你喜欢', info: '' } ,
 	"privateIndex_hotSpot" : { type:'click', evtid: '5', topic: '私募首页-热门私募', info: ''} ,
 	"privateList_detail" : { type:'click', evtid: '6', topic: '私募列表页-产品详情', info: ''} ,
-	
+	//homePage--------------------------------------------------------------分割线
+	//fortuneCollegeList.html
+	"banner" : { type:'click', evtid: '', topic: '轮播图图片', info: ''} ,
+	"slider" : { type:'click', evtid: '', topic: '轮播图小圆点', info: ''} ,
+	"fortune_host" : { type:'click', evtid: '', topic: '查看往期热词', info: ''} ,
+	"fortune_video" : { type:'click', evtid: '', topic: '播放往期内容', info: ''} ,
+	"fortune_videoList" : { type:'click', evtid: '', topic: '播放往期内容列表', info: ''} ,
+	"fortune_videoList" : { type:'click', evtid: '', topic: '播放往期内容列表', info: ''} ,
+	"fortune_all" : { type:'click', evtid: '', topic: '财富讲堂全部', info: ''} ,
+	"fortune_allTab" : { type:'click', evtid: '', topic: '财富讲堂tab', info: ''} ,
+	"fortune_allList" : { type:'click', evtid: '', topic: '财富讲堂全部列表', info: ''} ,
+	"fortune_studies" : { type:'click', evtid: '', topic: '财富研究', info: ''} ,
+	"fortune_studiesList" : { type:'click', evtid: '', topic: '财富研究列表', info: ''} ,
+	"fortune_studiesTab" : { type:'click', evtid: '', topic: '财富研究tab', info: ''} ,
 }
 
 module.exports = clickList;

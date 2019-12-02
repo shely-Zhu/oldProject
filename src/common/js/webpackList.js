@@ -180,7 +180,8 @@ module.exports = {
     './commonResources/fundDiagnosis/static/js/diagnosisDetail': './src/commonResources/fundDiagnosis/static/js/diagnosisDetail.js',
     // 基金诊断搜索页
     './commonResources/fundDiagnosis/static/js/diagnosisSearch': './src/commonResources/fundDiagnosis/static/js/diagnosisSearch.js',
-
+    //基金账户诊断
+    './commonResources/fundDiagnosis/static/js/fundAccountDiagnosis': './src/commonResources/fundDiagnosis/static/js/fundAccountDiagnosis.js',
 
     // 标普模型
     './personal/static/js/spAssetModel': "./src/personal/static/js/spAssetModel.js",
