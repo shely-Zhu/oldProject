@@ -1,3 +1,11 @@
+<!--
+ * @Author: your name
+ * @Date: 2019-11-26 14:42:56
+ * @LastEditTime: 2019-11-29 14:29:52
+ * @LastEditors: your name
+ * @Description: In User Settings Edit
+ * @FilePath: \htjf-app\src\financial\views\publicPlacement\cashManagement.html
+ -->
 <!-- /**  
  * @Page:  现金管理
  * @Author: yanruitng  
@@ -54,7 +62,7 @@
 		{{#each this}}
           <div class="cashItem">
                <div class="itemTop">
-                    <div class="itemTitle"><span>{{fundName}}</span><span class="rightCon"><span
+                    <div class="itemTitle"><span fundCode={{fundCode}}>{{fundName}}</span><span class="rightCon"><span
                                    class="right"></span></span></div>
                     <div class="itemSevenIncome">七日年化：{{annYldRat}}%</div>
                </div>

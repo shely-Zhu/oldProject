@@ -13,7 +13,8 @@
 
 <body>
     <div class="topTitle">
-        @@include('@pathInclude/views/header.html') @@include('@pathCommonViews/headBarConfig.html',{"pathName":"待确认交易","bgColors":"#3E3C3C,#3E3C3C"})
+
+        @@include('@pathCommonViews/headBarConfig.html',{"pathName":"待确认交易","bgColors":"#3E3C3C,#3E3C3C"})
         <!-- 筛选 -->
         <div class="hopper"></div>
         <!-- 筛选 -->
@@ -46,33 +47,33 @@
 
             </div>
         </div>
-        @@include('../../../common/views/load.html')
+
         <!-- 加载中loading -->
-        @@include('@pathCommonViews/loading/listLoading.html')
+        @@include('@pathCommonCom/loading/listLoading.html')
         <!-- 暂无数据 -->
         @@include('@pathCommonViews/noDataImg.html',{"tipText":"暂无数据"})
     </div>
     <div class="mask"></div>
     <!-- 弹框类型-淡黄色背景两个按钮 -->
     <div class="tipContainer" id="tipCon">
-        <p class="titleText">抱歉，您不符合活动参与条件</p>
-        <div class="tipCon">本活动仅限合格投资者参加，请先完成合格投资者认证</div>
+        <div class="tipCon"></div>
         <div class="buttonCon">
             <a class="cancel">取消</a>
-            <a class="todo">合格投资者认证</a>
+            <a class="todo">确认</a>
         </div>
     </div>
     <!-- 弹框类型-淡黄色背景两个按钮 -->
     <!-- 弹框类型-淡黄色背景一个按钮 -->
     <div class="tipContainer" id="tipConOne">
-        <p class="titleText">不可重复报名</p>
-        <div class="tipCon">您已经报名成功，不可以重复报名</div>
+        <div class="tipCon"></div>
         <div class="buttonOne">我明白了</div>
     </div>
     <!-- 弹框类型-淡黄色背景一个按钮 -->
 </body>
 <!-- 公共模板 -->
-@@include('../common/transcationTem.html') @@include('@pathInclude/views/footer.html')
+@@include('../common/transcationTem.html') 
+
+@@include('@pathInclude/views/footer.html')
 <!-- 添加埋点 -->
 <script src="/account/static/js/private/tobeConfirmTransaction.js"></script>
 

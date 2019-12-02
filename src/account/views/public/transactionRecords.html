@@ -9,8 +9,7 @@
 	<title>交易记录</title>
 </head>
 <body>
-	@@include('@pathCommonViews/load.html')
-    @@include('@pathCommonViews/loading/listLoading.html')
+    @@include('@pathCommonCom/loading/listLoading.html')
     @@include('@pathCommonViews/headBarConfig.html',{"bgColors":"#2C3E77,#273971","showType":"0","pathName":"交易记录"}) 
     <div id="recordBox">
         <div id="recordSearch">
@@ -70,7 +69,10 @@
 
     <script id="recordList-template" type="text/x-handlebars-template">
         {{#each this}}
-        <div class="recordItem">
+        <div class="recordItem" data-applyId="{{allotNo}}" data-fundCombination="{{fundCombination}}" data-fundCode="{{fundCode}}"
+            data-fundBusinCode="{{fundBusinCode}}" data-allotType="{{applyType}}" data-Fixbusinflag="{{fixbusinflag}}"
+            data-shares ="{{shares}}" data-fundName ="{{fundName}}" data-applyDate ="{{applyDate}}" data-autoBuyDesc ="{{autoBuyDesc}}" 
+            data-scheduledProtocolId ="{{scheduledProtocolId}}">
             <div class="recordLogoCon">
                 {{#if payin}} 
                 <div class="recordLogo payin">买入</div>
@@ -112,8 +114,7 @@
     </script>
 
 	@@include('@pathInclude/views/footer.html')
-    <!-- 添加埋点 -->
-    @@include('@pathInclude/views/header.html')
+
     <script src="/account/static/js/public/transactionRecords.js"></script>
 </body>
 </html>

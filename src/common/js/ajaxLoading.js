@@ -202,7 +202,7 @@ var splitUrl = require('./components/splitUrl.js')();
 
                         } else { //未登录，需要跳转
 
-                            //微信判断登录状态
+                            //微信判断登录状态 
                             if (data.code == 'WF0010') {
                                 tipAction(data.message, function() {
                                     //跳转到微信授权登陆页
@@ -292,6 +292,7 @@ var splitUrl = require('./components/splitUrl.js')();
                     if (el.needLoading) {
                         //needLoading为true时，显示$('#loading')遮罩
                         $("#loading").show();
+                        $('.listLoading').show();
                     }
 
                     //调用ajaxFunc，发送ajax请求
@@ -327,13 +328,15 @@ var splitUrl = require('./components/splitUrl.js')();
 
                         setTimeout(function() { //过10秒钟，隐藏遮罩
                             $("#loading").hide();
+                            $('.listLoading').hide();
                         }, 15000)
 
                     })
                     .done(function() {
                         //成功状态
                         console.log('ajax请求全部成功')
-                        $("#loading").hide(); //数据请求成功 遮罩隐藏
+                        $("#loading").hide(); 
+                        $('.listLoading').hide(); //数据请求成功 遮罩隐藏
                     })
             }
 

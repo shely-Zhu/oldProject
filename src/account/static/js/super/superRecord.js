@@ -1,15 +1,12 @@
 //  超宝基金产品-交易记录
 // @author caoqihai 2019-11-20 
 
+require('@pathIncludJs/base.js');
+
 require('@pathCommonJsCom/utils.js');
 //ajax调用
 require('@pathCommonJs/ajaxLoading.js');
-//zepto模块--callback
-require('@pathIncludJs/vendor/zepto/callback.js');
-//zepto模块--deferred
-require('@pathIncludJs/vendor/zepto/deferred.js');
-//路径配置文件
-require('@pathIncludJs/vendor/config.js');
+
 //下拉加载更多
 // require('@pathCommonJs/scrollFullPage.js');
 // 切换
@@ -20,6 +17,7 @@ require('@pathCommonJs/components/elasticLayerTypeFive.js');
 require('@pathCommonJs/components/headBarConfig.js');
 //黑色提示条的显示和隐藏
 var tipAction = require('@pathCommonJsCom/tipAction.js');
+var splitUrl = require('@pathCommonJs/components/splitUrl.js')();
 
 
 $(function() {
@@ -45,12 +43,14 @@ $(function() {
             listToTop: '', // 滑动区域距离顶部距离
             navToTop: '', // 滑动nav距离顶部距离
             navHeight: '', // nav高度
+            fundCode: splitUrl['fundCode'],
 
         },
         html: '', //存放生成的html
         init: function() { //初始化函数
 
             var that = this;
+
 
             //拼模板，初始化左右滑动mui组件
             that.beforeFunc();
@@ -84,7 +84,7 @@ $(function() {
             $.each(that.gV.navList, function(i, el) {
                 
                 that.gV.ajaxArr[el.num] = {
-                    fundCode:'00375',//现金宝基金代码
+                    fundCode:that.gV.fundCode,//现金宝基金代码
                     operationType:i,   //请求类型：0-转入，1-转出
                     pageCurrent: that.gV.aP.pageCurrent, //当前第几页(默认为1) 非必填项, 默认设置成第一页
                     pageSize: that.gV.aP.pageSize, //每页显示几条数据(默认10) 非必填项， 默认设置成20
@@ -213,11 +213,14 @@ $(function() {
                 needLogin: true,
                 callbackDone: function(json) {
                     var jsonData = json.data,
-                        pageList = jsonData.list;
+                        pageList = jsonData.pageList;
 
                     if (!$.util.objIsEmpty(pageList)) {
 
-                        jsonData.tobe = that.gV.current_index == 0 ? 0 : 1;
+                        pageList.map(function(e){
+
+                            e.tobe = that.gV.current_index == 0 ? true : false;
+                        })
 
                         var list_html = that.gV.list_template(jsonData);//  把内容  放到  模板里
                         //设置这两参数，在initMui()中使用
@@ -381,6 +384,14 @@ $(function() {
         },
         events: function() { //绑定事件
             var that = this;
+            //点击列表跳转
+            mui('body').on('tap','.datalist',function(){
+                var applyId=$(this).attr('data-applyId');
+                var isBuy=$(this).attr('data-isBuy');
+                var isCash = true
+                window.location.href=site_url.publicTradeDetail_url+'?applyId='+applyId+'&isBuy='+isBuy 
+                                        +'&isCash='+isCash;
+            });
         }
     };
     data.init();

@@ -7,23 +7,25 @@
 
 <head>
     @@include('@pathInclude/views/meta.html')
+    <meta name="referrer" content="no-referrer">
     <link rel="stylesheet" href="/account/static/css/publicTradeDetail/publicTradeDetail.css">
     <title>交易记录</title>
 </head>
 
-<body>
-    @@include('@pathInclude/views/header.html')
-    @@include('@pathCommonViews/headBarConfig.html',{"pathName":"交易记录","bgColors":"#475A95,#475A95","showType":"1"})
+<div>
+    @@include('@pathCommonViews/headBarConfig.html',{"pathName":"交易记录","bgColors":"#475A95,#475A95","showType":"0"})
+    <div class="cancel_order">
+        撤单
+    </div>
     <section class="container">
-        
         <div class="header">
             <!-- 顶部 包括金额与交易状态 -->
             <div class="amount_area">
-                <span class="amount">1,000,000.00</span>
-                <span class="">元</span>
+                <span class="amount">--</span>
+                <span class="yuan">元</span>
             </div>
-            <div class="trade_status">待扣款</div>
-            <div class="trade_status_des">等待银行汇款</div>
+            <div class="trade_status"></div>
+            <div class="trade_status_des"></div>
         </div>
         <div class="trade_status_area">
             <div class="guild_line_1"></div>
@@ -32,84 +34,210 @@
             <div class="trade_status_item">
                 <div class="trade_status_icon fl"></div>
                 <div class="trade_status_desc fl">申请已受理</div>
-                <div class="trade_status_date fr">2019-09-01 11:00:35</div>
+                <div class="trade_status_date fr">--</div>
             </div>
             <div class="trade_status_item">
-                <div class="trade_status_icon fl"></div>
-                <div class="trade_status_desc fl">申请已受理</div>
-                <div class="trade_status_date fr">2019-09-01 11:00:35</div>
+                <div class="trade_status_icon_1 fl"></div>
+                <div class="trade_status_desc fl">预计份额确认</div>
+                <div class="trade_status_date fr">--</div>
             </div>
             <div class="trade_status_item">
-                <div class="trade_status_icon fl"></div>
-                <div class="trade_status_desc fl">申请已受理</div>
-                <div class="trade_status_date fr">2019-09-01 11:00:35</div>
+                <div class="trade_status_icon_1 fl"></div>
+                <div class="trade_status_desc fl">预计查看收益</div>
+                <div class="trade_status_date fr">--</div>
             </div>
         </div>
-        <div class="account_info">
+        <div class="account_info hide">
             <!-- 汇款账户信息 -->
             <div class="item_header">汇款账号信息</div>
             <div class="item">
                 <div class="fl">户名</div>
-                <div class="fr font_size_28">北京恒天明泽基金销售有限公司公募代销账号</div>
+                <div class="accountName fr font_size_28">--</div>
             </div>
             <div class="item">
                 <div class="fl">账户</div>
-                <div class="fr">6217 1000 6273 0000</div>
+                <div class="bankAccount fr">--</div>
             </div>
             <div class="item">
                 <div class="fl">行号</div>
-                <div class="fr">6217 1000 6273 0000</div>
+                <div class="bankNo fr">--</div>
             </div>
             <div class="item">
                 <div class="fl">开户行</div>
-                <div class="fr">浦发银行北京莱户营支行</div>
+                <div class="bankAccountName fr">--</div>
             </div>
         </div>
-        <div class="buy_info">
-            <!-- 买入信息 -->
+        <div class="buy_info hide">
+            <!-- 普通基金买入信息 -->
             <div class="item_header">买入信息</div>
-            <div class="item">
+            <div class="item fund_item">
                 <div class="fl">买入产品</div>
                 <span class="iconfont fr">&#xe636;</span>
-                <div class="fr">中融3-5年信用债A  </div>
+                <div class="fund_name fr">--</div>
             </div>
             <div class="item">
                 <div class="fl">买入金额</div>
-                <div class="fr">1,000,000,000.00 元</div>
+                <div class="fund_amount fr">--</div>
             </div>
             <div class="item">
                 <div class="fl">支付方式</div>
-                <div class="bank_icon fr"></div>
-                <div class="fr">中国建设银行0563</div>
-                <div class="pay_mode fr">汇款支付</div>
+                <div class="pay_mode fr">--</div>
+                <div class="bank_name fr">--</div>
+                <img class="bank_icon fr"></img>                
             </div>
             <div class="item">
                 <div class="fl">买入时间</div>
-                <div class="fr">2019-09-01 11:00:35</div>
+                <div class="fund_date fr">--</div>
+            </div>
+            <div class="item hide fund_type">
+                <div class="fl">资金状态</div>
+                <div class="fund_date fr">资金将退回原银行卡</div>
             </div>
         </div>
-        <div class="redeem_info">
-            <!-- 赎回信息 -->
+        <div class="cash_buy_info hide">
+            <!-- 普通基金与现金宝买入信息 -->
+            <div class="item_header">转入信息</div>
+            <div class="item fund_item">
+                <div class="fl">转入产品</div>
+                <div class="fund_name fr">--</div>
+            </div>
+            <div class="item">
+                <div class="fl">转入金额</div>
+                <div class="fund_amount fr">--</div>
+            </div>
+            <div class="item">
+                <div class="fl">支付方式</div>
+                <div class="pay_mode fr">--</div>
+                <div class="bank_name fr">--</div>
+                <img class="bank_icon fr"></img>                
+            </div>
+            <div class="item">
+                <div class="fl"></div>
+                <div class="fund_date fr">--</div>
+            </div>
+            <div class="item hide fund_type">
+                <div class="fl">资金状态</div>
+                <div class="fund_date fr">资金将退回原银行卡</div>
+            </div>
+        </div>
+        <div class="bonus_info hide">
+            <!-- 分红信息 -->
+            <div class="item_header">分红信息</div>
+            <div class="item">
+                <div class="fl">分红产品</div>
+                <div class="fund_name fr">--</div>
+            </div>
+            <div class="item">
+                <div class="fl">分红份额</div>
+                <div class="fund_share fr">--</div>
+            </div>
+            <div class="item"> 
+                <div class="fl">分红方式</div>
+                <div class="bonus_mode fr">--</div>           
+            </div>
+            <div class="item">
+                <div class="fl">分红时间</div>
+                <div class="fund_date fr">--</div>
+            </div>
+        </div>
+        <div class="redeem_info hide">
+            <!-- 普通基金赎回信息 -->
             <div class="item_header">赎回信息</div>
             <div class="item">
                 <div class="fl">赎回产品</div>
-                <div class="fr">中融3-5年信用债A  </div>
+                <div class="item_1 fr">--</div>
             </div>
             <div class="item">
                 <div class="fl">赎回份额</div>
-                <div class="fr">1000.00 份</div>
+                <div class="item_2 fr">--</div>
+            </div>
+            <div class="redeem_bank item">
+                <div class="fl">到账银行卡</div>
+                <div class="item_3 fr">--</div>
+                <div class="bank_icon fr"></div>
+            </div>
+            <div class="item">
+                <div class="fl">赎回时间</div>
+                <div class="item_4 fr">--</div>
+            </div>
+        </div>
+        <div class="cash_redeem_info hide">
+            <!-- 超宝现金宝基金赎回信息 -->
+            <div class="item_header">转出信息</div>
+            <div class="item">
+                <div class="fl">转出产品</div>
+                <div class="item_1 fr">--</div>
+            </div>
+            <div class="item">
+                <div class="fl">转出金额</div>
+                <div class="item_2 fr">--</div>
+            </div>
+            <div class="item">
+                <div class="fl">转出至</div>
+                <div class="bank_icon fr"></div>
+                <div class="item_3 fr">--</div>
+            </div>
+            <div class="item">
+                <div class="fl">转出时间</div>
+                <div class="item_4 fr">--</div>
+            </div>
+        </div>
+
+        <div class="buy_confirm_info hide">
+            <!-- 买入确认信息 -->
+            <div class="item_header">确认信息</div>
+            <div class="item">
+                <div class="fl">确认金额</div>
+                <div class="confirm_amount fr">--</div>
+            </div>
+            <div class="item">
+                <div class="fl">确认份额</div>
+                <div class="confirm_share fr">--</div>
+            </div>
+            <div class="item">
+                <div class="fl">确认净值</div>
+                <div class="confirm_value fr">--</div>
+            </div>
+            <div class="item">
+                <div class="fl">手续费</div>
+                <div class="confirm_charge fr">--</div>
+            </div>
+            <div class="item">
+                <div class="fl">确认时间</div>
+                <div class="confirm_date fr">--</div>
+            </div>
+        </div>
+
+        <div class="redeem_confirm_info hide">
+            <!-- 赎回确认信息 -->
+            <div class="item_header">确认信息</div>
+            <div class="item">
+                <div class="fl">确认份额</div>
+                <div class="confirm_share fr">--</div>
+            </div>
+            <div class="item">
+                <div class="fl">确认净值</div>
+                <div class="confirm_value fr">--</div>
+            </div>
+            <div class="item">
+                <div class="fl">手续费</div>
+                <div class="confirm_charge fr">--</div>
+            </div>
+            <div class="item">
+                <div class="fl">到账金额</div>
+                <div class="confirm_amount fr">--</div>
             </div>
             <div class="item">
                 <div class="fl">到账银行卡</div>
                 <div class="bank_icon fr"></div>
-                <div class="fr">中国建设银行0563</div>
+                <div class="bank_name fr">--</div>
             </div>
             <div class="item">
-                <div class="fl">赎回时间</div>
-                <div class="fr">2019-09-01 11:00:35</div>
+                <div class="fl">资金状态</div>
+                <div class="confirm_date fr">资金将退回到原银行卡</div>
             </div>
         </div>
-        <div>
+        <div class="plan hide">
             <!-- 查看定投计划 -->
             <div class="divider"></div>
             <div class="item">
@@ -117,9 +245,13 @@
                 <span class="iconfont fr">&#xe636;</span>
             </div>
         </div>
+        <footer class="hide">
+            再买一笔
+        </footer>
 
         <!-- 加载中loading -->
-        @@include('@pathCommonViews/loading/listLoading.html')
+        @@include('@pathCommonCom/loading/listLoading.html')
+        @@include('@pathCommonViews/payPassword.html')
         <!-- 暂无数据 -->
         @@include('@pathCommonViews/noData.html',{"tipText":"暂无数据"})
 
@@ -127,9 +259,6 @@
     </section>
 
     @@include('@pathInclude/views/footer.html')
-
-    <!-- 添加埋点 -->
-    @@include('@pathInclude/views/header.html')
 
     <script src="/account/static/js/publicTradeDetail/publicTradeDetail.js"></script>
 </body>

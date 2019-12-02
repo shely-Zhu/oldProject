@@ -21,7 +21,7 @@
             <!-- 放置页面内容 -->
         </div>
         <!-- 加载中loading -->
-        @@include('@pathCommonViews/loading/listLoading.html')
+        @@include('@pathCommonCom/loading/listLoading.html')
         <!-- 暂无数据 -->
         @@include('@pathCommonViews/noDataImg.html',{"tipText":"暂无数据"})
     </div>
@@ -47,8 +47,8 @@
 </script>
 
     <script id="second-template" type="text/x-handlebars-template">
-    {{! 左侧页面列表}}  {{#each list}}
-    <div class="datalist">
+    {{! 左侧页面列表}}  {{#each pageList}}
+    <div class="datalist" data-applyId="{{allotNo}}" data-isBuy = "{{tobe}}">
         <div class="first">
             <div class="tit">{{fundName}}</div>
             <div class="mon">
@@ -68,8 +68,7 @@
 
     {{/each}} 
 </script> 
-<!-- 添加埋点 -->
-@@include('@pathInclude/views/header.html')
+
 @@include('@pathInclude/views/footer.html')
 <script src="/account/static/js/super/superRecord.js"></script>
 

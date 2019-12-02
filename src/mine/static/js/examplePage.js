@@ -11,15 +11,11 @@
  *此模板用于后台管理器生成模板用
  *
  */
-require('@pathIncludJs/vendor/config.js');
 
-//zepto模块
-require('@pathIncludJs/vendor/zepto/callback.js'); 
-require('@pathIncludJs/vendor/zepto/deferred.js'); 
 
-require('@pathCommonJsCom/utils.js');
+
+require('@pathIncludJs/base.js');
 require('@pathCommonJs/ajaxLoading.js');
-require('@pathCommonJs/components/headBarConfig.js');
 var generateTemplate = require('@pathCommonJsComBus/generateTemplate.js');
 
 //黑色提示条

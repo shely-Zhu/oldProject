@@ -6,24 +6,302 @@
 <html lang="en">
 <head>
 	@@include('@pathInclude/views/meta.html')
-    <link rel="stylesheet" href="/financial/static/css/privatePlacement/privatePlacementDetail.css">
-	<title></title>
+	<link rel="stylesheet" href="/financial/static/css/privatePlacement/privatePlacementDetail.css">
+	<title>产品详情</title>
 </head>
 <body>
-
+	<!--加载图标-->
+    <!--@@include('@pathCommonViews/load.html')-->
 	<div class="privatePlacementDetail">
 		@@include('@pathCommonViews/headBarConfig.html',{"bgColors":"#595E6F,#1C2135","showType":"1","pathName":"产品详情"})
 		<div class="privateDetailTitle">
-			<div class="productName">(银杏43号) 恒天财富稳季隆私募投资基金</div>
-			<p class="introduction">这里是一句话产品详情介绍</p>
-			<div class="privateDetailList">
-				
+			<!-- 产品基金名称 -->
+			<div class="productName"></div>
+			<p class="introduction"></p>
+			<!-- 单位净值、起投金额、产品期限 -->
+			<!-- 类固收产品展示 -->
+			<div class="privateDetailList fixedIncome hide">
+				<div class="netValueWord"><span class="iconfont">&#xe60a;</span>业绩比较基准</div>
+				<div class="mui-row productInfoList">
+					<!-- 单位净值 -->
+					<div class="mui-col-xs-6">
+						<span class="netValue"></span>
+					</div>
+					<!-- 起投金额 -->
+					<div class="mui-col-xs-3 investmentList">
+						<p class="investmentAmountTip">起投金额</p>
+						<p class="investmentAmountNum"></p>
+					</div>
+					<!-- 产品期限 -->
+					<div class="mui-col-xs-3 investmentList">
+						<p class="productDeadlineTip">产品期限</p>
+						<p class="productDeadlineNum"></p>
+					</div>
+				</div>
+				<!-- 产品特点标签 -->
+				<div class="productLabel">
+					
+				</div>
 			</div>
+			<!-- 浮收产品展示 -->
+			<div class="privateDetailList floatProfit">
+				<div class="netValueWord"><span class="iconfont">&#xe60a;</span>单位净值(元)(<span class="netValueDate"></span>)</div>
+				<div class="mui-row productInfoList">
+					<!-- 单位净值 -->
+					<div class="mui-col-xs-6">
+						<span class="netValue"></span>
+					</div>
+					<!-- 起投金额 -->
+					<div class="mui-col-xs-3 investmentList">
+						<p class="investmentAmountTip">起投金额</p>
+						<p class="investmentAmountNum"></p>
+					</div>
+					<!-- 产品期限 -->
+					<div class="mui-col-xs-3 investmentList">
+						<p class="productDeadlineTip">产品期限</p>
+						<p class="productDeadlineNum"></p>
+					</div>
+				</div>
+				<!-- 产品特点标签 -->
+				<div class="productLabel">
+					
+				</div>
+			</div>
+			<div class="appointment">预约资质：<span></span></div>
+		</div>
+		<div class="mui-content midContent">
+			<div class="content">
+				<div class="tabsBox">
+					<div class="tabs">
+						<li class="active">基本信息</li>
+						<li>交易须知</li>
+						<li>产品材料</li>
+					</div>
+				</div>
+				<div class="wrap">
+					<!-- 基本信息 start -->
+					<div class="panel panel1 active">
+						<!-- 私募基金产品详情折线图 -->
+						<div class="lineWrap">
+				 			<div class="clearfix titleWrap typeNo5Wrap">
+				 				<span class="title historyTip">历史业绩走势</span>
+				 				<div class="priceLimit">涨跌幅：<span></span></div>
+				 			</div>
+				 			<div class="lineDraw">
+				 				<!-- 历史业绩走势 -->
+				 				<div id="historyLine" class="line hide"></div>
+				 				<!-- 七日年化折线图 -->
+				 				<div id="qrnhLine" class="line"></div>
+				 				<!-- 无数据提示 -->
+				 				<div class="hide noDataHintEcharts">暂无数据</div>
+				 				<div class='history tab'>
+				 					<span class="time oneMonth active" num="0">月</span>
+				 					<span class="time threeMonth" num="1">季</span>
+				 					<span class="time halfYear" num="2">半年</span>
+				 					<span class="time newYear" num="3">一年</span>
+				 					<span class="time sinceNow" num="4">成立来</span>
+				 				</div>
+				 			</div>
+				 		</div>
+
+				 		<!-- 业绩比较基准说明 -->
+				 		<div class="textContainner performanceComparison hide">
+							<div class="textTitle">业绩比较基准说明</div>
+							<div class="detailText">
+								<div class="productRate ">100万(含)～300万<span></span></div>
+								<div class="productRate ">300万(含)～1000万<span></span></div>
+								<div class="productRate ">1000万<span></span></div>
+							</div>
+						</div>
+
+						<div class="basic">
+							<div class="name">产品信息</div>
+							<div class="contentWrap">
+								<div class="content">
+									<ul class="contentUl">
+										<li>剩余额度</li>
+										<li class="changgeRight remaining"></li>
+									</ul>
+									<ul class="contentUl">
+										<li>募集起截止日</li>
+										<li class="changgeRight deadline"></li>
+									</ul>
+									<ul class="contentUl">
+										<li>管理人</li>
+										<li class="changgeRight custodian"></li>
+									</ul>
+									<ul class="contentUl">
+										<li>风险等级</li>
+										<li class="changgeRight riskGrade"></li>
+									</ul>
+									<ul class="contentUl">
+										<li>发行规模</li>
+										<li class="changgeRight issuingScale"></li>
+									</ul>
+									<ul class="contentUl">
+										<li>投资方向</li>
+										<li class="changgeRight direction"></li>
+									</ul>
+									<ul class="contentUl">
+										<li>投资领域</li>
+										<li class="changgeRight investmentArea"></li>
+									</ul>
+									<ul class="contentUl">
+										<li>投资方式</li>
+										<li class="changgeRight investmentWay"></li>
+									</ul>
+									<ul class="contentUl">
+										<li>收益分配方式</li>
+										<li class="changgeRight incomeType"></li>
+									</ul>
+								</div>
+								<div class="textContent">
+									<div class="textTitle">产品亮点</div>
+									<div class="detailText">
+										
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<!-- 基本信息 end -->
+
+					<!-- 交易须知 start -->
+					<div class="panel panel2">
+						<div class="textContainner">
+							<div class="textTitle">产品费率</div>
+							<div class="detailText">
+								<div class="productRate productRateBuy">认购费率<span></span></div>
+								<div class="productRate productRateManage">管理费率<span></span></div>
+								<div class="productRate productRateTrust">托管费率<span></span></div>
+							</div>
+						</div>
+						<div class="basic">
+							<div class="name">交易信息</div>
+							<div class="contentWrap">
+								<div class="content">
+									<ul class="contentUl">
+										<li>预约递增金额</li>
+										<li class="changgeRight advanceAmount"></li>
+									</ul>
+									<ul class="contentUl">
+										<li>预约有效天数</li>
+										<li class="changgeRight reservationDay"></li>
+									</ul>
+									<ul class="contentUl">
+										<li>打款截止日期</li>
+										<li class="changgeRight paymentDeadline"></li>
+									</ul>
+									<ul class="contentUl">
+										<li>预计成立日期</li>
+										<li class="changgeRight establishment"></li>
+									</ul>
+									<ul class="contentUl">
+										<li>是否需要面签</li>
+										<li class="changgeRight isVideo"></li>
+									</ul>
+									<ul class="contentUl">
+										<li>允许购买客户类型</li>
+										<li class="changgeRight clientType"></li>
+									</ul>
+									<ul class="contentUl">
+										<li>允许购买客户等级</li>
+										<li class="changgeRight clientLevel"></li>
+									</ul>
+									<ul class="contentUl">
+										<li>汇款备注</li>
+										<li class="changgeRight remittance"></li>
+									</ul>
+									
+								</div>
+								<!-- 赎回开放频率 -->
+								<div class="textContent">
+									<div class="textTitle">赎回开放频率</div>
+									<div class="detailText redemptionOpenFrequency">
+										
+									</div>
+								</div>
+								<!-- 募集账户信息 -->
+								<div class="textContent">
+									<div class="textTitle">募集账户信息</div>
+									<div class="collectAccount">
+										<ul>
+											<li>
+												<div class="title">募集户名</div>
+												<div class="copy">
+													<div id="name">--</div>
+													<span class="copy_btn">复制</span>
+												</div>
+											</li>
+											<li>
+												<div class="title">募集账号</div>
+												<div class="copy">
+													<div id="number">--</div>
+													<span class="copy_btn">复制</span>
+												</div>
+											</li>
+											<li>
+												<div class="title">开户银行</div>
+												<div class="copy">
+													<div id="linenum">--</div>
+													<span class="copy_btn">复制</span>
+												</div>
+											</li>
+											<li class="bordernone">
+												<div class="title">开户支行</div>
+												<div class="copy">
+													<div id="openingBank">--</div>
+													<span class="copy_btn">复制</span>
+												</div>
+											</li>
+										</ul>
+										
+									</div>
+									<div class="copyAll">复制全部</div>
+								</div>
+							</div>
+						</div>
+						
+					</div>
+					<!-- 交易须知 end -->
+
+					<!-- 产品材料 start -->
+					<div class="panel panel3">
+
+						
+					</div>
+					<!-- 产品材料 end -->
+				</div>
+			</div>		
+		</div>
+		<div class="investmentTip">投资前请您认真阅读《基金合同》《招募说明书》《风险揭示书》等法律文件，了解产品风险，基金过往业绩不预示未来表现，理财有风险，投资需谨慎。</div>
+
+		<div class="immediatelyBuy">
+			<div class="buyRate">认购/申购费率 <span></span></div>
+			<div class="buyButton">立即预约</div>
 		</div>
 		
 	</div>
+
+	<script id="wrap-template" type="text/x-handlebars-template">
+		{{!-- {{#each this}} --}}
+			<div class="textContent">
+				<div class="textTitle">{{title}}</div>
+				<div class="detailText">
+					{{#each displayGrounp}}
+						<div class="content" href="{{href}}">
+							<p class="contentTitle">{{groupName}}<span>{{fileDate}}</span></p>
+							<p class="contentLink">{{fileName}}</p>
+						</div>
+					{{/each}}
+				</div>
+			</div>
+		{{!-- {{/each}} --}}
+	</script>
 	
 </body>
 	@@include('@pathInclude/views/footer.html')
-    <script src="/financial/static/js/privatePlacement/privatePlacementDetail.js"></script>
+	<script src="/include/js/vendor/echarts/echarts.min.js"></script>
+	<script src="/include/js/vendor/clipboard/clipboard.js"></script>
+	<script src="/financial/static/js/privatePlacement/privatePlacementDetail.js"></script>
 </html>

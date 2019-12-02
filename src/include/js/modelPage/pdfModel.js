@@ -7,11 +7,10 @@ require('@pathIncludJs/vendor/config.js');
 require('@pathIncludJs/vendor/zepto/callback.js'); 
 require('@pathIncludJs/vendor/zepto/deferred.js'); 
 
-require('@pathCommonJsCom/utils.js');
 require('@pathCommonJs/ajaxLoading.js');
 
-var splitUrl = require('@pathCommonJsCom/splitUrl.js');
-var Base64 = require('@pathIncludJs/vendor/base64/base64.js');
+require('@pathCommonJsCom/headBarConfig.js');
+
 var pdfModel={
 
 	init:function(){
@@ -19,10 +18,8 @@ var pdfModel={
 
 		// pdf转canvas
 		// var url = '/productPrivate/static/img/demo.pdf';
-		var marUrl = splitUrl()["type"];
 		var pageUrl = window.location.href;
 		var pdfId;
-		var objUrl,dataPdf;
 
 		if(pageUrl.indexOf('protocol') != -1){
 			pdfId = '132';

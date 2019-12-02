@@ -4,25 +4,37 @@
  * @author yangjinlai 20191119
  */
 
-@import url("@pathInclude/css/mui.min.css");
 @import url("@pathCommonLess/mui/resetMUI.less");
-@import url("@pathCommonLess/color.less");
-@import url("@pathCommonLess/reset.less");
-@import url("@pathCommonLess/chtwm.less");
-@import url("@pathCommonLess/app.less");
+
 @import url("@pathCommonLessCom/headBarConfig.less");
 
+@import url("@pathCommonCom/button/button.less");
+
 body{
-	background: @F7FAFD
+	background: @F7FAFD;
+	width: 100%;
 }
 .privateDetail{
+	width: 100%;
+	overflow-x:hidden;
+	// .HeadBarConfigBox{
+	// 	background: linear-gradient(to right, rgb(89, 94, 111) 40%, rgb(28, 33, 53) 60%);
+	// }
 	.hide{
-		display: none ;
+		display: none;
 	}
 	.hidden{
 		visibility: hidden;
 	}
 	.topContent{
+		position: relative;
+		.serviceLogo {
+			position: absolute;
+			right: 0;
+			top: .4rem;
+			width: .88rem;
+			height: .88rem;
+		}
 		//按钮点击 打开状态
 		&.open{
 			background: @c005;
@@ -89,7 +101,6 @@ body{
 				}
 				// 已持仓
 				.type {
-				    width: 100%;
 				    margin: 0 0.3rem;
 				    li {
 				        span {
@@ -166,7 +177,6 @@ body{
 		}
 		.type_1{
 			.openWrap{
-				height: 2.18rem;
 				.openCon:last-child {
 					margin-top: .15rem
 				}
@@ -403,22 +413,25 @@ body{
 			height: .98rem;
 			line-height: .98rem;
 			font-size: .32rem;
-			text-align:center;
+			// text-align:center;
 			position: fixed;
 			bottom: 0;
 			.redeemBtn {
-				background: @FFFFFF;
-				color: #D2B381;
+				// background: @FFFFFF;
+				// color: #D2B381;
 				flex: 1;
 				display: none;
 			}
 			.subscribeBtn {
-				background:linear-gradient(90deg,rgba(212,183,136,1) 0%,rgba(188,150,90,1) 100%);
-				color: @FFFFFF;
+				// background:linear-gradient(90deg,rgba(212,183,136,1) 0%,rgba(188,150,90,1) 100%);
+				// color: @FFFFFF;
 				flex: 1;
 				display: none;
 			}
 		}
 	}
-	
+}
+
+.fontSize28 {
+	font-size: .28rem!important;
 }

@@ -33,15 +33,16 @@ var rule_wenjin = Mock.mock({
     "data": {
         "id":919,
         "title":"爆款基金来袭，如何挑选好基金",
-        "introduction":"爆款基金来袭，如何挑选好基金",
+        "introduction":"=====快赎规则=====快赎轴前文案T日（交易日）=====快赎轴后文案T日（交易日）=====快赎交易说明10:50为T日，10:50后不支持快赎赎回=====快赎费率说明快速赎回手续费为0.1%=====普赎规则=====普赎轴前文案T日（交易日）=====普赎轴后文案T日+1（交易日）=====普赎交易说明13点前为T日，13点后为T+1日赎回",
         "subject_tag":"",
         "clicksNum":395,
         "productType":"",
-        "content":"=====快赎规则=====快赎轴前文案T日（交易日）=====快赎轴后文案T日（交易日）=====快赎交易说明10:50为T日，10:50后不支持快赎赎回=====快赎费率说明快速赎回手续费为0.1%=====普赎规则=====普赎轴前文案T日（交易日）=====普赎轴后文案T日+1（交易日）=====普赎交易说明13点前为T日，13点后为T+1日赎回",
+        "content":"",
         "releaseDate":"2018-02-12",
         "reportDate":null,
         "reportSource":"",
-        "targetUrl":""
+        "targetUrl":"",
+        "imgUrl": "https://www.baidu.com/img/baidu_jgylogo3.gif"
     }
 });
 
@@ -53,11 +54,11 @@ var rule_wenyu = Mock.mock({
     "data": {
         "id":919,
         "title":"爆款基金来袭，如何挑选好基金",
-        "introduction":"爆款基金来袭，如何挑选好基金",
+        "introduction":"=====普赎规则=====普赎轴前文案T日（交易日）=====普赎轴后文案T日+5（交易日）=====普赎交易说明15点前为T日，15点后为T+1日赎回。",
         "subject_tag":"",
         "clicksNum":395,
         "productType":"",
-        "content":"=====普赎规则=====普赎轴前文案T日（交易日）=====普赎轴后文案T日+5（交易日）=====普赎交易说明15点前为T日，15点后为T+1日赎回。",
+        "content":"",
         "releaseDate":"2018-02-12",
         "reportDate":null,
         "reportSource":"",
@@ -73,11 +74,11 @@ var rule_zhengquan = Mock.mock({
     "data": {
         "id":919,
         "title":"爆款基金来袭，如何挑选好基金",
-        "introduction":"爆款基金来袭，如何挑选好基金",
+        "introduction":"=====普赎规则=====普赎轴前文案T日（交易日）=====普赎轴后文案T日+5（交易日）=====普赎交易说明15点前为T日，15点后为T+1日赎回。",
         "subject_tag":"",
         "clicksNum":395,
         "productType":"",
-        "content":"=====普赎规则=====普赎轴前文案T日（交易日）=====普赎轴后文案T日+5（交易日）=====普赎交易说明15点前为T日，15点后为T+1日赎回。",
+        "content":"",
         "releaseDate":"2018-02-12",
         "reportDate":null,
         "reportSource":"",

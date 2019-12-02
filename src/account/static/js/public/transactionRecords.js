@@ -2,15 +2,11 @@
 * 自选公募-交易记录
 * @author yanruiting 2019-11-19
 */
-require('@pathIncludJs/vendor/config.js');
-require('@pathIncludJs/vendor/zepto/callback.js');
-require('@pathIncludJs/vendor/zepto/deferred.js');
-require('@pathCommonJs/components/utils.js');
-require('@pathCommonJs/components/headBarConfig.js');
+
+require('@pathIncludJs/base.js');
 require('@pathCommonJs/ajaxLoading.js');
 
 var tipAction = require('@pathCommonJs/components/tipAction.js');
-var splitUrl = require('@pathCommonJs/components/splitUrl.js')();
 var generateTemplate = require('@pathCommonJsComBus/generateTemplate.js');
 
 $(function () {
@@ -108,7 +104,7 @@ $(function () {
                 }
                 that.$e.listLoading.show();
                 mui('.contentWrapper').pullRefresh().pullupLoading();
-                // that.$e.listLoading.hide();
+                that.$e.listLoading.hide();
                 $('.list').addClass('hasPullUp');
             });
         },
@@ -169,7 +165,7 @@ $(function () {
                             t.endPullupToRefresh(false);
                         }
 
-                        $('.list').find('.contentWrapper .mui-pull-bottom-pocket').removeClass('mui-hidden');
+                        $('.list').find('.mui-pull-bottom-pocket').removeClass('mui-hidden');
 
                         // 页面++
                         that.gV.pageNum++;
@@ -179,7 +175,8 @@ $(function () {
                     }, 200)
                 },
                 callbackFail: function (json) {
-                    $('.list').find('.contentWrapper .mui-pull-bottom-pocket').removeClass('mui-hidden');
+
+                    $('.list').find('.mui-pull-bottom-pocket').addClass('mui-hidden');
                     $('.list').addClass('noMove');
                     t.endPullupToRefresh(true);
                     that.$e.listLoading.hide();
@@ -187,7 +184,7 @@ $(function () {
                     
                 },
                 callbackNoData:function(json){
-                    $('.list').find('.contentWrapper .mui-pull-bottom-pocket').removeClass('mui-hidden');
+                    $('.list').find('.mui-pull-bottom-pocket').addClass('mui-hidden');
                     $('.list').addClass('noMove');
                     t.endPullupToRefresh(true);
                     that.$e.listLoading.hide();
@@ -286,6 +283,34 @@ $(function () {
                 that.$e.noData.hide();
                 that.initMui(that.gV.ajaxdata);
             })
+
+
+            //点击列表跳转
+            mui('body').on('tap','.recordItem',function(){
+                var applyId=$(this).attr('data-applyId');
+                var fundCombination=$(this).attr('data-fundCombination');
+                var fundCode=$(this).attr('data-fundCode');
+                var fundBusinCode=$(this).attr('data-fundBusinCode');
+                var allotType=$(this).attr('data-allotType');
+                var Fixbusinflag=$(this).attr('data-Fixbusinflag');
+                var scheduledProtocolId=$(this).attr('data-scheduledProtocolId');
+                //分红需要传的
+                var shares = $(this).attr('data-shares')
+                var fundName = $(this).attr('data-fundName')
+                var applyDate = $(this).attr('data-applyDate')
+                var autoBuyDesc = $(this).attr('data-autoBuyDesc')
+                if(allotType == 3){
+                    window.location.href=site_url.publicTradeDetail_url+'?applyId='+applyId+'&fundCombination='+fundCombination 
+                                        +'&fundCode='+fundCode+'&fundBusinCode='+fundBusinCode+'&allotType='+allotType
+                                        +'&Fixbusinflag='+Fixbusinflag+'&shares='+shares+'&fundName='+fundName
+                                        +'&applyDate='+applyDate+'&autoBuyDesc='+autoBuyDesc;
+                }else{
+                    window.location.href=site_url.publicTradeDetail_url+'?applyId='+applyId+'&fundCombination='+fundCombination 
+                                        +'&fundCode='+fundCode+'&fundBusinCode='+fundBusinCode+'&allotType='+allotType
+                                        +'&Fixbusinflag='+Fixbusinflag+'&scheduledProtocolId='+scheduledProtocolId;
+                }
+                
+            });
         }
     };
     somePage.init();

@@ -13,17 +13,17 @@
  </head>
  
  <body>
-     <!--加载图标-->
-	@@include('@pathCommonViews/load.html') 
     <div class="topTitle">
      @@include('@pathCommonViews/headBarConfig.html',{"bgColors":"#2C3E77,#273971","showType":"0","pathName":"收益分配明细"})
     </div>
    <div class="box">
        <div class="list" style="width:100%;">
+         <!-- 暂无数据 -->
+         @@include('@pathCommonViews/noDataImg.html',{"tipText":"暂无数据"})
         <section class="contentWrapper">
             <ul class="mui-table-view" id="activityDataList">
                 <div class="mui-table-view-cell recordList">
-
+                    
                 </div>
             </ul>
             @@include('@pathCommonViews/goTop.html')
@@ -45,11 +45,8 @@
    </script>
     <!-- 加载中loading -->
     @@include('@pathCommonViews/loading/listLoading.html')
-    <!-- 暂无数据 -->
-    @@include('@pathCommonViews/noDataImg.html',{"tipText":"暂无数据"})
     @@include('@pathInclude/views/footer.html')
-   <!-- 添加埋点 -->
-	@@include('@pathInclude/views/header.html')
+
     <script src="/account/static/js/private/incomeDistribution.js"></script>
 
  </body>

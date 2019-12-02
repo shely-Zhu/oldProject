@@ -16,8 +16,21 @@ module.exports = {
     },
     module: {
         //各种加载器，即让各种文件格式可用require引用
-        loaders: [
-          { test: /\.js$/, loader: 'babel', exclude: /node_modules/ ,query: {compact: false}}
+        rules: [
+          { test: /\.js$/, 
+            //loader: 'babel', 
+            exclude: /node_modules/ ,
+            use: {
+                loader: 'babel-loader', // 对符合上面约束条件的文件 使用的 loader
+                options: {
+                    presets: ['env'],
+                    plugins: ['transform-runtime']
+                }
+            },
+                
+            //query: {compact: false},
+
+        }
           // {test: /\.less$/, loader: 'style-loader!css-loader?minimize&-autoprefixer!postcss-loader!less-loader'}
         ]
     },

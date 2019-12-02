@@ -13,7 +13,7 @@ var data = Mock.mock({
 
         applyId: "",//交易申请编号
 
-        fundName: "",//基金名称
+        fundName: "中融3-5年信用债A",//基金名称
 
         fundCode: "",//基金代码
 
@@ -21,49 +21,51 @@ var data = Mock.mock({
 
         fundStatus: "",//基金交易状态
 
-        fundBusinCode: "",//业务大类
+        fundBusinCode: "020",//业务大类
 
         capitalMode: "",//资金方式
 
-        payModeName: "",//支付方式名称
+        payModeName: "汇款支付",//支付方式名称
 
-        tradeShares: "",//交易申请份额(赎回交易使用)
+        tradeShares: "1,000,000",//交易申请份额(赎回交易使用)
 
-        tradeAmount: "",//交易申请金额(认/申购交易使用)
+        tradeAmount: "1,000,000.00",//交易申请金额(认/申购交易使用)
 
-        tradeStatus: "",//交易申请状态
+        tradeStatus: "0",//交易申请状态
 
-        tradeApplyDesc: "",//交易状态描述
+        tradeApplyDesc: "待扣款",//交易状态信息
+
+        tradeApplyDescMessage: "等待银行汇款",//交易状态描述
 
         debitStatus: "",//扣款状态
 
-        tradeDate: "",//交易申请日期
+        tradeDate: "2017-09-01 11:00:35",//交易申请日期
 
-        originalDate: "",//原交易日期
+        originalDate: "2016-09-01 11:00:35",//原交易日期
 
-        estimateConfirmDate: "",//预估确认日期
+        estimateConfirmDate: "2018-08-01 11:00:35",//预估确认日期
 
-        estimateArrivalDate: "",//预估到账日期
+        estimateArrivalDate: "2019-09-01 11:00:35",//预估到账日期
 
-        confirmShares: "",//确认份额
+        confirmShares: "1,000份",//确认份额
 
-        confirmAmount: "",//确认金额
+        confirmAmount: "1,000,000.00",//确认金额
 
-        confirmNav: "",//确认净值
+        confirmNav: "1.02",//确认净值
 
-        confirmRate: "",//手续费
+        confirmRate: "120.00",//手续费
 
-        confirmDate: "",//确认日期
+        confirmDate: "2019-09-01 11:00:35",//确认日期
 
         tradeNo: "",//交易账号
 
-        bankAccount: "",//银行账户
+        bankAccount: "6230221111111117",//银行账户
 
         bankIdNo: "",//银行编号
 
-        bankLogoUrl: "",//银行logoUrl
+        bankLogoUrl: "http://hbimg.b0.upaiyun.com/a9d854a213470cd3805bc9404b03f9179a8532b81b814-RUgwaI_fw658",//银行logoUrl
 
-        bankName: "",//银行名称
+        bankName: "中国工商银行",//银行名称
 
         cancelable: 0,//可撤单标记1-可撤单；0-不可撤单
 
@@ -89,7 +91,7 @@ var data = Mock.mock({
 
                 tradeShares: "",//交易份额
 
-                tradeAmount: "",//交易金额
+                tradeAmount: "1,000,000.00",//交易金额
 
                 confirmDate: "",//确认日期
 

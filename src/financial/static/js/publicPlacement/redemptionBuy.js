@@ -1,3 +1,11 @@
+/*
+ * @Author: your name
+ * @Date: 2019-11-26 14:42:56
+ * @LastEditTime: 2019-11-29 13:34:42
+ * @LastEditors: Please set LastEditors
+ * @Description: In User Settings Edit
+ * @FilePath: \htjf-app\src\financial\static\js\publicPlacement\redemptionBuy.js
+ */
 /**  
  * @Page:  普通基金产品详情页_定投
  * @Author: caoqihai  
@@ -26,7 +34,9 @@ var splitUrl = require('@pathCommonJs/components/splitUrl.js');
 // var Clipboard = require('clipboard');
 var popPicker = require('@pathCommonJsCom/popPicker.js');
 var provinceList = require('../../../../common/json/provinceList.js');
+var generateTemplate = require('@pathCommonJsComBus/generateTemplate.js');
 
+var payPass = require('@pathCommonJsCom/payPassword.js');
 
 $(function() {
 
@@ -39,16 +49,157 @@ $(function() {
             linenum: $('#linenum'), //行号
             openingBank: $("#openingBank"), //开户行
             topc: $('#topc'), //提示信息
+            templateTransferFunds:$("#templateTransferFunds"), //基金列表模板
+            TransferFundsContent:$(".transferFundsContent"), //基金列表容器
+            iconCheck: $(".item2 .iconfont"), //同意协议选择框
+            confirmBtn:$(".confirmeDemptionPay") // 确定按钮
+        },
+        gv:{//全局变量
+            transferFunds:"",
+            fundCode:"", //现在的基金编号
+            targetfundcode:"", //赎回后目前的基金编号
+            nowRedempShare:"", //赎回后目前的赎回份额
+            maxRedempShare:"", //最大赎回份额
+            payType:"",
+            maxMoney:"",
+            checkImgUrl:"/financial/static/img/account_icon_check@2x.png",
+            dataList:"",
+            enableSharesMax:"", //最大赎回金额
+
         },
 
         webinit: function() {
             var that = this;
-
+            console.log("999999")
+             console.log("888",that.gv.dataBox);
+             that.gv.dataList = JSON.parse(sessionStorage.getItem("publicFundDetail"));
+             console.log("89898",JSON.parse(sessionStorage.getItem("publicFundDetail")))
+            // that.gv.targetfundcode = that.gv.dataList.fundCode;
+           //  that.gv.dataList = 
             //
+            //that.getData();
+            that.initParmes();
             that.events();
-
+            that.initHtml();
+           that.initQueryTransferFunds();
         },
+        getData:function(){
+           
+        },
+        initHtml:function(){
+            var that = this;
+            var redemptionBuyTitalHtml ="";
+            var onrightLeftOneimgUrl = "";
+            var onrightLeftOneName = "";
+            var onrightLeftOneCode = "";
+            console.log("aaaa")
+            console.log(that.gv.dataList.enableShares)
+            $(".redemptionBuyTital span.name").html(that.gv.dataList.fundName);
+            $(".redemptionBuyTital span.code").html(that.gv.dataList.fundCode);
+            $(".listOneCar img").attr("src",that.gv.dataList.bankThumbnailUrl);
+            $(".listOneCar i").html(that.gv.dataList.bankName);
+            $(".listOneCar span.carNum").html(that.gv.dataList.bankAccountMask.substr(-4));
+            $(".pay span.payTime").html(that.gv.dataList.estimateArrivalDate);
+            $(".msecond input").val(that.gv.dataList.enableShares);
+            $(".listSecondCar span.name").html(that.gv.dataList.fundName);
+            $(".listSecondCar span.code").html(that.gv.dataList.fundCode);
+            $(".popupCarList .bank-img").attr("src",that.gv.dataList.bankThumbnailUrl)
+        },
+        //查看详情提交
+        findMessageCen:function(id){
+            var obj = [{
+                url: site_url.findMessageCenterById_api,
+                data: {
+                    "id": id,  
+                },
+                //async: false,
+                needDataEmpty: true,
+                callbackDone: function (json) {
+                    console.log("json",json);
+                },
 
+            }];
+            $.ajaxLoading(obj);
+        },
+        //初始化右侧展开
+        initQueryTransferFunds:function(){
+            var that = this;
+            var obj = [{
+                url : site_url.queryTransferFunds_api,
+                needDataEmpty:true,
+                data:{},
+                callbackDone : function(json){
+                    console.log("88888",json);
+                    that.gv.transferFunds = json.data;
+                    console.log("88898989")
+                     // 将列表插入到页面上
+                     for(var i = 0;i<that.gv.transferFunds.length;i++){
+                          var code = that.gv.transferFunds[i].fundCode;
+                          var Redata = that.searchNewfundDetails(code)
+                          console.log("98989",Redata);
+                     }
+                     generateTemplate(that.gv.transferFunds, that.getElements.TransferFundsContent, that.getElements.templateTransferFunds);
+                }
+            }];
+            $.ajaxLoading(obj);
+             
+        },
+        //查询基金七日年化
+        searchNewfundDetails: function(code){
+            var that = this;
+            var obj = [{
+                url:site_url.newFundDetails_api,
+                needDataEmpty:true,
+                data:{
+                    fundCode:code
+                },
+                callbackDone:function(json){
+                    return json
+                }
+    
+            }];
+            $.ajaxLoading(obj);
+        },
+        //赎回确认
+        cancelOrder:function(password){
+            var that = this;
+            var param = {
+                password: password,
+                fundCode:regulatory.gv.dataList.fundCode, //基金代码 
+                tradeNo:regulatory.gv.dataList.tradeNo,//交易账号
+                redempShare:regulatory.gv.nowRedempShare, //赎回份额
+                redempFlag:"0", //赎回标识
+                capitalMode:regulatory.gv.dataList.capitalMode, //资金方式
+                shareType:regulatory.gv.dataList.shareType, //份额分类
+                targetfundcode:regulatory.gv.targetfundcode,//目前基金编号
+                channel:"app",//渠道
+            };
+            var obj = [{
+                url:site_url.redemptionPay_api,
+                data:param,
+                needDataEmpty: true,
+                callbackDone:function(res){
+                    var data = res.data;
+                    console.log("888888888",data)
+                    debugger
+                    if(res.status == '0000'){
+                        window.location.href = site_url.pofSurelyResultsDetail_url + '?applyId=' + data.allotNo + '&fundBusinCode=' + 
+                        "024"+ "&fundCode=" + regulatory.gv.targetfundcode  + '&flag=redemption';
+                    }
+                }
+
+            }];
+            $.ajaxLoading(obj);
+        },
+        initParmes:function(){
+           var that = this;
+           var parmesDataList = that.gv.dataList;
+           that.gv.fundCode = parmesDataList.fundCode;
+           that.gv.nowRedempShare = parmesDataList.enableShares;
+           that.gv.maxRedempShare = parmesDataList.enableShares;
+             
+        },
+    
         /*
             绑定事件
          */
@@ -65,6 +216,82 @@ $(function() {
             $('body').on('tap', '.popup-mask', function() {
                 $('.popup').css('display', 'none')
             })
+
+            mui("body").on('tap','.findMessageCen',function(){
+                var id="79";
+                console.log("aaaaa")
+                that.findMessageCen(id);
+            })
+
+             //银行卡与基金形成单选
+            $('body').on('click',".radioCheckItem",function(){
+                var type = $(this).attr("type");
+                if(type == 'car'){
+                    //银行
+                    $(".transferFundsContent li").attr("checkStatu","off");
+                    $(".transferFundsContent li .radioCheckItemImg").attr("src","")
+                   
+                    $(".listOnefund").css({"display":"none"});
+                    $(".listOneCar").css({"display":"flex"});
+                    $(".maxMoneyContent").css({"display":"block"});
+                    that.gv.targetfundcode = that.gv.dataList.fundCode;
+                }
+                else if(type == 'fund'){
+                    console.log("8888")
+                   $(".carContent li").attr("checkStatu","off");
+                   $(".carContent li .radioCheckItemImg").attr("src","")
+                   $(this).siblings().attr("checkStatu","off");
+                   $(this).siblings().find(".radioCheckItemImg").attr("src","");
+                   $(".listOnefund").css({"display":"block"});
+                    $(".listOneCar").css({"display":"none"});
+                    $(".maxMoneyContent").css({"display":"none"});
+                    var fundCode = $(this).find("span.fundCode")[0].textContent;
+                    var fundName = $(this).find("span.fundName")[0].textContent;
+                    var fundMessage = $(this).find("span.fundMessage")[0].textContent;
+                    that.gv.targetfundcode = fundCode;
+                    console.log(fundCode,fundName);
+                    $(".listOnefund .fundName").html(fundName);
+                    $(".listOnefund .fundCode").html(fundCode);
+                    $(".listOnefund .fundMessage").html(fundMessage);
+                }
+                $(this).attr("checkStatu","on");
+                $(this).find(".radioCheckItemImg").attr("src",that.gv.checkImgUrl);
+                console.log("aaaa")
+              //  that.confirmCheck();
+            })
+
+            //点击全部，初始化最大赎回额度
+            mui("body").on('tap','.forAll',function(){
+                console.log("aaaaaaaa");
+               $(".msecond .msecond-one")[0].value=that.gv.dataList.enableShares;
+            })
+
+            //赎回确认         
+         $(".confirmeDemptionPay").on('click',function(){
+            $("#passwordWrap").show();
+            payPass(that.cancelOrder)
+        })
+         $(".msecond input").change(function(){
+             console.log("8888888");
+             that.gv.nowRedempShare = $(this)[0].value;
+             if(that.gv.maxRedempShare<that.gv.nowRedempShare){
+                 $(".checkMessage").css({"display":"block"});
+             }else{
+                $(".checkMessage").css({"display":"none"});
+             }
+         })
+
+         //点击同意协议
+			that.getElements.iconCheck.on('click', function() {
+                if ($(this).hasClass("check")) {
+					$(this).removeClass("check").html('&#xe668;');
+					that.getElements.confirmBtn.attr('disabled',true)
+                } else {
+					$(this).addClass("check").html('&#xe669;');
+					that.getElements.confirmBtn.removeAttr("disabled");
+                }
+			});
+            
 
         },
 

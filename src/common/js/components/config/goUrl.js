@@ -329,9 +329,11 @@ module.exports = function () {
     this.qualifiedInvestor_url = go_url.no_url + '/mine/views/qualifiedInvestor/qualifiedInvestor.html?type=private';
     //活动详情->去成交
     this.wealthIndex_url = go_url.no_url + '/financial/views/wealthIndex.html';
+
     //活动详情->我的奖励
     this.rewards_url = go_url.no_url + '/mine/views/rewards.html';
     /*-------------------------------活动列表 end -----------------------*/
+
 
     /*-------------------------------消息中心 start -----------------------*/
     // 通知详情
@@ -344,8 +346,9 @@ module.exports = function () {
     this.articleTemplate_url = go_url.no_url + '/include/views/articleTemplate.html';
     // 月度报告详情页
     this.monthReportDetail_url = go_url.no_url + '/mine/views/monthReport/monthReportDetail.html';
+    // 月度报告产品咨询
+    this.consultProduct_url = go_url.no_url + '/mine/views/monthReport/consultProduct.html';
     //自选公募详情页
-    this.optionalPublicDetail_url = go_url.no_url + '/account/views/optionalPublicDetail.html';
 
     /*------------------- 私募理财fang——le start ------------------------------*/
 
@@ -355,8 +358,34 @@ module.exports = function () {
     this.pofCashTransformIn_url = go_url.no_url + '/financial/views/publicPlacement/cashTransformIn.html';
     // 转出页面	
     this.pofCashTransformOut_url = go_url.no_url + '/financial/views/publicPlacement/cashTransformOut.html';
+    // 定投详情
+    this.pofCastSurelyDetails_url = go_url.no_url + '/financial/views/publicPlacement/castSurelyDetails.html';
+    // 修改定投
+    this.pofOrdinarySetThrow_url = go_url.no_url + '/financial/views/publicPlacement/ordinarySetThrow.html';
+    // 交易规则
+    this.pofTransactionRules_url = go_url.no_url + '/financial/views/publicPlacement/transactionRules.html';
+    // 基金档案
+    this.pofFundFile_url = go_url.no_url + '/financial/views/publicPlacement/fundFile.html';
+    // 基金经理
+    this.pofFundManager_url = go_url.no_url + '/financial/views/publicPlacement/fundManager.html';
+    // 基金公司
+    this.pofFundCompany_url = go_url.no_url + '/financial/views/publicPlacement/fundCompany.html';
+    // 基金详情
+    this.pofPublicDetail_url = go_url.no_url + '/account/views/public/publicDetail.html';
+    
+    // 买入结果页面，基金买入结果
+    this.pofSurelyResultsDetail_url = go_url.no_url + '/financial/views/publicPlacement/surelyResultsDetail.html';
+
+    //忘记密码  跳往原生页面
+    this.pofForgotPassword_url = go_url.no_url + '/minel/views/setting/forgotPassword.html';
+    //找回密码   跳往原生页面
+    this.pofRetrievePassword_url = go_url.no_url + '/minel/views/setting/retrievePassword.html';
+	//添加银行卡
+    this.pofAddBankCard_url = go_url.no_url + '/mine/views/bankCard/addBankCard.html'
 
     /*------------------- 私募理财fang——le end ------------------------------*/
+    this.optionalPublicDetail_url = go_url.no_url + '/account/views/public/optionalPublicDetail.html';
+
     // 收益分配明细页
     this.incomeDistribution_url = go_url.no_url + '/account/views/private/incomeDistribution.html';
     // 私募交易明细
@@ -369,8 +398,49 @@ module.exports = function () {
     this.productFiles_url = go_url.no_url + '/account/views/productFiles.html';
     // 基金确认书
     this.privateFundPdf_url = go_url.no_url + '/account/views/private/privateFundPdf.html';
-    // 交易规则
+    // 私募交易规则
+    this.privateTransactionRules_url = go_url.no_url + '/account/views/private/transactionRules.html';
+    // 公募交易规则
     this.transactionRules_url = go_url.no_url + '/financial/views/publicPlacement/transactionRules.html';
+    //基金公司
+    this.fundCompany_url = go_url.no_url + '/financial/views/publicPlacement/fundCompany.html';
     // 信息披露
     this.informationDisclosure_url = go_url.no_url + '/account/views/informationDisclosure.html';
+    // 公募交易详情查询
+    this.publicTradeDetail_url = go_url.no_url + '/account/views/publicTradeDetail/publicTradeDetail.html';
+    //普通基金-赎回页面
+    this.redemptionBuy_url = go_url.no_url + '/financial/views/publicPlacement/redemptionBuy.html';
+    //普通基金-买入页面
+    this.fundTransformIn_url = go_url.no_url + '/financial/views/publicPlacement/fundTransformIn.html';
+    //现金宝管理
+    this.cashManagement_url = go_url.no_url + '/financial/views/publicPlacement/cashManagement.html';
+    //  //普通基金-定投买入
+    // this.ordinarySetThrow_url = go_url.no_url + '/financial/views/publicPlacement/ordinarySetThrow.html';
+    // 超宝详情--内容页
+    this.superContent_url = go_url.no_url + '/account/views/public/superContent.html';
+    //超宝详情页
+    this.superStreasureDetail_url = go_url.no_url + '/account/views/public/superStreasureDetail.html';
+    //修改邮箱
+    this.changeMail_url = go_url.no_url + '/mine/views/mail/changeMail.html';
+    //修改分红方式
+    this.bonusMethod_url = go_url.no_url + '/mine/views/bonusMethod.html';
+
+    /*------------------- 公募持仓相关 start ------------------------------*/
+    //公募交易记录
+    this.transactionRecords_url = go_url.no_url + '/account/views/public/transactionRecords.html';
+    //公募持仓记录
+    this.publicAssets_url = go_url.no_url + '/account/views/publicAssets.html';
+    /*------------------- 公募持仓相关 end ------------------------------*/
+
+    //收益明细
+    this.returnsDetail_url = go_url.no_url + '/mine/views/returnsDetail.html';
+
+    //现金宝交易记录
+    this.superRecord_url = go_url.no_url + '/account/views/super/superRecord.html';
+    //财富早知道
+    this.fortuneFlowKnown_url = go_url.no_url + '/homePage/views/fortuneCollege/fortuneFlowKnown.html';
+    //财富讲堂
+    this.fortuneClassroom_url = go_url.no_url + '/homePage/views/fortuneCollege/fortuneClassroom.html';
+    //财富研究
+    this.wealthResearch_url = go_url.no_url + '/homePage/views/fortuneCollege/wealthResearch.html';
 };

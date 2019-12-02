@@ -73,9 +73,9 @@
                 @@include('@pathCommonViews/goTop.html')
             </ul>
             <!-- 没有数据 -->
-            @@include('@pathCommonViews/noDataImg.html')
+            @@include('@pathCommonViews/noDataImg.html',{"tipText":"暂无数据"})
             <!-- 加载中loading -->
-            @@include('@pathCommonViews/load.html')
+            @@include('@pathCommonCom/loading/listLoading.html')
         </div>
     </div>
 
@@ -101,8 +101,7 @@
         </div>
         {{/each}}
     </script>
-    <!-- 添加埋点 -->
-	@@include('@pathInclude/views/header.html')
+
     @@include('@pathInclude/views/footer.html')
     <script src="/mine/static/js/membershipInterestsRecord.js"></script>
 

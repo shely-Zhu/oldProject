@@ -2,10 +2,7 @@
 * 自选公募交易记录
 * @author yanruiting 2019-11-19
 */
-@import url("../../../../../include/css/mui.min.css");
-@import url('@pathCommonLess/mui/resetMUI.less');
-@import url("@pathCommonLess/reset.less");
-@import url("@pathCommonLess/color.less");
+@import url("@pathCommonLess/mui/resetMUI.less");
 @import url("@pathCommonLess/components/noDataImg.less");
 @import url("@pathCommonLessCom/againEnter.less");
 @import url("@pathCommonLessCom/alertBox.less");
@@ -24,6 +21,7 @@ body{
 	padding: .5rem;
 }
 #recordBox {
+	background: @F7FAFD;
 	#recordSearch {
 		height: .8rem;
 		background: @FFFFFF;
@@ -188,5 +186,12 @@ body{
 		line-height: .8rem;
 		height: .8rem;
 		display: none;
+	}
+	.mui-table-view-cell{
+		padding: 0;
+	}
+	.mui-pull-bottom-pocket{
+		position: absolute;
+		bottom: -40px;
 	}
 }
