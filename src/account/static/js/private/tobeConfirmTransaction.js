@@ -11,6 +11,8 @@ require('@pathCommonBase/base.js');
 //ajax调用
 require('@pathCommonJs/ajaxLoading.js');
 
+require('@pathCommonCom/elasticLayer/elasticLayer/elasticLayer.js');
+
 //下拉加载更多
 // require('@pathCommonJs/scrollFullPage.js');
 // 切换
@@ -173,6 +175,9 @@ $(function() {
             $.ajaxLoading(obj);
         },
         openTipCon: function(type, content, id) {
+
+            //弹层
+            
             $('#tipCon .tipCon').html(content);
             $('.mask').show();
             $('#tipCon').show();
