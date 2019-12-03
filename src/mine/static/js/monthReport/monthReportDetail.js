@@ -16,6 +16,7 @@ var moment = require('moment');
 //引入弹出层
 require('@pathCommonJsCom/elasticLayerTypeFive.js');
 var generateTemplate = require('@pathCommonJsComBus/generateTemplate.js');
+var Base64 = require('@pathIncludJs/vendor/base64/base64.js');
 
 
 var monthReportDetail = {
@@ -24,8 +25,6 @@ var monthReportDetail = {
 		reportId:splitUrl['reportId'],   //活动的id
 		adjustmentTemp: $('#second-template'), // 最新调仓模板
 	},
-	monthHoldShareList:'',
-	recommendList:'',
 	pieChartData:'', // 画图的title
 	init: function(){  //初始化函数
 		var that = this;
@@ -648,7 +647,7 @@ var monthReportDetail = {
 				callbackDone: function(json){
 					var result = json.data;
 					// 判断是否有专属理财师和服务理财师
-					if(result.exclusiveFinancialerList || result.serviceFinancialerList ){
+					if(result.exclusiveFinancialerList.length != 0 || result.serviceFinancialerList != 0 ){
 
 						if(result.exclusiveFinancialerList.length != 0){   //有专属理财师
 							var exclusive = result.exclusiveFinancialerList[0];//专属理财师
@@ -696,12 +695,23 @@ var monthReportDetail = {
 					}else{
 						var now = new Date();
 						var hh = now.getHours();
-						
+
 						if(8 <= hh && hh <= 20){
-							// window.location.href = site_url.consultProduct_url +'?empNo='+ that.getElements.plannerNum + '&empName=' + that.getElements.plannerName + '&productName=' + that.getElements.productName ;
-							// window.open(site_url.customerService_url);
+							 //跳转客服页面
+							var obj = [{
+								url: site_url.getToken_api,
+								data: {
+								},
+								needDataEmpty:false,
+								callbackDone: function(json) {
+									var token = json.data.token;
+									// 跳转第三方客服地址
+									window.location.href = site_url.onlineCustomer_url + '&token=' + token;
+								},     
+							}];
+							$.ajaxLoading(obj);
 						}else{
-							window.location.href = site_url.consultProduct_url +'?empNo='+ that.getElements.plannerNum + '&empName=' + that.getElements.plannerName + '&productName=' + that.getElements.productName ;
+							window.location.href = site_url.consultProduct_url +'?empNo='+ that.getElements.plannerNum + '&empName=' + that.getElements.plannerName + '&productName=' + new Base64().encode(that.getElements.productName) + '&backUrl=' + new Base64().encode(window.location.href) ;
 						}
 
 					}
