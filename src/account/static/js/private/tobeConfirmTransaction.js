@@ -13,8 +13,8 @@ require('@pathCommonJs/ajaxLoading.js');
 
 require('@pathCommonCom/elasticLayer/elasticLayer/elasticLayer.js');
 
-                
- 
+
+
 //下拉加载更多
 // require('@pathCommonJs/scrollFullPage.js');
 // 切换
@@ -176,11 +176,11 @@ $(function() {
         },
         openTipCon: function(type, content, id) {
 
-            
+
 
 
             //弹层
-            
+
             // $('#tipCon .tipCon').html(content);
             // $('.mask').show();
             // $('#tipCon').show();
@@ -233,28 +233,32 @@ $(function() {
                     var type = $(this).attr('data-type');
                     var id = $(this).attr('data-id');
                     if (type == 'assign') { //转让
-                        var obj={
-                            // title: '标题',
-                            p:'<p>您确定要取消转让申请吗？</p>',
-                            yesTxt:'确认',
-                            hideCelButton: true,
+                        var obj = {
+                            p: '<p>您确定要取消转让申请吗？</p>',
+                            yesTxt: '确认',
+                            celTxt: '取消',
+                            hideCelButton: false,
                             zIndex: 100,
-                            callback:function(t){
-                                
-                            },      
+                            callback: function(t) {
+
+                            },
                         };
                         $.elasticLayer(obj)
 
                         // that.openTipCon('assign', '您确定要取消转让申请吗？', id);
 
                     } else if (type == 'assignee')
-                        that.openTipCon('assign', '您确定要取消受让申请吗？', id);
+                        var obj = {
+                            p: '<p>您确定要取消受让申请吗？</p>',
+                            yesTxt: '确认',
+                            celTxt: '取消',
+                            hideCelButton: false,
+                            zIndex: 100,
+                            callback: function(t) {
 
-                })
-                //点击取消
-            mui("body").on('tap', '.tipContainer .cancel', function(e) {
-                    $('.mask').hide();
-                    $('#tipCon').hide();
+                            },
+                        };
+                    $.elasticLayer(obj)
 
                 })
                 // 点击我明白了
@@ -270,7 +274,16 @@ $(function() {
                     $('.mask').show();
                     $('#tipConOne').show();
                     var conText = $(this).siblings('tipContent').html;
-                    that.openTipConOne(conText);
+                    var obj = {
+                        p: '<p>' + conText + '</p>',
+                        yesTxt: '我明白了',
+                        hideCelButton: true,
+                        zIndex: 100,
+                        callback: function(t) {
+
+                        },
+                    };
+                    $.elasticLayer(obj);
 
                 })
                 //功能按钮

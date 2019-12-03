@@ -13,6 +13,8 @@ require('@pathCommonJs/components/authenticationProcess.js');
 var splitUrl = require('@pathCommonJs/components/splitUrl.js')();
 var tipAction = require('@pathCommonJs/components/tipAction.js');
 var generateTemplate = require('@pathCommonJsComBus/generateTemplate.js');
+//引入弹出层
+require('@pathCommonCom/elasticLayer/elasticLayer/elasticLayer.js');
 
 $(function(){
 	var  privatePlacementDetail = {
@@ -34,6 +36,7 @@ $(function(){
 		data:{
 			custType:"",//客户类型
 			fundDetailObj:"",//详情接口拿到的对象
+			buyFreeze:"",//是否买入冻结
 			qrnhWfsy: {
 				oneMonth : {},
 				threeMonth: {},
@@ -173,7 +176,7 @@ $(function(){
 					$('.buyRate span').html(jsonData.buyRate);
 				},
 			},{
-                    url: site_url.user_api,
+                    url: site_url.queryUserAuthInfo_api,
                     data: {
                         hmac: "", //预留的加密信息     
                         params: {
@@ -186,6 +189,8 @@ $(function(){
                     callbackDone: function(json) {
                         var jsonData = json.data;
                         that.data.custType = jsonData.accountType; // 客户类型【0.机构 1.个人】 
+                        that.data.buyFreeze = jsonData.buyFreeze; // 是否冻结买入：0-否；1-是；
+                        
 
                     },
                 }];
@@ -506,11 +511,14 @@ $(function(){
 				data: {
 					projectId: that.$e.projectId,
 				},
+				contentTypeSearch:true,
 				needLogin:true,//需要判断是否登陆
 				callbackDone: function(json){  //成功后执行的函数
 					$("#tips-wrap").show();//显示预约条件
 //					generateTemplate(json.data,$("#real-condition"), that.$e.conditionTemplate);
 					var jsonData = json.data,
+					isPopup = "",//弹框售前告知书
+					isReal = "",//是否实名认证，因为如果机构切一键认证是实名，点击需要提示弹框。
 					singleaAuthenPath = "",//一键认证跳转链接
 					singleaAuthen = false;//条件框是否展示
 					that.$e.realLi.hide();
@@ -518,26 +526,103 @@ $(function(){
 						var jumpUrl = "";
 						if(v.show == "1"){//如果显示。show=1
 							singleaAuthen = true;
+							if(!singleaAuthenPath){//获取一键认证的链接。有值的第一个
+								singleaAuthenPath = that.getJumpUrl(v)
+								if(v.conditionType == 1){//下面一键认证如果是实名认证且机构需要点击需要弹框提示，这里记录。且不能覆盖
+									isReal = true;//判断
+								}
+							}
+							if(v.conditionType == 3 && v.isPopup == "1"){//是否弹出售前告知书。售前告知书与风险等级匹配一起提示
+								isPopup = true;
+							}
 							that.$e.realLi.eq(e*1).show();
 							that.$e.realLi.eq(e*1).find(".bank-status").html(v.statusDesc);
-							jumpUrl = that.getJumpUrl(v)
+							jumpUrl = that.getJumpUrl(v);//获取跳转Url。
 						}
 //						对应的条件认证到哪里
 						that.$e.realLi.eq(e*1).find(".tips-li-right").on('tap',function(){
-							if(v.conditionType == "1" && that.data.custType != "1"){//机构不支持线上开户，弹框提示
-								
+							if(v.conditionType == "1" && that.data.custType != "1"){//如果是实名认证跳转，机构不支持线上开户，弹框提示
+								$("#tips-wrap").hide();
+				                var obj = {
+				                	title: '',
+				                	id: 'realOrg',
+				                	p: '机构客户需联系您的理财师，进行线下开户',
+				                	yesTxt: '确认',
+				                	celTxt: "取消",
+				                	zIndex: 100,
+				                	callback: function(t) {
+				                	},
+				                };
+				                $.elasticLayer(obj)
 							}else{
 								window.location.href = jumpUrl;
 							}
 						})
 						//一键认证调往哪里
 						mui("body").on('tap', '.tips-btn', function() {
-							window.location.href = jumpUrl;
+							if(isReal && that.data.custType != "1"){//如果是实名认证跳转，机构不支持线上开户，弹框提示,一键认证正好也是链接也是实名认证也弹框
+								$("#tips-wrap").hide();
+				                var obj = {
+				                	title: '',
+				                	id: 'realOrg1',
+				                	p: '机构客户需联系您的理财师，进行线下开户',
+				                	yesTxt: '确认',
+				                	celTxt: "取消",
+				                	zIndex: 100,
+				                	callback: function(t) {
+				                	},
+				                };
+				                $.elasticLayer(obj)
+							}else{
+								window.location.href = singleaAuthenPath;
+							}
 						})
 						
 					});
-					if(!singleaAuthen){//如果v.show都是0，则不展示预约框
+					if(!singleaAuthen){//如果v.show都是0，则不展示预约框,跳转到相应链接
 						$("#tips-wrap").hide();
+						if(!!isPopup){//如果弹售前告知书
+			                var obj = {
+			                	title: '',
+			                	id: 'sellPop',
+			                	p: '<p class="">你选择的产品与您现在的风险承受能力相匹配</p>' +
+			                		'<p class="">请您认真阅读' + that.email + '</p>' +
+			                		'<p class="otherColor" id="changeMail">邮箱有变更，去修改</p>',
+			                	yesTxt: '确认',
+			                	celTxt: '取消',
+			                	zIndex: 1200,
+			                	callback: function(t) {
+			                		if(that.email) {
+			                			var obj = [{
+			                				url: site_url.sendMailForConfirmBill_api,
+			                				data: {
+			                					fileName: that.fileName,
+			                					fileUrl: that.fileUrl,
+			                					email: that.email
+			                				},
+			                				needLogin: true,
+			                				callbackDone: function(json) {
+			                					t.hide(); //关闭弹窗
+
+			                				},
+			                				callbackFail: function(json) {
+			                					//                                  //显示错误提示
+			                					tipAction(json.message);
+
+			                				},
+			                			}];
+			                			$.ajaxLoading(obj);
+			                		} else {
+			                			//显示错误提示
+			                			tipAction("请去绑定邮箱");
+			                			//                          alert('请去绑定邮箱')
+			                		}
+			                	},
+			                };
+			                $.elasticLayer(obj)
+						}
+						that.nextStep();
+						
 					}
 
 
@@ -663,7 +748,9 @@ $(function(){
 						window.location.href = "/financial/views/privatePlacement/electronicContract/orderLimit.html?fundCode=" + that.$e.projectId + "&isAllowAppend=" +
 							that.data.fundDetailObj.isAllowAppend;
 					} else {
-						//弹框提示不支持在线追加弹框提示
+						//跳转到普通预约
+						window.location.href = "/financial/views/privatePlacement/ordinaryProducts/registration.html" + that.$e.projectId + "&isAllowAppend=" +
+							that.data.fundDetailObj.isAllowAppend;
 					}
 				} else { //预约
 					//跳转到预约产品链接
@@ -726,34 +813,21 @@ $(function(){
 
 			// 立即预约
 			mui("body").on('tap', '.buyButton' , function(){
-				that.getConditionsOfOrder();//获取预约条件
-				if(that.data.fundDetailObj.isElecContract == "1"){//电子合同逻辑
-					if(that.data.fundDetailObj.isAllowAppend == "1"){//追加商品参数fundCode,
-						//跳转到追加商品链接
-						if(that.data.custType == "1"){//客户类型【0.机构 1.个人】 
-							//跳转到电子合同追加页面
-							window.location.href = "/financial/views/privatePlacement/electronicContract/orderLimit.html?fundCode=" + that.$e.projectId + "&isAllowAppend="
-							+ that.data.fundDetailObj.isAllowAppend;
-						}else{
-							//弹框提示不支持在线追加弹框提示
-						}
-					}else{//预约
-						//跳转到预约产品链接
-						if(that.data.custType == "1"){//客户类型【0.机构 1.个人】 
-							//跳转到电子合同预约页面
-							window.location.href = "/financial/views/privatePlacement/electronicContract/orderLimit.html?fundCode=" + that.$e.projectId + "&isAllowAppend="
-							+ that.data.fundDetailObj.isAllowAppend;
-						}else{
-							//跳转到普通预约
-							window.location.href = "/financial/views/privatePlacement/ordinaryProducts/registration.html" + that.$e.projectId + "&isAllowAppend="
-							+ that.data.fundDetailObj.isAllowAppend;
-							
-						}
-					}
-				}else{//非电子合同
-					
-					window.location.href = "/financial/views/privatePlacement/ordinaryProducts/registration.html" + that.$e.projectId + "&isAllowAppend="
-							+ that.data.fundDetailObj.isAllowAppend;
+				if(that.data.buyFreeze == "1"){//如果账户冻结，首先提示
+	                var obj = {
+	                	title: '',
+	                	id: 'buyFreeze',
+	                	p: '您的账户已冻结，禁止买入，可联系您的理财师进行咨询',
+	                	yesTxt: '确认',
+	                	celTxt: "取消",
+	                	zIndex: 100,
+	                	callback: function(t) {
+
+	                	},
+	                };
+	                $.elasticLayer(obj)
+				}else{
+					that.getConditionsOfOrder();//获取预约条件
 					
 				}
 			});

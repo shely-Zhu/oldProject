@@ -147,8 +147,8 @@ $(function() {
             var that=this
             // 列表页跳转到详情页
 			mui("body").on('tap', '.knownItem' , function(){
-                var externalUrl = $(this).attr("externalUrl")
-                window.location.href = externalUrl
+                var id = $(this).attr("id")
+                window.location.href = site_url.articleTemplate_url + '?id=' + id + '&articleBelong=' + that.gV.articleBelong + '&applyType=1'
             })
             mui("body").on('tap', '.knownItem' , function(){
                 var externalUrl = $(this).attr("externalUrl")

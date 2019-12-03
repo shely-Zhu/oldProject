@@ -318,6 +318,7 @@ $(function(){
             });
             //点击定位选择效果
             mui('#cityListBox').on('tap','.mui-indexed-list-item,.hotBox span',function(){
+                $(this).attr('htmdEvt','starFinancia_city')
                 var txt=$(this).text();
                 var code=$(this).attr('data-code');
                 var parentId=$(this).attr('data-parentId');
@@ -341,12 +342,14 @@ $(function(){
             });
             //点击定位选择头部返回效果
             mui('#cityListBox').on('tap','.goBack',function(){
+                $(this).attr('htmdEvt','starFinancia_goBack')
                 $('#cityListBox').hide();
                 $('#activityDataBox').show();
                 mui('.contentWrapper').pullRefresh().scrollTo(0, 0, 10);         
             });
             //点击定位选择右侧索引效果
             mui('#cityListBox').on('tap','.mui-indexed-list-bar a',function(){
+                $(this).attr('htmdEvt','starFinancia_index')
                 var txt=$(this).text();
                 var len=$('.mui-table-view li').length;
                 var list=$('.mui-table-view li');
@@ -359,12 +362,14 @@ $(function(){
             });
             //点击活动列表跳转
             mui('body').on('tap','.mui-card',function(){
+                $(this).attr('htmdEvt','starFinancia_list')
                 var actType=$(this).children('a').attr('data-actType');
                 var actId=$(this).children('a').attr('data-actId');
                 window.location.href=site_url.activityDetails_url+'?actType='+actType+'&'+'actId='+actId;
             });
             //搜索框输入触发查询数据
             mui('#activitySearch').on('keyup','.activitySearchInput input',function(){
+                $(this).attr('htmdEvt','starFinancia_search')
                 $('.recordList').html('');
                 // $('#loading').show();
                 that.gV.startPage=1;
@@ -375,6 +380,7 @@ $(function(){
 
             //清除搜索框触发查询数据
             mui('#activitySearch').on('tap','.mui-icon-clear',function(){
+                $(this).attr('htmdEvt','starFinancia_del')
                 $('.recordList').html('');
                 // $('#loading').show();
                 that.gV.startPage=1;
@@ -394,6 +400,7 @@ $(function(){
             //点击搜索框触发选中
             $('.activitySearchInput *').on('tap',function(){
                 console.log(1);
+                $(this).attr('htmdEvt','starFinancia_SearchInput')
                 $('.activitySearchInput').children('input').focus();
             });
             //返回上一页

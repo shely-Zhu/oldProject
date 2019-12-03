@@ -26,14 +26,14 @@ var data=Mock.mock({
 		"isPopup": "0",//是否弹框（普通投资者买私募产品售前告知书）
 		},{
 		"conditionType": "2",//条件码（单位：万）
-		"show": "0",//下限金额0否1是
+		"show": "1",//下限金额0否1是
 		"statusDesc": "风测已过期",//状态描述
 		"isSatisfied": "1",//是否满足
 		"conditionJump": "2",//相关跳转
 		"isPopup": "0",//是否弹框（普通投资者买私募产品售前告知书）
 		},{
 		"conditionType": "3",//条件码（单位：万）
-		"show": "0",//下限金额0否1是
+		"show": "1",//下限金额0否1是
 		"statusDesc": "信息未完善",//状态描述
 		"isSatisfied": "1",//是否满足
 		"conditionJump": "3",//相关跳转

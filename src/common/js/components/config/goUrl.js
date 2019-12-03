@@ -302,11 +302,14 @@ module.exports = function () {
 
     /*-------------------------------基金诊断 start -----------------------*/
     // 热门诊断
-    this.hotDiagnosis_url = go_url.no_url + '/commonResources/fundDiagnosis/views/hotDiagnosis_url.html';
+       //this.hotDiagnosis_url = go_url.no_url + '/commonResources/fundDiagnosis/views/hotDiagnosis_url.html';
+       this.hotDiagnosis_url = go_url.no_url + '/mine/fundDiagnosis/views/hotDiagnosis_url.html';
     // 诊断搜索页面
-    this.diagnosisSearch_url = go_url.no_url + '/commonResources/fundDiagnosis/views/diagnosisSearch.html';
+     //this.diagnosisSearch_url = go_url.no_url + '/commonResources/fundDiagnosis/views/diagnosisSearch.html';
+     this.diagnosisSearch_url = go_url.no_url + '/mine/fundDiagnosis/views/diagnosisSearch.html';
     // 诊断详情页
-    this.diagnosisDetail_url = go_url.no_url + '/commonResources/fundDiagnosis/views/diagnosisDetail.html';
+    //this.diagnosisDetail_url = go_url.no_url + '/commonResources/fundDiagnosis/views/diagnosisDetail.html';
+    this.diagnosisDetail_url = go_url.no_url + '/mine/fundDiagnosis/views/diagnosisDetail.html';
 
     /*-------------------------------基金诊断 end -----------------------*/
     /*-------------------------------我的页面 start -----------------------*/
@@ -461,6 +464,7 @@ module.exports = function () {
     this.fortuneClassroom_url = go_url.no_url + '/homePage/views/fortuneCollege/fortuneClassroom.html';
     //财富研究
     this.wealthResearch_url = go_url.no_url + '/homePage/views/fortuneCollege/wealthResearch.html';
+    
 
     //定投排行榜  原生
     this.investmentPlanRanking_url = go_url.no_url +  '/financial/views/publicPlacement/investmentPlanRanking.html'

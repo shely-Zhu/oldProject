@@ -187,7 +187,7 @@ gulp.task('proxyTask', function() {
                     target: 'https://app.htjf4.com',
                     // target: 'http://172.16.187.129:8080',//李亚楠
                     // target: 'http://192.168.50.254:8085',
-                    // target: 'https://app.chtfundtest.com',
+                    //target: 'https://app.chtfundtest.com',
                     changeOrigin: true,
                     secure: false,
                 }),
@@ -196,7 +196,7 @@ gulp.task('proxyTask', function() {
                     target: 'https://h5.htjf4.com',
                     //  target: 'http://172.16.187.129:8080',//李亚楠
                     // target: 'http://172.16.187.164:8081',
-                    // target: 'https://h5.chtfundtest.com',
+                     //target: 'https://h5.chtfundtest.com',
                     changeOrigin: true,
                     secure: false,
                 }),
@@ -656,7 +656,7 @@ gulp.task('html', function (cb) {
             this.push(file);
             cb()
         }),
-        
+
 
         plugins.advancedFileInclude({ //头尾公共部分添加
             prefix: '@@',
