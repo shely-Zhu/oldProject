@@ -482,8 +482,6 @@ module.exports = function () {
     this.membershipDetails_url = go_url.no_url +  '/mine/views/membershipInterests/membershipDetails.html'
     //会员权益成长值记录
     this.membershipInterestsRecord_url = go_url.no_url +  '/mine/views/membershipInterests/membershipInterestsRecord.html'
-    //查看已签署材料
-    this.seeSign_url = go_url.no_url +  '/account/views/private/seeSign.html'
     //我的定投计划
     this.myInvestmentPlan_url = go_url.no_url +  '/financial/views/publicPlacement/myInvestmentPlan.html'
     //我的 历史明细
