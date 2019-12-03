@@ -199,18 +199,20 @@
 				{{#if flag3}} 
 					<div class="otherAssets">
 						<p class="privateFundHeader">其他持仓</p>
-						<div class="datalist">
-							<div class="proName clearfix">
-								<span class="proNameBefore"></span>
-								<p class="proNameCon">{{fundName}}</p>
-							</div>
-							<div class="haveFundCon clearfix">
-								<div class="total fl">
-									<p>总资产(元)</p>
-									<span>{{totalAssets}}</span>
+						{{#each generalModelList}}
+							<div class="datalist">
+								<div class="proName clearfix">
+									<span class="proNameBefore"></span>
+									<p class="proNameCon">{{fundName}}</p>
+								</div>
+								<div class="haveFundCon clearfix">
+									<div class="total fl">
+										<p>总资产(元)</p>
+										<span>{{totalAssets}}</span>
+									</div>
 								</div>
 							</div>
-						</div>
+						{{/each}} 
 						<div class="referenceTip">注：定融定投数据由恒天明泽基金销售有限公司提供，本报告作聚合展示，仅供参考。</div>
 					</div>
 				{{/if}}
