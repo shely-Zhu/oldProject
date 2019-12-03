@@ -114,7 +114,7 @@ var monthReportDetail = {
 			async: false,
 			callbackDone: function(json) {
 				var jsonData = json.data;
-				if(jsonData.pefSaleList.length == 0 &&jsonData.generalModelList.length == 0 && jsonData.pofList.length == 0){
+				if($.util.objIsEmpty(jsonData.pefSaleList) && $.util.objIsEmpty(jsonData.generalModelList) && $.util.objIsEmpty(jsonData.pofList)){
 					//没有数据
 					$('.holdNodata').show();
 					$('.holdNodata .text').html('截止'+that.getElements.reportTime+',您暂无持仓信息');
