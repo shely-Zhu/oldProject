@@ -61,7 +61,30 @@ $(function () {
         init: function () {
             var that = this;
             this.initMask();
-            this.initMui(that.gV.ajaxdata);
+            // 判断ccache是否有值
+            if(!sessionStorage.getItem("ccache")){
+                // 在跳转的本页面 会让上一个页面做清空ccache的操作
+                this.initMui(that.gV.ajaxdata);
+            }else{
+                //返回按钮不会清空ccache的值
+                that.gV.ajaxdata = JSON.parse(sessionStorage.getItem("ccache"));
+                console.log(sessionStorage.getItem("ccache1").split(','))
+                // 赋值选中状态
+                that.gV.selectedAll = sessionStorage.getItem("ccache1").split(',')[0]
+                that.gV.selectedstatus = sessionStorage.getItem("ccache1").split(',')[1]
+                that.gV.selectedTime = sessionStorage.getItem("ccache1").split(',')[2]
+                that.gV.selectedBankCard = sessionStorage.getItem("ccache1").split(',')[3]
+                console.log(sessionStorage.getItem("ccache1").split(',')[4])
+                // 回显选中的汉字
+                that.gV.searchTitleList[0].title = sessionStorage.getItem("ccache1").split(',')[4]
+                that.gV.searchTitleList[1].title = sessionStorage.getItem("ccache1").split(',')[5]
+                that.gV.searchTitleList[2].title = sessionStorage.getItem("ccache1").split(',')[6]
+                // 自己清空它
+                sessionStorage.removeItem("ccache"); 
+                sessionStorage.removeItem("ccache1"); 
+                this.initMui(that.gV.ajaxdata);
+            }
+            
             this.setSearchTitle()
             //获取银行卡列表
             this.bankList()
@@ -279,6 +302,7 @@ $(function () {
                     $(this).addClass("detailActive").siblings('.detailItem').removeClass('detailActive');
                     switch (searchType) {
                         case '1': that.gV.selectedAll = detailId - 1; that.gV.ajaxdata.applyType = data;
+                            // 赋值回显
                             $('#recordSearchWrapper .searchItem').eq(0).children('span').text($(this).text().trim())
                          break;
                         case '2': that.gV.selectedstatus = detailId - 1; that.gV.ajaxdata.tradeApplyStatus = data;
@@ -331,11 +355,21 @@ $(function () {
                                         +'&Fixbusinflag='+Fixbusinflag+'&shares='+shares+'&fundName='+fundName
                                         +'&applyDate='+applyDate+'&autoBuyDesc='+autoBuyDesc ;
                                         sessionStorage.setItem("ccache", JSON.stringify(that.gV.ajaxdata));
+                                        sessionStorage.setItem("ccache1", JSON.stringify(that.gV.selectedAll) + ','
+                                         + JSON.stringify(that.gV.selectedstatus) + ',' + that.gV.selectedTime + ',' 
+                                         + JSON.stringify(that.gV.selectedBankCard) + ',' +  $('#recordSearchWrapper .searchItem').eq(0).children('span').text() +
+                                         ',' +  $('#recordSearchWrapper .searchItem').eq(1).children('span').text() +  ',' +  $('#recordSearchWrapper .searchItem').eq(2).children('span').text() +
+                                         ',' +  $('#recordSearchWrapper .searchItem').eq(3).children('span').text());
                 }else{
                     window.location.href=site_url.publicTradeDetail_url+'?applyId='+applyId+'&fundCombination='+fundCombination 
                                         +'&fundCode='+fundCode+'&fundBusinCode='+fundBusinCode+'&allotType='+allotType
                                         +'&Fixbusinflag='+Fixbusinflag+'&scheduledProtocolId='+scheduledProtocolId ;
                                         sessionStorage.setItem("ccache", JSON.stringify(that.gV.ajaxdata));
+                                        sessionStorage.setItem("ccache1", JSON.stringify(that.gV.selectedAll) + ','
+                                         + JSON.stringify(that.gV.selectedstatus) + ',' + that.gV.selectedTime + ',' 
+                                         + JSON.stringify(that.gV.selectedBankCard) + ',' +  $('#recordSearchWrapper .searchItem').eq(0).children('span').text() +
+                                         ',' +  $('#recordSearchWrapper .searchItem').eq(1).children('span').text() +  ',' +  $('#recordSearchWrapper .searchItem').eq(2).children('span').text() +
+                                         ',' +  $('#recordSearchWrapper .searchItem').eq(3).children('span').text());
                 }
                 
             });

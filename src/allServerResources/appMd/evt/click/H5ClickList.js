@@ -256,7 +256,16 @@ var clickList = {
 	//noticeCenter.html
 	"notice_conterList":{ type:'click', evtid: '', topic: '消息中心', info: ''} ,
 	//systemInforms.html
-	"notice_systemList":{ type:'click', evtid: '', topic: '系统通知', info: ''} 
+	"notice_systemList":{ type:'click', evtid: '', topic: '系统通知', info: ''}, 
+	//starFinancialPlannerList.html
+	"starFinanciaLocation":{ type:'click', evtid: '', topic: '城市定位', info: ''} ,
+	"starFinancia_city":{ type:'click', evtid: '', topic: '热门城市', info: ''} ,
+	"starFinancia_goBack":{ type:'click', evtid: '', topic: '返回', info: ''} ,
+	"starFinancia_index":{ type:'click', evtid: '', topic: '城市索引', info: ''} ,
+	"starFinancia_list":{ type:'click', evtid: '', topic: '理财师列表', info: ''} ,
+	"starFinancia_search":{ type:'click', evtid: '', topic: '理财师查询', info: ''} ,
+	"starFinancia_del":{ type:'click', evtid: '', topic: '取消搜索', info: ''} ,
+	"starFinancia_SearchInput":{ type:'click', evtid: '', topic: '点击搜索框触发选中', info: ''} 
 }
 
 module.exports = clickList;
