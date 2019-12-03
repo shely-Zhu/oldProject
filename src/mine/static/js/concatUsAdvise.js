@@ -5,7 +5,7 @@
 require('@pathCommonBase/base.js');
 
 require('@pathCommonJs/ajaxLoading.js');
-var uploadFile = require('@pathCommonJs/components/uplaoderFile/uploaderFile.js')
+var uploadFile = require('@pathCommonCom/uplaoderFile/concatUsAdviseUploaderFile.js')
 
 var tipAction = require('@pathCommonJs/components/tipAction.js');
 var splitUrl = require('@pathCommonJs/components/splitUrl.js')();

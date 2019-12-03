@@ -56,7 +56,7 @@ var monthReportDetail = {
 				// 客户编号
 				$('.monthReportNum').html(json.customerNo);
 				// 客户登记
-				$('.clientLevel').html(json.tierDesc);
+				$('.clientLevelDesc').html(json.tierDesc);
 			},
 			callbackNoData: function(json){ //没有数据的情况
 				console.log(json.msg);
@@ -114,7 +114,7 @@ var monthReportDetail = {
 			async: false,
 			callbackDone: function(json) {
 				var jsonData = json.data;
-				if(jsonData.pefSaleList.length == 0 &&jsonData.generalModelList.length == 0 && jsonData.pofList.length == 0){
+				if($.util.objIsEmpty(jsonData.pefSaleList) && $.util.objIsEmpty(jsonData.generalModelList) && $.util.objIsEmpty(jsonData.pofList)){
 					//没有数据
 					$('.holdNodata').show();
 					$('.holdNodata .text').html('截止'+that.getElements.reportTime+',您暂无持仓信息');
