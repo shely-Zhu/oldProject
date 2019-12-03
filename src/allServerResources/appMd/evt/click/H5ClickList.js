@@ -232,8 +232,8 @@ var clickList = {
 	"cashTransformOut_elasticButtons" : { type:'click', evtid: '', topic: '现金转出-其他总资产点击明白了 ', info: ''} ,
 	//homePage--------------------------------------------------------------分割线
 	//fortuneCollegeList.html
-	"banner" : { type:'click', evtid: '', topic: '轮播图图片', info: ''} ,
-	"slider" : { type:'click', evtid: '', topic: '轮播图小圆点', info: ''} ,
+	// "banner" : { type:'click', evtid: '', topic: '轮播图图片', info: ''} ,
+	// "slider" : { type:'click', evtid: '', topic: '轮播图小圆点', info: ''} ,
 	"fortune_host" : { type:'click', evtid: '', topic: '查看往期热词', info: ''} ,
 	"fortune_video" : { type:'click', evtid: '', topic: '播放往期内容', info: ''} ,
 	"fortune_videoList" : { type:'click', evtid: '', topic: '播放往期内容列表', info: ''} ,
@@ -245,10 +245,18 @@ var clickList = {
 	"fortune_studiesList" : { type:'click', evtid: '', topic: '财富研究列表', info: ''} ,
 	"fortune_studiesTab" : { type:'click', evtid: '', topic: '财富研究tab', info: ''} ,
 	//fortuneFlowKnown.html
-	"knownItem" : { type:'click', evtid: '', topic: '早知道列表', info: ''} ,
+	"fortune_knownItem" : { type:'click', evtid: '', topic: '早知道列表', info: ''} ,
 	//fortuneClassroom.html
-	"roomItem" : { type:'click', evtid: '', topic: '财富讲堂列表', info: ''} ,
-	"sliderTab" : { type:'click', evtid: '', topic: '财富讲堂详情tab', info: ''} 
+	"fortune_roomItem" : { type:'click', evtid: '', topic: '财富讲堂列表', info: ''} ,
+	"fortune_sliderTab" : { type:'click', evtid: '', topic: '财富讲堂详情tab', info: ''},
+	//wealthResearch.html
+	"fortune_wealthTab":{ type:'click', evtid: '', topic: '财富研究详情tab', info: ''} ,
+	//understandHT.html
+	"understandTab":{ type:'click', evtid: '', topic: '了解恒天tab', info: ''} ,
+	//noticeCenter.html
+	"notice_conterList":{ type:'click', evtid: '', topic: '消息中心', info: ''} ,
+	//systemInforms.html
+	"notice_systemList":{ type:'click', evtid: '', topic: '系统通知', info: ''} 
 }
 
 module.exports = clickList;
