@@ -12,7 +12,6 @@ require('@pathCommonJs/ajaxLoading.js');
 require('@pathCommonJsCom/goTopMui.js');
 require('@pathCommonJs/components/headBarConfig.js');
 //黑色提示条的显示和隐藏
-var tipAction = require('@pathCommonJsCom/tipAction.js');
 var generateTemplate = require('@pathCommonJsComBus/generateTemplate.js');
 var splitUrl = require('@pathCommonJs/components/splitUrl.js')();
 
