@@ -19,8 +19,9 @@
 	<div class="privateDetail">
 
 		<div class="topContent">
+			<div id="fundCodeWrap">--</div>
 			@@include('@pathCommonCom/loading/listLoading.html')
-	 		@@include('@pathCommonViews/headBarConfig.html',{"bgColors":"#595E6F, #1C2135","showType":"1"})
+	 		@@include('@pathCommonViews/headBarConfig.html',{"bgColors":"#595E6F, #1C2135","showType":"1","serviceType":"1","iconStype":"详情"})
 
 	 		<div class="hide typeWrap type_0">
 	 			<!-- 类型一 货币资产-->	
@@ -85,15 +86,15 @@
 		 			<ul class="mui-row type">
 		 			    <li class="mui-col-sm-4 mui-col-xs-4">
 		 			        <span>昨日收益 （元）</span>
-		 			        <span class="num totalShare">--</span>
+		 			        <span class="num yesterdayShare">--</span>
 		 			    </li>
 		 			    <li class="mui-col-sm-4 mui-col-xs-4">
 		 			        <span>持有收益 （元）</span>
-		 			        <span class="num sevenYearYield">--</span>
+		 			        <span class="num ownShare">--</span>
 		 			    </li>
 		 			    <li class="mui-col-sm-4 mui-col-xs-4">
 		 			        <span>累计收益 （元）</span>
-		 			        <span class="num sevenYearYield">--</span>
+		 			        <span class="num accumulatedShare">--</span>
 		 			    </li>
 		 			</ul>
 		 		</div>
@@ -181,14 +182,14 @@
 
  			<!--默认为不显示。路径传参过来在判断哪个显示-->
  			<div class="mui-row footer">
- 				<div class="mui-col-sm-6 mui-col-xs-6 buttonStyle backBtn">赎回</div>
- 				<div class="mui-col-sm-6 mui-col-xs-6 buttonStyle buyBtn">买入</div>
+ 				<div class="mui-col-sm-6 mui-col-xs-6 buttonStyle blueTxtButton  backBtn">赎回</div>
+ 				<div class="mui-col-sm-6 mui-col-xs-6 buttonStyle blueBgButton buyBtn">买入</div>
  			</div>
  			
  			<div class="mui-row footer">
- 				<div class="mui-col-sm-6 mui-col-xs-4 buttonStyle backBtn">赎回</div>
- 				<div class="mui-col-sm-6 mui-col-xs-4 buttonStyle fiedBtn">定投</div>
- 				<div class="mui-col-sm-6 mui-col-xs-4 buttonStyle buyBtn">买入</div>
+ 				<div class="mui-col-sm-4 mui-col-xs-4 buttonStyle blueTxtButton backBtn">赎回</div>
+ 				<div class="mui-col-sm-4 mui-col-xs-4 buttonStyle blueTxtButton fiedBtn">定投</div>
+ 				<div class="mui-col-sm-4 mui-col-xs-4 buttonStyle blueBgButton buyBtn">买入</div>
 
  			</div>
 
