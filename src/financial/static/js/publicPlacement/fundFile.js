@@ -18,7 +18,8 @@ $(function () {
     let somePage = {
         //获取页面元素
         $e: {
-
+            emptyBox: $('#emptyBox'), //没有数据默认显示区块
+            listLoading: $('.listLoading'), //所有数据区域，第一次加载的loading结构
         },
         //全局变量
         gV: {
@@ -66,6 +67,7 @@ $(function () {
         init: function () {
             var that = this;
             that.events()
+            that.$e.listLoading.show();
             that.getData()
             that.getData2()
             // that.getData3()
@@ -190,15 +192,24 @@ $(function () {
                     fundCode: getQueryString('fundCode') ? getQueryString('fundCode') : '000847'
                 },
                 callbackDone: function (json) {
-
                     json = json.data
+                    that.$e.listLoading.hide();
                     var tplm = $("#dataLists1").html();
                     var template = Handlebars.compile(tplm);
                     json.assetValue = (json.assetValue / 100000000).toFixed(2)
                     var html = template(json);
                     $(".tplBox1").html(html);
-
                 },
+                callbackNoData:function(json){
+                    that.$e.emptyBox.show();
+                    that.$e.listLoading.hide();
+                    $(".tplBox1").hide()
+				},
+				callbackFail:function(json){
+                    that.$e.emptyBox.show();
+                    that.$e.listLoading.hide();
+                    $(".tplBox1").hide()
+				},
             }];
             $.ajaxLoading(obj1);
         },
@@ -236,8 +247,7 @@ $(function () {
                         pieData.push(item)
                     })
                     that.gV.pieData = pieData;
-                    that.gV.pieData.forEach(function (item) {
-
+                    that.gV.pieData.forEach(function (item,index) {
                         item.value = Number(item.value)
                     })
 
@@ -246,14 +256,20 @@ $(function () {
                     json.assetValue = (json.assetValue / 100000000).toFixed(2)
                     var html = template(json);
                     $(".tplBox2").html(html);
-
                 },
+                callbackNoData:function(json){
+                    that.$e.emptyBox.show();
+                    $(".tplBox2").hide()
+				},
+				callbackFail:function(json){
+                    that.$e.emptyBox.show();
+                    $(".tplBox2").hide()
+				},
             }];
             $.ajaxLoading(obj2);
         },
         getData3: function (t) {
             var that = this;
-
             var obj3 = [{
                 url: site_url.prfFundDividendList_api,
                 data: {
@@ -262,22 +278,28 @@ $(function () {
                     pageSize: 20
                 },
                 callbackDone: function (json) {
-
                     json = json.data.pageList
-                    console.log(json)
-
+                    that.$e.listLoading.hide();
                     var tplm = $("#dataLists3").html();
                     var template = Handlebars.compile(tplm);
                     var html = template(json);
                     $(".tplBox3").html(html);
-
                 },
+                callbackNoData:function(json){
+                    that.$e.emptyBox.show();
+                    that.$e.listLoading.hide();
+                    $(".tplBox3").hide()
+				},
+				callbackFail:function(json){
+                    that.$e.emptyBox.show();
+                    that.$e.listLoading.hide();
+                    $(".tplBox3").hide()
+				},
             }];
             $.ajaxLoading(obj3);
         },
         getData4: function (t) {
             var that = this;
-
             var obj4 = [{
                 url: site_url.prfFundNoticeList_api,
                 data: {
@@ -286,14 +308,23 @@ $(function () {
                     pageSize: 10
                 },
                 callbackDone: function (json) {
-
                     json = json.data.pageList
+                    that.$e.listLoading.hide();
                     var tplm = $("#dataLists4").html();
                     var template = Handlebars.compile(tplm);
                     var html = template(json);
                     $(".tplBox4").html(html);
-
                 },
+                callbackNoData:function(json){
+                    that.$e.emptyBox.show();
+                    that.$e.listLoading.hide();
+                    $(".tplBox4").hide()
+				},
+				callbackFail:function(json){
+                    that.$e.emptyBox.show();
+                    that.$e.listLoading.hide();
+                    $(".tplBox4").hide()
+				},
             }];
             $.ajaxLoading(obj4);
         },
@@ -302,6 +333,7 @@ $(function () {
 
             //tab点击切换
             mui("body").on('tap', '.tabs>li', function () {
+                that.$e.emptyBox.hide();
                 $(this).addClass('active').siblings().removeClass('active');
                 $(".wrap>.panel").eq($(this).index()).addClass('active').siblings().removeClass('active');
                 if ($(this).index() == 1) {
@@ -313,6 +345,10 @@ $(function () {
                 if ($(this).index() == 3) {
                     that.getData4()
                 }
+            });
+            //基金公告跳转
+            mui("body").on('tap', '.tplBox4 .content', function () {
+                window.location.href = $(this).attr('linkRul')
             })
         }
     };

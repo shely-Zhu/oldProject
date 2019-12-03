@@ -243,10 +243,6 @@ module.exports = {
     './life/static/js/memberClub/activityList': "./src/life/static/js/memberClub/activityList.js",
     //会员俱乐部-暂无数据mine
 
-    './mine/static/js/memberClub/activityNoList': "./src/mine/static/js/memberClub/activityNoList.js",
-    //mui索引列表插件
-    './mine/static/js/memberClub/mui.indexedlist': "./src/mine/static/js/memberClub/mui.indexedlist.js",
-
     './life/static/js/memberClub/activityNoList': "./src/life/static/js/memberClub/activityNoList.js",
     //mui索引列表插件
     './life/static/js/memberClub/mui.indexedlist': "./src/life/static/js/memberClub/mui.indexedlist.js",
@@ -372,7 +368,7 @@ module.exports = {
     './financial/static/js/publicPlacement/transactionRules': './src/financial/static/js/publicPlacement/transactionRules.js',
 
     // 购买触发提示
-    './financial/static/js/common/authenticationProcess': './src/financial/static/js/common/authenticationProcess.js',
+    // './financial/static/js/common/authenticationProcess': './src/financial/static/js/common/authenticationProcess.js',
 
 
     // 私募产品详情页

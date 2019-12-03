@@ -8,7 +8,6 @@
 
 require('@pathCommonBase/base.js');
 require('../../../common/js/ajaxLoading.js');
-var tipAction = require('@pathCommonJs/components/tipAction.js');
 
 $(function () {
 
