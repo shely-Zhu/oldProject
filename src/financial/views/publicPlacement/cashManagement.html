@@ -62,8 +62,12 @@
 		{{#each this}}
           <div class="cashItem">
                <div class="itemTop">
-                    <div class="itemTitle"><span fundCode={{fundCode}}>{{fundName}}</span><span class="rightCon"><span
-                                   class="right"></span></span></div>
+                    <div class="itemTitle" fundCode={{fundCode}}>
+                         <span fundCode={{fundCode}} fundName={{fundName}}>{{fundName}}</span>
+                              <span class="rightCon">
+                              <span class="right"></span>
+                         </span>
+                    </div>
                     <div class="itemSevenIncome">七日年化：{{annYldRat}}%</div>
                </div>
                <div class="itemCenter flex">

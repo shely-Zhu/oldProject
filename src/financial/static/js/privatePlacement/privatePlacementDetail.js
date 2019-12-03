@@ -628,7 +628,7 @@ $(function(){
 
 				},
 				callbackFail: function(json){  //失败后执行的函数
-					tipAction(json.msg);
+					tipAction(json.message);
 
 				}
 			}];
@@ -745,29 +745,29 @@ $(function(){
 					//跳转到追加商品链接
 					if(that.data.custType == "1") { //客户类型【0.机构 1.个人】 
 						//跳转到电子合同追加页面
-						window.location.href = "/financial/views/privatePlacement/electronicContract/orderLimit.html?fundCode=" + that.$e.projectId + "&isAllowAppend=" +
+						window.location.href = site_url.orderLimit_url + "?fundCode=" + that.$e.projectId + "&isAllowAppend=" +
 							that.data.fundDetailObj.isAllowAppend;
 					} else {
 						//跳转到普通预约
-						window.location.href = "/financial/views/privatePlacement/ordinaryProducts/registration.html" + that.$e.projectId + "&isAllowAppend=" +
+						window.location.href = site_url.registration_url + that.$e.projectId + "&isAllowAppend=" +
 							that.data.fundDetailObj.isAllowAppend;
 					}
 				} else { //预约
 					//跳转到预约产品链接
 					if(that.data.custType == "1") { //客户类型【0.机构 1.个人】 
 						//跳转到电子合同预约页面
-						window.location.href = "/financial/views/privatePlacement/electronicContract/orderLimit.html?fundCode=" + that.$e.projectId + "&isAllowAppend=" +
+						window.location.href = site_url.orderLimit_url + that.$e.projectId + "&isAllowAppend=" +
 							that.data.fundDetailObj.isAllowAppend;
 					} else {
 						//跳转到普通预约
-						window.location.href = "/financial/views/privatePlacement/ordinaryProducts/registration.html" + that.$e.projectId + "&isAllowAppend=" +
+						window.location.href = site_url.registration_url + that.$e.projectId + "&isAllowAppend=" +
 							that.data.fundDetailObj.isAllowAppend;
 
 					}
 				}
 			} else { //非电子合同
 
-				window.location.href = "/financial/views/privatePlacement/ordinaryProducts/registration.html" + that.$e.projectId + "&isAllowAppend=" +
+				window.location.href = site_url.registration_url + that.$e.projectId + "&isAllowAppend=" +
 					that.data.fundDetailObj.isAllowAppend;
 
 			}
