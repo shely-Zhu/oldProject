@@ -8,3 +8,5 @@ require('@pathIncludJs/vendor/config.js');
 
 require('@pathCommonJs/components/headBarConfig.js');
 // require('@pathIncludJs/vendor/lazyLoad/lazyload.js');
+
+require('@pathCommonJs/setGoUrl.js');
