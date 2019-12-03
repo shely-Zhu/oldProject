@@ -25,17 +25,39 @@ $(function(){
         },
         init:function(){
             var that = this;
-            $("#loading").hide()
-            // that.getPdf();
+            $(".listLoading").hide()
+            that.getPdf();
+            that.getEmail();
             that.events();
+        },
+        getEmail:function(){
+        	var that = this;
+        	var emailObj = [{
+                    url: site_url.user_api,
+                    data: {
+                        hmac: "", //预留的加密信息     
+                        params: {
+                            
+                        }
+                    },
+                    needLogin: true,
+                    // async: false, //同步
+                    needDataEmpty: false, //需要判断data是否为空
+                    callbackDone: function(json) {
+                        var jsonData = json.data;
+						that.data.email = jsonData.email;
+                        
+
+                    },
+                }]
+        	$.ajaxLoading(emailObj);
         },
         getPdf:function(){
             var that=this;
 //          $('#loading').show();
-            that.fileName = splitUrl['ecFileName'];
-            that.fileUrl = splitUrl['ecFileUrl'];
-            that.email = splitUrl['email'];
-            var url = site_url.downloadFile_api+'?fileName='+that.fileName;
+            that.data.fileName = splitUrl['ecFileName'];
+            that.data.fileUrl = splitUrl['ecFileUrl'];
+            var url = site_url.downloadFile_api+'?fileName='+that.data.fileName;
             // 将pdf流转为canvas
             var pdfjsLib = window['pdfjs-dist/build/pdf'];
             // The workerSrc property shall be specified.
@@ -73,24 +95,63 @@ $(function(){
         events:function(){
             var that = this;
             //点击下载按钮，显示弹框  
-            $('.downLoad').on('click',function(){ 
-                var obj={
-                    title:'',
-                    // id: 'emailPop',
-                    p:'<p class="">月度投资报告将发送到您的默认邮箱</p>'+
-                        '<p class="">'+that.email+'</p>'+
-                        '<p class="otherColor" id="changeMail">邮箱有变更，去修改</p>',
-                    yesTxt:'确认',
-                    celTxt:'取消',
-                    zIndex: 1200,
-                    callback:function(t){
-                        if(that.email){
-                            var obj = [{
+            $('.downLoad').on('click',function(){
+            	if(that.data.email){//如果有邮箱
+	                var objHave={
+	                    title:'',
+	                    id: 'emailPop',
+	                    p:'<p class="">基金确认书将发送到您的默认邮箱</p>'+
+	                        '<p class="">'+that.data.email+'</p>'+
+	                        '<p class="otherColor" id="changeMail">邮箱有变更，去修改</p>',
+	                    yesTxt:'确认',
+	                    celTxt:'取消',
+	                    zIndex: 1200,
+	                    callback:function(t){
+	                        if(that.data.email){
+	                            var obj1 = [{
+	                                url: site_url.sendMailForConfirmBill_api, 
+	                                data: {
+	                                    fileName: that.data.fileName,
+	                                    fileUrl: that.data.fileUrl,
+	                                    email: that.data.email
+	                                },
+	                                needLogin: true,
+	                                callbackDone: function(json) {
+	                                    t.hide();//关闭弹窗
+	                                    
+	                                },
+	                                callbackFail: function(json) {
+	//                                  //显示错误提示
+	                    				tipAction(json.message);
+	                                    
+	                                },
+	                            }];
+	                            $.ajaxLoading(obj1);	
+	                        }else{
+	                        	//显示错误提示
+	                    		tipAction("请去绑定邮箱");
+	//                          alert('请去绑定邮箱')
+	                        }
+	                    },      
+	                };
+	                $.elasticLayer(objHave)
+            		
+            	}else{
+            		var objNo={
+	                    title:'',
+	                    id: 'emailNoPop',
+	                    p:'<p class="">发送到指定邮箱</p>'+
+	                        '<p class=""><input class="emailInput" type="text" /></p>',
+	                    yesTxt:'确认',
+	                    celTxt:'取消',
+	                    zIndex: 1200,
+	                    callback:function(t){
+                            var emailObj = [{
                                 url: site_url.sendMailForConfirmBill_api, 
                                 data: {
-                                    fileName: that.fileName,
-                                    fileUrl: that.fileUrl,
-                                    email: that.email
+                                    fileName: that.data.fileName,
+                                    fileUrl: that.data.fileUrl,
+                                    email: $(".emailInput").val()
                                 },
                                 needLogin: true,
                                 callbackDone: function(json) {
@@ -101,17 +162,14 @@ $(function(){
 //                                  //显示错误提示
                     				tipAction(json.message);
                                     
-                                },
+                                }
                             }];
-                            $.ajaxLoading(obj);	
-                        }else{
-                        	//显示错误提示
-                    		tipAction("请去绑定邮箱");
-//                          alert('请去绑定邮箱')
-                        }
-                    },      
-                };
-                $.elasticLayer(obj)
+                            $.ajaxLoading(emailObj);	
+	                        
+	                    },      
+	                }
+            		$.elasticLayer(objNo)
+            	}
             })
             // 点击去修改邮箱
             mui("body").on('tap', '#changeMail', function() {

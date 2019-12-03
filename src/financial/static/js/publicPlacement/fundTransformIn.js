@@ -88,12 +88,12 @@ $(function () {
 					if (json.status == '0000') {
 						var data = json.data;
 						$("#loading").hide()
-						// that.$el.fundName.html(data.chiName)
-						// that.$el.fundCode.html(data.trdCode)
+						that.$el.fundName.html(data.secuSht)
+		    			that.$el.fundCode.html(data.trdCode)
 						that.$el.payConfirmDate.html(data.fundConfirmDate)
 						that.$el.brforre15Date.html(data.after15tradeDate)
-						// that.gV.fundName = data.chiName
-						// that.gV.fundCode = data.trdCode
+						that.gV.fundName = data.secuSht
+						that.gV.fundCode = data.trdCode
 						that.gV.discount = Number(data.discount);
 						that.gV.feeRateList = data.fundPurchaseFeeRate.detailList;
 						that.gV.fundStatus = data.fundStatus
