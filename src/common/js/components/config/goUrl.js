@@ -350,6 +350,7 @@ module.exports = function () {
 
     /*-------------------------------消息中心 start -----------------------*/
     // 通知详情
+    this.noticeCenter_url = go_url.no_url + '/homePage/views/notice/noticeCenter.html';
     this.noticeDetails_url = go_url.no_url + '/homePage/views/notice/noticeDetail.html';
     this.systemInforms_url = go_url.no_url + '/homePage/views/notice/systemInforms.html';
     /*-------------------------------消息中心 end -----------------------*/
@@ -406,6 +407,8 @@ module.exports = function () {
     this.incomeDistribution_url = go_url.no_url + '/account/views/private/incomeDistribution.html';
     // 私募交易明细
     this.transactionDetail_url = go_url.no_url + '/account/views/transactionDetail.html';
+    // 私募产品详情
+    this.privateDetail_url = go_url.no_url + '/account/views/private/privateDetail.html';
     // 私募交易明细
     this.privateDetailList_url = go_url.no_url + '/account/views/private/privateDetailList.html';
     // 历史明细
