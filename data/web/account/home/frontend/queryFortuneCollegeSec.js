@@ -11,7 +11,7 @@ var data = Mock.mock({
 	"message": "处理成功！", 
 	"data":{
 		'modelVO':{
-			modelName:'模块名称',
+			modelName:'模块名称1',
 			isUse:true,
 			listJumpUrl:"www.baidu.com"
 		},
@@ -20,6 +20,7 @@ var data = Mock.mock({
 			"sonModelName": "大类资产研究",
 			"list": [{
 				"applyType": 0,
+				"imageUrlShowOnline": "http://172.16.163.99:85/group2/M00/02/88/rBCjRF26j3-AaxveAAFKebrcAVE531.jpg",
 				"articleBelong": "4",
 				"articleTime": "2019-11-25T00:00:00.000+0000",
 				"author": "H011973",
@@ -59,6 +60,7 @@ var data = Mock.mock({
 			},
 			{
 				"applyType": 0,
+				"imageUrlShowOnline": "http://172.16.163.99:85/group2/M00/02/88/rBCjRF26j3-AaxveAAFKebrcAVE531.jpg",
 				"articleBelong": "4",
 				"articleTime": "2019-11-25T00:00:00.000+0000",
 				"author": "H011973",
@@ -101,6 +103,7 @@ var data = Mock.mock({
 			"sonModelName": "宏观策略",
 			"list": [{
 				"applyType": 0,
+				"imageUrlShowOnline": "http://172.16.163.99:85/group2/M00/02/88/rBCjRF26j3-AaxveAAFKebrcAVE531.jpg",
 				"articleBelong": "4",
 				"articleTime": "2019-11-25T00:00:00.000+0000",
 				"author": "H011973",
@@ -143,6 +146,7 @@ var data = Mock.mock({
 			"sonModelName": "宏观策略",
 			"list": [{
 				"applyType": 0,
+				"imageUrlShowOnline": "http://172.16.163.99:85/group2/M00/02/88/rBCjRF26j3-AaxveAAFKebrcAVE531.jpg",
 				"articleBelong": "4",
 				"articleTime": "2019-11-25T00:00:00.000+0000",
 				"author": "H011973",
@@ -182,6 +186,7 @@ var data = Mock.mock({
 			},
 			{
 				"applyType": 0,
+				"imageUrlShowOnline": "http://172.16.163.99:85/group2/M00/02/88/rBCjRF26j3-AaxveAAFKebrcAVE531.jpg",
 				"articleBelong": "4",
 				"articleTime": "2019-11-25T00:00:00.000+0000",
 				"author": "H011973",
@@ -224,6 +229,7 @@ var data = Mock.mock({
 			"sonModelName": "公募研究",
 			"list": [{
 				"applyType": 0,
+				"imageUrlShowOnline": "http://172.16.163.99:85/group2/M00/02/88/rBCjRF26j3-AaxveAAFKebrcAVE531.jpg",
 				"articleBelong": "4",
 				"articleTime": "2019-11-25T00:00:00.000+0000",
 				"author": "H011973",
