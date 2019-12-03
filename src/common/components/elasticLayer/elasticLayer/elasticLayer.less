@@ -31,9 +31,9 @@
                 min-height: 2.2rem;
                 // line-height: .45rem !important;
                 color: @272727;
-                display: table;
+                // display: table;
                     width: 100%;
-                    
+
 
                 //弹层标题
                 .elasticTitle{
@@ -59,14 +59,46 @@
                     // left: 50%;
                     width: 100%;
                     padding: 0.4rem;
-                    margin-top: 25%;
+                    // margin-top: 25%;
                         /* transform: translateY(-50%); */
-                        display: table-cell;
+                        // display: table-cell;
                         /* float: left; */
-                        margin-bottom: -25%;
+                        // margin-bottom: -25%;
 
-                    p{
+                    p{ 
                         color: @272727;
+
+                        &:nth-last-child(n+1){
+                            //至少一行的时候
+                            margin-top: 0.7rem;
+                            margin-bottom: 0.7rem;
+                        }
+
+                        &:nth-last-child(n+2) {
+                            //至少两行的时候
+                            & ~ p{
+                                margin-top: 0.2rem;
+                                margin-bottom: 0rem;
+                            }
+
+                            &:first-child{
+                                margin-top: 0.4rem;
+                                margin-bottom: auto;
+                            }
+                        }
+
+                        &:nth-last-child(n+3) {
+                            //至少三行的时候
+                            & ~ p{
+                                margin-top: 0.2rem;
+                                margin-bottom: 0rem;
+                            }
+
+                            &:first-child{
+                                margin-top: auto;
+                                margin-bottom: auto;
+                            }
+                        }
                     }
 
                     //弹窗上的文字蓝色

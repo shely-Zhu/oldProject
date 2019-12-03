@@ -16,8 +16,6 @@ $(function() {
 	let somePage = {
 		//获取页面元素
 		$e: {
-			typeOne:$('.type_one'),
-			typeTwo:$('.type_two'),
 			bonusType:$('.bonusType'),
 			duigou:$('.duigou'),
 			adjustmentTemp: $('#adjustment-template'), //模板
