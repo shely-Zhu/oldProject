@@ -56,7 +56,7 @@ var monthReportDetail = {
 				// 客户编号
 				$('.monthReportNum').html(json.customerNo);
 				// 客户登记
-				$('.clientLevel').html(json.tierDesc);
+				$('.clientLevelDesc').html(json.tierDesc);
 			},
 			callbackNoData: function(json){ //没有数据的情况
 				console.log(json.msg);
