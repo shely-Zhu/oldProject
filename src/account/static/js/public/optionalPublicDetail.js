@@ -373,8 +373,8 @@ $(function() {
 				//万份受益
 				$('.openWrap .wfsy').html( jsonData.unitYld);
 				
-				$('.qrnh').text("单位净值");
-				$('.wfsy').text("累计净值");
+				$('.lineWrap .qrnh').text("单位净值");
+				$('.lineWrap .wfsy').text("累计净值");
 
     		   	
 	    	}
