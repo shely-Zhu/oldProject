@@ -146,7 +146,8 @@ $(function () {
                         $($('.tips .bank-status')[3]).text(json.accreditedInvestor ? that.gV.accreditedInvestorArr[json.accreditedInvestor] : '未做')
                     }
                     if (json.idnoCheckflag || json.isRiskEndure || json.isPerfect || json.accreditedInvestor) {
-                        $('.tips').show()
+                       // $('.tips').show()
+                       that.gV.tipStatus = true
                     } else {
                         that.gV.tipStatus = true
 
