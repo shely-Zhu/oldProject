@@ -23,7 +23,6 @@ require('@pathCommonJsCom/goTopMui.js');
 
 //黑色提示条的显示和隐藏
 var splitUrl = require('@pathCommonJs/components/splitUrl.js')();
-var tipAction = require('@pathCommonJsCom/tipAction.js');
 var transcationTem = require('@pathCommonJsCom/account/transcationTem.js');
 
 

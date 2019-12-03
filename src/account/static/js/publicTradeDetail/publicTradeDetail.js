@@ -40,8 +40,6 @@
 require('@pathCommonBase/base.js');
 
 require('@pathCommonJs/ajaxLoading.js');
-
-var tipAction = require('@pathCommonJs/components/tipAction.js');
 var splitUrl = require('@pathCommonJs/components/splitUrl.js');
 var payPass = require('@pathCommonJs/components/payPassword.js');
 
