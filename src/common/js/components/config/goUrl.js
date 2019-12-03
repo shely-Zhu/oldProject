@@ -302,11 +302,14 @@ module.exports = function () {
 
     /*-------------------------------基金诊断 start -----------------------*/
     // 热门诊断
-    this.hotDiagnosis_url = go_url.no_url + '/commonResources/fundDiagnosis/views/hotDiagnosis_url.html';
+       //this.hotDiagnosis_url = go_url.no_url + '/commonResources/fundDiagnosis/views/hotDiagnosis_url.html';
+       this.hotDiagnosis_url = go_url.no_url + '/mine/fundDiagnosis/views/hotDiagnosis_url.html';
     // 诊断搜索页面
-    this.diagnosisSearch_url = go_url.no_url + '/commonResources/fundDiagnosis/views/diagnosisSearch.html';
+     //this.diagnosisSearch_url = go_url.no_url + '/commonResources/fundDiagnosis/views/diagnosisSearch.html';
+     this.diagnosisSearch_url = go_url.no_url + '/mine/fundDiagnosis/views/diagnosisSearch.html';
     // 诊断详情页
-    this.diagnosisDetail_url = go_url.no_url + '/commonResources/fundDiagnosis/views/diagnosisDetail.html';
+    //this.diagnosisDetail_url = go_url.no_url + '/commonResources/fundDiagnosis/views/diagnosisDetail.html';
+    this.diagnosisDetail_url = go_url.no_url + '/mine/fundDiagnosis/views/diagnosisDetail.html';
 
     /*-------------------------------基金诊断 end -----------------------*/
     /*-------------------------------我的页面 start -----------------------*/
