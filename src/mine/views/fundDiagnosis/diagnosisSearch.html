@@ -1,0 +1,90 @@
+<!--
+ * @Author: your name
+ * @Date: 2019-12-03 13:54:18
+ * @LastEditTime: 2019-12-03 14:05:23
+ * @LastEditors: Please set LastEditors
+ * @Description: In User Settings Edit
+ * @FilePath: \htjf-app\src\mine\views\fundDiagnosis\diagnosisSearch.html
+ -->
+<!-- /**  
+ * @Page:  基金诊断搜索
+ * @Author: songxiaoyu  
+ * @Date:   2019-08-08 17:44:32  
+ * @Last Modified by:   songxiaoyu  
+ */ -->
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="applicable-device" content="mobile">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="stylesheet" href="/mine/fundDiagnosis/static/css/hotDiagnosis.css">
+    <title>基金诊断</title>
+</head>
+
+<body>
+    <section class="hotDiagnosis clearfix">
+        <div class="fixedWrap">
+            <!-- 搜索 -->
+            <div class="branchSearchArea">
+                <div class="branchHeader">
+                    <div class="form-wrap">
+                        <div class="mui-input-row">
+                            <div class="search">
+                                <div class="mui-icon searchicon mui-icon-search"></div>
+                                <input type="text" id="searchInput" class="mui-input-clear branchSearchInput" placeholder="请输入基金代码/基金名称">
+                                <!-- <button type="button" class="mui-btn close">取消</button> -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="resultWrap">
+                <p class="searchResult">已为您找到 <span class="total"></span>个<span class="word"></span></p>
+            </div>
+        </div>
+        <!--热门诊断-->
+        <div class="hotFundList">
+            <div class="haveData list">
+                <div class="contentWrapper">
+                    <ul class="mui-table-view">
+                        <li class="mui-table-view-cell list_li">
+                            <div class="card-theme">
+                                <!--放置列表-->
+                            </div>
+                        </li>
+                    </ul>
+                    <!-- 返回顶部 -->
+                    @@include('@pathCommonViews/goTop.html')
+                </div>
+            </div>
+            <!-- 没有数据 -->
+            @@include('@pathCommonViews/noData.html')
+            <!-- 加载中loading -->
+            @@include('@pathCommonViews/loading/listLoading.html')
+        </div>
+    </section>
+    <script id="fundList-template" type="text/x-handlebars-template">
+    {{#each this}}
+        <div class="mui-row">
+            <div class="mui-col-xs-11">
+                <p class="fontBold">{{secuSht}}</p>
+                <p class="fontBold lightColor" fundCode="{{trdCode}}">{{trdCode}}</p>
+            </div>
+            <div class="mui-col-xs-1 right">
+                <p class="jumpIcon iconfont"></p>
+            </div>
+        </div>
+    {{/each}}
+    </script>
+    @@include('@pathInclude/views/footer.html')
+    <!-- 添加埋点 -->
+    @@include('@pathInclude/views/header.html')
+    <script src="/include/js/iscroll.js"></script>
+    <script src="/mine/fundDiagnosis/static/js/diagnosisSearch.js"></script>
+</body>
+
+</html>
