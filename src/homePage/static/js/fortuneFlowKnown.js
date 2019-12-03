@@ -7,6 +7,7 @@
 require('@pathCommonBase/base.js');
 require('@pathCommonJs/ajaxLoading.js');
 var generateTemplate = require('@pathCommonJsComBus/generateTemplate.js');
+var alwaysAjax = require('@pathCommonJs/components/alwaysAjax.js');
 var splitUrl = require('@pathCommonJs/components/splitUrl.js')();
 $(function() {
 	let somePage = {
@@ -154,14 +155,7 @@ $(function() {
                 var externalUrl = $(this).attr("externalUrl")
                 window.location.href = externalUrl
             })
-            var tops=-100;
-             $(document).scroll(function() {
-                console.log($('.knownList').offset())
-                    if($('.knownList').offset().top<tops){
-                        tops-=800;
-                        mui('.contentWrapper').pullRefresh().pullupLoading();
-                    }
-                });
+            alwaysAjax(".knownList")
 		}
 	};
     somePage.init();
