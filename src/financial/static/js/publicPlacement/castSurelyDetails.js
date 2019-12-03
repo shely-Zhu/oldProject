@@ -52,7 +52,7 @@ $(function () {
           json = json.data
           that.gV.copyJson = JSON.parse(JSON.stringify(json))
           that.gV.copyJson.scheduledProtocolId = scheduledProtocolId
-          $('.fundName').html(json.fundName);
+          $('.fundName').html(json.fundName + "(" +json.fundCode+")");
           $('.balanceMask').html(json.balanceMask);
           $('.totalTradeTimes').html(json.totalTradeTimes);
           $('.totalCfmBalaMask').html(json.totalCfmBalaMask);
@@ -84,7 +84,7 @@ $(function () {
 
             case 'P':
               fixState = "暂停"
-              str = '<div type="1"  >终止</div> <div class="active" type="2" >续保</div>';
+              str = '<div type="1"  >终止</div> <div class="active" type="2" >续投</div>';
               break;
             case 'D':
               fixState = "删除"
