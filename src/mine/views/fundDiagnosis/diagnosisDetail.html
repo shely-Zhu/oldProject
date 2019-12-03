@@ -1,0 +1,145 @@
+<!-- /**  
+ * @Page:  诊断详情
+ * @Author: songxiaoyu  
+ * @Date:   2019-08-08 17:44:32  
+ * @Last Modified by:   songxiaoyu  
+ */ -->
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="applicable-device" content="mobile">
+    <meta name="apple-mobile-web-app-capable" content="yes">                
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="stylesheet" href="/commonResources/fundDiagnosis/static/css/diagnosisDetail.css">
+    <title>诊断详情</title>
+</head>
+
+<body>
+    <!-- 加载中loading -->
+    @@include('@pathCommonViews/loading/listLoading.html')
+    <!-- 暂无数据 -->
+    @@include('@pathCommonViews/noData.html')
+    <section class="diagnosisDetail">
+        <!-- 顶部 -->
+        <div class="dd_top">
+        </div>
+        <!-- 综合评分 -->
+        <div class="dd_score dd_card">
+            <h3 class="dd_h3">
+                <span class="dd_h3_text">综合评分</span>
+                <span class="dd_small">数据统计截止<i class="dd_date_1">--</i></span>
+                <span class="dd_icon dd_fr iconfont" num="0"></span>
+            </h3>
+            <div class="mui-row dd_choice_1">
+                <div class="mui-col-xs-3 active"><span>短期1年</span></div>
+                <div class="mui-col-xs-3"><span>中期3年</span></div>
+                <div class="mui-col-xs-3"><span>长期5年</span></div>
+            </div>
+            <!-- 雷达图 -->
+            <div class="dd_radar chartWrapper radarEchart">
+                <i></i>
+            </div>
+            <!-- 无数据时显示 -->
+            <div class="dd_radar chartWrapper NoDataRada">
+                
+            </div>
+        </div>
+        <!-- 综合定性评价 --> 
+        <div class="dd_card dd_evaluate_wrap">
+            <h3 class="dd_h3">
+                <span class="dd_h3_text">综合定性评价</span>
+                <span class="dd_small">数据统计截止<i class="dd_date_2">--</i></span>
+                <span class="dd_icon dd_fr iconfont" num="1"></span>
+            </h3>
+            <div class="dd_evaluate">
+            </div>
+        </div>
+        <!-- 累计收益曲线 -->
+        <div class="dd_card dd_income">
+            <h3 class="dd_h3">
+                <span class="dd_h3_text">累计收益曲线</span>
+                <span class="dd_small">数据统计截止<i class="dd_date_3">--</i></span>
+                <span class="dd_icon dd_fr iconfont" num="2"></span>
+            </h3>
+            <div class="dd_rate_text">
+                <span class="dd_font_10">收益率</span>
+            </div>
+            <div class="dd_line_legend">
+                <span class="dd_legend dd_red"></span>
+                <span class="dd_legend dd_yellow">同类基金指数</span>
+                <span class="dd_legend dd_blue">上证指数</span>
+            </div>
+            <!-- 折线图 -->
+            <div class="dd_line"></div>
+            <div class="dd_lineNodata">暂无数据</div>
+            <div class="dd_choice_2">
+                <span class="dd_month active" num="1">近一月</span>
+                <span class="dd_year" num="2">近一年</span>
+                <span class="dd_all" num="3">成立以来</span>
+            </div>
+        </div>
+        <!-- 底部备注 -->
+        <div class="dd_bottom dd_center">   
+            <div class="m1">注：数据来源：wind，恒天公募销售中心</div>
+            <div class="dd_t1">上述数据仅供参考，不构成投资建议。投资者据此操作</div>
+            <div class="dd_t1">风险自担。市场有风险，投资需谨慎</div>
+        </div>
+    </section>
+
+    <!-- 顶部 -->
+    <script id="first-template" type="text/x-handlebars-template">
+        <div class="dd_name">{{fundName}}  {{fundCode}}</div>
+        <div class="dd_tag_wrap">
+            {{#if type}}
+            <span class="dd_tag">{{type}}</span> 
+            {{/if}}
+            {{#if fundLableList_new}}
+            <span class="dd_tag">{{fundLableList_new}}</span>
+            {{/if}}
+            {{#if fundState}}
+            <span class="dd_tag">{{fundState}}</span>
+            {{/if}}
+            {{#if grade}}
+            <span class="dd_tag">{{grade}}</span>
+            {{/if}}
+        </div>
+        <div class="mui-row dd_value">
+            <div class="mui-col-xs-4 left">
+                <i>{{newNetValue}}</i>
+            </div>
+            <div class="mui-col-xs-4 dd_center center">
+                <i>{{newOneDayGains}}%</i>
+            </div>
+            <div class="mui-col-xs-4 right">
+                <i>{{yearEarnRate}}%</i>
+            </div>
+        </div>
+        <div class="mui-row dd_text">
+            <div class="mui-col-xs-4 left">
+                <i>最新净值({{priceDate}})</i>
+            </div>
+            <div class="mui-col-xs-4 center dd_center projectTermUnit">
+                <i>最新日涨幅</i>
+            </div>
+            <div class="mui-col-xs-4 right">
+                <i>成立以来年化收益率</i>
+            </div>
+        </div>
+    </script>
+
+    
+    
+    @@include('@pathInclude/views/footer.html')
+    <!-- 添加埋点 -->
+    @@include('@pathInclude/views/header.html')
+    <script src="/include/js/iscroll.js"></script>
+    <script src="https://echarts.baidu.com/dist/echarts.js"></script>
+    <!-- <script src="/common/js/components/echartCom/echarts.min.js"></script> -->
+    <script src="/commonResources/fundDiagnosis/static/js/diagnosisDetail.js"></script>
+
+</body>
+
+</html>
