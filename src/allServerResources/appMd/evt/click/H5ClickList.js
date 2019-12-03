@@ -236,7 +236,11 @@ var clickList = {
 	//wealthResearch.html
 	"fortune_wealthTab":{ type:'click', evtid: '', topic: '财富研究详情tab', info: ''} ,
 	//understandHT.html
-	"understandTab":{ type:'click', evtid: '', topic: '了解恒天tab', info: ''} 
+	"understandTab":{ type:'click', evtid: '', topic: '了解恒天tab', info: ''} ,
+	//noticeCenter.html
+	"notice_conterList":{ type:'click', evtid: '', topic: '消息中心', info: ''} ,
+	//systemInforms.html
+	"notice_systemList":{ type:'click', evtid: '', topic: '系统通知', info: ''} 
 }
 
 module.exports = clickList;
