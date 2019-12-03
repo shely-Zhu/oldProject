@@ -147,7 +147,7 @@ $(function () {
                     }
                     if (json.idnoCheckflag || json.isRiskEndure || json.isPerfect || json.accreditedInvestor) {
                        // $('.tips').show()
-                       that.gV.tipStatus = true
+                        that.gV.tipStatus = true
                     } else {
                         that.gV.tipStatus = true
 
@@ -222,7 +222,9 @@ $(function () {
             });
             // 买入
             mui("body").on("tap", ".footer .buy_btn", function (e) {
-                that.getUserInfo()
+            
+                //that.getUserInfo()
+                window.location.href = site_url.fundTransformIn_url + '?fundCode=' + fundCode + '&fundName=' + fundName;
                 if (that.gV.tipStatus) {
                     window.location.href = site_url.fundTransformIn_url + '?fundCode=' + fundCode + '&fundName=' + fundName;
                 }
