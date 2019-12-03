@@ -1,7 +1,7 @@
 //  超宝基金产品-交易记录
 // @author caoqihai 2019-11-20 
 
-require('@pathIncludJs/base.js');
+require('@pathCommonBase/base.js');
 
 require('@pathCommonJsCom/utils.js');
 //ajax调用
@@ -15,8 +15,6 @@ require('@pathCommonJsCom/goTopMui.js');
 require('@pathCommonJs/components/elasticLayer.js');
 require('@pathCommonJs/components/elasticLayerTypeFive.js');
 require('@pathCommonJs/components/headBarConfig.js');
-//黑色提示条的显示和隐藏
-var tipAction = require('@pathCommonJsCom/tipAction.js');
 var splitUrl = require('@pathCommonJs/components/splitUrl.js')();
 
 
@@ -25,6 +23,8 @@ $(function() {
         getElements: {
             noData: $('.noData'), //没有数据的结构
             listLoading: $('.listLoading'), //所有数据区域，第一次加载的loading结构
+            slot1: $('.mui-content'), 
+            temp1: $('#first-template'), 
         },
         gV: { //一些设置
             navList: [ //导航

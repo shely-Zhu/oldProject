@@ -6,9 +6,8 @@
  * 公募持仓页面
  */
 
-require('@pathIncludJs/base.js');
+require('@pathCommonBase/base.js');
 require('../../../common/js/ajaxLoading.js');
-var tipAction = require('@pathCommonJs/components/tipAction.js');
 
 $(function () {
 
@@ -85,7 +84,7 @@ $(function () {
                         }
                     });
                     that.chooseTipDesc();
-                    that.renderView(true);
+                    that.renderView();
                     that.events();
                 },
                 callbackFail: function (data) {
@@ -106,12 +105,13 @@ $(function () {
                 $('.first_h_profit_box .h_profit_value').html(that.addSymbol(that.gV.data.todayProfit, that.gV.data.todayProfitMask));
                 //持仓总收益
                 $('.second_h_profit_box .h_profit_value').html(that.addSymbol(that.gV.data.cumulativeProfit, that.gV.data.cumulativeProfitMask));
+                
                 //现金宝列表渲染
                 var tplm = $("#cashLists").html();
                 var template = Handlebars.compile(tplm);
-                var html = template(that.gV.data.cashDetail);
+                var html = template(that.gV.data.cashDetails);
                 $("#cashPageLists").html(html);
-
+                
                 //普通基金列表渲染
                 var tplm = $("#dataLists").html();
                 var template = Handlebars.compile(tplm);
@@ -170,7 +170,7 @@ $(function () {
             //现金宝基金item的点击 进入持仓详情
             mui("body").on('tap', '#cashPageLists .hold_item', function (e) {
                 var index = $(this).index();
-                window.location.href=site_url.superStreasureDetail_url + '?fundCode=' + that.gV.data.cashDetail[index].fundCode;
+                window.location.href=site_url.superStreasureDetail_url + '?fundCode=' + that.gV.data.cashDetails[index].fundCode;
             })
             //点击持仓列表的感叹号 进入交易明细明细
             mui("body").on('tap', '.position_tip', function (e) {

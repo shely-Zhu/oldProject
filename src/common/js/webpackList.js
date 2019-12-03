@@ -183,6 +183,16 @@ module.exports = {
     //基金账户诊断
     './commonResources/fundDiagnosis/static/js/fundAccountDiagnosis': './src/commonResources/fundDiagnosis/static/js/fundAccountDiagnosis.js',
 
+    
+    // 基金诊断
+    './mine/static/js/hotDiagnosis': './src/mine/static/js/hotDiagnosis.js',
+    // 诊断详情
+    './mine/static/js/diagnosisDetail': './src/mine/static/js/diagnosisDetail.js',
+    // 基金诊断搜索页
+    './mine/static/js/diagnosisSearch': './src/mine/static/js/diagnosisSearch.js',
+    //基金账户诊断
+    './mine/static/js/fundAccountDiagnosis': './src/mine/static/js/fundAccountDiagnosis.js',
+
     // 标普模型
     './personal/static/js/spAssetModel': "./src/personal/static/js/spAssetModel.js",
     // 资产配置建议书
@@ -232,10 +242,6 @@ module.exports = {
     //会员俱乐部
     './life/static/js/memberClub/activityList': "./src/life/static/js/memberClub/activityList.js",
     //会员俱乐部-暂无数据mine
-
-    './mine/static/js/memberClub/activityNoList': "./src/mine/static/js/memberClub/activityNoList.js",
-    //mui索引列表插件
-    './mine/static/js/memberClub/mui.indexedlist': "./src/mine/static/js/memberClub/mui.indexedlist.js",
 
     './life/static/js/memberClub/activityNoList': "./src/life/static/js/memberClub/activityNoList.js",
     //mui索引列表插件
@@ -362,7 +368,7 @@ module.exports = {
     './financial/static/js/publicPlacement/transactionRules': './src/financial/static/js/publicPlacement/transactionRules.js',
 
     // 购买触发提示
-    './financial/static/js/common/authenticationProcess': './src/financial/static/js/common/authenticationProcess.js',
+    // './financial/static/js/common/authenticationProcess': './src/financial/static/js/common/authenticationProcess.js',
 
 
     // 私募产品详情页

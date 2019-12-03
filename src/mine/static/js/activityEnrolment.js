@@ -107,7 +107,7 @@ $(function () {
                         //给推荐活动赋值
                         morelist = json.data.defaultRecommend
                         //判断是否有报名时间
-                        if (morelist.actStartDate) {
+                        if (morelist && morelist.actStartDate) {
                             morelist.timeflag = true;
                             morelist.actStartDate = morelist.actStartDate ? moment(morelist.actStartDate).format('MM月至DD日') : '';
                             morelist.actEndDate = morelist.actEndDate ? moment(morelist.actEndDate).format('MM月至DD日') : '';

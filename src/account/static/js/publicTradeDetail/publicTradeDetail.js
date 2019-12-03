@@ -37,11 +37,9 @@
   * 3 怎么区分是否买入成功？确认状态为已确认 扣款状态为已成功   怎么确认是否赎回成功？确认状态为已确认 没有到账状态
   */
 
-require('@pathIncludJs/base.js');
+require('@pathCommonBase/base.js');
 
 require('@pathCommonJs/ajaxLoading.js');
-
-var tipAction = require('@pathCommonJs/components/tipAction.js');
 var splitUrl = require('@pathCommonJs/components/splitUrl.js');
 var payPass = require('@pathCommonJs/components/payPassword.js');
 

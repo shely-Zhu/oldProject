@@ -18,7 +18,7 @@
     var w = window,
         $window = $(w),
         defaultOptions = {
-            threshold                   : 0,
+            threshold                   : 200,
             failure_limit               : 0,
             event                       : 'scroll',
             effect                      : 'show',
@@ -33,9 +33,9 @@
             check_appear_throttle_time  : 300,
             url_rewriter_fn             : emptyFn,
             no_fake_img_loader          : false,
-            placeholder_data_img        : 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsQAAA7EAZUrDhsAAAANSURBVBhXYzh8+PB/AAffA0nNPuCLAAAAAElFTkSuQmCC',
+            // placeholder_data_img        : 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsQAAA7EAZUrDhsAAAANSURBVBhXYzh8+PB/AAffA0nNPuCLAAAAAElFTkSuQmCC',
             // for IE6\7 that does not support data image
-            placeholder_real_img        : './lazyImgList'
+            // placeholder_real_img        : './lazyImgList'
             // todo : 灏嗘煇浜涘睘鎬х敤global鏉ラ厤缃紝鑰屼笉鏄瘡娆″湪$(selector).lazyload({})鍐呴厤缃�
         },
         type // function

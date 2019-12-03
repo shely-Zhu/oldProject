@@ -46,7 +46,7 @@
 		<ul class="tradeStateList">
 				{{#each tradeLimitList}}
 			<li><span>申购起点</span><span class="floatRight">{{minValue}}元</span></li>
-			<li><span>追加购买</span><span class="floatRight">{{secondMin}}0元</span></li>
+			<li><span>追加购买</span><span class="floatRight">{{secondMin}}元</span></li>
 			<li><span>日累计申购金额</span><span class="floatRight">{{maxValue}}元</span></li>
 			{{/each}}
 		</ul>
@@ -108,11 +108,12 @@
 				<p class="tradeRateTitle">申购费率</p>
 				{{#each fundPurchaseFeeRate.detailList}}
 				<p class="tradeRateBuy">
-					<span>{{minValue}}万元&lt;金额&lt;{{maxValue}}万元</span>
+					<!-- <span>{{minValue}}万元&lt;金额&lt;{{maxValue}}万元</span> -->
+					<span class="label-left">{{conditions}}</span>
 					{{#if status}}
 					<span class="fontWeight">{{fundFeeRate}}</span>
 					{{else}}
-					<span class="fontWeight">每笔{{fundFeeRate}}元</span>
+					<span class="fontWeight">{{fundFeeRate}}</span>
 					{{/if}}
 				</p>
 				{{/each}}
@@ -121,7 +122,9 @@
 				<p class="tradeRateTitle">赎回费率</p>
 					{{#each fundRedeemFeeRate.detailList}}
 				<p class="tradeRateBuy">
-					<span>{{minValue}}日&lt;持有时长&lt;{{maxValue}}日万元</span>
+					<!-- <span>{{minValue}}日&lt;持有时长&lt;{{maxValue}}日万元</span> -->
+					<span>{{conditions}}</span>
+
 					{{#if status}}
 					<span class="fontWeight">{{fundFeeRate}}</span>
 					{{else}}

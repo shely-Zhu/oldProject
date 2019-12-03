@@ -20,11 +20,7 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0,user-scalable=no" name="viewport" id="viewport" />
-    <meta content="telephone=no" name="format-detection" />
-    <meta content="yes" name="apple-mobile-web-app-capable" />
-    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    @@include('@pathInclude/views/meta.html')
     <link rel="stylesheet" href="/recommend/static/css/recommend.css">
     <title>推荐有礼</title>
 </head>
@@ -33,9 +29,9 @@
 
     <div class="recommend_wrap">
         <!-- 加载中loading -->
-        @@include('../../common/views/load.html')
+        <!-- @@include('../../common/views/load.html') -->
         <!-- 顶部图片 -->
-        <div class="top_img"><img src="/recommend/static/img/top.jpg"></div>
+        @@include('@pathCommonViews/headBarConfig.html',{"showType":"1","pathName":""})
         <!-- 理财师选择 -->
         <div class="manager_choose_wrap">
             <div class="lcs mui-row" id="lcs">
