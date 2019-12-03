@@ -106,6 +106,8 @@ module.exports = function () {
     this.riskAssessment_url = go_url.no_url + '/personal/views/riskAssessment.html';
     //我的理财师
     this.plannerSearch_url = go_url.no_url + '/planner/views/plannerSearch.html';
+    //明星理财师
+    this.starFinancialPlannerList_url = go_url.no_url + '/homePage/views/starFinancialPlannerList/starFinancialPlannerList.html';
 
     //我的-理财师
     this.plannerIndex_url = go_url.no_url + '/planner/views/plannerIndex.html';
@@ -473,6 +475,8 @@ module.exports = function () {
     this.mineHistoryDetail_url = go_url.no_url +  '/mine/views/historyDetail.html'
     //联系我们 意见反馈
     this.concatUsAdvise_url = go_url.no_url +  '/mine/views/concatUs/concatUsAdvise.html'
-
-
+    /*------------------- 财富学院 start ------------------------------*/
+    //财富学院首页
+    this.fortuneCollegeList_url = go_url.no_url +  '/homePage/views/fortuneCollege/fortuneCollegeList.html'
+    /*------------------- 财富学院 end ------------------------------*/
 };
