@@ -4,9 +4,8 @@
 */
 
 
-require('@pathIncludJs/base.js');
+require('@pathCommonBase/base.js');
 require('@pathCommonJs/ajaxLoading.js');
-var tipAction = require('@pathCommonJs/components/tipAction.js');
 var generateTemplate = require('@pathCommonJsComBus/generateTemplate.js');
 var splitUrl = require('@pathCommonJs/components/splitUrl.js')();
 $(function() {
@@ -23,7 +22,8 @@ $(function() {
             pageCurrent: 1,
             pageSize: 10,
 			fortuneFlowList: [],
-            articleBelong : splitUrl['articleBelong'] // 文章类型
+            articleBelong : splitUrl['articleBelong'], // 文章类型
+            wrapperName:null,
 		},
 		//页面初始化函数
 		init: function() {	
@@ -79,8 +79,9 @@ $(function() {
                 },
                 callbackNoData:function(){
                     //没有数据时展示暂无数据
-                    $(".list").hide()
-                    that.$e.noData.show();
+                    tipAction("没有数据")
+                    /*$(".list").hide()
+                    that.$e.noData.show();*/
                 },
                 callbackFail: function(json) {
                     tipAction(json.message);
@@ -104,7 +105,8 @@ $(function() {
         },
 		//初始化mui的上拉加载
 		initMui: function(listClassName, wrapperName) {
-			var that = this;
+            var that = this;
+            that.gV.wrapperName=wrapperName;
             var height = windowHeight - $(".HeadBarConfigBox").height();
             if (!$(listClassName).hasClass('setHeight')) {
                 $(listClassName).height(height).addClass('setHeight');
@@ -142,12 +144,24 @@ $(function() {
 		},
 		//注册事件
 		events: function() {
-            var that = this;
+            var that=this
             // 列表页跳转到详情页
 			mui("body").on('tap', '.knownItem' , function(){
                 var id = $(this).attr("id")
                 window.location.href = site_url.articleTemplate_url + '?id=' + id + '&articleBelong=' + that.gV.articleBelong + '&applyType=1'
             })
+            mui("body").on('tap', '.knownItem' , function(){
+                var externalUrl = $(this).attr("externalUrl")
+                window.location.href = externalUrl
+            })
+            var tops=-100;
+             $(document).scroll(function() {
+                console.log($('.knownList').offset())
+                    if($('.knownList').offset().top<tops){
+                        tops-=800;
+                        mui('.contentWrapper').pullRefresh().pullupLoading();
+                    }
+                });
 		}
 	};
     somePage.init();

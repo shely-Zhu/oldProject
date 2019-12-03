@@ -2,8 +2,7 @@
 * 月度报告详情页我
 * @author zhangyanping 2019-11-19
 */
-
-require('@pathIncludJs/base.js');
+require('@pathCommonBase/base.js');
 
 require('@pathCommonJsCom/utils.js');
 require('@pathCommonJs/ajaxLoading.js');

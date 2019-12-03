@@ -3,7 +3,7 @@
  * @author 蔡文琦  2019-11-20
  */
 
-require('@pathIncludJs/base.js');
+require('@pathCommonBase/base.js');
 require('@pathCommonJs/ajaxLoading.js');
 var generateTemplate = require('@pathCommonJsComBus/generateTemplate.js');
 

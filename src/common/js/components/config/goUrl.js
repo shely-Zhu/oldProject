@@ -464,8 +464,12 @@ module.exports = function () {
     this.fortuneClassroom_url = go_url.no_url + '/homePage/views/fortuneCollege/fortuneClassroom.html';
     //财富研究
     this.wealthResearch_url = go_url.no_url + '/homePage/views/fortuneCollege/wealthResearch.html';
-    
-
     //定投排行榜  原生
     this.investmentPlanRanking_url = go_url.no_url +  '/financial/views/publicPlacement/investmentPlanRanking.html'
+    //我的 历史明细
+    this.mineHistoryDetail_url = go_url.no_url +  '/mine/views/historyDetail.html'
+    //联系我们 意见反馈
+    this.concatUsAdvise_url = go_url.no_url +  '/mine/views/concatUs/concatUsAdvise.html'
+
+
 };
