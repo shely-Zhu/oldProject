@@ -1,5 +1,5 @@
 /*
- * @page: 已确认交易(定融定投)
+ * @page: 已确认交易、待确认交易
  * @Author: peicongcong
  * @Date:   2019-11-19
  * @Last Modified by:   
@@ -23,7 +23,6 @@ require('@pathCommonJsCom/goTopMui.js');
 
 //黑色提示条的显示和隐藏
 var splitUrl = require('@pathCommonJs/components/splitUrl.js')();
-var tipAction = require('@pathCommonJsCom/tipAction.js');
 var transcationTem = require('@pathCommonJsCom/account/transcationTem.js');
 
 

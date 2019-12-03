@@ -6,7 +6,6 @@
 
 require('@pathCommonBase/base.js');
 require('@pathCommonJs/ajaxLoading.js');
-var tipAction = require('@pathCommonJs/components/tipAction.js');
 var generateTemplate = require('@pathCommonJsComBus/generateTemplate.js');
 var splitUrl = require('@pathCommonJs/components/splitUrl.js')();
 $(function() {
@@ -80,8 +79,9 @@ $(function() {
                 },
                 callbackNoData:function(){
                     //没有数据时展示暂无数据
-                    $(".list").hide()
-                    that.$e.noData.show();
+                    tipAction("没有数据")
+                    /*$(".list").hide()
+                    that.$e.noData.show();*/
                 },
                 callbackFail: function(json) {
                     tipAction(json.message);

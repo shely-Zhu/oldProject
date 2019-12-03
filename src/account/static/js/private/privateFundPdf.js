@@ -14,8 +14,6 @@ require('@pathCommonJs/components/headBarConfig.js');
 //引入弹出层
 require('@pathCommonCom/elasticLayer/elasticLayer/elasticLayer.js');
 var splitUrl = require('@pathCommonJs/components/splitUrl.js')();
-//黑色提示条的显示和隐藏
-var tipAction = require('@pathCommonJsCom/tipAction.js');
 
 $(function(){
     var fundPdf={
