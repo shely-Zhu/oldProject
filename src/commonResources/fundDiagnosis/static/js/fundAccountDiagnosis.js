@@ -23,10 +23,9 @@ $(function() {
 
     var fundAccountDiagnosis = {
         $e: {
-            hotFundList: $('.hotFundList .card-theme'), // 热门列表
-            fundListTemp: $('#fundList-template'), // 基金区域
-            listLoading: $('.listLoading'), //所有数据区域，第一次加载的loading结构
-            noData: $('.noData'), //没有数据的结构
+            holdingBox: $('#holdingBox'), // 账户持仓情况
+            holdingBoxTemp: $('#holdingBox-template'), // 账户持仓情况模板
+            diagnosis:$("#diagnosis-box") //诊断结论
         },
         gV: {
             pageCurrent:1,  // 账户持仓情况分页参数
@@ -34,11 +33,19 @@ $(function() {
             holdList:[],   // 账户持仓情况
             color:['#f2cfa0','#c57f5a','#3e5498','#accdda','#accdda','#cbc0e0','#e8b1a1','#cdd2d4'],
             pie:{        //基金配置比例
-                itemStyle1: {
-                   
-                },
+               
                 pieData: [],
+            },
+            heavyBar:{   //重仓行业配置
+               
+                barData: [],
+            },
+            volumeBar:{  //组合券种分布
+               
+                barData: [],
             }
+
+
             
         },
         init: function() {
@@ -46,6 +53,10 @@ $(function() {
             that.getHoldData();  //账户持仓详情
             that.getPieData()   //基金配置比例详情
             that.getAssetData()  //资产配置比例
+            that.getHeavyData()  // 重仓行业配置
+            that.getVolumeData()  // 组合券种分布
+            that.getAccountStyleData()  // 账户风格
+            that.getDiagnosisData()  // 诊断结论
             // that.drawCircle();
 
             that.events();
@@ -62,6 +73,9 @@ $(function() {
                 needDataEmpty: false,
                 callbackDone: function(json) {
                     debugger
+                    var data = json.data;
+                      // 将列表插入到页面上
+                      generateTemplate(data, that.$e.holdingBox, that.$e.holdingBoxTemp);
                     
                 },
                 callbackFail: function(json) {
@@ -113,11 +127,92 @@ $(function() {
                         $("#assets-box .bondAssetRatio").html(data.bondAssetRatio)
                         $("#assets-box .otherAssetRatio").html(data.otherAssetRatio)
                         var assets_width = $("#assets-box").width();
-                        $("#assets-box .stockAssetRatio .shape").width(Number(data.stockAssetRatio.split("%")[0])/100*assets_width) + 'rem';
-                        $("#assets-box .cashAssetRatio .shape").width(Number(data.stockAssetRatio.split("%")[0])/100*assets_width) + 'rem';
-                        $("#assets-box .bondAssetRatio .shape").width(Number(data.stockAssetRatio.split("%")[0])/100*assets_width) + 'rem';
-                        $("#assets-box .otherAssetRatio .shape").width(Number(data.stockAssetRatio.split("%")[0])/100*assets_width) + 'rem';
+                        // $("#assets-box .stockAssetRatio .shape").width(Number(data.stockAssetRatio.split("%")[0])/100*assets_width) + 'rem';
+                        // $("#assets-box .cashAssetRatio .shape").width(Number(data.stockAssetRatio.split("%")[0])/100*assets_width) + 'rem';
+                        // $("#assets-box .bondAssetRatio .shape").width(Number(data.stockAssetRatio.split("%")[0])/100*assets_width) + 'rem';
+                        // $("#assets-box .otherAssetRatio .shape").width(Number(data.stockAssetRatio.split("%")[0])/100*assets_width) + 'rem';
+                        // $("#assets-box .stockAssetRatio .shape").width(Number(data.stockAssetRatio.split("%")[0])/100*assets_width + 'rem');
+                        // $("#assets-box .cashAssetRatio .shape").width(Number(data.stockAssetRatio.split("%")[0])/100*assets_width + 'rem') ;
+                        // $("#assets-box .bondAssetRatio .shape").width(Number(data.stockAssetRatio.split("%")[0])/100*assets_width + 'rem');
+                        // $("#assets-box .otherAssetRatio .shape").width(Number(data.stockAssetRatio.split("%")[0])/100*assets_width  + 'rem');
+
+                        $("#assets-box .stockAssetRatio .shape").width('1rem');
+                        $("#assets-box .cashAssetRatio .shape").width('0.6rem') ;
+                        $("#assets-box .bondAssetRatio .shape").width('0.5rem');
+                        $("#assets-box .otherAssetRatio .shape").width('0.9rem');
                     }
+                    
+                },
+                callbackFail: function(json) {
+                    tipAction(json.msg);
+                }
+            }]
+            $.ajaxLoading(obj);
+        },
+        getHeavyData: function(t) {
+            var that = this;
+            var obj = [{
+                url: site_url.heavyIndustryConfigRatioDetail_api, 
+                data: {
+
+                },
+                needDataEmpty: false,
+                callbackDone: function(json) {
+                    debugger
+                    
+                },
+                callbackFail: function(json) {
+                    tipAction(json.msg);
+                }
+            }]
+            $.ajaxLoading(obj);
+        },
+        getVolumeData: function(t) {
+            var that = this;
+            var obj = [{
+                url: site_url.bondTypeAndValue_api, 
+                data: {
+
+                },
+                needDataEmpty: false,
+                callbackDone: function(json) {
+                    debugger
+                    
+                },
+                callbackFail: function(json) {
+                    tipAction(json.msg);
+                }
+            }]
+            $.ajaxLoading(obj);
+        },
+        getAccountStyleData: function(t) {
+            var that = this;
+            var obj = [{
+                url: site_url.bondTypeAndValue_api, 
+                data: {
+
+                },
+                needDataEmpty: false,
+                callbackDone: function(json) {
+                    debugger
+                    
+                },
+                callbackFail: function(json) {
+                    tipAction(json.msg);
+                }
+            }]
+            $.ajaxLoading(obj);
+        },
+        getDiagnosisData: function(t) {
+            var that = this;
+            var obj = [{
+                url: site_url.diagnoseResult_api, 
+                data: {
+
+                },
+                needDataEmpty: false,
+                callbackDone: function(json) {
+                    debugger
                     
                 },
                 callbackFail: function(json) {
