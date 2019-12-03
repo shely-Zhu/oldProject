@@ -315,6 +315,6 @@ $(function() {
         name.attr(attribute,value)
     }
     setTimeout(()=>{
-        attr($('#slider .tab-scroll-wrap .mui-control-item'),'htmdEvt','sliderTab')
+        attr($('#slider .tab-scroll-wrap .mui-control-item'),'htmdEvt','fortune_sliderTab')
     },1000)
 });
