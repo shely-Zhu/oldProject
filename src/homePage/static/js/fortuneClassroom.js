@@ -300,6 +300,12 @@ $(function() {
         },
         events: function() { //绑定事件
             var that = this;
+            // 列表页跳转到详情页
+            mui("body").on('tap', '.roomItem' , function(){
+                var id = $(this).attr("id")
+                var articleBelong = $(this).attr("articleBelong")
+                window.location.href = site_url.articleTemplate_url + '?id=' + id + '&articleBelong=' + articleBelong + '&applyType=1'
+            })
         }
     };
     data.init();
@@ -309,6 +315,6 @@ $(function() {
         name.attr(attribute,value)
     }
     setTimeout(()=>{
-        attr($('#slider .tab-scroll-wrap .mui-control-item'),'htmdEvt','sliderTab')
+        attr($('#slider .tab-scroll-wrap .mui-control-item'),'htmdEvt','fortune_sliderTab')
     },1000)
 });

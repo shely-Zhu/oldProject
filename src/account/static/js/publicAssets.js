@@ -158,6 +158,7 @@ $(function () {
             var that = this;
             //交易记录按钮点击 跳转到交易记录
             mui("body").on('tap', '.trade_list', function (e) {
+                sessionStorage.setItem("ccache", ""); 
                 window.location.href = site_url.transactionRecords_url;
             })
             //普通基金item的点击 进入持仓详情
