@@ -158,7 +158,7 @@ $(function () {
             var that = this;
             //交易记录按钮点击 跳转到交易记录
             mui("body").on('tap', '.trade_list', function (e) {
-                window.location.href = site_url.transactionRecords_url;
+                window.location.href = site_url.transactionRecords_url + '?fromAssets=true';
             })
             //普通基金item的点击 进入持仓详情
             mui("body").on('tap', '#pageLists .hold_item', function (e) {
