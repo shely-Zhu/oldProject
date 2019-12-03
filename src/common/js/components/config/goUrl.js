@@ -106,6 +106,8 @@ module.exports = function () {
     this.riskAssessment_url = go_url.no_url + '/personal/views/riskAssessment.html';
     //我的理财师
     this.plannerSearch_url = go_url.no_url + '/planner/views/plannerSearch.html';
+    //明星理财师
+    this.starFinancialPlannerList_url = go_url.no_url + '/homePage/views/starFinancialPlannerList/starFinancialPlannerList.html';
 
     //我的-理财师
     this.plannerIndex_url = go_url.no_url + '/planner/views/plannerIndex.html';
@@ -350,6 +352,7 @@ module.exports = function () {
 
     /*-------------------------------消息中心 start -----------------------*/
     // 通知详情
+    this.noticeCenter_url = go_url.no_url + '/homePage/views/notice/noticeCenter.html';
     this.noticeDetails_url = go_url.no_url + '/homePage/views/notice/noticeDetail.html';
     this.systemInforms_url = go_url.no_url + '/homePage/views/notice/systemInforms.html';
     /*-------------------------------消息中心 end -----------------------*/
@@ -357,6 +360,8 @@ module.exports = function () {
 
     //h5模板页
     this.articleTemplate_url = go_url.no_url + '/include/views/articleTemplate.html';
+    // 月度报告列表页
+    this.monthReportList_url = go_url.no_url + '/mine/views/monthReport/monthReportList.html';
     // 月度报告详情页
     this.monthReportDetail_url = go_url.no_url + '/mine/views/monthReport/monthReportDetail.html';
     // 月度报告产品咨询
@@ -406,6 +411,8 @@ module.exports = function () {
     this.incomeDistribution_url = go_url.no_url + '/account/views/private/incomeDistribution.html';
     // 私募交易明细
     this.transactionDetail_url = go_url.no_url + '/account/views/transactionDetail.html';
+    // 私募产品详情
+    this.privateDetail_url = go_url.no_url + '/account/views/private/privateDetail.html';
     // 私募交易明细
     this.privateDetailList_url = go_url.no_url + '/account/views/private/privateDetailList.html';
     // 历史明细
@@ -464,10 +471,9 @@ module.exports = function () {
     this.fortuneClassroom_url = go_url.no_url + '/homePage/views/fortuneCollege/fortuneClassroom.html';
     //财富研究
     this.wealthResearch_url = go_url.no_url + '/homePage/views/fortuneCollege/wealthResearch.html';
-    
-
     //定投排行榜  原生
     this.investmentPlanRanking_url = go_url.no_url +  '/financial/views/publicPlacement/investmentPlanRanking.html'
+<<<<<<< HEAD
 
     // 公募监管账户
     this.newregulatoryAccounts_url = go_url.no_url +  '/mine/views/regulatoryAccounts.html'
@@ -479,4 +485,16 @@ module.exports = function () {
     this.membershipInterestsRecord_url = go_url.no_url +  '/mine/views/membershipInterests/membershipInterestsRecord.html'
     //查看已签署材料
     this.seeSign_url = go_url.no_url +  '/account/views/private/seeSign.html'
+=======
+    //我的定投计划
+    this.myInvestmentPlan_url = go_url.no_url +  '/financial/views/publicPlacement/myInvestmentPlan.html'
+    //我的 历史明细
+    this.mineHistoryDetail_url = go_url.no_url +  '/mine/views/historyDetail.html'
+    //联系我们 意见反馈
+    this.concatUsAdvise_url = go_url.no_url +  '/mine/views/concatUs/concatUsAdvise.html'
+    /*------------------- 财富学院 start ------------------------------*/
+    //财富学院首页
+    this.fortuneCollegeList_url = go_url.no_url +  '/homePage/views/fortuneCollege/fortuneCollegeList.html'
+    /*------------------- 财富学院 end ------------------------------*/
+>>>>>>> 30f13bb08ce66f74f410ce524a4531c456fb0b81
 };
