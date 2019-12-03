@@ -151,32 +151,48 @@ var clickList = {
 	"privateIndex_hotSpot" : { type:'click', evtid: '5', topic: '私募首页-热门私募', info: ''} ,
 	"privateList_detail" : { type:'click', evtid: '6', topic: '私募列表页-产品详情', info: ''} ,
 	/*************************************************************mine文件夹下******************************************************************************************/ 
+	//已报名活动
 	"activitiesEnrolment_ongoing " : { type:'click', evtid: '', topic: '已报名活动-进行中', info: ''} ,
 	"activitiesEnrolment_complete" : { type:'click', evtid: '', topic: '已报名活动-已结束', info: ''} ,
-
+	//意见反馈
 	"feedback_functionalAbnormality" : { type:'click', evtid: '', topic: '意见反馈-功能异常', info: ''} ,
 	"feedback_safetyProblem" : { type:'click', evtid: '', topic: '意见反馈-安全问题', info: ''} ,
 	"feedback_productSuggestion" : { type:'click', evtid: '', topic: '意见反馈-产品建议', info: ''} ,
 	"feedback_otherQuestions" : { type:'click', evtid: '', topic: '意见反馈-其他问题', info: ''} ,
 	"feedback_addImg" : { type:'click', evtid: '', topic: '意见反馈-添加图片', info: ''} ,
 	"feedback_submit" : { type:'click', evtid: '', topic: '意见反馈-提交按钮', info: ''} ,
-
+	//权益详情
 	"details_understandingDetails" : { type:'click', evtid: '', topic: '权益详情-了解详情', info: ''} ,
-	"privateList_detail" : { type:'click', evtid: '', topic: '', info: ''} ,
-	"privateList_detail" : { type:'click', evtid: '', topic: '', info: ''} ,
-	"privateList_detail" : { type:'click', evtid: '', topic: '', info: ''} ,
-	"privateList_detail" : { type:'click', evtid: '', topic: '', info: ''} ,
-	"privateList_detail" : { type:'click', evtid: '', topic: '', info: ''} ,
-	"privateList_detail" : { type:'click', evtid: '', topic: '', info: ''} ,
-	"privateList_detail" : { type:'click', evtid: '', topic: '', info: ''} ,
-	"privateList_detail" : { type:'click', evtid: '', topic: '', info: ''} ,
-	"privateList_detail" : { type:'click', evtid: '', topic: '', info: ''} ,
-	"privateList_detail" : { type:'click', evtid: '', topic: '', info: ''} ,
-	"privateList_detail" : { type:'click', evtid: '', topic: '', info: ''} ,
-	"privateList_detail" : { type:'click', evtid: '', topic: '', info: ''} ,
-	"privateList_detail" : { type:'click', evtid: '', topic: '', info: ''} ,
-	"privateList_detail" : { type:'click', evtid: '', topic: '', info: ''} ,
-	"privateList_detail" : { type:'click', evtid: '', topic: '', info: ''} ,
+	//成长值记录
+	"adolesceRecord_ruleDescription" : { type:'click', evtid: '', topic: '成长值记录-规则说明', info: ''} ,
+	//产品咨询
+	"consultProduct_submit" : { type:'click', evtid: '', topic: '产品咨询-提交按钮', info: ''} ,
+	//月度报告详情页
+	"monthReportDetail_holdPositions" : { type:'click', evtid: '', topic: '月度报告详情页-月末持仓总览', info: ''} ,
+	"monthReportDetail_monthBusinessDetailed" : { type:'click', evtid: '', topic: '月度报告详情页-本月交易明细', info: ''} ,
+	"monthReportDetail_immediateInvestment" : { type:'click', evtid: '', topic: '月度报告详情页-立即投资按钮', info: ''} ,
+	"monthReportDetail_immediateAppointment" : { type:'click', evtid: '', topic: '月度报告详情页-立即预约按钮', info: ''} ,
+	"monthReportDetail_immediateConsultation" : { type:'click', evtid: '', topic: '月度报告详情页-立即咨询按钮', info: ''} ,
+	"monthReportDetail_immediateBuy" : { type:'click', evtid: '', topic: '月度报告详情页-立即购买按钮', info: ''} ,
+	//月度报告列表页
+	"monthReportList_rightArrow" : { type:'click', evtid: '', topic: '月度报告列表页-右箭头', info: ''} ,
+	//修改分红方式
+	"bonusMethod_bonusType" : { type:'click', evtid: '', topic: '修改分红方式', info: ''} ,
+	//历史明细（没按钮）
+	//登录日志查询（没按钮）
+	//公募监管账户
+	"regulatoryAccounts_copyName" : { type:'click', evtid: '', topic: '公墓监管账户-复制户名', info: ''} ,
+	"regulatoryAccounts_copyAccountNo" : { type:'click', evtid: '', topic: '公墓监管账户-复制账号', info: ''} ,
+	"regulatoryAccounts_copyBackNo" : { type:'click', evtid: '', topic: '公墓监管账户-复制行号', info: ''} ,
+	"regulatoryAccounts_copyOpeningBank" : { type:'click', evtid: '', topic: '公墓监管账户-复制开户行', info: ''} ,
+	//收益明细页面（没按钮）
+	//我的奖励页面
+	"rewards_viewDetails" : { type:'click', evtid: '', topic: '我的奖励-查看详情', info: ''} ,
+	//交易明细
+	"transactionDetails_privateDetailed" : { type:'click', evtid: '', topic: '交易明细-私募明细', info: ''} ,
+	"transactionDetails_publicOptional" : { type:'click', evtid: '', topic: '交易明细-公募自选', info: ''} ,
+	"transactionDetails_publicCombination" : { type:'click', evtid: '', topic: '交易明细-公募组合', info: ''} ,
+	"transactionDetails_publicIntellectual" : { type:'click', evtid: '', topic: '交易明细-公募智投', info: ''} ,
 
 	"privatePlacementDetail_information" : { type:'click', evtid: '', topic: '私募基金产品详情-基本信息', info: ''} ,
 	"privatePlacementDetail_notice" : { type:'click', evtid: '', topic: '私募基金产品详情-交易须知', info: ''} ,
@@ -229,10 +245,18 @@ var clickList = {
 	"fortune_studiesList" : { type:'click', evtid: '', topic: '财富研究列表', info: ''} ,
 	"fortune_studiesTab" : { type:'click', evtid: '', topic: '财富研究tab', info: ''} ,
 	//fortuneFlowKnown.html
-	"knownItem" : { type:'click', evtid: '', topic: '早知道列表', info: ''} ,
+	"fortune_knownItem" : { type:'click', evtid: '', topic: '早知道列表', info: ''} ,
 	//fortuneClassroom.html
-	"roomItem" : { type:'click', evtid: '', topic: '财富讲堂列表', info: ''} ,
-	"sliderTab" : { type:'click', evtid: '', topic: '财富讲堂详情tab', info: ''} 
+	"fortune_roomItem" : { type:'click', evtid: '', topic: '财富讲堂列表', info: ''} ,
+	"fortune_sliderTab" : { type:'click', evtid: '', topic: '财富讲堂详情tab', info: ''},
+	//wealthResearch.html
+	"fortune_wealthTab":{ type:'click', evtid: '', topic: '财富研究详情tab', info: ''} ,
+	//understandHT.html
+	"understandTab":{ type:'click', evtid: '', topic: '了解恒天tab', info: ''} ,
+	//noticeCenter.html
+	"notice_conterList":{ type:'click', evtid: '', topic: '消息中心', info: ''} ,
+	//systemInforms.html
+	"notice_systemList":{ type:'click', evtid: '', topic: '系统通知', info: ''} 
 }
 
 module.exports = clickList;

@@ -9,6 +9,9 @@ require('@pathIncludJs/base.js');
 require('@pathCommonJs/ajaxLoading.js');
 
 var splitUrl = require('@pathCommonJsCom/splitUrl.js')();
+var Base64 = require('@pathIncludJs/vendor/base64/base64.js');
+//黑色提示条的显示和隐藏
+var tipAction = require('@pathCommonJsCom/tipAction.js');
 
 var consultProduct = {
 	
@@ -20,34 +23,30 @@ var consultProduct = {
 	events: function(){  //绑定事件
 		var that = this;
 		mui("body").on('tap', '.submitBtn' , function(){
-			var empNo =  splitUrl['empNo']? splitUrl['empNo'] :'';
-			var empName =  splitUrl['empName']? splitUrl['empName'] :'';
-			var productName =  splitUrl['productName']? splitUrl['productName'] :'';
-
-			// that.getElements.productName = $(this).attr('productName');
+			var consultContent = $('.consultText').val();
+			var empNo =  splitUrl['empNo']==undefined ? splitUrl['empNo'] :'';
+			var empName =  splitUrl['empName']==undefined ? splitUrl['empName'] :'';
+			var productName =  new Base64().decode(splitUrl['productName']) ? new Base64().decode(splitUrl['productName']) :'';
 
 			var obj = [{
 				
 				url: site_url.reportContactNow_api,
 				data: {
-					hmac:"",
-					params:{
-						empNo: empNo,  //理顾工号
-						empName: empName,  // 理顾姓名
-						productName: productName,  // 产品名称
-					}
+					
+					empNo: empNo,  //理顾工号
+					empName: empName,  // 理顾姓名
+					productName: productName,  // 产品名称
+					content: consultContent,
 				},
 				needLogin: true, //需要判断登录情况
 				needDataEmpty: false,//不需要判断data是否为空
 				callbackDone: function(json){
-					// $(".contactNow").hide();
-					// $(".mask").hide();
-					// $(".btns .error-tip").html('');
-					// $('.btns .save').removeClass("btn_grey").attr('disabled',false);
+
+					window.location.href = new Base64().decode(splitUrl['backUrl']);
 				
 				},
 				callbackFail: function(json){
-					
+					tipAction(json.message);
 				},
 						
 			}]
