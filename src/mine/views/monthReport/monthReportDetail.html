@@ -306,7 +306,7 @@
 							</div>
 							{{!-- 私募 --}}
 							{{#if flag2}}
-								<a class="btn_order" href="javascript:;" htmdEvt="monthReportDetail_immediateAppointment">立即预约</a>
+								<a class="btn_order" href="/financial/views/privatePlacement/privatePlacementDetail.html?projectId={{productId}}:;" htmdEvt="monthReportDetail_immediateAppointment">立即预约</a>
 							{{/if}}
 							{{!-- 其他 --}}
 							{{#if flag1}}
@@ -314,7 +314,7 @@
 							{{/if}}
 							{{!-- 公募 --}}
 							{{#if flag3}}
-								<a class="btn_order publicBuy" href="javascript:;" htmdEvt="monthReportDetail_immediateBuy">立即购买</a>
+								<a class="btn_order publicBuy" href="/financial/views/publicPlacement/publicDetail.html?fundCode={{productId}}" htmdEvt="monthReportDetail_immediateBuy">立即购买</a>
 							{{/if}}
 						</li>
 					{{/each}}
