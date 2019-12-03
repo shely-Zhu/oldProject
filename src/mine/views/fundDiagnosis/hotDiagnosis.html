@@ -1,0 +1,105 @@
+<!--
+ * @Author: your name
+ * @Date: 2019-12-03 13:54:18
+ * @LastEditTime: 2019-12-03 14:07:16
+ * @LastEditors: Please set LastEditors
+ * @Description: In User Settings Edit
+ * @FilePath: \htjf-app\src\mine\views\fundDiagnosis\hotDiagnosis.html
+ -->
+<!-- /**  
+ * @Page:  基金诊断
+ * @Author: songxiaoyu  
+ * @Date:   2019-08-08 17:44:32  
+ * @Last Modified by:   songxiaoyu  
+ */ -->
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="applicable-device" content="mobile">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="stylesheet" href="/mine/fundDiagnosis/static/css/hotDiagnosis.css">
+    <title>基金诊断</title>
+</head>
+
+<body>
+    <section class="hotDiagnosis clearfix">
+        <div class="fixedWrap">
+            <!-- 搜索 -->
+            <div class="topSearch">
+                <div class="tip">
+                    <i class="mui-icon mui-icon-search"></i>
+                    <span>请输入基金代码/基金名称</span>
+                </div>
+                
+            </div>
+            <h2 class="h2_title">热门诊断</h2>
+        </div>
+        <!--热门诊断-->
+        <div class="hotFundList">
+            <div class="haveData list">
+                <div class="contentWrapper">
+                    <ul class="mui-table-view">
+                        <li class="mui-table-view-cell">
+                            <div class="card-theme">
+                                <!--放置热门列表-->
+                            </div>
+                        </li>
+                    </ul>
+                    <!-- 返回顶部 -->
+                    @@include('@pathCommonViews/goTop.html')
+                </div>
+            </div>
+            <!-- 没有数据 -->
+            @@include('@pathCommonViews/noData.html')
+            <!-- 加载中loading -->
+            @@include('@pathCommonViews/loading/listLoading.html')
+        </div>
+        <!-- 底部按钮 -->
+        <div class="mui-row btnBottom">
+            <div class="mui-col-xs-1">
+                <img class="imgBottom" src="/mine/fundDiagnosis/static/img/baogao.png">
+            </div>
+            <div class="mui-col-xs-10">
+                <p class="fontBold">点击获取专属诊断报告</p>
+            </div>
+            <div class="mui-col-xs-1 right">
+                <p class="jumpIcon iconfont"></p>
+            </div>
+        </div>
+    </section>
+    <script id="fundList-template" type="text/x-handlebars-template">
+    {{#each this}}
+        <div class="mui-row hd_to_detail">
+            <div class="mui-col-xs-1">
+                {{#if first}}
+                    <img class="imgNum" src="/mine/fundDiagnosis/static/img/first.png" >
+                {{else if second}}
+                    <img class="imgNum" src="/mine/fundDiagnosis/static/img/second.png" >
+                {{else if third}}
+                    <img class="imgNum" src="/mine/fundDiagnosis/static/img/third.png" >
+                {{else}}
+                    <p class="fontNum">{{serialNumber}}</p>
+                {{/if}}
+            </div>
+            <div class="mui-col-xs-10">
+                <p class="fontBold">{{fundName}}</p>
+                <p class="lightColor">{{fundCode}}</p>
+            </div>
+            <div class="mui-col-xs-1 right">
+                <p class="jumpIcon iconfont"></p>
+            </div>
+        </div>
+    {{/each}}
+    </script>
+    @@include('@pathInclude/views/footer.html')
+    <!-- 添加埋点 -->
+    @@include('@pathInclude/views/header.html')
+    <script src="/include/js/iscroll.js"></script>
+    <script src="/mine/fundDiagnosis/static/js/hotDiagnosis.js"></script>
+</body>
+
+</html>

@@ -27,7 +27,7 @@ var data = Mock.mock({
 				"voiceAttachName":'音频附件名称',
 				"titleFir":'一级标题',
 				"titleSec":'二级标题',
-				"imageUrlShowOnline": "www.baidu.com"//链接URL（跳转URL） 
+				"imageUrlShowOnline": "http://172.16.163.99:85/group2/M00/02/88/rBCjRF26j3-AaxveAAFKebrcAVE531.jpg"//链接URL（跳转URL） 
 			},
 			// { 
 			// 	"id": "2",//主键ID 

@@ -10,6 +10,7 @@ require('@pathCommonJs/ajaxLoading.js');
 // 切换
 require('@pathCommonJsCom/tabScroll.js');
 require('@pathCommonJsCom/goTopMui.js');
+require('@pathCommonCom/elasticLayer/elasticLayer/elasticLayer.js');
 
 //黑色提示条的显示和隐藏
 var tipAction = require('@pathCommonJsCom/tipAction.js');
@@ -81,6 +82,7 @@ $(function() {
 
                 that.gV.ajaxArr[i] = {
                     isConfirm: el.num, //请求类型
+                    businessType: null, //业务类型
                     pageNo: that.gV.aP.pageCurrent, //当前第几页(默认为1) 非必填项, 默认设置成第一页
                     pageSize: that.gV.aP.pageSize, //每页显示几条数据(默认10) 非必填项， 默认设置成20
                 }
@@ -88,12 +90,6 @@ $(function() {
                     id: i,
                     content: wrap_html
                 })
-                debugger
-                if (el.num == '1') {
-                    $('.hopper').show();
-                } else {
-                    $('.hopper').hide();
-                }
 
             })
 
@@ -107,6 +103,13 @@ $(function() {
                 callback: function(t) { //t返回的是 id 为 scroll1 / scroll2 这样的切换后当前区域中的节点
                     //data-scroll属性即当前左右切换区域的索引
                     var index = t.attr('data-scroll');
+
+                    //展示隐藏筛选按钮
+                    if (index == 1) {
+                        $('.hopper').show();
+                    } else {
+                        $('.hopper').hide();
+                    }
                     //data-scroll属性即当前左右切换区域的索引
                     that.gV.current_index = index;
 
@@ -229,7 +232,7 @@ $(function() {
                         //重设当前页码
                         if (!$.util.objIsEmpty(pageList)) {
                             //设置每个ajax传参数据中的当前页码
-                            that.gV.ajaxArr[that.gV.current_index].pageCurrent++;
+                            that.gV.ajaxArr[that.gV.current_index].pageNo++;
                         }
                     } else {
                         //没有数据
@@ -243,7 +246,7 @@ $(function() {
                         //that.gV.aP.pageSize  是  gV  里面设置的 
                         if (that.listLength < that.gV.aP.pageSize) {
 
-                            if (that.gV.ajaxArr[that.gV.current_index].pageCurrent == 1) {
+                            if (that.gV.ajaxArr[that.gV.current_index].pageNo == 1) {
                                 //第一页时
                                 if (that.listLength == 0) {
                                     //没有数据
@@ -284,7 +287,7 @@ $(function() {
                         }
 
                         $id.find('.contentWrapper .mui-pull-bottom-pocket').removeClass('mui-hidden');
-                        if (that.gV.ajaxArr[that.gV.current_index].pageCurrent == 1) {
+                        if (that.gV.ajaxArr[that.gV.current_index].pageNo == 1) {
                             //第一屏
                             $id.find('.contentWrapper .mui-table-view-cell').html(that.html);
                         } else {
@@ -386,7 +389,6 @@ $(function() {
             mui("body").on('tap', '.hopper', function(e) {
                     $('.mask').show();
                     $('.hopperCon').show();
-
                 })
                 //点击筛选数据
             mui("body").on('tap', '.hopperCon li', function(e) {
@@ -395,17 +397,90 @@ $(function() {
                     $('.hopperCon').hide();
                     that.gV.businessType = $(this).attr('data');
                     // 重置上拉加载
-                    mui('.contentWrapper').pullRefresh().refresh(true);
-                    that.gV.aP.pageNo = 1;
-                    that.getElements.contentWrap.html('');
+                    that.gV.ajaxArr[1].pageNo = 1;
+                    that.gV.ajaxArr[1].businessType = $(this).attr('data');
+                    // that.getElements.contentWrap.html('');
                     //重新初始化
-                    that.initMui();
-                    mui('.contentWrapper').pullRefresh().scrollTo(0, 0, 0);
+                    that.initMui($('#scroll2'));
+                    mui('#scroll2 .contentWrapper').pullRefresh().scrollTo(0, 0, 0);
                 })
                 // 点击遮罩隐藏
             mui("body").on('tap', '.mask', function(e) {
-                $('.mask').hide();
-                $('.hopperCon').hide();
+                    $('.mask').hide();
+                    $('.hopperCon').hide();
+                })
+                //取消受让、取消预约、取消转让
+            mui("body").on('tap', '.cancelBtn', function(e) {
+                    var type = $(this).attr('data-type');
+                    var id = $(this).attr('data-id');
+                    if (type == 'assign') { //转让
+                        var obj = {
+                            p: '<p>您确定要取消转让申请吗？</p>',
+                            yesTxt: '确认',
+                            celTxt: '取消',
+                            hideCelButton: false,
+                            zIndex: 100,
+                            callback: function(t) {
+
+                            },
+                        };
+                        $.elasticLayer(obj)
+
+                        // that.openTipCon('assign', '您确定要取消转让申请吗？', id);
+
+                    } else if (type == 'assignee')
+                        var obj = {
+                            p: '<p>您确定要取消受让申请吗？</p>',
+                            yesTxt: '确认',
+                            celTxt: '取消',
+                            hideCelButton: false,
+                            zIndex: 100,
+                            callback: function(t) {
+
+                            },
+                        };
+                    $.elasticLayer(obj)
+
+                })
+                // 点击我明白了
+            mui("body").on('tap', '.tipContainer .buttonOne', function(e) {
+                    $('.mask').hide();
+                    $('#tipConOne').hide();
+                    var conText = $(this).siblings('tipContent').html;
+                    that.openTipConOne(conText);
+
+                })
+                //点击状态文字出现弹框
+            mui("body").on('tap', '.openTip', function(e) {
+                    $('.mask').show();
+                    $('#tipConOne').show();
+                    var conText = $(this).siblings('tipContent').html;
+                    var obj = {
+                        p: '<p>' + conText + '</p>',
+                        yesTxt: '我明白了',
+                        hideCelButton: true,
+                        zIndex: 100,
+                        callback: function(t) {
+
+                        },
+                    };
+                    $.elasticLayer(obj);
+
+                })
+                //功能按钮
+            mui("body").on('tap', '.toDetail', function(e) {
+                var type = $(this).attr('type');
+                var id = $(this).attr('reserveId');
+                if (type == 'toCertif') { //去合格投资者认证
+
+                } else if (type == 'toSign') { //去签合同
+                    window.location.href = site_url.seeSign_url + '?reserveId=' + id;
+                } else if (type == 'toSee') { //查看合同
+
+                } else if (type == 'toUploadM') { //去上传汇款凭证
+
+                }
+
             })
         }
     };
