@@ -27,7 +27,7 @@ $(function () {
             //查询银行卡列表
             var that = this;
             var param = {
-                useEnv: 0
+                useEnv: 1
             };
 
             //发送ajax请求
@@ -37,16 +37,19 @@ $(function () {
                 needLogin: true,//需要判断是否登陆
                 //needDataEmpty: false,//不需要判断data是否为空
                 callbackDone: function (json) {  //成功后执行的函数
-
                     if (json.data.pageList.length) {
                         //获取银行卡后四位
                         Handlebars.registerHelper("get_last_4_value", function (value, options) {
-                            return value.substring(value.length - 4);
+                            if (value.length > 4){
+                                return ' - ' + value.substring(value.length - 4);
+                            }
+                            return '';
                         });
+                        json.data.pageList.unshift({'bankName': '全部', 'bankAccountMask': ''})
                         var tplm = $("#bankLists").html();
                         var template = Handlebars.compile(tplm);
                         var html = template(json.data.pageList);
-                        $("#bank_list_area").html(html);
+                        $("#bank_list").html(html);
                         //渲染模板后设置点击事件
                         that.bankEvents();
                     }
@@ -166,8 +169,7 @@ $(function () {
             //现金宝基金item的点击 进入持仓详情
             mui("body").on('tap', '#cashPageLists .hold_item', function (e) {
                 var index = $(this).index();
-                sessionStorage.setItem("cashFundDetail",JSON.stringify(that.gV.data.cashDetail[index])) 
-                window.location.href=site_url.superStreasureDetail_url;
+                window.location.href=site_url.superStreasureDetail_url + '?fundCode=' + that.gV.data.cashDetail[index].fundCode;
             })
             //点击持仓列表的感叹号 进入交易明细明细
             mui("body").on('tap', '.position_tip', function (e) {

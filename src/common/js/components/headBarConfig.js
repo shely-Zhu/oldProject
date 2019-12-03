@@ -103,10 +103,10 @@ $(function(){
     	}else{//负责显示默认的
     		$("#customerService").show();
     		//返回上一页
-		    $("#customerService").on("click",function(){
+		    //$("#customerService").on("click",function(){
 //		    	客服热线要跳转的链接
 //		        location.href= site_url.historyDetail_url;
-		    })
+		    // })
     	}
     }
     //返回上一页

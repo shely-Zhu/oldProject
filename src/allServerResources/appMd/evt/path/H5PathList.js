@@ -177,7 +177,32 @@ var pathList = {
     "/commonResources/fundDiagnosis/views/hotDiagnosis.html" :{ evtid: '167', topic: '基金诊断热门', info: ''} ,
     "/wealthResources/otherAssets/views/jjsAssets.html" :{ evtid: '168', topic: '其他资产', info: ''} ,
     "/personal/views/spAssetModel.html" :{ evtid: '169', topic: '标普资产', info: ''} ,
-    "/personal/views/assetAllocation.html" :{ evtid: '170', topic: '资产配置建议书', info: ''} ,
+	"/personal/views/assetAllocation.html" :{ evtid: '170', topic: '资产配置建议书', info: ''} ,
+	//mine文件夹
+	"/mine/views/activityEnrolment/activityEnrolment.html":{ evtid: '170', topic: '已报名活动', info: ''},
+	"/mine/views/concatUs/concatUsAdvise.html":{ evtid: '170', topic: '意见反馈', info: ''},
+	"/mine/views/membershipInterests/membershipDetails.html":{ evtid: '170', topic: '权益详情', info: ''},
+	"/mine/views/membershipInterests/membershipInterestsRecord.html":{ evtid: '170', topic: '成长值记录', info: ''},
+	"/mine/views/monthReport/consultProduct.html":{ evtid: '170', topic: '产品咨询', info: ''},
+	"/mine/views/monthReport/monthReportDetail.html":{ evtid: '170', topic: '月度报告详情页', info: ''},
+	"/mine/views/monthReport/monthReportList.html":{ evtid: '170', topic: '月度投资报告', info: ''},
+	"/mine/views/bonusMethod.html":{ evtid: '170', topic: '修改分红方式', info: ''},
+	"/mine/views/historyDetail.html":{ evtid: '170', topic: '历史明细', info: ''},
+	"/mine/views/journal.html":{ evtid: '170', topic: '登录日志查询', info: ''},
+	"/mine/views/regulatoryAccounts.html":{ evtid: '170', topic: '公募监管账户', info: ''},
+	"/mine/views/returnsDetail.html":{ evtid: '170', topic: '收益明细', info: ''},
+	"/mine/views/rewards.html":{ evtid: '170', topic: '我的奖励', info: ''},
+	"/mine/views/transactionDetails.html":{ evtid: '170', topic: '交易明细', info: ''},
+	//homePage
+	"/homePage/views/fortuneCollege/fortuneCollegeList.html" :{ evtid: '', topic: '财富学院首页', info: ''} ,
+	"/homePage/views/fortuneCollege/fortuneFlowKnown.html" :{ evtid: '', topic: '财富流向早知道', info: ''} ,
+	"/homePage/views/fortuneCollege/wealthResearch.html" :{ evtid: '', topic: '财富研究', info: ''} ,
+	"/homePage/views/fortuneCollege/fortuneClassroom.html" :{ evtid: '', topic: '财富讲堂', info: ''} ,
+	"/homePage/views/introduction/understandHT.html" :{ evtid: '', topic: '信息披露页面', info: ''} ,
+	"/homePage/views/notice/noticeCenter.html" :{ evtid: '', topic: '消息中心', info: ''} ,
+	"/homePage/views/notice/noticeDetail.html" :{ evtid: '', topic: '消息中心通知详情', info: ''} ,
+	"/homePage/views/notice/systemInforms.html" :{ evtid: '', topic: '消息中心系统通知', info: ''} ,
+	"/homePage/views/starFinancialPlannerList/starFinancialPlannerList.html" :{ evtid: '', topic: '明星理财师', info: ''} ,
 }
 
 

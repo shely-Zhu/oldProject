@@ -28,7 +28,7 @@ $(function(){
         init:function(){
             var that = this;
             $("#loading").hide()
-            that.getPdf();
+            // that.getPdf();
             that.events();
         },
         getPdf:function(){
@@ -84,7 +84,7 @@ $(function(){
                         '<p class="otherColor" id="changeMail">邮箱有变更，去修改</p>',
                     yesTxt:'确认',
                     celTxt:'取消',
-                    zIndex: 100,
+                    zIndex: 1200,
                     callback:function(t){
                         if(that.email){
                             var obj = [{
