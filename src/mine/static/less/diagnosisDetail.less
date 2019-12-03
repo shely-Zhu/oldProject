@@ -1,0 +1,285 @@
+//基金诊断页面
+
+
+@import url("@pathInclude/css/mui.min.css");
+@import url("@pathCommonLess/reset.less");
+@import url("@pathCommonLess/color.less");
+@import url("@pathCommonLess/mui/resetMUI.less");
+@import url("@pathCommonLess/components/againEnter.less");
+@import url("@pathCommonLess/components/elasticLayerTypeTwo.less");
+
+
+.diagnosisDetail {
+    font-family: Helvetica, Arial, "Microsoft YaHei";
+    //background-color: @f7f7f7;
+
+    // 公共
+    .right {
+        text-align: right;
+    }
+
+    .dd_center {
+        text-align: center;
+    }
+
+    .dd_fr {
+        float: right;
+    }
+
+    .dd_card {
+        background: @c005;
+        padding: 1.7rem;
+        margin-top: 0.9rem;
+
+        .dd_h3 {
+            font-size: 1.4rem;
+            color: @3c3c3c;
+            margin-bottom: 2.4rem;
+
+            .dd_h3_text {
+                font-weight: bold;
+            }
+
+            .dd_icon {
+                width: 1.4rem;
+                height: 1.4rem;
+                position: relative;
+
+                &:after {
+                    position: absolute;
+                    content: '\e649';
+                    font-size: 2rem;
+                    right: 0;
+                    color: @dbc69a;
+                }
+            }
+
+            .dd_small {
+                font-size: 0.9rem;
+                color: @878787;
+                margin-left: 0.9rem;
+
+                i {
+                    margin-left: 0.5rem;
+                }
+            }
+
+        }
+
+
+    }
+
+    // 顶部
+    .dd_top {
+        min-height: 13.8rem;
+        padding: 1.7rem 1.7rem 1.4rem 1.7rem;
+        background: @f75348;
+        color: @c005;
+        
+        .dd_name {
+            font-weight: bold;
+            font-size: 1.4rem;
+        }
+
+        .dd_tag_wrap {
+            margin-top: 0.7rem;
+            margin-bottom: 2.8rem;
+
+            .dd_tag {
+                display: inline-block;
+                padding: 0rem 0.5rem 0.1rem;
+                height: 1.8rem;
+                line-height:1.7rem;
+                font-size: 1rem;
+                margin-right: 0.4rem;
+                border: 1px solid rgba(255,255,255,.5);
+                margin-bottom: 0.5rem;
+            }
+
+        }
+
+        .dd_value {
+            color: @c005;
+            font-size: 1.7rem;
+            margin-bottom: 0.3rem;
+            font-weight: bold;
+        }
+
+        .dd_text {
+            color: @c005;
+            opacity: 0.7;
+            font-size: 1rem;
+            line-height: 1.2rem;
+        }
+    }
+
+    // 综合评分
+    .dd_score {
+        .dd_choice_1 {
+            font-size: 1.2rem;
+            color: @4d3a12;
+            margin-bottom: 1.9rem;
+
+            .mui-col-xs-3.active {
+
+                span {
+                    position: relative;
+
+                    &:after {
+                        height: 0.2rem;
+                        width: 100%;
+                        border-radius: 0.1rem;
+                        background: @fe4829;
+                        position: absolute;
+                        content: '';
+                        left: 0;
+                        bottom: -0.5rem;
+                    }
+
+                }
+
+
+            }
+        }
+
+        // 雷达图
+        .dd_radar {
+            width: 100%;
+            height:22rem;
+            line-height: 19.5rem;
+            text-align: center;
+        }
+        .NoDataRada{
+            display: none;
+        }
+    }
+
+
+    // 折线图
+    .dd_income {
+        .dd_line {
+            width: 100%;
+            height: 25rem;
+            overflow: hidden;
+        }
+        .dd_lineNodata {
+            width: 100%;
+            height: 25rem;
+            overflow: hidden;
+            display:none;
+            text-align: center;
+            line-height: 25rem;
+            font-size: 1.2rem;
+        }
+
+        .dd_choice_2 {
+            width: 27.2rem;
+            height: 2.2rem;
+            line-height: 2.2rem;
+            border: 1px solid @868e9e;
+            border-radius: 11rem;
+            color: @878787;
+            margin: 0 auto;
+            overflow: hidden;
+
+            span {
+                width: 8.9rem;
+                text-align: center;
+                display: inline-block;
+                border-right: 1px solid @868e9e;
+                float: left;
+
+
+                &:last-child {
+                    border-right: none;
+                }
+
+                &.active {
+                    background: @fcfaf5;
+                    color: @2a2315;
+                }
+            }
+        }
+
+        .dd_rate_text{
+            margin-bottom: 0.5rem;
+        }
+
+
+    }
+
+    // 收益曲线
+    .dd_income {
+        font-size: 0.9rem;
+
+        .dd_font_10 {
+            font-size: 1rem;
+        }
+
+        .dd_legend {
+            text-align: right;
+            margin-left: 2rem;
+            float: right;
+            position: relative;
+
+            &:before {
+                width: 0.9rem;
+                height: 0.9rem;
+                content: '';
+                background-color: @fb685c;
+                position: absolute;
+                top: 0.3rem;
+                left: -1.5rem;
+            }
+        }
+
+        .dd_red {
+            &:before {}
+        }
+
+        .dd_yellow {
+            &:before {
+                background: @ffc363,
+            }
+        }
+
+        .dd_blue {
+            &:before {
+                background: @60b0e0;
+            }
+        }
+    }
+
+    // 底部
+    .dd_bottom {
+        margin-top: 1.3rem;
+        margin-bottom: 1.7rem;
+        font-size: 0.9rem;
+        color: @878787;
+
+        .m1 {
+            margin-bottom: 1rem;
+        }
+
+        .dd_t1 {
+            color: @b1b0b0;
+        }
+
+    }
+
+}
+.elasticWrapper{
+    min-height: 100px;
+    .elasticMid{
+        margin-top: 15px;
+    }
+    p{
+        line-height: 20px;
+        padding-left: 10px;
+        padding-right: 10px;
+    }
+    .elasticButtons{
+        margin-bottom: 10px;
+        margin-top: 10px;
+    }
+}

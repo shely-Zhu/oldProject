@@ -1,0 +1,323 @@
+//基金诊断页面,基金诊断搜索页
+//引入mui
+
+@import url("@pathInclude/css/mui.min.css");
+@import url("@pathInclude/css/mui.picker.all.css");
+@import url("@pathInclude/css/mui.picker.css");
+@import url("@pathInclude/css/mui.poppicker.css");
+
+@import url("@pathCommonLess/reset.less");
+@import url("@pathCommonLess/color.less");
+
+//引入重置mui样式的表单样式文件
+//@import url("../../../common/less/mui/formMUI.less");
+@import url('@pathCommonLess/mui/resetMUI.less');
+//引入重置mui下拉列表样式文件
+@import url("@pathCommonLess/mui/selectMUI.less");
+@import url("@pathCommonLess/components/againEnter.less");
+
+//重置MUI的poppicker样式
+@import url("@pathCommonLess/mui/resetMuiPop.less");
+
+@import url("@pathCommonLessCom/headBarConfig.less");
+
+@import url('@pathCommonCom/elasticLayer/transOutRule/transOutRule.less');
+@import url("@pathCommonLessCom/payPassword.less");
+
+html,
+body {
+    height: 100%;
+    .container{
+        width: 100%;
+        height:100%;
+        
+        padding-bottom: 1rem;
+        .HeadBarConfigBox{
+            #HeadBarpathName{
+                display:block !important;
+            }
+        }
+        .content{
+            background-color: @F7FAFD;
+            .content-item{
+                padding:.3rem;
+                margin-bottom: .3rem;
+                background-color: @c005;
+                .title-box{
+                    height: 1.04rem;
+                    line-height: 1.04rem;
+                    overflow: hidden;
+                    .title{
+                        float: left;
+                        font-size:.4rem;
+                        font-weight: 600;
+                        color:@c009;
+                    }
+                    .more-data{
+                        float: right;
+                        font-size:.22rem;
+                        color:@c001;
+                        .down{
+                            background: url("../img/down.png") 0 0 no-repeat;
+                            background-size:100%;
+                            width: 0.22rem;
+                            height: 0.13rem;
+                            display: inline-block;
+                            margin-left:0.1rem;
+                        }
+                        .up{
+                            transform: rotate(180deg);
+                            transform-origin: center;
+                        }
+                    }
+                    
+                }
+            }
+            .account-holdings{
+                .title-box{
+                    height: 1.04rem;
+                    line-height: 1.04rem;
+                    overflow: hidden;
+                    .title{
+                        float: left;
+                        font-size:.4rem;
+                        font-weight: 600;
+                        color:@c009;
+                    }
+                    .more-data{
+                        float: right;
+                        font-size:.22rem;
+                        color:@c001;
+                        .down{
+                            background: url("../img/down.png") 0 0 no-repeat;
+                            background-size:100%;
+                            width: 0.22rem;
+                            height: 0.13rem;
+                            display: inline-block;
+                            margin-left:0.1rem;
+                        }
+                        .up{
+                            transform: rotate(180deg);
+                        }
+                    }
+                    
+                }
+                #holdingBox{
+                    .holding-item{
+                        position: relative;
+                        padding:.3rem;
+                        background-color:#fdf8f3;
+                        border-radius: .12rem;
+                        margin-bottom: .2rem;
+                        .founName.item{
+                            p{
+                                font-size:.22rem;
+                                color:@c001;
+                                height: .32rem;
+                                line-height: .32rem;
+                            }
+                            .name{
+                                font-size:.3rem;
+                                font-weight: 600;
+                                color:@c009;
+                                height: .39rem;
+                                line-height: .39rem;
+                            }
+                        }
+                        .bottom-content{
+                            margin-top:0.3rem;
+                            font-size:0;
+                            .item{
+                                display: inline-block;
+                                width:50%;
+                                p{
+                                    font-size:.22rem;
+                                    color:@c001;
+                                    height: .32rem;
+                                    line-height: .32rem;
+                                }
+                                .name{
+                                    color:@c009;
+                                    // height: .39rem;
+                                    // line-height: .39rem;
+                                }
+                            }
+                        }
+                        .top-right{
+                            position: absolute;
+                            right:0;
+                            top:0;
+                            width: 2rem;
+                            height:.36rem ;
+                            background-color:#ffeacd;
+                            border-bottom-left-radius: .36rem;
+                            border-top-right-radius:.12rem;
+                            // border-bottom-left-radius:.12rem;
+                            p{
+                                text-align: center;
+                                height:.36rem ;
+                                line-height:0.36rem;
+                                color:#714a1d;
+                            }
+                        }
+                    }
+                    
+
+                }
+            }
+            #allocation-pie{
+                width: 100%;
+                height: 4rem;
+            }
+            #assets-box{
+                width: 100%;
+                height: 1.83rem;
+                font-size:0;
+                .assets-item{
+                    display: inline-block;
+                    // width: 25%;
+                    p.leng{
+                        height: .22rem;
+                        line-height: .22rem;
+                        .point{
+                            width: .07rem;
+                            height:.07rem; 
+                            display: inline-block;
+                            border-radius: 50%;
+                            background-color:red;
+                            vertical-align: middle;
+                        }
+                        .num{
+                            display: inline-block;
+                            font-size:.22rem;
+                            font-weight: 600;
+                            color:@c002;
+                            vertical-align: middle;
+                            margin-left:0.02rem;
+                        }
+                    }
+                    p.name{
+                        height: .5rem;
+                        line-height: .5rem;
+                        font-size:.22rem;
+                        color:@c002;
+                    }
+                    p.shape{
+                        height:.4rem;
+                        background-color:red;
+                    }
+                }
+                .assets-item:first-child{
+                    p.shape{
+                        border-top-left-radius: .2rem;
+                        border-bottom-left-radius: .2rem;
+                    }
+                }
+                .assets-item:last-child{
+                    p.shape{
+                        border-top-right-radius: .2rem;
+                        border-bottom-right-radius: .2rem;
+                    }
+                }
+            }
+
+            #heavy-warehouse-box{
+                width:100%;
+                height:4.65rem ;
+            }
+            .annotation{
+                font-size:0.22rem;
+                height: .22rem;
+                line-height: .22rem;
+                color:@c009;
+            }
+            .account-style{
+                #account-style-box{
+                    padding:0 1.1rem;
+                    padding-bottom:0.5rem;
+                    .scratchable-latex{
+                        width: 4.7rem;
+                        height: 4.7rem;
+                        position: relative;
+                        display: flex;
+                        flex-wrap: wrap;
+                        .scratchable-item{
+                            flex-grow: 1; /* 子元素按1/n的比例进行拉伸 */
+                            background-color: #336699;
+                            text-align: center;
+                            color: #fff;
+                            margin-right: .085rem;
+                            margin-bottom: .085rem;
+                            // font-size: 50px;
+                            height:1.51rem ;
+                            font-size:.25rem;
+                            width: 1.51rem;
+                        }
+                        .scratchable-item:nth-of-type(3n){ /* 选择个数是3的倍数的元素 */
+                            margin-right: 0;
+                          }
+                         .scratchable-item:nth-of-type(n+7){  /* 选择倒数的三个元素，n可以取0 */
+                            margin-bottom: 0;
+                          }
+                          
+                    }
+                    .scratchable-left{
+                        width:0.67rem;
+                        height: 1.51rem;
+                        line-height: 1.51rem;
+                        position: absolute;
+                        color:@c009;
+                        font-weight: 600;
+                        font-size:.22rem ;
+                        text-align: center;
+                    }
+                    .scratchable1{
+                        top:0;
+                        right:-0.67rem;
+                    }
+                    .scratchable2{
+                        top:1.51rem;
+                        right:-0.67rem;
+                    }
+                    .scratchable3{
+                        top:3.19rem;
+                        right:-0.67rem;
+                    }
+                    .scratchable-bottom{
+                        width:1.51rem;
+                        height:.53rem ;
+                        line-height: .53rem;
+                        position: absolute;
+                        color:@c009;
+                        font-weight: 600;
+                        font-size:.22rem ;
+                        text-align: center;
+                    }
+                    .scratchable4{
+                        bottom:-.53rem;
+                        right:0;
+                    }
+                    .scratchable5{
+                        bottom:-.53rem;
+                        right:1.595rem;
+                    }
+                    .scratchable6{
+                        bottom:-.53rem;
+                        left:0;
+                    }
+                }
+            }
+            .diagnosis{
+                #diagnosis-box{
+                    padding:.23rem .28rem;
+                    background-color:#fff8ef;
+                    line-height: .4rem;
+                    color:@c009;
+                    border-radius: 0.08rem;
+                }
+            }
+            
+        }
+    }
+}
+
