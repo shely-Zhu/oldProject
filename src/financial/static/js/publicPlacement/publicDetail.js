@@ -106,7 +106,7 @@ $(function () {
                             $(v).addClass('value_green')
                         }
                     });
-                    $("#HeadBarpathName").html(that.gV.json.secuSht);
+                    $("#HeadBarpathName").html(that.gV.json.secuSht +"("+that.gV.json.secuId+")");
                 },
                 callbackFail: function (json) {
                     tipAction(json.msg);
@@ -313,6 +313,13 @@ $(function () {
                         }
                     })
                     json.fundType = that.fundType
+                    var newPageList = [];
+                    for(var i =0;i<json.pageList.length;i++){
+                        if(i<=3){
+                            newPageList.push(json.pageList[i])
+                        }
+                    };
+                    json.pageList = newPageList;
                     var html = template(json);
                     $(".tplBox1").html(html);
                     $.each($(".history_item .value"), function (i, v) {
