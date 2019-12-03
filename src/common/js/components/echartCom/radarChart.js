@@ -86,13 +86,13 @@ module.exports = function(echartData, $e) {
                 name: {
                     rich: {
                         a: {
-                            color: 'red',
-                            lineHeight: 20
+                            color: '#9F733F',
+                            lineHeight: 20,
                         },
                         b: {
-                            color: '#fff',
+                            color: '#9F733F',
                             align: 'center',
-                            backgroundColor: '#666',
+                            backgroundColor: '#fff',
                             padding: 2,
                             borderRadius: 4
                         }

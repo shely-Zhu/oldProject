@@ -1,7 +1,7 @@
 //  财富学院
 // @author yanruiting 2019-11-26 
 
-require('@pathIncludJs/base.js');
+require('@pathCommonBase/base.js');
 require('@pathCommonJsCom/utils.js');
 //ajax调用
 require('@pathCommonJs/ajaxLoading.js');

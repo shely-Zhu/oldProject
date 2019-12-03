@@ -116,7 +116,7 @@ module.exports = [
         params: {
             'articleBelong' : '1'   //要在左边的对比参数上加[]，不然比对不上 稳金
         },
-        response: liveData
+        response: noData
     },
     {
         params: {

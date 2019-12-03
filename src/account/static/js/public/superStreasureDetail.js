@@ -4,7 +4,7 @@
 */
 
 
-require('@pathIncludJs/base.js');
+require('@pathCommonBase/base.js');
 
 require('@pathCommonJs/components/headBarConfig.js');
 require('@pathCommonJs/ajaxLoading.js');
