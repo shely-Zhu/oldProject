@@ -83,7 +83,7 @@ $(function() {
                 that.gV.ajaxArr[i] = {
                     isConfirm: el.num, //请求类型
                     businessType: null, //业务类型
-                    pageNo: that.gV.aP.pageCurrent, //当前第几页(默认为1) 非必填项, 默认设置成第一页
+                    pageNum: that.gV.aP.pageCurrent, //当前第几页(默认为1) 非必填项, 默认设置成第一页
                     pageSize: that.gV.aP.pageSize, //每页显示几条数据(默认10) 非必填项， 默认设置成20
                 }
                 contentArr.push({
@@ -232,7 +232,7 @@ $(function() {
                         //重设当前页码
                         if (!$.util.objIsEmpty(pageList)) {
                             //设置每个ajax传参数据中的当前页码
-                            that.gV.ajaxArr[that.gV.current_index].pageNo++;
+                            that.gV.ajaxArr[that.gV.current_index].pageNum++;
                         }
                     } else {
                         //没有数据
@@ -246,7 +246,7 @@ $(function() {
                         //that.gV.aP.pageSize  是  gV  里面设置的 
                         if (that.listLength < that.gV.aP.pageSize) {
 
-                            if (that.gV.ajaxArr[that.gV.current_index].pageNo == 1) {
+                            if (that.gV.ajaxArr[that.gV.current_index].pageNum == 1) {
                                 //第一页时
                                 if (that.listLength == 0) {
                                     //没有数据
@@ -287,7 +287,7 @@ $(function() {
                         }
 
                         $id.find('.contentWrapper .mui-pull-bottom-pocket').removeClass('mui-hidden');
-                        if (that.gV.ajaxArr[that.gV.current_index].pageNo == 1) {
+                        if (that.gV.ajaxArr[that.gV.current_index].pageNum == 1) {
                             //第一屏
                             $id.find('.contentWrapper .mui-table-view-cell').html(that.html);
                         } else {
@@ -397,7 +397,7 @@ $(function() {
                     $('.hopperCon').hide();
                     that.gV.businessType = $(this).attr('data');
                     // 重置上拉加载
-                    that.gV.ajaxArr[1].pageNo = 1;
+                    that.gV.ajaxArr[1].pageNum = 1;
                     that.gV.ajaxArr[1].businessType = $(this).attr('data');
                     // that.getElements.contentWrap.html('');
                     //重新初始化
