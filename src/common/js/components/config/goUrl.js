@@ -383,8 +383,8 @@ module.exports = function () {
     //私募产品详情
     this.privatePlacementDetail_url = go_url.no_url + '/financial/views/privatePlacement/privatePlacementDetail.html';
 
-    // 基金详情
-    this.pofPublicDetail_url = go_url.no_url + '/account/views/public/publicDetail.html';
+    // 公募基金详情
+    this.pofPublicDetail_url = go_url.no_url + '/financial/views/publicPlacement/publicDetail.html';
 
     // 买入结果页面，基金买入结果
     this.pofSurelyResultsDetail_url = go_url.no_url + '/financial/views/publicPlacement/surelyResultsDetail.html';
@@ -461,7 +461,8 @@ module.exports = function () {
     this.fortuneClassroom_url = go_url.no_url + '/homePage/views/fortuneCollege/fortuneClassroom.html';
     //财富研究
     this.wealthResearch_url = go_url.no_url + '/homePage/views/fortuneCollege/wealthResearch.html';
+    
 
-    //
+    //定投排行榜  原生
     this.investmentPlanRanking_url = go_url.no_url +  '/financial/views/publicPlacement/investmentPlanRanking.html'
 };

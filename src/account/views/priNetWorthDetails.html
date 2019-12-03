@@ -13,7 +13,7 @@
     <body>
 
         <!--没有数据显示图标-->
-        @@include('@pathCommonViews/noDataImg.html')
+        <!-- @@include('@pathCommonViews/noDataImg.html') -->
         <!--列表加载显示图标-->
         @@include('@pathCommonCom/loading/listLoading.html')
         <!--公共页面头部-->
@@ -46,7 +46,7 @@
         </script>
         <!-- <p class="footer">暂无更多内容</p> -->
         <div class="noDataMore">
-           @@include('@pathCommonViews/noDataImg.html')
+           @@include('@pathCommonViews/noDataImg.html',{"tipText":"暂无数据"})
         </div>
     
         @@include('@pathInclude/views/footer.html')
