@@ -7,3 +7,5 @@ require('@pathIncludJs/vendor/zepto/deferred.js');
 require('@pathIncludJs/vendor/config.js');
 
 require('@pathCommonJs/components/headBarConfig.js');
+
+require('@pathCommonJs/components/setGoUrl.js'); 

@@ -14,7 +14,7 @@
 		min = false,
 		ssoDomain = "";
 	if( window.env == '0'){
-		mdDomain = "http://localhost:4000";
+		mdDomain = "http://localhost:9099";
 		ssoDomain = 'localhost:8008';
 	}
 	else if(window.env == '2' || window.env == '2_b' || window.env == '1' || window.env == '5'){
@@ -44,81 +44,102 @@
 	
 		k.onload = k.onreadystatechange = function(){
 		   	if( !this.readyState || this.readyState=='loaded' || this.readyState=='complete'){
-		   		//金服pc端需要的除底层文件中写的其他参数
-				var pcParam = {
-					cn: '', //客户编号（sso接口返回，前端保存到cookie中）
-				}
-		   		var tmType = "";
-   		        if(window.location.href.indexOf('/user/views/register.html') != -1) {
-					tmType = "wap";
-					$.ajax({
-                    	contentType:'application/json; charset=UTF-8',
-                        type: "GET",
-                        url:ssoDomain + '/checkUserInfo.action',
-                        dataType:"jsonp",
-                        async: false,
-                        jsonp: "callback",
-                        crossDomain: true,
-                        //这段代码不能注释，否则跨域时cookie带不过去
-                        xhrFields: {
-                            withCredentials: window.env != 0 ? true : false
-                        },
-                        headers: {
-                            "X-Requested-With": 'XMLHttpRequest',
-                        },
-                        success: function(json){
+		   		
 
-                            pcParam.cn = json.data && json.data.customerNo ? json.data.customerNo : '';
-                            var mdObj = {
-					   			pf: 1, //pf参数，表示当前项目
-					   			type: tmType,  //pc/app/wap
-				 	   			envMd: window.env, //当前环境变量
-					   			mdPathList : mdPathList ,  //页面路径对应id配置，用于页面进入离开的埋点请求
-					   			mdClickList: mdClickList,  //点击事件的id配置，用于点击事件时的埋点请求
-					   			mdInfo: mdInfo, //点击事件时，某些需要额外的参数是其他页面没有的，在这里单独获取并添加到evt的info里
-					   			//除了埋点底层文件中配置的公用参数外，本项目埋点需要的其他参数，作为otherParam传过去，如没有可不传
-			        	   		otherParams: pcParam
-					   		}
+                var mdObj = {
+		   			pf: 1, //pf参数，表示当前项目
+		   			type: "app",  //pc/app/wap
+	 	   			envMd: window.env, //当前环境变量
+		   			mdPathList : mdPathList ,  //页面路径对应id配置，用于页面进入离开的埋点请求
+		   			mdClickList: mdClickList,  //点击事件的id配置，用于点击事件时的埋点请求
+		   			mdInfo: mdInfo, //点击事件时，某些需要额外的参数是其他页面没有的，在这里单独获取并添加到evt的info里
+		   			//除了埋点底层文件中配置的公用参数外，本项目埋点需要的其他参数，作为otherParam传过去，如没有可不传
+        	   		// otherParams: pcParam
+		   		}
+		
+				window._htmd(mdObj);
+
+
+
+
+
+
+
+		   		//金服pc端需要的除底层文件中写的其他参数
+				// var pcParam = {
+				// 	cn: '', //客户编号（sso接口返回，前端保存到cookie中）
+				// }
+		  //  		var tmType = "";
+   	// 	        if(window.location.href.indexOf('/user/views/register.html') != -1) {
+				// 	tmType = "wap";
+				// 	$.ajax({
+    //                 	contentType:'application/json; charset=UTF-8',
+    //                     type: "GET",
+    //                     url:ssoDomain + '/checkUserInfo.action',
+    //                     dataType:"jsonp",
+    //                     async: false,
+    //                     jsonp: "callback",
+    //                     crossDomain: true,
+    //                     //这段代码不能注释，否则跨域时cookie带不过去
+    //                     xhrFields: {
+    //                         withCredentials: window.env != 0 ? true : false
+    //                     },
+    //                     headers: {
+    //                         "X-Requested-With": 'XMLHttpRequest',
+    //                     },
+    //                     success: function(json){
+
+    //                         pcParam.cn = json.data && json.data.customerNo ? json.data.customerNo : '';
+    //                         var mdObj = {
+				// 	   			pf: 1, //pf参数，表示当前项目
+				// 	   			type: tmType,  //pc/app/wap
+				//  	   			envMd: window.env, //当前环境变量
+				// 	   			mdPathList : mdPathList ,  //页面路径对应id配置，用于页面进入离开的埋点请求
+				// 	   			mdClickList: mdClickList,  //点击事件的id配置，用于点击事件时的埋点请求
+				// 	   			mdInfo: mdInfo, //点击事件时，某些需要额外的参数是其他页面没有的，在这里单独获取并添加到evt的info里
+				// 	   			//除了埋点底层文件中配置的公用参数外，本项目埋点需要的其他参数，作为otherParam传过去，如没有可不传
+			 //        	   		otherParams: pcParam
+				// 	   		}
 		   		
-		   					window._htmd(mdObj);
+		  //  					window._htmd(mdObj);
                             
-                        },
-                        fail: function(json){
-                            pcParam.cn = '';
-                            var mdObj = {
-					   			pf: 1, //pf参数，表示当前项目
-					   			type: tmType,  //pc/app/wap
-				 	   			envMd: window.env, //当前环境变量
-					   			mdPathList : mdPathList ,  //页面路径对应id配置，用于页面进入离开的埋点请求
-					   			mdClickList: mdClickList,  //点击事件的id配置，用于点击事件时的埋点请求
-					   			mdInfo: mdInfo, //点击事件时，某些需要额外的参数是其他页面没有的，在这里单独获取并添加到evt的info里
-					   			//除了埋点底层文件中配置的公用参数外，本项目埋点需要的其他参数，作为otherParam传过去，如没有可不传
-			        	   		otherParams: pcParam
-					   		}
+    //                     },
+    //                     fail: function(json){
+    //                         pcParam.cn = '';
+    //                         var mdObj = {
+				// 	   			pf: 1, //pf参数，表示当前项目
+				// 	   			type: tmType,  //pc/app/wap
+				//  	   			envMd: window.env, //当前环境变量
+				// 	   			mdPathList : mdPathList ,  //页面路径对应id配置，用于页面进入离开的埋点请求
+				// 	   			mdClickList: mdClickList,  //点击事件的id配置，用于点击事件时的埋点请求
+				// 	   			mdInfo: mdInfo, //点击事件时，某些需要额外的参数是其他页面没有的，在这里单独获取并添加到evt的info里
+				// 	   			//除了埋点底层文件中配置的公用参数外，本项目埋点需要的其他参数，作为otherParam传过去，如没有可不传
+			 //        	   		otherParams: pcParam
+				// 	   		}
 		   		
-		   					window._htmd(mdObj);
+		  //  					window._htmd(mdObj);
                             
-                        }
-                    });
+    //                     }
+    //                 });
 					
 					
-	   			} else if(window.location.href.indexOf('appId') != -1) {
-	   				tmType = "app";
-	   				pcParam.cn = splitUrl['cn'] ? splitUrl['cn'] : '';
-	   				var mdObj = {
-			   			pf: 1, //pf参数，表示当前项目
-			   			type: tmType,  //pc/app/wap
-		 	   			envMd: window.env, //当前环境变量
-			   			mdPathList : mdPathList ,  //页面路径对应id配置，用于页面进入离开的埋点请求
-			   			mdClickList: mdClickList,  //点击事件的id配置，用于点击事件时的埋点请求
-			   			mdInfo: mdInfo, //点击事件时，某些需要额外的参数是其他页面没有的，在这里单独获取并添加到evt的info里
-			   			//除了埋点底层文件中配置的公用参数外，本项目埋点需要的其他参数，作为otherParam传过去，如没有可不传
-	        	   		otherParams: pcParam
-			   		}
+	   // 			} else if(window.location.href.indexOf('appId') != -1) {
+	   // 				tmType = "app";
+	   // 				pcParam.cn = splitUrl['cn'] ? splitUrl['cn'] : '';
+	   // 				var mdObj = {
+			 //   			pf: 1, //pf参数，表示当前项目
+			 //   			type: tmType,  //pc/app/wap
+		 	//    			envMd: window.env, //当前环境变量
+			 //   			mdPathList : mdPathList ,  //页面路径对应id配置，用于页面进入离开的埋点请求
+			 //   			mdClickList: mdClickList,  //点击事件的id配置，用于点击事件时的埋点请求
+			 //   			mdInfo: mdInfo, //点击事件时，某些需要额外的参数是其他页面没有的，在这里单独获取并添加到evt的info里
+			 //   			//除了埋点底层文件中配置的公用参数外，本项目埋点需要的其他参数，作为otherParam传过去，如没有可不传
+	   //      	   		otherParams: pcParam
+			 //   		}
 		   		
-		   			window._htmd(mdObj);
+		  //  			window._htmd(mdObj);
 	   				
-	   			}  
+	   // 			}  
 
 	
 

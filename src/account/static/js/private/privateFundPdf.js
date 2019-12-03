@@ -5,7 +5,7 @@
  * @Last Modified time: 2019-11-28 18:18:54
  */
 
-require('@pathIncludJs/base.js');
+require('@pathCommonBase/base.js');
 
 //ajax调用
 require('@pathCommonJs/ajaxLoading.js');
