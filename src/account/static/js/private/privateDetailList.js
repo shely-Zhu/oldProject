@@ -1,5 +1,5 @@
-//  超宝-交易记录
-// @author wangjiajia 2019-11-20 
+//  私募交易详情-待确认交易，已确认交易
+// @author peicongcong 2019-12-02
 
 require('@pathCommonBase/base.js');
 require('@pathCommonJsCom/utils.js');
