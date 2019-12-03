@@ -193,7 +193,7 @@ var clickList = {
 	"transactionDetails_publicOptional" : { type:'click', evtid: '', topic: '交易明细-公募自选', info: ''} ,
 	"transactionDetails_publicCombination" : { type:'click', evtid: '', topic: '交易明细-公募组合', info: ''} ,
 	"transactionDetails_publicIntellectual" : { type:'click', evtid: '', topic: '交易明细-公募智投', info: ''} ,
-
+/**************************************************************mine文件夹结束*****************************************************************************************/ 
 	"privatePlacementDetail_information" : { type:'click', evtid: '', topic: '私募基金产品详情-基本信息', info: ''} ,
 	"privatePlacementDetail_notice" : { type:'click', evtid: '', topic: '私募基金产品详情-交易须知', info: ''} ,
 	"privatePlacementDetail_science" : { type:'click', evtid: '', topic: '私募基金产品详情-产品材料', info: ''} ,

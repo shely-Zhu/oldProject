@@ -25,16 +25,16 @@ $(function() {
 		events: function() {
             let that = this;
             mui("body").on('tap','.wrap li',function(e){
-                  var numAtr = $(this).attr('num');
-                  if(numAtr == 1){
-                        window.location.href=site_url.privateDetailList_url
-                  }else if(numAtr == 2){
-                        window.location.href=site_url.transactionRecords_url
-                  }else if(numAtr == 3){
-                        window.location.href=site_url.publicTransactionDetails_url
-                  }else if(numAtr == 4){
-                        window.location.href=site_url.transactionList_url
-                  }           
+				var numAtr = $(this).attr('num');
+				if(numAtr == 1){
+					window.location.href=site_url.privateDetailList_url
+				}else if(numAtr == 2){
+					window.location.href=site_url.transactionRecords_url
+				}else if(numAtr == 3){
+					window.location.href=site_url.publicTransactionDetails_url
+				}else if(numAtr == 4){
+					window.location.href=site_url.transactionList_url
+				}           
             })
 		}
 	};
