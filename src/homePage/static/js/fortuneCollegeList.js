@@ -141,6 +141,10 @@ var productPublic = {
               generateTemplate(modelData,$('.forum .title'),$('#forum-template'));     
               generateTemplate(listTitle,$('.broadcast'),$('#forumTitle'));
               generateTemplate(listContent,$('.forumList'),$('#forumContent'));	
+              setTimeout(()=>{
+                $('.broadcast').find('.bigspan').eq(0).addClass('getColor');
+                $('.broadcast').find('.bigspan').eq(0).css({"paddingLeft":0,"borderLeft":'none'});
+              },100)
               mui('.mui-scroll-wrapper').scroll({
                 deceleration: 0.0005 //flick 减速系数，系数越大，滚动速度越慢，滚动距离越小，默认值0.0006 
               });		
@@ -177,7 +181,10 @@ var productPublic = {
               console.log(modelData)
                generateTemplate(modelData,$('.tabContent .title'),$('#tabContent-template'));     
                generateTemplate(listTitle,$('.tab-t ol'),$('#titleTab'));
-               generateTemplate(listContent,$('.tab-b'),$('#listContent'));			
+               generateTemplate(listContent,$('.tab-b'),$('#listContent'));	
+               setTimeout(()=>{
+                $('.tab-t').find('ol li a').eq(0).addClass('active');
+               },100)		
             },
             callbackFail: function(json){
                 console.log(json)
@@ -206,11 +213,3 @@ var productPublic = {
     }
 }
 productPublic.init();
-
-window.onload=function(){
-    setTimeout(()=>{
-        $('.tab-t ol li a').eq(0).addClass('active');
-        $('.broadcast .bigspan').eq(0).addClass('getColor');
-        $('.broadcast .bigspan').eq(0).css({"paddingLeft":0,"borderLeft":'none'});
-    },800)
-}

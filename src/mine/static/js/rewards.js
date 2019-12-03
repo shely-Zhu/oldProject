@@ -3,8 +3,7 @@
  * @author zhangyanping 2019-11-12
 */
 
-
-require('@pathIncludJs/base.js');
+require('@pathCommonBase/base.js');
 require('@pathCommonJs/ajaxLoading.js');
 
 var tipAction = require('../../../common/js/components/tipAction.js');

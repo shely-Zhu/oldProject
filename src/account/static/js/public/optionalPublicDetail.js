@@ -8,7 +8,7 @@
  */
 
 
-require('@pathIncludJs/base.js');
+require('@pathCommonBase/base.js');
 
 //ajax调用
 require('@pathCommonJs/ajaxLoading.js');
@@ -47,6 +47,7 @@ $(function() {
 			//设置数据到页面上
 			that.setDomData(that.data.publicFundDetail);
 			if( that.data.projectType == "10300" ){//10300货币类型
+				$(".dealReg").hide()
 				//货币基金
 				$('.type_0').show();
 				//折线图
@@ -55,6 +56,8 @@ $(function() {
 				$('.lineWrap .wfsy').removeClass('hidden');
 			}
 			else{
+				//获取红利
+				that.getDividend();
 				//非货币基金
 				$('.type_1').show();
 				//折线图
@@ -81,8 +84,7 @@ $(function() {
 
 			var that = this;
 						
-			//获取红利
-			that.getDividend();
+
     		//稳金类项目，请求七日年化/万份收益折线图
     		that.getTypeOneData();
     		//请求快速赎回和普通赎回的文案
@@ -351,14 +353,16 @@ $(function() {
 
 			//项目名称
     		$('#HeadBarpathName').html( jsonData.fundName );
+			//基金代码
+    		$('#fundCodeWrap').html( jsonData.fundCode );
 			//总金额
-			$('.typeWrap .totalM').html( jsonData.totalMoney );
+			$('.typeWrap .totalM').html( jsonData.totalMoneyMask );
 		   	//待确认金额 接口无
 		   	$('.typeWrap .toConfirm .confirmMoney').html( jsonData.onwayAssetTotal );
 		   	//昨日收益
-		   	$('.typeWrap .sevenYearYield').html( jsonData.income);
+		   	$('.typeWrap .yesterdayShare').html( jsonData.incomeMask);
 		   	//持有收益
-		   	$('.typeWrap .ownShare').html( jsonData.addupIncome);
+		   	$('.typeWrap .ownShare').html( jsonData.holdIncomeMask);
 		   	//累计收益  接口无
 		   	$('.typeWrap .accumulatedShare').html( jsonData.incomeUnit);
 			//持有份额
@@ -373,8 +377,6 @@ $(function() {
 				//万份受益
 				$('.openWrap .wfsy').html( jsonData.unitYld);
 				
-				$('.lineWrap .qrnh').text("单位净值");
-				$('.lineWrap .wfsy').text("累计净值");
 
     		   	
 	    	}
@@ -384,6 +386,8 @@ $(function() {
 				$('.openWrap .rzf').html( jsonData.dayChgRat);
 				//最新净值
 				$('.openWrap .zxjz').html( jsonData.nav);
+				$('.lineWrap .qrnh').text("单位净值");
+				$('.lineWrap .wfsy').text("累计净值");
 	    	}
 
 		},
@@ -433,7 +437,7 @@ $(function() {
 			})
 //			交易记录跳转
 			mui("body").on('tap', '.jyjl', function() {
-				window.location.href = site_url.transactionDetail_url+"?fundCode=" +that.data.fundCode + "&tradeNo=" + that.data.publicFundDetail.tradeNo;
+				window.location.href = site_url.transactionRecords_url;
 			})
 //			分红方式跳转
 			mui("body").on('tap', '.dividend', function() {
@@ -445,7 +449,11 @@ $(function() {
 			})
 //			收益明细跳转
 			mui("body").on('tap', '.symx', function() {
-				window.location.href = site_url.incomeDetail_url;
+				window.location.href = site_url.returnsDetail_url + "?fundCode=" + that.data.fundCode;
+			})
+//			头部详情跳转
+			mui("body").on('tap', '#customerService', function() {
+				window.location.href = site_url.pofPublicDetail_url + "?fundCode=" + that.data.fundCode + "&fundType=" + that.data.projectType;
 			})
 			//点击赎回
 			mui("body").on('tap', '.backBtn', function(e) {

@@ -3,7 +3,7 @@
  * @author 蔡文琦  2019-11-20
  */
 
-require('@pathIncludJs/base.js');
+require('@pathCommonBase/base.js');
 
 require('@pathCommonJs/ajaxLoading.js');
 require('@pathCommonJs/components/elasticLayer.js');
@@ -16,8 +16,6 @@ $(function() {
 	let somePage = {
 		//获取页面元素
 		$e: {
-			typeOne:$('.type_one'),
-			typeTwo:$('.type_two'),
 			bonusType:$('.bonusType'),
 			duigou:$('.duigou'),
 			adjustmentTemp: $('#adjustment-template'), //模板
