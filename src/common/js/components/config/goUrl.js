@@ -471,6 +471,8 @@ module.exports = function () {
     this.wealthResearch_url = go_url.no_url + '/homePage/views/fortuneCollege/wealthResearch.html';
     //定投排行榜  原生
     this.investmentPlanRanking_url = go_url.no_url +  '/financial/views/publicPlacement/investmentPlanRanking.html'
+    //我的定投计划
+    this.myInvestmentPlan_url = go_url.no_url +  '/financial/views/publicPlacement/myInvestmentPlan.html'
     //我的 历史明细
     this.mineHistoryDetail_url = go_url.no_url +  '/mine/views/historyDetail.html'
     //联系我们 意见反馈
