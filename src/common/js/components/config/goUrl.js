@@ -323,7 +323,7 @@ module.exports = function () {
     // 活动详情
     this.activityDetails_url = go_url.no_url + '/mine/views/memberClub/activityDetails/activityDetails.html';
     // 活动列表
-    this.activityList_url = go_url.no_url + '/mine/views/memberClub/activityList/activityList.html';
+    this.activityList_url = go_url.no_url + '/life/views/memberClub/activityList/activityList.html';
     //活动详情->实名
     this.realName_url = go_url.no_url + '/mine/views/realName/realName.html';
     //活动详情->风测
@@ -468,4 +468,15 @@ module.exports = function () {
 
     //定投排行榜  原生
     this.investmentPlanRanking_url = go_url.no_url +  '/financial/views/publicPlacement/investmentPlanRanking.html'
+
+    // 公募监管账户
+    this.newregulatoryAccounts_url = go_url.no_url +  '/mine/views/regulatoryAccounts.html'
+    //已报名活动
+    this.activityEnrolment_url = go_url.no_url +  '/mine/views/activityEnrolment/activityEnrolment.html'
+    //会员权益详情
+    this.membershipDetails_url = go_url.no_url +  '/mine/views/membershipInterests/membershipDetails.html'
+    //会员权益成长值记录
+    this.membershipInterestsRecord_url = go_url.no_url +  '/mine/views/membershipInterests/membershipInterestsRecord.html'
+    //查看已签署材料
+    this.seeSign_url = go_url.no_url +  '/account/views/private/seeSign.html'
 };
