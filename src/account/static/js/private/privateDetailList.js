@@ -10,6 +10,7 @@ require('@pathCommonJs/ajaxLoading.js');
 // 切换
 require('@pathCommonJsCom/tabScroll.js');
 require('@pathCommonJsCom/goTopMui.js');
+require('@pathCommonCom/elasticLayer/elasticLayer/elasticLayer.js');
 
 //黑色提示条的显示和隐藏
 var tipAction = require('@pathCommonJsCom/tipAction.js');
@@ -405,8 +406,81 @@ $(function() {
                 })
                 // 点击遮罩隐藏
             mui("body").on('tap', '.mask', function(e) {
-                $('.mask').hide();
-                $('.hopperCon').hide();
+                    $('.mask').hide();
+                    $('.hopperCon').hide();
+                })
+                //取消受让、取消预约、取消转让
+            mui("body").on('tap', '.cancelBtn', function(e) {
+                    var type = $(this).attr('data-type');
+                    var id = $(this).attr('data-id');
+                    if (type == 'assign') { //转让
+                        var obj = {
+                            p: '<p>您确定要取消转让申请吗？</p>',
+                            yesTxt: '确认',
+                            celTxt: '取消',
+                            hideCelButton: false,
+                            zIndex: 100,
+                            callback: function(t) {
+
+                            },
+                        };
+                        $.elasticLayer(obj)
+
+                        // that.openTipCon('assign', '您确定要取消转让申请吗？', id);
+
+                    } else if (type == 'assignee')
+                        var obj = {
+                            p: '<p>您确定要取消受让申请吗？</p>',
+                            yesTxt: '确认',
+                            celTxt: '取消',
+                            hideCelButton: false,
+                            zIndex: 100,
+                            callback: function(t) {
+
+                            },
+                        };
+                    $.elasticLayer(obj)
+
+                })
+                // 点击我明白了
+            mui("body").on('tap', '.tipContainer .buttonOne', function(e) {
+                    $('.mask').hide();
+                    $('#tipConOne').hide();
+                    var conText = $(this).siblings('tipContent').html;
+                    that.openTipConOne(conText);
+
+                })
+                //点击状态文字出现弹框
+            mui("body").on('tap', '.openTip', function(e) {
+                    $('.mask').show();
+                    $('#tipConOne').show();
+                    var conText = $(this).siblings('tipContent').html;
+                    var obj = {
+                        p: '<p>' + conText + '</p>',
+                        yesTxt: '我明白了',
+                        hideCelButton: true,
+                        zIndex: 100,
+                        callback: function(t) {
+
+                        },
+                    };
+                    $.elasticLayer(obj);
+
+                })
+                //功能按钮
+            mui("body").on('tap', '.toDetail', function(e) {
+                var type = $(this).attr('type');
+                var id = $(this).attr('reserveId');
+                if (type == 'toCertif') { //去合格投资者认证
+
+                } else if (type == 'toSign') { //去签合同
+                    window.location.href = site_url.seeSign_url + '?reserveId=' + id;
+                } else if (type == 'toSee') { //查看合同
+
+                } else if (type == 'toUploadM') { //去上传汇款凭证
+
+                }
+
             })
         }
     };
