@@ -6,10 +6,11 @@
  */
 
 module.exports = function(className,cutNumber){
-    //点击下按钮，显示弹框  
+    //点击下按钮，显示弹框
+    var classNames=className?className:".contentWrap"  
     var tops=-100;
      $(document).scroll(function() {
-            if($(className).offset().top<tops){
+            if($(classNames).offset().top<tops){
                 tops-=800;
                 mui('.contentWrapper').pullRefresh().pullupLoading();
             }
