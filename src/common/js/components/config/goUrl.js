@@ -473,7 +473,6 @@ module.exports = function () {
     this.wealthResearch_url = go_url.no_url + '/homePage/views/fortuneCollege/wealthResearch.html';
     //定投排行榜  原生
     this.investmentPlanRanking_url = go_url.no_url +  '/financial/views/publicPlacement/investmentPlanRanking.html'
-<<<<<<< HEAD
 
     // 公募监管账户
     this.newregulatoryAccounts_url = go_url.no_url +  '/mine/views/regulatoryAccounts.html'
@@ -485,7 +484,6 @@ module.exports = function () {
     this.membershipInterestsRecord_url = go_url.no_url +  '/mine/views/membershipInterests/membershipInterestsRecord.html'
     //查看已签署材料
     this.seeSign_url = go_url.no_url +  '/account/views/private/seeSign.html'
-=======
     //我的定投计划
     this.myInvestmentPlan_url = go_url.no_url +  '/financial/views/publicPlacement/myInvestmentPlan.html'
     //我的 历史明细
@@ -496,5 +494,4 @@ module.exports = function () {
     //财富学院首页
     this.fortuneCollegeList_url = go_url.no_url +  '/homePage/views/fortuneCollege/fortuneCollegeList.html'
     /*------------------- 财富学院 end ------------------------------*/
->>>>>>> 30f13bb08ce66f74f410ce524a4531c456fb0b81
 };
