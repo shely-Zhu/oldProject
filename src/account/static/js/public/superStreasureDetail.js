@@ -23,6 +23,7 @@ $(function() {
 			time:[],
 			cashFundDetail:"",
 			fundCode:splitUrl["fundCode"],
+			numAttr:"",//点击选项卡切换时存储字段
         },
         init:function(){
 			var that = this;
@@ -218,7 +219,10 @@ $(function() {
 			mui("body").on('tap','.lineDraw .time',function(e){
 				$('.lineDraw .time').removeClass('active');
 				$(this).addClass('active');
-				that.getTimeReq($(this).attr('num'))
+				if(that.gL.numAttr != $(this).attr('num')){
+				  that.getTimeReq($(this).attr('num'))  
+				  that.gL.numAttr = $(this).attr('num')
+				}
 			})
 			mui("body").on('tap','.materialContent',function(e){
 				var id = $(this).attr('data-id')
