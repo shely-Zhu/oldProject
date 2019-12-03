@@ -1,7 +1,7 @@
 //  私募基金产品详情
 //  @author zhangyanping 2019-11-25 tian
 
-require('@pathIncludJs/base.js');
+require('@pathCommonBase/base.js');
 
 // require('@pathCommonJsCom/utils.js');
 require('@pathCommonJs/ajaxLoading.js');
@@ -511,12 +511,14 @@ $(function(){
 				data: {
 					projectId: that.$e.projectId,
 				},
+				contentTypeSearch:true,
 				needLogin:true,//需要判断是否登陆
 				callbackDone: function(json){  //成功后执行的函数
 					$("#tips-wrap").show();//显示预约条件
 //					generateTemplate(json.data,$("#real-condition"), that.$e.conditionTemplate);
 					var jsonData = json.data,
-					isPopup = "",//弹框
+					isPopup = "",//弹框售前告知书
+					isReal = "",//是否实名认证，因为如果机构切一键认证是实名，点击需要提示弹框。
 					singleaAuthenPath = "",//一键认证跳转链接
 					singleaAuthen = false;//条件框是否展示
 					that.$e.realLi.hide();
@@ -525,10 +527,12 @@ $(function(){
 						if(v.show == "1"){//如果显示。show=1
 							singleaAuthen = true;
 							if(!singleaAuthenPath){//获取一键认证的链接。有值的第一个
-//								return 
 								singleaAuthenPath = that.getJumpUrl(v)
+								if(v.conditionType == 1){//下面一键认证如果是实名认证且机构需要点击需要弹框提示，这里记录。且不能覆盖
+									isReal = true;//判断
+								}
 							}
-							if(v.conditionType == 3 && v.isPopup == "1"){
+							if(v.conditionType == 3 && v.isPopup == "1"){//是否弹出售前告知书。售前告知书与风险等级匹配一起提示
 								isPopup = true;
 							}
 							that.$e.realLi.eq(e*1).show();
@@ -537,20 +541,86 @@ $(function(){
 						}
 //						对应的条件认证到哪里
 						that.$e.realLi.eq(e*1).find(".tips-li-right").on('tap',function(){
-							if(v.conditionType == "1" && that.data.custType != "1"){//机构不支持线上开户，弹框提示
-								
+							if(v.conditionType == "1" && that.data.custType != "1"){//如果是实名认证跳转，机构不支持线上开户，弹框提示
+								$("#tips-wrap").hide();
+				                var obj = {
+				                	title: '',
+				                	id: 'realOrg',
+				                	p: '机构客户需联系您的理财师，进行线下开户',
+				                	yesTxt: '确认',
+				                	celTxt: "取消",
+				                	zIndex: 100,
+				                	callback: function(t) {
+				                	},
+				                };
+				                $.elasticLayer(obj)
 							}else{
 								window.location.href = jumpUrl;
 							}
 						})
 						//一键认证调往哪里
 						mui("body").on('tap', '.tips-btn', function() {
-							window.location.href = singleaAuthenPath;
+							if(isReal && that.data.custType != "1"){//如果是实名认证跳转，机构不支持线上开户，弹框提示,一键认证正好也是链接也是实名认证也弹框
+								$("#tips-wrap").hide();
+				                var obj = {
+				                	title: '',
+				                	id: 'realOrg1',
+				                	p: '机构客户需联系您的理财师，进行线下开户',
+				                	yesTxt: '确认',
+				                	celTxt: "取消",
+				                	zIndex: 100,
+				                	callback: function(t) {
+				                	},
+				                };
+				                $.elasticLayer(obj)
+							}else{
+								window.location.href = singleaAuthenPath;
+							}
 						})
 						
 					});
 					if(!singleaAuthen){//如果v.show都是0，则不展示预约框,跳转到相应链接
 						$("#tips-wrap").hide();
+						if(!!isPopup){//如果弹售前告知书
+			                var obj = {
+			                	title: '',
+			                	id: 'sellPop',
+			                	p: '<p class="">你选择的产品与您现在的风险承受能力相匹配</p>' +
+			                		'<p class="">请您认真阅读' + that.email + '</p>' +
+			                		'<p class="otherColor" id="changeMail">邮箱有变更，去修改</p>',
+			                	yesTxt: '确认',
+			                	celTxt: '取消',
+			                	zIndex: 1200,
+			                	callback: function(t) {
+			                		if(that.email) {
+			                			var obj = [{
+			                				url: site_url.sendMailForConfirmBill_api,
+			                				data: {
+			                					fileName: that.fileName,
+			                					fileUrl: that.fileUrl,
+			                					email: that.email
+			                				},
+			                				needLogin: true,
+			                				callbackDone: function(json) {
+			                					t.hide(); //关闭弹窗
+
+			                				},
+			                				callbackFail: function(json) {
+			                					//                                  //显示错误提示
+			                					tipAction(json.message);
+
+			                				},
+			                			}];
+			                			$.ajaxLoading(obj);
+			                		} else {
+			                			//显示错误提示
+			                			tipAction("请去绑定邮箱");
+			                			//                          alert('请去绑定邮箱')
+			                		}
+			                	},
+			                };
+			                $.elasticLayer(obj)
+						}
 						that.nextStep();
 						
 					}

@@ -81,7 +81,6 @@ $(function() {
                 callbackDone: function(json) {
                     var dataInfo = json.data,
                         fundLableList_new = dataInfo.fundLableList[0];
-
                     dataInfo["fundLableList_new"] = fundLableList_new; // 标签只展示第一个处理
                     dataInfo.newNetValue= dataInfo.newNetValue ? dataInfo.newNetValue : "--"
                     dataInfo.newOneDayGains= dataInfo.newOneDayGains ? dataInfo.newOneDayGains : "--"
@@ -128,11 +127,11 @@ $(function() {
                 callbackFail: function(json) {
                     tipAction(json.msg);
                 },
-                    callbackNoData: function (json) { // 暂无数据
-                        $('.radarEchart').css({ "display":"none"})
-                        $('.NoDataRada').html(that.gV.noDataArr[0]);
-                        $('.NoDataRada').css({"display": "block"});
-                }
+                callbackNoData: function (json) { // 暂无数据  
+                    $('.radarEchart').css({ "display":"none"})
+                    $('.NoDataRada').html(that.gV.noDataArr[0]);
+                    $('.NoDataRada').css({"display": "block"});
+               }
             }, {
                 url: site_url.querySynthesizeQualitativeEvaluate_api, //基金诊断-综合定性评价
                 data: {
@@ -171,7 +170,7 @@ $(function() {
                     tipAction(json.msg);
                 }
             }]
-
+            
             obj.push(that.getDrawData(1));
             $.ajaxLoading(obj);
         },
@@ -246,7 +245,8 @@ $(function() {
             // 雷达图一年，3年，5年
             mui("body").on('tap', '.dd_choice_1 .mui-col-xs-3', function(e) {
                 var i = $(this).index();
-                $(".mui-control-item").addClass('active').siblings().removeClass('active');
+                $(this).addClass("active").siblings().removeClass("active");
+               // $(".mui-control-item").addClass('active').siblings().removeClass('active');
                 // 切换图表
                 if (that.gV.echartData[i].length != 0) {
                     $('.radarEchart').css({"display": "block"})

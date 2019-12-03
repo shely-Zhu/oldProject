@@ -1,7 +1,7 @@
 //  超宝基金产品-交易记录
 // @author caoqihai 2019-11-20 
 
-require('@pathIncludJs/base.js');
+require('@pathCommonBase/base.js');
 
 require('@pathCommonJsCom/utils.js');
 //ajax调用

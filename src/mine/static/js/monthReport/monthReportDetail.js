@@ -2,8 +2,7 @@
 * 月度报告详情页我
 * @author zhangyanping 2019-11-19
 */
-
-require('@pathIncludJs/base.js');
+require('@pathCommonBase/base.js');
 
 require('@pathCommonJsCom/utils.js');
 require('@pathCommonJs/ajaxLoading.js');
@@ -16,6 +15,7 @@ var moment = require('moment');
 //引入弹出层
 require('@pathCommonJsCom/elasticLayerTypeFive.js');
 var generateTemplate = require('@pathCommonJsComBus/generateTemplate.js');
+var Base64 = require('@pathIncludJs/vendor/base64/base64.js');
 
 
 var monthReportDetail = {
@@ -114,8 +114,11 @@ var monthReportDetail = {
 			async: false,
 			callbackDone: function(json) {
 				var jsonData = json.data;
-				if(!$.util.objIsEmpty(jsonData)){
-
+				if(jsonData.pefSaleList.length == 0 &&jsonData.generalModelList.length == 0 && jsonData.pofList.length == 0){
+					//没有数据
+					$('.holdNodata').show();
+					$('.holdNodata .text').html('截止'+that.getElements.reportTime+',您暂无持仓信息');
+				}else{
 					var pefSaleList = jsonData.pefSaleList;
 					jsonData.holdPosition = true;
 
@@ -170,10 +173,7 @@ var monthReportDetail = {
 
 						generateTemplate(jsonData,$(".holdPosition"), that.getElements.adjustmentTemp);
 					}
-				}else{
-					//没有数据
-					$('.noData').show();
-					$('.noData .text').html('截止'+that.getElements.reportTime+',您暂无持仓信息');
+					
 
 				}
 
@@ -185,8 +185,8 @@ var monthReportDetail = {
 			},
 			callbackNoData: function(json) {
 				//没有数据
-				$('.noData').show();
-				$('.noData .text').html('截止'+that.getElements.reportTime+',您暂无持仓信息');
+				$('.holdNodata').show();
+				$('.holdNodata .text').html('截止'+that.getElements.reportTime+',您暂无持仓信息');
 
 			}
 
@@ -206,7 +206,12 @@ var monthReportDetail = {
 			async: false, 
 			callbackDone: function(json){
 				var jsonData = json.data;
-				if(!$.util.objIsEmpty(jsonData)){
+				if(jsonData.pefSaleInfoList.length == 0 && jsonData.pofInfoList.length == 0){
+					//没有数据
+					$('.tradeNoData').show();
+					$('.tradeNoData .text').html('截止'+that.getElements.reportTime+',您暂无持仓信息');
+				}
+				else{
 					jsonData.tradeDtail = true;
 
 					if(!$.util.objIsEmpty(jsonData.pefSaleInfoList)){
@@ -220,12 +225,7 @@ var monthReportDetail = {
 						jsonData.flag1 = false;
 						generateTemplate(jsonData,$(".tradeDtail"), that.getElements.adjustmentTemp);
 					}
-				}
-				else{
-					//没有数据
-					$('.noData').show();
-					$('.noData .text').html('截止'+that.getElements.reportTime+',您暂无持仓信息');
-
+					
 				}
 
 			},
@@ -237,8 +237,8 @@ var monthReportDetail = {
 			},
 			callbackNoData: function(json){
 				//没有数据
-				$('.noData').show();
-				$('.noData .text').html('您'+that.getElements.reportTime+'无交易明细');
+				$('.tradeNoData').show();
+				$('.tradeNoData .text').html('您'+that.getElements.reportTime+'无交易明细');
 			}
 
 		}]
@@ -315,6 +315,7 @@ var monthReportDetail = {
 
 					//调用画图方法
 					that.bingtu(0);
+					that.typeCompare();
 
 				}
 				// 资产情况分析
@@ -433,6 +434,7 @@ var monthReportDetail = {
 
 					//调用画图方法
 					that.bingtu(1);
+					that.typeCompare();
 				}
 				// 循环遍历数据
 				for(var index in data){
@@ -475,6 +477,38 @@ var monthReportDetail = {
 		$.ajaxLoading(obj);
 
 
+	},
+	typeCompare:function(){
+		var that = this;
+
+		if( that.monthHoldShareList.length || that.recommendList.length ){
+
+			var recommendData = [];
+
+			$.each( that.recommendList, function(i, el){
+				var remark = true;
+				$.each( that.monthHoldShareList, function( x, y){
+
+					if( el.assetType == y.assetType ){
+						remark = false;
+						if(el.assetRatio > y.confirmValuePercent ){
+							recommendData.push(el.assetTypeDesc);
+						}
+
+					}
+
+				})
+
+				if(remark){
+					recommendData.push(el.assetTypeDesc);
+				}
+				
+			})
+
+
+		}
+		var addTypesHtml = recommendData.join('、');
+		$('.addTypes').html(addTypesHtml)
 	},
 	getMonthDateRange: function(year, month) {
 		// month in moment is 0 based, so 9 is actually october, subtract 1 to compensate
@@ -612,7 +646,7 @@ var monthReportDetail = {
 				callbackDone: function(json){
 					var result = json.data;
 					// 判断是否有专属理财师和服务理财师
-					if(result.exclusiveFinancialerList || result.serviceFinancialerList ){
+					if(result.exclusiveFinancialerList.length != 0 || result.serviceFinancialerList != 0 ){
 
 						if(result.exclusiveFinancialerList.length != 0){   //有专属理财师
 							var exclusive = result.exclusiveFinancialerList[0];//专属理财师
@@ -660,12 +694,23 @@ var monthReportDetail = {
 					}else{
 						var now = new Date();
 						var hh = now.getHours();
-						
+
 						if(8 <= hh && hh <= 20){
-							// window.location.href = site_url.consultProduct_url +'?empNo='+ that.getElements.plannerNum + '&empName=' + that.getElements.plannerName + '&productName=' + that.getElements.productName ;
-							// window.open(site_url.customerService_url);
+							 //跳转客服页面
+							var obj = [{
+								url: site_url.getToken_api,
+								data: {
+								},
+								needDataEmpty:false,
+								callbackDone: function(json) {
+									var token = json.data.token;
+									// 跳转第三方客服地址
+									window.location.href = site_url.onlineCustomer_url + '&token=' + token;
+								},     
+							}];
+							$.ajaxLoading(obj);
 						}else{
-							window.location.href = site_url.consultProduct_url +'?empNo='+ that.getElements.plannerNum + '&empName=' + that.getElements.plannerName + '&productName=' + that.getElements.productName ;
+							window.location.href = site_url.consultProduct_url +'?empNo='+ that.getElements.plannerNum + '&empName=' + that.getElements.plannerName + '&productName=' + new Base64().encode(that.getElements.productName) + '&backUrl=' + new Base64().encode(window.location.href) ;
 						}
 
 					}

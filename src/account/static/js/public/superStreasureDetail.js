@@ -4,7 +4,7 @@
 */
 
 
-require('@pathIncludJs/base.js');
+require('@pathCommonBase/base.js');
 
 require('@pathCommonJs/components/headBarConfig.js');
 require('@pathCommonJs/ajaxLoading.js');
@@ -21,28 +21,16 @@ $(function() {
         gL: {
 			shuju:[],
 			time:[],
-			cashFundDetail:""
+			cashFundDetail:"",
+			fundCode:splitUrl["fundCode"],
         },
         init:function(){
 			var that = this;
-			that.gL.cashFundDetail = JSON.parse(sessionStorage.getItem("cashFundDetail"));
-			if(!that.gL.cashFundDetail){
-				$(".totalM").text("--")
-				$(".incomeMask").text("--")
-				$(".addupIncomeMask").text("--")
-				$("#HeadBarpathName").text("")
-				$(".titleTwo").text("")
-			}else{
-				$(".totalM").text(that.gL.cashFundDetail.totalMoneyMask)
-				$(".incomeMask").text(that.gL.cashFundDetail.incomeMask)
-				$(".addupIncomeMask").text(that.gL.cashFundDetail.addupIncomeMask)
-				$("#HeadBarpathName").text(that.gL.cashFundDetail.fundName)
-				$(".titleTwo").text(that.gL.cashFundDetail.fundCode)
-			}
             //事件绑定
             that.event();	
 			that.getTimeReq()
 			that.ruleReq()
+			that.getDataReq()
         },
         drawLine:function(){
             var that = this;
@@ -161,15 +149,36 @@ $(function() {
             myChart.setOption(option);
         },
 
-        //获取初始数据
+		//获取初始数据
+		getDataReq:function(){//数据接口
+			var that = this;
+	        var obj = [{
+			    url: site_url.getAssetsCashInfo_api, 
+			    data: {
+					//fundCode:"003075",
+					fundCode:that.gL.fundCode,
+			    },
+			    needLogin: true,
+			    callbackDone: function(json) {
+					var data = json.data
+					$(".totalM").text(data.totalMoneyMask?data.totalMoneyMask:"--")
+					$(".incomeMask").text(data.incomeMask?data.incomeMask:"--")
+					$(".addupIncomeMask").text(data.addupIncomeMask?data.addupIncomeMask:"--")
+					$("#HeadBarpathName").text(data.fundName?data.fundName:"--")
+					$(".titleTwo").text(data.fundCode?data.fundCode:"--")
+					$(".totalM").css({"background": "linear-gradient(360deg, rgba(186,140,112,1) 0%, rgba(244,210,192,1) 100%)", "-webkit-background-clip": "text", "-webkit-text-fill-color": "transparent"})
+				},
+			}];
+			$.ajaxLoading(obj);	
+		},
 	
 		getTimeReq:function(t){
 			var that = this;
 	        var obj = [{
 			    url: site_url.fundNetWorthTrendChart_api, 
 			    data: {
-					// fundCode:"000847",
-					fundCode:that.gL.cashFundDetail.fundCode,
+					//fundCode:"000847",
+					fundCode:that.gL.fundCode,
 					dataRange:t||1,
 			    },
 			    needLogin: true,
@@ -191,8 +200,8 @@ $(function() {
 	        var obj = [{
 			    url: site_url.findProtocolBasic_api, 
 			    data: {
-					code:that.gL.cashFundDetail.fundCode,
-					// code:"003075",
+					code:that.gL.fundCode,
+					//code:"003075",
 					template:"0",
 			    },
 			    needLogin: true,
@@ -225,7 +234,7 @@ $(function() {
 			})
 			//点击历史记录
 			mui("body").on('tap','.recordBtn',function(e){
-				window.location.href = `${site_url.superRecord_url}?fundCode=${that.gL.cashFundDetail.fundCode}`;
+				window.location.href = `${site_url.superRecord_url}?fundCode=${that.gL.fundCode}`;
 			})
         }
     } 

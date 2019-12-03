@@ -3,7 +3,7 @@
  * @Author: wangjiajia
  */
 
-require('@pathIncludJs/base.js');
+require('@pathCommonBase/base.js');
 require('@pathCommonJs/ajaxLoading.js');
 
 var tipAction = require('@pathCommonJs/components/tipAction.js');
@@ -133,7 +133,7 @@ $(function() {
                             }else if(len[i].tradeType == "1"){                               
                                 len[i].tradeType = "申购"
                             }else if(len[i].tradeType == "0"){
-                                len[i].tradeType = "分红"
+                                len[i].tradeType = "认购"
                             }
                         }
                           //去掉mui-pull-bottom-pocket的mui-hidden
@@ -147,7 +147,7 @@ $(function() {
                                     $(".photoleft").eq(i).addClass("test")
                                 }else if(len[i].tradeType == "申购"){                               
                                     $(".photoleft").eq(i).addClass("testone")
-                                }else if(len[i].tradeType == "分红"){
+                                }else if(len[i].tradeType == "认购"){
                                     $(".photoleft").eq(i).addClass("testoneo")
     
                                 }
@@ -158,7 +158,7 @@ $(function() {
                                     $(".photoleft").eq(i+15*that.gV.pageCurrent-15).addClass("test")
                                 }else if(len[i].tradeType == "申购"){                               
                                     $(".photoleft").eq(i+15*that.gV.pageCurrent-15).addClass("testone")
-                                }else if(len[i].tradeType == "分红"){
+                                }else if(len[i].tradeType == "认购"){
                                     $(".photoleft").eq(i+15*that.gV.pageCurrent-15).addClass("testoneo")
     
                                 }
