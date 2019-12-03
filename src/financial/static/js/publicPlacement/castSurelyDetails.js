@@ -96,6 +96,11 @@ $(function () {
             default:
               break;
           }
+          if(fixState == '已终止'){
+            $(".fixState").addClass(".redColor")
+          }else{
+            $(".fixState").removeClass(".redColor")
+          }
           $('.fixState').html(fixState);
           $('.footer').html(str);
           var tplm = $("#dataLists").html();
