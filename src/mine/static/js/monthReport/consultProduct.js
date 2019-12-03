@@ -5,7 +5,7 @@
 
 
 
-require('@pathIncludJs/base.js');
+require('@pathCommonBase/base.js');
 require('@pathCommonJs/ajaxLoading.js');
 
 var splitUrl = require('@pathCommonJsCom/splitUrl.js')();

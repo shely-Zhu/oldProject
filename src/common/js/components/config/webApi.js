@@ -396,15 +396,15 @@ module.exports = function() {
     //yan
     this.findMessageCenterById_api = http_url.web_url + '/content/frontend/findMessageCenterById'; //证监会要求查看详情
     
-    this.queryTransferFunds_api= '/app/account/queryTransferFunds'; // 查询基金列表
-    this.newFundDetails_api =  '/app/pof/fundDetails/frontend/newfundDetails';//基金年化查询
+    this.queryTransferFunds_api= http_url.web_url +'/account/queryTransferFunds'; // 查询基金列表
+    this.newFundDetails_api = http_url.web_url + '/pof/fundDetails/frontend/newfundDetails';//基金年化查询
     this.redemptionPay_api = http_url.web_url + '/pof/redemptionPay/redemptionPay';//赎回确认
-    this.findProtocolBasic_api =  'app/content/findProtocolBasic' ; //进入基金转出页面调用
+    this.findProtocolBasic_api = http_url.web_url + '/content/findProtocolBasic' ; //进入基金转出页面调用
     this.cashList_api = http_url.web_url + '/account/bankCard/cashList';//查询银行卡转出
     this.findProtocolContent_api = http_url.web_url + '/content/frontend/findProtocolContent'; //转出协议查询
     this.doCashTreasureSell_api = http_url.web_url + '/pof/cash/doCashTreasureSell'
-    this.getCashTreasureLimitInfo_api = '/app/pof/cash/forntend/getCashTreasureLimitInfo'  //转出份额限定 单日等
-    this.findProtocolContentRule_api = '/app/content/frontend/findProtocolContent';//转出规则查询
+    this.getCashTreasureLimitInfo_api = http_url.web_url + '/pof/cash/forntend/getCashTreasureLimitInfo'  //转出份额限定 单日等
+    this.findProtocolContentRule_api = http_url.web_url + '/content/frontend/findProtocolContent';//转出规则查询
 
     this.queryFundTransferAssets_api = http_url.web_url+ '/account/queryFundTransferAssets'    //查询活期理财列表
 

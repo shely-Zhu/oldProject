@@ -1,7 +1,7 @@
 //  私募基金产品详情
 //  @author zhangyanping 2019-11-25 tian
 
-require('@pathIncludJs/base.js');
+require('@pathCommonBase/base.js');
 
 // require('@pathCommonJsCom/utils.js');
 require('@pathCommonJs/ajaxLoading.js');

@@ -285,10 +285,19 @@ $(function() {
             mui("body").on('tap', '.dd_icon', function() {
                 var i = $(this).attr('num');
                 var value = that.gV.tipArr[i] && that.gV.tipArr[i].value;
-
+                var tital;
+                if(i == 0){
+                    tital = "综合评分"
+                }else if(i == 1){
+                    tital = "综合定性评价"
+                }else if(i == 2){
+                    tital = "累计收益曲线"
+                }else{
+                    tital = "提示" 
+                }
                 $.elasticLayerTypeTwo({
                     id: "tip",
-                    title: '提示',
+                    title: tital,
                     p: '<p>' + value + '</p>',
                     buttonTxt: '知道了',
                     zIndex: 100,
