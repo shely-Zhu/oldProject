@@ -29,7 +29,16 @@ body{
 	}
 
 	.topContent{
-
+        #customerService{
+            font-size: .3rem;
+        }
+        #fundCodeWrap{
+            position: fixed;
+            top: 1.1rem;
+            width: 100%;
+            text-align: center;
+            color: @FFFFFF;
+        }
 		//按钮点击 打开状态
 		&.open{
 			background: @c005;
@@ -331,6 +340,9 @@ body{
 	}
 	.footer{
 	    display: none;
+	    position: absolute;
+        bottom: 0;
+        width: 100%;
 	    background: @FFFFFF;
 	    .buttonStyle{
 	        line-height: .98rem;
