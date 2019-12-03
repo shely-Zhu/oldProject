@@ -24,6 +24,8 @@ var monthReportDetail = {
 		reportId:splitUrl['reportId'],   //活动的id
 		adjustmentTemp: $('#second-template'), // 最新调仓模板
 	},
+	monthHoldShareList:'',
+	recommendList:'',
 	pieChartData:'', // 画图的title
 	init: function(){  //初始化函数
 		var that = this;
@@ -114,8 +116,11 @@ var monthReportDetail = {
 			async: false,
 			callbackDone: function(json) {
 				var jsonData = json.data;
-				if(!$.util.objIsEmpty(jsonData)){
-
+				if(jsonData.pefSaleList.length == 0 &&jsonData.generalModelList.length == 0 && jsonData.pofList.length == 0){
+					//没有数据
+					$('.holdNodata').show();
+					$('.holdNodata .text').html('截止'+that.getElements.reportTime+',您暂无持仓信息');
+				}else{
 					var pefSaleList = jsonData.pefSaleList;
 					jsonData.holdPosition = true;
 
@@ -170,10 +175,7 @@ var monthReportDetail = {
 
 						generateTemplate(jsonData,$(".holdPosition"), that.getElements.adjustmentTemp);
 					}
-				}else{
-					//没有数据
-					$('.noData').show();
-					$('.noData .text').html('截止'+that.getElements.reportTime+',您暂无持仓信息');
+					
 
 				}
 
@@ -185,8 +187,8 @@ var monthReportDetail = {
 			},
 			callbackNoData: function(json) {
 				//没有数据
-				$('.noData').show();
-				$('.noData .text').html('截止'+that.getElements.reportTime+',您暂无持仓信息');
+				$('.holdNodata').show();
+				$('.holdNodata .text').html('截止'+that.getElements.reportTime+',您暂无持仓信息');
 
 			}
 
@@ -206,7 +208,12 @@ var monthReportDetail = {
 			async: false, 
 			callbackDone: function(json){
 				var jsonData = json.data;
-				if(!$.util.objIsEmpty(jsonData)){
+				if(jsonData.pefSaleInfoList.length == 0 && jsonData.pofInfoList.length == 0){
+					//没有数据
+					$('.tradeNoData').show();
+					$('.tradeNoData .text').html('截止'+that.getElements.reportTime+',您暂无持仓信息');
+				}
+				else{
 					jsonData.tradeDtail = true;
 
 					if(!$.util.objIsEmpty(jsonData.pefSaleInfoList)){
@@ -220,12 +227,7 @@ var monthReportDetail = {
 						jsonData.flag1 = false;
 						generateTemplate(jsonData,$(".tradeDtail"), that.getElements.adjustmentTemp);
 					}
-				}
-				else{
-					//没有数据
-					$('.noData').show();
-					$('.noData .text').html('截止'+that.getElements.reportTime+',您暂无持仓信息');
-
+					
 				}
 
 			},
@@ -237,8 +239,8 @@ var monthReportDetail = {
 			},
 			callbackNoData: function(json){
 				//没有数据
-				$('.noData').show();
-				$('.noData .text').html('您'+that.getElements.reportTime+'无交易明细');
+				$('.tradeNoData').show();
+				$('.tradeNoData .text').html('您'+that.getElements.reportTime+'无交易明细');
 			}
 
 		}]
@@ -315,6 +317,7 @@ var monthReportDetail = {
 
 					//调用画图方法
 					that.bingtu(0);
+					that.typeCompare();
 
 				}
 				// 资产情况分析
@@ -433,6 +436,7 @@ var monthReportDetail = {
 
 					//调用画图方法
 					that.bingtu(1);
+					that.typeCompare();
 				}
 				// 循环遍历数据
 				for(var index in data){
@@ -475,6 +479,38 @@ var monthReportDetail = {
 		$.ajaxLoading(obj);
 
 
+	},
+	typeCompare:function(){
+		var that = this;
+
+		if( that.monthHoldShareList.length || that.recommendList.length ){
+
+			var recommendData = [];
+
+			$.each( that.recommendList, function(i, el){
+				var remark = true;
+				$.each( that.monthHoldShareList, function( x, y){
+
+					if( el.assetType == y.assetType ){
+						remark = false;
+						if(el.assetRatio > y.confirmValuePercent ){
+							recommendData.push(el.assetTypeDesc);
+						}
+
+					}
+
+				})
+
+				if(remark){
+					recommendData.push(el.assetTypeDesc);
+				}
+				
+			})
+
+
+		}
+		var addTypesHtml = recommendData.join('、');
+		$('.addTypes').html(addTypesHtml)
 	},
 	getMonthDateRange: function(year, month) {
 		// month in moment is 0 based, so 9 is actually october, subtract 1 to compensate

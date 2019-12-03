@@ -229,10 +229,14 @@ var clickList = {
 	"fortune_studiesList" : { type:'click', evtid: '', topic: '财富研究列表', info: ''} ,
 	"fortune_studiesTab" : { type:'click', evtid: '', topic: '财富研究tab', info: ''} ,
 	//fortuneFlowKnown.html
-	"knownItem" : { type:'click', evtid: '', topic: '早知道列表', info: ''} ,
+	"fortune_knownItem" : { type:'click', evtid: '', topic: '早知道列表', info: ''} ,
 	//fortuneClassroom.html
-	"roomItem" : { type:'click', evtid: '', topic: '财富讲堂列表', info: ''} ,
-	"sliderTab" : { type:'click', evtid: '', topic: '财富讲堂详情tab', info: ''} 
+	"fortune_roomItem" : { type:'click', evtid: '', topic: '财富讲堂列表', info: ''} ,
+	"fortune_sliderTab" : { type:'click', evtid: '', topic: '财富讲堂详情tab', info: ''},
+	//wealthResearch.html
+	"fortune_wealthTab":{ type:'click', evtid: '', topic: '财富研究详情tab', info: ''} ,
+	//understandHT.html
+	"understandTab":{ type:'click', evtid: '', topic: '了解恒天tab', info: ''} 
 }
 
 module.exports = clickList;
