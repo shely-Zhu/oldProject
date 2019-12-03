@@ -6,7 +6,8 @@
 require('@pathCommonBase/base.js');
 
 require('@pathCommonJs/ajaxLoading.js');
-require('@pathCommonJs/components/elasticLayer.js');
+// require('@pathCommonJs/components/elasticLayer.js');
+require('@pathCommonCom/elasticLayer/elasticLayer/elasticLayer.js');
 var generateTemplate = require('@pathCommonJsComBus/generateTemplate.js');
 //黑色提示条的显示和隐藏
 var tipAction = require('@pathCommonJsCom/tipAction.js');
