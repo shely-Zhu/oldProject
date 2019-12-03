@@ -14,7 +14,7 @@ require('@pathIncludJs/vendor/zepto/callback.js');
 require('@pathIncludJs/vendor/zepto/deferred.js');
 
 require('@pathCommonJs/components/headBarConfig.js');
-
+require('@pathCommonJs/setGoUrl.js');
 require('@pathCommonCom/elasticLayer/transOutRule/transOutRule.js');
 var splitUrl = require('@pathCommonJs/components/splitUrl.js')();
 var generateTemplate = require('@pathCommonJsComBus/generateTemplate.js');

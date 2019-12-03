@@ -1,5 +1,5 @@
-//  超宝-交易记录
-// @author wangjiajia 2019-11-20 
+//  私募交易详情-待确认交易，已确认交易
+// @author peicongcong 2019-12-02
 
 require('@pathCommonBase/base.js');
 require('@pathCommonJsCom/utils.js');
@@ -13,7 +13,6 @@ require('@pathCommonJsCom/goTopMui.js');
 require('@pathCommonCom/elasticLayer/elasticLayer/elasticLayer.js');
 
 //黑色提示条的显示和隐藏
-var tipAction = require('@pathCommonJsCom/tipAction.js');
 var splitUrl = require('@pathCommonJs/components/splitUrl.js')();
 var transcationTem = require('@pathCommonJsCom/account/transcationTem.js');
 

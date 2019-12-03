@@ -8,8 +8,6 @@ require('@pathCommonJs/ajaxLoading.js');
 // 切换
 require('@pathCommonJsCom/tabScroll.js');
 require('@pathCommonJsCom/goTopMui.js');
-//黑色提示条的显示和隐藏
-var tipAction = require('@pathCommonJsCom/tipAction.js');
 
 $(function() {
     var data = {
