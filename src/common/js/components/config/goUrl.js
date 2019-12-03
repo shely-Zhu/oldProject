@@ -496,23 +496,5 @@ module.exports = function() {
     //财富学院首页
     this.fortuneCollegeList_url = go_url.no_url +  '/homePage/views/fortuneCollege/fortuneCollegeList.html'
     /*------------------- 财富学院 end ------------------------------*/
-    this.investmentPlanRanking_url = go_url.no_url + '/financial/views/publicPlacement/investmentPlanRanking.html'
-        // 公募监管账户
-    this.newregulatoryAccounts_url = go_url.no_url + '/mine/views/regulatoryAccounts.html'
-        //已报名活动
-    this.activityEnrolment_url = go_url.no_url + '/mine/views/activityEnrolment/activityEnrolment.html'
-        //会员权益详情
-    this.membershipDetails_url = go_url.no_url + '/mine/views/membershipInterests/membershipDetails.html'
-        //会员权益成长值记录
-    this.membershipInterestsRecord_url = go_url.no_url + '/mine/views/membershipInterests/membershipInterestsRecord.html'
-        //我的定投计划
-    this.myInvestmentPlan_url = go_url.no_url + '/financial/views/publicPlacement/myInvestmentPlan.html'
-        //我的 历史明细
-    this.mineHistoryDetail_url = go_url.no_url + '/mine/views/historyDetail.html'
-        //联系我们 意见反馈
-    this.concatUsAdvise_url = go_url.no_url + '/mine/views/concatUs/concatUsAdvise.html'
-        /*------------------- 财富学院 start ------------------------------*/
-        //财富学院首页
-    this.fortuneCollegeList_url = go_url.no_url + '/homePage/views/fortuneCollege/fortuneCollegeList.html'
-        /*------------------- 财富学院 end ------------------------------*/
+   
 };
