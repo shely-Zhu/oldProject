@@ -442,6 +442,10 @@ module.exports = function () {
     this.changeMail_url = go_url.no_url + '/mine/views/mail/changeMail.html';
     //修改分红方式
     this.bonusMethod_url = go_url.no_url + '/mine/views/bonusMethod.html';
+    //电子合同预约
+    this.orderLimit_url = go_url.no_url + '/financial/views/privatePlacement/electronicContract/orderLimit.html';
+    //普通预约
+    this.registration_url = go_url.no_url + '/financial/views/privatePlacement/ordinaryProducts/registration.html';
 
     /*------------------- 公募持仓相关 start ------------------------------*/
     //公募交易记录

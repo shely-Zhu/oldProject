@@ -33,7 +33,8 @@ $(function() {
 				sixMonth:{},
 				oneYear: {},
 				sinceNow: {}
-			}	
+			},
+			end:""
 		},
 
 		init: function(){
@@ -149,6 +150,7 @@ $(function() {
 				dataRange = 12;
 			}else if(num == 4){
 				dataRange = "";
+				that.data.end = new Date().toLocaleString().split(" ")[0].replace(/\//g, '-');
 			}
 			//判断是否已经有数据了，有的话不再请求接口
 			if( num == 0 && that.data['qrnhWfsy'].oneMonth.profitThoudDate && that.data['qrnhWfsy'].oneMonth.profitThoudDate.length){
@@ -177,7 +179,8 @@ $(function() {
 			    url: site_url.fundNetWorthTrendChart_api, 
 			    data: {
 			    	fundCode: that.data.fundCode,
-			    	dataRange: dataRange 
+			    	dataRange: dataRange,
+			    	end: that.data.end || ""
 			    },
 //			    needLoading: true,
 			    needLogin: true,
@@ -302,8 +305,17 @@ $(function() {
 			    	axisLabel:{
 			    		show: true,
 			    		color:  '#9B9B9B',
-			    		formatter: '{value}%',
+//			    		formatter: '{value}%',
+			    		formatter: function (value, index) {           
+							return value.toFixed(4);      
+						},
 			    	},
+//			    	type : 'value',
+// 					axisLabel: {                   
+//						formatter: function (value, index) {           
+//							return value.toFixed(4);      
+//						}                
+//					}
 			    },
 			    series: [{
 			    	type: 'line',
