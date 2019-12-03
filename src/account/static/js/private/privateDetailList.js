@@ -14,6 +14,7 @@ require('@pathCommonJsCom/goTopMui.js');
 //黑色提示条的显示和隐藏
 var tipAction = require('@pathCommonJsCom/tipAction.js');
 var splitUrl = require('@pathCommonJs/components/splitUrl.js')();
+var transcationTem = require('@pathCommonJsCom/account/transcationTem.js');
 
 
 $(function() {
@@ -24,10 +25,8 @@ $(function() {
         },
         gV: { //一些设置
             navList: [ //导航
-                { type: '买入', num: '0' },
-                { type: '定投', num: '2' },
-                { type: '分红', num: '3' },
-                { type: '赎回', num: '1' },
+                { type: '待确认交易', num: '0' },
+                { type: '已完成交易', num: '1' },
             ],
             aP: {
                 pageCurrent: 1,
@@ -39,7 +38,7 @@ $(function() {
             list_template: '', //列表的模板，生成后存放在这里
             ajaxArr: [], //存放每一个ajax请求的传参数据
             // 存放ajax请求地址  已持仓  待确认
-            siteUrlArr: [site_url.queryFortuneArticleList_api, site_url.queryFortuneArticleList_api, site_url.queryFortuneArticleList_api, site_url.queryFortuneArticleList_api],
+            siteUrlArr: [site_url.getTradeList_api, site_url.getTradeList_api],
             listToTop: '', // 滑动区域距离顶部距离
             navToTop: '', // 滑动nav距离顶部距离
             navHeight: '', // nav高度
@@ -51,10 +50,13 @@ $(function() {
             var that = this;
 
 
-            that.getTabsListData(); //获取tabs标签
-
             //事件监听
             that.events();
+            //拼模板，初始化左右滑动mui组件
+            that.beforeFunc();
+
+            //初始化第一屏区域的上拉加载
+            that.initMui($('#scroll1'));
         },
 
         beforeFunc: function() { //拼模板，初始化左右滑动mui组件
@@ -62,7 +64,7 @@ $(function() {
                 contentArr = []; //传给tabScroll组件的contentList参数的数组
 
             // list内容模板
-            var source = $('#second-template').html(), //获取 整个模板的html
+            var source = $('#trans-template').html(), //获取 整个模板的html
                 template = Handlebars.compile(source), //转换成方法
                 list_html = template(); //方法执行
 
@@ -78,7 +80,7 @@ $(function() {
             $.each(that.gV.navList, function(i, el) {
 
                 that.gV.ajaxArr[i] = {
-                    articleBelong: el.num, //请求类型
+                    isConfirm: el.num, //请求类型
                     pageNo: that.gV.aP.pageCurrent, //当前第几页(默认为1) 非必填项, 默认设置成第一页
                     pageSize: that.gV.aP.pageSize, //每页显示几条数据(默认10) 非必填项， 默认设置成20
                 }
@@ -86,6 +88,13 @@ $(function() {
                     id: i,
                     content: wrap_html
                 })
+                debugger
+                if (el.num == '1') {
+                    $('.hopper').show();
+                } else {
+                    $('.hopper').hide();
+                }
+
             })
 
             var obj = {
@@ -197,35 +206,6 @@ $(function() {
 
             // mui('.mui-slider').slider().stopped = true;
         },
-        getTabsListData: function(t) {
-            var that = this;
-            var obj = [{
-                url: site_url.getFortuneTabInfo_api,
-                data: {
-                    type: 29
-                },
-                needDataEmpty: true,
-                callbackDone: function(json) {
-                    that.gV.navList = [];
-
-                    for (var i = 0; i < json.data.length; i++) {
-                        (function(i) {
-                            that.gV.navList[i] = {
-                                type: json.data[i].sonModelName,
-                                num: json.data[i].sonModelType
-                            }
-                        })(i);
-                    }
-                    //拼模板，初始化左右滑动mui组件
-                    that.beforeFunc();
-
-                    //初始化第一屏区域的上拉加载
-                    that.initMui($('#scroll1'));
-
-                }
-            }];
-            $.ajaxLoading(obj);
-        },
         getData: function($id, t) { // 获取产品数据的公用ajax方法;$id为各区域的 scroll+num id
             var that = this;
             //获取产品列表
@@ -235,7 +215,7 @@ $(function() {
                 needLogin: true,
                 callbackDone: function(json) {
                     console.log(json.data)
-                    var jsonData = json.data.list,
+                    var jsonData = json.data.tradeList,
                         pageList = jsonData;
                     if (!$.util.objIsEmpty(pageList)) {
 
@@ -336,7 +316,7 @@ $(function() {
                         setTimeout(function() {
                             that.getElements.listLoading.hide();
                         }, 100);
-
+                        transcationTem(jsonData, $id.find('.list li'), $('#trans-template'))
                     }, 200)
 
 
@@ -403,6 +383,30 @@ $(function() {
         },
         events: function() { //绑定事件
             var that = this;
+            mui("body").on('tap', '.hopper', function(e) {
+                    $('.mask').show();
+                    $('.hopperCon').show();
+
+                })
+                //点击筛选数据
+            mui("body").on('tap', '.hopperCon li', function(e) {
+                    $(this).addClass('active').siblings('li').removeClass('active');
+                    $('.mask').hide();
+                    $('.hopperCon').hide();
+                    that.gV.businessType = $(this).attr('data');
+                    // 重置上拉加载
+                    mui('.contentWrapper').pullRefresh().refresh(true);
+                    that.gV.aP.pageNo = 1;
+                    that.getElements.contentWrap.html('');
+                    //重新初始化
+                    that.initMui();
+                    mui('.contentWrapper').pullRefresh().scrollTo(0, 0, 0);
+                })
+                // 点击遮罩隐藏
+            mui("body").on('tap', '.mask', function(e) {
+                $('.mask').hide();
+                $('.hopperCon').hide();
+            })
         }
     };
     data.init();

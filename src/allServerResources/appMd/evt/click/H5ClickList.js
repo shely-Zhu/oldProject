@@ -150,6 +150,33 @@ var clickList = {
 	"privateIndex_guessLike" : { type:'click', evtid: '4', topic: '私募首页-猜你喜欢', info: '' } ,
 	"privateIndex_hotSpot" : { type:'click', evtid: '5', topic: '私募首页-热门私募', info: ''} ,
 	"privateList_detail" : { type:'click', evtid: '6', topic: '私募列表页-产品详情', info: ''} ,
+	/*************************************************************mine文件夹下******************************************************************************************/ 
+	"activitiesEnrolment_ongoing " : { type:'click', evtid: '', topic: '已报名活动-进行中', info: ''} ,
+	"activitiesEnrolment_complete" : { type:'click', evtid: '', topic: '已报名活动-已结束', info: ''} ,
+
+	"feedback_functionalAbnormality" : { type:'click', evtid: '', topic: '意见反馈-功能异常', info: ''} ,
+	"feedback_safetyProblem" : { type:'click', evtid: '', topic: '意见反馈-安全问题', info: ''} ,
+	"feedback_productSuggestion" : { type:'click', evtid: '', topic: '意见反馈-产品建议', info: ''} ,
+	"feedback_otherQuestions" : { type:'click', evtid: '', topic: '意见反馈-其他问题', info: ''} ,
+	"feedback_addImg" : { type:'click', evtid: '', topic: '意见反馈-添加图片', info: ''} ,
+	"feedback_submit" : { type:'click', evtid: '', topic: '意见反馈-提交按钮', info: ''} ,
+
+	"details_understandingDetails" : { type:'click', evtid: '', topic: '权益详情-了解详情', info: ''} ,
+	"privateList_detail" : { type:'click', evtid: '', topic: '', info: ''} ,
+	"privateList_detail" : { type:'click', evtid: '', topic: '', info: ''} ,
+	"privateList_detail" : { type:'click', evtid: '', topic: '', info: ''} ,
+	"privateList_detail" : { type:'click', evtid: '', topic: '', info: ''} ,
+	"privateList_detail" : { type:'click', evtid: '', topic: '', info: ''} ,
+	"privateList_detail" : { type:'click', evtid: '', topic: '', info: ''} ,
+	"privateList_detail" : { type:'click', evtid: '', topic: '', info: ''} ,
+	"privateList_detail" : { type:'click', evtid: '', topic: '', info: ''} ,
+	"privateList_detail" : { type:'click', evtid: '', topic: '', info: ''} ,
+	"privateList_detail" : { type:'click', evtid: '', topic: '', info: ''} ,
+	"privateList_detail" : { type:'click', evtid: '', topic: '', info: ''} ,
+	"privateList_detail" : { type:'click', evtid: '', topic: '', info: ''} ,
+	"privateList_detail" : { type:'click', evtid: '', topic: '', info: ''} ,
+	"privateList_detail" : { type:'click', evtid: '', topic: '', info: ''} ,
+	"privateList_detail" : { type:'click', evtid: '', topic: '', info: ''} ,
 
 	"privatePlacementDetail_information" : { type:'click', evtid: '', topic: '私募基金产品详情-基本信息', info: ''} ,
 	"privatePlacementDetail_notice" : { type:'click', evtid: '', topic: '私募基金产品详情-交易须知', info: ''} ,
@@ -189,8 +216,8 @@ var clickList = {
 	"cashTransformOut_elasticButtons" : { type:'click', evtid: '', topic: '现金转出-其他总资产点击明白了 ', info: ''} ,
 	//homePage--------------------------------------------------------------分割线
 	//fortuneCollegeList.html
-	"banner" : { type:'click', evtid: '', topic: '轮播图图片', info: ''} ,
-	"slider" : { type:'click', evtid: '', topic: '轮播图小圆点', info: ''} ,
+	// "banner" : { type:'click', evtid: '', topic: '轮播图图片', info: ''} ,
+	// "slider" : { type:'click', evtid: '', topic: '轮播图小圆点', info: ''} ,
 	"fortune_host" : { type:'click', evtid: '', topic: '查看往期热词', info: ''} ,
 	"fortune_video" : { type:'click', evtid: '', topic: '播放往期内容', info: ''} ,
 	"fortune_videoList" : { type:'click', evtid: '', topic: '播放往期内容列表', info: ''} ,
@@ -202,9 +229,10 @@ var clickList = {
 	"fortune_studiesList" : { type:'click', evtid: '', topic: '财富研究列表', info: ''} ,
 	"fortune_studiesTab" : { type:'click', evtid: '', topic: '财富研究tab', info: ''} ,
 	//fortuneFlowKnown.html
-	"knownItem" : { type:'click', evtid: '', topic: '轮播图图片', info: ''} ,
+	"knownItem" : { type:'click', evtid: '', topic: '早知道列表', info: ''} ,
 	//fortuneClassroom.html
-	
+	"roomItem" : { type:'click', evtid: '', topic: '财富讲堂列表', info: ''} ,
+	"sliderTab" : { type:'click', evtid: '', topic: '财富讲堂详情tab', info: ''} 
 }
 
 module.exports = clickList;
