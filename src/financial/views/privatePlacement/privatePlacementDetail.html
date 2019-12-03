@@ -74,9 +74,9 @@
 			<div class="content">
 				<div class="tabsBox">
 					<div class="tabs">
-						<li class="active">基本信息</li>
-						<li>交易须知</li>
-						<li>产品材料</li>
+						<li class="active" htmdEvt="privatePlacementDetail_information">基本信息</li>
+						<li htmdEvt="privatePlacementDetail_notice">交易须知</li>
+						<li htmdEvt="privatePlacementDetail_science">产品材料</li>
 					</div>
 				</div>
 				<div class="wrap">
@@ -101,11 +101,11 @@
 				 				<!-- 无数据提示 -->
 				 				<div class="hide noDataHintEcharts">暂无数据</div>
 				 				<div class='history tab'>
-				 					<span class="time oneMonth active" num="0">月</span>
-				 					<span class="time threeMonth" num="1">季</span>
-				 					<span class="time halfYear" num="2">半年</span>
-				 					<span class="time newYear" num="3">一年</span>
-				 					<span class="time sinceNow" num="4">成立来</span>
+				 					<span class="time oneMonth active" htmdEvt="privatePlacementDetail_oneMonth" num="0">月</span>
+				 					<span class="time threeMonth" htmdEvt="privatePlacementDetail_threeMonth" num="1">季</span>
+				 					<span class="time halfYear" htmdEvt="privatePlacementDetail_halfYear" num="2">半年</span>
+				 					<span class="time newYear" htmdEvt="privatePlacementDetail_newYear" num="3">一年</span>
+				 					<span class="time sinceNow" htmdEvt="privatePlacementDetail_sinceNow" num="4">成立来</span>
 				 				</div>
 				 			</div>
 				 		</div>
@@ -236,34 +236,34 @@
 												<div class="title">募集户名</div>
 												<div class="copy">
 													<div id="name">--</div>
-													<span class="copy_btn">复制</span>
+													<span class="copy_btn" htmdEvt="privatePlacementDetail_name" >复制</span>
 												</div>
 											</li>
 											<li>
 												<div class="title">募集账号</div>
 												<div class="copy">
 													<div id="number">--</div>
-													<span class="copy_btn">复制</span>
+													<span class="copy_btn" htmdEvt="privatePlacementDetail_number" >复制</span>
 												</div>
 											</li>
 											<li>
 												<div class="title">开户银行</div>
 												<div class="copy">
 													<div id="linenum">--</div>
-													<span class="copy_btn">复制</span>
+													<span class="copy_btn" htmdEvt="privatePlacementDetail_linenum" >复制</span>
 												</div>
 											</li>
 											<li class="bordernone">
 												<div class="title">开户支行</div>
 												<div class="copy">
 													<div id="openingBank">--</div>
-													<span class="copy_btn">复制</span>
+													<span class="copy_btn" htmdEvt="privatePlacementDetail_openingBank" >复制</span>
 												</div>
 											</li>
 										</ul>
 										
 									</div>
-									<div class="copyAll">复制全部</div>
+									<div class="copyAll"  htmdEvt="privatePlacementDetail_copyAll" >复制全部</div>
 								</div>
 							</div>
 						</div>
@@ -284,7 +284,7 @@
 
 		<div class="immediatelyBuy">
 			<div class="buyRate">认购/申购费率 <span></span></div>
-			<div class="buyButton">立即预约</div>
+			<div class="buyButton" htmdEvt="privatePlacementDetail_buyButton" >立即预约</div>
 		</div>
 		
 	</div>

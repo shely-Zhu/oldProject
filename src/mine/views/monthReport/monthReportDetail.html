@@ -16,7 +16,7 @@
 	<!-- 月度报告详情 -->
 	<div class="monthReportDetail">
 		<!-- 月度报告详情页头部 -->
-		@@include('@pathCommonViews/headBarConfig.html',{"pathName":"月度报告详情页","bgColors":"#475A95,#051445","showType":"1"})
+		@@include('@pathCommonViews/headBarConfig.html',{"pathName":"","bgColors":"#475A95,#051445","showType":"1"})
 
 		<!-- 预读报告头部客户信息  start -->
 		<div class="reportDetailHeader">
@@ -47,14 +47,48 @@
 		<!-- 预读报告头部客户信息  end -->
 
 		<!-- 月末持仓总览、本月交易明细 start -->
-		<div class="reportContainer mui-content">			
+		<div class="mui-content midContent">
+			<div class="content">
+				<div class="tabsBox">
+					<div class="tabs">
+						<li class="active">月末持仓总览</li>
+						<li>本月交易明细</li>
+					</div>
+				</div>
+				<div class="wrap">
+					<!-- 月末持仓总览 start -->
+					<div class="panel holdPosition active" id="holdPosition">
 
+						<div class="without noData holdNodata" id="emptyBox">
+							<div class="box vertical center">
+								<p class="nodataImg">
+									<img src="/include/img/empty.png" alt="">
+								</p>
+								<p class="text"></p>
+							</div>
+							<div class="investBth">立即投资</div>
+						</div>
+					</div>
+					<!-- 月末持仓总览 end -->
+
+					<!-- 本月交易明细 start -->
+					<div class="panel tradeDtail" id="tradeDtail">
+						
+						<div class="without noData tradeNoData" id="emptyBox">
+							<div class="box vertical center">
+								<p class="nodataImg">
+									<img src="/include/img/empty.png" alt="">
+								</p>
+								<p class="text"></p>
+							</div>
+						</div>
+					</div>
+					<!-- 本月交易明细 end -->
+
+				</div>
+			</div>		
 		</div>
 		<!-- 月末持仓总览、本月交易明细 end -->
-		<!-- 加载中loading -->
-        @@include('@pathCommonViews/loading/listLoading.html')
-        <!-- 暂无数据 -->
-        @@include('@pathCommonViews/noDataImg.html',{"tipText":"暂无数据"})
 		
 		<!-- 资产情况分析 start -->
 		<div class="assetAnalysis">
@@ -93,27 +127,6 @@
 			</div>
 			<!-- 温馨提示 -->
 		</div>
-
-		<script id="transaction-template" type="text/x-handlebars-template">
-			{{! 列表 内容 使用mui的上拉加载}}
-			<div class="list">
-				{{! list是包裹上拉加载区域的，在js中计算当前页面中的list高度，不能超出一屏}}
-
-				{{! 初始化上拉加载区域，使用contentWrapper class}}
-				{{! contentWrapper 需要添加样式，具体见less文件}}
-				<div class="contentWrapper">
-
-					<ul class="mui-table-view">
-						<li class="mui-table-view-cell">
-						{{! 所有内容  需要放在这个li里，且里面不能再用Li元素}}
-						{{{content}}}
-
-						</li>
-					</ul>
-
-				</div>
-			</div>
-		</script>
 
 		<script id="second-template" type="text/x-handlebars-template">
 			{{! 左侧页面列表}} 
@@ -301,7 +314,7 @@
 							{{/if}}
 							{{!-- 公募 --}}
 							{{#if flag3}}
-								<a class="btn_order" href="javascript:;">立即购买</a>
+								<a class="btn_order publicBuy" href="javascript:;">立即购买</a>
 							{{/if}}
 						</li>
 					{{/each}}

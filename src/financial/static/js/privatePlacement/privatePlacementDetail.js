@@ -13,6 +13,8 @@ require('@pathCommonJs/components/authenticationProcess.js');
 var splitUrl = require('@pathCommonJs/components/splitUrl.js')();
 var tipAction = require('@pathCommonJs/components/tipAction.js');
 var generateTemplate = require('@pathCommonJsComBus/generateTemplate.js');
+//引入弹出层
+require('@pathCommonCom/elasticLayer/elasticLayer/elasticLayer.js');
 
 $(function(){
 	var  privatePlacementDetail = {
@@ -34,6 +36,7 @@ $(function(){
 		data:{
 			custType:"",//客户类型
 			fundDetailObj:"",//详情接口拿到的对象
+			buyFreeze:"",//是否买入冻结
 			qrnhWfsy: {
 				oneMonth : {},
 				threeMonth: {},
@@ -173,7 +176,7 @@ $(function(){
 					$('.buyRate span').html(jsonData.buyRate);
 				},
 			},{
-                    url: site_url.user_api,
+                    url: site_url.queryUserAuthInfo_api,
                     data: {
                         hmac: "", //预留的加密信息     
                         params: {
@@ -186,6 +189,8 @@ $(function(){
                     callbackDone: function(json) {
                         var jsonData = json.data;
                         that.data.custType = jsonData.accountType; // 客户类型【0.机构 1.个人】 
+                        that.data.buyFreeze = jsonData.buyFreeze; // 是否冻结买入：0-否；1-是；
+                        
 
                     },
                 }];
@@ -511,6 +516,7 @@ $(function(){
 					$("#tips-wrap").show();//显示预约条件
 //					generateTemplate(json.data,$("#real-condition"), that.$e.conditionTemplate);
 					var jsonData = json.data,
+					isPopup = "",//弹框
 					singleaAuthenPath = "",//一键认证跳转链接
 					singleaAuthen = false;//条件框是否展示
 					that.$e.realLi.hide();
@@ -518,9 +524,16 @@ $(function(){
 						var jumpUrl = "";
 						if(v.show == "1"){//如果显示。show=1
 							singleaAuthen = true;
+							if(!singleaAuthenPath){//获取一键认证的链接。有值的第一个
+//								return 
+								singleaAuthenPath = that.getJumpUrl(v)
+							}
+							if(v.conditionType == 3 && v.isPopup == "1"){
+								isPopup = true;
+							}
 							that.$e.realLi.eq(e*1).show();
 							that.$e.realLi.eq(e*1).find(".bank-status").html(v.statusDesc);
-							jumpUrl = that.getJumpUrl(v)
+							jumpUrl = that.getJumpUrl(v);//获取跳转Url。
 						}
 //						对应的条件认证到哪里
 						that.$e.realLi.eq(e*1).find(".tips-li-right").on('tap',function(){
@@ -532,12 +545,14 @@ $(function(){
 						})
 						//一键认证调往哪里
 						mui("body").on('tap', '.tips-btn', function() {
-							window.location.href = jumpUrl;
+							window.location.href = singleaAuthenPath;
 						})
 						
 					});
-					if(!singleaAuthen){//如果v.show都是0，则不展示预约框
+					if(!singleaAuthen){//如果v.show都是0，则不展示预约框,跳转到相应链接
 						$("#tips-wrap").hide();
+						that.nextStep();
+						
 					}
 
 
@@ -663,7 +678,9 @@ $(function(){
 						window.location.href = "/financial/views/privatePlacement/electronicContract/orderLimit.html?fundCode=" + that.$e.projectId + "&isAllowAppend=" +
 							that.data.fundDetailObj.isAllowAppend;
 					} else {
-						//弹框提示不支持在线追加弹框提示
+						//跳转到普通预约
+						window.location.href = "/financial/views/privatePlacement/ordinaryProducts/registration.html" + that.$e.projectId + "&isAllowAppend=" +
+							that.data.fundDetailObj.isAllowAppend;
 					}
 				} else { //预约
 					//跳转到预约产品链接
@@ -726,34 +743,21 @@ $(function(){
 
 			// 立即预约
 			mui("body").on('tap', '.buyButton' , function(){
-				that.getConditionsOfOrder();//获取预约条件
-				if(that.data.fundDetailObj.isElecContract == "1"){//电子合同逻辑
-					if(that.data.fundDetailObj.isAllowAppend == "1"){//追加商品参数fundCode,
-						//跳转到追加商品链接
-						if(that.data.custType == "1"){//客户类型【0.机构 1.个人】 
-							//跳转到电子合同追加页面
-							window.location.href = "/financial/views/privatePlacement/electronicContract/orderLimit.html?fundCode=" + that.$e.projectId + "&isAllowAppend="
-							+ that.data.fundDetailObj.isAllowAppend;
-						}else{
-							//弹框提示不支持在线追加弹框提示
-						}
-					}else{//预约
-						//跳转到预约产品链接
-						if(that.data.custType == "1"){//客户类型【0.机构 1.个人】 
-							//跳转到电子合同预约页面
-							window.location.href = "/financial/views/privatePlacement/electronicContract/orderLimit.html?fundCode=" + that.$e.projectId + "&isAllowAppend="
-							+ that.data.fundDetailObj.isAllowAppend;
-						}else{
-							//跳转到普通预约
-							window.location.href = "/financial/views/privatePlacement/ordinaryProducts/registration.html" + that.$e.projectId + "&isAllowAppend="
-							+ that.data.fundDetailObj.isAllowAppend;
-							
-						}
-					}
-				}else{//非电子合同
-					
-					window.location.href = "/financial/views/privatePlacement/ordinaryProducts/registration.html" + that.$e.projectId + "&isAllowAppend="
-							+ that.data.fundDetailObj.isAllowAppend;
+				if(that.data.buyFreeze == "1"){//如果账户冻结，首先提示
+	                var obj = {
+	                	title: '',
+	                	id: 'buyFreeze',
+	                	p: '您的账户已冻结，禁止买入，可联系您的理财师进行咨询',
+	                	yesTxt: '确认',
+	                	celTxt: "取消",
+	                	zIndex: 100,
+	                	callback: function(t) {
+
+	                	},
+	                };
+	                $.elasticLayer(obj)
+				}else{
+					that.getConditionsOfOrder();//获取预约条件
 					
 				}
 			});

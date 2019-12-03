@@ -44,12 +44,8 @@
             <div class="bank_screen_name fl">全部</div>
             <span class="iconfont fl">&#xe609;</span>
         </div>
-        <div class="bank_list hide">
-            <div class="bank_screen bank_item">
-                <div class="bank_screen_name fl">全部</div>
-                <span class="iconfont fr">&#xe626;</span>
-            </div>
-            <div id="bank_list_area"></div>
+        <div id="bank_list" class="bank_list hide">
+            <!-- 银行卡列表渲染 -->
         </div>
         <div class="list" id="cashPageLists">
             <!-- 现金宝列表 -->
@@ -172,7 +168,7 @@
         {{! 左侧页面列表}}
 		{{#each this}}
         <div class="bank_screen bank_item" bankAccount='{{bankAccount}}'>
-            <div class="bank_screen_name fl">{{bankName}} - {{get_last_4_value bankAccountMask}}</div>
+            <div class="bank_screen_name fl">{{bankName}}{{get_last_4_value bankAccountMask}}</div>
             <span class="iconfont fr hide">&#xe626;</span>
         </div>
         {{/each}}
