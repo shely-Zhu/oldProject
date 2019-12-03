@@ -183,6 +183,16 @@ module.exports = {
     //基金账户诊断
     './commonResources/fundDiagnosis/static/js/fundAccountDiagnosis': './src/commonResources/fundDiagnosis/static/js/fundAccountDiagnosis.js',
 
+    
+    // 基金诊断
+    './mine/static/js/hotDiagnosis': './src/mine/static/js/hotDiagnosis.js',
+    // 诊断详情
+    './mine/static/js/diagnosisDetail': './src/mine/static/js/diagnosisDetail.js',
+    // 基金诊断搜索页
+    './mine/static/js/diagnosisSearch': './src/mine/static/js/diagnosisSearch.js',
+    //基金账户诊断
+    './mine/static/js/fundAccountDiagnosis': './src/mine/static/js/fundAccountDiagnosis.js',
+
     // 标普模型
     './personal/static/js/spAssetModel': "./src/personal/static/js/spAssetModel.js",
     // 资产配置建议书

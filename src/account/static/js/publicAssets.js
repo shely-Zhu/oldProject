@@ -6,7 +6,7 @@
  * 公募持仓页面
  */
 
-require('@pathIncludJs/base.js');
+require('@pathCommonBase/base.js');
 require('../../../common/js/ajaxLoading.js');
 var tipAction = require('@pathCommonJs/components/tipAction.js');
 

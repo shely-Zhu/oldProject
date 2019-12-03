@@ -73,15 +73,16 @@
 
 require('./components/utils.js');
 //黑色提示条的显示和隐藏
-var tipAction = require("./components/tipAction.js");
-var Base64 = require('../../include/js/vendor/base64/base64.js');
-var manualTriggerLogin = require('./components/manualTriggerLogin.js');
-var splitUrl = require('./components/splitUrl.js')();
+var tipAction = require("../components/tipAction/tipAction.js");
+var Base64 = require('../../include/js/vendor/base64/base64.js');
+var manualTriggerLogin = require('./components/manualTriggerLogin.js');
+var splitUrl = require('./components/splitUrl.js')();
 
 //如果是app，判断登录状态
-//var appIsLogin = require("./components/app/needLogin.js");
+//var appIsLogin = require("./components/app/needLogin.js");
 
-;
+
+
 (function($) {
 
     $.extend($, {

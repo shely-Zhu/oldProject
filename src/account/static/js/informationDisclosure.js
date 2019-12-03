@@ -3,7 +3,7 @@
  * @author  zhangweipeng 2017-03-11
  */
 
-require('@pathIncludJs/base.js');
+require('@pathCommonBase/base.js');
 
 require('@pathCommonJs/ajaxLoading.js');
 require('@pathCommonJsCom/tabScroll.js');
