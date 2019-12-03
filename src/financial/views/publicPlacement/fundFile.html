@@ -15,8 +15,7 @@
 	<!-- @@include('@pathCommonViews/load.html') -->
 	<!-- 加载中loading -->
 	@@include('@pathCommonViews/loading/listLoading.html')
-	<!-- 暂无数据 -->
-	@@include('@pathCommonViews/noData.html')
+	
 	@@include('@pathCommonViews/headBarConfig.html',{"bgColors":"#2C3E77,#273971","showType":"0","pathName":"基本档案"})
 
 	<div class="mui-content midContent">
@@ -30,6 +29,8 @@
 				</div>
 			</div>
 			<div class="wrap">
+				<!-- 暂无数据 -->
+				@@include('@pathCommonViews/noData.html')
 				<div class="panel panel1 active tplBox1">
 
 				</div>
@@ -68,7 +69,8 @@
 			</div>
 		</div>
 	</div>
-	<script id="dataLists1" type="text/x-handlebars-template"> <div class="basic">
+	<script id="dataLists1" type="text/x-handlebars-template"> 
+	     <div class="basic">
 			<div class="name">{{ fundName }}</div>
 			<div class="contentWrap">
 				<div class="content">
@@ -85,14 +87,18 @@
 					</ul>
 					<ul class="contentUl">
 						<li>风险等级</li>
+						{{#if riskLevelName}}
 						<li class="changgeRight">{{ riskLevelName }}</li>
+						{{else}}
+						<li class="changgeRight">--</li>
+						{{/if}}
 					</ul>
 					<ul class="contentUl">
 						<li>成立日期</li>
 						<li class="changgeRight">{{ establishDate }}</li>
 					</ul>
 					<ul class="contentUl">
-						<li>分红方式</li>
+						<li>资产净值</li>
 						<li class="changgeRight">{{ assetValue }}亿({{ assetValueTime }})</li>
 					</ul>
 					<ul class="contentUl">
@@ -141,7 +147,7 @@
 						<div class="circle"></div>
 					</div>
 					<div class="industryConfiguration">
-						<div class="industryConfigurationTitle">资产配置</div>
+						<div class="industryConfigurationTitle">行业配置</div>
 						<div class="industryConfigurationTable">
 							<div class="industryConfigurationHead flex justify_center align_center">
 								<div class="industryConfigurationTd">行业名称</div>
@@ -190,7 +196,7 @@
 	<script id="dataLists4"  type="text/x-handlebars-template">
 	<div class="noticeWrap">
 		{{#each this}}
-			<div class="content">
+			<div class="content" linkRul="{{linkAddress}}">
 				<ul class="noticeWrapUl">
 					<li class="description">{{typInfo}}</li>
 					<li class="time">{{publishDate}}</li>

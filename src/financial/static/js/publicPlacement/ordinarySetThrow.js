@@ -84,6 +84,7 @@ $(function () {
 			bankNo: '',  //银行编号
 			bankAccount: '', // 银行账号
 			bankAccountMask:'', //银行账号密文
+			bankAccountSecret:'',//银行账号密文
 			nextDeductingDay:'',  //扣款周期
 		},
 		webinit: function () {
@@ -93,10 +94,11 @@ $(function () {
 			that.events();
 			if(that.gV.type == 'add'){
 				that.getData();
+				$("#HeadBarpathName").html('新增定投')
 			}
 			if(that.gV.type == 'edit'){
-				console.log('w222')
 				that.getDetails();
+				$("#HeadBarpathName").html('修改定投')
 			}
 			
 			that.getAgreeUrl();
@@ -181,7 +183,6 @@ $(function () {
 					if (json.status == '0000' || json.status == '4000') {
 						var data = json.data;
 						$("#loading").hide()
-						debugger
 						that.$el.fundName.html(data.secuSht)
 						that.$el.fundCode.html(data.trdCode)
 						that.gV.fundName = data.secuSht
@@ -236,10 +237,12 @@ $(function () {
 						that.gV.bankNo = data.bankNo 
 						that.gV.bankAccount = data.bankAccount
 						that.gV.bankAccountMask = data.bankAccountMask
+						that.gV.bankAccountSecret = data.bankAccountSecret
 						that.gV.fixedPeriodMask = data.fixedPeriodMask
 						that.gV.shares = data.shares
 						that.gV.expiryDate = data.expiryDate
 						that.$el.cycleDate.html(data.fixedPeriodMask)
+						that.$el.transformInput.val(data.balance)
 						that.getNextCutPayment();
 						that.getRate(data.balance);
 						that.getBankCard('0')
@@ -274,12 +277,13 @@ $(function () {
 							$('.popup').css('display','block')
 						}else{
 							for (var index = 0; index < data.length; index++) {
-								if(that.that.gV.bankAccountMask == data[index].bankAccountMask){
+								if(that.gV.bankAccountSecret == data[index].bankAccountSecret){
 									that.gV.bankName =data[index].bankName;
 									that.gV.bankNo = data[index].bankNo;
 									that.gV.tradeAcco = data[index].tradeAcco;
 									that.gV.bankAccount = data[index].bankAccount;
 									that.gV.bankAccountMask = data[index].bankAccountMask;
+									that.gV.bankAccountSecret = data[index].bankAccountSecret;
 									that.gV.capitalMode = data[index].capitalMode
 									var bankData = []
 									bankData.push({
@@ -531,7 +535,6 @@ $(function () {
 		},
 		//查询下次扣款日期
 		getNextCutPayment:function(){
-			debugger
 			var that = regulatory;
 			var deductingCycleDate = '';
 			var deductingDayDate = ''

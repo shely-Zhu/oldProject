@@ -1,5 +1,5 @@
-//  超宝-交易记录
-// @author wangjiajia 2019-11-20 
+//  私募交易详情-待确认交易，已确认交易
+// @author peicongcong 2019-12-02
 
 require('@pathCommonBase/base.js');
 require('@pathCommonJsCom/utils.js');
@@ -13,7 +13,6 @@ require('@pathCommonJsCom/goTopMui.js');
 require('@pathCommonCom/elasticLayer/elasticLayer/elasticLayer.js');
 
 //黑色提示条的显示和隐藏
-var tipAction = require('@pathCommonJsCom/tipAction.js');
 var splitUrl = require('@pathCommonJs/components/splitUrl.js')();
 var transcationTem = require('@pathCommonJsCom/account/transcationTem.js');
 
@@ -83,7 +82,7 @@ $(function() {
                 that.gV.ajaxArr[i] = {
                     isConfirm: el.num, //请求类型
                     businessType: null, //业务类型
-                    pageNo: that.gV.aP.pageCurrent, //当前第几页(默认为1) 非必填项, 默认设置成第一页
+                    pageNum: that.gV.aP.pageCurrent, //当前第几页(默认为1) 非必填项, 默认设置成第一页
                     pageSize: that.gV.aP.pageSize, //每页显示几条数据(默认10) 非必填项， 默认设置成20
                 }
                 contentArr.push({
@@ -232,7 +231,7 @@ $(function() {
                         //重设当前页码
                         if (!$.util.objIsEmpty(pageList)) {
                             //设置每个ajax传参数据中的当前页码
-                            that.gV.ajaxArr[that.gV.current_index].pageNo++;
+                            that.gV.ajaxArr[that.gV.current_index].pageNum++;
                         }
                     } else {
                         //没有数据
@@ -246,7 +245,7 @@ $(function() {
                         //that.gV.aP.pageSize  是  gV  里面设置的 
                         if (that.listLength < that.gV.aP.pageSize) {
 
-                            if (that.gV.ajaxArr[that.gV.current_index].pageNo == 1) {
+                            if (that.gV.ajaxArr[that.gV.current_index].pageNum == 1) {
                                 //第一页时
                                 if (that.listLength == 0) {
                                     //没有数据
@@ -287,7 +286,7 @@ $(function() {
                         }
 
                         $id.find('.contentWrapper .mui-pull-bottom-pocket').removeClass('mui-hidden');
-                        if (that.gV.ajaxArr[that.gV.current_index].pageNo == 1) {
+                        if (that.gV.ajaxArr[that.gV.current_index].pageNum == 1) {
                             //第一屏
                             $id.find('.contentWrapper .mui-table-view-cell').html(that.html);
                         } else {
@@ -397,7 +396,7 @@ $(function() {
                     $('.hopperCon').hide();
                     that.gV.businessType = $(this).attr('data');
                     // 重置上拉加载
-                    that.gV.ajaxArr[1].pageNo = 1;
+                    that.gV.ajaxArr[1].pageNum = 1;
                     that.gV.ajaxArr[1].businessType = $(this).attr('data');
                     // that.getElements.contentWrap.html('');
                     //重新初始化
@@ -474,9 +473,9 @@ $(function() {
                 if (type == 'toCertif') { //去合格投资者认证
 
                 } else if (type == 'toSign') { //去签合同
-                    window.location.href = site_url.seeSign_url + '?reserveId=' + id;
-                } else if (type == 'toSee') { //查看合同
 
+                } else if (type == 'toSee') { //查看合同
+                    window.location.href = site_url.seeSign_url + '?reserveId=' + id;
                 } else if (type == 'toUploadM') { //去上传汇款凭证
 
                 }

@@ -1,16 +1,22 @@
-document.addEventListener('DOMContentLoaded', function () {
+//document.addEventListener('DOMContentLoaded', function () {
     // 设置音频文件名显示宽度
     /*var element = document.querySelector('.audio-right');*/
     /*var maxWidth = window.getComputedStyle(element, null).width;*/
     /*document.querySelector('.audio-right p').style.maxWidth = maxWidth;*/
 
     // 初始化音频控制事件
+    //initAudioEvent();
+//}, false);
+
+$(function(){
+
     initAudioEvent();
-}, false);
+
+})
 
 function initAudioEvent() {
     var audio = document.getElementsByTagName('audio')[0];
-    var audioPlayer = document.getElementById('audioPlayer');
+    var audioPlayer = $('#audioPlayer');
 
     // // 添加音频自动播放功能
     // // PS：不完善，在chrome下会报错，原因看这里https://developers.google.com/web/updates/2017/09/autoplay-policy-changes
@@ -47,25 +53,25 @@ function initAudioEvent() {
     // 监听音频播放时间并更新进度条
     audio.addEventListener('timeupdate', function () {
         updateProgress(audio);
-    }, false);
+    });
 
     // 监听播放完成事件
     audio.addEventListener('ended', function () {
         audioEnded();
-    }, false);
+    });
 
     // 点击播放/暂停图片时，控制音乐的播放与暂停
-    audioPlayer.addEventListener('click', function () {
+    audioPlayer.on('click', function () {
         // 改变播放/暂停图片
         if (audio.paused) {
             // 开始播放当前点击的音频
             audio.play();
-            audioPlayer.innerHTML = '&#xe641;';
+            audioPlayer.html('&#xe641;');
         } else {
             audio.pause();
-            audioPlayer.innerHTML = '&#xe640;';
+            audioPlayer.html('&#xe640;');
         }
-    }, false);
+    });
 
     // 点击进度条跳到指定点播放
     // PS：此处不要用click，否则下面的拖动进度点事件有可能在此处触发，此时e.offsetX的值非常小，会导致进度条弹回开始处（简直不能忍！！）
@@ -167,7 +173,7 @@ function updateProgress(audio) {
     var value = audio.currentTime / audio.duration;
     /*document.getElementById('progressBar').style.width = value * 100 + '%';
     document.getElementById('progressDot').style.left = value * 100 + '%';*/
-    document.getElementById('audioCurTime').innerText = transTime(audio.currentTime);
+    $('#audioCurTime').text(transTime(audio.currentTime));
 
 }
 
@@ -177,8 +183,8 @@ function updateProgress(audio) {
 function audioEnded() {
     /*document.getElementById('progressBar').style.width = 0;
     document.getElementById('progressDot').style.left = 0;*/
-    document.getElementById('audioCurTime').innerText = transTime(0);
-    document.getElementById('audioPlayer').innerHTML = '&#xe641;';
+    $('#audioCurTime').text(transTime(0));
+    $('#audioPlayer').html('&#xe641;');
 }
 
 /**

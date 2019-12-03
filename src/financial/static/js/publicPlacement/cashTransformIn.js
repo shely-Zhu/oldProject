@@ -44,7 +44,7 @@ $(function () {
 		gV: { // 全局变量
 			fundBusinCode: '022',
 			fundName: splitUrl['fundName'] ? splitUrl['fundName'] : null,   //基金名称
-			fundCode: splitUrl['fundCode'] ? splitUrl['fundCode'] : '000847',  //基金代码
+			fundCode: splitUrl['fundCode'] ? splitUrl['fundCode'] : null,  //基金代码
 			capitalMode: '', //资金方式
 			payType: '',   //支付方式（0、在线支付 1、汇款支付）
 			bankName: '',  // 银行名称

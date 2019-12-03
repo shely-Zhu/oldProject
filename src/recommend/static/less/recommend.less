@@ -10,23 +10,30 @@
  *               有富文本，不能引入reset
  */
 
-@import url("../../../include/css/mui.min.css");
-@import url("../../../common/less/reset.less");
-@import url("../../../common/less/color.less");
-@import url("../../../include/css/mui.picker.all.css");
-@import url("../../../include/css/mui.picker.css");
+// @import url("../../../include/css/mui.min.css");
+// @import url("../../../common/less/reset.less");
+// @import url("../../../common/less/color.less");
+// @import url("../../../include/css/mui.pic/ker.all.css");
+// @import url("../../../include/css/mui.picker.css");
 
-@import url('../../../common/less/mui/resetMUI.less');
+// @import url('../../../common/less/mui/resetMUI.less');
 //重置MUI的poppicker样式
-@import url("../../../common/less/mui/resetMuiPop.less");
-@import url('../../../common/less/mui/selectMUI.less');
-@import url("../../../common/less/components/againEnter.less");
-@import url("../../../common/less/components/elasticLayerTypeTwo.less");
+// @import url("../../../common/less/mui/resetMuiPop.less");
+// @import url('../../../common/less/mui/selectMUI.less');
+// @import url("../../../common/less/components/againEnter.less");
+// @import url("../../../common/less/components/elasticLayerTypeTwo.less");
+@import url("@pathCommonLess/mui/resetMUI.less");
+@import url("@pathCommonLessCom/againEnter.less");
+@import url("@pathCommonLessCom/alertBox.less");
+@import url("@pathCommonLessCom/headBarConfig.less");
+@import url("@pathCommonCom/button/button.less");
+@import url("@pathCommonLessCom/headBarConfig.less");
 
 //设置屏幕宽高
 html,
 body {
-    width: 100%;
+    // width: 100%;
+    max-width: 7.5rem;
 }
 
 .mui-table-view-cell.mui-collapse .mui-navigate-right:after{
@@ -36,7 +43,6 @@ body {
 }
 
 .recommend_wrap {
-
     // 理财师选择
     .manager_choose_wrap {
         background-color: @c005;

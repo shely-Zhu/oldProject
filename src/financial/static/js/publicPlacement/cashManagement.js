@@ -64,9 +64,16 @@ $(function () {
     },
     events: function () {
       var that = this;
+      //调往现金宝详情
+      mui("body").on("tap", ".cashItem .itemTitle", function () {
+        var fundCode = $(this).attr("fundCode")
+        window.location.href = site_url.superStreasureDetail_url + '?fundCode='+ fundCode ;
+      });
 
       mui("body").on("tap", ".fundIn", function () {
-        window.location.href = site_url.pofCashTransformIn_url;
+        var fundCode = $(this).parent().parent().find(".itemTop .itemTitle span").eq(0).attr("fundCode")
+        var fundName = $(this).parent().parent().find(".itemTop .itemTitle span").eq(0).attr("fundName")
+        window.location.href = site_url.pofCashTransformIn_url + '?fundCode='+ fundCode + '&fundName=' + fundName;
       });
       mui("body").on("tap", ".fundOut", function () {
         var money = $($(this).parent().siblings()[1]).find(".centerValue").eq(0)[0].textContent;
