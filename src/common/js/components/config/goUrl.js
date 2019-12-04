@@ -405,6 +405,16 @@ module.exports = function() {
     //添加银行卡
     this.pofAddBankCard_url = go_url.no_url + '/mine/views/bankCard/addBankCard.html'
 
+    //
+    this.pofDemandFinancing_url = go_url.no_url + '/mine/views/bankCard/demandFinancing.html'
+    //
+    this.pofDemo_url = go_url.no_url + '/mine/views/bankCard/demo.html'
+
+
+
+
+
+
     /*------------------- 私募理财fang——le end ------------------------------*/
     this.optionalPublicDetail_url = go_url.no_url + '/account/views/public/optionalPublicDetail.html';
 
