@@ -245,7 +245,7 @@ $(function () {
 						that.$el.transformInput.val(data.balance)
 						that.getNextCutPayment();
 						that.getRate(data.balance);
-						that.getBankCard('0')
+						that.getBankCard('0',false)
 					}
                   
                 },
@@ -256,7 +256,7 @@ $(function () {
 
 
 		//获取银行列表
-		getBankCard: function(useEnv) {
+		getBankCard: function(useEnv,type) {
             var that = this;
             var obj = [{ 
                 url: site_url.normalPofList_api,
@@ -270,36 +270,44 @@ $(function () {
 						// 将列表插入到页面上
 						var data = [] ;
 						data = json.data.pageList;
-						console.log('data',data)
+						data.forEach(element => {
+							element.after4Num = element.bankAccountMask.substr(element.bankAccountMask.length -4)
+						});
 						if(that.gV.type == 'add'){
 							generateTemplate(data, that.$el.popupUl, that.$el.bankListTemplate,true);
 							$("#loading").hide()
 							$('.popup').css('display','block')
 						}else{
-							for (var index = 0; index < data.length; index++) {
-								if(that.gV.bankAccountSecret == data[index].bankAccountSecret){
-									that.gV.bankName =data[index].bankName;
-									that.gV.bankNo = data[index].bankNo;
-									that.gV.tradeAcco = data[index].tradeAcco;
-									that.gV.bankAccount = data[index].bankAccount;
-									that.gV.bankAccountMask = data[index].bankAccountMask;
-									that.gV.bankAccountSecret = data[index].bankAccountSecret;
-									that.gV.capitalMode = data[index].capitalMode
-									var bankData = []
-									bankData.push({
-										bankThumbnailUrl:data[index].bankThumbnailUrl,
-										bankName:data[index].bankName,
-										bankNo:data[index].bankNo,
-										singleNum:data[index].singleNum,
-										oneDayNum:data[index].oneDayNum
-									});
-									generateTemplate(bankData, that.$el.onlinepay, that.$el.bankListCheckTemplate,true);
-									setTimeout(function(){
-										$('.popup').css('display','none')
-									},500)
+							if(type){
+								generateTemplate(data, that.$el.popupUl, that.$el.bankListTemplate,true);
+								$("#loading").hide()
+								$('.popup').css('display','block')
+							}else{
+								for (var index = 0; index < data.length; index++) {
+									if(that.gV.bankAccountSecret == data[index].bankAccountSecret){
+										that.gV.bankName =data[index].bankName;
+										that.gV.bankNo = data[index].bankNo;
+										that.gV.tradeAcco = data[index].tradeAcco;
+										that.gV.bankAccount = data[index].bankAccount;
+										that.gV.bankAccountMask = data[index].bankAccountMask;
+										that.gV.bankAccountSecret = data[index].bankAccountSecret;
+										that.gV.capitalMode = data[index].capitalMode
+										var after4Num = data[index].after4Num
+										var bankData = []
+										bankData.push({
+											bankThumbnailUrl:data[index].bankThumbnailUrl,
+											bankName:data[index].bankName,
+											bankNo:data[index].bankNo,
+											singleNum:data[index].singleNum,
+											oneDayNum:data[index].oneDayNum,
+											after4Num:after4Num
+										});
+										generateTemplate(bankData, that.$el.onlinepay, that.$el.bankListCheckTemplate,true);
+									}
+									
 								}
-								
 							}
+							
 						}
 						
 					}
@@ -617,17 +625,6 @@ $(function () {
 		 */
 		events: function () {
 			var that = this;
-
-			//开始时间
-			// document.getElementById('starttime').addEventListener('tap', function () {
-			// 	option = { "type": "date", "beginYear": "1980", "endYear": "2030" };
-			// 	var picker = new mui.DtPicker(option);
-			// 	picker.show(function (rs) {
-			// 		console.log(rs.text)
-			// 		// document.getElementById('starttime').innerHTML = rs.text;
-			// 	});
-			// }, false);
-
 			var list = [{
 				value: '110000',
 				text: '每周',
@@ -784,7 +781,7 @@ $(function () {
 				$("#loading").show()
 				$(this).find(".imgc").show();
 				$(this).find(".iimg").hide();
-				that.getBankCard(useEnv)
+				that.getBankCard(useEnv,true)
 			}) 
 
 			$('body').on('tap','.popup-close',function(){
@@ -821,13 +818,15 @@ $(function () {
 				that.gV.bankAccount = $(this).attr('bankAccount');
 				that.gV.bankAccountMask = $(this).attr('bankAccountMask');
 				that.gV.capitalMode = $(this).attr('capitalMode')
+				var after4Num = $(this).attr('after4Num')
 				var data = []
 				data.push({
 					bankThumbnailUrl:$(this).attr('bankThumbnailUrl'),
 					bankName:$(this).attr('bankName'),
 					bankNo:$(this).attr('bankNo'),
 					singleNum:$(this).attr('singleNum'),
-					oneDayNum:$(this).attr('oneDayNum')
+					oneDayNum:$(this).attr('oneDayNum'),
+					after4Num:after4Num
 				});
 				generateTemplate(data, that.$el.onlinepay, that.$el.bankListCheckTemplate,true);
 				setTimeout(function(){

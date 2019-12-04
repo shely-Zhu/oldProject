@@ -15,6 +15,7 @@ require('@pathCommonJsCom/goTopMui.js');
 
 require('@pathCommonJs/components/headBarConfig.js');
 var splitUrl = require('@pathCommonJs/components/splitUrl.js')();
+var alwaysAjax = require('@pathCommonJs/components/alwaysAjax.js'); 
 
 
 $(function() {
@@ -380,6 +381,7 @@ $(function() {
         },
         events: function() { //绑定事件
             var that = this;
+            alwaysAjax("myAsset")
         }
     };
     data.init();
