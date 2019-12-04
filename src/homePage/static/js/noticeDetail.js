@@ -44,6 +44,7 @@ $(function(){
                 data:{
                     id: that.gV.noticeId
                 },
+                needLogin: true, //需要判断登录是否过期
                 needDataEmpty: true,
                 callbackDone: function(json) {
                     var data=json.data; 
