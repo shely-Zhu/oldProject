@@ -96,7 +96,7 @@
             <div class="onright-left-one">
                 <img src="{{bankThumbnailUrl}}" alt="">
                 <i>{{bankName}}</i>
-                <span>{{bankNo}}</span>
+                <span>{{after4Num}}</span>
             </div>
             <div class="onright-left-two">单笔限额{{singleNum}}，单日限额{{oneDayNum}}</div>
             {{/each}}
@@ -129,7 +129,7 @@
                 <!-- <div class="popup-close"> -->
                 <img class="popup-close" src="/financial/static/img/Nav Bar_icon_close_black@2x.png" alt="">
                 <!-- </div> -->
-                <div class="tit">选择在线支付银行卡</div>
+                <div class="tit bank-title"></div>
             </div>
             <ul class="popup-ul">
 
@@ -137,10 +137,10 @@
             <script id="bankList-template" type="text/x-handlebars-template">
                 {{#each this}}
                 <li class="popup-li bank-li" useEnv="{{useEnv}}" capitalMode="{{capitalMode}}" bankThumbnailUrl="{{bankThumbnailUrl}}" tradeAcco="{{tradeAcco}}" bankName="{{bankName}}" bankNo="{{bankNo}}" singleNum="{{singleNum}}"
-                 oneDayNum="{{oneDayNum}}" bankAccountSecret="{{bankAccountSecret}}">
+                 oneDayNum="{{oneDayNum}}" bankAccountSecret="{{bankAccountSecret}}" after4Num="{{after4Num}}">
                     <img class="bank-img" src="{{bankThumbnailUrl}}" alt="">
                     <div class="div">
-                        <div class="bank-name">{{bankName}}({{bankNo}})</div>
+                        <div class="bank-name">{{bankName}}({{after4Num}})</div>
                         <div class="bank-pay">单笔限额{{singleNum}}，单日限额{{oneDayNum}}</div>
                     </div>
                     <img class="true" src="/financial/static/img/account_icon_check@2x.png" alt="">
