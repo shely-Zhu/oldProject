@@ -804,8 +804,16 @@ $(function () {
 					tipAction('只能输入两位小数')
 					return
 				}else{
-					that.gV.balance = $(this).val();
-					that.getRate($(this).val());
+					if(Number($(this).val()) >= Number(that.gV.minValue) && Number($(this).val()) <= Number(that.gV.maxValue)){
+						that.gV.balance = Number($(this).val()).toFixed(2);
+						that.getRate($(this).val());
+					}else if(Number($(this).val()) > that.gV.maxValue){
+						tipAction('最大买入金额不能超过' + that.gV.maxValue + '元')
+						return
+					}else{
+						return false
+					}
+					
 				}
 				
 			})
@@ -853,14 +861,22 @@ $(function () {
 			
 			//确定
 			$('body').on('tap','.btn_box .btn',function(){
-				if(!!that.gV.bankAccountMask){
-					that.checkPayType()
-					
+				if(Number(that.gV.balance) > Number(that.gV.maxValue)){
+					tipAction('最大买入金额不能超过' + that.gV.maxValue + '元')
+				}else if(Number(that.gV.balance) < Number(that.gV.minValue)){
+					tipAction('最小买入金额不能低于' + that.gV.minValue + '元')
 				}else{
-					//未选择银行卡提示信息
-					tipAction("请选择银行卡！");
-					return
+					if(!!that.gV.bankAccountSecret){
+						that.checkPayType()
+						
+					}else{
+						//未选择银行卡提示信息
+						tipAction("请选择银行卡！");
+						return
+					}
 				}
+
+				
 			}) ;
 			//  ---《公募基金风险揭示及售前告知书》
 			$('body').on('tap','.setGoUrl',function(){
