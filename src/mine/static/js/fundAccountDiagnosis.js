@@ -72,7 +72,7 @@ $(function() {
                 },
                 needDataEmpty: false,
                 callbackDone: function(json) {
-                    debugger
+                    
                     var data = json.data;
                       // 将列表插入到页面上
                       generateTemplate(data, that.$e.holdingBox, that.$e.holdingBoxTemp);
@@ -158,7 +158,7 @@ $(function() {
                 },
                 needDataEmpty: false,
                 callbackDone: function(json) {
-                    debugger
+                    
                     
                 },
                 callbackFail: function(json) {
@@ -176,7 +176,7 @@ $(function() {
                 },
                 needDataEmpty: false,
                 callbackDone: function(json) {
-                    debugger
+                    
                     
                 },
                 callbackFail: function(json) {
@@ -194,7 +194,7 @@ $(function() {
                 },
                 needDataEmpty: false,
                 callbackDone: function(json) {
-                    debugger
+                    
                     
                 },
                 callbackFail: function(json) {
@@ -212,7 +212,7 @@ $(function() {
                 },
                 needDataEmpty: false,
                 callbackDone: function(json) {
-                    debugger
+                    
                     
                 },
                 callbackFail: function(json) {

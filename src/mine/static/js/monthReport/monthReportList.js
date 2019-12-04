@@ -33,7 +33,7 @@ $(function() {
 		},
 		init: function() {
 			var that = this;
-			// that.initMui();
+			that.initMui();
 			that.events();
 		},
 		getUserInfo:function(){
