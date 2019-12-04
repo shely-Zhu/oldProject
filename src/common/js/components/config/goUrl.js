@@ -307,14 +307,11 @@ module.exports = function() {
 
     /*-------------------------------基金诊断 start -----------------------*/
     // 热门诊断
-    //this.hotDiagnosis_url = go_url.no_url + '/commonResources/fundDiagnosis/views/hotDiagnosis_url.html';
-    this.hotDiagnosis_url = go_url.no_url + '/mine/fundDiagnosis/views/hotDiagnosis_url.html';
+    this.hotDiagnosis_url = go_url.no_url + '/mine/views/fundDiagnosis/hotDiagnosis_url.html';
     // 诊断搜索页面
-    //this.diagnosisSearch_url = go_url.no_url + '/commonResources/fundDiagnosis/views/diagnosisSearch.html';
-    this.diagnosisSearch_url = go_url.no_url + '/mine/fundDiagnosis/views/diagnosisSearch.html';
+    this.diagnosisSearch_url = go_url.no_url + '/mine/views/fundDiagnosis/diagnosisSearch.html';
     // 诊断详情页
-    //this.diagnosisDetail_url = go_url.no_url + '/commonResources/fundDiagnosis/views/diagnosisDetail.html';
-    this.diagnosisDetail_url = go_url.no_url + '/mine/fundDiagnosis/views/diagnosisDetail.html';
+    this.diagnosisDetail_url = go_url.no_url + '/mine/views/fundDiagnosis/diagnosisDetail.html';
 
     /*-------------------------------基金诊断 end -----------------------*/
     /*-------------------------------我的页面 start -----------------------*/
@@ -499,5 +496,13 @@ module.exports = function() {
     //财富学院首页
     this.fortuneCollegeList_url = go_url.no_url +  '/homePage/views/fortuneCollege/fortuneCollegeList.html'
     /*------------------- 财富学院 end ------------------------------*/
+
+    //电子合同预约
+    this.orderLimit_url = go_url.no_url + '/financial/views/privatePlacement/electronicContract/orderLimit.html';
+    //普通预约
+    this.registration_url = go_url.no_url + '/financial/views/privatePlacement/ordinaryProducts/registration.html';
+    this.pofDemandFinancing_url = go_url.no_url + '/mine/views/bankCard/demandFinancing.html';
+    this.pofDemo_url = go_url.no_url + '/mine/views/bankCard/demo.html';
+   
    
 };

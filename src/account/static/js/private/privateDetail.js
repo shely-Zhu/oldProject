@@ -100,7 +100,7 @@ $(function() {
 			that.event();	
 		},
 		// 获取交易规则内容接口 t 1 稳金 2 稳裕 5 证券
-		getTradeRule() {
+		getTradeRule: function() {
 			var that = this;
 			var projectType = Number(that.data.projectType)
 			switch(projectType) {
@@ -134,7 +134,7 @@ $(function() {
 			$.ajaxLoading(obj);	
 		},
 		// 赎回规则数据 1快速赎回 2普通赎回
-		setRedeemRule(type) {
+		setRedeemRule: function(type) {
 			var that = this;
 			var redeemRule = that.data.redeemRule;
 			if(type == 1) {

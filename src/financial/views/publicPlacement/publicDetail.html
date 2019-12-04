@@ -19,27 +19,6 @@
 	</div>
 	@@include('@pathCommonViews/authenticationProcess.html',{"pathTitle":"认证信息"})
 	@@include('@pathInclude/views/footer.html')
-
-	<script src="/include/js/vendor/echarts/echarts.min.js"></script>
-	<script src="/financial/static/js/publicPlacement/publicDetail.js"></script>
-	<script id="dataLists" type="text/x-handlebars-template">
-		<div >
-		<div class="topContent">
-
-			<div class="service"></div>
-			<div class="day_gain">七日年化</div>
-			<div class="day_gain_value">{{annYldRat}}%</div>
-			<div class="new_worth">万份收益</div>
-			<div class="new_worth_value">{{unitYld}}</div>
-			<div class="type">
-				<div class="type_1">{{riskLevelName}}</div>
-				<div class="type_2">{{invTypComDesc}}</div>
-				<div class="type_3">10000.0元起购</div>
-			</div>
-		</div>
-		@@include('@pathCommonViews/authenticationProcess.html',{"pathTitle":"认证信息"})
-		@@include('@pathInclude/views/footer.html')
-
 		<script src="/include/js/vendor/echarts/echarts.min.js"></script>
 		<script src="/financial/static/js/publicPlacement/publicDetail.js"></script>
 		<script id="dataLists" type="text/x-handlebars-template">
@@ -85,8 +64,8 @@
 						<span class="navSpan normal" type="2">万份收益</span>
 					</div>
 					<div class="line_area" >
-						<div id="line1" class="line" ></div>
-						<div id="line2" class="hide line"  ></div>
+						<div id="line1" class="line"></div>
+						<div id="line2" class="hide line"></div>
 						<div class="hide noDataHintEcharts">暂无数据</div>
 					</div>
 					<div class='tab'>

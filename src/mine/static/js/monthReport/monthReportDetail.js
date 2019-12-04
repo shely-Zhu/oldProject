@@ -268,6 +268,7 @@ var monthReportDetail = {
 				//判断是否已实名认证
 				var data = json.data;
 				// var assetPerHtml;
+				that.pieChartDataDetail = [];
 
 				var lastMonth = Number(that.getElements.month)-1;
 
@@ -276,7 +277,7 @@ var monthReportDetail = {
 					that.monthHoldShareList = data.monthHoldShareList;
 
 					$.each(data.monthHoldShareList,function(i,el){
-						that.pieChartData[i] = el.assetTypeDesc;
+						that.pieChartData[i] = el.assetTypeDesc + el.holdShareValue;
 
 						if(el.assetType == '203'){
 							el.colorStart = '#182F7A';
@@ -295,8 +296,8 @@ var monthReportDetail = {
 							el.colorStop = '#D8D8D8';
 						}
 
-
-						var dataDetail = {value:el.confirmValuePercent, name:el.assetTypeDesc,itemStyle: {
+						var assetTypeDesc = el.assetTypeDesc + '' + el.holdShareValue;
+						var dataDetail = {value:el.confirmValuePercent, name: assetTypeDesc,itemStyle: {
 							normal: {
 								color: new echarts.graphic.LinearGradient(
 									0, 0, 1, 1,
@@ -392,14 +393,14 @@ var monthReportDetail = {
 			callbackDone: function(json){
 				//判断是否已实名认证
 				var data = json.data;
-				// var flag;
+				that.pieChartDataDetail = [];
 
 				if ( data.length) {
 					//有数据
 					that.recommendList = data;
 
 					$.each(that.recommendList,function(i,el){
-						that.pieChartData[i] = el.assetTypeDesc;
+						that.pieChartData[i] = el.assetTypeDesc + (Number(el.assetRatio)*100).toFixed(2)+ '%';
 
 						if(el.assetType == '203'){
 							el.colorStart = '#182F7A';
@@ -419,7 +420,8 @@ var monthReportDetail = {
 						}
 
 
-						var dataDetail = {value:el.confirmValuePercent, name:el.assetTypeDesc,itemStyle: {
+						var assetTypeDesc = el.assetTypeDesc + (Number(el.assetRatio)*100).toFixed(2) + '%';
+						var dataDetail = {value:el.assetRatio, name:assetTypeDesc,itemStyle: {
 							normal: {
 								color: new echarts.graphic.LinearGradient(
 									0, 0, 1, 1,
@@ -554,8 +556,8 @@ var monthReportDetail = {
 
 				itemHeight: 10, // 设置高度
 				itemGap: 10 ,//设置间距
-				x: '50%',
-				y: '35%'
+				x: '55%',
+				y: '27%'
 
 			},
 			series: [
@@ -563,7 +565,7 @@ var monthReportDetail = {
 					name:'您当前的资产配比',
 					type:'pie',
 					radius: ['49%', '70%'],
-					center: ['35%', '47%'],
+					center: ['27%', '47%'],
 					// selectedMode: 'single',
 					avoidLabelOverlap: false,
 					hoverAnimation:false,
@@ -612,7 +614,7 @@ var monthReportDetail = {
 					type:'pie',
 					hoverAnimation:false,
 					radius: ['40%', '50%'],
-					center: ['35%', '47%'],
+					center: ['27%', '47%'],
 					avoidLabelOverlap: false,
 					
 					label: {

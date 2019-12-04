@@ -204,7 +204,7 @@ $(function(){
                     'htmdEvt': 'feedback_functionalAbnormality'
                 });
             //无缝滚动
-            alwaysAjax('.content .li')
+            alwaysAjax('.content')
 
 		},
     }

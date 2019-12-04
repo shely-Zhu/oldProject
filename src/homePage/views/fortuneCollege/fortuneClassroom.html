@@ -47,7 +47,7 @@
         {{#if isLive}}
             <div class="roomItem item" htmdEvt = "fortune_roomItem" id="{{id}}" articleBelong="{{articleBelong}}">
                 <div class="roomVideo">
-                    <img class="articalImg" src="{{imageUrlShowOnline}}" alt="">
+                    <img class="articalImg lazyload" src="/common/img/lazyImgList.png" data-original="{{imageUrlShowOnline}}" alt="">
                     <img class="play" src="/common/img/bofang@2x.png" alt="">
                 </div>
                 <div class="roomTitle">{{title}}</div>
@@ -55,7 +55,7 @@
             </div>
         {{else}}
             <div class="roomItem knowledgeItem" htmdEvt ="fortune_roomItem" id="{{id}}" articleBelong="{{articleBelong}}">
-                <div class="roomImg"><img src="{{imageUrlShowOnline}}" alt=""></div>
+                <div class="roomImg"><img src="/common/img/lazyImgList.png" data-original="{{imageUrlShowOnline}}" alt=""></div>
                 <div class="roomTitle">{{title}}</div>
                 <div class="roomContent">{{intro}}</div>
            </div>

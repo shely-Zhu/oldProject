@@ -145,7 +145,8 @@ $(function() {
                     
                     // 将列表插入到页面上
                     generateTemplate(modelData,$('.fortuneVideo .title'),$('#fortuneCf-template'));     
-                    generateTemplate(articleData,$('.fortuneVideo ul'),$('#video-template'));						
+                    generateTemplate(articleData,$('.fortuneVideo ul'),$('#video-template'));
+                    $(".lazyload").lazyload()					
                 },
                 callbackFail: function(json){
                     console.log(json)
@@ -181,6 +182,7 @@ $(function() {
               generateTemplate(modelData,$('.forum .title'),$('#forum-template'));     
               generateTemplate(listTitle,$('.broadcast'),$('#forumTitle'));
               generateTemplate(listContent,$('.forumList'),$('#forumContent'));	
+              $(".lazyload").lazyload()		
               setTimeout(()=>{
                 $('.broadcast').find('.bigspan').eq(0).addClass('getColor');
                 $('.broadcast').find('.bigspan').eq(0).css({"paddingLeft":0,"borderLeft":'none'});
@@ -415,13 +417,13 @@ $(function() {
                },
                 needLogin: true,
                 callbackDone: function(json) {
-                    console.log(json.data)
+                    console.log(json.data)	
                     var jsonData = json.data.list[that.gV.current_index].list,
                         pageList = jsonData;
                     if (!$.util.objIsEmpty(pageList)) {
 
                         jsonData.tobe = that.gV.current_index == 0 ? 0 : 1;    
-                        var list_html = that.gV.list_template(jsonData); //  把内容  放到  模板里
+                        var list_html = that.gV.list_template(jsonData); //  把内容  放到  模板里	
                         //设置这两参数，在initMui()中使用
                         //判断是否显示没有更多了等逻辑，以及插入新数据
                         that.listLength = pageList.length;
@@ -516,7 +518,7 @@ $(function() {
                         setTimeout(function() {
                             that.getElements.listLoading.hide();
                         }, 100);
-
+                        $('.lazyload').lazyload();
                     }, 200)
 
 
