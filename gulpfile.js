@@ -418,11 +418,15 @@ gulp.task('bfRev', function() {
 
 /*******************************各种打包任务***********************************/
 
+gulp.task('commonImages' , function() {
+    return gulp.src(['src/common/**/*.{jpg,png,jpeg,svg}'])
+        .pipe(gulp.dest(host.path + 'include/commonImg/'));
+});
 
 
 //图片打包任务，全部打包和单独打包可共用
-gulp.task('images', function() {
-    return gulp.src('src/**/img/**/*')
+gulp.task('images', ['commonImages'] , function() {
+    return gulp.src(['src/**/img/**/*', '!src/common/**/*'])
         .pipe(gulp.dest(host.path));
 });
 
@@ -443,6 +447,9 @@ gulp.task("cssToHost", function() {
     //通过through处理相对路径
     .pipe(
         through.obj(function(file, enc, cb) {
+            
+            file = changeCommonImg(file);
+
             file = pathVar.changePathVar(file);
             this.push(file);
             cb()
@@ -504,6 +511,7 @@ gulp.task("htmd", function() {
 
 //不使用webpack的 js文件打包
 gulp.task("includeJs", ['htmd'], function() {
+
     return gulp.src(jsIncludeSrc)
         //与host.path中的内容做比对
         .pipe(plugins.changed(host.path, { hasChanged: plugins.changed.compareSha1Digest }))
@@ -520,6 +528,9 @@ gulp.task("includeJs", ['htmd'], function() {
     //对root.js做一些修改
     .pipe(
         through.obj(function(file, enc, cb) {
+
+            file = changeCommonImg(file);
+
             if (file.path.indexOf('root.js') != -1 && (options.env == '0' || options.env == "5")) {
                 // if (file.path.indexOf('root.js') != -1 && (options.env == '0')) {
                 //如果是本地或联调环境，修改env和envOrigin的值
@@ -651,6 +662,9 @@ gulp.task("webpack", ['jsCpd'], function(cb) {
 
         //添加changeLocalHistory、eruda和CustomEventIeFile的文件内容
         through.obj(function(file, enc, cb) {
+
+            file = changeCommonImg(file);
+
             var fileCon = file.contents.toString();
             fileCon = changeLocalHistoryFile + fileCon + erudaFile + CustomEventIeFile;
             file.contents = new Buffer(fileCon);
@@ -681,8 +695,27 @@ gulp.task("webpack", ['jsCpd'], function(cb) {
 function changeCommonImg( file ){
     //如果有用到common里面的图片的，全部把路径改成include
     var fileCon = file.contents.toString();
-    var re = new RegExp( '\/common\/.*\.[jpg|png|svg|jpeg]{1}', 'g');
-    var commonImgArr = fileCon.match(re).length;
+    var re = new RegExp("\/common\/[^\.]*\.(jpg|png|svg|jpeg)", 'g');
+    var commonImgArr = fileCon.match(re);
+
+    if( commonImgArr && commonImgArr.length ){
+        //有common下的图片路径
+        for( var i in commonImgArr){
+
+            // console.log( '文件路径;' + file.path)
+            // console.log( '原图片路径：' + commonImgArr[i]);
+            // console.log('要替换的路径：' + commonImgArr[i].replace('/common/', '/include/commonImg/'));
+            // console.log( fileCon.indexOf( commonImgArr[i]));
+            
+            var r = new RegExp( commonImgArr[i], 'g');
+            
+            fileCon = fileCon.replace( r, commonImgArr[i].replace('/common/', '/include/commonImg/'))
+        
+            // console.log( fileCon.indexOf( commonImgArr[i].replace('/common/', '/include/commonImg/')));
+        }
+    }
+    file.contents = new Buffer(fileCon);
+    return file;
 }   
 
 //html文件打包
@@ -697,7 +730,7 @@ gulp.task('html', function (cb) {
             file = pathVar.changePathVar(file);
 
             //替换全部common下的图片路径为include的
-            // file = changeCommonImg(file);
+            file = changeCommonImg(file);
             
             this.push(file);
             cb()
