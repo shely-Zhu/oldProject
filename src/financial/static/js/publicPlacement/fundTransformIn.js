@@ -89,9 +89,9 @@ $(function () {
 						var data = json.data;
 						$("#loading").hide()
 						that.$el.fundName.html(data.secuSht)
-		    			that.$el.fundCode.html(data.trdCode)
+						that.$el.fundCode.html(data.trdCode)
 						that.$el.payConfirmDate.html(data.fundConfirmDate)
-						that.$el.brforre15Date.html(data.after15tradeDate)
+						that.$el.brforre15Date.html(data.g2gafter15tradeDate)
 						that.gV.fundName = data.secuSht
 						that.gV.fundCode = data.trdCode
 						that.gV.discount = Number(data.discount);
@@ -341,13 +341,13 @@ $(function () {
 			var that = this;
 			/** 下面三个事件： 银行卡列表出现/隐藏 **/
 			$('body').on('tap','.paymoney',function(){
-				$(".imgc").hide()
-				$(".iimg").show()
+				// $(".imgc").hide()
+				// $(".iimg").show()
 				that.gV.payType = $(this).attr('pay-type')
 				var useEnv = $(this).attr('pay-type')
 				$("#loading").show()
-				$(this).find(".imgc").show();
-				$(this).find(".iimg").hide();
+				// $(this).find(".imgc").show();
+				// $(this).find(".iimg").hide();
 				that.getBankCard(useEnv)
 			}) 
 
@@ -368,7 +368,7 @@ $(function () {
 			
 			$("#transformInput").on('input propertychange',function(){
 				console.log('this.val',$(this).val())
-				that.gV.balance = $(this).val();
+				that.gV.balance = Number($(this).val()).toFixed(2);
 				if(Number($(this).val()) >= Number(that.gV.minValue) && Number($(this).val()) <= Number(that.gV.maxValue)){
 					that.getCostEstimate($(this).val())
 				}else if(Number($(this).val()) > that.gV.maxValue){
@@ -379,10 +379,9 @@ $(function () {
 				
 			})
 			//清除输入框数字
-			$('body').on('tap','.deleteNum',function(){
+			mui("body").on("tap", ".deleteNum", function() {
 				$('.transformInput').val(null)
-			}) ;
-
+			})
 			//选中银行卡
 			$('body').on('tap','.bank-li',function(){
 				$(".bank-li .true").hide();
@@ -402,12 +401,20 @@ $(function () {
 				})
 
 				if(that.gV.payType == '0'){
-					generateTemplate(data, that.$el.onlinepay, that.$el.bankListCheckTemplate,true);		
+					generateTemplate(data, that.$el.onlinepay, that.$el.bankListCheckTemplate,true);
+					that.$el.onlinepay.parent().find(".imgc").show();
+					that.$el.onlinepay.parent().find(".iimg").hide();
 					that.$el.remittance.html('')
+					that.$el.remittance.parent().find(".imgc").hide();
+					that.$el.remittance.parent().find(".iimg").show();
 				}
 				if(that.gV.payType == '1'){
 					generateTemplate(data, that.$el.remittance, that.$el.bankListCheckTemplate,true);
+					that.$el.remittance.parent().find(".imgc").show();
+					that.$el.remittance.parent().find(".iimg").hide();
 					that.$el.onlinepay.html('')
+					that.$el.onlinepay.parent().find(".imgc").hide();
+					that.$el.onlinepay.parent().find(".iimg").show();
 				}
 				setTimeout(function(){
 					$('.popup').css('display','none')
