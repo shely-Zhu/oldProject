@@ -63,7 +63,7 @@
 						<div class="without noData holdNodata" id="emptyBox">
 							<div class="box vertical center">
 								<p class="nodataImg">
-									<img src="/include/img/empty.png" alt="">
+									<img src="/common/img/empty.png" alt="">
 								</p>
 								<p class="text"></p>
 							</div>
@@ -78,7 +78,7 @@
 						<div class="without noData tradeNoData" id="emptyBox">
 							<div class="box vertical center">
 								<p class="nodataImg">
-									<img src="/include/img/empty.png" alt="">
+									<img src="/common/img/empty.png" alt="">
 								</p>
 								<p class="text"></p>
 							</div>
@@ -288,6 +288,7 @@
 		{{! 左侧页面列表}}
 		{{#each this}}
 			<div class="assetsCon clearfix">
+				
 				<h2>{{assetTypeDesc}}<span>（投资比例{{assetRatioDesc}}%）</span></h2>
 				<ul class="assetsList">
 					{{#each productList}}
@@ -309,7 +310,8 @@
 							</div>
 							{{!-- 私募 --}}
 							{{#if flag2}}
-								<a class="btn_order" href="/financial/views/privatePlacement/privatePlacementDetail.html?projectId={{productId}}:;" htmdEvt="monthReportDetail_immediateAppointment">立即预约</a>
+								<!-- <a class="btn_order" href="/financial/views/privatePlacement/privatePlacementDetail.html?projectId={{productId}}:;" htmdEvt="monthReportDetail_immediateAppointment">立即预约</a> -->
+								<a class="btn_order" href="javascript:;" onclick="setGoUrl( site_url.privatePlacementDetail_url+'?projectId={{productId}}', '')" htmdEvt="monthReportDetail_immediateAppointment">立即预约</a>
 							{{/if}}
 							{{!-- 其他 --}}
 							{{#if flag1}}
@@ -317,7 +319,8 @@
 							{{/if}}
 							{{!-- 公募 --}}
 							{{#if flag3}}
-								<a class="btn_order publicBuy" href="/financial/views/publicPlacement/publicDetail.html?fundCode={{productId}}" htmdEvt="monthReportDetail_immediateBuy">立即购买</a>
+								<!-- <a class="btn_order publicBuy" href="/financial/views/publicPlacement/publicDetail.html?fundCode={{productId}}" htmdEvt="monthReportDetail_immediateBuy">立即购买</a> -->
+								<a class="btn_order publicBuy" onclick="setGoUrl( site_url.pofPublicDetail_url+'?fundCode={{productId}}', '')" htmdEvt="monthReportDetail_immediateBuy">立即购买</a>
 							{{/if}}
 						</li>
 					{{/each}}

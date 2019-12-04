@@ -42,7 +42,8 @@ $(function () {
 			contract: $(".file .contract"), //同意协议选择框
 			recruiting: $(".file .recruiting"), //同意协议选择框
 			confirmBtn: $(".btn_box .btn"), //确定按钮
-			elasticTxt:$(".popup-password .elasticTxt")
+			elasticTxt:$(".popup-password .elasticTxt"),
+			popupTitle:$(".popup .bank-title"),  //银行卡弹窗标题
 		},
 		gV: { // 全局变量
 			fundBusinCode: '022',
@@ -89,9 +90,9 @@ $(function () {
 						var data = json.data;
 						$("#loading").hide()
 						that.$el.fundName.html(data.secuSht)
-		    			that.$el.fundCode.html(data.trdCode)
+						that.$el.fundCode.html(data.trdCode)
 						that.$el.payConfirmDate.html(data.fundConfirmDate)
-						that.$el.brforre15Date.html(data.after15tradeDate)
+						that.$el.brforre15Date.html(data.g2gafter15tradeDate)
 						that.gV.fundName = data.secuSht
 						that.gV.fundCode = data.trdCode
 						that.gV.discount = Number(data.discount);
@@ -139,9 +140,17 @@ $(function () {
 						var data = [] ;
 						data = json.data.pageList;
 						console.log('data',data)
+						data.forEach(element => {
+							element.after4Num = element.bankAccountMask.substr(element.bankAccountMask.length -4)
+						});
 						generateTemplate(data, that.$el.popupUl, that.$el.bankListTemplate,true);
 						$("#loading").hide()
 						$('.popup').css('display','block')
+						if(useEnv == '0'){
+							that.$el.popupTitle.html('选择在线支付银行卡')
+						}else{
+							that.$el.popupTitle.html('选择汇款支付银行卡')
+						}
 					}
                   
 				},
@@ -341,13 +350,13 @@ $(function () {
 			var that = this;
 			/** 下面三个事件： 银行卡列表出现/隐藏 **/
 			$('body').on('tap','.paymoney',function(){
-				$(".imgc").hide()
-				$(".iimg").show()
+				// $(".imgc").hide()
+				// $(".iimg").show()
 				that.gV.payType = $(this).attr('pay-type')
 				var useEnv = $(this).attr('pay-type')
 				$("#loading").show()
-				$(this).find(".imgc").show();
-				$(this).find(".iimg").hide();
+				// $(this).find(".imgc").show();
+				// $(this).find(".iimg").hide();
 				that.getBankCard(useEnv)
 			}) 
 
@@ -368,7 +377,7 @@ $(function () {
 			
 			$("#transformInput").on('input propertychange',function(){
 				console.log('this.val',$(this).val())
-				that.gV.balance = $(this).val();
+				that.gV.balance = Number($(this).val()).toFixed(2);
 				if(Number($(this).val()) >= Number(that.gV.minValue) && Number($(this).val()) <= Number(that.gV.maxValue)){
 					that.getCostEstimate($(this).val())
 				}else if(Number($(this).val()) > that.gV.maxValue){
@@ -379,10 +388,9 @@ $(function () {
 				
 			})
 			//清除输入框数字
-			$('body').on('tap','.deleteNum',function(){
+			mui("body").on("tap", ".deleteNum", function() {
 				$('.transformInput').val(null)
-			}) ;
-
+			})
 			//选中银行卡
 			$('body').on('tap','.bank-li',function(){
 				$(".bank-li .true").hide();
@@ -392,22 +400,32 @@ $(function () {
 				that.gV.tradeAcco = $(this).attr('tradeAcco');
 				that.gV.bankAccountSecret = $(this).attr('bankAccountSecret');
 				that.gV.capitalMode = $(this).attr('capitalMode')
+				var after4Num =  $(this).attr('after4Num')
 				var data = []
 				data.push({
 					bankThumbnailUrl:$(this).attr('bankThumbnailUrl'),
 					bankName:$(this).attr('bankName'),
 					bankNo:$(this).attr('bankNo'),
 					singleNum:$(this).attr('singleNum'),
-					oneDayNum:$(this).attr('oneDayNum')
+					oneDayNum:$(this).attr('oneDayNum'),
+					after4Num:after4Num
 				})
 
 				if(that.gV.payType == '0'){
-					generateTemplate(data, that.$el.onlinepay, that.$el.bankListCheckTemplate,true);		
+					generateTemplate(data, that.$el.onlinepay, that.$el.bankListCheckTemplate,true);
+					that.$el.onlinepay.parent().find(".imgc").show();
+					that.$el.onlinepay.parent().find(".iimg").hide();
 					that.$el.remittance.html('')
+					that.$el.remittance.parent().find(".imgc").hide();
+					that.$el.remittance.parent().find(".iimg").show();
 				}
 				if(that.gV.payType == '1'){
 					generateTemplate(data, that.$el.remittance, that.$el.bankListCheckTemplate,true);
+					that.$el.remittance.parent().find(".imgc").show();
+					that.$el.remittance.parent().find(".iimg").hide();
 					that.$el.onlinepay.html('')
+					that.$el.onlinepay.parent().find(".imgc").hide();
+					that.$el.onlinepay.parent().find(".iimg").show();
 				}
 				setTimeout(function(){
 					$('.popup').css('display','none')
