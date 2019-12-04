@@ -42,7 +42,7 @@ $(function(){
                         }
                     },
                     needLogin: true,
-                    // async: false, //同步
+                    needLoading:true,
                     needDataEmpty: false, //需要判断data是否为空
                     callbackDone: function(json) {
                         var jsonData = json.data;

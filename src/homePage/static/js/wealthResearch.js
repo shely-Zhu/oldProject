@@ -337,7 +337,7 @@ $(function() {
                         setTimeout(function() {
                             that.getElements.listLoading.hide();
                         }, 100);
-
+                        $('.lazyload').lazyload();
                     }, 200)
 
 
@@ -408,10 +408,10 @@ $(function() {
     };
     data.init();
     //添加埋点待定这样
-    function attr(name,attribute,value){
-        name.attr(attribute,value)
+    function attr(name, attribute, value) {
+        name.attr(attribute, value)
     }
-    setTimeout(()=>{
-        attr($('#slider .tab-scroll-wrap .mui-control-item'),'htmdEvt','fortune_wealthTab')
-    },1000)
+    setTimeout(() => {
+        attr($('#slider .tab-scroll-wrap .mui-control-item'), 'htmdEvt', 'fortune_wealthTab')
+    }, 1000)
 });
