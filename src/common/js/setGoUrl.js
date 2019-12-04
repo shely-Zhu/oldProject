@@ -9,11 +9,16 @@
  * @author  yangjinlai 20191203
  */
 
-window.setGoUrl = function( url, htmdEvt ){
+window.setGoUrl = function(url, htmdEvt ){
 
-	mui('body').on('mdClick', function(){
-		window.locatin.href = url;
-	}, {
-		htmdEvt : htmdEvt
-	})
+	//发送埋点请求
+	window._submitMd && window._submitMd( 3, 'htmdEvt' );
+
+	window.location.href = url;
+
+	// mui('body').on('mdClick', that,  function(){
+	// 	window.location.href = url;
+	// }, {
+	// 	htmdEvt : htmdEvt
+	// })
 } 
