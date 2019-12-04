@@ -34,7 +34,8 @@ $(function() {
 				oneYear: {},
 				sinceNow: {}
 			},
-			end:""
+			end:"",
+			unit:"%",//折线图上是%还是不带%。
 		},
 
 		init: function(){
@@ -57,6 +58,7 @@ $(function() {
 				$('.lineWrap .wfsy').removeClass('hidden');
 			}
 			else{
+				that.data.unit = "";//手指移动echars显示的数值带不带百分号。非货币基金都不带百分号
 				//获取红利
 				that.getDividend();
 				//非货币基金
@@ -240,7 +242,7 @@ $(function() {
 			myChart.setOption({
 			    tooltip: {
 			    	trigger: 'axis',
-			    	formatter: '<p style="font-size:0.36rem;color: #677EC4;">{c}%</p><p style="font-size:0.24rem;color:#4A4A4A">{b}</p>',
+			    	formatter: '<p style="font-size:0.36rem;color: #677EC4;">{c}'+that.data.unit+'</p><p style="font-size:0.24rem;color:#4A4A4A">{b}</p>',
 			    	backgroundColor: 'rgba(218,181,124, 0.1)',
 			    	// renderMode : 'richText', 
 			    	extraCssText: [7, 15, 15, 15],
@@ -439,10 +441,14 @@ $(function() {
 				//判断当前画的是七日年化还是万份收益
 				if( $('.lineWrap .titleWrap .active').hasClass('qrnh') ){
 					//七日年化
+					if(that.data.projectType == "10300"){//如果是货币基金有七日年化和万份收益，万份收益不带百分号。七日年化带。
+						that.data.unit = "%"
+					}
 					$('#qrnhLine').removeClass('hide');
 					$('#wfsyLine').addClass('hide');
 				}
 				else{
+					that.data.unit = "";//万份受益没有百分号
 					$('#wfsyLine').removeClass('hide');
 					$('#qrnhLine').addClass('hide');
 				}
