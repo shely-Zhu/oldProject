@@ -63,7 +63,8 @@ $(function () {
 			bankAccountSecret: '', // 银行账号
 			bankNo: '',  //银行代码
 			password: "",
-			tradeAcco: ''  //交易账号
+			tradeAcco: ''  ,//交易账号
+			singleNum:0,   //单日限额
 		},
 		webinit: function () {
 			var that = this;
@@ -350,13 +351,9 @@ $(function () {
 			var that = this;
 			/** 下面三个事件： 银行卡列表出现/隐藏 **/
 			$('body').on('tap','.paymoney',function(){
-				// $(".imgc").hide()
-				// $(".iimg").show()
 				that.gV.payType = $(this).attr('pay-type')
 				var useEnv = $(this).attr('pay-type')
 				$("#loading").show()
-				// $(this).find(".imgc").show();
-				// $(this).find(".iimg").hide();
 				that.getBankCard(useEnv)
 			}) 
 
@@ -376,15 +373,20 @@ $(function () {
 			}) 
 			
 			$("#transformInput").on('input propertychange',function(){
-				console.log('this.val',$(this).val())
 				that.gV.balance = Number($(this).val()).toFixed(2);
-				if(Number($(this).val()) >= Number(that.gV.minValue) && Number($(this).val()) <= Number(that.gV.maxValue)){
-					that.getCostEstimate($(this).val())
-				}else if(Number($(this).val()) > that.gV.maxValue){
-					tipAction('最大买入金额不能超过' + that.gV.maxValue + '元')
+				if($(this).val().includes(".") && $(this).val().split(".")[1].length >2){
+					tipAction('只能输入两位小数')
+					return
 				}else{
-					return false
+					if(Number($(this).val()) >= Number(that.gV.minValue) && Number($(this).val()) <= Number(that.gV.maxValue)){
+						that.getCostEstimate($(this).val())
+					}else if(Number($(this).val()) > that.gV.maxValue){
+						tipAction('最大买入金额不能超过' + that.gV.maxValue + '元')
+					}else{
+						return false
+					}
 				}
+				
 				
 			})
 			//清除输入框数字
@@ -400,6 +402,7 @@ $(function () {
 				that.gV.tradeAcco = $(this).attr('tradeAcco');
 				that.gV.bankAccountSecret = $(this).attr('bankAccountSecret');
 				that.gV.capitalMode = $(this).attr('capitalMode')
+				that.gV.singleNum = $(this).attr('singleNum')
 				var after4Num =  $(this).attr('after4Num')
 				var data = []
 				data.push({
@@ -445,13 +448,15 @@ $(function () {
 			
 			//确定
 			$('body').on('tap','.btn_box .btn',function(){
-				
-				if(Number(that.gV.balance) > Number(that.gV.maxValue)){
-					tipAction('最大买入金额不能超过' + that.gV.maxValue + '元')
-				}else if(Number(that.gV.balance) < Number(that.gV.minValue)){
+				if(Number(that.gV.balance) < Number(that.gV.minValue)){
 					tipAction('最小买入金额不能低于' + that.gV.minValue + '元')
+					return
 				}else{
 					if(!!that.gV.bankAccountSecret){
+						if(Number(that.gV.balance) > Number(that.gV.singleNum)){
+							tipAction('单笔金额不能超过' + that.gV.singleNum + '元')
+							return
+						}
 						that.checkPayType()
 						
 					}else{
@@ -462,16 +467,10 @@ $(function () {
 				}
 				
 			}) ;
-			// $("#pwd-input").on("input", function() {
-			// 	var password = $('#pwd-input').val() //密码
-			// 	if(password.length == 6){
-			// 		that.gV.password = password;
-			// 		// $(".popup-password").show()
-			// 		that.checkPassword()
-
-			// 	}
-			// })
-			
+			//  ---《公募基金风险揭示及售前告知书》
+			$('body').on('tap','.setGoUrl',function(){
+				window.location.href = site_url.agreementModel_url + '?id=47' + '&financial=true'
+			}) ;
 
 			//  ---忘记密码
 			$('body').on('tap','#passwordWrap .forgetP',function(){
@@ -480,6 +479,8 @@ $(function () {
 			}) ;
 			//密码校验不通过   ---取消
 			$('body').on('tap','.elasticCel',function(){
+				$(".pwd-input").val('')
+				$(".fake-box input").val('');
 				$('#passwordWrap').css('display','none')
 				$('.popup-password').css('display','none')
 			}) ;
@@ -490,9 +491,9 @@ $(function () {
 			}) ;
 			//密码校验不通过   ---重新输入
 			$('body').on('tap','.error1 .elasticYes',function(){
-				$('.popup-password').css('display','none')
 				$(".pwd-input").val('')
 				$(".fake-box input").val('');
+				$('.popup-password').css('display','none')
 			}) ;
 			//密码校验不通过   ---找回密码
 			$('body').on('tap','.error2 .elasticYes',function(){
@@ -501,9 +502,10 @@ $(function () {
 			}) ;
 			//密码校验不通过   ---重新输入
 			$('body').on('tap','.error3 .elasticYes',function(){
-				$('.popup-password').css('display','none')
 				$(".pwd-input").val('')
 				$(".fake-box input").val('');
+				$('.popup-password').css('display','none')
+				
 			}) ;
 			//添加银行卡 -- 跳往原生
 			$('body').on('tap','.popup-last',function(){

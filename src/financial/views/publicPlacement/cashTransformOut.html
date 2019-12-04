@@ -55,7 +55,7 @@
 	                        <i class="defaultBankName">中国建设银行</i>
 	                        <span class="defaultBankCode">0563</span>
 	                    </div>
-	                    <div class="onright-left-two">单笔限额<span class="singleNum">5万</span>，单日限额<span class="oneDayNum">10万</span></div>
+	                    <div class="onright-left-two">可赎回<span class="singleNum">5万</span></div>
 	                </div>
 	                
 	            </div>
@@ -167,7 +167,7 @@
     <!--银行卡弹框模板-->
      <script id="cashTransformOutList" type="text/x-handlebars-template">
         {{#each this}}
-            <li class="popup-li cashCheckItem" htmdEvt="cashTransformOut_cashCheckItem" bankName={{bankName}} bankLogoUrl={{bankThumbnailUrl}} carNum={{carNum}} singleNum={{singleNum}} oneDayNum={{oneDayNum}} bankNo={{bankNo}} bankAccount={{bankAccountSecret}} tradeAcco={{tradeAcco}} capitalMode={{capitalMode}} singleNumMask={{singleNumMask}} oneDayNumMask={{oneDayNumMask}} >
+            <li class="popup-li cashCheckItem" htmdEvt="cashTransformOut_cashCheckItem" bankName={{bankName}} bankLogoUrl={{bankThumbnailUrl}} carNum={{carNum}} singleNum={{availableShare}} oneDayNum={{oneDayNum}} bankNo={{bankNo}} bankAccount={{bankAccountSecret}} tradeAcco={{tradeAcco}} capitalMode={{capitalMode}} singleNumMask={{singleNumMask}} oneDayNumMask={{oneDayNumMask}} >
                 <img class="bank-img" src={{bankThumbnailUrl}} alt="">
                 <div class="div">
                     <div class="bank-name"><span>{{bankName}}</span><span>(</span><span>{{carNum}}</span><span>)</span></div>
