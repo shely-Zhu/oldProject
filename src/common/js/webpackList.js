@@ -379,7 +379,7 @@ module.exports = {
     // 财富讲堂
     './homePage/static/js/fortuneClassroom': './src/homePage/static/js/fortuneClassroom.js',
     //历史明细
-    './mine/static/js/historyDetail': "./src/mine/static/js/historyDetail.js",
+    './mine/static/js/mineHistoryDetail': "./src/mine/static/js/mineHistoryDetail.js",
     //收益明细
     './mine/static/js/returnsDetail': "./src/mine/static/js/returnsDetail.js",
 
