@@ -372,15 +372,20 @@ $(function () {
 			}) 
 			
 			$("#transformInput").on('input propertychange',function(){
-				console.log('this.val',$(this).val())
-				that.gV.balance = Number($(this).val()).toFixed(2);
-				if(Number($(this).val()) >= Number(that.gV.minValue) && Number($(this).val()) <= Number(that.gV.maxValue)){
-					that.getCostEstimate($(this).val())
-				}else if(Number($(this).val()) > that.gV.maxValue){
-					tipAction('最大买入金额不能超过' + that.gV.maxValue + '元')
+				if($(this).val().split(".")[1].length >2){
+					tipAction('只能输入两位小数')
+					return
 				}else{
-					return false
+					that.gV.balance = Number($(this).val()).toFixed(2);
+					if(Number($(this).val()) >= Number(that.gV.minValue) && Number($(this).val()) <= Number(that.gV.maxValue)){
+						that.getCostEstimate($(this).val())
+					}else if(Number($(this).val()) > that.gV.maxValue){
+						tipAction('最大买入金额不能超过' + that.gV.maxValue + '元')
+					}else{
+						return false
+					}
 				}
+				
 				
 			})
 			//清除输入框数字

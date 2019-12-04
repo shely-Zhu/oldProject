@@ -296,7 +296,13 @@ $(function () {
 			}) 
 			
 			$("#transformInput").on('input propertychange',function(){
-				that.gV.balance = $(this).val();
+				if($(this).val().split(".")[1].length >2){
+					tipAction('只能输入两位小数')
+					return
+				}else{
+					that.gV.balance = $(this).val();
+				}
+				
 			})
 			//清除输入框数字
 			$('body').on('tap','.deleteNum',function(){
