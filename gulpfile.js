@@ -728,9 +728,6 @@ gulp.task('html', function (cb) {
         through.obj(function (file, enc, cb) {
 
             file = pathVar.changePathVar(file);
-
-            //替换全部common下的图片路径为include的
-            file = changeCommonImg(file);
             
             this.push(file);
             cb()
@@ -748,6 +745,16 @@ gulp.task('html', function (cb) {
 
         plugins.htmlmin({
             removeComments: true, //清除HTML注释
+        }),
+
+        //处理公共路径变量
+        through.obj(function (file, enc, cb) {
+
+             //替换全部common下的图片路径为include的
+            file = changeCommonImg(file);
+            
+            this.push(file);
+            cb()
         }),
 
         //与host.middleHtmlPath中的内容做比对

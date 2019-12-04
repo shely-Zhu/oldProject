@@ -586,37 +586,12 @@ $(function(){
 			                	title: '',
 			                	id: 'sellPop',
 			                	p: '<p class="">你选择的产品与您现在的风险承受能力相匹配</p>' +
-			                		'<p class="">请您认真阅读' + that.email + '</p>' +
-			                		'<p class="otherColor" id="changeMail">邮箱有变更，去修改</p>',
-			                	yesTxt: '确认',
+			                		'<p class="">请您认真阅读' + that.email + '并确认后继续购买该产品</p>',
+			                	yesTxt: '去阅读',
 			                	celTxt: '取消',
 			                	zIndex: 1200,
 			                	callback: function(t) {
-			                		if(that.email) {
-			                			var obj = [{
-			                				url: site_url.sendMailForConfirmBill_api,
-			                				data: {
-			                					fileName: that.fileName,
-			                					fileUrl: that.fileUrl,
-			                					email: that.email
-			                				},
-			                				needLogin: true,
-			                				callbackDone: function(json) {
-			                					t.hide(); //关闭弹窗
-
-			                				},
-			                				callbackFail: function(json) {
-			                					//                                  //显示错误提示
-			                					tipAction(json.message);
-
-			                				},
-			                			}];
-			                			$.ajaxLoading(obj);
-			                		} else {
-			                			//显示错误提示
-			                			tipAction("请去绑定邮箱");
-			                			//                          alert('请去绑定邮箱')
-			                		}
+									
 			                	},
 			                };
 			                $.elasticLayer(obj)
