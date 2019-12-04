@@ -598,35 +598,35 @@ gulp.task('jsCpd', function () {
         }
         else if ( name.indexOf('Url') != -1) {
 
-            var fileContent = fs.readFileSync(name, 'utf-8');
+            // var fileContent = fs.readFileSync(name, 'utf-8');
 
-            //获取module.export里的内容
-            fileContent = fileContent.substring(fileContent.indexOf('{'), fileContent.indexOf('}')).replace(/\s/g, "");
+            // //获取module.export里的内容
+            // fileContent = fileContent.substring(fileContent.indexOf('{'), fileContent.indexOf('}')).replace(/\s/g, "");
 
-            //用；拆分
-            var fileArr = fileContent.split(';');
+            // //用；拆分
+            // var fileArr = fileContent.split(';');
 
-            //用=拆分
-            for (var i in fileArr) {
-                var arrKey = fileArr[i].split('=')[0],
-                    arrValue = fileArr[i].split('=')[1];
+            // //用=拆分
+            // for (var i in fileArr) {
+            //     var arrKey = fileArr[i].split('=')[0],
+            //         arrValue = fileArr[i].split('=')[1];
 
-                //获取右边的文件名
-                var arrFileName = arrValue.substring( arrValue.lastIndexOf('/'), arrValue.lastIndexOf('.') );
+            //     //获取右边的文件名
+            //     var arrFileName = arrValue.substring( arrValue.lastIndexOf('/'), arrValue.lastIndexOf('.') );
 
-                if (arrKey.indexOf('//') == -1) {
-                    //这条是没有被注释的
-                    if (arr[arrFileName]) {
-                        //重复了
-                        console.log( arrValue + '文件重复了');
-                        process.exit();
-                    } else {
-                        arr[arrFileName] = arrValue;
-                    }
-                }
+            //     if (arrKey.indexOf('//') == -1) {
+            //         //这条是没有被注释的
+            //         if (arr[arrFileName]) {
+            //             //重复了
+            //             console.log( arrValue + '文件重复了');
+            //             process.exit();
+            //         } else {
+            //             arr[arrFileName] = arrValue;
+            //         }
+            //     }
 
 
-            }
+            // }
 
 
         }
@@ -678,6 +678,13 @@ gulp.task("webpack", ['jsCpd'], function(cb) {
     ], cb)
 });
 
+function changeCommonImg( file ){
+    //如果有用到common里面的图片的，全部把路径改成include
+    var fileCon = file.contents.toString();
+    var re = new RegExp( '\/common\/.*\.[jpg|png|svg|jpeg]{1}', 'g');
+    var commonImgArr = fileCon.match(re).length;
+}   
+
 //html文件打包
 gulp.task('html', function (cb) {
 
@@ -686,7 +693,12 @@ gulp.task('html', function (cb) {
 
         //处理公共路径变量
         through.obj(function (file, enc, cb) {
+
             file = pathVar.changePathVar(file);
+
+            //替换全部common下的图片路径为include的
+            // file = changeCommonImg(file);
+            
             this.push(file);
             cb()
         }),
