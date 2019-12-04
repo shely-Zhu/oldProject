@@ -174,7 +174,7 @@ $(function() {
             });
 
             mui.ready(function() { //init后需要执行ready函数，才能够初始化出来
-
+                $('.lazyload').lazyload();
                 //隐藏当前的加载中loading
                 if (!$id.hasClass('hasPullUp')) {
                     $id.find('.mui-pull-bottom-pocket').addClass('mui-hidden'); //上拉显示更多
@@ -315,7 +315,6 @@ $(function() {
                         } else {
                             $id.find('.contentWrapper .mui-table-view-cell').append(that.html);
                         }
-
                         //获取当前展示的tab的索引
                         var index = $('#slider .tab-scroll-wrap .mui-active').index(),
                             $list = $("#move_" + index + " .list");
