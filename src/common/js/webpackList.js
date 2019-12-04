@@ -210,7 +210,7 @@ module.exports = {
 
 
     //mine里面所有的二级页面
-    './mine/static/js/regulatoryAccounts': './src/mine/static/js/regulatoryAccounts.js',
+    './mine/static/js/mineRegulatoryAccounts': './src/mine/static/js/mineRegulatoryAccounts.js',
 
     // 月度报告列表页
     './mine/static/js/monthReport/monthReportList': './src/mine/static/js/monthReport/monthReportList.js',
@@ -379,7 +379,7 @@ module.exports = {
     // 财富讲堂
     './homePage/static/js/fortuneClassroom': './src/homePage/static/js/fortuneClassroom.js',
     //历史明细
-    './mine/static/js/historyDetail': "./src/mine/static/js/historyDetail.js",
+    './mine/static/js/mineHistoryDetail': "./src/mine/static/js/mineHistoryDetail.js",
     //收益明细
     './mine/static/js/returnsDetail': "./src/mine/static/js/returnsDetail.js",
 

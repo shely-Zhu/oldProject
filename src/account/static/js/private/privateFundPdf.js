@@ -33,7 +33,8 @@ $(function(){
         getEmail:function(){
         	var that = this;
         	var emailObj = [{
-                    url: site_url.user_api,
+                    url:
+                    site_url.user_api,
                     data: {
                         hmac: "", //预留的加密信息     
                         params: {
