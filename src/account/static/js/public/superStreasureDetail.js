@@ -160,8 +160,8 @@ $(function() {
 	        var obj = [{
 			    url: site_url.getAssetsCashInfo_api, 
 			    data: {
-					fundCode:"003075",
-					//fundCode:that.gL.fundCode,
+					//fundCode:"003075",
+					fundCode:that.gL.fundCode,
 			    },
 			    needLogin: true,
 			    callbackDone: function(json) {
@@ -182,8 +182,8 @@ $(function() {
 	        var obj = [{
 			    url: site_url.prfFundNetWorthTrendChart_api, 
 			    data: {
-					fundCode:"000847",
-					//fundCode:that.gL.fundCode,
+					//fundCode:"000847",
+					fundCode:that.gL.fundCode,
 					dataRange:that.gL.dataRange,
 					end:that.gL.end,
 			    },
@@ -206,8 +206,8 @@ $(function() {
 	        var obj = [{
 			    url: site_url.findProtocolBasic_api, 
 			    data: {
-					//code:that.gL.fundCode,
-					code:"003075",
+					code:that.gL.fundCode,
+					//code:"003075",
 					template:"0",
 			    },
 			    needLogin: true,
