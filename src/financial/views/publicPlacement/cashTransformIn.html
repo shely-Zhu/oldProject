@@ -40,15 +40,9 @@
          <div class="onlinepay paymoney" pay-type="2" htmdEvt="cashTransformIn_paymoney">
              <div class="ff">在线支付</div>
              <div class="paymoney-right">
-                 <!-- <img class="imgc" src="/financial/static/img/checkbox／selected+sure@2x.png" alt="">
-                 <img class="iimg" src="/financial/static/img/checkbox／selected+normal@2x.png" alt=""> -->
+                 <a class="iconfont iconone" href="javascript:;">&#xe67d;</a>
                  <div class="onright-left">
-                     <!-- <div class="onright-left-one">
-                         <img src="/financial/static/img/account_icon_bank logo@2x.png" alt="">
-                         <i>中国建设银行</i>
-                         <span>0563</span>
-                     </div>
-                     <div class="onright-left-two">单笔限额5万，单日限额10万</div> -->
+                   
                  </div>
              </div>
              
@@ -99,7 +93,7 @@
              <script id="bankList-template" type="text/x-handlebars-template">
                  {{#each this}}
                  <li class="popup-li bank-li" capitalMode="{{capitalMode}}" tradeSource="{{tradeSource}}" bankThumbnailUrl="{{bankThumbnailUrl}}" tradeAcco="{{tradeAcco}}" bankName="{{bankName}}" bankNo="{{bankNo}}" singleNum="{{singleNum}}"
-                  oneDayNum="{{oneDayNum}}" bankAccount="{{bankAccount}}">
+                  oneDayNum="{{oneDayNum}}" bankAccount="{{bankAccount}}" bankAccountSecret="{{bankAccountSecret}}">
                      <img class="bank-img" src="{{bankThumbnailUrl}}" alt="">
                      <div class="div">
                          <div class="bank-name">{{bankName}}({{bankNo}})</div>

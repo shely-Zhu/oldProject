@@ -97,6 +97,7 @@ $(function() {
                     "pageSize": "10", //非必须，默认为10
                     "mesType": that.gV.mesType
                 },
+                needLogin: true, //需要判断登录是否过期
                 needDataEmpty: true,
                 callbackDone: function(json) {
                     var data;
