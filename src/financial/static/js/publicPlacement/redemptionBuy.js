@@ -62,7 +62,7 @@ $(function() {
             maxRedempShare:"", //最大赎回份额
             payType:"",
             maxMoney:"",
-            checkImgUrl:"/financial/static/img/account_icon_check@2x.png",
+            checkImgUrl:"/common/img/account_icon_check@2x.png",
             dataList:"",
             enableSharesMax:"", //最大赎回金额
 
