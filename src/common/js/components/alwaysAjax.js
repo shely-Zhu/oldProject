@@ -3,16 +3,18 @@
  * @author chentiancheng  2019-12-3
  * className 模板替换的div classname  必填项
  * cutNumber 准备做tops的参数  后期优化
+ * pullupLoadingNames
  */
 
-module.exports = function(className,cutNumber){
+module.exports = function(className,pullupLoadingName, cutNumber){
     //点击下按钮，显示弹框
-    var classNames=className?className:".contentWrap"  
+    var classNames=className?className:".contentWrap" 
+    var pullupLoadingNames= pullupLoadingName?pullupLoadingName:".contentWrapper"
     var tops=-100;
      $(document).scroll(function() {
             if($(classNames).offset().top<tops){
                 tops-=800;
-                mui('.contentWrapper').pullRefresh().pullupLoading();
+                mui(pullupLoadingNames).pullRefresh().pullupLoading();
             }
-        });
+      });
 }

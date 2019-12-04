@@ -14,39 +14,27 @@ var data = Mock.mock({
         startPage:'1',//当前页
         pageSize:'10',//获取数据条数
         pages:'1',//总记录数
-        'list|5':[
-            {
-                id:'1',//主键唯一ID
-                actType:'1',//活动类型：1-线上活动，2-线下活动
-                actId:'11',//营销活动线上、线下活动id（活动编号）
-                actName:'活动名称',//活动名称
-                actStartDate:'2019年10月10号',//活动开始时间
-                actEndDate:'2019年10月10号',//活动结束时间
-                actProvince:'海南',//活动举办省份名称
-                actProvinceNO:'100',//活动举办省份编号
-                actCity:'三亚',//	活动举办城市名称
-                actCityNO:'3',//活动举办城市编号
-                actImgUrl:'/memberClub/static/img/Life_banner_bg1@2x.png',//金服推广图片URL
-                prizeFlag:true,//是否有奖品,
-                prize:'参与赠送30元电话卡30元电话卡'
-            },
-            {
-                id:'1',//主键唯一ID
-                actType:'1',//活动类型：1-线上活动，2-线下活动
-                actId:'11',//营销活动线上、线下活动id（活动编号）
-                actName:'活动名称',//活动名称
-                actStartDate:'2019年10月10号',//活动开始时间
-                actEndDate:'2019年10月10号',//活动结束时间
-                actProvince:'海南',//活动举办省份名称
-                actProvinceNO:'100',//活动举办省份编号
-                actCity:'三亚',//	活动举办城市名称
-                actCityNO:'3',//活动举办城市编号
-                actImgUrl:'/memberClub/static/img/Life_banner_bg2@2x.png',//金服推广图片URL
-                prizeFlag:false,//是否有奖品,
-                prize:''
-            },
-            
-        ]
+        "activityVoPageInfo":{
+            'list|5':[
+                {
+                    id:'1',//主键唯一ID
+                    actType:'1',//活动类型：1-线上活动，2-线下活动
+                    actId:'11',//营销活动线上、线下活动id（活动编号）
+                    actName:'活动名称',//活动名称
+                    actStartDate:'2019年10月10号',//活动开始时间
+                    actEndDate:'2019年10月10号',//活动结束时间
+                    actProvince:'海南',//活动举办省份名称
+                    actProvinceNO:'100',//活动举办省份编号
+                    actCity:'三亚',//	活动举办城市名称
+                    actCityNO:'3',//活动举办城市编号
+                    actImgUrl:'/memberClub/static/img/Life_banner_bg1@2x.png',//金服推广图片URL
+                    prizeFlag:true,//是否有奖品,
+                    prize:'参与赠送30元电话卡30元电话卡'
+                }
+                
+            ]
+        }
+        
 
 	}
     

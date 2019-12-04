@@ -9,8 +9,11 @@ var Mock = require('mockjs');
 
 var data = Mock.mock({
     "data": {
-        totalPage: 20,
-        total: 1000,
+        pageItems: {
+            totalPage: 20,
+            total: 1000
+        },
+
         pageList: [{
                 projectId: 1,
                 projectName: '恒天稳谊16号私募投资基 ZYFG恒天稳谊16号私募投资基ZYFG申购', //项目名称

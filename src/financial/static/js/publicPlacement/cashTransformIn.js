@@ -49,6 +49,7 @@ $(function () {
 			payType: '',   //支付方式（0、在线支付 1、汇款支付）
 			bankName: '',  // 银行名称
 			bankAccount: '', // 银行账号
+			bankAccountSecret:'',  // 银行账号
 			bankNo: '',  //银行代码
 			password: "",
 			tradeAcco: '' , //交易账号
@@ -75,21 +76,7 @@ $(function () {
 				needDataEmpty: true,
 				callbackDone: function (json) {
 					if (json.status == '0000' || json.status == '4000') {
-						// var data = json.data;
-						var data={
-							"startGainsDayStr":"03月23日",// 预计开始计算收益时间
-							"paymentGainsDayStr":"03月24日",// 预计收益到账时间
-							"purchaseAmount":"10000.00",// 起投金额
-							"purchaseAmountMask":"10,000.00",//起投金额千分位显示
-							"payAgainAmount":"1000.00",// 追加金额
-							"payAgainAmountMask":"1,000.00",//追加金额千分位
-							"fundCode": "003075",
-							"fundName": "恒添宝",  
-							"annYldRat": "3.84",// 七日年化收益率
-							 "unitYld": "0.9723",// 万分收益
-							"trdDt": "2017-04-07" // 万分 年化 发布日期
-						   }
-					
+						var data = json.data;
 						$("#loading").hide()
 						that.$el.fundName.html(data.fundName)
 						that.$el.fundCode.html(data.fundCode)
@@ -325,6 +312,7 @@ $(function () {
 				that.gV.tradeAcco = $(this).attr('tradeAcco');
 				that.gV.tradeSource = $(this).attr('tradeSource');
 				that.gV.bankAccount = $(this).attr('bankAccount');
+				that.gV.bankAccountSecret = $(this).attr('bankAccountSecret');
 				that.gV.capitalMode = $(this).attr('capitalMode')
 				var data = []
 				data.push({
@@ -353,7 +341,7 @@ $(function () {
 			
 			//确定
 			$('body').on('tap','.btn_box .btn',function(){
-				if(!!that.gV.bankAccount){
+				if(!!that.gV.bankAccountSecret){
 					that.checkPayType()
 					
 				}else{
