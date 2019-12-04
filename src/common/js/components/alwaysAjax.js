@@ -3,6 +3,7 @@
  * @author chentiancheng  2019-12-3
  * className 模板替换的div classname  必填项
  * cutNumber 准备做tops的参数  后期优化
+ * pullupLoadingNames
  */
 
 module.exports = function(className,pullupLoadingName, cutNumber){

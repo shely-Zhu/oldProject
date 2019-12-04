@@ -42,7 +42,7 @@ $(function() {
             listToTop: '', // 滑动区域距离顶部距离
             navToTop: '', // 滑动nav距离顶部距离
             navHeight: '', // nav高度
-
+            className:'',    
         },
         html: '', //存放生成的html
         init: function() { //初始化函数
