@@ -23,7 +23,7 @@ $(function(){
             this.getTemplateData();
         },
         // 获取
-        getTemplateData() {
+        getTemplateData:function() {
             var that=this;
             switch(that.gV.projectType) {
                 case '0': var params = {category: 'rule_wenjin'};break;

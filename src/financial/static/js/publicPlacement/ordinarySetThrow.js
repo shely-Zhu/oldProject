@@ -59,7 +59,7 @@ $(function () {
 			fundName: splitUrl['fundName'] ? splitUrl['fundName'] : null,   //基金名称
 			fundCode: splitUrl['fundCode'] ? splitUrl['fundCode'] : null,  //基金代码
 			capitalMode: '', //资金方式
-			payType: '',   //支付方式（0、在线支付 1、汇款支付）
+			payType: '0',   //支付方式（0、在线支付 1、汇款支付）
 			bankName: '',  // 银行名称
 			
 			password: "",
@@ -270,7 +270,7 @@ $(function () {
 						// 将列表插入到页面上
 						var data = [] ;
 						data = json.data.pageList;
-						data.forEach(element => {
+						data.forEach(function(element) {
 							element.after4Num = element.bankAccountMask.substr(element.bankAccountMask.length -4)
 						});
 						if(that.gV.type == 'add'){
@@ -470,7 +470,7 @@ $(function () {
 					tradeAcco:that.gV.tradeAcco,
 					scheduledProtocolId:that.gV.scheduledProtocolId,
 					fixState:'A',
-					expiryDate:'',  //终止日期
+					expiryDate:that.gV.expiryDate,  //终止日期
 					tradePeriod:that.gV.tradePeriod,
 					shares:that.gV.shares,
 					balance:that.gV.balance,
@@ -800,8 +800,14 @@ $(function () {
 			}) 
 			
 			$("#transformInput").on('input propertychange',function(){
-				that.gV.balance = $(this).val();
-				that.getRate($(this).val());
+				if($(this).val().includes(".") && $(this).val().split(".")[1].length >2){
+					tipAction('只能输入两位小数')
+					return
+				}else{
+					that.gV.balance = $(this).val();
+					that.getRate($(this).val());
+				}
+				
 			})
 			//清除输入框数字
 			$('body').on('tap','.deleteNum',function(){
@@ -856,18 +862,10 @@ $(function () {
 					return
 				}
 			}) ;
-			// $("#pwd-input").on("input", function() {
-			// 	var password = $('#pwd-input').val() //密码
-			// 	if(password.length == 6){
-			// 		that.gV.password = password;
-			// 		// $(".popup-password").show()
-			// 		that.checkPassword()
-
-			// 	}
-			// })
-			
-			
-
+			//  ---《公募基金风险揭示及售前告知书》
+			$('body').on('tap','.setGoUrl',function(){
+				window.location.href = site_url.agreementModel_url + '?id=47'
+			}) ;
 			//  ---忘记密码
 			$('body').on('tap','#passwordWrap .forgetP',function(){
 				//跳往原生页面去修改密码

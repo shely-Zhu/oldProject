@@ -33,7 +33,7 @@ $(function() {
             that.events()
 		},
         // 获取财富流向早知道的列表
-        getFlowKnownList(t) {
+        getFlowKnownList: function(t) {
             var that = this;
             var obj = [{
                 url: site_url.queryFortuneArticleList_api,
@@ -94,7 +94,7 @@ $(function() {
             }];
             $.ajaxLoading(obj); 
         },
-        dealTime(data) {
+        dealTime: function(data) {
             $.each(data, function(a, b) {
                 if(b.articleTimeStr && b.articleTimeStr!= '') {
                     b.articleTimeStr = b.articleTimeStr.split(" ")[0].split("-")[1] + "." + b.articleTimeStr.split(" ")[0].split("-")[2]
@@ -151,12 +151,7 @@ $(function() {
                 var id = $(this).attr("id")
                 window.location.href = site_url.articleTemplate_url + '?id=' + id + '&articleBelong=' + that.gV.articleBelong + '&applyType=1'
             })
-            mui("body").on('tap', '.knownItem' , function(){
-                var externalUrl = $(this).attr("externalUrl")
-                window.location.href = externalUrl
-            })
             alwaysAjax(".knownList")
-           
 		}
 	};
     somePage.init();

@@ -13,7 +13,7 @@ require('@pathCommonBase/base.js');
 // require('@pathCommonJsCom/utils.js');
 //ajax调用
 require('@pathCommonJs/ajaxLoading.js');
-
+var alwaysAjax = require('@pathCommonJs/components/alwaysAjax.js');
 require('@pathCommonJsCom/goTopMui.js');
 
 var splitUrl = require('@pathCommonJs/components/splitUrl.js');
@@ -167,7 +167,8 @@ $(function() {
         },
         events: function() { //绑定事件
             var that = this;
-
+            //无缝滚动
+            alwaysAjax(".recordList")
 
         }
     };

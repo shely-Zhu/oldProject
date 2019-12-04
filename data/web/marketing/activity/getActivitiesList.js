@@ -27,7 +27,7 @@ var data = Mock.mock({
                     actProvinceNO:'100',//活动举办省份编号
                     actCity:'三亚',//	活动举办城市名称
                     actCityNO:'3',//活动举办城市编号
-                    actImgUrl:'/memberClub/static/img/Life_banner_bg1@2x.png',//金服推广图片URL
+                    actImgUrl:'http://172.16.163.99:85/group1/M00/06/ED/rBCjPl3V-GCAdzrzAA4bEjEpcqc425.gif',//金服推广图片URL
                     prizeFlag:true,//是否有奖品,
                     prize:'参与赠送30元电话卡30元电话卡'
                 }
