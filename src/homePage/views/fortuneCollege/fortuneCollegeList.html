@@ -10,6 +10,7 @@
  <head>
      @@include('@pathInclude/views/meta.html')
      <link rel="stylesheet" href="/homePage/static/css/fortuneCollegeList.css">
+     <!-- <link rel="stylesheet" href="/homePage/static/css/wealthResearch.css"> -->
      <title>财富学院</title>
  </head>
  <body>
@@ -59,28 +60,65 @@
                              
                          </div>
                          <div class="tab">
-                              <div class="tab-t">
-                                   <ol>
-                         
-                                   </ol>
-                              </div>
                               <div class="tab-b">
-
+                                   <div class="container">
+                                        <div class="mui-content  myAsset">
+                                            <!-- 放置页面内容 -->
+                                        </div>
+                                        <!-- 加载中loading -->
+                                        @@include('@pathCommonCom/loading/listLoading.html')
+                                        <!-- 暂无数据 -->
+                                        @@include('@pathCommonViews/noDataImg.html',{"tipText":"暂无数据"})
+                                    </div>
                               </div>
                          </div>
                     </div>
                </div>
           </div>
      </div>
- 
+       
+     <script id="first-template" type="text/x-handlebars-template">
+     {{! 列表 内容 使用mui的上拉加载}}
+     <div class="list">
+          {{! list是包裹上拉加载区域的，在js中计算当前页面中的list高度，不能超出一屏}} {{! 初始化上拉加载区域，使用contentWrapper class}} {{! contentWrapper 需要添加样式，具体见less文件}}
+          <div class="contentWrapper">
+
+               <ul class="mui-table-view">
+                    <li class="mui-table-view-cell">
+                         {{! 所有内容 需要放在这个li里，且里面不能再用Li元素}} {{{content}}}
+
+                    </li>
+               </ul>
+
+               <!-- 返回顶部 -->
+               <!-- @@include('@pathCommonViews/goTop.html') -->
+
+          </div>
+     </div>
+     </script>
+
+     <script id="second-template" type="text/x-handlebars-template">
+     {{! 左侧页面列表}} {{#each this}}
+     <div class="list_item clearfix" id={{id}} articleBelong={{articleBelong}} applyType={{applyType}}>
+          <div class="list_itemL">
+               <p>{{title}}</p>
+               <span>{{createTimeStr}}</span>
+          </div>
+          <div class="list_itemR" ><img src="{{imageUrlShowOnline}}" alt=""></div>
+     </div>
+
+     {{/each}}
+     </script>
      
      @@include('../../../common/views/goTop.html')
      @@include('@pathInclude/views/footer.html')
      <!-- 添加埋点 -->
      @@include('@pathInclude/views/header.html')
+     <!-- 翻译官 -->
      <script id="fortune-template" type="text/x-handlebars-template">
                <h2>{{modelName}}</h2>
-               <p><a href="{{listJumpUrl}}" htmdEvt = "fortune_host">查看往期热词</a><i class="iconfont">&#xe636;</i></p>
+               <!-- <i><a href="{{listJumpUrl}}" htmdEvt = "fortune_host">查看往期热词</a><i class="iconfont">&#xe636;</i></p> -->
+               <p><a onclick="setGoUrl('{{listJumpUrl}}', '')" htmdEvt = "fortune_host">查看往期热词</a><i class="iconfont">&#xe636;</i></p>
      </script>
      <script id="content-template" type="text/x-handlebars-template">
           {{#each this}}
@@ -94,18 +132,21 @@
           </p>
           {{/each}}
      </script>
+     <!-- 早知道 -->
      <script id="fortuneCf-template" type="text/x-handlebars-template">
           <h2>{{modelName}}</h2>
-          <p><a href="{{listJumpUrl}}" htmdEvt = "fortune_video">播放往期内容</a><i class="iconfont">&#xe636;</i></p>
+          <!-- <i><a href="{{listJumpUrl}}" htmdEvt = "fortune_video">播放往期内容</a><i class="iconfont">&#xe636;</i></p> -->
+          <p><a onclick="setGoUrl('{{listJumpUrl}}', '')" htmdEvt = "fortune_video">播放往期内容</a><i class="iconfont">&#xe636;</i></p>
      </script>
      <script id="video-template" type="text/x-handlebars-template">
           {{#each this}}
                <li>
-                    <a htmdEvt = "fortune_videoList" onclick="window.location.href=site_url.fortuneFlowKnown_url+'?articleBelong={{articleBelong}}'">
+                    <!-- <a htmdEvt = "fortune_videoList" onclick="window.location.href=site_url.fortuneFlowKnown_url+'?articleBelong={{articleBelong}}'"> -->
+                    <a htmdEvt = "fortune_videoList" onclick="setGoUrl( site_url.fortuneFlowKnown_url+'?articleBelong={{articleBelong}}', '')">
                          <img src="{{imageUrlShowOnline}}" alt="">
                          <p>
                               <i class="iconfont">
-                                   <img src="/homePage/static/img/bofang@2x.png" alt="">
+                                   <img src="/common/img/bofang@2x.png" alt="">
                               </i>
                               <span>
                                         {{title}}
@@ -115,9 +156,12 @@
                </li>
           {{/each}}
      </script>
+
+     <!-- 财富讲堂 -->
      <script id="forum-template" type="text/x-handlebars-template">
           <h2>{{modelName}}</h2>
-          <p><a href="{{modelUrl}}" htmdEvt = "fortune_all">全部</a><i class="iconfont">&#xe636;</i></p>
+          <!-- <i><a href="{{modelUrl}}" htmdEvt = "fortune_all">全部</a><i class="iconfont">&#xe636;</i></p> -->
+          <p><a onclick="setGoUrl('{{modelUrl}}', '')" htmdEvt = "fortune_all">全部</a><i class="iconfont">&#xe636;</i></p>
      </script>
      <script id="forumTitle" type="text/x-handlebars-template">
           {{#each this}}
@@ -132,7 +176,8 @@
                               <div class="mui-scroll">
                                    {{#each listContent}}
                                         <!-- <a href="fortuneClassroom.html" style="width:6.2rem;height:4rem;display: block;position: absolute;;left:0;top:0;" class="mui-control-item"> </a> -->
-                                        <a htmdEvt = "fortune_allList" onclick="window.location.href=site_url.fortuneClassroom_url+'?id={{id}}&articleBelong={{articleBelong}}&applyType={{applyType}}';">
+                                        <!-- <a htmdEvt = "fortune_allList" onclick="window.location.href=site_url.fortuneClassroom_url+'?id={{id}}&articleBelong={{articleBelong}}&applyType={{applyType}}';"> -->
+                                        <a htmdEvt = "fortune_allList" onclick="setGoUrl( site_url.fortuneClassroom_url+'?id={{id}}&articleBelong={{articleBelong}}&applyType={{applyType}}', '')">
                                              <div class="mui-control-item conten">
                                                   
                                                   <img style="width:3.2rem;height:3rem;" src="{{imageUrlShowOnline}}" alt="">
@@ -149,39 +194,12 @@
                </div>
           {{/each}}
      </script>
+
+     <!-- 财富研究 -->
      <script id="tabContent-template" type="text/x-handlebars-template">
           <h2>{{modelName}}</h2>
-          <p><a htmdEvt = "fortune_studies" href="{{modelUrl}}" >查看全部研究</a><i class="iconfont">&#xe636;</i></p>
-     </script>
-     <script id="titleTab" type="text/x-handlebars-template">
-          {{#each this}}
-               <li>
-                    <a htmdEvt = "fortune_studiesTab" href="javascript:;">
-                         {{sonModelName}}
-                    </a>
-               </li>
-          {{/each}}
-     </script>
-     <script id="listContent" type="text/x-handlebars-template">
-          {{#each this}}
-               <div class="tab-content">
-                    <ul>
-                         {{#each listContent}}
-                              <a htmdEvt = "fortune_studiesList" onclick="window.location.href=site_url.wealthResearch_url+'?id={{id}}&articleBelong={{articleBelong}}&applyType={{applyType}}'">
-                                   <li>
-                                        
-                                        <div>
-                                             <p>{{title}}</p>
-                                             <span>{{createTimeStr}}</span>
-                                        </div>
-                                        <img src="{{imageUrlShowOnline}}" alt="">
-                                   
-                                   </li>
-                              </a>
-                         {{/each}}
-                    </ul>
-               </div>
-          {{/each}}
+          <!-- <i><a htmdEvt = "fortune_studies" href="{{modelUrl}}" >查看全部研究</a><i class="iconfont">&#xe636;</i></p> -->
+          <p><a htmdEvt = "fortune_studies" onclick="setGoUrl('{{modelUrl}}', '')" >查看全部研究</a><i class="iconfont">&#xe636;</i></p>
      </script>
      <script src="/include/js/iscroll.js"></script>
 	<script src="@pathIncludJs/vendor/root.js"></script>

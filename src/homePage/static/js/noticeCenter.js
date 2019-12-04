@@ -27,6 +27,7 @@ $(function(){
             var obj=[{
                 url: site_url.getNoticeTypeList_api,
                 data:{},
+                needLogin: true, //需要判断登录是否过期
                 needDataEmpty: true,
                 callbackDone: function(json) {
                     console.log(json.data)

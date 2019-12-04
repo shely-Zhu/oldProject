@@ -42,7 +42,8 @@ $(function () {
 			contract: $(".file .contract"), //同意协议选择框
 			recruiting: $(".file .recruiting"), //同意协议选择框
 			confirmBtn: $(".btn_box .btn"), //确定按钮
-			elasticTxt:$(".popup-password .elasticTxt")
+			elasticTxt:$(".popup-password .elasticTxt"),
+			popupTitle:$(".popup .bank-title"),  //银行卡弹窗标题
 		},
 		gV: { // 全局变量
 			fundBusinCode: '022',
@@ -139,9 +140,17 @@ $(function () {
 						var data = [] ;
 						data = json.data.pageList;
 						console.log('data',data)
+						data.forEach(element => {
+							element.after4Num = element.bankAccountMask.substr(element.bankAccountMask.length -4)
+						});
 						generateTemplate(data, that.$el.popupUl, that.$el.bankListTemplate,true);
 						$("#loading").hide()
 						$('.popup').css('display','block')
+						if(useEnv == '0'){
+							that.$el.popupTitle.html('选择在线支付银行卡')
+						}else{
+							that.$el.popupTitle.html('选择汇款支付银行卡')
+						}
 					}
                   
 				},
@@ -391,13 +400,15 @@ $(function () {
 				that.gV.tradeAcco = $(this).attr('tradeAcco');
 				that.gV.bankAccountSecret = $(this).attr('bankAccountSecret');
 				that.gV.capitalMode = $(this).attr('capitalMode')
+				var after4Num =  $(this).attr('after4Num')
 				var data = []
 				data.push({
 					bankThumbnailUrl:$(this).attr('bankThumbnailUrl'),
 					bankName:$(this).attr('bankName'),
 					bankNo:$(this).attr('bankNo'),
 					singleNum:$(this).attr('singleNum'),
-					oneDayNum:$(this).attr('oneDayNum')
+					oneDayNum:$(this).attr('oneDayNum'),
+					after4Num:after4Num
 				})
 
 				if(that.gV.payType == '0'){
