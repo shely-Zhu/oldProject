@@ -201,7 +201,7 @@ $(function() {
 			       		newData.profitThoudDate.push( el.trdDt);
 			       		newData.profitThoudValue.push( el.unitYld);
 			       		newData.unitNavValue.push( el.unitNav);//单位净值
-			       		newData.unitYldValue.push( el.unitYld);//累计净值
+			       		newData.unitYldValue.push( el.accuUnitNav);//累计净值
 			       	})
 			       	switch(num) {
 			       		case 0: that.data['qrnhWfsy'].oneMonth = newData;break;
@@ -378,7 +378,7 @@ $(function() {
 			//总金额
 			$('.typeWrap .totalM').html( jsonData.totalMoneyMask );
 		   	//待确认金额 接口无
-		   	$('.typeWrap .toConfirm .confirmMoney').html( jsonData.onwayAssetTotal );
+		   	$('.typeWrap .toConfirm .confirmMoney').html( jsonData.onwayAssetTotalMask );
 		   	//昨日收益
 		   	$('.typeWrap .yesterdayShare').html( jsonData.incomeMask);
 		   	//持有收益
@@ -386,9 +386,9 @@ $(function() {
 		   	//累计收益  接口无
 		   	$('.typeWrap .accumulatedShare').html( jsonData.addupIncomeMask);
 			//持有份额
-			$('.openWrap .cyfe').html( jsonData.currentShare);
+			$('.openWrap .cyfe').html( jsonData.currentShareMask);
 			//可用份额
-			$('.openWrap .kyfe').html( jsonData.enableShares);
+			$('.openWrap .kyfe').html( jsonData.enableSharesMask);
 
 	    	if( that.data.projectType == "10300" ){ //货币基金
 	    		
