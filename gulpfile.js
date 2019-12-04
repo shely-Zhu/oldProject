@@ -184,19 +184,19 @@ gulp.task('proxyTask', function() {
         middleware: function(connect, opt) {
             return [
                 proxy('/app', {
-                    // target: 'https://app.htjf4.com',
+                    target: 'https://app.htjf4.com',
                     // target: 'http://172.16.187.129:8080',//李亚楠
                     // target: 'http://192.168.50.254:8085',
-                    target: 'https://app.chtfundtest.com',
+                    // target: 'https://app.chtfundtest.com',
                     changeOrigin: true,
                     secure: false,
                 }),
 
                 proxy(['/wap', '/web/', '/jf/'], {
-                    // target: 'https://h5.htjf4.com',
+                    target: 'https://h5.htjf4.com',
                     //  target: 'http://172.16.187.129:8080',//李亚楠
                     // target: 'http://172.16.187.164:8081',
-                     target: 'https://h5.chtfundtest.com',
+                    //  target: 'https://h5.chtfundtest.com',
                     changeOrigin: true,
                     secure: false,
                 }),
@@ -728,9 +728,6 @@ gulp.task('html', function (cb) {
         through.obj(function (file, enc, cb) {
 
             file = pathVar.changePathVar(file);
-
-            //替换全部common下的图片路径为include的
-            file = changeCommonImg(file);
             
             this.push(file);
             cb()
@@ -748,6 +745,16 @@ gulp.task('html', function (cb) {
 
         plugins.htmlmin({
             removeComments: true, //清除HTML注释
+        }),
+
+        //处理公共路径变量
+        through.obj(function (file, enc, cb) {
+
+             //替换全部common下的图片路径为include的
+            file = changeCommonImg(file);
+            
+            this.push(file);
+            cb()
         }),
 
         //与host.middleHtmlPath中的内容做比对

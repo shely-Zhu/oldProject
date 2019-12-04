@@ -586,37 +586,12 @@ $(function(){
 			                	title: '',
 			                	id: 'sellPop',
 			                	p: '<p class="">你选择的产品与您现在的风险承受能力相匹配</p>' +
-			                		'<p class="">请您认真阅读' + that.email + '</p>' +
-			                		'<p class="otherColor" id="changeMail">邮箱有变更，去修改</p>',
-			                	yesTxt: '确认',
+			                		'<p class="">请您认真阅读' + that.email + '并确认后继续购买该产品</p>',
+			                	yesTxt: '去阅读',
 			                	celTxt: '取消',
 			                	zIndex: 1200,
 			                	callback: function(t) {
-			                		if(that.email) {
-			                			var obj = [{
-			                				url: site_url.sendMailForConfirmBill_api,
-			                				data: {
-			                					fileName: that.fileName,
-			                					fileUrl: that.fileUrl,
-			                					email: that.email
-			                				},
-			                				needLogin: true,
-			                				callbackDone: function(json) {
-			                					t.hide(); //关闭弹窗
-
-			                				},
-			                				callbackFail: function(json) {
-			                					//                                  //显示错误提示
-			                					tipAction(json.message);
-
-			                				},
-			                			}];
-			                			$.ajaxLoading(obj);
-			                		} else {
-			                			//显示错误提示
-			                			tipAction("请去绑定邮箱");
-			                			//                          alert('请去绑定邮箱')
-			                		}
+									
 			                	},
 			                };
 			                $.elasticLayer(obj)
@@ -749,25 +724,25 @@ $(function(){
 							that.data.fundDetailObj.isAllowAppend;
 					} else {
 						//跳转到普通预约
-						window.location.href = site_url.registration_url + that.$e.projectId + "&isAllowAppend=" +
+						window.location.href = site_url.registration_url + "?fundCode=" + that.$e.projectId + "&isAllowAppend=" +
 							that.data.fundDetailObj.isAllowAppend;
 					}
 				} else { //预约
 					//跳转到预约产品链接
 					if(that.data.custType == "1") { //客户类型【0.机构 1.个人】 
 						//跳转到电子合同预约页面
-						window.location.href = site_url.orderLimit_url + that.$e.projectId + "&isAllowAppend=" +
+						window.location.href = site_url.orderLimit_url + "?fundCode=" + that.$e.projectId + "&isAllowAppend=" +
 							that.data.fundDetailObj.isAllowAppend;
 					} else {
 						//跳转到普通预约
-						window.location.href = site_url.registration_url + that.$e.projectId + "&isAllowAppend=" +
+						window.location.href = site_url.registration_url + "?fundCode=" + that.$e.projectId + "&isAllowAppend=" +
 							that.data.fundDetailObj.isAllowAppend;
 
 					}
 				}
 			} else { //非电子合同
 
-				window.location.href = site_url.registration_url + that.$e.projectId + "&isAllowAppend=" +
+				window.location.href = site_url.registration_url + "?fundCode=" + that.$e.projectId + "&isAllowAppend=" +
 					that.data.fundDetailObj.isAllowAppend;
 
 			}
