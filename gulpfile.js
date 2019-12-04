@@ -565,7 +565,7 @@ gulp.task('jsCpd', function () {
 
     glob.sync(allUrl).forEach(function(name) {
 
-        if (name.indexOf('Url') != -1 || name.indexOf('Api') != -1) {
+        if ( name.indexOf('Api') != -1) {
 
             var fileContent = fs.readFileSync(name, 'utf-8');
 
@@ -588,6 +588,40 @@ gulp.task('jsCpd', function () {
                         process.exit();
                     } else {
                         arr[arrKey] = arrValue;
+                    }
+                }
+
+
+            }
+
+
+        }
+        else if ( name.indexOf('Url') != -1) {
+
+            var fileContent = fs.readFileSync(name, 'utf-8');
+
+            //获取module.export里的内容
+            fileContent = fileContent.substring(fileContent.indexOf('{'), fileContent.indexOf('}')).replace(/\s/g, "");
+
+            //用；拆分
+            var fileArr = fileContent.split(';');
+
+            //用=拆分
+            for (var i in fileArr) {
+                var arrKey = fileArr[i].split('=')[0],
+                    arrValue = fileArr[i].split('=')[1];
+
+                //获取右边的文件名
+                var arrFileName = arrValue.substring( arrValue.lastIndexOf('/'), arrValue.lastIndexOf('.') );
+
+                if (arrKey.indexOf('//') == -1) {
+                    //这条是没有被注释的
+                    if (arr[arrFileName]) {
+                        //重复了
+                        console.log( arrValue + '文件重复了');
+                        process.exit();
+                    } else {
+                        arr[arrFileName] = arrValue;
                     }
                 }
 
