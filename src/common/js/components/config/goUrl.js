@@ -503,6 +503,14 @@ module.exports = function() {
     this.registration_url = go_url.no_url + '/financial/views/privatePlacement/ordinaryProducts/registration.html';
     this.pofDemandFinancing_url = go_url.no_url + '/mine/views/bankCard/demandFinancing.html';
     this.pofDemo_url = go_url.no_url + '/mine/views/bankCard/demo.html';
-   
+    //举贤荐才
+    this.recruit_url = go_url.no_url + '/about/views/recruit.html';
+    //专业可靠的理财平台-恒天财富    
+    this.consult_url = go_url.no_url + '/about/views/baidu/consult.html';
+    //交易明细
+    this.tradeDetailOne_url = go_url.no_url + '/personal/views/tradeDetail.html';
+    //赎回明细
+    this.detailLists_url = go_url.no_url + '/personal/views/detailLists.html';
+
    
 };
