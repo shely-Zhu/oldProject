@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2019-11-26 14:42:56
- * @LastEditTime: 2019-12-04 18:56:53
+ * @LastEditTime: 2019-12-04 20:16:21
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \htjf-app\src\financial\static\js\publicPlacement\redemptionBuy.js
@@ -252,7 +252,7 @@ $(function() {
                 }
                 $(this).attr("checkStatu","on");
                 $(this).find(".radioCheckItemImg").attr("src",that.gv.checkImgUrl);
-                console.log("aaaa")
+                
               //  that.confirmCheck();
             })
 
@@ -260,6 +260,11 @@ $(function() {
             mui("body").on('tap','.forAll',function(){
                $(".msecond .msecond-one")[0].value=that.gv.dataList.enableShares;
             })
+
+            // 交易规则
+            mui("body").on("tap", ".goPofTransactionRules", function (e) {
+                window.location.href = site_url.pofTransactionRules_url + '?fundCode=' + regulatory.gv.dataList.fundCode
+            });
 
             //赎回确认         
          $(".confirmeDemptionPay").on('click',function(){

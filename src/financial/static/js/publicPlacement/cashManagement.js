@@ -96,6 +96,11 @@ $(function () {
         window.location.href = site_url.pofCashTransformOut_url;
       });
 
+      //了解现金管理
+      mui("body").on("tap", ".fundKnow", function () {
+       alert("跳转现金管理引导页")
+      });
+
       // // 跳转详情页
       // mui("body").on("tap", ".hd_to_detail", function (e) {
       //   var fundCode = $($(this).find('.lightColor')[0]).html();
