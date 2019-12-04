@@ -86,6 +86,7 @@ $(function () {
 			bankAccountMask:'', //银行账号密文
 			bankAccountSecret:'',//银行账号密文
 			nextDeductingDay:'',  //扣款周期
+			singleNum:0   //单日限额
 		},
 		webinit: function () {
 			var that = this;
@@ -292,6 +293,7 @@ $(function () {
 										that.gV.bankAccountMask = data[index].bankAccountMask;
 										that.gV.bankAccountSecret = data[index].bankAccountSecret;
 										that.gV.capitalMode = data[index].capitalMode
+										that.gV.singleNum = data[index].singleNum
 										var after4Num = data[index].after4Num
 										var bankData = []
 										bankData.push({
@@ -800,20 +802,21 @@ $(function () {
 			}) 
 			
 			$("#transformInput").on('input propertychange',function(){
+				that.gV.balance = Number($(this).val()).toFixed(2);
 				if($(this).val().includes(".") && $(this).val().split(".")[1].length >2){
 					tipAction('只能输入两位小数')
 					return
 				}else{
-					if(Number($(this).val()) >= Number(that.gV.minValue) && Number($(this).val()) <= Number(that.gV.maxValue)){
-						that.gV.balance = Number($(this).val()).toFixed(2);
-						that.getRate($(this).val());
-					}else if(Number($(this).val()) > that.gV.maxValue){
-						tipAction('最大买入金额不能超过' + that.gV.maxValue + '元')
-						return
+					if(that.gV.type == 'add'){
+						if(Number($(this).val()) >= Number(that.gV.minValue) && Number($(this).val()) <= Number(that.gV.maxValue)){
+							that.getRate($(this).val());
+						}else(Number($(this).val()) > that.gV.maxValue){
+							tipAction('最大买入金额不能超过' + that.gV.maxValue + '元')
+							return
+						}
 					}else{
-						return false
+						that.getRate($(this).val());
 					}
-					
 				}
 				
 			})
@@ -832,6 +835,7 @@ $(function () {
 				that.gV.bankAccount = $(this).attr('bankAccount');
 				that.gV.bankAccountMask = $(this).attr('bankAccountMask');
 				that.gV.capitalMode = $(this).attr('capitalMode')
+				that.gV.singleNum =  $(this).attr('singleNum')
 				var after4Num = $(this).attr('after4Num')
 				var data = []
 				data.push({
@@ -861,12 +865,30 @@ $(function () {
 			
 			//确定
 			$('body').on('tap','.btn_box .btn',function(){
-				if(Number(that.gV.balance) > Number(that.gV.maxValue)){
-					tipAction('最大买入金额不能超过' + that.gV.maxValue + '元')
-				}else if(Number(that.gV.balance) < Number(that.gV.minValue)){
-					tipAction('最小买入金额不能低于' + that.gV.minValue + '元')
+				if(that.gV.type == 'add'){
+					if(Number(that.gV.balance) < Number(that.gV.minValue)){
+						tipAction('最小买入金额不能低于' + that.gV.minValue + '元')
+						return
+					}else{
+						if(!!that.gV.bankAccountSecret){
+							if(Number(that.gV.balance) > Number(that.gV.singleNum)){
+								tipAction('单笔金额不能超过' + that.gV.singleNum + '元')
+								return
+							}
+							that.checkPayType()
+							
+						}else{
+							//未选择银行卡提示信息
+							tipAction("请选择银行卡！");
+							return
+						}
+					}
 				}else{
 					if(!!that.gV.bankAccountSecret){
+						if(Number(that.gV.balance) > Number(that.gV.singleNum)){
+							tipAction('单笔金额不能超过' + that.gV.singleNum + '元')
+							return
+						}
 						that.checkPayType()
 						
 					}else{
@@ -875,7 +897,6 @@ $(function () {
 						return
 					}
 				}
-
 				
 			}) ;
 			//  ---《公募基金风险揭示及售前告知书》

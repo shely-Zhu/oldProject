@@ -63,7 +63,8 @@ $(function () {
 			bankAccountSecret: '', // 银行账号
 			bankNo: '',  //银行代码
 			password: "",
-			tradeAcco: ''  //交易账号
+			tradeAcco: ''  ,//交易账号
+			singleNum:0,   //单日限额
 		},
 		webinit: function () {
 			var that = this;
@@ -372,11 +373,11 @@ $(function () {
 			}) 
 			
 			$("#transformInput").on('input propertychange',function(){
+				that.gV.balance = Number($(this).val()).toFixed(2);
 				if($(this).val().includes(".") && $(this).val().split(".")[1].length >2){
 					tipAction('只能输入两位小数')
 					return
 				}else{
-					that.gV.balance = Number($(this).val()).toFixed(2);
 					if(Number($(this).val()) >= Number(that.gV.minValue) && Number($(this).val()) <= Number(that.gV.maxValue)){
 						that.getCostEstimate($(this).val())
 					}else if(Number($(this).val()) > that.gV.maxValue){
@@ -401,6 +402,7 @@ $(function () {
 				that.gV.tradeAcco = $(this).attr('tradeAcco');
 				that.gV.bankAccountSecret = $(this).attr('bankAccountSecret');
 				that.gV.capitalMode = $(this).attr('capitalMode')
+				that.gV.singleNum = $(this).attr('singleNum')
 				var after4Num =  $(this).attr('after4Num')
 				var data = []
 				data.push({
@@ -446,13 +448,15 @@ $(function () {
 			
 			//确定
 			$('body').on('tap','.btn_box .btn',function(){
-				
-				if(Number(that.gV.balance) > Number(that.gV.maxValue)){
-					tipAction('最大买入金额不能超过' + that.gV.maxValue + '元')
-				}else if(Number(that.gV.balance) < Number(that.gV.minValue)){
+				if(Number(that.gV.balance) < Number(that.gV.minValue)){
 					tipAction('最小买入金额不能低于' + that.gV.minValue + '元')
+					return
 				}else{
 					if(!!that.gV.bankAccountSecret){
+						if(Number(that.gV.balance) > Number(that.gV.singleNum)){
+							tipAction('单笔金额不能超过' + that.gV.singleNum + '元')
+							return
+						}
 						that.checkPayType()
 						
 					}else{
