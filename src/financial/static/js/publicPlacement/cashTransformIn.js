@@ -198,7 +198,7 @@ $(function () {
 					fundName:that.gV.fundName,
 					balance:that.gV.balance,
 					bankNo:that.gV.bankNo,
-					bankAccount:that.gV.bankAccount,
+					bankAccount:that.gV.bankAccountSecret,
 					tradeAcco:that.gV.tradeAcco,
 					capitalMode:that.gV.capitalMode,
 					password:val,
