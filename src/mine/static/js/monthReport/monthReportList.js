@@ -33,7 +33,8 @@ $(function() {
 		},
 		init: function() {
 			var that = this;
-			that.initMui();
+			// that.initMui();
+			that.getUserInfo();
 			that.events();
 		},
 		getUserInfo:function(){
@@ -55,7 +56,7 @@ $(function() {
 						that.initMui();
 					}
 					else{
-						$('.noData').show();
+						$('.noneList').show();
 					}
 				},
 				callbackFail: function(json) { //失败后执行的函数
@@ -175,10 +176,19 @@ $(function() {
 		events: function() {
 			var that = this;
 
-			mui("body").on('tap', '.monthlyReport', function() {
+			mui("body").on('mdClick', '.monthlyReport', function() {
 				var $this = $(this);
 				window.location.href = site_url.monthReportDetail_url + '?reportId=' + $this.attr('reportId');
 				
+			},{
+				'htmdEvt': ''
+			})
+
+			mui("body").on('mdClick', '.productBtn', function() {
+				var $this = $(this);
+				window.location.href = site_url.wealthIndex_url;
+			},{
+				'htmdEvt': ''
 			})
 
 		},

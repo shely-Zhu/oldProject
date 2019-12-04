@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2019-11-26 14:42:56
- * @LastEditTime: 2019-11-29 13:34:42
+ * @LastEditTime: 2019-12-04 18:56:53
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \htjf-app\src\financial\static\js\publicPlacement\redemptionBuy.js
@@ -52,7 +52,8 @@ $(function() {
             templateTransferFunds:$("#templateTransferFunds"), //基金列表模板
             TransferFundsContent:$(".transferFundsContent"), //基金列表容器
             iconCheck: $(".item2 .iconfont"), //同意协议选择框
-            confirmBtn:$(".confirmeDemptionPay") // 确定按钮
+            confirmBtn:$(".confirmeDemptionPay"), // 确定按钮
+            maxMoneyContent:$(".maxMoneyContent span"),
         },
         gv:{//全局变量
             transferFunds:"",
@@ -62,7 +63,7 @@ $(function() {
             maxRedempShare:"", //最大赎回份额
             payType:"",
             maxMoney:"",
-            checkImgUrl:"/financial/static/img/account_icon_check@2x.png",
+            checkImgUrl:"/common/img/account_icon_check@2x.png",
             dataList:"",
             enableSharesMax:"", //最大赎回金额
 
@@ -70,9 +71,9 @@ $(function() {
 
         webinit: function() {
             var that = this;
-            console.log("999999")
              console.log("888",that.gv.dataBox);
              that.gv.dataList = JSON.parse(sessionStorage.getItem("publicFundDetail"));
+             that.getElements.maxMoneyContent[0].textContent = that.gv.dataList.enableShares;
              console.log("89898",JSON.parse(sessionStorage.getItem("publicFundDetail")))
             // that.gv.targetfundcode = that.gv.dataList.fundCode;
            //  that.gv.dataList = 
@@ -92,7 +93,6 @@ $(function() {
             var onrightLeftOneimgUrl = "";
             var onrightLeftOneName = "";
             var onrightLeftOneCode = "";
-            console.log("aaaa")
             console.log(that.gv.dataList.enableShares)
             $(".redemptionBuyTital span.name").html(that.gv.dataList.fundName);
             $(".redemptionBuyTital span.code").html(that.gv.dataList.fundCode);
@@ -100,9 +100,9 @@ $(function() {
             $(".listOneCar i").html(that.gv.dataList.bankName);
             $(".listOneCar span.carNum").html(that.gv.dataList.bankAccountMask.substr(-4));
             $(".pay span.payTime").html(that.gv.dataList.estimateArrivalDate);
-            $(".msecond input").val(that.gv.dataList.enableShares);
-            $(".listSecondCar span.name").html(that.gv.dataList.fundName);
-            $(".listSecondCar span.code").html(that.gv.dataList.fundCode);
+           // $(".msecond input").val(that.gv.dataList.enableShares);
+            $(".listSecondCar span.name").html(that.gv.dataList.bankName);
+            $(".listSecondCar span.code").html(that.gv.dataList.bankAccountMask.substr(-4));
             $(".popupCarList .bank-img").attr("src",that.gv.dataList.bankThumbnailUrl)
         },
         //查看详情提交
@@ -131,12 +131,10 @@ $(function() {
                 callbackDone : function(json){
                     console.log("88888",json);
                     that.gv.transferFunds = json.data;
-                    console.log("88898989")
                      // 将列表插入到页面上
                      for(var i = 0;i<that.gv.transferFunds.length;i++){
                           var code = that.gv.transferFunds[i].fundCode;
                           var Redata = that.searchNewfundDetails(code)
-                          console.log("98989",Redata);
                      }
                      generateTemplate(that.gv.transferFunds, that.getElements.TransferFundsContent, that.getElements.templateTransferFunds);
                 }
@@ -180,8 +178,6 @@ $(function() {
                 needDataEmpty: true,
                 callbackDone:function(res){
                     var data = res.data;
-                    console.log("888888888",data)
-                    debugger
                     if(res.status == '0000'){
                         window.location.href = site_url.pofSurelyResultsDetail_url + '?applyId=' + data.allotNo + '&fundBusinCode=' + 
                         "024"+ "&fundCode=" + regulatory.gv.targetfundcode  + '&flag=redemption';
@@ -262,7 +258,6 @@ $(function() {
 
             //点击全部，初始化最大赎回额度
             mui("body").on('tap','.forAll',function(){
-                console.log("aaaaaaaa");
                $(".msecond .msecond-one")[0].value=that.gv.dataList.enableShares;
             })
 
@@ -272,12 +267,16 @@ $(function() {
             payPass(that.cancelOrder)
         })
          $(".msecond input").change(function(){
-             console.log("8888888");
              that.gv.nowRedempShare = $(this)[0].value;
-             if(that.gv.maxRedempShare<that.gv.nowRedempShare){
+             if(parseFloat(that.gv.maxRedempShare)< parseFloat (that.gv.nowRedempShare)){
                  $(".checkMessage").css({"display":"block"});
+                 $(".checkMessage").html("超出最大赎回份额")
              }else{
                 $(".checkMessage").css({"display":"none"});
+                if(that.gv.nowRedempShare == ""){
+                    $(".checkMessage").css({"display":"block"});
+                    $(".checkMessage").html("赎回额度不能位空")
+                }
              }
          })
 
