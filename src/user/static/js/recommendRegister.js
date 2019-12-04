@@ -2,7 +2,7 @@
  * 老带新 注册 js
  * @author yangjinlai 2017-06-21
  */
-
+require('@pathCommonBase/base.js');
 require('../../../include/js/vendor/config.js');
 //zepto模块--callback
 require('../../../include/js/vendor/zepto/callback.js');
