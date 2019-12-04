@@ -37,13 +37,18 @@
                     <div class="fundValue"></div>
                     <div class="fundKnow" htmdEvt="cashManagement_fundKnow">了解现金管理<i class="iconfont">&#xe600;</i></div>
                </div>
-               <div class="profitContent justify_between flex">
-                    <div class="cashProfitCon profitCon">
+               <div class="profitContent">
+                    <div class="profitCon income">
                          <div class="profitTitle">昨日收益</div>
                          <div class="profitValue"></div>
                     </div>
                     <div class="lineVertical"></div>
-                    <div class="cashProfitCon profitCon">
+                    <div class="profitCon holdIncome">
+                         <div class="profitTitle">持有总收益</div>
+                         <div class="profitValue"></div>
+                    </div>
+                    <div class="lineVertical"></div>
+                    <div class="profitCon addupIncome">
                          <div class="profitTitle">累计收益</div>
                          <div class="profitValue"></div>
                     </div>
@@ -86,7 +91,11 @@
                </div>
                <div class="itemBottom flex">
                     <div class="fundIn" htmdEvt="cashManagement_fundIn">转入</div>
+                    {{#if show}}
                     <div class="fundOut" htmdEvt="cashManagement_fundOut">转出</div>
+                    {{else}}
+                    <div class="fundOut-disbled" htmdEvt="cashManagement_fundOut">转出</div>
+                    {{/if}}
                </div>
           </div>
 		{{/each}}
