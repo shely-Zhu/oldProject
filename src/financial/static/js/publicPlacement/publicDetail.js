@@ -92,7 +92,7 @@ $(function () {
                     that.getData1();
                     that.getData2('1', 1);
                     that.events();
-
+                    debugger
                     var historyStr = that.fundType ? '<div class="item_name">日期</div> <div class="item_name">万份收益</div><div class="item_name">七日年华</div>' : '<div class="item_name">日期</div><div class="item_name">单位净值</div><div class="item_name">累计净值</div><div class="item_name">日涨幅</div>'
                     $('.history_area >.history_item').html(historyStr);
 
