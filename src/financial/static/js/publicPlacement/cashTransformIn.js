@@ -368,8 +368,11 @@ $(function () {
 			}) ;
 			//密码校验不通过   ---取消
 			$('body').on('tap','.elasticCel',function(){
+				$(".pwd-input").val('')
+				$(".fake-box input").val('');
 				$('#passwordWrap').css('display','none')
 				$('.popup-password').css('display','none')
+				
 			}) ;
 			//密码校验不通过   ---忘记密码
 			$('body').on('tap','.error1 .elasticCel',function(){
@@ -378,9 +381,9 @@ $(function () {
 			}) ;
 			//密码校验不通过   ---重新输入
 			$('body').on('tap','.error1 .elasticYes',function(){
-				$('.popup-password').css('display','none')
 				$(".pwd-input").val('')
 				$(".fake-box input").val('');
+				$('.popup-password').css('display','none')
 			}) ;
 			//密码校验不通过   ---找回密码
 			$('body').on('tap','.error2 .elasticYes',function(){
@@ -389,9 +392,9 @@ $(function () {
 			}) ;
 			//密码校验不通过   ---重新输入
 			$('body').on('tap','.error3 .elasticYes',function(){
-				$('.popup-password').css('display','none')
 				$(".pwd-input").val('')
 				$(".fake-box input").val('');
+				$('.popup-password').css('display','none')
 			}) ;
 
 			//添加银行卡 -- 跳往原生

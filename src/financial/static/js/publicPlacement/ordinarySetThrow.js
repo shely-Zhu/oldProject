@@ -59,7 +59,7 @@ $(function () {
 			fundName: splitUrl['fundName'] ? splitUrl['fundName'] : null,   //基金名称
 			fundCode: splitUrl['fundCode'] ? splitUrl['fundCode'] : null,  //基金代码
 			capitalMode: '', //资金方式
-			payType: '',   //支付方式（0、在线支付 1、汇款支付）
+			payType: '0',   //支付方式（0、在线支付 1、汇款支付）
 			bankName: '',  // 银行名称
 			
 			password: "",
@@ -470,7 +470,7 @@ $(function () {
 					tradeAcco:that.gV.tradeAcco,
 					scheduledProtocolId:that.gV.scheduledProtocolId,
 					fixState:'A',
-					expiryDate:'',  //终止日期
+					expiryDate:that.gV.expiryDate,  //终止日期
 					tradePeriod:that.gV.tradePeriod,
 					shares:that.gV.shares,
 					balance:that.gV.balance,
