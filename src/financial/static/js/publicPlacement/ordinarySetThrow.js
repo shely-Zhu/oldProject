@@ -810,7 +810,7 @@ $(function () {
 					if(that.gV.type == 'add'){
 						if(Number($(this).val()) >= Number(that.gV.minValue) && Number($(this).val()) <= Number(that.gV.maxValue)){
 							that.getRate($(this).val());
-						}else(Number($(this).val()) > that.gV.maxValue){
+						}else if(Number($(this).val()) > that.gV.maxValue){
 							tipAction('最大买入金额不能超过' + that.gV.maxValue + '元')
 							return
 						}
@@ -901,7 +901,7 @@ $(function () {
 			}) ;
 			//  ---《公募基金风险揭示及售前告知书》
 			$('body').on('tap','.setGoUrl',function(){
-				window.location.href = site_url.agreementModel_url + '?id=47'
+				window.location.href = site_url.agreementModel_url + '?id=47' + '&financial=true'
 			}) ;
 			//  ---忘记密码
 			$('body').on('tap','#passwordWrap .forgetP',function(){

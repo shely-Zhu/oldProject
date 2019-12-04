@@ -16,6 +16,7 @@ require('@pathCommonJs/components/elasticLayer.js');
 require('@pathCommonJs/components/elasticLayerTypeFive.js');
 require('@pathCommonJs/components/headBarConfig.js');
 var splitUrl = require('@pathCommonJs/components/splitUrl.js')();
+var alwaysAjax = require('@pathCommonJs/components/alwaysAjax.js');
 
 
 $(function() {
@@ -81,6 +82,7 @@ $(function() {
             var wrap_source = $('#first-template').html(),
                 wrap_template = Handlebars.compile(wrap_source),
                 wrap_html = wrap_template({ content: list_html });  //模板生成
+                
             $.each(that.gV.navList, function(i, el) {
                 
                 that.gV.ajaxArr[el.num] = {
