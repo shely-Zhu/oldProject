@@ -64,8 +64,8 @@ $(function(){
             var obj=[{
                 url: site_url.getArticle_api,
                 data:{
-                    id : splitUrl['id'],
-                    articleBelong:splitUrl['articleBelong'],
+                    id : splitUrl['id'] || "",
+                    articleBelong:splitUrl['articleBelong'] || "",
                     applyType:"0",//h5是0
                 },
                 needDataEmpty: true,
