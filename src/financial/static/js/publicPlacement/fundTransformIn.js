@@ -372,7 +372,7 @@ $(function () {
 			}) 
 			
 			$("#transformInput").on('input propertychange',function(){
-				if($(this).val().split(".")[1].length >2){
+				if($(this).val().includes(".") && $(this).val().split(".")[1].length >2){
 					tipAction('只能输入两位小数')
 					return
 				}else{

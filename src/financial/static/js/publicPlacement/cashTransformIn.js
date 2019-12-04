@@ -119,7 +119,9 @@ $(function () {
 						// 将列表插入到页面上
 						var data = [] ;
 						data = json.data.pageList;
-						console.log('data',data)
+						data.forEach(function(element) {
+							element.after4Num = element.bankAccountMask.substr(element.bankAccountMask.length -4)
+						});
 						generateTemplate(data, that.$el.popupUl, that.$el.bankListTemplate,true);
 						$("#loading").hide()
 						$('.popup').css('display','block')
@@ -296,7 +298,7 @@ $(function () {
 			}) 
 			
 			$("#transformInput").on('input propertychange',function(){
-				if($(this).val().split(".")[1].length >2){
+				if($(this).val().includes(".") && $(this).val().split(".")[1].length >2){
 					tipAction('只能输入两位小数')
 					return
 				}else{
@@ -326,7 +328,8 @@ $(function () {
 					bankName:$(this).attr('bankName'),
 					bankNo:$(this).attr('bankNo'),
 					singleNum:$(this).attr('singleNum'),
-					oneDayNum:$(this).attr('oneDayNum')
+					oneDayNum:$(this).attr('oneDayNum'),
+					after4Num:$(this).attr('after4Num'),
 				});
 				generateTemplate(data, that.$el.onlinepay, that.$el.bankListCheckTemplate,true);
 				setTimeout(function(){

@@ -270,7 +270,7 @@ $(function () {
 						// 将列表插入到页面上
 						var data = [] ;
 						data = json.data.pageList;
-						data.forEach(element => {
+						data.forEach(function(element) {
 							element.after4Num = element.bankAccountMask.substr(element.bankAccountMask.length -4)
 						});
 						if(that.gV.type == 'add'){
@@ -800,7 +800,7 @@ $(function () {
 			}) 
 			
 			$("#transformInput").on('input propertychange',function(){
-				if($(this).val().split(".")[1].length >2){
+				if($(this).val().includes(".") && $(this).val().split(".")[1].length >2){
 					tipAction('只能输入两位小数')
 					return
 				}else{
