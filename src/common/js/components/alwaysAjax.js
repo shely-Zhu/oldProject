@@ -5,15 +5,18 @@
  * cutNumber 准备做tops的参数  后期优化
  */
 
-module.exports = function(className,pullupLoadingName, cutNumber){
+module.exports = function(className, pullupLoadingName, cutNumber) {
     //点击下按钮，显示弹框
-    var classNames=className?className:".contentWrap" 
-    var pullupLoadingNames= pullupLoadingName?pullupLoadingName:".contentWrapper"
-    var tops=-100;
-     $(document).scroll(function() {
-            if($(classNames).offset().top<tops){
-                tops-=800;
+    var classNames = className ? className : ".contentWrap"
+    var pullupLoadingNames = pullupLoadingName ? pullupLoadingName : ".contentWrapper"
+    var tops = parseInt(cutNumber?cutNumber:-100); 
+    if ($(classNames).length > 0) {
+        $(document).scroll(function() {
+            if ($(classNames).offset().top < tops) {
+                tops -= 800;
                 mui(pullupLoadingNames).pullRefresh().pullupLoading();
-            }
-      });
+            }   
+        });
+    }
+
 }

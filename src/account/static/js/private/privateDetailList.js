@@ -15,7 +15,7 @@ require('@pathCommonCom/elasticLayer/elasticLayer/elasticLayer.js');
 //黑色提示条的显示和隐藏
 var splitUrl = require('@pathCommonJs/components/splitUrl.js')();
 var transcationTem = require('@pathCommonJsCom/account/transcationTem.js');
-
+var alwaysAjax = require('@pathCommonJs/components/alwaysAjax.js');
 
 $(function() {
     var data = {
@@ -42,7 +42,6 @@ $(function() {
             listToTop: '', // 滑动区域距离顶部距离
             navToTop: '', // 滑动nav距离顶部距离
             navHeight: '', // nav高度
-            className:'',    
         },
         html: '', //存放生成的html
         init: function() { //初始化函数
@@ -167,7 +166,8 @@ $(function() {
             var that = this;
             w = $id.attr('id'), //获取节点的 id
                 s = '#' + w + ' .contentWrapper'; //id 拼接 查出content区域
-
+            //无缝滚动
+            alwaysAjax('#' + w + ' .mui-table-view-cell', s)
             mui.init({
                 pullRefresh: {
                     container: s,
@@ -385,6 +385,7 @@ $(function() {
         },
         events: function() { //绑定事件
             var that = this;
+
             mui("body").on('tap', '.hopper', function(e) {
                     $('.mask').show();
                     $('.hopperCon').show();

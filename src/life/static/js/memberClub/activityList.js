@@ -142,7 +142,7 @@ $(function(){
                         }
                         // 将列表插入到页面上
                         generateTemplate(list,that.$e.recordList,that.$e.activityListTemp)
-                        
+                        $(".lazyload").lazyload()
                     }, 200)
 
                 },

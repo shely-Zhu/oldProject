@@ -196,7 +196,7 @@ gulp.task('proxyTask', function() {
                     // target: 'https://h5.htjf4.com',
                     //  target: 'http://172.16.187.129:8080',//李亚楠
                     // target: 'http://172.16.187.164:8081',
-                     target: 'https://h5.chtfundtest.com',
+                    target: 'https://h5.chtfundtest.com',
                     changeOrigin: true,
                     secure: false,
                 }),
@@ -418,14 +418,14 @@ gulp.task('bfRev', function() {
 
 /*******************************各种打包任务***********************************/
 
-gulp.task('commonImages' , function() {
+gulp.task('commonImages', function() {
     return gulp.src(['src/common/**/*.{jpg,png,jpeg,svg}'])
         .pipe(gulp.dest(host.path + 'include/commonImg/'));
 });
 
 
 //图片打包任务，全部打包和单独打包可共用
-gulp.task('images', ['commonImages'] , function() {
+gulp.task('images', ['commonImages'], function() {
     return gulp.src(['src/**/img/**/*', '!src/common/**/*'])
         .pipe(gulp.dest(host.path));
 });
@@ -447,7 +447,7 @@ gulp.task("cssToHost", function() {
     //通过through处理相对路径
     .pipe(
         through.obj(function(file, enc, cb) {
-            
+
             file = changeCommonImg(file);
 
             file = pathVar.changePathVar(file);
@@ -568,7 +568,7 @@ gulp.task("includeJs", ['htmd'], function() {
 })
 
 //查config.js的重复
-gulp.task('jsCpd', function () {
+gulp.task('jsCpd', function() {
 
     var allUrl = path.resolve(__dirname, './src/common/js/components/config/*.js');
 
@@ -576,7 +576,7 @@ gulp.task('jsCpd', function () {
 
     glob.sync(allUrl).forEach(function(name) {
 
-        if ( name.indexOf('Api') != -1) {
+        if (name.indexOf('Api') != -1) {
 
             var fileContent = fs.readFileSync(name, 'utf-8');
 
@@ -606,8 +606,7 @@ gulp.task('jsCpd', function () {
             }
 
 
-        }
-        else if ( name.indexOf('Url') != -1) {
+        } else if (name.indexOf('Url') != -1) {
 
             // var fileContent = fs.readFileSync(name, 'utf-8');
 
@@ -692,46 +691,43 @@ gulp.task("webpack", ['jsCpd'], function(cb) {
     ], cb)
 });
 
-function changeCommonImg( file ){
+function changeCommonImg(file) {
     //如果有用到common里面的图片的，全部把路径改成include
     var fileCon = file.contents.toString();
     var re = new RegExp("\/common\/[^\.]*\.(jpg|png|svg|jpeg)", 'g');
     var commonImgArr = fileCon.match(re);
 
-    if( commonImgArr && commonImgArr.length ){
+    if (commonImgArr && commonImgArr.length) {
         //有common下的图片路径
-        for( var i in commonImgArr){
+        for (var i in commonImgArr) {
 
             // console.log( '文件路径;' + file.path)
             // console.log( '原图片路径：' + commonImgArr[i]);
             // console.log('要替换的路径：' + commonImgArr[i].replace('/common/', '/include/commonImg/'));
             // console.log( fileCon.indexOf( commonImgArr[i]));
-            
-            var r = new RegExp( commonImgArr[i], 'g');
-            
-            fileCon = fileCon.replace( r, commonImgArr[i].replace('/common/', '/include/commonImg/'))
-        
+
+            var r = new RegExp(commonImgArr[i], 'g');
+
+            fileCon = fileCon.replace(r, commonImgArr[i].replace('/common/', '/include/commonImg/'))
+
             // console.log( fileCon.indexOf( commonImgArr[i].replace('/common/', '/include/commonImg/')));
         }
     }
     file.contents = new Buffer(fileCon);
     return file;
-}   
+}
 
 //html文件打包
-gulp.task('html', function (cb) {
+gulp.task('html', function(cb) {
 
     pump([
-         gulp.src(['src/**/views/**/*.html', '!src/common/views/**/*.html']), //- 读取 rev-manifest.json 文件以及需要进行css名替换的文件
+        gulp.src(['src/**/views/**/*.html', '!src/common/views/**/*.html']), //- 读取 rev-manifest.json 文件以及需要进行css名替换的文件
 
         //处理公共路径变量
-        through.obj(function (file, enc, cb) {
+        through.obj(function(file, enc, cb) {
 
             file = pathVar.changePathVar(file);
 
-            //替换全部common下的图片路径为include的
-            file = changeCommonImg(file);
-            
             this.push(file);
             cb()
         }),
@@ -748,6 +744,16 @@ gulp.task('html', function (cb) {
 
         plugins.htmlmin({
             removeComments: true, //清除HTML注释
+        }),
+
+        //处理公共路径变量
+        through.obj(function(file, enc, cb) {
+
+            //替换全部common下的图片路径为include的
+            file = changeCommonImg(file);
+
+            this.push(file);
+            cb()
         }),
 
         //与host.middleHtmlPath中的内容做比对

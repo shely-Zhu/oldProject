@@ -6,8 +6,9 @@ require('@pathCommonJs/ajaxLoading.js');
 require('@pathCommonJs/components/elasticLayer.js');
 require('@pathCommonJs/components/elasticLayerTypeTwo.js');
 var tipAction = require('@pathCommonJs/components/tipAction.js');
-var splitUrl = require('@pathCommonJs/components/splitUrl.js')();
 var generateTemplate = require('@pathCommonJsComBus/generateTemplate.js');
+//无缝滚动
+var alwaysAjax = require('@pathCommonJs/components/alwaysAjax.js'); 
 
 $(function(){
     var regulatory = {
@@ -55,7 +56,7 @@ $(function(){
                     up: {
                         //auto: false,
                         contentrefresh: '拼命加载中',
-                        contentnomore: '没有更多了', //可选，请求完毕若没有更多数据时显示的提醒内容；
+                        contentnomore: '暂无更多数据', //可选，请求完毕若没有更多数据时显示的提醒内容；
                         callback: function() {
                             
                             // 热门诊断
@@ -174,6 +175,8 @@ $(function(){
                         $('.content').find('.mui-pull-bottom-pocket').removeClass('mui-hidden');
                         // 将列表插入到页面上
                         generateTemplate(dataList, that.$e.hotFundList, that.$e.fundListTemp);
+                        //无缝滚动
+                        alwaysAjax('.li',".content",100);
                     }, 200)
 
                 },
@@ -202,7 +205,7 @@ $(function(){
                 }, {
                     'htmdEvt': 'feedback_functionalAbnormality'
                 });
-
+            
 		},
     }
     //调用函数

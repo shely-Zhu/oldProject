@@ -114,7 +114,6 @@ $(function () {
                         }
                         setTimeout(function () {
                             generateTemplate(morelist, that.$e.moreSlot, that.$e.moreTemp);
-                            $(".lazyload").lazyload()
                         }, 200)
                     }
 

@@ -87,7 +87,7 @@ $(function () {
                     that.gV.json.trDate = that.gV.json.trDate.slice(5)
                     that.gV.json.fundType = that.fundType
                     var html = template(that.gV.json); (html, "00");
-
+                    
                     $(".tplBox").html(html);
                     that.getData1();
                     that.getData2('1', 1);
@@ -201,6 +201,7 @@ $(function () {
             mui("body").on("tap", ".history_area .history_more", function (e) {
                 window.location.href = site_url.mineHistoryDetail_url + '?fundCode=' + fundCode
             });
+           
             // 交易规则
             mui("body").on("tap", ".dealRegArea .rule", function (e) {
                 window.location.href = site_url.pofTransactionRules_url + '?fundCode=' + fundCode
@@ -380,12 +381,12 @@ $(function () {
             var that = this;
             if (type == '1') {
                 //画的是七日年化折线图 或者单位净值
-                var chartId = $('#line1')[0],
+                var chartId = document.getElementById("line1"),
                     xAxisData = data.date,
                     seriesData = data.seven;
             } else if (type == '2') {
                 //画的是万份收益折线图 或者累计净值
-                var chartId = $('#line2')[0],
+                var chartId = document.getElementById("line2"),
                     xAxisData = data.date,
                     seriesData = data.big;
             }

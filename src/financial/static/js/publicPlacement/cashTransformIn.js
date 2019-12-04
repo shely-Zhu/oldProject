@@ -53,7 +53,8 @@ $(function () {
 			bankNo: '',  //银行代码
 			password: "",
 			tradeAcco: '' , //交易账号
-			tradeSource: ''  //交易账号
+			tradeSource: '' , //交易账号
+			singleNum:0
 		},
 		webinit: function () {
 			var that = this;
@@ -119,7 +120,9 @@ $(function () {
 						// 将列表插入到页面上
 						var data = [] ;
 						data = json.data.pageList;
-						console.log('data',data)
+						data.forEach(function(element) {
+							element.after4Num = element.bankAccountMask.substr(element.bankAccountMask.length -4)
+						});
 						generateTemplate(data, that.$el.popupUl, that.$el.bankListTemplate,true);
 						$("#loading").hide()
 						$('.popup').css('display','block')
@@ -198,7 +201,7 @@ $(function () {
 					fundName:that.gV.fundName,
 					balance:that.gV.balance,
 					bankNo:that.gV.bankNo,
-					bankAccount:that.gV.bankAccount,
+					bankAccount:that.gV.bankAccountSecret,
 					tradeAcco:that.gV.tradeAcco,
 					capitalMode:that.gV.capitalMode,
 					password:val,
@@ -296,7 +299,12 @@ $(function () {
 			}) 
 			
 			$("#transformInput").on('input propertychange',function(){
-				that.gV.balance = $(this).val();
+				that.gV.balance = Number($(this).val()).toFixed(2);
+				if($(this).val().includes(".") && $(this).val().split(".")[1].length >2){
+					tipAction('只能输入两位小数')
+					return
+				}
+				
 			})
 			//清除输入框数字
 			$('body').on('tap','.deleteNum',function(){
@@ -314,13 +322,15 @@ $(function () {
 				that.gV.bankAccount = $(this).attr('bankAccount');
 				that.gV.bankAccountSecret = $(this).attr('bankAccountSecret');
 				that.gV.capitalMode = $(this).attr('capitalMode')
+				that.gV.singleNum = $(this).attr('singleNum')
 				var data = []
 				data.push({
 					bankThumbnailUrl:$(this).attr('bankThumbnailUrl'),
 					bankName:$(this).attr('bankName'),
 					bankNo:$(this).attr('bankNo'),
 					singleNum:$(this).attr('singleNum'),
-					oneDayNum:$(this).attr('oneDayNum')
+					oneDayNum:$(this).attr('oneDayNum'),
+					after4Num:$(this).attr('after4Num'),
 				});
 				generateTemplate(data, that.$el.onlinepay, that.$el.bankListCheckTemplate,true);
 				setTimeout(function(){
@@ -342,24 +352,22 @@ $(function () {
 			//确定
 			$('body').on('tap','.btn_box .btn',function(){
 				if(!!that.gV.bankAccountSecret){
+					if(Number(that.gV.balance) > Number(that.gV.singleNum)){
+						tipAction('单笔金额不能超过' + that.gV.singleNum + '元')
+						return
+					}
 					that.checkPayType()
-					
 				}else{
 					//未选择银行卡提示信息
 					tipAction("请选择银行卡！");
 					return
 				}
 			}) ;
-			// $("#pwd-input").on("input", function() {
-			// 	var password = $('#pwd-input').val() //密码
-			// 	if(password.length == 6){
-			// 		that.gV.password = password;
-			// 		// $(".popup-password").show()
-			// 		that.checkPassword()
-
-			// 	}
-			// })
 			
+			//  ---《公募基金风险揭示及售前告知书》
+			$('body').on('tap','.setGoUrl',function(){
+				window.location.href = site_url.agreementModel_url + '?id=47' + '&financial=true'
+			}) ;
 
 			//  ---忘记密码
 			$('body').on('tap','#passwordWrap .forgetP',function(){
@@ -368,8 +376,11 @@ $(function () {
 			}) ;
 			//密码校验不通过   ---取消
 			$('body').on('tap','.elasticCel',function(){
+				$(".pwd-input").val('')
+				$(".fake-box input").val('');
 				$('#passwordWrap').css('display','none')
 				$('.popup-password').css('display','none')
+				
 			}) ;
 			//密码校验不通过   ---忘记密码
 			$('body').on('tap','.error1 .elasticCel',function(){
@@ -378,9 +389,9 @@ $(function () {
 			}) ;
 			//密码校验不通过   ---重新输入
 			$('body').on('tap','.error1 .elasticYes',function(){
-				$('.popup-password').css('display','none')
 				$(".pwd-input").val('')
 				$(".fake-box input").val('');
+				$('.popup-password').css('display','none')
 			}) ;
 			//密码校验不通过   ---找回密码
 			$('body').on('tap','.error2 .elasticYes',function(){
@@ -389,9 +400,9 @@ $(function () {
 			}) ;
 			//密码校验不通过   ---重新输入
 			$('body').on('tap','.error3 .elasticYes',function(){
-				$('.popup-password').css('display','none')
 				$(".pwd-input").val('')
 				$(".fake-box input").val('');
+				$('.popup-password').css('display','none')
 			}) ;
 
 			//添加银行卡 -- 跳往原生

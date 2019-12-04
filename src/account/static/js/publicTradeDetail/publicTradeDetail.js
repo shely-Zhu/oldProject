@@ -342,7 +342,7 @@ $(function () {
                 //默认全部点亮 所以不用处理
             } else {
                 //其他情况 均把第一个点亮 其他的置灰
-                $('.trade_status_area .trade_status_icon_1').css('background', 'url(/account/static/img/publicTradeDetail/public_trade_detail_no_check.png)').css('background-size', '100%');
+                $('.trade_status_area .trade_status_icon_1').css('background', 'url(/common/img/public_trade_detail_no_check.png)').css('background-size', '100%');
             }
             if (that.gV.isCash){//现金宝
                 if (that.gV.isBuy){
