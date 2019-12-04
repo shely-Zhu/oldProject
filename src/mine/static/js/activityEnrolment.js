@@ -114,6 +114,7 @@ $(function () {
                         }
                         setTimeout(function () {
                             generateTemplate(morelist, that.$e.moreSlot, that.$e.moreTemp);
+                            $(".lazyload").lazyload()
                         }, 200)
                     }
 
@@ -146,8 +147,10 @@ $(function () {
                         // 将列表插入到页面上
                         if (num == 0) {
                             generateTemplate(dataList, that.$e.ListSlot, that.$e.listTemp);
+                            $(".lazyload").lazyload()
                         } else {
                             generateTemplate(dataList, that.$e.ListSlot1, that.$e.listTemp);
+                            $(".lazyload").lazyload()
                         }
 
 
