@@ -198,6 +198,9 @@ $(function () {
                 window.location.href = site_url.pofFundFile_url + '?secuId=' + secuId + '&fundCode=' + fundCode;
             });
             // 历史净值查看更多
+            // mui("body").on("tap", ".history_more", function (e) {
+            //     window.location.href = site_url.mineHistoryDetail_url + '?fundCode=' + fundCode
+            // });
             mui("body").on("tap", ".history_area .history_more", function (e) {
                 window.location.href = site_url.mineHistoryDetail_url + '?fundCode=' + fundCode
             });

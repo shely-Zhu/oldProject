@@ -501,8 +501,6 @@ module.exports = function() {
     this.orderLimit_url = go_url.no_url + '/financial/views/privatePlacement/electronicContract/orderLimit.html';
     //普通预约
     this.registration_url = go_url.no_url + '/financial/views/privatePlacement/ordinaryProducts/registration.html';
-    this.pofDemandFinancing_url = go_url.no_url + '/mine/views/bankCard/demandFinancing.html';
-    this.pofDemo_url = go_url.no_url + '/mine/views/bankCard/demo.html';
    
    
 };

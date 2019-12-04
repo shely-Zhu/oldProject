@@ -10,7 +10,7 @@ module.exports = function(className, pullupLoadingName, cutNumber) {
     //点击下按钮，显示弹框
     var classNames = className ? className : ".contentWrap"
     var pullupLoadingNames = pullupLoadingName ? pullupLoadingName : ".contentWrapper"
-    var tops = -100; 
+    var tops = parseInt(cutNumber?cutNumber:-100); 
     if ($(classNames).length > 0) {
         $(document).scroll(function() {
             if ($(classNames).offset().top < tops) {
