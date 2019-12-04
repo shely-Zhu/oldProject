@@ -53,7 +53,8 @@ $(function () {
 			bankNo: '',  //银行代码
 			password: "",
 			tradeAcco: '' , //交易账号
-			tradeSource: ''  //交易账号
+			tradeSource: '' , //交易账号
+			singleNum:0
 		},
 		webinit: function () {
 			var that = this;
@@ -298,11 +299,10 @@ $(function () {
 			}) 
 			
 			$("#transformInput").on('input propertychange',function(){
+				that.gV.balance = Number($(this).val()).toFixed(2);
 				if($(this).val().includes(".") && $(this).val().split(".")[1].length >2){
 					tipAction('只能输入两位小数')
 					return
-				}else{
-					that.gV.balance = $(this).val();
 				}
 				
 			})
@@ -322,6 +322,7 @@ $(function () {
 				that.gV.bankAccount = $(this).attr('bankAccount');
 				that.gV.bankAccountSecret = $(this).attr('bankAccountSecret');
 				that.gV.capitalMode = $(this).attr('capitalMode')
+				that.gV.singleNum = $(this).attr('singleNum')
 				var data = []
 				data.push({
 					bankThumbnailUrl:$(this).attr('bankThumbnailUrl'),
@@ -351,8 +352,11 @@ $(function () {
 			//确定
 			$('body').on('tap','.btn_box .btn',function(){
 				if(!!that.gV.bankAccountSecret){
+					if(Number(that.gV.balance) > Number(that.gV.singleNum)){
+						tipAction('单笔金额不能超过' + that.gV.singleNum + '元')
+						return
+					}
 					that.checkPayType()
-					
 				}else{
 					//未选择银行卡提示信息
 					tipAction("请选择银行卡！");
