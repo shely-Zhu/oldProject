@@ -152,6 +152,9 @@ $(function() {
 				dataRange = "";
 				that.data.end = new Date().toLocaleString().split(" ")[0].replace(/\//g, '-');
 			}
+			if(num != 4){
+				that.data.end = ""
+			}
 			//判断是否已经有数据了，有的话不再请求接口
 			if( num == 0 && that.data['qrnhWfsy'].oneMonth.profitThoudDate && that.data['qrnhWfsy'].oneMonth.profitThoudDate.length){
 	       		//请求的是近一个月的数据
@@ -176,13 +179,13 @@ $(function() {
 	       	}
 			//没有数据，请求接口
 			var obj = [{
-			    url: site_url.fundNetWorthTrendChart_api, 
+			    url: site_url.prfFundNetWorthTrendChart_api, 
 			    data: {
 			    	fundCode: that.data.fundCode,
 			    	dataRange: dataRange,
 			    	end: that.data.end || ""
 			    },
-//			    needLoading: true,
+			    needLoading: true,
 			    needLogin: true,
 			    callbackDone: function(json) {
 			    	var jsonData = json.data;
@@ -376,7 +379,7 @@ $(function() {
 		   	//持有收益
 		   	$('.typeWrap .ownShare').html( jsonData.holdIncomeMask);
 		   	//累计收益  接口无
-		   	$('.typeWrap .accumulatedShare').html( jsonData.incomeUnit);
+		   	$('.typeWrap .accumulatedShare').html( jsonData.addupIncomeMask);
 			//持有份额
 			$('.openWrap .cyfe').html( jsonData.currentShare);
 			//可用份额
@@ -468,7 +471,7 @@ $(function() {
 				window.location.href = site_url.pofPublicDetail_url + "?fundCode=" + that.data.fundCode + "&fundType=" + that.data.projectType;
 			})
 			//点击赎回
-			mui("body").on('tap', '.backBtn', function(e) {
+			mui("body").on('tap', '.redeemBtn', function(e) {
 				window.location.href = site_url.redemptionBuy_url;			
 			})
 			// //点击买入

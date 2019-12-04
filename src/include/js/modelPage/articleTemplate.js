@@ -4,6 +4,9 @@
 /**
 * 模板页面
 * @author 田俊国 2019-11-19
+* 路径中携带参数须知id为后台配置对应id
+* articleBelong为后台配置该条信息对应的articleBelong
+* applyType不需要传
 */
 require('@pathIncludJs/vendor/config.js');
 
@@ -63,7 +66,7 @@ $(function(){
                 data:{
                     id : splitUrl['id'],
                     articleBelong:splitUrl['articleBelong'],
-                    applyType:splitUrl['applyType']*1,
+                    applyType:"0",//h5是0
                 },
                 needDataEmpty: true,
                 callbackDone: function(json) {
