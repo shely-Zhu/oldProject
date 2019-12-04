@@ -123,6 +123,7 @@ $(function(){
                         // 将列表插入到页面上
                         generateTemplate(data,that.$e.recordList,that.$e.starFinancialPlannerListTemplateId)
                         that.$e.listLoading.hide();
+                        $(".lazyload").lazyload()
                         
                     }, 200)
 
