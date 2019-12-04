@@ -38,6 +38,17 @@ module.exports = function() {
     //实名认证第4步
     this.realNameStepFour_url = go_url.no_url + '/user/views/realName/realNameStepFour.html';
 
+     //协议模板
+     this.agreementModel_url = go_url.no_url + '/include/views/agreementModel.html';
+
+     //实名认证下的三个协议
+     this.tradeserviceAgreement_url = go_url.no_url + '/include/views/agreementModel.html?id=81';
+     this.investorinterests_url = go_url.no_url + '/include/views/agreementModel.html?id=82';
+     this.bankAuthorization_url = go_url.no_url + '/include/views/agreementModel.html?id=83';
+
+     //监管账户
+    this.regulatoryAccounts_url = go_url.no_url + '/personal/views/regulatoryAccounts.html';
+
     //重新设置手机号码
     this.resetLinkPhone_url = go_url.no_url + '/user/views/setUp/resetLinkPhone.html';
     //重新设置登录密码
@@ -471,7 +482,7 @@ module.exports = function() {
     this.investmentPlanRanking_url = go_url.no_url +  '/financial/views/publicPlacement/investmentPlanRanking.html'
 
     // 公募监管账户
-    this.newregulatoryAccounts_url = go_url.no_url +  '/mine/views/regulatoryAccounts.html'
+    this.mineRegulatoryAccounts_url = go_url.no_url +  '/mine/views/mineRegulatoryAccounts.html'
     //已报名活动
     this.activityEnrolment_url = go_url.no_url +  '/mine/views/activityEnrolment/activityEnrolment.html'
     //会员权益详情
