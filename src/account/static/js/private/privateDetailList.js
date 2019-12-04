@@ -217,7 +217,7 @@ $(function() {
                 needLogin: true,
                 callbackDone: function(json) {
                     console.log(json.data)
-                    var jsonData = json.data.tradeList,
+                    var jsonData = json.data.pageList,
                         pageList = jsonData;
                     if (!$.util.objIsEmpty(pageList)) {
 
