@@ -198,7 +198,7 @@ $(function () {
 					fundName:that.gV.fundName,
 					balance:that.gV.balance,
 					bankNo:that.gV.bankNo,
-					bankAccount:that.gV.bankAccount,
+					bankAccount:that.gV.bankAccountSecret,
 					tradeAcco:that.gV.tradeAcco,
 					capitalMode:that.gV.capitalMode,
 					password:val,
@@ -296,7 +296,13 @@ $(function () {
 			}) 
 			
 			$("#transformInput").on('input propertychange',function(){
-				that.gV.balance = $(this).val();
+				if($(this).val().split(".")[1].length >2){
+					tipAction('只能输入两位小数')
+					return
+				}else{
+					that.gV.balance = $(this).val();
+				}
+				
 			})
 			//清除输入框数字
 			$('body').on('tap','.deleteNum',function(){
@@ -350,16 +356,11 @@ $(function () {
 					return
 				}
 			}) ;
-			// $("#pwd-input").on("input", function() {
-			// 	var password = $('#pwd-input').val() //密码
-			// 	if(password.length == 6){
-			// 		that.gV.password = password;
-			// 		// $(".popup-password").show()
-			// 		that.checkPassword()
-
-			// 	}
-			// })
 			
+			//  ---《公募基金风险揭示及售前告知书》
+			$('body').on('tap','.setGoUrl',function(){
+				window.location.href = site_url.agreementModel_url + '?id=47'
+			}) ;
 
 			//  ---忘记密码
 			$('body').on('tap','#passwordWrap .forgetP',function(){
@@ -368,8 +369,11 @@ $(function () {
 			}) ;
 			//密码校验不通过   ---取消
 			$('body').on('tap','.elasticCel',function(){
+				$(".pwd-input").val('')
+				$(".fake-box input").val('');
 				$('#passwordWrap').css('display','none')
 				$('.popup-password').css('display','none')
+				
 			}) ;
 			//密码校验不通过   ---忘记密码
 			$('body').on('tap','.error1 .elasticCel',function(){
@@ -378,9 +382,9 @@ $(function () {
 			}) ;
 			//密码校验不通过   ---重新输入
 			$('body').on('tap','.error1 .elasticYes',function(){
-				$('.popup-password').css('display','none')
 				$(".pwd-input").val('')
 				$(".fake-box input").val('');
+				$('.popup-password').css('display','none')
 			}) ;
 			//密码校验不通过   ---找回密码
 			$('body').on('tap','.error2 .elasticYes',function(){
@@ -389,9 +393,9 @@ $(function () {
 			}) ;
 			//密码校验不通过   ---重新输入
 			$('body').on('tap','.error3 .elasticYes',function(){
-				$('.popup-password').css('display','none')
 				$(".pwd-input").val('')
 				$(".fake-box input").val('');
+				$('.popup-password').css('display','none')
 			}) ;
 
 			//添加银行卡 -- 跳往原生
