@@ -92,11 +92,10 @@ $(function () {
                     that.getData1();
                     that.getData2('1', 1);
                     that.events();
-
-                    var historyStr = that.fundType ? '<div class="item_name">日期</div> <div class="item_name">万份收益</div><div class="item_name">七日年华</div>' : '<div class="item_name">日期</div><div class="item_name">单位净值</div><div class="item_name">累计净值</div><div class="item_name">日涨幅</div>'
+                    var historyStr = that.fundType ? '<div class="item_name">日期</div> <div class="item_name">万份收益</div><div class="item_name">七日年化</div>' : '<div class="item_name">日期</div><div class="item_name">单位净值</div><div class="item_name">累计净值</div><div class="item_name">日涨幅</div>'
                     $('.history_area >.history_item').html(historyStr);
 
-                    var redeemNavArr = that.fundType ? ['七日年华', '万份收益'] : ['单位净值', '累计净值']
+                    var redeemNavArr = that.fundType ? ['七日年化', '万份收益'] : ['单位净值', '累计净值']
                     $($('#redeemNav span')[0]).text(redeemNavArr[0])
                     $($('#redeemNav span')[1]).text(redeemNavArr[1])
                     $.each($(".net_worth_area .net_worth_item .value"), function (i, v) {
@@ -106,7 +105,7 @@ $(function () {
                             $(v).addClass('value_green')
                         }
                     });
-                    $("#HeadBarpathName").html(that.gV.json.secuSht +"("+that.gV.json.secuId+")");
+                    $("#HeadBarpathName").html("<span>"+that.gV.json.secuSht+"</span>"+"</br><span>"+that.gV.json.trdCode+"</span>");
                 },
                 callbackFail: function (json) {
                     tipAction(json.msg);
@@ -298,7 +297,7 @@ $(function () {
                 data: {
                     fundCode: getQueryString('fundCode') ? getQueryString('fundCode') : '000847',
                     pageCurrent: 1,
-                    pageSize: 3,
+                    pageSize: 4,
                 },
                 callbackDone: function (json) {
                     json = json.data
@@ -313,13 +312,6 @@ $(function () {
                         }
                     })
                     json.fundType = that.fundType
-                    var newPageList = [];
-                    for(var i =0;i<json.pageList.length;i++){
-                        if(i<=3){
-                            newPageList.push(json.pageList[i])
-                        }
-                    };
-                    json.pageList = newPageList;
                     var html = template(json);
                     $(".tplBox1").html(html);
                     $.each($(".history_item .value"), function (i, v) {

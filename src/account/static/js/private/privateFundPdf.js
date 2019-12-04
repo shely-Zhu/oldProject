@@ -101,7 +101,7 @@ $(function(){
 	                var objHave={
 	                    title:'',
 	                    id: 'emailPop',
-	                    p:'<p class="">基金确认书将发送到您的默认邮箱</p>'+
+	                    p:'<p class="">下载确认书</p>'+
 	                        '<p class="">'+that.data.email+'</p>'+
 	                        '<p class="otherColor" id="changeMail">邮箱有变更，去修改</p>',
 	                    yesTxt:'确认',
@@ -157,7 +157,7 @@ $(function(){
                                 needLogin: true,
                                 callbackDone: function(json) {
                                     t.hide();//关闭弹窗
-                                    
+                                    tipAction(json.message);
                                 },
                                 callbackFail: function(json) {
 //                                  //显示错误提示

@@ -5,11 +5,11 @@
 <!doctype html>
 <html lang="en">
 
-<head>
-	@@include('@pathInclude/views/meta.html')
-	<link rel="stylesheet" href="/financial/static/css/publicPlacement/publicDetail.css">
-	<title></title>
-</head>
+	<head>
+		@@include('@pathInclude/views/meta.html')
+		<link rel="stylesheet" href="/financial/static/css/publicPlacement/publicDetail.css">
+		<title></title>
+	</head>
 
 <body>
 	<!-- @@include('@pathCommonViews/load.html')  -->
@@ -29,7 +29,7 @@
 			<div class="service"></div>
 			<div class="day_gain">七日年化</div>
 			<div class="day_gain_value">{{annYldRat}}%</div>
-			<div class="new_worth">万份收益({{trDate}})</div>
+			<div class="new_worth">万份收益</div>
 			<div class="new_worth_value">{{unitYld}}</div>
 			<div class="type">
 				<div class="type_1">{{riskLevelName}}</div>
@@ -37,153 +37,176 @@
 				<div class="type_3">10000.0元起购</div>
 			</div>
 		</div>
-		<div class="midContent">
-			<div class="max_amount_area">
-				<div class="max_amount fl"></div>
-				<div class="max_amount_value fl">单日单账户限额{{tradeLimitAmount}}万</div>
-			</div>
-			<div class="net_worth_area">
-				<div class="net_worth_item">
-					<div class="title">近一周</div>
-					<div class=" value">{{chgRat1w}}%</div>
-				</div>
-				<div class="net_worth_item">
-					<div class="title">近三个月</div>
-					<div class=" value">{{chgRat3m}}%</div>
-				</div>
-				<div class="net_worth_item">
-					<div class="title">近一年</div>
-					<div class=" value">{{chgRat1y}}%</div>
-				</div>
-				<div class="net_worth_item">
-					<div class="title">成立来</div>
-					<div class=" value">{{chgRatBgn}}%</div>
+		@@include('@pathCommonViews/authenticationProcess.html',{"pathTitle":"认证信息"})
+		@@include('@pathInclude/views/footer.html')
+
+		<script src="/include/js/vendor/echarts/echarts.min.js"></script>
+		<script src="/financial/static/js/publicPlacement/publicDetail.js"></script>
+		<script id="dataLists" type="text/x-handlebars-template">
+		<div>
+			<div class="topContent">
+				<div class="service"></div>
+				<div class="day_gain">七日年化</div>
+				<div class="day_gain_value">{{annYldRat}}%</div>
+				<div class="new_worth">万份收益({{trDate}})</div>
+				<div class="new_worth_value">{{unitYld}}</div>
+				<div class="type">
+					<div class="type_1">{{riskLevelName}}</div>
+					<div class="type_2">{{invTypComDesc}}</div>
+					<div class="type_3">10000.0元起购</div>
 				</div>
 			</div>
-			<div class="lineWrap">
-				<div class="nav" id="redeemNav">
-					<span class="navSpan quick active" type="1">七日年化</span>
-					<span class="navSpan normal" type="2">万份收益</span>
+			<div class="midContent">
+				<div class="max_amount_area">
+					<div class="max_amount fl"></div>
+					<div class="max_amount_value fl">单日单账户限额{{tradeLimitAmount}}万</div>
 				</div>
-				<div class="line_area" >
-	 				<div id="line1" class="line" ></div>
-	 				<div id="line2" class="hide line"  ></div>
-	 				<div class="hide noDataHintEcharts">暂无数据</div>
+				<div class="net_worth_area">
+					<div class="net_worth_item">
+						<div class="title">近一周</div>
+						<div class=" value">{{chgRat1w}}%</div>
+					</div>
+					<div class="net_worth_item">
+						<div class="title">近三个月</div>
+						<div class=" value">{{chgRat3m}}%</div>
+					</div>
+					<div class="net_worth_item">
+						<div class="title">近一年</div>
+						<div class=" value">{{chgRat1y}}%</div>
+					</div>
+					<div class="net_worth_item">
+						<div class="title">成立来</div>
+						<div class=" value">{{chgRatBgn}}%</div>
+					</div>
 				</div>
-				<div class='tab'>
-					<span class="oneMonth active" time='1'>月</span>
-					<span class="threeMonth" time='3'>季</span>
-					<span class="newYear" time='6'>半年</span>
-					<span class="sinceNow" time='12'>一年</span>
-					<span class="oneMonth" time='0'>成立以来</span>
+				<div class="lineWrap">
+					<div class="nav" id="redeemNav">
+						<span class="navSpan quick active" type="1">七日年化</span>
+						<span class="navSpan normal" type="2">万份收益</span>
+					</div>
+					<div class="line_area" >
+						<div id="line1" class="line" ></div>
+						<div id="line2" class="hide line"  ></div>
+						<div class="hide noDataHintEcharts">暂无数据</div>
+					</div>
+					<div class='tab'>
+						<span class="oneMonth active" time='1'>月</span>
+						<span class="threeMonth" time='3'>季</span>
+						<span class="newYear" time='6'>半年</span>
+						<span class="sinceNow" time='12'>一年</span>
+						<span class="oneMonth" time='0'>成立以来</span>
+					</div>
 				</div>
-			</div>
-			<div class="history_area">
+				<div class="history_area">
+					<div class="titleWrap">
+						<div class="title">
+							历史净值
+						</div>
+						<div class="arrow">
+							<span class="img"></span>
+						</div>
+						<div class="desc">
+							<span>查看更多</span>
+						</div>
+					</div>
+					<div class="history_item">
+					
+					</div>
+					
+				<div class="tplBox1">
+				</div>
+				</div>
+				<div class="dealRegArea">
+					<div class="titleWrap newTitalWarp">
+						<div class="title">交易规则</div>
+						<div class="arrow">
+							<span class="img"></span>
+						</div>
+						<div class="desc rule">
+							<span class="ruleName">买入/卖出规则</span>
+						</div>
+					</div>
+					<div class="line_area">
+						<div class="line_area_left">
+							<div class="top">买入提交</div>
+							<div class="mid"></div>
+							<div class="bottom">今日15点前</div>
+						</div>
+						<div class="line_area_mid">
+							<div class="top">确认份额</div>
+							<div class="mid"></div>
+							<div class="bottom">{{fundConfirmDate}}</div>
+						</div>
+						<div class="line_area_right">
+							<div class="top">查看盈亏</div>
+							<div class="mid"></div>
+							<div class="bottom">{{fundEarnDate}}</div>
+						</div>
+						<div class="line_left"></div>
+						<div class="line_right"></div>
+					</div>
+					<div class="line_desc">15:00后采用转账汇款方式的认申购款将视作下一个工作日的交易款项</div>
+				</div>
 				<div class="titleWrap">
 					<div class="title">
-						历史净值
+						产品档案
 					</div>
+				</div>
+				<div class="titleWrap">
+					<div class="title nobold">
+						基金档案
+					</div>
+					<div class="arrow fundFile">
+						<span class="img"></span>
 					<div class="arrow">
+						<span class="img historyImg"></span>
+					</div>
+					<div class="desc fundFile">
+						概括、持仓、公告、分红
+					</div>
+				</div>
+				<div class="titleWrap">
+					<div class="title nobold">
+						基金经理
+					</div>
+					<div class="arrow fundManager">
 						<span class="img"></span>
 					</div>
-					<div class="desc">
-						查看更多
+					<div class="desc fundManager">
+						{{fundManager}}
 					</div>
 				</div>
-				<div class="history_item">
-				
-				</div>
-				
-			<div class="tplBox1">
-				</div>
-			</div>
-			<div class="dealRegArea">
-				<div class="titleWrap newTitalWarp">
-					<div class="title">交易规则</div>
-					<div class="arrow rule">
-						<span class="ruleName">买入/卖出规则</span>
+				<div class="titleWrap">
+					<div class="title nobold">
+						基金公司
+					</div>
+					<div class="arrow fundCompany">
 						<span class="img"></span>
 					</div>
-				</div>
-				<div class="line_area">
-					<div class="line_area_left">
-						<div class="top">买入提交</div>
-						<div class="mid"></div>
-						<div class="bottom">今日15点前</div>
+					<div class="desc fundCompany">
+						{{fmcComName}}
 					</div>
-					<div class="line_area_mid">
-						<div class="top">确认份额</div>
-						<div class="mid"></div>
-						<div class="bottom">{{fundConfirmDate}}</div>
-					</div>
-					<div class="line_area_right">
-						<div class="top">查看盈亏</div>
-						<div class="mid"></div>
-						<div class="bottom">{{fundEarnDate}}</div>
-					</div>
-					<div class="line_left"></div>
-					<div class="line_right"></div>
 				</div>
-				<div class="line_desc">15:00后采用转账汇款方式的认申购款将视作下一个工作日的交易款项</div>
+				<div class="company_info">
+					基金销售服务由北京恒天明泽基金销售有限公司提供
+				</div>
+				<div class="divider"></div>
 			</div>
-			<div class="titleWrap">
-				<div class="title">
-					产品档案
+			<div class="footer">
+				<div class="share_area" type="1">
+					<div class="img"></div>
+					<div class="text">分享</div>
 				</div>
+				<div class="selected_area"  type="2">
+					<div class="img"></div>
+					<div class="text">加自选</div>
+				</div>
+				<div class="fixed_investement_btn"  type="3">定投</div>
+				<div class="buy_btn"  type="4">买入</div>
 			</div>
-			<div class="titleWrap">
-				<div class="title nobold">
-					基金档案
-				</div>
-				<div class="arrow fundFile">
-					<span class="img"></span>
-				</div>
-				<div class="desc fundFile">
-					概括、持仓、公告、分红
-				</div>
-			</div>
-			<div class="titleWrap">
-				<div class="title nobold">
-					基金经理
-				</div>
-				<div class="arrow fundManager">
-					<span class="img"></span>
-				</div>
-				<div class="desc fundManager">
-					{{fundManager}}
-				</div>
-			</div>
-			<div class="titleWrap">
-				<div class="title nobold">
-					基金公司
-				</div>
-				<div class="arrow fundCompany">
-					<span class="img"></span>
-				</div>
-				<div class="desc fundCompany">
-					{{fmcComName}}
-				</div>
-			</div>
-			<div class="company_info">
-				基金销售服务由北京恒天明泽基金销售有限公司提供
-			</div>
-			<div class="divider"></div>
 		</div>
-		<div class="footer">
-			<div class="share_area" type="1">
-				<div class="img"></div>
-				<div class="text">分享</div>
-			</div>
-			<div class="selected_area"  type="2">
-				<div class="img"></div>
-				<div class="text">加自选</div>
-			</div>
-			<div class="fixed_investement_btn"  type="3">定投</div>
-			<div class="buy_btn"  type="4">买入</div>
-		</div>
-	</div>
 		</script>
-	<script id="dataLists1" type="text/x-handlebars-template">
+		<script id="dataLists1" type="text/x-handlebars-template">
 			<div >
 				{{#if fundType}}
 					{{#each pageList}}
@@ -205,6 +228,6 @@
 				{{/if}}
 				</div>
 		</script>
-</body>
+	</body>
 
 </html>
