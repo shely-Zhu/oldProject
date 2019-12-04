@@ -175,6 +175,8 @@ $(function(){
                         $('.content').find('.mui-pull-bottom-pocket').removeClass('mui-hidden');
                         // 将列表插入到页面上
                         generateTemplate(dataList, that.$e.hotFundList, that.$e.fundListTemp);
+                        //无缝滚动
+                        alwaysAjax('.li',".content",100);
                     }, 200)
 
                 },
@@ -203,9 +205,7 @@ $(function(){
                 }, {
                     'htmdEvt': 'feedback_functionalAbnormality'
                 });
-            //无缝滚动
-            alwaysAjax('.content .li')
-
+            
 		},
     }
     //调用函数
