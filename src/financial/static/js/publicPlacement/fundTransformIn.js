@@ -14,7 +14,7 @@ require('@pathIncludJs/vendor/zepto/callback.js');
 require('@pathIncludJs/vendor/zepto/deferred.js');
 
 require('@pathCommonJs/components/headBarConfig.js');
-
+require('@pathCommonJs/setGoUrl.js');
 require('@pathCommonCom/elasticLayer/transOutRule/transOutRule.js');
 var splitUrl = require('@pathCommonJs/components/splitUrl.js')();
 var generateTemplate = require('@pathCommonJsComBus/generateTemplate.js');
@@ -42,7 +42,8 @@ $(function () {
 			contract: $(".file .contract"), //同意协议选择框
 			recruiting: $(".file .recruiting"), //同意协议选择框
 			confirmBtn: $(".btn_box .btn"), //确定按钮
-			elasticTxt:$(".popup-password .elasticTxt")
+			elasticTxt:$(".popup-password .elasticTxt"),
+			popupTitle:$(".popup .bank-title"),  //银行卡弹窗标题
 		},
 		gV: { // 全局变量
 			fundBusinCode: '022',
@@ -62,7 +63,8 @@ $(function () {
 			bankAccountSecret: '', // 银行账号
 			bankNo: '',  //银行代码
 			password: "",
-			tradeAcco: ''  //交易账号
+			tradeAcco: ''  ,//交易账号
+			singleNum:0,   //单日限额
 		},
 		webinit: function () {
 			var that = this;
@@ -88,12 +90,12 @@ $(function () {
 					if (json.status == '0000') {
 						var data = json.data;
 						$("#loading").hide()
-						// that.$el.fundName.html(data.chiName)
-						// that.$el.fundCode.html(data.trdCode)
+						that.$el.fundName.html(data.secuSht)
+						that.$el.fundCode.html(data.trdCode)
 						that.$el.payConfirmDate.html(data.fundConfirmDate)
-						that.$el.brforre15Date.html(data.after15tradeDate)
-						// that.gV.fundName = data.chiName
-						// that.gV.fundCode = data.trdCode
+						that.$el.brforre15Date.html(data.g2gafter15tradeDate)
+						that.gV.fundName = data.secuSht
+						that.gV.fundCode = data.trdCode
 						that.gV.discount = Number(data.discount);
 						that.gV.feeRateList = data.fundPurchaseFeeRate.detailList;
 						that.gV.fundStatus = data.fundStatus
@@ -105,7 +107,7 @@ $(function () {
 						}
 						for (var i = 0; i < tradeLimitList2.length; i++) {
 							if(i + 1 == tradeLimitList2.length){
-								that.$el.transformInput.attr('placeholder',tradeLimitList2[i].minValue)
+								that.$el.transformInput.attr('placeholder',tradeLimitList2[i].minValue + '元起')
 								that.$el.transformInput.attr('min',Number(tradeLimitList2[i].minValue).toFixed(0))
 								that.$el.transformInput.attr('max',Number(tradeLimitList2[i].maxValue).toFixed(0))
 								that.gV.minValue =   Number(tradeLimitList2[i].minValue).toFixed(0)  // 起投金额
@@ -139,9 +141,17 @@ $(function () {
 						var data = [] ;
 						data = json.data.pageList;
 						console.log('data',data)
+						data.forEach(element => {
+							element.after4Num = element.bankAccountMask.substr(element.bankAccountMask.length -4)
+						});
 						generateTemplate(data, that.$el.popupUl, that.$el.bankListTemplate,true);
 						$("#loading").hide()
 						$('.popup').css('display','block')
+						if(useEnv == '0'){
+							that.$el.popupTitle.html('选择在线支付银行卡')
+						}else{
+							that.$el.popupTitle.html('选择汇款支付银行卡')
+						}
 					}
                   
 				},
@@ -234,7 +244,7 @@ $(function () {
 				needDataEmpty: true,
 				callbackDone: function(json) {
 					// 将列表插入到页面上
-					debugger
+					
 					var data = [] ;
 					data = json.data;
 					
@@ -297,7 +307,7 @@ $(function () {
 			// that.gV.purchaseRate = ''  // 折扣前的费率
 			var value2 = 0
 			var discountMount = 0;
-			debugger
+			
 			var str = ''   //估算费用描述
 			for (var i = 0; i < that.gV.feeRateList.length; i++) {
 				//先判断 计算方式
@@ -341,13 +351,9 @@ $(function () {
 			var that = this;
 			/** 下面三个事件： 银行卡列表出现/隐藏 **/
 			$('body').on('tap','.paymoney',function(){
-				$(".imgc").hide()
-				$(".iimg").show()
 				that.gV.payType = $(this).attr('pay-type')
 				var useEnv = $(this).attr('pay-type')
 				$("#loading").show()
-				$(this).find(".imgc").show();
-				$(this).find(".iimg").hide();
 				that.getBankCard(useEnv)
 			}) 
 
@@ -367,22 +373,26 @@ $(function () {
 			}) 
 			
 			$("#transformInput").on('input propertychange',function(){
-				console.log('this.val',$(this).val())
-				that.gV.balance = $(this).val();
-				if(Number($(this).val()) >= Number(that.gV.minValue) && Number($(this).val()) <= Number(that.gV.maxValue)){
-					that.getCostEstimate($(this).val())
-				}else if(Number($(this).val()) > that.gV.maxValue){
-					tipAction('最大买入金额不能超过' + that.gV.maxValue + '元')
+				that.gV.balance = Number($(this).val()).toFixed(2);
+				if($(this).val().includes(".") && $(this).val().split(".")[1].length >2){
+					tipAction('只能输入两位小数')
+					return
 				}else{
-					return false
+					if(Number($(this).val()) >= Number(that.gV.minValue) && Number($(this).val()) <= Number(that.gV.maxValue)){
+						that.getCostEstimate($(this).val())
+					}else if(Number($(this).val()) > that.gV.maxValue){
+						tipAction('最大买入金额不能超过' + that.gV.maxValue + '元')
+					}else{
+						return false
+					}
 				}
+				
 				
 			})
 			//清除输入框数字
-			$('body').on('tap','.deleteNum',function(){
+			mui("body").on("tap", ".deleteNum", function() {
 				$('.transformInput').val(null)
-			}) ;
-
+			})
 			//选中银行卡
 			$('body').on('tap','.bank-li',function(){
 				$(".bank-li .true").hide();
@@ -392,22 +402,33 @@ $(function () {
 				that.gV.tradeAcco = $(this).attr('tradeAcco');
 				that.gV.bankAccountSecret = $(this).attr('bankAccountSecret');
 				that.gV.capitalMode = $(this).attr('capitalMode')
+				that.gV.singleNum = $(this).attr('singleNum')
+				var after4Num =  $(this).attr('after4Num')
 				var data = []
 				data.push({
 					bankThumbnailUrl:$(this).attr('bankThumbnailUrl'),
 					bankName:$(this).attr('bankName'),
 					bankNo:$(this).attr('bankNo'),
 					singleNum:$(this).attr('singleNum'),
-					oneDayNum:$(this).attr('oneDayNum')
+					oneDayNum:$(this).attr('oneDayNum'),
+					after4Num:after4Num
 				})
 
 				if(that.gV.payType == '0'){
-					generateTemplate(data, that.$el.onlinepay, that.$el.bankListCheckTemplate,true);		
+					generateTemplate(data, that.$el.onlinepay, that.$el.bankListCheckTemplate,true);
+					that.$el.onlinepay.parent().find(".imgc").show();
+					that.$el.onlinepay.parent().find(".iimg").hide();
 					that.$el.remittance.html('')
+					that.$el.remittance.parent().find(".imgc").hide();
+					that.$el.remittance.parent().find(".iimg").show();
 				}
 				if(that.gV.payType == '1'){
 					generateTemplate(data, that.$el.remittance, that.$el.bankListCheckTemplate,true);
+					that.$el.remittance.parent().find(".imgc").show();
+					that.$el.remittance.parent().find(".iimg").hide();
 					that.$el.onlinepay.html('')
+					that.$el.onlinepay.parent().find(".imgc").hide();
+					that.$el.onlinepay.parent().find(".iimg").show();
 				}
 				setTimeout(function(){
 					$('.popup').css('display','none')
@@ -427,13 +448,15 @@ $(function () {
 			
 			//确定
 			$('body').on('tap','.btn_box .btn',function(){
-				
-				if(Number(that.gV.balance) > Number(that.gV.maxValue)){
-					tipAction('最大买入金额不能超过' + that.gV.maxValue + '元')
-				}else if(Number(that.gV.balance) < Number(that.gV.minValue)){
+				if(Number(that.gV.balance) < Number(that.gV.minValue)){
 					tipAction('最小买入金额不能低于' + that.gV.minValue + '元')
+					return
 				}else{
 					if(!!that.gV.bankAccountSecret){
+						if(Number(that.gV.balance) > Number(that.gV.singleNum)){
+							tipAction('单笔金额不能超过' + that.gV.singleNum + '元')
+							return
+						}
 						that.checkPayType()
 						
 					}else{
@@ -444,16 +467,10 @@ $(function () {
 				}
 				
 			}) ;
-			// $("#pwd-input").on("input", function() {
-			// 	var password = $('#pwd-input').val() //密码
-			// 	if(password.length == 6){
-			// 		that.gV.password = password;
-			// 		// $(".popup-password").show()
-			// 		that.checkPassword()
-
-			// 	}
-			// })
-			
+			//  ---《公募基金风险揭示及售前告知书》
+			$('body').on('tap','.setGoUrl',function(){
+				window.location.href = site_url.agreementModel_url + '?id=47'
+			}) ;
 
 			//  ---忘记密码
 			$('body').on('tap','#passwordWrap .forgetP',function(){
@@ -462,6 +479,8 @@ $(function () {
 			}) ;
 			//密码校验不通过   ---取消
 			$('body').on('tap','.elasticCel',function(){
+				$(".pwd-input").val('')
+				$(".fake-box input").val('');
 				$('#passwordWrap').css('display','none')
 				$('.popup-password').css('display','none')
 			}) ;
@@ -472,9 +491,9 @@ $(function () {
 			}) ;
 			//密码校验不通过   ---重新输入
 			$('body').on('tap','.error1 .elasticYes',function(){
-				$('.popup-password').css('display','none')
 				$(".pwd-input").val('')
 				$(".fake-box input").val('');
+				$('.popup-password').css('display','none')
 			}) ;
 			//密码校验不通过   ---找回密码
 			$('body').on('tap','.error2 .elasticYes',function(){
@@ -483,9 +502,10 @@ $(function () {
 			}) ;
 			//密码校验不通过   ---重新输入
 			$('body').on('tap','.error3 .elasticYes',function(){
-				$('.popup-password').css('display','none')
 				$(".pwd-input").val('')
 				$(".fake-box input").val('');
+				$('.popup-password').css('display','none')
+				
 			}) ;
 			//添加银行卡 -- 跳往原生
 			$('body').on('tap','.popup-last',function(){

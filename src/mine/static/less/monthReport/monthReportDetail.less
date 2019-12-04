@@ -6,8 +6,7 @@
 @import url("@pathCommonLessCom/headBarConfig.less");
 @import url("@pathCommonLessCom/tabScroll.less");
 @import url("@pathCommonLessCom/noDataImg.less");
-
-@import url("@pathCommonLessCom/elasticLayerTypeFive.less");
+@import url("@pathCommonCom/elasticLayer/elasticLayer/elasticLayer.less");
 
 // 月度报告详情页
 
@@ -116,20 +115,25 @@ html {
 				font-size: 0.48rem;
 				font-weight:600;
 				color: @995100;
-				background:linear-gradient(180deg, rgba(204,155,104,1) 0%, rgba(153,81,0,1) 100%);
+				background:linear-gradient(180deg, #CC9B68 100%, #995100 100%);
 				-webkit-background-clip:text;
 				-webkit-text-fill-color:transparent;
 
 			}
 			.clientLevel{
-				padding-left:0.4rem;
-				width: 1.13rem;
 				height: 0.4rem;
 				line-height: 0.4rem;
 				font-size: 0.2rem;
 				color: @c005;
-				background: url("/mine/static/img/monthReport/clientLevel.png");
-				background-size: 100% 100%;
+				background:rgba(207,152,90,0.5);
+				border-radius:0.25rem;
+				.star{
+					margin-left: 0.1rem;
+					background: -webkit-linear-gradient(-90deg, #CC9B68 0%, #995100 100%);
+				    -webkit-background-clip: text;
+				    -webkit-text-fill-color: transparent;
+				    font-size: 0.24rem !important;
+				}
 			}
 		}
 		.clientMonth{
@@ -170,7 +174,7 @@ html {
 			margin-right: 0.09rem;
 		}
 		.proNameCon{
-			// width: 6rem;
+			width: 97%;
 			font-size: 0.28rem;
 			line-height: 0.32rem;
 			color: @272727;
@@ -480,7 +484,7 @@ html {
 				margin-left:0;
 			}
 			&>li.active{
-				// width: 1.55rem;
+				font-weight: 600;
 				color: @272727;
 				border-bottom:0.06rem solid rgba(196,146,94,1);
 				border-radius:0.06rem;

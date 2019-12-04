@@ -8,8 +8,6 @@ require('@pathCommonBase/base.js');
 
 require('@pathCommonJs/components/headBarConfig.js');
 require('@pathCommonJs/ajaxLoading.js');
-
-var tipAction = require('@pathCommonJs/components/tipAction.js');
 var splitUrl = require('@pathCommonJs/components/splitUrl.js')();
 var generateTemplate = require('@pathCommonJsComBus/generateTemplate.js');
 
@@ -23,14 +21,18 @@ $(function() {
 			time:[],
 			cashFundDetail:"",
 			fundCode:splitUrl["fundCode"],
+			numAttr:"",//点击选项卡切换时存储字段
+			dataRange:"1",
+			end:"",
+
         },
         init:function(){
 			var that = this;
             //事件绑定
-            that.event();	
-			that.getTimeReq()
 			that.ruleReq()
 			that.getDataReq()
+			that.getTimeReq()
+            that.event();	
         },
         drawLine:function(){
             var that = this;
@@ -112,7 +114,10 @@ $(function() {
 			    	axisLabel:{
 			    		show: true,
 			    		color:  '#9B9B9B',
-			    		formatter: '{value}%',
+						// formatter: '{value}%',
+						formatter: function (value, index) {           
+							return value.toFixed(4);      
+						},
 			    	},
 			    },
                 series: [{
@@ -175,11 +180,12 @@ $(function() {
 		getTimeReq:function(t){
 			var that = this;
 	        var obj = [{
-			    url: site_url.fundNetWorthTrendChart_api, 
+			    url: site_url.prfFundNetWorthTrendChart_api, 
 			    data: {
 					//fundCode:"000847",
 					fundCode:that.gL.fundCode,
-					dataRange:t||1,
+					dataRange:that.gL.dataRange,
+					end:that.gL.end,
 			    },
 			    needLogin: true,
 			    callbackDone: function(json) {
@@ -218,7 +224,19 @@ $(function() {
 			mui("body").on('tap','.lineDraw .time',function(e){
 				$('.lineDraw .time').removeClass('active');
 				$(this).addClass('active');
-				that.getTimeReq($(this).attr('num'))
+				if(that.gL.numAttr != $(this).attr('num')){
+					if($(this).attr('num') == 13){
+						that.gL.dataRange = ""
+						that.gL.end =  new Date().toLocaleString().split(" ")[0].replace(/\//g, '-');
+						that.getTimeReq()
+						that.gL.numAttr = 13
+					}else{
+						that.gL.dataRange = $(this).attr('num')
+						that.gL.end = ""
+						that.getTimeReq()
+						that.gL.numAttr = $(this).attr('num')
+					}
+				}
 			})
 			mui("body").on('tap','.materialContent',function(e){
 				var id = $(this).attr('data-id')

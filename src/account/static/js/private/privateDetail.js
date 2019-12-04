@@ -41,7 +41,8 @@ $(function() {
 				oneYear: {},
 				sinceNow: {}
 			},
-			redeemRule: []	// 赎回规则  按照=====切割		
+			redeemRule: [],	// 赎回规则  按照=====切割
+			echartsClickFlag: false // echarts图表查询单点标识		
 		},
 		init: function(){
 			var that = this;
@@ -99,7 +100,7 @@ $(function() {
 			that.event();	
 		},
 		// 获取交易规则内容接口 t 1 稳金 2 稳裕 5 证券
-		getTradeRule() {
+		getTradeRule: function() {
 			var that = this;
 			var projectType = Number(that.data.projectType)
 			switch(projectType) {
@@ -133,7 +134,7 @@ $(function() {
 			$.ajaxLoading(obj);	
 		},
 		// 赎回规则数据 1快速赎回 2普通赎回
-		setRedeemRule(type) {
+		setRedeemRule: function(type) {
 			var that = this;
 			var redeemRule = that.data.redeemRule;
 			if(type == 1) {
@@ -237,6 +238,7 @@ $(function() {
 			    needLogin: true,
 			    callbackDone: function(json) {
 			    	console.log(json)
+			    	that.data.echartsClickFlag = false;
 			    	var jsonData = json.data;
 			    	//拼数据
 			       	$.each( jsonData, function(i, el){
@@ -253,11 +255,13 @@ $(function() {
 			       	that.drawLine( type, newData);			       	
 			    },
 			    callbackNoData: function(json) {
+			    	that.data.echartsClickFlag = false;
                     $("#qrnhLine").addClass("hide")
                     $("#wfsyLine").addClass("hide")
                     $(".noDataHintEcharts").removeClass("hide")
                 },
 			    callbackFail: function(json) {
+			    	that.data.echartsClickFlag = false;
                     $("#qrnhLine").addClass("hide")
                     $("#wfsyLine").addClass("hide")
                     $(".noDataHintEcharts").removeClass("hide")
@@ -308,6 +312,7 @@ $(function() {
 			    },
 			    needLogin: true,
 			    callbackDone: function(json) {
+			    	that.data.echartsClickFlag = false;
 			    	var jsonData = json.data.pageList;
 			    	//拼数据
 			       	$.each( jsonData, function(i, el){
@@ -324,11 +329,13 @@ $(function() {
 			       	that.drawLine( type, newData);			       	
 			    },
 			    callbackNoData: function(json) {
+			    	that.data.echartsClickFlag = false;
                     $("#dwjzLine").addClass("hide")
                     $("#ljjzLine").addClass("hide")
                     $(".noDataHintEcharts").removeClass("hide")
                 },
 			    callbackFail: function(json) {
+			    	that.data.echartsClickFlag = false;
                     $("#dwjzLine").addClass("hide")
                     $("#ljjzLine").addClass("hide")
                     $(".noDataHintEcharts").removeClass("hide")
@@ -702,13 +709,16 @@ $(function() {
             })
             //折线图点击月份请求数据
             mui("body").on('tap', '.lineWrap .time', function() {
-            	$('.lineDraw .time').removeClass('active');
-				$(this).addClass('active');
-				if(that.data.projectType == 4) {
-					that.getTypeTwoData( $(this).attr('num') );
-				} else {
-					that.getTypeOneData( $(this).attr('num') );
-				}
+            	if(!that.data.echartsClickFlag) {
+            		$('.lineDraw .time').removeClass('active');
+					$(this).addClass('active');
+					if(that.data.projectType == 4) {
+						that.getTypeTwoData( $(this).attr('num') );
+					} else {
+						that.getTypeOneData( $(this).attr('num') );
+					}
+            	}
+            	
             })
             //赎回按钮点击切换
             mui("body").on('tap', '#redeemNav .navSpan', function() {

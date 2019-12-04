@@ -4,8 +4,6 @@
 */
 require('@pathCommonBase/base.js');
 require('@pathCommonJs/ajaxLoading.js');
-
-var tipAction = require('@pathCommonJs/components/tipAction.js');
 var splitUrl = require('@pathCommonJs/components/splitUrl.js')();
 var generateTemplate = require('@pathCommonJsComBus/generateTemplate.js');
 
@@ -25,7 +23,7 @@ $(function(){
             this.getTemplateData();
         },
         // 获取
-        getTemplateData() {
+        getTemplateData:function() {
             var that=this;
             switch(that.gV.projectType) {
                 case '0': var params = {category: 'rule_wenjin'};break;

@@ -87,16 +87,15 @@ $(function () {
                     that.gV.json.trDate = that.gV.json.trDate.slice(5)
                     that.gV.json.fundType = that.fundType
                     var html = template(that.gV.json); (html, "00");
-
+                    
                     $(".tplBox").html(html);
                     that.getData1();
                     that.getData2('1', 1);
                     that.events();
-
-                    var historyStr = that.fundType ? '<div class="item_name">日期</div> <div class="item_name">万份收益</div><div class="item_name">七日年华</div>' : '<div class="item_name">日期</div><div class="item_name">单位净值</div><div class="item_name">累计净值</div><div class="item_name">日涨幅</div>'
+                    var historyStr = that.fundType ? '<div class="item_name">日期</div> <div class="item_name">万份收益</div><div class="item_name">七日年化</div>' : '<div class="item_name">日期</div><div class="item_name">单位净值</div><div class="item_name">累计净值</div><div class="item_name">日涨幅</div>'
                     $('.history_area >.history_item').html(historyStr);
 
-                    var redeemNavArr = that.fundType ? ['七日年华', '万份收益'] : ['单位净值', '累计净值']
+                    var redeemNavArr = that.fundType ? ['七日年化', '万份收益'] : ['单位净值', '累计净值']
                     $($('#redeemNav span')[0]).text(redeemNavArr[0])
                     $($('#redeemNav span')[1]).text(redeemNavArr[1])
                     $.each($(".net_worth_area .net_worth_item .value"), function (i, v) {
@@ -106,7 +105,7 @@ $(function () {
                             $(v).addClass('value_green')
                         }
                     });
-                    $("#HeadBarpathName").html(that.gV.json.secuSht);
+                    $("#HeadBarpathName").html("<span>"+that.gV.json.secuSht+"</span>"+"</br><span>"+that.gV.json.trdCode+"</span>");
                 },
                 callbackFail: function (json) {
                     tipAction(json.msg);
@@ -197,6 +196,13 @@ $(function () {
             // 基金档案
             mui("body").on("tap", ".fundFile", function (e) {
                 window.location.href = site_url.pofFundFile_url + '?secuId=' + secuId + '&fundCode=' + fundCode;
+            });
+            // 历史净值查看更多
+            // mui("body").on("tap", ".history_more", function (e) {
+            //     window.location.href = site_url.mineHistoryDetail_url + '?fundCode=' + fundCode
+            // });
+            mui("body").on("tap", ".history_area .history_more", function (e) {
+                window.location.href = site_url.mineHistoryDetail_url + '?fundCode=' + fundCode
             });
             // 交易规则
             mui("body").on("tap", ".dealRegArea .rule", function (e) {
@@ -298,7 +304,7 @@ $(function () {
                 data: {
                     fundCode: getQueryString('fundCode') ? getQueryString('fundCode') : '000847',
                     pageCurrent: 1,
-                    pageSize: 3,
+                    pageSize: 4,
                 },
                 callbackDone: function (json) {
                     json = json.data
@@ -377,12 +383,12 @@ $(function () {
             var that = this;
             if (type == '1') {
                 //画的是七日年化折线图 或者单位净值
-                var chartId = $('#line1')[0],
+                var chartId = document.getElementById("line1"),
                     xAxisData = data.date,
                     seriesData = data.seven;
             } else if (type == '2') {
                 //画的是万份收益折线图 或者累计净值
-                var chartId = $('#line2')[0],
+                var chartId = document.getElementById("line2"),
                     xAxisData = data.date,
                     seriesData = data.big;
             }

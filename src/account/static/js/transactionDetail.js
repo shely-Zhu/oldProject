@@ -5,10 +5,9 @@
 
 require('@pathCommonBase/base.js');
 require('@pathCommonJs/ajaxLoading.js');
-
-var tipAction = require('@pathCommonJs/components/tipAction.js');
 var splitUrl = require('@pathCommonJs/components/splitUrl.js')();
 var generateTemplate = require('@pathCommonJsComBus/generateTemplate.js');
+var alwaysAjax = require('@pathCommonJs/components/alwaysAjax.js'); 
 
 $(function() {
 
@@ -29,7 +28,7 @@ $(function() {
         init: function() {
             var that = this;
             that.initMui();
-            // that.events();
+            that.events();
         },
         //初始化mui的上拉加载
         initMui: function() {
@@ -196,6 +195,9 @@ $(function() {
             }];
             $.ajaxLoading(obj);
         },
+        events:function(){
+            alwaysAjax()
+        }
     };
     somePage.init();
 });

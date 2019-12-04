@@ -16,7 +16,7 @@ require('../../../common/js/ajaxLoading.js');
 var tipAction = require('../../../common/js/components/tipAction.js');
 var splitUrl = require('../../../common/js/components/splitUrl.js')();
 var generateTemplate = require('@pathCommonJsComBus/generateTemplate.js');
-
+require('@pathCommonBase/base.js');
 //echarts图表
 var echarts = require('echarts/lib/echarts');
 require('echarts/lib/chart/line');

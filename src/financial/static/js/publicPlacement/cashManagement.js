@@ -33,6 +33,13 @@ $(function () {
         data: {
         },
         callbackDone: function (json) {
+          json.data.pageList.forEach(function(item){
+            if(Number(item.totalMoney) === 0){
+              item.show = false
+            }else{
+              item.show = true
+            }
+          });
           var tplm = $("#dataLists").html();
           var template = Handlebars.compile(tplm);
           var html = template(json.data.pageList);
@@ -52,8 +59,9 @@ $(function () {
         callbackDone: function (json) {
           json = json.data
           $('.fundValue').html(json.totalMoney);
-          $('.profitValue').html(json.income);
-          $('.profitValue').html(json.addupIncome);
+          $('.income .profitValue').html(json.incomeMask);
+          $('.holdIncome .profitValue').html(json.holdIncomeMask);
+          $('.addupIncome .profitValue').html(json.addupIncome);
         },
         callbackFail: function (json) {
           tipAction(json.msg);
@@ -64,9 +72,16 @@ $(function () {
     },
     events: function () {
       var that = this;
+      //调往现金宝详情
+      mui("body").on("tap", ".cashItem .itemTitle", function () {
+        var fundCode = $(this).attr("fundCode")
+        window.location.href = site_url.superStreasureDetail_url + '?fundCode='+ fundCode ;
+      });
 
       mui("body").on("tap", ".fundIn", function () {
-        window.location.href = site_url.pofCashTransformIn_url;
+        var fundCode = $(this).parent().parent().find(".itemTop .itemTitle span").eq(0).attr("fundCode")
+        var fundName = $(this).parent().parent().find(".itemTop .itemTitle span").eq(0).attr("fundName")
+        window.location.href = site_url.pofCashTransformIn_url + '?fundCode='+ fundCode + '&fundName=' + fundName;
       });
       mui("body").on("tap", ".fundOut", function () {
         var money = $($(this).parent().siblings()[1]).find(".centerValue").eq(0)[0].textContent;

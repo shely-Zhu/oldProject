@@ -4,8 +4,15 @@
 /**
 * 模板页面
 * @author 田俊国 2019-11-19
+<<<<<<< HEAD
 *
 * @author purpleZhao js补充
+=======
+* 路径中携带参数须知id为后台配置对应id，如果是一个列表。则传对应的id，因为一个articleBelong也就是归属对应多个无法区分。只需穿id即可，articleBelong传上也没事最好是只传id。
+* 如果articleBelong也就是归属只有一个。那么只需要传articleBelong即可。id为空也可以。有值传过来也可以。
+* articleBelong为后台配置该条信息对应的articleBelong
+* applyType不需要传
+>>>>>>> c3cabaa86e9c5df1a5cd88f3e451e334e45173d1
 */
 
 require('@pathCommonBase/base.js');
@@ -61,9 +68,9 @@ $(function(){
             var obj=[{
                 url: site_url.getArticle_api,
                 data:{
-                    id : splitUrl['id'],
-                    articleBelong:splitUrl['articleBelong'],
-                    applyType:splitUrl['applyType']*1,
+                    id : splitUrl['id'] || "",
+                    articleBelong:splitUrl['articleBelong'] || "",
+                    applyType:"0",//h5是0
                 },
                 needDataEmpty: true,
                 callbackDone: function(json) {

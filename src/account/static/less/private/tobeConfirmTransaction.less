@@ -1,13 +1,11 @@
 /*
- * @page: 已确认交易
+ * @page: 已确认交易、待确认交易
  * @Author: peicongcong
  * @Date:   2019-11-19
  * @description:
  */
 
 @import url("@pathCommonLess/mui/resetMUI.less");
- 
- @import url("@pathCommonLessCom/tipAction.less");
  // @import url("@pathCommonLessCom/alertBox.less");
  @import url("@pathCommonLessCom/tabScroll.less");
  
@@ -37,6 +35,9 @@
   background: #000000;
   z-index: 1000;
   display: none;
+}
+.mui-table-view-cell.mui-active{
+  background-color: @F7FAFD;
 }
  .contentWrapper{
     width: 100%;

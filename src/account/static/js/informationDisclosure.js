@@ -10,7 +10,6 @@ require('@pathCommonJsCom/tabScroll.js');
 require('@pathCommonJsCom/goTopMui.js');
 //黑色提示条的显示和隐藏
 var splitUrl = require('@pathCommonJs/components/splitUrl.js')();
-var tipAction = require('@pathCommonJs/components/tipAction.js');
 var Base64 = require('@pathIncludJs/vendor/base64/base64.js');
 
 var prvMar = {

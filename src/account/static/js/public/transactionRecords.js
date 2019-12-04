@@ -5,9 +5,8 @@
 
 require('@pathCommonBase/base.js');
 require('@pathCommonJs/ajaxLoading.js');
-
-var tipAction = require('@pathCommonJs/components/tipAction.js');
 var generateTemplate = require('@pathCommonJsComBus/generateTemplate.js');
+var alwaysAjax = require('@pathCommonJs/components/alwaysAjax.js');
 
 $(function () {
     let somePage = {
@@ -203,7 +202,7 @@ $(function () {
                         that.gV.pageNum++;
                         // 将交易记录列表插入到页面上
                         generateTemplate(data, that.$e.recordListWraperBoxId, that.$e.recordListTemplateId);
-
+                        alwaysAjax('.mui-table-view-cell',".contentWrapper",100);
                     }, 200)
                 },
                 callbackFail: function (json) {
