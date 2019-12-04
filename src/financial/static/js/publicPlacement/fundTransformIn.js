@@ -105,7 +105,7 @@ $(function () {
 						}
 						for (var i = 0; i < tradeLimitList2.length; i++) {
 							if(i + 1 == tradeLimitList2.length){
-								that.$el.transformInput.attr('placeholder',tradeLimitList2[i].minValue)
+								that.$el.transformInput.attr('placeholder',tradeLimitList2[i].minValue + '元起')
 								that.$el.transformInput.attr('min',Number(tradeLimitList2[i].minValue).toFixed(0))
 								that.$el.transformInput.attr('max',Number(tradeLimitList2[i].maxValue).toFixed(0))
 								that.gV.minValue =   Number(tradeLimitList2[i].minValue).toFixed(0)  // 起投金额
@@ -234,7 +234,7 @@ $(function () {
 				needDataEmpty: true,
 				callbackDone: function(json) {
 					// 将列表插入到页面上
-					debugger
+					
 					var data = [] ;
 					data = json.data;
 					
@@ -297,7 +297,7 @@ $(function () {
 			// that.gV.purchaseRate = ''  // 折扣前的费率
 			var value2 = 0
 			var discountMount = 0;
-			debugger
+			
 			var str = ''   //估算费用描述
 			for (var i = 0; i < that.gV.feeRateList.length; i++) {
 				//先判断 计算方式

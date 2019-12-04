@@ -129,12 +129,12 @@ $(function() {
                 },
                 callbackDone: function(json) {
                     var data;
-                    if (json.data.tradeList && json.data.tradeList.length == 0) { // 没有记录不展示
+                    if (json.data.pageList && json.data.pageList.length == 0) { // 没有记录不展示
                         $(".list").hide()
                         that.getElements.noData.show();
                         return false;
                     } else {
-                        data = json.data.tradeList;
+                        data = json.data.pageList;
                     }
                     setTimeout(function() {
                         if (data.length < that.gV.aP.pageSize) {
