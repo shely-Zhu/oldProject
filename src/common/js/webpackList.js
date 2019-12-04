@@ -210,7 +210,7 @@ module.exports = {
 
 
     //mine里面所有的二级页面
-    './mine/static/js/regulatoryAccounts': './src/mine/static/js/regulatoryAccounts.js',
+    './mine/static/js/mineRegulatoryAccounts': './src/mine/static/js/mineRegulatoryAccounts.js',
 
     // 月度报告列表页
     './mine/static/js/monthReport/monthReportList': './src/mine/static/js/monthReport/monthReportList.js',
