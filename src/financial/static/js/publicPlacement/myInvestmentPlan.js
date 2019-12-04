@@ -108,7 +108,6 @@ $(function () {
                 needDataEmpty: true,
                 callbackDone: function (json) {
                     console.log(json);
-
                     var data;
                     if (json.data.pageList.length == 0) { // 没有记录不展示
                         $(".list").hide()
@@ -144,7 +143,7 @@ $(function () {
                         var fixStateNum = 0;
                         for (var i = 0; i < len.length; i++) {
                             if (len[i].fixState == 'A') {
-                                len[i].fixState = "正常"
+                                len[i].fixState = "进行中"
                             } else if (len[i].fixState == 'H') {
                                 len[i].fixState = "终止"
                                 fixStateNum + 1

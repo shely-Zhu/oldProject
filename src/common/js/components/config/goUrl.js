@@ -4,7 +4,7 @@
 
 
 
-module.exports = function () {
+module.exports = function() {
 
     this.login_html_url = go_url.no_url + '/login'; //手动触发登录,需将redirectUrl值传回去
     this.logOut_html_url = go_url.no_url + '/logout.action'; //退出登录
@@ -106,6 +106,8 @@ module.exports = function () {
     this.riskAssessment_url = go_url.no_url + '/personal/views/riskAssessment.html';
     //我的理财师
     this.plannerSearch_url = go_url.no_url + '/planner/views/plannerSearch.html';
+    //明星理财师
+    this.starFinancialPlannerList_url = go_url.no_url + '/homePage/views/starFinancialPlannerList/starFinancialPlannerList.html';
 
     //我的-理财师
     this.plannerIndex_url = go_url.no_url + '/planner/views/plannerIndex.html';
@@ -302,20 +304,21 @@ module.exports = function () {
 
     /*-------------------------------基金诊断 start -----------------------*/
     // 热门诊断
+
        //this.hotDiagnosis_url = go_url.no_url + '/commonResources/fundDiagnosis/views/hotDiagnosis_url.html';
-       this.hotDiagnosis_url = go_url.no_url + '/mine/fundDiagnosis/views/hotDiagnosis_url.html';
+       this.hotDiagnosis_url = go_url.no_url + '/mine/views/fundDiagnosis/hotDiagnosis_url.html';
     // 诊断搜索页面
      //this.diagnosisSearch_url = go_url.no_url + '/commonResources/fundDiagnosis/views/diagnosisSearch.html';
-     this.diagnosisSearch_url = go_url.no_url + '/mine/fundDiagnosis/views/diagnosisSearch.html';
+     this.diagnosisSearch_url = go_url.no_url + '/mine/views/fundDiagnosis/diagnosisSearch.html';
     // 诊断详情页
     //this.diagnosisDetail_url = go_url.no_url + '/commonResources/fundDiagnosis/views/diagnosisDetail.html';
-    this.diagnosisDetail_url = go_url.no_url + '/mine/fundDiagnosis/views/diagnosisDetail.html';
+    this.diagnosisDetail_url = go_url.no_url + '/mine/views/fundDiagnosis/diagnosisDetail.html';
 
     /*-------------------------------基金诊断 end -----------------------*/
     /*-------------------------------我的页面 start -----------------------*/
     //登录日志查询页面
     this.journal_url = go_url.no_url + '/mine/views/journal.html'
-    //承接h5的模板页地址
+        //承接h5的模板页地址
     this.examplePage_url = go_url.no_url + '/mine/views/examplePage.html';
     /*-------------------------------我的页面 end -----------------------*/
 
@@ -323,7 +326,7 @@ module.exports = function () {
     // 活动详情
     this.activityDetails_url = go_url.no_url + '/mine/views/memberClub/activityDetails/activityDetails.html';
     // 活动列表
-    this.activityList_url = go_url.no_url + '/mine/views/memberClub/activityList/activityList.html';
+    this.activityList_url = go_url.no_url + '/life/views/memberClub/activityList/activityList.html';
     //活动详情->实名
     this.realName_url = go_url.no_url + '/mine/views/realName/realName.html';
     //活动详情->风测
@@ -344,12 +347,13 @@ module.exports = function () {
     //活动详情->我的奖励
     this.rewards_url = go_url.no_url + '/mine/views/rewards.html';
     //交易明细总页面
-    this.publicTransactionDetails_url = go_url.no_url +'/mine/views/publicTransactionDetails.html'
-    /*-------------------------------活动列表 end -----------------------*/
+    this.publicTransactionDetails_url = go_url.no_url + '/mine/views/publicTransactionDetails.html'
+        /*-------------------------------活动列表 end -----------------------*/
 
 
     /*-------------------------------消息中心 start -----------------------*/
     // 通知详情
+    this.noticeCenter_url = go_url.no_url + '/homePage/views/notice/noticeCenter.html';
     this.noticeDetails_url = go_url.no_url + '/homePage/views/notice/noticeDetail.html';
     this.systemInforms_url = go_url.no_url + '/homePage/views/notice/systemInforms.html';
     /*-------------------------------消息中心 end -----------------------*/
@@ -357,6 +361,8 @@ module.exports = function () {
 
     //h5模板页
     this.articleTemplate_url = go_url.no_url + '/include/views/articleTemplate.html';
+    // 月度报告列表页
+    this.monthReportList_url = go_url.no_url + '/mine/views/monthReport/monthReportList.html';
     // 月度报告详情页
     this.monthReportDetail_url = go_url.no_url + '/mine/views/monthReport/monthReportDetail.html';
     // 月度报告产品咨询
@@ -396,8 +402,18 @@ module.exports = function () {
     this.pofForgotPassword_url = go_url.no_url + '/minel/views/setting/forgotPassword.html';
     //找回密码   跳往原生页面
     this.pofRetrievePassword_url = go_url.no_url + '/minel/views/setting/retrievePassword.html';
-	//添加银行卡
+    //添加银行卡
     this.pofAddBankCard_url = go_url.no_url + '/mine/views/bankCard/addBankCard.html'
+
+    //
+    this.pofDemandFinancing_url = go_url.no_url + '/mine/views/bankCard/demandFinancing.html'
+    //
+    this.pofDemo_url = go_url.no_url + '/mine/views/bankCard/demo.html'
+
+
+
+
+
 
     /*------------------- 私募理财fang——le end ------------------------------*/
     this.optionalPublicDetail_url = go_url.no_url + '/account/views/public/optionalPublicDetail.html';
@@ -406,8 +422,12 @@ module.exports = function () {
     this.incomeDistribution_url = go_url.no_url + '/account/views/private/incomeDistribution.html';
     // 私募交易明细
     this.transactionDetail_url = go_url.no_url + '/account/views/transactionDetail.html';
+    // 私募产品详情
+    this.privateDetail_url = go_url.no_url + '/account/views/private/privateDetail.html';
     // 私募交易明细
     this.privateDetailList_url = go_url.no_url + '/account/views/private/privateDetailList.html';
+    //待确认已确认交易页面
+    this.tobeConfirmTransaction_url = go_url.no_url + '/account/views/private/tobeConfirmTransaction.html';
     // 历史明细
     this.historyDetail_url = go_url.no_url + '/account/views/historyDetail.html';
     //私募资产净值明细页面
@@ -442,6 +462,10 @@ module.exports = function () {
     this.changeMail_url = go_url.no_url + '/mine/views/mail/changeMail.html';
     //修改分红方式
     this.bonusMethod_url = go_url.no_url + '/mine/views/bonusMethod.html';
+    //电子合同预约
+    this.orderLimit_url = go_url.no_url + '/financial/views/privatePlacement/electronicContract/orderLimit.html';
+    //普通预约
+    this.registration_url = go_url.no_url + '/financial/views/privatePlacement/ordinaryProducts/registration.html';
 
     /*------------------- 公募持仓相关 start ------------------------------*/
     //公募交易记录
@@ -464,8 +488,28 @@ module.exports = function () {
     this.fortuneClassroom_url = go_url.no_url + '/homePage/views/fortuneCollege/fortuneClassroom.html';
     //财富研究
     this.wealthResearch_url = go_url.no_url + '/homePage/views/fortuneCollege/wealthResearch.html';
-    
-
+    //其他资产页面
+    this.otherAssets_url = go_url.no_url + '/wealthResources/otherAssets/views/otherAssets.html';
     //定投排行榜  原生
     this.investmentPlanRanking_url = go_url.no_url +  '/financial/views/publicPlacement/investmentPlanRanking.html'
+
+    // 公募监管账户
+    this.newregulatoryAccounts_url = go_url.no_url +  '/mine/views/regulatoryAccounts.html'
+    //已报名活动
+    this.activityEnrolment_url = go_url.no_url +  '/mine/views/activityEnrolment/activityEnrolment.html'
+    //会员权益详情
+    this.membershipDetails_url = go_url.no_url +  '/mine/views/membershipInterests/membershipDetails.html'
+    //会员权益成长值记录
+    this.membershipInterestsRecord_url = go_url.no_url +  '/mine/views/membershipInterests/membershipInterestsRecord.html'
+    //我的定投计划
+    this.myInvestmentPlan_url = go_url.no_url +  '/financial/views/publicPlacement/myInvestmentPlan.html'
+    //我的 历史明细
+    this.mineHistoryDetail_url = go_url.no_url +  '/mine/views/historyDetail.html'
+    //联系我们 意见反馈
+    this.concatUsAdvise_url = go_url.no_url +  '/mine/views/concatUs/concatUsAdvise.html'
+    /*------------------- 财富学院 start ------------------------------*/
+    //财富学院首页
+    this.fortuneCollegeList_url = go_url.no_url +  '/homePage/views/fortuneCollege/fortuneCollegeList.html'
+    /*------------------- 财富学院 end ------------------------------*/
+   
 };

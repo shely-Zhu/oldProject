@@ -73,7 +73,7 @@
 
 require('./components/utils.js');
 //黑色提示条的显示和隐藏
-var tipAction = require("../components/tipAction/tipAction.js");
+require('@pathCommonCom/tipAction/tipAction.js');
 var Base64 = require('../../include/js/vendor/base64/base64.js');
 var manualTriggerLogin = require('./components/manualTriggerLogin.js');
 var splitUrl = require('./components/splitUrl.js')();

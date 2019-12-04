@@ -3,6 +3,7 @@ require('@pathCommonBase/base.js');
 require('@pathCommonJs/ajaxLoading.js');
 
 var tipAction = require('@pathCommonJs/components/tipAction.js');
+var alwaysAjax = require('@pathCommonJs/components/alwaysAjax.js');
 var splitUrl = require('@pathCommonJs/components/splitUrl.js')();
 var generateTemplate = require('@pathCommonJsComBus/generateTemplate.js');
 
@@ -25,7 +26,12 @@ $(function() {
             var that = this;
             that.initMui();
             //that.getData()
-            // that.events();
+            that.events();
+        },
+        events:function(){
+            console.log(1)
+            alwaysAjax()
+           
         },
         //初始化mui的上拉加载
         initMui: function() {
@@ -34,7 +40,6 @@ $(function() {
             if (!$('.list').hasClass('setHeight')) {
                 $('.list').height(height).addClass('setHeight');
             }
-            console.log(height)
             mui.init({
                 pullRefresh: {
                     container: '.contentWrapper',

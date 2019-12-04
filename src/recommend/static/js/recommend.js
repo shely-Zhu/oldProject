@@ -13,17 +13,17 @@
 
 
 
-require('../../../include/js/vendor/config.js');
+// require('../../../include/js/vendor/config.js');
 
-//zepto模块 
-require('../../../include/js/vendor/zepto/callback.js');
-require('../../../include/js/vendor/zepto/deferred.js');
-require('../../../include/js/vendor/mui/mui.picker.min.js');
+// //zepto模块 
+// require('../../../include/js/vendor/zepto/callback.js');
+// require('../../../include/js/vendor/zepto/deferred.js');
+// require('../../../include/js/vendor/mui/mui.picker.min.js');
 
-require('../../../common/js/components/utils.js');
-require('../../../common/js/ajaxLoading.js');
-require('../../../common/js/components/elasticLayerTypeTwo.js');
-
+// require('../../../common/js/components/utils.js');
+// require('../../../common/js/ajaxLoading.js');
+// require('../../../common/js/components/elasticLayerTypeTwo.js');
+require('@pathCommonBase/base.js');
 var tipAction = require('../../../common/js/components/tipAction.js');
 var popPicker = require('../../../common/js/components/popPicker.js');
 

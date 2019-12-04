@@ -14,7 +14,7 @@ require('@pathIncludJs/vendor/zepto/callback.js');
 require('@pathIncludJs/vendor/zepto/deferred.js');
 
 require('@pathCommonJs/components/headBarConfig.js');
-
+require('@pathCommonJs/setGoUrl.js');
 require('@pathCommonCom/elasticLayer/transOutRule/transOutRule.js');
 var splitUrl = require('@pathCommonJs/components/splitUrl.js')();
 var generateTemplate = require('@pathCommonJsComBus/generateTemplate.js');
@@ -88,12 +88,12 @@ $(function () {
 					if (json.status == '0000') {
 						var data = json.data;
 						$("#loading").hide()
-						// that.$el.fundName.html(data.chiName)
-						// that.$el.fundCode.html(data.trdCode)
+						that.$el.fundName.html(data.secuSht)
+						that.$el.fundCode.html(data.trdCode)
 						that.$el.payConfirmDate.html(data.fundConfirmDate)
-						that.$el.brforre15Date.html(data.after15tradeDate)
-						// that.gV.fundName = data.chiName
-						// that.gV.fundCode = data.trdCode
+						that.$el.brforre15Date.html(data.g2gafter15tradeDate)
+						that.gV.fundName = data.secuSht
+						that.gV.fundCode = data.trdCode
 						that.gV.discount = Number(data.discount);
 						that.gV.feeRateList = data.fundPurchaseFeeRate.detailList;
 						that.gV.fundStatus = data.fundStatus
@@ -105,7 +105,7 @@ $(function () {
 						}
 						for (var i = 0; i < tradeLimitList2.length; i++) {
 							if(i + 1 == tradeLimitList2.length){
-								that.$el.transformInput.attr('placeholder',tradeLimitList2[i].minValue)
+								that.$el.transformInput.attr('placeholder',tradeLimitList2[i].minValue + '元起')
 								that.$el.transformInput.attr('min',Number(tradeLimitList2[i].minValue).toFixed(0))
 								that.$el.transformInput.attr('max',Number(tradeLimitList2[i].maxValue).toFixed(0))
 								that.gV.minValue =   Number(tradeLimitList2[i].minValue).toFixed(0)  // 起投金额
@@ -234,7 +234,7 @@ $(function () {
 				needDataEmpty: true,
 				callbackDone: function(json) {
 					// 将列表插入到页面上
-					debugger
+					
 					var data = [] ;
 					data = json.data;
 					
@@ -297,7 +297,7 @@ $(function () {
 			// that.gV.purchaseRate = ''  // 折扣前的费率
 			var value2 = 0
 			var discountMount = 0;
-			debugger
+			
 			var str = ''   //估算费用描述
 			for (var i = 0; i < that.gV.feeRateList.length; i++) {
 				//先判断 计算方式
@@ -341,13 +341,13 @@ $(function () {
 			var that = this;
 			/** 下面三个事件： 银行卡列表出现/隐藏 **/
 			$('body').on('tap','.paymoney',function(){
-				$(".imgc").hide()
-				$(".iimg").show()
+				// $(".imgc").hide()
+				// $(".iimg").show()
 				that.gV.payType = $(this).attr('pay-type')
 				var useEnv = $(this).attr('pay-type')
 				$("#loading").show()
-				$(this).find(".imgc").show();
-				$(this).find(".iimg").hide();
+				// $(this).find(".imgc").show();
+				// $(this).find(".iimg").hide();
 				that.getBankCard(useEnv)
 			}) 
 
@@ -368,7 +368,7 @@ $(function () {
 			
 			$("#transformInput").on('input propertychange',function(){
 				console.log('this.val',$(this).val())
-				that.gV.balance = $(this).val();
+				that.gV.balance = Number($(this).val()).toFixed(2);
 				if(Number($(this).val()) >= Number(that.gV.minValue) && Number($(this).val()) <= Number(that.gV.maxValue)){
 					that.getCostEstimate($(this).val())
 				}else if(Number($(this).val()) > that.gV.maxValue){
@@ -379,10 +379,9 @@ $(function () {
 				
 			})
 			//清除输入框数字
-			$('body').on('tap','.deleteNum',function(){
+			mui("body").on("tap", ".deleteNum", function() {
 				$('.transformInput').val(null)
-			}) ;
-
+			})
 			//选中银行卡
 			$('body').on('tap','.bank-li',function(){
 				$(".bank-li .true").hide();
@@ -402,12 +401,20 @@ $(function () {
 				})
 
 				if(that.gV.payType == '0'){
-					generateTemplate(data, that.$el.onlinepay, that.$el.bankListCheckTemplate,true);		
+					generateTemplate(data, that.$el.onlinepay, that.$el.bankListCheckTemplate,true);
+					that.$el.onlinepay.parent().find(".imgc").show();
+					that.$el.onlinepay.parent().find(".iimg").hide();
 					that.$el.remittance.html('')
+					that.$el.remittance.parent().find(".imgc").hide();
+					that.$el.remittance.parent().find(".iimg").show();
 				}
 				if(that.gV.payType == '1'){
 					generateTemplate(data, that.$el.remittance, that.$el.bankListCheckTemplate,true);
+					that.$el.remittance.parent().find(".imgc").show();
+					that.$el.remittance.parent().find(".iimg").hide();
 					that.$el.onlinepay.html('')
+					that.$el.onlinepay.parent().find(".imgc").hide();
+					that.$el.onlinepay.parent().find(".iimg").show();
 				}
 				setTimeout(function(){
 					$('.popup').css('display','none')
