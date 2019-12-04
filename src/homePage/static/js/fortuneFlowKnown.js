@@ -156,6 +156,7 @@ $(function() {
                 window.location.href = externalUrl
             })
             alwaysAjax(".knownList")
+           
 		}
 	};
     somePage.init();

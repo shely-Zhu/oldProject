@@ -452,6 +452,10 @@ module.exports = function() {
     this.changeMail_url = go_url.no_url + '/mine/views/mail/changeMail.html';
     //修改分红方式
     this.bonusMethod_url = go_url.no_url + '/mine/views/bonusMethod.html';
+    //电子合同预约
+    this.orderLimit_url = go_url.no_url + '/financial/views/privatePlacement/electronicContract/orderLimit.html';
+    //普通预约
+    this.registration_url = go_url.no_url + '/financial/views/privatePlacement/ordinaryProducts/registration.html';
 
     /*------------------- 公募持仓相关 start ------------------------------*/
     //公募交易记录
@@ -474,9 +478,6 @@ module.exports = function() {
     this.fortuneClassroom_url = go_url.no_url + '/homePage/views/fortuneCollege/fortuneClassroom.html';
     //财富研究
     this.wealthResearch_url = go_url.no_url + '/homePage/views/fortuneCollege/wealthResearch.html';
-    //定投排行榜  原生
-    this.investmentPlanRanking_url = go_url.no_url +  '/financial/views/publicPlacement/investmentPlanRanking.html';
-    
     //其他资产页面
     this.otherAssets_url = go_url.no_url + '/wealthResources/otherAssets/views/otherAssets.html';
     //定投排行榜  原生

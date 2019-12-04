@@ -52,7 +52,7 @@ $(function () {
           json = json.data
           that.gV.copyJson = JSON.parse(JSON.stringify(json))
           that.gV.copyJson.scheduledProtocolId = scheduledProtocolId
-          $('.fundName').html(json.fundName + "(" +json.fundCode+")");
+          $('.fundName').html(json.fundName + ' ' + json.fundCode);
           $('.balanceMask').html(json.balanceMask);
           $('.totalTradeTimes').html(json.totalTradeTimes);
           $('.totalCfmBalaMask').html(json.totalCfmBalaMask);
@@ -95,6 +95,11 @@ $(function () {
 
             default:
               break;
+          }
+          if(fixState == '已终止'){
+            $(".fixState").addClass(".redColor")
+          }else{
+            $(".fixState").removeClass(".redColor")
           }
           $('.fixState').html(fixState);
           $('.footer').html(str);

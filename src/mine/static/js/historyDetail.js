@@ -30,7 +30,7 @@ $(function() {
         },
         events:function(){
             console.log(1)
-            alwaysAjax(".contentWrap")
+            alwaysAjax()
            
         },
         //初始化mui的上拉加载
@@ -40,7 +40,6 @@ $(function() {
             if (!$('.list').hasClass('setHeight')) {
                 $('.list').height(height).addClass('setHeight');
             }
-            console.log(height)
             mui.init({
                 pullRefresh: {
                     container: '.contentWrapper',
