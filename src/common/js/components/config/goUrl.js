@@ -463,7 +463,7 @@ module.exports = function() {
     /*------------------- 公募持仓相关 end ------------------------------*/
 
     //收益明细
-    this.returnsDetail_url = go_url.no_url + '/mine/views/returnsDetail.html';
+    this.returnsDetail_url = go_url.no_url + '/account/views/public/returnsDetail.html';
 
     //现金宝交易记录
     this.superRecord_url = go_url.no_url + '/account/views/public/superRecord.html';
@@ -489,7 +489,7 @@ module.exports = function() {
     //我的定投计划
     this.myInvestmentPlan_url = go_url.no_url +  '/financial/views/publicPlacement/myInvestmentPlan.html'
     //我的 历史明细
-    this.mineHistoryDetail_url = go_url.no_url +  '/mine/views/mineHistoryDetail.html'
+    this.mineHistoryDetail_url = go_url.no_url +  '	/account/views/public/mineHistoryDetail.html'
     //联系我们 意见反馈
     this.concatUsAdvise_url = go_url.no_url +  '/mine/views/concatUs/concatUsAdvise.html'
     /*------------------- 财富学院 start ------------------------------*/
@@ -501,8 +501,6 @@ module.exports = function() {
     this.orderLimit_url = go_url.no_url + '/financial/views/privatePlacement/electronicContract/orderLimit.html';
     //普通预约
     this.registration_url = go_url.no_url + '/financial/views/privatePlacement/ordinaryProducts/registration.html';
-    this.pofDemandFinancing_url = go_url.no_url + '/mine/views/bankCard/demandFinancing.html';
-    this.pofDemo_url = go_url.no_url + '/mine/views/bankCard/demo.html';
    
    
 };

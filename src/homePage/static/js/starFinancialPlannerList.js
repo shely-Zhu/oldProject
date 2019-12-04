@@ -7,6 +7,7 @@ require('@pathCommonBase/base.js');
 require('@pathCommonJs/ajaxLoading.js');
 
 var tipAction = require('@pathCommonJs/components/tipAction.js');
+var alwaysAjax = require('@pathCommonJs/components/alwaysAjax.js');
 var splitUrl = require('@pathCommonJs/components/splitUrl.js')();
 var generateTemplate = require('@pathCommonJsComBus/generateTemplate.js');
 
@@ -424,6 +425,8 @@ $(function(){
                 }
                 
             })
+            //无缝滚动
+            alwaysAjax(".recordList")
         }
     }
     //调用初始化函数

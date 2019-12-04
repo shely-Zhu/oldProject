@@ -59,7 +59,7 @@ $(function () {
 			fundName: splitUrl['fundName'] ? splitUrl['fundName'] : null,   //基金名称
 			fundCode: splitUrl['fundCode'] ? splitUrl['fundCode'] : null,  //基金代码
 			capitalMode: '', //资金方式
-			payType: '',   //支付方式（0、在线支付 1、汇款支付）
+			payType: '0',   //支付方式（0、在线支付 1、汇款支付）
 			bankName: '',  // 银行名称
 			
 			password: "",
@@ -86,6 +86,7 @@ $(function () {
 			bankAccountMask:'', //银行账号密文
 			bankAccountSecret:'',//银行账号密文
 			nextDeductingDay:'',  //扣款周期
+			singleNum:0   //单日限额
 		},
 		webinit: function () {
 			var that = this;
@@ -270,7 +271,7 @@ $(function () {
 						// 将列表插入到页面上
 						var data = [] ;
 						data = json.data.pageList;
-						data.forEach(element => {
+						data.forEach(function(element) {
 							element.after4Num = element.bankAccountMask.substr(element.bankAccountMask.length -4)
 						});
 						if(that.gV.type == 'add'){
@@ -292,6 +293,7 @@ $(function () {
 										that.gV.bankAccountMask = data[index].bankAccountMask;
 										that.gV.bankAccountSecret = data[index].bankAccountSecret;
 										that.gV.capitalMode = data[index].capitalMode
+										that.gV.singleNum = data[index].singleNum
 										var after4Num = data[index].after4Num
 										var bankData = []
 										bankData.push({
@@ -470,7 +472,7 @@ $(function () {
 					tradeAcco:that.gV.tradeAcco,
 					scheduledProtocolId:that.gV.scheduledProtocolId,
 					fixState:'A',
-					expiryDate:'',  //终止日期
+					expiryDate:that.gV.expiryDate,  //终止日期
 					tradePeriod:that.gV.tradePeriod,
 					shares:that.gV.shares,
 					balance:that.gV.balance,
@@ -800,8 +802,23 @@ $(function () {
 			}) 
 			
 			$("#transformInput").on('input propertychange',function(){
-				that.gV.balance = $(this).val();
-				that.getRate($(this).val());
+				that.gV.balance = Number($(this).val()).toFixed(2);
+				if($(this).val().includes(".") && $(this).val().split(".")[1].length >2){
+					tipAction('只能输入两位小数')
+					return
+				}else{
+					if(that.gV.type == 'add'){
+						if(Number($(this).val()) >= Number(that.gV.minValue) && Number($(this).val()) <= Number(that.gV.maxValue)){
+							that.getRate($(this).val());
+						}else if(Number($(this).val()) > that.gV.maxValue){
+							tipAction('最大买入金额不能超过' + that.gV.maxValue + '元')
+							return
+						}
+					}else{
+						that.getRate($(this).val());
+					}
+				}
+				
 			})
 			//清除输入框数字
 			$('body').on('tap','.deleteNum',function(){
@@ -818,6 +835,7 @@ $(function () {
 				that.gV.bankAccount = $(this).attr('bankAccount');
 				that.gV.bankAccountMask = $(this).attr('bankAccountMask');
 				that.gV.capitalMode = $(this).attr('capitalMode')
+				that.gV.singleNum =  $(this).attr('singleNum')
 				var after4Num = $(this).attr('after4Num')
 				var data = []
 				data.push({
@@ -847,27 +865,44 @@ $(function () {
 			
 			//确定
 			$('body').on('tap','.btn_box .btn',function(){
-				if(!!that.gV.bankAccountMask){
-					that.checkPayType()
-					
+				if(that.gV.type == 'add'){
+					if(Number(that.gV.balance) < Number(that.gV.minValue)){
+						tipAction('最小买入金额不能低于' + that.gV.minValue + '元')
+						return
+					}else{
+						if(!!that.gV.bankAccountSecret){
+							if(Number(that.gV.balance) > Number(that.gV.singleNum)){
+								tipAction('单笔金额不能超过' + that.gV.singleNum + '元')
+								return
+							}
+							that.checkPayType()
+							
+						}else{
+							//未选择银行卡提示信息
+							tipAction("请选择银行卡！");
+							return
+						}
+					}
 				}else{
-					//未选择银行卡提示信息
-					tipAction("请选择银行卡！");
-					return
+					if(!!that.gV.bankAccountSecret){
+						if(Number(that.gV.balance) > Number(that.gV.singleNum)){
+							tipAction('单笔金额不能超过' + that.gV.singleNum + '元')
+							return
+						}
+						that.checkPayType()
+						
+					}else{
+						//未选择银行卡提示信息
+						tipAction("请选择银行卡！");
+						return
+					}
 				}
+				
 			}) ;
-			// $("#pwd-input").on("input", function() {
-			// 	var password = $('#pwd-input').val() //密码
-			// 	if(password.length == 6){
-			// 		that.gV.password = password;
-			// 		// $(".popup-password").show()
-			// 		that.checkPassword()
-
-			// 	}
-			// })
-			
-			
-
+			//  ---《公募基金风险揭示及售前告知书》
+			$('body').on('tap','.setGoUrl',function(){
+				window.location.href = site_url.agreementModel_url + '?id=47'
+			}) ;
 			//  ---忘记密码
 			$('body').on('tap','#passwordWrap .forgetP',function(){
 				//跳往原生页面去修改密码

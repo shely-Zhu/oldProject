@@ -28,7 +28,7 @@ $(function(){
             that.getInformsDetail();
             that.getTitle()
         },
-        getTitle() {
+        getTitle:function() {
             switch(this.gV.mesType) {
                 case '0': $("#HeadBarpathName").html("系统通知详情");break;
                 case '1': $("#HeadBarpathName").html("产品公告详情");break;
@@ -37,7 +37,7 @@ $(function(){
             }
         },
         // 获取通知详情
-        getInformsDetail() {
+        getInformsDetail:function() {
         	var that=this;
             var obj=[{
                 url: site_url.getNoticeAndTransDynamic_api,

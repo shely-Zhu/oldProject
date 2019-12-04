@@ -58,6 +58,7 @@ $(function() {
 				$('.lineWrap .wfsy').removeClass('hidden');
 			}
 			else{
+				$(".dealReg").show()
 				that.data.unit = "";//手指移动echars显示的数值带不带百分号。非货币基金都不带百分号
 				//获取红利
 				that.getDividend();
@@ -65,6 +66,8 @@ $(function() {
 				$('.type_1').show();
 				//折线图
 				$('.lineWrap').show();
+				//展示折线图的万份收益按钮
+				$('.lineWrap .wfsy').removeClass('hidden');
 			}
 			
 			if(that.data.supportFixedFlag == 1){//支持定投展示定投按钮,1支持定投
@@ -198,7 +201,7 @@ $(function() {
 			       		newData.profitThoudDate.push( el.trdDt);
 			       		newData.profitThoudValue.push( el.unitYld);
 			       		newData.unitNavValue.push( el.unitNav);//单位净值
-			       		newData.unitYldValue.push( el.unitYld);//累计净值
+			       		newData.unitYldValue.push( el.accuUnitNav);//累计净值
 			       	})
 			       	switch(num) {
 			       		case 0: that.data['qrnhWfsy'].oneMonth = newData;break;
@@ -375,7 +378,7 @@ $(function() {
 			//总金额
 			$('.typeWrap .totalM').html( jsonData.totalMoneyMask );
 		   	//待确认金额 接口无
-		   	$('.typeWrap .toConfirm .confirmMoney').html( jsonData.onwayAssetTotal );
+		   	$('.typeWrap .toConfirm .confirmMoney').html( jsonData.onwayAssetTotalMask );
 		   	//昨日收益
 		   	$('.typeWrap .yesterdayShare').html( jsonData.incomeMask);
 		   	//持有收益
@@ -383,14 +386,14 @@ $(function() {
 		   	//累计收益  接口无
 		   	$('.typeWrap .accumulatedShare').html( jsonData.addupIncomeMask);
 			//持有份额
-			$('.openWrap .cyfe').html( jsonData.currentShare);
+			$('.openWrap .cyfe').html( jsonData.currentShareMask);
 			//可用份额
-			$('.openWrap .kyfe').html( jsonData.enableShares);
+			$('.openWrap .kyfe').html( jsonData.enableSharesMask);
 
 	    	if( that.data.projectType == "10300" ){ //货币基金
 	    		
 				//七日年化
-				$('.openWrap .qrnh').html( jsonData.sevenDayYield);
+				$('.openWrap .qrnh').html( jsonData.sevenDayYield + "%");
 				//万份受益
 				$('.openWrap .wfsy').html( jsonData.unitYld);
 				
@@ -400,7 +403,7 @@ $(function() {
 	    	else{ //非货币基金	    		
 	    		//当前市值
 	    		//日涨幅
-				$('.openWrap .rzf').html( jsonData.dayChgRat);
+				$('.openWrap .rzf').html( jsonData.dayChgRat + "%");
 				//最新净值
 				$('.openWrap .zxjz').html( jsonData.nav);
 				$('.lineWrap .qrnh').text("单位净值");
@@ -466,7 +469,7 @@ $(function() {
 			})
 //			历史明细跳转
 			mui("body").on('tap', '.historyDetail', function() {
-				window.location.href = site_url.historyDetail_url;
+				window.location.href = site_url.mineHistoryDetail_url + "?fundCode=" + that.data.fundCode;
 			})
 //			收益明细跳转
 			mui("body").on('tap', '.symx', function() {

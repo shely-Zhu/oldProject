@@ -5,6 +5,7 @@ require('@pathCommonBase/base.js');
 require('@pathCommonJsCom/utils.js');
 //ajax调用
 require('@pathCommonJs/ajaxLoading.js');
+var alwaysAjax = require('@pathCommonJs/components/alwaysAjax.js');
 // 切换
 require('@pathCommonJsCom/tabScroll.js');
 require('@pathCommonJsCom/goTopMui.js');
@@ -155,10 +156,11 @@ $(function() {
                 },
                 callbackNoData:function(){
                     //没有数据时展示暂无数据
-                    /*$(".list").hide()
-                    $(".title").hide()*/
-                    //that.getElements.listLoading.hide();
+                    $(".list").hide()
+                    $(".title").hide()
+                    that.getElements.listLoading.hide();
                     that.getElements.noData.show();
+                    $(".br").css("display", "none")
                 },
                 callbackFail: function(json) {
                     tipAction(json.message);
@@ -234,8 +236,10 @@ $(function() {
                         if (that.gV.ajaxArr[that.gV.current_index].pageCurrent == 1) {
                             //第一屏
                             $id.find('.contentWrapper .mui-table-view-cell').html(that.html);
+                            $(".lazyload").lazyload()
                         } else {
                             $id.find('.contentWrapper .mui-table-view-cell').append(that.html);
+                            $(".lazyload").lazyload()
                         }
                         //获取当前展示的tab的索引
                         var index = $('#slider .tab-scroll-wrap .mui-active').index(),
@@ -286,7 +290,7 @@ $(function() {
             }]
             $.ajaxLoading(obj);
         },
-        dealData(data) {
+        dealData: function(data) {
             $.each(data, function(a, b) {
                 if(b.articleBelong == 2) {
                     b.isLive = true
@@ -304,6 +308,7 @@ $(function() {
                 var articleBelong = $(this).attr("articleBelong")
                 window.location.href = site_url.articleTemplate_url + '?id=' + id + '&articleBelong=' + articleBelong + '&applyType=1'
             })
+            //alwaysAjax(".roomItem")
         }
     };
     data.init();

@@ -1,3 +1,5 @@
+
+
 module.exports = {
     //personal
     './personal/static/js/myPots': "./src/personal/static/js/myPots.js", //我的积分
@@ -379,9 +381,9 @@ module.exports = {
     // 财富讲堂
     './homePage/static/js/fortuneClassroom': './src/homePage/static/js/fortuneClassroom.js',
     //历史明细
-    './mine/static/js/mineHistoryDetail': "./src/mine/static/js/mineHistoryDetail.js",
+    './account/static/js/public/mineHistoryDetail': "./src/account/static/js/public/mineHistoryDetail.js",
     //收益明细
-    './mine/static/js/returnsDetail': "./src/mine/static/js/returnsDetail.js",
+     './account/static/js/public/returnsDetail': "./src/account/static/js/public/returnsDetail.js",
 
     // 私募交易规则
     './account/static/js/private/transactionRules': "./src/account/static/js/private/transactionRules.js",
