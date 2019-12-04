@@ -22,14 +22,17 @@ $(function() {
 			cashFundDetail:"",
 			fundCode:splitUrl["fundCode"],
 			numAttr:"",//点击选项卡切换时存储字段
+			dataRange:"1",
+			end:"",
+
         },
         init:function(){
 			var that = this;
             //事件绑定
-            that.event();	
-			that.getTimeReq()
 			that.ruleReq()
 			that.getDataReq()
+			that.getTimeReq()
+            that.event();	
         },
         drawLine:function(){
             var that = this;
@@ -111,7 +114,10 @@ $(function() {
 			    	axisLabel:{
 			    		show: true,
 			    		color:  '#9B9B9B',
-			    		formatter: '{value}%',
+						// formatter: '{value}%',
+						formatter: function (value, index) {           
+							return value.toFixed(4);      
+						},
 			    	},
 			    },
                 series: [{
@@ -154,8 +160,8 @@ $(function() {
 	        var obj = [{
 			    url: site_url.getAssetsCashInfo_api, 
 			    data: {
-					//fundCode:"003075",
-					fundCode:that.gL.fundCode,
+					fundCode:"003075",
+					//fundCode:that.gL.fundCode,
 			    },
 			    needLogin: true,
 			    callbackDone: function(json) {
@@ -174,11 +180,12 @@ $(function() {
 		getTimeReq:function(t){
 			var that = this;
 	        var obj = [{
-			    url: site_url.fundNetWorthTrendChart_api, 
+			    url: site_url.prfFundNetWorthTrendChart_api, 
 			    data: {
-					//fundCode:"000847",
-					fundCode:that.gL.fundCode,
-					dataRange:t||1,
+					fundCode:"000847",
+					//fundCode:that.gL.fundCode,
+					dataRange:that.gL.dataRange,
+					end:that.gL.end,
 			    },
 			    needLogin: true,
 			    callbackDone: function(json) {
@@ -199,8 +206,8 @@ $(function() {
 	        var obj = [{
 			    url: site_url.findProtocolBasic_api, 
 			    data: {
-					code:that.gL.fundCode,
-					//code:"003075",
+					//code:that.gL.fundCode,
+					code:"003075",
 					template:"0",
 			    },
 			    needLogin: true,
@@ -218,8 +225,17 @@ $(function() {
 				$('.lineDraw .time').removeClass('active');
 				$(this).addClass('active');
 				if(that.gL.numAttr != $(this).attr('num')){
-				  that.getTimeReq($(this).attr('num'))  
-				  that.gL.numAttr = $(this).attr('num')
+					if($(this).attr('num') == 13){
+						that.gL.dataRange = ""
+						that.gL.end =  new Date().toLocaleString().split(" ")[0].replace(/\//g, '-');
+						that.getTimeReq()
+						that.gL.numAttr = 13
+					}else{
+						that.gL.dataRange = $(this).attr('num')
+						that.gL.end = ""
+						that.getTimeReq()
+						that.gL.numAttr = $(this).attr('num')
+					}
 				}
 			})
 			mui("body").on('tap','.materialContent',function(e){
