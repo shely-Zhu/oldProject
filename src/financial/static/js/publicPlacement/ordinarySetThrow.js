@@ -810,7 +810,7 @@ $(function () {
 					if(that.gV.type == 'add'){
 						if(Number($(this).val()) >= Number(that.gV.minValue) && Number($(this).val()) <= Number(that.gV.maxValue)){
 							that.getRate($(this).val());
-						}else(Number($(this).val()) > that.gV.maxValue){
+						}else if(Number($(this).val()) > that.gV.maxValue){
 							tipAction('最大买入金额不能超过' + that.gV.maxValue + '元')
 							return
 						}
