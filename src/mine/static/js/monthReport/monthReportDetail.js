@@ -13,7 +13,7 @@ var splitUrl = require('@pathCommonJsCom/splitUrl.js')();
 var tipAction = require('@pathCommonJsCom/tipAction.js');
 var moment = require('moment');
 //引入弹出层
-require('@pathCommonJsCom/elasticLayerTypeFive.js');
+require('@pathCommonCom/elasticLayer/elasticLayer/elasticLayer.js');
 var generateTemplate = require('@pathCommonJsComBus/generateTemplate.js');
 var Base64 = require('@pathIncludJs/vendor/base64/base64.js');
 
@@ -318,6 +318,10 @@ var monthReportDetail = {
 					that.typeCompare();
 
 				}
+				else{
+					// $('.assetAnalyse').hide();
+					// $('.pieBox').hide();
+				}
 				// 资产情况分析
 				if(!$.util.objIsEmpty(data)){
 					var result = data.monthHoldShareList;
@@ -550,7 +554,7 @@ var monthReportDetail = {
 
 				itemHeight: 10, // 设置高度
 				itemGap: 10 ,//设置间距
-				x: '70%',
+				x: '50%',
 				y: '35%'
 
 			},
@@ -659,14 +663,16 @@ var monthReportDetail = {
 							that.getElements.plannerNum = exclusive.code; //理财师工号
 						}
 
-					   $.elasticLayerTypeFive({
-							id: "tip",
-							title: '提示',
-							titleSatus: false,
-							p: '<p>非常感谢选择恒天财富！我们将尽快安排专业人员与您联系，请保持手机畅通</p>',
-							buttonTxt: '明白了',
-							zIndex: 100,
-						});
+						var obj = {
+                            p: '<p>非常感谢选择恒天财富！我们将尽快安排专业人员与您联系，请保持手机畅通</p>',
+                            hideCelButton: true,
+                            zIndex: 100,
+                            callback: function(t) {
+
+                            },
+                        };
+                        $.elasticLayer(obj)
+
 						var contentObj = [{
 							url: site_url.reportContactNow_api,
 							data: {
