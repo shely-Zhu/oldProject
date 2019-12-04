@@ -58,6 +58,7 @@ $(function() {
 				$('.lineWrap .wfsy').removeClass('hidden');
 			}
 			else{
+				$(".dealReg").show()
 				that.data.unit = "";//手指移动echars显示的数值带不带百分号。非货币基金都不带百分号
 				//获取红利
 				that.getDividend();
@@ -65,6 +66,8 @@ $(function() {
 				$('.type_1').show();
 				//折线图
 				$('.lineWrap').show();
+				//展示折线图的万份收益按钮
+				$('.lineWrap .wfsy').removeClass('hidden');
 			}
 			
 			if(that.data.supportFixedFlag == 1){//支持定投展示定投按钮,1支持定投
@@ -390,7 +393,7 @@ $(function() {
 	    	if( that.data.projectType == "10300" ){ //货币基金
 	    		
 				//七日年化
-				$('.openWrap .qrnh').html( jsonData.sevenDayYield);
+				$('.openWrap .qrnh').html( jsonData.sevenDayYield + "%");
 				//万份受益
 				$('.openWrap .wfsy').html( jsonData.unitYld);
 				
@@ -400,7 +403,7 @@ $(function() {
 	    	else{ //非货币基金	    		
 	    		//当前市值
 	    		//日涨幅
-				$('.openWrap .rzf').html( jsonData.dayChgRat);
+				$('.openWrap .rzf').html( jsonData.dayChgRat + "%");
 				//最新净值
 				$('.openWrap .zxjz').html( jsonData.nav);
 				$('.lineWrap .qrnh').text("单位净值");
@@ -466,7 +469,7 @@ $(function() {
 			})
 //			历史明细跳转
 			mui("body").on('tap', '.historyDetail', function() {
-				window.location.href = site_url.historyDetail_url;
+				window.location.href = site_url.mineHistoryDetail_url + "?fundCode=" + that.data.fundCode;
 			})
 //			收益明细跳转
 			mui("body").on('tap', '.symx', function() {

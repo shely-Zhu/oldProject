@@ -136,19 +136,18 @@ $(function () {
                                 t.endPullupToRefresh(true);
                             }
                         } else { // 还有更多数据
-                            console.log(999)
                             t.endPullupToRefresh(false);
                         }
                         var len = json.data.pageList;
                         var fixStateNum = 0;
                         for (var i = 0; i < len.length; i++) {
                             if (len[i].fixState == 'A') {
-                                len[i].fixState = "进行中"
+                                len[i].fixStateStr = "进行中"
                             } else if (len[i].fixState == 'H') {
-                                len[i].fixState = "终止"
+                                len[i].fixStateStr = "终止"
                                 fixStateNum + 1
                             } else {
-                                len[i].fixState = "暂停"
+                                len[i].fixStateStr = "暂停"
                             }
                         }
                         if (fixStateNum > 0) {
@@ -164,7 +163,7 @@ $(function () {
 
                         if (that.gV.pageCurrent == 1) {
                             for (var i = 0; i < len.length; i++) {
-                                if (len[i].fixState == "暂停") {
+                                if (len[i].fixStateStr == "暂停") {
                                     $(".content-t span").eq(i).addClass("suspend")
                                 } else {
 
@@ -172,7 +171,7 @@ $(function () {
                             }
                         } else {
                             for (var i = 0; i < len.length; i++) {
-                                if (len[i].fixState == "暂停") {
+                                if (len[i].fixStateStr == "暂停") {
                                     $(".content-t span").eq(i + 15 * that.gV.pageCurrent - 15).addClass("suspend")
                                 } else {
 

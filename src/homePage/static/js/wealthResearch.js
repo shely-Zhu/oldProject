@@ -15,7 +15,7 @@ require('@pathCommonJs/components/elasticLayerTypeFive.js');
 //黑色提示条的显示和隐藏
 var tipAction = require('@pathCommonJsCom/tipAction.js');
 var splitUrl = require('@pathCommonJs/components/splitUrl.js')();
-
+var alwaysAjax = require('@pathCommonJs/components/alwaysAjax.js');
 
 $(function() {
     var data = {
@@ -195,8 +195,12 @@ $(function() {
 
                 // mui(s).pullRefresh().disablePullupToRefresh()
             });
-
-            // mui('.mui-slider').slider().stopped = true;
+            //无缝滚动
+            setTimeout(function() {
+                    //无缝滚动
+                    alwaysAjax('#' + w + ' .mui-table-view-cell', s)
+                }, 1000)
+                // mui('.mui-slider').slider().stopped = true;
         },
         getTabsListData: function(t) {
             var that = this;
