@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2019-11-26 14:42:56
- * @LastEditTime: 2019-12-04 16:13:42
+ * @LastEditTime: 2019-12-04 16:53:10
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \htjf-app\src\financial\static\js\publicPlacement\cashTransformOut.js
@@ -85,7 +85,6 @@ $(function () {
 			templateTransferFunds:$("#cashTransformOutList"),//银行卡模板
 			TransferFundsContent:$(".cashListConent"), //银行卡列表容器
 			el_singleNum:$(".singleNum"), //单笔限额
-			el_oneDayNum:$(".oneDayNum"), //单日限额
 			el_defaultBankName:$(".defaultBankName"), //默认银行卡名称
 			el_defaultBankCode:$(".defaultBankCode"), //默认银行卡号后四位
 			el_defaultBankImgUrl:$(".defaultBankImgUrl"), //默认银行logo
@@ -182,7 +181,6 @@ $(function () {
 					 that.$e.el_defaultBankImgUrl.attr("src",defaultCarData.bankThumbnailUrl);
 					 that.$e.el_defaultBankCode[0].textContent =defaultCarData.bankAccountMask.substr(-4);
                      that.$e.el_singleNum[0].textContent = defaultCarData.availableShare;
-					 that.$e.el_oneDayNum[0].textContent = defaultCarData.oneDayNumMask;
 					 generateTemplate(that.gv.cashList, that.$e.TransferFundsContent, that.$e.templateTransferFunds);
 				 }
 
@@ -279,7 +277,6 @@ $(function () {
 			   that.gv.defaultCapitalMode = $(this).attr("capitalMode"); // 默认资金方式
 			 
 			   that.$e.el_singleNum[0].textContent = $(this).attr('availableShare');
-			   that.$e.el_oneDayNum[0].textContent = $(this).attr('oneDayNumMask');
 			   
 			   that.$e.el_defaultBankName[0].textContent = $(this).attr("bankName");
 			   that.$e.el_defaultBankImgUrl.attr("src",$(this).attr("bankLogoUrl"));
