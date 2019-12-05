@@ -261,6 +261,11 @@ $(function() {
                $(".msecond .msecond-one")[0].value=that.gv.dataList.enableShares;
             })
 
+            // 交易规则
+            mui("body").on("tap", ".goPofTransactionRules", function (e) {
+                window.location.href = site_url.pofTransactionRules_url + '?fundCode=' + regulatory.gv.dataList.fundCode
+            });
+
             //赎回确认         
          $(".confirmeDemptionPay").on('click',function(){
             $("#passwordWrap").show();
