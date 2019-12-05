@@ -68,10 +68,61 @@ body {
     .recommendQRCode{
         width: 4.3rem;
         height: 4.3rem;
-        margin: 0 auto; 
+        margin: 0 auto;
+        margin-top: .50rem;
         img{
             width: 100%;
         }
-    }   
+    }
+    .recommendLcs{
+        margin: 0 auto;
+        margin-top: .40rem;
+        width: 4.7rem;
+        height: .54rem;
+        background: url("../img/pic_lcs\ bg.png") no-repeat;
+        background-size: 4.7rem;
+        line-height: .54rem;
+        color: @FFFFFF;
+        .choose{
+            font-size: .24rem;
+            color: @FFFFFF;
+        }
+    }
+    .recommendShare{
+        width:6.20rem;
+        height:1.80rem;
+        border-radius:.20rem;
+        background:linear-gradient(90deg,@D6AD82 0%, @B57E45 100%);
+        display: flex;
+        text-align: center;
+        margin-top: .3rem;
+        color: @FFFFFF;
+        padding-top: .46rem;
+        i{
+            display: inline-block;
+            font-size: .7rem;
+            width: 100%;
+        }
+        p{
+            color: @FFFFFF;
+        }
+        .recommendShareWechart{
+            flex: 1;
+            i{
+                border-right: 1px solid @FFFFFF;
+            }
+        }
+        .recommendShareFriend{
+            flex: 1;
+            i{
+                border: none;
+            }
+        }
+       
+        
+       
+    }
+    
+
 }
 

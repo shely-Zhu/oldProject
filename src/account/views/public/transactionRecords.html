@@ -25,7 +25,7 @@
                             @@include('@pathCommonViews/goTop.html')
                         </ul>
                 <!-- <div id="recordListWraper"> -->
-                    @@include('@pathCommonViews/noDataImg.html', {"tipText": "暂无数据"})
+                    @@include('@pathCommonCom/noData/noData.html', {"tipText": "暂无数据"})
                     <!-- <div class="recordItem">
                         <div class="recordLogoCon">
                             <img class="recordLogo" src="/account/static/img/public/account_icon_mairu@2x.png" alt="">
@@ -50,8 +50,8 @@
         {{#each this}}
         <div class="searchItem" titleId="{{titleId}}">
             <span class="screeningWord">{{title}}</span>
-            <img class="screeningBtn xiaLaLogo" src="/account/static/img/public/account_icon_xiala@2x.png" alt="">
-            <img class="screeningBtn shouQiLogo" src="/account/static/img/public/account_icon_shouqi@2x.png" alt="">
+            <img class="screeningBtn xiaLaLogo" src="/common/img/account_icon_xiala@2x.png" alt="">
+            <img class="screeningBtn shouQiLogo" src="/common/img/account_icon_shouqi@2x.png" alt="">
         </div>
         {{/each}}
     </script>
@@ -61,7 +61,7 @@
             <div class="detailItem" searchType="{{searchType}}" detailId="{{detailId}}" data="{{data}}">
                 <div class="detailValue">{{title}}</div>
                 <div class="detailStatus">
-                    <img class="detailStatusLogo" src="/account/static/img/public/account_icon_check@2x.png" alt="">
+                    <img class="detailStatusLogo" src="/common/img/public/account_icon_check@2x.png" alt="">
                 </div>
             </div>
         {{/each}}

@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2019-11-26 14:42:56
- * @LastEditTime: 2019-12-04 18:56:53
+ * @LastEditTime: 2019-12-04 20:16:21
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \htjf-app\src\financial\static\js\publicPlacement\redemptionBuy.js
@@ -63,7 +63,7 @@ $(function() {
             maxRedempShare:"", //最大赎回份额
             payType:"",
             maxMoney:"",
-            checkImgUrl:"/financial/static/img/account_icon_check@2x.png",
+            checkImgUrl:"/common/img/account_icon_check@2x.png",
             dataList:"",
             enableSharesMax:"", //最大赎回金额
 
@@ -252,7 +252,7 @@ $(function() {
                 }
                 $(this).attr("checkStatu","on");
                 $(this).find(".radioCheckItemImg").attr("src",that.gv.checkImgUrl);
-                console.log("aaaa")
+                
               //  that.confirmCheck();
             })
 

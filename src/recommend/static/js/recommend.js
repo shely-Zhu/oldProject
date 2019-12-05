@@ -23,6 +23,7 @@
 // require('../../../common/js/components/utils.js');
 // require('../../../common/js/ajaxLoading.js');
 // require('../../../common/js/components/elasticLayerTypeTwo.js');
+require('@pathCommonJs/ajaxLoading.js');
 require('@pathCommonBase/base.js');
 var tipAction = require('../../../common/js/components/tipAction.js');
 var popPicker = require('../../../common/js/components/popPicker.js');

@@ -80,9 +80,8 @@ $(function() {
                 },
                 callbackNoData:function(){
                     //没有数据时展示暂无数据
-                    tipAction("没有数据")
-                    /*$(".list").hide()
-                    that.$e.noData.show();*/
+                    $(".list").hide()
+                    that.$e.noData.show();
                 },
                 callbackFail: function(json) {
                     tipAction(json.message);
