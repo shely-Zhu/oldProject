@@ -221,7 +221,7 @@ $(function () {
             mui("body").on('mdClick', '.assetsBtn', function (e) {
                 $('.mask').show();
                 $('.tipContainer').show();
-            }，{
+            },{
                 'htmdEvt': 'publicAssets_8'
             })
             //关闭资产组成说明
