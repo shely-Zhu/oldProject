@@ -17,9 +17,6 @@
 require('@pathCommonBase/base.js');
 require('@pathCommonJs/ajaxLoading.js');
 var generateTemplate = require('@pathCommonJsComBus/generateTemplate.js');
-
-//黑色提示条
-var tipAction = require('@pathCommonJs/components/tipAction.js');
 //require('../../../common/js/components/utils.js');
 //require('../../../common/js/ajaxLoading.js');
 //var splitUrl = require('../../../common/js/components/splitUrl.js');
