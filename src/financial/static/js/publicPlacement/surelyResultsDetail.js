@@ -97,7 +97,6 @@ $(function() {
           needDataEmpty: true,
           callbackDone: function(json) {
             if(json.status == '0000'){
-              debugger
               if(that.gV.payType == '0'){
                 $('#loading').hide();
                 $(".resultTop").hide()
@@ -150,6 +149,7 @@ $(function() {
                   that.$el.payTypeRedemption.html('在线支付')
                 }
               }
+              debugger
               if(that.gV.payType == '1'){   // 买入汇款支付
                 $(".resultTop").show()
                 $(".resultTopTwo").hide()
@@ -157,7 +157,7 @@ $(function() {
                 $(".changeNone").addClass("changeNone")
                 that.getBankInfo()
                 that.$el.amount1.html(json.data.tradeAmount)
-                that.$el.buyStatusText.html(json.data.tradeApplyDesc)
+                // that.$el.buyStatusText.html(json.data.tradeApplyDesc)
                 that.$el.bankName.html(json.data.bankName)
                 that.$el.bankNum.html(json.data.bankAccountMask.substr(json.data.bankAccountMask.length-4))
                 that.$el.payTypeBuy.html('汇款支付')
