@@ -168,7 +168,7 @@ $(function() {
                 that.$el.amount2Buy.html(json.data.tradeAmount)
                 that.$el.banKImgBuy.attr('src',json.data.bankThumbnailUrl)
                 that.$el.bankName2Buy.html(json.data.bankName)
-                that.$el.bankNum2Buy.html(json.data.bankIdNo)
+                that.$el.bankNum2Buy.html(json.data.bankAccountMask.substr(json.data.bankAccountMask.length - 4))
               }
               if(that.gV.flag == 'redemption'){
                 that.$el.fundNameRedemption.html(json.data.fundName)
@@ -176,7 +176,7 @@ $(function() {
                 that.$el.amount2Redemption.html(json.data.tradeAmount)
                 that.$el.banKImgRedemption.attr('src',json.data.bankThumbnailUrl)
                 that.$el.bankName2Redemption.html(json.data.bankName)
-                that.$el.bankNum2Redemption.html(json.data.bankIdNo)
+                that.$el.bankNum2Redemption.html(json.data.bankAccountMask.substr(json.data.bankAccountMask.length - 4))
               }
               
               
