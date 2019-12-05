@@ -141,8 +141,8 @@ $(function(){
             		var objNo={
 	                    title:'',
 	                    id: 'emailNoPop',
-	                    p:'<p class="">发送到指定邮箱</p>'+
-	                        '<p class=""><input class="emailInput" type="text" /></p>',
+	                    p:'<p class="">下载确认书</p>'+
+	                        '<p class=""><input class="emailInput" placeholder="请输入指定邮箱如 123@qq.com" type="text" /></p>',
 	                    yesTxt:'确认',
 	                    celTxt:'取消',
 	                    zIndex: 1200,

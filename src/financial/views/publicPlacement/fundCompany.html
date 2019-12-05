@@ -11,12 +11,10 @@
 </head>
 
 <body>
-    <!--加载图标-->
-    <!-- @@include('@pathCommonViews/load.html')  -->
     <!--没有数据显示图标-->
-    <!-- @@include('@pathCommonViews/noDataImg.html') -->
+    <!-- @@include('@pathCommonCom/noData/noData.html', {"tipText": "暂无数据"}) -->
     <!--列表加载显示图标-->
-    <!-- @@include('@pathCommonViews/loading/listLoading.html') -->
+    <!-- @@include('@pathCommonCom/loading/listLoading.html') -->
     <!--公共页面头部-->
     @@include('@pathCommonViews/headBarConfig.html',{"pathName":"基金公司"})
     <div class="wrap">
@@ -27,8 +25,6 @@
     </div>
 
     @@include('@pathInclude/views/footer.html')
-    <!-- 添加埋点 -->
-    @@include('@pathInclude/views/header.html')
     <script src="/financial/static/js/publicPlacement/fundCompany.js"></script>
 </body>
 <script id="dataLists" type="text/x-handlebars-template"> <div>

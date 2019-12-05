@@ -13,15 +13,8 @@
 * 
 */
 
-require('@pathIncludJs/vendor/config.js');
+require('@pathCommonBase/base.js');
 require('@pathCommonJs/ajaxLoading.js');
-
-//zepto模块
-require('@pathIncludJs/vendor/zepto/callback.js');
-require('@pathIncludJs/vendor/zepto/deferred.js');
-
-require('@pathCommonJs/components/headBarConfig.js');
-
 // require('@pathCommonCom/elasticLayer/transOutRule/transOutRule.js');
 var payPass = require('@pathCommonJsCom/payPassword.js');
 var generateTemplate = require('@pathCommonJsComBus/generateTemplate.js');
@@ -256,20 +249,26 @@ $(function () {
 			var that = this;
 
 			/** 下面三个事件： 银行卡列表出现/隐藏 **/
-			mui('body').on('tap','.onright',function(){
+			$('body').on('mdClick','.onright',function(){
 				$('.popup').css('display','block')
+			}, {
+				htmdEvt: 'cashTransformOut_01'
 			}) 
 
-			mui('body').on('tap','.popup-close',function(){
+			$('body').on('mdClick','.popup-close',function(){
 				$('.popup').css('display','none')
+			}, {
+				htmdEvt: 'cashTransformOut_02'
 			}) 
 
-			mui('body').on('tap','.popup-mask',function(){
+			$('body').on('mdClick','.popup-mask',function(){
 				$('.popup').css('display','none')
+			}, {
+				htmdEvt: 'cashTransformOut_03'
 			}) 
            
 		   //银行卡单选
-		   mui('body').off("click",".cashCheckItem").on('click','.cashCheckItem',function(){
+		   $('body').off("mdClick",".cashCheckItem").on('mdClick','.cashCheckItem',function(){
 			   $(this).find(".imgLogo").attr("src",that.gv.checkImgUrl);
 			   $(this).siblings().find(".imgLogo").attr("src","");
 			   that.gv.defaultBankNo = $(this).attr("bankNo"); //默认银行代码
@@ -282,10 +281,12 @@ $(function () {
 			   that.$e.el_defaultBankName[0].textContent = $(this).attr("bankName");
 			   that.$e.el_defaultBankImgUrl.attr("src",$(this).attr("bankLogoUrl"));
 			   that.$e.el_defaultBankCode[0].textContent = $(this).attr("carNum")
+			}, {
+				htmdEvt: 'cashTransformOut_04'
 			})
 
 		   //普通与快速切换
-		   mui('body').off("click",".tabWrapper .tab").on('click','.tabWrapper .tab',function(){   
+		   $('body').off("mdClick",".tabWrapper .tab").on('mdClick','.tabWrapper .tab',function(){   
 	           $(this).find(".activeIcon").addClass("active");
 			   $(this).siblings().find(".activeIcon").removeClass("active");
 			   var type = $(this).attr("type");
@@ -295,25 +296,29 @@ $(function () {
 			   }else if(type == 'common'){
 				that.gv.operationType = "0"
 			   }
+			}, {
+				htmdEvt: 'cashTransformOut_05'
 			})
-		   mui('body').off('click','.clearMoney').on('click','.clearMoney',function(){
+		   $('body').off('mdClick','.clearMoney').on('mdClick','.clearMoney',function(){
 			   that.gv.transformMoney = 0;
 			   that.$e.el_transformInput.val(0);
 
-		   })
+		   }, {
+			htmdEvt: 'cashTransformOut_06'
+		})
 			
 			//点击转出规则
-			mui('body').on('tap','.explain .transformRule',function(){
-				debugger
-				that.gv.ruleId = $(this).attr("ruleId");
-				var id = $(this).attr("ruleId");
+			$('body').on('mdClick','.explain .right',function(){
+				that.av.ruleId = $(this).find(".transformRule").attr("ruleId");
+				var id = $(this).find(".transformRule").attr("ruleId")
 				that.findProtocolContentRule(id);
 				$('.elasticLayer.transOutRule').show()
+			}, {
+				htmdEvt: 'cashTransformOut_07'
 			}) 
 
 			//点击同意协议
-			mui('body').on('tap','.item2 .iconfont',function(){   
-			//that.$e.iconCheck.on('click', function() {	
+			that.$e.iconCheck.on('mdClick', function() {
                 if ($(this).hasClass("check")) {
 					$(this).removeClass("check").html('&#xe668;');
 					that.$e.confirmBtn.attr('disabled',true)
@@ -321,6 +326,8 @@ $(function () {
 					$(this).addClass("check").html('&#xe669;');
 					that.$e.confirmBtn.removeAttr("disabled");
                 }
+			}, {
+				htmdEvt: 'cashTransformOut_08'
 			});
 
 			  //转出金额
@@ -334,26 +341,34 @@ $(function () {
 			})
 
 			//赎回确认 
-			mui('body').on('tap','.confirmeDemptionPay',function(){   
+			mui('body').on('mdClick','.confirmeDemptionPay',function(){   
 			//$(".confirmeDemptionPay").on('click',function(){
 				$("#passwordWrap").show();
 				payPass(that.cancelOrder)
+			}, {
+				htmdEvt: 'cashTransformOut_09'
 			})
 
 			//转出全部
-			mui('body').on('tap','.tranoutAllMoney',function(){ 
+			mui('body').on('mdClick','.tranoutAllMoney',function(){ 
 			//$(".tranoutAllMoney").on('click',function(){
 				$(".msecond input").val(that.gv.transformTotalMoney);
 				that.gv.transformMoney = that.gv.transformTotalMoney
+			}, {
+				htmdEvt: 'cashTransformOut_11'
 			})
 			//转出金额清零
-			mui('body').on('tap','.clearMoney',function(){ 
+			mui('body').on('mdClick','.clearMoney',function(){ 
 			//$(".clearMoney").on('click',function(){/
 				$(".msecond input").val("");
 				that.gv.transformMoney = "";
+			}, {
+				htmdEvt: 'cashTransformOut_12'
 			})
-			mui('body').on('tap','.elasticLayer.transOutRule .elasticButtons',function(){
+			mui('body').on('mdClick','.elasticLayer.transOutRule .elasticButtons',function(){
 				$('.elasticLayer.transOutRule').hide()
+			}, {
+				htmdEvt: 'cashTransformOut_10'
 			}) 
 		},
 

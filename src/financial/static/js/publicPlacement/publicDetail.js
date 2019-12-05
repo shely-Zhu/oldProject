@@ -6,19 +6,11 @@
  * 具体可以参考 privateDetail.js
  */
 
-require('@pathIncludJs/vendor/config.js');
-
-//zepto模块
-require('@pathIncludJs/vendor/zepto/callback.js');
-require('@pathIncludJs/vendor/zepto/deferred.js');
-
-require('@pathCommonJsCom/utils.js');
+require('@pathCommonBase/base.js');
 require('@pathCommonJs/ajaxLoading.js');
-require('@pathCommonJs/components/headBarConfig.js');
 var authenticationProcess = require('@pathCommonJs/components/authenticationProcess.js');
 var generateTemplate = require('@pathCommonJsComBus/generateTemplate.js');
 var splitUrl = require('@pathCommonJs/components/splitUrl.js');
-var tipAction = require('@pathCommonJs/components/tipAction.js');
 //是否大于0的判断器 用于设置涨红跌绿 可以参考publicAssets.js
 Handlebars.registerHelper("if_than_0", function (value, options) {
     if (value > 0) {
@@ -186,28 +178,28 @@ $(function () {
             var secuId = json.secuId ? json.secuId : '000846.OF'
             var fundName = json.chiName ? json.chiName : '中融货币市场基金'
             // 基金经理
-            mui("body").on("tap", ".fundManager", function (e) {
+            mui("body").on('mdClick', ".fundManager", function (e) {
                 window.location.href = site_url.pofFundManager_url + '?fundCode=' + fundCode
             });
             // 基金公司
-            mui("body").on("tap", ".fundCompany", function (e) {
+            mui("body").on('mdClick', ".fundCompany", function (e) {
                 window.location.href = site_url.pofFundCompany_url + '?fundComId=' + fundComId
             });
             // 基金档案
-            mui("body").on("tap", ".fundFile", function (e) {
+            mui("body").on('mdClick', ".fundFile", function (e) {
                 window.location.href = site_url.pofFundFile_url + '?secuId=' + secuId + '&fundCode=' + fundCode;
             });
             // 历史净值查看更多
-            mui("body").on("tap", ".history_area .history_more", function (e) {
+            mui("body").on('mdClick', ".history_area .history_more", function (e) {
                 window.location.href = site_url.mineHistoryDetail_url + '?fundCode=' + fundCode
             });
            
             // 交易规则
-            mui("body").on("tap", ".dealRegArea .rule", function (e) {
+            mui("body").on('mdClick', ".dealRegArea .rule", function (e) {
                 window.location.href = site_url.pofTransactionRules_url + '?fundCode=' + fundCode
             });
             // // 定投 买入
-            // mui("body").on("tap", ".footer >div", function (e) {
+            // mui("body").on('mdClick', ".footer >div", function (e) {
             //     console.log($(this).attr('type'));
             //     var type = $(this).attr('type')
             //     if (type === 1 || type === 2) return
@@ -217,7 +209,7 @@ $(function () {
             //     window.location.href = site_url.pofOrdinarySetThrow_url + '?fundCode=' + fundCode + '&fundName=' + fundName + '&type=add';
             // });
             // 定投
-            mui("body").on("tap", ".footer .fixed_investement_btn", function (e) {
+            mui("body").on('mdClick', ".footer .fixed_investement_btn", function (e) {
 
                 that.getUserInfo()
                 if (that.gV.tipStatus) {
@@ -225,7 +217,7 @@ $(function () {
                 }
             });
             // 买入
-            mui("body").on("tap", ".footer .buy_btn", function (e) {
+            mui("body").on('mdClick', ".footer .buy_btn", function (e) {
             
                 //that.getUserInfo()
                 window.location.href = site_url.fundTransformIn_url + '?fundCode=' + fundCode + '&fundName=' + fundName;
@@ -234,7 +226,7 @@ $(function () {
                 }
             });
             //认证
-            mui("body").on("tap", ".tips .tips-li-right", function (e) {
+            mui("body").on('mdClick', ".tips .tips-li-right", function (e) {
                 console.log($(this).attr('type'));
                 var type = $(this).attr('type')
                 switch (type) {
@@ -259,12 +251,12 @@ $(function () {
                 }
             });
             //一键认证
-            mui("body").on("tap", ".tips .tips-btn", function (e) {
+            mui("body").on('mdClick', ".tips .tips-btn", function (e) {
                 window.location.href = site_url.realName_url
             });
 
             // 七日年华 万份收益
-            mui("body").on("tap", "#redeemNav .navSpan ", function (e) {
+            mui("body").on('mdClick', "#redeemNav .navSpan ", function (e) {
                 $(this).addClass('active').siblings().removeClass('active');
                 var divs = $('.lineWrap .line_area>div')
                 var index = $(this).index()
@@ -280,7 +272,7 @@ $(function () {
                 }
             });
             //月 季 本年 一年 成立以来
-            mui("body").on("tap", ".lineWrap .tab span ", function (e) {
+            mui("body").on('mdClick', ".lineWrap .tab span ", function (e) {
                 $(this).addClass('active').siblings().removeClass('active');
 
                 var time = Number($(this).attr('time'))

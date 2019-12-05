@@ -9,9 +9,7 @@
 	<title>买入结果</title>
 </head>
 <body>
-	@@include('@pathCommonViews/load.html')
-    <!-- @@include('@pathCommonViews/noData.html') -->
-    <!-- @@include('@pathCommonViews/loading/listLoading.html') -->
+	@@include('@pathCommonCom/loading/listLoading.html')
     @@include('@pathCommonViews/headBarConfig.html',{"bgColors":"#2C3E77,#273971","showType":"0","pathName":"买入结果"}) 
     <div class="resultsWrap">
       <div class="resultTop">
@@ -48,9 +46,9 @@
       </div>
       <div class="resultTopTwo">
          <div class="photo" >
-            <img src="../../static/img/buy_success.png" class="proess-success" alt="">
-            <img src="../../static/img/pic_success@2x.png" class="proess-ongoing" alt="">
-            <img src="../../static/img/pic_success2@2x.png" class="proess-error" alt="">
+            <img src="/common/img/buy_success.png" class="proess-success" alt="">
+            <img src="/common/img/pic_success@2x.png" class="proess-ongoing" alt="">
+            <img src="/common/img/pic_success2@2x.png" class="proess-error" alt="">
             <p class="succedText"></p>
          </div>
          <div class="proessBox buy-result">
@@ -167,8 +165,6 @@
     </div>
 
 	@@include('@pathInclude/views/footer.html')
-	<!-- 添加埋点 -->
-	@@include('@pathInclude/views/header.html')
     <script src="/financial/static/js/publicPlacement/surelyResultsDetail.js"></script>
 </body>
 </html>

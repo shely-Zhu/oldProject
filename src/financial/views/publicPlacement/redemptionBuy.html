@@ -16,7 +16,7 @@
 </head>
 
 <body>
-    <!-- @@include('../../common/views/load.html') -->
+    <!-- @@include('@pathCommonCom/loading/listLoading.html') -->
 
     <section class="container">
         @@include('@pathCommonViews/headBarConfig.html',{"pathName":"赎回"})
@@ -74,7 +74,7 @@
             <div>
                 <span class="file">
                     <a href="javascript:;" class="item2"><span class="iconfont">&#xe668;</span><span>已阅读并同意</span></a>
-                    <a href="/include/views/agreementModel.html?id=47">《公募基金风险揭示及售前告知书》</a>、
+                    <a onclick="setGoUrl(site_url.agreementModel_url+'?id=47', '')">《公募基金风险揭示及售前告知书》</a>、
                     <a class="contract" href="javascript:;">《基金合同》</a>、
                     <a class="recruiting" href="javascript:;">《招募说明书》</a>
                 </span>
@@ -160,13 +160,10 @@
             </li>   
             {{/each}}
     </script>
-    <!-- 加载中loading -->
-    <!-- @@include('@pathCommonViews/load.html') -->
 
     <!-- 加载中loading -->
-    @@include('@pathCommonViews/loading/listLoading.html') @@include('@pathInclude/views/footer.html')
-    <!-- 添加埋点 -->
-    @@include('@pathInclude/views/header.html')
+    @@include('@pathCommonCom/loading/listLoading.html')
+    @@include('@pathInclude/views/footer.html')
     @@include('../../../common/views/payPassword.html') 
 
 

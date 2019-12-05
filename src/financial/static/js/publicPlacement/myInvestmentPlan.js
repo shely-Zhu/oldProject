@@ -5,15 +5,9 @@
  * @Last Modified by:   
  * @description:
  */
-require('@pathCommonJsCom/utils.js');
+require('@pathCommonBase/base.js');
 //ajax调用
 require('@pathCommonJs/ajaxLoading.js');
-//zepto模块--callback
-require('@pathIncludJs/vendor/zepto/callback.js');
-//zepto模块--deferred
-require('@pathIncludJs/vendor/zepto/deferred.js');
-//路径配置文件
-require('@pathIncludJs/vendor/config.js');
 //下拉加载更多
 // require('@pathCommonJs/scrollFullPage.js');
 // 切换
@@ -21,9 +15,6 @@ require('@pathCommonJsCom/tabScroll.js');
 require('@pathCommonJsCom/goTopMui.js');
 require('@pathCommonJs/components/elasticLayer.js');
 require('@pathCommonJs/components/elasticLayerTypeFive.js');
-require('@pathCommonJs/components/headBarConfig.js');
-//黑色提示条的显示和隐藏
-var tipAction = require('@pathCommonJsCom/tipAction.js');
 var generateTemplate = require('@pathCommonJsComBus/generateTemplate.js');
 $(function () {
     var somePage = {
@@ -202,15 +193,19 @@ $(function () {
         events: function () {
             var that = this;
             //新增 跳原生定投排行页
-            mui("body").on("tap", ".newPlan", function () {
+            mui("body").on("mdClick", ".newPlan", function () {
                 window.location.href = site_url.investmentPlanRanking_url;
-            });
+            }, {
+				htmdEvt: 'myInvestmentPlan_01'
+			});
 
             // 跳转详情页
-            mui("body").on("tap", ".investmentPlan-item", function (e) {
+            mui("body").on("mdClick", ".investmentPlan-item", function (e) {
                 var scheduledProtocolId = $(this).data('id');
                 window.location.href = site_url.pofCastSurelyDetails_url + '?scheduledProtocolId=' + scheduledProtocolId;
-            });
+            }, {
+				htmdEvt: 'myInvestmentPlan_02'
+			});
 
         },
     };
