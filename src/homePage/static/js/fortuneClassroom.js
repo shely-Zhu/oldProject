@@ -118,6 +118,7 @@ $(function() {
                 }
             });
             mui.ready(function() { //init后需要执行ready函数，才能够初始化出来
+                //$('.lazyload').lazyload();
                 //隐藏当前的加载中loading
                 if (!$id.hasClass('hasPullUp')) {
                     $id.find('.mui-pull-bottom-pocket').addClass('mui-hidden'); //上拉显示更多
@@ -130,6 +131,10 @@ $(function() {
                 //为$id添加hasPullUp  class
                 $($id).addClass('hasPullUp');
             });
+            //无缝滚动
+            /*setTimeout(function() {
+                alwaysAjax('#' + w + ' .mui-table-view-cell', s)
+            }, 1000)*/
         },
         getTabsListData: function(t) {
             var that = this;
@@ -236,10 +241,10 @@ $(function() {
                         if (that.gV.ajaxArr[that.gV.current_index].pageCurrent == 1) {
                             //第一屏
                             $id.find('.contentWrapper .mui-table-view-cell').html(that.html);
-                            $(".lazyload").lazyload()
+                            //$(".lazyload").lazyload()
                         } else {
                             $id.find('.contentWrapper .mui-table-view-cell').append(that.html);
-                            $(".lazyload").lazyload()
+                            //$(".lazyload").lazyload()
                         }
                         //获取当前展示的tab的索引
                         var index = $('#slider .tab-scroll-wrap .mui-active').index(),
@@ -308,7 +313,6 @@ $(function() {
                 var articleBelong = $(this).attr("articleBelong")
                 window.location.href = site_url.articleTemplate_url + '?id=' + id + '&articleBelong=' + articleBelong + '&applyType=1'
             })
-            //alwaysAjax(".roomItem")
         }
     };
     data.init();

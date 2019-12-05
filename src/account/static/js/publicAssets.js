@@ -185,6 +185,8 @@ $(function () {
             })
             //赎回
             mui("body").on('tap', '.redeem_btn', function (e) {
+                var index = $(this).parent().parent().parent().index();
+                sessionStorage.setItem("publicFundDetail",JSON.stringify(that.gV.data.fundDetailList[index])) 
                 window.location.href = site_url.redemptionBuy_url;
                 return false;
             })

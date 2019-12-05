@@ -6,8 +6,8 @@
 require('@pathCommonBase/base.js');
 
 require('@pathCommonJs/ajaxLoading.js');
-require('@pathCommonJs/components/elasticLayer.js');
-// require('@pathCommonCom/elasticLayer/elasticLayer/elasticLayer.js');
+// require('@pathCommonJs/components/elasticLayer.js');
+require('@pathCommonCom/elasticLayer/elasticLayer/elasticLayer.js');
 var generateTemplate = require('@pathCommonJsComBus/generateTemplate.js');
 //黑色提示条的显示和隐藏
 var tipAction = require('@pathCommonJsCom/tipAction.js');
@@ -52,8 +52,8 @@ $(function() {
 			    		return false;
 					}
 					 // 将列表插入到页面上
-					 generateTemplate(jsonData,$(".inner"), that.$e.adjustmentTemp);
-					 for(var i =0;i<jsonData.length;i++){
+					generateTemplate(jsonData,$(".inner"), that.$e.adjustmentTemp);
+					for(var i =0;i<jsonData.length;i++){
 						if(jsonData[i].checkFlag == 1){
 						   $(".duigou").eq(i).css('display','block')
 						   $(".bonusType").eq(i).text(jsonData[i].autoBuyDes+ "(当前分红方式)");

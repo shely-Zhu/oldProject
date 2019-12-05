@@ -202,7 +202,11 @@ $(function() {
 
                 // mui(s).pullRefresh().disablePullupToRefresh()
             });
-
+                //无缝滚动
+            setTimeout(function() {
+                //无缝滚动
+                alwaysAjax('#' + w + ' .mui-table-view-cell', s)
+            }, 1000)
             // mui('.mui-slider').slider().stopped = true;
         },
         getData: function($id, t) { // 获取产品数据的公用ajax方法;$id为各区域的 scroll+num id
@@ -385,4 +389,11 @@ $(function() {
         }
     };
     data.init();
+      //添加埋点待定这样
+    function attr(name, attribute, value) {
+        name.attr(attribute, value)
+    }
+    setTimeout(() => {
+        attr($('#slider .tab-scroll-wrap .mui-control-item'), 'htmdEvt', 'fortune_wealthTab')
+    }, 1000)
 });

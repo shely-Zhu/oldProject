@@ -2,8 +2,6 @@
 require('@pathCommonBase/base.js');
 require('@pathCommonJsCom/tabScroll.js')
 require('@pathCommonJs/ajaxLoading.js');
-//黑色提示条
-var tipAction = require('@pathCommonJs/components/tipAction.js');
 var generateTemplate = require('@pathCommonJsComBus/generateTemplate.js');
 var splitUrl = require('@pathCommonJs/components/splitUrl.js')();
 

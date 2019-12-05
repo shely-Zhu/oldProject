@@ -12,8 +12,6 @@ require('@pathCommonJsCom/tabScroll.js');
 require('@pathCommonJsCom/goTopMui.js');
 require('@pathCommonJs/components/elasticLayer.js');
 require('@pathCommonJs/components/elasticLayerTypeFive.js');
-//黑色提示条的显示和隐藏
-var tipAction = require('@pathCommonJsCom/tipAction.js');
 var splitUrl = require('@pathCommonJs/components/splitUrl.js')();
 var alwaysAjax = require('@pathCommonJs/components/alwaysAjax.js');
 
@@ -174,7 +172,7 @@ $(function() {
             });
 
             mui.ready(function() { //init后需要执行ready函数，才能够初始化出来
-
+                $('.lazyload').lazyload();
                 //隐藏当前的加载中loading
                 if (!$id.hasClass('hasPullUp')) {
                     $id.find('.mui-pull-bottom-pocket').addClass('mui-hidden'); //上拉显示更多
@@ -315,7 +313,6 @@ $(function() {
                         } else {
                             $id.find('.contentWrapper .mui-table-view-cell').append(that.html);
                         }
-
                         //获取当前展示的tab的索引
                         var index = $('#slider .tab-scroll-wrap .mui-active').index(),
                             $list = $("#move_" + index + " .list");
