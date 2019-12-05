@@ -332,7 +332,7 @@ $(function () {
             var that = this;
 
             //tab点击切换
-            mui("body").on('tap', '.tabs>li', function () {
+            mui("body").on('mdClick', '.tabs>li', function () {
                 that.$e.emptyBox.hide();
                 $(this).addClass('active').siblings().removeClass('active');
                 $(".wrap>.panel").eq($(this).index()).addClass('active').siblings().removeClass('active');
@@ -345,11 +345,15 @@ $(function () {
                 if ($(this).index() == 3) {
                     that.getData4()
                 }
-            });
+            }, {
+				htmdEvt: 'fundFile_01'
+			});
             //基金公告跳转
-            mui("body").on('tap', '.tplBox4 .content', function () {
+            mui("body").on('mdClick', '.tplBox4 .content', function () {
                 window.location.href = $(this).attr('linkRul')
-            })
+            }, {
+				htmdEvt: 'fundFile_02'
+			})
         }
     };
     somePage.init();
