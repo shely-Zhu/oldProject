@@ -469,7 +469,7 @@ $(function () {
 			}) ;
 			//  ---《公募基金风险揭示及售前告知书》
 			$('body').on('tap','.setGoUrl',function(){
-				window.location.href = site_url.agreementModel_url + '?id=47'
+				window.location.href = site_url.agreementModel_url + '?id=47' + '&financial=true'
 			}) ;
 
 			//  ---忘记密码

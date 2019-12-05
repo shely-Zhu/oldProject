@@ -124,8 +124,8 @@ $(function() {
                 data: {
                     "pageNum": that.gV.aP.pageNum, //非必须，默认为1
                     "pageSize": "10", //非必须，默认为10
-                    isConfirm: that.gV.type,
-                    businessType: Number(that.gV.businessType),
+                    "isConfirm": that.gV.type,
+                    "businessType": that.gV.businessType,
                 },
                 callbackDone: function(json) {
                     var data;
@@ -167,6 +167,7 @@ $(function() {
 
                 },
                 callbackNoData: function() {
+                    debugger
                     that.getElements.noData.show();
                 }
 
@@ -219,6 +220,7 @@ $(function() {
                     mui('.contentWrapper').pullRefresh().refresh(true);
                     that.gV.aP.pageNum = 1;
                     that.getElements.contentWrap.html('');
+                    debugger
                     //重新初始化
                     that.initMui();
                     mui('.contentWrapper').pullRefresh().scrollTo(0, 0, 0);

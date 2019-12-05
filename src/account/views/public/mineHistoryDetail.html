@@ -12,7 +12,6 @@
      <!-- 加载中loading -->
      @@include('@pathCommonCom/loading/listLoading.html')
      <!-- @@include('@pathCommonViews/headBarConfig.html',{"bgColors":"#2C3E77,#273971","showType":"0","pathName":"历史明细"}) -->
-     
      <div class="wrap">
          <div class="topTitle">
              @@include('@pathCommonViews/headBarConfig.html',{"bgColors":"#2C3E77,#273971","showType":"0","pathName":"历史明细"})
@@ -46,7 +45,7 @@
              {{/each}}
          </script>
          <div class="noDataMore">
-             @@include('@pathCommonViews/noDataImg.html',{"tipText":"暂无数据"})
+             @@include('@pathCommonCom/noData/noData.html', {"tipText": "暂无数据"})
          </div>
      </div>
  

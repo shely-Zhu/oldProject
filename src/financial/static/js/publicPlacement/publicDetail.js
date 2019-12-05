@@ -198,12 +198,10 @@ $(function () {
                 window.location.href = site_url.pofFundFile_url + '?secuId=' + secuId + '&fundCode=' + fundCode;
             });
             // 历史净值查看更多
-            // mui("body").on("tap", ".history_more", function (e) {
-            //     window.location.href = site_url.mineHistoryDetail_url + '?fundCode=' + fundCode
-            // });
             mui("body").on("tap", ".history_area .history_more", function (e) {
                 window.location.href = site_url.mineHistoryDetail_url + '?fundCode=' + fundCode
             });
+           
             // 交易规则
             mui("body").on("tap", ".dealRegArea .rule", function (e) {
                 window.location.href = site_url.pofTransactionRules_url + '?fundCode=' + fundCode
