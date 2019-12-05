@@ -166,7 +166,7 @@ var clickList = {
 	//成长值记录
 	"adolesceRecord_ruleDescription" : { type:'click', evtid: '', topic: '成长值记录-规则说明', info: ''} ,
 	//产品咨询
-	"consultProduct_submit" : { type:'click', evtid: '', topic: '产品咨询-提交按钮', info: ''} ,
+	"consultProduct_01" : { type:'click', evtid: '', topic: '产品咨询-提交按钮', info: ''} ,
 	//月度报告详情页
 	"monthReportDetail_01" : { type:'click', evtid: 'monthReportDetail_01', topic: '月度报告详情页-月末持仓总览本月交易明细tab', info: ''} ,
 	"monthReportDetail_02" : { type:'click', evtid: 'monthReportDetail_02', topic: '月度报告详情页-立即投资按钮', info: ''} ,
