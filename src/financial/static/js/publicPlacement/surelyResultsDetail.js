@@ -147,7 +147,6 @@ $(function() {
                   that.$el.payTypeRedemption.html('在线支付')
                 }
               }
-              debugger
               if(that.gV.payType == '1'){   // 买入汇款支付
                 $(".resultTop").show()
                 $(".resultTopTwo").hide()
@@ -216,7 +215,7 @@ $(function() {
       },
       event:function(){
         var that = this;
-        $('body').on('mdClick','.over',function(){
+        mui("body").on('mdClick','.over',function(){
           //跳往持仓列表页
           window.location.href = site_url.publicAssets_url
         }, {

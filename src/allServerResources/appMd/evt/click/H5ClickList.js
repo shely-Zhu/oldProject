@@ -187,12 +187,12 @@ var clickList = {
 	"regulatoryAccounts_copyOpeningBank" : { type:'click', evtid: '', topic: '公墓监管账户-复制开户行', info: ''} ,
 	//收益明细页面（没按钮）
 	//我的奖励页面
-	"rewards_viewDetails" : { type:'click', evtid: '', topic: '我的奖励-查看详情', info: ''} ,
+	"rewards_01" : { type:'click', evtid: 'rewards_01', topic: '我的奖励-查看详情', info: ''} ,
 	//交易明细
-	"transactionDetails_privateDetailed" : { type:'click', evtid: '', topic: '交易明细-私募明细', info: ''} ,
-	"transactionDetails_publicOptional" : { type:'click', evtid: '', topic: '交易明细-公募自选', info: ''} ,
-	"transactionDetails_publicCombination" : { type:'click', evtid: '', topic: '交易明细-公募组合', info: ''} ,
-	"transactionDetails_publicIntellectual" : { type:'click', evtid: '', topic: '交易明细-公募智投', info: ''} ,
+	"transactionDetails_01" : { type:'click', evtid: 'transactionDetails_01', topic: '交易明细-私募明细', info: ''} ,
+	"transactionDetails_02" : { type:'click', evtid: 'transactionDetails_02', topic: '交易明细-公募自选', info: ''} ,
+	"transactionDetails_03" : { type:'click', evtid: 'transactionDetails_03', topic: '交易明细-公募组合', info: ''} ,
+	"transactionDetails_04" : { type:'click', evtid: 'transactionDetails_04', topic: '交易明细-公募智投', info: ''} ,
 /**************************************************************mine文件夹结束*****************************************************************************************/ 
 	
 	//私募基金产品详情

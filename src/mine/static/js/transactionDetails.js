@@ -24,17 +24,37 @@ $(function() {
 		//注册事件
 		events: function() {
             let that = this;
-            mui("body").on('tap','.wrap li',function(e){
+            mui("body").on('mdClick','.wrap li',function(e){
 				var numAtr = $(this).attr('num');
 				if(numAtr == 1){
 					window.location.href=site_url.privateDetailList_url
-				}else if(numAtr == 2){
+				}          
+			},{
+                'htmdEvt': 'transactionDetails_01'
+            })
+			mui("body").on('mdClick','.wrap li',function(e){
+				var numAtr = $(this).attr('num');
+				 if(numAtr == 2){
 					window.location.href=site_url.transactionRecords_url
-				}else if(numAtr == 3){
+				}        
+			},{
+                'htmdEvt': 'transactionDetails_02'
+            })
+			mui("body").on('mdClick','.wrap li',function(e){
+				var numAtr = $(this).attr('num');
+				if(numAtr == 3){
 					window.location.href=site_url.publicTransactionDetails_url
-				}else if(numAtr == 4){
+				}         
+			},{
+                'htmdEvt': 'transactionDetails_03'
+            })
+			mui("body").on('mdClick','.wrap li',function(e){
+				var numAtr = $(this).attr('num');
+				if(numAtr == 4){
 					window.location.href=site_url.transactionList_url
 				}           
+            },{
+                'htmdEvt': 'transactionDetails_04'
             })
 		}
 	};
