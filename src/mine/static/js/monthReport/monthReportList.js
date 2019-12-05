@@ -13,6 +13,7 @@ var tipAction = require('@pathCommonJsCom/tipAction.js');
 
 var splitUrl = require('@pathCommonJs/components/splitUrl.js')();
 var generateTemplate = require('@pathCommonJsComBus/generateTemplate.js');
+var alwaysAjax = require('@pathCommonJs/components/alwaysAjax.js');
 
 
 $(function() {
@@ -190,6 +191,8 @@ $(function() {
 			},{
 				'htmdEvt': 'monthReportList_02'
 			})
+
+			alwaysAjax(".recordList");
 
 		},
 	};

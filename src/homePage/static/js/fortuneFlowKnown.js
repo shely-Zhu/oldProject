@@ -25,6 +25,7 @@ $(function() {
 			fortuneFlowList: [],
             articleBelong : splitUrl['articleBelong'], // 文章类型
             wrapperName:null,
+            isBottomFlag: false
 		},
 		//页面初始化函数
 		init: function() {	
@@ -51,9 +52,10 @@ $(function() {
                     } else {
                         data = that.dealTime(json.data.list);
                     }
-                    setTimeout(function() {
-                        console.log(data)
+                    //setTimeout(function() {
+                    //
                         if (data.length < that.gV.pageSize) {
+                            that.gV.isBottomFlag = true
                             if (that.gV.pageCurrent == 1) { //第一页时
                                 if (data.length == 0) {
                                     // 暂无数据显示
@@ -73,10 +75,10 @@ $(function() {
                         // 页面++
                         that.gV.pageCurrent++;
                         // 将消息列表插入到页面上
-                       
                         generateTemplate(data, that.$e.fortuneFlowListWrapper, that.$e.fortuneFlowListTemp)
                         $(".lazyload").lazyload()
-                    }, 200)
+                        alwaysAjax(".knownList")
+                    //}, 200)
                 },
                 callbackNoData:function(){
                     //没有数据时展示暂无数据
@@ -152,7 +154,6 @@ $(function() {
             },{
                 'htmdEvt': 'fortune_09'
             })
-            alwaysAjax(".knownList")
 		}
 	};
     somePage.init();

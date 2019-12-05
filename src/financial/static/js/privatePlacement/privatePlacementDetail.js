@@ -485,10 +485,10 @@ $(function(){
 			var jumpUrl = "";//跳转链接
 			if(v.conditionJump == 1){//跳转到认证中心页面
 				jumpUrl = site_url.realName_url
-			}else if(v.conditionJump == 2){//跳转到专项风测页面
-				jumpUrl = site_url.riskAppraisal_url+"?type=asset"
-			}else if(v.conditionJump == 3){//跳转到完善信息页面
+			}else if(v.conditionJump == 2){//跳转到完善信息页面
 				jumpUrl = site_url.completeInformation_url
+			}else if(v.conditionJump == 3){//跳转到专项风测页面
+				jumpUrl = site_url.riskAppraisal_url+"?type=asset"
 			}else if(v.conditionJump == 4){//跳转到投资者分类申请页面
 				jumpUrl = site_url.investorClassification_url
 			}else if(v.conditionJump == 5){//跳转到投资者分类结果页页面
@@ -578,6 +578,24 @@ $(function(){
 						})
 						
 					});
+								//发送ajax请求
+					var ReourceListobj = [{
+						url: site_url.getRaiseInfo_api,
+						data: {
+							projectId: that.$e.projectId,
+							fileType:"19"
+						},
+						contentTypeSearch: true,
+						needLogin:true,//需要判断是否登陆
+						callbackDone: function(json){  //成功后执行的函数
+									
+						},
+						callbackFail: function(json){  //失败后执行的函数
+							tipAction(json.msg);
+		
+						}
+					}];
+					$.ajaxLoading(ReourceListobj);
 					if(!singleaAuthen){//如果v.show都是0，则不展示预约框,跳转到相应链接
 						$("#tips-wrap").hide();
 						if(!!isPopup){//如果弹售前告知书
@@ -770,7 +788,7 @@ $(function(){
 				htmdEvt: 'privatePlacementDetail_02'
 			})
 			// 募集账户的信息的拷贝
-			mui("body").on('mdClick', '.copy_btn', function() {
+			mui("body").on('mdClick', '.copy_btn', function(event) {
 				var $this = $(this);
 				var copyText = $this.siblings('div').text()
 				//实例化clipboard
@@ -786,6 +804,7 @@ $(function(){
 				clipboard.on("error", function (e) {
 					tipAction("请选择“拷贝”进行复制!");
 				});
+				clipboard.onClick(event);
 
 			}, {
 				htmdEvt: 'privatePlacementDetail_03'

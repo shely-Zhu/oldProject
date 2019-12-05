@@ -83,7 +83,7 @@ $(function() {
 
                 //发送ajax请求
                 var obj = [{
-                    url:"/app/account/frontend/loginCheck",
+                    url:"/web/account/frontend/loginCheck",
                     data: {
                             accountType: nameValue, //客户类型（0机构，1个人）
                             mobile: phoneValue, //账号
