@@ -347,6 +347,8 @@ module.exports = function() {
     this.rewards_url = go_url.no_url + '/mine/views/rewards.html';
     //交易明细总页面
     this.publicTransactionDetails_url = go_url.no_url + '/mine/views/publicTransactionDetails.html'
+    //单个产品交易记录页面
+    this.transactionDetailPublic_url = go_url.no_url + '/account/views/public/transactionDetail.html'
         /*-------------------------------活动列表 end -----------------------*/
 
 
