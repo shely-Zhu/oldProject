@@ -264,7 +264,7 @@ $(function () {
 		events: function () {
 			var that = this;
 			/** 下面三个事件： 银行卡列表出现/隐藏 **/
-			$('body').on('mdClick','.paymoney',function(){
+			mui("body").on('mdClick','.paymoney',function(){
 				$(".imgc").hide()
 				$(".iimg").show()
 				that.gV.payType = $(this).attr('pay-type')
@@ -277,14 +277,14 @@ $(function () {
 				htmdEvt: 'cashTransformIn_01'
 			}) 
 
-			$('body').on('mdClick','.popup-close',function(){
+			mui("body").on('mdClick','.popup-close',function(){
 				$('.popup').css('display','none')
 				$('.popup-password').css('display','none')
 			}, {
 				htmdEvt: 'cashTransformIn_02'
 			}) 
 
-			$('body').on('mdClick','.popup-mask',function(){
+			mui("body").on('mdClick','.popup-mask',function(){
 				$('.popup').css('display','none')
 				$('.popup-password').css('display','none')
 			}, {
@@ -292,7 +292,7 @@ $(function () {
 			}) 
 
 			//点击转出规则
-			$('body').on('mdClick','.goRule',function(){
+			mui("body").on('mdClick','.goRule',function(){
 				window.location.href = site_url.transactionRules_url + '?fundCode=' + that.gV.fundCode;
 			}, {
 				htmdEvt: 'cashTransformIn_04'
@@ -307,14 +307,14 @@ $(function () {
 				
 			})
 			//清除输入框数字
-			$('body').on('mdClick','.deleteNum',function(){
+			mui("body").on('mdClick','.deleteNum',function(){
 				$('.transformInput').val(null)
 			}, {
 				htmdEvt: 'cashTransformIn_05'
 			}) ;
 
 			//选中银行卡
-			$('body').on('mdClick','.bank-li',function(){
+			mui("body").on('mdClick','.bank-li',function(){
 				$(".bank-li .true").hide();
 				$(this).find(".true").show()
 				that.gV.bankName = $(this).attr('bankName');
@@ -356,7 +356,7 @@ $(function () {
             });
 			
 			//确定
-			$('body').on('mdClick','.btn_box .btn',function(){
+			mui("body").on('mdClick','.btn_box .btn',function(){
 				if(!!that.gV.bankAccountSecret){
 					if(Number(that.gV.balance) > Number(that.gV.singleNum)){
 						tipAction('单笔金额不能超过' + that.gV.singleNum + '元')
@@ -373,21 +373,21 @@ $(function () {
 			}) ;
 			
 			//  ---《公募基金风险揭示及售前告知书》
-			$('body').on('mdClick','.setGoUrl',function(){
+			mui("body").on('mdClick','.setGoUrl',function(){
 				window.location.href = site_url.agreementModel_url + '?id=47' + '&financial=true'
 			}, {
 				htmdEvt: 'cashTransformIn_09'
 			}) ;
 
 			//  ---忘记密码
-			$('body').on('mdClick','#passwordWrap .forgetP',function(){
+			mui("body").on('mdClick','#passwordWrap .forgetP',function(){
 				//跳往原生页面去修改密码
 				window.location.href = site_url.pofForgotPassword_url
 			}, {
 				htmdEvt: 'cashTransformIn_10'
 			}) ;
 			//密码校验不通过   ---取消
-			$('body').on('mdClick','.elasticCel',function(){
+			mui("body").on('mdClick','.elasticCel',function(){
 				$(".pwd-input").val('')
 				$(".fake-box input").val('');
 				$('#passwordWrap').css('display','none')
@@ -397,14 +397,14 @@ $(function () {
 				htmdEvt: 'cashTransformIn_11'
 			}) ;
 			//密码校验不通过   ---忘记密码
-			$('body').on('mdClick','.error1 .elasticCel',function(){
+			mui("body").on('mdClick','.error1 .elasticCel',function(){
 				//跳往原生页面去修改密码
 				window.location.href = site_url.pofForgotPassword_url
 			}, {
 				htmdEvt: 'cashTransformIn_12'
 			}) ;
 			//密码校验不通过   ---重新输入
-			$('body').on('mdClick','.error1 .elasticYes',function(){
+			mui("body").on('mdClick','.error1 .elasticYes',function(){
 				$(".pwd-input").val('')
 				$(".fake-box input").val('');
 				$('.popup-password').css('display','none')
@@ -412,14 +412,14 @@ $(function () {
 				htmdEvt: 'cashTransformIn_13'
 			}) ;
 			//密码校验不通过   ---找回密码
-			$('body').on('mdClick','.error2 .elasticYes',function(){
+			mui("body").on('mdClick','.error2 .elasticYes',function(){
 				//跳往原生页面去修改密码
 				window.location.href = site_url.pofRetrievePassword_url
 			}, {
 				htmdEvt: 'cashTransformIn_14'
 			}) ;
 			//密码校验不通过   ---重新输入
-			$('body').on('mdClick','.error3 .elasticYes',function(){
+			mui("body").on('mdClick','.error3 .elasticYes',function(){
 				$(".pwd-input").val('')
 				$(".fake-box input").val('');
 				$('.popup-password').css('display','none')
@@ -428,7 +428,7 @@ $(function () {
 			}) ;
 
 			//添加银行卡 -- 跳往原生
-			$('body').on('mdClick','.popup-last',function(){
+			mui("body").on('mdClick','.popup-last',function(){
 				//跳往原生页面去修改密码
 				window.location.href = site_url.pofAddBankCard_url
 			}, {

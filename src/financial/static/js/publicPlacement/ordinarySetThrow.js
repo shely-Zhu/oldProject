@@ -843,16 +843,13 @@ $(function () {
 					tipAction('只能输入两位小数')
 					return
 				}else{
-					if(that.gV.type == 'add'){
-						if(Number($(this).val()) >= Number(that.gV.minValue) && Number($(this).val()) <= Number(that.gV.maxValue)){
-							that.getRate($(this).val());
-						}else if(Number($(this).val()) > that.gV.maxValue){
-							tipAction('最大买入金额不能超过' + that.gV.maxValue + '元')
-							return
-						}
-					}else{
+					if(Number($(this).val()) >= Number(that.gV.minValue) && Number($(this).val()) <= Number(that.gV.maxValue)){
 						that.getRate($(this).val());
+					}else if(Number($(this).val()) > that.gV.maxValue){
+						tipAction('最大买入金额不能超过' + that.gV.maxValue + '元')
+						return
 					}
+					
 				}
 				
 			})
@@ -907,7 +904,7 @@ $(function () {
 			});
 			
 			//确定
-			mui("body").on('tap','.btn_box .btn',function(){
+			mui("body").on("mdClick",'.btn_box .btn',function(){
 				if(Number(that.gV.balance) < Number(that.gV.minValue)){
 					tipAction('最小买入金额不能低于' + that.gV.minValue + '元')
 					return
