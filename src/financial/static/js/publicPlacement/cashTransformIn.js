@@ -382,13 +382,9 @@ $(function () {
 			
 			//  ---《公募基金风险揭示及售前告知书》
 			$('body').on('tap','.setGoUrl',function(){
-<<<<<<< HEAD
-				window.location.href = site_url.agreementModel_url + '?id=47'
+				window.location.href = site_url.agreementModel_url + '?id=47' + '&financial=true'
 			}, {
 				htmdEvt: 'cashTransformIn_09'
-=======
-				window.location.href = site_url.agreementModel_url + '?id=47' + '&financial=true'
->>>>>>> 80ad4550415dba0b713923f4650ca5720be85415
 			}) ;
 
 			//  ---忘记密码

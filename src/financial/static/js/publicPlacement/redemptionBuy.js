@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2019-11-26 14:42:56
- * @LastEditTime: 2019-12-04 20:16:21
+ * @LastEditTime: 2019-12-05 09:42:50
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \htjf-app\src\financial\static\js\publicPlacement\redemptionBuy.js
@@ -127,7 +127,9 @@ $(function() {
             var obj = [{
                 url : site_url.queryTransferFunds_api,
                 needDataEmpty:true,
-                data:{},
+                data:{
+                    type:"2"
+                },
                 callbackDone : function(json){
                     console.log("88888",json);
                     that.gv.transferFunds = json.data;

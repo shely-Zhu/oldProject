@@ -37,7 +37,7 @@ $(function() {
 				$("b").eq(e.detail.slideNumber).addClass('borderBottom');
 				that.getTemplateData($this.attr("belong"),e.detail.slideNumber)
 			},{
-                'htmdEvt': 'understandTab0'
+                'htmdEvt': 'understandTab_00'
             })
 		},
 		//获取数据函数
