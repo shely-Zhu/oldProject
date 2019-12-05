@@ -14,15 +14,15 @@ var financial = Mock.mock({
     "msg": "处理成功！",
     'data':{
              "pageItems": {
-                     "totalCount": "",// 总记录数
-                     "totalPages": "" //总页数
+                     "totalCount": "45",// 总记录数
+                     "totalPages": "5" //总页数
                      },
-             "pageList|50":[
+             "pageList|10":[
                 {
                      "trdDt":"2017-03-12",// 交易日期
                      "unitNav":"1.3332",// 份额净值
                      "accuUnitNav":"1.3332",// 份额累计净值
-                     "dayChgRat":"-1.3332",// 日涨跌幅（%）
+                     "dayChgRat|1":["-1.3332","+2.3242"],// 日涨跌幅（%）
                      "annYldRat":"-1.3332",// 最近7日折算年收益率
                      "unitYld":"1.3332"//每万份基金单位当日收益
                      },

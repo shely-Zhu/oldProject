@@ -6,7 +6,6 @@
 require('@pathCommonBase/base.js');
 require('@pathCommonJs/ajaxLoading.js');
 
-var tipAction = require('@pathCommonJs/components/tipAction.js');
 var swiperSizeMap = require('@pathCommonJs/components/swiper/swiperSizeMap.js');
 var generateTemplate = require('@pathCommonJsComBus/generateTemplate.js');
 

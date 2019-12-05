@@ -313,7 +313,7 @@ $(function() {
                 var articleBelong = $(this).attr("articleBelong")
                 window.location.href = site_url.articleTemplate_url + '?id=' + id + '&articleBelong=' + articleBelong + '&applyType=1'
             },{
-                'htmdEvt': 'fortune_roomItem0'
+                'htmdEvt': 'fortune_10'
             })
         }
     };
