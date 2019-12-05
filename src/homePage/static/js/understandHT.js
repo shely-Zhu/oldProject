@@ -31,12 +31,14 @@ $(function() {
 			mui.init();
 			//模拟点击对应的type。定位到当前type下
 			
-			$(".mui-slider").on("slide",function(e){
+			mui("body").on('mdClick', '.mui-slider' , function(e){
 				var $this = $(this);
 				$("b").removeClass('borderBottom');
 				$("b").eq(e.detail.slideNumber).addClass('borderBottom');
 				that.getTemplateData($this.attr("belong"),e.detail.slideNumber)
-			})
+			},{
+                'htmdEvt': 'understandTab0'
+            })
 		},
 		//获取数据函数
 		getData: function(t) {
