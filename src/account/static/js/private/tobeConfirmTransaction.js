@@ -104,10 +104,6 @@ $(function() {
                 that.getElements.listLoading.show();
                 //这一句初始化并第一次执行mui上拉加载的callback函数
                 mui('.contentWrapper').pullRefresh().pullupLoading();
-                //隐藏loading，调试接口时需要去掉
-                //setTimeout(function(){
-                that.getElements.listLoading.hide();
-                //}, 2000);
                 //为$id添加hasPullUp  class
                 $('.list').addClass('hasPullUp');
             });
