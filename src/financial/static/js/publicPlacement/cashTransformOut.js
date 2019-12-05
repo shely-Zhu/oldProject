@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2019-11-26 14:42:56
- * @LastEditTime: 2019-12-05 15:30:14
+ * @LastEditTime: 2019-12-05 15:59:19
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \htjf-app\src\financial\static\js\publicPlacement\cashTransformOut.js
@@ -327,7 +327,8 @@ $(function () {
 			}) 
 
 			//点击同意协议
-			that.$e.iconCheck.on('mdClick', function() {
+			mui('body').on('tap','.item2 .iconfont',function(){
+			//that.$e.iconCheck.on('mdClick', function() {
                 if ($(this).hasClass("check")) {
 					$(this).removeClass("check").html('&#xe668;');
 					that.$e.confirmBtn.attr('disabled',true)
@@ -344,8 +345,15 @@ $(function () {
 				that.gv.transformMoney = $(this)[0].value;
 				if( parseFloat( that.gv.transformTotalMoney)< parseFloat( that.gv.transformMoney) ){
 					$(".checkMessage").css({"display":"block"});
+					$(".checkMessage").html("转出金额超过最大额度")
 				}else{
-				   $(".checkMessage").css({"display":"none"});
+					if($(this)[0].value == ""){
+						$(".checkMessage").css({"display":"block"});
+						$(".checkMessage").html("转出金额不能为空")
+					}else{
+						$(".checkMessage").css({"display":"none"});
+					}
+				   
 				}
 			})
 
@@ -371,6 +379,8 @@ $(function () {
 			//$(".clearMoney").on('click',function(){/
 				$(".msecond input").val("");
 				that.gv.transformMoney = "";
+				$(".checkMessage").css({"display":"block"});
+						$(".checkMessage").html("转出金额不能为空")
 			}, {
 				htmdEvt: 'cashTransformOut_12'
 			})
