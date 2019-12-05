@@ -241,7 +241,7 @@ $(function() {
             var that = this;
 
             // 雷达图一年，3年，5年
-            mui("body").on('tap', '.dd_choice_1 .mui-col-xs-3', function(e) {
+            mui("body").on('mdClick', '.dd_choice_1 .mui-col-xs-3', function(e) {
                 var i = $(this).index();
                 $(this).addClass("active").siblings().removeClass("active");
                // $(".mui-control-item").addClass('active').siblings().removeClass('active');
@@ -260,11 +260,13 @@ $(function() {
                     
                 }
                 
+            },{
+                'htmdEvt': 'diagnosisDetail_01'
             })
 
 
             // 折线图 一月，一年，成立以来
-            mui("body").on('tap', '.dd_choice_2 span', function(e) {
+            mui("body").on('mdClick', '.dd_choice_2 span', function(e) {
                 var num = $(this).attr('num');
                 $(this).addClass('active').siblings().removeClass('active');
                 // 画图
@@ -277,10 +279,12 @@ $(function() {
                 } else {
                     that.sendAjax(that.getDrawData(num))
                 }
+            },{
+                'htmdEvt': 'diagnosisDetail_02'
             })
 
             // 文案提示
-            mui("body").on('tap', '.dd_icon', function() {
+            mui("body").on('mdClick', '.dd_icon', function() {
                 var i = $(this).attr('num');
                 var value = that.gV.tipArr[i] && that.gV.tipArr[i].value;
                 var tital;
@@ -301,6 +305,8 @@ $(function() {
                     zIndex: 100,
                 });
 
+            },{
+                'htmdEvt': 'diagnosisDetail_03'
             })
         },
     };

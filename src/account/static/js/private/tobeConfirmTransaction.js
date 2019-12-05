@@ -41,7 +41,7 @@ $(function() {
             },
             aThis: null,
             list_template: '', //列表的模板，生成后存放在这里
-            listToTop: '', // 滑动区域距离顶部距离-
+            listToTop: '', // 滑动区域距离顶部距离
             navToTop: '', // 滑动nav距离顶部距离
             type: 0, //是否确认
             businessType: $('.hopperCon li.active').attr('data'),
@@ -129,6 +129,7 @@ $(function() {
                     }
                     setTimeout(function() {
                         if (data.length < that.gV.aP.pageSize) {
+
                             if (that.gV.aP.pageNum == 1) { //第一页时
                                 if (data.length == 0) {
                                     // 暂无数据显示
@@ -140,9 +141,9 @@ $(function() {
                                 }
                             } else {
                                 //其他页-没有更多数据
-                                t.endPullupToRefresh(true)
+                                t.endPullupToRefresh(true);
                             }
-                        } else { // 还有更多数据;
+                        } else { // 还有更多数据
                             t.endPullupToRefresh(false);
                         }
                         // 页面++
@@ -153,8 +154,6 @@ $(function() {
                         transcationTem(data, that.getElements.contentWrap, that.getElements.transTemp, type)
 
                     }, 200)
-
-
                 },
                 callbackNoData: function() {
                     that.getElements.noData.show();
@@ -173,18 +172,16 @@ $(function() {
                 })
                 //点击筛选数据
             mui("body").on('tap', '.hopperCon li', function(e) {
-                    $('.list').show();
-                    that.getElements.noData.hide();
                     $(this).addClass('active').siblings('li').removeClass('active');
                     $('.mask').hide();
                     $('.hopperCon').hide();
                     that.gV.businessType = $(this).attr('data');
                     // 重置上拉加载
+                    mui('.contentWrapper').pullRefresh().refresh(true);
                     that.gV.aP.pageNum = 1;
                     that.getElements.contentWrap.html('');
                     //重新初始化
-                    that.getElements.listLoading.show();
-                    that.getData(that.gV.aThis);
+                    that.initMui();
                     mui('.contentWrapper').pullRefresh().scrollTo(0, 0, 0);
                 })
                 // 点击遮罩隐藏
