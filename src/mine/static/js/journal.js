@@ -5,6 +5,7 @@
 require('@pathCommonBase/base.js');
 require('@pathCommonJs/ajaxLoading.js');
 var generateTemplate = require('@pathCommonJsComBus/generateTemplate.js');
+var alwaysAjax = require('@pathCommonJs/components/alwaysAjax.js')
 
 $(function() {
 	let somePage = {
@@ -173,7 +174,9 @@ $(function() {
 			$.ajaxLoading(obj);
 		},
 		//注册事件
-		events: function() {}
+		events: function() {
+			alwaysAjax('.recordList')
+		}
 	};
 	somePage.init();
 });
