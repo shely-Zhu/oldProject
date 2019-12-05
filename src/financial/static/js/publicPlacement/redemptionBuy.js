@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2019-11-26 14:42:56
- * @LastEditTime: 2019-12-05 09:42:50
+ * @LastEditTime: 2019-12-05 13:40:35
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \htjf-app\src\financial\static\js\publicPlacement\redemptionBuy.js
@@ -203,15 +203,15 @@ $(function() {
          */
         events: function() {
             var that = this;
-            $('body').on('tap', '.onright', function() {
+            mui('body').on('tap', '.onright', function() {
                 $('.popup').css('display', 'block')
             })
 
-            $('body').on('tap', '.popup-close', function() {
+            mui('body').on('tap', '.popup-close', function() {
                 $('.popup').css('display', 'none')
             })
 
-            $('body').on('tap', '.popup-mask', function() {
+            mui('body').on('tap', '.popup-mask', function() {
                 $('.popup').css('display', 'none')
             })
 
@@ -222,7 +222,7 @@ $(function() {
             })
 
              //银行卡与基金形成单选
-            $('body').on('click',".radioCheckItem",function(){
+            mui('body').on('click',".radioCheckItem",function(){
                 var type = $(this).attr("type");
                 if(type == 'car'){
                     //银行
@@ -268,8 +268,9 @@ $(function() {
                 window.location.href = site_url.pofTransactionRules_url + '?fundCode=' + regulatory.gv.dataList.fundCode
             });
 
-            //赎回确认         
-         $(".confirmeDemptionPay").on('click',function(){
+            //赎回确认
+            mui("body").on('tap','.confirmeDemptionPay',function(){         
+        // $(".confirmeDemptionPay").on('click',function(){
             $("#passwordWrap").show();
             payPass(that.cancelOrder)
         })
@@ -288,7 +289,8 @@ $(function() {
          })
 
          //点击同意协议
-			that.getElements.iconCheck.on('click', function() {
+            mui("body").on('tap','.item2 .iconfont',function(){ 
+			//that.getElements.iconCheck.on('click', function() {
                 if ($(this).hasClass("check")) {
 					$(this).removeClass("check").html('&#xe668;');
 					that.getElements.confirmBtn.attr('disabled',true)

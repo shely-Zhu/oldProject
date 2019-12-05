@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2019-11-26 14:42:56
- * @LastEditTime: 2019-12-04 16:53:10
+ * @LastEditTime: 2019-12-05 13:37:36
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \htjf-app\src\financial\static\js\publicPlacement\cashTransformOut.js
@@ -248,27 +248,28 @@ $(function () {
 			   callbackDone:function(res){
 				   console.log("999",res)
 			   }
-		   }]
+		   }];
+		   $.ajaxLoading(obj)
 
 		},
 		events: function () {
 			var that = this;
 
 			/** 下面三个事件： 银行卡列表出现/隐藏 **/
-			$('body').on('tap','.onright',function(){
+			mui('body').on('tap','.onright',function(){
 				$('.popup').css('display','block')
 			}) 
 
-			$('body').on('tap','.popup-close',function(){
+			mui('body').on('tap','.popup-close',function(){
 				$('.popup').css('display','none')
 			}) 
 
-			$('body').on('tap','.popup-mask',function(){
+			mui('body').on('tap','.popup-mask',function(){
 				$('.popup').css('display','none')
 			}) 
            
 		   //银行卡单选
-		   $('body').off("click",".cashCheckItem").on('click','.cashCheckItem',function(){
+		   mui('body').off("click",".cashCheckItem").on('click','.cashCheckItem',function(){
 			   $(this).find(".imgLogo").attr("src",that.gv.checkImgUrl);
 			   $(this).siblings().find(".imgLogo").attr("src","");
 			   that.gv.defaultBankNo = $(this).attr("bankNo"); //默认银行代码
@@ -284,7 +285,7 @@ $(function () {
 			})
 
 		   //普通与快速切换
-		   $('body').off("click",".tabWrapper .tab").on('click','.tabWrapper .tab',function(){   
+		   mui('body').off("click",".tabWrapper .tab").on('click','.tabWrapper .tab',function(){   
 	           $(this).find(".activeIcon").addClass("active");
 			   $(this).siblings().find(".activeIcon").removeClass("active");
 			   var type = $(this).attr("type");
@@ -295,22 +296,24 @@ $(function () {
 				that.gv.operationType = "0"
 			   }
 			})
-		   $('body').off('click','.clearMoney').on('click','.clearMoney',function(){
+		   mui('body').off('click','.clearMoney').on('click','.clearMoney',function(){
 			   that.gv.transformMoney = 0;
 			   that.$e.el_transformInput.val(0);
 
 		   })
 			
 			//点击转出规则
-			$('body').on('tap','.explain .right',function(){
-				that.av.ruleId = $(this).find(".transformRule").attr("ruleId");
-				var id = $(this).find(".transformRule").attr("ruleId")
+			mui('body').on('tap','.explain .transformRule',function(){
+				debugger
+				that.gv.ruleId = $(this).attr("ruleId");
+				var id = $(this).attr("ruleId");
 				that.findProtocolContentRule(id);
 				$('.elasticLayer.transOutRule').show()
 			}) 
 
 			//点击同意协议
-			that.$e.iconCheck.on('click', function() {
+			mui('body').on('tap','.item2 .iconfont',function(){   
+			//that.$e.iconCheck.on('click', function() {	
                 if ($(this).hasClass("check")) {
 					$(this).removeClass("check").html('&#xe668;');
 					that.$e.confirmBtn.attr('disabled',true)
@@ -322,22 +325,34 @@ $(function () {
 
 			  //转出金额
 			$(".msecond input").change(function(){
-				console.log("8888888");
 				that.gv.transformMoney = $(this)[0].value;
-				if(that.gv.transformTotalMoney<that.gv.transformMoney){
+				if( parseFloat( that.gv.transformTotalMoney)< parseFloat( that.gv.transformMoney) ){
 					$(".checkMessage").css({"display":"block"});
 				}else{
 				   $(".checkMessage").css({"display":"none"});
 				}
 			})
 
-			//赎回确认         
-			$(".confirmeDemptionPay").on('click',function(){
+			//赎回确认 
+			mui('body').on('tap','.confirmeDemptionPay',function(){   
+			//$(".confirmeDemptionPay").on('click',function(){
 				$("#passwordWrap").show();
 				payPass(that.cancelOrder)
 			})
 
-			$('body').on('tap','.elasticLayer.transOutRule .elasticButtons',function(){
+			//转出全部
+			mui('body').on('tap','.tranoutAllMoney',function(){ 
+			//$(".tranoutAllMoney").on('click',function(){
+				$(".msecond input").val(that.gv.transformTotalMoney);
+				that.gv.transformMoney = that.gv.transformTotalMoney
+			})
+			//转出金额清零
+			mui('body').on('tap','.clearMoney',function(){ 
+			//$(".clearMoney").on('click',function(){/
+				$(".msecond input").val("");
+				that.gv.transformMoney = "";
+			})
+			mui('body').on('tap','.elasticLayer.transOutRule .elasticButtons',function(){
 				$('.elasticLayer.transOutRule').hide()
 			}) 
 		},
