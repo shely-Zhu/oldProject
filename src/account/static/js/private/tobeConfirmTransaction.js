@@ -41,7 +41,7 @@ $(function() {
             },
             aThis: null,
             list_template: '', //列表的模板，生成后存放在这里
-            listToTop: '', // 滑动区域距离顶部距离
+            listToTop: '', // 滑动区域距离顶部距离-
             navToTop: '', // 滑动nav距离顶部距离
             type: 0, //是否确认
             businessType: $('.hopperCon li.active').attr('data'),
@@ -106,7 +106,7 @@ $(function() {
 
                 //这一句初始化并第一次执行mui上拉加载的callback函数
                 mui('.contentWrapper').pullRefresh().pullupLoading();
-
+                // mui('.contentWrapper').pullRefresh().refresh(true);
                 //隐藏loading，调试接口时需要去掉
                 //setTimeout(function(){
                 that.getElements.listLoading.hide();
@@ -138,7 +138,6 @@ $(function() {
                     }
                     setTimeout(function() {
                         if (data.length < that.gV.aP.pageSize) {
-
                             if (that.gV.aP.pageNum == 1) { //第一页时
                                 if (data.length == 0) {
                                     // 暂无数据显示
@@ -150,9 +149,9 @@ $(function() {
                                 }
                             } else {
                                 //其他页-没有更多数据
-                                t.endPullupToRefresh(true);
+                                t.endPullupToRefresh(true)
                             }
-                        } else { // 还有更多数据
+                        } else { // 还有更多数据;
                             t.endPullupToRefresh(false);
                         }
                         // 页面++
@@ -166,10 +165,9 @@ $(function() {
 
 
                 },
-                callbackNoData: function() {
-                    debugger
-                    that.getElements.noData.show();
-                }
+                // callbackNoData: function() {
+                //     that.getElements.noData.show();
+                // }
 
             }];
             $.ajaxLoading(obj);
@@ -212,17 +210,18 @@ $(function() {
                 })
                 //点击筛选数据
             mui("body").on('tap', '.hopperCon li', function(e) {
+                    $('.list').show();
+                    that.getElements.noData.hide();
                     $(this).addClass('active').siblings('li').removeClass('active');
                     $('.mask').hide();
                     $('.hopperCon').hide();
                     that.gV.businessType = $(this).attr('data');
                     // 重置上拉加载
-                    mui('.contentWrapper').pullRefresh().refresh(true);
                     that.gV.aP.pageNum = 1;
                     that.getElements.contentWrap.html('');
-                    debugger
                     //重新初始化
-                    that.initMui();
+                    that.getElements.listLoading.show();
+                    that.getData(that.gV.aThis);
                     mui('.contentWrapper').pullRefresh().scrollTo(0, 0, 0);
                 })
                 // 点击遮罩隐藏
