@@ -22,7 +22,7 @@ var consultProduct = {
 	},
 	events: function(){  //绑定事件
 		var that = this;
-		mui("body").on('tap', '.submitBtn' , function(){
+		mui("body").on('mdClick', '.submitBtn' , function(){
 			var consultContent = $('.consultText').val();
 			var empNo =  splitUrl['empNo']==undefined ? splitUrl['empNo'] :'';
 			var empName =  splitUrl['empName']==undefined ? splitUrl['empName'] :'';
@@ -52,6 +52,8 @@ var consultProduct = {
 			}]
 			$.ajaxLoading(obj);
 
+		},{
+			'htmdEvt': 'consultProduct_01'
 		})
 	},
 }
