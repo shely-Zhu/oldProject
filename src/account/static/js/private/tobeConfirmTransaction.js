@@ -100,19 +100,10 @@ $(function() {
                 if (!$('.list').hasClass('hasPullUp')) {
                     $('.list').find('.mui-pull-bottom-pocket').addClass('mui-hidden');
                 }
-
                 //显示loading
                 that.getElements.listLoading.show();
-
                 //这一句初始化并第一次执行mui上拉加载的callback函数
                 mui('.contentWrapper').pullRefresh().pullupLoading();
-                // mui('.contentWrapper').pullRefresh().refresh(true);
-                //隐藏loading，调试接口时需要去掉
-                //setTimeout(function(){
-                that.getElements.listLoading.hide();
-                //}, 2000);
-
-
                 //为$id添加hasPullUp  class
                 $('.list').addClass('hasPullUp');
             });
@@ -165,40 +156,12 @@ $(function() {
 
 
                 },
-                // callbackNoData: function() {
-                //     that.getElements.noData.show();
-                // }
+                callbackNoData: function() {
+                    that.getElements.noData.show();
+                }
 
             }];
             $.ajaxLoading(obj);
-        },
-        openTipCon: function(type, content, id) {
-
-
-
-
-            //弹层
-
-            // $('#tipCon .tipCon').html(content);
-            // $('.mask').show();
-            // $('#tipCon').show();
-            // //点击确定
-            // mui("body").on('tap', '.tipContainer .todo', function(e) {
-            //     if (type == 'assign') {
-            //         //转让方法
-
-            //     } else if (type == 'assignee') {
-            //         //受让方法
-            //     }
-            //     $('.mask').hide();
-            //     $('#tipCon').hide();
-            // })
-
-        },
-        openTipConOne: function(content) {
-            $('.mask').show();
-            $('#tipConOne').show();
-            $('#tipConOne .tipCon').html(content);
         },
         events: function() { //绑定事件
             var that = this;
