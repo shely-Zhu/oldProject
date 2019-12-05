@@ -157,63 +157,85 @@ $(function () {
         events: function () { //绑定事件
             var that = this;
             //交易记录按钮点击 跳转到交易记录
-            mui("body").on('tap', '.trade_list', function (e) {
+            mui("body").on('mdClick', '.trade_list', function (e) {
                 sessionStorage.setItem("ccache", ""); 
                 window.location.href = site_url.transactionRecords_url;
+            },{
+                'htmdEvt': 'publicAssets_0'
             })
             //普通基金item的点击 进入持仓详情
-            mui("body").on('tap', '#pageLists .hold_item', function (e) {
+            mui("body").on('mdClick', '#pageLists .hold_item', function (e) {
                 var index = $(this).index();
                 sessionStorage.setItem("publicFundDetail",JSON.stringify(that.gV.data.fundDetailList[index])) 
                 window.location.href=site_url.optionalPublicDetail_url;
+            },{
+                'htmdEvt': 'publicAssets_1'
             })
             //现金宝基金item的点击 进入持仓详情
-            mui("body").on('tap', '#cashPageLists .hold_item', function (e) {
+            mui("body").on('mdClick', '#cashPageLists .hold_item', function (e) {
                 var index = $(this).index();
                 window.location.href=site_url.superStreasureDetail_url + '?fundCode=' + that.gV.data.cashDetails[index].fundCode;
+            },{
+                'htmdEvt': 'publicAssets_2'
             })
             //点击持仓列表的感叹号 进入交易明细明细
-            mui("body").on('tap', '.position_tip', function (e) {
+            mui("body").on('mdClick', '.position_tip', function (e) {
                 //跳转到收益明细
                 window.location.href = site_url.returnsDetail_url + '?fundCode=' + $(this).attr('data-fundcode');
                 return false;
+            },{
+                'htmdEvt': 'publicAssets_3'
             })
             //购买
-            mui("body").on('tap', '.buy_btn', function (e) {
+            mui("body").on('mdClick', '.buy_btn', function (e) {
                 window.location.href = site_url.fundTransformIn_url;   
                 return false;
+            },{
+                'htmdEvt': 'publicAssets_4'
             })
             //赎回
-            mui("body").on('tap', '.redeem_btn', function (e) {
+            mui("body").on('mdClick', '.redeem_btn', function (e) {
                 var index = $(this).parent().parent().parent().index();
                 sessionStorage.setItem("publicFundDetail",JSON.stringify(that.gV.data.fundDetailList[index])) 
                 window.location.href = site_url.redemptionBuy_url;
                 return false;
+            },{
+                'htmdEvt': 'publicAssets_5'
             })
             // 头部文案提示(金钱展示隐藏)
-            mui("body").on('tap', '.j_icon', function (e) {
+            mui("body").on('mdClick', '.j_icon', function (e) {
                 $('.j_icon').addClass('eyecose');
                 that.gV.isShowInfo = false;
                 that.renderView();
+            },{
+                'htmdEvt': 'publicAssets_6'
             })
-            mui("body").on('tap', '.eyecose', function (e) {
+            mui("body").on('mdClick', '.eyecose', function (e) {
                 $('.j_icon').removeClass('eyecose');
                 that.gV.isShowInfo = true;
                 that.renderView();
+            },{
+                'htmdEvt': 'publicAssets_7'
             })
             //打开资产组成说明
-            mui("body").on('tap', '.assetsBtn', function (e) {
+            mui("body").on('mdClick', '.assetsBtn', function (e) {
                 $('.mask').show();
                 $('.tipContainer').show();
+            }，{
+                'htmdEvt': 'publicAssets_8'
             })
             //关闭资产组成说明
-            mui("body").on('tap', '.buttonOne', function (e) {
+            mui("body").on('mdClick', '.buttonOne', function (e) {
                 $('.mask').hide();
                 $('.tipContainer').hide();
+            },{
+                'htmdEvt': 'publicAssets_9'
             })
-            mui('body').on('tap', '.position_tip', function (e){
+            mui('body').on('mdClick', '.position_tip', function (e){
                 
                 return false;
+            },{
+                'htmdEvt': 'publicAssets_10'
             })
         },
         chooseTipDesc: function(){

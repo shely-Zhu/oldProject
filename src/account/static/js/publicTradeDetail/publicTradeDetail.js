@@ -59,25 +59,33 @@ $(function () {
         },
         events: function (){
             var that = this;
-            mui("body").on('tap', 'footer', function (e) {
+            mui("body").on('mdClick', 'footer', function (e) {
                 //再买一笔 跳转到产品详情页
                 window.location.href = site_url.productPublicDetail_url + '?fundCode=' + splitUrl()[fundCode];
+            },{
+                'htmdEvt': 'publicTradeDetail_0'
             })
 
-            mui("body").on('tap', '.cancel_order', function (e) {
+            mui("body").on('mdClick', '.cancel_order', function (e) {
                 //去撤单 需要先输入交易密码
                 payPass(function (password){
                     //输入密码的回调
                     that.cancelOrder(password);
                 });
+            },{
+                'htmdEvt': 'publicTradeDetail_1'
             })
-            mui("body").on('tap', '.buy_info .fund_item', function (e) {
+            mui("body").on('mdClick', '.buy_info .fund_item', function (e) {
                 //买入产品条目点击进入公募产品详情
                 window.location.href = site_url.productPublicDetail_url + '?fundCode=' + splitUrl()[fundCode];
+            },{
+                'htmdEvt': 'publicTradeDetail_2'
             })
-            mui("body").on('tap', '.plan', function (e) {
+            mui("body").on('mdClick', '.plan', function (e) {
                 //定投计划跳转到定投详情
                 window.location.href = site_url.pofCastSurelyDetails_url + '?scheduledProtocolId=' + splitUrl()[scheduledProtocolId];
+            },{
+                'htmdEvt': 'publicTradeDetail_3'
             })
         },
         getData: function () {
