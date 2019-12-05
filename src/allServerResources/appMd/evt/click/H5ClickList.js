@@ -168,6 +168,11 @@ var clickList = {
 	//基金诊断
 	"fundAccountDiagnosis_01":{ type:'click', evtid: '', topic: '基金诊断-展开持仓按钮', info: ''},
 	"fundAccountDiagnosis_02":{ type:'click', evtid: '', topic: '基金诊断-获取专属报告按钮', info: ''},
+
+	//基金名称搜索
+	"diagnosisSearch_01" : { type:'click', evtid: 'diagnosisSearch_01', topic: '查询基金', info: ''} ,
+	"diagnosisSearch_02" : { type:'click', evtid: 'diagnosisSearch_02', topic: '跳转详情页', info: ''} ,
+	"diagnosisSearch_03" : { type:'click', evtid: 'diagnosisSearch_03', topic: '获取专属报告', info: ''} ,
 	//权益详情
 	"detailsUnderstandingDetails_01" : { type:'click', evtid: 'detailsUnderstandingDetails_01', topic: '权益详情-了解详情', info: ''} ,
 	//成长值记录
