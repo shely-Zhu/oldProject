@@ -11,7 +11,6 @@ require('@pathCommonJsCom/headBarConfig.js');
 require('@pathCommonJs/components/authenticationProcess.js');
 
 var splitUrl = require('@pathCommonJs/components/splitUrl.js')();
-var tipAction = require('@pathCommonJs/components/tipAction.js');
 var generateTemplate = require('@pathCommonJsComBus/generateTemplate.js');
 //引入弹出层
 require('@pathCommonCom/elasticLayer/elasticLayer/elasticLayer.js');

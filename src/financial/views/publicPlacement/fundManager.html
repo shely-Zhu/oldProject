@@ -24,8 +24,7 @@
 
 <body>
     @@include('@pathCommonViews/headBarConfig.html',{"bgColors":"#2C3E77,#273971","showType":"0","pathName":"基金经理"})
-    <!-- @@include('@pathCommonViews/load.html')
-     @@include('@pathCommonViews/loading/listLoading.html') -->
+    <!-- @@include('@pathCommonCom/loading/listLoading.html') -->
     <div class="list">
         <div class="contentWrapper">
             <div class="contentWrap tplBox">
@@ -35,8 +34,6 @@
 
 
     @@include('@pathInclude/views/footer.html')
-    <!-- 添加埋点 -->
-    @@include('@pathInclude/views/header.html')
     <script src="/financial/static/js/publicPlacement/fundManager.js"></script>
 </body>
 

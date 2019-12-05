@@ -196,9 +196,8 @@ $(function() {
 
 
             //console.log(JSON.stringify($(".viewDetails").html()));
-            mui("body").on('tap', '.viewDetails', function() {
+            mui("body").on('mdClick', '.viewDetails', function() {
                 var $this = $(this);
-
                 var prizeDetailId = $this.attr("data-id");
 
                 console.log(JSON.stringify(prizeDetailId));
@@ -239,6 +238,8 @@ $(function() {
                 }];
                 $.ajaxLoading(obj);
 
+            },{
+                'htmdEvt': 'rewards_01'
             });
 
             //返回上一页

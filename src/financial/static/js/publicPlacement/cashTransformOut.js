@@ -13,15 +13,8 @@
 * 
 */
 
-require('@pathIncludJs/vendor/config.js');
+require('@pathCommonBase/base.js');
 require('@pathCommonJs/ajaxLoading.js');
-
-//zepto模块
-require('@pathIncludJs/vendor/zepto/callback.js');
-require('@pathIncludJs/vendor/zepto/deferred.js');
-
-require('@pathCommonJs/components/headBarConfig.js');
-
 // require('@pathCommonCom/elasticLayer/transOutRule/transOutRule.js');
 var payPass = require('@pathCommonJsCom/payPassword.js');
 var generateTemplate = require('@pathCommonJsComBus/generateTemplate.js');

@@ -2,20 +2,13 @@
  * 我的定投_定投详情 js
  * @author 蔡文琦  2019-11-23
  */
-require('@pathIncludJs/vendor/config.js');
+require('@pathCommonBase/base.js');
 
-//zepto模块
-require('@pathIncludJs/vendor/zepto/callback.js');
-require('@pathIncludJs/vendor/zepto/deferred.js');
-
-require('@pathCommonJsCom/utils.js');
 require('@pathCommonJs/ajaxLoading.js');
 require('@pathCommonJs/components/headBarConfig.js');
 var generateTemplate = require('@pathCommonJsComBus/generateTemplate.js');
 var splitUrl = require('@pathCommonJs/components/splitUrl.js');
 var payPass = require('@pathCommonJsCom/payPassword.js');
-//黑色提示条
-var tipAction = require('@pathCommonJs/components/tipAction.js');
 //获取地址栏参数
 getQueryString = function (name) {
   var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)");

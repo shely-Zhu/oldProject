@@ -2,14 +2,9 @@
 * 定投结果 
 * @author wangjiajia 2019-11-23
 */
-require('@pathIncludJs/vendor/config.js');
-require('@pathIncludJs/vendor/zepto/callback.js');
-require('@pathIncludJs/vendor/zepto/deferred.js');
-require('@pathCommonJs/components/utils.js');
-require('@pathCommonJs/components/headBarConfig.js');
+require('@pathCommonBase/base.js');
 require('@pathCommonJs/ajaxLoading.js');
 var splitUrl = require('@pathCommonJs/components/splitUrl.js')();
-var tipAction = require('@pathCommonJs/components/tipAction.js');
 var splitUrl = require('@pathCommonJs/components/splitUrl.js')();
 var generateTemplate = require('@pathCommonJsComBus/generateTemplate.js');
 
@@ -152,7 +147,6 @@ $(function() {
                   that.$el.payTypeRedemption.html('在线支付')
                 }
               }
-              debugger
               if(that.gV.payType == '1'){   // 买入汇款支付
                 $(".resultTop").show()
                 $(".resultTopTwo").hide()
@@ -221,7 +215,7 @@ $(function() {
       },
       event:function(){
         var that = this;
-        $('body').on('mdClick','.over',function(){
+        mui("body").on('mdClick','.over',function(){
           //跳往持仓列表页
           window.location.href = site_url.publicAssets_url
         }, {
