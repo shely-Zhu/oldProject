@@ -176,7 +176,7 @@ $(function () {
     },
     event: function () {
       var that = this;
-      $('body').on('tap','.over',function(){
+      mui("body").on('tap','.over',function(){
         //跳往现金宝管理页面
         window.location.href = site_url.cashManagement_url
       }) 
