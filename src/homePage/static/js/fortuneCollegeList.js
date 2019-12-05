@@ -586,28 +586,24 @@ $(function() {
         events: function() { //绑定事件
             var that = this;
             //财富讲堂tab切换
-            $('.broadcast').on('tap','span',function(){
-                console.log($(this).index())
+            mui("body").on('mdClick','.broadcast span',function(){
                 $('.broadcast .bigspan').removeClass('getColor');
                 $('.broadcast .bigspan').eq($(this).index()).addClass('getColor');
                 $('.forumList .forumImg').css({"display":"none"});
                 $('.forumList .forumImg').eq($(this).index()).css({"display":"block"});
+            },{
+                'htmdEvt': 'fortune_allTab4'
             });
             // 列表页跳转到详情页
-			mui("body").on('tap', '.list_item' , function(){
+			mui("body").on('mdClick', '.list_item' , function(){
                 var id = $(this).attr("id")
                 var articleBelong = $(this).attr("articleBelong")
                 var applyType = $(this).attr("applyType")
                 window.location.href =site_url.wealthResearch_url + '?id=' + id + '&articleBelong=' + articleBelong + '&applyType='+applyType
+            },{
+                'htmdEvt': 'fortune_studiesList7'
             })
         }
     };
     data.init();
-    //添加埋点待定这样
-    function attr(name,attribute,value){
-        name.attr(attribute,value)
-    }
-    setTimeout(()=>{
-        attr($('#slider .tab-scroll-wrap .mui-control-item'),'htmdEvt','fortune_wealthTab')
-    },1000)
 });
