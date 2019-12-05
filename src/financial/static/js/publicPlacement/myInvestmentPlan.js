@@ -212,15 +212,19 @@ $(function () {
         events: function () {
             var that = this;
             //新增 跳原生定投排行页
-            mui("body").on("tap", ".newPlan", function () {
+            mui("body").on("mdClick", ".newPlan", function () {
                 window.location.href = site_url.investmentPlanRanking_url;
-            });
+            }, {
+				htmdEvt: 'myInvestmentPlan_01'
+			});
 
             // 跳转详情页
-            mui("body").on("tap", ".investmentPlan-item", function (e) {
+            mui("body").on("mdClick", ".investmentPlan-item", function (e) {
                 var scheduledProtocolId = $(this).data('id');
                 window.location.href = site_url.pofCastSurelyDetails_url + '?scheduledProtocolId=' + scheduledProtocolId;
-            });
+            }, {
+				htmdEvt: 'myInvestmentPlan_02'
+			});
 
         },
     };

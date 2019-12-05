@@ -176,10 +176,12 @@ $(function () {
     },
     event: function () {
       var that = this;
-      $('body').on('tap','.over',function(){
+      $('body').on('mdClick','.over',function(){
         //跳往现金宝管理页面
         window.location.href = site_url.cashManagement_url
-      }) 
+      }, {
+				htmdEvt: 'surelyResults_01'
+			}) 
     }
   }
   somePage.init()

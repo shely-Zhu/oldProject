@@ -201,26 +201,34 @@ $(function() {
          */
         events: function() {
             var that = this;
-            $('body').on('tap', '.onright', function() {
+            $('body').on('mdClick', '.onright', function() {
                 $('.popup').css('display', 'block')
-            })
+            }, {
+				htmdEvt: 'redemptionBuy_01'
+			})
 
-            $('body').on('tap', '.popup-close', function() {
+            $('body').on('mdClick', '.popup-close', function() {
                 $('.popup').css('display', 'none')
-            })
+            }, {
+				htmdEvt: 'redemptionBuy_02'
+			})
 
-            $('body').on('tap', '.popup-mask', function() {
+            $('body').on('mdClick', '.popup-mask', function() {
                 $('.popup').css('display', 'none')
-            })
+            }, {
+				htmdEvt: 'redemptionBuy_03'
+			})
 
-            mui("body").on('tap','.findMessageCen',function(){
+            mui("body").on('mdClick','.findMessageCen',function(){
                 var id="79";
                 console.log("aaaaa")
                 that.findMessageCen(id);
-            })
+            }, {
+				htmdEvt: 'redemptionBuy_04'
+			})
 
              //银行卡与基金形成单选
-            $('body').on('click',".radioCheckItem",function(){
+            $('body').on('mdClick',".radioCheckItem",function(){
                 var type = $(this).attr("type");
                 if(type == 'car'){
                     //银行
@@ -254,20 +262,26 @@ $(function() {
                 $(this).find(".radioCheckItemImg").attr("src",that.gv.checkImgUrl);
                 
               //  that.confirmCheck();
-            })
+            }, {
+				htmdEvt: 'redemptionBuy_05'
+			})
 
             //点击全部，初始化最大赎回额度
-            mui("body").on('tap','.forAll',function(){
+            mui("body").on('mdClick','.forAll',function(){
                $(".msecond .msecond-one")[0].value=that.gv.dataList.enableShares;
-            })
+            }, {
+				htmdEvt: 'redemptionBuy_06'
+			})
 
             // 交易规则
-            mui("body").on("tap", ".goPofTransactionRules", function (e) {
+            mui("body").on("mdClick", ".goPofTransactionRules", function (e) {
                 window.location.href = site_url.pofTransactionRules_url + '?fundCode=' + regulatory.gv.dataList.fundCode
-            });
+            }, {
+				htmdEvt: 'redemptionBuy_07'
+			});
 
             //赎回确认         
-         $(".confirmeDemptionPay").on('click',function(){
+         $(".confirmeDemptionPay").on('mdClick',function(){
             $("#passwordWrap").show();
             payPass(that.cancelOrder)
         })
@@ -283,10 +297,12 @@ $(function() {
                     $(".checkMessage").html("赎回额度不能位空")
                 }
              }
-         })
+         }, {
+            htmdEvt: 'redemptionBuy_08'
+        })
 
          //点击同意协议
-			that.getElements.iconCheck.on('click', function() {
+			that.getElements.iconCheck.on('mdClick', function() {
                 if ($(this).hasClass("check")) {
 					$(this).removeClass("check").html('&#xe668;');
 					that.getElements.confirmBtn.attr('disabled',true)
@@ -294,6 +310,8 @@ $(function() {
 					$(this).addClass("check").html('&#xe669;');
 					that.getElements.confirmBtn.removeAttr("disabled");
                 }
+			}, {
+				htmdEvt: 'redemptionBuy_09'
 			});
             
 

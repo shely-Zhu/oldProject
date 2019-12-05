@@ -218,9 +218,11 @@ $(function() {
       },
       event:function(){
         var that = this;
-        $('body').on('tap','.over',function(){
+        $('body').on('mdClick','.over',function(){
           //跳往持仓列表页
           window.location.href = site_url.publicAssets_url
+        }, {
+          htmdEvt: 'surelyResultsDetail_01'
         }) 
         
       },

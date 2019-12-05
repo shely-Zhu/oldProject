@@ -751,7 +751,7 @@ $(function(){
 		events: function(){
 			var that = this;
 			//tab点击切换
-			mui("body").on('tap', '.tabs>li' , function(){
+			mui("body").on('mdClick', '.tabs>li' , function(){
 				$(this).addClass('active').siblings().removeClass('active');
 				$(".wrap>.panel").eq($(this).index()).addClass('active').siblings().removeClass('active');
 			}, {
@@ -762,7 +762,7 @@ $(function(){
 				
 			});
 			//折线图点击月份请求数据
-			mui("body").on('tap', '.lineWrap .time', function() {
+			mui("body").on('mdClick', '.lineWrap .time', function() {
 				$('.lineDraw .time').removeClass('active');
 				$(this).addClass('active');
 				
@@ -771,7 +771,7 @@ $(function(){
 				htmdEvt: 'privatePlacementDetail_02'
 			})
 			// 募集账户的信息的拷贝
-			mui("body").on('tap', '.copy_btn', function() {
+			mui("body").on('mdClick', '.copy_btn', function() {
 				var $this = $(this);
 				var copyText = $this.siblings('div').text()
 				//实例化clipboard
@@ -793,7 +793,7 @@ $(function(){
 			});
 
 			// 立即预约
-			mui("body").on('tap', '.buyButton' , function(){
+			mui("body").on('mdClick', '.buyButton' , function(){
 				if(that.data.buyFreeze == "1"){//如果账户冻结，首先提示
 	                var obj = {
 	                	title: '',
