@@ -381,8 +381,21 @@ body{
 			text-align: center;
 			background-color: @F7FAFD;
 		}
+		.divider-top {
+			height: .6rem;
+			line-height: .6rem;
+			text-align: center;
+			color: @9B9B9B;
+			background-color: @FFFFFF;
+			.line-rate{
+				&::before{
+					content: "——";
+					position:absolute;
+				}
+			}
+		}
 		.divider {
-			height: 1.6rem;
+			height: 0.98rem;
 			background-color: @FFFFFF;
 		}
 	}
