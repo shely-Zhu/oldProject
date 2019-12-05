@@ -5,28 +5,17 @@
 * 
 */
 
-require('@pathIncludJs/vendor/config.js');
+require('@pathCommonBase/base.js');
 //ajax调用
 require('@pathCommonJs/ajaxLoading.js');
 
-//zepto模块
-require('@pathIncludJs/vendor/zepto/callback.js');
-require('@pathIncludJs/vendor/zepto/deferred.js');
-require('@pathIncludJs/vendor/config.js');
-
 require('@pathIncludJs/vendor/mui/mui.picker.min.js');
-
-//黑色提示条
-var tipAction = require('@pathCommonJs/components/tipAction.js');
-require('@pathCommonJs/components/utils.js');
 require('@pathCommonJs/components/elasticLayer.js');
 require('@pathCommonJs/components/headBarConfig.js');
 var splitUrl = require('@pathCommonJs/components/splitUrl.js')();
 require('@pathCommonCom/elasticLayer/transOutRule/transOutRule.js');
 var popPicker = require('@pathCommonJsCom/popPicker.js');
 var generateTemplate = require('@pathCommonJsComBus/generateTemplate.js');
-//黑色提示条的显示和隐藏
-var tipAction = require('@pathCommonJsCom/tipAction.js');
 
 var payPass = require('@pathCommonJsCom/payPassword.js');
 
@@ -244,6 +233,7 @@ $(function () {
 						that.gV.expiryDate = data.expiryDate
 						that.$el.cycleDate.html(data.fixedPeriodMask)
 						that.$el.transformInput.val(data.balance)
+						that.getLimitData(data.fundCode)
 						that.getNextCutPayment();
 						that.getRate(data.balance);
 						that.getBankCard('0',false)
@@ -255,7 +245,42 @@ $(function () {
             $.ajaxLoading(obj);
 		},
 
+		//修改时获取输入框限制
+		getLimitData:function(fundCode){
+			var that = this;
+			var obj = [{
+				url: site_url.newfundDetails_api,
+				data: {
+					"fundCode": fundCode
+				},
+				//async: false,
+				needDataEmpty: true,
+				callbackDone: function (json) {
+					if (json.status == '0000' || json.status == '4000') {
+						var data = json.data;
+						var tradeLimitList2 = []
+						that.$el.transformInput.attr('placeholder',data.tradeLimitAmount)
+						for (var index = 0; index < data.tradeLimitList.length; index++) {
+							if(that.gV.fundBusinCode ==  data.tradeLimitList[index].fundBusinCode){
+								tradeLimitList2.push(data.tradeLimitList[index])
+							}
+						}
+						for (var i = 0; i < tradeLimitList2.length; i++) {
+							if(i + 1 == tradeLimitList2.length){
+								that.$el.transformInput.attr('placeholder',tradeLimitList2[i].minValue)
+								that.$el.transformInput.attr('min',Number(tradeLimitList2[i].minValue).toFixed(0))
+								that.$el.transformInput.attr('max',Number(tradeLimitList2[i].maxValue).toFixed(0))
+								that.gV.minValue =   Number(tradeLimitList2[i].minValue).toFixed(0)  // 起投金额
+								that.gV.maxValue = Number(tradeLimitList2[i].maxValue).toFixed(0)   // 最大金额
+							}
+						}
+					}
+                  
+                },
 
+            }];
+            $.ajaxLoading(obj);
+		},
 		//获取银行列表
 		getBankCard: function(useEnv,type) {
             var that = this;
@@ -477,7 +502,8 @@ $(function () {
 					shares:that.gV.shares,
 					balance:that.gV.balance,
 					capitalMode:that.gV.capitalMode,
-					protocolFixDay:that.gV.dayInMonth,
+					// protocolFixDay:that.gV.dayInMonth,
+					protocolFixDay:that.gV.tradePeriod == '2' ? that.gV.dayInWeek : that.gV.dayInMonth,
 					protocolPeriodUnit:that.gV.protocolPeriodUnit,
 					nextFixrequestDate:that.gV.nextFixrequestDate,
 					firstExchdate:that.gV.nextDeductingDayFromate,
@@ -771,11 +797,13 @@ $(function () {
 			}]
 			 that.getNextCutPayment()
 			// 周期选择
-			$('body').on('tap', '#starttime', function () {
+			mui("body").on('mdClick', '#starttime', function () {
 				popPicker(2, list, that.$el.cycleDate , that.getNextCutPayment);
+			}, {
+				htmdEvt: 'ordinarySetThrow_17'
 			})
 			/** 下面三个事件： 银行卡列表出现/隐藏 **/
-			$('body').on('tap','.paymoney',function(){
+			mui("body").on('mdClick','.paymoney',function(){
 				$(".imgc").hide()
 				$(".iimg").show()
 				that.gV.payType = $(this).attr('pay-type')
@@ -784,21 +812,29 @@ $(function () {
 				$(this).find(".imgc").show();
 				$(this).find(".iimg").hide();
 				that.getBankCard(useEnv,true)
+			}, {
+				htmdEvt: 'ordinarySetThrow_01'
 			}) 
 
-			$('body').on('tap','.popup-close',function(){
+			mui("body").on('mdClick','.popup-close',function(){
 				$('.popup').css('display','none')
 				$('.popup-password').css('display','none')
+			}, {
+				htmdEvt: 'ordinarySetThrow_02'
 			}) 
 
-			$('body').on('tap','.popup-mask',function(){
+			mui("body").on('mdClick','.popup-mask',function(){
 				$('.popup').css('display','none')
 				$('.popup-password').css('display','none')
+			}, {
+				htmdEvt: 'ordinarySetThrow_03'
 			}) 
 
 			//点击转出规则
-			$('body').on('tap','.goRule',function(){
+			mui("body").on('mdClick','.goRule',function(){
 				window.location.href = site_url.transactionRules_url + '?fundCode=' + that.gV.fundCode;
+			}, {
+				htmdEvt: 'ordinarySetThrow_04'
 			}) 
 			
 			$("#transformInput").on('input propertychange',function(){
@@ -807,26 +843,25 @@ $(function () {
 					tipAction('只能输入两位小数')
 					return
 				}else{
-					if(that.gV.type == 'add'){
-						if(Number($(this).val()) >= Number(that.gV.minValue) && Number($(this).val()) <= Number(that.gV.maxValue)){
-							that.getRate($(this).val());
-						}else if(Number($(this).val()) > that.gV.maxValue){
-							tipAction('最大买入金额不能超过' + that.gV.maxValue + '元')
-							return
-						}
-					}else{
+					if(Number($(this).val()) >= Number(that.gV.minValue) && Number($(this).val()) <= Number(that.gV.maxValue)){
 						that.getRate($(this).val());
+					}else if(Number($(this).val()) > that.gV.maxValue){
+						tipAction('最大买入金额不能超过' + that.gV.maxValue + '元')
+						return
 					}
+					
 				}
 				
 			})
 			//清除输入框数字
-			$('body').on('tap','.deleteNum',function(){
+			mui("body").on('mdClick','.deleteNum',function(){
 				$('.transformInput').val(null)
+			}, {
+				htmdEvt: 'ordinarySetThrow_05'
 			}) ;
 
 			//选中银行卡
-			$('body').on('tap','.bank-li',function(){
+			mui("body").on('mdClick','.bank-li',function(){
 				$(".bank-li .true").hide();
 				$(this).find(".true").show()
 				that.gV.bankName = $(this).attr('bankName');
@@ -836,6 +871,7 @@ $(function () {
 				that.gV.bankAccountMask = $(this).attr('bankAccountMask');
 				that.gV.capitalMode = $(this).attr('capitalMode')
 				that.gV.singleNum =  $(this).attr('singleNum')
+				that.gV.bankAccountSecret = $(this).attr('bankAccountSecret')
 				var after4Num = $(this).attr('after4Num')
 				var data = []
 				data.push({
@@ -850,39 +886,28 @@ $(function () {
 				setTimeout(function(){
 					$('.popup').css('display','none')
 				},500)
+			}, {
+				htmdEvt: 'ordinarySetThrow_06'
 			}) 
 
 			//点击同意协议
-			that.$el.iconCheck.on('click', function() {
-                if ($(this).hasClass("check")) {
+			mui("body").on("mdClick", ".item2 .iconfont", function (e) {
+				if ($(this).hasClass("check")) {
 					$(this).removeClass("check").html('&#xe668;');
 					that.$el.confirmBtn.attr('disabled',true)
                 } else {
 					$(this).addClass("check").html('&#xe669;');
 					that.$el.confirmBtn.removeAttr("disabled");
                 }
+			}, {
+				htmdEvt: 'ordinarySetThrow_07'
 			});
 			
 			//确定
-			$('body').on('tap','.btn_box .btn',function(){
-				if(that.gV.type == 'add'){
-					if(Number(that.gV.balance) < Number(that.gV.minValue)){
-						tipAction('最小买入金额不能低于' + that.gV.minValue + '元')
-						return
-					}else{
-						if(!!that.gV.bankAccountSecret){
-							if(Number(that.gV.balance) > Number(that.gV.singleNum)){
-								tipAction('单笔金额不能超过' + that.gV.singleNum + '元')
-								return
-							}
-							that.checkPayType()
-							
-						}else{
-							//未选择银行卡提示信息
-							tipAction("请选择银行卡！");
-							return
-						}
-					}
+			mui("body").on("mdClick",'.btn_box .btn',function(){
+				if(Number(that.gV.balance) < Number(that.gV.minValue)){
+					tipAction('最小买入金额不能低于' + that.gV.minValue + '元')
+					return
 				}else{
 					if(!!that.gV.bankAccountSecret){
 						if(Number(that.gV.balance) > Number(that.gV.singleNum)){
@@ -898,48 +923,66 @@ $(function () {
 					}
 				}
 				
+			}, {
+				htmdEvt: 'ordinarySetThrow_08'
 			}) ;
 			//  ---《公募基金风险揭示及售前告知书》
-			$('body').on('tap','.setGoUrl',function(){
+			mui("body").on('mdClick','.setGoUrl',function(){
 				window.location.href = site_url.agreementModel_url + '?id=47' + '&financial=true'
+			}, {
+				htmdEvt: 'ordinarySetThrow_09'
 			}) ;
 			//  ---忘记密码
-			$('body').on('tap','#passwordWrap .forgetP',function(){
+			mui("body").on('mdClick','#passwordWrap .forgetP',function(){
 				//跳往原生页面去修改密码
 				window.location.href = site_url.pofForgotPassword_url
+			}, {
+				htmdEvt: 'ordinarySetThrow_10'
 			}) ;
 			//密码校验不通过   ---取消
-			$('body').on('tap','.elasticCel',function(){
+			mui("body").on('mdClick','.elasticCel',function(){
 				$('#passwordWrap').css('display','none')
 				$('.popup-password').css('display','none')
+			}, {
+				htmdEvt: 'ordinarySetThrow_11'
 			}) ;
 			//密码校验不通过   ---忘记密码
-			$('body').on('tap','.error1 .elasticCel',function(){
+			mui("body").on('mdClick','.error1 .elasticCel',function(){
 				//跳往原生页面去修改密码
 				window.location.href = site_url.pofForgotPassword_url
+			}, {
+				htmdEvt: 'ordinarySetThrow_12'
 			}) ;
 			//密码校验不通过   ---重新输入
-			$('body').on('tap','.error1 .elasticYes',function(){
+			mui("body").on('mdClick','.error1 .elasticYes',function(){
 				$('.popup-password').css('display','none')
 				$(".pwd-input").val('')
 				$(".fake-box input").val('');
+			}, {
+				htmdEvt: 'ordinarySetThrow_13'
 			}) ;
 			//密码校验不通过   ---找回密码
-			$('body').on('tap','.error2 .elasticYes',function(){
+			mui("body").on('mdClick','.error2 .elasticYes',function(){
 				//跳往原生页面去修改密码
 				window.location.href = site_url.pofRetrievePassword_url
+			}, {
+				htmdEvt: 'ordinarySetThrow_14'
 			}) ;
 			//密码校验不通过   ---重新输入
-			$('body').on('tap','.error3 .elasticYes',function(){
+			mui("body").on('mdClick','.error3 .elasticYes',function(){
 				$('.popup-password').css('display','none')
 				$(".pwd-input").val('')
 				$(".fake-box input").val('');
+			}, {
+				htmdEvt: 'ordinarySetThrow_15'
 			}) ;
 
 			//添加银行卡 -- 跳往原生
-			$('body').on('tap','.popup-last',function(){
+			mui("body").on('mdClick','.popup-last',function(){
 				//跳往原生页面去修改密码
 				window.location.href = site_url.pofAddBankCard_url
+			}, {
+				htmdEvt: 'ordinarySetThrow_16'
 			}) ;
 
 		},

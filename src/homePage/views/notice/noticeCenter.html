@@ -9,7 +9,7 @@
 	<title>消息中心</title>
 </head>
 <body>
-    @@include('@pathCommonViews/noDataImg.html')
+    @@include('@pathCommonCom/noData/noData.html', {"tipText": "暂无数据"})
     @@include('@pathCommonCom/loading/listLoading.html')
     <div id="noticeBox">
     	@@include('@pathCommonViews/headBarConfig.html',{"bgColors":"#2C3E77,#273971","showType":"0","pathName":"消息中心"})    
@@ -18,7 +18,7 @@
 
     <script id="noticeItemList-template" type="text/x-handlebars-template">
     	{{#each this}}
-        <div class="noticeItem" mesType="{{mesType}}" htmdEvt = "notice_conterList">
+        <div class="noticeItem" mesType="{{mesType}}">
     		<div class="itemImgCon">
     			<img class="itemImg" src="{{logoSrc}}" alt="">
                 {{#if badgeFlag}} 

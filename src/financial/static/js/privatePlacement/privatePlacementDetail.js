@@ -11,7 +11,6 @@ require('@pathCommonJsCom/headBarConfig.js');
 require('@pathCommonJs/components/authenticationProcess.js');
 
 var splitUrl = require('@pathCommonJs/components/splitUrl.js')();
-var tipAction = require('@pathCommonJs/components/tipAction.js');
 var generateTemplate = require('@pathCommonJsComBus/generateTemplate.js');
 //引入弹出层
 require('@pathCommonCom/elasticLayer/elasticLayer/elasticLayer.js');
@@ -751,23 +750,27 @@ $(function(){
 		events: function(){
 			var that = this;
 			//tab点击切换
-			mui("body").on('tap', '.tabs>li' , function(){
+			mui("body").on('mdClick', '.tabs>li' , function(){
 				$(this).addClass('active').siblings().removeClass('active');
 				$(".wrap>.panel").eq($(this).index()).addClass('active').siblings().removeClass('active');
+			}, {
+				htmdEvt: 'privatePlacementDetail_01'
 			});
 			//点击一键预约逻辑
 			mui("body").on('tap', '.tips-btn' , function(){
 				
 			});
 			//折线图点击月份请求数据
-			mui("body").on('tap', '.lineWrap .time', function() {
+			mui("body").on('mdClick', '.lineWrap .time', function() {
 				$('.lineDraw .time').removeClass('active');
 				$(this).addClass('active');
 				
 				that.getTypeOneData(that.$e.lineType ,$(this).attr('num') );
+			}, {
+				htmdEvt: 'privatePlacementDetail_02'
 			})
 			// 募集账户的信息的拷贝
-			mui("body").on('tap', '.copy_btn', function() {
+			mui("body").on('mdClick', '.copy_btn', function() {
 				var $this = $(this);
 				var copyText = $this.siblings('div').text()
 				//实例化clipboard
@@ -784,10 +787,12 @@ $(function(){
 					tipAction("请选择“拷贝”进行复制!");
 				});
 
+			}, {
+				htmdEvt: 'privatePlacementDetail_03'
 			});
 
 			// 立即预约
-			mui("body").on('tap', '.buyButton' , function(){
+			mui("body").on('mdClick', '.buyButton' , function(){
 				if(that.data.buyFreeze == "1"){//如果账户冻结，首先提示
 	                var obj = {
 	                	title: '',
@@ -805,6 +810,8 @@ $(function(){
 					that.getConditionsOfOrder();//获取预约条件
 					
 				}
+			}, {
+				htmdEvt: 'privatePlacementDetail_04'
 			});
 		},
 	};

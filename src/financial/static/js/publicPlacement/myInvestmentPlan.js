@@ -5,15 +5,9 @@
  * @Last Modified by:   
  * @description:
  */
-require('@pathCommonJsCom/utils.js');
+require('@pathCommonBase/base.js');
 //ajax调用
 require('@pathCommonJs/ajaxLoading.js');
-//zepto模块--callback
-require('@pathIncludJs/vendor/zepto/callback.js');
-//zepto模块--deferred
-require('@pathIncludJs/vendor/zepto/deferred.js');
-//路径配置文件
-require('@pathIncludJs/vendor/config.js');
 //下拉加载更多
 // require('@pathCommonJs/scrollFullPage.js');
 // 切换
@@ -21,9 +15,6 @@ require('@pathCommonJsCom/tabScroll.js');
 require('@pathCommonJsCom/goTopMui.js');
 require('@pathCommonJs/components/elasticLayer.js');
 require('@pathCommonJs/components/elasticLayerTypeFive.js');
-require('@pathCommonJs/components/headBarConfig.js');
-//黑色提示条的显示和隐藏
-var tipAction = require('@pathCommonJsCom/tipAction.js');
 var generateTemplate = require('@pathCommonJsComBus/generateTemplate.js');
 $(function () {
     var somePage = {
@@ -40,6 +31,7 @@ $(function () {
             pageCurrent: 1, //当前页码，默认为1
             pageSize: 10,
             listLength: 0,
+            fixStateNum : 0,
         },
         init: function () {
             var that = this;
@@ -50,12 +42,11 @@ $(function () {
         //初始化mui的上拉加载
         initMui: function () {
             var that = this;
-
-            var height = windowHeight - $(".title").height() - $(".topTitle").height() - $(".newPlan").height() - $(".noDataMore").height();
+            var height = windowHeight - $(".title").height() - $(".topTitle").height();
+            // var height = windowHeight - $(".title").height() - $(".topTitle").height() - $(".newPlan").height() - $(".noDataOne").height();
             if (!$('.list').hasClass('setHeight')) {
                 $('.list').height(height).addClass('setHeight');
             }
-
             mui.init({
                 pullRefresh: {
                     container: '.contentWrapper',
@@ -138,21 +129,28 @@ $(function () {
                         } else { // 还有更多数据
                             t.endPullupToRefresh(false);
                         }
-                        var len = json.data.pageList;
-                        var fixStateNum = 0;
-                        for (var i = 0; i < len.length; i++) {
-                            if (len[i].fixState == 'A') {
-                                len[i].fixStateStr = "进行中"
-                            } else if (len[i].fixState == 'H') {
-                                len[i].fixStateStr = "终止"
-                                fixStateNum + 1
+                        for (var i = 0; i < data.length; i++) {
+                            if (data[i].fixState == 'A') {
+                                data[i].fixStateStr = "进行中"
+                                data[i].show = true
+                            } else if (data[i].fixState == 'H') {
+                                data[i].fixStateStr = "终止"
+                                data[i].show = false
+                                that.gV.fixStateNum ++
                             } else {
-                                len[i].fixStateStr = "暂停"
+                                data[i].fixStateStr = "暂停"
+                                data[i].show = false
+                            }
+                            if(data[i].totalTradeTimes.length == 0){
+                                data[i].totalTradeTimes_s = false
+                            }else{
+                                data[i].totalTradeTimes_s = true
                             }
                         }
-                        if (fixStateNum > 0) {
+                        console.log('data',data)
+                        if (that.gV.fixStateNum > 0) {
                             that.$e.endPlan.show()
-                            $(".stopPlan").html(fixStateNum)
+                            $(".stopPlan").html(that.gV.fixStateNum)
 
                         } else {
                             that.$e.endPlan.hide()
@@ -162,16 +160,16 @@ $(function () {
                         generateTemplate(data, that.$e.recordList, that.$e.investmentPlanTemp);
 
                         if (that.gV.pageCurrent == 1) {
-                            for (var i = 0; i < len.length; i++) {
-                                if (len[i].fixStateStr == "暂停") {
+                            for (var i = 0; i < data.length; i++) {
+                                if (data[i].fixStateStr == "暂停") {
                                     $(".content-t span").eq(i).addClass("suspend")
                                 } else {
 
                                 }
                             }
                         } else {
-                            for (var i = 0; i < len.length; i++) {
-                                if (len[i].fixStateStr == "暂停") {
+                            for (var i = 0; i < data.length; i++) {
+                                if (data[i].fixStateStr == "暂停") {
                                     $(".content-t span").eq(i + 15 * that.gV.pageCurrent - 15).addClass("suspend")
                                 } else {
 
@@ -192,35 +190,22 @@ $(function () {
             }];
             $.ajaxLoading(obj);
         },
-        transcoding: function (t) {
-            if (t == 'A') {
-                return '正常'
-            } else if (t == 'H') {
-                return '终止'
-            } else {
-                return '暂停'
-            }
-
-        },
-        transcodingClass: function (t) {
-            if (t == 'P') {
-                return 'suspend'
-            } else {
-                return ''
-            }
-        },
         events: function () {
             var that = this;
             //新增 跳原生定投排行页
-            mui("body").on("tap", ".newPlan", function () {
+            mui("body").on("mdClick", ".newPlan", function () {
                 window.location.href = site_url.investmentPlanRanking_url;
-            });
+            }, {
+				htmdEvt: 'myInvestmentPlan_01'
+			});
 
             // 跳转详情页
-            mui("body").on("tap", ".investmentPlan-item", function (e) {
+            mui("body").on("mdClick", ".investmentPlan-item", function (e) {
                 var scheduledProtocolId = $(this).data('id');
                 window.location.href = site_url.pofCastSurelyDetails_url + '?scheduledProtocolId=' + scheduledProtocolId;
-            });
+            }, {
+				htmdEvt: 'myInvestmentPlan_02'
+			});
 
         },
     };

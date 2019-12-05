@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2019-11-26 14:42:56
- * @LastEditTime: 2019-12-04 18:56:53
+ * @LastEditTime: 2019-12-05 15:39:51
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \htjf-app\src\financial\static\js\publicPlacement\redemptionBuy.js
@@ -12,20 +12,9 @@
  * @Date:   2019-11-23
  * 
  */
-
-require('@pathIncludJs/vendor/config.js');
+require('@pathCommonBase/base.js');
 
 require('@pathIncludJs/vendor/mui/mui.picker.min.js');
-
-//zepto模块
-require('@pathIncludJs/vendor/zepto/callback.js');
-require('@pathIncludJs/vendor/zepto/deferred.js');
-
-require('@pathCommonJs/components/headBarConfig.js');
-
-//黑色提示条
-var tipAction = require('@pathCommonJs/components/tipAction.js');
-require('@pathCommonJs/components/utils.js');
 require('@pathCommonJs/ajaxLoading.js');
 require('@pathCommonJs/components/elasticLayer.js');
 
@@ -109,6 +98,7 @@ $(function() {
         findMessageCen:function(id){
             var obj = [{
                 url: site_url.findMessageCenterById_api,
+                 contentTypeSearch: true,
                 data: {
                     "id": id,  
                 },
@@ -116,6 +106,13 @@ $(function() {
                 needDataEmpty: true,
                 callbackDone: function (json) {
                     console.log("json",json);
+                    var html = json.data.content;
+                    if(json.status == "0000"){
+                        $('.elasticLayer.transOutRule').show()
+                           $(".elasticContent").html(html);
+                       }else{
+                        $(".elasticContent").html("规则查询失败");
+                       }
                 },
 
             }];
@@ -127,7 +124,9 @@ $(function() {
             var obj = [{
                 url : site_url.queryTransferFunds_api,
                 needDataEmpty:true,
-                data:{},
+                data:{
+                    type:"2"
+                },
                 callbackDone : function(json){
                     console.log("88888",json);
                     that.gv.transferFunds = json.data;
@@ -180,7 +179,7 @@ $(function() {
                     var data = res.data;
                     if(res.status == '0000'){
                         window.location.href = site_url.pofSurelyResultsDetail_url + '?applyId=' + data.allotNo + '&fundBusinCode=' + 
-                        "024"+ "&fundCode=" + regulatory.gv.targetfundcode  + '&flag=redemption';
+                        "024"+ "&fundCode=" + regulatory.gv.dataList.fundCode  + '&flag=redemption';
                     }
                 }
 
@@ -201,26 +200,34 @@ $(function() {
          */
         events: function() {
             var that = this;
-            $('body').on('tap', '.onright', function() {
+            $('body').on('mdClick', '.onright', function() {
                 $('.popup').css('display', 'block')
-            })
+            }, {
+				htmdEvt: 'redemptionBuy_01'
+			})
 
-            $('body').on('tap', '.popup-close', function() {
+            $('body').on('mdClick', '.popup-close', function() {
                 $('.popup').css('display', 'none')
-            })
+            }, {
+				htmdEvt: 'redemptionBuy_02'
+			})
 
-            $('body').on('tap', '.popup-mask', function() {
+            $('body').on('mdClick', '.popup-mask', function() {
                 $('.popup').css('display', 'none')
-            })
+            }, {
+				htmdEvt: 'redemptionBuy_03'
+			})
 
-            mui("body").on('tap','.findMessageCen',function(){
+            mui("body").on('mdClick','.findMessageCen',function(){
                 var id="79";
                 console.log("aaaaa")
                 that.findMessageCen(id);
-            })
+            }, {
+				htmdEvt: 'redemptionBuy_04'
+			})
 
              //银行卡与基金形成单选
-            $('body').on('click',".radioCheckItem",function(){
+            $('body').on('mdClick',".radioCheckItem",function(){
                 var type = $(this).attr("type");
                 if(type == 'car'){
                     //银行
@@ -252,19 +259,33 @@ $(function() {
                 }
                 $(this).attr("checkStatu","on");
                 $(this).find(".radioCheckItemImg").attr("src",that.gv.checkImgUrl);
-                console.log("aaaa")
+                
               //  that.confirmCheck();
-            })
+            }, {
+				htmdEvt: 'redemptionBuy_05'
+			})
 
             //点击全部，初始化最大赎回额度
-            mui("body").on('tap','.forAll',function(){
+            mui("body").on('mdClick','.forAll',function(){
                $(".msecond .msecond-one")[0].value=that.gv.dataList.enableShares;
-            })
+            }, {
+				htmdEvt: 'redemptionBuy_06'
+			})
 
-            //赎回确认         
-         $(".confirmeDemptionPay").on('click',function(){
+            // 交易规则
+            mui("body").on("mdClick", ".goPofTransactionRules", function (e) {
+                window.location.href = site_url.pofTransactionRules_url + '?fundCode=' + regulatory.gv.dataList.fundCode
+            }, {
+				htmdEvt: 'redemptionBuy_07'
+			});
+
+            //赎回确认
+            mui("body").on('mdClick','.confirmeDemptionPay',function(){         
+        // $(".confirmeDemptionPay").on('click',function(){
             $("#passwordWrap").show();
             payPass(that.cancelOrder)
+        }, {
+            htmdEvt: 'redemptionBuy_08'
         })
          $(".msecond input").change(function(){
              that.gv.nowRedempShare = $(this)[0].value;
@@ -281,7 +302,8 @@ $(function() {
          })
 
          //点击同意协议
-			that.getElements.iconCheck.on('click', function() {
+            mui("body").on('mdClick','.item2 .iconfont',function(){ 
+			//that.getElements.iconCheck.on('click', function() {
                 if ($(this).hasClass("check")) {
 					$(this).removeClass("check").html('&#xe668;');
 					that.getElements.confirmBtn.attr('disabled',true)
@@ -289,7 +311,13 @@ $(function() {
 					$(this).addClass("check").html('&#xe669;');
 					that.getElements.confirmBtn.removeAttr("disabled");
                 }
+			}, {
+				htmdEvt: 'redemptionBuy_09'
 			});
+            
+            mui('body').on('tap','.elasticLayer.transOutRule .elasticButtons',function(){
+				$('.elasticLayer.transOutRule').hide()
+			}) 
             
 
         },

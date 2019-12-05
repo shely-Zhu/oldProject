@@ -23,19 +23,17 @@
 </head>
 
 <body>
-     <!--加载图标-->
-     <!--@@include('@pathCommonViews/load.html')-->
      <!--没有数据显示图标-->
-     <!--@@include('@pathCommonViews/noDataImg.html')-->
-     <!--列表加载显示图标-->
-     <!--@@include('@pathCommonViews/loading/listLoading.html')-->
+     <!--@@include('@pathCommonCom/noData/noData.html', {"tipText": "暂无数据"})-->
+     <!--加载显示图标-->
+     <!--@@include('@pathCommonCom/loading/listLoading.html')-->
      <div id="top">
           @@include('@pathCommonViews/headBarConfig.html',{"bgColors":"#384A81,#2A3C70","showType":"1","pathName":"现金管理"})
           <div class="topCon">
                <div class="totalFundTitle">总资产（元）</div>
                <div class="totalFund justify_between flex">
                     <div class="fundValue"></div>
-                    <div class="fundKnow" htmdEvt="cashManagement_fundKnow">了解现金管理<i class="iconfont">&#xe600;</i></div>
+                    <div class="fundKnow" >了解现金管理<i class="iconfont">&#xe600;</i></div>
                </div>
                <div class="profitContent">
                     <div class="profitCon income">
@@ -90,11 +88,11 @@
                     </div>
                </div>
                <div class="itemBottom flex">
-                    <div class="fundIn" htmdEvt="cashManagement_fundIn">转入</div>
+                    <div class="fundIn" >转入</div>
                     {{#if show}}
-                    <div class="fundOut" htmdEvt="cashManagement_fundOut">转出</div>
+                    <div class="fundOut" >转出</div>
                     {{else}}
-                    <div class="fundOut-disbled" htmdEvt="cashManagement_fundOut">转出</div>
+                    <div class="fundOut-disbled">转出</div>
                     {{/if}}
                </div>
           </div>
@@ -104,8 +102,6 @@
 
 
      @@include('@pathInclude/views/footer.html')
-     <!-- 添加埋点 -->
-     @@include('@pathInclude/views/header.html')
      <script src="/financial/static/js/publicPlacement/cashManagement.js"></script>
  </body>
  </html>

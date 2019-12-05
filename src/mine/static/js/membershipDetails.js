@@ -6,7 +6,6 @@
 require('@pathCommonBase/base.js');
 require('@pathCommonJs/ajaxLoading.js');
 
-var tipAction = require('@pathCommonJs/components/tipAction.js');
 var swiperSizeMap = require('@pathCommonJs/components/swiper/swiperSizeMap.js');
 var generateTemplate = require('@pathCommonJsComBus/generateTemplate.js');
 
@@ -61,11 +60,13 @@ $(function(){
                         var index=this.activeIndex%num;
                         var text=$('.swiper-slide').eq(index).attr('data-text');
                         var link=$('.swiper-slide').eq(index).attr('data-link');
+                        debugger
+                        console.log(link,"地址")
                         var name=$('.swiper-slide').eq(index).attr('data-name');
                         $('.membershipDetailsContentBox h2').text(name);
                         $('.membershipDetailsContentBox p').text(text);     
                         $(".tel").attr("href", "tel:" + commonSetting.serverPhone).html(commonSetting.serverPhone)                   
-                        $('.linkBtnBox a').attr('href',link);
+                        // $('.linkBtnBox').html("<a href='javascript:;' class='linkBtn goldBgButton' onclick='setGoUrl({{" + link + "}}, "membershipDetails_1")'>了解详情1111</span>")
                     }
                 }
             });

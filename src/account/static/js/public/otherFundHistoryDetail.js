@@ -1,12 +1,14 @@
 
+
+
+
 require('@pathCommonBase/base.js');
 require('@pathCommonJs/ajaxLoading.js');
-
+var alwaysAjax = require('@pathCommonJs/components/alwaysAjax.js');
 var splitUrl = require('@pathCommonJs/components/splitUrl.js')();
 var generateTemplate = require('@pathCommonJsComBus/generateTemplate.js');
 
 $(function() {
-
     var somePage = {
         $e: {
             adjustmentRecord: $('.adjustmentRecord'), // 调仓记录
@@ -25,16 +27,20 @@ $(function() {
             var that = this;
             that.initMui();
             //that.getData()
-            // that.events();
+            that.events();
+        },
+        events:function(){
+            console.log(1)
+            alwaysAjax()
+           
         },
         //初始化mui的上拉加载
         initMui: function() {
             var that = this;
-            var height = windowHeight - $(".title").height() - $(".topTitle").height()-$(".messageTitle").height();
+            var height = windowHeight - $(".title").height() - $(".topTitle").height();
             if (!$('.list').hasClass('setHeight')) {
                 $('.list').height(height).addClass('setHeight');
             }
-            console.log(height)
             mui.init({
                 pullRefresh: {
                     container: '.contentWrapper',
@@ -76,9 +82,8 @@ $(function() {
         },
         getData: function(t) {
             var that = this;
-
-            var obj = [{ // 系统调仓记录列表
-                url: site_url.queryIncomeList_api,
+            var obj = [{ //历史明细
+                url: site_url.fundNetWorthList_api,
                 data: {
                     "pageCurrent": that.gV.pageCurrent, //非必须，默认为1
                     "pageSize": 10,//非必须，默认为10
@@ -87,13 +92,20 @@ $(function() {
                 //async: false,
                 needDataEmpty: true,
                 callbackDone: function(json) {
+                    json.data.pageList=json.data.pageList||[]
                     var data;
-                    if (json.data.list.length == 0) { // 没有记录不展示
+                    if (json.data.pageList.length == 0) { // 没有记录不展示
                         $(".list").hide()
+                        $(".title").hide()
                         that.$e.noData.show();
                         return false;
-                    } else if(json.status == "0000"&&json.data.list.length > 0){
-                        data = json.data.list;
+                    } else if(json.status == "0000"&&json.data.pageList.length > 0){
+                        data = json.data.pageList;
+                    }else if(json.status == "1000"){
+                        $(".list").hide()
+                        $(".title").hide()
+                        that.$e.noData.show();
+                        return false;
                     }
                     setTimeout(function() {
 
@@ -132,12 +144,21 @@ $(function() {
                         generateTemplate(data, that.$e.recordList, that.$e.adjustmentTemp);
                         //去掉mui-pull-bottom-pocket的mui-hidden
                         $('.contentWrapper').find('.mui-pull-bottom-pocket').removeClass('mui-hidden');
-
-
                     }, 200)
-
                 },
-
+                callbackNoData:function(){
+                    //没有数据时展示暂无数据
+                            $(".list").hide()
+                            $(".title").hide()
+                            that.$e.noData.show();
+                },
+                callbackFail: function(json) {
+                    tipAction(json.message);
+                    //隐藏loading，调试接口时需要去掉
+                       setTimeout(function() {
+                        that.$e.listLoading.hide();
+                    }, 100);
+                },
             }];
             $.ajaxLoading(obj);
         },

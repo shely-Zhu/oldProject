@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2019-11-26 14:42:56
- * @LastEditTime: 2019-12-04 16:53:10
+ * @LastEditTime: 2019-12-05 15:30:14
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \htjf-app\src\financial\static\js\publicPlacement\cashTransformOut.js
@@ -13,15 +13,8 @@
 * 
 */
 
-require('@pathIncludJs/vendor/config.js');
+require('@pathCommonBase/base.js');
 require('@pathCommonJs/ajaxLoading.js');
-
-//zepto模块
-require('@pathIncludJs/vendor/zepto/callback.js');
-require('@pathIncludJs/vendor/zepto/deferred.js');
-
-require('@pathCommonJs/components/headBarConfig.js');
-
 // require('@pathCommonCom/elasticLayer/transOutRule/transOutRule.js');
 var payPass = require('@pathCommonJsCom/payPassword.js');
 var generateTemplate = require('@pathCommonJsComBus/generateTemplate.js');
@@ -241,34 +234,49 @@ $(function () {
 		   var that = this;
 		   var obj = [{
 			   url:site_url.findProtocolContentRule_api,
+			   contentTypeSearch: true,
 			   data:{
 				   "id":id
 			   },
 			   needDataEmpty:true,
 			   callbackDone:function(res){
 				   console.log("999",res)
+				   var html = res.data.content;
+				   if(res.status == "0000"){
+					$('.elasticLayer.transOutRule').show()
+					   $(".elasticContent").html(html);
+				   }else{
+					$(".elasticContent").html("规则查询失败");
+				   }
 			   }
-		   }]
+		   }];
+		   $.ajaxLoading(obj)
 
 		},
 		events: function () {
 			var that = this;
 
 			/** 下面三个事件： 银行卡列表出现/隐藏 **/
-			$('body').on('tap','.onright',function(){
+			$('body').on('mdClick','.onright',function(){
 				$('.popup').css('display','block')
+			}, {
+				htmdEvt: 'cashTransformOut_01'
 			}) 
 
-			$('body').on('tap','.popup-close',function(){
+			$('body').on('mdClick','.popup-close',function(){
 				$('.popup').css('display','none')
+			}, {
+				htmdEvt: 'cashTransformOut_02'
 			}) 
 
-			$('body').on('tap','.popup-mask',function(){
+			$('body').on('mdClick','.popup-mask',function(){
 				$('.popup').css('display','none')
+			}, {
+				htmdEvt: 'cashTransformOut_03'
 			}) 
            
 		   //银行卡单选
-		   $('body').off("click",".cashCheckItem").on('click','.cashCheckItem',function(){
+		   $('body').off("mdClick",".cashCheckItem").on('mdClick','.cashCheckItem',function(){
 			   $(this).find(".imgLogo").attr("src",that.gv.checkImgUrl);
 			   $(this).siblings().find(".imgLogo").attr("src","");
 			   that.gv.defaultBankNo = $(this).attr("bankNo"); //默认银行代码
@@ -281,36 +289,45 @@ $(function () {
 			   that.$e.el_defaultBankName[0].textContent = $(this).attr("bankName");
 			   that.$e.el_defaultBankImgUrl.attr("src",$(this).attr("bankLogoUrl"));
 			   that.$e.el_defaultBankCode[0].textContent = $(this).attr("carNum")
+			}, {
+				htmdEvt: 'cashTransformOut_04'
 			})
 
 		   //普通与快速切换
-		   $('body').off("click",".tabWrapper .tab").on('click','.tabWrapper .tab',function(){   
+		   $('body').off("mdClick",".tabWrapper .tab").on('mdClick','.tabWrapper .tab',function(){   
 	           $(this).find(".activeIcon").addClass("active");
 			   $(this).siblings().find(".activeIcon").removeClass("active");
 			   var type = $(this).attr("type");
 			   that.gv.outType = type;
 			   if(type == 'fast'){
-				   that.gv.operationType = "1"
+				   that.gv.operationType = "1";
+				   $(".explain .left").eq(0).show();
+				   $(".explain .left").eq(1).hide();
 			   }else if(type == 'common'){
-				that.gv.operationType = "0"
+				that.gv.operationType = "0";
+				$(".explain .left").eq(1).show();
+				$(".explain .left").eq(0).hide();
 			   }
+			}, {
+				htmdEvt: 'cashTransformOut_05'
 			})
-		   $('body').off('click','.clearMoney').on('click','.clearMoney',function(){
+		   $('body').off('mdClick','.clearMoney').on('mdClick','.clearMoney',function(){
 			   that.gv.transformMoney = 0;
 			   that.$e.el_transformInput.val(0);
 
-		   })
+		   }, {
+			htmdEvt: 'cashTransformOut_06'
+		})
 			
 			//点击转出规则
-			$('body').on('tap','.explain .right',function(){
-				that.av.ruleId = $(this).find(".transformRule").attr("ruleId");
-				var id = $(this).find(".transformRule").attr("ruleId")
+			mui('body').on('tap','.explain .transformRule',function(){
+				that.gv.ruleId = $(this).attr("ruleId");
+				var id = $(this).attr("ruleId");
 				that.findProtocolContentRule(id);
-				$('.elasticLayer.transOutRule').show()
 			}) 
 
 			//点击同意协议
-			that.$e.iconCheck.on('click', function() {
+			that.$e.iconCheck.on('mdClick', function() {
                 if ($(this).hasClass("check")) {
 					$(this).removeClass("check").html('&#xe668;');
 					that.$e.confirmBtn.attr('disabled',true)
@@ -318,28 +335,57 @@ $(function () {
 					$(this).addClass("check").html('&#xe669;');
 					that.$e.confirmBtn.removeAttr("disabled");
                 }
+			}, {
+				htmdEvt: 'cashTransformOut_08'
 			});
 
 			  //转出金额
 			$(".msecond input").change(function(){
-				console.log("8888888");
 				that.gv.transformMoney = $(this)[0].value;
-				if(that.gv.transformTotalMoney<that.gv.transformMoney){
+				if( parseFloat( that.gv.transformTotalMoney)< parseFloat( that.gv.transformMoney) ){
 					$(".checkMessage").css({"display":"block"});
 				}else{
 				   $(".checkMessage").css({"display":"none"});
 				}
 			})
 
-			//赎回确认         
-			$(".confirmeDemptionPay").on('click',function(){
+			//赎回确认 
+			mui('body').on('mdClick','.confirmeDemptionPay',function(){   
+			//$(".confirmeDemptionPay").on('click',function(){
 				$("#passwordWrap").show();
 				payPass(that.cancelOrder)
+			}, {
+				htmdEvt: 'cashTransformOut_09'
 			})
 
-			$('body').on('tap','.elasticLayer.transOutRule .elasticButtons',function(){
+			//转出全部
+			mui('body').on('mdClick','.tranoutAllMoney',function(){ 
+			//$(".tranoutAllMoney").on('click',function(){
+				$(".msecond input").val(that.gv.transformTotalMoney);
+				that.gv.transformMoney = that.gv.transformTotalMoney
+			}, {
+				htmdEvt: 'cashTransformOut_11'
+			})
+			//转出金额清零
+			mui('body').on('mdClick','.clearMoney',function(){ 
+			//$(".clearMoney").on('click',function(){/
+				$(".msecond input").val("");
+				that.gv.transformMoney = "";
+			}, {
+				htmdEvt: 'cashTransformOut_12'
+			})
+			mui('body').on('mdClick','.elasticLayer.transOutRule .elasticButtons',function(){
 				$('.elasticLayer.transOutRule').hide()
+			}, {
+				htmdEvt: 'cashTransformOut_10'
 			}) 
+			//阅读规则
+			mui('body').on('tap','.file .agreementRule',function(){
+				that.gv.ruleId = $(this).attr("ruleId");
+				var id = $(this).attr("ruleId");
+				that.findProtocolContentRule(id);
+			})
+			
 		},
 
 		

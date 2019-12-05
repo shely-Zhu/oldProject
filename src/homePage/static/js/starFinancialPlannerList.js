@@ -5,8 +5,6 @@
 
 require('@pathCommonBase/base.js');
 require('@pathCommonJs/ajaxLoading.js');
-
-var tipAction = require('@pathCommonJs/components/tipAction.js');
 var alwaysAjax = require('@pathCommonJs/components/alwaysAjax.js');
 var splitUrl = require('@pathCommonJs/components/splitUrl.js')();
 var generateTemplate = require('@pathCommonJsComBus/generateTemplate.js');
@@ -312,15 +310,16 @@ $(function(){
         events:function(){
             var that=this;
             //点击定位文字弹出定位选择
-            mui('#activityDataBox').on('tap','.activityCityBox',function(){
+            mui("body").on('mdClick', '#activityDataBox .activityCityBox', function() {
                 $('#activityDataBox').hide();
                 $('#cityListBox').html('');
                 $('#loading').show();
                 that.getCityListData();
+            },{
+                'htmdEvt': 'starFinancia_00'
             });
             //点击定位选择效果
-            mui('#cityListBox').on('tap','.mui-indexed-list-item,.hotBox span',function(){
-                $(this).attr('htmdEvt','starFinancia_city')
+            mui("body").on('mdClick', '#cityListBox .mui-indexed-list-item,.hotBox span', function() {
                 var txt=$(this).text();
                 var code=$(this).attr('data-code');
                 var parentId=$(this).attr('data-parentId');
@@ -341,17 +340,19 @@ $(function(){
                 var activitySearchInputWidth=document.documentElement.clientWidth-$('#activitySearch a').width()-$('.activityCityBox').width()-30;
                 $('.activitySearchInput').width(activitySearchInputWidth);   
                 mui('.contentWrapper').pullRefresh().scrollTo(0, 0, 100);              
+            },{
+                'htmdEvt': 'starFinancia_01'
             });
             //点击定位选择头部返回效果
-            mui('#cityListBox').on('tap','.goBack',function(){
-                $(this).attr('htmdEvt','starFinancia_goBack')
+            mui("body").on('mdClick', '#cityListBox .goBack', function() {
                 $('#cityListBox').hide();
                 $('#activityDataBox').show();
                 mui('.contentWrapper').pullRefresh().scrollTo(0, 0, 10);         
+            },{
+                'htmdEvt': 'starFinancia_02'
             });
             //点击定位选择右侧索引效果
-            mui('#cityListBox').on('tap','.mui-indexed-list-bar a',function(){
-                $(this).attr('htmdEvt','starFinancia_index')
+            mui("body").on('mdClick', '#cityListBox .mui-indexed-list-bar a', function() {
                 var txt=$(this).text();
                 var len=$('.mui-table-view li').length;
                 var list=$('.mui-table-view li');
@@ -361,17 +362,20 @@ $(function(){
                         list.eq(i).addClass('active');
                     }
                 }
+            },{
+                'htmdEvt': 'starFinancia_03'
             });
             //点击活动列表跳转
-            mui('body').on('tap','.mui-card',function(){
-                $(this).attr('htmdEvt','starFinancia_list')
+            mui('body').on('mdClick','.mui-card',function(){
                 var actType=$(this).children('a').attr('data-actType');
                 var actId=$(this).children('a').attr('data-actId');
                 window.location.href=site_url.activityDetails_url+'?actType='+actType+'&'+'actId='+actId;
+            },{
+                'htmdEvt': 'starFinancia_04'
             });
             //搜索框输入触发查询数据
             mui('#activitySearch').on('keyup','.activitySearchInput input',function(){
-                $(this).attr('htmdEvt','starFinancia_search')
+                // $(this).attr('htmdEvt','starFinancia_search')
                 $('.recordList').html('');
                 // $('#loading').show();
                 that.gV.startPage=1;
@@ -381,13 +385,14 @@ $(function(){
             });
 
             //清除搜索框触发查询数据
-            mui('#activitySearch').on('tap','.mui-icon-clear',function(){
-                $(this).attr('htmdEvt','starFinancia_del')
+            mui('body').on('mdClick','#activitySearch .mui-icon-clear',function(){
                 $('.recordList').html('');
                 // $('#loading').show();
                 that.gV.startPage=1;
                 that.initMui();
                 mui('.contentWrapper').pullRefresh().scrollTo(0, 0, 100); 
+            },{
+                'htmdEvt': 'starFinancia_05'
             });
             
             // mui("body").on('tap', '.goTopBtn', function () {
@@ -400,10 +405,10 @@ $(function(){
             
                        
             //点击搜索框触发选中
-            $('.activitySearchInput *').on('tap',function(){
-                console.log(1);
-                $(this).attr('htmdEvt','starFinancia_SearchInput')
+            mui('body').on('mdClick','.activitySearchInput *',function(){
                 $('.activitySearchInput').children('input').focus();
+            },{
+                'htmdEvt': 'starFinancia_06'
             });
             //返回上一页
             $("#goBack").on("click",function(){

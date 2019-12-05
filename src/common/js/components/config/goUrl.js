@@ -490,6 +490,8 @@ module.exports = function() {
     this.myInvestmentPlan_url = go_url.no_url +  '/financial/views/publicPlacement/myInvestmentPlan.html'
     //我的 历史明细
     this.mineHistoryDetail_url = go_url.no_url +  '	/account/views/public/mineHistoryDetail.html'
+    //非货币基金历史明细
+    this.otherFundHistoryDetail_url = go_url.no_url +  '	/account/views/public/otherFundHistoryDetail.html'
     //联系我们 意见反馈
     this.concatUsAdvise_url = go_url.no_url +  '/mine/views/concatUs/concatUsAdvise.html'
     /*------------------- 财富学院 start ------------------------------*/
@@ -511,7 +513,9 @@ module.exports = function() {
     this.tradeDetailOne_url = go_url.no_url + '/personal/views/tradeDetail.html';
     //赎回明细
     this.detailLists_url = go_url.no_url + '/personal/views/detailLists.html';
-
-   
+    
+    //我的积分规则
+    this.imgModel_url =  go_url.no_url + '/include/views/imgModel.html';
+    
    
 };
