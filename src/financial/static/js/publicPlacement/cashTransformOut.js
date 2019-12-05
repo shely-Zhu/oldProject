@@ -55,7 +55,7 @@ $(function () {
 		   defaultOneDayNum:"", //默认银行单日限额
 		   
 		   
-		   checkImgUrl:'/financial/static/img/account_icon_check@2x.png', //银行卡勾选
+		   checkImgUrl:'/common/img/account_icon_check@2x.png', //银行卡勾选
 		   ruleList:[
 				{
 					"id":20,

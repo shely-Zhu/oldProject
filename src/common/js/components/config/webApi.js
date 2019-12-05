@@ -129,8 +129,6 @@ module.exports = function() {
     //成长值区间
     this.selectCustomerGrowthTier_api = http_url.web_url + '/account/selectCustomerGrowthTier';
 
-
-    this.findProtocolContent_api = http_url.web_url + '/content/frontend/findProtocolContent';
     //登录日志查询接口
     this.getUserTrackRecord_api = http_url.web_url + '/account/getUserTrackRecord';
 

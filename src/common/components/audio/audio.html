@@ -1,0 +1,33 @@
+<!--
+*音频组件html
+*purpleZhao   2019-12-04
+*
+*使用说明：
+*1，页面引入音频组件html————————————@@include('@pathCommonCom/audio/audio.html')
+*2，less文件引入音频组件less————————@import url("@pathCommonCom/audio/audio.less");
+*3，在对应的页面js中设置————————————var playAudio = require('@pathCommonCom/audio/audio.js');
+*4，在页面js中调用音频播放组件js方法——————————playAudio(url,title,size);
+*5，url:音频地址;title:音频对应的tile;size:音频的体积;
+* -->
+
+
+<div class="audioArea">
+
+    <div class="audioPlay flexbox">
+    <!-- 播放器 -->
+        <div class="audiocont">
+
+            <audio id='aud'  src='' duration="#01:58"></audio></audio>
+            <button id="control" class="play"><i  id="audioPlayer" class="iconfont playIcon audioPlayIcon">&#xe640;</i></button>
+
+        </div>
+
+        <ul class="audioTxt flex1">
+            <li class="ellipsis audioDisc"><!-- 11.13|介绍介绍介绍介绍介绍介绍介绍介绍介绍介绍介绍介绍 --></li>
+            <li class="audioTime"><span id="audioCurTime">00:00</span><span id="audioSize"><!-- 15.27MB --></span></li>
+
+        </ul>
+
+    </div>
+    <p class="autoTips">建议WIFI环境下播放</p>
+</div>

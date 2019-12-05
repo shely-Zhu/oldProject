@@ -19,26 +19,9 @@
             <div class="artTitle">
                 <p class="ellipsis_two"><!-- 11.13|资金买方资金买方头部文案头部文案头部文案头部文案头部文案 --></p>
             </div>
-            <div class="audioArea">
 
-                <div class="audioPlay flexbox">
-                <!-- 播放器 -->
-                    <div class="audiocont">
-
-                        <audio id='aud'  src='' duration="#01:58"></audio></audio>
-                        <button id="control" class="play"><i  id="audioPlayer" class="iconfont playIcon audioPlayIcon">&#xe640;</i></button>
-
-                    </div>
-
-                    <ul class="audioTxt flex1">
-                        <li class="ellipsis audioDisc"><!-- 11.13|介绍介绍介绍介绍介绍介绍介绍介绍介绍介绍介绍介绍 --></li>
-                        <li class="audioTime"><span id="audioCurTime">00:00</span><span><!-- 15.27MB --></span></li>
-
-                    </ul>
-
-                </div>
-                <p class="autoTips">建议WIFI环境下播放</p>
-            </div>
+            <!-- 引入音频组件 -->
+             <!-- @@include('@pathCommonCom/audio/audio.html') -->
 
         </div>
         <div id="contentWrap">
@@ -55,6 +38,6 @@
     @@include('@pathInclude/views/footer.html')
 
     <script src="/include/js/modelPage/articleTemplate.js"></script>
-    <script src="/include/js/modelPage/audio.js"></script>
+    <!-- <script src="/include/js/modelPage/audio.js"></script> -->
 </body>
 </html>

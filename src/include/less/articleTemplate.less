@@ -10,6 +10,9 @@
 @import url("@pathCommonLessCom/alertBox.less");
 @import url("@pathCommonLessCom/headBarConfig.less");
 
+/* 音频组件less */
+@import url("@pathCommonCom/audio/audio.less");
+
 body{
     background:@FFFFFF;
 }
@@ -71,56 +74,14 @@ body{
         }
 
     }
-    .playIcon{
-        font-size:0.7rem;
-        background:linear-gradient(139deg,rgba(251,226,189,1) 0%,rgba(246,194,134,1) 100%);
-        background-clip: text;
-        -webkit-background-clip: text;
-        text-fill-color: transparent;
-        -webkit-text-fill-color: transparent;
-    }
+
     .videoPlayIcon{
         position:absolute;
         top:50%;
         left:50%;
         margin:-0.35rem 0 0 -0.35rem;
     }
-    .audioArea{
-        display:none;
-        margin:0.3rem 0.3rem 0.15rem;
-        .audioPlay{
-            padding:0.2rem 0.3rem;
 
-            .audiocont{
-               /*  float:left; */
-            }
-            .audioTxt{
-                /* float:left; */
-                overflow:hidden;
-                margin-left: 0.2rem;
-
-            }
-
-            .audioDisc{
-                /* width:0; */
-                margin-bottom:0.11rem;
-                color:@333;
-
-            }
-            .audioTime{
-                span{
-                    display:inline-block;
-                    margin-right:0.2rem;
-                    color:@9B9B9B;
-                }
-            }
-        }
-        .autoTips{
-            font-size:0.24rem;
-            color:@9B9B9B;
-            text-align: center;
-        }
-    }
 }
 
 
