@@ -151,8 +151,10 @@ $(function() {
         events: function() {
             var that = this;
             //跳转到通知详情页面
-            mui("body").on('tap', '.systemInformItem', function() {
+            mui("body").on('mdClick', '.systemInformItem', function() {
                 window.location.href = site_url.noticeDetails_url + '?noticeId=' + $(this).attr('noticeId') + '&mesType=' + that.gV.mesType;
+            },{
+                'htmdEvt': 'notice_systemList1'
             })
         }
     };
