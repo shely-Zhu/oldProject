@@ -754,6 +754,8 @@ $(function(){
 			mui("body").on('tap', '.tabs>li' , function(){
 				$(this).addClass('active').siblings().removeClass('active');
 				$(".wrap>.panel").eq($(this).index()).addClass('active').siblings().removeClass('active');
+			}, {
+				htmdEvt: 'privatePlacementDetail_01'
 			});
 			//点击一键预约逻辑
 			mui("body").on('tap', '.tips-btn' , function(){
@@ -765,6 +767,8 @@ $(function(){
 				$(this).addClass('active');
 				
 				that.getTypeOneData(that.$e.lineType ,$(this).attr('num') );
+			}, {
+				htmdEvt: 'privatePlacementDetail_02'
 			})
 			// 募集账户的信息的拷贝
 			mui("body").on('tap', '.copy_btn', function() {
@@ -784,6 +788,8 @@ $(function(){
 					tipAction("请选择“拷贝”进行复制!");
 				});
 
+			}, {
+				htmdEvt: 'privatePlacementDetail_03'
 			});
 
 			// 立即预约
@@ -805,6 +811,8 @@ $(function(){
 					that.getConditionsOfOrder();//获取预约条件
 					
 				}
+			}, {
+				htmdEvt: 'privatePlacementDetail_04'
 			});
 		},
 	};

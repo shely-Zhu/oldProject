@@ -2,8 +2,6 @@
 require('@pathCommonBase/base.js');
 require('@pathCommonJsCom/tabScroll.js')
 require('@pathCommonJs/ajaxLoading.js');
-//黑色提示条
-var tipAction = require('@pathCommonJs/components/tipAction.js');
 var generateTemplate = require('@pathCommonJsComBus/generateTemplate.js');
 var splitUrl = require('@pathCommonJs/components/splitUrl.js')();
 
@@ -33,12 +31,14 @@ $(function() {
 			mui.init();
 			//模拟点击对应的type。定位到当前type下
 			
-			$(".mui-slider").on("slide",function(e){
+			mui("body").on('mdClick', '.mui-slider' , function(e){
 				var $this = $(this);
 				$("b").removeClass('borderBottom');
 				$("b").eq(e.detail.slideNumber).addClass('borderBottom');
 				that.getTemplateData($this.attr("belong"),e.detail.slideNumber)
-			})
+			},{
+                'htmdEvt': 'understandTab0'
+            })
 		},
 		//获取数据函数
 		getData: function(t) {
