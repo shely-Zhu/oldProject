@@ -154,7 +154,7 @@ $(function() {
             mui("body").on('mdClick', '.systemInformItem', function() {
                 window.location.href = site_url.noticeDetails_url + '?noticeId=' + $(this).attr('noticeId') + '&mesType=' + that.gV.mesType;
             },{
-                'htmdEvt': 'notice_systemList1'
+                'htmdEvt': 'notice_01'
             })
         }
     };
