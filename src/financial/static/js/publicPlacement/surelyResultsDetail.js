@@ -71,10 +71,12 @@ $(function() {
         $('.proess-error').hide();
         if(that.gV.flag == 'buy'){   //基金买入
           $(".buy-result").show()
+          $("#HeadBarpathName").html('买入结果')
           that.getData();  //查询结果可能要根据flag来
         }
         if(that.gV.flag == 'redemption'){  //基金赎回
           $(".redemption-result").show()
+          $("#HeadBarpathName").html('赎回结果')
           that.getData();  //查询结果可能要根据flag来
         }
         
@@ -95,6 +97,7 @@ $(function() {
           needDataEmpty: true,
           callbackDone: function(json) {
             if(json.status == '0000'){
+              debugger
               if(that.gV.payType == '0'){
                 $('#loading').hide();
                 $(".resultTop").hide()
