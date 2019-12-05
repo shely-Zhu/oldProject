@@ -255,20 +255,20 @@ var clickList = {
 	//wealthResearch.html
 	"fortune_12":{ type:'click', evtid: 'fortune_12', topic: '财富研究详情tab', info: ''} ,
 	//understandHT.html
-	"understandTab0":{ type:'click', evtid: '', topic: '了解恒天tab', info: ''} ,
+	"understandTab_00":{ type:'click', evtid: 'understandTab_00', topic: '了解恒天tab', info: ''} ,
 	//noticeCenter.html
-	"notice_conterList0":{ type:'click', evtid: '', topic: '消息中心', info: ''} ,
+	"notice_00":{ type:'click', evtid: 'notice_00', topic: '消息中心', info: ''} ,
 	//systemInforms.html
-	"notice_systemList1":{ type:'click', evtid: '', topic: '系统通知', info: ''}, 
+	"notice_01":{ type:'click', evtid: 'notice_01', topic: '系统通知', info: ''}, 
 	//starFinancialPlannerList.html
-	"starFinancia_location0":{ type:'click', evtid: '', topic: '城市定位', info: ''} ,
-	"starFinancia_city1":{ type:'click', evtid: '', topic: '热门城市', info: ''} ,
-	"starFinancia_goBack2":{ type:'click', evtid: '', topic: '返回', info: ''} ,
-	"starFinancia_index3":{ type:'click', evtid: '', topic: '城市索引', info: ''} ,
-	"starFinancia_list4":{ type:'click', evtid: '', topic: '理财师列表', info: ''} ,
+	"starFinancia_00":{ type:'click', evtid: 'starFinancia_00', topic: '城市定位', info: ''} ,
+	"starFinancia_01":{ type:'click', evtid: 'starFinancia_01', topic: '热门城市', info: ''} ,
+	"starFinancia_02":{ type:'click', evtid: 'starFinancia_02', topic: '返回', info: ''} ,
+	"starFinancia_03":{ type:'click', evtid: 'starFinancia_03', topic: '城市索引', info: ''} ,
+	"starFinancia_04":{ type:'click', evtid: 'starFinancia_04', topic: '理财师列表', info: ''} ,
 	// "starFinancia_search":{ type:'click', evtid: '', topic: '理财师查询', info: ''} ,
-	"starFinancia_del5":{ type:'click', evtid: '', topic: '取消搜索', info: ''} ,
-	"starFinancia_SearchInput6":{ type:'click', evtid: '', topic: '点击搜索框触发选中', info: ''} 
+	"starFinancia_05":{ type:'click', evtid: 'starFinancia_05', topic: '取消搜索', info: ''} ,
+	"starFinancia_06":{ type:'click', evtid: 'starFinancia_06', topic: '点击搜索框触发选中', info: ''} 
 }
 
 module.exports = clickList;

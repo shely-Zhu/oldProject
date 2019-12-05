@@ -62,7 +62,7 @@ $(function(){
             mui("body").on('mdClick', '.noticeItem' , function(){
                 window.location.href = site_url.systemInforms_url + '?mesType=' + $(this).attr('mesType');
             },{
-                'htmdEvt': 'notice_conterList0'
+                'htmdEvt': 'notice_00'
             })
         },
 	};
