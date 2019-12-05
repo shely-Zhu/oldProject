@@ -168,12 +168,11 @@ var clickList = {
 	//产品咨询
 	"consultProduct_submit" : { type:'click', evtid: '', topic: '产品咨询-提交按钮', info: ''} ,
 	//月度报告详情页
-	"monthReportDetail_holdPositions" : { type:'click', evtid: '', topic: '月度报告详情页-月末持仓总览', info: ''} ,
-	"monthReportDetail_monthBusinessDetailed" : { type:'click', evtid: '', topic: '月度报告详情页-本月交易明细', info: ''} ,
-	"monthReportDetail_immediateInvestment" : { type:'click', evtid: '', topic: '月度报告详情页-立即投资按钮', info: ''} ,
-	"monthReportDetail_immediateAppointment" : { type:'click', evtid: '', topic: '月度报告详情页-立即预约按钮', info: ''} ,
-	"monthReportDetail_immediateConsultation" : { type:'click', evtid: '', topic: '月度报告详情页-立即咨询按钮', info: ''} ,
-	"monthReportDetail_immediateBuy" : { type:'click', evtid: '', topic: '月度报告详情页-立即购买按钮', info: ''} ,
+	"monthReportDetail_01" : { type:'click', evtid: 'monthReportDetail_01', topic: '月度报告详情页-月末持仓总览本月交易明细tab', info: ''} ,
+	"monthReportDetail_02" : { type:'click', evtid: 'monthReportDetail_02', topic: '月度报告详情页-立即投资按钮', info: ''} ,
+	"monthReportDetail_03" : { type:'click', evtid: 'monthReportDetail_03', topic: '月度报告详情页-立即预约按钮', info: ''} ,
+	"monthReportDetail_04" : { type:'click', evtid: 'monthReportDetail_04', topic: '月度报告详情页-立即咨询按钮', info: ''} ,
+	"monthReportDetail_05" : { type:'click', evtid: 'monthReportDetail_05', topic: '月度报告详情页-立即购买按钮', info: ''} ,
 	//月度报告列表页
 	"monthReportList_01" : { type:'click', evtid: 'monthReportList_01', topic: '月度报告列表页-右箭头', info: ''} ,
 	"monthReportList_02" : { type:'click', evtid: 'monthReportList_02', topic: '浏览商品', info: ''} ,
