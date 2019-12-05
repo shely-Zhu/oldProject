@@ -100,19 +100,10 @@ $(function() {
                 if (!$('.list').hasClass('hasPullUp')) {
                     $('.list').find('.mui-pull-bottom-pocket').addClass('mui-hidden');
                 }
-
                 //显示loading
                 that.getElements.listLoading.show();
-
                 //这一句初始化并第一次执行mui上拉加载的callback函数
                 mui('.contentWrapper').pullRefresh().pullupLoading();
-                // mui('.contentWrapper').pullRefresh().refresh(true);
-                //隐藏loading，调试接口时需要去掉
-                //setTimeout(function(){
-                that.getElements.listLoading.hide();
-                //}, 2000);
-
-
                 //为$id添加hasPullUp  class
                 $('.list').addClass('hasPullUp');
             });
@@ -165,40 +156,12 @@ $(function() {
 
 
                 },
-                // callbackNoData: function() {
-                //     that.getElements.noData.show();
-                // }
+                callbackNoData: function() {
+                    that.getElements.noData.show();
+                }
 
             }];
             $.ajaxLoading(obj);
-        },
-        openTipCon: function(type, content, id) {
-
-
-
-
-            //弹层
-
-            // $('#tipCon .tipCon').html(content);
-            // $('.mask').show();
-            // $('#tipCon').show();
-            // //点击确定
-            // mui("body").on('tap', '.tipContainer .todo', function(e) {
-            //     if (type == 'assign') {
-            //         //转让方法
-
-            //     } else if (type == 'assignee') {
-            //         //受让方法
-            //     }
-            //     $('.mask').hide();
-            //     $('#tipCon').hide();
-            // })
-
-        },
-        openTipConOne: function(content) {
-            $('.mask').show();
-            $('#tipConOne').show();
-            $('#tipConOne .tipCon').html(content);
         },
         events: function() { //绑定事件
             var that = this;
@@ -246,7 +209,6 @@ $(function() {
                         };
                         $.elasticLayer(obj)
 
-                        // that.openTipCon('assign', '您确定要取消转让申请吗？', id);
 
                     } else if (type == 'assignee') {
                         var obj = {
@@ -260,23 +222,26 @@ $(function() {
                             },
                         };
                         $.elasticLayer(obj)
+                    } else if (type == 'appointment') {
+                        var obj = {
+                            p: '<p>您确定要预约吗？</p>',
+                            yesTxt: '确认',
+                            celTxt: '取消',
+                            hideCelButton: false,
+                            zIndex: 100,
+                            callback: function(t) {
+
+                            },
+                        };
+                        $.elasticLayer(obj)
                     }
 
-
-                })
-                // 点击我明白了
-            mui("body").on('tap', '.tipContainer .buttonOne', function(e) {
-                    $('.mask').hide();
-                    $('#tipConOne').hide();
-                    var conText = $(this).siblings('tipContent').html;
-                    that.openTipConOne(conText);
 
                 })
                 //点击状态文字出现弹框
             mui("body").on('tap', '.openTip', function(e) {
                     $('.mask').show();
-                    $('#tipConOne').show();
-                    var conText = $(this).siblings('tipContent').html;
+                    var conText = $(this).siblings('.tipContent').html();
                     var obj = {
                         p: '<p>' + conText + '</p>',
                         yesTxt: '我明白了',
