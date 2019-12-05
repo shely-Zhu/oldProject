@@ -461,7 +461,7 @@ $(function() {
 			})
 //			交易记录跳转
 			mui("body").on('tap', '.jyjl', function() {
-				window.location.href = site_url.transactionRecords_url;
+				window.location.href = site_url.transactionDetailPublic_url + "?fundCode=" + that.data.fundCode + "&tradeNo=" + that.data.publicFundDetail.tradeNo;
 			})
 //			分红方式跳转
 			mui("body").on('tap', '.dividend', function() {

@@ -36,8 +36,10 @@ $(function () {
         },
         event: function () {
             var that = this;
-            $(".list").on("click", function (e) {
+            $(".list").on("mdClick", function (e) {
                 that.gD.feedbackType = $(this).children("input").val() || 0
+            },{
+                'htmdEvt': 'concatUsAdvise_01'
             })
             $(".textarea").on('keyup', function () {
                 that.gD.feedbackDesc = $(".textarea").val()

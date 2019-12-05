@@ -71,10 +71,12 @@ $(function() {
         $('.proess-error').hide();
         if(that.gV.flag == 'buy'){   //基金买入
           $(".buy-result").show()
+          $("#HeadBarpathName").html('买入结果')
           that.getData();  //查询结果可能要根据flag来
         }
         if(that.gV.flag == 'redemption'){  //基金赎回
           $(".redemption-result").show()
+          $("#HeadBarpathName").html('赎回结果')
           that.getData();  //查询结果可能要根据flag来
         }
         
@@ -154,7 +156,7 @@ $(function() {
                 $(".changeNone").addClass("changeNone")
                 that.getBankInfo()
                 that.$el.amount1.html(json.data.tradeAmount)
-                that.$el.buyStatusText.html(json.data.tradeApplyDesc)
+                // that.$el.buyStatusText.html(json.data.tradeApplyDesc)
                 that.$el.bankName.html(json.data.bankName)
                 that.$el.bankNum.html(json.data.bankAccountMask.substr(json.data.bankAccountMask.length-4))
                 that.$el.payTypeBuy.html('汇款支付')
@@ -165,7 +167,7 @@ $(function() {
                 that.$el.amount2Buy.html(json.data.tradeAmount)
                 that.$el.banKImgBuy.attr('src',json.data.bankThumbnailUrl)
                 that.$el.bankName2Buy.html(json.data.bankName)
-                that.$el.bankNum2Buy.html(json.data.bankIdNo)
+                that.$el.bankNum2Buy.html(json.data.bankAccountMask.substr(json.data.bankAccountMask.length - 4))
               }
               if(that.gV.flag == 'redemption'){
                 that.$el.fundNameRedemption.html(json.data.fundName)
@@ -173,7 +175,7 @@ $(function() {
                 that.$el.amount2Redemption.html(json.data.tradeAmount)
                 that.$el.banKImgRedemption.attr('src',json.data.bankThumbnailUrl)
                 that.$el.bankName2Redemption.html(json.data.bankName)
-                that.$el.bankNum2Redemption.html(json.data.bankIdNo)
+                that.$el.bankNum2Redemption.html(json.data.bankAccountMask.substr(json.data.bankAccountMask.length - 4))
               }
               
               

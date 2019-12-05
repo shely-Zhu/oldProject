@@ -98,6 +98,9 @@ $(function () {
                         }
                     });
                     $("#HeadBarpathName").html("<span>"+that.gV.json.secuSht+"</span>"+"</br><span>"+that.gV.json.trdCode+"</span>");
+                    var saleFee = json.data.fundPurchaseFeeRate.detailList[0].fundFeeRate;
+                    var discount = Number(json.data.fundPurchaseFeeRate.detailList[0].fundFeeRate.split("%")[0])*json.data.discount/100 + '%'
+                    $(".divider-top").html(json.data.purSt + '、' + json.data.redemSt + '、' + '买入费率' + '(<span class="line-rate">' + saleFee + '</span>' + ' <span class="discount">' + discount + '</span>)')
                 },
                 callbackFail: function (json) {
                     tipAction(json.msg);

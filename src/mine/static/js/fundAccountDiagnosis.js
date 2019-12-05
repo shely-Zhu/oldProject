@@ -220,7 +220,7 @@ $(function() {
         },
         events: function() {
             var that = this;
-            mui("body").on("tap", ".account-holdings .down", function() {
+            mui("body").on("mdClick", ".account-holdings .down", function() {
                 if($(this).hasClass('up')){
                     $(this).removeClass('up')
                 }else{
@@ -228,12 +228,16 @@ $(function() {
                 }
                 that.gV.pageSize = 100000
                 that.getHoldData();
+            },{
+                'htmdEvt': 'fundAccountDiagnosis_01'
             });
 
 
             // 获取专属报告
-            mui("body").on("tap", ".btnBottom", function() {
+            mui("body").on("mdClick", ".btnBottom", function() {
                 that.getReport();
+            },{
+                'htmdEvt': 'fundAccountDiagnosis_02'
             });
         },
         //给饼图付渐变色
