@@ -64,7 +64,7 @@ $(function(){
                         $('.membershipDetailsContentBox h2').text(name);
                         $('.membershipDetailsContentBox p').text(text);     
                         $(".tel").attr("href", "tel:" + commonSetting.serverPhone).html(commonSetting.serverPhone)                   
-                        // $('.linkBtnBox').html("<a href='javascript:;' class='linkBtn goldBgButton' onclick='setGoUrl({{" + link + "}}, "membershipDetails_1")'>了解详情1111</span>")
+                        $('.linkBtnBox').html("<a href='" + link + "' class='linkBtn goldBgButton' onclick='setGoUrl({{" + link + "}} , 'detailsUnderstandingDetails_01')'>了解详情</span>")
                     }
                 }
             });

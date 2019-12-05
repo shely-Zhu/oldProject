@@ -58,12 +58,12 @@ module.exports = function(data, $ele, $id, type) {
         data[i].appointmentSigned = data[i].jfReserveStatus == 3 ? 1 : 0; //已签约
         data[i].appointmentSuccess = data[i].jfReserveStatus == 4 ? 1 : 0; //合同审核成功
         data[i].appointmentFailed = data[i].jfReserveStatus == 5 ? 1 : 0; //合同审核失败
-        data[i].appointmentFinished = data[i].jfReserveStatus == 4 || 5 ? 1 : 0; //合同成功和失败
+        data[i].appointmentFinished = data[i].jfReserveStatus == (4 || 5) ? 1 : 0; //合同成功和失败
         data[i].qualified = data[i].isQualified == 1 ? 1 : 0; //是否满足合格投资者限制
 
         //赎回
         data[i].businessType2 = (data[i].businessType == 2) || (data[i].tobeBussinessType == 2) ? 1 : 0;
-        data[i].redemptionRejected = data[i].redeemStatus == 4 || 5 ? 1 : 0; //已确认审核驳回状态
+        data[i].redemptionRejected = data[i].redeemStatus == (4 || 5) ? 1 : 0; //已确认审核驳回状态
         data[i].redemptionAuditSuccess = data[i].redeemStatus == 3 ? 1 : 0; //待确认审核通过状态
         data[i].redemptionSuccess = data[i].redeemStatus == 7 ? 1 : 0; //待确认审核通过状态
         //分红
@@ -109,9 +109,10 @@ module.exports = function(data, $ele, $id, type) {
         }
         //是否签约中 展示转受让双录状态
         data[i].signing = (data[i].assignSubStatus == '05') || (data[i].assigneeSubStatus == '03') ? 1 : 0;
-        console.log(data)
+
 
     }
-    //模板渲染页面
+    console.log(data)
+        //模板渲染页面
     generateTemplate(data, $ele, $id, type);
 };

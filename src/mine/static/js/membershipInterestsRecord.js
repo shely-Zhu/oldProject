@@ -202,7 +202,7 @@ $(function(){
 
                     window.location.href = site_url.articleTemplate_url+ '?articleBelong=9&applyType=0';
                 }, {
-                    'htmdEvt': 'feedback_functionalAbnormality'
+                    'htmdEvt': 'adolesceRecord_01'
                 });
             
 		},
