@@ -149,7 +149,6 @@ $(function() {
                   that.$el.payTypeRedemption.html('在线支付')
                 }
               }
-              debugger
               if(that.gV.payType == '1'){   // 买入汇款支付
                 $(".resultTop").show()
                 $(".resultTopTwo").hide()
