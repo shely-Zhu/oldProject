@@ -181,7 +181,9 @@ var clickList = {
 	//历史明细（没按钮）
 	//登录日志查询（没按钮）
 	//公募监管账户
-	"mineRegulatoryAccounts_01" : { type:'click', evtid: '', topic: '公墓监管账户-复制', info: ''} ,
+	"mineRegulatoryAccounts_01" : { type:'click', evtid: 'mineRegulatoryAccounts_01', topic: '公墓监管账户-复制', info: ''} ,
+	"mineRegulatoryAccounts_02" : { type:'click', evtid: 'mineRegulatoryAccounts_02', topic: '公墓监管说明-打开', info: ''} ,
+	"mineRegulatoryAccounts_03" : { type:'click', evtid: 'mineRegulatoryAccounts_03', topic: '公墓监管说明-隐藏', info: ''} ,
 	//收益明细页面（没按钮）
 	//我的奖励页面
 	"rewards_01" : { type:'click', evtid: 'rewards_01', topic: '我的奖励-查看详情', info: ''} ,
