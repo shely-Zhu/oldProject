@@ -238,37 +238,37 @@ var clickList = {
 	//fortuneCollegeList.html
 	// "banner" : { type:'click', evtid: '', topic: '轮播图图片', info: ''} ,
 	// "slider" : { type:'click', evtid: '', topic: '轮播图小圆点', info: ''} ,
-	"fortune_host0" : { type:'click', evtid: '', topic: '查看往期热词', info: ''} ,
-	"fortune_video1" : { type:'click', evtid: '', topic: '播放往期内容', info: ''} ,
-	"fortune_videoList2" : { type:'click', evtid: '', topic: '播放往期内容列表', info: ''} ,
-	"fortune_all3" : { type:'click', evtid: '', topic: '财富讲堂全部', info: ''} ,
-	"fortune_allTab4" : { type:'click', evtid: '', topic: '财富讲堂tab', info: ''} ,
-	"fortune_allList5" : { type:'click', evtid: '', topic: '财富讲堂全部列表', info: ''} ,
-	"fortune_studies6" : { type:'click', evtid: '', topic: '财富研究', info: ''} ,
-	"fortune_studiesList7" : { type:'click', evtid: '', topic: '财富研究列表', info: ''} ,
-	"fortune_studiesTab8" : { type:'click', evtid: '', topic: '财富研究tab', info: ''} ,
+	"fortune_00" : { type:'click', evtid: 'fortune_00', topic: '查看往期热词', info: ''} ,
+	"fortune_01" : { type:'click', evtid: 'fortune_01', topic: '播放往期内容', info: ''} ,
+	"fortune_02" : { type:'click', evtid: 'fortune_02', topic: '播放往期内容列表', info: ''} ,
+	"fortune_03" : { type:'click', evtid: 'fortune_03', topic: '财富讲堂全部', info: ''} ,
+	"fortune_04" : { type:'click', evtid: 'fortune_04', topic: '财富讲堂tab', info: ''} ,
+	"fortune_05" : { type:'click', evtid: 'fortune_05', topic: '财富讲堂全部列表', info: ''} ,
+	"fortune_06" : { type:'click', evtid: 'fortune_06', topic: '财富研究', info: ''} ,
+	"fortune_07" : { type:'click', evtid: 'fortune_07', topic: '财富研究列表', info: ''} ,
+	"fortune_08" : { type:'click', evtid: 'fortune_08', topic: '财富研究tab', info: ''} ,
 	//fortuneFlowKnown.html
-	"fortune_knownItem0" : { type:'click', evtid: '', topic: '早知道列表', info: ''} ,
+	"fortune_09" : { type:'click', evtid: 'fortune_09', topic: '早知道列表', info: ''} ,
 	//fortuneClassroom.html
-	"fortune_roomItem0" : { type:'click', evtid: '', topic: '财富讲堂列表', info: ''} ,
-	"fortune_sliderTab1" : { type:'click', evtid: '', topic: '财富讲堂详情tab', info: ''},
+	"fortune_10" : { type:'click', evtid: 'fortune_10', topic: '财富讲堂列表', info: ''} ,
+	"fortune_11" : { type:'click', evtid: 'fortune_11', topic: '财富讲堂详情tab', info: ''},
 	//wealthResearch.html
-	"fortune_wealthTab0":{ type:'click', evtid: '', topic: '财富研究详情tab', info: ''} ,
+	"fortune_12":{ type:'click', evtid: 'fortune_12', topic: '财富研究详情tab', info: ''} ,
 	//understandHT.html
 	"understandTab0":{ type:'click', evtid: '', topic: '了解恒天tab', info: ''} ,
 	//noticeCenter.html
-	"notice_conterList":{ type:'click', evtid: '', topic: '消息中心', info: ''} ,
+	"notice_conterList0":{ type:'click', evtid: '', topic: '消息中心', info: ''} ,
 	//systemInforms.html
-	"notice_systemList":{ type:'click', evtid: '', topic: '系统通知', info: ''}, 
+	"notice_systemList1":{ type:'click', evtid: '', topic: '系统通知', info: ''}, 
 	//starFinancialPlannerList.html
-	"starFinanciaLocation":{ type:'click', evtid: '', topic: '城市定位', info: ''} ,
-	"starFinancia_city":{ type:'click', evtid: '', topic: '热门城市', info: ''} ,
-	"starFinancia_goBack":{ type:'click', evtid: '', topic: '返回', info: ''} ,
-	"starFinancia_index":{ type:'click', evtid: '', topic: '城市索引', info: ''} ,
-	"starFinancia_list":{ type:'click', evtid: '', topic: '理财师列表', info: ''} ,
-	"starFinancia_search":{ type:'click', evtid: '', topic: '理财师查询', info: ''} ,
-	"starFinancia_del":{ type:'click', evtid: '', topic: '取消搜索', info: ''} ,
-	"starFinancia_SearchInput":{ type:'click', evtid: '', topic: '点击搜索框触发选中', info: ''} 
+	"starFinancia_location0":{ type:'click', evtid: '', topic: '城市定位', info: ''} ,
+	"starFinancia_city1":{ type:'click', evtid: '', topic: '热门城市', info: ''} ,
+	"starFinancia_goBack2":{ type:'click', evtid: '', topic: '返回', info: ''} ,
+	"starFinancia_index3":{ type:'click', evtid: '', topic: '城市索引', info: ''} ,
+	"starFinancia_list4":{ type:'click', evtid: '', topic: '理财师列表', info: ''} ,
+	// "starFinancia_search":{ type:'click', evtid: '', topic: '理财师查询', info: ''} ,
+	"starFinancia_del5":{ type:'click', evtid: '', topic: '取消搜索', info: ''} ,
+	"starFinancia_SearchInput6":{ type:'click', evtid: '', topic: '点击搜索框触发选中', info: ''} 
 }
 
 module.exports = clickList;
