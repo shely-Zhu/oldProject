@@ -152,32 +152,44 @@ var clickList = {
 	"privateList_detail" : { type:'click', evtid: '6', topic: '私募列表页-产品详情', info: ''} ,
 	/*************************************************************mine文件夹下******************************************************************************************/ 
 	//已报名活动
-	"activitiesEnrolment_ongoing " : { type:'click', evtid: '', topic: '已报名活动-进行中', info: ''} ,
-	"activitiesEnrolment_complete" : { type:'click', evtid: '', topic: '已报名活动-已结束', info: ''} ,
+	"activityEnrolment_01" : { type:'click', evtid: '', topic: '已报名活动-tab切换', info: ''} ,
+	"activityEnrolment_02" : { type:'click', evtid: '', topic: '已报名活动-分享给好友', info: ''} ,
 	//意见反馈
-	"feedback_functionalAbnormality" : { type:'click', evtid: '', topic: '意见反馈-功能异常', info: ''} ,
-	"feedback_safetyProblem" : { type:'click', evtid: '', topic: '意见反馈-安全问题', info: ''} ,
-	"feedback_productSuggestion" : { type:'click', evtid: '', topic: '意见反馈-产品建议', info: ''} ,
-	"feedback_otherQuestions" : { type:'click', evtid: '', topic: '意见反馈-其他问题', info: ''} ,
-	"feedback_addImg" : { type:'click', evtid: '', topic: '意见反馈-添加图片', info: ''} ,
-	"feedback_submit" : { type:'click', evtid: '', topic: '意见反馈-提交按钮', info: ''} ,
+	"concatUsAdvise_01" : { type:'click', evtid: '', topic: '意见反馈-单选按钮', info: ''} ,
+	"concatUsAdvise_02" : { type:'click', evtid: '', topic: '意见反馈-添加图片', info: ''} ,
+	"concatUsAdvise_03" : { type:'click', evtid: '', topic: '意见反馈-提交按钮', info: ''} ,
+	//诊断详情
+	"diagnosisDetail_01" :{ type:'click', evtid: '', topic: '诊断详情-雷达图', info: ''},
+	"diagnosisDetail_02" :{ type:'click', evtid: '', topic: '诊断详情-折线图', info: ''},
+	"diagnosisDetail_03" :{ type:'click', evtid: '', topic: '诊断详情-文案提示', info: ''},
+	//基金诊断搜索
+	"diagnosisSearch_01" :{ type:'click', evtid: '', topic: '基金诊断搜索-取消搜索按钮', info: ''},
+	"diagnosisSearch_02" :{ type:'click', evtid: '', topic: '基金诊断搜索-li标签的事件委托', info: ''},
+	//基金诊断
+	"fundAccountDiagnosis_01":{ type:'click', evtid: '', topic: '基金诊断-展开持仓按钮', info: ''},
+	"fundAccountDiagnosis_02":{ type:'click', evtid: '', topic: '基金诊断-获取专属报告按钮', info: ''},
+
+	//基金名称搜索
+	"diagnosisSearch_01" : { type:'click', evtid: 'diagnosisSearch_01', topic: '查询基金', info: ''} ,
+	"diagnosisSearch_02" : { type:'click', evtid: 'diagnosisSearch_02', topic: '跳转详情页', info: ''} ,
+	"diagnosisSearch_03" : { type:'click', evtid: 'diagnosisSearch_03', topic: '获取专属报告', info: ''} ,
 	//权益详情
-	"details_understandingDetails" : { type:'click', evtid: '', topic: '权益详情-了解详情', info: ''} ,
+	"detailsUnderstandingDetails_01" : { type:'click', evtid: 'detailsUnderstandingDetails_01', topic: '权益详情-了解详情', info: ''} ,
 	//成长值记录
-	"adolesceRecord_ruleDescription" : { type:'click', evtid: '', topic: '成长值记录-规则说明', info: ''} ,
+	"adolesceRecord_01" : { type:'click', evtid: 'adolesceRecord_01', topic: '成长值记录-规则说明', info: ''} ,
 	//产品咨询
-	"consultProduct_submit" : { type:'click', evtid: '', topic: '产品咨询-提交按钮', info: ''} ,
+	"consultProduct_01" : { type:'click', evtid: 'consultProduct_01', topic: '产品咨询-提交按钮', info: ''} ,
 	//月度报告详情页
-	"monthReportDetail_holdPositions" : { type:'click', evtid: '', topic: '月度报告详情页-月末持仓总览', info: ''} ,
-	"monthReportDetail_monthBusinessDetailed" : { type:'click', evtid: '', topic: '月度报告详情页-本月交易明细', info: ''} ,
-	"monthReportDetail_immediateInvestment" : { type:'click', evtid: '', topic: '月度报告详情页-立即投资按钮', info: ''} ,
-	"monthReportDetail_immediateAppointment" : { type:'click', evtid: '', topic: '月度报告详情页-立即预约按钮', info: ''} ,
-	"monthReportDetail_immediateConsultation" : { type:'click', evtid: '', topic: '月度报告详情页-立即咨询按钮', info: ''} ,
-	"monthReportDetail_immediateBuy" : { type:'click', evtid: '', topic: '月度报告详情页-立即购买按钮', info: ''} ,
+	"monthReportDetail_01" : { type:'click', evtid: 'monthReportDetail_01', topic: '月度报告详情页-月末持仓总览本月交易明细tab', info: ''} ,
+	"monthReportDetail_02" : { type:'click', evtid: 'monthReportDetail_02', topic: '月度报告详情页-立即投资按钮', info: ''} ,
+	"monthReportDetail_03" : { type:'click', evtid: 'monthReportDetail_03', topic: '月度报告详情页-立即预约按钮', info: ''} ,
+	"monthReportDetail_04" : { type:'click', evtid: 'monthReportDetail_04', topic: '月度报告详情页-立即咨询按钮', info: ''} ,
+	"monthReportDetail_05" : { type:'click', evtid: 'monthReportDetail_05', topic: '月度报告详情页-立即购买按钮', info: ''} ,
 	//月度报告列表页
-	"monthReportList_rightArrow" : { type:'click', evtid: '', topic: '月度报告列表页-右箭头', info: ''} ,
+	"monthReportList_01" : { type:'click', evtid: 'monthReportList_01', topic: '月度报告列表页-右箭头', info: ''} ,
+	"monthReportList_02" : { type:'click', evtid: 'monthReportList_02', topic: '浏览商品', info: ''} ,
 	//修改分红方式
-	"bonusMethod_bonusType" : { type:'click', evtid: '', topic: '修改分红方式', info: ''} ,
+	"bonusMethod_01" : { type:'click', evtid: 'bonusMethod_01', topic: '修改分红方式', info: ''} ,
 	//历史明细（没按钮）
 	//登录日志查询（没按钮）
 	//公募监管账户

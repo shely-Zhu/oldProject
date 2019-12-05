@@ -12,10 +12,12 @@ module.exports = function(className, pullupLoadingName, cutNumber) {
     var tops = parseInt(cutNumber?cutNumber:-100); 
     if ($(classNames).length > 0) {
         $(document).scroll(function() {
+            // 滚动距离 Math.abs($(classNames).offset().top - 64)
+            // 容器高度 $(classNames).parent().parent().height()
             if ($(classNames).offset().top < tops) {
                 tops -= 800;
                 mui(pullupLoadingNames).pullRefresh().pullupLoading();
-            }   
+            } 
         });
     }
 

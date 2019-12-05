@@ -490,6 +490,8 @@ module.exports = function() {
     this.membershipInterestsRecord_url = go_url.no_url +  '/mine/views/membershipInterests/membershipInterestsRecord.html'
     //我的定投计划
     this.myInvestmentPlan_url = go_url.no_url +  '/financial/views/publicPlacement/myInvestmentPlan.html'
+    //我的定投计划----已终止的定投计划
+    this.myInvestmentPlanH_url = go_url.no_url +  '/financial/views/publicPlacement/myInvestmentPlanH.html'
     //我的 历史明细
     this.mineHistoryDetail_url = go_url.no_url +  '	/account/views/public/mineHistoryDetail.html'
     //非货币基金历史明细

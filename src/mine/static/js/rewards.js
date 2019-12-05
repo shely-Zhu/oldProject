@@ -7,6 +7,7 @@ require('@pathCommonBase/base.js');
 require('@pathCommonJs/ajaxLoading.js');
 
 var generateTemplate = require('@pathCommonJsComBus/generateTemplate.js');
+var alwaysAjax = require('@pathCommonJs/components/alwaysAjax.js');
 
 $(function() {
 
@@ -246,6 +247,8 @@ $(function() {
             mui("body").on('tap', '.closeBtn', function() {
                 that.$e.tipBox.hide();//弹层隐藏
             })
+
+            alwaysAjax(".recordList");
 
         },
     };

@@ -241,14 +241,16 @@ $(function() {
 
 
             // 搜索取消按钮
-            mui("body").on("tap", ".mui-icon-clear", function (event) {
+            mui("body").on("mdClick", ".mui-icon-clear", function (event) {
                 that.$e.hotFundList.html('');
                 that.$e.resultWrap.find('.total').html('--');
                 that.$e.resultWrap.find('.word').html('');
+            },{
+                'htmdEvt': 'diagnosisSearch_01'
             })
             
             //为li标签点击事件委托
-            mui("body").on("tap", ".mui-row", function (event) {
+            mui("body").on("mdClick", ".mui-row", function (event) {
                 if (event.target) {
                     var fundCode = $($(this).find('.lightColor')[0]).attr("fundCode");
                     $("#searchInput").val("");
@@ -256,6 +258,8 @@ $(function() {
                     window.location.href = site_url.diagnosisDetail_url+'?fundCode='+fundCode;
                 }
                 
+            },{
+                'htmdEvt': 'diagnosisSearch_02'
             });
         },
     };

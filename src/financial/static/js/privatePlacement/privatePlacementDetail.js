@@ -788,7 +788,7 @@ $(function(){
 				htmdEvt: 'privatePlacementDetail_02'
 			})
 			// 募集账户的信息的拷贝
-			mui("body").on('mdClick', '.copy_btn', function() {
+			mui("body").on('mdClick', '.copy_btn', function(event) {
 				var $this = $(this);
 				var copyText = $this.siblings('div').text()
 				//实例化clipboard
@@ -804,6 +804,7 @@ $(function(){
 				clipboard.on("error", function (e) {
 					tipAction("请选择“拷贝”进行复制!");
 				});
+				clipboard.onClick(event);
 
 			}, {
 				htmdEvt: 'privatePlacementDetail_03'

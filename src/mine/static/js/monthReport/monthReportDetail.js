@@ -638,7 +638,7 @@ var monthReportDetail = {
 	},
 	events: function(){  //绑定事件
 		var that = this;
-		mui("body").on('tap', '.consult' , function(){
+		mui("body").on('mdClick', '.consult' , function(){
 
 			that.getElements.productName = $(this).attr('productName');
 			// 获取理财师
@@ -729,19 +729,27 @@ var monthReportDetail = {
 			}]
 			$.ajaxLoading(obj);
 
+		},{
+			'htmdEvt': 'monthReportDetail_04'
 		})
 		// 公募的立即购买--跳转到公募详情页
-		mui("body").on('tap', '.publicBuy' , function(){
+		mui("body").on('mdClick', '.publicBuy' , function(){
 			window.location.href = site_url.wealthIndex_url;
+		},{
+			'htmdEvt': 'monthReportDetail_05'
 		});
 
-		mui("body").on('tap', '.tabs>li' , function(){
+		mui("body").on('mdClick', '.tabs>li' , function(){
 			$(this).addClass('active').siblings().removeClass('active');
 			$(".wrap>.panel").eq($(this).index()).addClass('active').siblings().removeClass('active');
+		},{
+			'htmdEvt': 'monthReportDetail_01'
 		});
 
-		mui("body").on('tap', '.investBth' , function(){
+		mui("body").on('mdClick', '.investBth' , function(){
 			window.location.href = site_url.wealthIndex_url;
+		},{
+			'htmdEvt': 'monthReportDetail_02'
 		});
 
 

@@ -32,6 +32,7 @@ $(function () {
             pageSize: 10,
             listLength: 0,
             fixStateNum : 0,
+            stopPlanList:[]    // 已终止的定投计划
         },
         init: function () {
             var that = this;
@@ -137,6 +138,7 @@ $(function () {
                                 data[i].fixStateStr = "终止"
                                 data[i].show = false
                                 that.gV.fixStateNum ++
+                                that.gV.stopPlanList.push(data[i])
                             } else {
                                 data[i].fixStateStr = "暂停"
                                 data[i].show = false
@@ -205,6 +207,15 @@ $(function () {
                 window.location.href = site_url.pofCastSurelyDetails_url + '?scheduledProtocolId=' + scheduledProtocolId;
             }, {
 				htmdEvt: 'myInvestmentPlan_02'
+            });
+            
+            //跳往已终止的定投计划
+            mui("body").on("mdClick", ".goEndPlan", function () {
+                window.location.href = site_url.myInvestmentPlanH_url ;
+            
+                sessionStorage.setItem('stopList',JSON.stringify(that.gV.stopPlanList))
+            }, {
+				htmdEvt: 'myInvestmentPlan_01'
 			});
 
         },
