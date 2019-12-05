@@ -152,15 +152,21 @@ var clickList = {
 	"privateList_detail" : { type:'click', evtid: '6', topic: '私募列表页-产品详情', info: ''} ,
 	/*************************************************************mine文件夹下******************************************************************************************/ 
 	//已报名活动
-	"activitiesEnrolment_ongoing " : { type:'click', evtid: '', topic: '已报名活动-进行中', info: ''} ,
-	"activitiesEnrolment_complete" : { type:'click', evtid: '', topic: '已报名活动-已结束', info: ''} ,
+	"activityEnrolment_01" : { type:'click', evtid: '', topic: '已报名活动-tab切换', info: ''} ,
+	"activityEnrolment_02" : { type:'click', evtid: '', topic: '已报名活动-分享给好友', info: ''} ,
 	//意见反馈
-	"feedback_functionalAbnormality" : { type:'click', evtid: '', topic: '意见反馈-功能异常', info: ''} ,
-	"feedback_safetyProblem" : { type:'click', evtid: '', topic: '意见反馈-安全问题', info: ''} ,
-	"feedback_productSuggestion" : { type:'click', evtid: '', topic: '意见反馈-产品建议', info: ''} ,
-	"feedback_otherQuestions" : { type:'click', evtid: '', topic: '意见反馈-其他问题', info: ''} ,
-	"feedback_addImg" : { type:'click', evtid: '', topic: '意见反馈-添加图片', info: ''} ,
-	"feedback_submit" : { type:'click', evtid: '', topic: '意见反馈-提交按钮', info: ''} ,
+	"concatUsAdvise_01" : { type:'click', evtid: '', topic: '意见反馈-单选按钮', info: ''} ,
+	"concatUsAdvise_02" : { type:'click', evtid: '', topic: '意见反馈-添加图片', info: ''} ,
+	"concatUsAdvise_03" : { type:'click', evtid: '', topic: '意见反馈-提交按钮', info: ''} ,
+	//诊断详情
+	"diagnosisDetail_01" :{ type:'click', evtid: '', topic: '诊断详情-雷达图', info: ''},
+	"diagnosisDetail_02" :{ type:'click', evtid: '', topic: '诊断详情-折线图', info: ''},
+	"diagnosisDetail_03" :{ type:'click', evtid: '', topic: '诊断详情-文案提示', info: ''},
+	//基金诊断搜索
+	"diagnosisSearch_01" :{ type:'click', evtid: '', topic: '基金诊断搜索-取消搜索按钮', info: ''},
+	"diagnosisSearch_02" :{ type:'click', evtid: '', topic: '基金诊断搜索-li标签的事件委托', info: ''},
+	//基金诊断
+	"fundAccountDiagnosis_01":{ type:'click', evtid: '', topic: '基金诊断-li标签的事件委托', info: ''},
 	//权益详情
 	"details_understandingDetails" : { type:'click', evtid: '', topic: '权益详情-了解详情', info: ''} ,
 	//成长值记录

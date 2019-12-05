@@ -60,8 +60,6 @@ $(function(){
                         var index=this.activeIndex%num;
                         var text=$('.swiper-slide').eq(index).attr('data-text');
                         var link=$('.swiper-slide').eq(index).attr('data-link');
-                        debugger
-                        console.log(link,"地址")
                         var name=$('.swiper-slide').eq(index).attr('data-name');
                         $('.membershipDetailsContentBox h2').text(name);
                         $('.membershipDetailsContentBox p').text(text);     
