@@ -350,25 +350,25 @@ $(function () {
 		events: function () {
 			var that = this;
 			/** 下面三个事件： 银行卡列表出现/隐藏 **/
-			$('body').on('tap','.paymoney',function(){
+			mui("body").on('tap','.paymoney',function(){
 				that.gV.payType = $(this).attr('pay-type')
 				var useEnv = $(this).attr('pay-type')
 				$("#loading").show()
 				that.getBankCard(useEnv)
 			}) 
 
-			$('body').on('tap','.popup-close',function(){
+			mui("body").on('tap','.popup-close',function(){
 				$('.popup').css('display','none')
 				$('.popup-password').css('display','none')
 			}) 
 
-			$('body').on('tap','.popup-mask',function(){
+			mui("body").on('tap','.popup-mask',function(){
 				$('.popup').css('display','none')
 				$('.popup-password').css('display','none')
 			}) 
 
 			//点击转出规则
-			$('body').on('tap','.goRule',function(){
+			mui("body").on('tap','.goRule',function(){
 				window.location.href = site_url.transactionRules_url + '?fundCode=' + that.gV.fundCode;
 			}) 
 			
@@ -394,7 +394,7 @@ $(function () {
 				$('.transformInput').val(null)
 			})
 			//选中银行卡
-			$('body').on('tap','.bank-li',function(){
+			mui("body").on('tap','.bank-li',function(){
 				$(".bank-li .true").hide();
 				$(this).find(".true").show()
 				that.gV.bankName = $(this).attr('bankName');
@@ -436,18 +436,18 @@ $(function () {
 			}) 
 
 			//点击同意协议
-			that.$el.iconCheck.on('click', function() {
-                if ($(this).hasClass("check")) {
+			mui("body").on("tap", ".item2 .iconfont", function (e) {
+				if ($(this).hasClass("check")) {
 					$(this).removeClass("check").html('&#xe668;');
 					that.$el.confirmBtn.attr('disabled',true)
                 } else {
 					$(this).addClass("check").html('&#xe669;');
 					that.$el.confirmBtn.removeAttr("disabled");
                 }
-			});
+            });
 			
 			//确定
-			$('body').on('tap','.btn_box .btn',function(){
+			mui("body").on('tap','.btn_box .btn',function(){
 				if(Number(that.gV.balance) < Number(that.gV.minValue)){
 					tipAction('最小买入金额不能低于' + that.gV.minValue + '元')
 					return
@@ -468,47 +468,47 @@ $(function () {
 				
 			}) ;
 			//  ---《公募基金风险揭示及售前告知书》
-			$('body').on('tap','.setGoUrl',function(){
+			mui("body").on('tap','.setGoUrl',function(){
 				window.location.href = site_url.agreementModel_url + '?id=47' + '&financial=true'
 			}) ;
 
 			//  ---忘记密码
-			$('body').on('tap','#passwordWrap .forgetP',function(){
+			mui("body").on('tap','#passwordWrap .forgetP',function(){
 				//跳往原生页面去修改密码
 				window.location.href = site_url.pofForgotPassword_url
 			}) ;
 			//密码校验不通过   ---取消
-			$('body').on('tap','.elasticCel',function(){
+			mui("body").on('tap','.elasticCel',function(){
 				$(".pwd-input").val('')
 				$(".fake-box input").val('');
 				$('#passwordWrap').css('display','none')
 				$('.popup-password').css('display','none')
 			}) ;
 			//密码校验不通过   ---忘记密码
-			$('body').on('tap','.error1 .elasticCel',function(){
+			mui("body").on('tap','.error1 .elasticCel',function(){
 				//跳往原生页面去修改密码
 				window.location.href = site_url.pofForgotPassword_url
 			}) ;
 			//密码校验不通过   ---重新输入
-			$('body').on('tap','.error1 .elasticYes',function(){
+			mui("body").on('tap','.error1 .elasticYes',function(){
 				$(".pwd-input").val('')
 				$(".fake-box input").val('');
 				$('.popup-password').css('display','none')
 			}) ;
 			//密码校验不通过   ---找回密码
-			$('body').on('tap','.error2 .elasticYes',function(){
+			mui("body").on('tap','.error2 .elasticYes',function(){
 				//跳往原生页面去修改密码
 				window.location.href = site_url.pofRetrievePassword_url
 			}) ;
 			//密码校验不通过   ---重新输入
-			$('body').on('tap','.error3 .elasticYes',function(){
+			mui("body").on('tap','.error3 .elasticYes',function(){
 				$(".pwd-input").val('')
 				$(".fake-box input").val('');
 				$('.popup-password').css('display','none')
 				
 			}) ;
 			//添加银行卡 -- 跳往原生
-			$('body').on('tap','.popup-last',function(){
+			mui("body").on('tap','.popup-last',function(){
 				//跳往原生页面去修改密码
 				window.location.href = site_url.pofAddBankCard_url
 			}) ;
