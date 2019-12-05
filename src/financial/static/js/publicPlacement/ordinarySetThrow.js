@@ -5,28 +5,17 @@
 * 
 */
 
-require('@pathIncludJs/vendor/config.js');
+require('@pathCommonBase/base.js');
 //ajax调用
 require('@pathCommonJs/ajaxLoading.js');
 
-//zepto模块
-require('@pathIncludJs/vendor/zepto/callback.js');
-require('@pathIncludJs/vendor/zepto/deferred.js');
-require('@pathIncludJs/vendor/config.js');
-
 require('@pathIncludJs/vendor/mui/mui.picker.min.js');
-
-//黑色提示条
-var tipAction = require('@pathCommonJs/components/tipAction.js');
-require('@pathCommonJs/components/utils.js');
 require('@pathCommonJs/components/elasticLayer.js');
 require('@pathCommonJs/components/headBarConfig.js');
 var splitUrl = require('@pathCommonJs/components/splitUrl.js')();
 require('@pathCommonCom/elasticLayer/transOutRule/transOutRule.js');
 var popPicker = require('@pathCommonJsCom/popPicker.js');
 var generateTemplate = require('@pathCommonJsComBus/generateTemplate.js');
-//黑色提示条的显示和隐藏
-var tipAction = require('@pathCommonJsCom/tipAction.js');
 
 var payPass = require('@pathCommonJsCom/payPassword.js');
 

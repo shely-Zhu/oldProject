@@ -15,7 +15,7 @@
  </head>
  
  <body>
-     @@include('@pathCommonViews/load.html')
+     @@include('@pathCommonCom/loading/listLoading.html')
      <section class="container">
          @@include('@pathCommonViews/headBarConfig.html',{"pathName":"定投"})
          <div class="br"></div>
@@ -150,8 +150,6 @@
       @@include('@pathCommonCom/elasticLayer/transOutRule/transOutRule.html')
   
       @@include('@pathInclude/views/footer.html')
-      <!-- 添加埋点 -->
-      @@include('@pathInclude/views/header.html')
       <script src="/financial/static/js/publicPlacement/ordinarySetThrow.js"></script>
       <!-- <script src="/account/static/js/public/payPassword.js"></script> -->
   </body>

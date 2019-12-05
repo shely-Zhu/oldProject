@@ -13,9 +13,7 @@
      <title>转出</title>
    
  </head>
- <body>
-     <!-- @@include('../../common/views/load.html') -->
-     
+ <body>   
      <section class="container">
         @@include('@pathCommonViews/headBarConfig.html',{"pathName":"转出"}) 
         <div class="br"></div>
@@ -181,17 +179,11 @@
 
 
      @@include('@pathCommonCom/elasticLayer/transOutRule/transOutRule.html')
-
-
-     <!-- 加载中loading -->
-     <!-- @@include('@pathCommonViews/load.html') -->
  
      <!-- 加载中loading -->
-     @@include('@pathCommonViews/loading/listLoading.html')
+     @@include('@pathCommonCom/loading/listLoading.html')
  
      @@include('@pathInclude/views/footer.html')
-     <!-- 添加埋点 -->
-     @@include('@pathInclude/views/header.html')
 
      @@include('../../../common/views/payPassword.html') 
      <script src="/financial/static/js/publicPlacement/cashTransformOut.js"></script>
