@@ -177,7 +177,7 @@ var clickList = {
 	//月度报告列表页
 	"monthReportList_rightArrow" : { type:'click', evtid: '', topic: '月度报告列表页-右箭头', info: ''} ,
 	//修改分红方式
-	"bonusMethod_bonusType" : { type:'click', evtid: '', topic: '修改分红方式', info: ''} ,
+	"bonusMethod_01" : { type:'click', evtid: 'bonusMethod_01', topic: '修改分红方式', info: ''} ,
 	//历史明细（没按钮）
 	//登录日志查询（没按钮）
 	//公募监管账户
