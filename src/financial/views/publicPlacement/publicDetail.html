@@ -14,7 +14,7 @@
 <body>
 	<!-- @@include('@pathCommonCom/loading/listLoading.html')  -->
 	<div class="publicDetail ">
-		@@include('@pathCommonViews/headBarConfig.html',{"pathName":"普通基金","bgColors":"#475A95,#475A95","showType":"1"})
+		@@include('@pathCommonViews/headBarConfig.html',{"pathName":"普通基金","bgColors":"#475A95,#475A95","showType":"1","serviceType":"1"})
 		<div class="tplBox"></div>
 	</div>
 	@@include('@pathCommonViews/authenticationProcess.html',{"pathTitle":"认证信息"})
@@ -24,7 +24,7 @@
 		<script id="dataLists" type="text/x-handlebars-template">
 		<div>
 			<div class="topContent">
-				<div class="service"></div>
+				<!-- <div class="service"></div> -->
 				<div class="day_gain">七日年化</div>
 				<div class="day_gain_value">{{annYldRat}}%</div>
 				<div class="new_worth">万份收益({{trDate}})</div>
