@@ -76,13 +76,17 @@ $(function () {
       mui("body").on("tap", ".cashItem .itemTitle", function () {
         var fundCode = $(this).attr("fundCode")
         window.location.href = site_url.superStreasureDetail_url + '?fundCode='+ fundCode ;
-      });
+      }, {
+				htmdEvt: 'cashManagement_01'
+			});
 
       mui("body").on("tap", ".fundIn", function () {
         var fundCode = $(this).parent().parent().find(".itemTop .itemTitle span").eq(0).attr("fundCode")
         var fundName = $(this).parent().parent().find(".itemTop .itemTitle span").eq(0).attr("fundName")
         window.location.href = site_url.pofCashTransformIn_url + '?fundCode='+ fundCode + '&fundName=' + fundName;
-      });
+      }, {
+				htmdEvt: 'cashManagement_02'
+			});
       mui("body").on("tap", ".fundOut", function () {
         var money = $($(this).parent().siblings()[1]).find(".centerValue").eq(0)[0].textContent;
         var productName = $(this).parent().parent().find(".itemTop .itemTitle span").eq(0)[0].innerHTML;
@@ -94,7 +98,9 @@ $(function () {
         };
         sessionStorage.setItem("transformMessage",JSON.stringify(obj));
         window.location.href = site_url.pofCashTransformOut_url;
-      });
+      }, {
+				htmdEvt: 'cashManagement_03'
+			});
 
       // // 跳转详情页
       // mui("body").on("tap", ".hd_to_detail", function (e) {

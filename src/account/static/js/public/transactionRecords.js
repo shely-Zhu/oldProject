@@ -61,10 +61,10 @@ $(function () {
             var that = this;
             this.initMask();
             // 判断ccache是否有值
-            if(!sessionStorage.getItem("ccache")){
+            if (!sessionStorage.getItem("ccache")) {
                 // 在跳转的本页面 会让上一个页面做清空ccache的操作
                 this.initMui(that.gV.ajaxdata);
-            }else{
+            } else {
                 //返回按钮不会清空ccache的值
                 that.gV.ajaxdata = JSON.parse(sessionStorage.getItem("ccache"));
                 console.log(sessionStorage.getItem("ccache1").split(','))
@@ -79,11 +79,11 @@ $(function () {
                 that.gV.searchTitleList[1].title = sessionStorage.getItem("ccache1").split(',')[5]
                 that.gV.searchTitleList[2].title = sessionStorage.getItem("ccache1").split(',')[6]
                 // 自己清空它
-                sessionStorage.removeItem("ccache"); 
-                sessionStorage.removeItem("ccache1"); 
+                sessionStorage.removeItem("ccache");
+                sessionStorage.removeItem("ccache1");
                 this.initMui(that.gV.ajaxdata);
             }
-            
+
             this.setSearchTitle()
             //获取银行卡列表
             this.bankList()
@@ -102,7 +102,7 @@ $(function () {
         },
         //初始化mui的上拉加载
         initMui: function (da) {
-            var that = this;         
+            var that = this;
             var height = windowHeight - $(".HeadBarConfigBox").height() - $("#recordSearch").height() - 8;
             if (!$('.list').hasClass('setHeight')) {
                 $('.list').height(height).addClass('setHeight');
@@ -147,29 +147,33 @@ $(function () {
                 needDataEmpty: true,
                 callbackDone: function (json) {
                     var data;
-                    if (!$.util.objIsEmpty(json.data.pageLis)) { // 没有记录不展示
-                        that.gV.pageNum = 1;
+                    if (!json.data.pageList || json.data.pageList.length == 0) { // 没有记录不展示
+                        $('.list').find('.mui-pull-bottom-pocket').addClass('mui-hidden');
+                        $('.list').addClass('noMove');
+                        that.gV.pageNum = 1
+                        t.endPullupToRefresh(true);
+                        that.$e.listLoading.hide();
                         that.$e.noData.show();
                         return false;
                     } else {
-                        json.data.pageList.map(function(e){
-                            if(e.applyType == 0){
+                        json.data.pageList.map(function (e) {
+                            if (e.applyType == 0) {
                                 e.payin = true
-                            }else if(e.applyType == 1){
+                            } else if (e.applyType == 1) {
                                 e.payout = true
-                            }else if(e.applyType == 2){
+                            } else if (e.applyType == 2) {
                                 e.payfix = true
-                            }else if(e.applyType == 3){
+                            } else if (e.applyType == 3) {
                                 e.payred = true
                             }
 
-                            if(e.tradeApplyStatus == 0){
+                            if (e.tradeApplyStatus == 0) {
                                 e.tradeApplyStatusName = '交易失败'
-                            }else if(e.tradeApplyStatus == 1){
+                            } else if (e.tradeApplyStatus == 1) {
                                 e.tradeApplyStatusName = '交易成功'
-                            }else if(e.tradeApplyStatus == 2){
+                            } else if (e.tradeApplyStatus == 2) {
                                 e.tradeApplyStatusName = '待确认'
-                            }else if(e.tradeApplyStatus == 3){
+                            } else if (e.tradeApplyStatus == 3) {
                                 e.tradeApplyStatusName = '已撤单'
                             }
 
@@ -202,7 +206,7 @@ $(function () {
                         that.gV.pageNum++;
                         // 将交易记录列表插入到页面上
                         generateTemplate(data, that.$e.recordListWraperBoxId, that.$e.recordListTemplateId);
-                        alwaysAjax('.mui-table-view-cell',".contentWrapper",100);
+                        alwaysAjax('.mui-table-view-cell', ".contentWrapper", 100);
                     }, 200)
                 },
                 callbackFail: function (json) {
@@ -213,18 +217,18 @@ $(function () {
                     t.endPullupToRefresh(true);
                     that.$e.listLoading.hide();
                     tipAction(json.message);
-                    
+
                 },
-                callbackNoData:function(json){
+                callbackNoData: function (json) {
                     $('.list').find('.mui-pull-bottom-pocket').addClass('mui-hidden');
                     $('.list').addClass('noMove');
                     that.gV.pageNum = 1
                     t.endPullupToRefresh(true);
                     that.$e.listLoading.hide();
                     that.$e.noData.show();
-                    
+
                 },
-                
+
             }];
             $.ajaxLoading(obj);
         },
@@ -283,7 +287,7 @@ $(function () {
                     $(this).addClass("searchItemActive").siblings('.searchItem').removeClass('searchItemActive');
                     that.$e.recordSearchDetailBoxId.css("display", "block")
                     switch (titleId) {
-                        case '0': that.$e.recordSearchDetailBoxId.find(".detailItem").eq(that.gV.selectedAll).addClass("detailActive").siblings('.detailItem').removeClass('detailActive');break;
+                        case '0': that.$e.recordSearchDetailBoxId.find(".detailItem").eq(that.gV.selectedAll).addClass("detailActive").siblings('.detailItem').removeClass('detailActive'); break;
                         case '1': that.$e.recordSearchDetailBoxId.find(".detailItem").eq(that.gV.selectedstatus).addClass("detailActive").siblings('.detailItem').removeClass('detailActive'); break;
                         case '2': that.$e.recordSearchDetailBoxId.find(".detailItem").eq(that.gV.selectedTime).addClass("detailActive").siblings('.detailItem').removeClass('detailActive'); break;
                         case '3': that.$e.recordSearchDetailBoxId.find(".detailItem").eq(that.gV.selectedBankCard).addClass("detailActive").siblings('.detailItem').removeClass('detailActive'); break;
@@ -293,7 +297,7 @@ $(function () {
             })
             // 筛选列表内容的点击事件
             mui("body").on('tap', '.detailItem', function () {
-                
+
                 var detailId = $(this).attr("detailId")
                 var searchType = $(this).attr("searchType")
                 var data = $(this).attr("data")
@@ -303,16 +307,16 @@ $(function () {
                         case '1': that.gV.selectedAll = detailId - 1; that.gV.ajaxdata.applyType = data;
                             // 赋值回显
                             $('#recordSearchWrapper .searchItem').eq(0).children('span').text($(this).text().trim())
-                         break;
+                            break;
                         case '2': that.gV.selectedstatus = detailId - 1; that.gV.ajaxdata.tradeApplyStatus = data;
-                        $('#recordSearchWrapper .searchItem').eq(1).children('span').text($(this).text().trim()) 
-                        break;
+                            $('#recordSearchWrapper .searchItem').eq(1).children('span').text($(this).text().trim())
+                            break;
                         case '3': that.gV.selectedTime = detailId; that.gV.ajaxdata.timeNode = data;
-                        $('#recordSearchWrapper .searchItem').eq(2).children('span').text($(this).text().trim()) 
-                         break;
+                            $('#recordSearchWrapper .searchItem').eq(2).children('span').text($(this).text().trim())
+                            break;
                         case '4': that.gV.selectedBankCard = detailId - 1; that.gV.ajaxdata.tradeAcc = data;
-                        // $('#recordSearchWrapper .searchItem').eq(3).children('span').text($(this).text().trim()) 
-                        break;
+                            // $('#recordSearchWrapper .searchItem').eq(3).children('span').text($(this).text().trim()) 
+                            break;
                     }
                     $('.searchItem').removeClass("searchItemActive")
                     that.$e.recordSearchDetailBoxId.css("display", "none")
@@ -332,19 +336,19 @@ $(function () {
                 $('.list').find('.mui-pull-bottom-pocket').removeClass('mui-hidden');
                 //重新初始化
                 that.initMui(that.gV.ajaxdata);
-                mui('.contentWrapper').pullRefresh().scrollTo(0,0,0)
+                mui('.contentWrapper').pullRefresh().scrollTo(0, 0, 0)
             })
 
 
             //点击列表跳转
-            mui('body').on('tap','.recordItem',function(){
-                var applyId=$(this).attr('data-applyId');
-                var fundCombination=$(this).attr('data-fundCombination');
-                var fundCode=$(this).attr('data-fundCode');
-                var fundBusinCode=$(this).attr('data-fundBusinCode');
-                var allotType=$(this).attr('data-allotType');
-                var Fixbusinflag=$(this).attr('data-Fixbusinflag');
-                var scheduledProtocolId=$(this).attr('data-scheduledProtocolId');
+            mui('body').on('tap', '.recordItem', function () {
+                var applyId = $(this).attr('data-applyId');
+                var fundCombination = $(this).attr('data-fundCombination');
+                var fundCode = $(this).attr('data-fundCode');
+                var fundBusinCode = $(this).attr('data-fundBusinCode');
+                var allotType = $(this).attr('data-allotType');
+                var Fixbusinflag = $(this).attr('data-Fixbusinflag');
+                var scheduledProtocolId = $(this).attr('data-scheduledProtocolId');
                 //分红需要传的
                 var shares = $(this).attr('data-shares')
                 var fundName = $(this).attr('data-fundName')
@@ -355,31 +359,31 @@ $(function () {
                 //     tradeApplyStatus: '',//(0:失败，1：成功，2：待确认，3：已撤单)
                 //     timeNode: '',// * 1：近一个月 2：近三个月 3：近半年 4：近1年 5：近3年
                 //     tradeAcc: '',//交易账号(从银行卡列表取)
-    
+
                 // }
-                if(allotType == 3){
-                    window.location.href=site_url.publicTradeDetail_url+'?applyId='+applyId+'&fundCombination='+fundCombination 
-                                        +'&fundCode='+fundCode+'&fundBusinCode='+fundBusinCode+'&allotType='+allotType
-                                        +'&Fixbusinflag='+Fixbusinflag+'&shares='+shares+'&fundName='+fundName
-                                        +'&applyDate='+applyDate+'&autoBuyDesc='+autoBuyDesc ;
-                                        sessionStorage.setItem("ccache", JSON.stringify(that.gV.ajaxdata));
-                                        sessionStorage.setItem("ccache1", JSON.stringify(that.gV.selectedAll) + ','
-                                         + JSON.stringify(that.gV.selectedstatus) + ',' + that.gV.selectedTime + ',' 
-                                         + JSON.stringify(that.gV.selectedBankCard) + ',' +  $('#recordSearchWrapper .searchItem').eq(0).children('span').text() +
-                                         ',' +  $('#recordSearchWrapper .searchItem').eq(1).children('span').text() +  ',' +  $('#recordSearchWrapper .searchItem').eq(2).children('span').text() +
-                                         ',' +  $('#recordSearchWrapper .searchItem').eq(3).children('span').text());
-                }else{
-                    window.location.href=site_url.publicTradeDetail_url+'?applyId='+applyId+'&fundCombination='+fundCombination 
-                                        +'&fundCode='+fundCode+'&fundBusinCode='+fundBusinCode+'&allotType='+allotType
-                                        +'&Fixbusinflag='+Fixbusinflag+'&scheduledProtocolId='+scheduledProtocolId ;
-                                        sessionStorage.setItem("ccache", JSON.stringify(that.gV.ajaxdata));
-                                        sessionStorage.setItem("ccache1", JSON.stringify(that.gV.selectedAll) + ','
-                                         + JSON.stringify(that.gV.selectedstatus) + ',' + that.gV.selectedTime + ',' 
-                                         + JSON.stringify(that.gV.selectedBankCard) + ',' +  $('#recordSearchWrapper .searchItem').eq(0).children('span').text() +
-                                         ',' +  $('#recordSearchWrapper .searchItem').eq(1).children('span').text() +  ',' +  $('#recordSearchWrapper .searchItem').eq(2).children('span').text() +
-                                         ',' +  $('#recordSearchWrapper .searchItem').eq(3).children('span').text());
+                if (allotType == 3) {
+                    window.location.href = site_url.publicTradeDetail_url + '?applyId=' + applyId + '&fundCombination=' + fundCombination
+                        + '&fundCode=' + fundCode + '&fundBusinCode=' + fundBusinCode + '&allotType=' + allotType
+                        + '&Fixbusinflag=' + Fixbusinflag + '&shares=' + shares + '&fundName=' + fundName
+                        + '&applyDate=' + applyDate + '&autoBuyDesc=' + autoBuyDesc;
+                    sessionStorage.setItem("ccache", JSON.stringify(that.gV.ajaxdata));
+                    sessionStorage.setItem("ccache1", JSON.stringify(that.gV.selectedAll) + ','
+                        + JSON.stringify(that.gV.selectedstatus) + ',' + that.gV.selectedTime + ','
+                        + JSON.stringify(that.gV.selectedBankCard) + ',' + $('#recordSearchWrapper .searchItem').eq(0).children('span').text() +
+                        ',' + $('#recordSearchWrapper .searchItem').eq(1).children('span').text() + ',' + $('#recordSearchWrapper .searchItem').eq(2).children('span').text() +
+                        ',' + $('#recordSearchWrapper .searchItem').eq(3).children('span').text());
+                } else {
+                    window.location.href = site_url.publicTradeDetail_url + '?applyId=' + applyId + '&fundCombination=' + fundCombination
+                        + '&fundCode=' + fundCode + '&fundBusinCode=' + fundBusinCode + '&allotType=' + allotType
+                        + '&Fixbusinflag=' + Fixbusinflag + '&scheduledProtocolId=' + scheduledProtocolId;
+                    sessionStorage.setItem("ccache", JSON.stringify(that.gV.ajaxdata));
+                    sessionStorage.setItem("ccache1", JSON.stringify(that.gV.selectedAll) + ','
+                        + JSON.stringify(that.gV.selectedstatus) + ',' + that.gV.selectedTime + ','
+                        + JSON.stringify(that.gV.selectedBankCard) + ',' + $('#recordSearchWrapper .searchItem').eq(0).children('span').text() +
+                        ',' + $('#recordSearchWrapper .searchItem').eq(1).children('span').text() + ',' + $('#recordSearchWrapper .searchItem').eq(2).children('span').text() +
+                        ',' + $('#recordSearchWrapper .searchItem').eq(3).children('span').text());
                 }
-                
+
             });
         }
     };
