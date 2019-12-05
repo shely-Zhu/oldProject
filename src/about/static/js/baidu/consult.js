@@ -1,6 +1,7 @@
 /* 百度推广页
   *zhangyanping 2017/12/7
 */
+require('@pathCommonBase/base.js');
 require('@pathIncludJs/vendor/config.js');
 //zepto模块--callback
 require('@pathIncludJs/vendor/zepto/callback.js'); 

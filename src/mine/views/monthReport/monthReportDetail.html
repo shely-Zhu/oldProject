@@ -7,7 +7,7 @@
 <head>
 	@@include('@pathInclude/views/meta.html')
 	<link rel="stylesheet" href="/mine/static/css/monthReport/monthReportDetail.css">
-	<title></title>
+	<title>月度报告详情页</title>
 </head>
 <body>
 	<!-- @@include('@pathCommonViews/noDataImg.html')   -->
@@ -27,7 +27,8 @@
 						<p class="clientName"></p>
 					</div>
 					<div class="mui-col-xs-3 clientLevel">
-
+						<span class="iconfont star">&#xe63b;</span>
+						<span class="clientLevelDesc"></span>
 					</div>
 				</div>
 				<div class="mui-row clientMonth">
@@ -62,7 +63,7 @@
 						<div class="without noData holdNodata" id="emptyBox">
 							<div class="box vertical center">
 								<p class="nodataImg">
-									<img src="/include/img/empty.png" alt="">
+									<img src="/common/img/empty.png" alt="">
 								</p>
 								<p class="text"></p>
 							</div>
@@ -77,7 +78,7 @@
 						<div class="without noData tradeNoData" id="emptyBox">
 							<div class="box vertical center">
 								<p class="nodataImg">
-									<img src="/include/img/empty.png" alt="">
+									<img src="/common/img/empty.png" alt="">
 								</p>
 								<p class="text"></p>
 							</div>
@@ -98,12 +99,12 @@
 			<p class="holdStatus">您当前可能是处于<span class="lifeTerm"></span>，保持流动性的同时又能实现财富增值是您当前最主要的理财目标，你的风险等级是<span class="riskLevel"></span>，对风险有清晰的认识，并且您具备一定的投资经验，因此建议您增加<span class="addTypes"></span>资产配比，让您的资产更能抵御市场风险。</p>
 
 			<div class="holdProduct">
-				<p class="holdProduct">您当前的资产配比</p>
-				<div class='pieBox'>
+				<p class="holdProduct assetAnalyse">您当前的资产配比</p>
+				<div class='pieBox assetAnalyse'>
 					<div class='circle'></div>
 				</div>
-				<p class="holdProduct">建议您的资产配比</p>
-				<div class='pieBox'>
+				<p class="holdProduct configureAdvise">建议您的资产配比</p>
+				<div class='pieBox configureAdvise'>
 					<div class='circle'></div>
 				</div>
 			</div>
@@ -198,18 +199,20 @@
 				{{#if flag3}} 
 					<div class="otherAssets">
 						<p class="privateFundHeader">其他持仓</p>
-						<div class="datalist">
-							<div class="proName clearfix">
-								<span class="proNameBefore"></span>
-								<p class="proNameCon">{{fundName}}</p>
-							</div>
-							<div class="haveFundCon clearfix">
-								<div class="total fl">
-									<p>总资产(元)</p>
-									<span>{{totalAssets}}</span>
+						{{#each generalModelList}}
+							<div class="datalist">
+								<div class="proName clearfix">
+									<span class="proNameBefore"></span>
+									<p class="proNameCon">{{fundName}}</p>
+								</div>
+								<div class="haveFundCon clearfix">
+									<div class="total fl">
+										<p>总资产(元)</p>
+										<span>{{totalAssets}}</span>
+									</div>
 								</div>
 							</div>
-						</div>
+						{{/each}} 
 						<div class="referenceTip">注：定融定投数据由恒天明泽基金销售有限公司提供，本报告作聚合展示，仅供参考。</div>
 					</div>
 				{{/if}}
@@ -285,6 +288,7 @@
 		{{! 左侧页面列表}}
 		{{#each this}}
 			<div class="assetsCon clearfix">
+				
 				<h2>{{assetTypeDesc}}<span>（投资比例{{assetRatioDesc}}%）</span></h2>
 				<ul class="assetsList">
 					{{#each productList}}
@@ -306,7 +310,8 @@
 							</div>
 							{{!-- 私募 --}}
 							{{#if flag2}}
-								<a class="btn_order" href="/financial/views/privatePlacement/privatePlacementDetail.html?projectId={{productId}}:;" htmdEvt="monthReportDetail_immediateAppointment">立即预约</a>
+								<!-- <a class="btn_order" href="/financial/views/privatePlacement/privatePlacementDetail.html?projectId={{productId}}:;" htmdEvt="monthReportDetail_immediateAppointment">立即预约</a> -->
+								<a class="btn_order" href="javascript:;" onclick="setGoUrl( site_url.privatePlacementDetail_url+'?projectId={{productId}}', '')" htmdEvt="monthReportDetail_immediateAppointment">立即预约</a>
 							{{/if}}
 							{{!-- 其他 --}}
 							{{#if flag1}}
@@ -314,7 +319,8 @@
 							{{/if}}
 							{{!-- 公募 --}}
 							{{#if flag3}}
-								<a class="btn_order publicBuy" href="/financial/views/publicPlacement/publicDetail.html?fundCode={{productId}}" htmdEvt="monthReportDetail_immediateBuy">立即购买</a>
+								<!-- <a class="btn_order publicBuy" href="/financial/views/publicPlacement/publicDetail.html?fundCode={{productId}}" htmdEvt="monthReportDetail_immediateBuy">立即购买</a> -->
+								<a class="btn_order publicBuy" onclick="setGoUrl( site_url.pofPublicDetail_url+'?fundCode={{productId}}', '')" htmdEvt="monthReportDetail_immediateBuy">立即购买</a>
 							{{/if}}
 						</li>
 					{{/each}}

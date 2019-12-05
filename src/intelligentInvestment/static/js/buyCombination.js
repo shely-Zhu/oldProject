@@ -8,7 +8,7 @@
  * 页面必需参数 groupCode combinationName 
  * 页面选填参数 supplementary--是否追加
  */
-
+require('@pathCommonBase/base.js');
 require('../../../include/js/vendor/config.js');
 require('../../../include/js/vendor/zepto/callback.js');
 require('../../../include/js/vendor/zepto/deferred.js');

@@ -1,3 +1,5 @@
+
+
 module.exports = {
     //personal
     './personal/static/js/myPots': "./src/personal/static/js/myPots.js", //我的积分
@@ -210,7 +212,7 @@ module.exports = {
 
 
     //mine里面所有的二级页面
-    './mine/static/js/regulatoryAccounts': './src/mine/static/js/regulatoryAccounts.js',
+    './mine/static/js/mineRegulatoryAccounts': './src/mine/static/js/mineRegulatoryAccounts.js',
 
     // 月度报告列表页
     './mine/static/js/monthReport/monthReportList': './src/mine/static/js/monthReport/monthReportList.js',
@@ -242,10 +244,6 @@ module.exports = {
     //会员俱乐部
     './life/static/js/memberClub/activityList': "./src/life/static/js/memberClub/activityList.js",
     //会员俱乐部-暂无数据mine
-
-    './mine/static/js/memberClub/activityNoList': "./src/mine/static/js/memberClub/activityNoList.js",
-    //mui索引列表插件
-    './mine/static/js/memberClub/mui.indexedlist': "./src/mine/static/js/memberClub/mui.indexedlist.js",
 
     './life/static/js/memberClub/activityNoList': "./src/life/static/js/memberClub/activityNoList.js",
     //mui索引列表插件
@@ -372,7 +370,7 @@ module.exports = {
     './financial/static/js/publicPlacement/transactionRules': './src/financial/static/js/publicPlacement/transactionRules.js',
 
     // 购买触发提示
-    './financial/static/js/common/authenticationProcess': './src/financial/static/js/common/authenticationProcess.js',
+    // './financial/static/js/common/authenticationProcess': './src/financial/static/js/common/authenticationProcess.js',
 
 
     // 私募产品详情页
@@ -383,9 +381,9 @@ module.exports = {
     // 财富讲堂
     './homePage/static/js/fortuneClassroom': './src/homePage/static/js/fortuneClassroom.js',
     //历史明细
-    './mine/static/js/historyDetail': "./src/mine/static/js/historyDetail.js",
+    './account/static/js/public/mineHistoryDetail': "./src/account/static/js/public/mineHistoryDetail.js",
     //收益明细
-    './mine/static/js/returnsDetail': "./src/mine/static/js/returnsDetail.js",
+     './account/static/js/public/returnsDetail': "./src/account/static/js/public/returnsDetail.js",
 
     // 私募交易规则
     './account/static/js/private/transactionRules': "./src/account/static/js/private/transactionRules.js",

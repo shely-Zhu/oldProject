@@ -1,0 +1,77 @@
+<!-- /**  
+ * @Page:  公募监管账户
+ * @Author: caoqihai  
+ * @Date:   2019-11-14
+ * 
+ */ -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	@@include('@pathInclude/views/meta.html')
+	<link rel="stylesheet" href="/mine/static/css/mineRegulatoryAccounts.css">
+	<title>公募监管账户</title>
+</head>
+<body>
+	
+	<section class="container">
+		@@include('@pathCommonViews/headBarConfig.html',{"pathName":"公募监管账户"}) 
+		<div class="br"></div>
+		<div class="top">
+			<div class="toptitle">
+				<img src="/common/img/zhuyi@2x.png" alt="">
+				<span>监管账户说明</span>
+			</div>
+			<transition name='fade'>
+				<div class="topcontent">
+					<div class="topc" id="topc">--</div>
+					<img class="topimg" src="/mine/static/img/close@2x.png" alt="">
+				</div>
+			</transition>
+		</div>
+
+		<div class="content">
+			<ul>
+				<li>
+					<div class="title">户名</div>
+					<div class="copy">
+						<div id="name">--</div>
+						<span class="copy_btn" htmdEvt="regulatoryAccounts_copyName">复制</span>
+					</div>
+				</li>
+				<li>
+					<div class="title">账号</div>
+					<div class="copy">
+						<div id="number">--</div>
+						<span class="copy_btn" htmdEvt="regulatoryAccounts_copyAccountNo">复制</span>
+					</div>
+				</li>
+				<li>
+					<div class="title">行号</div>
+					<div class="copy">
+						<div id="linenum">--</div>
+						<span class="copy_btn" htmdEvt="regulatoryAccounts_copyBackNo">复制</span>
+					</div>
+				</li>
+				<li class="bordernone">
+					<div class="title">开户行</div>
+					<div class="copy">
+						<div id="openingBank">--</div>
+						<span class="copy_btn" htmdEvt="regulatoryAccounts_copyOpeningBank">复制</span>
+					</div>
+				</li>
+			</ul>
+		</div>
+		
+	</section>
+
+	<!-- 加载中loading -->
+	@@include('@pathCommonCom/loading/listLoading.html')
+
+	@@include('@pathInclude/views/footer.html')
+
+	<script src="/include/js/vendor/clipboard/clipboard.js"></script>
+	<script src="/mine/static/js/mineRegulatoryAccounts.js"></script>
+
+</body>
+</html>

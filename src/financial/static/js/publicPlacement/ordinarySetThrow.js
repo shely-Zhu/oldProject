@@ -59,7 +59,7 @@ $(function () {
 			fundName: splitUrl['fundName'] ? splitUrl['fundName'] : null,   //基金名称
 			fundCode: splitUrl['fundCode'] ? splitUrl['fundCode'] : null,  //基金代码
 			capitalMode: '', //资金方式
-			payType: '',   //支付方式（0、在线支付 1、汇款支付）
+			payType: '0',   //支付方式（0、在线支付 1、汇款支付）
 			bankName: '',  // 银行名称
 			
 			password: "",
@@ -84,7 +84,9 @@ $(function () {
 			bankNo: '',  //银行编号
 			bankAccount: '', // 银行账号
 			bankAccountMask:'', //银行账号密文
+			bankAccountSecret:'',//银行账号密文
 			nextDeductingDay:'',  //扣款周期
+			singleNum:0   //单日限额
 		},
 		webinit: function () {
 			var that = this;
@@ -93,10 +95,11 @@ $(function () {
 			that.events();
 			if(that.gV.type == 'add'){
 				that.getData();
+				$("#HeadBarpathName").html('新增定投')
 			}
 			if(that.gV.type == 'edit'){
-				console.log('w222')
 				that.getDetails();
+				$("#HeadBarpathName").html('修改定投')
 			}
 			
 			that.getAgreeUrl();
@@ -181,7 +184,6 @@ $(function () {
 					if (json.status == '0000' || json.status == '4000') {
 						var data = json.data;
 						$("#loading").hide()
-						debugger
 						that.$el.fundName.html(data.secuSht)
 						that.$el.fundCode.html(data.trdCode)
 						that.gV.fundName = data.secuSht
@@ -236,13 +238,15 @@ $(function () {
 						that.gV.bankNo = data.bankNo 
 						that.gV.bankAccount = data.bankAccount
 						that.gV.bankAccountMask = data.bankAccountMask
+						that.gV.bankAccountSecret = data.bankAccountSecret
 						that.gV.fixedPeriodMask = data.fixedPeriodMask
 						that.gV.shares = data.shares
 						that.gV.expiryDate = data.expiryDate
 						that.$el.cycleDate.html(data.fixedPeriodMask)
+						that.$el.transformInput.val(data.balance)
 						that.getNextCutPayment();
 						that.getRate(data.balance);
-						that.getBankCard('0')
+						that.getBankCard('0',false)
 					}
                   
                 },
@@ -253,7 +257,7 @@ $(function () {
 
 
 		//获取银行列表
-		getBankCard: function(useEnv) {
+		getBankCard: function(useEnv,type) {
             var that = this;
             var obj = [{ 
                 url: site_url.normalPofList_api,
@@ -267,35 +271,45 @@ $(function () {
 						// 将列表插入到页面上
 						var data = [] ;
 						data = json.data.pageList;
-						console.log('data',data)
+						data.forEach(function(element) {
+							element.after4Num = element.bankAccountMask.substr(element.bankAccountMask.length -4)
+						});
 						if(that.gV.type == 'add'){
 							generateTemplate(data, that.$el.popupUl, that.$el.bankListTemplate,true);
 							$("#loading").hide()
 							$('.popup').css('display','block')
 						}else{
-							for (var index = 0; index < data.length; index++) {
-								if(that.that.gV.bankAccountMask == data[index].bankAccountMask){
-									that.gV.bankName =data[index].bankName;
-									that.gV.bankNo = data[index].bankNo;
-									that.gV.tradeAcco = data[index].tradeAcco;
-									that.gV.bankAccount = data[index].bankAccount;
-									that.gV.bankAccountMask = data[index].bankAccountMask;
-									that.gV.capitalMode = data[index].capitalMode
-									var bankData = []
-									bankData.push({
-										bankThumbnailUrl:data[index].bankThumbnailUrl,
-										bankName:data[index].bankName,
-										bankNo:data[index].bankNo,
-										singleNum:data[index].singleNum,
-										oneDayNum:data[index].oneDayNum
-									});
-									generateTemplate(bankData, that.$el.onlinepay, that.$el.bankListCheckTemplate,true);
-									setTimeout(function(){
-										$('.popup').css('display','none')
-									},500)
+							if(type){
+								generateTemplate(data, that.$el.popupUl, that.$el.bankListTemplate,true);
+								$("#loading").hide()
+								$('.popup').css('display','block')
+							}else{
+								for (var index = 0; index < data.length; index++) {
+									if(that.gV.bankAccountSecret == data[index].bankAccountSecret){
+										that.gV.bankName =data[index].bankName;
+										that.gV.bankNo = data[index].bankNo;
+										that.gV.tradeAcco = data[index].tradeAcco;
+										that.gV.bankAccount = data[index].bankAccount;
+										that.gV.bankAccountMask = data[index].bankAccountMask;
+										that.gV.bankAccountSecret = data[index].bankAccountSecret;
+										that.gV.capitalMode = data[index].capitalMode
+										that.gV.singleNum = data[index].singleNum
+										var after4Num = data[index].after4Num
+										var bankData = []
+										bankData.push({
+											bankThumbnailUrl:data[index].bankThumbnailUrl,
+											bankName:data[index].bankName,
+											bankNo:data[index].bankNo,
+											singleNum:data[index].singleNum,
+											oneDayNum:data[index].oneDayNum,
+											after4Num:after4Num
+										});
+										generateTemplate(bankData, that.$el.onlinepay, that.$el.bankListCheckTemplate,true);
+									}
+									
 								}
-								
 							}
+							
 						}
 						
 					}
@@ -458,7 +472,7 @@ $(function () {
 					tradeAcco:that.gV.tradeAcco,
 					scheduledProtocolId:that.gV.scheduledProtocolId,
 					fixState:'A',
-					expiryDate:'',  //终止日期
+					expiryDate:that.gV.expiryDate,  //终止日期
 					tradePeriod:that.gV.tradePeriod,
 					shares:that.gV.shares,
 					balance:that.gV.balance,
@@ -531,7 +545,6 @@ $(function () {
 		},
 		//查询下次扣款日期
 		getNextCutPayment:function(){
-			debugger
 			var that = regulatory;
 			var deductingCycleDate = '';
 			var deductingDayDate = ''
@@ -614,17 +627,6 @@ $(function () {
 		 */
 		events: function () {
 			var that = this;
-
-			//开始时间
-			// document.getElementById('starttime').addEventListener('tap', function () {
-			// 	option = { "type": "date", "beginYear": "1980", "endYear": "2030" };
-			// 	var picker = new mui.DtPicker(option);
-			// 	picker.show(function (rs) {
-			// 		console.log(rs.text)
-			// 		// document.getElementById('starttime').innerHTML = rs.text;
-			// 	});
-			// }, false);
-
 			var list = [{
 				value: '110000',
 				text: '每周',
@@ -781,7 +783,7 @@ $(function () {
 				$("#loading").show()
 				$(this).find(".imgc").show();
 				$(this).find(".iimg").hide();
-				that.getBankCard(useEnv)
+				that.getBankCard(useEnv,true)
 			}) 
 
 			$('body').on('tap','.popup-close',function(){
@@ -800,8 +802,23 @@ $(function () {
 			}) 
 			
 			$("#transformInput").on('input propertychange',function(){
-				that.gV.balance = $(this).val();
-				that.getRate($(this).val());
+				that.gV.balance = Number($(this).val()).toFixed(2);
+				if($(this).val().includes(".") && $(this).val().split(".")[1].length >2){
+					tipAction('只能输入两位小数')
+					return
+				}else{
+					if(that.gV.type == 'add'){
+						if(Number($(this).val()) >= Number(that.gV.minValue) && Number($(this).val()) <= Number(that.gV.maxValue)){
+							that.getRate($(this).val());
+						}else if(Number($(this).val()) > that.gV.maxValue){
+							tipAction('最大买入金额不能超过' + that.gV.maxValue + '元')
+							return
+						}
+					}else{
+						that.getRate($(this).val());
+					}
+				}
+				
 			})
 			//清除输入框数字
 			$('body').on('tap','.deleteNum',function(){
@@ -818,13 +835,16 @@ $(function () {
 				that.gV.bankAccount = $(this).attr('bankAccount');
 				that.gV.bankAccountMask = $(this).attr('bankAccountMask');
 				that.gV.capitalMode = $(this).attr('capitalMode')
+				that.gV.singleNum =  $(this).attr('singleNum')
+				var after4Num = $(this).attr('after4Num')
 				var data = []
 				data.push({
 					bankThumbnailUrl:$(this).attr('bankThumbnailUrl'),
 					bankName:$(this).attr('bankName'),
 					bankNo:$(this).attr('bankNo'),
 					singleNum:$(this).attr('singleNum'),
-					oneDayNum:$(this).attr('oneDayNum')
+					oneDayNum:$(this).attr('oneDayNum'),
+					after4Num:after4Num
 				});
 				generateTemplate(data, that.$el.onlinepay, that.$el.bankListCheckTemplate,true);
 				setTimeout(function(){
@@ -845,27 +865,44 @@ $(function () {
 			
 			//确定
 			$('body').on('tap','.btn_box .btn',function(){
-				if(!!that.gV.bankAccountMask){
-					that.checkPayType()
-					
+				if(that.gV.type == 'add'){
+					if(Number(that.gV.balance) < Number(that.gV.minValue)){
+						tipAction('最小买入金额不能低于' + that.gV.minValue + '元')
+						return
+					}else{
+						if(!!that.gV.bankAccountSecret){
+							if(Number(that.gV.balance) > Number(that.gV.singleNum)){
+								tipAction('单笔金额不能超过' + that.gV.singleNum + '元')
+								return
+							}
+							that.checkPayType()
+							
+						}else{
+							//未选择银行卡提示信息
+							tipAction("请选择银行卡！");
+							return
+						}
+					}
 				}else{
-					//未选择银行卡提示信息
-					tipAction("请选择银行卡！");
-					return
+					if(!!that.gV.bankAccountSecret){
+						if(Number(that.gV.balance) > Number(that.gV.singleNum)){
+							tipAction('单笔金额不能超过' + that.gV.singleNum + '元')
+							return
+						}
+						that.checkPayType()
+						
+					}else{
+						//未选择银行卡提示信息
+						tipAction("请选择银行卡！");
+						return
+					}
 				}
+				
 			}) ;
-			// $("#pwd-input").on("input", function() {
-			// 	var password = $('#pwd-input').val() //密码
-			// 	if(password.length == 6){
-			// 		that.gV.password = password;
-			// 		// $(".popup-password").show()
-			// 		that.checkPassword()
-
-			// 	}
-			// })
-			
-			
-
+			//  ---《公募基金风险揭示及售前告知书》
+			$('body').on('tap','.setGoUrl',function(){
+				window.location.href = site_url.agreementModel_url + '?id=47' + '&financial=true'
+			}) ;
 			//  ---忘记密码
 			$('body').on('tap','#passwordWrap .forgetP',function(){
 				//跳往原生页面去修改密码

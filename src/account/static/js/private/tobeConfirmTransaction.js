@@ -23,9 +23,8 @@ require('@pathCommonJsCom/goTopMui.js');
 
 //黑色提示条的显示和隐藏
 var splitUrl = require('@pathCommonJs/components/splitUrl.js')();
-var tipAction = require('@pathCommonJsCom/tipAction.js');
 var transcationTem = require('@pathCommonJsCom/account/transcationTem.js');
-
+var alwaysAjax = require('@pathCommonJs/components/alwaysAjax.js');
 
 $(function() {
     var data = {
@@ -37,7 +36,7 @@ $(function() {
         },
         gV: { //一些设置
             aP: {
-                pageNo: 1,
+                pageNum: 1,
                 pageSize: 10,
             },
             aThis: null,
@@ -123,24 +122,24 @@ $(function() {
             var obj = [{
                 url: site_url.getTradeList_api,
                 data: {
-                    "pageNo": that.gV.aP.pageNo, //非必须，默认为1
+                    "pageNum": that.gV.aP.pageNum, //非必须，默认为1
                     "pageSize": "10", //非必须，默认为10
-                    isConfirm: that.gV.type,
-                    businessType: Number(that.gV.businessType),
+                    "isConfirm": that.gV.type,
+                    "businessType": that.gV.businessType,
                 },
                 callbackDone: function(json) {
                     var data;
-                    if (json.data.tradeList && json.data.tradeList.length == 0) { // 没有记录不展示
+                    if (json.data.pageList && json.data.pageList.length == 0) { // 没有记录不展示
                         $(".list").hide()
                         that.getElements.noData.show();
                         return false;
                     } else {
-                        data = json.data.tradeList;
+                        data = json.data.pageList;
                     }
                     setTimeout(function() {
                         if (data.length < that.gV.aP.pageSize) {
 
-                            if (that.gV.aP.pageNo == 1) { //第一页时
+                            if (that.gV.aP.pageNum == 1) { //第一页时
                                 if (data.length == 0) {
                                     // 暂无数据显示
                                     that.getElements.noData.show();
@@ -157,7 +156,7 @@ $(function() {
                             t.endPullupToRefresh(false);
                         }
                         // 页面++
-                        that.gV.aP.pageNo++;
+                        that.gV.aP.pageNum++;
                         //去掉mui-pull-bottom-pocket的mui-hidden
                         $('.contentWrapper').find('.mui-pull-bottom-pocket').removeClass('mui-hidden');
                         // 将列表插入到页面上
@@ -168,6 +167,7 @@ $(function() {
 
                 },
                 callbackNoData: function() {
+                    debugger
                     that.getElements.noData.show();
                 }
 
@@ -204,6 +204,7 @@ $(function() {
         },
         events: function() { //绑定事件
             var that = this;
+            alwaysAjax('.mui-table-view-cell');
             mui("body").on('tap', '.hopper', function(e) {
                     $('.mask').show();
                     $('.hopperCon').show();
@@ -217,8 +218,9 @@ $(function() {
                     that.gV.businessType = $(this).attr('data');
                     // 重置上拉加载
                     mui('.contentWrapper').pullRefresh().refresh(true);
-                    that.gV.aP.pageNo = 1;
+                    that.gV.aP.pageNum = 1;
                     that.getElements.contentWrap.html('');
+                    debugger
                     //重新初始化
                     that.initMui();
                     mui('.contentWrapper').pullRefresh().scrollTo(0, 0, 0);
@@ -247,7 +249,7 @@ $(function() {
 
                         // that.openTipCon('assign', '您确定要取消转让申请吗？', id);
 
-                    } else if (type == 'assignee')
+                    } else if (type == 'assignee') {
                         var obj = {
                             p: '<p>您确定要取消受让申请吗？</p>',
                             yesTxt: '确认',
@@ -258,7 +260,9 @@ $(function() {
 
                             },
                         };
-                    $.elasticLayer(obj)
+                        $.elasticLayer(obj)
+                    }
+
 
                 })
                 // 点击我明白了

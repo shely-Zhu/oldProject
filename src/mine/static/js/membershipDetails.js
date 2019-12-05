@@ -85,6 +85,7 @@ $(function(){
                 callbackDone: function(json) {
                     var data=json.data; 
                     generateTemplate(data,that.$e.membershipDetailsSilderBox,that.$e.membershipDetailsListTemplateId); 
+                    $(".lazyload").lazyload()
                     var n=0;
                     that.swiperInit(n,json.data.length);           
                 },

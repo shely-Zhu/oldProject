@@ -203,6 +203,23 @@ var pathList = {
 	"/homePage/views/notice/noticeDetail.html" :{ evtid: '', topic: '消息中心通知详情', info: ''} ,
 	"/homePage/views/notice/systemInforms.html" :{ evtid: '', topic: '消息中心系统通知', info: ''} ,
 	"/homePage/views/starFinancialPlannerList/starFinancialPlannerList.html" :{ evtid: '', topic: '明星理财师', info: ''} ,
+	//financial
+	"/financial/views/privatePlacement/privatePlacementDetail.html" :{ evtid: '', topic: '私募基金产品详情', info: ''} ,
+	"/financial/views/publicPlacement/cashManagement.html" :{ evtid: '', topic: '现金管理', info: ''} ,
+	"/financial/views/publicPlacement/cashTransformIn.html" :{ evtid: '', topic: '现金管理 - 转入', info: ''} ,
+	"/financial/views/publicPlacement/cashTransformOut.html" :{ evtid: '', topic: '现金管理 - 转出', info: ''} ,
+	"/financial/views/publicPlacement/castSurelyDetails.html" :{ evtid: '', topic: '我的定投_定投详情页面', info: ''} ,
+	"/financial/views/publicPlacement/demandFinancing.html" :{ evtid: '', topic: '活期理财', info: ''} ,
+	"/financial/views/publicPlacement/fundCompany.html" :{ evtid: '', topic: '我的定投_定投详情页面', info: ''} ,
+	"/financial/views/publicPlacement/fundFile.html" :{ evtid: '', topic: '基金档案', info: ''} ,
+	"/financial/views/publicPlacement/fundManager.html" :{ evtid: '', topic: '基金经理', info: ''} ,
+	"/financial/views/publicPlacement/fundTransformIn.html" :{ evtid: '', topic: '现金管理 - 买入', info: ''} ,
+	"/financial/views/publicPlacement/myInvestmentPlan.html" :{ evtid: '', topic: '我的定投计划', info: ''} ,
+	"/financial/views/publicPlacement/ordinarySetThrow.html" :{ evtid: '', topic: '普通基金产品详情页_定投', info: ''} ,
+	"/financial/views/publicPlacement/redemptionBuy.html" :{ evtid: '', topic: '赎回', info: ''} ,
+	"/financial/views/publicPlacement/surelyResults.html" :{ evtid: '', topic: '转入结果', info: ''} ,
+	"/financial/views/publicPlacement/surelyResultsDetail.html" :{ evtid: '', topic: '转入结果详情', info: ''} ,
+	"/financial/views/publicPlacement/transactionRules.html" :{ evtid: '', topic: '交易规则', info: ''} ,
 }
 
 

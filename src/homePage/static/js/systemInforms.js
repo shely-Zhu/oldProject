@@ -32,7 +32,7 @@ $(function() {
             that.initMui();
             this.events()
         },
-        getTitle() {
+        getTitle: function() {
             var mesType = Number(this.gV.mesType)
             switch (mesType) {
                 case 0:
@@ -88,7 +88,7 @@ $(function() {
             });
         },
         // 获取消息中心列表
-        getInformsListData(t) {
+        getInformsListData: function(t) {
             var that = this;
             var obj = [{
                 url: site_url.noticeAndTransDynamicList_api,
@@ -97,6 +97,7 @@ $(function() {
                     "pageSize": "10", //非必须，默认为10
                     "mesType": that.gV.mesType
                 },
+                needLogin: true, //需要判断登录是否过期
                 needDataEmpty: true,
                 callbackDone: function(json) {
                     var data;
@@ -142,7 +143,7 @@ $(function() {
             }];
             $.ajaxLoading(obj);
         },
-        dealData(data) {
+        dealData: function(data) {
             $.each(data, function(a, b) {
                 b.date = b.createTimeStr.split(" ")[0]
                 b.time = b.createTimeStr.split(" ")[1]

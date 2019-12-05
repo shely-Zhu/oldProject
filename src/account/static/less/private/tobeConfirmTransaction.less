@@ -6,8 +6,6 @@
  */
 
 @import url("@pathCommonLess/mui/resetMUI.less");
- 
- @import url("@pathCommonLessCom/tipAction.less");
  // @import url("@pathCommonLessCom/alertBox.less");
  @import url("@pathCommonLessCom/tabScroll.less");
  
@@ -37,6 +35,9 @@
   background: #000000;
   z-index: 1000;
   display: none;
+}
+.mui-table-view-cell.mui-active{
+  background-color: @F7FAFD;
 }
  .contentWrapper{
     width: 100%;
@@ -211,7 +212,7 @@
       .tipImg{
         width: 0.32rem;
         height: 0.32rem;
-        background-image: url("/account/static/img/tishi.png");
+        background-image: url("/common/img/tishi.png");
         background-size: 100% 100%;
         float: left;
         margin-top: 0.09rem;
@@ -219,11 +220,11 @@
 
       }
       .tipImg.fail{
-        background-image: url("/account/static/img/tishifail.png");
+        background-image: url("/common/img/tishifail.png");
         background-size: 100% 100%;
       }
       .tipImg.success{
-        background-image: url("/account/static/img/tishisussess.png");
+        background-image: url("/common/img/tishisussess.png");
         background-size: 100% 100%;
       }
       span{

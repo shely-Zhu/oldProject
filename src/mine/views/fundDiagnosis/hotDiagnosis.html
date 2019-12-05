@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2019-12-03 13:54:18
- * @LastEditTime: 2019-12-03 14:07:16
+ * @LastEditTime: 2019-12-03 17:50:17
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \htjf-app\src\mine\views\fundDiagnosis\hotDiagnosis.html
@@ -21,7 +21,7 @@
     <meta name="applicable-device" content="mobile">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black">
-    <link rel="stylesheet" href="/mine/fundDiagnosis/static/css/hotDiagnosis.css">
+    <link rel="stylesheet" href="../../../mine/static/css/hotDiagnosis.css">
     <title>基金诊断</title>
 </head>
 
@@ -61,7 +61,7 @@
         <!-- 底部按钮 -->
         <div class="mui-row btnBottom">
             <div class="mui-col-xs-1">
-                <img class="imgBottom" src="/mine/fundDiagnosis/static/img/baogao.png">
+                <img class="imgBottom" src="../../../mine/static/img/baogao.png">
             </div>
             <div class="mui-col-xs-10">
                 <p class="fontBold">点击获取专属诊断报告</p>
@@ -76,11 +76,11 @@
         <div class="mui-row hd_to_detail">
             <div class="mui-col-xs-1">
                 {{#if first}}
-                    <img class="imgNum" src="/mine/fundDiagnosis/static/img/first.png" >
+                    <img class="imgNum" src="/common/img/first.png" >
                 {{else if second}}
-                    <img class="imgNum" src="/mine/fundDiagnosis/static/img/second.png" >
+                    <img class="imgNum" src="/common/img/second.png" >
                 {{else if third}}
-                    <img class="imgNum" src="/mine/fundDiagnosis/static/img/third.png" >
+                    <img class="imgNum" src="/common/img/third.png" >
                 {{else}}
                     <p class="fontNum">{{serialNumber}}</p>
                 {{/if}}
@@ -99,7 +99,7 @@
     <!-- 添加埋点 -->
     @@include('@pathInclude/views/header.html')
     <script src="/include/js/iscroll.js"></script>
-    <script src="/mine/fundDiagnosis/static/js/hotDiagnosis.js"></script>
+    <script src="../../../mine/static/js/hotDiagnosis.js"></script>
 </body>
 
 </html>

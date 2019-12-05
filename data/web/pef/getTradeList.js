@@ -9,9 +9,12 @@ var Mock = require('mockjs');
 
 var data = Mock.mock({
     "data": {
-        totalPage: 20,
-        total: 1000,
-        tradeList: [{
+        pageItems: {
+            totalPage: 20,
+            total: 1000
+        },
+
+        pageList: [{
                 projectId: 1,
                 projectName: '恒天稳谊16号私募投资基 ZYFG恒天稳谊16号私募投资基ZYFG申购', //项目名称
                 businessCompareReference: '', //业绩比较基准(业务类型为 0:认购 1:申购时精确查找业绩比较基准)

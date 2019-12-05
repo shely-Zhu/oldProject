@@ -13,12 +13,10 @@ require('@pathCommonBase/base.js');
 // require('@pathCommonJsCom/utils.js');
 //ajax调用
 require('@pathCommonJs/ajaxLoading.js');
-
+var alwaysAjax = require('@pathCommonJs/components/alwaysAjax.js');
 require('@pathCommonJsCom/goTopMui.js');
 
 var splitUrl = require('@pathCommonJs/components/splitUrl.js');
-//黑色提示条的显示和隐藏
-// var tipAction = require('@pathCommonJsCom/tipAction.js');
 var generateTemplate = require('@pathCommonJsComBus/generateTemplate.js');
 
 
@@ -167,7 +165,8 @@ $(function() {
         },
         events: function() { //绑定事件
             var that = this;
-
+            //无缝滚动
+            alwaysAjax(".recordList")
 
         }
     };

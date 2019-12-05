@@ -6,8 +6,8 @@
 
 require('@pathCommonBase/base.js');
 require('@pathCommonJs/ajaxLoading.js');
-var tipAction = require('@pathCommonJsCom/tipAction.js');
 var generateTemplate = require('@pathCommonJsComBus/generateTemplate.js');
+var alwaysAjax = require('@pathCommonJs/components/alwaysAjax.js');
 var splitUrl = require('@pathCommonJs/components/splitUrl.js')();
 $(function() {
 	let somePage = {
@@ -33,7 +33,7 @@ $(function() {
             that.events()
 		},
         // 获取财富流向早知道的列表
-        getFlowKnownList(t) {
+        getFlowKnownList: function(t) {
             var that = this;
             var obj = [{
                 url: site_url.queryFortuneArticleList_api,
@@ -80,9 +80,8 @@ $(function() {
                 },
                 callbackNoData:function(){
                     //没有数据时展示暂无数据
-                    tipAction("没有数据")
-                    /*$(".list").hide()
-                    that.$e.noData.show();*/
+                    $(".list").hide()
+                    that.$e.noData.show();
                 },
                 callbackFail: function(json) {
                     tipAction(json.message);
@@ -94,7 +93,7 @@ $(function() {
             }];
             $.ajaxLoading(obj); 
         },
-        dealTime(data) {
+        dealTime: function(data) {
             $.each(data, function(a, b) {
                 if(b.articleTimeStr && b.articleTimeStr!= '') {
                     b.articleTimeStr = b.articleTimeStr.split(" ")[0].split("-")[1] + "." + b.articleTimeStr.split(" ")[0].split("-")[2]
@@ -151,18 +150,7 @@ $(function() {
                 var id = $(this).attr("id")
                 window.location.href = site_url.articleTemplate_url + '?id=' + id + '&articleBelong=' + that.gV.articleBelong + '&applyType=1'
             })
-            mui("body").on('tap', '.knownItem' , function(){
-                var externalUrl = $(this).attr("externalUrl")
-                window.location.href = externalUrl
-            })
-            var tops=-100;
-             $(document).scroll(function() {
-                console.log($('.knownList').offset())
-                    if($('.knownList').offset().top<tops){
-                        tops-=800;
-                        mui('.contentWrapper').pullRefresh().pullupLoading();
-                    }
-                });
+            alwaysAjax(".knownList")
 		}
 	};
     somePage.init();

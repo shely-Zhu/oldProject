@@ -5,11 +5,10 @@ require('@pathCommonBase/base.js');
 require('@pathCommonJsCom/utils.js');
 //ajax调用
 require('@pathCommonJs/ajaxLoading.js');
+var alwaysAjax = require('@pathCommonJs/components/alwaysAjax.js');
 // 切换
 require('@pathCommonJsCom/tabScroll.js');
 require('@pathCommonJsCom/goTopMui.js');
-//黑色提示条的显示和隐藏
-var tipAction = require('@pathCommonJsCom/tipAction.js');
 
 $(function() {
     var data = {
@@ -119,6 +118,7 @@ $(function() {
                 }
             });
             mui.ready(function() { //init后需要执行ready函数，才能够初始化出来
+                //$('.lazyload').lazyload();
                 //隐藏当前的加载中loading
                 if (!$id.hasClass('hasPullUp')) {
                     $id.find('.mui-pull-bottom-pocket').addClass('mui-hidden'); //上拉显示更多
@@ -131,6 +131,10 @@ $(function() {
                 //为$id添加hasPullUp  class
                 $($id).addClass('hasPullUp');
             });
+            //无缝滚动
+            /*setTimeout(function() {
+                alwaysAjax('#' + w + ' .mui-table-view-cell', s)
+            }, 1000)*/
         },
         getTabsListData: function(t) {
             var that = this;
@@ -157,10 +161,11 @@ $(function() {
                 },
                 callbackNoData:function(){
                     //没有数据时展示暂无数据
-                    /*$(".list").hide()
-                    $(".title").hide()*/
-                    //that.getElements.listLoading.hide();
+                    $(".list").hide()
+                    $(".title").hide()
+                    that.getElements.listLoading.hide();
                     that.getElements.noData.show();
+                    $(".br").css("display", "none")
                 },
                 callbackFail: function(json) {
                     tipAction(json.message);
@@ -236,8 +241,10 @@ $(function() {
                         if (that.gV.ajaxArr[that.gV.current_index].pageCurrent == 1) {
                             //第一屏
                             $id.find('.contentWrapper .mui-table-view-cell').html(that.html);
+                            //$(".lazyload").lazyload()
                         } else {
                             $id.find('.contentWrapper .mui-table-view-cell').append(that.html);
+                            //$(".lazyload").lazyload()
                         }
                         //获取当前展示的tab的索引
                         var index = $('#slider .tab-scroll-wrap .mui-active').index(),
@@ -288,7 +295,7 @@ $(function() {
             }]
             $.ajaxLoading(obj);
         },
-        dealData(data) {
+        dealData: function(data) {
             $.each(data, function(a, b) {
                 if(b.articleBelong == 2) {
                     b.isLive = true

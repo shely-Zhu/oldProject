@@ -14,9 +14,8 @@ require('@pathCommonJsCom/tabScroll.js');
 require('@pathCommonJsCom/goTopMui.js');
 
 require('@pathCommonJs/components/headBarConfig.js');
-//黑色提示条的显示和隐藏
-var tipAction = require('@pathCommonJsCom/tipAction.js');
 var splitUrl = require('@pathCommonJs/components/splitUrl.js')();
+var alwaysAjax = require('@pathCommonJs/components/alwaysAjax.js'); 
 
 
 $(function() {
@@ -203,7 +202,11 @@ $(function() {
 
                 // mui(s).pullRefresh().disablePullupToRefresh()
             });
-
+                //无缝滚动
+            setTimeout(function() {
+                //无缝滚动
+                alwaysAjax('#' + w + ' .mui-table-view-cell', s)
+            }, 1000)
             // mui('.mui-slider').slider().stopped = true;
         },
         getData: function($id, t) { // 获取产品数据的公用ajax方法;$id为各区域的 scroll+num id
@@ -382,7 +385,15 @@ $(function() {
         },
         events: function() { //绑定事件
             var that = this;
+            alwaysAjax("myAsset")
         }
     };
     data.init();
+      //添加埋点待定这样
+    function attr(name, attribute, value) {
+        name.attr(attribute, value)
+    }
+    setTimeout(() => {
+        attr($('#slider .tab-scroll-wrap .mui-control-item'), 'htmdEvt', 'fortune_wealthTab')
+    }, 1000)
 });

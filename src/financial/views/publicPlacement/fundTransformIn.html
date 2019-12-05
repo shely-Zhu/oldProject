@@ -29,13 +29,15 @@
                 <div class="mfirst-one">买入金额</div>
                 <div class="mfirst-two">
                     <span>交易规则</span> 
-                    <a href="javaScript:;" class="iconfont iconone goRule" href="javascript:;">&#xe67d;</a>
+                    <a href="javaScript:;" class="iconfont iconone goRule">&#xe67d;</a>
                 </div>
             </div>
             <div class="msecond">
             	<span class="msecond-one">￥</span>
                 <input class="transformInput" id="transformInput" type="number">
-                <img src="/financial/static/img/icon_delete@2x.png" class="deleteNum" alt="">
+                <a href="javaScript:;" class="deleteNum">
+                    <img src="/financial/static/img/icon_delete@2x.png" alt="">
+                </a>
              </div>
              <div class="pay">
                  <p class="CostEstimate">
@@ -47,7 +49,7 @@
                     <span class="date"></span>
                  </p>
                  <p class="brforre15">
-                    15点之后的交易申请将作为<span class="data"></span>的申请
+                    15点之后的交易申请将作为<span class="date"></span>的申请
                 </p>
                 <p class="after15">
                     15:00后采用的转账汇款方式的认申购数将视为下一个工作日的交易款项。
@@ -94,7 +96,7 @@
             <div class="onright-left-one">
                 <img src="{{bankThumbnailUrl}}" alt="">
                 <i>{{bankName}}</i>
-                <span>{{bankNo}}</span>
+                <span>{{after4Num}}</span>
             </div>
             <div class="onright-left-two">单笔限额{{singleNum}}，单日限额{{oneDayNum}}</div>
             {{/each}}
@@ -103,7 +105,7 @@
             <div>
                 <span class="file">
                     <a href="javascript:;" class="item2"><span class="iconfont">&#xe668;</span><span>已阅读并同意</span></a>
-                    <a href="/include/views/agreementModel.html?id=47">《公募基金风险揭示及售前告知书》</a>、
+                    <a href="javascript:;" class="setGoUrl">《公募基金风险揭示及售前告知书》</a>、
                     <a class="contract" href="javascript:;">《基金合同》</a>、
                     <a class="recruiting" href="javascript:;">《招募说明书》</a>
                 </span>
@@ -127,7 +129,7 @@
                 <!-- <div class="popup-close"> -->
                 <img class="popup-close" src="/financial/static/img/Nav Bar_icon_close_black@2x.png" alt="">
                 <!-- </div> -->
-                <div class="tit">选择在线支付银行卡</div>
+                <div class="tit bank-title"></div>
             </div>
             <ul class="popup-ul">
 
@@ -135,21 +137,21 @@
             <script id="bankList-template" type="text/x-handlebars-template">
                 {{#each this}}
                 <li class="popup-li bank-li" useEnv="{{useEnv}}" capitalMode="{{capitalMode}}" bankThumbnailUrl="{{bankThumbnailUrl}}" tradeAcco="{{tradeAcco}}" bankName="{{bankName}}" bankNo="{{bankNo}}" singleNum="{{singleNum}}"
-                 oneDayNum="{{oneDayNum}}" bankAccountSecret="{{bankAccountSecret}}">
+                 oneDayNum="{{oneDayNum}}" bankAccountSecret="{{bankAccountSecret}}" after4Num="{{after4Num}}" singleNum="{{singleNum}}">
                     <img class="bank-img" src="{{bankThumbnailUrl}}" alt="">
                     <div class="div">
-                        <div class="bank-name">{{bankName}}({{bankNo}})</div>
+                        <div class="bank-name">{{bankName}}({{after4Num}})</div>
                         <div class="bank-pay">单笔限额{{singleNum}}，单日限额{{oneDayNum}}</div>
                     </div>
-                    <img class="true" src="/financial/static/img/account_icon_check@2x.png" alt="">
+                    <img class="true" src="/common/img/account_icon_check@2x.png" alt="">
                 </li>
                 {{/each}}
                 <li class="popup-last">
-                    <img class="last-img" src="/financial/static/img/account_icon_bank logo@2x.png" alt="">
+                    <img class="last-img" src="/financial/static/img/icon _tianjia@2x.png" alt="">
                     <div class="last-title">
                         添加银行卡付款
                     </div>
-                    <a class="iconfont iconone"  href="javascript:;">&#xe67d;</a>
+                    <a href="javascript:;" class="iconfont iconone">&#xe67d;</a>
                 </li>
             </script>
         </div>
