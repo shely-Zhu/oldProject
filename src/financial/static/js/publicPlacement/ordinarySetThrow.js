@@ -874,6 +874,7 @@ $(function () {
 				that.gV.bankAccountMask = $(this).attr('bankAccountMask');
 				that.gV.capitalMode = $(this).attr('capitalMode')
 				that.gV.singleNum =  $(this).attr('singleNum')
+				that.gV.bankAccountSecret = $(this).attr('bankAccountSecret')
 				var after4Num = $(this).attr('after4Num')
 				var data = []
 				data.push({
