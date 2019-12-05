@@ -250,8 +250,8 @@ var clickList = {
 	//fortuneFlowKnown.html
 	"fortune_knownItem" : { type:'click', evtid: '', topic: '早知道列表', info: ''} ,
 	//fortuneClassroom.html
-	"fortune_roomItem" : { type:'click', evtid: '', topic: '财富讲堂列表', info: ''} ,
-	"fortune_sliderTab" : { type:'click', evtid: '', topic: '财富讲堂详情tab', info: ''},
+	"fortune_roomItem0" : { type:'click', evtid: '', topic: '财富讲堂列表', info: ''} ,
+	"fortune_sliderTab1" : { type:'click', evtid: '', topic: '财富讲堂详情tab', info: ''},
 	//wealthResearch.html
 	"fortune_wealthTab":{ type:'click', evtid: '', topic: '财富研究详情tab', info: ''} ,
 	//understandHT.html
