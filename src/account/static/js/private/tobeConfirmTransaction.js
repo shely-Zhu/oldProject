@@ -246,7 +246,6 @@ $(function() {
                         };
                         $.elasticLayer(obj)
 
-                        // that.openTipCon('assign', '您确定要取消转让申请吗？', id);
 
                     } else if (type == 'assignee') {
                         var obj = {
@@ -260,23 +259,26 @@ $(function() {
                             },
                         };
                         $.elasticLayer(obj)
+                    } else if (type == 'appointment') {
+                        var obj = {
+                            p: '<p>您确定要预约吗？</p>',
+                            yesTxt: '确认',
+                            celTxt: '取消',
+                            hideCelButton: false,
+                            zIndex: 100,
+                            callback: function(t) {
+
+                            },
+                        };
+                        $.elasticLayer(obj)
                     }
 
-
-                })
-                // 点击我明白了
-            mui("body").on('tap', '.tipContainer .buttonOne', function(e) {
-                    $('.mask').hide();
-                    $('#tipConOne').hide();
-                    var conText = $(this).siblings('tipContent').html;
-                    that.openTipConOne(conText);
 
                 })
                 //点击状态文字出现弹框
             mui("body").on('tap', '.openTip', function(e) {
                     $('.mask').show();
-                    $('#tipConOne').show();
-                    var conText = $(this).siblings('tipContent').html;
+                    var conText = $(this).siblings('.tipContent').html();
                     var obj = {
                         p: '<p>' + conText + '</p>',
                         yesTxt: '我明白了',
