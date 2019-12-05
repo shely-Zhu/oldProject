@@ -589,7 +589,7 @@ $(function() {
                 $('.forumList .forumImg').css({"display":"none"});
                 $('.forumList .forumImg').eq($(this).index()).css({"display":"block"});
             },{
-                'htmdEvt': 'fortune_allTab4'
+                'htmdEvt': 'fortune_04'
             });
             // 列表页跳转到详情页
 			mui("body").on('mdClick', '.list_item' , function(){
@@ -598,7 +598,7 @@ $(function() {
                 var applyType = $(this).attr("applyType")
                 window.location.href =site_url.wealthResearch_url + '?id=' + id + '&articleBelong=' + articleBelong + '&applyType='+applyType
             },{
-                'htmdEvt': 'fortune_studiesList7'
+                'htmdEvt': 'fortune_07'
             })
         }
     };
