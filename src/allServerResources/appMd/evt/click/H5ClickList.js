@@ -248,7 +248,7 @@ var clickList = {
 	"fortune_studiesList7" : { type:'click', evtid: '', topic: '财富研究列表', info: ''} ,
 	"fortune_studiesTab8" : { type:'click', evtid: '', topic: '财富研究tab', info: ''} ,
 	//fortuneFlowKnown.html
-	"fortune_knownItem" : { type:'click', evtid: '', topic: '早知道列表', info: ''} ,
+	"fortune_knownItem0" : { type:'click', evtid: '', topic: '早知道列表', info: ''} ,
 	//fortuneClassroom.html
 	"fortune_roomItem0" : { type:'click', evtid: '', topic: '财富讲堂列表', info: ''} ,
 	"fortune_sliderTab1" : { type:'click', evtid: '', topic: '财富讲堂详情tab', info: ''},
