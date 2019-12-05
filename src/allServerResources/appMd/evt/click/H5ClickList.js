@@ -240,7 +240,7 @@ var clickList = {
 	// "slider" : { type:'click', evtid: '', topic: '轮播图小圆点', info: ''} ,
 	"fortune_host0" : { type:'click', evtid: '', topic: '查看往期热词', info: ''} ,
 	"fortune_video1" : { type:'click', evtid: '', topic: '播放往期内容', info: ''} ,
-	"fortune_videoList2" : { type:'click', evtid: '', topic: '播放往期内容列表', info: ''} ,,
+	"fortune_videoList2" : { type:'click', evtid: '', topic: '播放往期内容列表', info: ''} ,
 	"fortune_all3" : { type:'click', evtid: '', topic: '财富讲堂全部', info: ''} ,
 	"fortune_allTab4" : { type:'click', evtid: '', topic: '财富讲堂tab', info: ''} ,
 	"fortune_allList5" : { type:'click', evtid: '', topic: '财富讲堂全部列表', info: ''} ,
