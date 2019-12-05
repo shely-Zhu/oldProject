@@ -511,7 +511,9 @@ module.exports = function() {
     this.tradeDetailOne_url = go_url.no_url + '/personal/views/tradeDetail.html';
     //赎回明细
     this.detailLists_url = go_url.no_url + '/personal/views/detailLists.html';
-
-   
+    
+    //我的积分规则
+    this.imgModel_url =  go_url.no_url + '/include/views/imgModel.html';
+    
    
 };
