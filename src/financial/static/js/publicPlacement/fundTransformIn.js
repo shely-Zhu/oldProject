@@ -448,8 +448,8 @@ $(function () {
 			}) 
 
 			//点击同意协议
-			that.$el.iconCheck.on('mdClick', function() {
-                if ($(this).hasClass("check")) {
+			mui("body").on("mdClick", ".item2 .iconfont", function (e) {
+				if ($(this).hasClass("check")) {
 					$(this).removeClass("check").html('&#xe668;');
 					that.$el.confirmBtn.attr('disabled',true)
                 } else {

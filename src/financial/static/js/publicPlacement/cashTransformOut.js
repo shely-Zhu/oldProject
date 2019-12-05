@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2019-11-26 14:42:56
- * @LastEditTime: 2019-12-04 16:53:10
+ * @LastEditTime: 2019-12-05 13:37:36
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \htjf-app\src\financial\static\js\publicPlacement\cashTransformOut.js
@@ -248,7 +248,8 @@ $(function () {
 			   callbackDone:function(res){
 				   console.log("999",res)
 			   }
-		   }]
+		   }];
+		   $.ajaxLoading(obj)
 
 		},
 		events: function () {
@@ -338,24 +339,40 @@ $(function () {
 
 			  //转出金额
 			$(".msecond input").change(function(){
-				console.log("8888888");
 				that.gv.transformMoney = $(this)[0].value;
-				if(that.gv.transformTotalMoney<that.gv.transformMoney){
+				if( parseFloat( that.gv.transformTotalMoney)< parseFloat( that.gv.transformMoney) ){
 					$(".checkMessage").css({"display":"block"});
 				}else{
 				   $(".checkMessage").css({"display":"none"});
 				}
 			})
 
-			//赎回确认         
-			$(".confirmeDemptionPay").on('mdClick',function(){
+			//赎回确认 
+			mui('body').on('mdClick','.confirmeDemptionPay',function(){   
+			//$(".confirmeDemptionPay").on('click',function(){
 				$("#passwordWrap").show();
 				payPass(that.cancelOrder)
 			}, {
 				htmdEvt: 'cashTransformOut_09'
 			})
 
-			$('body').on('mdClick','.elasticLayer.transOutRule .elasticButtons',function(){
+			//转出全部
+			mui('body').on('mdClick','.tranoutAllMoney',function(){ 
+			//$(".tranoutAllMoney").on('click',function(){
+				$(".msecond input").val(that.gv.transformTotalMoney);
+				that.gv.transformMoney = that.gv.transformTotalMoney
+			}, {
+				htmdEvt: 'cashTransformOut_11'
+			})
+			//转出金额清零
+			mui('body').on('mdClick','.clearMoney',function(){ 
+			//$(".clearMoney").on('click',function(){/
+				$(".msecond input").val("");
+				that.gv.transformMoney = "";
+			}, {
+				htmdEvt: 'cashTransformOut_12'
+			})
+			mui('body').on('mdClick','.elasticLayer.transOutRule .elasticButtons',function(){
 				$('.elasticLayer.transOutRule').hide()
 			}, {
 				htmdEvt: 'cashTransformOut_10'

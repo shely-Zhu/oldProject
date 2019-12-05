@@ -223,15 +223,17 @@ var clickList = {
 	"cashTransformIn_16" : { type:'click', evtid: 'cashTransformIn_16', topic: '现金转入-添加银行卡--跳往原生', info: ''} ,
 	//现金转出
 	"cashTransformOut_01" : { type:'click', evtid: 'cashTransformOut_01', topic: '现金转出-打开银行卡列表', info: ''} ,
-	"cashTransformOut_01" : { type:'click', evtid: 'cashTransformOut_01', topic: '现金转出-关闭银行卡列表', info: ''} ,
-	"cashTransformOut_01" : { type:'click', evtid: 'cashTransformOut_01', topic: '现金转出-关闭银行卡列表', info: ''} ,
-	"cashTransformOut_01" : { type:'click', evtid: 'cashTransformOut_01', topic: '现金转出-银行卡单选', info: ''} ,
-	"cashTransformOut_01" : { type:'click', evtid: 'cashTransformOut_01', topic: '现金转出-普通与快速切换', info: ''} ,
-	"cashTransformOut_01" : { type:'click', evtid: 'cashTransformOut_01', topic: '现金转出-清除输入框数字', info: ''} ,
-	"cashTransformOut_01" : { type:'click', evtid: 'cashTransformOut_01', topic: '现金转出-点击转出规则', info: ''} ,
-	"cashTransformOut_01" : { type:'click', evtid: 'cashTransformOut_01', topic: '现金转出-点击同意协议', info: ''} ,
-	"cashTransformOut_01" : { type:'click', evtid: 'cashTransformOut_01', topic: '现金转出-赎回确认', info: ''} ,
-	"cashTransformOut_01" : { type:'click', evtid: 'cashTransformOut_01', topic: '现金转出-点击其他总资产明白了', info: ''} ,
+	"cashTransformOut_02" : { type:'click', evtid: 'cashTransformOut_02', topic: '现金转出-关闭银行卡列表', info: ''} ,
+	"cashTransformOut_03" : { type:'click', evtid: 'cashTransformOut_03', topic: '现金转出-关闭银行卡列表', info: ''} ,
+	"cashTransformOut_04" : { type:'click', evtid: 'cashTransformOut_04', topic: '现金转出-银行卡单选', info: ''} ,
+	"cashTransformOut_05" : { type:'click', evtid: 'cashTransformOut_05', topic: '现金转出-普通与快速切换', info: ''} ,
+	"cashTransformOut_06" : { type:'click', evtid: 'cashTransformOut_06', topic: '现金转出-清除输入框数字', info: ''} ,
+	"cashTransformOut_07" : { type:'click', evtid: 'cashTransformOut_07', topic: '现金转出-点击转出规则', info: ''} ,
+	"cashTransformOut_08" : { type:'click', evtid: 'cashTransformOut_08', topic: '现金转出-点击同意协议', info: ''} ,
+	"cashTransformOut_09" : { type:'click', evtid: 'cashTransformOut_09', topic: '现金转出-赎回确认', info: ''} ,
+	"cashTransformOut_10" : { type:'click', evtid: 'cashTransformOut_10', topic: '现金转出-点击其他总资产明白了', info: ''} ,
+	"cashTransformOut_11" : { type:'click', evtid: 'cashTransformOut_11', topic: '现金转出-转出全部', info: ''} ,
+	"cashTransformOut_12" : { type:'click', evtid: 'cashTransformOut_12', topic: '现金转出-转出金额清零', info: ''} ,
 	//我的定投_定投详情
 	"castSurelyDetails_01" : { type:'click', evtid: 'castSurelyDetails_01', topic: '现金转出-跳转详情', info: ''} ,
 	"castSurelyDetails_02" : { type:'click', evtid: 'castSurelyDetails_02', topic: '现金转出-修改', info: ''} ,
@@ -300,37 +302,37 @@ var clickList = {
 	//fortuneCollegeList.html
 	// "banner" : { type:'click', evtid: '', topic: '轮播图图片', info: ''} ,
 	// "slider" : { type:'click', evtid: '', topic: '轮播图小圆点', info: ''} ,
-	"fortune_host0" : { type:'click', evtid: '', topic: '查看往期热词', info: ''} ,
-	"fortune_video1" : { type:'click', evtid: '', topic: '播放往期内容', info: ''} ,
-	"fortune_videoList2" : { type:'click', evtid: '', topic: '播放往期内容列表', info: ''} ,
-	"fortune_all3" : { type:'click', evtid: '', topic: '财富讲堂全部', info: ''} ,
-	"fortune_allTab4" : { type:'click', evtid: '', topic: '财富讲堂tab', info: ''} ,
-	"fortune_allList5" : { type:'click', evtid: '', topic: '财富讲堂全部列表', info: ''} ,
-	"fortune_studies6" : { type:'click', evtid: '', topic: '财富研究', info: ''} ,
-	"fortune_studiesList7" : { type:'click', evtid: '', topic: '财富研究列表', info: ''} ,
-	"fortune_studiesTab8" : { type:'click', evtid: '', topic: '财富研究tab', info: ''} ,
+	"fortune_00" : { type:'click', evtid: 'fortune_00', topic: '查看往期热词', info: ''} ,
+	"fortune_01" : { type:'click', evtid: 'fortune_01', topic: '播放往期内容', info: ''} ,
+	"fortune_02" : { type:'click', evtid: 'fortune_02', topic: '播放往期内容列表', info: ''} ,
+	"fortune_03" : { type:'click', evtid: 'fortune_03', topic: '财富讲堂全部', info: ''} ,
+	"fortune_04" : { type:'click', evtid: 'fortune_04', topic: '财富讲堂tab', info: ''} ,
+	"fortune_05" : { type:'click', evtid: 'fortune_05', topic: '财富讲堂全部列表', info: ''} ,
+	"fortune_06" : { type:'click', evtid: 'fortune_06', topic: '财富研究', info: ''} ,
+	"fortune_07" : { type:'click', evtid: 'fortune_07', topic: '财富研究列表', info: ''} ,
+	"fortune_08" : { type:'click', evtid: 'fortune_08', topic: '财富研究tab', info: ''} ,
 	//fortuneFlowKnown.html
-	"fortune_knownItem" : { type:'click', evtid: '', topic: '早知道列表', info: ''} ,
+	"fortune_09" : { type:'click', evtid: 'fortune_09', topic: '早知道列表', info: ''} ,
 	//fortuneClassroom.html
-	"fortune_roomItem" : { type:'click', evtid: '', topic: '财富讲堂列表', info: ''} ,
-	"fortune_sliderTab" : { type:'click', evtid: '', topic: '财富讲堂详情tab', info: ''},
+	"fortune_10" : { type:'click', evtid: 'fortune_10', topic: '财富讲堂列表', info: ''} ,
+	"fortune_11" : { type:'click', evtid: 'fortune_11', topic: '财富讲堂详情tab', info: ''},
 	//wealthResearch.html
-	"fortune_wealthTab":{ type:'click', evtid: '', topic: '财富研究详情tab', info: ''} ,
+	"fortune_12":{ type:'click', evtid: 'fortune_12', topic: '财富研究详情tab', info: ''} ,
 	//understandHT.html
-	"understandTab":{ type:'click', evtid: '', topic: '了解恒天tab', info: ''} ,
+	"understandTab_00":{ type:'click', evtid: 'understandTab_00', topic: '了解恒天tab', info: ''} ,
 	//noticeCenter.html
-	"notice_conterList":{ type:'click', evtid: '', topic: '消息中心', info: ''} ,
+	"notice_00":{ type:'click', evtid: 'notice_00', topic: '消息中心', info: ''} ,
 	//systemInforms.html
-	"notice_systemList":{ type:'click', evtid: '', topic: '系统通知', info: ''}, 
+	"notice_01":{ type:'click', evtid: 'notice_01', topic: '系统通知', info: ''}, 
 	//starFinancialPlannerList.html
-	"starFinanciaLocation":{ type:'click', evtid: '', topic: '城市定位', info: ''} ,
-	"starFinancia_city":{ type:'click', evtid: '', topic: '热门城市', info: ''} ,
-	"starFinancia_goBack":{ type:'click', evtid: '', topic: '返回', info: ''} ,
-	"starFinancia_index":{ type:'click', evtid: '', topic: '城市索引', info: ''} ,
-	"starFinancia_list":{ type:'click', evtid: '', topic: '理财师列表', info: ''} ,
-	"starFinancia_search":{ type:'click', evtid: '', topic: '理财师查询', info: ''} ,
-	"starFinancia_del":{ type:'click', evtid: '', topic: '取消搜索', info: ''} ,
-	"starFinancia_SearchInput":{ type:'click', evtid: '', topic: '点击搜索框触发选中', info: ''} 
+	"starFinancia_00":{ type:'click', evtid: 'starFinancia_00', topic: '城市定位', info: ''} ,
+	"starFinancia_01":{ type:'click', evtid: 'starFinancia_01', topic: '热门城市', info: ''} ,
+	"starFinancia_02":{ type:'click', evtid: 'starFinancia_02', topic: '返回', info: ''} ,
+	"starFinancia_03":{ type:'click', evtid: 'starFinancia_03', topic: '城市索引', info: ''} ,
+	"starFinancia_04":{ type:'click', evtid: 'starFinancia_04', topic: '理财师列表', info: ''} ,
+	// "starFinancia_search":{ type:'click', evtid: '', topic: '理财师查询', info: ''} ,
+	"starFinancia_05":{ type:'click', evtid: 'starFinancia_05', topic: '取消搜索', info: ''} ,
+	"starFinancia_06":{ type:'click', evtid: 'starFinancia_06', topic: '点击搜索框触发选中', info: ''} 
 }
 
 module.exports = clickList;

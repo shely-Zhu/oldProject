@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2019-11-26 14:42:56
- * @LastEditTime: 2019-12-04 20:16:21
+ * @LastEditTime: 2019-12-05 13:40:35
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \htjf-app\src\financial\static\js\publicPlacement\redemptionBuy.js
@@ -127,7 +127,9 @@ $(function() {
             var obj = [{
                 url : site_url.queryTransferFunds_api,
                 needDataEmpty:true,
-                data:{},
+                data:{
+                    type:"2"
+                },
                 callbackDone : function(json){
                     console.log("88888",json);
                     that.gv.transferFunds = json.data;
@@ -280,10 +282,13 @@ $(function() {
 				htmdEvt: 'redemptionBuy_07'
 			});
 
-            //赎回确认         
-         $(".confirmeDemptionPay").on('mdClick',function(){
+            //赎回确认
+            mui("body").on('mdClick','.confirmeDemptionPay',function(){         
+        // $(".confirmeDemptionPay").on('click',function(){
             $("#passwordWrap").show();
             payPass(that.cancelOrder)
+        }, {
+            htmdEvt: 'redemptionBuy_08'
         })
          $(".msecond input").change(function(){
              that.gv.nowRedempShare = $(this)[0].value;
@@ -297,12 +302,11 @@ $(function() {
                     $(".checkMessage").html("赎回额度不能位空")
                 }
              }
-         }, {
-            htmdEvt: 'redemptionBuy_08'
-        })
+         })
 
          //点击同意协议
-			that.getElements.iconCheck.on('mdClick', function() {
+            mui("body").on('mdClick','.item2 .iconfont',function(){ 
+			//that.getElements.iconCheck.on('click', function() {
                 if ($(this).hasClass("check")) {
 					$(this).removeClass("check").html('&#xe668;');
 					that.getElements.confirmBtn.attr('disabled',true)
