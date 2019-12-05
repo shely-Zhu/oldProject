@@ -12,7 +12,7 @@
  * @Date:   2019-11-23
  * 
  */
-
+require('@pathCommonBase/base.js');
 require('@pathIncludJs/vendor/config.js');
 
 require('@pathIncludJs/vendor/mui/mui.picker.min.js');
