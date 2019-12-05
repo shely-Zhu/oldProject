@@ -312,9 +312,11 @@ $(function () {
                     var html = template(json);
                     $(".tplBox1").html(html);
                     $.each($(".history_item .value"), function (i, v) {
-                        if (Number($(v).text().slice(0, $(v).text().length - 1)) >= 0) {
+                        if (Number($(v).text().slice(0, $(v).text().length - 1)) > 0) {
                             $(v).addClass('value_red')
-                        } else {
+                        } else if(Number($(v).text().slice(0, $(v).text().length - 1)) == 0) {
+                            $(v).addClass('value_c')
+                        }else{
                             $(v).addClass('value_green')
                         }
                     });

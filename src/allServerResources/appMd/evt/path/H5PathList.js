@@ -220,6 +220,19 @@ var pathList = {
 	"/financial/views/publicPlacement/surelyResults.html" :{ evtid: '', topic: '转入结果', info: ''} ,
 	"/financial/views/publicPlacement/surelyResultsDetail.html" :{ evtid: '', topic: '转入结果详情', info: ''} ,
 	"/financial/views/publicPlacement/transactionRules.html" :{ evtid: '', topic: '交易规则', info: ''} ,
+
+	/*********************************account start***************************************/
+	"/account/views/publicTradeDetail/publicTradeDetail.html": { evtid: 'publicTradeDetail', topic: '交易记录', info: ''} ,
+	"/account/views/historyDetail.html": { evtid: 'historyDetail', topic: '历史明细', info: ''} ,
+	"/account/views/informationDisclosure.html": { evtid: 'informationDisclosure', topic: '信息披露', info: ''} ,
+	"/account/views/priNetWorthDetails.html": { evtid: 'priNetWorthDetails', topic: '净值明细', info: ''} ,
+	"/account/views/productFiles.html": { evtid: 'productFiles', topic: '产品档案', info: ''} ,
+	"/account/views/publicAssets.html": { evtid: 'publicAssets', topic: '公募资产', info: ''} ,
+	
+	// "/account/views/priNetWorthDetails.html": { evtid: 'priNetWorthDetails', topic: '净值明细', info: ''} ,
+	// "/account/views/priNetWorthDetails.html": { evtid: 'priNetWorthDetails', topic: '净值明细', info: ''} ,
+
+	/*********************************account end ***************************************/
 }
 
 
