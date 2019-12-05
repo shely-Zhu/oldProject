@@ -408,11 +408,4 @@ $(function() {
         }
     };
     data.init();
-    //添加埋点待定这样
-    function attr(name, attribute, value) {
-        name.attr(attribute, value)
-    }
-    setTimeout(() => {
-        attr($('#slider .tab-scroll-wrap .mui-control-item'), 'htmdEvt', 'fortune_wealthTab')
-    }, 1000)
 });

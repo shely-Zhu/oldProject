@@ -253,7 +253,7 @@ var clickList = {
 	"fortune_roomItem0" : { type:'click', evtid: '', topic: '财富讲堂列表', info: ''} ,
 	"fortune_sliderTab1" : { type:'click', evtid: '', topic: '财富讲堂详情tab', info: ''},
 	//wealthResearch.html
-	"fortune_wealthTab":{ type:'click', evtid: '', topic: '财富研究详情tab', info: ''} ,
+	"fortune_wealthTab0":{ type:'click', evtid: '', topic: '财富研究详情tab', info: ''} ,
 	//understandHT.html
 	"understandTab":{ type:'click', evtid: '', topic: '了解恒天tab', info: ''} ,
 	//noticeCenter.html
