@@ -8,7 +8,6 @@ require('@pathCommonJs/ajaxLoading.js');
 //下拉加载更多
 // require('@pathCommonJs/scrollFullPage.js');
 // 切换
-var tipAction = require('@pathCommonJs/components/tipAction.js');
 var generateTemplate = require('@pathCommonJsComBus/generateTemplate.js');
 var splitUrl = require('@pathCommonJs/components/splitUrl.js');
 Slider = require('@pathCommonJs/components/sliderMui.js'); // 轮播
@@ -16,8 +15,6 @@ require('@pathCommonJsCom/tabScroll.js');
 require('@pathCommonJsCom/goTopMui.js');
 require('@pathCommonJs/components/elasticLayer.js');
 require('@pathCommonJs/components/elasticLayerTypeFive.js');
-//黑色提示条的显示和隐藏
-var tipAction = require('@pathCommonJsCom/tipAction.js');
 var splitUrl = require('@pathCommonJs/components/splitUrl.js')();
 
 
