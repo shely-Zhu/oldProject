@@ -81,13 +81,13 @@ $(function() {
                         needLogin: true, //需要判断是否登陆
                         contentTypeSearch: true,
                         data: {
-                            "ids": splitUrl()['id'], //内容ID
+                            "id": splitUrl()['id'], //内容ID
                         },
                         callbackDone: function(json) { //成功后执行的函数
 
-                            var result = json.data[0];
+                            var result = json.data;
                             //给页面title赋值
-                            window.document.title = result.title;
+                            window.document.title = result.protocolName;
                             $(".content").html(result.content); //内容区
 
                         },

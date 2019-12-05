@@ -145,23 +145,29 @@ $(function () {
       var that = this;
       var fundType = that.gV.json.fundType
       // 详情
-      mui("body").on("tap", ".posRight", function () {
+      mui("body").on("mdClick", ".posRight", function () {
         window.location.href = site_url.pofPublicDetail_url + '?fundCode=' + fundCode + '&fundType=' + fundType;
-      });
+      }, {
+				htmdEvt: 'cashTransformOut_01'
+			});
       // 修改
-      mui("body").on("tap", ".edit", function (e) {
+      mui("body").on("mdClick", ".edit", function (e) {
         var scheduledProtocolId = getQueryString('scheduledProtocolId')
         window.location.href = site_url.pofOrdinarySetThrow_url + '?scheduledProtocolId=' + scheduledProtocolId + '&fundCode=' + fundCode;
-      });
+      }, {
+				htmdEvt: 'castSurelyDetails_02'
+			});
       // 终止 暂停 续投
-      mui("body").on("tap", ".footer >div", function (e) {
+      mui("body").on("mdClick", ".footer >div", function (e) {
         var type = $(this).attr('type')
         if (!type) return
         $("#passwordWrap").show();
         payPass(function (pwd) {
           that.changeStatus(pwd, type)
         });
-      });
+      }, {
+				htmdEvt: 'castSurelyDetails_03'
+			});
 
     },
 

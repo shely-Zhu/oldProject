@@ -340,26 +340,34 @@ $(function () {
 		events: function () {
 			var that = this;
 			/** 下面三个事件： 银行卡列表出现/隐藏 **/
-			mui("body").on('tap','.paymoney',function(){
+			$('body').on('mdClick','.paymoney',function(){
 				that.gV.payType = $(this).attr('pay-type')
 				var useEnv = $(this).attr('pay-type')
 				$("#loading").show()
 				that.getBankCard(useEnv)
+			}, {
+				htmdEvt: 'fundTransformIn_01'
 			}) 
 
-			mui("body").on('tap','.popup-close',function(){
+			$('body').on('mdClick','.popup-close',function(){
 				$('.popup').css('display','none')
 				$('.popup-password').css('display','none')
+			}, {
+				htmdEvt: 'fundTransformIn_02'
 			}) 
 
-			mui("body").on('tap','.popup-mask',function(){
+			$('body').on('mdClick','.popup-mask',function(){
 				$('.popup').css('display','none')
 				$('.popup-password').css('display','none')
+			}, {
+				htmdEvt: 'fundTransformIn_03'
 			}) 
 
 			//点击转出规则
-			mui("body").on('tap','.goRule',function(){
+			$('body').on('mdClick','.goRule',function(){
 				window.location.href = site_url.transactionRules_url + '?fundCode=' + that.gV.fundCode;
+			}, {
+				htmdEvt: 'fundTransformIn_04'
 			}) 
 			
 			$("#transformInput").on('input propertychange',function(){
@@ -380,11 +388,13 @@ $(function () {
 				
 			})
 			//清除输入框数字
-			mui("body").on("tap", ".deleteNum", function() {
+			mui("body").on("mdClick", ".deleteNum", function() {
 				$('.transformInput').val(null)
+			}, {
+				htmdEvt: 'fundTransformIn_05'
 			})
 			//选中银行卡
-			mui("body").on('tap','.bank-li',function(){
+			$('body').on('mdClick','.bank-li',function(){
 				$(".bank-li .true").hide();
 				$(this).find(".true").show()
 				that.gV.bankName = $(this).attr('bankName');
@@ -423,10 +433,12 @@ $(function () {
 				setTimeout(function(){
 					$('.popup').css('display','none')
 				},500)
+			}, {
+				htmdEvt: 'fundTransformIn_06'
 			}) 
 
 			//点击同意协议
-			mui("body").on("tap", ".item2 .iconfont", function (e) {
+			mui("body").on("mdClick", ".item2 .iconfont", function (e) {
 				if ($(this).hasClass("check")) {
 					$(this).removeClass("check").html('&#xe668;');
 					that.$el.confirmBtn.attr('disabled',true)
@@ -434,10 +446,12 @@ $(function () {
 					$(this).addClass("check").html('&#xe669;');
 					that.$el.confirmBtn.removeAttr("disabled");
                 }
-            });
+			}, {
+				htmdEvt: 'fundTransformIn_07'
+			});
 			
 			//确定
-			mui("body").on('tap','.btn_box .btn',function(){
+			$('body').on('mdClick','.btn_box .btn',function(){
 				if(Number(that.gV.balance) < Number(that.gV.minValue)){
 					tipAction('最小买入金额不能低于' + that.gV.minValue + '元')
 					return
@@ -456,51 +470,69 @@ $(function () {
 					}
 				}
 				
+			}, {
+				htmdEvt: 'fundTransformIn_08'
 			}) ;
 			//  ---《公募基金风险揭示及售前告知书》
-			mui("body").on('tap','.setGoUrl',function(){
+			$('body').on('mdClick','.setGoUrl',function(){
 				window.location.href = site_url.agreementModel_url + '?id=47' + '&financial=true'
+			}, {
+				htmdEvt: 'fundTransformIn_09'
 			}) ;
 
 			//  ---忘记密码
-			mui("body").on('tap','#passwordWrap .forgetP',function(){
+			$('body').on('mdClick','#passwordWrap .forgetP',function(){
 				//跳往原生页面去修改密码
 				window.location.href = site_url.pofForgotPassword_url
+			}, {
+				htmdEvt: 'fundTransformIn_10'
 			}) ;
 			//密码校验不通过   ---取消
-			mui("body").on('tap','.elasticCel',function(){
+			$('body').on('mdClick','.elasticCel',function(){
 				$(".pwd-input").val('')
 				$(".fake-box input").val('');
 				$('#passwordWrap').css('display','none')
 				$('.popup-password').css('display','none')
+			}, {
+				htmdEvt: 'fundTransformIn_11'
 			}) ;
 			//密码校验不通过   ---忘记密码
-			mui("body").on('tap','.error1 .elasticCel',function(){
+			$('body').on('mdClick','.error1 .elasticCel',function(){
 				//跳往原生页面去修改密码
 				window.location.href = site_url.pofForgotPassword_url
+			}, {
+				htmdEvt: 'fundTransformIn_12'
 			}) ;
 			//密码校验不通过   ---重新输入
-			mui("body").on('tap','.error1 .elasticYes',function(){
+			$('body').on('mdClick','.error1 .elasticYes',function(){
 				$(".pwd-input").val('')
 				$(".fake-box input").val('');
 				$('.popup-password').css('display','none')
+			}, {
+				htmdEvt: 'fundTransformIn_13'
 			}) ;
 			//密码校验不通过   ---找回密码
-			mui("body").on('tap','.error2 .elasticYes',function(){
+			$('body').on('mdClick','.error2 .elasticYes',function(){
 				//跳往原生页面去修改密码
 				window.location.href = site_url.pofRetrievePassword_url
+			}, {
+				htmdEvt: 'fundTransformIn_14'
 			}) ;
 			//密码校验不通过   ---重新输入
-			mui("body").on('tap','.error3 .elasticYes',function(){
+			$('body').on('mdClick','.error3 .elasticYes',function(){
 				$(".pwd-input").val('')
 				$(".fake-box input").val('');
 				$('.popup-password').css('display','none')
 				
+			}, {
+				htmdEvt: 'fundTransformIn_15'
 			}) ;
 			//添加银行卡 -- 跳往原生
-			mui("body").on('tap','.popup-last',function(){
+			$('body').on('mdClick','.popup-last',function(){
 				//跳往原生页面去修改密码
 				window.location.href = site_url.pofAddBankCard_url
+			}, {
+				htmdEvt: 'fundTransformIn_16'
 			}) ;
 
 		},
