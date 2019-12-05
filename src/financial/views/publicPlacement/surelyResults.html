@@ -9,12 +9,12 @@
 	<title>转入结果</title>
 </head>
 <body>
-    @@include('@pathCommonViews/load.html')
+    @@include('@pathCommonCom/loading/listLoading.html')
     @@include('@pathCommonViews/headBarConfig.html',{"bgColors":"#2C3E77,#273971","showType":"0","pathName":""}) 
     <div class="resultsWrap">
       <div class="resultTop">
         <div class="photo">
-            <img src="/financial/static/img/pic_success@2x.png" alt="">
+            <img src="/common/img/pic_success@2x.png" alt="">
         </div>
         <div class="succedText"></div>
         <div class="proessBox cashInto">
@@ -60,7 +60,7 @@
       </div>
       <div class="resultTopTwo">
             <div class="photo">
-                    <img src="/financial/static/img/pic_success2@2x.png" alt="">
+                    <img src="/common/img/pic_success2@2x.png" alt="">
             </div>
             <div class="succedText">申请失败</div>
       </div>
@@ -131,8 +131,6 @@
     </div>
 
 	@@include('@pathInclude/views/footer.html')
-	<!-- 添加埋点 -->
-	@@include('@pathInclude/views/header.html')
     <script src="/financial/static/js/publicPlacement/surelyResults.js"></script>
 </body>
 </html>

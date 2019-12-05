@@ -12,20 +12,9 @@
  * @Date:   2019-11-23
  * 
  */
-
-require('@pathIncludJs/vendor/config.js');
+require('@pathCommonBase/base.js');
 
 require('@pathIncludJs/vendor/mui/mui.picker.min.js');
-
-//zepto模块
-require('@pathIncludJs/vendor/zepto/callback.js');
-require('@pathIncludJs/vendor/zepto/deferred.js');
-
-require('@pathCommonJs/components/headBarConfig.js');
-
-//黑色提示条
-var tipAction = require('@pathCommonJs/components/tipAction.js');
-require('@pathCommonJs/components/utils.js');
 require('@pathCommonJs/ajaxLoading.js');
 require('@pathCommonJs/components/elasticLayer.js');
 
@@ -203,26 +192,34 @@ $(function() {
          */
         events: function() {
             var that = this;
-            mui('body').on('tap', '.onright', function() {
+            $('body').on('mdClick', '.onright', function() {
                 $('.popup').css('display', 'block')
-            })
+            }, {
+				htmdEvt: 'redemptionBuy_01'
+			})
 
-            mui('body').on('tap', '.popup-close', function() {
+            $('body').on('mdClick', '.popup-close', function() {
                 $('.popup').css('display', 'none')
-            })
+            }, {
+				htmdEvt: 'redemptionBuy_02'
+			})
 
-            mui('body').on('tap', '.popup-mask', function() {
+            $('body').on('mdClick', '.popup-mask', function() {
                 $('.popup').css('display', 'none')
-            })
+            }, {
+				htmdEvt: 'redemptionBuy_03'
+			})
 
-            mui("body").on('tap','.findMessageCen',function(){
+            mui("body").on('mdClick','.findMessageCen',function(){
                 var id="79";
                 console.log("aaaaa")
                 that.findMessageCen(id);
-            })
+            }, {
+				htmdEvt: 'redemptionBuy_04'
+			})
 
              //银行卡与基金形成单选
-            mui('body').on('click',".radioCheckItem",function(){
+            $('body').on('mdClick',".radioCheckItem",function(){
                 var type = $(this).attr("type");
                 if(type == 'car'){
                     //银行
@@ -256,23 +253,31 @@ $(function() {
                 $(this).find(".radioCheckItemImg").attr("src",that.gv.checkImgUrl);
                 
               //  that.confirmCheck();
-            })
+            }, {
+				htmdEvt: 'redemptionBuy_05'
+			})
 
             //点击全部，初始化最大赎回额度
-            mui("body").on('tap','.forAll',function(){
+            mui("body").on('mdClick','.forAll',function(){
                $(".msecond .msecond-one")[0].value=that.gv.dataList.enableShares;
-            })
+            }, {
+				htmdEvt: 'redemptionBuy_06'
+			})
 
             // 交易规则
-            mui("body").on("tap", ".goPofTransactionRules", function (e) {
+            mui("body").on("mdClick", ".goPofTransactionRules", function (e) {
                 window.location.href = site_url.pofTransactionRules_url + '?fundCode=' + regulatory.gv.dataList.fundCode
-            });
+            }, {
+				htmdEvt: 'redemptionBuy_07'
+			});
 
             //赎回确认
-            mui("body").on('tap','.confirmeDemptionPay',function(){         
+            mui("body").on('mdClick','.confirmeDemptionPay',function(){         
         // $(".confirmeDemptionPay").on('click',function(){
             $("#passwordWrap").show();
             payPass(that.cancelOrder)
+        }, {
+            htmdEvt: 'redemptionBuy_08'
         })
          $(".msecond input").change(function(){
              that.gv.nowRedempShare = $(this)[0].value;
@@ -289,7 +294,7 @@ $(function() {
          })
 
          //点击同意协议
-            mui("body").on('tap','.item2 .iconfont',function(){ 
+            mui("body").on('mdClick','.item2 .iconfont',function(){ 
 			//that.getElements.iconCheck.on('click', function() {
                 if ($(this).hasClass("check")) {
 					$(this).removeClass("check").html('&#xe668;');
@@ -298,6 +303,8 @@ $(function() {
 					$(this).addClass("check").html('&#xe669;');
 					that.getElements.confirmBtn.removeAttr("disabled");
                 }
+			}, {
+				htmdEvt: 'redemptionBuy_09'
 			});
             
 

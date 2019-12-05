@@ -1,14 +1,7 @@
-require('@pathIncludJs/vendor/config.js');
-
-//zepto模块
-require('@pathIncludJs/vendor/zepto/callback.js');
-require('@pathIncludJs/vendor/zepto/deferred.js');
+require('@pathCommonBase/base.js');
 require('@pathCommonJsCom/tabScroll.js')
-require('@pathCommonJsCom/utils.js');
 require('@pathCommonJs/ajaxLoading.js');
-require('@pathCommonJs/components/headBarConfig.js');
 //黑色提示条
-var tipAction = require('@pathCommonJs/components/tipAction.js');
 var generateTemplate = require('@pathCommonJsComBus/generateTemplate.js');
 var splitUrl = require('@pathCommonJs/components/splitUrl.js');
 
@@ -73,21 +66,21 @@ $(function () {
     events: function () {
       var that = this;
       //调往现金宝详情
-      mui("body").on("tap", ".cashItem .itemTitle", function () {
+      mui("body").on("mdClick", ".cashItem .itemTitle", function () {
         var fundCode = $(this).attr("fundCode")
         window.location.href = site_url.superStreasureDetail_url + '?fundCode='+ fundCode ;
       }, {
 				htmdEvt: 'cashManagement_01'
 			});
 
-      mui("body").on("tap", ".fundIn", function () {
+      mui("body").on("mdClick", ".fundIn", function () {
         var fundCode = $(this).parent().parent().find(".itemTop .itemTitle span").eq(0).attr("fundCode")
         var fundName = $(this).parent().parent().find(".itemTop .itemTitle span").eq(0).attr("fundName")
         window.location.href = site_url.pofCashTransformIn_url + '?fundCode='+ fundCode + '&fundName=' + fundName;
       }, {
 				htmdEvt: 'cashManagement_02'
 			});
-      mui("body").on("tap", ".fundOut", function () {
+      mui("body").on("mdClick", ".fundOut", function () {
         var money = $($(this).parent().siblings()[1]).find(".centerValue").eq(0)[0].textContent;
         var productName = $(this).parent().parent().find(".itemTop .itemTitle span").eq(0)[0].innerHTML;
         var fundCode = $(this).parent().parent().find(".itemTop .itemTitle span").eq(0).attr("fundCode")
