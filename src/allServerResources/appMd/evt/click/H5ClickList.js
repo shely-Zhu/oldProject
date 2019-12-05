@@ -181,10 +181,9 @@ var clickList = {
 	//历史明细（没按钮）
 	//登录日志查询（没按钮）
 	//公募监管账户
-	"regulatoryAccounts_copyName" : { type:'click', evtid: '', topic: '公墓监管账户-复制户名', info: ''} ,
-	"regulatoryAccounts_copyAccountNo" : { type:'click', evtid: '', topic: '公墓监管账户-复制账号', info: ''} ,
-	"regulatoryAccounts_copyBackNo" : { type:'click', evtid: '', topic: '公墓监管账户-复制行号', info: ''} ,
-	"regulatoryAccounts_copyOpeningBank" : { type:'click', evtid: '', topic: '公墓监管账户-复制开户行', info: ''} ,
+	"mineRegulatoryAccounts_01" : { type:'click', evtid: 'mineRegulatoryAccounts_01', topic: '公墓监管账户-复制', info: ''} ,
+	"mineRegulatoryAccounts_02" : { type:'click', evtid: 'mineRegulatoryAccounts_02', topic: '公墓监管说明-打开', info: ''} ,
+	"mineRegulatoryAccounts_03" : { type:'click', evtid: 'mineRegulatoryAccounts_03', topic: '公墓监管说明-隐藏', info: ''} ,
 	//收益明细页面（没按钮）
 	//我的奖励页面
 	"rewards_01" : { type:'click', evtid: 'rewards_01', topic: '我的奖励-查看详情', info: ''} ,
@@ -332,7 +331,35 @@ var clickList = {
 	"starFinancia_04":{ type:'click', evtid: 'starFinancia_04', topic: '理财师列表', info: ''} ,
 	// "starFinancia_search":{ type:'click', evtid: '', topic: '理财师查询', info: ''} ,
 	"starFinancia_05":{ type:'click', evtid: 'starFinancia_05', topic: '取消搜索', info: ''} ,
-	"starFinancia_06":{ type:'click', evtid: 'starFinancia_06', topic: '点击搜索框触发选中', info: ''} 
+	"starFinancia_06":{ type:'click', evtid: 'starFinancia_06', topic: '点击搜索框触发选中', info: ''} ,
+
+	/************************************** account start *************************************************/
+	//publicTradeDetail.hrml
+	"publicTradeDetail_0": { type:'click', evtid: 'publicTradeDetail_0', topic: '交易记录_再买一笔', info: ''},
+	"publicTradeDetail_1": { type:'click', evtid: 'publicTradeDetail_1', topic: '交易记录_去撤单', info: ''},
+	"publicTradeDetail_2": { type:'click', evtid: 'publicTradeDetail_2', topic: '交易记录_买入产品', info: ''},
+	"publicTradeDetail_3": { type:'click', evtid: 'publicTradeDetail_3', topic: '交易记录_定投计划', info: ''},
+	// informationDisclosure.html
+	"informationDisclosure_0":{ type:'click', evtid: 'informationDisclosure_0', topic: '信息披露', info: ''},
+	// productFiles.html
+	"productFiles_0":{ type:'click', evtid: 'productFiles_0', topic: '产品档案_展开', info: ''},
+	"productFiles_1":{ type:'click', evtid: 'productFiles_1', topic: '产品档案_推荐材料', info: ''},
+	// publicAssets.html
+	"publicAssets_0":{ type:'click', evtid: 'publicAssets_0', topic: '公募资产_交易记录', info: ''},
+	"publicAssets_1":{ type:'click', evtid: 'publicAssets_1', topic: '公募资产_普通基金持仓详情', info: ''},
+	"publicAssets_2":{ type:'click', evtid: 'publicAssets_2', topic: '公募资产_现金宝持仓详情', info: ''},
+	"publicAssets_3":{ type:'click', evtid: 'publicAssets_3', topic: '公募资产_交易明细', info: ''},
+	"publicAssets_4":{ type:'click', evtid: 'publicAssets_4', topic: '公募资产_购买', info: ''},
+	"publicAssets_5":{ type:'click', evtid: 'publicAssets_5', topic: '公募资产_赎回', info: ''},
+	"publicAssets_6":{ type:'click', evtid: 'publicAssets_6', topic: '公募资产_文案提示', info: ''},
+	"publicAssets_7":{ type:'click', evtid: 'publicAssets_7', topic: '公募资产_金额隐藏', info: ''},
+	"publicAssets_8":{ type:'click', evtid: 'publicAssets_8', topic: '公募资产_资产组合说明', info: ''},
+	"publicAssets_9":{ type:'click', evtid: 'publicAssets_9', topic: '公募资产_关闭资产组合说明', info: ''},
+	"publicAssets_10":{ type:'click', evtid: 'publicAssets_10', topic: '公募资产_关闭资产组合说明', info: ''},
+
+
+
+	/************************************** account end *************************************************/
 }
 
 module.exports = clickList;

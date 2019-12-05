@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2019-11-26 14:42:56
- * @LastEditTime: 2019-12-05 13:37:36
+ * @LastEditTime: 2019-12-05 15:30:14
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \htjf-app\src\financial\static\js\publicPlacement\cashTransformOut.js
@@ -234,12 +234,20 @@ $(function () {
 		   var that = this;
 		   var obj = [{
 			   url:site_url.findProtocolContentRule_api,
+			   contentTypeSearch: true,
 			   data:{
 				   "id":id
 			   },
 			   needDataEmpty:true,
 			   callbackDone:function(res){
 				   console.log("999",res)
+				   var html = res.data.content;
+				   if(res.status == "0000"){
+					$('.elasticLayer.transOutRule').show()
+					   $(".elasticContent").html(html);
+				   }else{
+					$(".elasticContent").html("规则查询失败");
+				   }
 			   }
 		   }];
 		   $.ajaxLoading(obj)
@@ -292,9 +300,13 @@ $(function () {
 			   var type = $(this).attr("type");
 			   that.gv.outType = type;
 			   if(type == 'fast'){
-				   that.gv.operationType = "1"
+				   that.gv.operationType = "1";
+				   $(".explain .left").eq(0).show();
+				   $(".explain .left").eq(1).hide();
 			   }else if(type == 'common'){
-				that.gv.operationType = "0"
+				that.gv.operationType = "0";
+				$(".explain .left").eq(1).show();
+				$(".explain .left").eq(0).hide();
 			   }
 			}, {
 				htmdEvt: 'cashTransformOut_05'
@@ -308,13 +320,10 @@ $(function () {
 		})
 			
 			//点击转出规则
-			$('body').on('mdClick','.explain .right',function(){
-				that.av.ruleId = $(this).find(".transformRule").attr("ruleId");
-				var id = $(this).find(".transformRule").attr("ruleId")
+			mui('body').on('tap','.explain .transformRule',function(){
+				that.gv.ruleId = $(this).attr("ruleId");
+				var id = $(this).attr("ruleId");
 				that.findProtocolContentRule(id);
-				$('.elasticLayer.transOutRule').show()
-			}, {
-				htmdEvt: 'cashTransformOut_07'
 			}) 
 
 			//点击同意协议
@@ -370,6 +379,13 @@ $(function () {
 			}, {
 				htmdEvt: 'cashTransformOut_10'
 			}) 
+			//阅读规则
+			mui('body').on('tap','.file .agreementRule',function(){
+				that.gv.ruleId = $(this).attr("ruleId");
+				var id = $(this).attr("ruleId");
+				that.findProtocolContentRule(id);
+			})
+			
 		},
 
 		

@@ -109,6 +109,7 @@ module.exports = function(data, $ele, $id, type) {
         }
         //是否签约中 展示转受让双录状态
         data[i].signing = (data[i].assignSubStatus == '05') || (data[i].assigneeSubStatus == '03') ? 1 : 0;
+        console.log(data)
 
     }
     //模板渲染页面

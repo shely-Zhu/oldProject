@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2019-11-26 14:42:56
- * @LastEditTime: 2019-12-05 13:40:35
+ * @LastEditTime: 2019-12-05 15:39:51
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \htjf-app\src\financial\static\js\publicPlacement\redemptionBuy.js
@@ -98,6 +98,7 @@ $(function() {
         findMessageCen:function(id){
             var obj = [{
                 url: site_url.findMessageCenterById_api,
+                 contentTypeSearch: true,
                 data: {
                     "id": id,  
                 },
@@ -105,6 +106,13 @@ $(function() {
                 needDataEmpty: true,
                 callbackDone: function (json) {
                     console.log("json",json);
+                    var html = json.data.content;
+                    if(json.status == "0000"){
+                        $('.elasticLayer.transOutRule').show()
+                           $(".elasticContent").html(html);
+                       }else{
+                        $(".elasticContent").html("规则查询失败");
+                       }
                 },
 
             }];
@@ -171,7 +179,7 @@ $(function() {
                     var data = res.data;
                     if(res.status == '0000'){
                         window.location.href = site_url.pofSurelyResultsDetail_url + '?applyId=' + data.allotNo + '&fundBusinCode=' + 
-                        "024"+ "&fundCode=" + regulatory.gv.targetfundcode  + '&flag=redemption';
+                        "024"+ "&fundCode=" + regulatory.gv.dataList.fundCode  + '&flag=redemption';
                     }
                 }
 
@@ -306,6 +314,10 @@ $(function() {
 			}, {
 				htmdEvt: 'redemptionBuy_09'
 			});
+            
+            mui('body').on('tap','.elasticLayer.transOutRule .elasticButtons',function(){
+				$('.elasticLayer.transOutRule').hide()
+			}) 
             
 
         },
