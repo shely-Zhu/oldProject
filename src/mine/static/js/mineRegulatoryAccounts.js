@@ -9,8 +9,6 @@ require('@pathCommonBase/base.js');
 
 require('@pathIncludJs/vendor/mui/mui.picker.min.js');
 
-//黑色提示条
-var tipAction = require('@pathCommonJs/components/tipAction.js');
 require('@pathCommonJs/ajaxLoading.js');
 require('@pathCommonJs/components/elasticLayer.js');
 
