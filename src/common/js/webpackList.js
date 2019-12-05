@@ -382,6 +382,8 @@ module.exports = {
     './homePage/static/js/fortuneClassroom': './src/homePage/static/js/fortuneClassroom.js',
     //历史明细
     './account/static/js/public/mineHistoryDetail': "./src/account/static/js/public/mineHistoryDetail.js",
+    //非货币基金历史明细
+    './account/static/js/public/otherFundHistoryDetail': "./src/account/static/js/public/otherFundHistoryDetail.js",
     //收益明细
      './account/static/js/public/returnsDetail': "./src/account/static/js/public/returnsDetail.js",
 
