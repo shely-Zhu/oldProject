@@ -164,7 +164,7 @@ var clickList = {
 	//权益详情
 	"detailsUnderstandingDetails_01" : { type:'click', evtid: 'detailsUnderstandingDetails_01', topic: '权益详情-了解详情', info: ''} ,
 	//成长值记录
-	"adolesceRecord_ruleDescription" : { type:'click', evtid: '', topic: '成长值记录-规则说明', info: ''} ,
+	"adolesceRecord_01" : { type:'click', evtid: 'adolesceRecord_01', topic: '成长值记录-规则说明', info: ''} ,
 	//产品咨询
 	"consultProduct_01" : { type:'click', evtid: 'consultProduct_01', topic: '产品咨询-提交按钮', info: ''} ,
 	//月度报告详情页
