@@ -108,7 +108,7 @@ $(function(){
 			// 	});
 			// })
 
-			$(".copy_btn").click(function () {
+			mui("body").on('tap', '.copy_btn' , function(){
 				var $this = $(this);
 				var copyText = $this.siblings('div').text()
 			    //实例化clipboard
@@ -118,6 +118,7 @@ $(function(){
 						return copyText;
 					}
 				});
+				console.log(clipboard)
 				clipboard.on("success", function (e) {
 					//text = '';
 					tipAction("复制成功");
@@ -126,7 +127,9 @@ $(function(){
 					tipAction("请选择“拷贝”进行复制!");
 				});
 
-			});
+			},{
+                'htmdEvt': 'mineRegulatoryAccounts_01'
+            });
 			
 			$('.toptitle span,.toptitle img').on('tap',function(){
 				$('.topcontent').addClass('mui-active').removeClass('mui-hidden');
