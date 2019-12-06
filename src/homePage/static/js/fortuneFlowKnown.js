@@ -25,6 +25,7 @@ $(function() {
 			fortuneFlowList: [],
             articleBelong : splitUrl['articleBelong'], // 文章类型
             wrapperName:null,
+            isBottomFlag: false
 		},
 		//页面初始化函数
 		init: function() {	
@@ -51,9 +52,10 @@ $(function() {
                     } else {
                         data = that.dealTime(json.data.list);
                     }
-                    setTimeout(function() {
-                        console.log(data)
+                    //setTimeout(function() {
+                    //
                         if (data.length < that.gV.pageSize) {
+                            that.gV.isBottomFlag = true
                             if (that.gV.pageCurrent == 1) { //第一页时
                                 if (data.length == 0) {
                                     // 暂无数据显示
@@ -73,16 +75,15 @@ $(function() {
                         // 页面++
                         that.gV.pageCurrent++;
                         // 将消息列表插入到页面上
-                       
                         generateTemplate(data, that.$e.fortuneFlowListWrapper, that.$e.fortuneFlowListTemp)
                         $(".lazyload").lazyload()
-                    }, 200)
+                        alwaysAjax(".knownList")
+                    //}, 200)
                 },
                 callbackNoData:function(){
                     //没有数据时展示暂无数据
-                    tipAction("没有数据")
-                    /*$(".list").hide()
-                    that.$e.noData.show();*/
+                    $(".list").hide()
+                    that.$e.noData.show();
                 },
                 callbackFail: function(json) {
                     tipAction(json.message);
@@ -147,11 +148,12 @@ $(function() {
 		events: function() {
             var that=this
             // 列表页跳转到详情页
-			mui("body").on('tap', '.knownItem' , function(){
+			mui("body").on('mdClick', '.knownItem' , function(){
                 var id = $(this).attr("id")
                 window.location.href = site_url.articleTemplate_url + '?id=' + id + '&articleBelong=' + that.gV.articleBelong + '&applyType=1'
+            },{
+                'htmdEvt': 'fortune_09'
             })
-            alwaysAjax(".knownList")
 		}
 	};
     somePage.init();

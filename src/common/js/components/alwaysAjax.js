@@ -14,23 +14,10 @@ module.exports = function(className, pullupLoadingName, cutNumber, isBottomFlag)
         $(document).scroll(function() {
             // 滚动距离 Math.abs($(classNames).offset().top - 64)
             // 容器高度 $(classNames).parent().parent().height()
-            // 当滑动距离距底部剩余200px时触发上拉加载事件
-            var a = Math.abs($(classNames).offset().top - 64)
-            var b = $(classNames).parent().parent().height()
-            var diff = b - 200
-            console.log(isBottomFlag)
-            if(isBottomFlag == false) {
-                console.log(a % b)
-                if(a % b > diff && a % b < $(classNames).parent().parent().height()) {
-                    mui(pullupLoadingNames).pullRefresh().pullupLoading();
-                }
-            }
-            //if(Math.abs($(classNames).offset().top - 64) - $(classNames).parent().parent().height())
-            //console.log($(classNames).parent().parent().height(), $(classNames).offset().top)
-            /*if ($(classNames).offset().top < tops) {
+            if ($(classNames).offset().top < tops) {
                 tops -= 800;
-                
-            } */  
+                mui(pullupLoadingNames).pullRefresh().pullupLoading();
+            } 
         });
     }
 

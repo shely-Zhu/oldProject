@@ -6,8 +6,8 @@
 require('@pathCommonBase/base.js');
 require('@pathCommonJs/ajaxLoading.js');
 
-var tipAction = require('../../../common/js/components/tipAction.js');
 var generateTemplate = require('@pathCommonJsComBus/generateTemplate.js');
+var alwaysAjax = require('@pathCommonJs/components/alwaysAjax.js');
 
 $(function() {
 
@@ -197,9 +197,8 @@ $(function() {
 
 
             //console.log(JSON.stringify($(".viewDetails").html()));
-            mui("body").on('tap', '.viewDetails', function() {
+            mui("body").on('mdClick', '.viewDetails', function() {
                 var $this = $(this);
-
                 var prizeDetailId = $this.attr("data-id");
 
                 console.log(JSON.stringify(prizeDetailId));
@@ -240,12 +239,16 @@ $(function() {
                 }];
                 $.ajaxLoading(obj);
 
+            },{
+                'htmdEvt': 'rewards_01'
             });
 
             //返回上一页
             mui("body").on('tap', '.closeBtn', function() {
                 that.$e.tipBox.hide();//弹层隐藏
             })
+
+            alwaysAjax(".recordList");
 
         },
     };

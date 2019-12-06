@@ -4,8 +4,6 @@
 */
 require('@pathCommonBase/base.js');
 require('@pathCommonJs/ajaxLoading.js');
-
-var tipAction = require('@pathCommonJs/components/tipAction.js');
 var splitUrl = require('@pathCommonJs/components/splitUrl.js')();
 var generateTemplate = require('@pathCommonJsComBus/generateTemplate.js');
 
@@ -61,8 +59,10 @@ $(function(){
         events:function() {
             var that = this;
             //跳转到各类通知页面 mesType 0系统通知，1产品公告，2活动通知，3交易动态 
-            mui("body").on('tap', '.noticeItem' , function(){
+            mui("body").on('mdClick', '.noticeItem' , function(){
                 window.location.href = site_url.systemInforms_url + '?mesType=' + $(this).attr('mesType');
+            },{
+                'htmdEvt': 'notice_00'
             })
         },
 	};

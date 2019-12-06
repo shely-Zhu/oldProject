@@ -13,19 +13,17 @@
      <title>转出</title>
    
  </head>
- <body>
-     <!-- @@include('../../common/views/load.html') -->
-     
+ <body>   
      <section class="container">
         @@include('@pathCommonViews/headBarConfig.html',{"pathName":"转出"}) 
         <div class="br"></div>
         <div class="title" id="transformProductName">现金宝产品1</div>
 
         <div class="mui-row tabWrapper">
-        	<div class="mui-col-sm-6 mui-col-xs-6 tab" type="fast" htmdEvt="cashTransformOut_fast">
+        	<div class="mui-col-sm-6 mui-col-xs-6 tab" type="fast" >
         		<span class="active activeIcon">快速转出<span>
         	</div>
-        	<div class="mui-col-sm-6 mui-col-xs-6 tab" type="common" htmdEvt="cashTransformOut_common">
+        	<div class="mui-col-sm-6 mui-col-xs-6 tab" type="common" >
         		<span class="activeIcon">普通转出</span>
         	</div>
         </div>
@@ -47,7 +45,7 @@
 	            </div> -->
 
 	            <!-- 右侧 选择银行卡后样式 -->
-	            <div class="onright" id="bank" htmdEvt="cashTransformOut_bank"> 
+	            <div class="onright" id="bank" > 
 	                <a class="iconfont iconone" href="javascript:;">&#xe67d;</a>
 	                <div class="onright-left">
 	                    <div class="onright-left-one">
@@ -69,13 +67,16 @@
             <div class="msecond">
             	<span class="msecond-one">￥</span>
                 <input class="transformInput" type="text">
-                <img class="clearMoney" src="/financial/static/img/icon_delete@2x.png" htmdEvt="cashTransformOut_clearMoney" alt="">
-                <span class="button">全部</span>
+                <img class="clearMoney" src="/financial/static/img/icon_delete@2x.png"  alt="">
+                <span class="button tranoutAllMoney">全部</span>
              </div>
              <div class="clearfix explain">
-             	<div class="left">
+             	<div class="left" type='fast'>
              		2小时内到账<span class="iconfont">&#xe635;</span>
-             	</div>
+                 </div>
+                 <div class="left" type='common'>
+                        预计1-2个工作日到账<span class="iconfont">&#xe635;</span>
+                 </div>
              	<div class="right" htmdEvt="cashTransformOut_right">
              		<span class="transformRule">现金宝产品1转出规则</span><span class="iconfont">&#xe635;</span>
              	</div>
@@ -87,23 +88,23 @@
          <div class="p2">
                 <div class="agreementRuleFooter">
                     <span class="file">
-                        <a href="javascript:;" class="item2"><span class="iconfont" htmdEvt="cashTransformOut_iconfont">&#xe668;</span><span>已阅读并同意</span></a>
-                        <a class="agreementRule"></a>
+                        <a href="javascript:;" class="item2"><span class="iconfont" >&#xe668;</span><span>已阅读并同意</span></a>
+                        <a href="javascript:;" class="agreementRule"></a>
                     </span>
                     
                 </div>
             </div>
             <div class="checkMessage">超出最大转出金额额</div>
-            <button class="conformButton confirmeDemptionPay" htmdEvt="cashTransformOut_confirmeDemptionPay"  disabled>确定</button>
+            <button class="conformButton confirmeDemptionPay"  disabled>确定</button>
 
 
           <!-- 银行卡弹窗 -->
          <div class="popup">
-             <div class="popup-mask" htmdEvt="cashTransformOut_mask"></div>
+             <div class="popup-mask" ></div>
              <div class="popup-content">
                  <div class="popup-title">
                      <!-- <div class="popup-close"> -->
-                         <img class="popup-close" src="/financial/static/img/Nav Bar_icon_close_black@2x.png"  htmdEvt="cashTransformOut_close"  alt="">
+                         <img class="popup-close" src="/financial/static/img/Nav Bar_icon_close_black@2x.png"  alt="">
                      <!-- </div> -->
                      <div class="tit">选择到账银行卡</div> 
                  </div>
@@ -151,15 +152,16 @@
 <div class="elasticLayer transOutRule" id="tip" style="z-index:100">
         <div class="elasticWrapper">
             <div class="elasticMid">
-                <div class="elasticTitle">其他总资产</div>
+                <div class="elasticTitle">信息说明</div>
                 <div class="elasticContent">
-                    <p class="elasticP">《泰达宏利基金电子交易平台泰达宏利活期友货币A(001894）转出分为快速转出和普通转出2种方式。T日（工作日）15:00前申请转入，预计T+1工作日9:30以后可支持转出，15:00后申请转入的，顺延一个工作日可转出。当日申购的金额，当日无法赎回。</p>
+                   <!-- <p class="elasticP">《泰达宏利基金电子交易平台泰达宏利活期友货币A(001894）转出分为快速转出和普通转出2种方式。T日（工作日）15:00前申请转入，预计T+1工作日9:30以后可支持转出，15:00后申请转入的，顺延一个工作日可转出。当日申购的金额，当日无法赎回。</p>
                     <p class="elasticP">快速转出：单笔限额1万元，单日限额1万元，单日最多10笔，当日无收益，转出实时到账。 </p>
                     <p class="elasticP">普通转出：无限额限制，预计到账时间T+1工作日。</p>
+                    -->
                 </div>
                 
             </div>
-            <div class="elasticButtons"  htmdEvt="cashTransformOut_elasticButtons">明白了</button>
+            <div class="elasticButtons" >明白了</button>
             </div>
         </div>
     </div>
@@ -167,7 +169,7 @@
     <!--银行卡弹框模板-->
      <script id="cashTransformOutList" type="text/x-handlebars-template">
         {{#each this}}
-            <li class="popup-li cashCheckItem" htmdEvt="cashTransformOut_cashCheckItem" bankName={{bankName}} bankLogoUrl={{bankThumbnailUrl}} carNum={{carNum}} singleNum={{availableShare}} oneDayNum={{oneDayNum}} bankNo={{bankNo}} bankAccount={{bankAccountSecret}} tradeAcco={{tradeAcco}} capitalMode={{capitalMode}} singleNumMask={{singleNumMask}} oneDayNumMask={{oneDayNumMask}} >
+            <li class="popup-li cashCheckItem"  bankName={{bankName}} bankLogoUrl={{bankThumbnailUrl}} carNum={{carNum}} singleNum={{availableShare}} oneDayNum={{oneDayNum}} bankNo={{bankNo}} bankAccount={{bankAccountSecret}} tradeAcco={{tradeAcco}} capitalMode={{capitalMode}} singleNumMask={{singleNumMask}} oneDayNumMask={{oneDayNumMask}} >
                 <img class="bank-img" src={{bankThumbnailUrl}} alt="">
                 <div class="div">
                     <div class="bank-name"><span>{{bankName}}</span><span>(</span><span>{{carNum}}</span><span>)</span></div>
@@ -181,17 +183,11 @@
 
 
      @@include('@pathCommonCom/elasticLayer/transOutRule/transOutRule.html')
-
-
-     <!-- 加载中loading -->
-     <!-- @@include('@pathCommonViews/load.html') -->
  
      <!-- 加载中loading -->
-     @@include('@pathCommonViews/loading/listLoading.html')
+     @@include('@pathCommonCom/loading/listLoading.html')
  
      @@include('@pathInclude/views/footer.html')
-     <!-- 添加埋点 -->
-     @@include('@pathInclude/views/header.html')
 
      @@include('../../../common/views/payPassword.html') 
      <script src="/financial/static/js/publicPlacement/cashTransformOut.js"></script>

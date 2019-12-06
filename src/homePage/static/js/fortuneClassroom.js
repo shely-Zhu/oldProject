@@ -30,6 +30,7 @@ $(function() {
             listToTop: '', // 滑动区域距离顶部距离
             navToTop: '', // 滑动nav距离顶部距离
             navHeight: '', // nav高度
+            lazyClassArr: []
         },
         html: '', //存放生成的html
         init: function() { //初始化函数
@@ -130,6 +131,10 @@ $(function() {
                 //为$id添加hasPullUp  class
                 $($id).addClass('hasPullUp');
             });
+            //无缝滚动
+            /*setTimeout(function() {
+                
+            }, 1000)*/
         },
         getTabsListData: function(t) {
             var that = this;
@@ -148,6 +153,7 @@ $(function() {
                                 num: json.data[i].sonModelType
                             }
                         })(i);
+                        that.gV.lazyClassArr.push("lazyload" + json.data[i].sonModelType)
                     }
                     //拼模板，初始化左右滑动mui组件
                     that.beforeFunc();
@@ -233,13 +239,20 @@ $(function() {
                             t.endPullupToRefresh(false);
                         }
                         $id.find('.contentWrapper .mui-pull-bottom-pocket').removeClass('mui-hidden');
+                        console.log(that.gV.ajaxArr[that.gV.current_index].pageCurrent)
                         if (that.gV.ajaxArr[that.gV.current_index].pageCurrent == 1) {
                             //第一屏
                             $id.find('.contentWrapper .mui-table-view-cell').html(that.html);
-                            $(".lazyload").lazyload()
+                            for(var i = 0 ; i < that.gV.lazyClassArr.length; i++) {
+                                $("." + that.gV.lazyClassArr[i]).lazyload()
+                            }
+                            alwaysAjax('#' + w + ' .mui-table-view-cell', s)
                         } else {
                             $id.find('.contentWrapper .mui-table-view-cell').append(that.html);
-                            $(".lazyload").lazyload()
+                            for(var i = 0 ; i < that.gV.lazyClassArr.length; i++) {
+                                $("." + that.gV.lazyClassArr[i]).lazyload()
+                            }
+                            alwaysAjax('#' + w + ' .mui-table-view-cell', s)
                         }
                         //获取当前展示的tab的索引
                         var index = $('#slider .tab-scroll-wrap .mui-active').index(),
@@ -297,27 +310,21 @@ $(function() {
                 } else {
                     b.isLive = false
                 }
+                b.lazyClass = "lazyload" + b.articleBelong
             })
             return data;
         },
         events: function() { //绑定事件
             var that = this;
             // 列表页跳转到详情页
-            mui("body").on('tap', '.roomItem' , function(){
+            mui("body").on('mdClick', '.roomItem' , function(){
                 var id = $(this).attr("id")
                 var articleBelong = $(this).attr("articleBelong")
                 window.location.href = site_url.articleTemplate_url + '?id=' + id + '&articleBelong=' + articleBelong + '&applyType=1'
+            },{
+                'htmdEvt': 'fortune_10'
             })
-            //alwaysAjax(".roomItem")
         }
     };
     data.init();
-
-    //添加埋点待定这样
-    function attr(name,attribute,value){
-        name.attr(attribute,value)
-    }
-    setTimeout(()=>{
-        attr($('#slider .tab-scroll-wrap .mui-control-item'),'htmdEvt','fortune_sliderTab')
-    },1000)
 });

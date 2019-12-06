@@ -5,14 +5,11 @@
  * @Last Modified by:   songxiaoyu
  * @description:
  */
-
-require('@pathIncludJs/vendor/config.js');
-require('@pathIncludJs/vendor/zepto/callback.js');
-require('@pathIncludJs/vendor/zepto/deferred.js');
-require('@pathCommonJs/components/utils.js');
+require('@pathCommonBase/base.js');
 require('@pathCommonJs/ajaxLoading.js');
 require('@pathCommonJs/components/elasticLayer.js');
 require('@pathCommonJs/components/elasticLayerTypeTwo.js');
+require('@pathCommonJs/components/headBarConfig.js');
 var tipAction = require('@pathCommonJs/components/tipAction.js');
 var splitUrl = require('@pathCommonJs/components/splitUrl.js')();
 var generateTemplate = require('@pathCommonJsComBus/generateTemplate.js');
@@ -197,19 +194,25 @@ $(function() {
         events: function() {
             var that = this;
 
-            mui("body").on("tap", ".topSearch", function() {
+            mui("body").on("mdClick", ".topSearch", function() {
                 window.location.href = site_url.diagnosisSearch_url;
+            }, {
+                'htmdEvt': 'diagnosisSearch_01'
             });
 
             // 跳转详情页
-            mui("body").on("tap", ".hd_to_detail", function(e) {
+            mui("body").on("mdClick", ".hd_to_detail", function(e) {
                 var fundCode = $($(this).find('.lightColor')[0]).html();
                 window.location.href = site_url.diagnosisDetail_url + '?fundCode=' + fundCode;
+            }, {
+                'htmdEvt': 'diagnosisSearch_02'
             });
 
             // 获取专属报告
-            mui("body").on("tap", ".btnBottom", function() {
+            mui("body").on("mdClick", ".btnBottom", function() {
                 that.getReport();
+            }, {
+                'htmdEvt': 'diagnosisSearch_03'
             });
         },
     };

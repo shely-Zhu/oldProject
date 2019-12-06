@@ -13,6 +13,7 @@ var tipAction = require('@pathCommonJsCom/tipAction.js');
 
 var splitUrl = require('@pathCommonJs/components/splitUrl.js')();
 var generateTemplate = require('@pathCommonJsComBus/generateTemplate.js');
+var alwaysAjax = require('@pathCommonJs/components/alwaysAjax.js');
 
 
 $(function() {
@@ -181,15 +182,17 @@ $(function() {
 				window.location.href = site_url.monthReportDetail_url + '?reportId=' + $this.attr('reportId');
 				
 			},{
-				'htmdEvt': ''
+				'htmdEvt': 'monthReportList_01'
 			})
 
 			mui("body").on('mdClick', '.productBtn', function() {
 				var $this = $(this);
 				window.location.href = site_url.wealthIndex_url;
 			},{
-				'htmdEvt': ''
+				'htmdEvt': 'monthReportList_02'
 			})
+
+			alwaysAjax(".recordList");
 
 		},
 	};

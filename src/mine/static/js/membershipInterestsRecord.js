@@ -5,7 +5,6 @@ require('@pathCommonBase/base.js');
 require('@pathCommonJs/ajaxLoading.js');
 require('@pathCommonJs/components/elasticLayer.js');
 require('@pathCommonJs/components/elasticLayerTypeTwo.js');
-var tipAction = require('@pathCommonJs/components/tipAction.js');
 var generateTemplate = require('@pathCommonJsComBus/generateTemplate.js');
 //无缝滚动
 var alwaysAjax = require('@pathCommonJs/components/alwaysAjax.js'); 
@@ -203,7 +202,7 @@ $(function(){
 
                     window.location.href = site_url.articleTemplate_url+ '?articleBelong=9&applyType=0';
                 }, {
-                    'htmdEvt': 'feedback_functionalAbnormality'
+                    'htmdEvt': 'adolesceRecord_01'
                 });
             
 		},

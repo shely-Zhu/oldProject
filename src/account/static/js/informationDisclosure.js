@@ -225,7 +225,7 @@ var prvMar = {
         return that.setting.ajaxParamList[that.status.current_label];  
     },
     events: function() {
-        mui("body").on("tap", ".mui-box", function() {
+        mui("body").on("mdClick", ".mui-box", function() {
             // if(window.currentIsApp){
             //     window.location.href = $(this).attr("href");
             // }else{
@@ -237,6 +237,8 @@ var prvMar = {
             form.action = src;
             document.getElementsByTagName('body')[0].appendChild(form);
             form.submit();
+        },{
+            'htmdEvt': 'informationDisclosure_0'
         })
     }
 }

@@ -12,8 +12,6 @@ require('@pathCommonJsCom/tabScroll.js');
 require('@pathCommonJsCom/goTopMui.js');
 require('@pathCommonJs/components/elasticLayer.js');
 require('@pathCommonJs/components/elasticLayerTypeFive.js');
-//黑色提示条的显示和隐藏
-var tipAction = require('@pathCommonJsCom/tipAction.js');
 var splitUrl = require('@pathCommonJs/components/splitUrl.js')();
 var alwaysAjax = require('@pathCommonJs/components/alwaysAjax.js');
 
@@ -227,7 +225,15 @@ $(function() {
                     //初始化第一屏区域的上拉加载
                     that.initMui($('#scroll1'));
 
-                }
+                },
+                callbackNoData: function() {
+                    //没有数据时展示暂无数据
+                    $(".list").hide()
+                    $(".title").hide()
+                    that.getElements.listLoading.hide();
+                    that.getElements.noData.show();
+                    $(".br").css("display", "none");
+                },
             }];
             $.ajaxLoading(obj);
         },
@@ -410,11 +416,4 @@ $(function() {
         }
     };
     data.init();
-    //添加埋点待定这样
-    function attr(name, attribute, value) {
-        name.attr(attribute, value)
-    }
-    setTimeout(() => {
-        attr($('#slider .tab-scroll-wrap .mui-control-item'), 'htmdEvt', 'fortune_wealthTab')
-    }, 1000)
 });

@@ -385,7 +385,6 @@ $(function() {
         },
         events: function() { //绑定事件
             var that = this;
-            alwaysAjax("myAsset")
         }
     };
     data.init();

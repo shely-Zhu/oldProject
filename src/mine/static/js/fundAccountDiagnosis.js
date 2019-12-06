@@ -5,14 +5,11 @@
  * @Last Modified by:   songxiaoyu
  * @description:
  */
-
-require('@pathIncludJs/vendor/config.js');
-require('@pathIncludJs/vendor/zepto/callback.js');
-require('@pathIncludJs/vendor/zepto/deferred.js');
-require('@pathCommonJs/components/utils.js');
+require('@pathCommonBase/base.js');
 require('@pathCommonJs/ajaxLoading.js');
 require('@pathCommonJs/components/elasticLayer.js');
 require('@pathCommonJs/components/elasticLayerTypeTwo.js');
+require('@pathCommonJs/components/headBarConfig.js');
 var tipAction = require('@pathCommonJs/components/tipAction.js');
 var splitUrl = require('@pathCommonJs/components/splitUrl.js')();
 var generateTemplate = require('@pathCommonJsComBus/generateTemplate.js');
@@ -223,7 +220,7 @@ $(function() {
         },
         events: function() {
             var that = this;
-            mui("body").on("tap", ".account-holdings .down", function() {
+            mui("body").on("mdClick", ".account-holdings .down", function() {
                 if($(this).hasClass('up')){
                     $(this).removeClass('up')
                 }else{
@@ -231,12 +228,16 @@ $(function() {
                 }
                 that.gV.pageSize = 100000
                 that.getHoldData();
+            },{
+                'htmdEvt': 'fundAccountDiagnosis_01'
             });
 
 
             // 获取专属报告
-            mui("body").on("tap", ".btnBottom", function() {
+            mui("body").on("mdClick", ".btnBottom", function() {
                 that.getReport();
+            },{
+                'htmdEvt': 'fundAccountDiagnosis_02'
             });
         },
         //给饼图付渐变色

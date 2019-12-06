@@ -347,6 +347,8 @@ module.exports = function() {
     this.rewards_url = go_url.no_url + '/mine/views/rewards.html';
     //交易明细总页面
     this.publicTransactionDetails_url = go_url.no_url + '/mine/views/publicTransactionDetails.html'
+    //单个产品交易记录页面
+    this.transactionDetailPublic_url = go_url.no_url + '/account/views/public/transactionDetail.html'
         /*-------------------------------活动列表 end -----------------------*/
 
 
@@ -488,8 +490,12 @@ module.exports = function() {
     this.membershipInterestsRecord_url = go_url.no_url +  '/mine/views/membershipInterests/membershipInterestsRecord.html'
     //我的定投计划
     this.myInvestmentPlan_url = go_url.no_url +  '/financial/views/publicPlacement/myInvestmentPlan.html'
+    //我的定投计划----已终止的定投计划
+    this.myInvestmentPlanH_url = go_url.no_url +  '/financial/views/publicPlacement/myInvestmentPlanH.html'
     //我的 历史明细
     this.mineHistoryDetail_url = go_url.no_url +  '	/account/views/public/mineHistoryDetail.html'
+    //非货币基金历史明细
+    this.otherFundHistoryDetail_url = go_url.no_url +  '	/account/views/public/otherFundHistoryDetail.html'
     //联系我们 意见反馈
     this.concatUsAdvise_url = go_url.no_url +  '/mine/views/concatUs/concatUsAdvise.html'
     /*------------------- 财富学院 start ------------------------------*/
@@ -511,7 +517,9 @@ module.exports = function() {
     this.tradeDetailOne_url = go_url.no_url + '/personal/views/tradeDetail.html';
     //赎回明细
     this.detailLists_url = go_url.no_url + '/personal/views/detailLists.html';
-
-   
+    
+    //我的积分规则
+    this.imgModel_url =  go_url.no_url + '/include/views/imgModel.html';
+    
    
 };

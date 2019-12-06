@@ -337,6 +337,8 @@ module.exports = {
     './financial/static/js/publicPlacement/castSurelyDetails': './src/financial/static/js/publicPlacement/castSurelyDetails.js',
     //我的定投计划
     './financial/static/js/publicPlacement/myInvestmentPlan': './src/financial/static/js/publicPlacement/myInvestmentPlan.js',
+     //我的定投计划----已终止的定投计划
+     './financial/static/js/publicPlacement/myInvestmentPlanH': './src/financial/static/js/publicPlacement/myInvestmentPlanH.js',
     //我的定投计划详情
     './financial/static/js/publicPlacement/castSurelyDetails': './src/financial/static/js/publicPlacement/castSurelyDetails.js',
     //活期理财
@@ -382,6 +384,8 @@ module.exports = {
     './homePage/static/js/fortuneClassroom': './src/homePage/static/js/fortuneClassroom.js',
     //历史明细
     './account/static/js/public/mineHistoryDetail': "./src/account/static/js/public/mineHistoryDetail.js",
+    //非货币基金历史明细
+    './account/static/js/public/otherFundHistoryDetail': "./src/account/static/js/public/otherFundHistoryDetail.js",
     //收益明细
      './account/static/js/public/returnsDetail': "./src/account/static/js/public/returnsDetail.js",
 

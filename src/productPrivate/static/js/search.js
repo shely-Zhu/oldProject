@@ -2,7 +2,7 @@
  * 私募产品列表查询
  * @author  zhangweipeng 2017-03-08
  */
-
+require('@pathCommonBase/base.js');
 require('../../../include/js/vendor/config.js');
 //zepto模块
 require('../../../include/js/vendor/zepto/callback.js'); 

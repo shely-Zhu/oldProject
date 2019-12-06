@@ -15,7 +15,7 @@
  </head>
  
  <body>
-     @@include('@pathCommonViews/load.html')
+     @@include('@pathCommonCom/loading/listLoading.html')
      <section class="container">
          @@include('@pathCommonViews/headBarConfig.html',{"pathName":"转入"})
          <div class="br"></div>
@@ -31,13 +31,13 @@
              <div class="msecond">
                  <span class="msecond-one">￥</span>
                  <input class="transformInput" id="transformInput" type="number">
-                 <img src="/financial/static/img/icon_delete@2x.png" htmdEvt="cashTransformIn_deleteNum" class="deleteNum" alt="">
+                 <img src="/financial/static/img/icon_delete@2x.png" class="deleteNum" alt="">
               </div>
               <div class="pay">
                   <p class="payConfirm">预计<span class="startGainsDayStr"></span>开始收益，<span class="date paymentGainsDayStr"></span>收益到账</p>
               </div>
           </div>
-         <div class="onlinepay paymoney" pay-type="2" htmdEvt="cashTransformIn_paymoney">
+         <div class="onlinepay paymoney" pay-type="2" >
              <div class="ff">在线支付</div>
              <div class="paymoney-right">
                  <a class="iconfont iconone" href="javascript:;">&#xe67d;</a>
@@ -60,16 +60,16 @@
          <div class="p2">
              <div>
                  <span class="file">
-                     <a href="javascript:;" htmdEvt="cashTransformIn_item2" class="item2"><span class="iconfont">&#xe668;</span><span>已阅读并同意</span></a>
-                     <a href="javascript:;" class="setGoUrl" htmdEvt="cashTransformIn_agreementModel" >《公募基金风险揭示及售前告知书》</a>、
-                     <a class="contract" href="javascript:;" htmdEvt="cashTransformIn_contract" >《基金合同》</a>、
-                     <a class="recruiting" href="javascript:;" htmdEvt="cashTransformIn_recruiting" >《招募说明书》</a>
+                     <a href="javascript:;" class="item2"><span class="iconfont">&#xe668;</span><span>已阅读并同意</span></a>
+                     <a href="javascript:;" class="setGoUrl" >《公募基金风险揭示及售前告知书》</a>、
+                     <a class="contract" href="javascript:;" >《基金合同》</a>、
+                     <a class="recruiting" href="javascript:;" >《招募说明书》</a>
                  </span>
                  
              </div>
          </div>
         <div class="btn_box">
-             <button class="btn" type="button" disabled  htmdEvt="cashTransformIn_btn" >
+             <button class="btn" type="button" disabled  >
                      确定
              </button>
              
@@ -135,8 +135,6 @@
       @@include('@pathCommonCom/elasticLayer/transOutRule/transOutRule.html')
   
       @@include('@pathInclude/views/footer.html')
-      <!-- 添加埋点 -->
-      @@include('@pathInclude/views/header.html')
       <script src="/financial/static/js/publicPlacement/cashTransformIn.js"></script>
       <!-- <script src="/account/static/js/public/payPassword.js"></script> -->
   </body>

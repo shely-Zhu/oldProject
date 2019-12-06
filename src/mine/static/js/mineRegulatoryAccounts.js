@@ -9,8 +9,6 @@ require('@pathCommonBase/base.js');
 
 require('@pathIncludJs/vendor/mui/mui.picker.min.js');
 
-//黑色提示条
-var tipAction = require('@pathCommonJs/components/tipAction.js');
 require('@pathCommonJs/ajaxLoading.js');
 require('@pathCommonJs/components/elasticLayer.js');
 
@@ -110,7 +108,7 @@ $(function(){
 			// 	});
 			// })
 
-			$(".copy_btn").click(function () {
+			mui("body").on('mdClick', '.copy_btn' , function(event){
 				var $this = $(this);
 				var copyText = $this.siblings('div').text()
 			    //实例化clipboard
@@ -120,6 +118,7 @@ $(function(){
 						return copyText;
 					}
 				});
+				console.log(clipboard)
 				clipboard.on("success", function (e) {
 					//text = '';
 					tipAction("复制成功");
@@ -127,16 +126,22 @@ $(function(){
 				clipboard.on("error", function (e) {
 					tipAction("请选择“拷贝”进行复制!");
 				});
-
-			});
+				clipboard.onClick(event)
+			},{
+                'htmdEvt': 'mineRegulatoryAccounts_01'
+            });
 			
-			$('.toptitle span,.toptitle img').on('tap',function(){
+			mui("body").on('mdClick', '.toptitle span,.toptitle img' , function(){
 				$('.topcontent').addClass('mui-active').removeClass('mui-hidden');
-			})
+			},{
+                'htmdEvt': 'mineRegulatoryAccounts_02'
+            })
 			
-			$('.topimg').on('tap',function(){
+			mui("body").on('mdClick', '.topimg' , function(){
 				$('.topcontent').addClass('mui-hidden').removeClass('mui-active');
-			})
+			},{
+                'htmdEvt': 'mineRegulatoryAccounts_03'
+            })
 
         },
 

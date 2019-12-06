@@ -6,7 +6,6 @@
 require('@pathCommonBase/base.js');
 require('@pathCommonJs/ajaxLoading.js');
 
-var tipAction = require('@pathCommonJs/components/tipAction.js');
 var swiperSizeMap = require('@pathCommonJs/components/swiper/swiperSizeMap.js');
 var generateTemplate = require('@pathCommonJsComBus/generateTemplate.js');
 
@@ -65,7 +64,7 @@ $(function(){
                         $('.membershipDetailsContentBox h2').text(name);
                         $('.membershipDetailsContentBox p').text(text);     
                         $(".tel").attr("href", "tel:" + commonSetting.serverPhone).html(commonSetting.serverPhone)                   
-                        $('.linkBtnBox a').attr('href',link);
+                        $('.linkBtnBox').html("<a href='" + link + "' class='linkBtn goldBgButton' onclick='setGoUrl({{" + link + "}} , 'detailsUnderstandingDetails_01')'>了解详情</span>")
                     }
                 }
             });

@@ -8,7 +8,6 @@ require('@pathCommonJs/components/elasticLayer.js');
 require('@pathCommonJs/components/elasticLayerTypeTwo.js');
 
 require('@pathCommonJs/components/tabScroll.js');
-var tipAction = require('@pathCommonJs/components/tipAction.js');
 var splitUrl = require('@pathCommonJs/components/splitUrl.js')();
 var generateTemplate = require('@pathCommonJsComBus/generateTemplate.js');
 
@@ -213,13 +212,17 @@ $(function () {
                     $('.listHasData0').hide()
                     $('.listHasData1').show()
                 }
+            },{
+                'htmdEvt': 'activityEnrolment_01'
             })
 
             //分享好友
-            mui('body').on('tap', '.timeBtn', function () {
+            mui('body').on('mdClink', '.timeBtn', function () {
                 var actId = $(this).attr('data-actId');
                 var actType = $(this).attr('data-actType');
                 that.shareInfo(actId, actType);
+            },{
+                'htmdEvt': 'activityEnrolment_02'
             });
         }
 

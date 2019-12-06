@@ -461,7 +461,7 @@ $(function() {
 			})
 //			交易记录跳转
 			mui("body").on('tap', '.jyjl', function() {
-				window.location.href = site_url.transactionRecords_url;
+				window.location.href = site_url.transactionDetailPublic_url + "?fundCode=" + that.data.fundCode + "&tradeNo=" + that.data.publicFundDetail.tradeNo;
 			})
 //			分红方式跳转
 			mui("body").on('tap', '.dividend', function() {
@@ -469,7 +469,13 @@ $(function() {
 			})
 //			历史明细跳转
 			mui("body").on('tap', '.historyDetail', function() {
-				window.location.href = site_url.mineHistoryDetail_url + "?fundCode=" + that.data.fundCode;
+				if(that.data.projectType != "10300"){//非货币基金
+					window.location.href = site_url.otherFundHistoryDetail_url + "?fundCode=" + that.data.fundCode;
+					
+				}else{//货币基金
+					window.location.href = site_url.mineHistoryDetail_url + "?fundCode=" + that.data.fundCode;
+					
+				}
 			})
 //			收益明细跳转
 			mui("body").on('tap', '.symx', function() {
