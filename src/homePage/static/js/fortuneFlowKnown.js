@@ -24,8 +24,7 @@ $(function() {
             pageSize: 10,
 			fortuneFlowList: [],
             articleBelong : splitUrl['articleBelong'], // 文章类型
-            wrapperName:null,
-            isBottomFlag: false
+            wrapperName:null
 		},
 		//页面初始化函数
 		init: function() {	
@@ -52,8 +51,7 @@ $(function() {
                     } else {
                         data = that.dealTime(json.data.list);
                     }
-                    //setTimeout(function() {
-                    //
+                    setTimeout(function() {
                         if (data.length < that.gV.pageSize) {
                             that.gV.isBottomFlag = true
                             if (that.gV.pageCurrent == 1) { //第一页时
@@ -78,7 +76,7 @@ $(function() {
                         generateTemplate(data, that.$e.fortuneFlowListWrapper, that.$e.fortuneFlowListTemp)
                         $(".lazyload").lazyload()
                         alwaysAjax(".knownList")
-                    //}, 200)
+                    }, 200)
                 },
                 callbackNoData:function(){
                     //没有数据时展示暂无数据
