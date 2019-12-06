@@ -20,6 +20,7 @@ $(function () {
       var that = this;
 
       //页面初始化
+      $('.tips').hide()
       that.getData();
       that.events();
 
@@ -71,7 +72,7 @@ $(function () {
 
     },
      // 获取认证信息
-    getUserInfo: function (fundName,fundCode) {
+    getUserInfo: function (fundCode,fundName) {
       var that = this;
       // 请求页面数据
       var obj = [{
@@ -130,8 +131,8 @@ $(function () {
       mui("body").on("mdClick", ".fundIn", function () {
         var fundCode = $(this).parent().parent().find(".itemTop .itemTitle span").eq(0).attr("fundCode")
         var fundName = $(this).parent().parent().find(".itemTop .itemTitle span").eq(0).attr("fundName")
-        window.location.href = site_url.pofCashTransformIn_url + '?fundCode='+ fundCode + '&fundName=' + fundName;
-        // that.getUserInfo(fundCode,fundName)  //暂时屏蔽
+        // window.location.href = site_url.pofCashTransformIn_url + '?fundCode='+ fundCode + '&fundName=' + fundName;
+        that.getUserInfo(fundCode,fundName)  //暂时屏蔽
        
       }, {
 				htmdEvt: 'cashManagement_02'
