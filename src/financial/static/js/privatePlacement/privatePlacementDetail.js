@@ -498,8 +498,8 @@ $(function() {
                 jumpUrl = site_url.investorClassification_url
             } else if (v.conditionJump == 5) { //跳转到投资者分类结果页页面
                 jumpUrl = site_url.investorClassificationResult_url
-            } else if (v.conditionJump == 6) { //跳转到合格投资者申请选择 页面
-                jumpUrl = site_url.chooseQualifiedInvestor_url
+            } else if (v.conditionJump == 6) { //跳转到合格投资者申请 页面
+                jumpUrl = site_url.qualifiedInvestor_url
             } else if (v.conditionJump == 7) { //跳转到合格投资者结果页面
                 jumpUrl = site_url.qualifiedInvestorResult_url
             }

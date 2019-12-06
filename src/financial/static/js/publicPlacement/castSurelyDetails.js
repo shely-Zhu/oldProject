@@ -55,7 +55,7 @@ $(function () {
           $('.bankName').html(json.bankName);
           $('.bankAccountMask').html(json.bankAccountMask);
           $('.signDate').html(json.signDateMask);
-          $('.bankNo').html(json.bankNo);
+          $('.bankNo').html(json.bankAccountMask.substr(json.bankAccountMask.length - 4));
           $('.bankThumbnailUrl').attr('src', json.bankThumbnailUrl);
           $('.totalCfmShareMask').html(json.totalCfmShareMask);
           $('.serviceCharge').html('含手续费' + json.serviceCharge + '元');

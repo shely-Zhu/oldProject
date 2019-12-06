@@ -10,7 +10,7 @@ require('@pathCommonBase/base.js');
 require('@pathCommonJs/ajaxLoading.js');
 var authenticationProcess = require('@pathCommonJs/components/authenticationProcess.js');
 var generateTemplate = require('@pathCommonJsComBus/generateTemplate.js');
-var splitUrl = require('@pathCommonJs/components/splitUrl.js');
+var splitUrl = require('@pathCommonJs/components/splitUrl.js')();
 //是否大于0的判断器 用于设置涨红跌绿 可以参考publicAssets.js
 Handlebars.registerHelper("if_than_0", function (value, options) {
     if (value > 0) {
@@ -39,7 +39,7 @@ $(function () {
             accreditedInvestorArr: ['未通过', '已通过', '已过期', '未做'],//是否合格投资者 空-未做； 0-未通过；1-已通过； 2-已过期 
             tipStatus: false,
         },
-        fundType: getQueryString('fundType') === '10300' ? 1 : 0, //10300 货币基金类型，其余为普通基金类型
+        fundType: splitUrl['fundType'] == '10300' ? 1 : 0, //10300 货币基金类型，其余为普通基金类型
         init: function () {
             var that = this;
             //页面初始化
@@ -53,7 +53,6 @@ $(function () {
             var value = key.toFixed(num)
             if (isfalse) {
                 if (key > 0) {
-                    value = "+" + value
                 }
             }
             this.gV.json[prop] = value
@@ -64,10 +63,17 @@ $(function () {
             var obj = [{
                 url: site_url.newfundDetails_api,
                 data: {
-                    fundCode: getQueryString('fundCode') ? getQueryString('fundCode') : '000847'
+                    fundCode: splitUrl['fundCode'],
                 },
                 callbackDone: function (json) {
                     that.gV.json = json.data
+                    that.gV.json.fundType = that.fundType
+                    if(that.gV.json.chgRat1d > 0){
+                        that.gV.json.chgRat1d_s  = '+' + that.gV.json.chgRat1d.toFixed(2)
+                    }
+                    if(that.gV.json.annYldRat > 0){
+                        that.gV.json.annYldRat_s  = '+' + that.gV.json.annYldRat.toFixed(2)
+                    }
                     var tplm = $("#dataLists").html();
                     var template = Handlebars.compile(tplm);
                     that.changeVal('annYldRat', 4)
@@ -93,6 +99,8 @@ $(function () {
                     $.each($(".net_worth_area .net_worth_item .value"), function (i, v) {
                         if (Number($(v).text().slice(0, $(v).text().length - 1)) >= 0) {
                             $(v).addClass('value_red')
+                        } else if(Number($(v).text().slice(0, $(v).text().length - 1)) == 0) {
+                            $(v).addClass('value_c')
                         } else {
                             $(v).addClass('value_green')
                         }
@@ -146,26 +154,6 @@ $(function () {
                         that.gV.tipStatus = true
 
                     }
-                    // var tplm = $("#dataLists1").html();
-                    // var template = Handlebars.compile(tplm);
-                    // $.each(json.pageList, function (i, v) {
-                    //     if (v.dayChgRat > 0) {
-                    //         v.dayChgRat = "+" + v.dayChgRat
-                    //     }
-                    //     if (v.annYldRat > 0) {
-                    //         v.annYldRat = "+" + v.annYldRat
-                    //     }
-                    // })
-                    // json.fundType = that.fundType
-                    // var html = template(json);
-                    // $(".tplBox1").html(html);
-                    // $.each($(".history_item .value"), function (i, v) {
-                    //     if (Number($(v).text().slice(0, $(v).text().length - 1)) >= 0) {
-                    //         $(v).addClass('value_red')
-                    //     } else {
-                    //         $(v).addClass('value_green')
-                    //     }
-                    // });
                 },
                 callbackFail: function (json) {
                     tipAction(json.msg);
@@ -176,7 +164,7 @@ $(function () {
         events: function () {
             var that = this;
             var json = that.gV.json
-            var fundCode = getQueryString('fundCode') ? getQueryString('fundCode') : '000847'
+            var fundCode = splitUrl['fundCode']
             var fundComId = json.fmcComId ? json.fmcComId : 'gz04tVwXga'
             var secuId = json.secuId ? json.secuId : '000846.OF'
             var fundName = json.chiName ? json.chiName : '中融货币市场基金'
@@ -288,6 +276,12 @@ $(function () {
                 }
             });
 
+            //分享  -- 跳往原生页面
+            mui("body").on('mdClick', ".share_area", function (e) {
+                //要携带参数后期补上
+                window.location.href = site_url.pofShare_url
+            });
+
         },
         getData1: function () {
             var that = this;
@@ -295,7 +289,7 @@ $(function () {
             var obj = [{
                 url: site_url.fundNetWorthList_api,
                 data: {
-                    fundCode: getQueryString('fundCode') ? getQueryString('fundCode') : '000847',
+                    fundCode: splitUrl['fundCode'],
                     pageCurrent: 1,
                     pageSize: 4,
                 },
@@ -304,12 +298,6 @@ $(function () {
                     var tplm = $("#dataLists1").html();
                     var template = Handlebars.compile(tplm);
                     $.each(json.pageList, function (i, v) {
-                        if (v.dayChgRat > 0) {
-                            v.dayChgRat = "+" + v.dayChgRat
-                        }
-                        if (v.annYldRat > 0) {
-                            v.annYldRat = "+" + v.annYldRat
-                        }
                     })
                     json.fundType = that.fundType
                     var html = template(json);
@@ -334,7 +322,7 @@ $(function () {
             time = time === 0 ? "" : time
             var that = this;
             var dataOpt = {
-                fundCode: getQueryString('fundCode') ? getQueryString('fundCode') : '000847',
+                fundCode: splitUrl['fundCode'],
                 dataRange: time,
                 end: end || ""
             };

@@ -175,7 +175,7 @@ $(function(){
                         // 将列表插入到页面上
                         generateTemplate(dataList, that.$e.hotFundList, that.$e.fundListTemp);
                         //无缝滚动
-                        alwaysAjax('.li',".content",100);
+                        alwaysAjax($('.li'),".content",100);
                     }, 200)
 
                 },

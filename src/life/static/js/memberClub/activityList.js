@@ -7,6 +7,7 @@ require('@pathCommonBase/base.js');
 require('@pathCommonJs/ajaxLoading.js');
 var splitUrl = require('@pathCommonJs/components/splitUrl.js')();
 var generateTemplate = require('@pathCommonJsComBus/generateTemplate.js');
+var alwaysAjax = require('@pathCommonJs/components/alwaysAjax.js');
 
 $(function(){
     var activityList={
@@ -346,6 +347,8 @@ $(function(){
                 console.log(1);
                 $('.activitySearchInput').children('input').focus();
             });
+            // recordList
+            alwaysAjax($(".recordList"));
         }
     }
     //调用初始化函数

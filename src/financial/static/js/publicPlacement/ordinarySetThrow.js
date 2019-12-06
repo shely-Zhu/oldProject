@@ -79,8 +79,6 @@ $(function () {
 		},
 		webinit: function () {
 			var that = this;
-			that.$el.fundCode.html(that.gV.fundCode) ;
-			that.$el.fundName.html(that.gV.fundName);
 			that.events();
 			if(that.gV.type == 'add'){
 				that.getData();
@@ -298,6 +296,8 @@ $(function () {
 						data = json.data.pageList;
 						data.forEach(function(element) {
 							element.after4Num = element.bankAccountMask.substr(element.bankAccountMask.length -4)
+							element.singleNum_w = Number(element.singleNum)/10000 + '万'
+							element.oneDayNum_w = Number(element.oneDayNum)/10000 + '万'
 						});
 						if(that.gV.type == 'add'){
 							generateTemplate(data, that.$el.popupUl, that.$el.bankListTemplate,true);
@@ -327,7 +327,9 @@ $(function () {
 											bankNo:data[index].bankNo,
 											singleNum:data[index].singleNum,
 											oneDayNum:data[index].oneDayNum,
-											after4Num:after4Num
+											after4Num:after4Num,
+											singleNum_w:Number(data[index].singleNum)/10000 + '万',
+											oneDayNum_w:Number(data[index].oneDayNum)/10000 + '万',
 										});
 										generateTemplate(bankData, that.$el.onlinepay, that.$el.bankListCheckTemplate,true);
 									}
@@ -519,7 +521,7 @@ $(function () {
 					data = json.data;
 					console.log('data',data)
 					if(json.status == '0000'){
-					    window.location.href = site_url.pofSurelyResultsDetail_url + '?scheduledProtocolId=' + data.scheduledProtocolId ;
+					    window.location.href = site_url.pofCastSurelyDetails_url + '?scheduledProtocolId=' + data.scheduledProtocolId ;
 					}
 				},
 				callbackNoData:function(json){
@@ -842,16 +844,8 @@ $(function () {
 				if($(this).val().includes(".") && $(this).val().split(".")[1].length >2){
 					tipAction('只能输入两位小数')
 					return
-				}else{
-					if(Number($(this).val()) >= Number(that.gV.minValue) && Number($(this).val()) <= Number(that.gV.maxValue)){
-						that.getRate($(this).val());
-					}else if(Number($(this).val()) > that.gV.maxValue){
-						tipAction('最大买入金额不能超过' + that.gV.maxValue + '元')
-						return
-					}
-					
 				}
-				
+				that.getRate($(this).val());
 			})
 			//清除输入框数字
 			mui("body").on('mdClick','.deleteNum',function(){
@@ -880,7 +874,9 @@ $(function () {
 					bankNo:$(this).attr('bankNo'),
 					singleNum:$(this).attr('singleNum'),
 					oneDayNum:$(this).attr('oneDayNum'),
-					after4Num:after4Num
+					after4Num:after4Num,
+					singleNum_w:Number($(this).attr('singleNum'))/10000 + '万',
+					oneDayNum_w:Number($(this).attr('oneDayNum'))/10000 + '万',
 				});
 				generateTemplate(data, that.$el.onlinepay, that.$el.bankListCheckTemplate,true);
 				setTimeout(function(){
@@ -905,22 +901,26 @@ $(function () {
 			
 			//确定
 			mui("body").on("mdClick",'.btn_box .btn',function(){
+				$("#transformInput").blur()
 				if(Number(that.gV.balance) < Number(that.gV.minValue)){
 					tipAction('最小买入金额不能低于' + that.gV.minValue + '元')
 					return
-				}else{
-					if(!!that.gV.bankAccountSecret){
-						if(Number(that.gV.balance) > Number(that.gV.singleNum)){
-							tipAction('单笔金额不能超过' + that.gV.singleNum + '元')
-							return
-						}
-						that.checkPayType()
-						
-					}else{
-						//未选择银行卡提示信息
-						tipAction("请选择银行卡！");
+				}
+				if(Number(that.gV.balance) > Number(that.gV.maxValue)){
+					tipAction('最大买入金额不能超过' + that.gV.maxValue + '元')
+					return
+				}
+				if(!!that.gV.bankAccountSecret){
+					if(Number(that.gV.balance) > Number(that.gV.singleNum)){
+						tipAction('单笔金额不能超过' + that.gV.singleNum + '元')
 						return
 					}
+					that.checkPayType()
+					
+				}else{
+					//未选择银行卡提示信息
+					tipAction("请选择银行卡！");
+					return
 				}
 				
 			}, {

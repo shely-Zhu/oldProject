@@ -213,9 +213,7 @@ $(function() {
                     contentTypeSearch: true,
                     callbackDone: function(json) {
                         var data = json.data;
-
                         console.log(JSON.stringify(json.data));
-
                         //获取需要的值
                         var firstliText = $this.siblings(".rewardName").html(),//奖励名称
                             startTime = $this.siblings(".rewardTime").attr("start-data"),//使用期限起始时间
@@ -248,7 +246,7 @@ $(function() {
                 that.$e.tipBox.hide();//弹层隐藏
             })
 
-            alwaysAjax(".recordList");
+            alwaysAjax($(".recordList"),".rewardWrapper");
 
         },
     };

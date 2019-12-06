@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2019-11-26 14:42:56
- * @LastEditTime: 2019-12-05 15:59:19
+ * @LastEditTime: 2019-12-06 19:15:36
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \htjf-app\src\financial\static\js\publicPlacement\cashTransformOut.js
@@ -169,6 +169,11 @@ $(function () {
 						 }
 
 					 }
+					 if(that.gv.cashList.length == 1){
+						 $("#bank a.iconfont").hide();
+					 }else{
+						$("#bank a.iconfont").show();
+					 }
 
 					 that.$e.el_defaultBankName[0].textContent =defaultCarData.bankName;
 					 that.$e.el_defaultBankImgUrl.attr("src",defaultCarData.bankThumbnailUrl);
@@ -204,6 +209,14 @@ $(function () {
                     if(res.status == '0000'){
                         window.location.href =  site_url.pofSurelyResults_url + '?allotNo=' + data.allotNo + '&flag=out'+"&outType="+regulatory.gv.outType;
                     }
+                },
+                callbackNoData:function(json){
+                    $("#passwordWrap").hide();
+                    tipAction(json.message);
+                },
+                callbackFail:function(json){
+                    $("#passwordWrap").hide();
+                    tipAction(json.message);
                 }
             }];
             $.ajaxLoading(obj);
@@ -225,6 +238,7 @@ $(function () {
 					that.$e.el_dailyOnceMaxLimitWan[0].textContent = that.gv.dailyOnceMaxLimitWan;
 					that.$e.el_dailyMaxLimitWan[0].textContent = that.gv.dailyMaxLimitWan;
 					that.$e.el_dailyTimesMaxLimit[0].textContent = that.gv.dailyTimesMaxLimit;
+					$(".transformInput").attr("maxlength",data.dailyMaxLimit);
 				}
 			}]
 			$.ajaxLoading(obj)
@@ -257,26 +271,27 @@ $(function () {
 			var that = this;
 
 			/** 下面三个事件： 银行卡列表出现/隐藏 **/
-			$('body').on('mdClick','.onright',function(){
+			mui("body").on('mdClick','.onright',function(){
 				$('.popup').css('display','block')
 			}, {
 				htmdEvt: 'cashTransformOut_01'
 			}) 
 
-			$('body').on('mdClick','.popup-close',function(){
+			mui("body").on('mdClick','.popup-close',function(){
 				$('.popup').css('display','none')
 			}, {
 				htmdEvt: 'cashTransformOut_02'
 			}) 
 
-			$('body').on('mdClick','.popup-mask',function(){
+			mui("body").on('mdClick','.popup-mask',function(){
 				$('.popup').css('display','none')
 			}, {
 				htmdEvt: 'cashTransformOut_03'
 			}) 
            
 		   //银行卡单选
-		   $('body').off("mdClick",".cashCheckItem").on('mdClick','.cashCheckItem',function(){
+		   mui("body").off("mdClick",".cashCheckItem").on('mdClick','.cashCheckItem',function(){
+			   debugger
 			   $(this).find(".imgLogo").attr("src",that.gv.checkImgUrl);
 			   $(this).siblings().find(".imgLogo").attr("src","");
 			   that.gv.defaultBankNo = $(this).attr("bankNo"); //默认银行代码
@@ -284,7 +299,7 @@ $(function () {
 			   that.gv.defaultTradeAcco = $(this).attr("tradeAcco");  // 默认交易账号
 			   that.gv.defaultCapitalMode = $(this).attr("capitalMode"); // 默认资金方式
 			 
-			   that.$e.el_singleNum[0].textContent = $(this).attr('availableShare');
+			   that.$e.el_singleNum[0].textContent = $(this).attr('singleNum');
 			   
 			   that.$e.el_defaultBankName[0].textContent = $(this).attr("bankName");
 			   that.$e.el_defaultBankImgUrl.attr("src",$(this).attr("bankLogoUrl"));
@@ -294,7 +309,7 @@ $(function () {
 			})
 
 		   //普通与快速切换
-		   $('body').off("mdClick",".tabWrapper .tab").on('mdClick','.tabWrapper .tab',function(){   
+		   mui("body").off("mdClick",".tabWrapper .tab").on('mdClick','.tabWrapper .tab',function(){   
 	           $(this).find(".activeIcon").addClass("active");
 			   $(this).siblings().find(".activeIcon").removeClass("active");
 			   var type = $(this).attr("type");
@@ -311,7 +326,7 @@ $(function () {
 			}, {
 				htmdEvt: 'cashTransformOut_05'
 			})
-		   $('body').off('mdClick','.clearMoney').on('mdClick','.clearMoney',function(){
+		   mui("body").off('mdClick','.clearMoney').on('mdClick','.clearMoney',function(){
 			   that.gv.transformMoney = 0;
 			   that.$e.el_transformInput.val(0);
 
@@ -329,12 +344,30 @@ $(function () {
 			//点击同意协议
 			mui('body').on('tap','.item2 .iconfont',function(){
 			//that.$e.iconCheck.on('mdClick', function() {
+				var val =$(".msecond input")[0].value;
+				that.gv.transformMoney = val;
+				if( parseFloat( that.gv.transformTotalMoney)< parseFloat( that.gv.transformMoney) ){
+					$(".checkMessage").css({"display":"block"});
+					$(".checkMessage").html("转出金额超过最大额度")
+				}else{		
+					$(".checkMessage").css({"display":"none"}); 
+				}
+				
                 if ($(this).hasClass("check")) {
 					$(this).removeClass("check").html('&#xe668;');
-					that.$e.confirmBtn.attr('disabled',true)
+					if(that.gv.transformMoney!=""){
+						that.$e.confirmBtn.removeAttr("disabled");
+					}else{
+						that.$e.confirmBtn.attr('disabled',true)
+					}
                 } else {
 					$(this).addClass("check").html('&#xe669;');
-					that.$e.confirmBtn.removeAttr("disabled");
+					if(that.gv.transformMoney!=""){
+						that.$e.confirmBtn.removeAttr("disabled");
+					}else{
+						that.$e.confirmBtn.attr('disabled',true)
+					}
+					
                 }
 			}, {
 				htmdEvt: 'cashTransformOut_08'
@@ -346,20 +379,15 @@ $(function () {
 				if( parseFloat( that.gv.transformTotalMoney)< parseFloat( that.gv.transformMoney) ){
 					$(".checkMessage").css({"display":"block"});
 					$(".checkMessage").html("转出金额超过最大额度")
-				}else{
-					if($(this)[0].value == ""){
-						$(".checkMessage").css({"display":"block"});
-						$(".checkMessage").html("转出金额不能为空")
-					}else{
-						$(".checkMessage").css({"display":"none"});
-					}
-				   
+				}else{		
+					$(".checkMessage").css({"display":"none"}); 
 				}
 			})
 
 			//赎回确认 
 			mui('body').on('mdClick','.confirmeDemptionPay',function(){   
 			//$(".confirmeDemptionPay").on('click',function(){
+				$(".msecond input").blur();
 				$("#passwordWrap").show();
 				payPass(that.cancelOrder)
 			}, {
@@ -379,8 +407,8 @@ $(function () {
 			//$(".clearMoney").on('click',function(){/
 				$(".msecond input").val("");
 				that.gv.transformMoney = "";
-				$(".checkMessage").css({"display":"block"});
-						$(".checkMessage").html("转出金额不能为空")
+				$(".item2 .iconfont").removeClass("check").html('&#xe668;');
+				that.$e.confirmBtn.attr('disabled',true)
 			}, {
 				htmdEvt: 'cashTransformOut_12'
 			})
