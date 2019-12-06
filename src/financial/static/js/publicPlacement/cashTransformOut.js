@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2019-11-26 14:42:56
- * @LastEditTime: 2019-12-06 17:31:00
+ * @LastEditTime: 2019-12-06 18:48:07
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \htjf-app\src\financial\static\js\publicPlacement\cashTransformOut.js
@@ -168,6 +168,11 @@ $(function () {
 							that.gv.cashList[i].checkStatu = ""
 						 }
 
+					 }
+					 if(that.gv.cashList.length == 1){
+						 $("#bank a.iconfont").hide();
+					 }else{
+						$("#bank a.iconfont").show();
 					 }
 
 					 that.$e.el_defaultBankName[0].textContent =defaultCarData.bankName;
@@ -349,11 +354,17 @@ $(function () {
 				
                 if ($(this).hasClass("check")) {
 					$(this).removeClass("check").html('&#xe668;');
-					that.$e.confirmBtn.attr('disabled',true)
-                } else {
 					if(that.gv.transformMoney!=""){
-						$(this).addClass("check").html('&#xe669;');
 						that.$e.confirmBtn.removeAttr("disabled");
+					}else{
+						that.$e.confirmBtn.attr('disabled',true)
+					}
+                } else {
+					$(this).addClass("check").html('&#xe669;');
+					if(that.gv.transformMoney!=""){
+						that.$e.confirmBtn.removeAttr("disabled");
+					}else{
+						that.$e.confirmBtn.attr('disabled',true)
 					}
 					
                 }
@@ -395,6 +406,8 @@ $(function () {
 			//$(".clearMoney").on('click',function(){/
 				$(".msecond input").val("");
 				that.gv.transformMoney = "";
+				$(".item2 .iconfont").removeClass("check").html('&#xe668;');
+				that.$e.confirmBtn.attr('disabled',true)
 			}, {
 				htmdEvt: 'cashTransformOut_12'
 			})
