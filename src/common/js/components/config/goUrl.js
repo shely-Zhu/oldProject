@@ -325,7 +325,7 @@ module.exports = function() {
     // 活动详情
     this.activityDetails_url = go_url.no_url + '/mine/views/memberClub/activityDetails/activityDetails.html';
     // 活动列表
-    this.activityList_url = go_url.no_url + '/life/views/memberClub/activityList/activityList.html';
+    this.activityList_url = go_url.no_url + '/life/views/memberClub/activityList.html';
     //活动详情->实名
     this.realName_url = go_url.no_url + '/mine/views/realName/realName.html';
     //活动详情->风测
