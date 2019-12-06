@@ -35,9 +35,35 @@ $(function () {
 
           json = json.data
           console.log(json)
-
           var tplm = $("#dataLists").html();
           var template = Handlebars.compile(tplm);
+          //对电话传真号码有多个做数据重构
+          var faxNolist = [];
+          var telephoneNoList = [];
+          if(json.faxNo.split(",").length>1){
+            for(var i = 0;i<json.faxNo.split(",").length;i++){
+              var obj = {
+                "faxNoListChild":json.faxNo.split(",")[i]
+              }
+              faxNolist.push(obj)
+            }
+          }else{
+            faxNolist.push({"faxNoListChild":json.faxNo})
+          }
+
+          if(json.telephoneNo.split(",").length>1){
+            for(var i = 0;i<json.telephoneNo.split(",").length;i++){
+              var obj = {
+                "telephoneNoListChild":json.telephoneNo.split(",")[i]
+              }
+              telephoneNoList.push(obj)
+            }
+          }else{
+            telephoneNoList.push({"telephoneNoListChild":json.telephoneNo})
+          }
+          json.faxNolist = faxNolist;
+          json.telephoneNoList = telephoneNoList;
+
           var html = template(json);
           $(".tplBox").html(html);
 

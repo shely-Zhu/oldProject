@@ -80,15 +80,17 @@ $(function(){
                 //async: false,
                 needDataEmpty: true,
                 callbackDone: function(json) {
+                    debugger
                     var data=json.data; 
                     generateTemplate(data,that.$e.membershipDetailsSilderBox,that.$e.membershipDetailsListTemplateId); 
                     $(".lazyload").lazyload()
                     var n=0;
                     that.swiperInit(n,json.data.length);           
                 },
-                callbackFail: function(json) {
-                    tipAction(json.message);
+                callbackNoData:function(json){
+                    console.log(json)
                 }
+
             }];                        
             $.ajaxLoading(obj);         
         },
