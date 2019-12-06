@@ -175,7 +175,7 @@ $(function() {
 		},
 		//注册事件
 		events: function() {
-			alwaysAjax('.recordList',null,null,50)
+			alwaysAjax($('.recordList'),null,null,50)
 		}
 	};
 	somePage.init();
