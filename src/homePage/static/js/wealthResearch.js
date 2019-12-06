@@ -341,7 +341,8 @@ $(function() {
 
                             //})
                         }
-                        $('.lazyload').lazyload();
+                        //只加载当前tab页面的图片
+                        $id.find('.contentWrapper').find('.lazyload').lazyload();
                         //隐藏loading
                         setTimeout(function() {
                             that.getElements.listLoading.hide();

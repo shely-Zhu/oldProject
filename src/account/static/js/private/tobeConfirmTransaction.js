@@ -123,6 +123,7 @@ $(function() {
                     if (json.data.pageList && json.data.pageList.length == 0) { // 没有记录不展示
                         $(".list").hide()
                         that.getElements.noData.show();
+                        that.getElements.listLoading.hide();
                         return false;
                     } else {
                         data = json.data.pageList;
@@ -172,6 +173,8 @@ $(function() {
                 })
                 //点击筛选数据
             mui("body").on('tap', '.hopperCon li', function(e) {
+                    $('.list').show();
+                    that.getElements.noData.hide();
                     $(this).addClass('active').siblings('li').removeClass('active');
                     $('.mask').hide();
                     $('.hopperCon').hide();
@@ -181,7 +184,8 @@ $(function() {
                     that.gV.aP.pageNum = 1;
                     that.getElements.contentWrap.html('');
                     //重新初始化
-                    that.initMui();
+                    that.getElements.listLoading.show();
+                    that.getData(that.gV.aThis);
                     mui('.contentWrapper').pullRefresh().scrollTo(0, 0, 0);
                 })
                 // 点击遮罩隐藏
