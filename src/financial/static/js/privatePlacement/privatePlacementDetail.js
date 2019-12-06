@@ -137,11 +137,11 @@ $(function(){
 					// 净值日期
 					$('.netValueDate').html(jsonData.netValueDate)
 					// 起投金额
-					$('.investmentAmountNum').html(jsonData.investStart);
+					$('.investmentAmountNum').html(jsonData.investStart + '万');
 					// 产品期限
 					$('.productDeadlineNum').html(jsonData.projectTerm + jsonData.projectTermUnit);
 					// 预约资质
-					$('.appointment span').html(jsonData.orderConditionEnum);
+					$('.appointment span').html(jsonData.orderCondition);
 					// 产品特点标签
 					var projectLable = jsonData.projectLable.split('|');
 					for ( var i in projectLable ){
@@ -163,11 +163,25 @@ $(function(){
 					// 管理人
 					$('.custodian').html(jsonData.projectIssuer);
 					// 风险等级
-					$('.riskGrade').html(jsonData.productRiskLevel);
+					$('.riskGrade').html(jsonData.productRiskLevelDesc);
 					// 发行规模
 					$('.issuingScale').html(jsonData.formatIssuanceSize);
 					// 投资方向
-					$('.direction').html(jsonData.investDirect);
+					if(jsonData.investDirect == '0'){
+						$('.direction').html('债权投资');
+					}
+					else if(jsonData.investDirect == '1'){
+						$('.direction').html('证券投资(二级市场)');
+					}
+					else if(jsonData.investDirect == '2'){
+						$('.direction').html('股权投资');
+					}
+					else if(jsonData.investDirect == '3'){
+						$('.direction').html('海外投资');
+					}
+					else if(jsonData.investDirect == '4'){
+						$('.direction').html('其他');
+					}
 					// 投资领域
 					$('.investmentArea').html(jsonData.investArea);
 					// 投资方式
@@ -192,7 +206,11 @@ $(function(){
 					// 预计成立日期
 					$('.establishment').html(jsonData.setupDate);
 					// 是否需要面签
-					$('.isVideo').html(jsonData.isVideo);
+					if(jsonData.isVideo == 0){
+						$('.isVideo').html('否');
+					}else{
+						$('.isVideo').html('是');
+					}
 					// 允许购买客户类型
 					$('.clientType').html(jsonData.customerType);
 					// 允许购买客户等级
@@ -510,7 +528,7 @@ $(function(){
 
 				},
 				callbackFail: function(json){  //失败后执行的函数
-					tipAction(json.msg);
+					tipAction(json.message);
 
 				}
 			}];
@@ -541,7 +559,7 @@ $(function(){
 
 				},
 				callbackFail: function(json){  //失败后执行的函数
-					tipAction(json.msg);
+					tipAction(json.message);
 
 				}
 			}];
@@ -686,7 +704,7 @@ $(function(){
 							}
 						},
 						callbackFail: function(json){  //失败后执行的函数
-							tipAction(json.msg);
+							tipAction(json.message);
 							that.data.canClick = true;//变为可点击
 		
 						}

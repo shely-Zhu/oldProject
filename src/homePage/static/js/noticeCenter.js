@@ -31,9 +31,6 @@ $(function(){
                     console.log(json.data)
                     var data=that.dealData(json.data);  
                     generateTemplate(data,that.$e.noticeConTemplateId,that.$e.noticeItemListTemplateId);               
-                },
-                callbackFail: function(json) {
-                    tipAction(json.message);
                 }
             }];                        
             $.ajaxLoading(obj); 

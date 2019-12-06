@@ -436,7 +436,7 @@ $(function(){
                 
             })
             //无缝滚动
-            alwaysAjax(".recordList")
+            alwaysAjax($(".recordList"))
         }
     }
     //调用初始化函数
