@@ -41,8 +41,8 @@
                     <img src="../static/img/1575438680.png"/>
                </div>
                <div class="recommendLcs">
-                  您的理财师：王中伟H018298 <i class="iconfont choose">&#xe636;</i>
-               </div>     
+                <span class="recommendLcsText"></span> <span class="manager_show"></span><i class="iconfont choose">&#xe636;</i>
+               </div>
         </div>
         <div class="recommendShare">
             <div class="recommendShareWechart">
@@ -55,18 +55,6 @@
             </div>
         </div>
         <!-- 理财师选择 -->
-        <div class="manager_choose_wrap">
-            <div class="lcs mui-row" id="lcs">
-                <label class="label_class ">理财师</label>
-                <ul class="mui-table-view choose">
-                    <li class="mui-table-view-cell mui-collapse">
-                        <a class="mui-navigate-right" href="javascript:;" num="">
-                            请选择您的理财师
-                        </a>
-                    </li>
-                </ul>
-            </div>
-        </div>
         <!-- <div class="manager_choose_wrap">
             <div class="lcs mui-row" id="lcs">
                 <label class="label_class ">理财师</label>
@@ -88,6 +76,29 @@
             <span class="closeElastic iconfont">&#xe60c;</span>
         </div> -->
     </div>
+        <!-- 银行卡弹窗 -->
+        <div class="popup">
+            <div class="popup-mask"></div>
+            <div class="popup-content">
+                <ul class="popup-ul">
+                    <!-- <li class="popup-li">
+                          王丽丽<span>H012891</span>
+                   </li> -->
+                </ul>
+                <div class="cancel">
+                    取消
+                </div>
+                
+            </div>
+        </div>
+
+        <script id="bankList-template" type="text/x-handlebars-template">
+            {{#each this}}
+            <li class="popup-li">
+                王丽丽<span>H012891</span>
+            </li>
+            {{/each}}
+        </script>
 </body>
  
 <script src="/include/js/vendor/jquery/jquery1.12.3.js"></script>

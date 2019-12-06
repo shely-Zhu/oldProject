@@ -23,12 +23,10 @@ $(function() {
         init: function() {
             var that = this;
             that.initMui();
-            //that.getData()
             that.events();
         },
         events:function(){
-            console.log(1)
-            alwaysAjax()
+            alwaysAjax('.contentWrap','.contentWrapper',100,100)
            
         },
         //初始化mui的上拉加载
