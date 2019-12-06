@@ -26,7 +26,7 @@ $(function() {
             that.events();
         },
         events:function(){
-            alwaysAjax('.contentWrap','.contentWrapper',100,100)
+            alwaysAjax($('.contentWrap'),'.contentWrapper',100,100)
            
         },
         //初始化mui的上拉加载

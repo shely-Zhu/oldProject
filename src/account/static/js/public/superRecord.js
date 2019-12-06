@@ -207,7 +207,7 @@ $(function() {
                 //无缝滚动
                 setTimeout(function() {
                     //无缝滚动
-                    alwaysAjax('#' + w + ' .mui-table-view-cell', s , 50)
+                    alwaysAjax($('#' + w + ' .mui-table-view-cell'), s , 50)
                 }, 1000)
 
             // mui('.mui-slider').slider().stopped = true;

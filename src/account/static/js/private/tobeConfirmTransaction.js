@@ -165,7 +165,7 @@ $(function() {
         },
         events: function() { //绑定事件
             var that = this;
-            alwaysAjax('.mui-table-view-cell');
+            alwaysAjax($('.mui-table-view-cell'));
             mui("body").on('tap', '.hopper', function(e) {
                     $('.mask').show();
                     $('.hopperCon').show();

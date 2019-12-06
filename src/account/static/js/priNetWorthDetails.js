@@ -144,7 +144,7 @@ $(function() {
         },
         //注册事件
 		events: function() {
-			alwaysAjax('.contentWrap')
+			alwaysAjax($('.contentWrap'))
 		}
     };
     somePage.init();
