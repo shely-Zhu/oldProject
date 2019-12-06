@@ -6,7 +6,7 @@
 
 require('@pathCommonBase/base.js');
 require('@pathCommonJs/ajaxLoading.js');
-var generateTemplate = require('@pathCommonJsComBus/generateTemplate.js');
+// var generateTemplate = require('@pathCommonJsComBus/generateTemplate.js');
 
 var splitUrl = require('@pathCommonJs/components/splitUrl.js')();
 
@@ -40,66 +40,66 @@ $(function() {
             that.events()
 		},
         // 获取财富流向早知道的列表
-        getFlowKnownList: function(t) {
-            var that = this;
-            var obj = [{
-                url: site_url.queryFortuneArticleList_api,
-                data: {
-                    "pageNo": that.gV.pageCurrent, //非必须，默认为1
-                    "pageSize": that.gV.pageSize, //非必须，默认为10
-                    "articleBelong": that.gV.articleBelong
-                },
-                needDataEmpty: true,
-                callbackDone: function(json) {
-                    var data;
-                    if (json.data.total == 0) { // 没有记录不展示
-                        that.$e.noData.show();
-                        return false;
-                    } else {
-                        data = that.dealTime(json.data.list);
-                    }
-                    setTimeout(function() {
-                        if (data.length < that.gV.pageSize) {
-                            that.gV.isBottomFlag = true
-                            if (that.gV.pageCurrent == 1) { //第一页时
-                                if (data.length == 0) {
-                                    // 暂无数据显示
-                                    that.$e.noData.show();
-                                    return false;
-                                } else { // 没有更多数据了
-                                    t.endPullupToRefresh(true);
-                                }
-                            } else {
-                                //其他页-没有更多数据
-                                t.endPullupToRefresh(true);
-                            }
-                        } else { // 还有更多数据
-                            t.endPullupToRefresh(false);
-                        }
-                        $('.list').find('.contentWrapper .mui-pull-bottom-pocket').removeClass('mui-hidden');
-                        // 页面++
-                        that.gV.pageCurrent++;
-                        // 将消息列表插入到页面上
-                        generateTemplate(data, that.$e.fortuneFlowListWrapper, that.$e.fortuneFlowListTemp)
-                        $(".lazyload").lazyload()
-                        alwaysAjax(".knownList")
-                    }, 200)
-                },
-                callbackNoData:function(){
-                    //没有数据时展示暂无数据
-                    $(".list").hide()
-                    that.$e.noData.show();
-                },
-                callbackFail: function(json) {
-                    tipAction(json.message);
-                    //隐藏loading，调试接口时需要去掉
-                    setTimeout(function() {
-                        that.$e.listLoading.hide();
-                    }, 100);
-                },
-            }];
-            $.ajaxLoading(obj); 
-        },
+        // getFlowKnownList: function(t) {
+        //     var that = this;
+        //     var obj = [{
+        //         url: site_url.queryFortuneArticleList_api,
+        //         data: {
+        //             "pageNo": that.gV.pageCurrent, //非必须，默认为1
+        //             "pageSize": that.gV.pageSize, //非必须，默认为10
+        //             "articleBelong": that.gV.articleBelong
+        //         },
+        //         needDataEmpty: true,
+        //         callbackDone: function(json) {
+        //             var data;
+        //             if (json.data.total == 0) { // 没有记录不展示
+        //                 that.$e.noData.show();
+        //                 return false;
+        //             } else {
+        //                 data = that.dealTime(json.data.list);
+        //             }
+        //             setTimeout(function() {
+        //                 if (data.length < that.gV.pageSize) {
+        //                     that.gV.isBottomFlag = true
+        //                     if (that.gV.pageCurrent == 1) { //第一页时
+        //                         if (data.length == 0) {
+        //                             // 暂无数据显示
+        //                             that.$e.noData.show();
+        //                             return false;
+        //                         } else { // 没有更多数据了
+        //                             t.endPullupToRefresh(true);
+        //                         }
+        //                     } else {
+        //                         //其他页-没有更多数据
+        //                         t.endPullupToRefresh(true);
+        //                     }
+        //                 } else { // 还有更多数据
+        //                     t.endPullupToRefresh(false);
+        //                 }
+        //                 $('.list').find('.contentWrapper .mui-pull-bottom-pocket').removeClass('mui-hidden');
+        //                 // 页面++
+        //                 that.gV.pageCurrent++;
+        //                 // 将消息列表插入到页面上
+        //                 generateTemplate(data, that.$e.fortuneFlowListWrapper, that.$e.fortuneFlowListTemp)
+        //                 $(".lazyload").lazyload()
+        //                 alwaysAjax(".knownList")
+        //             }, 200)
+        //         },
+        //         callbackNoData:function(){
+        //             //没有数据时展示暂无数据
+        //             $(".list").hide()
+        //             that.$e.noData.show();
+        //         },
+        //         callbackFail: function(json) {
+        //             tipAction(json.message);
+        //             //隐藏loading，调试接口时需要去掉
+        //             setTimeout(function() {
+        //                 that.$e.listLoading.hide();
+        //             }, 100);
+        //         },
+        //     }];
+        //     $.ajaxLoading(obj); 
+        // },
         dealTime: function(data) {
             $.each(data, function(a, b) {
                 if(b.articleTimeStr && b.articleTimeStr!= '') {

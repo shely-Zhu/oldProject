@@ -9,6 +9,7 @@
 
 var alwaysAjax = require('@pathCommonJs/components/alwaysAjax.js');
 var generateTemplate = require('@pathCommonJsComBus/generateTemplate.js');
+require('@pathCommonJsCom/goTopMui.js');
 
  ;
  (function($, window, document, undefined) {
