@@ -7,6 +7,7 @@ require('@pathCommonBase/base.js');
 require('@pathCommonJs/ajaxLoading.js');
 var splitUrl = require('@pathCommonJs/components/splitUrl.js')();
 var generateTemplate = require('@pathCommonJsComBus/generateTemplate.js');
+var alwaysAjax = require('@pathCommonJs/components/alwaysAjax.js');
 
 $(function() {
     let somePage = {
@@ -130,13 +131,16 @@ $(function() {
                         that.gV.pageCurrent++;
                         // 将消息列表插入到页面上
                         generateTemplate(data, that.$e.informsListWrapperId, that.$e.informsListTemp);
+                        alwaysAjax($("#informsListWrapper"))
                     }, 200)
 
                 },
                 callbackNoData: function(json) {
-                    $(".noDataCon").css("display", "block")
-                    $(".mui-table-view").css({"transform": "none!important", "position": "static"})
-                    $(".mui-table-view-cell").css({"background": "#eeeeee"})
+                    if(that.gV.pageCurrent == 1) {
+                        $(".noDataCon").css("display", "block")
+                        $(".mui-table-view").css({"transform": "none!important", "position": "static"})
+                        $(".mui-table-view-cell").css({"background": "#eeeeee"})
+                    }
                 },
             }];
             $.ajaxLoading(obj);

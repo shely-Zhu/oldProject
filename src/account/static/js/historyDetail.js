@@ -147,7 +147,7 @@ $(function() {
             $.ajaxLoading(obj);
         },
         events:function(){
-            alwaysAjax()
+            alwaysAjax($(".contentWrap"))
         }
     };
 
