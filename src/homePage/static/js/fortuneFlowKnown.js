@@ -158,7 +158,7 @@ $(function() {
                             // 将消息列表插入到页面上
                             // generateTemplate(data, that.$e.fortuneFlowListWrapper, that.$e.fortuneFlowListTemp)
 
-                            def && def.resolve( data );
+                            def && def.resolve( data, that.gV.pageCurrent);
 
                             // if (json.data.total == 0) { // 没有记录不展示
                             //     that.$e.noData.show();
@@ -199,11 +199,11 @@ $(function() {
                             // $(".list").hide()
                             // that.$e.noData.show();
                             
-                            def && def.reject( json );
+                            def && def.reject( json, that.gV.pageCurrent );
                         },
                         callbackFail: function(json) {
 
-                            def && def.reject( json );
+                            def && def.reject( json, that.gV.pageCurrent );
 
                             // tipAction(json.message);
                             // //隐藏loading，调试接口时需要去掉

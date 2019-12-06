@@ -89,7 +89,7 @@ var generateTemplate = require('@pathCommonJsComBus/generateTemplate.js');
                  },
 
                 //处理返回的数据
-                 dealData: function( t, data ){
+                 dealData: function( t, data, pageCurrent ){
 
                     var that = this;
 
@@ -97,7 +97,7 @@ var generateTemplate = require('@pathCommonJsComBus/generateTemplate.js');
                         
                         // that.gV.isBottomFlag = true
                         
-                        if (that.options.pageCurrent == 1) { //第一页时
+                        if ( pageCurrent == 1) { //第一页时
                             
                             if (data.length == 0) {
                                 
@@ -150,19 +150,19 @@ var generateTemplate = require('@pathCommonJsComBus/generateTemplate.js');
                                     that.options.callback(def);
 
                                     $.when(def)
-                                    .fail(function( defData ) {
+                                    .fail(function( defData, pageCurrent ) {
                                         //失败状态
                                         console.log( defData );
 
-                                        that.dealData( t, defData);
+                                        that.dealData( t, defData, pageCurrent);
                                         
                                     })
-                                    .done(function( defData ) {
+                                    .done(function( defData, pageCurrent ) {
                                         //成功状态
                                        console.log( defData );
 
                                        //处理数据
-                                       that.dealData( t, defData);
+                                       that.dealData( t, defData, pageCurrent);
                                     })
 
                                     //请求数据
