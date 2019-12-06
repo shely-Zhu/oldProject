@@ -23,18 +23,33 @@
 		<script src="/financial/static/js/publicPlacement/publicDetail.js"></script>
 		<script id="dataLists" type="text/x-handlebars-template">
 		<div>
-			<div class="topContent">
+			{{#if fundType}}
+			<div class="topContent">       <!-- 10300 -->
 				<!-- <div class="service"></div> -->
 				<div class="day_gain">七日年化</div>
-				<div class="day_gain_value">{{annYldRat}}%</div>
+				<div class="day_gain_value">{{annYldRat_s}}%</div>
 				<div class="new_worth">万份收益({{trDate}})</div>
 				<div class="new_worth_value">{{unitYld}}</div>
+				<div class="type">
+					<div class="type_1">{{riskLevelName}}</div>
+					<div class="type_2">{{invTypComDesc}}</div>
+					<!-- <div class="type_3">10000.0元起购</div> -->
+				</div>
+			</div>
+			{{else}}
+			<div class="topContent">    <!-- 非10300 -->
+				<!-- <div class="service"></div> -->
+				<div class="day_gain">日涨幅</div>
+				<div class="day_gain_value">{{chgRat1d_s}}%</div>
+				<div class="new_worth">最新净值({{trDate}})</div>
+				<div class="new_worth_value">{{unitNav}}</div>
 				<div class="type">
 					<div class="type_1">{{riskLevelName}}</div>
 					<div class="type_2">{{invTypComDesc}}</div>
 					<div class="type_3">10000.0元起购</div>
 				</div>
 			</div>
+			{{/if}}
 			<div class="midContent">
 				<div class="max_amount_area">
 					<div class="max_amount fl"></div>
@@ -184,23 +199,23 @@
 			<div >
 				{{#if fundType}}
 					{{#each pageList}}
-				<div class="history_item">
-					<div class="item_value_1">{{trdDt}}</div>
-					<div class="item_value_1">{{unitYld}}</div>
-					<div class="item_value_2 value">{{annYldRat}}%</div>
-				</div>
+					<div class="history_item" data="{{fundType}}">
+						<div class="item_value_1">{{trdDt}}</div>
+						<div class="item_value_1">{{unitYld}}</div>
+						<div class="item_value_2 value">{{annYldRat}}%</div>
+					</div>
 				{{/each}}
 				{{else}}
 				{{#each pageList}}
-				<div class="history_item">
-					<div class="item_value_1">{{trdDt}}</div>
+					<div class="history_item" data2="{{fundType}}">
+					    <div class="item_value_1">{{trdDt}}</div>
 						<div class="item_value_1">{{unitNav}}</div>
 						<div class="item_value_1">{{accuUnitNav}}</div>
 						<div class="item_value_2 value">{{dayChgRat}}%</div>
-				</div>
+					</div>
 				{{/each}}
 				{{/if}}
-				</div>
+			</div>
 		</script>
 	</body>
 
