@@ -323,7 +323,7 @@ module.exports = function() {
 
     /*-------------------------------活动列表 start -----------------------*/
     // 活动详情
-    this.activityDetails_url = go_url.no_url + '/mine/views/memberClub/activityDetails/activityDetails.html';
+    this.activityDetails_url = go_url.no_url + '/life/views/memberClub/activityDetails.html';
     // 活动列表
     this.activityList_url = go_url.no_url + '/life/views/memberClub/activityList.html';
     //活动详情->实名
