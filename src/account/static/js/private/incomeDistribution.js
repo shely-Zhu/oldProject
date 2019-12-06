@@ -61,7 +61,7 @@ $(function() {
             var height = windowHeight - $(".topTitle").height();
             if (!$('.list').hasClass('setHeight')) {
                 $('.list').height(height).addClass('setHeight');
-                $('.box').height(height);
+                $('.listBox').height(height);
             }
             var that = this;
 			mui.init({

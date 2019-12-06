@@ -2,8 +2,6 @@
 // @author caoqihai 2019-11-28
 
 require('@pathCommonBase/base.js');
-
-require('@pathCommonJsCom/utils.js');
 //ajax调用
 require('@pathCommonJs/ajaxLoading.js');
 
