@@ -192,7 +192,7 @@ $(function() {
 				'htmdEvt': 'monthReportList_02'
 			})
 
-			alwaysAjax(".recordList");
+			alwaysAjax($(".recordList"));
 
 		},
 	};

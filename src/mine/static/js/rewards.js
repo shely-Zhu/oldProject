@@ -246,7 +246,7 @@ $(function() {
                 that.$e.tipBox.hide();//弹层隐藏
             })
 
-            alwaysAjax(".recordList",".rewardWrapper");
+            alwaysAjax($(".recordList"),".rewardWrapper");
 
         },
     };
