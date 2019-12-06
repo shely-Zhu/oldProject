@@ -9,12 +9,13 @@
 	<title>现金宝协议</title>
 </head>
 <body>
-        <div id="richTemplateWrap">
-                @@include('@pathCommonViews/headBarConfig.html',{"bgColors":"#000,#eee","showType":"0","pathName":""})    
-                <div id="contentWrap">
-                    
-                </div>   
-            </div>          
+    @@include('@pathCommonCom/noData/noData.html', {"tipText": "暂无数据"})
+    @@include('@pathCommonViews/headBarConfig.html',{"bgColors":"#000,#eee","showType":"0","pathName":"协议"}) 
+    <div id="richTemplateWrap">
+        <div id="contentWrap">
+            
+        </div>   
+    </div>          
 
     @@include('@pathInclude/views/footer.html')
     <script src="/account/static/js/public/superContent.js"></script>

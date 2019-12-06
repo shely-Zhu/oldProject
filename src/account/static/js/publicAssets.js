@@ -52,9 +52,6 @@ $(function () {
                         //渲染模板后设置点击事件
                         that.bankEvents();
                     }
-                },
-                callbackFail: function (json) {  //失败后执行的函数
-                    tipAction(json.msg);
                 }
             }];
             $.ajaxLoading(obj);
