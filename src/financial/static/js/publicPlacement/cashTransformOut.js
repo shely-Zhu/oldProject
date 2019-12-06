@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2019-11-26 14:42:56
- * @LastEditTime: 2019-12-06 14:49:59
+ * @LastEditTime: 2019-12-06 16:04:17
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \htjf-app\src\financial\static\js\publicPlacement\cashTransformOut.js
@@ -204,6 +204,14 @@ $(function () {
                     if(res.status == '0000'){
                         window.location.href =  site_url.pofSurelyResults_url + '?allotNo=' + data.allotNo + '&flag=out'+"&outType="+regulatory.gv.outType;
                     }
+                },
+                callbackNoData:function(json){
+                    $("#passwordWrap").hide();
+                    tipAction(json.message);
+                },
+                callbackFail:function(json){
+                    $("#passwordWrap").hide();
+                    tipAction(json.message);
                 }
             }];
             $.ajaxLoading(obj);
@@ -330,12 +338,24 @@ $(function () {
 			//点击同意协议
 			mui('body').on('tap','.item2 .iconfont',function(){
 			//that.$e.iconCheck.on('mdClick', function() {
+				var val =$(".msecond input")[0].value;
+				that.gv.transformMoney = val;
+				if( parseFloat( that.gv.transformTotalMoney)< parseFloat( that.gv.transformMoney) ){
+					$(".checkMessage").css({"display":"block"});
+					$(".checkMessage").html("转出金额超过最大额度")
+				}else{		
+					$(".checkMessage").css({"display":"none"}); 
+				}
+				
                 if ($(this).hasClass("check")) {
 					$(this).removeClass("check").html('&#xe668;');
 					that.$e.confirmBtn.attr('disabled',true)
                 } else {
-					$(this).addClass("check").html('&#xe669;');
-					that.$e.confirmBtn.removeAttr("disabled");
+					if(that.gv.transformMoney!=""){
+						$(this).addClass("check").html('&#xe669;');
+						that.$e.confirmBtn.removeAttr("disabled");
+					}
+					
                 }
 			}, {
 				htmdEvt: 'cashTransformOut_08'
@@ -347,14 +367,8 @@ $(function () {
 				if( parseFloat( that.gv.transformTotalMoney)< parseFloat( that.gv.transformMoney) ){
 					$(".checkMessage").css({"display":"block"});
 					$(".checkMessage").html("转出金额超过最大额度")
-				}else{
-					if($(this)[0].value == ""){
-						$(".checkMessage").css({"display":"block"});
-						$(".checkMessage").html("转出金额不能为空")
-					}else{
-						$(".checkMessage").css({"display":"none"});
-					}
-				   
+				}else{		
+					$(".checkMessage").css({"display":"none"}); 
 				}
 			})
 
@@ -380,8 +394,6 @@ $(function () {
 			//$(".clearMoney").on('click',function(){/
 				$(".msecond input").val("");
 				that.gv.transformMoney = "";
-				$(".checkMessage").css({"display":"block"});
-						$(".checkMessage").html("转出金额不能为空")
 			}, {
 				htmdEvt: 'cashTransformOut_12'
 			})
