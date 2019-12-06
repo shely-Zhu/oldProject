@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2019-11-26 14:42:56
- * @LastEditTime: 2019-12-05 15:59:19
+ * @LastEditTime: 2019-12-06 14:49:59
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \htjf-app\src\financial\static\js\publicPlacement\cashTransformOut.js
@@ -257,26 +257,27 @@ $(function () {
 			var that = this;
 
 			/** 下面三个事件： 银行卡列表出现/隐藏 **/
-			$('body').on('mdClick','.onright',function(){
+			mui("body").on('mdClick','.onright',function(){
 				$('.popup').css('display','block')
 			}, {
 				htmdEvt: 'cashTransformOut_01'
 			}) 
 
-			$('body').on('mdClick','.popup-close',function(){
+			mui("body").on('mdClick','.popup-close',function(){
 				$('.popup').css('display','none')
 			}, {
 				htmdEvt: 'cashTransformOut_02'
 			}) 
 
-			$('body').on('mdClick','.popup-mask',function(){
+			mui("body").on('mdClick','.popup-mask',function(){
 				$('.popup').css('display','none')
 			}, {
 				htmdEvt: 'cashTransformOut_03'
 			}) 
            
 		   //银行卡单选
-		   $('body').off("mdClick",".cashCheckItem").on('mdClick','.cashCheckItem',function(){
+		   mui("body").off("mdClick",".cashCheckItem").on('mdClick','.cashCheckItem',function(){
+			   debugger
 			   $(this).find(".imgLogo").attr("src",that.gv.checkImgUrl);
 			   $(this).siblings().find(".imgLogo").attr("src","");
 			   that.gv.defaultBankNo = $(this).attr("bankNo"); //默认银行代码
@@ -284,7 +285,7 @@ $(function () {
 			   that.gv.defaultTradeAcco = $(this).attr("tradeAcco");  // 默认交易账号
 			   that.gv.defaultCapitalMode = $(this).attr("capitalMode"); // 默认资金方式
 			 
-			   that.$e.el_singleNum[0].textContent = $(this).attr('availableShare');
+			   that.$e.el_singleNum[0].textContent = $(this).attr('singleNum');
 			   
 			   that.$e.el_defaultBankName[0].textContent = $(this).attr("bankName");
 			   that.$e.el_defaultBankImgUrl.attr("src",$(this).attr("bankLogoUrl"));
@@ -294,7 +295,7 @@ $(function () {
 			})
 
 		   //普通与快速切换
-		   $('body').off("mdClick",".tabWrapper .tab").on('mdClick','.tabWrapper .tab',function(){   
+		   mui("body").off("mdClick",".tabWrapper .tab").on('mdClick','.tabWrapper .tab',function(){   
 	           $(this).find(".activeIcon").addClass("active");
 			   $(this).siblings().find(".activeIcon").removeClass("active");
 			   var type = $(this).attr("type");
@@ -311,7 +312,7 @@ $(function () {
 			}, {
 				htmdEvt: 'cashTransformOut_05'
 			})
-		   $('body').off('mdClick','.clearMoney').on('mdClick','.clearMoney',function(){
+		   mui("body").off('mdClick','.clearMoney').on('mdClick','.clearMoney',function(){
 			   that.gv.transformMoney = 0;
 			   that.$e.el_transformInput.val(0);
 

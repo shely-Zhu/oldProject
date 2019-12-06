@@ -133,6 +133,8 @@ $(function () {
 						console.log('data',data)
 						data.forEach(element => {
 							element.after4Num = element.bankAccountMask.substr(element.bankAccountMask.length -4)
+							element.singleNum_w = Number(element.singleNum)/10000 + '万'
+							element.oneDayNum_w = Number(element.oneDayNum)/10000 + '万'
 						});
 						generateTemplate(data, that.$el.popupUl, that.$el.bankListTemplate,true);
 						$("#loading").hide()
@@ -411,7 +413,9 @@ $(function () {
 					bankNo:$(this).attr('bankNo'),
 					singleNum:$(this).attr('singleNum'),
 					oneDayNum:$(this).attr('oneDayNum'),
-					after4Num:after4Num
+					after4Num:after4Num,
+					singleNum_w:Number($(this).attr('singleNum'))/10000 + '万',
+					oneDayNum_w:Number($(this).attr('oneDayNum'))/10000 + '万',
 				})
 
 				if(that.gV.payType == '0'){

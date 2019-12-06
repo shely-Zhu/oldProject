@@ -18,19 +18,8 @@
     </div>
     <!-- 暂无数据 -->
     @@include('@pathCommonCom/noData/noData.html', {"tipText": "暂无数据"})
-   <div class="listBox">
-       <div class="list">
-        <section class="contentWrapper">
-            <ul class="mui-table-view" id="activityDataList">
-                <div class="mui-table-view-cell recordList">
-                    
-                </div>
-            </ul>
-            @@include('@pathCommonViews/goTop.html')
-        </section>
-        
-    </div>
-   </div>
+
+    <div class="list"></div>
    <script id="trans-template" type="text/x-handlebars-template">
     {{#each this}} 
             <li class="list-wrap mui-table-view">

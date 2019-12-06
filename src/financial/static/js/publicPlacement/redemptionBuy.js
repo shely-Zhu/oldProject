@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2019-11-26 14:42:56
- * @LastEditTime: 2019-12-06 11:16:19
+ * @LastEditTime: 2019-12-06 14:40:33
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \htjf-app\src\financial\static\js\publicPlacement\redemptionBuy.js
@@ -107,6 +107,7 @@ $(function() {
                 callbackDone: function (json) {
                     console.log("json",json);
                     var html = json.data.content;
+                    debugger
                     if(json.status == "0000"){
                         $('.elasticLayer.transOutRule').show()
                            $(".elasticContent").html(html);
@@ -178,6 +179,7 @@ $(function() {
                 needDataEmpty: true,
                 callbackDone:function(res){
                     var data = res.data;
+                    $("#passwordWrap").hide();
                     if(res.status == '0000'){
                         window.location.href = site_url.pofSurelyResultsDetail_url + '?applyId=' + data.allotNo + '&fundBusinCode=' + 
                         "024"+ "&fundCode=" + regulatory.gv.dataList.fundCode  + '&flag=redemption';
@@ -185,7 +187,16 @@ $(function() {
                         $('.elasticLayer.transOutRule').show()
                         $(".elasticContent").html(res.message);
                     }
+                },
+                callbackNoData:function(json){
+                    $("#passwordWrap").hide();
+                    tipAction(json.message);
+                },
+                callbackFail:function(json){
+                    $("#passwordWrap").hide();
+                    tipAction(json.message);
                 }
+                
 
             }];
             $.ajaxLoading(obj);
@@ -194,7 +205,7 @@ $(function() {
            var that = this;
            var parmesDataList = that.gv.dataList;
            that.gv.fundCode = parmesDataList.fundCode;
-           that.gv.nowRedempShare = parmesDataList.enableShares;
+           //that.gv.nowRedempShare = parmesDataList.enableShares;
            that.gv.maxRedempShare = parmesDataList.enableShares;
              
         },
@@ -204,19 +215,19 @@ $(function() {
          */
         events: function() {
             var that = this;
-            $('body').on('mdClick', '.onright', function() {
+            mui("body").on('mdClick', '.onright', function() {
                 $('.popup').css('display', 'block')
             }, {
 				htmdEvt: 'redemptionBuy_01'
 			})
 
-            $('body').on('mdClick', '.popup-close', function() {
+            mui("body").on('mdClick', '.popup-close', function() {
                 $('.popup').css('display', 'none')
             }, {
 				htmdEvt: 'redemptionBuy_02'
 			})
 
-            $('body').on('mdClick', '.popup-mask', function() {
+            mui("body").on('mdClick', '.popup-mask', function() {
                 $('.popup').css('display', 'none')
             }, {
 				htmdEvt: 'redemptionBuy_03'
@@ -231,7 +242,7 @@ $(function() {
 			})
 
              //银行卡与基金形成单选
-            $('body').on('mdClick',".radioCheckItem",function(){
+             mui("body").on('mdClick',".radioCheckItem",function(){
                 var type = $(this).attr("type");
                 if(type == 'car'){
                     //银行
