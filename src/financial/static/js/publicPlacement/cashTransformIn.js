@@ -362,6 +362,7 @@ $(function () {
 			
 			//确定
 			mui("body").on('mdClick','.btn_box .btn',function(){
+				$("#transformInput").blur()
 				if(!!that.gV.bankAccountSecret){
 					if(Number(that.gV.balance) < Number(that.gV.minValue)){
 						tipAction('单笔金额不能小于' + that.gV.minValue + '元')
