@@ -76,11 +76,11 @@
             {{#if appointmentToAuthentication}}
             <div class="toDetail blueBgButton" type="toCertif">合格投资者认证</div>
             {{else if appointmentToSign}}
-            <div class="toDetail blueBgButton" type="toSign" id="{{reserveId}}">签署合同</div>
+            <div class="toDetail blueBgButton" type="toSign" projectId="{{projectId}}" reserveid="{{reserveId}}">签署合同</div>
             {{else if appointmentToSee}}
             <div class="toDetail blueBgButton" type="toSee">查看合同</div>
             {{else if appointmentToUpload}}
-            <div class="toDetail blueBgButton" type="toUploadM">上传汇款凭证</div>
+            <div class="toDetail blueBgButton" type="toUploadM" reserveId="{{reserveId}}">上传汇款凭证</div>
             {{/if}}
             <!-- 功能按钮 -->
             <!-- 取消预约按钮 -->
