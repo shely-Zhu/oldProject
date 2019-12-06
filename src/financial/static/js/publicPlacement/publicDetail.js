@@ -53,7 +53,6 @@ $(function () {
             var value = key.toFixed(num)
             if (isfalse) {
                 if (key > 0) {
-                    value = "+" + value
                 }
             }
             this.gV.json[prop] = value
@@ -93,6 +92,8 @@ $(function () {
                     $.each($(".net_worth_area .net_worth_item .value"), function (i, v) {
                         if (Number($(v).text().slice(0, $(v).text().length - 1)) >= 0) {
                             $(v).addClass('value_red')
+                        } else if(Number($(v).text().slice(0, $(v).text().length - 1)) == 0) {
+                            $(v).addClass('value_c')
                         } else {
                             $(v).addClass('value_green')
                         }
@@ -146,26 +147,6 @@ $(function () {
                         that.gV.tipStatus = true
 
                     }
-                    // var tplm = $("#dataLists1").html();
-                    // var template = Handlebars.compile(tplm);
-                    // $.each(json.pageList, function (i, v) {
-                    //     if (v.dayChgRat > 0) {
-                    //         v.dayChgRat = "+" + v.dayChgRat
-                    //     }
-                    //     if (v.annYldRat > 0) {
-                    //         v.annYldRat = "+" + v.annYldRat
-                    //     }
-                    // })
-                    // json.fundType = that.fundType
-                    // var html = template(json);
-                    // $(".tplBox1").html(html);
-                    // $.each($(".history_item .value"), function (i, v) {
-                    //     if (Number($(v).text().slice(0, $(v).text().length - 1)) >= 0) {
-                    //         $(v).addClass('value_red')
-                    //     } else {
-                    //         $(v).addClass('value_green')
-                    //     }
-                    // });
                 },
                 callbackFail: function (json) {
                     tipAction(json.msg);
@@ -310,12 +291,6 @@ $(function () {
                     var tplm = $("#dataLists1").html();
                     var template = Handlebars.compile(tplm);
                     $.each(json.pageList, function (i, v) {
-                        if (v.dayChgRat > 0) {
-                            v.dayChgRat = "+" + v.dayChgRat
-                        }
-                        if (v.annYldRat > 0) {
-                            v.annYldRat = "+" + v.annYldRat
-                        }
                     })
                     json.fundType = that.fundType
                     var html = template(json);

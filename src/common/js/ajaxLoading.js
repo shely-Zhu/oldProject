@@ -247,7 +247,7 @@ var splitUrl = require('./components/splitUrl.js')();
                         //需要判断数据是否为空
                         // if ($.util.objIsEmpty(json)) {
                             //数据为空，如果有传callbackNoData，执行
-                            obj.callbackNoData();
+                            obj.callbackNoData( json );
                             return false;
                         // }
                     }

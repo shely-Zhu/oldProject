@@ -63,7 +63,7 @@ $(function() {
                             $('.activityBottomBox').show();
                         }
                         //金服展示图片
-                        that.$e.bgimg.attr("src", data.domainIP + data.htjfGeneralizeImgUrlPrex + data.htjfGeneralizeImgUrl);
+                        that.$e.bgimg.attr("data-original", data.domainIP + data.htjfGeneralizeImgUrlPrex + data.htjfGeneralizeImgUrl);
                         //活动名称
                         that.$e.actName.text(data.actName);
                         //活动地点
@@ -76,8 +76,7 @@ $(function() {
                         that.$e.startTimeOrendTime.html(data.actStartDateStr + '-' + data.actEndDateStr);
                         //活动介绍
                         that.$e.actIntroduce.html($(data.actIntroduce));
-
-
+                        $(".lazyload").lazyload()
 
                     },
                     callbackFail: function(json) {
