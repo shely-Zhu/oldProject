@@ -49,33 +49,33 @@
 
             var Layer = function(opts) {
 
-                this.$body = $('body'), //body元素
+                this.$body = $('body'); //body元素
 
-                    //默认参数
-                    this.defaults = {
-                        id: 'elasticLayer', //弹层的唯一id 不传默认为elasticLayer，如果多个弹层的话要传，否则区分不了
-                        title: '', //如果不传，默认不显示标题
-                        p: '',  //弹层上文案
-                        zIndex: 10000000, //该弹层的z-index，因为不知道有几个弹层和弹层顺序，不传默认为100
+                //默认参数
+                this.defaults = {
+                    id: 'elasticLayer', //弹层的唯一id 不传默认为elasticLayer，如果多个弹层的话要传，否则区分不了
+                    title: '', //如果不传，默认不显示标题
+                    p: '',  //弹层上文案
+                    zIndex: 10000000, //该弹层的z-index，因为不知道有几个弹层和弹层顺序，不传默认为100
 
-                        //yes按钮相关
-                        yesTxt: '确定', //确定按钮的文案，不传默认为确定
-                        yesButtonPosition: 'right', //确定按钮在左边还是在右边，不传的话，默认为'left'，在左边，如果在右边，传'right'
-                        callback: $.noop, //确定按钮的回调函数，默认为空(jQuery的空函数，仅仅想要传递一个空函数的时候可以使用)
-                        needYesHref: false, //是否需要把确定按钮改成a标签，默认false
-                        yesHref: 'javascript:;', //确定按钮a链接的默认href
+                    //yes按钮相关
+                    yesTxt: '确定', //确定按钮的文案，不传默认为确定
+                    yesButtonPosition: 'right', //确定按钮在左边还是在右边，不传的话，默认为'left'，在左边，如果在右边，传'right'
+                    callback: $.noop, //确定按钮的回调函数，默认为空(jQuery的空函数，仅仅想要传递一个空函数的时候可以使用)
+                    needYesHref: false, //是否需要把确定按钮改成a标签，默认false
+                    yesHref: 'javascript:;', //确定按钮a链接的默认href
 
-                        //cel按钮相关
-                        celTxt: '取消', //返回按钮的文案，不传默认为返回
-                        callbackCel: $.noop, //取消按钮的回调函数，默认为空
-                        needCelHref: false, //是否需要把取消按钮改成a标签，默认false
-                        celHref: 'javascript:;', //取消按钮a链接的默认href
+                    //cel按钮相关
+                    celTxt: '取消', //返回按钮的文案，不传默认为返回
+                    callbackCel: $.noop, //取消按钮的回调函数，默认为空
+                    needCelHref: false, //是否需要把取消按钮改成a标签，默认false
+                    celHref: 'javascript:;', //取消按钮a链接的默认href
 
-                        iconTxt: '', //icon的值
-                        iconType: 'green', //icon的颜色
-                        
-                        hideCelButton: false, //为true时隐藏cel按钮，仅使用yes按钮的所有属性
-                    }
+                    iconTxt: '', //icon的值
+                    iconType: 'green', //icon的颜色
+                    
+                    hideCelButton: false, //为true时隐藏cel按钮，仅使用yes按钮的所有属性
+                }
 
                 this.options = $.extend({}, this.defaults, opts)
             }

@@ -579,9 +579,10 @@ $(function(){
 				contentTypeSearch:true,
 				needLogin:true,//需要判断是否登陆
 				callbackDone: function(json){  //成功后执行的函数
-					$("#tips-wrap").show();//显示预约条件
 //					generateTemplate(json.data,$("#real-condition"), that.$e.conditionTemplate);
 					var jsonData = json.data,
+					notice = "",
+					noticeObj = "",
 					isPopup = "",//弹框售前告知书
 					isReal = "",//是否实名认证，因为如果机构切一键认证是实名，点击需要提示弹框。
 					singleaAuthenPath = "",//一键认证跳转链接
@@ -590,6 +591,7 @@ $(function(){
 					$.each(jsonData, function(e,v) {
 						var jumpUrl = "";
 						if(v.show == "1"){//如果显示。show=1
+							$("#tips-wrap").show();//显示预约条件
 							singleaAuthen = true;
 							if(!singleaAuthenPath){//获取一键认证的链接。有值的第一个
 								singleaAuthenPath = that.getJumpUrl(v)
@@ -597,8 +599,8 @@ $(function(){
 									isReal = true;//判断
 								}
 							}
-							if(v.conditionType == 3 && v.isPopup == "1"){//是否弹出售前告知书。售前告知书与风险等级匹配一起提示
-								isPopup = true;
+							if(v.conditionType == 3 && !!v.isPopup){//是否弹出售前告知书。售前告知书与风险等级匹配一起提示
+								isPopup = v.isPopup;
 							}
 							that.$e.realLi.eq(e*1).show();
 							that.$e.realLi.eq(e*1).find(".bank-status").html(v.statusDesc);
@@ -649,12 +651,36 @@ $(function(){
 						url: site_url.getRaiseInfo_api,
 						data: {
 							projectId: that.$e.projectId,
-							fileType:"19"
+							fileType:isPopup
 						},
 						contentTypeSearch: true,
+						needLoading:true,
 						needLogin:true,//需要判断是否登陆
 						callbackDone: function(json){  //成功后执行的函数
-									
+							var data = json.data,
+							noticeObj = data;
+							if(!singleaAuthen){//如果v.show都是0，则不展示预约框,跳转到相应链接
+								$("#tips-wrap").hide();
+								if(!!isPopup){//如果弹售前告知书
+					                var obj = {
+					                	title: '',
+					                	id: 'sellPop',
+					                	p: '<p class="">你选择的产品与您现在的风险承受能力相匹配</p>' +
+					                		'<p class="">请您认真阅读[' + fileName + ']并确认后继续购买该产品</p>',
+					                	yesTxt: '去阅读',
+					                	celTxt: '取消',
+					                	zIndex: 1200,
+					                	callback: function(t) {
+											window.location.href = site_url.downloadNew_api +"?filePath=" + noticeObj.fileUrl +"&fileName=" + new Base64().encode(noticeObj.fileName)+"&groupName=" + 
+											noticeObj.groupName + "show=1 "
+					                	},
+					                };
+					                $.elasticLayer(obj)
+								}else{
+									that.nextStep();
+								}
+								
+							}
 						},
 						callbackFail: function(json){  //失败后执行的函数
 							tipAction(json.msg);
@@ -662,26 +688,6 @@ $(function(){
 						}
 					}];
 					$.ajaxLoading(ReourceListobj);
-					if(!singleaAuthen){//如果v.show都是0，则不展示预约框,跳转到相应链接
-						$("#tips-wrap").hide();
-						if(!!isPopup){//如果弹售前告知书
-			                var obj = {
-			                	title: '',
-			                	id: 'sellPop',
-			                	p: '<p class="">你选择的产品与您现在的风险承受能力相匹配</p>' +
-			                		'<p class="">请您认真阅读' + that.email + '并确认后继续购买该产品</p>',
-			                	yesTxt: '去阅读',
-			                	celTxt: '取消',
-			                	zIndex: 1200,
-			                	callback: function(t) {
-									
-			                	},
-			                };
-			                $.elasticLayer(obj)
-						}
-						that.nextStep();
-						
-					}
 
 
 				},

@@ -6,7 +6,7 @@
  */ -->
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en">    
 
 <head>
     @@include('@pathInclude/views/meta.html')
@@ -98,7 +98,7 @@
                 <i>{{bankName}}</i>
                 <span>{{after4Num}}</span>
             </div>
-            <div class="onright-left-two">单笔限额{{singleNum}}，单日限额{{oneDayNum}}</div>
+            <div class="onright-left-two">单笔限额{{singleNum_w}}，单日限额{{oneDayNum_w}}</div>
             {{/each}}
         </script>
         <div class="p2">
@@ -141,7 +141,7 @@
                     <img class="bank-img" src="{{bankThumbnailUrl}}" alt="">
                     <div class="div">
                         <div class="bank-name">{{bankName}}({{after4Num}})</div>
-                        <div class="bank-pay">单笔限额{{singleNum}}，单日限额{{oneDayNum}}</div>
+                        <div class="bank-pay">单笔限额{{singleNum_w}}，单日限额{{oneDayNum_w}}</div>
                     </div>
                     <img class="true" src="/common/img/account_icon_check@2x.png" alt="">
                 </li>
