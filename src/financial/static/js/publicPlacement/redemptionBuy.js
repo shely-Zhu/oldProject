@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2019-11-26 14:42:56
- * @LastEditTime: 2019-12-06 16:43:28
+ * @LastEditTime: 2019-12-06 17:31:33
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \htjf-app\src\financial\static\js\publicPlacement\redemptionBuy.js
@@ -297,6 +297,7 @@ $(function() {
             //赎回确认
             mui("body").on('mdClick','.confirmeDemptionPay',function(){         
         // $(".confirmeDemptionPay").on('click',function(){
+            $(".msecond input").blur();
             $("#passwordWrap").show();
             payPass(that.cancelOrder)
         }, {
