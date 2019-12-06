@@ -37,9 +37,10 @@ require('@pathCommonJsCom/goTopMui.js');
 
                     template: $('#listTemplate'), //列表渲染使用的template
 
-                    class: '', //给当前
+                    class: '', //额外添加的class
 
-                    // height: '100%', //上拉列表的高度，默认为listWrap节点的100%高度，需要在外部设置好
+                    showTemplate: true, //默认使用组件里引用的generateTemplate方法渲染组件
+
                 }
 
                 this.options = $.extend({}, this.defaults, opts)
@@ -121,7 +122,7 @@ require('@pathCommonJsCom/goTopMui.js');
 
                     that.options.wrapper.find('.mui-pull-bottom-pocket').removeClass('mui-hidden');
                     
-                    generateTemplate(data, that.options.wrapper.find('.mui-table-view-cell'), that.options.template)
+                    that.options.showTemplate && generateTemplate(data, that.options.wrapper.find('.mui-table-view-cell'), that.options.template)
 
                     //懒加载
                     $(".lazyload").lazyload()
@@ -148,7 +149,7 @@ require('@pathCommonJsCom/goTopMui.js');
 
                                 if( !that.options.wrapper.find('.mui-pull-caption-nomore').length ){
                                     tops -= 800;
-                                    mui(pullupLoadingNames).pullRefresh().pullupLoading();
+                                    mui( that.options.wrapper.find('.contentWrapper')).pullRefresh().pullupLoading();
                                 }
                                 
                             } 
