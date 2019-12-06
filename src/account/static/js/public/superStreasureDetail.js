@@ -24,6 +24,8 @@ $(function() {
 			numAttr:"",//点击选项卡切换时存储字段
 			dataRange:"1",
 			end:"",
+			fundName:"",
+			transformMoney:"",
 
         },
         init:function(){
@@ -166,6 +168,9 @@ $(function() {
 			    needLogin: true,
 			    callbackDone: function(json) {
 					var data = json.data
+					that.gL.fundCode = data.fundCode,
+					that.gL.fundName = data.fundName,
+					that.gL.transformMoney = data.totalMoney,
 					$(".totalM").text(data.totalMoneyMask?data.totalMoneyMask:"--")
 					$(".incomeMask").text(data.incomeMask?data.incomeMask:"--")
 					$(".addupIncomeMask").text(data.addupIncomeMask?data.addupIncomeMask:"--")
@@ -244,6 +249,12 @@ $(function() {
 			})
 			//点击转出跳转
 			mui("body").on('tap','.rollOutBtn',function(e){
+				var obj = {
+					"money":that.gL.transformMoney,
+					"productName":that.gL.fundName,
+					"fundCode":that.gL.fundCode
+				  };
+				  sessionStorage.setItem("transformMessage",JSON.stringify(obj));
 				window.location.href =  site_url.pofCashTransformOut_url;
 			})
 			//点击转入跳转

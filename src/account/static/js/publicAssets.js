@@ -195,9 +195,15 @@ $(function () {
                 var index = $(this).parent().parent().parent().index();
                 var id = $(this).parent().parent().parent().parent().attr("id")
                 if(id =="cashPageLists" ){
+                    debugger;
                     //现金宝
-                    sessionStorage.setItem("publicFundDetail",JSON.stringify(that.gV.data.cashDetails[index])) ;
-                    window.location.href = site_url.redemptionBuy_url;
+                    var obj = {
+                        "money":that.gV.data.cashDetails[index].totalMoney,
+                        "productName":that.gV.data.cashDetails[index].fundName,
+                        "fundCode":that.gV.data.cashDetails[index].fundCode
+                      };
+                    sessionStorage.setItem("transformMessage",JSON.stringify(obj));
+                    window.location.href = site_url.pofCashTransformOut_url;
                 }else if(id == "pageLists"){
                     sessionStorage.setItem("publicFundDetail",JSON.stringify(that.gV.data.fundDetailList[index])) ;
                      window.location.href = site_url.redemptionBuy_url;

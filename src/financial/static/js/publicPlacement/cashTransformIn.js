@@ -77,6 +77,7 @@ $(function () {
 						that.$el.paymentGainsDayStr.html(data.paymentGainsDayStr)
 						that.gV.fundName = data.fundName
 						that.gV.fundCode = data.fundCode
+						that.gV.minValue = Number(data.purchaseAmount)
 						that.$el.transformInput.attr('placeholder',data.purchaseAmountMask)
 						// for (var index = 0; index < data.tradeLimitList.length; index++) {
 						// 	if(that.gV.fundBusinCode ==  data.tradeLimitList[index].fundBusinCode){
@@ -113,7 +114,9 @@ $(function () {
 						var data = [] ;
 						data = json.data.pageList;
 						data.forEach(function(element) {
-							element.after4Num = element.bankAccountMask.substr(element.bankAccountMask.length -4)
+							element.after4Num = element.bankAccountMask.substr(element.bankAccountMask.length -4);
+							element.singleNum_w = Number(element.singleNum)/10000 + '万'
+							element.oneDayNum_w = Number(element.oneDayNum)/10000 + '万'
 						});
 						generateTemplate(data, that.$el.popupUl, that.$el.bankListTemplate,true);
 						$("#loading").hide()
@@ -333,6 +336,8 @@ $(function () {
 					singleNum:$(this).attr('singleNum'),
 					oneDayNum:$(this).attr('oneDayNum'),
 					after4Num:$(this).attr('after4Num'),
+					singleNum_w:Number($(this).attr('singleNum'))/10000 + '万',
+					oneDayNum_w:Number($(this).attr('oneDayNum'))/10000 + '万',
 				});
 				generateTemplate(data, that.$el.onlinepay, that.$el.bankListCheckTemplate,true);
 				setTimeout(function(){
@@ -358,6 +363,11 @@ $(function () {
 			//确定
 			mui("body").on('mdClick','.btn_box .btn',function(){
 				if(!!that.gV.bankAccountSecret){
+					if(Number(that.gV.balance) < Number(that.gV.minValue)){
+						tipAction('单笔金额不能小于' + that.gV.minValue + '元')
+						return
+					}
+					
 					if(Number(that.gV.balance) > Number(that.gV.singleNum)){
 						tipAction('单笔金额不能超过' + that.gV.singleNum + '元')
 						return
