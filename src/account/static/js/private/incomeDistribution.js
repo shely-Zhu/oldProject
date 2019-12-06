@@ -8,16 +8,13 @@
 
 
 require('@pathCommonBase/base.js');
-
-
-// require('@pathCommonJsCom/utils.js');
 //ajax调用
 require('@pathCommonJs/ajaxLoading.js');
-var alwaysAjax = require('@pathCommonJs/components/alwaysAjax.js');
 require('@pathCommonJsCom/goTopMui.js');
 
 var splitUrl = require('@pathCommonJs/components/splitUrl.js');
 var generateTemplate = require('@pathCommonJsComBus/generateTemplate.js');
+require('@pathCommonCom/pullRefresh/pullRefresh.js');
 
 
 
@@ -38,7 +35,7 @@ $(function() {
             list_template: '', //列表的模板，生成后存放在这里
             listToTop: '', // 滑动区域距离顶部距离
             navToTop: '', // 滑动nav距离顶部距离
-
+            wrapperName: null
 
         },
         html: '', //存放生成的html
@@ -58,6 +55,43 @@ $(function() {
         //初始化mui的上拉加载
         initMui: function() {
             var that = this;
+            var height = windowHeight - $(".HeadBarConfigBox").height();
+            if (!$(".list").hasClass('setHeight')) {
+                $(".list").height(height).addClass('setHeight');
+            }
+            $.pullRefresh({
+                wrapper: $('.list'),
+                class: 'list-wrap',
+                template: that.getElements.transTemp, 
+                callback: function(def, t){
+                    console.log(def)
+                    var obj = [{
+                        url: site_url.yieldAssignList_api,
+                        data: {
+                            "projectId":splitUrl()["projectId"] ,
+                            "pageNo": that.gV.aP.pageNo, //非必须，默认为1
+                            "pageSize": that.gV.aP.pageSize//非必须，默认为10
+                        },                        
+                        needDataEmpty: true,
+                        callbackDone: function(json) {     
+                            var data = json.data;
+                            if( data.pageList && data.pageList.length ){
+                                data = json.data.pageList
+                            }
+                            that.gV.aP.pageNo++;
+                            def && def.resolve( data, that.gV.aP.pageNo);
+                        },
+                        callbackNoData: function( json ){  
+                            def && def.reject( json, that.gV.aP.pageNo );
+                        },
+                        callbackFail: function(json) {
+                            def && def.reject( json, that.gV.aP.pageNo );
+                        },
+                    }];
+                    $.ajaxLoading(obj); 
+                }
+            })
+            /*var that = this;
             var height = windowHeight - $(".topTitle").height();
             if (!$('.list').hasClass('setHeight')) {
                 $('.list').height(height).addClass('setHeight');
@@ -100,9 +134,9 @@ $(function() {
 
 				//为$id添加hasPullUp  class
 				$('.list').addClass('hasPullUp');
-			});
+			});*/
         },
-        getData: function(t) {
+        /*getData: function(t) {
             var that = this;
             var obj = [{ // 系统调仓记录列表
                 url: site_url.yieldAssignList_api,
@@ -162,11 +196,11 @@ $(function() {
 
             }];
             $.ajaxLoading(obj);
-        },
+        },*/
         events: function() { //绑定事件
             var that = this;
             //无缝滚动
-            alwaysAjax(".recordList")
+            //alwaysAjax(".recordList")
 
         }
     };
