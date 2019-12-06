@@ -363,6 +363,7 @@ $(function () {
 			}) 
 
 			$('body').on('tap','.popup-mask',function(){
+				debugger
 				$('.popup').css('display','none')
 				$('.popup-password').css('display','none')
 			}) 
