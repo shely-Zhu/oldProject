@@ -405,6 +405,8 @@ module.exports = function() {
     this.pofRetrievePassword_url = go_url.no_url + '/minel/views/setting/retrievePassword.html';
     //添加银行卡
     this.pofAddBankCard_url = go_url.no_url + '/mine/views/bankCard/addBankCard.html'
+    //基金分享跳原生页面
+    this.pofShare_url = go_url.no_url + '/financial/views/publicPlacement/share.html'
 
     /*------------------- 私募理财fang——le end ------------------------------*/
     this.optionalPublicDetail_url = go_url.no_url + '/account/views/public/optionalPublicDetail.html';

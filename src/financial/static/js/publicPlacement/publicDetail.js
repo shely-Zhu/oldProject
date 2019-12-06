@@ -288,6 +288,12 @@ $(function () {
                 }
             });
 
+            //分享  -- 跳往原生页面
+            mui("body").on('mdClick', ".share_area", function (e) {
+                //要携带参数后期补上
+                window.location.href = site_url.pofShare_url
+            });
+
         },
         getData1: function () {
             var that = this;
