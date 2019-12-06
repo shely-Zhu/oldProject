@@ -844,16 +844,8 @@ $(function () {
 				if($(this).val().includes(".") && $(this).val().split(".")[1].length >2){
 					tipAction('只能输入两位小数')
 					return
-				}else{
-					if(Number($(this).val()) >= Number(that.gV.minValue) && Number($(this).val()) <= Number(that.gV.maxValue)){
-						that.getRate($(this).val());
-					}else if(Number($(this).val()) > that.gV.maxValue){
-						tipAction('最大买入金额不能超过' + that.gV.maxValue + '元')
-						return
-					}
-					
 				}
-				
+				that.getRate($(this).val());
 			})
 			//清除输入框数字
 			mui("body").on('mdClick','.deleteNum',function(){
@@ -912,19 +904,22 @@ $(function () {
 				if(Number(that.gV.balance) < Number(that.gV.minValue)){
 					tipAction('最小买入金额不能低于' + that.gV.minValue + '元')
 					return
-				}else{
-					if(!!that.gV.bankAccountSecret){
-						if(Number(that.gV.balance) > Number(that.gV.singleNum)){
-							tipAction('单笔金额不能超过' + that.gV.singleNum + '元')
-							return
-						}
-						that.checkPayType()
-						
-					}else{
-						//未选择银行卡提示信息
-						tipAction("请选择银行卡！");
+				}
+				if(Number(that.gV.balance) > Number(that.gV.maxValue)){
+					tipAction('最大买入金额不能超过' + that.gV.maxValue + '元')
+					return
+				}
+				if(!!that.gV.bankAccountSecret){
+					if(Number(that.gV.balance) > Number(that.gV.singleNum)){
+						tipAction('单笔金额不能超过' + that.gV.singleNum + '元')
 						return
 					}
+					that.checkPayType()
+					
+				}else{
+					//未选择银行卡提示信息
+					tipAction("请选择银行卡！");
+					return
 				}
 				
 			}, {

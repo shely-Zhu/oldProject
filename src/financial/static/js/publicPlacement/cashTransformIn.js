@@ -366,14 +366,13 @@ $(function () {
 					if(Number(that.gV.balance) < Number(that.gV.minValue)){
 						tipAction('单笔金额不能小于' + that.gV.minValue + '元')
 						return
-					}else{
-						if(Number(that.gV.balance) > Number(that.gV.singleNum)){
-							tipAction('单笔金额不能超过' + that.gV.singleNum + '元')
-							return
-						}
-						that.checkPayType()
 					}
 					
+					if(Number(that.gV.balance) > Number(that.gV.singleNum)){
+						tipAction('单笔金额不能超过' + that.gV.singleNum + '元')
+						return
+					}
+					that.checkPayType()
 				}else{
 					//未选择银行卡提示信息
 					tipAction("请选择银行卡！");
