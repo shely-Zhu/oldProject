@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2019-11-26 14:42:56
- * @LastEditTime: 2019-12-06 14:40:33
+ * @LastEditTime: 2019-12-06 16:43:28
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \htjf-app\src\financial\static\js\publicPlacement\redemptionBuy.js
@@ -309,22 +309,28 @@ $(function() {
                  $(".checkMessage").html("超出最大赎回份额")
              }else{
                 $(".checkMessage").css({"display":"none"});
-                if(that.gv.nowRedempShare == ""){
-                    $(".checkMessage").css({"display":"block"});
-                    $(".checkMessage").html("赎回额度不能位空")
-                }
              }
          })
 
          //点击同意协议
             mui("body").on('mdClick','.item2 .iconfont',function(){ 
 			//that.getElements.iconCheck.on('click', function() {
+                that.gv.nowRedempShare = $(".msecond input")[0].value;
+             if(parseFloat(that.gv.maxRedempShare)< parseFloat (that.gv.nowRedempShare)){
+                 $(".checkMessage").css({"display":"block"});
+                 $(".checkMessage").html("超出最大赎回份额")
+             }else{
+                $(".checkMessage").css({"display":"none"});
+             }
+                
                 if ($(this).hasClass("check")) {
 					$(this).removeClass("check").html('&#xe668;');
 					that.getElements.confirmBtn.attr('disabled',true)
                 } else {
-					$(this).addClass("check").html('&#xe669;');
-					that.getElements.confirmBtn.removeAttr("disabled");
+                    if(that.gv.nowRedempShare!=""){
+                        $(this).addClass("check").html('&#xe669;');
+                        that.getElements.confirmBtn.removeAttr("disabled");
+                    }
                 }
 			}, {
 				htmdEvt: 'redemptionBuy_09'

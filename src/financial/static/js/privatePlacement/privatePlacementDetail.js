@@ -34,6 +34,7 @@ $(function(){
 			tipIcon: $(".tipIcon"), //净值披露信息
 		},
 		data:{
+			canClick:true,
 			custType:"",//客户类型
 			fundDetailObj:"",//详情接口拿到的对象
 			buyFreeze:"",//是否买入冻结
@@ -579,6 +580,7 @@ $(function(){
 				contentTypeSearch:true,
 				needLogin:true,//需要判断是否登陆
 				callbackDone: function(json){  //成功后执行的函数
+					that.data.canClick = true;//变为可点击
 //					generateTemplate(json.data,$("#real-condition"), that.$e.conditionTemplate);
 					var jsonData = json.data,
 					notice = "",
@@ -657,6 +659,7 @@ $(function(){
 						needLoading:true,
 						needLogin:true,//需要判断是否登陆
 						callbackDone: function(json){  //成功后执行的函数
+							that.data.canClick = true;//变为可点击
 							var data = json.data,
 							noticeObj = data;
 							if(!singleaAuthen){//如果v.show都是0，则不展示预约框,跳转到相应链接
@@ -665,7 +668,7 @@ $(function(){
 					                var obj = {
 					                	title: '',
 					                	id: 'sellPop',
-					                	p: '<p class="">你选择的产品与您现在的风险承受能力相匹配</p>' +
+					                	p: '<p class="" style="font-weight:bold;text-align:center">你选择的产品与您现在的风险承受能力相匹配</p>' +
 					                		'<p class="">请您认真阅读[' + noticeObj.fileName + ']并确认后继续购买该产品</p>',
 					                	yesTxt: '去阅读',
 					                	celTxt: '取消',
@@ -684,6 +687,7 @@ $(function(){
 						},
 						callbackFail: function(json){  //失败后执行的函数
 							tipAction(json.msg);
+							that.data.canClick = true;//变为可点击
 		
 						}
 					}];
@@ -693,6 +697,7 @@ $(function(){
 				},
 				callbackFail: function(json){  //失败后执行的函数
 					tipAction(json.message);
+					that.data.canClick = true;//变为可点击
 
 				}
 			}];
@@ -884,23 +889,29 @@ $(function(){
 
 			// 立即预约
 			mui("body").on('mdClick', '.buyButton' , function(){
-				if(that.data.buyFreeze == "1"){//如果账户冻结，首先提示
-	                var obj = {
-	                	title: '',
-	                	id: 'buyFreeze',
-	                	p: '您的账户已冻结，禁止买入，可联系您的理财师进行咨询',
-	                	yesTxt: '确认',
-	                	celTxt: "取消",
-	                	zIndex: 100,
-	                	callback: function(t) {
-
-	                	},
-	                };
-	                $.elasticLayer(obj)
-				}else{
-					that.getConditionsOfOrder();//获取预约条件
+				if(that.data.canClick){//防重复点击
+					if(that.data.buyFreeze == "1"){//如果账户冻结，首先提示
+		                var obj = {
+		                	title: '',
+		                	id: 'buyFreeze',
+		                	p: '您的账户已冻结，禁止买入，可联系您的理财师进行咨询',
+		                	yesTxt: '确认',
+		                	celTxt: "取消",
+		                	zIndex: 100,
+		                	callback: function(t) {
+	
+		                	},
+		                };
+		                $.elasticLayer(obj)
+					}else{
+						that.getConditionsOfOrder();//获取预约条件
+						
+					}
 					
+				}else{
+					return false;
 				}
+				that.data.canClick = false;
 			}, {
 				htmdEvt: 'privatePlacementDetail_04'
 			});
