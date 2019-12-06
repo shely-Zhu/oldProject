@@ -341,12 +341,12 @@ $(function() {
 
                             //})
                         }
-
+                        $('.lazyload').lazyload();
                         //隐藏loading
                         setTimeout(function() {
                             that.getElements.listLoading.hide();
                         }, 100);
-                        $('.lazyload').lazyload();
+
                     }, 200)
 
 

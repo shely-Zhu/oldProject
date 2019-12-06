@@ -23,11 +23,16 @@
 // require('../../../common/js/components/utils.js');
 // require('../../../common/js/ajaxLoading.js');
 // require('../../../common/js/components/elasticLayerTypeTwo.js');
+require('@pathIncludJs/vendor/mui/mui.picker.min.js');
+//zepto模块--callback
+require('@pathIncludJs/vendor/zepto/callback.js');
+//zepto模块--deferred
+require('@pathIncludJs/vendor/zepto/deferred.js');
 require('@pathCommonJs/ajaxLoading.js');
 require('@pathCommonBase/base.js');
 var tipAction = require('../../../common/js/components/tipAction.js');
 var popPicker = require('../../../common/js/components/popPicker.js');
-
+var generateTemplate = require('@pathCommonJsComBus/generateTemplate.js');
 $(function() {
     var recommend = {
         getElements: {
@@ -36,6 +41,10 @@ $(function() {
             manager_show_wrap: $('.manager_show_wrap'), // 唯一理财师展示区域
             qrcode_wrap: $('.qrcode_wrap'), // 二维码区域
             inviting_friend_wrap: $('.inviting_friend_wrap'), // 邀请好友区域
+            recommend_lcs_text: $('.recommendLcsText'), // 邀请好友区域
+            popupUl: $('.popup-ul'), // 银行卡模板容器
+			bankListTemplate: $('#bankList-template'), //银行卡模板
+
         },
         setting: {
             ajaxArr: [], // 请求ajax的数组
@@ -196,25 +205,19 @@ $(function() {
                 shareUrl = '', // 分享出去链接
                 existMain = data.existMain,
                 advisor = data.advisor;
-            if (existMain == 0 && advisor.length > 1) {
-                //无专属且理财师多于1位
-
-                //显示理财师选择
-                that.getElements.manager_choose_wrap.show();
-                // that.getElements.qrcode_wrap.hide();
-                $('.lcs').css('visibility', 'visible');
-
-                //循环数据
-                $.each(advisor, function(i, el) {
-                    that.list.push({
-                        text: '<span>' + el.codeName + '</span><span>' + el.empNo + '</span>',
-                        value: el.empNo
-                    })
-                })
+            if (existMain == 1 && advisor.length > 1) {
+                $('.recommendLcsText').html("您的理财师：")
+                //无专属且理财师多于1位默认展示一个
+                $('.manager_show').html(advisor[0].codeName + advisor[0].empNo)
+                that.generateShareLink(advisor[0].empNo);
+                that.list=advisor
+                debugger
+                generateTemplate(advisor,that.getElements.popupUl, that.getElements.bankListTemplate,true);
+                $(".popup").show();
             } else {
                 // 有专属理财师或者只有一位普通理财师
-                $('.manager_show_wrap .manager_show').html(advisor[0].codeName + advisor[0].empNo)
-                that.getElements.manager_show_wrap.show();
+                $('.recommendLcsText').html("您的理财师：")
+                $('.manager_show').html(advisor[0].codeName + advisor[0].empNo)
                 that.generateShareLink(advisor[0].empNo);
             }
         },
@@ -409,14 +412,20 @@ $(function() {
             var that = this;
 
             //点击选择理财师
-            mui("body").on('tap', '.mui-navigate-right', function() {
-                //出现选择器
-                popPicker(1, that.list, $('.mui-table-view a'));
+            mui("body").on('tap', '.popup-li', function() {
+                // //出现选择器
+                // debugger
+                // popPicker(1, that.list, $('.mui-table-view a'));
+                console.log(that.list)
+            })
+            //点击取消选择
+            
+            mui("body").on('tap', '.cancel', function() {
+               $(".popup").hide();
             })
 
             //点击--生成专属二维码
             mui("body").on('tap', '.generate_btn', function() {
-
                 //判断理财师是否已选择 
                 if (!$('.mui-table-view .mui-navigate-right').hasClass('hasSelect') && that.list.length) {
                     tipAction('请选择您的理财师');

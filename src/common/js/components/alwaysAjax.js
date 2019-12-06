@@ -5,7 +5,7 @@
  * cutNumber 准备做tops的参数  后期优化
  */
 
-module.exports = function(className, pullupLoadingName, cutNumber) {
+module.exports = function(className, pullupLoadingName, cutNumber, isBottomFlag) {
     //点击下按钮，显示弹框
     var classNames = className ? className : ".contentWrap"
     var pullupLoadingNames = pullupLoadingName ? pullupLoadingName : ".contentWrapper"
