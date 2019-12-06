@@ -10,6 +10,7 @@ require('@pathCommonJs/ajaxLoading.js');
 
 var generateTemplate = require('@pathCommonJsComBus/generateTemplate.js');
 var splitUrl = require('@pathCommonJs/components/splitUrl.js')();
+var alwaysAjax = require('@pathCommonJs/components/alwaysAjax.js')
 
 $(function() {
 
@@ -96,8 +97,6 @@ $(function() {
                 //async: false,
                 needDataEmpty: true,
                 callbackDone: function(json) {
-                    console.log(json.data)
-                    // console.log(json.data.pageList)
                     var data;
                     if (json.data.length == 0) { // 没有记录不展示
                         $(".list").hide()
@@ -126,7 +125,6 @@ $(function() {
                                 t.endPullupToRefresh(true);
                             }
                         } else { // 还有更多数据
-                            console.log(999)
                             t.endPullupToRefresh(false);
                         }
 
@@ -144,6 +142,10 @@ $(function() {
             console.log(obj)
             $.ajaxLoading(obj);
         },
+        //注册事件
+		events: function() {
+			alwaysAjax('.contentWrap')
+		}
     };
     somePage.init();
 });

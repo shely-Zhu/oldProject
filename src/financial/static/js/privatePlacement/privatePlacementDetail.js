@@ -513,7 +513,6 @@ $(function(){
 				contentTypeSearch:true,
 				needLogin:true,//需要判断是否登陆
 				callbackDone: function(json){  //成功后执行的函数
-					$("#tips-wrap").show();//显示预约条件
 //					generateTemplate(json.data,$("#real-condition"), that.$e.conditionTemplate);
 					var jsonData = json.data,
 					notice = "",
@@ -526,6 +525,7 @@ $(function(){
 					$.each(jsonData, function(e,v) {
 						var jumpUrl = "";
 						if(v.show == "1"){//如果显示。show=1
+							$("#tips-wrap").show();//显示预约条件
 							singleaAuthen = true;
 							if(!singleaAuthenPath){//获取一键认证的链接。有值的第一个
 								singleaAuthenPath = that.getJumpUrl(v)
@@ -534,7 +534,7 @@ $(function(){
 								}
 							}
 							if(v.conditionType == 3 && !!v.isPopup){//是否弹出售前告知书。售前告知书与风险等级匹配一起提示
-								isPopup = v.isisPopup;
+								isPopup = v.isPopup;
 							}
 							that.$e.realLi.eq(e*1).show();
 							that.$e.realLi.eq(e*1).find(".bank-status").html(v.statusDesc);
@@ -610,8 +610,9 @@ $(function(){
 					                	},
 					                };
 					                $.elasticLayer(obj)
+								}else{
+									that.nextStep();
 								}
-								that.nextStep();
 								
 							}
 						},

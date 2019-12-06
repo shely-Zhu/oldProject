@@ -323,9 +323,9 @@ module.exports = function() {
 
     /*-------------------------------活动列表 start -----------------------*/
     // 活动详情
-    this.activityDetails_url = go_url.no_url + '/mine/views/memberClub/activityDetails/activityDetails.html';
+    this.activityDetails_url = go_url.no_url + '/life/views/memberClub/activityDetails.html';
     // 活动列表
-    this.activityList_url = go_url.no_url + '/life/views/memberClub/activityList/activityList.html';
+    this.activityList_url = go_url.no_url + '/life/views/memberClub/activityList.html';
     //活动详情->实名
     this.realName_url = go_url.no_url + '/mine/views/realName/realName.html';
     //活动详情->风测
@@ -405,6 +405,8 @@ module.exports = function() {
     this.pofRetrievePassword_url = go_url.no_url + '/minel/views/setting/retrievePassword.html';
     //添加银行卡
     this.pofAddBankCard_url = go_url.no_url + '/mine/views/bankCard/addBankCard.html'
+    //基金分享跳原生页面
+    this.pofShare_url = go_url.no_url + '/financial/views/publicPlacement/share.html'
 
     /*------------------- 私募理财fang——le end ------------------------------*/
     this.optionalPublicDetail_url = go_url.no_url + '/account/views/public/optionalPublicDetail.html';
