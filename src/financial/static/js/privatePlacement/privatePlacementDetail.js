@@ -137,7 +137,7 @@ $(function(){
 					// 净值日期
 					$('.netValueDate').html(jsonData.netValueDate)
 					// 起投金额
-					$('.investmentAmountNum').html(jsonData.investStart);
+					$('.investmentAmountNum').html(jsonData.investStart+'万');
 					// 产品期限
 					$('.productDeadlineNum').html(jsonData.projectTerm + jsonData.projectTermUnit);
 					// 预约资质
