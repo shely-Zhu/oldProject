@@ -528,7 +528,7 @@ $(function(){
 
 				},
 				callbackFail: function(json){  //失败后执行的函数
-					tipAction(json.msg);
+					tipAction(json.message);
 
 				}
 			}];
@@ -559,7 +559,7 @@ $(function(){
 
 				},
 				callbackFail: function(json){  //失败后执行的函数
-					tipAction(json.msg);
+					tipAction(json.message);
 
 				}
 			}];
@@ -704,7 +704,7 @@ $(function(){
 							}
 						},
 						callbackFail: function(json){  //失败后执行的函数
-							tipAction(json.msg);
+							tipAction(json.message);
 							that.data.canClick = true;//变为可点击
 		
 						}

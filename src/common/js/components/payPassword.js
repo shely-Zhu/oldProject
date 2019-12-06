@@ -24,6 +24,7 @@ var fixScroll = function(num){//ios浏览器需要滚动
 	if (isiOS && num == 1) {
 		window.scrollTo(0, 0);
 	}else if(isiOS && num == 2){
+		window.scrollTo(-100000, -100000);//滚动到可是区域
 		document.body.scrollTop = document.body.scrollHeight;
 	}
 }
