@@ -187,7 +187,7 @@ $(function () {
 			var that = regulatory;
 			regulatory.gV.password = val
 			var obj = [{ 
-				url: site_url.pofCashBuy_api + '/mock',
+				url: site_url.pofCashBuy_api,
 				data: {
 					fundCode:that.gV.fundCode,
 					fundName:that.gV.fundName,

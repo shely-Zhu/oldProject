@@ -79,8 +79,6 @@ $(function () {
 		},
 		webinit: function () {
 			var that = this;
-			that.$el.fundCode.html(that.gV.fundCode) ;
-			that.$el.fundName.html(that.gV.fundName);
 			that.events();
 			if(that.gV.type == 'add'){
 				that.getData();
