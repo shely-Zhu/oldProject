@@ -31,8 +31,10 @@ $(function() {
             linenum: $('#linenum'), //行号
             openingBank: $("#openingBank"), //开户行
             topc: $('#topc'), //提示信息
+            tipIcon: $(".tipIcon"), //净值披露信息
         },
         data: {
+            canClick: true,
             custType: "", //客户类型
             fundDetailObj: "", //详情接口拿到的对象
             buyFreeze: "", //是否买入冻结
@@ -44,6 +46,7 @@ $(function() {
                 sinceNow: {}
             },
         },
+
         //页面初始化函数
         init: function() {
 
@@ -72,31 +75,53 @@ $(function() {
                     var jsonData = json.data;
                     that.data.fundDetailObj = jsonData;
                     var projectLableHtml, projectLableHtmlList;
+                    var businessCompareReferenceMin = jsonData.businessCompareReferenceMin,
+                        businessCompareReferenceMax = jsonData.businessCompareReferenceMax;
                     // 根据收益分配方式区分 0固收 1浮收普通 2浮收稳裕 
                     if (jsonData.incomeModeJF == '0') {
+                        // 头部不同的展示
                         $('.fixedIncome').removeClass('hide');
                         $('.floatProfit').addClass('hide');
+                        $('.floatProfitWy').addClass('hide');
 
                         // 基本信息的展示
                         $('.performanceComparison').removeClass('hide');
                         $('.lineWrap').addClass('hide');
+
+                        // $(".invSolid").show();
+                        if (Number(businessCompareReferenceMax) <= Number(businessCompareReferenceMin)) {
+                            if (businessCompareReferenceMin != '') {
+                                $(".fixedIncome .netValue").html(businessCompareReferenceMin + "%");
+                            }
+                        } else {
+                            $(".fixedIncome .netValue").html(businessCompareReferenceMin + "%-" + businessCompareReferenceMax + "%");
+                        }
                     } else if (jsonData.incomeModeJF == '1') { //1浮收普通   展示历史业绩走势
+                        // 头部不同的展示
+                        $('.fixedIncome').addClass('hide');
+                        $('.floatProfit').removeClass('hide');
+                        $('.floatProfitWy').addClass('hide');
+
                         that.$e.lineType = 'wfsy';
                         $('.lineWrap .wfsy').removeClass('hide');
                         $('.lineWrap .qrnh').addClass('hide');
 
                         $("#qrnhLine").addClass("hide");
                         $("#wfsyLine").removeClass("hide");
+                        // 单位净值
+                        $('.netValue').html(jsonData.unitNetValue);
                         // 折线图
                         that.getTypeOneData(that.$e.lineType);
 
                     } else if (jsonData.incomeModeJF == '2') { //2浮收稳裕   展示七日年化
-                        that.$e.lineType = 'qrnh';
-                        // $('.lineWrap .wfsy').addClass('hide');
-                        // $('.lineWrap .qrnh').removeClass('hide');
+                        // 头部不同的展示
+                        $('.fixedIncome').addClass('hide');
+                        $('.floatProfit').addClass('hide');
+                        $('.floatProfitWy').removeClass('hide');
 
-                        $("#qrnhLine").addClass("hide");
-                        $("#wfsyLine").removeClass("hide");
+                        that.$e.lineType = 'qrnh';
+                        $("#qrnhLine").removeClass("hide");
+                        $("#wfsyLine").addClass("hide");
                         // 折线图
                         that.getTypeOneData(that.$e.lineType);
                     }
@@ -106,21 +131,27 @@ $(function() {
                     // 一句话产品详情
                     $('.introduction').html(jsonData.productLightspot);
                     // 单位净值
-                    $('.netValue').html(jsonData.unitNetValue);
+                    // $('.netValue').html(jsonData.unitNetValue);
                     // 净值日期
                     $('.netValueDate').html(jsonData.netValueDate)
                         // 起投金额
-                    $('.investmentAmountNum').html(jsonData.investStart);
+                    $('.investmentAmountNum').html(jsonData.investStart + '万');
                     // 产品期限
                     $('.productDeadlineNum').html(jsonData.projectTerm + jsonData.projectTermUnit);
                     // 预约资质
-                    $('.appointment span').html(jsonData.orderConditionEnum);
+                    $('.appointment span').html(jsonData.orderCondition);
                     // 产品特点标签
                     var projectLable = jsonData.projectLable.split('|');
                     for (var i in projectLable) {
                         projectLableHtml = '<span>' + projectLable[i] + '</span>'
                         $('.productLabel').append(projectLableHtml)
                     }
+                    //0 债权投资;1 证券投资（二级市场）;2 股权投资;3 海外投资;4 其他
+                    if (jsonData.investDirect == "0" || jsonData.investDirect == "2" || jsonData.investDirect == "4") { // 债权投资、股权投资、其他服务不展示
+                        that.getElements.tipIcon.hide();
+                    } else if (jsonData.investDirect == "1" || jsonData.investDirect == "3") { // 海外投资  （证券投资）二级市场展示
+                        that.getElements.tipIcon.show();
+                    };
 
                     // 基本信息
                     // 剩余额度
@@ -130,11 +161,21 @@ $(function() {
                         // 管理人
                     $('.custodian').html(jsonData.projectIssuer);
                     // 风险等级
-                    $('.riskGrade').html(jsonData.productRiskLevel);
+                    $('.riskGrade').html(jsonData.productRiskLevelDesc);
                     // 发行规模
                     $('.issuingScale').html(jsonData.formatIssuanceSize);
                     // 投资方向
-                    $('.direction').html(jsonData.investDirect);
+                    if (jsonData.investDirect == '0') {
+                        $('.direction').html('债权投资');
+                    } else if (jsonData.investDirect == '1') {
+                        $('.direction').html('证券投资(二级市场)');
+                    } else if (jsonData.investDirect == '2') {
+                        $('.direction').html('股权投资');
+                    } else if (jsonData.investDirect == '3') {
+                        $('.direction').html('海外投资');
+                    } else if (jsonData.investDirect == '4') {
+                        $('.direction').html('其他');
+                    }
                     // 投资领域
                     $('.investmentArea').html(jsonData.investArea);
                     // 投资方式
@@ -159,7 +200,11 @@ $(function() {
                     // 预计成立日期
                     $('.establishment').html(jsonData.setupDate);
                     // 是否需要面签
-                    $('.isVideo').html(jsonData.isVideo);
+                    if (jsonData.isVideo == 0) {
+                        $('.isVideo').html('否');
+                    } else {
+                        $('.isVideo').html('是');
+                    }
                     // 允许购买客户类型
                     $('.clientType').html(jsonData.customerType);
                     // 允许购买客户等级
@@ -171,6 +216,42 @@ $(function() {
 
                     // 立即预约上的认购申购费率
                     $('.buyRate span').html(jsonData.buyRate);
+
+                    // 立即预约按钮展示逻辑
+                    switch (jsonData.productStatus) {
+                        case "1": //尚未预约，可以预约
+                            $(".buyButton").show().html("立即预约");
+                            $(".over").hide();
+                            break;
+                        case "2": //可以预约，但是会告知要联系理财师
+                            $(".buyButton").show().html("立即预约");
+                            $(".over").hide();
+                            break;
+                        case "3": //可以预约，但是需要重新风险测评
+                            $(".buyButton").show().html("立即预约");
+                            $(".over").hide();
+                            break;
+                        case "4": //产品已售罄
+                            $(".over").show().html("已售罄");
+                            $(".buyButton").hide();
+                            break;
+                        case "5": //产品已成立
+                            $(".over").show().html("已成立");
+                            $(".buyButton").hide();
+                            break;
+                        case "6": //已预约   产品处于可取消预约状态
+                            $(".rightBtn").show();
+                            $(".buyButton").hide();
+                            break;
+                        case "7": //产品未开始
+                            $(".over").show().html("未开始");
+                            $(".buyButton").hide();
+                            break;
+                        case "9": //可以预约，风测过期但是需要重新风险测评
+                            $(".buyButton").show().html("立即预约");
+                            $(".over").hide();
+                            break;
+                    }
                 },
             }, {
                 url: site_url.queryUserAuthInfo_api,
@@ -448,7 +529,7 @@ $(function() {
 
                 },
                 callbackFail: function(json) { //失败后执行的函数
-                    tipAction(json.msg);
+                    tipAction(json.message);
 
                 }
             }];
@@ -479,7 +560,7 @@ $(function() {
 
                 },
                 callbackFail: function(json) { //失败后执行的函数
-                    tipAction(json.msg);
+                    tipAction(json.message);
 
                 }
             }];
@@ -498,7 +579,7 @@ $(function() {
                 jumpUrl = site_url.investorClassification_url
             } else if (v.conditionJump == 5) { //跳转到投资者分类结果页页面
                 jumpUrl = site_url.investorClassificationResult_url
-            } else if (v.conditionJump == 6) { //跳转到合格投资者申请选择 页面
+            } else if (v.conditionJump == 6) { //跳转到合格投资者申请 页面
                 jumpUrl = site_url.chooseQualifiedInvestor_url
             } else if (v.conditionJump == 7) { //跳转到合格投资者结果页面
                 jumpUrl = site_url.qualifiedInvestorResult_url
@@ -518,7 +599,7 @@ $(function() {
                 contentTypeSearch: true,
                 needLogin: true, //需要判断是否登陆
                 callbackDone: function(json) { //成功后执行的函数
-                    $("#tips-wrap").show(); //显示预约条件
+                    that.data.canClick = true; //变为可点击
                     //					generateTemplate(json.data,$("#real-condition"), that.$e.conditionTemplate);
                     var jsonData = json.data,
                         notice = "",
@@ -530,16 +611,17 @@ $(function() {
                     that.$e.realLi.hide();
                     $.each(jsonData, function(e, v) {
                         var jumpUrl = "";
+                        if (v.conditionType == 3 && !!v.isPopup) { //是否弹出售前告知书。售前告知书与风险等级匹配一起提示
+                            isPopup = v.isPopup;
+                        }
                         if (v.show == "1") { //如果显示。show=1
+                            $("#tips-wrap").show(); //显示预约条件
                             singleaAuthen = true;
                             if (!singleaAuthenPath) { //获取一键认证的链接。有值的第一个
                                 singleaAuthenPath = that.getJumpUrl(v)
                                 if (v.conditionType == 1) { //下面一键认证如果是实名认证且机构需要点击需要弹框提示，这里记录。且不能覆盖
                                     isReal = true; //判断
                                 }
-                            }
-                            if (v.conditionType == 3 && !!v.isPopup) { //是否弹出售前告知书。售前告知书与风险等级匹配一起提示
-                                isPopup = v.isPopup;
                             }
                             that.$e.realLi.eq(e * 1).show();
                             that.$e.realLi.eq(e * 1).find(".bank-status").html(v.statusDesc);
@@ -585,7 +667,7 @@ $(function() {
                     });
                     //发送ajax请求
                     var ReourceListobj = [{
-                        url: site_url.getRaiseInfo_api,
+                        url: site_url.queryReourceList_api,
                         data: {
                             projectId: that.$e.projectId,
                             fileType: isPopup
@@ -594,6 +676,7 @@ $(function() {
                         needLoading: true,
                         needLogin: true, //需要判断是否登陆
                         callbackDone: function(json) { //成功后执行的函数
+                            that.data.canClick = true; //变为可点击
                             var data = json.data,
                                 noticeObj = data;
                             if (!singleaAuthen) { //如果v.show都是0，则不展示预约框,跳转到相应链接
@@ -602,8 +685,8 @@ $(function() {
                                     var obj = {
                                         title: '',
                                         id: 'sellPop',
-                                        p: '<p class="">你选择的产品与您现在的风险承受能力相匹配</p>' +
-                                            '<p class="">请您认真阅读[' + fileName + ']并确认后继续购买该产品</p>',
+                                        p: '<p class="" style="font-weight:bold;text-align:center">你选择的产品与您现在的风险承受能力相匹配</p>' +
+                                            '<p class="">请您认真阅读[' + noticeObj.fileName + ']并确认后继续购买该产品</p>',
                                         yesTxt: '去阅读',
                                         celTxt: '取消',
                                         zIndex: 1200,
@@ -613,13 +696,15 @@ $(function() {
                                         },
                                     };
                                     $.elasticLayer(obj)
+                                } else {
+                                    that.nextStep();
                                 }
-                                that.nextStep();
 
                             }
                         },
                         callbackFail: function(json) { //失败后执行的函数
-                            tipAction(json.msg);
+                            tipAction(json.message);
+                            that.data.canClick = true; //变为可点击
 
                         }
                     }];
@@ -629,6 +714,7 @@ $(function() {
                 },
                 callbackFail: function(json) { //失败后执行的函数
                     tipAction(json.message);
+                    that.data.canClick = true; //变为可点击
 
                 }
             }];
@@ -820,23 +906,29 @@ $(function() {
 
             // 立即预约
             mui("body").on('mdClick', '.buyButton', function() {
-                if (that.data.buyFreeze == "1") { //如果账户冻结，首先提示
-                    var obj = {
-                        title: '',
-                        id: 'buyFreeze',
-                        p: '您的账户已冻结，禁止买入，可联系您的理财师进行咨询',
-                        yesTxt: '确认',
-                        celTxt: "取消",
-                        zIndex: 100,
-                        callback: function(t) {
+                if (that.data.canClick) { //防重复点击
+                    if (that.data.buyFreeze == "1") { //如果账户冻结，首先提示
+                        var obj = {
+                            title: '',
+                            id: 'buyFreeze',
+                            p: '您的账户已冻结，禁止买入，可联系您的理财师进行咨询',
+                            yesTxt: '确认',
+                            celTxt: "取消",
+                            zIndex: 100,
+                            callback: function(t) {
 
-                        },
-                    };
-                    $.elasticLayer(obj)
+                            },
+                        };
+                        $.elasticLayer(obj)
+                    } else {
+                        that.getConditionsOfOrder(); //获取预约条件
+
+                    }
+
                 } else {
-                    that.getConditionsOfOrder(); //获取预约条件
-
+                    return false;
                 }
+                that.data.canClick = false;
             }, {
                 htmdEvt: 'privatePlacementDetail_04'
             });
