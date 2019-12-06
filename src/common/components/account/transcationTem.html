@@ -292,11 +292,11 @@
             <span>当前进度{{assigneeStep}}/6</span> {{else}}
             <span>当前进度已截止</span> {{/if}}
             <a href="">查看具体情况</a>
-            <div class="blueBgButton toDetail toView" data-type="assignee">详情</div>
+            <div class="blueBgButton toDetail" data-type="toView">详情</div>
             {{#if assigneeCancel}}
             <div class="goldBorderButton cancelBtn" data-type="assignee" data-id="{{projectId}}">取消受让</div>
             {{/if}} {{#if assigneeToVideo}}
-            <div class="toDetail blueBgButton toVideo" data-type="assignee" data-id="{{projectId}}">视频双录</div>
+            <div class="toDetail blueBgButton" data-type="toVideo" data-id="{{projectId}}">视频双录</div>
             {{/if}}
         </div>
         <!-- 进度 -->
