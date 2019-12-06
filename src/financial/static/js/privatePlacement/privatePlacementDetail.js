@@ -534,7 +534,7 @@ $(function(){
 								}
 							}
 							if(v.conditionType == 3 && !!v.isPopup){//是否弹出售前告知书。售前告知书与风险等级匹配一起提示
-								isPopup = v.isisPopup;
+								isPopup = v.isPopup;
 							}
 							that.$e.realLi.eq(e*1).show();
 							that.$e.realLi.eq(e*1).find(".bank-status").html(v.statusDesc);
