@@ -10,13 +10,13 @@ module.exports = function( $className, pullupLoadingName, cutNumber, isBottomFla
     var $classNames = $className ? $className : $(".contentWrap");
     var pullupLoadingNames = pullupLoadingName ? pullupLoadingName : ".contentWrapper"
     var tops = parseInt(cutNumber?cutNumber:-100); 
-    if ($(classNames).length > 0) {
+    if ( $classNames.length > 0) {
         $(document).scroll(function() {
             // 滚动距离 Math.abs($(classNames).offset().top - 64)
             // 容器高度 $(classNames).parent().parent().height()
             if ( $classNames.offset().top < tops) {
 
-                if( !$classNames.find('.mui-pull-caption-nomore').length ){
+                if( ! $classNames.find('.mui-pull-caption-nomore').length ){
                     tops -= 800;
                     mui(pullupLoadingNames).pullRefresh().pullupLoading();
                 }
