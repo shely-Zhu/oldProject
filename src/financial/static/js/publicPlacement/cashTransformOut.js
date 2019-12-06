@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2019-11-26 14:42:56
- * @LastEditTime: 2019-12-06 18:48:07
+ * @LastEditTime: 2019-12-06 19:15:36
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \htjf-app\src\financial\static\js\publicPlacement\cashTransformOut.js
@@ -238,6 +238,7 @@ $(function () {
 					that.$e.el_dailyOnceMaxLimitWan[0].textContent = that.gv.dailyOnceMaxLimitWan;
 					that.$e.el_dailyMaxLimitWan[0].textContent = that.gv.dailyMaxLimitWan;
 					that.$e.el_dailyTimesMaxLimit[0].textContent = that.gv.dailyTimesMaxLimit;
+					$(".transformInput").attr("maxlength",data.dailyMaxLimit);
 				}
 			}]
 			$.ajaxLoading(obj)
