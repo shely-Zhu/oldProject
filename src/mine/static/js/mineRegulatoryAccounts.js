@@ -65,16 +65,8 @@ $(function(){
 	                $('#number').html(json.data.bankAccount);
 	                $('#linenum').html(json.data.bankNo);
 	                $('#openingBank').html(json.data.bankAccountName);
-
 					$('#topc').html(json.data.remarks);
-
-
 	            },
-	            callbackFail: function(json){  //失败后执行的函数
-
-						tipAction(json.msg);
-
-	            }
 	        }];
 	        $.ajaxLoading(obj);
 
