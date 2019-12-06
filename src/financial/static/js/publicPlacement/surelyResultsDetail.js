@@ -172,7 +172,7 @@ $(function() {
               if(that.gV.flag == 'redemption'){
                 that.$el.fundNameRedemption.html(json.data.fundName)
                 that.$el.fundCodeRedemption.html(json.data.fundCode)
-                that.$el.amount2Redemption.html(json.data.tradeAmount)
+                that.$el.amount2Redemption.html(json.data.tradeShares)
                 that.$el.banKImgRedemption.attr('src',json.data.bankThumbnailUrl)
                 that.$el.bankName2Redemption.html(json.data.bankName)
                 that.$el.bankNum2Redemption.html(json.data.bankAccountMask.substr(json.data.bankAccountMask.length - 4))
