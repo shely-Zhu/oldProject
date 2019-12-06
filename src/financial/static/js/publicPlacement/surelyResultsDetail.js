@@ -144,9 +144,9 @@ $(function() {
                     }
                   }
                   that.$el.applyTimeRedemption.html(json.data.originalDate)
-                  that.$el.shareTimeRedemption.html(json.data.estimateConfirmDate)
-                  that.$el.earningsTimeRedemption.html(json.data.confirmDate)
-                  that.$el.payTypeRedemption.html('在线支付')
+                  that.$el.shareTimeRedemption.html(json.data.estimateConfirmDate + ' 24:00前')
+                  that.$el.earningsTimeRedemption.html(json.data.confirmDate + ' 24:00前')
+                  // that.$el.payTypeRedemption.html('在线支付')
                 }
               }
               if(that.gV.payType == '1'){   // 买入汇款支付
@@ -172,7 +172,7 @@ $(function() {
               if(that.gV.flag == 'redemption'){
                 that.$el.fundNameRedemption.html(json.data.fundName)
                 that.$el.fundCodeRedemption.html(json.data.fundCode)
-                that.$el.amount2Redemption.html(json.data.tradeAmount)
+                that.$el.amount2Redemption.html(json.data.tradeShares)
                 that.$el.banKImgRedemption.attr('src',json.data.bankThumbnailUrl)
                 that.$el.bankName2Redemption.html(json.data.bankName)
                 that.$el.bankNum2Redemption.html(json.data.bankAccountMask.substr(json.data.bankAccountMask.length - 4))

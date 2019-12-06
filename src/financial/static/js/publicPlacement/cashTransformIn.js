@@ -77,6 +77,7 @@ $(function () {
 						that.$el.paymentGainsDayStr.html(data.paymentGainsDayStr)
 						that.gV.fundName = data.fundName
 						that.gV.fundCode = data.fundCode
+						that.gV.minValue = Number(data.purchaseAmount)
 						that.$el.transformInput.attr('placeholder',data.purchaseAmountMask)
 						// for (var index = 0; index < data.tradeLimitList.length; index++) {
 						// 	if(that.gV.fundBusinCode ==  data.tradeLimitList[index].fundBusinCode){
@@ -187,7 +188,7 @@ $(function () {
 			var that = regulatory;
 			regulatory.gV.password = val
 			var obj = [{ 
-				url: site_url.pofCashBuy_api + '/mock',
+				url: site_url.pofCashBuy_api,
 				data: {
 					fundCode:that.gV.fundCode,
 					fundName:that.gV.fundName,
@@ -358,11 +359,17 @@ $(function () {
 			//确定
 			mui("body").on('mdClick','.btn_box .btn',function(){
 				if(!!that.gV.bankAccountSecret){
-					if(Number(that.gV.balance) > Number(that.gV.singleNum)){
-						tipAction('单笔金额不能超过' + that.gV.singleNum + '元')
+					if(Number(that.gV.balance) < Number(that.gV.minValue)){
+						tipAction('单笔金额不能小于' + that.gV.minValue + '元')
 						return
+					}else{
+						if(Number(that.gV.balance) > Number(that.gV.singleNum)){
+							tipAction('单笔金额不能超过' + that.gV.singleNum + '元')
+							return
+						}
+						that.checkPayType()
 					}
-					that.checkPayType()
+					
 				}else{
 					//未选择银行卡提示信息
 					tipAction("请选择银行卡！");

@@ -15,8 +15,12 @@ module.exports = function(className, pullupLoadingName, cutNumber, isBottomFlag)
             // 滚动距离 Math.abs($(classNames).offset().top - 64)
             // 容器高度 $(classNames).parent().parent().height()
             if ($(classNames).offset().top < tops) {
-                tops -= 800;
-                mui(pullupLoadingNames).pullRefresh().pullupLoading();
+
+                if( !$('.contentWrapper').find('.mui-pull-caption-nomore').length ){
+                    tops -= 800;
+                    mui(pullupLoadingNames).pullRefresh().pullupLoading();
+                }
+                
             } 
         });
     }

@@ -79,8 +79,6 @@ $(function () {
 		},
 		webinit: function () {
 			var that = this;
-			that.$el.fundCode.html(that.gV.fundCode) ;
-			that.$el.fundName.html(that.gV.fundName);
 			that.events();
 			if(that.gV.type == 'add'){
 				that.getData();
@@ -519,7 +517,7 @@ $(function () {
 					data = json.data;
 					console.log('data',data)
 					if(json.status == '0000'){
-					    window.location.href = site_url.pofSurelyResultsDetail_url + '?scheduledProtocolId=' + data.scheduledProtocolId ;
+					    window.location.href = site_url.pofCastSurelyDetails_url + '?scheduledProtocolId=' + data.scheduledProtocolId ;
 					}
 				},
 				callbackNoData:function(json){

@@ -123,6 +123,7 @@ $(function() {
                     if (json.data.pageList && json.data.pageList.length == 0) { // 没有记录不展示
                         $(".list").hide()
                         that.getElements.noData.show();
+                        that.getElements.listLoading.hide();
                         return false;
                     } else {
                         data = json.data.pageList;
@@ -172,6 +173,8 @@ $(function() {
                 })
                 //点击筛选数据
             mui("body").on('tap', '.hopperCon li', function(e) {
+                    $('.list').show();
+                    that.getElements.noData.hide();
                     $(this).addClass('active').siblings('li').removeClass('active');
                     $('.mask').hide();
                     $('.hopperCon').hide();
@@ -181,7 +184,8 @@ $(function() {
                     that.gV.aP.pageNum = 1;
                     that.getElements.contentWrap.html('');
                     //重新初始化
-                    that.initMui();
+                    that.getElements.listLoading.show();
+                    that.getData(that.gV.aThis);
                     mui('.contentWrapper').pullRefresh().scrollTo(0, 0, 0);
                 })
                 // 点击遮罩隐藏
@@ -254,15 +258,19 @@ $(function() {
                 //功能按钮
             mui("body").on('tap', '.toDetail', function(e) {
                 var type = $(this).attr('type');
-                var id = $(this).attr('reserveId');
+                var reserveId = $(this).attr('reserveId');
+                var proId = $(this).attr('projectId');
                 if (type == 'toCertif') { //去合格投资者认证
 
                 } else if (type == 'toSign') { //去签合同
-                    window.location.href = site_url.seeSign_url + '?reserveId=' + id;
+                    window.location.href = site_url.elecFourthStep_url + '?reserveId=' + reserveId + '&projectId' + proId;
                 } else if (type == 'toSee') { //查看合同
-
+                    window.location.href = site_url.seeSign_url + '?reserveId=' + reserveId;
                 } else if (type == 'toUploadM') { //去上传汇款凭证
+                    window.location.href = site_url.elecFourthStep_url + '?reserveId=' + reserveId;
+                } else if (type == 'toView') { //详情
 
+                } else if (type == 'toVideo') { //视频双录
                 }
 
             })
