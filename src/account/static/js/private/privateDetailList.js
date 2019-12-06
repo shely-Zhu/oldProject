@@ -167,7 +167,7 @@ $(function() {
             w = $id.attr('id'), //获取节点的 id
                 s = '#' + w + ' .contentWrapper'; //id 拼接 查出content区域
             //无缝滚动
-            alwaysAjax('#' + w + ' .mui-table-view-cell', s)
+            alwaysAjax($('#' + w + ' .mui-table-view-cell'), s)
             mui.init({
                 pullRefresh: {
                     container: s,
