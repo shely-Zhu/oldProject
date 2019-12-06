@@ -348,7 +348,7 @@ $(function(){
                 $('.activitySearchInput').children('input').focus();
             });
             // recordList
-            alwaysAjax(".recordList");
+            alwaysAjax($(".recordList"));
         }
     }
     //调用初始化函数
