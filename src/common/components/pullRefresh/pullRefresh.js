@@ -4,7 +4,7 @@
  * @author yangjinlai 20191129
  *
  *  给jQuery插件扩展上拉加载方法，使用Mui上拉加载组件
-    外部调用方式：$.elasticLayer(obj);
+    外部调用方式：$.pullRefresh(obj);
  */
 
 var alwaysAjax = require('@pathCommonJs/components/alwaysAjax.js');
@@ -84,6 +84,8 @@ var generateTemplate = require('@pathCommonJsComBus/generateTemplate.js');
 
                      //插入到容器中
                      that.options.wrapper.append(html);
+
+                     that.options.wrapper.find('.contentWrapper').height('100%');
 
                      // that.$list = that.options.wrapper.find('.list');
                  },
