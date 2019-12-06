@@ -519,7 +519,7 @@ $(function () {
 					data = json.data;
 					console.log('data',data)
 					if(json.status == '0000'){
-					    window.location.href = site_url.pofSurelyResultsDetail_url + '?scheduledProtocolId=' + data.scheduledProtocolId ;
+					    window.location.href = site_url.pofCastSurelyDetails_url + '?scheduledProtocolId=' + data.scheduledProtocolId ;
 					}
 				},
 				callbackNoData:function(json){

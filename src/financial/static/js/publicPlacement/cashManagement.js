@@ -20,6 +20,7 @@ $(function () {
       var that = this;
 
       //页面初始化
+      $('.tips').hide()
       that.getData();
       that.events();
 
@@ -71,7 +72,7 @@ $(function () {
 
     },
      // 获取认证信息
-    getUserInfo: function (fundName,fundCode) {
+    getUserInfo: function (fundCode,fundName) {
       var that = this;
       // 请求页面数据
       var obj = [{
