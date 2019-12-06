@@ -14,7 +14,7 @@
 	<title>我的奖励</title>
 </head>
 <body>
-	@@include('@pathCommonCom/noData/noData.html', {"tipText": "暂无数据"})
+	@@include('@pathCommonCom/noData/noData.html', {"tipText": "您暂无奖励"})
 
 	@@include('@pathCommonCom/loading/listLoading.html')
     @@include('@pathCommonViews/headBarConfig.html',{"pathName":"我的奖励"})
@@ -32,7 +32,7 @@
                             <!--放置列表-->
                         </li>
                         <!-- 返回顶部 -->
-                        @@include('../../common/views/goTop.html')
+                       @@include('@pathCommonViews/goTop.html')
                     </ul>
 					<!--内容区-->
 					<!-- <div class="mui-card-content mui-card-media entity ">

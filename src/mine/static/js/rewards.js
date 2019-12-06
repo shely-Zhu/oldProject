@@ -92,7 +92,7 @@ $(function() {
         getData: function(t) {
             var that = this;
 
-            var obj = [{ // 月度报告列表
+            var obj = [{ //
                 url: site_url.getPrizeInfo_api,
                 data: {
                     "pageNum": that.gV.pageCurrent,
