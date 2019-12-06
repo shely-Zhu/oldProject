@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2019-11-26 14:42:56
- * @LastEditTime: 2019-12-05 15:39:51
+ * @LastEditTime: 2019-12-06 11:16:19
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \htjf-app\src\financial\static\js\publicPlacement\redemptionBuy.js
@@ -111,7 +111,8 @@ $(function() {
                         $('.elasticLayer.transOutRule').show()
                            $(".elasticContent").html(html);
                        }else{
-                        $(".elasticContent").html("规则查询失败");
+                         $('.elasticLayer.transOutRule').show()
+                         $(".elasticContent").html("规则查询失败");
                        }
                 },
 
@@ -180,6 +181,9 @@ $(function() {
                     if(res.status == '0000'){
                         window.location.href = site_url.pofSurelyResultsDetail_url + '?applyId=' + data.allotNo + '&fundBusinCode=' + 
                         "024"+ "&fundCode=" + regulatory.gv.dataList.fundCode  + '&flag=redemption';
+                    }else{
+                        $('.elasticLayer.transOutRule').show()
+                        $(".elasticContent").html(res.message);
                     }
                 }
 
