@@ -209,7 +209,7 @@ var monthReportDetail = {
 				if(jsonData.pefSaleInfoList.length == 0 && jsonData.pofInfoList.length == 0){
 					//没有数据
 					$('.tradeNoData').show();
-					$('.tradeNoData .text').html('截止'+that.getElements.reportTime+',您暂无持仓信息');
+					$('.tradeNoData .text').html('您'+that.getElements.reportTime+'无交易明细');
 				}
 				else{
 					jsonData.tradeDtail = true;
