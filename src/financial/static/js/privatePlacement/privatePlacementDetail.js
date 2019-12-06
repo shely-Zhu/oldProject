@@ -524,6 +524,9 @@ $(function(){
 					that.$e.realLi.hide();
 					$.each(jsonData, function(e,v) {
 						var jumpUrl = "";
+						if(v.conditionType == 3 && !!v.isPopup){//是否弹出售前告知书。售前告知书与风险等级匹配一起提示
+							isPopup = v.isPopup;
+						}
 						if(v.show == "1"){//如果显示。show=1
 							$("#tips-wrap").show();//显示预约条件
 							singleaAuthen = true;
@@ -532,9 +535,6 @@ $(function(){
 								if(v.conditionType == 1){//下面一键认证如果是实名认证且机构需要点击需要弹框提示，这里记录。且不能覆盖
 									isReal = true;//判断
 								}
-							}
-							if(v.conditionType == 3 && !!v.isPopup){//是否弹出售前告知书。售前告知书与风险等级匹配一起提示
-								isPopup = v.isPopup;
 							}
 							that.$e.realLi.eq(e*1).show();
 							that.$e.realLi.eq(e*1).find(".bank-status").html(v.statusDesc);
@@ -582,7 +582,7 @@ $(function(){
 					});
 								//发送ajax请求
 					var ReourceListobj = [{
-						url: site_url.getRaiseInfo_api,
+						url: site_url.queryReourceList_api,
 						data: {
 							projectId: that.$e.projectId,
 							fileType:isPopup
@@ -600,7 +600,7 @@ $(function(){
 					                	title: '',
 					                	id: 'sellPop',
 					                	p: '<p class="">你选择的产品与您现在的风险承受能力相匹配</p>' +
-					                		'<p class="">请您认真阅读[' + fileName + ']并确认后继续购买该产品</p>',
+					                		'<p class="">请您认真阅读[' + noticeObj.fileName + ']并确认后继续购买该产品</p>',
 					                	yesTxt: '去阅读',
 					                	celTxt: '取消',
 					                	zIndex: 1200,
