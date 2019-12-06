@@ -38,15 +38,15 @@ module.exports = function() {
     //实名认证第4步
     this.realNameStepFour_url = go_url.no_url + '/user/views/realName/realNameStepFour.html';
 
-     //协议模板
-     this.agreementModel_url = go_url.no_url + '/include/views/agreementModel.html';
+    //协议模板
+    this.agreementModel_url = go_url.no_url + '/include/views/agreementModel.html';
 
-     //实名认证下的三个协议
-     this.tradeserviceAgreement_url = go_url.no_url + '/include/views/agreementModel.html?id=81';
-     this.investorinterests_url = go_url.no_url + '/include/views/agreementModel.html?id=82';
-     this.bankAuthorization_url = go_url.no_url + '/include/views/agreementModel.html?id=83';
+    //实名认证下的三个协议
+    this.tradeserviceAgreement_url = go_url.no_url + '/include/views/agreementModel.html?id=81';
+    this.investorinterests_url = go_url.no_url + '/include/views/agreementModel.html?id=82';
+    this.bankAuthorization_url = go_url.no_url + '/include/views/agreementModel.html?id=83';
 
-     //监管账户
+    //监管账户
     this.regulatoryAccounts_url = go_url.no_url + '/personal/views/regulatoryAccounts.html';
 
     //重新设置手机号码
@@ -347,7 +347,7 @@ module.exports = function() {
     this.rewards_url = go_url.no_url + '/mine/views/rewards.html';
     //交易明细总页面
     this.publicTransactionDetails_url = go_url.no_url + '/mine/views/publicTransactionDetails.html'
-    //单个产品交易记录页面
+        //单个产品交易记录页面
     this.transactionDetailPublic_url = go_url.no_url + '/account/views/public/transactionDetail.html'
         /*-------------------------------活动列表 end -----------------------*/
 
@@ -478,33 +478,37 @@ module.exports = function() {
     //其他资产页面
     this.otherAssets_url = go_url.no_url + '/wealthResources/otherAssets/views/otherAssets.html';
     //定投排行榜  原生
-    this.investmentPlanRanking_url = go_url.no_url +  '/financial/views/publicPlacement/investmentPlanRanking.html'
+    this.investmentPlanRanking_url = go_url.no_url + '/financial/views/publicPlacement/investmentPlanRanking.html'
 
     // 公募监管账户
-    this.mineRegulatoryAccounts_url = go_url.no_url +  '/mine/views/mineRegulatoryAccounts.html'
-    //已报名活动
-    this.activityEnrolment_url = go_url.no_url +  '/mine/views/activityEnrolment/activityEnrolment.html'
-    //会员权益详情
-    this.membershipDetails_url = go_url.no_url +  '/mine/views/membershipInterests/membershipDetails.html'
-    //会员权益成长值记录
-    this.membershipInterestsRecord_url = go_url.no_url +  '/mine/views/membershipInterests/membershipInterestsRecord.html'
-    //我的定投计划
-    this.myInvestmentPlan_url = go_url.no_url +  '/financial/views/publicPlacement/myInvestmentPlan.html'
-    //我的定投计划----已终止的定投计划
-    this.myInvestmentPlanH_url = go_url.no_url +  '/financial/views/publicPlacement/myInvestmentPlanH.html'
-    //我的 历史明细
-    this.mineHistoryDetail_url = go_url.no_url +  '	/account/views/public/mineHistoryDetail.html'
-    //非货币基金历史明细
-    this.otherFundHistoryDetail_url = go_url.no_url +  '	/account/views/public/otherFundHistoryDetail.html'
-    //联系我们 意见反馈
-    this.concatUsAdvise_url = go_url.no_url +  '/mine/views/concatUs/concatUsAdvise.html'
-    /*------------------- 财富学院 start ------------------------------*/
-    //财富学院首页
-    this.fortuneCollegeList_url = go_url.no_url +  '/homePage/views/fortuneCollege/fortuneCollegeList.html'
-    /*------------------- 财富学院 end ------------------------------*/
+    this.mineRegulatoryAccounts_url = go_url.no_url + '/mine/views/mineRegulatoryAccounts.html'
+        //已报名活动
+    this.activityEnrolment_url = go_url.no_url + '/mine/views/activityEnrolment/activityEnrolment.html'
+        //会员权益详情
+    this.membershipDetails_url = go_url.no_url + '/mine/views/membershipInterests/membershipDetails.html'
+        //会员权益成长值记录
+    this.membershipInterestsRecord_url = go_url.no_url + '/mine/views/membershipInterests/membershipInterestsRecord.html'
+        //我的定投计划
+    this.myInvestmentPlan_url = go_url.no_url + '/financial/views/publicPlacement/myInvestmentPlan.html'
+        //我的定投计划----已终止的定投计划
+    this.myInvestmentPlanH_url = go_url.no_url + '/financial/views/publicPlacement/myInvestmentPlanH.html'
+        //我的 历史明细
+    this.mineHistoryDetail_url = go_url.no_url + '	/account/views/public/mineHistoryDetail.html'
+        //非货币基金历史明细
+    this.otherFundHistoryDetail_url = go_url.no_url + '	/account/views/public/otherFundHistoryDetail.html'
+        //联系我们 意见反馈
+    this.concatUsAdvise_url = go_url.no_url + '/mine/views/concatUs/concatUsAdvise.html'
+        /*------------------- 财富学院 start ------------------------------*/
+        //财富学院首页
+    this.fortuneCollegeList_url = go_url.no_url + '/homePage/views/fortuneCollege/fortuneCollegeList.html'
+        /*------------------- 财富学院 end ------------------------------*/
 
     //电子合同预约
     this.orderLimit_url = go_url.no_url + '/financial/views/privatePlacement/electronicContract/orderLimit.html';
+    //电子合同第三步 去签署合同
+    this.elecThirdStep_url = go_url.no_url + '/financial/views/publicPlacement/electronicContract/thirdStep.html';
+    //电子合同第四步 上传汇款凭证
+    this.elecFourthStep_url = go_url.no_url + '/financial/views/publicPlacement/electronicContract/fourthStep.html';
     //普通预约
     this.registration_url = go_url.no_url + '/financial/views/privatePlacement/ordinaryProducts/registration.html';
     this.pofDemandFinancing_url = go_url.no_url + '/mine/views/bankCard/demandFinancing.html';
@@ -517,9 +521,9 @@ module.exports = function() {
     this.tradeDetailOne_url = go_url.no_url + '/personal/views/tradeDetail.html';
     //赎回明细
     this.detailLists_url = go_url.no_url + '/personal/views/detailLists.html';
-    
+
     //我的积分规则
-    this.imgModel_url =  go_url.no_url + '/include/views/imgModel.html';
-    
-   
+    this.imgModel_url = go_url.no_url + '/include/views/imgModel.html';
+
+
 };
