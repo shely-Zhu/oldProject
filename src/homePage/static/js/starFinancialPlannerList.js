@@ -61,7 +61,10 @@ $(function(){
                         contentrefresh: '拼命加载中',
                         contentnomore: '暂无更多内容', //可选，请求完毕若没有更多数据时显示的提醒内容；
                         callback: function() {
-                            that.getData(this);
+                            var _this=this
+                            setTimeout(function() {
+                                that.getData(_this);
+                            },100)
                         }
                     }
                 }
@@ -86,7 +89,7 @@ $(function(){
                 url: site_url.queryFinancialer_api,
                 // url:'http://172.16.187.164:8081/web/marketing/activity/getActivitiesList',
                 data: {
-                    code:$('.mui-input-clear').val(),   
+                    code:$.trim($('.mui-input-clear').val().replace(/'/g,'')),   
                     cityName:$('#locationCity').html(),
                     "pageNum": that.gV.startPage, //非必须，默认为1
                     "pageSize":that.gV.pageSize//非必须，默认为10
@@ -380,7 +383,9 @@ $(function(){
                 // $('#loading').show();
                 that.gV.startPage=1;
                 console.log($('.mui-input-clear').val())
-                that.initMui();
+                setTimeout(function() {
+                    that.initMui();
+                },400)
                 mui('.contentWrapper').pullRefresh().scrollTo(0, 0, 100); 
             });
 
