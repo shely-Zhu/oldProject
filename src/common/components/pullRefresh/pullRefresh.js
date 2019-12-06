@@ -127,7 +127,33 @@ require('@pathCommonJsCom/goTopMui.js');
                     $(".lazyload").lazyload()
                     
                     //无限滚动
-                    alwaysAjax( that.options.wrapper.find('.mui-table-view-cell') )
+                    that.alwaysAjax( that.options.wrapper.find('.mui-table-view-cell') )
+                 },
+
+                 alwaysAjax: function( $el ){
+                    var that = this;
+
+                    var tops = parseInt(-100);
+
+                    //点击下按钮，显示弹框
+                    // var classNames = className ? className : ".contentWrap"
+                    // var pullupLoadingNames = pullupLoadingName ? pullupLoadingName : ".contentWrapper"
+                    // var tops = parseInt(cutNumber?cutNumber:-100); 
+                    // if ( $el.length > 0) {
+                        
+                        $(document).scroll(function() {
+                            // 滚动距离 Math.abs($(classNames).offset().top - 64)
+                            // 容器高度 $(classNames).parent().parent().height()
+                            if ( $el.offset().top < tops) {
+
+                                if( !that.options.wrapper.find('.mui-pull-caption-nomore').length ){
+                                    tops -= 800;
+                                    mui(pullupLoadingNames).pullRefresh().pullupLoading();
+                                }
+                                
+                            } 
+                        });
+                    // }
                  },
 
                  //初始化mui
