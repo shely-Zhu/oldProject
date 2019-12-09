@@ -21,9 +21,9 @@ var data = Mock.mock({
     "code": "CS0000", 
     "msg": "处理成功！", 
     "data": {
-    	"pageList|5":[{
+    	"pageList|50":[{
 	        "fundType":"10014", //基金类型代码
-			"trdDt":"2019-5-21", //交易日期
+			"trdDt":"2019-05-21", //交易日期
 			"unitNav":"100",//份额净值
 			"accuUnitNav":"102.51",//份额累计净值
 			"dayChgRat":"1101",//日涨跌幅（%）
@@ -32,7 +32,7 @@ var data = Mock.mock({
     		
     	},{
 	        "fundType":"10014", //基金类型代码
-			"trdDt":"2019-5-22", //交易日期
+			"trdDt":"2019-12-22", //交易日期
 			"unitNav":"100",//份额净值
 			"accuUnitNav":"102.51",//份额累计净值
 			"dayChgRat":"1101",//日涨跌幅（%）
@@ -41,7 +41,7 @@ var data = Mock.mock({
     		
     	},{
 	        "fundType":"10014", //基金类型代码
-			"trdDt":"2019-5-23", //交易日期
+			"trdDt":"2019-11-23", //交易日期
 			"unitNav":"100",//份额净值
 			"accuUnitNav":"102.51",//份额累计净值
 			"dayChgRat":"1101",//日涨跌幅（%）
