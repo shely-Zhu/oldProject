@@ -354,7 +354,7 @@ $(function() {
 		event: function(){
 			
 			//按钮点击展开收起
-			mui("body").on('tap', '.openButton', function(e) {
+			mui("body").on('mdClick', '.openButton', function(e) {
 
 				if( $('.topContent.open').length ){
 					//收起
@@ -368,18 +368,24 @@ $(function() {
 
 					$('.typeWrap openWrap').show();
 				}
+            },{
+                'htmdEvt': 'cashTreasure_0'
             })
 
             //折线图点击月份请求数据
-			mui("body").on('tap', '.lineDraw .time', function(e) {
+			mui("body").on('mdClick', '.lineDraw .time', function(e) {
 
 				that.getTypeOneData( $(this).attr('num') );
+            },{
+                'htmdEvt': 'cashTreasure_1'
             })
 
             //折线图点击七日年化/万份收益切换区域
-			mui("body").on('tap', '.lineDraw .time', function(e) {
+			mui("body").on('mdClick', '.lineDraw .time', function(e) {
 
 				
+            },{
+                'htmdEvt': 'cashTreasure_2'
             })
 		}
 

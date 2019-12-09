@@ -386,12 +386,14 @@ $(function() {
         events: function() { //绑定事件
             var that = this;
 
-            mui("body").on('tap', '.hopper', function(e) {
+            mui("body").on('mdClick', '.hopper', function(e) {
                     $('.mask').show();
                     $('.hopperCon').show();
+                },{
+                    'htmdEvt': 'privateDetailList_0'
                 })
                 //点击筛选数据
-            mui("body").on('tap', '.hopperCon li', function(e) {
+            mui("body").on('mdClick', '.hopperCon li', function(e) {
                     $(this).addClass('active').siblings('li').removeClass('active');
                     $('.mask').hide();
                     $('.hopperCon').hide();
@@ -403,14 +405,18 @@ $(function() {
                     //重新初始化
                     that.initMui($('#scroll2'));
                     mui('#scroll2 .contentWrapper').pullRefresh().scrollTo(0, 0, 0);
+                },{
+                    'htmdEvt': 'privateDetailList_1'
                 })
                 // 点击遮罩隐藏
-            mui("body").on('tap', '.mask', function(e) {
+            mui("body").on('mdClick', '.mask', function(e) {
                     $('.mask').hide();
                     $('.hopperCon').hide();
+                },{
+                    'htmdEvt': 'privateDetailList_2'
                 })
                 //取消受让、取消预约、取消转让
-            mui("body").on('tap', '.cancelBtn', function(e) {
+            mui("body").on('mdClick', '.cancelBtn', function(e) {
                     var type = $(this).attr('data-type');
                     var id = $(this).attr('data-id');
                     if (type == 'assign') { //转让
@@ -441,17 +447,21 @@ $(function() {
                         };
                     $.elasticLayer(obj)
 
+                },{
+                    'htmdEvt': 'privateDetailList_3'
                 })
                 // 点击我明白了
-            mui("body").on('tap', '.tipContainer .buttonOne', function(e) {
+            mui("body").on('mdClick', '.tipContainer .buttonOne', function(e) {
                     $('.mask').hide();
                     $('#tipConOne').hide();
                     var conText = $(this).siblings('tipContent').html;
                     that.openTipConOne(conText);
 
+                },{
+                    'htmdEvt': 'privateDetailList_4'
                 })
                 //点击状态文字出现弹框
-            mui("body").on('tap', '.openTip', function(e) {
+            mui("body").on('mdClick', '.openTip', function(e) {
                     $('.mask').show();
                     $('#tipConOne').show();
                     var conText = $(this).siblings('tipContent').html;
@@ -466,9 +476,12 @@ $(function() {
                     };
                     $.elasticLayer(obj);
 
+                },{
+                    'htmdEvt': 'privateDetailList_5'
                 })
                 //功能按钮
-            mui("body").on('tap', '.toDetail', function(e) {
+            var clickEvent = '';
+            mui("body").on('mdClick', '.toDetail', function(e) {
                 var type = $(this).attr('type');
                 var id = $(this).attr('reserveId');
                 if (type == 'toCertif') { //去合格投资者认证
@@ -480,7 +493,8 @@ $(function() {
                 } else if (type == 'toUploadM') { //去上传汇款凭证
 
                 }
-
+            },{
+                'htmdEvt': 'privateDetailList_6'
             })
         }
     };

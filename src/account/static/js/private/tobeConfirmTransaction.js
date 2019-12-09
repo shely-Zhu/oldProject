@@ -166,13 +166,15 @@ $(function() {
         events: function() { //绑定事件
             var that = this;
             alwaysAjax($('.mui-table-view-cell'));
-            mui("body").on('tap', '.hopper', function(e) {
+            mui("body").on('mdClick', '.hopper', function(e) {
                     $('.mask').show();
                     $('.hopperCon').show();
 
+                },{
+                    'htmdEvt': 'tobeConfirmTransaction_0'
                 })
                 //点击筛选数据
-            mui("body").on('tap', '.hopperCon li', function(e) {
+            mui("body").on('mdClick', '.hopperCon li', function(e) {
                     $('.list').show();
                     that.getElements.noData.hide();
                     $(this).addClass('active').siblings('li').removeClass('active');
@@ -187,14 +189,18 @@ $(function() {
                     that.getElements.listLoading.show();
                     that.getData(that.gV.aThis);
                     mui('.contentWrapper').pullRefresh().scrollTo(0, 0, 0);
+                },{
+                    'htmdEvt': 'tobeConfirmTransaction_1'
                 })
                 // 点击遮罩隐藏
-            mui("body").on('tap', '.mask', function(e) {
+            mui("body").on('mdClick', '.mask', function(e) {
                     $('.mask').hide();
                     $('.hopperCon').hide();
+                },{
+                    'htmdEvt': 'tobeConfirmTransaction_2'
                 })
                 //取消受让、取消预约、取消转让
-            mui("body").on('tap', '.cancelBtn', function(e) {
+            mui("body").on('mdClick', '.cancelBtn', function(e) {
                     var type = $(this).attr('data-type');
                     var id = $(this).attr('data-id');
                     if (type == 'assign') { //转让
@@ -238,9 +244,11 @@ $(function() {
                     }
 
 
+                },{
+                    'htmdEvt': 'tobeConfirmTransaction_3'
                 })
                 //点击状态文字出现弹框
-            mui("body").on('tap', '.openTip', function(e) {
+            mui("body").on('mdClick', '.openTip', function(e) {
                     $('.mask').show();
                     var conText = $(this).siblings('.tipContent').html();
                     var obj = {
@@ -254,9 +262,12 @@ $(function() {
                     };
                     $.elasticLayer(obj);
 
+                },{
+                    'htmdEvt': 'tobeConfirmTransaction_4'
                 })
                 //功能按钮
-            mui("body").on('tap', '.toDetail', function(e) {
+            var clickEvent = '';
+            mui("body").on('mdClick', '.toDetail', function(e) {
                 var type = $(this).attr('type');
                 var reserveId = $(this).attr('reserveId');
                 var proId = $(this).attr('projectId');
@@ -271,8 +282,11 @@ $(function() {
                 } else if (type == 'toView') { //详情
 
                 } else if (type == 'toVideo') { //视频双录
+
                 }
 
+            },{
+                'htmdEvt': 'tobeConfirmTransaction_5'
             })
         }
     };

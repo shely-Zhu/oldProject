@@ -16,7 +16,7 @@
 		@@include('@pathCommonViews/headBarConfig.html',{"bgColors":"#595E6F,#1C2135","showType":"1","pathName":"产品详情"})
 		<div class="privateDetailTitle">
 			<!-- 产品基金名称 -->
-			<div class="productName ellipsis_two"></div>
+			<div class="productName ellipsis_two"><span class="productNameTip"></span><span class="iconfont nameTip">&#xe636;</span></div>
 			<p class="introduction"></p>
 			<!-- 单位净值、起投金额、产品期限 -->
 			<!-- 类固收产品展示 -->
@@ -110,11 +110,11 @@
 							<div class="clearfix titleWrap typeNo5Wrap">
 								<span class="title qrnh activeLine">七日年化</span>
 								<span class="title wfsy hide">历史业绩走势</span>
-								<div class="priceLimit">涨跌幅：<span></span></div>
-								<div class="arrow">
+								<div class="priceLimit">涨跌幅：<span></span>%</div>
+								<!-- <div class="arrow">
 									<span class="img"></span>
-								</div>
-								<span class="rightTitle hide" id="historyDetailBtn">历史明细</span>
+								</div> -->
+								<span class="rightTitle hide" id="historyDetailBtn">历史明细<span class="iconfont">&#xe636;</span></span>
 							</div>
 							<div class="lineDraw">
 								<!-- 七日年化 折线图 -->
@@ -184,7 +184,7 @@
 										<li class="changgeRight"></li>
 									</ul>
 								</div>
-								<div class="textContent">
+								<div class="textContent lightPointCon">
 									<div class="textTitle">产品亮点</div>
 									<div class="detailText lightPoint">
 										<img src="">
@@ -235,11 +235,11 @@
 									</ul>
 									<ul class="contentUl clientLevel">
 										<li>允许购买客户等级</li>
-										<li class="changgeRight"></li>
+										<li class="changgeRight"><span></span></li>
 									</ul>
-									<ul class="contentUl remittance">
+									<ul class="contentUl">
 										<li>汇款备注</li>
-										<li class="changgeRight"></li>
+										<li class="changgeRight remittance"></li>
 									</ul>
 									
 								</div>
@@ -312,7 +312,7 @@
 
 			<div class="rightBtn mui-row">
 				<div class="already mui-col-sm-6 mui-col-xs-6">已预约</div>
-				<div class="detail goldBgButton mui-col-sm-6 mui-col-xs-6">查看明细</div>
+				<div class="detail goldBgButton mui-col-sm-6 mui-col-xs-6 lookDetailed">查看明细</div>
 			</div>
 		</div>
 

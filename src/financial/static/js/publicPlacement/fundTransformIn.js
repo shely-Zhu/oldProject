@@ -26,6 +26,7 @@ $(function () {
 			popupUl: $('.popup-ul'), // 银行卡模板容器
 			popupUl2: $('.popup-ul2'), // 基金模板容器
 			bankListTemplate: $('#bankList-template'), //银行卡模板
+			bankListTemplate2: $('#bankList-template2'), //银行卡模板
 			onlinepay: $('.onlinepay .onright-left'), // 在线支付银行卡模板容器
 			remittance: $('.remittance .onright-left'), // 汇款支付银行卡模板容器
 			bankListCheckTemplate: $('#bankListCheck-template'), //选中银行卡模板
@@ -56,6 +57,8 @@ $(function () {
 			password: "",
 			tradeAcco: ''  ,//交易账号
 			singleNum:0,   //单日限额
+			fundOrBank:'',  // 在线支付中  银行卡支付 1   基金支付  2   
+			enableAmount:0,  //选择基金支付 可用余额 
 		},
 		webinit: function () {
 			var that = this;
@@ -163,7 +166,7 @@ $(function () {
 		getTransferFunds: function() {
 			var that = this;
 			var obj = [{ 
-				url: site_url.queryTransferFunds_api,
+				url: site_url.queryFundTransferAssetsDetail_api,
 				data: {
 					type:2
 				},
@@ -173,7 +176,12 @@ $(function () {
 					if(json.status == '0000'){
 						// 将列表插入到页面上
 						var data = [] ;
-						data = json.data;
+						data = json.data.pageList;
+						console.log('data',data)
+						data.forEach(function(element){
+							element.after4Num = element.bankAccoutEncrypt.substr(element.bankAccoutEncrypt.length -4)
+						});
+						generateTemplate(data, that.$el.popupUl2, that.$el.bankListTemplate2,true);
 						
 					}
 				}
@@ -409,27 +417,47 @@ $(function () {
 			mui("body").on('mdClick','.bank-li',function(){
 				$(".bank-li .true").hide();
 				$(this).find(".true").show()
+				that.gV.fundOrBank = $(this).attr('fundOrBank');
 				that.gV.bankName = $(this).attr('bankName');
 				that.gV.bankNo = $(this).attr('bankNo');
 				that.gV.tradeAcco = $(this).attr('tradeAcco');
-				that.gV.bankAccountSecret = $(this).attr('bankAccountSecret');
 				that.gV.capitalMode = $(this).attr('capitalMode')
-				that.gV.singleNum = $(this).attr('singleNum')
 				var after4Num =  $(this).attr('after4Num')
 				var data = []
-				data.push({
-					bankThumbnailUrl:$(this).attr('bankThumbnailUrl'),
-					bankName:$(this).attr('bankName'),
-					bankNo:$(this).attr('bankNo'),
-					singleNum:$(this).attr('singleNum'),
-					oneDayNum:$(this).attr('oneDayNum'),
-					after4Num:after4Num,
-					singleNum_w:Number($(this).attr('singleNum'))/10000 + '万',
-					oneDayNum_w:Number($(this).attr('oneDayNum'))/10000 + '万',
-				})
+				if(that.gV.fundOrBank == '1'){
+					that.gV.bankAccountSecret = $(this).attr('bankAccountSecret');
+					that.gV.singleNum = $(this).attr('singleNum')
+					data.push({
+						bankThumbnailUrl:$(this).attr('bankThumbnailUrl'),
+						bankName:$(this).attr('bankName'),
+						bankNo:$(this).attr('bankNo'),
+						singleNum:$(this).attr('singleNum'),
+						oneDayNum:$(this).attr('oneDayNum'),
+						after4Num:after4Num,
+						singleNum_w:Number($(this).attr('singleNum'))/10000 + '万',
+						oneDayNum_w:Number($(this).attr('oneDayNum'))/10000 + '万',
+					})
+				}else{
+					that.gV.bankAccountSecret = $(this).attr('bankAccoutEncrypt');
+					that.gV.enableAmount = $(this).attr('enableAmount')
+					data.push({
+						// bankThumbnailUrl:$(this).attr('bankThumbnailUrl'),
+						fundName:$(this).attr('fundName'),
+						bankName:$(this).attr('bankName'),
+						bankNo:$(this).attr('bankNo'),
+						enableAmount:$(this).attr('enableAmount'),
+						after4Num:after4Num
+					})
+				}
+				
 
 				if(that.gV.payType == '0'){
-					generateTemplate(data, that.$el.onlinepay, that.$el.bankListCheckTemplate,true);
+					if(that.gV.fundOrBank == '1'){
+						generateTemplate(data, that.$el.onlinepay, that.$el.bankListCheckTemplate,true);
+					}else{
+						// ......未完待续
+					}
+					
 					that.$el.onlinepay.parent().find(".imgc").show();
 					that.$el.onlinepay.parent().find(".iimg").hide();
 					that.$el.remittance.html('')

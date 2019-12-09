@@ -50,7 +50,7 @@ var prvMar = {
             needLogin: true, //需要判断是否登陆
             async: false,
             needDataEmpty: true, //需要判断data是否为空
-            contentTypeSearch: true,
+            contentTypeSearch: false,
             callbackDone: function(json) {
                 var labelArr = json.data;
                 for (var i =0; i < labelArr.length ; i++) {
@@ -168,7 +168,7 @@ var prvMar = {
             needLogin: true,
             needDataEmpty: true,
             async: false,
-            contentTypeSearch: true,
+            contentTypeSearch: false,
             callbackDone: function(json) {
                 var json = json.data;
                 $.each(json, function(i, el) {
