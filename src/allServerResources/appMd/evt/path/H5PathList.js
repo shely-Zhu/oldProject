@@ -229,10 +229,15 @@ var pathList = {
 	"/account/views/productFiles.html": { evtid: 'productFiles', topic: '产品档案', info: ''} ,
 	"/account/views/publicAssets.html": { evtid: 'publicAssets', topic: '公募资产', info: ''} ,
 	
-	// "/account/views/priNetWorthDetails.html": { evtid: 'priNetWorthDetails', topic: '净值明细', info: ''} ,
-	// "/account/views/priNetWorthDetails.html": { evtid: 'priNetWorthDetails', topic: '净值明细', info: ''} ,
-
 	/*********************************account end ***************************************/
+
+	/********************************* life start***************************************/
+	"/life/views/memberClub/activityNoList.html": { evtid: 'activityNoList', topic: '会员俱乐部-活动列表-搜索无结果', info: ''} ,
+	"/life/views/memberClub/activityList.html": { evtid: 'activityList', topic: '会员俱乐部-活动列表', info: ''} ,
+	"/life/views/memberClub/activityDetails.html": { evtid: 'activityDetails', topic: '会员俱乐部-活动列表', info: ''} ,
+
+	/********************************* life end ***************************************/
+
 }
 
 
