@@ -136,7 +136,7 @@ $(function() {
 
                     }, 200)
 
-                },
+                }
 
             }];
             console.log(obj)

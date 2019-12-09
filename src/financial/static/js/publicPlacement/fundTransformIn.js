@@ -176,7 +176,7 @@ $(function () {
 						data = json.data;
 						
 					}
-				},
+				}
 			}];
 			$.ajaxLoading(obj);
 		},
@@ -552,7 +552,7 @@ $(function () {
 				htmdEvt: 'fundTransformIn_16'
 			}) ;
 
-		},
+		}
 
 
 

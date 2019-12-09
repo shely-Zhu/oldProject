@@ -324,7 +324,7 @@ $(function() {
                             $(".over").hide();
                             break;
                     }
-                },
+                }
             }, {
                 url: site_url.queryUserAuthInfo_api,
                 data: {
@@ -435,7 +435,7 @@ $(function() {
                             break;
                     }
                     that.drawLine(type, newData);
-                },
+                }
             }];
             $.ajaxLoading(obj);
         },
@@ -710,7 +710,7 @@ $(function() {
                                         yesTxt: '确认',
                                         celTxt: "取消",
                                         zIndex: 100,
-                                        callback: function(t) {},
+                                        callback: function(t) {}
                                     };
                                     $.elasticLayer(obj)
                                 } else {
@@ -728,7 +728,7 @@ $(function() {
                                     yesTxt: '确认',
                                     celTxt: "取消",
                                     zIndex: 100,
-                                    callback: function(t) {},
+                                    callback: function(t) {}
                                 };
                                 $.elasticLayer(obj)
                             } else {
@@ -1004,7 +1004,7 @@ $(function() {
             }, {
                 htmdEvt: 'privatePlacementDetail_04'
             });
-        },
+        }
     };
     privatePlacementDetail.init();
 });

@@ -27,7 +27,6 @@ $(function() {
         },
         events:function(){
             alwaysAjax($('.contentWrap'),'.contentWrapper',100,100)
-           
         },
         //初始化mui的上拉加载
         initMui: function() {

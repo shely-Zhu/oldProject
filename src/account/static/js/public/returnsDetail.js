@@ -140,7 +140,7 @@ $(function() {
 
             }];
             $.ajaxLoading(obj);
-        },
+        }
     };
     somePage.init();
 });

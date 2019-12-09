@@ -218,7 +218,7 @@ $(function () {
 				htmdEvt: 'myInvestmentPlan_01'
 			});
 
-        },
+        }
     };
     somePage.init();
 

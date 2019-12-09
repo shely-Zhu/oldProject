@@ -121,7 +121,7 @@ $(function() {
 			    		}
 			    	});
 		       	
-			    },
+			    }
 			}]
 			$.ajaxLoading(obj);
 			
@@ -211,7 +211,7 @@ $(function() {
 			       		case 4: that.data['qrnhWfsy'].sinceNow = newData;break;
 			       	}
 			       	that.drawLine( type, newData);			       	
-			    },
+			    }
 			}];
 			$.ajaxLoading(obj);
 		},
@@ -498,7 +498,7 @@ $(function() {
 				window.location.href = site_url.ordinarySetThrow_url;			
 			})
 			
-		},
+		}
 
 
 	}

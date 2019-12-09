@@ -190,7 +190,7 @@ $(function() {
 //              $.ajaxLoading(obj);
 //          }
             
-        },
+        }
     };
 
     //调用数据

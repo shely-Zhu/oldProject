@@ -158,7 +158,7 @@ $(function() {
                        setTimeout(function() {
                         that.$e.listLoading.hide();
                     }, 100);
-                },
+                }
             }];
             $.ajaxLoading(obj);
         },
