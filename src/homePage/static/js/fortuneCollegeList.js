@@ -114,6 +114,9 @@ $(function() {
                 },
                 needDataEmpty: true,
                 callbackDone: function(json){
+                    if(json.data==''||json.data=='undefined'||json.data==null){
+                        $('.translate').hide()
+                    }
                     modelData=json.data.modelVO
                     articleData=json.data.list
                     console.log('我是什么',articleData)
@@ -137,6 +140,9 @@ $(function() {
                 },
                 needDataEmpty: true,
                 callbackDone: function(json){
+                    if(json.data==''||json.data=='undefined'||json.data==null){
+                        $('.fortuneVideo').hide()
+                    }
                     modelData=json.data.modelVO
                     articleData=json.data.list
                     
@@ -161,6 +167,9 @@ $(function() {
             },
             needDataEmpty: true,
             callbackDone: function(json){
+                if(json.data==''||json.data=='undefined'||json.data==null){
+                    $('.forum').hide()
+                }
                listData=json.data.list
                console.log(listData)
                modelData=json.data.modelVO
@@ -381,6 +390,9 @@ $(function() {
                 needDataEmpty: true,
                 callbackDone: function(json) {
                     console.log('我是json',json)
+                    if(json.data==''||json.data=='undefined'||json.data==null){
+                        $('.tabContent').hide()
+                    }
                     that.gV.navList = [];
                     listData=json.data.list
                     console.log('我是财富研究',listData)
