@@ -12,7 +12,7 @@ var data = Mock.mock({
 	"message": "处理成功！", 
 	"data":{  
 		"projectId": "4234",//产品代码
-		"productName": "稳金1号",//产品名称
+		"productName": "稳金1号稳金1号稳金1号稳金1号稳金1号稳金1号稳金1号稳金1号稳金1号稳金1号稳金1号稳金1号",//产品名称
 		"projectName": "稳金1号",//项目名称
 		"issuanceSize": "1000",//产品发行规模（单位：万）
 		"formatIssuanceSize": "1000",  //产品发行规模（千分位）（单位：万）
@@ -64,7 +64,7 @@ var data = Mock.mock({
         "trusteeFee": "",  //托管费
         "isVideo": "",  //是否需要面签 0否 1是
         "customerRiskLevel": "",   // 客户风险等级 (支持多个 ‘,’隔开 1:保守型;2:稳健型;3:平衡型;4:成长型;5:进取型)
-        "customerRiskLevelDesc": "" ,  //客户风险等级描述 (支持多个 ‘,’隔开 1:保守型;2:稳健型;3:平衡型;4:成长型;5:进取型)
+        "customerRiskLevelDesc": "保守型,稳健型,平衡型平衡型,成长型,进取型" ,  //客户风险等级描述 (支持多个 ‘,’隔开 1:保守型;2:稳健型;3:平衡型;4:成长型;5:进取型)
         "redemptionOpenFrequency": "",  // 赎回开放频率
         "surplusLevel": "",  //剩余额度
         "customerType":"1",   // 客户类型（允许购买客户类型 1.个人 0.机构 ）

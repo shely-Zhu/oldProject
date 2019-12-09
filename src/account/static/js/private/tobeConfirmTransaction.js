@@ -272,27 +272,21 @@ $(function() {
                 var reserveId = $(this).attr('reserveId');
                 var proId = $(this).attr('projectId');
                 if (type == 'toCertif') { //去合格投资者认证
-                    clickEvent = 'tobeConfirmTransaction_5'
 
                 } else if (type == 'toSign') { //去签合同
-                    clickEvent = 'tobeConfirmTransaction_6'
                     window.location.href = site_url.elecFourthStep_url + '?reserveId=' + reserveId + '&projectId' + proId;
                 } else if (type == 'toSee') { //查看合同
-                    clickEvent = 'tobeConfirmTransaction_7'
                     window.location.href = site_url.seeSign_url + '?reserveId=' + reserveId;
                 } else if (type == 'toUploadM') { //去上传汇款凭证
-                    clickEvent = 'tobeConfirmTransaction_8'
                     window.location.href = site_url.elecFourthStep_url + '?reserveId=' + reserveId;
                 } else if (type == 'toView') { //详情
-                    clickEvent = 'tobeConfirmTransaction_9'
 
                 } else if (type == 'toVideo') { //视频双录
-                    clickEvent = 'tobeConfirmTransaction_10'
 
                 }
 
             },{
-                'htmdEvt': clickEvent
+                'htmdEvt': 'tobeConfirmTransaction_5'
             })
         }
     };
