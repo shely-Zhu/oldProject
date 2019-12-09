@@ -130,8 +130,6 @@ $(function() {
                     $('.productName').html(jsonData.productName);
                     // 一句话产品详情
                     $('.introduction').html(jsonData.productLightspot);
-                    // 单位净值
-                    // $('.netValue').html(jsonData.unitNetValue);
                     // 净值日期
                     $('.netValueDate').html(jsonData.netValueDate)
                         // 起投金额
@@ -155,60 +153,133 @@ $(function() {
 
                     // 基本信息
                     // 剩余额度
-                    $('.remaining').html();
+                    if(jsonData.surplusLevel){
+                        $('.remaining').html(jsonData.surplusLevel);
+                    }else{
+                        $('.remain').hide();
+                    }
                     // 募集起截止日
-                    $('.deadline').html(jsonData.projectUpTime + '~' + jsonData.projectDownTime)
-                        // 管理人
-                    $('.custodian').html(jsonData.projectIssuer);
+                    if(jsonData.projectUpTime && jsonData.projectDownTime){
+                        $('.deadline').html(jsonData.projectUpTime + '~' + jsonData.projectDownTime)
+                    }else{
+                        $('.deadlineMj').hide();
+                    }
+                    // 管理人
+                    if(jsonData.projectIssuer){
+                        $('.custodian .changgeRight').html(jsonData.projectIssuer);
+                    }
+                    else{
+                        $('.custodian').hide();
+                    }
                     // 风险等级
-                    $('.riskGrade').html(jsonData.productRiskLevelDesc);
+                    if(jsonData.productRiskLevelDesc){
+                        $('.riskGrade .changgeRight').html(jsonData.productRiskLevelDesc);
+                    }else{
+                        $('.riskGrade').hide();
+                    }
                     // 发行规模
-                    $('.issuingScale').html(jsonData.formatIssuanceSize);
+                    if(jsonData.formatIssuanceSize){
+                        $('.issuingScale .changgeRight').html(jsonData.formatIssuanceSize);
+                    }else{
+                        $('.issuingScale').hide();
+                    }
                     // 投资方向
                     if (jsonData.investDirect == '0') {
-                        $('.direction').html('债权投资');
+                        $('.direction .changgeRight').html('债权投资');
                     } else if (jsonData.investDirect == '1') {
-                        $('.direction').html('证券投资(二级市场)');
+                        $('.direction .changgeRight').html('证券投资(二级市场)');
                     } else if (jsonData.investDirect == '2') {
-                        $('.direction').html('股权投资');
+                        $('.direction .changgeRight').html('股权投资');
                     } else if (jsonData.investDirect == '3') {
-                        $('.direction').html('海外投资');
+                        $('.direction .changgeRight').html('海外投资');
                     } else if (jsonData.investDirect == '4') {
-                        $('.direction').html('其他');
+                        $('.direction .changgeRight').html('其他');
+                    }else{
+                        $('.direction').hide();
                     }
                     // 投资领域
-                    $('.investmentArea').html(jsonData.investArea);
+                    if(jsonData.investArea){
+                        $('.investmentArea .changgeRight').html(jsonData.investArea);
+                    }else{
+                        $('.investmentArea').hide();
+                    }
                     // 投资方式
-                    $('.investmentWay').html(jsonData.investWay);
+                    if(jsonData.investWay){
+                        $('.investmentWay .changgeRight').html(jsonData.investWay);
+                    }else{
+                        $('.investmentWay').hide();
+                    }
                     // 收益分配方式
-                    $('.incomeType').html(jsonData.incomeModeDesc);
+                    if(jsonData.incomeModeDesc){
+                        $('.incomeType .changgeRight').html(jsonData.incomeModeDesc);
+                    }else{
+                        $('.incomeType').hide();
+                    }
 
 
                     // 交易须知  
                     // 认购费率
-                    $('.productRateBuy span').html(jsonData.buyRate);
+                    if(jsonData.buyRate){
+                        $('.productRateBuy span').html(jsonData.buyRate);
+                    }else{
+                        $('.productRateBuy').hide();
+                    }
                     // 管理费率
-                    $('.productRateManage span').html(jsonData.managementFee);
+                    if(jsonData.managementFee){
+                        $('.productRateManage span').html(jsonData.managementFee);
+                    }else{
+                        $('.productRateManage').hide();
+                    }
                     // 托管费率
-                    $('.productRateTrust span').html(jsonData.trusteeFee);
+                    if(jsonData.trusteeFee){
+                        $('.productRateTrust span').html(jsonData.trusteeFee);
+                    }else{
+                        $('.productRateTrust').hide();
+                    }
                     // 预约递增金额
-                    $('.advanceAmount').html(jsonData.minBase);
+                    if(jsonData.minBase){
+                        $('.advanceAmount .changgeRight').html(jsonData.minBase);
+                    }else{
+                        $('.advanceAmount').hide();
+                    }
                     // 预约有效天数
-                    $('.reservationDay').html(jsonData.reserveTime);
+                    if(jsonData.reserveTime){
+                        $('.reservationDay .changgeRight').html(jsonData.reserveTime);
+                    }else{
+                        $('.reservationDay').hide();
+                    }
                     // 打款截止日期
-                    $('.paymentDeadline').html(jsonData.projectDownTime);
+                    if(jsonData.projectDownTime){
+                        $('.paymentDeadline .changgeRight').html(jsonData.projectDownTime);
+                    }else{
+                        $('.paymentDeadline').hide();
+                    }
                     // 预计成立日期
-                    $('.establishment').html(jsonData.setupDate);
+                    if(jsonData.setupDate){
+                        $('.establishment .changgeRight').html(jsonData.setupDate);
+                    }else{
+                        $('.establishment').hide();
+                    }
                     // 是否需要面签
                     if (jsonData.isVideo == 0) {
-                        $('.isVideo').html('否');
-                    } else {
-                        $('.isVideo').html('是');
+                        $('.isVideo .changgeRight').html('否');
+                    }else if(jsonData.isVideo == 1){
+                        $('.isVideo .changgeRight').html('是');
+                    }else{
+                        $('.isVideo').hide();
                     }
                     // 允许购买客户类型
-                    $('.clientType').html(jsonData.customerType);
+                    if(jsonData.customerType){
+                        $('.clientType .changgeRight').html(jsonData.customerType);
+                    }else{
+                        $('.clientType').hide();
+                    }
                     // 允许购买客户等级
-                    $('.clientLevel').html(jsonData.customerRiskLevelDesc);
+                    if(jsonData.customerRiskLevelDesc){
+                        $('.clientLevel .changgeRight').html(jsonData.customerRiskLevelDesc);
+                    }else{
+                        $('.clientLevel').hide();
+                    }
                     // 汇款备注
                     $('.remittance').html('【xxx（姓名）认购（产品）】');
                     // 赎回开放频率
