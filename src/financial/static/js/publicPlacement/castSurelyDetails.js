@@ -100,7 +100,7 @@ $(function () {
           var template = Handlebars.compile(tplm);
           var tradeRecord = json.tradeRecord
           json.tradeRecordStutas = tradeRecord.length > 0 ? 1 : 0
-          tradeRecord.forEach(n => {
+          tradeRecord.forEach(function(n){
             n.tradeTime = n.tradeTime.split(" ")[0]
             n.status = n.status === "1" ? 1 : 0
           });
