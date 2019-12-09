@@ -8,7 +8,7 @@
 //引入mui
 @import url("@pathCommonLess/mui/resetMUI.less");
 @import url("@pathCommonCom/button/button.less");
-
+@import url("@pathCommonCom/elasticLayer/elasticLayer/elasticLayer.less");
 @import url("@pathCommonLessCom/headBarConfig.less");
 
 
@@ -38,10 +38,9 @@ header{
     img{
         width: 100%;
         border-radius: 0.1rem;
-        margin: 1.38rem 0 0.5rem ;
+        margin: .1rem 0 0.5rem ;
     }
     .activityDetailsBox{
-        background: #ccc;
         border-radius: .62rem .62rem 0px 0px;
         padding-bottom: 1rem;
         .activityDetailsTopBox{
@@ -309,7 +308,7 @@ header{
         margin: 1.5rem auto 0.78rem;
         background-color: #79462F;
         background-image: linear-gradient(to right,#79462F ,#9F794E , #C48C59);
-        
+        -webkit-background-clip: text;
         -webkit-text-fill-color: transparent;
     }
     //奖品名称

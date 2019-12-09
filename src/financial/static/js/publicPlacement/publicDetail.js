@@ -38,12 +38,15 @@ $(function () {
             isPerfectArr: ['未完善', '已完善'],//是否完善个人信息 0-否 1-是 
             accreditedInvestorArr: ['未通过', '已通过', '已过期', '未做'],//是否合格投资者 空-未做； 0-未通过；1-已通过； 2-已过期 
             tipStatus: false,
+            invTypCom:'' ,  // 基金类型
+            secuSht:''   // 基金名简写
         },
         fundType: splitUrl['fundType'] == '10300' ? 1 : 0, //10300 货币基金类型，其余为普通基金类型
         init: function () {
             var that = this;
             //页面初始化
             that.getData();
+            that.getFundCollectionInit()
             $('.tips').hide()
 
         },
@@ -84,6 +87,8 @@ $(function () {
                     that.changeVal('chgRatBgn', 2)
                     that.gV.json.trDate = that.gV.json.trDate.slice(5)
                     that.gV.json.fundType = that.fundType
+                    that.gV.invTypCom = json.data.invTypCom
+                    that.gV.secuSht = json.data.secuSht
                     var html = template(that.gV.json); (html, "00");
                     
                     $(".tplBox").html(html);
@@ -281,7 +286,66 @@ $(function () {
                 //要携带参数后期补上
                 window.location.href = site_url.pofShare_url
             });
+            //加自选  
+            mui("body").on('mdClick', ".selected_area", function (e) {
+                var prams ={
+                    fundCode:fundCode,
+                    collected:'',
+                    fundNameShort:that.gV.secuSht,
+                    invTypCom:that.gV.invTypCom,
+                }
+                if($(this).hasClass('active')){
+                    $(this).removeClass('active') 
+                    prams.collected = '0'
+                }else{
+                    $(this).addClass('active')
+                    prams.collected = '1'
+                }
+                that.getFundCollection(prams)
+            });
 
+        },
+        //收藏管理--判断是否被收藏
+        getFundCollectionInit: function () {
+            var that = this;
+            // 请求页面数据
+            var obj = [{
+                url: site_url.prfFundCollectionQueryCode_api,
+                data: {
+                    
+                },
+                callbackDone: function (json) {
+                   var fundCode = splitUrl['fundCode'];
+                   if(json.data.includes(fundCode)){
+                    $(".selected_area").addClass('active')
+                   }
+                },
+                callbackFail: function (json) {
+                    tipAction(json.message);
+                }
+            }]
+            $.ajaxLoading(obj);
+        },
+        //收藏管理
+        getFundCollection: function (prams) {
+            var that = this;
+            var manageList = [];
+            manageList.push(prams)
+            // 请求页面数据
+            var obj = [{
+                url: site_url.prfFundCollectionMG_api,
+                data: {
+                    feedback:'',
+                    manageList:manageList 
+                },
+                callbackDone: function (json) {
+                    tipAction(json.message);
+                },
+                callbackFail: function (json) {
+                    tipAction(json.message);
+                }
+            }]
+            $.ajaxLoading(obj);
         },
         getData1: function () {
             var that = this;
