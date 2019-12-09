@@ -8,6 +8,7 @@
 
 require('@pathCommonBase/base.js');
 require('@pathCommonJs/ajaxLoading.js');
+require('@pathCommonCom/elasticLayer/elasticLayer/elasticLayer.js');
 var splitUrl = require('@pathCommonJs/components/splitUrl.js')();
 var generateTemplate = require('@pathCommonJsComBus/generateTemplate.js');
 $(function() {
@@ -174,19 +175,81 @@ $(function() {
                         $('.activityBottomBtnBox').removeClass('disabled');
                         if (data.status == "20003") {
                             //需要风测
-                            that.tipConOpen('温馨提示', data.message, '风险测评', site_url.riskAppraisal_url);
+                            var obj = {
+                                title: '温馨提示', //如果不传，默认不显示标题
+                                p: '<p>' + data.message + '</p>',
+                                yesTxt: '风险测评',
+                                celTxt: '取消',
+                                hideCelButton: false,
+                                zIndex: 100,
+                                needYesHref: true, //是否需要把确定按钮改成a标签，默认false
+                                yesHref: site_url.riskAppraisal_url, //确定按钮a链接的默认href
+                                callback: function(t) {
+
+                                },
+                            };
+                            $.elasticLayer(obj)
                         } else if (data.status == "20010") {
                             //需要进行合格投资者信息认证
-                            that.tipConOpen('温馨提示', data.message, '合格投资者认证', site_url.qualifiedInvestor_url);
+                            var obj = {
+                                title: '温馨提示', //如果不传，默认不显示标题
+                                p: '<p>' + data.message + '</p>',
+                                yesTxt: '合格投资者认证',
+                                celTxt: '取消',
+                                hideCelButton: false,
+                                zIndex: 100,
+                                needYesHref: true, //是否需要把确定按钮改成a标签，默认false
+                                yesHref: site_url.qualifiedInvestor_url, //确定按钮a链接的默认href
+                                callback: function(t) {
+
+                                },
+                            };
+                            $.elasticLayer(obj)
                         } else if (data.status == "22011") {
                             //客户未成交
-                            that.tipConOpen('温馨提示', data.message, '查看产品', site_url.wealthIndex_url);
+                            var obj = {
+                                title: '温馨提示', //如果不传，默认不显示标题
+                                p: '<p>' + data.message + '</p>',
+                                yesTxt: '查看产品',
+                                celTxt: '取消',
+                                hideCelButton: false,
+                                zIndex: 100,
+                                needYesHref: true, //是否需要把确定按钮改成a标签，默认false
+                                yesHref: site_url.wealthIndex_url, //确定按钮a链接的默认href
+                                callback: function(t) {
+
+                                },
+                            };
+                            $.elasticLayer(obj)
                         } else if (data.status == "20007") {
                             //去实名
-                            that.tipConOpen('温馨提示', data.message, '实名认证', site_url.rewards_url);
+                            var obj = {
+                                title: '温馨提示', //如果不传，默认不显示标题
+                                p: '<p>' + data.message + '</p>',
+                                yesTxt: '实名认证',
+                                celTxt: '取消',
+                                hideCelButton: false,
+                                zIndex: 100,
+                                needYesHref: true, //是否需要把确定按钮改成a标签，默认false
+                                yesHref: site_url.rewards_url, //确定按钮a链接的默认href
+                                callback: function(t) {
+
+                                },
+                            };
+                            $.elasticLayer(obj)
                         } else if (data.status == "10003") {
                             //重复报名--已报名
-                            that.tipConOpenOne('不可重复报名', data.message);
+                            var obj = {
+                                title: '不可重复报名', //如果不传，默认不显示标题
+                                p: '<p>' + data.message + '</p>',
+                                yesTxt: '我明白了',
+                                hideCelButton: true,
+                                zIndex: 100,
+                                callback: function(t) {
+
+                                },
+                            };
+                            $.elasticLayer(obj)
                         } else if (data.status == "20013") {
                             //老客户
                             that.oldToNewTip('您已经是恒天财富的老会员啦！');
@@ -195,9 +258,29 @@ $(function() {
                             that.oldToNewTip('恭喜您注册成为恒天财富会员！');
                         } else if (data.status == "4009") {
                             //重复报名--已报名
-                            that.tipConOpenOne('抱歉，服务器异常', '请您稍后再试');
+                            var obj = {
+                                title: '抱歉，服务器异常', //如果不传，默认不显示标题
+                                p: '<p>请您稍后再试</p>',
+                                yesTxt: '我明白了',
+                                hideCelButton: true,
+                                zIndex: 100,
+                                callback: function(t) {
+
+                                },
+                            };
+                            $.elasticLayer(obj)
                         } else {
-                            that.tipConOpenOne('温馨提示', data.message);
+                            var obj = {
+                                title: '温馨提示', //如果不传，默认不显示标题
+                                p: '<p>' + data.message + '</p>',
+                                yesTxt: '我明白了',
+                                hideCelButton: true,
+                                zIndex: 100,
+                                callback: function(t) {
+
+                                },
+                            };
+                            $.elasticLayer(obj)
                         }
                     }
                 }];
@@ -226,25 +309,6 @@ $(function() {
                     }
                 }];
                 $.ajaxLoading(obj);
-            },
-            //淡黄色背景弹框打开方法
-            // title-弹框的标题,tipcontent-弹框内容,btnText-按钮的文案,btnUrl-按钮链接
-            tipConOpen: function(title, tipcontent, btnText, btnUrl) {
-                $('#tipCon').find('.titleText').text(title);
-                $('#tipCon').find('.tipCon').text(tipcontent);
-                $('#tipCon').find('.todo').text(btnText);
-                // $('#tipCon').find('.todo').attr('src', btnUrl);
-                window.location.href = btnUrl;
-                $('#tipCon').show();
-                $('.mask').show();
-            },
-            // title-弹框的标题,tipcontent-弹框内容
-            tipConOpenOne: function(title, tipcontent) {
-                $('#tipConOne').find('.titleText').text(title);
-                $('#tipConOne').find('.tipCon').text(tipcontent);
-                $('#tipConOne').find('.todo').text('明白了');
-                $('#tipConOne').show();
-                $('.mask').show();
             },
             //老带新实物奖品弹框--prizeName奖品名称successTit成功提示
             successSwConNewOpen: function(successTit, prizeName) {
