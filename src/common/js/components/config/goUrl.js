@@ -417,6 +417,8 @@ module.exports = function() {
     this.transactionDetail_url = go_url.no_url + '/account/views/transactionDetail.html';
     // 私募产品详情
     this.privateDetail_url = go_url.no_url + '/account/views/private/privateDetail.html';
+    // 私募赎回页面
+    this.privateRedeem_url = go_url.no_url + '/account/views/private/redeem.html';
     // 私募交易明细
     this.privateDetailList_url = go_url.no_url + '/account/views/private/privateDetailList.html';
     //待确认已确认交易页面
