@@ -485,21 +485,16 @@ $(function() {
                 var type = $(this).attr('type');
                 var id = $(this).attr('reserveId');
                 if (type == 'toCertif') { //去合格投资者认证
-                    clickEvent = 'privateDetailList_6';
 
                 } else if (type == 'toSign') { //去签合同
 
-                    clickEvent = 'privateDetailList_7';
                 } else if (type == 'toSee') { //查看合同
                     window.location.href = site_url.seeSign_url + '?reserveId=' + id;
-                    clickEvent = 'privateDetailList_8';
                 } else if (type == 'toUploadM') { //去上传汇款凭证
 
-                    clickEvent = 'privateDetailList_9';
                 }
-
             },{
-                'htmdEvt': clickEvent
+                'htmdEvt': 'privateDetailList_6'
             })
         }
     };

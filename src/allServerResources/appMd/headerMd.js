@@ -57,7 +57,7 @@
         	   		// otherParams: pcParam
 		   		}
 		
-				// window._htmd(mdObj);
+				window._htmd(mdObj);
 
 
 

@@ -127,6 +127,7 @@ $(function() {
         },
         // 初始页面请求
         initialPage: function() {
+
             var that = this;
             // 理财师接口传参
             var custBroData = {
@@ -198,6 +199,7 @@ $(function() {
 
             that.getData();
             $('.tipMask').hide();
+            $('.choose').hide();
         },
         // 有数据返回的   根据理财师处理页面逻辑
         dealManagerLogic: function(data) {
@@ -215,6 +217,7 @@ $(function() {
                 // debugger
                 generateTemplate(advisor,that.getElements.popupUl, that.getElements.bankListTemplate,true);
                 $('.recommendLcs').css('pointer-events','')
+                $('.choose').show()
                 // $(".popup").show();
             }else if( advisor.length < 0){
                 $('.recommendLcs').html('')
@@ -222,7 +225,7 @@ $(function() {
                 // 有专属理财师或者只有一位普通理财师
                 $('.recommendLcsText').html("您的理财师：")
                 $('.manager_show').html(advisor[0].codeName + advisor[0].empNo)
-                $('.choose').hide()
+                
                 that.generateShareLink(advisor[0].empNo);
                 $('.recommendLcs').css('pointer-events','none')
             }
@@ -479,13 +482,20 @@ $(function() {
             // })
             // 点击--分享给好友
             mui("body").on('tap', '.recommendShareFriend', function() {
+                if(that.list.length < 0){
+                    // 当没有理财师的时候提示？
+                    // tipAction('完成实名认证后才可以推荐好友哦')
+                }
                 that.generateShareLink(that.list[index].empNo,"friends");
-                console.log(index,"阿萨德萨达撒")
+                tipAction('分享成功')
             })
             // 点击--分享到朋友圈
             mui("body").on('tap', '.recommendShareWechart', function() {
-                console.log(index,"阿萨德萨达撒")
+                if(that.list.length < 0){
+                    // tipAction('完成实名认证后才可以推荐好友哦')
+                }
                 that.generateShareLink(that.list[index].empNo,"wechatMoments");
+                tipAction('分享成功')
             })
         },
         /*-----------------------------------公共方法------------------------------*/
