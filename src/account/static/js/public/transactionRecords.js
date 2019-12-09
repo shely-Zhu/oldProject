@@ -275,7 +275,7 @@ $(function () {
         events() {
             var that = this;
             // 筛选分类的点击事件
-            mui("body").on('tap', '.searchItem', function () {
+            mui("body").on('mdClick', '.searchItem', function () {
                 if ($(this).is('.searchItemActive')) {
                     $(this).removeClass("searchItemActive").siblings('.searchItem').removeClass('searchItemActive');
                     that.$e.recordSearchDetailBoxId.css("display", "none")
@@ -294,9 +294,11 @@ $(function () {
                     }
                     that.gV.mask.show()
                 }
+            },{
+                'htmdEvt': 'transactionRecords_0'
             })
             // 筛选列表内容的点击事件
-            mui("body").on('tap', '.detailItem', function () {
+            mui("body").on('mdClick', '.detailItem', function () {
 
                 var detailId = $(this).attr("detailId")
                 var searchType = $(this).attr("searchType")
@@ -337,11 +339,13 @@ $(function () {
                 //重新初始化
                 that.initMui(that.gV.ajaxdata);
                 mui('.contentWrapper').pullRefresh().scrollTo(0, 0, 0)
+            },{
+                'htmdEvt': 'transactionRecords_1'
             })
 
 
             //点击列表跳转
-            mui('body').on('tap', '.recordItem', function () {
+            mui('body').on('mdClick', '.recordItem', function () {
                 var applyId = $(this).attr('data-applyId');
                 var fundCombination = $(this).attr('data-fundCombination');
                 var fundCode = $(this).attr('data-fundCode');
@@ -384,6 +388,8 @@ $(function () {
                         ',' + $('#recordSearchWrapper .searchItem').eq(3).children('span').text());
                 }
 
+            },{
+                'htmdEvt': 'transactionRecords_2'
             });
         }
     };
