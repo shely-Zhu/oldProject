@@ -11,9 +11,6 @@
     </head>
     
     <body>
-
-        <!--没有数据显示图标-->
-        @@include('@pathCommonCom/noData/noData.html', {"tipText": "暂无数据"})
         <!--列表加载显示图标-->
         @@include('@pathCommonCom/loading/listLoading.html')
         <!--公共页面头部-->
@@ -26,17 +23,12 @@
                 <li class="growthRate">单位净值增长率</li>
             </ul>
         </div>
-        <div class="list">
-            <div class="contentWrapper">
-                <div class="contentWrap">
-                    <!-- 放置列表 -->
-                </div>
-                @@include('@pathCommonViews/goTop.html')
-            </div>
-        </div>
+        <!--没有数据显示图标-->
+        @@include('@pathCommonCom/noData/noData.html', {"tipText": "暂无数据"})
+        <div class="list"></div>
         <script id="adjustment-template" type="text/x-handlebars-template">
             {{#each this}}
-               <ul class="contentWrapUl">
+               <ul class="contentWrapUl listItem">
                     <li class="data">{{netValueDate}}</li>
                     <li class="unit">{{unitNetValue}}</li>
                     <li class="cumulative">{{accuNetValue}}</li>
