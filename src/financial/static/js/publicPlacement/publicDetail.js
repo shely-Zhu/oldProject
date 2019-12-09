@@ -316,7 +316,6 @@ $(function () {
                 needLogin: false,
                 callbackDone: function (json) {
                    var fundCode = splitUrl['fundCode'];
-                   debugger
                    if(json.data.includes(fundCode)){
                     $(".selected_area").addClass('active')
                    }
