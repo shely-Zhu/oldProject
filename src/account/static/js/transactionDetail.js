@@ -7,7 +7,7 @@ require('@pathCommonBase/base.js');
 require('@pathCommonJs/ajaxLoading.js');
 var splitUrl = require('@pathCommonJs/components/splitUrl.js')();
 var generateTemplate = require('@pathCommonJsComBus/generateTemplate.js');
-var alwaysAjax = require('@pathCommonJs/components/alwaysAjax.js'); 
+require('@pathCommonCom/pullRefresh/pullRefresh.js');
 
 $(function() {
 
@@ -38,8 +38,43 @@ $(function() {
             if (!$('.list').hasClass('setHeight')) {
                 $('.list').height(height).addClass('setHeight');
             }
+            $.pullRefresh({
+                wrapper: $('.list'),
+                class: 'listItem',
+                template: that.$e.adjustmentTemp, 
+                callback: function(def, t){
+                    var obj = [{
+                        url: site_url.dealDetailList_api,
+                        data: { 
+                            "pageNo": that.gV.pageCurrent, //非必须，默认为1
+                            "pageSize": "10",//非必须，默认为10
+                            "projectId": that.gV.projectId,//项目id
+                        },                        
+                        needDataEmpty: true,
+                        callbackDone: function(json) {     
+                            var data = json.data.pageList;
+                            if(that.gV.pageCurrent == 1 && data.length == 0) {
+                                $(".list").css("display", "none")
+                            } else {
+                                def && def.resolve( data, that.gV.pageCurrent);
+                                that.gV.pageCurrent++;
+                            }
+                        },
+                        callbackNoData: function( json ){  
+                            if(that.gV.pageCurrent == 1) {
+                                $(".list").css("display", "none")
+                            }
+                            def && def.reject( json, that.gV.pageCurrent );
+                        },
+                        callbackFail: function(json) {
+                            def && def.reject( json, that.gV.pageCurrent );
+                        },
+                    }];
+                    $.ajaxLoading(obj); 
+                }
+            })
 
-            mui.init({
+            /*mui.init({
                 pullRefresh: {
                     container: '.contentWrapper',
                     up: {
@@ -76,9 +111,9 @@ $(function() {
 
                 //为$id添加hasPullUp  class
                 $('.list').addClass('hasPullUp');
-            });
+            });*/
         },
-        getData: function(t) {
+        /*getData: function(t) {
             var that = this;
             var obj = [{ // 系统调仓记录列表
                 url: site_url.dealDetailList_api,
@@ -194,9 +229,9 @@ $(function() {
                      
             }];
             $.ajaxLoading(obj);
-        },
+        },*/
         events:function(){
-            alwaysAjax($('.contentWrap'))
+            //alwaysAjax($('.contentWrap'))
         }
     };
     somePage.init();

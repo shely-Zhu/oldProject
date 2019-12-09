@@ -753,7 +753,7 @@ $(function() {
                             projectId: that.$e.projectId,
                             fileType: isPopup
                         },
-                        contentTypeSearch: true,
+                        contentTypeSearch: false,
                         needLoading: true,
                         needLogin: true, //需要判断是否登陆
                         callbackDone: function(json) { //成功后执行的函数

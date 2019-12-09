@@ -216,7 +216,10 @@
                         options.url_rewriter_fn.call(element,$element,originalSrcInAttr),
                     originalSrcset = $element.attr('data-'+options.data_srcset_attribute),
                     isImg = $element.is('img')
-
+                if(originalSrcInAttr=='NaN'){
+                    $element.attr('data-'+options.data_attribute,placeholderSrc)
+                    return
+                }
                 if($element._lazyload_loadStarted == true || placeholderSrc == originalSrc){
                     $element._lazyload_loadStarted = true
                     $elements = getUnloadElements($elements)
