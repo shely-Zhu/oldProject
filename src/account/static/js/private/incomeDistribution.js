@@ -63,8 +63,8 @@ $(function() {
                 wrapper: $('.list'),
                 class: 'list-wrap',
                 template: that.getElements.transTemp, 
+                pageSize: that.gV.aP.pageSize,
                 callback: function(def, t){
-                    console.log(def)
                     var obj = [{
                         url: site_url.yieldAssignList_api,
                         data: {
@@ -74,14 +74,18 @@ $(function() {
                         },                        
                         needDataEmpty: true,
                         callbackDone: function(json) {     
-                            var data = json.data;
-                            if( data.pageList && data.pageList.length ){
-                                data = json.data.pageList
+                            var data = json.data.pageList;
+                            if(that.gV.aP.pageNo == 1 && data.length == 0) {
+                                $(".list").css("display", "none")
+                            } else {
+                                def && def.resolve( data, that.gV.aP.pageNo);
+                                that.gV.aP.pageNo++;
                             }
-                            that.gV.aP.pageNo++;
-                            def && def.resolve( data, that.gV.aP.pageNo);
                         },
                         callbackNoData: function( json ){  
+                            if(that.gV.aP.pageNo == 1) {
+                                $(".list").css("display", "none")
+                            }
                             def && def.reject( json, that.gV.aP.pageNo );
                         },
                         callbackFail: function(json) {
