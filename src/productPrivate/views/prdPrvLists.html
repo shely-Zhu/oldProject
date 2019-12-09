@@ -77,7 +77,7 @@
 		<script id="productList-template" type="text/x-handlebars-template">
 			{{#each this}}
 				{{#if solid}}
-					<a href="/productPrivate/views/prdPrvDetails.html?fundCode={{fundCode}}" class="mui-card" htmdEvt="privateList_detail">
+					<a href="javascript:void(0)" onclick="setGoUrl(site_url.productPrvDetail_url+'?fundCode={{fundCode}}', '')" class="mui-card" htmdEvt="privateList_detail">
 						<div class="card-head">
 							{{fundName}}
 						</div>
@@ -116,7 +116,7 @@
 						{{/if}}
 					</a>
 				{{else}}
-					<a href="/productPrivate/views/prdPrvDetails.html?fundCode={{fundCode}}" class="mui-card" htmdEvt="privateList_detail">
+					<a href="javascript:void(0)" onclick="setGoUrl(site_url.productPrvDetail_url+'?fundCode={{fundCode}}', '')" class="mui-card" htmdEvt="privateList_detail">
 						<div class="card-head">
 							{{fundName}}
 						</div>

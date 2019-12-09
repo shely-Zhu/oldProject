@@ -84,15 +84,15 @@
                 </p>
             </div>
         </div>
-        <p class="goback"><a href="javascript:;" class="knowBtn">确定</a></p>
-        <p class="gomine"><a href="javascript:;" class="knowBtn">我知道了</a><a href="javascript:;" id="linkBtn">查看详情</a></p>
+        <p class="goback"><a href="javascript:void(0)" class="knowBtn">确定</a></p>
+        <p class="gomine"><a href="javascript:void(0)" class="knowBtn">我知道了</a><a href="javascript:void(0)" id="linkBtn">查看详情</a></p>
     </section>
 </body>
 <script id="question-list-template" type="text/x-handlebars-template">
     {{! 题目列表 父模板 内容}} {{#each this}}
     <div class="choice" id={{questionNo}}>
         <a href="javascript:;" id=type{{number}} style="width: 0;height: 0;position: absolute;top:-10px;"></a>
-        <h3><a href="#" class="index sequence">{{number}}</a> .{{questionContent}}</h3> {{{content}}}
+        <h3><a href="javascript:;" class="index sequence">{{number}}</a> .{{questionContent}}</h3> {{{content}}}
     </div>
     {{/each}}
 </script>
