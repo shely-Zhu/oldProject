@@ -39,7 +39,7 @@ $(function () {
       var obj = [{
         url: site_url.pofFixedDetail_api,
         data: {
-          scheduledProtocolId: scheduledProtocolId
+          scheduledProtocolId:scheduledProtocolId
         },
         callbackDone: function (json) {
           json = json.data
@@ -55,7 +55,7 @@ $(function () {
           $('.bankName').html(json.bankName);
           $('.bankAccountMask').html(json.bankAccountMask);
           $('.signDate').html(json.signDateMask);
-          $('.bankNo').html(json.bankNo);
+          $('.bankNo').html(json.bankAccountMask.substr(json.bankAccountMask.length - 4));
           $('.bankThumbnailUrl').attr('src', json.bankThumbnailUrl);
           $('.totalCfmShareMask').html(json.totalCfmShareMask);
           $('.serviceCharge').html('含手续费' + json.serviceCharge + '元');
@@ -100,7 +100,7 @@ $(function () {
           var template = Handlebars.compile(tplm);
           var tradeRecord = json.tradeRecord
           json.tradeRecordStutas = tradeRecord.length > 0 ? 1 : 0
-          tradeRecord.forEach(n => {
+          tradeRecord.forEach(function(n){
             n.tradeTime = n.tradeTime.split(" ")[0]
             n.status = n.status === "1" ? 1 : 0
           });
@@ -167,7 +167,22 @@ $(function () {
         });
       }, {
 				htmdEvt: 'castSurelyDetails_03'
-			});
+      });
+      
+      //跳转到定投详情结果页 publicTradeDetail_url
+      mui("body").on("mdClick",".is_fail .state_fail",function(){
+        debugger
+        var obj = {
+          applyId: $(this).attr("allotNo"),
+          fundCombination: "",
+          fundCode: that.gV.copyJson.fundCode,
+          fundBusinCode: "039",
+          allotType: "",
+          Fixbusinflag: "",
+        };
+        window.location.href = site_url.publicTradeDetail_url + '?applyId='+obj.applyId +'&fundCombination=' + obj.fundCombination + '&fundCode=' + obj.fundCode + '&fundBusinCode=' + obj.fundBusinCode + '&allotType=' + obj.allotType + '&Fixbusinflag=' + obj.Fixbusinflag
+
+      })
 
     },
 

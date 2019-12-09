@@ -197,6 +197,7 @@ $(function() {
             }, function() {}, function() {}, true)
 
             that.getData();
+            $('.tipMask').hide();
         },
         // 有数据返回的   根据理财师处理页面逻辑
         dealManagerLogic: function(data) {
@@ -215,10 +216,13 @@ $(function() {
                 generateTemplate(advisor,that.getElements.popupUl, that.getElements.bankListTemplate,true);
                 $('.recommendLcs').css('pointer-events','')
                 // $(".popup").show();
-            } else {
+            }else if( advisor.length < 0){
+                $('.recommendLcs').html('')
+            }else{
                 // 有专属理财师或者只有一位普通理财师
                 $('.recommendLcsText').html("您的理财师：")
                 $('.manager_show').html(advisor[0].codeName + advisor[0].empNo)
+                $('.choose').hide()
                 that.generateShareLink(advisor[0].empNo);
                 $('.recommendLcs').css('pointer-events','none')
             }
@@ -228,7 +232,7 @@ $(function() {
          * [queryAesEncrypt  同步请求加密接口，拿到加密信息,通知app,生成二维码]
          * @author songxiaoyu 2018-07-18
          */
-        generateShareLink: function(num) {
+        generateShareLink: function(num,sharingType) {
             var that = this,
                 aesEncrypt = ''; // 加密信息
 
@@ -250,16 +254,16 @@ $(function() {
                     } else {
                         $(".recommendBoxUserName").html(json.data.oldName)
                         // 已实名认证
+                        
                         aesEncrypt = json.data.aesEncrypt;
                         //拼分享出去的链接
                         shareUrl = site_url.newRecommend_url + '?url=' + aesEncrypt;
-                        
                         // 生成二维码
                         that.generateQrcode(shareUrl)
 
                         //如果是app--设置ldxShare的值--- 需要拼凑对应的链接
                         if (window.currentIsApp) {
-                            $('#ldx_share').attr('src', 'ldxShare://' + shareUrl);
+                            $('#ldx_share').attr('src', 'ldxShare://' + shareUrl + '&sharingType=' + sharingType);
                         }
 
                         //如果是微信内打开--处理微信分享
@@ -411,6 +415,7 @@ $(function() {
         },
         events: function() {
             var that = this;
+            var index = 0;
             //点击取消选择
             mui("body").on('tap', '.recommendLcs', function() {
                 $(".popup").show()
@@ -420,7 +425,8 @@ $(function() {
                 // 拿到当前点击的理财师的名称和工号
                 $(".manager_show").html($(this).text())
                 $(".popup").hide()
-                that.generateShareLink(that.list[$(this).index()].empNo);
+                index = $(this).index()
+                that.generateShareLink(that.list[index].empNo);
             })
             mui("body").on('tap', '.cancel', function() {
                $(".popup").hide();
@@ -465,10 +471,21 @@ $(function() {
             })
 
             // 点击--邀请好友
-            mui("body").on('tap', '.inviting_friend_wrap', function() {
-                //显示分享提示弹层
-                $('.tipMask').show();
-                $('.closeElastic').show();
+            // mui("body").on('tap', '.recommendBoxText', function() {
+            //     //显示分享提示弹层
+            //     $('.tipMask').show();
+            //     $('.closeElastic').show();
+            //     that.asyncAll();
+            // })
+            // 点击--分享给好友
+            mui("body").on('tap', '.recommendShareFriend', function() {
+                that.generateShareLink(that.list[index].empNo,"friends");
+                console.log(index,"阿萨德萨达撒")
+            })
+            // 点击--分享到朋友圈
+            mui("body").on('tap', '.recommendShareWechart', function() {
+                console.log(index,"阿萨德萨达撒")
+                that.generateShareLink(that.list[index].empNo,"wechatMoments");
             })
         },
         /*-----------------------------------公共方法------------------------------*/

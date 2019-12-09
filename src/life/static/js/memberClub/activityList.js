@@ -7,6 +7,7 @@ require('@pathCommonBase/base.js');
 require('@pathCommonJs/ajaxLoading.js');
 var splitUrl = require('@pathCommonJs/components/splitUrl.js')();
 var generateTemplate = require('@pathCommonJsComBus/generateTemplate.js');
+var alwaysAjax = require('@pathCommonJs/components/alwaysAjax.js');
 
 $(function(){
     var activityList={
@@ -83,6 +84,7 @@ $(function(){
             
             var obj = [{ // 系统调仓记录列表
                 url: site_url.getActivitiesList_api,
+                needLogin: false,
                 // url:'http://172.16.187.164:8081/web/marketing/activity/getActivitiesList',
                 data: {
                         // "combCode": that.gV.groupCode, //组合代码 
@@ -346,6 +348,8 @@ $(function(){
                 console.log(1);
                 $('.activitySearchInput').children('input').focus();
             });
+            // recordList
+            alwaysAjax($(".recordList"));
         }
     }
     //调用初始化函数

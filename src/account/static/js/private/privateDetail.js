@@ -18,6 +18,8 @@ require('@pathCommonBase/base.js');
 require('@pathCommonJs/ajaxLoading.js');
 
 var splitUrl = require('@pathCommonJs/components/splitUrl.js')();
+var frozenAccount = require('@pathCommonJs/components/frozenAccount.js');
+require('@pathCommonCom/elasticLayer/elasticLayer/elasticLayer.js');
 
 $(function() {
 	var privateDetail = {
@@ -42,7 +44,9 @@ $(function() {
 				sinceNow: {}
 			},
 			redeemRule: [],	// 赎回规则  按照=====切割
-			echartsClickFlag: false // echarts图表查询单点标识		
+			echartsClickFlag: false, // echarts图表查询单点标识 false为可点击
+			redeemClickFlag: true, // true为可点击
+			redeemPartion: ''	
 		},
 		init: function(){
 			var that = this;
@@ -505,6 +509,7 @@ $(function() {
     		   	$('.type_0 .smallDate').html( jsonData.sevenYearYieldUpdateDate ?" (" + jsonData.sevenYearYieldUpdateDate + ")":"--");
     		   	//可赎回份额
     		   	$('.type_0 .kshfe').html( jsonData.allowRedemptionShare?jsonData.allowRedemptionShare:'--');
+    		   	that.data.redeemPartion = jsonData.allowRedemptionShare
     		   	//万份收益
     		   	$('.type_0 .wfsy').html( jsonData.incomeUnit?jsonData.incomeUnit:'--');
 	    	} else if( that.data.projectType == 1){ //稳裕类	   		
@@ -518,6 +523,7 @@ $(function() {
     		   	$('.type_1 .smallDate').html(jsonData.sevenYearYieldUpdateDate ?" (" + jsonData.sevenYearYieldUpdateDate + ")":"--");
 	    		//可赎回份额
     		   	$('.type_1 .kshfe').html( jsonData.allowRedemptionShare?jsonData.allowRedemptionShare:'--');
+    		   	that.data.redeemPartion = jsonData.allowRedemptionShare
     		   	//赎回开放日
     		   	jsonData.redemptionOpenDay ? $('.type_1 .shkfr').html( jsonData.redemptionOpenDay) : $(".type_1 .shkfr").parent().css("display", "none")
     		   	//可提交赎回申请时间
@@ -589,6 +595,7 @@ $(function() {
 	    		$('.type_4 .ljjz').html( jsonData.totalNetValue ? jsonData.totalNetValue : '--' );
 	    		// 可赎回份额
 	    		$('.type_4 .kshhf').html( jsonData.allowRedemptionShare ? jsonData.allowRedemptionShare : '--'  );
+	    		that.data.redeemPartion = jsonData.allowRedemptionShare
 	    		// 持有天数
 	    		$('.type_4 .cyts').html( jsonData.holdDays ? jsonData.holdDays : '--'  );
 	    		//赎回开放日
@@ -724,6 +731,16 @@ $(function() {
             mui("body").on('tap', '#redeemNav .navSpan', function() {
             	$(this).addClass("active").siblings().removeClass('active')
 				that.setRedeemRule($(this).attr("type"))
+            })
+            //进入赎回页面
+            mui("body").on('tap', '.redeemBtn', function() {
+            	// 先判断登录是否超时以及账户冻结状态    司法验证过期弹出提示框
+				if(that.data.redeemClickFlag) {
+					that.data.redeemClickFlag = frozenAccount("buyFreeze", window.location.href)
+					if(!that.data.redeemClickFlag) { // 验证通过则跳转赎回页面
+						window.location.href = site_url.privateRedeem_url + '?projectId=' + that.data.projectId + '&redeemPartion=' + that.data.redeemPartion;
+					}
+				}
             })
             //折线图点击七日年化/万份收益切换区域
             mui("body").on('tap', '.lineWrap .titleWrap .title', function() {

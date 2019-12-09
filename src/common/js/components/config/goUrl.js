@@ -323,9 +323,9 @@ module.exports = function() {
 
     /*-------------------------------活动列表 start -----------------------*/
     // 活动详情
-    this.activityDetails_url = go_url.no_url + '/mine/views/memberClub/activityDetails/activityDetails.html';
+    this.activityDetails_url = go_url.no_url + '/life/views/memberClub/activityDetails.html';
     // 活动列表
-    this.activityList_url = go_url.no_url + '/life/views/memberClub/activityList/activityList.html';
+    this.activityList_url = go_url.no_url + '/life/views/memberClub/activityList.html';
     //活动详情->实名
     this.realName_url = go_url.no_url + '/mine/views/realName/realName.html';
     //活动详情->风测
@@ -334,6 +334,8 @@ module.exports = function() {
     this.qualifiedInvestor_url = go_url.no_url + '/mine/views/qualifiedInvestor/qualifiedInvestor.html';
     //活动详情->合格投资者认证结果页
     this.qualifiedInvestorResult_url = go_url.no_url + '/mine/views/qualifiedInvestor/qualifiedInvestorResult.html';
+    //活动详情->合格投资者认证选择页面
+    this.chooseQualifiedInvestor_url = go_url.no_url + '/mine/views/qualifiedInvestor/chooseQualifiedInvestor.html';
     //活动详情->信息补全
     this.completeInformation_url = go_url.no_url + '/mine/views/information/completeInformation.html';
     //活动详情->投资者分类申请
@@ -405,6 +407,8 @@ module.exports = function() {
     this.pofRetrievePassword_url = go_url.no_url + '/minel/views/setting/retrievePassword.html';
     //添加银行卡
     this.pofAddBankCard_url = go_url.no_url + '/mine/views/bankCard/addBankCard.html'
+    //基金分享跳原生页面
+    this.pofShare_url = go_url.no_url + '/financial/views/publicPlacement/share.html'
 
     /*------------------- 私募理财fang——le end ------------------------------*/
     this.optionalPublicDetail_url = go_url.no_url + '/account/views/public/optionalPublicDetail.html';
@@ -415,6 +419,8 @@ module.exports = function() {
     this.transactionDetail_url = go_url.no_url + '/account/views/transactionDetail.html';
     // 私募产品详情
     this.privateDetail_url = go_url.no_url + '/account/views/private/privateDetail.html';
+    // 私募赎回页面
+    this.privateRedeem_url = go_url.no_url + '/account/views/private/redeem.html';
     // 私募交易明细
     this.privateDetailList_url = go_url.no_url + '/account/views/private/privateDetailList.html';
     //待确认已确认交易页面
