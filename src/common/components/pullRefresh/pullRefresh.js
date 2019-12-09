@@ -7,9 +7,11 @@
     外部调用方式：$.pullRefresh(obj);
  */
 
+require('@pathCommonJsCom/utils.js');
 var alwaysAjax = require('@pathCommonJs/components/alwaysAjax.js');
 var generateTemplate = require('@pathCommonJsComBus/generateTemplate.js');
 require('@pathCommonJsCom/goTopMui.js');
+
 
  ;
  (function($, window, document, undefined) {
@@ -97,38 +99,46 @@ require('@pathCommonJsCom/goTopMui.js');
 
                     var that = this;
 
-                    if (data.length < that.options.pageSize) {
-                        
-                        // that.gV.isBottomFlag = true
-                        
-                        if ( pageCurrent == 1) { //第一页时
+                    //data为空时，显示暂无数据
+                    if( $.util.objIsEmpty(data) ){
+                        // 暂无数据显示
+                        $('.without.noData').show();
+                    }
+                    else{
+
+                        if (data.length < that.options.pageSize) {
                             
-                            if (data.length == 0) {
+                            // that.gV.isBottomFlag = true
+                            
+                            if ( pageCurrent == 1) { //第一页时
                                 
-                                // 暂无数据显示
-                                $('.without.noData').show();
-                                return false;
-                            } else { 
-                                // 其他页，没有更多数据了
+                                if (data.length == 0) {
+                                    
+                                    // 暂无数据显示
+                                    $('.without.noData').show();
+                                    return false;
+                                } else { 
+                                    // 其他页，没有更多数据了
+                                    t.endPullupToRefresh(true);
+                                }
+                            } else {
+                                //其他页-没有更多数据
                                 t.endPullupToRefresh(true);
                             }
-                        } else {
-                            //其他页-没有更多数据
-                            t.endPullupToRefresh(true);
+                        } else { // 还有更多数据
+                            t.endPullupToRefresh(false);
                         }
-                    } else { // 还有更多数据
-                        t.endPullupToRefresh(false);
+
+                        that.options.wrapper.find('.mui-pull-bottom-pocket').removeClass('mui-hidden');
+                        
+                        that.options.showTemplate && generateTemplate(data, that.options.wrapper.find('.mui-table-view-cell'), that.options.template)
+
+                        //懒加载
+                        $(".lazyload").lazyload()
+                        
+                        //无限滚动
+                        that.alwaysAjax( that.options.wrapper.find('.mui-table-view-cell') )
                     }
-
-                    that.options.wrapper.find('.mui-pull-bottom-pocket').removeClass('mui-hidden');
-                    
-                    that.options.showTemplate && generateTemplate(data, that.options.wrapper.find('.mui-table-view-cell'), that.options.template)
-
-                    //懒加载
-                    $(".lazyload").lazyload()
-                    
-                    //无限滚动
-                    that.alwaysAjax( that.options.wrapper.find('.mui-table-view-cell') )
                  },
 
                  alwaysAjax: function( $el ){
