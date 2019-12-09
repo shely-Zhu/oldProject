@@ -749,7 +749,7 @@ $(function() {
                         needLogin: true, //需要判断是否登陆
                         callbackDone: function(json) { //成功后执行的函数
                             that.data.canClick = true; //变为可点击
-                            var data = json.data,
+                            var data = json.data[0],
                                 noticeObj = data;
                             if (!singleaAuthen) { //如果v.show都是0，则不展示预约框,跳转到相应链接
                                 $("#tips-wrap").hide();
@@ -943,6 +943,10 @@ $(function() {
             //点击一键预约逻辑
             mui("body").on('tap', '.tips-btn', function() {
 
+            });
+            //点击查看明细跳转
+            mui("body").on('tap', '.lookDetailed', function() {
+				window.location.href = site_url.tobeConfirmTransaction_url
             });
             //折线图点击月份请求数据
             mui("body").on('mdClick', '.lineWrap .time', function() {
