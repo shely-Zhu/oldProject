@@ -363,7 +363,7 @@ $(function () {
 						// 将列表插入到页面上
 						var data = [] ;
 						data = json.data;
-						data.forEach(element => {
+						data.forEach(function(element){
 							if(element.materialType == '1'){
 								that.$el.contract.attr('href',element.linkAddress)
 							}

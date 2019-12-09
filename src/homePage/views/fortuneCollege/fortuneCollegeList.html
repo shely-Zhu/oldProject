@@ -111,9 +111,9 @@
      </script>
      
      @@include('@pathCommonViews/goTop.html')
-     @@include('@pathInclude/views/footer.html')
-     <!-- 添加埋点 -->
-     @@include('@pathInclude/views/header.html')
+
+     
+
      <!-- 翻译官 -->
      <script id="fortune-template" type="text/x-handlebars-template">
                <h2>{{modelName}}</h2>
@@ -199,9 +199,9 @@
           <!-- <i><a htmdEvt = "fortune_studies" href="{{modelUrl}}" >查看全部研究</a><i class="iconfont">&#xe636;</i></p> -->
           <p><a href="javascript:void(0);" onclick="setGoUrl('{{modelUrl}}', 'fortune_06')" >查看全部研究</a><i class="iconfont">&#xe636;</i></p>
      </script>
-     <script src="/include/js/iscroll.js"></script>
-	<script src="@pathIncludJs/vendor/root.js"></script>
-     <script src="@pathIncludJs/vendor/mui/mui.min.js"></script>
+
+     @@include('@pathInclude/views/footer.html')
+     
      <script src="/homePage/static/js/fortuneCollegeList.js"></script>
  
  </body>
