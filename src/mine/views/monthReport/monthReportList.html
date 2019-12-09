@@ -44,13 +44,13 @@
 			{{#each this}}
 			<ul class="mui-card mui-table-view marginTop">
 				<li class="mui-table-view-cell mui-collapse">
-					<a class="monthYear mui-navigate-right" href="#">{{years}}</a>
+					<a href="javascript:void(0);" class="monthYear mui-navigate-right" >{{years}}</a>
 
 					<div class="mui-card marginTop latestAdjustment mui-collapse-content">
 						<div class='circle_left'></div>
 						<div class='circle_right'></div>
 						{{#each monthReportsList}}
-						<a href="javascript:;" reportId={{reportId}} class='monthlyReport'>
+						<a href="javascript:void(0);" reportId={{reportId}} class='monthlyReport'>
 							<span class='reportName'>{{reportName}}</span>
 							<span class='reportTime'>{{reportTime}}</span>
 							<span class='iconfont detailLink'>&#xe600;</span>
@@ -60,7 +60,7 @@
 
 				</li>
 				{{!--
-				<a class="mui-navigate-right" href="#"></a> --}}
+				<a href="javascript:void(0);" class="mui-navigate-right" href="#"></a> --}}
 			</ul>
 			{{/each}}
 		</script>

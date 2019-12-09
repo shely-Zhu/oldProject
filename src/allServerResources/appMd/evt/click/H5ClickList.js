@@ -437,9 +437,28 @@ var clickList = {
 	"transactionRecords_1":{ type:'click', evtid: 'transactionRecords_1', topic: '自选公募-交易记录_筛选列表内容的点击事件', info: ''},
 	"transactionRecords_2":{ type:'click', evtid: 'transactionRecords_2', topic: '自选公募-交易记录_点击列表跳转', info: ''},
 	
-
-
 	/************************************** account end *************************************************/
+
+	/************************************** life start *************************************************/
+	// activityList.html
+	"activityList_0":{ type:'click', evtid: 'activityList_0', topic: '定位选择', info: ''},
+	"activityList_1":{ type:'click', evtid: 'activityList_1', topic: '热门城市', info: ''},
+	"activityList_2":{ type:'click', evtid: 'activityList_2', topic: '头部返回效果', info: ''},
+	"activityList_3":{ type:'click', evtid: 'activityList_3', topic: '定位右侧索引效果', info: ''},
+	"activityList_4":{ type:'click', evtid: 'activityList_4', topic: '活动列表跳转', info: ''},
+	"activityList_5":{ type:'click', evtid: 'activityList_5', topic: '搜索框输入触发查询数据', info: ''},
+	"activityList_6":{ type:'click', evtid: 'activityList_6', topic: '清除搜索框触发查询数据', info: ''},
+	"activityList_7":{ type:'click', evtid: 'activityList_7', topic: '点击搜索框触发选中', info: ''},
+	// activityDetails.html
+	"activityDetails_0":{ type:'click', evtid: 'activityDetails_0', topic: '返回按钮事件', info: ''},
+	"activityDetails_1":{ type:'click', evtid: 'activityDetails_1', topic: '立即报名方法', info: ''},
+	"activityDetails_2":{ type:'click', evtid: 'activityDetails_2', topic: '弹框取消', info: ''},
+	"activityDetails_3":{ type:'click', evtid: 'activityDetails_3', topic: '弹框取消方法', info: ''},
+	"activityDetails_4":{ type:'click', evtid: 'activityDetails_4', topic: '关闭大弹框', info: ''},
+	"activityDetails_5":{ type:'click', evtid: 'activityDetails_5', topic: '分享好友', info: ''},
+	"activityDetails_6":{ type:'click', evtid: 'activityDetails_6', topic: '我知道了按钮', info: ''},
+
+	/************************************** life end *************************************************/
 }
 
 module.exports = clickList;

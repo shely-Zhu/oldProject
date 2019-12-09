@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2019-11-26 14:42:56
- * @LastEditTime: 2019-12-06 19:15:36
+ * @LastEditTime: 2019-12-09 14:46:11
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \htjf-app\src\financial\static\js\publicPlacement\cashTransformOut.js
@@ -55,7 +55,7 @@ $(function () {
 					"title":"<<中融货币E规则>>"
 				},
 				{
-					"id":20,
+					"id":21,
 					"title":"<<中融货币E规则>>"
 				},
 				{
@@ -291,7 +291,6 @@ $(function () {
            
 		   //银行卡单选
 		   mui("body").off("mdClick",".cashCheckItem").on('mdClick','.cashCheckItem',function(){
-			   debugger
 			   $(this).find(".imgLogo").attr("src",that.gv.checkImgUrl);
 			   $(this).siblings().find(".imgLogo").attr("src","");
 			   that.gv.defaultBankNo = $(this).attr("bankNo"); //默认银行代码
@@ -338,7 +337,8 @@ $(function () {
 			mui('body').on('tap','.explain .transformRule',function(){
 				that.gv.ruleId = $(this).attr("ruleId");
 				var id = $(this).attr("ruleId");
-				that.findProtocolContentRule(id);
+				//that.findProtocolContentRule(id);
+				window.location.href = site_url.agreementModel_url + '?id='+id+ '&financial=true'
 			}) 
 
 			//点击同意协议
@@ -355,11 +355,12 @@ $(function () {
 				
                 if ($(this).hasClass("check")) {
 					$(this).removeClass("check").html('&#xe668;');
-					if(that.gv.transformMoney!=""){
-						that.$e.confirmBtn.removeAttr("disabled");
-					}else{
-						that.$e.confirmBtn.attr('disabled',true)
-					}
+					that.$e.confirmBtn.attr('disabled',true)
+					//if(that.gv.transformMoney!=""){
+					//	that.$e.confirmBtn.removeAttr("disabled");
+					//}else{
+					//	that.$e.confirmBtn.attr('disabled',true)
+					//}
                 } else {
 					$(this).addClass("check").html('&#xe669;');
 					if(that.gv.transformMoney!=""){
@@ -381,6 +382,9 @@ $(function () {
 					$(".checkMessage").html("转出金额超过最大额度")
 				}else{		
 					$(".checkMessage").css({"display":"none"}); 
+				}
+				if($(this)[0].value == ""){
+					that.$e.confirmBtn.attr('disabled',true)
 				}
 			})
 
@@ -421,7 +425,8 @@ $(function () {
 			mui('body').on('tap','.file .agreementRule',function(){
 				that.gv.ruleId = $(this).attr("ruleId");
 				var id = $(this).attr("ruleId");
-				that.findProtocolContentRule(id);
+				//that.findProtocolContentRule(id);
+				window.location.href = site_url.agreementModel_url + '?id='+id+ '&financial=true'
 			})
 			
 		},

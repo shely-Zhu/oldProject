@@ -8,6 +8,7 @@ require('@pathCommonJs/ajaxLoading.js');
 var splitUrl = require('@pathCommonJs/components/splitUrl.js')();
 var generateTemplate = require('@pathCommonJsComBus/generateTemplate.js');
 var alwaysAjax = require('@pathCommonJs/components/alwaysAjax.js');
+var moment = require('moment');
 
 $(function(){
     var activityList={
@@ -266,14 +267,16 @@ $(function(){
         events:function(){
             var that=this;
             //点击定位文字弹出定位选择
-            mui('#activityDataBox').on('tap','.activityCityBox',function(){
+            mui('#activityDataBox').on('mdClick','.activityCityBox',function(){
                 $('#activityDataBox').hide();
                 $('#cityListBox').html('');
                 $('#loading').show();
                 that.getCityListData();
+            },{
+                htmdEvt: 'activityList_0'
             });
             //点击定位选择效果
-            mui('#cityListBox').on('tap','.mui-indexed-list-item,.hotBox span',function(){
+            mui('#cityListBox').on('mdClick','.mui-indexed-list-item,.hotBox span',function(){
                 var txt=$(this).text();
                 var code=$(this).attr('data-code');
                 var parentId=$(this).attr('data-parentId');
@@ -291,15 +294,19 @@ $(function(){
                 var activitySearchInputWidth=document.documentElement.clientWidth-$('#activitySearch a').width()-$('.activityCityBox').width()-30;
                 $('.activitySearchInput').width(activitySearchInputWidth);   
                 mui('.contentWrapper').pullRefresh().scrollTo(0, 0, 100);              
+            },{
+                htmdEvt: 'activityList_1'
             });
             //点击定位选择头部返回效果
-            mui('#cityListBox').on('tap','.goBack',function(){
+            mui('#cityListBox').on('mdClick','.goBack',function(){
                 $('#cityListBox').hide();
                 $('#activityDataBox').show();
                 mui('.contentWrapper').pullRefresh().scrollTo(0, 0, 10);         
+            },{
+                htmdEvt: 'activityList_2'
             });
             //点击定位选择右侧索引效果
-            mui('#cityListBox').on('tap','.mui-indexed-list-bar a',function(){
+            mui('#cityListBox').on('mdClick','.mui-indexed-list-bar a',function(){
                 var txt=$(this).text();
                 var len=$('.mui-table-view li').length;
                 var list=$('.mui-table-view li');
@@ -309,12 +316,16 @@ $(function(){
                         list.eq(i).addClass('active');
                     }
                 }
+            },{
+                htmdEvt: 'activityList_3'
             });
             //点击活动列表跳转
-            mui('body').on('tap','.mui-card',function(){
+            mui('body').on('mdClick','.mui-card',function(){
                 var actType=$(this).children('a').attr('data-actType');
                 var actId=$(this).children('a').attr('data-actId');
                 window.location.href=site_url.activityDetails_url+'?actType='+actType+'&'+'actId='+actId;
+            },{
+                htmdEvt: 'activityList_4'
             });
             //搜索框输入触发查询数据
             mui('#activitySearch').on('keyup','.activitySearchInput input',function(){
@@ -323,18 +334,22 @@ $(function(){
                 that.gV.startPage=1;
                 that.initMui();
                 mui('.contentWrapper').pullRefresh().scrollTo(0, 0, 100); 
+            },{
+                htmdEvt: 'activityList_5'
             });
 
             //清除搜索框触发查询数据
-            mui('#activitySearch').on('tap','.mui-icon-clear',function(){
+            mui('#activitySearch').on('mdClick','.mui-icon-clear',function(){
                 $('.recordList').html('');
                 // $('#loading').show();
                 that.gV.startPage=1;
                 that.initMui();
                 mui('.contentWrapper').pullRefresh().scrollTo(0, 0, 100); 
+            },{
+                htmdEvt: 'activityList_6'
             });
             
-            // mui("body").on('tap', '.goTopBtn', function () {
+            // mui("body").on('mdClick', '.goTopBtn', function () {
             //     // $('.mui-scrollbar-indicator')[0].style.webkitTransform = "translate3d(0px, 0px, 0px) translateZ(0px)";
             //     // $('.mui-scrollbar-indicator')[0].style.webkitTransform = '2500ms';
             //     //其他页面
@@ -344,9 +359,11 @@ $(function(){
             
                        
             //点击搜索框触发选中
-            $('.activitySearchInput *').on('tap',function(){
+            $('.activitySearchInput *').on('mdClick',function(){
                 console.log(1);
                 $('.activitySearchInput').children('input').focus();
+            },{
+                htmdEvt: 'activityList_7'
             });
             // recordList
             alwaysAjax($(".recordList"));
