@@ -232,6 +232,22 @@ var pathList = {
 	// "/account/views/priNetWorthDetails.html": { evtid: 'priNetWorthDetails', topic: '净值明细', info: ''} ,
 	// "/account/views/priNetWorthDetails.html": { evtid: 'priNetWorthDetails', topic: '净值明细', info: ''} ,
 
+	"/account/views/private/incomeDistribution.html" :{ evtid: '', topic: '收益分配明细-详情页', info: ''} ,
+	"/account/views/private/privateDetail.html" :{ evtid: '', topic: '私募产品详情页', info: ''} ,
+	"/account/views/private/privateDetailList.html" :{ evtid: '', topic: '私募交易详情-待确认交易，已确认交易', info: ''} ,
+	"/account/views/private/privateFundPdf.html" :{ evtid: '', topic: '查看基金确认书', info: ''} ,
+	"/account/views/private/seeSign.html" :{ evtid: '', topic: '查看已签署材料', info: ''} ,
+	"/account/views/private/tobeConfirmTransaction.html" :{ evtid: '', topic: '待确认交易', info: ''} ,
+	"/account/views/private/transactionRules.html" :{ evtid: '', topic: '私募交易规则', info: ''} ,
+
+	"/account/views/public/cashTreasure.html" :{ evtid: '', topic: '现金宝的详情的页面', info: ''} ,
+	"/account/views/public/optionalPublicDetail.html" :{ evtid: '', topic: '自选公募产品详情页', info: ''} ,
+	"/account/views/public/superContent.html" :{ evtid: '', topic: '自选公募-超宝详情', info: ''} ,
+	"/account/views/public/superRecord.html" :{ evtid: '', topic: '超宝基金产品-交易记录', info: ''} ,
+	"/account/views/public/superStreasureDetail.html" :{ evtid: '', topic: '自选公募-超宝详情', info: ''} ,
+	"/account/views/public/transactionDetail.html" :{ evtid: '', topic: '超宝-交易记录', info: ''} ,
+	"/account/views/public/transactionRecords.html" :{ evtid: '', topic: '自选公募-交易记录', info: ''} ,
+
 	/*********************************account end ***************************************/
 }
 
