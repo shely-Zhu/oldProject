@@ -38,6 +38,7 @@ $(function() {
             custType: "", //客户类型
             fundDetailObj: "", //详情接口拿到的对象
             buyFreeze: "", //是否买入冻结
+            productName:"",//产品名称
             qrnhWfsy: {
                 oneMonth: {},
                 threeMonth: {},
@@ -125,7 +126,7 @@ $(function() {
                         // 折线图
                         that.getTypeOneData(that.$e.lineType);
                     }
-
+					that.data.productName = jsonData.productName;
                     // 私募产品 产品名称
                     $('.productName').html(jsonData.productName);
                     // 一句话产品详情
@@ -757,7 +758,7 @@ $(function() {
                                         title: '',
                                         id: 'sellPop',
                                         p: '<p class="" style="font-weight:bold;text-align:center">你选择的产品与您现在的风险承受能力相匹配</p>' +
-                                            '<p class="">请您认真阅读[' + noticeObj.fileName + ']并确认后继续购买该产品</p>',
+                                            '<p class="">请您认真阅读[' + noticeObj.fileName + ']' + that.data.productName + '并确认后继续购买该产品</p>',
                                         yesTxt: '去阅读',
                                         celTxt: '取消',
                                         zIndex: 1200,
