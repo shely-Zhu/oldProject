@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2019-11-26 14:42:56
- * @LastEditTime: 2019-12-06 19:15:36
+ * @LastEditTime: 2019-12-09 12:02:57
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \htjf-app\src\financial\static\js\publicPlacement\cashTransformOut.js
@@ -55,7 +55,7 @@ $(function () {
 					"title":"<<中融货币E规则>>"
 				},
 				{
-					"id":20,
+					"id":21,
 					"title":"<<中融货币E规则>>"
 				},
 				{
@@ -338,7 +338,8 @@ $(function () {
 			mui('body').on('tap','.explain .transformRule',function(){
 				that.gv.ruleId = $(this).attr("ruleId");
 				var id = $(this).attr("ruleId");
-				that.findProtocolContentRule(id);
+				//that.findProtocolContentRule(id);
+				window.location.href = site_url.agreementModel_url + '?id='+id+ '&financial=true'
 			}) 
 
 			//点击同意协议
@@ -421,7 +422,8 @@ $(function () {
 			mui('body').on('tap','.file .agreementRule',function(){
 				that.gv.ruleId = $(this).attr("ruleId");
 				var id = $(this).attr("ruleId");
-				that.findProtocolContentRule(id);
+				//that.findProtocolContentRule(id);
+				window.location.href = site_url.agreementModel_url + '?id='+id+ '&financial=true'
 			})
 			
 		},

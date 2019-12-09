@@ -39,7 +39,7 @@ $(function () {
       var obj = [{
         url: site_url.pofFixedDetail_api,
         data: {
-          scheduledProtocolId: scheduledProtocolId
+          scheduledProtocolId:scheduledProtocolId
         },
         callbackDone: function (json) {
           json = json.data
@@ -167,7 +167,22 @@ $(function () {
         });
       }, {
 				htmdEvt: 'castSurelyDetails_03'
-			});
+      });
+      
+      //跳转到定投详情结果页 publicTradeDetail_url
+      mui("body").on("mdClick",".is_fail .state_fail",function(){
+        debugger
+        var obj = {
+          applyId: $(this).attr("allotNo"),
+          fundCombination: "",
+          fundCode: that.gV.copyJson.fundCode,
+          fundBusinCode: "039",
+          allotType: "",
+          Fixbusinflag: "",
+        };
+        window.location.href = site_url.publicTradeDetail_url + '?applyId='+obj.applyId +'&fundCombination=' + obj.fundCombination + '&fundCode=' + obj.fundCode + '&fundBusinCode=' + obj.fundBusinCode + '&allotType=' + obj.allotType + '&Fixbusinflag=' + obj.Fixbusinflag
+
+      })
 
     },
 
