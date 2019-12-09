@@ -84,6 +84,7 @@ $(function(){
             
             var obj = [{ // 系统调仓记录列表
                 url: site_url.getActivitiesList_api,
+                needLogin: false,
                 // url:'http://172.16.187.164:8081/web/marketing/activity/getActivitiesList',
                 data: {
                         // "combCode": that.gV.groupCode, //组合代码 

@@ -334,6 +334,8 @@ module.exports = function() {
     this.qualifiedInvestor_url = go_url.no_url + '/mine/views/qualifiedInvestor/qualifiedInvestor.html';
     //活动详情->合格投资者认证结果页
     this.qualifiedInvestorResult_url = go_url.no_url + '/mine/views/qualifiedInvestor/qualifiedInvestorResult.html';
+    //活动详情->合格投资者认证选择页面
+    this.chooseQualifiedInvestor_url = go_url.no_url + '/mine/views/qualifiedInvestor/chooseQualifiedInvestor.html';
     //活动详情->信息补全
     this.completeInformation_url = go_url.no_url + '/mine/views/information/completeInformation.html';
     //活动详情->投资者分类申请
