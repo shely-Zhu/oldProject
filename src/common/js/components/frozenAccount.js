@@ -45,7 +45,8 @@ function elasticLayer(outdateFreezeStatus, lawFreezeStatus, url, custType) {
     var custType = (custType == "0" || custType == "2") ? true : false;  //机构为true
 
 	if(lawFreezeStatus == 1) {
-		$.elasticLayerTypeTwo({
+		//$.elasticLayerTypeTwo({
+        $.elasticLayer({
 			id: "tip",
 			title: '温馨提示',
 			p: '<p>因司法原因该账户被冻结，请联系客服咨询！客服电话：400-8980-618！</p>',

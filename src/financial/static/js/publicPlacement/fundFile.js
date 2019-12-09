@@ -72,7 +72,7 @@ $(function () {
             var pieChart = echarts.init($('.circle')[0]);
             var optionData = []
             var pieData = that.gV.pieData
-            pieData.forEach(n => {
+            pieData.forEach(function(n){
                 optionData.push(n.name)
             })
             // 指定图表的配置项和数据
@@ -218,7 +218,7 @@ $(function () {
 
                     json = json.data
                     var pieData = []
-                    json.assetAllocation.forEach((n, i) => {
+                    json.assetAllocation.forEach(function(n, i){
                         var item
                         item = {
                             name: n.assetTypeName,
