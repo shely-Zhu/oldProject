@@ -652,7 +652,7 @@ $(function() {
 		event: function(){
 			var that = this;
 			// 按钮点击展开收起
-			mui("body").on('tap', '.openButton', function() {
+			mui("body").on('mdClick', '.openButton', function() {
                 if( $('.topContent.open').length ){
 					//收起
 					$('.topContent').removeClass('open');
@@ -662,60 +662,90 @@ $(function() {
 					$('.topContent').addClass('open');
 					$('.typeWrap openWrap').show();
 				}
-            })
-            // 交易明细，基金确认书，收益明细等点击跳转
-            mui("body").on('tap', '.single', function() {
+            }, {
+				'htmdEvt': 'privateDetail_0'
+			})
+			// 交易明细，基金确认书，收益明细等点击跳转
+			var clickEvent = '';//记录一下按钮到底跳转到哪里 埋点统计
+            mui("body").on('mdClick', '.single', function() {
             	if($(this).find(".txt").html() == '交易明细') { // 私募交易明细页面
-            		window.location.href = site_url.transactionDetail_url + '?projectId=' + that.data.projectId;
+					window.location.href = site_url.transactionDetail_url + '?projectId=' + that.data.projectId;
+					clickEvent = 'privateDetail_1';
             	} else if ($(this).find(".txt").html() == '收益分配明细') { // 私募收益明细页面
-            		window.location.href = site_url.incomeDistribution_url + '?projectId=' + that.data.projectId;
+					window.location.href = site_url.incomeDistribution_url + '?projectId=' + that.data.projectId;
+					clickEvent = 'privateDetail_2';
             	} else if ($(this).find(".txt").html() == '基金确认书') { // 基金确认书页面
-            		window.location.href = site_url.privateFundPdf_url + '?projectId=' + that.data.projectId + '&ecFileName=' + that.data.ecFileName + '&ecFileUrl=' + that.data.ecFileUrl;
+					window.location.href = site_url.privateFundPdf_url + '?projectId=' + that.data.projectId + '&ecFileName=' + that.data.ecFileName + '&ecFileUrl=' + that.data.ecFileUrl;
+					clickEvent = 'privateDetail_3';
             	}
-            })
-            mui("body").on('tap', '.double>div', function() {
+            }, {
+				'htmdEvt': clickEvent
+			})
+            mui("body").on('mdClick', '.double>div', function() {
             	if($(this).find(".txt").html() == '交易明细') { // 私募交易明细页面
-            		window.location.href = site_url.transactionDetail_url + '?projectId=' + that.data.projectId;
+					window.location.href = site_url.transactionDetail_url + '?projectId=' + that.data.projectId;
+					clickEvent = 'privateDetail_1';
             	} else if ($(this).find(".txt").html() == '收益分配明细') { // 私募收益明细页面
-            		window.location.href = site_url.incomeDistribution_url + '?projectId=' + that.data.projectId;
+					window.location.href = site_url.incomeDistribution_url + '?projectId=' + that.data.projectId;
+					clickEvent = 'privateDetail_2';
             	} else if ($(this).find(".txt").html() == '基金确认书') { // 基金确认书页面
-            		window.location.href = site_url.privateFundPdf_url + '?projectId=' + that.data.projectId + '&ecFileName=' + that.data.ecFileName + '&ecFileUrl=' + that.data.ecFileUrl;
+					window.location.href = site_url.privateFundPdf_url + '?projectId=' + that.data.projectId + '&ecFileName=' + that.data.ecFileName + '&ecFileUrl=' + that.data.ecFileUrl;
+					clickEvent = 'privateDetail_3';
             	}
-            })
-            mui("body").on('tap', '.treble>.actionCon', function() {
+            }, {
+				'htmdEvt': clickEvent
+			})
+            mui("body").on('mdClick', '.treble>.actionCon', function() {
             	if($(this).find(".txt").html() == '交易明细') { // 私募交易明细页面
-            		window.location.href = site_url.transactionDetail_url + '?projectId=' + that.data.projectId;
+					window.location.href = site_url.transactionDetail_url + '?projectId=' + that.data.projectId;
+					clickEvent = 'privateDetail_1';
             	} else if ($(this).find(".txt").html() == '收益分配明细') { // 私募收益明细页面
-            		window.location.href = site_url.incomeDistribution_url + '?projectId=' + that.data.projectId;
+					window.location.href = site_url.incomeDistribution_url + '?projectId=' + that.data.projectId;
+					clickEvent = 'privateDetail_2';
             	} else if ($(this).find(".txt").html() == '基金确认书') { // 基金确认书页面
-            		window.location.href = site_url.privateFundPdf_url + '?projectId=' + that.data.projectId + '&ecFileName=' + that.data.ecFileName + '&ecFileUrl=' + that.data.ecFileUrl;
+					window.location.href = site_url.privateFundPdf_url + '?projectId=' + that.data.projectId + '&ecFileName=' + that.data.ecFileName + '&ecFileUrl=' + that.data.ecFileUrl;
+					clickEvent = 'privateDetail_3';
             	}
-            })
+            }, {
+				'htmdEvt': clickEvent
+			})
             // 历史明细点击跳转
-            mui("body").on('tap', '#historyDetailBtn', function() {
+            mui("body").on('mdClick', '#historyDetailBtn', function() {
             	window.location.href = site_url.historyDetail_url + '?projectId=' + that.data.projectId;
-            })
+            }, {
+				'htmdEvt': 'privateDetail_4'
+			})
             // 净值明细点击跳转
-            mui("body").on('tap', '#netValueDetailBtn', function() {
+            mui("body").on('mdClick', '#netValueDetailBtn', function() {
             	window.location.href = site_url.priNetWorthDetails_url + '?projectId=' + that.data.projectId;
-            })
-            mui("body").on('tap', '#netValueDetailArrow', function() {
+            }, {
+				'htmdEvt': 'privateDetail_5'
+			})
+            mui("body").on('mdClick', '#netValueDetailArrow', function() {
             	window.location.href = site_url.priNetWorthDetails_url + '?projectId=' + that.data.projectId;
-            })
+            }, {
+				'htmdEvt': 'privateDetail_5'
+			})
             // 交易规则点击跳转
-            mui("body").on('tap', '#transactionRuleBtn', function() {
+            mui("body").on('mdClick', '#transactionRuleBtn', function() {
             	window.location.href = site_url.privateTransactionRules_url + '?projectType=' + that.data.projectType
-            })
+            }, {
+				'htmdEvt': 'privateDetail_6'
+			})
             // 产品档案点击跳转
-            mui("body").on('tap', '#productFilesBtn', function() {
+            mui("body").on('mdClick', '#productFilesBtn', function() {
             	window.location.href = site_url.productFiles_url + '?projectId=' + that.data.projectId;
-            })
+            }, {
+				'htmdEvt': 'privateDetail_7'
+			})
             // 信息披露点击跳转
-            mui("body").on('tap', '#infoPublishBtn', function() {
+            mui("body").on('mdClick', '#infoPublishBtn', function() {
             	window.location.href = site_url.informationDisclosure_url + '?projectId=' + that.data.projectId;
-            })
+            }, {
+				'htmdEvt': 'privateDetail_8'
+			})
             //折线图点击月份请求数据
-            mui("body").on('tap', '.lineWrap .time', function() {
+            mui("body").on('mdClick', '.lineWrap .time', function() {
             	if(!that.data.echartsClickFlag) {
             		$('.lineDraw .time').removeClass('active');
 					$(this).addClass('active');
@@ -726,14 +756,18 @@ $(function() {
 					}
             	}
             	
-            })
+            }, {
+				'htmdEvt': 'privateDetail_9'
+			})
             //赎回按钮点击切换
-            mui("body").on('tap', '#redeemNav .navSpan', function() {
+            mui("body").on('mdClick', '#redeemNav .navSpan', function() {
             	$(this).addClass("active").siblings().removeClass('active')
 				that.setRedeemRule($(this).attr("type"))
-            })
+            }, {
+				'htmdEvt': 'privateDetail_10'
+			})
             //进入赎回页面
-            mui("body").on('tap', '.redeemBtn', function() {
+            mui("body").on('mdClick', '.redeemBtn', function() {
             	// 先判断登录是否超时以及账户冻结状态    司法验证过期弹出提示框
 				if(that.data.redeemClickFlag) {
 					that.data.redeemClickFlag = frozenAccount("buyFreeze", window.location.href)
@@ -741,9 +775,11 @@ $(function() {
 						window.location.href = site_url.privateRedeem_url + '?projectId=' + that.data.projectId + '&redeemPartion=' + that.data.redeemPartion;
 					}
 				}
-            })
+            }, {
+				'htmdEvt': 'privateDetail_11'
+			})
             //折线图点击七日年化/万份收益切换区域
-            mui("body").on('tap', '.lineWrap .titleWrap .title', function() {
+            mui("body").on('mdClick', '.lineWrap .titleWrap .title', function() {
             	$('.lineWrap .titleWrap .title').removeClass('active');
 				$(this).addClass('active');
 				//判断当前画的是七日年化还是万份收益或单位净值或累计净值
@@ -778,7 +814,9 @@ $(function() {
 				}
 				$('.lineDraw .time').removeClass('active');
 				$('.lineDraw .newYear').addClass('active');
-            })
+            }, {
+				'htmdEvt': 'privateDetail_12'
+			})
 		},
 	}
 	privateDetail.init();
