@@ -100,7 +100,7 @@ require('@pathCommonJsCom/goTopMui.js');
                     var that = this;
 
                     //data为空时，显示暂无数据
-                    if( $.util.objIsEmpty(data) ){
+                    if( $.util.objIsEmpty(data) && pageCurrent == 1){
                         // 暂无数据显示
                         $('.without.noData').show();
                     }
@@ -143,8 +143,24 @@ require('@pathCommonJsCom/goTopMui.js');
 
                  alwaysAjax: function( $el ){
                     var that = this;
+                    
+                    // 滚动区域结构关系（由父到子） wrapper → contentWrapper → mui-table-view → mui-table-view-cell
+                    $(document).scroll(function() {
+                        // $(".mui-table-view").height()   // 滚动内容高度
+                        // $(".wrapper").height()             // 滚动区域高度
+                        // Math.abs($el.offset().top-(window.screen.height - $(".wrapper").height()))    // 滚动高度
+                        // 滚动内容高度 = 滚动区域高度 + 滚动高度
+                        var scrollTop = Math.abs($el.offset().top-(window.screen.height - that.options.wrapper.height()))
+                        var diff = $el.parent().height() - that.options.wrapper.height() - scrollTop
+                        // 设置距离底部还剩300px时加载下一页
+                        if(diff <= 400) { 
+                            if( !that.options.wrapper.find('.mui-pull-caption-nomore').length ){
+                                mui( that.options.wrapper.find('.contentWrapper')).pullRefresh().pullupLoading();
+                            }
+                        }
+                    })
 
-                    var tops = parseInt(-100);
+                    //var tops = parseInt(-100);
 
                     //点击下按钮，显示弹框
                     // var classNames = className ? className : ".contentWrap"
@@ -152,7 +168,7 @@ require('@pathCommonJsCom/goTopMui.js');
                     // var tops = parseInt(cutNumber?cutNumber:-100); 
                     // if ( $el.length > 0) {
                         
-                        $(document).scroll(function() {
+                        /*$(document).scroll(function() {
                             // 滚动距离 Math.abs($(classNames).offset().top - 64)
                             // 容器高度 $(classNames).parent().parent().height()
                             if ( $el.offset().top < tops) {
@@ -163,7 +179,7 @@ require('@pathCommonJsCom/goTopMui.js');
                                 }
                                 
                             } 
-                        });
+                        });*/
                     // }
                  },
 

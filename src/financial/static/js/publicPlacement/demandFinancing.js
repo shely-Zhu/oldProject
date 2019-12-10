@@ -30,7 +30,6 @@ $(function(){
                  url:site_url.queryFundTransferAssets_api,
                  needDataEmpty:true,
                  callbackDone:function(json){
-                     console.log("88888",json)
                      var data = json.data;
                      if(data){
                          console.log("成功")

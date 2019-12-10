@@ -45,6 +45,8 @@ module.exports = function() {
     this.getJJSInTransitAssets_api = http_url.web_url + '/account/jjs/getJJSInTransitAssets'; // 查询金交所在途资产 
     //待确认，已确认列表
     this.getTradeList_api = http_url.web_url + '/pef/getTradeList'
+        //取消预约产品
+    this.fundReserveCancel_api = http_url.web_url + '/pef/fundReserveCancel'
         // 查询金交持仓资产、在途资产、总资产
     this.getJJSAssets_api = http_url.web_url + '/account/jjs/getJJSAssets';
     // jjs持仓明细查询
@@ -169,9 +171,9 @@ module.exports = function() {
 
     //会员俱乐部-活动列表-获取城市定位
     this.getCity_api = http_url.web_url + '/marketing/frontend/getCity'
-    //新增客户反馈
+        //新增客户反馈
     this.insertFeedback_api = http_url.web_url + '/account/insertFeedback'
-    //上传图片
+        //上传图片
     this.upload_api = http_url.web_url + '/content/file/upYun/upload'
 
     this.getCity_api = http_url.web_url + '/marketing/frontend/getCity';
@@ -318,6 +320,7 @@ module.exports = function() {
     this.prfFundFeeRate_api = http_url.web_url + '/pof/fundFeeRate/frontend/query'; //15.金服WEB-定投费率-查询
     this.prfFundList_api = http_url.web_url + '/pof/newIssue/frontend/fundList'; //16.金服WEB-新发基金-列表查询
     this.prfQuerynewsletter_api = http_url.web_url + '/pof/fundnewsletter/frontend/querynewsletter'; //17.金服WEB-基金时讯-查询
+    this.queryFundTransferAssetsDetail_api = http_url.web_url + '/account/queryFundTransferAssetsDetail'; // 金服WEB-基金时支付列表
 
 
     /*------------------- 私募理财fang——le end ------------------------------*/
@@ -354,17 +357,17 @@ module.exports = function() {
 
     //yan
     this.findMessageCenterById_api = http_url.web_url + '/content/frontend/findMessageCenterById'; //证监会要求查看详情
-    
-    this.queryTransferFunds_api= http_url.web_url +'/account/queryTransferFunds'; // 查询基金列表
-    this.newFundDetails_api = http_url.web_url + '/pof/fundDetails/frontend/newfundDetails';//基金年化查询
-    this.redemptionPay_api = http_url.web_url + '/pof/redemptionPay/redemptionPay';//赎回确认
-    this.findProtocolBasic_api = http_url.web_url + '/content/findProtocolBasic' ; //进入基金转出页面调用
-    this.cashList_api = http_url.web_url + '/account/bankCard/cashList';//查询银行卡转出
+
+    this.queryTransferFunds_api = http_url.web_url + '/account/queryTransferFunds'; // 查询基金列表
+    this.newFundDetails_api = http_url.web_url + '/pof/fundDetails/frontend/newfundDetails'; //基金年化查询
+    this.redemptionPay_api = http_url.web_url + '/pof/redemptionPay/redemptionPay'; //赎回确认
+    this.findProtocolBasic_api = http_url.web_url + '/content/findProtocolBasic'; //进入基金转出页面调用
+    this.cashList_api = http_url.web_url + '/account/bankCard/cashList'; //查询银行卡转出
     this.findProtocolContent_api = http_url.web_url + '/content/frontend/findProtocolContent'; //转出协议查询
     this.doCashTreasureSell_api = http_url.web_url + '/pof/cash/doCashTreasureSell'
-    this.getCashTreasureLimitInfo_api = http_url.web_url + '/pof/cash/forntend/getCashTreasureLimitInfo'  //转出份额限定 单日等
-    this.findProtocolContentRule_api = http_url.web_url + '/content/frontend/findProtocolContent';//转出规则查询
+    this.getCashTreasureLimitInfo_api = http_url.web_url + '/pof/cash/forntend/getCashTreasureLimitInfo' //转出份额限定 单日等
+    this.findProtocolContentRule_api = http_url.web_url + '/content/frontend/findProtocolContent'; //转出规则查询
 
-    this.queryFundTransferAssets_api = http_url.web_url+ '/account/queryFundTransferAssets'    //查询活期理财列表
+    this.queryFundTransferAssets_api = http_url.web_url + '/account/queryFundTransferAssets' //查询活期理财列表
 
 };
