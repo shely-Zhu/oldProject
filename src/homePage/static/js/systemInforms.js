@@ -59,7 +59,7 @@ $(function() {
                 wrapper: $('.list'),
                 class: 'listItem',
                 template: that.$e.informsListTemp, 
-                pageSize: that.gV.pageCurrent,
+                pageSize: that.gV.pageSize,
                 callback: function(def, t){
                     var obj = [{
                         url: site_url.noticeAndTransDynamicList_api,
