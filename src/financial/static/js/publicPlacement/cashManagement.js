@@ -128,7 +128,7 @@ $(function () {
 
       //了解现金管理
       mui("body").on("tap", ".fundKnow", function () { 
-       window.location.href  = site_url.articleTemplate_url + '?id=1&articleBelong=12'
+       window.location.href  = site_url.articleTemplate_url + '?articleBelong=12'
        
       });
       //认证
