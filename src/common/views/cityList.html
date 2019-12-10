@@ -4,7 +4,7 @@
  */-->
 <script id="cityList-template" type="text/x-handlebars-template">
     <div>
-        <header class="mui-bar mui-bar-nav">
+        <!--<header class="mui-bar mui-bar-nav">
             <a href="javascript:;" class="mui-icon mui-icon-left-nav mui-pull-left goBack"></a>
             {{#each this}}
                 {{#if namea}}
@@ -13,7 +13,8 @@
                 <h1 class="mui-title">会员俱乐部</h1>
                 {{/if}} 
             {{/each}}
-        </header>
+        </header>-->
+        @@include('./headBarConfig.html',{"bgColors":"#2C3E77,#273971","showType":"0","pathName":"会员俱乐部"})
         
     </div>
     <div class="mui-content">
