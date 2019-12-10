@@ -37,15 +37,16 @@ $(function () {
             isRiskEndureArr: ['未风测', '已风测'],//是否风险测评 0-否 1-是    endurePubIsold 公募风险评测是否过期 0-否 1-是
             isPerfectArr: ['未完善', '已完善'],//是否完善个人信息 0-否 1-是 
             accreditedInvestorArr: ['未通过', '已通过', '已过期', '未做'],//是否合格投资者 空-未做； 0-未通过；1-已通过； 2-已过期 
-            tipStatus: false,
             invTypCom:'' ,  // 基金类型
-            secuSht:''   // 基金名简写
+            secuSht:'',   // 基金名简写
+            accountType:null   //客户类型  0-机构 1-个人
         },
         fundType: splitUrl['fundType'] == '10300' ? 1 : 0, //10300 货币基金类型，其余为普通基金类型
         init: function () {
             var that = this;
             //页面初始化
             that.getData();
+            that.getUserInfo();  //获取用户类型
             $('.tips').hide()
 
         },
@@ -121,7 +122,7 @@ $(function () {
             }]
             $.ajaxLoading(obj);
         },
-        // 获取认证信息
+        // 获取客户类型
         getUserInfo: function () {
             var that = this;
             // 请求页面数据
@@ -130,35 +131,8 @@ $(function () {
                 data: {
                 },
                 callbackDone: function (json) {
-                    json = json.data
-                    json.isRiskEndure = (json.isRiskEndure === 1 && json.endurePubIsold === 0) ? 1 : 0 //已经风险测评且没有过期 才展示已风测
-                    if (json.idnoCheckflag) {
-                        $($('.tips .tips-li')[0]).hide()
-                    } else {
-                        $($('.tips .bank-status')[0]).text(that.gV.idnoCheckflagArr[json.idnoCheckflag])
-                    }
-                    if (json.isRiskEndure) {
-                        $($('.tips .tips-li')[1]).hide()
-                    } else {
-                        $($('.tips .bank-status')[1]).text(that.gV.isRiskEndureArr[json.isRiskEndure])
-                    }
-                    if (json.isPerfect) {
-                        $($('.tips .tips-li')[2]).hide()
-                    } else {
-                        $($('.tips .bank-status')[2]).text(that.gV.isPerfectArr[json.isPerfect])
-                    }
-                    if (json.accreditedInvestor) {
-                        $($('.tips .tips-li')[3]).hide()
-                    } else {
-                        $($('.tips .bank-status')[3]).text(json.accreditedInvestor ? that.gV.accreditedInvestorArr[json.accreditedInvestor] : '未做')
-                    }
-                    if (json.idnoCheckflag || json.isRiskEndure || json.isPerfect || json.accreditedInvestor) {
-                       // $('.tips').show()
-                        that.gV.tipStatus = true
-                    } else {
-                        that.gV.tipStatus = true
-
-                    }
+                    var data = json.data
+                    that.gV.accountType = data.accountType
                 },
                 callbackFail: function (json) {
                     tipAction(json.msg);
@@ -194,31 +168,19 @@ $(function () {
             mui("body").on('mdClick', ".dealRegArea .rule", function (e) {
                 window.location.href = site_url.pofTransactionRules_url + '?fundCode=' + fundCode
             });
-            // // 定投 买入
-            // mui("body").on('mdClick', ".footer >div", function (e) {
-            //     console.log($(this).attr('type'));
-            //     var type = $(this).attr('type')
-            //     if (type === 1 || type === 2) return
-            //     that.getUserInfo()
-            //     $('.tips').show()
-            //     return
-            //     window.location.href = site_url.pofOrdinarySetThrow_url + '?fundCode=' + fundCode + '&fundName=' + fundName + '&type=add';
-            // });
+
             // 定投
             mui("body").on('mdClick', ".footer .fixed_investement_btn", function (e) {
-                window.location.href = site_url.pofOrdinarySetThrow_url + '?fundCode=' + fundCode + '&fundName=' + fundName + '&type=add';
-                // that.getUserInfo()
-                // if (that.gV.tipStatus) {
-                //     window.location.href = site_url.pofOrdinarySetThrow_url + '?fundCode=' + fundCode + '&fundName=' + fundName + '&type=add';
-                // }
+                if(that.gV.accountType === 0 || that.gV.accountType === 2){
+                    tipAction('暂不支持机构客户进行交易');
+                }else{
+                    window.location.href = site_url.pofOrdinarySetThrow_url + '?fundCode=' + fundCode + '&fundName=' + fundName + '&type=add';
+                }
             });
             // 买入
             mui("body").on('mdClick', ".footer .buy_btn", function (e) {
-                //that.getUserInfo()
                 window.location.href = site_url.fundTransformIn_url + '?fundCode=' + fundCode + '&fundName=' + fundName;
-                // if (that.gV.tipStatus) {
-                //     window.location.href = site_url.fundTransformIn_url + '?fundCode=' + fundCode + '&fundName=' + fundName;
-                // }
+               
             });
             //认证
             mui("body").on('mdClick', ".tips .tips-li-right", function (e) {

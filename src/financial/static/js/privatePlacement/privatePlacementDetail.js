@@ -123,6 +123,8 @@ $(function() {
                         that.$e.lineType = 'qrnh';
                         $("#qrnhLine").removeClass("hide");
                         $("#wfsyLine").addClass("hide");
+                        // 展示七日年化
+                        $('.netValue').html(jsonData.unitNetValue);
                         // 折线图
                         that.getTypeOneData(that.$e.lineType);
                     }
@@ -996,6 +998,34 @@ $(function() {
             }, {
                 htmdEvt: 'privatePlacementDetail_03'
             });
+            // 复制全部
+            mui("body").on('mdClick', '.copyAll', function(event) {
+                var $this = $(this);
+                var copyText = $('#name').text() + $('#number').text() + $('#linenum').text() + $('#openingBank').text();
+                    //实例化clipboard
+                var clipboard = new Clipboard('.copyAll', {
+                    text: function() {
+                        return copyText;
+                    }
+                });
+                clipboard.on("success", function(e) {
+                    //text = '';
+                    tipAction("复制成功");
+                });
+                clipboard.on("error", function(e) {
+                    tipAction("请选择“拷贝”进行复制!");
+                });
+                clipboard.onClick(event);
+
+            }, {
+                htmdEvt: 'privatePlacementDetail_04'
+            });
+            // 历史明细点击跳转
+            mui("body").on('mdClick', '#historyDetailBtn', function() {
+                window.location.href = site_url.historyDetail_url + '?projectId=' + that.$e.projectId;
+            }, {
+                'htmdEvt': 'privateDetail_05'
+            })
 
             // 立即预约
             mui("body").on('mdClick', '.buyButton', function() {
@@ -1023,7 +1053,7 @@ $(function() {
                 }
                 that.data.canClick = false;
             }, {
-                htmdEvt: 'privatePlacementDetail_04'
+                htmdEvt: 'privatePlacementDetail_06'
             });
         }
     };
