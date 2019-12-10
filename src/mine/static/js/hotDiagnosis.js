@@ -102,6 +102,7 @@ $(function() {
 
                 },
                 needDataEmpty: false,
+                needLoading: false,
                 callbackDone: function(json) {
                     var dataList;
 

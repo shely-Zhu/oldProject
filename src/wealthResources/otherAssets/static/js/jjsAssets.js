@@ -231,6 +231,7 @@ $(function() {
                 url: that.gV.siteUrlArr[that.gV.current_index],
                 data: that.gV.ajaxArr[that.gV.current_index],
                 needLogin: true,
+                needLoading: false,
                 callbackDone: function(json) {
                     var jsonData = json.data,
                         pageList = jsonData.pageList;

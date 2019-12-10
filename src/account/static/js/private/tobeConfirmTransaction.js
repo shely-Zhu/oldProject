@@ -118,6 +118,7 @@ $(function() {
                     "isConfirm": that.gV.type,
                     "confirmType": that.gV.businessType,
                 },
+                needLoading: false,
                 callbackDone: function(json) {
                     var data;
                     if (json.data.pageList && json.data.pageList.length == 0) { // 没有记录不展示
