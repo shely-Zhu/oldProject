@@ -46,7 +46,8 @@ $(function () {
 			password: "",
 			tradeAcco: '' , //交易账号
 			tradeSource: '' , //交易账号
-			singleNum:0
+			singleNum:0,
+			minValue:0
 		},
 		webinit: function () {
 			var that = this;
@@ -77,7 +78,7 @@ $(function () {
 						that.$el.paymentGainsDayStr.html(data.paymentGainsDayStr)
 						that.gV.fundName = data.fundName
 						that.gV.fundCode = data.fundCode
-						that.gV.minValue = Number(data.purchaseAmount)
+						that.gV.minValue = data.purchaseAmount ? Number(data.purchaseAmount) : 0
 						that.$el.transformInput.attr('placeholder',data.purchaseAmountMask)
 						// for (var index = 0; index < data.tradeLimitList.length; index++) {
 						// 	if(that.gV.fundBusinCode ==  data.tradeLimitList[index].fundBusinCode){
@@ -364,11 +365,12 @@ $(function () {
 			mui("body").on('mdClick','.btn_box .btn',function(){
 				$("#transformInput").blur()
 				if(!!that.gV.bankAccountSecret){
-					if(Number(that.gV.balance) < Number(that.gV.minValue)){
-						tipAction('单笔金额不能小于' + that.gV.minValue + '元')
-						return
+					if(!!that.gV.minValue){
+						if(Number(that.gV.balance) < Number(that.gV.minValue)){
+							tipAction('单笔金额不能小于' + that.gV.minValue + '元')
+							return
+						}
 					}
-					
 					if(Number(that.gV.balance) > Number(that.gV.singleNum)){
 						tipAction('单笔金额不能超过' + that.gV.singleNum + '元')
 						return
