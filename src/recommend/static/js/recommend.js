@@ -121,7 +121,7 @@ $(function() {
                         // 已实名认证，初始化页面
                         that.initialPage()
                     }
-                },
+                }
             }];
             $.ajaxLoading(obj);
         },
@@ -570,7 +570,7 @@ $(function() {
             if (++that.setting.count === that.setting.num) {
                 that.weixinShare();
             }
-        },
+        }
     };
     recommend.init();
 })

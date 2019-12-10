@@ -69,7 +69,7 @@ var prvSure = {
                 if(json.custType == '1'){ // 自然人客户请求银行卡接口
                     that.getCardList();
                 }
-            },
+            }
              
         }, {
             url: site_url.custBro_api, // 理财师

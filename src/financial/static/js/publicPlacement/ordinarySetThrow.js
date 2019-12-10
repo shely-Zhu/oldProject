@@ -66,8 +66,8 @@ $(function () {
 			expiryDate:'', //终止日期
 
 			//公用
-			minValue:0,  // 起投金额
-			maxValue:0,  //最大金额
+			minValue:null,  // 起投金额
+			maxValue:null,  //最大金额
 			balance:0,     //   申请金额
 			tradeAcco: '' , //交易账号
 			bankNo: '',  //银行编号
@@ -505,7 +505,7 @@ $(function () {
 					balance:that.gV.balance,
 					capitalMode:that.gV.capitalMode,
 					// protocolFixDay:that.gV.dayInMonth,
-					protocolFixDay:that.gV.tradePeriod == '2' ? that.gV.dayInWeek : that.gV.dayInMonth,
+					protocolFixDay:that.gV.protocolPeriodUnit == '1' ? that.gV.dayInWeek : that.gV.dayInMonth,
 					protocolPeriodUnit:that.gV.protocolPeriodUnit,
 					nextFixrequestDate:that.gV.nextFixrequestDate,
 					firstExchdate:that.gV.nextDeductingDayFromate,
