@@ -85,6 +85,9 @@ var splitUrl = require('./components/splitUrl.js')();
 
 (function($) {
 
+    //请求次数 页面每次发一个ajax请求，次数+1，当次数为0的时候再隐藏遮罩层
+    var requestCount = 0;
+
     $.extend($, {
 
         ajaxLoading: function(param) {
@@ -109,7 +112,7 @@ var splitUrl = require('./components/splitUrl.js')();
                 needLogin: true, //需要判断登录是否过期
                 needCrossDomain: false, //true-跨域, false-不跨域
                 needDataEmpty: true, //需要判断data是否为空
-                needLoading: false, //不需要显示loading遮罩
+                needLoading: true, //不需要显示loading遮罩
                 callbackDone: function() {},
                 callbackFail: function() {},
                 callbackNoData: function() {},
@@ -289,11 +292,23 @@ var splitUrl = require('./components/splitUrl.js')();
                 //循环obj数组
                 $.each(obj, function(i, el) {
 
+                    //每次请求都把请求次数+1
+                    requestCount ++;
+                    if (1 == requestCount){
+                        //页面第一次请求的时候 设置一个定时器 防止出现遮罩层隐藏不了的情况
+                        setTimeout(function() {
+                            requestCount = 0;
+                            $('.netLoading').hide();
+                            $('.listLoading').hide();
+                        }, 10000)
+                    }
                     //发送请求前，先判断是否需要显示遮罩
                     if (el.needLoading) {
                         //needLoading为true时，显示$('#loading')遮罩
-                        $("#loading").show();
-                        $('.listLoading').show();
+                        if ('none' == $('.listLoading').css('display')){
+                            //排除一进页面就发送请求的情况，这种情况只显示页面的遮罩层即可，否则两种loading框切换会很丑
+                            $('.netLoading').show();
+                        }
                     }
 
                     //调用ajaxFunc，发送ajax请求
@@ -327,8 +342,13 @@ var splitUrl = require('./components/splitUrl.js')();
                         //失败状态
                         console.log('失败了');
 
+                        requestCount -= 1;
+                        if (requestCount == 0){
+                            $('.netLoading').hide();
+                        }
+
                         setTimeout(function() { //过10秒钟，隐藏遮罩
-                            $("#loading").hide();
+                            $('.netLoading').hide();
                             $('.listLoading').hide();
                         }, 15000)
 
@@ -336,8 +356,12 @@ var splitUrl = require('./components/splitUrl.js')();
                     .done(function() {
                         //成功状态
                         console.log('ajax请求全部成功')
-                        $("#loading").hide(); 
-                        $('.listLoading').hide(); //数据请求成功 遮罩隐藏
+                        requestCount -= 1;
+                        if (requestCount == 0){
+                            //全部接口请求完成后将遮罩层隐藏掉
+                            $('.netLoading').hide();//数据请求成功 遮罩隐藏
+                            $('.listLoading').hide();
+                        }
                     })
             }
 
