@@ -16,6 +16,7 @@
 		height: 5.45rem;
 		background: url('/financial/static/img/privatePlacement/privateBackground.png') no-repeat;
 		.productName{
+			position: relative;
 			font-size: 0.32rem;
 			font-weight: 600;
 			color: @c005;
@@ -23,9 +24,14 @@
 			-webkit-background-clip:text;
 			-webkit-text-fill-color:transparent;
 		}
-		// .nameTip{
-		// 	color: @c005;
-		// }
+		.nameTip{
+			position: absolute;
+			right: 0;
+			top: 50%;
+			margin-top: -0.07rem;
+			font-size: 0.15rem;
+			color: @c005;
+		}
 		.introduction{
 			font-size: 0.26rem;
 			color: @c005;

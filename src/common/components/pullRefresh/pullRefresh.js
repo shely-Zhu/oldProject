@@ -100,7 +100,7 @@ require('@pathCommonJsCom/goTopMui.js');
                     var that = this;
 
                     //data为空时，显示暂无数据
-                    if( $.util.objIsEmpty(data) ){
+                    if( $.util.objIsEmpty(data) && pageCurrent == 1){
                         // 暂无数据显示
                         $('.without.noData').show();
                     }
