@@ -78,7 +78,7 @@ $(function(){
 	        $.ajaxLoading(obj);
 
 
-		},
+		}
 
 	};
 	//调用函数

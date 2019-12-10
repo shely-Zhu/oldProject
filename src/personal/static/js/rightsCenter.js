@@ -184,7 +184,7 @@ $(function(){
                 }
             }];
             $.ajaxLoading(obj);
-        },
+        }
 
     };
     rightsCenter.webinit();//页面数据初始化

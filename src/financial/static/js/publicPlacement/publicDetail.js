@@ -206,20 +206,19 @@ $(function () {
             // });
             // 定投
             mui("body").on('mdClick', ".footer .fixed_investement_btn", function (e) {
-
-                that.getUserInfo()
-                if (that.gV.tipStatus) {
-                    window.location.href = site_url.pofOrdinarySetThrow_url + '?fundCode=' + fundCode + '&fundName=' + fundName + '&type=add';
-                }
+                window.location.href = site_url.pofOrdinarySetThrow_url + '?fundCode=' + fundCode + '&fundName=' + fundName + '&type=add';
+                // that.getUserInfo()
+                // if (that.gV.tipStatus) {
+                //     window.location.href = site_url.pofOrdinarySetThrow_url + '?fundCode=' + fundCode + '&fundName=' + fundName + '&type=add';
+                // }
             });
             // 买入
             mui("body").on('mdClick', ".footer .buy_btn", function (e) {
-            
                 //that.getUserInfo()
                 window.location.href = site_url.fundTransformIn_url + '?fundCode=' + fundCode + '&fundName=' + fundName;
-                if (that.gV.tipStatus) {
-                    window.location.href = site_url.fundTransformIn_url + '?fundCode=' + fundCode + '&fundName=' + fundName;
-                }
+                // if (that.gV.tipStatus) {
+                //     window.location.href = site_url.fundTransformIn_url + '?fundCode=' + fundCode + '&fundName=' + fundName;
+                // }
             });
             //认证
             mui("body").on('mdClick', ".tips .tips-li-right", function (e) {

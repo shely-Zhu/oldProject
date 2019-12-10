@@ -265,7 +265,7 @@ $(function() {
             })
 			//点击转入跳转
 			mui("body").on('mdClick','.shiftToBtn',function(e){
-				window.location.href =  site_url.pofCashTransformIn_url;
+				window.location.href =  `${site_url.pofCashTransformIn_url}?fundName=${that.gL.fundName}&fundCode=${that.gL.fundCode}`;
 			},{
                 'htmdEvt': 'superStreasureDetail_3'
             })
