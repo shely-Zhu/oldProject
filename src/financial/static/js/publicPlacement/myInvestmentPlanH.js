@@ -42,7 +42,13 @@ $(function () {
            
         },
         events: function () {
-           
+            // 跳转详情页
+            mui("body").on("mdClick", ".investmentPlan-item", function (e) {
+                var scheduledProtocolId = $(this).data('id');
+                window.location.href = site_url.pofCastSurelyDetails_url + '?scheduledProtocolId=' + scheduledProtocolId;
+            }, {
+				htmdEvt: 'myInvestmentPlan_02'
+            });
         },
     };
     somePage.init();
