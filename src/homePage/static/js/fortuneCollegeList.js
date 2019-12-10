@@ -425,6 +425,7 @@ $(function() {
                    type:"29", //类型财富研究
                },
                 needLogin: true,
+                needLoading: false,
                 callbackDone: function(json) {
                     console.log(json.data)	
                     var jsonData = json.data.list[that.gV.current_index].list,

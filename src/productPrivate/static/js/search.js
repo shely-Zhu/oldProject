@@ -60,6 +60,7 @@ var search={
 		          	fundName: key,//产品名称	
 			    }
 			},
+			needLoading: false,
 			needDataEmpty: false,
 			needLogin:true,
 			callbackDone: function(json){

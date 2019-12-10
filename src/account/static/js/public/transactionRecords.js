@@ -145,6 +145,7 @@ $(function () {
                 url: site_url.tradeList_api,
                 data: propdata,
                 needDataEmpty: true,
+                needLoading: false,
                 callbackDone: function (json) {
                     var data;
                     if (!json.data.pageList || json.data.pageList.length == 0) { // 没有记录不展示

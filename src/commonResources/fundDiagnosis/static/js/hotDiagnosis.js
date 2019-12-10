@@ -104,6 +104,7 @@ $(function() {
                     "pageSize": 10,
 
                 },
+                needLoading: false,
                 needDataEmpty: false,
                 callbackDone: function(json) {
                     var dataList;

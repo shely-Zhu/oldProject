@@ -98,6 +98,7 @@ $(function () {
                 },
                 //async: false,
                 needDataEmpty: true,
+                needLoading: false,
                 callbackDone: function (json) {
                     console.log(json);
                     var data;
