@@ -104,6 +104,7 @@ $(function() {
 
                     //展示隐藏筛选按钮
                     if (index == 1) {
+                        //已确认
                         $('.hopper').show();
                     } else {
                         $('.hopper').hide();
