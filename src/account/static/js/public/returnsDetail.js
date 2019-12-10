@@ -44,7 +44,7 @@ $(function() {
                         url: site_url.queryIncomeList_api,
                         data: {
                             "pageCurrent": that.gV.pageCurrent, //非必须，默认为1
-                            "pageSize": 10,//非必须，默认为10
+                            "pageSize": that.gV.pageSize,//非必须，默认为10
                             "fundCode":that.gV.fundCode,//项目编号
                         },                        
                         needDataEmpty: true,

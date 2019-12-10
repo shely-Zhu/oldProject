@@ -43,7 +43,7 @@ $(function() {
                         url: url,
                         data: {
                             "pageNo": that.gV.pageCurrent, //非必须，默认为1
-                            "pageSize": 10,//非必须，默认为10
+                            "pageSize": that.gV.pageSize,//非必须，默认为10
                             "projectId":that.gV.projectId,//项目编号
                         },                        
                         needDataEmpty: true,

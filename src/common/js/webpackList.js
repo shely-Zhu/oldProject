@@ -194,6 +194,8 @@ module.exports = {
     './mine/static/js/diagnosisSearch': './src/mine/static/js/diagnosisSearch.js',
     //基金账户诊断
     './mine/static/js/fundAccountDiagnosis': './src/mine/static/js/fundAccountDiagnosis.js',
+    //基金账户诊断--提交申请
+    './mine/static/js/fundAccountDiagnosisResult': './src/mine/static/js/fundAccountDiagnosisResult.js',
 
     // 标普模型
     './personal/static/js/spAssetModel': "./src/personal/static/js/spAssetModel.js",
