@@ -4,27 +4,26 @@
 /**
 * 模板页面
 * @author 田俊国 2019-11-19
+* @author purpleZhao js补充
 * 路径中携带参数须知id为后台配置对应id，如果是一个列表。则传对应的id，因为一个articleBelong也就是归属对应多个无法区分。只需穿id即可，articleBelong传上也没事最好是只传id。
 * 如果articleBelong也就是归属只有一个。那么只需要传articleBelong即可。id为空也可以。有值传过来也可以。
 * articleBelong为后台配置该条信息对应的articleBelong
 * applyType不需要传
 */
-require('@pathIncludJs/vendor/config.js');
 
-//zepto模块--callback
-require('@pathIncludJs/vendor/zepto/callback.js');
-//zepto模块--deferred
-require('@pathIncludJs/vendor/zepto/deferred.js');
+require('@pathCommonBase/base.js');
 //黑色提示条
 //var tipAction = require('@pathCommonJs/components/tipAction.js');
 //var tipAction = require('@pathCommonJsCom/tipAction.js');
-require('@pathCommonJs/components/utils.js');
-require('@pathCommonJs/components/headBarConfig.js');
+require('@pathCommonJsCom/utils.js');
+require('@pathCommonJsCom/headBarConfig.js');
 require('@pathCommonJs/ajaxLoading.js');
 
-var splitUrl = require('@pathCommonJs/components/splitUrl.js')();
+var splitUrl = require('@pathCommonJsCom/splitUrl.js')();
 
-var playVideo = require('@pathCommonJs/components/playVideo/playVideo.js');
+var playVideo = require('@pathCommonJsCom/playVideo/playVideo.js');
+
+var playAudio = require('@pathCommonCom/audio/audio.js');
 
 
 $(function () {
@@ -77,11 +76,12 @@ $(function () {
                         that.$e.HeadBarpathName.text(resData.h5Title);
                     }
 
+                    //设置边距
                     that.$e.contentWrap.css({
-                        //                          "margin":"1rem 0 0",
-                        "padding": ".5rem .5rem 0"
+                        "padding":".5rem .5rem 0"
                     })
 
+                    //富文本内容
                     that.$e.contentWrap.html(resData.content);
 
                     that.$e.artImg.find("img").attr("src", resData.imageAttachUrl);//头部图片
@@ -94,8 +94,8 @@ $(function () {
                         that.$e.audioDisc.html(resData.voiceAttachName);
                         that.$e.audioTime.find("span").eq(1).html(resData.fileSize);
                         that.$e.aud.attr("src", resData.voiceAttachUrl);//音频路径
-
-
+                        //调用音频方法
+                        playAudio(resData.voiceAttachUrl,resData.voiceAttachName,resData.fileSize);
                     }
 
                     //如果视频路径不为空的话则显示播放按钮，给图片赋值视频地址
@@ -105,11 +105,13 @@ $(function () {
                         //
                         that.$e.videoButton.show();
 
-                        that.gV.videoExternalUrl = resData.videoExternalUrl;//视频路径
+                        //视频路径
+                        that.gV.videoExternalUrl = resData.videoExternalUrl;
                     }
                     if (resData.h5Type == "1") {//标题 h5模板类型 1图片 2文章 3产品推荐
 
-                        that.$e.contentWrap.css({//内容去边距不留白
+                        //内容去边距不留白
+                        that.$e.contentWrap.css({
 
                             "padding": "0"
                         })
@@ -121,7 +123,6 @@ $(function () {
 
 
                     }*/else if (resData.h5Type == "3") {//产品推荐
-
                         //给底部按钮加文字和跳转链接
                         that.$e.btnButton.html(resData.buttonLabel).show();
 
@@ -194,10 +195,9 @@ $(function () {
 
 
             //调用视频播放
-            mui("body").on('tap', '.artImg', function () {
-                playVideo(that.gV.videoExternalUrl, "video_wrapper");
-            })
-
+            mui("body").on('tap', '.artImg', function() {
+                playVideo(that.gV.videoExternalUrl,"video_wrapper");
+            });
         },
     };
     templatePage.init();

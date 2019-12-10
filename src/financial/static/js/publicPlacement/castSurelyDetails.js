@@ -177,7 +177,7 @@ $(function () {
           fundCombination: "",
           fundCode: that.gV.copyJson.fundCode,
           fundBusinCode: "039",
-          allotType: "",
+          allotType: "2",  //定投为2 买回0 赎回1
           Fixbusinflag: "",
         };
         window.location.href = site_url.publicTradeDetail_url + '?applyId='+obj.applyId +'&fundCombination=' + obj.fundCombination + '&fundCode=' + obj.fundCode + '&fundBusinCode=' + obj.fundBusinCode + '&allotType=' + obj.allotType + '&Fixbusinflag=' + obj.Fixbusinflag

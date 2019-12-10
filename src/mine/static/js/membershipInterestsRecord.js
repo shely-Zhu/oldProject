@@ -237,7 +237,7 @@ $(function(){
 
 	         mui("body").on('mdClick','.posioneright', function(){
 
-                    window.location.href = site_url.articleTemplate_url+ '?articleBelong=9&applyType=0';
+                    window.location.href = site_url.articleTemplate_url+ '?articleBelong=9';
                 }, {
                     'htmdEvt': 'adolesceRecord_01'
                 });
