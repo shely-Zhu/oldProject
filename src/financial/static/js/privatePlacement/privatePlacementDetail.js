@@ -123,6 +123,8 @@ $(function() {
                         that.$e.lineType = 'qrnh';
                         $("#qrnhLine").removeClass("hide");
                         $("#wfsyLine").addClass("hide");
+                        // 展示七日年化
+                        $('.netValue').html(jsonData.unitNetValue);
                         // 折线图
                         that.getTypeOneData(that.$e.lineType);
                     }
@@ -980,6 +982,28 @@ $(function() {
                 var copyText = $this.siblings('div').text()
                     //实例化clipboard
                 var clipboard = new Clipboard('.copy_btn', {
+                    text: function() {
+                        return copyText;
+                    }
+                });
+                clipboard.on("success", function(e) {
+                    //text = '';
+                    tipAction("复制成功");
+                });
+                clipboard.on("error", function(e) {
+                    tipAction("请选择“拷贝”进行复制!");
+                });
+                clipboard.onClick(event);
+
+            }, {
+                htmdEvt: 'privatePlacementDetail_03'
+            });
+            // 复制全部
+            mui("body").on('mdClick', '.copyAll', function(event) {
+                var $this = $(this);
+                var copyText = $('#name').text() + $('#number').text() + $('#linenum').text() + $('#openingBank').text();
+                    //实例化clipboard
+                var clipboard = new Clipboard('.copyAll', {
                     text: function() {
                         return copyText;
                     }
