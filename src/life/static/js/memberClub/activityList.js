@@ -194,6 +194,7 @@ $(function(){
                 // url:'http://172.16.187.164:8081/web/marketing/activity/cityList',
                 //async: false,
                 needDataEmpty: true,
+               	needLoading:true,
                 callbackDone: function(json) {
                     $('#loading').hide();
                     console.log(json);
@@ -298,8 +299,8 @@ $(function(){
             },{
                 htmdEvt: 'activityList_1'
             });
-            //点击定位选择头部返回效果
-            mui('#cityListBox').on('mdClick','.goBack',function(){
+            //点击搜索选择头部返回效果
+            mui('#activitySearch').on('mdClick','.backBtn',function(){
             	if(document.referrer == ''){
 		            var u = navigator.userAgent, 
 		                app = navigator.appVersion;
@@ -322,6 +323,11 @@ $(function(){
             },{
                 htmdEvt: 'activityList_2'
             });
+            //点击选择城市头部返回效果
+            mui('#activitySearch').on('mdClick','.goBack',function(){
+            	$('#cityListBox').hide();
+                $('#activityDataBox').show();
+            })
             //点击定位选择右侧索引效果
             mui('#cityListBox').on('mdClick','.mui-indexed-list-bar a',function(){
                 var txt=$(this).text();
