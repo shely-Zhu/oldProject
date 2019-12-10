@@ -320,7 +320,7 @@ $(function() {
             mui("body").on('mdClick', '.roomItem' , function(){
                 var id = $(this).attr("id")
                 var articleBelong = $(this).attr("articleBelong")
-                window.location.href = site_url.articleTemplate_url + '?id=' + id + '&articleBelong=' + articleBelong + '&applyType=1'
+                window.location.href = site_url.articleTemplate_url + '?id=' + id + '&articleBelong=' + articleBelong
             },{
                 'htmdEvt': 'fortune_10'
             })

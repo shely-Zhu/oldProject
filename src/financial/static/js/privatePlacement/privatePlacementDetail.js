@@ -746,50 +746,52 @@ $(function() {
                         })
 
                     });
-                    //发送ajax请求
-                    var ReourceListobj = [{
-                        url: site_url.queryReourceList_api,
-                        data: {
-                            projectId: that.$e.projectId,
-                            fileType: isPopup
-                        },
-                        contentTypeSearch: false,
-                        needLoading: true,
-                        needLogin: true, //需要判断是否登陆
-                        callbackDone: function(json) { //成功后执行的函数
-                            that.data.canClick = true; //变为可点击
-                            var data = json.data[0],
-                                noticeObj = data;
-                            if (!singleaAuthen) { //如果v.show都是0，则不展示预约框,跳转到相应链接
-                                $("#tips-wrap").hide();
-                                if (!!isPopup) { //如果弹售前告知书
-                                    var obj = {
-                                        title: '',
-                                        id: 'sellPop',
-                                        p: '<p class="" style="font-weight:bold;text-align:center">你选择的产品与您现在的风险承受能力相匹配</p>' +
-                                            '<p class="">请您认真阅读[' + noticeObj.fileName + ']' + that.data.productName + '并确认后继续购买该产品</p>',
-                                        yesTxt: '去阅读',
-                                        celTxt: '取消',
-                                        zIndex: 1200,
-                                        callback: function(t) {
-                                            window.location.href = site_url.downloadNew_api + "?filePath=" + noticeObj.fileUrl + "&fileName=" + new Base64().encode(noticeObj.fileName) + "&groupName=" +
-                                                noticeObj.groupName + "show=1 "
-                                        },
-                                    };
-                                    $.elasticLayer(obj)
-                                } else {
-                                    that.nextStep();
-                                }
-
-                            }
-                        },
-                        callbackFail: function(json) { //失败后执行的函数
-                            tipAction(json.message);
-                            that.data.canClick = true; //变为可点击
-
-                        }
-                    }];
-                    $.ajaxLoading(ReourceListobj);
+                    if(!!isPopup){//如果弹出售前告知书
+                    	
+	                    //发送ajax请求
+	                    var ReourceListobj = [{
+	                        url: site_url.queryReourceList_api,
+	                        data: {
+	                            projectId: that.$e.projectId,
+	                            fileType: isPopup
+	                        },
+	                        contentTypeSearch: false,
+	                        needLoading: true,
+	                        needLogin: true, //需要判断是否登陆
+	                        callbackDone: function(json) { //成功后执行的函数
+	                            that.data.canClick = true; //变为可点击
+	                            var data = json.data[0],
+	                                noticeObj = data;
+	                            if (!singleaAuthen) { //如果v.show都是0，则不展示预约框,跳转到相应链接
+	                                $("#tips-wrap").hide();
+	                                    var obj = {
+	                                        title: '',
+	                                        id: 'sellPop',
+	                                        p: '<p class="" style="font-weight:bold;text-align:center">你选择的产品与您现在的风险承受能力相匹配</p>' +
+	                                            '<p class="">请您认真阅读[' + noticeObj.fileName + ']' + that.data.productName + '并确认后继续购买该产品</p>',
+	                                        yesTxt: '去阅读',
+	                                        celTxt: '取消',
+	                                        zIndex: 1200,
+	                                        callback: function(t) {
+	                                            window.location.href = site_url.downloadNew_api + "?filePath=" + noticeObj.fileUrl + "&fileName=" + new Base64().encode(noticeObj.fileName) + "&groupName=" +
+	                                                noticeObj.groupName + "show=1 "
+	                                        },
+	                                    };
+	                                    $.elasticLayer(obj)
+	
+	                            }
+	                        },
+	                        callbackFail: function(json) { //失败后执行的函数
+	                            tipAction(json.message);
+	                            that.data.canClick = true; //变为可点击
+	
+	                        }
+	                    }];
+	                    $.ajaxLoading(ReourceListobj);
+                    }else{//如果不弹
+                    	
+                    	that.nextStep();
+                    }
 
 
                 },

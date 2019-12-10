@@ -135,18 +135,18 @@ $(function() {
         },
         // getData: function(t) {
         //     var that = this;
+            var obj = [{ //
+                url: site_url.getPrizeInfo_api,
+                data: {
+                    "pageNum": that.gV.pageCurrent,
+                    "pageSize": that.gV.pageSize
+                },
+                //async: false,
+                contentTypeSearch: true, //
+                needDataEmpty: true,
+                callbackDone: function(json) {
+                    var data;
 
-        //     var obj = [{ // 月度报告列表
-        //         url: site_url.getPrizeInfo_api,
-        //         data: {
-        //             "pageNum": that.gV.pageCurrent,
-        //             "pageSize": that.gV.pageSize
-        //         },
-        //         //async: false,
-        //         contentTypeSearch: true, //
-        //         needDataEmpty: true,
-        //         callbackDone: function(json) {
-        //             var data;
 
         //             //console.log(JSON.stringify(json.data.list.length));
 

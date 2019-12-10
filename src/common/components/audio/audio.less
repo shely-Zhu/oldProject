@@ -1,0 +1,57 @@
+/*
+<!--
+*音频组件less
+*purpleZhao   2019-12-04
+*使用说明：
+*1，页面引入音频组件html————————————@@include('@pathCommonCom/audio/audio.html')
+*2，less文件引入音频组件less————————@import url("@pathCommonCom/audio/audio.less");
+*3，在对应的页面js中设置————————————var playAudio = require('@pathCommonCom/audio/audio.js');
+*4，在页面js中调用音频播放组件js方法——————————playAudio(url,title,size);
+*5，url:音频地址;title:音频对应的tile;size:音频的体积;
+**/
+
+
+.audioArea{
+    display:none;
+    margin:0.3rem 0.3rem 0.15rem;
+    .audioPlay{
+        padding:0.2rem 0.3rem;
+
+        .audiocont{
+           /*  float:left; */
+        }
+        .audioTxt{
+            /* float:left; */
+            overflow:hidden;
+            margin-left: 0.2rem;
+
+        }
+
+        .audioDisc{
+            /* width:0; */
+            margin-bottom:0.11rem;
+            color:@333;
+
+        }
+        .audioTime{
+            span{
+                display:inline-block;
+                margin-right:0.2rem;
+                color:@9B9B9B;
+            }
+        }
+    }
+    .autoTips{
+        font-size:0.24rem;
+        color:@9B9B9B;
+        text-align: center;
+    }
+}
+.playIcon{
+    font-size:0.7rem;
+    background:linear-gradient(139deg,rgba(251,226,189,1) 0%,rgba(246,194,134,1) 100%);
+    background-clip: text;
+    -webkit-background-clip: text;
+    text-fill-color: transparent;
+    -webkit-text-fill-color: transparent;
+}
