@@ -103,7 +103,7 @@ $(function () {
 				callbackDone: function (json) {
 					if (json.status == '0000') {
 						var data = json.data;
-						$("#loading").hide()
+						$(".listLoading").hide()
 						that.$el.fundName.html(data.secuSht)
 						that.$el.fundCode.html(data.trdCode)
 						that.$el.payConfirmDate.html(data.fundConfirmDate)
@@ -154,19 +154,19 @@ $(function () {
 						// 将列表插入到页面上
 						var data = [] ;
 						data = json.data.pageList;
-						console.log('data',data)
 						data.forEach(function(element){
 							element.after4Num = element.bankAccountMask.substr(element.bankAccountMask.length -4)
 							element.singleNum_w = Number(element.singleNum)/10000 + '万'
 							element.oneDayNum_w = Number(element.oneDayNum)/10000 + '万'
 						});
 						generateTemplate(data, that.$el.popupUl, that.$el.bankListTemplate,true);
-						$("#loading").hide()
-						$('.popup').css('display','block')
+						that.$el.popupUl2.html('')
 						if(useEnv == '0'){
 							that.getTransferFunds()
 							that.$el.popupTitle.html('选择在线支付银行卡')
 						}else{
+							$(".listLoading").hide()
+						    $('.popup').css('display','block')
 							that.$el.popupTitle.html('选择汇款支付银行卡')
 						}
 					}
@@ -196,11 +196,13 @@ $(function () {
 					if(json.status == '0000'){
 						// 将列表插入到页面上
 						var data = [] ;
-						data = json.data.pageList;
+						data = json.data;
 						console.log('data',data)
 						data.forEach(function(element){
-							element.after4Num = element.bankAccoutEncrypt.substr(element.bankAccoutEncrypt.length -4)
+							element.after4Num = element.bankAccout.substr(element.bankAccout.length -4)
 						});
+						$(".listLoading").hide()
+						$('.popup').css('display','block')
 						generateTemplate(data, that.$el.popupUl2, that.$el.bankListTemplate2,true);
 						
 					}
@@ -397,7 +399,7 @@ $(function () {
 					}
 				}
 				var useEnv = $(this).attr('pay-type')
-				$("#loading").show()
+				$(".listLoading").show()
 				that.getBankCard(useEnv)
 			}, {
 				htmdEvt: 'fundTransformIn_01'
@@ -449,7 +451,7 @@ $(function () {
 				that.gV.tradeAcco = $(this).attr('tradeAcco');
 				that.gV.capitalMode = $(this).attr('capitalMode')
 				var after4Num =  $(this).attr('after4Num')
-				var data = []
+				var data = [];
 				if(that.gV.fundOrBank == '1'){
 					that.gV.bankAccountSecret = $(this).attr('bankAccountSecret');
 					that.gV.singleNum = $(this).attr('singleNum')
@@ -482,7 +484,6 @@ $(function () {
 						generateTemplate(data, that.$el.onlinepay, that.$el.bankListCheckTemplate,true);
 						
 					}else{
-						// ......未完待续
 						generateTemplate(data, that.$el.onlinepay, that.$el.fundListCheckTemplate,true);
 					}
 					that.$el.onlinepay.parent().find(".imgc").show();
@@ -535,12 +536,18 @@ $(function () {
 					}
 				}
 				if(!!that.gV.bankAccountSecret){
-					if(Number(that.gV.balance) > Number(that.gV.singleNum)){
-						tipAction('单笔金额不能超过' + that.gV.singleNum + '元')
-						return
+					if(that.gV.fundOrBank == '2'){
+						if(Number(that.gV.balance) > Number(that.gV.enableAmount)){
+							tipAction('单笔金额不能超过' + that.gV.enableAmount + '元')
+							return
+						}
+					}else{
+						if(Number(that.gV.balance) > Number(that.gV.singleNum)){
+							tipAction('单笔金额不能超过' + that.gV.singleNum + '元')
+							return
+						}
 					}
 					that.checkPayType()
-					
 				}else{
 					//未选择银行卡提示信息
 					tipAction("请选择银行卡！");
