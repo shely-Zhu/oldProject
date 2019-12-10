@@ -90,7 +90,7 @@ $(function () {
 						
 					}
                   
-                },
+                }
 
             }];
             $.ajaxLoading(obj);
@@ -123,7 +123,7 @@ $(function () {
 						$('.popup').css('display','block')
 					}
                   
-                },
+                }
 
             }];
             $.ajaxLoading(obj);
@@ -446,7 +446,7 @@ $(function () {
 				htmdEvt: 'cashTransformIn_16'
 			}) ;
 
-		},
+		}
 
 
 

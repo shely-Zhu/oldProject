@@ -58,7 +58,7 @@ $(function(){
 //          $('#loading').show();
             that.data.fileName = splitUrl['ecFileName'];
             that.data.fileUrl = splitUrl['ecFileUrl'];
-            var url = site_url.downloadFile_api+'?name='+new Base64().encode(that.data.fileName)+"?show=1&url="+that.data.fileUrl;
+            var url = site_url.downloadFile_api+'?name='+new Base64().encode(that.data.fileName)+"&show=0&url="+that.data.fileUrl;
             // 将pdf流转为canvas
             var pdfjsLib = window['pdfjs-dist/build/pdf'];
             // The workerSrc property shall be specified.

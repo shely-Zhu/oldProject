@@ -327,7 +327,7 @@ $(function () {
 	                $('.bankNo').html(json.data.bankNo);
 	                $('.bankAccountName').html(json.data.bankAccountName);
 
-	            },
+	            }
 	        }];
 	        $.ajaxLoading(obj);
         },
@@ -402,7 +402,7 @@ $(function () {
                         window.location.reload()
                     }, 2000);
                     
-	            },
+	            }
 	        }];
 	        $.ajaxLoading(obj);
         }

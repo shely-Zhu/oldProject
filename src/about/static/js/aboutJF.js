@@ -77,13 +77,13 @@ $(function(){
                         $("#title").html(result.title);//标题
                         $("#appaboutht").html(result.content);//富文本内容
                         
-                    },
+                    }
                     
                 }];
                 $.ajaxLoading(obj);
 
             
-        },
+        }
 
     }
     //调用

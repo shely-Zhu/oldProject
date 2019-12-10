@@ -46,7 +46,7 @@ $(function(){
         },
         events() {
             var that = this;
-        },
+        }
 	};
 	templatePage.init();
 });
