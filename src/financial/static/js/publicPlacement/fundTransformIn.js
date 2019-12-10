@@ -30,6 +30,7 @@ $(function () {
 			onlinepay: $('.onlinepay .onright-left'), // 在线支付银行卡模板容器
 			remittance: $('.remittance .onright-left'), // 汇款支付银行卡模板容器
 			bankListCheckTemplate: $('#bankListCheck-template'), //选中银行卡模板
+			fundListCheckTemplate: $('#fundListCheck-template'), //选中基金支付模板
 			iconCheck: $(".item2 .iconfont"), //同意协议选择框
 			contract: $(".file .contract"), //同意协议选择框
 			recruiting: $(".file .recruiting"), //同意协议选择框
@@ -454,10 +455,11 @@ $(function () {
 				if(that.gV.payType == '0'){
 					if(that.gV.fundOrBank == '1'){
 						generateTemplate(data, that.$el.onlinepay, that.$el.bankListCheckTemplate,true);
+						
 					}else{
 						// ......未完待续
+						generateTemplate(data, that.$el.onlinepay, that.$el.fundListCheckTemplate,true);
 					}
-					
 					that.$el.onlinepay.parent().find(".imgc").show();
 					that.$el.onlinepay.parent().find(".iimg").hide();
 					that.$el.remittance.html('')
@@ -495,13 +497,17 @@ $(function () {
 			//确定
 			mui("body").on('mdClick','.btn_box .btn',function(){
 				$("#transformInput").blur()
-				if(Number(that.gV.balance) < Number(that.gV.minValue)){
-					tipAction('最小买入金额不能低于' + that.gV.minValue + '元')
-					return
+				if(!!that.gV.minValue){
+					if(Number(that.gV.balance) < Number(that.gV.minValue)){
+						tipAction('最小买入金额不能低于' + that.gV.minValue + '元')
+						return
+					}
 				}
-				if(Number(that.gV.balance) > Number(that.gV.maxValue)){
-					tipAction('最大买入金额不能超过' + that.gV.maxValue + '元')
-					return
+				if(!!that.gV.maxValue){
+					if(Number(that.gV.balance) > Number(that.gV.maxValue)){
+						tipAction('最大买入金额不能超过' + that.gV.maxValue + '元')
+						return
+					}
 				}
 				if(!!that.gV.bankAccountSecret){
 					if(Number(that.gV.balance) > Number(that.gV.singleNum)){

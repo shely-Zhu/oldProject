@@ -300,7 +300,7 @@ $(function() {
         },
         drawCircle() {
             var that = this;
-            var pieChart = echarts.init($('#allocation-pie'));
+            var pieChart = echarts.init(document.getElementById('allocation-pie'));
             var optionData = []
             var pieData = that.gV.pie.pieData
             pieData.forEach(n => {

@@ -19,7 +19,7 @@ $(function() {
         },
         gV: { // 全局变量
             pageCurrent: 1, //当前页码，默认为1
-            pageSize: 10,
+            pageSize: 15,
             listLength: 0,
             fundCode: splitUrl['fundCode'],
         },
@@ -44,6 +44,7 @@ $(function() {
                 wrapper: $('.list'),
                 class: 'listItem',
                 template: that.$e.adjustmentTemp, 
+                pageSize: that.gV.pageSize,
                 callback: function(def, t){
                     var obj = [{
                         url: site_url.fundNetWorthList_api,

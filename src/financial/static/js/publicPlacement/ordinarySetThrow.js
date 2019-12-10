@@ -505,7 +505,7 @@ $(function () {
 					balance:that.gV.balance,
 					capitalMode:that.gV.capitalMode,
 					// protocolFixDay:that.gV.dayInMonth,
-					protocolFixDay:that.gV.tradePeriod == '2' ? that.gV.dayInWeek : that.gV.dayInMonth,
+					protocolFixDay:that.gV.protocolPeriodUnit == '1' ? that.gV.dayInWeek : that.gV.dayInMonth,
 					protocolPeriodUnit:that.gV.protocolPeriodUnit,
 					nextFixrequestDate:that.gV.nextFixrequestDate,
 					firstExchdate:that.gV.nextDeductingDayFromate,
@@ -902,14 +902,19 @@ $(function () {
 			//确定
 			mui("body").on("mdClick",'.btn_box .btn',function(){
 				$("#transformInput").blur()
-				if(Number(that.gV.balance) < Number(that.gV.minValue)){
-					tipAction('最小买入金额不能低于' + that.gV.minValue + '元')
-					return
+				if(!!that.gV.minValue){
+					if(Number(that.gV.balance) < Number(that.gV.minValue)){
+						tipAction('最小买入金额不能低于' + that.gV.minValue + '元')
+						return
+					}
 				}
-				if(Number(that.gV.balance) > Number(that.gV.maxValue)){
-					tipAction('最大买入金额不能超过' + that.gV.maxValue + '元')
-					return
+				if(!!that.gV.maxValue){
+					if(Number(that.gV.balance) > Number(that.gV.maxValue)){
+						tipAction('最大买入金额不能超过' + that.gV.maxValue + '元')
+						return
+					}
 				}
+				
 				if(!!that.gV.bankAccountSecret){
 					if(Number(that.gV.balance) > Number(that.gV.singleNum)){
 						tipAction('单笔金额不能超过' + that.gV.singleNum + '元')
