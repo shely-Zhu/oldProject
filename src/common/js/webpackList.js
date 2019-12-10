@@ -256,8 +256,6 @@ module.exports = {
     './life/static/js/memberClub/activityDetails': "./src/life/static/js/memberClub/activityDetails.js",
     //文件上传
     // './mine/static/js/uploadMaterial': './src/mine/static/js/uploadMaterial.js',
-    //明星理财师-理财师列表
-    './starFinancialPlanner/static/js/starFinancialPlannerList': "./src/starFinancialPlanner/static/js/starFinancialPlannerList.js",
 
     //历史明细
     './account/static/js/historyDetail': "./src/account/static/js/historyDetail.js",
@@ -291,7 +289,7 @@ module.exports = {
     './homePage/static/js/noticeDetail': './src/homePage/static/js/noticeDetail.js',
     //include---富文本模板
     './include/js/modelPage/articleTemplate': './src/include/js/modelPage/articleTemplate.js',
-    './include/js/modelPage/audio': './src/include/js/modelPage/audio.js',
+    // './include/js/modelPage/audio': './src/include/js/modelPage/audio.js',
     // 了解恒天
     './homePage/static/js/understandHT': './src/homePage/static/js/understandHT.js',
     // 财富学院
