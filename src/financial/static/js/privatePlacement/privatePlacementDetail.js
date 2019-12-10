@@ -1018,8 +1018,14 @@ $(function() {
                 clipboard.onClick(event);
 
             }, {
-                htmdEvt: 'privatePlacementDetail_03'
+                htmdEvt: 'privatePlacementDetail_04'
             });
+            // 历史明细点击跳转
+            mui("body").on('mdClick', '#historyDetailBtn', function() {
+                window.location.href = site_url.historyDetail_url + '?projectId=' + that.$e.projectId;
+            }, {
+                'htmdEvt': 'privateDetail_05'
+            })
 
             // 立即预约
             mui("body").on('mdClick', '.buyButton', function() {
@@ -1047,7 +1053,7 @@ $(function() {
                 }
                 that.data.canClick = false;
             }, {
-                htmdEvt: 'privatePlacementDetail_04'
+                htmdEvt: 'privatePlacementDetail_06'
             });
         }
     };
