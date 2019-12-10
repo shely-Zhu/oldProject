@@ -55,6 +55,7 @@ var prvRec = {
                 data: {
                 },
                 needDataEmpty: false,
+                needLoading: false,
                 callbackDone: function(data) {
                     var jsonData = data.data;
                     if (jsonData.idnoCheckflag == "1") { //是否实名认证

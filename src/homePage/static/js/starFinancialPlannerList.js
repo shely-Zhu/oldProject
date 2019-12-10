@@ -96,6 +96,7 @@ $(function(){
                 },
                 //async: false,
                 needDataEmpty: true,
+                needLoading: false,
                 callbackDone: function(json) {
                     console.log('我是内容',json);
                     var data=json.data.financialerList;
