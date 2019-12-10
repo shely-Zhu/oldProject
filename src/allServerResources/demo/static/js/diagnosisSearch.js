@@ -259,7 +259,7 @@ $(function() {
                 }
                 
             });
-        },
+        }
     };
     hotDiagnosis.init();
 });

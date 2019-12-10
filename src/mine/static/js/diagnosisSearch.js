@@ -261,7 +261,7 @@ $(function() {
             },{
                 'htmdEvt': 'diagnosisSearch_02'
             });
-        },
+        }
     };
     hotDiagnosis.init();
 });

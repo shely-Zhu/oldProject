@@ -308,7 +308,7 @@ $(function() {
             },{
                 'htmdEvt': 'diagnosisDetail_03'
             })
-        },
+        }
     };
     hotDiagnosis.init();
 });

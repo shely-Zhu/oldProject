@@ -110,7 +110,7 @@ $(function() {
 			    		that.getDurationPopProduct();
 			    	}
 
-			    },
+			    }
 			}];
 			$.ajaxLoading(obj);
 
@@ -131,7 +131,7 @@ $(function() {
 
 			    
 
-			    },
+			    }
 			}];
 			$.ajaxLoading(obj);
 
@@ -163,7 +163,7 @@ $(function() {
 
 			       	that.drawLine();
 			       	
-			    },
+			    }
 			}];
 			$.ajaxLoading(obj);
 		},
@@ -387,7 +387,7 @@ $(function() {
             },{
                 'htmdEvt': 'cashTreasure_2'
             })
-		},
+		}
 
 
 
