@@ -47,7 +47,7 @@ $(function() {
                         url: site_url.dealDetailList_api,
                         data: { 
                             "pageNo": that.gV.pageCurrent, //非必须，默认为1
-                            "pageSize": "10",//非必须，默认为10
+                            "pageSize": that.gV.pageSize,//非必须，默认为10
                             "projectId": that.gV.projectId,//项目id
                         },                        
                         needDataEmpty: true,
@@ -55,8 +55,59 @@ $(function() {
                             var data = json.data.pageList;
                             if(that.gV.pageCurrent == 1 && data.length == 0) {
                                 $(".list").css("display", "none")
-                            } else {
+                                } else {
+                                    var len = json.data.pageList;
+                                for(var i =0;i<len.length;i++){
+                                    if(len[i].redemptionType == 0&&len[i].tradeType == 2){
+                                        len[i].redemptionType = "普通赎回"                              
+                                    }else if(len[i].redemptionType == 1&&len[i].tradeType == 2){
+                                        len[i].redemptionType = "快速赎回"
+                                    }
+                                }
+                                for(var i =0;i<len.length;i++){
+                                    if(len[i].tradeType == "2"){
+                                        len[i].tradeType = "赎回"
+                                    }else if(len[i].tradeType == "1"){                               
+                                        len[i].tradeType = "申购"
+                                    }else if(len[i].tradeType == "0"){
+                                        len[i].tradeType = "认购"
+                                    }
+                                }
                                 def && def.resolve( data, that.gV.pageCurrent);
+                                if(that.gV.pageCurrent == 1){
+                                    for(var i =0;i<len.length;i++){
+                                        if(len[i].tradeType == "赎回"){
+                                            $(".photoleft").eq(i).addClass("test")
+                                        }else if(len[i].tradeType == "申购"){                               
+                                            $(".photoleft").eq(i).addClass("testone")
+                                        }else if(len[i].tradeType == "认购"){
+                                            $(".photoleft").eq(i).addClass("testoneo")
+            
+                                        }
+                                    }
+                                }else{
+                                    for(var i =0;i<len.length;i++){
+                                        if(len[i].tradeType == "赎回"){
+                                            $(".photoleft").eq(i+15*that.gV.pageCurrent-15).addClass("test")
+                                        }else if(len[i].tradeType == "申购"){                               
+                                            $(".photoleft").eq(i+15*that.gV.pageCurrent-15).addClass("testone")
+                                        }else if(len[i].tradeType == "认购"){
+                                            $(".photoleft").eq(i+15*that.gV.pageCurrent-15).addClass("testoneo")
+            
+                                        }
+                                    }
+                                }
+                                for(var i =0;i<len.length;i++){
+                                    if(len[i].redemptionType == 0&&len[i].tradeType == 2){
+                                        len[i].redemptionType = "普通赎回"
+                                        
+                                    }else if(len[i].redemptionType == 1&&len[i].tradeType == 2){
+                                        len[i].redemptionType = "快速赎回"
+
+                                    }else if(len[i].redemptionType == ""){
+                                        $(".rightUl").eq(i).css("display","none")
+                                    }
+                                }
                                 that.gV.pageCurrent++;
                             }
                         },

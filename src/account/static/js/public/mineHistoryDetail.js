@@ -40,7 +40,8 @@ $(function() {
             $.pullRefresh({
                 wrapper: $('.list'),
                 class: 'listItem',
-                template: that.$e.adjustmentTemp, 
+                template: that.$e.adjustmentTemp,
+                pageSize: that.gV.pageSize,
                 callback: function(def, t){
                     var obj = [{
                         url: site_url.fundNetWorthList_api,

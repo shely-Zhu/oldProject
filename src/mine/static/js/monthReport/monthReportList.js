@@ -34,8 +34,8 @@ $(function() {
 		},
 		init: function() {
 			var that = this;
-			//that.initMui();
-			that.getUserInfo();
+			that.initMui();
+			//that.getUserInfo();
 			that.events();
 		},
 		getUserInfo:function(){
@@ -92,6 +92,8 @@ $(function() {
                                 $(".list").css("display", "none")
                             } else {
                                 def && def.resolve( data, that.gV.pageCurrent);
+                                // 第一个调仓记录默认展开
+                                $('.list').find('ul').eq(0).find('.mui-collapse').addClass('mui-active');
                                 that.gV.pageCurrent++;
                             }
                         },

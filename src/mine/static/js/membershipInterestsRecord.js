@@ -61,7 +61,7 @@ $(function(){
                         url: site_url.queryGrowthDetailList_api, //成长值流水
                         data: {
                             "pageNo": that.gV.pageNo,
-                            "pageSize": 10,
+                            "pageSize": that.gV.pageSize,
                         },                        
                         needDataEmpty: false,
                         callbackDone: function(json) {     

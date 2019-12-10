@@ -65,7 +65,7 @@ $(function() {
                         url: site_url.noticeAndTransDynamicList_api,
                         data: {
                             "pageNo": that.gV.pageCurrent, //非必须，默认为1
-                            "pageSize": "10", //非必须，默认为10
+                            "pageSize": that.gV.pageSize, //非必须，默认为10
                             "mesType": that.gV.mesType
                         },                        
                         needDataEmpty: true,
