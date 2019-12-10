@@ -116,7 +116,7 @@ $(function() {
                     "pageNum": that.gV.aP.pageNum, //非必须，默认为1
                     "pageSize": "10", //非必须，默认为10
                     "isConfirm": that.gV.type,
-                    "businessType": that.gV.businessType,
+                    "confirmType": that.gV.businessType,
                 },
                 callbackDone: function(json) {
                     var data;
