@@ -55,6 +55,7 @@ $(function() {
                             var data = json.data.pageList;
                             if(that.gV.pageCurrent == 1 && data.length == 0) {
                                 $(".list").css("display", "none")
+                                that.$e.noData.show()
                                 } else {
                                     var len = json.data.pageList;
                                 for(var i =0;i<len.length;i++){

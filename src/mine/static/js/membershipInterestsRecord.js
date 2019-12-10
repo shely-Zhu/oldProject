@@ -68,6 +68,7 @@ $(function(){
                             var data = json.data.pageList;
                             if(that.gV.pageNo == 1 && data.length == 0) {
                                 $(".li").css("display", "none")
+                                that.$e.noData.show()
                             } else {
                                 def && def.resolve( data, that.gV.pageNo);
                                 that.gV.pageNo++;
