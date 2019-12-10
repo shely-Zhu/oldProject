@@ -317,9 +317,6 @@ module.exports = {
     './account/static/js/public/superStreasureDetail': './src/account/static/js/public/superStreasureDetail.js',
     // 自选公募--超宝详情--内容
     './account/static/js/public/superContent': './src/account/static/js/public/superContent.js',
-    // 现金宝详情页
-
-    './account/static/js/public/cashTreasure': './src/account/static/js/public/cashTreasure.js',
     // 基金确认书
     './account/static/js/private/privateFundPdf': './src/account/static/js/private/privateFundPdf.js',
 
