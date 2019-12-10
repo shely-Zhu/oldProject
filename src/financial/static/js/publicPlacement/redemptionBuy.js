@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2019-11-26 14:42:56
- * @LastEditTime: 2019-12-09 14:39:21
+ * @LastEditTime: 2019-12-10 09:55:07
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \htjf-app\src\financial\static\js\publicPlacement\redemptionBuy.js
@@ -67,14 +67,10 @@ $(function() {
             // that.gv.targetfundcode = that.gv.dataList.fundCode;
            //  that.gv.dataList = 
             //
-            //that.getData();
             that.initParmes();
             that.events();
             that.initHtml();
            that.initQueryTransferFunds();
-        },
-        getData:function(){
-           
         },
         initHtml:function(){
             var that = this;
@@ -134,7 +130,8 @@ $(function() {
                      // 将列表插入到页面上
                      for(var i = 0;i<that.gv.transferFunds.length;i++){
                           var code = that.gv.transferFunds[i].fundCode;
-                          var Redata = that.searchNewfundDetails(code)
+                          var Redata = that.searchNewfundDetails(code);
+                          that.gv.transferFunds[i].annYldRat = Redata;
                      }
                      generateTemplate(that.gv.transferFunds, that.getElements.TransferFundsContent, that.getElements.templateTransferFunds);
                 }
@@ -145,18 +142,22 @@ $(function() {
         //查询基金七日年化
         searchNewfundDetails: function(code){
             var that = this;
+            var callbackData;
             var obj = [{
                 url:site_url.newFundDetails_api,
                 needDataEmpty:true,
+                async: false ,
                 data:{
                     fundCode:code
                 },
                 callbackDone:function(json){
-                    return json
-                }
+                    callbackData = json.data.annYldRat
+                },
+                
     
             }];
             $.ajaxLoading(obj);
+            return callbackData
         },
         //赎回确认
         cancelOrder:function(password){
