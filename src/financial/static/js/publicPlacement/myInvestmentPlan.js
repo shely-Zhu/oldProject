@@ -135,7 +135,7 @@ $(function () {
                                 data[i].fixStateStr = "进行中"
                                 data[i].show = true
                             } else if (data[i].fixState == 'H') {
-                                data[i].fixStateStr = "终止"
+                                data[i].fixStateStr = "已终止"
                                 data[i].show = false
                                 that.gV.fixStateNum ++
                                 that.gV.stopPlanList.push(data[i])

@@ -300,7 +300,12 @@ $(function () {
                     manageList:manageList 
                 },
                 callbackDone: function (json) {
-                    tipAction(json.message);
+                    if(prams.collected == '1'){
+                        tipAction('添加自选成功');
+                    }else{
+                        tipAction('删除自选成功');
+                    }
+                    
                 },
                 callbackFail: function (json) {
                     tipAction(json.message);
