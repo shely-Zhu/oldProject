@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2019-12-09 15:48:30
- * @LastEditTime: 2019-12-10 12:13:41
+ * @LastEditTime: 2019-12-10 17:33:08
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \htjf-app\src\mine\views\fundDiagnosis\fundAccountDiagnosisResult.html
@@ -11,7 +11,7 @@
  
  <head>
      @@include('@pathInclude/views/meta.html')
-     <link rel="stylesheet" href="/mine/static/css/fundAccountDiagnosisResult.css">
+     <link rel="stylesheet" href="/mine/static/css/addAccountDiagnosisResult.css">
      <title>基金账户诊断_提交申请</title>
  </head>
  
@@ -24,22 +24,30 @@
              </div>
              <div class="fund-allocation content-item">
                 <ul class="mui-table-view">
-                    <li class="mui-table-view-cell"><span class="left">基金代码</span><span class="right"> <input type="text" class="mui-input-clear" placeholder="请输入用户名"></span></li>
-                    <li class="mui-table-view-cell"><span class="left">购买日期</span><span class="right"> <input type="text" class="mui-input-clear" placeholder="请输入用户名"></span></li>
-                    <li class="mui-table-view-cell"><span class="left">购买金额</span><span class="right"> <input type="text" class="mui-input-clear" placeholder="请输入用户名"></span></li>
+                    <li class="mui-table-view-cell"><span class="left">基金代码</span><span class="right"> <input type="text" class="mui-input-clear fundCode_input" placeholder="请输入基金代码"></span></li>
+                    <li class="mui-table-view-cell"><span class="left">购买日期</span> <span class="mui-icon mui-icon-arrowright"></span><span class="right dataPick"></span></li>
+                    <li class="mui-table-view-cell"><span class="left">购买金额</span><span class="right"> <input type="text" class="mui-input-clear money_input" placeholder="请输入用户名"></span></li>
                 </ul>
-
+                <div class="warmMessage">基金代码,购买日期,购买金额不能为空</div>
                 <div class="comfirmButtom mt20">
                     <button class="mui-btn mui-btn-warning">确认添加</button>
                 </div>
                 
              </div>
          </div>
+         <div class="popup" style="display:none">
+                <div class="popup-content">
+                    <div class="mui-content">
+                        <div class="mui-content-padded">
+                        </div>
+                    </div>
+                </div>
+        </div>
      </section>
     
      @@include('@pathInclude/views/footer.html')
 
-     <script src="/mine/static/js/fundAccountDiagnosisResult.js"></script>
+     <script src="/mine/static/js/addAccountDiagnosisResult.js"></script>
  </body>
  
  </html>

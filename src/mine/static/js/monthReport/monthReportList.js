@@ -90,6 +90,7 @@ $(function() {
                             var data = json.data;
                             if(that.gV.pageCurrent == 1 && data.length == 0) {
                                 $(".list").css("display", "none")
+                                that.$e.noData.show()
                             } else {
                                 def && def.resolve( data, that.gV.pageCurrent);
                                 // 第一个调仓记录默认展开

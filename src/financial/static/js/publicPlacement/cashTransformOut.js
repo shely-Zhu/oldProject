@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2019-11-26 14:42:56
- * @LastEditTime: 2019-12-09 14:46:11
+ * @LastEditTime: 2019-12-10 14:30:45
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \htjf-app\src\financial\static\js\publicPlacement\cashTransformOut.js
@@ -69,6 +69,7 @@ $(function () {
 			el_productName:$("#transformProductName"), //产品名称元素
 			el_transformInput:$(".transformInput"), //转出金额
 			el_transformRule:$(".transformRule"), //转出规则
+			el_transformRule_icon:$(".explain .left .iconfont"), //转出到账时间提示
 			el_agreementRule:$(".agreementRule"), // 转出协议规则
 			iconCheck: $(".item2 .iconfont"), //同意协议选择框
 			confirmBtn:$(".confirmeDemptionPay"), // 确定按钮
@@ -120,6 +121,8 @@ $(function () {
 		   that.$e.el_transformInput.val(that.gv.transformMoney);
 		   that.$e.el_transformRule[0].textContent = that.gv.ruleList[2].title;
 		   that.$e.el_transformRule.attr("ruleId",that.gv.ruleList[2].id);
+		   that.$e.el_transformRule_icon.attr("ruleId",that.gv.ruleList[2].id);
+
 		   that.$e.el_agreementRule[0].textContent = that.gv.ruleList[1].title;
 		   that.$e.el_agreementRule.attr('ruleId',that.gv.ruleList[1].id);
 		  
@@ -335,6 +338,13 @@ $(function () {
 			
 			//点击转出规则
 			mui('body').on('tap','.explain .transformRule',function(){
+				that.gv.ruleId = $(this).attr("ruleId");
+				var id = $(this).attr("ruleId");
+				//that.findProtocolContentRule(id);
+				window.location.href = site_url.agreementModel_url + '?id='+id+ '&financial=true'
+			}) 
+			//点击转出到账时间
+			mui('body').on('tap','.explain .left .iconfont',function(){
 				that.gv.ruleId = $(this).attr("ruleId");
 				var id = $(this).attr("ruleId");
 				//that.findProtocolContentRule(id);
