@@ -497,13 +497,17 @@ $(function () {
 			//确定
 			mui("body").on('mdClick','.btn_box .btn',function(){
 				$("#transformInput").blur()
-				if(Number(that.gV.balance) < Number(that.gV.minValue)){
-					tipAction('最小买入金额不能低于' + that.gV.minValue + '元')
-					return
+				if(!!that.gV.minValue){
+					if(Number(that.gV.balance) < Number(that.gV.minValue)){
+						tipAction('最小买入金额不能低于' + that.gV.minValue + '元')
+						return
+					}
 				}
-				if(Number(that.gV.balance) > Number(that.gV.maxValue)){
-					tipAction('最大买入金额不能超过' + that.gV.maxValue + '元')
-					return
+				if(!!that.gV.maxValue){
+					if(Number(that.gV.balance) > Number(that.gV.maxValue)){
+						tipAction('最大买入金额不能超过' + that.gV.maxValue + '元')
+						return
+					}
 				}
 				if(!!that.gV.bankAccountSecret){
 					if(Number(that.gV.balance) > Number(that.gV.singleNum)){

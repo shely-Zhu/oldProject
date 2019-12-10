@@ -241,7 +241,10 @@ var pathList = {
 	"/account/views/private/transactionRules.html" :{ evtid: '', topic: '私募交易规则', info: ''} ,
 
 	"/account/views/public/cashTreasure.html" :{ evtid: '', topic: '现金宝的详情的页面', info: ''} ,
+	"/account/views/public/mineHistoryDetail.html" :{ evtid: '', topic: '我的资产_历史明细', info: ''} ,
 	"/account/views/public/optionalPublicDetail.html" :{ evtid: '', topic: '自选公募产品详情页', info: ''} ,
+	"/account/views/public/otherFundHistoryDetail.html" :{ evtid: '', topic: '其他资产-历史明细', info: ''} ,
+	"/account/views/public/returnsDetail.html" :{ evtid: '', topic: '收益明细', info: ''} ,
 	"/account/views/public/superContent.html" :{ evtid: '', topic: '自选公募-超宝详情', info: ''} ,
 	"/account/views/public/superRecord.html" :{ evtid: '', topic: '超宝基金产品-交易记录', info: ''} ,
 	"/account/views/public/superStreasureDetail.html" :{ evtid: '', topic: '自选公募-超宝详情', info: ''} ,

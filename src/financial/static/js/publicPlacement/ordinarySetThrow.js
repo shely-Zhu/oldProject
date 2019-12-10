@@ -66,8 +66,8 @@ $(function () {
 			expiryDate:'', //终止日期
 
 			//公用
-			minValue:null,  // 起投金额
-			maxValue:null,  //最大金额
+			minValue:0,  // 起投金额
+			maxValue:0,  //最大金额
 			balance:0,     //   申请金额
 			tradeAcco: '' , //交易账号
 			bankNo: '',  //银行编号
@@ -902,14 +902,19 @@ $(function () {
 			//确定
 			mui("body").on("mdClick",'.btn_box .btn',function(){
 				$("#transformInput").blur()
-				if(Number(that.gV.balance) < Number(that.gV.minValue)){
-					tipAction('最小买入金额不能低于' + that.gV.minValue + '元')
-					return
+				if(!!that.gV.minValue){
+					if(Number(that.gV.balance) < Number(that.gV.minValue)){
+						tipAction('最小买入金额不能低于' + that.gV.minValue + '元')
+						return
+					}
 				}
-				if(Number(that.gV.balance) > Number(that.gV.maxValue)){
-					tipAction('最大买入金额不能超过' + that.gV.maxValue + '元')
-					return
+				if(!!that.gV.maxValue){
+					if(Number(that.gV.balance) > Number(that.gV.maxValue)){
+						tipAction('最大买入金额不能超过' + that.gV.maxValue + '元')
+						return
+					}
 				}
+				
 				if(!!that.gV.bankAccountSecret){
 					if(Number(that.gV.balance) > Number(that.gV.singleNum)){
 						tipAction('单笔金额不能超过' + that.gV.singleNum + '元')
