@@ -184,7 +184,7 @@ $(function () {
 						generateTemplate(data, that.$el.popupUl2, that.$el.bankListTemplate2,true);
 						
 					}
-				},
+				}
 			}];
 			$.ajaxLoading(obj);
 		},
@@ -580,7 +580,7 @@ $(function () {
 				htmdEvt: 'fundTransformIn_16'
 			}) ;
 
-		},
+		}
 
 
 

@@ -177,7 +177,7 @@ $(function() {
 					$("#HeadBarpathName").text(data.fundName?data.fundName:"--")
 					$(".titleTwo").text(data.fundCode?data.fundCode:"--")
 					$(".totalM").css({"background": "linear-gradient(360deg, rgba(186,140,112,1) 0%, rgba(244,210,192,1) 100%)", "-webkit-background-clip": "text", "-webkit-text-fill-color": "transparent"})
-				},
+				}
 			}];
 			$.ajaxLoading(obj);	
 		},
@@ -202,7 +202,7 @@ $(function() {
 						that.gL.shuju.push(jsonData[i]. annYldRat)
 					}
 					that.drawLine()
-				},
+				}
 			}];
 			$.ajaxLoading(obj);	
 		},

@@ -429,7 +429,7 @@ $(function () {
 				window.location.href = site_url.agreementModel_url + '?id='+id+ '&financial=true'
 			})
 			
-		},
+		}
 
 		
 

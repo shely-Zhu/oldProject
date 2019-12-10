@@ -211,7 +211,7 @@ $(function() {
             mui("body").on("tap", ".btnBottom", function() {
                 that.getReport();
             });
-        },
+        }
     };
     hotDiagnosis.init();
 });

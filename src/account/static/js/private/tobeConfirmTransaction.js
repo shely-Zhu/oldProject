@@ -212,7 +212,7 @@ $(function() {
                             zIndex: 100,
                             callback: function(t) {
 
-                            },
+                            }
                         };
                         $.elasticLayer(obj)
 
