@@ -1,4 +1,4 @@
-//  超宝-交易记录
+//  财富讲堂
 // @author wangjiajia 2019-11-20 
 
 require('@pathCommonBase/base.js');

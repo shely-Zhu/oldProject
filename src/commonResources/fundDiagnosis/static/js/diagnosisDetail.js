@@ -67,11 +67,12 @@ $(function() {
             var that = this;
             that.getData();
             that.events();
+            that.$e.listLoading.show();
         },
 
         getData: function(t) {
             var that = this;
-
+            
             var obj = [{
                 url: site_url.queryFundBaseInfo_api, //基金诊断-基金基本信息
                 data: {
@@ -176,7 +177,6 @@ $(function() {
         },
         getDrawData: function(num) { //num为传进来的数据范围
             var that = this;
-
             var obj = { //画图
                 url: site_url.queryCumulativeProfitCurveList_api, //基金诊断-累计收益曲线
                 data: {

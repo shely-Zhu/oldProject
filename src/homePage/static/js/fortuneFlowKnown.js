@@ -251,7 +251,7 @@ $(function() {
             // 列表页跳转到详情页
 			mui("body").on('mdClick', '.knownItem' , function(){
                 var id = $(this).attr("id")
-                window.location.href = site_url.articleTemplate_url + '?id=' + id + '&articleBelong=' + that.gV.articleBelong + '&applyType=1'
+                window.location.href = site_url.articleTemplate_url + '?id=' + id + '&articleBelong=' + that.gV.articleBelong
             },{
                 'htmdEvt': 'fortune_09'
             })
