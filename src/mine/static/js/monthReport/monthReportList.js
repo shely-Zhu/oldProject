@@ -194,7 +194,7 @@ $(function() {
 
 			alwaysAjax($(".recordList"));
 
-		},
+		}
 	};
 	somePage.init();
 });

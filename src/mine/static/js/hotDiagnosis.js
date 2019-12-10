@@ -214,7 +214,7 @@ $(function() {
             }, {
                 'htmdEvt': 'diagnosisSearch_03'
             });
-        },
+        }
     };
     hotDiagnosis.init();
 });

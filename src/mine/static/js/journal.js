@@ -169,7 +169,7 @@ $(function() {
 						// 将列表插入到页面上
 						generateTemplate(afterData, that.$e.recordList, that.$e.adjustmentTemp);
 					}, 200)
-				},
+				}
 			}];
 			$.ajaxLoading(obj);
 		},

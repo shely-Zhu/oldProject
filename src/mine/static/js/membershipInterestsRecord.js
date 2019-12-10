@@ -188,7 +188,7 @@ $(function(){
                     that.$e.listLoading.hide();
                     that.$e.noData.show();
                     
-                },
+                }
             }]
             $.ajaxLoading(obj);
 
@@ -205,7 +205,7 @@ $(function(){
                     'htmdEvt': 'adolesceRecord_01'
                 });
             
-		},
+		}
     }
     //调用函数
 	regulatory.init();
