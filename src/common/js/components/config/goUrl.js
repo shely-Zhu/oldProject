@@ -310,6 +310,10 @@ module.exports = function() {
     this.hotDiagnosis_url = go_url.no_url + '/mine/views/fundDiagnosis/hotDiagnosis_url.html';
     // 诊断搜索页面
     this.diagnosisSearch_url = go_url.no_url + '/mine/views/fundDiagnosis/diagnosisSearch.html';
+    //基金账户诊断--新增基金页面                                                           
+    this.addAccountDiagnosisResult_url = go_url.no_url + '/mine/views/fundDiagnosis/addAccountDiagnosisResult.html';
+    //基金账户诊断 -- 申请页面
+    this.fundAccountDiagnosisResult_url = go_url.no_url + '/mine/views/fundDiagnosis/fundAccountDiagnosisResult.html';
     // 诊断详情页
     this.diagnosisDetail_url = go_url.no_url + '/mine/views/fundDiagnosis/diagnosisDetail.html';
 
