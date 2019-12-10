@@ -164,7 +164,7 @@ $(function () {
                 $('.buy_info .fund_name').html(model.fundName);//买入产品
                 $('.buy_info .fund_amount').html(model.tradeAmount);//买入金额
                 $('.buy_info .bank_icon').attr('src', model.bankThumbnailUrl);//支付方式的银行logo
-                $('.buy_info .bank_name').html(model.bankName + model.bankAccountMask.substring(model.bankAccountMask.length - 4));//支付方式的银行名称
+                $('.buy_info .bank_name').html(model.bankName + model.bankAccountMask? model.bankAccountMask.substring(model.bankAccountMask.length - 4): '');//支付方式的银行名称
                 $('.buy_info .pay_mode').html(model.payModeName);//支付方式
                 $('.buy_info .fund_date').html(model.tradeDate);//买入时间
             } else {
@@ -173,7 +173,7 @@ $(function () {
                 $('.redeem_info .item_1').html(model.fundName);//赎回产品
                 $('.redeem_info .item_2').html(model.confirmShares);//赎回份额
                 $('.redeem_info .bank_icon').attr('url', model.bankThumbnailUrl);//到账银行卡icon
-                $('.redeem_info .item_3').html(model.bankName + model.bankAccountMask.substring(model.bankAccountMask.length - 4));//到账银行卡描述
+                $('.redeem_info .item_3').html(model.bankName + model.bankAccountMask? model.bankAccountMask.substring(model.bankAccountMask.length - 4): '');//到账银行卡描述
                 $('.redeem_info .item_4').html(model.tradeDate);//赎回时间
             }
             
@@ -207,7 +207,7 @@ $(function () {
                     $('.redeem_confirm_info .confirm_charge').html(model.confirmRate);//手续费
                     $('.redeem_confirm_info .confirm_amount').html(model.confirm_amount);//到账金额
                     $('.redeem_confirm_info .bank_icon').attr('url', model.bankLogoUrl);//银行logo
-                    $('.redeem_confirm_info .bank_name').html(model.bankName + model.bankAccountMask.substring(model.bankAccountMask.length - 4));//银行名称
+                    $('.redeem_confirm_info .bank_name').html(model.bankName + model.bankAccountMask? model.bankAccountMask.substring(model.bankAccountMask.length - 4): '');//银行名称
                 }
                 //确定状态显示全部确认的信息
                 that.showTradeArea(true, model);
@@ -286,7 +286,7 @@ $(function () {
                 $('.cash_buy_info .fund_name').html(model.fundName);//基金名称
                 $('.cash_buy_info .fund_amount').html(model.balanceMask);//买入金额
                 $('.cash_buy_info .bank_icon').attr('url', model.bankThumbnailUrl);//需要后台加接口 支付方式的银行logo
-                $('.cash_buy_info .bank_name').html(model.bankName + model.bankAccountMask.substring(model.bankAccountMask.length - 4));//支付方式的银行名称
+                $('.cash_buy_info .bank_name').html(model.bankName + model.bankAccountMask? model.bankAccountMask.substring(model.bankAccountMask.length - 4): 0);//支付方式的银行名称
                 $('.cash_buy_info .pay_mode').html(model.payModeName);//支付方式
                 $('.cash_buy_info .fund_date').html(model.applyDateTime);//买入时间
             } else {
@@ -391,7 +391,7 @@ $(function () {
 	            data: param,
 	            needLogin:true,//需要判断是否登陆
                 callbackDone: function(json){  //成功后执行的函数
-                    if (model.fundBusinCode.equals("020") || model.fundBusinCode.equals("022")) {
+                    if ("020" == model.fundBusinCode || "022" == model.fundBusinCode) {
                         //认购、申购
                         tipAction("已撤单，申请金额将退还支付银行卡中");
                     } else {
