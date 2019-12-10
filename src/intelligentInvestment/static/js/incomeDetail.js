@@ -64,6 +64,7 @@
 			        "pageSize":"50"//每页记录数
 				},
 				needDataEmpty: true,
+				needLoading: false,
 				callbackDone: function(json){
 					
 					that.jsonData = json.data;

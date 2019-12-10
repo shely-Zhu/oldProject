@@ -97,6 +97,7 @@ $(function() {
                 },
                 //async: false,
                 needDataEmpty: true,
+                needLoading: false,
                 callbackDone: function(json) {
                     var data;
 
