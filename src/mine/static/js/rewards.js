@@ -135,7 +135,6 @@ $(function() {
         events: function() {
             var that = this;
 
-            //console.log(JSON.stringify($(".viewDetails").html()));
             mui("body").on('mdClick', '.viewDetails', function() {
                 var $this = $(this);
                 var prizeDetailId = $this.attr("data-id");
@@ -184,9 +183,6 @@ $(function() {
             mui("body").on('tap', '.closeBtn', function() {
                 that.$e.tipBox.hide();//弹层隐藏
             })
-
-            // alwaysAjax($(".recordList"),".rewardWrapper");
-
         }
     };
     reward.init();
