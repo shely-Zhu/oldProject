@@ -1,0 +1,45 @@
+<!--
+ * @Author: your name
+ * @Date: 2019-12-09 15:48:30
+ * @LastEditTime: 2019-12-10 12:13:41
+ * @LastEditors: Please set LastEditors
+ * @Description: In User Settings Edit
+ * @FilePath: \htjf-app\src\mine\views\fundDiagnosis\fundAccountDiagnosisResult.html
+ -->
+ <!DOCTYPE html>
+ <html>
+ 
+ <head>
+     @@include('@pathInclude/views/meta.html')
+     <link rel="stylesheet" href="/mine/static/css/fundAccountDiagnosisResult.css">
+     <title>基金账户诊断_提交申请</title>
+ </head>
+ 
+ <body>
+     <section class="fundAccountDiagnosis container">
+       @@include('@pathCommonViews/headBarConfig.html',{"pathName":"添加已购买基金"})
+         <div class="content">
+             <div class="account-holdings">
+                 <p class="title-box">请您填写以下内容,以便我们为您提供专属诊断分析报告</p>
+             </div>
+             <div class="fund-allocation content-item">
+                <ul class="mui-table-view">
+                    <li class="mui-table-view-cell"><span class="left">基金代码</span><span class="right"> <input type="text" class="mui-input-clear" placeholder="请输入用户名"></span></li>
+                    <li class="mui-table-view-cell"><span class="left">购买日期</span><span class="right"> <input type="text" class="mui-input-clear" placeholder="请输入用户名"></span></li>
+                    <li class="mui-table-view-cell"><span class="left">购买金额</span><span class="right"> <input type="text" class="mui-input-clear" placeholder="请输入用户名"></span></li>
+                </ul>
+
+                <div class="comfirmButtom mt20">
+                    <button class="mui-btn mui-btn-warning">确认添加</button>
+                </div>
+                
+             </div>
+         </div>
+     </section>
+    
+     @@include('@pathInclude/views/footer.html')
+
+     <script src="/mine/static/js/fundAccountDiagnosisResult.js"></script>
+ </body>
+ 
+ </html>

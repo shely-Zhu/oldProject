@@ -103,7 +103,7 @@
         </script>
         <script id="fundListCheck-template" type="text/x-handlebars-template">
             {{#each this}}
-            <div class="onright-left-one">
+            <div class="onright-left-one fundListCheck">
                 <div class="checkFundName">{{fundName}}</div>
                 <div class="checkBankCard">
                     <!-- <img src="{{bankThumbnailUrl}}" alt=""> -->
@@ -111,8 +111,8 @@
                     <span>{{after4Num}}</span>
                 </div>
             </div>
-            <div class="onright-left-two">
-                <span class="title">可用金额</span>
+            <div class="onright-left-two fundListCheck">
+                <span class="remaining">可用金额</span>
                 <span class="amount">{{enableAmount}}元</span>
             </div>
             {{/each}}

@@ -173,7 +173,7 @@ $(function() {
                     $('.mask').show();
                     $('.hopperCon').show();
 
-                },{
+                }, {
                     'htmdEvt': 'tobeConfirmTransaction_0'
                 })
                 //点击筛选数据
@@ -192,14 +192,14 @@ $(function() {
                     that.getElements.listLoading.show();
                     that.getData(that.gV.aThis);
                     mui('.contentWrapper').pullRefresh().scrollTo(0, 0, 0);
-                },{
+                }, {
                     'htmdEvt': 'tobeConfirmTransaction_1'
                 })
                 // 点击遮罩隐藏
             mui("body").on('mdClick', '.mask', function(e) {
                     $('.mask').hide();
                     $('.hopperCon').hide();
-                },{
+                }, {
                     'htmdEvt': 'tobeConfirmTransaction_2'
                 })
                 //取消受让、取消预约、取消转让
@@ -262,7 +262,7 @@ $(function() {
                     }
 
 
-                },{
+                }, {
                     'htmdEvt': 'tobeConfirmTransaction_3'
                 })
                 //点击状态文字出现弹框
@@ -280,7 +280,7 @@ $(function() {
                     };
                     $.elasticLayer(obj);
 
-                },{
+                }, {
                     'htmdEvt': 'tobeConfirmTransaction_4'
                 })
                 //功能按钮
@@ -306,9 +306,13 @@ $(function() {
 
                 } else if (type == 'toVideo') { //视频双录
 
+                } else if (type == 'toDown') { //下载电子合同
+
+                } else if (type == 'reAppointment') { //重新预约
+
                 }
 
-            },{
+            }, {
                 'htmdEvt': 'tobeConfirmTransaction_5'
             })
         }
