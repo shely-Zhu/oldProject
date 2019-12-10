@@ -40,13 +40,13 @@ $(function () {
           json = json.data
           var tplm = $("#dataLists").html();
           var template = Handlebars.compile(tplm);
-          json.fundPurchaseFeeRate.detailList.forEach(n => {
+          json.fundPurchaseFeeRate.detailList.forEach(function(n){
             n.status = n.feeCalcMed === "2" ? 1 : 0
           });
-          json.fundRedeemFeeRate.detailList.forEach(n => {
+          json.fundRedeemFeeRate.detailList.forEach(function(n){
             n.status = n.feeCalcMed === "2" ? 1 : 0
           });
-          json.tradeLimitList.forEach(n => {
+          json.tradeLimitList.forEach(function(n){
             if (n.fundBusinCode === "022") {
               json.tradeLimitList = [n]
             }

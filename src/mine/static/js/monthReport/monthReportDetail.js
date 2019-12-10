@@ -102,7 +102,7 @@ var monthReportDetail = {
 				//请求失败，
 				//显示错误提示
 				tipAction(json.message);
-			},
+			}
 			
 		},{
 			url: site_url.queryInvestProdHoldShareList_api,   // 持仓总览  报告的月末持仓总览
@@ -209,7 +209,7 @@ var monthReportDetail = {
 				if(jsonData.pefSaleInfoList.length == 0 && jsonData.pofInfoList.length == 0){
 					//没有数据
 					$('.tradeNoData').show();
-					$('.tradeNoData .text').html('截止'+that.getElements.reportTime+',您暂无持仓信息');
+					$('.tradeNoData .text').html('您'+that.getElements.reportTime+'无交易明细');
 				}
 				else{
 					jsonData.tradeDtail = true;
@@ -638,7 +638,7 @@ var monthReportDetail = {
 	},
 	events: function(){  //绑定事件
 		var that = this;
-		mui("body").on('tap', '.consult' , function(){
+		mui("body").on('mdClick', '.consult' , function(){
 
 			that.getElements.productName = $(this).attr('productName');
 			// 获取理财师
@@ -729,26 +729,34 @@ var monthReportDetail = {
 			}]
 			$.ajaxLoading(obj);
 
+		},{
+			'htmdEvt': 'monthReportDetail_04'
 		})
 		// 公募的立即购买--跳转到公募详情页
-		mui("body").on('tap', '.publicBuy' , function(){
+		mui("body").on('mdClick', '.publicBuy' , function(){
 			window.location.href = site_url.wealthIndex_url;
+		},{
+			'htmdEvt': 'monthReportDetail_05'
 		});
 
-		mui("body").on('tap', '.tabs>li' , function(){
+		mui("body").on('mdClick', '.tabs>li' , function(){
 			$(this).addClass('active').siblings().removeClass('active');
 			$(".wrap>.panel").eq($(this).index()).addClass('active').siblings().removeClass('active');
+		},{
+			'htmdEvt': 'monthReportDetail_01'
 		});
 
-		mui("body").on('tap', '.investBth' , function(){
+		mui("body").on('mdClick', '.investBth' , function(){
 			window.location.href = site_url.wealthIndex_url;
+		},{
+			'htmdEvt': 'monthReportDetail_02'
 		});
 
 
 		
 		
 
-	},
+	}
 }
 
 monthReportDetail.init();

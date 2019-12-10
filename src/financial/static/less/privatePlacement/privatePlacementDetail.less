@@ -3,7 +3,7 @@
 @import url('@pathCommonLess/mui/resetMUI.less');
 @import url("@pathCommonCom/button/button.less");
 @import url("@pathCommonLessCom/headBarConfig.less");
- @import url("@pathCommonCom/elasticLayer/elasticLayer/elasticLayer.less");
+@import url("@pathCommonCom/elasticLayer/elasticLayer/elasticLayer.less");
 
 .hide{
 	display: none;
@@ -23,9 +23,15 @@
 			-webkit-background-clip:text;
 			-webkit-text-fill-color:transparent;
 		}
+		// .nameTip{
+		// 	color: @c005;
+		// }
 		.introduction{
 			font-size: 0.26rem;
 			color: @c005;
+		}
+		.invCore{
+			font-size: 0.6rem;
 		}
 		.privateDetailList{
 			padding-top:0.3rem;
@@ -107,11 +113,27 @@
 			background: @c005;
 		}
 		.buyButton{
+			display: none;
 			height: 0.98rem;
 			line-height: 0.98rem;
 			font-size: 0.32rem;
-			//color: @c005;
-			//background:linear-gradient(90deg,rgba(212,183,136,1) 0%,rgba(188,150,90,1) 100%);
+		}
+		.over{
+			display: none;
+			height: 0.98rem;
+			line-height: 0.98rem;
+			font-size: 0.32rem;
+			background:@c007;
+		}
+		.rightBtn{
+			display: none;
+			height: 0.98rem;
+			line-height: 0.98rem;
+			font-size: 0.32rem;
+			.already{
+				color: @c005;
+				background:@c007;
+			}
 		}
 	}
 
@@ -128,6 +150,11 @@
 	width: 100%;
 	.tabsBox{
 		width: 100%;
+		padding:0 0.3rem;
+		background: #ffffff;
+		height: 1rem;
+		border-top: 1px solid #E7E9ED;
+		border-bottom: 1px solid #E7E9ED;
 		display: -webkit-box;
 	    display: -ms-flexbox;
 	    display: -webkit-flex;
@@ -140,31 +167,19 @@
 	    -ms-flex-align: center;
 	    -webkit-align-items: center;
 	    align-items: center;
-		background: #ffffff;
-		height: 1rem;
-		border-top: 1px solid #E7E9ED;
-		border-bottom: 1px solid #E7E9ED;
 		.tabs {
+			width: 100%;
 			border: 1px solid @C8AB7D;
 			border-radius: .08rem;
-			&::after {
-				content: "";
-				display: block;
-				clear: both;
-			}
 			&>li {
-				text-align: center;
-				box-sizing: border-box;
-				width: 2.3rem;
-				list-style: none;
-				display: block;
-				float: left;
 				border-left: 1px solid @C8AB7D;;
-				// padding-left: 15px; 
 				line-height: .56rem;
 				cursor: pointer;
 				color: @C8AB7D;;
 				font-size: .24rem;
+				text-align: center;
+				box-sizing: border-box;
+				list-style: none;
 			}
 			&>li:first-child {
 				border-left: none;
@@ -223,8 +238,10 @@
 								color: @4A4A4A;
 							}
 							.changgeRight{
+								width: 4.5rem;
 								font-weight: 400;
 								color: @4A4A4A;
+								text-align: right;
 							}
 						}
 					}
@@ -454,7 +471,12 @@
 			}
 		}
 		.rightTitle{ 
+			padding-right: 0.3rem;
 			float: right;
+			font-size: 0.28rem;
+			.iconfont{
+				font-size: 0.2rem;
+			}
 		}
 	}
 	.lineDraw{

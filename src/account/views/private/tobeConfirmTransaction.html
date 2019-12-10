@@ -21,14 +21,14 @@
         <!-- 筛选区域 -->
         <div class="hopperCon">
             <ul>
-                <li class="active" data=''>全部</li>
+                <li data='' class="active">全部</li>
                 <li data="1">申购</li>
                 <li data="2">赎回</li>
-                <li data="3">分红</li>
-                <li data="4">预约撤单</li>
-                <li data="5">预约过期</li>
-                <li data="6">转让已完成</li>
-                <li data="7">受让已完成</li>
+                <li data="5">分红</li>
+                <li data="6">预约撤单</li>
+                <li data="7">预约过期</li>
+                <li data="3">转让已完成</li>
+                <li data="4">受让已完成</li>
             </ul>
         </div>
         <!-- 筛选区域 -->
@@ -54,25 +54,9 @@
         <!-- 暂无数据 -->
         @@include('@pathCommonCom/noData/noData.html', {"tipText": "暂无数据"})
     </div>
-    <div class="mask"></div>
-    <!-- 弹框类型-淡黄色背景两个按钮 -->
-    <div class="tipContainer" id="tipCon">
-        <div class="tipCon"></div>
-        <div class="buttonCon">
-            <a class="cancel">取消</a>
-            <a class="todo">确认</a>
-        </div>
-    </div>
-    <!-- 弹框类型-淡黄色背景两个按钮 -->
-    <!-- 弹框类型-淡黄色背景一个按钮 -->
-    <div class="tipContainer" id="tipConOne">
-        <div class="tipCon"></div>
-        <div class="buttonOne">我明白了</div>
-    </div>
-    <!-- 弹框类型-淡黄色背景一个按钮 -->
 </body>
 <!-- 公共模板 -->
-@@include('../common/transcationTem.html') @@include('@pathInclude/views/footer.html')
+@@include('@pathCommonCom/account/transcationTem.html') @@include('@pathInclude/views/footer.html')
 <!-- 添加埋点 -->
 <script src="/account/static/js/private/tobeConfirmTransaction.js"></script>
 

@@ -11,20 +11,18 @@
      <link rel="stylesheet" href="/life/static/css/activityList.css">
      <link rel="stylesheet" href="/life/static/css/mui.indexedlist.css">
      <title>会员俱乐部-活动列表</title>
-     <script src="/include/js/adaptation_750ui.js"></script>
-     <script src="/include/js/moment.js"></script>
+     <script src="https://unpkg.com/infinite-scroll@3/dist/infinite-scroll.pkgd.min.js"></script>
  </head>
 
  <body>
     @@include('@pathCommonCom/loading/listLoading.html')
     <div id="cityListBox">
-
     </div>
 
     <div id="activityDataBox">
         <!-- 活动列表搜索开始 -->
         <section id="activitySearch">
-            <a href="javascript:;" class=""></a>
+            <a href="javascript:void(0);" class=""></a>
             <!-- 搜索 -->
             <div class="mui-input-row mui-search activitySearchInput">
                 <input type="search" class="mui-input-clear" placeholder="请输入活动名称">

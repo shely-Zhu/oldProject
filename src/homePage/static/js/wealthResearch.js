@@ -225,7 +225,15 @@ $(function() {
                     //初始化第一屏区域的上拉加载
                     that.initMui($('#scroll1'));
 
-                }
+                },
+                callbackNoData: function() {
+                    //没有数据时展示暂无数据
+                    $(".list").hide()
+                    $(".title").hide()
+                    that.getElements.listLoading.hide();
+                    that.getElements.noData.show();
+                    $(".br").css("display", "none");
+                },
             }];
             $.ajaxLoading(obj);
         },
@@ -333,12 +341,13 @@ $(function() {
 
                             //})
                         }
-
+                        //只加载当前tab页面的图片
+                        $id.find('.contentWrapper').find('.lazyload').lazyload();
                         //隐藏loading
                         setTimeout(function() {
                             that.getElements.listLoading.hide();
                         }, 100);
-                        $('.lazyload').lazyload();
+
                     }, 200)
 
 

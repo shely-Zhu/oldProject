@@ -100,19 +100,10 @@ $(function() {
                 if (!$('.list').hasClass('hasPullUp')) {
                     $('.list').find('.mui-pull-bottom-pocket').addClass('mui-hidden');
                 }
-
                 //显示loading
                 that.getElements.listLoading.show();
-
                 //这一句初始化并第一次执行mui上拉加载的callback函数
                 mui('.contentWrapper').pullRefresh().pullupLoading();
-
-                //隐藏loading，调试接口时需要去掉
-                //setTimeout(function(){
-                that.getElements.listLoading.hide();
-                //}, 2000);
-
-
                 //为$id添加hasPullUp  class
                 $('.list').addClass('hasPullUp');
             });
@@ -132,6 +123,7 @@ $(function() {
                     if (json.data.pageList && json.data.pageList.length == 0) { // 没有记录不展示
                         $(".list").hide()
                         that.getElements.noData.show();
+                        that.getElements.listLoading.hide();
                         return false;
                     } else {
                         data = json.data.pageList;
@@ -163,55 +155,28 @@ $(function() {
                         transcationTem(data, that.getElements.contentWrap, that.getElements.transTemp, type)
 
                     }, 200)
-
-
                 },
                 callbackNoData: function() {
-                    debugger
                     that.getElements.noData.show();
                 }
 
             }];
             $.ajaxLoading(obj);
         },
-        openTipCon: function(type, content, id) {
-
-
-
-
-            //弹层
-
-            // $('#tipCon .tipCon').html(content);
-            // $('.mask').show();
-            // $('#tipCon').show();
-            // //点击确定
-            // mui("body").on('tap', '.tipContainer .todo', function(e) {
-            //     if (type == 'assign') {
-            //         //转让方法
-
-            //     } else if (type == 'assignee') {
-            //         //受让方法
-            //     }
-            //     $('.mask').hide();
-            //     $('#tipCon').hide();
-            // })
-
-        },
-        openTipConOne: function(content) {
-            $('.mask').show();
-            $('#tipConOne').show();
-            $('#tipConOne .tipCon').html(content);
-        },
         events: function() { //绑定事件
             var that = this;
-            alwaysAjax('.mui-table-view-cell');
-            mui("body").on('tap', '.hopper', function(e) {
+            alwaysAjax($('.mui-table-view-cell'));
+            mui("body").on('mdClick', '.hopper', function(e) {
                     $('.mask').show();
                     $('.hopperCon').show();
 
+                },{
+                    'htmdEvt': 'tobeConfirmTransaction_0'
                 })
                 //点击筛选数据
-            mui("body").on('tap', '.hopperCon li', function(e) {
+            mui("body").on('mdClick', '.hopperCon li', function(e) {
+                    $('.list').show();
+                    that.getElements.noData.hide();
                     $(this).addClass('active').siblings('li').removeClass('active');
                     $('.mask').hide();
                     $('.hopperCon').hide();
@@ -220,18 +185,22 @@ $(function() {
                     mui('.contentWrapper').pullRefresh().refresh(true);
                     that.gV.aP.pageNum = 1;
                     that.getElements.contentWrap.html('');
-                    debugger
                     //重新初始化
-                    that.initMui();
+                    that.getElements.listLoading.show();
+                    that.getData(that.gV.aThis);
                     mui('.contentWrapper').pullRefresh().scrollTo(0, 0, 0);
+                },{
+                    'htmdEvt': 'tobeConfirmTransaction_1'
                 })
                 // 点击遮罩隐藏
-            mui("body").on('tap', '.mask', function(e) {
+            mui("body").on('mdClick', '.mask', function(e) {
                     $('.mask').hide();
                     $('.hopperCon').hide();
+                },{
+                    'htmdEvt': 'tobeConfirmTransaction_2'
                 })
                 //取消受让、取消预约、取消转让
-            mui("body").on('tap', '.cancelBtn', function(e) {
+            mui("body").on('mdClick', '.cancelBtn', function(e) {
                     var type = $(this).attr('data-type');
                     var id = $(this).attr('data-id');
                     if (type == 'assign') { //转让
@@ -243,11 +212,10 @@ $(function() {
                             zIndex: 100,
                             callback: function(t) {
 
-                            },
+                            }
                         };
                         $.elasticLayer(obj)
 
-                        // that.openTipCon('assign', '您确定要取消转让申请吗？', id);
 
                     } else if (type == 'assignee') {
                         var obj = {
@@ -261,23 +229,28 @@ $(function() {
                             },
                         };
                         $.elasticLayer(obj)
+                    } else if (type == 'appointment') {
+                        var obj = {
+                            p: '<p>您确定要预约吗？</p>',
+                            yesTxt: '确认',
+                            celTxt: '取消',
+                            hideCelButton: false,
+                            zIndex: 100,
+                            callback: function(t) {
+
+                            },
+                        };
+                        $.elasticLayer(obj)
                     }
 
 
-                })
-                // 点击我明白了
-            mui("body").on('tap', '.tipContainer .buttonOne', function(e) {
-                    $('.mask').hide();
-                    $('#tipConOne').hide();
-                    var conText = $(this).siblings('tipContent').html;
-                    that.openTipConOne(conText);
-
+                },{
+                    'htmdEvt': 'tobeConfirmTransaction_3'
                 })
                 //点击状态文字出现弹框
-            mui("body").on('tap', '.openTip', function(e) {
+            mui("body").on('mdClick', '.openTip', function(e) {
                     $('.mask').show();
-                    $('#tipConOne').show();
-                    var conText = $(this).siblings('tipContent').html;
+                    var conText = $(this).siblings('.tipContent').html();
                     var obj = {
                         p: '<p>' + conText + '</p>',
                         yesTxt: '我明白了',
@@ -289,21 +262,31 @@ $(function() {
                     };
                     $.elasticLayer(obj);
 
+                },{
+                    'htmdEvt': 'tobeConfirmTransaction_4'
                 })
                 //功能按钮
-            mui("body").on('tap', '.toDetail', function(e) {
+            var clickEvent = '';
+            mui("body").on('mdClick', '.toDetail', function(e) {
                 var type = $(this).attr('type');
-                var id = $(this).attr('reserveId');
+                var reserveId = $(this).attr('reserveId');
+                var proId = $(this).attr('projectId');
                 if (type == 'toCertif') { //去合格投资者认证
 
                 } else if (type == 'toSign') { //去签合同
-                    window.location.href = site_url.seeSign_url + '?reserveId=' + id;
+                    window.location.href = site_url.elecFourthStep_url + '?reserveId=' + reserveId + '&projectId' + proId;
                 } else if (type == 'toSee') { //查看合同
-
+                    window.location.href = site_url.seeSign_url + '?reserveId=' + reserveId;
                 } else if (type == 'toUploadM') { //去上传汇款凭证
+                    window.location.href = site_url.elecFourthStep_url + '?reserveId=' + reserveId;
+                } else if (type == 'toView') { //详情
+
+                } else if (type == 'toVideo') { //视频双录
 
                 }
 
+            },{
+                'htmdEvt': 'tobeConfirmTransaction_5'
             })
         }
     };

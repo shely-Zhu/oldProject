@@ -194,6 +194,8 @@ module.exports = {
     './mine/static/js/diagnosisSearch': './src/mine/static/js/diagnosisSearch.js',
     //基金账户诊断
     './mine/static/js/fundAccountDiagnosis': './src/mine/static/js/fundAccountDiagnosis.js',
+    //基金账户诊断--提交申请
+    './mine/static/js/fundAccountDiagnosisResult': './src/mine/static/js/fundAccountDiagnosisResult.js',
 
     // 标普模型
     './personal/static/js/spAssetModel': "./src/personal/static/js/spAssetModel.js",
@@ -337,6 +339,8 @@ module.exports = {
     './financial/static/js/publicPlacement/castSurelyDetails': './src/financial/static/js/publicPlacement/castSurelyDetails.js',
     //我的定投计划
     './financial/static/js/publicPlacement/myInvestmentPlan': './src/financial/static/js/publicPlacement/myInvestmentPlan.js',
+     //我的定投计划----已终止的定投计划
+     './financial/static/js/publicPlacement/myInvestmentPlanH': './src/financial/static/js/publicPlacement/myInvestmentPlanH.js',
     //我的定投计划详情
     './financial/static/js/publicPlacement/castSurelyDetails': './src/financial/static/js/publicPlacement/castSurelyDetails.js',
     //活期理财

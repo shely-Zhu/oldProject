@@ -13,13 +13,13 @@ $(function(){
 		//获取页面元素
 		$e:{
 			contentWrap:$('#contentWrap'),
-			HeadBarpathName:$("#HeadBarpathName")
+			HeadBarpathName:$("#HeadBarpathName"),
+            noData: $('.noData') //没有数据的结构
 		},
 		//页面初始化函数
 		init:function(){         
             this.getTemplateData();
             this.events()
-            console.log(splitUrl['id'])
         },
         // 获取消息getnoticeItemData中心列表
         getTemplateData() {
@@ -36,15 +36,17 @@ $(function(){
                     that.$e.HeadBarpathName.text(resData.protocolName);
 					that.$e.contentWrap.html(resData.content);       
                 },
-                callbackFail: function(json) {
-                    tipAction(json.message);
+                callbackNoData: function() {
+                    $("#richTemplateWrap").css("display", "none");
+                    $(".zhanweifu").css("display", "none")
+                    that.$e.noData.show();
                 }
             }];                        
             $.ajaxLoading(obj); 
         },
         events() {
             var that = this;
-        },
+        }
 	};
 	templatePage.init();
 });

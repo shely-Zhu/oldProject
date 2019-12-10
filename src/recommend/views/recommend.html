@@ -35,14 +35,14 @@
         @@include('@pathCommonViews/headBarConfig.html',{"showType":"1","pathName":""})
         <!-- 理财师 -->
         <div class="recommendBox">
-               <div class="recommendBoxUserName">邓泽武</div>     
+               <div class="recommendBoxUserName"> </div>     
                <div class="recommendBoxText">邀请好友，分享精彩</div>
                <div class="recommendQRCode">
-                    <img src="../static/img/1575438680.png"/>
+                    <!-- <img src="../static/img/1575438680.png"/> -->
                </div>
                <div class="recommendLcs">
-                  您的理财师：王中伟H018298 <i class="iconfont choose">&#xe636;</i>
-               </div>     
+                <span class="recommendLcsText"></span> <span class="manager_show"></span><i class="iconfont choose">&#xe636;</i>
+               </div>
         </div>
         <div class="recommendShare">
             <div class="recommendShareWechart">
@@ -55,18 +55,6 @@
             </div>
         </div>
         <!-- 理财师选择 -->
-        <div class="manager_choose_wrap">
-            <div class="lcs mui-row" id="lcs">
-                <label class="label_class ">理财师</label>
-                <ul class="mui-table-view choose">
-                    <li class="mui-table-view-cell mui-collapse">
-                        <a class="mui-navigate-right" href="javascript:;" num="">
-                            请选择您的理财师
-                        </a>
-                    </li>
-                </ul>
-            </div>
-        </div>
         <!-- <div class="manager_choose_wrap">
             <div class="lcs mui-row" id="lcs">
                 <label class="label_class ">理财师</label>
@@ -82,12 +70,35 @@
             <div class="generate_qrcode_btn">
                 <div class="mui-btn generate_btn">生成专属二维码</div>
             </div>
-        </div>
+        </div>-->
         <div class="tipMask">
             <img src="/recommend/static/img/share.png" class="tip">
             <span class="closeElastic iconfont">&#xe60c;</span>
-        </div> -->
+        </div> 
     </div>
+        <!-- 银行卡弹窗 -->
+        <div class="popup">
+            <div class="popup-mask"></div>
+            <div class="popup-content">
+                <ul class="popup-ul">
+                    <!-- <li class="popup-li">
+                          王丽丽<span>H012891</span>
+                   </li> -->
+                </ul>
+                <div class="cancel">
+                    取消
+                </div>
+                
+            </div>
+        </div>
+
+        <script id="bankList-template" type="text/x-handlebars-template">
+            {{#each this}}
+            <li class="popup-li">
+                {{codeName}}<span>{{customerNo}}</span>
+            </li>
+            {{/each}}
+        </script>
 </body>
  
 <script src="/include/js/vendor/jquery/jquery1.12.3.js"></script>

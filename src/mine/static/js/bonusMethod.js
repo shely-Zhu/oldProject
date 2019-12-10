@@ -92,7 +92,7 @@ $(function() {
 		//注册事件
 		events: function() {
 			let that = this;
-			mui('body').on("tap",".type_one",function(e){
+			mui('body').on("mdClick",".type_one",function(e){
 				var autoBuy =$(this).attr("data-autoBuy")
 				if($(this).attr("data-checkFlag")!= "1"){
 					$.elasticLayer({
@@ -107,7 +107,9 @@ $(function() {
 						}
 					});
 				}
-			})
+			},{
+                'htmdEvt': 'bonusMethod_01'
+            })
 		}
 	};
 	somePage.init();

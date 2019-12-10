@@ -52,9 +52,6 @@ $(function () {
                         //渲染模板后设置点击事件
                         that.bankEvents();
                     }
-                },
-                callbackFail: function (json) {  //失败后执行的函数
-                    tipAction(json.msg);
                 }
             }];
             $.ajaxLoading(obj);
@@ -196,8 +193,25 @@ $(function () {
             //赎回
             mui("body").on('mdClick', '.redeem_btn', function (e) {
                 var index = $(this).parent().parent().parent().index();
-                sessionStorage.setItem("publicFundDetail",JSON.stringify(that.gV.data.fundDetailList[index])) 
-                window.location.href = site_url.redemptionBuy_url;
+                var id = $(this).parent().parent().parent().parent().attr("id")
+                if(id =="cashPageLists" ){
+                    debugger;
+                    //现金宝
+                    var obj = {
+                        "money":that.gV.data.cashDetails[index].totalMoney,
+                        "productName":that.gV.data.cashDetails[index].fundName,
+                        "fundCode":that.gV.data.cashDetails[index].fundCode
+                      };
+                    sessionStorage.setItem("transformMessage",JSON.stringify(obj));
+                    window.location.href = site_url.pofCashTransformOut_url;
+                }else if(id == "pageLists"){
+                    sessionStorage.setItem("publicFundDetail",JSON.stringify(that.gV.data.fundDetailList[index])) ;
+                     window.location.href = site_url.redemptionBuy_url;
+                }else{
+                    return false
+                }
+                
+               
                 return false;
             },{
                 'htmdEvt': 'publicAssets_5'
@@ -221,7 +235,7 @@ $(function () {
             mui("body").on('mdClick', '.assetsBtn', function (e) {
                 $('.mask').show();
                 $('.tipContainer').show();
-            }，{
+            },{
                 'htmdEvt': 'publicAssets_8'
             })
             //关闭资产组成说明

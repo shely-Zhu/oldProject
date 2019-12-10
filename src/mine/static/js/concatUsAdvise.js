@@ -6,7 +6,6 @@ require('@pathCommonBase/base.js');
 
 require('@pathCommonJs/ajaxLoading.js');
 var uploadFile = require('@pathCommonCom/uplaoderFile/concatUsAdviseUploaderFile.js')
-
 var splitUrl = require('@pathCommonJs/components/splitUrl.js')();
 var generateTemplate = require('@pathCommonJsComBus/generateTemplate.js');
 $(function () {
@@ -36,8 +35,10 @@ $(function () {
         },
         event: function () {
             var that = this;
-            $(".list").on("click", function (e) {
+            $(".list").on("mdClick", function (e) {
                 that.gD.feedbackType = $(this).children("input").val() || 0
+            },{
+                'htmdEvt': 'concatUsAdvise_01'
             })
             $(".textarea").on('keyup', function () {
                 that.gD.feedbackDesc = $(".textarea").val()
@@ -46,7 +47,6 @@ $(function () {
 
         },
         submitAdvise() {
-
             var that = this;
             var obj = [{
                 url: site_url.insertFeedback_api,
@@ -58,12 +58,8 @@ $(function () {
                 //async: false,
                 needDataEmpty: true,
                 callbackDone: function (json) {
-                    console.log(json)
                     location.href = "javascript:history.go(-1)";
                 },
-                callbackFail: function (json) {
-                    tipAction(json.message);
-                }
             }];
             $.ajaxLoading(obj);
         }

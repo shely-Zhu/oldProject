@@ -121,7 +121,7 @@ $(function() {
 			    		}
 			    	});
 		       	
-			    },
+			    }
 			}]
 			$.ajaxLoading(obj);
 			
@@ -211,7 +211,7 @@ $(function() {
 			       		case 4: that.data['qrnhWfsy'].sinceNow = newData;break;
 			       	}
 			       	that.drawLine( type, newData);			       	
-			    },
+			    }
 			}];
 			$.ajaxLoading(obj);
 		},
@@ -416,7 +416,7 @@ $(function() {
 		event: function(){
 			var that = this;
 			//按钮点击展开收起
-			mui("body").on('tap', '.openButton', function(e) {
+			mui("body").on('mdClick', '.openButton', function(e) {
 
 				if( $('.topContent.open').length ){
 					//收起
@@ -430,15 +430,19 @@ $(function() {
 
 					$('.typeWrap openWrap').show();
 				}
+            },{
+                'htmdEvt': 'optionalPublicDetail_0'
             })
             //折线图点击月份请求数据
-            mui("body").on('tap', '.lineWrap .time', function() {
+            mui("body").on('mdClick', '.lineWrap .time', function() {
 				$('.lineDraw .time').removeClass('active');
 				$(this).addClass('active');
 				that.getTypeOneData( $(this).attr('num') );		
-			})
+			},{
+                'htmdEvt': 'optionalPublicDetail_1'
+            })
             //折线图点击七日年化/万份收益切换区域
-            mui("body").on('tap', '.lineWrap .titleWrap .title', function() {
+            mui("body").on('mdClick', '.lineWrap .titleWrap .title', function() {
 				$('.lineWrap .titleWrap .title').removeClass('active');
 				$(this).addClass('active');
 				//判断当前画的是七日年化还是万份收益
@@ -458,17 +462,23 @@ $(function() {
 				$('.lineDraw .time').removeClass('active');
 				$('.lineDraw .oneMonth').addClass('active');
 				that.drawLine( 'wfsy', that.data['qrnhWfsy'].oneMonth );			
-			})
+			},{
+                'htmdEvt': 'optionalPublicDetail_2'
+            })
 //			交易记录跳转
-			mui("body").on('tap', '.jyjl', function() {
-				window.location.href = site_url.transactionRecords_url;
-			})
+			mui("body").on('mdClick', '.jyjl', function() {
+				window.location.href = site_url.transactionDetailPublic_url + "?fundCode=" + that.data.fundCode + "&tradeNo=" + that.data.publicFundDetail.tradeNo;
+			},{
+                'htmdEvt': 'optionalPublicDetail_3'
+            })
 //			分红方式跳转
-			mui("body").on('tap', '.dividend', function() {
+			mui("body").on('mdClick', '.dividend', function() {
 				window.location.href = site_url.bonusMethod_url;
-			})
+			},{
+                'htmdEvt': 'optionalPublicDetail_4'
+            })
 //			历史明细跳转
-			mui("body").on('tap', '.historyDetail', function() {
+			mui("body").on('mdClick', '.historyDetail', function() {
 				if(that.data.projectType != "10300"){//非货币基金
 					window.location.href = site_url.otherFundHistoryDetail_url + "?fundCode=" + that.data.fundCode;
 					
@@ -476,29 +486,41 @@ $(function() {
 					window.location.href = site_url.mineHistoryDetail_url + "?fundCode=" + that.data.fundCode;
 					
 				}
-			})
+			},{
+                'htmdEvt': 'optionalPublicDetail_5'
+            })
 //			收益明细跳转
-			mui("body").on('tap', '.symx', function() {
+			mui("body").on('mdClick', '.symx', function() {
 				window.location.href = site_url.returnsDetail_url + "?fundCode=" + that.data.fundCode;
-			})
+			},{
+                'htmdEvt': 'optionalPublicDetail_6'
+            })
 //			头部详情跳转
-			mui("body").on('tap', '#customerService', function() {
+			mui("body").on('mdClick', '#customerService', function() {
 				window.location.href = site_url.pofPublicDetail_url + "?fundCode=" + that.data.fundCode + "&fundType=" + that.data.projectType;
-			})
+			},{
+                'htmdEvt': 'optionalPublicDetail_7'
+            })
 			//点击赎回
-			mui("body").on('tap', '.redeemBtn', function(e) {
+			mui("body").on('mdClick', '.redeemBtn', function(e) {
 				window.location.href = site_url.redemptionBuy_url;			
-			})
+			},{
+                'htmdEvt': 'optionalPublicDetail_8'
+            })
 			// //点击买入
-			mui("body").on('tap', '.buyBtn', function(e) {
+			mui("body").on('mdClick', '.buyBtn', function(e) {
 				window.location.href = site_url.fundTransformIn_url;			
-			})
+			},{
+                'htmdEvt': 'optionalPublicDetail_9'
+            })
 			//点击定投
-			mui("body").on('tap', '.fiedBtn', function(e) {
+			mui("body").on('mdClick', '.fiedBtn', function(e) {
 				window.location.href = site_url.ordinarySetThrow_url;			
-			})
+			},{
+                'htmdEvt': 'optionalPublicDetail_10'
+            })
 			
-		},
+		}
 
 
 	}

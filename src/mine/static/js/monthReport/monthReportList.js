@@ -13,6 +13,7 @@ var tipAction = require('@pathCommonJsCom/tipAction.js');
 
 var splitUrl = require('@pathCommonJs/components/splitUrl.js')();
 var generateTemplate = require('@pathCommonJsComBus/generateTemplate.js');
+require('@pathCommonCom/pullRefresh/pullRefresh.js');
 
 
 $(function() {
@@ -33,8 +34,8 @@ $(function() {
 		},
 		init: function() {
 			var that = this;
-			// that.initMui();
-			that.getUserInfo();
+			that.initMui();
+			//that.getUserInfo();
 			that.events();
 		},
 		getUserInfo:function(){
@@ -75,7 +76,42 @@ $(function() {
 				$('.list').height(height).addClass('setHeight');
 			}
 
-			mui.init({
+			$.pullRefresh({
+                wrapper: $('.list'),
+                class: 'listItem',
+                template: that.$e.adjustmentTemp, 
+                pageSize: that.gV.pageSize,
+                callback: function(def, t){
+                    var obj = [{
+                        url: site_url.queryMonthlyReport_api,
+						data: {},
+						needDataEmpty: true,
+                        callbackDone: function(json) {     
+                            var data = json.data;
+                            if(that.gV.pageCurrent == 1 && data.length == 0) {
+                                $(".list").css("display", "none")
+                            } else {
+                                def && def.resolve( data, that.gV.pageCurrent);
+                                // 第一个调仓记录默认展开
+                                $('.list').find('ul').eq(0).find('.mui-collapse').addClass('mui-active');
+                                that.gV.pageCurrent++;
+                            }
+                        },
+                        callbackNoData: function( json ){  
+                            if(that.gV.pageCurrent == 1) {
+                                $(".list").css("display", "none")
+                            }
+                            def && def.reject( json, that.gV.pageCurrent );
+                        },
+                        callbackFail: function(json) {
+                            def && def.reject( json, that.gV.pageCurrent );
+                        },
+                    }];
+                    $.ajaxLoading(obj); 
+                }
+            })
+
+			/*mui.init({
 				pullRefresh: {
 					container: '.contentWrapper',
 					up: {
@@ -112,9 +148,9 @@ $(function() {
 
 				//为$id添加hasPullUp  class
 				$('.list').addClass('hasPullUp');
-			});
+			});*/
 		},
-		getData: function(t) {
+		/*getData: function(t) {
 			var that = this;
 
 			var obj = [{ // 月度报告列表
@@ -172,7 +208,7 @@ $(function() {
 					 
 			}];
 			$.ajaxLoading(obj);
-		},
+		},*/
 		events: function() {
 			var that = this;
 
@@ -181,17 +217,17 @@ $(function() {
 				window.location.href = site_url.monthReportDetail_url + '?reportId=' + $this.attr('reportId');
 				
 			},{
-				'htmdEvt': ''
+				'htmdEvt': 'monthReportList_01'
 			})
 
 			mui("body").on('mdClick', '.productBtn', function() {
 				var $this = $(this);
 				window.location.href = site_url.wealthIndex_url;
 			},{
-				'htmdEvt': ''
+				'htmdEvt': 'monthReportList_02'
 			})
 
-		},
+		}
 	};
 	somePage.init();
 });

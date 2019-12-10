@@ -117,7 +117,6 @@ $(function () {
                     allotType: that.gV.allotType,
                     Fixbusinflag: splitUrl()['Fixbusinflag'],
                 },
-                needDataEmpty: true,
                 callbackDone: function (json) {
                     that.events();
                     if ('1' == json.data.cancelable){
@@ -142,9 +141,6 @@ $(function () {
                             break
                     }
 
-                },
-                callbackFail: function (data) {
-                    console.log('加载失败');
                 }
             }];
             $.ajaxLoading(obj);
@@ -247,13 +243,9 @@ $(function () {
                 data: {
                     allotNo: splitUrl()['applyId'],
                 },
-                needDataEmpty: true,
                 callbackDone: function (json) {
                     that.events();
                     that.showCashStatus(json.data)
-                },
-                callbackFail: function (data) {
-                    console.log('加载失败');
                 }
             }];
             $.ajaxLoading(obj);
@@ -335,9 +327,6 @@ $(function () {
 	                $('.bankNo').html(json.data.bankNo);
 	                $('.bankAccountName').html(json.data.bankAccountName);
 
-	            },
-	            callbackFail: function(json){  //失败后执行的函数
-						tipAction(json.msg);
 	            }
 	        }];
 	        $.ajaxLoading(obj);
@@ -413,9 +402,6 @@ $(function () {
                         window.location.reload()
                     }, 2000);
                     
-	            },
-	            callbackFail: function(json){  //失败后执行的函数
-                    tipAction(json.msg);
 	            }
 	        }];
 	        $.ajaxLoading(obj);

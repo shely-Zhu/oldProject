@@ -22,12 +22,12 @@ var consultProduct = {
 	},
 	events: function(){  //绑定事件
 		var that = this;
-		mui("body").on('tap', '.submitBtn' , function(){
+		mui("body").on('mdClick', '.submitBtn' , function(){
 			var consultContent = $('.consultText').val();
 			var empNo =  splitUrl['empNo']==undefined ? splitUrl['empNo'] :'';
 			var empName =  splitUrl['empName']==undefined ? splitUrl['empName'] :'';
+			debugger
 			var productName =  new Base64().decode(splitUrl['productName']) ? new Base64().decode(splitUrl['productName']) :'';
-
 			var obj = [{
 				
 				url: site_url.reportContactNow_api,
@@ -44,16 +44,15 @@ var consultProduct = {
 
 					window.location.href = new Base64().decode(splitUrl['backUrl']);
 				
-				},
-				callbackFail: function(json){
-					tipAction(json.message);
-				},
+				}
 						
 			}]
 			$.ajaxLoading(obj);
 
+		},{
+			'htmdEvt': 'consultProduct_01'
 		})
-	},
+	}
 }
 
 consultProduct.init();

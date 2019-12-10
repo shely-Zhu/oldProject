@@ -24,6 +24,8 @@ $(function() {
 			numAttr:"",//点击选项卡切换时存储字段
 			dataRange:"1",
 			end:"",
+			fundName:"",
+			transformMoney:"",
 
         },
         init:function(){
@@ -166,13 +168,16 @@ $(function() {
 			    needLogin: true,
 			    callbackDone: function(json) {
 					var data = json.data
+					that.gL.fundCode = data.fundCode,
+					that.gL.fundName = data.fundName,
+					that.gL.transformMoney = data.totalMoney,
 					$(".totalM").text(data.totalMoneyMask?data.totalMoneyMask:"--")
 					$(".incomeMask").text(data.incomeMask?data.incomeMask:"--")
 					$(".addupIncomeMask").text(data.addupIncomeMask?data.addupIncomeMask:"--")
 					$("#HeadBarpathName").text(data.fundName?data.fundName:"--")
 					$(".titleTwo").text(data.fundCode?data.fundCode:"--")
 					$(".totalM").css({"background": "linear-gradient(360deg, rgba(186,140,112,1) 0%, rgba(244,210,192,1) 100%)", "-webkit-background-clip": "text", "-webkit-text-fill-color": "transparent"})
-				},
+				}
 			}];
 			$.ajaxLoading(obj);	
 		},
@@ -197,7 +202,7 @@ $(function() {
 						that.gL.shuju.push(jsonData[i]. annYldRat)
 					}
 					that.drawLine()
-				},
+				}
 			}];
 			$.ajaxLoading(obj);	
 		},
@@ -221,7 +226,7 @@ $(function() {
         event:function(){
 			var that = this;
             //选项卡切换
-			mui("body").on('tap','.lineDraw .time',function(e){
+			mui("body").on('mdClick','.lineDraw .time',function(e){
 				$('.lineDraw .time').removeClass('active');
 				$(this).addClass('active');
 				if(that.gL.numAttr != $(this).attr('num')){
@@ -237,23 +242,39 @@ $(function() {
 						that.gL.numAttr = $(this).attr('num')
 					}
 				}
-			})
-			mui("body").on('tap','.materialContent',function(e){
+			},{
+                'htmdEvt': 'superStreasureDetail_0'
+            })
+			mui("body").on('mdClick','.materialContent',function(e){
 				var id = $(this).attr('data-id')
 				window.location.href = `${site_url.superContent_url}?id=${id}`;
-			})
+			},{
+                'htmdEvt': 'superStreasureDetail_1'
+            })
 			//点击转出跳转
-			mui("body").on('tap','.rollOutBtn',function(e){
+			mui("body").on('mdClick','.rollOutBtn',function(e){
+				var obj = {
+					"money":that.gL.transformMoney,
+					"productName":that.gL.fundName,
+					"fundCode":that.gL.fundCode
+				  };
+				  sessionStorage.setItem("transformMessage",JSON.stringify(obj));
 				window.location.href =  site_url.pofCashTransformOut_url;
-			})
+			},{
+                'htmdEvt': 'superStreasureDetail_2'
+            })
 			//点击转入跳转
-			mui("body").on('tap','.shiftToBtn',function(e){
+			mui("body").on('mdClick','.shiftToBtn',function(e){
 				window.location.href =  site_url.pofCashTransformIn_url;
-			})
+			},{
+                'htmdEvt': 'superStreasureDetail_3'
+            })
 			//点击历史记录
-			mui("body").on('tap','.recordBtn',function(e){
+			mui("body").on('mdClick','.recordBtn',function(e){
 				window.location.href = `${site_url.superRecord_url}?fundCode=${that.gL.fundCode}`;
-			})
+			},{
+                'htmdEvt': 'superStreasureDetail_4'
+            })
         }
     } 
     privateDetail.init()

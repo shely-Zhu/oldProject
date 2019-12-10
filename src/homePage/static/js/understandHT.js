@@ -67,9 +67,6 @@ $(function() {
 
 					
             
-                },
-                callbackFail: function(json) {
-                    tipAction(json.message);
                 }
             }];                        
             $.ajaxLoading(obj); 

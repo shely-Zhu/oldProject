@@ -1,0 +1,135 @@
+<!--
+ * @Author: your name
+ * @Date: 2019-12-09 15:48:30
+ * @LastEditTime: 2019-12-10 11:26:24
+ * @LastEditors: Please set LastEditors
+ * @Description: In User Settings Edit
+ * @FilePath: \htjf-app\src\mine\views\fundDiagnosis\fundAccountDiagnosisResult.html
+ -->
+<!DOCTYPE html>
+ <html>
+ 
+ <head>
+     @@include('@pathInclude/views/meta.html')
+     <link rel="stylesheet" href="/mine/static/css/fundAccountDiagnosisResult.css">
+     <title>基金账户诊断_提交申请</title>
+ </head>
+ 
+ <body>
+     <section class="fundAccountDiagnosis container">
+       @@include('@pathCommonViews/headBarConfig.html',{"pathName":"提交申请"})
+         <div class="content">
+             <div class="account-holdings">
+                 <p class="title-box">请您填写以下内容,以便我们为您提供专属诊断分析报告</p>
+             </div>
+             <div class="fund-allocation content-item">
+                <ul class="mui-table-view">
+                    <li class="mui-table-view-cell"><span class="left">年龄</span><span class="right"> <input type="text" class="mui-input-clear" placeholder="请输入用户名"></span></li>
+                    <li class="mui-table-view-cell"><span class="left">性别</span>
+                        <span class="mui-icon mui-icon-arrowright"></span>
+                        <span class="right">
+                          <select>
+                              <option>男</option>
+                              <option>女</option>
+                          </select>
+                        </span>
+                    </li>
+                    <li class="mui-table-view-cell"><span class="left">职业</span>
+                        <span class="mui-icon mui-icon-arrowright"></span>
+                        <span class="right">
+                            <select>
+                                <option>工人</option>
+                                <option>教师</option>
+                            </select>
+                        </span>
+                    </li>
+                </ul>
+                <ul class="mui-table-view mt20">
+                    <li class="mui-table-view-cell"><span class="left">投资年限</span>
+                        <span class="mui-icon mui-icon-arrowright"></span>
+                        <span class="right">
+                                <select>
+                                    <option>2年以下</option>
+                                    <option>3年以上</option>
+                                </select>
+                        </span>
+                    </li>
+                    <li class="mui-table-view-cell"><span class="left">风险等级</span><span class="right"> 稳健型</span></li>
+                    <li class="mui-table-view-cell"><span class="left">预计投资年限</span>
+                        <span class="mui-icon mui-icon-arrowright"></span>
+                        <span class="right">
+                                <select>
+                                    <option>2年以下</option>
+                                    <option>3年以上</option>
+                                </select>
+                        </span>
+                    </li>
+                    <li class="mui-table-view-cell"><span class="left">流动性需求</span>
+                        <span class="mui-icon mui-icon-arrowright"></span>
+                        <span class="right">
+                                <select>
+                                    <option>高</option>
+                                    <option>低</option>
+                                </select>
+                        </span>
+                    </li>
+                    <li class="mui-table-view-cell"><span class="left">预期年化收益率</span>
+                        <span class="mui-icon mui-icon-arrowright"></span>
+                        <span class="right">
+                                <select>
+                                    <option>3% - 5%</option>
+                                    <option>5% - 10%</option>
+                                </select>
+                        </span>   
+                    </li>
+                    <li class="mui-table-view-cell"><span class="left">可承受最大回撤(亏损)</span>
+                        <span class="mui-icon mui-icon-arrowright"></span>
+                        <span class="right">
+                                <select>
+                                    <option>0% - 3%</option>
+                                    <option>3% - 5%</option>
+                                </select>
+                        </span>
+                    </li>
+                </ul>
+
+                <div class="messageBox mt20">
+                    <div class="mt20">
+                        <span class="left">已购买基金</span><span class="ml20">请选择或增加需要诊断的基金</span>
+                    </div>
+                    <div class="mt20"> <span class="ml50">恒天</span></div>
+                    <ul class="mui-table-view mt20 selectFundCode">
+                        <li class="mui-table-view-cell"><input name="radio1" type="checkbox"><span>基金代码</span><span>01234</span><span>购买日期</span><span>2019-10-28</span><span>金额</span><span>200000元</span></li>
+                        <li class="mui-table-view-cell"><input name="radio1" type="checkbox"><span>基金代码</span><span>01234</span><span>购买日期</span><span>2019-10-28</span><span>金额</span><span>200000元</span></li>
+                        <li class="mui-table-view-cell"><input name="radio1" type="checkbox"><span>基金代码</span><span>01234</span><span>购买日期</span><span>2019-10-28</span><span>金额</span><span>200000元</span></li>
+                    </ul>
+                    <div>
+                        <div>
+                            <span class="left">其他</span>
+                            <span class="right">+</span>
+                        </div>
+                        
+                    </div>
+
+                </div>
+                
+                <div class="comfirmButtom mt20">
+                    <button class="mui-btn mui-btn-warning">提交申请</button>
+                </div>
+                
+             </div>
+
+           
+
+            
+          
+
+         </div>
+     </section>
+    
+     @@include('@pathInclude/views/footer.html')
+
+     <script src="/mine/static/js/fundAccountDiagnosisResult.js"></script>
+ </body>
+ 
+ </html>

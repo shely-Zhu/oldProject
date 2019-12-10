@@ -65,7 +65,7 @@ $(function() {
 					$('.private_05 img').attr('src',jsonData[4].imgUrl);
 
 
-				},
+				}
 				    
 			}];
 			$.ajaxLoading(obj);
@@ -81,7 +81,7 @@ $(function() {
 			mui("body").on('tap','.private_04 img', function(){
 				window.location.href = site_url.htcf_prvIndex_url;
 			});
-		},
+		}
 	}
 	privateActivity.init();
 

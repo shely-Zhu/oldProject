@@ -204,6 +204,12 @@ $(function() {
                 // mui(s).pullRefresh().disablePullupToRefresh()
             });
 
+                //无缝滚动
+                setTimeout(function() {
+                    //无缝滚动
+                    alwaysAjax($('#' + w + ' .mui-table-view-cell'), s , 50)
+                }, 1000)
+
             // mui('.mui-slider').slider().stopped = true;
         },
         getData: function($id, t) { // 获取产品数据的公用ajax方法;$id为各区域的 scroll+num id
@@ -387,12 +393,14 @@ $(function() {
         events: function() { //绑定事件
             var that = this;
             //点击列表跳转
-            mui('body').on('tap','.datalist',function(){
+            mui('body').on('mdClick','.datalist',function(){
                 var applyId=$(this).attr('data-applyId');
                 var isBuy=$(this).attr('data-isBuy');
                 var isCash = true
                 window.location.href=site_url.publicTradeDetail_url+'?applyId='+applyId+'&isBuy='+isBuy 
                                         +'&isCash='+isCash;
+            },{
+                'htmdEvt': 'superRecord_0'
             });
         }
     };

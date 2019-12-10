@@ -246,13 +246,13 @@ $(function() {
                             for(var i = 0 ; i < that.gV.lazyClassArr.length; i++) {
                                 $("." + that.gV.lazyClassArr[i]).lazyload()
                             }
-                            alwaysAjax('#' + w + ' .mui-table-view-cell', s)
+                            alwaysAjax($('#' + w + ' .mui-table-view-cell'), s)
                         } else {
                             $id.find('.contentWrapper .mui-table-view-cell').append(that.html);
                             for(var i = 0 ; i < that.gV.lazyClassArr.length; i++) {
                                 $("." + that.gV.lazyClassArr[i]).lazyload()
                             }
-                            alwaysAjax('#' + w + ' .mui-table-view-cell', s)
+                            alwaysAjax($('#' + w + ' .mui-table-view-cell'), s)
                         }
                         //获取当前展示的tab的索引
                         var index = $('#slider .tab-scroll-wrap .mui-active').index(),

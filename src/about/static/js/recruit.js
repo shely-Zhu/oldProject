@@ -68,7 +68,7 @@ $(function(){
 								window.location.href=site_url.login_html_url+'?originUrl=' + new Base64().encode(window.location.href);
 							}
 						}	
-					},
+					}
 					   
 				}
 			];
@@ -201,7 +201,7 @@ $(function(){
 				window.location.href = site_url.recruitIndex_url;
 			})
 
-		},
+		}
 
 	}
 

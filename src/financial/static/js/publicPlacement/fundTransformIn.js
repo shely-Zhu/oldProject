@@ -24,10 +24,13 @@ $(function () {
 			payConfirmDate: $(".payConfirm .date"),  //购买确认日
 			brforre15Date: $(".brforre15 .date"),  // 15点之后交易日
 			popupUl: $('.popup-ul'), // 银行卡模板容器
+			popupUl2: $('.popup-ul2'), // 基金模板容器
 			bankListTemplate: $('#bankList-template'), //银行卡模板
+			bankListTemplate2: $('#bankList-template2'), //银行卡模板
 			onlinepay: $('.onlinepay .onright-left'), // 在线支付银行卡模板容器
 			remittance: $('.remittance .onright-left'), // 汇款支付银行卡模板容器
 			bankListCheckTemplate: $('#bankListCheck-template'), //选中银行卡模板
+			fundListCheckTemplate: $('#fundListCheck-template'), //选中基金支付模板
 			iconCheck: $(".item2 .iconfont"), //同意协议选择框
 			contract: $(".file .contract"), //同意协议选择框
 			recruiting: $(".file .recruiting"), //同意协议选择框
@@ -55,6 +58,8 @@ $(function () {
 			password: "",
 			tradeAcco: ''  ,//交易账号
 			singleNum:0,   //单日限额
+			fundOrBank:'',  // 在线支付中  银行卡支付 1   基金支付  2   
+			enableAmount:0,  //选择基金支付 可用余额 
 		},
 		webinit: function () {
 			var that = this;
@@ -131,13 +136,16 @@ $(function () {
 						var data = [] ;
 						data = json.data.pageList;
 						console.log('data',data)
-						data.forEach(element => {
+						data.forEach(function(element){
 							element.after4Num = element.bankAccountMask.substr(element.bankAccountMask.length -4)
+							element.singleNum_w = Number(element.singleNum)/10000 + '万'
+							element.oneDayNum_w = Number(element.oneDayNum)/10000 + '万'
 						});
 						generateTemplate(data, that.$el.popupUl, that.$el.bankListTemplate,true);
 						$("#loading").hide()
 						$('.popup').css('display','block')
 						if(useEnv == '0'){
+							that.getTransferFunds()
 							that.$el.popupTitle.html('选择在线支付银行卡')
 						}else{
 							that.$el.popupTitle.html('选择汇款支付银行卡')
@@ -155,11 +163,35 @@ $(function () {
             }];
             $.ajaxLoading(obj);
 		},
-
+		//获取可转换基金列表
+		getTransferFunds: function() {
+			var that = this;
+			var obj = [{ 
+				url: site_url.queryFundTransferAssetsDetail_api,
+				data: {
+					type:2
+				},
+				//async: false,
+				needDataEmpty: true,
+				callbackDone: function(json) {
+					if(json.status == '0000'){
+						// 将列表插入到页面上
+						var data = [] ;
+						data = json.data.pageList;
+						console.log('data',data)
+						data.forEach(function(element){
+							element.after4Num = element.bankAccoutEncrypt.substr(element.bankAccoutEncrypt.length -4)
+						});
+						generateTemplate(data, that.$el.popupUl2, that.$el.bankListTemplate2,true);
+						
+					}
+				}
+			}];
+			$.ajaxLoading(obj);
+		},
 		//获取告知书，招募书链接
 		getAgreeUrl: function() {
             var that = this;
-
             var obj = [{ 
                 url: site_url.fundMaterial_api,
                 data: {
@@ -172,7 +204,7 @@ $(function () {
 						// 将列表插入到页面上
 						var data = [] ;
 						data = json.data;
-						data.forEach(element => {
+						data.forEach(function(element){
 							if(element.materialType == '1'){
 								that.$el.contract.attr('href',element.linkAddress)
 							}
@@ -180,11 +212,8 @@ $(function () {
 								that.$el.recruiting.attr('href',element.linkAddress)
 							}
 						});
-						
 					}
-                  
                 },
-
             }];
             $.ajaxLoading(obj);
 		},
@@ -375,16 +404,8 @@ $(function () {
 				if($(this).val().includes(".") && $(this).val().split(".")[1].length >2){
 					tipAction('只能输入两位小数')
 					return
-				}else{
-					if(Number($(this).val()) >= Number(that.gV.minValue) && Number($(this).val()) <= Number(that.gV.maxValue)){
-						that.getCostEstimate($(this).val())
-					}else if(Number($(this).val()) > that.gV.maxValue){
-						tipAction('最大买入金额不能超过' + that.gV.maxValue + '元')
-					}else{
-						return false
-					}
 				}
-				
+				that.getCostEstimate($(this).val())
 				
 			})
 			//清除输入框数字
@@ -397,25 +418,48 @@ $(function () {
 			mui("body").on('mdClick','.bank-li',function(){
 				$(".bank-li .true").hide();
 				$(this).find(".true").show()
+				that.gV.fundOrBank = $(this).attr('fundOrBank');
 				that.gV.bankName = $(this).attr('bankName');
 				that.gV.bankNo = $(this).attr('bankNo');
 				that.gV.tradeAcco = $(this).attr('tradeAcco');
-				that.gV.bankAccountSecret = $(this).attr('bankAccountSecret');
 				that.gV.capitalMode = $(this).attr('capitalMode')
-				that.gV.singleNum = $(this).attr('singleNum')
 				var after4Num =  $(this).attr('after4Num')
 				var data = []
-				data.push({
-					bankThumbnailUrl:$(this).attr('bankThumbnailUrl'),
-					bankName:$(this).attr('bankName'),
-					bankNo:$(this).attr('bankNo'),
-					singleNum:$(this).attr('singleNum'),
-					oneDayNum:$(this).attr('oneDayNum'),
-					after4Num:after4Num
-				})
+				if(that.gV.fundOrBank == '1'){
+					that.gV.bankAccountSecret = $(this).attr('bankAccountSecret');
+					that.gV.singleNum = $(this).attr('singleNum')
+					data.push({
+						bankThumbnailUrl:$(this).attr('bankThumbnailUrl'),
+						bankName:$(this).attr('bankName'),
+						bankNo:$(this).attr('bankNo'),
+						singleNum:$(this).attr('singleNum'),
+						oneDayNum:$(this).attr('oneDayNum'),
+						after4Num:after4Num,
+						singleNum_w:Number($(this).attr('singleNum'))/10000 + '万',
+						oneDayNum_w:Number($(this).attr('oneDayNum'))/10000 + '万',
+					})
+				}else{
+					that.gV.bankAccountSecret = $(this).attr('bankAccoutEncrypt');
+					that.gV.enableAmount = $(this).attr('enableAmount')
+					data.push({
+						// bankThumbnailUrl:$(this).attr('bankThumbnailUrl'),
+						fundName:$(this).attr('fundName'),
+						bankName:$(this).attr('bankName'),
+						bankNo:$(this).attr('bankNo'),
+						enableAmount:$(this).attr('enableAmount'),
+						after4Num:after4Num
+					})
+				}
+				
 
 				if(that.gV.payType == '0'){
-					generateTemplate(data, that.$el.onlinepay, that.$el.bankListCheckTemplate,true);
+					if(that.gV.fundOrBank == '1'){
+						generateTemplate(data, that.$el.onlinepay, that.$el.bankListCheckTemplate,true);
+						
+					}else{
+						// ......未完待续
+						generateTemplate(data, that.$el.onlinepay, that.$el.fundListCheckTemplate,true);
+					}
 					that.$el.onlinepay.parent().find(".imgc").show();
 					that.$el.onlinepay.parent().find(".iimg").hide();
 					that.$el.remittance.html('')
@@ -452,24 +496,27 @@ $(function () {
 			
 			//确定
 			mui("body").on('mdClick','.btn_box .btn',function(){
+				$("#transformInput").blur()
 				if(Number(that.gV.balance) < Number(that.gV.minValue)){
 					tipAction('最小买入金额不能低于' + that.gV.minValue + '元')
 					return
-				}else{
-					if(!!that.gV.bankAccountSecret){
-						if(Number(that.gV.balance) > Number(that.gV.singleNum)){
-							tipAction('单笔金额不能超过' + that.gV.singleNum + '元')
-							return
-						}
-						that.checkPayType()
-						
-					}else{
-						//未选择银行卡提示信息
-						tipAction("请选择银行卡！");
+				}
+				if(Number(that.gV.balance) > Number(that.gV.maxValue)){
+					tipAction('最大买入金额不能超过' + that.gV.maxValue + '元')
+					return
+				}
+				if(!!that.gV.bankAccountSecret){
+					if(Number(that.gV.balance) > Number(that.gV.singleNum)){
+						tipAction('单笔金额不能超过' + that.gV.singleNum + '元')
 						return
 					}
+					that.checkPayType()
+					
+				}else{
+					//未选择银行卡提示信息
+					tipAction("请选择银行卡！");
+					return
 				}
-				
 			}, {
 				htmdEvt: 'fundTransformIn_08'
 			}) ;
@@ -535,7 +582,7 @@ $(function () {
 				htmdEvt: 'fundTransformIn_16'
 			}) ;
 
-		},
+		}
 
 
 

@@ -65,16 +65,8 @@ $(function(){
 	                $('#number').html(json.data.bankAccount);
 	                $('#linenum').html(json.data.bankNo);
 	                $('#openingBank').html(json.data.bankAccountName);
-
 					$('#topc').html(json.data.remarks);
-
-
 	            },
-	            callbackFail: function(json){  //失败后执行的函数
-
-						tipAction(json.msg);
-
-	            }
 	        }];
 	        $.ajaxLoading(obj);
 
@@ -108,7 +100,7 @@ $(function(){
 			// 	});
 			// })
 
-			mui("body").on('tap', '.copy_btn' , function(){
+			mui("body").on('mdClick', '.copy_btn' , function(event){
 				var $this = $(this);
 				var copyText = $this.siblings('div').text()
 			    //实例化clipboard
@@ -126,20 +118,24 @@ $(function(){
 				clipboard.on("error", function (e) {
 					tipAction("请选择“拷贝”进行复制!");
 				});
-
+				clipboard.onClick(event)
 			},{
                 'htmdEvt': 'mineRegulatoryAccounts_01'
             });
 			
-			$('.toptitle span,.toptitle img').on('tap',function(){
+			mui("body").on('mdClick', '.toptitle span,.toptitle img' , function(){
 				$('.topcontent').addClass('mui-active').removeClass('mui-hidden');
-			})
+			},{
+                'htmdEvt': 'mineRegulatoryAccounts_02'
+            })
 			
-			$('.topimg').on('tap',function(){
+			mui("body").on('mdClick', '.topimg' , function(){
 				$('.topcontent').addClass('mui-hidden').removeClass('mui-active');
-			})
+			},{
+                'htmdEvt': 'mineRegulatoryAccounts_03'
+            })
 
-        },
+        }
 
 	};
 	//调用函数
