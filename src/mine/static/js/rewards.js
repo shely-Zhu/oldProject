@@ -78,7 +78,9 @@ $(function() {
                             var data = json.data.list;
 
                             if(that.gV.pageCurrent == 1 && data.length == 0) {
-                                $(".list").css("display", "none")
+                                $(".list").css("display", "none");
+                                $('.without.noData').show();
+                                $('.contentHeader').hide();
                             } else {
                                 $.each(json.data.list, function(i, el) {
 
