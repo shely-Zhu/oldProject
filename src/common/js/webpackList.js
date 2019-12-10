@@ -198,7 +198,8 @@ module.exports = {
     './mine/static/js/fundAccountDiagnosisResult': './src/mine/static/js/fundAccountDiagnosisResult.js',
     //基金账户诊断 -- 添加已购买基金
     './mine/static/js/addAccountDiagnosisResult': './src/mine/static/js/addAccountDiagnosisResult.js',
-
+    //基金账户诊断 -- 申请记录页面
+    './mine/static/js/applyHistory': './src/mine/static/js/applyHistory.js',
     // 标普模型
     './personal/static/js/spAssetModel': "./src/personal/static/js/spAssetModel.js",
     // 资产配置建议书
