@@ -24,6 +24,7 @@ module.exports = function(data, $ele, $id, type) {
         data[i].businessType01 = (data[i].businessType == 0 || data[i].businessType == 1) ? 1 : 0;
         data[i].businessType0 = data[i].businessType == 0 && (data[i].leftTopStatus == 5) ? 1 : 0; //认购
         data[i].businessType1 = data[i].businessType == 1 && (data[i].leftTopStatus == 5) ? 1 : 0; //申购
+        data[i].businessTypeSucc = data[i].leftTopStatus == 5 ? 1 : 0; //申购
         //待确认的预约
 
         // 按钮的字段
@@ -37,7 +38,7 @@ module.exports = function(data, $ele, $id, type) {
                     data[i].appointmentToAuthentication = true; //展示合格投资者认证
                 }
                 if (operationNoList[j] == '2') {
-                    data[i].appointmentCancel = true; //展示取消按钮
+                    data[i].appointmentCancel = true; //展示取消预约按钮
                 }
                 if (operationNoList[j] == '3') {
                     data[i].reAppointment = true; //展示重新预约按钮
@@ -47,9 +48,6 @@ module.exports = function(data, $ele, $id, type) {
                 }
                 if (operationNoList[j] == '5' || operationNoList[j] == '10') {
                     data[i].appointmentToSee = true; //展示查看合同
-                }
-                if (operationNoList[j] == '6' || operationNoList[j] == '11') {
-                    data[i].appointmentToDown = true; //展示下载合同
                 }
                 if (operationNoList[j] == '8' || operationNoList[j] == '7' || operationNoList[j] == '12') {
                     data[i].appointmentToUpload = true; //展示上传汇款凭证
@@ -81,7 +79,7 @@ module.exports = function(data, $ele, $id, type) {
         //分红
         data[i].businessTypeBonus = data[i].businessType == 7 ? 1 : 0;
         //已完成的预约
-        data[i].businessTypeOrder = (data[i].businessType == 0 || data[i].businessType == 1) && (data[i].leftTopStatus == 21 || data[i].leftTopStatus == 22 || data[i].leftTopStatus == 23) ? 1 : 0;
+        data[i].businessTypeOrder = (data[i].businessType == 0 || data[i].businessType == 1) && (data[i].leftTopStatus == '21' || data[i].leftTopStatus == '22' || data[i].leftTopStatus == '23') ? 1 : 0;
         //转让
         data[i].businessType3 = data[i].businessType == 3 ? 1 : 0;
         //受让
