@@ -77,6 +77,7 @@ $(function() {
                             var data = json.data.pageList;
                             if(that.gV.aP.pageNo == 1 && data.length == 0) {
                                 $(".list").css("display", "none")
+                                that.getElements.noData.show()
                             } else {
                                 def && def.resolve( data, that.gV.aP.pageNo);
                                 that.gV.aP.pageNo++;
