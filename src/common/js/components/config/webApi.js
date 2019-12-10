@@ -320,6 +320,7 @@ module.exports = function() {
     this.prfFundFeeRate_api = http_url.web_url + '/pof/fundFeeRate/frontend/query'; //15.金服WEB-定投费率-查询
     this.prfFundList_api = http_url.web_url + '/pof/newIssue/frontend/fundList'; //16.金服WEB-新发基金-列表查询
     this.prfQuerynewsletter_api = http_url.web_url + '/pof/fundnewsletter/frontend/querynewsletter'; //17.金服WEB-基金时讯-查询
+    this.queryFundTransferAssetsDetail_api = http_url.web_url + '/account/queryFundTransferAssetsDetail'; // 金服WEB-基金时支付列表
 
 
     /*------------------- 私募理财fang——le end ------------------------------*/
