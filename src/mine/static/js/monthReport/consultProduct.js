@@ -44,7 +44,7 @@ var consultProduct = {
 
 					window.location.href = new Base64().decode(splitUrl['backUrl']);
 				
-				},
+				}
 						
 			}]
 			$.ajaxLoading(obj);
@@ -52,7 +52,7 @@ var consultProduct = {
 		},{
 			'htmdEvt': 'consultProduct_01'
 		})
-	},
+	}
 }
 
 consultProduct.init();

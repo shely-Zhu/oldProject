@@ -66,6 +66,6 @@ var openPdf={
             }; 
         });
 	
-	},
+	}
 }
 openPdf.init()

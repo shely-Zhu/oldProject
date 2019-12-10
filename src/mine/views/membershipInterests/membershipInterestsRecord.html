@@ -81,23 +81,25 @@
 
     <script id="List-template" type="text/x-handlebars-template">
         {{#each this}}
-        <div class="lione">
-            <div>
-                {{growthDesc}}
+        <div class="listItem">
+            <div class="lione">
+                <div>
+                    {{growthDesc}}
+                </div>
+                <div>
+                    {{growthDetail}}
+                </div>
             </div>
-            <div>
-                {{growthDetail}}
+            <div class="litwo">
+                <div>
+                    {{growthDate}}
+                </div>
+                {{#if growthIndate}}
+                <div>
+                    有效期至&nbsp;{{growthIndate}}
+                </div>
+                {{/if}}
             </div>
-        </div>
-        <div class="litwo">
-            <div>
-                {{growthDate}}
-            </div>
-            {{#if growthIndate}}
-            <div>
-                有效期至&nbsp;{{growthIndate}}
-            </div>
-            {{/if}}
         </div>
         {{/each}}
     </script>

@@ -102,7 +102,7 @@ var monthReportDetail = {
 				//请求失败，
 				//显示错误提示
 				tipAction(json.message);
-			},
+			}
 			
 		},{
 			url: site_url.queryInvestProdHoldShareList_api,   // 持仓总览  报告的月末持仓总览
@@ -756,7 +756,7 @@ var monthReportDetail = {
 		
 		
 
-	},
+	}
 }
 
 monthReportDetail.init();
