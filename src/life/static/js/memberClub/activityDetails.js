@@ -51,7 +51,6 @@ $(function() {
 
                     },
                     //async: false,
-                    needLogin: false,
                     needDataEmpty: true,
                     callbackDone: function(json) {
                         var data = json.data;
