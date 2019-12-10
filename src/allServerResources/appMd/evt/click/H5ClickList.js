@@ -369,9 +369,88 @@ var clickList = {
 	"publicAssets_9":{ type:'click', evtid: 'publicAssets_9', topic: '公募资产_关闭资产组合说明', info: ''},
 	"publicAssets_10":{ type:'click', evtid: 'publicAssets_10', topic: '公募资产_关闭资产组合说明', info: ''},
 
+	"privateDetail_0":{ type:'click', evtid: 'privateDetail_0', topic: '私募资产详情_详情的展开与收起', info: ''},
+	"privateDetail_1":{ type:'click', evtid: 'privateDetail_1', topic: '私募资产详情_交易明细跳转', info: ''},
+	"privateDetail_2":{ type:'click', evtid: 'privateDetail_2', topic: '私募资产详情_收益分配明细跳转', info: ''},
+	"privateDetail_3":{ type:'click', evtid: 'privateDetail_3', topic: '私募资产详情_基金确认书跳转', info: ''},
+	"privateDetail_4":{ type:'click', evtid: 'privateDetail_4', topic: '私募资产详情_历史明细跳转', info: ''},
+	"privateDetail_5":{ type:'click', evtid: 'privateDetail_5', topic: '私募资产详情_净值明细跳转', info: ''},
+	"privateDetail_6":{ type:'click', evtid: 'privateDetail_6', topic: '私募资产详情_交易规则跳转', info: ''},
+	"privateDetail_7":{ type:'click', evtid: 'privateDetail_7', topic: '私募资产详情_产品档案跳转', info: ''},
+	"privateDetail_8":{ type:'click', evtid: 'privateDetail_8', topic: '私募资产详情_信息披露跳转', info: ''},
+	"privateDetail_9":{ type:'click', evtid: 'privateDetail_9', topic: '私募资产详情_折线图点击月份区域', info: ''},
+	"privateDetail_10":{ type:'click', evtid: 'privateDetail_10', topic: '私募资产详情_赎回按钮点击切换', info: ''},
+	"privateDetail_11":{ type:'click', evtid: 'privateDetail_11', topic: '私募资产详情_赎回页面跳转', info: ''},
+	"privateDetail_12":{ type:'click', evtid: 'privateDetail_12', topic: '私募资产详情_折线图点击七日年化/万份收益切换区域', info: ''},
 
+	"privateDetailList_0":{ type:'click', evtid: 'privateDetailList_0', topic: '私募交易详情_筛选按钮点击', info: ''},
+	"privateDetailList_1":{ type:'click', evtid: 'privateDetailList_1', topic: '私募交易详情_筛选区域筛选项点击', info: ''},
+	"privateDetailList_2":{ type:'click', evtid: 'privateDetailList_2', topic: '私募交易详情_点击遮罩隐藏', info: ''},
+	"privateDetailList_3":{ type:'click', evtid: 'privateDetailList_3', topic: '私募交易详情_取消受让、取消预约、取消转让点击', info: ''},
+	"privateDetailList_4":{ type:'click', evtid: 'privateDetailList_4', topic: '私募交易详情_我明白了区域点击', info: ''},
+	"privateDetailList_5":{ type:'click', evtid: 'privateDetailList_5', topic: '私募交易详情_点击状态文字出现弹框', info: ''},
+	"privateDetailList_6":{ type:'click', evtid: 'privateDetailList_6', topic: '私募交易详情_详情按钮点击', info: ''},
 
+	"privateFundPdf_0":{ type:'click', evtid: 'privateFundPdf_0', topic: '私募基金确认书_点击下载', info: ''},
+	"privateFundPdf_1":{ type:'click', evtid: 'privateFundPdf_1', topic: '私募基金确认书_点击修改邮箱', info: ''},
+
+	"tobeConfirmTransaction_0":{ type:'click', evtid: 'tobeConfirmTransaction_0', topic: '待确认交易_筛选按钮点击', info: ''},
+	"tobeConfirmTransaction_1":{ type:'click', evtid: 'tobeConfirmTransaction_1', topic: '待确认交易_筛选区域条件点击', info: ''},
+	"tobeConfirmTransaction_2":{ type:'click', evtid: 'tobeConfirmTransaction_2', topic: '待确认交易_点击遮罩隐藏', info: ''},
+	"tobeConfirmTransaction_3":{ type:'click', evtid: 'tobeConfirmTransaction_3', topic: '待确认交易_取消受让、取消预约、取消转让', info: ''},
+	"tobeConfirmTransaction_4":{ type:'click', evtid: 'tobeConfirmTransaction_4', topic: '待确认交易_点击状态文字出现弹框', info: ''},
+	"tobeConfirmTransaction_5":{ type:'click', evtid: 'tobeConfirmTransaction_5', topic: '待确认交易_详情按钮点击', info: ''},
+
+	"cashTreasure_0":{ type:'click', evtid: 'cashTreasure_0', topic: '现金宝详情_展开收起按钮点击', info: ''},
+	"cashTreasure_1":{ type:'click', evtid: 'cashTreasure_1', topic: '现金宝详情_折线图中月份点击', info: ''},
+	"cashTreasure_2":{ type:'click', evtid: 'cashTreasure_2', topic: '现金宝详情_折线图点击七日年化/万份收益切换区域', info: ''},
+
+	"optionalPublicDetail_0":{ type:'click', evtid: 'optionalPublicDetail_0', topic: '公募自选资产详情页_按钮点击展开收起', info: ''},
+	"optionalPublicDetail_1":{ type:'click', evtid: 'optionalPublicDetail_1', topic: '公募自选资产详情页_折线图点击月份', info: ''},
+	"optionalPublicDetail_2":{ type:'click', evtid: 'optionalPublicDetail_2', topic: '公募自选资产详情页_折线图点击七日年化/万份收益切换区域', info: ''},
+	"optionalPublicDetail_3":{ type:'click', evtid: 'optionalPublicDetail_3', topic: '公募自选资产详情页_交易记录跳转', info: ''},
+	"optionalPublicDetail_4":{ type:'click', evtid: 'optionalPublicDetail_4', topic: '公募自选资产详情页_分红方式跳转', info: ''},
+	"optionalPublicDetail_5":{ type:'click', evtid: 'optionalPublicDetail_5', topic: '公募自选资产详情页_历史明细跳转', info: ''},
+	"optionalPublicDetail_6":{ type:'click', evtid: 'optionalPublicDetail_6', topic: '公募自选资产详情页_收益明细跳转', info: ''},
+	"optionalPublicDetail_7":{ type:'click', evtid: 'optionalPublicDetail_7', topic: '公募自选资产详情页_头部详情跳转', info: ''},
+	"optionalPublicDetail_8":{ type:'click', evtid: 'optionalPublicDetail_8', topic: '公募自选资产详情页_点击赎回', info: ''},
+	"optionalPublicDetail_9":{ type:'click', evtid: 'optionalPublicDetail_9', topic: '公募自选资产详情页_点击买入', info: ''},
+	"optionalPublicDetail_10":{ type:'click', evtid: 'optionalPublicDetail_10', topic: '公募自选资产详情页_点击定投', info: ''},
+
+	"superRecord_0":{ type:'click', evtid: 'superRecord_0', topic: '超宝基金产品-交易记录_列表点击', info: ''},
+	
+	"superStreasureDetail_0":{ type:'click', evtid: 'superStreasureDetail_0', topic: '自选公募-超宝详情_选项卡切换', info: ''},
+	"superStreasureDetail_1":{ type:'click', evtid: 'superStreasureDetail_1', topic: '自选公募-超宝详情_申请专业投资者', info: ''},
+	"superStreasureDetail_2":{ type:'click', evtid: 'superStreasureDetail_2', topic: '自选公募-超宝详情_点击转出跳转', info: ''},
+	"superStreasureDetail_3":{ type:'click', evtid: 'superStreasureDetail_3', topic: '自选公募-超宝详情_点击转入跳转', info: ''},
+	"superStreasureDetail_4":{ type:'click', evtid: 'superStreasureDetail_4', topic: '自选公募-超宝详情_点击历史记录', info: ''},
+
+	"transactionRecords_0":{ type:'click', evtid: 'transactionRecords_0', topic: '自选公募-交易记录_筛选分类的点击事件', info: ''},
+	"transactionRecords_1":{ type:'click', evtid: 'transactionRecords_1', topic: '自选公募-交易记录_筛选列表内容的点击事件', info: ''},
+	"transactionRecords_2":{ type:'click', evtid: 'transactionRecords_2', topic: '自选公募-交易记录_点击列表跳转', info: ''},
+	
 	/************************************** account end *************************************************/
+
+	/************************************** life start *************************************************/
+	// activityList.html
+	"activityList_0":{ type:'click', evtid: 'activityList_0', topic: '定位选择', info: ''},
+	"activityList_1":{ type:'click', evtid: 'activityList_1', topic: '热门城市', info: ''},
+	"activityList_2":{ type:'click', evtid: 'activityList_2', topic: '头部返回效果', info: ''},
+	"activityList_3":{ type:'click', evtid: 'activityList_3', topic: '定位右侧索引效果', info: ''},
+	"activityList_4":{ type:'click', evtid: 'activityList_4', topic: '活动列表跳转', info: ''},
+	"activityList_5":{ type:'click', evtid: 'activityList_5', topic: '搜索框输入触发查询数据', info: ''},
+	"activityList_6":{ type:'click', evtid: 'activityList_6', topic: '清除搜索框触发查询数据', info: ''},
+	"activityList_7":{ type:'click', evtid: 'activityList_7', topic: '点击搜索框触发选中', info: ''},
+	// activityDetails.html
+	"activityDetails_0":{ type:'click', evtid: 'activityDetails_0', topic: '返回按钮事件', info: ''},
+	"activityDetails_1":{ type:'click', evtid: 'activityDetails_1', topic: '立即报名方法', info: ''},
+	"activityDetails_2":{ type:'click', evtid: 'activityDetails_2', topic: '弹框取消', info: ''},
+	"activityDetails_3":{ type:'click', evtid: 'activityDetails_3', topic: '弹框取消方法', info: ''},
+	"activityDetails_4":{ type:'click', evtid: 'activityDetails_4', topic: '关闭大弹框', info: ''},
+	"activityDetails_5":{ type:'click', evtid: 'activityDetails_5', topic: '分享好友', info: ''},
+	"activityDetails_6":{ type:'click', evtid: 'activityDetails_6', topic: '我知道了按钮', info: ''},
+
+	/************************************** life end *************************************************/
 }
 
 module.exports = clickList;

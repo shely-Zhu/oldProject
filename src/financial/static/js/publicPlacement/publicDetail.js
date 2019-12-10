@@ -46,7 +46,6 @@ $(function () {
             var that = this;
             //页面初始化
             that.getData();
-            that.getFundCollectionInit()
             $('.tips').hide()
 
         },
@@ -92,6 +91,7 @@ $(function () {
                     var html = template(that.gV.json); (html, "00");
                     
                     $(".tplBox").html(html);
+                    that.getFundCollectionInit()
                     that.getData1();
                     that.getData2('1', 1);
                     that.events();
@@ -206,24 +206,22 @@ $(function () {
             // });
             // 定投
             mui("body").on('mdClick', ".footer .fixed_investement_btn", function (e) {
-
-                that.getUserInfo()
-                if (that.gV.tipStatus) {
-                    window.location.href = site_url.pofOrdinarySetThrow_url + '?fundCode=' + fundCode + '&fundName=' + fundName + '&type=add';
-                }
+                window.location.href = site_url.pofOrdinarySetThrow_url + '?fundCode=' + fundCode + '&fundName=' + fundName + '&type=add';
+                // that.getUserInfo()
+                // if (that.gV.tipStatus) {
+                //     window.location.href = site_url.pofOrdinarySetThrow_url + '?fundCode=' + fundCode + '&fundName=' + fundName + '&type=add';
+                // }
             });
             // 买入
             mui("body").on('mdClick', ".footer .buy_btn", function (e) {
-            
                 //that.getUserInfo()
                 window.location.href = site_url.fundTransformIn_url + '?fundCode=' + fundCode + '&fundName=' + fundName;
-                if (that.gV.tipStatus) {
-                    window.location.href = site_url.fundTransformIn_url + '?fundCode=' + fundCode + '&fundName=' + fundName;
-                }
+                // if (that.gV.tipStatus) {
+                //     window.location.href = site_url.fundTransformIn_url + '?fundCode=' + fundCode + '&fundName=' + fundName;
+                // }
             });
             //认证
             mui("body").on('mdClick', ".tips .tips-li-right", function (e) {
-                console.log($(this).attr('type'));
                 var type = $(this).attr('type')
                 switch (type) {
                     case "1":
@@ -284,7 +282,7 @@ $(function () {
             //分享  -- 跳往原生页面
             mui("body").on('mdClick', ".share_area", function (e) {
                 //要携带参数后期补上
-                window.location.href = site_url.pofShare_url
+                window.location.href = site_url.pofShare_url + '?fundCode=' + fundCode + '&shareTitle=' + that.gV.secuSht
             });
             //加自选  
             mui("body").on('mdClick', ".selected_area", function (e) {
@@ -314,6 +312,7 @@ $(function () {
                 data: {
                     
                 },
+                needLogin: false,
                 callbackDone: function (json) {
                    var fundCode = splitUrl['fundCode'];
                    if(json.data.includes(fundCode)){

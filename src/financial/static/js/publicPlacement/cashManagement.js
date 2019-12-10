@@ -153,8 +153,9 @@ $(function () {
 			});
 
       //了解现金管理
-      mui("body").on("tap", ".fundKnow", function () {
-       alert("跳转现金管理引导页")
+      mui("body").on("tap", ".fundKnow", function () { 
+       window.location.href  = site_url.articleTemplate_url + '?id=1&articleBelong=12'
+       
       });
       //认证
       mui("body").on('mdClick', ".tips .tips-li-right", function (e) {
@@ -196,7 +197,7 @@ $(function () {
       // mui("body").on("tap", ".btnBottom", function () {
       //   that.getReport();
       // });
-    },
+    }
 
   }
 

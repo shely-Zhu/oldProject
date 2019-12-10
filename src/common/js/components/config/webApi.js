@@ -115,10 +115,10 @@ module.exports = function() {
     /*-------------------营销相关 end ------------------------------*/
 
     /*-------------------生活-会员俱乐部 ------------------------------*/
-    this.getActivitiesList_api = http_url.web_url + '/marketing/activity/getActivitiesList'; //会员俱乐部-活动列表
-    this.getDetailActivity_api = http_url.web_url + '/marketing/activity/getDetailActivity'; //会员俱乐部-活动详情
+    this.getActivitiesList_api = http_url.web_url + '/marketing/frontend/getActivitiesList'; //会员俱乐部-活动列表
+    this.getDetailActivity_api = http_url.web_url + '/marketing/frontend/getDetailActivity'; //会员俱乐部-活动详情
     this.activityApply_api = http_url.web_url + '/marketing/activityApply'; //会员俱乐部-立即报名
-    this.shareInfo_api = http_url.web_url + '/marketing/activity/shareInfo'; //会员俱乐部-分享给好友
+    this.shareInfo_api = http_url.web_url + '/marketing/frontend/shareInfo'; //会员俱乐部-分享给好友
 
     /*-------------------生活-会员俱乐部 end ------------------------------*/
     /*-------------------银杏研究相关 ------------------------------*/
@@ -158,11 +158,9 @@ module.exports = function() {
     this.queryFinancialer_api = http_url.web_url + '/account/home/frontend/queryFinancialer';
 
     /*-------------------明星理财师结束 ------------------------------*/
-    //会员俱乐部-活动列表
-    this.getActivitiesList_api = http_url.web_url + '/marketing/activity/getActivitiesList';
     //会员俱乐部-活动-城市定位列表-根据城市类型或者首字母获取城市list
 
-    this.cityList_api = http_url.web_url + '/marketing/activity/cityList';
+    this.cityList_api = http_url.web_url + '/marketing/frontend/cityList';
     //我的奖励
     this.getPrizeInfo_api = http_url.web_url + "/account/myPrize/getPrizeInfo";
     //我的奖励查看详情

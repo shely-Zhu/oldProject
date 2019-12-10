@@ -7,7 +7,7 @@ require('@pathCommonBase/base.js');
 require('@pathCommonJs/ajaxLoading.js');
 var splitUrl = require('@pathCommonJs/components/splitUrl.js')();
 var generateTemplate = require('@pathCommonJsComBus/generateTemplate.js');
-var alwaysAjax = require('@pathCommonJs/components/alwaysAjax.js');
+require('@pathCommonCom/pullRefresh/pullRefresh.js');
 
 $(function() {
     let somePage = {
@@ -55,7 +55,43 @@ $(function() {
             if (!$('.list').hasClass('setHeight')) {
                 $('.list').height(height).addClass('setHeight');
             }
-            mui.init({
+            $.pullRefresh({
+                wrapper: $('.list'),
+                class: 'listItem',
+                template: that.$e.informsListTemp, 
+                pageSize: that.gV.pageSize,
+                callback: function(def, t){
+                    var obj = [{
+                        url: site_url.noticeAndTransDynamicList_api,
+                        data: {
+                            "pageNo": that.gV.pageCurrent, //非必须，默认为1
+                            "pageSize": that.gV.pageSize, //非必须，默认为10
+                            "mesType": that.gV.mesType
+                        },                        
+                        needDataEmpty: true,
+                        callbackDone: function(json) {     
+                            var data = json.data.list;
+                            if(that.gV.pageCurrent == 1 && data.length == 0) {
+                                $(".list").css("display", "none")
+                            } else {
+                                def && def.resolve( that.dealData(data), that.gV.pageCurrent);
+                                that.gV.pageCurrent++;
+                            }
+                        },
+                        callbackNoData: function( json ){  
+                            if(that.gV.pageCurrent == 1) {
+                                $(".list").css("display", "none")
+                            }
+                            def && def.reject( json, that.gV.pageCurrent );
+                        },
+                        callbackFail: function(json) {
+                            def && def.reject( json, that.gV.pageCurrent );
+                        },
+                    }];
+                    $.ajaxLoading(obj); 
+                }
+            })
+            /*mui.init({
                 pullRefresh: {
                     container: '.contentWrapper',
                     up: {
@@ -78,16 +114,17 @@ $(function() {
                 that.$e.listLoading.show();
                 //这一句初始化并第一次执行mui上拉加载的callback函数
                 mui('.contentWrapper').pullRefresh().pullupLoading();
-                //隐藏loading，调试接口时需要去掉
+                //隐藏loading，调试接口时需要去
+                掉
                 //setTimeout(function(){
                 that.$e.listLoading.hide();
                 //}, 2000);
                 //为$id添加hasPullUp  class
                 $('.list').addClass('hasPullUp');
-            });
+            });*/
         },
         // 获取消息中心列表
-        getInformsListData: function(t) {
+        /*getInformsListData: function(t) {
             var that = this;
             var obj = [{
                 url: site_url.noticeAndTransDynamicList_api,
@@ -144,7 +181,7 @@ $(function() {
                 },
             }];
             $.ajaxLoading(obj);
-        },
+        },*/
         dealData: function(data) {
             $.each(data, function(a, b) {
                 b.date = b.createTimeStr.split(" ")[0]

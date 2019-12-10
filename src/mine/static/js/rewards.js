@@ -248,7 +248,7 @@ $(function() {
 
             alwaysAjax($(".recordList"),".rewardWrapper");
 
-        },
+        }
     };
     reward.init();
 

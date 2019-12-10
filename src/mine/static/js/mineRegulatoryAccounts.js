@@ -135,7 +135,7 @@ $(function(){
                 'htmdEvt': 'mineRegulatoryAccounts_03'
             })
 
-        },
+        }
 
 	};
 	//调用函数

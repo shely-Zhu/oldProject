@@ -1,9 +1,10 @@
 
 require('@pathCommonBase/base.js');
 require('@pathCommonJs/ajaxLoading.js');
-var alwaysAjax = require('@pathCommonJs/components/alwaysAjax.js');
+/*var alwaysAjax = require('@pathCommonJs/components/alwaysAjax.js');*/
 var splitUrl = require('@pathCommonJs/components/splitUrl.js')();
 var generateTemplate = require('@pathCommonJsComBus/generateTemplate.js');
+require('@pathCommonCom/pullRefresh/pullRefresh.js');
 
 $(function() {
     var somePage = {
@@ -16,7 +17,7 @@ $(function() {
         },
         gV: { // 全局变量
             pageCurrent: 1, //当前页码，默认为1
-            pageSize: 10,
+            pageSize: 20,
             listLength: 0,
             fundCode: splitUrl['fundCode'],
         },
@@ -26,7 +27,7 @@ $(function() {
             that.events();
         },
         events:function(){
-            alwaysAjax($('.contentWrap'),'.contentWrapper',100,100)
+            //alwaysAjax($('.contentWrap'),'.contentWrapper',100,100)
            
         },
         //初始化mui的上拉加载
@@ -36,7 +37,43 @@ $(function() {
             if (!$('.list').hasClass('setHeight')) {
                 $('.list').height(height).addClass('setHeight');
             }
-            mui.init({
+            $.pullRefresh({
+                wrapper: $('.list'),
+                class: 'listItem',
+                template: that.$e.adjustmentTemp,
+                pageSize: that.gV.pageSize,
+                callback: function(def, t){
+                    var obj = [{
+                        url: site_url.fundNetWorthList_api,
+                        data: {
+                            "pageCurrent": that.gV.pageCurrent, //非必须，默认为1
+                            "pageSize": that.gV.pageSize,//非必须，默认为10
+                            "fundCode":that.gV.fundCode,//项目编号
+                        },                        
+                        needDataEmpty: true,
+                        callbackDone: function(json) {     
+                            var data = json.data.pageList;
+                            if(that.gV.pageCurrent == 1 && data.length == 0) {
+                                $(".list").css("display", "none")
+                            } else {
+                                def && def.resolve( data, that.gV.pageCurrent);
+                                that.gV.pageCurrent++;
+                            }
+                        },
+                        callbackNoData: function( json ){  
+                            def && def.reject( json, that.gV.pageCurrent );
+                            if(that.gV.pageCurrent==1) {
+                                $(".list").css("display", "none")
+                            }
+                        },
+                        callbackFail: function(json) {
+                            def && def.reject( json, that.gV.pageCurrent );
+                        }
+                    }];
+                    $.ajaxLoading(obj); 
+                },
+            })
+            /*mui.init({
                 pullRefresh: {
                     container: '.contentWrapper',
                     up: {
@@ -73,9 +110,9 @@ $(function() {
 
                 //为$id添加hasPullUp  class
                 $('.list').addClass('hasPullUp');
-            });
+            });*/
         },
-        getData: function(t) {
+        /*getData: function(t) {
             var that = this;
             var obj = [{ //历史明细
                 url: site_url.fundNetWorthList_api,
@@ -156,7 +193,7 @@ $(function() {
                 },
             }];
             $.ajaxLoading(obj);
-        },
+        },*/
     };
     somePage.init();
 });

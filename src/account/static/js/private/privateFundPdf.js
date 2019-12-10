@@ -58,7 +58,7 @@ $(function(){
 //          $('#loading').show();
             that.data.fileName = splitUrl['ecFileName'];
             that.data.fileUrl = splitUrl['ecFileUrl'];
-            var url = site_url.downloadFile_api+'?name='+new Base64().encode(that.data.fileName)+"?show=1&url="+that.data.fileUrl;
+            var url = site_url.downloadFile_api+'?name='+new Base64().encode(that.data.fileName)+"&show=0&url="+that.data.fileUrl;
             // 将pdf流转为canvas
             var pdfjsLib = window['pdfjs-dist/build/pdf'];
             // The workerSrc property shall be specified.
@@ -96,7 +96,7 @@ $(function(){
         events:function(){
             var that = this;
             //点击下载按钮，显示弹框  
-            $('.downLoad').on('click',function(){
+            mui("body").on('tap', '.downLoad', function() {
             	if(that.data.email){//如果有邮箱
 	                var objHave={
 	                    title:'',
@@ -171,11 +171,15 @@ $(function(){
 	                }
             		$.elasticLayer(objNo)
             	}
+            },{
+                'htmdEvt': 'privateFundPdf_0'
             })
             // 点击去修改邮箱
             mui("body").on('tap', '#changeMail', function() {
             	// 调用原生方法，或者原生拦截连接
             	window.location.href = site_url.changeMail_url;
+            },{
+                'htmdEvt': 'privateFundPdf_1'
             })
         }
     };

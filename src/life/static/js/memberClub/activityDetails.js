@@ -26,8 +26,8 @@ $(function() {
             gV: { // 全局变量
                 actType: splitUrl['actType'], //活动类型1-线上2-线下
                 actId: splitUrl['actId'], //活动ID
-                custType: 1, //客户类型0-机构1-个人
-                custCode: 2672403, //客户编号
+                custType: '', //客户类型0-机构1-个人
+                custCode: '', //客户编号
                 btnFlag: true,
             },
 
@@ -64,7 +64,7 @@ $(function() {
                             $('.activityBottomBox').show();
                         }
                         //金服展示图片
-                        that.$e.bgimg.attr("data-original", data.domainIP + data.htjfGeneralizeImgUrlPrex + data.htjfGeneralizeImgUrl);
+                        that.$e.bgimg.attr("data-original", url);
                         //活动名称
                         that.$e.actName.text(data.actName);
                         //活动地点
@@ -372,38 +372,52 @@ $(function() {
             events: function() {
                 var that = this;
                 //返回按钮事件
-                mui('body').on('tap', '.goblack', function() {
+                mui('body').on('mdClick', '.goblack', function() {
                     window.location.href = site_url.activityList_url;
+                },{
+                    htmdEvt: 'activityDetails_0'
                 });
                 //立即报名方法
-                mui('body').on('tap', '.activityBottomBtnBox', function() {
+                mui('body').on('mdClick', '.activityBottomBtnBox', function() {
                     if (!$(this).hasClass('disabled')) {
                         that.signUp();
                     }
+                },{
+                    htmdEvt: 'activityDetails_1'
                 });
                 //弹框取消方法-两个按钮取消
-                mui('body').on('tap', '.cancel', function() {
+                mui('body').on('mdClick', '.cancel', function() {
                     $(this).parents('.tipContainer').hide();
                     $('.mask').hide();
+                },{
+                    htmdEvt: 'activityDetails_2'
                 });
                 //弹框取消方法-一个按钮取消
-                mui('body').on('tap', '.buttonOne', function() {
+                mui('body').on('mdClick', '.buttonOne', function() {
                     $(this).parents('.tipContainer').hide();
                     $('.mask').hide();
+                },{
+                    htmdEvt: 'activityDetails_3'
                 });
                 //关闭大弹框
-                mui('body').on('tap', '.closeBtn', function() {
+                mui('body').on('mdClick', '.closeBtn', function() {
                     $(this).parent().hide();
                     $('.mask').hide();
+                },{
+                    htmdEvt: 'activityDetails_4'
                 });
                 //分享好友
-                mui('body').on('tap', '.toShare', function() {
+                mui('body').on('mdClick', '.toShare', function() {
                     that.shareInfo();
+                },{
+                    htmdEvt: 'activityDetails_5'
                 });
                 //我知道了按钮
-                mui('body').on('tap', '.knowBtn', function() {
+                mui('body').on('mdClick', '.knowBtn', function() {
                     $('#notOldToNewNoPrize').hide();
                     $('.mask').hide();
+                },{
+                    htmdEvt: 'activityDetails_6'
                 });
             }
         }

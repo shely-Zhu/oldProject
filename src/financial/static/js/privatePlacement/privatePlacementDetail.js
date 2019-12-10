@@ -128,12 +128,12 @@ $(function() {
                     }
 					that.data.productName = jsonData.productName;
                     // 私募产品 产品名称
-                    $('.productName').html(jsonData.productName);
+                    $('.productNameTip').html(jsonData.productName);
                     // 一句话产品详情
                     $('.introduction').html(jsonData.productLightspot);
                     // 净值日期
                     $('.netValueDate').html(jsonData.netValueDate)
-                        // 起投金额
+                    // 起投金额
                     $('.investmentAmountNum').html(jsonData.investStart + '万');
                     // 产品期限
                     $('.productDeadlineNum').html(jsonData.projectTerm + jsonData.projectTermUnit);
@@ -244,8 +244,8 @@ $(function() {
                         $('.advanceAmount').hide();
                     }
                     // 预约有效天数
-                    if(jsonData.reserveTime){
-                        $('.reservationDay .changgeRight').html(jsonData.reserveTime);
+                    if(jsonData.reserveEffectDays){
+                        $('.reservationDay .changgeRight').html(jsonData.reserveEffectDays);
                     }else{
                         $('.reservationDay').hide();
                     }
@@ -270,14 +270,16 @@ $(function() {
                         $('.isVideo').hide();
                     }
                     // 允许购买客户类型
-                    if(jsonData.customerType){
-                        $('.clientType .changgeRight').html(jsonData.customerType);
+                    if(jsonData.customerType == 0){
+                        $('.clientType .changgeRight').html('机构');
+                    }else if(jsonData.customerType == 1){
+                        $('.clientType .changgeRight').html('个人');
                     }else{
                         $('.clientType').hide();
                     }
                     // 允许购买客户等级
                     if(jsonData.customerRiskLevelDesc){
-                        $('.clientLevel .changgeRight').html(jsonData.customerRiskLevelDesc);
+                        $('.clientLevel .changgeRight span').html(jsonData.customerRiskLevelDesc);
                     }else{
                         $('.clientLevel').hide();
                     }
@@ -324,7 +326,7 @@ $(function() {
                             $(".over").hide();
                             break;
                     }
-                },
+                }
             }, {
                 url: site_url.queryUserAuthInfo_api,
                 data: {
@@ -435,7 +437,7 @@ $(function() {
                             break;
                     }
                     that.drawLine(type, newData);
-                },
+                }
             }];
             $.ajaxLoading(obj);
         },
@@ -447,13 +449,15 @@ $(function() {
 
             if (type == 'qrnh') {
                 //画的是七日年化折线图
-                $("#qrnhLine").removeClass("hide")
-                $(".noDataHintEcharts").addClass("hide")
+                $("#qrnhLine").removeClass("hide");
+                $(".noDataHintEcharts").addClass("hide");
+                $(".rightTitle").removeClass("hide");
+                $(".priceLimit").addClass("hide");
                 var chartId = $('#qrnhLine')[0],
                     xAxisData = data.profitThoudDate,
                     seriesData = data.sevenIncomeRate;
             } else if (type == 'wfsy') {
-                //画的是万份收益折线图
+                //画的是历史业绩折线图
                 $("#wfsyLine").removeClass("hide")
                 $(".noDataHintEcharts").addClass("hide")
                 var chartId = $('#wfsyLine')[0],
@@ -584,25 +588,30 @@ $(function() {
                     productModule: '',
                 },
                 needLogin: true, //需要判断是否登陆
+                needDataEmpty: true, //需要判断data是否为空
                 callbackDone: function(json) { //成功后执行的函数
-
                     var json = json.data[0];
-
-                    if (!json.imgPath) {
-                        if (json.features) {
-                            $(".lightPoint").html(json.features);
+                    if(json.imgPath == '' && json.features == ''){
+                        $('.lightPointCon').hide();
+                    }else{
+                        if (!json.imgPath) {
+                            if (json.features) {
+                                $(".lightPoint").html(json.features);
+                            } else {
+                                return false;
+                            }
                         } else {
-                            return false;
+                            $(".lightPoint img").attr("src", json.imgPath);
                         }
-                    } else {
-                        $(".lightPoint img").attr("src", json.imgPath);
                     }
-
 
                 },
                 callbackFail: function(json) { //失败后执行的函数
                     tipAction(json.message);
 
+                },
+                callbackNoData:function(json){
+                    $('.lightPointCon').hide();
                 }
             }];
             $.ajaxLoading(obj);
@@ -710,7 +719,7 @@ $(function() {
                                         yesTxt: '确认',
                                         celTxt: "取消",
                                         zIndex: 100,
-                                        callback: function(t) {},
+                                        callback: function(t) {}
                                     };
                                     $.elasticLayer(obj)
                                 } else {
@@ -728,7 +737,7 @@ $(function() {
                                     yesTxt: '确认',
                                     celTxt: "取消",
                                     zIndex: 100,
-                                    callback: function(t) {},
+                                    callback: function(t) {}
                                 };
                                 $.elasticLayer(obj)
                             } else {
@@ -744,12 +753,12 @@ $(function() {
                             projectId: that.$e.projectId,
                             fileType: isPopup
                         },
-                        contentTypeSearch: true,
+                        contentTypeSearch: false,
                         needLoading: true,
                         needLogin: true, //需要判断是否登陆
                         callbackDone: function(json) { //成功后执行的函数
                             that.data.canClick = true; //变为可点击
-                            var data = json.data,
+                            var data = json.data[0],
                                 noticeObj = data;
                             if (!singleaAuthen) { //如果v.show都是0，则不展示预约框,跳转到相应链接
                                 $("#tips-wrap").hide();
@@ -937,12 +946,22 @@ $(function() {
             mui("body").on('mdClick', '.tabs>li', function() {
                 $(this).addClass('active').siblings().removeClass('active');
                 $(".wrap>.panel").eq($(this).index()).addClass('active').siblings().removeClass('active');
+                var spanHeight = $('.clientLevel .changgeRight span').height();
+                    if(spanHeight > 50){
+                        $('.clientLevel .changgeRight').css({
+                            lineHeight:'0.5rem'
+                        })
+                    }
             }, {
                 htmdEvt: 'privatePlacementDetail_01'
             });
             //点击一键预约逻辑
             mui("body").on('tap', '.tips-btn', function() {
 
+            });
+            //点击查看明细跳转
+            mui("body").on('tap', '.lookDetailed', function() {
+				window.location.href = site_url.tobeConfirmTransaction_url
             });
             //折线图点击月份请求数据
             mui("body").on('mdClick', '.lineWrap .time', function() {
@@ -1004,7 +1023,7 @@ $(function() {
             }, {
                 htmdEvt: 'privatePlacementDetail_04'
             });
-        },
+        }
     };
     privatePlacementDetail.init();
 });

@@ -53,7 +53,7 @@ $(function() {
 					$('.public_03 img').attr('src',jsonData[2].imgUrl);
 					$('.public_04 img').attr('src',jsonData[3].imgUrl);
 
-				},
+				}
 				    
 			}];
 			$.ajaxLoading(obj);
@@ -127,12 +127,12 @@ $(function() {
                 needLogin: true, //需要判断是否登录
                 callbackDone: function(json) {
                     window.location.href = that.clickBtn;
-                },
+                }
 
             }];
             $.ajaxLoading(obj);
 
-        },
+        }
     }
 	publicActivityOne.init();
 

@@ -62,7 +62,7 @@ $(function(){
 						
 					});
 					
-				},
+				}
 				
 			}];
 			$.ajaxLoading(obj);
@@ -141,7 +141,7 @@ $(function(){
 					needLogin:true,//需要判断是否登录
 					callbackDone: function(json){
 						window.location.href = site_url.baseResult_url;
-					},
+					}
 					   
 				}
 			];

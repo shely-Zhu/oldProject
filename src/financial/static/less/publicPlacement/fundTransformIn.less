@@ -443,67 +443,70 @@ body{
                 font-weight:400;
             }
         }
-        .popup-ul{
+        .popup-ul-box{
             overflow-y: scroll;
             height: 80%;
-            .popup-li{
-                display: flex;
-                border-bottom: 1px solid @E7E9ED;
-                .bank-img{
-                    width: .7rem;
-                    height: .7rem;
-                    margin: .33rem .2rem .33rem .3rem;
+            .popup-ul{
+                .popup-li{
+                    display: flex;
+                    border-bottom: 1px solid @E7E9ED;
+                    .bank-img{
+                        width: .7rem;
+                        height: .7rem;
+                        margin: .33rem .2rem .33rem .3rem;
+                    }
+                    .div{
+                        width: 72%;
+                        .bank-name{
+                            height:.45rem;
+                            font-size:.32rem;
+                            font-weight:400;
+                            color:@272727;
+                            line-height:.45rem;
+                            margin-top: .24rem;
+                            margin-bottom: .1rem;
+                        }
+                        .bank-pay{
+                            height:.33rem;
+                            font-size:.24rem;
+                            font-weight:400;
+                            color:@9B9B9B;
+                            line-height:.33rem;
+                            margin-bottom: .23rem;
+                        }
+                    }
+                    
+                    .true{
+                        width: .46rem;
+                        height: .46rem;
+                        margin-top: .45rem;
+                        display: none;
+                    }
                 }
-                .div{
-                    width: 72%;
-                    .bank-name{
+                .popup-last{
+                    display: flex;
+                    border-bottom: 1px solid @E7E9ED;
+                    .last-img{
+                        width:.54rem;
+                        height:.54rem;
+                        margin: .45rem .28rem .47rem .38rem;
+                    }
+                    .last-title{
                         height:.45rem;
                         font-size:.32rem;
                         font-weight:400;
                         color:@272727;
                         line-height:.45rem;
-                        margin-top: .24rem;
-                        margin-bottom: .1rem;
+                        margin: .46rem 3.46rem .45rem 0;
                     }
-                    .bank-pay{
-                        height:.33rem;
-                        font-size:.24rem;
-                        font-weight:400;
-                        color:@9B9B9B;
-                        line-height:.33rem;
-                        margin-bottom: .23rem;
+                    .iconone{
+                        color: @9B9B9B;
+                        margin-top: .53rem;
                     }
                 }
-                
-                .true{
-                    width: .46rem;
-                    height: .46rem;
-                    margin-top: .45rem;
-                    display: none;
-                }
             }
-            .popup-last{
-                display: flex;
-                border-bottom: 1px solid @E7E9ED;
-                .last-img{
-                    width:.54rem;
-                    height:.54rem;
-                    margin: .45rem .28rem .47rem .38rem;
-                }
-                .last-title{
-                    height:.45rem;
-                    font-size:.32rem;
-                    font-weight:400;
-                    color:@272727;
-                    line-height:.45rem;
-                    margin: .46rem 3.46rem .45rem 0;
-                }
-                .iconone{
-                    color: @9B9B9B;
-                    margin-top: .53rem;
-                }
-            }
-        } 
+        }
+         
         
     }
 }

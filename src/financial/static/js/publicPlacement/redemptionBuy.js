@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2019-11-26 14:42:56
- * @LastEditTime: 2019-12-06 18:42:48
+ * @LastEditTime: 2019-12-10 09:55:07
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \htjf-app\src\financial\static\js\publicPlacement\redemptionBuy.js
@@ -67,14 +67,10 @@ $(function() {
             // that.gv.targetfundcode = that.gv.dataList.fundCode;
            //  that.gv.dataList = 
             //
-            //that.getData();
             that.initParmes();
             that.events();
             that.initHtml();
            that.initQueryTransferFunds();
-        },
-        getData:function(){
-           
         },
         initHtml:function(){
             var that = this;
@@ -107,7 +103,6 @@ $(function() {
                 callbackDone: function (json) {
                     console.log("json",json);
                     var html = json.data.content;
-                    debugger
                     if(json.status == "0000"){
                         $('.elasticLayer.transOutRule').show()
                            $(".elasticContent").html(html);
@@ -135,7 +130,8 @@ $(function() {
                      // 将列表插入到页面上
                      for(var i = 0;i<that.gv.transferFunds.length;i++){
                           var code = that.gv.transferFunds[i].fundCode;
-                          var Redata = that.searchNewfundDetails(code)
+                          var Redata = that.searchNewfundDetails(code);
+                          that.gv.transferFunds[i].annYldRat = Redata;
                      }
                      generateTemplate(that.gv.transferFunds, that.getElements.TransferFundsContent, that.getElements.templateTransferFunds);
                 }
@@ -146,18 +142,22 @@ $(function() {
         //查询基金七日年化
         searchNewfundDetails: function(code){
             var that = this;
+            var callbackData;
             var obj = [{
                 url:site_url.newFundDetails_api,
                 needDataEmpty:true,
+                async: false ,
                 data:{
                     fundCode:code
                 },
                 callbackDone:function(json){
-                    return json
-                }
+                    callbackData = json.data.annYldRat
+                },
+                
     
             }];
             $.ajaxLoading(obj);
+            return callbackData
         },
         //赎回确认
         cancelOrder:function(password){
@@ -247,19 +247,19 @@ $(function() {
                 if(type == 'car'){
                     //银行
                     $(".transferFundsContent li").attr("checkStatu","off");
-                    $(".transferFundsContent li .radioCheckItemImg").attr("src","")
+                    $(".transferFundsContent li .radioCheckItemImg").css({"display":"none"})
                    
                     $(".listOnefund").css({"display":"none"});
                     $(".listOneCar").css({"display":"flex"});
                     $(".maxMoneyContent").css({"display":"block"});
                     that.gv.targetfundcode = that.gv.dataList.fundCode;
+                    $(this).siblings().find(".radioCheckItemImg").css({"display":"none"});
                 }
                 else if(type == 'fund'){
-                    console.log("8888")
-                   $(".carContent li").attr("checkStatu","off");
-                   $(".carContent li .radioCheckItemImg").attr("src","")
-                   $(this).siblings().attr("checkStatu","off");
-                   $(this).siblings().find(".radioCheckItemImg").attr("src","");
+                  // $(".carContent li").attr("checkStatu","off");
+                   $(".carContent li .radioCheckItemImg").css({"display":"none"})
+                   //$(this).siblings().attr("checkStatu","off");
+                   $(this).siblings().find(".radioCheckItemImg").css({"display":"none"});
                    $(".listOnefund").css({"display":"block"});
                     $(".listOneCar").css({"display":"none"});
                     $(".maxMoneyContent").css({"display":"none"});
@@ -272,8 +272,9 @@ $(function() {
                     $(".listOnefund .fundCode").html(fundCode);
                     $(".listOnefund .fundMessage").html(fundMessage);
                 }
-                $(this).attr("checkStatu","on");
-                $(this).find(".radioCheckItemImg").attr("src",that.gv.checkImgUrl);
+              //  $(this).attr("checkStatu","on");
+                $(this).find(".radioCheckItemImg").css({"display":"block"});
+                $('.popup').css('display', 'none')
                 
               //  that.confirmCheck();
             }, {
@@ -311,12 +312,14 @@ $(function() {
              }else{
                 $(".checkMessage").css({"display":"none"});
              }
+             if($(this)[0].value == ""){
+                that.getElements.confirmBtn.attr('disabled',true)
+             }
          })
 
          //点击同意协议
             mui("body").on('mdClick','.item2 .iconfont',function(){ 
 			//that.getElements.iconCheck.on('click', function() {
-                debugger
                 that.gv.nowRedempShare = $(".msecond input")[0].value;
              if(parseFloat(that.gv.maxRedempShare)< parseFloat (that.gv.nowRedempShare)){
                  $(".checkMessage").css({"display":"block"});
@@ -326,12 +329,9 @@ $(function() {
              }
                 
                 if ($(this).hasClass("check")) {
-					$(this).removeClass("check").html('&#xe668;');
-					if(that.gv.nowRedempShare!=""){
-                        that.getElements.confirmBtn.removeAttr("disabled");
-                    }else{
-                        that.getElements.confirmBtn.attr('disabled',true)
-                    }
+                    $(this).removeClass("check").html('&#xe668;');
+                    that.getElements.confirmBtn.attr('disabled',true)
+					
                 } else {
                     $(this).addClass("check").html('&#xe669;');
                     if(that.gv.nowRedempShare!=""){
