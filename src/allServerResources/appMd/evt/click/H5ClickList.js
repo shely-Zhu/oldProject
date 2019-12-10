@@ -210,7 +210,9 @@ var clickList = {
  	"privatePlacementDetail_01" : { type:'click', evtid: 'privatePlacementDetail_01', topic: '私募基金产品详情-tab点击切换', info: ''} ,
 	"privatePlacementDetail_02" : { type:'click', evtid: 'privatePlacementDetail_02', topic: '私募基金产品详情-折线图点击', info: ''} ,
 	"privatePlacementDetail_03" : { type:'click', evtid: 'privatePlacementDetail_03', topic: '私募基金产品详情-信息的拷贝', info: ''} ,
-	"privatePlacementDetail_04" : { type:'click', evtid: 'privatePlacementDetail_04', topic: '私募基金产品详情-立即预约', info: ''} ,
+	"privatePlacementDetail_04" : { type:'click', evtid: 'privatePlacementDetail_04', topic: '私募基金产品详情-复制全部', info: ''} ,
+	"privatePlacementDetail_05" : { type:'click', evtid: 'privatePlacementDetail_05', topic: '私募基金产品详情-历史明细', info: ''} ,
+	"privatePlacementDetail_06" : { type:'click', evtid: 'privatePlacementDetail_06', topic: '私募基金产品详情-立即预约', info: ''} ,
 	//现金管理
 	"cashManagement_01" : { type:'click', evtid: 'cashManagement_01', topic: '现金管理-了解现金管理', info: ''} ,
 	"cashManagement_02" : { type:'click', evtid: 'cashManagement_02', topic: '现金管理-转入', info: ''} ,
