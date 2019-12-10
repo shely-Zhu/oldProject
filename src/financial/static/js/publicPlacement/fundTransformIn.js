@@ -60,6 +60,7 @@ $(function () {
 			singleNum:0,   //单日限额
 			fundOrBank:'',  // 在线支付中  银行卡支付 1   基金支付  2   
 			enableAmount:0,  //选择基金支付 可用余额 
+			accountType:null   //客户类型  0-机构 1-个人
 		},
 		webinit: function () {
 			var that = this;
@@ -67,9 +68,27 @@ $(function () {
 			//
 			that.events();
 			that.getData();
-			that.getAgreeUrl()
+			that.getAgreeUrl();
+			that.getUserInfo();
 		},
-
+		// 获取客户类型
+        getUserInfo: function () {
+            var that = this;
+            // 请求页面数据
+            var obj = [{
+                url: site_url.user_api,
+                data: {
+                },
+                callbackDone: function (json) {
+                    var data = json.data
+                    that.gV.accountType = data.accountType
+                },
+                callbackFail: function (json) {
+                    tipAction(json.msg);
+                }
+            }]
+            $.ajaxLoading(obj);
+        },
 		//获取基金数据
 		getData: function (t) {
 			var that = this;
@@ -371,6 +390,12 @@ $(function () {
 			/** 下面三个事件： 银行卡列表出现/隐藏 **/
 			mui("body").on('mdClick','.paymoney',function(){
 				that.gV.payType = $(this).attr('pay-type')
+				if(that.gV.payType == '0'){
+					if(that.gV.accountType === 0 || that.gV.accountType === 2){
+						tipAction('机构客户暂不支持在线支付');
+						return
+					}
+				}
 				var useEnv = $(this).attr('pay-type')
 				$("#loading").show()
 				that.getBankCard(useEnv)
