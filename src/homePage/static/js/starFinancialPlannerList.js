@@ -125,6 +125,8 @@ $(function(){
                         
                         // 将列表插入到页面上
                         generateTemplate(data,that.$e.recordList,that.$e.starFinancialPlannerListTemplateId)
+                        //无缝滚动
+                        alwaysAjax($(".recordList"))
                         that.$e.listLoading.hide();
                         $(".lazyload").lazyload()
                         
@@ -436,8 +438,6 @@ $(function(){
                 }
                 
             })
-            //无缝滚动
-            alwaysAjax($(".recordList"))
         }
     }
     //调用初始化函数

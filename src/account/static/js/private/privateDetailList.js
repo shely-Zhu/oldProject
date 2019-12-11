@@ -167,8 +167,6 @@ $(function() {
             var that = this;
             w = $id.attr('id'), //获取节点的 id
                 s = '#' + w + ' .contentWrapper'; //id 拼接 查出content区域
-            //无缝滚动
-            alwaysAjax($('#' + w + ' .mui-table-view-cell'), s)
             console.log('#' + w + ' .mui-table-view-cell')
             mui.init({
                 pullRefresh: {
@@ -322,6 +320,8 @@ $(function() {
                             that.getElements.listLoading.hide();
                         }, 100);
                         transcationTem(jsonData, $id.find('.list li'), $('#trans-template'))
+                        //无缝滚动
+                        alwaysAjax($id.find('.mui-table-view-cell'), $id.find(".contentWrapper"))
                     }, 200)
 
 

@@ -145,6 +145,7 @@ $(function(){
                         }
                         // 将列表插入到页面上
                         generateTemplate(list,that.$e.recordList,that.$e.activityListTemp)
+                        alwaysAjax($(".recordList"));
                         $(".lazyload").lazyload()
                     }, 200)
 
@@ -383,8 +384,6 @@ $(function(){
             },{
                 htmdEvt: 'activityList_7'
             });
-            // recordList
-            alwaysAjax($(".recordList"));
         }
     }
     //调用初始化函数
