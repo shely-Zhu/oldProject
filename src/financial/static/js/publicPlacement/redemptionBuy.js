@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2019-11-26 14:42:56
- * @LastEditTime: 2019-12-10 09:55:07
+ * @LastEditTime: 2019-12-11 16:25:10
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \htjf-app\src\financial\static\js\publicPlacement\redemptionBuy.js
@@ -126,7 +126,13 @@ $(function() {
                 },
                 callbackDone : function(json){
                     console.log("88888",json);
-                    that.gv.transferFunds = json.data;
+                    var arr= [];
+                   json.data.forEach(function(item){
+                       if(item.fundCode != that.gv.fundCode){
+                           arr.push(item)
+                       }
+                   })
+                    that.gv.transferFunds = arr;
                      // 将列表插入到页面上
                      for(var i = 0;i<that.gv.transferFunds.length;i++){
                           var code = that.gv.transferFunds[i].fundCode;
@@ -263,7 +269,7 @@ $(function() {
                    $(".listOnefund").css({"display":"block"});
                     $(".listOneCar").css({"display":"none"});
                     $(".maxMoneyContent").css({"display":"none"});
-                    var fundCode = $(this).find("span.fundCode")[0].textContent;
+                    var fundCode = $(this).attr("fundCode");
                     var fundName = $(this).find("span.fundName")[0].textContent;
                     var fundMessage = $(this).find("span.fundMessage")[0].textContent;
                     that.gv.targetfundcode = fundCode;
@@ -296,13 +302,20 @@ $(function() {
 			});
 
             //赎回确认
-            mui("body").on('mdClick','.confirmeDemptionPay',function(){         
+            mui("body").on('mdClick','.confirmeDemptionPay',function(){      
         // $(".confirmeDemptionPay").on('click',function(){
+            $(".pwd-input").val('')
+            $(".fake-box input").val('');
             $(".msecond input").blur();
             $("#passwordWrap").show();
             payPass(that.cancelOrder)
         }, {
             htmdEvt: 'redemptionBuy_08'
+        })
+
+        //忘记密码跳转
+        mui("body").on("mdClick",".passwordTop .forgetP",function(){
+            window.location.href = site_url.pofForgotPassword_url
         })
          $(".msecond input").change(function(){
              that.gv.nowRedempShare = $(this)[0].value;
@@ -314,6 +327,8 @@ $(function() {
              }
              if($(this)[0].value == ""){
                 that.getElements.confirmBtn.attr('disabled',true)
+             }else{
+                that.getElements.confirmBtn.removeAttr("disabled"); 
              }
          })
 
