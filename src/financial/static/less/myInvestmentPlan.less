@@ -6,13 +6,17 @@
 * { touch-action: none; }
 body{
     background-color: @F7FAFD;
+
+}
+.goTopBtn{
+    bottom:2.56rem;
 }
 .wrap{
     .list{
-        // margin-top: 1rem;
+        overflow: scroll;
         .contentWrapper{
             width: 100%;
-            overflow: hidden;
+           overflow: hidden;
             ul {
                 li{
                     margin-bottom:0.3rem;
@@ -98,7 +102,12 @@ body{
 }
 .wrap .endPlan{
     display: none;
-    margin:0.5rem 0 1.2rem 0;
+    width:100%;
+    color:@FFFFFF;
+    padding:0.5rem 0;
+    position: fixed;
+    left:0 ;
+    bottom:0.98rem;
     a{
         color:@364D97;
         font-size:0.28rem;
@@ -112,6 +121,7 @@ body{
 }
 .wrap .nothing{
     height:300px;  //为了看样式真实开发删掉就行
+    display: none;
     img{
         width: 2.19rem;
         height: 2.18rem;

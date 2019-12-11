@@ -14,31 +14,25 @@
     <!--没有数据显示图标-->
     <!-- @@include('@pathCommonCom/noData/noData.html', {"tipText": "暂无数据"}) -->
     <!--加载显示图标-->
-    <!-- @@include('@pathCommonCom/loading/listLoading.html') -->
+    @@include('@pathCommonCom/loading/listLoading.html')
     <!--公共页面头部-->
     <div class="topTitle">
         @@include('@pathCommonViews/headBarConfig.html',{"bgColors":"#2C3E77,#273971","showType":"0","pathName":"我的定投计划"})
     </div>
     <div class="wrap">
         <div class="list" style="width:100%;">
-            <section class="contentWrapper">
-                <div class="mui-table-view" id="activityDataList">
-                    <ul class="recordList contentWrap">
-                    </ul>
-                </div>
+            <div class="contentWrapper">
+                <ul class="recordList contentWrap">
+                </ul>
                 @@include('@pathCommonViews/goTop.html')
                 <div class="noDataOne">
                     暂无更多内容
                 </div>
-                <div class="nothing">
-                    <img src="/common/img/empty.png" alt="">
-                    <p>暂无计划</p>
-                </div>
-                <div class="endPlan">
-                    <a href="javascript:;" class="goEndPlan">查看已终止的定投（<span class="stopPlan"></span>）<i class="iconfont">&#xe636;</i></a>
-                </div>
-            </section>
+               
+            </div>
+            
         </div>
+        
         <script id="investmentPlan-template" type="text/x-handlebars-template">
                 {{#each this}}
                     {{#if show}}
@@ -74,7 +68,13 @@
         <div class="noDataMore">
             @@include('@pathCommonCom/noData/noData.html', {"tipText": "暂无数据"})
         </div>
-       
+        <div class="nothing">
+            <img src="/common/img/empty.png" alt="">
+            <p>暂无计划</p>
+        </div>
+        <div class="endPlan">
+            <a href="javascript:;" class="goEndPlan">查看已终止的定投（<span class="stopPlan"></span>）<i class="iconfont">&#xe636;</i></a>
+        </div>
         <div class="newPlan">
             新增定投计划
         </div>

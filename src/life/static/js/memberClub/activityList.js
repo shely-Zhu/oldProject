@@ -348,7 +348,7 @@ $(function(){
             mui('body').on('mdClick','.mui-card',function(){
                 var actType=$(this).children('a').attr('data-actType');
                 var actId=$(this).children('a').attr('data-actId');
-                window.location.href=site_url.activityDetails_url+'?actType='+actType+'&'+'actId='+actId;
+                window.location.href=site_url.activityDetails_url+'?actType='+actType+'&'+'actId='+actId + '&isNeedLogin=0';
             },{
                 htmdEvt: 'activityList_4'
             });
