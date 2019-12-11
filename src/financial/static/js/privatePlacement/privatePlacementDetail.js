@@ -132,6 +132,8 @@ $(function() {
                         $("#wfsyLine").addClass("hide");
                         // 展示七日年化
                         $('.netValue').html(jsonData.sevenIncomeRate);
+                        $('#historyDetailBtn').removeClass('hide');
+                        $('.priceLimit').addClass('hide');
                         // 折线图
                         that.getTypeTwoData(that.$e.lineType);
                     }
