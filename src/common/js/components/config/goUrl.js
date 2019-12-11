@@ -40,6 +40,8 @@ module.exports = function() {
 
     //协议模板
     this.agreementModel_url = go_url.no_url + '/include/views/agreementModel.html';
+     //《基金合同》《招募说明书》协议模板
+     this.agreementPreview_url = go_url.no_url + '/include/views/agreementPreview.html';
 
     //实名认证下的三个协议
     this.tradeserviceAgreement_url = go_url.no_url + '/include/views/agreementModel.html?id=81';
@@ -411,7 +413,7 @@ module.exports = function() {
     this.pofRetrievePassword_url = go_url.no_url + '/minel/views/setting/retrievePassword.html';
     //添加银行卡
     this.pofAddBankCard_url = go_url.no_url + '/mine/views/bankCard/addBankCard.html'
-    //基金分享跳原生页面
+        //基金分享跳原生页面
     this.pofShare_url = go_url.no_url + '/financial/views/publicPlacement/share.html'
 
     /*------------------- 私募理财fang——le end ------------------------------*/
@@ -515,6 +517,10 @@ module.exports = function() {
 
     //电子合同预约
     this.orderLimit_url = go_url.no_url + '/financial/views/privatePlacement/electronicContract/orderLimit.html';
+    //非电子合同第二步 合格投资者认证
+    this.notElecSecondStep_url = go_url.no_url + '/financial/views/publicPlacement/notelectronicContract/secondStep.html';
+    //电子合同第二步 合格投资者认证
+    this.elecSecondStep_url = go_url.no_url + '/financial/views/publicPlacement/electronicContract/secondStep.html';
     //电子合同第三步 去签署合同
     this.elecThirdStep_url = go_url.no_url + '/financial/views/publicPlacement/electronicContract/thirdStep.html';
     //电子合同第四步 上传汇款凭证

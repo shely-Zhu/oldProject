@@ -323,7 +323,7 @@ $(function() {
                             that.getElements.listLoading.hide();
                         }, 100);
                         transcationTem(jsonData, $id.find('.list li'), $('#trans-template'))
-                        //无缝滚动
+                            //无缝滚动
                         alwaysAjax($id.find('.mui-table-view-cell'), $id.find(".contentWrapper"))
                     }, 200)
 
@@ -430,7 +430,6 @@ $(function() {
                     var id = $(this).attr('data-id');
                     var reserveId = $(this).attr('data-reserveid');
                     var proId = $(this).attr('data-projectid');
-                    debugger
                     if (type == 'assign') { //转让
                         var obj = {
                             p: '<p>您确定要取消转让申请吗？</p>',
@@ -475,6 +474,13 @@ $(function() {
                                     },
                                     callbackDone: function(json) {
                                         var data;
+                                        if (json.status == '0000') {
+                                            that.gV.ajaxArr[0].pageNum = 1;
+                                            $('#scroll1 .contentWrapper li').html('');
+                                            //重新初始化
+                                            that.initMui($('#scroll1'));
+                                            mui('#scroll1 .contentWrapper').pullRefresh().scrollTo(0, 0, 0);
+                                        }
                                     },
                                     callbackNoData: function() {
 
@@ -523,33 +529,44 @@ $(function() {
                 //功能按钮
             var clickEvent = '';
             mui("body").on('mdClick', '.toDetail', function(e) {
-                var type = $(this).attr('type');
-                var reserveId = $(this).attr('data-reserveid');
-                var proId = $(this).attr('data-projectid');
-                var isElec = $(this).attr('data-type');
-                if (type == 'toCertif') { //去合格投资者认证
-                    if (isElec == 0) {
-                        //非电子合同
-                    } else if (isElec == 1) {
-                        //电子合同跳转
+                    var type = $(this).attr('type');
+                    var reserveId = $(this).attr('data-reserveid');
+                    var proId = $(this).attr('data-projectid');
+                    var isElec = $(this).attr('data-type');
+                    var isAllowAppend = $(this).attr('data-firstOrAppend');
+                    var projectName = $(this).attr('data-projectName');
+                    if (type == 'toCertif') { //去合格投资者认证
+                        if (isElec == 0) {
+                            //非电子合同
+                            window.location.href = site_url.notElecSecondStep_url + '?reserveId=' + reserveId + '&projectId=' + proId + '&projectName=' + projectName + '&isAllowAppend=' + isAllowAppend;
+                        } else if (isElec == 1) {
+                            //电子合同跳转
+                            window.location.href = site_url.elecSecondStep_url + '?reserveId=' + reserveId + '&projectId=' + proId + '&projectName=' + projectName + '&isAllowAppend=' + isAllowAppend;
+                        }
+                    } else if (type == 'toSign') { //去签合同
+                        window.location.href = site_url.elecFourthStep_url + '?reserveId=' + reserveId + '&projectId=' + proId + '&projectName=' + projectName + '&isAllowAppend=' + isAllowAppend;
+                    } else if (type == 'toSee') { //查看合同
+                        window.location.href = site_url.seeSign_url + '?reserveId=' + reserveId;
+                    } else if (type == 'toUploadM') { //去上传汇款凭证
+                        window.location.href = site_url.elecFourthStep_url + '?reserveId=' + reserveId + '&projectId=' + proId + '&projectName=' + projectName + '&isAllowAppend=' + isAllowAppend;
+                    } else if (type == 'toView') { //详情
+
+                    } else if (type == 'toVideo') { //视频双录
+
+                    } else if (type == 'toDown') { //下载电子合同
+
+                    } else if (type == 'reAppointment') { //重新预约
+
                     }
-                } else if (type == 'toSign') { //去签合同
-                    window.location.href = site_url.elecFourthStep_url + '?reserveId=' + reserveId + '&projectId=' + proId;
-                } else if (type == 'toSee') { //查看合同
-                    window.location.href = site_url.seeSign_url + '?reserveId=' + reserveId;
-                } else if (type == 'toUploadM') { //去上传汇款凭证
-                    window.location.href = site_url.elecFourthStep_url + '?reserveId=' + reserveId;
-                } else if (type == 'toView') { //详情
-
-                } else if (type == 'toVideo') { //视频双录
-
-                } else if (type == 'toDown') { //下载电子合同
-
-                } else if (type == 'reAppointment') { //重新预约
-
-                }
+                }, {
+                    'htmdEvt': 'privateDetailList_6'
+                })
+                // 点击每一条进入详情
+            mui("body").on('mdClick', '.transList', function(e) {
+                var proId = $(this).attr('data-projectid');
+                window.location.href = site_url.privatePlacementDetail_url + '?projectId=' + proId
             }, {
-                'htmdEvt': 'privateDetailList_6'
+                'htmdEvt': 'privateDetailList_7'
             })
         }
     };

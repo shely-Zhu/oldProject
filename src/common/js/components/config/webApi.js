@@ -141,7 +141,7 @@ module.exports = function() {
 
     //文章模板接口
     //  this.getArticle_api = http_url.web_url + '/account/articleExample';
-    this.getArticle_api = http_url.web_url + '/content/frontend/getArticle';
+//  this.getArticle_api = http_url.web_url + '/content/frontend/getArticle';
     //信息披露
     this.queryReourceLabels_api = http_url.web_url + '/pef/queryReourceLabels';
     this.queryReourceList_api = http_url.web_url + '/pef/queryReourceList';
@@ -321,6 +321,7 @@ module.exports = function() {
     this.prfFundList_api = http_url.web_url + '/pof/newIssue/frontend/fundList'; //16.金服WEB-新发基金-列表查询
     this.prfQuerynewsletter_api = http_url.web_url + '/pof/fundnewsletter/frontend/querynewsletter'; //17.金服WEB-基金时讯-查询
     this.queryFundTransferAssetsDetail_api = http_url.web_url + '/account/queryFundTransferAssetsDetail'; // 金服WEB-基金时支付列表
+    this.collectFund_api = http_url.web_url + '/pof/fundCollection/frontend/collectFund'; // 自选基金-收藏管理（
 
 
     /*------------------- 私募理财fang——le end ------------------------------*/

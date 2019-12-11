@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2019-11-26 14:42:56
- * @LastEditTime: 2019-12-10 14:30:45
+ * @LastEditTime: 2019-12-11 16:50:14
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \htjf-app\src\financial\static\js\publicPlacement\cashTransformOut.js
@@ -344,9 +344,9 @@ $(function () {
 				window.location.href = site_url.agreementModel_url + '?id='+id+ '&financial=true'
 			}) 
 			//点击转出到账时间
-			mui('body').on('tap','.explain .left .iconfont',function(){
-				that.gv.ruleId = $(this).attr("ruleId");
-				var id = $(this).attr("ruleId");
+			mui('body').on('tap','.explain .tranTime',function(){
+				var id = $(this).children().attr("ruleId");
+				that.gv.ruleId = id;
 				//that.findProtocolContentRule(id);
 				window.location.href = site_url.agreementModel_url + '?id='+id+ '&financial=true'
 			}) 

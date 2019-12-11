@@ -68,8 +68,18 @@ $(function() {
           var data = json.data
           if(data.length >0){
             $(".productCostTitleOne").show()
+            $.each(data, function(i, el) {
+              el.name = el.fileName.substring(0, el.fileName.indexOf("】") + 1);
+              el.marName = el.fileName.substring(el.fileName.indexOf("】") + 1);
+              if (el.fileName.indexOf(".pdf") != -1) {
+                  el.line = true; //线上可预览
+                  el.href = site_url.downloadNew_api + "?filePath=" + el.fileUrl + "&fileName=" + new Base64().encode(el.fileName) + "&groupName=" + el.groupName + "&show=1";
+              } else {
+                  el.line = false; //需下载
+                  el.href = site_url.downloadNew_api + "?filePath=" + el.fileUrl + "&fileName=" + new Base64().encode(el.fileName) + "&groupName=" + el.groupName;
+              }
+            })
           }
-          console.log(data)
           generateTemplate(data,$(".materialWrap"), that.$e.adjustmentTemp);
         },
     }];
@@ -94,15 +104,11 @@ $(function() {
         'htmdEvt': 'productFiles_0'
       })
       mui("body").on('mdClick','.materialContent',function(e){
-        console.log($(this).attr('data-fileUrl'))
-        window.location.href=`/${$(this).attr('data-fileUrl')}`
-      //   if ($(this).attr('data-fileUrl').indexOf(".pdf") != -1) {
-      //     el.line = true; //线上可预览
-      //     el.href = site_url.download_api + "?filePath=" + el.fileUrl + "&fileName=" + new Base64().encode(el.fileName) + "&groupName=" + el.groupName + "&show=1";
-      // } else {
-      //     el.line = false; //需下载
-      //     el.href = site_url.download_api + "?filePath=" + el.fileUrl + "&fileName=" + new Base64().encode(el.fileName) + "&groupName=" + el.groupName;
-      // }
+        var src=$(this).attr("href")
+        var form = document.createElement('form');
+        form.action = src;
+        document.getElementsByTagName('body')[0].appendChild(form);
+        form.submit();
 			},{
         'htmdEvt': 'productFiles_1'
       })

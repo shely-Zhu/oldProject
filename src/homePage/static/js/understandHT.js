@@ -16,12 +16,15 @@ $(function() {
 		},
 		//全局变量
 		gV: {
-			
+			articleBelong:splitUrl['articleBelong'],
+			sortType:splitUrl['type'],
 		},
 		//页面初始化函数
 		init: function() {	
 			var that = this;
-			that.getTemplateData()
+			$(".tabBar b").eq(that.gV.sortType*1).addClass('borderBottom');
+			$(".tabBar a").eq(that.gV.sortType*1).addClass('mui-active');
+			that.getTemplateData(that.gV.articleBelong,that.gV.sortType)
 			that.events()
 			that.initMui()
 		},
@@ -31,10 +34,10 @@ $(function() {
 			mui.init();
 			//模拟点击对应的type。定位到当前type下
 			
-			mui("body").on('mdClick', '.mui-slider' , function(e){
+			mui("body").on('mdClick', '.mui-slider .mui-control-item' , function(e){
 				var $this = $(this);
 				$("b").removeClass('borderBottom');
-				$("b").eq(e.detail.slideNumber).addClass('borderBottom');
+				$(".tabBar b").eq($(this).index()).addClass('borderBottom');
 				that.getTemplateData($this.attr("belong"),e.detail.slideNumber)
 			},{
                 'htmdEvt': 'understandTab_00'
@@ -63,7 +66,7 @@ $(function() {
 					if(!!resData.h5Title){//标题
 						that.$e.HeadBarpathName.text(resData.h5Title);
 					}
-					that.$e.contentWrap.eq(num*1 - 1).html(resData.content);
+					that.$e.contentWrap.eq(num*1).html(resData.content);
 
 					
             

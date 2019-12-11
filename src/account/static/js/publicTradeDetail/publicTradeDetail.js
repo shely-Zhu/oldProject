@@ -172,7 +172,7 @@ $(function () {
                 $('.redeem_info').removeClass('hide');
                 $('.redeem_info .item_1').html(model.fundName);//赎回产品
                 $('.redeem_info .item_2').html(model.confirmShares);//赎回份额
-                $('.redeem_info .bank_icon').attr('url', model.bankThumbnailUrl);//到账银行卡icon
+                $('.redeem_info .bank_icon').attr('src', model.bankThumbnailUrl);//到账银行卡icon
                 $('.redeem_info .item_3').html(that.getPayInfo(model.bankName, model.bankAccountMask));//到账银行卡描述
                 $('.redeem_info .item_4').html(model.tradeDate);//赎回时间
             }
@@ -288,16 +288,16 @@ $(function () {
                 $('.cash_buy_info').removeClass('hide');
                 $('.cash_buy_info .fund_name').html(model.fundName);//基金名称
                 $('.cash_buy_info .fund_amount').html(model.balanceMask + '元');//买入金额
-                $('.cash_buy_info .bank_icon').attr('url', model.bankThumbnailUrl);//需要后台加接口 支付方式的银行logo
+                $('.cash_buy_info .bank_icon').attr('src', model.bankThumbnailUrl);//需要后台加接口 支付方式的银行logo
                 $('.cash_buy_info .bank_name').html(that.getPayInfo(model.bankName, model.bankAccountMask));//支付方式的银行名称
-                $('.cash_buy_info .pay_mode').html(model.payModeName);//支付方式
+                $('.cash_buy_info .pay_mode').html('1' == model.payType? '汇款支付': '在线支付');//支付方式
                 $('.cash_buy_info .fund_date').html(model.applyDateTime);//买入时间
             } else {
                 //展示现金宝赎回信息
                 $('.cash_redeem_info').removeClass('hide');
                 $('.cash_redeem_info .item_1').html(model.fundName);//转出产品
                 $('.cash_redeem_info .item_2').html(model.balanceMask + '元');//转出金额
-                $('.cash_redeem_info .bank_icon').attr('url', model.bankThumbnailUrl);//转出至银行卡logo
+                $('.cash_redeem_info .bank_icon').attr('src', model.bankThumbnailUrl);//转出至银行卡logo
                 $('.cash_redeem_info .item_3').html(that.getPayInfo(model.bankName, model.bankAccountMask));//转出至银行卡描述
                 $('.cash_redeem_info .item_4').html(model.applyDateTime);//转出时间
             }

@@ -47,7 +47,7 @@ $(function () {
 			tradeAcco: '' , //交易账号
 			tradeSource: '' , //交易账号
 			singleNum:0,
-			minValue:0
+			minValue:0,
 		},
 		webinit: function () {
 			var that = this;
@@ -148,10 +148,10 @@ $(function () {
 						data = json.data;
 						data.forEach(function(element){
 							if(element.materialType == '1'){
-								that.$el.contract.attr('href',element.linkAddress)
+								that.$el.contract.attr('datalink',element.linkAddress)
 							}
 							if(element.materialType == '2'){
-								that.$el.recruiting.attr('href',element.linkAddress)
+								that.$el.recruiting.attr('datalink',element.linkAddress)
 							}
 						});
 						
@@ -391,7 +391,7 @@ $(function () {
 			}, {
 				htmdEvt: 'cashTransformIn_09'
 			}) ;
-
+			
 			//  ---忘记密码
 			mui("body").on('mdClick','#passwordWrap .forgetP',function(){
 				//跳往原生页面去修改密码
@@ -447,6 +447,15 @@ $(function () {
 			}, {
 				htmdEvt: 'cashTransformIn_16'
 			}) ;
+
+			//  ---《基金合同》《招募说明书》
+			mui("body").on('mdClick','.goPreview',function(){
+				var link = $(this).attr('datalink')
+				window.location.href = site_url.agreementPreview_url + '?link=' + link
+			}, {
+				htmdEvt: 'cashTransformIn_17'
+			}) ;
+
 
 		}
 
