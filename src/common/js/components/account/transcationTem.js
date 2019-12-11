@@ -80,7 +80,7 @@ module.exports = function(data, $ele, $id, type) {
         data[i].appointmentFailed = data[i].leftBottomStatus == 19 ? 1 : 0; //合同审核失败
 
         //赎回
-        data[i].businessTypeRedeem = (data[i].businessType == 2) || (data[i].businessType == 9) ? 1 : 0;
+        data[i].businessTypeRedeem = (data[i].businessType == 2) || (data[i].businessType == 9) || (data[i].businessType == 8) ? 1 : 0;
         //分红
         data[i].businessTypeBonus = data[i].businessType == 7 ? 1 : 0;
         //已完成的预约
