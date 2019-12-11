@@ -28,7 +28,15 @@ $(function() {
             pageCurrent:1,  // 账户持仓情况分页参数
             pageSize:5,    // 账户持仓情况分页参数
             holdList:[],   // 账户持仓情况
-            color:['#f2cfa0','#c57f5a','#3e5498','#accdda','#accdda','#cbc0e0','#e8b1a1','#cdd2d4'],
+            color:{
+                color1:['#FBE2BD','#D69549'],
+                color2:['#AA6545','#EDA377'],
+                color3:['#182F7A','#7286C1'],
+                color4:['#A3C2D3','#D5EFF4'],
+                color5:['#E2DBEA','#BEB1DB'],
+                color6:['#F1C5B8','#DE9A87'],
+                color7:['#B5BBBD','#E1E5E7']
+            },
             pie:{        //基金配置比例
                
                 pieData: [],
@@ -119,6 +127,7 @@ $(function() {
                 callbackDone: function(json) {
                     if(json.status == '0000'){
                         var data = json.data;
+                        debugger
                         $("#assets-box .stockAssetRatio").html(data.stockAssetRatio)
                         $("#assets-box .cashAssetRatio").html(data.cashAssetRatio)
                         $("#assets-box .bondAssetRatio").html(data.bondAssetRatio)
@@ -128,15 +137,15 @@ $(function() {
                         // $("#assets-box .cashAssetRatio .shape").width(Number(data.stockAssetRatio.split("%")[0])/100*assets_width) + 'rem';
                         // $("#assets-box .bondAssetRatio .shape").width(Number(data.stockAssetRatio.split("%")[0])/100*assets_width) + 'rem';
                         // $("#assets-box .otherAssetRatio .shape").width(Number(data.stockAssetRatio.split("%")[0])/100*assets_width) + 'rem';
-                        // $("#assets-box .stockAssetRatio .shape").width(Number(data.stockAssetRatio.split("%")[0])/100*assets_width + 'rem');
-                        // $("#assets-box .cashAssetRatio .shape").width(Number(data.stockAssetRatio.split("%")[0])/100*assets_width + 'rem') ;
-                        // $("#assets-box .bondAssetRatio .shape").width(Number(data.stockAssetRatio.split("%")[0])/100*assets_width + 'rem');
-                        // $("#assets-box .otherAssetRatio .shape").width(Number(data.stockAssetRatio.split("%")[0])/100*assets_width  + 'rem');
 
-                        $("#assets-box .stockAssetRatio .shape").width('1rem');
-                        $("#assets-box .cashAssetRatio .shape").width('0.6rem') ;
-                        $("#assets-box .bondAssetRatio .shape").width('0.5rem');
-                        $("#assets-box .otherAssetRatio .shape").width('0.9rem');
+                        $("#assets-box .stockAssetRatio .shape").css({'width':Number(data.stockAssetRatio.split("%")[0])/100*assets_width + 'rem',
+                        'background-color':'linear-gradient(to left,'+ that.gV.color.color1[0] + ',' + that.gV.color.color1[1] + ')'});
+                        $("#assets-box .cashAssetRatio .shape").css({'width':Number(data.cashAssetRatio.split("%")[0])/100*assets_width + 'rem',
+                        'background-color':'linear-gradient(to left,'+ that.gV.color.color2[0] + ',' + that.gV.color.color2[1] + ')'});
+                        $("#assets-box .bondAssetRatio .shape").css({'width':Number(data.bondAssetRatio.split("%")[0])/100*assets_width + 'rem',
+                        'background-color':'linear-gradient(to left,'+ that.gV.color.color3[0] + ',' + that.gV.color.color3[1] + ')'});
+                        $("#assets-box .otherAssetRatio .shape").css({'width':Number(data.otherAssetRatio.split("%")[0])/100*assets_width + 'rem',
+                        'background-color':'linear-gradient(to left,'+ that.gV.color.color4[0] + ',' + that.gV.color.color4[1] + ')'});
                     }
                     
                 },
