@@ -154,6 +154,7 @@ var clickList = {
 	//已报名活动
 	"activityEnrolment_01" : { type:'click', evtid: '', topic: '已报名活动-tab切换', info: ''} ,
 	"activityEnrolment_02" : { type:'click', evtid: '', topic: '已报名活动-分享给好友', info: ''} ,
+	"activityEnrolment_03" : { type:'click', evtid: '', topic: '已报名活动-跳转详情', info: ''} ,
 	//意见反馈
 	"concatUsAdvise_01" : { type:'click', evtid: '', topic: '意见反馈-单选按钮', info: ''} ,
 	"concatUsAdvise_02" : { type:'click', evtid: '', topic: '意见反馈-添加图片', info: ''} ,

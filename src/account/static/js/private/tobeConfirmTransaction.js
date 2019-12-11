@@ -121,7 +121,7 @@ $(function() {
                 needLoading: false,
                 callbackDone: function(json) {
                     var data;
-                    if (json.data.pageList && json.data.pageList.length == 0) { // 没有记录不展示
+                    if (json.data.pageList && json.data.pageList.length == 0 && that.gV.aP.pageNum == 1) { // 没有记录不展示
                         $(".list").hide()
                         that.getElements.noData.show();
                         that.getElements.listLoading.hide();
@@ -251,6 +251,16 @@ $(function() {
                                     },
                                     callbackDone: function(json) {
                                         var data;
+                                        if (json.status == '0000') {
+                                            // 重置上拉加载
+                                            mui('.contentWrapper').pullRefresh().refresh(true);
+                                            that.gV.aP.pageNum = 1;
+                                            that.getElements.contentWrap.html('');
+                                            //重新初始化
+                                            that.getElements.listLoading.show();
+                                            that.getData(that.gV.aThis);
+                                            mui('.contentWrapper').pullRefresh().scrollTo(0, 0, 0);
+                                        }
                                     },
                                     callbackNoData: function() {
 
@@ -299,7 +309,7 @@ $(function() {
                         //电子合同跳转
                     }
                 } else if (type == 'toSign') { //去签合同
-                    window.location.href = site_url.elecFourthStep_url + '?reserveId=' + reserveId + '&projectId' + proId;
+                    window.location.href = site_url.elecFourthStep_url + '?reserveId=' + reserveId + '&projectId=' + proId;
                 } else if (type == 'toSee') { //查看合同
                     window.location.href = site_url.seeSign_url + '?reserveId=' + reserveId;
                 } else if (type == 'toUploadM') { //去上传汇款凭证

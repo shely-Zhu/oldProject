@@ -128,24 +128,34 @@ $(function() {
                     if(json.status == '0000'){
                         var data = json.data;
                         debugger
-                        $("#assets-box .stockAssetRatio").html(data.stockAssetRatio)
-                        $("#assets-box .cashAssetRatio").html(data.cashAssetRatio)
-                        $("#assets-box .bondAssetRatio").html(data.bondAssetRatio)
-                        $("#assets-box .otherAssetRatio").html(data.otherAssetRatio)
+                        $("#assets-box .stockAssetRatio .num").html(Number(data.stockAssetRatio).toFixed(2) + '%')
+                        $("#assets-box .cashAssetRatio .num").html(Number(data.cashAssetRatio).toFixed(2) + '%')
+                        $("#assets-box .bondAssetRatio .num").html(Number(data.bondAssetRatio).toFixed(2) + '%')
+                        $("#assets-box .otherAssetRatio .num").html(Number(data.otherAssetRatio).toFixed(2) + '%')
                         var assets_width = $("#assets-box").width();
-                        // $("#assets-box .stockAssetRatio .shape").width(Number(data.stockAssetRatio.split("%")[0])/100*assets_width) + 'rem';
-                        // $("#assets-box .cashAssetRatio .shape").width(Number(data.stockAssetRatio.split("%")[0])/100*assets_width) + 'rem';
-                        // $("#assets-box .bondAssetRatio .shape").width(Number(data.stockAssetRatio.split("%")[0])/100*assets_width) + 'rem';
-                        // $("#assets-box .otherAssetRatio .shape").width(Number(data.stockAssetRatio.split("%")[0])/100*assets_width) + 'rem';
+                        $("#assets-box .stockAssetRatio").css({'width':Number(data.stockAssetRatio)/100*assets_width + 'px'});
+                        $("#assets-box .cashAssetRatio").css({'width':Number(data.cashAssetRatio)/100*assets_width + 'px'});
+                        $("#assets-box .bondAssetRatio").css({'width':Number(data.bondAssetRatio)/100*assets_width + 'px'});
+                        $("#assets-box .otherAssetRatio").css({'width':Number(data.otherAssetRatio)/100*assets_width + 'px'});
 
-                        $("#assets-box .stockAssetRatio .shape").css({'width':Number(data.stockAssetRatio.split("%")[0])/100*assets_width + 'rem',
-                        'background-color':'linear-gradient(to left,'+ that.gV.color.color1[0] + ',' + that.gV.color.color1[1] + ')'});
-                        $("#assets-box .cashAssetRatio .shape").css({'width':Number(data.cashAssetRatio.split("%")[0])/100*assets_width + 'rem',
-                        'background-color':'linear-gradient(to left,'+ that.gV.color.color2[0] + ',' + that.gV.color.color2[1] + ')'});
-                        $("#assets-box .bondAssetRatio .shape").css({'width':Number(data.bondAssetRatio.split("%")[0])/100*assets_width + 'rem',
-                        'background-color':'linear-gradient(to left,'+ that.gV.color.color3[0] + ',' + that.gV.color.color3[1] + ')'});
-                        $("#assets-box .otherAssetRatio .shape").css({'width':Number(data.otherAssetRatio.split("%")[0])/100*assets_width + 'rem',
-                        'background-color':'linear-gradient(to left,'+ that.gV.color.color4[0] + ',' + that.gV.color.color4[1] + ')'});
+                        $("#assets-box .stockAssetRatio .shape").css({'width':Number(data.stockAssetRatio)/100*assets_width + 'px',
+                        'background':'linear-gradient(to left,'+ that.gV.color.color1[0] + ',' + that.gV.color.color1[1] + ')'});
+                        $("#assets-box .cashAssetRatio .shape").css({'width':Number(data.cashAssetRatio)/100*assets_width + 'px',
+                        'background':'linear-gradient(to left,'+ that.gV.color.color2[0] + ',' + that.gV.color.color2[1] + ')'});
+                        $("#assets-box .bondAssetRatio .shape").css({'width':Number(data.bondAssetRatio)/100*assets_width + 'px',
+                        'background':'linear-gradient(to left,'+ that.gV.color.color3[0] + ',' + that.gV.color.color3[1] + ')'});
+                        $("#assets-box .otherAssetRatio .shape").css({'width':Number(data.otherAssetRatio)/100*assets_width + 'px',
+                        'background':'linear-gradient(to left,'+ that.gV.color.color4[0] + ',' + that.gV.color.color4[1] + ')'});
+
+
+                        // $("#assets-box .stockAssetRatio .shape").css({'width':Number(data.stockAssetRatio)/100*assets_width + 'px',
+                        // 'background':'#FBE2BD'});
+                        // $("#assets-box .cashAssetRatio .shape").css({'width':Number(data.cashAssetRatio)/100*assets_width + 'px',
+                        // 'background':'linear-gradient(to left,#FBE2BD,#D69549)'});
+                        // $("#assets-box .bondAssetRatio .shape").css({'width':Number(data.bondAssetRatio)/100*assets_width + 'px',
+                        // 'background':'linear-gradient(to left,#FBE2BD,#D69549)'});
+                        // $("#assets-box .otherAssetRatio .shape").css({'width':Number(data.otherAssetRatio)/100*assets_width + 'px',
+                        // 'background':'linear-gradient(to left,#FBE2BD,#D69549)'});
                     }
                     
                 },

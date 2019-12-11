@@ -170,8 +170,6 @@ $(function() {
             var that = this;
             w = $id.attr('id'), //获取节点的 id
                 s = '#' + w + ' .contentWrapper'; //id 拼接 查出content区域
-            //无缝滚动
-            alwaysAjax($('#' + w + ' .mui-table-view-cell'), s)
             console.log('#' + w + ' .mui-table-view-cell')
             mui.init({
                 pullRefresh: {
@@ -325,6 +323,8 @@ $(function() {
                             that.getElements.listLoading.hide();
                         }, 100);
                         transcationTem(jsonData, $id.find('.list li'), $('#trans-template'))
+                        //无缝滚动
+                        alwaysAjax($id.find('.mui-table-view-cell'), $id.find(".contentWrapper"))
                     }, 200)
 
 
@@ -430,7 +430,6 @@ $(function() {
                     var id = $(this).attr('data-id');
                     var reserveId = $(this).attr('data-reserveid');
                     var proId = $(this).attr('data-projectid');
-                    debugger
                     if (type == 'assign') { //转让
                         var obj = {
                             p: '<p>您确定要取消转让申请吗？</p>',
@@ -475,6 +474,13 @@ $(function() {
                                     },
                                     callbackDone: function(json) {
                                         var data;
+                                        if (json.status == '0000') {
+                                            that.gV.ajaxArr[0].pageNum = 1;
+                                            $('#scroll1 .contentWrapper li').html('');
+                                            //重新初始化
+                                            that.initMui($('#scroll1'));
+                                            mui('#scroll1 .contentWrapper').pullRefresh().scrollTo(0, 0, 0);
+                                        }
                                     },
                                     callbackNoData: function() {
 
@@ -534,7 +540,7 @@ $(function() {
                         //电子合同跳转
                     }
                 } else if (type == 'toSign') { //去签合同
-                    window.location.href = site_url.elecFourthStep_url + '?reserveId=' + reserveId + '&projectId' + proId;
+                    window.location.href = site_url.elecFourthStep_url + '?reserveId=' + reserveId + '&projectId=' + proId;
                 } else if (type == 'toSee') { //查看合同
                     window.location.href = site_url.seeSign_url + '?reserveId=' + reserveId;
                 } else if (type == 'toUploadM') { //去上传汇款凭证

@@ -240,7 +240,6 @@ $(function() {
                             t.endPullupToRefresh(false);
                         }
                         $id.find('.contentWrapper .mui-pull-bottom-pocket').removeClass('mui-hidden');
-                        console.log(that.gV.ajaxArr[that.gV.current_index].pageCurrent)
                         if (that.gV.ajaxArr[that.gV.current_index].pageCurrent == 1) {
                             //第一屏
                             $id.find('.contentWrapper .mui-table-view-cell').html(that.html);
