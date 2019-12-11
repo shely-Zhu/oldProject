@@ -1,5 +1,3 @@
-
-
 module.exports = {
     //personal
     './personal/static/js/myPots': "./src/personal/static/js/myPots.js", //我的积分
@@ -90,7 +88,7 @@ module.exports = {
     './recommend/static/js/recommend': "./src/recommend/static/js/recommend.js", // 二维码页面
     './recommend/static/js/newRecommend': "./src/recommend/static/js/newRecommend.js", // 引导页
     './recommend/static/js/congratulation': "./src/recommend/static/js/congratulation.js", // 恭喜
-
+    './mine/static/js/recommend': "./src/mine/static/js/recommend.js", // 二维码页面
     //抽奖活动
     './recommend/static/js/award': './src/recommend/static/js/award.js',
     './recommend/static/js/awardRotate': './src/recommend/static/js/awardRotate.js',
@@ -185,7 +183,7 @@ module.exports = {
     //基金账户诊断
     './commonResources/fundDiagnosis/static/js/fundAccountDiagnosis': './src/commonResources/fundDiagnosis/static/js/fundAccountDiagnosis.js',
 
-    
+
     // 基金诊断
     './mine/static/js/hotDiagnosis': './src/mine/static/js/hotDiagnosis.js',
     // 诊断详情
@@ -337,8 +335,8 @@ module.exports = {
     './financial/static/js/publicPlacement/castSurelyDetails': './src/financial/static/js/publicPlacement/castSurelyDetails.js',
     //我的定投计划
     './financial/static/js/publicPlacement/myInvestmentPlan': './src/financial/static/js/publicPlacement/myInvestmentPlan.js',
-     //我的定投计划----已终止的定投计划
-     './financial/static/js/publicPlacement/myInvestmentPlanH': './src/financial/static/js/publicPlacement/myInvestmentPlanH.js',
+    //我的定投计划----已终止的定投计划
+    './financial/static/js/publicPlacement/myInvestmentPlanH': './src/financial/static/js/publicPlacement/myInvestmentPlanH.js',
     //我的定投计划详情
     './financial/static/js/publicPlacement/castSurelyDetails': './src/financial/static/js/publicPlacement/castSurelyDetails.js',
     //活期理财
@@ -376,7 +374,7 @@ module.exports = {
 
 
     // 私募产品详情页
-    './financial/static/js/privatePlacement/privatePlacementDetail' : './src/financial/static/js/privatePlacement/privatePlacementDetail.js',
+    './financial/static/js/privatePlacement/privatePlacementDetail': './src/financial/static/js/privatePlacement/privatePlacementDetail.js',
 
     // 财富学院早知道
     './homePage/static/js/fortuneFlowKnown': './src/homePage/static/js/fortuneFlowKnown.js',
@@ -387,7 +385,7 @@ module.exports = {
     //非货币基金历史明细
     './account/static/js/public/otherFundHistoryDetail': "./src/account/static/js/public/otherFundHistoryDetail.js",
     //收益明细
-     './account/static/js/public/returnsDetail': "./src/account/static/js/public/returnsDetail.js",
+    './account/static/js/public/returnsDetail': "./src/account/static/js/public/returnsDetail.js",
 
     // 私募交易规则
     './account/static/js/private/transactionRules': "./src/account/static/js/private/transactionRules.js",

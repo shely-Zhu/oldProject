@@ -255,7 +255,7 @@ $(function() {
                                 //第一页时
                                 if (that.listLength == 0) {
                                     //没有数据
-                                    $id.find('.list').html(that.getElements.noData.clone(false)).addClass('noCon');
+                                    $id.find('.list .contentWrapper li').html(that.getElements.noData.clone(false)).addClass('noCon');
                                     $id.find('.noData').show();
 
                                     //隐藏loading，调试接口时需要去掉
@@ -264,7 +264,7 @@ $(function() {
                                     }, 100);
                                     t.endPullupToRefresh(true);
 
-                                    //获取当前展示的tab的索引
+                                    //获取当前展示的tab的索引     
                                     var index = $('#slider .tab-scroll-wrap .mui-active').index(),
                                         $list = $("#move_" + index + " .list");
                                     $list.height(that.highHeight).addClass('noMove');
@@ -403,11 +403,14 @@ $(function() {
                     $(this).addClass('active').siblings('li').removeClass('active');
                     $('.mask').hide();
                     $('.hopperCon').hide();
-                    that.gV.businessType = $(this).attr('data');
+
+                    mui('#scroll2 .contentWrapper').pullRefresh().refresh(true);
+
                     // 重置上拉加载
                     that.gV.ajaxArr[1].pageNum = 1;
-                    that.gV.ajaxArr[1].businessType = $(this).attr('data');
+                    that.gV.ajaxArr[1].confirmType = $(this).attr('data');
                     // that.getElements.contentWrap.html('');
+                    $('#scroll2 .contentWrapper li').html('');
                     //重新初始化
                     that.initMui($('#scroll2'));
                     mui('#scroll2 .contentWrapper').pullRefresh().scrollTo(0, 0, 0);
