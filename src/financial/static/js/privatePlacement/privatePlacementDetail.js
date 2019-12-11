@@ -32,6 +32,7 @@ $(function() {
             openingBank: $("#openingBank"), //开户行
             topc: $('#topc'), //提示信息
             tipIcon: $(".tipIcon"), //净值披露信息
+            isElecContract:'',  //是否是电子合同产品【0.否 1.是】
         },
         data: {
             canClick: true,
@@ -132,6 +133,8 @@ $(function() {
                         $("#wfsyLine").addClass("hide");
                         // 展示七日年化
                         $('.netValue').html(jsonData.sevenIncomeRate);
+                        $('#historyDetailBtn').removeClass('hide');
+                        $('.priceLimit').addClass('hide');
                         // 折线图
                         that.getTypeTwoData(that.$e.lineType);
                     }
@@ -149,6 +152,8 @@ $(function() {
                     // 预约资质
                     $('.appointment span').html(jsonData.orderCondition);
                     // 产品特点标签
+                    that.getElements.isElecContract = jsonData.isElecContract;
+                    
                     var projectLable = jsonData.projectLable.split('|');
                     for (var i in projectLable) {
                         projectLableHtml = '<span>' + projectLable[i] + '</span>'
@@ -160,6 +165,7 @@ $(function() {
                     } else if (jsonData.investDirect == "1" || jsonData.investDirect == "3") { // 海外投资  （证券投资）二级市场展示
                         that.getElements.tipIcon.show();
                     };
+
 
                     // 基本信息
                     // 剩余额度
@@ -281,9 +287,17 @@ $(function() {
                     // 允许购买客户类型
                     if(jsonData.customerType == 0){
                         $('.clientType .changgeRight').html('机构');
-                    }else if(jsonData.customerType == 1){
+                    }
+                    else if(jsonData.customerType == 1){
                         $('.clientType .changgeRight').html('个人');
-                    }else{
+                    }
+                    else if(jsonData.customerType == 2){
+                        $('.clientType .changgeRight').html('产品');
+                    }
+                    else if(jsonData.customerType == 3){
+                        $('.clientType .changgeRight').html('不限');
+                    }
+                    else{
                         $('.clientType').hide();
                     }
                     // 允许购买客户等级
