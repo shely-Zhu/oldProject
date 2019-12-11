@@ -425,6 +425,9 @@ $(function() {
             mui("body").on('mdClick', '.cancelBtn', function(e) {
                     var type = $(this).attr('data-type');
                     var id = $(this).attr('data-id');
+                    var reserveId = $(this).attr('data-reserveid');
+                    var proId = $(this).attr('data-projectid');
+                    debugger
                     if (type == 'assign') { //转让
                         var obj = {
                             p: '<p>您确定要取消转让申请吗？</p>',
@@ -462,6 +465,7 @@ $(function() {
                             callback: function(t) {
                                 var obj = [{
                                     url: site_url.fundReserveCancel_api,
+                                    contentTypeSearch: true,
                                     data: {
                                         "projectId": proId,
                                         "reserveId": reserveId,
@@ -517,8 +521,8 @@ $(function() {
             var clickEvent = '';
             mui("body").on('mdClick', '.toDetail', function(e) {
                 var type = $(this).attr('type');
-                var reserveId = $(this).attr('reserveId');
-                var proId = $(this).attr('projectId');
+                var reserveId = $(this).attr('data-reserveid');
+                var proId = $(this).attr('data-projectid');
                 var isElec = $(this).attr('data-type');
                 if (type == 'toCertif') { //去合格投资者认证
                     if (isElec == 0) {
