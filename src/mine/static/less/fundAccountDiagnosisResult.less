@@ -75,7 +75,13 @@ body {
             position: relative;
             background-color: white;
             height: 1rem;
-            line-height: 1rem;
+            line-height: 0.5rem;
+        }
+        .popup .mui-table-view > .mui-table-view-cell{
+            line-height: 0.8rem;
+        }
+        .selectFundCode li{
+            line-height: 1rem !important;
         }
         .mui-table-view > .mui-table-view-cell > .left{
             display: inline-block;
@@ -88,9 +94,44 @@ body {
         .mui-table-view > .mui-table-view-cell > .right{
             display: inline-block;
             float: right;
-            width: 1rem;
+            width: 1.5rem;
             line-height: 0.8rem;
             text-align: right;
+            input{
+                text-align: right;
+            }
+        }
+        .rightMoreBox{
+            position: absolute;
+            right: 0.6rem;
+            top: 0;
+            height: 0.8rem;
+            width: 3rem;
+            display: none;
+            .rightMore{
+                display: inline-block;
+                float: right;
+                line-height: 0.8rem;
+            }
+        }
+        
+        .interval{
+            position: absolute;
+            right: 0.1rem;
+            width: 3rem;
+            height: 0.8rem;
+            input{
+                display: inline-block;
+                width: 1.3rem;
+            }
+            span{
+                display: inline-block;
+                width: 0.2rem;
+            }
+            
+        }
+        .addOtherFundcodeList{
+            min-height: 1rem;
         }
         .mui-table-view > .mui-table-view-cell > .mui-icon{
             display: inline-block;
@@ -129,6 +170,9 @@ body {
         .ml50{
             margin-left: 0.5rem;
         }
+        .mr60{
+            margin-right: 0.6rem;
+        }
         .selectFundCode li input{
             display: inline-block;
             height: auto;
@@ -157,6 +201,31 @@ body {
             top: 0.3rem;
             right: 1rem;
         
+        }
+        .selectItemList  input{
+            display: inline-block;
+            float: left;
+            width: 3rem;
+            margin-left: 0.3rem;
+        }
+        .selectItemList span.line{
+            display: inline-block;
+            float: left;
+            width: 0.4rem;
+            text-align: center;
+            height: 0.8rem;
+            line-height: 0.7rem;
+            margin-left: 0.2rem;
+        }
+        .selectItemList .listBox{
+            height: 1rem;
+        }
+        .warmMessage{
+            width: 100%;
+            height: 1rem;
+            text-align:center;
+            line-height: 1rem;
+            color: red;
         }
         .addOtherFundcodeBox{
             .left{
