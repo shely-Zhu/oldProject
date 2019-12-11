@@ -127,9 +127,10 @@ $(function () {
             var that = this;
             // 请求页面数据
             var obj = [{
-                url: site_url.user_api,
+                url: site_url.queryUserBaseInfo_api,
                 data: {
                 },
+                needLogin: false,
                 callbackDone: function (json) {
                     var data = json.data
                     that.gV.accountType = data.accountType
@@ -294,9 +295,10 @@ $(function () {
             manageList.push(prams)
             // 请求页面数据
             var obj = [{
-                url: site_url.prfFundCollectionMG_api,
+                url: site_url.collectFund_api,
                 data: {
                     feedback:'',
+                    deviceId:splitUrl['deviceId'],
                     manageList:manageList 
                 },
                 callbackDone: function (json) {

@@ -94,11 +94,6 @@
             </div>
         </div>
         <!-- 金额 -->
-        {{#if reserveTime}}
-        <!-- 创建时间 -->
-        <div class="creatTime">创建时间：{{reserveTime}}</div>
-        <!-- 创建时间 -->
-        {{/if}}
         <!-- 进度 -->
         <div class="toolCon clearfix">
             {{#if appointmentSuccess}}
@@ -119,18 +114,18 @@
             {{#if appointmentToAuthentication}}
             <div class="toDetail blueBgButton" type="toCertif" data-type="{{isForElec}}">合格投资者认证</div>
             {{else if appointmentToSign}}
-            <div class="toDetail blueBgButton" type="toSign" projectId="{{projectId}}" reserveid="{{reserveId}}">签署合同</div>
+            <div class="toDetail blueBgButton" type="toSign" data-projectid="{{projectId}}" data-reserveid="{{reserveId}}">签署合同</div>
             {{else if appointmentToSee}}
-            <div class="toDetail blueBgButton" type="toSee" projectId="{{projectId}}">查看合同</div>
+            <div class="toDetail blueBgButton" type="toSee" data-projectid="{{projectId}}" data-reserveid="{{reserveId}}">查看合同</div>
             {{else if appointmentToUpload}}
-            <div class="toDetail blueBgButton" type="toUploadM" reserveId="{{reserveId}}">上传汇款凭证</div>
+            <div class="toDetail blueBgButton" type="toUploadM" data-projectid="{{projectId}}" data-reserveid="{{reserveId}}">上传汇款凭证</div>
             {{else if appointmentToDown}}
-            <div class="toDetail blueBgButton" type="reAppointment" reserveId="{{reserveId}}">重新预约</div>
+            <div class="toDetail blueBgButton" type="reAppointment" data-projectid="{{projectId}}" data-reserveid="{{reserveId}}">重新预约</div>
             {{/if}}
             <!-- 功能按钮 -->
             <!-- 取消预约按钮 -->
             {{#if appointmentCancel}}
-            <div class="cancelBtn goldBorderButton" data-type="appointment" projectId="{{projectId}}" reserveId="{{reserveId}}">取消预约</div>
+            <div class="cancelBtn goldBorderButton" data-type="appointment" data-projectid="{{projectId}}" data-reserveid="{{reserveId}}">取消预约</div>
             {{/if}}
             <!-- 取消预约按钮 -->
 
@@ -249,11 +244,11 @@
             <a href="">查看具体情况</a>
             <div class="blueBgButton toDetail toView" data-type="assign">详情</div>
             {{#if assignCancel}}
-            <div class="goldBorderButton cancelBtn" data-type="assign" data-id="{{projectId}}">取消转让</div>
+            <div class="goldBorderButton cancelBtn" data-type="assign" data-projectid="{{projectId}}" data-reserveid="{{reserveId}}">取消转让</div>
             {{/if}} {{#if assignObj}}
-            <div class="toDetail blueBgButton chooseObj" data-type="assign" data-id="{{projectId}}">选择受让方</div>
+            <div class="toDetail blueBgButton chooseObj" data-type="assign" data-projectid="{{projectId}}" data-reserveid="{{reserveId}}">选择受让方</div>
             {{/if}} {{#if assignToVideo}}
-            <div class="toDetail blueBgButton toVideo" data-type="assign" data-id="{{projectId}}">视频双录</div>
+            <div class="toDetail blueBgButton toVideo" data-type="assign" data-projectid="{{projectId}}" data-reserveid="{{reserveId}}">视频双录</div>
             {{/if}}
         </div>
         <!-- 进度 -->

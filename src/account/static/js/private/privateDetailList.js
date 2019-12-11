@@ -56,6 +56,7 @@ $(function() {
 
             //初始化第一屏区域的上拉加载
             that.initMui($('#scroll1'));
+            window.sessionStorage.setItem('isconfirm', 0);
         },
 
         beforeFunc: function() { //拼模板，初始化左右滑动mui组件
@@ -106,8 +107,10 @@ $(function() {
                     if (index == 1) {
                         //已确认
                         $('.hopper').show();
+                        window.sessionStorage.setItem('isconfirm', 1);
                     } else {
                         $('.hopper').hide();
+                        window.sessionStorage.setItem('isconfirm', 0);
                     }
                     //data-scroll属性即当前左右切换区域的索引
                     that.gV.current_index = index;
@@ -250,7 +253,7 @@ $(function() {
                                 //第一页时
                                 if (that.listLength == 0) {
                                     //没有数据
-                                    $id.find('.list').html(that.getElements.noData.clone(false)).addClass('noCon');
+                                    $id.find('.list .contentWrapper li').html(that.getElements.noData.clone(false)).addClass('noCon');
                                     $id.find('.noData').show();
 
                                     //隐藏loading，调试接口时需要去掉
@@ -259,7 +262,7 @@ $(function() {
                                     }, 100);
                                     t.endPullupToRefresh(true);
 
-                                    //获取当前展示的tab的索引
+                                    //获取当前展示的tab的索引     
                                     var index = $('#slider .tab-scroll-wrap .mui-active').index(),
                                         $list = $("#move_" + index + " .list");
                                     $list.height(that.highHeight).addClass('noMove');
@@ -400,11 +403,14 @@ $(function() {
                     $(this).addClass('active').siblings('li').removeClass('active');
                     $('.mask').hide();
                     $('.hopperCon').hide();
-                    that.gV.businessType = $(this).attr('data');
+
+                    mui('#scroll2 .contentWrapper').pullRefresh().refresh(true);
+
                     // 重置上拉加载
                     that.gV.ajaxArr[1].pageNum = 1;
-                    that.gV.ajaxArr[1].businessType = $(this).attr('data');
+                    that.gV.ajaxArr[1].confirmType = $(this).attr('data');
                     // that.getElements.contentWrap.html('');
+                    $('#scroll2 .contentWrapper li').html('');
                     //重新初始化
                     that.initMui($('#scroll2'));
                     mui('#scroll2 .contentWrapper').pullRefresh().scrollTo(0, 0, 0);
@@ -422,6 +428,9 @@ $(function() {
             mui("body").on('mdClick', '.cancelBtn', function(e) {
                     var type = $(this).attr('data-type');
                     var id = $(this).attr('data-id');
+                    var reserveId = $(this).attr('data-reserveid');
+                    var proId = $(this).attr('data-projectid');
+                    debugger
                     if (type == 'assign') { //转让
                         var obj = {
                             p: '<p>您确定要取消转让申请吗？</p>',
@@ -459,6 +468,7 @@ $(function() {
                             callback: function(t) {
                                 var obj = [{
                                     url: site_url.fundReserveCancel_api,
+                                    contentTypeSearch: true,
                                     data: {
                                         "projectId": proId,
                                         "reserveId": reserveId,
@@ -514,8 +524,8 @@ $(function() {
             var clickEvent = '';
             mui("body").on('mdClick', '.toDetail', function(e) {
                 var type = $(this).attr('type');
-                var reserveId = $(this).attr('reserveId');
-                var proId = $(this).attr('projectId');
+                var reserveId = $(this).attr('data-reserveid');
+                var proId = $(this).attr('data-projectid');
                 var isElec = $(this).attr('data-type');
                 if (type == 'toCertif') { //去合格投资者认证
                     if (isElec == 0) {
