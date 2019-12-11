@@ -96,10 +96,11 @@
         <!-- 金额 -->
         <!-- 进度 -->
         <div class="toolCon clearfix">
-            {{#if appointmentSuccess}}
-            <span class="tipImg success"></span> {{else if appointmentFailed}}
-            <span class="tipImg fail"></span> {{else}}
-            <span class="tipImg"></span> {{/if}}
+            {{#if reserveStatusTip}} {{#if appointmentSuccess}}
+            <span class="tipImg iconfont success">&#xe638;</span> {{else if appointmentFailed}}
+            <span class="tipImg iconfont">&#xe637;</span> {{else}}
+            <span class="tipImg iconfont">&#xe649;</span> {{/if}} {{else}}
+            <span class="tipImg tipImgTip iconfont">&#xe645;</span> {{/if}}
             <!-- 左下角状态文字 -->
             {{#if leftBottomStatusDesc}}
             <!-- 如果弹框里有内容 -->

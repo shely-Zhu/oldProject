@@ -430,7 +430,6 @@ $(function() {
                     var id = $(this).attr('data-id');
                     var reserveId = $(this).attr('data-reserveid');
                     var proId = $(this).attr('data-projectid');
-                    debugger
                     if (type == 'assign') { //转让
                         var obj = {
                             p: '<p>您确定要取消转让申请吗？</p>',
@@ -475,6 +474,13 @@ $(function() {
                                     },
                                     callbackDone: function(json) {
                                         var data;
+                                        if (json.status == '0000') {
+                                            that.gV.ajaxArr[0].pageNum = 1;
+                                            $('#scroll1 .contentWrapper li').html('');
+                                            //重新初始化
+                                            that.initMui($('#scroll1'));
+                                            mui('#scroll1 .contentWrapper').pullRefresh().scrollTo(0, 0, 0);
+                                        }
                                     },
                                     callbackNoData: function() {
 
