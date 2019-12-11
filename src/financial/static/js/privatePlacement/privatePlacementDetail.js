@@ -281,9 +281,17 @@ $(function() {
                     // 允许购买客户类型
                     if(jsonData.customerType == 0){
                         $('.clientType .changgeRight').html('机构');
-                    }else if(jsonData.customerType == 1){
+                    }
+                    else if(jsonData.customerType == 1){
                         $('.clientType .changgeRight').html('个人');
-                    }else{
+                    }
+                    else if(jsonData.customerType == 2){
+                        $('.clientType .changgeRight').html('产品');
+                    }
+                    else if(jsonData.customerType == 3){
+                        $('.clientType .changgeRight').html('不限');
+                    }
+                    else{
                         $('.clientType').hide();
                     }
                     // 允许购买客户等级
