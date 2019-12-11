@@ -32,6 +32,7 @@ $(function() {
             openingBank: $("#openingBank"), //开户行
             topc: $('#topc'), //提示信息
             tipIcon: $(".tipIcon"), //净值披露信息
+            isElecContract:'',  //是否是电子合同产品【0.否 1.是】
         },
         data: {
             canClick: true,
@@ -41,6 +42,13 @@ $(function() {
             productName:"",//产品名称
             qrnhWfsy: {
                 oneMonth: {},
+                threeMonth: {},
+                halfYear: {},
+                oneYear: {},
+                sinceNow: {}
+            },
+            dwjzljjz: {
+                oneMonth : {},
                 threeMonth: {},
                 halfYear: {},
                 oneYear: {},
@@ -124,9 +132,11 @@ $(function() {
                         $("#qrnhLine").removeClass("hide");
                         $("#wfsyLine").addClass("hide");
                         // 展示七日年化
-                        $('.netValue').html(jsonData.unitNetValue);
+                        $('.netValue').html(jsonData.sevenIncomeRate);
+                        $('#historyDetailBtn').removeClass('hide');
+                        $('.priceLimit').addClass('hide');
                         // 折线图
-                        that.getTypeOneData(that.$e.lineType);
+                        that.getTypeTwoData(that.$e.lineType);
                     }
 					that.data.productName = jsonData.productName;
                     // 私募产品 产品名称
@@ -142,10 +152,16 @@ $(function() {
                     // 预约资质
                     $('.appointment span').html(jsonData.orderCondition);
                     // 产品特点标签
-                    var projectLable = jsonData.projectLable.split('|');
-                    for (var i in projectLable) {
-                        projectLableHtml = '<span>' + projectLable[i] + '</span>'
-                        $('.productLabel').append(projectLableHtml)
+                    that.getElements.isElecContract = jsonData.isElecContract;  // 是否是电子合同产品【0.否 1.是】
+                    if( !!jsonData.projectLable){
+                        var projectLable = jsonData.projectLable.split('|');
+                        for (var i in projectLable) {
+                            projectLableHtml = '<span>' + projectLable[i] + '</span>'
+                            $('.productLabel').append(projectLableHtml);
+                        }
+                    }
+                    if(that.getElements.isElecContract == 1){
+                        $('.productLabel').append('<span>电子合同</span>')
                     }
                     //0 债权投资;1 证券投资（二级市场）;2 股权投资;3 海外投资;4 其他
                     if (jsonData.investDirect == "0" || jsonData.investDirect == "2" || jsonData.investDirect == "4") { // 债权投资、股权投资、其他服务不展示
@@ -153,6 +169,7 @@ $(function() {
                     } else if (jsonData.investDirect == "1" || jsonData.investDirect == "3") { // 海外投资  （证券投资）二级市场展示
                         that.getElements.tipIcon.show();
                     };
+
 
                     // 基本信息
                     // 剩余额度
@@ -223,19 +240,19 @@ $(function() {
                     // 交易须知  
                     // 认购费率
                     if(jsonData.buyRate){
-                        $('.productRateBuy span').html(jsonData.buyRate);
+                        $('.productRateBuy span').html(jsonData.buyRate + '%');
                     }else{
                         $('.productRateBuy').hide();
                     }
                     // 管理费率
                     if(jsonData.managementFee){
-                        $('.productRateManage span').html(jsonData.managementFee);
+                        $('.productRateManage span').html(jsonData.managementFee + '%');
                     }else{
                         $('.productRateManage').hide();
                     }
                     // 托管费率
                     if(jsonData.trusteeFee){
-                        $('.productRateTrust span').html(jsonData.trusteeFee);
+                        $('.productRateTrust span').html(jsonData.trusteeFee + '%');
                     }else{
                         $('.productRateTrust').hide();
                     }
@@ -274,9 +291,17 @@ $(function() {
                     // 允许购买客户类型
                     if(jsonData.customerType == 0){
                         $('.clientType .changgeRight').html('机构');
-                    }else if(jsonData.customerType == 1){
+                    }
+                    else if(jsonData.customerType == 1){
                         $('.clientType .changgeRight').html('个人');
-                    }else{
+                    }
+                    else if(jsonData.customerType == 2){
+                        $('.clientType .changgeRight').html('产品');
+                    }
+                    else if(jsonData.customerType == 3){
+                        $('.clientType .changgeRight').html('不限');
+                    }
+                    else{
                         $('.clientType').hide();
                     }
                     // 允许购买客户等级
@@ -351,6 +376,79 @@ $(function() {
             $.ajaxLoading(obj);
 
         },
+        //请求七日年化
+        getTypeTwoData: function( type,num ){
+            var that = this;
+            num = num ? num : 3;
+            var newData = {
+                sevenIncomeRate: [], //存放折线图七日年化
+                profitThoudDate: [], //存放折线图收益日期
+                profitThoudValue: [] //存放折线图万份收益
+            }
+            //判断是否已经有数据了，有的话不再请求接口
+            if (num == 0 && that.data['qrnhWfsy'].oneMonth.profitThoudDate && that.data['qrnhWfsy'].oneMonth.profitThoudDate.length) {
+                //请求的是近一个月的数据
+                that.drawLine(type, that.data['qrnhWfsy'].oneMonth);
+                return false;
+            } else if (num == 1 && that.data['qrnhWfsy'].threeMonth.profitThoudDate && that.data['qrnhWfsy'].threeMonth.profitThoudDate.length) {
+                //近三个月
+                that.drawLine(type, that.data['qrnhWfsy'].threeMonth);
+                return false;
+            } else if (num == 2 && that.data['qrnhWfsy'].halfYear.profitThoudDate && that.data['qrnhWfsy'].halfYear.profitThoudDate.length) {
+                // 半年
+                that.drawLine(type, that.data['qrnhWfsy'].halfYear);
+                return false;
+            } else if (num == 3 && that.data['qrnhWfsy'].oneYear.profitThoudDate && that.data['qrnhWfsy'].oneYear.profitThoudDate.length) {
+                //近一年
+                that.drawLine(type, that.data['qrnhWfsy'].oneYear);
+                return false;
+            } else if (num == 4 && that.data['qrnhWfsy'].sinceNow.profitThoudDate && that.data['qrnhWfsy'].sinceNow.profitThoudDate.length) {
+                //成立至今
+                that.drawLine(type, that.data['qrnhWfsy'].sinceNow);
+                return false;
+            }
+            //没有数据，请求接口
+            var obj = [{
+                url: site_url.earningCurve_api, 
+                data: {
+                    projectId: that.data.projectId,
+                    profitRange: num 
+                },
+                needLogin: true,
+                callbackDone: function(json) {
+                    console.log(json)
+                    that.data.echartsClickFlag = false;
+                    var jsonData = json.data;
+                    //拼数据
+                    $.each( jsonData, function(i, el){
+                        newData.sevenIncomeRate.push( el.sevenYearYield);
+                        newData.profitThoudDate.push( el.curveDate);
+                        newData.profitThoudValue.push( el.incomeUnit);
+                    })
+                    switch(num) {
+                        case 0: that.data['qrnhWfsy'].oneMonth = newData;break;
+                        case 1: that.data['qrnhWfsy'].threeMonth = newData;break;
+                        case 2: that.data['qrnhWfsy'].halfYear = newData;break;
+                        case 3: that.data['qrnhWfsy'].oneYear = newData;break;
+                        case 4: that.data['qrnhWfsy'].sinceNow = newData;break;
+                    }
+                    that.drawLine( type, newData);                  
+                },
+                callbackNoData: function(json) {
+                    that.data.echartsClickFlag = false;
+                    $("#qrnhLine").addClass("hide")
+                    $("#wfsyLine").addClass("hide")
+                    $(".noDataHintEcharts").removeClass("hide")
+                },
+                callbackFail: function(json) {
+                    that.data.echartsClickFlag = false;
+                    $("#qrnhLine").addClass("hide")
+                    $("#wfsyLine").addClass("hide")
+                    $(".noDataHintEcharts").removeClass("hide")
+                }
+            }];
+            $.ajaxLoading(obj);
+        },
         //请求历史业绩走势
         getTypeOneData: function(type, num) {
             var that = this;
@@ -377,26 +475,25 @@ $(function() {
                 days = '';
             }
 
-            //判断是否已经有数据了，有的话不再请求接口
-            if (num == 0 && that.data['qrnhWfsy'].oneMonth.profitThoudDate && that.data['qrnhWfsy'].oneMonth.profitThoudDate.length) {
+           if( num == 0 && that.data['dwjzljjz'].oneMonth.profitThoudDate && that.data['dwjzljjz'].oneMonth.profitThoudDate.length){
                 //请求的是近一个月的数据
-                that.drawLine(type, that.data['qrnhWfsy'].oneMonth);
+                that.drawLine( type, that.data['dwjzljjz'].oneMonth );
                 return false;
-            } else if (num == 1 && that.data['qrnhWfsy'].threeMonth.profitThoudDate && that.data['qrnhWfsy'].threeMonth.profitThoudDate.length) {
+            } else if( num == 1 && that.data['dwjzljjz'].threeMonth.profitThoudDate && that.data['dwjzljjz'].threeMonth.profitThoudDate.length){
                 //近三个月
-                that.drawLine(type, that.data['qrnhWfsy'].threeMonth);
+                that.drawLine( type, that.data['dwjzljjz'].threeMonth );
                 return false;
-            } else if (num == 2 && that.data['qrnhWfsy'].halfYear.profitThoudDate && that.data['qrnhWfsy'].halfYear.profitThoudDate.length) {
-                // 半年
-                that.drawLine(type, that.data['qrnhWfsy'].halfYear);
+            }else if( num == 2 && that.data['dwjzljjz'].halfYear.profitThoudDate && that.data['dwjzljjz'].halfYear.profitThoudDate.length){
+                //近三个月
+                that.drawLine( type, that.data['dwjzljjz'].halfYear );
                 return false;
-            } else if (num == 3 && that.data['qrnhWfsy'].oneYear.profitThoudDate && that.data['qrnhWfsy'].oneYear.profitThoudDate.length) {
+            } else if( num == 3 && that.data['dwjzljjz'].oneYear.profitThoudDate && that.data['dwjzljjz'].oneYear.profitThoudDate.length ){
                 //近一年
-                that.drawLine(type, that.data['qrnhWfsy'].oneYear);
+                that.drawLine( type, that.data['dwjzljjz'].oneYear );
                 return false;
-            } else if (num == 4 && that.data['qrnhWfsy'].sinceNow.profitThoudDate && that.data['qrnhWfsy'].sinceNow.profitThoudDate.length) {
+            } else if( num == 4 && that.data['dwjzljjz'].sinceNow.profitThoudDate && that.data['dwjzljjz'].sinceNow.profitThoudDate.length){
                 //成立至今
-                that.drawLine(type, that.data['qrnhWfsy'].sinceNow);
+                that.drawLine( type, that.data['dwjzljjz'].sinceNow );
                 return false;
             }
 
@@ -421,23 +518,24 @@ $(function() {
                         newData.profitThoudDate.push(el.netValueDate);
                     })
 
-                    switch (num) {
-                        case 0:
-                            that.data['qrnhWfsy'].oneMonth = newData;
+                    switch(num) {
+                        case 0: 
+                            that.data['dwjzljjz'].oneMonth = newData;
                             break;
-                        case 1:
-                            that.data['qrnhWfsy'].threeMonth = newData;
+                        case 1: 
+                            that.data['dwjzljjz'].threeMonth = newData;
                             break;
                         case 2:
-                            that.data['qrnhWfsy'].halfYear = newData;
+                            that.data['dwjzljjz'].halfYear = newData;
                             break;
-                        case 3:
-                            that.data['qrnhWfsy'].oneYear = newData;
+                        case 3: 
+                            that.data['dwjzljjz'].oneYear = newData;
                             break;
-                        case 4:
-                            that.data['qrnhWfsy'].sinceNow = newData;
+                        case 4: 
+                            that.data['dwjzljjz'].sinceNow = newData;
                             break;
                     }
+
                     that.drawLine(type, newData);
                 }
             }];
@@ -882,8 +980,7 @@ $(function() {
                 },
                 callbackNoData: function(json) {
                     //没有数据
-                    // $id.find('.noData').show();
-
+                    $('.without.noData').show();
                     setTimeout(function() {
                         // that.getElements.listLoading.hide();
                     }, 100);

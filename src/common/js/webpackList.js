@@ -1,5 +1,3 @@
-
-
 module.exports = {
     //personal
     './personal/static/js/myPots': "./src/personal/static/js/myPots.js", //我的积分
@@ -90,7 +88,7 @@ module.exports = {
     './recommend/static/js/recommend': "./src/recommend/static/js/recommend.js", // 二维码页面
     './recommend/static/js/newRecommend': "./src/recommend/static/js/newRecommend.js", // 引导页
     './recommend/static/js/congratulation': "./src/recommend/static/js/congratulation.js", // 恭喜
-
+    './mine/static/js/recommend': "./src/mine/static/js/recommend.js", // 二维码页面
     //抽奖活动
     './recommend/static/js/award': './src/recommend/static/js/award.js',
     './recommend/static/js/awardRotate': './src/recommend/static/js/awardRotate.js',
@@ -185,7 +183,7 @@ module.exports = {
     //基金账户诊断
     './commonResources/fundDiagnosis/static/js/fundAccountDiagnosis': './src/commonResources/fundDiagnosis/static/js/fundAccountDiagnosis.js',
 
-    
+
     // 基金诊断
     './mine/static/js/hotDiagnosis': './src/mine/static/js/hotDiagnosis.js',
     // 诊断详情
@@ -196,7 +194,10 @@ module.exports = {
     './mine/static/js/fundAccountDiagnosis': './src/mine/static/js/fundAccountDiagnosis.js',
     //基金账户诊断--提交申请
     './mine/static/js/fundAccountDiagnosisResult': './src/mine/static/js/fundAccountDiagnosisResult.js',
-
+    //基金账户诊断 -- 添加已购买基金
+    './mine/static/js/addAccountDiagnosisResult': './src/mine/static/js/addAccountDiagnosisResult.js',
+    //基金账户诊断 -- 申请记录页面
+    './mine/static/js/applyHistory': './src/mine/static/js/applyHistory.js',
     // 标普模型
     './personal/static/js/spAssetModel': "./src/personal/static/js/spAssetModel.js",
     // 资产配置建议书
@@ -254,8 +255,6 @@ module.exports = {
     './life/static/js/memberClub/activityDetails': "./src/life/static/js/memberClub/activityDetails.js",
     //文件上传
     // './mine/static/js/uploadMaterial': './src/mine/static/js/uploadMaterial.js',
-    //明星理财师-理财师列表
-    './starFinancialPlanner/static/js/starFinancialPlannerList': "./src/starFinancialPlanner/static/js/starFinancialPlannerList.js",
 
     //历史明细
     './account/static/js/historyDetail': "./src/account/static/js/historyDetail.js",
@@ -289,7 +288,7 @@ module.exports = {
     './homePage/static/js/noticeDetail': './src/homePage/static/js/noticeDetail.js',
     //include---富文本模板
     './include/js/modelPage/articleTemplate': './src/include/js/modelPage/articleTemplate.js',
-    './include/js/modelPage/audio': './src/include/js/modelPage/audio.js',
+    // './include/js/modelPage/audio': './src/include/js/modelPage/audio.js',
     // 了解恒天
     './homePage/static/js/understandHT': './src/homePage/static/js/understandHT.js',
     // 财富学院
@@ -336,8 +335,8 @@ module.exports = {
     './financial/static/js/publicPlacement/castSurelyDetails': './src/financial/static/js/publicPlacement/castSurelyDetails.js',
     //我的定投计划
     './financial/static/js/publicPlacement/myInvestmentPlan': './src/financial/static/js/publicPlacement/myInvestmentPlan.js',
-     //我的定投计划----已终止的定投计划
-     './financial/static/js/publicPlacement/myInvestmentPlanH': './src/financial/static/js/publicPlacement/myInvestmentPlanH.js',
+    //我的定投计划----已终止的定投计划
+    './financial/static/js/publicPlacement/myInvestmentPlanH': './src/financial/static/js/publicPlacement/myInvestmentPlanH.js',
     //我的定投计划详情
     './financial/static/js/publicPlacement/castSurelyDetails': './src/financial/static/js/publicPlacement/castSurelyDetails.js',
     //活期理财
@@ -375,7 +374,7 @@ module.exports = {
 
 
     // 私募产品详情页
-    './financial/static/js/privatePlacement/privatePlacementDetail' : './src/financial/static/js/privatePlacement/privatePlacementDetail.js',
+    './financial/static/js/privatePlacement/privatePlacementDetail': './src/financial/static/js/privatePlacement/privatePlacementDetail.js',
 
     // 财富学院早知道
     './homePage/static/js/fortuneFlowKnown': './src/homePage/static/js/fortuneFlowKnown.js',
@@ -386,7 +385,7 @@ module.exports = {
     //非货币基金历史明细
     './account/static/js/public/otherFundHistoryDetail': "./src/account/static/js/public/otherFundHistoryDetail.js",
     //收益明细
-     './account/static/js/public/returnsDetail': "./src/account/static/js/public/returnsDetail.js",
+    './account/static/js/public/returnsDetail': "./src/account/static/js/public/returnsDetail.js",
 
     // 私募交易规则
     './account/static/js/private/transactionRules': "./src/account/static/js/private/transactionRules.js",

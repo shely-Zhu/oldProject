@@ -202,6 +202,7 @@ var prdPrv = {
             },
             needDataEmpty: false,
             needLogin: true,
+            needLoading: false,
             callbackDone: function(json) {
                 var jsonData = json.data;
 

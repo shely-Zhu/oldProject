@@ -118,9 +118,10 @@ $(function() {
                     "isConfirm": that.gV.type,
                     "confirmType": that.gV.businessType,
                 },
+                needLoading: false,
                 callbackDone: function(json) {
                     var data;
-                    if (json.data.pageList && json.data.pageList.length == 0) { // 没有记录不展示
+                    if (json.data.pageList && json.data.pageList.length == 0 && that.gV.aP.pageNum == 1) { // 没有记录不展示
                         $(".list").hide()
                         that.getElements.noData.show();
                         that.getElements.listLoading.hide();
@@ -205,8 +206,8 @@ $(function() {
                 //取消受让、取消预约、取消转让
             mui("body").on('mdClick', '.cancelBtn', function(e) {
                     var type = $(this).attr('data-type');
-                    var reserveId = $(this).attr('reserveId');
-                    var proId = $(this).attr('projectId');
+                    var reserveId = $(this).attr('data-reserveid');
+                    var proId = $(this).attr('data-projectid');
                     if (type == 'assign') { //转让
                         var obj = {
                             p: '<p>您确定要取消转让申请吗？</p>',
@@ -243,12 +244,23 @@ $(function() {
                             callback: function(t) {
                                 var obj = [{
                                     url: site_url.fundReserveCancel_api,
+                                    contentTypeSearch: true,
                                     data: {
                                         "projectId": proId,
                                         "reserveId": reserveId,
                                     },
                                     callbackDone: function(json) {
                                         var data;
+                                        if (json.status == '0000') {
+                                            // 重置上拉加载
+                                            mui('.contentWrapper').pullRefresh().refresh(true);
+                                            that.gV.aP.pageNum = 1;
+                                            that.getElements.contentWrap.html('');
+                                            //重新初始化
+                                            that.getElements.listLoading.show();
+                                            that.getData(that.gV.aThis);
+                                            mui('.contentWrapper').pullRefresh().scrollTo(0, 0, 0);
+                                        }
                                     },
                                     callbackNoData: function() {
 
@@ -287,8 +299,8 @@ $(function() {
             var clickEvent = '';
             mui("body").on('mdClick', '.toDetail', function(e) {
                 var type = $(this).attr('type');
-                var reserveId = $(this).attr('reserveId');
-                var proId = $(this).attr('projectId');
+                var reserveId = $(this).attr('data-reserveid');
+                var proId = $(this).attr('data-projectid');
                 var isElec = $(this).attr('data-type');
                 if (type == 'toCertif') { //去合格投资者认证
                     if (isElec == 0) {
@@ -297,7 +309,7 @@ $(function() {
                         //电子合同跳转
                     }
                 } else if (type == 'toSign') { //去签合同
-                    window.location.href = site_url.elecFourthStep_url + '?reserveId=' + reserveId + '&projectId' + proId;
+                    window.location.href = site_url.elecFourthStep_url + '?reserveId=' + reserveId + '&projectId=' + proId;
                 } else if (type == 'toSee') { //查看合同
                     window.location.href = site_url.seeSign_url + '?reserveId=' + reserveId;
                 } else if (type == 'toUploadM') { //去上传汇款凭证

@@ -16,10 +16,15 @@ var operationNoList = '';
 module.exports = function(data, $ele, $id, type) {
     var $ele = $ele || $('.contentWrap'),
         $id = $id || $('#trans-template');
+    if (isConfirm == 'confirmed') {
+        window.sessionStorage.setItem('isconfirm', 1);
+    } else if (isConfirm == 'toBeConfirmed') {
+        window.sessionStorage.setItem('isconfirm', 0);
+    }
     for (var i = 0; i < data.length; i++) {
         // 是否确认交易isConfirm 1-确认 0-未确认
-        data[i].isConfirmTrans = isConfirm == 'confirmed' ? 1 : 0; //已确认
-        data[i].notConfirmTrans = isConfirm == 'toBeConfirmed' ? 1 : 0; //未确认
+        data[i].isConfirmTrans = window.sessionStorage.getItem('isconfirm') == 1 ? 1 : 0; //已确认
+        data[i].notConfirmTrans = window.sessionStorage.getItem('isconfirm') == 0 ? 1 : 0; //未确认
         // 申购/认购
         data[i].businessType01 = (data[i].businessType == 0 || data[i].businessType == 1) ? 1 : 0;
         data[i].businessType0 = data[i].businessType == 0 && (data[i].leftTopStatus == 5) ? 1 : 0; //认购
@@ -75,7 +80,7 @@ module.exports = function(data, $ele, $id, type) {
         data[i].appointmentFailed = data[i].leftBottomStatus == 19 ? 1 : 0; //合同审核失败
 
         //赎回
-        data[i].businessTypeRedeem = (data[i].businessType == 2) || (data[i].businessType == 9) ? 1 : 0;
+        data[i].businessTypeRedeem = (data[i].businessType == 2) || (data[i].businessType == 9) || (data[i].businessType == 8) ? 1 : 0;
         //分红
         data[i].businessTypeBonus = data[i].businessType == 7 ? 1 : 0;
         //已完成的预约

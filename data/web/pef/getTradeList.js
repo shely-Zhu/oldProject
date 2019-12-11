@@ -52,13 +52,51 @@ var data = Mock.mock({
                 leftBottomStatusDesc: '',
             },
             {
+                assignAmount: "0.00",
+                assignDate: null,
+                assignShare: "0.00",
+                assignStep: null,
+                assigneeAmount: "0.00",
+                assigneeDate: null,
+                assigneeShare: "",
+                assigneeStep: null,
+                businessCompareReference: "",
+                businessCompareReferenceMask: "",
+                businessCompareReferenceMax: "",
+                businessCompareReferenceMin: "",
+                businessType: 1,
+                businessTypeDesc: "申购",
+                confirmAmount: "0.00",
+                confirmDate: null,
+                confirmShare: "0.00",
+                doneAmount: "0.00",
+                empName: "王林",
+                empNo: "H011973",
+                isForElec: "",
+                isQualified: null,
+                leftBottomStatus: "",
+                leftBottomStatusDesc: "",
+                leftTopStatus: "21",
+                leftTopStatusDesc: "已撤销",
+                operationNo: "",
+                productId: 12365,
+                projectId: 33422,
+                projectName: "0706简化准入第一次开放424802",
+                redeemDate: null,
+                redeemPortion: "",
+                reserveAmount: "1,900,000.00",
+                reserveId: 51967,
+                reserveStatusTip: "",
+                reserveTime: "2019-11-18"
+            },
+            {
                 projectId: 1,
                 projectName: '恒天稳谊16号私募投资基 ZYFG恒天稳谊16号私募投资基ZYFG申购', //项目名称
                 businessCompareReference: '', //业绩比较基准(业务类型为 0:认购 1:申购时精确查找业绩比较基准)
                 businessCompareReferenceMin: '', //业绩比较基准最小值
                 businessCompareReferenceMax: '', //业绩比较基准最大值
                 businessCompareReferenceMask: '', //(转受让 *%-*%)
-                businessType: 1, //	0 认购；1申购；2 赎回；3 份额转让-转出；4份额转让-转入；5强增；6强减；7分红再投；9强制赎回；10内部转托管入；11内部转托管出
+                businessType: 2, //	0 认购；1申购；2 赎回；3 份额转让-转出；4份额转让-转入；5强增；6强减；7分红再投；9强制赎回；10内部转托管入；11内部转托管出
                 confirmAmount: '10,000', //确认金额
                 confirmShare: '1,000', //确认份额
                 confirmDate: '2019-09-09', //确认日期

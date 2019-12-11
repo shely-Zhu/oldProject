@@ -56,6 +56,7 @@ $(function() {
 
             //初始化第一屏区域的上拉加载
             that.initMui($('#scroll1'));
+            window.sessionStorage.setItem('isconfirm', 0);
         },
 
         beforeFunc: function() { //拼模板，初始化左右滑动mui组件
@@ -80,7 +81,7 @@ $(function() {
 
                 that.gV.ajaxArr[i] = {
                     isConfirm: el.num, //请求类型
-                    businessType: null, //业务类型
+                    confirmType: null, //业务类型
                     pageNum: that.gV.aP.pageCurrent, //当前第几页(默认为1) 非必填项, 默认设置成第一页
                     pageSize: that.gV.aP.pageSize, //每页显示几条数据(默认10) 非必填项， 默认设置成20
                 }
@@ -104,9 +105,12 @@ $(function() {
 
                     //展示隐藏筛选按钮
                     if (index == 1) {
+                        //已确认
                         $('.hopper').show();
+                        window.sessionStorage.setItem('isconfirm', 1);
                     } else {
                         $('.hopper').hide();
+                        window.sessionStorage.setItem('isconfirm', 0);
                     }
                     //data-scroll属性即当前左右切换区域的索引
                     that.gV.current_index = index;
@@ -166,8 +170,7 @@ $(function() {
             var that = this;
             w = $id.attr('id'), //获取节点的 id
                 s = '#' + w + ' .contentWrapper'; //id 拼接 查出content区域
-            //无缝滚动
-            alwaysAjax($('#' + w + ' .mui-table-view-cell'), s)
+            console.log('#' + w + ' .mui-table-view-cell')
             mui.init({
                 pullRefresh: {
                     container: s,
@@ -215,6 +218,7 @@ $(function() {
                 url: that.gV.siteUrlArr[that.gV.current_index], //调用第几个接口
                 data: that.gV.ajaxArr[that.gV.current_index], //传调用参数
                 needLogin: true,
+                needLoading: false,
                 callbackDone: function(json) {
                     console.log(json.data)
                     var jsonData = json.data.pageList,
@@ -249,7 +253,7 @@ $(function() {
                                 //第一页时
                                 if (that.listLength == 0) {
                                     //没有数据
-                                    $id.find('.list').html(that.getElements.noData.clone(false)).addClass('noCon');
+                                    $id.find('.list .contentWrapper li').html(that.getElements.noData.clone(false)).addClass('noCon');
                                     $id.find('.noData').show();
 
                                     //隐藏loading，调试接口时需要去掉
@@ -258,7 +262,7 @@ $(function() {
                                     }, 100);
                                     t.endPullupToRefresh(true);
 
-                                    //获取当前展示的tab的索引
+                                    //获取当前展示的tab的索引     
                                     var index = $('#slider .tab-scroll-wrap .mui-active').index(),
                                         $list = $("#move_" + index + " .list");
                                     $list.height(that.highHeight).addClass('noMove');
@@ -319,6 +323,8 @@ $(function() {
                             that.getElements.listLoading.hide();
                         }, 100);
                         transcationTem(jsonData, $id.find('.list li'), $('#trans-template'))
+                        //无缝滚动
+                        alwaysAjax($id.find('.mui-table-view-cell'), $id.find(".contentWrapper"))
                     }, 200)
 
 
@@ -389,7 +395,7 @@ $(function() {
             mui("body").on('mdClick', '.hopper', function(e) {
                     $('.mask').show();
                     $('.hopperCon').show();
-                },{
+                }, {
                     'htmdEvt': 'privateDetailList_0'
                 })
                 //点击筛选数据
@@ -397,28 +403,33 @@ $(function() {
                     $(this).addClass('active').siblings('li').removeClass('active');
                     $('.mask').hide();
                     $('.hopperCon').hide();
-                    that.gV.businessType = $(this).attr('data');
+
+                    mui('#scroll2 .contentWrapper').pullRefresh().refresh(true);
+
                     // 重置上拉加载
                     that.gV.ajaxArr[1].pageNum = 1;
-                    that.gV.ajaxArr[1].businessType = $(this).attr('data');
+                    that.gV.ajaxArr[1].confirmType = $(this).attr('data');
                     // that.getElements.contentWrap.html('');
+                    $('#scroll2 .contentWrapper li').html('');
                     //重新初始化
                     that.initMui($('#scroll2'));
                     mui('#scroll2 .contentWrapper').pullRefresh().scrollTo(0, 0, 0);
-                },{
+                }, {
                     'htmdEvt': 'privateDetailList_1'
                 })
                 // 点击遮罩隐藏
             mui("body").on('mdClick', '.mask', function(e) {
                     $('.mask').hide();
                     $('.hopperCon').hide();
-                },{
+                }, {
                     'htmdEvt': 'privateDetailList_2'
                 })
                 //取消受让、取消预约、取消转让
             mui("body").on('mdClick', '.cancelBtn', function(e) {
                     var type = $(this).attr('data-type');
                     var id = $(this).attr('data-id');
+                    var reserveId = $(this).attr('data-reserveid');
+                    var proId = $(this).attr('data-projectid');
                     if (type == 'assign') { //转让
                         var obj = {
                             p: '<p>您确定要取消转让申请吗？</p>',
@@ -434,7 +445,7 @@ $(function() {
 
                         // that.openTipCon('assign', '您确定要取消转让申请吗？', id);
 
-                    } else if (type == 'assignee')
+                    } else if (type == 'assignee') {
                         var obj = {
                             p: '<p>您确定要取消受让申请吗？</p>',
                             yesTxt: '确认',
@@ -445,22 +456,58 @@ $(function() {
 
                             },
                         };
-                    $.elasticLayer(obj)
+                        $.elasticLayer(obj)
+                    } else if (type == 'appointment') {
+                        var obj = {
+                            p: '<p>您确定要取消预约吗？</p>',
+                            yesTxt: '确认',
+                            celTxt: '取消',
+                            hideCelButton: false,
+                            zIndex: 100,
+                            callback: function(t) {
+                                var obj = [{
+                                    url: site_url.fundReserveCancel_api,
+                                    contentTypeSearch: true,
+                                    data: {
+                                        "projectId": proId,
+                                        "reserveId": reserveId,
+                                    },
+                                    callbackDone: function(json) {
+                                        var data;
+                                        if (json.status == '0000') {
+                                            that.gV.ajaxArr[0].pageNum = 1;
+                                            $('#scroll1 .contentWrapper li').html('');
+                                            //重新初始化
+                                            that.initMui($('#scroll1'));
+                                            mui('#scroll1 .contentWrapper').pullRefresh().scrollTo(0, 0, 0);
+                                        }
+                                    },
+                                    callbackNoData: function() {
 
-                },{
+                                    }
+
+                                }];
+                                $.ajaxLoading(obj);
+                            },
+                        };
+                        $.elasticLayer(obj)
+                    }
+
+
+                }, {
                     'htmdEvt': 'privateDetailList_3'
                 })
                 // 点击我明白了
-            mui("body").on('mdClick', '.tipContainer .buttonOne', function(e) {
-                    $('.mask').hide();
-                    $('#tipConOne').hide();
-                    var conText = $(this).siblings('tipContent').html;
-                    that.openTipConOne(conText);
+                // mui("body").on('mdClick', '.tipContainer .buttonOne', function(e) {
+                //         $('.mask').hide();
+                //         $('#tipConOne').hide();
+                //         var conText = $(this).siblings('tipContent').html;
+                //         that.openTipConOne(conText);
 
-                },{
-                    'htmdEvt': 'privateDetailList_4'
-                })
-                //点击状态文字出现弹框
+            //     }, {
+            //         'htmdEvt': 'privateDetailList_4'
+            //     })
+            //点击状态文字出现弹框
             mui("body").on('mdClick', '.openTip', function(e) {
                     $('.mask').show();
                     $('#tipConOne').show();
@@ -476,24 +523,38 @@ $(function() {
                     };
                     $.elasticLayer(obj);
 
-                },{
+                }, {
                     'htmdEvt': 'privateDetailList_5'
                 })
                 //功能按钮
             var clickEvent = '';
             mui("body").on('mdClick', '.toDetail', function(e) {
                 var type = $(this).attr('type');
-                var id = $(this).attr('reserveId');
+                var reserveId = $(this).attr('data-reserveid');
+                var proId = $(this).attr('data-projectid');
+                var isElec = $(this).attr('data-type');
                 if (type == 'toCertif') { //去合格投资者认证
-
+                    if (isElec == 0) {
+                        //非电子合同
+                    } else if (isElec == 1) {
+                        //电子合同跳转
+                    }
                 } else if (type == 'toSign') { //去签合同
-
+                    window.location.href = site_url.elecFourthStep_url + '?reserveId=' + reserveId + '&projectId=' + proId;
                 } else if (type == 'toSee') { //查看合同
-                    window.location.href = site_url.seeSign_url + '?reserveId=' + id;
+                    window.location.href = site_url.seeSign_url + '?reserveId=' + reserveId;
                 } else if (type == 'toUploadM') { //去上传汇款凭证
+                    window.location.href = site_url.elecFourthStep_url + '?reserveId=' + reserveId;
+                } else if (type == 'toView') { //详情
+
+                } else if (type == 'toVideo') { //视频双录
+
+                } else if (type == 'toDown') { //下载电子合同
+
+                } else if (type == 'reAppointment') { //重新预约
 
                 }
-            },{
+            }, {
                 'htmdEvt': 'privateDetailList_6'
             })
         }

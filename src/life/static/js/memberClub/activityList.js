@@ -87,6 +87,7 @@ $(function(){
             var obj = [{ // 系统调仓记录列表
                 url: site_url.getActivitiesList_api,
                 needLogin: false,
+                needLoading: false,
                 // url:'http://172.16.187.164:8081/web/marketing/activity/getActivitiesList',
                 data: {
                         // "combCode": that.gV.groupCode, //组合代码 
@@ -144,6 +145,7 @@ $(function(){
                         }
                         // 将列表插入到页面上
                         generateTemplate(list,that.$e.recordList,that.$e.activityListTemp)
+                        alwaysAjax($(".recordList"));
                         $(".lazyload").lazyload()
                     }, 200)
 
@@ -346,7 +348,7 @@ $(function(){
             mui('body').on('mdClick','.mui-card',function(){
                 var actType=$(this).children('a').attr('data-actType');
                 var actId=$(this).children('a').attr('data-actId');
-                window.location.href=site_url.activityDetails_url+'?actType='+actType+'&'+'actId='+actId;
+                window.location.href=site_url.activityDetails_url+'?actType='+actType+'&'+'actId='+actId + '&isNeedLogin=0';
             },{
                 htmdEvt: 'activityList_4'
             });
@@ -388,8 +390,6 @@ $(function(){
             },{
                 htmdEvt: 'activityList_7'
             });
-            // recordList
-            alwaysAjax($(".recordList"));
         }
     }
     //调用初始化函数

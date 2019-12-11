@@ -40,6 +40,8 @@ module.exports = function() {
 
     //协议模板
     this.agreementModel_url = go_url.no_url + '/include/views/agreementModel.html';
+     //《基金合同》《招募说明书》协议模板
+     this.agreementPreview_url = go_url.no_url + '/include/views/agreementPreview.html';
 
     //实名认证下的三个协议
     this.tradeserviceAgreement_url = go_url.no_url + '/include/views/agreementModel.html?id=81';
@@ -310,6 +312,10 @@ module.exports = function() {
     this.hotDiagnosis_url = go_url.no_url + '/mine/views/fundDiagnosis/hotDiagnosis_url.html';
     // 诊断搜索页面
     this.diagnosisSearch_url = go_url.no_url + '/mine/views/fundDiagnosis/diagnosisSearch.html';
+    //基金账户诊断--新增基金页面                                                           
+    this.addAccountDiagnosisResult_url = go_url.no_url + '/mine/views/fundDiagnosis/addAccountDiagnosisResult.html';
+    //基金账户诊断 -- 申请页面
+    this.fundAccountDiagnosisResult_url = go_url.no_url + '/mine/views/fundDiagnosis/fundAccountDiagnosisResult.html';
     // 诊断详情页
     this.diagnosisDetail_url = go_url.no_url + '/mine/views/fundDiagnosis/diagnosisDetail.html';
 

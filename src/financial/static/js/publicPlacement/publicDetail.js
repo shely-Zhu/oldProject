@@ -127,9 +127,10 @@ $(function () {
             var that = this;
             // 请求页面数据
             var obj = [{
-                url: site_url.user_api,
+                url: site_url.queryUserBaseInfo_api,
                 data: {
                 },
+                needLogin: false,
                 callbackDone: function (json) {
                     var data = json.data
                     that.gV.accountType = data.accountType
@@ -240,11 +241,15 @@ $(function () {
                     that.getData2(that.gV.type, time, end);
                 }
             });
-
+            //人工服务
+            mui("body").on('mdClick', ".customerService", function (e) {
+                window.location.href = 'http://zxkf.chtwm.com/webchat/jsp/standard/interfacePools.jsp?queue=105&device=mobile'
+            });
             //分享  -- 跳往原生页面
             mui("body").on('mdClick', ".share_area", function (e) {
-                //要携带参数后期补上
-                window.location.href = site_url.pofShare_url + '?fundCode=' + fundCode + '&shareTitle=' + that.gV.secuSht
+                if (window.currentIsApp) {
+                    $('body').append('<iframe src="publicDetailShare://?fundCode=' + splitUrl['fundCode'] + '&fundName=' + that.gV.secuSht + '"></iframe>');
+                }
             });
             //加自选  
             mui("body").on('mdClick', ".selected_area", function (e) {
@@ -294,9 +299,10 @@ $(function () {
             manageList.push(prams)
             // 请求页面数据
             var obj = [{
-                url: site_url.prfFundCollectionMG_api,
+                url: site_url.collectFund_api,
                 data: {
                     feedback:'',
+                    deviceId:splitUrl['deviceId'],
                     manageList:manageList 
                 },
                 callbackDone: function (json) {

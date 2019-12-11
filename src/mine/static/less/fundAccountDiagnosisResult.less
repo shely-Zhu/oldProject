@@ -42,13 +42,46 @@ body {
             text-align: center;
             margin-top: 0.2rem;
         }
-        .content-item{
-            
+        .popup{
+            display: block;
+            position: fixed;
+            left: 0;
+            right: 0;
+            width: 100%;
+            top: 0;
+            background: #666666;
+            height: 100%;
+            z-index: 10000;
+            .popup-content{
+                position: fixed;
+                bottom: 0;
+                left: 0;
+                width: 100%;
+                height: 7rem;
+                background-color: white;
+            }
+            .mui-table-view-cell{
+                text-align: center;
+                line-height: 1rem;
+            }
+            .selectItemList{
+                display: none;
+            }
+            .selectItemList:nth-of-type(1){
+                display: block;
+            }
         }
         .mui-table-view > .mui-table-view-cell {
             position: relative;
             background-color: white;
             height: 1rem;
+            line-height: 0.5rem;
+        }
+        .popup .mui-table-view > .mui-table-view-cell{
+            line-height: 0.8rem;
+        }
+        .selectFundCode li{
+            line-height: 1rem !important;
         }
         .mui-table-view > .mui-table-view-cell > .left{
             display: inline-block;
@@ -61,15 +94,50 @@ body {
         .mui-table-view > .mui-table-view-cell > .right{
             display: inline-block;
             float: right;
-            width: 1.8rem;
-            ::before{
-                content: '\e583';
+            width: 1.5rem;
+            line-height: 0.8rem;
+            text-align: right;
+            input{
+                text-align: right;
             }
+        }
+        .rightMoreBox{
+            position: absolute;
+            right: 0.6rem;
+            top: 0;
+            height: 0.8rem;
+            width: 3rem;
+            display: none;
+            .rightMore{
+                display: inline-block;
+                float: right;
+                line-height: 0.8rem;
+            }
+        }
+        
+        .interval{
+            position: absolute;
+            right: 0.1rem;
+            width: 3rem;
+            height: 0.8rem;
+            input{
+                display: inline-block;
+                width: 1.3rem;
+            }
+            span{
+                display: inline-block;
+                width: 0.2rem;
+            }
+            
+        }
+        .addOtherFundcodeList{
+            min-height: 1rem;
         }
         .mui-table-view > .mui-table-view-cell > .mui-icon{
             display: inline-block;
             float: right;
             margin-top: 0.15rem;
+            margin-right: 0.1rem;
         }
         select {
             margin-bottom: 0;
@@ -90,6 +158,11 @@ body {
         .messageBox .left{
             font-weight: bold;
             margin-left: 0.5rem;
+            margin-top: 0.2rem;
+            display: inline-block;
+        }
+        .ml5{
+            margin-left: 0.05rem;
         }
         .ml20{
             margin-left: 0.2rem;
@@ -97,10 +170,74 @@ body {
         .ml50{
             margin-left: 0.5rem;
         }
+        .mr60{
+            margin-right: 0.6rem;
+        }
         .selectFundCode li input{
             display: inline-block;
             height: auto;
             margin-left: 0.5rem;
+        }
+        .fontWei-b{
+            font-weight: bold;
+        }
+        .popup_cancel{
+            display: inline-block;
+            margin-left: 0.5rem;
+            margin-top: 0.2rem;
+        }
+        .popup_true{
+            display: inline-block;
+            margin-right: 0.5rem;
+            float: right;
+            margin-top: 0.2rem;
+            color: #2FA6FD;
+        }
+        .radioCheckItemImg{
+            display: none;
+            width: 0.4rem;
+            height: 0.4rem;
+            position: absolute;
+            top: 0.3rem;
+            right: 1rem;
+        
+        }
+        .selectItemList  input{
+            display: inline-block;
+            float: left;
+            width: 3rem;
+            margin-left: 0.3rem;
+        }
+        .selectItemList span.line{
+            display: inline-block;
+            float: left;
+            width: 0.4rem;
+            text-align: center;
+            height: 0.8rem;
+            line-height: 0.7rem;
+            margin-left: 0.2rem;
+        }
+        .selectItemList .listBox{
+            height: 1rem;
+        }
+        .warmMessage{
+            width: 100%;
+            height: 1rem;
+            text-align:center;
+            line-height: 1rem;
+            color: red;
+        }
+        .addOtherFundcodeBox{
+            .left{
+                display: inline-block;
+                margin-left: 0.5rem;
+                font-weight: bold;
+            }
+            .right{
+                float: right;
+                margin-right: 0.1rem;
+                margin-top: 0.1rem;
+            }
         }
     }
 }
