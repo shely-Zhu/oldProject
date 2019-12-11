@@ -32,6 +32,7 @@ $(function() {
             openingBank: $("#openingBank"), //开户行
             topc: $('#topc'), //提示信息
             tipIcon: $(".tipIcon"), //净值披露信息
+            isElecContract:'',  //是否是电子合同产品【0.否 1.是】
         },
         data: {
             canClick: true,
@@ -151,6 +152,8 @@ $(function() {
                     // 预约资质
                     $('.appointment span').html(jsonData.orderCondition);
                     // 产品特点标签
+                    that.getElements.isElecContract = jsonData.isElecContract;
+                    
                     var projectLable = jsonData.projectLable.split('|');
                     for (var i in projectLable) {
                         projectLableHtml = '<span>' + projectLable[i] + '</span>'
@@ -162,6 +165,7 @@ $(function() {
                     } else if (jsonData.investDirect == "1" || jsonData.investDirect == "3") { // 海外投资  （证券投资）二级市场展示
                         that.getElements.tipIcon.show();
                     };
+
 
                     // 基本信息
                     // 剩余额度
