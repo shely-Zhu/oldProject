@@ -56,6 +56,7 @@ $(function() {
 
             //初始化第一屏区域的上拉加载
             that.initMui($('#scroll1'));
+            window.sessionStorage.setItem('isconfirm', 0);
         },
 
         beforeFunc: function() { //拼模板，初始化左右滑动mui组件
@@ -104,9 +105,12 @@ $(function() {
 
                     //展示隐藏筛选按钮
                     if (index == 1) {
+                        //已确认
                         $('.hopper').show();
+                        window.sessionStorage.setItem('isconfirm', 1);
                     } else {
                         $('.hopper').hide();
+                        window.sessionStorage.setItem('isconfirm', 0);
                     }
                     //data-scroll属性即当前左右切换区域的索引
                     that.gV.current_index = index;
