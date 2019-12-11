@@ -241,11 +241,15 @@ $(function () {
                     that.getData2(that.gV.type, time, end);
                 }
             });
-
+            //人工服务
+            mui("body").on('mdClick', ".customerService", function (e) {
+                window.location.href = 'http://zxkf.chtwm.com/webchat/jsp/standard/interfacePools.jsp?queue=105&device=mobile'
+            });
             //分享  -- 跳往原生页面
             mui("body").on('mdClick', ".share_area", function (e) {
-                //要携带参数后期补上
-                window.location.href = site_url.pofShare_url + '?fundCode=' + fundCode + '&shareTitle=' + that.gV.secuSht
+                if (window.currentIsApp) {
+                    $('body').append('<iframe src="publicDetailShare://?fundCode=' + splitUrl['fundCode'] + '&fundName=' + that.gV.secuSht + '"></iframe>');
+                }
             });
             //加自选  
             mui("body").on('mdClick', ".selected_area", function (e) {

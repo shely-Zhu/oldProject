@@ -290,7 +290,7 @@ $(function () {
                 $('.cash_buy_info .fund_amount').html(model.balanceMask + '元');//买入金额
                 $('.cash_buy_info .bank_icon').attr('url', model.bankThumbnailUrl);//需要后台加接口 支付方式的银行logo
                 $('.cash_buy_info .bank_name').html(that.getPayInfo(model.bankName, model.bankAccountMask));//支付方式的银行名称
-                $('.cash_buy_info .pay_mode').html(model.payModeName);//支付方式
+                $('.cash_buy_info .pay_mode').html('1' == model.payType? '汇款支付': '在线支付');//支付方式
                 $('.cash_buy_info .fund_date').html(model.applyDateTime);//买入时间
             } else {
                 //展示现金宝赎回信息
