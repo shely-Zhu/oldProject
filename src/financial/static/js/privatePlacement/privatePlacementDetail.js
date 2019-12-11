@@ -46,6 +46,13 @@ $(function() {
                 oneYear: {},
                 sinceNow: {}
             },
+            dwjzljjz: {
+                oneMonth : {},
+                threeMonth: {},
+                halfYear: {},
+                oneYear: {},
+                sinceNow: {}
+            },
         },
 
         //页面初始化函数
