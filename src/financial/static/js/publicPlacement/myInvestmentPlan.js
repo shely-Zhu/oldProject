@@ -197,7 +197,7 @@ $(function () {
             var that = this;
             //新增 跳原生定投排行页
             mui("body").on("mdClick", ".newPlan", function () {
-                window.location.href = site_url.investmentPlanRanking_url;
+                window.location.href = site_url.investmentPlanRanking_url + '?flag=2';
             }, {
 				htmdEvt: 'myInvestmentPlan_01'
 			});
