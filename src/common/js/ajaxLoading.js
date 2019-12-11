@@ -342,12 +342,11 @@ var splitUrl = require('./components/splitUrl.js')();
                     .fail(function() {
                         //失败状态
                         console.log('失败了');
-
+                        $('.listLoading').hide();
                         if (needLoading) {
                             requestCount -= 1;
                             if (requestCount == 0){
                                 $('.netLoading').hide();//数据请求成功 遮罩隐藏
-                                $('.listLoading').hide();
                             }
                         }
                         
@@ -361,11 +360,11 @@ var splitUrl = require('./components/splitUrl.js')();
                     .done(function() {
                         //成功状态
                         console.log('ajax请求全部成功')
+                        $('.listLoading').hide();
                         if (needLoading) {
                             requestCount -= 1;
                             if (requestCount == 0){
                                 $('.netLoading').hide();//数据请求成功 遮罩隐藏
-                                $('.listLoading').hide();
                             }
                         }
                     })
