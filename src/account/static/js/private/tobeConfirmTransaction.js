@@ -309,7 +309,7 @@ $(function() {
                         //电子合同跳转
                     }
                 } else if (type == 'toSign') { //去签合同
-                    window.location.href = site_url.elecFourthStep_url + '?reserveId=' + reserveId + '&projectId' + proId;
+                    window.location.href = site_url.elecFourthStep_url + '?reserveId=' + reserveId + '&projectId=' + proId;
                 } else if (type == 'toSee') { //查看合同
                     window.location.href = site_url.seeSign_url + '?reserveId=' + reserveId;
                 } else if (type == 'toUploadM') { //去上传汇款凭证

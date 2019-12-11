@@ -47,7 +47,7 @@
    
    <script id="activityEn-template" type="text/x-handlebars-template">
     {{#each this}}
-        <li>
+        <li class="clickli" data-actType="{{actType}}" data-actId="{{actId}}">
             {{#if actTypestatus}}
             <img class="lazyload" src="/common/img/lazyImgList.png" data-original="{{htjfGeneralizeImgUrl}}" alt="">
             {{/if}}
@@ -79,7 +79,7 @@
     </script>
 
     <script id="more-template" type="text/x-handlebars-template">
-        <li style="background: url('{{filePath}}') 100% 100%">
+        <li style="background: url('{{filePath}}') 100% 100%" class="clickli" data-actType="{{actType}}" data-actId="{{actId}}">
             {{#if prize}}
             <div class="top">
                 <span>{{prize}}</span>

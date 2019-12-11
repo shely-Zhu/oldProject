@@ -125,6 +125,8 @@ $(function() {
 
                             // 将列表插入到页面上
                             generateTemplate(data, that.$e.recordList, that.$e.starFinancialPlannerListTemplateId)
+                                //无缝滚动
+                            alwaysAjax($(".recordList"))
                             that.$e.listLoading.hide();
                             $(".lazyload").lazyload()
 
@@ -368,12 +370,12 @@ $(function() {
                 }, {
                     'htmdEvt': 'starFinancia_03'
                 });
-                //点击活动列表跳转
-                // mui('body').on('mdClick','.mui-card',function(){
-                //     var actType=$(this).children('a').attr('data-actType');
-                //     var actId=$(this).children('a').attr('data-actId');
-                //     window.location.href=site_url.activityDetails_url+'?actType='+actType+'&'+'actId='+actId;
-                // },{
+                // //点击活动列表跳转
+                // mui('body').on('mdClick', '.mui-card', function() {
+                //     var actType = $(this).children('a').attr('data-actType');
+                //     var actId = $(this).children('a').attr('data-actId');
+                //     window.location.href = site_url.activityDetails_url + '?actType=' + actType + '&' + 'actId=' + actId;
+                // }, {
                 //     'htmdEvt': 'starFinancia_04'
                 // });
                 //搜索框输入触发查询数据
@@ -417,26 +419,24 @@ $(function() {
                 });
                 //返回上一页
                 $("#goBack").on("click", function() {
-                        if (document.referrer == '') {
-                            var u = navigator.userAgent,
-                                app = navigator.appVersion;
-                            var isAndroid = u.indexOf('Android') > -1 || u.indexOf('Linux') > -1; //g
-                            var isIOS = !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/); //ios终端
-                            if (isAndroid) {
-                                //这个是安卓操作系统
-                                window.jsObj.backNative();
-                            }
-                            if (isIOS) {
-                                //这个是ios操作系统
-                                window.webkit.messageHandlers.backNative.postMessage('backNative');
-                            }
-                        } else {
-                            location.href = "javascript:history.go(-1)";
+                    if (document.referrer == '') {
+                        var u = navigator.userAgent,
+                            app = navigator.appVersion;
+                        var isAndroid = u.indexOf('Android') > -1 || u.indexOf('Linux') > -1; //g
+                        var isIOS = !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/); //ios终端
+                        if (isAndroid) {
+                            //这个是安卓操作系统
+                            window.jsObj.backNative();
                         }
+                        if (isIOS) {
+                            //这个是ios操作系统
+                            window.webkit.messageHandlers.backNative.postMessage('backNative');
+                        }
+                    } else {
+                        location.href = "javascript:history.go(-1)";
+                    }
 
-                    })
-                    //无缝滚动
-                alwaysAjax($(".recordList"))
+                })
             }
         }
         //调用初始化函数

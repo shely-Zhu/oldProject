@@ -224,6 +224,15 @@ $(function () {
             },{
                 'htmdEvt': 'activityEnrolment_02'
             });
+
+            //点击活动列表跳转
+            mui('body').on('mdClick','.clickli',function(){
+                var actType=$(this).attr('data-actType');
+                var actId=$(this).attr('data-actId');
+                window.location.href=site_url.activityDetails_url+'?actType='+actType+'&'+'actId='+actId;
+            },{
+                htmdEvt: 'activityEnrolment_03'
+            });
         }
 
     }
