@@ -295,14 +295,16 @@ $(function () {
         //收藏管理
         getFundCollection: function (prams) {
             var that = this;
+            var deviceId = splitUrl['deviceId'].split("cookie")[0];
             var manageList = [];
+            debugger
             manageList.push(prams)
             // 请求页面数据
             var obj = [{
                 url: site_url.collectFund_api,
                 data: {
                     feedback:'',
-                    deviceId:splitUrl['deviceId'] ? splitUrl['deviceId'] : '',
+                    deviceId:deviceId,
                     manageList:manageList 
                 },
                 callbackDone: function (json) {
