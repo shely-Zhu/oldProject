@@ -58,7 +58,7 @@ $(function(){
 	            playVideo('http://htjj-vod.homecdn.com/630b0907-cf06-4c05-91ed-017aa04805e8.m3u8',"video_wrapper6");
 	        })
 
-		}
+		},
 
 	}
 
