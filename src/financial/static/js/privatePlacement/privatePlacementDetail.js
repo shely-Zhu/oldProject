@@ -615,6 +615,8 @@ $(function() {
                 }
             }];
             $.ajaxLoading(obj);
+             //懒加载
+             $(".lazyload").lazyload()
         },
 
         // 募集账户信息
