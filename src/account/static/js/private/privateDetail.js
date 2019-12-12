@@ -689,7 +689,7 @@ $(function() {
 					window.location.href = site_url.incomeDistribution_url + '?projectId=' + that.data.projectId;
 					clickEvent = 'privateDetail_2';
             	} else if ($(this).find(".txt").html() == '基金确认书') { // 基金确认书页面
-					window.location.href = site_url.privateFundPdf_url + '?projectId=' + that.data.projectId + '&ecFileName=' + that.data.ecFileName + '&ecFileUrl=' + that.data.ecFileUrl;
+					window.location.href = site_url.privateFundPdf_url + '?projectId=' + that.data.projectId + '&ecFileName=' + new Base64().encode(that.data.ecFileName) + '&ecFileUrl=' + new Base64().encode(that.data.ecFileUrl);
 					clickEvent = 'privateDetail_3';
             	}
             }, {
@@ -703,7 +703,7 @@ $(function() {
 					window.location.href = site_url.incomeDistribution_url + '?projectId=' + that.data.projectId;
 					clickEvent = 'privateDetail_2';
             	} else if ($(this).find(".txt").html() == '基金确认书') { // 基金确认书页面
-					window.location.href = site_url.privateFundPdf_url + '?projectId=' + that.data.projectId + '&ecFileName=' + that.data.ecFileName + '&ecFileUrl=' + that.data.ecFileUrl;
+					window.location.href = site_url.privateFundPdf_url + '?projectId=' + that.data.projectId + '&ecFileName=' + new Base64().encode(that.data.ecFileName) + '&ecFileUrl=' + new Base64().encode(that.data.ecFileUrl);
 					clickEvent = 'privateDetail_3';
             	}
             }, {
