@@ -134,8 +134,14 @@ module.exports = function(file) {
     //开始替换
     if (fileCon.indexOf('@path') != -1) {
 
+
+        console.log('smjhDirArr: ' + smjhDirArr );
+
         //判断是否为使命计划相关的文件
         var fileName = smjhDirArr.filter( (value, index) => {
+
+            console.log( 'file.path:' + file.path );
+
             return file.path.indexOf('\\' + value + '\\') != -1;
         });
 
