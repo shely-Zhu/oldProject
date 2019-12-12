@@ -117,6 +117,8 @@ $(function() {
 
                         $("#qrnhLine").addClass("hide");
                         $("#wfsyLine").removeClass("hide");
+                        // 涨跌幅
+                        $('.priceLimit').removeClass('hide');
                         // 单位净值
                         $('.netValue').html(jsonData.unitNetValue);
                         // 折线图
@@ -134,7 +136,6 @@ $(function() {
                         // 展示七日年化
                         $('.netValue').html(jsonData.sevenIncomeRate);
                         $('#historyDetailBtn').removeClass('hide');
-                        $('.priceLimit').addClass('hide');
                         // 折线图
                         that.getTypeTwoData(that.$e.lineType);
                     }
