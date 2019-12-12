@@ -140,9 +140,9 @@ module.exports = function(file) {
         //判断是否为使命计划相关的文件
         var fileName = smjhDirArr.filter( (value, index) => {
 
-            console.log( '有value:' + file.path.indexOf('\\' + value + '\\') );
+            console.log( '有value:' + file.path.indexOf('/' + value + '/') );
 
-            return file.path.indexOf('\\' + value + '\\') != -1;
+            return file.path.indexOf('/' + value + '/') != -1;
         });
 
         console.log('fileName: ' + fileName );
