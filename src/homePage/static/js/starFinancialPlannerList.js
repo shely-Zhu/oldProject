@@ -418,7 +418,7 @@ $(function() {
                     'htmdEvt': 'starFinancia_06'
                 });
                 //返回上一页
-                $("#goBack").on("click", function() {
+                mui("body").on('mdClick', '#goBack', function() {
                     if (document.referrer == '') {
                         var u = navigator.userAgent,
                             app = navigator.appVersion;
@@ -436,6 +436,8 @@ $(function() {
                         location.href = "javascript:history.go(-1)";
                     }
 
+                }, {
+                    'htmdEvt': 'starFinancia_07'
                 })
             }
         }

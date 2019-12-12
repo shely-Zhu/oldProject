@@ -14,27 +14,29 @@ var generateTemplate = require('@pathCommonJsComBus/generateTemplate.js');
 
 var moment = require('moment');
 
-$(function () {
+$(function() {
     var dataEn = {
         $e: {
             noData: $('.noData'), //没有数据的结构
             listLoading: $('.listLoading'), //所有数据区域，第一次加载的loading结构
-            ListSlot: $('.listHasData0'),//插入已报名活动位置
-            ListSlot1: $('.listHasData1'),//插入已报名活动位置
-            listTemp: $('#activityEn-template'),//已报名活动模板类名  
+            ListSlot: $('.listHasData0'), //插入已报名活动位置
+            ListSlot1: $('.listHasData1'), //插入已报名活动位置
+            listTemp: $('#activityEn-template'), //已报名活动模板类名  
             moreSlot: $('.moreul'),
-            moreTemp: $('#more-template'),//已报名活动模板类名     
+            moreTemp: $('#more-template'), //已报名活动模板类名     
 
         },
         gV: {
-            ListData: [
-            ], // 有活动的数据
+            ListData: [], // 有活动的数据
             search: false, // 搜索
             // 存放ajax请求地址  已进行  已结束
             ajaxArr: [], //存放每一个ajax请求的传参数据
-            custCode: ''
+            custCode: '',
+            shareImg: '',
+            shareTitle: '',
+
         },
-        init: function () {
+        init: function() {
             var that = this;
             that.getUserInfo();
             that.getData(site_url.getApplyActivity_api, {
@@ -46,7 +48,7 @@ $(function () {
             that.events();
         },
         //时间转换
-        getMyDate: function (str) {
+        getMyDate: function(str) {
             var that = this
             var oDate = new Date(str),
                 oYear = oDate.getFullYear(),
@@ -56,11 +58,11 @@ $(function () {
                 oMin = oDate.getMinutes(),
                 oSen = oDate.getSeconds(),
                 oTime = oYear + '-' + that.addZero(oMonth) + '-' + that.addZero(oDay) + ' ' + that.addZero(oHour) + ':' +
-                    that.addZero(oMin) + ':' + that.addZero(oSen);
+                that.addZero(oMin) + ':' + that.addZero(oSen);
             return oTime;
         },
         //补零操作
-        addZero: function (num) {
+        addZero: function(num) {
             if (parseInt(num) < 10) {
                 num = '0' + num;
             }
@@ -68,7 +70,7 @@ $(function () {
         },
         //获取用户信息
         //页面初始用户ajax请求
-        getUserInfo: function () {
+        getUserInfo: function() {
             var that = this;
             var obj = [{
                 url: site_url.user_api,
@@ -81,7 +83,7 @@ $(function () {
                 needLogin: true,
                 // async: false, //同步
                 needDataEmpty: false, //需要判断data是否为空
-                callbackDone: function (json) {
+                callbackDone: function(json) {
                     var jsonData = json.data;
                     that.gV.custCode = jsonData.customerNo; //客户编号
 
@@ -89,7 +91,7 @@ $(function () {
             }];
             $.ajaxLoading(obj);
         },
-        getData: function (ur, dat, num) {
+        getData: function(ur, dat, num) {
             var that = this
 
 
@@ -97,21 +99,21 @@ $(function () {
                 url: ur,
                 data: dat,
                 needDataEmpty: true,
-                needLogin: true,//需要判断是否登陆
+                needLogin: true, //需要判断是否登陆
                 contentTypeSearch: true,
-                callbackDone: function (json) {
+                callbackDone: function(json) {
                     var dataList;
                     if (num == 0) {
 
                         //给推荐活动赋值
                         morelist = json.data.defaultRecommend
-                        //判断是否有报名时间
+                            //判断是否有报名时间
                         if (morelist && morelist.actStartDate) {
                             morelist.timeflag = true;
                             morelist.actStartDate = morelist.actStartDate ? moment(morelist.actStartDate).format('MM月至DD日') : '';
                             morelist.actEndDate = morelist.actEndDate ? moment(morelist.actEndDate).format('MM月至DD日') : '';
                         }
-                        setTimeout(function () {
+                        setTimeout(function() {
                             generateTemplate(morelist, that.$e.moreSlot, that.$e.moreTemp);
                         }, 200)
                     }
@@ -127,10 +129,12 @@ $(function () {
                         }
 
                     } else {
-                        json.data.activityVOPageInfo.list.map(function (e) {
+                        that.gV.shareImg = json.data.activityVOPageInfo.list.htjfGeneralizeImgUrl;
+                        that.gV.shareTitle = json.data.activityVOPageInfo.list.actName;
+                        json.data.activityVOPageInfo.list.map(function(e) {
                             e.enterTime = that.getMyDate(parseInt(e.enterTime))
                             e.arriveTime = that.getMyDate(parseInt(e.arriveTime))
-                            // 判断是否有图片
+                                // 判断是否有图片
                             e.imgurl = e.htjfGeneralizeImgUrl == '' ? 0 : 1;
                             //判断是否显示分享   线上并且是 进行中的
                             e.shareflag = e.actType == 1 && num == 0 ? 1 : 0;
@@ -139,9 +143,9 @@ $(function () {
                         })
                         dataList = json.data.activityVOPageInfo.list;
                     }
-                   
 
-                    setTimeout(function () {
+
+                    setTimeout(function() {
                         // 将列表插入到页面上
                         if (num == 0) {
                             generateTemplate(dataList, that.$e.ListSlot, that.$e.listTemp);
@@ -155,10 +159,10 @@ $(function () {
                     }, 200)
 
                 },
-                callbackFail: function (json) {
+                callbackFail: function(json) {
                     tipAction(json.msg);
                 },
-                callbackNoData: function () {
+                callbackNoData: function() {
                     if (num == 0) {
                         $('.listHasData0 .noData').show();
                         return false;
@@ -174,7 +178,7 @@ $(function () {
 
 
         //分享给好友
-        shareInfo: function (actId, actType) {
+        shareInfo: function(actId, actType) {
             var that = this;
             var obj = [{
                 url: site_url.shareInfo_api,
@@ -185,23 +189,39 @@ $(function () {
                 },
                 //async: false,
                 needDataEmpty: true,
-                callbackDone: function (json) {
+                callbackDone: function(json) {
                     var data = json.data;
-                    $('#activity_share').attr('src', 'activityShare://' + data);
-
+                    var wxShare = {
+                            type: 'auto',
+                            businessType: 'activityShare', //业务类型
+                            title: that.gV.shareTitle,
+                            des: '邀请好友，分享精彩',
+                            link: data,
+                            img: that.gV.shareImg,
+                        }
+                        // window.isAndroid是在root文件中定义的变量
+                    if (window.isAndroid) {
+                        //这个是安卓操作系统
+                        window.jsObj.wxShare(wxShare);
+                    }
+                    // window.isIOS是在root文件中定义的变量
+                    if (window.isIOS) {
+                        //这个是ios操作系统
+                        window.webkit.messageHandlers.wxShare.postMessage(wxShare);
+                    }
                 },
-                callbackFail: function (json) {
+                callbackFail: function(json) {
                     console.log(json.message)
                     tipAction(json.message);
                 }
             }];
             $.ajaxLoading(obj);
         },
-        events: function () {
+        events: function() {
             var that = this
 
             // tab 切换
-            mui("body").on('tap', '.choice .mui-col-xs-6', function (e) {
+            mui("body").on('tap', '.choice .mui-col-xs-6', function(e) {
                 var i = $(this).index();
                 $(this).addClass('active').siblings().removeClass('active');
                 window.scroll(0, 0)
@@ -212,25 +232,25 @@ $(function () {
                     $('.listHasData0').hide()
                     $('.listHasData1').show()
                 }
-            },{
+            }, {
                 'htmdEvt': 'activityEnrolment_01'
             })
 
             //分享好友
-            mui('body').on('mdClink', '.timeBtn', function () {
+            mui('body').on('mdClink', '.timeBtn', function() {
                 var actId = $(this).attr('data-actId');
                 var actType = $(this).attr('data-actType');
                 that.shareInfo(actId, actType);
-            },{
+            }, {
                 'htmdEvt': 'activityEnrolment_02'
             });
 
             //点击活动列表跳转
-            mui('body').on('mdClick','.clickli',function(){
-                var actType=$(this).attr('data-actType');
-                var actId=$(this).attr('data-actId');
-                window.location.href=site_url.activityDetails_url+'?actType='+actType+'&'+'actId='+actId;
-            },{
+            mui('body').on('mdClick', '.clickli', function() {
+                var actType = $(this).attr('data-actType');
+                var actId = $(this).attr('data-actId');
+                window.location.href = site_url.activityDetails_url + '?actType=' + actType + '&' + 'actId=' + actId;
+            }, {
                 htmdEvt: 'activityEnrolment_03'
             });
         }
