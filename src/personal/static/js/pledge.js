@@ -55,7 +55,7 @@ var pledge = {
                 },
                 callbackDone: function(data) {
                     $(".introduce span").html(data.data.totalAssets);
-                }
+                },
                      
             },
             {
@@ -80,7 +80,7 @@ var pledge = {
                     } else {
                         $(".without").show();
                     }
-                }
+                },
                      
             }
         ]

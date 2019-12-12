@@ -188,7 +188,6 @@ var tradeList = {
 			needLogin: true,
 			needDataEmpty: true, 
 			async: false, 
-			needLoading: false,
 			callbackDone: function(json){
 				var jsonData = json.data;
 

@@ -1,5 +1,5 @@
 require('../../../include/js/vendor/config.js');
-require('@pathCommonBase/base.js');
+
 //zepto模块
 require('../../../include/js/vendor/zepto/callback.js');
 require('../../../include/js/vendor/zepto/deferred.js');

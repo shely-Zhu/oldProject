@@ -1,6 +1,6 @@
 //ajax调用
 require('../../../common/js/components/utils.js');
-require('@pathCommonBase/base.js');
+
 //ajax调用
 require('../../../common/js/ajaxLoading.js');
 //zepto模块--callback
@@ -160,7 +160,7 @@ $(function() {
                         })
                         //$('.items .real').html('已认证').addClass('non').parent().attr('href', resultUrl);
                     }
-                }
+                },
             }];
             $.ajaxLoading(obj);
         },
@@ -294,7 +294,7 @@ $(function() {
 
             };
             window.location.href = smUrl;
-        }
+        },
 
 
     }

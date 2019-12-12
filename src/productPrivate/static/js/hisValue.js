@@ -87,7 +87,6 @@ $(function() {
                     // netValueBeginDate: "", // 查询起始日期(非必须)
                     // netValueEndDate: "" // 查询结束日期(非必须)
                 },
-                needLoading: false,
                 needDataEmpty: false,
                 contentTypeSearch: true,
                 callbackDone: function(json) {
