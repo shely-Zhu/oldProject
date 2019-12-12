@@ -40,6 +40,9 @@ $(function() {
             fundDetailObj: "", //详情接口拿到的对象
             buyFreeze: "", //是否买入冻结
             productName:"",//产品名称
+            isRiskEndure:'',  // 是否风险测评 0-否 1-是
+            endurePubIsold:'',  // 公募风险评测是否过期 0:否 1:是
+            endurePriIsold:'', // 私募风险测评是否过期0:否 1:是 
             qrnhWfsy: {
                 oneMonth: {},
                 threeMonth: {},
@@ -62,10 +65,6 @@ $(function() {
             var that = this;
 
             that.getData();
-            // 募集账户信息
-            that.collectAccount();
-            // 获取标签
-            that.queryReourceListByLabel();
             // 查询产品亮点
             that.queryProductImage();
             that.events();
@@ -369,6 +368,10 @@ $(function() {
                     var jsonData = json.data;
                     that.data.custType = jsonData.accountType; // 客户类型【0.机构 1.个人】 
                     that.data.buyFreeze = jsonData.buyFreeze; // 是否冻结买入：0-否；1-是；
+                    that.data.isRiskEndure = jsonData.isRiskEndure;  // 是否风险测评 0-否 1-是
+                    if(that.data.isRiskEndure == 0 ){
+
+                    }
 
 
                 },
@@ -381,7 +384,7 @@ $(function() {
             var that = this;
             num = num ? num : 3;
             var newData = {
-                sevenIncomeRate: [], //存放折线图七日年化
+                // sevenIncomeRate: [], //存放折线图七日年化
                 profitThoudDate: [], //存放折线图收益日期
                 profitThoudValue: [] //存放折线图万份收益
             }
@@ -421,11 +424,11 @@ $(function() {
                     var jsonData = json.data;
                     //拼数据
                     $.each( jsonData, function(i, el){
-                        newData.sevenIncomeRate.push( el.sevenYearYield);
+                        // newData.sevenIncomeRate.push( el.sevenYearYield);
                         newData.profitThoudDate.push( el.curveDate);
                         newData.profitThoudValue.push( el.incomeUnit);
                     })
-                    switch(num) {
+                    switch(Number(num)) {
                         case 0: that.data['qrnhWfsy'].oneMonth = newData;break;
                         case 1: that.data['qrnhWfsy'].threeMonth = newData;break;
                         case 2: that.data['qrnhWfsy'].halfYear = newData;break;
@@ -502,7 +505,7 @@ $(function() {
                 url: site_url.prvHisValue_api,
                 data: {
                     projectId: splitUrl['projectId'],
-                    days: '',
+                    days: days,
                     pageNo: '',
                     pageSize: '',
                 },
@@ -518,12 +521,13 @@ $(function() {
                         newData.profitThoudDate.push(el.netValueDate);
                     })
 
-                    switch(num) {
+                    switch(Number(num)) {
                         case 0: 
                             that.data['dwjzljjz'].oneMonth = newData;
                             break;
                         case 1: 
                             that.data['dwjzljjz'].threeMonth = newData;
+                            console.log(that.data['dwjzljjz'].threeMonth);
                             break;
                         case 2:
                             that.data['dwjzljjz'].halfYear = newData;
@@ -781,7 +785,6 @@ $(function() {
                 needLogin: true, //需要判断是否登陆
                 callbackDone: function(json) { //成功后执行的函数
                     that.data.canClick = true; //变为可点击
-                    //					generateTemplate(json.data,$("#real-condition"), that.$e.conditionTemplate);
                     var jsonData = json.data,
                         notice = "",
                         noticeObj = "",
@@ -1048,11 +1051,21 @@ $(function() {
                 $(this).addClass('active').siblings().removeClass('active');
                 $(".wrap>.panel").eq($(this).index()).addClass('active').siblings().removeClass('active');
                 var spanHeight = $('.clientLevel .changgeRight span').height();
-                    if(spanHeight > 50){
-                        $('.clientLevel .changgeRight').css({
-                            lineHeight:'0.5rem'
-                        })
-                    }
+                if(spanHeight > 50){
+                    $('.clientLevel .changgeRight').css({
+                        lineHeight:'0.5rem'
+                    })
+                }
+                // tab点击切换时请求接口
+                if($(this).index() == 1){
+                    // 募集账户信息
+                    that.collectAccount();
+
+                }else if($(this).index() == 2){
+                    // 获取标签
+                    that.queryReourceListByLabel();
+                    
+                }
             }, {
                 htmdEvt: 'privatePlacementDetail_01'
             });
@@ -1152,6 +1165,14 @@ $(function() {
             }, {
                 htmdEvt: 'privatePlacementDetail_06'
             });
+            // 点击产品材料
+            mui("body").on('mdClick', '.contentLink', function() {
+                var $this = $(this);
+                console.log($this.attr('href'))
+                window.location.href = $this.attr('href');
+            }, {
+                'htmdEvt': 'privatePlacementDetail_07'
+            })
         }
     };
     privatePlacementDetail.init();
