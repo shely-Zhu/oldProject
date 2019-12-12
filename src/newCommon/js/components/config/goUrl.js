@@ -41,7 +41,7 @@ module.exports = function() {
     //协议模板
     this.agreementModel_url = go_url.no_url + '/include/views/agreementModel.html';
      //《基金合同》《招募说明书》协议模板
-     this.agreementPreview_url = go_url.no_url + '/include/views/agreementPreview.html';
+     this.agreementPreview_url = go_url.no_url + '/allServerResources/model/views/agreementPreview.html';
 
     //实名认证下的三个协议
     this.tradeserviceAgreement_url = go_url.no_url + '/include/views/agreementModel.html?id=81';
@@ -493,6 +493,8 @@ module.exports = function() {
     this.fortuneFlowKnown_url = go_url.no_url + '/homePage/views/fortuneCollege/fortuneFlowKnown.html';
     //财富讲堂
     this.fortuneClassroom_url = go_url.no_url + '/homePage/views/fortuneCollege/fortuneClassroom.html';
+    //查看往期热词
+    this.pastHotWords_url = go_url.no_url + '/homePage/views/fortuneCollege/pastHotWords.html';
     //财富研究
     this.wealthResearch_url = go_url.no_url + '/homePage/views/fortuneCollege/wealthResearch.html';
     //其他资产页面

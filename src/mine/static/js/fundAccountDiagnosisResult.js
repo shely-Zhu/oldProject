@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2019-12-09 15:53:31
- * @LastEditTime: 2019-12-12 10:35:58
+ * @LastEditTime: 2019-12-12 20:31:08
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \htjf-app\src\mine\static\js\fundAccountDiagnosisResult.js
@@ -42,6 +42,7 @@ $(function() {
         },
         gV: {
               otherFundCodeData:"", //其他基金数据
+              readyPurchaseHTFunds:"", //恒天基金
               userAge:"", //年龄
               sexData:"",//性别
               professionalData:"",//职业
@@ -57,12 +58,14 @@ $(function() {
         },
         init: function() {
             var that = this;
+            that.getData();
             that.initAddOtherFundCode();
             that.initParmis();
             that.queryDictionary();
             that.events();
         },
         initAddOtherFundCode:function(){
+            //初始化其他基金
             var that = this;
             that.gV.otherFundCodeData = JSON.parse(sessionStorage.getItem("addAccountDiagnosisResultList"))
             generateTemplate(that.gV.otherFundCodeData, that.$e.TransferFundsContent, that.$e.templateTransferFunds);
@@ -75,6 +78,21 @@ $(function() {
             }else{
                 $(".addOtherFundcodeBox_noData").show();
             }
+        },
+        initData:function(data){
+            that.gV.userAge = data.age;
+            that.gV.sexData = data.sex == 0 ?"女":"男";
+            that.gV.professionalData = data.evocation ;
+            that.gV.investment_yearData = data.investDurationLevel;
+            that.gV.riskLevelData = data.riskLevel;
+            that.gV.expectedInvestment_yearData = data.eInvestDurationLevel;
+            that.gV.liquidityData = data.liquidityRequirement;
+            that.gV.yield_firstData = data.eYieldratePerYearMin;
+            that.gV.yield_secondData = data.eYieldratePerYearMax;
+            that.gV.loss_firstData = data.affordableMaxDeficitRateMin;
+            that.gV.loss_secondData = data.affordableMaxDeficitRateMax;
+            that.gV.otherFundCodeData = data.readyPurchaseQTFunds;
+            that.gV.readyPurchaseHTFunds= data.readyPurchaseHTFunds;
         },
         initParmis:function(){
              var that = this;
@@ -105,6 +123,94 @@ $(function() {
 
             }];
             $.ajaxLoading(obj);
+        },
+        getData:function(){
+           var that = this;
+           var obj = [{
+               url:site_url.addBeforeFundDiagnosisApply_api,
+               needDataEmpty:true,
+               callbackDone:function(json){
+                   console.log("回显申请数据",json)
+                   if(json.data){
+                        that.initData(json.data);
+                        that.initParmis();
+                   }
+               }
+           }];
+           $.ajaxLoading(obj)
+        },
+        addFundDiagnosisApply:function(){
+            var that = this;
+            var obj = [{
+                url:site_url.addFundDiagnosisApply_api,
+                needDataEmpty:true,
+                data:{
+                    id:"",  //主键
+                    age:"", //年龄
+                    evocation:"", //职业
+                    evocationExtension:"",//职业描述
+                    investDurationLevel:"", //投资年限
+                    riskLevel:"",  //风险等级
+                    eInvestDurationLevel:"",  //预计投资年限
+                    liquidityRequirement:"",  //流动性需求
+                    eYieldratePerYearMin:"", //预期年化收益率最小值
+                    eYieldratePerYearMax:"",  //预期年化收益率最大值
+                    affordableMaxDeficitRateMin:"",  //可承受最大亏损最小值
+                    affordableMaxDeficitRateMax:"",  //可承受最大亏损最大值
+                    readyPurchaseHTFunds:"",    //已购买恒天基金
+                    readyPurchaseQTFunds:""      //已购买其他基金
+                },
+                callbackDone:function(json){
+                   console.log("提交申请",json)
+                }
+            }];
+            $.ajaxLoading(obj)
+        },
+        queryFundDiagnosisApplyInfo:function(){
+            //修改申请过来回显详情数据
+            var that = this;
+            var obj = [{
+                url:site_url.queryFundDiagnosisApplyInfo_api,
+                needDataEmpty:true,
+                data:{
+                    applyId:"", //基金诊断申请id
+                },
+                callbackDone:function(json){
+                    if(json.data){
+                        that.initData(json.data);
+                        that.initParmis();
+                    }
+                }
+            }];
+            $.ajaxLoading(obj)
+        },
+        updateFundDiagnosisApply:function(){
+            //修改基金诊断申请
+            var that = this;
+            var obj = [{
+                url:site_url.updateFundDiagnosisApply_api,
+                needDataEmpty:true,
+                data:{
+                    id:"",  //主键
+                    age:"", //年龄
+                    evocation:"", //职业
+                    evocationExtension:"",//职业描述
+                    investDurationLevel:"", //投资年限
+                    riskLevel:"",  //风险等级
+                    eInvestDurationLevel:"",  //预计投资年限
+                    liquidityRequirement:"",  //流动性需求
+                    eYieldratePerYearMin:"", //预期年化收益率最小值
+                    eYieldratePerYearMax:"",  //预期年化收益率最大值
+                    affordableMaxDeficitRateMin:"",  //可承受最大亏损最小值
+                    affordableMaxDeficitRateMax:"",  //可承受最大亏损最大值
+                    readyPurchaseHTFunds:"",    //已购买恒天基金
+                    readyPurchaseQTFunds:""      //已购买其他基金
+                },
+                callbackDone:function(json){
+                    console.log("修改申请",json)
+                }
+            }];
+            $.ajaxLoading(obj)
         },
        events:function(){
             var that = this;
@@ -260,6 +366,7 @@ $(function() {
 
            //提交申请
            mui("body").on("mdClick",".comfirmButtom .mui-btn",function(){
+               that.addFundDiagnosisApply();
                var tital = "提交申请成功";
                var value = "恒天公募基金研究团队正在快马加鞭赶来,我们将尽快与你联系,请耐心等待并保持手机畅通";
                 $.elasticLayerTypeTwo({

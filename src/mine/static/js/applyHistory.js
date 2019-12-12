@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2019-12-09 15:53:31
- * @LastEditTime: 2019-12-10 21:03:50
+ * @LastEditTime: 2019-12-12 19:38:00
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \htjf-app\src\mine\static\js\fundAccountDiagnosisResult.js
@@ -34,10 +34,21 @@ $(function() {
         },
         init: function() {
             var that = this;
-
+            that.queryAllByCustomerNo();
             that.events();
         },
-       
+        queryAllByCustomerNo:function(){
+            //所有基金诊断记录
+            var that = this;
+            var obj = [{
+                url:site_url.queryAllByCustomerNo_api,
+                needDataEmpty: true,
+                callbackDone:function(json){
+                    console.log("8989",json)
+                }
+            }];
+            $.ajaxLoading(obj);
+        },
        events:function(){
             var that = this;
             mui("body").on("mdClick",".historyItemList .right_left",function(){

@@ -35,10 +35,10 @@ var gulp = require('gulp'),
 
 var newWebpackList = require('./src/newCommon/js/webpackList.js'),
 
-//把webpackList和newWebpackList合并
-webpackList = Object.assign( webpackList, newWebpackList);
+    //把webpackList和newWebpackList合并
+    webpackList = Object.assign(webpackList, newWebpackList);
 
-for( var i in webpackList){
+for (var i in webpackList) {
     webpackList[i] = webpackList[i].replace('/src/', '/middle/js/')
 }
 
@@ -193,20 +193,20 @@ gulp.task('proxyTask', function() {
         middleware: function(connect, opt) {
             return [
                 proxy('/app', {
-                    target: 'https://app.htjf4.com',
+                    // target: 'https://app.htjf4.com',
                     // target: 'http://172.16.187.129:8080',//李亚楠
                     // target: 'http://192.168.50.254:8085',
-                    // target: 'https://app.chtfundtest.com',
+                    target: 'https://app.chtfundtest.com',
                     changeOrigin: true,
                     secure: false,
                 }),
 
                 proxy(['/wap', '/web/', '/jf/'], {
 
-                    target: 'https://h5.htjf4.com',
+                    // target: 'https://h5.htjf4.com',
                     //  target: 'http://172.16.187.129:8080',//李亚楠
                     // target: 'http://172.16.187.164:8081',
-                    // target: 'https://h5.chtfundtest.com',
+                    target: 'https://h5.chtfundtest.com',
                     changeOrigin: true,
                     secure: false,
                 }),
@@ -489,7 +489,7 @@ gulp.task("cssToHost", function() {
 
     //与host.path中的内容做比对
     .pipe(plugins.changed(host.path, { hasChanged: plugins.changed.compareSha1Digest }))
-    
+
     .pipe(plugins.if(isWatch, plugins.debug({ title: 'css-有变动的文件:' })))
 
     //修改当前文件的路径，将less替换为css
@@ -526,59 +526,59 @@ gulp.task("htmd", function() {
 })
 
 //不使用webpack的 js文件打包
-gulp.task("allServerResourcesInclude",  function() {
+gulp.task("allServerResourcesInclude", function() {
 
-    return gulp.src( ['src/allServerResources/include/**/*.js' ])
+    return gulp.src(['src/allServerResources/include/**/*.js'])
 
-        //与host.path中的内容做比对
-        .pipe(plugins.changed(host.path, { hasChanged: plugins.changed.compareSha1Digest }))
-        
-        .pipe(plugins.if(isWatch, plugins.debug({ title: 'js-有变动的文件:' })))
+    //与host.path中的内容做比对
+    .pipe(plugins.changed(host.path, { hasChanged: plugins.changed.compareSha1Digest }))
 
-        .pipe(plugins.if(options.env === '3' || options.env === '4', plugins.uglify({ //压缩
-            mangle: false, //类型：Boolean 默认：true 是否修改变量名
-            compress: false, //类型：Boolean 默认：true 是否完全压缩
-            output: {
-                beautify: true //只去注释，不压缩成一行
+    .pipe(plugins.if(isWatch, plugins.debug({ title: 'js-有变动的文件:' })))
+
+    .pipe(plugins.if(options.env === '3' || options.env === '4', plugins.uglify({ //压缩
+        mangle: false, //类型：Boolean 默认：true 是否修改变量名
+        compress: false, //类型：Boolean 默认：true 是否完全压缩
+        output: {
+            beautify: true //只去注释，不压缩成一行
+        }
+    })))
+
+    //对root.js做一些修改
+    .pipe(
+        through.obj(function(file, enc, cb) {
+
+            file = changeCommonImg(file);
+
+            if (file.path.indexOf('root.js') != -1 && (options.env == '0' || options.env == "5")) {
+                // if (file.path.indexOf('root.js') != -1 && (options.env == '0')) {
+                //如果是本地或联调环境，修改env和envOrigin的值
+                //且替换root.js里的本地ip
+                //因测试、预生产、生产环境的root需运维在发版时在对应环境上修改
+                //此处不处理
+                var fileCon = file.contents.toString();
+
+                fileCon = fileCon.replace(/localIp/g, localIp);
+
+                fileCon = 'var env = ' + options.env + ';\n' + 'var envOrigin = ' +
+                    options.envOrigin + ';\n' + fileCon.substring(fileCon.indexOf('//'));
+
+                file.contents = new Buffer(fileCon);
             }
-        })))
+            this.push(file);
+            cb()
+        })
+    )
 
-        //对root.js做一些修改
-        .pipe(
+    .pipe(gulp.dest(host.path + 'allServerResources/include/'))
+
+    //root.js需要打版本号
+    .pipe(
             through.obj(function(file, enc, cb) {
-
-                file = changeCommonImg(file);
-
-                if (file.path.indexOf('root.js') != -1 && (options.env == '0' || options.env == "5")) {
-                    // if (file.path.indexOf('root.js') != -1 && (options.env == '0')) {
-                    //如果是本地或联调环境，修改env和envOrigin的值
-                    //且替换root.js里的本地ip
-                    //因测试、预生产、生产环境的root需运维在发版时在对应环境上修改
-                    //此处不处理
-                    var fileCon = file.contents.toString();
-
-                    fileCon = fileCon.replace(/localIp/g, localIp);
-
-                    fileCon = 'var env = ' + options.env + ';\n' + 'var envOrigin = ' +
-                        options.envOrigin + ';\n' + fileCon.substring(fileCon.indexOf('//'));
-
-                    file.contents = new Buffer(fileCon);
+                if (file.path.indexOf('root.js') != -1) {
+                    this.push(file);
                 }
-                this.push(file);
                 cb()
             })
-        )
-
-        .pipe(gulp.dest(host.path + 'allServerResources/include/'))
-
-        //root.js需要打版本号
-        .pipe(
-                through.obj(function(file, enc, cb) {
-                    if (file.path.indexOf('root.js') != -1) {
-                        this.push(file);
-                    }
-                    cb()
-                })
         )
         .pipe(plugins.rev())
         .pipe(plugins.rev.manifest())
@@ -591,53 +591,53 @@ gulp.task("includeJs", ['htmd', 'allServerResourcesInclude'], function() {
     return gulp.src(jsIncludeSrc)
         //与host.path中的内容做比对
         .pipe(plugins.changed(host.path, { hasChanged: plugins.changed.compareSha1Digest }))
-        
-        .pipe(plugins.if(isWatch, plugins.debug({ title: 'js-有变动的文件:' })))
 
-        .pipe(plugins.if(options.env === '3' || options.env === '4', plugins.uglify({ //压缩
-            mangle: false, //类型：Boolean 默认：true 是否修改变量名
-            compress: false, //类型：Boolean 默认：true 是否完全压缩
-            output: {
-                beautify: true //只去注释，不压缩成一行
+    .pipe(plugins.if(isWatch, plugins.debug({ title: 'js-有变动的文件:' })))
+
+    .pipe(plugins.if(options.env === '3' || options.env === '4', plugins.uglify({ //压缩
+        mangle: false, //类型：Boolean 默认：true 是否修改变量名
+        compress: false, //类型：Boolean 默认：true 是否完全压缩
+        output: {
+            beautify: true //只去注释，不压缩成一行
+        }
+    })))
+
+    //对root.js做一些修改
+    .pipe(
+        through.obj(function(file, enc, cb) {
+
+            file = changeCommonImg(file);
+
+            if (file.path.indexOf('root.js') != -1 && (options.env == '0' || options.env == "5")) {
+                // if (file.path.indexOf('root.js') != -1 && (options.env == '0')) {
+                //如果是本地或联调环境，修改env和envOrigin的值
+                //且替换root.js里的本地ip
+                //因测试、预生产、生产环境的root需运维在发版时在对应环境上修改
+                //此处不处理
+                var fileCon = file.contents.toString();
+
+                fileCon = fileCon.replace(/localIp/g, localIp);
+
+                fileCon = 'var env = ' + options.env + ';\n' + 'var envOrigin = ' +
+                    options.envOrigin + ';\n' + fileCon.substring(fileCon.indexOf('//'));
+
+                file.contents = new Buffer(fileCon);
             }
-        })))
+            this.push(file);
+            cb()
+        })
+    )
 
-        //对root.js做一些修改
-        .pipe(
+    .pipe(gulp.dest(host.path + 'include/'))
+
+    //root.js需要打版本号
+    .pipe(
             through.obj(function(file, enc, cb) {
-
-                file = changeCommonImg(file);
-
-                if (file.path.indexOf('root.js') != -1 && (options.env == '0' || options.env == "5")) {
-                    // if (file.path.indexOf('root.js') != -1 && (options.env == '0')) {
-                    //如果是本地或联调环境，修改env和envOrigin的值
-                    //且替换root.js里的本地ip
-                    //因测试、预生产、生产环境的root需运维在发版时在对应环境上修改
-                    //此处不处理
-                    var fileCon = file.contents.toString();
-
-                    fileCon = fileCon.replace(/localIp/g, localIp);
-
-                    fileCon = 'var env = ' + options.env + ';\n' + 'var envOrigin = ' +
-                        options.envOrigin + ';\n' + fileCon.substring(fileCon.indexOf('//'));
-
-                    file.contents = new Buffer(fileCon);
+                if (file.path.indexOf('root.js') != -1) {
+                    this.push(file);
                 }
-                this.push(file);
                 cb()
             })
-        )
-
-        .pipe(gulp.dest(host.path + 'include/'))
-
-        //root.js需要打版本号
-        .pipe(
-                through.obj(function(file, enc, cb) {
-                    if (file.path.indexOf('root.js') != -1) {
-                        this.push(file);
-                    }
-                    cb()
-                })
         )
         .pipe(plugins.rev())
         .pipe(plugins.rev.manifest())
@@ -722,7 +722,7 @@ gulp.task('jsCpd', function() {
 });
 
 
-gulp.task("changePath", function( cb ) {
+gulp.task("changePath", function(cb) {
 
     pump([
         gulp.src(['src/**/*.js']),
@@ -735,7 +735,7 @@ gulp.task("changePath", function( cb ) {
             cb()
         }),
 
-        gulp.dest( 'middle/js')
+        gulp.dest('middle/js')
 
     ], cb)
 })
@@ -782,7 +782,7 @@ gulp.task("webpack", ['jsCpd', 'changePath'], function(cb) {
 
         //与host.path中的内容做比对,
         plugins.changed(host.path, { hasChanged: plugins.changed.compareSha1Digest }),
-        
+
         plugins.if(isWatch, plugins.debug({ title: 'js-有变动的文件:' })),
 
         gulp.dest(host.path),
@@ -826,8 +826,6 @@ gulp.task('html', function(cb) {
     pump([
         gulp.src(['src/**/views/**/*.html', '!src/common/views/**/*.html', '!src/newCommon/views/**/*.html']), //- 读取 rev-manifest.json 文件以及需要进行css名替换的文件
 
-        plugins.debug({ title: 'html-处理前的文件:' }),
-
         //处理公共路径变量
         through.obj(function(file, enc, cb) {
 
@@ -864,7 +862,7 @@ gulp.task('html', function(cb) {
         //与host.middleHtmlPath中的内容做比对
         plugins.changed(host.middleHtmlPath, { hasChanged: plugins.changed.compareSha1Digest }),
 
-        plugins.if(isWatch, plugins.debug({ title: 'html-有变动的文件:' })) ,
+        plugins.if(isWatch, plugins.debug({ title: 'html-有变动的文件:' })),
 
         //输出到middleHtmlPath文件夹，用于再次修改时比对，此时还没有加版本号
         gulp.dest(host.middleHtmlPath),
@@ -886,7 +884,7 @@ gulp.task('rev', function() {
 
 
     .pipe(plugins.revCollector()) //- 执行html内版本号的替换
-    
+
     .pipe(plugins.if(isWatch, plugins.debug({ title: '替换版本号的文件' })))
 
     //替换后的文件输出的目录

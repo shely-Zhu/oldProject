@@ -609,7 +609,7 @@ $(function() {
                 var id = $(this).attr("id")
                 var articleBelong = $(this).attr("articleBelong")
                 var applyType = $(this).attr("applyType")
-                window.location.href =site_url.wealthResearch_url + '?id=' + id + '&articleBelong=' + articleBelong + '&applyType='+applyType
+                window.location.href =site_url.articleTemplate_url + '?id=' + id + '&articleBelong=' + articleBelong 
             },{
                 'htmdEvt': 'fortune_07'
             })
