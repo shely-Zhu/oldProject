@@ -215,6 +215,7 @@ var clickList = {
 	"privatePlacementDetail_05" : { type:'click', evtid: 'privatePlacementDetail_05', topic: '私募基金产品详情-历史明细', info: ''} ,
 	"privatePlacementDetail_06" : { type:'click', evtid: 'privatePlacementDetail_06', topic: '私募基金产品详情-立即预约', info: ''} ,
 	"privatePlacementDetail_07" : { type:'click', evtid: 'privatePlacementDetail_07', topic: '私募基金产品详情-产品材料', info: ''} ,
+	"privatePlacementDetail_08" : { type:'click', evtid: 'privatePlacementDetail_08', topic: '私募基金产品详情-净值更新', info: ''} ,
 	
 	//现金管理
 	"cashManagement_01" : { type:'click', evtid: 'cashManagement_01', topic: '现金管理-了解现金管理', info: ''} ,

@@ -302,7 +302,7 @@ $(function () {
                 url: site_url.collectFund_api,
                 data: {
                     feedback:'',
-                    deviceId:splitUrl['deviceId'],
+                    deviceId:splitUrl['deviceId'] ? splitUrl['deviceId'] : '',
                     manageList:manageList 
                 },
                 callbackDone: function (json) {
