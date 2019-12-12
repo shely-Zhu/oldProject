@@ -82,7 +82,7 @@ $(function() {
                     up: {
                         //auto: false,
                         contentrefresh: '拼命加载中',
-                        contentnomore: '没有更多了', //可选，请求完毕若没有更多数据时显示的提醒内容；
+                        contentnomore: '暂无更多内容', //可选，请求完毕若没有更多数据时显示的提醒内容；
                         callback: function() {
                             // debugger
                             //执行ajax请求
