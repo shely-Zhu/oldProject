@@ -1,7 +1,7 @@
 /*
  * @Author: chennn 
  * @Date: 2019-11-22 10:52:18 
- * @Last Modified by: tianjunguo
+ * @Last Modified by:   songxiaoyu
  * @Last Modified time: 2019-11-28 18:18:54
  */
 
@@ -62,7 +62,7 @@ $(function(){
             // 将pdf流转为canvas
             var pdfjsLib = window['pdfjs-dist/build/pdf'];
             // The workerSrc property shall be specified.
-            pdfjsLib.GlobalWorkerOptions.workerSrc = '/include/js/vendor/pdf/pdf.worker.js';
+            pdfjsLib.GlobalWorkerOptions.workerSrc = '/allServerResources/include/js/vendor/pdf/pdf.worker.js';
             pdfjsLib.getDocument(url).then(function getPdfHelloWorld(pdf) {
 //				$('#loading').hide();
                 for (var i = 1; i <= pdf.numPages; i++) {
