@@ -228,9 +228,11 @@ $(function () {
 						data.forEach(function(element){
 							if(element.materialType == '1'){
 								that.$el.contract.attr('datalink',element.linkAddress)
+								that.$el.contract.attr('type','1')
 							}
 							if(element.materialType == '2'){
 								that.$el.recruiting.attr('datalink',element.linkAddress)
+								that.$el.recruiting.attr('type','2')
 							}
 						});
 					}
@@ -620,7 +622,7 @@ $(function () {
 			//  ---《基金合同》《招募说明书》
 			mui("body").on('mdClick','.goPreview',function(){
 				var link = $(this).attr('datalink')
-				window.location.href = site_url.agreementPreview_url + '?link=' + link
+				window.location.href = site_url.agreementPreview_url + '?link=' + link +'&type=' + $(this).attr('type')
 			}, {
 				htmdEvt: 'fundTransformIn_17'
 			}) ;

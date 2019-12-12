@@ -1,0 +1,40 @@
+/*
+ * pdf 模板
+ * @author zhangyanping 2019-11-08
+*/
+@import url("@pathInclude/css/mui.picker.all.css");
+@import url("@pathInclude/css/mui.picker.css");
+@import url("@pathInclude/css/mui.poppicker.css");
+@import url('@pathCommonLess/mui/resetMUI.less');
+//引入重置mui下拉列表样式文件
+@import url("@pathCommonLess/mui/selectMUI.less");
+
+//重置MUI的poppicker样式
+@import url("@pathCommonLess/mui/resetMuiPop.less");
+
+@import url("@pathCommonLessCom/headBarConfig.less");
+
+html{height: 100%;}
+body{
+	display: -webkit-box;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+	-webkit-box-pack: justify;
+    -ms-flex-pack: justify;
+    -webkit-justify-content: space-between;
+    justify-content: space-between;
+	-webkit-box-orient: vertical;
+    -ms-flex-direction: column;
+    -webkit-flex-direction: column;
+    flex-direction: column;
+	height: 100%;
+	canvas{
+		max-width: 100%;
+	}
+	#uploadService{
+		right:0;
+		font-size:0.34rem;
+	}
+
+}
