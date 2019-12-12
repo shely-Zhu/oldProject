@@ -50,7 +50,7 @@ $(function () {
         },
         gV: { // 全局变量
             allotType: splitUrl()['allotType'],//交易类别 0：购买 1：赎回 2：定投, 3：分红
-            isBuy: splitUrl()['isBuy'],//是否为现金宝购买
+            isBuy: splitUrl()['isBuy'] == 'true',//是否为现金宝购买
             isCash: splitUrl()['isCash'],//是否为现金宝
         },
         init: function () {
