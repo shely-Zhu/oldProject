@@ -426,6 +426,7 @@ $(function() {
                 })
                 //取消受让、取消预约、取消转让
             mui("body").on('mdClick', '.cancelBtn', function(e) {
+                    event.stopPropagation();
                     var type = $(this).attr('data-type');
                     var id = $(this).attr('data-id');
                     var reserveId = $(this).attr('data-reserveid');
@@ -529,26 +530,29 @@ $(function() {
                 //功能按钮
             var clickEvent = '';
             mui("body").on('mdClick', '.toDetail', function(e) {
-                    var type = $(this).attr('type');
-                    var reserveId = $(this).attr('data-reserveid');
-                    var proId = $(this).attr('data-projectid');
-                    var isElec = $(this).attr('data-type');
-                    var isAllowAppend = $(this).attr('data-firstOrAppend');
-                    var projectName = $(this).attr('data-projectName');
+                    event.stopPropagation();
+                    var type = $(this).attr('type'); //按钮类型
+                    var reserveId = $(this).attr('data-reserveid'); //预约id
+                    var proId = $(this).attr('data-projectid'); //项目id
+                    var isElec = $(this).attr('data-type'); //是否是电子合同
+                    var isAllowAppend = $(this).attr('data-firstorappend'); //是否首次追加
+                    var projectName = $(this).attr('data-projectname'); //项目名称
+                    var isQualified = $(this).attr('data-isqualified'); //是否满足合格投资者
+                    var isPubToPri = $(this).attr('data-ispubtopri'); //是否公转私
                     if (type == 'toCertif') { //去合格投资者认证
                         if (isElec == 0) {
                             //非电子合同
-                            window.location.href = site_url.notElecSecondStep_url + '?reserveId=' + reserveId + '&projectId=' + proId + '&projectName=' + projectName + '&isAllowAppend=' + isAllowAppend;
+                            window.location.href = site_url.notElecSecondStep_url + '?isQualified=' + isQualified + '&projectName=' + projectName;
                         } else if (isElec == 1) {
                             //电子合同跳转
-                            window.location.href = site_url.elecSecondStep_url + '?reserveId=' + reserveId + '&projectId=' + proId + '&projectName=' + projectName + '&isAllowAppend=' + isAllowAppend;
+                            window.location.href = site_url.elecSecondStep_url + '?reserveId=' + reserveId + '&projectId=' + proId + '&projectName=' + projectName + '&isAllowAppend=' + isAllowAppend + '&isPubToPri=' + isPubToPri;
                         }
                     } else if (type == 'toSign') { //去签合同
-                        window.location.href = site_url.elecThirdStep_url + '?reserveId=' + reserveId + '&projectId=' + proId + '&projectName=' + projectName + '&isAllowAppend=' + isAllowAppend;
+                        window.location.href = site_url.elecFourthStep_url + '?reserveId=' + reserveId + '&projectId=' + proId + '&projectName=' + projectName + '&isAllowAppend=' + isAllowAppend + '&isPubToPri=' + isPubToPri;
                     } else if (type == 'toSee') { //查看合同
                         window.location.href = site_url.seeSign_url + '?reserveId=' + reserveId;
                     } else if (type == 'toUploadM') { //去上传汇款凭证
-                        window.location.href = site_url.elecFourthStep_url + '?reserveId=' + reserveId + '&projectId=' + proId + '&projectName=' + projectName + '&isAllowAppend=' + isAllowAppend;
+                        window.location.href = site_url.elecFourthStep_url + '?reserveId=' + reserveId + '&projectId=' + proId + '&projectName=' + projectName + '&isAllowAppend=' + isAllowAppend + '&isPubToPri=' + isPubToPri;
                     } else if (type == 'toView') { //详情
 
                     } else if (type == 'toVideo') { //视频双录
@@ -558,6 +562,7 @@ $(function() {
                     } else if (type == 'reAppointment') { //重新预约
 
                     }
+
                 }, {
                     'htmdEvt': 'privateDetailList_6'
                 })

@@ -1,0 +1,9 @@
+<!-- 立即购买 -->
+
+<!--自定义按钮的文字和样式 引用及传值的demo @@include('../../common/views/button/buyNowBtn.html',{"arr":[ {"className": "bottom", "txt": "确定"} ]}) className 传样式   txt 按钮的样式 -->
+
+<!-- <button type="button" class="mui-btn bottom buyNowBtn">立即购买</button> -->
+
+@@foreach ( arr ) {
+	<button type="button" class="mui-btn @@className"> @@txt </button>
+}

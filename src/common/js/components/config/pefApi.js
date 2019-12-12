@@ -19,5 +19,4 @@ module.exports = function() {
     this.oldRecommendNew_api = http_url.pef_url + '/user/oldRecommendNew.action';
     //老带新微信
     this.share_api = http_url.joint_url + '/weixin/share.action';
-    
 };

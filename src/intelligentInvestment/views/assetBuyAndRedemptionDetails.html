@@ -8,7 +8,12 @@
 <html>
 
 <head>
-    @@include('@pathInclude/views/meta.html')
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <meta name="applicable-device" content="mobile">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta charset="UTF-8">
     <title></title>
     <link rel="stylesheet" href="/intelligentInvestment/static/css/assetBuyAndRedemptionDetails.css">
 </head>
@@ -40,7 +45,7 @@
 					</div>
 					<ul class="mui-table-view"> 
 				        <li class="mui-table-view-cell mui-collapse">
-				            <a href="javascript:void(0);" class="mui-navigate-right" href="#"><span>申请金额</span><span>{{applySumMask}}元</span></a>
+				            <a class="mui-navigate-right" href="#"><span>申请金额</span><span>{{applySumMask}}元</span></a>
 				            <div class="mui-collapse-content">
 				                <p>
 									<span>确认份额</span>
@@ -105,7 +110,7 @@
 					</div>
 					<ul class="mui-table-view"> 
 				        <li class="mui-table-view-cell mui-collapse">
-				            <a href="javascript:void(0);" class="mui-navigate-right" href="#"><span>申请份额</span><span>{{applyShareMask}}份</span></a>
+				            <a class="mui-navigate-right" href="#"><span>申请份额</span><span>{{applyShareMask}}份</span></a>
 				            <div class="mui-collapse-content">
 				                <p>
 									<span>确认份额(份)</span>
@@ -177,7 +182,7 @@
 					<ul class="mui-table-view"> 
 				        <li class="mui-table-view-cell mui-collapse">
 
-				            <a href="javascript:void(0);" class="mui-navigate-right" href="#"><span>赎回-{{redeemInfo.confirmFlagMask}}</span><span>确认金额(元)：{{redeemInfo.tradeConfirmBalanceMask}}</span></a>
+				            <a class="mui-navigate-right" href="#"><span>赎回-{{redeemInfo.confirmFlagMask}}</span><span>确认金额(元)：{{redeemInfo.tradeConfirmBalanceMask}}</span></a>
 				            <div class="mui-collapse-content">
 				                <p>
 									<span>确认份额(份)</span>
@@ -212,7 +217,7 @@
 					<ul class="mui-table-view"> 
 				        <li class="mui-table-view-cell mui-collapse">
 
-				            <a href="javascript:void(0);" class="mui-navigate-right" href="#"><span>买入-{{purchaseInfo.confirmFlagMask}}</span><span>确认金额(元)：{{purchaseInfo.tradeConfirmBalanceMask}}</span></a>
+				            <a class="mui-navigate-right" href="#"><span>买入-{{purchaseInfo.confirmFlagMask}}</span><span>确认金额(元)：{{purchaseInfo.tradeConfirmBalanceMask}}</span></a>
 
 				            <div class="mui-collapse-content">
 				                <p>

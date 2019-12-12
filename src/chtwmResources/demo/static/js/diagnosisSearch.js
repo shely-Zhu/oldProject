@@ -77,7 +77,6 @@ $(function() {
 
                 },
                 // needDataEmpty: false,
-                needLoading: false,
                 callbackDone: function(json) {
                     var dataList;
 
@@ -260,7 +259,7 @@ $(function() {
                 }
                 
             });
-        }
+        },
     };
     hotDiagnosis.init();
 });

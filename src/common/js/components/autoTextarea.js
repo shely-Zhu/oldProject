@@ -9,16 +9,16 @@
                                  
  */
 
-module.exports = function (elem, extra, maxHeight) {
+module.exports = function(elem, extra, maxHeight) {
     extra = extra || 0;
     var isFirefox = !!document.getBoxObjectFor || 'mozInnerScreenX' in window,
         isOpera = !!window.opera && !!window.opera.toString().indexOf('Opera'),
-        addEvent = function (type, callback) {
+        addEvent = function(type, callback) {
             elem.addEventListener ?
                 elem.addEventListener(type, callback, false) :
                 elem.attachEvent('on' + type, callback);
         },
-        getStyle = elem.currentStyle ? function (name) {
+        getStyle = elem.currentStyle ? function(name) {
             var val = elem.currentStyle[name];
 
             if (name === 'height' && val.search(/px/i) !== 1) {
@@ -29,14 +29,14 @@ module.exports = function (elem, extra, maxHeight) {
             };
 
             return val;
-        } : function (name) {
+        } : function(name) {
             return getComputedStyle(elem, null)[name];
         },
         minHeight = parseFloat(getStyle('height'));
 
     elem.style.resize = 'none';
 
-    var change = function () {
+    var change = function() {
         var scrollTop, height,
             padding = 0,
             style = elem.style;

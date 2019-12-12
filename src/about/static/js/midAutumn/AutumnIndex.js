@@ -68,7 +68,7 @@ $(function() {
 						'background-image': 'url("'+jsonData[1].imgUrl+'")',
 					});
 
-				}
+				},
 				    
 			}];
 			$.ajaxLoading(obj);
@@ -90,7 +90,7 @@ $(function() {
 				window.location.href = site_url.publicActivityOne_url;
 				// window.open(site_url.publicActivityOne_url);
 			})
-		}
+		},
 	}
 	AutumnIndex.init();
 

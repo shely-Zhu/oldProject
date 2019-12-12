@@ -32,12 +32,15 @@ $(function() {
         webInit: function() {
 
             var that = this;
+
+
             if (window.location.href.indexOf('id') == -1) {
 
                 console.log("地址栏中没有带过id的值，请查看跳转前的链接");
                 return false;
 
             } else {
+
                 //发送ajax请求
                 if(window.location.href.indexOf('rightsCenter') != -1) { //如果是权益中心页面单执行以下操作
                     var obj = [{
@@ -75,25 +78,7 @@ $(function() {
                              
                     }]; 
 
-                } else if(splitUrl()['financial'] == 'true'){ // 除权益中心页面执行以下操作
-                    var obj = [{
-                        url: site_url.findProtocolContent_api, //协议接口
-                        needLogin: true, //需要判断是否登陆
-                        contentTypeSearch: true,
-                        data: {
-                            "id": splitUrl()['id'], //内容ID
-                        },
-                        callbackDone: function(json) { //成功后执行的函数
-
-                            var result = json.data;
-                            //给页面title赋值
-                            window.document.title = result.protocolName;
-                            $(".content").html(result.content); //内容区
-
-                        },
-                             
-                    }]; 
-                }else{
+                } else{ // 除权益中心页面执行以下操作
                     var obj = [{
                         url: site_url.findInvestorClassification_api, //协议接口
                         needLogin: true, //需要判断是否登陆
