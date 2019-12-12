@@ -112,7 +112,10 @@ $(function () {
 						that.gV.fundCode = data.trdCode
 						that.gV.discount = Number(data.discount);
 						that.gV.feeRateList = data.fundPurchaseFeeRate.detailList;
-						that.gV.fundStatus = data.fundStatus
+						that.gV.fundStatus = data.fundStatus;
+						if(data.invTypCom == 10800){
+							$(".warnInfo").show()
+						}
 						var tradeLimitList2 = []
 						for (var index = 0; index < data.tradeLimitList.length; index++) {
 							if(that.gV.fundBusinCode ==  data.tradeLimitList[index].fundBusinCode){
