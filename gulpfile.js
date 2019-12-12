@@ -826,8 +826,6 @@ gulp.task('html', function(cb) {
     pump([
         gulp.src(['src/**/views/**/*.html', '!src/common/views/**/*.html', '!src/newCommon/views/**/*.html']), //- 读取 rev-manifest.json 文件以及需要进行css名替换的文件
 
-        plugins.debug({ title: 'html-处理前的文件:' }),
-
         //处理公共路径变量
         through.obj(function(file, enc, cb) {
 
