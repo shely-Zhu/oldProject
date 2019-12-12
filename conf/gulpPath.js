@@ -79,8 +79,8 @@ for (var m in oldPathVar) {
     
 }
 
-console.log( 'oldAppVar');
-console.log( oldAppVar );
+// console.log( 'oldAppVar');
+// console.log( oldAppVar );
 
 
 //newPath是webpack打包时，原key和现在key的对应，使用老配置路径修改
@@ -136,7 +136,7 @@ module.exports = function(file) {
 
         //判断是否为使命计划相关的文件
         var fileName = smjhDirArr.filter( (value, index) => {
-            return file.path.indexOf('\\' + value + '\\') != -1;
+            return file.path.replace(/\\/g, '/').indexOf('/' + value + '/') != -1;
         });
 
         if( file.path.indexOf('.js') != -1 ){
@@ -151,8 +151,6 @@ module.exports = function(file) {
                 for (var i in newPath) {
                     var re = new RegExp( i, 'g');
 
-                    // console.log( '要替换的变量：' + i, newPath[i] );
-
                     fileCon = fileCon.replace( re, newPath[i]);
                 }
             }
@@ -161,11 +159,6 @@ module.exports = function(file) {
         else{
 
             var relativePath = path.relative(path.dirname(file.path), 'src').replace(/\\/g, '/');
-
-            // for (var i in oldAppVar) {
-            //     var re = new RegExp( i, 'g');
-            //     fileCon = fileCon.replace(re, relativePath + oldAppVar[i]);
-            // }
 
             if( fileName && fileName.length ){
                 //是使命计划相关文件
