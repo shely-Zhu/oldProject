@@ -120,7 +120,7 @@ var host = {
     path: "/dist", //打包文件输出路径目录也是服务器访问的文件目录
     zip_name: "", //用于zip包的压缩文件名
     port: {
-        wap: 7007,
+        wap: 8008,
         mock: 8088
     }, //端口号配置入口
     ip: localIp, //本地ip
