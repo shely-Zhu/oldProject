@@ -208,24 +208,28 @@ $(function() {
                 existMain = data.existMain;
                 advisor = data.advisor;
                 
-            if (existMain == 0 && advisor.length > 1) {
-                $('.recommendLcsText').html("您的理财师：")
-                //无专属且理财师多于1位默认展示一个
-                $('.manager_show').html(advisor[0].codeName + advisor[0].empNo)
-                that.generateShareLink(advisor[0].empNo);
+            if (advisor.length > 1) {
+                // if(existMain == 0 ){//感觉判断有问题默认展示一个的话，展示就可以了
+                    $('.recommendLcsText').html("您的理财师：")
+                    //无专属且理财师多于1位默认展示一个
+                    $('.manager_show').html(advisor[0].codeName + advisor[0].empNo)
+                    that.generateShareLink(advisor[0].empNo);
+                // }
                 that.list=advisor
                 // debugger
                 generateTemplate(advisor,that.getElements.popupUl, that.getElements.bankListTemplate,true);
                 $('.recommendLcs').css('pointer-events','')
+                $('.choosePlanner').show()
                 $('.choose').show()
                 // $(".popup").show();
             }else if( advisor.length < 0){
                 $('.recommendLcs').html('')
+                $('.choosePlanner').hide()
             }else{
                 // 有专属理财师或者只有一位普通理财师
                 $('.recommendLcsText').html("您的理财师：")
                 $('.manager_show').html(advisor[0].codeName + advisor[0].empNo)
-                
+                $('.choosePlanner').hide()
                 that.generateShareLink(advisor[0].empNo);
                 $('.recommendLcs').css('pointer-events','none')
             }
@@ -421,6 +425,7 @@ $(function() {
             var index = 0;
             //点击取消选择
             mui("body").on('tap', '.recommendLcs', function() {
+                console.log("不好用？")
                 $(".popup").show()
             })
             //点击选择理财师
