@@ -711,6 +711,7 @@ $(function() {
 			})
             // 历史明细点击跳转
             mui("body").on('mdClick', '#historyDetailBtn', function() {
+            	alert(site_url.historyDetail_url + '?projectId=' + that.data.projectId);
             	window.location.href = site_url.historyDetail_url + '?projectId=' + that.data.projectId;
             }, {
 				'htmdEvt': 'privateDetail_4'
