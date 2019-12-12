@@ -334,6 +334,14 @@ module.exports = function() {
     this.activityList_url = go_url.no_url + '/life/views/memberClub/activityList.html';
     //活动详情->实名
     this.realName_url = go_url.no_url + '/mine/views/realName/realName.html';
+    //活动详情->身份认证
+    this.realIdcard_url = go_url.no_url + '/mine/views/realName/realIdcard.html';
+    //活动详情->人脸识别
+    this.realFaceCheck_url = go_url.no_url + '/mine/views/realName/realFaceCheck.html';
+    //活动详情->线下申请
+    this.realOffline_url = go_url.no_url + '/mine/views/realName/realOffline.html	';
+    //活动详情->视频双录
+    this.realVideoTranscribe_url = go_url.no_url + '/mine/views/realName/realVideoTranscribe.html	';
     //活动详情->风测
     this.riskAppraisal_url = go_url.no_url + '/mine/views/riskAppraisal/riskAppraisal.html';
     //活动详情->合格投资者认证
