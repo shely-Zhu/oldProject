@@ -216,6 +216,8 @@ module.exports = function() {
     this.getNoticeAndTransDynamic_api = http_url.web_url + '/account/account/getNoticeAndTransDynamic';
     //查询单条文章(APPCMS后台)
     this.getArticle_api = http_url.web_url + '/content/frontend/getArticle';
+    //查询了解恒天配置信息
+    this.queryHtInformation_api = http_url.web_url + '/account/home/frontend/queryHtInformation';
 
     /*------------------- 消息中心 end ------------------------------*/
 

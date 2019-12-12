@@ -12,7 +12,9 @@
 </head>
 
 <body>
-    @@include('@pathInclude/views/header.html') @@include('@pathCommonViews/headBarConfig.html',{"pathName":"其他资产","bgColors":"#3E3C3C,#3E3C3C","showType":"1"})
+    @@include('@pathInclude/views/header.html') 
+    @@include('@pathCommonCom/loading/listLoading.html')
+    @@include('@pathCommonViews/headBarConfig.html',{"pathName":"其他资产","bgColors":"#3E3C3C,#3E3C3C","showType":"1"})
     <!-- @@include('@pathCommonViews/load.html') -->
     <section class="container">
         <div class="banner">
@@ -122,7 +124,7 @@
 
         {{/each}} {{/if}}
     </script>
-    @@include('@pathInclude/views/footer.html') @@include('../../../common/views/load.html')
+    @@include('@pathInclude/views/footer.html') 
     <script src="/wealthResources/otherAssets/static/js/otherAssets.js"></script>
 </body>
 

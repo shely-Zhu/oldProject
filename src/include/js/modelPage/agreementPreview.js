@@ -54,12 +54,27 @@ $(function() {
         },
         //点击下载
         event:function() {
-            //点击下载
-			// mui("body").on('mdClick','#uploadService',function(){
-				
-			// }, {
-			// 	htmdEvt: 'fundTransformIn_04'
-			// }) 
+			mui("body").on('mdClick','#goBack',function(){
+				//返回上一页
+                if(document.referrer == ''){
+                    var u = navigator.userAgent, 
+                        app = navigator.appVersion;
+                    var isAndroid = u.indexOf('Android') > -1 || u.indexOf('Linux') > -1; //g
+                    var isIOS = !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/); //ios终端
+                    if (isAndroid) {
+                        //这个是安卓操作系统
+                        window.jsObj.backNative();
+                    }
+                    if (isIOS) {
+                        //这个是ios操作系统
+                        window.webkit.messageHandlers.backNative.postMessage('backNative');
+                    }
+                }else{
+                    location.href="javascript:history.go(-1)";
+                } 
+			}, {
+				htmdEvt: 'fundTransformIn_04'
+			}) 
         },
         pdfModel:function(url){
             var that = this;
