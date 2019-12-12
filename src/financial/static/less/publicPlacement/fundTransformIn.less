@@ -46,16 +46,35 @@ body{
         line-height:1.05rem;
         // background: @c005;
         padding-left: .3rem;
-        margin-bottom: .3rem;
+        
         color: #272727;
         font-weight: bold;
         background: @c005;
     }
+    .warnInfo{
+        padding-left: .3rem;
+        height:.8rem;
+        line-height:.8rem;
+        background: #fff9f1;
+        display:none;
+        font-size:0;
+        .infoImg{
+            vertical-align: middle;
+            color:#ecc59c;
+            font-size:0.24rem;
+        }
+        .infoText{
+            vertical-align: middle;
+            color:#a7a29e;
+            font-size:0.24rem;
+            line-height: 0.24rem;
+            height:0.24rem;
+        }
+    }
     .money{
         background: @c005;
         padding: .3rem .26rem ;
-        // margin-bottom: .3rem;
-
+        margin-top: .3rem;
         .mfirst{
             display: flex;
             justify-content: space-between;
