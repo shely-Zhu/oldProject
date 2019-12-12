@@ -527,7 +527,7 @@ $(function () {
 			
 			//确定
 			mui("body").on('mdClick','.btn_box .btn',function(){
-				$("#transformInput").blur()
+
 				if(!!that.gV.minValue){
 					if(Number(that.gV.balance) < Number(that.gV.minValue)){
 						tipAction('最小买入金额不能低于' + that.gV.minValue + '元')
@@ -628,6 +628,20 @@ $(function () {
 				window.location.href = site_url.agreementPreview_url + '?link=' + link +'&type=' + $(this).attr('type')
 			}, {
 				htmdEvt: 'fundTransformIn_17'
+			}) ;
+
+			//  ---
+			mui("body").on('mdClick','.container',function(e){
+				// debugger
+				var o = e.target || e.srcElement;//当前点击对象
+					if (o != document.getElementById("transformInput")) {
+						//隐藏键盘操作
+						$("#transformInput").blur()
+					}else{
+						$("#transformInput").focus()
+					}
+			}, {
+				htmdEvt: 'fundTransformIn_18'
 			}) ;
 
 
