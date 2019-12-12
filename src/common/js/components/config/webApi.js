@@ -141,7 +141,7 @@ module.exports = function() {
 
     //文章模板接口
     //  this.getArticle_api = http_url.web_url + '/account/articleExample';
-    this.getArticle_api = http_url.web_url + '/content/frontend/getArticle';
+//  this.getArticle_api = http_url.web_url + '/content/frontend/getArticle';
     //信息披露
     this.queryReourceLabels_api = http_url.web_url + '/pef/queryReourceLabels';
     this.queryReourceList_api = http_url.web_url + '/pef/queryReourceList';

@@ -868,7 +868,7 @@ $(function() {
                         })
 
                     });
-                    if(!!isPopup){//如果弹出售前告知书
+                    if(!!isPopup&&!singleaAuthen){//如果弹出售前告知书
                     	
 	                    //发送ajax请求
 	                    var ReourceListobj = [{
@@ -910,7 +910,7 @@ $(function() {
 	                        }
 	                    }];
 	                    $.ajaxLoading(ReourceListobj);
-                    }else{//如果不弹
+                    }else if(!singleaAuthen){//如果不弹框且没有显示认证五步款则有以下步骤
                     	
                     	that.nextStep();
                     }
