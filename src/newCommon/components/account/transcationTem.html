@@ -99,8 +99,8 @@
             {{#if reserveStatusTip}} {{#if appointmentSuccess}}
             <span class="tipImg iconfont success">&#xe638;</span> {{else if appointmentFailed}}
             <span class="tipImg iconfont">&#xe637;</span> {{else}}
-            <span class="tipImg iconfont">&#xe649;</span> {{/if}} {{else}}
-            <span class="tipImg tipImgTip iconfont">&#xe645;</span> {{/if}}
+            <span class="tipImg tipImgTip iconfont">&#xe645;</span> {{/if}} {{else}}
+            <span class="tipImg  iconfont">&#xe649;</span> {{/if}}
             <!-- 左下角状态文字 -->
             {{#if leftBottomStatusDesc}}
             <!-- 如果弹框里有内容 -->
@@ -122,6 +122,8 @@
             <div class="toDetail blueBgButton" type="toUploadM" data-projectid="{{projectId}}" data-projectname="{{projectName}}" data-firstorappend="{{firstOrAppend}}" data-reserveid="{{reserveId}}" data-ispubtopri="{{paymentType}}">上传汇款凭证</div>
             {{else if appointmentToDown}}
             <div class="toDetail blueBgButton" type="reAppointment" data-projectid="{{projectId}}" data-projectname="{{projectName}}" data-firstorappend="{{firstOrAppend}}" data-reserveid="{{reserveId}}">重新预约</div>
+            {{else if assignVideo}}
+            <div class="toDetail blueBgButton" type="toVideo" data-projectid="{{projectId}}" data-projectname="{{projectName}}" data-firstorappend="{{firstOrAppend}}" data-reserveid="{{reserveId}}">视频双录</div>
             {{/if}}
             <!-- 功能按钮 -->
             <!-- 取消预约按钮 -->
