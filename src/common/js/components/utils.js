@@ -226,34 +226,6 @@ $.extend($, {
             return Number(s1.replace(".", "")) * Number(s2.replace(".", "")) / Math.pow(10, m);
         },
 
-        numberSub: function(num1,num2){
-            var baseNum, baseNum1, baseNum2;
-            var precision;// 精度
-            try {
-                baseNum1 = num1.toString().split(".")[1].length;
-            } catch (e) {
-                baseNum1 = 0;
-            }
-            try {
-                baseNum2 = num2.toString().split(".")[1].length;
-            } catch (e) {
-                baseNum2 = 0;
-            }
-            baseNum = Math.pow(10, Math.max(baseNum1, baseNum2));
-            precision = (baseNum1 >= baseNum2) ? baseNum1 : baseNum2;
-            return ((num1 * baseNum - num2 * baseNum) / baseNum).toFixed(precision);
-        },
-
-        // 5.null的判断
-        isNull: function(data) {
-            if (!data && typeof(data) != "undefined" && data != 0) {
-                return true
-            }
-            return false
-        },
-
-
-
         //正则表达式集合
         regList: {
             //去掉所有空格
@@ -339,7 +311,7 @@ $.extend($, {
                     }
                 }
 
-            },
+            }
 
         }
 

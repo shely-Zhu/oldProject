@@ -1,0 +1,43 @@
+<!-- /**  
+ * @Page:  调仓表格公用模块
+ * @Author: songxiaoyu  
+ * @Date:   2019-01-03 15:54:10  
+ * @Last Modified by:   songxiaoyu  
+ * @Last Modified time: 2019-01-03 15:55:13  
+ *
+ * combinationDetails.html 智能投顾基金详情页
+ * 
+ * 
+ */ -->
+<script id="adjustment-template" type="text/x-handlebars-template">
+    {{#each this}}
+        {{#if recordPage}}
+        {{!-- 调仓记录页，折叠 --}}
+         <ul class="mui-card mui-table-view marginTop">
+                <li class="mui-table-view-cell mui-collapse">
+                    <a class="mui-navigate-right" href="#">{{transferDate}}</a>
+                
+        {{/if}}
+
+        <div class="mui-card marginTop latestAdjustment mui-collapse-content">
+            <h2>最新调仓<span class="date">{{transferDate}}</span><span class="more">查看更多<span class='iconfont'>&#xe600;</span></span></h2>
+            <div class="reason">{{transferCause}}</div>
+            {{#each fundList}}
+            <div class='listDiv mui-row'>
+                <div class="mui-col-xs-6 fundN">
+                    <span class="ellipsis">{{fundName}}</span>
+                    <span>({{fundCode}})</span>
+                </div>
+                <span class="mui-col-xs-3 alignR">{{fundOriginalScale}}%</span>
+                <span class="mui-col-xs-1 alignC iconfont">&#xe6f4;</span>
+                <span class="mui-col-xs-2 alignR {{colorName}}">{{fundNewScale}}%</span>
+            </div>
+            {{/each}}
+        </div>
+
+        {{#if recordPage}}
+            </li>
+        </ul>
+        {{/if}}
+    {{/each}}
+</script>

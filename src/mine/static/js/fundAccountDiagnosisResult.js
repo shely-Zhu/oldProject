@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2019-12-09 15:53:31
- * @LastEditTime: 2019-12-11 14:55:35
+ * @LastEditTime: 2019-12-12 10:35:58
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \htjf-app\src\mine\static\js\fundAccountDiagnosisResult.js
@@ -15,7 +15,6 @@ require('@pathCommonJs/components/headBarConfig.js');
 var tipAction = require('@pathCommonJs/components/tipAction.js');
 var splitUrl = require('@pathCommonJs/components/splitUrl.js')();
 var generateTemplate = require('@pathCommonJsComBus/generateTemplate.js');
-require('@pathCommonJs/components/elasticLayerTypeTwo.js');
 
 
 $(function() {
@@ -60,25 +59,52 @@ $(function() {
             var that = this;
             that.initAddOtherFundCode();
             that.initParmis();
+            that.queryDictionary();
             that.events();
         },
         initAddOtherFundCode:function(){
             var that = this;
             that.gV.otherFundCodeData = JSON.parse(sessionStorage.getItem("addAccountDiagnosisResultList"))
             generateTemplate(that.gV.otherFundCodeData, that.$e.TransferFundsContent, that.$e.templateTransferFunds);
+            if(that.gV.otherFundCodeData){
+               if(that.gV.otherFundCodeData.length>0){
+                    $(".addOtherFundcodeBox_noData").hide();
+               }else{
+                    $(".addOtherFundcodeBox_noData").show();
+               }
+            }else{
+                $(".addOtherFundcodeBox_noData").show();
+            }
         },
         initParmis:function(){
              var that = this;
-             that.$e.sex[0].textContent = that.gV.sexData;
-             that.$e.professional[0].textContent = that.gV.professionalData;
-             that.$e.investment_year[0].textContent = that.gV.investment_yearData;
-             that.$e.riskLevel[0].textContent = that.gV.riskLevelData;
-             that.$e.expectedInvestment_year[0].textContent = that.gV.expectedInvestment_yearData;
-             that.$e.liquidity[0].textContent = that.gV.liquidityData;
-             that.$e.yield_first[0].textContent = that.gV.yield_firstData;
-             that.$e.yield_second[0].textContent = that.gV.yield_secondData;
-             that.$e.loss_first[0].textContent = that.gV.loss_firstData;
-             that.$e.loss_second[0].textContent = that.gV.loss_secondData;
+             that.$e.sex[0].textContent = that.gV.sexData ==""?"请选择":that.gV.sexData;
+             that.$e.professional[0].textContent = that.gV.professionalData ==""?"请选择":that.gV.professionalData;
+             that.$e.investment_year[0].textContent = that.gV.investment_yearData ==""?"请选择":that.gV.investment_yearData;
+             that.$e.riskLevel[0].textContent = that.gV.riskLevelData ==""?"请选择":that.gV.riskLevelData;
+             that.$e.expectedInvestment_year[0].textContent = that.gV.expectedInvestment_yearData ==""?"请选择":that.gV.expectedInvestment_yearData;
+             that.$e.liquidity[0].textContent = that.gV.liquidityData ==""?"请选择":that.gV.liquidityData;
+             that.$e.yield_first[0].textContent = that.gV.yield_firstData ==""?"请选择":that.gV.yield_firstData;
+             that.$e.yield_second[0].textContent = that.gV.yield_secondData ==""?"请选择":that.gV.yield_secondData;
+             that.$e.loss_first[0].textContent = that.gV.loss_firstData ==""?"请选择":that.gV.loss_firstData;
+             that.$e.loss_second[0].textContent = that.gV.loss_secondData ==""?"请选择":that.gV.loss_secondData;
+        },
+        queryDictionary:function(){
+            //字典
+            var that = this;
+            var queryString = "fundDiagnosisRiskLevel,fundDiagnosisEInvestDurationLevel"
+            var obj = [{
+                url : site_url.queryDictionary_api,
+                data:{
+                    keySets:queryString
+                },
+                needDataEmpty: true,
+                callbackDone:function(json){
+                    console.log("8989",json)
+                }
+
+            }];
+            $.ajaxLoading(obj);
         },
        events:function(){
             var that = this;
@@ -216,6 +242,15 @@ $(function() {
                 });
                 that.gV.otherFundCodeData = newArr;
                 sessionStorage.setItem("addAccountDiagnosisResultList",JSON.stringify(newArr))
+                if(that.gV.otherFundCodeData){
+                    if(that.gV.otherFundCodeData.length>0){
+                         $(".addOtherFundcodeBox_noData").hide();
+                    }else{
+                         $(".addOtherFundcodeBox_noData").show();
+                    }
+                 }else{
+                     $(".addOtherFundcodeBox_noData").show();
+                 }
             })
 
             //新增其他新建添加按钮
@@ -223,6 +258,18 @@ $(function() {
                 window.location.href = site_url.addAccountDiagnosisResult_url;
             })
 
+           //提交申请
+           mui("body").on("mdClick",".comfirmButtom .mui-btn",function(){
+               var tital = "提交申请成功";
+               var value = "恒天公募基金研究团队正在快马加鞭赶来,我们将尽快与你联系,请耐心等待并保持手机畅通";
+                $.elasticLayerTypeTwo({
+                    id: "tip",
+                    title: tital,
+                    p: '<p>' + value + '</p>',
+                    buttonTxt: '知道了',
+                    zIndex: 100,
+                });
+           })
 
        },
       

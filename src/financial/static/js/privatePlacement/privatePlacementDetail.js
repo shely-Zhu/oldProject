@@ -15,6 +15,8 @@ var generateTemplate = require('@pathCommonJsComBus/generateTemplate.js');
 //引入弹出层
 require('@pathCommonCom/elasticLayer/elasticLayer/elasticLayer.js');
 
+var moment = require('moment');
+
 $(function() {
     var privatePlacementDetail = {
         //获取页面元素
@@ -117,6 +119,8 @@ $(function() {
 
                         $("#qrnhLine").addClass("hide");
                         $("#wfsyLine").removeClass("hide");
+                        // 涨跌幅
+                        $('.priceLimit').removeClass('hide');
                         // 单位净值
                         $('.netValue').html(jsonData.unitNetValue);
                         // 折线图
@@ -134,7 +138,6 @@ $(function() {
                         // 展示七日年化
                         $('.netValue').html(jsonData.sevenIncomeRate);
                         $('#historyDetailBtn').removeClass('hide');
-                        $('.priceLimit').addClass('hide');
                         // 折线图
                         that.getTypeTwoData(that.$e.lineType);
                     }
@@ -144,7 +147,8 @@ $(function() {
                     // 一句话产品详情
                     $('.introduction').html(jsonData.productLightspot);
                     // 净值日期
-                    $('.netValueDate').html(jsonData.netValueDate)
+                    var now=moment(jsonData.netValueDate).format('YYYY-MM-DD');
+                    $('.netValueDate').html(now.substring(5))
                     // 起投金额
                     $('.investmentAmountNum').html(jsonData.investStart + '万');
                     // 产品期限

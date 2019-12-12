@@ -8,7 +8,7 @@
  ** 鉴权需要传的capitalMode对应的是银行列表里的bankChanel字段
 -->
  */
-require('@pathCommonBase/base.js');
+
 require('../../../../include/js/vendor/config.js');
 
 require('../../../../include/js/vendor/mui/mui.picker.min.js');

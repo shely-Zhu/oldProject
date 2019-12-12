@@ -416,7 +416,7 @@ $(function() {
             that.getElements.investorCancel.on('tap', function() {
                 window.history.go(-1);
             });
-        }
+        },
     }
     //调用
     question.webinit();

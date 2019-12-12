@@ -76,7 +76,6 @@ $(function() {
                     "publicFundsKeyWords": key, ////产品检索关键字（简称、代码）非必填项   
 
                 },
-                needLoading: false,
                 // needDataEmpty: false,
                 callbackDone: function(json) {
                     var dataList;

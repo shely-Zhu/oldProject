@@ -67,12 +67,11 @@ $(function() {
             var that = this;
             that.getData();
             that.events();
-            that.$e.listLoading.show();
         },
 
         getData: function(t) {
             var that = this;
-            
+
             var obj = [{
                 url: site_url.queryFundBaseInfo_api, //基金诊断-基金基本信息
                 data: {
@@ -82,6 +81,7 @@ $(function() {
                 callbackDone: function(json) {
                     var dataInfo = json.data,
                         fundLableList_new = dataInfo.fundLableList[0];
+
                     dataInfo["fundLableList_new"] = fundLableList_new; // 标签只展示第一个处理
                     dataInfo.newNetValue= dataInfo.newNetValue ? dataInfo.newNetValue : "--"
                     dataInfo.newOneDayGains= dataInfo.newOneDayGains ? dataInfo.newOneDayGains : "--"
@@ -128,11 +128,11 @@ $(function() {
                 callbackFail: function(json) {
                     tipAction(json.msg);
                 },
-                callbackNoData: function (json) { // 暂无数据  
-                    $('.radarEchart').css({ "display":"none"})
-                    $('.NoDataRada').html(that.gV.noDataArr[0]);
-                    $('.NoDataRada').css({"display": "block"});
-               }
+                    callbackNoData: function (json) { // 暂无数据
+                        $('.radarEchart').css({ "display":"none"})
+                        $('.NoDataRada').html(that.gV.noDataArr[0]);
+                        $('.NoDataRada').css({"display": "block"});
+                }
             }, {
                 url: site_url.querySynthesizeQualitativeEvaluate_api, //基金诊断-综合定性评价
                 data: {
@@ -171,12 +171,13 @@ $(function() {
                     tipAction(json.msg);
                 }
             }]
-            
+
             obj.push(that.getDrawData(1));
             $.ajaxLoading(obj);
         },
         getDrawData: function(num) { //num为传进来的数据范围
             var that = this;
+
             var obj = { //画图
                 url: site_url.queryCumulativeProfitCurveList_api, //基金诊断-累计收益曲线
                 data: {
@@ -245,8 +246,7 @@ $(function() {
             // 雷达图一年，3年，5年
             mui("body").on('tap', '.dd_choice_1 .mui-col-xs-3', function(e) {
                 var i = $(this).index();
-                $(this).addClass("active").siblings().removeClass("active");
-               // $(".mui-control-item").addClass('active').siblings().removeClass('active');
+                $(this).addClass('active').siblings().removeClass('active');
                 // 切换图表
                 if (that.gV.echartData[i].length != 0) {
                     $('.radarEchart').css({"display": "block"})

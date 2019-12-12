@@ -2,7 +2,7 @@
  * 权益中心
  * @author sunfuping 2018-12-5
  */
-require('@pathCommonBase/base.js');
+
 //接口及静态资源路径
 require('../../../include/js/vendor/config.js');
 //zepto模块
@@ -184,7 +184,7 @@ $(function(){
                 }
             }];
             $.ajaxLoading(obj);
-        }
+        },
 
     };
     rightsCenter.webinit();//页面数据初始化

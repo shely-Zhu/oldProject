@@ -171,7 +171,7 @@ $(function(){
 							that.judge();
 						}
 						
-					}	
+					},	
 				}
 			];
 			$.ajaxLoading(obj);
