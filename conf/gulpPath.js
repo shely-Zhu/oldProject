@@ -79,8 +79,8 @@ for (var m in oldPathVar) {
     
 }
 
-// console.log( 'oldAppVar');
-// console.log( oldAppVar );
+console.log( 'oldAppVar');
+console.log( oldAppVar );
 
 
 //newPath是webpack打包时，原key和现在key的对应，使用老配置路径修改
