@@ -208,7 +208,7 @@ $(function() {
                 existMain = data.existMain;
                 advisor = data.advisor;
                 
-            if (advisor.length > 1) {
+            if (advisor.length > 0) {
                 // if(existMain == 0 ){//感觉判断有问题默认展示一个的话，展示就可以了
                     $('.recommendLcsText').html("您的理财师：")
                     //无专属且理财师多于1位默认展示一个
@@ -222,7 +222,7 @@ $(function() {
                 $('.choosePlanner').show()
                 $('.choose').show()
                 // $(".popup").show();
-            }else if( advisor.length < 0){
+            }else if( advisor.length == 0){
                 $('.recommendLcs').html('')
                 $('.choosePlanner').hide()
             }else{
