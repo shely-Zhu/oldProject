@@ -397,6 +397,7 @@ var clickList = {
 	"privateDetailList_4":{ type:'click', evtid: 'privateDetailList_4', topic: '私募交易详情_我明白了区域点击', info: ''},
 	"privateDetailList_5":{ type:'click', evtid: 'privateDetailList_5', topic: '私募交易详情_点击状态文字出现弹框', info: ''},
 	"privateDetailList_6":{ type:'click', evtid: 'privateDetailList_6', topic: '私募交易详情_详情按钮点击', info: ''},
+	"privateDetailList_7":{ type:'click', evtid: 'privateDetailList_7', topic: '私募交易详情_点击每一条进入详情', info: ''},
 
 	"privateFundPdf_0":{ type:'click', evtid: 'privateFundPdf_0', topic: '私募基金确认书_点击下载', info: ''},
 	"privateFundPdf_1":{ type:'click', evtid: 'privateFundPdf_1', topic: '私募基金确认书_点击修改邮箱', info: ''},
