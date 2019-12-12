@@ -365,10 +365,12 @@ $(function () {
 						data = json.data;
 						data.forEach(function(element){
 							if(element.materialType == '1'){
-								that.$el.contract.attr('href',element.linkAddress)
+								that.$el.contract.attr('datalink',element.linkAddress)
+								that.$el.contract.attr('type','1')
 							}
 							if(element.materialType == '2'){
-								that.$el.recruiting.attr('href',element.linkAddress)
+								that.$el.recruiting.attr('datalink',element.linkAddress)
+								that.$el.recruiting.attr('type','2')
 							}
 						});
 						
@@ -797,7 +799,9 @@ $(function () {
 				value: '140000',
 				text: '每日',
 			}]
-			 that.getNextCutPayment()
+			if(that.gV.type == 'add'){
+				that.getNextCutPayment()
+			}
 			// 周期选择
 			mui("body").on('mdClick', '#starttime', function () {
 				popPicker(2, list, that.$el.cycleDate , that.getNextCutPayment);
@@ -901,7 +905,6 @@ $(function () {
 			
 			//确定
 			mui("body").on("mdClick",'.btn_box .btn',function(){
-				$("#transformInput").blur()
 				if(!!that.gV.minValue){
 					if(Number(that.gV.balance) < Number(that.gV.minValue)){
 						tipAction('最小买入金额不能低于' + that.gV.minValue + '元')
@@ -988,6 +991,27 @@ $(function () {
 				window.location.href = site_url.pofAddBankCard_url
 			}, {
 				htmdEvt: 'ordinarySetThrow_16'
+			}) ;
+			//  ---《基金合同》《招募说明书》
+			mui("body").on('mdClick','.goPreview',function(){
+				var link = $(this).attr('datalink')
+				window.location.href = site_url.agreementPreview_url + '?link=' + link +'&type=' + $(this).attr('type')
+			}, {
+				htmdEvt: 'ordinarySetThrow_17'
+			}) ;
+
+			//  ---
+			mui("body").on('mdClick','.container',function(e){
+				// debugger
+				var o = e.target || e.srcElement;//当前点击对象
+					if (o != document.getElementById("transformInput")) {
+						//隐藏键盘操作
+						$("#transformInput").blur()
+					}else{
+						$("#transformInput").focus()
+					}
+			}, {
+				htmdEvt: 'fundTransformIn_18'
 			}) ;
 
 		},

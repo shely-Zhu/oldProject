@@ -23,7 +23,7 @@ var data=Mock.mock({
         "incomeMask": "0.00",
         "opened": false,
         "totalMoney": "0.00",
-        "totalMoneyMask": "0.00",
+        "totalMoneyMask": "110.00",
         "trDate": ""
     },
         "message": "操作成功！",

@@ -60,6 +60,7 @@ $(function () {
 			singleNum:0,   //单日限额
 			fundOrBank:'',  // 在线支付中  银行卡支付 1   基金支付  2   
 			enableAmount:0,  //选择基金支付 可用余额 
+			accountType:null   //客户类型  0-机构 1-个人
 		},
 		webinit: function () {
 			var that = this;
@@ -67,9 +68,27 @@ $(function () {
 			//
 			that.events();
 			that.getData();
-			that.getAgreeUrl()
+			that.getAgreeUrl();
+			that.getUserInfo();
 		},
-
+		// 获取客户类型
+        getUserInfo: function () {
+            var that = this;
+            // 请求页面数据
+            var obj = [{
+                url: site_url.queryUserBaseInfo_api,
+                data: {
+                },
+                callbackDone: function (json) {
+                    var data = json.data
+                    that.gV.accountType = data.accountType
+                },
+                callbackFail: function (json) {
+                    tipAction(json.msg);
+                }
+            }]
+            $.ajaxLoading(obj);
+        },
 		//获取基金数据
 		getData: function (t) {
 			var that = this;
@@ -84,7 +103,7 @@ $(function () {
 				callbackDone: function (json) {
 					if (json.status == '0000') {
 						var data = json.data;
-						$("#loading").hide()
+						$(".listLoading").hide()
 						that.$el.fundName.html(data.secuSht)
 						that.$el.fundCode.html(data.trdCode)
 						that.$el.payConfirmDate.html(data.fundConfirmDate)
@@ -93,7 +112,10 @@ $(function () {
 						that.gV.fundCode = data.trdCode
 						that.gV.discount = Number(data.discount);
 						that.gV.feeRateList = data.fundPurchaseFeeRate.detailList;
-						that.gV.fundStatus = data.fundStatus
+						that.gV.fundStatus = data.fundStatus;
+						if(data.invTypCom == 10800){
+							$(".warnInfo").show()
+						}
 						var tradeLimitList2 = []
 						for (var index = 0; index < data.tradeLimitList.length; index++) {
 							if(that.gV.fundBusinCode ==  data.tradeLimitList[index].fundBusinCode){
@@ -135,19 +157,19 @@ $(function () {
 						// 将列表插入到页面上
 						var data = [] ;
 						data = json.data.pageList;
-						console.log('data',data)
 						data.forEach(function(element){
 							element.after4Num = element.bankAccountMask.substr(element.bankAccountMask.length -4)
 							element.singleNum_w = Number(element.singleNum)/10000 + '万'
 							element.oneDayNum_w = Number(element.oneDayNum)/10000 + '万'
 						});
 						generateTemplate(data, that.$el.popupUl, that.$el.bankListTemplate,true);
-						$("#loading").hide()
-						$('.popup').css('display','block')
+						that.$el.popupUl2.html('')
 						if(useEnv == '0'){
 							that.getTransferFunds()
 							that.$el.popupTitle.html('选择在线支付银行卡')
 						}else{
+							$(".listLoading").hide()
+						    $('.popup').css('display','block')
 							that.$el.popupTitle.html('选择汇款支付银行卡')
 						}
 					}
@@ -177,11 +199,13 @@ $(function () {
 					if(json.status == '0000'){
 						// 将列表插入到页面上
 						var data = [] ;
-						data = json.data.pageList;
+						data = json.data;
 						console.log('data',data)
 						data.forEach(function(element){
-							element.after4Num = element.bankAccoutEncrypt.substr(element.bankAccoutEncrypt.length -4)
+							element.after4Num = element.bankAccout.substr(element.bankAccout.length -4)
 						});
+						$(".listLoading").hide()
+						$('.popup').css('display','block')
 						generateTemplate(data, that.$el.popupUl2, that.$el.bankListTemplate2,true);
 						
 					}
@@ -206,10 +230,12 @@ $(function () {
 						data = json.data;
 						data.forEach(function(element){
 							if(element.materialType == '1'){
-								that.$el.contract.attr('href',element.linkAddress)
+								that.$el.contract.attr('datalink',element.linkAddress)
+								that.$el.contract.attr('type','1')
 							}
 							if(element.materialType == '2'){
-								that.$el.recruiting.attr('href',element.linkAddress)
+								that.$el.recruiting.attr('datalink',element.linkAddress)
+								that.$el.recruiting.attr('type','2')
 							}
 						});
 					}
@@ -371,8 +397,14 @@ $(function () {
 			/** 下面三个事件： 银行卡列表出现/隐藏 **/
 			mui("body").on('mdClick','.paymoney',function(){
 				that.gV.payType = $(this).attr('pay-type')
+				if(that.gV.payType == '0'){
+					if(that.gV.accountType === 0 || that.gV.accountType === 2){
+						tipAction('机构客户暂不支持在线支付');
+						return
+					}
+				}
 				var useEnv = $(this).attr('pay-type')
-				$("#loading").show()
+				$(".listLoading").show()
 				that.getBankCard(useEnv)
 			}, {
 				htmdEvt: 'fundTransformIn_01'
@@ -424,7 +456,7 @@ $(function () {
 				that.gV.tradeAcco = $(this).attr('tradeAcco');
 				that.gV.capitalMode = $(this).attr('capitalMode')
 				var after4Num =  $(this).attr('after4Num')
-				var data = []
+				var data = [];
 				if(that.gV.fundOrBank == '1'){
 					that.gV.bankAccountSecret = $(this).attr('bankAccountSecret');
 					that.gV.singleNum = $(this).attr('singleNum')
@@ -457,7 +489,6 @@ $(function () {
 						generateTemplate(data, that.$el.onlinepay, that.$el.bankListCheckTemplate,true);
 						
 					}else{
-						// ......未完待续
 						generateTemplate(data, that.$el.onlinepay, that.$el.fundListCheckTemplate,true);
 					}
 					that.$el.onlinepay.parent().find(".imgc").show();
@@ -496,7 +527,7 @@ $(function () {
 			
 			//确定
 			mui("body").on('mdClick','.btn_box .btn',function(){
-				$("#transformInput").blur()
+
 				if(!!that.gV.minValue){
 					if(Number(that.gV.balance) < Number(that.gV.minValue)){
 						tipAction('最小买入金额不能低于' + that.gV.minValue + '元')
@@ -510,12 +541,18 @@ $(function () {
 					}
 				}
 				if(!!that.gV.bankAccountSecret){
-					if(Number(that.gV.balance) > Number(that.gV.singleNum)){
-						tipAction('单笔金额不能超过' + that.gV.singleNum + '元')
-						return
+					if(that.gV.fundOrBank == '2'){
+						if(Number(that.gV.balance) > Number(that.gV.enableAmount)){
+							tipAction('单笔金额不能超过' + that.gV.enableAmount + '元')
+							return
+						}
+					}else{
+						if(Number(that.gV.balance) > Number(that.gV.singleNum)){
+							tipAction('单笔金额不能超过' + that.gV.singleNum + '元')
+							return
+						}
 					}
 					that.checkPayType()
-					
 				}else{
 					//未选择银行卡提示信息
 					tipAction("请选择银行卡！");
@@ -530,7 +567,7 @@ $(function () {
 			}, {
 				htmdEvt: 'fundTransformIn_09'
 			}) ;
-
+			
 			//  ---忘记密码
 			mui("body").on('mdClick','#passwordWrap .forgetP',function(){
 				//跳往原生页面去修改密码
@@ -585,6 +622,28 @@ $(function () {
 			}, {
 				htmdEvt: 'fundTransformIn_16'
 			}) ;
+			//  ---《基金合同》《招募说明书》
+			mui("body").on('mdClick','.goPreview',function(){
+				var link = $(this).attr('datalink')
+				window.location.href = site_url.agreementPreview_url + '?link=' + link +'&type=' + $(this).attr('type')
+			}, {
+				htmdEvt: 'fundTransformIn_17'
+			}) ;
+
+			//  ---
+			mui("body").on('mdClick','.container',function(e){
+				// debugger
+				var o = e.target || e.srcElement;//当前点击对象
+					if (o != document.getElementById("transformInput")) {
+						//隐藏键盘操作
+						$("#transformInput").blur()
+					}else{
+						$("#transformInput").focus()
+					}
+			}, {
+				htmdEvt: 'fundTransformIn_18'
+			}) ;
+
 
 		}
 

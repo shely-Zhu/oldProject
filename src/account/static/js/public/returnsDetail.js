@@ -52,6 +52,7 @@ $(function() {
                             var data = json.data.list;
                             if(that.gV.pageCurrent == 1 && data.length == 0) {
                                 $(".list").css("display", "none")
+                                that.$e.noData.show()
                             } else {
                                 Handlebars.registerHelper("if_red", function (value, options) {
                                     if (value > 0) {

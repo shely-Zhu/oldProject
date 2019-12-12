@@ -9,6 +9,7 @@ var splitUrl = require('@pathCommonJs/components/splitUrl.js')();
 var generateTemplate = require('@pathCommonJsComBus/generateTemplate.js');
 var alwaysAjax = require('@pathCommonJs/components/alwaysAjax.js');
 var moment = require('moment');
+require('@pathCommonJs/components/headBarConfig.js');
 
 $(function(){
     var activityList={
@@ -86,6 +87,7 @@ $(function(){
             var obj = [{ // 系统调仓记录列表
                 url: site_url.getActivitiesList_api,
                 needLogin: false,
+                needLoading: false,
                 // url:'http://172.16.187.164:8081/web/marketing/activity/getActivitiesList',
                 data: {
                         // "combCode": that.gV.groupCode, //组合代码 
@@ -143,6 +145,7 @@ $(function(){
                         }
                         // 将列表插入到页面上
                         generateTemplate(list,that.$e.recordList,that.$e.activityListTemp)
+                        alwaysAjax($(".recordList"));
                         $(".lazyload").lazyload()
                     }, 200)
 
@@ -181,18 +184,34 @@ $(function(){
                 $('.contentWrapper').find('.mui-pull-bottom-pocket').removeClass('mui-hidden');
                 // 将列表插入到页面上
                 generateTemplate(data,$('.activityNoListBox2'),that.$e.activityListTemp)
+                $(".lazyload").lazyload()
                 // 第一个调仓记录默认展开
                 $('.recordList').find('ul').eq(0).find('.mui-collapse').addClass('mui-active');
             }, 200)
         },
         //将城市定位模板加载
         getCityListData:function(){
+                //为$id添加hasPullUp  class
+                $('.activityList').addClass('hasPullUp');
+                setTimeout(function() {
+                    //去掉mui-pull-bottom-pocket的mui-hidden
+                    $('.contentWrapper').find('.mui-pull-bottom-pocket').removeClass('mui-hidden');
+                    // 将列表插入到页面上
+                    generateTemplate(data, $('.activityNoListBox2'), that.$e.activityListTemp)
+                    $(".lazyload").lazyload()
+                        // 第一个调仓记录默认展开
+                    $('.recordList').find('ul').eq(0).find('.mui-collapse').addClass('mui-active');
+                }, 200)
+            },
+            //将城市定位模板加载
+            getCityListData: function() {
 
             var obj=[{
                 url: site_url.cityList_api,
                 // url:'http://172.16.187.164:8081/web/marketing/activity/cityList',
                 //async: false,
                 needDataEmpty: true,
+               	needLoading:true,
                 callbackDone: function(json) {
                     $('#loading').hide();
                     console.log(json);
@@ -297,14 +316,35 @@ $(function(){
             },{
                 htmdEvt: 'activityList_1'
             });
-            //点击定位选择头部返回效果
-            mui('#cityListBox').on('mdClick','.goBack',function(){
+            //点击搜索选择头部返回效果
+            mui('#activitySearch').on('mdClick','.backBtn',function(){
+            	if(document.referrer == ''){
+		            var u = navigator.userAgent, 
+		                app = navigator.appVersion;
+		            var isAndroid = u.indexOf('Android') > -1 || u.indexOf('Linux') > -1; //g
+		            var isIOS = !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/); //ios终端
+		            if (isAndroid) {
+		               //这个是安卓操作系统
+		               window.jsObj.backNative();
+		            }
+		            if (isIOS) {
+		                //这个是ios操作系统
+		                window.webkit.messageHandlers.backNative.postMessage('backNative');
+		            }
+		        }else{
+		            location.href="javascript:history.go(-1)";
+		        } 
                 $('#cityListBox').hide();
                 $('#activityDataBox').show();
                 mui('.contentWrapper').pullRefresh().scrollTo(0, 0, 10);         
             },{
                 htmdEvt: 'activityList_2'
             });
+            //点击选择城市头部返回效果
+            mui('#activitySearch').on('mdClick','.goBack',function(){
+            	$('#cityListBox').hide();
+                $('#activityDataBox').show();
+            })
             //点击定位选择右侧索引效果
             mui('#cityListBox').on('mdClick','.mui-indexed-list-bar a',function(){
                 var txt=$(this).text();
@@ -323,7 +363,7 @@ $(function(){
             mui('body').on('mdClick','.mui-card',function(){
                 var actType=$(this).children('a').attr('data-actType');
                 var actId=$(this).children('a').attr('data-actId');
-                window.location.href=site_url.activityDetails_url+'?actType='+actType+'&'+'actId='+actId;
+                window.location.href=site_url.activityDetails_url+'?actType='+actType+'&'+'actId='+actId + '&isNeedLogin=0';
             },{
                 htmdEvt: 'activityList_4'
             });
@@ -365,8 +405,6 @@ $(function(){
             },{
                 htmdEvt: 'activityList_7'
             });
-            // recordList
-            alwaysAjax($(".recordList"));
         }
     }
     //调用初始化函数

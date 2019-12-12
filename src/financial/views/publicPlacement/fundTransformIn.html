@@ -24,6 +24,10 @@
             &nbsp;
             <span class="fundCode"></span>
         </div>
+        <div class="warnInfo">
+            <span class="infoImg mui-icon mui-icon-info"></span>
+            <span class="infoText">&nbsp;此基金存在封闭期，到期前无法赎回</span>
+        </div>
         <div class="money">
             <div class="mfirst">
                 <div class="mfirst-one">买入金额</div>
@@ -103,7 +107,7 @@
         </script>
         <script id="fundListCheck-template" type="text/x-handlebars-template">
             {{#each this}}
-            <div class="onright-left-one">
+            <div class="onright-left-one fundListCheck">
                 <div class="checkFundName">{{fundName}}</div>
                 <div class="checkBankCard">
                     <!-- <img src="{{bankThumbnailUrl}}" alt=""> -->
@@ -111,8 +115,8 @@
                     <span>{{after4Num}}</span>
                 </div>
             </div>
-            <div class="onright-left-two">
-                <span class="title">可用金额</span>
+            <div class="onright-left-two fundListCheck">
+                <span class="remaining">可用金额</span>
                 <span class="amount">{{enableAmount}}元</span>
             </div>
             {{/each}}
@@ -122,8 +126,8 @@
                 <span class="file">
                     <a href="javascript:;" class="item2"><span class="iconfont">&#xe668;</span><span>已阅读并同意</span></a>
                     <a href="javascript:;" class="setGoUrl">《公募基金风险揭示及售前告知书》</a>、
-                    <a class="contract" href="javascript:;">《基金合同》</a>、
-                    <a class="recruiting" href="javascript:;">《招募说明书》</a>
+                    <a href="javascript:;" class="contract goPreview">《基金合同》</a>、
+                    <a href="javascript:;" class="recruiting goPreview">《招募说明书》</a>
                 </span>
                 
             </div>

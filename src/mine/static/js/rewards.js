@@ -75,52 +75,52 @@ $(function() {
                         },
                         needDataEmpty: true,
                         callbackDone: function(json) {
-                            
-                            var data = json.data;
+                            var data = json.data.list;
 
-                            if (json.data.list.length == 0) { // 没有记录不展示
-                                that.$e.noData.show();
-                                $('.reward').hide();
-                                return false;
+                            if(that.gV.pageCurrent == 1 && data.length == 0) {
+                                $(".list").css("display", "none");
+                                $('.without.noData').show();
+                                $('.contentHeader').hide();
                             } else {
-                                data = json.data.list;
-                            }
+                                $.each(json.data.list, function(i, el) {
 
-                            $.each(json.data.list, function(i, el) {
+                                    if (el.isAvailable == "0") {
+                                        el.AvailableValue = true; //有效
 
-                                if (el.isAvailable == "0") {
-                                    el.AvailableValue = true; //有效
+                                        el.xnParentClass = "virtual";
+                                        el.xnChildClass = "virRewardDetail";
 
-                                    el.xnParentClass = "virtual";
-                                    el.xnChildClass = "virRewardDetail";
+                                    } else if (el.isAvailable == "1") {
 
-                                } else if (el.isAvailable == "1") {
+                                        el.AvailableValue = false; //无效
+                                        el.imgvalue = true; //显示无效图片
 
-                                    el.AvailableValue = false; //无效
-                                    el.imgvalue = true; //显示无效图片
+                                        el.xnParentClass = "invalid";
+                                        el.xnChildClass = "invalidRewardDetail";
 
-                                    el.xnParentClass = "invalid";
-                                    el.xnChildClass = "invalidRewardDetail";
+                                    }
+                                    if (el.prizeType == "1") { //实物奖品
+                                        el.prizeValue = true;
+                                    } else if (el.prizeType == "2") { //虚拟奖品
+                                        el.prizeValue = false;
+                                    }
+                                });
 
+                                if( data.list && data.list.length ){
+                                    data = that.dealTime(data.list);
                                 }
-                                if (el.prizeType == "1") { //实物奖品
-                                    el.prizeValue = true;
-                                } else if (el.prizeType == "2") { //虚拟奖品
-                                    el.prizeValue = false;
-                                }
-                            });
 
-                            if( data.list && data.list.length ){
-                                data = that.dealTime(data.list);
+                                // 页面++
+                                that.gV.pageCurrent++;
+                                
+                                def && def.resolve( data, that.gV.pageCurrent);
                             }
-
-                            // 页面++
-                            that.gV.pageCurrent++;
-                            
-                            def && def.resolve( data, that.gV.pageCurrent);
 
                         },
                         callbackNoData: function( json ){
+                            if(that.gV.pageCurrent == 1) {
+                                $(".list").css("display", "none")
+                            }
                            
                             def && def.reject( json, that.gV.pageCurrent );
                         },
@@ -133,114 +133,10 @@ $(function() {
                 }
             })
         },
-        // getData: function(t) {
-        //     var that = this;
-
-        //     var obj = [{ // 月度报告列表
-        //         url: site_url.getPrizeInfo_api,
-        //         data: {
-        //             "pageNum": that.gV.pageCurrent,
-        //             "pageSize": that.gV.pageSize
-        //         },
-        //         //async: false,
-        //         contentTypeSearch: true, //
-        //         needDataEmpty: true,
-        //         callbackDone: function(json) {
-        //             var data;
-
-        //             //console.log(JSON.stringify(json.data.list.length));
-
-        //             if (json.data.list.length == 0) { // 没有记录不展示
-        //                 that.$e.noData.show();
-        //                 $('.reward').hide();
-        //                 return false;
-        //             } else {
-        //                 data = json.data.list;
-        //             }
-
-        //             setTimeout(function() {
-
-        //                 if (data.length < that.gV.pageSize) {
-
-        //                     if (that.gV.pageCurrent == 1) { //第一页时
-
-        //                         if (data.length == 0) {
-        //                             // 暂无数据显示
-        //                             $('.reward').hide();
-        //                             that.$e.noData.show();
-
-        //                             return false;
-
-        //                         } else { // 没有更多数据了
-        //                             t.endPullupToRefresh(true);
-        //                         }
-        //                     } else {
-        //                         //其他页-没有更多数据
-        //                         t.endPullupToRefresh(true);
-        //                     }
-        //                 } else { // 还有更多数据
-        //                     t.endPullupToRefresh(false);
-        //                 }
-
-        //                 // 页面++
-        //                 that.gV.pageCurrent++;
-
-        //                 $.each(data, function(i, el) {
-
-        //                     if (el.isAvailable == "0") {
-        //                         el.AvailableValue = true; //有效
-
-        //                         el.xnParentClass = "virtual";
-        //                         el.xnChildClass = "virRewardDetail";
-
-        //                     } else if (el.isAvailable == "1") {
-
-        //                         el.AvailableValue = false; //无效
-        //                         el.imgvalue = true; //显示无效图片
-
-        //                         el.xnParentClass = "invalid";
-        //                         el.xnChildClass = "invalidRewardDetail";
-
-        //                     }
-        //                     if (el.prizeType == "1") { //实物奖品
-        //                         el.prizeValue = true;
-        //                     } else if (el.prizeType == "2") { //虚拟奖品
-        //                         el.prizeValue = false;
-        //                     }
-        //                 });
-        //                 /*console.log(JSON.stringify(data));*/
-
-
-        //                 //去掉mui-pull-bottom-pocket的mui-hidden
-        //                 $('.rewardWrapper').find('.mui-pull-bottom-pocket').removeClass('mui-hidden');
-        //                 // 将列表插入到页面上
-        //                 generateTemplate(data, that.$e.recordList, that.$e.rewardTemp);
-
-        //                 // 第一个调仓记录默认展开
-        //                 //$('.recordList').find('ul').eq(0).find('.mui-collapse').addClass('mui-active');
-
-        //             }, 200)
-
-        //         },
-        //         callbackFail: function(json){  //失败后执行的函数
-
-        //             tipAction(json.message);
-
-        //         },
-        //         callbackNoData:function(json){
-        //             var that = this;
-        //                 that.$e.noData.show();
-        //                 $('.reward').hide();
-        //         }
-
-        //     }];
-        //     $.ajaxLoading(obj);
-        // },
+        
         events: function() {
             var that = this;
 
-
-            //console.log(JSON.stringify($(".viewDetails").html()));
             mui("body").on('mdClick', '.viewDetails', function() {
                 var $this = $(this);
                 var prizeDetailId = $this.attr("data-id");
@@ -289,9 +185,6 @@ $(function() {
             mui("body").on('tap', '.closeBtn', function() {
                 that.$e.tipBox.hide();//弹层隐藏
             })
-
-            // alwaysAjax($(".recordList"),".rewardWrapper");
-
         }
     };
     reward.init();

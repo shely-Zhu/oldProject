@@ -29,15 +29,20 @@ $(function() {
                 custType: '', //客户类型0-机构1-个人
                 custCode: '', //客户编号
                 btnFlag: true,
+                isNeedLogin: false,
             },
 
             //初始化
             init: function() {
                 var that = this;
                 that.events();
+                if (splitUrl['isNeedLogin'] == 0) {
+                    that.gV.isNeedLogin = false;
+                } else {
+                    that.gV.isNeedLogin = true;
+                }
                 that.getData();
                 that.getUserInfo();
-                $('body').append('<iframe src="activityShare://" id="activity_share" style="position:absolute;z-index:1000;height:0;width:0;"></iframe>');
             },
 
             //获取活动详情数据
@@ -51,7 +56,7 @@ $(function() {
 
                     },
                     //async: false,
-                    needDataEmpty: true,
+                    needDataEmpty: that.gV.isNeedLogin,
                     callbackDone: function(json) {
                         var data = json.data;
                         if (data.actStatus == 2) {
@@ -64,7 +69,7 @@ $(function() {
                             $('.activityBottomBox').show();
                         }
                         //金服展示图片
-                        that.$e.bgimg.attr("data-original", url);
+                        that.$e.bgimg.attr("data-original", data.domainIP + data.htjfGeneralizeImgUrlPrex + data.htjfGeneralizeImgUrl);
                         //活动名称
                         that.$e.actName.text(data.actName);
                         //活动地点
@@ -300,7 +305,24 @@ $(function() {
                     needDataEmpty: true,
                     callbackDone: function(json) {
                         var data = json.data;
-                        $('#activity_share').attr('src', 'activityShare://' + data);
+                        var wxShare = {
+                                type: 'auto',
+                                businessType: 'activityShare', //业务类型
+                                title: that.$e.actName.text(),
+                                des: '邀请好友，分享精彩',
+                                link: data,
+                                img: that.$e.bgimg.attr("data-original"),
+                            }
+                            // window.isAndroid是在root文件中定义的变量
+                        if (window.isAndroid) {
+                            //这个是安卓操作系统
+                            window.jsObj.wxShare(wxShare);
+                        }
+                        // window.isIOS是在root文件中定义的变量
+                        if (window.isIOS) {
+                            //这个是ios操作系统
+                            window.webkit.messageHandlers.wxShare.postMessage(wxShare);
+                        }
 
                     },
                     callbackFail: function(json) {
@@ -374,7 +396,7 @@ $(function() {
                 //返回按钮事件
                 mui('body').on('mdClick', '.goblack', function() {
                     window.location.href = site_url.activityList_url;
-                },{
+                }, {
                     htmdEvt: 'activityDetails_0'
                 });
                 //立即报名方法
@@ -382,41 +404,41 @@ $(function() {
                     if (!$(this).hasClass('disabled')) {
                         that.signUp();
                     }
-                },{
+                }, {
                     htmdEvt: 'activityDetails_1'
                 });
                 //弹框取消方法-两个按钮取消
                 mui('body').on('mdClick', '.cancel', function() {
                     $(this).parents('.tipContainer').hide();
                     $('.mask').hide();
-                },{
+                }, {
                     htmdEvt: 'activityDetails_2'
                 });
                 //弹框取消方法-一个按钮取消
                 mui('body').on('mdClick', '.buttonOne', function() {
                     $(this).parents('.tipContainer').hide();
                     $('.mask').hide();
-                },{
+                }, {
                     htmdEvt: 'activityDetails_3'
                 });
                 //关闭大弹框
                 mui('body').on('mdClick', '.closeBtn', function() {
                     $(this).parent().hide();
                     $('.mask').hide();
-                },{
+                }, {
                     htmdEvt: 'activityDetails_4'
                 });
                 //分享好友
                 mui('body').on('mdClick', '.toShare', function() {
                     that.shareInfo();
-                },{
+                }, {
                     htmdEvt: 'activityDetails_5'
                 });
                 //我知道了按钮
                 mui('body').on('mdClick', '.knowBtn', function() {
                     $('#notOldToNewNoPrize').hide();
                     $('.mask').hide();
-                },{
+                }, {
                     htmdEvt: 'activityDetails_6'
                 });
             }

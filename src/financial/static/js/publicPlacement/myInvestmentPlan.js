@@ -37,16 +37,15 @@ $(function () {
         init: function () {
             var that = this;
             that.initMui();
-            //that.getData()
             that.events();
         },
         //初始化mui的上拉加载
         initMui: function () {
             var that = this;
-            var height = windowHeight - $(".title").height() - $(".topTitle").height();
+            var height = windowHeight - $(".newPlan").height() - $(".topTitle").height();
             // var height = windowHeight - $(".title").height() - $(".topTitle").height() - $(".newPlan").height() - $(".noDataOne").height();
-            if (!$('.list').hasClass('setHeight')) {
-                $('.list').height(height).addClass('setHeight');
+            if (!$('.list .contentWrapper').hasClass('setHeight')) {
+                $('.list .contentWrapper').height(height).addClass('setHeight');
             }
             mui.init({
                 pullRefresh: {
@@ -57,6 +56,7 @@ $(function () {
                         contentnomore: '没有更多了', //可选，请求完毕若没有更多数据时显示的提醒内容；
                         callback: function () {
                             //执行ajax请求
+                            // that.$e.listLoading.show();
                             that.getData(this);
                         }
                     }
@@ -77,11 +77,6 @@ $(function () {
                 //这一句初始化并第一次执行mui上拉加载的callback函数
                 mui('.contentWrapper').pullRefresh().pullupLoading();
 
-                //隐藏loading，调试接口时需要去掉
-                //setTimeout(function(){
-                that.$e.listLoading.hide();
-                //}, 2000);
-
 
                 //为$id添加hasPullUp  class
                 $('.list').addClass('hasPullUp');
@@ -98,19 +93,18 @@ $(function () {
                 },
                 //async: false,
                 needDataEmpty: true,
+                needLoading: false,
                 callbackDone: function (json) {
-                    console.log(json);
+                    that.$e.listLoading.hide();
                     var data;
                     if (json.data.pageList.length == 0) { // 没有记录不展示
-                        $(".list").hide()
+                        $(".contentWrapper").hide()
                         that.$e.nothing.show();
                         return false;
                     } else if (json.status == "0000" && json.data.pageList.length > 0) {
                         data = json.data.pageList;
                         that.$e.nothing.hide();
                     }
-                    setTimeout(function () {
-
                         if (data.length < that.gV.pageSize) {
 
                             if (that.gV.pageCurrent == 1) { //第一页时
@@ -135,7 +129,7 @@ $(function () {
                                 data[i].fixStateStr = "进行中"
                                 data[i].show = true
                             } else if (data[i].fixState == 'H') {
-                                data[i].fixStateStr = "终止"
+                                data[i].fixStateStr = "已终止"
                                 data[i].show = false
                                 that.gV.fixStateNum ++
                                 that.gV.stopPlanList.push(data[i])
@@ -149,17 +143,15 @@ $(function () {
                                 data[i].totalTradeTimes_s = true
                             }
                         }
-                        console.log('data',data)
                         if (that.gV.fixStateNum > 0) {
                             that.$e.endPlan.show()
+                            var height = windowHeight - $(".newPlan").height() - $(".topTitle").height() - $(".endPlan").height();
+                            $('.list .contentWrapper').height(height)
                             $(".stopPlan").html(that.gV.fixStateNum)
 
                         } else {
                             that.$e.endPlan.hide()
                         }
-
-                        // 将列表插入到页面上
-                        generateTemplate(data, that.$e.recordList, that.$e.investmentPlanTemp);
 
                         if (that.gV.pageCurrent == 1) {
                             for (var i = 0; i < data.length; i++) {
@@ -179,15 +171,19 @@ $(function () {
 
                             }
                         }
+                         // 将列表插入到页面上
+                         generateTemplate(data, that.$e.recordList, that.$e.investmentPlanTemp);
 
                         // 页面++
                         that.gV.pageCurrent++;
 
-
-
-                    }, 200)
-
                 },
+                callbackNoData:function(json){
+					tipAction(json.message);
+                },
+                callbackFail:function(json){
+					tipAction(json.message);
+				},
 
             }];
             $.ajaxLoading(obj);
@@ -196,7 +192,7 @@ $(function () {
             var that = this;
             //新增 跳原生定投排行页
             mui("body").on("mdClick", ".newPlan", function () {
-                window.location.href = site_url.investmentPlanRanking_url;
+                window.location.href = site_url.investmentPlanRanking_url + '?flag=2';
             }, {
 				htmdEvt: 'myInvestmentPlan_01'
 			});

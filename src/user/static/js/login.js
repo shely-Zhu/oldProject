@@ -11,8 +11,6 @@ require('../../../common/js/input.js');
 require('../../../common/js/components/utils.js');
 require('../../../common/js/components/select.js');
 require('../../../common/js/ajaxLoading.js');
-require('@pathCommonBase/base.js');
-//echarts图表
 //zepto模块--callback
 require('../../../include/js/vendor/zepto/callback.js');
 //zepto模块--deferred

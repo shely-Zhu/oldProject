@@ -47,7 +47,7 @@ $(function () {
 			tradeAcco: '' , //交易账号
 			tradeSource: '' , //交易账号
 			singleNum:0,
-			minValue:0
+			minValue:0,
 		},
 		webinit: function () {
 			var that = this;
@@ -148,10 +148,12 @@ $(function () {
 						data = json.data;
 						data.forEach(function(element){
 							if(element.materialType == '1'){
-								that.$el.contract.attr('href',element.linkAddress)
+								that.$el.contract.attr('datalink',element.linkAddress)
+								that.$el.contract.attr('type','1')
 							}
 							if(element.materialType == '2'){
-								that.$el.recruiting.attr('href',element.linkAddress)
+								that.$el.recruiting.attr('datalink',element.linkAddress)
+								that.$el.recruiting.attr('type','2')
 							}
 						});
 						
@@ -363,7 +365,7 @@ $(function () {
 			
 			//确定
 			mui("body").on('mdClick','.btn_box .btn',function(){
-				$("#transformInput").blur()
+				
 				if(!!that.gV.bankAccountSecret){
 					if(!!that.gV.minValue){
 						if(Number(that.gV.balance) < Number(that.gV.minValue)){
@@ -391,7 +393,7 @@ $(function () {
 			}, {
 				htmdEvt: 'cashTransformIn_09'
 			}) ;
-
+			
 			//  ---忘记密码
 			mui("body").on('mdClick','#passwordWrap .forgetP',function(){
 				//跳往原生页面去修改密码
@@ -448,6 +450,29 @@ $(function () {
 				htmdEvt: 'cashTransformIn_16'
 			}) ;
 
+			//  ---《基金合同》《招募说明书》
+			mui("body").on('mdClick','.goPreview',function(){
+				var link = $(this).attr('datalink')
+				window.location.href = site_url.agreementPreview_url + '?link=' + link +'&type=' + $(this).attr('type')
+			}, {
+				htmdEvt: 'cashTransformIn_17'
+			}) ;
+
+			//  ---
+			mui("body").on('mdClick','.container',function(e){
+				// debugger
+				var o = e.target || e.srcElement;//当前点击对象
+					if (o != document.getElementById("transformInput")) {
+						//隐藏键盘操作
+						$("#transformInput").blur()
+					}else{
+						$("#transformInput").focus()
+					}
+			}, {
+				htmdEvt: 'cashTransformIn_18'
+			}) ;
+
+		
 		}
 
 

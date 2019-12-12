@@ -51,8 +51,10 @@
 				{{/if}}
 				<div class="midContent">
 					<div class="max_amount_area">
+						{{#if tradeLimitAmount}}
 						<div class="max_amount fl"></div>
 						<div class="max_amount_value fl">单日单账户限额{{tradeLimitAmount}}万</div>
+						{{/if}}
 					</div>
 					<div class="net_worth_area">
 						<div class="net_worth_item">
@@ -186,7 +188,7 @@
 						<div class="text">分享</div>
 					</div>
 					<div class="selected_area"  type="2">
-						<div class="img mui-icon mui-icon-star"></div>
+						<div class="img"></div>
 						<div class="text">加自选</div>
 					</div>
 					<div class="fixed_investement_btn"  type="3">定投</div>
@@ -216,7 +218,7 @@
 				{{/if}}
 			</div>
 		</script>
-		<script src="/include/js/vendor/echarts/echarts.min.js"></script>
+		<script src="/allServerResources/include/js//vendor/echarts/echarts.min.js"></script>
 		<script src="/financial/static/js/publicPlacement/publicDetail.js"></script>
 	</body>
 

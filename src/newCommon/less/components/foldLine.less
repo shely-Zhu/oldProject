@@ -1,0 +1,110 @@
+/**  
+ * @Page:  折现图
+ * @Author: songxiaoyu  
+ * @Date:   2018-10-11 10:39:01  
+ * @Last Modified by:   songxiaoyu  
+ * @Last Modified time: 2018-10-11 15:04:50  
+ *
+ * 现金宝总资产页面
+ * 恒小智资产详情页面
+ */
+
+
+//折线图
+.drawLine {
+    position: relative;
+    padding-left: 0.32rem;
+    padding-right: 0.32rem;
+    height: 5.1rem;
+    //height: 8rem;
+
+    .lineTitle {
+        //名称
+        position: absolute;
+        top: 0.28rem;
+        z-index: 30;
+        font-size: 0.24rem;
+        color: @c003;
+
+        span {
+            &:first-child {
+                padding-right: 0.26rem;
+            }
+
+            &.active {
+                color: @c006;
+            }
+        }
+    }
+
+    .right {
+        position: absolute;
+        top: 0.2rem;
+        right: 0.1rem;
+        text-align: right;
+        color: @c002;
+        font-size: 0.24rem;
+
+        .day {
+            color: @c003;
+            font-size: 0.2rem;
+
+        }
+    }
+
+    .lineWrapper {
+        height: 4.9rem;
+        //padding-left: 0.32rem;
+        color: @c003;
+        margin-right: -0.32rem;
+
+        .noData {
+            margin-top: 0;
+            padding-top: 1.6rem;
+            margin-left: -0.36rem;
+
+            .iconfont {
+                font-size: 0.72rem;
+            }
+        }
+    }
+
+    .line {
+        position: absolute;
+        bottom: 0.24rem;
+        left: 0;
+        border-bottom: 0.02rem solid @c007;
+        width: 100%;
+
+        .lineMiddle {
+            width: 74%;
+            margin: 0 auto;
+            text-align: center;
+            position: relative;
+            margin-bottom: -0.068rem;
+            color: @c003;
+
+            .timeBtn {
+                &.active {
+                    color: @c002;
+
+                    &:after {
+                        background-color: @c006;
+                    }
+                }
+
+                &:after {
+                    content: '';
+                    width: 0.14rem;
+                    height: 0.14rem;
+                    background: @c007;
+                    border-radius: 1.4rem;
+                    display: block;
+                    margin: 0 auto;
+                    margin-top: 0.06rem;
+                }
+            }
+        }
+
+    }
+}

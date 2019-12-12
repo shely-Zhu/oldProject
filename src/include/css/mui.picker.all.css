@@ -163,7 +163,7 @@
 .mui-dtpicker .mui-pciker-rule-ft{
 	border-top:1px solid #eee;
 	border-bottom:1px solid #eee;
-	font-size: 0.28rem;
+	font-size:1.4rem;
 }
 .mui-dtpicker.mui-active {
 	-webkit-transform: translateY(0px);
@@ -185,29 +185,29 @@
 }
 .mui-dtpicker-header {
 	padding: 0;
-    height: 0.8rem;
-    line-height: 0.8rem;
+    height: 4rem;
+    line-height: 4rem;
     border-bottom: 1px solid #eee;
-    margin-bottom:  0.24rem;
+    margin-bottom:1.2rem;
 }
 .mui-dtpicker-header button {
 	width: auto;
     border-radius: 0;
     background: transparent;
-    font-size: 0.28rem;
+    font-size: 1.4rem;
     padding: 0;
     display: block;
     height: 100%;
     line-height: 100%;
     margin: 0;
-    margin-left: 0.32rem;
+    margin-left: 1.6rem;
     color: #7d7c7d;
     float:left;
 }
 .mui-dtpicker-header button:last-child {
-	margin-right: 0.32rem;
+	margin-right: 1.6rem;
     background: transparent;
-    color: #0E98FC;
+    color: #f4cf5c;
     float:right;
 
 }
@@ -308,7 +308,7 @@
 }
 
 .mui-dtpicker .mui-picker .mui-pciker-list li{
-	font-size: 0.28rem;
+	font-size: 1.4rem;
     color: #7d7c7d;
 }
 .mui-dtpicker .mui-picker .mui-pciker-list li.highlight {

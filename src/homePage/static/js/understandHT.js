@@ -16,40 +16,66 @@ $(function() {
 		},
 		//全局变量
 		gV: {
-			
+			articleBelong:splitUrl['articleBelong'],
+			sortType:splitUrl['type'],
 		},
 		//页面初始化函数
 		init: function() {	
 			var that = this;
-			that.getTemplateData()
+			$(".tabBar b").eq(that.gV.sortType*1).addClass('borderBottom');
+			$(".tabBar a").eq(that.gV.sortType*1).addClass('mui-active');
+			that.getTemplateData(that.gV.articleBelong,that.gV.sortType);
+			mui('.mui-slider').slider().gotoItem(that.gV.sortType*1,0) //默认点击
 			that.events()
 			that.initMui()
 		},
 		//初始化mui的上拉加载
 		initMui: function() {
 			var that = this;
+			that.getTitleData();
 			mui.init();
 			//模拟点击对应的type。定位到当前type下
 			
-			mui("body").on('mdClick', '.mui-slider' , function(e){
-				var $this = $(this);
+			mui("body").on('mdClick', '.mui-slider .mui-control-item' , function(e){
+				var $this = $(this),
+				index = $(this).index();
 				$("b").removeClass('borderBottom');
-				$("b").eq(e.detail.slideNumber).addClass('borderBottom');
-				that.getTemplateData($this.attr("belong"),e.detail.slideNumber)
+				$(".tabBar b").eq(index).addClass('borderBottom');
+				that.getTemplateData($this.attr("belong"),index)
 			},{
                 'htmdEvt': 'understandTab_00'
             })
 		},
-		//获取数据函数
-		getData: function(t) {
-			var that = this;
-			that.getTemplateData();//获取模板
-		},
+		// 获取页面tab页title
+        getTitleData:function() {
+        	var that=this;
+            var obj=[{
+                url: site_url.queryHtInformation_api,
+                data:{},
+                needDataEmpty: true,
+                needLoading:true,
+                callbackDone: function(json) {
+					var data = json.data.manageAndServiceList;
+					$.each(data,function(i,v){
+						$(".tabBar a").eq(1)[0].childNodes[0].nodeValue = v.titleFst;//只修改父元素的文本，不修改其中的元素
+					})
+					
+                },
+                callbackFail: function(json) { //失败后执行的函数
+                    tipAction(json.message);
+
+                },
+                callbackNoData:function(json){
+                    
+                }
+            }];                        
+            $.ajaxLoading(obj); 
+        },
 		// 获取配置的图片
         getTemplateData(belong,num) {
         	var that=this,
-        	belong = belong ? belong : splitUrl['articleBelong'],
-        	num = num ? num : splitUrl['type'] * 1;//首次进来请求用路径中的articleBelong，点击的时候使用对应的articleBelong。
+        	belong = belong ? belong : splitUrl['articleBelong'];
+//      	num = num ? num : splitUrl['type'] * 1;//首次进来请求用路径中的articleBelong，点击的时候使用对应的articleBelong。
             var obj=[{
                 url: site_url.getArticle_api,
                 data:{
@@ -59,14 +85,21 @@ $(function() {
                 needDataEmpty: true,
                 needLoading:true,
                 callbackDone: function(json) {
-                	var resData = json.data.data;
+                	var resData = json.data;
 					if(!!resData.h5Title){//标题
 						that.$e.HeadBarpathName.text(resData.h5Title);
 					}
-					that.$e.contentWrap.eq(num*1 - 1).html(resData.content);
+					that.$e.contentWrap.eq(num*1).html(resData.content);
 
 					
             
+                },                
+                callbackFail: function(json) { //失败后执行的函数
+                    tipAction(json.message);
+
+                },
+                callbackNoData:function(json){
+                    
                 }
             }];                        
             $.ajaxLoading(obj); 

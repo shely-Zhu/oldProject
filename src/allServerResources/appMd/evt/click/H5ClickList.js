@@ -154,6 +154,7 @@ var clickList = {
 	//已报名活动
 	"activityEnrolment_01" : { type:'click', evtid: '', topic: '已报名活动-tab切换', info: ''} ,
 	"activityEnrolment_02" : { type:'click', evtid: '', topic: '已报名活动-分享给好友', info: ''} ,
+	"activityEnrolment_03" : { type:'click', evtid: '', topic: '已报名活动-跳转详情', info: ''} ,
 	//意见反馈
 	"concatUsAdvise_01" : { type:'click', evtid: '', topic: '意见反馈-单选按钮', info: ''} ,
 	"concatUsAdvise_02" : { type:'click', evtid: '', topic: '意见反馈-添加图片', info: ''} ,
@@ -210,7 +211,12 @@ var clickList = {
  	"privatePlacementDetail_01" : { type:'click', evtid: 'privatePlacementDetail_01', topic: '私募基金产品详情-tab点击切换', info: ''} ,
 	"privatePlacementDetail_02" : { type:'click', evtid: 'privatePlacementDetail_02', topic: '私募基金产品详情-折线图点击', info: ''} ,
 	"privatePlacementDetail_03" : { type:'click', evtid: 'privatePlacementDetail_03', topic: '私募基金产品详情-信息的拷贝', info: ''} ,
-	"privatePlacementDetail_04" : { type:'click', evtid: 'privatePlacementDetail_04', topic: '私募基金产品详情-立即预约', info: ''} ,
+	"privatePlacementDetail_04" : { type:'click', evtid: 'privatePlacementDetail_04', topic: '私募基金产品详情-复制全部', info: ''} ,
+	"privatePlacementDetail_05" : { type:'click', evtid: 'privatePlacementDetail_05', topic: '私募基金产品详情-历史明细', info: ''} ,
+	"privatePlacementDetail_06" : { type:'click', evtid: 'privatePlacementDetail_06', topic: '私募基金产品详情-立即预约', info: ''} ,
+	"privatePlacementDetail_07" : { type:'click', evtid: 'privatePlacementDetail_07', topic: '私募基金产品详情-产品材料', info: ''} ,
+	"privatePlacementDetail_08" : { type:'click', evtid: 'privatePlacementDetail_08', topic: '私募基金产品详情-净值更新', info: ''} ,
+	
 	//现金管理
 	"cashManagement_01" : { type:'click', evtid: 'cashManagement_01', topic: '现金管理-了解现金管理', info: ''} ,
 	"cashManagement_02" : { type:'click', evtid: 'cashManagement_02', topic: '现金管理-转入', info: ''} ,
@@ -344,6 +350,7 @@ var clickList = {
 	// "starFinancia_search":{ type:'click', evtid: '', topic: '理财师查询', info: ''} ,
 	"starFinancia_05":{ type:'click', evtid: 'starFinancia_05', topic: '取消搜索', info: ''} ,
 	"starFinancia_06":{ type:'click', evtid: 'starFinancia_06', topic: '点击搜索框触发选中', info: ''} ,
+	"starFinancia_07":{ type:'click', evtid: 'starFinancia_07', topic: '返回上一页首页', info: ''} ,
 
 	/************************************** account start *************************************************/
 	//publicTradeDetail.hrml

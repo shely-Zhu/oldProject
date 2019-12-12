@@ -185,6 +185,7 @@ $(function() {
                 url: that.gV.siteUrlArr[that.gV.current_index], //调用第几个接口
                 data: that.gV.ajaxArr[that.gV.current_index], //传调用参数
                 needLogin: true,
+                needLoading: false,
                 callbackDone: function(json) {
                     console.log(json.data)
                     var jsonData = that.dealData(json.data.list),
@@ -239,7 +240,6 @@ $(function() {
                             t.endPullupToRefresh(false);
                         }
                         $id.find('.contentWrapper .mui-pull-bottom-pocket').removeClass('mui-hidden');
-                        console.log(that.gV.ajaxArr[that.gV.current_index].pageCurrent)
                         if (that.gV.ajaxArr[that.gV.current_index].pageCurrent == 1) {
                             //第一屏
                             $id.find('.contentWrapper .mui-table-view-cell').html(that.html);
@@ -320,7 +320,7 @@ $(function() {
             mui("body").on('mdClick', '.roomItem' , function(){
                 var id = $(this).attr("id")
                 var articleBelong = $(this).attr("articleBelong")
-                window.location.href = site_url.articleTemplate_url + '?id=' + id + '&articleBelong=' + articleBelong + '&applyType=1'
+                window.location.href = site_url.articleTemplate_url + '?id=' + id + '&articleBelong=' + articleBelong
             },{
                 'htmdEvt': 'fortune_10'
             })

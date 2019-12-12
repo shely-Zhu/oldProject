@@ -1,0 +1,24 @@
+//重置mui轮播点的样式
+
+
+.mui-slider-indicator{
+    bottom: 0.28rem;
+    height: 0.1rem;
+
+    .mui-indicator{
+        background: @c005;
+        box-shadow: none;
+        width: 0.1rem;
+        height: 0.1rem;
+        border-radius: 0.1rem;
+        margin: 0 0.1rem 0 0;
+
+        &:last-child{
+            margin-right: 0;
+        }
+
+        &.mui-active{
+            background: @c006;
+        }
+    }
+}

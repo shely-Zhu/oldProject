@@ -14,7 +14,7 @@
 	<title>我的奖励</title>
 </head>
 <body>
-	@@include('@pathCommonCom/noData/noData.html', {"tipText": "暂无数据"})
+	@@include('@pathCommonCom/noData/noData.html', {"tipText": "您暂无奖励"})
 
 	@@include('@pathCommonCom/loading/listLoading.html')
     @@include('@pathCommonViews/headBarConfig.html',{"pathName":"我的奖励"})
@@ -24,7 +24,7 @@
 
 		<!-- 上拉加载容器 -->
      	<div class="list"></div>
-     	
+
         <!-- 弹框区域 -->
         <div class="tipBox">
             <div class="alertcontent">
@@ -67,13 +67,13 @@
 			</div>
 
 		{{else}}
-		{{! 虚拟奖励}
-		{{! 区分生效和失效状态}}
+		{{! 虚拟奖励 }}
+		{{! 区分生效和失效状态 }}
 			<div class="mui-card-content mui-card-media {{xnParentClass}}">
 				<div class="{{xnChildClass}}">
 					<p class="rewardName ellipsis">{{prizeName}}</p>
 					<p class="rewardTime" start-data={{startTime}} end-data={{endTime}} create-data={{createTime}}>有效期至：{{endTime}}</p>
-					<a href="javascript:void(0);" class="viewDetails"  data-id="{{prizeDetailId}}" data-memo={{memo}}></a>>查看详情<span class="iconfont">&#xe636;</span></a>
+					<a href="javascript:void(0);" class="viewDetails"  data-id="{{prizeDetailId}}" data-memo={{memo}}>查看详情<span class="iconfont">&#xe636;</span></a>
 					{{#if imgvalue}}
 					<img class="invalidImg" src="/mine/static/img/rewards/yishixiao@2x.png">
 					{{/if}}

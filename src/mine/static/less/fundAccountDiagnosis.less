@@ -168,8 +168,7 @@ body {
                 height: 1.83rem;
                 font-size:0;
                 .assets-item{
-                    display: inline-block;
-                    // width: 25%;
+                   float: left;
                     p.leng{
                         height: .22rem;
                         line-height: .22rem;
@@ -183,22 +182,23 @@ body {
                         }
                         .num{
                             display: inline-block;
-                            font-size:.22rem;
+                            font-size:.16rem;
                             font-weight: 600;
                             color:@c002;
                             vertical-align: middle;
                             margin-left:0.02rem;
+                            overflow: hidden;
                         }
                     }
                     p.name{
-                        height: .5rem;
-                        line-height: .5rem;
-                        font-size:.22rem;
+                        // height: .5rem;
+                        padding:.1rem 0;
+                        line-height: .3rem;
+                        font-size:.14rem;
                         color:@c002;
                     }
                     p.shape{
                         height:.4rem;
-                        background-color:red;
                     }
                 }
                 .assets-item:first-child{

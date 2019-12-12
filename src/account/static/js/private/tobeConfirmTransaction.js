@@ -116,11 +116,12 @@ $(function() {
                     "pageNum": that.gV.aP.pageNum, //非必须，默认为1
                     "pageSize": "10", //非必须，默认为10
                     "isConfirm": that.gV.type,
-                    "businessType": that.gV.businessType,
+                    "confirmType": that.gV.businessType,
                 },
+                needLoading: false,
                 callbackDone: function(json) {
                     var data;
-                    if (json.data.pageList && json.data.pageList.length == 0) { // 没有记录不展示
+                    if (json.data.pageList && json.data.pageList.length == 0 && that.gV.aP.pageNum == 1) { // 没有记录不展示
                         $(".list").hide()
                         that.getElements.noData.show();
                         that.getElements.listLoading.hide();
@@ -168,12 +169,12 @@ $(function() {
         },
         events: function() { //绑定事件
             var that = this;
-            alwaysAjax($('.mui-table-view-cell'));
+            alwaysAjax($('.contentWrapper'));
             mui("body").on('mdClick', '.hopper', function(e) {
                     $('.mask').show();
                     $('.hopperCon').show();
 
-                },{
+                }, {
                     'htmdEvt': 'tobeConfirmTransaction_0'
                 })
                 //点击筛选数据
@@ -185,28 +186,31 @@ $(function() {
                     $('.hopperCon').hide();
                     that.gV.businessType = $(this).attr('data');
                     // 重置上拉加载
-                    mui('.contentWrapper').pullRefresh().refresh(true);
                     that.gV.aP.pageNum = 1;
                     that.getElements.contentWrap.html('');
                     //重新初始化
-                    that.getElements.listLoading.show();
+                    // that.getElements.listLoading.show();
+                    // debugger
                     that.getData(that.gV.aThis);
-                    mui('.contentWrapper').pullRefresh().scrollTo(0, 0, 0);
-                },{
+                    // mui('.contentWrapper').pullRefresh().scrollTo(0, 0, 0);
+                }, {
                     'htmdEvt': 'tobeConfirmTransaction_1'
                 })
                 // 点击遮罩隐藏
             mui("body").on('mdClick', '.mask', function(e) {
-                    $('.mask').hide();
-                    $('.hopperCon').hide();
-                },{
-                    'htmdEvt': 'tobeConfirmTransaction_2'
-                })
-                //取消受让、取消预约、取消转让
+                $('.mask').hide();
+                $('.hopperCon').hide();
+            }, {
+                'htmdEvt': 'tobeConfirmTransaction_2'
+            })
+
+
+            //取消受让、取消预约、取消转让
             mui("body").on('mdClick', '.cancelBtn', function(e) {
+                    event.stopPropagation();
                     var type = $(this).attr('data-type');
-                    var reserveId = $(this).attr('reserveId');
-                    var proId = $(this).attr('projectId');
+                    var reserveId = $(this).attr('data-reserveid');
+                    var proId = $(this).attr('data-projectid');
                     if (type == 'assign') { //转让
                         var obj = {
                             p: '<p>您确定要取消转让申请吗？</p>',
@@ -243,12 +247,23 @@ $(function() {
                             callback: function(t) {
                                 var obj = [{
                                     url: site_url.fundReserveCancel_api,
+                                    contentTypeSearch: true,
                                     data: {
                                         "projectId": proId,
                                         "reserveId": reserveId,
                                     },
                                     callbackDone: function(json) {
                                         var data;
+                                        if (json.status == '0000') {
+                                            // 重置上拉加载
+                                            mui('.contentWrapper').pullRefresh().refresh(true);
+                                            that.gV.aP.pageNum = 1;
+                                            that.getElements.contentWrap.html('');
+                                            //重新初始化
+                                            that.getElements.listLoading.show();
+                                            that.getData(that.gV.aThis);
+                                            mui('.contentWrapper').pullRefresh().scrollTo(0, 0, 0);
+                                        }
                                     },
                                     callbackNoData: function() {
 
@@ -262,11 +277,12 @@ $(function() {
                     }
 
 
-                },{
+                }, {
                     'htmdEvt': 'tobeConfirmTransaction_3'
                 })
                 //点击状态文字出现弹框
             mui("body").on('mdClick', '.openTip', function(e) {
+                    event.stopPropagation();
                     $('.mask').show();
                     var conText = $(this).siblings('.tipContent').html();
                     var obj = {
@@ -280,36 +296,54 @@ $(function() {
                     };
                     $.elasticLayer(obj);
 
-                },{
+                }, {
                     'htmdEvt': 'tobeConfirmTransaction_4'
                 })
                 //功能按钮
             var clickEvent = '';
             mui("body").on('mdClick', '.toDetail', function(e) {
-                var type = $(this).attr('type');
-                var reserveId = $(this).attr('reserveId');
-                var proId = $(this).attr('projectId');
-                var isElec = $(this).attr('data-type');
-                if (type == 'toCertif') { //去合格投资者认证
-                    if (isElec == 0) {
-                        //非电子合同
-                    } else if (isElec == 1) {
-                        //电子合同跳转
+                    event.stopPropagation();
+                    var type = $(this).attr('type'); //按钮类型
+                    var reserveId = $(this).attr('data-reserveid'); //预约id
+                    var proId = $(this).attr('data-projectid'); //项目id
+                    var isElec = $(this).attr('data-type'); //是否是电子合同
+                    var isAllowAppend = $(this).attr('data-firstorappend'); //是否首次追加
+                    var projectName = $(this).attr('data-projectname'); //项目名称
+                    var isQualified = $(this).attr('data-isqualified'); //是否满足合格投资者
+                    var isPubToPri = $(this).attr('data-ispubtopri'); //是否公转私
+                    if (type == 'toCertif') { //去合格投资者认证
+                        if (isElec == 0) {
+                            //非电子合同
+                            window.location.href = site_url.notElecSecondStep_url + '?isQualified=' + isQualified + '&projectName=' + projectName;
+                        } else if (isElec == 1) {
+                            //电子合同跳转
+                            window.location.href = site_url.elecSecondStep_url + '?reserveId=' + reserveId + '&projectId=' + proId + '&projectName=' + projectName + '&isAllowAppend=' + isAllowAppend + '&isPubToPri=' + isPubToPri;
+                        }
+                    } else if (type == 'toSign') { //去签合同
+                        window.location.href = site_url.elecThirdStep_url + '?reserveId=' + reserveId + '&projectId=' + proId + '&projectName=' + projectName + '&isAllowAppend=' + isAllowAppend + '&isPubToPri=' + isPubToPri;
+                    } else if (type == 'toSee') { //查看合同
+                        window.location.href = site_url.seeSign_url + '?reserveId=' + reserveId;
+                    } else if (type == 'toUploadM') { //去上传汇款凭证
+                        window.location.href = site_url.elecFourthStep_url + '?reserveId=' + reserveId + '&projectId=' + proId + '&projectName=' + projectName + '&isAllowAppend=' + isAllowAppend + '&isPubToPri=' + isPubToPri;
+                    } else if (type == 'toView') { //详情
+                        window.location.href = site_url.privatePlacementDetail_url + '?projectId=' + proId
+                    } else if (type == 'toVideo') { //视频双录
+                        window.location.href = site_url.realVideoTranscribe_url;
+                    } else if (type == 'toDown') { //下载电子合同
+
+                    } else if (type == 'reAppointment') { //重新预约
+
                     }
-                } else if (type == 'toSign') { //去签合同
-                    window.location.href = site_url.elecFourthStep_url + '?reserveId=' + reserveId + '&projectId' + proId;
-                } else if (type == 'toSee') { //查看合同
-                    window.location.href = site_url.seeSign_url + '?reserveId=' + reserveId;
-                } else if (type == 'toUploadM') { //去上传汇款凭证
-                    window.location.href = site_url.elecFourthStep_url + '?reserveId=' + reserveId;
-                } else if (type == 'toView') { //详情
 
-                } else if (type == 'toVideo') { //视频双录
-
-                }
-
-            },{
-                'htmdEvt': 'tobeConfirmTransaction_5'
+                }, {
+                    'htmdEvt': 'tobeConfirmTransaction_5'
+                })
+                // 点击每一条进入详情
+            mui("body").on('mdClick', '.transList', function(e) {
+                var proId = $(this).attr('data-projectid');
+                window.location.href = site_url.privatePlacementDetail_url + '?projectId=' + proId
+            }, {
+                'htmdEvt': 'tobeConfirmTransaction_6'
             })
         }
     };

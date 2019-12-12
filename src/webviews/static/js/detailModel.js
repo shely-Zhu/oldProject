@@ -55,12 +55,12 @@ $(function(){
                     $("#time").html(json.releaseDate);//releaseDate
                     $("#resource").html(json.source);//source
                     $(".content").html(json.content);//内容区
-                }
+                },
                 
             }]
             $.ajaxLoading(obj);
 
-        }
+        },
 
     }
 

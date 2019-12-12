@@ -68,7 +68,7 @@ $(function(){
 				$.elasticLayerTypeTwo(obj);
 			})
 			
-		}
+		},
 
 	};
 	//调用函数

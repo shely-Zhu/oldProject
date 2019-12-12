@@ -68,6 +68,7 @@ $(function(){
                             var data = json.data.pageList;
                             if(that.gV.pageNo == 1 && data.length == 0) {
                                 $(".li").css("display", "none")
+                                that.$e.noData.show()
                             } else {
                                 def && def.resolve( data, that.gV.pageNo);
                                 that.gV.pageNo++;
@@ -237,7 +238,7 @@ $(function(){
 
 	         mui("body").on('mdClick','.posioneright', function(){
 
-                    window.location.href = site_url.articleTemplate_url+ '?articleBelong=9&applyType=0';
+                    window.location.href = site_url.articleTemplate_url+ '?articleBelong=9';
                 }, {
                     'htmdEvt': 'adolesceRecord_01'
                 });

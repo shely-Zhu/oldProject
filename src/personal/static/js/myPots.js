@@ -2,7 +2,6 @@
 *我的积分
 *@author 2016-12-29 purpleZhao
 */
-require('@pathCommonBase/base.js');
 //ajax调用
 require('../../../common/js/components/utils.js'); 
 //ajax调用

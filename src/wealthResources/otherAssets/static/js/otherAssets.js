@@ -6,25 +6,25 @@
  * @description:
  * 2019-9-10 待确认资产添加
  */
-require('@pathCommonJsCom/utils.js');
+require('@pathNewCommonJsCom/utils.js');
 //ajax调用
-require('@pathCommonJs/ajaxLoading.js');
+require('@pathNewCommonJs/ajaxLoading.js');
 //zepto模块--callback
-require('@pathIncludJs/vendor/zepto/callback.js');
+require('@pathNewIncludJs/vendor/zepto/callback.js');
 //zepto模块--deferred
-require('@pathIncludJs/vendor/zepto/deferred.js');
+require('@pathNewIncludJs/vendor/zepto/deferred.js');
 //路径配置文件
-require('@pathIncludJs/vendor/config.js');
+require('@pathNewIncludJs/vendor/config.js');
 //下拉加载更多
-// require('@pathCommonJs/scrollFullPage.js');
+// require('@pathNewCommonJs/scrollFullPage.js');
 // 切换
-require('@pathCommonJsCom/tabScroll.js');
-require('@pathCommonJsCom/goTopMui.js');
-require('@pathCommonJs/components/elasticLayer.js');
-require('@pathCommonJs/components/elasticLayerTypeFive.js');
-require('@pathCommonJs/components/headBarConfig.js');
+require('@pathNewCommonJsCom/tabScroll.js');
+require('@pathNewCommonJsCom/goTopMui.js');
+require('@pathNewCommonJs/components/elasticLayer.js');
+require('@pathNewCommonJs/components/elasticLayerTypeFive.js');
+require('@pathNewCommonJs/components/headBarConfig.js');
 //黑色提示条的显示和隐藏
-var tipAction = require('@pathCommonJsCom/tipAction.js');
+var tipAction = require('@pathNewCommonJsCom/tipAction.js');
 
 
 $(function() {
@@ -236,6 +236,7 @@ $(function() {
                 url: that.gV.siteUrlArr[that.gV.current_index],
                 data: that.gV.ajaxArr[that.gV.current_index],
                 needLogin: true,
+                needLoading: false,
                 callbackDone: function(json) {
                     var jsonData = json.data,
                         pageList = jsonData.pageList;

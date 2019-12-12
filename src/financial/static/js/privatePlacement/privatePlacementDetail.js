@@ -15,6 +15,8 @@ var generateTemplate = require('@pathCommonJsComBus/generateTemplate.js');
 //引入弹出层
 require('@pathCommonCom/elasticLayer/elasticLayer/elasticLayer.js');
 
+var moment = require('moment');
+
 $(function() {
     var privatePlacementDetail = {
         //获取页面元素
@@ -32,6 +34,8 @@ $(function() {
             openingBank: $("#openingBank"), //开户行
             topc: $('#topc'), //提示信息
             tipIcon: $(".tipIcon"), //净值披露信息
+            isElecContract:'',  //是否是电子合同产品【0.否 1.是】
+            unitNetValueDes:'',
         },
         data: {
             canClick: true,
@@ -39,8 +43,18 @@ $(function() {
             fundDetailObj: "", //详情接口拿到的对象
             buyFreeze: "", //是否买入冻结
             productName:"",//产品名称
+            isRiskEndure:'',  // 是否风险测评 0-否 1-是
+            endurePubIsold:'',  // 公募风险评测是否过期 0:否 1:是
+            endurePriIsold:'', // 私募风险测评是否过期0:否 1:是 
             qrnhWfsy: {
                 oneMonth: {},
+                threeMonth: {},
+                halfYear: {},
+                oneYear: {},
+                sinceNow: {}
+            },
+            dwjzljjz: {
+                oneMonth : {},
                 threeMonth: {},
                 halfYear: {},
                 oneYear: {},
@@ -54,10 +68,6 @@ $(function() {
             var that = this;
 
             that.getData();
-            // 募集账户信息
-            that.collectAccount();
-            // 获取标签
-            that.queryReourceListByLabel();
             // 查询产品亮点
             that.queryProductImage();
             that.events();
@@ -109,6 +119,8 @@ $(function() {
 
                         $("#qrnhLine").addClass("hide");
                         $("#wfsyLine").removeClass("hide");
+                        // 涨跌幅
+                        $('.priceLimit').removeClass('hide');
                         // 单位净值
                         $('.netValue').html(jsonData.unitNetValue);
                         // 折线图
@@ -123,8 +135,11 @@ $(function() {
                         that.$e.lineType = 'qrnh';
                         $("#qrnhLine").removeClass("hide");
                         $("#wfsyLine").addClass("hide");
+                        // 展示七日年化
+                        $('.netValue').html(jsonData.sevenIncomeRate);
+                        $('#historyDetailBtn').removeClass('hide');
                         // 折线图
-                        that.getTypeOneData(that.$e.lineType);
+                        that.getTypeTwoData(that.$e.lineType);
                     }
 					that.data.productName = jsonData.productName;
                     // 私募产品 产品名称
@@ -132,7 +147,8 @@ $(function() {
                     // 一句话产品详情
                     $('.introduction').html(jsonData.productLightspot);
                     // 净值日期
-                    $('.netValueDate').html(jsonData.netValueDate)
+                    var now=moment(jsonData.netValueDate).format('YYYY-MM-DD');
+                    $('.netValueDate').html(now.substring(5))
                     // 起投金额
                     $('.investmentAmountNum').html(jsonData.investStart + '万');
                     // 产品期限
@@ -140,17 +156,26 @@ $(function() {
                     // 预约资质
                     $('.appointment span').html(jsonData.orderCondition);
                     // 产品特点标签
-                    var projectLable = jsonData.projectLable.split('|');
-                    for (var i in projectLable) {
-                        projectLableHtml = '<span>' + projectLable[i] + '</span>'
-                        $('.productLabel').append(projectLableHtml)
+                    that.getElements.isElecContract = jsonData.isElecContract;  // 是否是电子合同产品【0.否 1.是】
+                    if( !!jsonData.projectLable){
+                        var projectLable = jsonData.projectLable.split('|');
+                        for (var i in projectLable) {
+                            projectLableHtml = '<span>' + projectLable[i] + '</span>'
+                            $('.productLabel').append(projectLableHtml);
+                        }
+                    }
+                    if(that.getElements.isElecContract == 1){
+                        $('.productLabel').append('<span>电子合同</span>')
                     }
                     //0 债权投资;1 证券投资（二级市场）;2 股权投资;3 海外投资;4 其他
                     if (jsonData.investDirect == "0" || jsonData.investDirect == "2" || jsonData.investDirect == "4") { // 债权投资、股权投资、其他服务不展示
                         that.getElements.tipIcon.hide();
                     } else if (jsonData.investDirect == "1" || jsonData.investDirect == "3") { // 海外投资  （证券投资）二级市场展示
                         that.getElements.tipIcon.show();
+                        var productModule = 'netValueCycleAPP';
+                        that.queryProductImage(productModule);
                     };
+
 
                     // 基本信息
                     // 剩余额度
@@ -221,19 +246,19 @@ $(function() {
                     // 交易须知  
                     // 认购费率
                     if(jsonData.buyRate){
-                        $('.productRateBuy span').html(jsonData.buyRate);
+                        $('.productRateBuy span').html(jsonData.buyRate + '%');
                     }else{
                         $('.productRateBuy').hide();
                     }
                     // 管理费率
                     if(jsonData.managementFee){
-                        $('.productRateManage span').html(jsonData.managementFee);
+                        $('.productRateManage span').html(jsonData.managementFee + '%');
                     }else{
                         $('.productRateManage').hide();
                     }
                     // 托管费率
                     if(jsonData.trusteeFee){
-                        $('.productRateTrust span').html(jsonData.trusteeFee);
+                        $('.productRateTrust span').html(jsonData.trusteeFee + '%');
                     }else{
                         $('.productRateTrust').hide();
                     }
@@ -272,9 +297,17 @@ $(function() {
                     // 允许购买客户类型
                     if(jsonData.customerType == 0){
                         $('.clientType .changgeRight').html('机构');
-                    }else if(jsonData.customerType == 1){
+                    }
+                    else if(jsonData.customerType == 1){
                         $('.clientType .changgeRight').html('个人');
-                    }else{
+                    }
+                    else if(jsonData.customerType == 2){
+                        $('.clientType .changgeRight').html('产品');
+                    }
+                    else if(jsonData.customerType == 3){
+                        $('.clientType .changgeRight').html('不限');
+                    }
+                    else{
                         $('.clientType').hide();
                     }
                     // 允许购买客户等级
@@ -342,12 +375,89 @@ $(function() {
                     var jsonData = json.data;
                     that.data.custType = jsonData.accountType; // 客户类型【0.机构 1.个人】 
                     that.data.buyFreeze = jsonData.buyFreeze; // 是否冻结买入：0-否；1-是；
+                    that.data.isRiskEndure = jsonData.isRiskEndure;  // 是否风险测评 0-否 1-是
+                    if(that.data.isRiskEndure == 0 ){
+
+                    }
 
 
                 },
             }];
             $.ajaxLoading(obj);
 
+        },
+        //请求七日年化
+        getTypeTwoData: function( type,num ){
+            var that = this;
+            num = num ? num : 3;
+            var newData = {
+                // sevenIncomeRate: [], //存放折线图七日年化
+                profitThoudDate: [], //存放折线图收益日期
+                profitThoudValue: [] //存放折线图万份收益
+            }
+            //判断是否已经有数据了，有的话不再请求接口
+            if (num == 0 && that.data['qrnhWfsy'].oneMonth.profitThoudDate && that.data['qrnhWfsy'].oneMonth.profitThoudDate.length) {
+                //请求的是近一个月的数据
+                that.drawLine(type, that.data['qrnhWfsy'].oneMonth);
+                return false;
+            } else if (num == 1 && that.data['qrnhWfsy'].threeMonth.profitThoudDate && that.data['qrnhWfsy'].threeMonth.profitThoudDate.length) {
+                //近三个月
+                that.drawLine(type, that.data['qrnhWfsy'].threeMonth);
+                return false;
+            } else if (num == 2 && that.data['qrnhWfsy'].halfYear.profitThoudDate && that.data['qrnhWfsy'].halfYear.profitThoudDate.length) {
+                // 半年
+                that.drawLine(type, that.data['qrnhWfsy'].halfYear);
+                return false;
+            } else if (num == 3 && that.data['qrnhWfsy'].oneYear.profitThoudDate && that.data['qrnhWfsy'].oneYear.profitThoudDate.length) {
+                //近一年
+                that.drawLine(type, that.data['qrnhWfsy'].oneYear);
+                return false;
+            } else if (num == 4 && that.data['qrnhWfsy'].sinceNow.profitThoudDate && that.data['qrnhWfsy'].sinceNow.profitThoudDate.length) {
+                //成立至今
+                that.drawLine(type, that.data['qrnhWfsy'].sinceNow);
+                return false;
+            }
+            //没有数据，请求接口
+            var obj = [{
+                url: site_url.earningCurve_api, 
+                data: {
+                    projectId: that.data.projectId,
+                    profitRange: num 
+                },
+                needLogin: true,
+                callbackDone: function(json) {
+                    console.log(json)
+                    that.data.echartsClickFlag = false;
+                    var jsonData = json.data;
+                    //拼数据
+                    $.each( jsonData, function(i, el){
+                        // newData.sevenIncomeRate.push( el.sevenYearYield);
+                        newData.profitThoudDate.push( el.curveDate);
+                        newData.profitThoudValue.push( el.incomeUnit);
+                    })
+                    switch(Number(num)) {
+                        case 0: that.data['qrnhWfsy'].oneMonth = newData;break;
+                        case 1: that.data['qrnhWfsy'].threeMonth = newData;break;
+                        case 2: that.data['qrnhWfsy'].halfYear = newData;break;
+                        case 3: that.data['qrnhWfsy'].oneYear = newData;break;
+                        case 4: that.data['qrnhWfsy'].sinceNow = newData;break;
+                    }
+                    that.drawLine( type, newData);                  
+                },
+                callbackNoData: function(json) {
+                    that.data.echartsClickFlag = false;
+                    $("#qrnhLine").addClass("hide")
+                    $("#wfsyLine").addClass("hide")
+                    $(".noDataHintEcharts").removeClass("hide")
+                },
+                callbackFail: function(json) {
+                    that.data.echartsClickFlag = false;
+                    $("#qrnhLine").addClass("hide")
+                    $("#wfsyLine").addClass("hide")
+                    $(".noDataHintEcharts").removeClass("hide")
+                }
+            }];
+            $.ajaxLoading(obj);
         },
         //请求历史业绩走势
         getTypeOneData: function(type, num) {
@@ -375,26 +485,25 @@ $(function() {
                 days = '';
             }
 
-            //判断是否已经有数据了，有的话不再请求接口
-            if (num == 0 && that.data['qrnhWfsy'].oneMonth.profitThoudDate && that.data['qrnhWfsy'].oneMonth.profitThoudDate.length) {
+           if( num == 0 && that.data['dwjzljjz'].oneMonth.profitThoudDate && that.data['dwjzljjz'].oneMonth.profitThoudDate.length){
                 //请求的是近一个月的数据
-                that.drawLine(type, that.data['qrnhWfsy'].oneMonth);
+                that.drawLine( type, that.data['dwjzljjz'].oneMonth );
                 return false;
-            } else if (num == 1 && that.data['qrnhWfsy'].threeMonth.profitThoudDate && that.data['qrnhWfsy'].threeMonth.profitThoudDate.length) {
+            } else if( num == 1 && that.data['dwjzljjz'].threeMonth.profitThoudDate && that.data['dwjzljjz'].threeMonth.profitThoudDate.length){
                 //近三个月
-                that.drawLine(type, that.data['qrnhWfsy'].threeMonth);
+                that.drawLine( type, that.data['dwjzljjz'].threeMonth );
                 return false;
-            } else if (num == 2 && that.data['qrnhWfsy'].halfYear.profitThoudDate && that.data['qrnhWfsy'].halfYear.profitThoudDate.length) {
-                // 半年
-                that.drawLine(type, that.data['qrnhWfsy'].halfYear);
+            }else if( num == 2 && that.data['dwjzljjz'].halfYear.profitThoudDate && that.data['dwjzljjz'].halfYear.profitThoudDate.length){
+                //近三个月
+                that.drawLine( type, that.data['dwjzljjz'].halfYear );
                 return false;
-            } else if (num == 3 && that.data['qrnhWfsy'].oneYear.profitThoudDate && that.data['qrnhWfsy'].oneYear.profitThoudDate.length) {
+            } else if( num == 3 && that.data['dwjzljjz'].oneYear.profitThoudDate && that.data['dwjzljjz'].oneYear.profitThoudDate.length ){
                 //近一年
-                that.drawLine(type, that.data['qrnhWfsy'].oneYear);
+                that.drawLine( type, that.data['dwjzljjz'].oneYear );
                 return false;
-            } else if (num == 4 && that.data['qrnhWfsy'].sinceNow.profitThoudDate && that.data['qrnhWfsy'].sinceNow.profitThoudDate.length) {
+            } else if( num == 4 && that.data['dwjzljjz'].sinceNow.profitThoudDate && that.data['dwjzljjz'].sinceNow.profitThoudDate.length){
                 //成立至今
-                that.drawLine(type, that.data['qrnhWfsy'].sinceNow);
+                that.drawLine( type, that.data['dwjzljjz'].sinceNow );
                 return false;
             }
 
@@ -403,7 +512,7 @@ $(function() {
                 url: site_url.prvHisValue_api,
                 data: {
                     projectId: splitUrl['projectId'],
-                    days: '',
+                    days: days,
                     pageNo: '',
                     pageSize: '',
                 },
@@ -419,23 +528,25 @@ $(function() {
                         newData.profitThoudDate.push(el.netValueDate);
                     })
 
-                    switch (num) {
-                        case 0:
-                            that.data['qrnhWfsy'].oneMonth = newData;
+                    switch(Number(num)) {
+                        case 0: 
+                            that.data['dwjzljjz'].oneMonth = newData;
                             break;
-                        case 1:
-                            that.data['qrnhWfsy'].threeMonth = newData;
+                        case 1: 
+                            that.data['dwjzljjz'].threeMonth = newData;
+                            console.log(that.data['dwjzljjz'].threeMonth);
                             break;
                         case 2:
-                            that.data['qrnhWfsy'].halfYear = newData;
+                            that.data['dwjzljjz'].halfYear = newData;
                             break;
-                        case 3:
-                            that.data['qrnhWfsy'].oneYear = newData;
+                        case 3: 
+                            that.data['dwjzljjz'].oneYear = newData;
                             break;
-                        case 4:
-                            that.data['qrnhWfsy'].sinceNow = newData;
+                        case 4: 
+                            that.data['dwjzljjz'].sinceNow = newData;
                             break;
                     }
+
                     that.drawLine(type, newData);
                 }
             }];
@@ -577,7 +688,7 @@ $(function() {
 
         },
         // 查询产品亮点
-        queryProductImage: function() {
+        queryProductImage: function(productModule) {
             var that = this;
             //发送ajax请求
             var obj = [{
@@ -585,23 +696,31 @@ $(function() {
                 data: {
                     projectId: that.$e.projectId,
                     limitNum: '',
-                    productModule: '',
+                    productModule: productModule,
                 },
                 needLogin: true, //需要判断是否登陆
                 needDataEmpty: true, //需要判断data是否为空
                 callbackDone: function(json) { //成功后执行的函数
                     var json = json.data[0];
-                    if(json.imgPath == '' && json.features == ''){
-                        $('.lightPointCon').hide();
+                    if(productModule == 'netValueCycleAPP'){
+                        var features = json.features;
+                        if (features) {
+                            that.getElements.unitNetValueDes = features;
+                        }
+
                     }else{
-                        if (!json.imgPath) {
-                            if (json.features) {
-                                $(".lightPoint").html(json.features);
+                        if(json.imgPath == '' && json.features == ''){
+                            $('.lightPointCon').hide();
+                        }else{
+                            if (!json.imgPath) {
+                                if (json.features) {
+                                    $(".lightPoint").html(json.features);
+                                } else {
+                                    return false;
+                                }
                             } else {
-                                return false;
+                                $(".lightPoint img").attr("src", json.imgPath);
                             }
-                        } else {
-                            $(".lightPoint img").attr("src", json.imgPath);
                         }
                     }
 
@@ -666,7 +785,15 @@ $(function() {
                 jumpUrl = site_url.chooseQualifiedInvestor_url
             } else if (v.conditionJump == 7) { //跳转到合格投资者结果页面
                 jumpUrl = site_url.qualifiedInvestorResult_url
-            }
+            } else if (v.conditionJump == 11) { //跳转到进身份证上传页面
+                jumpUrl = site_url.realIdcard_url
+            } else if (v.conditionJump == 12) { //跳转到人脸识别页面
+                jumpUrl = site_url.realFaceCheck_url
+            } else if (v.conditionJump == 13) { //跳转到线下申请状态页面
+                jumpUrl = site_url.realOffline_url
+            } else if (v.conditionJump == 14) { //跳转到视频双录状态页面
+                jumpUrl = site_url.realVideoTranscribe_url
+            } 
             return jumpUrl;
         },
         // 客户预约产品所需条件
@@ -683,7 +810,6 @@ $(function() {
                 needLogin: true, //需要判断是否登陆
                 callbackDone: function(json) { //成功后执行的函数
                     that.data.canClick = true; //变为可点击
-                    //					generateTemplate(json.data,$("#real-condition"), that.$e.conditionTemplate);
                     var jsonData = json.data,
                         notice = "",
                         noticeObj = "",
@@ -748,50 +874,52 @@ $(function() {
                         })
 
                     });
-                    //发送ajax请求
-                    var ReourceListobj = [{
-                        url: site_url.queryReourceList_api,
-                        data: {
-                            projectId: that.$e.projectId,
-                            fileType: isPopup
-                        },
-                        contentTypeSearch: false,
-                        needLoading: true,
-                        needLogin: true, //需要判断是否登陆
-                        callbackDone: function(json) { //成功后执行的函数
-                            that.data.canClick = true; //变为可点击
-                            var data = json.data[0],
-                                noticeObj = data;
-                            if (!singleaAuthen) { //如果v.show都是0，则不展示预约框,跳转到相应链接
-                                $("#tips-wrap").hide();
-                                if (!!isPopup) { //如果弹售前告知书
-                                    var obj = {
-                                        title: '',
-                                        id: 'sellPop',
-                                        p: '<p class="" style="font-weight:bold;text-align:center">你选择的产品与您现在的风险承受能力相匹配</p>' +
-                                            '<p class="">请您认真阅读[' + noticeObj.fileName + ']' + that.data.productName + '并确认后继续购买该产品</p>',
-                                        yesTxt: '去阅读',
-                                        celTxt: '取消',
-                                        zIndex: 1200,
-                                        callback: function(t) {
-                                            window.location.href = site_url.downloadNew_api + "?filePath=" + noticeObj.fileUrl + "&fileName=" + new Base64().encode(noticeObj.fileName) + "&groupName=" +
-                                                noticeObj.groupName + "show=1 "
-                                        },
-                                    };
-                                    $.elasticLayer(obj)
-                                } else {
-                                    that.nextStep();
-                                }
-
-                            }
-                        },
-                        callbackFail: function(json) { //失败后执行的函数
-                            tipAction(json.message);
-                            that.data.canClick = true; //变为可点击
-
-                        }
-                    }];
-                    $.ajaxLoading(ReourceListobj);
+                    if(!!isPopup&&!singleaAuthen){//如果弹出售前告知书
+                    	
+	                    //发送ajax请求
+	                    var ReourceListobj = [{
+	                        url: site_url.queryReourceList_api,
+	                        data: {
+	                            projectId: that.$e.projectId,
+	                            fileType: isPopup
+	                        },
+	                        contentTypeSearch: false,
+	                        needLoading: true,
+	                        needLogin: true, //需要判断是否登陆
+	                        callbackDone: function(json) { //成功后执行的函数
+	                            that.data.canClick = true; //变为可点击
+	                            var data = json.data[0],
+	                                noticeObj = data;
+	                            if (!singleaAuthen) { //如果v.show都是0，则不展示预约框,跳转到相应链接
+	                                $("#tips-wrap").hide();
+	                                    var obj = {
+	                                        title: '',
+	                                        id: 'sellPop',
+	                                        p: '<p class="" style="font-weight:bold;text-align:center">你选择的产品与您现在的风险承受能力相匹配</p>' +
+	                                            '<p class="">请您认真阅读[' + noticeObj.fileName + ']' + that.data.productName + '并确认后继续购买该产品</p>',
+	                                        yesTxt: '去阅读',
+	                                        celTxt: '取消',
+	                                        zIndex: 1200,
+	                                        callback: function(t) {
+	                                            window.location.href = site_url.downloadNew_api + "?filePath=" + noticeObj.fileUrl + "&fileName=" + new Base64().encode(noticeObj.fileName) + "&groupName=" +
+	                                                noticeObj.groupName + "show=1 "
+	                                        },
+	                                    };
+	                                    $.elasticLayer(obj)
+	
+	                            }
+	                        },
+	                        callbackFail: function(json) { //失败后执行的函数
+	                            tipAction(json.message);
+	                            that.data.canClick = true; //变为可点击
+	
+	                        }
+	                    }];
+	                    $.ajaxLoading(ReourceListobj);
+                    }else if(!singleaAuthen){//如果不弹框且没有显示认证五步款则有以下步骤
+                    	
+                    	that.nextStep();
+                    }
 
 
                 },
@@ -867,8 +995,6 @@ $(function() {
                 },
                 callbackFail: function(json) {
                     //请求失败，
-                    //隐藏loading
-                    //that.getElements.listLoading.hide();
                     //显示错误提示
                     tipAction(json.message);
 
@@ -876,12 +1002,10 @@ $(function() {
                     setTimeout(function() {
                         // that.getElements.listLoading.hide();
                     }, 100);
-                    //return false;
                 },
                 callbackNoData: function(json) {
                     //没有数据
-                    // $id.find('.noData').show();
-
+                    $('.without.noData').show();
                     setTimeout(function() {
                         // that.getElements.listLoading.hide();
                     }, 100);
@@ -949,11 +1073,21 @@ $(function() {
                 $(this).addClass('active').siblings().removeClass('active');
                 $(".wrap>.panel").eq($(this).index()).addClass('active').siblings().removeClass('active');
                 var spanHeight = $('.clientLevel .changgeRight span').height();
-                    if(spanHeight > 50){
-                        $('.clientLevel .changgeRight').css({
-                            lineHeight:'0.5rem'
-                        })
-                    }
+                if(spanHeight > 50){
+                    $('.clientLevel .changgeRight').css({
+                        lineHeight:'0.5rem'
+                    })
+                }
+                // tab点击切换时请求接口
+                if($(this).index() == 1){
+                    // 募集账户信息
+                    that.collectAccount();
+
+                }else if($(this).index() == 2){
+                    // 获取标签
+                    that.queryReourceListByLabel();
+                    
+                }
             }, {
                 htmdEvt: 'privatePlacementDetail_01'
             });
@@ -996,6 +1130,35 @@ $(function() {
             }, {
                 htmdEvt: 'privatePlacementDetail_03'
             });
+            // 复制全部
+            mui("body").on('mdClick', '.copyAll', function(event) {
+                var $this = $(this);
+                var copyText = $('#name').text() + $('#number').text() + $('#linenum').text() + $('#openingBank').text();
+                    //实例化clipboard
+                var clipboard = new Clipboard('.copyAll', {
+                    text: function() {
+                        return copyText;
+                    }
+                });
+                clipboard.on("success", function(e) {
+                    //text = '';
+                    tipAction("复制成功");
+                });
+                clipboard.on("error", function(e) {
+                    tipAction("请选择“拷贝”进行复制!");
+                });
+                clipboard.onClick(event);
+
+            }, {
+                htmdEvt: 'privatePlacementDetail_04'
+            });
+            // 历史明细点击跳转
+            mui("body").on('mdClick', '#historyDetailBtn', function() {
+                // alert(site_url.historyDetail_url + '?projectId=' + that.$e.projectId);
+                window.location.href = site_url.historyDetail_url + '?projectId=' + that.$e.projectId;
+            }, {
+                'htmdEvt': 'privatePlacementDetail_05'
+            });
 
             // 立即预约
             mui("body").on('mdClick', '.buyButton', function() {
@@ -1023,8 +1186,33 @@ $(function() {
                 }
                 that.data.canClick = false;
             }, {
-                htmdEvt: 'privatePlacementDetail_04'
+                htmdEvt: 'privatePlacementDetail_06'
             });
+            // 点击产品材料
+            mui("body").on('mdClick', '.contentLink', function() {
+                var $this = $(this);
+                console.log($this.attr('href'))
+                window.location.href = $this.attr('href');
+            }, {
+                'htmdEvt': 'privatePlacementDetail_07'
+            });
+            mui("body").on('mdClick','.tipIcon',function(){
+                var $this = $(this);
+                var obj = {
+                    title: '帮助',
+                    id: 'tipIcon',
+                    p: that.getElements.unitNetValueDes,
+                    yesTxt: '知道了',
+                    zIndex: 100,
+                    hideCelButton: true, //为true时隐藏cel按钮，仅使用yes按钮的所有属性
+                    callback: function(t) {
+
+                    },
+                };
+                $.elasticLayer(obj)
+            },{
+                'htmdEvt': 'privatePlacementDetail_08'
+            })
         }
     };
     privatePlacementDetail.init();
