@@ -140,10 +140,12 @@ module.exports = function(file) {
         //判断是否为使命计划相关的文件
         var fileName = smjhDirArr.filter( (value, index) => {
 
-            console.log( 'file.path:' + file.path );
+            console.log( '有value:' + file.path.indexOf('\\' + value + '\\') );
 
             return file.path.indexOf('\\' + value + '\\') != -1;
         });
+
+        console.log('fileName: ' + fileName );
 
         if( file.path.indexOf('.js') != -1 ){
 
@@ -175,7 +177,7 @@ module.exports = function(file) {
 
             console.log('less文件：' + file.path);
 
-            console.log('fileName: ' + fileName );
+            
 
             if( fileName && fileName.length ){
                 //是使命计划相关文件
