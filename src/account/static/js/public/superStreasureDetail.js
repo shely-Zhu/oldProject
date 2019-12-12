@@ -86,7 +86,7 @@ $(function() {
                 grid: {
                     top: '10%',
                     left: '5%',
-                    right: '5%',
+                    right: '8%',
                     bottom: '10%',
                     containLabel: true
                 },
