@@ -77,7 +77,8 @@ module.exports = {
     //include---协议模板
     './include/js/modelPage/agreementModel': "./src/include/js/modelPage/agreementModel.js",
      //include---协议模板
-     './include/js/modelPage/agreementPreview': "./src/include/js/modelPage/agreementPreview.js",
+    // 协议模板
+    './allServerResources/model/static/js/agreementPreview' : './src/allServerResources/model/static/js/agreementPreview.js',
     //include---图片拼接模板
     './include/js/modelPage/imgModel': "./src/include/js/modelPage/imgModel.js",
     //include---专题模板
