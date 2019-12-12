@@ -1196,6 +1196,8 @@ $(function() {
                     },
                 };
                 $.elasticLayer(obj)
+            },{
+                'htmdEvt': 'privatePlacementDetail_08'
             })
         }
     };
