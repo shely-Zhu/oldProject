@@ -544,7 +544,7 @@ $(function() {
                             window.location.href = site_url.elecSecondStep_url + '?reserveId=' + reserveId + '&projectId=' + proId + '&projectName=' + projectName + '&isAllowAppend=' + isAllowAppend;
                         }
                     } else if (type == 'toSign') { //去签合同
-                        window.location.href = site_url.elecFourthStep_url + '?reserveId=' + reserveId + '&projectId=' + proId + '&projectName=' + projectName + '&isAllowAppend=' + isAllowAppend;
+                        window.location.href = site_url.elecThirdStep_url + '?reserveId=' + reserveId + '&projectId=' + proId + '&projectName=' + projectName + '&isAllowAppend=' + isAllowAppend;
                     } else if (type == 'toSee') { //查看合同
                         window.location.href = site_url.seeSign_url + '?reserveId=' + reserveId;
                     } else if (type == 'toUploadM') { //去上传汇款凭证
