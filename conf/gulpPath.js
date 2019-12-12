@@ -169,6 +169,8 @@ module.exports = function(file) {
 
             console.log('less文件：' + file.path);
 
+            console.log('fileName: ' + fileName );
+
             if( fileName && fileName.length ){
                 //是使命计划相关文件
                 for (var i in oldAppVar) {
