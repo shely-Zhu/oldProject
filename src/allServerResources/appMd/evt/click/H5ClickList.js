@@ -350,6 +350,7 @@ var clickList = {
 	// "starFinancia_search":{ type:'click', evtid: '', topic: '理财师查询', info: ''} ,
 	"starFinancia_05":{ type:'click', evtid: 'starFinancia_05', topic: '取消搜索', info: ''} ,
 	"starFinancia_06":{ type:'click', evtid: 'starFinancia_06', topic: '点击搜索框触发选中', info: ''} ,
+	"starFinancia_07":{ type:'click', evtid: 'starFinancia_07', topic: '返回上一页首页', info: ''} ,
 
 	/************************************** account start *************************************************/
 	//publicTradeDetail.hrml
