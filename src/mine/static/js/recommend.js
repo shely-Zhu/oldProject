@@ -13,12 +13,12 @@
 
 
 
-// require('../../../include/js/vendor/config.js');
+// require('../../../allServerResources/include/js//vendor/config.js');
 
 // //zepto模块 
-// require('../../../include/js/vendor/zepto/callback.js');
-// require('../../../include/js/vendor/zepto/deferred.js');
-// require('../../../include/js/vendor/mui/mui.picker.min.js');
+// require('../../../allServerResources/include/js//vendor/zepto/callback.js');
+// require('../../../allServerResources/include/js//vendor/zepto/deferred.js');
+// require('../../../allServerResources/include/js//vendor/mui/mui.picker.min.js');
 
 // require('../../../common/js/components/utils.js');
 // require('../../../common/js/ajaxLoading.js');
