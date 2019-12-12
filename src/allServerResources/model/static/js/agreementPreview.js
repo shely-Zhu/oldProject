@@ -1,30 +1,16 @@
+// pdfModel
 
-/*
- * @page: 通过id获取协议模板
- * @Author: purpleZhao
- * @Date:   2017-06-08 16:42:39
- * @description:本页面逻辑是所有通过id查询协议的模板结果详情页
- *              要求：需要通过地址栏将id传过来
- *
- *
- * 
- * @Last Modified by:   songxiaoyu
- * @Last Modified time: 2018-11-20 10:18:44
- * @description:恒小智，app里协议，需公募调用私募接口，这个接口需转发
- */
-require('../vendor/config.js');
+// $.noConflict();
+require('@pathIncludJs/vendor/config.js');
 
 //zepto模块
-require('../vendor/zepto/callback.js');
-require('../vendor/zepto/deferred.js');
+require('@pathIncludJs/vendor/zepto/callback.js'); 
+require('@pathIncludJs/vendor/zepto/deferred.js'); 
 
-//黑色提示条
-var tipAction = require('../../../common/js/components/tipAction.js');
-require('../../../common/js/components/utils.js');
-require('../../../common/js/ajaxLoading.js');
-var splitUrl = require('../../../common/js/components/splitUrl.js')();
+require('@pathCommonJs/ajaxLoading.js');
 
-
+require('@pathCommonJsCom/headBarConfig.js');
+var splitUrl = require('@pathCommonJsCom/splitUrl.js')();
 $(function() {
 
     var model = {

@@ -316,7 +316,7 @@ module.exports = function() {
     this.queryFortuneCollegeFir_api = http_url.web_url + '/account/home/frontend/queryFortuneCollegeFir'; //财富翻译官/早知道
 
     this.getFortuneTabInfo_api = http_url.web_url + '/account/home/frontend/getFortuneTabInfo'; // 财富讲堂/财富研究 页签查询
-    this.queryFortuneArticleList_api = http_url.web_url + '/account/home/frontend/queryFortuneArticleList'; // 财富文章列表
+//  this.queryFortuneArticleList_api = http_url.web_url + '/account/home/frontend/queryFortuneArticleList'; // 财富文章列表
 
     //已报名活动
     this.getApplyActivity_api = http_url.web_url + '/marketing/activity/getApplyActivity';

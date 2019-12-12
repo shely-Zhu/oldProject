@@ -50,7 +50,7 @@ module.exports = function() {
     this.resetPassword_url = go_url.cft_url + '/user/views/forgetLoginPassword/resetPassword.html';
 
     //协议模板
-    this.agreementModel_url = go_url.no_url + '/include/views/agreementModel.html';
+    this.agreementModel_url = go_url.no_url + '/allServerResources/include/views/agreementModel.html';
 
     //首页
     this.index_url = go_url.no_url + '/index/views/index.html';
@@ -141,9 +141,9 @@ module.exports = function() {
     this.cashXml_url = go_url.no_url + '/cashTreasure/views/cashXml.html';
 
     //实名认证下的三个协议
-    this.tradeserviceAgreement_url = go_url.no_url + '/include/views/agreementModel.html?id=81';
-    this.investorinterests_url = go_url.no_url + '/include/views/agreementModel.html?id=82';
-    this.bankAuthorization_url = go_url.no_url + '/include/views/agreementModel.html?id=83';
+    this.tradeserviceAgreement_url = go_url.no_url + '/allServerResources/include/views/agreementModel.html?id=81';
+    this.investorinterests_url = go_url.no_url + '/allServerResources/include/views/agreementModel.html?id=82';
+    this.bankAuthorization_url = go_url.no_url + '/allServerResources/include/views/agreementModel.html?id=83';
 
     /*----------------------------------------投资者分类 start----------------------------------*/
     //分类页面
@@ -291,7 +291,7 @@ module.exports = function() {
     // 在线客服-第三方地址
     this.onlineCustomer_url = go_url.onlineCustomer_url+'/webchat/jsp/standard/interfacePools.jsp?queue=106&device=mobile';
     // 在线客服中转页
-    this.onlineCustomerTransfer_url = go_url.cft_url+ '/include/views/onlineCustomer.html';
+    this.onlineCustomerTransfer_url = go_url.cft_url+ '/allServerResources/include/views/onlineCustomer.html';
     // app中私募首页，视频直播跳转路径
     this.videoPlay_url = go_url.no_url + '/productPrivate/views/videoPlay.html';
 
