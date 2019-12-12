@@ -345,6 +345,7 @@ $(function () {
                 $('.trade_status_area .trade_status_icon_1').css('background', 'url(/common/img/public_trade_detail_no_check.png)').css('background-size', '100%');
             }
             if (that.gV.isCash){//现金宝
+                console.log(model,"这是什么")
                 if (that.gV.isBuy){
                     $('.trade_status_area .trade_status_desc').eq(0).html("提交转入申请");
                     $('.trade_status_area .trade_status_desc').eq(1).html("开始计算收益");
