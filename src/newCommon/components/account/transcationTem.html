@@ -1,0 +1,327 @@
+<script id="trans-template" type="text/x-handlebars-template">
+    {{#each this}}
+    <!---------- 申购状态 ---------->
+    <!-- 待确认的预约明细=已确认的申购 -->
+    {{#if businessType01}}
+    <!----- 已确认 预约成功 预约撤销 预约过期  预约失败----->
+    {{#if isConfirmTrans}}
+    <!-- 预约成功 -->
+    {{#if businessTypeSucc}}
+    <div class="transList" data-projectid="{{projectId}}">
+        <!-- 名称 -->
+        <div class="listName">{{projectName}}</div>
+        <!-- 名称 -->
+        <!-- 金额 -->
+        <div class="clearfix listCon">
+            <div class="listItem">
+                <p>确认份额(份)</p>
+                <span>{{confirmShare}}</span>
+            </div>
+            <div class="listItem">
+                <p>确认金额(元)</p>
+                <span>{{confirmAmount}}</span>
+            </div>
+            <div class="listItem">
+                <p>确认日期</p>
+                <span>{{confirmDate}}</span>
+            </div>
+        </div>
+        <!-- 金额 -->
+        {{#if businessType0}}
+        <!-- 认购图片 -->
+        <div class="typeImg rg"></div>
+        <!-- 认购图片 -->
+        {{else if businessType1}}
+        <!-- 申购图片 -->
+        <div class="typeImg sg"></div>
+        <!-- 申购图片 -->
+        {{/if}}
+    </div>
+    <!-- 预约成功 -->
+    {{else}}
+    <!-- 预约撤销 预约过期  预约失败 -->
+    <div class="transList" data-projectid="{{projectId}}">
+        {{#if leftTopStatusDesc}}
+        <div class="statusTip">{{leftTopStatusDesc}}</div>
+        {{/if}}
+        <!-- 名称 -->
+        <div class="listName mt30">{{projectName}}</div>
+        <!-- 名称 -->
+        <!-- 金额 -->
+        <div class="clearfix listCon">
+            <div class="listItem">
+                <p>预约金额(元)</p>
+                <span>{{reserveAmount}}</span>
+            </div>
+            <div class="listItem">
+                <p>预约时间</p>
+                <span>{{reserveTime}}</span>
+            </div>
+            <div class="listItem">
+                <p>理财师</p>
+                <span>{{empName}}</span>
+            </div>
+        </div>
+        <!-- 金额 -->
+        <!-- 预约图片 -->
+        <div class="typeImg yy"></div>
+        <!-- 预约图片 -->
+    </div>
+    <!-- 预约撤销 预约过期  预约失败 -->
+    {{/if}} {{/if}}
+    <!----- 未确认 ----->
+    {{#if notConfirmTrans}}
+    <div class="transList" data-projectid="{{projectId}}">
+        {{#if leftTopStatusDesc}}
+        <div class="statusTip">{{leftTopStatusDesc}}</div>
+        {{/if}}
+        <!-- 名称 -->
+        <div class="listName mt30">{{projectName}}</div>
+        <!-- 名称 -->
+        <!-- 金额 -->
+        <div class="clearfix listCon">
+            <div class="listItem">
+                <p>预约金额(元)</p>
+                <span>{{reserveAmount}}</span>
+            </div>
+            <div class="listItem">
+                <p>预约时间</p>
+                <span>{{reserveTime}}</span>
+            </div>
+            <div class="listItem">
+                <p>理财师</p>
+                <span>{{empName}}</span>
+            </div>
+        </div>
+        <!-- 金额 -->
+        <!-- 进度 -->
+        <div class="toolCon clearfix">
+            {{#if reserveStatusTip}} {{#if appointmentSuccess}}
+            <span class="tipImg iconfont success">&#xe638;</span> {{else if appointmentFailed}}
+            <span class="tipImg iconfont">&#xe637;</span> {{else}}
+            <span class="tipImg iconfont">&#xe649;</span> {{/if}} {{else}}
+            <span class="tipImg tipImgTip iconfont">&#xe645;</span> {{/if}}
+            <!-- 左下角状态文字 -->
+            {{#if leftBottomStatusDesc}}
+            <!-- 如果弹框里有内容 -->
+            {{#if reserveStatusTip}}
+            <span class="openTip">{{leftBottomStatusDesc}}</span><span style="display:none" class="tipContent">{{reserveStatusTip}}</span>
+            <!-- 如果弹框里有内容 -->
+            {{else}}
+            <span>{{leftBottomStatusDesc}}</span> {{/if}} {{/if}}
+            <!-- 左下角状态文字 -->
+
+            <!-- 功能按钮 -->
+            {{#if appointmentToAuthentication}}
+            <div class="toDetail blueBgButton" type="toCertif" data-type="{{isForElec}}" data-projectid="{{projectId}}" data-projectname="{{projectName}}" data-firstorappend="{{firstOrAppend}}" data-reserveid="{{reserveId}}" data-isqualified="{{isQualified}}" data-ispubtopri="{{paymentType}}">合格投资者认证</div>
+            {{else if appointmentToSign}}
+            <div class="toDetail blueBgButton" type="toSign" data-projectid="{{projectId}}" data-projectname="{{projectName}}" data-firstorappend="{{firstOrAppend}}" data-reserveid="{{reserveId}}" data-ispubtopri="{{paymentType}}">签署合同</div>
+            {{else if appointmentToSee}}
+            <div class="toDetail blueBgButton" type="toSee" data-projectid="{{projectId}}" data-reserveid="{{reserveId}}">查看合同</div>
+            {{else if appointmentToUpload}}
+            <div class="toDetail blueBgButton" type="toUploadM" data-projectid="{{projectId}}" data-projectname="{{projectName}}" data-firstorappend="{{firstOrAppend}}" data-reserveid="{{reserveId}}" data-ispubtopri="{{paymentType}}">上传汇款凭证</div>
+            {{else if appointmentToDown}}
+            <div class="toDetail blueBgButton" type="reAppointment" data-projectid="{{projectId}}" data-projectname="{{projectName}}" data-firstorappend="{{firstOrAppend}}" data-reserveid="{{reserveId}}">重新预约</div>
+            {{/if}}
+            <!-- 功能按钮 -->
+            <!-- 取消预约按钮 -->
+            {{#if appointmentCancel}}
+            <div class="cancelBtn goldBorderButton" data-type="appointment" data-projectid="{{projectId}}" data-reserveid="{{reserveId}}">取消预约</div>
+            {{/if}}
+            <!-- 取消预约按钮 -->
+
+        </div>
+        <!-- 进度 -->
+        <!-- 预约图片 -->
+        <div class="typeImg yy"></div>
+        <!-- 预约图片 -->
+    </div>
+    {{/if}}
+    <!---------- 申购状态 ---------->
+    <!---------- 赎回状态 ---------->
+    {{else if businessTypeRedeem}}
+    <!-- 赎回状态分为待确认和已确认共3中状态。待确认只有审核通过一种状态；已确认有两种状态：成功(左上角文字不展示)和审核驳回 -->
+    <div class="transList" data-projectid="{{projectId}}">
+        {{#if leftTopStatusDesc}}
+        <div class="statusTip">{{leftTopStatusDesc}}</div>
+        <!-- 有描述 -->
+        <div class="listName mt30">{{projectName}}</div>
+        {{else}}
+        <!-- 无描述 -->
+        <div class="listName">{{projectName}}</div>
+        {{/if}}
+        <!-- 名称 -->
+        <!-- 金额 -->
+        <div class="clearfix listCon">
+            <div class="listItemHalf">
+                <p>赎回份额(份)</p>
+                <span>{{redeemPortion}}</span>
+            </div>
+            <div class="listItem">
+                <p>赎回申请日期</p>
+                <span>{{redeemDate}}</span>
+            </div>
+        </div>
+        <!-- 金额 -->
+        <!-- 赎回图片 -->
+        <div class="typeImg sh"></div>
+        <!-- 赎回图片 -->
+    </div>
+    <!---------- 赎回状态 ---------->
+    <!---------- 分红状态 ---------->
+    <!-- 待确认里没有分红 -->
+    {{else if businessTypeBonus}}
+    <div class="transList" data-projectid="{{projectId}}">
+        <!-- 名称 -->
+        <div class="listName">{{projectName}}</div>
+        <!-- 名称 -->
+        <!-- 金额 -->
+        <div class="clearfix listCon">
+            <div class="listItem">
+                <p>确认份额(份)</p>
+                <span>{{confirmShare}}</span>
+            </div>
+            <div class="listItem">
+                <p>确认金额(元)</p>
+                <span>{{confirmAmount}}</span>
+            </div>
+            <div class="listItem">
+                <p>确认日期</p>
+                <span>{{confirmDate}}</span>
+            </div>
+        </div>
+        <!-- 金额 -->
+        <!-- 分红图片 -->
+        <div class="typeImg fh"></div>
+        <!-- 分红图片 -->
+    </div>
+    <!---------- 分红状态 ---------->
+    {{else if businessType3}}
+    <!---------- 转让状态 ---------->
+    <div class="transList" data-projectid="{{projectId}}">
+        {{#if leftTopStatusDesc}}
+        <div class="statusTip">{{leftTopStatusDesc}}</div>
+        {{/if}}
+        <!-- 右上角文字 -->
+        <div class="textTip">
+            <!-- 签约中状态里显示 -->
+            <span>转让方：</span> {{#if assignVideoStatus}}
+            <span>已双录</span> {{else}}
+            <span>未双录</span> {{/if}}
+            <span>受让方：</span> {{#if assigneeVideoStatus}}
+            <span>已双录</span> {{else}}
+            <span>未双录</span> {{/if}}
+
+        </div>
+        <!-- 右上角文字 -->
+        <!-- 名称 -->
+        <div class="listName mt30">{{projectName}}</div>
+        <!-- 名称 -->
+        <div class="benchmark">业绩比较基准{{businessCompareReferenceMask}}</div>
+        <!-- 金额 -->
+        <div class="clearfix listCon">
+            <div class="listItem">
+                <p>转让份额(份)</p>
+                <span>{{assignShare}}</span>
+            </div>
+            <div class="listItem">
+                <p>拟转让价格(元)</p>
+                <span>{{assignAmount}}</span>
+            </div>
+            <div class="listItem">
+                <p>成交价格</p>
+                <span>{{doneAmount}}</span>
+            </div>
+        </div>
+        <!-- 金额 -->
+        <!-- 创建时间 -->
+        <div class="creatTime">创建时间：{{assignDate}}</div>
+        <!-- 创建时间 -->
+        <!-- 进度 -->
+        <div class="toolCon clearfix">
+            <span class="tipImg"></span> {{#if assignStep}}
+            <span>当前进度{{assignStep}}/6</span> {{else}}
+            <span>当前进度已截止</span> {{/if}}
+            <a href="">查看具体情况</a>
+            <div class="blueBgButton toDetail toView" data-type="assign">详情</div>
+            {{#if assignCancel}}
+            <div class="goldBorderButton cancelBtn" data-type="assign" data-projectid="{{projectId}}" data-reserveid="{{reserveId}}">取消转让</div>
+            {{/if}} {{#if assignObj}}
+            <div class="toDetail blueBgButton chooseObj" data-type="assign" data-projectid="{{projectId}}" data-reserveid="{{reserveId}}">选择受让方</div>
+            {{/if}} {{#if assignToVideo}}
+            <div class="toDetail blueBgButton toVideo" data-type="assign" data-projectid="{{projectId}}" data-reserveid="{{reserveId}}">视频双录</div>
+            {{/if}}
+        </div>
+        <!-- 进度 -->
+        <!-- 转让图片 -->
+        <div class="typeImg zr"></div>
+        <!-- 转让图片 -->
+    </div>
+    <!---------- 转让状态 ---------->
+
+    {{else if businessType4}}
+    <!---------- 受让状态 ---------->
+    <div class="transList" data-projectid="{{projectId}}">
+        <!-- 左上角小框 -->
+        {{#if leftTopStatusDesc}}
+        <div class="statusTip">{{leftTopStatusDesc}}</div>
+        {{/if}}
+        <!-- 左上角小框 -->
+        {{#if signing}}
+        <!-- 右上角文字 -->
+        <div class="textTip">
+            <!-- 签约中状态里显示 -->
+            <span>转让方：</span> {{#if assignVideoStatus}}
+            <span>已双录</span> {{else}}
+            <span>未双录</span> {{/if}}
+            <span>受让方：</span> {{#if assigneeVideoStatus}}
+            <span>已双录</span> {{else}}
+            <span>未双录</span> {{/if}}
+
+        </div>
+        <!-- 右上角文字 -->
+        {{/if}}
+        <!-- 名称 -->
+        <div class="listName mt30">{{projectName}}</div>
+        <!-- 名称 -->
+        <!-- 金额 -->
+        <div class="clearfix listCon">
+            <div class="listItem">
+                <p>受让份额(份)</p>
+                <span>{{assigneeShare}}</span>
+            </div>
+            <div class="listItem">
+                <p>拟交易价格(元)</p>
+                <span>{{assigneeAmount}}</span>
+            </div>
+            <div class="listItem">
+                <p>成交价格</p>
+                <span>{{doneAmount}}</span>
+            </div>
+        </div>
+        <!-- 金额 -->
+        <!-- 创建时间 -->
+        <div class="creatTime">创建时间：{{assigneeDate}}</div>
+        <!-- 创建时间 -->
+        <!-- 进度 -->
+        <div class="toolCon clearfix">
+            <span class="tipImg"></span> {{#if assigneeStep}}
+            <span>当前进度{{assigneeStep}}/6</span> {{else}}
+            <span>当前进度已截止</span> {{/if}}
+            <a href="">查看具体情况</a>
+            <div class="blueBgButton toDetail" data-type="toView">详情</div>
+            {{#if assigneeCancel}}
+            <div class="goldBorderButton cancelBtn" data-type="assignee" data-id="{{projectId}}">取消受让</div>
+            {{/if}} {{#if assigneeToVideo}}
+            <div class="toDetail blueBgButton" data-type="toVideo" data-id="{{projectId}}">视频双录</div>
+            {{/if}}
+        </div>
+        <!-- 进度 -->
+        <!-- 受让图片 -->
+        <div class="typeImg sr"></div>
+        <!-- 受让图片 -->
+    </div>
+    <!---------- 受让状态 ---------->
+
+    {{/if}} {{/each}}
+</script>

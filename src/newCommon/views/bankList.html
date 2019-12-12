@@ -1,0 +1,52 @@
+<!-- /**  
+ * @Page:  银行卡列表的模板
+ * @Author: songxiaoyu  
+ * @Date:   2018-10-16 16:04:54  
+ * @Last Modified by:   songxiaoyu  
+ * @Last Modified time: 2018-11-29 16:26:16  
+ *
+ * 购买基金第一步payFundStepOne
+ * 恒小智购买页面 buyCombination
+ * 私募预约页面 prdPrvSure
+ *
+ * 公募加密账号是将原来的bankAccount字段变成了加密的
+ * 账户相关接口是新增了bankAccountSecret这个字段，注意
+ * 
+ */ -->
+<script id="bankList-template" type="text/x-handlebars-template">
+    {{! actionWrap class，标识当前是折叠区域}} {{! actionList class，标识是折叠区域的列表}}
+    <div class="actionWrap">
+        {{#each list}} 
+        	{{#if hide}} 
+	        	{{! 有hide属性的时候，说明当前条需要隐藏，添加hide class}} 
+	        	{{! 当前label是多行，添加lineMore class}}
+		        <ul class="mui-table-view mui-radio lineMore hide actionList">
+		            <li class="mui-table-view-cell">
+		                <label>
+		                    <p class="dark name">{{bankName}}({{banknum}})</p>
+		                    <p class="limitMoney">单笔限额{{singleNumMask}}，当日限额{{oneDayNumMask}}</p>
+		                </label>
+
+		                <input name="bankList" type="radio" capitalMode="{{capitalMode}}" singleNum="{{singleNum}}" tradeAcco="{{tradeAcco}}" bankAccount="{{bankAccountSecret}}" bankName="{{bankName}}" bankNo="{{bankNo}}" bankAccountMask="{{bankAccountMask}}" subBranch="{{subBranch}}" accountName="{{accountName}}" />
+		            </li>
+		        </ul>
+        	{{else}} 
+	        	{{! 不需要隐藏 }} 
+	        	{{#if more}}
+		        	<ul class="mui-table-view mui-radio lineMore actionList">
+		        {{else}} {{! 没有更多按钮的时候，添加noMoreList class，以去掉下边框}}
+		            <ul class="mui-table-view mui-radio lineMore actionList noMoreList">
+		         {{/if}}
+	                <li class="mui-table-view-cell">
+	                    <label singleNum="{{singleNum}}">
+	                        <p class="dark name">{{bankName}}({{banknum}})</p>
+	                        <p class="limitMoney">单笔限额{{singleNumMask}}，当日限额{{oneDayNumMask}}</p>
+	                    </label>
+	                    <input name="bankList" type="radio" capitalMode="{{capitalMode}}" singleNum="{{singleNum}}" tradeAcco="{{tradeAcco}}" bankAccount="{{bankAccountSecret}}" bankName="{{bankName}}" bankNo="{{bankNo}}" bankAccountMask="{{bankAccountMask}}" subBranch="{{subBranch}}" accountName="{{accountName}}" />
+	                </li>
+	            </ul>
+        	{{/if}} 
+        {{/each}}
+    </div>
+    {{! 有more的时候，显示收起按钮}} {{#if more}} @@include('../../common/views/openOrClose.html') {{/if}}
+</script>

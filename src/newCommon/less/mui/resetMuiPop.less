@@ -1,0 +1,53 @@
+/**
+*  重置MUI popPicker样式
+* @author yangjinlai 2017-02-16
+ */
+
+.mui-poppicker{
+    background-color: @c005;
+    border-top: none;
+    box-shadow: none;
+    
+    .mui-poppicker-header{
+        padding: 0;
+        height: 0.8rem;
+        line-height: 0.8rem;
+        
+        .mui-btn{
+            width: auto;
+            border-radius: 0;
+            background: transparent;
+            font-size: 0.28rem;
+            padding: 0;
+            display: block;
+            height: 100%;
+            line-height: 100%;
+            margin: 0;
+            margin-left: 0.32rem;
+            color: @c003;
+                
+        }
+        .mui-poppicker-btn-ok{
+            margin-right: 0.32rem;
+            background: transparent;
+            color: @0E98FC; 
+        }
+    }
+    
+    .mui-picker{
+        background-color: @c005;
+        
+        .mui-pciker-list{
+            
+            li{
+                font-size: 0.28rem;
+                color: @c003;
+                
+                &.highlight{
+                    color: @c002;
+                }   
+            }
+            
+        }
+    }
+}

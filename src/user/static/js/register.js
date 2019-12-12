@@ -9,7 +9,6 @@
  * @description: 3.新增理顾工号参数, brokerNo, trackModule跟踪模块,新增服务理财师模块展示
  */
 
-require('@pathCommonBase/base.js');
 
 require('../../../include/js/vendor/config.js');
 //zepto模块--callback

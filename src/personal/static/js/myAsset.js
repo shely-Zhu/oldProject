@@ -178,7 +178,7 @@ $(function(){
                     if( data.data.totalAssets == "0.00" ){
                         $(".dingBtn").hide();
                     }
-                }
+                },
                      
             }];
             $.ajaxLoading(obj);

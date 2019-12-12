@@ -17,6 +17,6 @@ var prvPic={
 			var dom=document.getElementsByClassName('pic_img');
 			    dom[0].setAttribute("src",src);
 	
-	}
+	},
 }
 prvPic.init()

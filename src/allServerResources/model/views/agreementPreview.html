@@ -1,0 +1,39 @@
+<!-- 用户服务协议模板 -->
+<!-- 其中title标签中文案是需要上一个页面传参过来，同时请求接口的id入参也是上一页面需要带过来的 -->
+<!-- author：purpleZhao
+time：2017.6.8 -->
+<!doctype html>
+<html lang="en">
+<head>
+	@@include('@pathInclude/views/meta.html')
+	<link rel="stylesheet" href="/include/css/agreementPreview.css">
+	<title></title>
+</head>
+<body>
+    @@include('@pathCommonViews/load.html')
+	<div class="container">
+		<div class="HeadBarConfigBox" id="HeadBarConfigBox">
+			<a href="javascript:;" class="iconfont backBtn"  id="goBack">&#xe634;</a>
+			<span id="HeadBarpathName"></span>
+			<!-- <a href="javascript:;" class="iconfont" id="uploadService" download>下载</a> -->
+		</div>
+		<div class="zhanweifu">
+		
+		</div>
+		<section id="openPdf">
+			
+			<section id="canvasBox">
+				<!-- canvas容器 -->
+			</section>
+			
+		</section>
+
+	</div>
+	
+</body>
+ 
+ @@include('@pathInclude/views/footer.html')
+
+<script src="/include/js/vendor/pdf/pdf.js"></script>
+<script src="/include/js/modelPage/agreementPreview.js"></script>
+</html>
