@@ -510,6 +510,7 @@ $(function() {
             //     })
             //点击状态文字出现弹框
             mui("body").on('mdClick', '.openTip', function(e) {
+                    event.stopPropagation();
                     $('.mask').show();
                     $('#tipConOne').show();
                     var conText = $(this).siblings('tipContent').html;
@@ -548,15 +549,15 @@ $(function() {
                             window.location.href = site_url.elecSecondStep_url + '?reserveId=' + reserveId + '&projectId=' + proId + '&projectName=' + projectName + '&isAllowAppend=' + isAllowAppend + '&isPubToPri=' + isPubToPri;
                         }
                     } else if (type == 'toSign') { //去签合同
-                        window.location.href = site_url.elecFourthStep_url + '?reserveId=' + reserveId + '&projectId=' + proId + '&projectName=' + projectName + '&isAllowAppend=' + isAllowAppend + '&isPubToPri=' + isPubToPri;
+                        window.location.href = site_url.elecThirdStep_url + '?reserveId=' + reserveId + '&projectId=' + proId + '&projectName=' + projectName + '&isAllowAppend=' + isAllowAppend + '&isPubToPri=' + isPubToPri;
                     } else if (type == 'toSee') { //查看合同
                         window.location.href = site_url.seeSign_url + '?reserveId=' + reserveId;
                     } else if (type == 'toUploadM') { //去上传汇款凭证
                         window.location.href = site_url.elecFourthStep_url + '?reserveId=' + reserveId + '&projectId=' + proId + '&projectName=' + projectName + '&isAllowAppend=' + isAllowAppend + '&isPubToPri=' + isPubToPri;
                     } else if (type == 'toView') { //详情
-
+                        window.location.href = site_url.privatePlacementDetail_url + '?projectId=' + proId
                     } else if (type == 'toVideo') { //视频双录
-
+                        window.location.href = site_url.realVideoTranscribe_url;
                     } else if (type == 'toDown') { //下载电子合同
 
                     } else if (type == 'reAppointment') { //重新预约
