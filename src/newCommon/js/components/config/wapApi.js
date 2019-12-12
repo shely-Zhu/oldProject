@@ -94,7 +94,17 @@ module.exports = function () {
     // 基金诊断-点击获取专属诊断报告
     this.exclusiveDiagnosisReport_api = http_url.wapApi_url + '/pof/fundDiagnosis/exclusiveDiagnosisReport';
     // 基金诊断字典接口
-    this.queryDictionary_api = http_url.wapApi_url + '/pof/frontend/fundDiagnosis/queryDictionary';
+    this.queryDictionary_api = http_url.wapApi_url + '/pof/frontend/fundDiagnosis/queryDefinitions';
+    //基金账户诊断优化-提交新增申请前的数据回显
+    this.addBeforeFundDiagnosisApply_api = http_url.wapApi_url + '/pof/fundDiagnosis/addBeforeFundDiagnosisApply';
+    //基金账户诊断优化-提交基金诊断申请记录
+    this.addFundDiagnosisApply_api = http_url.wapApi_url + '/pof/fundDiagnosis/addFundDiagnosisApply';
+    //基金账户诊断优化-所有基金诊断申请记录
+    this.queryAllByCustomerNo_api = http_url.wapApi_url + '/pof/fundDiagnosis/queryAllByCustomerNo';
+    //基金账户诊断优化-查询基金诊断申请详情
+    this.queryFundDiagnosisApplyInfo_api = http_url.wapApi_url + '/pof/fundDiagnosis/queryFundDiagnosisApplyInfo';
+    //基金账户诊断优化-修改基金诊断申请记录
+    this.updateFundDiagnosisApply_api = http_url.wapApi_url + '/pof/fundDiagnosis/updateFundDiagnosisApply';
 
     /*------------------------------基金诊断end------------------------------------------*/
 
