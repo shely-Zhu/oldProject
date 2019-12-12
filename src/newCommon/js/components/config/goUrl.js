@@ -41,7 +41,7 @@ module.exports = function() {
     //协议模板
     this.agreementModel_url = go_url.no_url + '/include/views/agreementModel.html';
      //《基金合同》《招募说明书》协议模板
-     this.agreementPreview_url = go_url.no_url + '/include/views/agreementPreview.html';
+     this.agreementPreview_url = go_url.no_url + '/allServerResources/model/views/agreementPreview.html';
 
     //实名认证下的三个协议
     this.tradeserviceAgreement_url = go_url.no_url + '/include/views/agreementModel.html?id=81';
