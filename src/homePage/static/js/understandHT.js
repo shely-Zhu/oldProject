@@ -24,8 +24,7 @@ $(function() {
 			var that = this;
 			$(".tabBar b").eq(that.gV.sortType*1).addClass('borderBottom');
 			$(".tabBar a").eq(that.gV.sortType*1).addClass('mui-active');
-			that.getTemplateData(that.gV.articleBelong,that.gV.sortType)
-//			$(".mui-slider .mui-control-item").eq(that.gV.sortType*1).click();
+			that.getTemplateData(that.gV.articleBelong,that.gV.sortType);
 			mui('.mui-slider').slider().gotoItem(that.gV.sortType*1,0) //默认点击
 			that.events()
 			that.initMui()
@@ -33,6 +32,7 @@ $(function() {
 		//初始化mui的上拉加载
 		initMui: function() {
 			var that = this;
+			that.getTitleData();
 			mui.init();
 			//模拟点击对应的type。定位到当前type下
 			
