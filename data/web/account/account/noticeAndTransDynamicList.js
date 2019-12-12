@@ -13,7 +13,7 @@ var data=Mock.mock({
 	data: { 
         total: 10,
         pages: 2,
-        "list|0": [{
+        "list|5": [{
             id: 1,
             mesType: 1,
             mesTitle: '关于恒天财富APP升级的公告',

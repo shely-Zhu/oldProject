@@ -25,7 +25,7 @@ var tipAction = require('../../../common/js/components/tipAction.js');
 var Base64 = require('../../../include/js/vendor/base64/base64.js');
 //恒天财富部分组件判断显示与隐藏
 require('../../../common/js/components/chtwm/ifChtwm.js');
-$(function () {
+$(function() {
 
     var dataLists = {
 
@@ -48,17 +48,17 @@ $(function () {
             errorTip: $(".againEnter"), //错误提示
             listLoading: $('.listLoading'), //所有数据区域，第一次加载的loading结构
             aptn: $(".aptn"), //去预约按钮
-            emptyBox: $('#emptyBox'), //没有数据默认显示区块
+            emptyBox : $('#emptyBox'), //没有数据默认显示区块
         },
 
-        webinit: function () {
+        webinit: function() {
             var that = this;
 
             /*页面初始化加载数据ajax请求*/
             that.getList();
         },
 
-        getList: function () {
+        getList: function() {
             var that = this;
 
             //请求jjs持仓明细入参
@@ -71,7 +71,7 @@ $(function () {
                 url: site_url.jjsAssetsDetail_api, //jjs持仓明细列表
                 data: param,
                 needLogin: true, //需要判断是否登陆
-                callbackDone: function (json) { //成功后执行的函数
+                callbackDone: function(json) { //成功后执行的函数
                     //jjs列表数据请求成功
                     if (!$.util.objIsEmpty(json.data.pageList)) {
 
@@ -94,13 +94,13 @@ $(function () {
                         that.getElements.emptyBox.show(); //没有数据显示状态
                     }
                 },
-                callbackFail: function (data) {
+                callbackFail: function(data) {
                     tipAction(data.msg);
                 }
             }, {
                 url: site_url.getTotalAssets_api, //查询总资产 从中拿到jjs的资产
                 data: {},
-                callbackDone: function (json) {
+                callbackDone: function(json) {
                     //拿到jjs资产并填充界面
                     that.getElements.totalCount.html(json.data.jJSAssets);
                 },
@@ -109,7 +109,7 @@ $(function () {
             $.ajaxLoading(obj);
         },
 
-        pageAction: function () {
+        pageAction: function() {
             var that = this;
 
             //设置可拉动区域的高度
@@ -121,14 +121,14 @@ $(function () {
             //下拉加载更多
             var obj = {
                 //isGoTop : false,//不显示回到顶部
-                callback: function () { //下拉分页的回调函数
+                callback: function() { //下拉分页的回调函数
                     that.upPage();
                 }
             }
             $.slideFullPage(obj); //初始化                  
 
         },
-        upPage: function () {
+        upPage: function() {
             var that = this;
 
             if (that.flag == false) {
@@ -139,7 +139,7 @@ $(function () {
                         pageSize: "10", //每页记录数
                     },
                     async: false, //同步
-                    callbackDone: function (json) { //成功后执行的函数
+                    callbackDone: function(json) { //成功后执行的函数
                         //jjs列表数据请求成功
                         var tplm = $("#dataLists").html();
                         var template = Handlebars.compile(tplm);
@@ -157,7 +157,7 @@ $(function () {
 
                         $('#pullUp').css('visibility', 'hidden');
                     },
-                    callbackFail: function (data) {
+                    callbackFail: function(data) {
                         tipAction(data.msg);
                     }
                 }];

@@ -56,14 +56,12 @@ author: sunfuping 2018-12-5
 <script id="scroll_box_list_template" type="text/x-handlebars-template">
 {{#each this}}
 	{{#compareTwo enjoy}}
-	<!-- <a class="icoBox"  onclick="window.location.href=site_url.agreementModel_url+'?id={{id}}&rightsCenter';"> -->
-	<a href="javascript:;" class="icoBox"  onclick="setGoUrl(site_url.agreementModel_url+'?id={{id}}&rightsCenter', '')">
+	<a class="icoBox"  onclick="window.location.href=site_url.agreementModel_url+'?id={{id}}&rightsCenter';">
 		<div class="ico"><img src="{{iconUnlock}}" alt=""></div>
 		<div class="discrb">{{rightName}}</div>
 	</a>
 	{{else}}
-	<!-- <a class="icoBox" onclick="window.location.href=site_url.agreementModel_url+'?id={{id}}&rightsCenter';"> -->
-	<a href="javascript:;" class="icoBox" onclick="setGoUrl(site_url.agreementModel_url+'?id={{id}}&rightsCenter', '')">
+	<a class="icoBox" onclick="window.location.href=site_url.agreementModel_url+'?id={{id}}&rightsCenter';">
 		<div class="ico"><img src="{{iconLocked}}" alt=""></div>
 		<div class="discrb">{{rightName}}</div>
 	</a>

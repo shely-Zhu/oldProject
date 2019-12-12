@@ -33,11 +33,6 @@ if (appId || getCookie('appId')) {
     //是，设置全局变量currentIsApp为true
     window.currentIsApp = true;
 }
-// 判断移动端设备
-var u = navigator.userAgent,
-    app = navigator.appVersion;
-window.isAndroid = u.indexOf('Android') > -1 || u.indexOf('Linux') > -1; //g
-window.isIOS = !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/); //ios终端
 /*********************************这里判断是否为app end****************************************/
 
 
@@ -107,7 +102,12 @@ var mock_server = "http://localIp:8088", //前端本地开发时，接口调用�
     // 在线客服
     onlineCustomer_test = "http://172.16.196.43:9080",
     onlineCustomer_haomaojf = "http://zxkf.haomalljf.com",
-    onlineCustomer_online = "http://zxkf.chtwm.com";
+    onlineCustomer_online = "http://zxkf.chtwm.com",
+
+    // 营销活动
+    recommend_test = "https://172.16.162.190:8011",
+    recommend_haomaojf = "https://wx.uata.haomalljf.com",
+    recommend_online = "https://wx.chtwm.com";
 
 
 //这是app时，存储本地cookie时的domain
@@ -139,17 +139,18 @@ var originFund_public = '', //公募
  * 
  */
 window.go_url = {
-        no_url: '',
-        oauth_url: '', // oauth跳转域名
-        apps_url: '', //app私募跳转域名
-        pofapp_url: '', //app私募跳转域名
-        wap_url: '', //wap跳转域名
-        cft_url: '', // 股份(财富)域名
-        wm_url: '', // 股份(财富)二级页面跳转域名
-        rock_url: '', //中岩域名
-        sso_url: ''
-    }
-    /***********************跳转链接 域名配置 end*****************************/
+    no_url: '',
+    oauth_url: '', // oauth跳转域名
+    apps_url: '', //app私募跳转域名
+    pofapp_url: '', //app私募跳转域名
+    wap_url: '', //wap跳转域名
+    cft_url: '', // 股份(财富)域名
+    wm_url: '', // 股份(财富)二级页面跳转域名
+    rock_url: '', //中岩域名
+    sso_url: '',
+    marketCampaign_url:'',
+}
+/***********************跳转链接 域名配置 end*****************************/
 
 /*
  * 针对不同环境设置不同域名
@@ -188,6 +189,7 @@ if (!window.currentIsApp) {
         go_url.cft_url = chtwm_local; // 财富域名
         go_url.oauth_url = oauth_local_test; // 跳转地址需要
         go_url.onlineCustomer_url = onlineCustomer_test; // 在线客服
+        go_url.marketCampaign_url = recommend_test;  // 营销活动
 
         if (envOrigin == 0) {
             //明泽
@@ -231,6 +233,7 @@ if (!window.currentIsApp) {
         go_url.cft_url = chtwm_test; //恒天财富的域名
         go_url.oauth_url = oauth_local_test; // oauth域名
         go_url.onlineCustomer_url = onlineCustomer_test; // 在线客服
+        go_url.marketCampaign_url = recommend_test;  // 营销活动
 
 
         if (envOrigin == 0) {
@@ -275,6 +278,7 @@ if (!window.currentIsApp) {
         go_url.cft_url = chtwm_haomaojf; //恒天财富的域名
         go_url.oauth_url = oauth_haomaojf;
         go_url.onlineCustomer_url = onlineCustomer_haomaojf; // 在线客服
+        go_url.marketCampaign_url = recommend_haomaojf;  // 营销活动
 
         if (envOrigin == 0) {
             //明泽
@@ -319,6 +323,7 @@ if (!window.currentIsApp) {
         go_url.cft_url = chtwm_online; //恒天财富的域名
         go_url.oauth_url = oauth_online; // oauth域名
         go_url.onlineCustomer_url = onlineCustomer_online; // 在线客服
+        go_url.marketCampaign_url = recommend_online;  // 营销活动
 
         if (envOrigin == 0) {
             //明泽
@@ -357,6 +362,7 @@ if (!window.currentIsApp) {
     if (env == 1) {
         go_url.oauth_url = oauth_local_test;
         d_url = d_url_local;
+        go_url.marketCampaign_url = recommend_test;  // 营销活动
         if (envOrigin == 0) {
             //明泽
             originFund_public = pofapp_url; //app服务器中的公募域名
@@ -372,6 +378,7 @@ if (!window.currentIsApp) {
     if (env == 2) {
         go_url.oauth_url = oauth_local_test;
         d_url = d_url_test;
+        go_url.marketCampaign_url = recommend_test;  // 营销活动
         if (envOrigin == 0) {
             //明泽
             originFund_public = pofapp_test; //app服务器中的公募域名
@@ -387,6 +394,7 @@ if (!window.currentIsApp) {
     if (env == 3) {
         go_url.oauth_url = oauth_haomaojf;
         d_url = d_url_haomaojf;
+        go_url.marketCampaign_url = recommend_haomaojf;  // 营销活动
         if (envOrigin == 0) {
             //明泽
             originFund_public = pofapp_haomaojf;
@@ -403,6 +411,7 @@ if (!window.currentIsApp) {
     if (env == 4) {
         go_url.oauth_url = oauth_online;
         d_url = d_url_online;
+        go_url.marketCampaign_url = recommend_online;  // 营销活动
         if (envOrigin == 0) {
             //明泽
             originFund_public = pofapp_online;
@@ -434,15 +443,12 @@ if (!window.currentIsApp) {
  */
 
 window.http_url = {
-    wapApi_url: '/wap', // wap接口
+    pof_url: '/wap/pof', //公募接口
+    pef_url: '/wap/pef', //私募接口
+    content_url: '/wap/content', // 内容接口
+    account_url: '/wap/account', // 账户接口
     web_url: '/web', // 账户接口
-    app_url: '/app', // App接口,
-    webPof_url: '/web/pof' //私募理财
-        // pof_url: '/wap/pof', //公募接口
-        // pef_url: '/wap/pef', //私募接口
-        // content_url: '/wap/content', // 内容接口
-        // account_url: '/wap/account', // 账户接口pef_url
-
+    app_url: '/app'// App接口
 }
 
 

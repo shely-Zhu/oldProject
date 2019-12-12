@@ -1,0 +1,45 @@
+.app {
+  width: 100%;
+  height: 4.9rem;
+  position: fixed;
+  bottom: 0;
+  background-color: rgba(51, 51, 51, 0.8);
+}
+.app.between {
+  justify-content: space-between;
+}
+.app .leftBox {
+  height: 3rem;
+  margin-left: 3.2rem;
+}
+.app .leftBox .icon {
+  margin-right: 0.8rem;
+}
+.app .leftBox .icon .iconfont {
+  font-size: 2.8rem;
+  color: #f4cf5c;
+}
+.app .leftBox .intr {
+  color: #fff;
+}
+.app .leftBox .intr .more {
+  font-size: 1.2rem;
+}
+.app .leftBox .intr .less {
+  font-size: 1rem;
+}
+.app .rightBox {
+  width: 7.5rem;
+  background-color: #f4cf5c;
+  height: 2.5rem;
+  margin-right: 2rem;
+  border-radius: 0.3rem;
+}
+.app .close {
+  position: absolute;
+  top: 0.6rem;
+  left: 0.6rem;
+}
+.app .close .iconfont {
+  color: #fff;
+}
