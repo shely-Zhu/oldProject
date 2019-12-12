@@ -22,7 +22,7 @@ $(function(){
          $e:{
             cashListConList:$("#cashListConList"), //模板列
             cashListCon:$("#cashListCon"), //模板容器
-
+            fundValue:$(".topCon .fundValue")
          },
          queryFundTransferAssets:function(){
              var that = this;
@@ -31,20 +31,48 @@ $(function(){
                  needDataEmpty:true,
                  callbackDone:function(json){
                      var data = json.data;
-                     if(data){
-                         console.log("成功")
-                        generateTemplate(data, that.$e.cashListCon, that.$e.cashListConList);
+                     debugger
+                     if(json.status == '0000'){
+                       that.$e.fundValue.html(data.enableAssetsStr)
+                       data.list.forEach(function(item){
+                        item.currentAmountStr = item.currentAmount.toFixed(2);
+                        item.currentShareStr = item.currentShare.toFixed(2);
+                        item.enableShareStr = item.enableShare.toFixed(2);
+                       });
+                        
+                       that.totalAssets(data.list)
                      }
                    
                  }
              }];
              $.ajaxLoading(obj);
          },
-
-        webinit: function () {
+         totalAssets:function(data){
+            var that = this;
+            var obj =[{
+                url:site_url.pofTotalAssets_api,
+                needDataEmpty:true,
+                callbackDone:function(json){
+                    var list = json.data;
+                    debugger
+                    if(json.status == '0000'){
+                    //   that.$e.fundValue.html(data.enableAssetsStr)
+                    //   data.list.forEach(function(item){
+                    //    item.currentAmountStr = item.currentAmount.toFixed(2);
+                    //    item.currentShareStr = item.currentShare.toFixed(2);
+                    //    item.enableShareStr = item.enableShare.toFixed(2);
+                    //   });
+                       // generateTemplate(data.list, that.$e.cashListCon, that.$e.cashListConList);
+                    }
+                  
+                }
+            }];
+            $.ajaxLoading(obj);
+         },
+         webinit: function () {
 			var that = this;
 	        that.queryFundTransferAssets()
-		},
+		 },
      }
      //调用函数
 	regulatory.webinit();
