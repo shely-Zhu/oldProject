@@ -799,7 +799,9 @@ $(function () {
 				value: '140000',
 				text: '每日',
 			}]
-			 that.getNextCutPayment()
+			if(that.gV.type == 'add'){
+				that.getNextCutPayment()
+			}
 			// 周期选择
 			mui("body").on('mdClick', '#starttime', function () {
 				popPicker(2, list, that.$el.cycleDate , that.getNextCutPayment);
@@ -903,7 +905,6 @@ $(function () {
 			
 			//确定
 			mui("body").on("mdClick",'.btn_box .btn',function(){
-				$("#transformInput").blur()
 				if(!!that.gV.minValue){
 					if(Number(that.gV.balance) < Number(that.gV.minValue)){
 						tipAction('最小买入金额不能低于' + that.gV.minValue + '元')
@@ -997,6 +998,20 @@ $(function () {
 				window.location.href = site_url.agreementPreview_url + '?link=' + link +'&type=' + $(this).attr('type')
 			}, {
 				htmdEvt: 'ordinarySetThrow_17'
+			}) ;
+
+			//  ---
+			mui("body").on('mdClick','.container',function(e){
+				// debugger
+				var o = e.target || e.srcElement;//当前点击对象
+					if (o != document.getElementById("transformInput")) {
+						//隐藏键盘操作
+						$("#transformInput").blur()
+					}else{
+						$("#transformInput").focus()
+					}
+			}, {
+				htmdEvt: 'fundTransformIn_18'
 			}) ;
 
 		},
