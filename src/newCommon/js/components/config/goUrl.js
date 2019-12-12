@@ -493,6 +493,8 @@ module.exports = function() {
     this.fortuneFlowKnown_url = go_url.no_url + '/homePage/views/fortuneCollege/fortuneFlowKnown.html';
     //财富讲堂
     this.fortuneClassroom_url = go_url.no_url + '/homePage/views/fortuneCollege/fortuneClassroom.html';
+    //查看往期热词
+    this.pastHotWords_url = go_url.no_url + '/homePage/views/fortuneCollege/pastHotWords.html';
     //财富研究
     this.wealthResearch_url = go_url.no_url + '/homePage/views/fortuneCollege/wealthResearch.html';
     //其他资产页面

@@ -32,8 +32,6 @@ $(function() {
             // 存放ajax请求地址  已进行  已结束
             ajaxArr: [], //存放每一个ajax请求的传参数据
             custCode: '',
-            shareImg: '',
-            shareTitle: '',
 
         },
         init: function() {
@@ -129,8 +127,6 @@ $(function() {
                         }
 
                     } else {
-                        that.gV.shareImg = json.data.activityVOPageInfo.list.htjfGeneralizeImgUrl;
-                        that.gV.shareTitle = json.data.activityVOPageInfo.list.actName;
                         json.data.activityVOPageInfo.list.map(function(e) {
                             e.enterTime = that.getMyDate(parseInt(e.enterTime))
                             e.arriveTime = that.getMyDate(parseInt(e.arriveTime))
@@ -178,7 +174,7 @@ $(function() {
 
 
         //分享给好友
-        shareInfo: function(actId, actType) {
+        shareInfo: function(actId, actType, title, iconimg) {
             var that = this;
             var obj = [{
                 url: site_url.shareInfo_api,
@@ -194,10 +190,10 @@ $(function() {
                     var wxShare = {
                             type: 'auto',
                             businessType: 'activityShare', //业务类型
-                            title: that.gV.shareTitle,
+                            title: title,
                             des: '邀请好友，分享精彩',
                             link: data,
-                            img: that.gV.shareImg,
+                            img: iconimg,
                         }
                         // window.isAndroid是在root文件中定义的变量
                     if (window.isAndroid) {
@@ -240,7 +236,9 @@ $(function() {
             mui('body').on('mdClink', '.timeBtn', function() {
                 var actId = $(this).attr('data-actId');
                 var actType = $(this).attr('data-actType');
-                that.shareInfo(actId, actType);
+                var title = $(this).attr('data-actName');
+                var iconimg = $(this).attr('data-htjfGeneralizeImgUrl');
+                that.shareInfo(actId, actType, title, iconimg);
             }, {
                 'htmdEvt': 'activityEnrolment_02'
             });
