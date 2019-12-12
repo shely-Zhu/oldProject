@@ -1140,7 +1140,7 @@ $(function() {
             });
             // 历史明细点击跳转
             mui("body").on('mdClick', '#historyDetailBtn', function() {
-                alert(site_url.historyDetail_url + '?projectId=' + that.$e.projectId);
+                // alert(site_url.historyDetail_url + '?projectId=' + that.$e.projectId);
                 window.location.href = site_url.historyDetail_url + '?projectId=' + that.$e.projectId;
             }, {
                 'htmdEvt': 'privatePlacementDetail_05'
