@@ -17,7 +17,7 @@ var generateTemplate = require('@pathCommonJsComBus/generateTemplate.js');
 $(function(){
      var regulatory = {
          gv:{
-              
+              list:[]
          },
          $e:{
             cashListConList:$("#cashListConList"), //模板列
@@ -31,38 +31,50 @@ $(function(){
                  needDataEmpty:true,
                  callbackDone:function(json){
                      var data = json.data;
-                     debugger
                      if(json.status == '0000'){
-                       that.$e.fundValue.html(data.enableAssetsStr)
-                       data.list.forEach(function(item){
-                        item.currentAmountStr = item.currentAmount.toFixed(2);
-                        item.currentShareStr = item.currentShare.toFixed(2);
-                        item.enableShareStr = item.enableShare.toFixed(2);
-                       });
-                        
-                       that.totalAssets(data.list)
+                        that.$e.fundValue.html(data.enableAssetsStr)
+                        that.gv.list = data.list
+                        that.gv.list.forEach(function(item){
+                            item.currentAmountStr = item.currentAmount.toFixed(2);
+                            item.currentShareStr = item.currentShare.toFixed(2);
+                            item.enableShareStr = item.enableShare.toFixed(2);
+                            that.newfundDetails(item)
+                        });
+                        setTimeout(function(){
+                            $(".listLoading").hide()
+                            generateTemplate(that.gv.list, that.$e.cashListCon, that.$e.cashListConList);
+                        },2000)
                      }
                    
                  }
              }];
              $.ajaxLoading(obj);
          },
-         totalAssets:function(data){
+         newfundDetails:function(item){
+            var that = this;
+            var obj =[{
+                url:site_url.newfundDetails_api,
+                data: {
+					"fundCode":item.fundCode
+				},
+				needDataEmpty: true,
+                callbackDone:function(json){
+                    var data = json.data;
+                    if(json.status == '0000'){
+                        item.annYldRat = data.annYldRat + '%'
+                    }
+                }
+            }];
+            $.ajaxLoading(obj);
+         },
+         totalAssets:function(){
             var that = this;
             var obj =[{
                 url:site_url.pofTotalAssets_api,
                 needDataEmpty:true,
                 callbackDone:function(json){
                     var list = json.data;
-                    debugger
                     if(json.status == '0000'){
-                    //   that.$e.fundValue.html(data.enableAssetsStr)
-                    //   data.list.forEach(function(item){
-                    //    item.currentAmountStr = item.currentAmount.toFixed(2);
-                    //    item.currentShareStr = item.currentShare.toFixed(2);
-                    //    item.enableShareStr = item.enableShare.toFixed(2);
-                    //   });
-                       // generateTemplate(data.list, that.$e.cashListCon, that.$e.cashListConList);
                     }
                   
                 }
@@ -70,7 +82,8 @@ $(function(){
             $.ajaxLoading(obj);
          },
          webinit: function () {
-			var that = this;
+            var that = this;
+            $(".listLoading").show()
 	        that.queryFundTransferAssets()
 		 },
      }
