@@ -79,8 +79,8 @@ for (var m in oldPathVar) {
     
 }
 
-console.log( 'oldAppVar');
-console.log( oldAppVar );
+// console.log( 'oldAppVar');
+// console.log( oldAppVar );
 
 
 //newPath是webpack打包时，原key和现在key的对应，使用老配置路径修改
@@ -167,10 +167,17 @@ module.exports = function(file) {
             //     fileCon = fileCon.replace(re, relativePath + oldAppVar[i]);
             // }
 
+            console.log('less文件：' + file.path);
+
             if( fileName && fileName.length ){
                 //是使命计划相关文件
                 for (var i in oldAppVar) {
                     var re = new RegExp( i, 'g');
+
+                    console.log('替换re' + re );
+
+                    console.log('替换的路径：' + relativePath + oldAppVar[i]);
+
                     fileCon = fileCon.replace(re, relativePath + oldAppVar[i]);
                 }
             }
