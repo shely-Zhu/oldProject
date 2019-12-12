@@ -169,7 +169,7 @@ $(function() {
         },
         events: function() { //绑定事件
             var that = this;
-            alwaysAjax($('.mui-table-view-cell'));
+            alwaysAjax($('.contentWrapper'));
             mui("body").on('mdClick', '.hopper', function(e) {
                     $('.mask').show();
                     $('.hopperCon').show();
@@ -186,13 +186,13 @@ $(function() {
                     $('.hopperCon').hide();
                     that.gV.businessType = $(this).attr('data');
                     // 重置上拉加载
-                    mui('.contentWrapper').pullRefresh().refresh(true);
                     that.gV.aP.pageNum = 1;
                     that.getElements.contentWrap.html('');
                     //重新初始化
-                    that.getElements.listLoading.show();
+                    // that.getElements.listLoading.show();
+                    // debugger
                     that.getData(that.gV.aThis);
-                    mui('.contentWrapper').pullRefresh().scrollTo(0, 0, 0);
+                    // mui('.contentWrapper').pullRefresh().scrollTo(0, 0, 0);
                 }, {
                     'htmdEvt': 'tobeConfirmTransaction_1'
                 })
