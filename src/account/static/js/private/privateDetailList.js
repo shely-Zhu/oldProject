@@ -565,6 +565,7 @@ $(function() {
 
                     }
 
+
                 }, {
                     'htmdEvt': 'privateDetailList_6'
                 })

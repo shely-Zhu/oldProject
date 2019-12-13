@@ -230,8 +230,6 @@ $(function() {
 
                 var obj = [{
                     url: site_url.cityList_api,
-                    // url:'http://172.16.187.164:8081/web/marketing/activity/cityList',
-                    //async: false,
                     needDataEmpty: true,
                     needLoading: true,
                     callbackDone: function(json) {
@@ -282,8 +280,6 @@ $(function() {
                 var that = this;
                 var obj = [{
                     url: site_url.getCity_api,
-                    // url:'http://172.16.187.164:8081/web/marketing/frontend/getCity',
-                    //async: false,
                     needDataEmpty: true,
                     callbackDone: function(json) {
                         var data = json.data;

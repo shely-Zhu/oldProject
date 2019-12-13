@@ -176,7 +176,6 @@ module.exports = function() {
         //上传图片
     this.upload_api = http_url.web_url + '/content/file/upYun/upload'
 
-    this.getCity_api = http_url.web_url + '/marketing/frontend/getCity';
 
     /*------------------- 私募 start ------------------------------*/
     //私募历史明细
