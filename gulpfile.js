@@ -820,8 +820,20 @@ function changeCommonImg(file) {
     return file;
 }
 
+
+gulp.task("commonHtml", function( cb ) {
+
+    pump([
+        gulp.src(['src/common/views/**/*.html']),
+
+        gulp.dest( 'middle/js/common/views')
+
+    ], cb)
+})
+
+
 //html文件打包
-gulp.task('html', function(cb) {
+gulp.task('html', ['commonHtml'],  function(cb) {
 
     pump([
         gulp.src(['src/**/views/**/*.html', '!src/common/views/**/*.html', '!src/newCommon/views/**/*.html']), //- 读取 rev-manifest.json 文件以及需要进行css名替换的文件
