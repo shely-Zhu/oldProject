@@ -12,7 +12,7 @@ var Mock = require('mockjs');
 //1. 积分
 var data = Mock.mock({ 
     "hmac": "hmac", 
-    "status": "0", 
+    "status": "0000", 
     "code": "CS0000", 
     "msg": "处理成功！", 
     "data": {

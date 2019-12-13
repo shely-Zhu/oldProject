@@ -11,27 +11,11 @@
  * @description: 推荐有礼大改版
  */
 
-
-
-// require('../../../allServerResources/include/js//vendor/config.js');
-
-// //zepto模块 
-// require('../../../allServerResources/include/js//vendor/zepto/callback.js');
-// require('../../../allServerResources/include/js//vendor/zepto/deferred.js');
-// require('../../../allServerResources/include/js//vendor/mui/mui.picker.min.js');
-
-// require('../../../common/js/components/utils.js');
-// require('../../../common/js/ajaxLoading.js');
-// require('../../../common/js/components/elasticLayerTypeTwo.js');
 require('@pathIncludJs/vendor/mui/mui.picker.min.js');
-//zepto模块--callback
-require('@pathIncludJs/vendor/zepto/callback.js');
-//zepto模块--deferred
-require('@pathIncludJs/vendor/zepto/deferred.js');
 require('@pathCommonJs/ajaxLoading.js');
 require('@pathCommonBase/base.js');
-var tipAction = require('../../../common/js/components/tipAction.js');
-var popPicker = require('../../../common/js/components/popPicker.js');
+var tipAction = require('@pathCommonJsCom/tipAction.js');
+var popPicker = require('@pathCommonJsCom/popPicker.js');
 var generateTemplate = require('@pathCommonJsComBus/generateTemplate.js');
 $(function() {
     var recommend = {
@@ -248,6 +232,14 @@ $(function() {
                 needLogin: true,
                 needDataEmpty: false,
                 callbackDone: function(json) {
+                    var wxShare={
+                        'type': sharingType,     // auto 原生自己分享框  wechatMoments 朋友圈   friends 朋友
+                        'businessType': '',   //life,业务类型
+                        'title': '',    //标题
+                        'des': '',   //简介
+                        'link': '',   //链接
+                        'img':'',   // 图标
+                    }
 
                     if (json.data.recommendable == 1) {
                         // 未实名认证
@@ -258,15 +250,23 @@ $(function() {
                         $(".recommendBoxUserName").html(json.data.oldName)
                         // 已实名认证
                         
-                        aesEncrypt = json.data.aesEncrypt;
                         //拼分享出去的链接
-                        shareUrl = site_url.newRecommend_url + '?url=' + aesEncrypt;
+                        shareUrl = site_url.marketCampaign_url + '&shareCustomerNo=' + that.customerNo + '&shareEmpCode=' + num;
+
+                        wxShare.link = shareUrl;
+
                         // 生成二维码
                         that.generateQrcode(shareUrl)
 
                         //如果是app--设置ldxShare的值--- 需要拼凑对应的链接
                         if (window.currentIsApp) {
-                            $('#ldx_share').attr('src', 'ldxShare://' + shareUrl + '&sharingType=' + sharingType);
+                            // $('#ldx_share').attr('src', 'ldxShare://' + shareUrl + '&sharingType=' + sharingType);
+                            if(window.isAndroid){
+                                window.jsObj.wxShare(wxShare)
+                            }
+                            if(window.isIOS){
+                                window.webkit.messageHandlers.wxShare.postMessage(wxShare)
+                            }
                         }
 
                         //如果是微信内打开--处理微信分享
