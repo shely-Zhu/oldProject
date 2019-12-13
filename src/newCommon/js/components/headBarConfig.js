@@ -127,6 +127,7 @@ $(function() {
             })
             //跳转客服页面
         $("#customerService").on("click", function() {
+            debugger
             var obj = [{
                 url: site_url.getToken_api,
                 data: {},
@@ -134,7 +135,7 @@ $(function() {
                 callbackDone: function(json) {
                     var token = json.data.token;
                     // 跳转第三方客服地址
-                    window.location.href = site_url.onlineCustomer_url + '&token=' + token;
+                    window.location.href =site_url.onlineCustomer_url + '&token=' + token;
                 },
             }];
             $.ajaxLoading(obj);

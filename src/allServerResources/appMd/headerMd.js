@@ -56,8 +56,12 @@
 		   			//除了埋点底层文件中配置的公用参数外，本项目埋点需要的其他参数，作为otherParam传过去，如没有可不传
         	   		// otherParams: pcParam
 		   		}
+
+		   		if( window.location.indexOf('account/views/productFiles.html') != -1){
+		   			window._htmd(mdObj);
+		   		}
 		
-				// window._htmd(mdObj);
+				
 
 
 
