@@ -149,6 +149,7 @@ window.go_url = {
     rock_url: '', //中岩域名
     sso_url: '',
     marketCampaign_url:'',
+    onlineCustomer_url:''//在线客服
 }
 /***********************跳转链接 域名配置 end*****************************/
 
@@ -185,7 +186,7 @@ if (!window.currentIsApp) {
     //此时为wap，不是app
 
     //env=1 ---------  wap的前后端调试环境
-    if (env == 1) {
+    if (env == 1 || env == 5 ) {
         go_url.cft_url = chtwm_local; // 财富域名
         go_url.oauth_url = oauth_local_test; // 跳转地址需要
         go_url.onlineCustomer_url = onlineCustomer_test; // 在线客服
@@ -359,7 +360,7 @@ if (!window.currentIsApp) {
     //此时是app
 
     //env=1不存在 ---------  app中h5没有联调环境，只能上测试和app进行联调
-    if (env == 1) {
+    if (env == 1|| env == 5) {
         go_url.oauth_url = oauth_local_test;
         d_url = d_url_local;
         go_url.marketCampaign_url = recommend_test;  // 营销活动

@@ -95,7 +95,7 @@ $(function(){
         events:function(){
             var that = this;
             //点击下载按钮，显示弹框  
-            mui("body").on('tap', '.downLoad', function() {
+            mui("body").on('mdClick', '.downLoad', function() {
             	if(that.data.email){//如果有邮箱
 	                var objHave={
 	                    title:'',
@@ -174,7 +174,7 @@ $(function(){
                 'htmdEvt': 'privateFundPdf_0'
             })
             // 点击去修改邮箱
-            mui("body").on('tap', '#changeMail', function() {
+            mui("body").on('mdClick', '#changeMail', function() {
             	// 调用原生方法，或者原生拦截连接
             	window.location.href = site_url.changeMail_url;
             },{
