@@ -162,6 +162,8 @@ $(function () {
 							element.singleNum_w = Number(element.singleNum)/10000 + '万'
 							element.oneDayNum_w = Number(element.oneDayNum)/10000 + '万'
 						});
+						$(".listLoading").hide()
+						$('.popup').css('display','block')
 						generateTemplate(data, that.$el.popupUl, that.$el.bankListTemplate,true);
 						that.$el.popupUl2.html('')
 						if(useEnv == '0'){
@@ -204,8 +206,6 @@ $(function () {
 						data.forEach(function(element){
 							element.after4Num = element.bankAccout.substr(element.bankAccout.length -4)
 						});
-						$(".listLoading").hide()
-						$('.popup').css('display','block')
 						generateTemplate(data, that.$el.popupUl2, that.$el.bankListTemplate2,true);
 						
 					}
