@@ -106,6 +106,10 @@ $(function() {
                             }
                         } else {
                             $(".fixedIncome .netValue").html(businessCompareReferenceMin + "%-" + businessCompareReferenceMax + "%");
+                            console.log($(".fixedIncome .netValue").html().length)
+                            if($(".fixedIncome .netValue").html().length>7){
+                                $(".fixedIncome .netValue").css({"font-size":'0.4rem',"display":"inline-block","margin-top":"0.2rem"})
+                            }
                         }
                     } else if (jsonData.incomeModeJF == '1') { //1浮收普通   展示历史业绩走势
                         // 头部不同的展示
