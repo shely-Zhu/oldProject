@@ -458,6 +458,7 @@ var clickList = {
 	"activityDetails_4":{ type:'click', evtid: 'activityDetails_4', topic: '关闭大弹框', info: ''},
 	"activityDetails_5":{ type:'click', evtid: 'activityDetails_5', topic: '分享好友', info: ''},
 	"activityDetails_6":{ type:'click', evtid: 'activityDetails_6', topic: '我知道了按钮', info: ''},
+	"activityDetails_7":{ type:'click', evtid: 'activityDetails_7', topic: '查看奖励按钮', info: ''},
 
 	/************************************** life end *************************************************/
 }
