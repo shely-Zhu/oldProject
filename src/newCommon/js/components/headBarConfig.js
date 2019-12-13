@@ -72,7 +72,7 @@ $(function() {
         //传人样式判断展示形式 
         if ($headBarConfigBox.attr('showType') == '1') {
             var colors = $headBarConfigBox.attr('bgColors').split(",")
-            // ClearStyle()
+            ClearStyle()
             $('.zhanweifu').css('display', 'none')
             // $(window).scroll(function() {
             //     var tops = $(this).scrollTop();
@@ -83,7 +83,6 @@ $(function() {
             //         ClearStyle()
             //     }
             // });
-            $("#HeadBarConfigBox").css({ "background": colors, "color": "#fff" });
             // 设置返回按钮和title的颜色
             var goBackColor = $("#HeadBarConfigBox a").attr('goBackColor');
             var titleColor = $("#HeadBarConfigBox span").attr('titleColor');
@@ -128,7 +127,6 @@ $(function() {
             })
             //跳转客服页面
         $("#customerService").on("click", function() {
-            debugger
             var obj = [{
                 url: site_url.getToken_api,
                 data: {},
@@ -136,7 +134,7 @@ $(function() {
                 callbackDone: function(json) {
                     var token = json.data.token;
                     // 跳转第三方客服地址
-                    window.location.href =site_url.onlineCustomer_url + '&token=' + token;
+                    window.location.href = site_url.onlineCustomer_url + '&token=' + token;
                 },
             }];
             $.ajaxLoading(obj);
