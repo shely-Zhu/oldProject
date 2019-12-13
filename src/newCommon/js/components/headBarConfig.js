@@ -72,17 +72,18 @@ $(function() {
         //传人样式判断展示形式 
         if ($headBarConfigBox.attr('showType') == '1') {
             var colors = $headBarConfigBox.attr('bgColors').split(",")
-            ClearStyle()
+            // ClearStyle()
             $('.zhanweifu').css('display', 'none')
-            $(window).scroll(function() {
-                var tops = $(this).scrollTop();
-                if (tops > 50) { //当window的scrolltop距离大于50时，
-                    $headBarConfigBox.animate({ "background-image": "linear-gradient(to right," + colors[0] + " 40%, " + colors[1] + " 60%)", "color": "#fff" }, 'slow', 'ease-out')
-                    $("#HeadBarConfigBox a").css({ "color": "#fff" });
-                } else {
-                    ClearStyle()
-                }
-            });
+            // $(window).scroll(function() {
+            //     var tops = $(this).scrollTop();
+            //     if (tops > 50) { //当window的scrolltop距离大于50时，
+            //         $headBarConfigBox.animate({ "background-image": "linear-gradient(to right," + colors[0] + " 40%, " + colors[1] + " 60%)", "color": "#fff" }, 'slow', 'ease-out')
+            //         $("#HeadBarConfigBox a").css({ "color": "#fff" });
+            //     } else {
+            //         ClearStyle()
+            //     }
+            // });
+            $("#HeadBarConfigBox").css({ "background": colors, "color": "#fff" });
             // 设置返回按钮和title的颜色
             var goBackColor = $("#HeadBarConfigBox a").attr('goBackColor');
             var titleColor = $("#HeadBarConfigBox span").attr('titleColor');
