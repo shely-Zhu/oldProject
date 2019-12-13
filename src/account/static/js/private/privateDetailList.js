@@ -438,6 +438,7 @@ $(function() {
                             celTxt: '取消',
                             hideCelButton: false,
                             zIndex: 100,
+                            yesButtonPosition: 'left',
                             callback: function(t) {
 
                             },
