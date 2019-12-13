@@ -6,7 +6,7 @@
  * @time 2018-09-25  ping
 
  */
-require('@pathCommonBase/base.js');
+
 require('../../../include/js/vendor/config.js');
 //zepto模块
 require('../../../include/js/vendor/zepto/callback.js');
@@ -202,7 +202,6 @@ var prdPrv = {
             },
             needDataEmpty: false,
             needLogin: true,
-            needLoading: false,
             callbackDone: function(json) {
                 var jsonData = json.data;
 

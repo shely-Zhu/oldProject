@@ -43,7 +43,6 @@ $(function() {
                 }
                 that.getData();
                 that.getUserInfo();
-                $('body').append('<iframe src="activityShare://" id="activity_share" style="position:absolute;z-index:1000;height:0;width:0;"></iframe>');
             },
 
             //获取活动详情数据
@@ -57,7 +56,7 @@ $(function() {
 
                     },
                     //async: false,
-                    needDataEmpty: that.gV.isNeedLogin,
+                    needLogin: that.gV.isNeedLogin,
                     callbackDone: function(json) {
                         var data = json.data;
                         if (data.actStatus == 2) {
@@ -70,7 +69,7 @@ $(function() {
                             $('.activityBottomBox').show();
                         }
                         //金服展示图片
-                        that.$e.bgimg.attr("data-original", url);
+                        that.$e.bgimg.attr("data-original", data.domainIP + data.htjfGeneralizeImgUrlPrex + data.htjfGeneralizeImgUrl);
                         //活动名称
                         that.$e.actName.text(data.actName);
                         //活动地点
@@ -306,7 +305,24 @@ $(function() {
                     needDataEmpty: true,
                     callbackDone: function(json) {
                         var data = json.data;
-                        $('#activity_share').attr('src', 'activityShare://' + data);
+                        var wxShare = {
+                                type: 'auto',
+                                businessType: 'activityShare', //业务类型
+                                title: that.$e.actName.text(),
+                                des: '邀请好友，分享精彩',
+                                link: data,
+                                img: that.$e.bgimg.attr("data-original"),
+                            }
+                            // window.isAndroid是在root文件中定义的变量
+                        if (window.isAndroid) {
+                            //这个是安卓操作系统
+                            window.jsObj.wxShare(wxShare);
+                        }
+                        // window.isIOS是在root文件中定义的变量
+                        if (window.isIOS) {
+                            //这个是ios操作系统
+                            window.webkit.messageHandlers.wxShare.postMessage(wxShare);
+                        }
 
                     },
                     callbackFail: function(json) {

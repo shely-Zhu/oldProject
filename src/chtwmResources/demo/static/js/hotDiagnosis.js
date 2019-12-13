@@ -104,7 +104,6 @@ $(function() {
                     "pageSize": 10,
 
                 },
-                needLoading: false,
                 needDataEmpty: false,
                 callbackDone: function(json) {
                     var dataList;
@@ -212,7 +211,7 @@ $(function() {
             mui("body").on("tap", ".btnBottom", function() {
                 that.getReport();
             });
-        }
+        },
     };
     hotDiagnosis.init();
 });

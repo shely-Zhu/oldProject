@@ -2,7 +2,6 @@
 	*举贤荐才
 	*zhangyanping 2018/01/22
 */
-require('@pathCommonBase/base.js');
 require('@pathIncludJs/vendor/config.js');
 require('@pathIncludJs/vendor/mui/mui.picker.min.js');   
 //zepto模块--callback
@@ -68,7 +67,7 @@ $(function(){
 								window.location.href=site_url.login_html_url+'?originUrl=' + new Base64().encode(window.location.href);
 							}
 						}	
-					}
+					},
 					   
 				}
 			];
@@ -201,7 +200,7 @@ $(function(){
 				window.location.href = site_url.recruitIndex_url;
 			})
 
-		}
+		},
 
 	}
 

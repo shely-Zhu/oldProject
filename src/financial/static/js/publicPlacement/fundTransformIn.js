@@ -155,6 +155,14 @@ $(function () {
                 callbackDone: function(json) {
 					if(json.status == '0000'){
 						// 将列表插入到页面上
+						$(".listLoading").hide()
+						$('.popup').css('display','block')
+						if(useEnv == '0'){
+							that.$el.popupTitle.html('选择在线支付银行卡')
+						}else{
+							that.$el.popupUl2.html('')
+							that.$el.popupTitle.html('选择汇款支付银行卡')
+						}
 						var data = [] ;
 						data = json.data.pageList;
 						data.forEach(function(element){
@@ -163,15 +171,7 @@ $(function () {
 							element.oneDayNum_w = Number(element.oneDayNum)/10000 + '万'
 						});
 						generateTemplate(data, that.$el.popupUl, that.$el.bankListTemplate,true);
-						that.$el.popupUl2.html('')
-						if(useEnv == '0'){
-							that.getTransferFunds()
-							that.$el.popupTitle.html('选择在线支付银行卡')
-						}else{
-							$(".listLoading").hide()
-						    $('.popup').css('display','block')
-							that.$el.popupTitle.html('选择汇款支付银行卡')
-						}
+						
 					}
                   
 				},
@@ -198,14 +198,14 @@ $(function () {
 				callbackDone: function(json) {
 					if(json.status == '0000'){
 						// 将列表插入到页面上
+						$(".listLoading").hide()
+						$('.popup').css('display','block')
 						var data = [] ;
 						data = json.data;
 						console.log('data',data)
 						data.forEach(function(element){
 							element.after4Num = element.bankAccout.substr(element.bankAccout.length -4)
 						});
-						$(".listLoading").hide()
-						$('.popup').css('display','block')
 						generateTemplate(data, that.$el.popupUl2, that.$el.bankListTemplate2,true);
 						
 					}
@@ -406,6 +406,9 @@ $(function () {
 				var useEnv = $(this).attr('pay-type')
 				$(".listLoading").show()
 				that.getBankCard(useEnv)
+				if(useEnv == '0'){
+					that.getTransferFunds()
+				}
 			}, {
 				htmdEvt: 'fundTransformIn_01'
 			}) 
@@ -527,7 +530,7 @@ $(function () {
 			
 			//确定
 			mui("body").on('mdClick','.btn_box .btn',function(){
-				$("#transformInput").blur()
+
 				if(!!that.gV.minValue){
 					if(Number(that.gV.balance) < Number(that.gV.minValue)){
 						tipAction('最小买入金额不能低于' + that.gV.minValue + '元')
@@ -563,7 +566,7 @@ $(function () {
 			}) ;
 			//  ---《公募基金风险揭示及售前告知书》
 			mui("body").on('mdClick','.setGoUrl',function(){
-				window.location.href = site_url.agreementModel_url + '?id=47' + '&financial=true'
+				window.location.href = site_url.superContent_url + '?id=47'
 			}, {
 				htmdEvt: 'fundTransformIn_09'
 			}) ;
@@ -628,6 +631,20 @@ $(function () {
 				window.location.href = site_url.agreementPreview_url + '?link=' + link +'&type=' + $(this).attr('type')
 			}, {
 				htmdEvt: 'fundTransformIn_17'
+			}) ;
+
+			//  ---
+			mui("body").on('mdClick','.container',function(e){
+				// debugger
+				var o = e.target || e.srcElement;//当前点击对象
+					if (o != document.getElementById("transformInput")) {
+						//隐藏键盘操作
+						$("#transformInput").blur()
+					}else{
+						$("#transformInput").focus()
+					}
+			}, {
+				htmdEvt: 'fundTransformIn_18'
 			}) ;
 
 

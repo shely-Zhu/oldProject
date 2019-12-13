@@ -3,18 +3,18 @@
  * @author  liuhongyu 2019-10-31
  */-->
 
- <!doctype html>
- <html lang="en">
+<!doctype html>
+<html lang="en">
 
- <head>
-     @@include('@pathInclude/views/meta.html') 
-     <link rel="stylesheet" href="/life/static/css/activityList.css">
-     <link rel="stylesheet" href="/life/static/css/mui.indexedlist.css">
-     <title>会员俱乐部-活动列表</title>
-     <script src="https://unpkg.com/infinite-scroll@3/dist/infinite-scroll.pkgd.min.js"></script>
- </head>
+<head>
+    @@include('@pathInclude/views/meta.html')
+    <link rel="stylesheet" href="/life/static/css/activityList.css">
+    <link rel="stylesheet" href="/life/static/css/mui.indexedlist.css">
+    <title>会员俱乐部-活动列表</title>
+    <script src="https://unpkg.com/infinite-scroll@3/dist/infinite-scroll.pkgd.min.js"></script>
+</head>
 
- <body>
+<body>
     @@include('@pathCommonCom/loading/listLoading.html')
     <div id="cityListBox">
     </div>
@@ -36,7 +36,7 @@
         <!-- 活动列表有数据开始 -->
         <div class="activityListDataBox">
             <section id="activityList">
-                <div class="activityList">
+                <div class="list">
                     <div class="contentWrapper ">
                         <ul class="mui-table-view" id="activityDataList">
                             <li class="mui-table-view-cell recordList">
@@ -72,13 +72,11 @@
         <!-- 活动列表没有数据结束 -->
     </div>
 
-    @@include('@pathCommonViews/activityList.html')
-    @@include('@pathCommonViews/cityList.html')
-    @@include('@pathInclude/views/footer.html')
+    @@include('@pathCommonViews/activityList.html') @@include('@pathCommonViews/cityList.html') @@include('@pathInclude/views/footer.html')
 
-    <script src="/include/js/iscroll.js"></script>
+    <script src="/allServerResources/include/js//iscroll.js"></script>
     <script src="/life/static/js/memberClub/mui.indexedlist.js"></script>
 
     <script src="/life/static/js/memberClub/activityList.js"></script>
 
- </body>
+</body>

@@ -34,6 +34,7 @@ $(function() {
             //事件绑定
             that.ruleReq()
             that.getDataReq()
+            console.log("你是真的不执行吗?")
             that.getTimeReq()
             that.event();
             that.getUserInfo(); //获取用户类型
@@ -85,7 +86,7 @@ $(function() {
                 grid: {
                     top: '10%',
                     left: '5%',
-                    right: '5%',
+                    right: '8%',
                     bottom: '10%',
                     containLabel: true
                 },
@@ -192,9 +193,13 @@ $(function() {
                 callbackDone: function(json) {
                     var data = json.data
                     that.gL.fundCode = data.fundCode,
-                        that.gL.fundName = data.fundName,
-                        that.gL.transformMoney = data.totalMoney,
-                        $(".totalM").text(data.totalMoneyMask ? data.totalMoneyMask : "--")
+                    that.gL.fundName = data.fundName,
+                    that.gL.transformMoney = data.totalMoney,
+                    $(".totalM").text(data.totalMoneyMask ? data.totalMoneyMask : "--")
+                    if(Number(data.totalMoneyMask) <= 0){//判断当持仓金额小于等于零时
+                        $('.footerBtnLeft').css('background','#ccc');//按钮背景置灰
+                        $('.footerBtnLeft').css('pointer-events','none');//按钮禁止点击
+                    }
                     $(".incomeMask").text(data.incomeMask ? data.incomeMask : "--")
                     $(".addupIncomeMask").text(data.addupIncomeMask ? data.addupIncomeMask : "--")
                     $("#HeadBarpathName").text(data.fundName ? data.fundName : "--")

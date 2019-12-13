@@ -82,7 +82,7 @@ $(function() {
                     up: {
                         //auto: false,
                         contentrefresh: '拼命加载中',
-                        contentnomore: '没有更多了', //可选，请求完毕若没有更多数据时显示的提醒内容；
+                        contentnomore: '暂无更多内容', //可选，请求完毕若没有更多数据时显示的提醒内容；
                         callback: function() {
                             // debugger
                             //执行ajax请求
@@ -169,7 +169,7 @@ $(function() {
         },
         events: function() { //绑定事件
             var that = this;
-            alwaysAjax($('.mui-table-view-cell'));
+            alwaysAjax($('.contentWrapper'));
             mui("body").on('mdClick', '.hopper', function(e) {
                     $('.mask').show();
                     $('.hopperCon').show();
@@ -186,13 +186,13 @@ $(function() {
                     $('.hopperCon').hide();
                     that.gV.businessType = $(this).attr('data');
                     // 重置上拉加载
-                    mui('.contentWrapper').pullRefresh().refresh(true);
                     that.gV.aP.pageNum = 1;
                     that.getElements.contentWrap.html('');
                     //重新初始化
-                    that.getElements.listLoading.show();
                     that.getData(that.gV.aThis);
-                    mui('.contentWrapper').pullRefresh().scrollTo(0, 0, 0);
+                    $('.goTopBtn').hide();
+                    $('.contentWrap')[0].style.webkitTransform = "translate3d(0px, 0px, 0px) translateZ(0px)";
+                    $('.contentWrap')[0].style.webkitTransform = '2500ms';
                 }, {
                     'htmdEvt': 'tobeConfirmTransaction_1'
                 })
@@ -207,6 +207,7 @@ $(function() {
 
             //取消受让、取消预约、取消转让
             mui("body").on('mdClick', '.cancelBtn', function(e) {
+                    event.stopPropagation();
                     var type = $(this).attr('data-type');
                     var reserveId = $(this).attr('data-reserveid');
                     var proId = $(this).attr('data-projectid');
@@ -281,6 +282,7 @@ $(function() {
                 })
                 //点击状态文字出现弹框
             mui("body").on('mdClick', '.openTip', function(e) {
+                    event.stopPropagation();
                     $('.mask').show();
                     var conText = $(this).siblings('.tipContent').html();
                     var obj = {
@@ -300,30 +302,33 @@ $(function() {
                 //功能按钮
             var clickEvent = '';
             mui("body").on('mdClick', '.toDetail', function(e) {
-                    var type = $(this).attr('type');
-                    var reserveId = $(this).attr('data-reserveid');
-                    var proId = $(this).attr('data-projectid');
-                    var isElec = $(this).attr('data-type');
-                    var isAllowAppend = $(this).attr('data-firstorappend');
-                    var projectName = $(this).attr('data-projectname');
+                    event.stopPropagation();
+                    var type = $(this).attr('type'); //按钮类型
+                    var reserveId = $(this).attr('data-reserveid'); //预约id
+                    var proId = $(this).attr('data-projectid'); //项目id
+                    var isElec = $(this).attr('data-type'); //是否是电子合同
+                    var isAllowAppend = $(this).attr('data-firstorappend'); //是否首次追加
+                    var projectName = $(this).attr('data-projectname'); //项目名称
+                    var isQualified = $(this).attr('data-isqualified'); //是否满足合格投资者
+                    var isPubToPri = $(this).attr('data-ispubtopri'); //是否公转私
                     if (type == 'toCertif') { //去合格投资者认证
                         if (isElec == 0) {
                             //非电子合同
-                            window.location.href = site_url.notElecSecondStep_url + '?reserveId=' + reserveId + '&projectId=' + proId + '&projectName=' + projectName + '&isAllowAppend=' + isAllowAppend;
+                            window.location.href = site_url.notElecSecondStep_url + '?isQualified=' + isQualified + '&projectName=' + projectName;
                         } else if (isElec == 1) {
                             //电子合同跳转
-                            window.location.href = site_url.elecSecondStep_url + '?reserveId=' + reserveId + '&projectId=' + proId + '&projectName=' + projectName + '&isAllowAppend=' + isAllowAppend;
+                            window.location.href = site_url.elecSecondStep_url + '?reserveId=' + reserveId + '&projectId=' + proId + '&projectName=' + projectName + '&isAllowAppend=' + isAllowAppend + '&isPubToPri=' + isPubToPri;
                         }
                     } else if (type == 'toSign') { //去签合同
-                        window.location.href = site_url.elecFourthStep_url + '?reserveId=' + reserveId + '&projectId=' + proId + '&projectName=' + projectName + '&isAllowAppend=' + isAllowAppend;
+                        window.location.href = site_url.elecThirdStep_url + '?reserveId=' + reserveId + '&projectId=' + proId + '&projectName=' + projectName + '&isAllowAppend=' + isAllowAppend + '&isPubToPri=' + isPubToPri;
                     } else if (type == 'toSee') { //查看合同
                         window.location.href = site_url.seeSign_url + '?reserveId=' + reserveId;
                     } else if (type == 'toUploadM') { //去上传汇款凭证
-                        window.location.href = site_url.elecFourthStep_url + '?reserveId=' + reserveId + '&projectId=' + proId + '&projectName=' + projectName + '&isAllowAppend=' + isAllowAppend;
+                        window.location.href = site_url.elecFourthStep_url + '?reserveId=' + reserveId + '&projectId=' + proId + '&projectName=' + projectName + '&isAllowAppend=' + isAllowAppend + '&isPubToPri=' + isPubToPri;
                     } else if (type == 'toView') { //详情
-
+                        window.location.href = site_url.privatePlacementDetail_url + '?projectId=' + proId
                     } else if (type == 'toVideo') { //视频双录
-
+                        window.location.href = site_url.realVideoTranscribe_url;
                     } else if (type == 'toDown') { //下载电子合同
 
                     } else if (type == 'reAppointment') { //重新预约

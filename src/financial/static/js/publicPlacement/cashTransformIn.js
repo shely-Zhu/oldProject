@@ -365,7 +365,7 @@ $(function () {
 			
 			//确定
 			mui("body").on('mdClick','.btn_box .btn',function(){
-				$("#transformInput").blur()
+				
 				if(!!that.gV.bankAccountSecret){
 					if(!!that.gV.minValue){
 						if(Number(that.gV.balance) < Number(that.gV.minValue)){
@@ -389,7 +389,7 @@ $(function () {
 			
 			//  ---《公募基金风险揭示及售前告知书》
 			mui("body").on('mdClick','.setGoUrl',function(){
-				window.location.href = site_url.agreementModel_url + '?id=47' + '&financial=true'
+				window.location.href = site_url.superContent_url + '?id=47'
 			}, {
 				htmdEvt: 'cashTransformIn_09'
 			}) ;
@@ -458,7 +458,21 @@ $(function () {
 				htmdEvt: 'cashTransformIn_17'
 			}) ;
 
+			//  ---
+			mui("body").on('mdClick','.container',function(e){
+				// debugger
+				var o = e.target || e.srcElement;//当前点击对象
+					if (o != document.getElementById("transformInput")) {
+						//隐藏键盘操作
+						$("#transformInput").blur()
+					}else{
+						$("#transformInput").focus()
+					}
+			}, {
+				htmdEvt: 'cashTransformIn_18'
+			}) ;
 
+		
 		}
 
 

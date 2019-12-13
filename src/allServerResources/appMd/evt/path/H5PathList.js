@@ -228,6 +228,7 @@ var pathList = {
 	"/account/views/priNetWorthDetails.html": { evtid: 'priNetWorthDetails', topic: '净值明细', info: ''} ,
 	"/account/views/productFiles.html": { evtid: 'productFiles', topic: '产品档案', info: ''} ,
 	"/account/views/publicAssets.html": { evtid: 'publicAssets', topic: '公募资产', info: ''} ,
+	"/account/views/transactionDetail.html":{ evtid: 'transactionDetail', topic: '交易明细', info: ''} ,
 	
 	// "/account/views/priNetWorthDetails.html": { evtid: 'priNetWorthDetails', topic: '净值明细', info: ''} ,
 	// "/account/views/priNetWorthDetails.html": { evtid: 'priNetWorthDetails', topic: '净值明细', info: ''} ,
@@ -245,7 +246,7 @@ var pathList = {
 	"/account/views/public/optionalPublicDetail.html" :{ evtid: '', topic: '自选公募产品详情页', info: ''} ,
 	"/account/views/public/otherFundHistoryDetail.html" :{ evtid: '', topic: '其他资产-历史明细', info: ''} ,
 	"/account/views/public/returnsDetail.html" :{ evtid: '', topic: '收益明细', info: ''} ,
-	"/account/views/public/superContent.html" :{ evtid: '', topic: '自选公募-超宝详情', info: ''} ,
+	"/allServerResources/model/views/superContent.html" :{ evtid: '', topic: '自选公募-超宝详情', info: ''} ,
 	"/account/views/public/superRecord.html" :{ evtid: '', topic: '超宝基金产品-交易记录', info: ''} ,
 	"/account/views/public/superStreasureDetail.html" :{ evtid: '', topic: '自选公募-超宝详情', info: ''} ,
 	"/account/views/public/transactionDetail.html" :{ evtid: '', topic: '超宝-交易记录', info: ''} ,

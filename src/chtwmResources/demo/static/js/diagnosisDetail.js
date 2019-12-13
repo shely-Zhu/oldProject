@@ -295,7 +295,7 @@ $(function() {
                 });
 
             })
-        }
+        },
     };
     hotDiagnosis.init();
 });

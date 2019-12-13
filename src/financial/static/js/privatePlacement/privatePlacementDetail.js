@@ -15,6 +15,8 @@ var generateTemplate = require('@pathCommonJsComBus/generateTemplate.js');
 //引入弹出层
 require('@pathCommonCom/elasticLayer/elasticLayer/elasticLayer.js');
 
+var moment = require('moment');
+
 $(function() {
     var privatePlacementDetail = {
         //获取页面元素
@@ -33,6 +35,7 @@ $(function() {
             topc: $('#topc'), //提示信息
             tipIcon: $(".tipIcon"), //净值披露信息
             isElecContract:'',  //是否是电子合同产品【0.否 1.是】
+            unitNetValueDes:'',
         },
         data: {
             canClick: true,
@@ -116,6 +119,8 @@ $(function() {
 
                         $("#qrnhLine").addClass("hide");
                         $("#wfsyLine").removeClass("hide");
+                        // 涨跌幅
+                        $('.priceLimit').removeClass('hide');
                         // 单位净值
                         $('.netValue').html(jsonData.unitNetValue);
                         // 折线图
@@ -133,7 +138,6 @@ $(function() {
                         // 展示七日年化
                         $('.netValue').html(jsonData.sevenIncomeRate);
                         $('#historyDetailBtn').removeClass('hide');
-                        $('.priceLimit').addClass('hide');
                         // 折线图
                         that.getTypeTwoData(that.$e.lineType);
                     }
@@ -143,7 +147,8 @@ $(function() {
                     // 一句话产品详情
                     $('.introduction').html(jsonData.productLightspot);
                     // 净值日期
-                    $('.netValueDate').html(jsonData.netValueDate)
+                    var now=moment(jsonData.netValueDate).format('YYYY-MM-DD');
+                    $('.netValueDate').html(now.substring(5))
                     // 起投金额
                     $('.investmentAmountNum').html(jsonData.investStart + '万');
                     // 产品期限
@@ -167,6 +172,8 @@ $(function() {
                         that.getElements.tipIcon.hide();
                     } else if (jsonData.investDirect == "1" || jsonData.investDirect == "3") { // 海外投资  （证券投资）二级市场展示
                         that.getElements.tipIcon.show();
+                        var productModule = 'netValueCycleAPP';
+                        that.queryProductImage(productModule);
                     };
 
 
@@ -681,7 +688,7 @@ $(function() {
 
         },
         // 查询产品亮点
-        queryProductImage: function() {
+        queryProductImage: function(productModule) {
             var that = this;
             //发送ajax请求
             var obj = [{
@@ -689,23 +696,31 @@ $(function() {
                 data: {
                     projectId: that.$e.projectId,
                     limitNum: '',
-                    productModule: '',
+                    productModule: productModule,
                 },
                 needLogin: true, //需要判断是否登陆
                 needDataEmpty: true, //需要判断data是否为空
                 callbackDone: function(json) { //成功后执行的函数
                     var json = json.data[0];
-                    if(json.imgPath == '' && json.features == ''){
-                        $('.lightPointCon').hide();
+                    if(productModule == 'netValueCycleAPP'){
+                        var features = json.features;
+                        if (features) {
+                            that.getElements.unitNetValueDes = features;
+                        }
+
                     }else{
-                        if (!json.imgPath) {
-                            if (json.features) {
-                                $(".lightPoint").html(json.features);
+                        if(json.imgPath == '' && json.features == ''){
+                            $('.lightPointCon').hide();
+                        }else{
+                            if (!json.imgPath) {
+                                if (json.features) {
+                                    $(".lightPoint").html(json.features);
+                                } else {
+                                    return false;
+                                }
                             } else {
-                                return false;
+                                $(".lightPoint img").attr("src", json.imgPath);
                             }
-                        } else {
-                            $(".lightPoint img").attr("src", json.imgPath);
                         }
                     }
 
@@ -719,6 +734,8 @@ $(function() {
                 }
             }];
             $.ajaxLoading(obj);
+             //懒加载
+             $(".lazyload").lazyload()
         },
 
         // 募集账户信息
@@ -768,7 +785,15 @@ $(function() {
                 jumpUrl = site_url.chooseQualifiedInvestor_url
             } else if (v.conditionJump == 7) { //跳转到合格投资者结果页面
                 jumpUrl = site_url.qualifiedInvestorResult_url
-            }
+            } else if (v.conditionJump == 11) { //跳转到进身份证上传页面
+                jumpUrl = site_url.realIdcard_url
+            } else if (v.conditionJump == 12) { //跳转到人脸识别页面
+                jumpUrl = site_url.realFaceCheck_url
+            } else if (v.conditionJump == 13) { //跳转到线下申请状态页面
+                jumpUrl = site_url.realOffline_url
+            } else if (v.conditionJump == 14) { //跳转到视频双录状态页面
+                jumpUrl = site_url.realVideoTranscribe_url
+            } 
             return jumpUrl;
         },
         // 客户预约产品所需条件
@@ -849,7 +874,7 @@ $(function() {
                         })
 
                     });
-                    if(!!isPopup){//如果弹出售前告知书
+                    if(!!isPopup&&!singleaAuthen){//如果弹出售前告知书
                     	
 	                    //发送ajax请求
 	                    var ReourceListobj = [{
@@ -891,7 +916,7 @@ $(function() {
 	                        }
 	                    }];
 	                    $.ajaxLoading(ReourceListobj);
-                    }else{//如果不弹
+                    }else if(!singleaAuthen){//如果不弹框且没有显示认证五步款则有以下步骤
                     	
                     	that.nextStep();
                     }
@@ -970,8 +995,6 @@ $(function() {
                 },
                 callbackFail: function(json) {
                     //请求失败，
-                    //隐藏loading
-                    //that.getElements.listLoading.hide();
                     //显示错误提示
                     tipAction(json.message);
 
@@ -979,7 +1002,6 @@ $(function() {
                     setTimeout(function() {
                         // that.getElements.listLoading.hide();
                     }, 100);
-                    //return false;
                 },
                 callbackNoData: function(json) {
                     //没有数据
@@ -1132,10 +1154,11 @@ $(function() {
             });
             // 历史明细点击跳转
             mui("body").on('mdClick', '#historyDetailBtn', function() {
+                // alert(site_url.historyDetail_url + '?projectId=' + that.$e.projectId);
                 window.location.href = site_url.historyDetail_url + '?projectId=' + that.$e.projectId;
             }, {
-                'htmdEvt': 'privateDetail_05'
-            })
+                'htmdEvt': 'privatePlacementDetail_05'
+            });
 
             // 立即预约
             mui("body").on('mdClick', '.buyButton', function() {
@@ -1172,6 +1195,23 @@ $(function() {
                 window.location.href = $this.attr('href');
             }, {
                 'htmdEvt': 'privatePlacementDetail_07'
+            });
+            mui("body").on('mdClick','.tipIcon',function(){
+                var $this = $(this);
+                var obj = {
+                    title: '帮助',
+                    id: 'tipIcon',
+                    p: that.getElements.unitNetValueDes,
+                    yesTxt: '知道了',
+                    zIndex: 100,
+                    hideCelButton: true, //为true时隐藏cel按钮，仅使用yes按钮的所有属性
+                    callback: function(t) {
+
+                    },
+                };
+                $.elasticLayer(obj)
+            },{
+                'htmdEvt': 'privatePlacementDetail_08'
             })
         }
     };

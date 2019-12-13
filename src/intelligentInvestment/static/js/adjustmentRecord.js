@@ -2,7 +2,7 @@
  * @page: 调仓记录页面
  * @Author: songxiaoyu
  * @Date:   2019-01-08 09:14:27
- * @Last Modified by:   Marte
+ * @Last Modified by:   songxiaoyu
  * @description:
  * 页面需传传参   groupCode
  */
@@ -91,13 +91,12 @@ $(function() {
             var obj = [{ // 系统调仓记录列表
                 url: site_url.combinTransferList_api,
                 data: {
-                    "combCode": that.gV.groupCode, //组合代码
+                    "combCode": that.gV.groupCode, //组合代码 
                     "pageCurrent": that.gV.pageCurrent, //非必须，默认为1
                     "pageSize": "10" //非必须，默认为10
                 },
                 //async: false,
                 needDataEmpty: true,
-                needLoading: false,
                 callbackDone: function(json) {
                     var data;
 
@@ -148,7 +147,7 @@ $(function() {
                     }, 200)
 
                 },
-
+                     
             }];
             $.ajaxLoading(obj);
         },

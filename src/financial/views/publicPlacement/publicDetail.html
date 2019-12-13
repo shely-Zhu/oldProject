@@ -51,8 +51,10 @@
 				{{/if}}
 				<div class="midContent">
 					<div class="max_amount_area">
+						{{#if tradeLimitAmount}}
 						<div class="max_amount fl"></div>
 						<div class="max_amount_value fl">单日单账户限额{{tradeLimitAmount}}万</div>
+						{{/if}}
 					</div>
 					<div class="net_worth_area">
 						<div class="net_worth_item">
@@ -216,7 +218,7 @@
 				{{/if}}
 			</div>
 		</script>
-		<script src="/include/js/vendor/echarts/echarts.min.js"></script>
+		<script src="/allServerResources/include/js//vendor/echarts/echarts.min.js"></script>
 		<script src="/financial/static/js/publicPlacement/publicDetail.js"></script>
 	</body>
 

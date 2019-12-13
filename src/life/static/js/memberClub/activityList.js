@@ -32,7 +32,7 @@ $(function() {
             gV: { // 全局变量
                 groupCode: splitUrl['groupCode'], // 组合编号，从我的持仓进
                 startPage: 1, //当前页码，默认为1
-                pageSize: 3, //一页最大返回list个数
+                pageSize: 10, //一页最大返回list个数
                 listLength: 0,
                 actName: $('.activitySearchInput input').val(), //活动名称
                 actProvinceNO: $('#locationCity').attr('data-parentid'), //活动省份编号
@@ -51,8 +51,8 @@ $(function() {
                 var topHeitgh = $('#activitySearch').height();
                 var height = windowHeight - topHeitgh;
 
-                if (!$('.activityList').hasClass('setHeight')) {
-                    $('.activityList').height(height).addClass('setHeight');
+                if (!$('.list').hasClass('setHeight')) {
+                    $('.list').height(height).addClass('setHeight');
                 }
 
                 mui.init({
@@ -105,7 +105,11 @@ $(function() {
                     callbackDone: function(json) {
 
                         console.log(json.data);
-                        if (!json.data.activityVoPageInfo) {
+                        if (!json.data.activityVoPageInfo && that.gV.startPage == 1) {
+                            var topHeitgh = $('#activitySearch').height();
+                            var height = windowHeight - topHeitgh;
+
+                            $('.activityListDataNoBox').height(height);
                             t.endPullupToRefresh(true);
                             that.$e.activityListDataBox.hide();
                             that.$e.activityListDataNoBox.show();
@@ -129,9 +133,20 @@ $(function() {
                         that.$e.activityListDataNoBox.hide();
                         setTimeout(function() {
                             if (data.length < that.gV.pageSize) {
-                                t.endPullupToRefresh(true);
+                                if (that.gV.startPage == 1) { //第一页时
+                                    if (data.length == 0) {
+                                        // 暂无数据显示
+                                        that.getElements.noData.show();
+                                        return false;
+
+                                    } else { // 没有更多数据了
+                                        t.endPullupToRefresh(true);
+                                    }
+                                } else {
+                                    //其他页-没有更多数据
+                                    t.endPullupToRefresh(true);
+                                }
                             } else { // 还有更多数据
-                                mui('.contentWrapper').pullRefresh().refresh(true);
                                 t.endPullupToRefresh(false);
                             }
                             // 页面++
@@ -155,10 +170,17 @@ $(function() {
                         tipAction(json.message);
                     },
                     callbackNoData: function(json) {
-                        t.endPullupToRefresh(true);
-                        that.$e.activityListDataBox.hide();
-                        that.$e.activityListDataNoBox.show();
-                        that.getNoData();
+                        if (!json.data.activityVoPageInfo && that.gV.startPage == 1) {
+                            var topHeitgh = $('#activitySearch').height();
+                            var height = windowHeight - topHeitgh;
+
+                            $('.activityListDataNoBox').height(height);
+
+                            t.endPullupToRefresh(true);
+                            that.$e.activityListDataBox.hide();
+                            that.$e.activityListDataNoBox.show();
+                            that.getNoData();
+                        }
                     }
                 }];
                 $.ajaxLoading(obj);
@@ -191,12 +213,27 @@ $(function() {
             },
             //将城市定位模板加载
             getCityListData: function() {
+                //为$id添加hasPullUp  class
+                $('.activityList').addClass('hasPullUp');
+                setTimeout(function() {
+                    //去掉mui-pull-bottom-pocket的mui-hidden
+                    $('.contentWrapper').find('.mui-pull-bottom-pocket').removeClass('mui-hidden');
+                    // 将列表插入到页面上
+                    generateTemplate(data, $('.activityNoListBox2'), that.$e.activityListTemp)
+                    $(".lazyload").lazyload()
+                        // 第一个调仓记录默认展开
+                    $('.recordList').find('ul').eq(0).find('.mui-collapse').addClass('mui-active');
+                }, 200)
+            },
+            //将城市定位模板加载
+            getCityListData: function() {
 
                 var obj = [{
                     url: site_url.cityList_api,
                     // url:'http://172.16.187.164:8081/web/marketing/activity/cityList',
                     //async: false,
                     needDataEmpty: true,
+                    needLoading: true,
                     callbackDone: function(json) {
                         $('#loading').hide();
                         console.log(json);
@@ -301,8 +338,8 @@ $(function() {
                 }, {
                     htmdEvt: 'activityList_1'
                 });
-                //点击定位选择头部返回效果
-                mui('#cityListBox').on('mdClick', '.goBack', function() {
+                //点击搜索选择头部返回效果
+                mui('#activitySearch').on('mdClick', '.backBtn', function() {
                     if (document.referrer == '') {
                         var u = navigator.userAgent,
                             app = navigator.appVersion;
@@ -325,7 +362,12 @@ $(function() {
                 }, {
                     htmdEvt: 'activityList_2'
                 });
-                //点击定位选择右侧索引效果
+                //点击选择城市头部返回效果
+                mui('#activitySearch').on('mdClick', '.goBack', function() {
+                        $('#cityListBox').hide();
+                        $('#activityDataBox').show();
+                    })
+                    //点击定位选择右侧索引效果
                 mui('#cityListBox').on('mdClick', '.mui-indexed-list-bar a', function() {
                     var txt = $(this).text();
                     var len = $('.mui-table-view li').length;

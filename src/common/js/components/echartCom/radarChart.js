@@ -20,7 +20,7 @@
 module.exports = function(echartData, $e) {
     var ele = $e || $('.chartWrapper');
     var myChart = echarts.init(ele[0]);
-    
+
     var option = {
         title: {
             text: '综合评分', // 最后一个值是总分
@@ -50,12 +50,18 @@ module.exports = function(echartData, $e) {
         },
         radar: [{
             indicator: [
-                { text: '稳定性', max: 100},
-                { text: '收益表现', max: 100},
-                { text: '择股择时能力', max: 100},
-                { text: '基金公司实力', max: 100},
-                { text: '抗风险性', max: 100},
+                { name: '稳定性', max: 100 },
+                { name: '收益表现', max: 100 },
+                { name: '择股择时能力', max: 100 },
+                { name: '基金公司实力', max: 100 },
+                { name: '抗风险性', max: 100 },
             ],
+            name:{
+                formatter:function(v){
+                    return v;
+                },
+                color:"#0b0b0d"
+            },
             triggerEvent: true,
             center: ['50%', '50%'],
             radius: 80
@@ -75,37 +81,8 @@ module.exports = function(echartData, $e) {
         }]
     };
 
-     
+
     myChart.setOption(option);
-
-    var i = -1;
-    var arr1 = echartData;
-    myChart.setOption({
-        radar: [
-            {
-                name: {
-                    rich: {
-                        a: {
-                            color: '#9F733F',
-                            lineHeight: 20,
-                        },
-                        b: {
-                            color: '#9F733F',
-                            align: 'center',
-                            backgroundColor: '#fff',
-                            padding: 2,
-                            borderRadius: 4
-                        }
-                    },
-                    formatter: (a,b)=>{
-                        i++;
-                        return `{a|${a}}\n{b|${arr1[i]}}`
-                    }
-                }
-            }
-        ]
-    });
-
 	myChart.on('click',function(params){//gulp打包禁止使用es6语法。否则打包不过去
 //	    console.log(option.radar[0].indicator[params.event.topTarget.__dimIdx].name);
 	    if(!!params.event.topTarget.__dimIdx){

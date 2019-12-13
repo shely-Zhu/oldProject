@@ -215,6 +215,7 @@ var clickList = {
 	"privatePlacementDetail_05" : { type:'click', evtid: 'privatePlacementDetail_05', topic: '私募基金产品详情-历史明细', info: ''} ,
 	"privatePlacementDetail_06" : { type:'click', evtid: 'privatePlacementDetail_06', topic: '私募基金产品详情-立即预约', info: ''} ,
 	"privatePlacementDetail_07" : { type:'click', evtid: 'privatePlacementDetail_07', topic: '私募基金产品详情-产品材料', info: ''} ,
+	"privatePlacementDetail_08" : { type:'click', evtid: 'privatePlacementDetail_08', topic: '私募基金产品详情-净值更新', info: ''} ,
 	
 	//现金管理
 	"cashManagement_01" : { type:'click', evtid: 'cashManagement_01', topic: '现金管理-了解现金管理', info: ''} ,
@@ -349,6 +350,7 @@ var clickList = {
 	// "starFinancia_search":{ type:'click', evtid: '', topic: '理财师查询', info: ''} ,
 	"starFinancia_05":{ type:'click', evtid: 'starFinancia_05', topic: '取消搜索', info: ''} ,
 	"starFinancia_06":{ type:'click', evtid: 'starFinancia_06', topic: '点击搜索框触发选中', info: ''} ,
+	"starFinancia_07":{ type:'click', evtid: 'starFinancia_07', topic: '返回上一页首页', info: ''} ,
 
 	/************************************** account start *************************************************/
 	//publicTradeDetail.hrml
@@ -395,6 +397,7 @@ var clickList = {
 	"privateDetailList_4":{ type:'click', evtid: 'privateDetailList_4', topic: '私募交易详情_我明白了区域点击', info: ''},
 	"privateDetailList_5":{ type:'click', evtid: 'privateDetailList_5', topic: '私募交易详情_点击状态文字出现弹框', info: ''},
 	"privateDetailList_6":{ type:'click', evtid: 'privateDetailList_6', topic: '私募交易详情_详情按钮点击', info: ''},
+	"privateDetailList_7":{ type:'click', evtid: 'privateDetailList_7', topic: '私募交易详情_点击每一条进入详情', info: ''},
 
 	"privateFundPdf_0":{ type:'click', evtid: 'privateFundPdf_0', topic: '私募基金确认书_点击下载', info: ''},
 	"privateFundPdf_1":{ type:'click', evtid: 'privateFundPdf_1', topic: '私募基金确认书_点击修改邮箱', info: ''},
@@ -405,6 +408,7 @@ var clickList = {
 	"tobeConfirmTransaction_3":{ type:'click', evtid: 'tobeConfirmTransaction_3', topic: '待确认交易_取消受让、取消预约、取消转让', info: ''},
 	"tobeConfirmTransaction_4":{ type:'click', evtid: 'tobeConfirmTransaction_4', topic: '待确认交易_点击状态文字出现弹框', info: ''},
 	"tobeConfirmTransaction_5":{ type:'click', evtid: 'tobeConfirmTransaction_5', topic: '待确认交易_详情按钮点击', info: ''},
+	"tobeConfirmTransaction_6":{ type:'click', evtid: 'tobeConfirmTransaction_6', topic: '待确认交易_点击每一条进入详情页', info: ''},
 
 	"cashTreasure_0":{ type:'click', evtid: 'cashTreasure_0', topic: '现金宝详情_展开收起按钮点击', info: ''},
 	"cashTreasure_1":{ type:'click', evtid: 'cashTreasure_1', topic: '现金宝详情_折线图中月份点击', info: ''},

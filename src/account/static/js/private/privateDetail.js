@@ -617,28 +617,37 @@ $(function() {
 	    		if(tradeRecordFlag) {
 	    			$(".single .txt").html("交易明细")
 	    			$(".single .img").attr("src", "/account/static/img/productDetail/type_1_left.png")
+	    			$(".single>div").addClass("transactionDetail")
 	    		} else if (incomeAssignFlag) {
 	    			$(".single .txt").html("收益分配明细")
 	    			$(".single .img").attr("src", "/account/static/img/productDetail/account_icon_jymx@2x.png")
+	    			$(".single>div").addClass("incomeDistribution")
 	    		} else if (fundConfirmDealFalg) {
 	    			$(".single .txt").html("基金确认书")
 	    			$(".single .img").attr("src", "/account/static/img/productDetail/type_1_right.png")
+	    			$(".single>div").addClass("privateFundPdf")
 	    		}
 	    	} else if ((tradeRecordFlag && incomeAssignFlag && !fundConfirmDealFalg) || (tradeRecordFlag && !incomeAssignFlag && fundConfirmDealFalg) || (!tradeRecordFlag && incomeAssignFlag && fundConfirmDealFalg)) {
 	    		$(".midContent>.actionWrap>.double").css("display", "block")
 	    		if(!fundConfirmDealFalg) {
+	    			$(".double").children().eq(0).addClass("transactionDetail")
 	    			$(".double").children().eq(0).find(".txt").html("交易明细")
 	    			$(".double").children().eq(0).find(".img").attr("src", "/account/static/img/productDetail/type_1_left.png")
+	    			$(".double").children().eq(1).addClass("incomeDistribution")
 	    			$(".double").children().eq(1).find(".txt").html("收益分配明细")
 	    			$(".double").children().eq(1).find(".img").attr("src", "/account/static/img/productDetail/account_icon_jymx@2x.png")
 	    		} else if (!incomeAssignFlag) {
+	    			$(".double").children().eq(0).addClass("transactionDetail")
 	    			$(".double").children().eq(0).find(".txt").html("交易明细")
 	    			$(".double").children().eq(0).find(".img").attr("src", "/account/static/img/productDetail/type_1_left.png")
+	    			$(".double").children().eq(1).addClass("privateFundPdf")
 	    			$(".double").children().eq(1).find(".txt").html("基金确认书")
 	    			$(".double").children().eq(1).find(".img").attr("src", "/account/static/img/productDetail/type_1_right.png")
 	    		} else if (!tradeRecordFlag) {
-	    			$(".double").children().eq(0).find(".txt").html("收益明细")
+	    			$(".double").children().eq(0).addClass("incomeDistribution")
+	    			$(".double").children().eq(0).find(".txt").html("收益分配明细")
 	    			$(".double").children().eq(0).find(".img").attr("src", "/account/static/img/productDetail/account_icon_jymx@2x.png")
+	    			$(".double").children().eq(1).addClass("privateFundPdf")
 	    			$(".double").children().eq(1).find(".txt").html("基金确认书")
 	    			$(".double").children().eq(1).find(".img").attr("src", "/account/static/img/productDetail/type_1_right.png")
 	    		}
@@ -665,49 +674,23 @@ $(function() {
             }, {
 				'htmdEvt': 'privateDetail_0'
 			})
-			// 交易明细，基金确认书，收益明细等点击跳转
-			var clickEvent = '';//记录一下按钮到底跳转到哪里 埋点统计
-            mui("body").on('mdClick', '.single', function() {
-            	if($(this).find(".txt").html() == '交易明细') { // 私募交易明细页面
-					window.location.href = site_url.transactionDetail_url + '?projectId=' + that.data.projectId;
-					clickEvent = 'privateDetail_1';
-            	} else if ($(this).find(".txt").html() == '收益分配明细') { // 私募收益明细页面
-					window.location.href = site_url.incomeDistribution_url + '?projectId=' + that.data.projectId;
-					clickEvent = 'privateDetail_2';
-            	} else if ($(this).find(".txt").html() == '基金确认书') { // 基金确认书页面
-					window.location.href = site_url.privateFundPdf_url + '?projectId=' + that.data.projectId + '&ecFileName=' + that.data.ecFileName + '&ecFileUrl=' + that.data.ecFileUrl;
-					clickEvent = 'privateDetail_3';
-            	}
-            }, {
-				'htmdEvt': clickEvent
+			// 交易明细点击跳转
+			mui("body").on('mdClick', '.transactionDetail', function() {
+				window.location.href = site_url.transactionDetail_url + '?projectId=' + that.data.projectId;
+			}, {
+				'htmdEvt': "privateDetail_1"
 			})
-            mui("body").on('mdClick', '.double>div', function() {
-            	if($(this).find(".txt").html() == '交易明细') { // 私募交易明细页面
-					window.location.href = site_url.transactionDetail_url + '?projectId=' + that.data.projectId;
-					clickEvent = 'privateDetail_1';
-            	} else if ($(this).find(".txt").html() == '收益分配明细') { // 私募收益明细页面
-					window.location.href = site_url.incomeDistribution_url + '?projectId=' + that.data.projectId;
-					clickEvent = 'privateDetail_2';
-            	} else if ($(this).find(".txt").html() == '基金确认书') { // 基金确认书页面
-					window.location.href = site_url.privateFundPdf_url + '?projectId=' + that.data.projectId + '&ecFileName=' + that.data.ecFileName + '&ecFileUrl=' + that.data.ecFileUrl;
-					clickEvent = 'privateDetail_3';
-            	}
-            }, {
-				'htmdEvt': clickEvent
+			// 收益分配明细点击跳转
+			mui("body").on('mdClick', '.incomeDistribution', function() {
+				window.location.href = site_url.incomeDistribution_url + '?projectId=' + that.data.projectId;
+			}, {
+				'htmdEvt': "privateDetail_2"
 			})
-            mui("body").on('mdClick', '.treble>.actionCon', function() {
-            	if($(this).find(".txt").html() == '交易明细') { // 私募交易明细页面
-					window.location.href = site_url.transactionDetail_url + '?projectId=' + that.data.projectId;
-					clickEvent = 'privateDetail_1';
-            	} else if ($(this).find(".txt").html() == '收益分配明细') { // 私募收益明细页面
-					window.location.href = site_url.incomeDistribution_url + '?projectId=' + that.data.projectId;
-					clickEvent = 'privateDetail_2';
-            	} else if ($(this).find(".txt").html() == '基金确认书') { // 基金确认书页面
-					window.location.href = site_url.privateFundPdf_url + '?projectId=' + that.data.projectId + '&ecFileName=' + that.data.ecFileName + '&ecFileUrl=' + that.data.ecFileUrl;
-					clickEvent = 'privateDetail_3';
-            	}
-            }, {
-				'htmdEvt': clickEvent
+			// 交易明细点击跳转
+			mui("body").on('mdClick', '.privateFundPdf', function() {
+				window.location.href = site_url.privateFundPdf_url + '?projectId=' + that.data.projectId + '&ecFileName=' + that.data.ecFileName + '&ecFileUrl=' + that.data.ecFileUrl;
+			}, {
+				'htmdEvt': "privateDetail_3"
 			})
             // 历史明细点击跳转
             mui("body").on('mdClick', '#historyDetailBtn', function() {
@@ -772,7 +755,21 @@ $(function() {
 				if(that.data.redeemClickFlag) {
 					that.data.redeemClickFlag = frozenAccount("buyFreeze", window.location.href)
 					if(!that.data.redeemClickFlag) { // 验证通过则跳转赎回页面
-						window.location.href = site_url.privateRedeem_url + '?projectId=' + that.data.projectId + '&redeemPartion=' + that.data.redeemPartion;
+						$.elasticLayer({
+				            id: "tip",
+				            title: '提示',
+				            p: '<p>赎回后不可撤单，确定要赎回</p>',
+				            zIndex: 100,
+				            yesButtonPosition: 'left',
+				            hideCelButton: false,
+				            callback: function() {
+				            	var type = that.data.projectType==0?1:2
+								window.location.href = site_url.privateRedeem_url + '?projectId=' + that.data.projectId + '&redeemPartion=' + that.data.redeemPartion + '&type=' + type;
+				            },
+				            callbackCel: function() {
+				            	that.data.redeemClickFlag = true
+				            }
+				        });
 					}
 				}
             }, {
