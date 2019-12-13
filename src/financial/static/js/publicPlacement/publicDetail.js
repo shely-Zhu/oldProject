@@ -44,7 +44,6 @@ $(function () {
         fundType: splitUrl['fundType'] == '10300' ? 1 : 0, //10300 货币基金类型，其余为普通基金类型
         init: function () {
             var that = this;
-            alert('测试是否进入基金详情页面')
             //页面初始化
             that.getData();
             that.getUserInfo();  //获取用户类型
