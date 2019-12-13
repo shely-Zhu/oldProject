@@ -299,6 +299,7 @@ $(function () {
                 $('.cash_redeem_info .item_2').html(model.balanceMask + '元');//转出金额
                 $('.cash_redeem_info .bank_icon').attr('src', model.bankThumbnailUrl);//转出至银行卡logo
                 $('.cash_redeem_info .item_3').html(that.getPayInfo(model.bankName, model.bankAccountMask));//转出至银行卡描述
+                $('.cash_redeem_info .pay_mode').html('1' == model.payType? '汇款支付': '在线支付');//支付方式
                 $('.cash_redeem_info .item_4').html(model.applyDateTime);//转出时间
             }
         },

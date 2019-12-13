@@ -117,8 +117,11 @@ $(function () {
                     $(".divider-top").html(json.data.purSt + '、' + json.data.redemSt + '、' + '买入费率' + '(<span class="line-rate">' + saleFee + '</span>' + ' <span class="discount">' + discount + '</span>)')
                 },
                 callbackFail: function (json) {
-                    tipAction(json.msg);
-                }
+                    tipAction(json.message);
+                },
+                callbackNoData:function(json){
+					tipAction(json.message);
+				},
             }]
             $.ajaxLoading(obj);
         },
@@ -136,8 +139,11 @@ $(function () {
                     that.gV.accountType = data.accountType
                 },
                 callbackFail: function (json) {
-                    tipAction(json.msg);
-                }
+                    tipAction(json.message);
+                },
+                callbackNoData:function(json){
+					tipAction(json.message);
+				},
             }]
             $.ajaxLoading(obj);
         },
@@ -247,8 +253,19 @@ $(function () {
             });
             //分享  -- 跳往原生页面
             mui("body").on('mdClick', ".share_area", function (e) {
-                if (window.currentIsApp) {
-                    $('body').append('<iframe src="publicDetailShare://?fundCode=' + splitUrl['fundCode'] + '&fundName=' + that.gV.secuSht + '"></iframe>');
+                var shareObj = {
+                    type:'auto',
+                    businessType:'publicProductShare',
+                    title: this.gV.secuSht,
+                    des: '',
+                    link: site_url.productPublicShare_url + splitUrl['fundCode'],
+                    img: ''
+                }
+                if (window.isAndroid){
+                    window.jsObj.wxShare(shareObj);
+                }
+                if (window.isIOS){
+                    window.webkit.messageHandlers(shareObj);
                 }
             });
             //加自选  
@@ -277,7 +294,7 @@ $(function () {
             var obj = [{
                 url: site_url.prfFundCollectionQueryCode_api,
                 data: {
-                    
+                    publicFundsKeyWords:splitUrl['fundCode']
                 },
                 needLogin: false,
                 callbackDone: function (json) {
@@ -297,7 +314,6 @@ $(function () {
             var that = this;
             var deviceId = splitUrl['deviceId'].split("cookie")[0];
             var manageList = [];
-            debugger
             manageList.push(prams)
             // 请求页面数据
             var obj = [{

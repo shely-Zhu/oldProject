@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2019-12-09 15:53:31
- * @LastEditTime: 2019-12-10 21:03:50
+ * @LastEditTime: 2019-12-13 11:12:11
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \htjf-app\src\mine\static\js\fundAccountDiagnosisResult.js
@@ -31,13 +31,25 @@ $(function() {
               dataPickData:"", //基金代码
               fundCode:"", //购买日期
               buyMoney:"",   //购买金额
+              applyId:"",   //需要编辑的基金的申请id
         },
         init: function() {
             var that = this;
-
+            that.queryAllByCustomerNo();
             that.events();
         },
-       
+        queryAllByCustomerNo:function(){
+            //所有基金诊断记录
+            var that = this;
+            var obj = [{
+                url:site_url.queryAllByCustomerNo_api,
+                needDataEmpty: true,
+                callbackDone:function(json){
+                    console.log("8989",json)
+                }
+            }];
+            $.ajaxLoading(obj);
+        },
        events:function(){
             var that = this;
             mui("body").on("mdClick",".historyItemList .right_left",function(){
@@ -52,11 +64,11 @@ $(function() {
             })
             //点击修改跳转到基金申请页面
             mui("body").on("mdClick",".editHistory",function(){
-                window.location.href = site_url.fundAccountDiagnosisResult_url
+                window.location.href = site_url.fundAccountDiagnosisResult_url+"?type=edit"+"&applyId="+that.gV.applyId
             })
             //点击新增申请
             mui("body").on("mdClick",".addApply",function(){
-                window.location.href = site_url.fundAccountDiagnosisResult_url
+                window.location.href = site_url.fundAccountDiagnosisResult_url+"?type=add"
             })
          
        },

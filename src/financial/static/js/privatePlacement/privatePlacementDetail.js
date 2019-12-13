@@ -106,6 +106,10 @@ $(function() {
                             }
                         } else {
                             $(".fixedIncome .netValue").html(businessCompareReferenceMin + "%-" + businessCompareReferenceMax + "%");
+                            console.log($(".fixedIncome .netValue").html().length)
+                            if($(".fixedIncome .netValue").html().length>7){
+                                $(".fixedIncome .netValue").css({"font-size":'0.4rem',"display":"inline-block","margin-top":"0.2rem"})
+                            }
                         }
                     } else if (jsonData.incomeModeJF == '1') { //1浮收普通   展示历史业绩走势
                         // 头部不同的展示
@@ -122,7 +126,11 @@ $(function() {
                         // 涨跌幅
                         $('.priceLimit').removeClass('hide');
                         // 单位净值
-                        $('.netValue').html(jsonData.unitNetValue);
+                        if(jsonData.unitNetValue == null || jsonData.unitNetValue == "" || jsonData.unitNetValue == undefined){
+                            $('.netValue').html('--')
+                        }else{
+                            $('.netValue').html(jsonData.unitNetValue);
+                        }
                         // 折线图
                         that.getTypeOneData(that.$e.lineType);
 
@@ -146,9 +154,13 @@ $(function() {
                     $('.productNameTip').html(jsonData.productName);
                     // 一句话产品详情
                     $('.introduction').html(jsonData.productLightspot);
-                    // 净值日期
-                    var now=moment(jsonData.netValueDate).format('YYYY-MM-DD');
-                    $('.netValueDate').html(now.substring(5))
+                    // 净值日期 非空判断
+                    if(jsonData.netValueDate == null || jsonData.netValueDate == "" || jsonData.netValueDate == undefined){
+                        $('.netValueDate').html('--')
+                    }else{
+                        var now=moment(jsonData.netValueDate).format('YYYY-MM-DD');
+                        $('.netValueDate').html(now.substring(5))
+                    }
                     // 起投金额
                     $('.investmentAmountNum').html(jsonData.investStart + '万');
                     // 产品期限
@@ -734,6 +746,8 @@ $(function() {
                 }
             }];
             $.ajaxLoading(obj);
+             //懒加载
+             $(".lazyload").lazyload()
         },
 
         // 募集账户信息

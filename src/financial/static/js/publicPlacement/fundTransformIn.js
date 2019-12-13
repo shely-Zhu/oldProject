@@ -150,11 +150,19 @@ $(function () {
                 data: {
                     useEnv:useEnv
                 },
-                //async: false,
+                async: false,
                 needDataEmpty: true,
                 callbackDone: function(json) {
 					if(json.status == '0000'){
 						// 将列表插入到页面上
+						$(".listLoading").hide()
+						$('.popup').css('display','block')
+						if(useEnv == '0'){
+							that.$el.popupTitle.html('选择在线支付银行卡')
+						}else{
+							that.$el.popupUl2.html('')
+							that.$el.popupTitle.html('选择汇款支付银行卡')
+						}
 						var data = [] ;
 						data = json.data.pageList;
 						data.forEach(function(element){
@@ -163,15 +171,7 @@ $(function () {
 							element.oneDayNum_w = Number(element.oneDayNum)/10000 + '万'
 						});
 						generateTemplate(data, that.$el.popupUl, that.$el.bankListTemplate,true);
-						that.$el.popupUl2.html('')
-						if(useEnv == '0'){
-							that.getTransferFunds()
-							that.$el.popupTitle.html('选择在线支付银行卡')
-						}else{
-							$(".listLoading").hide()
-						    $('.popup').css('display','block')
-							that.$el.popupTitle.html('选择汇款支付银行卡')
-						}
+						
 					}
                   
 				},
@@ -204,12 +204,11 @@ $(function () {
 						data.forEach(function(element){
 							element.after4Num = element.bankAccout.substr(element.bankAccout.length -4)
 						});
-						$(".listLoading").hide()
-						$('.popup').css('display','block')
 						generateTemplate(data, that.$el.popupUl2, that.$el.bankListTemplate2,true);
 						
 					}
-				}
+				},
+				
 			}];
 			$.ajaxLoading(obj);
 		},
@@ -380,7 +379,7 @@ $(function () {
 					value = (Number(val)*(1-1/(1 + Number(rate)))).toFixed(2)
 					value2 = (Number(val)*(1-1/(1 + that.gV.purchaseRate))).toFixed(2)
 					discountMount = (Number(value2) - Number(value)).toFixed(2)
-					str = value + '元&nbsp;' + '(<span class="line-rate">' + that.gV.purchaseRate*100 + '%</span>&nbsp;' + (rate*100).toFixed(2) + '%)省<span class="discount">' + discountMount + '</span>元'
+					str = value + '元&nbsp;' + '(<span class="line-rate">' + that.gV.purchaseRate*100 + '%</span>&nbsp;&nbsp;' + (rate*100).toFixed(2) + '%)省<span class="discount">' + discountMount + '</span>元'
 				}
 				
 				 
@@ -406,6 +405,9 @@ $(function () {
 				var useEnv = $(this).attr('pay-type')
 				$(".listLoading").show()
 				that.getBankCard(useEnv)
+				if(useEnv == '0'){
+					that.getTransferFunds()
+				}
 			}, {
 				htmdEvt: 'fundTransformIn_01'
 			}) 
@@ -563,7 +565,7 @@ $(function () {
 			}) ;
 			//  ---《公募基金风险揭示及售前告知书》
 			mui("body").on('mdClick','.setGoUrl',function(){
-				window.location.href = site_url.agreementModel_url + '?id=47' + '&financial=true'
+				window.location.href = site_url.superContent_url + '?id=47'
 			}, {
 				htmdEvt: 'fundTransformIn_09'
 			}) ;

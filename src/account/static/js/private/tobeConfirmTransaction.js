@@ -82,7 +82,7 @@ $(function() {
                     up: {
                         //auto: false,
                         contentrefresh: '拼命加载中',
-                        contentnomore: '没有更多了', //可选，请求完毕若没有更多数据时显示的提醒内容；
+                        contentnomore: '暂无更多内容', //可选，请求完毕若没有更多数据时显示的提醒内容；
                         callback: function() {
                             // debugger
                             //执行ajax请求
@@ -189,10 +189,10 @@ $(function() {
                     that.gV.aP.pageNum = 1;
                     that.getElements.contentWrap.html('');
                     //重新初始化
-                    // that.getElements.listLoading.show();
-                    // debugger
                     that.getData(that.gV.aThis);
-                    // mui('.contentWrapper').pullRefresh().scrollTo(0, 0, 0);
+                    $('.goTopBtn').hide();
+                    $('.contentWrap')[0].style.webkitTransform = "translate3d(0px, 0px, 0px) translateZ(0px)";
+                    $('.contentWrap')[0].style.webkitTransform = '2500ms';
                 }, {
                     'htmdEvt': 'tobeConfirmTransaction_1'
                 })
@@ -328,7 +328,7 @@ $(function() {
                     } else if (type == 'toView') { //详情
                         window.location.href = site_url.privatePlacementDetail_url + '?projectId=' + proId
                     } else if (type == 'toVideo') { //视频双录
-                        window.location.href = site_url.realVideoTranscribe_url;
+                        window.location.href = site_url.realVideoTranscribe_url + '?type=toBeConfirmed';
                     } else if (type == 'toDown') { //下载电子合同
 
                     } else if (type == 'reAppointment') { //重新预约

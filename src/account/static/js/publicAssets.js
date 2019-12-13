@@ -15,7 +15,9 @@ $(function () {
         gV: { // 全局变量
             showBankList: false,
             data: '',//请求到的总资产data
-            isShowInfo: true//是否展示信息 默认展示
+            isShowInfo: true,//是否展示信息 默认展示
+            listLoading: $('.listLoading') //所有数据区域，第一次加载的loading结构
+
         },
         init: function () {
             var that = this;
@@ -71,6 +73,7 @@ $(function () {
                         $('.noData').show();
                         return;
                     }
+                    that.gV.listLoading.hide();
                     that.gV.data = json.data;
                     //设置比较器
                     Handlebars.registerHelper("if_than_0", function (value, options) {
@@ -256,7 +259,11 @@ $(function () {
             var that = this;
             that.gV.data.fundDetailList.forEach(element => {
                 //自己处理一下文案的显示
-                element.myTip = element.divideMsg? element.divideMsg: element.canBeSpentMsg? element.canBeSpentMsg: '';
+                if (element.isShowDivideMsg == '1' && element.divideMsg){
+                    element.myTip = element.divideMsg;
+                } else if (element.canBeSpentMsg){
+                    element.myTip = element.canBeSpentMsg;
+                }
             });
         },
         addSymbol: function (value, valueMask) {

@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2019-11-26 14:42:56
- * @LastEditTime: 2019-12-11 16:50:14
+ * @LastEditTime: 2019-12-13 09:26:22
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \htjf-app\src\financial\static\js\publicPlacement\cashTransformOut.js
@@ -49,20 +49,7 @@ $(function () {
 		   
 		   
 		   checkImgUrl:'/common/img/account_icon_check@2x.png', //银行卡勾选
-		   ruleList:[
-				{
-					"id":20,
-					"title":"<<中融货币E规则>>"
-				},
-				{
-					"id":21,
-					"title":"<<中融货币E规则>>"
-				},
-				{
-					"id":22,
-					"title":"中融货币转出规则"
-				}
-		   ]
+		   ruleList:[]
 		},
 
 		$e:{
@@ -119,12 +106,6 @@ $(function () {
 		   var that = this;
 		   that.$e.el_productName.html(that.gv.productName);
 		   that.$e.el_transformInput.val(that.gv.transformMoney);
-		   that.$e.el_transformRule[0].textContent = that.gv.ruleList[2].title;
-		   that.$e.el_transformRule.attr("ruleId",that.gv.ruleList[2].id);
-		   that.$e.el_transformRule_icon.attr("ruleId",that.gv.ruleList[2].id);
-
-		   that.$e.el_agreementRule[0].textContent = that.gv.ruleList[1].title;
-		   that.$e.el_agreementRule.attr('ruleId',that.gv.ruleList[1].id);
 		  
 		   //that.$e.el_defaultBankName.textContent = 
 		},
@@ -134,11 +115,19 @@ $(function () {
 				{
 					url:site_url.findProtocolBasic_api,
 					data:{
-						"code":that.gv.fundCode
+						"code":that.gv.fundCode,
+						"template":"0"
 					},
 					needDataEmpty:true,
 					callbackDone:function(json){
-                        console.log("88888")
+						console.log("88888")
+						that.gv.ruleList = json.data;
+						that.$e.el_transformRule[0].textContent = that.gv.ruleList[2].title;
+		   that.$e.el_transformRule.attr("ruleId",that.gv.ruleList[2].id);
+		   that.$e.el_transformRule_icon.attr("ruleId",that.gv.ruleList[2].id);
+
+		   that.$e.el_agreementRule[0].textContent = that.gv.ruleList[1].title;
+		   that.$e.el_agreementRule.attr('ruleId',that.gv.ruleList[1].id);
 					}
 				}
 			]
@@ -341,14 +330,14 @@ $(function () {
 				that.gv.ruleId = $(this).attr("ruleId");
 				var id = $(this).attr("ruleId");
 				//that.findProtocolContentRule(id);
-				window.location.href = site_url.agreementModel_url + '?id='+id+ '&financial=true'
+				window.location.href = site_url.superContent_url + '?id='+id+ '&financial=true'
 			}) 
 			//点击转出到账时间
 			mui('body').on('tap','.explain .tranTime',function(){
 				var id = $(this).children().attr("ruleId");
 				that.gv.ruleId = id;
 				//that.findProtocolContentRule(id);
-				window.location.href = site_url.agreementModel_url + '?id='+id+ '&financial=true'
+				window.location.href = site_url.superContent_url + '?id='+id+ '&financial=true'
 			}) 
 
 			//点击同意协议
@@ -436,7 +425,7 @@ $(function () {
 				that.gv.ruleId = $(this).attr("ruleId");
 				var id = $(this).attr("ruleId");
 				//that.findProtocolContentRule(id);
-				window.location.href = site_url.agreementModel_url + '?id='+id+ '&financial=true'
+				window.location.href = site_url.superContent_url + '?id='+id+ '&financial=true'
 			})
 			
 		}

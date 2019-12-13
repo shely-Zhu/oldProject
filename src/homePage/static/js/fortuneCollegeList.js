@@ -66,7 +66,7 @@ $(function() {
             var obj=[{
                  url: site_url.queryBanner_api,
                  data: {    
-                    type:"8"
+                    type:"25"
                 },
                 needDataEmpty: true,
                 callbackDone: function(json){

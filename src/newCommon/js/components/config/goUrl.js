@@ -377,7 +377,7 @@ module.exports = function() {
 
 
     //h5模板页
-    this.articleTemplate_url = go_url.no_url + '/include/views/articleTemplate.html';
+    this.articleTemplate_url = go_url.no_url + '/allServerResources/model/views/articleTemplate.html';
     // 月度报告列表页
     this.monthReportList_url = go_url.no_url + '/mine/views/monthReport/monthReportList.html';
     // 月度报告详情页
@@ -466,7 +466,7 @@ module.exports = function() {
     //  //普通基金-定投买入
     // this.ordinarySetThrow_url = go_url.no_url + '/financial/views/publicPlacement/ordinarySetThrow.html';
     // 超宝详情--内容页
-    this.superContent_url = go_url.no_url + '/account/views/public/superContent.html';
+    this.superContent_url = go_url.no_url + '/allServerResources/model/views/superContent.html';
     //超宝详情页
     this.superStreasureDetail_url = go_url.no_url + '/account/views/public/superStreasureDetail.html';
     //修改邮箱
@@ -550,6 +550,9 @@ module.exports = function() {
 
     //我的积分规则
     this.imgModel_url = go_url.no_url + '/include/views/imgModel.html';
+
+    // 老带新分享链接
+    this.marketCampaign_url = go_url.marketCampaign_url;
 
 
 };
