@@ -89,6 +89,11 @@ $(function () {
                     that.gV.json.fundType = that.fundType
                     that.gV.invTypCom = json.data.invTypCom
                     that.gV.secuSht = json.data.secuSht
+                    if(!!that.gV.json.tradeLimitFlag){
+                        that.gV.json.tradeLimitFlag2 = true
+                    }else{
+                        that.gV.json.tradeLimitFlag2 = false
+                    }
                     var html = template(that.gV.json); (html, "00");
                     
                     $(".tplBox").html(html);
