@@ -692,46 +692,6 @@ $(function() {
 			}, {
 				'htmdEvt': "privateDetail_3"
 			})
-			//记录一下按钮到底跳转到哪里 埋点统计
-            /*mui("body").on('mdClick', '.single', function() {
-            	if($(this).find(".txt").html() == '交易明细') { // 私募交易明细页面
-					clickEvent = 'privateDetail_1';
-            	} else if ($(this).find(".txt").html() == '收益分配明细') { // 私募收益明细页面
-					clickEvent = 'privateDetail_2';
-            	} else if ($(this).find(".txt").html() == '基金确认书') { // 基金确认书页面
-					clickEvent = 'privateDetail_3';
-            	}
-            }, {
-				'htmdEvt': clickEvent
-			})
-            mui("body").on('mdClick', '.double>div', function() {
-            	if($(this).find(".txt").html() == '交易明细') { // 私募交易明细页面
-					window.location.href = site_url.transactionDetail_url + '?projectId=' + that.data.projectId;
-					clickEvent = 'privateDetail_1';
-            	} else if ($(this).find(".txt").html() == '收益分配明细') { // 私募收益明细页面
-					window.location.href = site_url.incomeDistribution_url + '?projectId=' + that.data.projectId;
-					clickEvent = 'privateDetail_2';
-            	} else if ($(this).find(".txt").html() == '基金确认书') { // 基金确认书页面
-					window.location.href = site_url.privateFundPdf_url + '?projectId=' + that.data.projectId + '&ecFileName=' + new Base64().encode(that.data.ecFileName) + '&ecFileUrl=' + new Base64().encode(that.data.ecFileUrl);
-					clickEvent = 'privateDetail_3';
-            	}
-            }, {
-				'htmdEvt': clickEvent
-			})
-            mui("body").on('mdClick', '.treble>.actionCon', function() {
-            	if($(this).find(".txt").html() == '交易明细') { // 私募交易明细页面
-					window.location.href = site_url.transactionDetail_url + '?projectId=' + that.data.projectId;
-					clickEvent = 'privateDetail_1';
-            	} else if ($(this).find(".txt").html() == '收益分配明细') { // 私募收益明细页面
-					window.location.href = site_url.incomeDistribution_url + '?projectId=' + that.data.projectId;
-					clickEvent = 'privateDetail_2';
-            	} else if ($(this).find(".txt").html() == '基金确认书') { // 基金确认书页面
-					window.location.href = site_url.privateFundPdf_url + '?projectId=' + that.data.projectId + '&ecFileName=' + new Base64().encode(that.data.ecFileName) + '&ecFileUrl=' + new Base64().encode(that.data.ecFileUrl);
-					clickEvent = 'privateDetail_3';
-            	}
-            }, {
-				'htmdEvt': clickEvent
-			})*/
             // 历史明细点击跳转
             mui("body").on('mdClick', '#historyDetailBtn', function() {
             	window.location.href = site_url.historyDetail_url + '?projectId=' + that.data.projectId;
@@ -795,8 +755,20 @@ $(function() {
 				if(that.data.redeemClickFlag) {
 					that.data.redeemClickFlag = frozenAccount("buyFreeze", window.location.href)
 					if(!that.data.redeemClickFlag) { // 验证通过则跳转赎回页面
-						var type = that.data.projectType==0?1:2
-						window.location.href = site_url.privateRedeem_url + '?projectId=' + that.data.projectId + '&redeemPartion=' + that.data.redeemPartion + '&type=' + type;
+						$.elasticLayer({
+				            id: "tip",
+				            title: '温馨提示',
+				            p: '<p>赎回后不可更改！</p>',
+				            buttonTxt: '确认',
+				            zIndex: 100,
+				            callback: function() {
+				            	var type = that.data.projectType==0?1:2
+								window.location.href = site_url.privateRedeem_url + '?projectId=' + that.data.projectId + '&redeemPartion=' + that.data.redeemPartion + '&type=' + type;
+				            },
+				            callbackCel: function() {
+				            	that.data.redeemClickFlag = true
+				            }
+				        });
 					}
 				}
             }, {
