@@ -44,6 +44,7 @@ $(function () {
         fundType: splitUrl['fundType'] == '10300' ? 1 : 0, //10300 货币基金类型，其余为普通基金类型
         init: function () {
             var that = this;
+            alert('测试是否进入基金详情页面')
             //页面初始化
             that.getData();
             that.getUserInfo();  //获取用户类型
@@ -117,8 +118,11 @@ $(function () {
                     $(".divider-top").html(json.data.purSt + '、' + json.data.redemSt + '、' + '买入费率' + '(<span class="line-rate">' + saleFee + '</span>' + ' <span class="discount">' + discount + '</span>)')
                 },
                 callbackFail: function (json) {
-                    tipAction(json.msg);
-                }
+                    tipAction(json.message);
+                },
+                callbackNoData:function(json){
+					tipAction(json.message);
+				},
             }]
             $.ajaxLoading(obj);
         },
@@ -136,8 +140,11 @@ $(function () {
                     that.gV.accountType = data.accountType
                 },
                 callbackFail: function (json) {
-                    tipAction(json.msg);
-                }
+                    tipAction(json.message);
+                },
+                callbackNoData:function(json){
+					tipAction(json.message);
+				},
             }]
             $.ajaxLoading(obj);
         },
@@ -308,7 +315,6 @@ $(function () {
             var that = this;
             var deviceId = splitUrl['deviceId'].split("cookie")[0];
             var manageList = [];
-            debugger
             manageList.push(prams)
             // 请求页面数据
             var obj = [{

@@ -420,43 +420,51 @@ $(function() {
             var that = this;
             var index = 0;
             //点击取消选择
-            mui("body").on('tap', '.recommendLcs', function() {
+            mui("body").on('mdClick', '.recommendLcs', function() {
                 $(".popup").show()
+            },{
+                'htmdEvt': 'recommend_0'
             })
             //点击选择理财师
-            mui("body").on('tap', '.popup-li', function(e) {
+            mui("body").on('mdClick', '.popup-li', function(e) {
                 // 拿到当前点击的理财师的名称和工号
                 $(".manager_show").html($(this).text())
                 $(".popup").hide()
                 index = $(this).index()
                 that.generateShareLink(that.list[index].empNo);
+            },{
+                'htmdEvt': 'recommend_1'
             })
-            mui("body").on('tap', '.cancel', function() {
+            mui("body").on('mdClick', '.cancel', function() {
                $(".popup").hide();
+            },{
+                'htmdEvt': 'recommend_2'
             })
 
             //点击--生成专属二维码
-            // mui("body").on('tap', '.generate_btn', function() {
-            //     //判断理财师是否已选择 
-            //     if (!$('.mui-table-view .mui-navigate-right').hasClass('hasSelect') && that.list.length) {
-            //         tipAction('请选择您的理财师');
-            //         return false;
-            //     }
+            mui("body").on('mdClick', '.generate_btn', function() {
+                //判断理财师是否已选择 
+                if (!$('.mui-table-view .mui-navigate-right').hasClass('hasSelect') && that.list.length) {
+                    tipAction('请选择您的理财师');
+                    return false;
+                }
 
-            //     //获取选中的理财师工号
-            //     var num = $('.mui-table-view a').attr('num');
+                //获取选中的理财师工号
+                var num = $('.mui-table-view a').attr('num');
 
-            //     //按钮变色
-            //     var $this = $(this).find('.txt');
-            //     $this.addClass('disable').attr('disabled', 'disabled');
+                //按钮变色
+                var $this = $(this).find('.txt');
+                $this.addClass('disable').attr('disabled', 'disabled');
 
-            //     // 清楚原有二维码
-            //     // jQuery("#code").qrcode.clear();
-            //     // 生成新的二维码
-            //     that.generateShareLink(num)
-            //         // 二维码显示
-            //         // that.getElements.qrcode_wrap.show();
-            // })
+                // 清楚原有二维码
+                // jQuery("#code").qrcode.clear();
+                // 生成新的二维码
+                that.generateShareLink(num)
+                    // 二维码显示
+                    // that.getElements.qrcode_wrap.show();
+            },{
+                'htmdEvt': 'recommend_3'
+            })
 
             //点击隐藏弹层
             // $('.shareMask').on('click', function(e) {
@@ -468,34 +476,41 @@ $(function() {
             // })
 
             // 关闭所有弹层
-            $('.closeElastic').on('click', function(e) {
+            mui("body").on('mdClick','closeElastic',function(){
                 $(e.target).hide();
                 $('.tipMask').hide();
+
+            },{
+                'htmdEvt': 'recommend_4'
             })
 
             // 点击--邀请好友
-            // mui("body").on('tap', '.recommendBoxText', function() {
+            // mui("body").on('mdClick', '.recommendBoxText', function() {
             //     //显示分享提示弹层
             //     $('.tipMask').show();
             //     $('.closeElastic').show();
             //     that.asyncAll();
             // })
             // 点击--分享给好友
-            mui("body").on('tap', '.recommendShareFriend', function() {
+            mui("body").on('mdClick', '.recommendShareFriend', function() {
                 if(that.list.length < 0){
                     // 当没有理财师的时候提示？
                     // tipAction('完成实名认证后才可以推荐好友哦')
                 }
                 that.generateShareLink(that.list[index].empNo,"friends");
                 tipAction('分享成功')
+            },{
+                'htmdEvt': 'recommend_5'
             })
             // 点击--分享到朋友圈
-            mui("body").on('tap', '.recommendShareWechart', function() {
+            mui("body").on('mdClick', '.recommendShareWechart', function() {
                 if(that.list.length < 0){
                     // tipAction('完成实名认证后才可以推荐好友哦')
                 }
                 that.generateShareLink(that.list[index].empNo,"wechatMoments");
                 tipAction('分享成功')
+            },{
+                'htmdEvt': 'recommend_6'
             })
         },
         /*-----------------------------------公共方法------------------------------*/

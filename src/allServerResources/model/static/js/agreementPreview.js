@@ -24,7 +24,6 @@ $(function() {
         webInit: function() {
             var that = this;
             that.event()
-            debugger
             // that.$el.showPreview.attr('src',splitUrl['link'])
             that.gV.url = 'http:'+ window.location.href.split('link=')[1].split(':')[1].split('&type=')[0];
             $("#uploadService").attr('href',that.gV.url)
