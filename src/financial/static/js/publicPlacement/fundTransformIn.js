@@ -563,7 +563,7 @@ $(function () {
 			}) ;
 			//  ---《公募基金风险揭示及售前告知书》
 			mui("body").on('mdClick','.setGoUrl',function(){
-				window.location.href = site_url.agreementModel_url + '?id=47' + '&financial=true'
+				window.location.href = site_url.superContent_url + '?id=47'
 			}, {
 				htmdEvt: 'fundTransformIn_09'
 			}) ;

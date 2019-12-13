@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2019-11-26 14:42:56
- * @LastEditTime: 2019-12-12 21:25:20
+ * @LastEditTime: 2019-12-13 09:26:22
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \htjf-app\src\financial\static\js\publicPlacement\cashTransformOut.js
@@ -330,14 +330,14 @@ $(function () {
 				that.gv.ruleId = $(this).attr("ruleId");
 				var id = $(this).attr("ruleId");
 				//that.findProtocolContentRule(id);
-				window.location.href = site_url.agreementModel_url + '?id='+id+ '&financial=true'
+				window.location.href = site_url.superContent_url + '?id='+id+ '&financial=true'
 			}) 
 			//点击转出到账时间
 			mui('body').on('tap','.explain .tranTime',function(){
 				var id = $(this).children().attr("ruleId");
 				that.gv.ruleId = id;
 				//that.findProtocolContentRule(id);
-				window.location.href = site_url.agreementModel_url + '?id='+id+ '&financial=true'
+				window.location.href = site_url.superContent_url + '?id='+id+ '&financial=true'
 			}) 
 
 			//点击同意协议
@@ -425,7 +425,7 @@ $(function () {
 				that.gv.ruleId = $(this).attr("ruleId");
 				var id = $(this).attr("ruleId");
 				//that.findProtocolContentRule(id);
-				window.location.href = site_url.agreementModel_url + '?id='+id+ '&financial=true'
+				window.location.href = site_url.superContent_url + '?id='+id+ '&financial=true'
 			})
 			
 		}
