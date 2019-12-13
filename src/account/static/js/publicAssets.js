@@ -259,7 +259,11 @@ $(function () {
             var that = this;
             that.gV.data.fundDetailList.forEach(element => {
                 //自己处理一下文案的显示
-                element.myTip = element.divideMsg? element.divideMsg: element.canBeSpentMsg? element.canBeSpentMsg: '';
+                if (element.isShowDivideMsg == '1' && element.divideMsg){
+                    element.myTip = element.divideMsg;
+                } else if (element.canBeSpentMsg){
+                    element.myTip = element.canBeSpentMsg;
+                }
             });
         },
         addSymbol: function (value, valueMask) {
