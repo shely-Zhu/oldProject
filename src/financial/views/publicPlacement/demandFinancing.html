@@ -37,7 +37,7 @@
      
      <script id="cashListConList" type="text/x-handlebars-template">
           {{#each this}}
-          <div class="cashItem">
+          <div class="cashItem" data="{{currentAmount}}" fundCode="{{fundCode}}" fundType="{{fundType}}">
                <div class="itemTop">
                     <div class="itemTitle"><span>{{fundName}}</span><span class="rightCon"><span class="right"></span></span></div>
                     <div class="itemSevenIncome">七日年化：{{annYldRat}}</div>

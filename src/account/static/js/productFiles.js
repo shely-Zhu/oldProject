@@ -61,7 +61,7 @@ $(function() {
           //"projectId":"21970",//项目编号
           "fileType":"19,20,10,22,1",
         },
-        contentTypeSearch: true,
+        contentTypeSearch: false,
         //async: false,
         needDataEmpty: true,
         callbackDone: function(json) {
