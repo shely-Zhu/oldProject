@@ -189,10 +189,9 @@ $(function() {
                     that.gV.aP.pageNum = 1;
                     that.getElements.contentWrap.html('');
                     //重新初始化
-                    // that.getElements.listLoading.show();
-                    // debugger
                     that.getData(that.gV.aThis);
-                    // mui('.contentWrapper').pullRefresh().scrollTo(0, 0, 0);
+                    $('.contentWrap')[0].style.webkitTransform = "translate3d(0px, 0px, 0px) translateZ(0px)";
+                    $('.contentWrap')[0].style.webkitTransform = '2500ms';
                 }, {
                     'htmdEvt': 'tobeConfirmTransaction_1'
                 })
