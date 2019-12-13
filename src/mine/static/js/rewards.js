@@ -1,7 +1,7 @@
 /*
  * 我的奖励
  * @author zhangyanping 2019-11-12
-*/
+ */
 
 require('@pathCommonBase/base.js');
 require('@pathCommonJs/ajaxLoading.js');
@@ -17,16 +17,16 @@ $(function() {
             rewardTemp: $('#reward-template'), // 最新调仓模板
             noData: $('.noData'), //没有数据的结构
             listLoading: $('.listLoading'), //
-            closeBtn: $('.closeBtn'),//关闭按钮
-            tipBox:$('.tipBox'),//弹层
-            viewDetails:$('.viewDetails'),//查看详情按钮
-            firstli:$('.firstli'),
-            secondli:$('.secondli'),
-            thirdli:$('.thirdli'),
-            fourli:$('.fourli'),
-            fiveli:$('.fiveli'),
-            secondliNum:$('.secondliNum'),
-            secondliPwd:$('.secondliPwd'),
+            closeBtn: $('.closeBtn'), //关闭按钮
+            tipBox: $('.tipBox'), //弹层
+            viewDetails: $('.viewDetails'), //查看详情按钮
+            firstli: $('.firstli'),
+            secondli: $('.secondli'),
+            thirdli: $('.thirdli'),
+            fourli: $('.fourli'),
+            fiveli: $('.fiveli'),
+            secondliNum: $('.secondliNum'),
+            secondliPwd: $('.secondliPwd'),
 
         },
         gV: { // 全局变量
@@ -42,7 +42,7 @@ $(function() {
         },
         dealTime: function(data) {
             $.each(data, function(a, b) {
-                if(b.articleTimeStr && b.articleTimeStr!= '') {
+                if (b.articleTimeStr && b.articleTimeStr != '') {
                     b.articleTimeStr = b.articleTimeStr.split(" ")[0].split("-")[1] + "." + b.articleTimeStr.split(" ")[0].split("-")[2]
                 } else {
                     b.articleTimeStr = ""
@@ -52,8 +52,8 @@ $(function() {
         },
         //初始化mui的上拉加载
         initMui: function(listClassName, wrapperName) {
-           var that = this;
-            that.gV.wrapperName=wrapperName;
+            var that = this;
+            that.gV.wrapperName = wrapperName;
 
             var height = windowHeight - $(".HeadBarConfigBox").height();
 
@@ -65,10 +65,11 @@ $(function() {
             $.pullRefresh({
                 wrapper: $('.list'),
                 class: 'recordList',
-                template: that.$e.rewardTemp, 
-                callback: function(def, t){
+                template: that.$e.rewardTemp,
+                callback: function(def, t) {
                     var obj = [{
                         url: site_url.getPrizeInfo_api,
+                        contentTypeSearch: true,
                         data: {
                             "pageNum": that.gV.pageCurrent,
                             "pageSize": that.gV.pageSize
@@ -77,7 +78,7 @@ $(function() {
                         callbackDone: function(json) {
                             var data = json.data.list;
 
-                            if(that.gV.pageCurrent == 1 && data.length == 0) {
+                            if (that.gV.pageCurrent == 1 && data.length == 0) {
                                 $(".list").css("display", "none");
                                 $('.without.noData').show();
                                 $('.contentHeader').hide();
@@ -106,34 +107,34 @@ $(function() {
                                     }
                                 });
 
-                                if( data.list && data.list.length ){
+                                if (data.list && data.list.length) {
                                     data = that.dealTime(data.list);
                                 }
 
                                 // 页面++
                                 that.gV.pageCurrent++;
-                                
-                                def && def.resolve( data, that.gV.pageCurrent);
+
+                                def && def.resolve(data, that.gV.pageCurrent);
                             }
 
                         },
-                        callbackNoData: function( json ){
-                            if(that.gV.pageCurrent == 1) {
+                        callbackNoData: function(json) {
+                            if (that.gV.pageCurrent == 1) {
                                 $(".list").css("display", "none")
                             }
-                           
-                            def && def.reject( json, that.gV.pageCurrent );
+
+                            def && def.reject(json, that.gV.pageCurrent);
                         },
                         callbackFail: function(json) {
 
-                            def && def.reject( json, that.gV.pageCurrent );
+                            def && def.reject(json, that.gV.pageCurrent);
                         },
                     }];
-                    $.ajaxLoading(obj); 
+                    $.ajaxLoading(obj);
                 }
             })
         },
-        
+
         events: function() {
             var that = this;
 
@@ -155,43 +156,38 @@ $(function() {
                         var data = json.data;
                         console.log(JSON.stringify(json.data));
                         //获取需要的值
-                        var firstliText = $this.siblings(".rewardName").html(),//奖励名称
-                            startTime = $this.siblings(".rewardTime").attr("start-data"),//使用期限起始时间
-                            endTime = $this.siblings(".rewardTime").attr("end-data"),//结束时间
-                            memo = $this.attr("data-memo"),//奖品描述
-                            createTime = $this.siblings(".rewardTime").attr("create-data");//奖励时间
+                        var firstliText = $this.siblings(".rewardName").html(), //奖励名称
+                            startTime = $this.siblings(".rewardTime").attr("start-data"), //使用期限起始时间
+                            endTime = $this.siblings(".rewardTime").attr("end-data"), //结束时间
+                            memo = $this.attr("data-memo"), //奖品描述
+                            createTime = $this.siblings(".rewardTime").attr("create-data"); //奖励时间
 
                         //给html标签赋值
-                        that.$e.firstli.html(firstliText);//奖励名称
-                        that.$e.secondliNum.find("span").eq(1).html(data.prizeCode);//卡号
-                        that.$e.secondliPwd.find("span").eq(1).html(data.prizeCodePwd);//密码
-                        that.$e.thirdli.find("span").eq(0).html(startTime);//使用期限起始时间
-                        that.$e.thirdli.find("span").eq(1).html(endTime);//结束时间
-                        that.$e.fourli.find("p").eq(1).html(memo);//奖品描述
-                        that.$e.fiveli.find("p").eq(1).html(createTime);//奖励时间
+                        that.$e.firstli.html(firstliText); //奖励名称
+                        that.$e.secondliNum.find("span").eq(1).html(data.prizeCode); //卡号
+                        that.$e.secondliPwd.find("span").eq(1).html(data.prizeCodePwd); //密码
+                        that.$e.thirdli.find("span").eq(0).html(startTime); //使用期限起始时间
+                        that.$e.thirdli.find("span").eq(1).html(endTime); //结束时间
+                        that.$e.fourli.find("p").eq(1).html(memo); //奖品描述
+                        that.$e.fiveli.find("p").eq(1).html(createTime); //奖励时间
 
-                        that.$e.tipBox.show();//弹层出现
+                        that.$e.tipBox.show(); //弹层出现
 
                     },
 
                 }];
                 $.ajaxLoading(obj);
 
-            },{
+            }, {
                 'htmdEvt': 'rewards_01'
             });
 
             //返回上一页
             mui("body").on('tap', '.closeBtn', function() {
-                that.$e.tipBox.hide();//弹层隐藏
+                that.$e.tipBox.hide(); //弹层隐藏
             })
         }
     };
     reward.init();
 
 });
-
-
-
-
-
