@@ -150,7 +150,7 @@ $(function () {
                 data: {
                     useEnv:useEnv
                 },
-                //async: false,
+                async: false,
                 needDataEmpty: true,
                 callbackDone: function(json) {
 					if(json.status == '0000'){
@@ -209,7 +209,8 @@ $(function () {
 						generateTemplate(data, that.$el.popupUl2, that.$el.bankListTemplate2,true);
 						
 					}
-				}
+				},
+				
 			}];
 			$.ajaxLoading(obj);
 		},
@@ -380,7 +381,7 @@ $(function () {
 					value = (Number(val)*(1-1/(1 + Number(rate)))).toFixed(2)
 					value2 = (Number(val)*(1-1/(1 + that.gV.purchaseRate))).toFixed(2)
 					discountMount = (Number(value2) - Number(value)).toFixed(2)
-					str = value + '元&nbsp;' + '(<span class="line-rate">' + that.gV.purchaseRate*100 + '%</span>&nbsp;' + (rate*100).toFixed(2) + '%)省<span class="discount">' + discountMount + '</span>元'
+					str = value + '元&nbsp;' + '(<span class="line-rate">' + that.gV.purchaseRate*100 + '%</span>&nbsp;&nbsp;' + (rate*100).toFixed(2) + '%)省<span class="discount">' + discountMount + '</span>元'
 				}
 				
 				 
