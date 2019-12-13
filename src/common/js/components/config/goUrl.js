@@ -99,6 +99,10 @@ module.exports = function() {
 
     //公募产品详情
     this.productPublicDetail_url = go_url.no_url + '/productPublic/views/productDetail.html';
+
+    //公募产品分享链接 需要拼接要分享的fundCode
+    this.productPublicShare_url = go_url.wap_url + '/productPublic/views/productDetail.html?fundCode=';
+
     //私募产品详情
     this.productPrvDetail_url = go_url.no_url + '/productPrivate/views/prdPrvDetails.html';
     //猜你喜欢产品推荐

@@ -297,7 +297,6 @@ var splitUrl = require('./components/splitUrl.js')();
                     if (needLoading) {
                         //每次请求都把请求次数+1
                         requestCount ++;
-                        console.log('start: ' + el.url + '----' + requestCount);
                         if (1 == requestCount){
                             //页面第一次请求的时候 设置一个定时器 防止出现遮罩层隐藏不了的情况
                             // setTimeout(function() {
@@ -344,7 +343,6 @@ var splitUrl = require('./components/splitUrl.js')();
                         $('.listLoading').hide();
                         if (needLoading) {
                             requestCount -= 1;
-                            console.log('fail: ' + param.url + "----" + requestCount);
                             if (requestCount == 0){
                                 $('.netLoading').hide();//数据请求成功 遮罩隐藏
                             }
@@ -363,7 +361,6 @@ var splitUrl = require('./components/splitUrl.js')();
                         $('.listLoading').hide();
                         if (needLoading) {
                             requestCount -= 1;
-                            console.log('done: ' + param.url + "----" + requestCount);
                             if (requestCount == 0){
                                 $('.netLoading').hide();//数据请求成功 遮罩隐藏
                             }
