@@ -190,6 +190,7 @@ $(function() {
                     that.getElements.contentWrap.html('');
                     //重新初始化
                     that.getData(that.gV.aThis);
+                    $('.goTopBtn').hide();
                     $('.contentWrap')[0].style.webkitTransform = "translate3d(0px, 0px, 0px) translateZ(0px)";
                     $('.contentWrap')[0].style.webkitTransform = '2500ms';
                 }, {
