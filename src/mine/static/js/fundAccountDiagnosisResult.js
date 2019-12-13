@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2019-12-09 15:53:31
- * @LastEditTime: 2019-12-13 11:57:17
+ * @LastEditTime: 2019-12-13 18:12:39
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \htjf-app\src\mine\static\js\fundAccountDiagnosisResult.js
@@ -26,6 +26,7 @@ $(function() {
             diagnosis:$("#diagnosis-box"), //诊断结论
             templateTransferFunds:$("#templateTransferFunds"), //基金列表模板
             TransferFundsContent:$(".otherAddList .selectFundCode"), //基金列表容器
+            userAge:$(".userAge"), //年龄
             sex:$("#sex"), //性别
             professional:$("#professional"), //职业
             investment_year:$("#investment_year"), //投资年限
@@ -75,61 +76,12 @@ $(function() {
               fundDiagnosisRiskLevelDicData:"", //风险等级字典
               fundDiagnosisEInvestDurationLevelDicData:"", //预计投资年限字典
               fundDiagnosisLiquidityRequirementDicData:"", //流动性需求字典
-              mockData:{
-                "fundDiagnosisSex": [
-                    {
-                    "dicCode": 0,
-                    "dicType": "fundDiagnosisSex",
-                    "rank": 0,
-                    "value": "男"
-                    },
-                    {
-                    "dicCode": 1,
-                    "dicType": "fundDiagnosisSex",
-                    "rank": 1,
-                    "value": "女"
-                    }
-                ], 
-                "fundDiagnosisInvestDuration": [
-                    {
-                    "dicCode": 1,
-                    "dicType": "fundDiagnosisInvestDuration",
-                    "rank": 1,
-                    "value": "没有经验"
-                    },
-                    {
-                    "dicCode": 2,
-                    "dicType": "fundDiagnosisInvestDuration",
-                    "rank": 2,
-                    "value": "2年以下"
-                    },
-                    {
-                    "dicCode": 3,
-                    "dicType": "fundDiagnosisInvestDuration",
-                    "rank": 3,
-                    "value": "2-5年"
-                    },
-                    {
-                    "dicCode": 4,
-                    "dicType": "fundDiagnosisInvestDuration",
-                    "rank": 4,
-                    "value": "5-10年"
-                    },
-                    {
-                    "dicCode": 5,
-                    "dicType": "fundDiagnosisInvestDuration",
-                    "rank": 5,
-                    "value": "10年以上"
-                    }
-                ]
-              }
         },
         init: function() {
             var that = this;
             that.queryDictionary();
             that.initResource();
             that.initAddOtherFundCode();
-            that.initSelectVal();
             that.events();
         },
         initAddOtherFundCode:function(){
@@ -150,17 +102,22 @@ $(function() {
         initSelectVal:function(){
            //初始化数据字典下拉框值
            var that = this;
-           generateTemplate(that.gV.mockData.fundDiagnosisSex,that.$e.fundDiagnosisSexTemplate,that.$e.templateSelectBox);  //init性别
-           generateTemplate(that.gV.mockData.fundDiagnosisInvestDuration,that.$e.fundDiagnosisInvestDurationTemplate,that.$e.templateSelectBox);  //init投资年限
+            generateTemplate(that.gV.fundDiagnosisSexDicData,that.$e.fundDiagnosisSexTemplate,that.$e.templateSelectBox);  //init性别
+            generateTemplate(that.gV.fundDiagnosisVocationDicData,that.$e.fundDiagnosisVocationTemplate,that.$e.templateSelectBox);  //init职业
+            generateTemplate(that.gV.fundDiagnosisInvestDurationDicData,that.$e.fundDiagnosisInvestDurationTemplate,that.$e.templateSelectBox);  //init投资年限
+            generateTemplate(that.gV.fundDiagnosisRiskLevelDicData,that.$e.fundDiagnosisRiskLevelTemplate,that.$e.templateSelectBox);  //init风险
+            generateTemplate(that.gV.fundDiagnosisEInvestDurationLevelDicData,that.$e.fundDiagnosisEInvestDurationLevelTemplate,that.$e.templateSelectBox);  //init预计投资年限
+            generateTemplate(that.gV.fundDiagnosisLiquidityRequirementDicData,that.$e.fundDiagnosisLiquidityRequirementTemplate,that.$e.templateSelectBox);  //init流动性
         },
         initData:function(data){
-            that.gV.userAge = data.age;
-            that.gV.sexData = data.sex == 0 ?"女":"男";
-            that.gV.professionalData = data.evocation ;
-            that.gV.investment_yearData = data.investDurationLevel;
-            that.gV.riskLevelData = data.riskLevel;
-            that.gV.expectedInvestment_yearData = data.eInvestDurationLevel;
-            that.gV.liquidityData = data.liquidityRequirement;
+            var that = this
+            that.gV.userAge = data.age;  //年龄
+            that.gV.sexDataCode = data.sex;  //性别
+            that.gV.professionalDataCode = data.evocation ;  //职业
+            that.gV.investment_yearDataCode = data.investDurationLevel;  //投资年限
+            that.gV.riskLevelDataCode = data.riskLevel;   //风险等级
+            that.gV.expectedInvestment_yearDataCode = data.eInvestDurationLevel;  //预期年限
+            that.gV.liquidityDataCode = data.liquidityRequirement; //流动性
             that.gV.yield_firstData = data.eYieldratePerYearMin;
             that.gV.yield_secondData = data.eYieldratePerYearMax;
             that.gV.loss_firstData = data.affordableMaxDeficitRateMin;
@@ -169,16 +126,57 @@ $(function() {
             that.gV.readyPurchaseHTFunds= data.readyPurchaseHTFunds;
         },
         escapeCode:function(code,type){
-           
+            var that = this;
+            var val = "请选择";
+           if(type == "fundDiagnosisSex"){
+               that.gV.fundDiagnosisSexDicData.forEach(function(item){
+                   if(item.dicCode == code){
+                        val = item.value
+                   }
+               })
+           }else if(type == 'fundDiagnosisVocation'){
+                that.gV.fundDiagnosisVocationDicData.forEach(function(item){
+                    if(item.dicCode == code){
+                        val = item.value
+                    }
+                })
+           }else if(type == 'fundDiagnosisInvestDuration'){
+                that.gV.fundDiagnosisInvestDurationDicData.forEach(function(item){
+                    if(item.dicCode == code){
+                        val = item.value
+                    }
+                })
+            }else if(type == 'fundDiagnosisRiskLevel'){
+                that.gV.fundDiagnosisRiskLevelDicData.forEach(function(item){
+                    if(item.dicCode == code){
+                        val = item.value
+                    }
+                })
+            }else if(type == 'fundDiagnosisEInvestDurationLevel'){
+                that.gV.fundDiagnosisEInvestDurationLevelDicData.forEach(function(item){
+                    if(item.dicCode == code){
+                        val = item.value
+                    }
+                })
+            }else if(type == 'fundDiagnosisLiquidityRequirement'){
+                that.gV.fundDiagnosisLiquidityRequirementDicData.forEach(function(item){
+                    if(item.dicCode == code){
+                        val = item.value
+                    }
+                })
+            }
+            return val;
         },
         initParmis:function(){
              var that = this;
-             that.$e.sex[0].textContent = that.gV.sexData ==""?"请选择":that.gV.sexData;
-             that.$e.professional[0].textContent = that.gV.professionalData ==""?"请选择":that.gV.professionalData;
-             that.$e.investment_year[0].textContent = that.gV.investment_yearData ==""?"请选择":that.gV.investment_yearData;
-             that.$e.riskLevel[0].textContent = that.gV.riskLevelData ==""?"请选择":that.gV.riskLevelData;
-             that.$e.expectedInvestment_year[0].textContent = that.gV.expectedInvestment_yearData ==""?"请选择":that.gV.expectedInvestment_yearData;
-             that.$e.liquidity[0].textContent = that.gV.liquidityData ==""?"请选择":that.gV.liquidityData;
+             that.$e.userAge[0].value =  that.gV.userAge
+             that.$e.sex[0].textContent = that.escapeCode(that.gV.sexDataCode,"fundDiagnosisSex");   //性别
+             that.$e.professional[0].textContent = that.escapeCode(that.gV.professionalDataCode,"fundDiagnosisVocation");  //职业
+             that.$e.investment_year[0].textContent = that.escapeCode(that.gV.investment_yearDataCode,"fundDiagnosisInvestDuration");  //投资年限
+             that.$e.riskLevel[0].textContent = that.escapeCode(that.gV.riskLevelDataCode,"fundDiagnosisRiskLevel");  //风险等级
+             that.$e.expectedInvestment_year[0].textContent = that.escapeCode(that.gV.expectedInvestment_yearDataCode,"fundDiagnosisEInvestDurationLevel"); //预期年限
+             that.$e.liquidity[0].textContent = that.escapeCode(that.gV.liquidityDataCode,"fundDiagnosisLiquidityRequirement");  //流动性
+             
              that.$e.yield_first[0].textContent = that.gV.yield_firstData ==""?"请选择":that.gV.yield_firstData;
              that.$e.yield_second[0].textContent = that.gV.yield_secondData ==""?"请选择":that.gV.yield_secondData;
              that.$e.loss_first[0].textContent = that.gV.loss_firstData ==""?"请选择":that.gV.loss_firstData;
@@ -190,12 +188,19 @@ $(function() {
             var queryString = "fundDiagnosisSex,fundDiagnosisVocation,fundDiagnosisInvestDuration,fundDiagnosisRiskLevel,fundDiagnosisEInvestDurationLevel,fundDiagnosisLiquidityRequirement"
             var obj = [{
                 url : site_url.queryDictionary_api,
+                contentTypeSearch:true,
                 data:{
                     keySets:queryString
                 },
                 needDataEmpty: true,
                 callbackDone:function(json){
-                    console.log("8989",json)
+                   that.gV.fundDiagnosisSexDicData = json.data.fundDiagnosisSex;
+                   that.gV.fundDiagnosisVocationDicData = json.data.fundDiagnosisVocation;
+                   that.gV.fundDiagnosisInvestDurationDicData = json.data.fundDiagnosisInvestDuration;
+                   that.gV.fundDiagnosisRiskLevelDicData = json.data.fundDiagnosisRiskLevel;
+                   that.gV.fundDiagnosisEInvestDurationLevelDicData =json.data.fundDiagnosisEInvestDurationLevel;
+                   that.gV.fundDiagnosisLiquidityRequirementDicData = json.data.fundDiagnosisLiquidityRequirement;
+                   that.initSelectVal();
                 }
 
             }];
@@ -231,20 +236,21 @@ $(function() {
                 url:site_url.addFundDiagnosisApply_api,
                 needDataEmpty:true,
                 data:{
-                    id:"",  //主键
-                    age:"", //年龄
-                    evocation:"", //职业
+                    id:"",  //主键 
+                    age:that.gV.userAge, //年龄
+                    sex:that.gV.sexDataCode, //性别
+                    evocation:that.gV.professionalDataCode, //职业
                     evocationExtension:"",//职业描述
-                    investDurationLevel:"", //投资年限
-                    riskLevel:"",  //风险等级
-                    eInvestDurationLevel:"",  //预计投资年限
-                    liquidityRequirement:"",  //流动性需求
+                    investDurationLevel:that.gV.investment_yearDataCode, //投资年限
+                    riskLevel:that.gV.riskLevelDataCode,  //风险等级
+                    eInvestDurationLevel:that.gV.expectedInvestment_yearDataCode,  //预计投资年限
+                    liquidityRequirement:that.gV.liquidityDataCode,  //流动性需求
                     eYieldratePerYearMin:"", //预期年化收益率最小值
                     eYieldratePerYearMax:"",  //预期年化收益率最大值
                     affordableMaxDeficitRateMin:"",  //可承受最大亏损最小值
                     affordableMaxDeficitRateMax:"",  //可承受最大亏损最大值
-                    readyPurchaseHTFunds:"",    //已购买恒天基金
-                    readyPurchaseQTFunds:""      //已购买其他基金
+                    readyPurchaseHTFunds:[],    //已购买恒天基金
+                    readyPurchaseQTFunds:[]      //已购买其他基金
                 },
                 callbackDone:function(json){
                    console.log("提交申请",json)
@@ -258,6 +264,7 @@ $(function() {
             var obj = [{
                 url:site_url.queryFundDiagnosisApplyInfo_api,
                 needDataEmpty:true,
+                contentTypeSearch:true,
                 data:{
                     applyId:applyId, //基金诊断申请id
                 },
