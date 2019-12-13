@@ -297,6 +297,8 @@ module.exports = function() {
 
     // 私募售前告知书
     this.openPdf_url = go_url.no_url + '/productPrivate/views/openPdf.html';
+    // 协议模板页
+    this.openPdf_url = go_url.no_url + '/allServerResources/model/views/superContent.html';
 
 
 

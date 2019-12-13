@@ -55,7 +55,7 @@ function elasticLayer(outdateFreezeStatus, lawFreezeStatus, url, custType) {
 			callback: function() {}
 		});
     	return true;
-	} else if(outdateFreezeStatus == 1) {
+	}/* else if(outdateFreezeStatus == 1) {
         var idDateObj = {
             title: '温馨提示',
             p: '您的证件已过期，补充证件信息后才可能继续交易',
@@ -74,7 +74,7 @@ function elasticLayer(outdateFreezeStatus, lawFreezeStatus, url, custType) {
         }
         $.elasticLayer(idDateObj);
         return true;
-    }
+    }*/
 };
 
 module.exports = function(value, url, custType) {

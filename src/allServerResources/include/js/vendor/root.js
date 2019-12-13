@@ -33,6 +33,12 @@ if (appId || getCookie('appId')) {
     //是，设置全局变量currentIsApp为true
     window.currentIsApp = true;
 }
+// 判断移动端设备
+var u = navigator.userAgent,
+    app = navigator.appVersion;
+window.isAndroid = u.indexOf('Android') > -1 || u.indexOf('Linux') > -1; //g
+window.isIOS = !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/); //ios终端
+
 /*********************************这里判断是否为app end****************************************/
 
 
@@ -134,17 +140,17 @@ var originFund_public = '', //公募
  * 
  */
 window.go_url = {
-    no_url: '',
-    oauth_url: '', // oauth跳转域名
-    apps_url: '', //app私募跳转域名
-    pofapp_url: '', //app私募跳转域名
-    wap_url: '', //wap跳转域名
-    cft_url: '', // 股份(财富)域名
-    wm_url: '', // 股份(财富)二级页面跳转域名
-    rock_url: '', //中岩域名
-    sso_url: ''
-}
-/***********************跳转链接 域名配置 end*****************************/
+        no_url: '',
+        oauth_url: '', // oauth跳转域名
+        apps_url: '', //app私募跳转域名
+        pofapp_url: '', //app私募跳转域名
+        wap_url: '', //wap跳转域名
+        cft_url: '', // 股份(财富)域名
+        wm_url: '', // 股份(财富)二级页面跳转域名
+        rock_url: '', //中岩域名
+        sso_url: ''
+    }
+    /***********************跳转链接 域名配置 end*****************************/
 
 /*
  * 针对不同环境设置不同域名
@@ -429,14 +435,14 @@ if (!window.currentIsApp) {
  */
 
 window.http_url = {
-    wapApi_url:'/wap',   // wap接口
+    wapApi_url: '/wap', // wap接口
     web_url: '/web', // 账户接口
-    app_url: '/app',// App接口,
-    webPof_url:'/web/pof' //私募理财
-    // pof_url: '/wap/pof', //公募接口
-    // pef_url: '/wap/pef', //私募接口
-    // content_url: '/wap/content', // 内容接口
-    // account_url: '/wap/account', // 账户接口pef_url
+    app_url: '/app', // App接口,
+    webPof_url: '/web/pof' //私募理财
+        // pof_url: '/wap/pof', //公募接口
+        // pef_url: '/wap/pef', //私募接口
+        // content_url: '/wap/content', // 内容接口
+        // account_url: '/wap/account', // 账户接口pef_url
 
 }
 
