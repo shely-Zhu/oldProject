@@ -551,5 +551,8 @@ module.exports = function() {
     //我的积分规则
     this.imgModel_url = go_url.no_url + '/include/views/imgModel.html';
 
+    // 老带新分享链接
+    this.marketCampaign_url = go_url.marketCampaign_url;
+
 
 };
