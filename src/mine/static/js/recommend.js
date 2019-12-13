@@ -28,7 +28,9 @@ $(function() {
             recommend_lcs_text: $('.recommendLcsText'), // 邀请好友区域
             popupUl: $('.popup-ul'), // 银行卡模板容器
 			bankListTemplate: $('#bankList-template'), //银行卡模板
-
+            empNo:'',   // 理财师工号
+            existMain:'',  // 专属理财师标识
+ 
         },
         setting: {
             ajaxArr: [], // 请求ajax的数组
@@ -79,7 +81,7 @@ $(function() {
             //用来设置分享链接给app
             //因ios和安卓拦截到的ldxShare为小写，这里同步改为ldxshare
             if (window.currentIsApp) {
-                $('body').append('<iframe src="ldxshare://" id="ldx_share" style="position:absolute;z-index:1000;height:0;width:0;"></iframe>');
+                // $('body').append('<iframe src="ldxshare://" id="ldx_share" style="position:absolute;z-index:1000;height:0;width:0;"></iframe>');
                 // 二维码下的提示文案，只有普通浏览器显示，微信和app内都不显示
                 $('.qrcode_wrap .code_tip').hide();;
             }
@@ -191,6 +193,7 @@ $(function() {
                 shareUrl = '', // 分享出去链接
                 existMain = data.existMain;
                 advisor = data.advisor;
+                that.getElements.existMain=existMain;
                 
             if (existMain == 0 && advisor.length > 1) {
                 $('.recommendLcsText').html("您的理财师：")
@@ -211,6 +214,7 @@ $(function() {
                 $('.manager_show').html(advisor[0].codeName + advisor[0].empNo)
                 
                 that.generateShareLink(advisor[0].empNo);
+                that.getElements.empNo = advisor[0].empNo;
                 $('.recommendLcs').css('pointer-events','none')
             }
         },
@@ -497,7 +501,11 @@ $(function() {
                     // 当没有理财师的时候提示？
                     // tipAction('完成实名认证后才可以推荐好友哦')
                 }
-                that.generateShareLink(that.list[index].empNo,"friends");
+                if(that.getElements.existMain == 1){
+                    that.generateShareLink(that.getElements.empNo,"friends");
+                }else{
+                    that.generateShareLink(that.list[index].empNo,"friends");
+                }
                 tipAction('分享成功')
             },{
                 'htmdEvt': 'recommend_5'
@@ -507,7 +515,12 @@ $(function() {
                 if(that.list.length < 0){
                     // tipAction('完成实名认证后才可以推荐好友哦')
                 }
-                that.generateShareLink(that.list[index].empNo,"wechatMoments");
+                if(that.getElements.existMain == 1){
+                    that.generateShareLink(that.getElements.empNo,"friends");
+                }else{
+                    that.generateShareLink(that.list[index].empNo,"friends");
+                }
+                // that.generateShareLink(that.list[index].empNo,"wechatMoments");
                 tipAction('分享成功')
             },{
                 'htmdEvt': 'recommend_6'
