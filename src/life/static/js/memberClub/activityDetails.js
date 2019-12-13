@@ -56,7 +56,7 @@ $(function() {
 
                     },
                     //async: false,
-                    needDataEmpty: that.gV.isNeedLogin,
+                    needLogin: that.gV.isNeedLogin,
                     callbackDone: function(json) {
                         var data = json.data;
                         if (data.actStatus == 2) {
