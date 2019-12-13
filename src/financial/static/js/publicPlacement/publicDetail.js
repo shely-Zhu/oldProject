@@ -277,7 +277,7 @@ $(function () {
             var obj = [{
                 url: site_url.prfFundCollectionQueryCode_api,
                 data: {
-                    
+                    publicFundsKeyWords:splitUrl['fundCode']
                 },
                 needLogin: false,
                 callbackDone: function (json) {

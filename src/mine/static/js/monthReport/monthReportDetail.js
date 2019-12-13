@@ -50,6 +50,7 @@ var monthReportDetail = {
 			needLogin:true,//需要判断是否登陆
 			needLoading:true,
 			callbackDone:function(data){
+				$(".netLoading").hide()
 				var json=data.data;
 				// 客户名称
 				$('.clientName').html(json.name);
@@ -70,6 +71,7 @@ var monthReportDetail = {
 			needDataEmpty: true,
 			async: false,
 			callbackDone: function(json) {
+				$(".netLoading").hide()
 				var json=json.data;
 				// 报告月份
 				that.getElements.monthReportTime = json.month;
@@ -113,6 +115,7 @@ var monthReportDetail = {
 			needDataEmpty: true,
 			async: false,
 			callbackDone: function(json) {
+				$(".netLoading").hide()
 				var jsonData = json.data;
 				if($.util.objIsEmpty(jsonData.pefSaleList) && $.util.objIsEmpty(jsonData.generalModelList) && $.util.objIsEmpty(jsonData.pofList)){
 					//没有数据
@@ -170,11 +173,8 @@ var monthReportDetail = {
 						jsonData.flag3 = true;
 						jsonData.flag1 = false;
 						jsonData.flag2 = false;
-
 						generateTemplate(jsonData,$(".holdPosition"), that.getElements.adjustmentTemp);
 					}
-					
-
 				}
 
 			},
@@ -205,6 +205,7 @@ var monthReportDetail = {
 			needDataEmpty: true, 
 			async: false, 
 			callbackDone: function(json){
+				$(".netLoading").hide()
 				var jsonData = json.data;
 				if(jsonData.pefSaleInfoList.length == 0 && jsonData.pofInfoList.length == 0){
 					//没有数据
@@ -265,6 +266,7 @@ var monthReportDetail = {
 			needDataEmpty: false,
 			async:false,//同步，newcomer字段在产品详情的结构会用于其他逻辑判断
 			callbackDone: function(json){
+				$(".netLoading").hide()
 				//判断是否已实名认证
 				var data = json.data;
 				// var assetPerHtml;
