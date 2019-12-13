@@ -757,10 +757,11 @@ $(function() {
 					if(!that.data.redeemClickFlag) { // 验证通过则跳转赎回页面
 						$.elasticLayer({
 				            id: "tip",
-				            title: '温馨提示',
-				            p: '<p>赎回后不可更改！</p>',
-				            buttonTxt: '确认',
+				            title: '提示',
+				            p: '<p>赎回后不可撤单，确定要赎回</p>',
 				            zIndex: 100,
+				            yesButtonPosition: 'left',
+				            hideCelButton: false,
 				            callback: function() {
 				            	var type = that.data.projectType==0?1:2
 								window.location.href = site_url.privateRedeem_url + '?projectId=' + that.data.projectId + '&redeemPartion=' + that.data.redeemPartion + '&type=' + type;

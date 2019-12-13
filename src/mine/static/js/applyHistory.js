@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2019-12-09 15:53:31
- * @LastEditTime: 2019-12-12 19:38:00
+ * @LastEditTime: 2019-12-13 11:12:11
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \htjf-app\src\mine\static\js\fundAccountDiagnosisResult.js
@@ -31,6 +31,7 @@ $(function() {
               dataPickData:"", //基金代码
               fundCode:"", //购买日期
               buyMoney:"",   //购买金额
+              applyId:"",   //需要编辑的基金的申请id
         },
         init: function() {
             var that = this;
@@ -63,11 +64,11 @@ $(function() {
             })
             //点击修改跳转到基金申请页面
             mui("body").on("mdClick",".editHistory",function(){
-                window.location.href = site_url.fundAccountDiagnosisResult_url
+                window.location.href = site_url.fundAccountDiagnosisResult_url+"?type=edit"+"&applyId="+that.gV.applyId
             })
             //点击新增申请
             mui("body").on("mdClick",".addApply",function(){
-                window.location.href = site_url.fundAccountDiagnosisResult_url
+                window.location.href = site_url.fundAccountDiagnosisResult_url+"?type=add"
             })
          
        },

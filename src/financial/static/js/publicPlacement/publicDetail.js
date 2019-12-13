@@ -247,8 +247,19 @@ $(function () {
             });
             //分享  -- 跳往原生页面
             mui("body").on('mdClick', ".share_area", function (e) {
-                if (window.currentIsApp) {
-                    $('body').append('<iframe src="publicDetailShare://?fundCode=' + splitUrl['fundCode'] + '&fundName=' + that.gV.secuSht + '"></iframe>');
+                var shareObj = {
+                    type:'auto',
+                    businessType:'publicProductShare',
+                    title: this.gV.secuSht,
+                    des: '',
+                    link: site_url.productPublicShare_url + splitUrl['fundCode'],
+                    img: ''
+                }
+                if (window.isAndroid){
+                    window.jsObj.wxShare(shareObj);
+                }
+                if (window.isIOS){
+                    window.webkit.messageHandlers(shareObj);
                 }
             });
             //加自选  
@@ -277,7 +288,7 @@ $(function () {
             var obj = [{
                 url: site_url.prfFundCollectionQueryCode_api,
                 data: {
-                    
+                    publicFundsKeyWords:splitUrl['fundCode']
                 },
                 needLogin: false,
                 callbackDone: function (json) {

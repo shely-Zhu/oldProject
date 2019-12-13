@@ -61,10 +61,16 @@ module.exports = {
                     plugins: ['transform-runtime']
                 }
             },
-                
+            
             //query: {compact: false},
 
-        }
+            },
+            {// 转译html文件
+                test: /\.html$/,
+                use: [
+                  'html-loader'
+                ]
+            }, 
           // {test: /\.less$/, loader: 'style-loader!css-loader?minimize&-autoprefixer!postcss-loader!less-loader'}
         ]
     },
@@ -73,7 +79,7 @@ module.exports = {
         //@callback和@deferred是webpack独有的，用于js中引用zepto的库，因此不写到pathVar.js中
         //需要在这里合并一下
         alias: aliasVar,
-        extensions: ['', '.js'],
+        extensions: ['', '.js', '.html'],
     },
     plugins: [
         //提供全局的变量，在模块中使用无需用require引入
