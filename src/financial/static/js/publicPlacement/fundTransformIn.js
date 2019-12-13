@@ -198,8 +198,6 @@ $(function () {
 				callbackDone: function(json) {
 					if(json.status == '0000'){
 						// 将列表插入到页面上
-						$(".listLoading").hide()
-						$('.popup').css('display','block')
 						var data = [] ;
 						data = json.data;
 						console.log('data',data)
