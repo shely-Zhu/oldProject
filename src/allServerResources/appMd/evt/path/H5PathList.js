@@ -193,6 +193,8 @@ var pathList = {
 	"/mine/views/returnsDetail.html":{ evtid: '170', topic: '收益明细', info: ''},
 	"/mine/views/rewards.html":{ evtid: '170', topic: '我的奖励', info: ''},
 	"/mine/views/transactionDetails.html":{ evtid: '170', topic: '交易明细', info: ''},
+	"/mine/views/examplePage.html":{ evtid: '170', topic: '专题模板', info: ''},
+	"/mine/views/mineRegulatoryAccounts.html":{ evtid: '170', topic: '公墓监管账户', info: ''},
 	//homePage
 	"/homePage/views/fortuneCollege/fortuneCollegeList.html" :{ evtid: '', topic: '财富学院首页', info: ''} ,
 	"/homePage/views/fortuneCollege/fortuneFlowKnown.html" :{ evtid: '', topic: '财富流向早知道', info: ''} ,

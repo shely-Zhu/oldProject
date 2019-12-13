@@ -35,16 +35,19 @@ $(function () {
         },
         event: function () {
             var that = this;
-            $(".list").on("mdClick", function (e) {
+            mui("body").on('mdClick','.list', function(){
                 that.gD.feedbackType = $(this).children("input").val() || 0
             },{
                 'htmdEvt': 'concatUsAdvise_01'
             })
-            $(".textarea").on('keyup', function () {
+            /*$(".textarea").on('keyup', function () {
+                that.gD.feedbackDesc = $(".textarea").val()
+                $(".haveMany").text(that.gD.feedbackDesc.length+'/200')
+            })*/
+            mui("body").on('keyup','.textarea', function(){
                 that.gD.feedbackDesc = $(".textarea").val()
                 $(".haveMany").text(that.gD.feedbackDesc.length+'/200')
             })
-
         },
         submitAdvise() {
             var that = this;
