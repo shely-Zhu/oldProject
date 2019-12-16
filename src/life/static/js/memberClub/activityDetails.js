@@ -51,7 +51,9 @@ $(function() {
                     url: site_url.getDetailActivity_api,
                     data: {
                         actType: that.gV.actType, //活动类型
-                        actId: that.gV.actId //活动id
+                        actId: that.gV.actId, //活动id
+                        isNeedLogin: splitUrl['isNeedLogin']
+
 
                     },
                     //async: false,

@@ -22,7 +22,6 @@ var splitUrl = require('@pathCommonJs/components/splitUrl.js');
 //引入复制功能
 // var Clipboard = require('clipboard');
 var popPicker = require('@pathCommonJsCom/popPicker.js');
-var provinceList = require('../../../../common/json/provinceList.js');
 var generateTemplate = require('@pathCommonJsComBus/generateTemplate.js');
 
 var payPass = require('@pathCommonJsCom/payPassword.js');
