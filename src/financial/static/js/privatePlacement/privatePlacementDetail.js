@@ -862,7 +862,7 @@ $(function() {
                         if (v.conditionType == 4 && !!v.isPopup) { //是否弹出售前告知书。售前告知书与风险等级匹配一起提示
                             isPopup = v.isPopup;
                         }
-                        if (v.conditionType == 2 && !!v.isPopup) { //是否弹出期限不符弹框
+                        if (v.conditionType == 6 && !!v.isPopup) { //是否弹出期限不符弹框
                             isRiskPopup = v.isPopup;
                         }
                         if (v.show == "1") { //如果显示。show=1
