@@ -36,6 +36,7 @@ $(function() {
             tipIcon: $(".tipIcon"), //净值披露信息
             isElecContract: '', //是否是电子合同产品【0.否 1.是】
             unitNetValueDes: '',
+            productNameTip:'',
         },
         data: {
             canClick: true,
@@ -152,6 +153,14 @@ $(function() {
                     that.data.productName = jsonData.productName;
                     // 私募产品 产品名称
                     $('.productNameTip').html(jsonData.productName);
+                    // console.log($('.productNameTip').text().length)
+                    //判断字符长度大于40  出现弹框
+                    if($('.productNameTip').text().length>40){
+                        $(".nameTip").show()
+                    }else{
+                        $(".nameTip").hide()
+                    }
+                    debugger
                     // 一句话产品详情
                     $('.introduction').html(jsonData.productLightspot);
                     // 净值日期 非空判断
@@ -1238,6 +1247,19 @@ $(function() {
                 $.elasticLayer(obj)
             }, {
                 'htmdEvt': 'privatePlacementDetail_08'
+            })
+            
+            mui("body").on('mdClick', '.nameTip', function() {
+                var $this = $(this);
+                var obj = {
+                    title: '产品名称',
+                    id: 'nameTip',
+                    p: that.data.productName,
+                    yesTxt: '确认',
+                    zIndex: 100,
+                    hideCelButton: true, //为true时隐藏cel按钮，仅使用yes按钮的所有属性
+                };
+                $.elasticLayer(obj)
             })
         }
     };
