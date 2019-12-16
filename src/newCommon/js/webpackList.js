@@ -375,6 +375,9 @@ module.exports = {
     // 购买触发提示
     // './financial/static/js/common/authenticationProcess': './src/financial/static/js/common/authenticationProcess.js',
 
+    // 新发基金详情页
+    './financial/static/js/publicPlacement/newFundDetail': './src/financial/static/js/publicPlacement/newFundDetail.js',
+
 
     // 私募产品详情页
     './financial/static/js/privatePlacement/privatePlacementDetail': './src/financial/static/js/privatePlacement/privatePlacementDetail.js',

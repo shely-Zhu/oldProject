@@ -9,14 +9,15 @@
 
 require('@pathCommonBase/base.js');
 require('@pathCommonJs/ajaxLoading.js');
-require('@pathCommonJs/components/elasticLayer.js');
-require('@pathCommonJs/components/elasticLayerTypeTwo.js');
+// require('@pathCommonJs/components/elasticLayer.js');
+// require('@pathCommonJs/components/elasticLayerTypeTwo.js');
 require('@pathCommonJs/components/headBarConfig.js');
 require('@pathIncludJs/vendor/mui/mui.picker.min.js');
 var tipAction = require('@pathCommonJs/components/tipAction.js');
 var splitUrl = require('@pathCommonJs/components/splitUrl.js')();
 var generateTemplate = require('@pathCommonJsComBus/generateTemplate.js');
-require('@pathCommonJs/components/elasticLayerTypeTwo.js');
+require('@pathCommonCom/elasticLayer/elasticLayer/elasticLayer.js'); 
+// require('@pathCommonJs/components/elasticLayerTypeTwo.js');
 
 
 $(function() {
