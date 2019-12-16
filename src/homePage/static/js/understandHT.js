@@ -56,7 +56,7 @@ $(function() {
                 callbackDone: function(json) {
                     var data = json.data.companyIntroductionList;
                     $.each(data, function(i, v) {
-                        $(".tabBar a").eq(1)[0].childNodes[0].nodeValue = v.titleFst; //只修改父元素的文本，不修改其中的元素
+                        $(".tabBar a").eq(i)[0].childNodes[0].nodeValue = v.titleFst; //只修改父元素的文本，不修改其中的元素
                     })
 
                 },

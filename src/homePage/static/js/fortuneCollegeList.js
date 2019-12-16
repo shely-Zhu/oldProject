@@ -13,8 +13,9 @@ var splitUrl = require('@pathCommonJs/components/splitUrl.js');
 Slider = require('@pathCommonJs/components/sliderMui.js'); // 轮播
 require('@pathCommonJsCom/tabScroll.js');
 require('@pathCommonJsCom/goTopMui.js');
-require('@pathCommonJs/components/elasticLayer.js');
-require('@pathCommonJs/components/elasticLayerTypeFive.js');
+require('@pathCommonCom/elasticLayer/elasticLayer/elasticLayer.js');
+// require('@pathCommonJs/components/elasticLayer.js');
+// require('@pathCommonJs/components/elasticLayerTypeFive.js');
 var splitUrl = require('@pathCommonJs/components/splitUrl.js')();
 
 

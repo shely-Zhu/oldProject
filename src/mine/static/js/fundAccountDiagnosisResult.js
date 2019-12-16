@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2019-12-09 15:53:31
- * @LastEditTime: 2019-12-13 18:12:39
+ * @LastEditTime: 2019-12-16 16:01:03
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \htjf-app\src\mine\static\js\fundAccountDiagnosisResult.js
@@ -26,6 +26,8 @@ $(function() {
             diagnosis:$("#diagnosis-box"), //诊断结论
             templateTransferFunds:$("#templateTransferFunds"), //基金列表模板
             TransferFundsContent:$(".otherAddList .selectFundCode"), //基金列表容器
+            readyPurchaseHTFunds:$("#readyPurchaseHTFunds"), //恒天基金模板
+            templateTransferFundsList:$(".templateTransferFundsList"),  //恒天基金容器
             userAge:$(".userAge"), //年龄
             sex:$("#sex"), //性别
             professional:$("#professional"), //职业
@@ -52,6 +54,7 @@ $(function() {
               applyId:splitUrl['applyId'],   //编辑具体的基金的id
               otherFundCodeData:"", //其他基金数据
               readyPurchaseHTFunds:"", //恒天基金
+              selectPurchaseHTFunds:[],//已购买恒天基金
               userAge:"", //年龄
               sexData:"",//性别
               sexDataCode:"", //性别编码
@@ -81,13 +84,11 @@ $(function() {
             var that = this;
             that.queryDictionary();
             that.initResource();
-            that.initAddOtherFundCode();
             that.events();
         },
         initAddOtherFundCode:function(){
             //初始化其他基金
             var that = this;
-            that.gV.otherFundCodeData = JSON.parse(sessionStorage.getItem("addAccountDiagnosisResultList"))
             generateTemplate(that.gV.otherFundCodeData, that.$e.TransferFundsContent, that.$e.templateTransferFunds);
             if(that.gV.otherFundCodeData){
                if(that.gV.otherFundCodeData.length>0){
@@ -122,8 +123,22 @@ $(function() {
             that.gV.yield_secondData = data.eYieldratePerYearMax;
             that.gV.loss_firstData = data.affordableMaxDeficitRateMin;
             that.gV.loss_secondData = data.affordableMaxDeficitRateMax;
-            that.gV.otherFundCodeData = data.readyPurchaseQTFunds;
+            that.gV.otherFundCodeData = JSON.parse(sessionStorage.getItem("addAccountDiagnosisResultList")) != ""?JSON.parse(sessionStorage.getItem("addAccountDiagnosisResultList")):data.readyPurchaseQTFunds;
+            sessionStorage.setItem("addAccountDiagnosisResultList",JSON.stringify(that.gV.otherFundCodeData));
+            that.initAddOtherFundCode();
             that.gV.readyPurchaseHTFunds= data.readyPurchaseHTFunds;
+            that.gV.readyPurchaseHTFunds.forEach(function(item,index){
+                if(!!item.id){
+                    item.checkStatu = true
+                    that.gV.selectPurchaseHTFunds.push(item) 
+                }else{
+                    item.checkStatu = false
+                }
+                item.purchaseSourceType="1"
+            })
+            if(that.gV.readyPurchaseHTFunds){
+                generateTemplate(that.gV.readyPurchaseHTFunds,that.$e.templateTransferFundsList,that.$e.readyPurchaseHTFunds)
+            }
         },
         escapeCode:function(code,type){
             var that = this;
@@ -245,16 +260,32 @@ $(function() {
                     riskLevel:that.gV.riskLevelDataCode,  //风险等级
                     eInvestDurationLevel:that.gV.expectedInvestment_yearDataCode,  //预计投资年限
                     liquidityRequirement:that.gV.liquidityDataCode,  //流动性需求
-                    eYieldratePerYearMin:"", //预期年化收益率最小值
-                    eYieldratePerYearMax:"",  //预期年化收益率最大值
-                    affordableMaxDeficitRateMin:"",  //可承受最大亏损最小值
-                    affordableMaxDeficitRateMax:"",  //可承受最大亏损最大值
-                    readyPurchaseHTFunds:[],    //已购买恒天基金
-                    readyPurchaseQTFunds:[]      //已购买其他基金
+                    eYieldratePerYearMin:that.gV.yield_firstData, //预期年化收益率最小值
+                    eYieldratePerYearMax:that.gV.yield_secondData,  //预期年化收益率最大值
+                    affordableMaxDeficitRateMin:that.gV.loss_firstData,  //可承受最大亏损最小值
+                    affordableMaxDeficitRateMax:that.gV.loss_secondData,  //可承受最大亏损最大值
+                    readyPurchaseHTFunds:that.gV.selectPurchaseHTFunds,    //已购买恒天基金
+                    readyPurchaseQTFunds:that.gV.otherFundCodeData      //已购买其他基金
                 },
                 callbackDone:function(json){
                    console.log("提交申请",json)
+                    var tital = "新增提交申请成功";
+                    var value = "恒天公募基金研究团队正在快马加鞭赶来,我们将尽快与你联系,请耐心等待并保持手机畅通";
+                    $.elasticLayerTypeTwo({
+                        id: "tip",
+                        title: tital,
+                        p: '<p>' + value + '</p>',
+                        buttonTxt: '知道了',
+                        zIndex: 100,
+                    });
+                },
+                callbackNoData:function(json){
+                    tipAction(json.message);
+                },
+                callbackFail:function(json){
+                    tipAction(json.message);
                 }
+                
             }];
             $.ajaxLoading(obj)
         },
@@ -285,22 +316,38 @@ $(function() {
                 needDataEmpty:true,
                 data:{
                     id:"",  //主键
-                    age:"", //年龄
-                    evocation:"", //职业
+                    age:that.gV.userAge, //年龄
+                    sex:that.gV.sexDataCode, //性别
+                    evocation:that.gV.professionalDataCode, //职业
                     evocationExtension:"",//职业描述
-                    investDurationLevel:"", //投资年限
-                    riskLevel:"",  //风险等级
-                    eInvestDurationLevel:"",  //预计投资年限
-                    liquidityRequirement:"",  //流动性需求
-                    eYieldratePerYearMin:"", //预期年化收益率最小值
-                    eYieldratePerYearMax:"",  //预期年化收益率最大值
-                    affordableMaxDeficitRateMin:"",  //可承受最大亏损最小值
-                    affordableMaxDeficitRateMax:"",  //可承受最大亏损最大值
-                    readyPurchaseHTFunds:"",    //已购买恒天基金
-                    readyPurchaseQTFunds:""      //已购买其他基金
+                    investDurationLevel:that.gV.investment_yearDataCode, //投资年限
+                    riskLevel:that.gV.riskLevelDataCode,  //风险等级
+                    eInvestDurationLevel:that.gV.expectedInvestment_yearDataCode,  //预计投资年限
+                    liquidityRequirement:that.gV.liquidityDataCode,  //流动性需求
+                    eYieldratePerYearMin:that.gV.yield_firstData, //预期年化收益率最小值
+                    eYieldratePerYearMax:that.gV.yield_secondData,  //预期年化收益率最大值
+                    affordableMaxDeficitRateMin:that.gV.loss_firstData,  //可承受最大亏损最小值
+                    affordableMaxDeficitRateMax:that.gV.loss_secondData,  //可承受最大亏损最大值
+                    readyPurchaseHTFunds:that.gV.selectPurchaseHTFunds,    //已购买恒天基金
+                    readyPurchaseQTFunds:that.gV.otherFundCodeData       //已购买其他基金
                 },
                 callbackDone:function(json){
-                    console.log("修改申请",json)
+                    console.log("修改申请",json);
+                    var tital = "编辑提交申请成功";
+                    var value = "恒天公募基金研究团队正在快马加鞭赶来,我们将尽快与你联系,请耐心等待并保持手机畅通";
+                     $.elasticLayerTypeTwo({
+                         id: "tip",
+                         title: tital,
+                         p: '<p>' + value + '</p>',
+                         buttonTxt: '知道了',
+                         zIndex: 100,
+                     });
+                },
+                callbackNoData:function(json){
+                    tipAction(json.message);
+                },
+                callbackFail:function(json){
+                    tipAction(json.message);
                 }
             }];
             $.ajaxLoading(obj)
@@ -308,7 +355,6 @@ $(function() {
        events:function(){
             var that = this;
             mui("body").on("mdClick",".mui-icon-arrowright",function(){
-             
                 var type = $(this).attr("type");
                 $('.popup').css('display', 'block')
                 $(".popup-content .selectItemList").hide();
@@ -435,7 +481,7 @@ $(function() {
                         that.$e.lossControl.show();
                     }
                 }
-                
+                $(this).attr("type","")
                 $('.popup').css('display', 'none')
             })
             //弹出框取消按钮
@@ -473,24 +519,48 @@ $(function() {
 
            //提交申请
            mui("body").on("mdClick",".comfirmButtom .mui-btn",function(){
-             debugger  
             if(that.gV.applyType == "add"){
                 that.addFundDiagnosisApply()
             }else if(that.gV.applyType == 'edit'){
                 that.updateFundDiagnosisApply()
             }
-              
-               var tital = "提交申请成功";
-               var value = "恒天公募基金研究团队正在快马加鞭赶来,我们将尽快与你联系,请耐心等待并保持手机畅通";
-                $.elasticLayerTypeTwo({
-                    id: "tip",
-                    title: tital,
-                    p: '<p>' + value + '</p>',
-                    buttonTxt: '知道了',
-                    zIndex: 100,
-                });
            })
 
+           //基金勾选
+            mui("body").on("mdClick",".templateTransferFundsList li input",function(){
+                var checkStatu = $(this).parent().attr("checkStatus");
+                var id = $(this).attr("listId");
+                var fundCode = $(this).parent().attr("fundCode");
+                var purchaseDate = $(this).parent().attr("purchaseDate");
+                var purchaseAmount = $(this).parent().attr("purchaseAmount");
+                var diagnoseApplyId = $(this).parent().attr("diagnoseApplyId");
+                var obj = {
+                    "id":id,
+                    "fundCode":fundCode,
+                    "purchaseDate":purchaseDate,
+                    "diagnoseApplyId":diagnoseApplyId,
+                    "purchaseAmount":purchaseAmount
+                }
+                if(checkStatu == "false"){
+                    //勾选 添加
+                     that.gV.selectPurchaseHTFunds.push(obj)
+                     $(this).parent().attr("checkStatus","true")
+                }else{
+                    //去除
+                    var newArr = [];
+                    that.gV.selectPurchaseHTFunds.forEach(function(item){
+                        if(item.fundCode != fundCode){
+                            newArr.push(item)
+                        }
+                    })
+                    that.gV.selectPurchaseHTFunds = newArr
+                    $(this).parent().attr("checkStatus","false")
+
+                }
+            
+
+                console.log("8888",status)
+            })
        },
       
      
