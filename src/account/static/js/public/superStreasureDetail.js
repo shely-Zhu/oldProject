@@ -26,8 +26,9 @@ $(function() {
             end: "",
             fundName: "",
             transformMoney: "",
-            accountType: ''
-
+            accountType: '',
+            maxNum:null,
+            minNum:null,
         },
         init: function() {
             var that = this;
@@ -108,6 +109,8 @@ $(function() {
                     }
                 },
                 yAxis: {
+                    max:that.gL.maxNum,
+                    min:that.gL.minNum,
                     axisTick: {
                         show: false
                     },
@@ -122,9 +125,10 @@ $(function() {
                     axisLabel: {
                         show: true,
                         color: '#9B9B9B',
-                        // formatter: '{value}%',
                         formatter: function(value, index) {
-                            return value.toFixed(4);
+                            // if(value != 0){
+                                return value.toFixed(4);
+                            // }
                         },
                     },
                 },
@@ -201,7 +205,7 @@ $(function() {
                         $('.footerBtnLeft').css('pointer-events','none');//按钮禁止点击
                     }else{
                         $('.footerBtnLeft').css('background','#fff');//按钮背景置灰
-                        $('.footerBtnLeft').css('pointer-events','');//按钮禁止点击
+                        $('.footerBtnLeft').css('pointer-events','auto');//按钮禁止点击
                     }
                     $(".incomeMask").text(data.incomeMask ? data.incomeMask : "--")
                     $(".addupIncomeMask").text(data.addupIncomeMask ? data.addupIncomeMask : "--")
@@ -232,6 +236,16 @@ $(function() {
                         that.gL.time.push(jsonData[i].trdDt)
                         that.gL.shuju.push(jsonData[i].annYldRat)
                     }
+                    console.log(that.gL.shuju,"能排序吗")
+                    let temp = that.gL.shuju[0];
+                    let maxNum = that.gL.shuju[0];
+                    let minNum = that.gL.shuju[0];
+                    that.gL.shuju.forEach(item => maxNum = item > maxNum ? item : maxNum)
+                    that.gL.shuju.forEach(item => minNum = item < minNum ? item : minNum)
+                    console.log("最大值",maxNum)
+                    console.log("最小值",minNum)
+                    that.gL.maxNum = maxNum;
+                    that.gL.minNum = minNum;
                     that.drawLine()
                 }
             }];
