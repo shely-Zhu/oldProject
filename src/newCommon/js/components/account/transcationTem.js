@@ -81,7 +81,6 @@ module.exports = function(data, $ele, $id, type) {
 
         data[i].appointmentSuccess = data[i].leftBottomStatus == 18 ? 1 : 0; //合同审核成功
         data[i].appointmentFailed = data[i].leftBottomStatus == 19 ? 1 : 0; //合同审核失败
-
         //赎回
         data[i].businessTypeRedeem = (data[i].businessType == 2) || (data[i].businessType == 9) || (data[i].businessType == 8) ? 1 : 0;
         //分红
@@ -94,7 +93,7 @@ module.exports = function(data, $ele, $id, type) {
         data[i].businessType4 = data[i].businessType == 4 ? 1 : 0;
         //是否签约中 展示转受让双录状态
         data[i].signing = (data[i].assignSubStatus == '05') || (data[i].assigneeSubStatus == '03') ? 1 : 0;
-
+        data[i].redeemDate = data[i].redeemDate?data[i].redeemDate:'--'
 
     }
     console.log(data)

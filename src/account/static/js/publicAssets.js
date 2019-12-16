@@ -23,6 +23,7 @@ $(function () {
             var that = this;
             that.getData('');
             that.getBankList();
+            that.initRightBtn();
         },
         getBankList: function () {
             //查询银行卡列表
@@ -126,6 +127,16 @@ $(function () {
                 $('.position_h').css('color', '#272727');
             }
         },
+        initRightBtn: function(){
+            //初始化右上角的按钮btn
+            $('.rightBtn').show().html('交易记录');
+            mui("body").on('mdClick', '.rightBtn', function (e) {
+                sessionStorage.setItem("ccache", ""); 
+                    window.location.href = site_url.transactionRecords_url;
+            },{
+                'htmdEvt': 'publicAssets_0'
+            })
+        },
         bankEvents: function () { //绑定事件
             var that = this;
             //点击筛选银行卡
@@ -156,13 +167,6 @@ $(function () {
         },
         events: function () { //绑定事件
             var that = this;
-            //交易记录按钮点击 跳转到交易记录
-            mui("body").on('mdClick', '.trade_list', function (e) {
-                sessionStorage.setItem("ccache", ""); 
-                window.location.href = site_url.transactionRecords_url;
-            },{
-                'htmdEvt': 'publicAssets_0'
-            })
             //普通基金item的点击 进入持仓详情
             mui("body").on('mdClick', '#pageLists .hold_item', function (e) {
                 var index = $(this).index();
