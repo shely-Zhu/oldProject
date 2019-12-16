@@ -22,7 +22,7 @@
     docEl.dataset.dpr = dpr;
     var metaEl = doc.createElement('meta');
     metaEl.name = 'viewport';
-    metaEl.content = 'initial-scale=' + scale + ',maximum-scale=' + scale + ', minimum-scale=' + scale;
+    metaEl.content = 'initial-scale=' + scale + ',maximum-scale=' + scale + ', minimum-scale=' + scale + ', viewport-fit=cover';
     docEl.firstElementChild.appendChild(metaEl);
     var recalc = function() {
         var width = docEl.clientWidth;
