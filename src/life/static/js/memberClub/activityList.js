@@ -228,9 +228,10 @@ $(function() {
                         console.log(json);
                         var data = json.data;
                         var res = [];
-                        var rightListArr = [{ name: '热' }];
+                        var rightListArr = [{ name: '全' }, { name: '热' }];
                         var cityList = [];
                         var hotCity = [];
+                        var allCity = [];
                         for (var j in data.cityMap) {
                             rightListArr.push({
                                 name: j.toLocaleUpperCase(),
@@ -246,7 +247,8 @@ $(function() {
                         res.push({
                             hotCityList: rightListArr,
                             hotCity: data.hotCityList,
-                            cityList: cityList
+                            cityList: cityList,
+                            allCity: data.allCityMap
                         });
                         console.log(res);
                         // 将列表插入到页面上
