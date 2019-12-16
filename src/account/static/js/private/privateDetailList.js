@@ -324,7 +324,7 @@ $(function() {
                         }, 100);
                         transcationTem(jsonData, $id.find('.list li'), $('#trans-template'))
                             //无缝滚动
-                        alwaysAjax($id.find('.mui-table-view-cell'), $id.find(".contentWrapper"))
+                        alwaysAjax($id.find('.mui-table-view-cell'), $id.find(".contentWrapper"), 2)
                     }, 200)
 
 
