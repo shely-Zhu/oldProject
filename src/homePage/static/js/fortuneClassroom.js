@@ -290,8 +290,10 @@ $(function() {
                 callbackNoData: function(json) {
                     t.endPullupToRefresh(false);
                     //没有数据
-                    $id.find('.mui-scroll .list').html(that.getElements.noData.clone(false)).addClass('noCon');
-                    $id.find('.noData').show();
+                    if(that.gV.ajaxArr[that.gV.current_index].pageCurrent == 1) {
+                        $id.find('.mui-scroll .list').html(that.getElements.noData.clone(false)).addClass('noCon');
+                        $id.find('.noData').show();
+                    }
                     setTimeout(function() {
                         that.getElements.listLoading.hide();
                     }, 100);
