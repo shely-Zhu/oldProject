@@ -382,6 +382,7 @@ $(function() {
                     var jsonData = json.data;
                     that.data.custType = jsonData.accountType; // 客户类型【0.机构 1.个人】 
                     that.data.buyFreeze = jsonData.buyFreeze; // 是否冻结买入：0-否；1-是；
+                    that.data.lawFreezeStatus = jsonData.lawFreezeStatus; // 是否司法冻结：0-否；1-是；
                     that.data.isRiskEndure = jsonData.isRiskEndure; // 是否风险测评 0-否 1-是
                     if (that.data.isRiskEndure == 0) {
 
@@ -831,14 +832,20 @@ $(function() {
                         notice = "",
                         noticeObj = "",
                         isPopup = "", //弹框售前告知书
+                        isRiskPopup = "", //期限不符弹框
+                        PopupElasticLayer = '<p class="" style="font-weight:bold;text-align:center">你选择的产品与您现在的风险承受能力相匹配</p>' +
+                                            '<p class="">请您认真阅读[' + noticeObj.fileName + ']' + that.data.productName + '并确认后继续购买该产品</p>', //期限不符弹框
                         isReal = "", //是否实名认证，因为如果机构切一键认证是实名，点击需要提示弹框。
                         singleaAuthenPath = "", //一键认证跳转链接
                         singleaAuthen = false; //条件框是否展示
                     that.$e.realLi.hide();
                     $.each(jsonData, function(e, v) {
                         var jumpUrl = "";
-                        if (v.conditionType == 3 && !!v.isPopup) { //是否弹出售前告知书。售前告知书与风险等级匹配一起提示
+                        if (v.conditionType == 4 && !!v.isPopup) { //是否弹出售前告知书。售前告知书与风险等级匹配一起提示
                             isPopup = v.isPopup;
+                        }
+                        if (v.conditionType == 2 && !!v.isPopup) { //是否弹出期限不符弹框
+                            isRiskPopup = v.isPopup;
                         }
                         if (v.show == "1") { //如果显示。show=1
                             $("#tips-wrap").show(); //显示预约条件
@@ -892,7 +899,11 @@ $(function() {
 
                     });
                     if (!!isPopup && !singleaAuthen) { //如果弹出售前告知书
-
+						if(!!isRiskPopup){//如果不匹配
+							PopupElasticLayer = '<p class="" style="font-weight:bold;text-align:center">你选择的产品与您现在的风险承受能力相匹配</p>' + 
+												'<p class="" style="font-weight:bold;text-align:center">您风险测评中所选计划投资期限少于产品期限存在匹配风险，请确认是否继续购买</p>' +
+                                            	'<p class="">请您认真阅读[' + noticeObj.fileName + ']' + that.data.productName + '并确认后继续购买该产品</p>';
+						}
                         //发送ajax请求
                         var ReourceListobj = [{
                             url: site_url.queryReourceList_api,
@@ -912,8 +923,7 @@ $(function() {
                                     var obj = {
                                         title: '',
                                         id: 'sellPop',
-                                        p: '<p class="" style="font-weight:bold;text-align:center">你选择的产品与您现在的风险承受能力相匹配</p>' +
-                                            '<p class="">请您认真阅读[' + noticeObj.fileName + ']' + that.data.productName + '并确认后继续购买该产品</p>',
+                                        p: PopupElasticLayer,
                                         yesTxt: '去阅读',
                                         celTxt: '取消',
                                         zIndex: 1200,
@@ -1180,11 +1190,12 @@ $(function() {
             // 立即预约
             mui("body").on('mdClick', '.buyButton', function() {
                 if (that.data.canClick) { //防重复点击
-                    if (that.data.buyFreeze == "1") { //如果账户冻结，首先提示
+                    if (that.data.buyFreeze == "1" && that.data.lawFreezeStatus == "1") { //如果禁止买入且司法冻结，首先提示
+                    	that.data.canClick = true;
                         var obj = {
                             title: '',
                             id: 'buyFreeze',
-                            p: '您的账户已冻结，禁止买入，可联系您的理财师进行咨询',
+                            p: '因司法原因该账户被冻结，请联系客服咨询！客服电话：400-8980-618',
                             yesTxt: '确认',
                             celTxt: "取消",
                             zIndex: 100,
@@ -1194,6 +1205,7 @@ $(function() {
                         };
                         $.elasticLayer(obj)
                     } else {
+                    	that.data.canClick = false;
                         that.getConditionsOfOrder(); //获取预约条件
 
                     }
@@ -1201,7 +1213,6 @@ $(function() {
                 } else {
                     return false;
                 }
-                that.data.canClick = false;
             }, {
                 htmdEvt: 'privatePlacementDetail_06'
             });
