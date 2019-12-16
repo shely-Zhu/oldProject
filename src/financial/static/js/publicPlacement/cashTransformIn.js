@@ -184,6 +184,12 @@ $(function () {
 					}
 					
 				},
+				callbackNoData:function(json){
+                    tipAction(json.message);
+                },
+                callbackFail:function(json){
+                    tipAction(json.message);
+                }
 
 			}];
 			$.ajaxLoading(obj);

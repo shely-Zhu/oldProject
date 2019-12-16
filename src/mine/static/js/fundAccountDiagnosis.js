@@ -63,6 +63,7 @@ $(function() {
             that.getAccountStyleData()  // 账户风格
             that.getDiagnosisData()  // 诊断结论
             // that.drawCircle();
+            that.drawBar()
 
             that.events();
         },
@@ -428,6 +429,62 @@ $(function() {
             // 绘制图表
             pieChart.setOption(option);
         },
+
+        drawBar(){
+            debugger
+            var that = this;
+            var barBoxContent = echarts.init(document.getElementById('heavy-warehouse-box'));
+            var optionData = [];
+            var barData = that.gV.heavyBar.barData;
+            optionData.forEach(function(item){
+                optionData.push(item)
+            });
+            option = {
+                tooltip: {
+                    trigger: 'axis',
+                    axisPointer: {
+                        type: 'shadow'
+                    },
+                    formatter:'{c}%'
+                },
+                grid: {
+                    left: '3%',
+                    right: '4%',
+                    bottom: '3%',
+                    containLabel: true
+                },
+                xAxis: {
+                    type: 'value',
+                    boundaryGap: ["0%", "100%"]
+                },
+                yAxis: {
+                    type: 'category',
+                    data: ['巴西','印尼','美国','印度','中国','世界人口(万)']
+                },
+                series: [
+                    {
+                        name: '2011年',
+                        type: 'bar',
+                        data: [12, 23, 45, 33, 44, 30],
+                        itemStyle:{
+                            normal:{
+                                color:function(params){
+                                    var colorList = [ '#C1232B','#B5C334','#FCCE10','#E87C25','#27727B','#FE8463'];
+                                    return colorList[params.dataIndex]
+                                },
+                                label:{
+                                    show:true,
+                                    position:'right',
+                                    formatter:'{b}\n{c}%'
+                                },
+                                barBorderRadius:"10px"
+                            }
+                        }
+                    }
+                ]
+            };
+            barBoxContent.setOption(option)
+        }
     };
     fundAccountDiagnosis.init();
 });
