@@ -143,8 +143,8 @@ $(function () {
             let strCode = navigator.userAgent;
             console.log(navigator.userAgent.NetType);
             console.dir(navigator.userAgent);
-            alert(navigator.userAgent.toString());
-            alert(navigator.userAgent.NetType.toString());
+            // alert(navigator.userAgent.toString());
+            // alert(navigator.userAgent.NetType.toString());
             // let stringNet= strCode .match(/NetType/\w+/) ? strCode .match(/NetType/\w+/)[0] : 'NetType/other';
             // var networkType= stringNet.toLowerCase().replace('nettype/', '');
             // if(networkType==='wifi'){
