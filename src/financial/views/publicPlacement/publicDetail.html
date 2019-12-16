@@ -12,7 +12,7 @@
 	</head>
 
 <body>
-	<!-- @@include('@pathCommonCom/loading/listLoading.html')  -->
+	@@include('@pathCommonCom/loading/listLoading.html') 
 	<div class="publicDetail ">
 		@@include('@pathCommonViews/headBarConfig.html',{"pathName":"普通基金","bgColors":"#475A95,#475A95","showType":"1","serviceType":"1"})
 		<div class="tplBox"></div>
@@ -51,7 +51,7 @@
 				{{/if}}
 				<div class="midContent">
 					<div class="max_amount_area">
-						{{#if tradeLimitFlag}}
+						{{#if tradeLimitFlag2}}
 						<div class="max_amount fl"></div>
 						<div class="max_amount_value fl">单日单账户限额{{tradeLimitAmount}}万</div>
 						{{/if}}

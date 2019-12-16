@@ -226,17 +226,17 @@ var prvMar = {
     },
     events: function() {
         mui("body").on("mdClick", ".mui-box", function() {
-            // if(window.currentIsApp){
-            //     window.location.href = $(this).attr("href");
-            // }else{
-            //     window.open($(this).attr("href"));
-            // }
+            if(window.currentIsApp){
+                window.location.href = $(this).attr("href");
+            }else{
+                window.open($(this).attr("href"));
+            }
             // debugger
-            var src=$(this).attr("href")
-            var form = document.createElement('form');
-            form.action = src;
-            document.getElementsByTagName('body')[0].appendChild(form);
-            form.submit();
+            // var src=$(this).attr("href")
+            // var form = document.createElement('form');
+            // form.action = src;
+            // document.getElementsByTagName('body')[0].appendChild(form);
+            // form.submit();
         },{
             'htmdEvt': 'informationDisclosure_0'
         })

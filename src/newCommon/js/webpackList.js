@@ -317,10 +317,8 @@ module.exports = {
 
     // 自选公募--超宝详情
     './account/static/js/public/superStreasureDetail': './src/account/static/js/public/superStreasureDetail.js',
-    // 自选公募--超宝详情--内容
-    './account/static/js/public/superContent': './src/account/static/js/public/superContent.js',
      // 自选公募--超宝详情--内容
-     './allServerResources/model/static/js/superContent': './src/allServerResources/model/static/js/superContent.js',
+     './allServerResources/model/static/js/protocolTemplate': './src/allServerResources/model/static/js/protocolTemplate.js',
     // 基金确认书
     './account/static/js/private/privateFundPdf': './src/account/static/js/private/privateFundPdf.js',
 
@@ -376,6 +374,9 @@ module.exports = {
 
     // 购买触发提示
     // './financial/static/js/common/authenticationProcess': './src/financial/static/js/common/authenticationProcess.js',
+
+    // 新发基金详情页
+    './financial/static/js/publicPlacement/newFundDetail': './src/financial/static/js/publicPlacement/newFundDetail.js',
 
 
     // 私募产品详情页

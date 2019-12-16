@@ -57,10 +57,19 @@ $(function () {
                     if (json.data == '') { // 没有记录不展示
                         that.$e.noData.show();
                         return false;
-                    } else {
+                    } else { 
                         dataList = json.data;
+                        $.each(dataList, function(i, el) {
+                          var groupName = el.groupName?el.groupName:""
+                          if (el.modulename.indexOf(".pdf") != -1) {
+                              el.line = true; //线上可预览
+                              el.href = site_url.downloadNew_api + "?filePath=" + el.contracturl + "&fileName=" + new Base64().encode(el.modulename) + "&groupName=" + groupName + "&show=1";
+                          } else {
+                              el.line = false; //需下载
+                              el.href = site_url.downloadNew_api + "?filePath=" + el.contracturl + "&fileName=" + new Base64().encode(el.modulename) + "&groupName=" + groupName;
+                          }
+                        })
                     }
-
                     setTimeout(function () {
                         generateTemplate(dataList, that.$e.listSlot, that.$e.listTemp);
                     }, 200)
@@ -80,7 +89,16 @@ $(function () {
         },
         events: function (targetUrl) {
             var that = this;
-
+            mui("body").on('mdClick','.con',function(e){
+                console.log($(this).attr("href"))
+               var src=$(this).attr("href")
+                var form = document.createElement('form');
+                form.action = src;
+                document.getElementsByTagName('body')[0].appendChild(form);
+                form.submit();
+            }, {
+                'htmdEvt': 'seeSign_0'
+            })
         },
     }
     //调用函数

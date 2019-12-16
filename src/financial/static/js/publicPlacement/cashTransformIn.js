@@ -184,6 +184,12 @@ $(function () {
 					}
 					
 				},
+				callbackNoData:function(json){
+                    tipAction(json.message);
+                },
+                callbackFail:function(json){
+                    tipAction(json.message);
+                }
 
 			}];
 			$.ajaxLoading(obj);
@@ -453,7 +459,8 @@ $(function () {
 			//  ---《基金合同》《招募说明书》
 			mui("body").on('mdClick','.goPreview',function(){
 				var link = $(this).attr('datalink')
-				window.location.href = site_url.agreementPreview_url + '?link=' + link +'&type=' + $(this).attr('type')
+				var typInfo = $(this).attr('type') == '1' ? '基金合同' : '招募说明书'
+				window.location.href = site_url.agreementPreview_url + '?link=' + link +'&typInfo=' + encodeURI(typInfo)
 			}, {
 				htmdEvt: 'cashTransformIn_17'
 			}) ;
