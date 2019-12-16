@@ -57,10 +57,9 @@ $(function () {
                     if (json.data == '') { // 没有记录不展示
                         that.$e.noData.show();
                         return false;
-                    } else {
+                    } else { 
                         dataList = json.data;
                     }
-
                     setTimeout(function () {
                         generateTemplate(dataList, that.$e.listSlot, that.$e.listTemp);
                     }, 200)
@@ -80,7 +79,15 @@ $(function () {
         },
         events: function (targetUrl) {
             var that = this;
-
+            mui("body").on('mdClick','.con',function(e){
+               var src=$(this).attr("href")
+                var form = document.createElement('form');
+                form.action = src;
+                document.getElementsByTagName('body')[0].appendChild(form);
+                form.submit();
+            }, {
+                'htmdEvt': 'seeSign_0'
+            })
         },
     }
     //调用函数
