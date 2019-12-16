@@ -228,6 +228,7 @@ $(function () {
 						var data = [] ;
 						data = json.data;
 						data.forEach(function(element){
+							debugger
 							if(element.materialType == '1'){
 								that.$el.contract.attr('datalink',element.linkAddress)
 								that.$el.contract.attr('type','1')
@@ -628,12 +629,11 @@ $(function () {
 			mui("body").on('mdClick','.goPreview',function(){
 				var link = $(this).attr('datalink')
 				var typInfo = $(this).attr('type') == '1' ? '基金合同' : '招募说明书'
-				window.location.href = site_url.agreementPreview_url + '?link=' + link +'&typInfo=' + encodeURI(typInfo)
+				debugger
+				window.location.href = link +'&fileName=' + new Base64().encode(typInfo)
 			}, {
 				htmdEvt: 'fundTransformIn_17'
 			}) ;
-
-			//  ---
 			mui("body").on('mdClick','.container',function(e){
 				// debugger
 				var o = e.target || e.srcElement;//当前点击对象

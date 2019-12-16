@@ -205,10 +205,10 @@ $(function() {
             });
 
                 //无缝滚动
-                setTimeout(function() {
+                /*setTimeout(function() {
                     //无缝滚动
                     alwaysAjax($('#' + w + ' .mui-table-view-cell'), s , 50)
-                }, 1000)
+                }, 1000)*/
 
             // mui('.mui-slider').slider().stopped = true;
         },
@@ -326,7 +326,7 @@ $(function() {
                         setTimeout(function() {
                             that.getElements.listLoading.hide();
                         }, 100);
-
+                        alwaysAjax($id.find('.mui-table-view-cell'), $id.find(".contentWrapper"), 2)
                     }, 200)
 
 

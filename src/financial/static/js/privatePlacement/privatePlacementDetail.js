@@ -160,14 +160,18 @@ $(function() {
                     }else{
                         $(".nameTip").hide()
                     }
-                    debugger
                     // 一句话产品详情
                     $('.introduction').html(jsonData.productLightspot);
                     // 净值日期 非空判断
                     if (jsonData.netValueDate == null || jsonData.netValueDate == "" || jsonData.netValueDate == undefined) {
                         $('.netValueDate').html('--')
                     } else {
+                        if(jsonData.incomeModeJF == '2'){
+                            var now = moment(jsonData.profitThoudDate).format('YYYY-MM-DD');
+                        }else{
                         var now = moment(jsonData.netValueDate).format('YYYY-MM-DD');
+
+                        }
                         $('.netValueDate').html(now.substring(5))
                     }
                     // 起投金额
