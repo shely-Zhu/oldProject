@@ -211,7 +211,16 @@ $(function() {
                     }
                     // 风险等级
                     if(jsonData.productRiskLevelDesc){
-                        $('.riskGrade .changgeRight').html(jsonData.productRiskLevelDesc);
+                        var startHtml=""
+                            //星星
+                            for(var i=0;i<jsonData.productRiskLevel;i++){
+                                startHtml+="<span class='iconfont starLight'>&#xe639;</span>"
+                            }
+                            //空白星星
+                            for(var j=5;j>jsonData.productRiskLevel;j--){
+                                startHtml+="<span class='iconfont starDefault'>&#xe63b;</span>"
+                            }
+                        $('.riskGrade .changgeRight').html(jsonData.productRiskLevelDesc+startHtml);
                     }else{
                         $('.riskGrade').hide();
                     }
