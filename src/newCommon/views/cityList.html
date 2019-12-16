@@ -29,6 +29,15 @@
             <div class="mui-indexed-list-inner">
                 <div class="mui-indexed-list-empty-alert">没有数据</div>
                 <ul class="mui-table-view">
+                    <li data-group="全" class="mui-table-view-divider mui-indexed-list-group hot">全部</li>
+                    <li class="hotCity">
+                        <div class="hotBox">
+                            {{#each this}} {{#with allCity}} {{#each this}}
+                            <span data-name="">{{regionName}}</span> {{/each}} {{/with}} {{/each}}
+                        </div>
+
+
+                    </li>
                     <li data-group="热" class="mui-table-view-divider mui-indexed-list-group hot">热门城市</li>
                     <li class="hotCity">
                         <div class="hotBox">
