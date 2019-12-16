@@ -26,7 +26,6 @@ $(function() {
                 listLoading: $('.listLoading'), //所有数据区域，第一次加载的loading结构
                 activityListDataBox: $('.activityListDataBox'), //有数据盒子
                 activityListDataNoBox: $('.activityListDataNoBox'), //没有数据盒子
-                actName: $('#activitySearch .mui-input-clear').val(),
                 activityNoListBox: $('.activityNoListBox')
             },
             gV: { // 全局变量
@@ -36,7 +35,7 @@ $(function() {
                 listLength: 0,
                 actName: $('.activitySearchInput input').val(), //活动名称
                 actProvinceNO: $('#locationCity').attr('data-parentid'), //活动省份编号
-                actCityNO: $('#locationCity').attr('data-code'), //活动城市编号
+                actCityName: $('#locationCity').attr('data-name'), //活动城市编号
             },
             //初始化
             init: function() {
@@ -83,24 +82,17 @@ $(function() {
             //有数据获取列表
             getData: function(t) {
                 var that = this;
-
                 var obj = [{ // 系统调仓记录列表
                     url: site_url.getActivitiesList_api,
                     needLogin: false,
                     needLoading: false,
-                    // url:'http://172.16.187.164:8081/web/marketing/activity/getActivitiesList',
                     data: {
-                        // "combCode": that.gV.groupCode, //组合代码 
-                        // "pageCurrent": that.gV.pageCurrent, //非必须，默认为1
-                        // "pageSize": "10" //非必须，默认为10
                         startPage: that.gV.startPage,
                         pageSize: that.gV.pageSize,
-                        actName: $('#activitySearch .mui-input-clear').val(),
-                        // actConductProvinceNo:$('#locationCity').attr('data-parentid'),//活动省份编号
-                        actConductCityNo: $('#locationCity').attr('data-code'), //活动城市编号
+                        actName: that.gV.actName,
+                        actConductCity: that.gV.actCityName, //活动城市编号
 
                     },
-                    //async: false,
                     needDataEmpty: true,
                     callbackDone: function(json) {
 
@@ -227,7 +219,6 @@ $(function() {
             },
             //将城市定位模板加载
             getCityListData: function() {
-
                 var obj = [{
                     url: site_url.cityList_api,
                     needDataEmpty: true,
@@ -237,9 +228,10 @@ $(function() {
                         console.log(json);
                         var data = json.data;
                         var res = [];
-                        var rightListArr = [{ name: '热' }];
+                        var rightListArr = [{ name: '全' }, { name: '热' }];
                         var cityList = [];
                         var hotCity = [];
+                        var allCity = [];
                         for (var j in data.cityMap) {
                             rightListArr.push({
                                 name: j.toLocaleUpperCase(),
@@ -255,7 +247,8 @@ $(function() {
                         res.push({
                             hotCityList: rightListArr,
                             hotCity: data.hotCityList,
-                            cityList: cityList
+                            cityList: cityList,
+                            allCity: data.allCityMap
                         });
                         console.log(res);
                         // 将列表插入到页面上
@@ -288,9 +281,10 @@ $(function() {
                         var parentid = data.provinceCode;
                         $('#locationCity').text(name);
                         $('#locationCity').attr({
-                            'data-code': code,
+                            'data-name': name,
                             'data-parentid': parentid
                         });
+                        that.gV.actCityName = name;
                         that.initMui();
                     },
                     callbackFail: function(json) {
@@ -315,7 +309,7 @@ $(function() {
                 //点击定位选择效果
                 mui('#cityListBox').on('mdClick', '.mui-indexed-list-item,.hotBox span', function() {
                     var txt = $(this).text();
-                    var code = $(this).attr('data-code');
+                    var name = $(this).attr('data-name');
                     var parentId = $(this).attr('data-parentId');
                     $('#activityDataBox').show();
                     $('#cityListBox').hide();
@@ -323,9 +317,11 @@ $(function() {
                     $('.recordList').html('');
                     $('#locationCity').text(txt);
                     $('#locationCity').attr({
-                        'data-code': code,
+                        'data-name': name,
                         'data-parentId': parentId
                     })
+
+                    that.gV.actCityName = name;
                     that.gV.startPage = 1;
                     that.initMui();
                     var activitySearchInputWidth = document.documentElement.clientWidth - $('#activitySearch a').width() - $('.activityCityBox').width() - 30;
@@ -388,7 +384,7 @@ $(function() {
                 //搜索框输入触发查询数据
                 mui('#activitySearch').on('keyup', '.activitySearchInput input', function() {
                     $('.recordList').html('');
-                    // $('#loading').show();
+                    that.gV.actName = $(this).val();
                     that.gV.startPage = 1;
                     that.initMui();
                     mui('.contentWrapper').pullRefresh().scrollTo(0, 0, 100);
@@ -399,21 +395,12 @@ $(function() {
                 //清除搜索框触发查询数据
                 mui('#activitySearch').on('mdClick', '.mui-icon-clear', function() {
                     $('.recordList').html('');
-                    // $('#loading').show();
                     that.gV.startPage = 1;
                     that.initMui();
                     mui('.contentWrapper').pullRefresh().scrollTo(0, 0, 100);
                 }, {
                     htmdEvt: 'activityList_6'
                 });
-
-                // mui("body").on('mdClick', '.goTopBtn', function () {
-                //     // $('.mui-scrollbar-indicator')[0].style.webkitTransform = "translate3d(0px, 0px, 0px) translateZ(0px)";
-                //     // $('.mui-scrollbar-indicator')[0].style.webkitTransform = '2500ms';
-                //     //其他页面
-                //     $('#activityDataList')[0].style.webkitTransform = "translate3d(0px, 0px, 0px) translateZ(0px)";
-                //     $('#activityDataList')[0].style.webkitTransform = '2500ms';
-                // }); 
 
 
                 //点击搜索框触发选中

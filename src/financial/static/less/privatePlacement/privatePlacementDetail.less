@@ -24,16 +24,20 @@
 			position: relative;
 			font-size: 0.32rem;
 			font-weight: 600;
-			color: @c005;
-			background:linear-gradient(180deg, rgba(251,226,189,1) 0%, rgba(226,181,128,1) 100%);
-			-webkit-background-clip:text;
-			-webkit-text-fill-color:transparent;
+			// color: @c005;
+			.productNameTip{
+				background:linear-gradient(180deg, rgba(251,226,189,1) 0%, rgba(226,181,128,1) 100%);
+				-webkit-background-clip:text;
+				-webkit-text-fill-color:transparent;
+				
+			}
 		}
 		.nameTip{
 			position: absolute;
 			right: 0;
 			top: 50%;
-			margin-top: -0.07rem;
+			// margin-top: -0.07rem;    
+			margin-top: 0.1rem;
 			font-size: 0.15rem;
 			color: @c005;
 		}
@@ -521,6 +525,29 @@
 			}				
 		}
 	}
+}
+
+.starLight{
+	background: linear-gradient(to right, #F1CDA8, #B57E45);
+	-webkit-background-clip: text;
+	color: transparent;
+	opacity: 1;
+}
+.starDefault{
+	background: linear-gradient(to right, #F1CDA8, #B57E45);
+	-webkit-background-clip: text;
+	color: transparent;
+	opacity: 0.3;
+}
+.riskGrade .changgeRight span{
+	font-size: .17rem;
+	margin-right: .13rem;
+}
+.riskGrade .changgeRight span:first-child{
+	margin-left: .2rem;
+}
+.riskGrade .changgeRight span:last-child{
+	margin-right: 0;
 }
 
 
