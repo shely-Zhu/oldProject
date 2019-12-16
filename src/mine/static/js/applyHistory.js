@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2019-12-09 15:53:31
- * @LastEditTime: 2019-12-13 11:12:11
+ * @LastEditTime: 2019-12-13 17:29:34
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \htjf-app\src\mine\static\js\fundAccountDiagnosisResult.js
@@ -31,7 +31,7 @@ $(function() {
               dataPickData:"", //基金代码
               fundCode:"", //购买日期
               buyMoney:"",   //购买金额
-              applyId:"",   //需要编辑的基金的申请id
+              applyId:"25",   //需要编辑的基金的申请id
         },
         init: function() {
             var that = this;

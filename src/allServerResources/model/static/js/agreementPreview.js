@@ -25,15 +25,11 @@ $(function() {
             var that = this;
             that.event()
             // that.$el.showPreview.attr('src',splitUrl['link'])
-            that.gV.url = 'http:'+ window.location.href.split('link=')[1].split(':')[1].split('&type=')[0];
+            debugger
+            that.gV.url = 'https:' + window.location.href.split('link=')[1].split('&typInfo=')[0].split(":")[1];
             $("#uploadService").attr('href',that.gV.url)
-            that.gV.type =  window.location.href.split('link=')[1].split(':')[1].split('&type=')[1];
-            if(that.gV.type == '1'){
-                $("#HeadBarpathName").html('基金合同')
-            }
-            if(that.gV.type == '2'){
-                $("#HeadBarpathName").html('招募说明书')
-            }
+            that.gV.typInfo =  decodeURI(window.location.href.split('link=')[1].split('&typInfo=')[1]);
+            $("#HeadBarpathName").html(that.gV.typInfo)
             $("#loading").hide()
 
             that.pdfModel(that.gV.url)
