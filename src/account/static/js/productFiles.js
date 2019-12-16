@@ -49,6 +49,13 @@ $(function() {
               $(".openOff").show()
             }
           },
+          callbackFail: function(data) {
+            tipAction(data.message);
+            $(".content").hide()
+            $(".productCostWrap>.productCostTitle").hide()
+            $(".productCostWrap>.productCostDetail").hide()
+            $(".productCostWrap>.openOff").hide()
+          }
       }];
       $.ajaxLoading(obj);
   },
@@ -82,6 +89,14 @@ $(function() {
           }
           generateTemplate(data,$(".materialWrap"), that.$e.adjustmentTemp);
         },
+        callbackNoData: function() {
+          $(".productCostTitleOne").hide()
+          $(".materialWrap").hide()
+        },
+        callbackFail: function(data) {
+          $(".productCostTitleOne").hide()
+          $(".materialWrap").hide()
+        }
     }];
     $.ajaxLoading(obj);
   },
