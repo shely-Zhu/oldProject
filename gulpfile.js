@@ -193,20 +193,20 @@ gulp.task('proxyTask', function() {
         middleware: function(connect, opt) {
             return [
                 proxy('/app', {
-                    target: 'https://app.htjf4.com',
+                    // target: 'https://app.htjf4.com',
                     // target: 'http://172.16.187.129:8080',//李亚楠
                     // target: 'http://192.168.50.254:8085',
-                    // target: 'https://app.chtfundtest.com',
+                    target: 'https://app.chtfundtest.com',
                     changeOrigin: true,
                     secure: false,
                 }),
 
                 proxy(['/wap', '/web/', '/jf/'], {
 
-                    target: 'https://h5.htjf4.com',
+                    // target: 'https://h5.htjf4.com',
                     //  target: 'http://172.16.187.129:8080',//李亚楠
                     // target: 'http://172.16.187.164:8081',
-                    // target: 'https://h5.chtfundtest.com',
+                    target: 'https://h5.chtfundtest.com',
                     changeOrigin: true,
                     secure: false,
                 }),
@@ -740,12 +740,12 @@ gulp.task("changePath", function(cb) {
     ], cb)
 })
 
-gulp.task("commonHtml", function( cb ) {
+gulp.task("commonHtml", function(cb) {
 
     pump([
         gulp.src(['src/common/views/**/*.html']),
 
-        gulp.dest( 'middle/js/common/views')
+        gulp.dest('middle/js/common/views')
 
     ], cb)
 })
@@ -835,7 +835,7 @@ function changeCommonImg(file) {
 
 
 //html文件打包
-gulp.task('html',  function(cb) {
+gulp.task('html', function(cb) {
 
     pump([
         gulp.src(['src/**/views/**/*.html', '!src/common/views/**/*.html', '!src/newCommon/views/**/*.html']), //- 读取 rev-manifest.json 文件以及需要进行css名替换的文件
