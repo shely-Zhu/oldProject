@@ -7,7 +7,7 @@
  */
 
 require('@pathCommonBase/base.js');
-require('../../../common/js/ajaxLoading.js');
+require('@pathCommonJs/ajaxLoading.js');
 
 $(function () {
 
