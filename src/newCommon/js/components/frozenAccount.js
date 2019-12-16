@@ -50,6 +50,7 @@ function elasticLayer(outdateFreezeStatus, lawFreezeStatus, url, custType) {
 			id: "tip",
 			title: '温馨提示',
 			p: '<p>因司法原因该账户被冻结，请联系客服咨询！客服电话：400-8980-618！</p>',
+            yesButtonPosition: 'left',
 			buttonTxt: '确认',
 			zIndex: 100,
 			callback: function() {}

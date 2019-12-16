@@ -42,7 +42,6 @@ $(function() {
                     that.gV.isNeedLogin = true;
                 }
                 that.getData();
-                that.getUserInfo();
             },
 
             //获取活动详情数据
@@ -110,6 +109,7 @@ $(function() {
                         var jsonData = json.data;
                         that.gV.custCode = jsonData.customerNo; //客户编号
                         that.gV.custType = jsonData.accountType; // 客户类型【0.机构 1.个人】 
+                        that.signUp();
 
                     },
                 }];
@@ -402,7 +402,7 @@ $(function() {
                 //立即报名方法
                 mui('body').on('mdClick', '.activityBottomBtnBox', function() {
                     if (!$(this).hasClass('disabled')) {
-                        that.signUp();
+                        that.getUserInfo();
                     }
                 }, {
                     htmdEvt: 'activityDetails_1'

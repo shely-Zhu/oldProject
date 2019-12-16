@@ -86,7 +86,7 @@ $(function() {
                 grid: {
                     top: '10%',
                     left: '5%',
-                    right: '8%',
+                    right: '7%',
                     bottom: '10%',
                     containLabel: true
                 },
@@ -199,6 +199,9 @@ $(function() {
                     if(Number(data.totalMoneyMask) <= 0){//判断当持仓金额小于等于零时
                         $('.footerBtnLeft').css('background','#ccc');//按钮背景置灰
                         $('.footerBtnLeft').css('pointer-events','none');//按钮禁止点击
+                    }else{
+                        $('.footerBtnLeft').css('background','#fff');//按钮背景置灰
+                        $('.footerBtnLeft').css('pointer-events','');//按钮禁止点击
                     }
                     $(".incomeMask").text(data.incomeMask ? data.incomeMask : "--")
                     $(".addupIncomeMask").text(data.addupIncomeMask ? data.addupIncomeMask : "--")
