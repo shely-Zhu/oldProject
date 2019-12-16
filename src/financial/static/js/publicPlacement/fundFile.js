@@ -344,7 +344,9 @@ $(function () {
 			});
             //基金公告跳转
             mui("body").on('mdClick', '.tplBox4 .content', function () {
-                window.location.href = $(this).attr('linkRul')
+                var link = $(this).attr('linkRul')
+                var typInfo = $(this).attr('typInfo')
+				window.location.href = site_url.agreementPreview_url + '?link=' + link + '&typInfo=' + encodeURI(typInfo)
             }, {
 				htmdEvt: 'fundFile_02'
 			})

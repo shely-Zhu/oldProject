@@ -43,6 +43,44 @@
 
                     .elasticTitleP{
                         color: @272727;
+                        font-weight: bold;
+
+                    }
+
+                    & + .elasticP{
+                        p{
+                            &:nth-last-child(n+1){
+                                //至少一行的时候
+                                margin-top: 0.4rem;
+                                margin-bottom: 0.4rem;
+                            }
+
+                            &:nth-last-child(n+2) {
+                                //至少两行的时候
+                                & ~ p{
+                                    margin-top: 0.2rem;
+                                    margin-bottom: 0rem;
+                                }
+
+                                &:first-child{
+                                    margin-top: 0.4rem;
+                                    margin-bottom: auto;
+                                }
+                            }
+
+                            &:nth-last-child(n+3) {
+                                //至少三行的时候
+                                & ~ p{
+                                    margin-top: 0.2rem;
+                                    margin-bottom: 0rem;
+                                }
+
+                                &:first-child{
+                                    margin-top: auto;
+                                    margin-bottom: auto;
+                                }
+                            }
+                        }
                     }
                 }
 
