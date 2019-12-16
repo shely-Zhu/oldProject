@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2019-12-09 15:48:30
- * @LastEditTime: 2019-12-13 11:22:09
+ * @LastEditTime: 2019-12-13 15:14:27
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \htjf-app\src\mine\views\fundDiagnosis\fundAccountDiagnosisResult.html
@@ -41,7 +41,7 @@
                     </li>
                     <li class="mui-table-view-cell"><span class="left">风险等级</span>
                         <span class="mui-icon mui-icon-arrowright" type="riskLevel"></span>
-                        <span class="right riskLevel" id="riskLevel"></span>
+                        <span class="right riskLevel" id="riskLevel">请选择</span>
                     </li>
                     <li class="mui-table-view-cell"><span class="left">预计投资年限</span>
                         <span class="mui-icon mui-icon-arrowright" type="expectedInvestment_year"></span>
@@ -78,6 +78,7 @@
                     </div>
                     <div class="mt20"> <span class="ml50">恒天</span></div>
                     <ul class="mui-table-view mt20 selectFundCode">
+                       <!--
                         <li class="mui-table-view-cell">
                             <input name="radio1" type="checkbox">
                             <span class="fundCodeListItem">
@@ -93,21 +94,7 @@
                                         <span class="fundCodeListItem_val">200000元</span>
                                     </span>
                         </li>
-                        <li class="mui-table-view-cell">
-                                <input name="radio1" type="checkbox">
-                                <span class="fundCodeListItem">
-                                    <span class="fundCodeListItem_tital">基金代码</span>
-                                    <span class="fundCodeListItem_val">01234</span>
-                                </span>
-                                <span class="fundCodeListItem">
-                                        <span class="fundCodeListItem_tital">购买日期</span>
-                                        <span class="fundCodeListItem_val">2019-10-28</span>
-                                    </span>
-                                    <span class="fundCodeListItem">
-                                            <span class="fundCodeListItem_tital">金额</span>
-                                            <span class="fundCodeListItem_val">200000元</span>
-                                        </span>
-                            </li>
+                        -->
                     </ul>
                     <div class="addOtherFundcodeList">
                         <div class="addOtherFundcodeBox">
@@ -153,11 +140,13 @@
                     </div>
                     <div class="selectItemList professional">
                         <ul class="mui-table-view">
+                            <!--
                             <li class="mui-table-view-cell" type="professional"><span>企业单位</span> <img class="true radioCheckItemImg"  src="/common/img/account_icon_check@2x.png" alt=""></li>
                             <li class="mui-table-view-cell" type="professional"><span>公务员</span> <img class="true radioCheckItemImg"  src="/common/img/account_icon_check@2x.png" alt=""></li>
                             <li class="mui-table-view-cell" type="professional"><span>个体</span> <img class="true radioCheckItemImg"  src="/common/img/account_icon_check@2x.png" alt=""></li>
                             <li class="mui-table-view-cell" type="professional"><span>退休</span> <img class="true radioCheckItemImg"  src="/common/img/account_icon_check@2x.png" alt=""></li>
                             <li class="mui-table-view-cell" type="professional"><span>其他</span> <img class="true radioCheckItemImg"  src="/common/img/account_icon_check@2x.png" alt=""></li>
+                            -->
                         </ul>
                     </div>
                     <div class="selectItemList investment_year">
@@ -173,24 +162,30 @@
                     </div>
                     <div class="selectItemList riskLevel">
                             <ul class="mui-table-view">
+                                <!--
                                 <li class="mui-table-view-cell" type="riskLevel"><span>保守型</span> <img class="true radioCheckItemImg"  src="/common/img/account_icon_check@2x.png" alt=""></li>
                                 <li class="mui-table-view-cell" type="riskLevel"><span>稳健型</span> <img class="true radioCheckItemImg"  src="/common/img/account_icon_check@2x.png" alt=""></li>
                                 <li class="mui-table-view-cell" type="riskLevel"><span>成长型</span> <img class="true radioCheckItemImg"  src="/common/img/account_icon_check@2x.png" alt=""></li>
+                                -->
                             </ul>
                     </div>
                     <div class="selectItemList expectedInvestment_year">
                         <ul class="mui-table-view">
+                            <!--
                             <li class="mui-table-view-cell" type="expectedInvestment_year"><span>2年以下</span><img class="true radioCheckItemImg"  src="/common/img/account_icon_check@2x.png" alt=""></li>
                             <li class="mui-table-view-cell" type="expectedInvestment_year"><span>2-5年</span><img class="true radioCheckItemImg"  src="/common/img/account_icon_check@2x.png" alt=""></li>
                             <li class="mui-table-view-cell" type="expectedInvestment_year"><span>5-10年</span> <img class="true radioCheckItemImg"  src="/common/img/account_icon_check@2x.png" alt=""></li>
                             <li class="mui-table-view-cell" type="expectedInvestment_year"><span>10年以上</span> <img class="true radioCheckItemImg"  src="/common/img/account_icon_check@2x.png" alt=""></li>
+                            -->
                         </ul>
                     </div>
                     <div class="selectItemList liquidity">
                             <ul class="mui-table-view">
+                                <!--
                                 <li class="mui-table-view-cell" type="liquidity"><span>低</span> <img class="true radioCheckItemImg"  src="/common/img/account_icon_check@2x.png" alt=""></li>
                                 <li class="mui-table-view-cell" type="liquidity"><span>中</span> <img class="true radioCheckItemImg"  src="/common/img/account_icon_check@2x.png" alt=""></li>
                                 <li class="mui-table-view-cell" type="liquidity"><span>高</span> <img class="true radioCheckItemImg"  src="/common/img/account_icon_check@2x.png" alt=""></li>
+                                -->
                             </ul>
                     </div>
                     <div class="selectItemList yield">
@@ -239,6 +234,26 @@
                 <span class="mui-icon mui-icon-close"></span>
             </li>
        <!-- <li class="mui-table-view-cell" code={{fundCode}}><span class="ml50">基金代码</span><span>{{fundCode}}</span><span class="ml20">购买日期</span><span>{{dataPick}}</span><span class="ml20">金额</span><span>{{money}}元</span><span class="mui-icon mui-icon-close"></span></li>  -->
+        {{/each}}
+    </script>
+
+    <script id="readyPurchaseHTFunds" type="text/x-handlebars-template">
+        {{each this}}
+        <li class="mui-table-view-cell">
+                <input name="radio1" type="checkbox" checked={{!! id}}>
+                <span class="fundCodeListItem">
+                    <span class="fundCodeListItem_tital">基金代码</span>
+                    <span class="fundCodeListItem_val">{{fundCode}}</span>
+                </span>
+                <span class="fundCodeListItem">
+                        <span class="fundCodeListItem_tital">购买日期</span>
+                        <span class="fundCodeListItem_val">2019-10-28</span>
+                    </span>
+                    <span class="fundCodeListItem">
+                            <span class="fundCodeListItem_tital">金额</span>
+                            <span class="fundCodeListItem_val">200000元</span>
+                    </span>
+            </li>
         {{/each}}
     </script>
 

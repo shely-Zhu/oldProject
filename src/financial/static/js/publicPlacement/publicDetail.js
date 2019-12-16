@@ -44,7 +44,6 @@ $(function () {
         fundType: splitUrl['fundType'] == '10300' ? 1 : 0, //10300 货币基金类型，其余为普通基金类型
         init: function () {
             var that = this;
-            alert('测试是否进入基金详情页面')
             //页面初始化
             that.getData();
             that.getUserInfo();  //获取用户类型
@@ -90,6 +89,11 @@ $(function () {
                     that.gV.json.fundType = that.fundType
                     that.gV.invTypCom = json.data.invTypCom
                     that.gV.secuSht = json.data.secuSht
+                    if(!!that.gV.json.tradeLimitFlag){
+                        that.gV.json.tradeLimitFlag2 = true
+                    }else{
+                        that.gV.json.tradeLimitFlag2 = false
+                    }
                     var html = template(that.gV.json); (html, "00");
                     
                     $(".tplBox").html(html);

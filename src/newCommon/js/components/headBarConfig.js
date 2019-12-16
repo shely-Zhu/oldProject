@@ -74,15 +74,15 @@ $(function() {
             var colors = $headBarConfigBox.attr('bgColors').split(",")
             ClearStyle()
             $('.zhanweifu').css('display', 'none')
-            $(window).scroll(function() {
-                var tops = $(this).scrollTop();
-                if (tops > 50) { //当window的scrolltop距离大于50时，
-                    $headBarConfigBox.animate({ "background-image": "linear-gradient(to right," + colors[0] + " 40%, " + colors[1] + " 60%)", "color": "#fff" }, 'slow', 'ease-out')
-                    $("#HeadBarConfigBox a").css({ "color": "#fff" });
-                } else {
-                    ClearStyle()
-                }
-            });
+            // $(window).scroll(function() {
+            //     var tops = $(this).scrollTop();
+            //     if (tops > 50) { //当window的scrolltop距离大于50时，
+            //         $headBarConfigBox.animate({ "background-image": "linear-gradient(to right," + colors[0] + " 40%, " + colors[1] + " 60%)", "color": "#fff" }, 'slow', 'ease-out')
+            //         $("#HeadBarConfigBox a").css({ "color": "#fff" });
+            //     } else {
+            //         ClearStyle()
+            //     }
+            // });
             // 设置返回按钮和title的颜色
             var goBackColor = $("#HeadBarConfigBox a").attr('goBackColor');
             var titleColor = $("#HeadBarConfigBox span").attr('titleColor');
@@ -127,7 +127,6 @@ $(function() {
             })
             //跳转客服页面
         $("#customerService").on("click", function() {
-            debugger
             var obj = [{
                 url: site_url.getToken_api,
                 data: {},
@@ -135,7 +134,7 @@ $(function() {
                 callbackDone: function(json) {
                     var token = json.data.token;
                     // 跳转第三方客服地址
-                    window.location.href =site_url.onlineCustomer_url + '&token=' + token;
+                    window.location.href = site_url.onlineCustomer_url + '&token=' + token;
                 },
             }];
             $.ajaxLoading(obj);
