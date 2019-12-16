@@ -17,13 +17,6 @@
 require('@pathCommonBase/base.js');
 require('@pathCommonJs/ajaxLoading.js');
 var generateTemplate = require('@pathCommonJsComBus/generateTemplate.js');
-//require('../../../common/js/components/utils.js');
-//require('../../../common/js/ajaxLoading.js');
-//var splitUrl = require('../../../common/js/components/splitUrl.js');
-//require('../../../common/js/userCheck.js');
-//require('../../../common/js/components/elasticLayerTypeTwo.js');
-//
-//require('../../../common/js/components/app/requireAppDown.js');
 
 $(function() {
 
