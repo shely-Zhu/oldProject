@@ -400,7 +400,8 @@ if (!window.currentIsApp) {
         go_url.oauth_url = oauth_haomaojf;
         d_url = d_url_haomaojf;
         go_url.marketCampaign_url = recommend_haomaojf;  // 营销活动
-        go_url.onlineCustomer_url = onlineCustomer_test; // 在线客服
+        go_url.onlineCustomer_url = onlineCustomer_haomaojf; // 在线客服
+
 
         if (envOrigin == 0) {
             //明泽
@@ -419,7 +420,7 @@ if (!window.currentIsApp) {
         go_url.oauth_url = oauth_online;
         d_url = d_url_online;
         go_url.marketCampaign_url = recommend_online;  // 营销活动
-        go_url.onlineCustomer_url = onlineCustomer_test; // 在线客服
+        go_url.onlineCustomer_url = onlineCustomer_online; // 在线客服
         if (envOrigin == 0) {
             //明泽
             originFund_public = pofapp_online;
