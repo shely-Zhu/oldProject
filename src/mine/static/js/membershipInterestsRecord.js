@@ -237,8 +237,8 @@ $(function(){
 
 
 	         mui("body").on('mdClick','.posioneright', function(){
-
-                    window.location.href = site_url.articleTemplate_url+ '?articleBelong=9';
+                    // 13成长值规则说明
+                    window.location.href = site_url.articleTemplate_url+ '?articleBelong=13';
                 }, {
                     'htmdEvt': 'adolesceRecord_01'
                 });
