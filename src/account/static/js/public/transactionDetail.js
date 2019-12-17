@@ -395,7 +395,10 @@ $(function() {
     function attr(name, attribute, value) {
         name.attr(attribute, value)
     }
-    setTimeout(() => {
+    /*setTimeout(() => {
+        attr($('#slider .tab-scroll-wrap .mui-control-item'), 'htmdEvt', 'fortune_wealthTab')
+    }, 1000)*/
+    setTimeout(function() {
         attr($('#slider .tab-scroll-wrap .mui-control-item'), 'htmdEvt', 'fortune_wealthTab')
     }, 1000)
 });
