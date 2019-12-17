@@ -31,27 +31,6 @@ var pathTitle = [{
 {
     pathName: "登录日志查询",
     pathUrl: "eruda3"
-},
-{
-    pathName: "消息中心"
-},
-{
-    pathName: "了解恒天"
-},
-{
-    pathName: "交易记录"
-},
-{
-    pathName: "收益明细"
-},
-{
-    pathName: "现金管理"
-}, 
-{
-    pathName: '交易规则'
-}, 
-{
-    pathName: '财富学院早知道'
 }
 ]
 $(function () {
@@ -76,6 +55,10 @@ $(function () {
         $("#HeadBarpathName").show()
     } else {
         $("#HeadBarpathName").show()
+    }
+    // 判断是否为双行文本溢出
+    if($headBarConfigBox.attr("linesNum") != 2) {
+        $("#HeadBarpathName").addClass("singleLine")
     }
     //传人样式判断展示形式 
     if ($headBarConfigBox.attr('showType') == '1') {
