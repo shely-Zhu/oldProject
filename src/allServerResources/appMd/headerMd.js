@@ -31,6 +31,10 @@
 		mdDomain = "https://dc.chtwm.com";
 		ssoDomain = 'https://sso.chtwm.com';
 	}
+
+	if( window.location.href.indexOf('account/views/productFiles.html') != -1){
+			$('#HeadBarpathName').html('开始引入');
+		}
 	
 	
 	//引入埋点文件
@@ -41,6 +45,10 @@
 		k.className = 'mdScript';
 		var m = document.getElementsByTagName("body")[0];
 		m.appendChild(k);
+
+		if( window.location.href.indexOf('account/views/productFiles.html') != -1){
+   			$('#HeadBarpathName').html('引入埋点文件');
+   		}
 	
 		k.onload = k.onreadystatechange = function(){
 		   	if( !this.readyState || this.readyState=='loaded' || this.readyState=='complete'){
@@ -58,6 +66,10 @@
 		   		}
 
 		   		if( window.location.href.indexOf('account/views/productFiles.html') != -1){
+
+		   			$('#HeadBarpathName').html('埋点文件加载完毕');
+
+		   			alert( window.htmd );
 		   			window._htmd(mdObj);
 		   		}
 		
