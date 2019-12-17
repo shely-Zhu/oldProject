@@ -301,7 +301,7 @@ $(function() {
                 'htmdEvt': 'superStreasureDetail_0'
             })
             mui("body").on('mdClick', '.materialContent', function(e) {
-                    var id = $(this).attr('data-id')
+                    var id = $(this).attr('data-id');
                     window.location.href = site_url.superContent_url + "?id=" + id;
 
                 }, {
