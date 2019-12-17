@@ -9,7 +9,7 @@ var generateTemplate = require('@pathCommonJsComBus/generateTemplate.js');
 var alwaysAjax = require('@pathCommonJs/components/alwaysAjax.js');
 
 $(function () {
-    let somePage = {
+    var somePage = {
         //获取页面元素
         $e: {
             recordSearchTitleBoxId: $("#recordSearchWrapper"), // 筛选标签容器
