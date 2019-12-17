@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2019-11-26 14:42:56
- * @LastEditTime: 2019-12-17 15:46:30
+ * @LastEditTime: 2019-12-17 17:26:31
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \htjf-app\src\financial\static\js\publicPlacement\cashTransformOut.js
@@ -348,8 +348,10 @@ $(function () {
 				var val =$(".msecond input")[0].value;
 				that.gv.transformMoney = val;
 				if( parseFloat( that.gv.transformTotalMoney)< parseFloat( that.gv.transformMoney) ){
-					$(".checkMessage").css({"display":"block"});
-					$(".checkMessage").html("转出金额超过最大额度")
+
+					//$(".checkMessage").css({"display":"block"});
+					//$(".checkMessage").html("转出金额超过最大额度")
+					tipAction("转出金额超过最大额度"+that.gv.transformTotalMoney+"元")
 				}else{		
 					$(".checkMessage").css({"display":"none"}); 
 				}
@@ -379,8 +381,9 @@ $(function () {
 			$(".msecond input").change(function(){
 				that.gv.transformMoney = $(this)[0].value;
 				if( parseFloat( that.gv.transformTotalMoney)< parseFloat( that.gv.transformMoney) ){
-					$(".checkMessage").css({"display":"block"});
-					$(".checkMessage").html("转出金额超过最大额度")
+					//$(".checkMessage").css({"display":"block"});
+					//$(".checkMessage").html("转出金额超过最大额度")
+					tipAction("转出金额超过最大额度"+that.gv.transformTotalMoney+"元")
 				}else{		
 					$(".checkMessage").css({"display":"none"}); 
 				}
@@ -392,9 +395,12 @@ $(function () {
 			//赎回确认 
 			mui('body').on('mdClick','.confirmeDemptionPay',function(){   
 			//$(".confirmeDemptionPay").on('click',function(){
+				var val =$(".msecond input")[0].value;
+				that.gv.transformMoney = val;
 				if(parseFloat(that.gv.transformMoney)>that.gv.dailyOnceMaxLimit){
-					$(".checkMessage").css({"display":"block"});
-					$(".checkMessage").html("转出金额查过单笔最高限额");
+					//$(".checkMessage").css({"display":"block"});
+					//$(".checkMessage").html("转出金额超过单笔最高限额");
+					tipAction("转出金额超过单笔最高限额"+that.gv.dailyOnceMaxLimit + "元")
 					return 
 				}else{
 					$(".checkMessage").css({"display":"none"});
