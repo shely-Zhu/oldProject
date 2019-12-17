@@ -90,12 +90,12 @@ var data = Mock.mock({
 			"salesFee":null,
 			"redeemTime":null,
 			"detailList": [{
-			  "conditions": "100万元≤金额<300万元",
-			  "fundFeeRate": "0.50%",
-			  "feeCalcMed": "2", //计算方式(1是固定费用，2是固定费率),
-			  "maxValue": "300",
-			  "minValue": "",
-			  "maxRate":"0.500"
+			"conditions": "100万元≤金额<300万元",
+			"fundFeeRate": "0.50%",
+			"feeCalcMed": "2", //计算方式(1是固定费用，2是固定费率),
+			"maxValue": "300",
+			"minValue": "",
+			"maxRate":"0.500"
 			},{
 			 "conditions": "500万元≤金额",
 			 "fundFeeRate": "每笔1,000.00元",

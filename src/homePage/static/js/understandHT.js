@@ -5,7 +5,7 @@ var generateTemplate = require('@pathCommonJsComBus/generateTemplate.js');
 var splitUrl = require('@pathCommonJs/components/splitUrl.js')();
 
 $(function() {
-    let somePage = {
+    var somePage = {
         //获取页面元素
         $e: {
             tab: $('.tabHeader .tab'),

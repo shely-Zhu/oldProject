@@ -30,5 +30,5 @@ var mdObj = {
 	otherParams: pcParam
 }
 
-window._htmd && window._htmd(mdObj);
+// window._htmd && window._htmd(mdObj);
 
