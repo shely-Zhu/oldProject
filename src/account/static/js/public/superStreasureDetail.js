@@ -302,8 +302,8 @@ $(function() {
             })
             mui("body").on('mdClick', '.materialContent', function(e) {
                     var id = $(this).attr('data-id')
-                    //window.location.href = `${site_url.superContent_url}?id=${id}`;
-                    window.location.href = site_url.superContent_url + '?id=' + id;
+                    window.location.href = site_url.superContent_url + "?id=" + id;
+
                 }, {
                     'htmdEvt': 'superStreasureDetail_1'
                 })
@@ -324,8 +324,8 @@ $(function() {
                     if (that.gL.accountType === 0 || that.gL.accountType === 2) {
                         tipAction('暂不支持机构客户进行交易');
                     } else {
-                        //window.location.href = `${site_url.pofCashTransformIn_url}?fundName=${that.gL.fundName}&fundCode=${that.gL.fundCode}`;
-                        window.location.href = site_url.pofCashTransformIn_url + '?fundName=' + that.gL.fundName + '&fundCode=' + that.gL.fundCode;
+                        window.location.href = site_url.pofCashTransformIn_url+ "?fundName=" +that.gL.fundName + "&fundCode=" +that.gL.fundCode;
+
                     }
 
                 }, {
@@ -333,8 +333,13 @@ $(function() {
                 })
                 //点击历史记录
             mui("body").on('mdClick', '.recordBtn', function(e) {
-                //window.location.href = `${site_url.superRecord_url}?fundCode=${that.gL.fundCode}`;
-                window.location.href = site_url.superRecord_url + '?fundCode=' + that.gL.fundCode;
+                window.location.href = site_url.superRecord_url+ "?fundCode=" +that.gL.fundCode;
+            }, {
+                'htmdEvt': 'superStreasureDetail_4'
+            })
+                //点击收益明细
+            mui("body").on('mdClick', '.addLi', function(e) {
+                window.location.href = site_url.returnsDetail_url + "?fundCode=" + that.gL.fundCode;
             }, {
                 'htmdEvt': 'superStreasureDetail_4'
             })
