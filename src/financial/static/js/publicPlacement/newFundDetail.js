@@ -17,18 +17,22 @@ $(function () {
         },
         init: function () {
             var that = this;
-            // that.getData();
+            that.getData();
         },
         getData: function () {
             var that = this;
             // 请求页面数据
             var obj = [{
-                // url: site_url.newfundDetails_api,
+                url: site_url.newfundDetails_api,
                 data: {
                     fundCode: splitUrl['fundCode'],
                 },
                 callbackDone: function (json) {
-                    
+                    var jsonData = json.data;
+
+                    $('#HeadBarpathName').html(jsonData.chiName + jsonData.secuId);
+                    // 认购期
+                    $('.subscriptionDate').html(jsonData.issBgnDt + '-' + jsonData.issEndDt);
                 },
                 callbackFail: function (json) {
                     tipAction(json.message);
