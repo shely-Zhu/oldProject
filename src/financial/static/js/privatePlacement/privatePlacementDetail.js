@@ -156,6 +156,10 @@ $(function() {
                     // console.log($('.productNameTip').text().length)
                     //判断字符长度大于40  出现弹框
                     if($('.productNameTip').text().length>40){
+                        var dataText=jsonData.productName
+                            dataText=dataText.substring(0,40)
+                            dataText=dataText+"..."
+                            $('.productNameTip').html(dataText);
                         $(".nameTip").show()
                     }else{
                         $(".nameTip").hide()
