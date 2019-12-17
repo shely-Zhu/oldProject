@@ -13,7 +13,7 @@ var splitUrl = require('@pathCommonJs/components/splitUrl.js')();
 require('@pathCommonCom/pullRefresh/pullRefresh.js');
 
 $(function() {
-	let somePage = {
+	var somePage = {
 		//获取页面元素
 		$e: {
 			fortuneFlowListWrapper: $(".knownList"), // 财富流向早知道列表容器

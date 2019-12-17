@@ -228,7 +228,6 @@ $(function () {
 						var data = [] ;
 						data = json.data;
 						data.forEach(function(element){
-							debugger
 							if(element.materialType == '1'){
 								that.$el.contract.attr('datalink',element.linkAddress)
 								that.$el.contract.attr('type','1')
