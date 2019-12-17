@@ -500,10 +500,11 @@ gulp.task("cssToHost", function() {
                 cb()
             })
         )
-        .pipe(gulp.dest(host.path))
+        //.pipe(gulp.dest(host.path))
 
     //打版本号
     .pipe(plugins.rev())
+        .pipe(gulp.dest(host.path))
         .pipe(plugins.rev.manifest())
         .pipe(gulp.dest(host.path + 'rev/css/'))
 })
@@ -580,6 +581,7 @@ gulp.task("allServerResourcesInclude", function() {
             })
         )
         .pipe(plugins.rev())
+        .pipe(gulp.dest(host.path + 'allServerResources/include/'))
         .pipe(plugins.rev.manifest())
         .pipe(gulp.dest(host.path + 'rev/include/js'));
 })
@@ -639,6 +641,7 @@ gulp.task("includeJs", ['htmd', 'allServerResourcesInclude'], function() {
             })
         )
         .pipe(plugins.rev())
+        .pipe(gulp.dest(host.path + 'include/'))
         .pipe(plugins.rev.manifest())
         .pipe(gulp.dest(host.path + 'rev/include/js'));
 })
@@ -795,9 +798,11 @@ gulp.task("webpack", ['jsCpd', 'changePath', 'commonHtml'], function(cb) {
 
         plugins.if(isWatch, plugins.debug({ title: 'js-有变动的文件:' })),
 
-        gulp.dest(host.path),
+        //gulp.dest(host.path),
 
         plugins.rev(),
+        gulp.dest(host.path),
+        //plugins.debug({ title: 'js文件对应的节点。。。。。。。。。。。。' }),
         plugins.rev.manifest(),
         gulp.dest(host.path + 'rev/js')
 
