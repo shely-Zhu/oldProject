@@ -127,7 +127,7 @@ $(function() {
             sessionStorage.setItem("addAccountDiagnosisResultList",JSON.stringify(that.gV.otherFundCodeData));
             that.initAddOtherFundCode();
             that.gV.readyPurchaseHTFunds= data.readyPurchaseHTFunds;
-            that.gV.readyPurchaseHTFunds.forEach(function(item,index){
+            /*that.gV.readyPurchaseHTFunds.forEach(function(item,index){
                 if(!!item.id){
                     item.checkStatu = true
                     that.gV.selectPurchaseHTFunds.push(item) 
@@ -135,7 +135,16 @@ $(function() {
                     item.checkStatu = false
                 }
                 item.purchaseSourceType="1"
-            })
+            })*/
+            for(var i = 0 ; i < that.gV.readyPurchaseHTFunds.length; i++) {
+              if(!!that.gV.readyPurchaseHTFunds[i].id){
+                that.gV.readyPurchaseHTFunds[i].checkStatu = true
+                that.gV.selectPurchaseHTFunds.push(that.gV.readyPurchaseHTFunds[i]) 
+              }else{
+                that.gV.readyPurchaseHTFunds[i].checkStatu = false
+              }
+              that.gV.readyPurchaseHTFunds[i].purchaseSourceType="1"
+            }
             if(that.gV.readyPurchaseHTFunds){
                 generateTemplate(that.gV.readyPurchaseHTFunds,that.$e.templateTransferFundsList,that.$e.readyPurchaseHTFunds)
             }
@@ -144,41 +153,71 @@ $(function() {
             var that = this;
             var val = "请选择";
            if(type == "fundDiagnosisSex"){
-               that.gV.fundDiagnosisSexDicData.forEach(function(item){
+               /*that.gV.fundDiagnosisSexDicData.forEach(function(item){
                    if(item.dicCode == code){
                         val = item.value
                    }
-               })
+               })*/
+               for(var i = 0 ; i < that.gV.fundDiagnosisSexDicData.length; i++) {
+                 if(that.gV.fundDiagnosisSexDicData[i].dicCode == code){
+                    val = that.gV.fundDiagnosisSexDicData[i].value
+                  }
+               }
            }else if(type == 'fundDiagnosisVocation'){
-                that.gV.fundDiagnosisVocationDicData.forEach(function(item){
+                /*that.gV.fundDiagnosisVocationDicData.forEach(function(item){
                     if(item.dicCode == code){
                         val = item.value
                     }
-                })
+                })*/
+                for(var i = 0 ; i < that.gV.fundDiagnosisVocationDicData.length; i++) {
+                  if(that.gV.fundDiagnosisVocationDicData[i].dicCode == code){
+                    val = that.gV.fundDiagnosisVocationDicData[i].value
+                  }
+                }
            }else if(type == 'fundDiagnosisInvestDuration'){
-                that.gV.fundDiagnosisInvestDurationDicData.forEach(function(item){
+                /*that.gV.fundDiagnosisInvestDurationDicData.forEach(function(item){
                     if(item.dicCode == code){
                         val = item.value
                     }
-                })
+                })*/
+                for(var i = 0 ; i < that.gV.fundDiagnosisInvestDurationDicData.length; i++) {
+                  if(that.gV.fundDiagnosisInvestDurationDicData[i].dicCode == code){
+                    val = that.gV.fundDiagnosisInvestDurationDicData[i].value
+                  }
+                }
             }else if(type == 'fundDiagnosisRiskLevel'){
-                that.gV.fundDiagnosisRiskLevelDicData.forEach(function(item){
+                /*that.gV.fundDiagnosisRiskLevelDicData.forEach(function(item){
                     if(item.dicCode == code){
                         val = item.value
                     }
-                })
+                })*/
+                for(var i = 0 ; i < that.gV.fundDiagnosisRiskLevelDicData.length; i++) {
+                  if(that.gV.fundDiagnosisRiskLevelDicData[i].dicCode == code){
+                    val = that.gV.fundDiagnosisRiskLevelDicData[i].value
+                  }
+                }
             }else if(type == 'fundDiagnosisEInvestDurationLevel'){
-                that.gV.fundDiagnosisEInvestDurationLevelDicData.forEach(function(item){
+                /*that.gV.fundDiagnosisEInvestDurationLevelDicData.forEach(function(item){
                     if(item.dicCode == code){
                         val = item.value
                     }
-                })
+                })*/
+                for(var i = 0 ; i < that.gV.fundDiagnosisEInvestDurationLevelDicData.length; i++) {
+                  if(that.gV.fundDiagnosisEInvestDurationLevelDicData[i].dicCode == code){
+                    val = that.gV.fundDiagnosisEInvestDurationLevelDicData[i].value
+                  }
+                }
             }else if(type == 'fundDiagnosisLiquidityRequirement'){
-                that.gV.fundDiagnosisLiquidityRequirementDicData.forEach(function(item){
+                /*that.gV.fundDiagnosisLiquidityRequirementDicData.forEach(function(item){
                     if(item.dicCode == code){
                         val = item.value
                     }
-                })
+                })*/
+                for(var i = 0 ; i < that.gV.fundDiagnosisLiquidityRequirementDicData.length; i++) {
+                  if(that.gV.fundDiagnosisLiquidityRequirementDicData[i].dicCode == code){
+                    val = that.gV.fundDiagnosisLiquidityRequirementDicData[i].value
+                  }
+                }
             }
             return val;
         },
@@ -494,11 +533,16 @@ $(function() {
                 $(this).parent().remove();
                 var fundCode = $(this).parent().attr("code");
                 var newArr = [];
-                that.gV.otherFundCodeData.forEach(function(item){
+                /*that.gV.otherFundCodeData.forEach(function(item){
                       if(item.fundCode != fundCode){
                           newArr.push(item)
                       }
-                });
+                });*/
+                for(var i = 0 ; i < that.gV.otherFundCodeData.length; i++) {
+                  if(that.gV.otherFundCodeData[i].fundCode != fundCode){
+                      newArr.push(that.gV.otherFundCodeData[i])
+                  }
+                }
                 that.gV.otherFundCodeData = newArr;
                 sessionStorage.setItem("addAccountDiagnosisResultList",JSON.stringify(newArr))
                 if(that.gV.otherFundCodeData){
@@ -548,11 +592,16 @@ $(function() {
                 }else{
                     //去除
                     var newArr = [];
-                    that.gV.selectPurchaseHTFunds.forEach(function(item){
+                    /*that.gV.selectPurchaseHTFunds.forEach(function(item){
                         if(item.fundCode != fundCode){
                             newArr.push(item)
                         }
-                    })
+                    })*/
+                    for(var i = 0 ; i < that.gV.selectPurchaseHTFunds.length; i++) {
+                      if(that.gV.selectPurchaseHTFunds[i].fundCode != fundCode){
+                          newArr.push(that.gV.selectPurchaseHTFunds[i])
+                      }
+                    }
                     that.gV.selectPurchaseHTFunds = newArr
                     $(this).parent().attr("checkStatus","false")
 

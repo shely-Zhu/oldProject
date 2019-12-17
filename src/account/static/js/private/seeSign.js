@@ -7,7 +7,6 @@ require('@pathCommonJs/ajaxLoading.js');
 
 //下拉加载更多
 // require('@pathCommonJs/scrollFullPage.js');
-require('@pathCommonJsCom/goTopMui.js');
 require('@pathCommonJs/components/headBarConfig.js');
 //黑色提示条的显示和隐藏
 var generateTemplate = require('@pathCommonJsComBus/generateTemplate.js');
