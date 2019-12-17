@@ -155,7 +155,7 @@ $(function() {
                         // 将列表插入到页面上
                         transcationTem(data, that.getElements.contentWrap, that.getElements.transTemp, type)
 
-                    }, 200)
+                    }, 300)
                 },
                 callbackNoData: function() {
                     if (that.gV.aP.pageNum == 1) {

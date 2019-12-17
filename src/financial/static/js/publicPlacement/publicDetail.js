@@ -89,7 +89,7 @@ $(function () {
                     that.gV.json.fundType = that.fundType
                     that.gV.invTypCom = json.data.invTypCom
                     that.gV.secuSht = json.data.secuSht
-                    if(!!that.gV.json.tradeLimitFlag){
+                    if(that.gV.json.tradeLimitFlag == "1"){
                         that.gV.json.tradeLimitFlag2 = true
                     }else{
                         that.gV.json.tradeLimitFlag2 = false
