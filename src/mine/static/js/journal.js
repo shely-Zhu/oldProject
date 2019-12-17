@@ -28,7 +28,7 @@ $(function() {
 		//页面初始化函数
 		init: function() {
 			//启用事件处理
-			$.each(this.$e.islogin, (index, item) => {
+			$.each(this.$e.islogin, function(index, item) {
 				console.log($(item).html())
 				if($(item).html() == "退出") {
 					$(item).css({
