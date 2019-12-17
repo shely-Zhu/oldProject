@@ -261,14 +261,21 @@ $(function () {
         },
         chooseTipDesc: function(){
             var that = this;
-            that.gV.data.fundDetailList.forEach(element => {
+            /*that.gV.data.fundDetailList.forEach(element => {
                 //自己处理一下文案的显示
                 if (element.isShowDivideMsg == '1' && element.divideMsg){
                     element.myTip = element.divideMsg;
                 } else if (element.canBeSpentMsg){
                     element.myTip = element.canBeSpentMsg;
                 }
-            });
+            });*/
+            for(var i = 0 ; i < that.gV.data.fundDetailList.length; i++) {
+                if(that.gV.data.fundDetailList[i].isShowDivideMsg == '1' && that.gV.data.fundDetailList[i].divideMsg) {
+                    that.gV.data.fundDetailList[i].myTip = that.gV.data.fundDetailList[i].divideMsg;
+                } else if (that.gV.data.fundDetailList[i].canBeSpentMsg){
+                    that.gV.data.fundDetailList[i].myTip = that.gV.data.fundDetailList[i].canBeSpentMsg;
+                }
+            }
         },
         addSymbol: function (value, valueMask) {
             //添加正负号
