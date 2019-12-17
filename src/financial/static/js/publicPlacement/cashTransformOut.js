@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2019-11-26 14:42:56
- * @LastEditTime: 2019-12-13 09:26:22
+ * @LastEditTime: 2019-12-17 15:46:30
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \htjf-app\src\financial\static\js\publicPlacement\cashTransformOut.js
@@ -28,6 +28,7 @@ $(function () {
 		   productName:"",   //产品名称
 		   transformTotalMoney:"",   //产品转出总额度
 		   transformMoney:"",    //产品转出额度
+		   dailyOnceMaxLimit:"",  //单日最高限额 整数
 		   fundCode:"" ,//基金编号
 		   outType:"fast",//转出方式  快速位fast 普通位common
 		   dailyOnceMaxLimitWan:"", //单笔最高限额
@@ -139,8 +140,8 @@ $(function () {
 				 url:site_url.cashList_api,
 				 needDataEmpty:true,
 				 data:{
-					 //'code':that.gv.fundCode,
-					  'code':"003075",
+					 'code':that.gv.fundCode,
+					  //'code':"003075",
 					 'operationType':'1'
 				 },
 				 callbackDone:function(json){
@@ -226,6 +227,7 @@ $(function () {
 					var data = json.data;
 					that.gv.dailyMaxLimitWan = data.dailyMaxLimitWan;
 					that.gv.dailyTimesMaxLimit = data.dailyTimesMaxLimit;
+					that.gv.dailyOnceMaxLimit = data.dailyOnceMaxLimit;
 					that.gv.dailyOnceMaxLimitWan = data.dailyOnceMaxLimitWan;
 					that.$e.el_dailyOnceMaxLimitWan[0].textContent = that.gv.dailyOnceMaxLimitWan;
 					that.$e.el_dailyMaxLimitWan[0].textContent = that.gv.dailyMaxLimitWan;
@@ -390,6 +392,13 @@ $(function () {
 			//赎回确认 
 			mui('body').on('mdClick','.confirmeDemptionPay',function(){   
 			//$(".confirmeDemptionPay").on('click',function(){
+				if(parseFloat(that.gv.transformMoney)>that.gv.dailyOnceMaxLimit){
+					$(".checkMessage").css({"display":"block"});
+					$(".checkMessage").html("转出金额查过单笔最高限额");
+					return 
+				}else{
+					$(".checkMessage").css({"display":"none"});
+				}
 				$(".msecond input").blur();
 				$("#passwordWrap").show();
 				payPass(that.cancelOrder)
