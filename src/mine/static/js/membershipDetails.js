@@ -6,6 +6,8 @@
 require('@pathCommonBase/base.js');
 require('@pathCommonJs/ajaxLoading.js');
 
+var splitUrl = require('@pathCommonJsCom/splitUrl.js')();
+
 var swiperSizeMap = require('@pathCommonJs/components/swiper/swiperSizeMap.js');
 var generateTemplate = require('@pathCommonJsComBus/generateTemplate.js');
 
@@ -75,7 +77,8 @@ $(function(){
             var obj=[{
                 url: site_url.findBenefitByLevel_api,
                 data:{
-                    level:'7'
+                    // level:'7'
+                    level:splitUrl['level']
                 },
                 //async: false,
                 needDataEmpty: true,
