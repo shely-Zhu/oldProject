@@ -435,7 +435,7 @@ gulp.task('commonImages', function() {
 
 //图片打包任务，全部打包和单独打包可共用
 gulp.task('images', ['commonImages'], function() {
-    return gulp.src(['src/**/img/**/*', '!src/newCommon/**/*'])
+    return gulp.src(['src/**/img/**/*', 'src/newCommon/**/*'])
         .pipe(gulp.dest(host.path));
 });
 

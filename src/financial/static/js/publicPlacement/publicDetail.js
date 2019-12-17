@@ -260,9 +260,6 @@ $(function () {
             mui("body").on('mdClick', ".share_area", function (e) {
                 var shareObj = {
                     type:'auto',
-
-
-                    
                     businessType:'publicProductShare',
                     title: that.gV.secuSht,
                     des: '',
