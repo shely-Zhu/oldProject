@@ -7,9 +7,9 @@
         <header class="mui-bar mui-bar-nav cityHeader">
             <a href="javascript:;" class="mui-icon mui-icon-left-nav mui-pull-left goBack"></a>
             {{#each this}} {{#if namea}}
-            <h1 class="mui-title">明星理财师</h1>
+            <h1 class="mui-title">选择城市</h1>
             {{else}}
-            <h1 class="mui-title">会员俱乐部</h1>
+            <h1 class="mui-title">选择城市</h1>
             {{/if}} {{/each}}
         </header>
         <header class="cityHeader"></header>
@@ -33,7 +33,7 @@
                     <li class="hotCity">
                         <div class="hotBox">
                             {{#each this}} {{#with allCity}} {{#each this}}
-                            <span data-name="">{{regionName}}</span> {{/each}} {{/with}} {{/e ach}}
+                            <span data-name="">{{regionName}}</span> {{/each}} {{/with}} {{/each}}
                         </div>
                     </li>
                     <li data-group="热" class="mui-table-view-divider mui-indexed-list-group hot">热门城市</li>
