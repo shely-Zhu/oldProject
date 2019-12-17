@@ -57,7 +57,7 @@
         	   		// otherParams: pcParam
 		   		}
 
-		   		if( window.location.indexOf('account/views/productFiles.html') != -1){
+		   		if( window.location.href.indexOf('account/views/productFiles.html') != -1){
 		   			window._htmd(mdObj);
 		   		}
 		
