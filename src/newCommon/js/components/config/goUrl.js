@@ -301,6 +301,8 @@ module.exports = function() {
     this.onlineCustomerTransfer_url = go_url.cft_url + '/include/views/onlineCustomer.html';
     // app中私募首页，视频直播跳转路径
     this.videoPlay_url = go_url.no_url + '/productPrivate/views/videoPlay.html';
+    // 公募产品分享地址 需拼接fundCode
+    this.productPublicShare_url = go_url.wap_url + "/productPublic/views/productDetail.html?fundCode=";
 
     // 私募售前告知书
     this.openPdf_url = go_url.no_url + '/productPrivate/views/openPdf.html';

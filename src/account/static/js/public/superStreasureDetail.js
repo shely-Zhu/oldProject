@@ -26,8 +26,9 @@ $(function() {
             end: "",
             fundName: "",
             transformMoney: "",
-            accountType: ''
-
+            accountType: '',
+            maxNum:null,
+            minNum:null,
         },
         init: function() {
             var that = this;
@@ -108,6 +109,8 @@ $(function() {
                     }
                 },
                 yAxis: {
+                    max:that.gL.maxNum,
+                    min:that.gL.minNum,
                     axisTick: {
                         show: false
                     },
@@ -122,9 +125,10 @@ $(function() {
                     axisLabel: {
                         show: true,
                         color: '#9B9B9B',
-                        // formatter: '{value}%',
                         formatter: function(value, index) {
-                            return value.toFixed(4);
+                            // if(value != 0){
+                                return value.toFixed(4);
+                            // }
                         },
                     },
                 },
@@ -201,7 +205,7 @@ $(function() {
                         $('.footerBtnLeft').css('pointer-events','none');//按钮禁止点击
                     }else{
                         $('.footerBtnLeft').css('background','#fff');//按钮背景置灰
-                        $('.footerBtnLeft').css('pointer-events','');//按钮禁止点击
+                        $('.footerBtnLeft').css('pointer-events','auto');//按钮禁止点击
                     }
                     $(".incomeMask").text(data.incomeMask ? data.incomeMask : "--")
                     $(".addupIncomeMask").text(data.addupIncomeMask ? data.addupIncomeMask : "--")
@@ -232,6 +236,26 @@ $(function() {
                         that.gL.time.push(jsonData[i].trdDt)
                         that.gL.shuju.push(jsonData[i].annYldRat)
                     }
+                    console.log(that.gL.shuju,"能排序吗")
+                    var temp = that.gL.shuju[0];
+                    var maxNum = that.gL.shuju[0];
+                    var minNum = that.gL.shuju[0];
+                    //that.gL.shuju.forEach(item => maxNum = item > maxNum ? item : maxNum)
+                    //that.gL.shuju.forEach(item => minNum = item < minNum ? item : minNum)
+                    for( var j = 0 ; j < that.gL.shuju.length; j++) {
+                        if(that.gL.shuju[j] > maxNum) {
+                            maxNum = that.gL.shuju[j]
+                        }
+                    }
+                    for( var m = 0 ; m < that.gL.shuju.length; m++) {
+                        if(that.gL.shuju[m] < minNum) {
+                            minNum = that.gL.shuju[m]
+                        }
+                    }
+                    console.log("最大值",maxNum)
+                    console.log("最小值",minNum)
+                    that.gL.maxNum = maxNum;
+                    that.gL.minNum = minNum;
                     that.drawLine()
                 }
             }];
@@ -277,8 +301,9 @@ $(function() {
                 'htmdEvt': 'superStreasureDetail_0'
             })
             mui("body").on('mdClick', '.materialContent', function(e) {
-                    var id = $(this).attr('data-id')
-                    window.location.href = `${site_url.superContent_url}?id=${id}`;
+                    var id = $(this).attr('data-id');
+                    window.location.href = site_url.superContent_url + "?id=" + id;
+
                 }, {
                     'htmdEvt': 'superStreasureDetail_1'
                 })
@@ -299,7 +324,8 @@ $(function() {
                     if (that.gL.accountType === 0 || that.gL.accountType === 2) {
                         tipAction('暂不支持机构客户进行交易');
                     } else {
-                        window.location.href = `${site_url.pofCashTransformIn_url}?fundName=${that.gL.fundName}&fundCode=${that.gL.fundCode}`;
+                        window.location.href = site_url.pofCashTransformIn_url+ "?fundName=" +that.gL.fundName + "&fundCode=" +that.gL.fundCode;
+
                     }
 
                 }, {
@@ -307,7 +333,13 @@ $(function() {
                 })
                 //点击历史记录
             mui("body").on('mdClick', '.recordBtn', function(e) {
-                window.location.href = `${site_url.superRecord_url}?fundCode=${that.gL.fundCode}`;
+                window.location.href = site_url.superRecord_url+ "?fundCode=" +that.gL.fundCode;
+            }, {
+                'htmdEvt': 'superStreasureDetail_4'
+            })
+                //点击收益明细
+            mui("body").on('mdClick', '.addLi', function(e) {
+                window.location.href = site_url.returnsDetail_url + "?fundCode=" + that.gL.fundCode;
             }, {
                 'htmdEvt': 'superStreasureDetail_4'
             })

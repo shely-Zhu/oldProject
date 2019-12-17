@@ -246,13 +246,13 @@ $(function() {
                             for(var i = 0 ; i < that.gV.lazyClassArr.length; i++) {
                                 $("." + that.gV.lazyClassArr[i]).lazyload()
                             }
-                            alwaysAjax($('#' + w + ' .mui-table-view-cell'), s)
+                            alwaysAjax($('#' + w + ' .mui-table-view-cell'), s, 2)
                         } else {
                             $id.find('.contentWrapper .mui-table-view-cell').append(that.html);
                             for(var i = 0 ; i < that.gV.lazyClassArr.length; i++) {
                                 $("." + that.gV.lazyClassArr[i]).lazyload()
                             }
-                            alwaysAjax($('#' + w + ' .mui-table-view-cell'), s)
+                            alwaysAjax($('#' + w + ' .mui-table-view-cell'), s, 2)
                         }
                         //获取当前展示的tab的索引
                         var index = $('#slider .tab-scroll-wrap .mui-active').index(),
@@ -290,8 +290,10 @@ $(function() {
                 callbackNoData: function(json) {
                     t.endPullupToRefresh(false);
                     //没有数据
-                    $id.find('.mui-scroll .list').html(that.getElements.noData.clone(false)).addClass('noCon');
-                    $id.find('.noData').show();
+                    if(that.gV.ajaxArr[that.gV.current_index].pageCurrent == 1) {
+                        $id.find('.mui-scroll .list').html(that.getElements.noData.clone(false)).addClass('noCon');
+                        $id.find('.noData').show();
+                    }
                     setTimeout(function() {
                         that.getElements.listLoading.hide();
                     }, 100);

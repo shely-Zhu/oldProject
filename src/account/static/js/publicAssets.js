@@ -23,6 +23,7 @@ $(function () {
             var that = this;
             that.getData('');
             that.getBankList();
+            that.initRightBtn();
         },
         getBankList: function () {
             //查询银行卡列表
@@ -126,6 +127,16 @@ $(function () {
                 $('.position_h').css('color', '#272727');
             }
         },
+        initRightBtn: function(){
+            //初始化右上角的按钮btn
+            $('.rightBtn').show().html('交易记录');
+            mui("body").on('mdClick', '.rightBtn', function (e) {
+                sessionStorage.setItem("ccache", ""); 
+                    window.location.href = site_url.transactionRecords_url;
+            },{
+                'htmdEvt': 'publicAssets_0'
+            })
+        },
         bankEvents: function () { //绑定事件
             var that = this;
             //点击筛选银行卡
@@ -156,13 +167,6 @@ $(function () {
         },
         events: function () { //绑定事件
             var that = this;
-            //交易记录按钮点击 跳转到交易记录
-            mui("body").on('mdClick', '.trade_list', function (e) {
-                sessionStorage.setItem("ccache", ""); 
-                window.location.href = site_url.transactionRecords_url;
-            },{
-                'htmdEvt': 'publicAssets_0'
-            })
             //普通基金item的点击 进入持仓详情
             mui("body").on('mdClick', '#pageLists .hold_item', function (e) {
                 var index = $(this).index();
@@ -257,14 +261,21 @@ $(function () {
         },
         chooseTipDesc: function(){
             var that = this;
-            that.gV.data.fundDetailList.forEach(element => {
+            /*that.gV.data.fundDetailList.forEach(element => {
                 //自己处理一下文案的显示
                 if (element.isShowDivideMsg == '1' && element.divideMsg){
                     element.myTip = element.divideMsg;
                 } else if (element.canBeSpentMsg){
                     element.myTip = element.canBeSpentMsg;
                 }
-            });
+            });*/
+            for(var i = 0 ; i < that.gV.data.fundDetailList.length; i++) {
+                if(that.gV.data.fundDetailList[i].isShowDivideMsg == '1' && that.gV.data.fundDetailList[i].divideMsg) {
+                    that.gV.data.fundDetailList[i].myTip = that.gV.data.fundDetailList[i].divideMsg;
+                } else if (that.gV.data.fundDetailList[i].canBeSpentMsg){
+                    that.gV.data.fundDetailList[i].myTip = that.gV.data.fundDetailList[i].canBeSpentMsg;
+                }
+            }
         },
         addSymbol: function (value, valueMask) {
             //添加正负号

@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2019-12-09 15:53:31
- * @LastEditTime: 2019-12-10 18:01:50
+ * @LastEditTime: 2019-12-16 14:33:45
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \htjf-app\src\mine\static\js\fundAccountDiagnosisResult.js
@@ -71,17 +71,22 @@ $(function() {
                 var arr =[];
                 var obj = {
                     "fundCode":fundCode,
-                    "dataPick":dataPick,
-                    "money":money
+                    "purchaseDate":new Date(dataPick).getTime(),
+                    "purchaseDateStr":dataPick,
+                    "purchaseAmount":money,
+                    "purchaseSourceType": 2
                 }
                 if(fundCode!=""&&dataPick!=""&&money!=""){
                     if(sessionStorage.getItem("addAccountDiagnosisResultList")){
                          var list = JSON.parse(sessionStorage.getItem("addAccountDiagnosisResultList"));
                          //list.push(obj);
                          
-                         list.forEach(function(item){
-                             arr.push(item)
-                         })
+                         // list.forEach(function(item){
+                         //     arr.push(item)
+                         // })
+                         for(var i = 0 ; i < list.length; i++) {
+                            arr.push(list[i])
+                         }
                          arr.push(obj)
                          sessionStorage.setItem("addAccountDiagnosisResultList",JSON.stringify(arr))
                     }else{
@@ -89,7 +94,7 @@ $(function() {
                         sessionStorage.setItem("addAccountDiagnosisResultList",JSON.stringify(arr))
                     } 
                     $(".warmMessage").hide();
-                    window.location.href = site_url.fundAccountDiagnosisResult_url
+                    window.location.href = site_url.fundAccountDiagnosisResult_url+"?type=add"
                 }else{
                     $(".warmMessage").show()
                 }

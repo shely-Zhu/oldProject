@@ -428,7 +428,7 @@ gulp.task('bfRev', function() {
 /*******************************各种打包任务***********************************/
 
 gulp.task('commonImages', function() {
-    return gulp.src(['src/newCommon/**/*.{jpg,png,jpeg,svg}'])
+    return gulp.src(['src/newCommon/**/*.{jpg,png,jpeg,svg,gif}'])
         .pipe(gulp.dest(host.path + 'allServerResources/include/commonImg/'));
 });
 
@@ -812,7 +812,7 @@ gulp.task("webpack", ['jsCpd', 'changePath', 'commonHtml'], function(cb) {
 function changeCommonImg(file) {
     //如果有用到common里面的图片的，全部把路径改成include
     var fileCon = file.contents.toString();
-    var re = new RegExp("\/common\/[^\.]*\.(jpg|png|svg|jpeg)", 'g');
+    var re = new RegExp("\/common\/[^\.]*\.(jpg|png|svg|jpeg|gif)", 'g');
     var commonImgArr = fileCon.match(re);
 
     if (commonImgArr && commonImgArr.length) {
@@ -834,8 +834,6 @@ function changeCommonImg(file) {
     file.contents = new Buffer(fileCon);
     return file;
 }
-
-
 
 
 //html文件打包
@@ -872,6 +870,28 @@ gulp.task('html', function(cb) {
 
             //替换全部common下的图片路径为include的
             file = changeCommonImg(file);
+
+            var fileCon = file.contents.toString();
+
+            var dcDomain = 'http://localhost:9099';
+
+            if( options.env == 2){
+                //测试环境
+                dcDomain = 'https://dc.qasa.chtwm.com';
+            }
+            else if( options.env == 3){
+                //预生产
+                dcDomain = 'https://dc.uata.haomalljf.com';
+            }
+            else if( options.env == 4){
+                //生产
+                dcDomain = 'https://dc.chtwm.com';
+            }
+
+            fileCon = fileCon.replace('@dcDomain', dcDomain );
+
+            file.contents = new Buffer(fileCon);
+
 
             this.push(file);
             cb()

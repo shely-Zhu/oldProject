@@ -205,10 +205,10 @@ $(function() {
             });
 
                 //无缝滚动
-                setTimeout(function() {
+                /*setTimeout(function() {
                     //无缝滚动
                     alwaysAjax($('#' + w + ' .mui-table-view-cell'), s , 50)
-                }, 1000)
+                }, 1000)*/
 
             // mui('.mui-slider').slider().stopped = true;
         },
@@ -292,7 +292,7 @@ $(function() {
                         } else {
                             t.endPullupToRefresh(false);
                         }
-
+                        console.log(that.gV.ajaxArr)
                         $id.find('.contentWrapper .mui-pull-bottom-pocket').removeClass('mui-hidden');
                         if (that.gV.ajaxArr[that.gV.current_index].pageCurrent == 1) {
                             //第一屏
@@ -326,7 +326,7 @@ $(function() {
                         setTimeout(function() {
                             that.getElements.listLoading.hide();
                         }, 100);
-
+                        alwaysAjax($id.find('.mui-table-view-cell'), $id.find(".contentWrapper"), 2)
                     }, 200)
 
 
@@ -359,8 +359,10 @@ $(function() {
                     t.endPullupToRefresh(false);
 
                     //没有数据
-                    $id.find('.mui-scroll .list').html(that.getElements.noData.clone(false)).addClass('noCon');
-                    $id.find('.noData').show();
+                    if(that.gV.ajaxArr[that.gV.current_index].pageCurrent == 1) {
+                        $id.find('.mui-scroll .list').html(that.getElements.noData.clone(false)).addClass('noCon');
+                        $id.find('.noData').show(); 
+                    }
 
                     setTimeout(function() {
                         that.getElements.listLoading.hide();

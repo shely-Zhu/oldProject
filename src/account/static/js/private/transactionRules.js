@@ -8,7 +8,7 @@ var splitUrl = require('@pathCommonJs/components/splitUrl.js')();
 var generateTemplate = require('@pathCommonJsComBus/generateTemplate.js');
 
 $(function(){
-    let templatePage = {
+    var templatePage = {
         //获取页面元素
         $e:{
             contentWrap:$('#contentWrap'),

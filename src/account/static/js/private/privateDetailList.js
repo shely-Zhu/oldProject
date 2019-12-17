@@ -324,7 +324,7 @@ $(function() {
                         }, 100);
                         transcationTem(jsonData, $id.find('.list li'), $('#trans-template'))
                             //无缝滚动
-                        alwaysAjax($id.find('.mui-table-view-cell'), $id.find(".contentWrapper"))
+                        alwaysAjax($id.find('.mui-table-view-cell'), $id.find(".contentWrapper"), 2)
                     }, 200)
 
 
@@ -357,8 +357,10 @@ $(function() {
                     t.endPullupToRefresh(false);
 
                     //没有数据
-                    $id.find('.mui-scroll .list').html(that.getElements.noData.clone(false)).addClass('noCon');
-                    $id.find('.noData').show();
+                    if(that.gV.ajaxArr[that.gV.current_index].pageNum == 1) {
+                        $id.find('.mui-scroll .list').html(that.getElements.noData.clone(false)).addClass('noCon');
+                        $id.find('.noData').show();
+                    } 
 
                     setTimeout(function() {
                         that.getElements.listLoading.hide();

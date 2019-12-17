@@ -18,19 +18,27 @@ require('@pathIncludJs/vendor/config.js');
 require('@pathCommonJs/components/utils.js');
 require('@pathCommonJs/components/headBarConfig.js');
 
-var fixScroll = function(num){//ios浏览器需要滚动
+var fixScroll = function(num,oHeight){//ios浏览器需要滚动
 	var u = navigator.userAgent;
 	var isiOS = !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/); //ios终端
 	if (isiOS && num == 1) {
 		window.scrollTo(0, 0);
 	}else if(isiOS && num == 2){
-		window.scrollTo(-100000, -100000);//滚动到可是区域
-		document.body.scrollTop = document.body.scrollHeight;
+		window.scrollTo(0, 1000);//滚动到可是区域
+//		document.querySelectorById('#passwordWrap').scroll(0,1000)//iphonex可以滚动到顶部
+//		if(!!window.scrollTo){
+//			alert("123")
+//		}else if(!!window.scrollTop){
+			
+//			window.scrollTop = 1000;//滚动到可是区域
+//		}
+//		document.body.scrollTop = document.body.scrollHeight;
 	}
 }
 
 module.exports = function(callback,forgetCall){
-		
+		//屏幕当前的高度
+    	var oHeight = $(window).height();
 		$("#passwordWrap").show();
 		//将input输入内容依次加到密码输入框里
 		$("#pwd-input").on("input", function() {
@@ -64,9 +72,17 @@ module.exports = function(callback,forgetCall){
 	   
 		$("#pwd-input").on("focus", function() {
 			setTimeout(function(){
-				fixScroll(2);
+				fixScroll(2,oHeight);
 			},300)
 		})
+//		$(window).resize(function(){
+//			alert("1")
+//	        if($(window).height() < oHeight){
+//	            $("#passwordWrap").css("top","8.4rem");
+//	        }else{
+//	            $("#passwordWrap").css("top","");
+//	        }
+//	    });
 		$("#pwd-input").on("blur", function() {
 			    fixScroll(1)
 		})

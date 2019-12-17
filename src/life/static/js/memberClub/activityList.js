@@ -5,6 +5,7 @@
 
 require('@pathCommonBase/base.js');
 require('@pathCommonJs/ajaxLoading.js');
+require('@pathCommonJsCom/goTopMui.js');
 var splitUrl = require('@pathCommonJs/components/splitUrl.js')();
 var generateTemplate = require('@pathCommonJsComBus/generateTemplate.js');
 var alwaysAjax = require('@pathCommonJs/components/alwaysAjax.js');
@@ -225,6 +226,7 @@ $(function() {
                     needLoading: true,
                     callbackDone: function(json) {
                         $('#loading').hide();
+                        $('.netLoading').hide();
                         console.log(json);
                         var data = json.data;
                         var res = [];
