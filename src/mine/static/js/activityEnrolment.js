@@ -258,7 +258,7 @@ $(function() {
             mui('body').on('mdClick', '.clickli', function() {
                 var actType = $(this).attr('data-actType');
                 var actId = $(this).attr('data-actId');
-                window.location.href = site_url.activityDetails_url + '?actType=' + actType + '&' + 'actId=' + actId;
+                window.location.href = site_url.activityDetails_url + '?actType=' + actType + '&' + 'actId=' + actId+'&isNeedLogin=1';
             }, {
                 htmdEvt: 'activityEnrolment_03'
             });

@@ -258,6 +258,7 @@ $(function () {
             });
             //分享  -- 跳往原生页面
             mui("body").on('mdClick', ".share_area", function (e) {
+                debugger
                 var shareObj = {
                     'type':'auto',
                     'businessType':'publicProductShare',
@@ -267,10 +268,10 @@ $(function () {
                     'img': ''
                 }
                 if (window.isAndroid){
-                    window.jsObj.wxShare(shareObj);
+                    window.jsObj.wxShare(JSON.stringify(shareObj));
                 }
                 if (window.isIOS){
-                    window.webkit.messageHandlers(shareObj);
+                    window.webkit.messageHandlers.wxShare.postMessage(JSON.stringify(shareObj));
                 }
             });
             //加自选  
