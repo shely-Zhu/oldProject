@@ -259,12 +259,12 @@ $(function () {
             //分享  -- 跳往原生页面
             mui("body").on('mdClick', ".share_area", function (e) {
                 var shareObj = {
-                    type:'auto',
-                    businessType:'publicProductShare',
-                    title: that.gV.secuSht,
-                    des: '',
-                    link: site_url.productPublicShare_url + splitUrl['fundCode'],
-                    img: ''
+                    'type':'auto',
+                    'businessType':'publicProductShare',
+                    'title': that.gV.secuSht,
+                    'des': '',
+                    'link': site_url.productPublicShare_url + splitUrl['fundCode'],
+                    'img': ''
                 }
                 if (window.isAndroid){
                     window.jsObj.wxShare(shareObj);
