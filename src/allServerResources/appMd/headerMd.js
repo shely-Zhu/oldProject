@@ -46,8 +46,10 @@
 		var m = document.getElementsByTagName("body")[0];
 		m.appendChild(k);
 
+
+
 		if( window.location.href.indexOf('account/views/productFiles.html') != -1){
-   			$('#HeadBarpathName').html('引入埋点文件');
+   			$('#HeadBarpathName').html('引入埋点文件' + document.getElementsByTagName("body").length + ' '+ $('#htmdScript').length );
    		}
 	
 		k.onload = k.onreadystatechange = function(){
