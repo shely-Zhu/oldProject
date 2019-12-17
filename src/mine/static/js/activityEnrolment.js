@@ -6,6 +6,7 @@ require('@pathCommonBase/base.js');
 require('@pathCommonJs/ajaxLoading.js');
 // require('@pathCommonJs/components/elasticLayer.js');
 // require('@pathCommonJs/components/elasticLayerTypeTwo.js');
+require('@pathCommonJsCom/goTopMui.js');
 require('@pathCommonCom/elasticLayer/elasticLayer/elasticLayer.js'); 
 require('@pathCommonJs/components/tabScroll.js');
 var splitUrl = require('@pathCommonJs/components/splitUrl.js')();
