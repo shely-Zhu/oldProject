@@ -69,7 +69,7 @@ $(function(){
                     // 获取第i页
                     //
                     pdf.getPage(i).then(function getPageHelloWorld(page) {
-                        var scale = 0.9;
+                        var scale = 0.5;
                         var viewport = page.getViewport(scale);
         
                         //

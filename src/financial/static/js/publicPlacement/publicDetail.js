@@ -89,7 +89,7 @@ $(function () {
                     that.gV.json.fundType = that.fundType
                     that.gV.invTypCom = json.data.invTypCom
                     that.gV.secuSht = json.data.secuSht
-                    if(!!that.gV.json.tradeLimitFlag){
+                    if(that.gV.json.tradeLimitFlag == "1"){
                         that.gV.json.tradeLimitFlag2 = true
                     }else{
                         that.gV.json.tradeLimitFlag2 = false
@@ -259,12 +259,12 @@ $(function () {
             //分享  -- 跳往原生页面
             mui("body").on('mdClick', ".share_area", function (e) {
                 var shareObj = {
-                    type:'auto',
-                    businessType:'publicProductShare',
-                    title: this.gV.secuSht,
-                    des: '',
-                    link: site_url.productPublicShare_url + splitUrl['fundCode'],
-                    img: ''
+                    'type':'auto',
+                    'businessType':'publicProductShare',
+                    'title': that.gV.secuSht,
+                    'des': '',
+                    'link': site_url.productPublicShare_url + splitUrl['fundCode'],
+                    'img': ''
                 }
                 if (window.isAndroid){
                     window.jsObj.wxShare(shareObj);
