@@ -54,8 +54,8 @@ $(function () {
                     // 认购流程的募集期
                     $('.collectDate').html(jsonData.issEndDt.substring(5));
                     // 购买费率
-                    $('.buyRateTip').html(jsonData.purchaseRate + '%');
-                    $('.buyRate span').html(jsonData.purchaseRate + '%');
+                    $('.purchaseRate').html(jsonData.purchaseRate + '%');
+                    $('.discountRate').html(jsonData.discountRate + '%');
                     // 认购起点
                     $(".buyStart").html(jsonData.tradeLimitList[0].minValue);
 
