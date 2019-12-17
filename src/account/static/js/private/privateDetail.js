@@ -688,7 +688,8 @@ $(function() {
 			})
 			// 交易明细点击跳转
 			mui("body").on('mdClick', '.privateFundPdf', function() {
-				window.location.href = site_url.privateFundPdf_url + '?projectId=' + that.data.projectId + '&ecFileName=' + that.data.ecFileName + '&ecFileUrl=' + that.data.ecFileUrl;
+				window.location.href = site_url.privateFundPdf_url + '?projectId=' + that.data.projectId + '&ecFileName=' 
+				+ new Base64().encode(that.data.ecFileName) + '&ecFileUrl=' + new Base64().encode(that.data.ecFileUrl);
 			}, {
 				'htmdEvt': "privateDetail_3"
 			})
