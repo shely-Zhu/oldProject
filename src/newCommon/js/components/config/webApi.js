@@ -349,6 +349,8 @@ module.exports = function() {
     this.queryReourceListByLabel_api = http_url.web_url + '/pef/queryReourceListByLabel';
     // 查询产品亮点
     this.queryProductImage_api = http_url.web_url + '/pef/queryProductImage';
+    // 意见认证和开户弹框
+    this.popReal_api = http_url.web_url + '/mine/views/popReal.html';
 
 
     /*------------------------------------ 私募接口文档 end -------------------------------------*/
