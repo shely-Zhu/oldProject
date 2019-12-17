@@ -428,7 +428,7 @@ gulp.task('bfRev', function() {
 /*******************************各种打包任务***********************************/
 
 gulp.task('commonImages', function() {
-    return gulp.src(['src/newCommon/**/*.{jpg,png,jpeg,svg}'])
+    return gulp.src(['src/newCommon/**/*.{jpg,png,jpeg,svg,gif}'])
         .pipe(gulp.dest(host.path + 'allServerResources/include/commonImg/'));
 });
 
@@ -807,7 +807,7 @@ gulp.task("webpack", ['jsCpd', 'changePath', 'commonHtml'], function(cb) {
 function changeCommonImg(file) {
     //如果有用到common里面的图片的，全部把路径改成include
     var fileCon = file.contents.toString();
-    var re = new RegExp("\/common\/[^\.]*\.(jpg|png|svg|jpeg)", 'g');
+    var re = new RegExp("\/common\/[^\.]*\.(jpg|png|svg|jpeg|gif)", 'g');
     var commonImgArr = fileCon.match(re);
 
     if (commonImgArr && commonImgArr.length) {

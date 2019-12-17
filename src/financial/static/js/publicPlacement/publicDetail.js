@@ -261,7 +261,7 @@ $(function () {
                 var shareObj = {
                     type:'auto',
                     businessType:'publicProductShare',
-                    title: this.gV.secuSht,
+                    title: that.gV.secuSht,
                     des: '',
                     link: site_url.productPublicShare_url + splitUrl['fundCode'],
                     img: ''
