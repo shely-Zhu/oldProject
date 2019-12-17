@@ -346,7 +346,6 @@ $(function () {
                 $('.trade_status_area .trade_status_icon_1').css('background', 'url(/common/img/public_trade_detail_no_check.png)').css('background-size', '100%');
             }
             if (that.gV.isCash){//现金宝
-                console.log(model,"这是什么")
                 if (that.gV.isBuy){
                     $('.trade_status_area .trade_status_desc').eq(0).html("提交转入申请");
                     $('.trade_status_area .trade_status_desc').eq(1).html("开始计算收益");
@@ -365,8 +364,8 @@ $(function () {
                     $('.trade_status_area .trade_status_desc').eq(0).html("提交转出申请");
                     $('.trade_status_area .trade_status_desc').eq(1).html("到账时间");
 
-                    $('.trade_status_area .trade_status_date').eq(0).html(model.estimateDateStr);//提交转出申请
-                    $('.trade_status_area .trade_status_date').eq(1).html('预计' + model.estimateTimeStr);//到账时间
+                    $('.trade_status_area .trade_status_date').eq(0).html(model.applyDateTime);//提交转出申请
+                    $('.trade_status_area .trade_status_date').eq(1).html('预计' + model.estimateDateStr + ' ' + model.estimateTimeStr);//到账时间
                 }
             } else {
                 //普通基金赎回不展示进度条 所以不判断
@@ -402,7 +401,11 @@ $(function () {
                     } else {
                         tipAction("已撤单，您将继续持有该基金份额");
                     }
-                    setTimeout(() => {
+                    /*setTimeout(() => {
+                        //2秒后刷新页面
+                        window.location.reload()
+                    }, 2000);*/
+                    setTimeout(function() {
                         //2秒后刷新页面
                         window.location.reload()
                     }, 2000);

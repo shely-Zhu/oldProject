@@ -225,6 +225,7 @@ $(function() {
                     needLoading: true,
                     callbackDone: function(json) {
                         $('#loading').hide();
+                        $('.netLoading').hide();
                         console.log(json);
                         var data = json.data;
                         var res = [];

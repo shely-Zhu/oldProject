@@ -237,11 +237,21 @@ $(function() {
                         that.gL.shuju.push(jsonData[i].annYldRat)
                     }
                     console.log(that.gL.shuju,"能排序吗")
-                    let temp = that.gL.shuju[0];
-                    let maxNum = that.gL.shuju[0];
-                    let minNum = that.gL.shuju[0];
-                    that.gL.shuju.forEach(item => maxNum = item > maxNum ? item : maxNum)
-                    that.gL.shuju.forEach(item => minNum = item < minNum ? item : minNum)
+                    var temp = that.gL.shuju[0];
+                    var maxNum = that.gL.shuju[0];
+                    var minNum = that.gL.shuju[0];
+                    //that.gL.shuju.forEach(item => maxNum = item > maxNum ? item : maxNum)
+                    //that.gL.shuju.forEach(item => minNum = item < minNum ? item : minNum)
+                    for( var j = 0 ; j < that.gL.shuju.length; j++) {
+                        if(that.gL.shuju[j] > maxNum) {
+                            maxNum = that.gL.shuju[j]
+                        }
+                    }
+                    for( var m = 0 ; m < that.gL.shuju.length; m++) {
+                        if(that.gL.shuju[m] < minNum) {
+                            minNum = that.gL.shuju[m]
+                        }
+                    }
                     console.log("最大值",maxNum)
                     console.log("最小值",minNum)
                     that.gL.maxNum = maxNum;
@@ -293,6 +303,7 @@ $(function() {
             mui("body").on('mdClick', '.materialContent', function(e) {
                     var id = $(this).attr('data-id')
                     window.location.href = site_url.superContent_url + "?id=" + id;
+
                 }, {
                     'htmdEvt': 'superStreasureDetail_1'
                 })
@@ -314,6 +325,7 @@ $(function() {
                         tipAction('暂不支持机构客户进行交易');
                     } else {
                         window.location.href = site_url.pofCashTransformIn_url+ "?fundName=" +that.gL.fundName + "&fundCode=" +that.gL.fundCode;
+
                     }
 
                 }, {

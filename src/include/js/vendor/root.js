@@ -106,8 +106,8 @@ var mock_server = "http://localIp:8088", //前端本地开发时，接口调用�
 
     // 营销活动
     recommend_test = "https://172.16.162.190:8011",
-    recommend_haomaojf = "https://wx.uata.haomalljf.com",
-    recommend_online = "https://wx.chtwm.com";
+    recommend_haomaojf = "https://wx.uata.haomalljf.com/api/brand/index.html?activityId=qwJ0pXBGtwHBxJaeUOAq%2Bw%3D%3D&channel=3",
+    recommend_online = "https://wx.chtwm.com/api/brand/index.html?activityId=pWhA5xJTKF4Zfst%2B9ycHqQ%3D%3D&channel=3";
 
 
 //这是app时，存储本地cookie时的domain
@@ -149,7 +149,6 @@ window.go_url = {
     rock_url: '', //中岩域名
     sso_url: '',
     marketCampaign_url:'',
-    onlineCustomer_url:''//在线客服
 }
 /***********************跳转链接 域名配置 end*****************************/
 
@@ -186,7 +185,7 @@ if (!window.currentIsApp) {
     //此时为wap，不是app
 
     //env=1 ---------  wap的前后端调试环境
-    if (env == 1 || env == 5 ) {
+    if (env == 1) {
         go_url.cft_url = chtwm_local; // 财富域名
         go_url.oauth_url = oauth_local_test; // 跳转地址需要
         go_url.onlineCustomer_url = onlineCustomer_test; // 在线客服
@@ -360,10 +359,9 @@ if (!window.currentIsApp) {
     //此时是app
 
     //env=1不存在 ---------  app中h5没有联调环境，只能上测试和app进行联调
-    if (env == 1|| env == 5) {
+    if (env == 1) {
         go_url.oauth_url = oauth_local_test;
         d_url = d_url_local;
-        go_url.onlineCustomer_url = onlineCustomer_test; // 在线客服
         go_url.marketCampaign_url = recommend_test;  // 营销活动
         if (envOrigin == 0) {
             //明泽
@@ -381,9 +379,6 @@ if (!window.currentIsApp) {
         go_url.oauth_url = oauth_local_test;
         d_url = d_url_test;
         go_url.marketCampaign_url = recommend_test;  // 营销活动
-        go_url.onlineCustomer_url = onlineCustomer_test; // 在线客服
-
-
         if (envOrigin == 0) {
             //明泽
             originFund_public = pofapp_test; //app服务器中的公募域名
@@ -400,8 +395,6 @@ if (!window.currentIsApp) {
         go_url.oauth_url = oauth_haomaojf;
         d_url = d_url_haomaojf;
         go_url.marketCampaign_url = recommend_haomaojf;  // 营销活动
-        go_url.onlineCustomer_url = onlineCustomer_test; // 在线客服
-
         if (envOrigin == 0) {
             //明泽
             originFund_public = pofapp_haomaojf;
@@ -419,7 +412,6 @@ if (!window.currentIsApp) {
         go_url.oauth_url = oauth_online;
         d_url = d_url_online;
         go_url.marketCampaign_url = recommend_online;  // 营销活动
-        go_url.onlineCustomer_url = onlineCustomer_test; // 在线客服
         if (envOrigin == 0) {
             //明泽
             originFund_public = pofapp_online;

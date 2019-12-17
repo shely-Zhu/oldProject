@@ -831,8 +831,6 @@ function changeCommonImg(file) {
 }
 
 
-
-
 //html文件打包
 gulp.task('html', function(cb) {
 
@@ -867,6 +865,28 @@ gulp.task('html', function(cb) {
 
             //替换全部common下的图片路径为include的
             file = changeCommonImg(file);
+
+            var fileCon = file.contents.toString();
+
+            var dcDomain = 'http://localhost:9099';
+
+            if( options.env == 2){
+                //测试环境
+                dcDomain = 'https://dc.qasa.chtwm.com';
+            }
+            else if( options.env == 3){
+                //预生产
+                dcDomain = 'https://dc.uata.haomalljf.com';
+            }
+            else if( options.env == 4){
+                //生产
+                dcDomain = 'https://dc.chtwm.com';
+            }
+
+            fileCon = fileCon.replace('@dcDomain', dcDomain );
+
+            file.contents = new Buffer(fileCon);
+
 
             this.push(file);
             cb()
