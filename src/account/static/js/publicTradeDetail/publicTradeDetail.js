@@ -121,7 +121,7 @@ $(function () {
                     that.events();
                     if ('1' == json.data.cancelable){
                         //根据撤单标记来展示撤单按钮
-                        cancel_order.removeClass('hide');
+                        $(".cancel_order").removeClass('hide');
                     }
                     switch (that.gV.allotType) {
                         case "0":

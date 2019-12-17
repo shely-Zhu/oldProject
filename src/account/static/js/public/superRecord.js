@@ -292,7 +292,7 @@ $(function() {
                         } else {
                             t.endPullupToRefresh(false);
                         }
-
+                        console.log(that.gV.ajaxArr)
                         $id.find('.contentWrapper .mui-pull-bottom-pocket').removeClass('mui-hidden');
                         if (that.gV.ajaxArr[that.gV.current_index].pageCurrent == 1) {
                             //第一屏
@@ -359,8 +359,10 @@ $(function() {
                     t.endPullupToRefresh(false);
 
                     //没有数据
-                    $id.find('.mui-scroll .list').html(that.getElements.noData.clone(false)).addClass('noCon');
-                    $id.find('.noData').show();
+                    if(that.gV.ajaxArr[that.gV.current_index].pageCurrent == 1) {
+                        $id.find('.mui-scroll .list').html(that.getElements.noData.clone(false)).addClass('noCon');
+                        $id.find('.noData').show(); 
+                    }
 
                     setTimeout(function() {
                         that.getElements.listLoading.hide();
