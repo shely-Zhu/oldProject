@@ -494,10 +494,18 @@ $(function() {
 		getTxt: function(){
 			var that = this;
 		},
+		setHeadLineHeight() {
+			if($("#HeadBarpathName").height() <= $(".backBtn").height()) {
+				$("#HeadBarpathName").removeClass("singleLine").addClass("singleLine")
+			} else {
+				$("#HeadBarpathName").removeClass("doubleLines").addClass("doubleLines")
+			}
+		},
 		setDomData: function( jsonData){
 			var that = this;
 			//项目名称
     		$('#HeadBarpathName').html( jsonData.projectName );
+    		that.setHeadLineHeight()
 	    	if ( that.data.projectType == 0 ){ //稳金类项目
     			//当前市值
     			$('#type0TotalM').html( jsonData.capitalisation?jsonData.capitalisation:'--' );
@@ -506,7 +514,7 @@ $(function() {
     		   	//七日年化
     		   	$('.type_0 .sevenYearYield').html( jsonData.sevenYearYield?jsonData.sevenYearYield + '%':'--');
     		   	// 七日年化日期
-    		   	$('.type_0 .smallDate').html( jsonData.sevenYearYieldUpdateDate ?" (" + jsonData.sevenYearYieldUpdateDate + ")":"--");
+    		   	$('.type_0 .smallDate').html( jsonData.sevenYearYieldUpdateDate ?" (" + jsonData.sevenYearYieldUpdateDate + ")":"( -- )");
     		   	//可赎回份额
     		   	$('.type_0 .kshfe').html( jsonData.allowRedemptionShare?jsonData.allowRedemptionShare:'--');
     		   	that.data.redeemPartion = jsonData.allowRedemptionShare
@@ -520,7 +528,7 @@ $(function() {
 	    		//七日年化
 	    		$('.type_1 .sevenYearYield').html( jsonData.sevenYearYield?jsonData.sevenYearYield + '%':'--');
 	    		// 七日年化日期
-    		   	$('.type_1 .smallDate').html(jsonData.sevenYearYieldUpdateDate ?" (" + jsonData.sevenYearYieldUpdateDate + ")":"--");
+    		   	$('.type_1 .smallDate').html(jsonData.sevenYearYieldUpdateDate ?" (" + jsonData.sevenYearYieldUpdateDate + ")":"( -- )");
 	    		//可赎回份额
     		   	$('.type_1 .kshfe').html( jsonData.allowRedemptionShare?jsonData.allowRedemptionShare:'--');
     		   	that.data.redeemPartion = jsonData.allowRedemptionShare

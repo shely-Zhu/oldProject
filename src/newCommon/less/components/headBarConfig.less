@@ -28,10 +28,29 @@
         left: 0;
         right: 0;
         top: .4rem;
-        text-overflow: ellipsis;
-        overflow: hidden;
-        white-space: nowrap;
         padding: 0 .88rem;
+        &.singleLine {
+            text-overflow: ellipsis;
+            overflow: hidden;
+            white-space: nowrap;
+            line-height: .88rem;
+            padding-top: 0;
+            line-height: .88rem;
+        }
+        &.doubleLines {
+            text-overflow: ellipsis;
+            overflow: hidden;
+            line-height: .44rem;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+
+            display: -moz-box;
+            -moz-line-clamp: 2;
+            -moz-box-orient: vertical;
+            white-space: pre-wrap;
+            padding-top: .05rem;
+        }
     }
     .customerService{
         display: none;
