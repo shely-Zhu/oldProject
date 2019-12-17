@@ -268,10 +268,10 @@ $(function () {
                     'img': ''
                 }
                 if (window.isAndroid){
-                    window.jsObj.wxShare(shareObj);
+                    window.jsObj.wxShare(JSON.stringify(shareObj));
                 }
                 if (window.isIOS){
-                    window.webkit.messageHandlers.wxShare.postMessage(shareObj);
+                    window.webkit.messageHandlers.wxShare.postMessage(JSON.stringify(shareObj));
                 }
             });
             //加自选  
