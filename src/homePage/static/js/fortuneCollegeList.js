@@ -174,23 +174,29 @@ $(function() {
                listData=json.data.list
                console.log(listData)
                modelData=json.data.modelVO
-             const listTitle = listData.map(d => {
+             /*var listTitle = listData.map(d => {
                 return {
                  sonModelName: d.sonModelName,
                 }
               })
-              const listContent=listData.map(d => {
+              var listContent=listData.map(d => {
                 return {
                  listContent: d.list
                 }
-              })
+              })*/
+              var listTitle = [];
+              var listContent = [];
+              for(var i = 0 ; i < listData.length; i++) {
+                listTitle.push({sonModelName: listData[i].sonModelName})
+                listContent.push({listContent: listData[i].list})
+              }
               console.log('我是listtitle',listTitle)
               console.log('我是listContent',listContent)
               generateTemplate(modelData,$('.forum .title'),$('#forum-template'));     
               generateTemplate(listTitle,$('.broadcast'),$('#forumTitle'));
               generateTemplate(listContent,$('.forumList'),$('#forumContent'));	
               $(".lazyload").lazyload()		
-              setTimeout(()=>{
+              setTimeout(function(){
                 $('.broadcast').find('.bigspan').eq(0).addClass('getColor');
                 $('.broadcast').find('.bigspan').eq(0).css({"paddingLeft":0,"borderLeft":'none'});
               },100)
@@ -217,21 +223,30 @@ $(function() {
                listData=json.data.list
                console.log('我是财富研究',listData)
                modelData=json.data.modelVO
-             const listTitle = listData.map(d => {
+             /*var listTitle = listData.map(d => {
                 return {
                  sonModelName: d.sonModelName,
                 }
               })
-              const listContent=listData.map(d => {
+              var listContent=listData.map(d => {
                 return {
                  listContent: d.list
                 }
-              })
+              })*/
+              var listTitle = [];
+              var listContent = [];
+              for(var i = 0 ; i < listData.length; i++) {
+                listTitle.push({sonModelName: listData[i].sonModelName})
+                listContent.push({listContent: listData[i].list})
+              }
               console.log(modelData)
                generateTemplate(modelData,$('.tabContent .title'),$('#tabContent-template'));     
                generateTemplate(listTitle,$('.tab-t ol'),$('#titleTab'));
                generateTemplate(listContent,$('.tab-b'),$('#listContent'));	
-               setTimeout(()=>{
+               // setTimeout(()=>{
+               //  $('.tab-t').find('ol li a').eq(0).addClass('active');
+               // },100)
+               setTimeout(function(){
                 $('.tab-t').find('ol li a').eq(0).addClass('active');
                },100)		
             },

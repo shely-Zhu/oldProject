@@ -10,7 +10,7 @@ var generateTemplate = require('@pathCommonJsComBus/generateTemplate.js');
 require('@pathCommonCom/pullRefresh/pullRefresh.js');
 
 $(function() {
-    let somePage = {
+    var somePage = {
         //获取页面元素
         $e: {
             informsListWrapperId: $("#informsListWrapper"), // 消息列表盒子

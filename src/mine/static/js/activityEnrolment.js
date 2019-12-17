@@ -127,7 +127,7 @@ $(function() {
                         }
 
                     } else {
-                        json.data.activityVOPageInfo.list.map(function(e) {
+                        /*json.data.activityVOPageInfo.list.map(function(e) {
                             e.enterTime = that.getMyDate(parseInt(e.enterTime))
                             e.arriveTime = that.getMyDate(parseInt(e.arriveTime))
                                 // 判断是否有图片
@@ -136,8 +136,19 @@ $(function() {
                             e.shareflag = e.actType == 1 && num == 0 ? 1 : 0;
                             //判断是 线上还是线下
                             e.actTypestatus = e.actType == 1 ? 1 : 0
-                        })
-                        dataList = json.data.activityVOPageInfo.list;
+                        })*/
+                        var list = json.data.activityVOPageInfo.list;
+                        for(var i = 0 ; i < list.length; i++) {
+                            list[i].enterTime = that.getMyDate(parseInt(list[i].enterTime))
+                            list[i].arriveTime = that.getMyDate(parseInt(list[i].arriveTime))
+                                // 判断是否有图片
+                            list[i].imgurl = list[i].htjfGeneralizeImgUrl == '' ? 0 : 1;
+                            //判断是否显示分享   线上并且是 进行中的
+                            list[i].shareflag = list[i].actType == 1 && num == 0 ? 1 : 0;
+                            //判断是 线上还是线下
+                            list[i].actTypestatus = list[i].actType == 1 ? 1 : 0 
+                        }
+                        dataList = list;
                     }
 
 
