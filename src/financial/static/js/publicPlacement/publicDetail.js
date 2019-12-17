@@ -258,6 +258,7 @@ $(function () {
             });
             //分享  -- 跳往原生页面
             mui("body").on('mdClick', ".share_area", function (e) {
+                debugger
                 var shareObj = {
                     'type':'auto',
                     'businessType':'publicProductShare',
@@ -270,7 +271,7 @@ $(function () {
                     window.jsObj.wxShare(shareObj);
                 }
                 if (window.isIOS){
-                    window.webkit.messageHandlers(shareObj);
+                    window.webkit.messageHandlers.wxShare.postMessage(shareObj);
                 }
             });
             //加自选  

@@ -401,7 +401,11 @@ $(function () {
                     } else {
                         tipAction("已撤单，您将继续持有该基金份额");
                     }
-                    setTimeout(() => {
+                    /*setTimeout(() => {
+                        //2秒后刷新页面
+                        window.location.reload()
+                    }, 2000);*/
+                    setTimeout(function() {
                         //2秒后刷新页面
                         window.location.reload()
                     }, 2000);
