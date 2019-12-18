@@ -86,9 +86,9 @@ $(function() {
                 },
                 grid: {
                     top: '10%',
-                    left: '5%',
-                    right: '7%',
-                    bottom: '10%',
+                    left: '1%',
+                    right: '2%',
+                    bottom: '6%',
                     containLabel: true
                 },
                 xAxis: {
@@ -109,8 +109,8 @@ $(function() {
                     }
                 },
                 yAxis: {
-                    max:that.gL.maxNum,
-                    min:that.gL.minNum,
+                    /*max:that.gL.maxNum,
+                    min:that.gL.minNum,*/
                     axisTick: {
                         show: false
                     },
