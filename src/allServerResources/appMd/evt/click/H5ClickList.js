@@ -14,7 +14,7 @@ var clickList = {
 	"privateIndex_guessLike" : { type:'click', evtid: '4', topic: '私募首页-猜你喜欢', info: '' } ,
 	"privateIndex_hotSpot" : { type:'click', evtid: '5', topic: '私募首页-热门私募', info: ''} ,
 	"privateList_detail" : { type:'click', evtid: '6', topic: '私募列表页-产品详情', info: ''} ,
-	/*************************************************************mine文件夹下******************************************************************************************/ 
+	/*************************************************************mine文件夹下*************************************************************************/ 
 	//已报名活动
 	"activityEnrolment_01" : { type:'click', evtid: '', topic: '已报名活动-tab切换', info: ''} ,
 	"activityEnrolment_02" : { type:'click', evtid: '', topic: '已报名活动-分享给好友', info: ''} ,
@@ -139,6 +139,8 @@ var clickList = {
 	"cashTransformOut_13" : { type:'click', evtid: 'cashTransformOut_13', topic: '现金转出-转出到账时间', info: ''} ,
 	"cashTransformOut_14" : { type:'click', evtid: 'cashTransformOut_14', topic: '现金转出-阅读规则', info: ''} ,
 	"cashTransformOut_15" : { type:'click', evtid: 'cashTransformOut_15', topic: '现金转出-转出金额', info: ''} ,
+    // 活期理财
+    "demandFinancing_01" : { type:'click', evtid: 'demandFinancing_01', topic: '活期理财-跳转产品详情', info: ''} ,
 	//我的定投_定投详情 castSurelyDetails.html
 	"castSurelyDetails_01" : { type:'click', evtid: 'castSurelyDetails_01', topic: '现金转出-跳转详情', info: ''} ,
 	"castSurelyDetails_02" : { type:'click', evtid: 'castSurelyDetails_02', topic: '现金转出-修改', info: ''} ,
