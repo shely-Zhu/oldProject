@@ -180,7 +180,7 @@ var clickList = {
 	"newFundDetail_0" : { type:'click', evtid: 'newFundDetail_0', topic: '新发基金-基金档案', info: ''} ,
 	"newFundDetail_1" : { type:'click', evtid: 'newFundDetail_1', topic: '新发基金-基金经理', info: ''} ,
 	"newFundDetail_2" : { type:'click', evtid: 'newFundDetail_2', topic: '新发基金-基金公司', info: ''} ,
-
+	"newFundDetail_3" : { type:'click', evtid: 'newFundDetail_3', topic: '新发基金-立即购买', info: ''} ,
 	//定投
 	"ordinarySetThrow_01" : { type:'click', evtid: 'ordinarySetThrow_01', topic: '定投-打开银行卡列表', info: ''} ,
 	"ordinarySetThrow_02" : { type:'click', evtid: 'ordinarySetThrow_02', topic: '定投-关闭银行卡列表', info: ''} ,

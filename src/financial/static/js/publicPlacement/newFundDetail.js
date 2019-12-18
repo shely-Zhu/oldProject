@@ -7,6 +7,7 @@
 require('@pathCommonBase/base.js');
 require('@pathCommonJs/ajaxLoading.js');
 var splitUrl = require('@pathCommonJs/components/splitUrl.js')();
+var moment = require('moment');
 
 $(function () {
     var newFundDetail = {
