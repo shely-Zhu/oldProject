@@ -101,7 +101,7 @@ $(function () {
                     that.getData1();
                     that.getData2('1', 1);
                     that.events();
-                    var historyStr = that.fundType ? '<div class="item_name">日期</div> <div class="item_name">万份收益</div><div class="item_name">七日年化</div>' : '<div class="item_name">日期</div><div class="item_name">单位净值</div><div class="item_name">累计净值</div><div class="item_name">日涨幅</div>'
+                    var historyStr = that.fundType ? '<div class="item_name">日期</div><div class="item_name">七日年化</div><div class="item_name">万份收益(元)</div>' : '<div class="item_name">日期</div><div class="item_name">单位净值</div><div class="item_name">累计净值</div><div class="item_name">日涨幅</div>'
                     $('.history_area >.history_item').html(historyStr);
 
                     var redeemNavArr = that.fundType ? ['七日年化', '万份收益'] : ['单位净值', '累计净值']
@@ -325,11 +325,14 @@ $(function () {
         getFundCollectionInit: function () {
             var that = this;
             var deviceId ;
-            if(splitUrl['deviceId'].includes("cookie")){
-                deviceId = splitUrl['deviceId'].split("cookie")[0];
-            }else{
-                deviceId = splitUrl['deviceId'];
+            if(splitUrl['deviceId']){
+                if(splitUrl['deviceId'].includes("cookie")){
+                    deviceId = splitUrl['deviceId'].split("cookie")[0];
+                }else{
+                    deviceId = splitUrl['deviceId'];
+                }
             }
+            
             // 请求页面数据
             var obj = [{
                 url: site_url.prfFundCollectionQueryCode_api,
@@ -354,10 +357,12 @@ $(function () {
         getFundCollection: function (prams) {
             var that = this;
             var deviceId ;
-            if(splitUrl['deviceId'].includes("cookie")){
-                deviceId = splitUrl['deviceId'].split("cookie")[0];
-            }else{
-                deviceId = splitUrl['deviceId'];
+            if(splitUrl['deviceId']){
+                if(splitUrl['deviceId'].includes("cookie")){
+                    deviceId = splitUrl['deviceId'].split("cookie")[0];
+                }else{
+                    deviceId = splitUrl['deviceId'];
+                }
             }
             var manageList = [];
             manageList.push(prams)
