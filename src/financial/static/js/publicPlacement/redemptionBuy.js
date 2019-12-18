@@ -1,7 +1,15 @@
 /*
  * @Author: your name
  * @Date: 2019-11-26 14:42:56
- * @LastEditTime: 2019-12-16 14:27:35
+<<<<<<< Updated upstream
+<<<<<<< Updated upstream
+ * @LastEditTime: 2019-12-18 14:56:55
+=======
+ * @LastEditTime: 2019-12-18 14:52:02
+>>>>>>> Stashed changes
+=======
+ * @LastEditTime: 2019-12-18 14:52:02
+>>>>>>> Stashed changes
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \htjf-app\src\financial\static\js\publicPlacement\redemptionBuy.js
@@ -313,11 +321,18 @@ $(function() {
                 htmdEvt: 'redemptionBuy_08'
             })
 
-            $(".msecond input").change(function(){
+        //忘记密码跳转
+        mui("body").on("mdClick",".passwordTop .forgetP",function(){
+            window.location.href = site_url.pofForgotPassword_url
+        })
+        // $(".msecond input").change(function(){
+        $(".msecond input").on('input propertychange',function(){
              that.gv.nowRedempShare = $(this)[0].value;
              if(parseFloat(that.gv.maxRedempShare)< parseFloat (that.gv.nowRedempShare)){
-                 $(".checkMessage").css({"display":"block"});
-                 $(".checkMessage").html("超出最大赎回份额")
+               //  $(".checkMessage").css({"display":"block"});
+                // $(".checkMessage").html("超出最大赎回份额")
+                tipAction("超出最大赎回份额"+that.gv.maxRedempShare)
+                return
              }else{
                 $(".checkMessage").css({"display":"none"});
              }
@@ -330,15 +345,8 @@ $(function() {
 
             //点击同意协议
             mui("body").on('mdClick','.item2 .iconfont',function(){ 
-    		//that.getElements.iconCheck.on('click', function() {
-                that.gv.nowRedempShare = $(".msecond input")[0].value;
-             if(parseFloat(that.gv.maxRedempShare)< parseFloat (that.gv.nowRedempShare)){
-                 $(".checkMessage").css({"display":"block"});
-                 $(".checkMessage").html("超出最大赎回份额")
-             }else{
-                $(".checkMessage").css({"display":"none"});
-             }
-                
+			//that.getElements.iconCheck.on('click', function() {
+                that.gv.nowRedempShare = $(".msecond input")[0].value;   
                 if ($(this).hasClass("check")) {
                     $(this).removeClass("check").html('&#xe668;');
                     that.getElements.confirmBtn.attr('disabled',true)

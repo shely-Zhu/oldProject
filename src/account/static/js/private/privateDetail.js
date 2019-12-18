@@ -496,9 +496,9 @@ $(function() {
 		},
 		setHeadLineHeight() {
 			if($("#HeadBarpathName").height() <= $(".backBtn").height()) {
-				$("#HeadBarpathName").removeClass("singleLine").addClass("singleLine")
+				$("#HeadBarpathName").removeClass("doubleLines").addClass("singleLine")
 			} else {
-				$("#HeadBarpathName").removeClass("doubleLines").addClass("doubleLines")
+				$("#HeadBarpathName").removeClass("singleLine").addClass("doubleLines")
 			}
 		},
 		setDomData: function( jsonData){
