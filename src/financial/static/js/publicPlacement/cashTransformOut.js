@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2019-11-26 14:42:56
- * @LastEditTime: 2019-12-17 17:26:31
+ * @LastEditTime: 2019-12-18 14:49:24
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \htjf-app\src\financial\static\js\publicPlacement\cashTransformOut.js
@@ -373,17 +373,25 @@ $(function () {
 			});
 
 			  //转出金额
-			$(".msecond input").change(function(){
+			//$(".msecond input").change(function(){
+			 $(".msecond input").on('input propertychange',function(){
 				that.gv.transformMoney = $(this)[0].value;
 				if( parseFloat( that.gv.transformTotalMoney)< parseFloat( that.gv.transformMoney) ){
 					//$(".checkMessage").css({"display":"block"});
 					//$(".checkMessage").html("转出金额超过最大额度")
 					tipAction("转出金额超过最大额度"+that.gv.transformTotalMoney+"元")
+					return
 				}else{		
 					$(".checkMessage").css({"display":"none"}); 
 				}
 				if($(this)[0].value == ""){
 					that.$e.confirmBtn.attr('disabled',true)
+				}else{
+					if($(".item2 .iconfont").hasClass("check")){
+						that.$e.confirmBtn.removeAttr("disabled")
+					}else{
+						that.$e.confirmBtn.attr('disabled',true);
+					}
 				}
 			},{
 				htmdEvt: 'cashTransformOut_15'
