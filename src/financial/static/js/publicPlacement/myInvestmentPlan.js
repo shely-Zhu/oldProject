@@ -211,7 +211,7 @@ $(function () {
             
                 sessionStorage.setItem('stopList',JSON.stringify(that.gV.stopPlanList))
             }, {
-				htmdEvt: 'myInvestmentPlan_01'
+				htmdEvt: 'myInvestmentPlan_03'
 			});
 
         }

@@ -162,23 +162,33 @@ $(function () {
             // 基金经理
             mui("body").on('mdClick', ".fundManager", function (e) {
                 window.location.href = site_url.pofFundManager_url + '?fundCode=' + fundCode
+            },{
+                htmdEvt: 'publicDetail_01'
             });
             // 基金公司
             mui("body").on('mdClick', ".fundCompany", function (e) {
                 window.location.href = site_url.pofFundCompany_url + '?fundComId=' + fundComId
+            },{
+                htmdEvt: 'publicDetail_02'
             });
             // 基金档案
             mui("body").on('mdClick', ".fundFile", function (e) {
                 window.location.href = site_url.pofFundFile_url + '?secuId=' + secuId + '&fundCode=' + fundCode;
+            },{
+                htmdEvt: 'publicDetail_03'
             });
             // 历史净值查看更多
             mui("body").on('mdClick', ".history_area .history_more", function (e) {
                 window.location.href = site_url.mineHistoryDetail_url + '?fundCode=' + fundCode
+            },{
+                htmdEvt: 'publicDetail_04'
             });
            
             // 交易规则
             mui("body").on('mdClick', ".dealRegArea .rule", function (e) {
                 window.location.href = site_url.pofTransactionRules_url + '?fundCode=' + fundCode
+            },{
+                htmdEvt: 'publicDetail_05'
             });
 
             // 定投
@@ -188,11 +198,15 @@ $(function () {
                 }else{
                     window.location.href = site_url.pofOrdinarySetThrow_url + '?fundCode=' + fundCode + '&fundName=' + fundName + '&type=add';
                 }
+            },{
+                htmdEvt: 'publicDetail_06'
             });
             // 买入
             mui("body").on('mdClick', ".footer .buy_btn", function (e) {
                 window.location.href = site_url.fundTransformIn_url + '?fundCode=' + fundCode + '&fundName=' + fundName;
                
+            },{
+                htmdEvt: 'publicDetail_07'
             });
             //认证
             mui("body").on('mdClick', ".tips .tips-li-right", function (e) {
@@ -217,10 +231,14 @@ $(function () {
                     default:
                         break;
                 }
+            },{
+                htmdEvt: 'publicDetail_08'
             });
             //一键认证
             mui("body").on('mdClick', ".tips .tips-btn", function (e) {
                 window.location.href = site_url.realName_url
+            },{
+                htmdEvt: 'publicDetail_09'
             });
 
             // 七日年华 万份收益
@@ -238,6 +256,8 @@ $(function () {
                 } else {
                     that.getData2(type, time, end);
                 }
+            },{
+                htmdEvt: 'publicDetail_10'
             });
             //月 季 本年 一年 成立以来
             mui("body").on('mdClick', ".lineWrap .tab span ", function (e) {
@@ -251,10 +271,14 @@ $(function () {
                 } else {
                     that.getData2(that.gV.type, time, end);
                 }
+            },{
+                htmdEvt: 'publicDetail_11'
             });
             //人工服务
             mui("body").on('mdClick', ".customerService", function (e) {
                 window.location.href = 'http://zxkf.chtwm.com/webchat/jsp/standard/interfacePools.jsp?queue=105&device=mobile'
+            },{
+                htmdEvt: 'publicDetail_12'
             });
             //分享  -- 跳往原生页面
             mui("body").on('mdClick', ".share_area", function (e) {
@@ -273,6 +297,8 @@ $(function () {
                 if (window.isIOS){
                     window.webkit.messageHandlers.wxShare.postMessage(JSON.stringify(shareObj));
                 }
+            },{
+                htmdEvt: 'publicDetail_13'
             });
             //加自选  
             mui("body").on('mdClick', ".selected_area", function (e) {
@@ -290,6 +316,8 @@ $(function () {
                     prams.collected = '1'
                 }
                 that.getFundCollection(prams)
+            },{
+                htmdEvt: 'publicDetail_14'
             });
 
         },
