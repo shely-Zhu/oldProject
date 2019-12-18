@@ -304,20 +304,16 @@ $(function() {
             //赎回确认
             mui("body").on('mdClick','.confirmeDemptionPay',function(){      
         // $(".confirmeDemptionPay").on('click',function(){
-            $(".pwd-input").val('')
-            $(".fake-box input").val('');
-            $(".msecond input").blur();
-            $("#passwordWrap").show();
-            payPass(that.cancelOrder)
-        }, {
-            htmdEvt: 'redemptionBuy_08'
-        })
+                $(".pwd-input").val('')
+                $(".fake-box input").val('');
+                $(".msecond input").blur();
+                $("#passwordWrap").show();
+                payPass(that.cancelOrder)
+            }, {
+                htmdEvt: 'redemptionBuy_08'
+            })
 
-        //忘记密码跳转
-        mui("body").on("mdClick",".passwordTop .forgetP",function(){
-            window.location.href = site_url.pofForgotPassword_url
-        })
-         $(".msecond input").change(function(){
+            $(".msecond input").change(function(){
              that.gv.nowRedempShare = $(this)[0].value;
              if(parseFloat(that.gv.maxRedempShare)< parseFloat (that.gv.nowRedempShare)){
                  $(".checkMessage").css({"display":"block"});
@@ -330,11 +326,11 @@ $(function() {
              }else{
                 that.getElements.confirmBtn.removeAttr("disabled"); 
              }
-         })
+            })
 
-         //点击同意协议
+            //点击同意协议
             mui("body").on('mdClick','.item2 .iconfont',function(){ 
-			//that.getElements.iconCheck.on('click', function() {
+    		//that.getElements.iconCheck.on('click', function() {
                 that.gv.nowRedempShare = $(".msecond input")[0].value;
              if(parseFloat(that.gv.maxRedempShare)< parseFloat (that.gv.nowRedempShare)){
                  $(".checkMessage").css({"display":"block"});
@@ -346,7 +342,7 @@ $(function() {
                 if ($(this).hasClass("check")) {
                     $(this).removeClass("check").html('&#xe668;');
                     that.getElements.confirmBtn.attr('disabled',true)
-					
+    				
                 } else {
                     $(this).addClass("check").html('&#xe669;');
                     if(that.gv.nowRedempShare!=""){
@@ -355,13 +351,21 @@ $(function() {
                         that.getElements.confirmBtn.attr('disabled',true)
                     }
                 }
-			}, {
-				htmdEvt: 'redemptionBuy_09'
-			});
-            
+    		}, {
+    			htmdEvt: 'redemptionBuy_09'
+    		});
+             //忘记密码跳转
+            mui("body").on("mdClick",".passwordTop .forgetP",function(){
+                window.location.href = site_url.pofForgotPassword_url
+            },{
+                htmdEvt: 'redemptionBuy_10'
+            })
+                
             mui('body').on('tap','.elasticLayer.transOutRule .elasticButtons',function(){
-				$('.elasticLayer.transOutRule').hide()
-			}) 
+    			$('.elasticLayer.transOutRule').hide()
+    		},{
+                htmdEvt: 'redemptionBuy_11'
+            }) 
             
 
         },
