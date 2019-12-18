@@ -484,7 +484,7 @@ $(function () {
             myChart.setOption({
                 tooltip: {
                     trigger: 'axis',
-                    formatter: '<p style="font-size:0.36rem;color: #DAB57C;">{c}%</p><p style="font-size:0.24rem;color:#4A4A4A">{b}</p>',
+                    formatter: '<p style="font-size:0.36rem;color: #DAB57C;">{c}</p><p style="font-size:0.24rem;color:#4A4A4A">{b}</p>',
                     backgroundColor: 'rgba(218,181,124, 0.1)',
                     // renderMode : 'richText', 
                     extraCssText: [7, 15, 15, 15],
