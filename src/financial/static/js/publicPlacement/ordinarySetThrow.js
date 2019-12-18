@@ -802,12 +802,7 @@ $(function () {
 			if(that.gV.type == 'add'){
 				that.getNextCutPayment()
 			}
-			// 周期选择
-			mui("body").on('mdClick', '#starttime', function () {
-				popPicker(2, list, that.$el.cycleDate , that.getNextCutPayment);
-			}, {
-				htmdEvt: 'ordinarySetThrow_17'
-			})
+			
 			/** 下面三个事件： 银行卡列表出现/隐藏 **/
 			mui("body").on('mdClick','.paymoney',function(){
 				$(".imgc").hide()
@@ -1012,8 +1007,14 @@ $(function () {
 						$("#transformInput").focus()
 					}
 			}, {
-				htmdEvt: 'fundTransformIn_18'
+				htmdEvt: 'ordinarySetThrow_18'
 			}) ;
+			// 周期选择
+			mui("body").on('mdClick', '#starttime', function () {
+				popPicker(2, list, that.$el.cycleDate , that.getNextCutPayment);
+			}, {
+				htmdEvt: 'ordinarySetThrow_19'
+			})
 
 		},
 

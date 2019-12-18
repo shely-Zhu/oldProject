@@ -256,7 +256,7 @@ if (options.env === '0') { //当开发环境的时候构建命令执行mock服�
 
 /**此任务默认执行，gulp启动时，先将所有文件打包一次**/
 gulp.task('initialTask', function(cb) {
-    plugins.sequence('clean', 'images', 'font', 'allServerResources', 'includeJs', 'includeCss', 'cssToHost', 'webpack', 'bfRev', 'html', 'rev', 'rootEnv', cb);
+    plugins.sequence('clean', 'images', 'font', 'allServerResources','allServerResourcesFont', 'includeJs', 'includeCss', 'cssToHost', 'webpack', 'bfRev', 'html', 'rev', 'rootEnv', cb);
 });
 
 
@@ -445,6 +445,11 @@ gulp.task('font', function() {
         .pipe(gulp.dest(host.path + 'include/fonts'));
 })
 
+
+gulp.task('allServerResourcesFont', function() {
+    return gulp.src('src/allServerResources/include/fonts/*')
+        .pipe(gulp.dest(host.path + 'allServerResources/include/fonts'));
+})
 //allServerResources中include文件的打包
 gulp.task('allServerResources', function() {
     return gulp.src('src/allServerResources/include/*')
