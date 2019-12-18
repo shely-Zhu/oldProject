@@ -91,6 +91,12 @@
 				.iconfont{
 					font-size: 0.24rem;
 				}
+				.purchaseRate{
+					color: @FF0000;
+				}
+				.discountRate{
+					color: @c009;
+				}
 			}
 			&:last-child{
 				border:0;
@@ -120,6 +126,9 @@
 			line-height: 0.6rem;
 			color: @364D97;
 			background: @c005;
+			.purchaseRate{
+				color: @9B9B9B;
+			}
 		}
 		.buyButton{
 			height: 0.98rem;
@@ -215,6 +224,20 @@
 	.purchaseRate{
 		text-decoration:line-through;
 	}
+}
+
+#HeadBarpathName{
+	height: 1.2rem;
+}
+#HeadBarpathName span:nth-of-type(1){
+	top: -0.2rem !important;
+}
+#HeadBarpathName .secuId{
+	position: absolute;
+	top: 0.38rem !important;
+	left: 50%;
+	margin-left: -0.7rem;
+	font-size: 0.24rem;
 }
 
 
