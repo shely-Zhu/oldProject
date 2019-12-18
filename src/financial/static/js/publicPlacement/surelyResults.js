@@ -87,7 +87,7 @@ $(function () {
                 that.$e.shareTimeInto.html(data.startGainsDayStr + '&nbsp;24:00 前')
                 that.$e.earningsTimeInto.html(data.paymentGainsDayStr + '&nbsp;24:00 前')
                 that.$e.fundNameInto.html(data.fundName)
-                that.$e.fundCodeInto.html(data.fundCode)
+                //that.$e.fundCodeInto.html(data.fundCode)
                 that.$e.amountInto.html(data.balanceMask)
                 that.$e.banKImgInto.attr('src',data.bankThumbnailUrl)
                 that.$e.bankNameInto.html(data.bankName)

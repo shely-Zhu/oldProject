@@ -4,10 +4,8 @@
  * @Date:   2019-12-16
  * 
  */
-
 require('@pathCommonBase/base.js');
 require('@pathCommonJs/ajaxLoading.js');
-var generateTemplate = require('@pathCommonJsComBus/generateTemplate.js');
 var splitUrl = require('@pathCommonJs/components/splitUrl.js')();
 
 $(function () {
