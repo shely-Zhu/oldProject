@@ -127,6 +127,8 @@ var clickList = {
 	"cashTransformOut_10" : { type:'click', evtid: 'cashTransformOut_10', topic: '现金转出-点击其他总资产明白了', info: ''} ,
 	"cashTransformOut_11" : { type:'click', evtid: 'cashTransformOut_11', topic: '现金转出-转出全部', info: ''} ,
 	"cashTransformOut_12" : { type:'click', evtid: 'cashTransformOut_12', topic: '现金转出-转出金额清零', info: ''} ,
+    // 活期理财
+    "demandFinancing_01" : { type:'click', evtid: 'demandFinancing_01', topic: '活期理财-跳转产品详情', info: ''} ,
 	//我的定投_定投详情
 	"castSurelyDetails_01" : { type:'click', evtid: 'castSurelyDetails_01', topic: '现金转出-跳转详情', info: ''} ,
 	"castSurelyDetails_02" : { type:'click', evtid: 'castSurelyDetails_02', topic: '现金转出-修改', info: ''} ,

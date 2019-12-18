@@ -114,7 +114,7 @@ $(function(){
                     '?fundCode=' + $(this).attr('fundCode') + '&fundType=' + $(this).attr('fundType') + '&deviceId=' + splitUrl['deviceId']
                 }
 			}, {
-				htmdEvt: 'demandFinancing_1'
+				htmdEvt: 'demandFinancing_01'
 			}) ;
 
          }
