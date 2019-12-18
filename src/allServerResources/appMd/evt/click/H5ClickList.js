@@ -189,6 +189,11 @@ var clickList = {
 	"surelyResults_01" : { type:'click', evtid: 'surelyResults_01', topic: '定投结果-跳往现金宝管理页面', info: ''} ,
 	//买入结果
 	"surelyResultsDetail_01" : { type:'click', evtid: 'surelyResultsDetail_01', topic: '买入结果-跳往持仓列表页', info: ''} ,
+	// newFundDetail.html
+	"newFundDetail_0" : { type:'click', evtid: 'newFundDetail_0', topic: '新发基金-基金档案', info: ''} ,
+	"newFundDetail_1" : { type:'click', evtid: 'newFundDetail_1', topic: '新发基金-基金经理', info: ''} ,
+	"newFundDetail_2" : { type:'click', evtid: 'newFundDetail_2', topic: '新发基金-基金公司', info: ''} ,
+	
 
 
 	//homePage--------------------------------------------------------------分割线
