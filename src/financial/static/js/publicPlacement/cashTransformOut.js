@@ -323,9 +323,9 @@ $(function () {
 			   that.gv.transformMoney = 0;
 			   that.$e.el_transformInput.val(0);
 
-		   }, {
-			htmdEvt: 'cashTransformOut_06'
-		})
+		   	}, {
+				htmdEvt: 'cashTransformOut_06'
+			})
 			
 			//点击转出规则
 			mui('body').on('tap','.explain .transformRule',function(){
@@ -333,13 +333,8 @@ $(function () {
 				var id = $(this).attr("ruleId");
 				//that.findProtocolContentRule(id);
 				window.location.href = site_url.superContent_url + '?id='+id+ '&financial=true'
-			}) 
-			//点击转出到账时间
-			mui('body').on('tap','.explain .tranTime',function(){
-				var id = $(this).children().attr("ruleId");
-				that.gv.ruleId = id;
-				//that.findProtocolContentRule(id);
-				window.location.href = site_url.superContent_url + '?id='+id+ '&financial=true'
+			},{
+				htmdEvt: 'cashTransformOut_07'
 			}) 
 
 			//点击同意协议
@@ -390,6 +385,8 @@ $(function () {
 				if($(this)[0].value == ""){
 					that.$e.confirmBtn.attr('disabled',true)
 				}
+			},{
+				htmdEvt: 'cashTransformOut_15'
 			})
 
 			//赎回确认 
@@ -435,12 +432,23 @@ $(function () {
 			}, {
 				htmdEvt: 'cashTransformOut_10'
 			}) 
+			//点击转出到账时间
+			mui('body').on('tap','.explain .tranTime',function(){
+				var id = $(this).children().attr("ruleId");
+				that.gv.ruleId = id;
+				//that.findProtocolContentRule(id);
+				window.location.href = site_url.superContent_url + '?id='+id+ '&financial=true'
+			},{
+				htmdEvt: 'cashTransformOut_13'
+			}) 
 			//阅读规则
 			mui('body').on('tap','.file .agreementRule',function(){
 				that.gv.ruleId = $(this).attr("ruleId");
 				var id = $(this).attr("ruleId");
 				//that.findProtocolContentRule(id);
 				window.location.href = site_url.superContent_url + '?id='+id+ '&financial=true'
+			},{
+				htmdEvt: 'cashTransformOut_14'
 			})
 			
 		}

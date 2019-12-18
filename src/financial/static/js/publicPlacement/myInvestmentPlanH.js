@@ -47,7 +47,7 @@ $(function () {
                 var scheduledProtocolId = $(this).data('id');
                 window.location.href = site_url.pofCastSurelyDetails_url + '?scheduledProtocolId=' + scheduledProtocolId;
             }, {
-				htmdEvt: 'myInvestmentPlan_02'
+				htmdEvt: 'myInvestmentPlan_01'
             });
         },
     };

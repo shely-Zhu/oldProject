@@ -81,9 +81,11 @@ var clickList = {
 
 
 
-/**************************************************************mine文件夹结束*****************************************************************************************/ 
+/**************************************************************mine文件夹结束**************************************************************************/ 
+
+/**************************************************************financial start***********************************************************************/ 
 	
-	//私募基金产品详情
+	//私募基金产品详情   privatePlacementDetail.html
  	"privatePlacementDetail_01" : { type:'click', evtid: 'privatePlacementDetail_01', topic: '私募基金产品详情-tab点击切换', info: ''} ,
 	"privatePlacementDetail_02" : { type:'click', evtid: 'privatePlacementDetail_02', topic: '私募基金产品详情-折线图点击', info: ''} ,
 	"privatePlacementDetail_03" : { type:'click', evtid: 'privatePlacementDetail_03', topic: '私募基金产品详情-信息的拷贝', info: ''} ,
@@ -92,12 +94,17 @@ var clickList = {
 	"privatePlacementDetail_06" : { type:'click', evtid: 'privatePlacementDetail_06', topic: '私募基金产品详情-立即预约', info: ''} ,
 	"privatePlacementDetail_07" : { type:'click', evtid: 'privatePlacementDetail_07', topic: '私募基金产品详情-产品材料', info: ''} ,
 	"privatePlacementDetail_08" : { type:'click', evtid: 'privatePlacementDetail_08', topic: '私募基金产品详情-净值更新', info: ''} ,
-	
-	//现金管理
-	"cashManagement_01" : { type:'click', evtid: 'cashManagement_01', topic: '现金管理-了解现金管理', info: ''} ,
+	"privatePlacementDetail_09" : { type:'click', evtid: 'privatePlacementDetail_09', topic: '私募基金产品详情-一键预约', info: ''} ,
+	"privatePlacementDetail_10" : { type:'click', evtid: 'privatePlacementDetail_10', topic: '私募基金产品详情-查看明细', info: ''} ,
+	"privatePlacementDetail_11" : { type:'click', evtid: 'privatePlacementDetail_11', topic: '私募基金产品详情-产品名称', info: ''} ,
+	//现金管理  cashManagement.html
+	"cashManagement_01" : { type:'click', evtid: 'cashManagement_01', topic: '现金管理-现金宝详情', info: ''} ,
 	"cashManagement_02" : { type:'click', evtid: 'cashManagement_02', topic: '现金管理-转入', info: ''} ,
 	"cashManagement_03" : { type:'click', evtid: 'cashManagement_03', topic: '现金管理-转出', info: ''} ,
-	//现金转入
+	"cashManagement_04" : { type:'click', evtid: 'cashManagement_04', topic: '现金管理-了解现金管理', info: ''} ,
+	"cashManagement_05" : { type:'click', evtid: 'cashManagement_05', topic: '现金管理-认证', info: ''} ,
+	"cashManagement_06" : { type:'click', evtid: 'cashManagement_06', topic: '现金管理-一键认证', info: ''} ,
+	//现金转入  cashTransformIn.html
 	"cashTransformIn_01" : { type:'click', evtid: 'cashTransformIn_01', topic: '现金转入-打开银行卡列表', info: ''} ,
 	"cashTransformIn_02" : { type:'click', evtid: 'cashTransformIn_02', topic: '现金转入-关闭银行卡列表', info: ''} ,
 	"cashTransformIn_03" : { type:'click', evtid: 'cashTransformIn_03', topic: '现金转入-关闭银行卡列表', info: ''} ,
@@ -114,7 +121,9 @@ var clickList = {
 	"cashTransformIn_14" : { type:'click', evtid: 'cashTransformIn_14', topic: '现金转入-密码校验不通过---找回密码', info: ''} ,
 	"cashTransformIn_15" : { type:'click', evtid: 'cashTransformIn_15', topic: '现金转入-密码校验不通过---重新输入', info: ''} ,
 	"cashTransformIn_16" : { type:'click', evtid: 'cashTransformIn_16', topic: '现金转入-添加银行卡--跳往原生', info: ''} ,
-	//现金转出
+	"cashTransformIn_17" : { type:'click', evtid: 'cashTransformIn_17', topic: '现金转入-基金合同,募说明书', info: ''} ,
+	"cashTransformIn_18" : { type:'click', evtid: 'cashTransformIn_18', topic: '现金转入-键盘', info: ''} ,
+	//现金转出  cashTransformOut.html
 	"cashTransformOut_01" : { type:'click', evtid: 'cashTransformOut_01', topic: '现金转出-打开银行卡列表', info: ''} ,
 	"cashTransformOut_02" : { type:'click', evtid: 'cashTransformOut_02', topic: '现金转出-关闭银行卡列表', info: ''} ,
 	"cashTransformOut_03" : { type:'click', evtid: 'cashTransformOut_03', topic: '现金转出-关闭银行卡列表', info: ''} ,
@@ -127,17 +136,20 @@ var clickList = {
 	"cashTransformOut_10" : { type:'click', evtid: 'cashTransformOut_10', topic: '现金转出-点击其他总资产明白了', info: ''} ,
 	"cashTransformOut_11" : { type:'click', evtid: 'cashTransformOut_11', topic: '现金转出-转出全部', info: ''} ,
 	"cashTransformOut_12" : { type:'click', evtid: 'cashTransformOut_12', topic: '现金转出-转出金额清零', info: ''} ,
-	//我的定投_定投详情
+	"cashTransformOut_13" : { type:'click', evtid: 'cashTransformOut_13', topic: '现金转出-转出到账时间', info: ''} ,
+	"cashTransformOut_14" : { type:'click', evtid: 'cashTransformOut_14', topic: '现金转出-阅读规则', info: ''} ,
+	"cashTransformOut_15" : { type:'click', evtid: 'cashTransformOut_15', topic: '现金转出-转出金额', info: ''} ,
+	//我的定投_定投详情 castSurelyDetails.html
 	"castSurelyDetails_01" : { type:'click', evtid: 'castSurelyDetails_01', topic: '现金转出-跳转详情', info: ''} ,
 	"castSurelyDetails_02" : { type:'click', evtid: 'castSurelyDetails_02', topic: '现金转出-修改', info: ''} ,
 	"castSurelyDetails_03" : { type:'click', evtid: 'castSurelyDetails_03', topic: '现金转出-终止 暂停 续投', info: ''} ,
-	//基金档案
+	"castSurelyDetails_04" : { type:'click', evtid: 'castSurelyDetails_04', topic: '现金转出-定投详情结果页', info: ''} ,
+	// demandFinancing.html  活期理财
+	"demandFinancing_01" : { type:'click', evtid: 'demandFinancing_01', topic: '活期理财-基金详情页', info: ''} ,
+	//基金档案 fundFile.html
 	"fundFile_01" : { type:'click', evtid: 'fundFile_01', topic: '基金档案-tab点击切换', info: ''} ,
 	"fundFile_02" : { type:'click', evtid: 'fundFile_02', topic: '基金档案-基金公告跳转', info: ''} ,
-	//产品档案
-	"fundFile_01" : { type:'click', evtid: 'fundFile_01', topic: '基金档案-tab点击切换', info: ''} ,
-	"fundFile_02" : { type:'click', evtid: 'fundFile_02', topic: '基金档案-基金公告跳转', info: ''} ,
-	//现金管理 -- 转入
+	//现金管理 -- 转入  fundTransformIn.html
 	"fundTransformIn_01" : { type:'click', evtid: 'fundTransformIn_01', topic: '现金转入-打开银行卡列表', info: ''} ,
 	"fundTransformIn_02" : { type:'click', evtid: 'fundTransformIn_02', topic: '现金转入-关闭银行卡列表', info: ''} ,
 	"fundTransformIn_03" : { type:'click', evtid: 'fundTransformIn_03', topic: '现金转入-关闭银行卡列表', info: ''} ,
@@ -154,9 +166,19 @@ var clickList = {
 	"fundTransformIn_14" : { type:'click', evtid: 'fundTransformIn_14', topic: '现金转入-密码校验不通过---找回密码', info: ''} ,
 	"fundTransformIn_15" : { type:'click', evtid: 'fundTransformIn_15', topic: '现金转入-密码校验不通过---重新输入', info: ''} ,
 	"fundTransformIn_16" : { type:'click', evtid: 'fundTransformIn_16', topic: '现金转入-添加银行卡--跳往原生', info: ''} ,
-	//我的定投计划
-	"myInvestmentPlan_01" : { type:'click', evtid: 'myInvestmentPlan_01', topic: '基金档案-新增 跳原生定投排行页', info: ''} ,
-	"myInvestmentPlan_02" : { type:'click', evtid: 'myInvestmentPlan_02', topic: '基金档案-跳转详情页', info: ''} ,
+	"fundTransformIn_17" : { type:'click', evtid: 'fundTransformIn_17', topic: '现金转入-基金合同,募说明书', info: ''} ,
+	"fundTransformIn_18" : { type:'click', evtid: 'fundTransformIn_18', topic: '现金转入-键盘', info: ''} ,
+	//我的定投计划 myInvestmentPlan.html
+	"myInvestmentPlan_01" : { type:'click', evtid: 'myInvestmentPlan_01', topic: '定投计划-新增 跳原生定投排行页', info: ''} ,
+	"myInvestmentPlan_02" : { type:'click', evtid: 'myInvestmentPlan_02', topic: '定投计划-跳转详情页', info: ''} ,
+	"myInvestmentPlan_03" : { type:'click', evtid: 'myInvestmentPlan_03', topic: '定投计划-已终止的定投计划', info: ''} ,
+	// myInvestmentPlanH.html
+	"myInvestmentPlanH_01" : { type:'click', evtid: 'myInvestmentPlanH_01', topic: '定投计划-跳转详情页', info: ''} ,
+	// newFundDetail.html  新发基金
+	"newFundDetail_0" : { type:'click', evtid: 'newFundDetail_0', topic: '新发基金-基金档案', info: ''} ,
+	"newFundDetail_1" : { type:'click', evtid: 'newFundDetail_1', topic: '新发基金-基金经理', info: ''} ,
+	"newFundDetail_2" : { type:'click', evtid: 'newFundDetail_2', topic: '新发基金-基金公司', info: ''} ,
+
 	//定投
 	"ordinarySetThrow_01" : { type:'click', evtid: 'ordinarySetThrow_01', topic: '定投-打开银行卡列表', info: ''} ,
 	"ordinarySetThrow_02" : { type:'click', evtid: 'ordinarySetThrow_02', topic: '定投-关闭银行卡列表', info: ''} ,
@@ -174,7 +196,25 @@ var clickList = {
 	"ordinarySetThrow_14" : { type:'click', evtid: 'ordinarySetThrow_14', topic: '定投-密码校验不通过---找回密码', info: ''} ,
 	"ordinarySetThrow_15" : { type:'click', evtid: 'ordinarySetThrow_15', topic: '定投-密码校验不通过---重新输入', info: ''} ,
 	"ordinarySetThrow_16" : { type:'click', evtid: 'ordinarySetThrow_16', topic: '定投-添加银行卡--跳往原生', info: ''} ,
-	"ordinarySetThrow_17" : { type:'click', evtid: 'ordinarySetThrow_17', topic: '定投-周期选择', info: ''} ,
+	"ordinarySetThrow_17" : { type:'click', evtid: 'ordinarySetThrow_17', topic: '定投-基金合同', info: ''} ,
+	"ordinarySetThrow_18" : { type:'click', evtid: 'ordinarySetThrow_18', topic: '定投-键盘', info: ''} ,
+	"ordinarySetThrow_19" : { type:'click', evtid: 'ordinarySetThrow_19', topic: '定投-周期选择', info: ''} ,
+	// publicDetail.html  公募产品详情页
+	"publicDetail_01" : { type:'click', evtid: 'publicDetail_01', topic: '公募产品详情页-基金经理', info: ''} ,
+	"publicDetail_02" : { type:'click', evtid: 'publicDetail_02', topic: '公募产品详情页-基金公司', info: ''} ,
+	"publicDetail_03" : { type:'click', evtid: 'publicDetail_03', topic: '公募产品详情页-基金档案', info: ''} ,
+	"publicDetail_04" : { type:'click', evtid: 'publicDetail_04', topic: '公募产品详情页-历史净值查看更多', info: ''} ,
+	"publicDetail_05" : { type:'click', evtid: 'publicDetail_05', topic: '公募产品详情页-交易规则', info: ''} ,
+	"publicDetail_06" : { type:'click', evtid: 'publicDetail_06', topic: '公募产品详情页-定投', info: ''} ,
+	"publicDetail_07" : { type:'click', evtid: 'publicDetail_07', topic: '公募产品详情页-买入', info: ''} ,
+	"publicDetail_08" : { type:'click', evtid: 'publicDetail_08', topic: '公募产品详情页-认证', info: ''} ,
+	"publicDetail_09" : { type:'click', evtid: 'publicDetail_09', topic: '公募产品详情页-一键认证', info: ''} ,
+	"publicDetail_10" : { type:'click', evtid: 'publicDetail_10', topic: '公募产品详情页-七日年华 万份收益', info: ''} ,
+	"publicDetail_11" : { type:'click', evtid: 'publicDetail_11', topic: '公募产品详情页-折线图切换', info: ''} ,
+	"publicDetail_12" : { type:'click', evtid: 'publicDetail_12', topic: '公募产品详情页-//人工服务', info: ''} ,
+	"publicDetail_13" : { type:'click', evtid: 'publicDetail_13', topic: '公募产品详情页-分享--跳往原生页面', info: ''} ,
+	"publicDetail_14" : { type:'click', evtid: 'publicDetail_14', topic: '公募产品详情页-加自选', info: ''} ,
+
 	//赎回
 	"redemptionBuy_01" : { type:'click', evtid: 'redemptionBuy_01', topic: '赎回-打开银行卡列表', info: ''} ,
 	"redemptionBuy_02" : { type:'click', evtid: 'redemptionBuy_02', topic: '赎回-关闭银行卡列表', info: ''} ,
@@ -185,14 +225,15 @@ var clickList = {
 	"redemptionBuy_07" : { type:'click', evtid: 'redemptionBuy_07', topic: '赎回-交易规则', info: ''} ,
 	"redemptionBuy_08" : { type:'click', evtid: 'redemptionBuy_08', topic: '赎回-赎回确认', info: ''} ,
 	"redemptionBuy_09" : { type:'click', evtid: 'redemptionBuy_09', topic: '赎回-点击同意协议', info: ''} ,
-	//定投结果
+	"redemptionBuy_10" : { type:'click', evtid: 'redemptionBuy_10', topic: '赎回-忘记密码跳转', info: ''} ,
+	"redemptionBuy_11" : { type:'click', evtid: 'redemptionBuy_11', topic: '赎回-明白了', info: ''} ,
+	//转入结果  surelyResults.html
 	"surelyResults_01" : { type:'click', evtid: 'surelyResults_01', topic: '定投结果-跳往现金宝管理页面', info: ''} ,
-	//买入结果
+	//买入结果  surelyResultsDetail.html
 	"surelyResultsDetail_01" : { type:'click', evtid: 'surelyResultsDetail_01', topic: '买入结果-跳往持仓列表页', info: ''} ,
-	// newFundDetail.html
-	"newFundDetail_0" : { type:'click', evtid: 'newFundDetail_0', topic: '新发基金-基金档案', info: ''} ,
-	"newFundDetail_1" : { type:'click', evtid: 'newFundDetail_1', topic: '新发基金-基金经理', info: ''} ,
-	"newFundDetail_2" : { type:'click', evtid: 'newFundDetail_2', topic: '新发基金-基金公司', info: ''} ,
+
+/**************************************************************financial  end ***********************************************************************/ 
+	
 	
 
 

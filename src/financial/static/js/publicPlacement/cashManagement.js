@@ -130,6 +130,8 @@ $(function () {
       mui("body").on("tap", ".fundKnow", function () { 
        window.location.href  = site_url.articleTemplate_url + '?articleBelong=12'
        
+      },{
+        htmdEvt: 'cashManagement_04'
       });
       //认证
       mui("body").on('mdClick', ".tips .tips-li-right", function (e) {
@@ -155,10 +157,14 @@ $(function () {
             default:
                 break;
         }
+    },{
+      htmdEvt: 'cashManagement_05'
     });
     //一键认证
     mui("body").on('mdClick', ".tips .tips-btn", function (e) {
         window.location.href = site_url.realName_url
+    },{
+      htmdEvt: 'cashManagement_06'
     });
 
       // // 跳转详情页

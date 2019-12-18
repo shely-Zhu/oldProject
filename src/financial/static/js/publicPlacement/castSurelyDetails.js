@@ -148,7 +148,7 @@ $(function () {
       mui("body").on("mdClick", ".posRight", function () {
         window.location.href = site_url.pofPublicDetail_url + '?fundCode=' + fundCode + '&fundType=' + fundType;
       }, {
-				htmdEvt: 'cashTransformOut_01'
+				htmdEvt: 'castSurelyDetails_01'
 			});
       // 修改
       mui("body").on("mdClick", ".edit", function (e) {
@@ -182,6 +182,8 @@ $(function () {
         };
         window.location.href = site_url.publicTradeDetail_url + '?applyId='+obj.applyId +'&fundCombination=' + obj.fundCombination + '&fundCode=' + obj.fundCode + '&fundBusinCode=' + obj.fundBusinCode + '&allotType=' + obj.allotType + '&Fixbusinflag=' + obj.Fixbusinflag
 
+      },{
+        htmdEvt: 'castSurelyDetails_04'
       })
 
     },
