@@ -371,7 +371,11 @@ $(function () {
 			
 			//确定
 			mui("body").on('mdClick','.btn_box .btn',function(){
-				
+				var val = $("#transformInput").val();
+				if(val==""){
+					tipAction("转入金额不能为空");
+					return
+				}
 				if(!!that.gV.bankAccountSecret){
 					if(!!that.gV.minValue){
 						if(Number(that.gV.balance) < Number(that.gV.minValue)){
