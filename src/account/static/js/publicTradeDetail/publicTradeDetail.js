@@ -254,8 +254,8 @@ $(function () {
             //现金宝详情
             var that = this;
             //转入失败与转出成功展示资金状态
-            if ("1" == model.tradeApplyStatus){
-                //确认成功
+            if ("20" == model.tradeApplyStatus || "23" == model.tradeApplyStatus){
+                //确认成功 包括转入成功与转出成功
                 that.showTradeArea(true, model);
                 if ("2" == model.ident && !that.gV.isBuy){
                     //扣款成功 转出 展示资金状况

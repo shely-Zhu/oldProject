@@ -324,11 +324,18 @@ $(function () {
         //收藏管理--判断是否被收藏
         getFundCollectionInit: function () {
             var that = this;
+            var deviceId ;
+            if(splitUrl['deviceId'].includes("cookie")){
+                deviceId = splitUrl['deviceId'].split("cookie")[0];
+            }else{
+                deviceId = splitUrl['deviceId'];
+            }
             // 请求页面数据
             var obj = [{
                 url: site_url.prfFundCollectionQueryCode_api,
                 data: {
-                    publicFundsKeyWords:splitUrl['fundCode']
+                    publicFundsKeyWords:splitUrl['fundCode'],
+                    deviceId:deviceId
                 },
                 needLogin: false,
                 callbackDone: function (json) {
@@ -346,7 +353,12 @@ $(function () {
         //收藏管理
         getFundCollection: function (prams) {
             var that = this;
-            var deviceId = splitUrl['deviceId'].split("cookie")[0];
+            var deviceId ;
+            if(splitUrl['deviceId'].includes("cookie")){
+                deviceId = splitUrl['deviceId'].split("cookie")[0];
+            }else{
+                deviceId = splitUrl['deviceId'];
+            }
             var manageList = [];
             manageList.push(prams)
             // 请求页面数据

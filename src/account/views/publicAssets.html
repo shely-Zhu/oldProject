@@ -107,7 +107,7 @@
                     {{/if}}
                     <!-- todo 需要判断字段来是否显示 -->
                     {{#if isBuyFlag}}
-                        <div class="buy_btn fr blueBgButton">买入</div>
+                        <div class="buy_btn fr blueBgButton" fundCode = {{fundCode}}>买入</div>
                     {{/if}}
                     {{#if isRedemptionFlag}}
                         <div class="redeem_btn fr goldBorderButton">赎回</div>
@@ -147,7 +147,7 @@
                     {{/if_than_0}}
                     <!-- todo 需要判断字段来是否显示 -->
                     {{#if isBuyFlag}}
-                        <div class="buy_btn fr blueBgButton">买入</div>
+                        <div class="buy_btn fr blueBgButton" fundCode={{fundCode}}>买入</div>
                     {{/if}}
                     {{#if isRedemptionFlag}}
                         <div class="redeem_btn fr goldBorderButton">转出</div>

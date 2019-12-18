@@ -34,7 +34,7 @@ $(function() {
             ],
             aP: {
                 pageCurrent: 1,
-                pageSize: 10,
+                pageSize: 15,
             },
             current_index: 0, //左右滑动区域的索引
             list_template: '', //列表的模板，生成后存放在这里
