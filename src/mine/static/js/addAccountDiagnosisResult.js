@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2019-12-09 15:53:31
- * @LastEditTime: 2019-12-16 14:33:45
+ * @LastEditTime: 2019-12-17 18:28:53
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \htjf-app\src\mine\static\js\fundAccountDiagnosisResult.js
@@ -80,13 +80,12 @@ $(function() {
                     if(sessionStorage.getItem("addAccountDiagnosisResultList")){
                          var list = JSON.parse(sessionStorage.getItem("addAccountDiagnosisResultList"));
                          //list.push(obj);
-                         
-                         // list.forEach(function(item){
-                         //     arr.push(item)
-                         // })
-                         for(var i = 0 ; i < list.length; i++) {
-                            arr.push(list[i])
+                         if(list){
+                            list.forEach(function(item){
+                                arr.push(item)
+                            })
                          }
+                         
                          arr.push(obj)
                          sessionStorage.setItem("addAccountDiagnosisResultList",JSON.stringify(arr))
                     }else{
