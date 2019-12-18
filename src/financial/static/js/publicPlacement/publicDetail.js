@@ -346,7 +346,12 @@ $(function () {
         //收藏管理
         getFundCollection: function (prams) {
             var that = this;
-            var deviceId = splitUrl['deviceId'].split("cookie")[0];
+            var deviceId ;
+            if(splitUrl['deviceId'].includes("cookie")){
+                deviceId = splitUrl['deviceId'].split("cookie")[0];
+            }else{
+                deviceId = splitUrl['deviceId'];
+            }
             var manageList = [];
             manageList.push(prams)
             // 请求页面数据
