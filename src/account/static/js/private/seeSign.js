@@ -51,7 +51,6 @@ $(function () {
                 contentTypeSearch:true,
                 callbackDone: function (json) {
                     var dataList;
-
                     // 待定
                     if (json.data == '') { // 没有记录不展示
                         that.$e.noData.show();
@@ -60,7 +59,7 @@ $(function () {
                         dataList = json.data;
                         $.each(dataList, function(i, el) {
                           var groupName = el.groupName?el.groupName:""
-                          if (el.modulename.indexOf(".pdf") != -1) {
+                          if (el.contracturl.indexOf(".pdf") != -1) {
                               el.line = true; //线上可预览
                               el.href = site_url.downloadNew_api + "?filePath=" + el.contracturl + "&fileName=" + new Base64().encode(el.modulename) + "&groupName=" + groupName + "&show=1";
                           } else {
@@ -89,12 +88,8 @@ $(function () {
         events: function (targetUrl) {
             var that = this;
             mui("body").on('mdClick','.con',function(e){
-                console.log($(this).attr("href"))
-               var src=$(this).attr("href")
-                var form = document.createElement('form');
-                form.action = src;
-                document.getElementsByTagName('body')[0].appendChild(form);
-                form.submit();
+                var src=$(this).attr("href")
+                window.location.href=src
             }, {
                 'htmdEvt': 'seeSign_0'
             })
