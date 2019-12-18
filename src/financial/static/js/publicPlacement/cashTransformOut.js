@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2019-11-26 14:42:56
- * @LastEditTime: 2019-12-18 14:49:24
+ * @LastEditTime: 2019-12-18 15:22:44
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \htjf-app\src\financial\static\js\publicPlacement\cashTransformOut.js
@@ -410,6 +410,8 @@ $(function () {
 				}else{
 					$(".checkMessage").css({"display":"none"});
 				}
+				$(".pwd-input").val('')
+                $(".fake-box input").val('');
 				$(".msecond input").blur();
 				$("#passwordWrap").show();
 				payPass(that.cancelOrder)
