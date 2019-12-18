@@ -192,7 +192,8 @@ $(function () {
             })
             //购买
             mui("body").on('mdClick', '.buy_btn', function (e) {
-                window.location.href = site_url.fundTransformIn_url;   
+                var fundCode = $(this).attr("fundCode")
+                window.location.href = site_url.fundTransformIn_url+"?fundCode="+fundCode;   
                 return false;
             },{
                 'htmdEvt': 'publicAssets_4'
@@ -202,7 +203,6 @@ $(function () {
                 var index = $(this).parent().parent().parent().index();
                 var id = $(this).parent().parent().parent().parent().attr("id")
                 if(id =="cashPageLists" ){
-                    debugger;
                     //现金宝
                     var obj = {
                         "money":that.gV.data.cashDetails[index].totalMoney,
