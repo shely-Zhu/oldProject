@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2019-12-09 15:53:31
- * @LastEditTime: 2019-12-16 16:01:03
+ * @LastEditTime: 2019-12-16 16:23:55
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \htjf-app\src\mine\static\js\fundAccountDiagnosisResult.js
@@ -354,7 +354,7 @@ $(function() {
                 url:site_url.updateFundDiagnosisApply_api,
                 needDataEmpty:true,
                 data:{
-                    id:"",  //主键
+                    id:that.gV.applyId,  //主键
                     age:that.gV.userAge, //年龄
                     sex:that.gV.sexDataCode, //性别
                     evocation:that.gV.professionalDataCode, //职业
