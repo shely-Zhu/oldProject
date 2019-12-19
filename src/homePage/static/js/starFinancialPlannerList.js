@@ -402,7 +402,12 @@ $(function() {
                     $(".activityListDataBox").show()
                     $(".activityCityBox").show()
                     $(".Cutof").hide()
-                    $(".activitySearchInput input").val("")
+                    $(".mui-input-clear").attr("placeholder","")
+                    if($(".mui-input-clear").val() != ""){
+                        $(".mui-input-clear").val("")
+                        $(".mui-input-clear").attr("placeholder","请输入理财师工号或姓名")
+                      
+                    }
                     that.initMui();
                 })
                 //清除搜索框触发查询数据

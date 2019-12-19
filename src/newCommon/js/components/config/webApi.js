@@ -71,6 +71,10 @@ module.exports = function() {
     this.download_api = http_url.web_url + '/content/file/fastDFS/download'; //文件下载
     //文件下载新
     this.downloadNew_api = http_url.web_url + '/content/file/fastDFS/downloadNew'; //文件下载
+    //文件下载（金服挂载盘）
+    this.downloadNew_api = http_url.web_url + '/content/file/mount/download'; //文件下载
+     //文件下载（金服挂载盘）
+     this.downloadNew_api = http_url.web_url + '/content/file/frontend/mount/download'; //入参如果是url而不是fileName的情况，可以使用此接口用于非登录下载
     // 内容管理接口
     this.findContentByCategory_api = http_url.web_url + '/content/frontend/findContentByCategory'; // 内容管理接口
 
