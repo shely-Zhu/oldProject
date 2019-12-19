@@ -243,7 +243,7 @@ $(function() {
                                 hideCelButton: false,
                                 zIndex: 100,
                                 needYesHref: true, //是否需要把确定按钮改成a标签，默认false
-                                yesHref: site_url.rewards_url, //确定按钮a链接的默认href
+                                yesHref: site_url.realName_url, //确定按钮a链接的默认href
                                 callback: function(t) {
 
                                 },
