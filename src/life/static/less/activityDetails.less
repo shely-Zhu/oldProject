@@ -430,7 +430,15 @@ header{
     }
 }
 // 实名认证a标签展示有问题，修改样式
+.elasticLayer .elasticWrapper .elasticMid .elasticButtons{
+    display: flex;
+    overflow: hidden;
+}
+.elasticLayer .elasticWrapper .elasticMid .elasticButtons .positionLeft{
+    flex: 1;
+}
 .elasticLayer .elasticWrapper .elasticMid .elasticButtons .positionRight{
     display: inline-block;
     line-height: .99rem;
+    flex: 1;
 }
