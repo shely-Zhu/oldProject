@@ -113,7 +113,7 @@ $(function() {
                                 actType: json.data.defaultRecommend.linkType,
                                 actId: json.data.defaultRecommend.id,
                                 actImgUrl: json.data.defaultRecommend.filePath,
-                                actName: json.data.defaultRecommend.title
+                                // actName: json.data.defaultRecommend.title
                             }];
                             that.getNoData(noList);
                             return false;
