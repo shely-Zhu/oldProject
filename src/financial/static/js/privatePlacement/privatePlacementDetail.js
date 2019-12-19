@@ -79,7 +79,8 @@ $(function() {
             var obj = [{
                 url: site_url.queryFundDetailV2_api,
                 data: {
-                    projectId: that.$e.projectId,
+                    // projectId: that.$e.projectId,
+                    projectId:"35940",
                 },
                 contentTypeSearch: true,
                 needLogin: true,
@@ -209,7 +210,7 @@ $(function() {
                     // 基本信息
                     // 剩余额度
                     if (jsonData.surplusLevel) {
-                        $('.remaining').html(jsonData.surplusLevel);
+                        $('.remaining').html(jsonData.surplusLevel+"万");
                     } else {
                         $('.remain').hide();
                     }
