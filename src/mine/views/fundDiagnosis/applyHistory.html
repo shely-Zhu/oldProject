@@ -18,6 +18,10 @@
  <body>
      <section class="fundAccountDiagnosis container">
        @@include('@pathCommonViews/headBarConfig.html',{"pathName":"申请记录"})
+       <!-- 加载中loading -->
+        @@include('@pathCommonCom/loading/listLoading.html')
+        <!-- 暂无数据 -->
+        @@include('@pathCommonViews/noDataImg.html',{"tipText":"暂无数据"})
          <div class="content">
              <div class="addApply">新增申请</div>
              <div class="historyBox">

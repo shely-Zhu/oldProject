@@ -266,10 +266,10 @@ $(function() {
                         if (window.currentIsApp) {
                             // $('#ldx_share').attr('src', 'ldxShare://' + shareUrl + '&sharingType=' + sharingType);
                             if(window.isAndroid){
-                                window.jsObj.wxShare(wxShare)
+                                window.jsObj.wxShare(JSON.stringify(wxShare))
                             }
                             if(window.isIOS){
-                                window.webkit.messageHandlers.wxShare.postMessage(wxShare)
+                                window.webkit.messageHandlers.wxShare.postMessage(JSON.stringify(wxShare))
                             }
                         }
 

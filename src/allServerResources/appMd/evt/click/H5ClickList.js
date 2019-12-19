@@ -33,7 +33,10 @@ var clickList = {
 	//基金诊断
 	"fundAccountDiagnosis_01":{ type:'click', evtid: '', topic: '基金诊断-展开持仓按钮', info: ''},
 	"fundAccountDiagnosis_02":{ type:'click', evtid: '', topic: '基金诊断-获取专属报告按钮', info: ''},
-
+	// 添加已购买基金
+	"addAccountDiagnosisResult_01": { type:'click', evtid: '', topic: '添加已购买基金-购买日期选择', info: ''},
+	"addAccountDiagnosisResult_02": { type:'click', evtid: '', topic: '添加已购买基金-购买日期选择弹框取消按钮', info: ''},
+	"addAccountDiagnosisResult_03": { type:'click', evtid: '', topic: '添加已购买基金-确认添加按钮', info: ''},
 	//基金名称搜索
 	"diagnosisSearch_01" : { type:'click', evtid: 'diagnosisSearch_01', topic: '查询基金', info: ''} ,
 	"diagnosisSearch_02" : { type:'click', evtid: 'diagnosisSearch_02', topic: '跳转详情页', info: ''} ,
@@ -97,6 +100,8 @@ var clickList = {
 	"privatePlacementDetail_09" : { type:'click', evtid: 'privatePlacementDetail_09', topic: '私募基金产品详情-一键预约', info: ''} ,
 	"privatePlacementDetail_10" : { type:'click', evtid: 'privatePlacementDetail_10', topic: '私募基金产品详情-查看明细', info: ''} ,
 	"privatePlacementDetail_11" : { type:'click', evtid: 'privatePlacementDetail_11', topic: '私募基金产品详情-产品名称', info: ''} ,
+	"privatePlacementDetail_12" : { type:'click', evtid: 'privatePlacementDetail_12', topic: '私募基金产品详情-未认证跳转', info: ''} ,
+	"privatePlacementDetail_13" : { type:'click', evtid: 'privatePlacementDetail_13', topic: '私募基金产品详情-一键认证', info: ''} ,
 	//现金管理  cashManagement.html
 	"cashManagement_01" : { type:'click', evtid: 'cashManagement_01', topic: '现金管理-现金宝详情', info: ''} ,
 	"cashManagement_02" : { type:'click', evtid: 'cashManagement_02', topic: '现金管理-转入', info: ''} ,
