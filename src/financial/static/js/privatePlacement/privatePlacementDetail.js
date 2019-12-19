@@ -79,8 +79,8 @@ $(function() {
             var obj = [{
                 url: site_url.queryFundDetailV2_api,
                 data: {
-                    // projectId: that.$e.projectId,
-                    projectId:"35940",
+                    projectId: that.$e.projectId,
+                    // projectId:"35940",
                 },
                 contentTypeSearch: true,
                 needLogin: true,
