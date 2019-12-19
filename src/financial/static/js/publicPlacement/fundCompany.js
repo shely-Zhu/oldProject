@@ -14,7 +14,8 @@ getQueryString = function (name) {
 $(function () {
   var somePage = {
     $e: {
-
+      noData: $('.noData'), //没有数据的结构
+      listLoading: $('.listLoading'), //所有数据区域，第一次加载的loading结构
     },
     gV: { // 全局变量
 
@@ -68,6 +69,9 @@ $(function () {
           $(".tplBox").html(html);
 
         },
+        callbackNoData: function() {
+          that.$e.noData.show()
+        }
       }];
       $.ajaxLoading(obj);
     },
