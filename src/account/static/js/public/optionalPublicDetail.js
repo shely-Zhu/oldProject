@@ -509,7 +509,7 @@ $(function() {
             })
 			// //点击买入
 			mui("body").on('mdClick', '.buyBtn', function(e) {
-				window.location.href = site_url.fundTransformIn_url;			
+				window.location.href = site_url.fundTransformIn_url+"?fundCode="+that.data.fundCode;			
 			},{
                 'htmdEvt': 'optionalPublicDetail_9'
             })
