@@ -143,6 +143,7 @@ module.exports = function() {
     this.getBrokerInfo_api = http_url.joint_url + '/broker/getBrokerInfo.action';
     // 查询理顾图片接口
     this.getImage_api = http_url.joint_url + '/broker/getImage.action';
+    
 
 
 }   

@@ -218,12 +218,12 @@ $(function() {
                         // window.isAndroid是在root文件中定义的变量
                     if (window.isAndroid) {
                         //这个是安卓操作系统
-                        window.jsObj.wxShare(wxShare);
+                        window.jsObj.wxShare(JSON.stringify(wxShare));
                     }
                     // window.isIOS是在root文件中定义的变量
                     if (window.isIOS) {
                         //这个是ios操作系统
-                        window.webkit.messageHandlers.wxShare.postMessage(wxShare);
+                        window.webkit.messageHandlers.wxShare.postMessage(JSON.stringify(wxShare));
                     }
                 },
                 callbackFail: function(json) {
