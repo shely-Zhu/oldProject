@@ -194,9 +194,6 @@ $(function() {
                             $('.productLabel').append(projectLableHtml);
                         }
                     }
-                    if (that.getElements.isElecContract == 1) {
-                        $('.productLabel').append('<span>电子合同</span>')
-                    }
                     //0 债权投资;1 证券投资（二级市场）;2 股权投资;3 海外投资;4 其他
                     if (jsonData.investDirect == "0" || jsonData.investDirect == "2" || jsonData.investDirect == "4") { // 债权投资、股权投资、其他服务不展示
                         that.getElements.tipIcon.hide();
