@@ -859,8 +859,7 @@ $(function() {
                         noticeObj = "",
                         isPopup = "", //弹框售前告知书
                         isRiskPopup = "", //期限不符弹框
-                        PopupElasticLayer = '<p class="" style="font-weight:bold;text-align:center">你选择的产品与您现在的风险承受能力相匹配</p>' +
-                                            '<p class="">请您认真阅读[' + noticeObj.fileName + ']' + that.data.productName + '并确认后继续购买该产品</p>', //期限不符弹框
+                        PopupElasticLayer = "",
                         isReal = "", //是否实名认证，因为如果机构切一键认证是实名，点击需要提示弹框。
                         singleaAuthenPath = "", //一键认证跳转链接
                         singleaAuthen = false; //条件框是否展示
@@ -925,11 +924,6 @@ $(function() {
 
                     });
                     if (!!isPopup && !singleaAuthen) { //如果弹出售前告知书
-						if(!!isRiskPopup){//如果不匹配
-							PopupElasticLayer = '<p class="" style="font-weight:bold;text-align:center">你选择的产品与您现在的风险承受能力相匹配</p>' + 
-												'<p class="" style="font-weight:bold;text-align:center">您风险测评中所选计划投资期限少于产品期限存在匹配风险，请确认是否继续购买</p>' +
-                                            	'<p class="">请您认真阅读[' + noticeObj.fileName + ']' + that.data.productName + '并确认后继续购买该产品</p>';
-						}
                         //发送ajax请求
                         var ReourceListobj = [{
                             url: site_url.queryReourceList_api,
@@ -944,6 +938,14 @@ $(function() {
                                 that.data.canClick = true; //变为可点击
                                 var data = json.data[0],
                                     noticeObj = data;
+									if(!!isRiskPopup){//如果不匹配
+										PopupElasticLayer = '<p class="" style="font-weight:bold;text-align:center">你选择的产品与您现在的风险承受能力相匹配</p>' + 
+															'<p class="" style="font-weight:bold;text-align:center">您风险测评中所选计划投资期限少于产品期限存在匹配风险，请确认是否继续购买</p>' +
+			                                            	'<p class="">请您认真阅读' + noticeObj.fileName + that.data.productName + '并确认后继续购买该产品</p>';
+									}else{
+										PopupElasticLayer = '<p class="" style="font-weight:bold;text-align:center">你选择的产品与您现在的风险承受能力相匹配</p>' +
+                                            '<p class="">请您认真阅读' + noticeObj.fileName + that.data.productName + '并确认后继续购买该产品</p>'; //期限不符弹框
+									}
                                 if (!singleaAuthen) { //如果v.show都是0，则不展示预约框,跳转到相应链接
                                     $("#tips-wrap").hide();
                                     var obj = {

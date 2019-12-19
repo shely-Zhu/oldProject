@@ -463,8 +463,12 @@ window.http_url = {
     wapApi_url: '/wap', // wap接口
     web_url: '/web', // 账户接口
     app_url: '/app', // App接口,
-    webPof_url: '/web/pof' //私募理财
+    webPof_url: '/web/pof', //私募理财
 
+    pof_url: '/wap/pof', //公募接口-----老版本兼容，禁用,使用wapApi_url替换
+    pef_url: '/wap/pef', //私募接口-----老版本兼容，禁用,使用wapApi_url替换
+    content_url: '/wap/content', // 内容接口-----老版本兼容，禁用,使用wapApi_url替换
+    account_url: '/wap/account', // 账户接口-----老版本兼容，禁用,使用wapApi_url替换
 }
 
 

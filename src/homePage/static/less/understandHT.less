@@ -6,6 +6,8 @@
 @import url("@pathCommonLessCom/alertBox.less");
 @import url("@pathCommonLessCom/headBarConfig.less");
 
+//@body_center_height: calc(100% - 216px);
+
 .HeadBarConfigBox {
 	background:linear-gradient(116deg,rgba(56,74,129,1) 0%,rgba(42,60,112,1) 100%)!important;
 }
@@ -22,6 +24,7 @@
 }
 #tabHT {
 	margin-top: 1.28rem;
+	position: fixed;
 	.mui-slider-indicator {
 		height: .88rem;
 		background:linear-gradient(116deg,rgba(56,74,129,1) 0%,rgba(42,60,112,1) 100%)!important;
@@ -33,4 +36,8 @@
 			color: #F7D0A4;
 		}
 	}
+}
+#drapUpWrapper .mui-slider-item{
+    height:calc(~"100vh - 88px");
+    overflow: scroll;
 }
