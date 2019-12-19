@@ -530,6 +530,11 @@ $(function () {
 			//确定
 			mui("body").on('mdClick','.btn_box .btn',function(){
 
+				if($("#transformInput").val().includes(".") && $("#transformInput").val().split(".")[1].length >2){
+					tipAction('只能输入两位小数')
+					return
+				}
+
 				if(!!that.gV.minValue){
 					if(Number(that.gV.balance) < Number(that.gV.minValue)){
 						tipAction('最小买入金额不能低于' + that.gV.minValue + '元')

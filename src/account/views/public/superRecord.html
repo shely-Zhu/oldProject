@@ -1,3 +1,11 @@
+<!--
+ * @Author: your name
+ * @Date: 2019-12-12 19:21:07
+ * @LastEditTime: 2019-12-18 19:11:38
+ * @LastEditors: Please set LastEditors
+ * @Description: In User Settings Edit
+ * @FilePath: \htjf-app\src\account\views\public\superRecord.html
+ -->
 <!-- 超宝基金产品-交易记录
  @author caoqihai 2019-11-20 -->
 
@@ -50,7 +58,12 @@
     {{! 左侧页面列表}}  {{#each pageList}}
     <div class="datalist" data-applyId="{{allotNo}}" data-isBuy = "{{tobe}}">
         <div class="first">
+            {{#if taconfirmFlagStatu}}
+
+            <div class="tit">{{fundName}}<span>[快速]</span></div>
+            {{else}}
             <div class="tit">{{fundName}}</div>
+            {{/if}}
             <div class="mon">
                 {{#if tobe}}
                 +
