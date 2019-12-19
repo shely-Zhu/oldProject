@@ -384,6 +384,8 @@ $(function() {
                     // $(this).attr('htmdEvt','starFinancia_search')
                     $('.recordList').html('');
                     // $('#loading').show();
+                    $(".activityCityBox").hide()
+                    $(".Cutof").show()
                     that.gV.startPage = 1;
                     console.log($('.mui-input-clear').val())
                     setTimeout(function() {
@@ -391,7 +393,18 @@ $(function() {
                     }, 400)
                     mui('.contentWrapper').pullRefresh().scrollTo(0, 0, 100);
                 });
-
+                $(".activitySearchInput input").focus(function(){
+                    $(".activityListDataBox").hide()
+                    $(".activityCityBox").hide()
+                    $(".Cutof").show()
+                })
+                $(".Cutof").click(function(){
+                    $(".activityListDataBox").show()
+                    $(".activityCityBox").show()
+                    $(".Cutof").hide()
+                    $(".activitySearchInput input").val("")
+                    that.initMui();
+                })
                 //清除搜索框触发查询数据
                 mui('body').on('mdClick', '#activitySearch .mui-icon-clear', function() {
                     $('.recordList').html('');

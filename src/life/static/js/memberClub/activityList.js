@@ -96,12 +96,9 @@ $(function() {
                     },
                     needDataEmpty: true,
                     callbackDone: function(json) {
-
-                        console.log(json.data);
                         if (!json.data.activityVoPageInfo && that.gV.startPage == 1) {
                             var topHeitgh = $('#activitySearch').height();
                             var height = windowHeight - topHeitgh;
-
                             $('.activityListDataNoBox').height(height);
                             t.endPullupToRefresh(true);
                             that.$e.activityListDataBox.hide();
@@ -153,22 +150,19 @@ $(function() {
                             }
                             // 将列表插入到页面上
                             generateTemplate(list, that.$e.recordList, that.$e.activityListTemp)
-                            alwaysAjax($(".recordList"));
+                            alwaysAjax($(".recordList"), null, 2);
                             $(".lazyload").lazyload()
                         }, 200)
 
                     },
                     callbackFail: function(json) {
-                        console.log(json.message)
                         tipAction(json.message);
                     },
                     callbackNoData: function(json) {
                         if (!json.data.activityVoPageInfo && that.gV.startPage == 1) {
                             var topHeitgh = $('#activitySearch').height();
                             var height = windowHeight - topHeitgh;
-
                             $('.activityListDataNoBox').height(height);
-
                             t.endPullupToRefresh(true);
                             that.$e.activityListDataBox.hide();
                             that.$e.activityListDataNoBox.show();
@@ -313,8 +307,8 @@ $(function() {
                     var txt = $(this).text();
                     var name = $(this).attr('data-name');
                     var parentId = $(this).attr('data-parentId');
-                    $('#activityDataBox').show();
                     $('#cityListBox').hide();
+                    $('#activityDataBox').show();
                     $('#loading').show();
                     $('.recordList').html('');
                     $('#locationCity').text(txt);
