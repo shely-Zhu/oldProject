@@ -886,7 +886,7 @@ $(function() {
                             jumpUrl = that.getJumpUrl(v); //获取跳转Url。
                         }
                         //						对应的条件认证到哪里
-                        that.$e.realLi.eq(e * 1).find(".tips-li-right").on('tap', function() {
+                        that.$e.realLi.eq(e * 1).find(".tips-li-right").on('mdClick', function() {
                                 if (v.conditionType == "1" && that.data.custType != "1") { //如果是实名认证跳转，机构不支持线上开户，弹框提示
                                     $("#tips-wrap").hide();
                                     var obj = {
@@ -902,9 +902,11 @@ $(function() {
                                 } else {
                                     window.location.href = jumpUrl;
                                 }
-                            })
+                            }, {
+                            htmdEvt: 'privatePlacementDetail_12'
+                        })
                             //一键认证调往哪里
-                        mui("body").on('tap', '.tips-btn', function() {
+                        mui("body").on('mdClick', '.tips-btn', function() {
                             if (isReal && that.data.custType != "1") { //如果是实名认证跳转，机构不支持线上开户，弹框提示,一键认证正好也是链接也是实名认证也弹框
                                 $("#tips-wrap").hide();
                                 var obj = {
@@ -920,6 +922,8 @@ $(function() {
                             } else {
                                 window.location.href = singleaAuthenPath;
                             }
+                        }, {
+                            htmdEvt: 'privatePlacementDetail_13'
                         })
 
                     });
@@ -1262,13 +1266,13 @@ $(function() {
                 'htmdEvt': 'privatePlacementDetail_08'
             })
               //点击一键预约逻辑
-            mui("body").on('tap', '.tips-btn', function() {
+            mui("body").on('mdClick', '.tips-btn', function() {
 
             },{
                 htmdEvt: 'privatePlacementDetail_09'
             });
             //点击查看明细跳转
-            mui("body").on('tap', '.lookDetailed', function() {
+            mui("body").on('mdClick', '.lookDetailed', function() {
                 window.location.href = site_url.tobeConfirmTransaction_url
             },{
                 htmdEvt: 'privatePlacementDetail_10'

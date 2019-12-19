@@ -18,7 +18,9 @@ $(function(){
      var regulatory = {
          gv:{
               list:[],
-              fundDetailList:[]
+              fundDetailList:[],
+              noData: $('.noData'), //没有数据的结构
+              listLoading: $('.listLoading'), //所有数据区域，第一次加载的loading结构
          },
          $e:{
             cashListConList:$("#cashListConList"), //模板列

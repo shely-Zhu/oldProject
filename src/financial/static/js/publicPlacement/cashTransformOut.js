@@ -337,7 +337,7 @@ $(function () {
 			})
 			
 			//点击转出规则
-			mui('body').on('tap','.explain .transformRule',function(){
+			mui('body').on('mdClick','.explain .transformRule',function(){
 				that.gv.ruleId = $(this).attr("ruleId");
 				var id = $(this).attr("ruleId");
 				//that.findProtocolContentRule(id);
@@ -347,7 +347,7 @@ $(function () {
 			}) 
 
 			//点击同意协议
-			mui('body').on('tap','.item2 .iconfont',function(){
+			mui('body').on('mdClick','.item2 .iconfont',function(){
 			//that.$e.iconCheck.on('mdClick', function() {
 				var val =$(".msecond input")[0].value;
 				that.gv.transformMoney = val;
@@ -450,7 +450,7 @@ $(function () {
 				htmdEvt: 'cashTransformOut_10'
 			}) 
 			//点击转出到账时间
-			mui('body').on('tap','.explain .tranTime',function(){
+			mui('body').on('mdClick','.explain .tranTime',function(){
 				var id = $(this).children().attr("ruleId");
 				that.gv.ruleId = id;
 				//that.findProtocolContentRule(id);
@@ -459,7 +459,7 @@ $(function () {
 				htmdEvt: 'cashTransformOut_13'
 			}) 
 			//阅读规则
-			mui('body').on('tap','.file .agreementRule',function(){
+			mui('body').on('mdClick','.file .agreementRule',function(){
 				that.gv.ruleId = $(this).attr("ruleId");
 				var id = $(this).attr("ruleId");
 				//that.findProtocolContentRule(id);
