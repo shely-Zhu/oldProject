@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2019-11-26 14:42:56
- * @LastEditTime: 2019-12-18 15:22:44
+ * @LastEditTime: 2019-12-18 18:49:43
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \htjf-app\src\financial\static\js\publicPlacement\cashTransformOut.js
@@ -14,10 +14,19 @@
 */
 
 require('@pathCommonBase/base.js');
+
+require('@pathIncludJs/vendor/mui/mui.picker.min.js');
 require('@pathCommonJs/ajaxLoading.js');
-// require('@pathCommonCom/elasticLayer/transOutRule/transOutRule.js');
-var payPass = require('@pathCommonJsCom/payPassword.js');
+require('@pathCommonJs/components/elasticLayer.js');
+
+var splitUrl = require('@pathCommonJs/components/splitUrl.js');
+//引入复制功能
+// var Clipboard = require('clipboard');
+var popPicker = require('@pathCommonJsCom/popPicker.js');
 var generateTemplate = require('@pathCommonJsComBus/generateTemplate.js');
+var tipAction = require('@pathCommonJs/components/tipAction.js');
+
+var payPass = require('@pathCommonJsCom/payPassword.js');
 
 
 $(function () {
@@ -374,7 +383,7 @@ $(function () {
 
 			  //转出金额
 			//$(".msecond input").change(function(){
-			 $(".msecond input").on('input propertychange',function(){
+			$(".msecond input").on('input propertychange',function(){
 				that.gv.transformMoney = $(this)[0].value;
 				if( parseFloat( that.gv.transformTotalMoney)< parseFloat( that.gv.transformMoney) ){
 					//$(".checkMessage").css({"display":"block"});
@@ -393,8 +402,6 @@ $(function () {
 						that.$e.confirmBtn.attr('disabled',true);
 					}
 				}
-			},{
-				htmdEvt: 'cashTransformOut_15'
 			})
 
 			//赎回确认 
