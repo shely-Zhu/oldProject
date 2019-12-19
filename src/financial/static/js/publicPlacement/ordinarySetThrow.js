@@ -844,11 +844,17 @@ $(function () {
 					tipAction('只能输入两位小数')
 					return
 				}
+				if($(this).val()!="" && $(".item2 .iconfont").hasClass("check")){
+					that.$el.confirmBtn.removeAttr("disabled");
+				}else{
+					that.$el.confirmBtn.attr('disabled',true)
+				}
 				that.getRate($(this).val());
 			})
 			//清除输入框数字
 			mui("body").on('mdClick','.deleteNum',function(){
 				$('.transformInput').val(null)
+				that.$el.confirmBtn.attr('disabled',true)
 			}, {
 				htmdEvt: 'ordinarySetThrow_05'
 			}) ;
@@ -900,6 +906,7 @@ $(function () {
 			
 			//确定
 			mui("body").on("mdClick",'.btn_box .btn',function(){
+				debugger
 				$(".pwd-input").val('')
                 $(".fake-box input").val('');
 				if(!!that.gV.minValue){
