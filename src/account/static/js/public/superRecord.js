@@ -225,12 +225,15 @@ $(function() {
                         pageList = jsonData.pageList;
 
                     if (!$.util.objIsEmpty(pageList)) {
-
                         pageList.map(function(e){
-
                             e.tobe = that.gV.current_index == 0 ? true : false;
+                            if(that.gV.current_index == "1"){
+                                if(e.taconfirmFlag == "1"){
+                                    e.taconfirmFlagStatu = true
+                                }
+                            }
                         })
-
+                        
                         var list_html = that.gV.list_template(jsonData);//  把内容  放到  模板里
                         //设置这两参数，在initMui()中使用
                         //判断是否显示没有更多了等逻辑，以及插入新数据
