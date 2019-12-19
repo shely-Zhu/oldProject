@@ -609,7 +609,7 @@ $(function () {
 			//密码校验不通过   ---找回密码
 			mui("body").on('mdClick','.error2 .elasticYes',function(){
 				//跳往原生页面去修改密码
-				window.location.href = site_url.pofRetrievePassword_url
+				window.location.href = site_url.pofForgotPassword_url
 			}, {
 				htmdEvt: 'fundTransformIn_14'
 			}) ;
