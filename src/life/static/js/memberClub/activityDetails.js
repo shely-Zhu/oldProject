@@ -243,7 +243,7 @@ $(function() {
                                 hideCelButton: false,
                                 zIndex: 100,
                                 needYesHref: true, //是否需要把确定按钮改成a标签，默认false
-                                yesHref: site_url.rewards_url, //确定按钮a链接的默认href
+                                yesHref: site_url.realName_url, //确定按钮a链接的默认href
                                 callback: function(t) {
 
                                 },
@@ -321,14 +321,17 @@ $(function() {
                                 img: that.$e.bgimg.attr("data-original"),
                             }
                             // window.isAndroid是在root文件中定义的变量
-                        if (window.isAndroid) {
-                            //这个是安卓操作系统
-                            window.jsObj.wxShare(wxShare);
-                        }
-                        // window.isIOS是在root文件中定义的变量
-                        if (window.isIOS) {
-                            //这个是ios操作系统
-                            window.webkit.messageHandlers.wxShare.postMessage(wxShare);
+
+                        if (window.currentIsApp) {
+                            if (window.isAndroid) {
+                                //这个是安卓操作系统
+                                window.jsObj.wxShare(wxShare);
+                            }
+                            // window.isIOS是在root文件中定义的变量
+                            if (window.isIOS) {
+                                //这个是ios操作系统
+                                window.webkit.messageHandlers.wxShare.postMessage(wxShare);
+                            }
                         }
 
                     },

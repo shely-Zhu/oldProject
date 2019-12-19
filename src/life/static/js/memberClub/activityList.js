@@ -5,7 +5,6 @@
 
 require('@pathCommonBase/base.js');
 require('@pathCommonJs/ajaxLoading.js');
-require('@pathCommonJsCom/goTopMui.js');
 var splitUrl = require('@pathCommonJs/components/splitUrl.js')();
 var generateTemplate = require('@pathCommonJsComBus/generateTemplate.js');
 var alwaysAjax = require('@pathCommonJs/components/alwaysAjax.js');
@@ -44,6 +43,7 @@ $(function() {
                 // that.getCityListData();
                 that.getCity();
                 that.events();
+                // $("img")
             },
             //初始化mui的上拉加载
             initMui: function() {
@@ -96,12 +96,9 @@ $(function() {
                     },
                     needDataEmpty: true,
                     callbackDone: function(json) {
-
-                        console.log(json.data);
                         if (!json.data.activityVoPageInfo && that.gV.startPage == 1) {
                             var topHeitgh = $('#activitySearch').height();
                             var height = windowHeight - topHeitgh;
-
                             $('.activityListDataNoBox').height(height);
                             t.endPullupToRefresh(true);
                             that.$e.activityListDataBox.hide();
@@ -116,7 +113,7 @@ $(function() {
                                 actType: json.data.defaultRecommend.linkType,
                                 actId: json.data.defaultRecommend.id,
                                 actImgUrl: json.data.defaultRecommend.filePath,
-                                actName: json.data.defaultRecommend.title
+                                // actName: json.data.defaultRecommend.title
                             }];
                             that.getNoData(noList);
                             return false;
@@ -153,22 +150,19 @@ $(function() {
                             }
                             // 将列表插入到页面上
                             generateTemplate(list, that.$e.recordList, that.$e.activityListTemp)
-                            alwaysAjax($(".recordList"));
+                            alwaysAjax($(".recordList"), null, 2);
                             $(".lazyload").lazyload()
                         }, 200)
 
                     },
                     callbackFail: function(json) {
-                        console.log(json.message)
                         tipAction(json.message);
                     },
                     callbackNoData: function(json) {
                         if (!json.data.activityVoPageInfo && that.gV.startPage == 1) {
                             var topHeitgh = $('#activitySearch').height();
                             var height = windowHeight - topHeitgh;
-
                             $('.activityListDataNoBox').height(height);
-
                             t.endPullupToRefresh(true);
                             that.$e.activityListDataBox.hide();
                             that.$e.activityListDataNoBox.show();
@@ -313,8 +307,8 @@ $(function() {
                     var txt = $(this).text();
                     var name = $(this).attr('data-name');
                     var parentId = $(this).attr('data-parentId');
-                    $('#activityDataBox').show();
                     $('#cityListBox').hide();
+                    $('#activityDataBox').show();
                     $('#loading').show();
                     $('.recordList').html('');
                     $('#locationCity').text(txt);
