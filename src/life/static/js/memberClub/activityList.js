@@ -5,7 +5,6 @@
 
 require('@pathCommonBase/base.js');
 require('@pathCommonJs/ajaxLoading.js');
-require('@pathCommonJsCom/goTopMui.js');
 var splitUrl = require('@pathCommonJs/components/splitUrl.js')();
 var generateTemplate = require('@pathCommonJsComBus/generateTemplate.js');
 var alwaysAjax = require('@pathCommonJs/components/alwaysAjax.js');
@@ -44,6 +43,7 @@ $(function() {
                 // that.getCityListData();
                 that.getCity();
                 that.events();
+                // $("img")
             },
             //初始化mui的上拉加载
             initMui: function() {

@@ -19,6 +19,7 @@ $(function() {
     var dataEn = {
         $e: {
             noData: $('.noData'), //没有数据的结构
+            NoData: $('.NoData'), //没有数据的结构
             listLoading: $('.listLoading'), //所有数据区域，第一次加载的loading结构
             ListSlot: $('.listHasData0'), //插入已报名活动位置
             ListSlot1: $('.listHasData1'), //插入已报名活动位置
@@ -120,10 +121,13 @@ $(function() {
                     // 待定 
                     if (json.data.activityVOPageInfo.list.length == 0) { // 没有记录不展示
                         if (num == 0) {
-                            $('.listHasData0 .noData').show();
+                            $('.NoData').show();
+                            // $('.listHasData0 .noData').show();
+                            
                             return false;
                         } else {
-                            $('.listHasData1 .noData').show();
+                            $('.NoData').show();
+                            // $('.listHasData1 .noData').show();
                             return false;
                         }
 
@@ -172,10 +176,13 @@ $(function() {
                 },
                 callbackNoData: function() {
                     if (num == 0) {
-                        $('.listHasData0 .noData').show();
+                        // $('.listHasData0 .noData').show();
+                        $('.NoData').show();
+
                         return false;
                     } else {
-                        $('.listHasData1 .noData').show();
+                        // $('.listHasData1 .noData').show();
+                        $('.NoData').show();
                         return false;
                     }
 
@@ -258,13 +265,8 @@ $(function() {
             }, {
                 'htmdEvt': 'activityEnrolment_02'
             });
-
             //点击活动列表跳转
             mui('body').on('mdClick', '.clickli', function(e) {
-                debugger
-                var event=e||window.event
-                event.preventDefault();
-                event.stopPropagation();  
                 var actType = $(this).attr('data-actType');
                 var actId = $(this).attr('data-actId');
                 window.location.href = site_url.activityDetails_url + '?actType=' + actType + '&' + 'actId=' + actId+'&isNeedLogin=1';
