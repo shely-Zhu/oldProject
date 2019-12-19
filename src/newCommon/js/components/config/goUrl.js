@@ -417,10 +417,8 @@ module.exports = function() {
     // 买入结果页面，基金买入结果
     this.pofSurelyResultsDetail_url = go_url.no_url + '/financial/views/publicPlacement/surelyResultsDetail.html';
 
-    //忘记密码  跳往原生页面
-    this.pofForgotPassword_url = go_url.no_url + '/minel/views/setting/forgotPassword.html';
-    //找回密码   跳往原生页面
-    this.pofRetrievePassword_url = go_url.no_url + '/minel/views/setting/retrievePassword.html';
+    //忘记密码 | 找回密码  跳往原生页面
+    this.pofForgotPassword_url = go_url.no_url + '/mine/views/setting/forgotPassword.html';
     //添加银行卡
     this.pofAddBankCard_url = go_url.no_url + '/mine/views/bankCard/addBankCard.html'
         //基金分享跳原生页面
