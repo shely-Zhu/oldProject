@@ -18,9 +18,10 @@
          </div>
          <div class="title">
              <ul class="titleContent">
-                 <li>日期</li>
+                 <!--<li>日期</li>
                  <li>七日年化</li>
                  <li>万份收益(元)</li>
+                 -->
              </ul>
          </div>
          @@include('@pathCommonCom/noData/noData.html', {"tipText": "暂无数据"})
@@ -29,11 +30,21 @@
              {{#each this}}
                 <ul class="contentWrapUl listItem">
                     <li>{{trdDt}}</li>
-                    <li>{{annYldRat}}%</li>
+                    <li  class="value">{{annYldRat}}%</li>
                     <li>{{unitYld}}</li>
                 </ul>
              {{/each}}
          </script>
+         <script id="adjustment-template_1" type="text/x-handlebars-template">
+            {{#each this}}
+               <ul class="contentWrapUl listItem">
+                   <li>{{trdDt}}</li>
+                   <li>{{unitNav}}</li>
+                   <li>{{accuUnitNav}}</li>
+                   <li class="value">{{dayChgRat}}%</li>
+               </ul>
+            {{/each}}
+        </script>
          <!-- <div class="noDataMore">
              
          </div> -->

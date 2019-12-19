@@ -179,7 +179,7 @@ $(function () {
             });
             // 历史净值查看更多
             mui("body").on('mdClick', ".history_area .history_more", function (e) {
-                window.location.href = site_url.mineHistoryDetail_url + '?fundCode=' + fundCode
+                window.location.href = site_url.mineHistoryDetail_url + '?fundCode=' + fundCode+"&fundType="+that.fundType
             },{
                 htmdEvt: 'publicDetail_04'
             });
@@ -401,6 +401,12 @@ $(function () {
                 callbackDone: function (json) {
                     json = json.data
                     var tplm = $("#dataLists1").html();
+                    if(that.fundType){
+                        $("#history_tital").html("历史收益")
+                            //货币 
+                    }else{
+                        $("#history_tital").html("历史净值")
+                    }
                     var template = Handlebars.compile(tplm);
                     $.each(json.pageList, function (i, v) {
                     })
