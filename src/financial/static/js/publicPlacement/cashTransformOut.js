@@ -1,8 +1,8 @@
 /*
  * @Author: your name
  * @Date: 2019-11-26 14:42:56
- * @LastEditTime: 2019-12-18 18:49:43
- * @LastEditors: Please set LastEditors
+ * @LastEditTime : 2019-12-19 16:56:20
+ * @LastEditors  : Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \htjf-app\src\financial\static\js\publicPlacement\cashTransformOut.js
  */
@@ -451,10 +451,14 @@ $(function () {
 			}) 
 			//点击转出到账时间
 			mui('body').on('mdClick','.explain .tranTime',function(){
-				var id = $(this).children().attr("ruleId");
-				that.gv.ruleId = id;
+				var type = $(this).attr("type");
+				if(type == "fast"){
+					tipAction("部分银行不支持2小时快速到账")
+				}
+				//var id = $(this).children().attr("ruleId");
+				//that.gv.ruleId = id;
 				//that.findProtocolContentRule(id);
-				window.location.href = site_url.superContent_url + '?id='+id+ '&financial=true'
+				//window.location.href = site_url.superContent_url + '?id='+id+ '&financial=true'
 			},{
 				htmdEvt: 'cashTransformOut_13'
 			}) 

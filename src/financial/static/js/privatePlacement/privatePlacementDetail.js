@@ -80,6 +80,7 @@ $(function() {
                 url: site_url.queryFundDetailV2_api,
                 data: {
                     projectId: that.$e.projectId,
+                    // projectId:"35940",
                 },
                 contentTypeSearch: true,
                 needLogin: true,
@@ -171,12 +172,12 @@ $(function() {
                         $('.netValueDate').html('--')
                     } else {
                         if(jsonData.incomeModeJF == '2'){
-                            var now = moment(jsonData.profitThoudDate).format('YYYY-MM-DD');
+                            var now = jsonData.profitThoudDate;
                         }else{
                         var now = moment(jsonData.netValueDate).format('YYYY-MM-DD');
-
+                            now= now.substring(5)
                         }
-                        $('.netValueDate').html(now.substring(5))
+                        $('.netValueDate').html(now)
                     }
                     // 起投金额
                     $('.investmentAmountNum').html(jsonData.investStart + '万');
@@ -209,7 +210,7 @@ $(function() {
                     // 基本信息
                     // 剩余额度
                     if (jsonData.surplusLevel) {
-                        $('.remaining').html(jsonData.surplusLevel);
+                        $('.remaining').html(jsonData.surplusLevel+"万");
                     } else {
                         $('.remain').hide();
                     }

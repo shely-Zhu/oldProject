@@ -24,8 +24,8 @@ var fixScroll = function(num,oHeight){//ios浏览器需要滚动
 	if (isiOS && num == 1) {
 		window.scrollTo(0, 0);
 	}else if(isiOS && num == 2){
-		window.scrollTo(0, 1000);//滚动到可是区域
-//		document.querySelectorById('#passwordWrap').scroll(0,1000)//iphonex可以滚动到顶部
+//		window.scrollTo(0, 1000);//滚动到可是区域
+		document.querySelectorById('#passwordWrap').scroll(0,1000)//iphonex可以滚动到顶部
 //		if(!!window.scrollTo){
 //			alert("123")
 //		}else if(!!window.scrollTop){
