@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2019-11-26 14:42:56
- * @LastEditTime: 2019-12-17 17:26:31
+ * @LastEditTime: 2019-12-18 18:49:43
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \htjf-app\src\financial\static\js\publicPlacement\cashTransformOut.js
@@ -14,10 +14,19 @@
 */
 
 require('@pathCommonBase/base.js');
+
+require('@pathIncludJs/vendor/mui/mui.picker.min.js');
 require('@pathCommonJs/ajaxLoading.js');
-// require('@pathCommonCom/elasticLayer/transOutRule/transOutRule.js');
-var payPass = require('@pathCommonJsCom/payPassword.js');
+require('@pathCommonJs/components/elasticLayer.js');
+
+var splitUrl = require('@pathCommonJs/components/splitUrl.js');
+//引入复制功能
+// var Clipboard = require('clipboard');
+var popPicker = require('@pathCommonJsCom/popPicker.js');
 var generateTemplate = require('@pathCommonJsComBus/generateTemplate.js');
+var tipAction = require('@pathCommonJs/components/tipAction.js');
+
+var payPass = require('@pathCommonJsCom/payPassword.js');
 
 
 $(function () {
@@ -323,9 +332,9 @@ $(function () {
 			   that.gv.transformMoney = 0;
 			   that.$e.el_transformInput.val(0);
 
-		   }, {
-			htmdEvt: 'cashTransformOut_06'
-		})
+		   	}, {
+				htmdEvt: 'cashTransformOut_06'
+			})
 			
 			//点击转出规则
 			mui('body').on('tap','.explain .transformRule',function(){
@@ -333,13 +342,8 @@ $(function () {
 				var id = $(this).attr("ruleId");
 				//that.findProtocolContentRule(id);
 				window.location.href = site_url.superContent_url + '?id='+id+ '&financial=true'
-			}) 
-			//点击转出到账时间
-			mui('body').on('tap','.explain .tranTime',function(){
-				var id = $(this).children().attr("ruleId");
-				that.gv.ruleId = id;
-				//that.findProtocolContentRule(id);
-				window.location.href = site_url.superContent_url + '?id='+id+ '&financial=true'
+			},{
+				htmdEvt: 'cashTransformOut_07'
 			}) 
 
 			//点击同意协议
@@ -378,17 +382,25 @@ $(function () {
 			});
 
 			  //转出金额
-			$(".msecond input").change(function(){
+			//$(".msecond input").change(function(){
+			$(".msecond input").on('input propertychange',function(){
 				that.gv.transformMoney = $(this)[0].value;
 				if( parseFloat( that.gv.transformTotalMoney)< parseFloat( that.gv.transformMoney) ){
 					//$(".checkMessage").css({"display":"block"});
 					//$(".checkMessage").html("转出金额超过最大额度")
 					tipAction("转出金额超过最大额度"+that.gv.transformTotalMoney+"元")
+					return
 				}else{		
 					$(".checkMessage").css({"display":"none"}); 
 				}
 				if($(this)[0].value == ""){
 					that.$e.confirmBtn.attr('disabled',true)
+				}else{
+					if($(".item2 .iconfont").hasClass("check")){
+						that.$e.confirmBtn.removeAttr("disabled")
+					}else{
+						that.$e.confirmBtn.attr('disabled',true);
+					}
 				}
 			})
 
@@ -405,6 +417,8 @@ $(function () {
 				}else{
 					$(".checkMessage").css({"display":"none"});
 				}
+				$(".pwd-input").val('')
+                $(".fake-box input").val('');
 				$(".msecond input").blur();
 				$("#passwordWrap").show();
 				payPass(that.cancelOrder)
@@ -435,12 +449,23 @@ $(function () {
 			}, {
 				htmdEvt: 'cashTransformOut_10'
 			}) 
+			//点击转出到账时间
+			mui('body').on('tap','.explain .tranTime',function(){
+				var id = $(this).children().attr("ruleId");
+				that.gv.ruleId = id;
+				//that.findProtocolContentRule(id);
+				window.location.href = site_url.superContent_url + '?id='+id+ '&financial=true'
+			},{
+				htmdEvt: 'cashTransformOut_13'
+			}) 
 			//阅读规则
 			mui('body').on('tap','.file .agreementRule',function(){
 				that.gv.ruleId = $(this).attr("ruleId");
 				var id = $(this).attr("ruleId");
 				//that.findProtocolContentRule(id);
 				window.location.href = site_url.superContent_url + '?id='+id+ '&financial=true'
+			},{
+				htmdEvt: 'cashTransformOut_14'
 			})
 			
 		}

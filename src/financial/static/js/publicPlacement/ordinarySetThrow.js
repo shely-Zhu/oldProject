@@ -802,12 +802,7 @@ $(function () {
 			if(that.gV.type == 'add'){
 				that.getNextCutPayment()
 			}
-			// 周期选择
-			mui("body").on('mdClick', '#starttime', function () {
-				popPicker(2, list, that.$el.cycleDate , that.getNextCutPayment);
-			}, {
-				htmdEvt: 'ordinarySetThrow_17'
-			})
+			
 			/** 下面三个事件： 银行卡列表出现/隐藏 **/
 			mui("body").on('mdClick','.paymoney',function(){
 				$(".imgc").hide()
@@ -849,11 +844,17 @@ $(function () {
 					tipAction('只能输入两位小数')
 					return
 				}
+				if($(this).val()!="" && $(".item2 .iconfont").hasClass("check")){
+					that.$el.confirmBtn.removeAttr("disabled");
+				}else{
+					that.$el.confirmBtn.attr('disabled',true)
+				}
 				that.getRate($(this).val());
 			})
 			//清除输入框数字
 			mui("body").on('mdClick','.deleteNum',function(){
 				$('.transformInput').val(null)
+				that.$el.confirmBtn.attr('disabled',true)
 			}, {
 				htmdEvt: 'ordinarySetThrow_05'
 			}) ;
@@ -905,6 +906,9 @@ $(function () {
 			
 			//确定
 			mui("body").on("mdClick",'.btn_box .btn',function(){
+				debugger
+				$(".pwd-input").val('')
+                $(".fake-box input").val('');
 				if(!!that.gV.minValue){
 					if(Number(that.gV.balance) < Number(that.gV.minValue)){
 						tipAction('最小买入金额不能低于' + that.gV.minValue + '元')
@@ -1012,8 +1016,14 @@ $(function () {
 						$("#transformInput").focus()
 					}
 			}, {
-				htmdEvt: 'fundTransformIn_18'
+				htmdEvt: 'ordinarySetThrow_18'
 			}) ;
+			// 周期选择
+			mui("body").on('mdClick', '#starttime', function () {
+				popPicker(2, list, that.$el.cycleDate , that.getNextCutPayment);
+			}, {
+				htmdEvt: 'ordinarySetThrow_19'
+			})
 
 		},
 

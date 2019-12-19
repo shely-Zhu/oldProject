@@ -16,6 +16,7 @@ require('@pathCommonJsCom/goTopMui.js');
 require('@pathCommonJs/components/elasticLayer.js');
 require('@pathCommonJs/components/elasticLayerTypeFive.js');
 var generateTemplate = require('@pathCommonJsComBus/generateTemplate.js');
+var tipAction = require('@pathCommonJs/components/tipAction.js');
 $(function () {
     var somePage = {
         $e: {
@@ -32,10 +33,12 @@ $(function () {
             pageSize: 10,
             listLength: 0,
             fixStateNum : 0,
-            stopPlanList:[]    // 已终止的定投计划
+            stopPlanList:[],    // 已终止的定投计划
+            accountType:"",
         },
         init: function () {
             var that = this;
+            that.getUserInfo();
             that.initMui();
             that.events();
         },
@@ -188,10 +191,31 @@ $(function () {
             }];
             $.ajaxLoading(obj);
         },
+        // 获取认证信息
+        getUserInfo: function() {
+            var that = this;
+            // 请求页面数据
+            var obj = [{
+                url: site_url.queryUserBaseInfo_api,
+                data: {},
+                callbackDone: function(json) {
+                    var data = json.data
+                    that.gV.accountType = data.accountType
+                },
+                callbackFail: function(json) {
+                    tipAction(json.msg);
+                }
+            }]
+            $.ajaxLoading(obj);
+        },
         events: function () {
             var that = this;
             //新增 跳原生定投排行页
             mui("body").on("mdClick", ".newPlan", function () {
+                if(that.gV.accountType == 0 ||that.gV.accountType == 2){
+                    tipAction("暂不支持机构客户进行交易")
+                    return
+                }
                 window.location.href = site_url.investmentPlanRanking_url + '?flag=2';
             }, {
 				htmdEvt: 'myInvestmentPlan_01'
@@ -211,7 +235,7 @@ $(function () {
             
                 sessionStorage.setItem('stopList',JSON.stringify(that.gV.stopPlanList))
             }, {
-				htmdEvt: 'myInvestmentPlan_01'
+				htmdEvt: 'myInvestmentPlan_03'
 			});
 
         }

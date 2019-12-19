@@ -101,7 +101,7 @@ $(function () {
                     that.getData1();
                     that.getData2('1', 1);
                     that.events();
-                    var historyStr = that.fundType ? '<div class="item_name">日期</div> <div class="item_name">万份收益</div><div class="item_name">七日年化</div>' : '<div class="item_name">日期</div><div class="item_name">单位净值</div><div class="item_name">累计净值</div><div class="item_name">日涨幅</div>'
+                    var historyStr = that.fundType ? '<div class="item_name">日期</div><div class="item_name">七日年化</div><div class="item_name">万份收益(元)</div>' : '<div class="item_name">日期</div><div class="item_name">单位净值</div><div class="item_name">累计净值</div><div class="item_name">日涨幅</div>'
                     $('.history_area >.history_item').html(historyStr);
 
                     var redeemNavArr = that.fundType ? ['七日年化', '万份收益'] : ['单位净值', '累计净值']
@@ -162,23 +162,33 @@ $(function () {
             // 基金经理
             mui("body").on('mdClick', ".fundManager", function (e) {
                 window.location.href = site_url.pofFundManager_url + '?fundCode=' + fundCode
+            },{
+                htmdEvt: 'publicDetail_01'
             });
             // 基金公司
             mui("body").on('mdClick', ".fundCompany", function (e) {
                 window.location.href = site_url.pofFundCompany_url + '?fundComId=' + fundComId
+            },{
+                htmdEvt: 'publicDetail_02'
             });
             // 基金档案
             mui("body").on('mdClick', ".fundFile", function (e) {
                 window.location.href = site_url.pofFundFile_url + '?secuId=' + secuId + '&fundCode=' + fundCode;
+            },{
+                htmdEvt: 'publicDetail_03'
             });
             // 历史净值查看更多
             mui("body").on('mdClick', ".history_area .history_more", function (e) {
                 window.location.href = site_url.mineHistoryDetail_url + '?fundCode=' + fundCode
+            },{
+                htmdEvt: 'publicDetail_04'
             });
            
             // 交易规则
             mui("body").on('mdClick', ".dealRegArea .rule", function (e) {
                 window.location.href = site_url.pofTransactionRules_url + '?fundCode=' + fundCode
+            },{
+                htmdEvt: 'publicDetail_05'
             });
 
             // 定投
@@ -188,11 +198,15 @@ $(function () {
                 }else{
                     window.location.href = site_url.pofOrdinarySetThrow_url + '?fundCode=' + fundCode + '&fundName=' + fundName + '&type=add';
                 }
+            },{
+                htmdEvt: 'publicDetail_06'
             });
             // 买入
             mui("body").on('mdClick', ".footer .buy_btn", function (e) {
                 window.location.href = site_url.fundTransformIn_url + '?fundCode=' + fundCode + '&fundName=' + fundName;
                
+            },{
+                htmdEvt: 'publicDetail_07'
             });
             //认证
             mui("body").on('mdClick', ".tips .tips-li-right", function (e) {
@@ -217,10 +231,14 @@ $(function () {
                     default:
                         break;
                 }
+            },{
+                htmdEvt: 'publicDetail_08'
             });
             //一键认证
             mui("body").on('mdClick', ".tips .tips-btn", function (e) {
                 window.location.href = site_url.realName_url
+            },{
+                htmdEvt: 'publicDetail_09'
             });
 
             // 七日年华 万份收益
@@ -238,6 +256,8 @@ $(function () {
                 } else {
                     that.getData2(type, time, end);
                 }
+            },{
+                htmdEvt: 'publicDetail_10'
             });
             //月 季 本年 一年 成立以来
             mui("body").on('mdClick', ".lineWrap .tab span ", function (e) {
@@ -251,10 +271,14 @@ $(function () {
                 } else {
                     that.getData2(that.gV.type, time, end);
                 }
+            },{
+                htmdEvt: 'publicDetail_11'
             });
             //人工服务
             mui("body").on('mdClick', ".customerService", function (e) {
                 window.location.href = 'http://zxkf.chtwm.com/webchat/jsp/standard/interfacePools.jsp?queue=105&device=mobile'
+            },{
+                htmdEvt: 'publicDetail_12'
             });
             //分享  -- 跳往原生页面
             mui("body").on('mdClick', ".share_area", function (e) {
@@ -273,6 +297,8 @@ $(function () {
                 if (window.isIOS){
                     window.webkit.messageHandlers.wxShare.postMessage(JSON.stringify(shareObj));
                 }
+            },{
+                htmdEvt: 'publicDetail_13'
             });
             //加自选  
             mui("body").on('mdClick', ".selected_area", function (e) {
@@ -290,17 +316,29 @@ $(function () {
                     prams.collected = '1'
                 }
                 that.getFundCollection(prams)
+            },{
+                htmdEvt: 'publicDetail_14'
             });
 
         },
         //收藏管理--判断是否被收藏
         getFundCollectionInit: function () {
             var that = this;
+            var deviceId ;
+            if(splitUrl['deviceId']){
+                if(splitUrl['deviceId'].includes("cookie")){
+                    deviceId = splitUrl['deviceId'].split("cookie")[0];
+                }else{
+                    deviceId = splitUrl['deviceId'];
+                }
+            }
+            
             // 请求页面数据
             var obj = [{
                 url: site_url.prfFundCollectionQueryCode_api,
                 data: {
-                    publicFundsKeyWords:splitUrl['fundCode']
+                    publicFundsKeyWords:splitUrl['fundCode'],
+                    deviceId:deviceId
                 },
                 needLogin: false,
                 callbackDone: function (json) {
@@ -318,7 +356,14 @@ $(function () {
         //收藏管理
         getFundCollection: function (prams) {
             var that = this;
-            var deviceId = splitUrl['deviceId'].split("cookie")[0];
+            var deviceId ;
+            if(splitUrl['deviceId']){
+                if(splitUrl['deviceId'].includes("cookie")){
+                    deviceId = splitUrl['deviceId'].split("cookie")[0];
+                }else{
+                    deviceId = splitUrl['deviceId'];
+                }
+            }
             var manageList = [];
             manageList.push(prams)
             // 请求页面数据
@@ -439,7 +484,7 @@ $(function () {
             myChart.setOption({
                 tooltip: {
                     trigger: 'axis',
-                    formatter: '<p style="font-size:0.36rem;color: #DAB57C;">{c}%</p><p style="font-size:0.24rem;color:#4A4A4A">{b}</p>',
+                    formatter: '<p style="font-size:0.36rem;color: #DAB57C;">{c}</p><p style="font-size:0.24rem;color:#4A4A4A">{b}</p>',
                     backgroundColor: 'rgba(218,181,124, 0.1)',
                     // renderMode : 'richText', 
                     extraCssText: [7, 15, 15, 15],

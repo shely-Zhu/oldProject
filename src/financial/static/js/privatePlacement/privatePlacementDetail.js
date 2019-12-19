@@ -1146,14 +1146,6 @@ $(function() {
             }, {
                 htmdEvt: 'privatePlacementDetail_01'
             });
-            //点击一键预约逻辑
-            mui("body").on('tap', '.tips-btn', function() {
-
-            });
-            //点击查看明细跳转
-            mui("body").on('tap', '.lookDetailed', function() {
-                window.location.href = site_url.tobeConfirmTransaction_url
-            });
             //折线图点击月份请求数据
             mui("body").on('mdClick', '.lineWrap .time', function() {
                     $('.lineDraw .time').removeClass('active');
@@ -1269,7 +1261,19 @@ $(function() {
             }, {
                 'htmdEvt': 'privatePlacementDetail_08'
             })
-            
+              //点击一键预约逻辑
+            mui("body").on('tap', '.tips-btn', function() {
+
+            },{
+                htmdEvt: 'privatePlacementDetail_09'
+            });
+            //点击查看明细跳转
+            mui("body").on('tap', '.lookDetailed', function() {
+                window.location.href = site_url.tobeConfirmTransaction_url
+            },{
+                htmdEvt: 'privatePlacementDetail_10'
+            });
+            // 产品名称
             mui("body").on('mdClick', '.nameTip', function() {
                 var $this = $(this);
                 var obj = {
@@ -1281,6 +1285,8 @@ $(function() {
                     hideCelButton: true, //为true时隐藏cel按钮，仅使用yes按钮的所有属性
                 };
                 $.elasticLayer(obj)
+            },{
+                htmdEvt: 'privatePlacementDetail_11'
             })
         }
     };

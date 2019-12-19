@@ -4,11 +4,10 @@
  * @Date:   2019-12-16
  * 
  */
-
 require('@pathCommonBase/base.js');
 require('@pathCommonJs/ajaxLoading.js');
-var generateTemplate = require('@pathCommonJsComBus/generateTemplate.js');
 var splitUrl = require('@pathCommonJs/components/splitUrl.js')();
+var moment = require('moment');
 
 $(function () {
     var newFundDetail = {
@@ -39,8 +38,10 @@ $(function () {
 		    		var nowDate = new Date();
 		    		var endDate = new Date(jsonData.issEndDt);
 		    		var totalSeconds = parseInt((endDate - nowDate) / 1000);
+                    // 基金简称 + 基金编码
+                    $("#HeadBarpathName").html("<span>"+jsonData.secuSht+"</span>"+"</br><span class='secuId'>"+jsonData.secuId+"</span>");
+                    that.setHeadLineHeight()
 
-                    $('#HeadBarpathName').html(jsonData.chiName + jsonData.secuId);
                     // 认购期
                     $('.subscriptionDate').html(jsonData.issBgnDt + '-' + jsonData.issEndDt);
                     // 新发基金倒计时
@@ -55,7 +56,7 @@ $(function () {
                     $('.collectDate').html(jsonData.issEndDt.substring(5));
                     // 购买费率
                     $('.purchaseRate').html(jsonData.purchaseRate + '%');
-                    $('.discountRate').html(jsonData.discountRate + '%');
+                    $('.discountRate').html(jsonData.discountRate/100 + '%');
                     // 认购起点
                     $(".buyStart").html(jsonData.tradeLimitList[0].minValue);
 
@@ -104,6 +105,13 @@ $(function () {
 		    }, 1000)
 
             $('.subscriptionTime').html('<span>'+days+'</span>天<span>'+hours+'</span>小时<span>'+minutes+'</span>分<span>'+seconds+'</span>秒')
+        },
+        setHeadLineHeight() {
+            if($("#HeadBarpathName").height() <= $(".backBtn").height()) {
+                $("#HeadBarpathName").removeClass("doubleLines").addClass("singleLine")
+            } else {
+                $("#HeadBarpathName").removeClass("singleLine").addClass("doubleLines")
+            }
         },
         events: function () {
         	var that = this;

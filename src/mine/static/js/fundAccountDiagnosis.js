@@ -78,8 +78,7 @@ $(function() {
                 },
                 needDataEmpty: false,
                 callbackDone: function(json) {
-                    
-                    var data = json.data;
+                    var data = json.data.holdShareList;
                       // 将列表插入到页面上
                       generateTemplate(data, that.$e.holdingBox, that.$e.holdingBoxTemp);
                     
@@ -128,16 +127,15 @@ $(function() {
                 callbackDone: function(json) {
                     if(json.status == '0000'){
                         var data = json.data;
-                        debugger
                         $("#assets-box .stockAssetRatio .num").html(Number(data.stockAssetRatio).toFixed(2) + '%')
                         $("#assets-box .cashAssetRatio .num").html(Number(data.cashAssetRatio).toFixed(2) + '%')
                         $("#assets-box .bondAssetRatio .num").html(Number(data.bondAssetRatio).toFixed(2) + '%')
                         $("#assets-box .otherAssetRatio .num").html(Number(data.otherAssetRatio).toFixed(2) + '%')
                         var assets_width = $("#assets-box").width();
-                        $("#assets-box .stockAssetRatio").css({'width':Number(data.stockAssetRatio)/100*assets_width + 'px'});
+                        $("#assets-box .stockAssetRatio").css({'width':Number(data.stockAssetRatio)/100*assets_width -40+ 'px'});
                         $("#assets-box .cashAssetRatio").css({'width':Number(data.cashAssetRatio)/100*assets_width + 'px'});
                         $("#assets-box .bondAssetRatio").css({'width':Number(data.bondAssetRatio)/100*assets_width + 'px'});
-                        $("#assets-box .otherAssetRatio").css({'width':Number(data.otherAssetRatio)/100*assets_width + 'px'});
+                        $("#assets-box .otherAssetRatio").css({'width':Number(data.otherAssetRatio)/100*assets_width +20+ 'px'});
 
                         $("#assets-box .stockAssetRatio .shape").css({'width':Number(data.stockAssetRatio)/100*assets_width + 'px',
                         'background':'linear-gradient(to left,'+ that.gV.color.color1[0] + ',' + that.gV.color.color1[1] + ')'});
@@ -175,7 +173,9 @@ $(function() {
                 },
                 needDataEmpty: false,
                 callbackDone: function(json) {
-                    
+                    var data = json.data.industryConfigRatioList;
+                    that.gV.heavyBar.barData = data;
+                    that.drawBar(data,"heavy-warehouse-box");
                     
                 },
                 callbackFail: function(json) {
@@ -193,25 +193,45 @@ $(function() {
                 },
                 needDataEmpty: false,
                 callbackDone: function(json) {
-                    
+                    var data = json.data;
+                    var newData = [
+                        {"industryName":"同业存单比例","industryNavRatio":data.cdsRatio},
+                        {"industryName":"中期票据比例","industryNavRatio":data.mtnValueRatio},
+                        {"industryName":"短期融资券比例","industryNavRatio":data.cpValueRatio},
+                        {"industryName":"央行票据比例","industryNavRatio":data.ctrBankBillRatio},
+                        {"industryName":"企债比例","industryNavRatio":data.corpBondRatio},
+                        {"industryName":"可转债比例","industryNavRatio":data.covertBondRatio},
+                        {"industryName":"金融债比例","industryNavRatio":data.finanBondRatio},
+                        {"industryName":"国债比例","industryNavRatio":data.govBondRatio}
+                    ]
+                    that.drawBar(newData,"volume-distribution-box")
                     
                 },
                 callbackFail: function(json) {
                     tipAction(json.msg);
                 }
-            }]
+            }];
             $.ajaxLoading(obj);
         },
         getAccountStyleData: function(t) {
             var that = this;
             var obj = [{
-                url: site_url.bondTypeAndValue_api, 
+                url: site_url.diagnosisAccountStyle_api, 
                 data: {
 
                 },
                 needDataEmpty: false,
                 callbackDone: function(json) {
-                    
+                    var data = json.data;
+                    $(".fl1").html(data[1]);
+                    $(".fl2").html(data[2]);
+                    $(".fl3").html(data[3]);
+                    $(".fl4").html(data[4]);
+                    $(".fl5").html(data[5]);
+                    $(".fl6").html(data[6]);
+                    $(".fl7").html(data[7]);
+                    $(".fl8").html(data[8]);
+                    $(".fl9").html(data[9]);
                     
                 },
                 callbackFail: function(json) {
@@ -229,8 +249,30 @@ $(function() {
                 },
                 needDataEmpty: false,
                 callbackDone: function(json) {
-                    
-                    
+                    var data = json.data;
+                    var fundStyle = data.fundStyle;    //账户风格
+                    var fundType = data.fundType;      //基金风格
+                    var assetConfig = data.assetConfig;  //资产配置比例
+                    var heavyIndustry = data.heavyIndustry;  //重仓行业
+                    var bondIndustry = data.bondIndustry;  //债券类型
+                    var str = "";
+                    if(!!fundStyle){
+                        str = str + "当前账户风格为"+fundStyle + ","
+                    }
+                    if(!!fundType){
+                        str = str +"配置"+fundType+"型基金较多,"
+                    }
+                    if(!!assetConfig){
+                        str = str + assetConfig +"仓位较高,"
+                    }
+                    if(!!heavyIndustry){
+                        str = str + "重仓行业为"+heavyIndustry +","
+                    }
+                    if(!!bondIndustry){
+                        str = str + '债券中'+ bondIndustry +'占比较多。'
+                    }
+                    //var star = "当前账户风格为'fundStyle'，配置‘fundType’型基金较多，‘assetConfig’仓位较高，重仓行业为‘heavyIndustry’，债券中‘bondStyle’占比较多"
+                    that.$e.diagnosis.html(str)
                 },
                 callbackFail: function(json) {
                     tipAction(json.msg);
@@ -323,6 +365,7 @@ $(function() {
             var pieChart = echarts.init(document.getElementById('allocation-pie'));
             var optionData = []
             var pieData = that.gV.pie.pieData
+            console.log("pieData",pieData)
             pieData.forEach(n => {
                 optionData.push(n.name)
             })
@@ -330,12 +373,12 @@ $(function() {
             option = {
                 legend: {
                     orient: 'vertical',
-                    x: 'left',
+                    x: 'right',
                     data: optionData,
                     icon: "roundRect",
                     itemWidth: 10,  // 设置宽度
-                    itemHeight: 10, // 设置高度
-                    itemGap: 15,//设置间距
+                    itemHeight: 8, // 设置高度
+                    itemGap: 5,//设置间距
                     x: '60%',
                     y: '35%',
                     formatter: function (name) {
@@ -401,28 +444,7 @@ $(function() {
                                 show: false
                             }
                         },
-                        data: pieData
-                    },
-                    {
-                        name: '',
-                        type: 'pie',
-                        hoverAnimation: false,
-                        radius: ['40%', '46%'],
-                        center: ['30%', '47%'],
-                        avoidLabelOverlap: false,
-                        label: {
-                            normal: {
-                                show: false,
-                                position: 'inner'
-                            }
-                        },
-                        labelLine: {
-                            normal: {
-                                show: false
-                            }
-                        },
-
-                        data: pieData
+                        data:pieData
                     }
                 ]
             };
@@ -430,15 +452,17 @@ $(function() {
             pieChart.setOption(option);
         },
 
-        drawBar(){
-            debugger
+        drawBar(data,listBoxId){
             var that = this;
-            var barBoxContent = echarts.init(document.getElementById('heavy-warehouse-box'));
+            var barBoxContent = echarts.init(document.getElementById(listBoxId));
             var optionData = [];
-            var barData = that.gV.heavyBar.barData;
-            optionData.forEach(function(item){
-                optionData.push(item)
+            var barData = [];
+            data.forEach(function(item){
+                optionData.push(item.industryName)
             });
+            data.forEach(function(item){
+                barData.push(item.industryNavRatio)
+            })
             option = {
                 tooltip: {
                     trigger: 'axis',
@@ -455,21 +479,23 @@ $(function() {
                 },
                 xAxis: {
                     type: 'value',
-                    boundaryGap: ["0%", "100%"]
+                    boundaryGap: ["0%", "100%"],
+                    axisTick:{show:false}
                 },
                 yAxis: {
                     type: 'category',
-                    data: ['巴西','印尼','美国','印度','中国','世界人口(万)']
+                    data: optionData,
+                    axisTick:{show:false}
                 },
                 series: [
                     {
                         name: '2011年',
                         type: 'bar',
-                        data: [12, 23, 45, 33, 44, 30],
+                        data: barData,
                         itemStyle:{
                             normal:{
                                 color:function(params){
-                                    var colorList = [ '#C1232B','#B5C334','#FCCE10','#E87C25','#27727B','#FE8463'];
+                                    var colorList = [ '#C1232B','#B5C334','#FCCE10','#E87C25','#27727B','#FE8463','#3232CD','#238e68'];
                                     return colorList[params.dataIndex]
                                 },
                                 label:{
@@ -479,7 +505,8 @@ $(function() {
                                 },
                                 barBorderRadius:"10px"
                             }
-                        }
+                        },
+                        barGap:"40%"
                     }
                 ]
             };

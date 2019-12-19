@@ -76,7 +76,12 @@ $(function() {
                         //活动地点
                         if (data.actProvince) {
                             that.$e.city.text(data.actProvince);
-                        } else {
+                            //判断市
+                            if(data.actCity!="北京市"){
+                                that.$e.city.text(data.actProvince+data.actCity);  
+                            }
+                        } 
+                        else {
                             that.$e.city.text(data.actCity);
                         }
                         //报名时间

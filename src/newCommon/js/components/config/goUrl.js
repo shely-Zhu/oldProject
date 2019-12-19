@@ -466,7 +466,7 @@ module.exports = function() {
     //现金宝管理
     this.cashManagement_url = go_url.no_url + '/financial/views/publicPlacement/cashManagement.html';
     //  //普通基金-定投买入
-    // this.ordinarySetThrow_url = go_url.no_url + '/financial/views/publicPlacement/ordinarySetThrow.html';
+    this.ordinarySetThrow_url = go_url.no_url + '/financial/views/publicPlacement/ordinarySetThrow.html';
     // 协议模板--内容页
     this.superContent_url = go_url.no_url + '/allServerResources/model/views/protocolTemplate.html';
     //超宝详情页
