@@ -11,7 +11,8 @@ $(function() {
         $e: {
             adjustmentRecord: $('.adjustmentRecord'), // 调仓记录
             recordList: $('.contentWrap'), // 调仓记录
-            adjustmentTemp: $('#adjustment-template'), // 最新调仓模板
+            adjustmentTemp: $('#adjustment-template'), // 最新调仓模板  货币
+            adjustmentTemp_1: $('#adjustment-template_1'),
             noData: $('.noData'), //没有数据的结构
             listLoading: $('.listLoading'), //所有数据区域，第一次加载的loading结构
         },
@@ -20,6 +21,7 @@ $(function() {
             pageSize: 20,
             listLength: 0,
             fundCode: splitUrl['fundCode'],
+            fundType:splitUrl['fundType'],  //0 非货币 1 货币
         },
         init: function() {
             var that = this;
@@ -37,10 +39,17 @@ $(function() {
             if (!$('.list').hasClass('setHeight')) {
                 $('.list').height(height).addClass('setHeight');
             }
+            var template;
+            if(that.gV.fundType=="1"){
+                //货币
+                template = that.$e.adjustmentTemp
+            }else{
+                template = that.$e.adjustmentTemp_1
+            }
             $.pullRefresh({
                 wrapper: $('.list'),
                 class: 'listItem',
-                template: that.$e.adjustmentTemp,
+                template: template,
                 pageSize: that.gV.pageSize,
                 callback: function(def, t){
                     var obj = [{
@@ -53,6 +62,9 @@ $(function() {
                         needDataEmpty: true,
                         callbackDone: function(json) {     
                             var data = json.data.pageList;
+                            var historyStr = that.gV.fundType=="1" ? '<li>日期</li><li>七日年化</li><li>万份收益(元)</li>' : '<li>日期</li><li>单位净值</li><li>累计净值</li><li>日涨幅</li>'
+                            $(".titleContent").html(historyStr)
+                            //data.fundType = that.fundType;
                             if(that.gV.pageCurrent == 1 && data.length == 0) {
                                 $(".list").css("display", "none")
                                 that.$e.noData.show()
@@ -60,6 +72,15 @@ $(function() {
                                 def && def.resolve( data, that.gV.pageCurrent);
                                 that.gV.pageCurrent++;
                             }
+                            $.each($(".listItem .value"), function (i, v) {
+                                if (Number($(v).text().slice(0, $(v).text().length - 1)) > 0) {
+                                    $(v).addClass('value_red')
+                                } else if(Number($(v).text().slice(0, $(v).text().length - 1)) == 0) {
+                                    $(v).addClass('value_c')
+                                }else{
+                                    $(v).addClass('value_green')
+                                }
+                            });
                         },
                         callbackNoData: function( json ){  
                             def && def.reject( json, that.gV.pageCurrent );
