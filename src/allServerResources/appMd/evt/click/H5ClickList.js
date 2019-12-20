@@ -41,6 +41,15 @@ var clickList = {
 	"diagnosisSearch_01" : { type:'click', evtid: 'diagnosisSearch_01', topic: '查询基金', info: ''} ,
 	"diagnosisSearch_02" : { type:'click', evtid: 'diagnosisSearch_02', topic: '跳转详情页', info: ''} ,
 	"diagnosisSearch_03" : { type:'click', evtid: 'diagnosisSearch_03', topic: '获取专属报告', info: ''} ,
+	// 基金诊断提交申请
+	"fundAccountDiagnosisResult_01": { type:'click', evtid: 'fundAccountDiagnosisResult_01', topic: '提交申请-性别选择', info: ''} ,
+	"fundAccountDiagnosisResult_02": { type:'click', evtid: 'fundAccountDiagnosisResult_02', topic: '提交申请-弹框内容选择', info: ''} ,
+	"fundAccountDiagnosisResult_03": { type:'click', evtid: 'fundAccountDiagnosisResult_03', topic: '提交申请-弹框确定选择', info: ''} ,
+	"fundAccountDiagnosisResult_04": { type:'click', evtid: 'fundAccountDiagnosisResult_04', topic: '提交申请-弹框取消选择', info: ''} ,
+	"fundAccountDiagnosisResult_05": { type:'click', evtid: 'fundAccountDiagnosisResult_05', topic: '提交申请-新增其他的清除按钮', info: ''} ,
+	"fundAccountDiagnosisResult_06": { type:'click', evtid: 'fundAccountDiagnosisResult_06', topic: '提交申请-新增其他新建添加按钮', info: ''} ,
+	"fundAccountDiagnosisResult_07": { type:'click', evtid: 'fundAccountDiagnosisResult_07', topic: '提交申请-提交申请', info: ''} ,
+	"fundAccountDiagnosisResult_08": { type:'click', evtid: 'fundAccountDiagnosisResult_08', topic: '提交申请-基金勾选', info: ''} ,
 	//权益详情
 	"detailsUnderstandingDetails_01" : { type:'click', evtid: 'detailsUnderstandingDetails_01', topic: '权益详情-了解详情', info: ''} ,
 	//成长值记录

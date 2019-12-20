@@ -426,6 +426,7 @@ $(function() {
                 data: {
                     projectId: that.$e.projectId,
                 },
+                contentTypeSearch:true,
                 needLogin: true,
                 callbackDone: function(json) {
                     var that = this;
@@ -1247,7 +1248,7 @@ $(function() {
             mui("body").on('mdClick', '.buyButton', function() {
                 if (that.data.canClick) { //防重复点击
                     if (that.data.buyFreeze == "1" && that.data.lawFreezeStatus == "1") { //如果禁止买入且司法冻结，首先提示
-                    	that.data.canClick = true;
+                    	that.data.canClick = true;//这里必须改成true，否则取消后按钮不生效了。
                         var obj = {
                             title: '',
                             id: 'buyFreeze',

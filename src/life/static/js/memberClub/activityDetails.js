@@ -53,8 +53,6 @@ $(function() {
                         actType: that.gV.actType, //活动类型
                         actId: that.gV.actId, //活动id
                         isNeedLogin: splitUrl['isNeedLogin']
-
-
                     },
                     //async: false,
                     needLogin: that.gV.isNeedLogin,

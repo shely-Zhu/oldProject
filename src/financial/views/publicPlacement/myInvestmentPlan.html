@@ -12,7 +12,7 @@
 
 <body>
     <!--没有数据显示图标-->
-    <!-- @@include('@pathCommonCom/noData/noData.html', {"tipText": "暂无数据"}) -->
+    @@include('@pathCommonCom/noData/noData.html', {"tipText": "暂无数据"})
     <!--加载显示图标-->
     @@include('@pathCommonCom/loading/listLoading.html')
     <!--公共页面头部-->
@@ -20,23 +20,12 @@
         @@include('@pathCommonViews/headBarConfig.html',{"bgColors":"#2C3E77,#273971","showType":"0","pathName":"我的定投计划"})
     </div>
     <div class="wrap">
-        <div class="list" style="width:100%;">
-            <div class="contentWrapper">
-                <ul class="recordList contentWrap">
-                </ul>
-                @@include('@pathCommonViews/goTop.html')
-                <div class="noDataOne">
-                    暂无更多内容
-                </div>
-               
-            </div>
-            
-        </div>
+        <div class="list"></div>
         
         <script id="investmentPlan-template" type="text/x-handlebars-template">
                 {{#each this}}
                     {{#if show}}
-                        <li class="investmentPlan-item" data-id={{scheduledProtocolId}}>
+                        <li class="investmentPlan-item listItem" data-id={{scheduledProtocolId}}>
                             <div class="content-t">
                                 <h2>{{fundName}}</h2>
                                 <span>{{fixStateStr}}<i class="iconfont">&#xe636;</i></span>
@@ -65,13 +54,6 @@
                     {{/if}}
                 {{/each}}
             </script>
-        <div class="noDataMore">
-            @@include('@pathCommonCom/noData/noData.html', {"tipText": "暂无数据"})
-        </div>
-        <div class="nothing">
-            <img src="/common/img/empty.png" alt="">
-            <p>暂无计划</p>
-        </div>
         <div class="endPlan">
             <a href="javascript:;" class="goEndPlan">查看已终止的定投（<span class="stopPlan"></span>）<i class="iconfont">&#xe636;</i></a>
         </div>
