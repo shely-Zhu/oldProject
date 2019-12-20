@@ -137,7 +137,8 @@ $(function () {
             var obj = [{ 
                 url: site_url.fundMaterial_api,
                 data: {
-                    fundCode:that.gV.fundCode
+					fundCode:that.gV.fundCode,
+					// fundCode:"003075",
                 },
                 //async: false,
                 needDataEmpty: true,
