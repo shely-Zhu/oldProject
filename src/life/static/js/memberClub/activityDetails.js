@@ -193,7 +193,7 @@ $(function() {
                                 hideCelButton: false,
                                 zIndex: 100,
                                 needYesHref: true, //是否需要把确定按钮改成a标签，默认false
-                                yesHref: site_url.riskAppraisal_url, //确定按钮a链接的默认href
+                                yesHref: site_url.riskAppraisal_url+"?type=private", //确定按钮a链接的默认href
                                 callback: function(t) {
 
                                 },
@@ -209,7 +209,7 @@ $(function() {
                                 hideCelButton: false,
                                 zIndex: 100,
                                 needYesHref: true, //是否需要把确定按钮改成a标签，默认false
-                                yesHref: site_url.qualifiedInvestor_url, //确定按钮a链接的默认href
+                                yesHref: site_url.qualifiedInvestor_url+"?type=private", //确定按钮a链接的默认href 产品确认跳私募
                                 callback: function(t) {
 
                                 },
@@ -241,7 +241,7 @@ $(function() {
                                 hideCelButton: false,
                                 zIndex: 100,
                                 needYesHref: true, //是否需要把确定按钮改成a标签，默认false
-                                yesHref: site_url.realName_url, //确定按钮a链接的默认href
+                                yesHref: site_url.realIdcard_url, //确定按钮a链接的默认href  身份证上传
                                 callback: function(t) {
 
                                 },

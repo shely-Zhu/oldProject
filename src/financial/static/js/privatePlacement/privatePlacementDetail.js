@@ -101,7 +101,8 @@ $(function() {
                         $('.performanceComparison').removeClass('hide');
                         $('.lineWrap').addClass('hide');
 
-                        // $(".invSolid").show();
+                        that.queryBenefitLevel();
+
                         if (Number(businessCompareReferenceMax) <= Number(businessCompareReferenceMin)) {
                             if (businessCompareReferenceMin != '') {
                                 $(".fixedIncome .netValue").html(businessCompareReferenceMin + "%");
@@ -414,6 +415,41 @@ $(function() {
 
 
                 },
+            }];
+            $.ajaxLoading(obj);
+
+        },
+        queryBenefitLevel:function(){
+            var that = this;
+            var obj = [{
+                url: site_url.prvLevel_api,
+                data: {
+                    projectId: that.$e.projectId,
+                },
+                contentTypeSearch:true,
+                needLogin: true,
+                callbackDone: function(json) {
+                    var that = this;
+
+                    $.each(json, function(i, el) {
+                        if (el.benifitUpperLimit == "0" || !el.benifitUpperLimit) {
+                            el.bool = false;
+                        } else {
+                            el.bool = true;
+                        }
+                    })
+                    
+                    var tplm = $("#prvLevel").html();
+                    var template = Handlebars.compile(tplm);
+                    $(".performance").html(template(json));
+                    
+                },
+                callbackNoData: function(json) {
+                    tipAction(json.message);
+                },
+                callbackFail: function(json) {
+                    tipAction(json.message);
+                }
             }];
             $.ajaxLoading(obj);
 
@@ -831,9 +867,9 @@ $(function() {
                 jumpUrl = site_url.realIdcard_url
             } else if (v.conditionJump == 12) { //跳转到人脸识别页面
                 jumpUrl = site_url.realFaceCheck_url
-            } else if (v.conditionJump == 13) { //跳转到线下申请状态页面
+            } else if (v.conditionJump == "13b") { //跳转到线下申请状态页面
                 jumpUrl = site_url.realOffline_url
-            } else if (v.conditionJump == 14) { //跳转到视频双录状态页面
+            } else if (v.conditionJump == 14 || v.conditionJump == "13a") { //跳转到视频双录状态页面
                 jumpUrl = site_url.realVideoTranscribe_url + '?type=default'
             }
             return jumpUrl;
@@ -883,8 +919,8 @@ $(function() {
                             that.$e.realLi.eq(e * 1).find(".bank-status").html(v.statusDesc);
                             jumpUrl = that.getJumpUrl(v); //获取跳转Url。
                         }
-                        //对应的条件认证到哪里
-                        that.$e.realLi.eq(e * 1).find(".tips-li-right").on('mdClick', function() {
+                        //						对应的条件认证到哪里
+                        that.$e.realLi.eq(e * 1).find(".tips-li-right").on('tap', function() {
                                 if (v.conditionType == "1" && that.data.custType != "1") { //如果是实名认证跳转，机构不支持线上开户，弹框提示
                                     $("#tips-wrap").hide();
                                     var obj = {
@@ -900,9 +936,7 @@ $(function() {
                                 } else {
                                     window.location.href = jumpUrl;
                                 }
-                            }, {
-                            htmdEvt: 'privatePlacementDetail_12'
-                        })
+                            })
                             //一键认证调往哪里
                         mui("body").on('mdClick', '.tips-btn', function() {
                             if (isReal && that.data.custType != "1") { //如果是实名认证跳转，机构不支持线上开户，弹框提示,一键认证正好也是链接也是实名认证也弹框
@@ -1213,7 +1247,7 @@ $(function() {
             mui("body").on('mdClick', '.buyButton', function() {
                 if (that.data.canClick) { //防重复点击
                     if (that.data.buyFreeze == "1" && that.data.lawFreezeStatus == "1") { //如果禁止买入且司法冻结，首先提示
-                    	that.data.canClick = true;
+                    	that.data.canClick = true;//这里必须改成true，否则取消后按钮不生效了。
                         var obj = {
                             title: '',
                             id: 'buyFreeze',

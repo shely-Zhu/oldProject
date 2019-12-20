@@ -11,19 +11,16 @@ require('@pathCommonJs/ajaxLoading.js');
 //下拉加载更多
 // require('@pathCommonJs/scrollFullPage.js');
 // 切换
-require('@pathCommonJsCom/tabScroll.js');
 require('@pathCommonJsCom/goTopMui.js');
-require('@pathCommonJs/components/elasticLayer.js');
-require('@pathCommonJs/components/elasticLayerTypeFive.js');
 var generateTemplate = require('@pathCommonJsComBus/generateTemplate.js');
 var tipAction = require('@pathCommonJs/components/tipAction.js');
+require('@pathCommonCom/pullRefresh/pullRefresh.js');
 $(function () {
     var somePage = {
         $e: {
             recordList: $('.contentWrap'), // 调仓记录
             investmentPlanTemp: $('#investmentPlan-template'), // 最新调仓模板
-            noDataOne: $('.noDataOne'), //没有数据的结构
-            nothing: $('.nothing'), //没有计划
+            noData: $(".noData"),
             endPlan: $(".endPlan"),  //已终止的定投计划
             listLoading: $('.listLoading'), //所有数据区域，第一次加载的loading结构
 
@@ -38,16 +35,102 @@ $(function () {
         },
         init: function () {
             var that = this;
-            that.getUserInfo();
             that.initMui();
+            that.getUserInfo();
             that.events();
         },
         //初始化mui的上拉加载
         initMui: function () {
             var that = this;
             var height = windowHeight - $(".newPlan").height() - $(".topTitle").height();
-            // var height = windowHeight - $(".title").height() - $(".topTitle").height() - $(".newPlan").height() - $(".noDataOne").height();
-            if (!$('.list .contentWrapper').hasClass('setHeight')) {
+            if (!$('.list').hasClass('setHeight')) {
+                $('.list').height(height).addClass('setHeight');
+            }
+            $.pullRefresh({
+                wrapper: $('.list'),
+                class: 'listItem',
+                template: that.$e.investmentPlanTemp, 
+                pageSize: that.gV.pageSize,
+                callback: function(def, t){
+                    var obj = [{
+                        url: site_url.protocolList_api,
+                        data: {
+                            "pageNo": that.gV.pageCurrent, //非必须，默认为1
+                            "pageSize": 10,//非必须，默认为10
+                        },
+                        needDataEmpty: true,
+                        needLoading: false,
+                        callbackDone: function(json) {     
+                            var data = json.data.pageList;
+                            if(that.gV.pageCurrent == 1 && data.length == 0) {
+                                $(".list").css("display", "none")
+                                that.$e.noData.show()
+                            } else {
+                                for (var i = 0; i < data.length; i++) {
+                                    if (data[i].fixState == 'A') {
+                                        data[i].fixStateStr = "进行中"
+                                        data[i].show = true
+                                    } else if (data[i].fixState == 'H') {
+                                        data[i].fixStateStr = "已终止"
+                                        data[i].show = false
+                                        that.gV.fixStateNum ++
+                                        that.gV.stopPlanList.push(data[i])
+                                    } else {
+                                        data[i].fixStateStr = "暂停"
+                                        data[i].show = false
+                                    }
+                                    if(data[i].totalTradeTimes.length == 0){
+                                        data[i].totalTradeTimes_s = false
+                                    }else{
+                                        data[i].totalTradeTimes_s = true
+                                    }
+                                }
+                                if (that.gV.fixStateNum > 0) {
+                                    that.$e.endPlan.show()
+                                    var height = windowHeight - $(".newPlan").height() - $(".topTitle").height() - $(".endPlan").height();
+                                    $('.list .contentWrapper').height(height)
+                                    $(".stopPlan").html(that.gV.fixStateNum)
+
+                                } else {
+                                    that.$e.endPlan.hide()
+                                }
+
+                                if (that.gV.pageCurrent == 1) {
+                                    for (var i = 0; i < data.length; i++) {
+                                        if (data[i].fixStateStr == "暂停") {
+                                            $(".content-t span").eq(i).addClass("suspend")
+                                        } else {
+
+                                        }
+                                    }
+                                } else {
+                                    for (var i = 0; i < data.length; i++) {
+                                        if (data[i].fixStateStr == "暂停") {
+                                            $(".content-t span").eq(i + 15 * that.gV.pageCurrent - 15).addClass("suspend")
+                                        } else {
+
+                                        }
+                                    }
+                                }
+                                def && def.resolve( data, that.gV.pageCurrent);
+                                that.gV.pageCurrent++;
+                            }
+                        },
+                        callbackNoData: function( json ){
+                            if(that.gV.pageCurrent == 1) {
+                                $(".list").css("display", "none")
+                                that.$e.noData.show()
+                            }
+                            def && def.reject( json, that.gV.pageCurrent );
+                        },
+                        callbackFail: function(json) {
+                            def && def.reject( json, that.gV.pageCurrent );
+                        },
+                    }];
+                    $.ajaxLoading(obj); 
+                }
+            })
+            /*if (!$('.list .contentWrapper').hasClass('setHeight')) {
                 $('.list .contentWrapper').height(height).addClass('setHeight');
             }
             mui.init({
@@ -83,9 +166,9 @@ $(function () {
 
                 //为$id添加hasPullUp  class
                 $('.list').addClass('hasPullUp');
-            });
+            });*/
         },
-        getData: function (t) {
+        /*getData: function (t) {
             var that = this;
 
             var obj = [{
@@ -98,6 +181,7 @@ $(function () {
                 needDataEmpty: true,
                 needLoading: false,
                 callbackDone: function (json) {
+                    debugger
                     that.$e.listLoading.hide();
                     var data;
                     if (json.data.pageList.length == 0) { // 没有记录不展示
@@ -182,7 +266,8 @@ $(function () {
 
                 },
                 callbackNoData:function(json){
-					tipAction(json.message);
+                    that.$e.nothing.show();
+					//tipAction(json.message);
                 },
                 callbackFail:function(json){
 					tipAction(json.message);
@@ -190,7 +275,7 @@ $(function () {
 
             }];
             $.ajaxLoading(obj);
-        },
+        },*/
         // 获取认证信息
         getUserInfo: function() {
             var that = this;

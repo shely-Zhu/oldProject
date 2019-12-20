@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2019-11-26 14:42:56
- * @LastEditTime : 2019-12-19 16:56:20
+ * @LastEditTime : 2019-12-20 11:05:25
  * @LastEditors  : Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \htjf-app\src\financial\static\js\publicPlacement\cashTransformOut.js
@@ -431,6 +431,11 @@ $(function () {
 			//$(".tranoutAllMoney").on('click',function(){
 				$(".msecond input").val(that.gv.transformTotalMoney);
 				that.gv.transformMoney = that.gv.transformTotalMoney
+				if($(".item2 .iconfont").hasClass("check")){
+					that.$e.confirmBtn.removeAttr("disabled")
+				}else{
+					that.$e.confirmBtn.attr('disabled',true);
+				}
 			}, {
 				htmdEvt: 'cashTransformOut_11'
 			})
