@@ -866,9 +866,9 @@ $(function() {
                 jumpUrl = site_url.realIdcard_url
             } else if (v.conditionJump == 12) { //跳转到人脸识别页面
                 jumpUrl = site_url.realFaceCheck_url
-            } else if (v.conditionJump == 13) { //跳转到线下申请状态页面
+            } else if (v.conditionJump == "13b") { //跳转到线下申请状态页面
                 jumpUrl = site_url.realOffline_url
-            } else if (v.conditionJump == 14) { //跳转到视频双录状态页面
+            } else if (v.conditionJump == 14 || v.conditionJump == "13a") { //跳转到视频双录状态页面
                 jumpUrl = site_url.realVideoTranscribe_url + '?type=default'
             }
             return jumpUrl;
