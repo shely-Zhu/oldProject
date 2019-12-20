@@ -3,14 +3,14 @@
  * @Date: 2019-11-26 14:42:56
 <<<<<<< Updated upstream
 <<<<<<< Updated upstream
- * @LastEditTime: 2019-12-18 14:56:55
+ * @LastEditTime : 2019-12-20 11:13:52
 =======
  * @LastEditTime: 2019-12-18 14:52:02
 >>>>>>> Stashed changes
 =======
  * @LastEditTime: 2019-12-18 14:52:02
 >>>>>>> Stashed changes
- * @LastEditors: Please set LastEditors
+ * @LastEditors  : Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \htjf-app\src\financial\static\js\publicPlacement\redemptionBuy.js
  */
@@ -201,14 +201,17 @@ $(function() {
                         $('.elasticLayer.transOutRule').show()
                         $(".elasticContent").html(res.message);
                     }
+                    that.getElements.confirmBtn.removeAttr("disabled"); 
                 },
                 callbackNoData:function(json){
                     $("#passwordWrap").hide();
                     tipAction(json.message);
+                    that.getElements.confirmBtn.removeAttr("disabled"); 
                 },
                 callbackFail:function(json){
                     $("#passwordWrap").hide();
                     tipAction(json.message);
+                    that.getElements.confirmBtn.removeAttr("disabled"); 
                 }
                 
 
@@ -316,7 +319,8 @@ $(function() {
                 $(".fake-box input").val('');
                 $(".msecond input").blur();
                 $("#passwordWrap").show();
-                payPass(that.cancelOrder)
+                payPass(that.cancelOrder);
+                 that.getElements.confirmBtn.attr('disabled',true)
             }, {
                 htmdEvt: 'redemptionBuy_08'
             })

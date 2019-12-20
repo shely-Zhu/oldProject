@@ -228,7 +228,7 @@ $(function() {
                         pageList.map(function(e){
                             e.tobe = that.gV.current_index == 0 ? true : false;
                             if(that.gV.current_index == "1"){
-                                if(e.taconfirmFlag == "1"){
+                                if(e.fundBusinCode == "098"){
                                     e.taconfirmFlagStatu = true
                                 }
                             }

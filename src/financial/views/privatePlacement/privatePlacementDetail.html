@@ -140,10 +140,8 @@
 						<!-- 业绩比较基准说明 -->
 						<div class="textContainner performanceComparison hide">
 							<div class="textTitle">业绩比较基准说明</div>
-							<div class="detailText">
-								<div class="productRate ">100万(含)～300万<span></span></div>
-								<div class="productRate ">300万(含)～1000万<span></span></div>
-								<div class="productRate ">1000万<span></span></div>
+							<div class="detailText performance">
+								
 							</div>
 						</div>
 
@@ -355,6 +353,17 @@
 					<!--{{/if}}-->
 		{{/each}}
 	</script>
+
+	<script id="prvLevel" type="text/x-handlebars-template">
+	  {{! 左侧页面列表}}
+		{{#each this}}
+			{{#if bool}}
+				<div class="productRate"><p class="invRange">{{benifitLowerLimit}}万(含)-{{benifitUpperLimit}}万</p><p class="invResult">{{benifitRate}}%</p></div>
+			{{else}}
+				<div class="productRate"><p class="invRange">{{benifitLowerLimit}}万(含)以上</p><p class="invResult">{{benifitRate}}%</p></div>
+			{{/if}}
+		{{/each}}
+	</script> 
 	
 </body>
 	@@include('@pathInclude/views/footer.html')
