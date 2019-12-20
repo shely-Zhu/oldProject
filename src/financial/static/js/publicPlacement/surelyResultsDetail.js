@@ -79,7 +79,6 @@ $(function() {
           $("#HeadBarpathName").html('赎回结果')
           that.getData();  //查询结果可能要根据flag来
         }
-        
         that.event()
         
       },
