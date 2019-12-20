@@ -522,7 +522,7 @@ $(function () {
                 grid: {
                     top: '10%',
                     left: '5%',
-                    right: '5%',
+                    right: '11%',
                     bottom: '10%',
                     containLabel: true
                 },
@@ -537,7 +537,9 @@ $(function () {
                     axisLabel: {
                         show: true,
                         color: '#9B9B9B',   //这里用参数代替了
-                        margin: 20
+                        margin: 20,
+                        // align: 'right',
+                        showMaxLabel:true,
                     },
                     axisTick: {
                         show: false
