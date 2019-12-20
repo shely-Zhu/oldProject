@@ -117,10 +117,10 @@ $(function () {
                                 that.gV.pageCurrent++;
                             }
                         },
-                        callbackNoData: function( json ){  
+                        callbackNoData: function( json ){
                             if(that.gV.pageCurrent == 1) {
                                 $(".list").css("display", "none")
-                                that.$e.noData.show()
+                                that.$e.nothing.show()
                             }
                             def && def.reject( json, that.gV.pageCurrent );
                         },
@@ -182,6 +182,7 @@ $(function () {
                 needDataEmpty: true,
                 needLoading: false,
                 callbackDone: function (json) {
+                    debugger
                     that.$e.listLoading.hide();
                     var data;
                     if (json.data.pageList.length == 0) { // 没有记录不展示
@@ -266,7 +267,8 @@ $(function () {
 
                 },
                 callbackNoData:function(json){
-					tipAction(json.message);
+                    that.$e.nothing.show();
+					//tipAction(json.message);
                 },
                 callbackFail:function(json){
 					tipAction(json.message);
