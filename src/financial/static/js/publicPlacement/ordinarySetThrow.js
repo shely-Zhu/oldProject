@@ -945,6 +945,9 @@ $(function () {
 			}, {
 				htmdEvt: 'ordinarySetThrow_09'
 			}) ;
+			mui("body").on('mdClick','setGoUrl_1',function(){
+				window.location.href = site_url.superContent_url + '?id=63'
+			})
 			//  ---忘记密码
 			mui("body").on('mdClick','#passwordWrap .forgetP',function(){
 				//跳往原生页面去修改密码
