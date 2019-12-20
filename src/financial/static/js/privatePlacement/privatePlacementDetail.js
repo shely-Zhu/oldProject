@@ -426,6 +426,7 @@ $(function() {
                 data: {
                     projectId: that.$e.projectId,
                 },
+                contentTypeSearch:true,
                 needLogin: true,
                 callbackDone: function(json) {
                     var that = this;
