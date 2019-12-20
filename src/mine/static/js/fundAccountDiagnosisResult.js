@@ -393,6 +393,7 @@ $(function() {
         },
        events:function(){
             var that = this;
+            // 性别选择
             mui("body").on("mdClick",".mui-icon-arrowright",function(){
                 var type = $(this).attr("type");
                 $('.popup').css('display', 'block')
@@ -418,7 +419,10 @@ $(function() {
                     that.gV.typeInput = "loss";
                 }
             
+            },{
+                'htmdEvt': 'fundAccountDiagnosisResult_01'
             })
+            // 弹框内容选择
             mui("body").on("mdClick",".selectItemList ul li",function(){
                 var type = $(this).attr("type");
                 var val = $(this).find("span")[0].textContent;
@@ -426,6 +430,8 @@ $(function() {
                 $(this).find(".radioCheckItemImg").show();
                 $(this).siblings().find(".radioCheckItemImg").hide();
                 $(".popup_true").attr("type",type).attr("val",val).attr("dicCode",dicCode);
+            },{
+                'htmdEvt': 'fundAccountDiagnosisResult_02'
             })
 
             //弹出框确定按钮
@@ -522,10 +528,14 @@ $(function() {
                 }
                 $(this).attr("type","")
                 $('.popup').css('display', 'none')
+            },{
+                'htmdEvt': 'fundAccountDiagnosisResult_03'
             })
             //弹出框取消按钮
             mui("body").on("mdClick",".popup_cancel",function(){
                 $('.popup').css('display', 'none')
+            },{
+                'htmdEvt': 'fundAccountDiagnosisResult_04'
             })
 
             //新增其他的清除按钮
@@ -554,11 +564,15 @@ $(function() {
                  }else{
                      $(".addOtherFundcodeBox_noData").show();
                  }
+            },{
+                'htmdEvt': 'fundAccountDiagnosisResult_05'
             })
 
             //新增其他新建添加按钮
             mui("body").on("mdClick",".addOtherFundcodeBox .mui-icon-plusempty",function(){
                 window.location.href = site_url.addAccountDiagnosisResult_url;
+            },{
+                'htmdEvt': 'fundAccountDiagnosisResult_06'
             })
 
            //提交申请
@@ -568,7 +582,9 @@ $(function() {
             }else if(that.gV.applyType == 'edit'){
                 that.updateFundDiagnosisApply()
             }
-           })
+           },{
+                'htmdEvt': 'fundAccountDiagnosisResult_07'
+            })
 
            //基金勾选
             mui("body").on("mdClick",".templateTransferFundsList li input",function(){
@@ -609,6 +625,8 @@ $(function() {
             
 
                 console.log("8888",status)
+            },{
+                'htmdEvt': 'fundAccountDiagnosisResult_08'
             })
        },
       

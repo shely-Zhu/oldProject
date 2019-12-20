@@ -184,7 +184,7 @@ $(function () {
 						}
 						for (var i = 0; i < tradeLimitList2.length; i++) {
 							if(i + 1 == tradeLimitList2.length){
-								that.$el.transformInput.attr('placeholder',tradeLimitList2[i].minValue)
+								that.$el.transformInput.attr('placeholder',tradeLimitList2[i].minValue +"元起")
 								that.$el.transformInput.attr('min',Number(tradeLimitList2[i].minValue).toFixed(0))
 								that.$el.transformInput.attr('max',Number(tradeLimitList2[i].maxValue).toFixed(0))
 								that.gV.minValue =   Number(tradeLimitList2[i].minValue).toFixed(0)  // 起投金额

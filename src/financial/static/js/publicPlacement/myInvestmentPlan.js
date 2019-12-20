@@ -20,8 +20,7 @@ $(function () {
         $e: {
             recordList: $('.contentWrap'), // 调仓记录
             investmentPlanTemp: $('#investmentPlan-template'), // 最新调仓模板
-            noDataOne: $('.noDataOne'), //没有数据的结构
-            nothing: $('.nothing'), //没有计划
+            noData: $(".noData"),
             endPlan: $(".endPlan"),  //已终止的定投计划
             listLoading: $('.listLoading'), //所有数据区域，第一次加载的loading结构
 
@@ -120,7 +119,7 @@ $(function () {
                         callbackNoData: function( json ){
                             if(that.gV.pageCurrent == 1) {
                                 $(".list").css("display", "none")
-                                that.$e.nothing.show()
+                                that.$e.noData.show()
                             }
                             def && def.reject( json, that.gV.pageCurrent );
                         },
