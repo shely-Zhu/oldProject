@@ -26,6 +26,7 @@ $(function() {
         $e: {
             historyTemplate:$("#historyTemplate"), //申请历史模板
             historyBox:$(".historyBox"), //申请历史容器
+            noData: $(".noData")
         },
         gV: {
               dataPickData:"", //基金代码
@@ -57,6 +58,9 @@ $(function() {
                     }
                     generateTemplate(that.gV.listData, that.$e.historyBox, that.$e.historyTemplate);
                     console.log("9090",that.gV.listData)
+                },
+                callbackNoData: function() {
+                    that.$e.noData.show()
                 }
             }];
             $.ajaxLoading(obj);
