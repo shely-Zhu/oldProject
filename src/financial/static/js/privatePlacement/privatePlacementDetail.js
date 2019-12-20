@@ -883,7 +883,7 @@ $(function() {
                             that.$e.realLi.eq(e * 1).find(".bank-status").html(v.statusDesc);
                             jumpUrl = that.getJumpUrl(v); //获取跳转Url。
                         }
-                        //						对应的条件认证到哪里
+                        //对应的条件认证到哪里
                         that.$e.realLi.eq(e * 1).find(".tips-li-right").on('mdClick', function() {
                                 if (v.conditionType == "1" && that.data.custType != "1") { //如果是实名认证跳转，机构不支持线上开户，弹框提示
                                     $("#tips-wrap").hide();
