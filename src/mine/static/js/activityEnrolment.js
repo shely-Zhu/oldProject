@@ -206,6 +206,7 @@ $(function() {
                 needDataEmpty: true,
                 callbackDone: function(json) {
                     $(".netLoading").hide()
+                    debugger
                     var data = json.data;
                     var wxShare = {
                             type: 'auto',
