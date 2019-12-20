@@ -25,6 +25,8 @@ var fixScroll = function(num,oHeight){//ios浏览器需要滚动
 		window.scrollTo(0, 0);
 	}else if(isiOS && num == 2){
 //		window.scrollTo(0, 1000);//滚动到可是区域
+
+		document.activeElement.scrollIntoViewIfNeeded();//将不在浏览器窗口的可见区域内的元素滚动到浏览器窗口的可见区域。 如果该元素已经在浏览器窗口的可见区域内，则不会发生滚动
 		document.querySelectorById('#passwordWrap').scroll(0,1000)//iphonex可以滚动到顶部
 //		if(!!window.scrollTo){
 //			alert("123")
