@@ -1,8 +1,8 @@
 <!--
  * @Author: your name
  * @Date: 2019-12-12 19:21:07
- * @LastEditTime: 2019-12-18 19:11:38
- * @LastEditors: Please set LastEditors
+ * @LastEditTime : 2019-12-20 13:56:36
+ * @LastEditors  : Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \htjf-app\src\account\views\public\superRecord.html
  -->
@@ -61,17 +61,26 @@
             {{#if taconfirmFlagStatu}}
 
             <div class="tit">{{fundName}}<span>[快速]</span></div>
-            {{else}}
-            <div class="tit">{{fundName}}</div>
-            {{/if}}
             <div class="mon">
                 {{#if tobe}}
                 +
                 {{else}}
                 -
                 {{/if}}
-                {{balance}}元
-            </div>             
+                {{sharesMask}}元
+            </div> 
+            {{else}}
+            <div class="tit">{{fundName}}</div>
+            <div class="mon">
+                {{#if tobe}}
+                +
+                {{else}}
+                -
+                {{/if}}
+                {{balanceMask}}元
+            </div> 
+            {{/if}}
+                       
         </div>
         <div class="second">
             <div class="tim">{{originalDate}} {{orderDate}}</div>
