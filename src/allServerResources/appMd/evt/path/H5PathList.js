@@ -195,6 +195,13 @@ var pathList = {
 	"/mine/views/transactionDetails.html":{ evtid: '170', topic: '交易明细', info: ''},
 	"/mine/views/examplePage.html":{ evtid: '170', topic: '专题模板', info: ''},
 	"/mine/views/mineRegulatoryAccounts.html":{ evtid: '170', topic: '公墓监管账户', info: ''},
+	"/mine/views/fundDiagnosis/addAccountDiagnosisResult.html":{ evtid: '170', topic: '添加已购买基金', info: ''},
+	"/mine/views/fundDiagnosis/applyHistory.html":{ evtid: '170', topic: '申请记录', info: ''},
+	"/mine/views/fundDiagnosis/diagnosisDetail.html":{ evtid: '170', topic: '基金诊断详情', info: ''},
+	"/mine/views/fundDiagnosis/diagnosisSearch.html":{ evtid: '170', topic: '基金诊断查询', info: ''},
+	"/mine/views/fundDiagnosis/fundAccountDiagnosis.html":{ evtid: '170', topic: '基金账户诊断', info: ''},
+	"/mine/views/fundDiagnosis/fundAccountDiagnosisResult.html":{ evtid: '170', topic: '提交申请', info: ''},
+	"/mine/views/fundDiagnosis/hotDiagnosis.html":{ evtid: '170', topic: '热门诊断', info: ''},
 	//homePage
 	"/homePage/views/fortuneCollege/fortuneCollegeList.html" :{ evtid: '', topic: '财富学院首页', info: ''} ,
 	"/homePage/views/fortuneCollege/fortuneFlowKnown.html" :{ evtid: '', topic: '财富流向早知道', info: ''} ,

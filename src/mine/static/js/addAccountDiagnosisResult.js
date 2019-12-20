@@ -44,6 +44,7 @@ $(function() {
             var dtPicker = new mui.DtPicker({
                 type:'date'
             }); 
+            // 购买日期选择
             mui("body").on("mdClick",".mui-icon-arrowright",function(){
                 var type = $(this).attr("type");
                 $('.popup').css('display', 'block')
@@ -52,6 +53,8 @@ $(function() {
                     that.gV.dataPickData=selectItems.value;
                     $('.popup').css('display', 'none')
                 })
+            },{
+                'htmdEvt': 'addAccountDiagnosisResult_01'
             })
             dtPicker.hide(function (selectItems) { 
                 that.gV.dataPickData=selectItems.value;
@@ -62,6 +65,8 @@ $(function() {
                 $('.popup').css('display', 'none')
                 console.log(that.gV.dataPickData)
                 $(".dataPick")[0].textContent = that.gV.dataPickData
+            },{
+                'htmdEvt': 'addAccountDiagnosisResult_02'
             })
             //确认按钮
             mui("body").on("mdClick",".comfirmButtom .mui-btn-warning",function(){
@@ -97,6 +102,8 @@ $(function() {
                 }else{
                     $(".warmMessage").show()
                 }
+            },{
+                'htmdEvt': 'addAccountDiagnosisResult_03'
             })
          
        },
