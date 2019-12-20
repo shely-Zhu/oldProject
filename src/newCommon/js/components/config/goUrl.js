@@ -392,6 +392,8 @@ module.exports = function() {
 
     // 转入，转出结果页面，定投结果
     this.pofSurelyResults_url = go_url.no_url + '/financial/views/publicPlacement/surelyResults.html';
+     //定投结果页
+     this.surelyResultShot_url = go_url.no_url + '/financial/views/publicPlacement/surelyResultShot.html'
     // 转入页面
     this.pofCashTransformIn_url = go_url.no_url + '/financial/views/publicPlacement/cashTransformIn.html';
     // 转出页面

@@ -100,6 +100,8 @@ $(function() {
                         }
                     },
                     axisLabel: {
+                        /*showMinLabel: true,
+                        showMaxLabel: true,*/
                         show: true,
                         color: '#9B9B9B', //这里用参数代替了
                         margin: 20,
@@ -109,8 +111,8 @@ $(function() {
                     }
                 },
                 yAxis: {
-                    /*max:that.gL.maxNum,
-                    min:that.gL.minNum,*/
+                    max:that.gL.maxNum,
+                    min:that.gL.minNum,
                     axisTick: {
                         show: false
                     },

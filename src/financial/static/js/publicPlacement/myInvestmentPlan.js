@@ -22,6 +22,7 @@ $(function () {
             investmentPlanTemp: $('#investmentPlan-template'), // 最新调仓模板
             noData: $(".noData"),
             endPlan: $(".endPlan"),  //已终止的定投计划
+            stopPlan:$(".stoppPlan"), //已暂停的定投计划
             listLoading: $('.listLoading'), //所有数据区域，第一次加载的loading结构
 
         },
@@ -30,7 +31,9 @@ $(function () {
             pageSize: 10,
             listLength: 0,
             fixStateNum : 0,
+            stopNum:0,//暂停的定投计划数
             stopPlanList:[],    // 已终止的定投计划
+            stopPlanList_1:[],  //已暂停的定投计划
             accountType:"",
         },
         init: function () {
@@ -78,6 +81,8 @@ $(function () {
                                     } else {
                                         data[i].fixStateStr = "暂停"
                                         data[i].show = false
+                                        that.gV.stopNum ++
+                                        that.gV.stopPlanList_1.push(data[i])
                                     }
                                     if(data[i].totalTradeTimes.length == 0){
                                         data[i].totalTradeTimes_s = false
@@ -93,6 +98,14 @@ $(function () {
 
                                 } else {
                                     that.$e.endPlan.hide()
+                                }
+                                if(that.gV.stopNum>0){
+                                    that.$e.stopPlan.show()
+                                    var height = windowHeight - $(".newPlan").height() - $(".topTitle").height() - $(".endPlan").height();
+                                    $('.list .contentWrapper').height(height)
+                                    $(".stopPlan_1").html(that.gV.stopNum)
+                                }else{
+                                    that.$e.stopPlan.hide()
                                 }
 
                                 if (that.gV.pageCurrent == 1) {

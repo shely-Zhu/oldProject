@@ -70,7 +70,12 @@ $(function () {
             if(data.tradeApplyStatus == '20' || data.tradeApplyStatus == '22' || data.tradeApplyStatus == '23' || data.tradeApplyStatus == '25'){   //转入中  || 转出中   || 成功
               $(".resultTop").show()
               //状态为转入中和转入成功全部统一为转入中
-              that.$e.succedText.html("转入中")
+              if(that.gV.flag =="out"){
+                that.$e.succedText.html("转出中")
+              }else if(that.gV.flag == "into"){
+                that.$e.succedText.html("转入中")
+              }
+              
               $(".resultTopTwo").hide()
               if(that.gV.flag == 'into'){   // 转入
                 $("#HeadBarpathName").html('转入结果')
