@@ -109,8 +109,8 @@ $(function() {
                     }
                 },
                 yAxis: {
-                    /*max:that.gL.maxNum,
-                    min:that.gL.minNum,*/
+                    max:that.gL.maxNum,
+                    min:that.gL.minNum,
                     axisTick: {
                         show: false
                     },
