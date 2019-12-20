@@ -921,6 +921,7 @@ $(function() {
                         }
                         //						对应的条件认证到哪里
                         that.$e.realLi.eq(e * 1).find(".tips-li-right").on('click', function() {
+                            debugger
                                 if (v.conditionType == "1" && that.data.custType != "1") { //如果是实名认证跳转，机构不支持线上开户，弹框提示
                                     $("#tips-wrap").hide();
                                     var obj = {
@@ -933,6 +934,7 @@ $(function() {
                                         callback: function(t) {}
                                     };
                                     $.elasticLayer(obj)
+
                                 } else {
                                     window.location.href = jumpUrl;
                                 }
@@ -1306,7 +1308,7 @@ $(function() {
             });
             //点击查看明细跳转
             mui("body").on('mdClick', '.lookDetailed', function() {
-                window.location.href = site_url.tobeConfirmTransaction_url
+                window.location.href = site_url.tobeConfirmTransaction_url+"?type=toBeConfirmed"//查看明细跳转待确认明细
             },{
                 htmdEvt: 'privatePlacementDetail_10'
             });
