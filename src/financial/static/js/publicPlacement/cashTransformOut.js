@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2019-11-26 14:42:56
- * @LastEditTime : 2019-12-20 11:05:25
+ * @LastEditTime : 2019-12-20 18:37:56
  * @LastEditors  : Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \htjf-app\src\financial\static\js\publicPlacement\cashTransformOut.js
@@ -210,7 +210,9 @@ $(function () {
                     var data = res.data;
                     if(res.status == '0000'){
                         window.location.href =  site_url.pofSurelyResults_url + '?allotNo=' + data.allotNo + '&flag=out'+"&outType="+regulatory.gv.outType;
-                    }
+                    }else{
+						tipAction(json.message);
+					}
                 },
                 callbackNoData:function(json){
                     $("#passwordWrap").hide();
@@ -356,6 +358,7 @@ $(function () {
 					//$(".checkMessage").css({"display":"block"});
 					//$(".checkMessage").html("转出金额超过最大额度")
 					tipAction("转出金额超过最大额度"+that.gv.transformTotalMoney+"元")
+					return
 				}else{		
 					$(".checkMessage").css({"display":"none"}); 
 				}

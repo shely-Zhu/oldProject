@@ -439,7 +439,8 @@ $(function () {
 					data = json.data;
 					console.log('data',data)
 					if(json.status == '0000'){
-					    window.location.href = site_url.pofCastSurelyDetails_url + '?scheduledProtocolId=' + data.scheduledProtocolId ;
+						//window.location.href = site_url.pofCastSurelyDetails_url + '?scheduledProtocolId=' + data.scheduledProtocolId ;
+						window.location.href = site_url.surelyResultShot_url + '?scheduledProtocolId=' + data.scheduledProtocolId +"&applyDate="+data.applyDate;
 					}
 				},
 				callbackNoData:function(json){
@@ -523,7 +524,8 @@ $(function () {
 					data = json.data;
 					console.log('data',data)
 					if(json.status == '0000'){
-					    window.location.href = site_url.pofCastSurelyDetails_url + '?scheduledProtocolId=' + data.scheduledProtocolId ;
+					   // window.location.href = site_url.pofCastSurelyDetails_url + '?scheduledProtocolId=' + data.scheduledProtocolId ;
+					   window.location.href = site_url.surelyResultShot_url + '?scheduledProtocolId=' + data.scheduledProtocolId ;
 					}
 				},
 				callbackNoData:function(json){
@@ -906,7 +908,6 @@ $(function () {
 			
 			//确定
 			mui("body").on("mdClick",'.btn_box .btn',function(){
-				debugger
 				$(".pwd-input").val('')
                 $(".fake-box input").val('');
 				if(!!that.gV.minValue){
@@ -944,6 +945,9 @@ $(function () {
 			}, {
 				htmdEvt: 'ordinarySetThrow_09'
 			}) ;
+			mui("body").on('mdClick','setGoUrl_1',function(){
+				window.location.href = site_url.superContent_url + '?id=63'
+			})
 			//  ---忘记密码
 			mui("body").on('mdClick','#passwordWrap .forgetP',function(){
 				//跳往原生页面去修改密码

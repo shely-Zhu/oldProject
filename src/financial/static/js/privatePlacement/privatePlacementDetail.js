@@ -920,7 +920,7 @@ $(function() {
                             jumpUrl = that.getJumpUrl(v); //获取跳转Url。
                         }
                         //						对应的条件认证到哪里
-                        that.$e.realLi.eq(e * 1).find(".tips-li-right").on('tap', function() {
+                        that.$e.realLi.eq(e * 1).find(".tips-li-right").on('click', function() {
                                 if (v.conditionType == "1" && that.data.custType != "1") { //如果是实名认证跳转，机构不支持线上开户，弹框提示
                                     $("#tips-wrap").hide();
                                     var obj = {
@@ -936,6 +936,7 @@ $(function() {
                                 } else {
                                     window.location.href = jumpUrl;
                                 }
+                                window._submitMd && window._submitMd( 3, 'privatePlacementDetail_12' );
                             })
                             //一键认证调往哪里
                         mui("body").on('mdClick', '.tips-btn', function() {
@@ -952,7 +953,7 @@ $(function() {
                                 };
                                 $.elasticLayer(obj)
                             } else {
-                                window.location.href = singleaAuthenPath;
+                                window.location.href = singleaAuthenPath;//
                             }
                         }, {
                             htmdEvt: 'privatePlacementDetail_13'
