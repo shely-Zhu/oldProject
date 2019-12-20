@@ -97,6 +97,8 @@ $(function() {
                         $('.floatProfit').addClass('hide');
                         $('.floatProfitWy').addClass('hide');
 
+                        that.queryBenefitLevel();
+
                         // 基本信息的展示
                         $('.performanceComparison').removeClass('hide');
                         $('.lineWrap').addClass('hide');
@@ -414,6 +416,27 @@ $(function() {
 
 
                 },
+            }];
+            $.ajaxLoading(obj);
+
+        },
+        queryBenefitLevel:function(){
+            var that = this;
+            var obj = [{
+                url: site_url.prvLevel_api,
+                data: {
+                    projectId: that.data.projectId,
+                },
+                needLogin: true,
+                callbackDone: function(json) {
+                    
+                },
+                callbackNoData: function(json) {
+                    tipAction(json.message);
+                },
+                callbackFail: function(json) {
+                    tipAction(json.message);
+                }
             }];
             $.ajaxLoading(obj);
 
