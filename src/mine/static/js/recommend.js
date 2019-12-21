@@ -107,7 +107,11 @@ $(function() {
                         // 已实名认证，初始化页面
                         that.initialPage()
                     }
+                },
+                callbackFail: function(json) {
+                    tipAction(json.message);
                 }
+
             }];
             $.ajaxLoading(obj);
         },
@@ -236,11 +240,12 @@ $(function() {
                 needLogin: true,
                 needDataEmpty: false,
                 callbackDone: function(json) {
+                    debugger
                     var wxShare={
-                        'type': sharingType,     // auto 原生自己分享框  wechatMoments 朋友圈   friends 朋友
-                        'businessType': '',   //life,业务类型
+                        'type': 'auto',     // auto 原生自己分享框  wechatMoments 朋友圈   friends 朋友
+                        'businessType': 'ldx',   //life,业务类型
                         'title': '',    //标题
-                        'des': '',   //简介
+                        'des': '邀请好友，分享精彩',   //简介
                         'link': '',   //链接
                         'img':'',   // 图标
                     }
@@ -261,10 +266,9 @@ $(function() {
 
                         // 生成二维码
                         that.generateQrcode(shareUrl)
-
+                        debugger
                         //如果是app--设置ldxShare的值--- 需要拼凑对应的链接
                         if (window.currentIsApp) {
-                            // $('#ldx_share').attr('src', 'ldxShare://' + shareUrl + '&sharingType=' + sharingType);
                             if(window.isAndroid){
                                 window.jsObj.wxShare(JSON.stringify(wxShare))
                             }
@@ -549,7 +553,11 @@ $(function() {
                     var jsonData = json.data;
                     //隐藏loading
                     // that.getElements.listLoading.hide();
+                    if(json.status=='1000'){
+                        tipAction(json.message);
+                    }
                     callback(jsonData);
+
                 },
                 callbackFail: function(json) {
                     // that.getElements.listLoading.hide();

@@ -49,7 +49,7 @@ $(function () {
                 $(".haveMany").text(that.gD.feedbackDesc.length+'/200')
             })
         },
-        submitAdvise() {
+        submitAdvise:function(){
             var that = this;
             var obj = [{
                 url: site_url.insertFeedback_api,
@@ -63,6 +63,11 @@ $(function () {
                 callbackDone: function (json) {
                     location.href = "javascript:history.go(-1)";
                 },
+                callbackFail: function(json) {
+                    console.log(json.message)
+                    tipAction(json.message);
+                }
+                
             }];
             $.ajaxLoading(obj);
         }

@@ -534,6 +534,7 @@ $(function() {
                 //功能按钮
             var clickEvent = '';
             mui("body").on('mdClick', '.toDetail', function(e) {
+                     debugger
                     event.stopPropagation();
                     var type = $(this).attr('type'); //按钮类型
                     var reserveId = $(this).attr('data-reserveid'); //预约id
