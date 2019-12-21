@@ -40,7 +40,7 @@ $(function () {
 		    		var totalSeconds = parseInt((endDate - nowDate) / 1000);
                     // 基金简称 + 基金编码
                     $("#HeadBarpathName").html("<span>"+jsonData.secuSht+"</span>"+"</br><span class='secuId'>"+jsonData.trdCode+"</span>");
-                    that.setHeadLineHeight()
+                    // that.setHeadLineHeight()
 
                     // 认购期
                     $('.subscriptionDate').html(jsonData.issBgnDt + '-' + jsonData.issEndDt);
