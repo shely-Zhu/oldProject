@@ -154,7 +154,6 @@ $(function() {
                         $('.contentWrapper').find('.mui-pull-bottom-pocket').removeClass('mui-hidden');
                         // 将列表插入到页面上
                         transcationTem(data, that.getElements.contentWrap, that.getElements.transTemp, type)
-
                     }, 300)
                 },
                 callbackNoData: function() {

@@ -87,7 +87,7 @@ $(function() {
                 grid: {
                     top: '10%',
                     left: '1%',
-                    right: '2%',
+                    right: '0%',
                     bottom: '6%',
                     containLabel: true
                 },
@@ -100,17 +100,23 @@ $(function() {
                         }
                     },
                     axisLabel: {
+                        showMinLabel: true,
+                        showMaxLabel: true,
                         show: true,
                         color: '#9B9B9B', //这里用参数代替了
                         margin: 20,
+                        //rotate: 0.5,
+                        textStyle: {
+                          fontSize : 10      //更改坐标轴文字大小
+                        }
                     },
                     axisTick: {
                         show: false
                     }
                 },
                 yAxis: {
-                    /*max:that.gL.maxNum,
-                    min:that.gL.minNum,*/
+                    max:that.gL.maxNum,
+                    min:that.gL.minNum,
                     axisTick: {
                         show: false
                     },
@@ -233,7 +239,13 @@ $(function() {
                     that.gL.time = [];
                     that.gL.shuju = [];
                     for (var i = 0; i < jsonData.length; i++) {
-                        that.gL.time.push(jsonData[i].trdDt)
+                        if(i == 0) {
+                           that.gL.time.push('             ' + jsonData[i].trdDt) 
+                        } else if (i == jsonData.length - 1) {
+                            that.gL.time.push(jsonData[i].trdDt + '                   ')
+                        } else {
+                            that.gL.time.push(jsonData[i].trdDt)
+                        }
                         that.gL.shuju.push(jsonData[i].annYldRat)
                     }
                     console.log(that.gL.shuju,"能排序吗")
