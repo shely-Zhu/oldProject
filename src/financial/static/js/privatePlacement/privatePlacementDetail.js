@@ -1021,6 +1021,10 @@ $(function() {
                     tipAction(json.message);
                     that.data.canClick = true; //变为可点击
 
+                },
+                callbackNoData:function(argument) {
+                    tipAction(json.message);
+                    that.data.canClick = true; //变为可点击
                 }
             }];
             $.ajaxLoading(obj);
