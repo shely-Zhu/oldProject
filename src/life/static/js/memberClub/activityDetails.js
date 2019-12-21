@@ -131,8 +131,7 @@ $(function() {
                         custType: that.gV.custType, //客户类型 0 - 机构 1-个人
                         custCode: that.gV.custCode, //客户编号
                         activityId: that.gV.actId, //活动id
-                        shareCustCode: that.gV.custCode, //分享客户编号
-
+                        // shareCustCode: that.gV.custCode, //分享客户编号
                     },
                     //async: false,
                     needDataEmpty: true,
@@ -215,7 +214,7 @@ $(function() {
                                 },
                             };
                             $.elasticLayer(obj)
-                        } else if (data.status == "22011") {
+                        } else if (data.status == "22011"||data.status == "20016") {
                             //客户未成交
                             var obj = {
                                 title: '温馨提示', //如果不传，默认不显示标题

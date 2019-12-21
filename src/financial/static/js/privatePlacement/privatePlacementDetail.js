@@ -918,10 +918,27 @@ $(function() {
                             that.$e.realLi.eq(e * 1).show();
                             that.$e.realLi.eq(e * 1).find(".bank-status").html(v.statusDesc);
                             jumpUrl = that.getJumpUrl(v); //获取跳转Url。
+                            that.$e.realLi.eq(e * 1).find(".tips-li-right").attr("conditionType",v.conditionType)
+                            that.$e.realLi.eq(e * 1).find(".tips-li-right").attr("conditionJump",v.conditionJump)
                         }
                         //						对应的条件认证到哪里
                         that.$e.realLi.eq(e * 1).find(".tips-li-right").on('click', function() {
-                            debugger
+                        // that.$e.realLi.eq(0).find(".tips-li-right")
+                        debugger
+                            if($(this).attr('conditionJump')!=that.$e.realLi.eq(0).find(".tips-li-right").attr("conditionJump")&&that.$e.realLi.eq(0).find(".tips-li-right").attr("conditionType")==1){
+                                    $("#tips-wrap").hide();
+                                    var obj = {
+                                        title: '',
+                                        id: 'realOrg',
+                                        p: '请您先开通财富账户',
+                                        yesTxt: '确认',
+                                        celTxt: "取消",
+                                        zIndex: 100,
+                                        callback: function(t) {}
+                                    };
+                                    $.elasticLayer(obj)
+                                    return
+                            }
                                 if (v.conditionType == "1" && that.data.custType != "1") { //如果是实名认证跳转，机构不支持线上开户，弹框提示
                                     $("#tips-wrap").hide();
                                     var obj = {
