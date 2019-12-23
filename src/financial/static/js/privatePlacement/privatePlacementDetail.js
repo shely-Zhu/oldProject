@@ -47,6 +47,7 @@ $(function() {
             isRiskEndure: '', // 是否风险测评 0-否 1-是
             endurePubIsold: '', // 公募风险评测是否过期 0:否 1:是
             endurePriIsold: '', // 私募风险测评是否过期0:否 1:是 
+            accreditedInvestor:'',  //合格投资者【空-未做过】【0-未通过】【1-已通过】【2-已过期】
             qrnhWfsy: {
                 oneMonth: {},
                 threeMonth: {},
@@ -409,6 +410,7 @@ $(function() {
                     that.data.buyFreeze = jsonData.buyFreeze; // 是否冻结买入：0-否；1-是；
                     that.data.lawFreezeStatus = jsonData.lawFreezeStatus; // 是否司法冻结：0-否；1-是；
                     that.data.isRiskEndure = jsonData.isRiskEndure; // 是否风险测评 0-否 1-是
+                    that.data.accreditedInvestor = jsonData.accreditedInvestor;   //合格投资者【空-未做过】【0-未通过】【1-已通过】【2-已过期】
                     if (that.data.isRiskEndure == 0) {
 
                     }
@@ -996,23 +998,10 @@ $(function() {
                                 that.data.canClick = true; //变为可点击
                                 var data = json.data[0],
                                     noticeObj = data;
-									if(!!isRiskPopup){//如果不匹配
+									if(isRiskPopup){//如果不匹配
 										/*PopupElasticLayer = '<p class="" style="font-weight:bold;text-align:center">你选择的产品与您现在的风险承受能力相匹配</p>' + 
-															'<p class="" style="font-weight:bold;text-align:center">您风险测评中所选计划投资期限少于产品期限存在匹配风险，请确认是否继续购买</p>' +
-			                                            	'<p class="">请您认真阅读' + noticeObj.fileName + that.data.productName + '并确认后继续购买该产品</p>';*/
-									    objElasticLayer = {
-                                            title: '',
-                                            id: 'sellPop',
-                                            p: '<p class="" style="font-weight:bold;text-align:center">您购买的产品与您现在的风险承受能力不匹配</p>',
-                                            yesTxt: '重新测评',
-                                            celTxt: '放弃购买',
-                                            zIndex: 1200,
-                                            callback: function(t) {
-                                                // 跳转到测评页面
-                                                window.location.href = site_url.riskAppraisal_url + '?type=private'
-                                            },
-                                        };
-                                    }else{
+                                        '<p class="" style="font-weight:bold;text-align:center">您风险测评中所选计划投资期限少于产品期限存在匹配风险，请确认是否继续购买</p>' +
+                                        '<p class="">请您认真阅读' + noticeObj.fileName + that.data.productName + '并确认后继续购买该产品</p>';*/
                                         objElasticLayer = {
                                             title: '',
                                             id: 'sellPop',
@@ -1031,10 +1020,23 @@ $(function() {
                                                     zIndex: 1200,
                                                     callback: function(t) {
                                                         window.location.href = site_url.downloadNew_api + "?filePath=" + noticeObj.fileUrl + "&fileName=" + new Base64().encode(noticeObj.fileName) + "&groupName=" +
-                                                            noticeObj.groupName + "show=1 "
+                                                        noticeObj.groupName + "&show=1"
                                                     },
                                                 };
                                                 $.elasticLayer(obj) 
+                                            },
+                                        };
+                                    }else{
+                                        objElasticLayer = {
+                                            title: '',
+                                            id: 'sellPop',
+                                            p: '<p class="" style="font-weight:bold;text-align:center">您购买的产品与您现在的风险承受能力不匹配</p>',
+                                            yesTxt: '重新测评',
+                                            celTxt: '放弃购买',
+                                            zIndex: 1200,
+                                            callback: function(t) {
+                                                // 跳转到测评页面
+                                                window.location.href = site_url.riskAppraisal_url + '?type=private'
                                             },
                                         };
 										// PopupElasticLayer = '<p class="" style="font-weight:bold;text-align:center">你选择的产品与您现在的风险承受能力相匹配</p>' +
@@ -1191,7 +1193,7 @@ $(function() {
                     if (that.data.custType == "1") { //客户类型【0.机构 1.个人】 
                         //跳转到电子合同追加页面
                         window.location.href = site_url.orderLimit_url + "?fundCode=" + that.$e.projectId + "&isAllowAppend=" +
-                            that.data.fundDetailObj.isAllowAppend;
+                            that.data.fundDetailObj.isAllowAppend + '&accreditedInvestor=' + that.data.accreditedInvestor;
                     } else {
                         //跳转到普通预约
                         window.location.href = site_url.registration_url + "?fundCode=" + that.$e.projectId + "&isAllowAppend=" +
@@ -1202,7 +1204,7 @@ $(function() {
                     if (that.data.custType == "1") { //客户类型【0.机构 1.个人】 
                         //跳转到电子合同预约页面
                         window.location.href = site_url.orderLimit_url + "?fundCode=" + that.$e.projectId + "&isAllowAppend=" +
-                            that.data.fundDetailObj.isAllowAppend;
+                            that.data.fundDetailObj.isAllowAppend + '&accreditedInvestor=' + that.data.accreditedInvestor;;
                     } else {
                         //跳转到普通预约
                         window.location.href = site_url.registration_url + "?fundCode=" + that.$e.projectId + "&isAllowAppend=" +
