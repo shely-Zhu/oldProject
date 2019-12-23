@@ -355,7 +355,7 @@ module.exports = function() {
     //活动详情->信息补全
     this.completeInformation_url = go_url.no_url + '/mine/views/information/completeInformation.html';
      //活动详情->信息查看（修改证件有效期） 
-     this.completeInfoEditModify_url = go_url.no_url + '/mine/views/information/ompleteInfoEditModify.html';
+     this.completeInfoEditModify_url = go_url.no_url + '/mine/views/information/completeInfoEditModify.html';
     //活动详情->投资者分类申请
     this.investorClassification_url = go_url.no_url + '/mine/views/investorClassification/investorClassification.html';
     //活动详情->投资者分类结果页
