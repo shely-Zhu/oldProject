@@ -47,6 +47,7 @@ $(function() {
             isRiskEndure: '', // 是否风险测评 0-否 1-是
             endurePubIsold: '', // 公募风险评测是否过期 0:否 1:是
             endurePriIsold: '', // 私募风险测评是否过期0:否 1:是 
+            accreditedInvestor:'',  //合格投资者【空-未做过】【0-未通过】【1-已通过】【2-已过期】
             qrnhWfsy: {
                 oneMonth: {},
                 threeMonth: {},
@@ -409,6 +410,7 @@ $(function() {
                     that.data.buyFreeze = jsonData.buyFreeze; // 是否冻结买入：0-否；1-是；
                     that.data.lawFreezeStatus = jsonData.lawFreezeStatus; // 是否司法冻结：0-否；1-是；
                     that.data.isRiskEndure = jsonData.isRiskEndure; // 是否风险测评 0-否 1-是
+                    that.data.accreditedInvestor = jsonData.accreditedInvestor;   //合格投资者【空-未做过】【0-未通过】【1-已通过】【2-已过期】
                     if (that.data.isRiskEndure == 0) {
 
                     }
@@ -918,15 +920,15 @@ $(function() {
                                     isReal = true; //判断
                                 }
                             }
-                            that.$e.realLi.eq(e * 1).show();
-                            that.$e.realLi.eq(e * 1).find(".bank-status").html(v.statusDesc);
+                            that.$e.realLi.eq(Number(e) + 1).show();
+                            that.$e.realLi.eq(Number(e) + 1).find(".bank-status").html(v.statusDesc);
                             jumpUrl = that.getJumpUrl(v); //获取跳转Url。
                             that.$e.realLi.eq(e * 1).find(".tips-li-right").attr("jumpUrl",jumpUrl)
                             that.$e.realLi.eq(e * 1).find(".tips-li-right").attr("conditionType",v.conditionType)
                             that.$e.realLi.eq(e * 1).find(".tips-li-right").attr("conditionJump",v.conditionJump)
                         }
                         //						对应的条件认证到哪里
-                        that.$e.realLi.eq(e * 1).find(".tips-li-right").on('click', function() {
+                        that.$e.realLi.eq(Number(e) + 1).find(".tips-li-right").on('click', function() {
                         // that.$e.realLi.eq(0).find(".tips-li-right")
                             if($(this).attr('conditionJump')!=that.$e.realLi.eq(0).find(".tips-li-right").attr("conditionJump")&&that.$e.realLi.eq(0).find(".tips-li-right").attr("conditionType")==1){
                                     // $("#tips-wrap").hide();
@@ -1194,7 +1196,7 @@ $(function() {
                     if (that.data.custType == "1") { //客户类型【0.机构 1.个人】 
                         //跳转到电子合同追加页面
                         window.location.href = site_url.orderLimit_url + "?fundCode=" + that.$e.projectId + "&isAllowAppend=" +
-                            that.data.fundDetailObj.isAllowAppend;
+                            that.data.fundDetailObj.isAllowAppend + '&accreditedInvestor=' + that.data.accreditedInvestor;
                     } else {
                         //跳转到普通预约
                         window.location.href = site_url.registration_url + "?fundCode=" + that.$e.projectId + "&isAllowAppend=" +
@@ -1205,7 +1207,7 @@ $(function() {
                     if (that.data.custType == "1") { //客户类型【0.机构 1.个人】 
                         //跳转到电子合同预约页面
                         window.location.href = site_url.orderLimit_url + "?fundCode=" + that.$e.projectId + "&isAllowAppend=" +
-                            that.data.fundDetailObj.isAllowAppend;
+                            that.data.fundDetailObj.isAllowAppend + '&accreditedInvestor=' + that.data.accreditedInvestor;;
                     } else {
                         //跳转到普通预约
                         window.location.href = site_url.registration_url + "?fundCode=" + that.$e.projectId + "&isAllowAppend=" +

@@ -39,7 +39,12 @@ $(function () {
             accreditedInvestorArr: ['未通过', '已通过', '已过期', '未做'],//是否合格投资者 空-未做； 0-未通过；1-已通过； 2-已过期 
             invTypCom:'' ,  // 基金类型
             secuSht:'',   // 基金名简写
-            accountType:null   //客户类型  0-机构 1-个人
+            accountType:null,   //客户类型  0-机构 1-个人
+            realLi: $('#real-condition>li'), // 条件下的五条
+            tipsWrap:$("#tips-wrap"),
+            singleaAuthenPath : "", //一键认证跳转链接
+            fixedInvestementBtn:$(".fixed_investement_btn"), //定投按钮
+            fixedInvestementBtnStatu:true
         },
         fundType: splitUrl['fundType'] == '10300' ? 1 : 0, //10300 货币基金类型，其余为普通基金类型
         init: function () {
@@ -67,6 +72,7 @@ $(function () {
                 url: site_url.newfundDetails_api,
                 data: {
                     fundCode: splitUrl['fundCode'],
+                    // fundCode:"000847",
                 },
                 callbackDone: function (json) {
                     that.gV.json = json.data
@@ -120,6 +126,26 @@ $(function () {
                     var saleFee = json.data.fundPurchaseFeeRate.detailList[0].fundFeeRate;
                     var discount = Number(json.data.fundPurchaseFeeRate.detailList[0].fundFeeRate.split("%")[0])*json.data.discount/100 + '%'
                     $(".divider-top").html(json.data.purSt + '、' + json.data.redemSt + '、' + '买入费率' + '(<span class="line-rate">' + saleFee + '</span>' + ' <span class="discount">' + discount + '</span>)')
+                    
+                    //定投按钮的展示问题
+                    var supportFixedFlag = that.gV.json.supportFixedFlag;
+                    if(supportFixedFlag == true){
+                        $(".footer .fixed_investement_btn").css({"display":"block"})
+                        that.gV.fixedInvestementBtnStatu = true
+                        if(that.gV.json.cashTreasure == "1"){
+                            $(".footer .fixed_investement_btn").attr("disabled",true)
+                            that.gV.fixedInvestementBtnStatu = false
+                        }
+                        if(that.gV.json.fundStatus=="3"||that.gV.json.fundStatus=="5"){
+                            $(".footer .fixed_investement_btn").attr("disabled",true)
+                            that.gV.fixedInvestementBtnStatu = false
+                        }
+                       // that.gV.fixedInvestementBtn.show()
+                    }else if(supportFixedFlag == false){
+                        $(".footer .fixed_investement_btn").css({"display":"none"})
+                       // that.gV.fixedInvestementBtn.hide()
+                    }
+                  
                 },
                 callbackFail: function (json) {
                     tipAction(json.message);
@@ -152,6 +178,107 @@ $(function () {
             }]
             $.ajaxLoading(obj);
         },
+        	 // 客户预约产品所需条件
+		 getConditionsOfOrder: function(type) {
+            var type = type;
+            var that = this;
+
+            //发送ajax请求
+            var obj = [{
+                url: site_url.queryCustomerAuthInfo_api,
+                data: {
+                    fundCode: splitUrl['fundCode'],
+                },
+                //contentTypeSearch: true,
+                //needLogin: true, //需要判断是否登陆
+                callbackDone: function(json) { //成功后执行的函数
+                    var jsonData = json.data,
+                        notice = "",
+                        noticeObj = "",
+                        isPopup = "", //弹框售前告知书
+                        isRiskPopup = "", //期限不符弹框
+                        PopupElasticLayer = "",
+                        objElasticLayer = "", // 产品风险等级与个人承受能力匹配弹框
+                        isReal = "", //是否实名认证，因为如果机构切一键认证是实名，点击需要提示弹框。
+                        singleaAuthenPath = "", //一键认证跳转链接
+						singleaAuthen = false; //条件框是否展示
+						if(jsonData.isWealthAccount == "1"&&jsonData.isRiskEndure == "1"&&jsonData.isPerfect == "1"&&jsonData.isInvestFavour=="1"&&jsonData.isRiskMatch=="1"){
+                            that.gV.realLi.hide();
+                            that.gV.tipsWrap.hide();
+                            if(type == "into"){
+                                //买入一键认证
+                                window.location.href = site_url.fundTransformIn_url + '?fundCode=' + fundCode + '&fundName=' + fundName;
+                            }else if(type == "investement"){
+
+                                //定投一键认证
+                                if(!that.gV.fixedInvestementBtnStatu){
+                                    return
+                                }
+                                if(that.gV.accountType === 0 || that.gV.accountType === 2){
+                                    tipAction('暂不支持机构客户进行交易');
+                                }else{
+                                    window.location.href = site_url.pofOrdinarySetThrow_url + '?fundCode=' + fundCode + '&fundName=' + fundName + '&type=add';
+                                }
+
+                            }
+                           
+						}else{
+                            that.gV.tipsWrap.show()
+                            that.gV.realLi.show();
+							
+                        }
+                        Object.keys(jsonData).forEach(function(key){
+                            if(!!jsonData[key]){
+                               that.gV.singleaAuthenPath = key;
+                                return ;
+                            }
+                        })
+						if(jsonData.isWealthAccount=="0"){
+							//是否开通财富账户
+							that.gV.realLi.eq(0).hide()  
+						}else{
+							that.gV.realLi.eq(0).show()
+						}
+						if(jsonData.isRiskEndure=="0"){
+							//是否风测
+							that.gV.realLi.eq(1).hide()  
+						}else{
+							that.gV.realLi.eq(1).show()
+						}
+						if(jsonData.isPerfect=="0"){
+							//是否完善资料
+							that.gV.realLi.eq(2).hide()  
+						}else{
+							that.gV.realLi.eq(2).show()
+						}
+						if(jsonData.isInvestFavour=="0"){
+							//是否投资者分类
+							that.gV.realLi.eq(3).hide()  
+						}else{
+							that.gV.realLi.eq(3).show()
+                        }
+                        that.gV.realLi.eq(4).hide()
+						if(jsonData.isRiskMatch=="0"){
+							//是否风险等级
+							that.gV.realLi.eq(4).hide()  
+						}else{
+							that.gV.realLi.eq(4).show()
+						}
+
+                },
+                callbackFail: function(json) { //失败后执行的函数
+                   tipAction(json.message);
+					//that.data.canClick = true; //变为可点击
+
+                },
+                callbackNoData:function(argument) {
+                    tipAction(json.message);
+					that.data.canClick = true; //变为可点击
+                }
+            }];
+            $.ajaxLoading(obj);
+
+		},
         events: function () {
             var that = this;
             var json = that.gV.json
@@ -193,39 +320,41 @@ $(function () {
 
             // 定投
             mui("body").on('mdClick', ".footer .fixed_investement_btn", function (e) {
-                if(that.gV.accountType === 0 || that.gV.accountType === 2){
-                    tipAction('暂不支持机构客户进行交易');
-                }else{
-                    window.location.href = site_url.pofOrdinarySetThrow_url + '?fundCode=' + fundCode + '&fundName=' + fundName + '&type=add';
-                }
+                that.getConditionsOfOrder("investement");
             },{
                 htmdEvt: 'publicDetail_06'
             });
             // 买入
             mui("body").on('mdClick', ".footer .buy_btn", function (e) {
-                window.location.href = site_url.fundTransformIn_url + '?fundCode=' + fundCode + '&fundName=' + fundName;
+                debugger
+
+                that.getConditionsOfOrder("into");
+               // window.location.href = site_url.fundTransformIn_url + '?fundCode=' + fundCode + '&fundName=' + fundName;
                
             },{
                 htmdEvt: 'publicDetail_07'
             });
             //认证
-            mui("body").on('mdClick', ".tips .tips-li-right", function (e) {
-                var type = $(this).attr('type')
+            mui("body").on('mdClick', ".tips-li .tips-li-right", function (e) {
+                var type = $(this).parent().index()
                 switch (type) {
-                    case "1":
+                    case 0:   //开通账户
                         window.location.href = site_url.realName_url
                         break;
 
-                    case "2":
-                        window.location.href = site_url.realName_url
+                    case 1:   //风险评测
+                        window.location.href = site_url.riskAppraisal_url + "?type=asset"
                         break;
 
-                    case "3":
-                        window.location.href = site_url.realName_url
+                    case 2:   //完善基本信息
+                        window.location.href = site_url.completeInformation_url
                         break;
 
-                    case "4":
-                        window.location.href = site_url.realName_url
+                    case 3:  //投资者分类
+                        window.location.href = site_url.investorClassification_url
+                        break;
+                    case 4:  //合格投资者认证
+                        window.location.href = site_url.chooseQualifiedInvestor_url
                         break;
 
                     default:
@@ -236,7 +365,30 @@ $(function () {
             });
             //一键认证
             mui("body").on('mdClick', ".tips .tips-btn", function (e) {
-                window.location.href = site_url.realName_url
+                var key = that.gV.singleaAuthenPath;
+                switch (key) {
+                    case "isWealthAccount":   //开通账户
+                        window.location.href = site_url.realName_url
+                        break;
+
+                    case "isRiskEndure":   //风险评测
+                        window.location.href = site_url.riskAppraisal_url + "?type=asset"
+                        break;
+
+                    case "isPerfect":   //完善基本信息
+                        window.location.href = site_url.completeInformation_url
+                        break;
+
+                    case "isInvestFavour":  //投资者分类
+                        window.location.href = site_url.investorClassification_url
+                        break;
+                    case "isRiskMatch":  //合格投资者认证
+                        window.location.href = site_url.chooseQualifiedInvestor_url
+                        break;
+
+                    default:
+                        break;
+                }
             },{
                 htmdEvt: 'publicDetail_09'
             });
@@ -282,7 +434,6 @@ $(function () {
             });
             //分享  -- 跳往原生页面
             mui("body").on('mdClick', ".share_area", function (e) {
-                debugger
                 var shareObj = {
                     'type':'auto',
                     'businessType':'publicProductShare',

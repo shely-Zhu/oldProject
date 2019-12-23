@@ -63,7 +63,7 @@ $(function () {
                         },
                         needDataEmpty: true,
                         needLoading: false,
-                        callbackDone: function(json) {     
+                        callbackDone: function(json) {    
                             var data = json.data.pageList;
                             if(that.gV.pageCurrent == 1 && data.length == 0) {
                                 $(".list").css("display", "none")
@@ -75,12 +75,12 @@ $(function () {
                                         data[i].show = true
                                     } else if (data[i].fixState == 'H') {
                                         data[i].fixStateStr = "已终止"
-                                        data[i].show = false
+                                        data[i].show = true
                                         that.gV.fixStateNum ++
                                         that.gV.stopPlanList.push(data[i])
                                     } else {
                                         data[i].fixStateStr = "暂停"
-                                        data[i].show = false
+                                        data[i].show = true
                                         that.gV.stopNum ++
                                         that.gV.stopPlanList_1.push(data[i])
                                     }
@@ -100,10 +100,10 @@ $(function () {
                                     that.$e.endPlan.hide()
                                 }
                                 if(that.gV.stopNum>0){
-                                    that.$e.stopPlan.show()
+                                    //that.$e.stopPlan.show()
                                     var height = windowHeight - $(".newPlan").height() - $(".topTitle").height() - $(".endPlan").height();
-                                    $('.list .contentWrapper').height(height)
-                                    $(".stopPlan_1").html(that.gV.stopNum)
+                                   // $('.list .contentWrapper').height(height)
+                                   // $(".stopPlan_1").html(that.gV.stopNum)
                                 }else{
                                     that.$e.stopPlan.hide()
                                 }

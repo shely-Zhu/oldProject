@@ -85,7 +85,7 @@ $(function() {
                     }
                 },
                 grid: {
-                    top: '10%',
+                    top: '5%',
                     left: '1%',
                     right: '0%',
                     bottom: '6%',
@@ -104,10 +104,17 @@ $(function() {
                         showMaxLabel: true,
                         show: true,
                         color: '#9B9B9B', //这里用参数代替了
-                        margin: 20,
+                        //margin: 20,
                         //rotate: 0.5,
                         textStyle: {
                           fontSize : 10      //更改坐标轴文字大小
+                        },
+                        interval: function(index, value) {
+                            if(index == Math.floor(that.gL.time.length/2) || index == 0 || index == that.gL.time.length-1) {
+                                return true
+                            } else {
+                                return false
+                            }
                         }
                     },
                     axisTick: {
