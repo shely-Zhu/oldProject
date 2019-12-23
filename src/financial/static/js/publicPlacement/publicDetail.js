@@ -257,13 +257,13 @@ $(function () {
 						}else{
 							that.gV.realLi.eq(3).show()
                         }
-                        that.gV.realLi.eq(4).hide()
 						if(jsonData.isRiskMatch=="0"){
 							//是否风险等级
 							that.gV.realLi.eq(4).hide()  
 						}else{
 							that.gV.realLi.eq(4).show()
-						}
+                        }
+                        that.gV.realLi.eq(4).hide()
 
                 },
                 callbackFail: function(json) { //失败后执行的函数
