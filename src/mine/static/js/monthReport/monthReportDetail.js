@@ -705,7 +705,7 @@ var monthReportDetail = {
 						var now = new Date();
 						var hh = now.getHours();
 
-						if(8 <= hh && hh <= 20){
+						if(8 <= hh && hh < 20){
 							 //跳转客服页面
 							var obj = [{
 								url: site_url.getToken_api,
