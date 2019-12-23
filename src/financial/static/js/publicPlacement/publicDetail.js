@@ -67,6 +67,7 @@ $(function () {
                 url: site_url.newfundDetails_api,
                 data: {
                     fundCode: splitUrl['fundCode'],
+                    // fundCode:"000847",
                 },
                 callbackDone: function (json) {
                     that.gV.json = json.data
