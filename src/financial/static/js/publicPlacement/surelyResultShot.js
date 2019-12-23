@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2019-12-20 15:32:30
- * @LastEditTime : 2019-12-20 18:18:17
+ * @LastEditTime : 2019-12-23 12:03:45
  * @LastEditors  : Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \htjf-app\src\financial\static\js\publicPlacement\surelyResultShot.js
@@ -68,7 +68,8 @@ $(function () {
                 $(".resultTop").show()
                 //状态为转入中和转入成功全部统一为转入中
                 that.$e.succedText.html("申请成功")
-                that.$e.applyTimeOut.html(that.gV.applyDate)
+                var str= that.gV.applyDate.slice(0,4)+'-'+that.gV.applyDate.slice(4,6)+'-'+that.gV.applyDate.slice(6,8)
+                that.$e.applyTimeOut.html(str)
                 that.$e.toTimeOut.html(data.nextFixrequestDateMask + '&nbsp;24:00 前')
                 that.$e.earningsTimeInto.html(data.paymentGainsDayStr + '&nbsp;24:00 前')
                 $(".shotData")[0].textContent = data.fixedPeriodMask
@@ -90,6 +91,12 @@ $(function () {
     },
     event: function () {
       var that = this;
+
+      //跳转到基金详情页面
+      mui("body").on("mdClick",".over",function(){
+        debugger
+          window.location.href = site_url.pofCastSurelyDetails_url + '?scheduledProtocolId=' + that.gV.scheduledProtocolId ;
+      })
    
     }
   }
