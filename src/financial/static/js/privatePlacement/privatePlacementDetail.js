@@ -864,7 +864,7 @@ $(function() {
             } else if (v.conditionJump == 7) { //跳转到合格投资者结果页面
                 jumpUrl = site_url.qualifiedInvestorResult_url
             }else if (v.conditionJump == 8) { //信息查看（修改证件有效期） 
-                jumpUrl = site_url.completeInformation_url
+                jumpUrl = site_url.completeInfoEditModify_url
             }else if (v.conditionJump == 11) { //跳转到进身份证上传页面
                 jumpUrl = site_url.realIdcard_url
             } else if (v.conditionJump == 12) { //跳转到人脸识别页面
