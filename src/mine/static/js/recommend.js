@@ -240,7 +240,7 @@ $(function() {
                 needLogin: true,
                 needDataEmpty: false,
                 callbackDone: function(json) {
-                    debugger
+                $(".netLoading").hide()
                     var wxShare={
                         'type': 'auto',     // auto 原生自己分享框  wechatMoments 朋友圈   friends 朋友
                         'businessType': 'ldx',   //life,业务类型
@@ -266,7 +266,6 @@ $(function() {
 
                         // 生成二维码
                         that.generateQrcode(shareUrl)
-                        debugger
                         //如果是app--设置ldxShare的值--- 需要拼凑对应的链接
                         if (window.currentIsApp) {
                             if(window.isAndroid){

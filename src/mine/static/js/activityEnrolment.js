@@ -121,6 +121,7 @@ $(function() {
                     // 待定 
                     if (json.data.activityVOPageInfo.list.length == 0) { // 没有记录不展示
                         if (num == 0) {
+                            debugger
                             $('.NoData').show();
                             // $('.listHasData0 .noData').show();
                             
@@ -159,6 +160,7 @@ $(function() {
 
                     setTimeout(function() {
                         // 将列表插入到页面上
+                        
                         if (num == 0) {
                             generateTemplate(dataList, that.$e.ListSlot, that.$e.listTemp);
                             $(".lazyload").lazyload()
