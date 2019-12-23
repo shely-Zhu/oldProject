@@ -715,6 +715,7 @@ var monthReportDetail = {
 								callbackDone: function(json) {
 									var token = json.data.token;
 									// 跳转第三方客服地址
+									alert(site_url.onlineCustomer_url + '&token=' + token)
 									window.location.href = site_url.onlineCustomer_url + '&token=' + token;
 								},     
 							}];

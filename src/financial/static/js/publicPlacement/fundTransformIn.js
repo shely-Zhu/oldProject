@@ -78,7 +78,7 @@ $(function () {
             var that = this;
             // 请求页面数据
             var obj = [{
-                url: site_url.queryUserBaseInfo_api,//1
+                url: site_url.queryUserBaseInfo_api,
                 data: {
                 },
                 callbackDone: function (json) {
@@ -95,7 +95,7 @@ $(function () {
 		getUserInfo_1:function(){
 			var that = this;
 			var obj = [{
-				url:site_url.user_api,//1
+				url:site_url.user_api,
 				data:{
 
 				},
@@ -118,7 +118,7 @@ $(function () {
 			var that = this;
 
 			var obj = [{
-				url: site_url.newfundDetails_api,//1
+				url: site_url.newfundDetails_api,
 				data: {
 					"fundCode": that.gV.fundCode
 				},
@@ -240,7 +240,7 @@ $(function () {
 		getAgreeUrl: function() {
             var that = this;
             var obj = [{ 
-                url: site_url.fundMaterial_api,//1
+                url: site_url.fundMaterial_api,
                 data: {
                     fundCode:that.gV.fundCode
                 },

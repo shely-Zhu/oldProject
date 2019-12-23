@@ -421,9 +421,9 @@ $(function() {
 		},
 
 		 // 客户预约产品所需条件
-		 getConditionsOfOrder: function() {
+		 getConditionsOfOrder: function(type) {
             var that = this;
-
+            var type = type;
             //发送ajax请求
             var obj = [{
                 url: site_url.queryCustomerAuthInfo_api,
@@ -447,7 +447,14 @@ $(function() {
 						if(jsonData.isWealthAccount == "1"&&jsonData.isRiskEndure == "1"&&jsonData.isPerfect == "1"&&jsonData.isInvestFavour=="1"&&jsonData.isRiskMatch=="1"){
 							that.data.tipsWrap.hide()
 							that.data.realLi.hide();
-							window.location.href = site_url.fundTransformIn_url+"?fundCode="+that.data.fundCode;
+							if(type == "into"){
+								 //买入一键认证
+								 window.location.href = site_url.fundTransformIn_url+"?fundCode="+that.data.fundCode;
+							}else if(type == "investement"){
+								 //定投一键认证
+								 window.location.href = site_url.ordinarySetThrow_url+"?fundCode="+that.data.fundCode;;			
+							}
+							
 						}else{
 							that.data.tipsWrap.show()
 							that.data.realLi.show();
@@ -482,6 +489,7 @@ $(function() {
 						}else{
 							that.data.realLi.eq(3).show()
 						}
+						that.data.realLi.eq(4).hide() 
 						if(jsonData.isRiskMatch=="0"){
 							//是否风险等级
 							that.data.realLi.eq(4).hide()  
@@ -497,7 +505,6 @@ $(function() {
                 },
                 callbackNoData:function(argument) {
                     tipAction(json.message);
-					that.data.canClick = true; //变为可点击
                 }
             }];
             $.ajaxLoading(obj);
@@ -523,19 +530,27 @@ $(function() {
 			}
             return jumpUrl;
         },
-		queryCustomerAuthInfo:function(){
+		getData:function(){
 			var that = this;
 			var obj = [{
-				url: site_url.queryCustomerAuthInfo_api,
-                data: {
-                    projectId: that.$e.projectId,
-                },
-                contentTypeSearch: true,
-				needLogin: true, //需要判断是否登陆
+				url:site_url.newfundDetails_api,
+				data:{
+					fundCode:that.data.fundCode
+				},
 				callbackDone:function(json){
-					var data = hson.data;
-				}
-			}]
+                    
+				},
+				callbackFail: function(json) { //失败后执行的函数
+					tipAction(json.message);
+					 //that.data.canClick = true; //变为可点击
+ 
+				 },
+				 callbackNoData:function(argument) {
+					 tipAction(json.message);
+				 }
+
+			}];
+			$.ajaxLoading(obj);
 		},
 		//点击展开按钮
 		event: function(){
@@ -634,7 +649,7 @@ $(function() {
             })
 			// //点击买入
 			mui("body").on('mdClick', '.buyBtn', function(e) {
-                that.getConditionsOfOrder();
+                that.getConditionsOfOrder("into");
 			//	window.location.href = site_url.fundTransformIn_url+"?fundCode="+that.data.fundCode;			
 			},{
                 'htmdEvt': 'optionalPublicDetail_9'
@@ -695,7 +710,8 @@ $(function() {
 				});
 			//点击定投
 			mui("body").on('mdClick', '.fiedBtn', function(e) {
-				window.location.href = site_url.ordinarySetThrow_url+"?fundCode="+that.data.fundCode;;			
+				that.getConditionsOfOrder("investement");
+				//window.location.href = site_url.ordinarySetThrow_url+"?fundCode="+that.data.fundCode;;			
 			},{
                 'htmdEvt': 'optionalPublicDetail_10'
             })

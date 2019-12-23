@@ -43,6 +43,8 @@ $(function () {
             realLi: $('#real-condition>li'), // 条件下的五条
             tipsWrap:$("#tips-wrap"),
             singleaAuthenPath : "", //一键认证跳转链接
+            fixedInvestementBtn:$(".fixed_investement_btn"), //定投按钮
+            fixedInvestementBtnStatu:true
         },
         fundType: splitUrl['fundType'] == '10300' ? 1 : 0, //10300 货币基金类型，其余为普通基金类型
         init: function () {
@@ -124,6 +126,26 @@ $(function () {
                     var saleFee = json.data.fundPurchaseFeeRate.detailList[0].fundFeeRate;
                     var discount = Number(json.data.fundPurchaseFeeRate.detailList[0].fundFeeRate.split("%")[0])*json.data.discount/100 + '%'
                     $(".divider-top").html(json.data.purSt + '、' + json.data.redemSt + '、' + '买入费率' + '(<span class="line-rate">' + saleFee + '</span>' + ' <span class="discount">' + discount + '</span>)')
+                    
+                    //定投按钮的展示问题
+                    var supportFixedFlag = that.gV.json.supportFixedFlag;
+                    if(supportFixedFlag == true){
+                        $(".footer .fixed_investement_btn").css({"display":"block"})
+                        that.gV.fixedInvestementBtnStatu = true
+                        if(that.gV.json.cashTreasure == "1"){
+                            $(".footer .fixed_investement_btn").attr("disabled",true)
+                            that.gV.fixedInvestementBtnStatu = false
+                        }
+                        if(that.gV.json.fundStatus=="3"||that.gV.json.fundStatus=="5"){
+                            $(".footer .fixed_investement_btn").attr("disabled",true)
+                            that.gV.fixedInvestementBtnStatu = false
+                        }
+                       // that.gV.fixedInvestementBtn.show()
+                    }else if(supportFixedFlag == false){
+                        $(".footer .fixed_investement_btn").css({"display":"none"})
+                       // that.gV.fixedInvestementBtn.hide()
+                    }
+                  
                 },
                 callbackFail: function (json) {
                     tipAction(json.message);
@@ -157,7 +179,8 @@ $(function () {
             $.ajaxLoading(obj);
         },
         	 // 客户预约产品所需条件
-		 getConditionsOfOrder: function() {
+		 getConditionsOfOrder: function(type) {
+            var type = type;
             var that = this;
 
             //发送ajax请求
@@ -181,8 +204,24 @@ $(function () {
 						singleaAuthen = false; //条件框是否展示
 						if(jsonData.isWealthAccount == "1"&&jsonData.isRiskEndure == "1"&&jsonData.isPerfect == "1"&&jsonData.isInvestFavour=="1"&&jsonData.isRiskMatch=="1"){
                             that.gV.realLi.hide();
-                            that.gV.tipsWrap.hide()
-                            window.location.href = site_url.fundTransformIn_url + '?fundCode=' + fundCode + '&fundName=' + fundName;
+                            that.gV.tipsWrap.hide();
+                            if(type == "into"){
+                                //买入一键认证
+                                window.location.href = site_url.fundTransformIn_url + '?fundCode=' + fundCode + '&fundName=' + fundName;
+                            }else if(type == "investement"){
+
+                                //定投一键认证
+                                if(!that.gV.fixedInvestementBtnStatu){
+                                    return
+                                }
+                                if(that.gV.accountType === 0 || that.gV.accountType === 2){
+                                    tipAction('暂不支持机构客户进行交易');
+                                }else{
+                                    window.location.href = site_url.pofOrdinarySetThrow_url + '?fundCode=' + fundCode + '&fundName=' + fundName + '&type=add';
+                                }
+
+                            }
+                           
 						}else{
                             that.gV.tipsWrap.show()
                             that.gV.realLi.show();
@@ -217,7 +256,8 @@ $(function () {
 							that.gV.realLi.eq(3).hide()  
 						}else{
 							that.gV.realLi.eq(3).show()
-						}
+                        }
+                        that.gV.realLi.eq(4).hide()
 						if(jsonData.isRiskMatch=="0"){
 							//是否风险等级
 							that.gV.realLi.eq(4).hide()  
@@ -280,18 +320,15 @@ $(function () {
 
             // 定投
             mui("body").on('mdClick', ".footer .fixed_investement_btn", function (e) {
-                if(that.gV.accountType === 0 || that.gV.accountType === 2){
-                    tipAction('暂不支持机构客户进行交易');
-                }else{
-                    window.location.href = site_url.pofOrdinarySetThrow_url + '?fundCode=' + fundCode + '&fundName=' + fundName + '&type=add';
-                }
+                that.getConditionsOfOrder("investement");
             },{
                 htmdEvt: 'publicDetail_06'
             });
             // 买入
             mui("body").on('mdClick', ".footer .buy_btn", function (e) {
+                debugger
 
-                that.getConditionsOfOrder();
+                that.getConditionsOfOrder("into");
                // window.location.href = site_url.fundTransformIn_url + '?fundCode=' + fundCode + '&fundName=' + fundName;
                
             },{
