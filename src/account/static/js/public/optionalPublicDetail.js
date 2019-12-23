@@ -515,7 +515,7 @@ $(function() {
             })
 			//点击定投
 			mui("body").on('mdClick', '.fiedBtn', function(e) {
-				window.location.href = site_url.ordinarySetThrow_url;			
+				window.location.href = site_url.ordinarySetThrow_url+"?fundCode="+that.data.fundCode;;			
 			},{
                 'htmdEvt': 'optionalPublicDetail_10'
             })
