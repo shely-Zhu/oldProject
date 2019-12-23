@@ -280,7 +280,6 @@ $(function () {
 				needDataEmpty: true,
 				callbackDone: function(json) {
 					if(json.status == '0000'){
-						alert(1);
 						payPass(that.checkPassword);
 					}else{
 						tipAction(json.message);
@@ -572,7 +571,7 @@ $(function () {
 						return
 					}
 				}
-				if(!that.gV.bankAccountSecret){
+				if(!!that.gV.bankAccountSecret){
 					if(that.gV.fundOrBank == '2'){
 						if(Number(that.gV.balance) > Number(that.gV.enableAmount)){
 							tipAction('单笔金额不能超过' + that.gV.enableAmount + '元')
