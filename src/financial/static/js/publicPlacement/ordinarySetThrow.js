@@ -45,6 +45,7 @@ $(function () {
 			custType:sessionStorage.getItem('custType') ? sessionStorage.getItem('custType') : '1',   // 交易来源
 			scheduledProtocolId: splitUrl['scheduledProtocolId'] ? splitUrl['scheduledProtocolId'] : '201911270201',
 			type: splitUrl['type'] ? splitUrl['type'] : 'edit', // add添加  edit 编辑
+			//type:"add",
 			fundName: splitUrl['fundName'] ? splitUrl['fundName'] : null,   //基金名称
 			fundCode: splitUrl['fundCode'] ? splitUrl['fundCode'] : null,  //基金代码
 			capitalMode: '', //资金方式
@@ -355,6 +356,7 @@ $(function () {
                 url: site_url.fundMaterial_api,
                 data: {
                     fundCode:that.gV.fundCode
+                    // fundCode:"000847"
                 },
                 //async: false,
                 needDataEmpty: true,
