@@ -863,7 +863,9 @@ $(function() {
                 jumpUrl = site_url.chooseQualifiedInvestor_url
             } else if (v.conditionJump == 7) { //跳转到合格投资者结果页面
                 jumpUrl = site_url.qualifiedInvestorResult_url
-            } else if (v.conditionJump == 11) { //跳转到进身份证上传页面
+            }else if (v.conditionJump == 8) { //信息查看（修改证件有效期） 
+                jumpUrl = site_url.completeInformation_url
+            }else if (v.conditionJump == 11) { //跳转到进身份证上传页面
                 jumpUrl = site_url.realIdcard_url
             } else if (v.conditionJump == 12) { //跳转到人脸识别页面
                 jumpUrl = site_url.realFaceCheck_url
@@ -925,16 +927,15 @@ $(function() {
                         //						对应的条件认证到哪里
                         that.$e.realLi.eq(e * 1).find(".tips-li-right").on('click', function() {
                         // that.$e.realLi.eq(0).find(".tips-li-right")
-                        debugger
                             if($(this).attr('conditionJump')!=that.$e.realLi.eq(0).find(".tips-li-right").attr("conditionJump")&&that.$e.realLi.eq(0).find(".tips-li-right").attr("conditionType")==1){
-                                    $("#tips-wrap").hide();
+                                    // $("#tips-wrap").hide();
                                     var obj = {
-                                        title: '',
-                                        id: 'realOrg',
+                                        title: '尊敬的客户',
+                                        id: 'realOrg3',
                                         p: '请您先开通财富账户',
                                         yesTxt: '确认',
                                         celTxt: "取消",
-                                        zIndex: 100,
+                                        zIndex: 6001,
                                         callback: function(t) {}
                                     };
                                     $.elasticLayer(obj)
@@ -944,7 +945,7 @@ $(function() {
                                     $("#tips-wrap").hide();
                                     var obj = {
                                         title: '',
-                                        id: 'realOrg',
+                                        id: 'realOrg2',
                                         p: '机构客户需联系您的理财师，进行线下开户',
                                         yesTxt: '确认',
                                         celTxt: "取消",
