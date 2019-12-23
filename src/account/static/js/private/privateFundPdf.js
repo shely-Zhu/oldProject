@@ -69,7 +69,7 @@ $(function(){
                     // 获取第i页
                     //
                     pdf.getPage(i).then(function getPageHelloWorld(page) {
-                        var scale = 1;
+                        var scale = 0.6;
                         var viewport = page.getViewport(scale);
         
                         //
@@ -78,7 +78,8 @@ $(function(){
                         var canvas = document.createElement('canvas');
                         var context = canvas.getContext('2d');
                         canvas.height = viewport.height;
-                        canvas.width = viewport.width;
+                        //canvas.width = viewport.width;
+                        canvas.width = window.screen.width
         
                         // 这里拿body当pdf容器
                         document.getElementById('pdfBox').appendChild(canvas);
