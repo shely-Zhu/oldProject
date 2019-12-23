@@ -489,13 +489,13 @@ $(function() {
 						}else{
 							that.data.realLi.eq(3).show()
 						}
-						that.data.realLi.eq(4).hide() 
 						if(jsonData.isRiskMatch=="0"){
 							//是否风险等级
 							that.data.realLi.eq(4).hide()  
 						}else{
 							that.data.realLi.eq(4).show()
 						}
+						that.data.realLi.eq(4).hide() 
 
                 },
                 callbackFail: function(json) { //失败后执行的函数
