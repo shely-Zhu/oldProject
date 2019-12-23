@@ -182,6 +182,9 @@ require('@pathCommonJsCom/goTopMui.js');
                         });*/
                     // }
                  },
+                 failData: function(t, data) {
+                    tipAction(data.message)
+                 },
 
                  //初始化mui
                  initMui: function(){
@@ -208,14 +211,15 @@ require('@pathCommonJsCom/goTopMui.js');
                                     $.when(def)
                                     .fail(function( defData, pageCurrent ) {
                                         //失败状态
-                                        console.log( defData );
+                                        console.log( "失败", defData );
 
-                                        that.dealData( t, defData, pageCurrent);
+                                        //that.dealData( t, defData, pageCurrent);
+                                        that.failData(t, defData)
                                         
                                     })
                                     .done(function( defData, pageCurrent ) {
                                         //成功状态
-                                       console.log( defData );
+                                       console.log( "成功", defData );
 
                                        //处理数据
                                        that.dealData( t, defData, pageCurrent);
