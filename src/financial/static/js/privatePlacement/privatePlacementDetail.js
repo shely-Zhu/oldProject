@@ -894,6 +894,7 @@ $(function() {
                         isPopup = "", //弹框售前告知书
                         isRiskPopup = "", //期限不符弹框
                         PopupElasticLayer = "",
+                        objElasticLayer = "", // 产品风险等级与个人承受能力匹配弹框
                         isReal = "", //是否实名认证，因为如果机构切一键认证是实名，点击需要提示弹框。
                         singleaAuthenPath = "", //一键认证跳转链接
                         singleaAuthen = false; //条件框是否展示
@@ -995,16 +996,52 @@ $(function() {
                                 var data = json.data[0],
                                     noticeObj = data;
 									if(!!isRiskPopup){//如果不匹配
-										PopupElasticLayer = '<p class="" style="font-weight:bold;text-align:center">你选择的产品与您现在的风险承受能力相匹配</p>' + 
+										/*PopupElasticLayer = '<p class="" style="font-weight:bold;text-align:center">你选择的产品与您现在的风险承受能力相匹配</p>' + 
 															'<p class="" style="font-weight:bold;text-align:center">您风险测评中所选计划投资期限少于产品期限存在匹配风险，请确认是否继续购买</p>' +
-			                                            	'<p class="">请您认真阅读' + noticeObj.fileName + that.data.productName + '并确认后继续购买该产品</p>';
-									}else{
-										PopupElasticLayer = '<p class="" style="font-weight:bold;text-align:center">你选择的产品与您现在的风险承受能力相匹配</p>' +
-                                            '<p class="">请您认真阅读' + noticeObj.fileName + that.data.productName + '并确认后继续购买该产品</p>'; //期限不符弹框
+			                                            	'<p class="">请您认真阅读' + noticeObj.fileName + that.data.productName + '并确认后继续购买该产品</p>';*/
+									    objElasticLayer = {
+                                            title: '',
+                                            id: 'sellPop',
+                                            p: '<p class="" style="font-weight:bold;text-align:center">您购买的产品与您现在的风险承受能力不匹配</p>',
+                                            yesTxt: '重新测评',
+                                            celTxt: '放弃购买',
+                                            zIndex: 1200,
+                                            callback: function(t) {
+                                                // 跳转到测评页面
+                                                window.location.href = site_url.riskAppraisal_url + '?type=private'
+                                            },
+                                        };
+                                    }else{
+                                        objElasticLayer = {
+                                            title: '',
+                                            id: 'sellPop',
+                                            p: '<p class="" style="font-weight:bold;text-align:center">您风险测评中所选计划投资期限少于产品期限存在匹配风险，请确认是否继续购买</p>',
+                                            yesTxt: '继续',
+                                            celTxt: '放弃',
+                                            zIndex: 1200,
+                                            callback: function(t) {
+                                                var obj = {
+                                                    title: '',
+                                                    id: 'sellPop',
+                                                    p: '<p class="" style="font-weight:bold;text-align:center">你选择的产品与您现在的风险承受能力相匹配</p>' + 
+                                                            '<p class="">请您认真阅读' + noticeObj.fileName + that.data.productName + '并确认后继续购买该产品</p>',
+                                                    yesTxt: '去阅读',
+                                                    celTxt: '取消',
+                                                    zIndex: 1200,
+                                                    callback: function(t) {
+                                                        window.location.href = site_url.downloadNew_api + "?filePath=" + noticeObj.fileUrl + "&fileName=" + new Base64().encode(noticeObj.fileName) + "&groupName=" +
+                                                            noticeObj.groupName + "show=1 "
+                                                    },
+                                                };
+                                                $.elasticLayer(obj) 
+                                            },
+                                        };
+										// PopupElasticLayer = '<p class="" style="font-weight:bold;text-align:center">你选择的产品与您现在的风险承受能力相匹配</p>' +
+          //                                   '<p class="">请您认真阅读' + noticeObj.fileName + that.data.productName + '并确认后继续购买该产品</p>'; //期限不符弹框
 									}
                                 if (!singleaAuthen) { //如果v.show都是0，则不展示预约框,跳转到相应链接
                                     $("#tips-wrap").hide();
-                                    var obj = {
+                                    /*var obj = {
                                         title: '',
                                         id: 'sellPop',
                                         p: PopupElasticLayer,
@@ -1015,9 +1052,8 @@ $(function() {
                                             window.location.href = site_url.downloadNew_api + "?filePath=" + noticeObj.fileUrl + "&fileName=" + new Base64().encode(noticeObj.fileName) + "&groupName=" +
                                                 noticeObj.groupName + "show=1 "
                                         },
-                                    };
-                                    $.elasticLayer(obj)
-
+                                    };*/
+                                    $.elasticLayer(objElasticLayer)
                                 }
                             },
                             callbackFail: function(json) { //失败后执行的函数
@@ -1028,7 +1064,7 @@ $(function() {
                         }];
                         $.ajaxLoading(ReourceListobj);
                     } else if (!singleaAuthen) { //如果不弹框且没有显示认证五步款则有以下步骤
-
+                        
                         that.nextStep();
                     }
 
