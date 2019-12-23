@@ -996,23 +996,10 @@ $(function() {
                                 that.data.canClick = true; //变为可点击
                                 var data = json.data[0],
                                     noticeObj = data;
-									if(!!isRiskPopup){//如果不匹配
+									if(isRiskPopup){//如果不匹配
 										/*PopupElasticLayer = '<p class="" style="font-weight:bold;text-align:center">你选择的产品与您现在的风险承受能力相匹配</p>' + 
-															'<p class="" style="font-weight:bold;text-align:center">您风险测评中所选计划投资期限少于产品期限存在匹配风险，请确认是否继续购买</p>' +
-			                                            	'<p class="">请您认真阅读' + noticeObj.fileName + that.data.productName + '并确认后继续购买该产品</p>';*/
-									    objElasticLayer = {
-                                            title: '',
-                                            id: 'sellPop',
-                                            p: '<p class="" style="font-weight:bold;text-align:center">您购买的产品与您现在的风险承受能力不匹配</p>',
-                                            yesTxt: '重新测评',
-                                            celTxt: '放弃购买',
-                                            zIndex: 1200,
-                                            callback: function(t) {
-                                                // 跳转到测评页面
-                                                window.location.href = site_url.riskAppraisal_url + '?type=private'
-                                            },
-                                        };
-                                    }else{
+                                        '<p class="" style="font-weight:bold;text-align:center">您风险测评中所选计划投资期限少于产品期限存在匹配风险，请确认是否继续购买</p>' +
+                                        '<p class="">请您认真阅读' + noticeObj.fileName + that.data.productName + '并确认后继续购买该产品</p>';*/
                                         objElasticLayer = {
                                             title: '',
                                             id: 'sellPop',
@@ -1031,10 +1018,23 @@ $(function() {
                                                     zIndex: 1200,
                                                     callback: function(t) {
                                                         window.location.href = site_url.downloadNew_api + "?filePath=" + noticeObj.fileUrl + "&fileName=" + new Base64().encode(noticeObj.fileName) + "&groupName=" +
-                                                            noticeObj.groupName + "show=1 "
+                                                        noticeObj.groupName + "show=1"
                                                     },
                                                 };
                                                 $.elasticLayer(obj) 
+                                            },
+                                        };
+                                    }else{
+                                        objElasticLayer = {
+                                            title: '',
+                                            id: 'sellPop',
+                                            p: '<p class="" style="font-weight:bold;text-align:center">您购买的产品与您现在的风险承受能力不匹配</p>',
+                                            yesTxt: '重新测评',
+                                            celTxt: '放弃购买',
+                                            zIndex: 1200,
+                                            callback: function(t) {
+                                                // 跳转到测评页面
+                                                window.location.href = site_url.riskAppraisal_url + '?type=private'
                                             },
                                         };
 										// PopupElasticLayer = '<p class="" style="font-weight:bold;text-align:center">你选择的产品与您现在的风险承受能力相匹配</p>' +
