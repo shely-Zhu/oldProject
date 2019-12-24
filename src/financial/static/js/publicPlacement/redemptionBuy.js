@@ -3,7 +3,7 @@
  * @Date: 2019-11-26 14:42:56
 <<<<<<< Updated upstream
 <<<<<<< Updated upstream
- * @LastEditTime : 2019-12-20 11:13:52
+ * @LastEditTime : 2019-12-24 18:14:30
 =======
  * @LastEditTime: 2019-12-18 14:52:02
 >>>>>>> Stashed changes
@@ -160,7 +160,7 @@ $(function() {
             var that = this;
             var callbackData;
             var obj = [{
-                url:site_url.newFundDetails_api,
+                url:site_url.newfundDetails_api,
                 needDataEmpty:true,
                 async: false ,
                 data:{

@@ -155,12 +155,13 @@ $(function() {
                 }
             }, {
                 url: site_url.queryDictionary_api, //基金诊断-字典接口
+                contentTypeSearch:true,
                 data: {
-                    "dicType": 'fundDiagnosisKey',
+                    "keySets": 'fundDiagnosisKey',
                 },
                 // needDataEmpty: false,
                 callbackDone: function(json) {
-                    var jsonData = json.data.list;
+                    var jsonData = json.data.fundDiagnosisKey;
 
                     that.gV.tipArr = jsonData;
                 },
@@ -286,7 +287,7 @@ $(function() {
             // 文案提示
             mui("body").on('mdClick', '.dd_icon', function() {
                 var i = $(this).attr('num');
-                var value = that.gV.tipArr[i] && that.gV.tipArr[i].value;
+                var value = that.gV.tipArr[i].value;
                 var tital;
                 if(i == 0){
                     tital = "综合评分"
