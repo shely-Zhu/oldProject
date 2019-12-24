@@ -879,6 +879,7 @@ $(function() {
 
         },
         getJumpUrl: function(v) { //获取跳转链接
+            var that = this;
             var jumpUrl = ""; //跳转链接
             if (v.conditionJump == 1) { //跳转到认证中心页面
                 jumpUrl = site_url.realName_url
