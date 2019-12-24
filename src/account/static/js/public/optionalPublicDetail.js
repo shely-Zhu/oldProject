@@ -459,41 +459,36 @@ $(function() {
 							that.data.tipsWrap.show()
 							that.data.realLi.show();
 						}
-						Object.keys(jsonData).forEach(function(key){
-                            if(!!jsonData[key]){
-                               that.data.singleaAuthenPath = key;
-                                return ;
-                            }
-                        })
-						if(jsonData.isWealthAccount=="0"){
+						that.data.singleaAuthenPath = that.getSingleaAuthenPath(jsonData);
+						if(jsonData.isWealthAccount=="0"||jsonData.isWealthAccount == null){
 							//是否开通财富账户
-							that.data.realLi.eq(0).hide()  
+							that.data.realLi.eq(0).show()  
 						}else{
-							that.data.realLi.eq(0).show()
+							that.data.realLi.eq(0).hide()
 						}
-						if(jsonData.isRiskEndure=="0"){
+						if(jsonData.isRiskEndure=="0"||jsonData.isRiskEndure == null){
 							//是否风测
-							that.data.realLi.eq(1).hide()  
+							that.data.realLi.eq(1).show()  
 						}else{
-							that.data.realLi.eq(1).show()
+							that.data.realLi.eq(1).hide()
 						}
-						if(jsonData.isPerfect=="0"){
+						if(jsonData.isPerfect=="0" ||jsonData.isPerfect== null){
 							//是否完善资料
-							that.data.realLi.eq(2).hide()  
+							that.data.realLi.eq(2).show()  
 						}else{
-							that.data.realLi.eq(2).show()
+							that.data.realLi.eq(2).hide()
 						}
-						if(jsonData.isInvestFavour=="0"){
+						if(jsonData.isInvestFavour=="0" || jsonData.isInvestFavour == null){
 							//是否投资者分类
-							that.data.realLi.eq(3).hide()  
+							that.data.realLi.eq(3).show()  
 						}else{
-							that.data.realLi.eq(3).show()
+							that.data.realLi.eq(3).hide()
 						}
-						if(jsonData.isRiskMatch=="0"){
+						if(jsonData.isRiskMatch=="0" || jsonData.isRiskMatch == null){
 							//是否风险等级
-							that.data.realLi.eq(4).hide()  
+							that.data.realLi.eq(4).show()  
 						}else{
-							that.data.realLi.eq(4).show()
+							that.data.realLi.eq(4).hide()
 						}
 						that.data.realLi.eq(4).hide() 
 
@@ -552,6 +547,20 @@ $(function() {
 			}];
 			$.ajaxLoading(obj);
 		},
+		getSingleaAuthenPath:function(data){
+			var that = this;
+			var singleaAuthenPath="";
+			if(!data.isWealthAccount){
+				singleaAuthenPath = "isWealthAccount"
+			}else if(!data.isRiskEndure){
+				singleaAuthenPath = "isRiskEndure"
+			}else if(!data.isPerfect){
+				singleaAuthenPath = "isPerfect"
+			}else if(!data.isInvestFavour){
+				singleaAuthenPath = 'isInvestFavour'
+			}
+			return singleaAuthenPath 
+		 },
 		//点击展开按钮
 		event: function(){
 			var that = this;
@@ -662,8 +671,8 @@ $(function() {
 							window.location.href = site_url.realName_url
 							break;
 	
-						case 1:   //风险评测
-							window.location.href = site_url.riskAppraisal_url + "?type=asset"
+						case 1:   //私募风险评测  type=private type=asset 资管风测
+							window.location.href = site_url.riskAppraisal_url + "?type=private"
 							break;
 	
 						case 2:   //完善基本信息
@@ -690,7 +699,7 @@ $(function() {
 							break;
 	
 						case "isRiskEndure":   //风险评测
-							window.location.href = site_url.riskAppraisal_url + "?type=asset"
+							window.location.href = site_url.riskAppraisal_url + "?type=private"
 							break;
 	
 						case "isPerfect":   //完善基本信息

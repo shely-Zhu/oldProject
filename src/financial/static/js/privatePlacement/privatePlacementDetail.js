@@ -186,7 +186,11 @@ $(function() {
                     // 产品期限
                     $('.productDeadlineNum').html(jsonData.projectTerm + jsonData.projectTermUnit);
                     // 预约资质
-                    $('.appointment span').html(jsonData.orderCondition);
+                    if(jsonData.orderCondition && jsonData.orderCondition!='') {
+                        $('.appointment span').html(jsonData.orderCondition);
+                    } else {
+                        $(".appointment").hide()
+                    }
                     // 产品特点标签
                     that.getElements.isElecContract = jsonData.isElecContract; // 是否是电子合同产品【0.否 1.是】
                     if (!!jsonData.projectLable) {
@@ -242,7 +246,7 @@ $(function() {
                     }
                     // 发行规模
                     if (jsonData.formatIssuanceSize) {
-                        $('.issuingScale .changgeRight').html(jsonData.formatIssuanceSize);
+                        $('.issuingScale .changgeRight').html(jsonData.formatIssuanceSize + '万');
                     } else {
                         $('.issuingScale').hide();
                     }
@@ -355,7 +359,7 @@ $(function() {
                     $('.redemptionOpenFrequency').html(jsonData.redemptionOpenFrequency);
 
                     // 立即预约上的认购申购费率
-                    $('.buyRate span').html(jsonData.buyRate);
+                    $('.buyRate span').html(jsonData.buyRate + '%');
 
                     // 立即预约按钮展示逻辑
                     switch (jsonData.productStatus) {
@@ -736,6 +740,12 @@ $(function() {
                         color: '#9B9B9B',
                         formatter: '{value}%',
                     },
+                    type : 'value',
+                    axisLabel: {                   
+                        formatter: function (value, index) {           
+                            return value.toFixed(4) + '%';      
+                        }                
+                    }
                 },
                 series: [{
                     type: 'line',
