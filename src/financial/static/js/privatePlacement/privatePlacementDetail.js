@@ -867,7 +867,6 @@ $(function() {
 
                     $('#topc').html(json.data.remarks);
 
-
                 },
                 callbackNoData: function() {
                     $(".productRateContainer").hide()
@@ -1120,14 +1119,14 @@ $(function() {
 
                     // 风险揭示书
                     if (jsonData.fxjss) {
-                        jsonData.title = '风险揭示书';
+                        jsonData.title = '风险揭示信息';
                         that.processData(jsonData.fxjss);
                         jsonData.displayGrounp = jsonData.fxjss;
                         generateTemplate(jsonData, $(".panel3"), that.$e.adjustmentTemp);
                     }
                     // 产品信息
                     if (jsonData.cpxx) {
-                        jsonData.title = '产品信息';
+                        jsonData.title = '产品介绍信息';
                         that.processData(jsonData.cpxx);
                         jsonData.displayGrounp = jsonData.cpxx;
                         generateTemplate(jsonData, $(".panel3"), that.$e.adjustmentTemp);
@@ -1189,6 +1188,9 @@ $(function() {
             var that = this;
 
             $.each(data, function(i, el) {
+                el.name = el.fileName.substring(1, el.fileName.indexOf("】"));
+                el.marName = el.fileName.substring(el.fileName.indexOf("】") + 1);
+
                 if (el.fileName.indexOf(".pdf") != -1) {
                     el.line = true; //线上可预览
                     el.href = site_url.downloadNew_api + "?filePath=" + el.fileUrl + "&fileName=" + new Base64().encode(el.fileName) + "&groupName=" + el.groupName + "&show=1";
