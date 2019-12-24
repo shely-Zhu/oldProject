@@ -467,6 +467,7 @@ $(function() {
                 },
                 callbackNoData: function(json) {
                     tipAction(json.message);
+                    $(".performanceComparison").hide()
                 },
                 callbackFail: function(json) {
                     tipAction(json.message);
@@ -868,9 +869,8 @@ $(function() {
 
 
                 },
-                callbackFail: function(json) { //失败后执行的函数
-                    tipAction(json.message);
-
+                callbackNoData: function() {
+                    $(".productRateContainer").hide()
                 }
             }];
             $.ajaxLoading(obj);

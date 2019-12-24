@@ -70,7 +70,7 @@ $(function() {
         getHoldData: function(t) {
             var that = this;
             var obj = [{
-                url: site_url.accountHoldShareDetail_api, 
+                url: site_url.accountHoldShareDetail_api, //1
                 data: {
                     "pageCurrent": that.gV.pageCurrent,
                     "pageSize": that.gV.pageSize,
@@ -92,7 +92,7 @@ $(function() {
         getPieData: function(t) {
             var that = this;
             var obj = [{
-                url: site_url.fundConfigRatioDetail_api, 
+                url: site_url.fundConfigRatioDetail_api, //1
                 data: {
                 
                 },
@@ -119,7 +119,7 @@ $(function() {
         getAssetData: function(t) {
             var that = this;
             var obj = [{
-                url: site_url.assetConfigRatioDetail_api, 
+                url: site_url.assetConfigRatioDetail_api, //1
                 data: {
                 
                 },
@@ -167,7 +167,7 @@ $(function() {
         getHeavyData: function(t) {
             var that = this;
             var obj = [{
-                url: site_url.heavyIndustryConfigRatioDetail_api, 
+                url: site_url.heavyIndustryConfigRatioDetail_api, //1
                 data: {
 
                 },
@@ -187,7 +187,7 @@ $(function() {
         getVolumeData: function(t) {
             var that = this;
             var obj = [{
-                url: site_url.bondTypeAndValue_api, 
+                url: site_url.bondTypeAndValue_api, //1
                 data: {
 
                 },
@@ -243,7 +243,7 @@ $(function() {
         getDiagnosisData: function(t) {
             var that = this;
             var obj = [{
-                url: site_url.diagnoseResult_api, 
+                url: site_url.diagnoseResult_api, //1
                 data: {
 
                 },
