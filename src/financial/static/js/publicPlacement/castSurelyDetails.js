@@ -104,6 +104,17 @@ $(function () {
             n.tradeTime = n.tradeTime.split(" ")[0]
             n.status = n.status === "1" ? 1 : 0
           });
+          if(json.tradeRecord.length>0){
+            for(var i=0;i<json.tradeRecord.length;i++){
+              if(json.tradeRecord[i].status=="1"){
+                json.tradeRecord[i].statusDesc_1 ="定投成功"
+              }else if(json.tradeRecord[i].status=="3"){
+                json.tradeRecord[i].statusDesc_1 ="待确认"
+              }else{
+                json.tradeRecord[i].statusDesc_1 ="定投失败"
+              }
+            }
+          }
           var html = template(json);
           $(".tplBox").html(html);
 
