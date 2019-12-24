@@ -124,7 +124,15 @@ $(function () {
 						$('.popup').css('display','block')
 					}
                   
-                }
+				},
+				callbackNoData:function(json){
+					generateTemplate("", that.$el.popupUl, that.$el.bankListTemplate,true);
+						$("#loading").hide()
+						$('.popup').css('display','block')
+
+				},
+				callbackFail:function(json){
+				}
 
             }];
             $.ajaxLoading(obj);
