@@ -202,7 +202,7 @@ $(function () {
                         isReal = "", //是否实名认证，因为如果机构切一键认证是实名，点击需要提示弹框。
                         singleaAuthenPath = "", //一键认证跳转链接
 						singleaAuthen = false; //条件框是否展示
-						if(jsonData.isWealthAccount == "1"&&jsonData.isRiskEndure == "1"&&jsonData.isPerfect == "1"&&jsonData.isInvestFavour=="1"&&jsonData.isRiskMatch=="1"){
+						if(jsonData.isWealthAccount != "1"&&jsonData.isRiskEndure == "1"&&jsonData.isPerfect == "1"&&jsonData.isInvestFavour=="1"&&jsonData.isRiskMatch=="1"){
                             that.gV.realLi.hide();
                             that.gV.tipsWrap.hide();
                             if(type == "into"){
