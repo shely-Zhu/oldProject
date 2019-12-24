@@ -459,12 +459,7 @@ $(function() {
 							that.data.tipsWrap.show()
 							that.data.realLi.show();
 						}
-						Object.keys(jsonData).forEach(function(key){
-                            if(!!jsonData[key]){
-                               that.data.singleaAuthenPath = key;
-                                return ;
-                            }
-                        })
+						that.data.singleaAuthenPath = that.getSingleaAuthenPath(jsonData);
 						if(jsonData.isWealthAccount=="0"||jsonData.isWealthAccount == null){
 							//是否开通财富账户
 							that.data.realLi.eq(0).show()  
@@ -552,6 +547,20 @@ $(function() {
 			}];
 			$.ajaxLoading(obj);
 		},
+		getSingleaAuthenPath:function(data){
+			var that = this;
+			var singleaAuthenPath="";
+			if(!data.isWealthAccount){
+				singleaAuthenPath = "isWealthAccount"
+			}else if(!data.isRiskEndure){
+				singleaAuthenPath = "isRiskEndure"
+			}else if(!data.isPerfect){
+				singleaAuthenPath = "isPerfect"
+			}else if(!data.isInvestFavour){
+				singleaAuthenPath = 'isInvestFavour'
+			}
+			return singleaAuthenPath 
+		 },
 		//点击展开按钮
 		event: function(){
 			var that = this;
