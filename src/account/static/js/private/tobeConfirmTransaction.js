@@ -91,7 +91,6 @@ $(function() {
                         contentrefresh: '拼命加载中',
                         contentnomore: '暂无更多内容', //可选，请求完毕若没有更多数据时显示的提醒内容；
                         callback: function() {
-                            // debugger
                             //执行ajax请求
                             that.gV.aThis = this;
                             that.getData(this);
@@ -329,7 +328,6 @@ $(function() {
                         window.location.href = site_url.elecThirdStep_url + '?reserveId=' + reserveId + '&projectId=' + proId + '&projectName=' + projectName + '&isAllowAppend=' + isAllowAppend + '&isPubToPri=' + isPubToPri;
                     } else if (type == 'toSee') { //查看合同
                         window.location.href = site_url.seeSign_url + '?reserveId=' + reserveId;
-                        debugger
                     } else if (type == 'toUploadM') { //去上传汇款凭证
                         window.location.href = site_url.elecFourthStep_url + '?reserveId=' + reserveId + '&projectId=' + proId + '&projectName=' + projectName + '&isAllowAppend=' + isAllowAppend + '&isPubToPri=' + isPubToPri;
                     } else if (type == 'toView') { //详情
