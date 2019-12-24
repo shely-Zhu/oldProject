@@ -142,7 +142,7 @@ $(function () {
                   that.$e.amountInto.html(data.balanceMask)
                   that.$e.banKImgInto.attr('src',data.bankThumbnailUrl)
                   that.$e.bankNameInto.html(data.bankName)
-                  that.$e.bankNumInto.html(data.bankAccount.substr(data.bankAccount.length-4))
+                  that.$e.bankNumInto.html(data.bankAccount.substr(data.bankAccountMask.length-4))
                   that.$e.payTypeInto.html('在线支付')
                 }
                 if(that.gV.flag == 'out'){   // 转出
