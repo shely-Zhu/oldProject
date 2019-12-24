@@ -25,7 +25,7 @@ require('@pathCommonJsCom/goTopMui.js');
 var splitUrl = require('@pathCommonJs/components/splitUrl.js')();
 var transcationTem = require('@pathCommonJsCom/account/transcationTem.js');
 
-var generateTemplate = require('@pathCommonJsComBus/generateTemplate.js');
+// var generateTemplate = require('@pathCommonJsComBus/generateTemplate.js');
 var splitUrl = require('@pathCommonJs/components/splitUrl.js')();
 var isConfirm = splitUrl['type'];
 
@@ -352,6 +352,7 @@ $(function() {
             })
         },
         initTemp:function(data, $ele, $id, type) {
+            var that=this;
             var $ele = $ele || $('.contentWrap'),
                 $id = $id || $('#trans-template');
             if (isConfirm == 'confirmed') {
@@ -434,7 +435,22 @@ $(function() {
                 data[i].redeemDate = data[i].redeemDate?data[i].redeemDate:'--'
 
             }
-            generateTemplate(data, $ele, $id, type);
+            that.generateTemplate(data, $ele, $id, type);
+            
+    },
+    generateTemplate:function(data, $ele, $id,clear) {
+        // 模板
+        var that = this,
+            source = $id.html(),
+            template = Handlebars.compile(source),
+            html = template(data);
+    
+        if(clear){
+            $ele.html(html);
+        }else{
+            $ele.append(html);
+    
+        }
     }
     };
     data.init();
