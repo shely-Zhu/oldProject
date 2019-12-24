@@ -705,13 +705,13 @@ $(function () {
 				}, {
 					value: "120105",
 					text: "周五"
-				}, {
+				}/*, {
 					value: "120106",
 					text: "周六"
 				}, {
 					value: "120107",
 					text: "周日"
-				}]
+				}*/]
 			}, {
 				value: '130000',
 				text: '每月',
@@ -810,6 +810,9 @@ $(function () {
 			
 			/** 下面三个事件： 银行卡列表出现/隐藏 **/
 			mui("body").on('mdClick','.paymoney',function(){
+				if(that.gV.type == 'edit'){
+					return
+				}
 				$(".imgc").hide()
 				$(".iimg").show()
 				that.gV.payType = $(this).attr('pay-type')
@@ -821,6 +824,10 @@ $(function () {
 			}, {
 				htmdEvt: 'ordinarySetThrow_01'
 			}) 
+			//返回按钮
+			mui("mui").on("mdClick","#goBack",function(){
+				history.go(-1)
+			})
 
 			mui("body").on('mdClick','.popup-close',function(){
 				$('.popup').css('display','none')

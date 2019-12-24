@@ -105,7 +105,7 @@ $(function () {
 
 		 initParmes:function(){
 		   var that = this;
-		   var data = JSON.parse(sessionStorage.getItem("transformMessage"));
+		   var data = JSON.parse(sessionStorage.getItem("transformMessage"))?JSON.parse(sessionStorage.getItem("transformMessage")):"";
 		   that.gv.productName = data.productName;
 		   that.gv.fundCode = data.fundCode;
 		   that.gv.transformTotalMoney = data.money;

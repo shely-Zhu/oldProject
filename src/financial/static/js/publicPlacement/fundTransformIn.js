@@ -200,6 +200,14 @@ $(function () {
                   
 				},
 				callbackNoData:function(json){
+                        $('.popup').css('display','block')
+						if(useEnv == '0'){
+							that.$el.popupTitle.html('选择在线支付银行卡')
+						}else{
+							that.$el.popupUl2.html('')
+							that.$el.popupTitle.html('选择汇款支付银行卡')
+						}
+						generateTemplate("", that.$el.popupUl, that.$el.bankListTemplate,true);
 					tipAction(json.message);
 				},
 				callbackFail:function(json){
@@ -674,6 +682,10 @@ $(function () {
 			}, {
 				htmdEvt: 'fundTransformIn_18'
 			});
+			//返回按钮
+			mui("mui").on("mdClick","#goBack",function(){
+				history.go(-1)
+			})
 
 			//风险揭示函
 			mui("body").on("mdClick",'.raskBook',function(){
