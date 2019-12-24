@@ -432,7 +432,7 @@ $(function() {
                 needLogin: true,
                 callbackDone: function(json) {
                     var that = this;
-
+                    
                     $.each(json, function(i, el) {
                         if (el.benifitUpperLimit == "0" || !el.benifitUpperLimit) {
                             el.bool = false;
@@ -443,7 +443,7 @@ $(function() {
                     
                     var tplm = $("#prvLevel").html();
                     var template = Handlebars.compile(tplm);
-                    $(".performance").html(template(json));
+                    $(".performance").html(template(json.data));
                     
                 },
                 callbackNoData: function(json) {
@@ -600,13 +600,16 @@ $(function() {
                 needLogin: true,
                 callbackDone: function(json) {
                     var jsonData = json.data;
-                    $(".priceLimit span").html(jsonData.pageList[0].unitNetChangePercent);
+                    // debugger
+                    $(".priceLimit span").html(jsonData.pageList[jsonData.pageList.length-1].unitNetChangePercent);
 
                     //拼数据
                     $.each(jsonData.pageList, function(i, el) {
-                        newData.sevenIncomeRate.push(el.unitNetValue);
-                        newData.profitThoudDate.push(el.netValueDate);
+                        newData.sevenIncomeRate.unshift(el.unitNetValue);
+                        newData.profitThoudDate.unshift(el.netValueDate);
                     })
+                    // debugger
+                    // newData.profitThoudDate=newData.profitThoudDate.reverse()
 
                     switch (Number(num)) {
                         case 0:
@@ -1082,7 +1085,7 @@ $(function() {
 
                 },
                 callbackNoData:function(argument) {
-                    tipAction(json.message);
+                    tipAction(argument.message);
                     that.data.canClick = true; //变为可点击
                 }
             }];
