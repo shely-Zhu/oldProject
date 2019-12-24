@@ -465,37 +465,37 @@ $(function() {
                                 return ;
                             }
                         })
-						if(jsonData.isWealthAccount=="0"){
+						if(jsonData.isWealthAccount=="0"||jsonData.isWealthAccount == null){
 							//是否开通财富账户
-							that.data.realLi.eq(0).hide()  
+							that.data.realLi.eq(0).show()  
 						}else{
-							that.data.realLi.eq(0).show()
+							that.data.realLi.eq(0).hide()
 						}
-						if(jsonData.isRiskEndure=="0"){
+						if(jsonData.isRiskEndure=="0"||jsonData.isRiskEndure == null){
 							//是否风测
-							that.data.realLi.eq(1).hide()  
+							that.data.realLi.eq(1).show()  
 						}else{
-							that.data.realLi.eq(1).show()
+							that.data.realLi.eq(1).hide()
 						}
-						if(jsonData.isPerfect=="0"){
+						if(jsonData.isPerfect=="0" ||jsonData.isPerfect== null){
 							//是否完善资料
-							that.data.realLi.eq(2).hide()  
+							that.data.realLi.eq(2).show()  
 						}else{
-							that.data.realLi.eq(2).show()
+							that.data.realLi.eq(2).hide()
 						}
-						if(jsonData.isInvestFavour=="0"){
+						if(jsonData.isInvestFavour=="0" || jsonData.isInvestFavour == null){
 							//是否投资者分类
-							that.data.realLi.eq(3).hide()  
+							that.data.realLi.eq(3).show()  
 						}else{
-							that.data.realLi.eq(3).show()
+							that.data.realLi.eq(3).hide()
+						}
+						if(jsonData.isRiskMatch=="0" || jsonData.isRiskMatch == null){
+							//是否风险等级
+							that.data.realLi.eq(4).show()  
+						}else{
+							that.data.realLi.eq(4).hide()
 						}
 						that.data.realLi.eq(4).hide() 
-						if(jsonData.isRiskMatch=="0"){
-							//是否风险等级
-							that.data.realLi.eq(4).hide()  
-						}else{
-							that.data.realLi.eq(4).show()
-						}
 
                 },
                 callbackFail: function(json) { //失败后执行的函数
