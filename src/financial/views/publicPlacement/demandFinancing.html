@@ -1,3 +1,11 @@
+<!--
+ * @Author: your name
+ * @Date: 2019-11-26 14:42:56
+ * @LastEditTime: 2019-12-24 09:41:40
+ * @LastEditors: your name
+ * @Description: In User Settings Edit
+ * @FilePath: \htjf-app\src\financial\views\publicPlacement\demandFinancing.html
+ -->
 <!-- /**  
  * @Page:  活期理财
  * @Author: liliang 
@@ -37,7 +45,7 @@
      
      <script id="cashListConList" type="text/x-handlebars-template">
           {{#each this}}
-          <div class="cashItem" data="{{currentAmount}}" fundCode="{{fundCode}}" fundType="{{fundType}}">
+          <div class="cashItem" data="{{currentAmount}}" fundCode="{{fundCode}}" fundType="{{fundType}}" cash={{cash}}>
                <div class="itemTop">
                     <div class="itemTitle"><span>{{fundName}}</span><span class="rightCon"><span class="right"></span></span></div>
                     <div class="itemSevenIncome">七日年化：{{annYldRat}}</div>
