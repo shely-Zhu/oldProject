@@ -16,11 +16,13 @@ var operationNoList = [];
 module.exports = function(data, $ele, $id, type) {
     var $ele = $ele || $('.contentWrap'),
         $id = $id || $('#trans-template');
-    /*if (isConfirm == 'confirmed') {
-        window.sessionStorage.setItem('isconfirm', 1);
+    if (isConfirm == 'confirmed') {
+        //window.sessionStorage.setItem('isconfirm', 1);
+        sessionStorage.setItem("isconfirm", 1);
     } else if (isConfirm == 'toBeConfirmed') {
-        window.sessionStorage.setItem('isconfirm', 0);
-    }*/
+        //window.sessionStorage.setItem('isconfirm', 0);
+        sessionStorage.setItem("isconfirm", 0);
+    }
     for (var i = 0; i < data.length; i++) {
         // 是否确认交易isConfirm 1-确认 0-未确认
         data[i].isConfirmTrans = (isConfirm == 'confirmed') ? 1 : 0; //已确认
