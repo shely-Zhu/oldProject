@@ -44,7 +44,8 @@ $(function () {
             tipsWrap:$("#tips-wrap"),
             singleaAuthenPath : "", //一键认证跳转链接
             fixedInvestementBtn:$(".fixed_investement_btn"), //定投按钮
-            fixedInvestementBtnStatu:true
+            fixedInvestementBtnStatu:true,
+            fundName:"",
         },
         fundType: splitUrl['fundType'] == '10300' ? 1 : 0, //10300 货币基金类型，其余为普通基金类型
         init: function () {
@@ -207,7 +208,7 @@ $(function () {
                             that.gV.tipsWrap.hide();
                             if(type == "into"){
                                 //买入一键认证
-                                window.location.href = site_url.fundTransformIn_url + '?fundCode=' + fundCode + '&fundName=' + fundName;
+                                window.location.href = site_url.fundTransformIn_url + '?fundCode=' + splitUrl['fundCode'] + '&fundName=' + that.gV.secuSht;
                             }else if(type == "investement"){
 
                                 //定投一键认证
@@ -217,7 +218,7 @@ $(function () {
                                 if(that.gV.accountType === 0 || that.gV.accountType === 2){
                                     tipAction('暂不支持机构客户进行交易');
                                 }else{
-                                    window.location.href = site_url.pofOrdinarySetThrow_url + '?fundCode=' + fundCode + '&fundName=' + fundName + '&type=add';
+                                    window.location.href = site_url.pofOrdinarySetThrow_url + '?fundCode=' + splitUrl['fundCode'] + '&fundName=' + that.gV.secuSht + '&type=add';
                                 }
 
                             }
