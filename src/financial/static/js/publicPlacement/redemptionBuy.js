@@ -69,7 +69,7 @@ $(function() {
         webinit: function() {
             var that = this;
              console.log("888",that.gv.dataBox);
-             that.gv.dataList = JSON.parse(sessionStorage.getItem("publicFundDetail"));
+             that.gv.dataList = JSON.parse(sessionStorage.getItem("publicFundDetail"))?JSON.parse(sessionStorage.getItem("publicFundDetail")):"";
              that.getElements.maxMoneyContent[0].textContent = that.gv.dataList.enableShares;
              console.log("89898",JSON.parse(sessionStorage.getItem("publicFundDetail")))
             // that.gv.targetfundcode = that.gv.dataList.fundCode;
@@ -91,11 +91,13 @@ $(function() {
             $(".redemptionBuyTital span.code").html(that.gv.dataList.fundCode);
             $(".listOneCar img").attr("src",that.gv.dataList.bankThumbnailUrl);
             $(".listOneCar i").html(that.gv.dataList.bankName);
-            $(".listOneCar span.carNum").html(that.gv.dataList.bankAccountMask.substr(-4));
+            if(that.gv.dataList != ""){
+               $(".listOneCar span.carNum").html(that.gv.dataList.bankAccountMask.substr(-4));
+               $(".listSecondCar span.code").html(that.gv.dataList.bankAccountMask.substr(-4)); 
+            }
             $(".pay span.payTime").html(that.gv.dataList.estimateArrivalDate);
            // $(".msecond input").val(that.gv.dataList.enableShares);
             $(".listSecondCar span.name").html(that.gv.dataList.bankName);
-            $(".listSecondCar span.code").html(that.gv.dataList.bankAccountMask.substr(-4));
             $(".popupCarList .bank-img").attr("src",that.gv.dataList.bankThumbnailUrl)
         },
         //查看详情提交
