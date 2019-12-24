@@ -38,6 +38,7 @@ $(function() {
             unitNetValueDes: '',
             productNameTip:'',
             reourceData:true,   //标签内容
+            collectAccountFlag:true,    //标签募集账号
         },
         data: {
             canClick: true,
@@ -867,6 +868,8 @@ $(function() {
 
                     $('#topc').html(json.data.remarks);
 
+                    that.getElements.collectAccountFlag = false;
+
                 },
                 callbackNoData: function() {
                     $(".productRateContainer").hide()
@@ -1254,8 +1257,13 @@ $(function() {
                 }
                 // tab点击切换时请求接口
                 if ($(this).index() == 1) {
-                    // 募集账户信息
-                    that.collectAccount();
+                    if(that.getElements.collectAccountFlag){
+                        // 募集账户信息
+                        that.collectAccount();
+                    }
+                    else{
+                        return false;
+                    }
 
                 } else if ($(this).index() == 2) {
                     // 获取标签
