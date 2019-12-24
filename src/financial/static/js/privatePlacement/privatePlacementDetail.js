@@ -48,6 +48,7 @@ $(function() {
             endurePubIsold: '', // 公募风险评测是否过期 0:否 1:是
             endurePriIsold: '', // 私募风险测评是否过期0:否 1:是 
             accreditedInvestor:'',  //合格投资者【空-未做过】【0-未通过】【1-已通过】【2-已过期】
+            isOpenWealth:"1",//是否开通财富账户。0未开通，1已开通
             qrnhWfsy: {
                 oneMonth: {},
                 threeMonth: {},
@@ -622,7 +623,6 @@ $(function() {
                             break;
                         case 1:
                             that.data['dwjzljjz'].threeMonth = newData;
-                            console.log(that.data['dwjzljjz'].threeMonth);
                             break;
                         case 2:
                             that.data['dwjzljjz'].halfYear = newData;
@@ -871,11 +871,11 @@ $(function() {
             } else if (v.conditionJump == 3) { //跳转到专项风测页面
                 jumpUrl = site_url.riskAppraisal_url + "?type=asset"
             } else if (v.conditionJump == 4) { //跳转到投资者分类申请页面
-                jumpUrl = site_url.investorClassification_url
+                jumpUrl = site_url.investorClassification_url+ "?isOpenAcc=" + that.data.isOpenWealth;
             } else if (v.conditionJump == 5) { //跳转到投资者分类结果页页面
                 jumpUrl = site_url.investorClassificationResult_url
             } else if (v.conditionJump == 6) { //跳转到合格投资者申请 页面
-                jumpUrl = site_url.chooseQualifiedInvestor_url
+                jumpUrl = site_url.chooseQualifiedInvestor_url + "?isOpenAcc=" + that.data.isOpenWealth;
             } else if (v.conditionJump == 7) { //跳转到合格投资者结果页面
                 jumpUrl = site_url.qualifiedInvestorResult_url
             }else if (v.conditionJump == 8) { //信息查看（修改证件有效期） 
@@ -921,6 +921,9 @@ $(function() {
                         if (v.conditionType == 4 && !!v.isPopup) { //是否弹出售前告知书。售前告知书与风险等级匹配一起提示
                             isPopup = v.isPopup;
                         }
+                        if (v.conditionType == 1 && !v.isSatisfied) { //财富账户是否开通，需要给app携带，0未开通，1开通
+                            that.data.isOpenWealth = 0;
+                        }
                         if (v.conditionType == 6 && !!v.isPopup) { //是否弹出期限不符弹框
                             isRiskPopup = v.isPopup;
                         }
@@ -933,15 +936,15 @@ $(function() {
                                     isReal = true; //判断
                                 }
                             }
-                            that.$e.realLi.eq(Number(e) + 1).show();
-                            that.$e.realLi.eq(Number(e) + 1).find(".bank-status").html(v.statusDesc);
+                            that.$e.realLi.eq(e * 1).show();
+                            that.$e.realLi.eq(e * 1).find(".bank-status").html(v.statusDesc);
                             jumpUrl = that.getJumpUrl(v); //获取跳转Url。
                             that.$e.realLi.eq(e * 1).find(".tips-li-right").attr("jumpUrl",jumpUrl)
                             that.$e.realLi.eq(e * 1).find(".tips-li-right").attr("conditionType",v.conditionType)
                             that.$e.realLi.eq(e * 1).find(".tips-li-right").attr("conditionJump",v.conditionJump)
                         }
                         //						对应的条件认证到哪里
-                        that.$e.realLi.eq(Number(e) + 1).find(".tips-li-right").on('click', function() {
+                        that.$e.realLi.eq(e * 1).find(".tips-li-right").on('click', function() {
                         // that.$e.realLi.eq(0).find(".tips-li-right")
                             if($(this).attr('conditionJump')!=that.$e.realLi.eq(0).find(".tips-li-right").attr("conditionJump")&&that.$e.realLi.eq(0).find(".tips-li-right").attr("conditionType")==1){
                                     // $("#tips-wrap").hide();
@@ -1124,42 +1127,42 @@ $(function() {
                         jsonData.title = '风险揭示书';
                         that.processData(jsonData.fxjss);
                         jsonData.displayGrounp = jsonData.fxjss;
-                        generateTemplate(jsonData, $(".panel3"), that.$e.adjustmentTemp);
+                        generateTemplate(jsonData, $(".panel3"), that.$e.adjustmentTemp,'clear');
                     }
                     // 产品信息
                     if (jsonData.cpxx) {
                         jsonData.title = '产品信息';
                         that.processData(jsonData.cpxx);
                         jsonData.displayGrounp = jsonData.cpxx;
-                        generateTemplate(jsonData, $(".panel3"), that.$e.adjustmentTemp);
+                        generateTemplate(jsonData, $(".panel3"), that.$e.adjustmentTemp,'clear');
                     }
                     // 管理报告
                     if (jsonData.glbg) {
                         jsonData.title = '管理报告';
                         that.processData(jsonData.glbg);
                         jsonData.displayGrounp = jsonData.glbg;
-                        generateTemplate(jsonData, $(".panel3"), that.$e.adjustmentTemp);
+                        generateTemplate(jsonData, $(".panel3"), that.$e.adjustmentTemp,'clear');
                     }
                     // 资金分配
                     if (jsonData.zjfp) {
                         jsonData.title = '资金分配';
                         that.processData(jsonData.zjfp);
                         jsonData.displayGrounp = jsonData.zjfp;
-                        generateTemplate(jsonData, $(".panel3"), that.$e.adjustmentTemp);
+                        generateTemplate(jsonData, $(".panel3"), that.$e.adjustmentTemp,'clear');
                     }
                     // 重要公告及通知
                     if (jsonData.zyggjtz) {
                         jsonData.title = '重要公告及通知';
                         that.processData(jsonData.zyggjtz);
                         jsonData.displayGrounp = jsonData.zyggjtz;
-                        generateTemplate(jsonData, $(".panel3"), that.$e.adjustmentTemp);
+                        generateTemplate(jsonData, $(".panel3"), that.$e.adjustmentTemp,'clear');
                     }
                     // 恒天简报
                     if (jsonData.htjb) {
                         jsonData.title = '恒天简报';
                         that.processData(jsonData.htjb);
                         jsonData.displayGrounp = jsonData.htjb;
-                        generateTemplate(jsonData, $(".panel3"), that.$e.adjustmentTemp);
+                        generateTemplate(jsonData, $(".panel3"), that.$e.adjustmentTemp,'clear');
                     }
 
                 },
@@ -1167,7 +1170,6 @@ $(function() {
                     //请求失败，
                     //显示错误提示
                     tipAction(json.message);
-
                     //隐藏loading，调试接口时需要去掉
                     setTimeout(function() {
                         // that.getElements.listLoading.hide();

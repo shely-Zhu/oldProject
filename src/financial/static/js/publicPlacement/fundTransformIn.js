@@ -674,6 +674,10 @@ $(function () {
 			}, {
 				htmdEvt: 'fundTransformIn_18'
 			});
+			//返回按钮
+			mui("mui").on("mdClick","#goBack",function(){
+				history.go(-1)
+			})
 
 			//风险揭示函
 			mui("body").on("mdClick",'.raskBook',function(){

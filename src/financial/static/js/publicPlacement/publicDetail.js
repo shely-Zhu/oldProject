@@ -44,7 +44,8 @@ $(function () {
             tipsWrap:$("#tips-wrap"),
             singleaAuthenPath : "", //一键认证跳转链接
             fixedInvestementBtn:$(".fixed_investement_btn"), //定投按钮
-            fixedInvestementBtnStatu:true
+            fixedInvestementBtnStatu:true,
+            fundName:"",
         },
         fundType: splitUrl['fundType'] == '10300' ? 1 : 0, //10300 货币基金类型，其余为普通基金类型
         init: function () {
@@ -69,7 +70,7 @@ $(function () {
             var that = this;
             // 请求页面数据
             var obj = [{
-                url: site_url.newfundDetails_api,
+                url: site_url.newfundDetails_api,//1
                 data: {
                     fundCode: splitUrl['fundCode'],
                     // fundCode:"000847",
@@ -161,7 +162,7 @@ $(function () {
             var that = this;
             // 请求页面数据
             var obj = [{
-                url: site_url.queryUserBaseInfo_api,
+                url: site_url.queryUserBaseInfo_api,//1
                 data: {
                 },
                 needLogin: false,
@@ -185,7 +186,7 @@ $(function () {
 
             //发送ajax请求
             var obj = [{
-                url: site_url.queryCustomerAuthInfo_api,
+                url: site_url.queryCustomerAuthInfo_api,//1
                 data: {
                     fundCode: splitUrl['fundCode'],
                 },
@@ -202,12 +203,12 @@ $(function () {
                         isReal = "", //是否实名认证，因为如果机构切一键认证是实名，点击需要提示弹框。
                         singleaAuthenPath = "", //一键认证跳转链接
 						singleaAuthen = false; //条件框是否展示
-						if(jsonData.isWealthAccount == "1"&&jsonData.isRiskEndure == "1"&&jsonData.isPerfect == "1"&&jsonData.isInvestFavour=="1"&&jsonData.isRiskMatch=="1"){
+						if(jsonData.isWealthAccount != "1"&&jsonData.isRiskEndure == "1"&&jsonData.isPerfect == "1"&&jsonData.isInvestFavour=="1"&&jsonData.isRiskMatch=="1"){
                             that.gV.realLi.hide();
                             that.gV.tipsWrap.hide();
                             if(type == "into"){
                                 //买入一键认证
-                                window.location.href = site_url.fundTransformIn_url + '?fundCode=' + fundCode + '&fundName=' + fundName;
+                                window.location.href = site_url.fundTransformIn_url + '?fundCode=' + splitUrl['fundCode'] + '&fundName=' + that.gV.secuSht;
                             }else if(type == "investement"){
 
                                 //定投一键认证
@@ -217,7 +218,7 @@ $(function () {
                                 if(that.gV.accountType === 0 || that.gV.accountType === 2){
                                     tipAction('暂不支持机构客户进行交易');
                                 }else{
-                                    window.location.href = site_url.pofOrdinarySetThrow_url + '?fundCode=' + fundCode + '&fundName=' + fundName + '&type=add';
+                                    window.location.href = site_url.pofOrdinarySetThrow_url + '?fundCode=' + splitUrl['fundCode'] + '&fundName=' + that.gV.secuSht + '&type=add';
                                 }
 
                             }
@@ -230,7 +231,7 @@ $(function () {
                       
                         that.gV.singleaAuthenPath = that.getSingleaAuthenPath(jsonData);
                        
-						if(jsonData.isWealthAccount=="0"||jsonData.isWealthAccount== null){
+						if(jsonData.isWealthAccount=="1"){
 							//是否开通财富账户
 							that.gV.realLi.eq(0).show()  
 						}else{
@@ -530,7 +531,7 @@ $(function () {
             manageList.push(prams)
             // 请求页面数据
             var obj = [{
-                url: site_url.collectFund_api,
+                url: site_url.collectFund_api,//1
                 data: {
                     feedback:'',
                     deviceId:deviceId,
@@ -554,7 +555,7 @@ $(function () {
             var that = this;
             // 请求页面数据
             var obj = [{
-                url: site_url.fundNetWorthList_api,
+                url: site_url.fundNetWorthList_api,//1
                 data: {
                     fundCode: splitUrl['fundCode'],
                     pageCurrent: 1,
@@ -601,7 +602,7 @@ $(function () {
             };
             // 请求页面数据
             var obj = [{
-                url: site_url.prfFundNetWorthTrendChart_api,
+                url: site_url.prfFundNetWorthTrendChart_api,//1
                 data: dataOpt,
                 callbackDone: function (json) {
                     json = json.data.pageList
