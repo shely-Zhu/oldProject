@@ -246,7 +246,7 @@ $(function() {
                     }
                     // 发行规模
                     if (jsonData.formatIssuanceSize) {
-                        $('.issuingScale .changgeRight').html(jsonData.formatIssuanceSize);
+                        $('.issuingScale .changgeRight').html(jsonData.formatIssuanceSize + '万');
                     } else {
                         $('.issuingScale').hide();
                     }
