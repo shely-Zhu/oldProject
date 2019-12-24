@@ -83,11 +83,11 @@ $(function () {
 			that.events();
 			if(that.gV.type == 'add'){
 				that.getData();
-				$("#HeadBarpathName").html('新增定投')
+				$("#HeadBarpathName").html('定投')
 			}
 			if(that.gV.type == 'edit'){
 				that.getDetails();
-				$("#HeadBarpathName").html('修改定投')
+				$("#HeadBarpathName").html('定投')
 			}
 			
 			that.getAgreeUrl();
