@@ -67,6 +67,7 @@ $(function() {
         },
         //初始化mui的上拉加载
         initMui: function() {
+            console.log("参数值", splitUrl['type'])
             var that = this;
             var height = windowHeight - $(".topTitle").height();
             if (!$('.list').hasClass('setHeight')) {

@@ -104,6 +104,17 @@ $(function () {
             n.tradeTime = n.tradeTime.split(" ")[0]
             n.status = n.status === "1" ? 1 : 0
           });
+          if(json.tradeRecord.length>0){
+            for(var i=0;i<json.tradeRecord.length;i++){
+              if(json.tradeRecord[i].status=="1"){
+                json.tradeRecord[i].statusDesc_1 ="定投成功"
+              }else if(json.tradeRecord[i].status=="3"){
+                json.tradeRecord[i].statusDesc_1 ="待确认"
+              }else{
+                json.tradeRecord[i].statusDesc_1 ="定投失败"
+              }
+            }
+          }
           var html = template(json);
           $(".tplBox").html(html);
 
@@ -130,7 +141,8 @@ $(function () {
           $("#passwordWrap").hide()
           $("#passwordWrap input").val("");
           setTimeout(function () {
-            window.history.go(-1)
+            //window.history.go(-1)
+            window.location.href = site_url.myInvestmentPlan_url
           }, 800)
         },
         callbackFail: function (json) {
@@ -171,7 +183,6 @@ $(function () {
       
       //跳转到定投详情结果页 publicTradeDetail_url
       mui("body").on("mdClick",".is_fail .state_fail",function(){
-        debugger
         var obj = {
           applyId: $(this).attr("allotNo"),
           fundCombination: "",

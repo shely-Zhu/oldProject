@@ -70,7 +70,7 @@ $(function () {
             var that = this;
             // 请求页面数据
             var obj = [{
-                url: site_url.newfundDetails_api,//1
+                url: site_url.newfundDetails_api,
                 data: {
                     fundCode: splitUrl['fundCode'],
                     // fundCode:"000847",
@@ -162,7 +162,7 @@ $(function () {
             var that = this;
             // 请求页面数据
             var obj = [{
-                url: site_url.queryUserBaseInfo_api,//1
+                url: site_url.queryUserBaseInfo_api,
                 data: {
                 },
                 needLogin: false,
@@ -186,7 +186,7 @@ $(function () {
 
             //发送ajax请求
             var obj = [{
-                url: site_url.queryCustomerAuthInfo_api,//1
+                url: site_url.queryCustomerAuthInfo_api,
                 data: {
                     fundCode: splitUrl['fundCode'],
                 },
@@ -531,7 +531,7 @@ $(function () {
             manageList.push(prams)
             // 请求页面数据
             var obj = [{
-                url: site_url.collectFund_api,//1
+                url: site_url.collectFund_api,
                 data: {
                     feedback:'',
                     deviceId:deviceId,
@@ -555,7 +555,7 @@ $(function () {
             var that = this;
             // 请求页面数据
             var obj = [{
-                url: site_url.fundNetWorthList_api,//1
+                url: site_url.fundNetWorthList_api,
                 data: {
                     fundCode: splitUrl['fundCode'],
                     pageCurrent: 1,
@@ -602,7 +602,7 @@ $(function () {
             };
             // 请求页面数据
             var obj = [{
-                url: site_url.prfFundNetWorthTrendChart_api,//1
+                url: site_url.prfFundNetWorthTrendChart_api,
                 data: dataOpt,
                 callbackDone: function (json) {
                     json = json.data.pageList

@@ -117,8 +117,6 @@ module.exports = function() {
     this.plannerSearch_url = go_url.no_url + '/planner/views/plannerSearch.html';
     //明星理财师
     this.starFinancialPlannerList_url = go_url.no_url + '/homePage/views/starFinancialPlannerList/starFinancialPlannerList.html';
-    // 绑定理财师验证身份页面
-    this.bindFinancialer_url = go_url.no_url + '/homePage/views/bindFinancialer/bindFinancialer.html';
 
     //我的-理财师
     this.plannerIndex_url = go_url.no_url + '/planner/views/plannerIndex.html';
@@ -181,8 +179,7 @@ module.exports = function() {
     // 老带新二维码页面--股份和明泽离得推荐有礼都跳转明泽
     this.recommend_url = go_url.wap_url + '/recommend/views/recommend.html';
     // 分享页面
-    // this.newRecommend_url = window.location.origin.replace('h5', 'wap') + '/recommend/views/newRecommend.html';
-    this.newRecommend_url ='wap'+ '/recommend/views/newRecommend.html';
+    this.newRecommend_url = window.location.origin.replace('h5', 'wap') + '/recommend/views/newRecommend.html';
     // 老带新注册页面
     this.recommendRegister_url = go_url.no_url + '/user/views/recommendRegister.html';
     // 恭喜页面
@@ -301,7 +298,7 @@ module.exports = function() {
     // 在线客服-第三方地址
     this.onlineCustomer_url = go_url.onlineCustomer_url + '/webchat/jsp/standard/interfacePools.jsp?queue=106&device=mobile';
     // 在线客服中转页
-    this.onlineCustomerTransfer_url = go_url.cft_url + '/include/views/onlineCustomer.html';
+    this.onlineCustomerTransfer_url = go_url.no_url + '/include/views/onlineCustomer.html';
     // app中私募首页，视频直播跳转路径
     this.videoPlay_url = go_url.no_url + '/productPrivate/views/videoPlay.html';
     // 公募产品分享地址 需拼接fundCode
