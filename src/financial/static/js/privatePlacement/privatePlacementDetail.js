@@ -937,15 +937,15 @@ $(function() {
                                     isReal = true; //判断
                                 }
                             }
-                            that.$e.realLi.eq(Number(e) + 1).show();
-                            that.$e.realLi.eq(Number(e) + 1).find(".bank-status").html(v.statusDesc);
+                            that.$e.realLi.eq(e * 1).show();
+                            that.$e.realLi.eq(e * 1).find(".bank-status").html(v.statusDesc);
                             jumpUrl = that.getJumpUrl(v); //获取跳转Url。
                             that.$e.realLi.eq(e * 1).find(".tips-li-right").attr("jumpUrl",jumpUrl)
                             that.$e.realLi.eq(e * 1).find(".tips-li-right").attr("conditionType",v.conditionType)
                             that.$e.realLi.eq(e * 1).find(".tips-li-right").attr("conditionJump",v.conditionJump)
                         }
                         //						对应的条件认证到哪里
-                        that.$e.realLi.eq(Number(e) + 1).find(".tips-li-right").on('click', function() {
+                        that.$e.realLi.eq(e * 1).find(".tips-li-right").on('click', function() {
                         // that.$e.realLi.eq(0).find(".tips-li-right")
                             if($(this).attr('conditionJump')!=that.$e.realLi.eq(0).find(".tips-li-right").attr("conditionJump")&&that.$e.realLi.eq(0).find(".tips-li-right").attr("conditionType")==1){
                                     // $("#tips-wrap").hide();
