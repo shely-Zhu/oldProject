@@ -230,7 +230,7 @@ $(function () {
                       
                         that.gV.singleaAuthenPath = that.getSingleaAuthenPath(jsonData);
                        
-						if(jsonData.isWealthAccount=="0"||jsonData.isWealthAccount== null){
+						if(jsonData.isWealthAccount=="1"){
 							//是否开通财富账户
 							that.gV.realLi.eq(0).show()  
 						}else{

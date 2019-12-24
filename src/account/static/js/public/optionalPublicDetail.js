@@ -460,7 +460,7 @@ $(function() {
 							that.data.realLi.show();
 						}
 						that.data.singleaAuthenPath = that.getSingleaAuthenPath(jsonData);
-						if(jsonData.isWealthAccount=="0"||jsonData.isWealthAccount == null){
+						if(jsonData.isWealthAccount=="1"){
 							//是否开通财富账户
 							that.data.realLi.eq(0).show()  
 						}else{
