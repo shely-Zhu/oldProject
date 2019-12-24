@@ -905,6 +905,7 @@ $(function() {
                 contentTypeSearch: true,
                 needLogin: true, //需要判断是否登陆
                 callbackDone: function(json) { //成功后执行的函数
+                	$(".netLoading").hide();
                     that.data.canClick = true; //变为可点击
                     var jsonData = json.data,
                         notice = "",
@@ -937,8 +938,8 @@ $(function() {
                                     isReal = true; //判断
                                 }
                             }
-                            that.$e.realLi.eq(Number(e) + 1).show();
-                            that.$e.realLi.eq(Number(e) + 1).find(".bank-status").html(v.statusDesc);
+                            that.$e.realLi.eq(Number(e)).show();
+                            that.$e.realLi.eq(Number(e)).find(".bank-status").html(v.statusDesc);
                             jumpUrl = that.getJumpUrl(v); //获取跳转Url。
                             that.$e.realLi.eq(e * 1).find(".tips-li-right").attr("jumpUrl",jumpUrl)
                             that.$e.realLi.eq(e * 1).find(".tips-li-right").attr("conditionType",v.conditionType)
@@ -952,7 +953,7 @@ $(function() {
                                     var obj = {
                                         title: '尊敬的客户',
                                         id: 'realOrg3',
-                                        p: '请您先开通财富账户',
+                                        p: '请您先开通恒天账户',
                                         yesTxt: '确认',
                                         celTxt: "取消",
                                         zIndex: 6001,
@@ -1015,6 +1016,7 @@ $(function() {
                             needLoading: true,
                             needLogin: true, //需要判断是否登陆
                             callbackDone: function(json) { //成功后执行的函数
+                            	
                                 that.data.canClick = true; //变为可点击
                                 var data = json.data[0],
                                     noticeObj = data;
@@ -1082,6 +1084,7 @@ $(function() {
                             callbackFail: function(json) { //失败后执行的函数
                                 tipAction(json.message);
                                 that.data.canClick = true; //变为可点击
+                                $(".netLoading").hide();
 
                             }
                         }];

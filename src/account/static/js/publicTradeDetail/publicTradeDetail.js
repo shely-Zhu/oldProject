@@ -162,7 +162,7 @@ $(function () {
                 //展示买入信息区域 并填充
                 $('.buy_info').removeClass('hide');
                 $('.buy_info .fund_name').html(model.fundName);//买入产品
-                $('.buy_info .fund_amount').html(model.tradeAmount);//买入金额
+                $('.buy_info .fund_amount').html(model.tradeAmount + '元');//买入金额
                 $('.buy_info .bank_icon').attr('src', model.bankThumbnailUrl);//支付方式的银行logo
                 $('.buy_info .bank_name').html(that.getPayInfo(model.bankName, model.bankAccountMask));//支付方式的银行名称
                 $('.buy_info .pay_mode').html(model.payModeName);//支付方式
