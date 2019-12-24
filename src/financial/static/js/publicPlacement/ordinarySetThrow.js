@@ -527,7 +527,8 @@ $(function () {
 					console.log('data',data)
 					if(json.status == '0000'){
 					   // window.location.href = site_url.pofCastSurelyDetails_url + '?scheduledProtocolId=' + data.scheduledProtocolId ;
-					   window.location.href = site_url.surelyResultShot_url + '?scheduledProtocolId=' + data.scheduledProtocolId ;
+					   //跳我的定投计划
+					   window.location.href = site_url.myInvestmentPlan_url
 					}
 				},
 				callbackNoData:function(json){
