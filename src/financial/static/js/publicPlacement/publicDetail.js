@@ -354,7 +354,7 @@ $(function () {
                         break;
 
                     case 1:   //风险评测
-                        window.location.href = site_url.riskAppraisal_url + "?type=asset"
+                        window.location.href = site_url.riskAppraisal_url + "?type=private"
                         break;
 
                     case 2:   //完善基本信息
@@ -382,8 +382,8 @@ $(function () {
                         window.location.href = site_url.realName_url
                         break;
 
-                    case "isRiskEndure":   //风险评测
-                        window.location.href = site_url.riskAppraisal_url + "?type=asset"
+                    case "isRiskEndure":   //私募风险评测  type=private type=asset 资管风测
+                        window.location.href = site_url.riskAppraisal_url + "?type=private"
                         break;
 
                     case "isPerfect":   //完善基本信息
