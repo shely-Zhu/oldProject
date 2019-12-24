@@ -37,6 +37,7 @@ $(function() {
             isElecContract: '', //是否是电子合同产品【0.否 1.是】
             unitNetValueDes: '',
             productNameTip:'',
+            reourceData:true,   //标签内容
         },
         data: {
             canClick: true,
@@ -286,33 +287,37 @@ $(function() {
 
 
                     // 交易须知  
-                    // 认购费率
-                    if (jsonData.buyRate) {
-                        $('.productRateBuy span').html(jsonData.buyRate + '%');
-                    } else {
-                        $('.productRateBuy').hide();
-                    }
-                    // 管理费率
-                    if (jsonData.managementFee) {
-                        $('.productRateManage span').html(jsonData.managementFee + '%');
-                    } else {
-                        $('.productRateManage').hide();
-                    }
-                    // 托管费率
-                    if (jsonData.trusteeFee) {
-                        $('.productRateTrust span').html(jsonData.trusteeFee + '%');
-                    } else {
-                        $('.productRateTrust').hide();
+                    if( !jsonData.buyRate && !jsonData.managementFee && !jsonData.trusteeFee){
+                        $('.productRateHeader').hide();
+                    }else{
+                        // 认购费率
+                        if (jsonData.buyRate) {
+                            $('.productRateBuy span').html(jsonData.buyRate + '%');
+                        } else {
+                            $('.productRateBuy').hide();
+                        }
+                        // 管理费率
+                        if (jsonData.managementFee) {
+                            $('.productRateManage span').html(jsonData.managementFee + '%');
+                        } else {
+                            $('.productRateManage').hide();
+                        }
+                        // 托管费率
+                        if (jsonData.trusteeFee) {
+                            $('.productRateTrust span').html(jsonData.trusteeFee + '%');
+                        } else {
+                            $('.productRateTrust').hide();
+                        }
                     }
                     // 预约递增金额
                     if (jsonData.minBase) {
-                        $('.advanceAmount .changgeRight').html(jsonData.minBase);
+                        $('.advanceAmount .changgeRight').html(jsonData.minBase + '万');
                     } else {
                         $('.advanceAmount').hide();
                     }
                     // 预约有效天数
                     if (jsonData.reserveEffectDays) {
-                        $('.reservationDay .changgeRight').html(jsonData.reserveEffectDays);
+                        $('.reservationDay .changgeRight').html(jsonData.reserveEffectDays + '天');
                     } else {
                         $('.reservationDay').hide();
                     }
@@ -357,7 +362,11 @@ $(function() {
                     // 汇款备注
                     $('.remittance').html('【xxx（姓名）认购（产品）】');
                     // 赎回开放频率
-                    $('.redemptionOpenFrequency').html(jsonData.redemptionOpenFrequency);
+                    if(jsonData.redemptionOpenFrequency){
+                        $('.redemptionOpenFrequency .detailText').html(jsonData.redemptionOpenFrequency);
+                    }else{
+                        $('.redemptionOpenFrequency').hide();
+                    }
 
                     // 立即预约上的认购申购费率
                     $('.buyRate span').html(jsonData.buyRate + '%');
@@ -437,18 +446,23 @@ $(function() {
                 needLogin: true,
                 callbackDone: function(json) {
                     var that = this;
+                    // 判断业绩比较基准是否有值，有值展示，无值隐藏
+                    if(json.data.length == 0){
+                        $('.performanceComparison').hide();
+                    }else{
+                        $.each(json.data, function(i, el) {
+                            if (el.benifitUpperLimit == "0" || !el.benifitUpperLimit) {
+                                el.bool = false;
+                            } else {
+                                el.bool = true;
+                            }
+                        })
+                        
+                        var tplm = $("#prvLevel").html();
+                        var template = Handlebars.compile(tplm);
+                        $(".performance").html(template(json.data));
+                    }
                     
-                    $.each(json, function(i, el) {
-                        if (el.benifitUpperLimit == "0" || !el.benifitUpperLimit) {
-                            el.bool = false;
-                        } else {
-                            el.bool = true;
-                        }
-                    })
-                    
-                    var tplm = $("#prvLevel").html();
-                    var template = Handlebars.compile(tplm);
-                    $(".performance").html(template(json.data));
                     
                 },
                 callbackNoData: function(json) {
@@ -943,9 +957,8 @@ $(function() {
                             that.$e.realLi.eq(e * 1).find(".tips-li-right").attr("conditionType",v.conditionType)
                             that.$e.realLi.eq(e * 1).find(".tips-li-right").attr("conditionJump",v.conditionJump)
                         }
-                        //						对应的条件认证到哪里
+                        //对应的条件认证到哪里
                         that.$e.realLi.eq(e * 1).find(".tips-li-right").on('click', function() {
-                        // that.$e.realLi.eq(0).find(".tips-li-right")
                             if($(this).attr('conditionJump')!=that.$e.realLi.eq(0).find(".tips-li-right").attr("conditionJump")&&that.$e.realLi.eq(0).find(".tips-li-right").attr("conditionType")==1){
                                     // $("#tips-wrap").hide();
                                     var obj = {
@@ -962,24 +975,24 @@ $(function() {
                                     $.elasticLayer(obj)
                                     return
                             }
-                                if (v.conditionType == "1" && that.data.custType != "1") { //如果是实名认证跳转，机构不支持线上开户，弹框提示
-                                    $("#tips-wrap").hide();
-                                    var obj = {
-                                        title: '',
-                                        id: 'realOrg2',
-                                        p: '机构客户需联系您的理财师，进行线下开户',
-                                        yesTxt: '确认',
-                                        celTxt: "取消",
-                                        zIndex: 100,
-                                        callback: function(t) {}
-                                    };
-                                    $.elasticLayer(obj)
+                            if (v.conditionType == "1" && that.data.custType != "1") { //如果是实名认证跳转，机构不支持线上开户，弹框提示
+                                $("#tips-wrap").hide();
+                                var obj = {
+                                    title: '',
+                                    id: 'realOrg2',
+                                    p: '机构客户需联系您的理财师，进行线下开户',
+                                    yesTxt: '确认',
+                                    celTxt: "取消",
+                                    zIndex: 100,
+                                    callback: function(t) {}
+                                };
+                                $.elasticLayer(obj)
 
-                                } else {
-                                    window.location.href = jumpUrl;
-                                }
-                                window._submitMd && window._submitMd( 3, 'privatePlacementDetail_12' );
-                            })
+                            } else {
+                                window.location.href = jumpUrl;
+                            }
+                            window._submitMd && window._submitMd( 3, 'privatePlacementDetail_12' );
+                        })
                             //一键认证调往哪里
                         mui("body").on('mdClick', '.tips-btn', function() {
                             if (isReal && that.data.custType != "1") { //如果是实名认证跳转，机构不支持线上开户，弹框提示,一键认证正好也是链接也是实名认证也弹框
@@ -1018,9 +1031,6 @@ $(function() {
                                 var data = json.data[0],
                                     noticeObj = data;
 									if(isRiskPopup){//如果不匹配
-										/*PopupElasticLayer = '<p class="" style="font-weight:bold;text-align:center">你选择的产品与您现在的风险承受能力相匹配</p>' + 
-                                        '<p class="" style="font-weight:bold;text-align:center">您风险测评中所选计划投资期限少于产品期限存在匹配风险，请确认是否继续购买</p>' +
-                                        '<p class="">请您认真阅读' + noticeObj.fileName + that.data.productName + '并确认后继续购买该产品</p>';*/
                                         objElasticLayer = {
                                             title: '',
                                             id: 'sellPop',
@@ -1058,24 +1068,10 @@ $(function() {
                                                 window.location.href = site_url.riskAppraisal_url + '?type=private'
                                             },
                                         };
-										// PopupElasticLayer = '<p class="" style="font-weight:bold;text-align:center">你选择的产品与您现在的风险承受能力相匹配</p>' +
-          //                                   '<p class="">请您认真阅读' + noticeObj.fileName + that.data.productName + '并确认后继续购买该产品</p>'; //期限不符弹框
 									}
+                                    $.elasticLayer(objElasticLayer)
                                 if (!singleaAuthen) { //如果v.show都是0，则不展示预约框,跳转到相应链接
                                     $("#tips-wrap").hide();
-                                    /*var obj = {
-                                        title: '',
-                                        id: 'sellPop',
-                                        p: PopupElasticLayer,
-                                        yesTxt: '去阅读',
-                                        celTxt: '取消',
-                                        zIndex: 1200,
-                                        callback: function(t) {
-                                            window.location.href = site_url.downloadNew_api + "?filePath=" + noticeObj.fileUrl + "&fileName=" + new Base64().encode(noticeObj.fileName) + "&groupName=" +
-                                                noticeObj.groupName + "show=1 "
-                                        },
-                                    };*/
-                                    $.elasticLayer(objElasticLayer)
                                 }
                             },
                             callbackFail: function(json) { //失败后执行的函数
@@ -1127,44 +1123,45 @@ $(function() {
                         jsonData.title = '风险揭示书';
                         that.processData(jsonData.fxjss);
                         jsonData.displayGrounp = jsonData.fxjss;
-                        generateTemplate(jsonData, $(".panel3"), that.$e.adjustmentTemp,'clear');
+                        generateTemplate(jsonData, $(".panel3"), that.$e.adjustmentTemp);
                     }
                     // 产品信息
                     if (jsonData.cpxx) {
                         jsonData.title = '产品信息';
                         that.processData(jsonData.cpxx);
                         jsonData.displayGrounp = jsonData.cpxx;
-                        generateTemplate(jsonData, $(".panel3"), that.$e.adjustmentTemp,'clear');
+                        generateTemplate(jsonData, $(".panel3"), that.$e.adjustmentTemp);
                     }
                     // 管理报告
                     if (jsonData.glbg) {
                         jsonData.title = '管理报告';
                         that.processData(jsonData.glbg);
                         jsonData.displayGrounp = jsonData.glbg;
-                        generateTemplate(jsonData, $(".panel3"), that.$e.adjustmentTemp,'clear');
+                        generateTemplate(jsonData, $(".panel3"), that.$e.adjustmentTemp);
                     }
                     // 资金分配
                     if (jsonData.zjfp) {
                         jsonData.title = '资金分配';
                         that.processData(jsonData.zjfp);
                         jsonData.displayGrounp = jsonData.zjfp;
-                        generateTemplate(jsonData, $(".panel3"), that.$e.adjustmentTemp,'clear');
+                        generateTemplate(jsonData, $(".panel3"), that.$e.adjustmentTemp);
                     }
                     // 重要公告及通知
                     if (jsonData.zyggjtz) {
                         jsonData.title = '重要公告及通知';
                         that.processData(jsonData.zyggjtz);
                         jsonData.displayGrounp = jsonData.zyggjtz;
-                        generateTemplate(jsonData, $(".panel3"), that.$e.adjustmentTemp,'clear');
+                        generateTemplate(jsonData, $(".panel3"), that.$e.adjustmentTemp);
                     }
                     // 恒天简报
                     if (jsonData.htjb) {
                         jsonData.title = '恒天简报';
                         that.processData(jsonData.htjb);
                         jsonData.displayGrounp = jsonData.htjb;
-                        generateTemplate(jsonData, $(".panel3"), that.$e.adjustmentTemp,'clear');
+                        generateTemplate(jsonData, $(".panel3"), that.$e.adjustmentTemp);
                     }
 
+                    that.getElements.reourceData = false;
                 },
                 callbackFail: function(json) {
                     //请求失败，
@@ -1257,7 +1254,12 @@ $(function() {
 
                 } else if ($(this).index() == 2) {
                     // 获取标签
-                    that.queryReourceListByLabel();
+                    if( that.getElements.reourceData ){
+                        that.queryReourceListByLabel();
+                    }
+                    else{
+                        return false;
+                    }
 
                 }
             }, {
