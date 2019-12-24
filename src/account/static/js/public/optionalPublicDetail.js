@@ -459,12 +459,7 @@ $(function() {
 							that.data.tipsWrap.show()
 							that.data.realLi.show();
 						}
-						Object.keys(jsonData).forEach(function(key){
-                            if(!!jsonData[key]){
-                               that.data.singleaAuthenPath = key;
-                                return ;
-                            }
-                        })
+						that.data.singleaAuthenPath = that.getSingleaAuthenPath(jsonData);
 						if(jsonData.isWealthAccount=="0"||jsonData.isWealthAccount == null){
 							//是否开通财富账户
 							that.data.realLi.eq(0).show()  
@@ -552,6 +547,20 @@ $(function() {
 			}];
 			$.ajaxLoading(obj);
 		},
+		getSingleaAuthenPath:function(data){
+			var that = this;
+			var singleaAuthenPath="";
+			if(!data.isWealthAccount){
+				singleaAuthenPath = "isWealthAccount"
+			}else if(!data.isRiskEndure){
+				singleaAuthenPath = "isRiskEndure"
+			}else if(!data.isPerfect){
+				singleaAuthenPath = "isPerfect"
+			}else if(!data.isInvestFavour){
+				singleaAuthenPath = 'isInvestFavour'
+			}
+			return singleaAuthenPath 
+		 },
 		//点击展开按钮
 		event: function(){
 			var that = this;
@@ -662,8 +671,8 @@ $(function() {
 							window.location.href = site_url.realName_url
 							break;
 	
-						case 1:   //风险评测
-							window.location.href = site_url.riskAppraisal_url + "?type=asset"
+						case 1:   //私募风险评测  type=private type=asset 资管风测
+							window.location.href = site_url.riskAppraisal_url + "?type=private"
 							break;
 	
 						case 2:   //完善基本信息
@@ -690,7 +699,7 @@ $(function() {
 							break;
 	
 						case "isRiskEndure":   //风险评测
-							window.location.href = site_url.riskAppraisal_url + "?type=asset"
+							window.location.href = site_url.riskAppraisal_url + "?type=private"
 							break;
 	
 						case "isPerfect":   //完善基本信息
