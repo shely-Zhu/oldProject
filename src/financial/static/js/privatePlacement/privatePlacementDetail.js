@@ -38,6 +38,7 @@ $(function() {
             unitNetValueDes: '',
             productNameTip:'',
             reourceData:true,   //标签内容
+            collectAccountFlag:true,    //标签募集账号
         },
         data: {
             canClick: true,
@@ -867,6 +868,7 @@ $(function() {
 
                     $('#topc').html(json.data.remarks);
 
+                    that.getElements.collectAccountFlag = false;
 
                 },
                 callbackNoData: function() {
@@ -877,6 +879,7 @@ $(function() {
 
         },
         getJumpUrl: function(v) { //获取跳转链接
+            var that = this;
             var jumpUrl = ""; //跳转链接
             if (v.conditionJump == 1) { //跳转到认证中心页面
                 jumpUrl = site_url.realName_url
@@ -1123,14 +1126,14 @@ $(function() {
 
                     // 风险揭示书
                     if (jsonData.fxjss) {
-                        jsonData.title = '风险揭示书';
+                        jsonData.title = '风险揭示信息';
                         that.processData(jsonData.fxjss);
                         jsonData.displayGrounp = jsonData.fxjss;
                         generateTemplate(jsonData, $(".panel3"), that.$e.adjustmentTemp);
                     }
                     // 产品信息
                     if (jsonData.cpxx) {
-                        jsonData.title = '产品信息';
+                        jsonData.title = '产品介绍信息';
                         that.processData(jsonData.cpxx);
                         jsonData.displayGrounp = jsonData.cpxx;
                         generateTemplate(jsonData, $(".panel3"), that.$e.adjustmentTemp);
@@ -1192,6 +1195,9 @@ $(function() {
             var that = this;
 
             $.each(data, function(i, el) {
+                el.name = el.fileName.substring(1, el.fileName.indexOf("】"));
+                el.marName = el.fileName.substring(el.fileName.indexOf("】") + 1);
+
                 if (el.fileName.indexOf(".pdf") != -1) {
                     el.line = true; //线上可预览
                     el.href = site_url.downloadNew_api + "?filePath=" + el.fileUrl + "&fileName=" + new Base64().encode(el.fileName) + "&groupName=" + el.groupName + "&show=1";
@@ -1252,8 +1258,13 @@ $(function() {
                 }
                 // tab点击切换时请求接口
                 if ($(this).index() == 1) {
-                    // 募集账户信息
-                    that.collectAccount();
+                    if(that.getElements.collectAccountFlag){
+                        // 募集账户信息
+                        that.collectAccount();
+                    }
+                    else{
+                        return false;
+                    }
 
                 } else if ($(this).index() == 2) {
                     // 获取标签
@@ -1391,7 +1402,7 @@ $(function() {
             });
             //点击查看明细跳转
             mui("body").on('mdClick', '.lookDetailed', function() {
-                window.location.href = site_url.tobeConfirmTransaction_url+"?type=toBeConfirmed"//查看明细跳转待确认明细
+                window.location.href = site_url.tobeConfirmTransaction_url+"?type=toBeConfirmed&eruda=true"//查看明细跳转待确认明细
             },{
                 htmdEvt: 'privatePlacementDetail_10'
             });

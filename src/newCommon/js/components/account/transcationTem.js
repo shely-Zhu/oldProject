@@ -12,7 +12,7 @@ var splitUrl = require('@pathCommonJs/components/splitUrl.js')();
 var isConfirm = splitUrl['type'];
 // 按钮变量
 var operationNoStr = '';
-var operationNoList = '';
+var operationNoList = [];
 module.exports = function(data, $ele, $id, type) {
     var $ele = $ele || $('.contentWrap'),
         $id = $id || $('#trans-template');
