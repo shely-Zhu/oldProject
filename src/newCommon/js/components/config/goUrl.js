@@ -117,6 +117,8 @@ module.exports = function() {
     this.plannerSearch_url = go_url.no_url + '/planner/views/plannerSearch.html';
     //明星理财师
     this.starFinancialPlannerList_url = go_url.no_url + '/homePage/views/starFinancialPlannerList/starFinancialPlannerList.html';
+    // 绑定理财师验证身份页面
+    this.bindFinancialer_url = go_url.no_url + '/homePage/views/bindFinancialer/bindFinancialer.html';
 
     //我的-理财师
     this.plannerIndex_url = go_url.no_url + '/planner/views/plannerIndex.html';

@@ -105,8 +105,9 @@ var mock_server = "http://localIp:8088", //前端本地开发时，接口调用�
     sso_online = "https://sso.chtwm.com",
 
 
-    // 在线客服
-    onlineCustomer_test = "http://172.16.196.43:9080",
+    // 在线客服  测试环境页面地址打不开，暂时替换成预生产环境的地址
+    // onlineCustomer_test = "http://172.16.196.43:9080",
+    onlineCustomer_test = "http://zxkf.haomalljf.com",  
     onlineCustomer_haomaojf = "http://zxkf.haomalljf.com",
     onlineCustomer_online = "http://zxkf.chtwm.com",
 
