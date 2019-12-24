@@ -622,7 +622,6 @@ $(function() {
                             break;
                         case 1:
                             that.data['dwjzljjz'].threeMonth = newData;
-                            console.log(that.data['dwjzljjz'].threeMonth);
                             break;
                         case 2:
                             that.data['dwjzljjz'].halfYear = newData;
@@ -1128,42 +1127,42 @@ $(function() {
                         jsonData.title = '风险揭示书';
                         that.processData(jsonData.fxjss);
                         jsonData.displayGrounp = jsonData.fxjss;
-                        generateTemplate(jsonData, $(".panel3"), that.$e.adjustmentTemp);
+                        generateTemplate(jsonData, $(".panel3"), that.$e.adjustmentTemp,'clear');
                     }
                     // 产品信息
                     if (jsonData.cpxx) {
                         jsonData.title = '产品信息';
                         that.processData(jsonData.cpxx);
                         jsonData.displayGrounp = jsonData.cpxx;
-                        generateTemplate(jsonData, $(".panel3"), that.$e.adjustmentTemp);
+                        generateTemplate(jsonData, $(".panel3"), that.$e.adjustmentTemp,'clear');
                     }
                     // 管理报告
                     if (jsonData.glbg) {
                         jsonData.title = '管理报告';
                         that.processData(jsonData.glbg);
                         jsonData.displayGrounp = jsonData.glbg;
-                        generateTemplate(jsonData, $(".panel3"), that.$e.adjustmentTemp);
+                        generateTemplate(jsonData, $(".panel3"), that.$e.adjustmentTemp,'clear');
                     }
                     // 资金分配
                     if (jsonData.zjfp) {
                         jsonData.title = '资金分配';
                         that.processData(jsonData.zjfp);
                         jsonData.displayGrounp = jsonData.zjfp;
-                        generateTemplate(jsonData, $(".panel3"), that.$e.adjustmentTemp);
+                        generateTemplate(jsonData, $(".panel3"), that.$e.adjustmentTemp,'clear');
                     }
                     // 重要公告及通知
                     if (jsonData.zyggjtz) {
                         jsonData.title = '重要公告及通知';
                         that.processData(jsonData.zyggjtz);
                         jsonData.displayGrounp = jsonData.zyggjtz;
-                        generateTemplate(jsonData, $(".panel3"), that.$e.adjustmentTemp);
+                        generateTemplate(jsonData, $(".panel3"), that.$e.adjustmentTemp,'clear');
                     }
                     // 恒天简报
                     if (jsonData.htjb) {
                         jsonData.title = '恒天简报';
                         that.processData(jsonData.htjb);
                         jsonData.displayGrounp = jsonData.htjb;
-                        generateTemplate(jsonData, $(".panel3"), that.$e.adjustmentTemp);
+                        generateTemplate(jsonData, $(".panel3"), that.$e.adjustmentTemp,'clear');
                     }
 
                 },
@@ -1171,7 +1170,6 @@ $(function() {
                     //请求失败，
                     //显示错误提示
                     tipAction(json.message);
-
                     //隐藏loading，调试接口时需要去掉
                     setTimeout(function() {
                         // that.getElements.listLoading.hide();
