@@ -1,8 +1,8 @@
 /*
  * @Author: your name
  * @Date: 2019-11-26 14:42:56
- * @LastEditTime: 2019-11-30 15:43:43
- * @LastEditors: Please set LastEditors
+ * @LastEditTime : 2019-12-24 10:41:10
+ * @LastEditors  : Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \htjf-app\src\financial\static\js\publicPlacement\demandFinancing.js
  */
@@ -107,14 +107,23 @@ $(function(){
             var that = this;
 			mui("body").on('mdClick','.cashItem',function(e){
                 var data = $(this).attr('data')
+                var cash = $(this).attr("cash")
                 var index = $(this).index();
-                if(Number(data) > 0){
-                    that.getData($(this).attr('fundCode'))
-                }else{
-                    //跳往基金详情页
-                    window.location.href = site_url.pofPublicDetail_url + 
-                    '?fundCode=' + $(this).attr('fundCode') + '&fundType=' + $(this).attr('fundType') + '&deviceId=' + splitUrl['deviceId']
+                if(cash == "false"){
+                     //跳往基金详情页
+                       window.location.href = site_url.pofPublicDetail_url + 
+                      '?fundCode=' + $(this).attr('fundCode') + '&fundType=' + $(this).attr('fundType') + '&deviceId=' + splitUrl['deviceId']
+                }else if(cash == "true"){
+                    //超宝详情
+                    window.location.href=site_url.superStreasureDetail_url + '?fundCode=' + $(this).attr('fundCode')
                 }
+               // if(Number(data) > 0){
+                 //   that.getData($(this).attr('fundCode'))
+                //}else{
+                    //跳往基金详情页
+                  //  window.location.href = site_url.pofPublicDetail_url + 
+                   // '?fundCode=' + $(this).attr('fundCode') + '&fundType=' + $(this).attr('fundType') + '&deviceId=' + splitUrl['deviceId']
+               // }
 			}, {
 				htmdEvt: 'demandFinancing_01'
 			}) ;

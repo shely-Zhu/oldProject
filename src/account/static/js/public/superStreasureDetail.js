@@ -140,7 +140,7 @@ $(function() {
                         color: '#9B9B9B',
                         formatter: function(value, index) {
                             // if(value != 0){
-                                return value.toFixed(4);
+                                return value.toFixed(4) + '%';
                             // }
                         },
                     },

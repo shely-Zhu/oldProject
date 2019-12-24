@@ -44,7 +44,8 @@ $(function () {
             tipsWrap:$("#tips-wrap"),
             singleaAuthenPath : "", //一键认证跳转链接
             fixedInvestementBtn:$(".fixed_investement_btn"), //定投按钮
-            fixedInvestementBtnStatu:true
+            fixedInvestementBtnStatu:true,
+            fundName:"",
         },
         fundType: splitUrl['fundType'] == '10300' ? 1 : 0, //10300 货币基金类型，其余为普通基金类型
         init: function () {
@@ -202,12 +203,12 @@ $(function () {
                         isReal = "", //是否实名认证，因为如果机构切一键认证是实名，点击需要提示弹框。
                         singleaAuthenPath = "", //一键认证跳转链接
 						singleaAuthen = false; //条件框是否展示
-						if(jsonData.isWealthAccount == "1"&&jsonData.isRiskEndure == "1"&&jsonData.isPerfect == "1"&&jsonData.isInvestFavour=="1"&&jsonData.isRiskMatch=="1"){
+						if(jsonData.isWealthAccount != "1"&&jsonData.isRiskEndure == "1"&&jsonData.isPerfect == "1"&&jsonData.isInvestFavour=="1"&&jsonData.isRiskMatch=="1"){
                             that.gV.realLi.hide();
                             that.gV.tipsWrap.hide();
                             if(type == "into"){
                                 //买入一键认证
-                                window.location.href = site_url.fundTransformIn_url + '?fundCode=' + fundCode + '&fundName=' + fundName;
+                                window.location.href = site_url.fundTransformIn_url + '?fundCode=' + splitUrl['fundCode'] + '&fundName=' + that.gV.secuSht;
                             }else if(type == "investement"){
 
                                 //定投一键认证
@@ -217,7 +218,7 @@ $(function () {
                                 if(that.gV.accountType === 0 || that.gV.accountType === 2){
                                     tipAction('暂不支持机构客户进行交易');
                                 }else{
-                                    window.location.href = site_url.pofOrdinarySetThrow_url + '?fundCode=' + fundCode + '&fundName=' + fundName + '&type=add';
+                                    window.location.href = site_url.pofOrdinarySetThrow_url + '?fundCode=' + splitUrl['fundCode'] + '&fundName=' + that.gV.secuSht + '&type=add';
                                 }
 
                             }
@@ -227,41 +228,38 @@ $(function () {
                             that.gV.realLi.show();
 							
                         }
-                        Object.keys(jsonData).forEach(function(key){
-                            if(!!jsonData[key]){
-                               that.gV.singleaAuthenPath = key;
-                                return ;
-                            }
-                        })
-						if(jsonData.isWealthAccount=="0"){
+                      
+                        that.gV.singleaAuthenPath = that.getSingleaAuthenPath(jsonData);
+                       
+						if(jsonData.isWealthAccount=="1"){
 							//是否开通财富账户
-							that.gV.realLi.eq(0).hide()  
+							that.gV.realLi.eq(0).show()  
 						}else{
-							that.gV.realLi.eq(0).show()
+							that.gV.realLi.eq(0).hide()
 						}
-						if(jsonData.isRiskEndure=="0"){
+						if(jsonData.isRiskEndure=="0"||jsonData.isRiskEndure == null){
 							//是否风测
-							that.gV.realLi.eq(1).hide()  
+							that.gV.realLi.eq(1).show()  
 						}else{
-							that.gV.realLi.eq(1).show()
+							that.gV.realLi.eq(1).hide()
 						}
-						if(jsonData.isPerfect=="0"){
+						if(jsonData.isPerfect=="0" ||jsonData.isPerfect== null){
 							//是否完善资料
-							that.gV.realLi.eq(2).hide()  
+							that.gV.realLi.eq(2).show()  
 						}else{
-							that.gV.realLi.eq(2).show()
+							that.gV.realLi.eq(2).hide()
 						}
-						if(jsonData.isInvestFavour=="0"){
+						if(jsonData.isInvestFavour=="0" || jsonData.isInvestFavour == null){
 							//是否投资者分类
-							that.gV.realLi.eq(3).hide()  
+							that.gV.realLi.eq(3).show()  
 						}else{
-							that.gV.realLi.eq(3).show()
+							that.gV.realLi.eq(3).hide()
                         }
-						if(jsonData.isRiskMatch=="0"){
+						if(jsonData.isRiskMatch=="0" || jsonData.isRiskMatch == null){
 							//是否风险等级
-							that.gV.realLi.eq(4).hide()  
+							that.gV.realLi.eq(4).show()  
 						}else{
-							that.gV.realLi.eq(4).show()
+							that.gV.realLi.eq(4).hide()
                         }
                         that.gV.realLi.eq(4).hide()
 
@@ -278,7 +276,21 @@ $(function () {
             }];
             $.ajaxLoading(obj);
 
-		},
+        },
+        getSingleaAuthenPath:function(data){
+           var that = this;
+           var singleaAuthenPath="";
+           if(!data.isWealthAccount){
+               singleaAuthenPath = "isWealthAccount"
+           }else if(!data.isRiskEndure){
+               singleaAuthenPath = "isRiskEndure"
+           }else if(!data.isPerfect){
+               singleaAuthenPath = "isPerfect"
+           }else if(!data.isInvestFavour){
+               singleaAuthenPath = 'isInvestFavour'
+           }
+           return singleaAuthenPath 
+        },
         events: function () {
             var that = this;
             var json = that.gV.json
@@ -343,7 +355,7 @@ $(function () {
                         break;
 
                     case 1:   //风险评测
-                        window.location.href = site_url.riskAppraisal_url + "?type=asset"
+                        window.location.href = site_url.riskAppraisal_url + "?type=private"
                         break;
 
                     case 2:   //完善基本信息
@@ -371,8 +383,8 @@ $(function () {
                         window.location.href = site_url.realName_url
                         break;
 
-                    case "isRiskEndure":   //风险评测
-                        window.location.href = site_url.riskAppraisal_url + "?type=asset"
+                    case "isRiskEndure":   //私募风险评测  type=private type=asset 资管风测
+                        window.location.href = site_url.riskAppraisal_url + "?type=private"
                         break;
 
                     case "isPerfect":   //完善基本信息
