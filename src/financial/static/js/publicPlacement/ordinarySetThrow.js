@@ -810,6 +810,9 @@ $(function () {
 			
 			/** 下面三个事件： 银行卡列表出现/隐藏 **/
 			mui("body").on('mdClick','.paymoney',function(){
+				if(that.gV.type == 'edit'){
+					return
+				}
 				$(".imgc").hide()
 				$(".iimg").show()
 				that.gV.payType = $(this).attr('pay-type')
