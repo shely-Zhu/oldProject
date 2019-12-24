@@ -24,8 +24,15 @@ require('@pathCommonJsCom/goTopMui.js');
 //黑色提示条的显示和隐藏
 var splitUrl = require('@pathCommonJs/components/splitUrl.js')();
 var transcationTem = require('@pathCommonJsCom/account/transcationTem.js');
-var alwaysAjax = require('@pathCommonJs/components/alwaysAjax.js');
 
+var generateTemplate = require('@pathCommonJsComBus/generateTemplate.js');
+var splitUrl = require('@pathCommonJs/components/splitUrl.js')();
+var isConfirm = splitUrl['type'];
+
+var alwaysAjax = require('@pathCommonJs/components/alwaysAjax.js');
+// 按钮变量
+var operationNoStr = '';
+var operationNoList = '';
 $(function() {
     var data = {
         getElements: {
@@ -153,7 +160,7 @@ $(function() {
                         //去掉mui-pull-bottom-pocket的mui-hidden
                         $('.contentWrapper').find('.mui-pull-bottom-pocket').removeClass('mui-hidden');
                         // 将列表插入到页面上
-                        transcationTem(data, that.getElements.contentWrap, that.getElements.transTemp, type)
+                        that.initTemp(data, that.getElements.contentWrap, that.getElements.transTemp, type)
                     }, 300)
                 },
                 callbackNoData: function() {
@@ -343,7 +350,92 @@ $(function() {
             }, {
                 'htmdEvt': 'tobeConfirmTransaction_6'
             })
-        }
+        },
+        initTemp:function(data, $ele, $id, type) {
+            var $ele = $ele || $('.contentWrap'),
+                $id = $id || $('#trans-template');
+            if (isConfirm == 'confirmed') {
+                window.sessionStorage.setItem('isconfirm', 1);
+            } else if (isConfirm == 'toBeConfirmed') {
+                window.sessionStorage.setItem('isconfirm', 0);
+            }
+            for (var i = 0; i < data.length; i++) {
+                // 是否确认交易isConfirm 1-确认 0-未确认
+                data[i].isConfirmTrans = (isConfirm == 'confirmed') ? 1 : 0; //已确认
+                data[i].notConfirmTrans = (isConfirm == 'toBeConfirmed') ? 1 : 0; //未确认
+                // 申购/认购
+                data[i].businessType01 = (data[i].businessType == 0 || data[i].businessType == 1) ? 1 : 0;
+                data[i].businessType0 = data[i].businessType == 0 && (data[i].leftTopStatus == 5) ? 1 : 0; //认购
+                data[i].businessType1 = data[i].businessType == 1 && (data[i].leftTopStatus == 5) ? 1 : 0; //申购
+                data[i].businessTypeSucc = data[i].leftTopStatus == 5 ? 1 : 0; //申购
+                //待确认的预约
+
+                // 按钮的字段
+                operationNoStr = data[i].operationNo;
+                if (operationNoStr) {
+                    operationNoList = operationNoStr.split(',');
+                }
+                if (operationNoList && operationNoList.length > 0) {
+                    for (var j = 0; j < operationNoList.length; j++) {
+                        if (operationNoList[j] == '1') {
+                            data[i].appointmentToAuthentication = true; //展示合格投资者认证
+                        }
+                        if (operationNoList[j] == '2') {
+                            data[i].appointmentCancel = true; //展示取消预约按钮
+                        }
+                        if (operationNoList[j] == '3') {
+                            data[i].reAppointment = true; //展示重新预约按钮
+                        }
+                        if (operationNoList[j] == '4' || operationNoList[j] == '9') {
+                            data[i].appointmentToSign = true; //展示去签署合同
+                        }
+                        if (operationNoList[j] == '5' || operationNoList[j] == '10') {
+                            data[i].appointmentToSee = true; //展示查看合同
+                        }
+                        if (operationNoList[j] == '8' || operationNoList[j] == '7' || operationNoList[j] == '12') {
+                            data[i].appointmentToUpload = true; //展示上传汇款凭证
+                        }
+                        if (operationNoList[j] == '13') {
+                            data[i].assignVideo = true; //展示视频双录按钮
+                        }
+                        if (operationNoList[j] == '21') {
+                            data[i].assignCancel = true; //展示取消转让按钮
+                        }
+                        if (operationNoList[j] == '31') {
+                            data[i].assigneeCancel = true; //展示取消受让按钮
+                        }
+                        if (operationNoList[j] == '22') {
+                            data[i].assignObj = true; //展示选择受让方
+                        }
+                        if (operationNoList[j] == '23') {
+                            data[i].assignToVideo = true; //展示转让视频双录按钮
+                        }
+                        if (operationNoList[j] == '32') {
+                            data[i].assigneeToVideo = true; //展示受让视频双录按钮
+                        }
+                    }
+                }
+
+
+                data[i].appointmentSuccess = data[i].leftBottomStatus == 18 ? 1 : 0; //合同审核成功
+                data[i].appointmentFailed = data[i].leftBottomStatus == 19 ? 1 : 0; //合同审核失败
+                //赎回
+                data[i].businessTypeRedeem = (data[i].businessType == 2) || (data[i].businessType == 9) || (data[i].businessType == 8) ? 1 : 0;
+                //分红
+                data[i].businessTypeBonus = data[i].businessType == 7 ? 1 : 0;
+                //已完成的预约
+                data[i].businessTypeOrder = (data[i].businessType == 0 || data[i].businessType == 1) && (data[i].leftTopStatus == '21' || data[i].leftTopStatus == '22' || data[i].leftTopStatus == '23') ? 1 : 0;
+                //转让
+                data[i].businessType3 = data[i].businessType == 3 ? 1 : 0;
+                //受让
+                data[i].businessType4 = data[i].businessType == 4 ? 1 : 0;
+                //是否签约中 展示转受让双录状态
+                data[i].signing = (data[i].assignSubStatus == '05') || (data[i].assigneeSubStatus == '03') ? 1 : 0;
+                data[i].redeemDate = data[i].redeemDate?data[i].redeemDate:'--'
+
+            }
+            generateTemplate(data, $ele, $id, type);
+    }
     };
     data.init();
 });
