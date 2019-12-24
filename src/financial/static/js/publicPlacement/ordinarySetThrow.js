@@ -821,6 +821,10 @@ $(function () {
 			}, {
 				htmdEvt: 'ordinarySetThrow_01'
 			}) 
+			//返回按钮
+			mui("mui").on("mdClick","#goBack",function(){
+				history.go(-1)
+			})
 
 			mui("body").on('mdClick','.popup-close',function(){
 				$('.popup').css('display','none')
