@@ -200,6 +200,14 @@ $(function () {
                   
 				},
 				callbackNoData:function(json){
+                        $('.popup').css('display','block')
+						if(useEnv == '0'){
+							that.$el.popupTitle.html('选择在线支付银行卡')
+						}else{
+							that.$el.popupUl2.html('')
+							that.$el.popupTitle.html('选择汇款支付银行卡')
+						}
+						generateTemplate("", that.$el.popupUl, that.$el.bankListTemplate,true);
 					tipAction(json.message);
 				},
 				callbackFail:function(json){

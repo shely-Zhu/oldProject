@@ -20,6 +20,28 @@ $(function() {
 		init: function() {
 			var that = this;  
 			that.events()
+			that.getUserInfo()
+		},
+		        // 获取认证信息
+		getUserInfo: function() {
+			var that = this;
+			// 请求页面数据
+			var obj = [{
+				url: site_url.queryUserBaseInfo_api,
+				data: {},
+				callbackDone: function(json) {
+					var data = json.data
+					if(data.accountType==0||2){
+						$(".type").hide()
+					}else{
+						$(".type").show()
+					}
+				},
+				callbackFail: function(json) {
+					tipAction(json.msg);
+				}
+			}]
+			$.ajaxLoading(obj);
 		},
 		//注册事件
 		events: function() {
