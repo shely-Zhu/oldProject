@@ -622,7 +622,7 @@ $(function() {
                 callbackDone: function(json) {
                     var jsonData = json.data;
                     // debugger
-                    $(".priceLimit span").html(jsonData.pageList[jsonData.pageList.length-1].unitNetChangePercent);
+                    $(".priceLimit span").html(jsonData.pageList[0].unitNetChangePercent);
 
                     //拼数据
                     $.each(jsonData.pageList, function(i, el) {

@@ -117,18 +117,20 @@
      <!-- 翻译官 -->
      <script id="fortune-template" type="text/x-handlebars-template">
                <h2>{{modelName}}</h2>
-               <p><a href="javascript:void(0);"  onclick="setGoUrl(site_url.pastHotWords_url,  'fortune_00')">查看往期热词</a><i class="iconfont">&#xe636;</i></p>
+               <p><a href="{{modelUrl}}">查看往期热词</a><i class="iconfont">&#xe636;</i></p>
      </script>
      <script id="content-template" type="text/x-handlebars-template">
           {{#each this}}
-          <p class="con-t">
-               <span>第{{numPeriods}}期</span><b>{{titleFir}}</b>
-          </p>
-          <p class="con-b">
-               <span>{{titleSec}}</span>
-               <!-- <span class="span-l">中信建投:</span>
-               <span class="span-r">鉴定看涨A股将迎来戴维斯双击</span> -->
-          </p>
+          <a href="{{externalUrl}}">
+               <p class="con-t">
+                    <span>第{{numPeriods}}期</span><b>{{titleFir}}</b>
+               </p>
+               <p class="con-b">
+                    <span>{{titleSec}}</span>
+                    <!-- <span class="span-l">中信建投:</span>
+                    <span class="span-r">鉴定看涨A股将迎来戴维斯双击</span> -->
+               </p>
+          </a>
           {{/each}}
      </script>
      <!-- 早知道 -->
