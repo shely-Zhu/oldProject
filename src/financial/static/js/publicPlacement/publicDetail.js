@@ -227,12 +227,9 @@ $(function () {
                             that.gV.realLi.show();
 							
                         }
-                        Object.keys(jsonData).forEach(function(key){
-                            if(!!jsonData[key]){
-                               that.gV.singleaAuthenPath = key;
-                                return ;
-                            }
-                        })
+                      
+                        that.gV.singleaAuthenPath = that.getSingleaAuthenPath(jsonData);
+                       
 						if(jsonData.isWealthAccount=="0"||jsonData.isWealthAccount== null){
 							//是否开通财富账户
 							that.gV.realLi.eq(0).show()  
@@ -278,7 +275,21 @@ $(function () {
             }];
             $.ajaxLoading(obj);
 
-		},
+        },
+        getSingleaAuthenPath:function(data){
+           var that = this;
+           var singleaAuthenPath="";
+           if(!data.isWealthAccount){
+               singleaAuthenPath = "isWealthAccount"
+           }else if(!data.isRiskEndure){
+               singleaAuthenPath = "isRiskEndure"
+           }else if(!data.isPerfect){
+               singleaAuthenPath = "isPerfect"
+           }else if(!data.isInvestFavour){
+               singleaAuthenPath = 'isInvestFavour'
+           }
+           return singleaAuthenPath 
+        },
         events: function () {
             var that = this;
             var json = that.gV.json
@@ -343,7 +354,7 @@ $(function () {
                         break;
 
                     case 1:   //风险评测
-                        window.location.href = site_url.riskAppraisal_url + "?type=asset"
+                        window.location.href = site_url.riskAppraisal_url + "?type=private"
                         break;
 
                     case 2:   //完善基本信息
@@ -371,8 +382,8 @@ $(function () {
                         window.location.href = site_url.realName_url
                         break;
 
-                    case "isRiskEndure":   //风险评测
-                        window.location.href = site_url.riskAppraisal_url + "?type=asset"
+                    case "isRiskEndure":   //私募风险评测  type=private type=asset 资管风测
+                        window.location.href = site_url.riskAppraisal_url + "?type=private"
                         break;
 
                     case "isPerfect":   //完善基本信息
