@@ -75,7 +75,7 @@ $(function () {
                                         data[i].show = true
                                     } else if (data[i].fixState == 'H') {
                                         data[i].fixStateStr = "已终止"
-                                        data[i].show = true
+                                        data[i].show = false
                                         that.gV.fixStateNum ++
                                         that.gV.stopPlanList.push(data[i])
                                     } else {
