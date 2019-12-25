@@ -9,13 +9,13 @@
 
 var generateTemplate = require('@pathCommonJsComBus/generateTemplate.js');
 var splitUrl = require('@pathCommonJs/components/splitUrl.js')();
-var isConfirm = splitUrl['type'];
 // 按钮变量
 var operationNoStr = '';
 var operationNoList = [];
 module.exports = function(data, $ele, $id, type) {
-    var $ele = $ele || $('.contentWrap'),
-        $id = $id || $('#trans-template');
+    var $ele = $ele || $('.contentWrap');
+    var $id = $id || $('#trans-template');
+    var isConfirm = splitUrl['type'];
     if (isConfirm == 'confirmed') {
         //window.sessionStorage.setItem('isconfirm', 1);
         sessionStorage.setItem("isconfirm", 1);

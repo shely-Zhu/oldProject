@@ -342,7 +342,11 @@ $(function () {
 						
 					}
                   
-                },
+				},
+				callbackDone:function(json){
+					$('.popup').css('display','block')
+					generateTemplate("", that.$el.onlinepay, that.$el.bankListCheckTemplate,true);
+				}
 
             }];
             $.ajaxLoading(obj);
