@@ -197,7 +197,7 @@ $(function() {
                     // 产品特点标签
                     that.getElements.isElecContract = jsonData.isElecContract; // 是否是电子合同产品【0.否 1.是】
                     if (!!jsonData.projectLable) {
-                        var projectLable = jsonData.projectLable.split('|');
+                        var projectLable = jsonData.projectLable;
                         for (var i in projectLable) {
                             projectLableHtml = '<span>' + projectLable[i] + '</span>'
                             $('.productLabel').append(projectLableHtml);
