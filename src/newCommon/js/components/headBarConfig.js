@@ -121,17 +121,6 @@ $(function () {
     //跳转客服页面
     $("#customerService").on("click", function () {
         window.location.href = site_url.onlineCustomerTransfer_url;
-        // var obj = [{
-        //     url: site_url.getToken_api,
-        //     data: {},
-        //     needDataEmpty: false,
-        //     callbackDone: function (json) {
-        //         var token = json.data.token;
-        //         // 跳转第三方客服地址
-        //         window.location.href = site_url.onlineCustomerTransfer_url + '&token=' + token;
-        //     },
-        // }];
-        // $.ajaxLoading(obj);
     })
 })
 //字符串截取
