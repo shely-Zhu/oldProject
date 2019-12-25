@@ -20,6 +20,7 @@ require('@pathCommonCom/elasticLayer/elasticLayer/elasticLayer.js');
 require('@pathCommonJs/components/headBarConfig.js');
 var generateTemplate = require('@pathCommonJsComBus/generateTemplate.js');
 var getCookie = require('@pathNewCommonJsCom/getCookie.js');
+var Base64 = require('@pathIncludJs/vendor/base64/base64.js');
 
 
 $(function() {
@@ -50,7 +51,9 @@ $(function() {
 		init: function(){
 			var that = this;
 			//that.data.publicFundDetail = JSON.parse(sessionStorage.getItem("publicFundDetail"));
-			that.data.publicFundDetail = JSON.parse(getCookie("publicFundDetail"))
+			var publicFundDetail = getCookie("publicFundDetail")
+			var base64PublicFundDetail = new Base64().decode(publicFundDetail)
+			that.data.publicFundDetail = JSON.parse(base64PublicFundDetail)
 			that.data.projectType = that.data.publicFundDetail.invTypCom;//基金类型。货币10300、非货币除10300其他
 			that.data.fundCode = that.data.publicFundDetail.fundCode;
 			that.data.isBuyFlag = that.data.publicFundDetail.isBuyFlag;//是否可购买(0否1是) int类型
