@@ -667,7 +667,10 @@ $(function () {
 			//添加银行卡 -- 跳往原生
 			mui("body").on('mdClick','.popup-last',function(){
 				//跳往原生页面去修改密码
-				window.location.href = site_url.pofAddBankCard_url
+				if(that.gV.doubleClickStatus){
+                    window.location.href = site_url.pofAddBankCard_url
+				}
+				
 			}, {
 				htmdEvt: 'fundTransformIn_16'
 			}) ;

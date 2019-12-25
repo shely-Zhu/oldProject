@@ -77,7 +77,7 @@ $(function () {
 			bankAccountSecret:'',//银行账号密文
 			nextDeductingDay:'',  //扣款周期
 			singleNum:0,   //单日限额
-			doubleClick:false,
+			doubleClickStatus:false,
 		},
 		webinit: function () {
 			var that = this;
@@ -305,13 +305,13 @@ $(function () {
 							generateTemplate(data, that.$el.popupUl, that.$el.bankListTemplate,true);
 							$("#loading").hide()
 							$('.popup').css('display','block')
-						    that.gV.doubleClick = true
+						    that.gV.doubleClickStatus = true
 						}else{
 							if(type){
 								generateTemplate(data, that.$el.popupUl, that.$el.bankListTemplate,true);
 								$("#loading").hide()
 								$('.popup').css('display','block')
-								that.gV.doubleClick = true
+								that.gV.doubleClickStatus = true
 							}else{
 								for (var index = 0; index < data.length; index++) {
 									if(that.gV.bankAccountSecret == data[index].bankAccountSecret){
@@ -348,7 +348,7 @@ $(function () {
 				},
 				callbackNoData:function(json){
 					$('.popup').css('display','block')
-					that.gV.doubleClick = true
+					that.gV.doubleClickStatus = true
 					generateTemplate("", that.$el.popupUl, that.$el.bankListTemplate,true);
 				}
 
@@ -1014,7 +1014,7 @@ $(function () {
 			//添加银行卡 -- 跳往原生
 			mui("body").on('mdClick','.popup-last',function(){
 				//跳往原生页面去修改密码
-				if(that.gV.doubleClick){
+				if(that.gV.doubleClickStatus){
 					window.location.href = site_url.pofAddBankCard_url
 				}
 			}, {

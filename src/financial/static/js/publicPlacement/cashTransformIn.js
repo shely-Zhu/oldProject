@@ -48,6 +48,7 @@ $(function () {
 			tradeSource: '' , //交易账号
 			singleNum:0,
 			minValue:0,
+			doubleClickStatus:false,
 		},
 		webinit: function () {
 			var that = this;
@@ -122,6 +123,7 @@ $(function () {
 						generateTemplate(data, that.$el.popupUl, that.$el.bankListTemplate,true);
 						$("#loading").hide()
 						$('.popup').css('display','block')
+						that.gV.doubleClickStatus = true
 					}
                   
 				},
@@ -129,6 +131,7 @@ $(function () {
 					generateTemplate("", that.$el.popupUl, that.$el.bankListTemplate,true);
 						$("#loading").hide()
 						$('.popup').css('display','block')
+						that.gV.doubleClickStatus = true
 
 				},
 				callbackFail:function(json){
@@ -468,7 +471,10 @@ $(function () {
 			//添加银行卡 -- 跳往原生
 			mui("body").on('mdClick','.popup-last',function(){
 				//跳往原生页面去修改密码
-				window.location.href = site_url.pofAddBankCard_url
+				if(that.gV.doubleClickStatus){
+					window.location.href = site_url.pofAddBankCard_url
+				}
+				
 			}, {
 				htmdEvt: 'cashTransformIn_16'
 			}) ;
