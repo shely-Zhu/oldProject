@@ -50,7 +50,7 @@ $(function() {
 
 		init: function(){
 			var that = this;
-			//that.data.publicFundDetail = JSON.parse(sessionStorage.getItem("publicFundDetail"));
+			//that.data.publicFundDetail = JSON.parse(localStorage.getItem("publicFundDetail"));
 			var publicFundDetail = getCookie("publicFundDetail")
 			var base64PublicFundDetail = new Base64().decode(publicFundDetail)
 			that.data.publicFundDetail = JSON.parse(base64PublicFundDetail)
