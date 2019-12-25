@@ -389,18 +389,26 @@ $(function () {
 			
 			var str = ''   //估算费用描述
 			for (var i = 0; i < that.gV.feeRateList.length; i++) {
-				//先判断 计算方式
-				if (that.gV.feeRateList[i].feeCalcMed == '1') {//固定费用 (最多有一条此数据)
-					if (Number(val) >= Number(that.gV.feeRateList[i].minValue) * 10000) {//当前输入Money 小于等于 此区间最小值
-						that.gV.purchaseRate= Number(that.gV.feeRateList[i].maxRate);//将此区间费用赋值给rate
-						that.gV.feeCalcMed = "1";
+				if(that.gV.feeRateList.length==1&& Number(that.gV.feeRateList[0].maxRate) == 0){
+					var str = "0.00元(0.00%)"
+					that.$el.CostEstimate.html(str)
+					return
+				}else{
+					//先判断 计算方式
+					if (that.gV.feeRateList[i].feeCalcMed == '1') {//固定费用 (最多有一条此数据)
+						if (Number(val) >= Number(that.gV.feeRateList[i].minValue) * 10000) {//当前输入Money 小于等于 此区间最小值
+							that.gV.purchaseRate= Number(that.gV.feeRateList[i].maxRate);//将此区间费用赋值给rate
+							that.gV.feeCalcMed = "1";
+						}
+					} else if (that.gV.feeRateList[i].feeCalcMed == '2') {//固定费率
+						if (Number(val) < Number(that.gV.feeRateList[i].maxValue) * 10000 && Number(val) >= Number(that.gV.feeRateList[i].minValue) * 10000) {//当前输入Money 属于此区间
+							that.gV.purchaseRate = Number(that.gV.feeRateList[i].maxRate) / 100;//将此区间费率赋值给rate   需要除以100是 其值
+							that.gV.feeCalcMed = "2";
+						}
 					}
-				} else if (that.gV.feeRateList[i].feeCalcMed == '2') {//固定费率
-					if (Number(val) < Number(that.gV.feeRateList[i].maxValue) * 10000 && Number(val) >= Number(that.gV.feeRateList[i].minValue) * 10000) {//当前输入Money 属于此区间
-						that.gV.purchaseRate = Number(that.gV.feeRateList[i].maxRate) / 100;//将此区间费率赋值给rate   需要除以100是 其值
-						that.gV.feeCalcMed = "2";
-					}
+					
 				}
+				
 			}
 			
 			if(that.gV.feeCalcMed == "1"){
@@ -564,7 +572,6 @@ $(function () {
 			
 			//确定
 			mui("body").on('mdClick','.btn_box .btn',function(){
-
 				if($("#transformInput").val().includes(".") && $("#transformInput").val().split(".")[1].length >2){
 					tipAction('只能输入两位小数')
 					return
