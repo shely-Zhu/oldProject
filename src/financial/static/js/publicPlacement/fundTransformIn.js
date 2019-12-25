@@ -61,7 +61,8 @@ $(function () {
 			singleNum:0,   //单日限额
 			fundOrBank:'',  // 在线支付中  银行卡支付 1   基金支付  2   
 			enableAmount:0,  //选择基金支付 可用余额 
-			accountType:null   //客户类型  0-机构 1-个人
+			accountType:null,   //客户类型  0-机构 1-个人
+			doubleClickStatus:false
 		},
 		webinit: function () {
 			var that = this;
@@ -181,6 +182,7 @@ $(function () {
 						// 将列表插入到页面上
 						$(".listLoading").hide()
 						$('.popup').css('display','block')
+						that.gV.doubleClickStatus = true;
 						if(useEnv == '0'){
 							that.$el.popupTitle.html('选择在线支付银行卡')
 						}else{
@@ -200,7 +202,8 @@ $(function () {
                   
 				},
 				callbackNoData:function(json){
-                        $('.popup').css('display','block')
+						$('.popup').css('display','block')
+						that.gV.doubleClickStatus = true;
 						if(useEnv == '0'){
 							that.$el.popupTitle.html('选择在线支付银行卡')
 						}else{
