@@ -8,8 +8,8 @@
 
 require('@pathCommonBase/base.js');
 require('@pathCommonJs/ajaxLoading.js');
-/*var setCookie = require('@pathNewCommonJsCom/setCookie.js');
-var Base64 = require('@pathIncludJs/vendor/base64/base64.js');*/
+var setCookie = require('@pathNewCommonJsCom/setCookie.js');
+var Base64 = require('@pathIncludJs/vendor/base64/base64.js');
 
 $(function () {
 
@@ -172,16 +172,8 @@ $(function () {
             //普通基金item的点击 进入持仓详情
             mui("body").on('mdClick', '#pageLists .hold_item', function (e) {
                 var index = $(this).index();
-                //var publicFundDetail = JSON.stringify(that.gV.data.fundDetailList[index])
-                console.log("取值前", localStorage.getItem("publicFundDetail"))
-                console.log(typeof localStorage)
-                try {
-                    localStorage.setItem("publicFundDetail",JSON.stringify(that.gV.data.fundDetailList[index])) 
-                }catch(e) {
-                    console.log("localStorage", e)
-                }
-                console.log("取值后", localStorage.getItem("publicFundDetail"))
-                //setCookie("publicFundDetail", new Base64().encode(publicFundDetail))
+                var publicFundDetail = JSON.stringify(that.gV.data.fundDetailList[index])
+                setCookie("publicFundDetail", new Base64().encode(publicFundDetail))
                 window.location.href=site_url.optionalPublicDetail_url;
             },{
                 'htmdEvt': 'publicAssets_1'
