@@ -1,0 +1,284 @@
+/*<!--
+*公募和私募共用productOther文件，所有提取到common里面
+*author:songxiaoyu
+*time：2017/10/11
+-->*/
+
+@charset "utf-8";
+
+@import url("@pathInclude/css/mui.min.css");
+@import url('@pathCommonLess/mui/resetMUI.less');
+@import url("@pathCommonLess/reset.less");
+@import url("@pathCommonLess/color.less");
+
+@import url("@pathCommonLessCom/noData.less");
+
+//黑色提示框的样式
+@import url("@pathCommonLessCom/againEnter.less");
+//暂无数据的样式
+@import url("@pathCommonLessCom/alertBox.less");
+//回到顶部的样式
+@import url("@pathCommonLessCom/goTopMui.less");
+//错误提示
+@import url("@pathCommonLessCom/elasticLayerTypeTwo.less");
+
+//历史收益
+.income{
+	background:@c005;
+	font-size: 1.0rem;
+	overflow: hidden;
+	position: relative;
+    //height: 568px;
+	color: @c003;
+    
+	span{
+		display: inline-block;
+		text-align: center;
+	}
+
+	header{ 
+		padding-left: 1.6rem;
+		height: 4rem;
+		line-height: 4rem;
+		border-bottom:0.1rem solid @c008;
+		background: @c012;
+		position: relative;
+		z-index: 200; 
+	}
+    &.before{
+        header{
+            padding-left:0 ;  
+        }
+    }
+	.list{
+		position: relative;
+	}
+	.contentWrapper {
+		height: 100%;
+		// padding-left: 1.6rem;
+		position:relative;
+	}
+
+	ul{
+		//height: 100%;
+		li{
+			//height: 100%;
+			padding:0;
+			background: @c005;
+			padding-left: 1.6rem;
+			.listDiv{
+				height: 4rem;
+				line-height: 4rem;
+				border-bottom:0.1rem solid @c008;
+			}
+			span{
+				&.red{
+					color: @c010;
+				}
+				&.green{
+					color: @c013;
+				}
+				
+			}
+			.listDiv:nth-last-of-type(1){
+				border: 0;
+			}
+		}
+	}
+
+}
+.area3{
+	header{
+		span{
+			width:32.3%;
+		}
+	}
+	ul{
+		li{
+			span{
+				width:32.3%;
+			}
+		}
+	}
+}
+.area4{
+	background: @c012;
+	header{
+		width: 100%;
+		text-transform:scale(0.875);
+		span{
+			width:25%;
+			float: left;
+		}
+	}
+	ul{
+		li{
+			span{
+				width:25%;
+				float: left;
+			}
+		}
+	}
+}
+
+.mui-table-view{
+	&:before, &:after{
+		height: 0;
+	}
+}
+
+
+.payNotice{
+	.process{
+		display: none;
+		padding:1rem 1.6rem 1.8rem;
+		font-size: 1.2rem;
+		color: @c003;
+
+		p{
+			text-align: center;
+			margin-bottom: 2.2rem;
+			border-radius: 1.6rem;
+			span{
+				display: inline-block;
+				height: 2rem;
+				line-height: 2rem;
+				width: 8.5rem;
+				border-radius: 1.6rem;
+				background: @c015;
+
+			}
+			
+		}
+		ul{
+			position: relative;
+			li.center{
+				text-align: center;
+			}
+			li.right{
+				text-align: right;
+			}
+			li{
+				float: left;
+				width: 33.3%;
+				position: relative;
+				z-index: 99;
+				span{
+					display: inline-block;
+					width: 100%;
+					
+					&.dayNum{
+						display: inline;
+					}
+				}
+				span:nth-of-type(2){
+					margin:0.9rem 0;
+					color:@c005;
+					width: 1.9rem;
+					height: 1.9rem;
+					border-radius: 1.9rem;
+					background: @c006;
+					line-height: 1.9rem;
+					text-align: center;
+					border: 0.2rem solid @c014;
+					box-sizing: content-box;
+				}
+				.iconfont{
+					font-size: 1.2rem;
+					margin-left:0.4rem;
+				}
+			}
+			li:first-child{
+				width: 100%;
+				height: 0.1rem;
+				border-top:0.1rem solid @c014;
+				position: absolute;
+				top:50%;
+				margin-top: -0.05rem;
+				z-index: 9;
+				
+
+			}
+		}
+		ul:nth-of-type(2){
+			margin:0.9rem 0;
+		}
+	}
+	.description{
+
+		padding:1.6rem;
+		.table{
+			p.title{
+				color: @c003;
+				margin-bottom: 0.2rem;
+				
+			}
+			div{
+				margin-top: 1.2rem;
+				span{
+					display: inline-block;
+					text-align: center;
+					height: 3rem;
+					line-height: 3rem;
+					box-sizing: border-box;
+					font-size: 1.2rem;
+
+				}
+				p{
+					background: @c012;
+				}
+
+				p.header{
+					background:@c014;
+
+				}
+			}
+		}
+		.deaArea1{
+			display: none;
+			div{
+				// span{
+				// 	width: 33.3%;
+				// }
+				p{
+					span:nth-of-type(2){
+						border-left:0.1rem solid @c005;
+						border-right:0.1rem solid @c005;
+					}	
+				}
+			}
+
+		}
+		.deaArea2{
+			display: none;
+			margin-top: 1.6rem;
+			.shengouArea{
+				p{
+					color: @c003;
+					font-size: 1.2rem;
+				}
+			}
+			&.shenGouFl{
+				margin-top: 0;
+			}
+			div{
+				span{
+					width: 50%;
+				}
+				p{
+					span.left_1{
+						border-right:0.1rem solid @c005;
+					}
+				}
+			}
+		}
+	}
+}
+//张卫鹏样式重置
+.mui-table-view-cell:after{
+    height:0;
+}
+
+
+
+
