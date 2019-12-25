@@ -1054,7 +1054,8 @@ $(function() {
                                                     zIndex: 1200,
                                                     callback: function(t) {
                                                         window.location.href = site_url.downloadNew_api + "?filePath=" + noticeObj.fileUrl + "&fileName=" + new Base64().encode(noticeObj.fileName) + "&groupName=" +
-                                                        noticeObj.groupName + "&show=1&readComplete=true&showDownload=false"
+                                                        noticeObj.groupName + "&show=1&readComplete=true&showDownload=false&fundCode=" + that.$e.projectId + "&isAllowAppend=" +
+                                                        that.data.fundDetailObj.isAllowAppend + '&accreditedInvestor=' + that.data.accreditedInvestor;
                                                     },
                                                 };
                                                 $.elasticLayer(obj) 
@@ -1228,7 +1229,7 @@ $(function() {
                     if (that.data.custType == "1") { //客户类型【0.机构 1.个人】 
                         //跳转到电子合同预约页面
                         window.location.href = site_url.orderLimit_url + "?fundCode=" + that.$e.projectId + "&isAllowAppend=" +
-                            that.data.fundDetailObj.isAllowAppend + '&accreditedInvestor=' + that.data.accreditedInvestor;;
+                            that.data.fundDetailObj.isAllowAppend + '&accreditedInvestor=' + that.data.accreditedInvestor;
                     } else {
                         //跳转到普通预约
                         window.location.href = site_url.registration_url + "?fundCode=" + that.$e.projectId + "&isAllowAppend=" +
