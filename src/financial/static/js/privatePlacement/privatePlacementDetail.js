@@ -1054,7 +1054,7 @@ $(function() {
                                                     zIndex: 1200,
                                                     callback: function(t) {
                                                         window.location.href = site_url.downloadNew_api + "?filePath=" + noticeObj.fileUrl + "&fileName=" + new Base64().encode(noticeObj.fileName) + "&groupName=" +
-                                                        noticeObj.groupName + "&show=1"
+                                                        noticeObj.groupName + "&show=1&readComplete=true&showDownload=false"
                                                     },
                                                 };
                                                 $.elasticLayer(obj) 

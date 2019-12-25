@@ -60,6 +60,11 @@ $(function(){
             var url = site_url.downloadFile_api+'?name='+that.data.fileName+"&show=0&url="+that.data.fileUrl;
             // 将pdf流转为canvas
             var pdfjsLib = window['pdfjs-dist/build/pdf'];
+            
+			pdfjsLib.cMapUrl= 'https://cdn.jsdelivr.net/npm/pdfjs-dist@2.0.288/cmaps/'; // include "/"
+			
+			pdfjsLib.cMapPacked= true; // set cMapPacked = true to ignore Warning: Ignoring invalid character "121" in hex string
+
             // The workerSrc property shall be specified.
             pdfjsLib.GlobalWorkerOptions.workerSrc = '/allServerResources/include/js/vendor/pdf/pdf.worker.js';
             pdfjsLib.getDocument(url).then(function getPdfHelloWorld(pdf) {
@@ -69,17 +74,17 @@ $(function(){
                     // 获取第i页
                     //
                     pdf.getPage(i).then(function getPageHelloWorld(page) {
-                        var scale = 0.6;
+                        var scale = 1.0;
                         var viewport = page.getViewport(scale);
         
                         //
                         // Prepare canvas using PDF page dimensions
                         //
                         var canvas = document.createElement('canvas');
-                        var context = canvas.getContext('2d');
                         canvas.height = viewport.height;
-                        //canvas.width = viewport.width;
-                        canvas.width = window.screen.width
+                          canvas.width = viewport.width;
+                          var context = canvas.getContext('2d');
+//                      canvas.width = window.screen.width
         
                         // 这里拿body当pdf容器
                         document.getElementById('pdfBox').appendChild(canvas);
