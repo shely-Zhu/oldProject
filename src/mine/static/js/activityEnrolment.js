@@ -121,7 +121,6 @@ $(function() {
                     // 待定 
                     if (json.data.activityVOPageInfo.list.length == 0) { // 没有记录不展示
                         if (num == 0) {
-                            debugger
                             $('.NoData').show();
                             // $('.listHasData0 .noData').show();
                             

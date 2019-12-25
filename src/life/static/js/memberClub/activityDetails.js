@@ -75,7 +75,7 @@ $(function() {
                         if (data.actProvince) {
                             that.$e.city.text(data.actProvince);
                             //判断市
-                            if(data.actCity!="北京市"){
+                            if(data.actProvince==data.actCity){
                                 that.$e.city.text(data.actProvince+data.actCity);  
                             }
                         } 
