@@ -25,6 +25,7 @@ require('@pathCommonJsCom/goTopMui.js');
 var splitUrl = require('@pathCommonJs/components/splitUrl.js')();
 var transcationTem = require('@pathCommonJsCom/account/transcationTem.js');
 var alwaysAjax = require('@pathCommonJs/components/alwaysAjax.js');
+var setCookie = require('@pathNewCommonJsCom/setCookie.js');
 
 $(function() {
     var data = {
@@ -72,8 +73,16 @@ $(function() {
                 $('#HeadBarpathName').attr("data", '已完成交易').html('已完成交易');
                 that.gV.type = 1;
             } else if (splitUrl['type'] == 'toBeConfirmed') {
-                $('.hopper').hide();
-                $('#HeadBarpathName').attr("data", '待确认交易').html('待确认交易');
+                try {
+                    $('.hopper').hide();
+                }catch(e) {
+                    console.log("hopper", e)
+                }
+                try {
+                    $('#HeadBarpathName').attr("data", '待确认交易').html('待确认交易');
+                }catch(e) {
+                    console.log("bar", e)
+                }
                 that.gV.type = 0;
             }
             mui.init({
