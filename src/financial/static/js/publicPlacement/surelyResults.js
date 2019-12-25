@@ -114,7 +114,6 @@ $(function () {
                 that.$e.applyTimeOut.html(data.applyDateTime)
 
                 if(that.gV.outType == 'common'){
-                  debugger
                   that.$e.toTimeOut.html(data.estimateDateStr + '&nbsp;24:00 前')   //普通转出
                 }else{
                   that.$e.toTimeOut.html(data.estimateTimeStr + '&nbsp;24:00 前')    //快速转出
@@ -142,7 +141,7 @@ $(function () {
                   that.$e.amountInto.html(data.balanceMask)
                   that.$e.banKImgInto.attr('src',data.bankThumbnailUrl)
                   that.$e.bankNameInto.html(data.bankName)
-                  that.$e.bankNumInto.html(data.bankAccount.substr(data.bankAccountMask.length-4))
+                  that.$e.bankNumInto.html(data.bankAccountMask.substr(data.bankAccountMask.length-4))
                   that.$e.payTypeInto.html('在线支付')
                 }
                 if(that.gV.flag == 'out'){   // 转出
