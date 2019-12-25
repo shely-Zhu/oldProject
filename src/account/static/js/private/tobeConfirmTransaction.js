@@ -77,11 +77,20 @@ $(function() {
             //地址栏里confirmed代表已确认  toBeConfirmed代表待确认
             if (splitUrl['type'] == 'confirmed') {
                 $('.hopper').show();
-                $('#HeadBarpathName').attr("data", '已完成交易').html('已完成交易');
+                try {
+                    $('#HeadBarpathName').attr("data", '已完成交易').html('已完成交易');
+                }catch(e) {
+                    console.log(e)
+                }
                 that.gV.type = 1;
             } else if (splitUrl['type'] == 'toBeConfirmed') {
                 $('.hopper').hide();
-                $('#HeadBarpathName').attr("data", '待确认交易').html('待确认交易');
+                try {
+                    $('#HeadBarpathName').html('待确认交易');
+                    $('#HeadBarpathName').attr("data", '待确认交易');
+                }catch(e) {
+                    console.log(e)
+                }
                 that.gV.type = 0;
             }
             mui.init({
@@ -356,20 +365,24 @@ $(function() {
                 $id = $id || $('#trans-template');
             console.log("外页参数值", that.gV.isConfirm)
             if (that.gV.isConfirm == 'confirmed') {
-                console.log("存值前", sessionStorage.getItem("isconfirm"))
-                //window.sessionStorage.setItem('isconfirm', 1);
-                sessionStorage.setItem("isconfirm", '1');
-                console.log("存值后", sessionStorage.getItem("isconfirm"))
-            } else if (that.gV.isConfirm == 'toBeConfirmed') {
-                //window.sessionStorage.setItem('isconfirm', 0);
-                console.log("存值前",sessionStorage.getItem("isconfirm"))
-                //sessionStorage.setItem("isconfirm", String(0));
+                console.log("存值前", localStorage.getItem("isconfirm"))
                 try{
-                    sessionStorage.setItem("isconfirm", '0');
+                    console.log(typeof localStorage)
+                    localStorage.setItem("isconfirm",'1');
                 } catch (e){
                     console.error(e)
                 }
-                console.log("存值后", sessionStorage.getItem("isconfirm"))
+                //sessionStorage.setItem("isconfirm", '1');
+                console.log("存值后", localStorage.getItem("isconfirm"))
+            } else if (that.gV.isConfirm == 'toBeConfirmed') {
+                console.log("存值前",that.getCookie("isconfirm"))
+                try{
+                    //sessionStorage.setItem("isconfirm",'0');
+                    that.setCookie( "isconfirm", 0 );
+                } catch (e){
+                    console.error(e)
+                }
+                console.log("存值后", that.getCookie("isconfirm"))
             }
             for (var i = 0; i < data.length; i++) {
                 // 是否确认交易isConfirm 1-确认 0-未确认
@@ -449,6 +462,8 @@ $(function() {
             that.generateTemplate(data, $ele, $id, type);
             
     },
+    setCookie(name, value){var expdate = new Date();expdate.setTime(expdate.getTime() + 365 * 24 * 3600 * 1000);   document.cookie = name+"="+value+";expires="+expdate.toGMTString()+";path=/";},
+    getCookie(c_name){if (document.cookie.length>0){c_start=document.cookie.indexOf(c_name + "=");if (c_start!=-1){ c_start=c_start + c_name.length+1;c_end=document.cookie.indexOf(";",c_start);if (c_end==-1) c_end=document.cookie.length;return unescape(document.cookie.substring(c_start,c_end));}};return "";},
     generateTemplate:function(data, $ele, $id,clear) {
         // 模板
         var that = this,

@@ -174,6 +174,8 @@ $(function () {
                 $('.redeem_info .item_2').html(model.confirmShares);//赎回份额
                 $('.redeem_info .bank_icon').attr('src', model.bankThumbnailUrl);//到账银行卡icon
                 $('.redeem_info .item_3').html(that.getPayInfo(model.bankName, model.bankAccountMask));//到账银行卡描述
+//              $('.redeemOut').hide();//隐藏转出银行卡
+                $('.redeem_bank').hide();//隐藏转出银行卡
                 $('.redeem_info .item_4').html(model.tradeDate);//赎回时间
             }
             
@@ -205,8 +207,8 @@ $(function () {
                     $('.redeem_confirm_info .confirm_share').html(model.confirmShares + "份");//确认份额
                     $('.redeem_confirm_info .confirm_value').html(model.confirmNav);//确认净值
                     $('.redeem_confirm_info .confirm_charge').html(model.confirmRate + "元");//手续费
-                    $('.redeem_confirm_info .confirm_amount').html(model.confirm_amount);//到账金额
-                    $('.redeem_confirm_info .bank_icon').attr('src', model.bankLogoUrl);//银行logo
+                    $('.redeem_confirm_info .confirm_amount').html(model.confirmAmount + "元");//到账金额
+                    $('.redeem_confirm_info .bank_icon').attr('src', model.bankThumbnailUrl);//银行logo
                     $('.redeem_confirm_info .bank_name').html(that.getPayInfo(model.bankName, model.bankAccountMask));//银行名称
                     if(!!model.estimateArrivalDate){//到账时间
                     	$('.redeem_confirm_info .hours_account').html(model.estimateArrivalDate);//到账时间
