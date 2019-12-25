@@ -195,13 +195,13 @@ $(function() {
                         $(".appointment").hide()
                     }
                     // 产品特点标签
-                    that.getElements.isElecContract = jsonData.isElecContract; // 是否是电子合同产品【0.否 1.是】
+                    // that.getElements.isElecContract = jsonData.isElecContract; // 是否是电子合同产品【0.否 1.是】
                     if (!!jsonData.projectLable) {
-                        var projectLable = jsonData.projectLable;
-                        for (var i in projectLable) {
-                            projectLableHtml = '<span>' + projectLable[i] + '</span>'
+                        // var projectLable = jsonData.projectLable;
+                        $.each(jsonData.projectLable, function(i, el) {
+                            projectLableHtml = '<span>' + el + '</span>'
                             $('.productLabel').append(projectLableHtml);
-                        }
+                        })
                     }
                     //0 债权投资;1 证券投资（二级市场）;2 股权投资;3 海外投资;4 其他
                     if (jsonData.investDirect == "0" || jsonData.investDirect == "2" || jsonData.investDirect == "4") { // 债权投资、股权投资、其他服务不展示
