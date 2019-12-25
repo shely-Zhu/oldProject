@@ -354,6 +354,8 @@ module.exports = function() {
     this.chooseQualifiedInvestor_url = go_url.no_url + '/mine/views/qualifiedInvestor/chooseQualifiedInvestor.html';
     //活动详情->信息补全
     this.completeInformation_url = go_url.no_url + '/mine/views/information/completeInformation.html';
+    //理财师->绑定理财师
+    this.addFinancialer_url = go_url.no_url + '/mine/views/financialer/addFinancialer.html';
      //活动详情->信息查看（修改证件有效期） 
      this.completeInfoEditModify_url = go_url.no_url + '/mine/views/information/completeInfoEditModify.html';
     //活动详情->投资者分类申请
