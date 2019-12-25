@@ -118,7 +118,7 @@ $(function () {
             location.href = "javascript:history.go(-1)";
         }
     })
-    //跳转客服页面
+    //跳转客服页面  app进行拦截
     $("#customerService").on("click", function () {
         window.location.href = site_url.onlineCustomerTransfer_url;
     })
