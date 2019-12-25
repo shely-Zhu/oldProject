@@ -690,11 +690,12 @@ $(function() {
 			})
 			// 收益分配明细点击跳转
 			mui("body").on('mdClick', '.incomeDistribution', function() {
-				window.location.href = site_url.incomeDistribution_url + '?projectId=' + that.data.projectId;
+				window.location.href = site_url.downloadNew_api + "?filePath=" + noticeObj.fileUrl + "&fileName=" + new Base64().encode(noticeObj.fileName) 
+				+ "&groupName=" + noticeObj.groupName + "&show=1&readComplete=true&showDownload=true"
 			}, {
 				'htmdEvt': "privateDetail_2"
 			})
-			// 交易明细点击跳转
+			// 电子确认书点击跳转
 			mui("body").on('mdClick', '.privateFundPdf', function() {
 				window.location.href = site_url.privateFundPdf_url + '?projectId=' + that.data.projectId + '&ecFileName=' 
 				+ new Base64().encode(that.data.ecFileName) + '&ecFileUrl=' + new Base64().encode(that.data.ecFileUrl);
