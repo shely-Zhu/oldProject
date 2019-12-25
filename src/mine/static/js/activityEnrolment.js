@@ -122,13 +122,13 @@ $(function() {
                     if (json.data.activityVOPageInfo.list.length == 0) { // 没有记录不展示
                         if (num == 0) {
                             debugger
-                            $('.NoData').show();
-                            // $('.listHasData0 .noData').show();
+                            // $('.NoData').show();
+                            $('.listHasData0 .NoDataMore').show();
                             
                             return false;
                         } else {
-                            $('.NoData').show();
-                            // $('.listHasData1 .noData').show();
+                            // $('.NoData').show();
+                            $('.listHasData1 .NoDataMore').show();
                             return false;
                         }
 
@@ -178,13 +178,13 @@ $(function() {
                 },
                 callbackNoData: function() {
                     if (num == 0) {
-                        // $('.listHasData0 .noData').show();
-                        $('.NoData').show();
+                        $('.listHasData0 .NoDataMore').show();
+                        // $('.NoData').show();
 
                         return false;
                     } else {
-                        // $('.listHasData1 .noData').show();
-                        $('.NoData').show();
+                        $('.listHasData1 .NoDataMore').show();
+                        // $('.NoData').show();
                         return false;
                     }
 

@@ -31,10 +31,10 @@ $(function() {
 				data: {},
 				callbackDone: function(json) {
 					var data = json.data
-					if(data.accountType==0||2){
-						$(".type").hide()
-					}else{
+					if(data.accountType == 1){
 						$(".type").show()
+					}else{
+						$(".type").hide()
 					}
 				},
 				callbackFail: function(json) {
