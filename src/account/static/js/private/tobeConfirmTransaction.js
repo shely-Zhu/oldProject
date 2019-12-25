@@ -356,13 +356,20 @@ $(function() {
                 $id = $id || $('#trans-template');
             console.log("外页参数值", that.gV.isConfirm)
             if (that.gV.isConfirm == 'confirmed') {
-                console.log(sessionStorage.getItem("isconfirm"))
+                console.log("存值前", sessionStorage.getItem("isconfirm"))
                 //window.sessionStorage.setItem('isconfirm', 1);
                 sessionStorage.setItem("isconfirm", '1');
+                console.log("存值后", sessionStorage.getItem("isconfirm"))
             } else if (that.gV.isConfirm == 'toBeConfirmed') {
                 //window.sessionStorage.setItem('isconfirm', 0);
-                console.log(sessionStorage.getItem("isconfirm"))
-                sessionStorage.setItem("isconfirm", '0');
+                console.log("存值前",sessionStorage.getItem("isconfirm"))
+                //sessionStorage.setItem("isconfirm", String(0));
+                try{
+                    sessionStorage.setItem("isconfirm", '0');
+                } catch (e){
+                    console.error(e)
+                }
+                console.log("存值后", sessionStorage.getItem("isconfirm"))
             }
             for (var i = 0; i < data.length; i++) {
                 // 是否确认交易isConfirm 1-确认 0-未确认
