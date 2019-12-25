@@ -134,8 +134,8 @@ $(function() {
 							//需要风测
                             var obj = {
                                 title: '温馨提示', //如果不传，默认不显示标题
-                                p: '<p>' + "暂无理财师" + '</p>',
-                                yesTxt: '去添加',
+                                p: '<p>' + "为了能时刻给您提供更优质的服务，请您绑定理财师后再报名活动" + '</p>',
+                                yesTxt: '去绑定',
                                 celTxt: '取消',
                                 hideCelButton: false,
                                 zIndex: 100,
