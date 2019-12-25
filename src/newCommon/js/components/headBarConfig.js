@@ -112,7 +112,7 @@ $(function () {
             // window.isIOS是在root文件中定义的变量
             if (window.isIOS) {
                 //这个是ios操作系统
-                window.webkit.messageHandlers.backNative.postMessage('backNative');
+                window.webkit.messageHandlers.backNative.postMessage({"type":"backNative"});
             }
         } else {
             location.href = "javascript:history.go(-1)";
