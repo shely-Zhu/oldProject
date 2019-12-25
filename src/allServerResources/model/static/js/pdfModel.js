@@ -20,12 +20,13 @@ var pdfModel={
 		// var url = '/productPrivate/static/img/demo.pdf';
 		var pageUrl = window.location.href;
 		var pdfId;
-
+		// protocol: '服务协议'
+		// policy: '隐私权政策协议'
 		if(pageUrl.indexOf('protocol') != -1){
-			pdfId = '132';
+			pdfId = '84';
 		}
 		else if(pageUrl.indexOf('policy') != -1){
-			pdfId = '131';
+			pdfId = '132';
 		}
 		
 		var obj = [{

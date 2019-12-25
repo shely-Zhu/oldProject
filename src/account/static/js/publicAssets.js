@@ -8,6 +8,8 @@
 
 require('@pathCommonBase/base.js');
 require('@pathCommonJs/ajaxLoading.js');
+var setCookie = require('@pathNewCommonJsCom/setCookie.js');
+var Base64 = require('@pathIncludJs/vendor/base64/base64.js');
 
 $(function () {
 
@@ -170,7 +172,8 @@ $(function () {
             //普通基金item的点击 进入持仓详情
             mui("body").on('mdClick', '#pageLists .hold_item', function (e) {
                 var index = $(this).index();
-                sessionStorage.setItem("publicFundDetail",JSON.stringify(that.gV.data.fundDetailList[index])) 
+                var publicFundDetail = JSON.stringify(that.gV.data.fundDetailList[index])
+                setCookie("publicFundDetail", new Base64().encode(publicFundDetail))
                 window.location.href=site_url.optionalPublicDetail_url;
             },{
                 'htmdEvt': 'publicAssets_1'

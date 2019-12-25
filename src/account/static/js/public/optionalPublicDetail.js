@@ -19,6 +19,8 @@ require('@pathCommonCom/elasticLayer/elasticLayer/elasticLayer.js');
 
 require('@pathCommonJs/components/headBarConfig.js');
 var generateTemplate = require('@pathCommonJsComBus/generateTemplate.js');
+var getCookie = require('@pathNewCommonJsCom/getCookie.js');
+var Base64 = require('@pathIncludJs/vendor/base64/base64.js');
 
 
 $(function() {
@@ -48,7 +50,10 @@ $(function() {
 
 		init: function(){
 			var that = this;
-			that.data.publicFundDetail = JSON.parse(sessionStorage.getItem("publicFundDetail"));
+			//that.data.publicFundDetail = JSON.parse(localStorage.getItem("publicFundDetail"));
+			var publicFundDetail = getCookie("publicFundDetail")
+			var base64PublicFundDetail = new Base64().decode(publicFundDetail)
+			that.data.publicFundDetail = JSON.parse(base64PublicFundDetail)
 			that.data.projectType = that.data.publicFundDetail.invTypCom;//基金类型。货币10300、非货币除10300其他
 			that.data.fundCode = that.data.publicFundDetail.fundCode;
 			that.data.isBuyFlag = that.data.publicFundDetail.isBuyFlag;//是否可购买(0否1是) int类型
@@ -444,7 +449,7 @@ $(function() {
                         isReal = "", //是否实名认证，因为如果机构切一键认证是实名，点击需要提示弹框。
                         singleaAuthenPath = "", //一键认证跳转链接
 						singleaAuthen = false; //条件框是否展示
-						if(jsonData.isWealthAccount != "1"&&jsonData.isRiskEndure == "1"&&jsonData.isPerfect == "1"&&jsonData.isInvestFavour=="1"&&jsonData.isRiskMatch=="1"){
+						if(jsonData.isWealthAccount != "1"&&jsonData.isRiskEndure == "1"&&jsonData.isPerfect == "1"&&jsonData.isInvestFavour=="1"){
 							that.data.tipsWrap.hide()
 							that.data.realLi.hide();
 							if(type == "into"){
