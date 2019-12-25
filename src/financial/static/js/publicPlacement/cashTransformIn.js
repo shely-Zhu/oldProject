@@ -389,20 +389,25 @@ $(function () {
 					return
 				}
 				if(!!that.gV.bankAccountSecret){
-					if(Number(that.gV.singleNum)<Number(that.gV.minValue)){
-						tipAction("银行卡限额"+that.gV.singleNum + '元')
-						return
-					}
+			//		if(Number(that.gV.singleNum)<Number(that.gV.minValue)){
+			//			tipAction("银行卡限额"+that.gV.singleNum + '元')
+			//			return
+			//		}
 					if(!!that.gV.minValue){
 						if(Number(that.gV.balance) < Number(that.gV.minValue)){
 							tipAction('单笔金额不能小于' + that.gV.minValue + '元')
 							return
+						}else{
+							if(Number(that.gV.balance) > Number(that.gV.singleNum)){
+								tipAction('单笔金额不能超过' + that.gV.singleNum + '元')
+								return
+							}
 						}
 					}
-					if(Number(that.gV.balance) > Number(that.gV.singleNum)){
-						tipAction('单笔金额不能超过' + that.gV.singleNum + '元')
-						return
-					}
+				//	if(Number(that.gV.balance) > Number(that.gV.singleNum)){
+				//		tipAction('单笔金额不能超过' + that.gV.singleNum + '元')
+				//		return
+				//	}
 					that.checkPayType()
 				}else{
 					//未选择银行卡提示信息
