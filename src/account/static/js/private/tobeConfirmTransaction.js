@@ -356,11 +356,13 @@ $(function() {
                 $id = $id || $('#trans-template');
             console.log("外页参数值", that.gV.isConfirm)
             if (that.gV.isConfirm == 'confirmed') {
+                console.log(sessionStorage.getItem("isconfirm"))
                 //window.sessionStorage.setItem('isconfirm', 1);
-                //sessionStorage.setItem("isconfirm", 1);
+                sessionStorage.setItem("isconfirm", '1');
             } else if (that.gV.isConfirm == 'toBeConfirmed') {
                 //window.sessionStorage.setItem('isconfirm', 0);
-                //sessionStorage.setItem("isconfirm", 0);
+                console.log(sessionStorage.getItem("isconfirm"))
+                sessionStorage.setItem("isconfirm", '0');
             }
             for (var i = 0; i < data.length; i++) {
                 // 是否确认交易isConfirm 1-确认 0-未确认
