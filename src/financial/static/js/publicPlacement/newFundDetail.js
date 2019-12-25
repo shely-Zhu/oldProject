@@ -51,8 +51,18 @@ $(function () {
                         if(jsonData.isWealthAccount != "1"&&jsonData.isRiskEndure == "1"&&jsonData.isPerfect == "1"&&jsonData.isInvestFavour=="1"){
                             that.gV.realLi.hide();
                             that.gV.tipsWrap.hide();
-                            window.location.href = site_url.fundTransformIn_url + '?fundCode=' + that.getElements.fundCode + '&fundName=' + that.getElements.chiName;
-                           
+                            $(".isRiskMatchBox").show();
+                            if(jsonData.isRiskMatch == "1"){
+                                //风险等级匹配
+                                $(".isRiskMatchBox_match").show()
+                                $(".isRiskMatchBox_noMatch").hide()
+                                $(".isRiskMatchBox_header").html("你选择的产品与您现在的风险承受能力相匹配")
+                            }else{
+                                $(".isRiskMatchBox_noMatch").show()
+                                $(".isRiskMatchBox_match").hide()
+                                $(".isRiskMatchBox_header").html("你选择的产品与您现在的风险承受能力不相匹配")
+                            }
+                              
 						}else{
                             that.gV.tipsWrap.show()
                             that.gV.realLi.show();
@@ -234,6 +244,24 @@ $(function () {
             },{
             	htmdEvt: 'newFundDetail_3'
             });
+
+                   //风测等级匹配成功
+                mui("body").on('mdClick',".isRiskMatchBox_match",function(){
+                    $(".isRiskMatchBox").hide();
+                    window.location.href = site_url.fundTransformIn_url + '?fundCode=' + that.getElements.fundCode + '&fundName=' + that.getElements.chiName;
+                 })
+   
+                //风险等级匹配失败
+                mui("body").on("mdClick",".isRiskMatchBox_cancel",function(){
+                  
+                    $(".isRiskMatchBox").hide();
+                  // that.gV.isRiskMatchBox.hide();
+                })
+   
+                //风险等级匹配失败结果跳转
+                mui("body").on("mdClick",".isRiskMatchResult",function(){
+                   window.location.href = site_url.riskAppraisal_url + "?type=private"
+                })
 
                    //认证
                    mui("body").on('mdClick', ".tips-li .tips-li-right", function (e) {
