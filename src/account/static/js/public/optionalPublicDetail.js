@@ -50,9 +50,9 @@ $(function() {
 
 		init: function(){
 			var that = this;
-			//that.data.publicFundDetail = JSON.parse(sessionStorage.getItem("publicFundDetail"));
-			var publicFundDetail = getCookie("publicFundDetail")
-			var base64PublicFundDetail = new Base64().decode(publicFundDetail)
+			that.data.publicFundDetail = JSON.parse(localStorage.getItem("publicFundDetail"));
+			/*var publicFundDetail = getCookie("publicFundDetail")
+			var base64PublicFundDetail = new Base64().decode(publicFundDetail)*/
 			that.data.publicFundDetail = JSON.parse(base64PublicFundDetail)
 			that.data.projectType = that.data.publicFundDetail.invTypCom;//基金类型。货币10300、非货币除10300其他
 			that.data.fundCode = that.data.publicFundDetail.fundCode;
