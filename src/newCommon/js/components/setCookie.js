@@ -1,0 +1,1 @@
+module.exports = function setCookie(name, value){var expdate = new Date();expdate.setTime(expdate.getTime() + 365 * 24 * 3600 * 1000);   document.cookie = name+"="+value+";expires="+expdate.toGMTString()+";path=/";}

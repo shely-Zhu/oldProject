@@ -114,11 +114,48 @@ $(function() {
                         var jsonData = json.data;
                         that.gV.custCode = jsonData.customerNo; //客户编号
                         that.gV.custType = jsonData.accountType; // 客户类型【0.机构 1.个人】 
-                        that.signUp();
+                        that.queryFinan();
 
                     },
                 }];
                 $.ajaxLoading(obj);
+            },
+            queryFinan:function(){
+            	var that = this;
+            	var obj = [{ // 系统调仓记录列表
+            	    url: site_url.queryFinancialer_api,
+            	    data: {
+            	        "pageNum": 1, //非必须，默认为1
+            	        "pageSize": 10 //非必须，默认为10
+            	    },
+            	    needDataEmpty: false,
+            	    callbackDone: function(json) {
+						if (json.status != "0000") {
+							//需要风测
+                            var obj = {
+                                title: '温馨提示', //如果不传，默认不显示标题
+                                p: '<p>' + "为了能时刻给您提供更优质的服务，请您绑定理财师后再报名活动" + '</p>',
+                                yesTxt: '去绑定',
+                                celTxt: '取消',
+                                hideCelButton: false,
+                                zIndex: 100,
+                                needYesHref: true, //是否需要把确定按钮改成a标签，默认false
+                                yesHref: site_url.addFinancialer_url, //跳转到绑定理财师页面
+                                callback: function(t) {
+
+                                },
+                            };
+                            $.elasticLayer(obj)
+						}else{
+							that.signUp();
+						}
+            	    },
+            	    callbackFail: function(json) {
+						tipAction(json.message);
+            	    }
+            	}];
+            	$.ajaxLoading(obj);
+            	
             },
             //立即报名
             signUp: function() {

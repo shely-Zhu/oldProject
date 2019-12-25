@@ -48,6 +48,7 @@ $(function () {
 			tradeSource: '' , //交易账号
 			singleNum:0,
 			minValue:0,
+			doubleClickStatus:false,
 		},
 		webinit: function () {
 			var that = this;
@@ -122,9 +123,19 @@ $(function () {
 						generateTemplate(data, that.$el.popupUl, that.$el.bankListTemplate,true);
 						$("#loading").hide()
 						$('.popup').css('display','block')
+						that.gV.doubleClickStatus = true
 					}
                   
-                }
+				},
+				callbackNoData:function(json){
+					generateTemplate("", that.$el.popupUl, that.$el.bankListTemplate,true);
+						$("#loading").hide()
+						$('.popup').css('display','block')
+						that.gV.doubleClickStatus = true
+
+				},
+				callbackFail:function(json){
+				}
 
             }];
             $.ajaxLoading(obj);
@@ -378,6 +389,10 @@ $(function () {
 					return
 				}
 				if(!!that.gV.bankAccountSecret){
+					if(Number(that.gV.singleNum)<Number(that.gV.minValue)){
+						tipAction("银行卡限额"+that.gV.singleNum + '元')
+						return
+					}
 					if(!!that.gV.minValue){
 						if(Number(that.gV.balance) < Number(that.gV.minValue)){
 							tipAction('单笔金额不能小于' + that.gV.minValue + '元')
@@ -456,7 +471,10 @@ $(function () {
 			//添加银行卡 -- 跳往原生
 			mui("body").on('mdClick','.popup-last',function(){
 				//跳往原生页面去修改密码
-				window.location.href = site_url.pofAddBankCard_url
+				if(that.gV.doubleClickStatus){
+					window.location.href = site_url.pofAddBankCard_url
+				}
+				
 			}, {
 				htmdEvt: 'cashTransformIn_16'
 			}) ;
@@ -469,7 +487,10 @@ $(function () {
 			}, {
 				htmdEvt: 'cashTransformIn_17'
 			}) ;
-
+			//返回按钮
+			mui("body").on('mdClick',"#goBack",function(){
+				history.go(-1)
+			})
 			//  ---
 			mui("body").on('mdClick','.container',function(e){
 				// debugger

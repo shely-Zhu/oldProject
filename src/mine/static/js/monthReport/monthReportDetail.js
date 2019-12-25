@@ -708,18 +708,6 @@ var monthReportDetail = {
 						if(8 <= hh && hh < 20){
 							 //跳转客服页面
 							window.location.href = site_url.onlineCustomerTransfer_url;
-							// var obj = [{
-							// 	url: site_url.getToken_api,
-							// 	data: {
-							// 	},
-							// 	needDataEmpty:false,
-							// 	callbackDone: function(json) {
-							// 		var token = json.data.token;
-							// 		// 跳转第三方客服地址
-							// 		window.location.href = site_url.onlineCustomerTransfer_url + '&token=' + token;
-							// 	},     
-							// }];
-							// $.ajaxLoading(obj);
 						}else{
 							window.location.href = site_url.consultProduct_url +'?empNo='+ that.getElements.plannerNum + '&empName=' + that.getElements.plannerName + '&productName=' + new Base64().encode(that.getElements.productName) + '&backUrl=' + new Base64().encode(window.location.href) ;
 						}

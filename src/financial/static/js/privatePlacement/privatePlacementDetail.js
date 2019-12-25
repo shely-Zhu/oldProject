@@ -427,7 +427,7 @@ $(function() {
                     that.data.isRiskEndure = jsonData.isRiskEndure; // 是否风险测评 0-否 1-是
                     that.data.accreditedInvestor = jsonData.accreditedInvestor;   //合格投资者【空-未做过】【0-未通过】【1-已通过】【2-已过期】
                     if (that.data.isRiskEndure == 0) {
-
+                        window.location.href = site_url.riskAppraisal_url + '?type=private';
                     }
 
 
@@ -1054,7 +1054,7 @@ $(function() {
                                                     zIndex: 1200,
                                                     callback: function(t) {
                                                         window.location.href = site_url.downloadNew_api + "?filePath=" + noticeObj.fileUrl + "&fileName=" + new Base64().encode(noticeObj.fileName) + "&groupName=" +
-                                                        noticeObj.groupName + "&show=1"
+                                                        noticeObj.groupName + "&show=1&readComplete=true&showDownload=false"
                                                     },
                                                 };
                                                 $.elasticLayer(obj) 
