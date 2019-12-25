@@ -427,7 +427,7 @@ $(function() {
                     that.data.isRiskEndure = jsonData.isRiskEndure; // 是否风险测评 0-否 1-是
                     that.data.accreditedInvestor = jsonData.accreditedInvestor;   //合格投资者【空-未做过】【0-未通过】【1-已通过】【2-已过期】
                     if (that.data.isRiskEndure == 0) {
-
+                        window.location.href = site_url.riskAppraisal_url + '?type=private';
                     }
 
 
@@ -622,7 +622,7 @@ $(function() {
                 callbackDone: function(json) {
                     var jsonData = json.data;
                     // debugger
-                    $(".priceLimit span").html(jsonData.pageList[jsonData.pageList.length-1].unitNetChangePercent);
+                    $(".priceLimit span").html(jsonData.pageList[0].unitNetChangePercent);
 
                     //拼数据
                     $.each(jsonData.pageList, function(i, el) {

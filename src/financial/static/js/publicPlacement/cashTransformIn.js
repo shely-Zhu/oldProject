@@ -124,7 +124,15 @@ $(function () {
 						$('.popup').css('display','block')
 					}
                   
-                }
+				},
+				callbackNoData:function(json){
+					generateTemplate("", that.$el.popupUl, that.$el.bankListTemplate,true);
+						$("#loading").hide()
+						$('.popup').css('display','block')
+
+				},
+				callbackFail:function(json){
+				}
 
             }];
             $.ajaxLoading(obj);
@@ -378,6 +386,10 @@ $(function () {
 					return
 				}
 				if(!!that.gV.bankAccountSecret){
+					if(Number(that.gV.singleNum)<Number(that.gV.minValue)){
+						tipAction("银行卡限额"+that.gV.singleNum + '元')
+						return
+					}
 					if(!!that.gV.minValue){
 						if(Number(that.gV.balance) < Number(that.gV.minValue)){
 							tipAction('单笔金额不能小于' + that.gV.minValue + '元')
@@ -469,7 +481,10 @@ $(function () {
 			}, {
 				htmdEvt: 'cashTransformIn_17'
 			}) ;
-
+			//返回按钮
+			mui("body").on('mdClick',"#goBack",function(){
+				history.go(-1)
+			})
 			//  ---
 			mui("body").on('mdClick','.container',function(e){
 				// debugger

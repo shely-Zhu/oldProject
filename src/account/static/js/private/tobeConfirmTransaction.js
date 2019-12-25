@@ -27,7 +27,6 @@ var transcationTem = require('@pathCommonJsCom/account/transcationTem.js');
 
 // var generateTemplate = require('@pathCommonJsComBus/generateTemplate.js');
 var splitUrl = require('@pathCommonJs/components/splitUrl.js')();
-var isConfirm = splitUrl['type'];
 
 var alwaysAjax = require('@pathCommonJs/components/alwaysAjax.js');
 // 按钮变量
@@ -52,6 +51,7 @@ $(function() {
             navToTop: '', // 滑动nav距离顶部距离
             type: 0, //是否确认
             businessType: $('.hopperCon li.active').attr('data'),
+            isConfirm: splitUrl['type']
         },
         html: '', //存放生成的html
         init: function() { //初始化函数
@@ -354,15 +354,27 @@ $(function() {
             var that=this;
             var $ele = $ele || $('.contentWrap'),
                 $id = $id || $('#trans-template');
-            if (isConfirm == 'confirmed') {
-                window.sessionStorage.setItem('isconfirm', 1);
-            } else if (isConfirm == 'toBeConfirmed') {
-                window.sessionStorage.setItem('isconfirm', 0);
+            console.log("外页参数值", that.gV.isConfirm)
+            if (that.gV.isConfirm == 'confirmed') {
+                console.log("存值前", sessionStorage.getItem("isconfirm"))
+                //window.sessionStorage.setItem('isconfirm', 1);
+                sessionStorage.setItem("isconfirm", '1');
+                console.log("存值后", sessionStorage.getItem("isconfirm"))
+            } else if (that.gV.isConfirm == 'toBeConfirmed') {
+                //window.sessionStorage.setItem('isconfirm', 0);
+                console.log("存值前",sessionStorage.getItem("isconfirm"))
+                //sessionStorage.setItem("isconfirm", String(0));
+                try{
+                    sessionStorage.setItem("isconfirm", '0');
+                } catch (e){
+                    console.error(e)
+                }
+                console.log("存值后", sessionStorage.getItem("isconfirm"))
             }
             for (var i = 0; i < data.length; i++) {
                 // 是否确认交易isConfirm 1-确认 0-未确认
-                data[i].isConfirmTrans = (isConfirm == 'confirmed') ? 1 : 0; //已确认
-                data[i].notConfirmTrans = (isConfirm == 'toBeConfirmed') ? 1 : 0; //未确认
+                data[i].isConfirmTrans = (that.gV.isConfirm == 'confirmed') ? 1 : 0; //已确认
+                data[i].notConfirmTrans = (that.gV.isConfirm == 'toBeConfirmed') ? 1 : 0; //未确认
                 // 申购/认购
                 data[i].businessType01 = (data[i].businessType == 0 || data[i].businessType == 1) ? 1 : 0;
                 data[i].businessType0 = data[i].businessType == 0 && (data[i].leftTopStatus == 5) ? 1 : 0; //认购

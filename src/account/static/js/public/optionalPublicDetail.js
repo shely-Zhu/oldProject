@@ -550,16 +550,15 @@ $(function() {
 		getSingleaAuthenPath:function(data){
 			var that = this;
 			var singleaAuthenPath="";
-			if(!data.isWealthAccount){
-				singleaAuthenPath = "isWealthAccount"
-			}else if(!data.isRiskEndure){
-				singleaAuthenPath = "isRiskEndure"
-			}else if(!data.isPerfect){
-				singleaAuthenPath = "isPerfect"
-			}else if(!data.isInvestFavour){
-				singleaAuthenPath = 'isInvestFavour'
+			if(data.isWealthAccount == "1"){
+			  return singleaAuthenPath = "isWealthAccount"
+			}else if(data.isRiskEndure !="1"){
+			 return singleaAuthenPath = "isRiskEndure"
+			}else if(data.isPerfect != "1"){
+			 return  singleaAuthenPath = "isPerfect"
+			}else if(!data.isInvestFavour != "1"){
+			 return  singleaAuthenPath = 'isInvestFavour'
 			}
-			return singleaAuthenPath 
 		 },
 		//点击展开按钮
 		event: function(){
