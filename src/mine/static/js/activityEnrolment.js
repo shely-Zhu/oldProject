@@ -196,6 +196,7 @@ $(function() {
 
         //分享给好友
         shareInfo: function(actId, actType, title, iconimg) {
+            debugger
             var that = this;
             var obj = [{
                 url: site_url.shareInfo_api,
