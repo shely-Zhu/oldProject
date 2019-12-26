@@ -5,6 +5,7 @@
 require('@pathCommonBase/base.js');
 
 require('@pathCommonJs/ajaxLoading.js');
+require('@pathCommonJs/components/headBarConfig.js');
 var uploadFile = require('@pathCommonCom/uplaoderFile/concatUsAdviseUploaderFile.js')
 var splitUrl = require('@pathCommonJs/components/splitUrl.js')();
 var generateTemplate = require('@pathCommonJsComBus/generateTemplate.js');
