@@ -47,6 +47,11 @@ $(function () {
             fixedInvestementBtnStatu:true,
             fundName:"",
             isRiskMatchStatus:false,
+            isRiskMatchBox:$(".isRiskMatchBox"),
+            isRiskMatchBoxMatch:$(".isRiskMatchBox_match"),
+            isRiskMatchBoxNoMatch:$(".isRiskMatchBox_noMatch"),
+            isRiskMatchBoxHeader:$(".isRiskMatchBox_header"),
+            singleaAuthenType:"",  //认证类型  买入into  定投 investement
         },
         fundType: splitUrl['fundType'] == '10300' ? 1 : 0, //10300 货币基金类型，其余为普通基金类型
         init: function () {
@@ -207,23 +212,20 @@ $(function () {
 						if(jsonData.isWealthAccount != "1"&&jsonData.isRiskEndure == "1"&&jsonData.isPerfect == "1"&&jsonData.isInvestFavour=="1"){
                             that.gV.realLi.hide();
                             that.gV.tipsWrap.hide();
-                            if(type == "into"){
-                                //买入一键认证
-                                window.location.href = site_url.fundTransformIn_url + '?fundCode=' + splitUrl['fundCode'] + '&fundName=' + that.gV.secuSht;
-                            }else if(type == "investement"){
-
-                                //定投一键认证
-                                if(!that.gV.fixedInvestementBtnStatu){
-                                    return
-                                }
-                                if(that.gV.accountType === 0 || that.gV.accountType === 2){
-                                    tipAction('暂不支持机构客户进行交易');
-                                }else{
-                                    window.location.href = site_url.pofOrdinarySetThrow_url + '?fundCode=' + splitUrl['fundCode'] + '&fundName=' + that.gV.secuSht + '&type=add';
-                                }
-
+                            $(".isRiskMatchBox").show();
+                            if(jsonData.isRiskMatch == "1"){
+                                //风险等级匹配
+                                $(".isRiskMatchBox_match").show()
+                                $(".isRiskMatchBox_noMatch").hide()
+                                $(".isRiskMatchBox_header").html("你选择的产品与您现在的风险承受能力相匹配")
+                            }else{
+                                $(".isRiskMatchBox_noMatch").show()
+                                $(".isRiskMatchBox_match").hide()
+                                $(".isRiskMatchBox_header").html("你选择的产品与您现在的风险承受能力不相匹配")
                             }
-                           
+ 
+                            that.gV.singleaAuthenType = type
+                          
 						}else{
                             that.gV.tipsWrap.show()
                             that.gV.realLi.show();
@@ -338,7 +340,6 @@ $(function () {
             });
             // 买入
             mui("body").on('mdClick', ".footer .buy_btn", function (e) {
-                debugger
 
                 that.getConditionsOfOrder("into");
                // window.location.href = site_url.fundTransformIn_url + '?fundCode=' + fundCode + '&fundName=' + fundName;
@@ -404,6 +405,39 @@ $(function () {
             },{
                 htmdEvt: 'publicDetail_09'
             });
+
+             //风测等级匹配成功
+             mui("body").on('mdClick',".isRiskMatchBox_match",function(){
+                 var type = that.gV.singleaAuthenType;
+                 if(type == "into"){
+                    //买入一键认证
+                    window.location.href = site_url.fundTransformIn_url + '?fundCode=' + splitUrl['fundCode'] + '&fundName=' + that.gV.secuSht;
+                }else if(type == "investement"){
+
+                    //定投一键认证
+                    if(!that.gV.fixedInvestementBtnStatu){
+                        return
+                    }
+                    if(that.gV.accountType === 0 || that.gV.accountType === 2){
+                        tipAction('暂不支持机构客户进行交易');
+                    }else{
+                        window.location.href = site_url.pofOrdinarySetThrow_url + '?fundCode=' + splitUrl['fundCode'] + '&fundName=' + that.gV.secuSht + '&type=add';
+                    }
+
+                }
+             })
+
+             //风险等级匹配失败
+             mui("body").on("mdClick",".isRiskMatchBox_cancel",function(){
+                 $(".isRiskMatchBox").hide();
+               // that.gV.isRiskMatchBox.hide();
+             })
+
+             //风险等级匹配失败结果跳转
+             mui("body").on("mdClick",".isRiskMatchResult",function(){
+                window.location.href = site_url.riskAppraisal_url + "?type=private"
+             })
+
 
             // 七日年华 万份收益
             mui("body").on('mdClick', "#redeemNav .navSpan ", function (e) {
