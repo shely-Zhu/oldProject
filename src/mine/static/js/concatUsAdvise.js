@@ -55,7 +55,7 @@ $(function () {
             var obj = [{
                 url: site_url.insertFeedback_api,
                 data: {
-                    feedbackType: that.gD.feedbackType,
+                    feedbackType: Number(that.gD.feedbackType),
                     feedbackDesc: that.gD.feedbackDesc,
                     imgIds: that.gD.idArr
                 },
