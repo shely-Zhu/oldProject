@@ -51,6 +51,7 @@ $(function () {
         },
         submitAdvise:function(){
             var that = this;
+            $(".blueBgButton").addClass("disable")
             var obj = [{
                 url: site_url.insertFeedback_api,
                 data: {
@@ -61,10 +62,11 @@ $(function () {
                 //async: false,
                 needDataEmpty: true,
                 callbackDone: function (json) {
+                    $(".blueBgButton").removeClass("disable")
                     location.href = "javascript:history.go(-1)";
                 },
                 callbackFail: function(json) {
-                    console.log(json.message)
+                    $(".blueBgButton").removeClass("disable")
                     tipAction(json.message);
                 }
                 
