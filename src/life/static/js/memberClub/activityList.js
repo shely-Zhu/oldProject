@@ -118,7 +118,11 @@ $(function() {
                             that.getNoData(noList);
                             return false;
                         }
-                        var data = json.data.activityVoPageInfo.list;
+                        if(json.data.activityVoPageInfo) {
+                            var data = json.data.activityVoPageInfo.list
+                        } else {
+                            var data = []
+                        }
                         that.$e.activityListDataBox.show();
                         that.$e.activityListDataNoBox.hide();
                         setTimeout(function() {
@@ -275,7 +279,7 @@ $(function() {
                         var code = data.cityCode;
                         var name = data.cityName;
                         var parentid = data.provinceCode;
-                        $('#locationCity').text(name);
+                        $('#locationCity').text(name || '全国');
                         $('#locationCity').attr({
                             'data-name': name,
                             'data-parentid': parentid
