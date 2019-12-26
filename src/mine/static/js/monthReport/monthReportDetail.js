@@ -650,7 +650,7 @@ var monthReportDetail = {
 					
 				},
 				needLogin: true, //需要判断登录情况
-				needDataEmpty: false,//不需要判断data是否为空
+				needDataEmpty: true,//不需要判断data是否为空
 				callbackDone: function(json){
 					var result = json.data;
 					// 判断是否有专属理财师和服务理财师
@@ -715,8 +715,19 @@ var monthReportDetail = {
 					}
 				},
 				callbackFail: function(json){
-					
+					tipAction(json.message)
 				},
+				callbackNoData:function(json){
+					var now = new Date();
+					var hh = now.getHours();
+
+					if(8 <= hh && hh < 20){
+						 //跳转客服页面
+						window.location.href = site_url.onlineCustomerTransfer_url;
+					}else{
+						window.location.href = site_url.consultProduct_url +'?empNo='+ that.getElements.plannerNum + '&empName=' + that.getElements.plannerName + '&productName=' + new Base64().encode(that.getElements.productName) + '&backUrl=' + new Base64().encode(window.location.href) ;
+					}
+				}
 			}]
 			$.ajaxLoading(obj);
 

@@ -65,6 +65,7 @@ $(function() {
                 oneYear: {},
                 sinceNow: {}
             },
+            incomeModeJF: 0 // 0固收 1浮收普通 2浮收稳裕
         },
 
         //页面初始化函数
@@ -95,6 +96,8 @@ $(function() {
                     var businessCompareReferenceMin = jsonData.businessCompareReferenceMin,
                         businessCompareReferenceMax = jsonData.businessCompareReferenceMax;
                     // 根据收益分配方式区分 0固收 1浮收普通 2浮收稳裕 
+                    console.log(that.data.incomeModeJF,jsonData.incomeModeJF)
+                    that.data.incomeModeJF = jsonData.incomeModeJF
                     if (jsonData.incomeModeJF == '0') {
                         // 头部不同的展示
                         $('.fixedIncome').removeClass('hide');
@@ -482,7 +485,7 @@ $(function() {
             var that = this;
             num = num ? num : 3;
             var newData = {
-                    // sevenIncomeRate: [], //存放折线图七日年化
+                    sevenIncomeRate: [], //存放折线图七日年化
                     profitThoudDate: [], //存放折线图收益日期
                     profitThoudValue: [] //存放折线图万份收益
                 }
@@ -512,7 +515,7 @@ $(function() {
             var obj = [{
                 url: site_url.earningCurve_api,
                 data: {
-                    projectId: that.data.projectId,
+                    projectId: that.$e.projectId,
                     profitRange: num
                 },
                 needLogin: true,
@@ -522,7 +525,7 @@ $(function() {
                     var jsonData = json.data;
                     //拼数据
                     $.each(jsonData, function(i, el) {
-                        // newData.sevenIncomeRate.push( el.sevenYearYield);
+                        newData.sevenIncomeRate.push( el.sevenYearYield);
                         newData.profitThoudDate.push(el.curveDate);
                         newData.profitThoudValue.push(el.incomeUnit);
                     })
@@ -563,27 +566,10 @@ $(function() {
         //请求历史业绩走势
         getTypeOneData: function(type, num) {
             var that = this;
-            num = num ? num : 0;
+            num = num ? num : 3;
             var newData = {
                 sevenIncomeRate: [], //存放折线图历史业绩净值
                 profitThoudDate: [], //存放折线图净值日期
-            }
-            var days;
-            if (num == 0) {
-                // 月
-                days = 30;
-            } else if (num == 1) {
-                // 季
-                days = 90;
-            } else if (num == 2) {
-                // 半年
-                days = 180;
-            } else if (num == 3) {
-                // 一年
-                days = 365;
-            } else if (num == 4) {
-                // 成立至今
-                days = '';
             }
 
             if (num == 0 && that.data['dwjzljjz'].oneMonth.profitThoudDate && that.data['dwjzljjz'].oneMonth.profitThoudDate.length) {
@@ -610,14 +596,12 @@ $(function() {
 
             //没有数据，请求接口
             var obj = [{
-                url: site_url.prvHisValue_api,
+                //url: site_url.prvHisValue_api,
+                url: site_url.queryHistoryNetValue_api,
                 data: {
                     projectId: splitUrl['projectId'],
-                    days: days,
-                    pageNo: '',
-                    pageSize: '',
+                    profitRange: num 
                 },
-                contentTypeSearch: true,
                 needLogin: true,
                 callbackDone: function(json) {
                     var jsonData = json.data;
@@ -1297,8 +1281,11 @@ $(function() {
             mui("body").on('mdClick', '.lineWrap .time', function() {
                     $('.lineDraw .time').removeClass('active');
                     $(this).addClass('active');
-
-                    that.getTypeOneData(that.$e.lineType, $(this).attr('num'));
+                    if(that.data.incomeModeJF == 1) { // 展示净值走势
+                        that.getTypeOneData(that.$e.lineType, $(this).attr('num'));
+                    } else if (that.data.incomeModeJF == 2) { // 展示七日年化
+                        that.getTypeTwoData(that.$e.lineType, $(this).attr('num'));
+                    }
                 }, {
                     htmdEvt: 'privatePlacementDetail_02'
                 })

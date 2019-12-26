@@ -487,6 +487,13 @@ $(function() {
                 }, {
                     htmdEvt: 'activityDetails_6'
                 });
+                // 点击查看奖励跳转到我的奖励页面
+                mui('body').on('mdClick','.rewards',function(){
+                    alert(site_url.rewards_url);
+                    window.location.href = site_url.rewards_url;
+                },{
+                    htmdEvt: 'activityDetails_7'
+                })
             }
         }
         //调用初始化函数
