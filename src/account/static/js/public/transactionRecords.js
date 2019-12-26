@@ -367,8 +367,8 @@ $(function () {
                 + '&Fixbusinflag=' + Fixbusinflag + '&fundType='+ fundType
                 // allotType == 3  是分红
                 if (allotType == 3) {
-                    window.location.href = pathdata + '&shares=' + shares + '&fundName=' + fundName
-                        + '&applyDate=' + applyDate + '&autoBuyDesc=' + autoBuyDesc;
+                    window.location.href = pathdata + '&shares=' + shares + '&fundName=' + new Base64().encode(fundName)
+                        + '&applyDate=' + applyDate + '&autoBuyDesc=' + new Base64().encode(autoBuyDesc);
                 } else {
                     window.location.href = pathdata + '&scheduledProtocolId=' + scheduledProtocolId;
                     
