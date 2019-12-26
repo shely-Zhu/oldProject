@@ -344,6 +344,7 @@ $(function() {
                         tipAction('暂不支持机构客户进行交易');
                     } else {
                         window.location.href = site_url.pofCashTransformIn_url+ "?fundName=" +that.gL.fundName + "&fundCode=" +that.gL.fundCode;
+                        //window.location.href = site_url.pofCashTransformIn_url+ "?fundName=" +"jfskdjfhk"+ "&fundCode=" +"003075";
 
                     }
 
