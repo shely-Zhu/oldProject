@@ -61,7 +61,8 @@ $(function () {
             var that = this;
             mui("body").on('mdClick', 'footer', function (e) {
                 //再买一笔 跳转到产品详情页
-                window.location.href = site_url.productPublicDetail_url + '?fundCode=' + splitUrl()[fundCode];
+                // window.location.href = site_url.productPublicDetail_url + '?fundCode=' + splitUrl()["fundCode"];
+                window.location.href = site_url.pofPublicDetail_url + '?fundCode=' + splitUrl()["fundCode"];
             },{
                 'htmdEvt': 'publicTradeDetail_0'
             })
@@ -77,13 +78,15 @@ $(function () {
             })
             mui("body").on('mdClick', '.buy_info .fund_item', function (e) {
                 //买入产品条目点击进入公募产品详情
-                window.location.href = site_url.productPublicDetail_url + '?fundCode=' + splitUrl()[fundCode];
+                // window.location.href = site_url.productPublicDetail_url + '?fundCode=' + splitUrl()["fundCode"];
+                window.location.href = site_url.pofPublicDetail_url + '?fundCode=' + splitUrl()["fundCode"];
+
             },{
                 'htmdEvt': 'publicTradeDetail_2'
             })
             mui("body").on('mdClick', '.plan', function (e) {
                 //定投计划跳转到定投详情
-                window.location.href = site_url.pofCastSurelyDetails_url + '?scheduledProtocolId=' + splitUrl()[scheduledProtocolId];
+                window.location.href = site_url.pofCastSurelyDetails_url + '?scheduledProtocolId=' + splitUrl()["scheduledProtocolId"];
             },{
                 'htmdEvt': 'publicTradeDetail_3'
             })
@@ -318,10 +321,11 @@ $(function () {
 
             $('.trade_status_area').addClass('hide'); 
             $('.bonus_info').removeClass('hide');
-            $('.bonus_info .fund_name').html(splitUrl()['fundName']);//分红产品
+            $('.bonus_info .fund_name').html(new Base64().decode(splitUrl()['fundName']));//分红产品
             $('.bonus_info .fund_share').html(splitUrl()['shares']);//分红份额
-            $('.bonus_info .bonus_mode').html(splitUrl()['autoBuyDesc']);//分红方式
+            $('.bonus_info .bonus_mode').html(new Base64().decode(splitUrl()['autoBuyDesc']));//分红方式
             $('.bonus_info .fund_date').html(splitUrl()['applyDate']);//分红时间
+            $(".listLoading").hide();//隐藏loading
         },
         getRemittanceAccount: function () { 
             //获取监管账户信息
