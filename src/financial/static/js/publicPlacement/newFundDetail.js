@@ -48,7 +48,7 @@ $(function () {
                         isReal = "", //是否实名认证，因为如果机构切一键认证是实名，点击需要提示弹框。
                         singleaAuthenPath = "", //一键认证跳转链接
                         singleaAuthen = false; //条件框是否展示
-                        if(jsonData.isWealthAccount != "1"&&jsonData.isRiskEndure == "1"&&jsonData.isPerfect == "1"&&jsonData.isInvestFavour=="1"){
+                        if(jsonData.isWealthAccount == "0"&&jsonData.isRiskEndure == "1"&&jsonData.isPerfect == "1"&&jsonData.isInvestFavour=="1"){
                             that.gV.realLi.hide();
                             that.gV.tipsWrap.hide();
                             $(".isRiskMatch_mask").show();
@@ -70,11 +70,11 @@ $(function () {
 							
                         }
                         that.gV.singleaAuthenPath = that.getSingleaAuthenPath(jsonData);
-                        if(jsonData.isWealthAccount=="1"){
-							//是否开通财富账户
-							that.gV.realLi.eq(0).show()  
+                        if(jsonData.isWealthAccount=="0"){
+							//是否开通财富账户 0开通  非0 没有开通
+							that.gV.realLi.eq(0).hide()  
 						}else{
-							that.gV.realLi.eq(0).hide()
+							that.gV.realLi.eq(0).show()
 						}
 						if(jsonData.isRiskEndure=="0"||jsonData.isRiskEndure == null){
 							//是否风测
@@ -109,7 +109,7 @@ $(function () {
         getSingleaAuthenPath:function(data){
             var that = this;
             var singleaAuthenPath="";
-            if(data.isWealthAccount == "1"){
+            if(data.isWealthAccount != "0"){
               return singleaAuthenPath = "isWealthAccount"
             }else if(data.isRiskEndure !="1"){
              return singleaAuthenPath = "isRiskEndure"
