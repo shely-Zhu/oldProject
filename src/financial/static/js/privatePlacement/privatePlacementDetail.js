@@ -198,7 +198,7 @@ $(function() {
                         $(".appointment").hide()
                     }
                     // 产品特点标签
-                    // that.getElements.isElecContract = jsonData.isElecContract; // 是否是电子合同产品【0.否 1.是】
+                    that.getElements.isElecContract = jsonData.isElecContract; // 是否是电子合同产品【0.否 1.是】
                     if (!!jsonData.projectLable) {
                         // var projectLable = jsonData.projectLable;
                         $.each(jsonData.projectLable, function(i, el) {
@@ -1069,7 +1069,9 @@ $(function() {
                                                     	var isEle = "";
                                                     	if(that.data.fundDetailObj.isElecContract == "1"){
                                                     		isEle = "electronicContract"
-                                                    	}
+                                                    	}else{
+                                                            isEle = "ordinaryProducts"
+                                                        }
                                                         window.location.href = site_url.downloadNew_api + "?filePath=" + noticeObj.fileUrl + "&fileName=" + new Base64().encode(noticeObj.fileName) + "&groupName=" +
                                                         noticeObj.groupName + "&show=1&readComplete=true&showDownload=false&fundCode=" + that.$e.projectId + "&isAllowAppend=" +
                                                         that.data.fundDetailObj.isAllowAppend + '&accreditedInvestor=' + that.data.accreditedInvestor + '&businessType=' + isEle;

@@ -60,7 +60,6 @@ $(function () {
             that.getData();
             that.getUserInfo();  //获取用户类型
             $('.tips').hide()
-
         },
         changeVal: function (prop, num, isfalse) {
             isfalse = isfalse === undefined ? true : false
