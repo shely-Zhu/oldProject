@@ -48,7 +48,7 @@ $(function () {
                         isReal = "", //是否实名认证，因为如果机构切一键认证是实名，点击需要提示弹框。
                         singleaAuthenPath = "", //一键认证跳转链接
                         singleaAuthen = false; //条件框是否展示
-                        if(jsonData.isWealthAccount == "0"&&jsonData.isRiskEndure == "1"&&jsonData.isPerfect == "1"&&jsonData.isInvestFavour=="1"){
+                        if(jsonData.isWealthAccount != "1"&&jsonData.isRiskEndure == "1"&&jsonData.isPerfect == "1"&&jsonData.isInvestFavour=="1"){
                             that.gV.realLi.hide();
                             that.gV.tipsWrap.hide();
                             $(".isRiskMatch_mask").show();
@@ -70,11 +70,11 @@ $(function () {
 							
                         }
                         that.gV.singleaAuthenPath = that.getSingleaAuthenPath(jsonData);
-                        if(jsonData.isWealthAccount=="0"){
-							//是否开通财富账户 0开通  非0 没有开通
-							that.gV.realLi.eq(0).hide()  
+                        if(jsonData.isWealthAccount=="1"){
+							//是否开通财富账户
+							that.gV.realLi.eq(0).show()  
 						}else{
-							that.gV.realLi.eq(0).show()
+							that.gV.realLi.eq(0).hide()
 						}
 						if(jsonData.isRiskEndure=="0"||jsonData.isRiskEndure == null){
 							//是否风测
@@ -109,7 +109,7 @@ $(function () {
         getSingleaAuthenPath:function(data){
             var that = this;
             var singleaAuthenPath="";
-            if(data.isWealthAccount != "0"){
+            if(data.isWealthAccount == "1"){
               return singleaAuthenPath = "isWealthAccount"
             }else if(data.isRiskEndure !="1"){
              return singleaAuthenPath = "isRiskEndure"
@@ -132,7 +132,9 @@ $(function () {
                     //当前时间
 		    		var nowDate = new Date();
 		    		var endDate = new Date(jsonData.issEndDt);
-		    		var totalSeconds = parseInt((endDate - nowDate) / 1000);
+		    		var totalSeconds = parseInt((endDate - nowDate) / 1000); // 当前时间与募集截止日的日期相比
+                    var issBgnDt = new Date(jsonData.issBgnDt); 
+                    var timeDiff = parseInt((issBgnDt - nowDate) / 1000); // 当前时间与募集起始日的日期相比
                     // 基金简称 + 基金编码
                     $("#HeadBarpathName").html("<span>"+jsonData.secuSht+"</span>"+"</br><span class='secuId'>"+jsonData.trdCode+"</span>");
                     // that.setHeadLineHeight()
@@ -143,10 +145,11 @@ $(function () {
 
                     if(totalSeconds > 0){
                     	that.TimeDown(jsonData.issEndDt);
-                    }else{
-                    	$('.subscriptionTime').html('<span>00</span>天<span>00</span>小时<span>00</span>分<span>00</span>秒')
+                        that.getElements.productStatus = 0;
+                    }else if(totalSeconds <= 0 && jsonData.issBgnDt || timeDiff > 0){
+                    	$('.subscriptionTime').html('<span>00</span>天<span>00</span>小时<span>00</span>分<span>00</span>秒');
+                        $('.buyButton').attr("disabled", true).addClass('disable'); 
                     }
-
                     // 认购流程的募集期
                     $('.collectDate').html(jsonData.issEndDt.substring(5));
                     // 购买费率
@@ -162,9 +165,9 @@ $(function () {
                     $('.fundCompanyTxt').html(jsonData.fmcComName);
                     that.getElements.fmcComId = jsonData.fmcComId;
 
-                    if(that.getElements.productStatus == 1){
-                    	$('.buyButton').attr("disabled", true).addClass('disable');	
-                    }
+                    // if(that.getElements.productStatus == 1){
+                    // 	$('.buyButton').attr("disabled", true).addClass('disable');	
+                    // }
                     that.getElements.chiName = jsonData.chiName;
                 },
                 callbackFail: function (json) {
