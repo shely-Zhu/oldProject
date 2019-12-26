@@ -7,6 +7,8 @@ require('@pathCommonBase/base.js');
 require('@pathCommonJs/ajaxLoading.js');
 var generateTemplate = require('@pathCommonJsComBus/generateTemplate.js');
 var alwaysAjax = require('@pathCommonJs/components/alwaysAjax.js');
+var setCookie = require('@pathNewCommonJsCom/setCookie.js');
+var getCookie = require('@pathNewCommonJsCom/getCookie.js');
 
 $(function () {
     var somePage = {
@@ -60,27 +62,26 @@ $(function () {
         init: function () {
             var that = this;
             this.initMask();
-            // 判断ccache是否有值
-            if (!sessionStorage.getItem("ccache")) {
-                // 在跳转的本页面 会让上一个页面做清空ccache的操作
+            // 判断transactionRecordsAjaxData是否有值
+            if (!getCookie("transactionRecordsAjaxData")) {
+                // 在跳转的本页面 会让上一个页面做清空transactionRecordsAjaxData的操作
                 this.initMui(that.gV.ajaxdata);
             } else {
-                //返回按钮不会清空ccache的值
-                that.gV.ajaxdata = JSON.parse(sessionStorage.getItem("ccache"));
-                console.log(sessionStorage.getItem("ccache1").split(','))
+                //返回按钮不会清空transactionRecordsAjaxData的值
+                that.gV.ajaxdata = JSON.parse(getCookie("transactionRecordsAjaxData"));
                 // 赋值选中状态
-                that.gV.selectedAll = sessionStorage.getItem("ccache1").split(',')[0]
-                that.gV.selectedstatus = sessionStorage.getItem("ccache1").split(',')[1]
-                that.gV.selectedTime = sessionStorage.getItem("ccache1").split(',')[2]
-                that.gV.selectedBankCard = sessionStorage.getItem("ccache1").split(',')[3]
-                console.log(sessionStorage.getItem("ccache1").split(',')[4])
+                that.gV.selectedAll = getCookie("transactionRecordsShowData").split(',')[0]
+                that.gV.selectedstatus = getCookie("transactionRecordsShowData").split(',')[1]
+                that.gV.selectedTime = getCookie("transactionRecordsShowData").split(',')[2]
+                that.gV.selectedBankCard = getCookie("transactionRecordsShowData").split(',')[3]
+                console.log(getCookie("transactionRecordsShowData").split(',')[4])
                 // 回显选中的汉字
-                that.gV.searchTitleList[0].title = sessionStorage.getItem("ccache1").split(',')[4]
-                that.gV.searchTitleList[1].title = sessionStorage.getItem("ccache1").split(',')[5]
-                that.gV.searchTitleList[2].title = sessionStorage.getItem("ccache1").split(',')[6]
+                that.gV.searchTitleList[0].title = getCookie("transactionRecordsShowData").split(',')[4]
+                that.gV.searchTitleList[1].title = getCookie("transactionRecordsShowData").split(',')[5]
+                that.gV.searchTitleList[2].title = getCookie("transactionRecordsShowData").split(',')[6]
                 // 自己清空它
-                sessionStorage.removeItem("ccache");
-                sessionStorage.removeItem("ccache1");
+                // setCookie("transactionRecordsAjaxData","", -1);
+                // setCookie("transactionRecordsShowData","", -1);
                 this.initMui(that.gV.ajaxdata);
             }
 
@@ -359,35 +360,24 @@ $(function () {
                 var fundName = $(this).attr('data-fundName')
                 var applyDate = $(this).attr('data-applyDate')
                 var autoBuyDesc = $(this).attr('data-autoBuyDesc')
-                // ajaxdata: {
-                //     applyType: '',  //0：购买 1：赎回  2：定投,3:分红
-                //     tradeApplyStatus: '',//(0:失败，1：成功，2：待确认，3：已撤单)
-                //     timeNode: '',// * 1：近一个月 2：近三个月 3：近半年 4：近1年 5：近3年
-                //     tradeAcc: '',//交易账号(从银行卡列表取)
-
-                // }
+                // pathdata 是 每个详情页 都需要传的参数
+                var pathdata = site_url.publicTradeDetail_url + '?applyId=' + applyId + '&fundCombination=' + fundCombination
+                + '&fundCode=' + fundCode + '&fundBusinCode=' + fundBusinCode + '&allotType=' + allotType
+                + '&Fixbusinflag=' + Fixbusinflag
+                // allotType == 3  是分红
                 if (allotType == 3) {
-                    window.location.href = site_url.publicTradeDetail_url + '?applyId=' + applyId + '&fundCombination=' + fundCombination
-                        + '&fundCode=' + fundCode + '&fundBusinCode=' + fundBusinCode + '&allotType=' + allotType
-                        + '&Fixbusinflag=' + Fixbusinflag + '&shares=' + shares + '&fundName=' + fundName
+                    window.location.href = pathdata + '&shares=' + shares + '&fundName=' + fundName
                         + '&applyDate=' + applyDate + '&autoBuyDesc=' + autoBuyDesc;
-                    sessionStorage.setItem("ccache", JSON.stringify(that.gV.ajaxdata));
-                    sessionStorage.setItem("ccache1", JSON.stringify(that.gV.selectedAll) + ','
-                        + JSON.stringify(that.gV.selectedstatus) + ',' + that.gV.selectedTime + ','
-                        + JSON.stringify(that.gV.selectedBankCard) + ',' + $('#recordSearchWrapper .searchItem').eq(0).children('span').text() +
-                        ',' + $('#recordSearchWrapper .searchItem').eq(1).children('span').text() + ',' + $('#recordSearchWrapper .searchItem').eq(2).children('span').text() +
-                        ',' + $('#recordSearchWrapper .searchItem').eq(3).children('span').text());
                 } else {
-                    window.location.href = site_url.publicTradeDetail_url + '?applyId=' + applyId + '&fundCombination=' + fundCombination
-                        + '&fundCode=' + fundCode + '&fundBusinCode=' + fundBusinCode + '&allotType=' + allotType
-                        + '&Fixbusinflag=' + Fixbusinflag + '&scheduledProtocolId=' + scheduledProtocolId;
-                    sessionStorage.setItem("ccache", JSON.stringify(that.gV.ajaxdata));
-                    sessionStorage.setItem("ccache1", JSON.stringify(that.gV.selectedAll) + ','
+                    window.location.href = pathdata + '&scheduledProtocolId=' + scheduledProtocolId;
+                    
+                }
+                // 存 setCookie 是详情页返回时  要保留 筛选条件的动作  transactionRecordsAjaxData  是ajax参数  transactionRecordsShowData 是回显
+                setCookie("transactionRecordsAjaxData", JSON.stringify(that.gV.ajaxdata));
+                setCookie("transactionRecordsShowData", JSON.stringify(that.gV.selectedAll) + ','
                         + JSON.stringify(that.gV.selectedstatus) + ',' + that.gV.selectedTime + ','
                         + JSON.stringify(that.gV.selectedBankCard) + ',' + $('#recordSearchWrapper .searchItem').eq(0).children('span').text() +
-                        ',' + $('#recordSearchWrapper .searchItem').eq(1).children('span').text() + ',' + $('#recordSearchWrapper .searchItem').eq(2).children('span').text() +
-                        ',' + $('#recordSearchWrapper .searchItem').eq(3).children('span').text());
-                }
+                        ',' + $('#recordSearchWrapper .searchItem').eq(1).children('span').text() + ',' + $('#recordSearchWrapper .searchItem').eq(2).children('span').text());
 
             },{
                 'htmdEvt': 'transactionRecords_2'
