@@ -369,8 +369,8 @@ $(function () {
                 if (allotType == 3) {
                     window.location.href = site_url.publicTradeDetail_url + '?applyId=' + applyId + '&fundCombination=' + fundCombination
                         + '&fundCode=' + fundCode + '&fundBusinCode=' + fundBusinCode + '&allotType=' + allotType
-                        + '&Fixbusinflag=' + Fixbusinflag + '&shares=' + shares + '&fundName=' + fundName
-                        + '&applyDate=' + applyDate + '&autoBuyDesc=' + autoBuyDesc;
+                        + '&Fixbusinflag=' + Fixbusinflag + '&shares=' + shares + '&fundName=' + new Base64().encode(fundName)
+                        + '&applyDate=' + applyDate + '&autoBuyDesc=' + new Base64().encode(autoBuyDesc);
                     sessionStorage.setItem("ccache", JSON.stringify(that.gV.ajaxdata));
                     sessionStorage.setItem("ccache1", JSON.stringify(that.gV.selectedAll) + ','
                         + JSON.stringify(that.gV.selectedstatus) + ',' + that.gV.selectedTime + ','
