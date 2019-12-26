@@ -370,7 +370,7 @@ module.exports = function() {
     //交易明细总页面
     this.publicTransactionDetails_url = go_url.no_url + '/mine/views/publicTransactionDetails.html'
         //单个产品交易记录页面
-    this.transactionDetailPublic_url = go_url.no_url + '/account/views/public/transactionDetail.html'
+    this.transactionDetailPublic_url = go_url.no_url + '/account/views/public/superTransactionRecord.html'
         /*-------------------------------活动列表 end -----------------------*/
 
 
@@ -456,7 +456,7 @@ module.exports = function() {
     // 私募交易规则
     this.privateTransactionRules_url = go_url.no_url + '/account/views/private/transactionRules.html';
     // 公募交易规则
-    this.transactionRules_url = go_url.no_url + '/financial/views/publicPlacement/transactionRules.html';
+    // this.transactionRules_url = go_url.no_url + '/financial/views/publicPlacement/transactionRules.html';
     //基金公司
     this.fundCompany_url = go_url.no_url + '/financial/views/publicPlacement/fundCompany.html';
     // 信息披露
