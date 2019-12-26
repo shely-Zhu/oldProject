@@ -976,7 +976,19 @@ $(function() {
                                 };
                                 $.elasticLayer(obj)
 
-                            } else {
+                            } else if(v.conditionType == "3" && that.data.custType != "1"){//完善信息和税收声明未完成时，机构客户不支持线上完善资料
+                            	$("#tips-wrap").hide();
+                                var obj = {
+                                    title: '',
+                                    id: 'realOrg2',
+                                    p: '机构客户完善资料请联系您的理财师',
+                                    yesTxt: '确认',
+                                    celTxt: "取消",
+                                    zIndex: 100,
+                                    callback: function(t) {}
+                                };
+                                $.elasticLayer(obj)
+                            }else {
                                 window.location.href = jumpUrl;
                             }
                             $("#tips-wrap").hide();//点击跳转关闭弹窗

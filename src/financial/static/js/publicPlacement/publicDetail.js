@@ -218,10 +218,18 @@ $(function () {
                                 $(".isRiskMatchBox_match").show()
                                 $(".isRiskMatchBox_noMatch").hide()
                                 $(".isRiskMatchBox_header").html("你选择的产品与您现在的风险承受能力相匹配")
-                            }else{
+                            }else if(jsonData.isRiskMatch == "0"){
                                 $(".isRiskMatchBox_noMatch").show()
                                 $(".isRiskMatchBox_match").hide()
                                 $(".isRiskMatchBox_header").html("你选择的产品与您现在的风险承受能力不相匹配")
+                                $(".isRiskMatchResult").html("查看评测结果")
+                                $(".isRiskMatchResult").attr("type","noRisk")
+                            }else if(jsonData.isRiskMatch == "2"){
+                                $(".isRiskMatchBox_noMatch").show()
+                                $(".isRiskMatchBox_match").hide()
+                                $(".isRiskMatchBox_header").html("您的风险测评已过期,请重新进行风险测评")
+                                $(".isRiskMatchResult").html("重新风测")
+                                $(".isRiskMatchResult").attr("type","repeatRisk")
                             }
  
                             that.gV.singleaAuthenType = type
@@ -289,7 +297,7 @@ $(function () {
             return singleaAuthenPath = "isRiskEndure"
            }else if(data.isPerfect != "1"){
             return  singleaAuthenPath = "isPerfect"
-           }else if(!data.isInvestFavour != "1"){
+           }else if(data.isInvestFavour != "1"){
             return  singleaAuthenPath = 'isInvestFavour'
            }
         },
@@ -378,6 +386,7 @@ $(function () {
             });
             //一键认证
             mui("body").on('mdClick', ".tips .tips-btn", function (e) {
+               
                 var key = that.gV.singleaAuthenPath;
                 switch (key) {
                     case "isWealthAccount":   //开通账户
@@ -440,7 +449,15 @@ $(function () {
              mui("body").on("mdClick",".isRiskMatchResult",function(){
                 $(".isRiskMatch_mask").hide();
                 $(".isRiskMatchBox").hide();
-                window.location.href = site_url.riskAppraisal_url + "?type=private"
+                var type = $(this).attr("type");
+                if(type == "noRisk"){
+                    //未风测
+                    window.location.href = site_url.riskAppraisal_url + "?type=private"
+                }else if(type == "repeatRisk"){
+                    //风测过期
+                    window.location.href = site_url.riskAppraisal_url + "?type=private"
+                }
+               
              })
 
 

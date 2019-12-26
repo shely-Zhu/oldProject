@@ -321,10 +321,11 @@ $(function () {
 
             $('.trade_status_area').addClass('hide'); 
             $('.bonus_info').removeClass('hide');
-            $('.bonus_info .fund_name').html(splitUrl()['fundName']);//分红产品
+            $('.bonus_info .fund_name').html(new Base64().decode(splitUrl()['fundName']));//分红产品
             $('.bonus_info .fund_share').html(splitUrl()['shares']);//分红份额
-            $('.bonus_info .bonus_mode').html(splitUrl()['autoBuyDesc']);//分红方式
+            $('.bonus_info .bonus_mode').html(new Base64().decode(splitUrl()['autoBuyDesc']));//分红方式
             $('.bonus_info .fund_date').html(splitUrl()['applyDate']);//分红时间
+            $(".listLoading").hide();//隐藏loading
         },
         getRemittanceAccount: function () { 
             //获取监管账户信息
