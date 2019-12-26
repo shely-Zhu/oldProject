@@ -402,6 +402,9 @@ var clickList = {
     // 返回按钮
     "goBackButton":{ type:'click', evtid: 'goBackButton', topic: '返回按钮', info: ''},
 
+    // 在线客服
+    "customerService":{ type:'click', evtid: 'customerService', topic: '在线客服', info: ''},
+
 
 
 	/************************************** life end *************************************************/
