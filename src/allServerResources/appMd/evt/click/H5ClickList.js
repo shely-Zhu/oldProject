@@ -399,6 +399,11 @@ var clickList = {
 	"activityDetails_6":{ type:'click', evtid: 'activityDetails_6', topic: '我知道了按钮', info: ''},
 	"activityDetails_7":{ type:'click', evtid: 'activityDetails_7', topic: '查看奖励按钮', info: ''},
 
+    // 返回按钮
+    "goBackButton":{ type:'click', evtid: 'goBackButton', topic: '返回按钮', info: ''},
+
+
+
 	/************************************** life end *************************************************/
 }
 

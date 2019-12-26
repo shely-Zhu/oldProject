@@ -93,8 +93,6 @@ $(function() {
         },
         getData: function(ur, dat, num) {
             var that = this
-
-
             var obj = [{
                 url: ur,
                 data: dat,
@@ -121,7 +119,6 @@ $(function() {
                     // 待定 
                     if (json.data.activityVOPageInfo.list.length == 0) { // 没有记录不展示
                         if (num == 0) {
-                            debugger
                             // $('.NoData').show();
                             $('.listHasData0 .NoDataMore').show();
                             
@@ -152,7 +149,7 @@ $(function() {
                             //判断是否显示分享   线上并且是 进行中的
                             list[i].shareflag = list[i].actType == 1 && num == 0 ? 1 : 0;
                             //判断是 线上还是线下
-                            list[i].actTypestatus = list[i].actType == 1||list[i].actType == 2 ? 1 : 0 
+                            list[i].actTypestatus = list[i].actType == 1? 1 : 0 
                         }
                         dataList = list;
                     }
@@ -196,7 +193,6 @@ $(function() {
 
         //分享给好友
         shareInfo: function(actId, actType, title, iconimg) {
-            debugger
             var that = this;
             var obj = [{
                 url: site_url.shareInfo_api,
@@ -209,7 +205,6 @@ $(function() {
                 needDataEmpty: true,
                 callbackDone: function(json) {
                     $(".netLoading").hide()
-                    debugger
                     var data = json.data;
                     var wxShare = {
                             type: 'auto',
