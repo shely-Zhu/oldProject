@@ -61,9 +61,8 @@
 
     <script id="activityEn-template" type="text/x-handlebars-template">
         {{#each this}}
-        <li class="clickli" data-actType="{{actType}}" data-actId="{{actId}}">
-            {{#if actTypestatus}}
-            <img class="lazyload" src="/common/img/lazyImgList.png" data-original="{{htjfGeneralizeImgUrl}}" alt=""> {{/if}}
+        <li class="clickli" data-actType="{{actType}}" data-actId="{{actId}}" >
+            <img class="lazyload" src="/common/img/lazyImgList.png" data-original="{{htjfGeneralizeImgUrl}}" alt=""> 
             <p>{{actName}}</p>
             {{#if actTypestatus}}
             <div class="sign">
@@ -83,7 +82,7 @@
             <div class="time">
                 <div class="timeco">报名时间&nbsp;{{enterTime}}</div>
                 {{#if shareflag}}
-                <div class="timeBtn blueBgButton" data-actId={{actId}} data-actType={{actType}}>分享给好友</div>
+                <div class="timeBtn blueBgButton" data-actId={{actId}} data-actType={{actType}} data-htjfGeneralizeImgUrl="{{htjfGeneralizeImgUrl}}" data-actName="{{actName}}" data-actType="{{linkType}}">分享给好友</div>
                 {{/if}}
             </div>
         </li>
