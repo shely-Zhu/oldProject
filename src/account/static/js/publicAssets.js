@@ -173,7 +173,6 @@ $(function () {
             mui("body").on('mdClick', '#pageLists .hold_item', function (e) {
                 var index = $(this).index();
                 var publicFundDetail = JSON.stringify(that.gV.data.fundDetailList[index])
-                //sessionStorage.setItem("publicFundDetail",JSON.stringify(that.gV.data.fundDetailList[index])) 
                 setCookie("publicFundDetail", new Base64().encode(publicFundDetail))
                 window.location.href=site_url.optionalPublicDetail_url;
             },{

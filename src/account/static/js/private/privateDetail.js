@@ -29,6 +29,7 @@ $(function() {
 			isAllowRedemption: splitUrl['isAllowRedemption'],
 			ecFileName: '',
 			ecFileUrl: '',
+			groupName: '',
 			redemptionOpenFrequency: '', // 赎回开放频率
 			imgUrl: '', // 赎回指引图片路径
 			qrnhWfsy: {
@@ -183,6 +184,7 @@ $(function() {
 			    	that.setDomData( jsonData );
 			    	that.data.ecFileName = jsonData.ecFileName?jsonData.ecFileName:'';
 			    	that.data.ecFileUrl = jsonData.ecFileUrl?jsonData.ecFileUrl:'';
+			    	that.data.groupName = jsonData.groupName?jsonData.groupName:'';
 			    	that.data.redemptionOpenFrequency = jsonData.redemptionOpenFrequency?jsonData.redemptionOpenFrequency:''
 			    	//请求其他接口
 			    	if( (that.data.projectType == 0) || (that.data.projectType == 1) ){ 
@@ -694,10 +696,10 @@ $(function() {
 			}, {
 				'htmdEvt': "privateDetail_2"
 			})
-			// 交易明细点击跳转
+			// 基金确认书点击跳转
 			mui("body").on('mdClick', '.privateFundPdf', function() {
-				window.location.href = site_url.privateFundPdf_url + '?projectId=' + that.data.projectId + '&ecFileName=' 
-				+ new Base64().encode(that.data.ecFileName) + '&ecFileUrl=' + new Base64().encode(that.data.ecFileUrl);
+				window.location.href = site_url.downloadNew_api + "?filePath=" + that.data.ecFileUrl + "&fileName=" + new Base64().encode(that.data.ecFileName) 
+				+ "&groupName=" + that.data.groupName + "&show=1&readComplete=false&showDownload=true"
 			}, {
 				'htmdEvt': "privateDetail_3"
 			})
