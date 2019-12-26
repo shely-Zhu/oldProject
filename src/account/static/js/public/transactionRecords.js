@@ -80,8 +80,8 @@ $(function () {
                 that.gV.searchTitleList[1].title = getCookie("transactionRecordsShowData").split(',')[5]
                 that.gV.searchTitleList[2].title = getCookie("transactionRecordsShowData").split(',')[6]
                 // 自己清空它
-                // setCookie("transactionRecordsAjaxData","", -1);
-                // setCookie("transactionRecordsShowData","", -1);
+                setCookie("transactionRecordsAjaxData","", -1);
+                setCookie("transactionRecordsShowData","", -1);
                 this.initMui(that.gV.ajaxdata);
             }
 

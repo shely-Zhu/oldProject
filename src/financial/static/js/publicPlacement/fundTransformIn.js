@@ -471,7 +471,7 @@ $(function () {
 
 			//点击转出规则
 			mui("body").on('mdClick','.goRule',function(){
-				window.location.href = site_url.transactionRules_url + '?fundCode=' + that.gV.fundCode;
+				window.location.href = site_url.pofTransactionRules_url + '?fundCode=' + that.gV.fundCode;
 			}, {
 				htmdEvt: 'fundTransformIn_04'
 			}) 

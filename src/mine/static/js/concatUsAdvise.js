@@ -10,7 +10,7 @@ var uploadFile = require('@pathCommonCom/uplaoderFile/concatUsAdviseUploaderFile
 var splitUrl = require('@pathCommonJs/components/splitUrl.js')();
 var generateTemplate = require('@pathCommonJsComBus/generateTemplate.js');
 $(function () {
-    let concatUsAdvise = {
+    var concatUsAdvise = {
         gD: {
             feedbackType: null,//客户反馈类型
             imgNum: 0, // 需要上传的图片数量
