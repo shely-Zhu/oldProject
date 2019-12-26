@@ -501,18 +501,26 @@ font-size: 0.32rem;
 .disabled{
 	background-color: #cccccc !important;
 }
+.isRiskMatch_mask{
+	background: #000;
+	top:0;
+	opacity: .6;
+	width: 100%;
+	height: 100%;
+	position: fixed;
+	display: none;
+}
 
 .isRiskMatchBox{
 	position: fixed;
 	width: 100%;
 	height: 100%;
-	z-index: 111111;
-	background: #000;
 	top:0;
-	opacity: .6;
 	display: none;
+	z-index: 111111;
 	.isRiskMatchBox_contentBox{
 		position: absolute;
+		z-index: 111111;
 		top: 5rem;
 		left: 1.4rem;
 		width: 5.2rem;

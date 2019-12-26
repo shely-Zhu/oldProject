@@ -213,6 +213,7 @@ $(function () {
                             that.gV.realLi.hide();
                             that.gV.tipsWrap.hide();
                             $(".isRiskMatchBox").show();
+                            $(".isRiskMatch_mask").show();
                             if(jsonData.isRiskMatch == "1"){
                                 //风险等级匹配
                                 $(".isRiskMatchBox_match").show()
@@ -340,7 +341,7 @@ $(function () {
             });
             // 买入
             mui("body").on('mdClick', ".footer .buy_btn", function (e) {
-
+            
                 that.getConditionsOfOrder("into");
                // window.location.href = site_url.fundTransformIn_url + '?fundCode=' + fundCode + '&fundName=' + fundName;
                
@@ -409,6 +410,8 @@ $(function () {
              //风测等级匹配成功
              mui("body").on('mdClick',".isRiskMatchBox_match",function(){
                  var type = that.gV.singleaAuthenType;
+                 $(".isRiskMatch_mask").hide();
+                 $(".isRiskMatchBox").hide();
                  if(type == "into"){
                     //买入一键认证
                     window.location.href = site_url.fundTransformIn_url + '?fundCode=' + splitUrl['fundCode'] + '&fundName=' + that.gV.secuSht;
@@ -429,12 +432,15 @@ $(function () {
 
              //风险等级匹配失败
              mui("body").on("mdClick",".isRiskMatchBox_cancel",function(){
+                $(".isRiskMatch_mask").hide();
                  $(".isRiskMatchBox").hide();
                // that.gV.isRiskMatchBox.hide();
              })
 
              //风险等级匹配失败结果跳转
              mui("body").on("mdClick",".isRiskMatchResult",function(){
+                $(".isRiskMatch_mask").hide();
+                $(".isRiskMatchBox").hide();
                 window.location.href = site_url.riskAppraisal_url + "?type=private"
              })
 
