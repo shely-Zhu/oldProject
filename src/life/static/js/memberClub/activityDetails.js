@@ -255,8 +255,8 @@ $(function() {
                             //需要进行合格投资者信息认证
                             var obj = {
                                 title: '温馨提示', //如果不传，默认不显示标题
-                                p: '<p>根据本公司的投资者与产品、服务等级匹配规则，您的风险承受能力为 '+data.data.personRiskGrade+'。'+
-                                    '本次活动推荐产品的等级为 '+data.data.productRisk+'，'+
+                                p: '<p>您的风险承受能力为 '+data.data.personRiskGrade+'。</br>'+
+                                    '本次活动推荐产品的等级为 '+data.data.productRisk+'</br></br>'+
                                     '本次活动推荐产品与您的风险承受能力不匹配，应进行充分的风险评估，再做出投资决定，当您的风险承担能力或财务状况发生重大变化时，请您重新进行测评。</p>',
                                 yesTxt: '重新测评',
                                 celTxt: '取消报名',
