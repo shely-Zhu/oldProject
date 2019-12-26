@@ -340,7 +340,6 @@ $(function () {
             });
             // 买入
             mui("body").on('mdClick', ".footer .buy_btn", function (e) {
-                debugger
 
                 that.getConditionsOfOrder("into");
                // window.location.href = site_url.fundTransformIn_url + '?fundCode=' + fundCode + '&fundName=' + fundName;
@@ -430,7 +429,6 @@ $(function () {
 
              //风险等级匹配失败
              mui("body").on("mdClick",".isRiskMatchBox_cancel",function(){
-                 debugger
                  $(".isRiskMatchBox").hide();
                // that.gV.isRiskMatchBox.hide();
              })
