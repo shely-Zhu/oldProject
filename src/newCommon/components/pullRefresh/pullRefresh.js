@@ -183,7 +183,11 @@ require('@pathCommonJsCom/goTopMui.js');
                     // }
                  },
                  failData: function(t, data) {
-                    tipAction(data.message)
+                    if(data.status == 1000) {
+                        $(".noData").show()
+                    } else {
+                        tipAction(data.message)
+                    }
                  },
 
                  //初始化mui
