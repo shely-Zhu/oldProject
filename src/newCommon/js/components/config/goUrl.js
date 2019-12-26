@@ -454,7 +454,7 @@ module.exports = function() {
     // 基金确认书
     this.privateFundPdf_url = go_url.no_url + '/account/views/private/privateFundPdf.html';
     // 私募交易规则
-    this.privateTransactionRules_url = go_url.no_url + '/account/views/private/transactionRules.html';
+    this.privateTransactionRules_url = go_url.no_url + '/account/views/private/privateTransactionRules.html';
     // 公募交易规则
     // this.transactionRules_url = go_url.no_url + '/financial/views/publicPlacement/transactionRules.html';
     //基金公司
