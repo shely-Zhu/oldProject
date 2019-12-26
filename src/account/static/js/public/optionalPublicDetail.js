@@ -455,7 +455,7 @@ $(function() {
 						if(jsonData.isWealthAccount != "1"&&jsonData.isRiskEndure == "1"&&jsonData.isPerfect == "1"&&jsonData.isInvestFavour=="1"){
 							that.data.tipsWrap.hide()
 							that.data.realLi.hide();
-
+                            $(".isRiskMatch_mask").show();
 							$(".isRiskMatchBox").show();
                             if(jsonData.isRiskMatch == "1"){
                                 //风险等级匹配
@@ -656,6 +656,8 @@ $(function() {
                //风测等级匹配成功
 			   mui("body").on('mdClick',".isRiskMatchBox_match",function(){
 				var type = that.gV.singleaAuthenType;
+				$(".isRiskMatch_mask").hide();
+				$(".isRiskMatchBox").hide();
 				if(type == "into"){
 					//买入一键认证
 					window.location.href = site_url.fundTransformIn_url+"?fundCode="+that.data.fundCode;
@@ -667,12 +669,15 @@ $(function() {
 
 			//风险等级匹配失败
 			mui("body").on("mdClick",".isRiskMatchBox_cancel",function(){
+				$(".isRiskMatch_mask").hide();
 				$(".isRiskMatchBox").hide();
 			  // that.gV.isRiskMatchBox.hide();
 			})
 
 			//风险等级匹配失败结果跳转
 			mui("body").on("mdClick",".isRiskMatchResult",function(){
+				$(".isRiskMatch_mask").hide();
+				$(".isRiskMatchBox").hide();
 			   window.location.href = site_url.riskAppraisal_url + "?type=private"
 			})
 
