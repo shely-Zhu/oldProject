@@ -351,6 +351,7 @@ $(function () {
                 var applyId = $(this).attr('data-applyId');
                 var fundCombination = $(this).attr('data-fundCombination');
                 var fundCode = $(this).attr('data-fundCode');
+                var fundType = $(this).attr('data-fundType');
                 var fundBusinCode = $(this).attr('data-fundBusinCode');
                 var allotType = $(this).attr('data-allotType');
                 var Fixbusinflag = $(this).attr('data-Fixbusinflag');
@@ -363,7 +364,7 @@ $(function () {
                 // pathdata 是 每个详情页 都需要传的参数
                 var pathdata = site_url.publicTradeDetail_url + '?applyId=' + applyId + '&fundCombination=' + fundCombination
                 + '&fundCode=' + fundCode + '&fundBusinCode=' + fundBusinCode + '&allotType=' + allotType
-                + '&Fixbusinflag=' + Fixbusinflag
+                + '&Fixbusinflag=' + Fixbusinflag + '&fundType='+ fundType
                 // allotType == 3  是分红
                 if (allotType == 3) {
                     window.location.href = pathdata + '&shares=' + shares + '&fundName=' + fundName
