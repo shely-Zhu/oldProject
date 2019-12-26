@@ -1062,9 +1062,13 @@ $(function() {
                                                     celTxt: '取消',
                                                     zIndex: 1200,
                                                     callback: function(t) {
+                                                    	var isEle = "";
+                                                    	if(that.data.fundDetailObj.isElecContract == "1"){
+                                                    		isEle = "electronicContract"
+                                                    	}
                                                         window.location.href = site_url.downloadNew_api + "?filePath=" + noticeObj.fileUrl + "&fileName=" + new Base64().encode(noticeObj.fileName) + "&groupName=" +
                                                         noticeObj.groupName + "&show=1&readComplete=true&showDownload=false&fundCode=" + that.$e.projectId + "&isAllowAppend=" +
-                                                        that.data.fundDetailObj.isAllowAppend + '&accreditedInvestor=' + that.data.accreditedInvestor;
+                                                        that.data.fundDetailObj.isAllowAppend + '&accreditedInvestor=' + that.data.accreditedInvestor + '&businessType=' + isEle;
                                                     },
                                                 };
                                                 $.elasticLayer(obj) 

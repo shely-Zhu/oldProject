@@ -313,7 +313,7 @@ module.exports = {
     // 自选公募交易记录
     './account/static/js/public/transactionRecords': './src/account/static/js/public/transactionRecords.js',
     // 自选公募交易明细
-    './account/static/js/public/transactionDetail': './src/account/static/js/public/transactionDetail.js',
+    './account/static/js/public/superTransactionRecord': './src/account/static/js/public/superTransactionRecord.js',
 
     // 自选公募--超宝详情
     './account/static/js/public/superStreasureDetail': './src/account/static/js/public/superStreasureDetail.js',
@@ -397,7 +397,7 @@ module.exports = {
     './account/static/js/public/returnsDetail': "./src/account/static/js/public/returnsDetail.js",
 
     // 私募交易规则
-    './account/static/js/private/transactionRules': "./src/account/static/js/private/transactionRules.js",
+    './account/static/js/private/privateTransactionRules': "./src/account/static/js/private/privateTransactionRules.js",
     //私募详情列表页
     './account/static/js/private/privateDetailList': "./src/account/static/js/private/privateDetailList.js",
 }
