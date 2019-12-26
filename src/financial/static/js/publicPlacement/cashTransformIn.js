@@ -79,8 +79,8 @@ $(function () {
 						that.$el.paymentGainsDayStr.html(data.paymentGainsDayStr)
 						that.gV.fundName = data.fundName
 						that.gV.fundCode = data.fundCode
-						that.gV.minValue = data.purchaseAmount ? Number(data.purchaseAmount) : 0
-						that.$el.transformInput.attr('placeholder',data.purchaseAmountMask)
+						that.gV.minValue = data.purchaseAmount ? Number(data.purchaseAmount) : 0						
+						that.$el.transformInput.attr('placeholder',data.purchaseAmountMask+"元起")
 						// for (var index = 0; index < data.tradeLimitList.length; index++) {
 						// 	if(that.gV.fundBusinCode ==  data.tradeLimitList[index].fundBusinCode){
 						// 	   that.$el.transformInput.attr('placeholder',data.tradeLimitList[index].minValue)
@@ -509,7 +509,6 @@ $(function () {
 			}, {
 				htmdEvt: 'cashTransformIn_18'
 			}) ;
-
 		
 		}
 
