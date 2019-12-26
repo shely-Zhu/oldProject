@@ -121,27 +121,14 @@ $(function() {
     }, {
         htmdEvt: 'goBackButton'
     });
-    //返回上一页
-    /*$("#goBack").on("click", function() {
-        if (document.referrer == '') {
-            // window.isAndroid是在root文件中定义的变量
-            if (window.isAndroid) {
-                //这个是安卓操作系统
-                window.jsObj.backNative();
-            }
-            // window.isIOS是在root文件中定义的变量
-            if (window.isIOS) {
-                //这个是ios操作系统
-                window.webkit.messageHandlers.backNative.postMessage(JSON.stringify({ "type": "backNative" }));
-            }
-        } else {
-            location.href = "javascript:history.go(-1)";
-        }
-    })*/
+   
     //跳转客服页面  app进行拦截
-    $("#customerService").on("click", function() {
+    mui("body").on('mdClick', '#customerService', function() {
         window.location.href = site_url.onlineCustomerTransfer_url;
-    })
+    }, {
+        htmdEvt: 'customerService'
+    });
+   
 })
 //字符串截取
 function GetRequest() {

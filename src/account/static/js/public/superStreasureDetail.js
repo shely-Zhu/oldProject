@@ -85,7 +85,7 @@ $(function() {
                     }
                 },
                 grid: {
-                    top: '5%',
+                    top: '4%',
                     left: '1%',
                     right: '0%',
                     bottom: '6%',

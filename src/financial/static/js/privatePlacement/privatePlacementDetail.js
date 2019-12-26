@@ -198,7 +198,7 @@ $(function() {
                         $(".appointment").hide()
                     }
                     // 产品特点标签
-                    // that.getElements.isElecContract = jsonData.isElecContract; // 是否是电子合同产品【0.否 1.是】
+                    that.getElements.isElecContract = jsonData.isElecContract; // 是否是电子合同产品【0.否 1.是】
                     if (!!jsonData.projectLable) {
                         // var projectLable = jsonData.projectLable;
                         $.each(jsonData.projectLable, function(i, el) {
@@ -1008,6 +1008,18 @@ $(function() {
                                     callback: function(t) {}
                                 };
                                 $.elasticLayer(obj)
+                            } else if(v.conditionType == "3" && that.data.custType != "1"){//完善信息和税收声明未完成时，机构客户不支持线上完善资料
+                            	$("#tips-wrap").hide();
+                                var obj = {
+                                    title: '',
+                                    id: 'realOrg2',
+                                    p: '机构客户完善资料请联系您的理财师',
+                                    yesTxt: '确认',
+                                    celTxt: "取消",
+                                    zIndex: 100,
+                                    callback: function(t) {}
+                                };
+                                $.elasticLayer(obj)
                             } else {
                                 window.location.href = singleaAuthenPath;//
                             }
@@ -1050,27 +1062,32 @@ $(function() {
                                                     celTxt: '取消',
                                                     zIndex: 1200,
                                                     callback: function(t) {
+                                                    	var isEle = "";
+                                                    	if(that.data.fundDetailObj.isElecContract == "1"){
+                                                    		isEle = "electronicContract"
+                                                    	}else{
+                                                            isEle = "ordinaryProducts"
+                                                        }
                                                         window.location.href = site_url.downloadNew_api + "?filePath=" + noticeObj.fileUrl + "&fileName=" + new Base64().encode(noticeObj.fileName) + "&groupName=" +
                                                         noticeObj.groupName + "&show=1&readComplete=true&showDownload=false&fundCode=" + that.$e.projectId + "&isAllowAppend=" +
-                                                        that.data.fundDetailObj.isAllowAppend + '&accreditedInvestor=' + that.data.accreditedInvestor;
+                                                        that.data.fundDetailObj.isAllowAppend + '&accreditedInvestor=' + that.data.accreditedInvestor + '&businessType=' + isEle;
                                                     },
                                                 };
                                                 $.elasticLayer(obj) 
                                             },
                                         };
                                     }else{
-                                        objElasticLayer = {
+                                    	objElasticLayer = {
                                             title: '',
                                             id: 'sellPop',
-                                            p: '<p class="" style="font-weight:bold;text-align:center">您购买的产品与您现在的风险承受能力不匹配</p>',
-                                            yesTxt: '重新测评',
-                                            celTxt: '放弃购买',
+                                            p: '<p class="" style="font-weight:bold;text-align:center">您风险测评中所选计划投资期限少于产品期限存在匹配风险，请确认是否继续购买</p>',
+                                            yesTxt: '继续',
+                                            celTxt: '放弃',
                                             zIndex: 1200,
                                             callback: function(t) {
-                                                // 跳转到测评页面
-                                                window.location.href = site_url.riskAppraisal_url + '?type=private'
+                                            	that.nextStep();//跳转到对应链接
                                             },
-                                        };
+                                       };
 									}
                                     $.elasticLayer(objElasticLayer)
                                 if (!singleaAuthen) { //如果v.show都是0，则不展示预约框,跳转到相应链接
