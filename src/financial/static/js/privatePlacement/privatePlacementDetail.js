@@ -915,6 +915,7 @@ $(function() {
                         PopupElasticLayer = "",
                         objElasticLayer = "", // 产品风险等级与个人承受能力匹配弹框
                         isReal = "", //是否实名认证，因为如果机构切一键认证是实名，点击需要提示弹框。
+                        isCompOri = "", //是否完善信息，因为如果机构切一键认证是完善信息，点击需要提示弹框。
                         singleaAuthenPath = "", //一键认证跳转链接
                         singleaAuthen = false; //条件框是否展示
                     that.$e.realLi.hide();
@@ -936,6 +937,9 @@ $(function() {
                                 singleaAuthenPath = that.getJumpUrl(v)
                                 if (v.conditionType == 1) { //下面一键认证如果是实名认证且机构需要点击需要弹框提示，这里记录。且不能覆盖
                                     isReal = true; //判断
+                                }
+                                if (v.conditionType == 3) { //下面一键认证如果是完善信息且机构需要点击需要弹框提示，这里记录。且不能覆盖
+                                    isCompOri = true; //判断
                                 }
                             }
                             that.$e.realLi.eq(Number(e)).show();
@@ -1008,7 +1012,7 @@ $(function() {
                                     callback: function(t) {}
                                 };
                                 $.elasticLayer(obj)
-                            } else if(v.conditionType == "3" && that.data.custType != "1"){//完善信息和税收声明未完成时，机构客户不支持线上完善资料
+                            } else if(isCompOri && that.data.custType != "1"){//完善信息和税收声明未完成时，机构客户不支持线上完善资料
                             	$("#tips-wrap").hide();
                                 var obj = {
                                     title: '',
@@ -1044,7 +1048,7 @@ $(function() {
                                 that.data.canClick = true; //变为可点击
                                 var data = json.data[0],
                                     noticeObj = data;
-									if(isRiskPopup){//如果不匹配
+									if(!!isRiskPopup && !!isPopup){//如果不匹配 isPopup是弹出售前告知书 isRiskPopup弹出风险期限
                                         objElasticLayer = {
                                             title: '',
                                             id: 'sellPop',
@@ -1074,7 +1078,7 @@ $(function() {
                                                 $.elasticLayer(obj) 
                                             },
                                         };
-                                    }else{
+                                    }else if(!!isRiskPopup && !isPopup){
                                     	objElasticLayer = {
                                             title: '',
                                             id: 'sellPop',
@@ -1086,6 +1090,26 @@ $(function() {
                                             	that.nextStep();//跳转到对应链接
                                             },
                                        };
+									}else if(!isRiskPopup && !!isPopup){
+								        var objElasticLayer = {
+                                            title: '',
+                                            id: 'sellPop',
+                                            p: '<p class="" style="font-weight:bold;text-align:center">你选择的产品与您现在的风险承受能力相匹配</p>' + 
+                                                    '<p class="">请您认真阅读' + noticeObj.fileName + that.data.productName + '并确认后继续购买该产品</p>',
+                                            yesTxt: '去阅读',
+                                            celTxt: '取消',
+                                            zIndex: 1200,
+                                            callback: function(t) {
+                                            	var isEle = "";
+                                            	if(that.data.fundDetailObj.isElecContract == "1"){
+                                            		isEle = "electronicContract"
+                                            	}
+                                                window.location.href = site_url.downloadNew_api + "?filePath=" + noticeObj.fileUrl + "&fileName=" + new Base64().encode(noticeObj.fileName) + "&groupName=" +
+                                                noticeObj.groupName + "&show=1&readComplete=true&showDownload=false&fundCode=" + that.$e.projectId + "&isAllowAppend=" +
+                                                that.data.fundDetailObj.isAllowAppend + '&accreditedInvestor=' + that.data.accreditedInvestor + '&businessType=' + isEle;
+                                            },
+                                        };
+//                                      $.elasticLayer(objPop) 
 									}
                                     $.elasticLayer(objElasticLayer)
                                 if (!singleaAuthen) { //如果v.show都是0，则不展示预约框,跳转到相应链接
