@@ -136,7 +136,6 @@ module.exports = function(callback, preThis, type) {
                         return false;
                     }
                 })
-                console.log(preThis.gD.idArr)
                 // debugger
                 // if (condition) {
                     // 如果校验通过，执行上传
@@ -145,7 +144,9 @@ module.exports = function(callback, preThis, type) {
                     // that.uploader.upload();
                 // } else {
                 //     tipAction('请完善认证资料');
-                         preThis.submitAdvise()
+               if(!$(this).hasClass("disable")){
+                 preThis.submitAdvise()
+               }
                 // }
                 
             });

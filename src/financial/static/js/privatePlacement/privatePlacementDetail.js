@@ -995,6 +995,7 @@ $(function() {
                             } else {
                                 window.location.href = jumpUrl;
                             }
+                            $("#tips-wrap").hide();//点击跳转关闭弹窗
                             window._submitMd && window._submitMd( 3, 'privatePlacementDetail_12' );
                         })
                             //一键认证调往哪里
