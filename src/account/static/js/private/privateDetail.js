@@ -698,8 +698,7 @@ $(function() {
 			})
 			// 基金确认书点击跳转
 			mui("body").on('mdClick', '.privateFundPdf', function() {
-				window.location.href = site_url.downloadNew_api + "?filePath=" + that.data.ecFileUrl + "&fileName=" + new Base64().encode(that.data.ecFileName) 
-				+ "&groupName=" + that.data.groupName + "&show=1&readComplete=false&showDownload=true"
+				window.location.href = site_url.downloadFile_api+'?name='+ new Base64().encode(that.data.ecFileName)+"&show=0&url="+that.data.ecFileUrl;
 			}, {
 				'htmdEvt': "privateDetail_3"
 			})
