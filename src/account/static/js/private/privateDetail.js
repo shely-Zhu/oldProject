@@ -252,7 +252,7 @@ $(function() {
 			       		newData.profitThoudDate.push( el.curveDate);
 			       		newData.profitThoudValue.push( el.incomeUnit);
 			       	})
-			       	switch(num) {
+			       	switch(Number(num)) {
 			       		case 0: that.data['qrnhWfsy'].oneMonth = newData;break;
 			       		case 1: that.data['qrnhWfsy'].threeMonth = newData;break;
 			       		case 3: that.data['qrnhWfsy'].oneYear = newData;break;
@@ -292,19 +292,19 @@ $(function() {
 				var type = 'ljjz';
 			}
 			//判断是否已经有数据了，有的话不再请求接口
-			if( num == 0 && that.data['dwjzljjz'].oneMonth.profitThoudDate && that.data['dwjzljjz'].oneMonth.profitThoudDate.length){
+			if( num == 0 && that.data['dwjzljjz'].oneMonth.assetsDate && that.data['dwjzljjz'].oneMonth.assetsDate.length){
 	       		//请求的是近一个月的数据
 	       		that.drawLine( type, that.data['dwjzljjz'].oneMonth );
 	       		return false;
-	       	} else if( num == 1 && that.data['dwjzljjz'].threeMonth.profitThoudDate && that.data['dwjzljjz'].threeMonth.profitThoudDate.length){
+	       	} else if( num == 1 && that.data['dwjzljjz'].threeMonth.assetsDate && that.data['dwjzljjz'].threeMonth.assetsDate.length){
 	       		//近三个月
 	       		that.drawLine( type, that.data['dwjzljjz'].threeMonth );
 	       		return false;
-	       	} else if( num == 3 && that.data['dwjzljjz'].oneYear.profitThoudDate && that.data['dwjzljjz'].oneYear.profitThoudDate.length ){
+	       	} else if( num == 3 && that.data['dwjzljjz'].oneYear.assetsDate && that.data['dwjzljjz'].oneYear.assetsDate.length ){
 	       		//近一年
 	       		that.drawLine( type, that.data['dwjzljjz'].oneYear );
 	       		return false;
-	       	} else if( num == 4 && that.data['dwjzljjz'].sinceNow.profitThoudDate && that.data['dwjzljjz'].sinceNow.profitThoudDate.length){
+	       	} else if( num == 4 && that.data['dwjzljjz'].sinceNow.assetsDate && that.data['dwjzljjz'].sinceNow.assetsDate.length){
 	       		//成立至今
 	       		that.drawLine( type, that.data['dwjzljjz'].sinceNow );
 	       		return false;
@@ -326,7 +326,7 @@ $(function() {
 			       		newData.assetsDate.push( el.netValueDate);
 			       		newData.accumulativeAssets.push( el.accuNetValue);
 			       	})
-			       	switch(num) {
+			       	switch(Number(num)) {
 			       		case 0: that.data['dwjzljjz'].oneMonth = newData;break;
 			       		case 1: that.data['dwjzljjz'].threeMonth = newData;break;
 			       		case 3: that.data['dwjzljjz'].oneYear = newData;break;
