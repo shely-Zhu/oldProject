@@ -251,7 +251,26 @@ $(function() {
                                 },
                             };
                             $.elasticLayer(obj)
-                        } else if (data.status == "22011"||data.status == "20016") {
+                        } else if (data.status == "20005") {
+                            //需要进行合格投资者信息认证
+                            var obj = {
+                                title: '温馨提示', //如果不传，默认不显示标题
+                                p: '<p>您的风险承受能力为 '+data.data.personRiskGrade+'。</br>'+
+                                    '本次活动推荐产品的等级为 '+data.data.productRisk+'</br></br>'+
+                                    '本次活动推荐产品与您的风险承受能力不匹配，应进行充分的风险评估，再做出投资决定，当您的风险承担能力或财务状况发生重大变化时，请您重新进行测评。</p>',
+                                yesTxt: '重新测评',
+                                celTxt: '取消报名',
+                                hideCelButton: false,
+                                zIndex: 100,
+                                needYesHref: true, //是否需要把确定按钮改成a标签，默认false
+                                yesHref:  site_url.riskAppraisal_url+"?type=private", //
+                                callback: function(t) {
+
+                                },
+                            };
+                            $.elasticLayer(obj)
+                        }
+                         else if (data.status == "22011"||data.status == "20016") {
                             //客户未成交
                             var obj = {
                                 title: '温馨提示', //如果不传，默认不显示标题
