@@ -137,7 +137,7 @@ $(function() {
                         $('.priceLimit').removeClass('hide');
                         // 单位净值
                         if (jsonData.unitNetValue == null || jsonData.unitNetValue == "" || jsonData.unitNetValue == undefined) {
-                            $('.netValue').html('--')
+                            $('.netValue').html('1.0000')
                         } else {
                             $('.netValue').html(jsonData.unitNetValue);
                         }
@@ -177,7 +177,7 @@ $(function() {
                     $('.introduction').html(jsonData.productLightspot);
                     // 净值日期 非空判断
                     if (jsonData.netValueDate == null || jsonData.netValueDate == "" || jsonData.netValueDate == undefined) {
-                        $('.netValueDate').html('--')
+                        $('.netValueDate').html('1.0000')
                     } else {
                         if(jsonData.incomeModeJF == '2'){
                             var now = jsonData.profitThoudDate;
