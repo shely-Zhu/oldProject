@@ -147,26 +147,26 @@ $(function() {
                 pageSize: "1"
             };
 
-            // 如果是微信浏览器
-            if (that.isWeiXin) {
-                // 为性能，提前请求鉴权接口，分享内容接口，
+            // // 如果是微信浏览器
+            // if (that.isWeiXin) {
+            //     // 为性能，提前请求鉴权接口，分享内容接口，
 
-                // 请求微信鉴权接口
-                that.generateAjaxObj(site_url.share_api, shareData, function(data) {
-                    //  微信config设置
-                    that.dealWeiXinSet(data);
-                })
+            //     // 请求微信鉴权接口
+            //     that.generateAjaxObj(site_url.share_api, shareData, function(data) {
+            //         //  微信config设置
+            //         that.dealWeiXinSet(data);
+            //     })
+            // }
 
-                // 请求微信分享内容接口
-                that.generateAjaxObj(site_url.findContentByCategory_api, wxData, function(data) {
-                    // 将数据存储起来，待一会生成链接使用，为性能，提前请求接口
-                    var data = data.pageList[0];
+            // 请求微信分享内容接口
+            that.generateAjaxObj(site_url.findContentByCategory_api, wxData, function(data) {
+                // 将数据存储起来，待一会生成链接使用，为性能，提前请求接口
+                var data = data.pageList[0];
 
-                    that.setting.weixinConf = Object.assign(that.setting.weixinConf, Object(data));
-                    // 确保3个接口（鉴权，分享内容，分享链接）都请求成功，再设置分享链接
-                    that.asyncAll();
-                }, function() {}, function() {}, true)
-            }
+                that.setting.weixinConf = Object.assign(that.setting.weixinConf, Object(data));
+                // 确保3个接口（鉴权，分享内容，分享链接）都请求成功，再设置分享链接
+                that.asyncAll();
+            }, function() {}, function() {}, true)
             // 获取理财师的接口
             that.generateAjaxObj(site_url.custBro_api, custBroData, function(data) {
                 // 根据理财师处理页面逻辑
