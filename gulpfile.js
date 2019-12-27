@@ -27,16 +27,22 @@ var gulp = require('gulp'),
     minimist = require('minimist'), //命令行替换变量
     glob = require('glob'),
 
+    //prefixUrl = require('gulp-prefix'),
+    //modifyCssUrls = require('gulp-modify-css-urls'),//给文件中的所有路径添加前缀
+    //cdnify = require('gulp-cdnify'),
+
     //其他所需文件
     erudaFile = fs.readFileSync('conf/eruda.js', 'utf-8'), //读取eruda.js内容
     CustomEventIeFile = fs.readFileSync('conf/CustomEventIE.js', 'utf-8'), //读取CustomEventIE.js文件内容
     changeLocalHistoryFile = fs.readFileSync('conf/changeLocalHistory.js', 'utf-8'), //读取changeLocalHistory.js内容
-    pathVar = require('./conf/gulpPath.js'); //打包公用路径配置
+    pathVar = require('./conf/gulpPath.js'), //打包公用路径配置
 
-var newWebpackList = require('./src/newCommon/js/webpackList.js'),
+    newWebpackList = require('./src/newCommon/js/webpackList.js'),
 
     //把webpackList和newWebpackList合并
     webpackList = Object.assign(webpackList, newWebpackList);
+
+    var prefix = '//static.chtfund.com';//cdn服务地址
 
 for (var i in webpackList) {
     webpackList[i] = webpackList[i].replace('/src/', '/middle/js/')
@@ -323,6 +329,7 @@ if (options.env === '0' || options.env === '5') { //当开发环境的时候执�
             //是html，打包所有html文件
             console.log('打包所有html文件：');
 
+
             revChangeSrc = revChangeSrcStatic_1;
             plugins.sequence('cleanHtmlMiddleRev', 'html', 'rev', function() {});
         } else if (filePath.indexOf('.js') != -1 && filePath.indexOf('.json') == -1) {
@@ -504,6 +511,16 @@ gulp.task("cssToHost", function() {
 
     //打版本号
     .pipe(plugins.rev())
+
+        //给css文件里面所有的图片添加cdn的域名
+        //.pipe(modifyCssUrls({
+          //modify(url, filePath) {
+            //return `app/${url}`;
+          //},
+          //prepend: prefix,
+          //append: '?cache-buster'
+        //}))
+
         .pipe(gulp.dest(host.path))
         .pipe(plugins.rev.manifest())
         .pipe(gulp.dest(host.path + 'rev/css/'))
@@ -924,6 +941,10 @@ gulp.task('rev', function() {
     .pipe(plugins.revCollector()) //- 执行html内版本号的替换
 
     .pipe(plugins.if(isWatch, plugins.debug({ title: '替换版本号的文件' })))
+
+    //.pipe(plugins.if(isWatch, plugins.debug({ title: '替换版本号的文件' })))
+    //.pipe(plugins.if(options.env === '4', prefixUrl(prefix, null, '{{')))
+    //.pipe(prefixUrl(prefix))
 
     //替换后的文件输出的目录
     .pipe(gulp.dest(host.path))
