@@ -174,8 +174,10 @@ $(function() {
                     needDataEmpty: true,
                     callbackDone: function(data) {
                         $('.activityBottomBtnBox').removeClass('disabled');
-
                         if (data.status == "0000") {
+                            $('.activityBottomBox a').html('已报名');
+                            $('.activityBottomBtnBox').hide();
+                            $('.activityBottomBox').show();
                             successTitle = data.message;
                             if (that.gV.actType == 1) { //线上活动
                                 if (data.data.actStyle == 4) {

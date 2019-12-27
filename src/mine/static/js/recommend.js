@@ -147,26 +147,26 @@ $(function() {
                 pageSize: "1"
             };
 
-            // 如果是微信浏览器
-            if (that.isWeiXin) {
-                // 为性能，提前请求鉴权接口，分享内容接口，
+            // // 如果是微信浏览器
+            // if (that.isWeiXin) {
+            //     // 为性能，提前请求鉴权接口，分享内容接口，
 
-                // 请求微信鉴权接口
-                that.generateAjaxObj(site_url.share_api, shareData, function(data) {
-                    //  微信config设置
-                    that.dealWeiXinSet(data);
-                })
+            //     // 请求微信鉴权接口
+            //     that.generateAjaxObj(site_url.share_api, shareData, function(data) {
+            //         //  微信config设置
+            //         that.dealWeiXinSet(data);
+            //     })
+            // }
 
-                // 请求微信分享内容接口
-                that.generateAjaxObj(site_url.findContentByCategory_api, wxData, function(data) {
-                    // 将数据存储起来，待一会生成链接使用，为性能，提前请求接口
-                    var data = data.pageList[0];
+            // 请求微信分享内容接口
+            that.generateAjaxObj(site_url.findContentByCategory_api, wxData, function(data) {
+                // 将数据存储起来，待一会生成链接使用，为性能，提前请求接口
+                var data = data.pageList[0];
 
-                    that.setting.weixinConf = Object.assign(that.setting.weixinConf, Object(data));
-                    // 确保3个接口（鉴权，分享内容，分享链接）都请求成功，再设置分享链接
-                    that.asyncAll();
-                }, function() {}, function() {}, true)
-            }
+                that.setting.weixinConf = Object.assign(that.setting.weixinConf, Object(data));
+                // 确保3个接口（鉴权，分享内容，分享链接）都请求成功，再设置分享链接
+                that.asyncAll();
+            }, function() {}, function() {}, true)
             // 获取理财师的接口
             that.generateAjaxObj(site_url.custBro_api, custBroData, function(data) {
                 // 根据理财师处理页面逻辑
@@ -241,21 +241,21 @@ $(function() {
         },
         wxShareSend(type){
             var that=this;
-                    var wxShare={
+                    var shareObj={
                         'type': type,     // auto 原生自己分享框  wechatMoments 朋友圈   friends 朋友
                         'businessType': 'ldx',   //life,业务类型
-                        'title': that.setting.weixinConf.title,    //标题
-                        'des': that.setting.weixinConf.introduction,   //简介
-                        'link': that.setting.shareUrl,   //链接
-                        'img':that.setting.weixinConf.imageUrl,   // 图标
+                        'title': that.setting.weixinConf.title?that.setting.weixinConf.title:"",    //标题
+                        'des':'邀请好友，分享精彩',   //简介
+                        'link': that.setting.shareUrl?that.setting.shareUrl:'',   //链接
+                        'img':that.setting.weixinConf.imageUrl?that.setting.weixinConf.imageUrl:"",   // 图标
                     }
                 //如果是app--设置ldxShare的值--- 需要拼凑对应的链接
                 // if (window.currentIsApp) {
                     if(window.isAndroid){
-                        window.jsObj.wxShare(JSON.stringify(wxShare))
+                        window.jsObj.wxShare(JSON.stringify(shareObj))
                     }
                     if(window.isIOS){
-                        window.webkit.messageHandlers.wxShare.postMessage(JSON.stringify(wxShare))
+                        window.webkit.messageHandlers.wxShare.postMessage(JSON.stringify(shareObj))
                     }
                 // }
         },

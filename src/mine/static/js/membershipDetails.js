@@ -61,6 +61,7 @@ $(function(){
                     },
                     //滑动结束赋值
                     slideChangeTransitionEnd: function(){
+                        $(".lazyload").lazyload()
                         var index=this.activeIndex%num;
                         var text=$('.swiper-slide').eq(index).attr('data-text');
                         var link=$('.swiper-slide').eq(index).attr('data-link');
@@ -84,11 +85,10 @@ $(function(){
                 //async: false,
                 needDataEmpty: true,
                 callbackDone: function(json) {
-                    debugger;
                     var data=json.data; 
-                    generateTemplate(data,that.$e.membershipDetailsSilderBox,that.$e.membershipDetailsListTemplateId); 
-                    $(".lazyload").lazyload()
-                    that.swiperInit(that.gV.index,json.data.length);           
+                    generateTemplate(data,that.$e.membershipDetailsSilderBox,that.$e.membershipDetailsListTemplateId);
+                    that.swiperInit(parseInt(splitUrl['index']),json.data.length);    
+                    // $(".lazyload").lazyload()
                 },
                 callbackNoData:function(json){
                     console.log(json)

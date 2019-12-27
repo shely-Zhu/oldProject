@@ -37,7 +37,7 @@ $(function () {
         event: function () {
             var that = this;
             mui("body").on('mdClick','.list', function(){
-                // that.gD.feedbackType = $(this).children("input").val() || 0
+                that.gD.feedbackType = $(this).children("input").val() || 0
             },{
                 'htmdEvt': 'concatUsAdvise_01'
             })
