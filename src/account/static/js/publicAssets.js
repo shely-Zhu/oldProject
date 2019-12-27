@@ -131,7 +131,7 @@ $(function () {
         },
         initRightBtn: function(){
             //初始化右上角的按钮btn
-            $('.rightBtn').show().html('交易记录');
+            $('.rightBtn').show().html('交易记录').css('color','#fff');
             mui("body").on('mdClick', '.rightBtn', function (e) {
                 sessionStorage.setItem("ccache", ""); 
                     window.location.href = site_url.transactionRecords_url;
@@ -156,6 +156,8 @@ $(function () {
             $('.bank_item').on('click', function(){
                 $(this).find('.iconfont').removeClass('hide');
                 $(this).siblings().find('.iconfont').addClass('hide');
+                $(this).addClass('bank_listactive');
+                $(this).siblings().removeClass('bank_listactive');
                 //将获取到的名字填充到外部
                 $('#bank_screen .bank_screen_name').html($(this).find('.bank_screen_name').html());
                 //点击后拿到银行卡号去筛选银行卡
