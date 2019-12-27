@@ -205,6 +205,7 @@ $(function () {
             mui("body").on('mdClick', '.redeem_btn', function (e) {
                 var index = $(this).parent().parent().parent().index();
                 var id = $(this).parent().parent().parent().parent().attr("id")
+                var fundCode = $(this).parent().parent().parent().attr("data-fundcode")
                 if(id =="cashPageLists" ){
                     //现金宝
                     var obj = {
@@ -215,8 +216,7 @@ $(function () {
                     sessionStorage.setItem("transformMessage",JSON.stringify(obj));
                     window.location.href = site_url.pofCashTransformOut_url;
                 }else if(id == "pageLists"){
-                    sessionStorage.setItem("publicFundDetail",JSON.stringify(that.gV.data.fundDetailList[index])) ;
-                     window.location.href = site_url.redemptionBuy_url;
+                     window.location.href = site_url.redemptionBuy_url + '?fundCode=' + fundCode;
                 }else{
                     return false
                 }
