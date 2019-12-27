@@ -57,7 +57,6 @@ $(function() {
 
             //初始化第一屏区域的上拉加载
             that.initMui($('#scroll1'));
-            //window.sessionStorage.setItem('isconfirm', 0);
             setCookie('isconfirm', 0)
         },
 
@@ -109,11 +108,9 @@ $(function() {
                     if (index == 1) {
                         //已确认
                         $('.hopper').show();
-                        //window.sessionStorage.setItem('isconfirm', 1);
                         setCookie('isconfirm', 1)
                     } else {
                         $('.hopper').hide();
-                        //window.sessionStorage.setItem('isconfirm', 0);
                         setCookie('isconfirm', 0)
                     }
                     //data-scroll属性即当前左右切换区域的索引
