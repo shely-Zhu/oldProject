@@ -135,7 +135,13 @@ $(function () {
 						that.$el.brforre15Date.html(data.g2gafter15tradeDate)
 						that.gV.fundName = data.secuSht
 						that.gV.fundCode = data.trdCode
-						that.gV.discount = Number(data.discount);
+						if(!!data.discount){
+							//有费率
+							that.gV.discount = Number(data.discount);
+						}else{
+							that.gV.discount = ""
+						}
+						
 						that.gV.feeRateList = data.fundPurchaseFeeRate.detailList;
 						that.gV.fundStatus = data.fundStatus;
 						if(data.invTypCom == 10800){
@@ -415,15 +421,22 @@ $(function () {
 				value = Number(val)
 				str = that.gV.purchaseRate + '元'
 			}else{
-				if(Number(that.gV.discount)/100 == 1){
-					str = value + '元' +'(' + (that.gV.purchaseRate).toFixed(2) + '%)'
+				if(!!that.gV.discount){
+					//有费率
+					if(Number(that.gV.discount)/100 == 1){
+						str = value + '元' +'(' + (that.gV.purchaseRate).toFixed(2) + '%)'
+					}else{
+						var rate = that.gV.purchaseRate * that.gV.discount/100
+						value = (Number(val)*(1-1/(1 + Number(rate)))).toFixed(2)
+						value2 = (Number(val)*(1-1/(1 + that.gV.purchaseRate))).toFixed(2)
+						discountMount = (Number(value2) - Number(value)).toFixed(2)
+						str = value + '元&nbsp;' + '(<span class="line-rate">' + that.gV.purchaseRate*100 + '%</span>&nbsp;&nbsp;' + (rate*100).toFixed(2) + '%)省<span class="discount">' + discountMount + '</span>元'
+					}
 				}else{
-					var rate = that.gV.purchaseRate * that.gV.discount/100
-					value = (Number(val)*(1-1/(1 + Number(rate)))).toFixed(2)
-					value2 = (Number(val)*(1-1/(1 + that.gV.purchaseRate))).toFixed(2)
-					discountMount = (Number(value2) - Number(value)).toFixed(2)
-					str = value + '元&nbsp;' + '(<span class="line-rate">' + that.gV.purchaseRate*100 + '%</span>&nbsp;&nbsp;' + (rate*100).toFixed(2) + '%)省<span class="discount">' + discountMount + '</span>元'
+					 //无费率
+					 str = Number(val)*that.gV.purchaseRate+"元&nbsp;"+'(<span>' + that.gV.purchaseRate*100 + '%</span>)'
 				}
+				
 				
 				 
 			}
@@ -678,7 +691,6 @@ $(function () {
 			mui("body").on('mdClick','.goPreview',function(){
 				var link = $(this).attr('datalink')
 				var typInfo = $(this).attr('type') == '1' ? '基金合同' : '招募说明书'
-				debugger
 				window.location.href = link +'&fileName=' + new Base64().encode(typInfo)
 			}, {
 				htmdEvt: 'fundTransformIn_17'

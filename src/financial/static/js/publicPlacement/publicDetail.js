@@ -52,6 +52,7 @@ $(function () {
             isRiskMatchBoxNoMatch:$(".isRiskMatchBox_noMatch"),
             isRiskMatchBoxHeader:$(".isRiskMatchBox_header"),
             singleaAuthenType:"",  //认证类型  买入into  定投 investement
+            discountStatus:"", //有无费率
         },
         fundType: splitUrl['fundType'] == '10300' ? 1 : 0, //10300 货币基金类型，其余为普通基金类型
         init: function () {
@@ -107,6 +108,11 @@ $(function () {
                         that.gV.json.tradeLimitFlag2 = false
                     }
                     var html = template(that.gV.json); (html, "00");
+                    if(!that.gV.json.discount){
+                        that.gV.discountStatus = false
+                    }else{
+                        that.gV.discountStatus = true
+                    }
                     
                     $(".tplBox").html(html);
                     that.getFundCollectionInit()
@@ -131,7 +137,12 @@ $(function () {
                     $("#HeadBarpathName").html("<span>"+that.gV.json.secuSht+"</span>"+"</br><span>"+that.gV.json.trdCode+"</span>");
                     var saleFee = json.data.fundPurchaseFeeRate.detailList[0].fundFeeRate;
                     var discount = Number(json.data.fundPurchaseFeeRate.detailList[0].fundFeeRate.split("%")[0])*json.data.discount/100 + '%'
-                    $(".divider-top").html(json.data.purSt + '、' + json.data.redemSt + '、' + '买入费率' + '(<span class="line-rate">' + saleFee + '</span>' + ' <span class="discount">' + discount + '</span>)')
+                    if(that.gV.discountStatus){
+                        $(".divider-top").html(json.data.purSt + '、' + json.data.redemSt + '、' + '买入费率' + '(<span class="line-rate">' + saleFee + '</span>' + ' <span class="discount">' + discount + '</span>)')
+                    }else{
+                        $(".divider-top").html(json.data.purSt + '、' + json.data.redemSt + '、' + '买入费率' + '(<span>' + saleFee + '</span>)')
+                    }
+                 
                     
                     //定投按钮的展示问题
                     var supportFixedFlag = that.gV.json.supportFixedFlag;
