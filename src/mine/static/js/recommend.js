@@ -241,21 +241,21 @@ $(function() {
         },
         wxShareSend(type){
             var that=this;
-                    var wxShare={
+                    var shareObj={
                         'type': type,     // auto 原生自己分享框  wechatMoments 朋友圈   friends 朋友
                         'businessType': 'ldx',   //life,业务类型
-                        'title': that.setting.weixinConf.title,    //标题
-                        'des': that.setting.weixinConf.introduction,   //简介
-                        'link': that.setting.shareUrl,   //链接
-                        'img':that.setting.weixinConf.imageUrl,   // 图标
+                        'title': that.setting.weixinConf.title?that.setting.weixinConf.title:"",    //标题
+                        'des':'邀请好友，分享精彩',   //简介
+                        'link': that.setting.shareUrl?that.setting.shareUrl:'',   //链接
+                        'img':that.setting.weixinConf.imageUrl?that.setting.weixinConf.imageUrl:"",   // 图标
                     }
                 //如果是app--设置ldxShare的值--- 需要拼凑对应的链接
                 // if (window.currentIsApp) {
                     if(window.isAndroid){
-                        window.jsObj.wxShare(JSON.stringify(wxShare))
+                        window.jsObj.wxShare(JSON.stringify(shareObj))
                     }
                     if(window.isIOS){
-                        window.webkit.messageHandlers.wxShare.postMessage(JSON.stringify(wxShare))
+                        window.webkit.messageHandlers.wxShare.postMessage(JSON.stringify(shareObj))
                     }
                 // }
         },
