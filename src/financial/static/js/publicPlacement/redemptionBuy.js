@@ -75,7 +75,7 @@ $(function() {
             var obj = [{
                 url: site_url.pofAssessList_api,
                 data: {
-                    fundCode: that.gv.fundCode
+                    tradeAcc:splitUrl["tradeNo"]
                 },
                 callbackDone: function (json) {
                     that.gv.dataList = json.data[0] || ''
