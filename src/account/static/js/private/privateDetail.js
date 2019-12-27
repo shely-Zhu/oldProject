@@ -772,6 +772,8 @@ $(function() {
 				            zIndex: 100,
 				            yesButtonPosition: 'left',
 				            hideCelButton: false,
+				            htmdEvtYes:'redeemBtnYes',  // 埋点确定按钮属性
+				            htmdEvtCel:'redeemBtnCel',  // 埋点取消按钮属性
 				            callback: function() {
 				            	var type = that.data.projectType==0?1:2
 								window.location.href = site_url.privateRedeem_url + '?projectId=' + that.data.projectId + '&redeemPartion=' + that.data.redeemPartion + '&type=' + type;
