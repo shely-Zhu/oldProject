@@ -651,7 +651,7 @@ $(function() {
             })
 //			分红方式跳转
 			mui("body").on('mdClick', '.dividend', function() {
-				window.location.href = site_url.bonusMethod_url;
+				window.location.href = site_url.bonusMethod_url + "?tradeNo=" + splitUrl['tradeNo'];
 			},{
                 'htmdEvt': 'optionalPublicDetail_4'
             })

@@ -9,6 +9,7 @@ require('@pathCommonJs/ajaxLoading.js');
 // require('@pathCommonJs/components/elasticLayer.js');
 require('@pathCommonCom/elasticLayer/elasticLayer/elasticLayer.js');
 var generateTemplate = require('@pathCommonJsComBus/generateTemplate.js');
+var splitUrl = require('@pathCommonJs/components/splitUrl.js')();
 
 
 $(function() {
@@ -28,11 +29,27 @@ $(function() {
 		//页面初始化函数
 		init: function() {
 			var that = this;
-			that.gV.publicFundDetail = JSON.parse(sessionStorage.getItem("publicFundDetail"));
-			that.gV.publicFundDetail.fundCode = that.gV.publicFundDetail.fundCode;
-			that.gV.publicFundDetail.tradeNo = that.gV.publicFundDetail.tradeNo;
+			that.getPublicFundDetail()
 			that.events()
-			that.getDividend()
+		},
+		// 获取产品信息
+		getPublicFundDetail() {
+			var that = this;
+            //发送ajax请求
+            var obj = [{
+                url: site_url.pofAssessList_api,
+                data: {
+                    tradeAcc:splitUrl["tradeNo"]
+                },
+                callbackDone: function(json) {
+				   var jsonData = json.data[0] || []
+				   that.gV.publicFundDetail = jsonData
+				   that.gV.publicFundDetail.fundCode = jsonData.fundCode
+				   that.gV.publicFundDetail.tradeNo = jsonData.tradeNo
+				   that.getDividend()
+                }
+            }];
+            $.ajaxLoading(obj);
 		},
 		getDividend:function(){
 			var that = this;
