@@ -49,7 +49,7 @@ $(function() {
             isRiskEndure: '', // 是否风险测评 0-否 1-是
             endurePubIsold: '', // 公募风险评测是否过期 0:否 1:是
             endurePriIsold: '', // 私募风险测评是否过期0:否 1:是 
-            accreditedInvestor:'',  //合格投资者【空-未做过】【0-未通过】【1-已通过】【2-已过期】
+            isSatisfied:'',  //合格投资者认证是否满足，需要给app携带
             isOpenWealth:"1",//是否开通财富账户。0未开通，1已开通
             qrnhWfsy: {
                 oneMonth: {},
@@ -927,6 +927,9 @@ $(function() {
                         if (v.conditionType == 1 && !v.isSatisfied) { //财富账户是否开通，需要给app携带，0未开通，1开通
                             that.data.isOpenWealth = 0;
                         }
+                        if (v.conditionType == 5 && !v.isSatisfied) { //合格投资者认证是否满足，需要给app携带
+                            that.data.isSatisfied = v.isSatisfied
+                        }
                         if (v.conditionType == 6 && !!v.isPopup) { //是否弹出期限不符弹框
                             isRiskPopup = v.isPopup;
                         }
@@ -1258,7 +1261,7 @@ $(function() {
                     if (that.data.custType == "1") { //客户类型【0.机构 1.个人】 
                         //跳转到电子合同追加页面
                         window.location.href = site_url.orderLimit_url + "?fundCode=" + that.$e.projectId + "&isAllowAppend=" +
-                            that.data.fundDetailObj.isAllowAppend + '&accreditedInvestor=' + that.data.accreditedInvestor;
+                            that.data.fundDetailObj.isAllowAppend + '&isSatisfied=' + that.data.isSatisfied
                     } else {
                         //跳转到普通预约
                         window.location.href = site_url.registration_url + "?fundCode=" + that.$e.projectId + "&isAllowAppend=" +
@@ -1269,7 +1272,7 @@ $(function() {
                     if (that.data.custType == "1") { //客户类型【0.机构 1.个人】 
                         //跳转到电子合同预约页面
                         window.location.href = site_url.orderLimit_url + "?fundCode=" + that.$e.projectId + "&isAllowAppend=" +
-                            that.data.fundDetailObj.isAllowAppend + '&accreditedInvestor=' + that.data.accreditedInvestor;
+                            that.data.fundDetailObj.isAllowAppend + '&isSatisfied=' + that.data.isSatisfied
                     } else {
                         //跳转到普通预约
                         window.location.href = site_url.registration_url + "?fundCode=" + that.$e.projectId + "&isAllowAppend=" +
