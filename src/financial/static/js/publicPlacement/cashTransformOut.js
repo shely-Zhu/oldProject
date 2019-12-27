@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2019-11-26 14:42:56
- * @LastEditTime : 2019-12-20 18:37:56
+ * @LastEditTime : 2019-12-27 13:54:04
  * @LastEditors  : Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \htjf-app\src\financial\static\js\publicPlacement\cashTransformOut.js
@@ -350,6 +350,7 @@ $(function () {
 
 			//点击同意协议
 			mui('body').on('mdClick','.item2 .iconfont',function(){
+				$("#transformInput").blur()
 			//that.$e.iconCheck.on('mdClick', function() {
 				var val =$(".msecond input")[0].value;
 				that.gv.transformMoney = val;
@@ -432,6 +433,7 @@ $(function () {
 			//转出全部
 			mui('body').on('mdClick','.tranoutAllMoney',function(){ 
 			//$(".tranoutAllMoney").on('click',function(){
+				$("#transformInput").blur()
 				$(".msecond input").val(that.gv.transformTotalMoney);
 				that.gv.transformMoney = that.gv.transformTotalMoney
 				if($(".item2 .iconfont").hasClass("check")){
@@ -472,6 +474,7 @@ $(function () {
 			}) 
 			//阅读规则
 			mui('body').on('mdClick','.file .agreementRule',function(){
+				$("#transformInput").blur()
 				that.gv.ruleId = $(this).attr("ruleId");
 				var id = $(this).attr("ruleId");
 				//that.findProtocolContentRule(id);

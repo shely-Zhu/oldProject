@@ -105,7 +105,8 @@ module.exports = function() {
     this.queryIncomeList_api = http_url.web_url + '/account/pof/queryIncomeList'; //收益明细
 
     this.cashQueryIncomeList_api = http_url.web_url + '/account/pof/cash/queryIncomeList'; //超宝收益明细
-
+    this.pofAssessList_api = http_url.web_url + '/account/pof/pofAssessList'; //超宝收益明细
+    
     //公募基金购买认证           
     this.queryCustomerAuthInfo_api = http_url.web_url +'/pof/buyFund/queryCustomerAuthInfo';
     /*-------------------公募相关 end ------------------------------*/
@@ -369,7 +370,7 @@ module.exports = function() {
     this.findMessageCenterById_api = http_url.web_url + '/content/frontend/findMessageCenterById'; //证监会要求查看详情
 
     this.queryTransferFunds_api = http_url.web_url + '/account/queryTransferFunds'; // 查询基金列表
-    // this.newFundDetails_api = http_url.web_url + '/pof/fundDetails/frontend/newfundDetails'; //基金年化查询
+    this.newfundDetailList_api = http_url.web_url + '/pof/fundDetails/frontend/newfundDetailList'; //基金年化查询
     this.redemptionPay_api = http_url.web_url + '/pof/redemptionPay/redemptionPay'; //赎回确认
     this.findProtocolBasic_api = http_url.web_url + '/content/findProtocolBasic'; //进入基金转出页面调用
     this.cashList_api = http_url.web_url + '/account/bankCard/cashList'; //查询银行卡转出

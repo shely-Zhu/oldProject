@@ -320,7 +320,10 @@ module.exports = function() {
     this.fundAccountDiagnosisResult_url = go_url.no_url + '/mine/views/fundDiagnosis/fundAccountDiagnosisResult.html';
     // 诊断详情页
     this.diagnosisDetail_url = go_url.no_url + '/mine/views/fundDiagnosis/diagnosisDetail.html';
-
+    
+    //账户诊断 ---持仓空白页
+    this.noAccountHoldShare_url = go_url.no_url+'/mine/views/fundDiagnosis/noAccountHoldShare.html';
+    
     /*-------------------------------基金诊断 end -----------------------*/
     /*-------------------------------我的页面 start -----------------------*/
     //登录日志查询页面
