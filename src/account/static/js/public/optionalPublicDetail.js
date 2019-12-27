@@ -21,7 +21,7 @@ require('@pathCommonJs/components/headBarConfig.js');
 var generateTemplate = require('@pathCommonJsComBus/generateTemplate.js');
 var getCookie = require('@pathNewCommonJsCom/getCookie.js');
 var Base64 = require('@pathIncludJs/vendor/base64/base64.js');
-
+var splitUrl = require('@pathCommonJs/components/splitUrl.js')();
 
 $(function() {
 
@@ -30,7 +30,8 @@ $(function() {
 		data: {
 			publicFundDetail:"",//从列表页带过来的数据
 			projectType : "",//基金类型。货币10300、非货币除10300其他
-			fundCode: "",//货币代码
+			// fundCode: "",//货币代码
+			fundCode:splitUrl["fundCode"],//货币代码
 			supportFixedFlag: "",//是否支持定投
 			isBuyFlag:"",//是否可购买
 			isRedemptionFlag:"",//是否可赎回
@@ -53,50 +54,10 @@ $(function() {
 
 		init: function(){
 			var that = this;
-			//that.data.publicFundDetail = JSON.parse(localStorage.getItem("publicFundDetail"));
-			var publicFundDetail = getCookie("publicFundDetail")
-			var base64PublicFundDetail = new Base64().decode(publicFundDetail)
-			that.data.publicFundDetail = JSON.parse(base64PublicFundDetail)
-			that.data.projectType = that.data.publicFundDetail.invTypCom;//基金类型。货币10300、非货币除10300其他
-			that.data.fundCode = that.data.publicFundDetail.fundCode;
-			that.data.isBuyFlag = that.data.publicFundDetail.isBuyFlag;//是否可购买(0否1是) int类型
-			that.data.isRedemptionFlag = that.data.publicFundDetail.isRedemptionFlag; //是否可赎回(0否1是) int 类型
-			that.data.supportFixedFlag = that.data.publicFundDetail.isFixFlag;//是否可定投(0否1是) int 类型
-			//设置数据到页面上
-			that.setDomData(that.data.publicFundDetail);
-			if( that.data.projectType == "10300" ){//10300货币类型
-				$(".dealReg").hide()
-				//货币基金
-				$('.type_0').show();
-				//折线图
-				$('.lineWrap').show();
-				//展示折线图的万份收益按钮
-				$('.lineWrap .wfsy').removeClass('hidden');
-			}
-			else{
-				$(".dealReg").show()
-				that.data.unit = "";//手指移动echars显示的数值带不带百分号。非货币基金都不带百分号
-				//获取红利
-				that.getDividend();
-				//非货币基金
-				$('.type_1').show();
-				//折线图
-				$('.lineWrap').show();
-				//展示折线图的万份收益按钮
-				$('.lineWrap .wfsy').removeClass('hidden');
-			}
-			
-			if(that.data.supportFixedFlag == 1){//支持定投展示定投按钮,1支持定投
-				$('.footer').eq(1).show()
-			}else{
-				$('.footer').eq(0).show()
-			}
-			
-			
-
-			that.getData();
-
-			that.event();
+			that.setDomDataOne(splitUrl["fundCode"])
+			// that.getTypeOneData()
+			that.getData()
+			that.event()
 		},
 
 		
@@ -120,7 +81,7 @@ $(function() {
 			var obj = [{
 			    url: site_url.pofQueryDividendByCode_api, 
 			    data: {
-			    	tradeAcco: that.data.publicFundDetail.tradeNo, 
+			    	tradeAcco:splitUrl["tradeNo"], 
 			    	fundCode: that.data.fundCode,
 			    },
 			    needLogin: true,
@@ -383,49 +344,95 @@ $(function() {
 			var obj = [];
 			$.ajaxLoading(obj);
 		},
-
-		setDomData: function( jsonData){
+        setDomDataOne:function(fundCode){
 			var that = this;
+            //发送ajax请求
+            var obj = [{
+                url: site_url.pofAssessList_api,
+                data: {
+                    tradeAcc:splitUrl["tradeNo"]
+                },
+                callbackDone: function(json) { //成功后执行的函数
+				//   console.log(json.data[0])
+				   var jsonData = json.data[0]
+				   that.data.projectType = jsonData.invTypCom;
+				   that.data.isBuyFlag = jsonData.isBuyFlag;//是否可购买(0否1是) int类型
+				   that.data.isRedemptionFlag = jsonData.isRedemptionFlag; //是否可赎回(0否1是) int 类型
+				   that.data.supportFixedFlag = jsonData.isFixFlag;//是否可定投(0否1是) int 类型
+					//项目名称
+					$('#HeadBarpathName').html( jsonData.fundName );
+					//基金代码
+					$('#fundCodeWrap').html( jsonData.fundCode );
+					//总金额
+					$('.typeWrap .totalM').html( jsonData.totalMoneyMask );
+					//待确认金额 接口无
+					$('.typeWrap .toConfirm .confirmMoney').html( jsonData.onwayAssetTotalMask );
+					//昨日收益
+					$('.typeWrap .yesterdayShare').html( jsonData.incomeMask);
+					//持有收益
+					$('.typeWrap .ownShare').html( jsonData.holdIncomeMask);
+					//累计收益  接口无
+					$('.typeWrap .accumulatedShare').html( jsonData.addupIncomeMask);
+					//持有份额
+					$('.openWrap .cyfe').html( jsonData.currentShareMask);
+					//可用份额
+					$('.openWrap .kyfe').html( jsonData.enableSharesMask);
 
-			//项目名称
-    		$('#HeadBarpathName').html( jsonData.fundName );
-			//基金代码
-    		$('#fundCodeWrap').html( jsonData.fundCode );
-			//总金额
-			$('.typeWrap .totalM').html( jsonData.totalMoneyMask );
-		   	//待确认金额 接口无
-		   	$('.typeWrap .toConfirm .confirmMoney').html( jsonData.onwayAssetTotalMask );
-		   	//昨日收益
-		   	$('.typeWrap .yesterdayShare').html( jsonData.incomeMask);
-		   	//持有收益
-		   	$('.typeWrap .ownShare').html( jsonData.holdIncomeMask);
-		   	//累计收益  接口无
-		   	$('.typeWrap .accumulatedShare').html( jsonData.addupIncomeMask);
-			//持有份额
-			$('.openWrap .cyfe').html( jsonData.currentShareMask);
-			//可用份额
-			$('.openWrap .kyfe').html( jsonData.enableSharesMask);
+					if( that.data.projectType == "10300" ){ //货币基金						
+						//七日年化
+						$('.openWrap .qrnh').html( jsonData.sevenDayYield + "%");
+						//万份受益
+						$('.openWrap .wfsy').html( jsonData.unitYld);
+						
+					}
+					else{ //非货币基金	    		
+						//当前市值
+						//日涨幅
+						$('.openWrap .rzf').html( jsonData.dayChgRat + "%");
+						//最新净值
+						$('.openWrap .zxjz').html( jsonData.nav);
+						$('.lineWrap .qrnh').text("单位净值");
+						$('.lineWrap .wfsy').text("累计净值");
+					}
+					$(".totalM").css({ "background": "linear-gradient(360deg, rgba(186,140,112,1) 0%, rgba(244,210,192,1) 100%)", "-webkit-background-clip": "text", "-webkit-text-fill-color": "transparent" })
+                    if(that.data.supportFixedFlag == 1){//支持定投展示定投按钮,1支持定投
+						$('.footer').eq(1).show()
+					}else{
+						$('.footer').eq(0).show()
+					}
+					if( that.data.projectType == "10300" ){//10300货币类型
+						$(".dealReg").hide()
+						//货币基金
+						$('.type_0').show();
+						//折线图
+						$('.lineWrap').show();
+						//展示折线图的万份收益按钮
+						$('.lineWrap .wfsy').removeClass('hidden');
+					}
+					else{
+						$(".dealReg").show()
+						that.data.unit = "";//手指移动echars显示的数值带不带百分号。非货币基金都不带百分号
+						//获取红利
+						that.getDividend();
+						//非货币基金
+						$('.type_1').show();
+						//折线图
+						$('.lineWrap').show();
+						//展示折线图的万份收益按钮
+						$('.lineWrap .wfsy').removeClass('hidden');
+					}
+					that.getTypeOneData()
+                },
+                callbackFail: function(json) { //失败后执行的函数
+                //    tipAction(json.message);
+					//that.data.canClick = true; //变为可点击
 
-	    	if( that.data.projectType == "10300" ){ //货币基金
-	    		
-				//七日年化
-				$('.openWrap .qrnh').html( jsonData.sevenDayYield + "%");
-				//万份受益
-				$('.openWrap .wfsy').html( jsonData.unitYld);
-				
-
-    		   	
-	    	}
-	    	else{ //非货币基金	    		
-	    		//当前市值
-	    		//日涨幅
-				$('.openWrap .rzf').html( jsonData.dayChgRat + "%");
-				//最新净值
-				$('.openWrap .zxjz').html( jsonData.nav);
-				$('.lineWrap .qrnh').text("单位净值");
-				$('.lineWrap .wfsy').text("累计净值");
-	    	}
-
+                },
+                callbackNoData:function(argument) {
+                    tipAction(json.message);
+                }
+            }];
+            $.ajaxLoading(obj);
 		},
 
 		 // 客户预约产品所需条件
@@ -638,7 +645,7 @@ $(function() {
             })
 //			交易记录跳转
 			mui("body").on('mdClick', '.jyjl', function() {
-				window.location.href = site_url.transactionDetailPublic_url + "?fundCode=" + that.data.fundCode + "&tradeNo=" + that.data.publicFundDetail.tradeNo;
+				window.location.href = site_url.transactionDetailPublic_url + "?fundCode=" + that.data.fundCode + "&tradeNo=" + splitUrl["tradeNo"];
 			},{
                 'htmdEvt': 'optionalPublicDetail_3'
             })
@@ -710,7 +717,7 @@ $(function() {
             })
 			//点击赎回
 			mui("body").on('mdClick', '.redeemBtn', function(e) {
-				window.location.href = site_url.redemptionBuy_url;			
+				window.location.href = site_url.redemptionBuy_url + "?tradeNo=" + splitUrl['tradeNo'];			
 			},{
                 'htmdEvt': 'optionalPublicDetail_8'
             })

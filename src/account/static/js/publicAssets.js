@@ -172,9 +172,9 @@ $(function () {
             //普通基金item的点击 进入持仓详情
             mui("body").on('mdClick', '#pageLists .hold_item', function (e) {
                 var index = $(this).index();
-                var publicFundDetail = JSON.stringify(that.gV.data.fundDetailList[index])
-                setCookie("publicFundDetail", new Base64().encode(publicFundDetail))
-                window.location.href=site_url.optionalPublicDetail_url;
+                var fundCode = $(this).attr("data-fundCode")
+                var tradeNo = $(this).attr("data-tradeNo")
+                window.location.href=site_url.optionalPublicDetail_url+'?fundCode='+fundCode+'&tradeNo='+tradeNo
             },{
                 'htmdEvt': 'publicAssets_1'
             })
@@ -205,6 +205,7 @@ $(function () {
             mui("body").on('mdClick', '.redeem_btn', function (e) {
                 var index = $(this).parent().parent().parent().index();
                 var id = $(this).parent().parent().parent().parent().attr("id")
+                var tradeNo = $(this).parent().parent().parent().attr("data-tradeNo")
                 if(id =="cashPageLists" ){
                     //现金宝
                     var obj = {
@@ -215,8 +216,7 @@ $(function () {
                     sessionStorage.setItem("transformMessage",JSON.stringify(obj));
                     window.location.href = site_url.pofCashTransformOut_url;
                 }else if(id == "pageLists"){
-                    sessionStorage.setItem("publicFundDetail",JSON.stringify(that.gV.data.fundDetailList[index])) ;
-                     window.location.href = site_url.redemptionBuy_url;
+                     window.location.href = site_url.redemptionBuy_url + '?tradeNo=' + tradeNo;
                 }else{
                     return false
                 }

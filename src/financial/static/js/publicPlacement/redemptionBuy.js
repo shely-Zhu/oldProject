@@ -26,7 +26,7 @@ require('@pathIncludJs/vendor/mui/mui.picker.min.js');
 require('@pathCommonJs/ajaxLoading.js');
 require('@pathCommonJs/components/elasticLayer.js');
 
-var splitUrl = require('@pathCommonJs/components/splitUrl.js');
+var splitUrl = require('@pathCommonJs/components/splitUrl.js')();
 //引入复制功能
 // var Clipboard = require('clipboard');
 var popPicker = require('@pathCommonJsCom/popPicker.js');
@@ -54,7 +54,7 @@ $(function() {
         },
         gv:{//全局变量
             transferFunds:"",
-            fundCode:"", //现在的基金编号
+            fundCode: splitUrl["fundCode"], //现在的基金编号
             targetfundcode:"", //赎回后目前的基金编号
             nowRedempShare:"", //赎回后目前的赎回份额
             maxRedempShare:"", //最大赎回份额
@@ -68,17 +68,24 @@ $(function() {
 
         webinit: function() {
             var that = this;
-             console.log("888",that.gv.dataBox);
-             that.gv.dataList = JSON.parse(sessionStorage.getItem("publicFundDetail"))?JSON.parse(sessionStorage.getItem("publicFundDetail")):"";
-             that.getElements.maxMoneyContent[0].textContent = that.gv.dataList.enableShares;
-             console.log("89898",JSON.parse(sessionStorage.getItem("publicFundDetail")))
-            // that.gv.targetfundcode = that.gv.dataList.fundCode;
-           //  that.gv.dataList = 
-            //
-            that.initParmes();
-            that.events();
-            that.initHtml();
-           that.initQueryTransferFunds();
+            that.getPublicFundDetail()
+        },
+        getPublicFundDetail() {
+            var that = this;
+            var obj = [{
+                url: site_url.pofAssessList_api,
+                data: {
+                    tradeAcc:splitUrl["tradeNo"]
+                },
+                callbackDone: function (json) {
+                    that.gv.dataList = json.data[0] || ''
+                    that.initParmes();
+                    that.events();
+                    that.initHtml();
+                    that.initQueryTransferFunds();
+                }
+            }];
+            $.ajaxLoading(obj);
         },
         initHtml:function(){
             var that = this;

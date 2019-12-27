@@ -174,8 +174,10 @@ $(function() {
                     needDataEmpty: true,
                     callbackDone: function(data) {
                         $('.activityBottomBtnBox').removeClass('disabled');
-
                         if (data.status == "0000") {
+                            $('.activityBottomBox a').html('已报名');
+                            $('.activityBottomBtnBox').hide();
+                            $('.activityBottomBox').show();
                             successTitle = data.message;
                             if (that.gV.actType == 1) { //线上活动
                                 if (data.data.actStyle == 4) {
@@ -270,7 +272,7 @@ $(function() {
                             };
                             $.elasticLayer(obj)
                         }
-                         else if (data.status == "22011"||data.status == "20016") {
+                         else if (data.status == "20011"||data.status == "20016") {
                             //客户未成交
                             var obj = {
                                 title: '温馨提示', //如果不传，默认不显示标题
