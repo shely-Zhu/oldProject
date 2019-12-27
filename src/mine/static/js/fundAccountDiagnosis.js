@@ -180,15 +180,24 @@ $(function() {
                 needDataEmpty: false,
                 callbackDone: function(json) {
                     var data = json.data.holdShareList;
-                    if(json.data.holdShareList.length==0){
+                    if(!json.data){
                         window.location.href = site_url.noAccountHoldShare_url
+                    }else{
+                        if(json.data.holdShareList.length==0){
+                            window.location.href = site_url.noAccountHoldShare_url
+                        }
                     }
+                    
                       // 将列表插入到页面上
                       generateTemplate(data, that.$e.holdingBox, that.$e.holdingBoxTemp);
                     
                 },
+                callbackNoData:function(){
+                    window.location.href = site_url.noAccountHoldShare_url
+                },
                 callbackFail: function(json) {
                     tipAction(json.msg);
+                    window.location.href = site_url.noAccountHoldShare_url
                 }
             }]
             $.ajaxLoading(obj);
