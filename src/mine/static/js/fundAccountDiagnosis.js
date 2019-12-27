@@ -204,14 +204,28 @@ $(function() {
                 callbackDone: function(json) {
                     var data = json.data;
                     that.gV.pie.pieData = []
-                    that.gV.pie.pieData.push({name: '股票型',value: data.stockRatio,itemStyle:that.getPieColor('stockRatio'),})
-                    that.gV.pie.pieData.push({name: '混合型',value: data.mixRatio,itemStyle:that.getPieColor('mixRatio'),})
-                    that.gV.pie.pieData.push({name: '债券型',value: data.bondRatio,itemStyle:that.getPieColor('bondRatio'),})
-                    that.gV.pie.pieData.push({name: '保本型',value: data.breakEvenRatio,itemStyle:that.getPieColor('breakEvenRatio'),})
-                    that.gV.pie.pieData.push({name: '商品型',value: data.goodsRatio,itemStyle:that.getPieColor('goodsRatio'),})
-                    that.gV.pie.pieData.push({name: '另类投资型',value: data.currencyRatio,itemStyle:that.getPieColor('alternativeInvestRatio'),})
-                    that.gV.pie.pieData.push({name: '货币市场型',value: data.currencyRatio,itemStyle:that.getPieColor('currencyRatio'),})
-
+                    if(!!data.stockRatio&&Number(data.stockRatio)!=0){
+                        that.gV.pie.pieData.push({name: '股票型',value:Number( data.stockRatio).toFixed(2),itemStyle:that.getPieColor('stockRatio'),})
+                    }
+                    if(!!data.mixRatio&&Number(data.mixRatio)!=0){
+                        that.gV.pie.pieData.push({name: '混合型',value:Number( data.mixRatio).toFixed(2),itemStyle:that.getPieColor('mixRatio'),})
+                    }
+                    if(!!data.bondRatio&&Number(data.bondRatio)!=0){
+                        that.gV.pie.pieData.push({name: '债券型',value:Number (data.bondRatio).toFixed(2),itemStyle:that.getPieColor('bondRatio'),})
+                    }
+                    if(!!data.breakEvenRatio&&Number(data.breakEvenRatio)!=0){
+                        that.gV.pie.pieData.push({name: '保本型',value:Number(data.breakEvenRatio).toFixed(2),itemStyle:that.getPieColor('breakEvenRatio'),})
+                    }
+                    if(!!data.goodsRatio&&Number(data.goodsRatio)!=0){
+                        that.gV.pie.pieData.push({name: '商品型',value:Number (data.goodsRatio).toFixed(2),itemStyle:that.getPieColor('goodsRatio'),})
+                    }
+                    if(!!data.currencyRatio&&Number(data.currencyRatio)!=0){
+                        that.gV.pie.pieData.push({name: '另类投资型',value:Number (data.currencyRatio).toFixed(2),itemStyle:that.getPieColor('alternativeInvestRatio'),})
+                    }
+                    if(!!data.currencyRatio&&Number(data.currencyRatio)!=0){
+                        that.gV.pie.pieData.push({name: '货币市场型',value:Number (data.currencyRatio).toFixed(2),itemStyle:that.getPieColor('currencyRatio'),})
+                    }
+                   
                    that.drawCircle()
                 },
                 callbackFail: function(json) {
@@ -567,15 +581,15 @@ $(function() {
                     x: 'right',
                     data: optionData,
                     icon: "roundRect",
-                    itemWidth: 10,  // 设置宽度
+                    itemWidth: 14,  // 设置宽度
                     itemHeight: 8, // 设置高度
                     itemGap: 5,//设置间距
-                    x: '60%',
+                    x: '58%',
                     y: '35%',
                     formatter: function (name) {
                         for (var i = 0; i < pieData.length; i++) {
                             if (name === pieData[i].name) {
-                                return " {title|" + name + "}  {value|" + pieData[i].value + "}"
+                                return " {title|" + name + "}  {value|" + pieData[i].value + "%"+"}"
                             }
                         }
                     },
@@ -671,7 +685,12 @@ $(function() {
                 xAxis: {
                     type: 'value',
                     boundaryGap: ["0%", "100%"],
-                    axisTick:{show:false}
+                    axisTick:{show:false},
+                    axisLabel:{
+                        formatter:(val)=>{
+                            return val*100 +"%"
+                        }
+                    }
                 },
                 yAxis: {
                     type: 'category',
@@ -690,7 +709,7 @@ $(function() {
                                     return colorList[params.dataIndex]
                                 },
                                 label:{
-                                    show:true,
+                                    show:false,
                                     position:'right',
                                     formatter:'{b}\n{c}%'
                                 },
