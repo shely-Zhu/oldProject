@@ -137,7 +137,7 @@ $(function() {
                         $('.priceLimit').removeClass('hide');
                         // 单位净值
                         if (jsonData.unitNetValue == null || jsonData.unitNetValue == "" || jsonData.unitNetValue == undefined) {
-                            $('.netValue').html('--')
+                            $('.netValue').html('1.0000')
                         } else {
                             $('.netValue').html(jsonData.unitNetValue);
                         }
