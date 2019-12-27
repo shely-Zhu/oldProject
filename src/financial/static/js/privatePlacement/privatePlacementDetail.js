@@ -468,7 +468,7 @@ $(function() {
                     
                 },
                 callbackNoData: function(json) {
-                    tipAction(json.message);
+                    // tipAction(json.message);
                     $(".performanceComparison").hide()
                 },
                 callbackFail: function(json) {
