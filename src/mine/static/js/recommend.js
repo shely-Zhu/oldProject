@@ -107,6 +107,7 @@ $(function() {
                         })
                     } else {
                         // 已实名认证，初始化页面
+                        $(".recommendBoxUserName").html(json.data.oldName)
                         that.initialPage()
                     }
                 },
@@ -166,7 +167,6 @@ $(function() {
                     that.asyncAll();
                 }, function() {}, function() {}, true)
             }
-
             // 获取理财师的接口
             that.generateAjaxObj(site_url.custBro_api, custBroData, function(data) {
                 // 根据理财师处理页面逻辑
@@ -231,7 +231,6 @@ $(function() {
          * @author songxiaoyu 2018-07-18
          */
         generateShareLink: function(num,sharingType) {
-            debugger
             var that = this;
                     //拼分享出去的链接
 
@@ -251,14 +250,14 @@ $(function() {
                         'img':that.setting.weixinConf.imageUrl,   // 图标
                     }
                 //如果是app--设置ldxShare的值--- 需要拼凑对应的链接
-                if (window.currentIsApp) {
+                // if (window.currentIsApp) {
                     if(window.isAndroid){
                         window.jsObj.wxShare(JSON.stringify(wxShare))
                     }
                     if(window.isIOS){
                         window.webkit.messageHandlers.wxShare.postMessage(JSON.stringify(wxShare))
                     }
-                }
+                // }
         },
         // 微信鉴权设置
         dealWeiXinSet: function(data) {
@@ -465,10 +464,11 @@ $(function() {
             // })
             // 点击--分享给好友
             mui("body").on('mdClick', '.recommendShareFriend', function() {
-                if(that.list.length < 0){
-                    // 当没有理财师的时候提示？
-                    // tipAction('完成实名认证后才可以推荐好友哦')
-                }
+                debugger
+                // if(that.list.length < 0){
+                //     // 当没有理财师的时候提示？
+                //     // tipAction('完成实名认证后才可以推荐好友哦')
+                // }
                 if(that.getElements.existMain == 1){
                     // that.generateShareLink(that.getElements.empNo,"friends");
                     that.wxShareSend("friends")
@@ -482,6 +482,7 @@ $(function() {
             })
             // 点击--分享到朋友圈
             mui("body").on('mdClick', '.recommendShareWechart', function() {
+                debugger
                 if(that.list.length < 0){
                     // tipAction('完成实名认证后才可以推荐好友哦')
                 }
@@ -510,7 +511,6 @@ $(function() {
          */
         generateAjaxObj: function(url, data, callback, callbackFail, callbackNoData, contentTypeSearch) {
             var that = this;
-
             that.setting.ajaxArr.push({
                 url: url,
                 data: data,
