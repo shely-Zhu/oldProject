@@ -408,6 +408,9 @@ var clickList = {
 
 
 	/************************************** life end *************************************************/
+
+	"redeemBtnYes":{ type:'click', evtid: 'redeemBtnYes', topic: '赎回确认', info: ''},
+	"redeemBtnCel":{ type:'click', evtid: 'redeemBtnCel', topic: '赎回取消', info: ''},
 }
 
 module.exports = clickList;
