@@ -105,7 +105,8 @@ module.exports = function() {
     this.queryIncomeList_api = http_url.web_url + '/account/pof/queryIncomeList'; //收益明细
 
     this.cashQueryIncomeList_api = http_url.web_url + '/account/pof/cash/queryIncomeList'; //超宝收益明细
-
+    this.pofAssessList_api = http_url.web_url + '/account/pof/pofAssessList'; //超宝收益明细
+    
     //公募基金购买认证           
     this.queryCustomerAuthInfo_api = http_url.web_url +'/pof/buyFund/queryCustomerAuthInfo';
     /*-------------------公募相关 end ------------------------------*/

@@ -313,7 +313,6 @@ var monthReportDetail = {
 
 						that.pieChartDataDetail.push(dataDetail) ;
 
-
 					})
 
 					//调用画图方法
@@ -322,8 +321,8 @@ var monthReportDetail = {
 
 				}
 				else{
-					// $('.assetAnalyse').hide();
-					// $('.pieBox').hide();
+					$('.assetAnalyse').hide();
+					$('.pieBox.assetAnalyse').hide();
 				}
 				// 资产情况分析
 				if(!$.util.objIsEmpty(data)){
