@@ -350,7 +350,7 @@ $(function() {
             var obj = [{
                 url: site_url.pofAssessList_api,
                 data: {
-                    fundCode:fundCode,
+                    tradeAcc:splitUrl["tradeNo"]
                 },
                 callbackDone: function(json) { //成功后执行的函数
 				//   console.log(json.data[0])
@@ -717,7 +717,7 @@ $(function() {
             })
 			//点击赎回
 			mui("body").on('mdClick', '.redeemBtn', function(e) {
-				window.location.href = site_url.redemptionBuy_url + "?fundCode=" + that.data.fundCode;			
+				window.location.href = site_url.redemptionBuy_url + "?tradeNo=" + splitUrl['tradeNo'];			
 			},{
                 'htmdEvt': 'optionalPublicDetail_8'
             })
