@@ -20,10 +20,8 @@ module.exports = function(data, $ele, $id, type) {
         $id = $id || $('#trans-template');
     if (isConfirm == 'confirmed') {
         setCookie('isconfirm', 1)
-        //window.sessionStorage.setItem('isconfirm', 1);
     } else if (isConfirm == 'toBeConfirmed') {
         setCookie('isconfirm', 0)
-        //window.sessionStorage.setItem('isconfirm', 0);
     }
     for (var i = 0; i < data.length; i++) {
         // 是否确认交易isConfirm 1-确认 0-未确认

@@ -19,7 +19,7 @@ require('@pathIncludJs/vendor/mui/mui.picker.min.js');
 require('@pathCommonJs/ajaxLoading.js');
 require('@pathCommonJs/components/elasticLayer.js');
 
-var splitUrl = require('@pathCommonJs/components/splitUrl.js');
+var splitUrl = require('@pathCommonJs/components/splitUrl.js')();
 //引入复制功能
 // var Clipboard = require('clipboard');
 var popPicker = require('@pathCommonJsCom/popPicker.js');
@@ -34,11 +34,11 @@ $(function () {
 	var regulatory = {
 
 		gv:{
-		   productName:"",   //产品名称
+		   productName:new Base64().decode(splitUrl['productName']),   //产品名称
 		   transformTotalMoney:"",   //产品转出总额度
 		   transformMoney:"",    //产品转出额度
 		   dailyOnceMaxLimit:"",  //单日最高限额 整数
-		   fundCode:"" ,//基金编号
+		   fundCode:splitUrl['fundCode'] ,//基金编号
 		   outType:"fast",//转出方式  快速位fast 普通位common
 		   dailyOnceMaxLimitWan:"", //单笔最高限额
 		   dailyMaxLimitWan:"" ,//单日最高限额：
@@ -86,39 +86,36 @@ $(function () {
 
 		webinit: function () {
 			var that = this;
-
-			//
 			that.events();
 			that.initParmes();
 			that.findProtocolBasi();
 			that.cashListWiki();
 			that.pofCashLimit();
-
-
-			that.initElement();
 			
 		},
 
         /*
             绑定事件
          */
-
+         // 获取该账户的余额
 		 initParmes:function(){
 		   var that = this;
-		   var data = JSON.parse(sessionStorage.getItem("transformMessage"))?JSON.parse(sessionStorage.getItem("transformMessage")):"";
-		   that.gv.productName = data.productName;
-		   that.gv.fundCode = data.fundCode;
-		   that.gv.transformTotalMoney = data.money;
-		   that.gv.transformMoney = data.money;
-
+			var obj =[{
+				url:site_url.pofGetAssetsCashList_api,
+				data:{
+					"fundCode":that.gv.fundCode,
+					"pageSize":10,
+					"pageCurrent": 1
+				},
+				callbackDone:function(json){
+					that.gv.transformTotalMoney = json.data.pageList[0].totalMoney;
+		   			that.gv.transformMoney = json.data.pageList[0].totalMoney;
+		   			that.$e.el_productName.html(that.gv.productName);
+		   			that.$e.el_transformInput.val(json.data.pageList[0].totalMoney);
+				}
+			}]
+			$.ajaxLoading(obj);
 		 },
-		 initElement:function(){
-		   var that = this;
-		   that.$e.el_productName.html(that.gv.productName);
-		   that.$e.el_transformInput.val(that.gv.transformMoney);
-		  
-		   //that.$e.el_defaultBankName.textContent = 
-		},
 		 findProtocolBasi:function(){
 			var that = this;
 			var obj =[

@@ -208,13 +208,9 @@ $(function () {
                 var tradeNo = $(this).parent().parent().parent().attr("data-tradeNo")
                 if(id =="cashPageLists" ){
                     //现金宝
-                    var obj = {
-                        "money":that.gV.data.cashDetails[index].totalMoney,
-                        "productName":that.gV.data.cashDetails[index].fundName,
-                        "fundCode":that.gV.data.cashDetails[index].fundCode
-                      };
-                    sessionStorage.setItem("transformMessage",JSON.stringify(obj));
-                    window.location.href = site_url.pofCashTransformOut_url;
+                    var fundCode = that.gV.data.cashDetails[index].fundCode
+                    var productName = that.gV.data.cashDetails[index].fundName
+                    window.location.href = site_url.pofCashTransformOut_url + '?fundCode=' + fundCode + '&productName=' + new Base64().encode(productName);
                 }else if(id == "pageLists"){
                      window.location.href = site_url.redemptionBuy_url + '?tradeNo=' + tradeNo;
                 }else{
