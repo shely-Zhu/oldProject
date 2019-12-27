@@ -18,9 +18,35 @@ require('@pathIncludJs/vendor/config.js');
 require('@pathCommonJs/components/utils.js');
 require('@pathCommonJs/components/headBarConfig.js');
 
+var timer = {
+    id:null,
+    run:function (callback,time) {
+        this.id = window.setInterval(callback,time);
+    },
+    clean:function () {
+        var that = this;
+        this.id = window.clearInterval(that.id);
+    }
+};
+var keyboardHeight = 0,
+screenHeight = window.innerHeight;
+//input.addEventListener('focus',function (evt) {
+//  if(!keyboardHeight){
+//      timer.run(function () {
+//          if (screenHeight !== window.innerHeight) {
+//              keyboardHeight = screenHeight-window.innerHeight;
+//              timer.clean()
+//          }
+//      }, 50)
+//  }
+//});
+//input.focus();
+
 var fixScroll = function(num,oHeight){//ios浏览器需要滚动
+//	alert(keyboardHeight)
 	var u = navigator.userAgent;
 	var isiOS = !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/); //ios终端
+	var isAndroid = u.indexOf('Android') > -1 || u.indexOf('Linux') > -1; //g
 	if (isiOS && num == 1) {
 		window.scrollTo(0, 0);
 	}else if(isiOS && num == 2){
@@ -35,6 +61,11 @@ var fixScroll = function(num,oHeight){//ios浏览器需要滚动
 //			window.scrollTop = 1000;//滚动到可是区域
 //		}
 //		document.body.scrollTop = document.body.scrollHeight;
+	}else if(isAndroid && num == 1){
+		$(".passwordTop").css("margin-bottom","0")
+	}else if(isAndroid && num == 2){
+		$(".passwordTop").css("margin-bottom",keyboardHeight)
+		
 	}
 }
 
@@ -72,8 +103,17 @@ module.exports = function(callback,forgetCall){
 			 }
 		 })
 	   
-		$("#pwd-input").on("focus", function() {
+		$("#pwd-input").on("focus", function(e) {
+			e.stopPropagation();
 			setTimeout(function(){
+				if(!keyboardHeight){
+			        timer.run(function () {
+			            if (screenHeight !== window.innerHeight) {
+			                keyboardHeight = screenHeight-window.innerHeight;
+			                timer.clean()
+			            }
+			        }, 50)
+			    }
 				fixScroll(2,oHeight);
 			},300)
 		})
@@ -88,8 +128,8 @@ module.exports = function(callback,forgetCall){
 		$("#pwd-input").on("blur", function() {
 			    fixScroll(1)
 		})
-		$(".closeBtn").on('click',function(){
-			$("#passwordWrap").hide();
+		$(".closeBtn").on('click',function(e){
+			e.stopPropagation();
 			//清空密码
 			var inputList = $(".pwd-box .fake-box input");
 			if(inputList.length>0){
@@ -97,6 +137,8 @@ module.exports = function(callback,forgetCall){
 					inputList[i].value=""
 				}
 			}
+			$("#passwordWrap").hide();
+			$(".passwordTop").css("margin-bottom","0")
 			
 		})
 		$(".forgetP").on('click',function(){
