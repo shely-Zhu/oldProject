@@ -84,7 +84,6 @@ $(function(){
                 //async: false,
                 needDataEmpty: true,
                 callbackDone: function(json) {
-                    debugger;
                     var data=json.data; 
                     generateTemplate(data,that.$e.membershipDetailsSilderBox,that.$e.membershipDetailsListTemplateId); 
                     $(".lazyload").lazyload()
