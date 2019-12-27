@@ -970,7 +970,7 @@ $(function() {
                             if (v.conditionType == "1" && that.data.custType != "1") { //如果是实名认证跳转，机构不支持线上开户，弹框提示
                                 $("#tips-wrap").hide();
                                 var obj = {
-                                    title: '',
+                                    title: '尊敬的客户',
                                     id: 'realOrg2',
                                     p: '机构客户需联系您的理财师，进行线下开户',
                                     yesTxt: '确认',
@@ -983,7 +983,7 @@ $(function() {
                             } else if(v.conditionType == "3" && that.data.custType != "1"){//完善信息和税收声明未完成时，机构客户不支持线上完善资料
                             	$("#tips-wrap").hide();
                                 var obj = {
-                                    title: '',
+                                    title: '尊敬的客户',
                                     id: 'realOrg2',
                                     p: '机构客户完善资料请联系您的理财师',
                                     yesTxt: '确认',
@@ -1003,7 +1003,7 @@ $(function() {
                             if (isReal && that.data.custType != "1") { //如果是实名认证跳转，机构不支持线上开户，弹框提示,一键认证正好也是链接也是实名认证也弹框
                                 $("#tips-wrap").hide();
                                 var obj = {
-                                    title: '',
+                                    title: '尊敬的客户',
                                     id: 'realOrg1',
                                     p: '机构客户需联系您的理财师，进行线下开户',
                                     yesTxt: '确认',
@@ -1015,7 +1015,7 @@ $(function() {
                             } else if(isCompOri && that.data.custType != "1"){//完善信息和税收声明未完成时，机构客户不支持线上完善资料
                             	$("#tips-wrap").hide();
                                 var obj = {
-                                    title: '',
+                                    title: '尊敬的客户',
                                     id: 'realOrg2',
                                     p: '机构客户完善资料请联系您的理财师',
                                     yesTxt: '确认',
@@ -1082,7 +1082,7 @@ $(function() {
                                         };
                                     }else if(!!isRiskPopup && !isPopup){
                                     	objElasticLayer = {
-                                            title: '',
+                                            title: '尊敬的客户',
                                             id: 'sellPop',
                                             p: '<p class="" style="font-weight:bold;text-align:center">您风险测评中所选计划投资期限少于产品期限存在匹配风险，请确认是否继续购买</p>',
                                             yesTxt: '继续',
@@ -1094,7 +1094,7 @@ $(function() {
                                        };
 									}else if(!isRiskPopup && !!isPopup){
 								        var objElasticLayer = {
-                                            title: '',
+                                            title: '尊敬的客户',
                                             id: 'sellPop',
                                             p: '<p class="" style="font-weight:bold;text-align:center">你选择的产品与您现在的风险承受能力相匹配</p>' + 
                                                     '<p class="">请您认真阅读' + noticeObj.fileName + that.data.productName + '并确认后继续购买该产品</p>',
