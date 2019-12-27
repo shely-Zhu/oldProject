@@ -272,7 +272,7 @@ $(function() {
                             };
                             $.elasticLayer(obj)
                         }
-                         else if (data.status == "22011"||data.status == "20016") {
+                         else if (data.status == "20011"||data.status == "20016") {
                             //客户未成交
                             var obj = {
                                 title: '温馨提示', //如果不传，默认不显示标题
