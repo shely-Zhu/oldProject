@@ -1105,6 +1105,8 @@ $(function() {
                                             	var isEle = "";
                                             	if(that.data.fundDetailObj.isElecContract == "1"){
                                             		isEle = "electronicContract"
+                                            	}else{
+                                            		isEle = "ordinaryProducts"
                                             	}
                                                 window.location.href = site_url.downloadNew_api + "?filePath=" + noticeObj.fileUrl + "&fileName=" + new Base64().encode(noticeObj.fileName) + "&groupName=" +
                                                 noticeObj.groupName + "&show=1&readComplete=true&showDownload=false&fundCode=" + that.$e.projectId + "&isAllowAppend=" +
