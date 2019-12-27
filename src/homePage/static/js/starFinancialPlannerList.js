@@ -446,7 +446,22 @@ $(function() {
                                 }          
                             },
                             callbackNoData: function() {
-                                that.gV.FinancialerClickFlag = true
+                                $.elasticLayer({
+                                    id: "tip",
+                                    title: '温馨提示',
+                                    p: '<p>立即绑定理财师 享受一对一专属服务</p><div class="warmPrompt">*为了给您提供专属理财服务，您只能绑定一位理财师，请您慎重考虑*</div>',
+                                    zIndex: 100,
+                                    yesButtonPosition: 'right',
+                                    hideCelButton: false,
+                                    yesTxt: '立即绑定',
+                                    callback: function() {
+                                        // 点击立即绑定跳转验证用户身份页面
+                                        window.location.href = site_url.bindFinancialer_url
+                                    },
+                                    callbackCel: function() {
+                                        that.gV.FinancialerClickFlag = true 
+                                    }
+                                });
                             },
                             callbackFail: function(data) {
                                 that.gV.FinancialerClickFlag = true
