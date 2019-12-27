@@ -717,7 +717,7 @@ $(function() {
             })
 			//点击赎回
 			mui("body").on('mdClick', '.redeemBtn', function(e) {
-				window.location.href = site_url.redemptionBuy_url;			
+				window.location.href = site_url.redemptionBuy_url + "?fundCode=" + that.data.fundCode;			
 			},{
                 'htmdEvt': 'optionalPublicDetail_8'
             })
