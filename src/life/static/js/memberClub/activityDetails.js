@@ -103,9 +103,7 @@ $(function() {
                     url: site_url.user_api,
                     data: {
                         hmac: "", //预留的加密信息     
-                        params: {
-                            //uuid: sessionStorage.getItem('uuid') //'EE7CA9386715CBF3BAB30CD479697D72' //sessionStorage.getItem('uuid') //客户Id,打开登录页面链接带过来的参数uuid
-                        }
+                        params: {}
                     },
                     needLogin: true,
                     // async: false, //同步

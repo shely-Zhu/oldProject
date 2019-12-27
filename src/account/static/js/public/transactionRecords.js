@@ -68,17 +68,22 @@ $(function () {
                 this.initMui(that.gV.ajaxdata);
             } else {
                 //返回按钮不会清空transactionRecordsAjaxData的值
-                that.gV.ajaxdata = JSON.parse(getCookie("transactionRecordsAjaxData"));
+                var transactionRecordsAjaxDataCookie = getCookie("transactionRecordsAjaxData")
+                var baseTransactionRecordsAjaxDataCookie = new Base64().decode(transactionRecordsAjaxDataCookie)
+                that.gV.ajaxdata = JSON.parse(baseTransactionRecordsAjaxDataCookie);
+
+                var transactionRecordsShowDataCookie = getCookie("transactionRecordsShowData")
+                var baseTransactionRecordsShowDataCookie = new Base64().decode(transactionRecordsShowDataCookie)
                 // 赋值选中状态
-                that.gV.selectedAll = getCookie("transactionRecordsShowData").split(',')[0]
-                that.gV.selectedstatus = getCookie("transactionRecordsShowData").split(',')[1]
-                that.gV.selectedTime = getCookie("transactionRecordsShowData").split(',')[2]
-                that.gV.selectedBankCard = getCookie("transactionRecordsShowData").split(',')[3]
-                console.log(getCookie("transactionRecordsShowData").split(',')[4])
+                that.gV.selectedAll = baseTransactionRecordsShowDataCookie.split(',')[0]
+                that.gV.selectedstatus = baseTransactionRecordsShowDataCookie.split(',')[1]
+                that.gV.selectedTime = baseTransactionRecordsShowDataCookie.split(',')[2]
+                that.gV.selectedBankCard = baseTransactionRecordsShowDataCookie.split(',')[3]
+                console.log(baseTransactionRecordsShowDataCookie.split(',')[4])
                 // 回显选中的汉字
-                that.gV.searchTitleList[0].title = getCookie("transactionRecordsShowData").split(',')[4]
-                that.gV.searchTitleList[1].title = getCookie("transactionRecordsShowData").split(',')[5]
-                that.gV.searchTitleList[2].title = getCookie("transactionRecordsShowData").split(',')[6]
+                that.gV.searchTitleList[0].title = baseTransactionRecordsShowDataCookie.split(',')[4]
+                that.gV.searchTitleList[1].title = baseTransactionRecordsShowDataCookie.split(',')[5]
+                that.gV.searchTitleList[2].title = baseTransactionRecordsShowDataCookie.split(',')[6]
                 // 自己清空它
                 setCookie("transactionRecordsAjaxData","", -1);
                 setCookie("transactionRecordsShowData","", -1);
@@ -374,11 +379,13 @@ $(function () {
                     
                 }
                 // 存 setCookie 是详情页返回时  要保留 筛选条件的动作  transactionRecordsAjaxData  是ajax参数  transactionRecordsShowData 是回显
-                setCookie("transactionRecordsAjaxData", JSON.stringify(that.gV.ajaxdata));
-                setCookie("transactionRecordsShowData", JSON.stringify(that.gV.selectedAll) + ','
+                var transactionRecordsAjaxData = JSON.stringify(that.gV.ajaxdata)
+                var transactionRecordsShowData = JSON.stringify(that.gV.selectedAll) + ','
                         + JSON.stringify(that.gV.selectedstatus) + ',' + that.gV.selectedTime + ','
                         + JSON.stringify(that.gV.selectedBankCard) + ',' + $('#recordSearchWrapper .searchItem').eq(0).children('span').text() +
-                        ',' + $('#recordSearchWrapper .searchItem').eq(1).children('span').text() + ',' + $('#recordSearchWrapper .searchItem').eq(2).children('span').text());
+                        ',' + $('#recordSearchWrapper .searchItem').eq(1).children('span').text() + ',' + $('#recordSearchWrapper .searchItem').eq(2).children('span').text()
+                setCookie("transactionRecordsAjaxData", new Base64().encode(transactionRecordsAjaxData));
+                setCookie("transactionRecordsShowData", new Base64().encode(transactionRecordsShowData));
 
             },{
                 'htmdEvt': 'transactionRecords_2'
