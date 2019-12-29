@@ -210,13 +210,14 @@ $(function () {
                 var index = $(this).parent().parent().parent().index();
                 var id = $(this).parent().parent().parent().parent().attr("id")
                 var tradeNo = $(this).parent().parent().parent().attr("data-tradeNo")
+                var fundCode = $(this).parent().parent().parent().attr("data-fundCode")
                 if(id =="cashPageLists" ){
                     //现金宝
                     var fundCode = that.gV.data.cashDetails[index].fundCode
                     var productName = that.gV.data.cashDetails[index].fundName
                     window.location.href = site_url.pofCashTransformOut_url + '?fundCode=' + fundCode + '&productName=' + new Base64().encode(productName);
                 }else if(id == "pageLists"){
-                     window.location.href = site_url.redemptionBuy_url + '?tradeNo=' + tradeNo;
+                     window.location.href = site_url.redemptionBuy_url + '?tradeNo=' + tradeNo + "&fundCode=" + fundCode
                 }else{
                     return false
                 }
