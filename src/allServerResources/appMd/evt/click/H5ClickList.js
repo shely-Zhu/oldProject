@@ -209,6 +209,11 @@ var clickList = {
 	"fundTransformIn_16" : { type:'click', evtid: 'fundTransformIn_16', topic: '现金转入-添加银行卡--跳往原生', info: ''} ,
 	"fundTransformIn_17" : { type:'click', evtid: 'fundTransformIn_17', topic: '现金转入-基金合同,募说明书', info: ''} ,
 	"fundTransformIn_18" : { type:'click', evtid: 'fundTransformIn_18', topic: '现金转入-键盘', info: ''} ,
+	"fundTransformIn_20" : { type:'click', evtid: 'fundTransformIn_20', topic: '现金转入-风险揭示函_知道了', info: ''} ,
+	"fundTransformIn_21" : { type:'click', evtid: 'fundTransformIn_21', topic: '现金转入-返回', info: ''} ,
+	// 组件弹层的点击事件
+	"fundTransformIn_19" : { type:'click', evtid: 'fundTransformIn_19', topic: '现金转入-风险揭示函', info: ''} ,
+
 	//我的定投计划 myInvestmentPlan.html
 	"myInvestmentPlan_01" : { type:'click', evtid: 'myInvestmentPlan_01', topic: '定投计划-新增 跳原生定投排行页', info: ''} ,
 	"myInvestmentPlan_02" : { type:'click', evtid: 'myInvestmentPlan_02', topic: '定投计划-跳转详情页', info: ''} ,
@@ -220,6 +225,12 @@ var clickList = {
 	"newFundDetail_1" : { type:'click', evtid: 'newFundDetail_1', topic: '新发基金-基金经理', info: ''} ,
 	"newFundDetail_2" : { type:'click', evtid: 'newFundDetail_2', topic: '新发基金-基金公司', info: ''} ,
 	"newFundDetail_3" : { type:'click', evtid: 'newFundDetail_3', topic: '新发基金-立即购买', info: ''} ,
+	"newFundDetail_4" : { type:'click', evtid: 'newFundDetail_4', topic: '新发基金-风测等级匹配成功', info: ''} ,
+	"newFundDetail_5" : { type:'click', evtid: 'newFundDetail_5', topic: '新发基金-风险等级匹配失败', info: ''} ,
+	"newFundDetail_6" : { type:'click', evtid: 'newFundDetail_6', topic: '新发基金-风险等级匹配失败结果跳转', info: ''} ,
+	"newFundDetail_7" : { type:'click', evtid: 'newFundDetail_7', topic: '新发基金-认证', info: ''} ,
+	"newFundDetail_8" : { type:'click', evtid: 'newFundDetail_8', topic: '新发基金-一键认证', info: ''} ,
+	// 组件弹层的点击事件
 	//定投
 	"ordinarySetThrow_01" : { type:'click', evtid: 'ordinarySetThrow_01', topic: '定投-打开银行卡列表', info: ''} ,
 	"ordinarySetThrow_02" : { type:'click', evtid: 'ordinarySetThrow_02', topic: '定投-关闭银行卡列表', info: ''} ,
@@ -240,6 +251,7 @@ var clickList = {
 	"ordinarySetThrow_17" : { type:'click', evtid: 'ordinarySetThrow_17', topic: '定投-基金合同', info: ''} ,
 	"ordinarySetThrow_18" : { type:'click', evtid: 'ordinarySetThrow_18', topic: '定投-键盘', info: ''} ,
 	"ordinarySetThrow_19" : { type:'click', evtid: 'ordinarySetThrow_19', topic: '定投-周期选择', info: ''} ,
+	"ordinarySetThrow_20" : { type:'click', evtid: 'ordinarySetThrow_20', topic: '定投-返回', info: ''} ,
 	// publicDetail.html  公募产品详情页
 	"publicDetail_01" : { type:'click', evtid: 'publicDetail_01', topic: '公募产品详情页-基金经理', info: ''} ,
 	"publicDetail_02" : { type:'click', evtid: 'publicDetail_02', topic: '公募产品详情页-基金公司', info: ''} ,
@@ -252,9 +264,12 @@ var clickList = {
 	"publicDetail_09" : { type:'click', evtid: 'publicDetail_09', topic: '公募产品详情页-一键认证', info: ''} ,
 	"publicDetail_10" : { type:'click', evtid: 'publicDetail_10', topic: '公募产品详情页-七日年华 万份收益', info: ''} ,
 	"publicDetail_11" : { type:'click', evtid: 'publicDetail_11', topic: '公募产品详情页-折线图切换', info: ''} ,
-	"publicDetail_12" : { type:'click', evtid: 'publicDetail_12', topic: '公募产品详情页-//人工服务', info: ''} ,
+	// "publicDetail_12" : { type:'click', evtid: 'publicDetail_12', topic: '公募产品详情页-//人工服务', info: ''} ,
 	"publicDetail_13" : { type:'click', evtid: 'publicDetail_13', topic: '公募产品详情页-分享--跳往原生页面', info: ''} ,
 	"publicDetail_14" : { type:'click', evtid: 'publicDetail_14', topic: '公募产品详情页-加自选', info: ''} ,
+	"publicDetail_15" : { type:'click', evtid: 'publicDetail_15', topic: '公募产品详情页-风测等级匹配成功', info: ''} ,
+	"publicDetail_16" : { type:'click', evtid: 'publicDetail_16', topic: '公募产品详情页-风险等级匹配失败', info: ''} ,
+	"publicDetail_17" : { type:'click', evtid: 'publicDetail_17', topic: '公募产品详情页-风险等级匹配失败结果跳转', info: ''} ,
 
 	//赎回
 	"redemptionBuy_01" : { type:'click', evtid: 'redemptionBuy_01', topic: '赎回-打开银行卡列表', info: ''} ,
@@ -268,6 +283,7 @@ var clickList = {
 	"redemptionBuy_09" : { type:'click', evtid: 'redemptionBuy_09', topic: '赎回-点击同意协议', info: ''} ,
 	"redemptionBuy_10" : { type:'click', evtid: 'redemptionBuy_10', topic: '赎回-忘记密码跳转', info: ''} ,
 	"redemptionBuy_11" : { type:'click', evtid: 'redemptionBuy_11', topic: '赎回-明白了', info: ''} ,
+	"redemptionBuy_12" : { type:'click', evtid: 'redemptionBuy_12', topic: '赎回-明白了', info: ''} ,
 	//转入结果  surelyResults.html
 	"surelyResults_01" : { type:'click', evtid: 'surelyResults_01', topic: '定投结果-跳往现金宝管理页面', info: ''} ,
 	//买入结果  surelyResultsDetail.html
