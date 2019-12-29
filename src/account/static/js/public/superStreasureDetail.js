@@ -143,8 +143,8 @@ $(function() {
                     }
                 },
                 yAxis: {
-                    max:that.gL.maxNum,
-                    min:that.gL.minNum,
+                    max:maxNum,
+                    min:minNum,
                     axisTick: {
                         show: false
                     },
@@ -164,7 +164,7 @@ $(function() {
                                 return value.toFixed(4) + '%';
                             // }
                         },
-                    },
+                    }
                 },
                 series: [{
                     type: 'line',
