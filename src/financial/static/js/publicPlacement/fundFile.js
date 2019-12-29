@@ -162,7 +162,7 @@ $(function () {
                     {
                         name: '',
                         type: 'pie',
-                        radius: ['46%', '70%'],
+                        radius: ['45%', '70%'],
                         center: ['30%', '47%'],
                         avoidLabelOverlap: false,
                         hoverAnimation: false,

@@ -709,12 +709,12 @@ $(function () {
             myChart.setOption({
                 tooltip: {
                     trigger: 'axis',
-                    formatter: '<p style="font-size:0.36rem;color: #DAB57C;">{c}</p><p style="font-size:0.24rem;color:#4A4A4A">{b}</p>',
+                    formatter: '<p style="font-size:0.36rem;color: #1F3781;">{c}</p><p style="font-size:0.24rem;color:#4A4A4A">{b}</p>',
                     backgroundColor: 'rgba(218,181,124, 0.1)',
                     // renderMode : 'richText', 
                     extraCssText: [7, 15, 15, 15],
                     textStyle: {
-                        color: '#FADFBB'
+                        color: '#5B83FF'
                     },
                     confine: true,
                     axisPointer: {
@@ -727,11 +727,14 @@ $(function () {
                                 x2: 0,
                                 y2: 1,
                                 colorStops: [{
-                                    offset: 0, color: '#fff' // 0% 处的颜色
+                                    offset: 0,
+                                    color: '#fff' // 0% 处的颜色
                                 }, {
-                                    offset: 0.5, color: '#F1CDA8' // 0% 处的颜色
+                                    offset: 0.5,
+                                    color: '#081F6B' // 0% 处的颜色
                                 }, {
-                                    offset: 1, color: '#D2B280' // 0% 处的颜色
+                                    offset: 1,
+                                    color: '#5B83FF' // 0% 处的颜色
                                 }],
                                 global: false // 缺省为 false
                             }
@@ -750,7 +753,7 @@ $(function () {
                     data: xAxisData,
                     axisLine: {
                         lineStyle: {
-                            color: '#FADFBB'
+                            color: '#e5e5e5'
                         }
                     },
                     axisLabel: {
@@ -773,7 +776,7 @@ $(function () {
                     },
                     splitLine: {
                         lineStyle: {
-                            color: '#FADFBB'
+                            color: '#e5e5e5'
                         }
                     },
                     axisLabel: {
@@ -785,7 +788,7 @@ $(function () {
                 series: [{
                     type: 'line',
                     lineStyle: {
-                        color: '#FADFBB'
+                       color: '#677EC4'
                     },
                     itemStyle: {
                         show: false
@@ -800,9 +803,11 @@ $(function () {
                                 x2: 0,
                                 y2: 1,
                                 colorStops: [{
-                                    offset: 0, color: '#F2E3CA' // 0% 处的颜色
+                                    offset: 0,
+                                    color: '#5B83FF' // 0% 处的颜色
                                 }, {
-                                    offset: 1, color: '#fff' // 100% 处的颜色
+                                    offset: 1,
+                                    color: '#fff' // 100% 处的颜色
                                 }],
                                 global: false // 缺省为 false
                             }
