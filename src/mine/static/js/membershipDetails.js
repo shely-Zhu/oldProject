@@ -20,7 +20,7 @@ $(function(){
 		},
 		//全局变量
 		gV:{
-            index:splitUrl['index'], // 用户点击的第几个icon，从0开始
+            index:splitUrl['index']?splitUrl['index']:"", // 用户点击的第几个icon，从0开始
         },
 		//页面初始化函数
 		init:function(){
