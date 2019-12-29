@@ -39,7 +39,8 @@ $(function() {
             var obj = [{
                 url: site_url.pofAssessList_api,
                 data: {
-                    tradeAcc:splitUrl["tradeNo"]
+                    tradeAcc:splitUrl["tradeNo"],
+                    fundCode: splitUrl["fundCode"]
                 },
                 callbackDone: function(json) {
 				   var jsonData = json.data[0] || []

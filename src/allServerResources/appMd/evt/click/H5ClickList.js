@@ -314,6 +314,7 @@ var clickList = {
 	"publicAssets_9":{ type:'click', evtid: 'publicAssets_9', topic: '公募资产_关闭资产组合说明', info: ''},
 	"publicAssets_10":{ type:'click', evtid: 'publicAssets_10', topic: '公募资产_关闭资产组合说明', info: ''},
 
+	// privateDetail.html
 	"privateDetail_0":{ type:'click', evtid: 'privateDetail_0', topic: '私募资产详情_详情的展开与收起', info: ''},
 	"privateDetail_1":{ type:'click', evtid: 'privateDetail_1', topic: '私募资产详情_交易明细跳转', info: ''},
 	"privateDetail_2":{ type:'click', evtid: 'privateDetail_2', topic: '私募资产详情_收益分配明细跳转', info: ''},
@@ -327,7 +328,12 @@ var clickList = {
 	"privateDetail_10":{ type:'click', evtid: 'privateDetail_10', topic: '私募资产详情_赎回按钮点击切换', info: ''},
 	"privateDetail_11":{ type:'click', evtid: 'privateDetail_11', topic: '私募资产详情_赎回页面跳转', info: ''},
 	"privateDetail_12":{ type:'click', evtid: 'privateDetail_12', topic: '私募资产详情_折线图点击七日年化/万份收益切换区域', info: ''},
+	// 组件弹层的点击事件
+	"privateDetail_13":{ type:'click', evtid: 'privateDetail_13', topic: '赎回页面_账户冻结_确认', info: ''},
+	"privateDetail_14":{ type:'click', evtid: 'privateDetail_14', topic: '赎回确认', info: ''},
+	"privateDetail_15":{ type:'click', evtid: 'privateDetail_15', topic: '赎回取消', info: ''},
 
+	// privateDetailList.html
 	"privateDetailList_0":{ type:'click', evtid: 'privateDetailList_0', topic: '私募交易详情_筛选按钮点击', info: ''},
 	"privateDetailList_1":{ type:'click', evtid: 'privateDetailList_1', topic: '私募交易详情_筛选区域筛选项点击', info: ''},
 	"privateDetailList_2":{ type:'click', evtid: 'privateDetailList_2', topic: '私募交易详情_点击遮罩隐藏', info: ''},
@@ -336,9 +342,23 @@ var clickList = {
 	"privateDetailList_5":{ type:'click', evtid: 'privateDetailList_5', topic: '私募交易详情_点击状态文字出现弹框', info: ''},
 	"privateDetailList_6":{ type:'click', evtid: 'privateDetailList_6', topic: '私募交易详情_详情按钮点击', info: ''},
 	"privateDetailList_7":{ type:'click', evtid: 'privateDetailList_7', topic: '私募交易详情_点击每一条进入详情', info: ''},
+	// 组件弹层的点击事件
+	"privateDetailList_8":{ type:'click', evtid: 'privateDetailList_8', topic: '取消转让申请_确定', info: ''},
+	"privateDetailList_9":{ type:'click', evtid: 'privateDetailList_9', topic: '取消转让申请_取消', info: ''},
+	"privateDetailList_10":{ type:'click', evtid: 'privateDetailList_10', topic: '取消受让申请_确定', info: ''},
+	"privateDetailList_11":{ type:'click', evtid: 'privateDetailList_11', topic: '取消受让申请_取消', info: ''},
+	"privateDetailList_12":{ type:'click', evtid: 'privateDetailList_12', topic: '取消预约_确定', info: ''},
+	"privateDetailList_13":{ type:'click', evtid: 'privateDetailList_13', topic: '取消预约_取消', info: ''},
+	"privateDetailList_14":{ type:'click', evtid: 'privateDetailList_14', topic: '取消预约_取消', info: ''},
 
+	// privateFundPdf.html
 	"privateFundPdf_0":{ type:'click', evtid: 'privateFundPdf_0', topic: '私募基金确认书_点击下载', info: ''},
 	"privateFundPdf_1":{ type:'click', evtid: 'privateFundPdf_1', topic: '私募基金确认书_点击修改邮箱', info: ''},
+	// 组件弹层的点击事件
+	"privateFundPdf_2":{ type:'click', evtid: 'privateFundPdf_2', topic: '私募基金确认书_邮箱变更_确认', info: ''},
+	"privateFundPdf_3":{ type:'click', evtid: 'privateFundPdf_3', topic: '私募基金确认书_邮箱变更_取消', info: ''},
+	"privateFundPdf_4":{ type:'click', evtid: 'privateFundPdf_4', topic: '私募基金确认书_输入指定邮箱_确认', info: ''},
+	"privateFundPdf_5":{ type:'click', evtid: 'privateFundPdf_5', topic: '私募基金确认书_输入指定邮箱_取消', info: ''},
 
 	"tobeConfirmTransaction_0":{ type:'click', evtid: 'tobeConfirmTransaction_0', topic: '待确认交易_筛选按钮点击', info: ''},
 	"tobeConfirmTransaction_1":{ type:'click', evtid: 'tobeConfirmTransaction_1', topic: '待确认交易_筛选区域条件点击', info: ''},
@@ -409,8 +429,7 @@ var clickList = {
 
 	/************************************** life end *************************************************/
 
-	"redeemBtnYes":{ type:'click', evtid: 'redeemBtnYes', topic: '赎回确认', info: ''},
-	"redeemBtnCel":{ type:'click', evtid: 'redeemBtnCel', topic: '赎回取消', info: ''},
+	
 }
 
 module.exports = clickList;

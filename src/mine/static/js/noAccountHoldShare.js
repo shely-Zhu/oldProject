@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2019-12-27 10:17:54
- * @LastEditTime : 2019-12-27 12:42:44
+ * @LastEditTime : 2019-12-29 11:17:29
  * @LastEditors  : Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \htjf-app\src\mine\static\js\noAccountHoldShare.js
@@ -70,17 +70,14 @@ $(function() {
                                 //风险等级匹配
                                 $(".isRiskMatchBox_match").show()
                                 $(".isRiskMatchBox_noMatch").hide()
-                                $(".isRiskMatchBox_header").html("你选择的产品与您现在的风险承受能力相匹配")
                             }else if(jsonData.isRiskMatch == "0"){
                                 $(".isRiskMatchBox_noMatch").show()
                                 $(".isRiskMatchBox_match").hide()
-                                $(".isRiskMatchBox_header").html("你选择的产品与您现在的风险承受能力不相匹配")
                                 $(".isRiskMatchResult").html("查看评测结果")
                                 $(".isRiskMatchResult").attr("type","noRisk")
                             }else if(jsonData.isRiskMatch == "2"){
                                 $(".isRiskMatchBox_noMatch").show()
                                 $(".isRiskMatchBox_match").hide()
-                                $(".isRiskMatchBox_header").html("您的风险测评已过期,请重新进行风险测评")
                                 $(".isRiskMatchResult").html("重新风测")
                                 $(".isRiskMatchResult").attr("type","repeatRisk")
                             }
@@ -157,7 +154,7 @@ $(function() {
                     $(".isRiskMatch_mask").hide();
                     $(".isRiskMatchBox").hide();
                     //wealthIndex_url
-                    window.location.href = site_url.addAccountDiagnosisResult_url
+                    window.location.href = site_url.applyHistory_url;
                  })
    
                 //风险等级匹配失败
@@ -235,6 +232,11 @@ $(function() {
                             break;
                     }
                 });
+                mui("body").on('mdClick',".icontips-close",function(){
+                  
+                   $("#tips-wrap").hide()
+                
+                })
         
        },
       
