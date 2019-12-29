@@ -1,15 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2019-11-26 14:42:56
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
- * @LastEditTime : 2019-12-24 18:14:30
-=======
  * @LastEditTime: 2019-12-18 14:52:02
->>>>>>> Stashed changes
-=======
- * @LastEditTime: 2019-12-18 14:52:02
->>>>>>> Stashed changes
  * @LastEditors  : Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \htjf-app\src\financial\static\js\publicPlacement\redemptionBuy.js
@@ -324,7 +316,7 @@ $(function() {
 
             //赎回确认
             mui("body").on('mdClick','.confirmeDemptionPay',function(){      
-        // $(".confirmeDemptionPay").on('click',function(){
+            // $(".confirmeDemptionPay").on('click',function(){
                 $(".pwd-input").val('')
                 $(".fake-box input").val('');
                 $(".msecond input").blur();
@@ -335,31 +327,33 @@ $(function() {
                 htmdEvt: 'redemptionBuy_08'
             })
 
-        //忘记密码跳转
-        mui("body").on("mdClick",".passwordTop .forgetP",function(){
-            window.location.href = site_url.pofForgotPassword_url
-        })
-        // $(".msecond input").change(function(){
-        $(".msecond input").on('input propertychange',function(){
-             that.gv.nowRedempShare = $(this)[0].value;
-             if(parseFloat(that.gv.maxRedempShare)< parseFloat (that.gv.nowRedempShare)){
-               //  $(".checkMessage").css({"display":"block"});
-                // $(".checkMessage").html("超出最大赎回份额")
-                tipAction("超出最大赎回份额"+that.gv.maxRedempShare)
-                return
-             }else{
-                $(".checkMessage").css({"display":"none"});
-             }
-             if($(this)[0].value == ""){
-                that.getElements.confirmBtn.attr('disabled',true)
-             }else{
-                that.getElements.confirmBtn.removeAttr("disabled"); 
-             }
+            //忘记密码跳转
+            mui("body").on("mdClick",".passwordTop .forgetP",function(){
+                window.location.href = site_url.pofForgotPassword_url
+            },{
+                htmdEvt: 'redemptionBuy_12'
+            })
+            // $(".msecond input").change(function(){
+            $(".msecond input").on('input propertychange',function(){
+                that.gv.nowRedempShare = $(this)[0].value;
+                if(parseFloat(that.gv.maxRedempShare)< parseFloat (that.gv.nowRedempShare)){
+                    //  $(".checkMessage").css({"display":"block"});
+                    // $(".checkMessage").html("超出最大赎回份额")
+                    tipAction("超出最大赎回份额"+that.gv.maxRedempShare)
+                    return
+                }else{
+                    $(".checkMessage").css({"display":"none"});
+                }
+                if($(this)[0].value == ""){
+                    that.getElements.confirmBtn.attr('disabled',true)
+                }else{
+                    that.getElements.confirmBtn.removeAttr("disabled"); 
+                }
             })
 
             //点击同意协议
             mui("body").on('mdClick','.item2 .iconfont',function(){ 
-			//that.getElements.iconCheck.on('click', function() {
+    		//that.getElements.iconCheck.on('click', function() {
                 that.gv.nowRedempShare = $(".msecond input")[0].value;   
                 if ($(this).hasClass("check")) {
                     $(this).removeClass("check").html('&#xe668;');
@@ -376,7 +370,7 @@ $(function() {
     		}, {
     			htmdEvt: 'redemptionBuy_09'
     		});
-             //忘记密码跳转
+                 //忘记密码跳转
             mui("body").on("mdClick",".passwordTop .forgetP",function(){
                 window.location.href = site_url.pofForgotPassword_url
             },{
