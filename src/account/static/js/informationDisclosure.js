@@ -170,8 +170,7 @@ var prvMar = {
             async: false,
             contentTypeSearch: false,
             callbackDone: function(json) {
-                var json = json.data;
-                debugger
+                var json = json.data;     
                 $.each(json, function(i, el) {
                     el.name = el.fileName.substring(0, el.fileName.indexOf("】") + 1);
                     el.marName = el.fileName.substring(el.fileName.indexOf("】") + 1);
