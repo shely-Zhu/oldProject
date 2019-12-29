@@ -54,9 +54,23 @@ body{
 	    	margin-top: .3rem;
 	    	.itemTitle {
 	    		font-size: .28rem;
-	    		line-height: .4rem;
 	    		color: @272727;
 	    		padding: .32rem .15rem .19rem 0;
+	    		display: flex;
+	    		.itemBadgeCon {
+	    			height: .4rem;
+	    			display: flex;
+	    			justify-content: space-between;
+	    			align-items: center;
+	    			margin-right: .14rem;
+	    			.itemBadge {
+		    			width: 0.12rem;
+		    			height: 0.12rem;
+		    		}
+	    		}
+	    		.itemTitleWords {
+	    			line-height: .4rem;
+	    		}
 	    	}
 	    	.itemContent {
 	    		padding-bottom: .17rem;
