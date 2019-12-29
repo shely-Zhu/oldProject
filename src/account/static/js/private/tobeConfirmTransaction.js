@@ -226,6 +226,8 @@ $(function() {
                             celTxt: '取消',
                             hideCelButton: false,
                             zIndex: 100,
+                            htmdEvtYes:'tobeConfirmTransaction_7',  // 埋点确定按钮属性
+                            htmdEvtCel:'tobeConfirmTransaction_8',  // 埋点取消按钮属性
                             callback: function(t) {
 
                             }
@@ -240,6 +242,8 @@ $(function() {
                             celTxt: '取消',
                             hideCelButton: false,
                             zIndex: 100,
+                            htmdEvtYes:'tobeConfirmTransaction_9',  // 埋点确定按钮属性
+                            htmdEvtCel:'tobeConfirmTransaction_10',  // 埋点取消按钮属性
                             callback: function(t) {
 
                             },
@@ -252,6 +256,8 @@ $(function() {
                             celTxt: '取消',
                             hideCelButton: false,
                             zIndex: 100,
+                            htmdEvtYes:'tobeConfirmTransaction_11',  // 埋点确定按钮属性
+                            htmdEvtCel:'tobeConfirmTransaction_12',  // 埋点取消按钮属性
                             callback: function(t) {
                                 var obj = [{
                                     url: site_url.fundReserveCancel_api,
@@ -298,6 +304,7 @@ $(function() {
                         yesTxt: '我明白了',
                         hideCelButton: true,
                         zIndex: 100,
+                        htmdEvtYes:'tobeConfirmTransaction_13',  // 埋点确定按钮属性
                         callback: function(t) {
 
                         },

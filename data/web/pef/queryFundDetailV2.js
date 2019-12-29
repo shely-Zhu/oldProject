@@ -59,7 +59,7 @@ var data = Mock.mock({
         "productCustomerRiskType": "1",  //产品对应客户风险等级类型：1-私募风险等级 2-专项风险等级
         "productRiskLimit": "0",  //是否启用风测限制【0：否，1：是】（V3.13.0）
         "productLightspot": "这里是一句话产品详情介绍",  //一句话介绍（产品亮点）
-        "projectLable":"关注度高|电子合同",  //产品特点标签(‘|’拼接)
+        "projectLable":['关注度高','电子合同'],  //产品特点标签 返回数组
         "managementFee":"",   //管理费
         "trusteeFee": "",  //托管费
         "isVideo": "",  //是否需要面签 0否 1是
