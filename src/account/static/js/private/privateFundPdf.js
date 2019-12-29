@@ -111,6 +111,8 @@ $(function(){
 	                        '<p class="otherColor" id="changeMail">邮箱有变更，去修改</p>',
 	                    yesTxt:'确认',
 	                    celTxt:'取消',
+                        htmdEvtYes:'privateFundPdf_2',  // 埋点确定按钮属性
+                        htmdEvtCel:'privateFundPdf_3',  // 埋点取消按钮属性
 	                    zIndex: 1200,
 	                    callback:function(t){
 	                        if(that.data.email){
@@ -150,6 +152,8 @@ $(function(){
 	                        '<p class=""><input class="emailInput" placeholder="请输入指定邮箱如 123@qq.com" type="text" /></p>',
 	                    yesTxt:'确认',
 	                    celTxt:'取消',
+                        htmdEvtYes:'privateFundPdf_4',  // 埋点确定按钮属性
+                        htmdEvtCel:'privateFundPdf_5',  // 埋点取消按钮属性
 	                    zIndex: 1200,
 	                    callback:function(t){
                             var emailObj = [{

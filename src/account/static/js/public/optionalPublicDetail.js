@@ -180,7 +180,7 @@ $(function() {
 			       		newData.unitNavValue.push( el.unitNav);//单位净值
 			       		newData.unitYldValue.push( el.accuUnitNav);//累计净值
 			       	})
-			       	switch(num) {
+			       	switch(Number(num)) {
 			       		case 0: that.data['qrnhWfsy'].oneMonth = newData;break;
 			       		case 1: that.data['qrnhWfsy'].threeMonth = newData;break;
 			       		case 2: that.data['qrnhWfsy'].sixMonth = newData;break;
@@ -350,7 +350,8 @@ $(function() {
             var obj = [{
                 url: site_url.pofAssessList_api,
                 data: {
-                    tradeAcc:splitUrl["tradeNo"]
+                    tradeAcc:splitUrl["tradeNo"],
+                    fundCode: splitUrl["fundCode"]
                 },
                 callbackDone: function(json) { //成功后执行的函数
 				//   console.log(json.data[0])
@@ -651,7 +652,7 @@ $(function() {
             })
 //			分红方式跳转
 			mui("body").on('mdClick', '.dividend', function() {
-				window.location.href = site_url.bonusMethod_url + "?tradeNo=" + splitUrl['tradeNo'];
+				window.location.href = site_url.bonusMethod_url + "?tradeNo=" + splitUrl['tradeNo'] + '&fundCode=' + that.data.fundCode;
 			},{
                 'htmdEvt': 'optionalPublicDetail_4'
             })
