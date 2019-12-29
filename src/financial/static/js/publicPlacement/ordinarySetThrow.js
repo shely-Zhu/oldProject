@@ -18,7 +18,7 @@ var popPicker = require('@pathCommonJsCom/popPicker.js');
 var generateTemplate = require('@pathCommonJsComBus/generateTemplate.js');
 
 var payPass = require('@pathCommonJsCom/payPassword.js');
-var getCookie = require('@pathNewCommonJsCom/getCookie.js');
+//var getCookie = require('@pathNewCommonJsCom/getCookie.js');
 
 $(function () {
 
@@ -43,7 +43,7 @@ $(function () {
 		gV: { // 全局变量
 			//------add-----
 			fundBusinCode:'039',
-			custType:getCookie('custType') ? getCookie('custType') : '1',   // 交易来源
+			//custType:getCookie('custType') ? getCookie('custType') : '1',   // 交易来源
 			scheduledProtocolId: splitUrl['scheduledProtocolId'] ? splitUrl['scheduledProtocolId'] : '201911270201',
 			type: splitUrl['type'] ? splitUrl['type'] : 'edit', // add添加  edit 编辑
 			//type:"add",
