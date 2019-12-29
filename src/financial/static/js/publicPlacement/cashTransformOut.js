@@ -1,7 +1,8 @@
 /*
  * @Author: your name
  * @Date: 2019-11-26 14:42:56
- * @LastEditTime : 2019-12-27 13:54:04
+ * @LastEditTime : 2019-12-29 10:18:24
+ * @LastEditTime : 2019-12-29 10:08:22
  * @LastEditors  : Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \htjf-app\src\financial\static\js\publicPlacement\cashTransformOut.js
@@ -177,7 +178,10 @@ $(function () {
 					 that.$e.el_defaultBankName[0].textContent =defaultCarData.bankName;
 					 that.$e.el_defaultBankImgUrl.attr("src",defaultCarData.bankThumbnailUrl);
 					 that.$e.el_defaultBankCode[0].textContent =defaultCarData.bankAccountMask.substr(-4);
-                     that.$e.el_singleNum[0].textContent = defaultCarData.availableShare;
+					 that.$e.el_singleNum[0].textContent = defaultCarData.availableShare;
+					 that.gv.transformTotalMoney = defaultCarData.availableShare;
+					 that.gv.transformMoney = defaultCarData.availableShare;
+					 that.$e.el_transformInput.val(that.gv.transformMoney);
 					 generateTemplate(that.gv.cashList, that.$e.TransferFundsContent, that.$e.templateTransferFunds);
 				 }
 
@@ -293,14 +297,19 @@ $(function () {
            
 		   //银行卡单选
 		   mui("body").off("mdClick",".cashCheckItem").on('mdClick','.cashCheckItem',function(){
-			   $(this).find(".imgLogo").attr("src",that.gv.checkImgUrl);
-			   $(this).siblings().find(".imgLogo").attr("src","");
+			//   $(this).find(".imgLogo").attr("src",that.gv.checkImgUrl);
+			  // $(this).siblings().find(".imgLogo").attr("src","");
+			   $(this).find(".radioCheckItemImg").show();
+			   $(this).siblings().find(".radioCheckItemImg").hide();
 			   that.gv.defaultBankNo = $(this).attr("bankNo"); //默认银行代码
 			   that.gv.defaultBankAccount = $(this).attr("bankAccount"); //默认银行账号
 			   that.gv.defaultTradeAcco = $(this).attr("tradeAcco");  // 默认交易账号
 			   that.gv.defaultCapitalMode = $(this).attr("capitalMode"); // 默认资金方式
 			 
 			   that.$e.el_singleNum[0].textContent = $(this).attr('singleNum');
+			   that.gv.transformTotalMoney =  $(this).attr('singleNum');
+			    that.gv.transformMoney =  $(this).attr('singleNum');
+				that.$e.el_transformInput.val(that.gv.transformMoney);
 			   
 			   that.$e.el_defaultBankName[0].textContent = $(this).attr("bankName");
 			   that.$e.el_defaultBankImgUrl.attr("src",$(this).attr("bankLogoUrl"));
