@@ -12,9 +12,9 @@ require('@pathCommonJs/ajaxLoading.js');
 // 切换
 require('@pathCommonJsCom/tabScroll.js');
 require('@pathCommonJsCom/goTopMui.js');
-require('@pathCommonCom/elasticLayer/elasticLayer/elasticLayer.js');
+// require('@pathCommonCom/elasticLayer/elasticLayer/elasticLayer.js');
 /*require('@pathCommonJs/components/elasticLayerTypeFive.js');*/
-require('@pathCommonJs/components/headBarConfig.js');
+// require('@pathCommonJs/components/headBarConfig.js');
 var splitUrl = require('@pathCommonJs/components/splitUrl.js')();
 var alwaysAjax = require('@pathCommonJs/components/alwaysAjax.js');
 

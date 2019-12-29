@@ -17,7 +17,7 @@ require('@pathCommonJs/components/authenticationProcess.js');
 //引入弹出层
 require('@pathCommonCom/elasticLayer/elasticLayer/elasticLayer.js');
 
-require('@pathCommonJs/components/headBarConfig.js');
+// require('@pathCommonJs/components/headBarConfig.js');
 var generateTemplate = require('@pathCommonJsComBus/generateTemplate.js');
 var getCookie = require('@pathNewCommonJsCom/getCookie.js');
 var Base64 = require('@pathIncludJs/vendor/base64/base64.js');
@@ -670,7 +670,7 @@ $(function() {
 			})
 			
                //风测等级匹配成功
-			   mui("body").on('mdClick',".isRiskMatchBox_match",function(){
+			mui("body").on('mdClick',".isRiskMatchBox_match",function(){
 				var type = that.gV.singleaAuthenType;
 				$(".isRiskMatch_mask").hide();
 				$(".isRiskMatchBox").hide();
@@ -681,6 +681,8 @@ $(function() {
 					//定投一键认证
 					window.location.href = site_url.ordinarySetThrow_url+"?fundCode="+that.data.fundCode;;			
 			   }
+			},{
+				'htmdEvt': 'optionalPublicDetail_11'
 			})
 
 			//风险等级匹配失败
@@ -688,6 +690,8 @@ $(function() {
 				$(".isRiskMatch_mask").hide();
 				$(".isRiskMatchBox").hide();
 			  // that.gV.isRiskMatchBox.hide();
+			},{
+				'htmdEvt': 'optionalPublicDetail_12'
 			})
 
 			//风险等级匹配失败结果跳转
@@ -702,6 +706,8 @@ $(function() {
                     //风测过期
                     window.location.href = site_url.riskAppraisal_url + "?type=private"
                 }
+			},{
+				'htmdEvt': 'optionalPublicDetail_13'
 			})
 
 //			收益明细跳转
@@ -718,7 +724,7 @@ $(function() {
             })
 			//点击赎回
 			mui("body").on('mdClick', '.redeemBtn', function(e) {
-				window.location.href = site_url.redemptionBuy_url + "?tradeNo=" + splitUrl['tradeNo'];			
+				window.location.href = site_url.redemptionBuy_url + "?tradeNo=" + splitUrl['tradeNo'] + "&fundCode=" + that.data.fundCode			
 			},{
                 'htmdEvt': 'optionalPublicDetail_8'
             })
@@ -730,59 +736,63 @@ $(function() {
                 'htmdEvt': 'optionalPublicDetail_9'
 			})
 			     //认证
-				 mui("body").on('mdClick', ".tips-li .tips-li-right", function (e) {
-					var type = $(this).parent().index()
-					switch (type) {
-						case 0:   //开通账户
-							window.location.href = site_url.realName_url
-							break;
-	
-						case 1:   //私募风险评测  type=private type=asset 资管风测
-							window.location.href = site_url.riskAppraisal_url + "?type=private"
-							break;
-	
-						case 2:   //完善基本信息
-							window.location.href = site_url.completeInformation_url
-							break;
-	
-						case 3:  //投资者分类
-							window.location.href = site_url.investorClassification_url
-							break;
-						case 4:  //合格投资者认证
-							window.location.href = site_url.chooseQualifiedInvestor_url
-							break;
-	
-						default:
-							break;
-					}
-				});
+			mui("body").on('mdClick', ".tips-li .tips-li-right", function (e) {
+				var type = $(this).parent().index()
+				switch (type) {
+					case 0:   //开通账户
+						window.location.href = site_url.realName_url
+						break;
+
+					case 1:   //私募风险评测  type=private type=asset 资管风测
+						window.location.href = site_url.riskAppraisal_url + "?type=private"
+						break;
+
+					case 2:   //完善基本信息
+						window.location.href = site_url.completeInformation_url
+						break;
+
+					case 3:  //投资者分类
+						window.location.href = site_url.investorClassification_url
+						break;
+					case 4:  //合格投资者认证
+						window.location.href = site_url.chooseQualifiedInvestor_url
+						break;
+
+					default:
+						break;
+				}
+			},{
+				'htmdEvt': 'optionalPublicDetail_14'
+			});
 				//一键认证
-				mui("body").on('mdClick', ".tips .tips-btn", function (e) {
-					var key = that.data.singleaAuthenPath;
-					switch (key) {
-						case "isWealthAccount":   //开通账户
-							window.location.href = site_url.realName_url
-							break;
-	
-						case "isRiskEndure":   //风险评测
-							window.location.href = site_url.riskAppraisal_url + "?type=private"
-							break;
-	
-						case "isPerfect":   //完善基本信息
-							window.location.href = site_url.completeInformation_url
-							break;
-	
-						case "isInvestFavour":  //投资者分类
-							window.location.href = site_url.investorClassification_url
-							break;
-						case "isRiskMatch":  //合格投资者认证
-							window.location.href = site_url.chooseQualifiedInvestor_url
-							break;
-	
-						default:
-							break;
-					}
-				});
+			mui("body").on('mdClick', ".tips .tips-btn", function (e) {
+				var key = that.data.singleaAuthenPath;
+				switch (key) {
+					case "isWealthAccount":   //开通账户
+						window.location.href = site_url.realName_url
+						break;
+
+					case "isRiskEndure":   //风险评测
+						window.location.href = site_url.riskAppraisal_url + "?type=private"
+						break;
+
+					case "isPerfect":   //完善基本信息
+						window.location.href = site_url.completeInformation_url
+						break;
+
+					case "isInvestFavour":  //投资者分类
+						window.location.href = site_url.investorClassification_url
+						break;
+					case "isRiskMatch":  //合格投资者认证
+						window.location.href = site_url.chooseQualifiedInvestor_url
+						break;
+
+					default:
+						break;
+				}
+			},{
+				'htmdEvt': 'optionalPublicDetail_15'
+			});
 			//点击定投
 			mui("body").on('mdClick', '.fiedBtn', function(e) {
 				that.getConditionsOfOrder("investement");

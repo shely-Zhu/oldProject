@@ -142,7 +142,7 @@ $(function () {
         bankEvents: function () { //绑定事件
             var that = this;
             //点击筛选银行卡
-            $('#bank_screen').on('click', function (e) {
+            mui("body").on('mdClick', '#bank_screen', function (e) {
                 that.gV.showBankList = !that.gV.showBankList;
                 if (that.gV.showBankList) {
                     $('.bank_list').show();
@@ -151,9 +151,11 @@ $(function () {
                     $('.bank_list').hide();
                     $('#bank_screen .iconfont').html('&#xe609;');
                 }
+            },{
+                'htmdEvt': 'publicAssets_11'
             })
             //银行卡列表点击
-            $('.bank_item').on('click', function(){
+            mui("body").on('mdClick', '.bank_item', function (e) {
                 $(this).find('.iconfont').removeClass('hide');
                 $(this).siblings().find('.iconfont').addClass('hide');
                 //将获取到的名字填充到外部
@@ -165,6 +167,8 @@ $(function () {
                 that.gV.showBankList = !that.gV.showBankList;
                 $('.bank_list').hide();
                 $('#bank_screen .iconfont').html('&#xe609;');
+            },{
+                'htmdEvt': 'publicAssets_12'
             })
         },
         events: function () { //绑定事件
@@ -206,13 +210,14 @@ $(function () {
                 var index = $(this).parent().parent().parent().index();
                 var id = $(this).parent().parent().parent().parent().attr("id")
                 var tradeNo = $(this).parent().parent().parent().attr("data-tradeNo")
+                var fundCode = $(this).parent().parent().parent().attr("data-fundCode")
                 if(id =="cashPageLists" ){
                     //现金宝
                     var fundCode = that.gV.data.cashDetails[index].fundCode
                     var productName = that.gV.data.cashDetails[index].fundName
                     window.location.href = site_url.pofCashTransformOut_url + '?fundCode=' + fundCode + '&productName=' + new Base64().encode(productName);
                 }else if(id == "pageLists"){
-                     window.location.href = site_url.redemptionBuy_url + '?tradeNo=' + tradeNo;
+                     window.location.href = site_url.redemptionBuy_url + '?tradeNo=' + tradeNo + "&fundCode=" + fundCode
                 }else{
                     return false
                 }

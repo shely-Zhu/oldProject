@@ -259,10 +259,10 @@ $(function() {
                         $("#assets-box .bondAssetRatio .num").html(Number(data.bondAssetRatio).toFixed(2) + '%')
                         $("#assets-box .otherAssetRatio .num").html(Number(data.otherAssetRatio).toFixed(2) + '%')
                         var assets_width = $("#assets-box").width();
-                        $("#assets-box .stockAssetRatio").css({'width':Number(data.stockAssetRatio)/100*assets_width -40+ 'px'});
+                        $("#assets-box .stockAssetRatio").css({'width':Number(data.stockAssetRatio)/100*assets_width+ 'px'});
                         $("#assets-box .cashAssetRatio").css({'width':Number(data.cashAssetRatio)/100*assets_width + 'px'});
                         $("#assets-box .bondAssetRatio").css({'width':Number(data.bondAssetRatio)/100*assets_width + 'px'});
-                        $("#assets-box .otherAssetRatio").css({'width':Number(data.otherAssetRatio)/100*assets_width +20+ 'px'});
+                        $("#assets-box .otherAssetRatio").css({'width':Number(data.otherAssetRatio)/100*assets_width+ 'px'});
 
                         $("#assets-box .stockAssetRatio .shape").css({'width':Number(data.stockAssetRatio)/100*assets_width + 'px',
                         'background':'linear-gradient(to left,'+ that.gV.color.color1[0] + ',' + that.gV.color.color1[1] + ')'});
