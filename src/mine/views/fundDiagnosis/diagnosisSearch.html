@@ -16,11 +16,12 @@
 <html>
 
 <head>
-    <meta charset="UTF-8">
+    <!--<meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <meta name="applicable-device" content="mobile">
     <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">-->
+    @@include('@pathInclude/views/meta.html')	
     <link rel="stylesheet" href="/mine/static/css/hotDiagnosis.css">
     <title>基金诊断</title>
 </head>
@@ -29,7 +30,8 @@
     <section class="hotDiagnosis clearfix">
         <div class="fixedWrap">
             <!-- 搜索 -->
-            @@include('@pathCommonViews/headBarConfig.html',{"bgColors":"#384A81,#2A3C70","showType":"1","pathName":"基金诊断"})
+            <!--@@include('@pathCommonViews/headBarConfig.html',{"bgColors":"#384A81,#2A3C70","showType":"1","pathName":"基金诊断"})-->
+            @@include('@pathCommonViews/headBarConfig.html',{"bgColors":"#384A81,#2A3C70","showType":"0","pathName":"基金诊断"})
             <div class="branchSearchArea">
                 <div class="branchHeader">
                     <div class="form-wrap">
