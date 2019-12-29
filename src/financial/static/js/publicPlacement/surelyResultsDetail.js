@@ -23,8 +23,9 @@ $(function() {
         amount2Buy:$(".listWrap .buy-result .amount"),  //买入金额
         bankName2Buy:$(".listWrap .buy-result .bankName"),  //银行名称
         bankNum2Buy:$(".listWrap .buy-result .bankNum"),  //银行卡尾号
-        banKImgBuy:$(".listWrap .buy-result .banKImg"),  //银行卡缩略图
+        banKImgbanKImgBuy:$(".listWrap .buy-result .banKImg"),  //银行卡缩略图
         payTypeBuy:$(".listWrap .buy-result .payType"),  //支付方式
+        buyFundName:$(".buyFundName"),//在线支付 货币基金买入
 
         //redemption
         shareTimePRedemption:$(".resultTopTwo .redemption-result .shareTimeP"),   //开始计算收益流程
@@ -122,6 +123,10 @@ $(function() {
                   that.$el.applyTimeBuy.html(json.data.originalDate)
                   that.$el.shareTimeBuy.html(json.data.estimateConfirmDate)
                   that.$el.earningsTimeBuy.html(json.data.confirmDate)
+                  if(decodeURI(splitUrl['bugFundName'])!="false"){
+                    that.$el.buyFundName[0].textContent =decodeURI(splitUrl['bugFundName'])
+                  }
+                 
                   that.$el.payTypeBuy.html('在线支付')
                 }
                 if(that.gV.flag == 'redemption'){
@@ -164,7 +169,9 @@ $(function() {
                 that.$el.fundNameBuy.html(json.data.fundName)
                 that.$el.fundCodeBuy.html(json.data.fundCode)
                 that.$el.amount2Buy.html(json.data.tradeAmount)
-                that.$el.banKImgBuy.attr('src',json.data.bankThumbnailUrl)
+                if(decodeURI(splitUrl['bugFundName'])=="false"){
+                  that.$el.banKImgbanKImgBuy.attr('src',json.data.bankThumbnailUrl)
+                }
                 that.$el.bankName2Buy.html(json.data.bankName)
                 that.$el.bankNum2Buy.html(json.data.bankAccountMask.substr(json.data.bankAccountMask.length - 4))
               }
