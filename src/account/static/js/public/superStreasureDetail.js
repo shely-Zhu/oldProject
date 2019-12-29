@@ -6,7 +6,7 @@
 
 require('@pathCommonBase/base.js');
 
-require('@pathCommonJs/components/headBarConfig.js');
+// require('@pathCommonJs/components/headBarConfig.js');
 require('@pathCommonJs/ajaxLoading.js');
 var splitUrl = require('@pathCommonJs/components/splitUrl.js')();
 var generateTemplate = require('@pathCommonJsComBus/generateTemplate.js');
@@ -145,6 +145,7 @@ $(function() {
                 yAxis: {
                     max:maxNum,
                     min:minNum,
+                    /*splitNumber: 6,*/
                     axisTick: {
                         show: false
                     },
@@ -163,8 +164,9 @@ $(function() {
                             // if(value != 0){
                                 return value.toFixed(4) + '%';
                             // }
-                        },
-                    }
+                        }
+                    },
+                    interval: (Number(maxNum) - Number(minNum))/5
                 },
                 series: [{
                     type: 'line',

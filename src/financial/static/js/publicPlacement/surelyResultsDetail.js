@@ -122,7 +122,7 @@ $(function() {
                   }
                   that.$el.applyTimeBuy.html(json.data.originalDate)
                   that.$el.shareTimeBuy.html(json.data.estimateConfirmDate)
-                  that.$el.earningsTimeBuy.html(json.data.confirmDate)
+                  that.$el.earningsTimeBuy.html(json.data.estimateArrivalDate)
                   if(decodeURI(splitUrl['bugFundName'])!="false"){
                     that.$el.buyFundName[0].textContent =decodeURI(splitUrl['bugFundName'])
                   }
