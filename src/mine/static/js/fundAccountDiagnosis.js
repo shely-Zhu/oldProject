@@ -214,25 +214,25 @@ $(function() {
                     var data = json.data;
                     that.gV.pie.pieData = []
                     if(!!data.stockRatio&&Number(data.stockRatio)!=0){
-                        that.gV.pie.pieData.push({name: '股票型',value:Number( data.stockRatio).toFixed(2),itemStyle:that.getPieColor('stockRatio'),})
+                        that.gV.pie.pieData.push({name: '股票型',value:(Number( data.stockRatio)*100).toFixed(2),itemStyle:that.getPieColor('stockRatio'),})
                     }
                     if(!!data.mixRatio&&Number(data.mixRatio)!=0){
-                        that.gV.pie.pieData.push({name: '混合型',value:Number( data.mixRatio).toFixed(2),itemStyle:that.getPieColor('mixRatio'),})
+                        that.gV.pie.pieData.push({name: '混合型',value:(Number( data.mixRatio)*100).toFixed(2),itemStyle:that.getPieColor('mixRatio'),})
                     }
                     if(!!data.bondRatio&&Number(data.bondRatio)!=0){
-                        that.gV.pie.pieData.push({name: '债券型',value:Number (data.bondRatio).toFixed(2),itemStyle:that.getPieColor('bondRatio'),})
+                        that.gV.pie.pieData.push({name: '债券型',value:(Number (data.bondRatio)*100).toFixed(2),itemStyle:that.getPieColor('bondRatio'),})
                     }
                     if(!!data.breakEvenRatio&&Number(data.breakEvenRatio)!=0){
-                        that.gV.pie.pieData.push({name: '保本型',value:Number(data.breakEvenRatio).toFixed(2),itemStyle:that.getPieColor('breakEvenRatio'),})
+                        that.gV.pie.pieData.push({name: '保本型',value:(Number(data.breakEvenRatio)*100).toFixed(2),itemStyle:that.getPieColor('breakEvenRatio'),})
                     }
                     if(!!data.goodsRatio&&Number(data.goodsRatio)!=0){
-                        that.gV.pie.pieData.push({name: '商品型',value:Number (data.goodsRatio).toFixed(2),itemStyle:that.getPieColor('goodsRatio'),})
+                        that.gV.pie.pieData.push({name: '商品型',value:(Number (data.goodsRatio)*100).toFixed(2),itemStyle:that.getPieColor('goodsRatio'),})
                     }
                     if(!!data.currencyRatio&&Number(data.currencyRatio)!=0){
-                        that.gV.pie.pieData.push({name: '另类投资型',value:Number (data.currencyRatio).toFixed(2),itemStyle:that.getPieColor('alternativeInvestRatio'),})
+                        that.gV.pie.pieData.push({name: '另类投资型',value:(Number (data.currencyRatio)*100).toFixed(2),itemStyle:that.getPieColor('alternativeInvestRatio'),})
                     }
                     if(!!data.currencyRatio&&Number(data.currencyRatio)!=0){
-                        that.gV.pie.pieData.push({name: '货币市场型',value:Number (data.currencyRatio).toFixed(2),itemStyle:that.getPieColor('currencyRatio'),})
+                        that.gV.pie.pieData.push({name: '货币市场型',value:(Number (data.currencyRatio)*100).toFixed(2),itemStyle:that.getPieColor('currencyRatio'),})
                     }
                    
                    that.drawCircle()
@@ -301,8 +301,16 @@ $(function() {
                 needDataEmpty: false,
                 callbackDone: function(json) {
                     var data = json.data.industryConfigRatioList;
-                    that.gV.heavyBar.barData = data;
-                    that.drawBar(data,"heavy-warehouse-box");
+                   // that.gV.heavyBar.barData = data;
+                   var newData = [];
+                   data.forEach(function(item){
+                       if(Number(item.industryNavRatio)>0){
+                           item.industryNavRatio =( Number (item.industryNavRatio)*100).toFixed(2);
+                           newData.push(item)
+                       }
+                   })
+                   that.gV.heavyBar.barData = newData
+                    that.drawBar(newData,"heavy-warehouse-box");
                     
                 },
                 callbackFail: function(json) {
@@ -322,15 +330,40 @@ $(function() {
                 callbackDone: function(json) {
                     var data = json.data;
                     var newData = [
-                        {"industryName":"同业存单比例","industryNavRatio":data.cdsRatio},
-                        {"industryName":"中期票据比例","industryNavRatio":data.mtnValueRatio},
-                        {"industryName":"短期融资券比例","industryNavRatio":data.cpValueRatio},
-                        {"industryName":"央行票据比例","industryNavRatio":data.ctrBankBillRatio},
-                        {"industryName":"企债比例","industryNavRatio":data.corpBondRatio},
-                        {"industryName":"可转债比例","industryNavRatio":data.covertBondRatio},
-                        {"industryName":"金融债比例","industryNavRatio":data.finanBondRatio},
-                        {"industryName":"国债比例","industryNavRatio":data.govBondRatio}
+                        //{"industryName":"同业存单比例","industryNavRatio":data.cdsRatio},
+                        //{"industryName":"中期票据比例","industryNavRatio":data.mtnValueRatio},
+                        //{"industryName":"短期融资券比例","industryNavRatio":data.cpValueRatio},
+                        //{"industryName":"央行票据比例","industryNavRatio":data.ctrBankBillRatio},
+                        //{"industryName":"企债比例","industryNavRatio":data.corpBondRatio},
+                        //{"industryName":"可转债比例","industryNavRatio":data.covertBondRatio},
+                        //{"industryName":"金融债比例","industryNavRatio":data.finanBondRatio},
+                        //{"industryName":"国债比例","industryNavRatio":data.govBondRatio}
                     ]
+                    if(Number(data.cdsRatio)>0){
+                        newData.push({"industryName":"同业存单比例","industryNavRatio":(Number(data.cdsRatio)*100).toFixed(2)})
+                    }
+                    if(Number(data.mtnValueRatio)>0){
+                        newData.push({"industryName":"中期票据比例","industryNavRatio":(Number(data.mtnValueRatio)*100).toFixed(2)})
+                    }
+                    if(Number(data.cpValueRatio)>0){
+                        newData.push({"industryName":"短期融资券比例","industryNavRatio":(Number(data.cpValueRatio)*100).toFixed(2)})
+                    }
+                    if(Number(data.ctrBankBillRatio)>0){
+                        newData.push({"industryName":"央行票据比例","industryNavRatio":(Number(data.ctrBankBillRatio)*100).toFixed(2)})
+                    }
+                    if(Number(data.corpBondRatio)>0){
+                        newData.push({"industryName":"企债比例","industryNavRatio":(Number(data.corpBondRatio)*100).toFixed(2)})
+                    }
+                    if(Number(data.covertBondRatio)>0){
+                        newData.push({"industryName":"可转债比例","industryNavRatio":(Number(data.covertBondRatio)*100).toFixed(2)})
+                    }
+                    if(Number(data.finanBondRatio)>0){
+                        newData.push({"industryName":"金融债比例","industryNavRatio":(Number(data.finanBondRatio)*100).toFixed(2)})
+                    }
+                    if(Number(data.govBondRatio)>0){
+                        newData.push({"industryName":"国债比例","industryNavRatio":(Number(data.govBondRatio)*100).toFixed(2)})
+                    }
+                   
                     that.drawBar(newData,"volume-distribution-box")
                     
                 },
@@ -699,11 +732,14 @@ $(function() {
                 },
                 xAxis: {
                     type: 'value',
-                    boundaryGap: ["0%", "100%"],
+                    boundaryGap: ["0", "100%"],
                     axisTick:{show:false},
                     axisLabel:{
                         formatter:(val)=>{
-                            return val*100 +"%"
+                            if(val!=0){
+                                return val +"%"
+                            }
+                           
                         }
                     }
                 },

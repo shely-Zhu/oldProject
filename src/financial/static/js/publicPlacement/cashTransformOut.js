@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2019-11-26 14:42:56
- * @LastEditTime : 2019-12-29 10:18:24
+ * @LastEditTime : 2019-12-29 12:49:45
  * @LastEditTime : 2019-12-29 10:08:22
  * @LastEditors  : Please set LastEditors
  * @Description: In User Settings Edit
@@ -163,9 +163,9 @@ $(function () {
 						 var carNum = that.gv.cashList[i].bankAccountMask.substr(-4);
 						 that.gv.cashList[i].carNum = carNum;
 						 if(i == 0){
-							that.gv.cashList[i].checkStatu = that.gv.checkImgUrl; 
+							that.gv.cashList[i].checkStatu = true; 
 						 }else{
-							that.gv.cashList[i].checkStatu = ""
+							that.gv.cashList[i].checkStatu = false
 						 }
 
 					 }
@@ -183,6 +183,16 @@ $(function () {
 					 that.gv.transformMoney = defaultCarData.availableShare;
 					 that.$e.el_transformInput.val(that.gv.transformMoney);
 					 generateTemplate(that.gv.cashList, that.$e.TransferFundsContent, that.$e.templateTransferFunds);
+					 for(var i=0;i<$(".cashListConent .cashCheckItem").length;i++){
+						 if(i==0){
+							$(".cashListConent .cashCheckItem").eq(i).find(".radioCheckItemImg").show();
+						 }else{
+							$(".cashListConent .cashCheckItem").eq(i).find(".radioCheckItemImg").hide(); 
+						 }
+					 }
+					// $(".cashListConent .cashCheckItem").eq(0).find(".radioCheckItemImg").show();
+					//$(".cashListConent .cashCheckItem").not(0).find(".radioCheckItemImg").hide();
+                     
 				 }
 
 			 }];
