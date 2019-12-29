@@ -28,19 +28,8 @@ var timer = {
         this.id = window.clearInterval(that.id);
     }
 };
-var keyboardHeight = 0,
-screenHeight = window.innerHeight;
-//input.addEventListener('focus',function (evt) {
-//  if(!keyboardHeight){
-//      timer.run(function () {
-//          if (screenHeight !== window.innerHeight) {
-//              keyboardHeight = screenHeight-window.innerHeight;
-//              timer.clean()
-//          }
-//      }, 50)
-//  }
-//});
-//input.focus();
+//var keyboardHeight = 0,
+//screenHeight = window.innerHeight;
 
 var fixScroll = function(num,oHeight){//ios浏览器需要滚动
 //	alert(keyboardHeight)
@@ -61,12 +50,13 @@ var fixScroll = function(num,oHeight){//ios浏览器需要滚动
 //			window.scrollTop = 1000;//滚动到可是区域
 //		}
 //		document.body.scrollTop = document.body.scrollHeight;
-	}else if(isAndroid && num == 1){
-		$(".passwordTop").css("margin-bottom","0")
-	}else if(isAndroid && num == 2){
-		$(".passwordTop").css("margin-bottom",keyboardHeight)
-		
 	}
+//	else if(isAndroid && num == 1){
+//		$(".passwordTop").css("margin-bottom","0")
+//	}else if(isAndroid && num == 2){
+//		$(".passwordTop").css("margin-bottom",keyboardHeight)
+//		
+//	}
 }
 
 module.exports = function(callback,forgetCall){
@@ -106,14 +96,14 @@ module.exports = function(callback,forgetCall){
 		$("#pwd-input").on("focus", function(e) {
 			e.stopPropagation();
 			setTimeout(function(){
-				if(!keyboardHeight){
-			        timer.run(function () {
-			            if (screenHeight !== window.innerHeight) {
-			                keyboardHeight = screenHeight-window.innerHeight;
-			                timer.clean()
-			            }
-			        }, 50)
-			    }
+//				if(!keyboardHeight){
+//			        timer.run(function () {
+//			            if (screenHeight !== window.innerHeight) {
+//			                keyboardHeight = screenHeight-window.innerHeight;
+//			                timer.clean()
+//			            }
+//			        }, 50)
+//			    }
 				fixScroll(2,oHeight);
 			},300)
 		})
