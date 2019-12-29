@@ -30,6 +30,7 @@ $(function () {
     var fundCode
     var regard = {
         gV: {
+            fundBusinCode: '022',
             json: {},
             type: '1',//'1'七年 '2'万份
             time: 1,// 1月份 3 季度 6半年 12 一年 0成立以来
@@ -90,7 +91,11 @@ $(function () {
                     if(that.gV.json.annYldRat > 0){
                         that.gV.json.annYldRat_s  = '+' + that.gV.json.annYldRat.toFixed(2)
                     }
-                    that.gV.json.minValue = that.gV.json.tradeLimitList[0].minValue
+                    that.gV.json.tradeLimitList.forEach(function(item){
+                        if(item.fundBusinCode == that.gV.fundBusinCode){
+                            that.gV.json.minValue = item.minValue
+                        }
+                    })
                     var tplm = $("#dataLists").html();
                     var template = Handlebars.compile(tplm);
                     that.changeVal('annYldRat', 4)
