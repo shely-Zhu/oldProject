@@ -1,7 +1,8 @@
 /*
  * @Author: your name
  * @Date: 2019-11-26 14:42:56
- * @LastEditTime : 2019-12-27 13:54:04
+ * @LastEditTime : 2019-12-29 10:18:24
+ * @LastEditTime : 2019-12-29 10:08:22
  * @LastEditors  : Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \htjf-app\src\financial\static\js\publicPlacement\cashTransformOut.js
@@ -19,7 +20,7 @@ require('@pathIncludJs/vendor/mui/mui.picker.min.js');
 require('@pathCommonJs/ajaxLoading.js');
 require('@pathCommonJs/components/elasticLayer.js');
 
-var splitUrl = require('@pathCommonJs/components/splitUrl.js');
+var splitUrl = require('@pathCommonJs/components/splitUrl.js')();
 //引入复制功能
 // var Clipboard = require('clipboard');
 var popPicker = require('@pathCommonJsCom/popPicker.js');
@@ -34,11 +35,11 @@ $(function () {
 	var regulatory = {
 
 		gv:{
-		   productName:"",   //产品名称
+		   productName:new Base64().decode(splitUrl['productName']),   //产品名称
 		   transformTotalMoney:"",   //产品转出总额度
 		   transformMoney:"",    //产品转出额度
 		   dailyOnceMaxLimit:"",  //单日最高限额 整数
-		   fundCode:"" ,//基金编号
+		   fundCode:splitUrl['fundCode'] ,//基金编号
 		   outType:"fast",//转出方式  快速位fast 普通位common
 		   dailyOnceMaxLimitWan:"", //单笔最高限额
 		   dailyMaxLimitWan:"" ,//单日最高限额：
@@ -86,39 +87,36 @@ $(function () {
 
 		webinit: function () {
 			var that = this;
-
-			//
 			that.events();
 			that.initParmes();
 			that.findProtocolBasi();
 			that.cashListWiki();
 			that.pofCashLimit();
-
-
-			that.initElement();
 			
 		},
 
         /*
             绑定事件
          */
-
+         // 获取该账户的余额
 		 initParmes:function(){
 		   var that = this;
-		   var data = JSON.parse(sessionStorage.getItem("transformMessage"))?JSON.parse(sessionStorage.getItem("transformMessage")):"";
-		   that.gv.productName = data.productName;
-		   that.gv.fundCode = data.fundCode;
-		   that.gv.transformTotalMoney = data.money;
-		   that.gv.transformMoney = data.money;
-
+			var obj =[{
+				url:site_url.pofGetAssetsCashList_api,
+				data:{
+					"fundCode":that.gv.fundCode,
+					"pageSize":10,
+					"pageCurrent": 1
+				},
+				callbackDone:function(json){
+					that.gv.transformTotalMoney = json.data.pageList[0].totalMoney;
+		   			that.gv.transformMoney = json.data.pageList[0].totalMoney;
+		   			that.$e.el_productName.html(that.gv.productName);
+		   			that.$e.el_transformInput.val(json.data.pageList[0].totalMoney);
+				}
+			}]
+			$.ajaxLoading(obj);
 		 },
-		 initElement:function(){
-		   var that = this;
-		   that.$e.el_productName.html(that.gv.productName);
-		   that.$e.el_transformInput.val(that.gv.transformMoney);
-		  
-		   //that.$e.el_defaultBankName.textContent = 
-		},
 		 findProtocolBasi:function(){
 			var that = this;
 			var obj =[
@@ -180,7 +178,10 @@ $(function () {
 					 that.$e.el_defaultBankName[0].textContent =defaultCarData.bankName;
 					 that.$e.el_defaultBankImgUrl.attr("src",defaultCarData.bankThumbnailUrl);
 					 that.$e.el_defaultBankCode[0].textContent =defaultCarData.bankAccountMask.substr(-4);
-                     that.$e.el_singleNum[0].textContent = defaultCarData.availableShare;
+					 that.$e.el_singleNum[0].textContent = defaultCarData.availableShare;
+					 that.gv.transformTotalMoney = defaultCarData.availableShare;
+					 that.gv.transformMoney = defaultCarData.availableShare;
+					 that.$e.el_transformInput.val(that.gv.transformMoney);
 					 generateTemplate(that.gv.cashList, that.$e.TransferFundsContent, that.$e.templateTransferFunds);
 				 }
 
@@ -296,14 +297,19 @@ $(function () {
            
 		   //银行卡单选
 		   mui("body").off("mdClick",".cashCheckItem").on('mdClick','.cashCheckItem',function(){
-			   $(this).find(".imgLogo").attr("src",that.gv.checkImgUrl);
-			   $(this).siblings().find(".imgLogo").attr("src","");
+			//   $(this).find(".imgLogo").attr("src",that.gv.checkImgUrl);
+			  // $(this).siblings().find(".imgLogo").attr("src","");
+			   $(this).find(".radioCheckItemImg").show();
+			   $(this).siblings().find(".radioCheckItemImg").hide();
 			   that.gv.defaultBankNo = $(this).attr("bankNo"); //默认银行代码
 			   that.gv.defaultBankAccount = $(this).attr("bankAccount"); //默认银行账号
 			   that.gv.defaultTradeAcco = $(this).attr("tradeAcco");  // 默认交易账号
 			   that.gv.defaultCapitalMode = $(this).attr("capitalMode"); // 默认资金方式
 			 
 			   that.$e.el_singleNum[0].textContent = $(this).attr('singleNum');
+			   that.gv.transformTotalMoney =  $(this).attr('singleNum');
+			    that.gv.transformMoney =  $(this).attr('singleNum');
+				that.$e.el_transformInput.val(that.gv.transformMoney);
 			   
 			   that.$e.el_defaultBankName[0].textContent = $(this).attr("bankName");
 			   that.$e.el_defaultBankImgUrl.attr("src",$(this).attr("bankLogoUrl"));
