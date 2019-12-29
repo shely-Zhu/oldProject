@@ -145,6 +145,7 @@ $(function() {
                 yAxis: {
                     max:maxNum,
                     min:minNum,
+                    /*splitNumber: 6,*/
                     axisTick: {
                         show: false
                     },
@@ -163,8 +164,9 @@ $(function() {
                             // if(value != 0){
                                 return value.toFixed(4) + '%';
                             // }
-                        },
-                    }
+                        }
+                    },
+                    interval: (Number(maxNum) - Number(minNum))/5
                 },
                 series: [{
                     type: 'line',
