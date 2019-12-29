@@ -437,7 +437,7 @@ $(function() {
                    mui("body").on('mdClick',".isRiskMatchBox_match",function(){
                     $(".isRiskMatch_mask").hide();
                     $(".isRiskMatchBox").hide();
-                    window.location.href = site_url.addAccountDiagnosisResult_url
+                    window.location.href = site_url.applyHistory_url
                  })
    
                 //风险等级匹配失败
@@ -515,6 +515,12 @@ $(function() {
                             break;
                     }
                 });
+
+                mui("body").on('mdClick',".icontips-close",function(){
+                  
+                    $("#tips-wrap").hide()
+                 
+                 })
         },
         //给饼图付渐变色
         getPieColor(val){
