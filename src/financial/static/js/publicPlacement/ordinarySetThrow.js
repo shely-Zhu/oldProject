@@ -11,7 +11,7 @@ require('@pathCommonJs/ajaxLoading.js');
 
 require('@pathIncludJs/vendor/mui/mui.picker.min.js');
 require('@pathCommonJs/components/elasticLayer.js');
-require('@pathCommonJs/components/headBarConfig.js');
+// require('@pathCommonJs/components/headBarConfig.js');
 var splitUrl = require('@pathCommonJs/components/splitUrl.js')();
 require('@pathCommonCom/elasticLayer/transOutRule/transOutRule.js');
 var popPicker = require('@pathCommonJsCom/popPicker.js');
@@ -834,9 +834,11 @@ $(function () {
 				htmdEvt: 'ordinarySetThrow_01'
 			}) 
 			//返回按钮
-			mui("mui").on("mdClick","#goBack",function(){
-				history.go(-1)
-			})
+			// mui("mui").on("mdClick","#goBack",function(){
+			// 	history.go(-1)
+			// },{
+			// 	htmdEvt: 'ordinarySetThrow_20'
+			// })
 
 			mui("body").on('mdClick','.popup-close',function(){
 				$('.popup').css('display','none')
