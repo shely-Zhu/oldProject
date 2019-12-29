@@ -718,6 +718,8 @@ $(function () {
 			//返回按钮
 			mui("mui").on("mdClick","#goBack",function(){
 				history.go(-1)
+			},{
+				htmdEvt: 'fundTransformIn_21'
 			})
 
 			//风险揭示函
@@ -729,8 +731,11 @@ $(function () {
 					title: tital,
 					p: '<p>' + value + '</p>',
 					buttonTxt: '知道了',
+					htmdEvtYes:'fundTransformIn_19',  // 埋点确定按钮属性
 					zIndex: 100,
 				});
+			}{
+				htmdEvt: 'fundTransformIn_20'
 			})
 
 

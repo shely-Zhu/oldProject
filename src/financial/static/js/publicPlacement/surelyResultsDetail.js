@@ -5,7 +5,7 @@
 require('@pathCommonBase/base.js');
 require('@pathCommonJs/ajaxLoading.js');
 var splitUrl = require('@pathCommonJs/components/splitUrl.js')();
-var splitUrl = require('@pathCommonJs/components/splitUrl.js')();
+// var splitUrl = require('@pathCommonJs/components/splitUrl.js')();
 var generateTemplate = require('@pathCommonJsComBus/generateTemplate.js');
 
 $(function() {
@@ -121,8 +121,8 @@ $(function() {
                     }
                   }
                   that.$el.applyTimeBuy.html(json.data.originalDate)
-                  that.$el.shareTimeBuy.html(json.data.estimateConfirmDate)
-                  that.$el.earningsTimeBuy.html(json.data.confirmDate)
+                  that.$el.shareTimeBuy.html(json.data.estimateConfirmDate+"&nbsp; 24:00前")
+                  that.$el.earningsTimeBuy.html(json.data.estimateArrivalDate+"&nbsp; 24:00前")
                   if(decodeURI(splitUrl['bugFundName'])!="false"){
                     that.$el.buyFundName[0].textContent =decodeURI(splitUrl['bugFundName'])
                   }

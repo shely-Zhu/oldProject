@@ -111,6 +111,31 @@ var clickList = {
 	"privatePlacementDetail_11" : { type:'click', evtid: 'privatePlacementDetail_11', topic: '私募基金产品详情-产品名称', info: ''} ,
 	"privatePlacementDetail_12" : { type:'click', evtid: 'privatePlacementDetail_12', topic: '私募基金产品详情-未认证跳转', info: ''} ,
 	"privatePlacementDetail_13" : { type:'click', evtid: 'privatePlacementDetail_13', topic: '私募基金产品详情-一键认证', info: ''} ,
+	// 组件弹层的点击事件
+	"privatePlacementDetail_14" : { type:'click', evtid: 'privatePlacementDetail_14', topic: '私募基金产品详情-开通恒天账户_确定', info: ''} ,
+	"privatePlacementDetail_15" : { type:'click', evtid: 'privatePlacementDetail_15', topic: '私募基金产品详情-开通恒天账户_取消', info: ''} ,
+	"privatePlacementDetail_16" : { type:'click', evtid: 'privatePlacementDetail_16', topic: '私募基金产品详情-机构_线下开户_确定', info: ''} ,
+	"privatePlacementDetail_17" : { type:'click', evtid: 'privatePlacementDetail_17', topic: '私募基金产品详情-机构_线下开户_取消', info: ''} ,
+	"privatePlacementDetail_18" : { type:'click', evtid: 'privatePlacementDetail_18', topic: '私募基金产品详情-机构客户完善资料_确定', info: ''} ,
+	"privatePlacementDetail_19" : { type:'click', evtid: 'privatePlacementDetail_19', topic: '私募基金产品详情-机构客户完善资料_取消', info: ''} ,
+	"privatePlacementDetail_20" : { type:'click', evtid: 'privatePlacementDetail_20', topic: '私募基金产品详情-机构开户联系理财师_线下开户_确定', info: ''} ,
+	"privatePlacementDetail_21" : { type:'click', evtid: 'privatePlacementDetail_21', topic: '私募基金产品详情-机构开户联系理财师_线下开户_取消', info: ''} ,
+	"privatePlacementDetail_22" : { type:'click', evtid: 'privatePlacementDetail_22', topic: '私募基金产品详情-机构开户联系理财师_联系理财师_确定', info: ''} ,
+	"privatePlacementDetail_23" : { type:'click', evtid: 'privatePlacementDetail_23', topic: '私募基金产品详情-机构开户联系理财师_联系理财师_取消', info: ''} ,
+	"privatePlacementDetail_24" : { type:'click', evtid: 'privatePlacementDetail_24', topic: '私募基金产品详情-投资期限少于产品期限_确定', info: ''} ,
+	"privatePlacementDetail_25" : { type:'click', evtid: 'privatePlacementDetail_25', topic: '私募基金产品详情-投资期限少于产品期限_取消', info: ''} ,
+	"privatePlacementDetail_26" : { type:'click', evtid: 'privatePlacementDetail_26', topic: '私募基金产品详情-售前告知书_确定', info: ''} ,
+	"privatePlacementDetail_27" : { type:'click', evtid: 'privatePlacementDetail_27', topic: '私募基金产品详情-售前告知书_取消', info: ''} ,
+	"privatePlacementDetail_28" : { type:'click', evtid: 'privatePlacementDetail_28', topic: '私募基金产品详情-投资期限少于产品期限_确定', info: ''} ,
+	"privatePlacementDetail_29" : { type:'click', evtid: 'privatePlacementDetail_29', topic: '私募基金产品详情-投资期限少于产品期限_取消', info: ''} ,
+	"privatePlacementDetail_30" : { type:'click', evtid: 'privatePlacementDetail_30', topic: '私募基金产品详情-产品与风险承受能力相匹配_确定', info: ''} ,
+	"privatePlacementDetail_31" : { type:'click', evtid: 'privatePlacementDetail_31', topic: '私募基金产品详情-产品与风险承受能力相匹配_取消', info: ''} ,
+	"privatePlacementDetail_32" : { type:'click', evtid: 'privatePlacementDetail_32', topic: '私募基金产品详情-账户冻结_确定', info: ''} ,
+	"privatePlacementDetail_33" : { type:'click', evtid: 'privatePlacementDetail_33', topic: '私募基金产品详情-账户冻结_取消', info: ''} ,
+
+
+
+
 	//现金管理  cashManagement.html
 	"cashManagement_01" : { type:'click', evtid: 'cashManagement_01', topic: '现金管理-现金宝详情', info: ''} ,
 	"cashManagement_02" : { type:'click', evtid: 'cashManagement_02', topic: '现金管理-转入', info: ''} ,
@@ -184,6 +209,11 @@ var clickList = {
 	"fundTransformIn_16" : { type:'click', evtid: 'fundTransformIn_16', topic: '现金转入-添加银行卡--跳往原生', info: ''} ,
 	"fundTransformIn_17" : { type:'click', evtid: 'fundTransformIn_17', topic: '现金转入-基金合同,募说明书', info: ''} ,
 	"fundTransformIn_18" : { type:'click', evtid: 'fundTransformIn_18', topic: '现金转入-键盘', info: ''} ,
+	"fundTransformIn_20" : { type:'click', evtid: 'fundTransformIn_20', topic: '现金转入-风险揭示函_知道了', info: ''} ,
+	"fundTransformIn_21" : { type:'click', evtid: 'fundTransformIn_21', topic: '现金转入-返回', info: ''} ,
+	// 组件弹层的点击事件
+	"fundTransformIn_19" : { type:'click', evtid: 'fundTransformIn_19', topic: '现金转入-风险揭示函', info: ''} ,
+
 	//我的定投计划 myInvestmentPlan.html
 	"myInvestmentPlan_01" : { type:'click', evtid: 'myInvestmentPlan_01', topic: '定投计划-新增 跳原生定投排行页', info: ''} ,
 	"myInvestmentPlan_02" : { type:'click', evtid: 'myInvestmentPlan_02', topic: '定投计划-跳转详情页', info: ''} ,
@@ -195,6 +225,12 @@ var clickList = {
 	"newFundDetail_1" : { type:'click', evtid: 'newFundDetail_1', topic: '新发基金-基金经理', info: ''} ,
 	"newFundDetail_2" : { type:'click', evtid: 'newFundDetail_2', topic: '新发基金-基金公司', info: ''} ,
 	"newFundDetail_3" : { type:'click', evtid: 'newFundDetail_3', topic: '新发基金-立即购买', info: ''} ,
+	"newFundDetail_4" : { type:'click', evtid: 'newFundDetail_4', topic: '新发基金-风测等级匹配成功', info: ''} ,
+	"newFundDetail_5" : { type:'click', evtid: 'newFundDetail_5', topic: '新发基金-风险等级匹配失败', info: ''} ,
+	"newFundDetail_6" : { type:'click', evtid: 'newFundDetail_6', topic: '新发基金-风险等级匹配失败结果跳转', info: ''} ,
+	"newFundDetail_7" : { type:'click', evtid: 'newFundDetail_7', topic: '新发基金-认证', info: ''} ,
+	"newFundDetail_8" : { type:'click', evtid: 'newFundDetail_8', topic: '新发基金-一键认证', info: ''} ,
+	// 组件弹层的点击事件
 	//定投
 	"ordinarySetThrow_01" : { type:'click', evtid: 'ordinarySetThrow_01', topic: '定投-打开银行卡列表', info: ''} ,
 	"ordinarySetThrow_02" : { type:'click', evtid: 'ordinarySetThrow_02', topic: '定投-关闭银行卡列表', info: ''} ,
@@ -215,6 +251,7 @@ var clickList = {
 	"ordinarySetThrow_17" : { type:'click', evtid: 'ordinarySetThrow_17', topic: '定投-基金合同', info: ''} ,
 	"ordinarySetThrow_18" : { type:'click', evtid: 'ordinarySetThrow_18', topic: '定投-键盘', info: ''} ,
 	"ordinarySetThrow_19" : { type:'click', evtid: 'ordinarySetThrow_19', topic: '定投-周期选择', info: ''} ,
+	"ordinarySetThrow_20" : { type:'click', evtid: 'ordinarySetThrow_20', topic: '定投-返回', info: ''} ,
 	// publicDetail.html  公募产品详情页
 	"publicDetail_01" : { type:'click', evtid: 'publicDetail_01', topic: '公募产品详情页-基金经理', info: ''} ,
 	"publicDetail_02" : { type:'click', evtid: 'publicDetail_02', topic: '公募产品详情页-基金公司', info: ''} ,
@@ -227,9 +264,12 @@ var clickList = {
 	"publicDetail_09" : { type:'click', evtid: 'publicDetail_09', topic: '公募产品详情页-一键认证', info: ''} ,
 	"publicDetail_10" : { type:'click', evtid: 'publicDetail_10', topic: '公募产品详情页-七日年华 万份收益', info: ''} ,
 	"publicDetail_11" : { type:'click', evtid: 'publicDetail_11', topic: '公募产品详情页-折线图切换', info: ''} ,
-	"publicDetail_12" : { type:'click', evtid: 'publicDetail_12', topic: '公募产品详情页-//人工服务', info: ''} ,
+	// "publicDetail_12" : { type:'click', evtid: 'publicDetail_12', topic: '公募产品详情页-//人工服务', info: ''} ,
 	"publicDetail_13" : { type:'click', evtid: 'publicDetail_13', topic: '公募产品详情页-分享--跳往原生页面', info: ''} ,
 	"publicDetail_14" : { type:'click', evtid: 'publicDetail_14', topic: '公募产品详情页-加自选', info: ''} ,
+	"publicDetail_15" : { type:'click', evtid: 'publicDetail_15', topic: '公募产品详情页-风测等级匹配成功', info: ''} ,
+	"publicDetail_16" : { type:'click', evtid: 'publicDetail_16', topic: '公募产品详情页-风险等级匹配失败', info: ''} ,
+	"publicDetail_17" : { type:'click', evtid: 'publicDetail_17', topic: '公募产品详情页-风险等级匹配失败结果跳转', info: ''} ,
 
 	//赎回
 	"redemptionBuy_01" : { type:'click', evtid: 'redemptionBuy_01', topic: '赎回-打开银行卡列表', info: ''} ,
@@ -243,6 +283,7 @@ var clickList = {
 	"redemptionBuy_09" : { type:'click', evtid: 'redemptionBuy_09', topic: '赎回-点击同意协议', info: ''} ,
 	"redemptionBuy_10" : { type:'click', evtid: 'redemptionBuy_10', topic: '赎回-忘记密码跳转', info: ''} ,
 	"redemptionBuy_11" : { type:'click', evtid: 'redemptionBuy_11', topic: '赎回-明白了', info: ''} ,
+	"redemptionBuy_12" : { type:'click', evtid: 'redemptionBuy_12', topic: '赎回-明白了', info: ''} ,
 	//转入结果  surelyResults.html
 	"surelyResults_01" : { type:'click', evtid: 'surelyResults_01', topic: '定投结果-跳往现金宝管理页面', info: ''} ,
 	//买入结果  surelyResultsDetail.html
@@ -313,6 +354,9 @@ var clickList = {
 	"publicAssets_8":{ type:'click', evtid: 'publicAssets_8', topic: '公募资产_资产组合说明', info: ''},
 	"publicAssets_9":{ type:'click', evtid: 'publicAssets_9', topic: '公募资产_关闭资产组合说明', info: ''},
 	"publicAssets_10":{ type:'click', evtid: 'publicAssets_10', topic: '公募资产_关闭资产组合说明', info: ''},
+	// 组件弹层的点击事件
+	"publicAssets_11":{ type:'click', evtid: 'publicAssets_11', topic: '公募资产_筛选银行卡', info: ''},
+	"publicAssets_12":{ type:'click', evtid: 'publicAssets_12', topic: '公募资产_银行卡列表点击', info: ''},
 
 	// privateDetail.html
 	"privateDetail_0":{ type:'click', evtid: 'privateDetail_0', topic: '私募资产详情_详情的展开与收起', info: ''},
@@ -360,6 +404,7 @@ var clickList = {
 	"privateFundPdf_4":{ type:'click', evtid: 'privateFundPdf_4', topic: '私募基金确认书_输入指定邮箱_确认', info: ''},
 	"privateFundPdf_5":{ type:'click', evtid: 'privateFundPdf_5', topic: '私募基金确认书_输入指定邮箱_取消', info: ''},
 
+	// tobeConfirmTransaction.html
 	"tobeConfirmTransaction_0":{ type:'click', evtid: 'tobeConfirmTransaction_0', topic: '待确认交易_筛选按钮点击', info: ''},
 	"tobeConfirmTransaction_1":{ type:'click', evtid: 'tobeConfirmTransaction_1', topic: '待确认交易_筛选区域条件点击', info: ''},
 	"tobeConfirmTransaction_2":{ type:'click', evtid: 'tobeConfirmTransaction_2', topic: '待确认交易_点击遮罩隐藏', info: ''},
@@ -367,11 +412,20 @@ var clickList = {
 	"tobeConfirmTransaction_4":{ type:'click', evtid: 'tobeConfirmTransaction_4', topic: '待确认交易_点击状态文字出现弹框', info: ''},
 	"tobeConfirmTransaction_5":{ type:'click', evtid: 'tobeConfirmTransaction_5', topic: '待确认交易_详情按钮点击', info: ''},
 	"tobeConfirmTransaction_6":{ type:'click', evtid: 'tobeConfirmTransaction_6', topic: '待确认交易_点击每一条进入详情页', info: ''},
+	// 组件弹层的点击事件
+	"tobeConfirmTransaction_7":{ type:'click', evtid: 'tobeConfirmTransaction_7', topic: '待确认交易_取消转让申请_确定', info: ''},
+	"tobeConfirmTransaction_8":{ type:'click', evtid: 'tobeConfirmTransaction_8', topic: '待确认交易_取消转让申请_取消', info: ''},
+	"tobeConfirmTransaction_9":{ type:'click', evtid: 'tobeConfirmTransaction_9', topic: '待确认交易_取消受让申请_确定', info: ''},
+	"tobeConfirmTransaction_10":{ type:'click', evtid: 'tobeConfirmTransaction_10', topic: '待确认交易_取消受让申请_取消', info: ''},
+	"tobeConfirmTransaction_11":{ type:'click', evtid: 'tobeConfirmTransaction_11', topic: '待确认交易_取消预约_确定', info: ''},
+	"tobeConfirmTransaction_12":{ type:'click', evtid: 'tobeConfirmTransaction_12', topic: '待确认交易_取消预约_取消', info: ''},
+	"tobeConfirmTransaction_13":{ type:'click', evtid: 'tobeConfirmTransaction_13', topic: '待确认交易_我知道了', info: ''},
 
 	"cashTreasure_0":{ type:'click', evtid: 'cashTreasure_0', topic: '现金宝详情_展开收起按钮点击', info: ''},
 	"cashTreasure_1":{ type:'click', evtid: 'cashTreasure_1', topic: '现金宝详情_折线图中月份点击', info: ''},
 	"cashTreasure_2":{ type:'click', evtid: 'cashTreasure_2', topic: '现金宝详情_折线图点击七日年化/万份收益切换区域', info: ''},
 
+	// optionalPublicDetail.html
 	"optionalPublicDetail_0":{ type:'click', evtid: 'optionalPublicDetail_0', topic: '公募自选资产详情页_按钮点击展开收起', info: ''},
 	"optionalPublicDetail_1":{ type:'click', evtid: 'optionalPublicDetail_1', topic: '公募自选资产详情页_折线图点击月份', info: ''},
 	"optionalPublicDetail_2":{ type:'click', evtid: 'optionalPublicDetail_2', topic: '公募自选资产详情页_折线图点击七日年化/万份收益切换区域', info: ''},
@@ -383,6 +437,12 @@ var clickList = {
 	"optionalPublicDetail_8":{ type:'click', evtid: 'optionalPublicDetail_8', topic: '公募自选资产详情页_点击赎回', info: ''},
 	"optionalPublicDetail_9":{ type:'click', evtid: 'optionalPublicDetail_9', topic: '公募自选资产详情页_点击买入', info: ''},
 	"optionalPublicDetail_10":{ type:'click', evtid: 'optionalPublicDetail_10', topic: '公募自选资产详情页_点击定投', info: ''},
+	// 组件弹层的点击事件
+	"optionalPublicDetail_11":{ type:'click', evtid: 'optionalPublicDetail_11', topic: '公募自选资产详情页_一键认证', info: ''},
+	"optionalPublicDetail_12":{ type:'click', evtid: 'optionalPublicDetail_12', topic: '公募自选资产详情页_风险等级匹配失败', info: ''},
+	"optionalPublicDetail_13":{ type:'click', evtid: 'optionalPublicDetail_13', topic: '公募自选资产详情页_风险等级匹配失败结果跳转', info: ''},
+	"optionalPublicDetail_14":{ type:'click', evtid: 'optionalPublicDetail_14', topic: '公募自选资产详情页_认证', info: ''},
+	"optionalPublicDetail_15":{ type:'click', evtid: 'optionalPublicDetail_15', topic: '公募自选资产详情页_一键认证', info: ''},
 
 	"superRecord_0":{ type:'click', evtid: 'superRecord_0', topic: '超宝基金产品-交易记录_列表点击', info: ''},
 	
