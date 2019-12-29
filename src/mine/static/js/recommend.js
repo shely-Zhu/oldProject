@@ -103,7 +103,14 @@ $(function() {
                     if (json.data.recommendable == 1) {
                         // 未实名认证
                         tipAction('完成实名认证后才可以推荐好友哦', function() {
-                            window.location.href = site_url.mine_url;
+                        if (window.isAndroid) {
+                            //这个是安卓操作系统
+                            window.jsObj.backNative();
+                        }
+                        if (window.isIOS) {
+                            //这个是ios操作系统
+                            window.webkit.messageHandlers.backNative.postMessage('backNative');
+                        }   
                         })
                     } else {
                         // 已实名认证，初始化页面
