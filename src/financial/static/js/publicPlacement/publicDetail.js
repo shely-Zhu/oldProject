@@ -90,6 +90,7 @@ $(function () {
                     if(that.gV.json.annYldRat > 0){
                         that.gV.json.annYldRat_s  = '+' + that.gV.json.annYldRat.toFixed(2)
                     }
+                    that.gV.json.minValue = that.gV.json.tradeLimitList[0].minValue
                     var tplm = $("#dataLists").html();
                     var template = Handlebars.compile(tplm);
                     that.changeVal('annYldRat', 4)

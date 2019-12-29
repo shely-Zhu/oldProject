@@ -328,13 +328,7 @@ $(function() {
                 })
                 //点击转出跳转
             mui("body").on('mdClick', '.rollOutBtn', function(e) {
-                    var obj = {
-                        "money": that.gL.transformMoney,
-                        "productName": that.gL.fundName,
-                        "fundCode": that.gL.fundCode
-                    };
-                    sessionStorage.setItem("transformMessage", JSON.stringify(obj));
-                    window.location.href = site_url.pofCashTransformOut_url;
+                    window.location.href = site_url.pofCashTransformOut_url + '?fundCode=' + that.gL.fundCode + '&productName=' + new Base64().encode(that.gL.fundName);
                 }, {
                     'htmdEvt': 'superStreasureDetail_2'
                 })
