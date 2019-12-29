@@ -121,8 +121,8 @@ $(function() {
                     }
                   }
                   that.$el.applyTimeBuy.html(json.data.originalDate)
-                  that.$el.shareTimeBuy.html(json.data.estimateConfirmDate)
-                  that.$el.earningsTimeBuy.html(json.data.estimateArrivalDate)
+                  that.$el.shareTimeBuy.html(json.data.estimateConfirmDate+"&nbsp; 24:00前")
+                  that.$el.earningsTimeBuy.html(json.data.estimateArrivalDate+"&nbsp; 24:00前")
                   if(decodeURI(splitUrl['bugFundName'])!="false"){
                     that.$el.buyFundName[0].textContent =decodeURI(splitUrl['bugFundName'])
                   }
