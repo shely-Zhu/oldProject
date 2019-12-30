@@ -35,6 +35,7 @@ $(function () {
             stopPlanList:[],    // 已终止的定投计划
             stopPlanList_1:[],  //已暂停的定投计划
             accountType:"",
+            paddingStatus:false,  //有进行中的计划状态
         },
         init: function () {
             var that = this;
@@ -73,6 +74,7 @@ $(function () {
                                     if (data[i].fixState == 'A') {
                                         data[i].fixStateStr = "进行中"
                                         data[i].show = true
+                                        that.gV.paddingStatus = true
                                     } else if (data[i].fixState == 'H') {
                                         data[i].fixStateStr = "已终止"
                                         data[i].show = false
@@ -125,8 +127,13 @@ $(function () {
                                         }
                                     }
                                 }
+                                if(!that.gV.paddingStatus&&that.gV.stopNum==0){
+                                    that.$e.noData.show()
+                                    return 
+                                }
                                 def && def.resolve( data, that.gV.pageCurrent);
                                 that.gV.pageCurrent++;
+                                
                             }
                         },
                         callbackNoData: function( json ){

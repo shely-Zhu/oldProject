@@ -117,7 +117,7 @@
      <!-- 翻译官 -->
      <script id="fortune-template" type="text/x-handlebars-template">
           <h2>{{modelName}}</h2>
-          <p><a href="javascript:void(0);"  onclick="setGoUrl(site_url.pastHotWords_url,  'fortune_00')">查看往期热词</a><i class="iconfont">&#xe636;</i></p>
+          <p><a href="javascript:void(0);" onclick="setGoUrl( '{{modelUrl}}', 'fortune_00')">查看往期热词</a><i class="iconfont">&#xe636;</i></p>
      </script>
      <script id="content-template" type="text/x-handlebars-template">
           {{#each this}}
@@ -136,7 +136,7 @@
      <!-- 早知道 -->
      <script id="fortuneCf-template" type="text/x-handlebars-template">
           <h2>{{modelName}}</h2>
-          <p><a href="javascript:void(0);" onclick="setGoUrl( site_url.fortuneFlowKnown_url+'?articleBelong={{articleBelong}}', 'fortune_01')" >播放往期内容</a><i class="iconfont">&#xe636;</i></p>
+          <p><a href="javascript:void(0);" onclick="setGoUrl( '{{modelUrl}}', 'fortune_01')" >播放往期内容</a><i class="iconfont">&#xe636;</i></p>
      </script>
      <script id="video-template" type="text/x-handlebars-template">
           {{#each this}}
@@ -161,7 +161,7 @@
      <script id="forum-template" type="text/x-handlebars-template">
           <h2>{{modelName}}</h2>
           <!-- <i><a href="{{modelUrl}}" htmdEvt = "fortune_all">全部</a><i class="iconfont">&#xe636;</i></p> -->
-          <p><a href="javascript:void(0);" onclick="setGoUrl( site_url.fortuneClassroom_url, 'fortune_03')">全部</a><i class="iconfont">&#xe636;</i></p>
+          <p><a href="javascript:void(0);" onclick="setGoUrl('{{modelUrl}}', 'fortune_03')">全部</a><i class="iconfont">&#xe636;</i></p>
      </script>
      <script id="forumTitle" type="text/x-handlebars-template">
           {{#each this}}
@@ -198,7 +198,7 @@
      <script id="tabContent-template" type="text/x-handlebars-template">
           <h2>{{modelName}}</h2>
           <!-- <i><a htmdEvt = "fortune_studies" href="{{modelUrl}}" >查看全部研究</a><i class="iconfont">&#xe636;</i></p> -->
-          <p><a href="javascript:void(0);" onclick="setGoUrl(site_url.wealthResearch_url, 'fortune_06')" >查看全部研究</a><i class="iconfont">&#xe636;</i></p>
+          <p><a href="javascript:void(0);" onclick="setGoUrl('{{modelUrl}}', 'fortune_06')" >查看全部研究</a><i class="iconfont">&#xe636;</i></p>
      </script>
 
      @@include('@pathInclude/views/footer.html')

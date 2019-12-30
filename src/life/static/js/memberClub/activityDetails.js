@@ -140,6 +140,8 @@ $(function() {
                                 zIndex: 100,
                                 needYesHref: true, //是否需要把确定按钮改成a标签，默认false
                                 yesHref: site_url.addFinancialer_url, //跳转到绑定理财师页面
+                                htmdEvtYes:'activityDetails_8',  // 埋点确定按钮属性
+                                htmdEvtCel:'activityDetails_9',  // 埋点取消按钮属性
                                 callback: function(t) {
 
                                 },
@@ -231,6 +233,8 @@ $(function() {
                                 zIndex: 100,
                                 needYesHref: true, //是否需要把确定按钮改成a标签，默认false
                                 yesHref: site_url.riskAppraisal_url+"?type=private", //确定按钮a链接的默认href
+                                htmdEvtYes:'activityDetails_10',  // 埋点确定按钮属性
+                                htmdEvtCel:'activityDetails_11',  // 埋点取消按钮属性
                                 callback: function(t) {
 
                                 },
@@ -248,6 +252,8 @@ $(function() {
                                     zIndex: 100,
                                     needYesHref: true, //是否需要把确定按钮改成a标签，默认false
                                     yesHref: site_url.qualifiedInvestor_url+"?type=private", //确定按钮a链接的默认href 产品确认跳私募
+                                    htmdEvtYes:'activityDetails_12',  // 埋点确定按钮属性
+                                    htmdEvtCel:'activityDetails_13',  // 埋点取消按钮属性
                                     callback: function(t) {
 
                                     },
@@ -264,6 +270,8 @@ $(function() {
                                     zIndex: 100,
                                     needYesHref: true, //是否需要把确定按钮改成a标签，默认false
                                     yesHref: site_url.realIdcard_url, //确定按钮a链接的默认href  身份证上传
+                                    htmdEvtYes:'activityDetails_14',  // 埋点确定按钮属性
+                                    htmdEvtCel:'activityDetails_15',  // 埋点取消按钮属性
                                     callback: function(t) {
 
                                     },
@@ -284,6 +292,8 @@ $(function() {
                                 zIndex: 100,
                                 needYesHref: true, //是否需要把确定按钮改成a标签，默认false
                                 yesHref:  site_url.riskAppraisal_url+"?type=private", //
+                                htmdEvtYes:'activityDetails_16',  // 埋点确定按钮属性
+                                htmdEvtCel:'activityDetails_17',  // 埋点取消按钮属性
                                 callback: function(t) {
 
                                 },
@@ -301,6 +311,8 @@ $(function() {
                                 zIndex: 100,
                                 needYesHref: true, //是否需要把确定按钮改成a标签，默认false
                                 yesHref: site_url.wealthIndex_url, //确定按钮a链接的默认href
+                                htmdEvtYes:'activityDetails_18',  // 埋点确定按钮属性
+                                htmdEvtCel:'activityDetails_19',  // 埋点取消按钮属性
                                 callback: function(t) {
 
                                 },
@@ -317,6 +329,8 @@ $(function() {
                                 zIndex: 100,
                                 needYesHref: true, //是否需要把确定按钮改成a标签，默认false
                                 yesHref: site_url.realIdcard_url, //确定按钮a链接的默认href  身份证上传
+                                htmdEvtYes:'activityDetails_20',  // 埋点确定按钮属性
+                                htmdEvtCel:'activityDetails_21',  // 埋点取消按钮属性
                                 callback: function(t) {
 
                                 },
@@ -330,6 +344,7 @@ $(function() {
                                 yesTxt: '我明白了',
                                 hideCelButton: true,
                                 zIndex: 100,
+                                htmdEvtYes:'activityDetails_22',  // 埋点确定按钮属性
                                 callback: function(t) {
 
                                 },
@@ -349,6 +364,7 @@ $(function() {
                                 yesTxt: '我明白了',
                                 hideCelButton: true,
                                 zIndex: 100,
+                                htmdEvtYes:'activityDetails_23',  // 埋点确定按钮属性
                                 callback: function(t) {
 
                                 },
@@ -361,6 +377,7 @@ $(function() {
                                 yesTxt: '我明白了',
                                 hideCelButton: true,
                                 zIndex: 100,
+                                htmdEvtYes:'activityDetails_24',  // 埋点确定按钮属性
                                 callback: function(t) {
 
                                 },

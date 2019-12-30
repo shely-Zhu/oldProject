@@ -16,7 +16,7 @@ require('@pathCommonJsCom/goTopMui.js');
 require('@pathCommonCom/elasticLayer/elasticLayer/elasticLayer.js');
 // require('@pathCommonJs/components/elasticLayer.js');
 // require('@pathCommonJs/components/elasticLayerTypeFive.js');
-var splitUrl = require('@pathCommonJs/components/splitUrl.js')();
+// var splitUrl = require('@pathCommonJs/components/splitUrl.js')();
 
 
 $(function() {
