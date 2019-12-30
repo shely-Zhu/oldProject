@@ -101,12 +101,10 @@ $(function() {
                     if (jsonData.incomeModeJF == '0') {
                         // 头部不同的展示
                         $('.fixedIncome').removeClass('hide');
-                        $('.floatProfit').addClass('hide');
-                        $('.floatProfitWy').addClass('hide');
 
                         // 基本信息的展示
                         $('.performanceComparison').removeClass('hide');
-                        $('.lineWrap').addClass('hide');
+                        // $('.lineWrap').addClass('hide');
 
                         that.queryBenefitLevel();
 
@@ -123,11 +121,10 @@ $(function() {
                         }
                     } else if (jsonData.incomeModeJF == '1') { //1浮收普通   展示历史业绩走势
                         // 头部不同的展示
-                        $('.fixedIncome').addClass('hide');
                         $('.floatProfit').removeClass('hide');
-                        $('.floatProfitWy').addClass('hide');
 
                         that.$e.lineType = 'wfsy';
+                        $('.lineWrap').removeClass('hide');
                         $('.lineWrap .wfsy').removeClass('hide');
                         $('.lineWrap .qrnh').addClass('hide');
 
@@ -146,11 +143,10 @@ $(function() {
 
                     } else if (jsonData.incomeModeJF == '2') { //2浮收稳裕   展示七日年化
                         // 头部不同的展示
-                        $('.fixedIncome').addClass('hide');
-                        $('.floatProfit').addClass('hide');
                         $('.floatProfitWy').removeClass('hide');
 
                         that.$e.lineType = 'qrnh';
+                        $('.lineWrap').removeClass('hide');
                         $("#qrnhLine").removeClass("hide");
                         $("#wfsyLine").addClass("hide");
                         // 展示七日年化
@@ -202,7 +198,12 @@ $(function() {
                     if (!!jsonData.projectLable) {
                         // var projectLable = jsonData.projectLable;
                         $.each(jsonData.projectLable, function(i, el) {
-                            projectLableHtml = '<span>' + el + '</span>'
+                            if(el == '关注度高'){
+                               projectLableHtml = '<span id="red">' + el + '</span>'  
+                            }else{
+                                projectLableHtml = '<span>' + el + '</span>'
+                            }
+                            // projectLableHtml = '<span>' + el + '</span>'
                             $('.productLabel').append(projectLableHtml);
                         })
                     }
