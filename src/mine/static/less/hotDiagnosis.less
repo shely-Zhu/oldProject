@@ -7,6 +7,7 @@
 html,
 body {
     height: 100%;
+    background:@c005;
 }
 
 
@@ -67,13 +68,14 @@ body {
             background-color: @c005;
             padding: 0.1rem 0.26rem;
             .tip {
-                height: 0.56rem;
+                height: 0.76rem;
                 background-color: @f7f7f7;
                 color: @878787;
                 font-size: 0.22rem;
-                line-height: 0.56rem;
+                line-height: 0.76rem;
                 width: 100%;
                 border-radius: 0.04rem;
+                font-size: .24rem;
             }
 
             .mui-icon-search::before {
@@ -192,7 +194,7 @@ body {
     // 热门列表
     .hotFundList {
         overflow: hidden;
-        margin-top: 1.6rem;
+        margin-top: 2.9rem;
 
         .card-theme,
         .search-list,.list{
@@ -262,7 +264,8 @@ body {
 
     // 底部按钮     
     .btnBottom {
-        position: absolute;
+        // position: absolute;
+        position: fixed;
         bottom: 0.34rem;
         margin: 0.5%;
         height: 0.78rem;
@@ -305,11 +308,5 @@ body {
 
     .red{
         color: @ff6905;
-    }
-    .fixedWrap .HeadBarConfigBox a.backBtn{
-        color: black !important;
-        font-size: 0.4rem;
-        margin-top: -0.4rem;
-        margin-left: -0.25rem;
     }
 }
