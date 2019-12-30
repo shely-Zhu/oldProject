@@ -140,6 +140,8 @@ $(function() {
                                 zIndex: 100,
                                 needYesHref: true, //是否需要把确定按钮改成a标签，默认false
                                 yesHref: site_url.addFinancialer_url, //跳转到绑定理财师页面
+                                htmdEvtYes:'activityDetails_8',  // 埋点确定按钮属性
+                                htmdEvtCel:'activityDetails_9',  // 埋点取消按钮属性
                                 callback: function(t) {
 
                                 },

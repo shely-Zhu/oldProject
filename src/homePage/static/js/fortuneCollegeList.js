@@ -1,5 +1,5 @@
 //  财富讲堂
-// @author wangjiajia 2019-11-20 
+// @author liliang 2019-11-20 
 
 require('@pathCommonBase/base.js');
 require('@pathCommonJsCom/utils.js');
@@ -16,7 +16,7 @@ require('@pathCommonJsCom/goTopMui.js');
 require('@pathCommonCom/elasticLayer/elasticLayer/elasticLayer.js');
 // require('@pathCommonJs/components/elasticLayer.js');
 // require('@pathCommonJs/components/elasticLayerTypeFive.js');
-var splitUrl = require('@pathCommonJs/components/splitUrl.js')();
+// var splitUrl = require('@pathCommonJs/components/splitUrl.js')();
 
 
 $(function() {
