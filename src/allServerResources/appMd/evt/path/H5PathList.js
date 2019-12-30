@@ -231,6 +231,7 @@ var pathList = {
 	"/financial/views/publicPlacement/transactionRules.html" :{ evtid: 'transactionRules', topic: '交易规则', info: ''} ,
 	"/financial/views/publicPlacement/newFundDetail.html" :{ evtid: 'newFundDetail', topic: '新发基金产品详情', info: ''} ,
 	"/financial/views/publicPlacement/publicDetail.html" :{ evtid: 'publicDetail', topic: '公募持仓基金详情', info: ''} ,
+	"/financial/views/publicPlacement/surelyResultShot.html" :{evtid: 'surelyResultShot', topic: '定投结果', info: ''},
 
 	/*********************************account start***************************************/
 	"/account/views/publicTradeDetail/publicTradeDetail.html": { evtid: 'publicTradeDetail', topic: '交易记录', info: ''} ,

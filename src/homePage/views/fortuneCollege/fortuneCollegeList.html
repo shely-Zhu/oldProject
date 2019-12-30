@@ -116,8 +116,8 @@
 
      <!-- 翻译官 -->
      <script id="fortune-template" type="text/x-handlebars-template">
-               <h2>{{modelName}}</h2>
-               <p><a href="{{modelUrl}}">查看往期热词</a><i class="iconfont">&#xe636;</i></p>
+          <h2>{{modelName}}</h2>
+          <p><a href="{{modelUrl}}">查看往期热词</a><i class="iconfont">&#xe636;</i></p>
      </script>
      <script id="content-template" type="text/x-handlebars-template">
           {{#each this}}
@@ -136,7 +136,7 @@
      <!-- 早知道 -->
      <script id="fortuneCf-template" type="text/x-handlebars-template">
           <h2>{{modelName}}</h2>
-          <p><a href="javascript:void(0);" onclick="setGoUrl( site_url.fortuneFlowKnown_url+'?articleBelong={{articleBelong}}', 'fortune_01')" >播放往期内容</a><i class="iconfont">&#xe636;</i></p>
+          <p><a href="javascript:void(0);" onclick="setGoUrl( site_url.fortuneFlowKnown_url, 'fortune_01')" >播放往期内容</a><i class="iconfont">&#xe636;</i></p>
      </script>
      <script id="video-template" type="text/x-handlebars-template">
           {{#each this}}

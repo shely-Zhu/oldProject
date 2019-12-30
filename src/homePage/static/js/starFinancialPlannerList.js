@@ -48,6 +48,8 @@ $(function() {
                         hideCelButton: false,
                         yesTxt: '浏览产品',
                         celTxt: '返回首页',
+                        htmdEvtYes:'starFinancialPlannerList_08',  // 埋点确定按钮属性
+                        htmdEvtCel:'starFinancialPlannerList_09',  // 埋点取消按钮属性
                         callback: function() {
                             // 点击浏览产品跳转理财首页
                             window.location.href = site_url.wealthIndex_url
@@ -346,7 +348,7 @@ $(function() {
                     $('#loading').show();
                     that.getCityListData();
                 }, {
-                    'htmdEvt': 'starFinancia_00'
+                    'htmdEvt': 'starFinancialPlannerList_00'
                 });
                 //点击定位选择效果
                 mui("body").on('mdClick', '#cityListBox .mui-indexed-list-item,.hotBox span', function() {
@@ -371,7 +373,7 @@ $(function() {
                     $('.activitySearchInput').width(activitySearchInputWidth);
                     mui('.contentWrapper').pullRefresh().scrollTo(0, 0, 100);
                 }, {
-                    'htmdEvt': 'starFinancia_01'
+                    'htmdEvt': 'starFinancialPlannerList_01'
                 });
                 //点击定位选择头部返回效果
                 mui("body").on('mdClick', '#cityListBox .goBack', function() {
@@ -379,7 +381,7 @@ $(function() {
                     $('#activityDataBox').show();
                     mui('.contentWrapper').pullRefresh().scrollTo(0, 0, 10);
                 }, {
-                    'htmdEvt': 'starFinancia_02'
+                    'htmdEvt': 'starFinancialPlannerList_02'
                 });
                 //点击定位选择右侧索引效果
                 mui("body").on('mdClick', '#cityListBox .mui-indexed-list-bar a', function() {
@@ -393,7 +395,7 @@ $(function() {
                         }
                     }
                 }, {
-                    'htmdEvt': 'starFinancia_03'
+                    'htmdEvt': 'starFinancialPlannerList_03'
                 });
                 //点击活动列表跳转
                 mui('body').on('mdClick', '.mui-card', function() {
@@ -416,14 +418,15 @@ $(function() {
                                         p: '<p>您已经绑定过理财师，请勿重复绑定</p>',
                                         zIndex: 100,
                                         yesButtonPosition: 'right',
-                                        hideCelButton: false,
-                                        yesTxt: '立即绑定',
+                                        hideCelButton: true,
+                                        yesTxt: '明白了',
+                                        htmdEvtYes:'starFinancialPlannerList_10',
                                         callback: function() {
                                             that.gV.FinancialerClickFlag = true  
                                         },
-                                        callbackCel: function() {
-                                            that.gV.FinancialerClickFlag = true 
-                                        }
+                                        // callbackCel: function() {
+                                        //     that.gV.FinancialerClickFlag = true 
+                                        // }
                                     });
                                 // 未绑定过理财师则先提示用户只能绑定一个用户，再跳转验证用户身份页面
                                 } else {
@@ -435,6 +438,8 @@ $(function() {
                                         yesButtonPosition: 'right',
                                         hideCelButton: false,
                                         yesTxt: '立即绑定',
+                                        htmdEvtYes:'starFinancialPlannerList_12',
+                                        htmdEvtCel:'starFinancialPlannerList_13',
                                         callback: function() {
                                             // 点击立即绑定跳转验证用户身份页面
                                             window.location.href = site_url.bindFinancialer_url
@@ -454,6 +459,8 @@ $(function() {
                                     yesButtonPosition: 'right',
                                     hideCelButton: false,
                                     yesTxt: '立即绑定',
+                                    htmdEvtYes:'starFinancialPlannerList_14',
+                                    htmdEvtCel:'starFinancialPlannerList_15',
                                     callback: function() {
                                         // 点击立即绑定跳转验证用户身份页面
                                         window.location.href = site_url.bindFinancialer_url
@@ -474,7 +481,7 @@ $(function() {
                     var actId = $(this).children('a').attr('data-actId');
                     window.location.href = site_url.activityDetails_url + '?actType=' + actType + '&' + 'actId=' + actId;*/
                 }, {
-                    'htmdEvt': 'starFinancia_04'
+                    'htmdEvt': 'starFinancialPlannerList_04'
                 });
                 //搜索框输入触发查询数据
                 mui('#activitySearch').on('keyup', '.activitySearchInput input', function() {
@@ -495,7 +502,8 @@ $(function() {
                     $(".activityCityBox").hide()
                     $(".Cutof").show()
                 })
-                $(".Cutof").click(function(){
+                mui('body').on('mdClick', '.Cutof', function() {
+                // $(".Cutof").click(function(){
                     $(".activityListDataBox").show()
                     $(".activityCityBox").show()
                     $(".Cutof").hide()
@@ -506,6 +514,8 @@ $(function() {
                       
                     }
                     that.initMui();
+                },{
+                    'htmdEvt': 'starFinancialPlannerList_16'
                 })
                 //清除搜索框触发查询数据
                 mui('body').on('mdClick', '#activitySearch .mui-icon-clear', function() {
@@ -515,7 +525,7 @@ $(function() {
                     that.initMui();
                     mui('.contentWrapper').pullRefresh().scrollTo(0, 0, 100);
                 }, {
-                    'htmdEvt': 'starFinancia_05'
+                    'htmdEvt': 'starFinancialPlannerList_05'
                 });
 
                 // mui("body").on('tap', '.goTopBtn', function () {
@@ -531,7 +541,7 @@ $(function() {
                 mui('body').on('mdClick', '.activitySearchInput *', function() {
                     $('.activitySearchInput').children('input').focus();
                 }, {
-                    'htmdEvt': 'starFinancia_06'
+                    'htmdEvt': 'starFinancialPlannerList_06'
                 });
                 //返回上一页
                 mui("body").on('mdClick', '#goBack', function() {
@@ -553,7 +563,7 @@ $(function() {
                     }
 
                 }, {
-                    'htmdEvt': 'starFinancia_07'
+                    'htmdEvt': 'starFinancialPlannerList_07'
                 })
             }
         }
