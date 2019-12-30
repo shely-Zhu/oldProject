@@ -29,6 +29,7 @@ $(function() {
 			isAllowRedemption: splitUrl['isAllowRedemption'],
 			ecFileName: '',
 			ecFileUrl: '',
+			groupName: '',
 			redemptionOpenFrequency: '', // 赎回开放频率
 			imgUrl: '', // 赎回指引图片路径
 			qrnhWfsy: {
@@ -183,6 +184,7 @@ $(function() {
 			    	that.setDomData( jsonData );
 			    	that.data.ecFileName = jsonData.ecFileName?jsonData.ecFileName:'';
 			    	that.data.ecFileUrl = jsonData.ecFileUrl?jsonData.ecFileUrl:'';
+			    	that.data.groupName = jsonData.groupName?jsonData.groupName:'';
 			    	that.data.redemptionOpenFrequency = jsonData.redemptionOpenFrequency?jsonData.redemptionOpenFrequency:''
 			    	//请求其他接口
 			    	if( (that.data.projectType == 0) || (that.data.projectType == 1) ){ 
@@ -250,7 +252,7 @@ $(function() {
 			       		newData.profitThoudDate.push( el.curveDate);
 			       		newData.profitThoudValue.push( el.incomeUnit);
 			       	})
-			       	switch(num) {
+			       	switch(Number(num)) {
 			       		case 0: that.data['qrnhWfsy'].oneMonth = newData;break;
 			       		case 1: that.data['qrnhWfsy'].threeMonth = newData;break;
 			       		case 3: that.data['qrnhWfsy'].oneYear = newData;break;
@@ -290,19 +292,19 @@ $(function() {
 				var type = 'ljjz';
 			}
 			//判断是否已经有数据了，有的话不再请求接口
-			if( num == 0 && that.data['dwjzljjz'].oneMonth.profitThoudDate && that.data['dwjzljjz'].oneMonth.profitThoudDate.length){
+			if( num == 0 && that.data['dwjzljjz'].oneMonth.assetsDate && that.data['dwjzljjz'].oneMonth.assetsDate.length){
 	       		//请求的是近一个月的数据
 	       		that.drawLine( type, that.data['dwjzljjz'].oneMonth );
 	       		return false;
-	       	} else if( num == 1 && that.data['dwjzljjz'].threeMonth.profitThoudDate && that.data['dwjzljjz'].threeMonth.profitThoudDate.length){
+	       	} else if( num == 1 && that.data['dwjzljjz'].threeMonth.assetsDate && that.data['dwjzljjz'].threeMonth.assetsDate.length){
 	       		//近三个月
 	       		that.drawLine( type, that.data['dwjzljjz'].threeMonth );
 	       		return false;
-	       	} else if( num == 3 && that.data['dwjzljjz'].oneYear.profitThoudDate && that.data['dwjzljjz'].oneYear.profitThoudDate.length ){
+	       	} else if( num == 3 && that.data['dwjzljjz'].oneYear.assetsDate && that.data['dwjzljjz'].oneYear.assetsDate.length ){
 	       		//近一年
 	       		that.drawLine( type, that.data['dwjzljjz'].oneYear );
 	       		return false;
-	       	} else if( num == 4 && that.data['dwjzljjz'].sinceNow.profitThoudDate && that.data['dwjzljjz'].sinceNow.profitThoudDate.length){
+	       	} else if( num == 4 && that.data['dwjzljjz'].sinceNow.assetsDate && that.data['dwjzljjz'].sinceNow.assetsDate.length){
 	       		//成立至今
 	       		that.drawLine( type, that.data['dwjzljjz'].sinceNow );
 	       		return false;
@@ -324,7 +326,7 @@ $(function() {
 			       		newData.assetsDate.push( el.netValueDate);
 			       		newData.accumulativeAssets.push( el.accuNetValue);
 			       	})
-			       	switch(num) {
+			       	switch(Number(num)) {
 			       		case 0: that.data['dwjzljjz'].oneMonth = newData;break;
 			       		case 1: that.data['dwjzljjz'].threeMonth = newData;break;
 			       		case 3: that.data['dwjzljjz'].oneYear = newData;break;
@@ -494,10 +496,18 @@ $(function() {
 		getTxt: function(){
 			var that = this;
 		},
+		setHeadLineHeight() {
+			if($("#HeadBarpathName").height() <= $(".backBtn").height()) {
+				$("#HeadBarpathName").removeClass("doubleLines").addClass("singleLine")
+			} else {
+				$("#HeadBarpathName").removeClass("singleLine").addClass("doubleLines")
+			}
+		},
 		setDomData: function( jsonData){
 			var that = this;
 			//项目名称
     		$('#HeadBarpathName').html( jsonData.projectName );
+    		that.setHeadLineHeight()
 	    	if ( that.data.projectType == 0 ){ //稳金类项目
     			//当前市值
     			$('#type0TotalM').html( jsonData.capitalisation?jsonData.capitalisation:'--' );
@@ -506,7 +516,7 @@ $(function() {
     		   	//七日年化
     		   	$('.type_0 .sevenYearYield').html( jsonData.sevenYearYield?jsonData.sevenYearYield + '%':'--');
     		   	// 七日年化日期
-    		   	$('.type_0 .smallDate').html( jsonData.sevenYearYieldUpdateDate ?" (" + jsonData.sevenYearYieldUpdateDate + ")":"--");
+    		   	$('.type_0 .smallDate').html( jsonData.sevenYearYieldUpdateDate ?" (" + jsonData.sevenYearYieldUpdateDate + ")":"( -- )");
     		   	//可赎回份额
     		   	$('.type_0 .kshfe').html( jsonData.allowRedemptionShare?jsonData.allowRedemptionShare:'--');
     		   	that.data.redeemPartion = jsonData.allowRedemptionShare
@@ -520,7 +530,7 @@ $(function() {
 	    		//七日年化
 	    		$('.type_1 .sevenYearYield').html( jsonData.sevenYearYield?jsonData.sevenYearYield + '%':'--');
 	    		// 七日年化日期
-    		   	$('.type_1 .smallDate').html(jsonData.sevenYearYieldUpdateDate ?" (" + jsonData.sevenYearYieldUpdateDate + ")":"--");
+    		   	$('.type_1 .smallDate').html(jsonData.sevenYearYieldUpdateDate ?" (" + jsonData.sevenYearYieldUpdateDate + ")":"( -- )");
 	    		//可赎回份额
     		   	$('.type_1 .kshfe').html( jsonData.allowRedemptionShare?jsonData.allowRedemptionShare:'--');
     		   	that.data.redeemPartion = jsonData.allowRedemptionShare
@@ -686,9 +696,9 @@ $(function() {
 			}, {
 				'htmdEvt': "privateDetail_2"
 			})
-			// 交易明细点击跳转
+			// 基金确认书点击跳转
 			mui("body").on('mdClick', '.privateFundPdf', function() {
-				window.location.href = site_url.privateFundPdf_url + '?projectId=' + that.data.projectId + '&ecFileName=' + that.data.ecFileName + '&ecFileUrl=' + that.data.ecFileUrl;
+				window.location.href = site_url.downloadFile_api+'?name='+ new Base64().encode(that.data.ecFileName)+"&show=0&url="+that.data.ecFileUrl;
 			}, {
 				'htmdEvt': "privateDetail_3"
 			})
@@ -753,7 +763,7 @@ $(function() {
             mui("body").on('mdClick', '.redeemBtn', function() {
             	// 先判断登录是否超时以及账户冻结状态    司法验证过期弹出提示框
 				if(that.data.redeemClickFlag) {
-					that.data.redeemClickFlag = frozenAccount("buyFreeze", window.location.href)
+					that.data.redeemClickFlag = frozenAccount("buyFreeze", window.location.href,'','privateDetail_13')
 					if(!that.data.redeemClickFlag) { // 验证通过则跳转赎回页面
 						$.elasticLayer({
 				            id: "tip",
@@ -762,6 +772,8 @@ $(function() {
 				            zIndex: 100,
 				            yesButtonPosition: 'left',
 				            hideCelButton: false,
+				            htmdEvtYes:'privateDetail_14',  // 埋点确定按钮属性
+				            htmdEvtCel:'privateDetail_15',  // 埋点取消按钮属性
 				            callback: function() {
 				            	var type = that.data.projectType==0?1:2
 								window.location.href = site_url.privateRedeem_url + '?projectId=' + that.data.projectId + '&redeemPartion=' + that.data.redeemPartion + '&type=' + type;

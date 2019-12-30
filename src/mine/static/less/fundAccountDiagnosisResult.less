@@ -41,7 +41,7 @@ body {
             text-align: center;
             margin-top: 0.2rem;
         }
-        .popup{
+        .popuplist{
             display: block;
             position: fixed;
             left: 0;
@@ -318,5 +318,35 @@ body {
         height: 40px !important;
         line-height: 40px !important;
     }
+}
+.addOtherFund{
+    display: none;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: black;
+    opacity: 0.6;
+}
+.addOtherFund_content{
+    position: fixed;
+    display: none;
+    z-index: 1111;
+    top: 3rem;
+    left: 5%;
+    width: 90%;
+    background: #ececec;
+    height: 4.2rem;
+    .addOtherFalse,.addOtherTrue{
+        width: 2rem;
+        height: 0.8rem;
+        background-color: #f4cf5c;
+        color: white;
+        margin-left: 0.7rem;
+        display: inline-block;
+    }
+}
+.warmMessage{
+    display: none;
 }
 

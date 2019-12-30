@@ -4,7 +4,7 @@
 @import url("@pathCommonLess/mui/resetMUI.less");
 @import url("@pathCommonCom/button/button.less");
 @import url("@pathCommonLessCom/alertBox.less");
-@import url("@pathCommonCom/noData/noData.less");
+// @import url("@pathCommonCom/noData/noData.less");
 @import url("@pathCommonLessCom/headBarConfig.less");
 
 .container{
@@ -119,25 +119,26 @@
             }
         }
     }
-    .NoData{
-        margin-top: 1.1rem;
-        background: @c005;
-        padding-top: .42rem;
-        img{
-            width: 2.16rem;
-            height:2.16rem;
-            margin: 0 auto .35rem;
-        }
-        p{
-            font-size:.28rem;
-            font-family:PingFangSC-Regular,PingFang SC;
-            font-weight:400;
-            color:@9B9B9B;
-            line-height:.28rem;
-            text-align: center;
-            padding-bottom: .47rem;
-        }
-    }
+    // .NoData{
+    //     margin-top: 1.1rem;
+    //     background: @c005;
+    //     padding-top: .42rem;
+    //     display: none;
+    //     img{
+    //         width: 2.16rem;
+    //         height:2.16rem;
+    //         margin: 0 auto .35rem;
+    //     }
+    //     p{
+    //         font-size:.28rem;
+    //         font-family:PingFangSC-Regular,PingFang SC;
+    //         font-weight:400;
+    //         color:@9B9B9B;
+    //         line-height:.28rem;
+    //         text-align: center;
+    //         padding-bottom: .47rem;
+    //     }
+    // }
     .more{
         background: @c005;
         margin-top: .3rem;
@@ -153,7 +154,6 @@
                 top:.18rem;
             }
             div{
-                width:1.92rem;
                 height:.4rem;
                 font-size:.32rem;
                 font-weight:600;
@@ -237,5 +237,33 @@
 
     .without{
         margin-top: 1.3rem;
+    }
+}
+
+.clickli {
+    background-size: 100% 100%!important;
+}
+.without{
+    padding-top:0.5rem;
+}
+
+.NoDataMore{
+    margin-top: 1.1rem;
+    background: @c005;
+    padding-top: .42rem;
+    display: none;
+    img{
+        width: 2.16rem;
+        height:2.16rem;
+        margin: 0 auto .35rem;
+    }
+    p{
+        font-size:.28rem;
+        font-family:PingFangSC-Regular,PingFang SC;
+        font-weight:400;
+        color:@9B9B9B;
+        line-height:.28rem;
+        text-align: center;
+        padding-bottom: .47rem;
     }
 }

@@ -10,7 +10,7 @@ var generateTemplate = require('@pathCommonJsComBus/generateTemplate.js');
 require('@pathCommonCom/pullRefresh/pullRefresh.js');
 
 $(function() {
-    let somePage = {
+    var somePage = {
         //获取页面元素
         $e: {
             informsListWrapperId: $("#informsListWrapper"), // 消息列表盒子
@@ -187,6 +187,11 @@ $(function() {
             $.each(data, function(a, b) {
                 b.date = b.createTimeStr.split(" ")[0]
                 b.time = b.createTimeStr.split(" ")[1]
+                if(b.readStatus == 0) {
+                    b.badgeFlag = true
+                } else {
+                    b.badgeFlag = false
+                }
             })
             return data;
         },

@@ -25,6 +25,7 @@ require('@pathCommonJsCom/goTopMui.js');
 var splitUrl = require('@pathCommonJs/components/splitUrl.js')();
 var transcationTem = require('@pathCommonJsCom/account/transcationTem.js');
 var alwaysAjax = require('@pathCommonJs/components/alwaysAjax.js');
+var setCookie = require('@pathNewCommonJsCom/setCookie.js');
 
 $(function() {
     var data = {
@@ -72,8 +73,16 @@ $(function() {
                 $('#HeadBarpathName').attr("data", '已完成交易').html('已完成交易');
                 that.gV.type = 1;
             } else if (splitUrl['type'] == 'toBeConfirmed') {
-                $('.hopper').hide();
-                $('#HeadBarpathName').attr("data", '待确认交易').html('待确认交易');
+                try {
+                    $('.hopper').hide();
+                }catch(e) {
+                    console.log("hopper", e)
+                }
+                try {
+                    $('#HeadBarpathName').attr("data", '待确认交易').html('待确认交易');
+                }catch(e) {
+                    console.log("bar", e)
+                }
                 that.gV.type = 0;
             }
             mui.init({
@@ -154,8 +163,7 @@ $(function() {
                         $('.contentWrapper').find('.mui-pull-bottom-pocket').removeClass('mui-hidden');
                         // 将列表插入到页面上
                         transcationTem(data, that.getElements.contentWrap, that.getElements.transTemp, type)
-
-                    }, 200)
+                    }, 300)
                 },
                 callbackNoData: function() {
                     if (that.gV.aP.pageNum == 1) {
@@ -218,6 +226,8 @@ $(function() {
                             celTxt: '取消',
                             hideCelButton: false,
                             zIndex: 100,
+                            htmdEvtYes:'tobeConfirmTransaction_7',  // 埋点确定按钮属性
+                            htmdEvtCel:'tobeConfirmTransaction_8',  // 埋点取消按钮属性
                             callback: function(t) {
 
                             }
@@ -232,6 +242,8 @@ $(function() {
                             celTxt: '取消',
                             hideCelButton: false,
                             zIndex: 100,
+                            htmdEvtYes:'tobeConfirmTransaction_9',  // 埋点确定按钮属性
+                            htmdEvtCel:'tobeConfirmTransaction_10',  // 埋点取消按钮属性
                             callback: function(t) {
 
                             },
@@ -244,6 +256,8 @@ $(function() {
                             celTxt: '取消',
                             hideCelButton: false,
                             zIndex: 100,
+                            htmdEvtYes:'tobeConfirmTransaction_11',  // 埋点确定按钮属性
+                            htmdEvtCel:'tobeConfirmTransaction_12',  // 埋点取消按钮属性
                             callback: function(t) {
                                 var obj = [{
                                     url: site_url.fundReserveCancel_api,
@@ -290,6 +304,7 @@ $(function() {
                         yesTxt: '我明白了',
                         hideCelButton: true,
                         zIndex: 100,
+                        htmdEvtYes:'tobeConfirmTransaction_13',  // 埋点确定按钮属性
                         callback: function(t) {
 
                         },
@@ -314,7 +329,7 @@ $(function() {
                     if (type == 'toCertif') { //去合格投资者认证
                         if (isElec == 0) {
                             //非电子合同
-                            window.location.href = site_url.notElecSecondStep_url + '?isQualified=' + isQualified + '&projectName=' + projectName;
+                            window.location.href = site_url.notElecSecondStep_url + '?isQualified=' + isQualified + '&projectName=' + projectName+'&projectId=' + proId;
                         } else if (isElec == 1) {
                             //电子合同跳转
                             window.location.href = site_url.elecSecondStep_url + '?reserveId=' + reserveId + '&projectId=' + proId + '&projectName=' + projectName + '&isAllowAppend=' + isAllowAppend + '&isPubToPri=' + isPubToPri;
@@ -323,6 +338,7 @@ $(function() {
                         window.location.href = site_url.elecThirdStep_url + '?reserveId=' + reserveId + '&projectId=' + proId + '&projectName=' + projectName + '&isAllowAppend=' + isAllowAppend + '&isPubToPri=' + isPubToPri;
                     } else if (type == 'toSee') { //查看合同
                         window.location.href = site_url.seeSign_url + '?reserveId=' + reserveId;
+                        debugger
                     } else if (type == 'toUploadM') { //去上传汇款凭证
                         window.location.href = site_url.elecFourthStep_url + '?reserveId=' + reserveId + '&projectId=' + proId + '&projectName=' + projectName + '&isAllowAppend=' + isAllowAppend + '&isPubToPri=' + isPubToPri;
                     } else if (type == 'toView') { //详情

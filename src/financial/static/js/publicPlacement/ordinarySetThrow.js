@@ -11,13 +11,14 @@ require('@pathCommonJs/ajaxLoading.js');
 
 require('@pathIncludJs/vendor/mui/mui.picker.min.js');
 require('@pathCommonJs/components/elasticLayer.js');
-require('@pathCommonJs/components/headBarConfig.js');
+// require('@pathCommonJs/components/headBarConfig.js');
 var splitUrl = require('@pathCommonJs/components/splitUrl.js')();
 require('@pathCommonCom/elasticLayer/transOutRule/transOutRule.js');
 var popPicker = require('@pathCommonJsCom/popPicker.js');
 var generateTemplate = require('@pathCommonJsComBus/generateTemplate.js');
 
 var payPass = require('@pathCommonJsCom/payPassword.js');
+//var getCookie = require('@pathNewCommonJsCom/getCookie.js');
 
 $(function () {
 
@@ -42,9 +43,10 @@ $(function () {
 		gV: { // 全局变量
 			//------add-----
 			fundBusinCode:'039',
-			custType:sessionStorage.getItem('custType') ? sessionStorage.getItem('custType') : '1',   // 交易来源
+			//custType:getCookie('custType') ? getCookie('custType') : '1',   // 交易来源
 			scheduledProtocolId: splitUrl['scheduledProtocolId'] ? splitUrl['scheduledProtocolId'] : '201911270201',
 			type: splitUrl['type'] ? splitUrl['type'] : 'edit', // add添加  edit 编辑
+			//type:"add",
 			fundName: splitUrl['fundName'] ? splitUrl['fundName'] : null,   //基金名称
 			fundCode: splitUrl['fundCode'] ? splitUrl['fundCode'] : null,  //基金代码
 			capitalMode: '', //资金方式
@@ -75,18 +77,19 @@ $(function () {
 			bankAccountMask:'', //银行账号密文
 			bankAccountSecret:'',//银行账号密文
 			nextDeductingDay:'',  //扣款周期
-			singleNum:0   //单日限额
+			singleNum:0,   //单日限额
+			doubleClickStatus:false,
 		},
 		webinit: function () {
 			var that = this;
 			that.events();
 			if(that.gV.type == 'add'){
 				that.getData();
-				$("#HeadBarpathName").html('新增定投')
+				$("#HeadBarpathName").html('定投')
 			}
 			if(that.gV.type == 'edit'){
 				that.getDetails();
-				$("#HeadBarpathName").html('修改定投')
+				$("#HeadBarpathName").html('定投')
 			}
 			
 			that.getAgreeUrl();
@@ -184,7 +187,7 @@ $(function () {
 						}
 						for (var i = 0; i < tradeLimitList2.length; i++) {
 							if(i + 1 == tradeLimitList2.length){
-								that.$el.transformInput.attr('placeholder',tradeLimitList2[i].minValue)
+								that.$el.transformInput.attr('placeholder',tradeLimitList2[i].minValue +"元起")
 								that.$el.transformInput.attr('min',Number(tradeLimitList2[i].minValue).toFixed(0))
 								that.$el.transformInput.attr('max',Number(tradeLimitList2[i].maxValue).toFixed(0))
 								that.gV.minValue =   Number(tradeLimitList2[i].minValue).toFixed(0)  // 起投金额
@@ -303,11 +306,13 @@ $(function () {
 							generateTemplate(data, that.$el.popupUl, that.$el.bankListTemplate,true);
 							$("#loading").hide()
 							$('.popup').css('display','block')
+						    that.gV.doubleClickStatus = true
 						}else{
 							if(type){
 								generateTemplate(data, that.$el.popupUl, that.$el.bankListTemplate,true);
 								$("#loading").hide()
 								$('.popup').css('display','block')
+								that.gV.doubleClickStatus = true
 							}else{
 								for (var index = 0; index < data.length; index++) {
 									if(that.gV.bankAccountSecret == data[index].bankAccountSecret){
@@ -341,7 +346,12 @@ $(function () {
 						
 					}
                   
-                },
+				},
+				callbackNoData:function(json){
+					$('.popup').css('display','block')
+					that.gV.doubleClickStatus = true
+					generateTemplate("", that.$el.popupUl, that.$el.bankListTemplate,true);
+				}
 
             }];
             $.ajaxLoading(obj);
@@ -355,6 +365,7 @@ $(function () {
                 url: site_url.fundMaterial_api,
                 data: {
                     fundCode:that.gV.fundCode
+                    // fundCode:"000847"
                 },
                 //async: false,
                 needDataEmpty: true,
@@ -439,7 +450,8 @@ $(function () {
 					data = json.data;
 					console.log('data',data)
 					if(json.status == '0000'){
-					    window.location.href = site_url.pofCastSurelyDetails_url + '?scheduledProtocolId=' + data.scheduledProtocolId ;
+						//window.location.href = site_url.pofCastSurelyDetails_url + '?scheduledProtocolId=' + data.scheduledProtocolId ;
+						window.location.href = site_url.surelyResultShot_url + '?scheduledProtocolId=' + data.scheduledProtocolId +"&applyDate="+data.applyDate;
 					}
 				},
 				callbackNoData:function(json){
@@ -523,7 +535,9 @@ $(function () {
 					data = json.data;
 					console.log('data',data)
 					if(json.status == '0000'){
-					    window.location.href = site_url.pofCastSurelyDetails_url + '?scheduledProtocolId=' + data.scheduledProtocolId ;
+					   // window.location.href = site_url.pofCastSurelyDetails_url + '?scheduledProtocolId=' + data.scheduledProtocolId ;
+					   //跳我的定投计划
+					   window.location.href = site_url.myInvestmentPlan_url
 					}
 				},
 				callbackNoData:function(json){
@@ -675,13 +689,13 @@ $(function () {
 				}, {
 					value: "110105",
 					text: "周五"
-				}, {
+				}/*, {
 					value: "110106",
 					text: "周六"
 				}, {
 					value: "110107",
 					text: "周日"
-				}]
+				}*/]
 			}, {
 				value: '120000',
 				text: '每两周',
@@ -700,13 +714,13 @@ $(function () {
 				}, {
 					value: "120105",
 					text: "周五"
-				}, {
+				}/*, {
 					value: "120106",
 					text: "周六"
 				}, {
 					value: "120107",
 					text: "周日"
-				}]
+				}*/]
 			}, {
 				value: '130000',
 				text: '每月',
@@ -802,14 +816,12 @@ $(function () {
 			if(that.gV.type == 'add'){
 				that.getNextCutPayment()
 			}
-			// 周期选择
-			mui("body").on('mdClick', '#starttime', function () {
-				popPicker(2, list, that.$el.cycleDate , that.getNextCutPayment);
-			}, {
-				htmdEvt: 'ordinarySetThrow_17'
-			})
+			
 			/** 下面三个事件： 银行卡列表出现/隐藏 **/
 			mui("body").on('mdClick','.paymoney',function(){
+				if(that.gV.type == 'edit'){
+					return
+				}
 				$(".imgc").hide()
 				$(".iimg").show()
 				that.gV.payType = $(this).attr('pay-type')
@@ -821,6 +833,12 @@ $(function () {
 			}, {
 				htmdEvt: 'ordinarySetThrow_01'
 			}) 
+			//返回按钮
+			// mui("mui").on("mdClick","#goBack",function(){
+			// 	history.go(-1)
+			// },{
+			// 	htmdEvt: 'ordinarySetThrow_20'
+			// })
 
 			mui("body").on('mdClick','.popup-close',function(){
 				$('.popup').css('display','none')
@@ -838,7 +856,7 @@ $(function () {
 
 			//点击转出规则
 			mui("body").on('mdClick','.goRule',function(){
-				window.location.href = site_url.transactionRules_url + '?fundCode=' + that.gV.fundCode;
+				window.location.href = site_url.pofTransactionRules_url + '?fundCode=' + that.gV.fundCode;
 			}, {
 				htmdEvt: 'ordinarySetThrow_04'
 			}) 
@@ -849,11 +867,17 @@ $(function () {
 					tipAction('只能输入两位小数')
 					return
 				}
+				if($(this).val()!="" && $(".item2 .iconfont").hasClass("check")){
+					that.$el.confirmBtn.removeAttr("disabled");
+				}else{
+					that.$el.confirmBtn.attr('disabled',true)
+				}
 				that.getRate($(this).val());
 			})
 			//清除输入框数字
 			mui("body").on('mdClick','.deleteNum',function(){
 				$('.transformInput').val(null)
+				that.$el.confirmBtn.attr('disabled',true)
 			}, {
 				htmdEvt: 'ordinarySetThrow_05'
 			}) ;
@@ -905,6 +929,8 @@ $(function () {
 			
 			//确定
 			mui("body").on("mdClick",'.btn_box .btn',function(){
+				$(".pwd-input").val('')
+                $(".fake-box input").val('');
 				if(!!that.gV.minValue){
 					if(Number(that.gV.balance) < Number(that.gV.minValue)){
 						tipAction('最小买入金额不能低于' + that.gV.minValue + '元')
@@ -940,6 +966,9 @@ $(function () {
 			}, {
 				htmdEvt: 'ordinarySetThrow_09'
 			}) ;
+			mui("body").on('mdClick','setGoUrl_1',function(){
+				window.location.href = site_url.superContent_url + '?id=63'
+			})
 			//  ---忘记密码
 			mui("body").on('mdClick','#passwordWrap .forgetP',function(){
 				//跳往原生页面去修改密码
@@ -972,7 +1001,7 @@ $(function () {
 			//密码校验不通过   ---找回密码
 			mui("body").on('mdClick','.error2 .elasticYes',function(){
 				//跳往原生页面去修改密码
-				window.location.href = site_url.pofRetrievePassword_url
+				window.location.href = site_url.pofForgotPassword_url
 			}, {
 				htmdEvt: 'ordinarySetThrow_14'
 			}) ;
@@ -988,7 +1017,9 @@ $(function () {
 			//添加银行卡 -- 跳往原生
 			mui("body").on('mdClick','.popup-last',function(){
 				//跳往原生页面去修改密码
-				window.location.href = site_url.pofAddBankCard_url
+				if(that.gV.doubleClickStatus){
+					window.location.href = site_url.pofAddBankCard_url
+				}
 			}, {
 				htmdEvt: 'ordinarySetThrow_16'
 			}) ;
@@ -1012,8 +1043,14 @@ $(function () {
 						$("#transformInput").focus()
 					}
 			}, {
-				htmdEvt: 'fundTransformIn_18'
+				htmdEvt: 'ordinarySetThrow_18'
 			}) ;
+			// 周期选择
+			mui("body").on('mdClick', '#starttime', function () {
+				popPicker(2, list, that.$el.cycleDate , that.getNextCutPayment);
+			}, {
+				htmdEvt: 'ordinarySetThrow_19'
+			})
 
 		},
 

@@ -5,7 +5,7 @@ var generateTemplate = require('@pathCommonJsComBus/generateTemplate.js');
 var splitUrl = require('@pathCommonJs/components/splitUrl.js')();
 
 $(function() {
-    let somePage = {
+    var somePage = {
         //获取页面元素
         $e: {
             tab: $('.tabHeader .tab'),
@@ -25,6 +25,7 @@ $(function() {
             $(".tabBar a").eq(that.gV.sortType * 1).addClass('mui-active');
             that.getTemplateData(that.gV.articleBelong, that.gV.sortType);
             mui('.mui-slider').slider().gotoItem(that.gV.sortType * 1, 0) //默认点击
+            mui('.mui-slider').slider().setStopped(true);//禁用左右滑动事件
             that.events()
             that.initMui()
         },

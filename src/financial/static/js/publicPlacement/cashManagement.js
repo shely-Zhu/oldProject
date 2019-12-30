@@ -115,21 +115,17 @@ $(function () {
         var money = $($(this).parent().siblings()[1]).find(".centerValue").eq(0)[0].textContent;
         var productName = $(this).parent().parent().find(".itemTop .itemTitle span").eq(0)[0].innerHTML;
         var fundCode = $(this).parent().parent().find(".itemTop .itemTitle span").eq(0).attr("fundCode")
-        var obj = {
-          "money":money,
-          "productName":productName,
-          "fundCode":fundCode
-        };
-        sessionStorage.setItem("transformMessage",JSON.stringify(obj));
-        window.location.href = site_url.pofCashTransformOut_url;
+        window.location.href = site_url.pofCashTransformOut_url + '?fundCode=' + fundCode + '&productName=' + new Base64().encode(productName);;
       }, {
 				htmdEvt: 'cashManagement_03'
 			});
 
       //了解现金管理
-      mui("body").on("tap", ".fundKnow", function () { 
+      mui("body").on("mdClick", ".fundKnow", function () { 
        window.location.href  = site_url.articleTemplate_url + '?articleBelong=12'
        
+      },{
+        htmdEvt: 'cashManagement_04'
       });
       //认证
       mui("body").on('mdClick', ".tips .tips-li-right", function (e) {
@@ -155,10 +151,14 @@ $(function () {
             default:
                 break;
         }
+    },{
+      htmdEvt: 'cashManagement_05'
     });
     //一键认证
     mui("body").on('mdClick', ".tips .tips-btn", function (e) {
         window.location.href = site_url.realName_url
+    },{
+      htmdEvt: 'cashManagement_06'
     });
 
       // // 跳转详情页

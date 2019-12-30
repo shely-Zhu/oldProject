@@ -5,8 +5,9 @@
  * cutNumber 准备做tops的参数  后期优化
  */
 
-module.exports = function( $el, pullupLoadingName, cutNumber, isBottomFlag) {
-    var pullupLoadingNames = pullupLoadingName ? pullupLoadingName : ".contentWrapper"
+module.exports = function( $el, pullupLoadingName, type) {
+    var pullupLoadingNames = pullupLoadingName ? pullupLoadingName : ".contentWrapper";
+    var type = type ? type : 1 // type 1 单个列表 2 tab列表
     var $el = $el ? $el : $(".mui-table-view-cell");
     // 设置距离底部还剩300px时加载下一页
     console.log($el.length)
@@ -22,8 +23,14 @@ module.exports = function( $el, pullupLoadingName, cutNumber, isBottomFlag) {
             var diff = $el.parent().height() - $el.parent().parent().parent().height() - scrollTop
             // 当滚动距离距离最底部还剩500时，加载下一页
             if(diff <= 500) { 
-                if( ! $el.find('.mui-pull-caption-nomore').length ){
-                    mui(pullupLoadingNames).pullRefresh().pullupLoading();
+                if(type == 1) {
+                   if( ! $el.find('.mui-pull-caption-nomore').length ){
+                        mui(pullupLoadingNames).pullRefresh().pullupLoading();
+                    } 
+                } else if (type == 2) {
+                    if( ! $el.next().find('.mui-pull-caption-nomore').length ){
+                        mui(pullupLoadingNames).pullRefresh().pullupLoading();
+                    }
                 }
             } 
         });

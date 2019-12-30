@@ -1,12 +1,18 @@
 /*
- * @page: 投资者分类上传
- * @Author: songxiaoyu
- * @Date:   2017-05-24
- * @Last Modified by:   songxiaoyu
- * @Last Modified time: 2019-6-13
+ * @page: 联系我们
+ * @Author: chentiancheng
+ * @Date:   2019.12
+ * @Last Modified by:   chentiancheng
+ * @Last Modified time: 2019-12-30
  * @description:
  */
-
+require('../../../include/js/vendor/mui/mui.picker.min.js');
+require('../../../include/js/vendor/config.js');
+require('../../../include/js/vendor/zepto/callback.js');
+require('../../../include/js/vendor/zepto/deferred.js');
+require('../../../common/js/components/utils.js');
+require('../../../common/js/ajaxLoading.js');
+require('../../../common/js/input.js');
 var tipAction = require('../../js/components/tipAction.js');
 var splitUrl = require('../../js/components/splitUrl.js');
 
@@ -36,8 +42,8 @@ module.exports = function(callback, preThis, type) {
             multiple: true,
             errorTip: '最多只能上传九张照片',
             acceptTitle: 'compliance',
-            extensions: 'jpg,jpeg,png',
-            mimeTypes: 'image/*,Camera/*', // word格式--application/vnd.openxmlformats-officedocument.wordprocessingml.document,application/msword,
+            extensions: 'gif,jpg,jpeg,png,bmp,',
+            mimeTypes: 'image/jpg,image/jpeg,image/png,Camera/*', // word格式--application/vnd.openxmlformats-officedocument.wordprocessingml.document,application/msword,
             //可选择的类型
             // investType: ajaxParam.investType, //提交到服务器的参数，投资者类型
             // fileSizeLimit: 1024 * 1024 * 10 * 9, //10M---总文件大小
@@ -84,6 +90,7 @@ module.exports = function(callback, preThis, type) {
             },
             fileVal: 'file',
             fileNumLimit: source.fileNumLimit, //只能上传5张
+            getAjaxImg:true,
             // fileSizeLimit: source.fileSizeLimit, //
             fileSingleSizeLimit: source.fileSingleSizeLimit, //
             server: uploaderFile.allDeploy.uploadUrl, //上传路径
@@ -136,7 +143,6 @@ module.exports = function(callback, preThis, type) {
                         return false;
                     }
                 })
-                console.log(preThis.gD.idArr)
                 // debugger
                 // if (condition) {
                     // 如果校验通过，执行上传
@@ -145,7 +151,9 @@ module.exports = function(callback, preThis, type) {
                     // that.uploader.upload();
                 // } else {
                 //     tipAction('请完善认证资料');
-                         preThis.submitAdvise()
+               if(!$(this).hasClass("disable")){
+                 preThis.submitAdvise()
+               }
                 // }
                 
             });
@@ -225,7 +233,6 @@ module.exports = function(callback, preThis, type) {
             $li.off().find('.file-panel').off();
             $li.remove();
             that.source.$select.show();
-            debugger
             var indexs=file.id.split("_")    
             preThis.gD.idArr.splice(indexs[2],1)
             // console.log(indexs,'+++++++++++++++++++',preThis.gD.idArr)
@@ -276,7 +283,6 @@ module.exports = function(callback, preThis, type) {
         UploadSuccess: function(uploader, file, json) {
             var that = this;
             //判断登录是否失效
-            console.log('callback------  ', callback)
             // 上传成功不移除文件
             // uploader.removeFile(file, true);
 

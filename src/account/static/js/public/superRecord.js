@@ -12,9 +12,9 @@ require('@pathCommonJs/ajaxLoading.js');
 // 切换
 require('@pathCommonJsCom/tabScroll.js');
 require('@pathCommonJsCom/goTopMui.js');
-require('@pathCommonCom/elasticLayer/elasticLayer/elasticLayer.js');
+// require('@pathCommonCom/elasticLayer/elasticLayer/elasticLayer.js');
 /*require('@pathCommonJs/components/elasticLayerTypeFive.js');*/
-require('@pathCommonJs/components/headBarConfig.js');
+// require('@pathCommonJs/components/headBarConfig.js');
 var splitUrl = require('@pathCommonJs/components/splitUrl.js')();
 var alwaysAjax = require('@pathCommonJs/components/alwaysAjax.js');
 
@@ -34,7 +34,7 @@ $(function() {
             ],
             aP: {
                 pageCurrent: 1,
-                pageSize: 10,
+                pageSize: 15,
             },
             current_index: 0, //左右滑动区域的索引
             list_template: '', //列表的模板，生成后存放在这里
@@ -205,10 +205,10 @@ $(function() {
             });
 
                 //无缝滚动
-                setTimeout(function() {
+                /*setTimeout(function() {
                     //无缝滚动
                     alwaysAjax($('#' + w + ' .mui-table-view-cell'), s , 50)
-                }, 1000)
+                }, 1000)*/
 
             // mui('.mui-slider').slider().stopped = true;
         },
@@ -225,12 +225,15 @@ $(function() {
                         pageList = jsonData.pageList;
 
                     if (!$.util.objIsEmpty(pageList)) {
-
                         pageList.map(function(e){
-
                             e.tobe = that.gV.current_index == 0 ? true : false;
+                            if(that.gV.current_index == "1"){
+                                if(e.fundBusinCode == "098"){
+                                    e.taconfirmFlagStatu = true
+                                }
+                            }
                         })
-
+                        
                         var list_html = that.gV.list_template(jsonData);//  把内容  放到  模板里
                         //设置这两参数，在initMui()中使用
                         //判断是否显示没有更多了等逻辑，以及插入新数据
@@ -292,7 +295,7 @@ $(function() {
                         } else {
                             t.endPullupToRefresh(false);
                         }
-
+                        console.log(that.gV.ajaxArr)
                         $id.find('.contentWrapper .mui-pull-bottom-pocket').removeClass('mui-hidden');
                         if (that.gV.ajaxArr[that.gV.current_index].pageCurrent == 1) {
                             //第一屏
@@ -326,7 +329,7 @@ $(function() {
                         setTimeout(function() {
                             that.getElements.listLoading.hide();
                         }, 100);
-
+                        alwaysAjax($id.find('.mui-table-view-cell'), $id.find(".contentWrapper"), 2)
                     }, 200)
 
 
@@ -359,8 +362,10 @@ $(function() {
                     t.endPullupToRefresh(false);
 
                     //没有数据
-                    $id.find('.mui-scroll .list').html(that.getElements.noData.clone(false)).addClass('noCon');
-                    $id.find('.noData').show();
+                    if(that.gV.ajaxArr[that.gV.current_index].pageCurrent == 1) {
+                        $id.find('.mui-scroll .list').html(that.getElements.noData.clone(false)).addClass('noCon');
+                        $id.find('.noData').show(); 
+                    }
 
                     setTimeout(function() {
                         that.getElements.listLoading.hide();

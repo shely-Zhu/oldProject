@@ -12,9 +12,6 @@
 </head>
 
 <body>
-    <div class="trade_list">
-        交易记录
-    </div>
     @@include('@pathCommonViews/headBarConfig.html',{"pathName":"自选公募","bgColors":"#475A95,#475A95","showType":"1"})
     <section class="container">
         <div class="banner">
@@ -76,7 +73,7 @@
     <script id="dataLists" type="text/x-handlebars-template">
 		{{! 左侧页面列表}}
 		{{#each this}}
-        <div class="hold_item">
+        <div class="hold_item" data-fundCode={{fundCode}} data-tradeNo={{tradeNo}}>
             <div class="divider"></div>
             {{#if_than_0 inTransitNum}}
                 <div class="be_confirmed_tag fr">{{inTransitNum}}笔待确认交易</div>
@@ -110,7 +107,7 @@
                     {{/if}}
                     <!-- todo 需要判断字段来是否显示 -->
                     {{#if isBuyFlag}}
-                        <div class="buy_btn fr blueBgButton">买入</div>
+                        <div class="buy_btn fr blueBgButton" fundCode = {{fundCode}}>买入</div>
                     {{/if}}
                     {{#if isRedemptionFlag}}
                         <div class="redeem_btn fr goldBorderButton">赎回</div>
@@ -150,7 +147,7 @@
                     {{/if_than_0}}
                     <!-- todo 需要判断字段来是否显示 -->
                     {{#if isBuyFlag}}
-                        <div class="buy_btn fr blueBgButton">买入</div>
+                        <div class="buy_btn fr blueBgButton" fundCode={{fundCode}}>买入</div>
                     {{/if}}
                     {{#if isRedemptionFlag}}
                         <div class="redeem_btn fr goldBorderButton">转出</div>

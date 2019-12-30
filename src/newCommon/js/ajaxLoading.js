@@ -116,7 +116,7 @@ var splitUrl = require('./components/splitUrl.js')();
                 needDataEmpty: true, //需要判断data是否为空
                 needLoading: true, //需要显示loading遮罩
                 callbackDone: function() {},
-                callbackFail: function() {},
+                callbackFail: null,
                 callbackNoData: function() {},
                 //formData
                 formData: false, //判断是否需要使用formData上传
@@ -251,7 +251,7 @@ var splitUrl = require('./components/splitUrl.js')();
                         //需要判断数据是否为空
                         // if ($.util.objIsEmpty(json)) {
                             //数据为空，如果有传callbackNoData，执行
-                            obj.callbackNoData( json );
+                            obj.callbackNoData( data );
                             return false;
                         // }
                     }

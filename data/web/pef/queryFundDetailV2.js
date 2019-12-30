@@ -12,7 +12,7 @@ var data = Mock.mock({
 	"message": "处理成功！", 
 	"data":{  
 		"projectId": "4234",//产品代码
-		"productName": "稳金1号稳金1号稳金1号稳金1号稳金1号稳金1号稳金1号稳金1号稳金1号稳金1号稳金1号稳金1号",//产品名称
+		"productName": "稳稳稳稳稳稳稳稳稳稳稳稳稳稳稳稳稳稳稳稳稳稳稳稳稳稳稳稳稳稳稳稳稳稳稳稳稳稳稳稳稳稳稳稳稳",//产品名称
 		"projectName": "稳金1号",//项目名称
 		"issuanceSize": "1000",//产品发行规模（单位：万）
 		"formatIssuanceSize": "1000",  //产品发行规模（千分位）（单位：万）
@@ -59,7 +59,7 @@ var data = Mock.mock({
         "productCustomerRiskType": "1",  //产品对应客户风险等级类型：1-私募风险等级 2-专项风险等级
         "productRiskLimit": "0",  //是否启用风测限制【0：否，1：是】（V3.13.0）
         "productLightspot": "这里是一句话产品详情介绍",  //一句话介绍（产品亮点）
-        "projectLable":"关注度高|电子合同",  //产品特点标签(‘|’拼接)
+        "projectLable":['关注度高','电子合同'],  //产品特点标签 返回数组
         "managementFee":"",   //管理费
         "trusteeFee": "",  //托管费
         "isVideo": "",  //是否需要面签 0否 1是
@@ -68,7 +68,7 @@ var data = Mock.mock({
         "redemptionOpenFrequency": "",  // 赎回开放频率
         "surplusLevel": "",  //剩余额度
         "customerType":"1",   // 客户类型（允许购买客户类型 1.个人 0.机构 ）
-        "incomeModeJF":"2",  //收益分配方式金服（0固收 1浮收普通 2浮收稳裕）
+        "incomeModeJF":"0",  //收益分配方式金服（0固收 1浮收普通 2浮收稳裕）
         "investArea":"投资领域",   // 投资领域
         "setupDate": "成立日期",   //成立日期yyyy/MM/dd
         "investWay": "投资方式",   //投资方式

@@ -12,6 +12,13 @@
 @import url("@pathCommonLessCom/cityList.less");
 // 没有数据
 @import url("@pathCommonLessCom/noDataImg.less");
+@media screen and (device-aspect-ratio: 40/71) {
+       .activityListBottomBox{
+           i{
+               width: 2rem !important;
+           } 
+       } 
+}
 
 #activitySearch{
     position: relative;
@@ -50,6 +57,7 @@
         height: .88rem;
         line-height: .88rem;
         top:.4rem;
+        width: 1.7rem;
         span{
             font-family: PingFangSC-Regular;
             font-size: .34rem;
@@ -58,10 +66,13 @@
             display: block;
             float: left;
             margin-right: .25rem;
-            
+            width: 1.2rem;
+            overflow:hidden;/*超出部分隐藏*/
+            white-space: nowrap;/*不换行*/
+            text-overflow:ellipsis;/*超出部分文字以...显示*/       
         }
         i{
-            float: left;
+            float: right;
             width: .25rem;
             height: .12rem;
             background: url('/common/img/Life_icon_position@2x.png') no-repeat;
@@ -119,7 +130,7 @@
             }
             i{
                 position: absolute;
-                height: .47rem;
+                // height: .47rem;
                 line-height: .47rem;
                 font-family: PingFangSC-Regular;
                 font-size: .24rem;
@@ -155,7 +166,7 @@
                 i{
                     display: inline-block;
                     font-style: normal;
-                    width: 1.51rem;
+                    width: 1.61rem;
                     height: .36rem;
                     text-align: center;
                     line-height: .36rem;

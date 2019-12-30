@@ -313,7 +313,6 @@ var monthReportDetail = {
 
 						that.pieChartDataDetail.push(dataDetail) ;
 
-
 					})
 
 					//调用画图方法
@@ -322,8 +321,8 @@ var monthReportDetail = {
 
 				}
 				else{
-					// $('.assetAnalyse').hide();
-					// $('.pieBox').hide();
+					$('.assetAnalyse').hide();
+					$('.pieBox.assetAnalyse').hide();
 				}
 				// 资产情况分析
 				if(!$.util.objIsEmpty(data)){
@@ -650,7 +649,7 @@ var monthReportDetail = {
 					
 				},
 				needLogin: true, //需要判断登录情况
-				needDataEmpty: false,//不需要判断data是否为空
+				needDataEmpty: true,//不需要判断data是否为空
 				callbackDone: function(json){
 					var result = json.data;
 					// 判断是否有专属理财师和服务理财师
@@ -705,20 +704,9 @@ var monthReportDetail = {
 						var now = new Date();
 						var hh = now.getHours();
 
-						if(8 <= hh && hh <= 20){
+						if(8 <= hh && hh < 20){
 							 //跳转客服页面
-							var obj = [{
-								url: site_url.getToken_api,
-								data: {
-								},
-								needDataEmpty:false,
-								callbackDone: function(json) {
-									var token = json.data.token;
-									// 跳转第三方客服地址
-									window.location.href = site_url.onlineCustomer_url + '&token=' + token;
-								},     
-							}];
-							$.ajaxLoading(obj);
+							window.location.href = site_url.onlineCustomerTransfer_url;
 						}else{
 							window.location.href = site_url.consultProduct_url +'?empNo='+ that.getElements.plannerNum + '&empName=' + that.getElements.plannerName + '&productName=' + new Base64().encode(that.getElements.productName) + '&backUrl=' + new Base64().encode(window.location.href) ;
 						}
@@ -726,8 +714,19 @@ var monthReportDetail = {
 					}
 				},
 				callbackFail: function(json){
-					
+					tipAction(json.message)
 				},
+				callbackNoData:function(json){
+					var now = new Date();
+					var hh = now.getHours();
+
+					if(8 <= hh && hh < 20){
+						 //跳转客服页面
+						window.location.href = site_url.onlineCustomerTransfer_url;
+					}else{
+						window.location.href = site_url.consultProduct_url +'?empNo='+ that.getElements.plannerNum + '&empName=' + that.getElements.plannerName + '&productName=' + new Base64().encode(that.getElements.productName) + '&backUrl=' + new Base64().encode(window.location.href) ;
+					}
+				}
 			}]
 			$.ajaxLoading(obj);
 
