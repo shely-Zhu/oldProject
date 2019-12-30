@@ -17,7 +17,7 @@ var financial = Mock.mock({
                      "totalCount": "",// 总记录数
                      "totalPages": "" //总页数
                      },
-             "pageList|5":[
+             "pageList|50":[
                 {
                      "trdDt":"2017-03-12",// 交易日期
                      "unitNav":"1.3332",// 份额净值

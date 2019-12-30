@@ -1,0 +1,86 @@
+<!-- 
+@page 已确认交易
+@author peicongcong 2019-11-19
+-->
+<!doctype html>
+<html lang="en">
+
+<head>
+    @@include('@pathInclude/views/meta.html')
+    <link rel="stylesheet" href="/account/static/css/private/tobeConfirmTransaction.css">
+    <title>待确认交易</title>
+</head>
+
+<body>
+    <div class="topTitle">
+
+        @@include('@pathCommonViews/headBarConfig.html',{"pathName":"待确认交易","bgColors":"#3E3C3C,#3E3C3C"})
+        <!-- 筛选 -->
+        <div class="hopper"></div>
+        <!-- 筛选 -->
+        <!-- 筛选区域 -->
+        <div class="hopperCon">
+            <ul>
+                <li data='' class="active">全部</li>
+                <li data="1">认申购</li>
+                <li data="2">赎回</li>
+                <li data="5">分红</li>
+                <li data="8">强制赎回</li>
+                <li data="6">预约撤单</li>
+                <li data="7">预约过期</li>
+                <!-- <li data="3">转让已完成</li>
+                <li data="4">受让已完成</li> -->
+            </ul>
+        </div>
+        <!-- 筛选区域 -->
+    </div>
+    <div class="warp">
+        <div class="list">
+            <div class="contentWrapper ">
+                <ul class="mui-table-view contentWrap">
+                    <li class="mui-table-view-cell">
+                        <!-- 放置列表 -->
+                    </li>
+                </ul>
+
+                @@include('@pathCommonViews/goTop.html')
+            </div>
+        </div>
+
+        <!-- 加载中loading -->
+        @@include('@pathCommonCom/loading/listLoading.html')
+        <!-- 暂无数据 -->
+        @@include('@pathCommonCom/noData/noData.html', {"tipText": "暂无数据"})
+        <script id="first-template" type="text/x-handlebars-template">
+            {{! 列表 内容 使用mui的上拉加载}}
+            <div class="list">
+                {{! list是包裹上拉加载区域的，在js中计算当前页面中的list高度，不能超出一屏}} {{! 初始化上拉加载区域，使用contentWrapper class}} {{! contentWrapper 需要添加样式，具体见less文件}}
+                <div class="contentWrapper">
+    
+                    <ul class="mui-table-view contentWrap">
+                        <li class="mui-table-view-cell">
+                            {{! 所有内容 需要放在这个li里，且里面不能再用Li元素}} {{{content}}}
+    
+                        </li>
+                    </ul>
+    
+                    <!-- 返回顶部 -->
+                    @@include('@pathCommonViews/goTop.html')
+    
+                </div>
+            </div>
+        </script>
+    </div>
+</body>
+<!-- 公共模板 -->
+@@include('@pathCommonCom/account/transcationTem.html') @@include('@pathInclude/views/footer.html')
+<!-- 添加埋点 -->
+<script src="/account/static/js/private/tobeConfirmTransaction.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/eruda"></script>
+<script>
+    window.onload=function(){
+        eruda.init()
+    }
+</script>
+
+</html>

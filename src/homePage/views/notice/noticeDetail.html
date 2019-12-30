@@ -1,0 +1,27 @@
+<!-- 消息中心-通知详情
+ @author yanruiting 2019-11-18
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	@@include('@pathInclude/views/meta.html') 
+	<link rel="stylesheet" href="/homePage/static/css/noticeDetail.css">  
+	<title>通知详情</title>
+</head>
+<body>
+    @@include('@pathCommonCom/noData/noData.html', {"tipText": "暂无数据"})
+    @@include('@pathCommonCom/loading/listLoading.html')
+    <div id="informsDetailBox">
+    	@@include('@pathCommonViews/headBarConfig.html',{"bgColors":"#2C3E77,#273971","showType":"0","pathName":"系统通知详情"})   
+        <div id="informsDetailWrapper">
+            <div id="informsDetailCon">
+                <div id="informsDetailContent"></div>
+                <img src="/homePage/static/img/home_logo@2x.png" class="noticeLogo" alt="">
+            </div>
+        </div>   
+    </div>
+
+    @@include('@pathInclude/views/footer.html')
+    <script src="/homePage/static/js/noticeDetail.js"></script>
+</body>
+</html>

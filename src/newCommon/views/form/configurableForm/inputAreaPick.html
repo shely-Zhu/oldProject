@@ -1,0 +1,52 @@
+<!--
+* @page: 可配置表单结构,根据新版表单样式
+* @Author: songxiaoyu
+* @Date:   2018-05-09 16:40:34
+* @Last Modified by:   songxiaoyu
+* @Last Modified time: 2018-05-09 16:40:34
+* @description:目前所有变量
+* 			   type--表单类型，textarea,select
+* 			   label--label
+* 			   errortip----错误提示，或者placehoder
+* 			   checkType----校验类型
+* 			   mexlength----字数限制
+*              needCheck----是否需要check
+* 			   
+* @demo: @@loop('./inputAreaPick.html',[{
+*           "type": "textarea", 
+*           "label": "项目名称", 
+*           "errortip": "请填写", 
+*           "checkType": "name",
+*           "needCheck"：false
+*        }])
+-->
+
+@@foreach ( configurableArr ) {
+
+     @@if (@@type==="select"){
+        <div class="formBox line10">
+            <label>@@label</label>
+            <div class="formList lineSelect">
+                <ul class="mui-table-view isBor @@checkType">
+                    <li class="mui-table-view-cell mui-collapse">
+                        <a class="mui-navigate-right" href="javascript:;" needCheck=@@needCheck check=@@checkType num="" errortip=@@errortip>@@placehoder</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    }
+
+    @@if (@@type==="textarea"){
+        <div class="formBox line6 hasPad noBor">
+            <label>@@label</label>
+            <div class="formList">
+                <div class="mui-input-row">
+                    <textarea rows="2" placeholder=@@errortip needcheck=@@needCheck check=@@checkType maxlength=@@maxlength></textarea>
+                </div>
+            </div>
+        </div>
+    }
+}
+
+	
+

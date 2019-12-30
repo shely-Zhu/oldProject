@@ -1,0 +1,373 @@
+<!-- 私募基金产品详情
+ @author zhangyanping 2019-11-25 
+-->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	@@include('@pathInclude/views/meta.html')
+	<link rel="stylesheet" href="/financial/static/css/privatePlacement/privatePlacementDetail.css">
+	<title>产品详情</title>
+</head>
+<body>
+	<!--加载图标-->
+	@@include('@pathCommonCom/loading/listLoading.html')
+	<div class="privatePlacementDetail">
+		@@include('@pathCommonViews/headBarConfig.html',{"bgColors":"#595E6F,#1C2135","showType":"1","pathName":"产品详情","serviceType":"1"})
+		<div class="privateDetailTitle">
+			<!-- 产品基金名称 -->
+			<div class="productName ellipsis_two">
+				<!-- <span class="productNameTip"></span> -->
+				<p class="productNameTip "></p>
+				<span class="iconfont nameTip">&#xe636;</span>
+			</div>
+			<p class="introduction"></p>
+			<!-- 单位净值、起投金额、产品期限 -->
+			<!-- 类固收产品展示 -->
+			<div class="privateDetailList fixedIncome hide">
+				<div class="netValueWord"><span class="iconfont tipIcon">&#xe60a;</span>业绩比较基准</div>
+				<div class="mui-row productInfoList">
+					<!-- 业绩比较基准 -->
+					<div class="mui-col-xs-6">
+						<span class="netValue invCore"></span>
+					</div>
+					<!-- 起投金额 -->
+					<div class="mui-col-xs-3 investmentList">
+						<p class="investmentAmountTip">起投金额</p>
+						<p class="investmentAmountNum"></p>
+					</div>
+					<!-- 产品期限 -->
+					<div class="mui-col-xs-3 investmentList">
+						<p class="productDeadlineTip">产品期限</p>
+						<p class="productDeadlineNum"></p>
+					</div>
+				</div>
+				<!-- 产品特点标签 -->
+				<div class="productLabel">
+					
+				</div>
+			</div>
+			<!-- 浮收产品展示 -->
+			<div class="privateDetailList floatProfit hide">
+				<div class="netValueWord"><span class="iconfont tipIcon">&#xe60a;</span>单位净值(元)(<span class="netValueDate"></span>)</div>
+				<div class="mui-row productInfoList">
+					<!-- 单位净值 -->
+					<div class="mui-col-xs-6">
+						<span class="netValue"></span>
+					</div>
+					<!-- 起投金额 -->
+					<div class="mui-col-xs-3 investmentList">
+						<p class="investmentAmountTip">起投金额</p>
+						<p class="investmentAmountNum"></p>
+					</div>
+					<!-- 产品期限 -->
+					<div class="mui-col-xs-3 investmentList">
+						<p class="productDeadlineTip">产品期限</p>
+						<p class="productDeadlineNum"></p>
+					</div>
+				</div>
+				<!-- 产品特点标签 -->
+				<div class="productLabel">
+					
+				</div>
+			</div>
+			<!-- 浮收稳裕 -->
+			<div class="privateDetailList floatProfitWy hide">
+				<div class="netValueWord"><span class="iconfont tipIcon">&#xe60a;</span>七日年化(<span class="netValueDate"></span>)</div>
+				<div class="mui-row productInfoList">
+					<!-- 单位净值 -->
+					<div class="mui-col-xs-6">
+						<span class="netValue"></span>
+					</div>
+					<!-- 起投金额 -->
+					<div class="mui-col-xs-3 investmentList">
+						<p class="investmentAmountTip">起投金额</p>
+						<p class="investmentAmountNum"></p>
+					</div>
+					<!-- 产品期限 -->
+					<div class="mui-col-xs-3 investmentList">
+						<p class="productDeadlineTip">产品期限</p>
+						<p class="productDeadlineNum"></p>
+					</div>
+				</div>
+				<!-- 产品特点标签 -->
+				<div class="productLabel">
+					
+				</div>
+			</div>
+			<div class="appointment">预约资质：<span></span></div>
+		</div>
+		<div class="mui-content midContent">
+			<div class="content">
+				<div class="tabsBox">
+					<div class="tabs mui-row">
+						<li class="active mui-col-sm-4 mui-col-xs-4" >基本信息</li>
+						<li class="mui-col-sm-4 mui-col-xs-4">交易须知</li>
+						<li class="mui-col-sm-4 mui-col-xs-4">产品材料</li>
+					</div>
+				</div>
+				<div class="wrap">
+					<!-- 基本信息 start -->
+					<div class="panel panel1 active">
+						<!-- 私募基金产品详情折线图 -->
+						<div class="lineWrap hide">
+							<div class="clearfix titleWrap typeNo5Wrap">
+								<span class="title qrnh activeLine">七日年化</span>
+								<span class="title wfsy hide">历史业绩走势</span>
+								<div class="priceLimit hide">涨跌幅：<span></span>%</div>
+								<!-- <div class="arrow">
+									<span class="img"></span>
+								</div> -->
+								<span class="rightTitle hide" id="historyDetailBtn">历史明细<span class="iconfont">&#xe636;</span></span>
+							</div>
+							<div class="lineDraw">
+								<!-- 七日年化 折线图 -->
+								<div id="qrnhLine" class="line"></div>
+								<!-- 历史业绩走势 -->
+								<div id="wfsyLine" class="line hide"></div>
+								<!-- 无数据提示 -->
+								<div class="hide noDataHintEcharts">暂无数据</div>
+								<div class='history tab'>
+									<span class="time oneMonth"  num="0">月</span>
+									<span class="time threeMonth"  num="1">季</span>
+									<span class="time halfYear"  num="2">半年</span>
+									<span class="time newYear active"  num="3">一年</span>
+									<span class="time sinceNow"  num="4">成立来</span>
+								</div>
+							</div>
+						</div>
+
+						<!-- 业绩比较基准说明 -->
+						<div class="textContainner performanceComparison hide">
+							<div class="textTitle">业绩比较基准说明</div>
+							<div class="detailText performance">
+								
+							</div>
+						</div>
+
+						<div class="basic">
+							<div class="name">产品信息</div>
+							<div class="contentWrap">
+								<div class="content">
+									<ul class="mui-row remain">
+										<li class="mui-col-sm-4 mui-col-xs-4">剩余额度</li>
+										<li class="changgeRight remaining mui-col-sm-8 mui-col-xs-8"></li>
+									</ul>
+									<ul class="mui-row deadlineMj">
+										<li class="mui-col-sm-4 mui-col-xs-4">募集起截止日</li>
+										<li class="changgeRight deadline mui-col-sm-8 mui-col-xs-8"></li>
+									</ul>
+									<ul class="mui-row custodian">
+										<li class="mui-col-sm-4 mui-col-xs-4">管理人</li>
+										<li class="changgeRight mui-col-sm-8 mui-col-xs-8"></li>
+									</ul>
+									<ul class="mui-row riskGrade">
+										<li class="mui-col-sm-4 mui-col-xs-4">风险等级</li>
+										<li class="changgeRight mui-col-sm-8 mui-col-xs-8"></li>
+									</ul>
+									<ul class="mui-row issuingScale">
+										<li class="mui-col-sm-4 mui-col-xs-4">发行规模</li>
+										<li class="changgeRight mui-col-sm-8 mui-col-xs-8"></li>
+									</ul>
+									<ul class="mui-row direction">
+										<li class="mui-col-sm-4 mui-col-xs-4">投资方向</li>
+										<li class="changgeRight mui-col-sm-8 mui-col-xs-8"></li>
+									</ul>
+									<ul class="mui-row investmentArea">
+										<li class="mui-col-sm-4 mui-col-xs-4">投资领域</li>
+										<li class="changgeRight mui-col-sm-8 mui-col-xs-8"></li>
+									</ul>
+									<ul class="mui-row investmentWay">
+										<li class="mui-col-sm-4 mui-col-xs-4">投资方式</li>
+										<li class="changgeRight mui-col-sm-8 mui-col-xs-8"></li>
+									</ul>
+									<ul class="mui-row incomeType">
+										<li class="mui-col-sm-4 mui-col-xs-4">收益分配方式</li>
+										<li class="changgeRight mui-col-sm-8 mui-col-xs-8"></li>
+									</ul>
+								</div>
+								<div class="textContent lightPointCon">
+									<div class="textTitle">产品亮点</div>
+									<div class="detailText lightPoint">
+										<img class="lazyload" src="/common/img/lazyImgList.png" data-original="" >
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<!-- 基本信息 end -->
+
+					<!-- 交易须知 start -->
+					<div class="panel panel2">
+						<div class="textContainner productRateHeader">
+							<div class="textTitle">产品费率</div>
+							<div class="detailText">
+								<div class="productRate productRateBuy">认购费率<span></span></div>
+								<div class="productRate productRateManage">管理费率<span></span></div>
+								<div class="productRate productRateTrust">托管费率<span></span></div>
+							</div>
+						</div>
+						<div class="basic">
+							<div class="name">交易信息</div>
+							<div class="contentWrap">
+								<div class="content">
+									<ul class="mui-row advanceAmount">
+										<li class="mui-col-sm-4 mui-col-xs-4">预约递增金额</li>
+										<li class="changgeRight mui-col-sm-8 mui-col-xs-8"></li>
+									</ul>
+									<ul class="mui-row reservationDay">
+										<li class="mui-col-sm-4 mui-col-xs-4">预约有效天数</li>
+										<li class="changgeRight mui-col-sm-8 mui-col-xs-8"></li>
+									</ul>
+									<ul class="mui-row paymentDeadline">
+										<li class="mui-col-sm-4 mui-col-xs-4">打款截止日期</li>
+										<li class="changgeRight mui-col-sm-8 mui-col-xs-8"></li>
+									</ul>
+									<ul class="mui-row establishment">
+										<li class="mui-col-sm-4 mui-col-xs-4">预计成立日期</li>
+										<li class="changgeRight mui-col-sm-8 mui-col-xs-8"></li>
+									</ul>
+									<ul class="mui-row isVideo">
+										<li class="mui-col-sm-4 mui-col-xs-4">是否需要面签</li>
+										<li class="changgeRight mui-col-sm-8 mui-col-xs-8"></li>
+									</ul>
+									<ul class="mui-row clientType">
+										<li class="mui-col-sm-4 mui-col-xs-4">允许购买客户类型</li>
+										<li class="changgeRight mui-col-sm-8 mui-col-xs-8"></li>
+									</ul>
+									<ul class="mui-row clientLevel">
+										<li class="mui-col-sm-4 mui-col-xs-4">允许购买客户等级</li>
+										<li class="changgeRight mui-col-sm-8 mui-col-xs-8"><span></span></li>
+									</ul>
+									<ul class="mui-row">
+										<li class="mui-col-sm-4 mui-col-xs-4">汇款备注</li>
+										<li class="changgeRight remittance mui-col-sm-8 mui-col-xs-8"></li>
+									</ul>
+									
+								</div>
+								<!-- 赎回开放频率 -->
+								<div class="textContent redemptionOpenFrequency">
+									<div class="textTitle">赎回开放频率</div>
+									<div class="detailText">
+										
+									</div>
+								</div>
+								<!-- 募集账户信息 -->
+								<div class="textContent productRateContainer">
+									<div class="textTitle">募集账户信息</div>
+									<div class="collectAccount">
+										<ul>
+											<li>
+												<div class="title">募集户名</div>
+												<div class="copy">
+													<div id="name">--</div>
+													<span class="copy_btn" >复制</span>
+												</div>
+											</li>
+											<li>
+												<div class="title">募集账号</div>
+												<div class="copy">
+													<div id="number">--</div>
+													<span class="copy_btn"  >复制</span>
+												</div>
+											</li>
+											<li>
+												<div class="title">开户银行</div>
+												<div class="copy">
+													<div id="linenum">--</div>
+													<span class="copy_btn"  >复制</span>
+												</div>
+											</li>
+											<li class="bordernone">
+												<div class="title">开户支行</div>
+												<div class="copy">
+													<div id="openingBank">--</div>
+													<span class="copy_btn"  >复制</span>
+												</div>
+											</li>
+										</ul>
+										
+									</div>
+									<div class="copyAll">复制全部</div>
+								</div>
+							</div>
+						</div>
+						
+					</div>
+					<!-- 交易须知 end -->
+
+					<!-- 产品材料 start -->
+					<div class="panel panel3">
+						@@include('@pathCommonCom/noData/noData.html', {"tipText": "暂无数据"})
+						
+					</div>
+					<!-- 产品材料 end -->
+				</div>
+			</div>		
+		</div>
+		<div class="investmentTip">投资前请您认真阅读《基金合同》《招募说明书》《风险揭示书》等法律文件，了解产品风险，基金过往业绩不预示未来表现，理财有风险，投资需谨慎。</div>
+
+		<div class="immediatelyBuy">
+			<div class="buyRate">认购/申购费率 <span></span></div>
+			<div class="mui-btn buyButton goldBgButton" >立即预约</div>
+			<div class="mui-btn over">已售罄</div>
+
+			<div class="rightBtn mui-row">
+				<div class="already mui-col-sm-6 mui-col-xs-6">已预约</div>
+				<div class="detail goldBgButton mui-col-sm-6 mui-col-xs-6 lookDetailed">查看明细</div>
+			</div>
+		</div>
+
+	</div>
+
+	@@include('@pathCommonViews/authenticationProcess.html',{"pathTitle":"购买私募产品前，请完成以下认证"}) 
+	<script id="wrap-template" type="text/x-handlebars-template">
+		{{!-- {{#each this}} --}}
+			<div class="textContent">
+				<div class="textTitle">{{title}}</div>
+				<div class="detailText">
+					{{#each displayGrounp}}
+						<div class="content contentLink" href="{{href}}">
+							<p class="contentTitle">{{name}}<span>{{fileDate}}</span></p>
+							<p class="contentLink">{{marName}}</p>
+						</div>
+					{{/each}}
+				</div>
+			</div>
+		{{!-- {{/each}} --}}
+	</script>
+	<script id="condition-template" type="text/x-handlebars-template">
+		{{#each this}}
+					<!--{{#if show}}-->
+					 <li class="tips-li">
+						 <div class="tips-li-left">
+							<img class="bank-img" src="/financial/static/img/icon_smrz@2x.png" alt="">
+							<div class="bank-name">{{conditionType}}</div>
+						 </div>
+						 <div class="tips-li-right">
+							<div class="bank-status">{{statusDesc}}</div>
+							<!--<a class="iconfont iconsure"  href="javascript:;" onclick="window.location.href=site_url.idCertificate_url">&#xe600;</a>-->
+							<a class="iconfont iconsure"  href="javascript:;">&#xe600;</a>
+						 </div>                        
+					 </li>
+					<!--{{/if}}-->
+		{{/each}}
+	</script>
+
+	<script id="prvLevel" type="text/x-handlebars-template">
+	  {{! 左侧页面列表}}
+		{{#each this}}
+			{{#if bool}}
+				<div class="productRate"><p class="invRange">{{benifitLowerLimit}}万(含)-{{benifitUpperLimit}}万</p><p class="invResult">{{benifitRate}}%</p></div>
+			{{else}}
+				<div class="productRate"><p class="invRange">{{benifitLowerLimit}}万(含)以上</p><p class="invResult">{{benifitRate}}%</p></div>
+			{{/if}}
+		{{/each}}
+	</script> 
+	
+</body>
+	@@include('@pathInclude/views/footer.html')
+	<script src="/allServerResources/include/js//vendor/echarts/echarts.min.js"></script>
+	<script src="/allServerResources/include/js//vendor/clipboard/clipboard.js"></script>
+	<script src="/financial/static/js/privatePlacement/privatePlacementDetail.js"></script>
+</html>

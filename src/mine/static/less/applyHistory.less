@@ -1,0 +1,158 @@
+//基金诊断页面,基金诊断搜索页
+//引入mui
+@import url("@pathInclude/css/mui.picker.all.css");
+@import url("@pathInclude/css/mui.picker.css");
+@import url("@pathInclude/css/mui.poppicker.css");
+
+//引入重置mui样式的表单样式文件
+@import url('@pathCommonLess/mui/resetMUI.less');
+//引入重置mui下拉列表样式文件
+@import url("@pathCommonLess/mui/selectMUI.less");
+
+//重置MUI的poppicker样式
+@import url("@pathCommonLess/mui/resetMuiPop.less");
+
+@import url("@pathCommonLessCom/headBarConfig.less");
+
+@import url('@pathCommonCom/elasticLayer/transOutRule/transOutRule.less');
+@import url("@pathCommonLessCom/payPassword.less");
+@import url("@pathCommonCom/noData/noData.less");
+
+html,
+body {
+    height: 100%;
+    .container{
+        width: 100%;
+        height:100%;
+        .addApply{
+            position: fixed;
+            right: 0.3rem;
+            z-index: 200000;
+            color:#364D97 ;
+            top: 0.65rem;
+            font-size: 0.3rem;
+        }
+        padding-bottom: 1rem;
+        .HeadBarConfigBox{
+            #HeadBarpathName{
+                display:block !important;
+            }
+        }
+        .account-holdings{
+            height: 0.6rem;
+        }
+        .fund-allocation{
+            margin-bottom: 0.4rem;
+        }
+        .title-box{
+            line-height: 0.3rem;
+            text-align: center;
+            margin-top: 0.2rem;
+        }
+        .popup{
+            display: block;
+            position: fixed;
+            left: 0;
+            right: 0;
+            width: 100%;
+            top: 0;
+            background: #666666;
+            height: 100%;
+            z-index: 10000;
+            .popup-content{
+                position: fixed;
+                bottom: 0;
+                left: 0;
+                width: 100%;
+                height: 7rem;
+                background-color: white;
+            }
+            .mui-table-view-cell{
+                text-align: center;
+                line-height: 1rem;
+            }
+            .selectItemList{
+                display: none;
+            }
+            .selectItemList:nth-of-type(1){
+                display: block;
+            }
+        }
+        .mui-table-view > .mui-table-view-cell {
+            position: relative;
+            background-color: white;
+            height: 1rem;
+            line-height: 1rem;
+        }
+        .mui-table-view > .mui-table-view-cell > .left{
+            display: inline-block;
+            float: left;
+            margin-left: 0.5rem;
+            margin-top: 0.2rem;
+            font-weight: bold;
+            
+        }
+        .mui-table-view > .mui-table-view-cell > .right{
+            display: inline-block;
+            float: right;
+            width: 1rem;
+            line-height: 0.8rem;
+            text-align: right;
+        }
+        .mui-table-view > .mui-table-view-cell > .mui-icon{
+            display: inline-block;
+            float: right;
+            margin-top: 0.15rem;
+            margin-right: 0.1rem;
+        }
+        .mt20{
+            margin-top: 0.2rem;
+        }
+     
+    
+        .ml5{
+            margin-left: 0.05rem;
+        }
+        .ml20{
+            margin-left: 0.2rem;
+        }
+        .ml50{
+            margin-left: 0.5rem;
+        }
+       
+        .fontWei-b{
+            font-weight: bold;
+        }
+        .content-item{
+            .historyItemList{
+                width: 100%;
+                height: 0.8rem;
+                background-color: white;
+                line-height: 0.8rem;
+                .left{
+                    margin-left: 0.5rem;
+                    display: inline-block;
+                }
+                .right{
+                    display: inline-block;
+                    float:right;
+                    margin-right: 0.1rem;
+                    margin-top: 0.1rem;
+                }
+                .right_down{
+                    display: none;
+                }
+            }
+            .mui-table-view{
+                display: none;
+                .editHistory{
+                    color: #364D97;
+                }
+            }
+        }
+        
+    
+
+    }
+}
+

@@ -1,0 +1,193 @@
+/*
+ * @page: 老带新----推荐有礼
+ * 
+ * @Author: yangjinlai
+ * @Date:   2017-10-27 10:48:29
+ *  
+ * @Last Modified by: sunfuping
+ * @Last Modified time: 2019-12-29 18:24:14
+ * @description: 推荐有礼大改版
+ *               有富文本，不能引入reset
+ */
+
+ @import url("@pathInclude/css/mui.min.css");
+ @import url("@pathInclude/css/mui.picker.all.css");
+ @import url("@pathInclude/css/mui.picker.css");
+ @import url("@pathInclude/css/mui.poppicker.css");
+ 
+ @import url("@pathCommonLess/reset.less");
+ @import url("@pathCommonLess/color.less");
+@import url("@pathCommonLess/mui/resetMUI.less");
+@import url("@pathCommonLessCom/againEnter.less");
+@import url("@pathCommonLessCom/alertBox.less");
+@import url("@pathCommonCom/button/button.less");
+@import url("@pathCommonLessCom/headBarConfig.less");
+
+//设置屏幕宽高
+html,
+body {
+    // width: 100%;
+    // max-width: 7.5rem;
+    width: 100%;
+    height: 100%;
+}
+// .mui-table-view-cell.mui-collapse .mui-navigate-right:after{
+//     font-family: iconfont;
+//     content: '\e600';
+//     font-size: 1.4rem;
+// }
+
+.recommend_wrap {
+    width: 100%;
+    height: 100%;
+    background: url("/mine/static/img/pic_bg1.png") no-repeat ;
+    padding:2.2rem .65rem  0 .65rem ;
+    .recommendBox{
+        position: relative;
+        width:6.20rem;
+        height:7.64rem;
+        background:linear-gradient(137deg,rgba(255,252,244,1) 0%,rgba(238,223,189,1) 100%);
+        border-radius:.2rem;
+       
+        text-align: center;
+    }
+    .recommendBoxUserName{
+        font-size:.44rem;
+        font-weight:600;
+        line-height:.62rem;
+        background:linear-gradient(239deg,@BB8E5F 0%, @6C4517 100%);
+        -webkit-background-clip:text;
+        -webkit-text-fill-color:transparent;
+        color: transparent;
+        padding-top: .4rem;
+    }
+    .recommendBoxText{
+        margin-top: .1rem;
+        font-size: .28rem;
+        line-height: .4rem;
+        color: @6C4517;
+    }
+    .recommendQRCode{
+        width: 4.3rem;
+        height: 4.3rem;
+        margin: 0 auto;
+        margin-top: .50rem;
+        img{
+            width: 100%;
+        }
+    }
+    .recommendLcs{
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        margin: 0 auto;
+        margin-top: .40rem;
+        width: 5.86rem;
+        height: .98rem;
+        background: url(/mine/static/img/pic_lcs\ bg.png) no-repeat center;
+        background-size: 5.86rem .98rem;
+        line-height: .98rem ;
+        color: #fff;
+        font-size: 0.3rem;
+        .choose{
+            font-size: .24rem;
+            color: @FFFFFF;
+        }
+    }
+    .recommendShare{
+        width:6.20rem;
+        height:1.80rem;
+        border-radius:.20rem;
+        background:linear-gradient(90deg,@D6AD82 0%, @B57E45 100%);
+        display: flex;
+        text-align: center;
+        margin-top: .3rem;
+        color: @FFFFFF;
+        padding-top: .46rem;
+        i{
+            display: inline-block;
+            font-size: .7rem;
+            width: 100%;
+        }
+        p{
+            color: @FFFFFF;
+        }
+        .recommendShareFriend{
+            flex: 1;
+            i{
+                border-right: 1px solid rgba(245,237,216,0.4);
+            }
+        }
+        .recommendShareWechart{
+            flex: 1;
+            i{
+                border: none;
+            }
+        }
+       
+        
+       
+    }
+    .mui-table-view-cell{
+      padding: .1rem;  
+    }
+    .mui-table-view-cell.mui-collapse>.mui-navigate-right:after, .mui-table-view-cell.mui-collapse>.mui-push-right:after{
+        content: '\e583';
+        right: 35px;
+
+    }
+}
+.popup{
+    display: none;
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 3000;
+    .popup-mask{
+        height: 40%;
+        background:@c009;
+        opacity: .6;
+    }
+    .popup-content{
+        height: 60%;
+        background: @c005;
+        display: flex;
+        flex-direction: column;
+        .popup-ul{
+            overflow-y: scroll;
+            flex: 1;
+            .popup-li{
+               width: 100%;
+               height: .98rem;
+               padding-left: .3rem;
+               line-height: .98rem; 
+               font-size: .32rem;
+               font-weight: 600;
+               border-bottom: .01rem solid #f5f5f5;
+               span{
+                   font-size: .22rem;
+                   background:linear-gradient(220deg, @F5ECD5 0%, @F0DFBA 100%);
+                   border-radius:0.01rem;
+                   opacity:0.5;
+                   color: #6C4517;
+                   margin-left: .1rem;
+               }
+            }
+        }
+        .cancel{
+            width: 100%;
+            height: 0.98rem;
+            text-align: center;
+            line-height: .98rem;
+            background: @F6F6F6;
+            font-size: .32rem;
+
+        } 
+        
+    }
+}
+

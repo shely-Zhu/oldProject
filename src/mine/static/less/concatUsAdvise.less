@@ -1,0 +1,115 @@
+@import url("@pathCommonLess/mui/resetMUI.less");
+@import url("@pathCommonLessCom/alertBox.less");
+@import url("@pathCommonLessCom/headBarConfig.less");
+@import url("@pathCommonCom/button/button.less");
+
+body{
+    max-width: 7.5rem;
+}
+.concatUsAdvisePage{
+    // margin-top:1.18rem;
+    width: 100%;
+    overflow: hidden;
+    .concatUsAdvisePageMain{
+        width: 100%;
+        .concatUsAdvisePageMainQuestion{
+            width: 100%;
+            // height: 5rem;
+            background: #fff;
+            font-size: 0.32rem;
+            color: #272727;
+            .list{
+                height: 1rem;
+                line-height: 1rem;
+            }
+            .list:first-child{
+                display: none;
+            }
+            .mui-radio label{
+                line-height: 1rem;
+                font-size: .32rem;
+                color: #272727;
+            }
+            .mui-radio input[type=radio]{
+                height: 1rem;
+                right: .3rem;
+            }
+            .mui-radio input[type=radio]:before{
+                font-size: .3rem;
+                line-height: 1rem;
+                top: .37rem;
+
+            }
+            .mui-radio input[type=radio]:checked:before{
+                color:#0E246C
+            }
+            .mui-table-view-cell{
+                padding: 0;
+                padding-left: .3rem;
+            }
+            .concatUsAdvisePageMainAdviceType{
+                padding-left: .3rem;
+                font-size: .32rem;
+                line-height: 1rem;
+                font-weight: bold;
+                border-bottom: 0.01rem solid @E7E9ED;
+                color: @272727;
+
+            }
+        }
+        .concatUsAdvisePageMainAdvice{
+            margin-top: .35rem;
+            background: #fff;
+            .concatUsAdvisePageMainAdviceTitle{
+                font-size: .32rem;
+                color: #272727;
+                font-weight: bold;
+                height: 1rem;
+                line-height: 1rem;
+                margin-left: .3rem;
+            }
+            .concatUsAdvisePageMainAdviceContent{
+                width: 100%;
+                font-size: .32rem;
+                height:3rem;
+                position: relative;
+                textarea{
+                    height: 3rem;
+                    font-size: .3rem;
+                    width: 6.9rem;
+                    margin-left: .3rem;
+                    border: 1px solid #E7E9ED;
+                    border-radius: 4px;
+                    padding: .15rem;
+                }
+             .haveMany{
+                    position: absolute;
+                    right: 0.6rem;
+                    bottom: 0.3rem;
+                    font-size: .32rem;
+                    color: @c014;
+                }
+            }
+        }
+    }
+    .btnButton{
+        width: 100%;
+        height: .98rem;
+        margin: 0;
+        position: fixed;
+        bottom: 0px;
+
+    }
+    .mui-btn{
+        height: .98rem;
+        line-height: .98rem;
+        font-size: .32rem;
+        border-radius: 0;
+        background: #fff;
+        background-image: linear-gradient(135deg, #6C83C9 0%, #061D6A 100%);
+    }
+    .disabled{
+        background-image: linear-gradient(135deg, #B1BEE3 0%, #7F8CB4 100%);
+    }
+
+}

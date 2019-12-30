@@ -6,7 +6,7 @@
 //引入项目公共的配置
 require('../../../common/js/components/config/windowConfig.js');
 //跳转链接
-var goUrl = require('../../../common/js/components/config/goUrl.js'); 
+var goUrl = require('../../../common/js/components/config/goUrl.js');
 // wap私募接口
 var pefApi = require('../../../common/js/components/config/pefApi.js');
 // wap公募接口
@@ -21,7 +21,7 @@ var webApi = require('../../../common/js/components/config/webApi.js');
 var appApi = require('../../../common/js/components/config/appApi.js')
 
 //声明site_url
-window.site_url = { 
+window.site_url = {
 
 	//这里是非公募，非私募，非joint，非跳转的接口和跳转链接配置
 	//积分商城登录
@@ -46,5 +46,5 @@ accountApi.call(site_url);
 contentApi.call(site_url);
 webApi.call(site_url);
 appApi.call(site_url);
-// crossApi.call(site_url);
+//crossApi.call(site_url);
 

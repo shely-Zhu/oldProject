@@ -1,0 +1,66 @@
+<!-- 会员权益-会员权益详情
+ @author liuhongyu 2019-11-11
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	@@include('@pathInclude/views/meta.html')
+    <link rel="stylesheet" href="/allServerResources/include/css/swiper.min.css">
+    <link rel="stylesheet" href="/mine/static/css/membershipDetails.css">   
+      
+	<title>会员权益-会员权益详情</title>
+</head>
+<body>
+	<!--@@include('@pathCommonCom/noData/noData.html', {"tipText": "暂无数据"}) -->
+	@@include('@pathCommonCom/loading/listLoading.html')
+    <div id="membershipDetailsBox">
+    <!-- <div class="membershipDetailsHeaderBox">
+        <a class="iconfont" href="javascript:;">&#xe634;</a>
+        权益详情
+    </div> -->
+    @@include('@pathCommonViews/headBarConfig.html',{"bgColors":"#2C3E77,#273971","showType":"1","pathName":"权益详情"})    
+        <div class="membershipDetailsSilderBgBox"></div>
+        <div class="membershipDetailsSilderBox">
+    </div>
+        
+    </div>
+    <script id="membershipDetailsList-template" type="text/x-handlebars-template">
+        <div class="swiper-container show-swiper swiper-container-horizontal swiper-container-ios">
+            <div class="swiper-wrapper" style="transition-duration: 0ms; transform: translate3d(.5rem, 0px, 0px);">
+                {{#each this}}
+                <div class="swiper-slide swiper-slide-active" style="margin-right: 17px;" data-text="{{content}}" data-link="{{linkUrl}}" data-name="{{rightName}}">
+                    <div class="goods" style="transform: scale3d(1.4, 1.4, 1); transition-duration: 0ms;">
+                        <img class="lazyload" src="/common/img/lazyImgList.png" data-original="{{iconUnlock}}" alt="">
+                        <p>{{rightName}}</p>
+                    </div>
+                </div>
+                {{/each}}     
+            </div>
+        </div>
+        <div class="membershipDetailsContentBox">
+            <h2>--</h2>
+            <p>--</p>
+            <span class="title">更多信息可通过恒天财富官方客服热线进行咨询</span>
+            <a href="javascript:void(0);" class="tel"></a>
+            {{#if linkUrl}}
+            <div class="linkBtnBox">
+                
+                <a href="javascript:void(0);" class="linkBtn goldBgButton">了解详情</span>
+                <!-- <a href="javascript:;" onclick="setGoUrl('{{data-link}}', 'membershipDetails_1')">全部</ a> -->
+            </div>
+            {{/if}}
+        </div>
+    </script>
+	
+	 
+	@@include('@pathInclude/views/footer.html')
+	<!-- <script src="/allServerResources/include/js//iscroll.js"></script> -->
+    <script type="text/javascript" src="/allServerResources/include/js/vendor/swiper/swiper.min.js"></script>  
+    <script src="/mine/static/js/membershipDetails.js"></script>
+
+</body>
+<script>
+    
+    
+</script>
+</html>

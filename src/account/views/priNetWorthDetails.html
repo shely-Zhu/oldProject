@@ -1,0 +1,48 @@
+<!-- 私募资产净值明细 -->
+<!-- author: caiwenqi
+	time:2019/11/22 -->
+    <!DOCTYPE html>
+    <html>
+    
+    <head>
+        @@include('@pathInclude/views/meta.html')
+        <link rel="stylesheet" href="/account/static/css/priNetWorthDetails.css">
+        <title>净值明细</title>
+    </head>
+    
+    <body>
+        <!--列表加载显示图标-->
+        @@include('@pathCommonCom/loading/listLoading.html')
+        <!--公共页面头部-->
+        @@include('@pathCommonViews/headBarConfig.html',{"pathName":"净值明细"})
+        <div class="title">
+            <ul class="titleContent">
+                <li class="data">日期</li>
+                <li class="unit">单位净值</li>
+                <li class="cumulative">累计净值</li>
+                <li class="growthRate">单位净值增长率</li>
+            </ul>
+        </div>
+        <!--没有数据显示图标-->
+        @@include('@pathCommonCom/noData/noData.html', {"tipText": "暂无数据"})
+        <div class="list"></div>
+        <script id="adjustment-template" type="text/x-handlebars-template">
+            {{#each this}}
+               <ul class="contentWrapUl listItem">
+                    <li class="data">{{netValueDate}}</li>
+                    <li class="unit">{{unitNetValue}}</li>
+                    <li class="cumulative">{{accuNetValue}}</li>
+                    <li class="growthRate">{{unitNetValueGrowthRate}}%</li>
+                </ul>
+            {{/each}}
+        </script>
+        <!-- <p class="footer">暂无更多内容</p> -->
+        <!-- <div class="noDataMore">@@include('@pathCommonCom/noData/noData.html', {"tipText": "暂无数据"})</div> -->
+        
+        
+        @@include('@pathInclude/views/footer.html')
+
+        <script src="/account/static/js/priNetWorthDetails.js"></script>
+    </body>
+    
+    </html>

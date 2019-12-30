@@ -1,0 +1,49 @@
+<!-- /**  
+ * @Page:  持仓表格页
+ * @Author: songxiaoyu  
+ * @Date:   2018-10-16 16:04:54  
+ * @Last Modified by:   songxiaoyu  
+ * @Last Modified time: 2019-01-03 16:18:09  
+ *
+ *
+ * 恒小智购买页 buyCombination.html
+ * 恒小智我的持仓页面   myCombination.html
+ * 
+ */ -->
+<script id="holdingTable-template" type="text/x-handlebars-template">
+	{{!-- 表格title --}}
+	<div class="mui-row detailT">
+	{{#each title}}
+        <span class="{{../colName}}">{{this}}</span>
+	{{/each}}
+    </div>
+    {{!-- 表格行 --}}
+    {{#if buyCombination}}
+    {{!-- 恒小智购买页 --}}
+        {{#each list}}
+        <div class='listDiv mui-row'>
+            <div class="{{../colName}} alignL fundN">
+                <span class="ellipsis">{{fundName}}</span>
+                <span>({{fundCode}})</span>
+            </div>
+            <span class="{{../colName}} percent">{{prdPercent}}</span>
+            <span class="{{../colName}} distribution">0.00</span>
+        </div>
+        {{/each}}
+    {{/if}}
+    {{#if myCombination}}
+    {{!-- 恒小智我的持仓页面  --}}
+        {{#each list}}
+        <div class='listDiv mui-row'>
+            <div class="{{../colName}} alignL fundN">
+                <span class="ellipsis">{{fundName}}</span>
+                <span>({{fundCode}})</span>
+            </div>
+            <span class="{{../colName}} percent">{{holdShareMask}}</span>
+            <span class="{{../colName}} distribution">{{worthMask}}</span>
+            <span class="{{../colName}} distribution">{{assetRatio}}%</span>
+        </div>
+        {{/each}}
+
+    {{/if}}
+</script>

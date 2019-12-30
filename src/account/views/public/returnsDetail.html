@@ -1,0 +1,49 @@
+<!-- /*
+ * @page:收益明细
+ * @Author: chentiancheng 11-28
+ */ -->
+ <!DOCTYPE html>
+ <html lang="en">
+ <head>
+     @@include('@pathInclude/views/meta.html')
+     <link rel="stylesheet" href="/account/static/css/public/returnsDetail.css">
+     <title>收益明细</title>
+ <body>
+     
+    @@include('@pathCommonCom/loading/listLoading.html')
+     <div class="wrap">
+         <div class="topTitle">
+             @@include('@pathCommonViews/headBarConfig.html',{"bgColors":"#2C3E77,#273971","showType":"0","pathName":"收益明细"})
+         </div>
+         <div class="messageTitle">
+            说明：昨日收益是根据持仓货基万份收益计算的估算收益，仅供参考，实际收益以具体到账为准。 如后台数据未下载完成、周末及节假日等到净值数据未更新时，昨日收益一栏显示最近一次更新的收益。
+         </div>
+         <div class="title">
+             <ul class="titleContent">
+                 <li>日期</li>
+                 <li>收益(元)</li>
+             </ul>
+         </div>
+         @@include('@pathCommonCom/noData/noData.html', {"tipText": "暂无数据"})
+         <div class="list"></div>
+         <script id="adjustment-template" type="text/x-handlebars-template">
+             {{#each this}}
+                <ul class="contentWrapUl listItem">
+                    <li>{{belongdate}}</li>
+             {{#if_red todayIncome}}       
+                    <li style="color:red">+{{todayIncomeMask}}</li>
+                    {{else}}
+                    <li style="color:green">-{{todayIncomeMask}}</li>
+              {{/if_red}}   
+                </ul>
+              {{/each}}
+         </script>
+     </div>
+ 
+     @@include('@pathInclude/views/footer.html')
+     
+ 
+     <script src="/account/static/js/public/returnsDetail.js"></script>
+ </body>
+ 
+ </html>

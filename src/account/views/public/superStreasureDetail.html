@@ -1,0 +1,101 @@
+<!-- 自选公募-超宝详情
+ @author wangjiajia 2019-11-19
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	@@include('@pathInclude/views/meta.html') 
+	<link rel="stylesheet" href="/account/static/css/public/superStreasureDetail.css">  
+	<title>交易记录</title>
+</head>
+<body>
+        @@include('@pathCommonViews/headBarConfig.html',{"pathName":"","bgColors":"#475A95,#475A95","showType":"1"})
+        <section class="container">
+            <div class="banner">
+                <div class="bannerTop clearfix">
+                    <div class="sum fl"><span class="j_text">总金额(元)</span></div>
+                    <!-- <div class="assetsBtn fr">资产组成说明</div> -->
+                </div>
+                <div class="totalM">--</div>
+                <div class="accountWrap">
+                    <div class="first_h_profit_box fl">
+                        <div class="h_profit">昨日收益(元)</div>
+                        <div class="h_profit_value incomeMask">--</div>
+                    </div>
+                    <div class="second_h_profit_box fl">
+                        <p class="h_profit">累计收益(元)</p>
+                        <p class="h_profit_value addupIncomeMask">--</p>
+                    </div>
+                </div>
+            </div>
+            <div class="detailWrap">
+              <ul class="detailWrapUl">
+                 <li class="detailLi addLi">
+                     <div class="imgWrap">
+                        <img src="/account/static/img/account_icon_jyjl.png" alt="">
+                     </div>
+                     <div>
+                        收益明细 
+                     </div>                  
+                </li>
+                <li class="detailLi recordBtn">
+                    <div class="imgWrap">
+                        <img src="/account/static/img/account_icon_jyjl.png" alt="">
+                    </div>
+                    <div>
+                        交易记录 
+                    </div>                  
+                </li>
+              </ul>
+            </div>
+            <div class="data">
+                七日年化
+            </div> 
+            <div class="lineDraw">
+                <!-- 七日年化折线图 -->
+                <div id="qrnhLine" class="line"></div>
+                <!-- 万份收益折线图 -->
+                <div id="wfsyLine" class="hide line"></div>
+                <div class='mui-row tab'>
+                    <span class="time oneMonth active" num="1">近一个月</span>
+                    <span class="time threeMonth" num="3">近三个月</span>
+                    <span class="time threeMonth" num="6">近六个月</span>
+                    <span class="time newYear" num="12">近一年</span>
+                    <span class="time sinceNow" num="13">成立至今</span>
+                </div>
+            </div>
+            <div class="textWrap">
+               <div class="rulestestWrap">
+                  <!-- 放置列表 -->
+               </div>
+            </div>
+            <div class="footer mui-row">
+                    <div class="footerBtnLeft mui-col-sm-6 mui-col-xs-6 rollOutBtn blueTxtButton">转出</div>
+                    <div class="footerBtnRight mui-col-sm-6 mui-col-xs-6 shiftToBtn blueBgButton">转入</div>
+            </div>
+            <div class="titleTwo"></div>
+            <script id="adjustment-template" type="text/x-handlebars-template">
+                {{#each this}}
+                <ul data-id='{{id}}' class="materialContent">
+                    <li >{{title}}</li>
+                    <i class="iconfont">&#xe600;</i>
+                 </ul>
+                {{/each}}
+            </script>
+
+
+
+            <!-- 加载中loading -->
+            <!-- @@include('@pathCommonCom/loading/listLoading.html') -->
+            <!-- 暂无数据 -->
+            @@include('@pathCommonCom/noData/noData.html', {"tipText": "暂无数据"})
+    
+    
+        </section>
+
+
+    @@include('@pathInclude/views/footer.html')
+    <script src="/allServerResources/include/js/vendor/echarts/echarts.min.js"></script>
+    <script src="/account/static/js/public/superStreasureDetail.js"></script>
+</body>
+</html>

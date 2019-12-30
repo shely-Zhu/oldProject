@@ -1,18 +1,15 @@
-
-/*
-	成长值
-*/
-
+//文章模板模拟数据
 // 使用 Mock
 var Mock = require('mockjs');
 
-var incomeDetail = Mock.mock({ 
-	"data": {
-        "growthValue": "0",
-    },
-    "message": "操作成功！",
-    "status": "0000"
+var data = Mock.mock({
+	data: {
+		"growthValue": 300,
+		"levelUpValue": '',
+		"percent": 100,
+	},
+	"message": "successful",
+	"status": "0000"
 });
 
-//把生成的假数据当做模块输出
-module.exports = incomeDetail;
+module.exports = data;

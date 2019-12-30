@@ -1,0 +1,85 @@
+<!-- 联系我们-意见反馈
+     @author 陈天成 2019-11-11
+-->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    @@include('@pathInclude/views/meta.html')
+    <link rel="stylesheet" href="/mine/static/css/concatUsAdvise.css">
+    <link rel="stylesheet" href="/mine/static/css/uploadMaterial.css">
+    <title>联系我们-意见反馈</title>
+</head>
+
+<body>
+
+    @@include('@pathCommonViews/headBarConfig.html',{"pathName":"意见反馈"})
+    @@include('@pathCommonCom/loading/listLoading.html')
+    <div class="concatUsAdvisePage" id="concatUsAdvise">
+        <!--头部  -->
+        <!--身体  -->
+        <div class="concatUsAdvisePageMain  uploadMaterial">
+            <div class="concatUsAdvisePageMainQuestion">
+                <h3 class="concatUsAdvisePageMainAdviceType">请选择您的反馈类型</h3>
+                <ul class="mui-table-view">
+                    <li class="mui-input-row mui-table-view-cell mui-radio mui-right list mui-selected">
+                        <label class="blod"></label>
+                    </li>
+                    <li class="mui-input-row  mui-table-view-cell mui-radio mui-right list">
+                        <label>功能异常</label>
+                        <input name="radio1" htmdEvt="feedback_functionalAbnormality" value="0" type="radio" >
+                    </li>
+                    <li class="mui-input-row mui-table-view-cell mui-radio mui-right list">
+                        <label>安全问题</label>
+                        <input name="radio1" htmdEvt="feedback_safetyProblem" value="1" type="radio">
+                    </li>
+                    <li class="mui-input-row mui-table-view-cell mui-radio mui-right list">
+                        <label>产品建议</label>
+                        <input name="radio1" htmdEvt="feedback_productSuggestion" value="2" type="radio">
+                    </li>
+                    <li class="mui-input-row mui-table-view-cell mui-radio mui-right list">
+                        <label>其他问题</label>
+                    <input name="radio1" htmdEvt="feedback_otherQuestions" value="3" type="radio">
+                    </li>
+                </ul>
+            </div>
+            <div class="concatUsAdvisePageMainAdvice">
+                <h3 class="concatUsAdvisePageMainAdviceTitle">请您补充详细问题或意见</h3>
+                <div class="mui-input-row concatUsAdvisePageMainAdviceContent">
+                    <textarea maxlength="200" value="" placeholder="请输入1-200字的描述" needCheck="true" htmdEvt="feedback_addImg" class="textarea" check="regAddress"></textarea>
+                    <span class="haveMany"  data="0/200">0/200</span>
+                </div>
+                <h3 class="concatUsAdvisePageMainAdviceTitle">请您提供对应问题截图或照片</h3>
+                <section class="content_wrap" id="complianceMaterial">
+                    <div class="uploadWrap">
+                        <div class="uw_2">
+                            <div class="mui-row queueList uploadArea">
+                                <div class="mui-col-sm-6 iconWrap addBtn" id="complianceSelect">
+                                    <div class="iconfont addIcon">&#xe69e;</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </div>
+        <div class="btnButton">
+            <button type="button" class="mui-btn blueBgButton" htmdEvt="feedback_submit" id="upload_btn">提交</button>
+        </div>
+    </div>
+
+
+
+
+	
+	 
+	@@include('@pathInclude/views/footer.html')
+
+
+    <script src="/mine/static/js/concatUsAdvise.js"></script>
+    <script src="/allServerResources/include/js//vendor/webuploader/webUploader.js"></script>
+    <!-- <script src="//cdn.jsdelivr.net/npm/eruda"></script> -->
+    <!-- <script>eruda.init();</script> -->
+</body>
+
+</html>

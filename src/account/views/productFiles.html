@@ -1,0 +1,97 @@
+<!-- /*
+ * @page:产品档案
+ * @Author: wangjiajia
+ */ -->
+ <!DOCTYPE html>
+ <html lang="en">
+ <head>
+     @@include('@pathInclude/views/meta.html')
+     <link rel="stylesheet" href="/account/static/css/productFiles.css">
+     <title>产品档案</title>
+ <body>
+     @@include('@pathCommonViews/headBarConfig.html',{"bgColors":"#2C3E77,#273971","showType":"0","pathName":"产品档案"})
+     @@include('@pathCommonCom/loading/listLoading.html')
+     <div class="list">
+        <div class="contentWrapper">
+            <div class="contentWrap">
+                <!-- 放置列表 -->
+                <div class="content">
+                    <ul class="contentUl">
+                        <li class="liLeft">产品名称</li>
+                        <li class="liRight productName">--</li>
+                    </ul>
+                    <ul class="contentUl">
+                        <li class="liLeft">投资策略</li>
+                        <li class="liRight investTactics">--</li>
+                    </ul>
+                    <ul class="contentUl">
+                        <li class="liLeft">产品期限</li>
+                        <li class="liRight productTerms">--</li>
+                    </ul>
+                    <ul class="contentUl">
+                        <li class="liLeft">管理人</li>
+                        <li class="liRight custodianUser">--</li>
+                    </ul>
+                    <ul class="contentUl">
+                        <li class="liLeft">托管机构</li>
+                        <li class="liRight custodianOrg">--</li>
+                    </ul>
+                    <ul class="contentUl">
+                        <li class="liLeft">份额登记机构</li>
+                        <li class="liRight shareRegisterOrg">--</li>
+                    </ul>
+                    <ul class="contentUl">
+                        <li class="liLeft">产品备案号</li>
+                        <li class="liRight productRecord">--</li>
+                    </ul>
+                    <ul class="contentUl">
+                        <li class="liLeft">风险等级</li>
+                        <li class="liRight riskLevel">--</li>
+                    </ul>
+                    <ul class="contentUl">
+                        <li class="liLeft">最新规模</li>
+                        <li class="liRight newScale">--</li>
+                    </ul>
+                </div>
+                <div class="productCostWrap">
+                   <div class="productCostTitle">
+                        产品费用
+                   </div>
+                   <div class="productCostDetail">
+                      --
+                   </div>
+                   <div class="openOff">
+                     <div class="open">展开</div>
+                     <div class="imgWrap">
+                        <img class="img" src="/common/img/arrow.png" alt="">
+                     </div>
+                   </div>
+                   <div class="productCostTitle productCostTitleOne">
+                        推荐材料
+                   </div>
+                   <div class="materialWrap">
+                     <!-- <ul class="materialContent">
+                         <li>材料名称.PDF</li>
+                         <li class="imgLi"><img src="/common/img/arrow.png" alt=""></li>
+                     </ul>
+                     <ul class="materialContent">
+                        <li>材料名称.PDF</li>
+                        <li class="imgLi"><img src="/common/img/arrow.png" alt=""></li>
+                    </ul> -->
+                   </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script id="adjustment-template" type="text/x-handlebars-template">
+        {{#each this}}
+        <ul href="{{href}}" class="materialContent">
+            <li class="fileName">{{marName}}</li>
+            <i class="iconfont">&#xe600;</i>
+        </ul>
+        {{/each}}
+    </script>
+     @@include('@pathInclude/views/footer.html')
+     <script src="/account/static/js/productFiles.js"></script>
+ </body>
+ </html>

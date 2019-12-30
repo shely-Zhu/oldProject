@@ -11,10 +11,10 @@ var Mock = require('mockjs');
 //这里直接返回的就是JSON格式
 var data = Mock.mock({
     "data": {
-        "accountType": 1,
+        "accountType": "0",
         "accreditedInvestor": 0,
         "accreditedInvestorValiddate": null,
-        "buyFreeze": 0,
+        "buyFreeze": "0",
         "customerNo": 486472,
         "dealStatus": 0,
         "endurePri": "1",

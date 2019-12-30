@@ -1,0 +1,257 @@
+
+@import url('@pathCommonLess/mui/resetMUI.less');
+@import url("@pathCommonLessCom/alertBox.less");
+@import url("@pathCommonLessCom/headBarConfig.less");
+body{
+    max-width: 7.5rem;
+    // background:@c005;
+}
+html{
+    height: 100%;   
+}
+.resultsWrap{
+    width: 100%;
+    height: 100%;
+    margin-bottom: 1rem;
+    // background:@c005;
+    position: relative;
+    .resultTop{
+        width: 100%;
+        height:100%;
+        padding-bottom: 0.5rem;
+        border-top:0.01rem solid @c004;
+        background:@c005;
+        display:none;
+        .photo{
+            width: 100%;
+            padding-left: 2.9rem;
+            padding-top:1.5rem;
+            img{
+                width:1.62rem;
+                height:1.21rem;
+            }
+        }
+        .succedText{
+            width: 100%;
+            text-align: center;
+            font-size:0.32rem;
+            font-family:PingFangSC-Regular,PingFang SC;
+            font-weight:400;
+            color:@272727;
+            margin-bottom: 1.2rem;
+        }
+        .proessBox{
+            width: 100%;
+            box-sizing: border-box;
+            padding:0 0.3rem;
+            overflow: hidden;
+            display:none;
+            .proess-img{
+               // float: left;
+               position: absolute;
+                width:0.36rem;
+                height:1.76rem ;
+                
+                .proess-line{
+                    width: 100%;
+                    height: 0.34rem;
+                    background: url("/financial/static/img/proess_line.png") 0 0 no-repeat;
+                    background-size: 100% 100%;
+                }
+                .wait-proess{
+                    width: 100%;
+                    height: 0.36rem;
+                    background: url("/common/img/public_trade_detail_no_check.png") 0 0 no-repeat;
+                    background-size: 100% 100%;
+                }
+                .right-proess{
+                    width: 100%;
+                    height: 0.36rem;
+                    background: url("/common/img/public_trade_detail_check.png") 0 0 no-repeat;
+                    background-size: 100% 100%;
+                }
+            }
+            .proess-title{
+                //float: left;
+                position: absolute;
+                left: 0.7rem;
+                width:6.48rem;
+                height:1.76rem ;
+                overflow: hidden;
+                padding-left:0.13rem;
+                box-sizing: border-box;
+                .time{
+                    display: flex;
+                    justify-content: space-between;
+                    font-size:0.26rem;
+                    color: #272727;
+                    font-family: PingFangSC-Regular, PingFang SC;
+                    // .laber-left{
+                    //     float: left;
+                    // }
+                    .laber-right{
+                       color:#9b9b9b
+                    }
+                }
+                .applyTime{
+                    height: 0.36rem;
+                    line-height: 0.36rem;
+                }
+                .shareTime{
+                    height:1.05rem;
+                    line-height: 1.05rem;
+                }
+                .earningsTime{
+                    height: 0.36rem;
+                    line-height: 0.36rem;
+                }
+            }
+        }
+        .cashInto{
+            height: 1.4rem;
+        }
+        .proessBox.cashOut{
+            width: 100%;
+            box-sizing: border-box;
+            padding:0 0.3rem;
+            overflow: hidden;
+            height: 1.8rem;
+            .proess-img{
+               // float: left;
+               position: absolute;
+                width:0.36rem;
+                height:1.06rem ;
+            }
+            .proess-title{
+               // float: left;
+               position: absolute;
+               left: 0.7rem;
+               width:6.5rem;
+                height:2rem ;
+                overflow: hidden;
+                padding-left:0.13rem;
+                box-sizing: border-box;
+                .time{
+                    display: flex;
+                    justify-content: space-between;
+                    font-size:0.26rem;
+                    color: #272727;
+                    font-family: PingFangSC-Regular, PingFang SC;
+                    // .laber-left{
+                    //     float: left;
+                    // }
+                    .laber-right{
+                       color:#9b9b9b
+                    }
+                }
+                .applyTime{
+                    height: 0.36rem;
+                    line-height: 0.36rem;
+                    margin-bottom: 0.34rem;
+                }
+                .toTime{
+                    height: 0.36rem;
+                    line-height: 0.36rem;
+                }
+               
+            }
+        }
+    
+    }
+    .listWrap{
+        width: 100%;
+        height: 100%;
+        margin-top: 0.2rem;
+        background:@c005;
+        .listContent{
+            width: 100%;
+            display:none;
+            .listContentUl{
+                width: 95%;
+                margin: 0 auto;
+                height: 1rem;
+                border-bottom: 0.01rem solid @c004;
+                display:flex;
+                justify-content:space-between;
+                line-height: 1rem;
+                font-size:0.32rem;
+                font-family:PingFangSC-Regular,PingFang SC;
+                font-weight:500;
+                color:@272727;
+                
+                li{
+                    line-height: 1rem;
+                    height: 1rem;
+                }
+                .bank{
+                    width:4.2rem;
+                    text-align: right;
+                    .banKImg{
+                        width: .3rem;
+                        height: .3rem;
+                        display: inline-block;
+                    }
+                    span{
+                        display: inline-block;
+                    }
+                }
+                .textcolor{
+                    color: @364D97;
+                }
+                .onlinePay span{
+                    height: 0.5rem;
+                    color: @364D97;
+                    font-size: 0.24rem;
+                    background: rgb(231, 236, 248);
+                }
+            }
+           
+        }
+    }
+    .over{
+        position: absolute;
+        top: -0.7rem;
+        right: 0.32rem;
+        z-index: 999;
+        font-size:0.3rem;
+        font-family:PingFangSC-Regular,PingFang SC;
+        font-weight:400;
+        color:rgba(54,77,151,1);
+    }
+    //判断titletop
+    .resultTopTwo{
+        width: 100%;
+        // height:100%;
+        height: 5rem;
+        padding-bottom:0.7rem;
+        border-top:0.01rem solid @c004;
+        background:@c005;
+        display:none;
+        .photo{
+            width: 100%;
+            padding-left: 2.9rem;
+            padding-top:1.5rem;
+            img{
+                width:1.8rem;
+                height:1.21rem;
+            }
+        }
+        .succedText{
+            width: 100%;
+            text-align: center;
+            font-size:0.28rem;
+            font-family:PingFangSC-Regular,PingFang SC;
+            font-weight:400;
+            color:@272727;
+            // margin-bottom: 1.2rem;
+        }
+    }
+
+}
+.mt20{
+    margin-top: 0.2rem
+}
+#goBack{
+    display: none;
+}
+

@@ -1,0 +1,45 @@
+<!-- /*
+ * @page:收益明细
+ * @Author: wangjiajia
+ */ -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    @@include('@pathInclude/views/meta.html')
+	<link rel="stylesheet" href="/account/static/css/transactionDetail.css">
+	<title>交易明细</title>
+<body>
+    @@include('@pathCommonViews/headBarConfig.html',{"bgColors":"#2C3E77,#273971","showType":"0","pathName":"交易明细"})
+    @@include('@pathCommonCom/loading/listLoading.html')
+    @@include('@pathCommonCom/noData/noData.html', {"tipText": "暂无数据"})
+    <div class="list"></div>
+    <script id="adjustment-template" type="text/x-handlebars-template">
+        {{#each this}}
+        <div class="content listItem">
+                <div class="contentLeft">
+                    <div class="photoleft">{{tradeType}}</div>
+                </div>
+                <div class="contentRight">
+                   <ul class="contentUl leftUl">
+                      <li>交易金额(元)</li>
+                      <li>{{buyAmount}}</li>
+                   </ul>
+                   <ul class="contentUl centerUl">
+                       <li>{{buyDate}}</li>
+                       <li class="changeColor">申请日</li>
+                   </ul>
+                   <ul class="contentUl rightUl">
+                       <li>{{redemptionType}}</li>
+                       <li class="changeColor">赎回方式</li>
+                  </ul>
+                </div>
+           </div>
+        {{/each}}
+    </script>
+
+    @@include('@pathInclude/views/footer.html')
+
+    <script src="/account/static/js/transactionDetail.js"></script>
+</body>
+
+</html>

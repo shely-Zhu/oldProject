@@ -1,0 +1,72 @@
+<!-- htjf4登录 -->
+
+<!doctype html>
+<html lang="en">
+<head>
+    @@include('@pathNewInclude/views/meta.html')
+    <link rel="stylesheet" href="/user/static/css/user.css">
+	<title>联调环境登录登录</title>
+</head>
+<body>
+	<section class="container login">
+
+		<!-- <div class="login"> -->
+
+			<div class="overHead">
+				<span class="iconfont">&#xe602;</span>
+				<p class="title">联调环境app登录</p>
+			</div>
+
+			<div class="mui-card topMitter">
+
+				<div class="form-wrap">
+
+						<!-- 下拉选择 -->
+						<div class="selectWrapper idType">
+						    
+						    <p  class="selectCopy" num="1" >
+						    	<span class="select_txt selectResult">自然人</span>
+						   	</p>
+
+							<ul class="optionCopy" style="display:none;"> 
+								<li num="1" class="liSelect">自然人</li>
+								<li num="0">授权代理人</li>
+							</ul>
+						</div>
+						
+						<!-- 手机号 -->
+						<div class="formList formIconLeft">
+							<span class="iconfont">&#xe665;</span>
+
+							@@include('../../common/views/form/phone/phone.html')
+						</div>
+
+						<!-- 登陆密码 -->
+						<div class="formList formIconLeft formIconRight">
+							<span class="iconfont">&#xe666;</span>
+
+							@@include('../../common/views/form/loginPassword/loginPassword.html')
+						</div>
+
+				</div>
+			
+			</div>
+
+			<!-- <a href="/user/views/forgetLoginPassword/phoneVerify.html" class="forgot">重置密码</a>   -->
+
+			<div class="btnButton">
+				<button type="button" class="mui-btn nextBtn"  id="btn">登录</button>
+			</div>
+			
+			<!-- <div class="goReg box"> 
+				<a class="ckReg next" href="javascript:;">立即注册</a>
+			</div> -->
+
+	</section>
+
+	 
+	 @@include('@pathInclude/views/footer.html')
+	 
+	<script src="/user/static/js/htjf4Login.js"></script>	
+</body>
+</html>

@@ -1,0 +1,142 @@
+// 蔡文琦 基金公司页面 css
+@import url('@pathCommonLess/mui/resetMUI.less');
+@import url("@pathCommonLessCom/alertBox.less");
+@import url("@pathCommonLessCom/headBarConfig.less");
+@import url("@pathCommonCom/noData/noData.less");
+
+body{
+    background: @F7FAFD;
+}
+.wrap{
+    width: 7.5rem;
+    background: @F7FAFD;
+    // 公司基本信息部分
+    .container{
+        margin: .3rem auto;
+        width: 7.5rem;
+        background: @c005;
+        border-bottom: solid .01rem @E7E9ED;
+        .header{
+            padding-top: .3rem;
+            padding-bottom: .3rem;
+            padding-left: .3rem;
+            border-bottom: solid .01rem @E7E9ED;
+            font-size: .32rem;
+            font-weight: 400;
+        }
+        .companyIntroduce{
+            margin: 0 auto;
+            width: 6.9rem;
+            li:nth-of-type(1){
+                border-top: none;
+            }
+            li{ 
+                width: 100%;
+                display: -webkit-box;
+                padding-top: .19rem;
+                padding-bottom: .2rem;
+                border-top: dashed .01rem @E1E1E1;
+                .blur_font{
+                    display: block;
+                    -webkit-box-flex:1;
+                    font-size: .28rem;
+                    color: @364D97;
+                    font-weight: 500;
+                }
+                .content{
+                    display: block;
+                    text-align: right;
+                    -webkit-box-flex:1;
+                    font-size: .28rem;
+                    color: @4A4A4A;
+                    font-weight: 400;
+                }
+            }
+        }
+    }
+    .listBorder{
+        margin: .3rem 0;
+        width: 7.5rem;
+        height: 3.89rem;
+        background: @c005;
+        .listTitle{
+            color: @272727;
+            font-size: .32rem;
+            font-weight: 400;
+            padding-top: .3rem;
+            // padding-bottom: .3rem;
+            margin-left: .3rem;
+        }
+        .innerWrap{
+            margin: .3rem auto;
+            width: 6.9rem;
+            padding-bottom: 0.01rem;
+            border: solid .01rem @364D97;
+            border-top: none;
+            border-radius: .2rem;
+            .shareholderTitle{
+                background: linear-gradient(135deg,rgba(108,131,201,1) 0%,rgba(6,29,106,1) 100%);
+                border-radius: .2rem .2rem 0 0;
+                display: flex;
+                justify-content: space-around;
+                height: .79rem;
+                line-height: .79rem;
+                .titleLeft,.titleCenter,.titleRight{
+                    -webkit-box-flex:1;
+                    font-size: .28rem;
+                    font-weight: 500;
+                    color: @c005;
+                }
+                .titleLeft{
+                    text-align: left;
+                    text-indent: .5rem;
+                }
+            }
+            .shareholderList{
+                // background: @F8F9FC;
+                display: flex;
+                justify-content: space-around;
+                height: .88rem;
+                line-height: .88rem;
+                background-color: @F8F9FC;
+                // border:solid .01rem @364D97;
+                border-top: solid .01rem @42579D;
+                border-radius: 0 0 .2rem .2rem;
+                color: @364D97;
+                font-size: .24rem;
+                font-weight: 400;
+                div{
+                    width: 2.5rem;
+                    text-align: center;  
+                }
+            }
+            .productList{
+                display: flex;
+                justify-content: space-around;
+                height: .88rem;
+                line-height: .88rem;
+                background-color: @F8F9FC;
+                // border:solid .01rem @364D97;
+                border-top: solid .01rem @42579D;
+                border-radius: 0 0 .2rem .2rem;
+                color: @364D97;
+                font-size: .24rem;
+                font-weight: 400;
+                div{
+                    // -webkit-box-flex:1;
+                    width: 2.3rem;
+                    text-align: center;
+                }
+            }
+        }
+    }
+}
+.secondFloor ul li{
+    border-bottom: none;
+    border-top: none !important;
+    text-align: right !important;
+}
+.officeAddress{
+    display: block;
+    max-width: 65%;
+}

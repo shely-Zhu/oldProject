@@ -1,0 +1,130 @@
+/**
+* 现金管理
+* @author yanruiting 2019-11-23
+*/
+@import url('@pathCommonLess/mui/resetMUI.less');
+@import url("@pathCommonLessCom/alertBox.less");
+@import url("@pathCommonLessCom/headBarConfig.less");
+
+body{
+	max-width: 7.5rem;
+	background:@F7F9FA !important;
+}
+#top {
+	height: 4.92rem;
+	background: url('/financial/static/img/cash_bg.png') no-repeat;
+	.HeadBarConfigBox {
+		background:linear-gradient(135deg,rgba(71,90,149,1) 0%,rgba(3,19,73,1) 100%);
+	}
+	.topCon {
+		padding: 1.58rem 0 0.56rem 0;
+		.totalFundTitle {
+			text-align: center;
+			font-size: .32rem;
+			color:rgba(255,255,255,1);
+			line-height:.45rem;
+			background:linear-gradient(180deg, rgba(251,226,189,1) 0%, rgba(226,181,128,1) 100%);
+			-webkit-background-clip:text;
+			-webkit-text-fill-color:transparent;
+			font-weight: 600;
+		}
+		.totalFund {
+			margin-top: .14rem;
+			.fundValue {
+				text-align: center;
+				font-size: .68rem;
+				font-weight:bold;
+				color:rgba(255,255,255,1);
+				line-height:.8rem;
+				background:linear-gradient(180deg, rgba(251,226,189,1) 0%, rgba(226,181,128,1) 100%);
+				-webkit-background-clip:text;
+				-webkit-text-fill-color:transparent;
+				margin:0 auto
+			}
+		}
+	}
+	.list {
+		.wrapper {
+			#cashListCon {
+				.cashItem {
+					padding: 0 0 0 .3rem;
+					background:@FFFFFF;
+					margin-bottom: .3rem;
+					&>div {
+						padding: .3rem .3rem .3rem 0;
+						border-bottom: 1px solid @E7E9ED;
+					}
+					.itemTop {
+						.itemTitle {
+							font-size: .32rem;
+							line-height: .32rem;
+							color: @000000;
+							font-weight: 600;
+							margin-bottom: .13rem;
+							.rightCon {
+								display: inline-block;
+							}
+						}
+						.itemSevenIncome {
+							height:.33rem;
+							font-size:.24rem;
+							line-height: .33rem;
+							color: @9B9B9B;
+							margin-top: .08rem;
+						}
+					}
+					.itemCenter {
+						&>div {
+							flex: 1;
+							.centerTitle {
+								font-size: .24rem;
+								line-height: .33rem;
+								color: @9B9B9B;
+							}
+							.centerValue {
+								font-size: .32rem;
+								line-height: .32rem;
+								font-weight: 600;
+								margin-top: .13rem;
+								color:@000000;
+							}
+						}
+						&>div:last-child {
+							border: none;
+						}
+					}
+				}
+				&.cashItem:last-child {
+					margin-bottom: 0;
+				}
+			}
+		}
+	}
+}
+#loading {
+	top: 1.28rem!important;
+}
+.flex {
+	display: flex;
+}
+.justify_between {
+	justify-content: space-between;
+}
+.lineVertical {
+	width:0.01rem;
+	height:0.5rem;
+	background:rgba(255,255,255,1);
+	opacity:0.3;
+	margin-top: .23rem;
+}
+.right {
+	display: inline-block;
+	width: .3rem;
+	height: .3rem;
+	background: url("/common/img/right.png") no-repeat;
+	background-size: 100%;
+	margin-left: .08rem;
+}
+.red {
+	color: @F52323!important;
+}

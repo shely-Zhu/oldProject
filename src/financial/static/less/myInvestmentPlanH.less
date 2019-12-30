@@ -1,0 +1,137 @@
+//李亮 2019-11-23 我的定投计划 css
+@import url('@pathCommonLess/mui/resetMUI.less');
+@import url("@pathCommonLessCom/alertBox.less");
+@import url("@pathCommonLessCom/headBarConfig.less");
+@import url("@pathCommonLessCom/goTopMui.less");
+* { touch-action: none; }
+body{
+    background-color: @F7FAFD;
+}
+.wrap{
+    .list{
+        // margin-top: 1rem;
+        .contentWrapper{
+            width: 100%;
+            overflow: hidden;
+            ul {
+                li{
+                    margin-bottom:0.3rem;
+                    background-color: @FFFFFF;
+                    padding:0.3rem;
+                    .content-t{
+                        display:-webkit-box;
+                        margin-bottom:0.2rem;
+                        h2{
+                            color:@272727;
+                            font-size:0.28rem;
+                            -webkit-box-flex:1;
+                            font-weight: bold;
+                        }
+                        .suspend{
+                            color:@C4925E;
+                        }
+                        span{
+                            -webkit-box-flex:1;
+                            display: block;
+                            color:@6C83C9; 
+                            text-align: right;
+                            font-size:0.24rem;
+                            i{
+                                color:@9B9B9B;
+                                font-size:0.12rem;
+                            }
+                        }
+                    }
+                    .content-c{
+                        margin-bottom:0.3rem;
+                        display:-webkit-box;
+                        p{
+                            -webkit-box-flex:1;
+                            span{
+                                display:block;
+                            }
+                            .span-l{
+                                color:@9B9B9B;
+                                font-size:0.24rem;
+                                margin-bottom: 0.08rem;
+                            }
+                            .span-r{
+                                color:@272727;
+                                font-size:0.26rem;
+                            }
+                        }
+            
+                    }
+                    .content-b{
+                        width:100%;
+                        border-radius: 4px;
+                        background:rgba(255,249,240,1);
+                        line-height:0.7rem;
+                        padding-left:0.2rem;
+                        color:@9B9B9B;
+                        font-size:0.24rem;
+                    }
+                }
+            }
+            ul:last-child{
+            	margin-bottom: 0.2rem;
+            }
+           
+        }
+       
+    }
+    
+
+    .newPlan{
+        line-height:0.98rem;
+        width:100%;
+        color:@FFFFFF;
+        background-color: @061D6A;
+        background-image: linear-gradient(to right, @6C83C9 ,@061D6A);
+        text-align: center;
+        font-size:0.32rem;
+        position: fixed;
+        left:0 ;
+        bottom:0;
+    }
+
+}
+.wrap .endPlan{
+    display: none;
+    margin:0.5rem 0 1.2rem 0;
+    a{
+        color:@364D97;
+        font-size:0.28rem;
+        text-align: center;
+        display: block;
+        i{
+            color:@364D97;
+            font-size:0.23rem;
+        }
+    }
+}
+.wrap .nothing{
+    height:300px;  //为了看样式真实开发删掉就行
+    img{
+        width: 2.19rem;
+        height: 2.18rem;
+        margin:0 auto;
+    }
+    p{
+        text-align: center;
+        font-size: .32rem;
+        width: 7.5rem;
+        margin-top:0.42rem;
+        columns: @9B9B9B;
+    }
+}
+.contentWrapper .noDataOne {
+    width: 100%;
+    text-align: center;
+    margin-top: 0.5rem;
+    display: none;
+}
+
+
+
+

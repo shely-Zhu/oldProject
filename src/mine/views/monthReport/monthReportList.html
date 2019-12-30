@@ -1,0 +1,64 @@
+<!-- 月度报告列表页
+ @author zhangyanping 2019-11-01
+-->
+
+<!DOCTYPE html>
+<html lang="en">
+
+	<head>
+
+		@@include('@pathInclude/views/meta.html')
+		<link rel="stylesheet" href="/mine/static/css/monthReport/monthReportList.css">
+		<title>月度投资报告</title>
+	</head>
+
+	<body>
+		@@include('@pathCommonCom/loading/listLoading.html')
+		@@include('@pathCommonViews/headBarConfig.html',{"pathName":"月度投资报告"})
+		<!-- 暂无数据 -->
+		<div class="without noData noneList" id="emptyBox">
+			<div class="box vertical center">
+				<img src="/common/img/empty.png">
+				<p class="tipText">您暂无月度投资报告</p>
+				<p class="tipAdvise">持仓产品后可获得定制化个性投资分析报告</p>
+				<p class="tipAdvise">立即查看产品进行持仓</p>
+			</div>
+			<div class="productBtn">去浏览产品</div>
+		</div>
+
+		<div class="adjustmentRecord">
+			<div class="list"></div>
+		</div>
+
+		<script id="adjustment-template" type="text/x-handlebars-template">
+			{{#each this}}
+			<ul class="mui-card mui-table-view marginTop listItem">
+				<li class="mui-table-view-cell mui-collapse">
+					<a href="javascript:void(0);" class="monthYear mui-navigate-right" >{{years}}</a>
+
+					<div class="mui-card marginTop latestAdjustment mui-collapse-content">
+						<div class='circle_left'></div>
+						<div class='circle_right'></div>
+						{{#each monthReportsList}}
+						<a href="javascript:void(0);" reportId={{reportId}} class='monthlyReport'>
+							<span class='reportName'>{{reportName}}</span>
+							<span class='reportTime'>{{reportTime}}</span>
+							<span class='iconfont detailLink'>&#xe600;</span>
+						</a>
+						{{/each}}
+					</div>
+
+				</li>
+				{{!--
+				<a href="javascript:void(0);" class="mui-navigate-right"></a> --}}
+			</ul>
+			{{/each}}
+		</script>
+
+		@@include('@pathInclude/views/footer.html')
+
+		<script src="/mine/static/js/monthReport/monthReportList.js"></script>
+
+	</body>
+
+</html>

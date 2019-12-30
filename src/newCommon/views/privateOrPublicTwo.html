@@ -1,0 +1,29 @@
+<!-- 公募或私募按钮 或定融/定投 -->
+<div class="publicPrivateTwo">
+	<div class="mui-segmented-control">
+
+		<a class="publicOrPrivateBtn gmBtn" href="javascript:;">公募</a>
+
+		<a class="publicOrPrivateBtn smBtn" href="javascript:;">私募</a>
+
+		<a class="publicOrPrivateBtn dingBtn mui-active" href="javascript:;">定融/定投</a>
+	</div>
+  <div class="mui-icon searchicon mui-icon-search"></div>
+</div>
+
+<script>
+
+	if(window.location.href.indexOf("myAsset") != -1){
+		document.getElementsByClassName("smBtn")[0].className="publicOrPrivateBtn smBtn mui-active";
+		document.getElementsByClassName("gmBtn")[0].className= "publicOrPrivateBtn gmBtn";
+		document.getElementsByClassName("dingBtn")[0].className= "publicOrPrivateBtn dingBtn";
+	}else if(window.location.href.indexOf("payThemeCash") != -1){
+		document.getElementsByClassName("gmBtn")[0].className="publicOrPrivateBtn gmBtn mui-active";
+		document.getElementsByClassName("smBtn")[0].className="publicOrPrivateBtn smBtn";
+		document.getElementsByClassName("dingBtn")[0].className= "publicOrPrivateBtn dingBtn";
+	}else{
+		document.getElementsByClassName("gmBtn")[0].className="publicOrPrivateBtn gmBtn";
+		document.getElementsByClassName("smBtn")[0].className="publicOrPrivateBtn smBtn";
+		document.getElementsByClassName("dingBtn")[0].className= "publicOrPrivateBtn dingBtn mui-active";
+	}
+</script>

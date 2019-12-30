@@ -1,0 +1,38 @@
+//蔡文琦 2019-11-20 交易明细页面样式
+@import url("@pathCommonLess/mui/resetMUI.less");
+@import url('@pathCommonLessCom/tabScroll.less');
+@import url("@pathCommonLessCom/alertBox.less");
+@import url("@pathCommonLessCom/headBarConfig.less");
+
+body{
+    max-width: 7.5rem;
+}
+.wrap{
+    li{ 
+        position: relative;
+        margin: .3rem auto;
+        width:6.9rem;
+        height: 1.34rem;
+        line-height: 1.34rem;
+        font-size: .32rem;
+        font-weight:400;
+        background-color: @c005;
+        border-radius:.18rem;
+        img{
+            display: inline-block;
+            width: .48rem;
+            height: .48rem;
+            margin-left: .3rem;
+            margin-right: .11rem;
+            vertical-align: middle;
+        }
+        a{  
+            position: absolute;
+            right: .2rem;
+        }
+    }
+    .type{
+        display: none;
+    }
+}
+
