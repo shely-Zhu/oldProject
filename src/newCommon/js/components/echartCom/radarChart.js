@@ -46,7 +46,9 @@ module.exports = function(echartData, $e) {
             trigger: 'item',
             textStyle:{
                 align:'left',
-            }
+            },
+            show:false
+    
         },
         radar: [{
             indicator: [
@@ -56,7 +58,7 @@ module.exports = function(echartData, $e) {
                 { text: '基金公司实力', max: 100},
                 { text: '抗风险性', max: 100},
             ],
-            triggerEvent: true,
+            triggerEvent: false,
             center: ['50%', '50%'],
             radius: 80
         }],
@@ -109,7 +111,7 @@ module.exports = function(echartData, $e) {
 	myChart.on('click',function(params){//gulp打包禁止使用es6语法。否则打包不过去
 //	    console.log(option.radar[0].indicator[params.event.topTarget.__dimIdx].name);
 	    if(!!params.event.topTarget.__dimIdx){
-	    		    option.series[0].data[0].value = echartData[params.event.topTarget.__dimIdx];
+	    		  //  option.series[0].data[0].value = echartData[params.event.topTarget.__dimIdx];
 	    }
 //	    option.series[0].data[0].value = echartData[echartData.length-1][params.event.topTarget.__dimIdx].name];
 	});
