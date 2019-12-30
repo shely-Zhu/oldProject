@@ -111,7 +111,6 @@ $(function() {
             //有数据获取列表
             getData: function(t) {
                 var that = this;
-                that.$e.listLoading.show();
                 var obj = [{ // 系统调仓记录列表
                     url: site_url.queryFinancialer_api,
                     // url:'http://172.16.187.164:8081/web/marketing/activity/getActivitiesList',
@@ -154,7 +153,6 @@ $(function() {
                             generateTemplate(data, that.$e.recordList, that.$e.starFinancialPlannerListTemplateId)
                                 //无缝滚动
                             alwaysAjax($(".recordList"))
-                            that.$e.listLoading.hide();
                             $(".lazyload").lazyload()
 
                         }, 200)

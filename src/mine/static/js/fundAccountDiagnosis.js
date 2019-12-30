@@ -168,7 +168,7 @@ $(function() {
                             window.location.href = site_url.noAccountHoldShare_url
                         }
                     }
-                    
+                       $("#holdingBox").html("")
                       // 将列表插入到页面上
                       generateTemplate(data, that.$e.holdingBox, that.$e.holdingBoxTemp);
                     
@@ -474,10 +474,12 @@ $(function() {
             mui("body").on("mdClick", ".account-holdings .down", function() {
                 if($(this).hasClass('up')){
                     $(this).removeClass('up')
+                    that.gV.pageSize = 5
                 }else{
                     $(this).addClass('up')
+                    that.gV.pageSize = 100000
                 }
-                that.gV.pageSize = 100000
+               
                 that.getHoldData();
             },{
                 'htmdEvt': 'fundAccountDiagnosis_01'

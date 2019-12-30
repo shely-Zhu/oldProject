@@ -676,11 +676,12 @@ $(function() {
             })
 //			历史明细跳转
 			mui("body").on('mdClick', '.historyDetail', function() {
+				debugger
 				if(that.data.projectType != "10300"){//非货币基金
-					window.location.href = site_url.otherFundHistoryDetail_url + "?fundCode=" + that.data.fundCode;
+					window.location.href = site_url.otherFundHistoryDetail_url + "?fundCode=" + that.data.fundCode+"&fundType=0";
 					
 				}else{//货币基金
-					window.location.href = site_url.mineHistoryDetail_url + "?fundCode=" + that.data.fundCode;
+					window.location.href = site_url.mineHistoryDetail_url + "?fundCode=" + that.data.fundCode+"&fundType=1";
 					
 				}
 			},{
