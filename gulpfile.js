@@ -268,7 +268,7 @@ if (options.env === '0') { //当开发环境的时候构建命令执行mock服�
 
 /**此任务默认执行，gulp启动时，先将所有文件打包一次**/
 gulp.task('initialTask', function(cb) {
-    plugins.sequence('clean', 'images', 'font', 'allServerResources', 'includeJs', 'includeCss', 'cssToHost', 'webpack', 'babel', 'bfRev', 'html', 'rev', 'rootEnv', cb);
+    plugins.sequence('clean', 'images', 'font', 'allServerResources', 'includeJs', 'includeCss', 'cssToHost', 'webpack', 'bfRev', 'html', 'rev', 'rootEnv', cb);
 });
 
 
@@ -868,11 +868,11 @@ gulp.task("babel", function(cb) {
     pump([
         gulp.src([ host.path + '**/*.js']),
 
-        plugins.babel({
-            compact: false,
-            presets: ['env'],
-            plugins: ['transform-runtime']
-        }),
+        // plugins.babel({
+        //     compact: false,
+        //     presets: ['env'],
+        //     plugins: ['transform-runtime']
+        // }),
 
         gulp.dest( 'middle/babel/' )
 
