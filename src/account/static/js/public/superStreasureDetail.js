@@ -231,11 +231,11 @@ $(function() {
                 },
                 needLogin: true,
                 callbackDone: function(json) {
-                    var data = json.data
-                    that.gL.fundCode = data.fundCode,
-                    that.gL.fundName = data.fundName,
-                    that.gL.transformMoney = data.totalMoney,
-                    $(".totalM").text(data.totalMoneyMask ? data.totalMoneyMask : "--")
+                    var data = json.data;
+                    that.gL.fundCode = data.fundCode;
+                    that.gL.fundName = data.fundName;
+                    that.gL.transformMoney = data.totalMoney;
+                    $(".totalM").text(data.totalMoneyMask ? data.totalMoneyMask : "--");
                     if(Number(data.totalMoneyMask) <= 0){//判断当持仓金额小于等于零时
                         $('.footerBtnLeft').css('background','#ccc');//按钮背景置灰
                         $('.footerBtnLeft').css('pointer-events','none');//按钮禁止点击
@@ -397,17 +397,17 @@ $(function() {
                 })
                 //点击转入跳转
             mui("body").on('mdClick', '.shiftToBtn', function(e) {
-                    if (that.gL.accountType === 0 || that.gL.accountType === 2) {
-                        tipAction('暂不支持机构客户进行交易');
-                    } else {
-                        //window.location.href = site_url.pofCashTransformIn_url+ "?fundName=" +that.gL.fundName + "&fundCode=" +that.gL.fundCode;
-                        window.location.href = site_url.pofCashTransformIn_url+ "?fundName=" +"jfskdjfhk"+ "&fundCode=" +"003075";
+                if (that.gL.accountType === 0 || that.gL.accountType === 2) {
+                    tipAction('暂不支持机构客户进行交易');
+                } else {
+                    window.location.href = site_url.pofCashTransformIn_url+ "?fundName=" +that.gL.fundName + "&fundCode=" +that.gL.fundCode;
+                    // window.location.href = site_url.pofCashTransformIn_url+ "?fundName=" +"jfskdjfhk"+ "&fundCode=" + that.gL.fundCode;
 
-                    }
+                }
 
-                }, {
-                    'htmdEvt': 'superStreasureDetail_3'
-                })
+            }, {
+                'htmdEvt': 'superStreasureDetail_3'
+            })
                 //点击历史记录
             mui("body").on('mdClick', '.recordBtn', function(e) {
                 window.location.href = site_url.superRecord_url+ "?fundCode=" +that.gL.fundCode;
@@ -418,7 +418,7 @@ $(function() {
             mui("body").on('mdClick', '.addLi', function(e) {
                 window.location.href = site_url.returnsDetail_url + "?fundCode=" + that.gL.fundCode;
             }, {
-                'htmdEvt': 'superStreasureDetail_4'
+                'htmdEvt': 'superStreasureDetail_5'
             })
         }
     }

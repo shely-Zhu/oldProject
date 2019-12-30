@@ -698,8 +698,10 @@ $(function () {
 			//  ---《基金合同》《招募说明书》
 			mui("body").on('mdClick','.goPreview',function(){
 				var link = $(this).attr('datalink')
+				var links=link.split("?")
+			    var fileNames=links[0].substring(links[0].lastIndexOf('.'))
 				var typInfo = $(this).attr('type') == '1' ? '基金合同' : '招募说明书'
-				window.location.href = link +'&fileName=' + new Base64().encode(typInfo)
+				window.location.href = link +'&fileName=' + new Base64().encode(typInfo+fileNames)
 			}, {
 				htmdEvt: 'fundTransformIn_17'
 			}) ;

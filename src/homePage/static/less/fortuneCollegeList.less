@@ -27,25 +27,33 @@
 // .box /deep/ .mui-slider-indicator{
 // 	bottom:0px !important;
 // }
-.mui-indicator{
-	margin-right:0.2rem !important;
-}
+// box/deep/ .mui-indicator{
+// 	margin-right:0.2rem !important;
+// }
+// /deep/ .mui-slider-indicator .mui-active /deep/ .mui-indicator{
+// 	background:rgba(255, 255, 255, 0.5) !important;
+// }
+// .mui-slider-indicator .mui-indicator /deep/ .mui-active{
+// 	width:0.16rem !important;
+// 	height:0.08rem !important;
+// 	background:@FFFFFF !important;
+// }
 .boxA{
 	.banner{
 		position: relative;
-		// .mui-slider-indicator .mui-indicator{
-		// 	width:0.08rem !important;
-		// 	height:0.08rem !important;
-		// 	background:rgba(255,255,255,0.5) !important;
-		// }
-		// .mui-slider-indicator{
-		// 	bottom:8px !important;
-		// }
-		// .mui-slider-indicator .mui-indicator.mui-active{
-		// 	width: 0.16rem !important;
-		// 	height:0.08rem !important;
-		// 	background:@FFFFFF !important;
-		// }
+		.mui-slider-indicator .mui-indicator{
+			width:0.08rem !important;
+			height:0.08rem !important;
+			background:rgba(255,255,255,0.5) !important;
+		}
+		.mui-slider-indicator{
+			bottom:0.3rem !important;
+		}
+		.mui-slider-indicator .mui-indicator.mui-active{
+			width: 0.16rem !important;
+			height:0.08rem !important;
+			background:@FFFFFF !important;
+		}
 	}
 	.hotWords{
 		padding:0.3rem;
@@ -137,7 +145,12 @@
 			ul li{
 				margin-bottom:0.3rem;
 				position: relative;
+				img{
+					border-radius: 0.16rem;
+				}
 				p{
+					border-bottom-left-radius: .16rem;
+					border-bottom-right-radius: .16rem;
 					i{
 						margin-right:0.1rem;
 						img{
@@ -185,6 +198,11 @@
 			}
 			.mui-control-item{
 				padding-right:0.3rem !important;
+			}
+			.conten{
+				img{
+					border-radius: .16rem;
+				}
 			}
 			.conten .con{
 				h4{
@@ -271,9 +289,6 @@
 				
 					// 其他资产列表
 					.myAsset {
-						
-				
-				
 						// nav重置
 						.mui-slider .mui-segmented-control.mui-scroll-wrapper {
 							background: none;
@@ -451,7 +466,8 @@
 					.list_itemR{
 						img{
 							width:100%;
-							display: block;	
+							display: block;
+							border-radius: .16rem;	
 						}
 					}
 				}			

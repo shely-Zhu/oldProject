@@ -19,13 +19,14 @@ $(function () {
         init: function () {
             var that = this;
             $(".list").eq(0).hide()
+            $('.listLoading').hide()
             uploadFile(that.asyncAll, that, 1); //插件初始化
             that.event()
+            //初始化时隐藏加载
         },
         // 所有图片上传完毕，请求申请投资者分类接口
         asyncAll: function (idJson, idTypeArr) {
             var that = this;
-            console.log(that.gD.idArr,idJson)
             if(idJson.status=='0000'){
                 that.gD.idArr.push.apply(that.gD.idArr, idJson.data);
             }else{

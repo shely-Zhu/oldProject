@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2019-12-20 15:32:30
- * @LastEditTime : 2019-12-23 12:03:45
+ * @LastEditTime : 2019-12-30 15:23:38
  * @LastEditors  : Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \htjf-app\src\financial\static\js\publicPlacement\surelyResultShot.js
@@ -79,7 +79,7 @@ $(function () {
                 $(".cashOut").show()
                 //that.$e.fundCodeInto.html(data.fundCode)
                 that.$e.amountOut.html(data.balanceMask)
-                that.$e.banKImgOut.attr('src',data.bankThumbnailUrl)
+                that.$e.banKImgOut.attr('src',data.thumbnailUrl)
                 that.$e.bankNameOut.html(data.bankName)
                 that.$e.bankNumOut.html(data.bankAccountMask.substr(data.bankAccountMask.length-4))
                 that.$e.payTypeOut.html('在线支付')
@@ -95,6 +95,8 @@ $(function () {
       //跳转到基金详情页面
       mui("body").on("mdClick",".over",function(){
             window.location.href = site_url.pofCastSurelyDetails_url + '?scheduledProtocolId=' + that.gV.scheduledProtocolId ;
+      },{
+        htmdEvt: 'surelyResultShot_01'
       })
    
     }

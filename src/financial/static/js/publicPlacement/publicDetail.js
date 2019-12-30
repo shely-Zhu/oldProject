@@ -55,7 +55,7 @@ $(function () {
             singleaAuthenType:"",  //认证类型  买入into  定投 investement
             discountStatus:"", //有无费率
         },
-        fundType: splitUrl['fundType'] == '10300' ? 1 : 0, //10300 货币基金类型，其余为普通基金类型
+        fundType: splitUrl['fundType'] == '10300'||splitUrl['fundType'] == '10800' ? 1 : 0, //10300 货币基金类型，其余为普通基金类型
         init: function () {
             var that = this;
             //页面初始化
