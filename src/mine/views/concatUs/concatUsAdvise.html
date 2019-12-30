@@ -13,19 +13,16 @@
 
 <body>
 
+    @@include('@pathCommonViews/headBarConfig.html',{"pathName":"意见反馈"})
     
-    <!-- @@include('@pathCommonCom/loading/listLoading.html') -->
+    @@include('@pathCommonCom/loading/listLoading.html')
     <div class="concatUsAdvisePage" id="concatUsAdvise">
         <!--头部  -->
-        @@include('@pathCommonViews/headBarConfig.html',{"pathName":"意见反馈"})
         <!--身体  -->
         <div class="concatUsAdvisePageMain  uploadMaterial">
             <div class="concatUsAdvisePageMainQuestion">
                 <h3 class="concatUsAdvisePageMainAdviceType">请选择您的反馈类型</h3>
                 <ul class="mui-table-view">
-                    <!-- <li class="mui-input-row mui-table-view-cell mui-radio mui-right list mui-selected">
-                                <label class="blod">请选择您的反馈类型</label>
-                            </li> -->
                     <li class="mui-input-row mui-table-view-cell mui-radio mui-right list mui-selected">
                         <label class="blod"></label>
                     </li>
@@ -81,11 +78,9 @@
 
 
     <script src="/mine/static/js/concatUsAdvise.js"></script>
-
-    <!-- <script src="/mine/static/js/uploaderFile.js"></script> -->
     <script src="/allServerResources/include/js//vendor/webuploader/webUploader.js"></script>
-    <script src="//cdn.jsdelivr.net/npm/eruda"></script>
-    <script>eruda.init();</script>
+    <!-- <script src="//cdn.jsdelivr.net/npm/eruda"></script> -->
+    <!-- <script>eruda.init();</script> -->
 </body>
 
 </html>
