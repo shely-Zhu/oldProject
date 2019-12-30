@@ -369,11 +369,23 @@ $(function() {
 					//待确认金额 接口无
 					$('.typeWrap .toConfirm .confirmMoney').html( jsonData.onwayAssetTotalMask );
 					//昨日收益
-					$('.typeWrap .yesterdayShare').html( jsonData.incomeMask);
+					if(Number(jsonData.income) > 0){
+						$('.typeWrap .yesterdayShare').html('+' + jsonData.incomeMask);
+					}else{
+						$('.typeWrap .yesterdayShare').html(jsonData.incomeMask);
+					}
 					//持有收益
-					$('.typeWrap .ownShare').html( jsonData.holdIncomeMask);
+					if(Number(jsonData.holdIncome) > 0){
+						$('.typeWrap .ownShare').html( '+' + jsonData.holdIncomeMask);
+					}else{
+						$('.typeWrap .ownShare').html(jsonData.holdIncomeMask);
+					}
 					//累计收益  接口无
-					$('.typeWrap .accumulatedShare').html( jsonData.addupIncomeMask);
+					if(Number(jsonData.addupIncome) > 0){
+						$('.typeWrap .accumulatedShare').html('+' + jsonData.addupIncomeMask);
+					}else{
+						$('.typeWrap .accumulatedShare').html( jsonData.addupIncomeMask);
+					}
 					//持有份额
 					$('.openWrap .cyfe').html( jsonData.currentShareMask);
 					//可用份额
