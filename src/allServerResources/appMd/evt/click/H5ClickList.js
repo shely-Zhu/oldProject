@@ -288,6 +288,9 @@ var clickList = {
 	"surelyResults_01" : { type:'click', evtid: 'surelyResults_01', topic: '定投结果-跳往现金宝管理页面', info: ''} ,
 	//买入结果  surelyResultsDetail.html
 	"surelyResultsDetail_01" : { type:'click', evtid: 'surelyResultsDetail_01', topic: '买入结果-跳往持仓列表页', info: ''} ,
+	// surelyResultShot.html
+	"surelyResultShot_01" : { type:'click', evtid: 'surelyResultShot_01', topic: '定投结果-跳往现金宝管理页面', info: ''} ,
+
 
 /**************************************************************financial  end ***********************************************************************/ 
 	
@@ -321,15 +324,27 @@ var clickList = {
 	//systemInforms.html
 	"notice_01":{ type:'click', evtid: 'notice_01', topic: '系统通知', info: ''}, 
 	//starFinancialPlannerList.html
-	"starFinancia_00":{ type:'click', evtid: 'starFinancia_00', topic: '城市定位', info: ''} ,
-	"starFinancia_01":{ type:'click', evtid: 'starFinancia_01', topic: '热门城市', info: ''} ,
-	"starFinancia_02":{ type:'click', evtid: 'starFinancia_02', topic: '返回', info: ''} ,
-	"starFinancia_03":{ type:'click', evtid: 'starFinancia_03', topic: '城市索引', info: ''} ,
-	"starFinancia_04":{ type:'click', evtid: 'starFinancia_04', topic: '理财师列表', info: ''} ,
-	// "starFinancia_search":{ type:'click', evtid: '', topic: '理财师查询', info: ''} ,
-	"starFinancia_05":{ type:'click', evtid: 'starFinancia_05', topic: '取消搜索', info: ''} ,
-	"starFinancia_06":{ type:'click', evtid: 'starFinancia_06', topic: '点击搜索框触发选中', info: ''} ,
-	"starFinancia_07":{ type:'click', evtid: 'starFinancia_07', topic: '返回上一页首页', info: ''} ,
+	"starFinancialPlannerList_00":{ type:'click', evtid: 'starFinancialPlannerList_00', topic: '城市定位', info: ''} ,
+	"starFinancialPlannerList_01":{ type:'click', evtid: 'starFinancialPlannerList_01', topic: '热门城市', info: ''} ,
+	"starFinancialPlannerList_02":{ type:'click', evtid: 'starFinancialPlannerList_02', topic: '返回', info: ''} ,
+	"starFinancialPlannerList_03":{ type:'click', evtid: 'starFinancialPlannerList_03', topic: '城市索引', info: ''} ,
+	"starFinancialPlannerList_04":{ type:'click', evtid: 'starFinancialPlannerList_04', topic: '理财师列表', info: ''} ,
+	// "starFinancialPlannerList_search":{ type:'click', evtid: '', topic: '理财师查询', info: ''} ,
+	"starFinancialPlannerList_05":{ type:'click', evtid: 'starFinancialPlannerList_05', topic: '取消搜索', info: ''} ,
+	"starFinancialPlannerList_06":{ type:'click', evtid: 'starFinancialPlannerList_06', topic: '点击搜索框触发选中', info: ''} ,
+	"starFinancialPlannerList_07":{ type:'click', evtid: 'starFinancialPlannerList_07', topic: '返回上一页首页', info: ''} ,
+	// 组件弹层的点击事件
+	"starFinancialPlannerList_08":{ type:'click', evtid: 'starFinancialPlannerList_08', topic: '绑定成功_浏览产品', info: ''} ,
+	"starFinancialPlannerList_09":{ type:'click', evtid: 'starFinancialPlannerList_09', topic: '绑定成功_返回首页', info: ''} ,
+	"starFinancialPlannerList_10":{ type:'click', evtid: 'starFinancialPlannerList_10', topic: '已绑定理财师_明白了', info: ''} ,
+	// "starFinancialPlannerList_11":{ type:'click', evtid: 'starFinancialPlannerList_11', topic: '已绑定理财师_取消', info: ''} ,
+	"starFinancialPlannerList_12":{ type:'click', evtid: 'starFinancialPlannerList_12', topic: '绑定理财师_立即绑定', info: ''} ,
+	"starFinancialPlannerList_13":{ type:'click', evtid: 'starFinancialPlannerList_13', topic: '绑定理财师_取消', info: ''} ,
+	"starFinancialPlannerList_14":{ type:'click', evtid: 'starFinancialPlannerList_14', topic: '绑定理财师_立即绑定', info: ''} ,
+	"starFinancialPlannerList_15":{ type:'click', evtid: 'starFinancialPlannerList_15', topic: '绑定理财师_取消', info: ''} ,
+
+	"starFinancialPlannerList_16":{ type:'click', evtid: 'starFinancialPlannerList_16', topic: '输入理财师工号或姓名_取消', info: ''} ,
+
 
 	/************************************** account start *************************************************/
 	//publicTradeDetail.hrml
@@ -478,6 +493,9 @@ var clickList = {
 	"activityDetails_5":{ type:'click', evtid: 'activityDetails_5', topic: '分享好友', info: ''},
 	"activityDetails_6":{ type:'click', evtid: 'activityDetails_6', topic: '我知道了按钮', info: ''},
 	"activityDetails_7":{ type:'click', evtid: 'activityDetails_7', topic: '查看奖励按钮', info: ''},
+	// 组件弹层的点击事件
+	"activityDetails_8":{ type:'click', evtid: 'activityDetails_8', topic: '请您绑定理财师后再报名活动_去绑定', info: ''},
+	"activityDetails_9":{ type:'click', evtid: 'activityDetails_9', topic: '请您绑定理财师后再报名活动_取消', info: ''},
 
     // 返回按钮
     "goBackButton":{ type:'click', evtid: 'goBackButton', topic: '返回按钮', info: ''},
