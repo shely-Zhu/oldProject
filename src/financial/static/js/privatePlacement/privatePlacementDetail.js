@@ -633,6 +633,18 @@ $(function() {
                     }
 
                     that.drawLine(type, newData);
+                },
+                callbackNoData: function(json) {
+                    that.data.echartsClickFlag = false;
+                    $("#qrnhLine").addClass("hide")
+                    $("#wfsyLine").addClass("hide")
+                    $(".noDataHintEcharts").removeClass("hide")
+                },
+                callbackFail: function(json) {
+                    that.data.echartsClickFlag = false;
+                    $("#qrnhLine").addClass("hide")
+                    $("#wfsyLine").addClass("hide")
+                    $(".noDataHintEcharts").removeClass("hide")
                 }
             }];
             $.ajaxLoading(obj);
