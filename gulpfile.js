@@ -8,6 +8,10 @@
  * wap: 8000，mock端口号为8089
  *
  * app: 8008 mock是8088
+ *
+ * gulp-babel使用记录：
+ * 1. 版本使用7.9.1的版本，不能使用8，8以上的版本引用的babel-core为@babel/core，不适用于当前项目
+ * 
  */
 
 var gulp = require('gulp'),
@@ -42,7 +46,9 @@ var gulp = require('gulp'),
     //把webpackList和newWebpackList合并
     webpackList = Object.assign(webpackList, newWebpackList);
 
-    var prefix = '//static.chtfund.com';//cdn服务地址
+    // var prefix = '//static.chtfund.com';//cdn服务地址
+    
+    var prefix = 'http://172.16.187.170:8008';
 
 for (var i in webpackList) {
     webpackList[i] = webpackList[i].replace('/src/', '/middle/js/')
@@ -262,7 +268,7 @@ if (options.env === '0') { //当开发环境的时候构建命令执行mock服�
 
 /**此任务默认执行，gulp启动时，先将所有文件打包一次**/
 gulp.task('initialTask', function(cb) {
-    plugins.sequence('clean', 'images', 'font', 'allServerResources', 'includeJs', 'includeCss', 'cssToHost', 'webpack', 'bfRev', 'html', 'rev', 'rootEnv', cb);
+    plugins.sequence('clean', 'images', 'font', 'allServerResources', 'includeJs', 'includeCss', 'cssToHost', 'webpack', 'babel', 'bfRev', 'html', 'rev', 'rootEnv', cb);
 });
 
 
@@ -567,6 +573,12 @@ gulp.task("webpack", ['jsCpd', 'changePath', 'commonHtml'], function(cb) {
 
         plugins.webpack(webpackConfig),
 
+        // plugins.babel({
+        //     compact: false,
+        //     presets: ['env'],
+        //     plugins: ['transform-runtime']
+        // }),
+
         //添加changeLocalHistory、eruda和CustomEventIeFile的文件内容
         through.obj(function(file, enc, cb) {
 
@@ -582,10 +594,10 @@ gulp.task("webpack", ['jsCpd', 'changePath', 'commonHtml'], function(cb) {
         //预上线环境时，去掉Log并压缩
         plugins.if(options.env === '3' || options.env === '4', plugins.removelogs()),
 
-        // plugins.if(options.env === '3' || options.env === '4', plugins.uglify({ //压缩
-        //     mangle: false, //类型：Boolean 默认：true 是否修改变量名
-        //     compress: false
-        // })),
+        plugins.if(options.env === '3' || options.env === '4', plugins.uglify({ //压缩
+            mangle: false, //类型：Boolean 默认：true 是否修改变量名
+            compress: false
+        })),
 
         //与host.path中的内容做比对,
         plugins.changed(host.path, { hasChanged: plugins.changed.compareSha1Digest }),
@@ -620,7 +632,13 @@ gulp.task("allServerResourcesIncludeRoot", function( cb ) {
 
     pump([
 
-        gulp.src(['src/allServerResources/include/**/*.js']),
+        gulp.src(['src/allServerResources/include/js/vendor/root.js']),
+
+        // plugins.babel({
+        //     compact: false,
+        //     presets: ['env'],
+        //     plugins: ['transform-runtime']
+        // }),
 
         //与host.path中的内容做比对
         plugins.changed(host.path, { hasChanged: plugins.changed.compareSha1Digest }),
@@ -659,11 +677,9 @@ gulp.task("allServerResourcesIncludeRoot", function( cb ) {
         }),
     
 
-        gulp.dest(host.path + 'allServerResources/include/'),
-
         plugins.rev(),
 
-        gulp.dest(host.path + 'allServerResources/include/'),
+        gulp.dest(host.path + 'allServerResources/include/js/vendor'),
 
         plugins.rev.manifest(),
 
@@ -671,7 +687,7 @@ gulp.task("allServerResourcesIncludeRoot", function( cb ) {
         plugins.jsonEditor(function(json) {
             var newJson = {};
             for( var i in json ){
-                newJson['/allServerResources/include/' + i] = prefix + '/allServerResources/include/' + json[i];
+                newJson['/allServerResources/include/js/vendor/' + i] = prefix + '/allServerResources/include/js/vendor/' + json[i];
             } 
             return newJson; 
         }),
@@ -685,7 +701,13 @@ gulp.task("allServerResourcesInclude", ['allServerResourcesIncludeRoot'],  funct
 
     pump([
 
-        gulp.src(['src/allServerResources/include/**/*.js']),
+        gulp.src(['src/allServerResources/include/**/*.js', '!src/allServerResources/include/js/vendor/root.js']),
+
+        // plugins.babel({
+        //     compact: false,
+        //     presets: ['env'],
+        //     plugins: ['transform-runtime']
+        // }),
 
         //与host.path中的内容做比对
         plugins.changed(host.path, { hasChanged: plugins.changed.compareSha1Digest }),
@@ -700,17 +722,6 @@ gulp.task("allServerResourcesInclude", ['allServerResourcesIncludeRoot'],  funct
         //     }
         // })))
 
-        //对root.js做一些修改
-        
-        through.obj(function(file, enc, cb) {
-            file = changeCommonImg(file);
-            this.push(file);
-            cb()
-        }),
-    
-
-        gulp.dest(host.path + 'allServerResources/include/'),
-    
         plugins.rev(),
 
         gulp.dest(host.path + 'allServerResources/include/'),
@@ -738,6 +749,12 @@ gulp.task("includeRoot", function( cb ) {
 
         gulp.src(['src/include/js/vendor/root.js']),
 
+        // plugins.babel({
+        //     compact: false,
+        //     presets: ['env'],
+        //     plugins: ['transform-runtime']
+        // }),
+
         //与host.path中的内容做比对
         plugins.changed(host.path, { hasChanged: plugins.changed.compareSha1Digest }),
 
@@ -773,34 +790,7 @@ gulp.task("includeRoot", function( cb ) {
             this.push(file);
             cb()
         }),
-    
-
-        gulp.dest(host.path + 'allServerResources/include/'),
-
-        //root.js需要打版本号
-        through.obj(function(file, enc, cb) {
-
-            if (file.path.indexOf('root.js') != -1 && (options.env == '0' || options.env == "5")) {
-                // if (file.path.indexOf('root.js') != -1 && (options.env == '0')) {
-                //如果是本地或联调环境，修改env和envOrigin的值
-                //且替换root.js里的本地ip
-                //因测试、预生产、生产环境的root需运维在发版时在对应环境上修改
-                //此处不处理
-                var fileCon = file.contents.toString();
-
-                fileCon = fileCon.replace(/localIp/g, localIp);
-
-                fileCon = 'var env = ' + options.env + ';\n' + 'var envOrigin = ' +
-                    options.envOrigin + ';\n' + fileCon.substring(fileCon.indexOf('//'));
-
-                file.contents = new Buffer(fileCon);
-            }
-            this.push(file);
-            cb()
-        }),
         
-
-        gulp.dest(host.path + 'include/'),
 
         //打版本号
         plugins.rev(),
@@ -813,7 +803,7 @@ gulp.task("includeRoot", function( cb ) {
         plugins.jsonEditor(function(json) {
             var newJson = {};
             for( var i in json ){
-                newJson['/include/' + i] = prefix + '/include/' + json[i];
+                newJson['/include/js/vendor/' + i] = prefix + '/include/js/vendor/' + json[i];
             } 
             return newJson; 
         }),
@@ -831,6 +821,12 @@ gulp.task("includeJs", ['allServerResourcesInclude', 'includeRoot'], function( c
 
         gulp.src(jsIncludeSrc),
 
+        // plugins.babel({
+        //     compact: false,
+        //     presets: ['env'],
+        //     plugins: ['transform-runtime']
+        // }),
+
         //与host.path中的内容做比对
         plugins.changed(host.path, { hasChanged: plugins.changed.compareSha1Digest }),
 
@@ -844,18 +840,7 @@ gulp.task("includeJs", ['allServerResourcesInclude', 'includeRoot'], function( c
         //     }
         // })))
 
-        //对root.js做一些修改
         
-        through.obj(function(file, enc, cb) {
-
-            file = changeCommonImg(file);
-
-            this.push(file);
-            cb()
-        }),
-        
-        gulp.dest(host.path + 'include/'),
-
         plugins.rev(),
 
         gulp.dest(host.path + 'include/'),
@@ -872,6 +857,24 @@ gulp.task("includeJs", ['allServerResourcesInclude', 'includeRoot'], function( c
         }),
 
         gulp.dest( host.path + 'rev/include/js')
+
+    ], cb)
+})
+
+
+/************所有js用babel编译*************/
+gulp.task("babel", function(cb) {
+
+    pump([
+        gulp.src([ host.path + '**/*.js']),
+
+        // plugins.babel({
+        //     compact: false,
+        //     presets: ['env'],
+        //     plugins: ['transform-runtime']
+        // }),
+
+        gulp.dest( host.path )
 
     ], cb)
 })
