@@ -280,7 +280,7 @@ gulp.task('initialTask', function(cb) {
 //includeCssSrcStatic--include下的css文件
 //webpackConfig.entry--webpack.config.js里的entry入口文件，默认为webpackList的内容，即
 //所有需要webpack打包的文件
-var jsIncludeSrcStatic = ['src/include/**/*.js', '!src/include/js/vendor/buriedPoint/**/*.js'],
+var jsIncludeSrcStatic = ['src/include/**/*.js', '!src/include/js/vendor/root.js', '!src/include/js/vendor/buriedPoint/**/*.js'],
     revChangeSrcStatic_1 = [host.middle + 'rev/**/*.json', host.middleHtmlPathRev + '**/*.html'],
     revChangeSrcStatic_2 = [host.path + 'rev/**/*.json', host.path + '**/*.html'],
     includeCssSrcStatic = 'src/**/*.css';
@@ -421,247 +421,41 @@ gulp.task('cleanHtmlMiddleRev', function() {
  * 第一次打包时，需要打包css\js文件的rev文件备份，用于后期修改html文件时添加版本号
  */
 gulp.task('bfRev', function() {
-        return gulp.src([host.path + 'rev/**/*.json'])
-            .pipe(gulp.dest(host.middle + 'rev/'))
-    })
-    /*******************************版本号文件的备份 end****************************/
-
-
-
-
-
-
-
-/*******************************各种打包任务***********************************/
-
-gulp.task('commonImages', function() {
-    return gulp.src(['src/newCommon/**/*.{jpg,png,jpeg,svg,gif}'])
-        .pipe(gulp.dest(host.path + 'allServerResources/include/commonImg/'));
-});
-
-
-//图片打包任务，全部打包和单独打包可共用
-gulp.task('images', ['commonImages'], function() {
-    return gulp.src(['src/**/img/**/*', '!src/newCommon/**/*'])
-        .pipe(gulp.dest(host.path));
-});
-
-//mui所需的font文件夹打包
-gulp.task('font', function() {
-    return gulp.src('src/include/fonts/*')
-        .pipe(gulp.dest(host.path + 'include/fonts'));
+    return gulp.src([host.path + 'rev/**/*.json'])
+        .pipe(gulp.dest(host.middle + 'rev/'))
 })
-
-//allServerResources中include文件的打包
-gulp.task('allServerResources', function() {
-    return gulp.src('src/allServerResources/include/*')
-        .pipe(gulp.dest(host.path + 'allServerResources/include'));
-})
-
-//css文件打包，先经过Less处理，然后比对文件，修改的文件会打包到host.dest中
-//并且生成版本号文件
-gulp.task("cssToHost", function() {
-
-    //测试环境
-    return gulp.src(['src/**/*.less', '!src/common/**/*.less', '!src/newCommon/**/*.less'])
-
-    //通过through处理相对路径
-    .pipe(
-        through.obj(function(file, enc, cb) {
-
-            file = changeCommonImg(file);
-
-            file = pathVar(file);
-            this.push(file);
-            cb()
-        })
-    )
-
-    .pipe(plugins.less())
-
-    //预上线/线上环境时，压缩css
-    //设置这两个参数，防止去掉浏览器前缀和z-index值的变化
-    .pipe(plugins.if(options.env === '3' || options.env === '4', plugins.cssnano({ autoprefixer: false, zindex: false })))
-
-    //修改当前文件的路径，将less替换为css
-    .pipe(
-        through.obj(function(file, enc, cb) {
-            //修改当前文件的路径到host.path下，且替换路径中的less为css
-            file.path = file.path.replace('less', 'css');
-            this.push(file);
-            cb()
-        })
-    )
-
-    //与host.path中的内容做比对
-    .pipe(plugins.changed(host.path, { hasChanged: plugins.changed.compareSha1Digest }))
-
-    .pipe(plugins.if(isWatch, plugins.debug({ title: 'css-有变动的文件:' })))
-
-    //修改当前文件的路径，将less替换为css
-    .pipe(
-            through.obj(function(file, enc, cb) {
-                //修改当前文件的路径到host.path下，且替换路径中的less为css
-                file.path = file.path.replace('less', 'css');
-                this.push(file);
-                cb()
-            })
-        )
-        //.pipe(gulp.dest(host.path))
-
-    //打版本号
-    .pipe(plugins.rev())
-
-        //给css文件里面所有的图片添加cdn的域名
-        //.pipe(modifyCssUrls({
-          //modify(url, filePath) {
-            //return `app/${url}`;
-          //},
-          //prepend: prefix,
-          //append: '?cache-buster'
-        //}))
-
-        .pipe(gulp.dest(host.path))
-        .pipe(plugins.rev.manifest())
-        .pipe(gulp.dest(host.path + 'rev/css/'))
-})
-
-//include css文件打包
-gulp.task("includeCss", function() {
-    return gulp.src(includeCssSrc)
-        //也加上压缩处理
-        .pipe(plugins.if(options.env === '3' || options.env === '4', plugins.cssnano({ autoprefixer: false, zindex: false })))
-        .pipe(gulp.dest(host.path))
-})
+/*******************************版本号文件的备份 end****************************/
 
 
-gulp.task("htmd", function() {
+function changeCommonImg(file) {
 
-    // return gulp.src(['src/include/js/vendor/buriedPoint/**/*.js'])
-    //     .pipe(gulp.dest(host.path + 'include/js/vendor/buriedPoint/'))
+    //如果有用到common里面的图片的，全部把路径改成allServerResources/include/commonImg
+    //只涉及到新页面，因为原来的旧common里是没有图片的
+    var fileCon = file.contents.toString();
+    var re = new RegExp("\/common\/[^\.]*\.(jpg|png|svg|jpeg|gif)", 'g');
+    var commonImgArr = fileCon.match(re);
 
-})
+    if (commonImgArr && commonImgArr.length) {
+        //有common下的图片路径
+        for (var i in commonImgArr) {
 
-//不使用webpack的 js文件打包
-gulp.task("allServerResourcesInclude", function() {
+            // console.log( '文件路径;' + file.path)
+            // console.log( '原图片路径：' + commonImgArr[i]);
+            // console.log('要替换的路径：' + commonImgArr[i].replace('/common/', '/include/commonImg/'));
+            // console.log( fileCon.indexOf( commonImgArr[i]));
 
-    return gulp.src(['src/allServerResources/include/**/*.js'])
+            var r = new RegExp(commonImgArr[i], 'g');
 
-    //与host.path中的内容做比对
-    .pipe(plugins.changed(host.path, { hasChanged: plugins.changed.compareSha1Digest }))
+            fileCon = fileCon.replace(r, commonImgArr[i].replace('/common/', '/allServerResources/include/commonImg/'))
 
-    .pipe(plugins.if(isWatch, plugins.debug({ title: 'js-有变动的文件:' })))
+        }
+    }
+    file.contents = new Buffer(fileCon);
+    return file;
+}
 
-    // .pipe(plugins.if(options.env === '3' || options.env === '4', plugins.uglify({ //压缩
-    //     mangle: false, //类型：Boolean 默认：true 是否修改变量名
-    //     compress: false, //类型：Boolean 默认：true 是否完全压缩
-    //     output: {
-    //         beautify: true //只去注释，不压缩成一行
-    //     }
-    // })))
 
-    //对root.js做一些修改
-    .pipe(
-        through.obj(function(file, enc, cb) {
-
-            file = changeCommonImg(file);
-
-            if (file.path.indexOf('root.js') != -1 && (options.env == '0' || options.env == "5")) {
-                // if (file.path.indexOf('root.js') != -1 && (options.env == '0')) {
-                //如果是本地或联调环境，修改env和envOrigin的值
-                //且替换root.js里的本地ip
-                //因测试、预生产、生产环境的root需运维在发版时在对应环境上修改
-                //此处不处理
-                var fileCon = file.contents.toString();
-
-                fileCon = fileCon.replace(/localIp/g, localIp);
-
-                fileCon = 'var env = ' + options.env + ';\n' + 'var envOrigin = ' +
-                    options.envOrigin + ';\n' + fileCon.substring(fileCon.indexOf('//'));
-
-                file.contents = new Buffer(fileCon);
-            }
-            this.push(file);
-            cb()
-        })
-    )
-
-    .pipe(gulp.dest(host.path + 'allServerResources/include/'))
-
-    //root.js需要打版本号
-    .pipe(
-            through.obj(function(file, enc, cb) {
-                if (file.path.indexOf('root.js') != -1) {
-                    this.push(file);
-                }
-                cb()
-            })
-        )
-        .pipe(plugins.rev())
-        .pipe(gulp.dest(host.path + 'allServerResources/include/'))
-        .pipe(plugins.rev.manifest())
-        .pipe(gulp.dest(host.path + 'rev/include/js'));
-})
-
-//不使用webpack的 js文件打包
-gulp.task("includeJs", ['htmd', 'allServerResourcesInclude'], function() {
-
-    return gulp.src(jsIncludeSrc)
-        //与host.path中的内容做比对
-        .pipe(plugins.changed(host.path, { hasChanged: plugins.changed.compareSha1Digest }))
-
-    .pipe(plugins.if(isWatch, plugins.debug({ title: 'js-有变动的文件:' })))
-
-    // .pipe(plugins.if(options.env === '3' || options.env === '4', plugins.uglify({ //压缩
-    //     mangle: false, //类型：Boolean 默认：true 是否修改变量名
-    //     compress: false, //类型：Boolean 默认：true 是否完全压缩
-    //     output: {
-    //         beautify: true //只去注释，不压缩成一行
-    //     }
-    // })))
-
-    //对root.js做一些修改
-    .pipe(
-        through.obj(function(file, enc, cb) {
-
-            file = changeCommonImg(file);
-
-            if (file.path.indexOf('root.js') != -1 && (options.env == '0' || options.env == "5")) {
-                // if (file.path.indexOf('root.js') != -1 && (options.env == '0')) {
-                //如果是本地或联调环境，修改env和envOrigin的值
-                //且替换root.js里的本地ip
-                //因测试、预生产、生产环境的root需运维在发版时在对应环境上修改
-                //此处不处理
-                var fileCon = file.contents.toString();
-
-                fileCon = fileCon.replace(/localIp/g, localIp);
-
-                fileCon = 'var env = ' + options.env + ';\n' + 'var envOrigin = ' +
-                    options.envOrigin + ';\n' + fileCon.substring(fileCon.indexOf('//'));
-
-                file.contents = new Buffer(fileCon);
-            }
-            this.push(file);
-            cb()
-        })
-    )
-
-    .pipe(gulp.dest(host.path + 'include/'))
-
-    //root.js需要打版本号
-    .pipe(
-            through.obj(function(file, enc, cb) {
-                if (file.path.indexOf('root.js') != -1) {
-                    this.push(file);
-                }
-                cb()
-            })
-        )
-        .pipe(plugins.rev())
-        .pipe(gulp.dest(host.path + 'include/'))
-        .pipe(plugins.rev.manifest())
-        .pipe(gulp.dest(host.path + 'rev/include/js'));
-})
+/******js打包任务*******/
 
 //查config.js的重复
 gulp.task('jsCpd', function() {
@@ -697,11 +491,7 @@ gulp.task('jsCpd', function() {
                         arr[arrKey] = arrValue;
                     }
                 }
-
-
             }
-
-
         } else if (name.indexOf('Url') != -1) {
 
             // var fileContent = fs.readFileSync(name, 'utf-8');
@@ -733,8 +523,6 @@ gulp.task('jsCpd', function() {
 
 
             // }
-
-
         }
     })
 
@@ -770,24 +558,12 @@ gulp.task("commonHtml", function(cb) {
 })
 
 
-//非include文件夹下的js文件打包
+//1. 非include文件夹下的js文件打包
 gulp.task("webpack", ['jsCpd', 'changePath', 'commonHtml'], function(cb) {
+
     //测试环境
     pump([
         gulp.src(['src/**/*.js']),
-
-        //替换使命计划相关文件里的公用路径
-        // through.obj(function(file, enc, cb) {
-        //     //处理公共路径
-        //     file = pathVar(file);
-        //     this.push(file);
-        //     cb()
-        // }),
-
-        //禁止使用es6
-        // plugins.jshint(),
-
-        // plugins.jshint.reporter('default'),
 
         plugins.webpack(webpackConfig),
 
@@ -805,6 +581,7 @@ gulp.task("webpack", ['jsCpd', 'changePath', 'commonHtml'], function(cb) {
 
         //预上线环境时，去掉Log并压缩
         plugins.if(options.env === '3' || options.env === '4', plugins.removelogs()),
+
         // plugins.if(options.env === '3' || options.env === '4', plugins.uglify({ //压缩
         //     mangle: false, //类型：Boolean 默认：true 是否修改变量名
         //     compress: false
@@ -818,42 +595,539 @@ gulp.task("webpack", ['jsCpd', 'changePath', 'commonHtml'], function(cb) {
         //gulp.dest(host.path),
 
         plugins.rev(),
+
         gulp.dest(host.path),
+
         //plugins.debug({ title: 'js文件对应的节点。。。。。。。。。。。。' }),
         plugins.rev.manifest(),
+
+        //修改manifest文件的路径,增加cdn域名
+        plugins.jsonEditor(function(json) {
+            var newJson = {};
+            for( var i in json ){
+                newJson['/' + i] = prefix + '/' + json[i];
+            } 
+            return newJson; 
+        }),
+
         gulp.dest(host.path + 'rev/js')
 
     ], cb)
 });
 
-function changeCommonImg(file) {
-    //如果有用到common里面的图片的，全部把路径改成include
-    var fileCon = file.contents.toString();
-    var re = new RegExp("\/common\/[^\.]*\.(jpg|png|svg|jpeg|gif)", 'g');
-    var commonImgArr = fileCon.match(re);
 
-    if (commonImgArr && commonImgArr.length) {
-        //有common下的图片路径
-        for (var i in commonImgArr) {
+gulp.task("allServerResourcesIncludeRoot", function( cb ) {
 
-            // console.log( '文件路径;' + file.path)
-            // console.log( '原图片路径：' + commonImgArr[i]);
-            // console.log('要替换的路径：' + commonImgArr[i].replace('/common/', '/include/commonImg/'));
-            // console.log( fileCon.indexOf( commonImgArr[i]));
+    pump([
 
-            var r = new RegExp(commonImgArr[i], 'g');
+        gulp.src(['src/allServerResources/include/**/*.js']),
 
-            fileCon = fileCon.replace(r, commonImgArr[i].replace('/common/', '/allServerResources/include/commonImg/'))
+        //与host.path中的内容做比对
+        plugins.changed(host.path, { hasChanged: plugins.changed.compareSha1Digest }),
 
-            // console.log( fileCon.indexOf( commonImgArr[i].replace('/common/', '/include/commonImg/')));
-        }
-    }
-    file.contents = new Buffer(fileCon);
-    return file;
-}
+        plugins.if(isWatch, plugins.debug({ title: 'js-有变动的文件:' })),
+
+        //  plugins.if(options.env === '3' || options.env === '4', plugins.uglify({ //压缩
+        //     mangle: false, //类型：Boolean 默认：true 是否修改变量名
+        //     compress: false, //类型：Boolean 默认：true 是否完全压缩
+        //     output: {
+        //         beautify: true //只去注释，不压缩成一行
+        //     }
+        // })))
+
+        //对root.js做一些修改
+        
+        through.obj(function(file, enc, cb) {
+
+            if ( options.env == '0' || options.env == "5") {
+                // if (file.path.indexOf('root.js') != -1 && (options.env == '0')) {
+                //如果是本地或联调环境，修改env和envOrigin的值
+                //且替换root.js里的本地ip
+                //因测试、预生产、生产环境的root需运维在发版时在对应环境上修改
+                //此处不处理
+                var fileCon = file.contents.toString();
+
+                fileCon = fileCon.replace(/localIp/g, localIp);
+
+                fileCon = 'var env = ' + options.env + ';\n' + 'var envOrigin = ' +
+                    options.envOrigin + ';\n' + fileCon.substring(fileCon.indexOf('//'));
+
+                file.contents = new Buffer(fileCon);
+            }
+            this.push(file);
+            cb()
+        }),
+    
+
+        gulp.dest(host.path + 'allServerResources/include/'),
+
+        plugins.rev(),
+
+        gulp.dest(host.path + 'allServerResources/include/'),
+
+        plugins.rev.manifest(),
+
+        //修改manifest文件的路径,增加cdn域名
+        plugins.jsonEditor(function(json) {
+            var newJson = {};
+            for( var i in json ){
+                newJson['/allServerResources/include/' + i] = prefix + '/allServerResources/include/' + json[i];
+            } 
+            return newJson; 
+        }),
+
+        gulp.dest(host.path + 'rev/allServerResources/include/js/root')
+
+    ], cb)
+})
+
+gulp.task("allServerResourcesInclude", ['allServerResourcesIncludeRoot'],  function( cb ) {
+
+    pump([
+
+        gulp.src(['src/allServerResources/include/**/*.js']),
+
+        //与host.path中的内容做比对
+        plugins.changed(host.path, { hasChanged: plugins.changed.compareSha1Digest }),
+
+        plugins.if(isWatch, plugins.debug({ title: 'js-有变动的文件:' })),
+
+        //  plugins.if(options.env === '3' || options.env === '4', plugins.uglify({ //压缩
+        //     mangle: false, //类型：Boolean 默认：true 是否修改变量名
+        //     compress: false, //类型：Boolean 默认：true 是否完全压缩
+        //     output: {
+        //         beautify: true //只去注释，不压缩成一行
+        //     }
+        // })))
+
+        //对root.js做一些修改
+        
+        through.obj(function(file, enc, cb) {
+            file = changeCommonImg(file);
+            this.push(file);
+            cb()
+        }),
+    
+
+        gulp.dest(host.path + 'allServerResources/include/'),
+    
+        plugins.rev(),
+
+        gulp.dest(host.path + 'allServerResources/include/'),
+
+        plugins.rev.manifest(),
+
+        //修改manifest文件的路径,增加cdn域名
+        plugins.jsonEditor(function(json) {
+            var newJson = {};
+            for( var i in json ){
+                newJson['/allServerResources/include/' + i] = prefix + '/allServerResources/include/' + json[i];
+            } 
+            return newJson; 
+        }),
+
+        gulp.dest(host.path + 'rev/allServerResources/include/js')
+
+    ], cb)
+})
 
 
-//html文件打包
+gulp.task("includeRoot", function( cb ) {
+
+    pump([
+
+        gulp.src(['src/include/js/vendor/root.js']),
+
+        //与host.path中的内容做比对
+        plugins.changed(host.path, { hasChanged: plugins.changed.compareSha1Digest }),
+
+        plugins.if(isWatch, plugins.debug({ title: 'js-有变动的文件:' })),
+
+        //  plugins.if(options.env === '3' || options.env === '4', plugins.uglify({ //压缩
+        //     mangle: false, //类型：Boolean 默认：true 是否修改变量名
+        //     compress: false, //类型：Boolean 默认：true 是否完全压缩
+        //     output: {
+        //         beautify: true //只去注释，不压缩成一行
+        //     }
+        // })))
+
+        //对root.js做一些修改
+        
+        through.obj(function(file, enc, cb) {
+
+            if ( options.env == '0' || options.env == "5") {
+                // if (file.path.indexOf('root.js') != -1 && (options.env == '0')) {
+                //如果是本地或联调环境，修改env和envOrigin的值
+                //且替换root.js里的本地ip
+                //因测试、预生产、生产环境的root需运维在发版时在对应环境上修改
+                //此处不处理
+                var fileCon = file.contents.toString();
+
+                fileCon = fileCon.replace(/localIp/g, localIp);
+
+                fileCon = 'var env = ' + options.env + ';\n' + 'var envOrigin = ' +
+                    options.envOrigin + ';\n' + fileCon.substring(fileCon.indexOf('//'));
+
+                file.contents = new Buffer(fileCon);
+            }
+            this.push(file);
+            cb()
+        }),
+    
+
+        gulp.dest(host.path + 'allServerResources/include/'),
+
+        //root.js需要打版本号
+        through.obj(function(file, enc, cb) {
+
+            if (file.path.indexOf('root.js') != -1 && (options.env == '0' || options.env == "5")) {
+                // if (file.path.indexOf('root.js') != -1 && (options.env == '0')) {
+                //如果是本地或联调环境，修改env和envOrigin的值
+                //且替换root.js里的本地ip
+                //因测试、预生产、生产环境的root需运维在发版时在对应环境上修改
+                //此处不处理
+                var fileCon = file.contents.toString();
+
+                fileCon = fileCon.replace(/localIp/g, localIp);
+
+                fileCon = 'var env = ' + options.env + ';\n' + 'var envOrigin = ' +
+                    options.envOrigin + ';\n' + fileCon.substring(fileCon.indexOf('//'));
+
+                file.contents = new Buffer(fileCon);
+            }
+            this.push(file);
+            cb()
+        }),
+        
+
+        gulp.dest(host.path + 'include/'),
+
+        //打版本号
+        plugins.rev(),
+
+        gulp.dest(host.path + 'include/'),
+
+        plugins.rev.manifest(),
+
+        //修改manifest文件的路径,增加cdn域名
+        plugins.jsonEditor(function(json) {
+            var newJson = {};
+            for( var i in json ){
+                newJson['/include/' + i] = prefix + '/include/' + json[i];
+            } 
+            return newJson; 
+        }),
+
+        gulp.dest( host.path + 'rev/include/js/root')
+
+    ], cb)
+})
+
+
+//2.不需要webpack打包的js,原include和allServerResources里的include
+gulp.task("includeJs", ['allServerResourcesInclude', 'includeRoot'], function( cb ) {
+
+    pump([
+
+        gulp.src(jsIncludeSrc),
+
+        //与host.path中的内容做比对
+        plugins.changed(host.path, { hasChanged: plugins.changed.compareSha1Digest }),
+
+        plugins.if(isWatch, plugins.debug({ title: 'js-有变动的文件:' })),
+
+        // plugins.if(options.env === '3' || options.env === '4', plugins.uglify({ //压缩
+        //     mangle: false, //类型：Boolean 默认：true 是否修改变量名
+        //     compress: false, //类型：Boolean 默认：true 是否完全压缩
+        //     output: {
+        //         beautify: true //只去注释，不压缩成一行
+        //     }
+        // })))
+
+        //对root.js做一些修改
+        
+        through.obj(function(file, enc, cb) {
+
+            file = changeCommonImg(file);
+
+            this.push(file);
+            cb()
+        }),
+        
+        gulp.dest(host.path + 'include/'),
+
+        plugins.rev(),
+
+        gulp.dest(host.path + 'include/'),
+
+        plugins.rev.manifest(),
+
+        //修改manifest文件的路径,增加cdn域名
+        plugins.jsonEditor(function(json) {
+            var newJson = {};
+            for( var i in json ){
+                newJson['/include/' + i] = prefix + '/include/' + json[i];
+            } 
+            return newJson; 
+        }),
+
+        gulp.dest( host.path + 'rev/include/js')
+
+    ], cb)
+})
+
+
+/*********************less打包任务**********************/
+gulp.task("cssToHost", function( cb ) {
+
+    pump([
+
+        gulp.src(['src/**/*.less', '!src/common/**/*.less', '!src/newCommon/**/*.less']),
+
+        //通过through处理相对路径
+        through.obj(function(file, enc, cb) {
+
+            file = changeCommonImg(file);
+
+            file = pathVar(file);
+            this.push(file);
+            cb()
+        }),
+    
+
+        plugins.less(),
+
+        //预上线/线上环境时，压缩css
+        //设置这两个参数，防止去掉浏览器前缀和z-index值的变化
+        plugins.if(options.env === '3' || options.env === '4', plugins.cssnano({ autoprefixer: false, zindex: false })),
+
+        //修改当前文件的路径，将less替换为css
+        through.obj(function(file, enc, cb) {
+            //修改当前文件的路径到host.path下，且替换路径中的less为css
+            file.path = file.path.replace('less', 'css');
+            this.push(file);
+            cb()
+        }),
+    
+
+        //与host.path中的内容做比对
+        plugins.changed(host.path, { hasChanged: plugins.changed.compareSha1Digest }),
+
+        plugins.if(isWatch, plugins.debug({ title: 'css-有变动的文件:' })),
+
+        //修改当前文件的路径，将less替换为css
+    
+        through.obj(function(file, enc, cb) {
+            //修改当前文件的路径到host.path下，且替换路径中的less为css
+            file.path = file.path.replace('less', 'css');
+            this.push(file);
+            cb()
+        }),
+
+        //打版本号
+        plugins.rev(),
+
+        //给css文件里面所有的图片添加cdn的域名
+        //modifyCssUrls({
+          //modify(url, filePath) {
+            //return `app/${url}`;
+          //},
+          //prepend: prefix,
+          //append: '?cache-buster'
+        //}))
+
+        gulp.dest(host.path),
+
+        plugins.rev.manifest(),
+
+        //修改manifest文件的路径,增加cdn域名
+        plugins.jsonEditor(function(json) {
+            var newJson = {};
+            for( var i in json ){
+                newJson['/' + i] = prefix + '/' + json[i];
+            } 
+            return newJson; 
+        }),
+
+        gulp.dest(host.path + 'rev/css/')
+
+    ], cb)
+})
+
+
+/*******************css打包任务**************************/
+
+gulp.task("allServerResourcesCss", function( cb ) {
+    
+    pump([
+        gulp.src('src/allServerResources/include/css/*'),
+
+        //也加上压缩处理
+        plugins.if(options.env === '3' || options.env === '4', plugins.cssnano({ autoprefixer: false, zindex: false })),
+        
+        plugins.rev(),
+
+        gulp.dest(host.path),
+
+        plugins.rev.manifest(),
+
+        //修改manifest文件的路径,增加cdn域名
+        plugins.jsonEditor(function(json) {
+            var newJson = {};
+            for( var i in json ){
+                newJson['/allServerResources/include/css/' + i] = prefix + '/allServerResources/include/css/' + json[i];
+            } 
+            return newJson; 
+        }),
+
+        gulp.dest( host.path + 'rev/allServerResources/include/css')
+
+    ], cb )
+})
+
+
+gulp.task("includeCss", ['allServerResourcesCss'], function( cb ) {
+    
+    pump([
+        gulp.src(includeCssSrc),
+
+        //也加上压缩处理
+        plugins.if(options.env === '3' || options.env === '4', plugins.cssnano({ autoprefixer: false, zindex: false })),
+        
+        plugins.rev(),
+
+        gulp.dest(host.path),
+
+        plugins.rev.manifest(),
+
+        //修改manifest文件的路径,增加cdn域名
+        plugins.jsonEditor(function(json) {
+            var newJson = {};
+            for( var i in json ){
+                newJson['/include/' + i] = prefix + '/include/' + json[i];
+            } 
+            return newJson; 
+        }),
+
+        gulp.dest( host.path + 'rev/include/css')
+
+    ], cb )
+})
+
+
+/**********************图片打包任务*******************************/
+
+gulp.task('commonImages', function( cb ) {        
+    
+    pump([
+        gulp.src(['src/newCommon/**/*.{jpg,png,jpeg,svg,gif}']),
+
+        plugins.rev(),
+
+        gulp.dest(host.path + 'allServerResources/include/commonImg/'),
+
+        plugins.rev.manifest(),
+
+        // gulp.dest(host.path + 'rev/allServerResources/include/commonImg/'),
+
+        //修改manifest文件的路径
+        plugins.jsonEditor(function(json) {
+            var newJson = {};
+            for( var i in json ){
+                newJson['/allServerResources/include/commonImg/' + i] = prefix + '/allServerResources/include/commonImg/' + json[i];
+            } 
+            return newJson; 
+        }),
+
+        gulp.dest(host.path + 'rev/allServerResources/include/commonImg/')
+
+    ], cb)
+});
+
+
+//图片打包任务，全部打包和单独打包可共用
+gulp.task('images', ['commonImages'], function( cb ) {
+    pump([
+        gulp.src(['src/**/img/**/*', '!src/newCommon/**/*']),
+
+        plugins.rev(),
+
+        gulp.dest(host.path),
+
+        plugins.rev.manifest(),
+
+        //修改manifest文件的路径
+        plugins.jsonEditor(function(json) {
+            var newJson = {};
+            for( var i in json ){
+                newJson['/' + i] = prefix + '/' + json[i];
+            } 
+            return newJson; 
+        }),
+
+        gulp.dest( host.path + 'rev/img/')
+
+    ], cb)
+
+
+});
+
+/**********************************字体打包任务*************************/
+
+//mui所需的font文件夹打包
+gulp.task('font', function( cb ) {
+
+    pump([
+        gulp.src('src/include/fonts/*'),
+
+        plugins.rev(),
+
+        gulp.dest(host.path + 'include/fonts'),
+
+        plugins.rev.manifest(),
+
+        //修改manifest文件的路径
+        plugins.jsonEditor(function(json) {
+            var newJson = {};
+            for( var i in json ){
+                newJson['/include/fonts/' + i] = prefix + '/include/fonts/' + json[i];
+            } 
+            return newJson; 
+        }),
+
+        gulp.dest(host.path + 'rev/include/fonts')
+
+    ], cb)
+
+})
+
+gulp.task('allServerResources', function( cb ) {
+
+    pump([
+        gulp.src( ['src/allServerResources/include/fonts/*']),
+
+        plugins.rev(),
+
+        gulp.dest(host.path + 'allServerResources/include/fonts'),
+
+        plugins.rev.manifest(),
+
+        //修改manifest文件的路径
+        plugins.jsonEditor(function(json) {
+            var newJson = {};
+            for( var i in json ){
+                newJson['/allServerResources/include/fonts/' + i] = prefix + '/allServerResources/include/fonts/' + json[i];
+            } 
+            return newJson; 
+        }),
+
+        gulp.dest( host.path + 'rev/allServerResources/include/fonts')
+
+    ], cb)
+})
+
+
+/******************html文件打包****************************/
 gulp.task('html', function(cb) {
 
     pump([
