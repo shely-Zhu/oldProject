@@ -57,7 +57,11 @@
 				 {{else}}
 				 -
 				 {{/if}}
-				 {{balance}}元 
+				 {{#if isShares}}
+				   {{shares}}份
+				 {{else}}
+				   {{balance}}元 
+				 {{/if}}
 			 </div>             
 		 </div>
 		 <div class="second">

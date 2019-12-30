@@ -182,11 +182,6 @@ $(function () {
 //              $('.redeemOut').hide();//隐藏转出银行卡
                 //$('.redeem_bank').hide();//隐藏转出银行卡
                 $('.redeem_info .item_4').html(model.tradeDate);//赎回时间
-
-                // 赎回成功，隐藏进度条
-                if(model.tradeStatus == 1) {
-                    $('.trade_status_area').addClass('hide');
-                }
             }
             
             /**
@@ -206,7 +201,7 @@ $(function () {
                         //扣款状态为已扣款 展示确认信息并填充
                         $('.buy_confirm_info').removeClass('hide');
                         $('.buy_confirm_info .confirm_amount').html(model.confirmAmount);//确认金额
-                        $('.buy_confirm_info .confirm_share').html(model.confirmShares + "份");//确认份额
+                        $('.buy_confirm_info .confirm_share').html(model.confirmShares + " 份");//确认份额
                         $('.buy_confirm_info .confirm_value').html(model.confirmNav);//确认净值中的净值
                         $('.buy_confirm_info .confirm_charge').html(model.confirmRate);//手续费
                         $('.buy_confirm_info .confirm_date').html(model.confirmDate);//确认时间
@@ -214,10 +209,14 @@ $(function () {
                 } else {
                     //赎回为确认状态 展示赎回确认信息
                     $('.redeem_confirm_info').removeClass('hide');
-                    $('.redeem_confirm_info .confirm_share').html(model.confirmShares + "份");//确认份额
-                    $('.redeem_confirm_info .confirm_value').html(model.confirmNav);//确认净值
-                    $('.redeem_confirm_info .confirm_charge').html(model.confirmRate + "元");//手续费
-                    $('.redeem_confirm_info .confirm_amount').html(model.confirmAmount + "元");//到账金额
+                    $('.redeem_confirm_info .confirm_share').html(model.confirmShares + " 份");//确认份额
+                    if(model.confirmDate && model.confirmDate != '') {
+                        $('.redeem_confirm_info .confirm_value').html(model.confirmNav + '(<span class="colorGray">'+ model.confirmDate +'</span>)');//确认净值
+                    } else {
+                        $('.redeem_confirm_info .confirm_value').html(model.confirmNav);//确认净值
+                    }
+                    $('.redeem_confirm_info .confirm_charge').html(model.confirmRate + " 元");//手续费
+                    $('.redeem_confirm_info .confirm_amount').html(model.confirmAmount + " 元");//到账金额
                     $('.redeem_confirm_info .bank_icon').attr('src', model.bankThumbnailUrl);//银行logo
                     $('.redeem_confirm_info .bank_name').html(that.getPayInfo(model.bankName, model.bankAccountMask));//银行名称
                     if(!!model.estimateArrivalDate){//到账时间

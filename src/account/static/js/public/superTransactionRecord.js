@@ -107,7 +107,6 @@ $(function() {
                     var index = t.attr('data-scroll');
                     //data-scroll属性即当前左右切换区域的索引
                     that.gV.current_index = index;
-
                     //判断当前区域是否已经初始化出来上拉加载
                     if (t.hasClass('hasPullUp')) {
                         //有这个class，表示已经初始化，不再执行下一步
@@ -220,9 +219,11 @@ $(function() {
                     var jsonData = json.data,
                         pageList = jsonData.pageList;
                     if (!$.util.objIsEmpty(pageList)) {
-
-                        jsonData.tobe = that.gV.current_index == 0 ? 0 : 1;
-
+                        //循环添加每条条件
+                        $.each(jsonData.pageList,function(i,el){
+                            el.tobe = that.gV.current_index == 0 ? 0 : 1;
+                            el.isShares = that.gV.current_index == 3? 1 : 0;        
+                        });
                         var list_html = that.gV.list_template(jsonData);//  把内容  放到  模板里
                         //设置这两参数，在initMui()中使用
                         //判断是否显示没有更多了等逻辑，以及插入新数据

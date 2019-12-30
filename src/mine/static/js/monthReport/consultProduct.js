@@ -26,7 +26,6 @@ var consultProduct = {
 			var consultContent = $('.consultText').val();
 			var empNo =  splitUrl['empNo']==undefined ? splitUrl['empNo'] :'';
 			var empName =  splitUrl['empName']==undefined ? splitUrl['empName'] :'';
-			debugger
 			var productName =  new Base64().decode(splitUrl['productName']) ? new Base64().decode(splitUrl['productName']) :'';
 			var obj = [{
 				
