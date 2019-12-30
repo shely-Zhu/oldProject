@@ -30,6 +30,7 @@ $(function() {
                 custCode: '', //客户编号
                 btnFlag: true,
                 isNeedLogin: false,
+                idnoCheckflag:false,//实名认证
             },
 
             //初始化
@@ -43,7 +44,6 @@ $(function() {
                 }
                 that.getData();
             },
-
             //获取活动详情数据
             getData: function() {
                 var that = this;
@@ -112,6 +112,7 @@ $(function() {
                         var jsonData = json.data;
                         that.gV.custCode = jsonData.customerNo; //客户编号
                         that.gV.custType = jsonData.accountType; // 客户类型【0.机构 1.个人】 
+                        that.gV.idnoCheckflag = jsonData.idnoCheckflag==1?false:true; // 是否实名认证
                         that.queryFinan();
 
                     },
@@ -238,21 +239,40 @@ $(function() {
                             };
                             $.elasticLayer(obj)
                         } else if (data.status == "20010") {
-                            //需要进行合格投资者信息认证
-                            var obj = {
-                                title: '温馨提示', //如果不传，默认不显示标题
-                                p: '<p>' + data.message + '</p>',
-                                yesTxt: '合格投资者认证',
-                                celTxt: '取消',
-                                hideCelButton: false,
-                                zIndex: 100,
-                                needYesHref: true, //是否需要把确定按钮改成a标签，默认false
-                                yesHref: site_url.qualifiedInvestor_url+"?type=private", //确定按钮a链接的默认href 产品确认跳私募
-                                callback: function(t) {
+                            if(!that.gV.idnoCheckflag){
+                                //需要进行合格投资者信息认证
+                                var obj = {
+                                    title: '温馨提示', //如果不传，默认不显示标题
+                                    p: '<p>' + data.message + '</p>',
+                                    yesTxt: '合格投资者认证',
+                                    celTxt: '取消',
+                                    hideCelButton: false,
+                                    zIndex: 100,
+                                    needYesHref: true, //是否需要把确定按钮改成a标签，默认false
+                                    yesHref: site_url.qualifiedInvestor_url+"?type=private", //确定按钮a链接的默认href 产品确认跳私募
+                                    callback: function(t) {
 
-                                },
-                            };
-                            $.elasticLayer(obj)
+                                    },
+                                };
+                                $.elasticLayer(obj)
+                            }else{
+                               //去实名
+                                var obj = {
+                                    title: '温馨提示', //如果不传，默认不显示标题
+                                    p: '<p>' + data.message + '</p>',
+                                    yesTxt: '实名认证',
+                                    celTxt: '取消',
+                                    hideCelButton: false,
+                                    zIndex: 100,
+                                    needYesHref: true, //是否需要把确定按钮改成a标签，默认false
+                                    yesHref: site_url.realIdcard_url, //确定按钮a链接的默认href  身份证上传
+                                    callback: function(t) {
+
+                                    },
+                                };
+                                $.elasticLayer(obj) 
+                            }
+                            
                         } else if (data.status == "20005") {
                             //需要进行合格投资者信息认证
                             var obj = {
