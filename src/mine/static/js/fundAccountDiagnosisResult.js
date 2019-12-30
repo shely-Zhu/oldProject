@@ -1,8 +1,8 @@
 /*
  * @Author: your name
  * @Date: 2019-12-09 15:53:31
- * @LastEditTime: 2019-12-16 16:23:55
- * @LastEditors: Please set LastEditors
+ * @LastEditTime : 2019-12-30 10:29:20
+ * @LastEditors  : Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \htjf-app\src\mine\static\js\fundAccountDiagnosisResult.js
  */
@@ -15,6 +15,7 @@ require('@pathCommonJs/components/headBarConfig.js');
 var tipAction = require('@pathCommonJs/components/tipAction.js');
 var splitUrl = require('@pathCommonJs/components/splitUrl.js')();
 var generateTemplate = require('@pathCommonJsComBus/generateTemplate.js');
+require('@pathIncludJs/vendor/mui/mui.picker.min.js');
 
 
 $(function() {
@@ -52,7 +53,7 @@ $(function() {
         gV: {
               applyType:splitUrl['type'], // add 为新增  edit 为编辑
               applyId:splitUrl['applyId'],   //编辑具体的基金的id
-              otherFundCodeData:"", //其他基金数据
+              otherFundCodeData:[], //其他基金数据
               readyPurchaseHTFunds:"", //恒天基金
               selectPurchaseHTFunds:[],//已购买恒天基金
               userAge:"", //年龄
@@ -79,6 +80,7 @@ $(function() {
               fundDiagnosisRiskLevelDicData:"", //风险等级字典
               fundDiagnosisEInvestDurationLevelDicData:"", //预计投资年限字典
               fundDiagnosisLiquidityRequirementDicData:"", //流动性需求字典
+              dataPickData:"", //其他基金的日期
         },
         init: function() {
             var that = this;
@@ -89,6 +91,7 @@ $(function() {
         initAddOtherFundCode:function(){
             //初始化其他基金
             var that = this;
+            that.$e.TransferFundsContent.html("")
             generateTemplate(that.gV.otherFundCodeData, that.$e.TransferFundsContent, that.$e.templateTransferFunds);
             if(that.gV.otherFundCodeData){
                if(that.gV.otherFundCodeData.length>0){
@@ -123,8 +126,9 @@ $(function() {
             that.gV.yield_secondData = data.eYieldratePerYearMax;
             that.gV.loss_firstData = data.affordableMaxDeficitRateMin;
             that.gV.loss_secondData = data.affordableMaxDeficitRateMax;
-            that.gV.otherFundCodeData = JSON.parse(sessionStorage.getItem("addAccountDiagnosisResultList")) != ""?JSON.parse(sessionStorage.getItem("addAccountDiagnosisResultList")):data.readyPurchaseQTFunds;
-            sessionStorage.setItem("addAccountDiagnosisResultList",JSON.stringify(that.gV.otherFundCodeData));
+            that.gV.otherFundCodeData = data.readyPurchaseQTFunds;
+           // that.gV.otherFundCodeData = JSON.parse(sessionStorage.getItem("addAccountDiagnosisResultList")) != ""?JSON.parse(sessionStorage.getItem("addAccountDiagnosisResultList")):data.readyPurchaseQTFunds;
+            //sessionStorage.setItem("addAccountDiagnosisResultList",JSON.stringify(that.gV.otherFundCodeData));
             that.initAddOtherFundCode();
             that.gV.readyPurchaseHTFunds= data.readyPurchaseHTFunds;
             /*that.gV.readyPurchaseHTFunds.forEach(function(item,index){
@@ -393,11 +397,76 @@ $(function() {
         },
        events:function(){
             var that = this;
-            // 性别选择
-            mui("body").on("mdClick",".mui-icon-arrowright",function(){
+            var dtPicker = new mui.DtPicker({
+                type:'date'
+            }); 
+            // 购买日期选择
+            mui("body").on("mdClick",".addOtherFund_content .mui-icon-arrowright",function(){
                 var type = $(this).attr("type");
-                $('.popup').css('display', 'block')
+               $('.popup').show()
+               //$('.popup-content .popup-mask').hide();
+                $('.mui-dtpicker').show()
+                that.gV.dataPickData="";
+			// 监听日期选择点击事件
+				dtPicker.show(function (selectItems) { 
+                    $('.popup-mask').show();
+                   // $('.popup').css('display', 'none')
+                    that.gV.dataPickData=selectItems.value;
+                    $(".dataPick")[0].textContent = selectItems.value;
+                })
+            })
+            mui("body").on("mdClick",".addOtherFund_content .comfirmButtom .addOtherTrue",function(){
+                 var fundCode = $(".fundCode_input").val();
+                var dataPick = $(".dataPick")[0].textContent;
+                var money = $(".money_input").val();
+                var obj = {
+                    "fundCode":fundCode,
+                    "purchaseDate":new Date(dataPick).getTime(),
+                    "purchaseDateStr":dataPick,
+                    "purchaseAmount":money,
+                    "purchaseSourceType": 2
+                }
+                if(fundCode!=""&&dataPick!=""&&money!=""){
+                    if(!!that.gV.otherFundCodeData){
+                        if(that.gV.otherFundCodeData.length==0){
+                            that.gV.otherFundCodeData.push(obj)
+                        }else{
+                            var arr = [];
+                            that.gV.otherFundCodeData.forEach(function(item){
+                                 if(item.fundCode!=obj.fundCode){
+                                     arr.push(item)
+                                 }
+                            })
+                            arr.push(obj);
+                            that.gV.otherFundCodeData = arr;
+                        }
+                    }else{
+                        var arr = [];
+                        arr.push(obj);
+                        that.gV.otherFundCodeData = arr
+                    }
+                   
+                    $(".warmMessage").hide()
+                    $(".addOtherFund").hide()
+                    $(".addOtherFund_content").hide()
+                    that.initAddOtherFundCode()
+                }else{
+                    $(".warmMessage").show()
+                }
+            })
+
+            mui("body").on("mdClick",".addOtherFund_content .comfirmButtom .addOtherFalse",function(){
+                $(".warmMessage").hide()
+                $(".addOtherFund").hide()
+                $(".addOtherFund_content").hide()
+            })
+            // 性别选择
+            mui("body").on("mdClick",".content-item .mui-icon-arrowright",function(){
+                var type = $(this).attr("type");
+                $('.popuplist').css('display', 'block')
                 $(".popup-content .selectItemList").hide();
+                $(".mui-dtpicker").hide();
+                $('.popup-mask').show();
                 if(type == "sex"){
                     $(".popup-content .sex").show()
                 }else if(type == "professional"){
@@ -527,13 +596,15 @@ $(function() {
                     }
                 }
                 $(this).attr("type","")
-                $('.popup').css('display', 'none')
+                $('.popuplist').css('display', 'none')
+                $(".mui-backdrop").remove()
             },{
                 'htmdEvt': 'fundAccountDiagnosisResult_03'
             })
             //弹出框取消按钮
             mui("body").on("mdClick",".popup_cancel",function(){
-                $('.popup').css('display', 'none')
+                $('.popuplist').css('display', 'none')
+                $(".mui-backdrop").remove()
             },{
                 'htmdEvt': 'fundAccountDiagnosisResult_04'
             })
@@ -554,7 +625,7 @@ $(function() {
                   }
                 }
                 that.gV.otherFundCodeData = newArr;
-                sessionStorage.setItem("addAccountDiagnosisResultList",JSON.stringify(newArr))
+               // sessionStorage.setItem("addAccountDiagnosisResultList",JSON.stringify(newArr))
                 if(that.gV.otherFundCodeData){
                     if(that.gV.otherFundCodeData.length>0){
                          $(".addOtherFundcodeBox_noData").hide();
@@ -570,13 +641,17 @@ $(function() {
 
             //新增其他新建添加按钮
             mui("body").on("mdClick",".addOtherFundcodeBox .mui-icon-plusempty",function(){
-                window.location.href = site_url.addAccountDiagnosisResult_url;
+               // $('.popup').css('display', 'block')
+                $(".addOtherFund").show()
+                $(".addOtherFund_content").show()
+                $(".popup_true").attr("type","addOtherFund");
+               // window.location.href = site_url.addAccountDiagnosisResult_url;
             },{
                 'htmdEvt': 'fundAccountDiagnosisResult_06'
             })
 
            //提交申请
-           mui("body").on("mdClick",".comfirmButtom .mui-btn",function(){
+           mui("body").on("mdClick",".submitButton",function(){
             if(that.gV.applyType == "add"){
                 that.addFundDiagnosisApply()
             }else if(that.gV.applyType == 'edit'){

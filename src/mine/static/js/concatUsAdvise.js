@@ -3,12 +3,11 @@
 * @author chentiancheng 2019-11-14
 */
 require('@pathCommonBase/base.js');
-
 require('@pathCommonJs/ajaxLoading.js');
 require('@pathCommonJs/components/headBarConfig.js');
 var uploadFile = require('@pathCommonCom/uplaoderFile/concatUsAdviseUploaderFile.js')
-var splitUrl = require('@pathCommonJs/components/splitUrl.js')();
-var generateTemplate = require('@pathCommonJsComBus/generateTemplate.js');
+// var splitUrl = require('@pathCommonJs/components/splitUrl.js')();
+// var generateTemplate = require('@pathCommonJsComBus/generateTemplate.js');
 $(function () {
     var concatUsAdvise = {
         gD: {
@@ -20,14 +19,14 @@ $(function () {
         init: function () {
             var that = this;
             $(".list").eq(0).hide()
+            $('.listLoading').hide()
             uploadFile(that.asyncAll, that, 1); //插件初始化
             that.event()
+            //初始化时隐藏加载
         },
         // 所有图片上传完毕，请求申请投资者分类接口
         asyncAll: function (idJson, idTypeArr) {
             var that = this;
-            console.log(that.gD.idArr,idJson)
-            alert(1)
             if(idJson.status=='0000'){
                 that.gD.idArr.push.apply(that.gD.idArr, idJson.data);
             }else{
@@ -38,16 +37,19 @@ $(function () {
         },
         event: function () {
             var that = this;
+            //点击事件，点击获取值
             mui("body").on('mdClick','.list', function(){
                 that.gD.feedbackType = $(this).children("input").val() || 0
             },{
                 'htmdEvt': 'concatUsAdvise_01'
             })
+            //文本事件
             mui("body").on('keyup','.textarea', function(){
                 that.gD.feedbackDesc = $(".textarea").val()
                 $(".haveMany").text(that.gD.feedbackDesc.length+'/200')
             })
         },
+        //提交
         submitAdvise:function(){
             var that = this;
             $(".blueBgButton").addClass("disable")
@@ -62,7 +64,7 @@ $(function () {
                 needDataEmpty: true,
                 callbackDone: function (json) {
                     $(".blueBgButton").removeClass("disable")
-                    tipAction("意见提交成功,感谢您的反馈")
+                    tipAction("  意见提交成功,感谢您的反馈")
                     if (window.isAndroid) {
                         //这个是安卓操作系统
                         window.jsObj.backNative();

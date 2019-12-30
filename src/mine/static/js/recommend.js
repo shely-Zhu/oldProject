@@ -39,6 +39,7 @@ $(function() {
             weixinConf: {}, // 微信分享内容对象
             title: '', // 微信分享title设置
             imageUrl: '', // 微信分享图片设置
+            imageUrlApp: '', // 微信分享图片设置
             introduction: '', // 微信分享简介设置
             shareUrl:'',
             customerNo:'',
@@ -103,7 +104,14 @@ $(function() {
                     if (json.data.recommendable == 1) {
                         // 未实名认证
                         tipAction('完成实名认证后才可以推荐好友哦', function() {
-                            window.location.href = site_url.mine_url;
+                        if (window.isAndroid) {
+                            //这个是安卓操作系统
+                            window.jsObj.backNative();
+                        }
+                        if (window.isIOS) {
+                            //这个是ios操作系统
+                            window.webkit.messageHandlers.backNative.postMessage('backNative');
+                        }   
                         })
                     } else {
                         // 已实名认证，初始化页面
@@ -247,7 +255,7 @@ $(function() {
                         'title': that.setting.weixinConf.title?that.setting.weixinConf.title:"",    //标题
                         'des':'邀请好友，分享精彩',   //简介
                         'link': that.setting.shareUrl?that.setting.shareUrl:'',   //链接
-                        'img':that.setting.weixinConf.imageUrl?that.setting.weixinConf.imageUrl:"",   // 图标
+                        'img':that.setting.weixinConf.imageUrlApp?that.setting.weixinConf.imageUrlApp:"",   // 图标
                     }
                 //如果是app--设置ldxShare的值--- 需要拼凑对应的链接
                 // if (window.currentIsApp) {
@@ -327,7 +335,7 @@ $(function() {
                 title: that.setting.weixinConf.title, // 分享标题
                 desc: that.setting.weixinConf.introduction, // 分享描述
                 link: that.setting.weixinConf.shareUrl, // 分享链接
-                imgUrl: that.setting.weixinConf.imageUrl, // 分享图标
+                imgUrl: that.setting.weixinConf.imageUrlApp, // 分享图标
                 success: function() {
                     // 用户确认分享后执行的回调函数
                     //隐藏分享提示浮层
@@ -347,7 +355,7 @@ $(function() {
             wx.onMenuShareTimeline({
                 title: that.setting.weixinConf.title, // 分享标题
                 link: that.setting.weixinConf.shareUrl, // 分享链接
-                imgUrl: that.setting.weixinConf.imageUrl, // 分享图标
+                imgUrl: that.setting.weixinConf.imageUrlApp, // 分享图标
                 success: function() {
                     // 用户确认分享后执行的回调函数
                     //隐藏分享提示浮层

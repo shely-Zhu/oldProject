@@ -17,7 +17,7 @@ require('@pathCommonJs/components/authenticationProcess.js');
 //引入弹出层
 require('@pathCommonCom/elasticLayer/elasticLayer/elasticLayer.js');
 
-require('@pathCommonJs/components/headBarConfig.js');
+// require('@pathCommonJs/components/headBarConfig.js');
 var generateTemplate = require('@pathCommonJsComBus/generateTemplate.js');
 var getCookie = require('@pathNewCommonJsCom/getCookie.js');
 var Base64 = require('@pathIncludJs/vendor/base64/base64.js');
@@ -180,7 +180,7 @@ $(function() {
 			       		newData.unitNavValue.push( el.unitNav);//单位净值
 			       		newData.unitYldValue.push( el.accuUnitNav);//累计净值
 			       	})
-			       	switch(num) {
+			       	switch(Number(num)) {
 			       		case 0: that.data['qrnhWfsy'].oneMonth = newData;break;
 			       		case 1: that.data['qrnhWfsy'].threeMonth = newData;break;
 			       		case 2: that.data['qrnhWfsy'].sixMonth = newData;break;
@@ -350,7 +350,8 @@ $(function() {
             var obj = [{
                 url: site_url.pofAssessList_api,
                 data: {
-                    tradeAcc:splitUrl["tradeNo"]
+                    tradeAcc:splitUrl["tradeNo"],
+                    fundCode: splitUrl["fundCode"]
                 },
                 callbackDone: function(json) { //成功后执行的函数
 				//   console.log(json.data[0])
@@ -368,11 +369,23 @@ $(function() {
 					//待确认金额 接口无
 					$('.typeWrap .toConfirm .confirmMoney').html( jsonData.onwayAssetTotalMask );
 					//昨日收益
-					$('.typeWrap .yesterdayShare').html( jsonData.incomeMask);
+					if(Number(jsonData.income) > 0){
+						$('.typeWrap .yesterdayShare').html('+' + jsonData.incomeMask);
+					}else{
+						$('.typeWrap .yesterdayShare').html(jsonData.incomeMask);
+					}
 					//持有收益
-					$('.typeWrap .ownShare').html( jsonData.holdIncomeMask);
+					if(Number(jsonData.holdIncome) > 0){
+						$('.typeWrap .ownShare').html( '+' + jsonData.holdIncomeMask);
+					}else{
+						$('.typeWrap .ownShare').html(jsonData.holdIncomeMask);
+					}
 					//累计收益  接口无
-					$('.typeWrap .accumulatedShare').html( jsonData.addupIncomeMask);
+					if(Number(jsonData.addupIncome) > 0){
+						$('.typeWrap .accumulatedShare').html('+' + jsonData.addupIncomeMask);
+					}else{
+						$('.typeWrap .accumulatedShare').html( jsonData.addupIncomeMask);
+					}
 					//持有份额
 					$('.openWrap .cyfe').html( jsonData.currentShareMask);
 					//可用份额
@@ -651,7 +664,7 @@ $(function() {
             })
 //			分红方式跳转
 			mui("body").on('mdClick', '.dividend', function() {
-				window.location.href = site_url.bonusMethod_url + "?tradeNo=" + splitUrl['tradeNo'];
+				window.location.href = site_url.bonusMethod_url + "?tradeNo=" + splitUrl['tradeNo'] + '&fundCode=' + that.data.fundCode;
 			},{
                 'htmdEvt': 'optionalPublicDetail_4'
             })
@@ -669,7 +682,7 @@ $(function() {
 			})
 			
                //风测等级匹配成功
-			   mui("body").on('mdClick',".isRiskMatchBox_match",function(){
+			mui("body").on('mdClick',".isRiskMatchBox_match",function(){
 				var type = that.gV.singleaAuthenType;
 				$(".isRiskMatch_mask").hide();
 				$(".isRiskMatchBox").hide();
@@ -680,6 +693,8 @@ $(function() {
 					//定投一键认证
 					window.location.href = site_url.ordinarySetThrow_url+"?fundCode="+that.data.fundCode;;			
 			   }
+			},{
+				'htmdEvt': 'optionalPublicDetail_11'
 			})
 
 			//风险等级匹配失败
@@ -687,6 +702,8 @@ $(function() {
 				$(".isRiskMatch_mask").hide();
 				$(".isRiskMatchBox").hide();
 			  // that.gV.isRiskMatchBox.hide();
+			},{
+				'htmdEvt': 'optionalPublicDetail_12'
 			})
 
 			//风险等级匹配失败结果跳转
@@ -701,6 +718,8 @@ $(function() {
                     //风测过期
                     window.location.href = site_url.riskAppraisal_url + "?type=private"
                 }
+			},{
+				'htmdEvt': 'optionalPublicDetail_13'
 			})
 
 //			收益明细跳转
@@ -717,7 +736,7 @@ $(function() {
             })
 			//点击赎回
 			mui("body").on('mdClick', '.redeemBtn', function(e) {
-				window.location.href = site_url.redemptionBuy_url + "?tradeNo=" + splitUrl['tradeNo'];			
+				window.location.href = site_url.redemptionBuy_url + "?tradeNo=" + splitUrl['tradeNo'] + "&fundCode=" + that.data.fundCode			
 			},{
                 'htmdEvt': 'optionalPublicDetail_8'
             })
@@ -729,59 +748,63 @@ $(function() {
                 'htmdEvt': 'optionalPublicDetail_9'
 			})
 			     //认证
-				 mui("body").on('mdClick', ".tips-li .tips-li-right", function (e) {
-					var type = $(this).parent().index()
-					switch (type) {
-						case 0:   //开通账户
-							window.location.href = site_url.realName_url
-							break;
-	
-						case 1:   //私募风险评测  type=private type=asset 资管风测
-							window.location.href = site_url.riskAppraisal_url + "?type=private"
-							break;
-	
-						case 2:   //完善基本信息
-							window.location.href = site_url.completeInformation_url
-							break;
-	
-						case 3:  //投资者分类
-							window.location.href = site_url.investorClassification_url
-							break;
-						case 4:  //合格投资者认证
-							window.location.href = site_url.chooseQualifiedInvestor_url
-							break;
-	
-						default:
-							break;
-					}
-				});
+			mui("body").on('mdClick', ".tips-li .tips-li-right", function (e) {
+				var type = $(this).parent().index()
+				switch (type) {
+					case 0:   //开通账户
+						window.location.href = site_url.realName_url
+						break;
+
+					case 1:   //私募风险评测  type=private type=asset 资管风测
+						window.location.href = site_url.riskAppraisal_url + "?type=private"
+						break;
+
+					case 2:   //完善基本信息
+						window.location.href = site_url.completeInformation_url
+						break;
+
+					case 3:  //投资者分类
+						window.location.href = site_url.investorClassification_url
+						break;
+					case 4:  //合格投资者认证
+						window.location.href = site_url.chooseQualifiedInvestor_url
+						break;
+
+					default:
+						break;
+				}
+			},{
+				'htmdEvt': 'optionalPublicDetail_14'
+			});
 				//一键认证
-				mui("body").on('mdClick', ".tips .tips-btn", function (e) {
-					var key = that.data.singleaAuthenPath;
-					switch (key) {
-						case "isWealthAccount":   //开通账户
-							window.location.href = site_url.realName_url
-							break;
-	
-						case "isRiskEndure":   //风险评测
-							window.location.href = site_url.riskAppraisal_url + "?type=private"
-							break;
-	
-						case "isPerfect":   //完善基本信息
-							window.location.href = site_url.completeInformation_url
-							break;
-	
-						case "isInvestFavour":  //投资者分类
-							window.location.href = site_url.investorClassification_url
-							break;
-						case "isRiskMatch":  //合格投资者认证
-							window.location.href = site_url.chooseQualifiedInvestor_url
-							break;
-	
-						default:
-							break;
-					}
-				});
+			mui("body").on('mdClick', ".tips .tips-btn", function (e) {
+				var key = that.data.singleaAuthenPath;
+				switch (key) {
+					case "isWealthAccount":   //开通账户
+						window.location.href = site_url.realName_url
+						break;
+
+					case "isRiskEndure":   //风险评测
+						window.location.href = site_url.riskAppraisal_url + "?type=private"
+						break;
+
+					case "isPerfect":   //完善基本信息
+						window.location.href = site_url.completeInformation_url
+						break;
+
+					case "isInvestFavour":  //投资者分类
+						window.location.href = site_url.investorClassification_url
+						break;
+					case "isRiskMatch":  //合格投资者认证
+						window.location.href = site_url.chooseQualifiedInvestor_url
+						break;
+
+					default:
+						break;
+				}
+			},{
+				'htmdEvt': 'optionalPublicDetail_15'
+			});
 			//点击定投
 			mui("body").on('mdClick', '.fiedBtn', function(e) {
 				that.getConditionsOfOrder("investement");

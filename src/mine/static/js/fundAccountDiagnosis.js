@@ -92,26 +92,7 @@ $(function() {
                         if(jsonData.isWealthAccount != "1"&&jsonData.isRiskEndure == "1"&&jsonData.isPerfect == "1"&&jsonData.isInvestFavour=="1"){
                             that.gV.realLi.hide();
                             that.gV.tipsWrap.hide();
-                            $(".isRiskMatch_mask").show();
-                            $(".isRiskMatchBox").show();
-                            if(jsonData.isRiskMatch == "1"){
-                                //风险等级匹配
-                                $(".isRiskMatchBox_match").show()
-                                $(".isRiskMatchBox_noMatch").hide()
-                                $(".isRiskMatchBox_header").html("你选择的产品与您现在的风险承受能力相匹配")
-                            }else if(jsonData.isRiskMatch == "0"){
-                                $(".isRiskMatchBox_noMatch").show()
-                                $(".isRiskMatchBox_match").hide()
-                                $(".isRiskMatchBox_header").html("你选择的产品与您现在的风险承受能力不相匹配")
-                                $(".isRiskMatchResult").html("查看评测结果")
-                                $(".isRiskMatchResult").attr("type","noRisk")
-                            }else if(jsonData.isRiskMatch == "2"){
-                                $(".isRiskMatchBox_noMatch").show()
-                                $(".isRiskMatchBox_match").hide()
-                                $(".isRiskMatchBox_header").html("您的风险测评已过期,请重新进行风险测评")
-                                $(".isRiskMatchResult").html("重新风测")
-                                $(".isRiskMatchResult").attr("type","repeatRisk")
-                            }
+                            window.location.href = site_url.applyHistory_url
                               
 						}else{
                             that.gV.tipsWrap.show()
@@ -187,7 +168,7 @@ $(function() {
                             window.location.href = site_url.noAccountHoldShare_url
                         }
                     }
-                    
+                       $("#holdingBox").html("")
                       // 将列表插入到页面上
                       generateTemplate(data, that.$e.holdingBox, that.$e.holdingBoxTemp);
                     
@@ -214,25 +195,25 @@ $(function() {
                     var data = json.data;
                     that.gV.pie.pieData = []
                     if(!!data.stockRatio&&Number(data.stockRatio)!=0){
-                        that.gV.pie.pieData.push({name: '股票型',value:Number( data.stockRatio).toFixed(2),itemStyle:that.getPieColor('stockRatio'),})
+                        that.gV.pie.pieData.push({name: '股票型',value:(Number( data.stockRatio)*100).toFixed(2),itemStyle:that.getPieColor('stockRatio'),})
                     }
                     if(!!data.mixRatio&&Number(data.mixRatio)!=0){
-                        that.gV.pie.pieData.push({name: '混合型',value:Number( data.mixRatio).toFixed(2),itemStyle:that.getPieColor('mixRatio'),})
+                        that.gV.pie.pieData.push({name: '混合型',value:(Number( data.mixRatio)*100).toFixed(2),itemStyle:that.getPieColor('mixRatio'),})
                     }
                     if(!!data.bondRatio&&Number(data.bondRatio)!=0){
-                        that.gV.pie.pieData.push({name: '债券型',value:Number (data.bondRatio).toFixed(2),itemStyle:that.getPieColor('bondRatio'),})
+                        that.gV.pie.pieData.push({name: '债券型',value:(Number (data.bondRatio)*100).toFixed(2),itemStyle:that.getPieColor('bondRatio'),})
                     }
                     if(!!data.breakEvenRatio&&Number(data.breakEvenRatio)!=0){
-                        that.gV.pie.pieData.push({name: '保本型',value:Number(data.breakEvenRatio).toFixed(2),itemStyle:that.getPieColor('breakEvenRatio'),})
+                        that.gV.pie.pieData.push({name: '保本型',value:(Number(data.breakEvenRatio)*100).toFixed(2),itemStyle:that.getPieColor('breakEvenRatio'),})
                     }
                     if(!!data.goodsRatio&&Number(data.goodsRatio)!=0){
-                        that.gV.pie.pieData.push({name: '商品型',value:Number (data.goodsRatio).toFixed(2),itemStyle:that.getPieColor('goodsRatio'),})
+                        that.gV.pie.pieData.push({name: '商品型',value:(Number (data.goodsRatio)*100).toFixed(2),itemStyle:that.getPieColor('goodsRatio'),})
                     }
                     if(!!data.currencyRatio&&Number(data.currencyRatio)!=0){
-                        that.gV.pie.pieData.push({name: '另类投资型',value:Number (data.currencyRatio).toFixed(2),itemStyle:that.getPieColor('alternativeInvestRatio'),})
+                        that.gV.pie.pieData.push({name: '投资型',value:(Number (data.currencyRatio)*100).toFixed(2),itemStyle:that.getPieColor('alternativeInvestRatio'),})
                     }
                     if(!!data.currencyRatio&&Number(data.currencyRatio)!=0){
-                        that.gV.pie.pieData.push({name: '货币市场型',value:Number (data.currencyRatio).toFixed(2),itemStyle:that.getPieColor('currencyRatio'),})
+                        that.gV.pie.pieData.push({name: '市场型',value:(Number (data.currencyRatio)*100).toFixed(2),itemStyle:that.getPieColor('currencyRatio'),})
                     }
                    
                    that.drawCircle()
@@ -259,19 +240,59 @@ $(function() {
                         $("#assets-box .bondAssetRatio .num").html(Number(data.bondAssetRatio).toFixed(2) + '%')
                         $("#assets-box .otherAssetRatio .num").html(Number(data.otherAssetRatio).toFixed(2) + '%')
                         var assets_width = $("#assets-box").width();
-                        $("#assets-box .stockAssetRatio").css({'width':Number(data.stockAssetRatio)/100*assets_width -40+ 'px'});
-                        $("#assets-box .cashAssetRatio").css({'width':Number(data.cashAssetRatio)/100*assets_width + 'px'});
-                        $("#assets-box .bondAssetRatio").css({'width':Number(data.bondAssetRatio)/100*assets_width + 'px'});
-                        $("#assets-box .otherAssetRatio").css({'width':Number(data.otherAssetRatio)/100*assets_width +20+ 'px'});
+                        var arr = [
+                            {key:'stockAssetRatio',val:Number(data.stockAssetRatio)/100*assets_width},
+                            {key:'cashAssetRatio',val:Number(data.cashAssetRatio)/100*assets_width},
+                            {key:'bondAssetRatio',val:Number(data.bondAssetRatio)/100*assets_width},
+                            {key:'otherAssetRatio',val:Number(data.otherAssetRatio)/100*assets_width},
+                        ] 
+                         var newArr = arr.sort(that.compare('val'));
+                         console.log("8888",newArr);
+                         var num = 0;
+                         newArr.forEach(function(item){
+                             if(item.val<42){
+                                 var chaNum = item.val -42;
+                                 num = num + chaNum
+                                 item.val = 42;
+                             }
+                         })
+                         newArr[newArr.length - 1].val = newArr[newArr.length - 1].val + num;
+                         console.log("898",newArr)
 
-                        $("#assets-box .stockAssetRatio .shape").css({'width':Number(data.stockAssetRatio)/100*assets_width + 'px',
-                        'background':'linear-gradient(to left,'+ that.gV.color.color1[0] + ',' + that.gV.color.color1[1] + ')'});
-                        $("#assets-box .cashAssetRatio .shape").css({'width':Number(data.cashAssetRatio)/100*assets_width + 'px',
-                        'background':'linear-gradient(to left,'+ that.gV.color.color2[0] + ',' + that.gV.color.color2[1] + ')'});
-                        $("#assets-box .bondAssetRatio .shape").css({'width':Number(data.bondAssetRatio)/100*assets_width + 'px',
-                        'background':'linear-gradient(to left,'+ that.gV.color.color3[0] + ',' + that.gV.color.color3[1] + ')'});
-                        $("#assets-box .otherAssetRatio .shape").css({'width':Number(data.otherAssetRatio)/100*assets_width + 'px',
-                        'background':'linear-gradient(to left,'+ that.gV.color.color4[0] + ',' + that.gV.color.color4[1] + ')'});
+                         newArr.forEach(function(item){
+                             var type = item.key;
+                             if(type == "stockAssetRatio"){
+                                $("#assets-box .stockAssetRatio").css({'width':item.val+ 'px'});
+                                $("#assets-box .stockAssetRatio .shape").css({'width':item.val + 'px',
+                                'background':'linear-gradient(to left,'+ that.gV.color.color1[0] + ',' + that.gV.color.color1[1] + ')'});
+                             }else if(type == "cashAssetRatio"){
+                                $("#assets-box .cashAssetRatio").css({'width':item.val+ 'px'});
+                                $("#assets-box .cashAssetRatio .shape").css({'width':item.val + 'px',
+                                'background':'linear-gradient(to left,'+ that.gV.color.color2[0] + ',' + that.gV.color.color2[1] + ')'});
+                             }else if(type == "bondAssetRatio"){
+                                $("#assets-box .bondAssetRatio").css({'width':item.val+ 'px'});
+                                $("#assets-box .bondAssetRatio .shape").css({'width':item + 'px',
+                                'background':'linear-gradient(to left,'+ that.gV.color.color3[0] + ',' + that.gV.color.color3[1] + ')'});
+                             }else if(type == "otherAssetRatio"){
+                                $("#assets-box .otherAssetRatio").css({'width':item.val+ 'px'});
+                                $("#assets-box .otherAssetRatio .shape").css({'width':item.val + 'px',
+                                'background':'linear-gradient(to left,'+ that.gV.color.color4[0] + ',' + that.gV.color.color4[1] + ')'});
+                             }
+                         })
+
+                    //    $("#assets-box .stockAssetRatio").css({'width':Number(data.stockAssetRatio)/100*assets_width+ 'px'});
+                     //   $("#assets-box .cashAssetRatio").css({'width':Number(data.cashAssetRatio)/100*assets_width + 'px'});
+                     //   $("#assets-box .bondAssetRatio").css({'width':Number(data.bondAssetRatio)/100*assets_width + 'px'});
+                    //    $("#assets-box .otherAssetRatio").css({'width':Number(data.otherAssetRatio)/100*assets_width+ 'px'});
+
+                    //    $("#assets-box .stockAssetRatio .shape").css({'width':Number(data.stockAssetRatio)/100*assets_width + 'px',
+                    //    'background':'linear-gradient(to left,'+ that.gV.color.color1[0] + ',' + that.gV.color.color1[1] + ')'});
+                    //    $("#assets-box .cashAssetRatio .shape").css({'width':Number(data.cashAssetRatio)/100*assets_width + 'px',
+                    //    'background':'linear-gradient(to left,'+ that.gV.color.color2[0] + ',' + that.gV.color.color2[1] + ')'});
+                    //    $("#assets-box .bondAssetRatio .shape").css({'width':Number(data.bondAssetRatio)/100*assets_width + 'px',
+                    //    'background':'linear-gradient(to left,'+ that.gV.color.color3[0] + ',' + that.gV.color.color3[1] + ')'});
+                    //    $("#assets-box .otherAssetRatio .shape").css({'width':Number(data.otherAssetRatio)/100*assets_width + 'px',
+                    //    'background':'linear-gradient(to left,'+ that.gV.color.color4[0] + ',' + that.gV.color.color4[1] + ')'});
 
 
                         // $("#assets-box .stockAssetRatio .shape").css({'width':Number(data.stockAssetRatio)/100*assets_width + 'px',
@@ -291,6 +312,14 @@ $(function() {
             }]
             $.ajaxLoading(obj);
         },
+        compare:function(property){
+            var that = this;
+            return function(a,b){
+                var value1 = a[property];
+                var value2 = b[property];
+                return value1 - value2;
+            }
+        },
         getHeavyData: function(t) {
             var that = this;
             var obj = [{
@@ -301,8 +330,16 @@ $(function() {
                 needDataEmpty: false,
                 callbackDone: function(json) {
                     var data = json.data.industryConfigRatioList;
-                    that.gV.heavyBar.barData = data;
-                    that.drawBar(data,"heavy-warehouse-box");
+                   // that.gV.heavyBar.barData = data;
+                   var newData = [];
+                   data.forEach(function(item){
+                       if(Number(item.industryNavRatio)>0){
+                           item.industryNavRatio =( Number (item.industryNavRatio)*100).toFixed(2);
+                           newData.push(item)
+                       }
+                   })
+                   that.gV.heavyBar.barData = newData
+                    that.drawBar(newData,"heavy-warehouse-box");
                     
                 },
                 callbackFail: function(json) {
@@ -322,15 +359,40 @@ $(function() {
                 callbackDone: function(json) {
                     var data = json.data;
                     var newData = [
-                        {"industryName":"同业存单比例","industryNavRatio":data.cdsRatio},
-                        {"industryName":"中期票据比例","industryNavRatio":data.mtnValueRatio},
-                        {"industryName":"短期融资券比例","industryNavRatio":data.cpValueRatio},
-                        {"industryName":"央行票据比例","industryNavRatio":data.ctrBankBillRatio},
-                        {"industryName":"企债比例","industryNavRatio":data.corpBondRatio},
-                        {"industryName":"可转债比例","industryNavRatio":data.covertBondRatio},
-                        {"industryName":"金融债比例","industryNavRatio":data.finanBondRatio},
-                        {"industryName":"国债比例","industryNavRatio":data.govBondRatio}
+                        //{"industryName":"同业存单比例","industryNavRatio":data.cdsRatio},
+                        //{"industryName":"中期票据比例","industryNavRatio":data.mtnValueRatio},
+                        //{"industryName":"短期融资券比例","industryNavRatio":data.cpValueRatio},
+                        //{"industryName":"央行票据比例","industryNavRatio":data.ctrBankBillRatio},
+                        //{"industryName":"企债比例","industryNavRatio":data.corpBondRatio},
+                        //{"industryName":"可转债比例","industryNavRatio":data.covertBondRatio},
+                        //{"industryName":"金融债比例","industryNavRatio":data.finanBondRatio},
+                        //{"industryName":"国债比例","industryNavRatio":data.govBondRatio}
                     ]
+                    if(Number(data.cdsRatio)>0){
+                        newData.push({"industryName":"同业存单比例","industryNavRatio":(Number(data.cdsRatio)*100).toFixed(2)})
+                    }
+                    if(Number(data.mtnValueRatio)>0){
+                        newData.push({"industryName":"中期票据比例","industryNavRatio":(Number(data.mtnValueRatio)*100).toFixed(2)})
+                    }
+                    if(Number(data.cpValueRatio)>0){
+                        newData.push({"industryName":"短期融资券比例","industryNavRatio":(Number(data.cpValueRatio)*100).toFixed(2)})
+                    }
+                    if(Number(data.ctrBankBillRatio)>0){
+                        newData.push({"industryName":"央行票据比例","industryNavRatio":(Number(data.ctrBankBillRatio)*100).toFixed(2)})
+                    }
+                    if(Number(data.corpBondRatio)>0){
+                        newData.push({"industryName":"企债比例","industryNavRatio":(Number(data.corpBondRatio)*100).toFixed(2)})
+                    }
+                    if(Number(data.covertBondRatio)>0){
+                        newData.push({"industryName":"可转债比例","industryNavRatio":(Number(data.covertBondRatio)*100).toFixed(2)})
+                    }
+                    if(Number(data.finanBondRatio)>0){
+                        newData.push({"industryName":"金融债比例","industryNavRatio":(Number(data.finanBondRatio)*100).toFixed(2)})
+                    }
+                    if(Number(data.govBondRatio)>0){
+                        newData.push({"industryName":"国债比例","industryNavRatio":(Number(data.govBondRatio)*100).toFixed(2)})
+                    }
+                   
                     that.drawBar(newData,"volume-distribution-box")
                     
                 },
@@ -412,10 +474,12 @@ $(function() {
             mui("body").on("mdClick", ".account-holdings .down", function() {
                 if($(this).hasClass('up')){
                     $(this).removeClass('up')
+                    that.gV.pageSize = 5
                 }else{
                     $(this).addClass('up')
+                    that.gV.pageSize = 100000
                 }
-                that.gV.pageSize = 100000
+               
                 that.getHoldData();
             },{
                 'htmdEvt': 'fundAccountDiagnosis_01'
@@ -433,34 +497,6 @@ $(function() {
                 that.getConditionsOfOrder();
             });
             
-                   //风测等级匹配成功
-                   mui("body").on('mdClick',".isRiskMatchBox_match",function(){
-                    $(".isRiskMatch_mask").hide();
-                    $(".isRiskMatchBox").hide();
-                    window.location.href = site_url.addAccountDiagnosisResult_url
-                 })
-   
-                //风险等级匹配失败
-                mui("body").on("mdClick",".isRiskMatchBox_cancel",function(){
-                    $(".isRiskMatch_mask").hide();
-                    $(".isRiskMatchBox").hide();
-                  // that.gV.isRiskMatchBox.hide();
-                })
-   
-                //风险等级匹配失败结果跳转
-                mui("body").on("mdClick",".isRiskMatchResult",function(){
-                    $(".isRiskMatch_mask").hide();
-                    $(".isRiskMatchBox").hide();
-                    var type = $(this).attr("type");
-                    if(type == "noRisk"){
-                        //未风测
-                        window.location.href = site_url.riskAppraisal_url + "?type=private"
-                    }else if(type == "repeatRisk"){
-                        //风测过期
-                        window.location.href = site_url.riskAppraisal_url + "?type=private"
-                    }
-                })
-
                    //认证
                    mui("body").on('mdClick', ".tips-li .tips-li-right", function (e) {
                     var type = $(this).parent().index()
@@ -515,6 +551,12 @@ $(function() {
                             break;
                     }
                 });
+
+                mui("body").on('mdClick',".icontips-close",function(){
+                  
+                    $("#tips-wrap").hide()
+                 
+                 })
         },
         //给饼图付渐变色
         getPieColor(val){
@@ -593,7 +635,11 @@ $(function() {
                     itemWidth: 14,  // 设置宽度
                     itemHeight: 8, // 设置高度
                     itemGap: 5,//设置间距
-                    x: '58%',
+                    textStyle:{
+                      fontSize:12,
+                      color:"##CA965F"
+                    },
+                    x: '55%',
                     y: '35%',
                     formatter: function (name) {
                         for (var i = 0; i < pieData.length; i++) {
@@ -616,7 +662,7 @@ $(function() {
                     {
                         name: '',
                         type: 'pie',
-                        radius: ['46%', '70%'],
+                        radius: ['46%', '60%'],
                         center: ['30%', '47%'],
                         avoidLabelOverlap: false,
                         hoverAnimation: false,
@@ -693,11 +739,14 @@ $(function() {
                 },
                 xAxis: {
                     type: 'value',
-                    boundaryGap: ["0%", "100%"],
+                    boundaryGap: ["0", "100%"],
                     axisTick:{show:false},
                     axisLabel:{
                         formatter:(val)=>{
-                            return val*100 +"%"
+                            if(val!=0){
+                                return val +"%"
+                            }
+                           
                         }
                     }
                 },

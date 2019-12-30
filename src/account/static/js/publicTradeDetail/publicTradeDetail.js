@@ -110,6 +110,7 @@ $(function () {
             var that = this;
             //普通产品展示再买一笔
             $('footer').removeClass('hide');
+            $(".tradeCon").css("padding-bottom", ".98rem")
             var obj = [{
                 url: site_url.pofTradeApplyInfo_api,
                 data: {
@@ -134,6 +135,7 @@ $(function () {
                         case "1":
                             //赎回
                             that.showFundStatus(false, json.data);
+                            $(".trade_status_area>.trade_status_item").eq(2).find(".trade_status_desc").html("预计到账时间")
                             break;
 
                         case "2":
@@ -174,12 +176,17 @@ $(function () {
                 //展示赎回信息区域
                 $('.redeem_info').removeClass('hide');
                 $('.redeem_info .item_1').html(model.fundName);//赎回产品
-                $('.redeem_info .item_2').html(model.confirmShares);//赎回份额
+                $('.redeem_info .item_2').html(model.confirmShares + ' 份');//赎回份额
                 $('.redeem_info .bank_icon').attr('src', model.bankThumbnailUrl);//到账银行卡icon
                 $('.redeem_info .item_3').html(that.getPayInfo(model.bankName, model.bankAccountMask));//到账银行卡描述
 //              $('.redeemOut').hide();//隐藏转出银行卡
-                $('.redeem_bank').hide();//隐藏转出银行卡
+                //$('.redeem_bank').hide();//隐藏转出银行卡
                 $('.redeem_info .item_4').html(model.tradeDate);//赎回时间
+
+                // 赎回成功，隐藏进度条
+                if(model.tradeStatus == 1) {
+                    $('.trade_status_area').addClass('hide');
+                }
             }
             
             /**
@@ -388,8 +395,8 @@ $(function () {
                     $('.trade_status_area .trade_status_date').eq(1).html("已基金公司公告为准");//第二步右边描述
                     $('.trade_status_area .trade_status_date').eq(2).html("基金成立次日");//第三步右边描述
                 } else {
-                    $('.trade_status_area .trade_status_date').eq(1).html(model.estimateConfirmDate + '前');//预计份额确认时间
-                    $('.trade_status_area .trade_status_date').eq(2).html(model.estimateArrivalDate + '前');//预计查看收益时间
+                    $('.trade_status_area .trade_status_date').eq(1).html(model.estimateConfirmDate + ' 24:00前');//预计份额确认时间
+                    $('.trade_status_area .trade_status_date').eq(2).html(model.estimateArrivalDate + ' 24:00前');//预计查看收益时间
                 }
             }
         },

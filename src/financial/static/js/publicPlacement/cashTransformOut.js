@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2019-11-26 14:42:56
- * @LastEditTime : 2019-12-27 13:54:04
+ * @LastEditTime : 2019-12-30 14:29:01
  * @LastEditors  : Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \htjf-app\src\financial\static\js\publicPlacement\cashTransformOut.js
@@ -100,21 +100,12 @@ $(function () {
          // 获取该账户的余额
 		 initParmes:function(){
 		   var that = this;
-			var obj =[{
-				url:site_url.pofGetAssetsCashList_api,
-				data:{
-					"fundCode":that.gv.fundCode,
-					"pageSize":10,
-					"pageCurrent": 1
-				},
-				callbackDone:function(json){
-					that.gv.transformTotalMoney = json.data.pageList[0].totalMoney;
-		   			that.gv.transformMoney = json.data.pageList[0].totalMoney;
-		   			that.$e.el_productName.html(that.gv.productName);
-		   			that.$e.el_transformInput.val(json.data.pageList[0].totalMoney);
-				}
-			}]
-			$.ajaxLoading(obj);
+		   var data = JSON.parse(sessionStorage.getItem("transformMessage"))?JSON.parse(sessionStorage.getItem("transformMessage")):"";
+		   that.gv.productName = data.productName;
+		   that.gv.fundCode = data.fundCode;
+		  // that.gv.transformTotalMoney = data.money;
+		   //that.gv.transformMoney = data.money;
+
 		 },
 		 findProtocolBasi:function(){
 			var that = this;
@@ -130,11 +121,11 @@ $(function () {
 						console.log("88888")
 						that.gv.ruleList = json.data;
 						that.$e.el_transformRule[0].textContent = that.gv.ruleList[2].title;
-		   that.$e.el_transformRule.attr("ruleId",that.gv.ruleList[2].id);
-		   that.$e.el_transformRule_icon.attr("ruleId",that.gv.ruleList[2].id);
+						that.$e.el_transformRule.attr("ruleId",that.gv.ruleList[2].id);
+						that.$e.el_transformRule_icon.attr("ruleId",that.gv.ruleList[2].id);
 
-		   that.$e.el_agreementRule[0].textContent = that.gv.ruleList[1].title;
-		   that.$e.el_agreementRule.attr('ruleId',that.gv.ruleList[1].id);
+						that.$e.el_agreementRule[0].textContent = that.gv.ruleList[1].title;
+						that.$e.el_agreementRule.attr('ruleId',that.gv.ruleList[1].id);
 					}
 				}
 			]
@@ -162,9 +153,9 @@ $(function () {
 						 var carNum = that.gv.cashList[i].bankAccountMask.substr(-4);
 						 that.gv.cashList[i].carNum = carNum;
 						 if(i == 0){
-							that.gv.cashList[i].checkStatu = that.gv.checkImgUrl; 
+							that.gv.cashList[i].checkStatu = true; 
 						 }else{
-							that.gv.cashList[i].checkStatu = ""
+							that.gv.cashList[i].checkStatu = false
 						 }
 
 					 }
@@ -177,8 +168,21 @@ $(function () {
 					 that.$e.el_defaultBankName[0].textContent =defaultCarData.bankName;
 					 that.$e.el_defaultBankImgUrl.attr("src",defaultCarData.bankThumbnailUrl);
 					 that.$e.el_defaultBankCode[0].textContent =defaultCarData.bankAccountMask.substr(-4);
-                     that.$e.el_singleNum[0].textContent = defaultCarData.availableShare;
+					 that.$e.el_singleNum[0].textContent = defaultCarData.availableShare;
+					 that.gv.transformTotalMoney = defaultCarData.availableShare;
+					 that.gv.transformMoney = defaultCarData.availableShare;
+					 that.$e.el_transformInput.val(that.gv.transformMoney);
 					 generateTemplate(that.gv.cashList, that.$e.TransferFundsContent, that.$e.templateTransferFunds);
+					 for(var i=0;i<$(".cashListConent .cashCheckItem").length;i++){
+						 if(i==0){
+							$(".cashListConent .cashCheckItem").eq(i).find(".radioCheckItemImg").show();
+						 }else{
+							$(".cashListConent .cashCheckItem").eq(i).find(".radioCheckItemImg").hide(); 
+						 }
+					 }
+					// $(".cashListConent .cashCheckItem").eq(0).find(".radioCheckItemImg").show();
+					//$(".cashListConent .cashCheckItem").not(0).find(".radioCheckItemImg").hide();
+                     
 				 }
 
 			 }];
@@ -293,14 +297,19 @@ $(function () {
            
 		   //银行卡单选
 		   mui("body").off("mdClick",".cashCheckItem").on('mdClick','.cashCheckItem',function(){
-			   $(this).find(".imgLogo").attr("src",that.gv.checkImgUrl);
-			   $(this).siblings().find(".imgLogo").attr("src","");
+			//   $(this).find(".imgLogo").attr("src",that.gv.checkImgUrl);
+			  // $(this).siblings().find(".imgLogo").attr("src","");
+			   $(this).find(".radioCheckItemImg").show();
+			   $(this).siblings().find(".radioCheckItemImg").hide();
 			   that.gv.defaultBankNo = $(this).attr("bankNo"); //默认银行代码
 			   that.gv.defaultBankAccount = $(this).attr("bankAccount"); //默认银行账号
 			   that.gv.defaultTradeAcco = $(this).attr("tradeAcco");  // 默认交易账号
 			   that.gv.defaultCapitalMode = $(this).attr("capitalMode"); // 默认资金方式
 			 
 			   that.$e.el_singleNum[0].textContent = $(this).attr('singleNum');
+			   that.gv.transformTotalMoney =  $(this).attr('singleNum');
+			    that.gv.transformMoney =  $(this).attr('singleNum');
+				that.$e.el_transformInput.val(that.gv.transformMoney);
 			   
 			   that.$e.el_defaultBankName[0].textContent = $(this).attr("bankName");
 			   that.$e.el_defaultBankImgUrl.attr("src",$(this).attr("bankLogoUrl"));

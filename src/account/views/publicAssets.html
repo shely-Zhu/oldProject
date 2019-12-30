@@ -163,7 +163,7 @@
     <script id="bankLists" type="text/x-handlebars-template">
         {{! 左侧页面列表}}
 		{{#each this}}
-        <div class="bank_screen bank_item" bankAccount='{{bankAccount}}'>
+        <div class="bank_screen bank_item" bankAccount='{{bankAccountSecret}}'>
             <div class="bank_screen_name fl">{{bankName}}{{get_last_4_value bankAccountMask}}</div>
             <span class="iconfont fr hide">&#xe626;</span>
         </div>
