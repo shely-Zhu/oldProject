@@ -472,6 +472,8 @@ var clickList = {
 	"transactionRecords_1":{ type:'click', evtid: 'transactionRecords_1', topic: '自选公募-交易记录_筛选列表内容的点击事件', info: ''},
 	"transactionRecords_2":{ type:'click', evtid: 'transactionRecords_2', topic: '自选公募-交易记录_点击列表跳转', info: ''},
 	
+	"superTransactionRecord_0":{ type:'click', evtid: 'superTransactionRecord_0', topic: '现金宝-交易记录_点击列表跳转', info: ''},
+
 	"seeSign_0": { type:'click', evtid: 'seeSign_0', topic: '查看已签署材料-点击查看pdf', info: ''},
 	/************************************** account end *************************************************/
 
