@@ -24,7 +24,7 @@ var financial = Mock.mock({
             endDate: "20190930",
             publishDate: "",
         },{
-            assetAllocationRatio: "0.00",
+            assetAllocationRatio: "16.30",
             assetType: "1110",
             assetTypeName: "股票",
             endDate: "20190930",
