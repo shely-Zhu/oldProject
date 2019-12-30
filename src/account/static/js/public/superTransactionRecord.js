@@ -82,11 +82,10 @@ $(function() {
                 wrap_template = Handlebars.compile(wrap_source),
                 wrap_html = wrap_template({ content: list_html });  //模板生成
             $.each(that.gV.navList, function(i, el) {
-                
-                that.gV.ajaxArr[el.num] = {
+                that.gV.ajaxArr[i] = {
 					fundCode:that.gV.aP.fundCode,//现金宝基金代码
 					tradeNo:that.gV.aP.tradeNo,
-                    applyType:i,   //请求类型
+                    applyType:el.num,   //请求类型
                     pageCurrent: that.gV.aP.pageCurrent, //当前第几页(默认为1) 非必填项, 默认设置成第一页
                     pageSize: that.gV.aP.pageSize, //每页显示几条数据(默认10) 非必填项， 默认设置成20
                 }
@@ -388,6 +387,35 @@ $(function() {
         },
         events: function() { //绑定事件
             var that = this;
+            //点击列表跳转
+            mui('body').on('mdClick', '.datalist', function () {
+                var applyId = $(this).attr('applyId');
+                var fundCombination = $(this).attr('fundCombination');
+                var fundCode = $(this).attr('fundCode');
+                var fundType = $(this).attr('fundType');
+                var fundBusinCode = $(this).attr('fundBusinCode');
+                var allotType = $(this).attr('allotType');
+                var fixbusinflag = $(this).attr('fixbusinflag');
+                var scheduledProtocolId = $(this).attr('scheduledProtocolId');
+                //分红需要传的
+                var shares = $(this).attr('shares')
+                var fundName = $(this).attr('fundName')
+                var applyDate = $(this).attr('applyDate')
+                var autoBuyDesc = $(this).attr('autoBuyDesc')
+                // pathdata 是 每个详情页 都需要传的参数
+                var pathdata = site_url.publicTradeDetail_url + '?applyId=' + applyId + '&fundCombination=' + fundCombination
+                + '&fundCode=' + fundCode + '&fundBusinCode=' + fundBusinCode + '&allotType=' + allotType
+                + '&fixbusinflag=' + fixbusinflag + '&fundType='+ fundType
+                if (allotType == 3) {
+                    window.location.href = pathdata + '&shares=' + shares + '&fundName=' + new Base64().encode(fundName)
+                        + '&applyDate=' + applyDate + '&autoBuyDesc=' + new Base64().encode(autoBuyDesc);
+                } else {
+                    window.location.href = pathdata + '&scheduledProtocolId=' + scheduledProtocolId;
+                    
+                }
+            },{
+                'htmdEvt': 'superTransactionRecord_0'
+            });
         }
     };
     data.init();

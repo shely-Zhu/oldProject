@@ -48,7 +48,7 @@
  
 	 <script id="second-template" type="text/x-handlebars-template">
 	 {{! 左侧页面列表}}  {{#each pageList}}
-	 <div class="datalist">
+	 <div class="datalist" applyId="{{allotNo}}" fundCombination="{{fundCombination}}" fundCode="{{fundCode}}" fundType="{{fundType}}" fundBusinCode="{{fundBusinCode}}" allotType="{{applyType}}" fixbusinflag="{{fixbusinflag}}" scheduledProtocolId="{{scheduledProtocolId}}" shares="{{shares}}" fundName="{{fundName}}" applyDate="{{originalDate}}" autoBuyDesc="{{autoBuyDesc}}">
 		 <div class="first">
 			 <div class="tit">{{fundName}}</div>
 			 <div class="mon">
