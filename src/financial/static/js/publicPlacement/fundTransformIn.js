@@ -734,7 +734,7 @@ $(function () {
 					htmdEvtYes:'fundTransformIn_19',  // 埋点确定按钮属性
 					zIndex: 100,
 				});
-			}{
+			},{
 				htmdEvt: 'fundTransformIn_20'
 			})
 
