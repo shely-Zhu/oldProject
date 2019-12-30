@@ -50,6 +50,9 @@ var gulp = require('gulp'),
     
     // var prefix = 'http://172.16.187.170:8008';
 
+// var webpackStream = require('webpack-stream');
+// var named = require('vinyl-named')
+
 for (var i in webpackList) {
     webpackList[i] = webpackList[i].replace('/src/', '/middle/js/')
 }
@@ -569,9 +572,15 @@ gulp.task("webpack", ['jsCpd', 'changePath', 'commonHtml'], function(cb) {
 
     //测试环境
     pump([
-        gulp.src(['src/**/*.js']),
+
+        // gulp.src( ['src/**/*.js', '!src/common/**/*.js', '!src/newCommon/**/*.js', '!src/include/js/vendor/**/*.js', '!src/allServerResources/include/js/vendor/**/*.js']),
+
+        // named(), 
+        gulp.src( ['src/**/*.js'] ),
 
         plugins.webpack(webpackConfig),
+        
+        // webpackStream(webpackConfig),
 
         // plugins.babel({
         //     compact: false,
@@ -594,10 +603,10 @@ gulp.task("webpack", ['jsCpd', 'changePath', 'commonHtml'], function(cb) {
         //预上线环境时，去掉Log并压缩
         plugins.if(options.env === '3' || options.env === '4', plugins.removelogs()),
 
-        // plugins.if(options.env === '3' || options.env === '4', plugins.uglify({ //压缩
-        //     mangle: false, //类型：Boolean 默认：true 是否修改变量名
-        //     compress: false
-        // })),
+        plugins.if(options.env === '3' || options.env === '4', plugins.uglify({ //压缩
+            mangle: false, //类型：Boolean 默认：true 是否修改变量名
+            compress: false
+        })),
 
         //与host.path中的内容做比对,
         plugins.changed(host.path, { hasChanged: plugins.changed.compareSha1Digest }),
@@ -645,13 +654,13 @@ gulp.task("allServerResourcesIncludeRoot", function( cb ) {
 
         plugins.if(isWatch, plugins.debug({ title: 'js-有变动的文件:' })),
 
-        //  plugins.if(options.env === '3' || options.env === '4', plugins.uglify({ //压缩
-        //     mangle: false, //类型：Boolean 默认：true 是否修改变量名
-        //     compress: false, //类型：Boolean 默认：true 是否完全压缩
-        //     output: {
-        //         beautify: true //只去注释，不压缩成一行
-        //     }
-        // })))
+        plugins.if(options.env === '3' || options.env === '4', plugins.uglify({ //压缩
+            mangle: false, //类型：Boolean 默认：true 是否修改变量名
+            compress: false, //类型：Boolean 默认：true 是否完全压缩
+            output: {
+                beautify: true //只去注释，不压缩成一行
+            }
+        })),
 
         //对root.js做一些修改
         
@@ -714,13 +723,13 @@ gulp.task("allServerResourcesInclude", ['allServerResourcesIncludeRoot'],  funct
 
         plugins.if(isWatch, plugins.debug({ title: 'js-有变动的文件:' })),
 
-        //  plugins.if(options.env === '3' || options.env === '4', plugins.uglify({ //压缩
-        //     mangle: false, //类型：Boolean 默认：true 是否修改变量名
-        //     compress: false, //类型：Boolean 默认：true 是否完全压缩
-        //     output: {
-        //         beautify: true //只去注释，不压缩成一行
-        //     }
-        // })))
+        plugins.if(options.env === '3' || options.env === '4', plugins.uglify({ //压缩
+            mangle: false, //类型：Boolean 默认：true 是否修改变量名
+            compress: false, //类型：Boolean 默认：true 是否完全压缩
+            output: {
+                beautify: true //只去注释，不压缩成一行
+            }
+        })),
 
         plugins.rev(),
 
@@ -760,13 +769,13 @@ gulp.task("includeRoot", function( cb ) {
 
         plugins.if(isWatch, plugins.debug({ title: 'js-有变动的文件:' })),
 
-        //  plugins.if(options.env === '3' || options.env === '4', plugins.uglify({ //压缩
-        //     mangle: false, //类型：Boolean 默认：true 是否修改变量名
-        //     compress: false, //类型：Boolean 默认：true 是否完全压缩
-        //     output: {
-        //         beautify: true //只去注释，不压缩成一行
-        //     }
-        // })))
+        plugins.if(options.env === '3' || options.env === '4', plugins.uglify({ //压缩
+            mangle: false, //类型：Boolean 默认：true 是否修改变量名
+            compress: false, //类型：Boolean 默认：true 是否完全压缩
+            output: {
+                beautify: true //只去注释，不压缩成一行
+            }
+        })),
 
         //对root.js做一些修改
         
@@ -795,7 +804,7 @@ gulp.task("includeRoot", function( cb ) {
         //打版本号
         plugins.rev(),
 
-        gulp.dest(host.path + 'include/'),
+        gulp.dest(host.path + 'include/js/vendor'),
 
         plugins.rev.manifest(),
 
@@ -832,13 +841,13 @@ gulp.task("includeJs", ['allServerResourcesInclude', 'includeRoot'], function( c
 
         plugins.if(isWatch, plugins.debug({ title: 'js-有变动的文件:' })),
 
-        // plugins.if(options.env === '3' || options.env === '4', plugins.uglify({ //压缩
-        //     mangle: false, //类型：Boolean 默认：true 是否修改变量名
-        //     compress: false, //类型：Boolean 默认：true 是否完全压缩
-        //     output: {
-        //         beautify: true //只去注释，不压缩成一行
-        //     }
-        // })))
+        plugins.if(options.env === '3' || options.env === '4', plugins.uglify({ //压缩
+            mangle: false, //类型：Boolean 默认：true 是否修改变量名
+            compress: false, //类型：Boolean 默认：true 是否完全压缩
+            output: {
+                beautify: true //只去注释，不压缩成一行
+            }
+        })),
 
         
         plugins.rev(),
@@ -857,24 +866,6 @@ gulp.task("includeJs", ['allServerResourcesInclude', 'includeRoot'], function( c
         }),
 
         gulp.dest( host.path + 'rev/include/js')
-
-    ], cb)
-})
-
-
-/************所有js用babel编译*************/
-gulp.task("babel", function(cb) {
-
-    pump([
-        gulp.src([ host.path + '**/*.js']),
-
-        // plugins.babel({
-        //     compact: false,
-        //     presets: ['env'],
-        //     plugins: ['transform-runtime']
-        // }),
-
-        gulp.dest( 'middle/babel/' )
 
     ], cb)
 })
