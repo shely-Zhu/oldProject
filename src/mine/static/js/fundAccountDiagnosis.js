@@ -210,10 +210,10 @@ $(function() {
                         that.gV.pie.pieData.push({name: '商品型',value:(Number (data.goodsRatio)*100).toFixed(2),itemStyle:that.getPieColor('goodsRatio'),})
                     }
                     if(!!data.currencyRatio&&Number(data.currencyRatio)!=0){
-                        that.gV.pie.pieData.push({name: '另类投资型',value:(Number (data.currencyRatio)*100).toFixed(2),itemStyle:that.getPieColor('alternativeInvestRatio'),})
+                        that.gV.pie.pieData.push({name: '投资型',value:(Number (data.currencyRatio)*100).toFixed(2),itemStyle:that.getPieColor('alternativeInvestRatio'),})
                     }
                     if(!!data.currencyRatio&&Number(data.currencyRatio)!=0){
-                        that.gV.pie.pieData.push({name: '货币市场型',value:(Number (data.currencyRatio)*100).toFixed(2),itemStyle:that.getPieColor('currencyRatio'),})
+                        that.gV.pie.pieData.push({name: '市场型',value:(Number (data.currencyRatio)*100).toFixed(2),itemStyle:that.getPieColor('currencyRatio'),})
                     }
                    
                    that.drawCircle()
@@ -240,19 +240,59 @@ $(function() {
                         $("#assets-box .bondAssetRatio .num").html(Number(data.bondAssetRatio).toFixed(2) + '%')
                         $("#assets-box .otherAssetRatio .num").html(Number(data.otherAssetRatio).toFixed(2) + '%')
                         var assets_width = $("#assets-box").width();
-                        $("#assets-box .stockAssetRatio").css({'width':Number(data.stockAssetRatio)/100*assets_width+ 'px'});
-                        $("#assets-box .cashAssetRatio").css({'width':Number(data.cashAssetRatio)/100*assets_width + 'px'});
-                        $("#assets-box .bondAssetRatio").css({'width':Number(data.bondAssetRatio)/100*assets_width + 'px'});
-                        $("#assets-box .otherAssetRatio").css({'width':Number(data.otherAssetRatio)/100*assets_width+ 'px'});
+                        var arr = [
+                            {key:'stockAssetRatio',val:Number(data.stockAssetRatio)/100*assets_width},
+                            {key:'cashAssetRatio',val:Number(data.cashAssetRatio)/100*assets_width},
+                            {key:'bondAssetRatio',val:Number(data.bondAssetRatio)/100*assets_width},
+                            {key:'otherAssetRatio',val:Number(data.otherAssetRatio)/100*assets_width},
+                        ] 
+                         var newArr = arr.sort(that.compare('val'));
+                         console.log("8888",newArr);
+                         var num = 0;
+                         newArr.forEach(function(item){
+                             if(item.val<42){
+                                 var chaNum = item.val -42;
+                                 num = num + chaNum
+                                 item.val = 42;
+                             }
+                         })
+                         newArr[newArr.length - 1].val = newArr[newArr.length - 1].val + num;
+                         console.log("898",newArr)
 
-                        $("#assets-box .stockAssetRatio .shape").css({'width':Number(data.stockAssetRatio)/100*assets_width + 'px',
-                        'background':'linear-gradient(to left,'+ that.gV.color.color1[0] + ',' + that.gV.color.color1[1] + ')'});
-                        $("#assets-box .cashAssetRatio .shape").css({'width':Number(data.cashAssetRatio)/100*assets_width + 'px',
-                        'background':'linear-gradient(to left,'+ that.gV.color.color2[0] + ',' + that.gV.color.color2[1] + ')'});
-                        $("#assets-box .bondAssetRatio .shape").css({'width':Number(data.bondAssetRatio)/100*assets_width + 'px',
-                        'background':'linear-gradient(to left,'+ that.gV.color.color3[0] + ',' + that.gV.color.color3[1] + ')'});
-                        $("#assets-box .otherAssetRatio .shape").css({'width':Number(data.otherAssetRatio)/100*assets_width + 'px',
-                        'background':'linear-gradient(to left,'+ that.gV.color.color4[0] + ',' + that.gV.color.color4[1] + ')'});
+                         newArr.forEach(function(item){
+                             var type = item.key;
+                             if(type == "stockAssetRatio"){
+                                $("#assets-box .stockAssetRatio").css({'width':item.val+ 'px'});
+                                $("#assets-box .stockAssetRatio .shape").css({'width':item.val + 'px',
+                                'background':'linear-gradient(to left,'+ that.gV.color.color1[0] + ',' + that.gV.color.color1[1] + ')'});
+                             }else if(type == "cashAssetRatio"){
+                                $("#assets-box .cashAssetRatio").css({'width':item.val+ 'px'});
+                                $("#assets-box .cashAssetRatio .shape").css({'width':item.val + 'px',
+                                'background':'linear-gradient(to left,'+ that.gV.color.color2[0] + ',' + that.gV.color.color2[1] + ')'});
+                             }else if(type == "bondAssetRatio"){
+                                $("#assets-box .bondAssetRatio").css({'width':item.val+ 'px'});
+                                $("#assets-box .bondAssetRatio .shape").css({'width':item + 'px',
+                                'background':'linear-gradient(to left,'+ that.gV.color.color3[0] + ',' + that.gV.color.color3[1] + ')'});
+                             }else if(type == "otherAssetRatio"){
+                                $("#assets-box .otherAssetRatio").css({'width':item.val+ 'px'});
+                                $("#assets-box .otherAssetRatio .shape").css({'width':item.val + 'px',
+                                'background':'linear-gradient(to left,'+ that.gV.color.color4[0] + ',' + that.gV.color.color4[1] + ')'});
+                             }
+                         })
+
+                    //    $("#assets-box .stockAssetRatio").css({'width':Number(data.stockAssetRatio)/100*assets_width+ 'px'});
+                     //   $("#assets-box .cashAssetRatio").css({'width':Number(data.cashAssetRatio)/100*assets_width + 'px'});
+                     //   $("#assets-box .bondAssetRatio").css({'width':Number(data.bondAssetRatio)/100*assets_width + 'px'});
+                    //    $("#assets-box .otherAssetRatio").css({'width':Number(data.otherAssetRatio)/100*assets_width+ 'px'});
+
+                    //    $("#assets-box .stockAssetRatio .shape").css({'width':Number(data.stockAssetRatio)/100*assets_width + 'px',
+                    //    'background':'linear-gradient(to left,'+ that.gV.color.color1[0] + ',' + that.gV.color.color1[1] + ')'});
+                    //    $("#assets-box .cashAssetRatio .shape").css({'width':Number(data.cashAssetRatio)/100*assets_width + 'px',
+                    //    'background':'linear-gradient(to left,'+ that.gV.color.color2[0] + ',' + that.gV.color.color2[1] + ')'});
+                    //    $("#assets-box .bondAssetRatio .shape").css({'width':Number(data.bondAssetRatio)/100*assets_width + 'px',
+                    //    'background':'linear-gradient(to left,'+ that.gV.color.color3[0] + ',' + that.gV.color.color3[1] + ')'});
+                    //    $("#assets-box .otherAssetRatio .shape").css({'width':Number(data.otherAssetRatio)/100*assets_width + 'px',
+                    //    'background':'linear-gradient(to left,'+ that.gV.color.color4[0] + ',' + that.gV.color.color4[1] + ')'});
 
 
                         // $("#assets-box .stockAssetRatio .shape").css({'width':Number(data.stockAssetRatio)/100*assets_width + 'px',
@@ -271,6 +311,14 @@ $(function() {
                 }
             }]
             $.ajaxLoading(obj);
+        },
+        compare:function(property){
+            var that = this;
+            return function(a,b){
+                var value1 = a[property];
+                var value2 = b[property];
+                return value1 - value2;
+            }
         },
         getHeavyData: function(t) {
             var that = this;
@@ -585,7 +633,11 @@ $(function() {
                     itemWidth: 14,  // 设置宽度
                     itemHeight: 8, // 设置高度
                     itemGap: 5,//设置间距
-                    x: '58%',
+                    textStyle:{
+                      fontSize:12,
+                      color:"##CA965F"
+                    },
+                    x: '55%',
                     y: '35%',
                     formatter: function (name) {
                         for (var i = 0; i < pieData.length; i++) {
@@ -608,7 +660,7 @@ $(function() {
                     {
                         name: '',
                         type: 'pie',
-                        radius: ['46%', '70%'],
+                        radius: ['46%', '60%'],
                         center: ['30%', '47%'],
                         avoidLabelOverlap: false,
                         hoverAnimation: false,
