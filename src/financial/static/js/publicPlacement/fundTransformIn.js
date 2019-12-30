@@ -59,7 +59,8 @@ $(function () {
 			password: "",
 			tradeAcco: ''  ,//交易账号
 			singleNum:0,   //单日限额
-			fundOrBank:'',  // 在线支付中  银行卡支付 1   基金支付  2   
+			fundOrBank:'',  // 在线支付中  银行卡支付 1   基金支付  2 
+			bugFundName:"", //在线支付为 基金支付时 的基金名称
 			enableAmount:0,  //选择基金支付 可用余额 
 			accountType:null,   //客户类型  0-机构 1-个人
 			doubleClickStatus:false
@@ -135,7 +136,13 @@ $(function () {
 						that.$el.brforre15Date.html(data.g2gafter15tradeDate)
 						that.gV.fundName = data.secuSht
 						that.gV.fundCode = data.trdCode
-						that.gV.discount = Number(data.discount);
+						if(!!data.discount){
+							//有费率
+							that.gV.discount = Number(data.discount);
+						}else{
+							that.gV.discount = ""
+						}
+						
 						that.gV.feeRateList = data.fundPurchaseFeeRate.detailList;
 						that.gV.fundStatus = data.fundStatus;
 						if(data.invTypCom == 10800){
@@ -326,10 +333,16 @@ $(function () {
 					
 					var data = [] ;
 					data = json.data;
-					
+					debugger
 					if(json.status == '0000'){
-					   window.location.href = site_url.pofSurelyResultsDetail_url + '?applyId=' + data.allotNo + '&fundBusinCode=' + 
-					   that.gV.fundBusinCode + "&fundCode=" + that.gV.fundCode + "&payType=" +that.gV.payType + '&flag=buy';
+						if(!!that.gV.bugFundName){
+							window.location.href = site_url.pofSurelyResultsDetail_url + '?applyId=' + data.allotNo + '&fundBusinCode=' + 
+							that.gV.fundBusinCode + "&fundCode=" + that.gV.fundCode + "&payType=" +that.gV.payType + '&flag=buy'+'&bugFundName='+encodeURI(that.gV.bugFundName);
+						}else{
+							window.location.href = site_url.pofSurelyResultsDetail_url + '?applyId=' + data.allotNo + '&fundBusinCode=' + 
+							that.gV.fundBusinCode + "&fundCode=" + that.gV.fundCode + "&payType=" +that.gV.payType + '&flag=buy'+'&bugFundName=false'
+						}
+					  
 					}
 				},
 				callbackNoData:function(json){
@@ -415,15 +428,22 @@ $(function () {
 				value = Number(val)
 				str = that.gV.purchaseRate + '元'
 			}else{
-				if(Number(that.gV.discount)/100 == 1){
-					str = value + '元' +'(' + (that.gV.purchaseRate).toFixed(2) + '%)'
+				if(!!that.gV.discount){
+					//有费率
+					if(Number(that.gV.discount)/100 == 1){
+						str = value + '元' +'(' + (that.gV.purchaseRate).toFixed(2) + '%)'
+					}else{
+						var rate = that.gV.purchaseRate * that.gV.discount/100
+						value = (Number(val)*(1-1/(1 + Number(rate)))).toFixed(2)
+						value2 = (Number(val)*(1-1/(1 + that.gV.purchaseRate))).toFixed(2)
+						discountMount = (Number(value2) - Number(value)).toFixed(2)
+						str = value + '元&nbsp;' + '(<span class="line-rate">' + that.gV.purchaseRate*100 + '%</span>&nbsp;&nbsp;' + (rate*100).toFixed(2) + '%)省<span class="discount">' + discountMount + '</span>元'
+					}
 				}else{
-					var rate = that.gV.purchaseRate * that.gV.discount/100
-					value = (Number(val)*(1-1/(1 + Number(rate)))).toFixed(2)
-					value2 = (Number(val)*(1-1/(1 + that.gV.purchaseRate))).toFixed(2)
-					discountMount = (Number(value2) - Number(value)).toFixed(2)
-					str = value + '元&nbsp;' + '(<span class="line-rate">' + that.gV.purchaseRate*100 + '%</span>&nbsp;&nbsp;' + (rate*100).toFixed(2) + '%)省<span class="discount">' + discountMount + '</span>元'
+					 //无费率
+					 str = Number(val)*that.gV.purchaseRate+"元&nbsp;"+'(<span>' + that.gV.purchaseRate*100 + '%</span>)'
 				}
+				
 				
 				 
 			}
@@ -518,6 +538,7 @@ $(function () {
 				}else{
 					that.gV.bankAccountSecret = $(this).attr('bankAccoutEncrypt');
 					that.gV.enableAmount = $(this).attr('enableAmount')
+					that.gV.bugFundName = $(this).attr('fundName');
 					data.push({
 						// bankThumbnailUrl:$(this).attr('bankThumbnailUrl'),
 						fundName:$(this).attr('fundName'),
@@ -678,7 +699,6 @@ $(function () {
 			mui("body").on('mdClick','.goPreview',function(){
 				var link = $(this).attr('datalink')
 				var typInfo = $(this).attr('type') == '1' ? '基金合同' : '招募说明书'
-				debugger
 				window.location.href = link +'&fileName=' + new Base64().encode(typInfo)
 			}, {
 				htmdEvt: 'fundTransformIn_17'
@@ -698,6 +718,8 @@ $(function () {
 			//返回按钮
 			mui("mui").on("mdClick","#goBack",function(){
 				history.go(-1)
+			},{
+				htmdEvt: 'fundTransformIn_21'
 			})
 
 			//风险揭示函
@@ -709,8 +731,11 @@ $(function () {
 					title: tital,
 					p: '<p>' + value + '</p>',
 					buttonTxt: '知道了',
+					htmdEvtYes:'fundTransformIn_19',  // 埋点确定按钮属性
 					zIndex: 100,
 				});
+			},{
+				htmdEvt: 'fundTransformIn_20'
 			})
 
 

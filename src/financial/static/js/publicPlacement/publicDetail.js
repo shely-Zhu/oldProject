@@ -30,6 +30,7 @@ $(function () {
     var fundCode
     var regard = {
         gV: {
+            fundBusinCode: '022',
             json: {},
             type: '1',//'1'七年 '2'万份
             time: 1,// 1月份 3 季度 6半年 12 一年 0成立以来
@@ -52,6 +53,7 @@ $(function () {
             isRiskMatchBoxNoMatch:$(".isRiskMatchBox_noMatch"),
             isRiskMatchBoxHeader:$(".isRiskMatchBox_header"),
             singleaAuthenType:"",  //认证类型  买入into  定投 investement
+            discountStatus:"", //有无费率
         },
         fundType: splitUrl['fundType'] == '10300' ? 1 : 0, //10300 货币基金类型，其余为普通基金类型
         init: function () {
@@ -89,6 +91,11 @@ $(function () {
                     if(that.gV.json.annYldRat > 0){
                         that.gV.json.annYldRat_s  = '+' + that.gV.json.annYldRat.toFixed(2)
                     }
+                    that.gV.json.tradeLimitList.forEach(function(item){
+                        if(item.fundBusinCode == that.gV.fundBusinCode){
+                            that.gV.json.minValue = item.minValue
+                        }
+                    })
                     var tplm = $("#dataLists").html();
                     var template = Handlebars.compile(tplm);
                     that.changeVal('annYldRat', 4)
@@ -107,6 +114,11 @@ $(function () {
                         that.gV.json.tradeLimitFlag2 = false
                     }
                     var html = template(that.gV.json); (html, "00");
+                    if(!that.gV.json.discount){
+                        that.gV.discountStatus = false
+                    }else{
+                        that.gV.discountStatus = true
+                    }
                     
                     $(".tplBox").html(html);
                     that.getFundCollectionInit()
@@ -131,7 +143,12 @@ $(function () {
                     $("#HeadBarpathName").html("<span>"+that.gV.json.secuSht+"</span>"+"</br><span>"+that.gV.json.trdCode+"</span>");
                     var saleFee = json.data.fundPurchaseFeeRate.detailList[0].fundFeeRate;
                     var discount = Number(json.data.fundPurchaseFeeRate.detailList[0].fundFeeRate.split("%")[0])*json.data.discount/100 + '%'
-                    $(".divider-top").html(json.data.purSt + '、' + json.data.redemSt + '、' + '买入费率' + '(<span class="line-rate">' + saleFee + '</span>' + ' <span class="discount">' + discount + '</span>)')
+                    if(that.gV.discountStatus){
+                        $(".divider-top").html(json.data.purSt + '、' + json.data.redemSt + '、' + '买入费率' + '(<span class="line-rate">' + saleFee + '</span>' + ' <span class="discount">' + discount + '</span>)')
+                    }else{
+                        $(".divider-top").html(json.data.purSt + '、' + json.data.redemSt + '、' + '买入费率' + '(<span>' + saleFee + '</span>)')
+                    }
+                 
                     
                     //定投按钮的展示问题
                     var supportFixedFlag = that.gV.json.supportFixedFlag;
@@ -416,7 +433,7 @@ $(function () {
             });
 
              //风测等级匹配成功
-             mui("body").on('mdClick',".isRiskMatchBox_match",function(){
+            mui("body").on('mdClick',".isRiskMatchBox_match",function(){
                  var type = that.gV.singleaAuthenType;
                  $(".isRiskMatch_mask").hide();
                  $(".isRiskMatchBox").hide();
@@ -436,17 +453,21 @@ $(function () {
                     }
 
                 }
-             })
+            },{
+                htmdEvt: 'publicDetail_15'
+            })
 
-             //风险等级匹配失败
-             mui("body").on("mdClick",".isRiskMatchBox_cancel",function(){
+            //风险等级匹配失败
+            mui("body").on("mdClick",".isRiskMatchBox_cancel",function(){
                 $(".isRiskMatch_mask").hide();
-                 $(".isRiskMatchBox").hide();
+                $(".isRiskMatchBox").hide();
                // that.gV.isRiskMatchBox.hide();
-             })
+            },{
+                htmdEvt: 'publicDetail_16'
+            })
 
              //风险等级匹配失败结果跳转
-             mui("body").on("mdClick",".isRiskMatchResult",function(){
+            mui("body").on("mdClick",".isRiskMatchResult",function(){
                 $(".isRiskMatch_mask").hide();
                 $(".isRiskMatchBox").hide();
                 var type = $(this).attr("type");
@@ -458,8 +479,9 @@ $(function () {
                     window.location.href = site_url.riskAppraisal_url + "?type=private"
                 }
                
-             })
-
+            },{
+                htmdEvt: 'publicDetail_17'
+            })
 
             // 七日年华 万份收益
             mui("body").on('mdClick', "#redeemNav .navSpan ", function (e) {
@@ -495,11 +517,11 @@ $(function () {
                 htmdEvt: 'publicDetail_11'
             });
             //人工服务
-            mui("body").on('mdClick', ".customerService", function (e) {
-                window.location.href = 'http://zxkf.chtwm.com/webchat/jsp/standard/interfacePools.jsp?queue=105&device=mobile'
-            },{
-                htmdEvt: 'publicDetail_12'
-            });
+            // mui("body").on('mdClick', ".customerService", function (e) {
+            //     window.location.href = 'http://zxkf.chtwm.com/webchat/jsp/standard/interfacePools.jsp?queue=105&device=mobile'
+            // },{
+            //     htmdEvt: 'publicDetail_12'
+            // });
             //分享  -- 跳往原生页面
             mui("body").on('mdClick', ".share_area", function (e) {
                 var shareObj = {

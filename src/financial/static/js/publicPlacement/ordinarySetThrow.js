@@ -11,13 +11,14 @@ require('@pathCommonJs/ajaxLoading.js');
 
 require('@pathIncludJs/vendor/mui/mui.picker.min.js');
 require('@pathCommonJs/components/elasticLayer.js');
-require('@pathCommonJs/components/headBarConfig.js');
+// require('@pathCommonJs/components/headBarConfig.js');
 var splitUrl = require('@pathCommonJs/components/splitUrl.js')();
 require('@pathCommonCom/elasticLayer/transOutRule/transOutRule.js');
 var popPicker = require('@pathCommonJsCom/popPicker.js');
 var generateTemplate = require('@pathCommonJsComBus/generateTemplate.js');
 
 var payPass = require('@pathCommonJsCom/payPassword.js');
+//var getCookie = require('@pathNewCommonJsCom/getCookie.js');
 
 $(function () {
 
@@ -42,7 +43,7 @@ $(function () {
 		gV: { // 全局变量
 			//------add-----
 			fundBusinCode:'039',
-			custType:sessionStorage.getItem('custType') ? sessionStorage.getItem('custType') : '1',   // 交易来源
+			//custType:getCookie('custType') ? getCookie('custType') : '1',   // 交易来源
 			scheduledProtocolId: splitUrl['scheduledProtocolId'] ? splitUrl['scheduledProtocolId'] : '201911270201',
 			type: splitUrl['type'] ? splitUrl['type'] : 'edit', // add添加  edit 编辑
 			//type:"add",
@@ -833,9 +834,11 @@ $(function () {
 				htmdEvt: 'ordinarySetThrow_01'
 			}) 
 			//返回按钮
-			mui("mui").on("mdClick","#goBack",function(){
-				history.go(-1)
-			})
+			// mui("mui").on("mdClick","#goBack",function(){
+			// 	history.go(-1)
+			// },{
+			// 	htmdEvt: 'ordinarySetThrow_20'
+			// })
 
 			mui("body").on('mdClick','.popup-close',function(){
 				$('.popup').css('display','none')

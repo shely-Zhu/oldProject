@@ -6,7 +6,7 @@ require('@pathCommonBase/base.js');
 // require('@pathCommonJsCom/utils.js');
 require('@pathCommonJs/ajaxLoading.js');
 
-require('@pathCommonJsCom/headBarConfig.js');
+// require('@pathCommonJsCom/headBarConfig.js');
 
 require('@pathCommonJs/components/authenticationProcess.js');
 
@@ -49,7 +49,7 @@ $(function() {
             isRiskEndure: '', // 是否风险测评 0-否 1-是
             endurePubIsold: '', // 公募风险评测是否过期 0:否 1:是
             endurePriIsold: '', // 私募风险测评是否过期0:否 1:是 
-            accreditedInvestor:'',  //合格投资者【空-未做过】【0-未通过】【1-已通过】【2-已过期】
+            isSatisfied:'',  //合格投资者认证是否满足，需要给app携带
             isOpenWealth:"1",//是否开通财富账户。0未开通，1已开通
             qrnhWfsy: {
                 oneMonth: {},
@@ -137,7 +137,7 @@ $(function() {
                         $('.priceLimit').removeClass('hide');
                         // 单位净值
                         if (jsonData.unitNetValue == null || jsonData.unitNetValue == "" || jsonData.unitNetValue == undefined) {
-                            $('.netValue').html('--')
+                            $('.netValue').html('1.0000')
                         } else {
                             $('.netValue').html(jsonData.unitNetValue);
                         }
@@ -415,9 +415,7 @@ $(function() {
                 url: site_url.queryUserAuthInfo_api,
                 data: {
                     hmac: "", //预留的加密信息     
-                    params: {
-                        //uuid: sessionStorage.getItem('uuid') //'EE7CA9386715CBF3BAB30CD479697D72' //sessionStorage.getItem('uuid') //客户Id,打开登录页面链接带过来的参数uuid
-                    }
+                    params: {}
                 },
                 needLogin: true,
                 // async: false, //同步
@@ -470,7 +468,7 @@ $(function() {
                     
                 },
                 callbackNoData: function(json) {
-                    tipAction(json.message);
+                    // tipAction(json.message);
                     $(".performanceComparison").hide()
                 },
                 callbackFail: function(json) {
@@ -927,6 +925,9 @@ $(function() {
                         if (v.conditionType == 1 && !v.isSatisfied) { //财富账户是否开通，需要给app携带，0未开通，1开通
                             that.data.isOpenWealth = 0;
                         }
+                        if (v.conditionType == 5 && !v.isSatisfied) { //合格投资者认证是否满足，需要给app携带
+                            that.data.isSatisfied = v.isSatisfied
+                        }
                         if (v.conditionType == 6 && !!v.isPopup) { //是否弹出期限不符弹框
                             isRiskPopup = v.isPopup;
                         }
@@ -959,6 +960,8 @@ $(function() {
                                         p: '请您先开通恒天账户',
                                         yesTxt: '确认',
                                         celTxt: "取消",
+                                        htmdEvtYes:'privatePlacementDetail_14',  // 埋点确定按钮属性
+                                        htmdEvtCel:'privatePlacementDetail_15',  // 埋点取消按钮属性
                                         zIndex: 6001,
                                         callback: function(t) {
                                             window.location.href =that.$e.realLi.eq(0).find(".tips-li-right").attr("jumpUrl")  
@@ -975,6 +978,8 @@ $(function() {
                                     p: '机构客户需联系您的理财师，进行线下开户',
                                     yesTxt: '确认',
                                     celTxt: "取消",
+                                    htmdEvtYes:'privatePlacementDetail_16',  // 埋点确定按钮属性
+                                    htmdEvtCel:'privatePlacementDetail_17',  // 埋点取消按钮属性
                                     zIndex: 100,
                                     callback: function(t) {}
                                 };
@@ -988,6 +993,8 @@ $(function() {
                                     p: '机构客户完善资料请联系您的理财师',
                                     yesTxt: '确认',
                                     celTxt: "取消",
+                                    htmdEvtYes:'privatePlacementDetail_18',  // 埋点确定按钮属性
+                                    htmdEvtCel:'privatePlacementDetail_19',  // 埋点取消按钮属性
                                     zIndex: 100,
                                     callback: function(t) {}
                                 };
@@ -1008,6 +1015,8 @@ $(function() {
                                     p: '机构客户需联系您的理财师，进行线下开户',
                                     yesTxt: '确认',
                                     celTxt: "取消",
+                                    htmdEvtYes:'privatePlacementDetail_20',  // 埋点确定按钮属性
+                                    htmdEvtCel:'privatePlacementDetail_21',  // 埋点取消按钮属性
                                     zIndex: 100,
                                     callback: function(t) {}
                                 };
@@ -1020,6 +1029,8 @@ $(function() {
                                     p: '机构客户完善资料请联系您的理财师',
                                     yesTxt: '确认',
                                     celTxt: "取消",
+                                    htmdEvtYes:'privatePlacementDetail_22',  // 埋点确定按钮属性
+                                    htmdEvtCel:'privatePlacementDetail_23',  // 埋点取消按钮属性
                                     zIndex: 100,
                                     callback: function(t) {}
                                 };
@@ -1055,6 +1066,8 @@ $(function() {
                                             p: '<p class="" style="font-weight:bold;text-align:center">您风险测评中所选计划投资期限少于产品期限存在匹配风险，请确认是否继续购买</p>',
                                             yesTxt: '继续',
                                             celTxt: '放弃',
+                                            htmdEvtYes:'privatePlacementDetail_24',  // 埋点确定按钮属性
+                                            htmdEvtCel:'privatePlacementDetail_25',  // 埋点取消按钮属性
                                             zIndex: 1200,
                                             callback: function(t) {
                                                 var obj = {
@@ -1064,6 +1077,8 @@ $(function() {
                                                             '<p class="">请您认真阅读' + noticeObj.fileName + that.data.productName + '并确认后继续购买该产品</p>',
                                                     yesTxt: '去阅读',
                                                     celTxt: '取消',
+                                                    htmdEvtYes:'privatePlacementDetail_26',  // 埋点确定按钮属性
+                                                    htmdEvtCel:'privatePlacementDetail_27',  // 埋点取消按钮属性
                                                     zIndex: 1200,
                                                     callback: function(t) {
                                                     	var isEle = "";
@@ -1087,6 +1102,8 @@ $(function() {
                                             p: '<p class="" style="font-weight:bold;text-align:center">您风险测评中所选计划投资期限少于产品期限存在匹配风险，请确认是否继续购买</p>',
                                             yesTxt: '继续',
                                             celTxt: '放弃',
+                                            htmdEvtYes:'privatePlacementDetail_28',  // 埋点确定按钮属性
+                                            htmdEvtCel:'privatePlacementDetail_29',  // 埋点取消按钮属性
                                             zIndex: 1200,
                                             callback: function(t) {
                                             	that.nextStep();//跳转到对应链接
@@ -1100,6 +1117,8 @@ $(function() {
                                                     '<p class="">请您认真阅读' + noticeObj.fileName + that.data.productName + '并确认后继续购买该产品</p>',
                                             yesTxt: '去阅读',
                                             celTxt: '取消',
+                                            htmdEvtYes:'privatePlacementDetail_30',  // 埋点确定按钮属性
+                                            htmdEvtCel:'privatePlacementDetail_31',  // 埋点取消按钮属性
                                             zIndex: 1200,
                                             callback: function(t) {
                                             	var isEle = "";
@@ -1258,7 +1277,7 @@ $(function() {
                     if (that.data.custType == "1") { //客户类型【0.机构 1.个人】 
                         //跳转到电子合同追加页面
                         window.location.href = site_url.orderLimit_url + "?fundCode=" + that.$e.projectId + "&isAllowAppend=" +
-                            that.data.fundDetailObj.isAllowAppend + '&accreditedInvestor=' + that.data.accreditedInvestor;
+                            that.data.fundDetailObj.isAllowAppend + '&isSatisfied=' + that.data.isSatisfied
                     } else {
                         //跳转到普通预约
                         window.location.href = site_url.registration_url + "?fundCode=" + that.$e.projectId + "&isAllowAppend=" +
@@ -1269,7 +1288,7 @@ $(function() {
                     if (that.data.custType == "1") { //客户类型【0.机构 1.个人】 
                         //跳转到电子合同预约页面
                         window.location.href = site_url.orderLimit_url + "?fundCode=" + that.$e.projectId + "&isAllowAppend=" +
-                            that.data.fundDetailObj.isAllowAppend + '&accreditedInvestor=' + that.data.accreditedInvestor;
+                            that.data.fundDetailObj.isAllowAppend + '&isSatisfied=' + that.data.isSatisfied
                     } else {
                         //跳转到普通预约
                         window.location.href = site_url.registration_url + "?fundCode=" + that.$e.projectId + "&isAllowAppend=" +
@@ -1395,6 +1414,8 @@ $(function() {
                             p: '因司法原因该账户被冻结，请联系客服咨询！客服电话：400-8980-618',
                             yesTxt: '确认',
                             celTxt: "取消",
+                            htmdEvtYes:'privatePlacementDetail_32',  // 埋点确定按钮属性
+                            htmdEvtCel:'privatePlacementDetail_33',  // 埋点取消按钮属性
                             zIndex: 100,
                             callback: function(t) {
 

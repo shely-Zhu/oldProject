@@ -763,7 +763,7 @@ $(function() {
             mui("body").on('mdClick', '.redeemBtn', function() {
             	// 先判断登录是否超时以及账户冻结状态    司法验证过期弹出提示框
 				if(that.data.redeemClickFlag) {
-					that.data.redeemClickFlag = frozenAccount("buyFreeze", window.location.href)
+					that.data.redeemClickFlag = frozenAccount("buyFreeze", window.location.href,'','privateDetail_13')
 					if(!that.data.redeemClickFlag) { // 验证通过则跳转赎回页面
 						$.elasticLayer({
 				            id: "tip",
@@ -772,6 +772,8 @@ $(function() {
 				            zIndex: 100,
 				            yesButtonPosition: 'left',
 				            hideCelButton: false,
+				            htmdEvtYes:'privateDetail_14',  // 埋点确定按钮属性
+				            htmdEvtCel:'privateDetail_15',  // 埋点取消按钮属性
 				            callback: function() {
 				            	var type = that.data.projectType==0?1:2
 								window.location.href = site_url.privateRedeem_url + '?projectId=' + that.data.projectId + '&redeemPartion=' + that.data.redeemPartion + '&type=' + type;

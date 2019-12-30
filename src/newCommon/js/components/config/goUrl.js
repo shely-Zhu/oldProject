@@ -323,6 +323,9 @@ module.exports = function() {
     
     //账户诊断 ---持仓空白页
     this.noAccountHoldShare_url = go_url.no_url+'/mine/views/fundDiagnosis/noAccountHoldShare.html';
+
+    //账户诊断---历史申请记录
+    this.applyHistory_url = go_url.no_url + '/mine/views/fundDiagnosis/applyHistory.html'
     
     /*-------------------------------基金诊断 end -----------------------*/
     /*-------------------------------我的页面 start -----------------------*/

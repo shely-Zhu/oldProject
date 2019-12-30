@@ -12,7 +12,7 @@
  * 
  */
 var tipAction = require('./tipAction.js');
-function isCustTypeOne(outdateFreezeStatus, lawFreezeStatus, url, custType) {
+function isCustTypeOne(outdateFreezeStatus, lawFreezeStatus, url, custType, htmdEvt) {
     var f = false;
     var userObj = [{
             //由于恒小智-赎回用到了，改成新接口
@@ -32,7 +32,7 @@ function isCustTypeOne(outdateFreezeStatus, lawFreezeStatus, url, custType) {
                 
                 var jsonData = data.data;
                 // 获取客户是机构客户还是个人客户
-                f = elasticLayer(outdateFreezeStatus, lawFreezeStatus, url, jsonData.accountType); // 调用弹框
+                f = elasticLayer(outdateFreezeStatus, lawFreezeStatus, url, jsonData.accountType, htmdEvt); // 调用弹框
             },
              
         }]
@@ -40,7 +40,7 @@ function isCustTypeOne(outdateFreezeStatus, lawFreezeStatus, url, custType) {
         return f;
 };
 
-function elasticLayer(outdateFreezeStatus, lawFreezeStatus, url, custType) {
+function elasticLayer(outdateFreezeStatus, lawFreezeStatus, url, custType,htmdEvt) {
 
     var custType = (custType == "0" || custType == "2") ? true : false;  //机构为true
 
@@ -53,6 +53,7 @@ function elasticLayer(outdateFreezeStatus, lawFreezeStatus, url, custType) {
             yesButtonPosition: 'left',
 			buttonTxt: '确认',
 			zIndex: 100,
+            htmdEvtYes:htmdEvt,
 			callback: function() {}
 		});
     	return true;
@@ -78,7 +79,7 @@ function elasticLayer(outdateFreezeStatus, lawFreezeStatus, url, custType) {
     }*/
 };
 
-module.exports = function(value, url, custType) {
+module.exports = function(value, url, custType,htmdEvt) {
 	var r = false;
 
 	var alterMsgStatus = [{
@@ -97,9 +98,9 @@ module.exports = function(value, url, custType) {
         		saleFreeze = data.saleFreeze;
         	if( (value == "buyFreeze" && buyFreeze == 1) || (value == "saleFreeze" && saleFreeze == 1) ) {
                 if(custType) { // 如果传客户类型调用弹框的方法
-                    r = elasticLayer(data.outdateFreezeStatus, data.lawFreezeStatus, url, custType);
+                    r = elasticLayer(data.outdateFreezeStatus, data.lawFreezeStatus, url, custType, htmdEvt);
                 } else{ // 如果没传调用getuserinfo接口获取客户类型
-                    r = isCustTypeOne(data.outdateFreezeStatus, data.lawFreezeStatus, url, custType);
+                    r = isCustTypeOne(data.outdateFreezeStatus, data.lawFreezeStatus, url, custType, htmdEvt);
                 }
         		
         	}

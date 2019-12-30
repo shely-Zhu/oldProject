@@ -42,7 +42,7 @@ var data=Mock.mock({
 
 "sevenDayYield":"4.12",//七日年化收益率
 
-"invTypCom":"10300",//基金类型
+"invTypCom":"10200",//基金类型
 
 "inTransitNum":"0", // 待确认交易笔数
 

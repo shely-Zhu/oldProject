@@ -94,8 +94,7 @@ $(function () {
 
       //跳转到基金详情页面
       mui("body").on("mdClick",".over",function(){
-        debugger
-          window.location.href = site_url.pofCastSurelyDetails_url + '?scheduledProtocolId=' + that.gV.scheduledProtocolId ;
+            window.location.href = site_url.pofCastSurelyDetails_url + '?scheduledProtocolId=' + that.gV.scheduledProtocolId ;
       })
    
     }

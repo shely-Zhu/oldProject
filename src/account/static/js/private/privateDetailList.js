@@ -57,7 +57,6 @@ $(function() {
 
             //初始化第一屏区域的上拉加载
             that.initMui($('#scroll1'));
-            //window.sessionStorage.setItem('isconfirm', 0);
             setCookie('isconfirm', 0)
         },
 
@@ -109,11 +108,9 @@ $(function() {
                     if (index == 1) {
                         //已确认
                         $('.hopper').show();
-                        //window.sessionStorage.setItem('isconfirm', 1);
                         setCookie('isconfirm', 1)
                     } else {
                         $('.hopper').hide();
-                        //window.sessionStorage.setItem('isconfirm', 0);
                         setCookie('isconfirm', 0)
                     }
                     //data-scroll属性即当前左右切换区域的索引
@@ -445,6 +442,8 @@ $(function() {
                             hideCelButton: false,
                             zIndex: 100,
                             yesButtonPosition: 'left',
+                            htmdEvtYes:'privateDetailList_8',
+                            htmdEvtCel:'privateDetailList_9',
                             callback: function(t) {
 
                             },
@@ -460,6 +459,8 @@ $(function() {
                             celTxt: '取消',
                             hideCelButton: false,
                             zIndex: 100,
+                            htmdEvtYes:'privateDetailList_10',
+                            htmdEvtCel:'privateDetailList_11',
                             callback: function(t) {
 
                             },
@@ -472,6 +473,8 @@ $(function() {
                             celTxt: '取消',
                             hideCelButton: false,
                             zIndex: 100,
+                            htmdEvtYes:'privateDetailList_12',
+                            htmdEvtCel:'privateDetailList_13',
                             callback: function(t) {
                                 var obj = [{
                                     url: site_url.fundReserveCancel_api,
@@ -526,6 +529,7 @@ $(function() {
                         yesTxt: '我明白了',
                         hideCelButton: true,
                         zIndex: 100,
+                        htmdEvtYes:'privateDetailList_14',
                         callback: function(t) {
 
                         },
@@ -538,7 +542,6 @@ $(function() {
                 //功能按钮
             var clickEvent = '';
             mui("body").on('mdClick', '.toDetail', function(e) {
-                     debugger
                     event.stopPropagation();
                     var type = $(this).attr('type'); //按钮类型
                     var reserveId = $(this).attr('data-reserveid'); //预约id

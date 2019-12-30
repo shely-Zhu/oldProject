@@ -12,7 +12,7 @@
 	</head>
 
 <body>
-	@@include('@pathCommonCom/loading/listLoading.html') 
+	<!--@@include('@pathCommonCom/loading/listLoading.html')--> 
 	<div class="publicDetail ">
 		@@include('@pathCommonViews/headBarConfig.html',{"pathName":"普通基金","bgColors":"#475A95,#475A95","showType":"1","serviceType":"1"})
 		<div class="tplBox"></div>
@@ -45,7 +45,7 @@
 					<div class="type">
 						<div class="type_1">{{riskLevelName}}</div>
 						<div class="type_2">{{invTypComDesc}}</div>
-						<div class="type_3">10000.00元起购</div>
+						<div class="type_3">{{minValue}}元起购</div>
 					</div>
 				</div>
 				{{/if}}

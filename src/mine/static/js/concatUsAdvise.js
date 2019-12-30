@@ -3,12 +3,11 @@
 * @author chentiancheng 2019-11-14
 */
 require('@pathCommonBase/base.js');
-
 require('@pathCommonJs/ajaxLoading.js');
 require('@pathCommonJs/components/headBarConfig.js');
 var uploadFile = require('@pathCommonCom/uplaoderFile/concatUsAdviseUploaderFile.js')
-var splitUrl = require('@pathCommonJs/components/splitUrl.js')();
-var generateTemplate = require('@pathCommonJsComBus/generateTemplate.js');
+// var splitUrl = require('@pathCommonJs/components/splitUrl.js')();
+// var generateTemplate = require('@pathCommonJsComBus/generateTemplate.js');
 $(function () {
     var concatUsAdvise = {
         gD: {
@@ -26,31 +25,30 @@ $(function () {
         // 所有图片上传完毕，请求申请投资者分类接口
         asyncAll: function (idJson, idTypeArr) {
             var that = this;
-            that.gD.imgNum = $('.uploadMaterial').find('.imgNum').length;
-            // that.gD.idArr.push(1);
-            that.gD.idArr.push.apply(that.gD.idArr, idJson.data);
-            // if (that.gD.idArr.length === that.gD.imgNum) {
-            //     that.submitAdvise()
-            // }
-            // console.log(idJson)
+            console.log(that.gD.idArr,idJson)
+            if(idJson.status=='0000'){
+                that.gD.idArr.push.apply(that.gD.idArr, idJson.data);
+            }else{
+                tipAction(idJson.message); 
+            }
+
+            // that.gD.imgNum = $('.uploadMaterial').find('.imgNum').length;
         },
         event: function () {
             var that = this;
+            //点击事件，点击获取值
             mui("body").on('mdClick','.list', function(){
                 that.gD.feedbackType = $(this).children("input").val() || 0
             },{
                 'htmdEvt': 'concatUsAdvise_01'
             })
-
-            /*$(".textarea").on('keyup', function () {
-                that.gD.feedbackDesc = $(".textarea").val()
-                $(".haveMany").text(that.gD.feedbackDesc.length+'/200')
-            })*/
+            //文本事件
             mui("body").on('keyup','.textarea', function(){
                 that.gD.feedbackDesc = $(".textarea").val()
                 $(".haveMany").text(that.gD.feedbackDesc.length+'/200')
             })
         },
+        //提交
         submitAdvise:function(){
             var that = this;
             $(".blueBgButton").addClass("disable")
@@ -65,7 +63,15 @@ $(function () {
                 needDataEmpty: true,
                 callbackDone: function (json) {
                     $(".blueBgButton").removeClass("disable")
-                    location.href = "javascript:history.go(-1)";
+                    tipAction("  意见提交成功,感谢您的反馈")
+                    if (window.isAndroid) {
+                        //这个是安卓操作系统
+                        window.jsObj.backNative();
+                    }
+                    if (window.isIOS) {
+                        //这个是ios操作系统
+                        window.webkit.messageHandlers.backNative.postMessage('backNative');
+                    }
                 },
                 callbackFail: function(json) {
                     $(".blueBgButton").removeClass("disable")
