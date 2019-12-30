@@ -360,6 +360,65 @@ $(function() {
             }];
             $.ajaxLoading(obj);
         },
+         	 // 客户预约产品所需条件
+		 getConditionsOfOrder: function(fundCode) {
+            var type = type;
+            var that = this;
+      
+            //发送ajax请求
+            var obj = [{
+                url: site_url.queryCustomerAuthInfo_api,
+                data: {
+                    fundCode: fundCode,
+                },
+                //contentTypeSearch: true,
+                //needLogin: true, //需要判断是否登陆
+                callbackDone: function(json) { //成功后执行的函数
+                    var jsonData = json.data,
+                        notice = "",
+                        noticeObj = "",
+                        isPopup = "", //弹框售前告知书
+                        isRiskPopup = "", //期限不符弹框
+                        PopupElasticLayer = "",
+                        objElasticLayer = "", // 产品风险等级与个人承受能力匹配弹框
+                        isReal = "", //是否实名认证，因为如果机构切一键认证是实名，点击需要提示弹框。
+                        singleaAuthenPath = "", //一键认证跳转链接
+                        singleaAuthen = false; //条件框是否展示
+                          $(".isRiskMatchBox").show();
+                          $(".isRiskMatch_mask").show();
+                          if(jsonData.isRiskMatch == "1"){
+                                //风险等级匹配
+                                $(".isRiskMatchBox_match").show()
+                                $(".isRiskMatchBox_noMatch").hide()
+                                $(".isRiskMatchBox_header").html("你选择的产品与您现在的风险承受能力相匹配")
+                            }else if(jsonData.isRiskMatch == "0"){
+                                $(".isRiskMatchBox_noMatch").show()
+                                $(".isRiskMatchBox_match").hide()
+                                $(".isRiskMatchBox_header").html("你选择的产品与您现在的风险承受能力不相匹配")
+                                $(".isRiskMatchResult").html("查看评测结果")
+                                $(".isRiskMatchResult").attr("type","noRisk")
+                            }else if(jsonData.isRiskMatch == "2"){
+                                $(".isRiskMatchBox_noMatch").show()
+                                $(".isRiskMatchBox_match").hide()
+                                $(".isRiskMatchBox_header").html("您的风险测评已过期,请重新进行风险测评")
+                                $(".isRiskMatchResult").html("重新风测")
+                                $(".isRiskMatchResult").attr("type","repeatRisk")
+                            }
+      
+                },
+                callbackFail: function(json) { //失败后执行的函数
+                   tipAction(json.message);
+          //that.data.canClick = true; //变为可点击
+      
+                },
+                callbackNoData:function(argument) {
+                    tipAction(json.message);
+          that.data.canClick = true; //变为可点击
+                }
+            }];
+            $.ajaxLoading(obj);
+      
+        },
         event: function() {
             var that = this;
             //选项卡切换
@@ -397,17 +456,51 @@ $(function() {
                 })
                 //点击转入跳转
             mui("body").on('mdClick', '.shiftToBtn', function(e) {
-                if (that.gL.accountType === 0 || that.gL.accountType === 2) {
-                    tipAction('暂不支持机构客户进行交易');
-                } else {
-                    window.location.href = site_url.pofCashTransformIn_url+ "?fundName=" +that.gL.fundName + "&fundCode=" +that.gL.fundCode;
-                    // window.location.href = site_url.pofCashTransformIn_url+ "?fundName=" +"jfskdjfhk"+ "&fundCode=" + that.gL.fundCode;
+                      that.getConditionsOfOrder(that.gL.fundCode)
+          //      if (that.gL.accountType === 0 || that.gL.accountType === 2) {
+          //          tipAction('暂不支持机构客户进行交易');
+          //      } else {
+           //         window.location.href = site_url.pofCashTransformIn_url+ "?fundName=" +that.gL.fundName + "&fundCode=" +that.gL.fundCode;
+            //        // window.location.href = site_url.pofCashTransformIn_url+ "?fundName=" +"jfskdjfhk"+ "&fundCode=" + that.gL.fundCode;
 
-                }
+            //    }
 
             }, {
                 'htmdEvt': 'superStreasureDetail_3'
             })
+
+                     //风测等级匹配成功
+         mui("body").on('mdClick',".isRiskMatchBox_match",function(){
+            $(".isRiskMatch_mask").hide();
+            $(".isRiskMatchBox").hide();
+            if (that.gL.accountType === 0 || that.gL.accountType === 2) {
+                         tipAction('暂不支持机构客户进行交易');
+            } else {
+                        window.location.href = site_url.pofCashTransformIn_url+ "?fundName=" +that.gL.fundName + "&fundCode=" +that.gL.fundCode;
+                    }
+       })
+
+      //风险等级匹配失败
+      mui("body").on("mdClick",".isRiskMatchBox_cancel",function(){
+        $(".isRiskMatch_mask").hide();
+        $(".isRiskMatchBox").hide();
+       // that.gV.isRiskMatchBox.hide();
+    })
+
+     //风险等级匹配失败结果跳转
+    mui("body").on("mdClick",".isRiskMatchResult",function(){
+        $(".isRiskMatch_mask").hide();
+        $(".isRiskMatchBox").hide();
+        var type = $(this).attr("type");
+        if(type == "noRisk"){
+            //未风测
+            window.location.href = site_url.riskAppraisal_url + "?type=private"
+        }else if(type == "repeatRisk"){
+            //风测过期
+            window.location.href = site_url.riskAppraisal_url + "?type=private"
+        }
+       
+    })
                 //点击历史记录
             mui("body").on('mdClick', '.recordBtn', function(e) {
                 window.location.href = site_url.superRecord_url+ "?fundCode=" +that.gL.fundCode;
