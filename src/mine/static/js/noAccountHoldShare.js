@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2019-12-27 10:17:54
- * @LastEditTime : 2019-12-29 11:17:29
+ * @LastEditTime : 2019-12-30 10:53:23
  * @LastEditors  : Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \htjf-app\src\mine\static\js\noAccountHoldShare.js
@@ -64,24 +64,7 @@ $(function() {
                         if(jsonData.isWealthAccount != "1"&&jsonData.isRiskEndure == "1"&&jsonData.isPerfect == "1"&&jsonData.isInvestFavour=="1"){
                             that.gV.realLi.hide();
                             that.gV.tipsWrap.hide();
-                            $(".isRiskMatch_mask").show();
-                            $(".isRiskMatchBox").show();
-                            if(jsonData.isRiskMatch == "1"){
-                                //风险等级匹配
-                                $(".isRiskMatchBox_match").show()
-                                $(".isRiskMatchBox_noMatch").hide()
-                            }else if(jsonData.isRiskMatch == "0"){
-                                $(".isRiskMatchBox_noMatch").show()
-                                $(".isRiskMatchBox_match").hide()
-                                $(".isRiskMatchResult").html("查看评测结果")
-                                $(".isRiskMatchResult").attr("type","noRisk")
-                            }else if(jsonData.isRiskMatch == "2"){
-                                $(".isRiskMatchBox_noMatch").show()
-                                $(".isRiskMatchBox_match").hide()
-                                $(".isRiskMatchResult").html("重新风测")
-                                $(".isRiskMatchResult").attr("type","repeatRisk")
-                            }
-                              
+                            window.location.href = site_url.applyHistory_url     
 						}else{
                             that.gV.tipsWrap.show()
                             that.gV.realLi.show();
@@ -148,35 +131,6 @@ $(function() {
                 //跳理财首页
                 window.location.href = site_url.wealthIndex_url
             })
-            
-                   //风测等级匹配成功
-                   mui("body").on('mdClick',".isRiskMatchBox_match",function(){
-                    $(".isRiskMatch_mask").hide();
-                    $(".isRiskMatchBox").hide();
-                    //wealthIndex_url
-                    window.location.href = site_url.applyHistory_url;
-                 })
-   
-                //风险等级匹配失败
-                mui("body").on("mdClick",".isRiskMatchBox_cancel",function(){
-                    $(".isRiskMatch_mask").hide();
-                    $(".isRiskMatchBox").hide();
-                  // that.gV.isRiskMatchBox.hide();
-                })
-   
-                //风险等级匹配失败结果跳转
-                mui("body").on("mdClick",".isRiskMatchResult",function(){
-                    $(".isRiskMatch_mask").hide();
-                    $(".isRiskMatchBox").hide();
-                    var type = $(this).attr("type");
-                    if(type == "noRisk"){
-                        //未风测
-                        window.location.href = site_url.riskAppraisal_url + "?type=private"
-                    }else if(type == "repeatRisk"){
-                        //风测过期
-                        window.location.href = site_url.riskAppraisal_url + "?type=private"
-                    }
-                })
 
                    //认证
                    mui("body").on('mdClick', ".tips-li .tips-li-right", function (e) {
