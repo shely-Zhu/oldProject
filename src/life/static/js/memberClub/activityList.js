@@ -9,7 +9,7 @@ var splitUrl = require('@pathCommonJs/components/splitUrl.js')();
 var generateTemplate = require('@pathCommonJsComBus/generateTemplate.js');
 var alwaysAjax = require('@pathCommonJs/components/alwaysAjax.js');
 var moment = require('moment');
-require('@pathCommonJs/components/headBarConfig.js');
+// require('@pathCommonJs/components/headBarConfig.js');
 
 $(function() {
     var activityList = {
@@ -356,9 +356,11 @@ $(function() {
                 });
                 //点击选择城市头部返回效果
                 mui('#activitySearch').on('mdClick', '.goBack', function() {
-                        $('#cityListBox').hide();
-                        $('#activityDataBox').show();
-                    })
+                    $('#cityListBox').hide();
+                    $('#activityDataBox').show();
+                },{
+                    htmdEvt: 'activityList_8'
+                })
                     //点击定位选择右侧索引效果
                 mui('#cityListBox').on('mdClick', '.mui-indexed-list-bar a', function() {
                     var txt = $(this).text();
