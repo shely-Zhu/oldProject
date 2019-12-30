@@ -79,7 +79,7 @@
             font-size:1.6rem;
             font-family:PingFangSC-Semibold,PingFang SC;
             font-weight:600;
-            color:rgba(255,255,255,1);
+            color:@c005;
             line-height:45px;
             background:linear-gradient(180deg, rgba(251,226,189,1) 0%, rgba(226,181,128,1) 100%);
             -webkit-background-clip:text;
@@ -90,7 +90,6 @@
         }
 
         .dd_tag_wrap {
-            margin-top: 0.7rem;
             margin-bottom: 1.8rem;
 
             .dd_tag {
@@ -98,11 +97,12 @@
                 padding: 0rem 0.5rem 0.1rem;
                 height: 1.8rem;
                 line-height:1.7rem;
-                font-size: 1rem;
+                font-size: .8rem;
                 margin-right: 0.4rem;
                 opacity:0.7;
-                border:1px solid rgba(255,255,255,1);
+                border:1px solid @c005;
                 margin-bottom: 0.5rem;
+                border-radius: 0.3rem;
             }
 
         }
@@ -113,7 +113,7 @@
             margin-bottom: 0.6rem;
             font-weight: bold;
             .left{
-                color:rgba(255,255,255,1);
+                color:@c005;
                 background:linear-gradient(180deg, rgba(251,226,189,1) 0%, rgba(226,181,128,1) 100%);
                 -webkit-background-clip:text;
                 -webkit-text-fill-color:transparent;
@@ -140,14 +140,16 @@
     .dd_score {
         .dd_choice_1 {
             font-size: 1.2rem;
-            color: @4d3a12;
+            color: @9B9B9B;
             margin-bottom: 1.9rem;
 
             .mui-col-xs-3.active {
 
                 span {
                     position: relative;
-
+                    font-family:PingFangSC-Semibold,PingFang SC;
+                    font-weight:600;
+                    color:@272727;
                     &:after {
                         height: 0.2rem;
                         width: 100%;
@@ -218,7 +220,7 @@
                 &.active {
                     width: 33.33%;
                     background:linear-gradient(135deg,rgba(108,131,201,1) 0%,rgba(6,29,106,1) 100%);
-                    color: #fff;
+                    color: @c005;
                 }
             }
         }

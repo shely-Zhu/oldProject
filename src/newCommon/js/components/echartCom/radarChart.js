@@ -76,7 +76,7 @@ module.exports = function(echartData, $e) {
                   width: 6,
                   shadowColor: '#FBE2BD',
                   shadowBlur: 50,
-                  shadowOffsetY: 15
+                  shadowOffsetY: 15,
                 }
             },
             data: [{
