@@ -110,6 +110,7 @@ $(function () {
             var that = this;
             //普通产品展示再买一笔
             $('footer').removeClass('hide');
+            $(".tradeCon").css("padding-bottom", ".98rem")
             var obj = [{
                 url: site_url.pofTradeApplyInfo_api,
                 data: {
