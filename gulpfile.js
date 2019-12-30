@@ -35,11 +35,12 @@ var gulp = require('gulp'),
 
 var newWebpackList = require('./src/newCommon/js/webpackList.js'),
 
-    //把webpackList和newWebpackList合并
-    webpackList = Object.assign(webpackList, newWebpackList);
+//把webpackList和newWebpackList合并
+webpackList = Object.assign(webpackList, newWebpackList);
 
 for (var i in webpackList) {
-    webpackList[i] = webpackList[i].replace('/src/', '/middle/js/')
+    // webpackList[i] = [ 'babel-polyfill', webpackList[i].replace('/src/', '/middle/js/')]
+    webpackList[i] = [ webpackList[i].replace('/src/', '/middle/js/')]
 }
 
 // Environment setup 环境设置
@@ -537,11 +538,11 @@ gulp.task("allServerResourcesInclude", function() {
     //与host.path中的内容做比对
     .pipe(plugins.changed(host.path, { hasChanged: plugins.changed.compareSha1Digest }))
 
-    .pipe(plugins.babel({
-        compact: false,
-        presets: ['env'],
-        plugins: ['transform-runtime']
-    }))
+    // .pipe(plugins.babel({
+    //     compact: false,
+    //     presets: ['env'],
+    //     plugins: ['transform-runtime']
+    // }))
 
     .pipe(plugins.if(isWatch, plugins.debug({ title: 'js-有变动的文件:' })))
 
@@ -602,11 +603,11 @@ gulp.task("includeJs", ['htmd', 'allServerResourcesInclude'], function() {
         //与host.path中的内容做比对
         .pipe(plugins.changed(host.path, { hasChanged: plugins.changed.compareSha1Digest }))
 
-        .pipe(plugins.babel({
-            compact: false,
-            presets: ['env'],
-            plugins: ['transform-runtime']
-        }))
+        // .pipe(plugins.babel({
+        //     compact: false,
+        //     presets: ['env'],
+        //     plugins: ['transform-runtime']
+        // }))
 
         .pipe(plugins.if(isWatch, plugins.debug({ title: 'js-有变动的文件:' })))
 
@@ -775,11 +776,11 @@ gulp.task("webpack", ['jsCpd', 'changePath', 'commonHtml'], function(cb) {
 
         plugins.webpack(webpackConfig),
 
-        plugins.babel({
-            compact: false,
-            presets: ['env'],
-            plugins: ['transform-runtime']
-        }),
+        // plugins.babel({
+        //     compact: false,
+        //     presets: ['env'],
+        //     plugins: ['transform-runtime']
+        // }),
 
         //添加changeLocalHistory、eruda和CustomEventIeFile的文件内容
         through.obj(function(file, enc, cb) {
@@ -794,9 +795,9 @@ gulp.task("webpack", ['jsCpd', 'changePath', 'commonHtml'], function(cb) {
         }),
 
 
-
         //预上线环境时，去掉Log并压缩
         plugins.if(options.env === '3' || options.env === '4', plugins.removelogs()),
+        
         plugins.if(options.env === '3' || options.env === '4', plugins.uglify({ //压缩
             mangle: false, //类型：Boolean 默认：true 是否修改变量名
             compress: false
