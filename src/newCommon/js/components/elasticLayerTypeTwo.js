@@ -65,6 +65,7 @@
                         callback: $.noop, //确定按钮的回调函数，默认为空(jQuery的空函数，仅仅想要传递一个空函数的时候可以使用)
                         //iconTxt: '', //icon的值
                         isHide: true, //弹窗是否隐藏,默认隐藏
+                        htmdEvtYes:'', //埋点确定按钮属性
                     }
 
                 this.options = $.extend({}, this.defaults, opts)
@@ -140,7 +141,7 @@
                 celEvent: function() {
                     var that = this;
                     that.$close.on('click', function() {
-
+                        window._submitMd && window._submitMd( 3, that.options.htmdEvtYes );
                         that.options.callback(that);
                         //关闭按钮事件即隐藏当前弹层
                         if (that.options.isHide) {

@@ -8,13 +8,6 @@
 require('@pathCommonBase/base.js');
 //ajax调用
 require('@pathCommonJs/ajaxLoading.js');
-//下拉加载更多
-// require('@pathCommonJs/scrollFullPage.js');
-// 切换
-require('@pathCommonJsCom/tabScroll.js');
-require('@pathCommonJsCom/goTopMui.js');
-require('@pathCommonJs/components/elasticLayer.js');
-require('@pathCommonJs/components/elasticLayerTypeFive.js');
 var generateTemplate = require('@pathCommonJsComBus/generateTemplate.js');
 $(function () {
     var somePage = {
@@ -47,7 +40,7 @@ $(function () {
                 var scheduledProtocolId = $(this).data('id');
                 window.location.href = site_url.pofCastSurelyDetails_url + '?scheduledProtocolId=' + scheduledProtocolId;
             }, {
-				htmdEvt: 'myInvestmentPlan_02'
+				htmdEvt: 'myInvestmentPlan_01'
             });
         },
     };

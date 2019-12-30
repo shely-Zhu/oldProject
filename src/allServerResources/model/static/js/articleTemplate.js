@@ -85,18 +85,7 @@ $(function () {
                     that.$e.contentWrap.html(resData.content);
 
                     that.$e.artImg.find("img").attr("src", resData.imageAttachUrl);//头部图片
-                    that.$e.artTitle.find("p").html(resData.title);//文章title
 
-                    //如果音频路径不为空的话则隐藏音频dom元素
-                    if (resData.voiceAttachUrl.length != 0) {
-
-                        that.$e.audioArea.show();
-                        that.$e.audioDisc.html(resData.voiceAttachName);
-                        that.$e.audioTime.find("span").eq(1).html(resData.fileSize);
-                        that.$e.aud.attr("src", resData.voiceAttachUrl);//音频路径
-                        //调用音频方法
-                        playAudio(resData.voiceAttachUrl,resData.voiceAttachName,resData.fileSize);
-                    }
 
                     //如果视频路径不为空的话则显示播放按钮，给图片赋值视频地址
                     if (resData.videoExternalUrl.length != 0) {
@@ -116,13 +105,24 @@ $(function () {
                             "padding": "0"
                         })
 
-                    }/*else if(resData.h5Type == "2") {
+                    }else if(resData.h5Type == "2") {
 
 
-                        //that.$e.artHeaderCont.show();
+                        that.$e.artTitle.find("p").html(resData.title);//文章title
+
+                        //如果音频路径不为空的话则隐藏音频dom元素
+                        if (resData.voiceAttachUrl.length != 0) {
+
+                            that.$e.audioArea.show();
+                            that.$e.audioDisc.html(resData.voiceAttachName);
+                            that.$e.audioTime.find("span").eq(1).html(resData.fileSize);
+                            that.$e.aud.attr("src", resData.voiceAttachUrl);//音频路径
+                            //调用音频方法
+                            playAudio(resData.voiceAttachUrl,resData.voiceAttachName,resData.fileSize);
+                        }
 
 
-                    }*/else if (resData.h5Type == "3") {//产品推荐
+                    }else if (resData.h5Type == "3") {//产品推荐
                         //给底部按钮加文字和跳转链接
                         that.$e.btnButton.html(resData.buttonLabel).show();
 

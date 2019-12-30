@@ -32,6 +32,7 @@ $(function () {
         url: site_url.prfFundManagerInfo_api,
         data: {
           fundCode: getQueryString('fundCode')
+          // fundCode:"000847"
         },
         callbackDone: function (json) {
 

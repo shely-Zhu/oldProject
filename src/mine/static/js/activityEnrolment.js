@@ -19,6 +19,7 @@ $(function() {
     var dataEn = {
         $e: {
             noData: $('.noData'), //没有数据的结构
+            NoData: $('.NoData'), //没有数据的结构
             listLoading: $('.listLoading'), //所有数据区域，第一次加载的loading结构
             ListSlot: $('.listHasData0'), //插入已报名活动位置
             ListSlot1: $('.listHasData1'), //插入已报名活动位置
@@ -75,9 +76,7 @@ $(function() {
                 url: site_url.user_api,
                 data: {
                     hmac: "", //预留的加密信息     
-                    params: {
-                        //uuid: sessionStorage.getItem('uuid') //'EE7CA9386715CBF3BAB30CD479697D72' //sessionStorage.getItem('uuid') //客户Id,打开登录页面链接带过来的参数uuid
-                    }
+                    params: {}
                 },
                 needLogin: true,
                 // async: false, //同步
@@ -92,8 +91,6 @@ $(function() {
         },
         getData: function(ur, dat, num) {
             var that = this
-
-
             var obj = [{
                 url: ur,
                 data: dat,
@@ -120,10 +117,13 @@ $(function() {
                     // 待定 
                     if (json.data.activityVOPageInfo.list.length == 0) { // 没有记录不展示
                         if (num == 0) {
-                            $('.listHasData0 .noData').show();
+                            // $('.NoData').show();
+                            $('.listHasData0 .NoDataMore').show();
+                            
                             return false;
                         } else {
-                            $('.listHasData1 .noData').show();
+                            // $('.NoData').show();
+                            $('.listHasData1 .NoDataMore').show();
                             return false;
                         }
 
@@ -147,7 +147,7 @@ $(function() {
                             //判断是否显示分享   线上并且是 进行中的
                             list[i].shareflag = list[i].actType == 1 && num == 0 ? 1 : 0;
                             //判断是 线上还是线下
-                            list[i].actTypestatus = list[i].actType == 1 ? 1 : 0 
+                            list[i].actTypestatus = list[i].actType == 1? 1 : 0 
                         }
                         dataList = list;
                     }
@@ -155,6 +155,7 @@ $(function() {
 
                     setTimeout(function() {
                         // 将列表插入到页面上
+                        
                         if (num == 0) {
                             generateTemplate(dataList, that.$e.ListSlot, that.$e.listTemp);
                             $(".lazyload").lazyload()
@@ -172,10 +173,13 @@ $(function() {
                 },
                 callbackNoData: function() {
                     if (num == 0) {
-                        $('.listHasData0 .noData').show();
+                        $('.listHasData0 .NoDataMore').show();
+                        // $('.NoData').show();
+
                         return false;
                     } else {
-                        $('.listHasData1 .noData').show();
+                        $('.listHasData1 .NoDataMore').show();
+                        // $('.NoData').show();
                         return false;
                     }
 
@@ -198,6 +202,7 @@ $(function() {
                 //async: false,
                 needDataEmpty: true,
                 callbackDone: function(json) {
+                    $(".netLoading").hide()
                     var data = json.data;
                     var wxShare = {
                             type: 'auto',
@@ -210,12 +215,12 @@ $(function() {
                         // window.isAndroid是在root文件中定义的变量
                     if (window.isAndroid) {
                         //这个是安卓操作系统
-                        window.jsObj.wxShare(wxShare);
+                        window.jsObj.wxShare(JSON.stringify(wxShare));
                     }
                     // window.isIOS是在root文件中定义的变量
                     if (window.isIOS) {
                         //这个是ios操作系统
-                        window.webkit.messageHandlers.wxShare.postMessage(wxShare);
+                        window.webkit.messageHandlers.wxShare.postMessage(JSON.stringify(wxShare));
                     }
                 },
                 callbackFail: function(json) {
@@ -245,7 +250,10 @@ $(function() {
             })
 
             //分享好友
-            mui('body').on('mdClink', '.timeBtn', function() {
+            mui('body').on('mdClick', '.timeBtn', function(e) {
+                var event=e||window.event
+                event.preventDefault();
+                event.stopPropagation();  
                 var actId = $(this).attr('data-actId');
                 var actType = $(this).attr('data-actType');
                 var title = $(this).attr('data-actName');
@@ -254,15 +262,15 @@ $(function() {
             }, {
                 'htmdEvt': 'activityEnrolment_02'
             });
-
             //点击活动列表跳转
-            mui('body').on('mdClick', '.clickli', function() {
+            mui('body').on('mdClick', '.clickli', function(e) {
                 var actType = $(this).attr('data-actType');
                 var actId = $(this).attr('data-actId');
                 window.location.href = site_url.activityDetails_url + '?actType=' + actType + '&' + 'actId=' + actId+'&isNeedLogin=1';
             }, {
                 htmdEvt: 'activityEnrolment_03'
             });
+            //更多跳转
         }
 
     }

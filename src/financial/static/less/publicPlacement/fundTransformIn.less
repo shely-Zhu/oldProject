@@ -17,7 +17,7 @@
 @import url("@pathCommonLess/mui/resetMuiPop.less");
 
 @import url("@pathCommonLessCom/headBarConfig.less");
-
+@import url("@pathCommonLess/components/elasticLayerTypeTwo.less");
 @import url('@pathCommonCom/elasticLayer/transOutRule/transOutRule.less');
 @import url("@pathCommonLessCom/payPassword.less");
 
@@ -139,6 +139,7 @@ body{
                 }
                 .num{
                     .line-rate{
+                        padding-right: 8px;
                         &::before{
                             content: "——";
                             position:absolute;
@@ -693,4 +694,8 @@ body{
         
     }
     
+}
+.elasticContent{
+    height: 6rem;
+    overflow: scroll;
 }
