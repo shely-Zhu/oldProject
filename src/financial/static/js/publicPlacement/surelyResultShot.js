@@ -95,6 +95,8 @@ $(function () {
       //跳转到基金详情页面
       mui("body").on("mdClick",".over",function(){
             window.location.href = site_url.pofCastSurelyDetails_url + '?scheduledProtocolId=' + that.gV.scheduledProtocolId ;
+      },{
+        htmdEvt: 'surelyResultShot_01'
       })
    
     }
