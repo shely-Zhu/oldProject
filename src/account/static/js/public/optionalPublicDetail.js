@@ -360,6 +360,12 @@ $(function() {
 				   that.data.isBuyFlag = jsonData.isBuyFlag;//是否可购买(0否1是) int类型
 				   that.data.isRedemptionFlag = jsonData.isRedemptionFlag; //是否可赎回(0否1是) int 类型
 				   that.data.supportFixedFlag = jsonData.isFixFlag;//是否可定投(0否1是) int 类型
+				   if(!that.data.isBuyFlag){//不可买入
+				   	 	$(".buyBtn").addClass("disable")
+				   }
+				   	if(!that.data.isRedemptionFlag){//不可赎回
+				   		$(".redeemBtn").addClass("disable")
+				   }
 					//项目名称
 					$('#HeadBarpathName').html( jsonData.fundName );
 					//基金代码
@@ -736,12 +742,18 @@ $(function() {
             })
 			//点击赎回
 			mui("body").on('mdClick', '.redeemBtn', function(e) {
+			   	if(!that.data.isRedemptionFlag){//不可赎回
+			   		return false;
+			   	}
 				window.location.href = site_url.redemptionBuy_url + "?tradeNo=" + splitUrl['tradeNo'] + "&fundCode=" + that.data.fundCode			
 			},{
                 'htmdEvt': 'optionalPublicDetail_8'
             })
 			// //点击买入
 			mui("body").on('mdClick', '.buyBtn', function(e) {
+				if(!that.data.isBuyFlag){//不可买入
+				   	 	return false;
+				   }
                 that.getConditionsOfOrder("into");
 			//	window.location.href = site_url.fundTransformIn_url+"?fundCode="+that.data.fundCode;			
 			},{
