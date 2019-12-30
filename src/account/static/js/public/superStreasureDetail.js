@@ -231,11 +231,11 @@ $(function() {
                 },
                 needLogin: true,
                 callbackDone: function(json) {
-                    var data = json.data
-                    that.gL.fundCode = data.fundCode,
-                    that.gL.fundName = data.fundName,
-                    that.gL.transformMoney = data.totalMoney,
-                    $(".totalM").text(data.totalMoneyMask ? data.totalMoneyMask : "--")
+                    var data = json.data;
+                    that.gL.fundCode = data.fundCode;
+                    that.gL.fundName = data.fundName;
+                    that.gL.transformMoney = data.totalMoney;
+                    $(".totalM").text(data.totalMoneyMask ? data.totalMoneyMask : "--");
                     if(Number(data.totalMoneyMask) <= 0){//判断当持仓金额小于等于零时
                         $('.footerBtnLeft').css('background','#ccc');//按钮背景置灰
                         $('.footerBtnLeft').css('pointer-events','none');//按钮禁止点击
@@ -418,7 +418,7 @@ $(function() {
             mui("body").on('mdClick', '.addLi', function(e) {
                 window.location.href = site_url.returnsDetail_url + "?fundCode=" + that.gL.fundCode;
             }, {
-                'htmdEvt': 'superStreasureDetail_4'
+                'htmdEvt': 'superStreasureDetail_5'
             })
         }
     }
