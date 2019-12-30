@@ -45,7 +45,7 @@ body{
 
 .equipment-name{
     font-size: .32rem;
-    color: @9B9B9B;
+    color: @272727;
     position: absolute;
     top: .24rem;
     left: .3rem;
@@ -55,6 +55,7 @@ body{
     position: absolute;
     top: .24rem;
     right: .3rem;
+    color: @9B9B9B;
 }
 .address{
     font-size: .24rem;
@@ -75,4 +76,12 @@ body{
 }
 .mui-table-view-cell{
     padding: 0;
+}
+.listBox .mui-table-view:after{
+    content: "";
+    height: 1px;
+    left: .3rem; 
+}
+.listBox .mui-table-view:last-child:after{
+    left: 0; 
 }
