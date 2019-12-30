@@ -397,17 +397,17 @@ $(function() {
                 })
                 //点击转入跳转
             mui("body").on('mdClick', '.shiftToBtn', function(e) {
-                    if (that.gL.accountType === 0 || that.gL.accountType === 2) {
-                        tipAction('暂不支持机构客户进行交易');
-                    } else {
-                        //window.location.href = site_url.pofCashTransformIn_url+ "?fundName=" +that.gL.fundName + "&fundCode=" +that.gL.fundCode;
-                        window.location.href = site_url.pofCashTransformIn_url+ "?fundName=" +"jfskdjfhk"+ "&fundCode=" +"003075";
+                if (that.gL.accountType === 0 || that.gL.accountType === 2) {
+                    tipAction('暂不支持机构客户进行交易');
+                } else {
+                    window.location.href = site_url.pofCashTransformIn_url+ "?fundName=" +that.gL.fundName + "&fundCode=" +that.gL.fundCode;
+                    // window.location.href = site_url.pofCashTransformIn_url+ "?fundName=" +"jfskdjfhk"+ "&fundCode=" + that.gL.fundCode;
 
-                    }
+                }
 
-                }, {
-                    'htmdEvt': 'superStreasureDetail_3'
-                })
+            }, {
+                'htmdEvt': 'superStreasureDetail_3'
+            })
                 //点击历史记录
             mui("body").on('mdClick', '.recordBtn', function(e) {
                 window.location.href = site_url.superRecord_url+ "?fundCode=" +that.gL.fundCode;
