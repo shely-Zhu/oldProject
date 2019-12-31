@@ -29,9 +29,32 @@ $(function () {
         getData: function (t) {
             var that = this;
             $(".listLoading").hide();
-            that.gV.dataList = JSON.parse(sessionStorage.getItem('stopList'));
+            var obj = [{
+                url: site_url.protocolList_api,
+                data: {
+                    "pageNo": 1, //非必须，默认为1
+                    "pageSize": 100,//非必须，默认为10
+                },
+                needDataEmpty: true,
+                needLoading: false,
+                callbackDone: function(json) {    
+                    var data = json.data.pageList;
+                    for(var i=0;i<data.length;i++){
+                        if(data[i].fixState == 'H'){
+                            that.gV.dataList.push(data[i])
+                        }
+                    }
+                    generateTemplate(that.gV.dataList, that.$e.recordList, that.$e.investmentPlanTemp);
+                        
+                },
+                callbackNoData: function( json ){
+                },
+                callbackFail: function(json) {
+                },
+            }];
+            $.ajaxLoading(obj);
+            //that.gV.dataList = JSON.parse(sessionStorage.getItem('stopList'));
             // 将列表插入到页面上
-            generateTemplate(that.gV.dataList, that.$e.recordList, that.$e.investmentPlanTemp);
            
         },
         events: function () {
