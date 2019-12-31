@@ -68,6 +68,9 @@ var clickList = {
 	"monthReportList_02" : { type:'click', evtid: 'monthReportList_02', topic: '浏览商品', info: ''} ,
 	//修改分红方式
 	"bonusMethod_01" : { type:'click', evtid: 'bonusMethod_01', topic: '修改分红方式', info: ''} ,
+	// 组件弹层的点击事件
+	"bonusMethod_02" : { type:'click', evtid: 'bonusMethod_02', topic: '修改分红方式_确定', info: ''} ,
+	"bonusMethod_03" : { type:'click', evtid: 'bonusMethod_03', topic: '修改分红方式_取消', info: ''} ,
 	//历史明细（没按钮）
 	//登录日志查询（没按钮）
 	//公募监管账户
@@ -91,6 +94,12 @@ var clickList = {
 	"recommend_4": { type:'click', evtid: 'recommend_4', topic: '推荐有礼-关闭所有弹层', info: ''} ,
 	"recommend_5": { type:'click', evtid: 'recommend_5', topic: '推荐有礼-分享给好友', info: ''} ,
 	"recommend_6": { type:'click', evtid: 'recommend_6', topic: '推荐有礼-分享到朋友圈', info: ''} ,
+
+	"applyHistory_01": { type:'click', evtid: 'applyHistory_01', topic: '基金账户诊断_详情页', info: ''} ,
+	"applyHistory_02": { type:'click', evtid: 'applyHistory_02', topic: '基金账户诊断_展开收起', info: ''} ,
+	"applyHistory_03": { type:'click', evtid: 'applyHistory_03', topic: '基金账户诊断_编辑', info: ''} ,
+	"applyHistory_04": { type:'click', evtid: 'applyHistory_04', topic: '基金账户诊断_新增申请', info: ''} ,
+	
 
 
 
@@ -526,6 +535,12 @@ var clickList = {
 
 
 	/************************************** life end *************************************************/
+
+
+	// allServerResources
+
+	"articleTemplate_01":{ type:'click', evtid: 'articleTemplate_01', topic: '立即跳转', info: ''},
+	"articleTemplate_02":{ type:'click', evtid: 'articleTemplate_02', topic: '调用视频播放', info: ''},
 
 	
 }
