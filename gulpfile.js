@@ -546,13 +546,13 @@ gulp.task("allServerResourcesInclude", function() {
 
     .pipe(plugins.if(isWatch, plugins.debug({ title: 'js-有变动的文件:' })))
 
-    .pipe(plugins.if(options.env === '3' || options.env === '4', plugins.uglify({ //压缩
-        mangle: false, //类型：Boolean 默认：true 是否修改变量名
-        compress: false, //类型：Boolean 默认：true 是否完全压缩
-        output: {
-            beautify: true //只去注释，不压缩成一行
-        }
-    })))
+    // .pipe(plugins.if(options.env === '3' || options.env === '4', plugins.uglify({ //压缩
+    //     mangle: false, //类型：Boolean 默认：true 是否修改变量名
+    //     compress: false, //类型：Boolean 默认：true 是否完全压缩
+    //     output: {
+    //         beautify: true //只去注释，不压缩成一行
+    //     }
+    // })))
 
     //对root.js做一些修改
     .pipe(
@@ -609,15 +609,16 @@ gulp.task("includeJs", ['htmd', 'allServerResourcesInclude'], function() {
         //     plugins: ['transform-runtime']
         // }))
 
+
         .pipe(plugins.if(isWatch, plugins.debug({ title: 'js-有变动的文件:' })))
 
-        .pipe(plugins.if(options.env === '3' || options.env === '4', plugins.uglify({ //压缩
-            mangle: false, //类型：Boolean 默认：true 是否修改变量名
-            compress: false, //类型：Boolean 默认：true 是否完全压缩
-            output: {
-                beautify: true //只去注释，不压缩成一行
-            }
-        })))
+    // .pipe(plugins.if(options.env === '3' || options.env === '4', plugins.uglify({ //压缩
+    //     mangle: false, //类型：Boolean 默认：true 是否修改变量名
+    //     compress: false, //类型：Boolean 默认：true 是否完全压缩
+    //     output: {
+    //         beautify: true //只去注释，不压缩成一行
+    //     }
+    // })))
 
         //对root.js做一些修改
         .pipe(
@@ -1062,13 +1063,13 @@ gulp.task('rootEnv', function() {
                 }))
 
                 //如果是预生产/生产环境，需要去注释
-                .pipe(plugins.if(options.env === '3' || options.env === '4', plugins.uglify({ //压缩
-                    mangle: false, //类型：Boolean 默认：true 是否修改变量名
-                    compress: false, //类型：Boolean 默认：true 是否完全压缩
-                    output: {
-                        beautify: true //只去注释，不压缩成一行
-                    }
-                })))
+                // .pipe(plugins.if(options.env === '3' || options.env === '4', plugins.uglify({ //压缩
+                //     mangle: false, //类型：Boolean 默认：true 是否修改变量名
+                //     compress: false, //类型：Boolean 默认：true 是否完全压缩
+                //     output: {
+                //         beautify: true //只去注释，不压缩成一行
+                //     }
+                // })))
 
 
                 //替换后的文件修改文件名，打出到middle/root文件夹中

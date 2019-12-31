@@ -137,7 +137,6 @@ $(function () {
                           $(".isRiskMatchResult").attr("type","repeatRisk")
                       }
 
-                      that.gV.singleaAuthenType = type
           },
           callbackFail: function(json) { //失败后执行的函数
              tipAction(json.message);
@@ -229,7 +228,6 @@ $(function () {
     
             //风测等级匹配成功
          mui("body").on('mdClick',".isRiskMatchBox_match",function(){
-              var type = that.gV.singleaAuthenType;
               $(".isRiskMatch_mask").hide();
               $(".isRiskMatchBox").hide();
               window.location.href = site_url.pofCashTransformIn_url + '?fundCode='+ that.gV.transformInFundCode + '&fundName=' + that.gV.transformInFundName;
