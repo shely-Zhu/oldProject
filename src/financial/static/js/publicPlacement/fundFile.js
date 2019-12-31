@@ -293,6 +293,7 @@ $(function () {
                             }
                         }
                         pieData.push(item)
+                        console.log(pieData)
                     })
                     that.gV.pieData = pieData;
                     that.gV.pieData.forEach(function (item,index) {

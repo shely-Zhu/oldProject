@@ -68,14 +68,25 @@ module.exports = function(echartData, $e) {
             type: 'radar',
             areaStyle: {
                 normal: {
-                    color: "#DCA564",//背景色
+                    color: "#FBE2BD",//背景色
                 },
+            },
+            symbolSize:0, //圆点大小
+            lineStyle: {   // 线的样式
+                normal: {
+                  color: '#FBE2BD',
+                  width: 6,
+                  shadowColor: '#FBE2BD',
+                  shadowBlur: 50,
+                  shadowOffsetY: 15,
+                }
             },
             data: [{
                 value: echartData,
                 // name: '某软件'
             }]
-        }]
+        },
+       ]
     };
 
      
