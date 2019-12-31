@@ -20,8 +20,8 @@
         right:0;
         width: 100%;
         height:3.6rem;
-        // background: url("/mine/membershipInterests/static/img/banner.jpg");
-        background: linear-gradient(to right, @32457e 0%, @04154a 100%);
+        background: url("/mine/static/img/chengzhang_head_bg@2x.png") no-repeat center center;
+        // background: linear-gradient(to right, @32457e 0%, @04154a 100%);
         background-size: 100% 100%;
         // margin-bottom: 1.1rem;
         z-index: 100;
@@ -172,14 +172,19 @@
         ul>li{
             background: @c005;
             .lione{
-                font-size: .3rem;
+                font-size: .32rem;
                 color: @070707;
-                font-weight: bold;
+                font-weight: 400;
                 display: flex;
                 justify-content:space-between;
-                margin: 0 .4rem .22rem;
-                div{
-                    margin-top: .3rem;
+                margin:.15rem 0;
+                font-family:PingFangSC-Regular,PingFang SC;
+                .changeC{
+                    font-size: .38rem;
+                    font-weight:bold;
+                    span{
+                        margin-right: -0.15rem;
+                    }
                 }
             }
             .litwo{
@@ -188,14 +193,16 @@
                 display: flex;
                 justify-content:space-between;
                 // margin: 0 .4rem;
-                margin-left: .4rem;
-                padding-right: .4rem;
-                padding-bottom: .3rem;
+                // margin-left: .4rem;
+                // padding-right: .4rem;
+                padding-bottom: .2rem;
                 border-bottom: 1px solid @eaebef;
             }
         }
     }
-
+    .mui-table-view{
+        background:@c005;
+    }
     // .blackBg{
     //     width: 2rem!important;
     //     height:2rem!important;

@@ -193,23 +193,13 @@ gulp.task('proxyTask', function() {
         middleware: function(connect, opt) {
             return [
                 proxy('/app', {
-                    // target: 'https://app.htjf4.com',
+                    target: 'https://app.htjf4.com',
                     // target: 'http://172.16.187.129:8080',//李亚楠
                     // target: 'http://192.168.50.254:8085',
-                    target: 'https://app.chtfundtest.com',
+                    //target: 'https://app.chtfundtest.com',
                     changeOrigin: true,
                     secure: false,
                 }),
-
-                proxy(['/wap', '/web/', '/jf/'], {
-                    // target: 'https://h5.htjf4.com',
-                    //  target: 'http://172.16.187.129:8080',//李亚楠
-                    // target: 'http://172.16.187.164:8081',
-                    target: 'https://h5.chtfundtest.com',
-                    changeOrigin: true,
-                    secure: false,
-                }),
-
             ]
         }
     });
@@ -256,7 +246,7 @@ if (options.env === '0') { //当开发环境的时候构建命令执行mock服�
 
 /**此任务默认执行，gulp启动时，先将所有文件打包一次**/
 gulp.task('initialTask', function(cb) {
-    plugins.sequence('clean', 'images', 'font', 'allServerResources','allServerResourcesFont', 'includeJs', 'includeCss', 'cssToHost', 'webpack', 'bfRev', 'html', 'rev', 'rootEnv', cb);
+    plugins.sequence('clean', 'images', 'font', 'allServerResources', 'allServerResourcesFont', 'includeJs', 'includeCss', 'cssToHost', 'webpack', 'bfRev', 'html', 'rev', 'rootEnv', cb);
 });
 
 
@@ -447,10 +437,10 @@ gulp.task('font', function() {
 
 
 gulp.task('allServerResourcesFont', function() {
-    return gulp.src('src/allServerResources/include/fonts/*')
-        .pipe(gulp.dest(host.path + 'allServerResources/include/fonts'));
-})
-//allServerResources中include文件的打包
+        return gulp.src('src/allServerResources/include/fonts/*')
+            .pipe(gulp.dest(host.path + 'allServerResources/include/fonts'));
+    })
+    //allServerResources中include文件的打包
 gulp.task('allServerResources', function() {
     return gulp.src('src/allServerResources/include/*')
         .pipe(gulp.dest(host.path + 'allServerResources/include'));
@@ -875,20 +865,18 @@ gulp.task('html', function(cb) {
 
             var dcDomain = 'http://localhost:9099';
 
-            if( options.env == 2){
+            if (options.env == 2) {
                 //测试环境
                 dcDomain = 'https://dc.qasa.chtwm.com';
-            }
-            else if( options.env == 3){
+            } else if (options.env == 3) {
                 //预生产
                 dcDomain = 'https://dc.uata.haomalljf.com';
-            }
-            else if( options.env == 4){
+            } else if (options.env == 4) {
                 //生产
                 dcDomain = 'https://dc.chtwm.com';
             }
 
-            fileCon = fileCon.replace('@dcDomain', dcDomain );
+            fileCon = fileCon.replace('@dcDomain', dcDomain);
 
             file.contents = new Buffer(fileCon);
 

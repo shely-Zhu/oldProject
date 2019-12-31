@@ -1,13 +1,13 @@
 /*
-	历史净值 净值走势图
+	脌煤脢路戮禄脰碌 戮禄脰碌脳脽脢脝脥录
  */
 
-// 使用 Mock
+// 脢鹿脫脙 Mock
 var Mock = require('mockjs');
 
 
-//这里直接返回的就是JSON格式
-//var financial = Mock.mock({"data":"","message":"操作成功,数据为空","status":"1000"})
+//脮芒脌茂脰卤陆脫路碌禄脴碌脛戮脥脢脟JSON赂帽脢陆
+//var financial = Mock.mock({"data":"","message":"虏脵脳梅鲁脡鹿娄,脢媒戮脻脦陋驴脮","status":"1000"})
 var financial = Mock.mock({
 	"status":"0000",
 	"msg":"success",
@@ -15,23 +15,23 @@ var financial = Mock.mock({
 		"totalCount": 20,
         "totalPage": 10,
 		"pageList|10":[{
-             "noticeId":"785",// 公告ID
+             "noticeId":"785",// 鹿芦赂忙ID
 
-             "noticeSecuId":"8563214",// 公告业务编码
+             "noticeSecuId":"8563214",// 鹿芦赂忙脪碌脦帽卤脿脗毛
 
-             "publishDate":"2018-02-13",// 发布日期
+             "publishDate":"2018-02-13",// 路垄虏录脠脮脝脷
 
-             "title":"标题",// 标题
+             "title":"鐨勯兘鏄诞鍔ㄦ诞鍔ㄥ彂",// 卤锚脤芒
 
-             "typCode":"1",//类型ID
+             "typCode":"1",//脌脿脨脥ID
 
-             "typInfo":"类型说明",// 类型说明
+             "typInfo":"鐨勯兘鏄诞鍔ㄦ诞鍔ㄥ彂",// 脌脿脨脥脣碌脙梅
 
-             "linkAddress":"http://www.baidu.com",//链接地址
+             "linkAddress":"http://www.baidu.com",//脕麓陆脫碌脴脰路
 
-             "fileType":"2",//附件类型
+             "fileType":"2",//赂陆录镁脌脿脨脥
 
-            "contentLength":"85" //公告内容长度
+            "contentLength":"85" //鹿芦赂忙脛脷脠脻鲁陇露脠
 		}]
 	}
 });
