@@ -320,6 +320,7 @@ $(function() {
                         p: '<p>' + value + '</p>',
                         buttonTxt: '知道了',
                         zIndex: 100,
+                        htmdEvtYes:'fundAccountDiagnosisResult_09',
                     });
                     setTimeout(function(){
                         window.location.href = site_url.applyHistory_url 
@@ -388,6 +389,7 @@ $(function() {
                          p: '<p>' + value + '</p>',
                          buttonTxt: '知道了',
                          zIndex: 100,
+                         htmdEvtYes:'fundAccountDiagnosisResult_10'
                      });
                      setTimeout(function(){
                         window.location.href = site_url.applyHistory_url 
