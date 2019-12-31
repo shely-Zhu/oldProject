@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2019-12-09 15:53:31
- * @LastEditTime : 2019-12-30 10:29:20
+ * @LastEditTime : 2019-12-31 10:34:26
  * @LastEditors  : Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \htjf-app\src\mine\static\js\fundAccountDiagnosisResult.js
@@ -321,6 +321,10 @@ $(function() {
                         buttonTxt: '知道了',
                         zIndex: 100,
                     });
+                    setTimeout(function(){
+                        window.location.href = site_url.applyHistory_url 
+                    },1000)
+                   
                 },
                 callbackNoData:function(json){
                     tipAction(json.message);
@@ -385,6 +389,9 @@ $(function() {
                          buttonTxt: '知道了',
                          zIndex: 100,
                      });
+                     setTimeout(function(){
+                        window.location.href = site_url.applyHistory_url 
+                    },1000)
                 },
                 callbackNoData:function(json){
                     tipAction(json.message);
