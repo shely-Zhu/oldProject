@@ -27,20 +27,21 @@ module.exports = function(echartData, $e) {
             top:'40%',
             left:'center',
             textStyle: {
-                color: '#f2d8d8',
+                color: '#9D5709',//综合测评得颜色
                 fontSize: 14,
-                textBorderColor: "#f75348",
+                // textBorderColor: "#9D5709",
                 textBorderWidth:3
             },
             subtext: echartData[echartData.length-1], // 最后一个值是总分
             subtextStyle:{
-                color: '#f2d8d8',
-                fontSize: 20,
-                textBorderColor: "#f75348",
+                color: '#9D5709',//数字得颜色
+                fontSize: 25,
+                // textBorderColor: "#9D5709",
                 textBorderWidth:3
             }
         },
         legend: {
+            
         },
         tooltip: {
             trigger: 'item',
@@ -67,8 +68,8 @@ module.exports = function(echartData, $e) {
             type: 'radar',
             areaStyle: {
                 normal: {
-                    color: "#fe8982"
-                }
+                    color: "#DCA564",//背景色
+                },
             },
             data: [{
                 value: echartData,

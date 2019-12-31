@@ -10,7 +10,7 @@ var data = Mock.mock({
     "status": "0000",
     "message": "处理成功！",
     "data": {
-
+        "bankAccountMask": "1111111111",//交易状态
         "tradeApplyStatus": "21",//交易状态
 
         "tradeApplyDesc": "转入失败",//交易状态描述

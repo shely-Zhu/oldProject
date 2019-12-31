@@ -12,10 +12,10 @@ var incomeDetail = Mock.mock({
 			"totalPages": 2,
 		},
         "pageList|10": [{
-        	"growthDetail": 1,
+        	"growthDetail": 100,
         	"growthDesc": "成长值描述",
         	"growthDate": "2019-08-22",
-        	"growthIndate": ''
+        	"growthIndate": '2020-08-22'
         }],
     },
     "message": "操作成功！",

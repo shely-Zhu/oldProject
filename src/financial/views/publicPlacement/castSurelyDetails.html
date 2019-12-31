@@ -24,6 +24,7 @@
                 <span class="posRight">
                     <a class="iconfont iconone" href="javascript:;">&#xe67d;</a>
                 </span>
+                <span class="line"></span>
                 <div class="type">
                     <div>
                         <p class="word_color ">累计定投(元)</p>
@@ -86,14 +87,11 @@
         <div class="active ">修改</div>
         <div class="active ">续保</div> -->
     </div>
-    @@include('@pathCommonViews/payPassword.html')
-    @@include('@pathInclude/views/footer.html')
+    @@include('@pathCommonViews/payPassword.html') @@include('@pathInclude/views/footer.html')
     <script src="/financial/static/js/publicPlacement/castSurelyDetails.js"></script>
 </body>
 <script id="dataLists" type="text/x-handlebars-template">
-{{#if tradeRecordStutas}}
-    {{#each tradeRecord}}
-    {{#if status}}
+    {{#if tradeRecordStutas}} {{#each tradeRecord}} {{#if status}}
     <div>
         <span>{{tradeTime}}</span>
         <span>{{balance}}元</span>
@@ -103,15 +101,13 @@
     <div class="is_fail">
         <span>{{tradeTime}}</span>
         <span>{{balance}}元</span>
-        <span class="state_fail" allotNo = {{allotNo}}>{{statusDesc_1}}<a class="iconfont iconone" href="javascript:;">&#xe67d;</a>
+        <span class="state_fail" allotNo={ {allotNo}}>{{statusDesc_1}}<a class="iconfont iconone" href="javascript:;">&#xe67d;</a>
         </span>
         <span class="needPos">{{statusDesc}}</span>
     </div>
-    {{/if}}
-    {{/each}}
-{{else}}
+    {{/if}} {{/each}} {{else}}
     <p class="no-data">暂无数据</p>
-{{/if}}
+    {{/if}}
 </script>
 
 </html>
