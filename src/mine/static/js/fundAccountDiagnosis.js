@@ -209,8 +209,8 @@ $(function() {
                     if(!!data.goodsRatio&&Number(data.goodsRatio)!=0){
                         that.gV.pie.pieData.push({name: '商品型',value:(Number (data.goodsRatio)*100).toFixed(2),itemStyle:that.getPieColor('goodsRatio'),})
                     }
-                    if(!!data.currencyRatio&&Number(data.currencyRatio)!=0){
-                        that.gV.pie.pieData.push({name: '投资型',value:(Number (data.currencyRatio)*100).toFixed(2),itemStyle:that.getPieColor('alternativeInvestRatio'),})
+                    if(!!data.alternativeInvestRatio&&Number(data.alternativeInvestRatio)!=0){
+                        that.gV.pie.pieData.push({name: '投资型',value:(Number (data.alternativeInvestRatio)*100).toFixed(2),itemStyle:that.getPieColor('alternativeInvestRatio'),})
                     }
                     if(!!data.currencyRatio&&Number(data.currencyRatio)!=0){
                         that.gV.pie.pieData.push({name: '市场型',value:(Number (data.currencyRatio)*100).toFixed(2),itemStyle:that.getPieColor('currencyRatio'),})
@@ -656,7 +656,8 @@ $(function() {
                                 fontWeight: 600
                             }
                         }
-                    }
+                    },
+                    selectedMode:false,
                 },
                 series: [
                     {
