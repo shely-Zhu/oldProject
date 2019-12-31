@@ -1,8 +1,3 @@
-/**
- * 由于使用了gulp-webpack，当前项目的webpack版本是1.x的，配置项与3.x，4.x的都不同
- * 修改时需注意
- */
-
 var webpack = require('webpack'),
     path = require("path"),
     //assign  = require('object-assign'),
@@ -55,48 +50,29 @@ module.exports = {
     },
     module: {
         //各种加载器，即让各种文件格式可用require引用
-        loaders: [
-            { 
-                test: /\.js$/, 
-                loader: 'babel-loader' ,
-                // include: /node_modules/,
+        rules: [
+          { test: /\.js$/, 
+            //loader: 'babel', 
+            exclude: /node_modules/ ,
+            use: {
+                loader: 'babel-loader', // 对符合上面约束条件的文件 使用的 loader
+                options: {
+                    presets: ['env'],
+                    plugins: ['transform-runtime']
+                }
             },
-       ]
-
-
-        // rules: [
-        //   { test: /\.js$/, 
-        //     //loader: 'babel', 
-        //     exclude: /node_modules/ ,
-        //     // use: {
-        //     //     loader: 'babel-loader', // 对符合上面约束条件的文件 使用的 loader
-        //     //     options: {
-        //     //         presets: ['env'],
-        //     //         plugins: ['transform-runtime']
-        //     //     }
-        //     // },
             
-        //     loader: {
-        //         loader: 'babel-loader',
-        //     },
-        //     // query: {
-        //     //     "presets": [
-        //     //         "env"
-        //     //     ],
-        //     //     plugins: ['transform-runtime']
-        //     // }
+            //query: {compact: false},
 
-        //     //query: {compact: false},
-
-        //     },
-        //     {// 转译html文件
-        //         test: /\.html$/,
-        //         use: [
-        //           'html-loader'
-        //         ]
-        //     }, 
-        //   // {test: /\.less$/, loader: 'style-loader!css-loader?minimize&-autoprefixer!postcss-loader!less-loader'}
-        // ]
+            },
+            {// 转译html文件
+                test: /\.html$/,
+                use: [
+                  'html-loader'
+                ]
+            }, 
+          // {test: /\.less$/, loader: 'style-loader!css-loader?minimize&-autoprefixer!postcss-loader!less-loader'}
+        ]
     },
     resolve: {
         //配置别名，在项目中可缩减引用路径，
@@ -137,4 +113,3 @@ module.exports = {
     });
     return files;
 }*/
-
