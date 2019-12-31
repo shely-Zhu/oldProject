@@ -670,6 +670,7 @@ var monthReportDetail = {
                             p: '<p>非常感谢选择恒天财富！我们将尽快安排专业人员与您联系，请保持手机畅通</p>',
                             hideCelButton: true,
                             zIndex: 100,
+                            htmdEvtYes:'monthReportDetail_06',  // 埋点确定按钮属性
                             callback: function(t) {
 
                             },

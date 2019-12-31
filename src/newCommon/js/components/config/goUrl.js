@@ -565,6 +565,10 @@ module.exports = function() {
 
     // 老带新分享链接
     this.marketCampaign_url = go_url.marketCampaign_url;
+    // 点击立即绑定跳转验证用户身份页面
+    this.bindFinancialer_url = go_url.no_url + '/homePage/views/bindFinancialer/bindFinancialer.html';
+
+    
 
 
 };

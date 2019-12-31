@@ -119,6 +119,8 @@ $(function() {
 						p: '<p>' + '修改分红方式为“<span>'+ $(this).attr("data-autoBuyDes") +'</span>”<br>分红方式确认前将不能再次修改</p>',
 						yesTxt: '确定', 
 						celTxt: '取消',
+						htmdEvtYes:'bonusMethod_02',  // 埋点确定按钮属性
+                    	htmdEvtCel:'bonusMethod_03',  // 埋点取消按钮属性
 						zIndex: 100,
 						callback:function(){
 							that.changeBonusType(that.gV.publicFundDetail.tradeNo,that.gV.publicFundDetail.fundCode,autoBuy)
