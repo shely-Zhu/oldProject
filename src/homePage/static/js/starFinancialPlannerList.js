@@ -397,6 +397,7 @@ $(function() {
                 });
                 //点击活动列表跳转
                 mui('body').on('mdClick', '.mui-card', function() {
+                    var financialerId = $(this).attr("code")
                     // 登陆状态下先判断该用户是否绑定过理财师，未登录状态下直接跳转开户页面
                     // 先判断该用户是否绑定过理财师
                     if(that.gV.FinancialerClickFlag) {
@@ -440,7 +441,7 @@ $(function() {
                                         htmdEvtCel:'starFinancialPlannerList_13',
                                         callback: function() {
                                             // 点击立即绑定跳转验证用户身份页面
-                                            window.location.href = site_url.bindFinancialer_url
+                                            window.location.href = site_url.bindFinancialer_url + '?financialerId=' + financialerId + '&type=1'
                                         },
                                         callbackCel: function() {
                                             that.gV.FinancialerClickFlag = true 
@@ -461,7 +462,7 @@ $(function() {
                                     htmdEvtCel:'starFinancialPlannerList_15',
                                     callback: function() {
                                         // 点击立即绑定跳转验证用户身份页面
-                                        window.location.href = site_url.bindFinancialer_url
+                                        window.location.href = site_url.bindFinancialer_url + '?financialerId=' + financialerId + '&type=1'
                                     },
                                     callbackCel: function() {
                                         that.gV.FinancialerClickFlag = true 
