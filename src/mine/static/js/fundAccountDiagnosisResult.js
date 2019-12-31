@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2019-12-09 15:53:31
- * @LastEditTime : 2019-12-31 10:34:26
+ * @LastEditTime : 2019-12-31 15:04:09
  * @LastEditors  : Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \htjf-app\src\mine\static\js\fundAccountDiagnosisResult.js
@@ -16,6 +16,7 @@ var tipAction = require('@pathCommonJs/components/tipAction.js');
 var splitUrl = require('@pathCommonJs/components/splitUrl.js')();
 var generateTemplate = require('@pathCommonJsComBus/generateTemplate.js');
 require('@pathIncludJs/vendor/mui/mui.picker.min.js');
+var popPicker = require('@pathCommonJsCom/popPicker.js');
 
 
 $(function() {
@@ -106,12 +107,12 @@ $(function() {
         initSelectVal:function(){
            //初始化数据字典下拉框值
            var that = this;
-            generateTemplate(that.gV.fundDiagnosisSexDicData,that.$e.fundDiagnosisSexTemplate,that.$e.templateSelectBox);  //init性别
-            generateTemplate(that.gV.fundDiagnosisVocationDicData,that.$e.fundDiagnosisVocationTemplate,that.$e.templateSelectBox);  //init职业
-            generateTemplate(that.gV.fundDiagnosisInvestDurationDicData,that.$e.fundDiagnosisInvestDurationTemplate,that.$e.templateSelectBox);  //init投资年限
-            generateTemplate(that.gV.fundDiagnosisRiskLevelDicData,that.$e.fundDiagnosisRiskLevelTemplate,that.$e.templateSelectBox);  //init风险
-            generateTemplate(that.gV.fundDiagnosisEInvestDurationLevelDicData,that.$e.fundDiagnosisEInvestDurationLevelTemplate,that.$e.templateSelectBox);  //init预计投资年限
-            generateTemplate(that.gV.fundDiagnosisLiquidityRequirementDicData,that.$e.fundDiagnosisLiquidityRequirementTemplate,that.$e.templateSelectBox);  //init流动性
+          //  generateTemplate(that.gV.fundDiagnosisSexDicData,that.$e.fundDiagnosisSexTemplate,that.$e.templateSelectBox);  //init性别
+          //  generateTemplate(that.gV.fundDiagnosisVocationDicData,that.$e.fundDiagnosisVocationTemplate,that.$e.templateSelectBox);  //init职业
+          //  generateTemplate(that.gV.fundDiagnosisInvestDurationDicData,that.$e.fundDiagnosisInvestDurationTemplate,that.$e.templateSelectBox);  //init投资年限
+          //  generateTemplate(that.gV.fundDiagnosisRiskLevelDicData,that.$e.fundDiagnosisRiskLevelTemplate,that.$e.templateSelectBox);  //init风险
+          //  generateTemplate(that.gV.fundDiagnosisEInvestDurationLevelDicData,that.$e.fundDiagnosisEInvestDurationLevelTemplate,that.$e.templateSelectBox);  //init预计投资年限
+          //  generateTemplate(that.gV.fundDiagnosisLiquidityRequirementDicData,that.$e.fundDiagnosisLiquidityRequirementTemplate,that.$e.templateSelectBox);  //init流动性
         },
         initData:function(data){
             var that = this
@@ -164,7 +165,7 @@ $(function() {
                })*/
                for(var i = 0 ; i < that.gV.fundDiagnosisSexDicData.length; i++) {
                  if(that.gV.fundDiagnosisSexDicData[i].dicCode == code){
-                    val = that.gV.fundDiagnosisSexDicData[i].value
+                    val = that.gV.fundDiagnosisSexDicData[i].text
                   }
                }
            }else if(type == 'fundDiagnosisVocation'){
@@ -175,7 +176,7 @@ $(function() {
                 })*/
                 for(var i = 0 ; i < that.gV.fundDiagnosisVocationDicData.length; i++) {
                   if(that.gV.fundDiagnosisVocationDicData[i].dicCode == code){
-                    val = that.gV.fundDiagnosisVocationDicData[i].value
+                    val = that.gV.fundDiagnosisVocationDicData[i].text
                   }
                 }
            }else if(type == 'fundDiagnosisInvestDuration'){
@@ -186,7 +187,7 @@ $(function() {
                 })*/
                 for(var i = 0 ; i < that.gV.fundDiagnosisInvestDurationDicData.length; i++) {
                   if(that.gV.fundDiagnosisInvestDurationDicData[i].dicCode == code){
-                    val = that.gV.fundDiagnosisInvestDurationDicData[i].value
+                    val = that.gV.fundDiagnosisInvestDurationDicData[i].text
                   }
                 }
             }else if(type == 'fundDiagnosisRiskLevel'){
@@ -197,7 +198,7 @@ $(function() {
                 })*/
                 for(var i = 0 ; i < that.gV.fundDiagnosisRiskLevelDicData.length; i++) {
                   if(that.gV.fundDiagnosisRiskLevelDicData[i].dicCode == code){
-                    val = that.gV.fundDiagnosisRiskLevelDicData[i].value
+                    val = that.gV.fundDiagnosisRiskLevelDicData[i].text
                   }
                 }
             }else if(type == 'fundDiagnosisEInvestDurationLevel'){
@@ -208,7 +209,7 @@ $(function() {
                 })*/
                 for(var i = 0 ; i < that.gV.fundDiagnosisEInvestDurationLevelDicData.length; i++) {
                   if(that.gV.fundDiagnosisEInvestDurationLevelDicData[i].dicCode == code){
-                    val = that.gV.fundDiagnosisEInvestDurationLevelDicData[i].value
+                    val = that.gV.fundDiagnosisEInvestDurationLevelDicData[i].text
                   }
                 }
             }else if(type == 'fundDiagnosisLiquidityRequirement'){
@@ -219,7 +220,7 @@ $(function() {
                 })*/
                 for(var i = 0 ; i < that.gV.fundDiagnosisLiquidityRequirementDicData.length; i++) {
                   if(that.gV.fundDiagnosisLiquidityRequirementDicData[i].dicCode == code){
-                    val = that.gV.fundDiagnosisLiquidityRequirementDicData[i].value
+                    val = that.gV.fundDiagnosisLiquidityRequirementDicData[i].text
                   }
                 }
             }
@@ -296,13 +297,13 @@ $(function() {
                 data:{
                     id:"",  //主键 
                     age:that.gV.userAge, //年龄
-                    sex:that.gV.sexDataCode, //性别
-                    evocation:that.gV.professionalDataCode, //职业
+                    sex:(!!that.$e.sex.attr("num"))?that.$e.sex.attr("num"):that.gV.sexDataCode, //性别
+                    evocation:(!!that.$e.professional.attr("num"))? that.$e.professional.attr("num"):that.gV.professionalDataCode, //职业
                     evocationExtension:"",//职业描述
-                    investDurationLevel:that.gV.investment_yearDataCode, //投资年限
-                    riskLevel:that.gV.riskLevelDataCode,  //风险等级
-                    eInvestDurationLevel:that.gV.expectedInvestment_yearDataCode,  //预计投资年限
-                    liquidityRequirement:that.gV.liquidityDataCode,  //流动性需求
+                    investDurationLevel:(!!that.$e.investment_year.attr("num"))?that.$e.investment_year.attr("num"):that.gV.investment_yearDataCode, //投资年限
+                    riskLevel:(!!that.$e.riskLevel.attr('num'))?that.$e.riskLevel.attr('num'):that.gV.riskLevelDataCode,  //风险等级
+                    eInvestDurationLevel:(!!that.$e.expectedInvestment_year.attr("num"))?that.$e.expectedInvestment_year.attr("num"):that.gV.expectedInvestment_yearDataCode,  //预计投资年限
+                    liquidityRequirement:(!!that.$e.liquidity.attr("num"))?that.$e.liquidity.attr("num"):that.gV.liquidityDataCode,  //流动性需求
                     eYieldratePerYearMin:that.gV.yield_firstData, //预期年化收益率最小值
                     eYieldratePerYearMax:that.gV.yield_secondData,  //预期年化收益率最大值
                     affordableMaxDeficitRateMin:that.gV.loss_firstData,  //可承受最大亏损最小值
@@ -365,13 +366,13 @@ $(function() {
                 data:{
                     id:that.gV.applyId,  //主键
                     age:that.gV.userAge, //年龄
-                    sex:that.gV.sexDataCode, //性别
-                    evocation:that.gV.professionalDataCode, //职业
+                    sex:(!!that.$e.sex.attr("num"))?that.$e.sex.attr("num"):that.gV.sexDataCode, //性别
+                    evocation:(!!that.$e.professional.attr("num"))? that.$e.professional.attr("num"):that.gV.professionalDataCode, //职业
                     evocationExtension:"",//职业描述
-                    investDurationLevel:that.gV.investment_yearDataCode, //投资年限
-                    riskLevel:that.gV.riskLevelDataCode,  //风险等级
-                    eInvestDurationLevel:that.gV.expectedInvestment_yearDataCode,  //预计投资年限
-                    liquidityRequirement:that.gV.liquidityDataCode,  //流动性需求
+                    investDurationLevel:(!!that.$e.investment_year.attr("num"))?that.$e.investment_year.attr("num"):that.gV.investment_yearDataCode, //投资年限
+                    riskLevel:(!!that.$e.riskLevel.attr('num'))?that.$e.riskLevel.attr('num'):that.gV.riskLevelDataCode,  //风险等级
+                    eInvestDurationLevel:(!!that.$e.expectedInvestment_year.attr("num"))?that.$e.expectedInvestment_year.attr("num"):that.gV.expectedInvestment_yearDataCode,  //预计投资年限
+                    liquidityRequirement:(!!that.$e.liquidity.attr("num"))?that.$e.liquidity.attr("num"):that.gV.liquidityDataCode,  //流动性需求
                     eYieldratePerYearMin:that.gV.yield_firstData, //预期年化收益率最小值
                     eYieldratePerYearMax:that.gV.yield_secondData,  //预期年化收益率最大值
                     affordableMaxDeficitRateMin:that.gV.loss_firstData,  //可承受最大亏损最小值
@@ -472,31 +473,40 @@ $(function() {
             // 性别选择
             mui("body").on("mdClick",".content-item .mui-icon-arrowright",function(){
                 var type = $(this).attr("type");
-                $('.popuplist').css('display', 'block')
+               // $('.popuplist').css('display', 'block')
                 $(".popup-content .selectItemList").hide();
                 $(".mui-dtpicker").hide();
-                $('.popup-mask').show();
+               // $('.popup-mask').show();
                 if(type == "sex"){
-                    $(".popup-content .sex").show()
+                    popPicker(1, that.gV.fundDiagnosisSexDicData, that.$e.sex);
+                   // $(".popup-content .sex").show()
                 }else if(type == "professional"){
-                    $(".popup-content .professional").show()
+                    popPicker(1, that.gV.fundDiagnosisVocationDicData, that.$e.professional);
+                   // $(".popup-content .professional").show()
                 }else if(type == "investment_year"){
-                    $(".popup-content .investment_year").show()
+                    popPicker(1, that.gV.fundDiagnosisInvestDurationDicData, that.$e.investment_year);
+                 //   $(".popup-content .investment_year").show()
                 }else if(type == "riskLevel"){
-                    $(".popup-content .riskLevel").show()
+                    popPicker(1, that.gV.fundDiagnosisRiskLevelDicData, that.$e.riskLevel);
+                 //   $(".popup-content .riskLevel").show()
                 }
                 else if(type == "expectedInvestment_year"){
-                    $(".popup-content .expectedInvestment_year").show()
+                    popPicker(1, that.gV.fundDiagnosisEInvestDurationLevelDicData, that.$e.expectedInvestment_year);
+                 //   $(".popup-content .expectedInvestment_year").show()
                 }else if(type == "liquidity"){
-                    $(".popup-content .liquidity").show()
+                    popPicker(1, that.gV.fundDiagnosisLiquidityRequirementDicData, that.$e.liquidity);
+                   // $(".popup-content .liquidity").show()
                 }else if(type == "yield"){
+                      $('.popuplist').css('display', 'block')
+                      $('.popup-mask').show();
                     $(".popup-content .yield").show()
                     that.gV.typeInput = "yield";
                 }else if(type == "loss"){
+                    $('.popuplist').css('display', 'block')
+                    $('.popup-mask').show();
                     $(".popup-content .loss").show()
                     that.gV.typeInput = "loss";
                 }
-            
             },{
                 'htmdEvt': 'fundAccountDiagnosisResult_01'
             })
@@ -514,35 +524,6 @@ $(function() {
 
             //弹出框确定按钮
             mui("body").on("mdClick",".popup_true",function(){
-                var type = $(this).attr("type");
-                var val = $(this).attr("val");
-                var dicCode = $(this).attr("dicCode");
-                if(type == "fundDiagnosisSex"){
-                    that.$e.sex[0].textContent = val;
-                    that.gV.sexData = val;
-                    that.gV.sexDataCode = dicCode;
-                }else if(type == "fundDiagnosisVocation"){
-                    that.$e.professional[0].textContent = val;
-                    that.gV.professionalData = val;
-                    that.gV.professionalDataCode = dicCode;
-                }else if(type == "fundDiagnosisInvestDuration"){
-                    that.$e.investment_year[0].textContent = val;
-                    that.gV.investment_yearData = val;
-                    that.gV.investment_yearDataCode = dicCode;
-                }else if(type == "fundDiagnosisRiskLevel"){
-                    that.$e.riskLevel[0].textContent = val;
-                    that.gV.riskLevelData = val;
-                    that.gV.riskLevelDataCode = dicCode;
-                } else if(type == "fundDiagnosisEInvestDurationLevel"){
-                    that.$e.expectedInvestment_year[0].textContent = val;
-                    that.gV.expectedInvestment_yearData = val;
-                    that.gV.expectedInvestment_yearDataCode = dicCode;
-                }else if(type == "fundDiagnosisLiquidityRequirement"){
-                    that.$e.liquidity[0].textContent = val;
-                    that.gV.liquidityData = val;
-                    that.gV.liquidityDataCode = dicCode;
-                }
-                else{
                     if(that.gV.typeInput == "yield"){
                         var firstVal = $(".yieldFirst").val();
                         var secondVal = $(".yieldSecond").val();
@@ -603,7 +584,6 @@ $(function() {
                         that.gV.loss_firstData = firstVal;
                         that.$e.lossControl.show();
                     }
-                }
                 $(this).attr("type","")
                 $('.popuplist').css('display', 'none')
                 $(".mui-backdrop").remove()
