@@ -99,9 +99,9 @@ module.exports = function(echartData, $e) {
                             borderRadius: 4
                         }
                     },
-                    formatter: (a,b)=>{
+                    formatter: function(a,b){
                         i++;
-                        return `{a|${a}}\n{b|${arr1[i]}}`
+                        return "{a|" + a + "}\n{b|" + arr1[i] + "}"
                     }
                 }
             }

@@ -9,7 +9,7 @@ var generateTemplate = require('@pathCommonJsComBus/generateTemplate.js');
 
 
 $(function(){
-	let templatePage = {
+	var templatePage = {
 		//获取页面元素
 		$e:{
 			contentWrap:$('#contentWrap'),
@@ -22,7 +22,7 @@ $(function(){
             this.events()
         },
         // 获取消息getnoticeItemData中心列表
-        getTemplateData() {
+        getTemplateData: function() {
         	var that=this;
             var obj=[{
                 url: site_url.findProtocolContent_api,
@@ -44,7 +44,7 @@ $(function(){
             }];                        
             $.ajaxLoading(obj); 
         },
-        events() {
+        events: function() {
             var that = this;
         }
 	};

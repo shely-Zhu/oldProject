@@ -25,7 +25,7 @@ $(function() {
             $(".tabBar a").eq(that.gV.sortType * 1).addClass('mui-active');
             that.getTemplateData(that.gV.articleBelong, that.gV.sortType);
             mui('.mui-slider').slider().gotoItem(that.gV.sortType * 1, 0) //默认点击
-            mui('.mui-slider').slider().setStopped(true);//禁用左右滑动事件
+            mui('.mui-slider').slider().setStopped(true); //禁用左右滑动事件
             that.events()
             that.initMui()
         },
@@ -72,10 +72,10 @@ $(function() {
             $.ajaxLoading(obj);
         },
         // 获取配置的图片
-        getTemplateData(belong, num) {
+        getTemplateData: function(belong, num) {
             var that = this,
                 belong = belong ? belong : splitUrl['articleBelong'];
-            //      	num = num ? num : splitUrl['type'] * 1;//首次进来请求用路径中的articleBelong，点击的时候使用对应的articleBelong。
+            //          num = num ? num : splitUrl['type'] * 1;//首次进来请求用路径中的articleBelong，点击的时候使用对应的articleBelong。
             var obj = [{
                 url: site_url.getArticle_api,
                 data: {
