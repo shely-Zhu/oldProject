@@ -223,6 +223,8 @@ $(function() {
             that.gV.fundCode = parmesDataList.fundCode;
             //that.gV.nowRedempShare = parmesDataList.enableShares;
             that.gV.maxRedempShare = parmesDataList.enableShares;
+            $(".maxMoneyContent span").text(that.gV.maxRedempShare)
+            $(".msecond-one").attr("placeholder","最多可赎回"+that.gV.maxRedempShare+"份")
         },
         /*
             绑定事件
