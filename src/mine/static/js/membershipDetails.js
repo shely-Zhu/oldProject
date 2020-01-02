@@ -20,7 +20,7 @@ $(function() {
         },
         //全局变量
         gV: {
-            index: splitUrl['index'], // 用户点击的第几个icon，从0开始
+            index: splitUrl['index']?splitUrl['index']:0, // 用户点击的第几个icon，从0开始
         },
         //页面初始化函数
         init: function() {
@@ -87,7 +87,7 @@ $(function() {
                 callbackDone: function(json) {
                     var data = json.data;
                     generateTemplate(data, that.$e.membershipDetailsSilderBox, that.$e.membershipDetailsListTemplateId);
-                    that.swiperInit(parseInt(splitUrl['index']), json.data.length);
+                    that.swiperInit(parseInt(that.gV.index), json.data.length);
                     // $(".lazyload").lazyload()
                 },
                 callbackNoData: function(json) {
