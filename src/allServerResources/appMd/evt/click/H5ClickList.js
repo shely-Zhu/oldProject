@@ -39,9 +39,10 @@ var clickList = {
 	"addAccountDiagnosisResult_02": { type:'click', evtid: 'addAccountDiagnosisResult_02', topic: '添加已购买基金-购买日期选择弹框取消按钮', info: ''},
 	"addAccountDiagnosisResult_03": { type:'click', evtid: 'addAccountDiagnosisResult_03', topic: '添加已购买基金-确认添加按钮', info: ''},
 	//基金名称搜索
-	"diagnosisSearch_01" : { type:'click', evtid: 'diagnosisSearch_01', topic: '查询基金', info: ''} ,
-	"diagnosisSearch_02" : { type:'click', evtid: 'diagnosisSearch_02', topic: '跳转详情页', info: ''} ,
-	"diagnosisSearch_03" : { type:'click', evtid: 'diagnosisSearch_03', topic: '获取专属报告', info: ''} ,
+	"hotDiagnosis_01" : { type:'click', evtid: 'hotDiagnosis_01', topic: '查询基金', info: ''} ,
+	"hotDiagnosis_02" : { type:'click', evtid: 'hotDiagnosis_02', topic: '跳转详情页', info: ''} ,
+	"hotDiagnosis_03" : { type:'click', evtid: 'hotDiagnosis_03', topic: '获取专属报告', info: ''} ,
+	"hotDiagnosis_04" : { type:'click', evtid: 'hotDiagnosis_04', topic: '我知道了', info: ''} ,
 	// 基金诊断提交申请
 	"fundAccountDiagnosisResult_01": { type:'click', evtid: 'fundAccountDiagnosisResult_01', topic: '提交申请-性别选择', info: ''} ,
 	"fundAccountDiagnosisResult_02": { type:'click', evtid: 'fundAccountDiagnosisResult_02', topic: '提交申请-弹框内容选择', info: ''} ,
