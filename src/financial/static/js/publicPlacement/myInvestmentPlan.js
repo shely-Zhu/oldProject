@@ -338,7 +338,7 @@ $(function () {
             mui("body").on("mdClick", ".goEndPlan", function () {
                 window.location.href = site_url.myInvestmentPlanH_url ;
             
-                sessionStorage.setItem('stopList',JSON.stringify(that.gV.stopPlanList))
+               // sessionStorage.setItem('stopList',JSON.stringify(that.gV.stopPlanList))
             }, {
 				htmdEvt: 'myInvestmentPlan_03'
 			});

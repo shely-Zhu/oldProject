@@ -81,7 +81,7 @@ $(function() {
 					if ((valueOnway != 0) && !!valueOnway) {
 						that.$e.amountCom.find('.alignR').html(valueOnwayMask)
 						that.$e.redemption.attr("disabled", true).addClass('disable');
-						that.$e.buyBtn.attr("disabled", true).addClass('disable');
+						// that.$e.buyBtn.attr("disabled", true).addClass('disable');
 					} else {
 						// 隐藏待确认金额区域
 						that.$e.amountCom.hide()

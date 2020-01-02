@@ -14,33 +14,35 @@ var clickList = {
 	"privateIndex_guessLike" : { type:'click', evtid: '4', topic: '私募首页-猜你喜欢', info: '' } ,
 	"privateIndex_hotSpot" : { type:'click', evtid: '5', topic: '私募首页-热门私募', info: ''} ,
 	"privateList_detail" : { type:'click', evtid: '6', topic: '私募列表页-产品详情', info: ''} ,
-	/*************************************************************mine文件夹下*************************************************************************/ 
+	/***********************************************************mine文件夹下***************************************************************/ 
 	//已报名活动
-	"activityEnrolment_01" : { type:'click', evtid: '', topic: '已报名活动-tab切换', info: ''} ,
-	"activityEnrolment_02" : { type:'click', evtid: '', topic: '已报名活动-分享给好友', info: ''} ,
-	"activityEnrolment_03" : { type:'click', evtid: '', topic: '已报名活动-跳转详情', info: ''} ,
+	"activityEnrolment_01" : { type:'click', evtid: 'activityEnrolment_01', topic: '已报名活动-tab切换', info: ''} ,
+	"activityEnrolment_02" : { type:'click', evtid: 'activityEnrolment_02', topic: '已报名活动-分享给好友', info: ''} ,
+	"activityEnrolment_03" : { type:'click', evtid: 'activityEnrolment_03', topic: '已报名活动-跳转详情', info: ''} ,
 	//意见反馈
-	"concatUsAdvise_01" : { type:'click', evtid: '', topic: '意见反馈-单选按钮', info: ''} ,
-	"concatUsAdvise_02" : { type:'click', evtid: '', topic: '意见反馈-添加图片', info: ''} ,
-	"concatUsAdvise_03" : { type:'click', evtid: '', topic: '意见反馈-提交按钮', info: ''} ,
+	"concatUsAdvise_01" : { type:'click', evtid: 'concatUsAdvise_01', topic: '意见反馈-单选按钮', info: ''} ,
+	"concatUsAdvise_02" : { type:'click', evtid: 'concatUsAdvise_02', topic: '意见反馈-添加图片', info: ''} ,
+	"concatUsAdvise_03" : { type:'click', evtid: 'concatUsAdvise_03', topic: '意见反馈-提交按钮', info: ''} ,
 	//诊断详情
-	"diagnosisDetail_01" :{ type:'click', evtid: '', topic: '诊断详情-雷达图', info: ''},
-	"diagnosisDetail_02" :{ type:'click', evtid: '', topic: '诊断详情-折线图', info: ''},
-	"diagnosisDetail_03" :{ type:'click', evtid: '', topic: '诊断详情-文案提示', info: ''},
+	"diagnosisDetail_01" :{ type:'click', evtid: 'diagnosisDetail_01', topic: '诊断详情-雷达图', info: ''},
+	"diagnosisDetail_02" :{ type:'click', evtid: 'diagnosisDetail_02', topic: '诊断详情-折线图', info: ''},
+	"diagnosisDetail_03" :{ type:'click', evtid: 'diagnosisDetail_03', topic: '诊断详情-文案提示', info: ''},
+	"diagnosisDetail_04" :{ type:'click', evtid: 'diagnosisDetail_04', topic: '提示_我知道了', info: ''},
 	//基金诊断搜索
-	"diagnosisSearch_01" :{ type:'click', evtid: '', topic: '基金诊断搜索-取消搜索按钮', info: ''},
-	"diagnosisSearch_02" :{ type:'click', evtid: '', topic: '基金诊断搜索-li标签的事件委托', info: ''},
+	"diagnosisSearch_01" :{ type:'click', evtid: 'diagnosisSearch_01', topic: '基金诊断搜索-取消搜索按钮', info: ''},
+	"diagnosisSearch_02" :{ type:'click', evtid: 'diagnosisSearch_02', topic: '基金诊断搜索-li标签的事件委托', info: ''},
 	//基金诊断
-	"fundAccountDiagnosis_01":{ type:'click', evtid: '', topic: '基金诊断-展开持仓按钮', info: ''},
-	"fundAccountDiagnosis_02":{ type:'click', evtid: '', topic: '基金诊断-获取专属报告按钮', info: ''},
+	"fundAccountDiagnosis_01":{ type:'click', evtid: 'fundAccountDiagnosis_01', topic: '基金诊断-展开持仓按钮', info: ''},
+	"fundAccountDiagnosis_02":{ type:'click', evtid: 'fundAccountDiagnosis_02', topic: '基金诊断-获取专属报告按钮', info: ''},
 	// 添加已购买基金
-	"addAccountDiagnosisResult_01": { type:'click', evtid: '', topic: '添加已购买基金-购买日期选择', info: ''},
-	"addAccountDiagnosisResult_02": { type:'click', evtid: '', topic: '添加已购买基金-购买日期选择弹框取消按钮', info: ''},
-	"addAccountDiagnosisResult_03": { type:'click', evtid: '', topic: '添加已购买基金-确认添加按钮', info: ''},
+	"addAccountDiagnosisResult_01": { type:'click', evtid: 'addAccountDiagnosisResult_01', topic: '添加已购买基金-购买日期选择', info: ''},
+	"addAccountDiagnosisResult_02": { type:'click', evtid: 'addAccountDiagnosisResult_02', topic: '添加已购买基金-购买日期选择弹框取消按钮', info: ''},
+	"addAccountDiagnosisResult_03": { type:'click', evtid: 'addAccountDiagnosisResult_03', topic: '添加已购买基金-确认添加按钮', info: ''},
 	//基金名称搜索
-	"diagnosisSearch_01" : { type:'click', evtid: 'diagnosisSearch_01', topic: '查询基金', info: ''} ,
-	"diagnosisSearch_02" : { type:'click', evtid: 'diagnosisSearch_02', topic: '跳转详情页', info: ''} ,
-	"diagnosisSearch_03" : { type:'click', evtid: 'diagnosisSearch_03', topic: '获取专属报告', info: ''} ,
+	"hotDiagnosis_01" : { type:'click', evtid: 'hotDiagnosis_01', topic: '查询基金', info: ''} ,
+	"hotDiagnosis_02" : { type:'click', evtid: 'hotDiagnosis_02', topic: '跳转详情页', info: ''} ,
+	"hotDiagnosis_03" : { type:'click', evtid: 'hotDiagnosis_03', topic: '获取专属报告', info: ''} ,
+	"hotDiagnosis_04" : { type:'click', evtid: 'hotDiagnosis_04', topic: '我知道了', info: ''} ,
 	// 基金诊断提交申请
 	"fundAccountDiagnosisResult_01": { type:'click', evtid: 'fundAccountDiagnosisResult_01', topic: '提交申请-性别选择', info: ''} ,
 	"fundAccountDiagnosisResult_02": { type:'click', evtid: 'fundAccountDiagnosisResult_02', topic: '提交申请-弹框内容选择', info: ''} ,
@@ -50,6 +52,9 @@ var clickList = {
 	"fundAccountDiagnosisResult_06": { type:'click', evtid: 'fundAccountDiagnosisResult_06', topic: '提交申请-新增其他新建添加按钮', info: ''} ,
 	"fundAccountDiagnosisResult_07": { type:'click', evtid: 'fundAccountDiagnosisResult_07', topic: '提交申请-提交申请', info: ''} ,
 	"fundAccountDiagnosisResult_08": { type:'click', evtid: 'fundAccountDiagnosisResult_08', topic: '提交申请-基金勾选', info: ''} ,
+	"fundAccountDiagnosisResult_09": { type:'click', evtid: 'fundAccountDiagnosisResult_09', topic: '提交申请-我知道了', info: ''} ,
+	"fundAccountDiagnosisResult_10": { type:'click', evtid: 'fundAccountDiagnosisResult_10', topic: '编辑提交成功-我知道了', info: ''} ,
+	
 	//权益详情
 	"detailsUnderstandingDetails_01" : { type:'click', evtid: 'detailsUnderstandingDetails_01', topic: '权益详情-了解详情', info: ''} ,
 	//成长值记录
@@ -68,6 +73,9 @@ var clickList = {
 	"monthReportList_02" : { type:'click', evtid: 'monthReportList_02', topic: '浏览商品', info: ''} ,
 	//修改分红方式
 	"bonusMethod_01" : { type:'click', evtid: 'bonusMethod_01', topic: '修改分红方式', info: ''} ,
+	// 组件弹层的点击事件
+	"bonusMethod_02" : { type:'click', evtid: 'bonusMethod_02', topic: '修改分红方式_确定', info: ''} ,
+	"bonusMethod_03" : { type:'click', evtid: 'bonusMethod_03', topic: '修改分红方式_取消', info: ''} ,
 	//历史明细（没按钮）
 	//登录日志查询（没按钮）
 	//公募监管账户
@@ -92,9 +100,15 @@ var clickList = {
 	"recommend_5": { type:'click', evtid: 'recommend_5', topic: '推荐有礼-分享给好友', info: ''} ,
 	"recommend_6": { type:'click', evtid: 'recommend_6', topic: '推荐有礼-分享到朋友圈', info: ''} ,
 
-
+	"applyHistory_01": { type:'click', evtid: 'applyHistory_01', topic: '基金账户诊断_详情页', info: ''} ,
+	"applyHistory_02": { type:'click', evtid: 'applyHistory_02', topic: '基金账户诊断_展开收起', info: ''} ,
+	"applyHistory_03": { type:'click', evtid: 'applyHistory_03', topic: '基金账户诊断_编辑', info: ''} ,
+	"applyHistory_04": { type:'click', evtid: 'applyHistory_04', topic: '基金账户诊断_新增申请', info: ''} ,
 
 /**************************************************************mine文件夹结束**************************************************************************/ 
+
+
+
 
 /**************************************************************financial start***********************************************************************/ 
 	
@@ -133,9 +147,6 @@ var clickList = {
 	"privatePlacementDetail_31" : { type:'click', evtid: 'privatePlacementDetail_31', topic: '私募基金产品详情-产品与风险承受能力相匹配_取消', info: ''} ,
 	"privatePlacementDetail_32" : { type:'click', evtid: 'privatePlacementDetail_32', topic: '私募基金产品详情-账户冻结_确定', info: ''} ,
 	"privatePlacementDetail_33" : { type:'click', evtid: 'privatePlacementDetail_33', topic: '私募基金产品详情-账户冻结_取消', info: ''} ,
-
-
-
 
 	//现金管理  cashManagement.html
 	"cashManagement_01" : { type:'click', evtid: 'cashManagement_01', topic: '现金管理-现金宝详情', info: ''} ,
@@ -296,12 +307,9 @@ var clickList = {
 /**************************************************************financial  end ***********************************************************************/ 
 	
 	
+/********************************************************homePage  start ***********************************************************/ 
 
-
-	//homePage--------------------------------------------------------------分割线
 	//fortuneCollegeList.html
-	// "banner" : { type:'click', evtid: '', topic: '轮播图图片', info: ''} ,
-	// "slider" : { type:'click', evtid: '', topic: '轮播图小圆点', info: ''} ,
 	"fortune_00" : { type:'click', evtid: 'fortune_00', topic: '查看往期热词', info: ''} ,
 	"fortune_01" : { type:'click', evtid: 'fortune_01', topic: '播放往期内容', info: ''} ,
 	"fortune_02" : { type:'click', evtid: 'fortune_02', topic: '播放往期内容列表', info: ''} ,
@@ -346,6 +354,7 @@ var clickList = {
 
 	"starFinancialPlannerList_16":{ type:'click', evtid: 'starFinancialPlannerList_16', topic: '输入理财师工号或姓名_取消', info: ''} ,
 
+/********************************************************homePage  end ***********************************************************/ 
 
 	/************************************** account start *************************************************/
 	//publicTradeDetail.hrml
@@ -478,6 +487,8 @@ var clickList = {
 	"seeSign_0": { type:'click', evtid: 'seeSign_0', topic: '查看已签署材料-点击查看pdf', info: ''},
 	/************************************** account end *************************************************/
 
+
+
 	/************************************** life start *************************************************/
 	// activityList.html
 	"activityList_0":{ type:'click', evtid: 'activityList_0', topic: '定位选择', info: ''},
@@ -523,9 +534,13 @@ var clickList = {
     // 在线客服
     "customerService":{ type:'click', evtid: 'customerService', topic: '在线客服', info: ''},
 
-
-
 	/************************************** life end *************************************************/
+
+
+	// allServerResources
+
+	"articleTemplate_01":{ type:'click', evtid: 'articleTemplate_01', topic: '立即跳转', info: ''},
+	"articleTemplate_02":{ type:'click', evtid: 'articleTemplate_02', topic: '调用视频播放', info: ''},
 
 	
 }

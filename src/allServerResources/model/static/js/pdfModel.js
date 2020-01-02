@@ -1,15 +1,9 @@
 // pdfModel
 
 // $.noConflict();
-require('@pathIncludJs/vendor/config.js');
-
-//zepto模块
-require('@pathIncludJs/vendor/zepto/callback.js'); 
-require('@pathIncludJs/vendor/zepto/deferred.js'); 
+require('@pathCommonBase/base.js');
 
 require('@pathCommonJs/ajaxLoading.js');
-
-require('@pathCommonJsCom/headBarConfig.js');
 
 var pdfModel={
 
