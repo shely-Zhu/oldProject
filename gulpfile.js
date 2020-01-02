@@ -789,10 +789,10 @@ gulp.task("webpack", ['jsCpd', 'changePath', 'commonHtml'], function(cb) {
         //预上线环境时，去掉Log并压缩
         plugins.if(options.env === '3' || options.env === '4', plugins.removelogs()),
         
-        /*plugins.if(options.env === '3' || options.env === '4', plugins.uglify({ //压缩
+        plugins.if(options.env === '3' || options.env === '4', plugins.uglify({ //压缩
             mangle: false, //类型：Boolean 默认：true 是否修改变量名
             compress: false
-        })),*/
+        })),
 
         // plugins.if(options.env != '3' && options.env != '4', plugins.uglify({ //压缩
         //     mangle: false, //类型：Boolean 默认：true 是否修改变量名
