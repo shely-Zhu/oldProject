@@ -5,9 +5,9 @@
 // 使用 Mock
 var Mock = require('mockjs');
 
-var financial = Mock.mock({"data":"","message":"操作成功,数据为空","status":"1000"})
+/*var financial = Mock.mock({"data":"","message":"操作成功,数据为空","status":"1000"})*/
 //这里直接返回的就是JSON格式
-/*var financial = Mock.mock({
+var financial = Mock.mock({
 　　"status":"0000",
 　　"msg":"success",
 　　"data": {
@@ -28,7 +28,7 @@ var financial = Mock.mock({"data":"","message":"操作成功,数据为空","stat
 　　　　　　　"exRdDtOtc":"2017-12-07" //场外除息日
 　　　　}]
 　　}
-});*/
+});
 
 
 module.exports=financial;

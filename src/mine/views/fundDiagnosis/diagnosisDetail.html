@@ -20,14 +20,14 @@
 </head>
 
 <body>
-    <!-- 加载中loading -->
-    @@include('@pathCommonViews/loading/listLoading.html')
-    <!-- 暂无数据 -->
-    @@include('@pathCommonCom/noData/noData.html', {"tipText": "暂无数据"})
+       @@include('@pathCommonViews/headBarConfig.html',{"bgColors":"#384A81,#2A3C70","showType":"1","pathName":"基金诊断"})
+        <!-- 加载中loading -->
+        @@include('@pathCommonViews/loading/listLoading.html')
+        <!-- 暂无数据 -->
+        @@include('@pathCommonCom/noData/noData.html', {"tipText": "暂无数据"})
+
     <section class="diagnosisDetail">
     <!-- 顶部 -->
-    <!--@@include('@pathCommonViews/headBarConfig.html',{"bgColors":"#384A81,#2A3C70","showType":"1","pathName":"基金诊断"})-->
-    @@include('@pathCommonViews/headBarConfig.html',{"bgColors":"#384A81,#2A3C70","showType":"0","pathName":"基金诊断"})
         <div class="dd_top diagnosisDetail_top">
         </div>
         <!-- 综合评分 -->
@@ -95,7 +95,7 @@
 
     <!-- 顶部 -->
     <script id="first-template" type="text/x-handlebars-template">
-        <div class="dd_name">{{fundName}}  {{fundCode}}</div>
+        <div class="dd_name">{{fundName}} <span>{{fundCode}}</span> </div>
         <div class="dd_tag_wrap">
             {{#if type}}
             <span class="dd_tag">{{type}}</span> 
@@ -112,23 +112,23 @@
         </div>
         <div class="mui-row dd_value">
             <div class="mui-col-xs-4 left">
-                <i>{{newNetValue}}</i>
+               {{newNetValue}}
             </div>
-            <div class="mui-col-xs-4 dd_center center">
-                <i>{{newOneDayGains}}%</i>
+            <div class="mui-col-xs-4 dd_center left center">
+                {{newOneDayGains}}%
             </div>
-            <div class="mui-col-xs-4 right">
-                <i>{{yearEarnRate}}%</i>
+            <div class="mui-col-xs-4 left right">
+                {{yearEarnRate}}%
             </div>
         </div>
         <div class="mui-row dd_text">
             <div class="mui-col-xs-4 left">
                 <i>最新净值({{priceDate}})</i>
             </div>
-            <div class="mui-col-xs-4 center dd_center projectTermUnit">
+            <div class="mui-col-xs-4 center left dd_center projectTermUnit">
                 <i>最新日涨幅</i>
             </div>
-            <div class="mui-col-xs-4 right">
+            <div class="mui-col-xs-4 left right">
                 <i>成立以来年化收益率</i>
             </div>
         </div>

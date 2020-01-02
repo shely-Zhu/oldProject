@@ -11,6 +11,8 @@ var data = Mock.mock({
     "message": "处理成功！",
     "data": {
 
+        bankAccountMask: "1111111111111111111",//交易申请编号
+
         applyId: "",//交易申请编号
 
         fundName: "中融3-5年信用债A",//基金名称

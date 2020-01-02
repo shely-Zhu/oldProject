@@ -33,28 +33,15 @@
                 </div>
                 
             </div>
-            <h2 class="h2_title">热门诊断</h2>
+            <h2 class="h2_title"><p>热门诊断</p></h2>
         </div>
         <!--热门诊断-->
         <div class="hotFundList">
             <div class="list"></div>
-            <!-- <div class="haveData list">
-                <div class="contentWrapper">
-                    <ul class="mui-table-view">
-                        <li class="mui-table-view-cell">
-                            <div class="card-theme">
-                                放置热门列表
-                            </div>
-                        </li>
-                    </ul>
-                    返回顶部
-                    @@include('@pathCommonViews/goTop.html')
-                </div>
-            </div> -->
             <!-- 没有数据 -->
             @@include('@pathCommonCom/noData/noData.html', {"tipText": "暂无数据"})
             <!-- 加载中loading -->
-            @@include('@pathCommonViews/loading/listLoading.html')
+            @@include('@pathCommonCom/loading/listLoading.html')
         </div>
         <!-- 底部按钮 -->
         <div class="mui-row btnBottom">

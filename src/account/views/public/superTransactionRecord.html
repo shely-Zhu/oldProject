@@ -52,12 +52,11 @@
 		 <div class="first">
 			 <div class="tit">{{fundName}}</div>
 			 <div class="mon">
-				 {{#if tobe}}
-				 +
+				 {{#if isShares}}
+				   {{sharesMask}}元
 				 {{else}}
-				 -
+				   {{balanceMask}}元 
 				 {{/if}}
-				 {{balance}}元 
 			 </div>             
 		 </div>
 		 <div class="second">

@@ -13,7 +13,7 @@ require('@pathCommonJs/components/headBarConfig.js');
 var tipAction = require('@pathCommonJs/components/tipAction.js');
 var splitUrl = require('@pathCommonJs/components/splitUrl.js')();
 var generateTemplate = require('@pathCommonJsComBus/generateTemplate.js');
-require('@pathCommonJs/components/elasticLayerTypeTwo.js');
+// require('@pathCommonJs/components/elasticLayerTypeTwo.js');
 require('@pathCommonCom/pullRefresh/pullRefresh.js');
 
 
@@ -244,6 +244,7 @@ $(function() {
                         title: '提示',
                         p: '<p>提交申请成功！该功能暂未开发查询功能，稍后我们会尽快将专属诊断报告发送至您的专属理顾</p>',
                         buttonTxt: '知道了',
+                        htmdEvtYes:'hotDiagnosis_04',
                         zIndex: 100,
                     })
                 },
@@ -260,7 +261,7 @@ $(function() {
             mui("body").on("mdClick", ".topSearch", function() {
                 window.location.href = site_url.diagnosisSearch_url;
             }, {
-                'htmdEvt': 'diagnosisSearch_01'
+                'htmdEvt': 'hotDiagnosis_02'
             });
 
             // 跳转详情页
@@ -268,14 +269,14 @@ $(function() {
                 var fundCode = $($(this).find('.lightColor')[0]).html();
                 window.location.href = site_url.diagnosisDetail_url + '?fundCode=' + fundCode;
             }, {
-                'htmdEvt': 'diagnosisSearch_02'
+                'htmdEvt': 'hotDiagnosis_03'
             });
 
             // 获取专属报告
             mui("body").on("mdClick", ".btnBottom", function() {
                 that.getReport();
             }, {
-                'htmdEvt': 'diagnosisSearch_03'
+                'htmdEvt': 'hotDiagnosis_01'
             });
         }
     };

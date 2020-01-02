@@ -209,8 +209,8 @@ $(function() {
                     if(!!data.goodsRatio&&Number(data.goodsRatio)!=0){
                         that.gV.pie.pieData.push({name: '商品型',value:(Number (data.goodsRatio)*100).toFixed(2),itemStyle:that.getPieColor('goodsRatio'),})
                     }
-                    if(!!data.currencyRatio&&Number(data.currencyRatio)!=0){
-                        that.gV.pie.pieData.push({name: '投资型',value:(Number (data.currencyRatio)*100).toFixed(2),itemStyle:that.getPieColor('alternativeInvestRatio'),})
+                    if(!!data.alternativeInvestRatio&&Number(data.alternativeInvestRatio)!=0){
+                        that.gV.pie.pieData.push({name: '投资型',value:(Number (data.alternativeInvestRatio)*100).toFixed(2),itemStyle:that.getPieColor('alternativeInvestRatio'),})
                     }
                     if(!!data.currencyRatio&&Number(data.currencyRatio)!=0){
                         that.gV.pie.pieData.push({name: '市场型',value:(Number (data.currencyRatio)*100).toFixed(2),itemStyle:that.getPieColor('currencyRatio'),})
@@ -241,19 +241,18 @@ $(function() {
                         $("#assets-box .otherAssetRatio .num").html(Number(data.otherAssetRatio).toFixed(2) + '%')
                         var assets_width = $("#assets-box").width();
                         var arr = [
-                            {key:'stockAssetRatio',val:Number(data.stockAssetRatio)/100*assets_width},
-                            {key:'cashAssetRatio',val:Number(data.cashAssetRatio)/100*assets_width},
-                            {key:'bondAssetRatio',val:Number(data.bondAssetRatio)/100*assets_width},
-                            {key:'otherAssetRatio',val:Number(data.otherAssetRatio)/100*assets_width},
+                            {key:'stockAssetRatio',val:Number(data.stockAssetRatio)/110*assets_width},
+                            {key:'cashAssetRatio',val:Number(data.cashAssetRatio)/110*assets_width},
+                            {key:'bondAssetRatio',val:Number(data.bondAssetRatio)/110*assets_width},
+                            {key:'otherAssetRatio',val:Number(data.otherAssetRatio)/110*assets_width},
                         ] 
                          var newArr = arr.sort(that.compare('val'));
-                         console.log("8888",newArr);
                          var num = 0;
                          newArr.forEach(function(item){
-                             if(item.val<42){
-                                 var chaNum = item.val -42;
+                             if(item.val<45){
+                                 var chaNum = item.val -45;
                                  num = num + chaNum
-                                 item.val = 42;
+                                 item.val = 45;
                              }
                          })
                          newArr[newArr.length - 1].val = newArr[newArr.length - 1].val + num;
@@ -656,7 +655,8 @@ $(function() {
                                 fontWeight: 600
                             }
                         }
-                    }
+                    },
+                    selectedMode:false,
                 },
                 series: [
                     {

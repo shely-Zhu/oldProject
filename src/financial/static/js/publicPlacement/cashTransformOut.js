@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2019-11-26 14:42:56
- * @LastEditTime : 2019-12-30 14:29:01
+ * @LastEditTime : 2019-12-31 12:10:56
  * @LastEditors  : Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \htjf-app\src\financial\static\js\publicPlacement\cashTransformOut.js
@@ -99,14 +99,23 @@ $(function () {
          */
          // 获取该账户的余额
 		 initParmes:function(){
-		   var that = this;
-		   var data = JSON.parse(sessionStorage.getItem("transformMessage"))?JSON.parse(sessionStorage.getItem("transformMessage")):"";
-		   that.gv.productName = data.productName;
-		   that.gv.fundCode = data.fundCode;
-		  // that.gv.transformTotalMoney = data.money;
-		   //that.gv.transformMoney = data.money;
-
-		 },
+			var that = this;
+			 var obj =[{
+				 url:site_url.pofGetAssetsCashList_api,
+				 data:{
+					 "fundCode":that.gv.fundCode,
+					 "pageSize":10,
+					 "pageCurrent": 1
+				 },
+				 callbackDone:function(json){
+					    that.gv.transformTotalMoney = json.data.pageList[0].totalMoney;
+						that.gv.transformMoney = json.data.pageList[0].totalMoney;
+						that.$e.el_productName.html(that.gv.productName);
+						that.$e.el_transformInput.val(json.data.pageList[0].totalMoney);
+				 }
+			 }]
+			 $.ajaxLoading(obj);
+		  },
 		 findProtocolBasi:function(){
 			var that = this;
 			var obj =[

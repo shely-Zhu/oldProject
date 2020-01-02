@@ -77,6 +77,8 @@ $(function() {
 					// 买入按钮暂不可用
 					that.$e.buyBtn.attr("disabled", true).addClass('disable').html("暂不可售");
 
+					that.$e.buyBtn.attr("disabled", true).addClass('disable').html("暂不可售");
+
 					// 有待确认金额，赎回按钮,买入按钮不可用
 					if ((valueOnway != 0) && !!valueOnway) {
 						that.$e.amountCom.find('.alignR').html(valueOnwayMask)

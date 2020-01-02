@@ -269,6 +269,7 @@ var pathList = {
 	"/life/views/memberClub/activityDetails.html": { evtid: 'activityDetails', topic: '会员俱乐部-活动列表', info: ''} ,
 
 	/********************************* life end ***************************************/
+	"/allServerResources/model/views/articleTemplate.html" : { evtid: '36', topic: '活动模板', info: ''} ,
 
 }
 

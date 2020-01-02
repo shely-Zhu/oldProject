@@ -10,14 +10,11 @@
 require('@pathCommonBase/base.js');
 require('@pathCommonJs/ajaxLoading.js');
 require('@pathCommonCom/elasticLayer/elasticLayer/elasticLayer.js'); 
-// require('@pathCommonJs/components/elasticLayer.js');
-// require('@pathCommonJs/components/elasticLayerTypeTwo.js');
-require('@pathCommonJs/components/headBarConfig.js');
+// require('@pathCommonJs/components/headBarConfig.js');
 require('@pathIncludJs/vendor/mui/mui.picker.min.js');
 var tipAction = require('@pathCommonJs/components/tipAction.js');
 var splitUrl = require('@pathCommonJs/components/splitUrl.js')();
 var generateTemplate = require('@pathCommonJsComBus/generateTemplate.js');
-// require('@pathCommonJs/components/elasticLayerTypeTwo.js');
 
 
 $(function() {
@@ -71,20 +68,28 @@ $(function() {
                 $(this).siblings().eq(1).show();
                 $(this).hide();
                 $(this).parent().siblings().eq(0).show()
+            },{
+                'htmdEvt': 'applyHistory_01'
             })
             mui("body").on("mdClick",".historyItemList .right_down",function(){
                 $(this).siblings().eq(1).show();
                 $(this).hide();
                 $(this).parent().siblings().eq(0).hide()
+            },{
+                'htmdEvt': 'applyHistory_02'
             })
             //点击修改跳转到基金申请页面
             mui("body").on("mdClick",".editHistory",function(){
                 var id = $(this).attr("applyId");
                 window.location.href = site_url.fundAccountDiagnosisResult_url+"?type=edit"+"&applyId="+id
+            },{
+                'htmdEvt': 'applyHistory_03'
             })
             //点击新增申请
             mui("body").on("mdClick",".addApply",function(){
                 window.location.href = site_url.fundAccountDiagnosisResult_url+"?type=add"
+            },{
+                'htmdEvt': 'applyHistory_04'
             })
          
        },
