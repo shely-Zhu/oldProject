@@ -3,15 +3,11 @@
 * @author zhangyanping 2019-11-19
 */
 
-
-
 require('@pathCommonBase/base.js');
 require('@pathCommonJs/ajaxLoading.js');
 
 var splitUrl = require('@pathCommonJsCom/splitUrl.js')();
 var Base64 = require('@pathIncludJs/vendor/base64/base64.js');
-//黑色提示条的显示和隐藏
-var tipAction = require('@pathCommonJsCom/tipAction.js');
 
 var consultProduct = {
 	

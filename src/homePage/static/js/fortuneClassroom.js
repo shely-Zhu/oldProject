@@ -307,7 +307,7 @@ $(function() {
         },
         dealData: function(data) {
             $.each(data, function(a, b) {
-                if(b.articleBelong == 2) {
+                if(b.articleBelong == 6) { // 大咖直播 6
                     b.isLive = true
                 } else {
                     b.isLive = false
