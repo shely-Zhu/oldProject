@@ -54,13 +54,22 @@ $(function () {
             isRiskMatchBoxHeader:$(".isRiskMatchBox_header"),
             singleaAuthenType:"",  //认证类型  买入into  定投 investement
             discountStatus:"", //有无费率
+            echartsData: {
+                oneMonth : {},
+                threeMonth: {},
+                sixMonth: {},
+                oneYear: {},
+                sinceNow: {}
+            },
         },
         fundType: splitUrl['fundType'] == '10300'||splitUrl['fundType'] == '10800' ? 1 : 0, //10300 货币基金类型，其余为普通基金类型
         init: function () {
             var that = this;
-            //页面初始化
-            that.getData();
+            that.getData(); // 获取基金详情
+            that.getFundCollectionInit() //收藏管理--判断是否被收藏
+            that.getData1(); // 查询基金的历史收益（货币基金）/历史净值（普通基金）
             that.getUserInfo();  //获取用户类型
+            that.events();
             $('.tips').hide()
         },
         changeVal: function (prop, num, isfalse) {
@@ -73,6 +82,7 @@ $(function () {
             }
             this.gV.json[prop] = value
         },
+        // 获取基金详情
         getData: function () {
             var that = this;
             // 请求页面数据
@@ -120,11 +130,8 @@ $(function () {
                         that.gV.discountStatus = true
                     }
                     
-                    $(".tplBox").html(html);
-                    that.getFundCollectionInit()
-                    that.getData1();
-                    that.getData2('1', 1);
-                    that.events();
+                    $(".tplBox").html(html); 
+                    that.getData2('1', 1); // 获取echarts数据
                     var historyStr = that.fundType ? '<div class="item_name">日期</div><div class="item_name">七日年化</div><div class="item_name">万份收益(元)</div>' : '<div class="item_name">日期</div><div class="item_name">单位净值</div><div class="item_name">累计净值</div><div class="item_name">日涨幅</div>'
                     $('.history_area >.history_item').html(historyStr);
 
@@ -674,18 +681,64 @@ $(function () {
         getData2: function (type, time, end) {
             time = time === 0 ? "" : time
             var that = this;
+            //判断是否已经有数据了，有的话不再请求接口
+            if( time == '' && that.gV['echartsData'].sinceNow.date && that.gV['echartsData'].sinceNow.date.length){
+                // 成立至今
+                that.drawLine( type, that.gV['echartsData'].sinceNow );
+                return false;
+            } else if( time == 1 && that.gV['echartsData'].oneMonth.date && that.gV['echartsData'].oneMonth.date.length){
+                //月
+                that.drawLine( type, that.gV['echartsData'].oneMonth );
+                return false;
+            } else if( time == 3 && that.gV['echartsData'].threeMonth.date && that.gV['echartsData'].threeMonth.date.length ){
+                // 季
+                that.drawLine( type, that.gV['echartsData'].threeMonth );
+                return false;
+            } else if( time == 6 && that.gV['echartsData'].sixMonth.date && that.gV['echartsData'].sixMonth.date.length){
+                //半年
+                that.drawLine( type, that.gV['echartsData'].sixMonth );
+                return false;
+            } else if( time == 12 && that.gV['echartsData'].oneYear.date && that.gV['echartsData'].oneYear.date.length){
+                //一年
+                that.drawLine( type, that.gV['echartsData'].oneYear );
+                return false;
+            }
             var dataOpt = {
                 fundCode: splitUrl['fundCode'],
                 dataRange: time,
                 end: end || ""
             };
+            var newData = {
+                date: [], //存放折线图收益日期
+                seven: [], //存放折线图七日年化  单位净值
+                big: [],//存放折线图万份收益  累计净值
+            }
             // 请求页面数据
             var obj = [{
                 url: site_url.prfFundNetWorthTrendChart_api,
                 data: dataOpt,
                 callbackDone: function (json) {
                     json = json.data.pageList
-                    var newData = {
+                    //拼数据
+                    $.each( json, function(i, v){
+                        newData.date.push(v.trdDt)
+                        if (that.fundType) {
+                            newData.seven.push(v.annYldRat)
+                            newData.big.push(v.unitYld)
+                        } else {
+                            newData.seven.push(v.unitNav)
+                            newData.big.push(v.accuUnitNav)
+                        }
+                    })
+                    switch(Number(time)) {
+                        case 0: that.gV['echartsData'].sinceNow = newData;break; // 成立至今
+                        case 1: that.gV['echartsData'].oneMonth = newData;break; // 月
+                        case 3: that.gV['echartsData'].threeMonth = newData;break; // 季
+                        case 6: that.gV['echartsData'].sixMonth = newData;break; // 半年
+                        case 12: that.gV['echartsData'].oneYear = newData;break; // 近一年
+                    }
+                    
+                    /*var newData = {
                         date: [], //存放折线图收益日期
                         seven: [], //存放折线图七日年化  单位净值
                         big: [],//存放折线图万份收益  累计净值
@@ -699,7 +752,7 @@ $(function () {
                             newData.seven.push(v.unitNav)
                             newData.big.push(v.accuUnitNav)
                         }
-                    })
+                    })*/
                     // newData.date = [json[0].trdDt, json[Math.ceil(json.length / 2)].trdDt, json[json.length - 1].trdDt]
                     // newData.seven = [json[0].annYldRat, json[Math.ceil(json.length / 2)].annYldRat, json[json.length - 1].annYldRat]
                     // newData.big = [json[0].unitYld, json[Math.ceil(json.length / 2)].unitYld, json[json.length - 1].unitYld]
