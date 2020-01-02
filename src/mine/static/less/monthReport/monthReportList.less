@@ -1,13 +1,11 @@
 // 月度报告列表页
 // @author zhangyanping 2019-11-01
 
-@import url("@pathInclude/css/mui.min.css");
-@import url('@pathCommonLess/mui/resetMUI.less');
-@import url("@pathCommonLess/reset.less");
-@import url("@pathCommonLess/color.less");
-
-@import url("@pathCommonLessCom/againEnter.less");
+@import url("@pathCommonLess/mui/resetMUI.less");
 @import url("@pathCommonLessCom/alertBox.less");
+
+@import url("@pathCommonLessCom/headBarConfig.less");
+
 
 .mui-table-view:before{
 	height: 0;
@@ -17,6 +15,11 @@
 }
 .mui-pull-bottom-pocket{
 	overflow: visible;
+	padding-top: 0.2rem;
+}
+
+.noneList{
+	display: none;
 }
 
 // 样式重置
@@ -102,7 +105,7 @@
 		margin-top: 0.5rem;
 	}
 	.mui-table-view.mui-card{
-		width: 6.9rem;
+		// width: 6.9rem;
 		margin:0.5rem auto;
 		border-radius:0.3rem;
 	}
@@ -307,6 +310,7 @@
 		border-radius: 0.04rem;
 		text-align: center;
 		background-image: linear-gradient(135deg, #F1CDA8 0%, #B57E45 100%);
+		color: @c005;
 	}
 
 }

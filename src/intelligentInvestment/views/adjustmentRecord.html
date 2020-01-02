@@ -1,20 +1,24 @@
-<!-- /**
+<!-- /**  
  * @Page:  调仓记录页面
- * @Author: songxiaoyu
- * @Date:   2019-01-07 17:38:06
- * @Last Modified by:   songxiaoyu
+ * @Author: songxiaoyu  
+ * @Date:   2019-01-07 17:38:06  
+ * @Last Modified by:   songxiaoyu  
  */ -->
 <!DOCTYPE html>
 <html>
 
 <head>
-    @@include('@pathInclude/views/meta.html')
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="applicable-device" content="mobile">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
     <link rel="stylesheet" href="/intelligentInvestment/static/css/adjustmentRecord.css">
     <title>调仓记录</title>
 </head>
 
 <body>
-
+    
     @@include('@pathCommonViews/load.html')
     @@include('@pathCommonViews/noData.html')
     @@include('@pathCommonViews/loading/listLoading.html')
@@ -32,11 +36,11 @@
         </div>
     </div>
     @@include('@pathCommonViews/pageModule/adjustmentTable.html')
-
+     
      @@include('@pathInclude/views/footer.html')
     <script src="/include/js/iscroll.js"></script>
-
-
+     
+     
      <!-- 添加埋点 -->
     @@include('@pathInclude/views/header.html')
     <script src="/intelligentInvestment/static/js/adjustmentRecord.js"></script>

@@ -12,14 +12,14 @@
  */
 
 
-require('@pathIncludJs/base.js');
+require('@pathCommonBase/base.js');
 // require('@pathCommonJsCom/utils.js');
 //ajax调用
 require('@pathCommonJs/ajaxLoading.js');
 
-require('@pathCommonJs/components/headBarConfig.js');
-
 var splitUrl = require('@pathCommonJs/components/splitUrl.js')();
+var frozenAccount = require('@pathCommonJs/components/frozenAccount.js');
+require('@pathCommonCom/elasticLayer/elasticLayer/elasticLayer.js');
 
 $(function() {
 	var privateDetail = {
@@ -29,6 +29,9 @@ $(function() {
 			isAllowRedemption: splitUrl['isAllowRedemption'],
 			ecFileName: '',
 			ecFileUrl: '',
+			groupName: '',
+			redemptionOpenFrequency: '', // 赎回开放频率
+			imgUrl: '', // 赎回指引图片路径
 			qrnhWfsy: {
 				oneMonth : {},
 				threeMonth: {},
@@ -41,7 +44,10 @@ $(function() {
 				oneYear: {},
 				sinceNow: {}
 			},
-			redeemRule: []	// 赎回规则  按照=====切割		
+			redeemRule: [],	// 赎回规则  按照=====切割
+			echartsClickFlag: false, // echarts图表查询单点标识 false为可点击
+			redeemClickFlag: true, // true为可点击
+			redeemPartion: ''	
 		},
 		init: function(){
 			var that = this;
@@ -99,7 +105,7 @@ $(function() {
 			that.event();	
 		},
 		// 获取交易规则内容接口 t 1 稳金 2 稳裕 5 证券
-		getTradeRule() {
+		getTradeRule: function() {
 			var that = this;
 			var projectType = Number(that.data.projectType)
 			switch(projectType) {
@@ -114,6 +120,7 @@ $(function() {
 			    needLogin: true,
 			    contentTypeSearch: true,
 			    callbackDone: function(json) {
+			    	that.data.imgUrl = json.data.imgUrl?json.data.imgUrl:''
 			    	if(json.data.introduction && json.data.introduction!='') {
 			    		that.data.redeemRule = json.data.introduction.replace(/\r\n/g,"").split("=====");
 				    	// 判断是否有快速赎回规则
@@ -132,7 +139,7 @@ $(function() {
 			$.ajaxLoading(obj);	
 		},
 		// 赎回规则数据 1快速赎回 2普通赎回
-		setRedeemRule(type) {
+		setRedeemRule: function(type) {
 			var that = this;
 			var redeemRule = that.data.redeemRule;
 			if(type == 1) {
@@ -175,8 +182,10 @@ $(function() {
 			    	var jsonData = json.data;
 			    	//设置数据到页面上
 			    	that.setDomData( jsonData );
-			    	that.data.ecFileName = jsonData.ecFileName;
-			    	that.data.ecFileUrl = jsonData.ecFileUrl;
+			    	that.data.ecFileName = jsonData.ecFileName?jsonData.ecFileName:'';
+			    	that.data.ecFileUrl = jsonData.ecFileUrl?jsonData.ecFileUrl:'';
+			    	that.data.groupName = jsonData.groupName?jsonData.groupName:'';
+			    	that.data.redemptionOpenFrequency = jsonData.redemptionOpenFrequency?jsonData.redemptionOpenFrequency:''
 			    	//请求其他接口
 			    	if( (that.data.projectType == 0) || (that.data.projectType == 1) ){ 
 			    		//稳金类项目，请求七日年化/万份收益折线图
@@ -235,6 +244,7 @@ $(function() {
 			    needLogin: true,
 			    callbackDone: function(json) {
 			    	console.log(json)
+			    	that.data.echartsClickFlag = false;
 			    	var jsonData = json.data;
 			    	//拼数据
 			       	$.each( jsonData, function(i, el){
@@ -242,7 +252,7 @@ $(function() {
 			       		newData.profitThoudDate.push( el.curveDate);
 			       		newData.profitThoudValue.push( el.incomeUnit);
 			       	})
-			       	switch(num) {
+			       	switch(Number(num)) {
 			       		case 0: that.data['qrnhWfsy'].oneMonth = newData;break;
 			       		case 1: that.data['qrnhWfsy'].threeMonth = newData;break;
 			       		case 3: that.data['qrnhWfsy'].oneYear = newData;break;
@@ -251,11 +261,13 @@ $(function() {
 			       	that.drawLine( type, newData);			       	
 			    },
 			    callbackNoData: function(json) {
+			    	that.data.echartsClickFlag = false;
                     $("#qrnhLine").addClass("hide")
                     $("#wfsyLine").addClass("hide")
                     $(".noDataHintEcharts").removeClass("hide")
                 },
 			    callbackFail: function(json) {
+			    	that.data.echartsClickFlag = false;
                     $("#qrnhLine").addClass("hide")
                     $("#wfsyLine").addClass("hide")
                     $(".noDataHintEcharts").removeClass("hide")
@@ -280,19 +292,19 @@ $(function() {
 				var type = 'ljjz';
 			}
 			//判断是否已经有数据了，有的话不再请求接口
-			if( num == 0 && that.data['dwjzljjz'].oneMonth.profitThoudDate && that.data['dwjzljjz'].oneMonth.profitThoudDate.length){
+			if( num == 0 && that.data['dwjzljjz'].oneMonth.assetsDate && that.data['dwjzljjz'].oneMonth.assetsDate.length){
 	       		//请求的是近一个月的数据
 	       		that.drawLine( type, that.data['dwjzljjz'].oneMonth );
 	       		return false;
-	       	} else if( num == 1 && that.data['dwjzljjz'].threeMonth.profitThoudDate && that.data['dwjzljjz'].threeMonth.profitThoudDate.length){
+	       	} else if( num == 1 && that.data['dwjzljjz'].threeMonth.assetsDate && that.data['dwjzljjz'].threeMonth.assetsDate.length){
 	       		//近三个月
 	       		that.drawLine( type, that.data['dwjzljjz'].threeMonth );
 	       		return false;
-	       	} else if( num == 3 && that.data['dwjzljjz'].oneYear.profitThoudDate && that.data['dwjzljjz'].oneYear.profitThoudDate.length ){
+	       	} else if( num == 3 && that.data['dwjzljjz'].oneYear.assetsDate && that.data['dwjzljjz'].oneYear.assetsDate.length ){
 	       		//近一年
 	       		that.drawLine( type, that.data['dwjzljjz'].oneYear );
 	       		return false;
-	       	} else if( num == 4 && that.data['dwjzljjz'].sinceNow.profitThoudDate && that.data['dwjzljjz'].sinceNow.profitThoudDate.length){
+	       	} else if( num == 4 && that.data['dwjzljjz'].sinceNow.assetsDate && that.data['dwjzljjz'].sinceNow.assetsDate.length){
 	       		//成立至今
 	       		that.drawLine( type, that.data['dwjzljjz'].sinceNow );
 	       		return false;
@@ -306,6 +318,7 @@ $(function() {
 			    },
 			    needLogin: true,
 			    callbackDone: function(json) {
+			    	that.data.echartsClickFlag = false;
 			    	var jsonData = json.data.pageList;
 			    	//拼数据
 			       	$.each( jsonData, function(i, el){
@@ -313,7 +326,7 @@ $(function() {
 			       		newData.assetsDate.push( el.netValueDate);
 			       		newData.accumulativeAssets.push( el.accuNetValue);
 			       	})
-			       	switch(num) {
+			       	switch(Number(num)) {
 			       		case 0: that.data['dwjzljjz'].oneMonth = newData;break;
 			       		case 1: that.data['dwjzljjz'].threeMonth = newData;break;
 			       		case 3: that.data['dwjzljjz'].oneYear = newData;break;
@@ -322,11 +335,13 @@ $(function() {
 			       	that.drawLine( type, newData);			       	
 			    },
 			    callbackNoData: function(json) {
+			    	that.data.echartsClickFlag = false;
                     $("#dwjzLine").addClass("hide")
                     $("#ljjzLine").addClass("hide")
                     $(".noDataHintEcharts").removeClass("hide")
                 },
 			    callbackFail: function(json) {
+			    	that.data.echartsClickFlag = false;
                     $("#dwjzLine").addClass("hide")
                     $("#ljjzLine").addClass("hide")
                     $(".noDataHintEcharts").removeClass("hide")
@@ -481,10 +496,18 @@ $(function() {
 		getTxt: function(){
 			var that = this;
 		},
+		setHeadLineHeight: function() {
+			if($("#HeadBarpathName").height() <= $(".backBtn").height()) {
+				$("#HeadBarpathName").removeClass("doubleLines").addClass("singleLine")
+			} else {
+				$("#HeadBarpathName").removeClass("singleLine").addClass("doubleLines")
+			}
+		},
 		setDomData: function( jsonData){
 			var that = this;
 			//项目名称
     		$('#HeadBarpathName').html( jsonData.projectName );
+    		that.setHeadLineHeight()
 	    	if ( that.data.projectType == 0 ){ //稳金类项目
     			//当前市值
     			$('#type0TotalM').html( jsonData.capitalisation?jsonData.capitalisation:'--' );
@@ -493,9 +516,10 @@ $(function() {
     		   	//七日年化
     		   	$('.type_0 .sevenYearYield').html( jsonData.sevenYearYield?jsonData.sevenYearYield + '%':'--');
     		   	// 七日年化日期
-    		   	$('.type_0 .smallDate').html( jsonData.sevenYearYieldUpdateDate ?" (" + jsonData.sevenYearYieldUpdateDate + ")":"--");
+    		   	$('.type_0 .smallDate').html( jsonData.sevenYearYieldUpdateDate ?" (" + jsonData.sevenYearYieldUpdateDate + ")":"( -- )");
     		   	//可赎回份额
     		   	$('.type_0 .kshfe').html( jsonData.allowRedemptionShare?jsonData.allowRedemptionShare:'--');
+    		   	that.data.redeemPartion = jsonData.allowRedemptionShare
     		   	//万份收益
     		   	$('.type_0 .wfsy').html( jsonData.incomeUnit?jsonData.incomeUnit:'--');
 	    	} else if( that.data.projectType == 1){ //稳裕类	   		
@@ -506,9 +530,10 @@ $(function() {
 	    		//七日年化
 	    		$('.type_1 .sevenYearYield').html( jsonData.sevenYearYield?jsonData.sevenYearYield + '%':'--');
 	    		// 七日年化日期
-    		   	$('.type_1 .smallDate').html(jsonData.sevenYearYieldUpdateDate ?" (" + jsonData.sevenYearYieldUpdateDate + ")":"--");
+    		   	$('.type_1 .smallDate').html(jsonData.sevenYearYieldUpdateDate ?" (" + jsonData.sevenYearYieldUpdateDate + ")":"( -- )");
 	    		//可赎回份额
     		   	$('.type_1 .kshfe').html( jsonData.allowRedemptionShare?jsonData.allowRedemptionShare:'--');
+    		   	that.data.redeemPartion = jsonData.allowRedemptionShare
     		   	//赎回开放日
     		   	jsonData.redemptionOpenDay ? $('.type_1 .shkfr').html( jsonData.redemptionOpenDay) : $(".type_1 .shkfr").parent().css("display", "none")
     		   	//可提交赎回申请时间
@@ -534,7 +559,7 @@ $(function() {
 	    		//认购金额
 	    		$('#type3TotalM').html( jsonData.buyAmount ? jsonData.buyAmount : '--' );
 	    		//收益分配
-	    		if(!jsonData.incomeAssign || jsonData.incomeAssign=='') {
+	    		if(!jsonData.incomeAssign || jsonData.incomeAssign=='' || Number(jsonData.incomeAssign)==0) {
 	    			$('.type_3 .syfp').parent().css("display", "none")
 	    		} else {
 	    			$('.type_3 .syfp').html( jsonData.incomeAssign );
@@ -546,7 +571,29 @@ $(function() {
 	    			$('.type_3 .clr').html( jsonData.setupDate);
 	    		}
 	    		//产品期限
-    		   	$('.type_3 .cpqx').html( jsonData.prodTerm==''?'--': jsonData.prodTerm);
+	    		var period = '';
+	    		if(jsonData.investPeriod && jsonData.investPeriod!= '') { // 投资期
+	    			period += jsonData.investPeriod + jsonData.prodTerm + "（投资期）"
+	    		}
+	    		if(jsonData.quitPeriod && jsonData.quitPeriod!= '') { // 退出期
+	    			if(period == '') {
+	    				period += jsonData.quitPeriod + jsonData.prodTerm + "（退出期）"
+	    			} else {
+	    				period = period + "+" + jsonData.quitPeriod + jsonData.prodTerm + "（退出期）"
+	    			}
+	    		}
+	    		if(jsonData.delayPeriod && jsonData.delayPeriod!= '') { // 延长期
+	    			if(period == '') {
+	    				period += jsonData.delayPeriod + jsonData.prodTerm + "（延长期）"
+	    			} else {
+	    				period = period + "+" + jsonData.delayPeriod + jsonData.prodTerm + "（延长期）"
+	    			}
+	    		}
+	    		if(period == '') {
+	    			$('.type_3 .cpqx').parent().parent().remove();
+	    		} else {
+	    			$('.type_3 .cpqx').html( period);
+	    		}
 	    	} else if( that.data.projectType == 4){ //证券类   		
 	    		//当前市值
 	    		$('#type4TotalM').html( jsonData.capitalisation ? jsonData.capitalisation : '--'  );
@@ -558,6 +605,7 @@ $(function() {
 	    		$('.type_4 .ljjz').html( jsonData.totalNetValue ? jsonData.totalNetValue : '--' );
 	    		// 可赎回份额
 	    		$('.type_4 .kshhf').html( jsonData.allowRedemptionShare ? jsonData.allowRedemptionShare : '--'  );
+	    		that.data.redeemPartion = jsonData.allowRedemptionShare
 	    		// 持有天数
 	    		$('.type_4 .cyts').html( jsonData.holdDays ? jsonData.holdDays : '--'  );
 	    		//赎回开放日
@@ -579,28 +627,37 @@ $(function() {
 	    		if(tradeRecordFlag) {
 	    			$(".single .txt").html("交易明细")
 	    			$(".single .img").attr("src", "/account/static/img/productDetail/type_1_left.png")
+	    			$(".single>div").addClass("transactionDetail")
 	    		} else if (incomeAssignFlag) {
 	    			$(".single .txt").html("收益分配明细")
 	    			$(".single .img").attr("src", "/account/static/img/productDetail/account_icon_jymx@2x.png")
+	    			$(".single>div").addClass("incomeDistribution")
 	    		} else if (fundConfirmDealFalg) {
 	    			$(".single .txt").html("基金确认书")
 	    			$(".single .img").attr("src", "/account/static/img/productDetail/type_1_right.png")
+	    			$(".single>div").addClass("privateFundPdf")
 	    		}
 	    	} else if ((tradeRecordFlag && incomeAssignFlag && !fundConfirmDealFalg) || (tradeRecordFlag && !incomeAssignFlag && fundConfirmDealFalg) || (!tradeRecordFlag && incomeAssignFlag && fundConfirmDealFalg)) {
 	    		$(".midContent>.actionWrap>.double").css("display", "block")
 	    		if(!fundConfirmDealFalg) {
+	    			$(".double").children().eq(0).addClass("transactionDetail")
 	    			$(".double").children().eq(0).find(".txt").html("交易明细")
 	    			$(".double").children().eq(0).find(".img").attr("src", "/account/static/img/productDetail/type_1_left.png")
+	    			$(".double").children().eq(1).addClass("incomeDistribution")
 	    			$(".double").children().eq(1).find(".txt").html("收益分配明细")
 	    			$(".double").children().eq(1).find(".img").attr("src", "/account/static/img/productDetail/account_icon_jymx@2x.png")
 	    		} else if (!incomeAssignFlag) {
+	    			$(".double").children().eq(0).addClass("transactionDetail")
 	    			$(".double").children().eq(0).find(".txt").html("交易明细")
 	    			$(".double").children().eq(0).find(".img").attr("src", "/account/static/img/productDetail/type_1_left.png")
+	    			$(".double").children().eq(1).addClass("privateFundPdf")
 	    			$(".double").children().eq(1).find(".txt").html("基金确认书")
 	    			$(".double").children().eq(1).find(".img").attr("src", "/account/static/img/productDetail/type_1_right.png")
 	    		} else if (!tradeRecordFlag) {
-	    			$(".double").children().eq(0).find(".txt").html("收益明细")
+	    			$(".double").children().eq(0).addClass("incomeDistribution")
+	    			$(".double").children().eq(0).find(".txt").html("收益分配明细")
 	    			$(".double").children().eq(0).find(".img").attr("src", "/account/static/img/productDetail/account_icon_jymx@2x.png")
+	    			$(".double").children().eq(1).addClass("privateFundPdf")
 	    			$(".double").children().eq(1).find(".txt").html("基金确认书")
 	    			$(".double").children().eq(1).find(".img").attr("src", "/account/static/img/productDetail/type_1_right.png")
 	    		}
@@ -614,7 +671,7 @@ $(function() {
 		event: function(){
 			var that = this;
 			// 按钮点击展开收起
-			mui("body").on('tap', '.openButton', function() {
+			mui("body").on('mdClick', '.openButton', function() {
                 if( $('.topContent.open').length ){
 					//收起
 					$('.topContent').removeClass('open');
@@ -624,75 +681,114 @@ $(function() {
 					$('.topContent').addClass('open');
 					$('.typeWrap openWrap').show();
 				}
-            })
-            // 交易明细，基金确认书，收益明细等点击跳转
-            mui("body").on('tap', '.single', function() {
-            	if($(this).find(".txt").html() == '交易明细') { // 私募交易明细页面
-            		window.location.href = site_url.transactionDetail_url + '?projectId=' + that.data.projectId;
-            	} else if ($(this).find(".txt").html() == '收益分配明细') { // 私募收益明细页面
-            		window.location.href = site_url.incomeDistribution_url + '?projectId=' + that.data.projectId;
-            	} else if ($(this).find(".txt").html() == '基金确认书') { // 基金确认书页面
-            		window.location.href = site_url.privateFundPdf_url + '?projectId=' + that.data.projectId + '&ecFileName=' + that.data.ecFileName + '&ecFileUrl=' + that.data.ecFileUrl;
-            	}
-            })
-            mui("body").on('tap', '.double>div', function() {
-            	if($(this).find(".txt").html() == '交易明细') { // 私募交易明细页面
-            		window.location.href = site_url.transactionDetail_url + '?projectId=' + that.data.projectId;
-            	} else if ($(this).find(".txt").html() == '收益分配明细') { // 私募收益明细页面
-            		window.location.href = site_url.incomeDistribution_url + '?projectId=' + that.data.projectId;
-            	} else if ($(this).find(".txt").html() == '基金确认书') { // 基金确认书页面
-            		window.location.href = site_url.privateFundPdf_url + '?projectId=' + that.data.projectId + '&ecFileName=' + that.data.ecFileName + '&ecFileUrl=' + that.data.ecFileUrl;
-            	}
-            })
-            mui("body").on('tap', '.treble>.actionCon', function() {
-            	if($(this).find(".txt").html() == '交易明细') { // 私募交易明细页面
-            		window.location.href = site_url.transactionDetail_url + '?projectId=' + that.data.projectId;
-            	} else if ($(this).find(".txt").html() == '收益分配明细') { // 私募收益明细页面
-            		window.location.href = site_url.incomeDistribution_url + '?projectId=' + that.data.projectId;
-            	} else if ($(this).find(".txt").html() == '基金确认书') { // 基金确认书页面
-            		window.location.href = site_url.privateFundPdf_url + '?projectId=' + that.data.projectId + '&ecFileName=' + that.data.ecFileName + '&ecFileUrl=' + that.data.ecFileUrl;
-            	}
-            })
+            }, {
+				'htmdEvt': 'privateDetail_0'
+			})
+			// 交易明细点击跳转
+			mui("body").on('mdClick', '.transactionDetail', function() {
+				window.location.href = site_url.transactionDetail_url + '?projectId=' + that.data.projectId;
+			}, {
+				'htmdEvt': "privateDetail_1"
+			})
+			// 收益分配明细点击跳转
+			mui("body").on('mdClick', '.incomeDistribution', function() {
+				window.location.href = site_url.incomeDistribution_url + '?projectId=' + that.data.projectId;
+			}, {
+				'htmdEvt': "privateDetail_2"
+			})
+			// 基金确认书点击跳转
+			mui("body").on('mdClick', '.privateFundPdf', function() {
+				window.location.href = site_url.downloadFile_api+'?name='+ new Base64().encode(that.data.ecFileName)+"&show=0&url="+that.data.ecFileUrl;
+			}, {
+				'htmdEvt': "privateDetail_3"
+			})
             // 历史明细点击跳转
-            mui("body").on('tap', '#historyDetailBtn', function() {
+            mui("body").on('mdClick', '#historyDetailBtn', function() {
             	window.location.href = site_url.historyDetail_url + '?projectId=' + that.data.projectId;
-            })
+            }, {
+				'htmdEvt': 'privateDetail_4'
+			})
             // 净值明细点击跳转
-            mui("body").on('tap', '#netValueDetailBtn', function() {
+            mui("body").on('mdClick', '#netValueDetailBtn', function() {
             	window.location.href = site_url.priNetWorthDetails_url + '?projectId=' + that.data.projectId;
-            })
-            mui("body").on('tap', '#netValueDetailArrow', function() {
+            }, {
+				'htmdEvt': 'privateDetail_5'
+			})
+            mui("body").on('mdClick', '#netValueDetailArrow', function() {
             	window.location.href = site_url.priNetWorthDetails_url + '?projectId=' + that.data.projectId;
-            })
+            }, {
+				'htmdEvt': 'privateDetail_5'
+			})
             // 交易规则点击跳转
-            mui("body").on('tap', '#transactionRuleBtn', function() {
-            	window.location.href = site_url.transactionRules_url + '?projectId=' + that.data.projectId;
-            })
+            mui("body").on('mdClick', '#transactionRuleBtn', function() {
+            	window.location.href = site_url.privateTransactionRules_url + '?projectType=' + that.data.projectType
+            }, {
+				'htmdEvt': 'privateDetail_6'
+			})
             // 产品档案点击跳转
-            mui("body").on('tap', '#productFilesBtn', function() {
+            mui("body").on('mdClick', '#productFilesBtn', function() {
             	window.location.href = site_url.productFiles_url + '?projectId=' + that.data.projectId;
-            })
+            }, {
+				'htmdEvt': 'privateDetail_7'
+			})
             // 信息披露点击跳转
-            mui("body").on('tap', '#infoPublishBtn', function() {
+            mui("body").on('mdClick', '#infoPublishBtn', function() {
             	window.location.href = site_url.informationDisclosure_url + '?projectId=' + that.data.projectId;
-            })
+            }, {
+				'htmdEvt': 'privateDetail_8'
+			})
             //折线图点击月份请求数据
-            mui("body").on('tap', '.lineWrap .time', function() {
-            	$('.lineDraw .time').removeClass('active');
-				$(this).addClass('active');
-				if(that.data.projectType == 4) {
-					that.getTypeTwoData( $(this).attr('num') );
-				} else {
-					that.getTypeOneData( $(this).attr('num') );
-				}
-            })
+            mui("body").on('mdClick', '.lineWrap .time', function() {
+            	if(!that.data.echartsClickFlag) {
+            		$('.lineDraw .time').removeClass('active');
+					$(this).addClass('active');
+					if(that.data.projectType == 4) {
+						that.getTypeTwoData( $(this).attr('num') );
+					} else {
+						that.getTypeOneData( $(this).attr('num') );
+					}
+            	}
+            	
+            }, {
+				'htmdEvt': 'privateDetail_9'
+			})
             //赎回按钮点击切换
-            mui("body").on('tap', '#redeemNav .navSpan', function() {
+            mui("body").on('mdClick', '#redeemNav .navSpan', function() {
             	$(this).addClass("active").siblings().removeClass('active')
 				that.setRedeemRule($(this).attr("type"))
-            })
+            }, {
+				'htmdEvt': 'privateDetail_10'
+			})
+            //进入赎回页面
+            mui("body").on('mdClick', '.redeemBtn', function() {
+            	// 先判断登录是否超时以及账户冻结状态    司法验证过期弹出提示框
+				if(that.data.redeemClickFlag) {
+					that.data.redeemClickFlag = frozenAccount("buyFreeze", window.location.href,'','privateDetail_13')
+					if(!that.data.redeemClickFlag) { // 验证通过则跳转赎回页面
+						$.elasticLayer({
+				            id: "tip",
+				            title: '提示',
+				            p: '<p>赎回后不可撤单，确定要赎回</p>',
+				            zIndex: 100,
+				            yesButtonPosition: 'left',
+				            hideCelButton: false,
+				            htmdEvtYes:'privateDetail_14',  // 埋点确定按钮属性
+				            htmdEvtCel:'privateDetail_15',  // 埋点取消按钮属性
+				            callback: function() {
+				            	var type = that.data.projectType==0?1:2
+								window.location.href = site_url.privateRedeem_url + '?projectId=' + that.data.projectId + '&redeemPartion=' + that.data.redeemPartion + '&type=' + type;
+				            },
+				            callbackCel: function() {
+				            	that.data.redeemClickFlag = true
+				            }
+				        });
+					}
+				}
+            }, {
+				'htmdEvt': 'privateDetail_11'
+			})
             //折线图点击七日年化/万份收益切换区域
-            mui("body").on('tap', '.lineWrap .titleWrap .title', function() {
+            mui("body").on('mdClick', '.lineWrap .titleWrap .title', function() {
             	$('.lineWrap .titleWrap .title').removeClass('active');
 				$(this).addClass('active');
 				//判断当前画的是七日年化还是万份收益或单位净值或累计净值
@@ -727,7 +823,9 @@ $(function() {
 				}
 				$('.lineDraw .time').removeClass('active');
 				$('.lineDraw .newYear').addClass('active');
-            })
+            }, {
+				'htmdEvt': 'privateDetail_12'
+			})
 		},
 	}
 	privateDetail.init();

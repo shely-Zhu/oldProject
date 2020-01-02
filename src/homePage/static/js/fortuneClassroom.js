@@ -1,24 +1,14 @@
 //  财富学院
 // @author yanruiting 2019-11-26 
 
+require('@pathCommonBase/base.js');
 require('@pathCommonJsCom/utils.js');
 //ajax调用
 require('@pathCommonJs/ajaxLoading.js');
-//zepto模块--callback
-require('@pathIncludJs/vendor/zepto/callback.js');
-//zepto模块--deferred
-require('@pathIncludJs/vendor/zepto/deferred.js');
-//路径配置文件
-require('@pathIncludJs/vendor/config.js');
+var alwaysAjax = require('@pathCommonJs/components/alwaysAjax.js');
 // 切换
 require('@pathCommonJsCom/tabScroll.js');
 require('@pathCommonJsCom/goTopMui.js');
-require('@pathCommonJs/components/elasticLayer.js');
-require('@pathCommonJs/components/elasticLayerTypeFive.js');
-require('@pathCommonJs/components/headBarConfig.js');
-//黑色提示条的显示和隐藏
-var tipAction = require('@pathCommonJsCom/tipAction.js');
-var splitUrl = require('@pathCommonJs/components/splitUrl.js')();
 
 $(function() {
     var data = {
@@ -40,6 +30,7 @@ $(function() {
             listToTop: '', // 滑动区域距离顶部距离
             navToTop: '', // 滑动nav距离顶部距离
             navHeight: '', // nav高度
+            lazyClassArr: []
         },
         html: '', //存放生成的html
         init: function() { //初始化函数
@@ -140,6 +131,10 @@ $(function() {
                 //为$id添加hasPullUp  class
                 $($id).addClass('hasPullUp');
             });
+            //无缝滚动
+            /*setTimeout(function() {
+                
+            }, 1000)*/
         },
         getTabsListData: function(t) {
             var that = this;
@@ -158,12 +153,28 @@ $(function() {
                                 num: json.data[i].sonModelType
                             }
                         })(i);
+                        that.gV.lazyClassArr.push("lazyload" + json.data[i].sonModelType)
                     }
                     //拼模板，初始化左右滑动mui组件
                     that.beforeFunc();
                     //初始化第一屏区域的上拉加载
                     that.initMui($('#scroll1'));
-                }
+                },
+                callbackNoData:function(){
+                    //没有数据时展示暂无数据
+                    $(".list").hide()
+                    $(".title").hide()
+                    that.getElements.listLoading.hide();
+                    that.getElements.noData.show();
+                    $(".br").css("display", "none")
+                },
+                callbackFail: function(json) {
+                    tipAction(json.message);
+                    //隐藏loading，调试接口时需要去掉
+                    setTimeout(function() {
+                        that.$e.listLoading.hide();
+                    }, 100);
+                },
             }];
             $.ajaxLoading(obj);
         },
@@ -174,6 +185,7 @@ $(function() {
                 url: that.gV.siteUrlArr[that.gV.current_index], //调用第几个接口
                 data: that.gV.ajaxArr[that.gV.current_index], //传调用参数
                 needLogin: true,
+                needLoading: false,
                 callbackDone: function(json) {
                     console.log(json.data)
                     var jsonData = that.dealData(json.data.list),
@@ -231,8 +243,16 @@ $(function() {
                         if (that.gV.ajaxArr[that.gV.current_index].pageCurrent == 1) {
                             //第一屏
                             $id.find('.contentWrapper .mui-table-view-cell').html(that.html);
+                            for(var i = 0 ; i < that.gV.lazyClassArr.length; i++) {
+                                $("." + that.gV.lazyClassArr[i]).lazyload()
+                            }
+                            alwaysAjax($('#' + w + ' .mui-table-view-cell'), s, 2)
                         } else {
                             $id.find('.contentWrapper .mui-table-view-cell').append(that.html);
+                            for(var i = 0 ; i < that.gV.lazyClassArr.length; i++) {
+                                $("." + that.gV.lazyClassArr[i]).lazyload()
+                            }
+                            alwaysAjax($('#' + w + ' .mui-table-view-cell'), s, 2)
                         }
                         //获取当前展示的tab的索引
                         var index = $('#slider .tab-scroll-wrap .mui-active').index(),
@@ -270,8 +290,10 @@ $(function() {
                 callbackNoData: function(json) {
                     t.endPullupToRefresh(false);
                     //没有数据
-                    $id.find('.mui-scroll .list').html(that.getElements.noData.clone(false)).addClass('noCon');
-                    $id.find('.noData').show();
+                    if(that.gV.ajaxArr[that.gV.current_index].pageCurrent == 1) {
+                        $id.find('.mui-scroll .list').html(that.getElements.noData.clone(false)).addClass('noCon');
+                        $id.find('.noData').show();
+                    }
                     setTimeout(function() {
                         that.getElements.listLoading.hide();
                     }, 100);
@@ -283,18 +305,27 @@ $(function() {
             }]
             $.ajaxLoading(obj);
         },
-        dealData(data) {
+        dealData: function(data) {
             $.each(data, function(a, b) {
-                if(b.articleBelong == 2) {
+                if(b.articleBelong == 6) { // 大咖直播 6
                     b.isLive = true
                 } else {
                     b.isLive = false
                 }
+                b.lazyClass = "lazyload" + b.articleBelong
             })
             return data;
         },
         events: function() { //绑定事件
             var that = this;
+            // 列表页跳转到详情页
+            mui("body").on('mdClick', '.roomItem' , function(){
+                var id = $(this).attr("id")
+                var articleBelong = $(this).attr("articleBelong")
+                window.location.href = site_url.articleTemplate_url + '?id=' + id + '&articleBelong=' + articleBelong
+            },{
+                'htmdEvt': 'fortune_10'
+            })
         }
     };
     data.init();

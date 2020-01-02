@@ -3,19 +3,14 @@
  * @author yanruiting 2019-11-15
  * 从消息中心页面携带参数   mesType 0系统通知，1产品公告，2活动通知，3交易动态
  */
-require('@pathIncludJs/vendor/config.js');
-require('@pathIncludJs/vendor/zepto/callback.js');
-require('@pathIncludJs/vendor/zepto/deferred.js');
-require('@pathCommonJs/components/utils.js');
-require('@pathCommonJs/components/headBarConfig.js');
+require('@pathCommonBase/base.js');
 require('@pathCommonJs/ajaxLoading.js');
-
-var tipAction = require('@pathCommonJs/components/tipAction.js');
 var splitUrl = require('@pathCommonJs/components/splitUrl.js')();
 var generateTemplate = require('@pathCommonJsComBus/generateTemplate.js');
+require('@pathCommonCom/pullRefresh/pullRefresh.js');
 
 $(function() {
-    let somePage = {
+    var somePage = {
         //获取页面元素
         $e: {
             informsListWrapperId: $("#informsListWrapper"), // 消息列表盒子
@@ -36,7 +31,7 @@ $(function() {
             that.initMui();
             this.events()
         },
-        getTitle() {
+        getTitle: function() {
             var mesType = Number(this.gV.mesType)
             switch (mesType) {
                 case 0:
@@ -60,7 +55,44 @@ $(function() {
             if (!$('.list').hasClass('setHeight')) {
                 $('.list').height(height).addClass('setHeight');
             }
-            mui.init({
+            $.pullRefresh({
+                wrapper: $('.list'),
+                class: 'listItem',
+                template: that.$e.informsListTemp, 
+                pageSize: that.gV.pageSize,
+                callback: function(def, t){
+                    var obj = [{
+                        url: site_url.noticeAndTransDynamicList_api,
+                        data: {
+                            "pageNo": that.gV.pageCurrent, //非必须，默认为1
+                            "pageSize": that.gV.pageSize, //非必须，默认为10
+                            "mesType": that.gV.mesType
+                        },                        
+                        needDataEmpty: true,
+                        callbackDone: function(json) {     
+                            var data = json.data.list;
+                            if(that.gV.pageCurrent == 1 && data.length == 0) {
+                                $(".list").css("display", "none")
+                                that.$e.noData.show()
+                            } else {
+                                def && def.resolve( that.dealData(data), that.gV.pageCurrent);
+                                that.gV.pageCurrent++;
+                            }
+                        },
+                        callbackNoData: function( json ){  
+                            if(that.gV.pageCurrent == 1) {
+                                $(".list").css("display", "none")
+                            }
+                            def && def.reject( json, that.gV.pageCurrent );
+                        },
+                        callbackFail: function(json) {
+                            def && def.reject( json, that.gV.pageCurrent );
+                        },
+                    }];
+                    $.ajaxLoading(obj); 
+                }
+            })
+            /*mui.init({
                 pullRefresh: {
                     container: '.contentWrapper',
                     up: {
@@ -83,16 +115,17 @@ $(function() {
                 that.$e.listLoading.show();
                 //这一句初始化并第一次执行mui上拉加载的callback函数
                 mui('.contentWrapper').pullRefresh().pullupLoading();
-                //隐藏loading，调试接口时需要去掉
+                //隐藏loading，调试接口时需要去
+                掉
                 //setTimeout(function(){
                 that.$e.listLoading.hide();
                 //}, 2000);
                 //为$id添加hasPullUp  class
                 $('.list').addClass('hasPullUp');
-            });
+            });*/
         },
         // 获取消息中心列表
-        getInformsListData(t) {
+        /*getInformsListData: function(t) {
             var that = this;
             var obj = [{
                 url: site_url.noticeAndTransDynamicList_api,
@@ -101,6 +134,7 @@ $(function() {
                     "pageSize": "10", //非必须，默认为10
                     "mesType": that.gV.mesType
                 },
+                needLogin: true, //需要判断登录是否过期
                 needDataEmpty: true,
                 callbackDone: function(json) {
                     var data;
@@ -135,29 +169,39 @@ $(function() {
                         that.gV.pageCurrent++;
                         // 将消息列表插入到页面上
                         generateTemplate(data, that.$e.informsListWrapperId, that.$e.informsListTemp);
+                        alwaysAjax($("#informsListWrapper"))
                     }, 200)
 
                 },
                 callbackNoData: function(json) {
-                    $(".noDataCon").css("display", "block")
-                    $(".mui-table-view").css({"transform": "none!important", "position": "static"})
-                    $(".mui-table-view-cell").css({"background": "#eeeeee"})
+                    if(that.gV.pageCurrent == 1) {
+                        $(".noDataCon").css("display", "block")
+                        $(".mui-table-view").css({"transform": "none!important", "position": "static"})
+                        $(".mui-table-view-cell").css({"background": "#eeeeee"})
+                    }
                 },
             }];
             $.ajaxLoading(obj);
-        },
-        dealData(data) {
+        },*/
+        dealData: function(data) {
             $.each(data, function(a, b) {
                 b.date = b.createTimeStr.split(" ")[0]
                 b.time = b.createTimeStr.split(" ")[1]
+                if(b.readStatus == 0) {
+                    b.badgeFlag = true
+                } else {
+                    b.badgeFlag = false
+                }
             })
             return data;
         },
         events: function() {
             var that = this;
             //跳转到通知详情页面
-            mui("body").on('tap', '.systemInformItem', function() {
+            mui("body").on('mdClick', '.systemInformItem', function() {
                 window.location.href = site_url.noticeDetails_url + '?noticeId=' + $(this).attr('noticeId') + '&mesType=' + that.gV.mesType;
+            },{
+                'htmdEvt': 'notice_01'
             })
         }
     };

@@ -6,16 +6,11 @@
  */
 
 
-@import url("../../../../include/css/mui.min.css");
-@import url('@pathCommonLess/mui/resetMUI.less');
-@import url("@pathCommonLess/reset.less");
-@import url("@pathCommonLess/color.less");
-
-   @import url("@pathCommonLessCom/againEnter.less");
+@import url("@pathCommonLess/mui/resetMUI.less");
 // @import url("@pathCommonLessCom/alertBox.less");
 @import url("@pathCommonLessCom/headBarConfig.less");
 //@import url("@pathCommonLessCom/tabScroll.less");
-@import url("@pathCommonLessCom/elasticLayer.less");
+ @import url("@pathCommonCom/elasticLayer/elasticLayer/elasticLayer.less");
 body{
 	background: @F7FAFD
 }
@@ -44,8 +39,11 @@ body{
 		.pdfContent{
 			min-height: 4rem;
 			background: @FFFFFF;
-			margin: 0.6rem 0.6rem 0;
+			//margin: 0.6rem 0.6rem 0;
 		}
 	}
 	
+}
+.listLoading{
+	margin-top: 1rem;
 }

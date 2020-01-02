@@ -11,30 +11,56 @@
 </head>
 
 <body>
-    <!--加载图标-->
-    <!-- @@include('@pathCommonViews/load.html')  -->
     <!--没有数据显示图标-->
-    <!-- @@include('@pathCommonViews/noDataImg.html') -->
+    @@include('@pathCommonCom/noData/noData.html', {"tipText": "暂无数据"})
     <!--列表加载显示图标-->
-    <!-- @@include('@pathCommonViews/loading/listLoading.html') -->
+    @@include('@pathCommonCom/loading/listLoading.html')
     <!--公共页面头部-->
     @@include('@pathCommonViews/headBarConfig.html',{"pathName":"基金公司"})
     <div class="wrap">
-        <!-- 公司基本信息部分 -->
+        <div class="tplBox">
+
+        </div>
+
+    </div>
+
+    @@include('@pathInclude/views/footer.html')
+    <script src="/financial/static/js/publicPlacement/fundCompany.js"></script>
+</body>
+<script id="dataLists" type="text/x-handlebars-template"> <div>
         <div class="container">
             <div class="header">基本信息</div>
             <ul class="companyIntroduce">
-                <li><span class="blur_font">公司名称</span><span class="content">显示公司名称</span></li>
-                <li><span class="blur_font">成立日期</span><span class="content">2019-11-11</span></li>
-                <li><span class="blur_font">管理基金数</span><span class="content">88</span></li>
-                <li><span class="blur_font">总经理</span><span class="content">郭书</span></li>
-                <li><span class="blur_font">注册资金</span><span class="content">13.00亿</span></li>
-                <li><span class="blur_font">电话</span><span class="content">010-29384746</span></li>
-                <li><span class="blur_font">传真</span><span class="content">010-29384746</span></li>
-                <li><span class="blur_font">办公地址</span><span class="content">一行办公地址样式一行办公地址样式</span></li>
+                <li><span class="blur_font">公司名称</span><span class="content">{{ companyName }}</span></li>
+                <li><span class="blur_font">成立日期</span><span class="content">{{ establishDate }}</span></li>
+                <li><span class="blur_font">管理基金数</span><span class="content">{{ fundManagementCount }}</span></li>
+                <li><span class="blur_font">总经理</span><span class="content">{{ managerName }}</span></li>
+                <li><span class="blur_font">注册资金</span><span class="content">{{ registeredCapital }}亿</span></li>
+                <li><span class="blur_font">电话</span>
+                    <span class="content">
+                        <div class="secondFloor">
+                            <ul>
+                                    {{#each telephoneNoList}}
+                                    <li><span class="content">{{telephoneNoListChild}}</span></li>
+                                    {{/ each}}
+                            </ul>
+                        </div>
+                    </span>
+                    </li>
+                <li><span class="blur_font">传真</span>
+                    <span class="content">
+                            <div class="secondFloor">
+                            <ul>
+                                    {{#each faxNolist}}
+                                    <li><span class="content">{{faxNoListChild}}</span></li>
+                                    {{/ each}}
+                            </ul>
+                        </div>
+                        </span>
+                    </li>
+                <li><span class="blur_font">办公地址</span><span class="content officeAddress">{{ officeAddress }}</span></li>
             </ul>
         </div>
-        <!-- 股东列表 -->
         <div class="listBorder">
             <div class="listTitle">股东列表</div>
             <div class="innerWrap">
@@ -42,17 +68,14 @@
                     <div class="titleLeft">股东</div>
                     <div class="titleRight">持股比例(%)</div>
                 </div>
-                <div class="shareholderList">
-                    <div class="shareholderName">显示股东名称</div>
-                    <div class="shareholderScale">2.34%</div>
+                {{#each shareholderInfo}}
+        <div class="shareholderList">
+                    <div class="shareholderName">{{ shareholderName }}</div>
+                    <div class="shareholderScale">{{ holdSharesRatio }}%</div>
                 </div>
-                <div class="shareholderList">
-                    <div class="shareholderName">显示股东名称</div>
-                    <div class="shareholderScale">2.34%</div>
-                </div>
-            </div>
+                {{/ each}}
+    </div>
         </div>
-        <!-- 产品列表 -->
         <div class="listBorder">
             <div class="listTitle">产品列表</div>
             <div class="innerWrap">
@@ -61,24 +84,16 @@
                     <div class="titleCenter">数量</div>
                     <div class="titleRight">规模(亿元)</div>
                 </div>
-                <div class="productList">
-                    <div class="productName">QDLL</div>
-                    <div class="productNum">1</div>
-                    <div class="productScale">2.34</div>
+                {{#each scaleInfo}}
+        <div class="productList">
+                    <div class="productName">{{ fundTypeName }}</div>
+                    <div class="productNum">{{ fundCount }}</div>
+                    <div class="productScale">{{ fundNav }}</div>
                 </div>
-                <div class="productList">
-                    <div class="productName">货币市场型</div>
-                    <div class="productNum">1</div>
-                    <div class="productScale">2.34</div>
-                </div>
-            </div>
+                {{/ each}}
+    </div>
         </div>
     </div>
-
-    @@include('@pathInclude/views/footer.html')
-    <!-- 添加埋点 -->
-    @@include('@pathInclude/views/header.html')
-    <script src="/financial/static/js/publicPlacement/fundCompany.js"></script>
-</body>
+</script>
 
 </html>

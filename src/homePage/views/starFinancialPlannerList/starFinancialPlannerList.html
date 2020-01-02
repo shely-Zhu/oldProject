@@ -7,22 +7,16 @@
  <html lang="en">
  
  <head>
-     <meta charset="UTF-8">
-     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-     <meta name="applicable-device" content="mobile">
-     <meta name="apple-mobile-web-app-capable" content="yes">
-     <meta name="apple-mobile-web-app-status-bar-style" content="black">
-     <meta name="format-detection" content="telephone=no,date=no,address=no,email=no,url=no"/>
+     @@include('@pathInclude/views/meta.html') 
      <link rel="stylesheet" href="/homePage/static/css/starFinancialPlannerList.css">
-     <link rel="stylesheet" href="/starFinancialPlanner/static/css/mui.indexedlist.css">
+     <link rel="stylesheet" href="/homePage/static/css/mui.indexedlist.css">
      <title>明星理财师理财师列表</title>
-     <script src="/include/js/adaptation_750ui.js"></script>
-     <script src="/include/js/moment.js"></script>
+     <script src="/allServerResources/include/js//adaptation_750ui.js"></script>
+     <script src="/allServerResources/include/js//moment.js"></script>
  </head>
  
  <body>
-    <!-- @@include('@pathCommonViews/load.html')
-    @@include('@pathCommonViews/loading/listLoading.html') -->
+    <!-- @@include('@pathCommonCom/loading/listLoading.html') -->
     <div id="cityListBox">
 
     </div>
@@ -30,14 +24,19 @@
     <div id="activityDataBox">
         <!-- 活动列表搜索开始 -->
         <section id="activitySearch">
-            <a href="javascript:;" class=""></a>
+            <a href="javascript:void(0);" id="goBack">
+                <i class="iconfont">&#xe634;</i>
+            </a>
             <!-- 搜索 -->
             <div class="mui-input-row mui-search activitySearchInput">
-                <input type="search" class="mui-input-clear" placeholder="请输入活动名称">
+                <input type="search" class="mui-input-clear" id="mui-input-clear" placeholder="请输入理财师工号或姓名">
             </div>
             <div class="activityCityBox">
-                <span id="locationCity" data-code="120000" data-parentId="120000">天津</span>
-                <i></i>
+                <span id="locationCity" data-code="120000" data-parentId="120000"></span>
+                <i class="iconfont">&#xe609;</i>
+            </div>
+            <div class="Cutof">
+                <span>取消</span>
             </div>
         </section>
         <!-- 活动列表搜索结束 -->
@@ -54,7 +53,7 @@
                             <!-- 返回顶部 -->
                             
                         </ul>
-                        @@include('../../../common/views/goTop.html')
+                        @@include('@pathCommonViews/goTop.html')
                         <!-- <a href="javascript:;" class="goTopBtn4"></a> -->
                     </div>
                 </div>
@@ -66,8 +65,8 @@
         <div class="activityListDataNoBox">
             <section id="activityList">
                 <div class="activityNoListBox">
-                    <img src="/starFinancialPlanner/static/img/Life_none_Empty state@1x.png" alt="">
-                    <p>抱歉！没有搜索到相关内容</p>
+                    <img src="/common/img/empty.png" alt="">
+                    <p> 抱歉，没有搜索到相关理财师</p>
                 </div>
                 <div class="activityList activityNoList">
                     <h3>推荐理财师</h3>
@@ -80,13 +79,13 @@
         </div>
         <!-- 活动列表没有数据结束 -->
     </div>
-    
+    <!-- 加载中loading -->
+    @@include('@pathCommonCom/loading/listLoading.html')
     @@include('@pathCommonViews/starFinancialPlannerList.html')
     @@include('@pathCommonViews/cityList.html')
     @@include('@pathInclude/views/footer.html')
    
-    <script src="/include/js/iscroll.js"></script>
-    <script src="/include/js/mui.indexedlist.js"></script>
+    <script src="/allServerResources/include/js//mui.indexedlist.js"></script>
     <script src="/homePage/static/js/starFinancialPlannerList.js"></script>
 
  </body>

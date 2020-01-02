@@ -1,0 +1,83 @@
+<!-- 超宝-交易记录
+ @author wangjiajia 2019-11-20 -->
+
+
+
+ <!DOCTYPE html>
+ <html lang="en">
+ 
+ <head>
+	 @@include('@pathInclude/views/meta.html')
+	 <link rel="stylesheet" href="/account/static/css/public/superTransactionRecord.css">
+ 
+	 <title>交易记录</title>
+ </head>
+ 
+ <body>
+	 <div class="container">
+		 @@include('@pathCommonViews/headBarConfig.html',{"pathName":"交易记录"})
+		 <div class="br"></div>
+		 <div class="mui-content  myAsset">
+			 <!-- 放置页面内容 -->
+		 </div>
+		 <!-- 加载中loading -->
+		 @@include('@pathCommonCom/loading/listLoading.html')
+		 <!-- 暂无数据 -->
+		 @@include('@pathCommonCom/noData/noData.html', {"tipText": "暂无数据"})
+	 </div>
+ 
+	 <script id="first-template" type="text/x-handlebars-template">
+	 {{! 列表 内容 使用mui的上拉加载}}
+	 <div class="list">
+		 {{! list是包裹上拉加载区域的，在js中计算当前页面中的list高度，不能超出一屏}} {{! 初始化上拉加载区域，使用contentWrapper class}} {{! contentWrapper 需要添加样式，具体见less文件}}
+		 <div class="contentWrapper">
+ 
+			 <ul class="mui-table-view">
+				 <li class="mui-table-view-cell">
+					 {{! 所有内容 需要放在这个li里，且里面不能再用Li元素}} {{{content}}}
+ 
+				 </li>
+			 </ul>
+ 
+			 <!-- 返回顶部 -->
+			 @@include('@pathCommonViews/goTop.html')
+ 
+		 </div>
+	 </div>
+ </script>
+ 
+	 <script id="second-template" type="text/x-handlebars-template">
+	 {{! 左侧页面列表}}  {{#each pageList}}
+	 <div class="datalist" applyId="{{allotNo}}" fundCombination="{{fundCombination}}" fundCode="{{fundCode}}" fundType="{{fundType}}" fundBusinCode="{{fundBusinCode}}" allotType="{{applyType}}" fixbusinflag="{{fixbusinflag}}" scheduledProtocolId="{{scheduledProtocolId}}" shares="{{shares}}" fundName="{{fundName}}" applyDate="{{originalDate}}" autoBuyDesc="{{autoBuyDesc}}">
+		 <div class="first">
+			 <div class="tit">{{fundName}}</div>
+			 <div class="mon">
+				 {{#if isShares}}
+				   {{#if isfundType}}
+				  	 {{sharesMask}}元
+				   {{else}}
+				  	 {{sharesMask}}份
+				   {{/if}}	
+				 {{else}}
+				   {{balanceMask}}元 
+				 {{/if}}
+			 </div>             
+		 </div>
+		 <div class="second">
+			 <div class="tim">{{originalDate}} {{orderDate}}</div>
+			 <div class="sta">{{tradeApplyDesc}}</div> 
+		 </div>
+	 </div>
+ 
+	 {{/each}} 
+ </script> 
+
+ @@include('@pathInclude/views/footer.html')
+ <script src="/account/static/js/public/superTransactionRecord.js"></script>
+ 
+ 
+ 
+ 
+ </body>
+ 
+ </html>

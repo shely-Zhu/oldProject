@@ -6,17 +6,16 @@
  */ -->
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en">    
 
 <head>
     @@include('@pathInclude/views/meta.html')
     <link rel="stylesheet" href="/financial/static/css/publicPlacement/fundTransformIn.css">
-    <title>买入</title>
+    <title>基金买入</title>
 </head>
 
 <body>
-    <!-- @@include('../../common/views/load.html') -->
-
+    @@include('@pathCommonCom/loading/listLoading.html')
     <section class="container">
         @@include('@pathCommonViews/headBarConfig.html',{"pathName":"买入"})
         <div class="br"></div>
@@ -25,37 +24,43 @@
             &nbsp;
             <span class="fundCode"></span>
         </div>
+        <div class="warnInfo">
+            <span class="infoImg mui-icon mui-icon-info"></span>
+            <span class="infoText">&nbsp;此基金存在封闭期，到期前无法赎回</span>
+        </div>
         <div class="money">
             <div class="mfirst">
                 <div class="mfirst-one">买入金额</div>
                 <div class="mfirst-two">
                     <span>交易规则</span> 
-                    <a href="javaScript:;" class="iconfont iconone goRule" href="javascript:;">&#xe67d;</a>
+                    <a href="javaScript:;" class="iconfont iconone goRule">&#xe67d;</a>
                 </div>
             </div>
             <div class="msecond">
             	<span class="msecond-one">￥</span>
-                <input class="transformInput" id="transformInput" type="number">
-                <img src="/financial/static/img/icon_delete@2x.png" class="deleteNum" alt="">
-             </div>
-             <div class="pay">
+                <input class="transformInput" id="transformInput" type="number" />
+                <a href="javaScript:;" class="deleteNum">
+                    <img src="/financial/static/img/icon_delete@2x.png" alt="">
+                </a>
+            </div>
+            <div class="pay">
                  <p class="CostEstimate">
                      <span>费用估算：</span>
                      <span class="num">-</span>
                  </p>
-                 <p class="payConfirm">
+                 <p class="payConfirm payConfirm-f">
                     <span>购买确认日：</span>
                     <span class="date"></span>
                  </p>
-                 <p class="brforre15">
-                    15点之后的交易申请将作为<span class="data"></span>的申请
+                 <p class="brforre15 brforre15-f">
+                    <span>15点之后的交易申请将作为</span>
+                    <span class="date"></span>
+                    <span>的申请</span>
                 </p>
-                <p class="after15">
-                    15:00后采用的转账汇款方式的认申购数将视为下一个工作日的交易款项。
-                </p>
-             </div>
-         </div>
-         <div class="online">
+                <p class="after15 after15-f">15:00后采用的转账汇款方式的认申购数将视为下一个工作日的交易款项。</p>
+            </div>
+        </div>
+        <div class="online">
             <div class="onleft">支付方式</div>
         </div>
         <div class="onlinepay paymoney" pay-type="0">
@@ -95,28 +100,45 @@
             <div class="onright-left-one">
                 <img src="{{bankThumbnailUrl}}" alt="">
                 <i>{{bankName}}</i>
-                <span>{{bankNo}}</span>
+                <span>{{after4Num}}</span>
             </div>
-            <div class="onright-left-two">单笔限额{{singleNum}}，单日限额{{oneDayNum}}</div>
+            <div class="onright-left-two">单笔限额{{singleNum_w}}，单日限额{{oneDayNum_w}}</div>
+            {{/each}}
+        </script>
+        <script id="fundListCheck-template" type="text/x-handlebars-template">
+            {{#each this}}
+            <div class="onright-left-one fundListCheck">
+                <div class="checkFundName">{{fundName}}</div>
+                <div class="checkBankCard">
+                    <!-- <img src="{{bankThumbnailUrl}}" alt=""> -->
+                    <i>{{bankName}}</i>
+                    <span>{{after4Num}}</span>
+                </div>
+            </div>
+            <div class="onright-left-two fundListCheck">
+                <span class="remaining">可用金额</span>
+                <span class="amount">{{enableAmount}}元</span>
+            </div>
             {{/each}}
         </script>
         <div class="p2">
             <div>
                 <span class="file">
                     <a href="javascript:;" class="item2"><span class="iconfont">&#xe668;</span><span>已阅读并同意</span></a>
-                    <a href="/include/views/agreementModel.html?id=47">《公募基金风险揭示及售前告知书》</a>、
-                    <a class="contract" href="javascript:;">《基金合同》</a>、
-                    <a class="recruiting" href="javascript:;">《招募说明书》</a>
+                    <a href="javascript:;" class="setGoUrl">《公募基金风险揭示及售前告知书》、</a>
+                    <a href="javascript:;" class="raskBook">《风险揭示函》、</a>
+                    <a href="javascript:;" class="contract goPreview">《基金合同》</a>、
+                    <a href="javascript:;" class="recruiting goPreview">《招募说明书》</a>
                 </span>
                 
             </div>
         </div>
-       <div class="btn_box">
+        <div class="btn_box">
             <button class="btn" type="button" disabled>
                     确定
             </button>
             
-       </div>
+        </div>
         
     </section>
 
@@ -128,38 +150,61 @@
                 <!-- <div class="popup-close"> -->
                 <img class="popup-close" src="/financial/static/img/Nav Bar_icon_close_black@2x.png" alt="">
                 <!-- </div> -->
-                <div class="tit">选择在线支付银行卡</div>
+                <div class="tit bank-title"></div>
             </div>
-            <ul class="popup-ul">
+            <div class="popup-ul-box">
+                <ul class="popup-ul">
 
-            </ul>
-            <script id="bankList-template" type="text/x-handlebars-template">
-                {{#each this}}
-                <li class="popup-li bank-li" bankThumbnailUrl="{{bankThumbnailUrl}}" tradeAcco="{{tradeAcco}}" bankName="{{bankName}}" bankNo="{{bankNo}}" singleNum="{{singleNum}}"
-                 oneDayNum="{{oneDayNum}}" bankAccountSecret="{{bankAccountSecret}}">
-                    <img class="bank-img" src="{{bankThumbnailUrl}}" alt="">
-                    <div class="div">
-                        <div class="bank-name">{{bankName}}({{bankNo}})</div>
-                        <div class="bank-pay">单笔限额{{singleNum}}，单日限额{{oneDayNum}}</div>
-                    </div>
-                    <img class="true" src="/financial/static/img/account_icon_check@2x.png" alt="">
-                </li>
-                {{/each}}
-                <li class="popup-last">
-                    <img class="last-img" src="/financial/static/img/account_icon_bank logo@2x.png" alt="">
-                    <div class="last-title">
-                        添加银行卡付款
-                    </div>
-                    <a class="iconfont iconone"  href="javascript:;">&#xe67d;</a>
-                </li>
-            </script>
+                </ul>
+                <script id="bankList-template" type="text/x-handlebars-template">
+                    {{#each this}}
+                    <li class="popup-li bank-li" fundOrBank="1" useEnv="{{useEnv}}" capitalMode="{{capitalMode}}" bankThumbnailUrl="{{bankThumbnailUrl}}" tradeAcco="{{tradeAcco}}" bankName="{{bankName}}" bankNo="{{bankNo}}" singleNum="{{singleNum}}"
+                    oneDayNum="{{oneDayNum}}" bankAccountSecret="{{bankAccountSecret}}" after4Num="{{after4Num}}" singleNum="{{singleNum}}">
+                        <img class="bank-img" src="{{bankThumbnailUrl}}" alt="">
+                        <div class="div">
+                            <div class="bank-name">{{bankName}}({{after4Num}})</div>
+                            <div class="bank-pay">单笔限额{{singleNum_w}}，单日限额{{oneDayNum_w}}</div>
+                        </div>
+                        <img class="true" src="/common/img/account_icon_check@2x.png" alt="">
+                    </li>
+                    {{/each}}
+                    <li class="popup-last">
+                        <img class="last-img" src="/financial/static/img/icon _tianjia@2x.png" alt="">
+                        <div class="last-title">
+                            添加银行卡付款
+                        </div>
+                        <a href="javascript:;" class="iconfont iconone">&#xe67d;</a>
+                    </li>
+                </script>
+                <ul class="popup-ul2">
+                
+                </ul>
+                <script id="bankList-template2" type="text/x-handlebars-template">
+                    {{#each this}}
+                        <li class="popup-li bank-li" fundOrBank="2" useEnv="{{useEnv}}" capitalMode="{{capitalMode}}" tradeAcco="{{tradeAcco}}" bankName="{{bankName}}" bankNo="{{bankNo}}" 
+                        bankAccoutEncrypt="{{bankAccoutEncrypt}}" after4Num="{{after4Num}}" enableAmount="{{enableAmount}}" fundName="{{fundName}}" fundAccount="{{fundAccount}}">
+                            <!-- <img class="bank-img" src="" alt=""> -->
+                            <div class="div">
+                                <div class="bank-fundName">{{fundName}}</div>
+                                <div class="bank-name">{{bankName}}({{after4Num}})</div>
+                                <div class="enableAmount"> 
+                                    <span class="title">可用金额</span>
+                                    <span class="amount">{{enableAmount}}元</span>
+                                </div>
+                            </div>
+                            <img class="true" src="/common/img/account_icon_check@2x.png" alt="">
+                        </li>
+                    {{/each}}
+                </script>
+            </div>
         </div>
     </div>
 
     <!-- 校验密码弹窗 -->
     <div class="popup-password">
         <div class="elasticMid">
-               <div class="elasticTxt"></div>
+               <div class="elasticTxt">
+               </div>
                <div  class="elasticButtons error1">
                     <button class="elasticCel" type="button">忘记密码</button>
                     <button class="elasticYes" type="button">重新输入</button>
@@ -178,13 +223,8 @@
      <!-- 转出规则 -->
      @@include('@pathCommonCom/elasticLayer/transOutRule/transOutRule.html')
  
-     <!-- 加载中loading -->
-     @@include('@pathCommonViews/loading/listLoading.html')
- 
      @@include('@pathInclude/views/footer.html')
-     <!-- 添加埋点 -->
-     @@include('@pathInclude/views/header.html')
      <script src="/financial/static/js/publicPlacement/fundTransformIn.js"></script>
-     <script src="/account/static/js/public/payPassword.js"></script>
+     <!-- <script src="/account/static/js/public/payPassword.js"></script> -->
  </body>
  </html>

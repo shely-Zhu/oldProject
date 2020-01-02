@@ -5,22 +5,20 @@
 * @description:
 */
 
-@import url("@pathInclude/css/mui.min.css");
 @import url("@pathCommonLess/mui/resetMUI.less");
-@import url("@pathCommonLess/color.less");
-@import url("@pathCommonLess/reset.less");
 
 @import url("@pathCommonLess/chtwm.less");
 @import url("@pathCommonLess/app.less");
-@import url("@pathCommonLessCom/againEnter.less");
 @import url("@pathCommonLessCom/alertBox.less");
 @import url("@pathCommonLessCom/tabScroll.less");
+@import url("@pathCommonCom/button/button.less");
 
 //回到顶部的样式
 @import url("@pathCommonLessCom/goTopMui.less");
-@import url("@pathCommonLess/components/elasticLayerTypeFive.less");
+//@import url("@pathCommonLess/components/elasticLayerTypeFive.less");
+@import url("@pathCommonCom/elasticLayer/elasticLayer/elasticLayer.less");
 @import url("@pathCommonLessCom/headBarConfig.less");
-@import url("@pathCommonLessCom/noDataImg.less");
+@import url("@pathCommonCom/noData/noData.less");
 @import url("@pathCommonLessCom/payPassword.less");
 html {
     height: 100%;
@@ -36,6 +34,10 @@ html {
 }
 .text_red {
     color: @F52323;
+}
+.colorGray {
+    color: @9B9B9B;
+    font-size: .32rem;
 }
 
 .cancel_order {
@@ -78,6 +80,9 @@ html {
             color: #4A4A4A;
         }
     }
+    .buy_confirm_info,.redeem_confirm_info{
+        margin-bottom: .98rem;//防止确认时间看不到。
+    }
     .trade_status_area{
         width: 100%;
         height: 2.4rem;
@@ -89,7 +94,7 @@ html {
             .trade_status_icon, .trade_status_icon_1 {
                 width: 0.38rem;
                 height: 0.38rem;
-                background: url('/account/static/img/publicTradeDetail/public_trade_detail_check.png');
+                background: url('/common/img/public_trade_detail_check.png');
                 background-size: 100%;
             }
             .trade_status_desc {
@@ -144,7 +149,12 @@ html {
         height: .27rem;
         margin: .36rem .18rem 0 0;
     }
-    .buy_info .pay_mode {
+    .divider {
+        height: 0.3rem;
+        width: 100%;
+        background-color: @F7FAFD;
+    }
+    .pay_mode {
         background-color: @EDF1FF;
         margin: .32rem 0 0 .18rem;
         width: 1.06rem;
@@ -154,11 +164,6 @@ html {
         color: @364D97;
         font-size: .24rem;
     }
-    .divider {
-        height: 0.3rem;
-        width: 100%;
-        background-color: @F7FAFD;
-    }
 
 
 
@@ -167,9 +172,6 @@ html {
         bottom: 0;
         height: .98rem;
         width: 100%;
-        background: linear-gradient(to right, @6C83C9, @061D6A);
-        text-align: center;
-        color: @FFFFFF;
         line-height: .98rem;
         font-size: .32rem;
     }

@@ -19,7 +19,7 @@
                 <div class="totalM">--</div>
                 <div class="accountWrap">
                     <div class="first_h_profit_box fl">
-                        <div class="h_profit">昨日总收益(元)</div>
+                        <div class="h_profit">昨日收益(元)</div>
                         <div class="h_profit_value incomeMask">--</div>
                     </div>
                     <div class="second_h_profit_box fl">
@@ -38,7 +38,7 @@
                         收益明细 
                      </div>                  
                 </li>
-                <li class="detailLi">
+                <li class="detailLi recordBtn">
                     <div class="imgWrap">
                         <img src="/account/static/img/account_icon_jyjl.png" alt="">
                     </div>
@@ -57,10 +57,11 @@
                 <!-- 万份收益折线图 -->
                 <div id="wfsyLine" class="hide line"></div>
                 <div class='mui-row tab'>
-                    <span class="mui-col-sm-3 mui-col-xs-3 time oneMonth active" num="1">近一个月</span>
-                    <span class="mui-col-sm-3 mui-col-xs-3 time threeMonth" num="3">近三个月</span>
-                    <span class="mui-col-sm-3 mui-col-xs-3 time newYear" num="12">近一年</span>
-                    <span class="mui-col-sm-3 mui-col-xs-3 time sinceNow" num="">成立至今</span>
+                    <span class="time oneMonth active" num="1">近一个月</span>
+                    <span class="time threeMonth" num="3">近三个月</span>
+                    <span class="time threeMonth" num="6">近六个月</span>
+                    <span class="time newYear" num="12">近一年</span>
+                    <span class="time sinceNow" num="13">成立至今</span>
                 </div>
             </div>
             <div class="textWrap">
@@ -69,15 +70,25 @@
                </div>
             </div>
             <div class="footer mui-row">
-                    <div class="footerBtnLeft mui-col-sm-6 mui-col-xs-6 rollOutBtn">转出</div>
-                    <div class="footerBtnRight mui-col-sm-6 mui-col-xs-6 shiftToBtn">转入</div>
+                    <div class="footerBtnLeft mui-col-sm-6 mui-col-xs-6 rollOutBtn blueTxtButton">转出</div>
+                    <div class="footerBtnRight mui-col-sm-6 mui-col-xs-6 shiftToBtn blueBgButton">转入</div>
             </div>
             <div class="titleTwo"></div>
+            <div class="isRiskMatchBox">
+                <div class="isRiskMatchBox_contentBox">
+                        <div class='isRiskMatchBox_header'>你选择的产品与您现在的风险承受能力相匹配</div>
+                        <div class="isRiskMatchBox_footer">
+                             <div class="isRiskMatchBox_match">确定</div>
+                             <div class="isRiskMatchBox_noMatch"><button class="isRiskMatchBox_cancel">放弃购买</button> <button class="isRiskMatchResult">查看评测结果</button></div>
+                        </div>
+                </div>
+           </div>
+           <div class="isRiskMatch_mask"></div>
             <script id="adjustment-template" type="text/x-handlebars-template">
                 {{#each this}}
                 <ul data-id='{{id}}' class="materialContent">
                     <li >{{title}}</li>
-                    <li class="imgLi"><img src="/account/static/img/jiantou.png" alt=""></li>
+                    <i class="iconfont">&#xe600;</i>
                  </ul>
                 {{/each}}
             </script>
@@ -85,16 +96,16 @@
 
 
             <!-- 加载中loading -->
-            <!-- @@include('@pathCommonViews/loading/listLoading.html') -->
+            <!-- @@include('@pathCommonCom/loading/listLoading.html') -->
             <!-- 暂无数据 -->
-            @@include('@pathCommonViews/noData.html',{"tipText":"暂无数据"})
+            @@include('@pathCommonCom/noData/noData.html', {"tipText": "暂无数据"})
     
     
         </section>
 
 
     @@include('@pathInclude/views/footer.html')
-    <script src="/include/js/vendor/echarts/echarts.min.js"></script>
+    <script src="/allServerResources/include/js/vendor/echarts/echarts.min.js"></script>
     <script src="/account/static/js/public/superStreasureDetail.js"></script>
 </body>
 </html>

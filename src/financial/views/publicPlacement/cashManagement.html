@@ -1,3 +1,11 @@
+<!--
+ * @Author: your name
+ * @Date: 2019-11-26 14:42:56
+ * @LastEditTime : 2019-12-30 14:19:20
+ * @LastEditors  : Please set LastEditors
+ * @Description: In User Settings Edit
+ * @FilePath: \htjf-app\src\financial\views\publicPlacement\cashManagement.html
+ -->
 <!-- /**  
  * @Page:  现金管理
  * @Author: yanruitng  
@@ -11,31 +19,35 @@
 <head>
      @@include('@pathInclude/views/meta.html')
      <link rel="stylesheet" href="/financial/static/css/publicPlacement/cashManagement.css">
-     <title>公募监管账户</title>
+     <title>现金管理</title>
 </head>
 
 <body>
-     <!--加载图标-->
-     <!--@@include('@pathCommonViews/load.html')-->
      <!--没有数据显示图标-->
-     <!--@@include('@pathCommonViews/noDataImg.html')-->
-     <!--列表加载显示图标-->
-     <!--@@include('@pathCommonViews/loading/listLoading.html')-->
+     <!--@@include('@pathCommonCom/noData/noData.html', {"tipText": "暂无数据"})-->
+     <!--加载显示图标-->
+     @@include('@pathCommonCom/loading/listLoading.html')
      <div id="top">
           @@include('@pathCommonViews/headBarConfig.html',{"bgColors":"#384A81,#2A3C70","showType":"1","pathName":"现金管理"})
+          @@include('@pathCommonViews/authenticationProcess.html',{"pathTitle":"认证信息"})
           <div class="topCon">
                <div class="totalFundTitle">总资产（元）</div>
                <div class="totalFund justify_between flex">
                     <div class="fundValue"></div>
-                    <div class="fundKnow">了解现金管理<i class="iconfont">&#xe600;</i></div>
+                    <div class="fundKnow" >了解现金管理<i class="iconfont">&#xe600;</i></div>
                </div>
-               <div class="profitContent justify_between flex">
-                    <div class="cashProfitCon profitCon">
+               <div class="profitContent">
+                    <div class="profitCon income">
                          <div class="profitTitle">昨日收益</div>
                          <div class="profitValue"></div>
                     </div>
                     <div class="lineVertical"></div>
-                    <div class="cashProfitCon profitCon">
+                    <div class="profitCon holdIncome">
+                         <div class="profitTitle">持有总收益</div>
+                         <div class="profitValue"></div>
+                    </div>
+                    <div class="lineVertical"></div>
+                    <div class="profitCon addupIncome">
                          <div class="profitTitle">累计收益</div>
                          <div class="profitValue"></div>
                     </div>
@@ -47,6 +59,17 @@
                </div>
           </div>
 
+          <div class="isRiskMatchBox">
+               <div class="isRiskMatchBox_contentBox">
+                       <div class='isRiskMatchBox_header'>你选择的产品与您现在的风险承受能力相匹配</div>
+                       <div class="isRiskMatchBox_footer">
+                            <div class="isRiskMatchBox_match">确定</div>
+                            <div class="isRiskMatchBox_noMatch"><button class="isRiskMatchBox_cancel">放弃购买</button> <button class="isRiskMatchResult">查看评测结果</button></div>
+                       </div>
+               </div>
+          </div>
+          <div class="isRiskMatch_mask"></div>
+
      </div>
 
      <script id="dataLists" type="text/x-handlebars-template">
@@ -54,8 +77,12 @@
 		{{#each this}}
           <div class="cashItem">
                <div class="itemTop">
-                    <div class="itemTitle"><span>{{fundName}}</span><span class="rightCon"><span
-                                   class="right"></span></span></div>
+                    <div class="itemTitle" fundCode={{fundCode}}>
+                         <span fundCode={{fundCode}} fundName={{fundName}}>{{fundName}}</span>
+                              <span class="rightCon">
+                              <span class="right"></span>
+                         </span>
+                    </div>
                     <div class="itemSevenIncome">七日年化：{{annYldRat}}%</div>
                </div>
                <div class="itemCenter flex">
@@ -73,8 +100,12 @@
                     </div>
                </div>
                <div class="itemBottom flex">
-                    <div class="fundIn">转入</div>
-                    <div class="fundOut">转出</div>
+                    <div class="fundIn" >转入</div>
+                    {{#if show}}
+                    <div class="fundOut" >转出</div>
+                    {{else}}
+                    <div class="fundOut-disbled">转出</div>
+                    {{/if}}
                </div>
           </div>
 		{{/each}}
@@ -83,8 +114,6 @@
 
 
      @@include('@pathInclude/views/footer.html')
-     <!-- 添加埋点 -->
-     @@include('@pathInclude/views/header.html')
      <script src="/financial/static/js/publicPlacement/cashManagement.js"></script>
  </body>
  </html>

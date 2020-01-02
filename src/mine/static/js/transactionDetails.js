@@ -3,13 +3,12 @@
  * @author 蔡文琦  2019-11-20
  */
 
-require('@pathIncludJs/base.js');
+require('@pathCommonBase/base.js');
 require('@pathCommonJs/ajaxLoading.js');
-require('@pathCommonJs/components/headBarConfig.js');
 var generateTemplate = require('@pathCommonJsComBus/generateTemplate.js');
 
 $(function() {
-	let somePage = {
+	var somePage = {
 		//获取页面元素
 		$e: {
             lis: $(".wrap li"),
@@ -20,55 +19,65 @@ $(function() {
 		//页面初始化函数
 		init: function() {
 			var that = this;  
-			this.events()
+			that.events()
+			that.getUserInfo()
 		},
-		//获取数据函数
-		getData: function(t) {
-			var that = this
-			// $.ajaxLoading(obj);
+		        // 获取认证信息
+		getUserInfo: function() {
+			var that = this;
+			// 请求页面数据
+			var obj = [{
+				url: site_url.queryUserBaseInfo_api,
+				data: {},
+				callbackDone: function(json) {
+					var data = json.data
+					if(data.accountType == 1){
+						$(".type").show()
+					}else{
+						$(".type").hide()
+					}
+				},
+				callbackFail: function(json) {
+					tipAction(json.msg);
+				}
+			}]
+			$.ajaxLoading(obj);
 		},
 		//注册事件
 		events: function() {
-            let that = this;
-            // $.each(mui(".wrap li"),(e,i)=>{
-            //     $(i).on("tap",function(){
-            //         console.log(e)
-            //     })
-            // })
-            // this.$e.lis[0].onclick = function(){
-            //     console.log("点击了第一个li标签")
-            //     window.location.href = site_url.journal_url
-            // }
-            // mui('body').on('tap','li',function(a){
-            //     console.log(a)
-            //     if(a.srcElement.childNodes[1].data == "私募交易明细"){
-            //         // window.location.href =
-            //     }else if(a.srcElement.childNodes[1].data == "公募自选交易明细"){
-            //         // window.location.href =
-            //     }else if(a.srcElement.childNodes[1].data == "公募组合交易明细"){
-            //         // window.location.href =
-            //     }else{
-            //         // window.location.href =
-            //     }
-            // })
-            mui("li").on('tap',(a)=>{
-                console.log(a)
+            var that = this;
+            mui("body").on('mdClick','.wrap li',function(e){
+				var numAtr = $(this).attr('num');
+				if(numAtr == 1){
+					window.location.href=site_url.privateDetailList_url
+				}          
+			},{
+                'htmdEvt': 'transactionDetails_01'
             })
-            // mui(".wrap li").eq(0).on("tap",function(){
-            //     console.log(111)
-            // })
-            // this.$e.lis[1].onclick = function(){
-            //     console.log("点击了第二个li标签")
-            //      window.location.href =
-            // }
-            // this.$e.lis[2].onclick = function(){
-            //     console.log("点击了第三个li标签")
-            //      window.location.href =
-            // }
-            // this.$e.lis[3].onclick = function(){
-            //     console.log("点击了第三个li标签")
-            //      window.location.href =
-            // }
+			mui("body").on('mdClick','.wrap li',function(e){
+				var numAtr = $(this).attr('num');
+				 if(numAtr == 2){
+					window.location.href=site_url.transactionRecords_url
+				}        
+			},{
+                'htmdEvt': 'transactionDetails_02'
+            })
+			mui("body").on('mdClick','.wrap li',function(e){
+				var numAtr = $(this).attr('num');
+				if(numAtr == 3){
+					window.location.href=site_url.publicTransactionDetails_url
+				}         
+			},{
+                'htmdEvt': 'transactionDetails_03'
+            })
+			mui("body").on('mdClick','.wrap li',function(e){
+				var numAtr = $(this).attr('num');
+				if(numAtr == 4){
+					window.location.href=site_url.transactionList_url
+				}           
+            },{
+                'htmdEvt': 'transactionDetails_04'
+            })
 		}
 	};
 	somePage.init();

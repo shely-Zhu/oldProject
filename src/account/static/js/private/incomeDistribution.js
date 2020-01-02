@@ -7,25 +7,13 @@
  */
 
 
-require('@pathIncludJs/base.js');
-
-
-// require('@pathCommonJsCom/utils.js');
+require('@pathCommonBase/base.js');
 //ajax调用
 require('@pathCommonJs/ajaxLoading.js');
 
-//下拉加载更多
-// require('@pathCommonJs/scrollFullPage.js');
-// 切换
-// require('@pathCommonJsCom/tabScroll.js');
-require('@pathCommonJsCom/goTopMui.js');
-// require('@pathCommonJs/components/elasticLayer.js');
-// require('@pathCommonJs/components/elasticLayerTypeFive.js');
-require('@pathCommonJs/components/headBarConfig.js');
 var splitUrl = require('@pathCommonJs/components/splitUrl.js');
-//黑色提示条的显示和隐藏
-// var tipAction = require('@pathCommonJsCom/tipAction.js');
 var generateTemplate = require('@pathCommonJsComBus/generateTemplate.js');
+require('@pathCommonCom/pullRefresh/pullRefresh.js');
 
 
 
@@ -46,7 +34,7 @@ $(function() {
             list_template: '', //列表的模板，生成后存放在这里
             listToTop: '', // 滑动区域距离顶部距离
             navToTop: '', // 滑动nav距离顶部距离
-
+            wrapperName: null
 
         },
         html: '', //存放生成的html
@@ -66,10 +54,52 @@ $(function() {
         //初始化mui的上拉加载
         initMui: function() {
             var that = this;
+            var height = windowHeight - $(".HeadBarConfigBox").height();
+            if (!$(".list").hasClass('setHeight')) {
+                $(".list").height(height).addClass('setHeight');
+            }
+            $.pullRefresh({
+                wrapper: $('.list'),
+                class: 'list-wrap',
+                template: that.getElements.transTemp, 
+                pageSize: that.gV.aP.pageSize,
+                callback: function(def, t){
+                    var obj = [{
+                        url: site_url.yieldAssignList_api,
+                        data: {
+                            "projectId":splitUrl()["projectId"] ,
+                            "pageNo": that.gV.aP.pageNo, //非必须，默认为1
+                            "pageSize": that.gV.aP.pageSize//非必须，默认为10
+                        },                        
+                        needDataEmpty: true,
+                        callbackDone: function(json) {     
+                            var data = json.data.pageList;
+                            if(that.gV.aP.pageNo == 1 && data.length == 0) {
+                                $(".list").css("display", "none")
+                                that.getElements.noData.show()
+                            } else {
+                                def && def.resolve( data, that.gV.aP.pageNo);
+                                that.gV.aP.pageNo++;
+                            }
+                        },
+                        callbackNoData: function( json ){  
+                            if(that.gV.aP.pageNo == 1) {
+                                $(".list").css("display", "none")
+                            }
+                            def && def.reject( json, that.gV.aP.pageNo );
+                        },
+                        callbackFail: function(json) {
+                            def && def.reject( json, that.gV.aP.pageNo );
+                        },
+                    }];
+                    $.ajaxLoading(obj); 
+                }
+            })
+            /*var that = this;
             var height = windowHeight - $(".topTitle").height();
             if (!$('.list').hasClass('setHeight')) {
                 $('.list').height(height).addClass('setHeight');
-                $('.box').height(height);
+                $('.listBox').height(height);
             }
             var that = this;
 			mui.init({
@@ -108,9 +138,9 @@ $(function() {
 
 				//为$id添加hasPullUp  class
 				$('.list').addClass('hasPullUp');
-			});
+			});*/
         },
-        getData: function(t) {
+        /*getData: function(t) {
             var that = this;
             var obj = [{ // 系统调仓记录列表
                 url: site_url.yieldAssignList_api,
@@ -170,10 +200,11 @@ $(function() {
 
             }];
             $.ajaxLoading(obj);
-        },
+        },*/
         events: function() { //绑定事件
             var that = this;
-
+            //无缝滚动
+            //alwaysAjax(".recordList")
 
         }
     };

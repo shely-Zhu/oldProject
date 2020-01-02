@@ -11,11 +11,9 @@
 
 	<body>
 		<!--加载图标-->
-		@@include('@pathCommonViews/load.html') 
+		@@include('@pathCommonCom/loading/listLoading.html')
 		<!--没有数据显示图标-->
-		<!--@@include('@pathCommonViews/noDataImg.html')-->
-		<!--列表加载显示图标-->
-		<!--@@include('@pathCommonViews/loading/listLoading.html')-->
+		<!--@@include('@pathCommonCom/noData/noData.html', {"tipText": "暂无数据"})-->
 		<!--公共页面头部-->
 		@@include('@pathCommonViews/headBarConfig.html',{"pathName":"h5生成模板页面"})
 		<!--页面容器-->
@@ -31,7 +29,7 @@
 			<video id="video" width="320" height="240" controls></video>
 			<!--富文本位置开始-->
 			<div class="richText">
-				<a id="aaaa" href="">点我</a>
+				<a href="javascript:void(0);" id="aaaa">点我</a>
 			</div>
 			<!--富文本位置结束-->
 		</div>

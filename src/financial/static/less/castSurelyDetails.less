@@ -1,13 +1,8 @@
 //蔡文琦 2019-11-23 我的定投_定投详情页面 css
-@import url("../../../include/css/mui.min.css");
-@import url('@pathCommonLess/mui/resetMUI.less');
-@import url("@pathCommonLess/reset.less");
-@import url("@pathCommonLess/color.less");
+@import url("@pathCommonLess/mui/resetMUI.less");
 @import url("@pathCommonLessCom/alertBox.less");
 @import url("@pathCommonLessCom/headBarConfig.less");
-
-
-@import url("@pathCommonLessCom/againEnter.less");
+@import url("@pathCommonLessCom/payPassword.less");
 
 html {
     height: 100%;
@@ -74,7 +69,9 @@ body,.mui-content{
                 }
             }
             .ipt{
-                width: 6.9rem;
+                // width: 6.9rem;
+                width: 100%;
+                padding: 0 .3rem;
                 height: .7rem;
                 // color: @c005;
                 background-color:rgba(255,255,255,0.3);
@@ -124,8 +121,7 @@ body,.mui-content{
             }
         }
         ul{
-            width: 6.9rem;
-            margin: 0 auto;
+            padding: 0 .3rem;
             li{
                 position: relative;
                 height: 1.1rem;
@@ -175,7 +171,7 @@ body,.mui-content{
     }
     .table{
         background-color: @c005;
-        width: 7.5rem;
+        width: 100%;
         div{
             display: flex;
             justify-content: space-around;
@@ -238,7 +234,8 @@ body,.mui-content{
     div{
         line-height: .98rem;
         text-align: center;
-        width: 2.5rem;
+        // width: 2.5rem;
+        flex: 1;
         height: .98rem;
         border-top: @E7E9ED solid 1px;
         background: @c005;
@@ -249,4 +246,7 @@ body,.mui-content{
     .cen{
         border: @E7E9ED solid 1px;
     }
+}
+.redColor{
+    color: red !important;
 }

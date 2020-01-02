@@ -6,38 +6,36 @@
 */
 
 //引入mui
-@import url("@pathInclude/css/mui.min.css");
-
-@import url('@pathCommonLess/mui/resetMUI.less');
-@import url("@pathCommonLess/reset.less");
-@import url("@pathCommonLess/color.less");
-@import url("@pathCommonLessCom/againEnter.less");
+@import url("@pathCommonLess/mui/resetMUI.less");
 
 //城市定位样式
 @import url("@pathCommonLessCom/cityList.less");
 // 没有数据
-@import url("@pathCommonLessCom/noData.less");
+@import url("@pathCommonCom/noData/noData.less");
+@import url("@pathCommonCom/elasticLayer/elasticLayer/elasticLayer.less");
 
 #activitySearch{
-    width: 7.5rem;
-    height: .88rem;
+    width: 100%;
+    height: 1.28rem;
     background-color: @c005;
     border-bottom: 1px solid @c007;
     a{
         display: inline-block;
         width: .88rem;
         height: .88rem;
-        background: url('/starFinancialPlanner/static/img/Life_icon_back@2x.png') no-repeat;
+        // background: url('/common/img/Life_icon_back@2x.png') no-repeat;
+        text-align: center;
         background-size: .88rem .88rem;
         position: absolute;
-        top: 0;
+        top: .4rem;
+        line-height:0.88rem;
     }
     .mui-search{
         height: .6rem;
         width: 4.5rem;
         position: absolute;
         display: inline-block;
-        top: .14rem;
+        top: .54rem;
         left: 1rem;
         input{
             height: .6rem;
@@ -52,7 +50,7 @@
         right: .32rem;
         height: .88rem;
         line-height: .88rem;
-        top:0;
+        top:.4rem;
         span{
             font-family: PingFangSC-Regular;
             font-size: .34rem;
@@ -65,15 +63,24 @@
         }
         i{
             float: left;
-            width: .25rem;
-            height: .12rem;
-            background: url('/starFinancialPlanner/static/img/Life_icon_position@2x.png') no-repeat;
-            background-size: .25rem .12rem;
-            margin-top: .36rem;
+            // background: url('/common/img/Life_icon_position@2x.png') no-repeat;
+            font-size:0.24rem;
+            color:@878787;
         }
     }
+    .Cutof{
+        display:none;
+        position: absolute;
+        right: .32rem;
+        height: .88rem;
+        line-height: .88rem;
+        font-size: .34rem;
+        top:.4rem;
+    }
 }
-
+.activityListDataNoBox{
+    display:none;
+}
 #activityList{
     .mui-table-view{
         background:none;
@@ -105,7 +112,7 @@
         padding: 0;
         overflow: hidden;
         position: relative;
-        background:url('/starFinancialPlanner/static/img/home_card-bg@2x.png') no-repeat;
+        background:url('/common/img/wave_bg.png') no-repeat;
         background-size: 6.9rem 3.5rem;
         padding: 0 .32rem 0 .29rem;
         &>a{
@@ -117,7 +124,6 @@
         }
         .activityListBox{
             height: 2.8rem;
-            // background: url(../img/Life_banner_bg1@2x.png);
             position: relative;
             img{
                 width: 6.9rem;
@@ -154,14 +160,14 @@
                 color: @9B9B9B;
                 letter-spacing: 0;
                 height: .36rem;
-                line-height: .36rem;
+                line-height: .29rem;
                 i{
                     display: inline-block;
                     font-style: normal;
                     width: 1.51rem;
                     height: .36rem;
                     text-align: center;
-                    line-height: .36rem;
+                    line-height: .29rem;
                     border-radius: .04rem;
                     margin-right: .1rem;
                     background-image: linear-gradient(-135deg, @FFF6E2 0%, @DDCDA4 100%);
@@ -187,7 +193,7 @@
     }
     .activityNoListBox{
         
-        width: 7.5rem;
+        width: 100%;
         height: 3.7rem;
         border-bottom: 1px solid @c007;
         position: relative;
@@ -204,7 +210,7 @@
             text-align: center;
             font-size: .32rem;
             top: 2.79rem;
-            width: 7.5rem;
+            width: 100%;
             
         }
     }
@@ -225,7 +231,7 @@
 #cityListBox{
     font-size: .32rem;
     display: none;
-    width: 7.5rem;
+    width: 100%;
     .mui-table-view{
         margin-top: 44px;
         li{
@@ -254,7 +260,7 @@
     .hotCity{
         padding: .09rem .06rem;
         overflow: hidden;
-        width: 7.5rem;
+        width: 100%;
         span{
             width: 1.4rem;
             height: .6rem;
@@ -308,14 +314,18 @@
         .starFinancialPlannerPhotoBox{
             width: 1.36rem;
             height: 1.34rem;
-            background: url('/starFinancialPlanner/static/img/home_Head_huahuan.png') no-repeat;
+            border-radius:50%;
+            background: url('/homePage/static/img/home_Head_huahuan.png') no-repeat;
             background-size: 1.36rem 1.34rem;
             text-align: center;
             line-height: 1.34rem;
+            padding-top:0.16rem;
+            padding-left:0.2rem;
             img{
-                width: 1.11rem;
-                height: 1.11rem;
-                display: inline-block;
+                width: 1rem;
+                height: 1rem;
+                display: block;
+                border-radius:50%;
             }
         }
         .starFinancialPlannerName{
@@ -404,11 +414,11 @@
             height: .54rem;
             
             &.icon1{
-                background: url('/starFinancialPlanner/static/img/home_icon_Trophy(1).png') no-repeat;
+                background: url('/common/img/home_icon_Trophy@2x.png') no-repeat;
                 background-size: .26rem .54rem;
             }
             &.icon2{
-                background: url('/starFinancialPlanner/static/img/home_icon_Trophy1(1).png') no-repeat;
+                background: url('/common/img/home_icon_Trophy1@2x.png') no-repeat;
                 background-size: .26rem .54rem;
             }
         }
@@ -427,4 +437,25 @@
         overflow: hidden;
         opacity: 0.68;
     }
+}
+
+.mui-search .mui-placeholder {
+    line-height: .6rem;
+}
+
+.warmPrompt {
+    margin-top: 1rem;
+    font-size: .24rem;
+    color: #4e4e4e;
+    margin: .6rem 0 .2rem;
+    text-align: left;
+    line-height: .33rem;
+    .hintNumber {
+        font-size: .28rem;
+        line-height: .42rem;
+        color: #C4925E;
+    }
+}
+.text_left {
+    text-align: left !important;
 }

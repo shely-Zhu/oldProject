@@ -11,26 +11,26 @@
      @@include('@pathInclude/views/meta.html')
      <link rel="stylesheet" href="/financial/static/css/publicPlacement/cashTransformOut.css">
      <title>转出</title>
+   
  </head>
  <body>
-     <!-- @@include('../../common/views/load.html') -->
-     
+    @@include('@pathCommonCom/loading/listLoading.html')
      <section class="container">
         @@include('@pathCommonViews/headBarConfig.html',{"pathName":"转出"}) 
         <div class="br"></div>
-        <div class="title">现金宝产品1</div>
+        <div class="title" id="transformProductName"></div>
 
         <div class="mui-row tabWrapper">
-        	<div class="mui-col-sm-6 mui-col-xs-6 tab">
-        		<span class="active">快速转出<span>
+        	<div class="mui-col-sm-6 mui-col-xs-6 tab" type="fast" >
+        		<span class="active activeIcon">快速转出<span>
         	</div>
-        	<div class="mui-col-sm-6 mui-col-xs-6 tab">
-        		<span>普通转出</span>
+        	<div class="mui-col-sm-6 mui-col-xs-6 tab" type="common" >
+        		<span class="activeIcon">普通转出</span>
         	</div>
         </div>
 
         <div class="typeDetail">
-        	<p>*单笔最高限额1万，单日最高50万，单日最多10笔</p>
+        	<p>*单笔最高限额<span class="dailyOnceMaxLimitWan">1万</span>，单日最高<span class="dailyMaxLimitWan">50万</span>，单日最多<span class="dailyTimesMaxLimit">10</span>笔</p>
         	<p>*赎回金额将按照原路返回到您所付款的银行卡</p>
         </div>
 
@@ -46,15 +46,15 @@
 	            </div> -->
 
 	            <!-- 右侧 选择银行卡后样式 -->
-	            <div class="onright" id="bank"> 
+	            <div class="onright" id="bank" > 
 	                <a class="iconfont iconone" href="javascript:;">&#xe67d;</a>
 	                <div class="onright-left">
 	                    <div class="onright-left-one">
-	                        <img src="/financial/static/img/account_icon_bank logo@2x.png" alt="">
-	                        <i>中国建设银行</i>
-	                        <span>0563</span>
+	                        <img class="defaultBankImgUrl" src="/financial/static/img/account_icon_bank logo@2x.png" alt="">
+	                        <i class="defaultBankName"></i>
+	                        <span class="defaultBankCode"></span>
 	                    </div>
-	                    <div class="onright-left-two">单笔限额5万，单日限额10万</div>
+	                    <div class="onright-left-two"><span>可赎回</span><span class="singleNum"></span><span>元</span></div>
 	                </div>
 	                
 	            </div>
@@ -67,16 +67,19 @@
             </div>
             <div class="msecond">
             	<span class="msecond-one">￥</span>
-                <input class="transformInput" type="text">
-                <img src="/financial/static/img/icon_delete@2x.png" alt="">
-                <span class="button">全部</span>
+                <input class="transformInput" id="transformInput" type="number">
+                <img class="clearMoney" src="/financial/static/img/icon_delete@2x.png"  alt="">
+                <span class="button tranoutAllMoney">全部</span>
              </div>
              <div class="clearfix explain">
-             	<div class="left">
+             	<div class="left tranTime" type='fast'>
              		2小时内到账<span class="iconfont">&#xe635;</span>
-             	</div>
-             	<div class="right">
-             		现金宝产品1转出规则<span class="iconfont">&#xe635;</span>
+                 </div>
+                 <div class="left tranTime" type='common'>
+                        预计1-2个工作日到账<span class="iconfont">&#xe635;</span>
+                 </div>
+             	<div class="right" htmdEvt="cashTransformOut_right">
+             		<span class="transformRule"></span><span class="iconfont">&#xe635;</span>
              	</div>
              </div>
          </div>
@@ -84,76 +87,107 @@
          
 
          <div class="p2">
-            <img src="/financial/static/img/sign up_icon_checkbox_normal@2x.png" alt=""><div>如有内容占位，此处显示内容此处显示内容此处显示内容<span class="file">《xxxx》</span>和<span class="file">《xxxxxx》</span></div>
-         </div>
-         <div class="btn">
-            确定
-         </div>
+                <div class="agreementRuleFooter">
+                    <span class="file">
+                        <a href="javascript:;" class="item2"><span class="iconfont" >&#xe668;</span><span>已阅读并同意</span></a>
+                        <a href="javascript:;" class="agreementRule"></a>
+                    </span>
+                    
+                </div>
+            </div>
+            <div class="checkMessage">超出最大转出金额额</div>
+            <button class="conformButton confirmeDemptionPay"  disabled>确定</button>
 
 
           <!-- 银行卡弹窗 -->
          <div class="popup">
-             <div class="popup-mask"></div>
+             <div class="popup-mask" ></div>
              <div class="popup-content">
                  <div class="popup-title">
                      <!-- <div class="popup-close"> -->
-                         <img class="popup-close" src="/financial/static/img/Nav Bar_icon_close_black@2x.png" alt="">
+                         <img class="popup-close" src="/financial/static/img/Nav Bar_icon_close_black@2x.png"  alt="">
                      <!-- </div> -->
                      <div class="tit">选择到账银行卡</div> 
                  </div>
                  <p  class="popup-detail">*赎回金额将按照原路返回到您所付款的银行卡</p>
-                 <ul class="popup-ul">
-                     <li class="popup-li">
+                 <ul class="popup-ul cashListConent">
+                    <!-- <li class="popup-li cashCheckItem">
                          <img class="bank-img" src="/financial/static/img/account_icon_bank logo@2x.png" alt="">
                          <div class="div">
                              <div class="bank-name">中国招商银行储蓄卡(8304)</div>
                              <div class="bank-pay">可赎回1000000.00元</div>
                          </div>
-                         <img class="true" src="/financial/static/img/account_icon_check@2x.png" alt="">
+                         <img class="true imgLogo" src="" alt="">
                      </li>
-                     <li class="popup-li">
+                     <li class="popup-li cashCheckItem">
                              <img class="bank-img" src="/financial/static/img/account_icon_bank logo@2x.png" alt="">
                              <div class="div">
                                  <div class="bank-name">中国招商银行储蓄卡(8304)</div>
                                  <div class="bank-pay">可赎回1000000.00元</div>
                              </div>
-                             <img class="true" src="/financial/static/img/account_icon_check@2x.png" alt="">
+                             <img class="true imgLogo" src="" alt="">
                          </li>
-                         <li class="popup-li">
+                         <li class="popup-li cashCheckItem">
                                  <img class="bank-img" src="/financial/static/img/account_icon_bank logo@2x.png" alt="">
                                  <div class="div">
                                      <div class="bank-name">中国招商银行储蓄卡(8304)</div>
                                      <div class="bank-pay">可赎回1000000.00元</div>
                                  </div>
-                                 <img class="true" src="/financial/static/img/account_icon_check@2x.png" alt="">
+                                 <img class="true imgLogo" src="" alt="">
                              </li>
-                     <li class="popup-li">
+                     <li class="popup-li cashCheckItem">
                              <img class="bank-img" src="/financial/static/img/account_icon_bank logo@2x.png" alt="">
                              <div class="div">
                                  <div class="bank-name">中国招商银行储蓄卡(8304)</div>
                                  <div class="bank-pay">可赎回1000000.00元</div>
                              </div>
-                             <img class="true" src="/financial/static/img/account_icon_check@2x.png" alt="">
+                             <img class="true imgLogo" src="" alt="">
                          </li>
-                     
+                     -->
                  </ul>
              </div>
          </div>
      </section>
 
+     
+<div class="elasticLayer transOutRule" id="tip" style="z-index:100">
+        <div class="elasticWrapper">
+            <div class="elasticMid">
+                <div class="elasticTitle">信息说明</div>
+                <div class="elasticContent">
+                   <!-- <p class="elasticP">《泰达宏利基金电子交易平台泰达宏利活期友货币A(001894）转出分为快速转出和普通转出2种方式。T日（工作日）15:00前申请转入，预计T+1工作日9:30以后可支持转出，15:00后申请转入的，顺延一个工作日可转出。当日申购的金额，当日无法赎回。</p>
+                    <p class="elasticP">快速转出：单笔限额1万元，单日限额1万元，单日最多10笔，当日无收益，转出实时到账。 </p>
+                    <p class="elasticP">普通转出：无限额限制，预计到账时间T+1工作日。</p>
+                    -->
+                </div>
+                
+            </div>
+            <div class="elasticButtons" >明白了</button>
+            </div>
+        </div>
+    </div>
+
+    <!--银行卡弹框模板-->
+     <script id="cashTransformOutList" type="text/x-handlebars-template">
+        {{#each this}}
+            <li class="popup-li cashCheckItem"  bankName={{bankName}} bankLogoUrl={{bankThumbnailUrl}} carNum={{carNum}} singleNum={{availableShare}} oneDayNum={{oneDayNum}} bankNo={{bankNo}} bankAccount={{bankAccountSecret}} tradeAcco={{tradeAcco}} capitalMode={{capitalMode}} singleNumMask={{singleNumMask}} oneDayNumMask={{oneDayNumMask}} >
+                <img class="bank-img" src={{bankThumbnailUrl}} alt="">
+                <div class="div">
+                    <div class="bank-name"><span>{{bankName}}</span><span>(</span><span>{{carNum}}</span><span>)</span></div>
+                    <div class="bank-pay">可赎回<span class="availableShare">{{availableShare}}</span>元</div>
+                </div>
+                <img class="true radioCheckItemImg" src="/common/img/account_icon_check@2x.png" alt="">
+            </li> 
+        {{/each}}
+</script>
+
+
 
      @@include('@pathCommonCom/elasticLayer/transOutRule/transOutRule.html')
-
-
-     <!-- 加载中loading -->
-     <!-- @@include('@pathCommonViews/load.html') -->
- 
-     <!-- 加载中loading -->
-     @@include('@pathCommonViews/loading/listLoading.html')
  
      @@include('@pathInclude/views/footer.html')
-     <!-- 添加埋点 -->
-     @@include('@pathInclude/views/header.html')
+
+     @@include('@pathCommonViews/payPassword.html') 
      <script src="/financial/static/js/publicPlacement/cashTransformOut.js"></script>
  
  </body>

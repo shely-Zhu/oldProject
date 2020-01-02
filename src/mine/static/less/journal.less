@@ -1,12 +1,7 @@
 // 月度报告列表页
 // @author 蔡文琦  2019-11-11
 
-@import url("@pathInclude/css/mui.min.css");
-@import url('@pathCommonLess/mui/resetMUI.less');
-@import url("@pathCommonLess/reset.less");
-@import url("@pathCommonLess/color.less");
-
-@import url("@pathCommonLessCom/againEnter.less");
+@import url("@pathCommonLess/mui/resetMUI.less");
 @import url("@pathCommonLessCom/alertBox.less");
 @import url("@pathCommonLessCom/headBarConfig.less");
 body{
@@ -50,7 +45,7 @@ body{
 
 .equipment-name{
     font-size: .32rem;
-    color: @9B9B9B;
+    color: @272727;
     position: absolute;
     top: .24rem;
     left: .3rem;
@@ -60,6 +55,7 @@ body{
     position: absolute;
     top: .24rem;
     right: .3rem;
+    color: @9B9B9B;
 }
 .address{
     font-size: .24rem;
@@ -80,4 +76,12 @@ body{
 }
 .mui-table-view-cell{
     padding: 0;
+}
+.listBox .mui-table-view:after{
+    content: "";
+    height: 1px;
+    left: .3rem; 
+}
+.listBox .mui-table-view:last-child:after{
+    left: 0; 
 }

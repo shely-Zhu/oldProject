@@ -1,11 +1,50 @@
+/**
+ * 由于使用了gulp-webpack，当前项目的webpack版本是1.x的，配置项与3.x，4.x的都不同
+ * 修改时需注意
+ */
+
 var webpack = require('webpack'),
     path = require("path"),
     //assign  = require('object-assign'),
     //公用路径变量配置
-    pathVar = require('./conf/pathVar.js').pathVarObj();
+    pathVar = require('./conf/pathConfig.js');
 
-//var CommonsChunkPlugin = require("webpack/lib/optimize/CommonsChunkPlugin"); 
- 
+var pathObj = {};
+for( var i in pathVar.commonPathVar){
+    pathObj[i] = pathVar.commonPathVar[i];
+}
+
+for( var j in pathVar.newPathVar){
+    pathObj[j] = pathVar.newPathVar[j];
+}
+
+
+var arr = []
+for (var i in pathObj) {
+    arr.push({
+        key: i,
+        value: pathObj[i]
+    })
+}
+//将pathVar按索引长度从长到短排序，防止先替换了短的，长的会出错
+arr = arr.sort(function(a, b) {
+    return a.key.length < b.key.length
+});
+//arr = arr.reverse();
+// console.log(arr);
+
+var newPathVar = {};
+for (var j in arr) {
+    newPathVar[arr[j].key] = arr[j].value;
+}
+
+
+//公用变量合辑
+var aliasVar = {};
+for( var i in newPathVar){
+    aliasVar[i] = path.join(__dirname, 'middle\\js' + newPathVar[i]).replace(/\\/g, '/')  ;
+}
+
 module.exports = {
     //devtool: "source-map",  //生成sourcemap,便于开发调试
     entry: {},
@@ -16,30 +55,56 @@ module.exports = {
     },
     module: {
         //各种加载器，即让各种文件格式可用require引用
-        rules: [
-          { test: /\.js$/, 
-            //loader: 'babel', 
-            exclude: /node_modules/ ,
-            use: {
-                loader: 'babel-loader', // 对符合上面约束条件的文件 使用的 loader
-                options: {
-                    presets: ['env'],
-                    plugins: ['transform-runtime']
-                }
+        loaders: [
+            { 
+                test: /\.js$/, 
+                loader: 'babel-loader',
+                include: /node_modules/,
+                exclude: /node_modules/,
             },
-                
-            //query: {compact: false},
+       ]
 
-        }
-          // {test: /\.less$/, loader: 'style-loader!css-loader?minimize&-autoprefixer!postcss-loader!less-loader'}
-        ]
+
+        // rules: [
+        //   { test: /\.js$/, 
+        //     //loader: 'babel', 
+        //     exclude: /node_modules/ ,
+        //     // use: {
+        //     //     loader: 'babel-loader', // 对符合上面约束条件的文件 使用的 loader
+        //     //     options: {
+        //     //         presets: ['env'],
+        //     //         plugins: ['transform-runtime']
+        //     //     }
+        //     // },
+            
+        //     loader: {
+        //         loader: 'babel-loader',
+        //     },
+        //     // query: {
+        //     //     "presets": [
+        //     //         "env"
+        //     //     ],
+        //     //     plugins: ['transform-runtime']
+        //     // }
+
+        //     //query: {compact: false},
+
+        //     },
+        //     {// 转译html文件
+        //         test: /\.html$/,
+        //         use: [
+        //           'html-loader'
+        //         ]
+        //     }, 
+        //   // {test: /\.less$/, loader: 'style-loader!css-loader?minimize&-autoprefixer!postcss-loader!less-loader'}
+        // ]
     },
     resolve: {
         //配置别名，在项目中可缩减引用路径，
         //@callback和@deferred是webpack独有的，用于js中引用zepto的库，因此不写到pathVar.js中
         //需要在这里合并一下
-        alias: pathVar,
-        extensions: ['', '.js'],
+        alias: aliasVar,
+        extensions: ['', '.js', '.html'],
     },
     plugins: [
         //提供全局的变量，在模块中使用无需用require引入
@@ -73,4 +138,3 @@ module.exports = {
     });
     return files;
 }*/
-

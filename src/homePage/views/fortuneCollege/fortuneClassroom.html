@@ -14,15 +14,15 @@
 
 <body>
     <div class="container">
+        <!-- 暂无数据 -->
+        @@include('@pathCommonCom/noData/noData.html', {"tipText": "暂无数据"})
+        <!-- 加载中loading -->
+        @@include('@pathCommonCom/loading/listLoading.html')
         @@include('@pathCommonViews/headBarConfig.html',{"pathName":"财富学院"})
         <div class="br"></div>
         <div class="mui-content  myAsset">
             <!-- 放置页面内容 -->
         </div>
-        <!-- 加载中loading -->
-        @@include('@pathCommonViews/loading/listLoading.html')
-        <!-- 暂无数据 -->
-        @@include('@pathCommonViews/noDataImg.html',{"tipText":"暂无数据"})
     </div>
 
     <script id="first-template" type="text/x-handlebars-template">
@@ -45,17 +45,19 @@
         {{! 左侧页面列表}} 
         {{#each this}}
         {{#if isLive}}
-            <div class="roomItem item">
+            <div class="roomItem item" id="{{id}}" articleBelong="{{articleBelong}}">
                 <div class="roomVideo">
-                    <img class="articalImg" src="{{imageAttachId}}" alt="">
-                    <img class="play" src="/homePage/static/img/bofang@2x.png" alt="">
+                    <img class="articalImg {{lazyClass}}" src="/common/img/lazyImgList.png" data-original="{{imageUrlShowOnline}}" alt="">
+                    <img class="play" src="/common/img/bofang@2x.png" alt="">
                 </div>
                 <div class="roomTitle">{{title}}</div>
                 <div class="roomContent">{{intro}}</div>
             </div>
         {{else}}
-            <div class="roomItem knowledgeItem">
-                <div class="roomImg"><img src="{{imageAttachId}}" alt=""></div>
+            <div class="knowledgeItem" id="{{id}}" articleBelong="{{articleBelong}}">
+                
+                    <img class="{{lazyClass}}" src="/common/img/lazyImgList.png" data-original="{{imageUrlShowOnline}}" alt="">
+                
                 <div class="roomTitle">{{title}}</div>
                 <div class="roomContent">{{intro}}</div>
            </div>
@@ -63,8 +65,6 @@
         {{/each}}
     </script>
     @@include('@pathInclude/views/footer.html')
-    <!-- 添加埋点 -->
-    @@include('@pathInclude/views/header.html') 
     <script src="/homePage/static/js/fortuneClassroom.js"></script>
 </body>
 </html>

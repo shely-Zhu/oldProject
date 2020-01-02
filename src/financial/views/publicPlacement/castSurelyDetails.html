@@ -11,19 +11,19 @@
 </head>
 
 <body>
-    <!--加载图标-->
-    <!-- @@include('@pathCommonViews/load.html')  -->
     <!--没有数据显示图标-->
-    <!-- @@include('@pathCommonViews/noDataImg.html') -->
+    <!-- @@include('@pathCommonCom/noData/noData.html', {"tipText": "暂无数据"}) -->
     <!--列表加载显示图标-->
-    <!-- @@include('@pathCommonViews/loading/listLoading.html') -->
+    @@include('@pathCommonCom/loading/listLoading.html')
     <!--公共页面头部-->
     @@include('@pathCommonViews/headBarConfig.html',{"pathName":"定投详情","bgColors":"#384B85,#112258","showType":"1"})
     <section class="container">
         <div class="banner">
             <div class="bannerTop clearfix">
-                <span class="j_text fundName"></span><span class="posRight"><a class="iconfont
-                        iconone" href="javascript:;">&#xe67d;</a></span>
+                <span class="j_text fundName"></span>
+                <span class="posRight">
+                    <a class="iconfont iconone" href="javascript:;">&#xe67d;</a>
+                </span>
                 <div class="type">
                     <div>
                         <p class="word_color ">累计定投(元)</p>
@@ -77,10 +77,8 @@
         <div class="table tplBox">
 
         </div>
-        <!-- 加载中loading -->
-        @@include('@pathCommonViews/loading/listLoading.html')
         <!-- 暂无数据 -->
-        @@include('@pathCommonViews/noDataImg.html',{"tipText":"暂无数据"})
+        @@include('@pathCommonCom/noData/noData.html', {"tipText": "暂无数据"})
     </section>
     <div class="footer">
         <!-- <div>终止</div>
@@ -88,33 +86,32 @@
         <div class="active ">修改</div>
         <div class="active ">续保</div> -->
     </div>
+    @@include('@pathCommonViews/payPassword.html')
     @@include('@pathInclude/views/footer.html')
-    <!-- 添加埋点 -->
-    @@include('@pathInclude/views/header.html')
     <script src="/financial/static/js/publicPlacement/castSurelyDetails.js"></script>
 </body>
 <script id="dataLists" type="text/x-handlebars-template">
 {{#if tradeRecordStutas}}
-    {{#each this}}
+    {{#each tradeRecord}}
     {{#if status}}
     <div>
         <span>{{tradeTime}}</span>
         <span>{{balance}}元</span>
-        <span class="state_succ">{{statusDesc}}<a class="iconfont iconone" href="javascript:;">&#xe67d;</a></span>
+        <span class="state_succ">{{statusDesc_1}}<a class="iconfont iconone" href="javascript:;">&#xe67d;</a></span>
     </div>
     {{else}}
     <div class="is_fail">
         <span>{{tradeTime}}</span>
         <span>{{balance}}元</span>
-        <span class="state_fail">{{statusDesc}}<a class="iconfont iconone" href="javascript:;">&#xe67d;</a>
+        <span class="state_fail" allotNo = {{allotNo}}>{{statusDesc_1}}<a class="iconfont iconone" href="javascript:;">&#xe67d;</a>
         </span>
-        <span class="needPos">此处填写定投失败原因</span>
+        <span class="needPos">{{statusDesc}}</span>
     </div>
     {{/if}}
     {{/each}}
-    {{else}}
+{{else}}
     <p class="no-data">暂无数据</p>
-    {{/if}}
+{{/if}}
 </script>
 
 </html>

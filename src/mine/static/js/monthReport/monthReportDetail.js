@@ -2,106 +2,36 @@
 * 月度报告详情页我
 * @author zhangyanping 2019-11-19
 */
-
-require('@pathIncludJs/base.js');
+require('@pathCommonBase/base.js');
 
 require('@pathCommonJsCom/utils.js');
 require('@pathCommonJs/ajaxLoading.js');
-require('@pathCommonJsCom/headBarConfig.js');
 
 require('@pathCommonJsCom/tabScroll.js');
 var splitUrl = require('@pathCommonJsCom/splitUrl.js')();
-//黑色提示条的显示和隐藏
-var tipAction = require('@pathCommonJsCom/tipAction.js');
-
 var moment = require('moment');
 //引入弹出层
-require('@pathCommonJsCom/elasticLayerTypeFive.js');
+require('@pathCommonCom/elasticLayer/elasticLayer/elasticLayer.js');
+var generateTemplate = require('@pathCommonJsComBus/generateTemplate.js');
+var Base64 = require('@pathIncludJs/vendor/base64/base64.js');
 
 
 var monthReportDetail = {
 	getElements: {
 		noData: $('.noData'), //没有数据的结构
-		listLoading: $('.listLoading'),  //所有数据区域，第一次加载的loading结构
 		reportId:splitUrl['reportId'],   //活动的id
+		adjustmentTemp: $('#second-template'), // 最新调仓模板
 	},
-	setting: {  //一些设置
-		navList: [  //导航
-			{type: '月末持仓总览',num: '0'}, //
-			{type: '本月交易明细',num: '1'},
-		],
-		current_index: 0,  //左右滑动区域的索引
-		list_template: '',  //列表的模板，生成后存放在这里
-	},
-	html: '',  //存放生成的html
 	pieChartData:'', // 画图的title
 	init: function(){  //初始化函数
 		var that = this;
-		
-		//拼模板，初始化左右滑动mui组件
-		that.beforeFunc();
-
-		//初始化第一屏区域的上拉加载
-		that.getData($('#scroll1'));
+		that.getData();
+		// 交易明细
+		that.commonAjax();
 		// 资产情况分析
 		that.assetAnalysis();
-
 		//事件监听
 		that.events();
-	},
-
-	beforeFunc: function(){  //拼模板，初始化左右滑动mui组件
-		var that = this,
-			contentArr = [];  //传给tabScroll组件的contentList参数的数组
-
-		// list内容模板
-		var source = $('#second-template').html(),
-			template = Handlebars.compile(source),
-			list_html = template();
-
-		//将生成的模板内容存到that.list_template上
-		that.setting.list_template = template;
-
-		// 外容器优先加载
-		var wrap_source = $('#transaction-template').html(),
-			wrap_template = Handlebars.compile(wrap_source),
-			wrap_html = wrap_template({content: list_html});
-			
-		$.each( that.setting.navList, function(i, el){
-
-			contentArr.push({
-				id: i,
-				content: wrap_html
-			})
-		})
-
-		var obj = {
-			wrapper: $('.reportContainer'), //存放整个组件的区域
-			needNavAction: false,
-			//needBlock: true,
-			navList: that.setting.navList, //导航
-			contentLength: that.setting.navList.length,  //左右滑动的区域个数，即导航数组长度
-			contentList: contentArr, //此时只有框架，实际列表内容还未请求
-			callback: function(t){  //t返回的是 id 为 scroll1 / scroll2 这样的切换后当前区域中的节点
-					var w = $('#scroll1').attr('id'),
-					s = '#'+w+' .contentWrapper';
-
-				  //data-scroll属性即当前左右切换区域的索引
-				var index = t.attr('data-scroll');
-
-				//data-scroll属性即当前左右切换区域的索引
-				that.setting.current_index = index;
-
-				//判断当前区域是否已经初始化出来上拉加载
-				if (t.hasClass('hasPullUp')) {
-					//有这个class，表示已经初始化，不再执行下一步
-					return false;
-				}
-				//没有初始化，请求第一次数据
-				that.commonAjax(t);
-			}
-		}
-		$.tabScroll(obj);
 	},
 	getData: function($id, t) {
 
@@ -118,11 +48,14 @@ var monthReportDetail = {
 			needLogin:true,//需要判断是否登陆
 			needLoading:true,
 			callbackDone:function(data){
+				$(".netLoading").hide()
 				var json=data.data;
-
+				// 客户名称
 				$('.clientName').html(json.name);
 				// 客户编号
 				$('.monthReportNum').html(json.customerNo);
+				// 客户登记
+				$('.clientLevelDesc').html(json.tierDesc);
 			},
 			callbackNoData: function(json){ //没有数据的情况
 				console.log(json.msg);
@@ -136,9 +69,8 @@ var monthReportDetail = {
 			needDataEmpty: true,
 			async: false,
 			callbackDone: function(json) {
+				$(".netLoading").hide()
 				var json=json.data;
-				// 报告名称
-				$('.clientName').html(json.reportName)
 				// 报告月份
 				that.getElements.monthReportTime = json.month;
 				$('.reportMonth').html(json.month);
@@ -149,6 +81,9 @@ var monthReportDetail = {
 				$('.riskLevel').html(json.riskLevel);
 				// 报告日期
 				$('.reportTime').html(json.reportTime);
+
+				// 报告名称
+				$('#HeadBarpathName').html(json.reportName)
 				that.getElements.reportTime = json.reportTime;
 
 				var dateStr = json.reportTime;
@@ -161,17 +96,14 @@ var monthReportDetail = {
 				var month = now.substring(5,7);
 				that.getElements.month = month;
 				that.getMonthDateRange(year,month);
-				
 
 			},
 			callbackFail: function(json) {
 				//请求失败，
 				//显示错误提示
 				tipAction(json.message);
-
-			},
+			}
 			
-
 		},{
 			url: site_url.queryInvestProdHoldShareList_api,   // 持仓总览  报告的月末持仓总览
 			data: {
@@ -181,9 +113,13 @@ var monthReportDetail = {
 			needDataEmpty: true,
 			async: false,
 			callbackDone: function(json) {
+				$(".netLoading").hide()
 				var jsonData = json.data;
-				if(!$.util.objIsEmpty(jsonData)){
-
+				if($.util.objIsEmpty(jsonData.pefSaleList) && $.util.objIsEmpty(jsonData.generalModelList) && $.util.objIsEmpty(jsonData.pofList)){
+					//没有数据
+					$('.holdNodata').show();
+					$('.holdNodata .text').html('截止'+that.getElements.reportTime+',您暂无持仓信息');
+				}else{
 					var pefSaleList = jsonData.pefSaleList;
 					jsonData.holdPosition = true;
 
@@ -222,66 +158,40 @@ var monthReportDetail = {
 
 						})
 
-						that.setting.html = that.setting.list_template(jsonData);
+						generateTemplate(jsonData,$(".holdPosition"), that.getElements.adjustmentTemp);
 
-						$id.find('.contentWrapper .mui-table-view-cell').html(that.setting.html);
 					}
 					if(!$.util.objIsEmpty(jsonData.pofList)){
 						jsonData.flag2 = true;
 						jsonData.flag1 = false;
 						jsonData.flag3 = false;
-						that.setting.html = that.setting.list_template(jsonData);
-
-						$id.find('.contentWrapper .mui-table-view-cell').append(that.setting.html);
+						generateTemplate(jsonData,$(".holdPosition"), that.getElements.adjustmentTemp);
 					}
 					if(!$.util.objIsEmpty(jsonData.generalModelList)){
 						jsonData.flag3 = true;
 						jsonData.flag1 = false;
 						jsonData.flag2 = false;
-						that.setting.html = that.setting.list_template(jsonData);
-
-						$id.find('.contentWrapper .mui-table-view-cell').append(that.setting.html);
+						generateTemplate(jsonData,$(".holdPosition"), that.getElements.adjustmentTemp);
 					}
-				}else{
-					//没有数据
-					$id.find('.mui-scroll .list').html(that.getElements.noData.clone(false)).addClass('noCon');
-					$id.find('.noData').show();
-
-					setTimeout(function() {
-						that.getElements.listLoading.hide();
-					}, 100);
 				}
-				that.getElements.listLoading.hide();
-				$id.addClass('hasPullUp');
 
 			},
 			callbackFail: function(json) {
 				//请求失败，
-				//隐藏loading
-				//that.getElements.listLoading.hide();
 				//显示错误提示
 				tipAction(json.message);
-
-				//隐藏loading，调试接口时需要去掉
-				setTimeout(function() {
-					that.getElements.listLoading.hide();
-				}, 100);
-				//return false;
 			},
 			callbackNoData: function(json) {
 				//没有数据
-				$id.find('.mui-scroll .list').html(that.getElements.noData.clone(false)).addClass('noCon');
-				$id.find('.noData').show();
+				$('.holdNodata').show();
+				$('.holdNodata .text').html('截止'+that.getElements.reportTime+',您暂无持仓信息');
 
-				setTimeout(function() {
-					that.getElements.listLoading.hide();
-				}, 100);
 			}
 
 		}]
 		$.ajaxLoading(obj);
 	},
-	commonAjax: function( $id, t ){  // 获取产品数据的公用ajax方法;$id为各区域的 scroll+num id
+	commonAjax: function(){  //交易明细
 		var that = this;
 		//获取产品列表
 		var obj = [{
@@ -293,64 +203,41 @@ var monthReportDetail = {
 			needDataEmpty: true, 
 			async: false, 
 			callbackDone: function(json){
+				$(".netLoading").hide()
 				var jsonData = json.data;
-				if(!$.util.objIsEmpty(jsonData)){
+				if(jsonData.pefSaleInfoList.length == 0 && jsonData.pofInfoList.length == 0){
+					//没有数据
+					$('.tradeNoData').show();
+					$('.tradeNoData .text').html('您'+that.getElements.reportTime+'无交易明细');
+				}
+				else{
 					jsonData.tradeDtail = true;
 
 					if(!$.util.objIsEmpty(jsonData.pefSaleInfoList)){
 						jsonData.flag1 = true;
 						jsonData.flag2 = false;
-						that.setting.html = that.setting.list_template(jsonData);
-
-						$id.find('.contentWrapper .mui-table-view-cell').html(that.setting.html);
+						generateTemplate(jsonData,$(".tradeDtail"), that.getElements.adjustmentTemp);
+						
 					}
 					if(!$.util.objIsEmpty(jsonData.pofInfoList)){
 						jsonData.flag2 = true;
 						jsonData.flag1 = false;
-						that.setting.html = that.setting.list_template(jsonData);
-
-						$id.find('.contentWrapper .mui-table-view-cell').append(that.setting.html);
+						generateTemplate(jsonData,$(".tradeDtail"), that.getElements.adjustmentTemp);
 					}
+					
 				}
-				else{
-					//没有数据
-					$id.find('.mui-scroll .list').html(that.getElements.noData.clone(false)).addClass('noCon');
-					$id.find('.noData').show();
-
-					setTimeout(function() {
-						that.getElements.listLoading.hide();
-					}, 100);
-				}
-
-				that.getElements.listLoading.hide();
-				$id.addClass('hasPullUp');
 
 			},
 			callbackFail: function(json){
 				//请求失败，
-				//隐藏loading
-				//that.getElements.listLoading.hide();
 				//显示错误提示
 				tipAction( json.message );
 
-				t.endPullupToRefresh(false);	
-				$('.contentWrapper').find('.mui-pull-bottom-pocket').removeClass('mui-hidden');
-
-				//隐藏loading，调试接口时需要去掉
-				setTimeout(function(){
-					that.getElements.listLoading.hide();
-				}, 100);
-				//return false;
 			},
 			callbackNoData: function(json){
- 
 				//没有数据
-				$id.find('.mui-scroll .list').html(that.getElements.noData.clone(false)).addClass('noCon');
-				$id.find('.noData').show();
-
-				setTimeout(function() {
-					that.getElements.listLoading.hide();
-				}, 100);
+				$('.tradeNoData').show();
+				$('.tradeNoData .text').html('您'+that.getElements.reportTime+'无交易明细');
 			}
 
 		}]
@@ -377,9 +264,11 @@ var monthReportDetail = {
 			needDataEmpty: false,
 			async:false,//同步，newcomer字段在产品详情的结构会用于其他逻辑判断
 			callbackDone: function(json){
+				$(".netLoading").hide()
 				//判断是否已实名认证
 				var data = json.data;
 				// var assetPerHtml;
+				that.pieChartDataDetail = [];
 
 				var lastMonth = Number(that.getElements.month)-1;
 
@@ -388,7 +277,7 @@ var monthReportDetail = {
 					that.monthHoldShareList = data.monthHoldShareList;
 
 					$.each(data.monthHoldShareList,function(i,el){
-						that.pieChartData[i] = el.assetTypeDesc;
+						that.pieChartData[i] = el.assetTypeDesc + el.holdShareValue;
 
 						if(el.assetType == '203'){
 							el.colorStart = '#182F7A';
@@ -407,8 +296,8 @@ var monthReportDetail = {
 							el.colorStop = '#D8D8D8';
 						}
 
-
-						var dataDetail = {value:el.confirmValuePercent, name:el.assetTypeDesc,itemStyle: {
+						var assetTypeDesc = el.assetTypeDesc + '' + el.holdShareValue;
+						var dataDetail = {value:el.confirmValuePercent, name: assetTypeDesc,itemStyle: {
 							normal: {
 								color: new echarts.graphic.LinearGradient(
 									0, 0, 1, 1,
@@ -422,12 +311,16 @@ var monthReportDetail = {
 
 						that.pieChartDataDetail.push(dataDetail) ;
 
-
 					})
 
 					//调用画图方法
 					that.bingtu(0);
+					that.typeCompare();
 
+				}
+				else{
+					$('.assetAnalyse').hide();
+					$('.pieBox.assetAnalyse').hide();
 				}
 				// 资产情况分析
 				if(!$.util.objIsEmpty(data)){
@@ -499,14 +392,14 @@ var monthReportDetail = {
 			callbackDone: function(json){
 				//判断是否已实名认证
 				var data = json.data;
-				// var flag;
+				that.pieChartDataDetail = [];
 
 				if ( data.length) {
 					//有数据
 					that.recommendList = data;
 
 					$.each(that.recommendList,function(i,el){
-						that.pieChartData[i] = el.assetTypeDesc;
+						that.pieChartData[i] = el.assetTypeDesc + (Number(el.assetRatio)*100).toFixed(2)+ '%';
 
 						if(el.assetType == '203'){
 							el.colorStart = '#182F7A';
@@ -526,7 +419,8 @@ var monthReportDetail = {
 						}
 
 
-						var dataDetail = {value:el.confirmValuePercent, name:el.assetTypeDesc,itemStyle: {
+						var assetTypeDesc = el.assetTypeDesc + (Number(el.assetRatio)*100).toFixed(2) + '%';
+						var dataDetail = {value:el.assetRatio, name:assetTypeDesc,itemStyle: {
 							normal: {
 								color: new echarts.graphic.LinearGradient(
 									0, 0, 1, 1,
@@ -545,6 +439,7 @@ var monthReportDetail = {
 
 					//调用画图方法
 					that.bingtu(1);
+					that.typeCompare();
 				}
 				// 循环遍历数据
 				for(var index in data){
@@ -588,6 +483,38 @@ var monthReportDetail = {
 
 
 	},
+	typeCompare:function(){
+		var that = this;
+
+		if( that.monthHoldShareList.length || that.recommendList.length ){
+
+			var recommendData = [];
+
+			$.each( that.recommendList, function(i, el){
+				var remark = true;
+				$.each( that.monthHoldShareList, function( x, y){
+
+					if( el.assetType == y.assetType ){
+						remark = false;
+						if(el.assetRatio > y.confirmValuePercent ){
+							recommendData.push(el.assetTypeDesc);
+						}
+
+					}
+
+				})
+
+				if(remark){
+					recommendData.push(el.assetTypeDesc);
+				}
+				
+			})
+
+
+		}
+		var addTypesHtml = recommendData.join('、');
+		$('.addTypes').html(addTypesHtml)
+	},
 	getMonthDateRange: function(year, month) {
 		// month in moment is 0 based, so 9 is actually october, subtract 1 to compensate
 		// array is 'year', 'month', 'day', etc
@@ -628,8 +555,8 @@ var monthReportDetail = {
 
 				itemHeight: 10, // 设置高度
 				itemGap: 10 ,//设置间距
-				x: '70%',
-				y: '35%'
+				x: '55%',
+				y: '27%'
 
 			},
 			series: [
@@ -637,7 +564,7 @@ var monthReportDetail = {
 					name:'您当前的资产配比',
 					type:'pie',
 					radius: ['49%', '70%'],
-					center: ['35%', '47%'],
+					center: ['27%', '47%'],
 					// selectedMode: 'single',
 					avoidLabelOverlap: false,
 					hoverAnimation:false,
@@ -686,7 +613,7 @@ var monthReportDetail = {
 					type:'pie',
 					hoverAnimation:false,
 					radius: ['40%', '50%'],
-					center: ['35%', '47%'],
+					center: ['27%', '47%'],
 					avoidLabelOverlap: false,
 					
 					label: {
@@ -710,7 +637,7 @@ var monthReportDetail = {
 	},
 	events: function(){  //绑定事件
 		var that = this;
-		mui("body").on('tap', '.consult' , function(){
+		mui("body").on('mdClick', '.consult' , function(){
 
 			that.getElements.productName = $(this).attr('productName');
 			// 获取理财师
@@ -720,11 +647,11 @@ var monthReportDetail = {
 					
 				},
 				needLogin: true, //需要判断登录情况
-				needDataEmpty: false,//不需要判断data是否为空
+				needDataEmpty: true,//不需要判断data是否为空
 				callbackDone: function(json){
 					var result = json.data;
 					// 判断是否有专属理财师和服务理财师
-					if(result.exclusiveFinancialerList || result.serviceFinancialerList ){
+					if(result.exclusiveFinancialerList.length != 0 || result.serviceFinancialerList != 0 ){
 
 						if(result.exclusiveFinancialerList.length != 0){   //有专属理财师
 							var exclusive = result.exclusiveFinancialerList[0];//专属理财师
@@ -737,14 +664,17 @@ var monthReportDetail = {
 							that.getElements.plannerNum = exclusive.code; //理财师工号
 						}
 
-					   $.elasticLayerTypeFive({
-							id: "tip",
-							title: '提示',
-							titleSatus: false,
-							p: '<p>非常感谢选择恒天财富！我们将尽快安排专业人员与您联系，请保持手机畅通</p>',
-							buttonTxt: '明白了',
-							zIndex: 100,
-						});
+						var obj = {
+                            p: '<p>非常感谢选择恒天财富！我们将尽快安排专业人员与您联系，请保持手机畅通</p>',
+                            hideCelButton: true,
+                            zIndex: 100,
+                            htmdEvtYes:'monthReportDetail_06',  // 埋点确定按钮属性
+                            callback: function(t) {
+
+                            },
+                        };
+                        $.elasticLayer(obj)
+
 						var contentObj = [{
 							url: site_url.reportContactNow_api,
 							data: {
@@ -772,26 +702,61 @@ var monthReportDetail = {
 					}else{
 						var now = new Date();
 						var hh = now.getHours();
-						
-						if(8 <= hh && hh <= 20){
-							// window.location.href = site_url.consultProduct_url +'?empNo='+ that.getElements.plannerNum + '&empName=' + that.getElements.plannerName + '&productName=' + that.getElements.productName ;
-							// window.open(site_url.customerService_url);
+
+						if(8 <= hh && hh < 20){
+							 //跳转客服页面
+							window.location.href = site_url.onlineCustomerTransfer_url;
 						}else{
-							window.location.href = site_url.consultProduct_url +'?empNo='+ that.getElements.plannerNum + '&empName=' + that.getElements.plannerName + '&productName=' + that.getElements.productName ;
+							window.location.href = site_url.consultProduct_url +'?empNo='+ that.getElements.plannerNum + '&empName=' + that.getElements.plannerName + '&productName=' + new Base64().encode(that.getElements.productName) + '&backUrl=' + new Base64().encode(window.location.href) ;
 						}
 
 					}
 				},
 				callbackFail: function(json){
-					
+					tipAction(json.message)
 				},
+				callbackNoData:function(json){
+					var now = new Date();
+					var hh = now.getHours();
+
+					if(8 <= hh && hh < 20){
+						 //跳转客服页面
+						window.location.href = site_url.onlineCustomerTransfer_url;
+					}else{
+						window.location.href = site_url.consultProduct_url +'?empNo='+ that.getElements.plannerNum + '&empName=' + that.getElements.plannerName + '&productName=' + new Base64().encode(that.getElements.productName) + '&backUrl=' + new Base64().encode(window.location.href) ;
+					}
+				}
 			}]
 			$.ajaxLoading(obj);
 
+		},{
+			'htmdEvt': 'monthReportDetail_04'
 		})
+		// 公募的立即购买--跳转到公募详情页
+		mui("body").on('mdClick', '.publicBuy' , function(){
+			window.location.href = site_url.wealthIndex_url;
+		},{
+			'htmdEvt': 'monthReportDetail_05'
+		});
+
+		mui("body").on('mdClick', '.tabs>li' , function(){
+			$(this).addClass('active').siblings().removeClass('active');
+			$(".wrap>.panel").eq($(this).index()).addClass('active').siblings().removeClass('active');
+		},{
+			'htmdEvt': 'monthReportDetail_01'
+		});
+
+		mui("body").on('mdClick', '.investBth' , function(){
+			window.location.href = site_url.wealthIndex_url;
+		},{
+			'htmdEvt': 'monthReportDetail_02'
+		});
+
+
+		
 		
 
-	},
+	}
 }
 
 monthReportDetail.init();

@@ -2,15 +2,10 @@
  * 基金档案 样式
  * @yangjinlai 2017-03-21
  */
-
- @import url("../../../include/css/mui.min.css");
  @import url('@pathCommonLess/mui/resetMUI.less');
- @import url("@pathCommonLess/reset.less");
- @import url("@pathCommonLess/color.less");
- 
- @import url("@pathCommonLessCom/againEnter.less");
  @import url("@pathCommonLessCom/alertBox.less");
  @import url("@pathCommonLessCom/headBarConfig.less");
+ @import url("@pathCommonCom/noData/noData.less");
 
 html{
     height: 100%;
@@ -140,7 +135,7 @@ body{
                             width: 100%;
                             line-height:0.4rem;
                             color: @4A4A4A;
-                            font-size: 0.32rem;
+                            font-size: 0.14rem;
                             padding:0.3rem 0.3rem;
                             border-bottom: 0.01rem solid @c004;
                         }
@@ -291,4 +286,8 @@ body{
 }
 .align_center {
     align-items: center;
+}
+.contentWrapper {
+    height: 100%;
+    overflow: hidden;
 }

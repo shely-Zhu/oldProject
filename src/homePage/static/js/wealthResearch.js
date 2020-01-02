@@ -1,27 +1,20 @@
 //  超宝-交易记录
 // @author wangjiajia 2019-11-20 
 
+require('@pathCommonBase/base.js');
 require('@pathCommonJsCom/utils.js');
 //ajax调用
 require('@pathCommonJs/ajaxLoading.js');
-//zepto模块--callback
-require('@pathIncludJs/vendor/zepto/callback.js');
-//zepto模块--deferred
-require('@pathIncludJs/vendor/zepto/deferred.js');
-//路径配置文件
-require('@pathIncludJs/vendor/config.js');
 //下拉加载更多
 // require('@pathCommonJs/scrollFullPage.js');
 // 切换
 require('@pathCommonJsCom/tabScroll.js');
 require('@pathCommonJsCom/goTopMui.js');
-require('@pathCommonJs/components/elasticLayer.js');
-require('@pathCommonJs/components/elasticLayerTypeFive.js');
-require('@pathCommonJs/components/headBarConfig.js');
-//黑色提示条的显示和隐藏
-var tipAction = require('@pathCommonJsCom/tipAction.js');
+require('@pathCommonCom/elasticLayer/elasticLayer/elasticLayer.js');
+// require('@pathCommonJs/components/elasticLayer.js');
+// require('@pathCommonJs/components/elasticLayerTypeFive.js');
 var splitUrl = require('@pathCommonJs/components/splitUrl.js')();
-
+var alwaysAjax = require('@pathCommonJs/components/alwaysAjax.js');
 
 $(function() {
     var data = {
@@ -180,7 +173,7 @@ $(function() {
             });
 
             mui.ready(function() { //init后需要执行ready函数，才能够初始化出来
-
+                $('.lazyload').lazyload();
                 //隐藏当前的加载中loading
                 if (!$id.hasClass('hasPullUp')) {
                     $id.find('.mui-pull-bottom-pocket').addClass('mui-hidden'); //上拉显示更多
@@ -201,8 +194,12 @@ $(function() {
 
                 // mui(s).pullRefresh().disablePullupToRefresh()
             });
-
-            // mui('.mui-slider').slider().stopped = true;
+            //无缝滚动
+            setTimeout(function() {
+                    //无缝滚动
+                    alwaysAjax($('#' + w + ' .mui-table-view-cell'), s)
+                }, 1000)
+                // mui('.mui-slider').slider().stopped = true;
         },
         getTabsListData: function(t) {
             var that = this;
@@ -229,7 +226,15 @@ $(function() {
                     //初始化第一屏区域的上拉加载
                     that.initMui($('#scroll1'));
 
-                }
+                },
+                callbackNoData: function() {
+                    //没有数据时展示暂无数据
+                    $(".list").hide()
+                    $(".title").hide()
+                    that.getElements.listLoading.hide();
+                    that.getElements.noData.show();
+                    $(".br").css("display", "none");
+                },
             }];
             $.ajaxLoading(obj);
         },
@@ -240,6 +245,7 @@ $(function() {
                 url: that.gV.siteUrlArr[that.gV.current_index], //调用第几个接口
                 data: that.gV.ajaxArr[that.gV.current_index], //传调用参数
                 needLogin: true,
+                needLoading: false,
                 callbackDone: function(json) {
                     console.log(json.data)
                     var jsonData = json.data.list,
@@ -317,7 +323,6 @@ $(function() {
                         } else {
                             $id.find('.contentWrapper .mui-table-view-cell').append(that.html);
                         }
-
                         //获取当前展示的tab的索引
                         var index = $('#slider .tab-scroll-wrap .mui-active').index(),
                             $list = $("#move_" + index + " .list");
@@ -338,7 +343,8 @@ $(function() {
 
                             //})
                         }
-
+                        //只加载当前tab页面的图片
+                        $id.find('.contentWrapper').find('.lazyload').lazyload();
                         //隐藏loading
                         setTimeout(function() {
                             that.getElements.listLoading.hide();
@@ -376,8 +382,10 @@ $(function() {
                     t.endPullupToRefresh(false);
 
                     //没有数据
-                    $id.find('.mui-scroll .list').html(that.getElements.noData.clone(false)).addClass('noCon');
-                    $id.find('.noData').show();
+                    if(that.gV.ajaxArr[that.gV.current_index].pageCurrent == 1) {
+                        $id.find('.mui-scroll .list').html(that.getElements.noData.clone(false)).addClass('noCon');
+                        $id.find('.noData').show();
+                    }
 
                     setTimeout(function() {
                         that.getElements.listLoading.hide();

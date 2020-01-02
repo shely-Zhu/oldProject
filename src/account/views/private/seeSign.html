@@ -17,9 +17,8 @@
      <div class="container">
          @@include('@pathCommonViews/headBarConfig.html',{"pathName":"查看已签署材料"})
          <div class="br"></div>
-         <!-- @@include('@pathCommonViews/load.html') -->
          <!-- 加载中loading -->
-         @@include('@pathCommonViews/loading/listLoading.html')
+         @@include('@pathCommonCom/loading/listLoading.html')
 
          <div class="list">
             <div class="contentWrapper">
@@ -39,14 +38,16 @@
         </div>
 
          <!-- 暂无数据 -->
-         @@include('@pathCommonViews/noDataImg.html',{"tipText":"暂无数据"})
+         @@include('@pathCommonCom/noData/noData.html', {"tipText": "暂无数据"})
      </div>
  
      <script id="list-template" type="text/x-handlebars-template">
         {{#each this}}
-        <div class="con">
-            <div class="con-title">稳裕1号基金稳裕1号基金稳裕1号基金稳裕1号基金</div>
-            <a href="javaScript:;" class="iconfont iconone" href="javascript:;">&#xe67d;</a>
+        <div class="con" href="{{href}}">
+            <div class="con-title">{{modulename}}</div>
+            <div class="icondiv">
+                <a href="javascript:void(0)" class="iconfont iconone">&#xe67d;</a>
+            </div>
         </div>
         {{/each}}
     </script>

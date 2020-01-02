@@ -13,29 +13,16 @@
  </head>
  
  <body>
-     <!--加载图标-->
-	@@include('@pathCommonViews/load.html') 
     <div class="topTitle">
      @@include('@pathCommonViews/headBarConfig.html',{"bgColors":"#2C3E77,#273971","showType":"0","pathName":"收益分配明细"})
     </div>
-   <div class="">
-       <div class="list" style="width:100%;">
-         <!-- 暂无数据 -->
-         @@include('@pathCommonViews/noDataImg.html',{"tipText":"暂无数据"})
-        <section class="contentWrapper">
-            <ul class="mui-table-view" id="activityDataList">
-                <div class="mui-table-view-cell recordList">
-                    
-                </div>
-            </ul>
-            @@include('@pathCommonViews/goTop.html')
-        </section>
-        
-    </div>
-   </div>
+    <!-- 暂无数据 -->
+    @@include('@pathCommonCom/noData/noData.html', {"tipText": "暂无数据"})
+
+    <div class="list"></div>
    <script id="trans-template" type="text/x-handlebars-template">
     {{#each this}} 
-            <li class="list-wrap mui-table-view recordList">
+            <li class="list-wrap mui-table-view">
                 <h2>{{yieldDate}}</h2>
                 <div class="content">
                     <p><span>金额(元)</span><b>{{yieldSum}}</b></p>
@@ -46,7 +33,7 @@
     {{/each}}
    </script>
     <!-- 加载中loading -->
-    @@include('@pathCommonViews/loading/listLoading.html')
+    @@include('@pathCommonCom/loading/listLoading.html')
     @@include('@pathInclude/views/footer.html')
 
     <script src="/account/static/js/private/incomeDistribution.js"></script>

@@ -21,20 +21,20 @@
             <div class="bannerposi">
                 <div class="posione">
                     <div class="posioneleft">当前值</div>
-                    <div class="posioneright">
+                    <div class="posioneright" htmdEvt="adolesceRecord_ruleDescription">
                         <span>规则说明</span>
-                        <a class="iconfont iconone" href="javascript:;">&#xe67d;</a>
+                        <a href="javascript:void(0);" class="iconfont iconone">&#xe67d;</a>
                     </div>
                 </div>
                 <div class="positwo">
-                    <div class="positwoleft"></div>
+                    <div class="positwoleft">--</div>
                     <!-- <div class="positworight">
-                        <img src="/mine/static/img/icon_sheng@3x.png" alt="">
+                        <img src="/common/img/icon_sheng@2x.png" alt="">
                         <span>100</span> 
                     </div> -->
                     <div class="positworight2">
                         <span class="promotionname">晋级值</span>
-                        <span class="promotionvalue"></span>
+                        <span class="promotionvalue">--</span>
                     </div>
                 </div>
                 <div id="mui-progressbar" class="mui-progressbar">
@@ -73,33 +73,33 @@
                 @@include('@pathCommonViews/goTop.html')
             </ul>
             <!-- 没有数据 -->
-            @@include('@pathCommonViews/noDataImg.html',{"tipText":"暂无数据"})
+            @@include('@pathCommonCom/noData/noData.html', {"tipText": "暂无数据"})
             <!-- 加载中loading -->
-            @@include('@pathCommonViews/load.html')
-            <!-- 加载中loading -->
-            @@include('@pathCommonViews/loading/listLoading.html')
+            @@include('@pathCommonCom/loading/listLoading.html')
         </div>
     </div>
 
     <script id="List-template" type="text/x-handlebars-template">
         {{#each this}}
-        <div class="lione">
-            <div>
-                {{growthDesc}}
+        <div class="listItem">
+            <div class="lione">
+                <div>
+                    {{growthDesc}}
+                </div>
+                <div>
+                    {{growthDetail}}
+                </div>
             </div>
-            <div>
-                {{growthDetail}}
+            <div class="litwo">
+                <div>
+                    {{growthDate}}
+                </div>
+                {{#if growthIndate}}
+                <div>
+                    有效期至&nbsp;{{growthIndate}}
+                </div>
+                {{/if}}
             </div>
-        </div>
-        <div class="litwo">
-            <div>
-                {{growthDate}}
-            </div>
-            {{#if growthIndate}}
-            <div>
-                有效期至&nbsp;{{growthIndate}}
-            </div>
-            {{/if}}
         </div>
         {{/each}}
     </script>

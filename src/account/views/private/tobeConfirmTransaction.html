@@ -13,65 +13,74 @@
 
 <body>
     <div class="topTitle">
-        @@include('@pathInclude/views/header.html') @@include('@pathCommonViews/headBarConfig.html',{"pathName":"待确认交易","bgColors":"#3E3C3C,#3E3C3C"})
+
+        @@include('@pathCommonViews/headBarConfig.html',{"pathName":"待确认交易","bgColors":"#3E3C3C,#3E3C3C"})
         <!-- 筛选 -->
         <div class="hopper"></div>
         <!-- 筛选 -->
         <!-- 筛选区域 -->
         <div class="hopperCon">
             <ul>
-                <li class="active" data=''>全部</li>
-                <li data="1">申购</li>
+                <li data='' class="active">全部</li>
+                <li data="1">认申购</li>
                 <li data="2">赎回</li>
-                <li data="3">分红</li>
-                <li data="4">预约撤单</li>
-                <li data="5">预约过期</li>
-                <li data="6">转让已完成</li>
-                <li data="7">受让已完成</li>
+                <li data="5">分红</li>
+                <li data="8">强制赎回</li>
+                <li data="6">预约撤单</li>
+                <li data="7">预约过期</li>
+                <!-- <li data="3">转让已完成</li>
+                <li data="4">受让已完成</li> -->
             </ul>
         </div>
         <!-- 筛选区域 -->
     </div>
     <div class="warp">
-
         <div class="list">
-            <div class="contentWrapper">
-                <ul class="mui-table-view">
+            <div class="contentWrapper ">
+                <ul class="mui-table-view contentWrap">
                     <li class="mui-table-view-cell">
                         <!-- 放置列表 -->
                     </li>
-                    @@include('@pathCommonViews/goTop.html')
                 </ul>
 
-
+                @@include('@pathCommonViews/goTop.html')
             </div>
         </div>
-        @@include('../../../common/views/load.html')
+
         <!-- 加载中loading -->
-        @@include('@pathCommonViews/loading/listLoading.html')
+        @@include('@pathCommonCom/loading/listLoading.html')
         <!-- 暂无数据 -->
-        @@include('@pathCommonViews/noDataImg.html',{"tipText":"暂无数据"})
+        @@include('@pathCommonCom/noData/noData.html', {"tipText": "暂无数据"})
+        <script id="first-template" type="text/x-handlebars-template">
+            {{! 列表 内容 使用mui的上拉加载}}
+            <div class="list">
+                {{! list是包裹上拉加载区域的，在js中计算当前页面中的list高度，不能超出一屏}} {{! 初始化上拉加载区域，使用contentWrapper class}} {{! contentWrapper 需要添加样式，具体见less文件}}
+                <div class="contentWrapper">
+    
+                    <ul class="mui-table-view contentWrap">
+                        <li class="mui-table-view-cell">
+                            {{! 所有内容 需要放在这个li里，且里面不能再用Li元素}} {{{content}}}
+    
+                        </li>
+                    </ul>
+    
+                    <!-- 返回顶部 -->
+                    @@include('@pathCommonViews/goTop.html')
+    
+                </div>
+            </div>
+        </script>
     </div>
-    <div class="mask"></div>
-    <!-- 弹框类型-淡黄色背景两个按钮 -->
-    <div class="tipContainer" id="tipCon">
-        <div class="tipCon"></div>
-        <div class="buttonCon">
-            <a class="cancel">取消</a>
-            <a class="todo">确认</a>
-        </div>
-    </div>
-    <!-- 弹框类型-淡黄色背景两个按钮 -->
-    <!-- 弹框类型-淡黄色背景一个按钮 -->
-    <div class="tipContainer" id="tipConOne">
-        <div class="tipCon"></div>
-        <div class="buttonOne">我明白了</div>
-    </div>
-    <!-- 弹框类型-淡黄色背景一个按钮 -->
 </body>
 <!-- 公共模板 -->
-@@include('../common/transcationTem.html') @@include('@pathInclude/views/footer.html')
+@@include('@pathCommonCom/account/transcationTem.html') @@include('@pathInclude/views/footer.html')
 <!-- 添加埋点 -->
 <script src="/account/static/js/private/tobeConfirmTransaction.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/eruda"></script>
+<script>
+    window.onload=function(){
+        eruda.init()
+    }
+</script>
 
 </html>

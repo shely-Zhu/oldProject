@@ -5,16 +5,14 @@
 <html lang="en">
 <head>
 	@@include('@pathInclude/views/meta.html')
-    <link rel="stylesheet" href="/include/css/swiper.min.css">
+    <link rel="stylesheet" href="/allServerResources/include/css/swiper.min.css">
     <link rel="stylesheet" href="/mine/static/css/membershipDetails.css">   
       
 	<title>会员权益-会员权益详情</title>
 </head>
 <body>
-	
-	@@include('@pathCommonViews/load.html')
-	<!--@@include('@pathCommonViews/noDataImg.html')  -->
-	@@include('@pathCommonViews/loading/listLoading.html')
+	<!--@@include('@pathCommonCom/noData/noData.html', {"tipText": "暂无数据"}) -->
+	@@include('@pathCommonCom/loading/listLoading.html')
     <div id="membershipDetailsBox">
     <!-- <div class="membershipDetailsHeaderBox">
         <a class="iconfont" href="javascript:;">&#xe634;</a>
@@ -32,7 +30,7 @@
                 {{#each this}}
                 <div class="swiper-slide swiper-slide-active" style="margin-right: 17px;" data-text="{{content}}" data-link="{{linkUrl}}" data-name="{{rightName}}">
                     <div class="goods" style="transform: scale3d(1.4, 1.4, 1); transition-duration: 0ms;">
-                        <img src="{{iconUnlock}}" alt="">
+                        <img class="lazyload" src="/common/img/lazyImgList.png" data-original="{{iconUnlock}}" alt="">
                         <p>{{rightName}}</p>
                     </div>
                 </div>
@@ -43,18 +41,21 @@
             <h2>--</h2>
             <p>--</p>
             <span class="title">更多信息可通过恒天财富官方客服热线进行咨询</span>
-            <a  href="javascript:;" class="tel"></a>
+            <a href="javascript:void(0);" class="tel"></a>
+            {{#if linkUrl}}
             <div class="linkBtnBox">
-                <a href="javascript:;" class="linkBtn">了解详情</span>
+                
+                <a href="javascript:void(0);" class="linkBtn goldBgButton">了解详情</span>
+                <!-- <a href="javascript:;" onclick="setGoUrl('{{data-link}}', 'membershipDetails_1')">全部</ a> -->
             </div>
-            
+            {{/if}}
         </div>
     </script>
 	
 	 
 	@@include('@pathInclude/views/footer.html')
-	<!-- <script src="/include/js/iscroll.js"></script> -->
-    <script type="text/javascript" src="/include/js/vendor/swiper/swiper.min.js"></script>  
+	<!-- <script src="/allServerResources/include/js//iscroll.js"></script> -->
+    <script type="text/javascript" src="/allServerResources/include/js/vendor/swiper/swiper.min.js"></script>  
     <script src="/mine/static/js/membershipDetails.js"></script>
 
 </body>

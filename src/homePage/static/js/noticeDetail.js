@@ -3,19 +3,13 @@
 * @author yanruiting 2019-11-18
 * 从通知列表页面携带参数   noticeId 消息id mesType 0系统通知，1产品公告，2活动通知，3交易动态
 */
-require('@pathIncludJs/vendor/config.js');
-require('@pathIncludJs/vendor/zepto/callback.js');
-require('@pathIncludJs/vendor/zepto/deferred.js');
-require('@pathCommonJs/components/utils.js');
-require('@pathCommonJs/components/headBarConfig.js');
+require('@pathCommonBase/base.js');
 require('@pathCommonJs/ajaxLoading.js');
-
-//var tipAction = require('@pathCommonJs/components/tipAction.js');
 var splitUrl = require('@pathCommonJs/components/splitUrl.js')();
 var generateTemplate = require('@pathCommonJsComBus/generateTemplate.js');
 
 $(function(){
-	let somePage = {
+	var somePage = {
 		//获取页面元素
 		$e:{
 			noticeDetailConId: $("#informsDetailCon"),
@@ -32,7 +26,7 @@ $(function(){
             that.getInformsDetail();
             that.getTitle()
         },
-        getTitle() {
+        getTitle:function() {
             switch(this.gV.mesType) {
                 case '0': $("#HeadBarpathName").html("系统通知详情");break;
                 case '1': $("#HeadBarpathName").html("产品公告详情");break;
@@ -41,13 +35,14 @@ $(function(){
             }
         },
         // 获取通知详情
-        getInformsDetail() {
+        getInformsDetail:function() {
         	var that=this;
             var obj=[{
                 url: site_url.getNoticeAndTransDynamic_api,
                 data:{
                     id: that.gV.noticeId
                 },
+                needLogin: true, //需要判断登录是否过期
                 needDataEmpty: true,
                 callbackDone: function(json) {
                     var data=json.data; 

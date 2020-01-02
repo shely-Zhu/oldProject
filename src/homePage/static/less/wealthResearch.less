@@ -1,20 +1,16 @@
 // 超宝-交易记录
 // @author wangjiajia 2019-11-20
 
-@import url("@pathInclude/css/mui.min.css");
-@import url('@pathCommonLess/mui/resetMUI.less');
-@import url("@pathCommonLess/reset.less");
-@import url("@pathCommonLess/color.less");
-
-@import url("@pathCommonLessCom/againEnter.less");
+@import url("@pathCommonLess/mui/resetMUI.less");
 @import url("@pathCommonLessCom/alertBox.less");
 
 @import url("@pathCommonLessCom/tabScroll.less");
 
 //回到顶部的样式
 @import url("@pathCommonLessCom/goTopMui.less");
-@import url("@pathCommonLess/components/elasticLayerTypeFive.less");
-@import url("@pathCommonLessCom/noDataImg.less");
+// @import url("@pathCommonLess/components/elasticLayerTypeFive.less");
+@import url("@pathCommonCom/elasticLayer/elasticLayer/elasticLayer.less");
+@import url("@pathCommonCom/noData/noData.less");
 @import url("@pathCommonLessCom/headBarConfig.less");
 body{
 	background-color: @c005;
@@ -214,10 +210,12 @@ body{
 .list_item{
 	padding: 0.3rem;
 	background-color: @c005;
-	border-bottom: 0.01rem solid @E7E9ED;
+    border-bottom: 0.01rem solid @E7E9ED;
+    display: flex;
 	.list_itemL{
-		float: left;
-		width: 4rem;
+		// float: left;
+        // width: 4rem;
+        flex: 1;
 		p{
 			font-size: 0.32rem;
 			line-height: 0.5rem;
@@ -236,7 +234,7 @@ body{
 		}
 	}
 	.list_itemR{
-		float: right;
+		// float: right;
 		width: 2.2rem;
 		height: 1.5rem;
 		border-radius: 0.1rem;

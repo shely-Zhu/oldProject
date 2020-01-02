@@ -19,8 +19,9 @@
 	<div class="privateDetail">
 
 		<div class="topContent">
-			@@include('@pathCommonViews/load.html')
-	 		@@include('@pathCommonViews/headBarConfig.html',{"bgColors":"#595E6F, #1C2135","showType":"1"})
+			<div id="fundCodeWrap">--</div>
+			@@include('@pathCommonCom/loading/listLoading.html')
+	 		@@include('@pathCommonViews/headBarConfig.html',{"bgColors":"#595E6F, #1C2135","showType":"1","serviceType":"1","iconStype":"详情"})
 
 	 		<div class="hide typeWrap type_0">
 	 			<!-- 类型一 货币资产-->	
@@ -48,8 +49,8 @@
 
 	 			<!-- 展开按钮  -->
 	 			<div class="openButton">
-	 				<img src="/account/static/img/arrow_down_blue.png" class="img">
-	 				<img src="/account/static/img/arrow_up_blue.png" class="openImg">
+	 				<img src="/common/img/arrow_down_blue.png" class="img">
+	 				<img src="/common/img/arrow_up_blue.png" class="openImg">
 	 			</div> 
 
 	 			<!-- 隐藏区域 -->
@@ -85,23 +86,23 @@
 		 			<ul class="mui-row type">
 		 			    <li class="mui-col-sm-4 mui-col-xs-4">
 		 			        <span>昨日收益 （元）</span>
-		 			        <span class="num totalShare">--</span>
+		 			        <span class="num yesterdayShare">--</span>
 		 			    </li>
 		 			    <li class="mui-col-sm-4 mui-col-xs-4">
 		 			        <span>持有收益 （元）</span>
-		 			        <span class="num sevenYearYield">--</span>
+		 			        <span class="num ownShare">--</span>
 		 			    </li>
 		 			    <li class="mui-col-sm-4 mui-col-xs-4">
 		 			        <span>累计收益 （元）</span>
-		 			        <span class="num sevenYearYield">--</span>
+		 			        <span class="num accumulatedShare">--</span>
 		 			    </li>
 		 			</ul>
 		 		</div>
 		 		
 		 		<!-- 展开按钮  -->
 	 			<div class="openButton">
-	 				<img src="/account/static/img/productDetail/openButton.png" class="img">
-	 				<img src="/account/static/img/productDetail/openButton_open.png" class="openImg">
+	 				<img src="/common/img/arrow_down_blue.png" class="img">
+	 				<img src="/common/img/arrow_up_blue.png" class="openImg">
 	 			</div> 
 
 	 			<!-- 隐藏区域 -->
@@ -146,7 +147,8 @@
 	 				<span class="title wfsy hidden">万份收益</span>
 	 				
 	 				<div class="arrow">
-	 					<span class="img"></span>
+	 					<i class="iconfont jump">&#xe67d;</i>
+	 					<!-- <span class="img"></span> -->
 	 				</div>
 
 	 				<span class="rightTitle historyDetail">历史明细</span>
@@ -170,7 +172,7 @@
 	 		<div class="dealReg">
  				<div class="titleWrap">分红方式
  					<div class="arrow">
-	 					<span class="img"></span>
+	 					<i class="iconfont jump">&#xe67d;</i>
 	 				</div>
 	 				<div class="dividend">--</div>
  				</div>
@@ -180,24 +182,35 @@
 
  			<!--默认为不显示。路径传参过来在判断哪个显示-->
  			<div class="mui-row footer">
- 				<div class="mui-col-sm-6 mui-col-xs-6 buttonStyle">赎回</div>
- 				<div class="mui-col-sm-6 mui-col-xs-6 buttonStyle">买入</div>
+ 				<div class="mui-col-sm-6 mui-col-xs-6 buttonStyle blueTxtButton  redeemBtn">赎回</div>
+ 				<div class="mui-col-sm-6 mui-col-xs-6 buttonStyle blueBgButton buyBtn">买入</div>
  			</div>
  			
  			<div class="mui-row footer">
- 				<div class="mui-col-sm-6 mui-col-xs-4 buttonStyle">赎回</div>
- 				<div class="mui-col-sm-6 mui-col-xs-4 buttonStyle">定投</div>
- 				<div class="mui-col-sm-6 mui-col-xs-4 buttonStyle">买入</div>
+ 				<div class="mui-col-sm-4 mui-col-xs-4 buttonStyle blueTxtButton redeemBtn">赎回</div>
+ 				<div class="mui-col-sm-4 mui-col-xs-4 buttonStyle blueTxtButton fiedBtn">定投</div>
+ 				<div class="mui-col-sm-4 mui-col-xs-4 buttonStyle blueBgButton buyBtn">买入</div>
+
  			</div>
 
-	 	</div>
+		 </div>
+		 <div class="isRiskMatchBox">
+			<div class="isRiskMatchBox_contentBox">
+				   <div class='isRiskMatchBox_header'>你选择的产品与您现在的风险承受能力相匹配</div>
+				   <div class="isRiskMatchBox_footer">
+					   <div class="isRiskMatchBox_match">确定</div>
+					   <div class="isRiskMatchBox_noMatch"><button class="isRiskMatchBox_cancel">放弃购买</button> <button class="isRiskMatchResult">查看评测结果</button></div>
+				   </div>
+			</div>
+		</div>
+		<div class="isRiskMatch_mask"></div>
 	</div>
+	@@include('@pathCommonViews/authenticationProcess.html',{"pathTitle":"购买私募产品前，请完成以下认证"}) 
 	
-	@@include('@pathCommonViews/payPassword.html')
 	@@include('@pathInclude/views/footer.html')
-	<script src="/include/js/vendor/echarts/echarts.min.js"></script>
+	<script src="/allServerResources/include/js/vendor/echarts/echarts.min.js"></script>
+	<script src="/allServerResources/include/js//vendor/clipboard/clipboard.js"></script>
 	<script src="/account/static/js/public/optionalPublicDetail.js"></script>
-	<script src="/account/static/js/public/payPassword.js"></script>
 
 </body>
 

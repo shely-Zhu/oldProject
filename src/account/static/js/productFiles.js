@@ -3,12 +3,8 @@
  * @Author: wangjiajia
  */
 
-require('@pathIncludJs/base.js');
-
-require('@pathCommonJs/components/headBarConfig.js');
+require('@pathCommonBase/base.js');
 require('@pathCommonJs/ajaxLoading.js');
-
-var tipAction = require('@pathCommonJs/components/tipAction.js');
 var splitUrl = require('@pathCommonJs/components/splitUrl.js')();
 var generateTemplate = require('@pathCommonJsComBus/generateTemplate.js');
 $(function() {
@@ -32,7 +28,6 @@ $(function() {
           data: {
             "projectId":that.gV.projectId,//项目编号
             // "projectId":"10103",//项目编号
-           
           },
           //async: false,
           needDataEmpty: true,
@@ -54,6 +49,13 @@ $(function() {
               $(".openOff").show()
             }
           },
+          callbackFail: function(data) {
+            tipAction(data.message);
+            $(".content").hide()
+            $(".productCostWrap>.productCostTitle").hide()
+            $(".productCostWrap>.productCostDetail").hide()
+            $(".productCostWrap>.openOff").hide()
+          }
       }];
       $.ajaxLoading(obj);
   },
@@ -62,26 +64,44 @@ $(function() {
     var obj = [{ // 系统调仓记录列表
         url: site_url.queryReourceList_api,
         data: {
-         //"projectId":that.gV.projectId,//项目编号
-          "projectId":"21970",//项目编号
+          "projectId":that.gV.projectId,//项目编号
+          //"projectId":"21970",//项目编号
           "fileType":"19,20,10,22,1",
         },
-        contentTypeSearch: true,
+        contentTypeSearch: false,
         //async: false,
         needDataEmpty: true,
         callbackDone: function(json) {
           var data = json.data
           if(data.length >0){
             $(".productCostTitleOne").show()
+            $.each(data, function(i, el) {
+              el.name = el.fileName.substring(0, el.fileName.indexOf("】") + 1);
+              el.marName = el.fileName.substring(el.fileName.indexOf("】") + 1);
+              if (el.fileName.indexOf(".pdf") != -1) {
+                  el.line = true; //线上可预览
+                  el.href = site_url.downloadNew_api + "?filePath=" + el.fileUrl + "&fileName=" + new Base64().encode(el.fileName) + "&groupName=" + el.groupName + "&show=1";
+              } else {
+                  el.line = false; //需下载
+                  el.href = site_url.downloadNew_api + "?filePath=" + el.fileUrl + "&fileName=" + new Base64().encode(el.fileName) + "&groupName=" + el.groupName;
+              }
+            })
           }
-          console.log(data)
           generateTemplate(data,$(".materialWrap"), that.$e.adjustmentTemp);
         },
+        callbackNoData: function() {
+          $(".productCostTitleOne").hide()
+          $(".materialWrap").hide()
+        },
+        callbackFail: function(data) {
+          $(".productCostTitleOne").hide()
+          $(".materialWrap").hide()
+        }
     }];
     $.ajaxLoading(obj);
-},
+  },
     event:function(){
-      mui("body").on('tap','.open',function(e){
+      mui("body").on('mdClick','.open',function(e){
         if($(".openOff .open").text() != "收起"){
           $(".productCostDetail").addClass("openStyle")
           $(".productCostDetail").removeClass("productCostDetail");
@@ -95,11 +115,14 @@ $(function() {
           $(".openOff .imgWrap .changeImg").addClass("img")
           $(".openOff .imgWrap .changeImg").removeClass("changeImg")
         }
-			})
-      mui("body").on('tap','.materialContent',function(e){
-        console.log($(this).attr('data-fileUrl'))
-        window.location.href=`/${$(this).attr('data-fileUrl')}`
-			})
+			},{
+        'htmdEvt': 'productFiles_0'
+      })
+      mui("body").on('mdClick','.materialContent',function(e){
+        window.location.href = $(this).attr("href");
+			},{
+        'htmdEvt': 'productFiles_1'
+      })
     }
   }
   somePage.init()

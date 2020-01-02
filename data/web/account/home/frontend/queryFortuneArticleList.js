@@ -5,7 +5,9 @@
 // 使用 Mock
 var Mock = require('mockjs');
 
-var liveData=Mock.mock({
+var noData = Mock.mock({ "data": "", "message": "操作成功,数据为空", "status": "1000" })
+
+var liveData = Mock.mock({
     "data": {
         "pageNum": 1,
         "pageSize": 10,
@@ -13,7 +15,7 @@ var liveData=Mock.mock({
         "pages": 0,
         "list|11": [{
             applyType: 0,
-            articleBelong: "1", // 2 为大咖直播
+            articleBelong: "2", // 2 为大咖直播
             articleTime: "2019-11-27T00:00:00.000+0000",
             articleTimeStr: "2019-11-27 15:04:37",
             author: "H000503",
@@ -26,8 +28,9 @@ var liveData=Mock.mock({
             h5Title: null,
             h5Type: null,
             id: 28,
-            imageAttachId: "/homePage/static/img/picture1_1@2x.png",
-            imageAttachName: null,
+            "imageAttachId": 56,
+            "imageAttachName": "3c28af542f2d49f7-44af7693092324ab-c7519a05ba772541a9594edcae2a2fb1.jpg",
+            "imageUrlShowOnline": "http://172.16.163.99:85/group2/M00/02/88/rBCjRF26j3-AaxveAAFKebrcAVE531.jpg",
             intro: "文章简介",
             isDelete: 0,
             isUse: 0,
@@ -56,7 +59,7 @@ var liveData=Mock.mock({
     "message": "操作成功！"
 });
 
-var knownData=Mock.mock({
+var knownData = Mock.mock({
     "data": {
         "pageNum": 1,
         "pageSize": 10,
@@ -64,7 +67,7 @@ var knownData=Mock.mock({
         "pages": 0,
         "list|11": [{
             applyType: 0,
-            articleBelong: "2", // 2 为大咖直播
+            articleBelong: "3", // 2 为大咖直播
             articleTime: "2019-11-27T00:00:00.000+0000",
             articleTimeStr: "2019-11-27 15:04:37",
             author: "H000503",
@@ -77,8 +80,9 @@ var knownData=Mock.mock({
             h5Title: null,
             h5Type: null,
             id: 28,
-            imageAttachId: "/homePage/static/img/picture1_1@2x.png",
+            imageAttachId: 25,
             imageAttachName: null,
+            "imageUrlShowOnline": "http://172.16.163.99:85/group2/M00/02/88/rBCjRF26j3-AaxveAAFKebrcAVE531.jpg",
             intro: "大咖直播",
             isDelete: 0,
             isUse: 0,
@@ -107,16 +111,27 @@ var knownData=Mock.mock({
     "message": "操作成功！"
 });
 
-module.exports = [
-    {
+module.exports = [{
         params: {
-            'articleBelong' : '2'   //要在左边的对比参数上加[]，不然比对不上 稳金
+            'articleBelong': '1' //要在左边的对比参数上加[]，不然比对不上 稳金
         },
         response: liveData
     },
     {
         params: {
-            'articleBelong' : '1'   //要在左边的对比参数上加[]，不然比对不上 稳金
+            'articleBelong': '2' //要在左边的对比参数上加[]，不然比对不上 稳金
+        },
+        response: liveData
+    },
+    {
+        params: {
+            'articleBelong': '3' //要在左边的对比参数上加[]，不然比对不上 稳金
+        },
+        response: knownData
+    },
+    {
+        params: {
+            'articleBelong': '4' //要在左边的对比参数上加[]，不然比对不上 稳金
         },
         response: knownData
     }

@@ -4,12 +4,13 @@
  */
 
 
-require('@pathIncludJs/base.js');
+require('@pathCommonBase/base.js');
 
 require('@pathCommonJs/ajaxLoading.js');
-require('@pathCommonJs/components/headBarConfig.js');
+
 var generateTemplate = require('@pathCommonJsComBus/generateTemplate.js');
 var splitUrl = require('@pathCommonJs/components/splitUrl.js')();
+require('@pathCommonCom/pullRefresh/pullRefresh.js');
 
 $(function() {
 
@@ -23,7 +24,7 @@ $(function() {
         },
         gV: { // 全局变量
             pageCurrent: 1, //当前页码，默认为1
-            pageSize: 10,
+            pageSize: 20,
             listLength: 0,
             projectId: splitUrl['projectId'],
         },
@@ -37,12 +38,49 @@ $(function() {
         initMui: function() {
             var that = this;
 
-            var height = windowHeight - $(".title").height() - $(".topTitle").height();
+            var height = windowHeight - $(".title").height() - $(".HeadBarConfigBox").height();
             if (!$('.list').hasClass('setHeight')) {
                 $('.list').height(height).addClass('setHeight');
             }
-
-            mui.init({
+            $.pullRefresh({
+                wrapper: $('.list'),
+                class: 'listItem',
+                template: that.$e.adjustmentTemp, 
+                pageSize: that.gV.pageSize,
+                callback: function(def, t){
+                    var obj = [{
+                        url: site_url.queryHistoryNetValue_api,
+                        data: {
+                            "pageNo": that.gV.pageCurrent, //非必须，默认为1
+                            "pageSize": that.gV.pageSize,//非必须，默认为10
+                            "projectId":that.gV.projectId,//项目编号
+                            "profitRange":1,//0:近1月 1:近3月 2:近6个月 3:近1年4：成立至今
+                        },                        
+                        needDataEmpty: true,
+                        callbackDone: function(json) {     
+                            var data = json.data.pageList;
+                            if(that.gV.pageCurrent == 1 && data.length == 0) {
+                                $(".list").css("display", "none")
+                                that.$e.noData.show()
+                            } else {
+                                def && def.resolve( data, that.gV.pageCurrent);
+                                that.gV.pageCurrent++;
+                            }
+                        },
+                        callbackNoData: function( json ){  
+                            if(that.gV.pageCurrent == 1) {
+                                $(".list").css("display", "none")
+                            }
+                            def && def.reject( json, that.gV.pageCurrent );
+                        },
+                        callbackFail: function(json) {
+                            def && def.reject( json, that.gV.pageCurrent );
+                        },
+                    }];
+                    $.ajaxLoading(obj); 
+                }
+            })
+            /*mui.init({
                 pullRefresh: {
                     container: '.contentWrapper',
                     up: {
@@ -79,9 +117,9 @@ $(function() {
 
                 //为$id添加hasPullUp  class
                 $('.list').addClass('hasPullUp');
-            });
+            });*/
         },
-        getData: function(t) {
+        /*getData: function(t) {
             var that = this;
 
             var obj = [{ // 系统调仓记录列表
@@ -96,8 +134,6 @@ $(function() {
                 //async: false,
                 needDataEmpty: true,
                 callbackDone: function(json) {
-                    console.log(json.data)
-                    // console.log(json.data.pageList)
                     var data;
                     if (json.data.length == 0) { // 没有记录不展示
                         $(".list").hide()
@@ -126,7 +162,6 @@ $(function() {
                                 t.endPullupToRefresh(true);
                             }
                         } else { // 还有更多数据
-                            console.log(999)
                             t.endPullupToRefresh(false);
                         }
 
@@ -138,12 +173,16 @@ $(function() {
 
                     }, 200)
 
-                },
+                }
 
             }];
             console.log(obj)
             $.ajaxLoading(obj);
-        },
+        },*/
+        //注册事件
+		events: function() {
+			//alwaysAjax($('.contentWrap'))
+		}
     };
     somePage.init();
 });

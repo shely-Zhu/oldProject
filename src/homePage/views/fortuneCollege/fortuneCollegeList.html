@@ -10,22 +10,21 @@
  <head>
      @@include('@pathInclude/views/meta.html')
      <link rel="stylesheet" href="/homePage/static/css/fortuneCollegeList.css">
+     <!-- <link rel="stylesheet" href="/homePage/static/css/wealthResearch.css"> -->
      <title>财富学院</title>
  </head>
  <body>
-     <!--加载图标-->
-     <!--@@include('@pathCommonViews/load.html')--> 
      <!--没有数据显示图标-->
-     <!--@@include('@pathCommonViews/noDataImg.html')-->
+     @@include('@pathCommonCom/noData/noData.html', {"tipText": "暂无数据"})
      <!--列表加载显示图标-->
-     <!--@@include('@pathCommonViews/loading/listLoading.html')-->
-     <div class="box">
+     @@include('@pathCommonCom/loading/listLoading.html')
+     <div class="boxA">
           @@include('@pathCommonViews/headBarConfig.html',{"bgColors":"#384A81,#2A3C70","showType":"1","pathName":"财富学院"})
           <div class="list">
                <div class="wrapper">
                     <div class="banner">
                     </div>
-                    <div class="hotWords translate">
+                    <div class="hotWords translate hide">
                          <div class="title">
                              
                          </div>
@@ -33,7 +32,7 @@
                               
                          </div>
                     </div>
-                    <div class="hotWords fortuneVideo">
+                    <div class="hotWords fortuneVideo hide">
                          <div class="title">
                              
                          </div>
@@ -43,7 +42,7 @@
                               </ul>
                          </div>
                     </div>
-                    <div class="hotWords forum">
+                    <div class="hotWords forum hide">
                          <div class="title">
                              
                          </div>
@@ -56,74 +55,117 @@
                               
                          </div>
                     </div>
-                    <div class="hotWords tabContent">
+                    <div class="hotWords tabContent hide">
                          <div class="title">
                              
                          </div>
                          <div class="tab">
-                              <div class="tab-t">
-                                   <ol>
-                         
-                                   </ol>
-                              </div>
                               <div class="tab-b">
-
+                                   <div class="container">
+                                        <div class="mui-content  myAsset">
+                                            <!-- 放置页面内容 -->
+                                        </div>
+                                        <!-- 加载中loading -->
+                                        @@include('@pathCommonCom/loading/listLoading.html')
+                                        <!-- 暂无数据 -->
+                                        @@include('@pathCommonViews/noDataImg.html',{"tipText":"暂无数据"})
+                                    </div>
                               </div>
                          </div>
                     </div>
                </div>
           </div>
      </div>
- 
+       
+     <script id="first-template" type="text/x-handlebars-template">
+     {{! 列表 内容 使用mui的上拉加载}}
+     <div class="list">
+          {{! list是包裹上拉加载区域的，在js中计算当前页面中的list高度，不能超出一屏}} {{! 初始化上拉加载区域，使用contentWrapper class}} {{! contentWrapper 需要添加样式，具体见less文件}}
+          <div class="contentWrapper">
+
+               <ul class="mui-table-view">
+                    <li class="mui-table-view-cell">
+                         {{! 所有内容 需要放在这个li里，且里面不能再用Li元素}} {{{content}}}
+
+                    </li>
+               </ul>
+
+               <!-- 返回顶部 -->
+               <!-- @@include('@pathCommonViews/goTop.html') -->
+
+          </div>
+     </div>
+     </script>
+
+     <script id="second-template" type="text/x-handlebars-template">
+     {{! 左侧页面列表}} {{#each this}}
+     <div class="list_item clearfix" id={{id}} articleBelong={{articleBelong}} applyType={{applyType}}>
+          <div class="list_itemL">
+               <p>{{title}}</p>
+               <span>{{createTimeStr}}</span>
+          </div>
+          <div class="list_itemR" ><img class="lazyload" src="/common/img/lazyImgList.png" data-original="{{imageUrlShowOnline}}"></div>
+     </div>
+
+     {{/each}}
+     </script>
      
- 
-     @@include('@pathInclude/views/footer.html')
-     <!-- 添加埋点 -->
-     @@include('@pathInclude/views/header.html')
+     @@include('@pathCommonViews/goTop.html')
+
+     
+
+     <!-- 翻译官 -->
      <script id="fortune-template" type="text/x-handlebars-template">
-               <h2>{{modelName}}</h2>
-               <p><a href="{{listJumpUrl}}" >查看往期热词</a><i class="iconfont">&#xe636;</i></p>
+          <h2>{{modelName}}</h2>
+          <p><a href="javascript:void(0);" onclick="setGoUrl( '{{modelUrl}}', 'fortune_00')">查看往期热词</a><i class="iconfont">&#xe636;</i></p>
      </script>
      <script id="content-template" type="text/x-handlebars-template">
           {{#each this}}
-          <p class="con-t">
-               <span>第{{numPeriods}}期</span><b>{{titleFir}}</b>
-          </p>
-          <p class="con-b">
-               <span>{{titleSec}}</span>
-               <!-- <span class="span-l">中信建投:</span>
-               <span class="span-r">鉴定看涨A股将迎来戴维斯双击</span> -->
-          </p>
+          <a href="{{externalUrl}}">
+               <p class="con-t">
+                    <span>第{{numPeriods}}期</span><b>{{titleFir}}</b>
+               </p>
+               <p class="con-b">
+                    <span>{{titleSec}}</span>
+                    <!-- <span class="span-l">中信建投:</span>
+                    <span class="span-r">鉴定看涨A股将迎来戴维斯双击</span> -->
+               </p>
+          </a>
           {{/each}}
      </script>
+     <!-- 早知道 -->
      <script id="fortuneCf-template" type="text/x-handlebars-template">
           <h2>{{modelName}}</h2>
-          <p><a href="{{listJumpUrl}}" >播放往期内容</a><i class="iconfont">&#xe636;</i></p>
+          <p><a href="javascript:void(0);" onclick="setGoUrl( '{{modelUrl}}', 'fortune_01')" >播放往期内容</a><i class="iconfont">&#xe636;</i></p>
      </script>
      <script id="video-template" type="text/x-handlebars-template">
           {{#each this}}
                <li>
-                    <a href="fortuneFlowKnown.html">
-                         <img src="http://172.16.163.99:85/group2/M00/02/89/rBCjQ126kE2AX8h4AAFKebrcAVE188.jpg" alt="">
+                    <!-- <a htmdEvt = "fortune_videoList" onclick="window.location.href=site_url.fortuneFlowKnown_url+'?articleBelong={{articleBelong}}'"> -->
+                    <a href="javascript:void(0);" onclick="setGoUrl( site_url.articleTemplate_url+'?id={{id}}&articleBelong={{articleBelong}}', 'fortune_02')">
+                         <img class="lazyload" src="/common/img/lazyImgList.png" data-original="{{imageUrlShowOnline}}" alt="">
                          <p>
                               <i class="iconfont">
-                                   <img src="/homePage/static/img/bofang@2x.png" alt="">
+                                   <img src="/common/img/bofang@2x.png" alt="">
                               </i>
                               <span>
-                                        {{title}}
+                                   {{title}}
                               </span>
                          </p>
                     </a>
                </li>
           {{/each}}
      </script>
+
+     <!-- 财富讲堂 -->
      <script id="forum-template" type="text/x-handlebars-template">
           <h2>{{modelName}}</h2>
-          <p><a href="fortuneClassroom.html" >全部</a><i class="iconfont">&#xe636;</i></p>
+          <!-- <i><a href="{{modelUrl}}" htmdEvt = "fortune_all">全部</a><i class="iconfont">&#xe636;</i></p> -->
+          <p><a href="javascript:void(0);" onclick="setGoUrl('{{modelUrl}}', 'fortune_03')">全部</a><i class="iconfont">&#xe636;</i></p>
      </script>
      <script id="forumTitle" type="text/x-handlebars-template">
           {{#each this}}
-             <span class="bigspan">{{sonModelName}}</span> 
+             <span  class="bigspan">{{sonModelName}}</span> 
           {{/each}}
      </script>
      <script id="forumContent" type="text/x-handlebars-template">
@@ -133,19 +175,17 @@
                          <div class="mui-scroll-wrapper mui-slider-indicator mui-segmented-control mui-segmented-control-inverted">
                               <div class="mui-scroll">
                                    {{#each listContent}}
-                                   <a href="fortuneClassroom.html">
-                                        <div class="mui-control-item conten">
-                                             
-                                             <img style="width:3.2rem;height:3rem;" src="/homePage/static/img/picture1_3@2x.png" alt="">
-                                             <div class="con">
-                                                  <!-- <h4>{{intro}}</h4>
-                                                  <p>李世通·国开证券首席投资顾问</p> -->
-                                                  <p>
-                                                       {{content}}
-                                                  </p>
+                                        <!-- <a href="fortuneClassroom.html" style="width:6.2rem;height:4rem;display: block;position: absolute;;left:0;top:0;" class="mui-control-item"> </a> -->
+                                        <!-- <a htmdEvt = "fortune_allList" onclick="window.location.href=site_url.fortuneClassroom_url+'?id={{id}}&articleBelong={{articleBelong}}&applyType={{applyType}}';"> -->
+                                        <a  href="javascript:void(0);" onclick="setGoUrl( site_url.articleTemplate_url+'?id={{id}}&articleBelong={{articleBelong}}', 'fortune_05')">
+                                             <div class="mui-control-item conten">
+                                                  <img style="width:3.2rem;height:3rem;" class="lazyload" src="/common/img/lazyImgList.png" data-original="{{imageUrlShowOnline}}" alt="">
+                                                  <div class="con">
+                                                       <h4>{{title}}</h4>
+                                                       <p>{{intro}}</p>
+                                                  </div>
                                              </div>
-                                        </div>
-                                   </a>
+                                         </a>
                                    {{/each}}
                               </div>
                          </div>
@@ -153,43 +193,16 @@
                </div>
           {{/each}}
      </script>
+
+     <!-- 财富研究 -->
      <script id="tabContent-template" type="text/x-handlebars-template">
           <h2>{{modelName}}</h2>
-          <p><a href="wealthResearch.html" >查看全部研究</a><i class="iconfont">&#xe636;</i></p>
+          <!-- <i><a htmdEvt = "fortune_studies" href="{{modelUrl}}" >查看全部研究</a><i class="iconfont">&#xe636;</i></p> -->
+          <p><a href="javascript:void(0);" onclick="setGoUrl('{{modelUrl}}', 'fortune_06')" >查看全部研究</a><i class="iconfont">&#xe636;</i></p>
      </script>
-     <script id="titleTab" type="text/x-handlebars-template">
-          {{#each this}}
-               <li>
-                    <a href="javascript:;">
-                         {{sonModelName}}
-                    </a>
-               </li>
-          {{/each}}
-     </script>
-     <script id="listContent" type="text/x-handlebars-template">
-          {{#each this}}
-               <div class="tab-content">
-                    <ul>
-                         {{#each listContent}}
-                              <a href="wealthResearch.html" >
-                                   <li>
-                                        
-                                        <div>
-                                             <p>{{createName}}</p>
-                                             <span>{{createTimeStr}}</span>
-                                        </div>
-                                        <img src="/homePage/static/img/tab1.png" alt="">
-                                   
-                                   </li>
-                              </a>
-                         {{/each}}
-                    </ul>
-               </div>
-          {{/each}}
-     </script>
-     <!-- <script src="/include/js/vendor/jquery/jquery1.12.3.js"></script> -->
-	<script src="@pathIncludJs/vendor/root.js"></script>
-     <script src="@pathIncludJs/vendor/mui/mui.min.js"></script>
+
+     @@include('@pathInclude/views/footer.html')
+     
      <script src="/homePage/static/js/fortuneCollegeList.js"></script>
  
  </body>
