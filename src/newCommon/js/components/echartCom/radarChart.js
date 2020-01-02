@@ -101,6 +101,7 @@ module.exports = function(echartData, $e) {
                     },
                     formatter: (a,b)=>{
                         i++;
+//                      return `{a|${a}}\n{b|${arr1[i]}}`
                         return `{a|${a}}\n{b|${arr1[i]}}`
                     }
                 }
