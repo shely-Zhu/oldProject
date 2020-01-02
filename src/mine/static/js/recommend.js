@@ -247,7 +247,7 @@ $(function() {
                         // 生成二维码
                     that.generateQrcode(shareUrl)
         },
-        wxShareSend(type){
+        wxShareSend: function(type){
             var that=this;
                     var shareObj={
                         'type': type,     // auto 原生自己分享框  wechatMoments 朋友圈   friends 朋友

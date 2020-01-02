@@ -10,7 +10,7 @@ getQueryString = function (name) {
     if (r != null) return unescape(r[2]); return '';
 }
 $(function () {
-    let somePage = {
+    var somePage = {
         //获取页面元素
         $e: {
             emptyBox: $('#emptyBox'), //没有数据默认显示区块
@@ -121,7 +121,7 @@ $(function () {
                 $('.tplBox'+type+' .list').addClass('hasPullUp');
             });
         },
-        drawCircle() {
+        drawCircle: function() {
             var that = this;
             var pieChart = echarts.init($('.circle')[0]);
             var optionData = []

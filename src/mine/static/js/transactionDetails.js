@@ -8,7 +8,7 @@ require('@pathCommonJs/ajaxLoading.js');
 var generateTemplate = require('@pathCommonJsComBus/generateTemplate.js');
 
 $(function() {
-	let somePage = {
+	var somePage = {
 		//获取页面元素
 		$e: {
             lis: $(".wrap li"),
@@ -45,7 +45,7 @@ $(function() {
 		},
 		//注册事件
 		events: function() {
-            let that = this;
+            var that = this;
             mui("body").on('mdClick','.wrap li',function(e){
 				var numAtr = $(this).attr('num');
 				if(numAtr == 1){

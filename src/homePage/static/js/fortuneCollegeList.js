@@ -387,6 +387,7 @@ $(function() {
                 //这一句初始化并第一次执行mui上拉加载的callback函数
                 mui(s).pullRefresh().pullupLoading();
 
+
                 //为$id添加hasPullUp  class
                 $($id).addClass('hasPullUp');
 
@@ -542,8 +543,9 @@ $(function() {
                         //隐藏loading
                         setTimeout(function() {
                             that.getElements.listLoading.hide();
+                            $('.lazyload').lazyload();
+
                         }, 100);
-                        $('.lazyload').lazyload();
                     }, 200)
 
 
