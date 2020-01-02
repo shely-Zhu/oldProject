@@ -30,6 +30,7 @@ $(function() {
                 custCode: '', //客户编号
                 btnFlag: true,
                 isNeedLogin: false,
+                idnoCheckflag:false,//实名认证
             },
 
             //初始化
@@ -43,7 +44,6 @@ $(function() {
                 }
                 that.getData();
             },
-
             //获取活动详情数据
             getData: function() {
                 var that = this;
@@ -53,8 +53,6 @@ $(function() {
                         actType: that.gV.actType, //活动类型
                         actId: that.gV.actId, //活动id
                         isNeedLogin: splitUrl['isNeedLogin']
-
-
                     },
                     //async: false,
                     needLogin: that.gV.isNeedLogin,
@@ -76,7 +74,12 @@ $(function() {
                         //活动地点
                         if (data.actProvince) {
                             that.$e.city.text(data.actProvince);
-                        } else {
+                            //判断市
+                            if(data.actProvince!==data.actCity){
+                                that.$e.city.text(data.actProvince+data.actCity);  
+                            }
+                        } 
+                        else {
                             that.$e.city.text(data.actCity);
                         }
                         //报名时间
@@ -100,9 +103,7 @@ $(function() {
                     url: site_url.user_api,
                     data: {
                         hmac: "", //预留的加密信息     
-                        params: {
-                            //uuid: sessionStorage.getItem('uuid') //'EE7CA9386715CBF3BAB30CD479697D72' //sessionStorage.getItem('uuid') //客户Id,打开登录页面链接带过来的参数uuid
-                        }
+                        params: {}
                     },
                     needLogin: true,
                     // async: false, //同步
@@ -111,11 +112,51 @@ $(function() {
                         var jsonData = json.data;
                         that.gV.custCode = jsonData.customerNo; //客户编号
                         that.gV.custType = jsonData.accountType; // 客户类型【0.机构 1.个人】 
-                        that.signUp();
+                        that.gV.idnoCheckflag = jsonData.idnoCheckflag==1?false:true; // 是否实名认证
+                        that.queryFinan();
 
                     },
                 }];
                 $.ajaxLoading(obj);
+            },
+            queryFinan:function(){
+            	var that = this;
+            	var obj = [{ // 系统调仓记录列表
+            	    url: site_url.queryFinancialer_api,
+            	    data: {
+            	        "pageNum": 1, //非必须，默认为1
+            	        "pageSize": 10 //非必须，默认为10
+            	    },
+            	    needDataEmpty: false,
+            	    callbackDone: function(json) {
+						if (json.status != "0000") {
+							//需要风测
+                            var obj = {
+                                title: '温馨提示', //如果不传，默认不显示标题
+                                p: '<p>' + "为了能时刻给您提供更优质的服务，请您绑定理财师后再报名活动" + '</p>',
+                                yesTxt: '去绑定',
+                                celTxt: '取消',
+                                hideCelButton: false,
+                                zIndex: 100,
+                                needYesHref: true, //是否需要把确定按钮改成a标签，默认false
+                                yesHref: site_url.addFinancialer_url, //跳转到绑定理财师页面
+                                htmdEvtYes:'activityDetails_8',  // 埋点确定按钮属性
+                                htmdEvtCel:'activityDetails_9',  // 埋点取消按钮属性
+                                callback: function(t) {
+
+                                },
+                            };
+                            $.elasticLayer(obj)
+						}else{
+							that.signUp();
+						}
+            	    },
+            	    callbackFail: function(json) {
+						tipAction(json.message);
+            	    }
+            	}];
+            	$.ajaxLoading(obj);
+            	
             },
             //立即报名
             signUp: function() {
@@ -128,15 +169,16 @@ $(function() {
                         custType: that.gV.custType, //客户类型 0 - 机构 1-个人
                         custCode: that.gV.custCode, //客户编号
                         activityId: that.gV.actId, //活动id
-                        shareCustCode: that.gV.custCode, //分享客户编号
-
+                        // shareCustCode: that.gV.custCode, //分享客户编号
                     },
                     //async: false,
                     needDataEmpty: true,
                     callbackDone: function(data) {
                         $('.activityBottomBtnBox').removeClass('disabled');
-
                         if (data.status == "0000") {
+                            $('.activityBottomBox a').html('已报名');
+                            $('.activityBottomBtnBox').hide();
+                            $('.activityBottomBox').show();
                             successTitle = data.message;
                             if (that.gV.actType == 1) { //线上活动
                                 if (data.data.actStyle == 4) {
@@ -190,29 +232,75 @@ $(function() {
                                 hideCelButton: false,
                                 zIndex: 100,
                                 needYesHref: true, //是否需要把确定按钮改成a标签，默认false
-                                yesHref: site_url.riskAppraisal_url, //确定按钮a链接的默认href
+                                yesHref: site_url.riskAppraisal_url+"?type=private", //确定按钮a链接的默认href
+                                htmdEvtYes:'activityDetails_10',  // 埋点确定按钮属性
+                                htmdEvtCel:'activityDetails_11',  // 埋点取消按钮属性
                                 callback: function(t) {
 
                                 },
                             };
                             $.elasticLayer(obj)
                         } else if (data.status == "20010") {
+                            if(!that.gV.idnoCheckflag){
+                                //需要进行合格投资者信息认证
+                                var obj = {
+                                    title: '温馨提示', //如果不传，默认不显示标题
+                                    p: '<p>' + data.message + '</p>',
+                                    yesTxt: '合格投资者认证',
+                                    celTxt: '取消',
+                                    hideCelButton: false,
+                                    zIndex: 100,
+                                    needYesHref: true, //是否需要把确定按钮改成a标签，默认false
+                                    yesHref: site_url.qualifiedInvestor_url+"?type=private", //确定按钮a链接的默认href 产品确认跳私募
+                                    htmdEvtYes:'activityDetails_12',  // 埋点确定按钮属性
+                                    htmdEvtCel:'activityDetails_13',  // 埋点取消按钮属性
+                                    callback: function(t) {
+
+                                    },
+                                };
+                                $.elasticLayer(obj)
+                            }else{
+                               //去实名
+                                var obj = {
+                                    title: '温馨提示', //如果不传，默认不显示标题
+                                    p: '<p>' + data.message + '</p>',
+                                    yesTxt: '实名认证',
+                                    celTxt: '取消',
+                                    hideCelButton: false,
+                                    zIndex: 100,
+                                    needYesHref: true, //是否需要把确定按钮改成a标签，默认false
+                                    yesHref: site_url.realIdcard_url, //确定按钮a链接的默认href  身份证上传
+                                    htmdEvtYes:'activityDetails_14',  // 埋点确定按钮属性
+                                    htmdEvtCel:'activityDetails_15',  // 埋点取消按钮属性
+                                    callback: function(t) {
+
+                                    },
+                                };
+                                $.elasticLayer(obj) 
+                            }
+                            
+                        } else if (data.status == "20005") {
                             //需要进行合格投资者信息认证
                             var obj = {
                                 title: '温馨提示', //如果不传，默认不显示标题
-                                p: '<p>' + data.message + '</p>',
-                                yesTxt: '合格投资者认证',
-                                celTxt: '取消',
+                                p: '<p>您的风险承受能力为 '+data.data.personRiskGrade+'。</br>'+
+                                    '本次活动推荐产品的等级为 '+data.data.productRisk+'</br></br>'+
+                                    '本次活动推荐产品与您的风险承受能力不匹配，应进行充分的风险评估，再做出投资决定，当您的风险承担能力或财务状况发生重大变化时，请您重新进行测评。</p>',
+                                yesTxt: '重新测评',
+                                celTxt: '取消报名',
                                 hideCelButton: false,
                                 zIndex: 100,
                                 needYesHref: true, //是否需要把确定按钮改成a标签，默认false
-                                yesHref: site_url.qualifiedInvestor_url, //确定按钮a链接的默认href
+                                yesHref:  site_url.riskAppraisal_url+"?type=private", //
+                                htmdEvtYes:'activityDetails_16',  // 埋点确定按钮属性
+                                htmdEvtCel:'activityDetails_17',  // 埋点取消按钮属性
                                 callback: function(t) {
 
                                 },
                             };
                             $.elasticLayer(obj)
-                        } else if (data.status == "22011") {
+                        }
+                         else if (data.status == "20011"||data.status == "20016") {
                             //客户未成交
                             var obj = {
                                 title: '温馨提示', //如果不传，默认不显示标题
@@ -223,6 +311,8 @@ $(function() {
                                 zIndex: 100,
                                 needYesHref: true, //是否需要把确定按钮改成a标签，默认false
                                 yesHref: site_url.wealthIndex_url, //确定按钮a链接的默认href
+                                htmdEvtYes:'activityDetails_18',  // 埋点确定按钮属性
+                                htmdEvtCel:'activityDetails_19',  // 埋点取消按钮属性
                                 callback: function(t) {
 
                                 },
@@ -238,7 +328,9 @@ $(function() {
                                 hideCelButton: false,
                                 zIndex: 100,
                                 needYesHref: true, //是否需要把确定按钮改成a标签，默认false
-                                yesHref: site_url.rewards_url, //确定按钮a链接的默认href
+                                yesHref: site_url.realIdcard_url, //确定按钮a链接的默认href  身份证上传
+                                htmdEvtYes:'activityDetails_20',  // 埋点确定按钮属性
+                                htmdEvtCel:'activityDetails_21',  // 埋点取消按钮属性
                                 callback: function(t) {
 
                                 },
@@ -252,6 +344,7 @@ $(function() {
                                 yesTxt: '我明白了',
                                 hideCelButton: true,
                                 zIndex: 100,
+                                htmdEvtYes:'activityDetails_22',  // 埋点确定按钮属性
                                 callback: function(t) {
 
                                 },
@@ -271,6 +364,7 @@ $(function() {
                                 yesTxt: '我明白了',
                                 hideCelButton: true,
                                 zIndex: 100,
+                                htmdEvtYes:'activityDetails_23',  // 埋点确定按钮属性
                                 callback: function(t) {
 
                                 },
@@ -283,6 +377,7 @@ $(function() {
                                 yesTxt: '我明白了',
                                 hideCelButton: true,
                                 zIndex: 100,
+                                htmdEvtYes:'activityDetails_24',  // 埋点确定按钮属性
                                 callback: function(t) {
 
                                 },
@@ -316,14 +411,19 @@ $(function() {
                                 img: that.$e.bgimg.attr("data-original"),
                             }
                             // window.isAndroid是在root文件中定义的变量
-                        if (window.isAndroid) {
-                            //这个是安卓操作系统
-                            window.jsObj.wxShare(wxShare);
-                        }
-                        // window.isIOS是在root文件中定义的变量
-                        if (window.isIOS) {
-                            //这个是ios操作系统
-                            window.webkit.messageHandlers.wxShare.postMessage(wxShare);
+
+                        if (window.currentIsApp) {
+                            if (window.isAndroid) {
+                                //这个是安卓操作系统
+                                window.jsObj.wxShare(JSON.stringify(wxShare));
+
+                            }
+                            // window.isIOS是在root文件中定义的变量
+                            if (window.isIOS) {
+                                //这个是ios操作系统
+                                window.webkit.messageHandlers.wxShare.postMessage(JSON.stringify(wxShare));
+
+                            }
                         }
 
                     },
@@ -443,6 +543,12 @@ $(function() {
                 }, {
                     htmdEvt: 'activityDetails_6'
                 });
+                // 点击查看奖励跳转到我的奖励页面
+                mui('body').on('mdClick','.rewards',function(){
+                    window.location.href = site_url.rewards_url;
+                },{
+                    htmdEvt: 'activityDetails_7'
+                })
             }
         }
         //调用初始化函数

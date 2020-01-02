@@ -15,7 +15,7 @@ var data = Mock.mock({
         pageSize:'10',//获取数据条数
         pages:'1',//总记录数
         "activityVoPageInfo":{
-            'list|5':[
+            'list':[
                 {
                     id:'1',//主键唯一ID
                     actType:'1',//活动类型：1-线上活动，2-线下活动

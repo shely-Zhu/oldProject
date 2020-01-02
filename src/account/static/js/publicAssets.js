@@ -8,6 +8,7 @@
 
 require('@pathCommonBase/base.js');
 require('@pathCommonJs/ajaxLoading.js');
+var setCookie = require('@pathNewCommonJsCom/setCookie.js');
 
 $(function () {
 
@@ -129,10 +130,11 @@ $(function () {
         },
         initRightBtn: function(){
             //初始化右上角的按钮btn
-            $('.rightBtn').show().html('交易记录');
+            $('.rightBtn').show().html('交易记录').css('color','#fff');
             mui("body").on('mdClick', '.rightBtn', function (e) {
-                sessionStorage.setItem("ccache", ""); 
-                    window.location.href = site_url.transactionRecords_url;
+                setCookie("transactionRecordsAjaxData","", -1);
+                setCookie("transactionRecordsShowData","", -1);
+                window.location.href = site_url.transactionRecords_url;
             },{
                 'htmdEvt': 'publicAssets_0'
             })
@@ -140,7 +142,7 @@ $(function () {
         bankEvents: function () { //绑定事件
             var that = this;
             //点击筛选银行卡
-            $('#bank_screen').on('click', function (e) {
+            mui("body").on('mdClick', '#bank_screen', function (e) {
                 that.gV.showBankList = !that.gV.showBankList;
                 if (that.gV.showBankList) {
                     $('.bank_list').show();
@@ -149,11 +151,15 @@ $(function () {
                     $('.bank_list').hide();
                     $('#bank_screen .iconfont').html('&#xe609;');
                 }
+            },{
+                'htmdEvt': 'publicAssets_11'
             })
             //银行卡列表点击
-            $('.bank_item').on('click', function(){
+            mui("body").on('mdClick', '.bank_item', function (e) {
                 $(this).find('.iconfont').removeClass('hide');
                 $(this).siblings().find('.iconfont').addClass('hide');
+                $(this).addClass('bank_listactive');
+                $(this).siblings().removeClass('bank_listactive');
                 //将获取到的名字填充到外部
                 $('#bank_screen .bank_screen_name').html($(this).find('.bank_screen_name').html());
                 //点击后拿到银行卡号去筛选银行卡
@@ -163,6 +169,8 @@ $(function () {
                 that.gV.showBankList = !that.gV.showBankList;
                 $('.bank_list').hide();
                 $('#bank_screen .iconfont').html('&#xe609;');
+            },{
+                'htmdEvt': 'publicAssets_12'
             })
         },
         events: function () { //绑定事件
@@ -170,8 +178,9 @@ $(function () {
             //普通基金item的点击 进入持仓详情
             mui("body").on('mdClick', '#pageLists .hold_item', function (e) {
                 var index = $(this).index();
-                sessionStorage.setItem("publicFundDetail",JSON.stringify(that.gV.data.fundDetailList[index])) 
-                window.location.href=site_url.optionalPublicDetail_url;
+                var fundCode = $(this).attr("data-fundCode")
+                var tradeNo = $(this).attr("data-tradeNo")
+                window.location.href=site_url.optionalPublicDetail_url+'?fundCode='+fundCode+'&tradeNo='+tradeNo
             },{
                 'htmdEvt': 'publicAssets_1'
             })
@@ -192,7 +201,8 @@ $(function () {
             })
             //购买
             mui("body").on('mdClick', '.buy_btn', function (e) {
-                window.location.href = site_url.fundTransformIn_url;   
+                var fundCode = $(this).attr("fundCode")
+                window.location.href = site_url.fundTransformIn_url+"?fundCode="+fundCode;   
                 return false;
             },{
                 'htmdEvt': 'publicAssets_4'
@@ -201,19 +211,15 @@ $(function () {
             mui("body").on('mdClick', '.redeem_btn', function (e) {
                 var index = $(this).parent().parent().parent().index();
                 var id = $(this).parent().parent().parent().parent().attr("id")
+                var tradeNo = $(this).parent().parent().parent().attr("data-tradeNo")
+                var fundCode = $(this).parent().parent().parent().attr("data-fundCode")
                 if(id =="cashPageLists" ){
-                    debugger;
                     //现金宝
-                    var obj = {
-                        "money":that.gV.data.cashDetails[index].totalMoney,
-                        "productName":that.gV.data.cashDetails[index].fundName,
-                        "fundCode":that.gV.data.cashDetails[index].fundCode
-                      };
-                    sessionStorage.setItem("transformMessage",JSON.stringify(obj));
-                    window.location.href = site_url.pofCashTransformOut_url;
+                    var fundCode = that.gV.data.cashDetails[index].fundCode
+                    var productName = that.gV.data.cashDetails[index].fundName
+                    window.location.href = site_url.pofCashTransformOut_url + '?fundCode=' + fundCode + '&productName=' + new Base64().encode(productName);
                 }else if(id == "pageLists"){
-                    sessionStorage.setItem("publicFundDetail",JSON.stringify(that.gV.data.fundDetailList[index])) ;
-                     window.location.href = site_url.redemptionBuy_url;
+                     window.location.href = site_url.redemptionBuy_url + '?tradeNo=' + tradeNo + "&fundCode=" + fundCode
                 }else{
                     return false
                 }

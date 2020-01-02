@@ -27,11 +27,19 @@
         <div class="dd_radar HasData">
             <ul class="listHasData0">
                 <!-- 暂无数据 -->
-                @@include('@pathCommonCom/noData/noData.html', {"tipText": "暂无数据"})
+                <!-- @@include('@pathCommonCom/noData/noData.html', {"tipText": "暂无活动信息"}) -->
+                <div class="dd_radar NoDataMore">
+                    <img src="/mine/static/img/Me_huodog_Empty@2x.png" alt="">
+                    <p>暂无活动信息</p>
+                </div>
             </ul>
             <ul class="listHasData1">
                 <!-- 暂无数据 -->
-                @@include('@pathCommonCom/noData/noData.html', {"tipText": "暂无数据"})
+                <!-- @@include('@pathCommonCom/noData/noData.html', {"tipText": "暂无活动信息"}) -->
+                <div class="dd_radar NoDataMore">
+                    <img src="/mine/static/img/Me_huodog_Empty@2x.png" alt="">
+                    <p>暂无活动信息</p>
+                </div>
             </ul>
         </div>
         <!-- 无数据时显示 -->
@@ -53,9 +61,8 @@
 
     <script id="activityEn-template" type="text/x-handlebars-template">
         {{#each this}}
-        <li class="clickli" data-actType="{{actType}}" data-actId="{{actId}}">
-            {{#if actTypestatus}}
-            <img class="lazyload" src="/common/img/lazyImgList.png" data-original="{{htjfGeneralizeImgUrl}}" alt=""> {{/if}}
+        <li class="clickli" data-actType="{{actType}}" data-actId="{{actId}}" >
+            <img class="lazyload" src="/common/img/lazyImgList1.png" data-original="{{htjfGeneralizeImgUrl}}" alt=""> 
             <p>{{actName}}</p>
             {{#if actTypestatus}}
             <div class="sign">
@@ -68,13 +75,14 @@
                 <span class="yes">已签到</span>
                 <div>{{arriveTime}}</div>
                 {{else}}
-                <span class="no">未签到</span> {{/if}}
+                <span class="no">未签到</span>
+                 {{/if}}
             </div>
             {{/if}}
             <div class="time">
                 <div class="timeco">报名时间&nbsp;{{enterTime}}</div>
                 {{#if shareflag}}
-                <div class="timeBtn blueBgButton" data-actId={{actId}} data-actType={{actType}}>分享给好友</div>
+                <div class="timeBtn blueBgButton" data-actId={{actId}} data-actType={{actType}} data-htjfGeneralizeImgUrl="{{htjfGeneralizeImgUrl}}" data-actName="{{actName}}" data-actType="{{linkType}}">分享给好友</div>
                 {{/if}}
             </div>
         </li>
@@ -82,8 +90,8 @@
     </script>
 
     <script id="more-template" type="text/x-handlebars-template">
-        <li style="background: url('{{filePath}}') 100% 100%" class="clickli" data-htjfGeneralizeImgUrl="{{htjfGeneralizeImgUrl}}" data-actName="{{actName}}" data-actType="{{actType}}" data-actId="{{actId}}">
-            {{#if prize}}
+        <li style="background: url('{{filePath}}')" class="clickli" data-htjfGeneralizeImgUrl="{{htjfGeneralizeImgUrl}}" data-actName="{{actName}}" data-actType="{{linkType}}" data-actId="{{linkUrl}}">
+            <!-- {{#if prize}}
             <div class="top">
                 <span>{{prize}}</span>
             </div>
@@ -95,7 +103,7 @@
                 <div>{{actStartDate}} 至 {{actEndDate}}</div>
             </div>
             {{/if}}
-            <div></div>
+            <div></div> -->
         </li>
     </script>
     @@include('@pathInclude/views/footer.html')

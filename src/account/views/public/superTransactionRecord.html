@@ -8,7 +8,7 @@
  
  <head>
 	 @@include('@pathInclude/views/meta.html')
-	 <link rel="stylesheet" href="/account/static/css/public/transactionDetail.css">
+	 <link rel="stylesheet" href="/account/static/css/public/superTransactionRecord.css">
  
 	 <title>交易记录</title>
  </head>
@@ -48,16 +48,15 @@
  
 	 <script id="second-template" type="text/x-handlebars-template">
 	 {{! 左侧页面列表}}  {{#each pageList}}
-	 <div class="datalist">
+	 <div class="datalist" applyId="{{allotNo}}" fundCombination="{{fundCombination}}" fundCode="{{fundCode}}" fundType="{{fundType}}" fundBusinCode="{{fundBusinCode}}" allotType="{{applyType}}" fixbusinflag="{{fixbusinflag}}" scheduledProtocolId="{{scheduledProtocolId}}" shares="{{shares}}" fundName="{{fundName}}" applyDate="{{originalDate}}" autoBuyDesc="{{autoBuyDesc}}">
 		 <div class="first">
 			 <div class="tit">{{fundName}}</div>
 			 <div class="mon">
-				 {{#if tobe}}
-				 +
+				 {{#if isShares}}
+				   {{sharesMask}}份
 				 {{else}}
-				 -
+				   {{balanceMask}}元 
 				 {{/if}}
-				 {{balance}}元 
 			 </div>             
 		 </div>
 		 <div class="second">
@@ -70,7 +69,7 @@
  </script> 
 
  @@include('@pathInclude/views/footer.html')
- <script src="/account/static/js/public/transactionDetail.js"></script>
+ <script src="/account/static/js/public/superTransactionRecord.js"></script>
  
  
  

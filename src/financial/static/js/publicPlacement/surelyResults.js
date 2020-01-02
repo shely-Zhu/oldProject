@@ -69,7 +69,13 @@ $(function () {
           if(json.status == '0000'){
             if(data.tradeApplyStatus == '20' || data.tradeApplyStatus == '22' || data.tradeApplyStatus == '23' || data.tradeApplyStatus == '25'){   //转入中  || 转出中   || 成功
               $(".resultTop").show()
-              that.$e.succedText.html(data.tradeApplyDesc)
+              //状态为转入中和转入成功全部统一为转入中
+              if(that.gV.flag =="out"){
+                that.$e.succedText.html("转出中")
+              }else if(that.gV.flag == "into"){
+                that.$e.succedText.html("转入中")
+              }
+              
               $(".resultTopTwo").hide()
               if(that.gV.flag == 'into'){   // 转入
                 $("#HeadBarpathName").html('转入结果')
@@ -87,7 +93,7 @@ $(function () {
                 that.$e.shareTimeInto.html(data.startGainsDayStr + '&nbsp;24:00 前')
                 that.$e.earningsTimeInto.html(data.paymentGainsDayStr + '&nbsp;24:00 前')
                 that.$e.fundNameInto.html(data.fundName)
-                that.$e.fundCodeInto.html(data.fundCode)
+                //that.$e.fundCodeInto.html(data.fundCode)
                 that.$e.amountInto.html(data.balanceMask)
                 that.$e.banKImgInto.attr('src',data.bankThumbnailUrl)
                 that.$e.bankNameInto.html(data.bankName)
@@ -108,7 +114,6 @@ $(function () {
                 that.$e.applyTimeOut.html(data.applyDateTime)
 
                 if(that.gV.outType == 'common'){
-                  debugger
                   that.$e.toTimeOut.html(data.estimateDateStr + '&nbsp;24:00 前')   //普通转出
                 }else{
                   that.$e.toTimeOut.html(data.estimateTimeStr + '&nbsp;24:00 前')    //快速转出
@@ -136,7 +141,7 @@ $(function () {
                   that.$e.amountInto.html(data.balanceMask)
                   that.$e.banKImgInto.attr('src',data.bankThumbnailUrl)
                   that.$e.bankNameInto.html(data.bankName)
-                  that.$e.bankNumInto.html(data.bankAccount.substr(data.bankAccount.length-4))
+                  that.$e.bankNumInto.html(data.bankAccountMask.substr(data.bankAccountMask.length-4))
                   that.$e.payTypeInto.html('在线支付')
                 }
                 if(that.gV.flag == 'out'){   // 转出

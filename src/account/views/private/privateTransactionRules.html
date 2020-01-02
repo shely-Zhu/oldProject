@@ -5,10 +5,11 @@
 <html lang="en">
 <head>
     @@include('@pathInclude/views/meta.html') 
-    <link rel="stylesheet" href="/account/static/css/private/transactionRules.css">  
+    <link rel="stylesheet" href="/account/static/css/private/privateTransactionRules.css">  
     <title>私募交易规则</title>
 </head>
 <body>
+    @@include('@pathCommonCom/loading/listLoading.html')
     <div id="richTemplateWrap">
         @@include('@pathCommonViews/headBarConfig.html',{"bgColors":"#000,#eee","showType":"0","pathName":"交易规则"})
         <!--没有数据显示图标-->
@@ -17,6 +18,6 @@
     </div>          
 
     @@include('@pathInclude/views/footer.html')
-    <script src="/account/static/js/private/transactionRules.js"></script>
+    <script src="/account/static/js/private/privateTransactionRules.js"></script>
 </body>
 </html>

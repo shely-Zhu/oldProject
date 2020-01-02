@@ -35,6 +35,10 @@ html {
 .text_red {
     color: @F52323;
 }
+.colorGray {
+    color: @9B9B9B;
+    font-size: .32rem;
+}
 
 .cancel_order {
     //撤单按钮
@@ -59,6 +63,9 @@ html {
             .amount {
                 font-size: 0.68rem;
                 font-weight: bold;
+                background: linear-gradient(to right, @6C83C9, @0E246C);
+                -webkit-background-clip: text;
+                color: transparent;
             }
             .yuan {
                 font-size: 0.32rem;
@@ -75,6 +82,9 @@ html {
             font-size: 0.28rem;
             color: #4A4A4A;
         }
+    }
+    .buy_confirm_info,.redeem_confirm_info{
+        margin-bottom: .98rem;//防止确认时间看不到。
     }
     .trade_status_area{
         width: 100%;

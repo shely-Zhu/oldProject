@@ -11,7 +11,8 @@
 @import url("@pathCommonLessCom/authenticationProcess.less");
 
 body{
-	background: @F7FAFD
+	background: @F7FAFD;
+	position: relative;
 }
 .fl {
 	float: left;
@@ -219,6 +220,9 @@ body{
 				line-height: 0.6rem;
 				margin-top: .2rem;
 			}
+			.mr_03{
+				margin-right: 0.3rem;
+			}
 			.arrow{
 				float: right;
 				width: 0.3rem;
@@ -376,10 +380,11 @@ body{
 				}
 			}
 			.line_desc {
-				margin:  .3rem;
+				margin:0 .3rem .3rem  .3rem;
 				padding-bottom: .3rem;
 				font-size: .28rem;
 				color: @9B9B9B;
+
 			}
 		}
 		.company_info {
@@ -486,10 +491,100 @@ body{
 		}
 	}
 }
-#HeadBarpathName span:nth-of-type(1){
+/*jiaoxiaolu 2019.12.27 因调整展头部展示两行问题添加*/
+/*start*/
+.HeadBarConfigBox #HeadBarpathName{
+	height: 1.2rem;
+	top: 0.25rem;
+}
+.HeadBarConfigBox a{
+	top: 0.25rem;
+}
+/*end*/
+
+.HeadBarConfigBox #HeadBarpathName span:nth-of-type(1){
 top: -0.2rem !important;
 }
-#HeadBarpathName span:nth-of-type(2){
-top: 0.2rem !important;
+.HeadBarConfigBox #HeadBarpathName span:nth-of-type(2){
+top: 0.38rem !important;
+left: 3.2rem;
+position: absolute;
+font-size: 0.32rem;
+}
+
+.disabled{
+	background-color: #cccccc !important;
+}
+.isRiskMatch_mask{
+	background: #000;
+	top:0;
+	opacity: .6;
+	width: 100%;
+	height: 100%;
+	position: fixed;
+	display: none;
+}
+
+.isRiskMatchBox{
+	position: fixed;
+	width: 100%;
+	height: 100%;
+	top:0;
+	display: none;
+	z-index: 111111;
+	.isRiskMatchBox_contentBox{
+		position: absolute;
+		z-index: 111111;
+		top: 5rem;
+		left: 1.4rem;
+		width: 5.2rem;
+		height: 2.5rem;
+		background-color:#f2e1c1;
+		.isRiskMatchBox_header{
+			width: 100%;
+			height: 1.5rem;
+			text-align: center;
+			line-height: 1.5rem;
+			color: black;
+			font-weight: bold;
+			font-size: 0.22rem;
+			border-bottom: 2px solid #f2e1c1
+		}
+		.isRiskMatchBox_footer{
+			width: 100%;
+			height: 1rem;
+			background-color: #fdf3dc;
+			.isRiskMatchBox_match{
+				display: none;
+				width: 100%;
+				height: 1rem;
+				line-height: 1rem;
+				text-align: center;
+				font-weight: bold;
+			}
+			.isRiskMatchBox_noMatch{
+				display: block;
+				width: 100%;
+				height: 1rem;
+				button:nth-of-type(1){
+					width:calc(50% - 2px);
+					height:1rem;
+					border-left: 2px solid #eeeeee;
+					line-height: 1rem;
+					text-align: center;
+					font-weight: bold;
+					font-size: 0.2rem;
+				}
+				button:nth-of-type(2){
+					width: 50%;
+					height:1rem;
+					line-height: 1rem;
+					text-align: center;
+					font-weight: bold;
+					font-size: 0.2rem;
+				}
+			}
+		}
+	}
 }
 

@@ -19,7 +19,9 @@ $(function(){
             membershipDetailsListTemplateId:$('#membershipDetailsList-template'),//swiper会员权益模板Id
 		},
 		//全局变量
-		gV:{},
+		gV:{
+            index:splitUrl['index']?splitUrl['index']:"", // 用户点击的第几个icon，从0开始
+        },
 		//页面初始化函数
 		init:function(){
             var that=this;
@@ -59,6 +61,7 @@ $(function(){
                     },
                     //滑动结束赋值
                     slideChangeTransitionEnd: function(){
+                        $(".lazyload").lazyload()
                         var index=this.activeIndex%num;
                         var text=$('.swiper-slide').eq(index).attr('data-text');
                         var link=$('.swiper-slide').eq(index).attr('data-link');
@@ -77,17 +80,15 @@ $(function(){
             var obj=[{
                 url: site_url.findBenefitByLevel_api,
                 data:{
-                    // level:'7'
-                    level:splitUrl['level']
+                    level:'7' // 传最高就行，可以固定写死，拿所有的权益
                 },
                 //async: false,
                 needDataEmpty: true,
                 callbackDone: function(json) {
                     var data=json.data; 
-                    generateTemplate(data,that.$e.membershipDetailsSilderBox,that.$e.membershipDetailsListTemplateId); 
-                    $(".lazyload").lazyload()
-                    var n=0;
-                    that.swiperInit(n,json.data.length);           
+                    generateTemplate(data,that.$e.membershipDetailsSilderBox,that.$e.membershipDetailsListTemplateId);
+                    that.swiperInit(parseInt(splitUrl['index']),json.data.length);    
+                    // $(".lazyload").lazyload()
                 },
                 callbackNoData:function(json){
                     console.log(json)

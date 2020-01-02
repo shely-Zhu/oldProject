@@ -1,8 +1,8 @@
 /*
  * @Author: your name
  * @Date: 2019-12-09 15:53:31
- * @LastEditTime: 2019-12-16 16:01:03
- * @LastEditors: Please set LastEditors
+ * @LastEditTime : 2019-12-31 15:04:09
+ * @LastEditors  : Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \htjf-app\src\mine\static\js\fundAccountDiagnosisResult.js
  */
@@ -15,6 +15,8 @@ require('@pathCommonJs/components/headBarConfig.js');
 var tipAction = require('@pathCommonJs/components/tipAction.js');
 var splitUrl = require('@pathCommonJs/components/splitUrl.js')();
 var generateTemplate = require('@pathCommonJsComBus/generateTemplate.js');
+require('@pathIncludJs/vendor/mui/mui.picker.min.js');
+var popPicker = require('@pathCommonJsCom/popPicker.js');
 
 
 $(function() {
@@ -52,7 +54,7 @@ $(function() {
         gV: {
               applyType:splitUrl['type'], // add 为新增  edit 为编辑
               applyId:splitUrl['applyId'],   //编辑具体的基金的id
-              otherFundCodeData:"", //其他基金数据
+              otherFundCodeData:[], //其他基金数据
               readyPurchaseHTFunds:"", //恒天基金
               selectPurchaseHTFunds:[],//已购买恒天基金
               userAge:"", //年龄
@@ -79,6 +81,7 @@ $(function() {
               fundDiagnosisRiskLevelDicData:"", //风险等级字典
               fundDiagnosisEInvestDurationLevelDicData:"", //预计投资年限字典
               fundDiagnosisLiquidityRequirementDicData:"", //流动性需求字典
+              dataPickData:"", //其他基金的日期
         },
         init: function() {
             var that = this;
@@ -89,6 +92,7 @@ $(function() {
         initAddOtherFundCode:function(){
             //初始化其他基金
             var that = this;
+            that.$e.TransferFundsContent.html("")
             generateTemplate(that.gV.otherFundCodeData, that.$e.TransferFundsContent, that.$e.templateTransferFunds);
             if(that.gV.otherFundCodeData){
                if(that.gV.otherFundCodeData.length>0){
@@ -103,12 +107,12 @@ $(function() {
         initSelectVal:function(){
            //初始化数据字典下拉框值
            var that = this;
-            generateTemplate(that.gV.fundDiagnosisSexDicData,that.$e.fundDiagnosisSexTemplate,that.$e.templateSelectBox);  //init性别
-            generateTemplate(that.gV.fundDiagnosisVocationDicData,that.$e.fundDiagnosisVocationTemplate,that.$e.templateSelectBox);  //init职业
-            generateTemplate(that.gV.fundDiagnosisInvestDurationDicData,that.$e.fundDiagnosisInvestDurationTemplate,that.$e.templateSelectBox);  //init投资年限
-            generateTemplate(that.gV.fundDiagnosisRiskLevelDicData,that.$e.fundDiagnosisRiskLevelTemplate,that.$e.templateSelectBox);  //init风险
-            generateTemplate(that.gV.fundDiagnosisEInvestDurationLevelDicData,that.$e.fundDiagnosisEInvestDurationLevelTemplate,that.$e.templateSelectBox);  //init预计投资年限
-            generateTemplate(that.gV.fundDiagnosisLiquidityRequirementDicData,that.$e.fundDiagnosisLiquidityRequirementTemplate,that.$e.templateSelectBox);  //init流动性
+          //  generateTemplate(that.gV.fundDiagnosisSexDicData,that.$e.fundDiagnosisSexTemplate,that.$e.templateSelectBox);  //init性别
+          //  generateTemplate(that.gV.fundDiagnosisVocationDicData,that.$e.fundDiagnosisVocationTemplate,that.$e.templateSelectBox);  //init职业
+          //  generateTemplate(that.gV.fundDiagnosisInvestDurationDicData,that.$e.fundDiagnosisInvestDurationTemplate,that.$e.templateSelectBox);  //init投资年限
+          //  generateTemplate(that.gV.fundDiagnosisRiskLevelDicData,that.$e.fundDiagnosisRiskLevelTemplate,that.$e.templateSelectBox);  //init风险
+          //  generateTemplate(that.gV.fundDiagnosisEInvestDurationLevelDicData,that.$e.fundDiagnosisEInvestDurationLevelTemplate,that.$e.templateSelectBox);  //init预计投资年限
+          //  generateTemplate(that.gV.fundDiagnosisLiquidityRequirementDicData,that.$e.fundDiagnosisLiquidityRequirementTemplate,that.$e.templateSelectBox);  //init流动性
         },
         initData:function(data){
             var that = this
@@ -123,8 +127,9 @@ $(function() {
             that.gV.yield_secondData = data.eYieldratePerYearMax;
             that.gV.loss_firstData = data.affordableMaxDeficitRateMin;
             that.gV.loss_secondData = data.affordableMaxDeficitRateMax;
-            that.gV.otherFundCodeData = JSON.parse(sessionStorage.getItem("addAccountDiagnosisResultList")) != ""?JSON.parse(sessionStorage.getItem("addAccountDiagnosisResultList")):data.readyPurchaseQTFunds;
-            sessionStorage.setItem("addAccountDiagnosisResultList",JSON.stringify(that.gV.otherFundCodeData));
+            that.gV.otherFundCodeData = data.readyPurchaseQTFunds;
+           // that.gV.otherFundCodeData = JSON.parse(sessionStorage.getItem("addAccountDiagnosisResultList")) != ""?JSON.parse(sessionStorage.getItem("addAccountDiagnosisResultList")):data.readyPurchaseQTFunds;
+            //sessionStorage.setItem("addAccountDiagnosisResultList",JSON.stringify(that.gV.otherFundCodeData));
             that.initAddOtherFundCode();
             that.gV.readyPurchaseHTFunds= data.readyPurchaseHTFunds;
             /*that.gV.readyPurchaseHTFunds.forEach(function(item,index){
@@ -160,7 +165,7 @@ $(function() {
                })*/
                for(var i = 0 ; i < that.gV.fundDiagnosisSexDicData.length; i++) {
                  if(that.gV.fundDiagnosisSexDicData[i].dicCode == code){
-                    val = that.gV.fundDiagnosisSexDicData[i].value
+                    val = that.gV.fundDiagnosisSexDicData[i].text
                   }
                }
            }else if(type == 'fundDiagnosisVocation'){
@@ -171,7 +176,7 @@ $(function() {
                 })*/
                 for(var i = 0 ; i < that.gV.fundDiagnosisVocationDicData.length; i++) {
                   if(that.gV.fundDiagnosisVocationDicData[i].dicCode == code){
-                    val = that.gV.fundDiagnosisVocationDicData[i].value
+                    val = that.gV.fundDiagnosisVocationDicData[i].text
                   }
                 }
            }else if(type == 'fundDiagnosisInvestDuration'){
@@ -182,7 +187,7 @@ $(function() {
                 })*/
                 for(var i = 0 ; i < that.gV.fundDiagnosisInvestDurationDicData.length; i++) {
                   if(that.gV.fundDiagnosisInvestDurationDicData[i].dicCode == code){
-                    val = that.gV.fundDiagnosisInvestDurationDicData[i].value
+                    val = that.gV.fundDiagnosisInvestDurationDicData[i].text
                   }
                 }
             }else if(type == 'fundDiagnosisRiskLevel'){
@@ -193,7 +198,7 @@ $(function() {
                 })*/
                 for(var i = 0 ; i < that.gV.fundDiagnosisRiskLevelDicData.length; i++) {
                   if(that.gV.fundDiagnosisRiskLevelDicData[i].dicCode == code){
-                    val = that.gV.fundDiagnosisRiskLevelDicData[i].value
+                    val = that.gV.fundDiagnosisRiskLevelDicData[i].text
                   }
                 }
             }else if(type == 'fundDiagnosisEInvestDurationLevel'){
@@ -204,7 +209,7 @@ $(function() {
                 })*/
                 for(var i = 0 ; i < that.gV.fundDiagnosisEInvestDurationLevelDicData.length; i++) {
                   if(that.gV.fundDiagnosisEInvestDurationLevelDicData[i].dicCode == code){
-                    val = that.gV.fundDiagnosisEInvestDurationLevelDicData[i].value
+                    val = that.gV.fundDiagnosisEInvestDurationLevelDicData[i].text
                   }
                 }
             }else if(type == 'fundDiagnosisLiquidityRequirement'){
@@ -215,7 +220,7 @@ $(function() {
                 })*/
                 for(var i = 0 ; i < that.gV.fundDiagnosisLiquidityRequirementDicData.length; i++) {
                   if(that.gV.fundDiagnosisLiquidityRequirementDicData[i].dicCode == code){
-                    val = that.gV.fundDiagnosisLiquidityRequirementDicData[i].value
+                    val = that.gV.fundDiagnosisLiquidityRequirementDicData[i].text
                   }
                 }
             }
@@ -292,13 +297,13 @@ $(function() {
                 data:{
                     id:"",  //主键 
                     age:that.gV.userAge, //年龄
-                    sex:that.gV.sexDataCode, //性别
-                    evocation:that.gV.professionalDataCode, //职业
+                    sex:(!!that.$e.sex.attr("num"))?that.$e.sex.attr("num"):that.gV.sexDataCode, //性别
+                    evocation:(!!that.$e.professional.attr("num"))? that.$e.professional.attr("num"):that.gV.professionalDataCode, //职业
                     evocationExtension:"",//职业描述
-                    investDurationLevel:that.gV.investment_yearDataCode, //投资年限
-                    riskLevel:that.gV.riskLevelDataCode,  //风险等级
-                    eInvestDurationLevel:that.gV.expectedInvestment_yearDataCode,  //预计投资年限
-                    liquidityRequirement:that.gV.liquidityDataCode,  //流动性需求
+                    investDurationLevel:(!!that.$e.investment_year.attr("num"))?that.$e.investment_year.attr("num"):that.gV.investment_yearDataCode, //投资年限
+                    riskLevel:(!!that.$e.riskLevel.attr('num'))?that.$e.riskLevel.attr('num'):that.gV.riskLevelDataCode,  //风险等级
+                    eInvestDurationLevel:(!!that.$e.expectedInvestment_year.attr("num"))?that.$e.expectedInvestment_year.attr("num"):that.gV.expectedInvestment_yearDataCode,  //预计投资年限
+                    liquidityRequirement:(!!that.$e.liquidity.attr("num"))?that.$e.liquidity.attr("num"):that.gV.liquidityDataCode,  //流动性需求
                     eYieldratePerYearMin:that.gV.yield_firstData, //预期年化收益率最小值
                     eYieldratePerYearMax:that.gV.yield_secondData,  //预期年化收益率最大值
                     affordableMaxDeficitRateMin:that.gV.loss_firstData,  //可承受最大亏损最小值
@@ -316,7 +321,12 @@ $(function() {
                         p: '<p>' + value + '</p>',
                         buttonTxt: '知道了',
                         zIndex: 100,
+                        htmdEvtYes:'fundAccountDiagnosisResult_09',
                     });
+                    setTimeout(function(){
+                        window.location.href = site_url.applyHistory_url 
+                    },1000)
+                   
                 },
                 callbackNoData:function(json){
                     tipAction(json.message);
@@ -354,15 +364,15 @@ $(function() {
                 url:site_url.updateFundDiagnosisApply_api,
                 needDataEmpty:true,
                 data:{
-                    id:"",  //主键
+                    id:that.gV.applyId,  //主键
                     age:that.gV.userAge, //年龄
-                    sex:that.gV.sexDataCode, //性别
-                    evocation:that.gV.professionalDataCode, //职业
+                    sex:(!!that.$e.sex.attr("num"))?that.$e.sex.attr("num"):that.gV.sexDataCode, //性别
+                    evocation:(!!that.$e.professional.attr("num"))? that.$e.professional.attr("num"):that.gV.professionalDataCode, //职业
                     evocationExtension:"",//职业描述
-                    investDurationLevel:that.gV.investment_yearDataCode, //投资年限
-                    riskLevel:that.gV.riskLevelDataCode,  //风险等级
-                    eInvestDurationLevel:that.gV.expectedInvestment_yearDataCode,  //预计投资年限
-                    liquidityRequirement:that.gV.liquidityDataCode,  //流动性需求
+                    investDurationLevel:(!!that.$e.investment_year.attr("num"))?that.$e.investment_year.attr("num"):that.gV.investment_yearDataCode, //投资年限
+                    riskLevel:(!!that.$e.riskLevel.attr('num'))?that.$e.riskLevel.attr('num'):that.gV.riskLevelDataCode,  //风险等级
+                    eInvestDurationLevel:(!!that.$e.expectedInvestment_year.attr("num"))?that.$e.expectedInvestment_year.attr("num"):that.gV.expectedInvestment_yearDataCode,  //预计投资年限
+                    liquidityRequirement:(!!that.$e.liquidity.attr("num"))?that.$e.liquidity.attr("num"):that.gV.liquidityDataCode,  //流动性需求
                     eYieldratePerYearMin:that.gV.yield_firstData, //预期年化收益率最小值
                     eYieldratePerYearMax:that.gV.yield_secondData,  //预期年化收益率最大值
                     affordableMaxDeficitRateMin:that.gV.loss_firstData,  //可承受最大亏损最小值
@@ -380,7 +390,11 @@ $(function() {
                          p: '<p>' + value + '</p>',
                          buttonTxt: '知道了',
                          zIndex: 100,
+                         htmdEvtYes:'fundAccountDiagnosisResult_10'
                      });
+                     setTimeout(function(){
+                        window.location.href = site_url.applyHistory_url 
+                    },1000)
                 },
                 callbackNoData:function(json){
                     tipAction(json.message);
@@ -393,32 +407,110 @@ $(function() {
         },
        events:function(){
             var that = this;
-            mui("body").on("mdClick",".mui-icon-arrowright",function(){
+            var dtPicker = new mui.DtPicker({
+                type:'date'
+            }); 
+            // 购买日期选择
+            mui("body").on("mdClick",".addOtherFund_content .mui-icon-arrowright",function(){
                 var type = $(this).attr("type");
-                $('.popup').css('display', 'block')
+               $('.popup').show()
+               //$('.popup-content .popup-mask').hide();
+                $('.mui-dtpicker').show()
+                that.gV.dataPickData="";
+			// 监听日期选择点击事件
+				dtPicker.show(function (selectItems) { 
+                    $('.popup-mask').show();
+                   // $('.popup').css('display', 'none')
+                    that.gV.dataPickData=selectItems.value;
+                    $(".dataPick")[0].textContent = selectItems.value;
+                })
+            })
+            mui("body").on("mdClick",".addOtherFund_content .comfirmButtom .addOtherTrue",function(){
+                 var fundCode = $(".fundCode_input").val();
+                var dataPick = $(".dataPick")[0].textContent;
+                var money = $(".money_input").val();
+                var obj = {
+                    "fundCode":fundCode,
+                    "purchaseDate":new Date(dataPick).getTime(),
+                    "purchaseDateStr":dataPick,
+                    "purchaseAmount":money,
+                    "purchaseSourceType": 2
+                }
+                if(fundCode!=""&&dataPick!=""&&money!=""){
+                    if(!!that.gV.otherFundCodeData){
+                        if(that.gV.otherFundCodeData.length==0){
+                            that.gV.otherFundCodeData.push(obj)
+                        }else{
+                            var arr = [];
+                            that.gV.otherFundCodeData.forEach(function(item){
+                                 if(item.fundCode!=obj.fundCode){
+                                     arr.push(item)
+                                 }
+                            })
+                            arr.push(obj);
+                            that.gV.otherFundCodeData = arr;
+                        }
+                    }else{
+                        var arr = [];
+                        arr.push(obj);
+                        that.gV.otherFundCodeData = arr
+                    }
+                   
+                    $(".warmMessage").hide()
+                    $(".addOtherFund").hide()
+                    $(".addOtherFund_content").hide()
+                    that.initAddOtherFundCode()
+                }else{
+                    $(".warmMessage").show()
+                }
+            })
+
+            mui("body").on("mdClick",".addOtherFund_content .comfirmButtom .addOtherFalse",function(){
+                $(".warmMessage").hide()
+                $(".addOtherFund").hide()
+                $(".addOtherFund_content").hide()
+            })
+            // 性别选择
+            mui("body").on("mdClick",".content-item .mui-icon-arrowright",function(){
+                var type = $(this).attr("type");
+               // $('.popuplist').css('display', 'block')
                 $(".popup-content .selectItemList").hide();
+                $(".mui-dtpicker").hide();
+               // $('.popup-mask').show();
                 if(type == "sex"){
-                    $(".popup-content .sex").show()
+                    popPicker(1, that.gV.fundDiagnosisSexDicData, that.$e.sex);
+                   // $(".popup-content .sex").show()
                 }else if(type == "professional"){
-                    $(".popup-content .professional").show()
+                    popPicker(1, that.gV.fundDiagnosisVocationDicData, that.$e.professional);
+                   // $(".popup-content .professional").show()
                 }else if(type == "investment_year"){
-                    $(".popup-content .investment_year").show()
+                    popPicker(1, that.gV.fundDiagnosisInvestDurationDicData, that.$e.investment_year);
+                 //   $(".popup-content .investment_year").show()
                 }else if(type == "riskLevel"){
-                    $(".popup-content .riskLevel").show()
+                    popPicker(1, that.gV.fundDiagnosisRiskLevelDicData, that.$e.riskLevel);
+                 //   $(".popup-content .riskLevel").show()
                 }
                 else if(type == "expectedInvestment_year"){
-                    $(".popup-content .expectedInvestment_year").show()
+                    popPicker(1, that.gV.fundDiagnosisEInvestDurationLevelDicData, that.$e.expectedInvestment_year);
+                 //   $(".popup-content .expectedInvestment_year").show()
                 }else if(type == "liquidity"){
-                    $(".popup-content .liquidity").show()
+                    popPicker(1, that.gV.fundDiagnosisLiquidityRequirementDicData, that.$e.liquidity);
+                   // $(".popup-content .liquidity").show()
                 }else if(type == "yield"){
+                      $('.popuplist').css('display', 'block')
+                      $('.popup-mask').show();
                     $(".popup-content .yield").show()
                     that.gV.typeInput = "yield";
                 }else if(type == "loss"){
+                    $('.popuplist').css('display', 'block')
+                    $('.popup-mask').show();
                     $(".popup-content .loss").show()
                     that.gV.typeInput = "loss";
                 }
-            
+            },{
+                'htmdEvt': 'fundAccountDiagnosisResult_01'
             })
+            // 弹框内容选择
             mui("body").on("mdClick",".selectItemList ul li",function(){
                 var type = $(this).attr("type");
                 var val = $(this).find("span")[0].textContent;
@@ -426,39 +518,12 @@ $(function() {
                 $(this).find(".radioCheckItemImg").show();
                 $(this).siblings().find(".radioCheckItemImg").hide();
                 $(".popup_true").attr("type",type).attr("val",val).attr("dicCode",dicCode);
+            },{
+                'htmdEvt': 'fundAccountDiagnosisResult_02'
             })
 
             //弹出框确定按钮
             mui("body").on("mdClick",".popup_true",function(){
-                var type = $(this).attr("type");
-                var val = $(this).attr("val");
-                var dicCode = $(this).attr("dicCode");
-                if(type == "fundDiagnosisSex"){
-                    that.$e.sex[0].textContent = val;
-                    that.gV.sexData = val;
-                    that.gV.sexDataCode = dicCode;
-                }else if(type == "fundDiagnosisVocation"){
-                    that.$e.professional[0].textContent = val;
-                    that.gV.professionalData = val;
-                    that.gV.professionalDataCode = dicCode;
-                }else if(type == "fundDiagnosisInvestDuration"){
-                    that.$e.investment_year[0].textContent = val;
-                    that.gV.investment_yearData = val;
-                    that.gV.investment_yearDataCode = dicCode;
-                }else if(type == "fundDiagnosisRiskLevel"){
-                    that.$e.riskLevel[0].textContent = val;
-                    that.gV.riskLevelData = val;
-                    that.gV.riskLevelDataCode = dicCode;
-                } else if(type == "fundDiagnosisEInvestDurationLevel"){
-                    that.$e.expectedInvestment_year[0].textContent = val;
-                    that.gV.expectedInvestment_yearData = val;
-                    that.gV.expectedInvestment_yearDataCode = dicCode;
-                }else if(type == "fundDiagnosisLiquidityRequirement"){
-                    that.$e.liquidity[0].textContent = val;
-                    that.gV.liquidityData = val;
-                    that.gV.liquidityDataCode = dicCode;
-                }
-                else{
                     if(that.gV.typeInput == "yield"){
                         var firstVal = $(".yieldFirst").val();
                         var secondVal = $(".yieldSecond").val();
@@ -519,13 +584,18 @@ $(function() {
                         that.gV.loss_firstData = firstVal;
                         that.$e.lossControl.show();
                     }
-                }
                 $(this).attr("type","")
-                $('.popup').css('display', 'none')
+                $('.popuplist').css('display', 'none')
+                $(".mui-backdrop").remove()
+            },{
+                'htmdEvt': 'fundAccountDiagnosisResult_03'
             })
             //弹出框取消按钮
             mui("body").on("mdClick",".popup_cancel",function(){
-                $('.popup').css('display', 'none')
+                $('.popuplist').css('display', 'none')
+                $(".mui-backdrop").remove()
+            },{
+                'htmdEvt': 'fundAccountDiagnosisResult_04'
             })
 
             //新增其他的清除按钮
@@ -544,7 +614,7 @@ $(function() {
                   }
                 }
                 that.gV.otherFundCodeData = newArr;
-                sessionStorage.setItem("addAccountDiagnosisResultList",JSON.stringify(newArr))
+               // sessionStorage.setItem("addAccountDiagnosisResultList",JSON.stringify(newArr))
                 if(that.gV.otherFundCodeData){
                     if(that.gV.otherFundCodeData.length>0){
                          $(".addOtherFundcodeBox_noData").hide();
@@ -554,21 +624,31 @@ $(function() {
                  }else{
                      $(".addOtherFundcodeBox_noData").show();
                  }
+            },{
+                'htmdEvt': 'fundAccountDiagnosisResult_05'
             })
 
             //新增其他新建添加按钮
             mui("body").on("mdClick",".addOtherFundcodeBox .mui-icon-plusempty",function(){
-                window.location.href = site_url.addAccountDiagnosisResult_url;
+               // $('.popup').css('display', 'block')
+                $(".addOtherFund").show()
+                $(".addOtherFund_content").show()
+                $(".popup_true").attr("type","addOtherFund");
+               // window.location.href = site_url.addAccountDiagnosisResult_url;
+            },{
+                'htmdEvt': 'fundAccountDiagnosisResult_06'
             })
 
            //提交申请
-           mui("body").on("mdClick",".comfirmButtom .mui-btn",function(){
+           mui("body").on("mdClick",".submitButton",function(){
             if(that.gV.applyType == "add"){
                 that.addFundDiagnosisApply()
             }else if(that.gV.applyType == 'edit'){
                 that.updateFundDiagnosisApply()
             }
-           })
+           },{
+                'htmdEvt': 'fundAccountDiagnosisResult_07'
+            })
 
            //基金勾选
             mui("body").on("mdClick",".templateTransferFundsList li input",function(){
@@ -609,6 +689,8 @@ $(function() {
             
 
                 console.log("8888",status)
+            },{
+                'htmdEvt': 'fundAccountDiagnosisResult_08'
             })
        },
       

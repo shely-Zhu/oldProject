@@ -67,7 +67,7 @@
             </div>
             <div class="msecond">
             	<span class="msecond-one">￥</span>
-                <input class="transformInput" type="text">
+                <input class="transformInput" id="transformInput" type="number">
                 <img class="clearMoney" src="/financial/static/img/icon_delete@2x.png"  alt="">
                 <span class="button tranoutAllMoney">全部</span>
              </div>
@@ -79,7 +79,7 @@
                         预计1-2个工作日到账<span class="iconfont">&#xe635;</span>
                  </div>
              	<div class="right" htmdEvt="cashTransformOut_right">
-             		<span class="transformRule">现金宝产品1转出规则</span><span class="iconfont">&#xe635;</span>
+             		<span class="transformRule"></span><span class="iconfont">&#xe635;</span>
              	</div>
              </div>
          </div>
@@ -176,7 +176,7 @@
                     <div class="bank-name"><span>{{bankName}}</span><span>(</span><span>{{carNum}}</span><span>)</span></div>
                     <div class="bank-pay">可赎回<span class="availableShare">{{availableShare}}</span>元</div>
                 </div>
-                <img class="true" src={{checkStatu}} alt="">
+                <img class="true radioCheckItemImg" src="/common/img/account_icon_check@2x.png" alt="">
             </li> 
         {{/each}}
 </script>
@@ -184,9 +184,6 @@
 
 
      @@include('@pathCommonCom/elasticLayer/transOutRule/transOutRule.html')
- 
-     <!-- 加载中loading -->
-     @@include('@pathCommonCom/loading/listLoading.html')
  
      @@include('@pathInclude/views/footer.html')
 

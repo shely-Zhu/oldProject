@@ -53,6 +53,11 @@ $(function() {
                                 $(".list").css("display", "none")
                                 that.$e.noData.show()
                             } else {
+                                $.each((data), function(a, b) {
+                                    if(b.incomeUnit == '') {
+                                        b.incomeUnit = '--'
+                                    }
+                                })
                                 def && def.resolve( data, that.gV.pageCurrent);
                                 that.gV.pageCurrent++;
                             }

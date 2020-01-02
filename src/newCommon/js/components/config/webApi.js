@@ -71,6 +71,10 @@ module.exports = function() {
     this.download_api = http_url.web_url + '/content/file/fastDFS/download'; //文件下载
     //文件下载新
     this.downloadNew_api = http_url.web_url + '/content/file/fastDFS/downloadNew'; //文件下载
+    //文件下载（金服挂载盘）
+    this.mountDownload_api = http_url.web_url + '/content/file/mount/download'; //文件下载
+     //文件下载（金服挂载盘）
+     this.frontendMountDownload_api = http_url.web_url + '/content/file/frontend/mount/download'; //入参如果是url而不是fileName的情况，可以使用此接口用于非登录下载
     // 内容管理接口
     this.findContentByCategory_api = http_url.web_url + '/content/frontend/findContentByCategory'; // 内容管理接口
 
@@ -101,7 +105,10 @@ module.exports = function() {
     this.queryIncomeList_api = http_url.web_url + '/account/pof/queryIncomeList'; //收益明细
 
     this.cashQueryIncomeList_api = http_url.web_url + '/account/pof/cash/queryIncomeList'; //超宝收益明细
-
+    this.pofAssessList_api = http_url.web_url + '/account/pof/pofAssessList'; //超宝收益明细
+    
+    //公募基金购买认证           
+    this.queryCustomerAuthInfo_api = http_url.web_url +'/pof/buyFund/queryCustomerAuthInfo';
     /*-------------------公募相关 end ------------------------------*/
 
 
@@ -314,7 +321,7 @@ module.exports = function() {
     this.prfFundNetWorthTrendChart_api = http_url.web_url + '/pof/fundDetails/frontend/fundNetWorthTrendChart'; //8.金服WEB-详情页-基金净值走势图查询
     this.prfFundCollectionQuery_api = http_url.web_url + '/pof/fundCollection/query'; //9.金服WEB-自选基金-列表查询
     this.prfQueryNoLogin_api = http_url.web_url + '/pof/fundCollection/frontend/queryNoLogin'; //10.金服WEB-自选基金-列表查询（未登录状态）
-    this.prfFundCollectionQueryCode_api = http_url.web_url + '/pof/fundCollection/queryCode'; //11.金服WEB-自选基金-代码查询
+    this.prfFundCollectionQueryCode_api = http_url.web_url + '/pof/fundCollection/frontend/queryCode'; //11.金服WEB-自选基金-代码查询
     this.prfFundCollectionMG_api = http_url.web_url + '/pof/fundCollection/manage'; //12.金服WEB-自选基金-收藏管理
     this.prfFundNetWorthList_api = http_url.web_url + '/pof/fundDetails/frontend/fundNetWorthList'; //13.金服WEB-基金历史净值-查询
     this.prfFundDividendList_api = http_url.web_url + '/pof/fundDetails/frontend/fundDividendList'; //14.金服WEB-基金分红信息-列表查询
@@ -349,6 +356,8 @@ module.exports = function() {
     this.queryReourceListByLabel_api = http_url.web_url + '/pef/queryReourceListByLabel';
     // 查询产品亮点
     this.queryProductImage_api = http_url.web_url + '/pef/queryProductImage';
+    // 意见认证和开户弹框
+    this.popReal_api = http_url.web_url + '/mine/views/popReal.html';
 
 
     /*------------------------------------ 私募接口文档 end -------------------------------------*/
@@ -361,7 +370,7 @@ module.exports = function() {
     this.findMessageCenterById_api = http_url.web_url + '/content/frontend/findMessageCenterById'; //证监会要求查看详情
 
     this.queryTransferFunds_api = http_url.web_url + '/account/queryTransferFunds'; // 查询基金列表
-    // this.newFundDetails_api = http_url.web_url + '/pof/fundDetails/frontend/newfundDetails'; //基金年化查询
+    this.newfundDetailList_api = http_url.web_url + '/pof/fundDetails/frontend/newfundDetailList'; //基金年化查询
     this.redemptionPay_api = http_url.web_url + '/pof/redemptionPay/redemptionPay'; //赎回确认
     this.findProtocolBasic_api = http_url.web_url + '/content/findProtocolBasic'; //进入基金转出页面调用
     this.cashList_api = http_url.web_url + '/account/bankCard/cashList'; //查询银行卡转出

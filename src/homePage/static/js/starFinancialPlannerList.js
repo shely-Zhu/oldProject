@@ -9,6 +9,7 @@ require('@pathCommonJsCom/goTopMui.js');
 var alwaysAjax = require('@pathCommonJs/components/alwaysAjax.js');
 var splitUrl = require('@pathCommonJs/components/splitUrl.js')();
 var generateTemplate = require('@pathCommonJsComBus/generateTemplate.js');
+require('@pathCommonCom/elasticLayer/elasticLayer/elasticLayer.js');
 
 $(function() {
     var activityList = {
@@ -31,17 +32,42 @@ $(function() {
                 actName: $('.activitySearchInput input').val(), //活动名称
                 actProvinceNO: $('#locationCity').attr('data-parentid'), //活动省份编号
                 actCityNO: $('#locationCity').attr('data-code'), //活动城市编号
+                FinancialerClickFlag: true // true 表示可点击 false 表示不可点击
             },
             //初始化
             init: function() {
-                var that = this;
-                // that.getCityListData();
-                $('.activityNoList').css({
-                    'margin-top': '.3rem'
-                });
-                that.getCity();
-                that.events();
-
+                // 判断入口，为1时是用户绑定完理财师后跳转过来
+                if(splitUrl['type'] == 1) {
+                    // 绑定成功理财师提示用户已绑定成功
+                    $.elasticLayer({
+                        id: "tip",
+                        title: '绑定成功',
+                        p: '<p class="text_left">您心仪的理财师将会在一个工作日内与您联系，请耐心等待并保持手机畅通。</p><div class="warmPrompt">如有疑问，请致电客服热线：<span class="hintNumber">400-8980-618</span></div>',
+                        zIndex: 100,
+                        yesButtonPosition: 'right',
+                        hideCelButton: false,
+                        yesTxt: '浏览产品',
+                        celTxt: '返回首页',
+                        htmdEvtYes:'starFinancialPlannerList_08',  // 埋点确定按钮属性
+                        htmdEvtCel:'starFinancialPlannerList_09',  // 埋点取消按钮属性
+                        callback: function() {
+                            // 点击浏览产品跳转理财首页
+                            window.location.href = site_url.wealthIndex_url
+                        },
+                        callbackCel: function() {
+                            // 点击返回首页跳转首页
+                            window.location.href = site_url.index_url
+                        }
+                    });
+                } else {
+                    var that = this;
+                    // that.getCityListData();
+                    $('.activityNoList').css({
+                        'margin-top': '.3rem'
+                    });
+                    that.getCity();
+                    that.events();
+                }
             },
             //初始化mui的上拉加载
             initMui: function() {
@@ -85,7 +111,6 @@ $(function() {
             //有数据获取列表
             getData: function(t) {
                 var that = this;
-                that.$e.listLoading.show();
                 var obj = [{ // 系统调仓记录列表
                     url: site_url.queryFinancialer_api,
                     // url:'http://172.16.187.164:8081/web/marketing/activity/getActivitiesList',
@@ -128,7 +153,6 @@ $(function() {
                             generateTemplate(data, that.$e.recordList, that.$e.starFinancialPlannerListTemplateId)
                                 //无缝滚动
                             alwaysAjax($(".recordList"))
-                            that.$e.listLoading.hide();
                             $(".lazyload").lazyload()
 
                         }, 200)
@@ -322,7 +346,7 @@ $(function() {
                     $('#loading').show();
                     that.getCityListData();
                 }, {
-                    'htmdEvt': 'starFinancia_00'
+                    'htmdEvt': 'starFinancialPlannerList_00'
                 });
                 //点击定位选择效果
                 mui("body").on('mdClick', '#cityListBox .mui-indexed-list-item,.hotBox span', function() {
@@ -347,7 +371,7 @@ $(function() {
                     $('.activitySearchInput').width(activitySearchInputWidth);
                     mui('.contentWrapper').pullRefresh().scrollTo(0, 0, 100);
                 }, {
-                    'htmdEvt': 'starFinancia_01'
+                    'htmdEvt': 'starFinancialPlannerList_01'
                 });
                 //点击定位选择头部返回效果
                 mui("body").on('mdClick', '#cityListBox .goBack', function() {
@@ -355,7 +379,7 @@ $(function() {
                     $('#activityDataBox').show();
                     mui('.contentWrapper').pullRefresh().scrollTo(0, 0, 10);
                 }, {
-                    'htmdEvt': 'starFinancia_02'
+                    'htmdEvt': 'starFinancialPlannerList_02'
                 });
                 //点击定位选择右侧索引效果
                 mui("body").on('mdClick', '#cityListBox .mui-indexed-list-bar a', function() {
@@ -369,21 +393,102 @@ $(function() {
                         }
                     }
                 }, {
-                    'htmdEvt': 'starFinancia_03'
+                    'htmdEvt': 'starFinancialPlannerList_03'
                 });
-                // //点击活动列表跳转
-                // mui('body').on('mdClick', '.mui-card', function() {
-                //     var actType = $(this).children('a').attr('data-actType');
-                //     var actId = $(this).children('a').attr('data-actId');
-                //     window.location.href = site_url.activityDetails_url + '?actType=' + actType + '&' + 'actId=' + actId;
-                // }, {
-                //     'htmdEvt': 'starFinancia_04'
-                // });
+                //点击活动列表跳转
+                mui('body').on('mdClick', '.mui-card', function() {
+                    var financialerId = $(this).attr("code")
+                    // 登陆状态下先判断该用户是否绑定过理财师，未登录状态下直接跳转开户页面
+                    // 先判断该用户是否绑定过理财师
+                    if(that.gV.FinancialerClickFlag) {
+                        that.gV.FinancialerClickFlag = false
+                        var obj=[{
+                            url: site_url.queryMyFinancialerList_api,
+                            data:{},
+                            needLogin: true, //需要判断登录是否过期
+                            needDataEmpty: true,
+                            callbackDone: function(json) {
+                                // 绑定过理财师提示用户已绑定
+                                var data = json.data.exclusiveFinancialerList || []
+                                if(data.length > 0) {
+                                    $.elasticLayer({
+                                        id: "tip",
+                                        title: '温馨提示',
+                                        p: '<p>您已经绑定过理财师，请勿重复绑定</p>',
+                                        zIndex: 100,
+                                        yesButtonPosition: 'right',
+                                        hideCelButton: true,
+                                        yesTxt: '明白了',
+                                        htmdEvtYes:'starFinancialPlannerList_10',
+                                        callback: function() {
+                                            that.gV.FinancialerClickFlag = true  
+                                        },
+                                        // callbackCel: function() {
+                                        //     that.gV.FinancialerClickFlag = true 
+                                        // }
+                                    });
+                                // 未绑定过理财师则先提示用户只能绑定一个用户，再跳转验证用户身份页面
+                                } else {
+                                    $.elasticLayer({
+                                        id: "tip",
+                                        title: '温馨提示',
+                                        p: '<p>立即绑定理财师 享受一对一专属服务</p><div class="warmPrompt">*为了给您提供专属理财服务，您只能绑定一位理财师，请您慎重考虑*</div>',
+                                        zIndex: 100,
+                                        yesButtonPosition: 'right',
+                                        hideCelButton: false,
+                                        yesTxt: '立即绑定',
+                                        htmdEvtYes:'starFinancialPlannerList_12',
+                                        htmdEvtCel:'starFinancialPlannerList_13',
+                                        callback: function() {
+                                            // 点击立即绑定跳转验证用户身份页面
+                                            window.location.href = site_url.bindFinancialer_url + '?financialerId=' + financialerId + '&type=1'
+                                        },
+                                        callbackCel: function() {
+                                            that.gV.FinancialerClickFlag = true 
+                                        }
+                                    }); 
+                                }          
+                            },
+                            callbackNoData: function() {
+                                $.elasticLayer({
+                                    id: "tip",
+                                    title: '温馨提示',
+                                    p: '<p>立即绑定理财师 享受一对一专属服务</p><div class="warmPrompt">*为了给您提供专属理财服务，您只能绑定一位理财师，请您慎重考虑*</div>',
+                                    zIndex: 100,
+                                    yesButtonPosition: 'right',
+                                    hideCelButton: false,
+                                    yesTxt: '立即绑定',
+                                    htmdEvtYes:'starFinancialPlannerList_14',
+                                    htmdEvtCel:'starFinancialPlannerList_15',
+                                    callback: function() {
+                                        // 点击立即绑定跳转验证用户身份页面
+                                        window.location.href = site_url.bindFinancialer_url + '?financialerId=' + financialerId + '&type=1'
+                                    },
+                                    callbackCel: function() {
+                                        that.gV.FinancialerClickFlag = true 
+                                    }
+                                });
+                            },
+                            callbackFail: function(data) {
+                                that.gV.FinancialerClickFlag = true
+                                tipAction(data.message)
+                            }
+                        }];                        
+                        $.ajaxLoading(obj);
+                    }
+                    /*var actType = $(this).children('a').attr('data-actType');
+                    var actId = $(this).children('a').attr('data-actId');
+                    window.location.href = site_url.activityDetails_url + '?actType=' + actType + '&' + 'actId=' + actId;*/
+                }, {
+                    'htmdEvt': 'starFinancialPlannerList_04'
+                });
                 //搜索框输入触发查询数据
                 mui('#activitySearch').on('keyup', '.activitySearchInput input', function() {
                     // $(this).attr('htmdEvt','starFinancia_search')
                     $('.recordList').html('');
                     // $('#loading').show();
+                    $(".activityCityBox").hide()
+                    $(".Cutof").show()
                     that.gV.startPage = 1;
                     console.log($('.mui-input-clear').val())
                     setTimeout(function() {
@@ -391,7 +496,26 @@ $(function() {
                     }, 400)
                     mui('.contentWrapper').pullRefresh().scrollTo(0, 0, 100);
                 });
-
+                $(".activitySearchInput input").focus(function(){
+                    $(".activityListDataBox").hide()
+                    $(".activityCityBox").hide()
+                    $(".Cutof").show()
+                })
+                mui('body').on('mdClick', '.Cutof', function() {
+                // $(".Cutof").click(function(){
+                    $(".activityListDataBox").show()
+                    $(".activityCityBox").show()
+                    $(".Cutof").hide()
+                    $(".mui-input-clear").attr("placeholder","")
+                    if($(".mui-input-clear").val() != ""){
+                        $(".mui-input-clear").val("")
+                        $(".mui-input-clear").attr("placeholder","请输入理财师工号或姓名")
+                      
+                    }
+                    that.initMui();
+                },{
+                    'htmdEvt': 'starFinancialPlannerList_16'
+                })
                 //清除搜索框触发查询数据
                 mui('body').on('mdClick', '#activitySearch .mui-icon-clear', function() {
                     $('.recordList').html('');
@@ -400,7 +524,7 @@ $(function() {
                     that.initMui();
                     mui('.contentWrapper').pullRefresh().scrollTo(0, 0, 100);
                 }, {
-                    'htmdEvt': 'starFinancia_05'
+                    'htmdEvt': 'starFinancialPlannerList_05'
                 });
 
                 // mui("body").on('tap', '.goTopBtn', function () {
@@ -416,7 +540,7 @@ $(function() {
                 mui('body').on('mdClick', '.activitySearchInput *', function() {
                     $('.activitySearchInput').children('input').focus();
                 }, {
-                    'htmdEvt': 'starFinancia_06'
+                    'htmdEvt': 'starFinancialPlannerList_06'
                 });
                 //返回上一页
                 mui("body").on('mdClick', '#goBack', function() {
@@ -438,7 +562,7 @@ $(function() {
                     }
 
                 }, {
-                    'htmdEvt': 'starFinancia_07'
+                    'htmdEvt': 'starFinancialPlannerList_07'
                 })
             }
         }

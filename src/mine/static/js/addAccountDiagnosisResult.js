@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2019-12-09 15:53:31
- * @LastEditTime: 2019-12-16 14:33:45
+ * @LastEditTime: 2019-12-17 18:28:53
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \htjf-app\src\mine\static\js\fundAccountDiagnosisResult.js
@@ -9,15 +9,12 @@
 
 require('@pathCommonBase/base.js');
 require('@pathCommonJs/ajaxLoading.js');
-// require('@pathCommonJs/components/elasticLayer.js');
-// require('@pathCommonJs/components/elasticLayerTypeTwo.js');
 require('@pathCommonJs/components/headBarConfig.js');
 require('@pathIncludJs/vendor/mui/mui.picker.min.js');
 var tipAction = require('@pathCommonJs/components/tipAction.js');
 var splitUrl = require('@pathCommonJs/components/splitUrl.js')();
 var generateTemplate = require('@pathCommonJsComBus/generateTemplate.js');
 require('@pathCommonCom/elasticLayer/elasticLayer/elasticLayer.js'); 
-// require('@pathCommonJs/components/elasticLayerTypeTwo.js');
 
 
 $(function() {
@@ -44,6 +41,7 @@ $(function() {
             var dtPicker = new mui.DtPicker({
                 type:'date'
             }); 
+            // 购买日期选择
             mui("body").on("mdClick",".mui-icon-arrowright",function(){
                 var type = $(this).attr("type");
                 $('.popup').css('display', 'block')
@@ -52,6 +50,8 @@ $(function() {
                     that.gV.dataPickData=selectItems.value;
                     $('.popup').css('display', 'none')
                 })
+            },{
+                'htmdEvt': 'addAccountDiagnosisResult_01'
             })
             dtPicker.hide(function (selectItems) { 
                 that.gV.dataPickData=selectItems.value;
@@ -62,6 +62,8 @@ $(function() {
                 $('.popup').css('display', 'none')
                 console.log(that.gV.dataPickData)
                 $(".dataPick")[0].textContent = that.gV.dataPickData
+            },{
+                'htmdEvt': 'addAccountDiagnosisResult_02'
             })
             //确认按钮
             mui("body").on("mdClick",".comfirmButtom .mui-btn-warning",function(){
@@ -80,13 +82,12 @@ $(function() {
                     if(sessionStorage.getItem("addAccountDiagnosisResultList")){
                          var list = JSON.parse(sessionStorage.getItem("addAccountDiagnosisResultList"));
                          //list.push(obj);
-                         
-                         // list.forEach(function(item){
-                         //     arr.push(item)
-                         // })
-                         for(var i = 0 ; i < list.length; i++) {
-                            arr.push(list[i])
+                         if(list){
+                            list.forEach(function(item){
+                                arr.push(item)
+                            })
                          }
+                         
                          arr.push(obj)
                          sessionStorage.setItem("addAccountDiagnosisResultList",JSON.stringify(arr))
                     }else{
@@ -98,6 +99,8 @@ $(function() {
                 }else{
                     $(".warmMessage").show()
                 }
+            },{
+                'htmdEvt': 'addAccountDiagnosisResult_03'
             })
          
        },

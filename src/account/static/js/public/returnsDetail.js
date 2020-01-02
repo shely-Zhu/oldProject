@@ -49,7 +49,7 @@ $(function() {
                         },                        
                         needDataEmpty: true,
                         callbackDone: function(json) {     
-                            var data = json.data.list;
+                            var data = json.data.pageList ||[];
                             if(that.gV.pageCurrent == 1 && data.length == 0) {
                                 $(".list").css("display", "none")
                                 that.$e.noData.show()

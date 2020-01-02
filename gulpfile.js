@@ -11,7 +11,7 @@
  *
  * gulp-babel使用记录：
  * 1. 版本使用7.9.1的版本，不能使用8，8以上的版本引用的babel-core为@babel/core，不适用于当前项目
- * 
+ *
  */
 
 var gulp = require('gulp'),
@@ -47,7 +47,7 @@ var gulp = require('gulp'),
     webpackList = Object.assign(webpackList, newWebpackList);
 
     var prefix = '//static.chtfund.com';//cdn服务地址
-    
+
     // var prefix = 'http://172.16.187.170:8008';
 
 // var webpackStream = require('webpack-stream');
@@ -208,23 +208,13 @@ gulp.task('proxyTask', function() {
         middleware: function(connect, opt) {
             return [
                 proxy('/app', {
-                    // target: 'https://app.htjf4.com',
+                    target: 'https://app.htjf4.com',
                     // target: 'http://172.16.187.129:8080',//李亚楠
                     // target: 'http://192.168.50.254:8085',
-                    target: 'https://app.chtfundtest.com',
+                    //target: 'https://app.chtfundtest.com',
                     changeOrigin: true,
                     secure: false,
                 }),
-
-                proxy(['/wap', '/web/', '/jf/'], {
-                    // target: 'https://h5.htjf4.com',
-                    //  target: 'http://172.16.187.129:8080',//李亚楠
-                    // target: 'http://172.16.187.164:8081',
-                    target: 'https://h5.chtfundtest.com',
-                    changeOrigin: true,
-                    secure: false,
-                }),
-
             ]
         }
     });
@@ -271,7 +261,7 @@ if (options.env === '0') { //当开发环境的时候构建命令执行mock服�
 
 /**此任务默认执行，gulp启动时，先将所有文件打包一次**/
 gulp.task('initialTask', function(cb) {
-    plugins.sequence('clean', 'images', 'font', 'allServerResources', 'includeJs', 'includeCss', 'cssToHost', 'webpack', 'bfRev', 'html', 'rev', 'rootEnv', cb);
+    plugins.sequence('clean', 'images', 'font', 'allServerResources', 'allServerResourcesFont', 'includeJs', 'includeCss', 'cssToHost', 'webpack', 'bfRev', 'html', 'rev', 'rootEnv', cb);
 });
 
 
@@ -556,6 +546,7 @@ gulp.task("changePath", function(cb) {
     ], cb)
 })
 
+
 gulp.task("commonHtml", function(cb) {
 
     pump([
@@ -564,6 +555,17 @@ gulp.task("commonHtml", function(cb) {
         gulp.dest('middle/js/common/views')
 
     ], cb)
+
+
+gulp.task('allServerResourcesFont', function() {
+        return gulp.src('src/allServerResources/include/fonts/*')
+            .pipe(gulp.dest(host.path + 'allServerResources/include/fonts'));
+    })
+    //allServerResources中include文件的打包
+gulp.task('allServerResources', function() {
+    return gulp.src('src/allServerResources/include/*')
+        .pipe(gulp.dest(host.path + 'allServerResources/include'));
+
 })
 
 
@@ -575,11 +577,11 @@ gulp.task("webpack", ['jsCpd', 'changePath', 'commonHtml'], function(cb) {
 
         // gulp.src( ['src/**/*.js', '!src/common/**/*.js', '!src/newCommon/**/*.js', '!src/include/js/vendor/**/*.js', '!src/allServerResources/include/js/vendor/**/*.js']),
 
-        // named(), 
+        // named(),
         gulp.src( ['src/**/*.js'] ),
 
         plugins.webpack(webpackConfig),
-        
+
         // webpackStream(webpackConfig),
 
         // plugins.babel({
@@ -627,8 +629,8 @@ gulp.task("webpack", ['jsCpd', 'changePath', 'commonHtml'], function(cb) {
             var newJson = {};
             for( var i in json ){
                 newJson['/' + i] = prefix + '/' + json[i];
-            } 
-            return newJson; 
+            }
+            return newJson;
         }),
 
         gulp.dest(host.path + 'rev/js')
@@ -643,11 +645,6 @@ gulp.task("allServerResourcesIncludeRoot", function( cb ) {
 
         gulp.src(['src/allServerResources/include/js/vendor/root.js']),
 
-        // plugins.babel({
-        //     compact: false,
-        //     presets: ['env'],
-        //     plugins: ['transform-runtime']
-        // }),
 
         //与host.path中的内容做比对
         plugins.changed(host.path, { hasChanged: plugins.changed.compareSha1Digest }),
@@ -663,7 +660,7 @@ gulp.task("allServerResourcesIncludeRoot", function( cb ) {
         })),
 
         //对root.js做一些修改
-        
+
         through.obj(function(file, enc, cb) {
 
             if ( options.env == '0' || options.env == "5") {
@@ -684,7 +681,7 @@ gulp.task("allServerResourcesIncludeRoot", function( cb ) {
             this.push(file);
             cb()
         }),
-    
+
 
         plugins.rev(),
 
@@ -697,8 +694,8 @@ gulp.task("allServerResourcesIncludeRoot", function( cb ) {
             var newJson = {};
             for( var i in json ){
                 newJson['/allServerResources/include/js/vendor/' + i] = prefix + '/allServerResources/include/js/vendor/' + json[i];
-            } 
-            return newJson; 
+            }
+            return newJson;
         }),
 
         gulp.dest(host.path + 'rev/allServerResources/include/js/root')
@@ -731,6 +728,15 @@ gulp.task("allServerResourcesInclude", ['allServerResourcesIncludeRoot'],  funct
             }
         })),
 
+    // .pipe(plugins.if(options.env === '3' || options.env === '4', plugins.uglify({ //压缩
+    //     mangle: false, //类型：Boolean 默认：true 是否修改变量名
+    //     compress: false, //类型：Boolean 默认：true 是否完全压缩
+    //     output: {
+    //         beautify: true //只去注释，不压缩成一行
+    //     }
+    // })))
+
+
         plugins.rev(),
 
         gulp.dest(host.path + 'allServerResources/include/'),
@@ -742,8 +748,8 @@ gulp.task("allServerResourcesInclude", ['allServerResourcesIncludeRoot'],  funct
             var newJson = {};
             for( var i in json ){
                 newJson['/allServerResources/include/' + i] = prefix + '/allServerResources/include/' + json[i];
-            } 
-            return newJson; 
+            }
+            return newJson;
         }),
 
         gulp.dest(host.path + 'rev/allServerResources/include/js')
@@ -778,7 +784,7 @@ gulp.task("includeRoot", function( cb ) {
         })),
 
         //对root.js做一些修改
-        
+
         through.obj(function(file, enc, cb) {
 
             if ( options.env == '0' || options.env == "5") {
@@ -799,7 +805,7 @@ gulp.task("includeRoot", function( cb ) {
             this.push(file);
             cb()
         }),
-        
+
 
         //打版本号
         plugins.rev(),
@@ -813,8 +819,8 @@ gulp.task("includeRoot", function( cb ) {
             var newJson = {};
             for( var i in json ){
                 newJson['/include/js/vendor/' + i] = prefix + '/include/js/vendor/' + json[i];
-            } 
-            return newJson; 
+            }
+            return newJson;
         }),
 
         gulp.dest( host.path + 'rev/include/js/root')
@@ -849,7 +855,7 @@ gulp.task("includeJs", ['allServerResourcesInclude', 'includeRoot'], function( c
             }
         })),
 
-        
+
         plugins.rev(),
 
         gulp.dest(host.path + 'include/'),
@@ -861,8 +867,8 @@ gulp.task("includeJs", ['allServerResourcesInclude', 'includeRoot'], function( c
             var newJson = {};
             for( var i in json ){
                 newJson['/include/' + i] = prefix + '/include/' + json[i];
-            } 
-            return newJson; 
+            }
+            return newJson;
         }),
 
         gulp.dest( host.path + 'rev/include/js')
@@ -887,7 +893,7 @@ gulp.task("cssToHost", function( cb ) {
             this.push(file);
             cb()
         }),
-    
+
 
         plugins.less(),
 
@@ -902,7 +908,7 @@ gulp.task("cssToHost", function( cb ) {
             this.push(file);
             cb()
         }),
-    
+
 
         //与host.path中的内容做比对
         plugins.changed(host.path, { hasChanged: plugins.changed.compareSha1Digest }),
@@ -910,7 +916,7 @@ gulp.task("cssToHost", function( cb ) {
         plugins.if(isWatch, plugins.debug({ title: 'css-有变动的文件:' })),
 
         //修改当前文件的路径，将less替换为css
-    
+
         through.obj(function(file, enc, cb) {
             //修改当前文件的路径到host.path下，且替换路径中的less为css
             file.path = file.path.replace('less', 'css');
@@ -939,8 +945,8 @@ gulp.task("cssToHost", function( cb ) {
             var newJson = {};
             for( var i in json ){
                 newJson['/' + i] = prefix + '/' + json[i];
-            } 
-            return newJson; 
+            }
+            return newJson;
         }),
 
         gulp.dest(host.path + 'rev/css/')
@@ -952,13 +958,13 @@ gulp.task("cssToHost", function( cb ) {
 /*******************css打包任务**************************/
 
 gulp.task("allServerResourcesCss", function( cb ) {
-    
+
     pump([
         gulp.src('src/allServerResources/include/css/*'),
 
         //也加上压缩处理
         plugins.if(options.env === '3' || options.env === '4', plugins.cssnano({ autoprefixer: false, zindex: false })),
-        
+
         plugins.rev(),
 
         gulp.dest(host.path),
@@ -970,8 +976,8 @@ gulp.task("allServerResourcesCss", function( cb ) {
             var newJson = {};
             for( var i in json ){
                 newJson['/allServerResources/include/css/' + i] = prefix + '/allServerResources/include/css/' + json[i];
-            } 
-            return newJson; 
+            }
+            return newJson;
         }),
 
         gulp.dest( host.path + 'rev/allServerResources/include/css')
@@ -981,13 +987,13 @@ gulp.task("allServerResourcesCss", function( cb ) {
 
 
 gulp.task("includeCss", ['allServerResourcesCss'], function( cb ) {
-    
+
     pump([
         gulp.src(includeCssSrc),
 
         //也加上压缩处理
         plugins.if(options.env === '3' || options.env === '4', plugins.cssnano({ autoprefixer: false, zindex: false })),
-        
+
         plugins.rev(),
 
         gulp.dest(host.path),
@@ -999,8 +1005,8 @@ gulp.task("includeCss", ['allServerResourcesCss'], function( cb ) {
             var newJson = {};
             for( var i in json ){
                 newJson['/include/' + i] = prefix + '/include/' + json[i];
-            } 
-            return newJson; 
+            }
+            return newJson;
         }),
 
         gulp.dest( host.path + 'rev/include/css')
@@ -1011,8 +1017,8 @@ gulp.task("includeCss", ['allServerResourcesCss'], function( cb ) {
 
 /**********************图片打包任务*******************************/
 
-gulp.task('commonImages', function( cb ) {        
-    
+gulp.task('commonImages', function( cb ) {
+
     pump([
         gulp.src(['src/newCommon/**/*.{jpg,png,jpeg,svg,gif}']),
 
@@ -1029,11 +1035,20 @@ gulp.task('commonImages', function( cb ) {
             var newJson = {};
             for( var i in json ){
                 newJson['/allServerResources/include/commonImg/' + i] = prefix + '/allServerResources/include/commonImg/' + json[i];
-            } 
-            return newJson; 
+            }
+            return newJson;
         }),
 
+
         gulp.dest(host.path + 'rev/allServerResources/include/commonImg/')
+
+        //预上线环境时，去掉Log并压缩
+        plugins.if(options.env === '3' || options.env === '4', plugins.removelogs()),
+        // plugins.if(options.env === '3' || options.env === '4', plugins.uglify({ //压缩
+        //     mangle: false, //类型：Boolean 默认：true 是否修改变量名
+        //     compress: false
+        // })),
+
 
     ], cb)
 });
@@ -1055,8 +1070,8 @@ gulp.task('images', ['commonImages'], function( cb ) {
             var newJson = {};
             for( var i in json ){
                 newJson['/' + i] = prefix + '/' + json[i];
-            } 
-            return newJson; 
+            }
+            return newJson;
         }),
 
         gulp.dest( host.path + 'rev/img/')
@@ -1085,8 +1100,8 @@ gulp.task('font', function( cb ) {
             var newJson = {};
             for( var i in json ){
                 newJson['/include/fonts/' + i] = prefix + '/include/fonts/' + json[i];
-            } 
-            return newJson; 
+            }
+            return newJson;
         }),
 
         gulp.dest(host.path + 'rev/include/fonts')
@@ -1111,8 +1126,8 @@ gulp.task('allServerResources', function( cb ) {
             var newJson = {};
             for( var i in json ){
                 newJson['/allServerResources/include/fonts/' + i] = prefix + '/allServerResources/include/fonts/' + json[i];
-            } 
-            return newJson; 
+            }
+            return newJson;
         }),
 
         gulp.dest( host.path + 'rev/allServerResources/include/fonts')
@@ -1160,20 +1175,18 @@ gulp.task('html', function(cb) {
 
             var dcDomain = 'http://localhost:9099';
 
-            if( options.env == 2){
+            if (options.env == 2) {
                 //测试环境
                 dcDomain = 'https://dc.qasa.chtwm.com';
-            }
-            else if( options.env == 3){
+            } else if (options.env == 3) {
                 //预生产
                 dcDomain = 'https://dc.uata.haomalljf.com';
-            }
-            else if( options.env == 4){
+            } else if (options.env == 4) {
                 //生产
                 dcDomain = 'https://dc.chtwm.com';
             }
 
-            fileCon = fileCon.replace('@dcDomain', dcDomain );
+            fileCon = fileCon.replace('@dcDomain', dcDomain);
 
             file.contents = new Buffer(fileCon);
 
@@ -1306,7 +1319,7 @@ gulp.task('rootEnv', function() {
         for (var i = 0; i < rootName.length; i++) {
 
             (function(i) {
-                gulp.src(['src/include/js/vendor/root.js']) //- 读取 rev-manifest.json 文件
+                gulp.src(['src/allServerResources/include/js/vendor/root.js']) //- 读取 rev-manifest.json 文件
                     .pipe(
                         through.obj(function(file, enc, cb) {
                             //if (options.env != '0' ) {

@@ -28631,11 +28631,11 @@ function (_Annotation) {
 
     data.readOnly = _this2.hasFieldFlag(_util.AnnotationFieldFlag.READONLY);
 
-    if (data.fieldType === 'Sig') {
-      data.fieldValue = null;
+//  if (data.fieldType === 'Sig') {
+//    data.fieldValue = null;
 
-      _this2.setFlags(_util.AnnotationFlag.HIDDEN);
-    }
+//    _this2.setFlags(_util.AnnotationFlag.HIDDEN);
+//  }
 
     return _this2;
   }

@@ -48,7 +48,7 @@
 				</div>
 			</div>
 			<!-- 浮收产品展示 -->
-			<div class="privateDetailList floatProfit">
+			<div class="privateDetailList floatProfit hide">
 				<div class="netValueWord"><span class="iconfont tipIcon">&#xe60a;</span>单位净值(元)(<span class="netValueDate"></span>)</div>
 				<div class="mui-row productInfoList">
 					<!-- 单位净值 -->
@@ -72,7 +72,7 @@
 				</div>
 			</div>
 			<!-- 浮收稳裕 -->
-			<div class="privateDetailList floatProfitWy">
+			<div class="privateDetailList floatProfitWy hide">
 				<div class="netValueWord"><span class="iconfont tipIcon">&#xe60a;</span>七日年化(<span class="netValueDate"></span>)</div>
 				<div class="mui-row productInfoList">
 					<!-- 单位净值 -->
@@ -110,7 +110,7 @@
 					<!-- 基本信息 start -->
 					<div class="panel panel1 active">
 						<!-- 私募基金产品详情折线图 -->
-						<div class="lineWrap">
+						<div class="lineWrap hide">
 							<div class="clearfix titleWrap typeNo5Wrap">
 								<span class="title qrnh activeLine">七日年化</span>
 								<span class="title wfsy hide">历史业绩走势</span>
@@ -128,10 +128,10 @@
 								<!-- 无数据提示 -->
 								<div class="hide noDataHintEcharts">暂无数据</div>
 								<div class='history tab'>
-									<span class="time oneMonth active"  num="0">月</span>
+									<span class="time oneMonth"  num="0">月</span>
 									<span class="time threeMonth"  num="1">季</span>
 									<span class="time halfYear"  num="2">半年</span>
-									<span class="time newYear"  num="3">一年</span>
+									<span class="time newYear active"  num="3">一年</span>
 									<span class="time sinceNow"  num="4">成立来</span>
 								</div>
 							</div>
@@ -140,10 +140,8 @@
 						<!-- 业绩比较基准说明 -->
 						<div class="textContainner performanceComparison hide">
 							<div class="textTitle">业绩比较基准说明</div>
-							<div class="detailText">
-								<div class="productRate ">100万(含)～300万<span></span></div>
-								<div class="productRate ">300万(含)～1000万<span></span></div>
-								<div class="productRate ">1000万<span></span></div>
+							<div class="detailText performance">
+								
 							</div>
 						</div>
 
@@ -201,7 +199,7 @@
 
 					<!-- 交易须知 start -->
 					<div class="panel panel2">
-						<div class="textContainner">
+						<div class="textContainner productRateHeader">
 							<div class="textTitle">产品费率</div>
 							<div class="detailText">
 								<div class="productRate productRateBuy">认购费率<span></span></div>
@@ -248,14 +246,14 @@
 									
 								</div>
 								<!-- 赎回开放频率 -->
-								<div class="textContent">
+								<div class="textContent redemptionOpenFrequency">
 									<div class="textTitle">赎回开放频率</div>
-									<div class="detailText redemptionOpenFrequency">
+									<div class="detailText">
 										
 									</div>
 								</div>
 								<!-- 募集账户信息 -->
-								<div class="textContent">
+								<div class="textContent productRateContainer">
 									<div class="textTitle">募集账户信息</div>
 									<div class="collectAccount">
 										<ul>
@@ -330,8 +328,8 @@
 				<div class="detailText">
 					{{#each displayGrounp}}
 						<div class="content contentLink" href="{{href}}">
-							<p class="contentTitle">{{groupName}}<span>{{fileDate}}</span></p>
-							<p class="contentLink">{{fileName}}</p>
+							<p class="contentTitle">{{name}}<span>{{fileDate}}</span></p>
+							<p class="contentLink">{{marName}}</p>
 						</div>
 					{{/each}}
 				</div>
@@ -355,6 +353,17 @@
 					<!--{{/if}}-->
 		{{/each}}
 	</script>
+
+	<script id="prvLevel" type="text/x-handlebars-template">
+	  {{! 左侧页面列表}}
+		{{#each this}}
+			{{#if bool}}
+				<div class="productRate"><p class="invRange">{{benifitLowerLimit}}万(含)-{{benifitUpperLimit}}万</p><p class="invResult">{{benifitRate}}%</p></div>
+			{{else}}
+				<div class="productRate"><p class="invRange">{{benifitLowerLimit}}万(含)以上</p><p class="invResult">{{benifitRate}}%</p></div>
+			{{/if}}
+		{{/each}}
+	</script> 
 	
 </body>
 	@@include('@pathInclude/views/footer.html')

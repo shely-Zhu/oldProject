@@ -16,7 +16,7 @@ require('@pathCommonBase/base.js');
 //var tipAction = require('@pathCommonJs/components/tipAction.js');
 //var tipAction = require('@pathCommonJsCom/tipAction.js');
 require('@pathCommonJsCom/utils.js');
-require('@pathCommonJsCom/headBarConfig.js');
+// require('@pathCommonJsCom/headBarConfig.js');
 require('@pathCommonJs/ajaxLoading.js');
 
 var splitUrl = require('@pathCommonJsCom/splitUrl.js')();
@@ -85,18 +85,7 @@ $(function () {
                     that.$e.contentWrap.html(resData.content);
 
                     that.$e.artImg.find("img").attr("src", resData.imageAttachUrl);//头部图片
-                    that.$e.artTitle.find("p").html(resData.title);//文章title
 
-                    //如果音频路径不为空的话则隐藏音频dom元素
-                    if (resData.voiceAttachUrl.length != 0) {
-
-                        that.$e.audioArea.show();
-                        that.$e.audioDisc.html(resData.voiceAttachName);
-                        that.$e.audioTime.find("span").eq(1).html(resData.fileSize);
-                        that.$e.aud.attr("src", resData.voiceAttachUrl);//音频路径
-                        //调用音频方法
-                        playAudio(resData.voiceAttachUrl,resData.voiceAttachName,resData.fileSize);
-                    }
 
                     //如果视频路径不为空的话则显示播放按钮，给图片赋值视频地址
                     if (resData.videoExternalUrl.length != 0) {
@@ -116,15 +105,27 @@ $(function () {
                             "padding": "0"
                         })
 
-                    }/*else if(resData.h5Type == "2") {
+                    }else if(resData.h5Type == "2") {
 
 
-                        //that.$e.artHeaderCont.show();
+                        that.$e.artTitle.find("p").html(resData.title);//文章title
+
+                        //如果音频路径不为空的话则隐藏音频dom元素
+                        if (resData.voiceAttachUrl.length != 0) {
+
+                            that.$e.audioArea.show();
+                            that.$e.audioDisc.html(resData.voiceAttachName);
+                            that.$e.audioTime.find("span").eq(1).html(resData.fileSize);
+                            that.$e.aud.attr("src", resData.voiceAttachUrl);//音频路径
+                            //调用音频方法
+                            playAudio(resData.voiceAttachUrl,resData.voiceAttachName,resData.fileSize);
+                        }
 
 
-                    }*/else if (resData.h5Type == "3") {//产品推荐
+                    }else if (resData.h5Type == "3") {//产品推荐
                         //给底部按钮加文字和跳转链接
-                        that.$e.btnButton.html(resData.buttonLabel).show();
+                         that.$e.btnButton.show();
+                        that.$e.btnHref.html(resData.buttonLabel).show();
 
                         that.gV.fundCode = resData.recomCodes;
 
@@ -163,8 +164,7 @@ $(function () {
         events() {
             var that = this;
 
-            that.$e.btnHref.on('tap', function () {
-
+            mui("body").on('mdClick', '.btnHref', function() {
                 //1-超级现金宝;2-货币型普通基金;3-私募基金;4-超宝产品列表;5-私募产品列表；6-非货币型普通基金
                 //后续找小宇确认跳转逻辑和连接
                 if (that.recomTypes == "1") {//1-超级现金宝
@@ -191,12 +191,16 @@ $(function () {
 
                     window.location.href = site_url.pofPublicDetail_url + "?fundCode=" + that.gV.fundCode + "&fundType";//非货币型普通基金
                 }
+            },{
+                'htmdEvt': 'articleTemplate_01'
             });
 
 
             //调用视频播放
-            mui("body").on('tap', '.artImg', function() {
+            mui("body").on('mdClick', '.artImg', function() {
                 playVideo(that.gV.videoExternalUrl,"video_wrapper");
+            },{
+                'htmdEvt': 'articleTemplate_02'
             });
         },
     };

@@ -15,6 +15,7 @@
 </head>
 
 <body>
+    @@include('@pathCommonCom/loading/listLoading.html')
     <section id="activityDetailsBox">
         @@include('@pathCommonViews/headBarConfig.html',{"pathName":"活动详情"})
         <div class="bgBox">
@@ -67,7 +68,7 @@
             <!-- 分享按钮 -->
             <div class="shareBtn goldRedBgButton toShare">分享给好友</div>
             <!-- 查看奖励 -->
-            <a href="javascript:void(0);" onclick="setGoUrl( site_url.wealthIndex_url, 'activityDetails_7')" class="seePrize">查看奖励></a>
+            <a href="javascript:void(0);" class="seePrize rewards">查看奖励></a>
         </div>
         <span class="iconfont closeBtn">&#xe637;</span>
     </div>
@@ -90,7 +91,7 @@
             <!-- 分享按钮 -->
             <div class="shareBtn goldRedBgButton toShare">分享给好友</div>
             <!-- 查看奖励 -->
-            <a href="javascript:void(0);" onclick="setGoUrl( site_url.wealthIndex_url, 'activityDetails_7')" class="seePrize">查看奖励></a>
+            <a href="javascript:void(0);" class="seePrize rewards">查看奖励></a>
         </div>
         <span class="iconfont closeBtn">&#xe637;</span>
     </div>
@@ -137,7 +138,7 @@
             <!-- 邮寄提示 -->
             <div class="postTip">*请您保持手机畅通，我们工作人员将与您联系并给您邮寄奖品，谢谢您的参与*</div>
             <!-- 分享按钮 -->
-            <div class="shareBtn goldRedBgButton" onclick="setGoUrl( site_url.wealthIndex_url, 'activityDetails_7')">查看奖励</div>
+            <div class="shareBtn goldRedBgButton rewards">查看奖励</div>
         </div>
         <span class="iconfont closeBtn">&#xe637;</span>
     </div>
@@ -150,7 +151,7 @@
             <!-- 成功提示内容 -->
             <div class="prizeName">恭喜您获得<span>京东100元购物卡</span></div>
             <!-- 分享按钮 -->
-            <div class="shareBtn goldRedBgButton" onclick="setGoUrl( site_url.wealthIndex_url, 'activityDetails_7')">查看奖励</div>
+            <div class="shareBtn goldRedBgButton rewards">查看奖励</div>
         </div>
         <span class="iconfont closeBtn">&#xe637;</span>
     </div>

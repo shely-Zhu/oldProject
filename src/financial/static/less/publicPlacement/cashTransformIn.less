@@ -91,7 +91,7 @@ body{
             display: flex;
             justify-content: space-between;
             border-bottom: 1px solid @E7E9ED;
-
+            position: relative;
             .msecond-one, .transformInput{
                 height:.8rem;
                 font-size:.6rem;
@@ -104,6 +104,15 @@ body{
                 height: .36rem;
                 opacity: .5;
                 margin-top: .14rem;
+            }
+            .moneyStart{
+                display: inline-block;
+                position: absolute;
+                top: .3rem;
+                right: 2.6rem;
+                font-size: .35rem;
+                color: #9B9B9B;
+                font-weight: 600;
             }
         }
         .pay{
@@ -126,7 +135,7 @@ body{
                 }
             }
             .payConfirm{
-                font-size:.12rem;
+                font-size:.28rem;
                 height: .4rem;
                 line-height: .4rem;
             }
@@ -173,7 +182,6 @@ body{
             .onright-left{
                 float: right;
                 margin-right: .3rem;
-                
                 .onright-left-one{
                     // display: flex;
                     justify-content: space-between;
@@ -255,13 +263,19 @@ body{
             .iconfont{
                 position: absolute;
                 right:0.3rem;
-                top:50%;
+                top:40%;
                 transform: translateY(-50%);
             }
             .onright-left{
                 float: right;
                 margin-right: .5rem;
                 
+                font-size: 0.24rem;
+                color: @9B9B9B;
+                .choice-btn{
+                    display: block;
+                    margin-top: 0.25rem;
+                }
                 .onright-left-one{
                     // display: flex;
                     justify-content: space-between;
@@ -328,6 +342,9 @@ body{
                 color: @9B9B9B;
                 position: absolute;
                 right: .3rem;
+            }
+            .iconfont{
+                color: @9B9B9B;
             }
         }
 

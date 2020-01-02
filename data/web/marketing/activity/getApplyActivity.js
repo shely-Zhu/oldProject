@@ -8,7 +8,7 @@
 var Mock = require('mockjs');
 
 var data = Mock.mock({
-    "status": 0000,
+    "status":0000,
     "message": "获取已报名活动成功",
     "data":{
         "activityVOPageInfo": {

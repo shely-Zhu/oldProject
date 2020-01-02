@@ -105,7 +105,7 @@ var mock_server = "http://localIp:8088", //前端本地开发时，接口调用�
     sso_online = "https://sso.chtwm.com",
 
 
-    // 在线客服
+    // 在线客服  
     onlineCustomer_test = "http://172.16.196.43:9080",
     onlineCustomer_haomaojf = "http://zxkf.haomalljf.com",
     onlineCustomer_online = "http://zxkf.chtwm.com",
@@ -463,8 +463,12 @@ window.http_url = {
     wapApi_url: '/wap', // wap接口
     web_url: '/web', // 账户接口
     app_url: '/app', // App接口,
-    webPof_url: '/web/pof' //私募理财
+    webPof_url: '/web/pof', //私募理财
 
+    pof_url: '/wap/pof', //公募接口-----老版本兼容，禁用,使用wapApi_url替换
+    pef_url: '/wap/pef', //私募接口-----老版本兼容，禁用,使用wapApi_url替换
+    content_url: '/wap/content', // 内容接口-----老版本兼容，禁用,使用wapApi_url替换
+    account_url: '/wap/account', // 账户接口-----老版本兼容，禁用,使用wapApi_url替换
 }
 
 

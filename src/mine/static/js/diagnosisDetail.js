@@ -8,13 +8,13 @@
 
 require('@pathCommonBase/base.js');
 require('@pathCommonJs/ajaxLoading.js');
-require('@pathCommonJs/components/elasticLayer.js');
+// require('@pathCommonJs/components/elasticLayer.js');
 require('@pathCommonJs/components/elasticLayerTypeTwo.js');
-require('@pathCommonJs/components/headBarConfig.js');
+// require('@pathCommonJs/components/headBarConfig.js');
 var tipAction = require('@pathCommonJs/components/tipAction.js');
 var splitUrl = require('@pathCommonJs/components/splitUrl.js')();
-//var echarts = require('echarts/lib/echarts');
-// var echarts = require('@pathCommonJsCom/echartCom/echarts.min.js');
+var echarts = require('echarts/lib/echarts');
+var echarts = require('@pathCommonJsCom/echartCom/echarts.min.js');
 var radarChart = require('@pathCommonJsCom/echartCom/radarChart.js');
 var lineChart = require('@pathCommonJsCom/echartCom/lineChart.js');
 var generateTemplate = require('@pathCommonJsComBus/generateTemplate.js');
@@ -155,12 +155,13 @@ $(function() {
                 }
             }, {
                 url: site_url.queryDictionary_api, //基金诊断-字典接口
+                contentTypeSearch:true,
                 data: {
-                    "dicType": 'fundDiagnosisKey',
+                    "keySets": 'fundDiagnosisKey',
                 },
                 // needDataEmpty: false,
                 callbackDone: function(json) {
-                    var jsonData = json.data.list;
+                    var jsonData = json.data.fundDiagnosisKey;
 
                     that.gV.tipArr = jsonData;
                 },
@@ -286,7 +287,7 @@ $(function() {
             // 文案提示
             mui("body").on('mdClick', '.dd_icon', function() {
                 var i = $(this).attr('num');
-                var value = that.gV.tipArr[i] && that.gV.tipArr[i].value;
+                var value = that.gV.tipArr[i].value;
                 var tital;
                 if(i == 0){
                     tital = "综合评分"
@@ -302,6 +303,7 @@ $(function() {
                     title: tital,
                     p: '<p>' + value + '</p>',
                     buttonTxt: '知道了',
+                    htmdEvtYes:'diagnosisDetail_04',
                     zIndex: 100,
                 });
 

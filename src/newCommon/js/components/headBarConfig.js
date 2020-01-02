@@ -17,27 +17,27 @@ var splitUrl = require('@pathCommonJs/components/splitUrl.js')();
 var titleName = "";
 //各个页面对应的头部名称
 var pathTitle = [{
-    pathName: "权益详情1",
-    pathUrl: "eruda1"
-},
-{
-    pathName: "权益详情2",
-    pathUrl: "eruda2"
-},
-{
-    pathName: "权益详情3",
-    pathUrl: "eruda3"
-},
-{
-    pathName: "登录日志查询",
-    pathUrl: "eruda3"
-}
+        pathName: "权益详情1",
+        pathUrl: "eruda1"
+    },
+    {
+        pathName: "权益详情2",
+        pathUrl: "eruda2"
+    },
+    {
+        pathName: "权益详情3",
+        pathUrl: "eruda3"
+    },
+    {
+        pathName: "登录日志查询",
+        pathUrl: "eruda3"
+    }
 ]
-$(function () {
+$(function() {
     var $headBarConfigBox = $("#HeadBarConfigBox");
     //IOS会在所有连接上拼接是否为刘海屏的标识，同时会存在session中。
-    if (splitUrl['isIphoneX'] || sessionStorage.getItem('isIphoneX')) {
-        sessionStorage.setItem('isIphoneX', true);
+    if (splitUrl['isIphoneX'] || window.isIphoneX) {
+        window.isIphoneX = true;
         $(".HeadBarConfigBox").css('margin-top', '0.2rem');
     }
     //判断传入的值
@@ -57,7 +57,7 @@ $(function () {
         $("#HeadBarpathName").show()
     }
     // 判断是否为双行文本溢出
-    if($headBarConfigBox.attr("linesNum") != 2) {
+    if ($headBarConfigBox.attr("linesNum") != 2) {
         $("#HeadBarpathName").addClass("singleLine")
     }
     //传人样式判断展示形式 
@@ -96,13 +96,13 @@ $(function () {
             $("#customerService").show();
             //返回上一页
             //$("#customerService").on("click",function(){
-            //		    	客服热线要跳转的链接
-            //		        location.href= site_url.historyDetail_url;
+            //              客服热线要跳转的链接
+            //              location.href= site_url.historyDetail_url;
             // })
         }
     }
     //返回上一页
-    $("#goBack").on("click", function () {
+    mui("body").on('mdClick', '#goBack', function() {
         if (document.referrer == '') {
             // window.isAndroid是在root文件中定义的变量
             if (window.isAndroid) {
@@ -112,26 +112,23 @@ $(function () {
             // window.isIOS是在root文件中定义的变量
             if (window.isIOS) {
                 //这个是ios操作系统
-                window.webkit.messageHandlers.backNative.postMessage('backNative');
+                // window.webkit.messageHandlers.backNative.postMessage(JSON.stringify({ "type": "backNative" }));
+                window.webkit.messageHandlers.backNative.postMessage("backNative" );
             }
         } else {
             location.href = "javascript:history.go(-1)";
         }
-    })
-    //跳转客服页面
-    $("#customerService").on("click", function () {
-        var obj = [{
-            url: site_url.getToken_api,
-            data: {},
-            needDataEmpty: false,
-            callbackDone: function (json) {
-                var token = json.data.token;
-                // 跳转第三方客服地址
-                window.location.href = site_url.onlineCustomer_url + '&token=' + token;
-            },
-        }];
-        $.ajaxLoading(obj);
-    })
+    }, {
+        htmdEvt: 'goBackButton'
+    });
+   
+    //跳转客服页面  app进行拦截
+    mui("body").on('mdClick', '#customerService', function() {
+        window.location.href = site_url.onlineCustomerTransfer_url;
+    }, {
+        htmdEvt: 'customerService'
+    });
+   
 })
 //字符串截取
 function GetRequest() {

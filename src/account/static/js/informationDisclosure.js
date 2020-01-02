@@ -170,7 +170,7 @@ var prvMar = {
             async: false,
             contentTypeSearch: false,
             callbackDone: function(json) {
-                var json = json.data;
+                var json = json.data;     
                 $.each(json, function(i, el) {
                     el.name = el.fileName.substring(0, el.fileName.indexOf("】") + 1);
                     el.marName = el.fileName.substring(el.fileName.indexOf("】") + 1);
@@ -226,11 +226,11 @@ var prvMar = {
     },
     events: function() {
         mui("body").on("mdClick", ".mui-box", function() {
-            if(window.currentIsApp){
+            // if(window.currentIsApp){
                 window.location.href = $(this).attr("href");
-            }else{
-                window.open($(this).attr("href"));
-            }
+            // }else{
+                // window.open($(this).attr("href"));
+            // }
             // debugger
             // var src=$(this).attr("href")
             // var form = document.createElement('form');

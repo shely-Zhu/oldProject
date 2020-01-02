@@ -1,8 +1,8 @@
 /*
  * @Author: your name
  * @Date: 2019-11-26 14:42:56
- * @LastEditTime: 2019-12-17 17:26:31
- * @LastEditors: Please set LastEditors
+ * @LastEditTime : 2019-12-31 12:10:56
+ * @LastEditors  : Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \htjf-app\src\financial\static\js\publicPlacement\cashTransformOut.js
  */
@@ -14,10 +14,19 @@
 */
 
 require('@pathCommonBase/base.js');
+
+require('@pathIncludJs/vendor/mui/mui.picker.min.js');
 require('@pathCommonJs/ajaxLoading.js');
-// require('@pathCommonCom/elasticLayer/transOutRule/transOutRule.js');
-var payPass = require('@pathCommonJsCom/payPassword.js');
+require('@pathCommonJs/components/elasticLayer.js');
+
+var splitUrl = require('@pathCommonJs/components/splitUrl.js')();
+//引入复制功能
+// var Clipboard = require('clipboard');
+var popPicker = require('@pathCommonJsCom/popPicker.js');
 var generateTemplate = require('@pathCommonJsComBus/generateTemplate.js');
+var tipAction = require('@pathCommonJs/components/tipAction.js');
+
+var payPass = require('@pathCommonJsCom/payPassword.js');
 
 
 $(function () {
@@ -25,11 +34,11 @@ $(function () {
 	var regulatory = {
 
 		gv:{
-		   productName:"",   //产品名称
+		   productName:new Base64().decode(splitUrl['productName']),   //产品名称
 		   transformTotalMoney:"",   //产品转出总额度
 		   transformMoney:"",    //产品转出额度
 		   dailyOnceMaxLimit:"",  //单日最高限额 整数
-		   fundCode:"" ,//基金编号
+		   fundCode:splitUrl['fundCode'] ,//基金编号
 		   outType:"fast",//转出方式  快速位fast 普通位common
 		   dailyOnceMaxLimitWan:"", //单笔最高限额
 		   dailyMaxLimitWan:"" ,//单日最高限额：
@@ -77,39 +86,36 @@ $(function () {
 
 		webinit: function () {
 			var that = this;
-
-			//
 			that.events();
 			that.initParmes();
 			that.findProtocolBasi();
 			that.cashListWiki();
 			that.pofCashLimit();
-
-
-			that.initElement();
 			
 		},
 
         /*
             绑定事件
          */
-
+         // 获取该账户的余额
 		 initParmes:function(){
-		   var that = this;
-		   var data = JSON.parse(sessionStorage.getItem("transformMessage"));
-		   that.gv.productName = data.productName;
-		   that.gv.fundCode = data.fundCode;
-		   that.gv.transformTotalMoney = data.money;
-		   that.gv.transformMoney = data.money;
-
-		 },
-		 initElement:function(){
-		   var that = this;
-		   that.$e.el_productName.html(that.gv.productName);
-		   that.$e.el_transformInput.val(that.gv.transformMoney);
-		  
-		   //that.$e.el_defaultBankName.textContent = 
-		},
+			var that = this;
+			 var obj =[{
+				 url:site_url.pofGetAssetsCashList_api,
+				 data:{
+					 "fundCode":that.gv.fundCode,
+					 "pageSize":10,
+					 "pageCurrent": 1
+				 },
+				 callbackDone:function(json){
+					    that.gv.transformTotalMoney = json.data.pageList[0].totalMoney;
+						that.gv.transformMoney = json.data.pageList[0].totalMoney;
+						that.$e.el_productName.html(that.gv.productName);
+						that.$e.el_transformInput.val(json.data.pageList[0].totalMoney);
+				 }
+			 }]
+			 $.ajaxLoading(obj);
+		  },
 		 findProtocolBasi:function(){
 			var that = this;
 			var obj =[
@@ -124,11 +130,11 @@ $(function () {
 						console.log("88888")
 						that.gv.ruleList = json.data;
 						that.$e.el_transformRule[0].textContent = that.gv.ruleList[2].title;
-		   that.$e.el_transformRule.attr("ruleId",that.gv.ruleList[2].id);
-		   that.$e.el_transformRule_icon.attr("ruleId",that.gv.ruleList[2].id);
+						that.$e.el_transformRule.attr("ruleId",that.gv.ruleList[2].id);
+						that.$e.el_transformRule_icon.attr("ruleId",that.gv.ruleList[2].id);
 
-		   that.$e.el_agreementRule[0].textContent = that.gv.ruleList[1].title;
-		   that.$e.el_agreementRule.attr('ruleId',that.gv.ruleList[1].id);
+						that.$e.el_agreementRule[0].textContent = that.gv.ruleList[1].title;
+						that.$e.el_agreementRule.attr('ruleId',that.gv.ruleList[1].id);
 					}
 				}
 			]
@@ -156,9 +162,9 @@ $(function () {
 						 var carNum = that.gv.cashList[i].bankAccountMask.substr(-4);
 						 that.gv.cashList[i].carNum = carNum;
 						 if(i == 0){
-							that.gv.cashList[i].checkStatu = that.gv.checkImgUrl; 
+							that.gv.cashList[i].checkStatu = true; 
 						 }else{
-							that.gv.cashList[i].checkStatu = ""
+							that.gv.cashList[i].checkStatu = false
 						 }
 
 					 }
@@ -171,8 +177,21 @@ $(function () {
 					 that.$e.el_defaultBankName[0].textContent =defaultCarData.bankName;
 					 that.$e.el_defaultBankImgUrl.attr("src",defaultCarData.bankThumbnailUrl);
 					 that.$e.el_defaultBankCode[0].textContent =defaultCarData.bankAccountMask.substr(-4);
-                     that.$e.el_singleNum[0].textContent = defaultCarData.availableShare;
+					 that.$e.el_singleNum[0].textContent = defaultCarData.availableShare;
+					 that.gv.transformTotalMoney = defaultCarData.availableShare;
+					 that.gv.transformMoney = defaultCarData.availableShare;
+					 that.$e.el_transformInput.val(that.gv.transformMoney);
 					 generateTemplate(that.gv.cashList, that.$e.TransferFundsContent, that.$e.templateTransferFunds);
+					 for(var i=0;i<$(".cashListConent .cashCheckItem").length;i++){
+						 if(i==0){
+							$(".cashListConent .cashCheckItem").eq(i).find(".radioCheckItemImg").show();
+						 }else{
+							$(".cashListConent .cashCheckItem").eq(i).find(".radioCheckItemImg").hide(); 
+						 }
+					 }
+					// $(".cashListConent .cashCheckItem").eq(0).find(".radioCheckItemImg").show();
+					//$(".cashListConent .cashCheckItem").not(0).find(".radioCheckItemImg").hide();
+                     
 				 }
 
 			 }];
@@ -201,7 +220,9 @@ $(function () {
                     var data = res.data;
                     if(res.status == '0000'){
                         window.location.href =  site_url.pofSurelyResults_url + '?allotNo=' + data.allotNo + '&flag=out'+"&outType="+regulatory.gv.outType;
-                    }
+                    }else{
+						tipAction(json.message);
+					}
                 },
                 callbackNoData:function(json){
                     $("#passwordWrap").hide();
@@ -285,14 +306,19 @@ $(function () {
            
 		   //银行卡单选
 		   mui("body").off("mdClick",".cashCheckItem").on('mdClick','.cashCheckItem',function(){
-			   $(this).find(".imgLogo").attr("src",that.gv.checkImgUrl);
-			   $(this).siblings().find(".imgLogo").attr("src","");
+			//   $(this).find(".imgLogo").attr("src",that.gv.checkImgUrl);
+			  // $(this).siblings().find(".imgLogo").attr("src","");
+			   $(this).find(".radioCheckItemImg").show();
+			   $(this).siblings().find(".radioCheckItemImg").hide();
 			   that.gv.defaultBankNo = $(this).attr("bankNo"); //默认银行代码
 			   that.gv.defaultBankAccount = $(this).attr("bankAccount"); //默认银行账号
 			   that.gv.defaultTradeAcco = $(this).attr("tradeAcco");  // 默认交易账号
 			   that.gv.defaultCapitalMode = $(this).attr("capitalMode"); // 默认资金方式
 			 
 			   that.$e.el_singleNum[0].textContent = $(this).attr('singleNum');
+			   that.gv.transformTotalMoney =  $(this).attr('singleNum');
+			    that.gv.transformMoney =  $(this).attr('singleNum');
+				that.$e.el_transformInput.val(that.gv.transformMoney);
 			   
 			   that.$e.el_defaultBankName[0].textContent = $(this).attr("bankName");
 			   that.$e.el_defaultBankImgUrl.attr("src",$(this).attr("bankLogoUrl"));
@@ -323,27 +349,23 @@ $(function () {
 			   that.gv.transformMoney = 0;
 			   that.$e.el_transformInput.val(0);
 
-		   }, {
-			htmdEvt: 'cashTransformOut_06'
-		})
+		   	}, {
+				htmdEvt: 'cashTransformOut_06'
+			})
 			
 			//点击转出规则
-			mui('body').on('tap','.explain .transformRule',function(){
+			mui('body').on('mdClick','.explain .transformRule',function(){
 				that.gv.ruleId = $(this).attr("ruleId");
 				var id = $(this).attr("ruleId");
 				//that.findProtocolContentRule(id);
 				window.location.href = site_url.superContent_url + '?id='+id+ '&financial=true'
-			}) 
-			//点击转出到账时间
-			mui('body').on('tap','.explain .tranTime',function(){
-				var id = $(this).children().attr("ruleId");
-				that.gv.ruleId = id;
-				//that.findProtocolContentRule(id);
-				window.location.href = site_url.superContent_url + '?id='+id+ '&financial=true'
+			},{
+				htmdEvt: 'cashTransformOut_07'
 			}) 
 
 			//点击同意协议
-			mui('body').on('tap','.item2 .iconfont',function(){
+			mui('body').on('mdClick','.item2 .iconfont',function(){
+				$("#transformInput").blur()
 			//that.$e.iconCheck.on('mdClick', function() {
 				var val =$(".msecond input")[0].value;
 				that.gv.transformMoney = val;
@@ -352,6 +374,7 @@ $(function () {
 					//$(".checkMessage").css({"display":"block"});
 					//$(".checkMessage").html("转出金额超过最大额度")
 					tipAction("转出金额超过最大额度"+that.gv.transformTotalMoney+"元")
+					return
 				}else{		
 					$(".checkMessage").css({"display":"none"}); 
 				}
@@ -378,17 +401,25 @@ $(function () {
 			});
 
 			  //转出金额
-			$(".msecond input").change(function(){
+			//$(".msecond input").change(function(){
+			$(".msecond input").on('input propertychange',function(){
 				that.gv.transformMoney = $(this)[0].value;
 				if( parseFloat( that.gv.transformTotalMoney)< parseFloat( that.gv.transformMoney) ){
 					//$(".checkMessage").css({"display":"block"});
 					//$(".checkMessage").html("转出金额超过最大额度")
 					tipAction("转出金额超过最大额度"+that.gv.transformTotalMoney+"元")
+					return
 				}else{		
 					$(".checkMessage").css({"display":"none"}); 
 				}
 				if($(this)[0].value == ""){
 					that.$e.confirmBtn.attr('disabled',true)
+				}else{
+					if($(".item2 .iconfont").hasClass("check")){
+						that.$e.confirmBtn.removeAttr("disabled")
+					}else{
+						that.$e.confirmBtn.attr('disabled',true);
+					}
 				}
 			})
 
@@ -405,6 +436,8 @@ $(function () {
 				}else{
 					$(".checkMessage").css({"display":"none"});
 				}
+				$(".pwd-input").val('')
+                $(".fake-box input").val('');
 				$(".msecond input").blur();
 				$("#passwordWrap").show();
 				payPass(that.cancelOrder)
@@ -415,8 +448,14 @@ $(function () {
 			//转出全部
 			mui('body').on('mdClick','.tranoutAllMoney',function(){ 
 			//$(".tranoutAllMoney").on('click',function(){
+				$("#transformInput").blur()
 				$(".msecond input").val(that.gv.transformTotalMoney);
 				that.gv.transformMoney = that.gv.transformTotalMoney
+				if($(".item2 .iconfont").hasClass("check")){
+					that.$e.confirmBtn.removeAttr("disabled")
+				}else{
+					that.$e.confirmBtn.attr('disabled',true);
+				}
 			}, {
 				htmdEvt: 'cashTransformOut_11'
 			})
@@ -435,12 +474,28 @@ $(function () {
 			}, {
 				htmdEvt: 'cashTransformOut_10'
 			}) 
+			//点击转出到账时间
+			mui('body').on('mdClick','.explain .tranTime',function(){
+				var type = $(this).attr("type");
+				if(type == "fast"){
+					tipAction("部分银行不支持2小时快速到账")
+				}
+				//var id = $(this).children().attr("ruleId");
+				//that.gv.ruleId = id;
+				//that.findProtocolContentRule(id);
+				//window.location.href = site_url.superContent_url + '?id='+id+ '&financial=true'
+			},{
+				htmdEvt: 'cashTransformOut_13'
+			}) 
 			//阅读规则
-			mui('body').on('tap','.file .agreementRule',function(){
+			mui('body').on('mdClick','.file .agreementRule',function(){
+				$("#transformInput").blur()
 				that.gv.ruleId = $(this).attr("ruleId");
 				var id = $(this).attr("ruleId");
 				//that.findProtocolContentRule(id);
 				window.location.href = site_url.superContent_url + '?id='+id+ '&financial=true'
+			},{
+				htmdEvt: 'cashTransformOut_14'
 			})
 			
 		}

@@ -298,7 +298,7 @@ module.exports = function() {
     // 在线客服-第三方地址
     this.onlineCustomer_url = go_url.onlineCustomer_url + '/webchat/jsp/standard/interfacePools.jsp?queue=106&device=mobile';
     // 在线客服中转页
-    this.onlineCustomerTransfer_url = go_url.cft_url + '/include/views/onlineCustomer.html';
+    this.onlineCustomerTransfer_url = go_url.no_url + '/include/views/onlineCustomer.html';
     // app中私募首页，视频直播跳转路径
     this.videoPlay_url = go_url.no_url + '/productPrivate/views/videoPlay.html';
     // 公募产品分享地址 需拼接fundCode
@@ -320,7 +320,13 @@ module.exports = function() {
     this.fundAccountDiagnosisResult_url = go_url.no_url + '/mine/views/fundDiagnosis/fundAccountDiagnosisResult.html';
     // 诊断详情页
     this.diagnosisDetail_url = go_url.no_url + '/mine/views/fundDiagnosis/diagnosisDetail.html';
+    
+    //账户诊断 ---持仓空白页
+    this.noAccountHoldShare_url = go_url.no_url+'/mine/views/fundDiagnosis/noAccountHoldShare.html';
 
+    //账户诊断---历史申请记录
+    this.applyHistory_url = go_url.no_url + '/mine/views/fundDiagnosis/applyHistory.html'
+    
     /*-------------------------------基金诊断 end -----------------------*/
     /*-------------------------------我的页面 start -----------------------*/
     //登录日志查询页面
@@ -354,6 +360,10 @@ module.exports = function() {
     this.chooseQualifiedInvestor_url = go_url.no_url + '/mine/views/qualifiedInvestor/chooseQualifiedInvestor.html';
     //活动详情->信息补全
     this.completeInformation_url = go_url.no_url + '/mine/views/information/completeInformation.html';
+    //理财师->绑定理财师
+    this.addFinancialer_url = go_url.no_url + '/mine/views/financialer/addFinancialer.html';
+     //活动详情->信息查看（修改证件有效期） 
+     this.completeInfoEditModify_url = go_url.no_url + '/mine/views/information/completeInfoEditModify.html';
     //活动详情->投资者分类申请
     this.investorClassification_url = go_url.no_url + '/mine/views/investorClassification/investorClassification.html';
     //活动详情->投资者分类结果页
@@ -366,7 +376,7 @@ module.exports = function() {
     //交易明细总页面
     this.publicTransactionDetails_url = go_url.no_url + '/mine/views/publicTransactionDetails.html'
         //单个产品交易记录页面
-    this.transactionDetailPublic_url = go_url.no_url + '/account/views/public/transactionDetail.html'
+    this.transactionDetailPublic_url = go_url.no_url + '/account/views/public/superTransactionRecord.html'
         /*-------------------------------活动列表 end -----------------------*/
 
 
@@ -392,6 +402,8 @@ module.exports = function() {
 
     // 转入，转出结果页面，定投结果
     this.pofSurelyResults_url = go_url.no_url + '/financial/views/publicPlacement/surelyResults.html';
+     //定投结果页
+     this.surelyResultShot_url = go_url.no_url + '/financial/views/publicPlacement/surelyResultShot.html'
     // 转入页面
     this.pofCashTransformIn_url = go_url.no_url + '/financial/views/publicPlacement/cashTransformIn.html';
     // 转出页面
@@ -417,10 +429,8 @@ module.exports = function() {
     // 买入结果页面，基金买入结果
     this.pofSurelyResultsDetail_url = go_url.no_url + '/financial/views/publicPlacement/surelyResultsDetail.html';
 
-    //忘记密码  跳往原生页面
-    this.pofForgotPassword_url = go_url.no_url + '/minel/views/setting/forgotPassword.html';
-    //找回密码   跳往原生页面
-    this.pofRetrievePassword_url = go_url.no_url + '/minel/views/setting/retrievePassword.html';
+    //忘记密码 | 找回密码  跳往原生页面
+    this.pofForgotPassword_url = go_url.no_url + '/mine/views/setting/forgotPassword.html';
     //添加银行卡
     this.pofAddBankCard_url = go_url.no_url + '/mine/views/bankCard/addBankCard.html'
         //基金分享跳原生页面
@@ -450,9 +460,9 @@ module.exports = function() {
     // 基金确认书
     this.privateFundPdf_url = go_url.no_url + '/account/views/private/privateFundPdf.html';
     // 私募交易规则
-    this.privateTransactionRules_url = go_url.no_url + '/account/views/private/transactionRules.html';
+    this.privateTransactionRules_url = go_url.no_url + '/account/views/private/privateTransactionRules.html';
     // 公募交易规则
-    this.transactionRules_url = go_url.no_url + '/financial/views/publicPlacement/transactionRules.html';
+    // this.transactionRules_url = go_url.no_url + '/financial/views/publicPlacement/transactionRules.html';
     //基金公司
     this.fundCompany_url = go_url.no_url + '/financial/views/publicPlacement/fundCompany.html';
     // 信息披露
@@ -466,7 +476,7 @@ module.exports = function() {
     //现金宝管理
     this.cashManagement_url = go_url.no_url + '/financial/views/publicPlacement/cashManagement.html';
     //  //普通基金-定投买入
-    // this.ordinarySetThrow_url = go_url.no_url + '/financial/views/publicPlacement/ordinarySetThrow.html';
+    this.ordinarySetThrow_url = go_url.no_url + '/financial/views/publicPlacement/ordinarySetThrow.html';
     // 协议模板--内容页
     this.superContent_url = go_url.no_url + '/allServerResources/model/views/protocolTemplate.html';
     //超宝详情页
@@ -555,6 +565,10 @@ module.exports = function() {
 
     // 老带新分享链接
     this.marketCampaign_url = go_url.marketCampaign_url;
+    // 点击立即绑定跳转验证用户身份页面
+    this.bindFinancialer_url = go_url.no_url + '/homePage/views/bindFinancialer/bindFinancialer.html';
+
+    
 
 
 };

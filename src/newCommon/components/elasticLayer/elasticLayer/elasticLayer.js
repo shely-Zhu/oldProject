@@ -75,6 +75,9 @@
                     iconType: 'green', //icon的颜色
                     
                     hideCelButton: false, //为true时隐藏cel按钮，仅使用yes按钮的所有属性
+
+                    htmdEvtYes:'',  // 埋点确定按钮属性
+                    htmdEvtCel:'',  // 埋点取消按钮属性
                 }
 
                 this.options = $.extend({}, this.defaults, opts)
@@ -204,8 +207,9 @@
                     that.$cel.on('click', function() {
                         //关闭按钮事件即隐藏当前弹层
                         $(this).parents('.elasticLayer').hide();
-
+                        window._submitMd && window._submitMd( 3, that.options.htmdEvtCel);
                         that.options.callbackCel(that);
+
                     })
                 },
 
@@ -216,6 +220,7 @@
                     var that = this;
                     that.$yes.on('click', function() {
                         //调用的是callback回调函数
+                        window._submitMd && window._submitMd( 3, that.options.htmdEvtYes );
                         that.options.callback(that);
                         $(this).parents('.elasticLayer').hide();
                     })

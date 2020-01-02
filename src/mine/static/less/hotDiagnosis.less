@@ -7,6 +7,7 @@
 html,
 body {
     height: 100%;
+    background:@c005;
 }
 
 
@@ -61,19 +62,20 @@ body {
         height: 1.6rem;
         top: 0;
         z-index: 1000;
-
+        top: 0.3rem;
         // 诊断页面搜索区域
         .topSearch {
             background-color: @c005;
             padding: 0.1rem 0.26rem;
             .tip {
-                height: 0.56rem;
+                height: 0.7rem;
                 background-color: @f7f7f7;
-                color: @878787;
+                color: #757784;
                 font-size: 0.22rem;
-                line-height: 0.56rem;
+                line-height: 0.7rem;
                 width: 100%;
                 border-radius: 0.04rem;
+                font-size: .24rem;
             }
 
             .mui-icon-search::before {
@@ -100,7 +102,9 @@ body {
                     background-color: @f7f7f7;
                     border-radius: 0.04rem;
                     position: relative;
-
+                    height: 0.7rem;
+                    line-height: 0.7rem;
+                    font-size: 0.24rem;
                     .branchSearchInput {
                         color: @878787;
                         display: inline-block;
@@ -180,22 +184,26 @@ body {
 
         // 热门诊断
         .h2_title {
-            padding: 0 0.34rem;
-            color: @3c3c3c;
             font-size: 0.28rem;
             line-height: 0.86rem;
-            background-color: @f7f7f7;
             font-weight: 700;
+            background: @c005;
+            p{
+             width: 90%;
+             margin:0 auto;
+             border-bottom: .01rem solid @c004;   
+             color: @3c3c3c;
+            }
         }
     }
 
     // 热门列表
     .hotFundList {
         overflow: hidden;
-        margin-top: 1.6rem;
+        margin-top: 2.9rem;
 
         .card-theme,
-        .search-list {
+        .search-list,.list{
             .mui-row {
                 padding: 0.28rem 0.34rem;
                 border-bottom: 1px solid @f6f9ff;
@@ -205,7 +213,7 @@ body {
                 }
 
                 .imgNum {
-                    width: 0.3rem;
+                    width: 0.31rem;
                     padding-top: 0.1rem;
                 }
 
@@ -217,10 +225,11 @@ body {
                 }
 
                 .fontBold {
-                    color: @2d2f46;
-                    font-size: 0.26rem;
+                    color: @272727;
+                    font-size: 0.28rem;
                     line-height: 0.46rem;
-
+                    font-family:PingFangSC-Regular,PingFang SC;
+                    font-weight:400;
                 }
 
                 .jumpIcon {
@@ -238,7 +247,7 @@ body {
                 }
 
                 .lightColor {
-                    font-size: 0.2rem;
+                    font-size: 0.28rem;
                     line-height: 0.4rem;
                     color: @999999;
                 }
@@ -262,7 +271,8 @@ body {
 
     // 底部按钮     
     .btnBottom {
-        position: absolute;
+        // position: absolute;
+        position: fixed;
         bottom: 0.34rem;
         margin: 0.5%;
         height: 0.78rem;
@@ -274,7 +284,7 @@ body {
         box-shadow: 0 0.02rem 0.08rem 0 rgba(0, 0, 0, 0.1);
         padding: 0 0.36rem 0 0.2rem;
         color: @837046;
-
+        display: none;
         .imgBottom {
             margin-top: 0.16rem;
             width: 0.48rem;
@@ -308,8 +318,13 @@ body {
     }
     .fixedWrap .HeadBarConfigBox a.backBtn{
         color: black !important;
-        font-size: 0.052rem;
-        margin-top: -0.4rem;
-        margin-left: -0.25rem;
+        font-size: 0.4rem;
+//      margin-top: -0.4rem;
+//      margin-left: -0.25rem;
+    }
+}
+.hotFundList {
+    .contentWrapper{
+        margin-top: 1.5rem;
     }
 }

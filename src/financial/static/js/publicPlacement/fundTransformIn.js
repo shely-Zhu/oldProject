@@ -9,6 +9,7 @@ require('@pathCommonBase/base.js');
 //ajax调用
 require('@pathCommonJs/ajaxLoading.js');
 require('@pathCommonCom/elasticLayer/transOutRule/transOutRule.js');
+require('@pathCommonJs/components/elasticLayerTypeTwo.js');
 var splitUrl = require('@pathCommonJs/components/splitUrl.js')();
 var generateTemplate = require('@pathCommonJsComBus/generateTemplate.js');
 var payPass = require('@pathCommonJsCom/payPassword.js');
@@ -58,9 +59,11 @@ $(function () {
 			password: "",
 			tradeAcco: ''  ,//交易账号
 			singleNum:0,   //单日限额
-			fundOrBank:'',  // 在线支付中  银行卡支付 1   基金支付  2   
+			fundOrBank:'',  // 在线支付中  银行卡支付 1   基金支付  2 
+			bugFundName:"", //在线支付为 基金支付时 的基金名称
 			enableAmount:0,  //选择基金支付 可用余额 
-			accountType:null   //客户类型  0-机构 1-个人
+			accountType:null,   //客户类型  0-机构 1-个人
+			doubleClickStatus:false
 		},
 		webinit: function () {
 			var that = this;
@@ -70,6 +73,7 @@ $(function () {
 			that.getData();
 			that.getAgreeUrl();
 			that.getUserInfo();
+			that.getUserInfo_1();
 		},
 		// 获取客户类型
         getUserInfo: function () {
@@ -88,7 +92,29 @@ $(function () {
                 }
             }]
             $.ajaxLoading(obj);
-        },
+		},
+		//获取用户信息
+		getUserInfo_1:function(){
+			var that = this;
+			var obj = [{
+				url:site_url.user_api,
+				data:{
+
+				},
+				callbackDone:function(json){
+					var data = json.data
+					if(data.investFavour=="0"){
+						//普通投资
+						$(".setGoUrl").show();
+						$(".raskBook").hide();
+					}else{
+						$(".setGoUrl").hide();
+						$(".raskBook").show();
+					}
+				}
+			}];
+			$.ajaxLoading(obj);
+		},
 		//获取基金数据
 		getData: function (t) {
 			var that = this;
@@ -110,7 +136,13 @@ $(function () {
 						that.$el.brforre15Date.html(data.g2gafter15tradeDate)
 						that.gV.fundName = data.secuSht
 						that.gV.fundCode = data.trdCode
-						that.gV.discount = Number(data.discount);
+						if(!!data.discount){
+							//有费率
+							that.gV.discount = Number(data.discount);
+						}else{
+							that.gV.discount = ""
+						}
+						
 						that.gV.feeRateList = data.fundPurchaseFeeRate.detailList;
 						that.gV.fundStatus = data.fundStatus;
 						if(data.invTypCom == 10800){
@@ -157,6 +189,7 @@ $(function () {
 						// 将列表插入到页面上
 						$(".listLoading").hide()
 						$('.popup').css('display','block')
+						that.gV.doubleClickStatus = true;
 						if(useEnv == '0'){
 							that.$el.popupTitle.html('选择在线支付银行卡')
 						}else{
@@ -176,6 +209,15 @@ $(function () {
                   
 				},
 				callbackNoData:function(json){
+						$('.popup').css('display','block')
+						that.gV.doubleClickStatus = true;
+						if(useEnv == '0'){
+							that.$el.popupTitle.html('选择在线支付银行卡')
+						}else{
+							that.$el.popupUl2.html('')
+							that.$el.popupTitle.html('选择汇款支付银行卡')
+						}
+						generateTemplate("", that.$el.popupUl, that.$el.bankListTemplate,true);
 					tipAction(json.message);
 				},
 				callbackFail:function(json){
@@ -291,10 +333,16 @@ $(function () {
 					
 					var data = [] ;
 					data = json.data;
-					
+					debugger
 					if(json.status == '0000'){
-					   window.location.href = site_url.pofSurelyResultsDetail_url + '?applyId=' + data.allotNo + '&fundBusinCode=' + 
-					   that.gV.fundBusinCode + "&fundCode=" + that.gV.fundCode + "&payType=" +that.gV.payType + '&flag=buy';
+						if(!!that.gV.bugFundName){
+							window.location.href = site_url.pofSurelyResultsDetail_url + '?applyId=' + data.allotNo + '&fundBusinCode=' + 
+							that.gV.fundBusinCode + "&fundCode=" + that.gV.fundCode + "&payType=" +that.gV.payType + '&flag=buy'+'&bugFundName='+encodeURI(that.gV.bugFundName);
+						}else{
+							window.location.href = site_url.pofSurelyResultsDetail_url + '?applyId=' + data.allotNo + '&fundBusinCode=' + 
+							that.gV.fundBusinCode + "&fundCode=" + that.gV.fundCode + "&payType=" +that.gV.payType + '&flag=buy'+'&bugFundName=false'
+						}
+					  
 					}
 				},
 				callbackNoData:function(json){
@@ -354,33 +402,48 @@ $(function () {
 			
 			var str = ''   //估算费用描述
 			for (var i = 0; i < that.gV.feeRateList.length; i++) {
-				//先判断 计算方式
-				if (that.gV.feeRateList[i].feeCalcMed == '1') {//固定费用 (最多有一条此数据)
-					if (Number(val) >= Number(that.gV.feeRateList[i].minValue) * 10000) {//当前输入Money 小于等于 此区间最小值
-						that.gV.purchaseRate= Number(that.gV.feeRateList[i].maxRate);//将此区间费用赋值给rate
-						that.gV.feeCalcMed = "1";
+				if(that.gV.feeRateList.length==1&& Number(that.gV.feeRateList[0].maxRate) == 0){
+					var str = "0.00元(0.00%)"
+					that.$el.CostEstimate.html(str)
+					return
+				}else{
+					//先判断 计算方式
+					if (that.gV.feeRateList[i].feeCalcMed == '1') {//固定费用 (最多有一条此数据)
+						if (Number(val) >= Number(that.gV.feeRateList[i].minValue) * 10000) {//当前输入Money 小于等于 此区间最小值
+							that.gV.purchaseRate= Number(that.gV.feeRateList[i].maxRate);//将此区间费用赋值给rate
+							that.gV.feeCalcMed = "1";
+						}
+					} else if (that.gV.feeRateList[i].feeCalcMed == '2') {//固定费率
+						if (Number(val) < Number(that.gV.feeRateList[i].maxValue) * 10000 && Number(val) >= Number(that.gV.feeRateList[i].minValue) * 10000) {//当前输入Money 属于此区间
+							that.gV.purchaseRate = Number(that.gV.feeRateList[i].maxRate) / 100;//将此区间费率赋值给rate   需要除以100是 其值
+							that.gV.feeCalcMed = "2";
+						}
 					}
-				} else if (that.gV.feeRateList[i].feeCalcMed == '2') {//固定费率
-					if (Number(val) < Number(that.gV.feeRateList[i].maxValue) * 10000 && Number(val) >= Number(that.gV.feeRateList[i].minValue) * 10000) {//当前输入Money 属于此区间
-						that.gV.purchaseRate = Number(that.gV.feeRateList[i].maxRate) / 100;//将此区间费率赋值给rate   需要除以100是 其值
-						that.gV.feeCalcMed = "2";
-					}
+					
 				}
+				
 			}
 			
 			if(that.gV.feeCalcMed == "1"){
 				value = Number(val)
 				str = that.gV.purchaseRate + '元'
 			}else{
-				if(Number(that.gV.discount)/100 == 1){
-					str = value + '元' +'(' + (that.gV.purchaseRate).toFixed(2) + '%)'
+				if(!!that.gV.discount){
+					//有费率
+					if(Number(that.gV.discount)/100 == 1){
+						str = value + '元' +'(' + (that.gV.purchaseRate).toFixed(2) + '%)'
+					}else{
+						var rate = that.gV.purchaseRate * that.gV.discount/100
+						value = (Number(val)*(1-1/(1 + Number(rate)))).toFixed(2)
+						value2 = (Number(val)*(1-1/(1 + that.gV.purchaseRate))).toFixed(2)
+						discountMount = (Number(value2) - Number(value)).toFixed(2)
+						str = value + '元&nbsp;' + '(<span class="line-rate">' + that.gV.purchaseRate*100 + '%</span>&nbsp;&nbsp;' + (rate*100).toFixed(2) + '%)省<span class="discount">' + discountMount + '</span>元'
+					}
 				}else{
-					var rate = that.gV.purchaseRate * that.gV.discount/100
-					value = (Number(val)*(1-1/(1 + Number(rate)))).toFixed(2)
-					value2 = (Number(val)*(1-1/(1 + that.gV.purchaseRate))).toFixed(2)
-					discountMount = (Number(value2) - Number(value)).toFixed(2)
-					str = value + '元&nbsp;' + '(<span class="line-rate">' + that.gV.purchaseRate*100 + '%</span>&nbsp;&nbsp;' + (rate*100).toFixed(2) + '%)省<span class="discount">' + discountMount + '</span>元'
+					 //无费率
+					 str = Number(val)*that.gV.purchaseRate+"元&nbsp;"+'(<span>' + that.gV.purchaseRate*100 + '%</span>)'
 				}
+				
 				
 				 
 			}
@@ -428,7 +491,7 @@ $(function () {
 
 			//点击转出规则
 			mui("body").on('mdClick','.goRule',function(){
-				window.location.href = site_url.transactionRules_url + '?fundCode=' + that.gV.fundCode;
+				window.location.href = site_url.pofTransactionRules_url + '?fundCode=' + that.gV.fundCode;
 			}, {
 				htmdEvt: 'fundTransformIn_04'
 			}) 
@@ -475,6 +538,7 @@ $(function () {
 				}else{
 					that.gV.bankAccountSecret = $(this).attr('bankAccoutEncrypt');
 					that.gV.enableAmount = $(this).attr('enableAmount')
+					that.gV.bugFundName = $(this).attr('fundName');
 					data.push({
 						// bankThumbnailUrl:$(this).attr('bankThumbnailUrl'),
 						fundName:$(this).attr('fundName'),
@@ -529,6 +593,10 @@ $(function () {
 			
 			//确定
 			mui("body").on('mdClick','.btn_box .btn',function(){
+				if($("#transformInput").val().includes(".") && $("#transformInput").val().split(".")[1].length >2){
+					tipAction('只能输入两位小数')
+					return
+				}
 
 				if(!!that.gV.minValue){
 					if(Number(that.gV.balance) < Number(that.gV.minValue)){
@@ -604,7 +672,7 @@ $(function () {
 			//密码校验不通过   ---找回密码
 			mui("body").on('mdClick','.error2 .elasticYes',function(){
 				//跳往原生页面去修改密码
-				window.location.href = site_url.pofRetrievePassword_url
+				window.location.href = site_url.pofForgotPassword_url
 			}, {
 				htmdEvt: 'fundTransformIn_14'
 			}) ;
@@ -620,16 +688,20 @@ $(function () {
 			//添加银行卡 -- 跳往原生
 			mui("body").on('mdClick','.popup-last',function(){
 				//跳往原生页面去修改密码
-				window.location.href = site_url.pofAddBankCard_url
+				if(that.gV.doubleClickStatus){
+                    window.location.href = site_url.pofAddBankCard_url
+				}
+				
 			}, {
 				htmdEvt: 'fundTransformIn_16'
 			}) ;
 			//  ---《基金合同》《招募说明书》
 			mui("body").on('mdClick','.goPreview',function(){
 				var link = $(this).attr('datalink')
+				var links=link.split("?")
+			    var fileNames=links[0].substring(links[0].lastIndexOf('.'))
 				var typInfo = $(this).attr('type') == '1' ? '基金合同' : '招募说明书'
-				debugger
-				window.location.href = link +'&fileName=' + new Base64().encode(typInfo)
+				window.location.href = link +'&fileName=' + new Base64().encode(typInfo+fileNames)
 			}, {
 				htmdEvt: 'fundTransformIn_17'
 			}) ;
@@ -644,7 +716,21 @@ $(function () {
 					}
 			}, {
 				htmdEvt: 'fundTransformIn_18'
-			}) ;
+			});
+			//返回按钮
+			mui("mui").on("mdClick","#goBack",function(){
+				history.go(-1)
+			},{
+				htmdEvt: 'fundTransformIn_21'
+			})
+
+			//风险揭示函
+			mui("body").on("mdClick",'.raskBook',function(){
+				//风险揭示函
+				window.location.href = site_url.superContent_url + '?id=93'
+			},{
+				htmdEvt: 'fundTransformIn_20'
+			})
 
 
 		}
