@@ -36,38 +36,13 @@ $(function() {
             },
             //初始化
             init: function() {
-                // 判断入口，为1时是用户绑定完理财师后跳转过来
-                if(splitUrl['type'] == 1) {
-                    // 绑定成功理财师提示用户已绑定成功
-                    $.elasticLayer({
-                        id: "tip",
-                        title: '绑定成功',
-                        p: '<p class="text_left">您心仪的理财师将会在一个工作日内与您联系，请耐心等待并保持手机畅通。</p><div class="warmPrompt">如有疑问，请致电客服热线：<span class="hintNumber">400-8980-618</span></div>',
-                        zIndex: 100,
-                        yesButtonPosition: 'right',
-                        hideCelButton: false,
-                        yesTxt: '浏览产品',
-                        celTxt: '返回首页',
-                        htmdEvtYes:'starFinancialPlannerList_08',  // 埋点确定按钮属性
-                        htmdEvtCel:'starFinancialPlannerList_09',  // 埋点取消按钮属性
-                        callback: function() {
-                            // 点击浏览产品跳转理财首页
-                            window.location.href = site_url.wealthIndex_url
-                        },
-                        callbackCel: function() {
-                            // 点击返回首页跳转首页
-                            window.location.href = site_url.index_url
-                        }
-                    });
-                } else {
-                    var that = this;
-                    // that.getCityListData();
-                    $('.activityNoList').css({
-                        'margin-top': '.3rem'
-                    });
-                    that.getCity();
-                    that.events();
-                }
+                var that = this;
+                // that.getCityListData();
+                $('.activityNoList').css({
+                    'margin-top': '.3rem'
+                });
+                that.getCity();
+                that.events();
             },
             //初始化mui的上拉加载
             initMui: function() {
