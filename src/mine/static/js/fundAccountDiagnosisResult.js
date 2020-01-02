@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2019-12-09 15:53:31
- * @LastEditTime : 2019-12-31 15:04:09
+ * @LastEditTime : 2020-01-02 14:05:57
  * @LastEditors  : Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \htjf-app\src\mine\static\js\fundAccountDiagnosisResult.js
@@ -25,63 +25,66 @@ $(function() {
         $e: {
             holdingBox: $('#holdingBox'), // 账户持仓情况
             holdingBoxTemp: $('#holdingBox-template'), // 账户持仓情况模板
-            diagnosis: $("#diagnosis-box"), //诊断结论
-            templateTransferFunds: $("#templateTransferFunds"), //基金列表模板
-            TransferFundsContent: $(".otherAddList .selectFundCode"), //基金列表容器
-            readyPurchaseHTFunds: $("#readyPurchaseHTFunds"), //恒天基金模板
-            templateTransferFundsList: $(".templateTransferFundsList"), //恒天基金容器
-            userAge: $(".userAge"), //年龄
-            sex: $("#sex"), //性别
-            professional: $("#professional"), //职业
-            investment_year: $("#investment_year"), //投资年限
-            riskLevel: $("#riskLevel"), //风险等级
-            expectedInvestment_year: $("#expectedInvestment_year"), //预计投资年限
-            liquidity: $("#liquidity"), //流动性需求
-            yield_second: $("#yield_second"), // 最高预期年化收益
-            yield_first: $("#yield_first"), // 最低预期年化收益
-            loss_second: $("#loss_second"), //最高承受最大回撤
-            loss_first: $("#loss_first"), // 最低承受最大回撤
-            yieldControl: $(".yieldControl"), //年化收益数据显示容器
-            lossControl: $(".lossControl"), // 可承受数据显示容器
-            fundDiagnosisSexTemplate: $(".popup-content .sex ul"), //性别下拉列表容器
-            fundDiagnosisVocationTemplate: $(".popup-content .professional ul"), //职业下拉列表容器
-            fundDiagnosisInvestDurationTemplate: $(".popup-content .investment_year ul"), //投资年限下拉列表容器
-            fundDiagnosisRiskLevelTemplate: $(".popup-content .riskLevel ul"), //风险下拉列表容器
-            fundDiagnosisEInvestDurationLevelTemplate: $(".popup-content .expectedInvestment_year ul"), //预期投资年限下拉列表容器
-            fundDiagnosisLiquidityRequirementTemplate: $(".popup-content .liquidity ul"), //流动性需求下拉列表容器
-            templateSelectBox: $(".selectItem"), //下拉框模板
+            diagnosis:$("#diagnosis-box"), //诊断结论
+            templateTransferFunds:$("#templateTransferFunds"), //基金列表模板
+            TransferFundsContent:$(".otherAddList .selectFundCode"), //基金列表容器
+            readyPurchaseHTFunds:$("#readyPurchaseHTFunds"), //恒天基金模板
+            templateTransferFundsList:$(".templateTransferFundsList"),  //恒天基金容器
+            userAge:$(".userAge"), //年龄
+            sex:$("#sex"), //性别
+            professional:$("#professional"), //职业
+            professionalDescript:$("#professionalDescript"), //职业描述
+            investment_year:$("#investment_year"), //投资年限
+            riskLevel:$("#riskLevel"), //风险等级
+            expectedInvestment_year:$("#expectedInvestment_year"), //预计投资年限
+            liquidity:$("#liquidity"),  //流动性需求
+            yield_second:$("#yield_second"), // 最高预期年化收益
+            yield_first:$("#yield_first"),  // 最低预期年化收益
+            loss_second:$("#loss_second"),  //最高承受最大回撤
+            loss_first:$("#loss_first"),    // 最低承受最大回撤
+            yieldControl:$(".yieldControl"), //年化收益数据显示容器
+            lossControl:$(".lossControl"),   // 可承受数据显示容器
+            fundDiagnosisSexTemplate:$(".popup-content .sex ul"), //性别下拉列表容器
+            fundDiagnosisVocationTemplate:$(".popup-content .professional ul"), //职业下拉列表容器
+            fundDiagnosisInvestDurationTemplate:$(".popup-content .investment_year ul"),  //投资年限下拉列表容器
+            fundDiagnosisRiskLevelTemplate:$(".popup-content .riskLevel ul"),  //风险下拉列表容器
+            fundDiagnosisEInvestDurationLevelTemplate:$(".popup-content .expectedInvestment_year ul"),  //预期投资年限下拉列表容器
+            fundDiagnosisLiquidityRequirementTemplate:$(".popup-content .liquidity ul"),  //流动性需求下拉列表容器
+            templateSelectBox:$(".selectItem") , //下拉框模板
         },
         gV: {
-            applyType: splitUrl['type'], // add 为新增  edit 为编辑
-            applyId: splitUrl['applyId'], //编辑具体的基金的id
-            otherFundCodeData: [], //其他基金数据
-            readyPurchaseHTFunds: "", //恒天基金
-            selectPurchaseHTFunds: [], //已购买恒天基金
-            userAge: "", //年龄
-            sexData: "", //性别
-            sexDataCode: "", //性别编码
-            professionalData: "", //职业
-            professionalDataCode: "", //职业编码
-            investment_yearData: "", //投资年限
-            investment_yearDataCode: "", //投资年限编码
-            riskLevelData: "", //风险等级
-            riskLevelDataCode: "", //风险等级编码
-            expectedInvestment_yearData: "", //预计投资年限
-            expectedInvestment_yearDataCode: "", //预计投资年限编码
-            liquidityData: "", //流动性需求
-            liquidityDataCode: "", //流动性需求编码
-            yield_firstData: "", // 最低预期年化收益
-            yield_secondData: "", // 最高预期年化收益
-            loss_firstData: "", // 最低承受最大回撤
-            loss_secondData: "", //最高承受最大回撤
-            typeInput: "", //预期年化收益率 与 可承受最大回撤
-            fundDiagnosisSexDicData: "", //性别数据字典
-            fundDiagnosisVocationDicData: "", //职业数据字典
-            fundDiagnosisInvestDurationDicData: "", //投资年限字典
-            fundDiagnosisRiskLevelDicData: "", //风险等级字典
-            fundDiagnosisEInvestDurationLevelDicData: "", //预计投资年限字典
-            fundDiagnosisLiquidityRequirementDicData: "", //流动性需求字典
-            dataPickData: "", //其他基金的日期
+              applyType:splitUrl['type'], // add 为新增  edit 为编辑
+              applyId:splitUrl['applyId'],   //编辑具体的基金的id
+              otherFundCodeData:[], //其他基金数据
+              readyPurchaseHTFunds:"", //恒天基金
+              selectPurchaseHTFunds:[],//已购买恒天基金
+              userAge:"", //年龄
+              birthDate:"", 
+              sexData:"",//性别
+              sexDataCode:"", //性别编码
+              professionalData:"",//职业
+              professionalDataCode:"", //职业编码
+              professionalDescriptData:"", // 职业描述
+              investment_yearData:"", //投资年限
+              investment_yearDataCode:"",  //投资年限编码
+              riskLevelData:"", //风险等级
+              riskLevelDataCode:"", //风险等级编码
+              expectedInvestment_yearData:"", //预计投资年限
+              expectedInvestment_yearDataCode:"", //预计投资年限编码
+              liquidityData:"", //流动性需求
+              liquidityDataCode:"", //流动性需求编码
+              yield_firstData:"",// 最低预期年化收益
+              yield_secondData:"", // 最高预期年化收益
+              loss_firstData:"",  // 最低承受最大回撤
+              loss_secondData:"",  //最高承受最大回撤
+              typeInput:"",//预期年化收益率 与 可承受最大回撤
+              fundDiagnosisSexDicData:"", //性别数据字典
+              fundDiagnosisVocationDicData:"", //职业数据字典
+              fundDiagnosisInvestDurationDicData:"" ,//投资年限字典
+              fundDiagnosisRiskLevelDicData:"", //风险等级字典
+              fundDiagnosisEInvestDurationLevelDicData:"", //预计投资年限字典
+              fundDiagnosisLiquidityRequirementDicData:"", //流动性需求字典
+              dataPickData:"", //其他基金的日期
         },
         init: function() {
             var that = this;
@@ -116,12 +119,14 @@ $(function() {
         },
         initData: function(data) {
             var that = this
-            that.gV.userAge = data.age; //年龄
-            that.gV.sexDataCode = data.sex; //性别
-            that.gV.professionalDataCode = data.evocation; //职业
-            that.gV.investment_yearDataCode = data.investDurationLevel; //投资年限
-            that.gV.riskLevelDataCode = data.riskLevel; //风险等级
-            that.gV.expectedInvestment_yearDataCode = data.eInvestDurationLevel; //预期年限
+            that.gV.userAge = data.age;  //年龄
+            that.gV.birthDate = data.birthDate ; //出生日期
+            that.gV.sexDataCode = data.sex;  //性别
+            that.gV.professionalDataCode = data.evocation ;  //职业
+            that.gV.professionalDescriptData = data.evocationExtension; //职业描述
+            that.gV.investment_yearDataCode = data.investDurationLevel;  //投资年限
+            that.gV.riskLevelDataCode = data.riskLevel;   //风险等级
+            that.gV.expectedInvestment_yearDataCode = data.eInvestDurationLevel;  //预期年限
             that.gV.liquidityDataCode = data.liquidityRequirement; //流动性
             that.gV.yield_firstData = data.eYieldratePerYearMin;
             that.gV.yield_secondData = data.eYieldratePerYearMax;
@@ -226,20 +231,35 @@ $(function() {
             }
             return val;
         },
-        initParmis: function() {
-            var that = this;
-            that.$e.userAge[0].value = that.gV.userAge
-            that.$e.sex[0].textContent = that.escapeCode(that.gV.sexDataCode, "fundDiagnosisSex"); //性别
-            that.$e.professional[0].textContent = that.escapeCode(that.gV.professionalDataCode, "fundDiagnosisVocation"); //职业
-            that.$e.investment_year[0].textContent = that.escapeCode(that.gV.investment_yearDataCode, "fundDiagnosisInvestDuration"); //投资年限
-            that.$e.riskLevel[0].textContent = that.escapeCode(that.gV.riskLevelDataCode, "fundDiagnosisRiskLevel"); //风险等级
-            that.$e.expectedInvestment_year[0].textContent = that.escapeCode(that.gV.expectedInvestment_yearDataCode, "fundDiagnosisEInvestDurationLevel"); //预期年限
-            that.$e.liquidity[0].textContent = that.escapeCode(that.gV.liquidityDataCode, "fundDiagnosisLiquidityRequirement"); //流动性
+        initParmis:function(){
+             var that = this;
+             that.$e.userAge[0].value =  that.gV.userAge
+             that.$e.sex[0].textContent = that.escapeCode(that.gV.sexDataCode,"fundDiagnosisSex");   //性别
+             that.$e.professional[0].textContent = that.escapeCode(that.gV.professionalDataCode,"fundDiagnosisVocation");  //职业
+             if(!!that.gV.professionalDescriptData){
+                that.$e.professionalDescript.show()
+                that.$e.professionalDescript[0].value = that.gV.professionalDescriptData;  //职业描述
+             }
+             
+             that.$e.investment_year[0].textContent = that.escapeCode(that.gV.investment_yearDataCode,"fundDiagnosisInvestDuration");  //投资年限
+             that.$e.riskLevel[0].textContent = that.escapeCode(that.gV.riskLevelDataCode,"fundDiagnosisRiskLevel");  //风险等级
+             that.$e.expectedInvestment_year[0].textContent = that.escapeCode(that.gV.expectedInvestment_yearDataCode,"fundDiagnosisEInvestDurationLevel"); //预期年限
+             that.$e.liquidity[0].textContent = that.escapeCode(that.gV.liquidityDataCode,"fundDiagnosisLiquidityRequirement");  //流动性
+             if(!!that.gV.yield_firstData || !! that.gV.yield_secondData){
+                that.$e.yieldControl.show();
+             }else{
+                that.$e.yieldControl.hide();
+             }
 
-            that.$e.yield_first[0].textContent = that.gV.yield_firstData == "" ? "请选择" : that.gV.yield_firstData;
-            that.$e.yield_second[0].textContent = that.gV.yield_secondData == "" ? "请选择" : that.gV.yield_secondData;
-            that.$e.loss_first[0].textContent = that.gV.loss_firstData == "" ? "请选择" : that.gV.loss_firstData;
-            that.$e.loss_second[0].textContent = that.gV.loss_secondData == "" ? "请选择" : that.gV.loss_secondData;
+             if(!!that.gV.loss_firstData || !!that.gV.loss_secondData){
+                that.$e.lossControl.show();
+             }else{
+                that.$e.lossControl.hide();
+             }
+             that.$e.yield_first[0].textContent = that.gV.yield_firstData ==""?"请选择":that.gV.yield_firstData;
+             that.$e.yield_second[0].textContent = that.gV.yield_secondData ==""?"请选择":that.gV.yield_secondData;
+             that.$e.loss_first[0].textContent = that.gV.loss_firstData ==""?"请选择":that.gV.loss_firstData;
+             that.$e.loss_second[0].textContent = that.gV.loss_secondData ==""?"请选择":that.gV.loss_secondData;
         },
         queryDictionary: function() {
             //字典
@@ -292,24 +312,25 @@ $(function() {
         addFundDiagnosisApply: function() {
             var that = this;
             var obj = [{
-                url: site_url.addFundDiagnosisApply_api,
-                needDataEmpty: true,
-                data: {
-                    id: "", //主键 
-                    age: that.gV.userAge, //年龄
-                    sex: (!!that.$e.sex.attr("num")) ? that.$e.sex.attr("num") : that.gV.sexDataCode, //性别
-                    evocation: (!!that.$e.professional.attr("num")) ? that.$e.professional.attr("num") : that.gV.professionalDataCode, //职业
-                    evocationExtension: "", //职业描述
-                    investDurationLevel: (!!that.$e.investment_year.attr("num")) ? that.$e.investment_year.attr("num") : that.gV.investment_yearDataCode, //投资年限
-                    riskLevel: (!!that.$e.riskLevel.attr('num')) ? that.$e.riskLevel.attr('num') : that.gV.riskLevelDataCode, //风险等级
-                    eInvestDurationLevel: (!!that.$e.expectedInvestment_year.attr("num")) ? that.$e.expectedInvestment_year.attr("num") : that.gV.expectedInvestment_yearDataCode, //预计投资年限
-                    liquidityRequirement: (!!that.$e.liquidity.attr("num")) ? that.$e.liquidity.attr("num") : that.gV.liquidityDataCode, //流动性需求
-                    eYieldratePerYearMin: that.gV.yield_firstData, //预期年化收益率最小值
-                    eYieldratePerYearMax: that.gV.yield_secondData, //预期年化收益率最大值
-                    affordableMaxDeficitRateMin: that.gV.loss_firstData, //可承受最大亏损最小值
-                    affordableMaxDeficitRateMax: that.gV.loss_secondData, //可承受最大亏损最大值
-                    readyPurchaseHTFunds: that.gV.selectPurchaseHTFunds, //已购买恒天基金
-                    readyPurchaseQTFunds: that.gV.otherFundCodeData //已购买其他基金
+                url:site_url.addFundDiagnosisApply_api,
+                needDataEmpty:true,
+                data:{
+                    id:"",  //主键 
+                    age:that.gV.userAge, //年龄
+                    birthDate:that.gV.birthDate,  //出生日期
+                    sex:(!!that.$e.sex.attr("num"))?that.$e.sex.attr("num"):that.gV.sexDataCode, //性别
+                    evocation:(!!that.$e.professional.attr("num"))? that.$e.professional.attr("num"):that.gV.professionalDataCode, //职业
+                    evocationExtension:that.$e.professionalDescript.val(),//职业描述
+                    investDurationLevel:(!!that.$e.investment_year.attr("num"))?that.$e.investment_year.attr("num"):that.gV.investment_yearDataCode, //投资年限
+                    riskLevel:(!!that.$e.riskLevel.attr('num'))?that.$e.riskLevel.attr('num'):that.gV.riskLevelDataCode,  //风险等级
+                    eInvestDurationLevel:(!!that.$e.expectedInvestment_year.attr("num"))?that.$e.expectedInvestment_year.attr("num"):that.gV.expectedInvestment_yearDataCode,  //预计投资年限
+                    liquidityRequirement:(!!that.$e.liquidity.attr("num"))?that.$e.liquidity.attr("num"):that.gV.liquidityDataCode,  //流动性需求
+                    eYieldratePerYearMin:that.gV.yield_firstData, //预期年化收益率最小值
+                    eYieldratePerYearMax:that.gV.yield_secondData,  //预期年化收益率最大值
+                    affordableMaxDeficitRateMin:that.gV.loss_firstData,  //可承受最大亏损最小值
+                    affordableMaxDeficitRateMax:that.gV.loss_secondData,  //可承受最大亏损最大值
+                    readyPurchaseHTFunds:that.gV.selectPurchaseHTFunds,    //已购买恒天基金
+                    readyPurchaseQTFunds:that.gV.otherFundCodeData      //已购买其他基金
                 },
                 callbackDone: function(json) {
                     console.log("提交申请", json)
@@ -323,10 +344,10 @@ $(function() {
                         zIndex: 100,
                         htmdEvtYes: 'fundAccountDiagnosisResult_09',
                     });
-                    setTimeout(function() {
-                        window.location.href = site_url.applyHistory_url
-                    }, 1000)
-
+                    setTimeout(function(){
+                        //window.location.href = site_url.applyHistory_url 
+                    },1000)
+                   
                 },
                 callbackNoData: function(json) {
                     tipAction(json.message);
@@ -361,40 +382,41 @@ $(function() {
             //修改基金诊断申请
             var that = this;
             var obj = [{
-                url: site_url.updateFundDiagnosisApply_api,
-                needDataEmpty: true,
-                data: {
-                    id: that.gV.applyId, //主键
-                    age: that.gV.userAge, //年龄
-                    sex: (!!that.$e.sex.attr("num")) ? that.$e.sex.attr("num") : that.gV.sexDataCode, //性别
-                    evocation: (!!that.$e.professional.attr("num")) ? that.$e.professional.attr("num") : that.gV.professionalDataCode, //职业
-                    evocationExtension: "", //职业描述
-                    investDurationLevel: (!!that.$e.investment_year.attr("num")) ? that.$e.investment_year.attr("num") : that.gV.investment_yearDataCode, //投资年限
-                    riskLevel: (!!that.$e.riskLevel.attr('num')) ? that.$e.riskLevel.attr('num') : that.gV.riskLevelDataCode, //风险等级
-                    eInvestDurationLevel: (!!that.$e.expectedInvestment_year.attr("num")) ? that.$e.expectedInvestment_year.attr("num") : that.gV.expectedInvestment_yearDataCode, //预计投资年限
-                    liquidityRequirement: (!!that.$e.liquidity.attr("num")) ? that.$e.liquidity.attr("num") : that.gV.liquidityDataCode, //流动性需求
-                    eYieldratePerYearMin: that.gV.yield_firstData, //预期年化收益率最小值
-                    eYieldratePerYearMax: that.gV.yield_secondData, //预期年化收益率最大值
-                    affordableMaxDeficitRateMin: that.gV.loss_firstData, //可承受最大亏损最小值
-                    affordableMaxDeficitRateMax: that.gV.loss_secondData, //可承受最大亏损最大值
-                    readyPurchaseHTFunds: that.gV.selectPurchaseHTFunds, //已购买恒天基金
-                    readyPurchaseQTFunds: that.gV.otherFundCodeData //已购买其他基金
+                url:site_url.updateFundDiagnosisApply_api,
+                needDataEmpty:true,
+                data:{
+                    id:that.gV.applyId,  //主键
+                    age:that.gV.userAge, //年龄
+                    birthDate:that.gV.birthDate,  //出生日期
+                    sex:(!!that.$e.sex.attr("num"))?that.$e.sex.attr("num"):that.gV.sexDataCode, //性别
+                    evocation:(!!that.$e.professional.attr("num"))? that.$e.professional.attr("num"):that.gV.professionalDataCode, //职业
+                    evocationExtension:that.$e.professionalDescript.val(),//职业描述
+                    investDurationLevel:(!!that.$e.investment_year.attr("num"))?that.$e.investment_year.attr("num"):that.gV.investment_yearDataCode, //投资年限
+                    riskLevel:(!!that.$e.riskLevel.attr('num'))?that.$e.riskLevel.attr('num'):that.gV.riskLevelDataCode,  //风险等级
+                    eInvestDurationLevel:(!!that.$e.expectedInvestment_year.attr("num"))?that.$e.expectedInvestment_year.attr("num"):that.gV.expectedInvestment_yearDataCode,  //预计投资年限
+                    liquidityRequirement:(!!that.$e.liquidity.attr("num"))?that.$e.liquidity.attr("num"):that.gV.liquidityDataCode,  //流动性需求
+                    eYieldratePerYearMin:that.gV.yield_firstData, //预期年化收益率最小值
+                    eYieldratePerYearMax:that.gV.yield_secondData,  //预期年化收益率最大值
+                    affordableMaxDeficitRateMin:that.gV.loss_firstData,  //可承受最大亏损最小值
+                    affordableMaxDeficitRateMax:that.gV.loss_secondData,  //可承受最大亏损最大值
+                    readyPurchaseHTFunds:that.gV.selectPurchaseHTFunds,    //已购买恒天基金
+                    readyPurchaseQTFunds:that.gV.otherFundCodeData       //已购买其他基金
                 },
                 callbackDone: function(json) {
                     console.log("修改申请", json);
                     var tital = "编辑提交申请成功";
                     var value = "恒天公募基金研究团队正在快马加鞭赶来,我们将尽快与你联系,请耐心等待并保持手机畅通";
-                    $.elasticLayerTypeTwo({
-                        id: "tip",
-                        title: tital,
-                        p: '<p>' + value + '</p>',
-                        buttonTxt: '知道了',
-                        zIndex: 100,
-                        htmdEvtYes: 'fundAccountDiagnosisResult_10'
-                    });
-                    setTimeout(function() {
-                        window.location.href = site_url.applyHistory_url
-                    }, 1000)
+                     $.elasticLayerTypeTwo({
+                         id: "tip",
+                         title: tital,
+                         p: '<p>' + value + '</p>',
+                         buttonTxt: '知道了',
+                         zIndex: 100,
+                         htmdEvtYes:'fundAccountDiagnosisResult_10'
+                     });
+                     setTimeout(function(){
+                       // window.location.href = site_url.applyHistory_url 
+                    },1000)
                 },
                 callbackNoData: function(json) {
                     tipAction(json.message);
@@ -405,7 +427,16 @@ $(function() {
             }];
             $.ajaxLoading(obj)
         },
-        events: function() {
+        professionalCallback:function(){
+            var that =this;
+            if(that.$e.professional.attr("num")=="98"){
+                //职业为其他
+                that.$e.professionalDescript.show()
+            }else{
+                that.$e.professionalDescript.hide()
+            }
+        },
+       events:function(){
             var that = this;
             var dtPicker = new mui.DtPicker({
                 type: 'date'
@@ -479,11 +510,11 @@ $(function() {
                 // $('.popup-mask').show();
                 if (type == "sex") {
                     popPicker(1, that.gV.fundDiagnosisSexDicData, that.$e.sex);
-                    // $(".popup-content .sex").show()
-                } else if (type == "professional") {
-                    popPicker(1, that.gV.fundDiagnosisVocationDicData, that.$e.professional);
-                    // $(".popup-content .professional").show()
-                } else if (type == "investment_year") {
+                   // $(".popup-content .sex").show()
+                }else if(type == "professional"){
+                    popPicker(1, that.gV.fundDiagnosisVocationDicData, that.$e.professional,that.professionalCallback.bind(that));
+                   // $(".popup-content .professional").show()
+                }else if(type == "investment_year"){
                     popPicker(1, that.gV.fundDiagnosisInvestDurationDicData, that.$e.investment_year);
                     //   $(".popup-content .investment_year").show()
                 } else if (type == "riskLevel") {
@@ -648,6 +679,10 @@ $(function() {
             }, {
                 'htmdEvt': 'fundAccountDiagnosisResult_07'
             })
+     
+            mui("body").on("mdClick",".elasticButtons",function(){
+                window.location.href = site_url.applyHistory_url 
+            } )
 
             //基金勾选
             mui("body").on("mdClick", ".templateTransferFundsList li input", function() {
