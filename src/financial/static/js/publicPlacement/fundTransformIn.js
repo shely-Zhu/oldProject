@@ -688,8 +688,10 @@ $(function () {
 			//添加银行卡 -- 跳往原生
 			mui("body").on('mdClick','.popup-last',function(){
 				//跳往原生页面去修改密码
+				debugger
+				var isonline = that.gV.payType==0?"?supportOnline=true":""
 				if(that.gV.doubleClickStatus){
-                    window.location.href = site_url.pofAddBankCard_url
+                    window.location.href = site_url.pofAddBankCard_url+isonline
 				}
 				
 			}, {

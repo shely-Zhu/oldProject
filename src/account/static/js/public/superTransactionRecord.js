@@ -222,7 +222,8 @@ $(function() {
                         //循环添加每条条件
                         $.each(jsonData.pageList,function(i,el){
                             el.isShares = that.gV.current_index == 3? 1 : 0;        
-                            el.isParticipation = that.gV.current_index == 2? 1 : 0;        
+                            el.isParticipation = that.gV.current_index == 2? 1 : 0;   
+                            el.isfundType = el.fundType=='10300' ? 1 : 0;     
                         });
                         var list_html = that.gV.list_template(jsonData);//  把内容  放到  模板里
                         //设置这两参数，在initMui()中使用

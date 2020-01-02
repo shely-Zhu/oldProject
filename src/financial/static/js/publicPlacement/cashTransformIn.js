@@ -476,9 +476,11 @@ $(function () {
 
 			//添加银行卡 -- 跳往原生
 			mui("body").on('mdClick','.popup-last',function(){
+				//判断是否是在线支付
+				var isonline = that.gV.payType==0?"?supportOnline=true":""
 				//跳往原生页面去修改密码
 				if(that.gV.doubleClickStatus){
-					window.location.href = site_url.pofAddBankCard_url
+                    window.location.href = site_url.pofAddBankCard_url+isonline
 				}
 				
 			}, {
