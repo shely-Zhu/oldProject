@@ -12,6 +12,8 @@ require('@pathCommonJs/ajaxLoading.js');
 // 切换
 require('@pathCommonJsCom/tabScroll.js');
 require('@pathCommonJsCom/goTopMui.js');
+var setCookie = require('@pathNewCommonJsCom/setCookie.js');
+var getCookie = require('@pathNewCommonJsCom/getCookie.js');
 
 // require('@pathCommonJs/components/headBarConfig.js');
 var splitUrl = require('@pathCommonJs/components/splitUrl.js')();
@@ -37,7 +39,7 @@ $(function() {
 				fundCode: splitUrl['fundCode'],
 				tradeNo: splitUrl['tradeNo'],
             },
-            current_index: 0, //左右滑动区域的索引
+            current_index:getCookie("current_index")?getCookie("current_index"):0, //左右滑动区域的索引
             list_template: '', //列表的模板，生成后存放在这里
             ajaxArr: [], //存放每一个ajax请求的传参数据
             // 存放ajax请求地址  已持仓  待确认
@@ -55,8 +57,12 @@ $(function() {
             //拼模板，初始化左右滑动mui组件
             that.beforeFunc();
 
-            //初始化第一屏区域的上拉加载
-            that.initMui($('#scroll1'));
+            //初始化第一屏区域的上拉加载 判断存没存cookie
+            if(getCookie("current_index")){
+                that.initMui($('#scroll'+(parseInt(that.gV.current_index)+1)));
+            }else{
+                that.initMui($('#scroll1'));
+            }
 
 
             //事件监听
@@ -94,12 +100,12 @@ $(function() {
                     content: wrap_html
                 })
             })
-
             var obj = {
                 wrapper: $('.myAsset'), //存放整个组件的区域
                 needNavAction: false,
                 //needBlock: true,
                 navList: that.gV.navList, //导航
+                activeList:that.gV.current_index,
                 contentLength: that.gV.navList.length, //左右滑动的区域个数，即导航数组长度
                 contentList: contentArr, //此时只有框架，实际列表内容还未请求
                 callback: function(t) { //t返回的是 id 为 scroll1 / scroll2 这样的切换后当前区域中的节点
@@ -107,6 +113,7 @@ $(function() {
                     var index = t.attr('data-scroll');
                     //data-scroll属性即当前左右切换区域的索引
                     that.gV.current_index = index;
+                    setCookie("current_index",index)  
                     //判断当前区域是否已经初始化出来上拉加载
                     if (t.hasClass('hasPullUp')) {
                         //有这个class，表示已经初始化，不再执行下一步
@@ -160,6 +167,7 @@ $(function() {
 
         initMui: function($id) {//$id   就是滑动区域的 id 节点
             var that = this;
+            // $('#slider .tab-scroll-wrap .mui-control-item').eq(that.gV.current_index).click()
             w = $id.attr('id'),  //获取节点的 id
                 s = '#' + w + ' .contentWrapper';  //id 拼接 查出content区域
 
@@ -223,7 +231,6 @@ $(function() {
                         $.each(jsonData.pageList,function(i,el){
                             el.isShares = that.gV.current_index == 3? 1 : 0;        
                             el.isParticipation = that.gV.current_index == 2? 1 : 0;   
-                            el.isfundType = el.fundType=='10300' ? 1 : 0;     
                         });
                         var list_html = that.gV.list_template(jsonData);//  把内容  放到  模板里
                         //设置这两参数，在initMui()中使用
@@ -296,6 +303,8 @@ $(function() {
                         }
 
                         //获取当前展示的tab的索引
+                        // $('#slider .tab-scroll-wrap .mui-control-item').removeClass("mui-active")
+                        // $('#slider .tab-scroll-wrap .mui-control-item').eq(that.gV.current_index).addClass("mui-active")
                         var index = $('#slider .tab-scroll-wrap .mui-active').index(),
                             $list = $("#move_" + index + " .list");
                         if (!$list.hasClass('setHeight')) {

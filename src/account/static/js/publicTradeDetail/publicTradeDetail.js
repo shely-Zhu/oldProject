@@ -158,12 +158,7 @@ $(function () {
                 $('.header .amount').html(model.tradeAmount);//交易申请金额 header中显示的后下面显示的金额都是这个 除了确认信息中的金额显示的是确认金额confirmAmount
             } else {
                 $('.header .amount').html(model.tradeShares);//交易申请份额
-                 //判断是否是货币基金
-                if(model.fundType=='10300'){
-                    $('.header .yuan').html("元");//更换单位
-                }else{
-                    $('.header .yuan').html("份");//更换单位
-                }
+                $('.header .yuan').html("份");//更换单位
             }
             $('.header .trade_status').html(model.tradeApplyDesc);//交易状态 例如待扣款
             $('.header .trade_status_des').html(model.tradeApplyDescMessage);//交易状态描述信息 例如等待给银行汇款 
@@ -328,11 +323,7 @@ $(function () {
             //分红没有进度条 隐藏之
             $('.header .amount').html(splitUrl()['shares']);//交易申请份额
             //判断是否是货币基金
-            if(model.fundType=='10300'){
-                $('.header .yuan').html("元");//更换单位
-            }else{
-                $('.header .yuan').html("份");//更换单位
-            }
+            $('.header .yuan').html("份");//更换单位
             $('.header .trade_status').html('分红成功');//分红的交易状态为分红成功
 
             $('.trade_status_area').addClass('hide'); 
