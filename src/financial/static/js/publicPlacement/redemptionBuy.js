@@ -101,7 +101,7 @@ $(function() {
             $(".popupCarList .bank-img").attr("src",that.gv.dataList.bankThumbnailUrl)
         },
         //查看详情提交
-        findMessageCen:function(id){
+        /*findMessageCen:function(id){
             var obj = [{
                 url: site_url.findMessageCenterById_api,
                  contentTypeSearch: true,
@@ -124,7 +124,7 @@ $(function() {
 
             }];
             $.ajaxLoading(obj);
-        },
+        },*/
         //初始化右侧展开
         initQueryTransferFunds:function(){
             var that = this;
@@ -254,8 +254,9 @@ $(function() {
 
             mui("body").on('mdClick','.findMessageCen',function(){
                 var id="79";
-                console.log("aaaaa")
-                that.findMessageCen(id);
+                // 跳转赎回说明页面
+                window.location.href = site_url.redemptionExplain_url + '?id=' + id
+                // that.findMessageCen(id);
             }, {
 				htmdEvt: 'redemptionBuy_04'
 			})
