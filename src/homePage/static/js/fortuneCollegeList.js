@@ -115,19 +115,19 @@ $(function() {
                 },
                 needDataEmpty: true,
                 callbackDone: function(json){
-                    if(json.data==''||json.data=='undefined'||json.data==null){
-                        $('.translate').hide()
-                    }
-                    modelData=json.data.modelVO
-                    articleData=json.data.list
-                    console.log('我是什么',articleData)
-                    // 将列表插入到页面上
-                    generateTemplate(modelData,$('.translate .title'),$('#fortune-template'));
-                    generateTemplate(articleData,$('.translate .content'),$('#content-template'));     					
+                    if(json.data && json.data.list && json.data.list.length > 0) {
+                        $('.translate').removeClass('hide')
+                        modelData=json.data.modelVO
+                        articleData=json.data.list
+                        console.log('我是什么',articleData)
+                        // 将列表插入到页面上
+                        generateTemplate(modelData,$('.translate .title'),$('#fortune-template'));
+                        generateTemplate(articleData,$('.translate .content'),$('#content-template'));
+                    }   					
                 },
                 callbackFail: function(json){
                     console.log(json)
-                },
+                }
              }]
             $.ajaxLoading(obj);
         },
@@ -141,16 +141,16 @@ $(function() {
                 },
                 needDataEmpty: true,
                 callbackDone: function(json){
-                    if(json.data==''||json.data=='undefined'||json.data==null){
-                        $('.fortuneVideo').hide()
-                    }
-                    modelData=json.data.modelVO
-                    articleData=json.data.list
-                    
-                    // 将列表插入到页面上
-                    generateTemplate(modelData,$('.fortuneVideo .title'),$('#fortuneCf-template'));     
-                    generateTemplate(articleData,$('.fortuneVideo ul'),$('#video-template'));
-                    $(".lazyload").lazyload()					
+                    if(json.data && json.data.list && json.data.list.length > 0) {
+                        $(".fortuneVideo").removeClass('hide')
+                        modelData=json.data.modelVO
+                        articleData=json.data.list
+                        
+                        // 将列表插入到页面上
+                        generateTemplate(modelData,$('.fortuneVideo .title'),$('#fortuneCf-template'));     
+                        generateTemplate(articleData,$('.fortuneVideo ul'),$('#video-template'));
+                        $(".lazyload").lazyload()
+                    }					
                 },
                 callbackFail: function(json){
                     console.log(json)
@@ -168,12 +168,31 @@ $(function() {
             },
             needDataEmpty: true,
             callbackDone: function(json){
-                if(json.data==''||json.data=='undefined'||json.data==null){
-                    $('.forum').hide()
+                if(json.data && json.data.list && json.data.list.length > 0) {
+                    $(".forum").removeClass('hide')
+                    listData=json.data.list
+                   console.log(listData)
+                   modelData=json.data.modelVO
+                   var listTitle = [];
+                  var listContent = [];
+                  for(var i = 0 ; i < listData.length; i++) {
+                    listTitle.push({sonModelName: listData[i].sonModelName})
+                    listContent.push({listContent: listData[i].list})
+                  }
+                  console.log('我是listtitle',listTitle)
+                  console.log('我是listContent',listContent)
+                  generateTemplate(modelData,$('.forum .title'),$('#forum-template'));     
+                  generateTemplate(listTitle,$('.broadcast'),$('#forumTitle'));
+                  generateTemplate(listContent,$('.forumList'),$('#forumContent')); 
+                  $(".lazyload").lazyload()     
+                  setTimeout(function(){
+                    $('.broadcast').find('.bigspan').eq(0).addClass('getColor');
+                    $('.broadcast').find('.bigspan').eq(0).css({"paddingLeft":0,"borderLeft":'none'});
+                  },100)
+                  mui('.mui-scroll-wrapper').scroll({
+                    deceleration: 0.0005 //flick 减速系数，系数越大，滚动速度越慢，滚动距离越小，默认值0.0006 
+                  });
                 }
-               listData=json.data.list
-               console.log(listData)
-               modelData=json.data.modelVO
              /*var listTitle = listData.map(d => {
                 return {
                  sonModelName: d.sonModelName,
@@ -184,25 +203,7 @@ $(function() {
                  listContent: d.list
                 }
               })*/
-              var listTitle = [];
-              var listContent = [];
-              for(var i = 0 ; i < listData.length; i++) {
-                listTitle.push({sonModelName: listData[i].sonModelName})
-                listContent.push({listContent: listData[i].list})
-              }
-              console.log('我是listtitle',listTitle)
-              console.log('我是listContent',listContent)
-              generateTemplate(modelData,$('.forum .title'),$('#forum-template'));     
-              generateTemplate(listTitle,$('.broadcast'),$('#forumTitle'));
-              generateTemplate(listContent,$('.forumList'),$('#forumContent'));	
-              $(".lazyload").lazyload()		
-              setTimeout(function(){
-                $('.broadcast').find('.bigspan').eq(0).addClass('getColor');
-                $('.broadcast').find('.bigspan').eq(0).css({"paddingLeft":0,"borderLeft":'none'});
-              },100)
-              mui('.mui-scroll-wrapper').scroll({
-                deceleration: 0.0005 //flick 减速系数，系数越大，滚动速度越慢，滚动距离越小，默认值0.0006 
-              });		
+              		
             },
             callbackFail: function(json){
                 console.log(json)
@@ -405,29 +406,27 @@ $(function() {
                 },
                 needDataEmpty: true,
                 callbackDone: function(json) {
-                    console.log('我是json',json)
-                    if(json.data==''||json.data=='undefined'||json.data==null){
-                        $('.tabContent').hide()
-                    }
-                    that.gV.navList = [];
-                    listData=json.data.list
-                    console.log('我是财富研究',listData)
-                    modelData=json.data.modelVO
-                    for (var i = 0; i < json.data.list.length; i++) {
-                        (function(i) {
-                            that.gV.navList[i] = {
-                                type: json.data.list[i].sonModelName,
-                                num: json.data.list[i].sonModelType
-                            }
-                        })(i);
-                    }
-                    generateTemplate(modelData,$('.tabContent .title'),$('#tabContent-template'));
-                    //拼模板，初始化左右滑动mui组件
-                    that.beforeFunc();
+                    if(json.data && json.data.list && json.data.list.length > 0) {
+                        $('.tabContent').removeClass("hide")
+                        that.gV.navList = [];
+                        listData=json.data.list
+                        console.log('我是财富研究',listData)
+                        modelData=json.data.modelVO
+                        for (var i = 0; i < json.data.list.length; i++) {
+                            (function(i) {
+                                that.gV.navList[i] = {
+                                    type: json.data.list[i].sonModelName,
+                                    num: json.data.list[i].sonModelType
+                                }
+                            })(i);
+                        }
+                        generateTemplate(modelData,$('.tabContent .title'),$('#tabContent-template'));
+                        //拼模板，初始化左右滑动mui组件
+                        that.beforeFunc();
 
-                    //初始化第一屏区域的上拉加载
-                    that.initMui($('#scroll1'));
-
+                        //初始化第一屏区域的上拉加载
+                        that.initMui($('#scroll1'));
+                    }
                 }
             }];
             $.ajaxLoading(obj);
