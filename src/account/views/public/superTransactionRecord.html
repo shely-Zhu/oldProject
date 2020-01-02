@@ -53,7 +53,12 @@
 			 <div class="tit">{{fundName}}</div>
 			 <div class="mon">
 				 {{#if isShares}}
-				   {{sharesMask}}元
+				   {{#if isfundType}}
+				  	 {{sharesMask}}元
+				   {{else}}
+				  	 {{sharesMask}}份
+				   {{/if}}	
+
 				 {{else}}
 				   {{balanceMask}}元 
 				 {{/if}}
