@@ -43,8 +43,8 @@ var gulp = require('gulp'),
 
     newWebpackList = require('./src/newCommon/js/webpackList.js'),
 
-//把webpackList和newWebpackList合并
-webpackList = Object.assign(webpackList, newWebpackList);
+    //把webpackList和newWebpackList合并
+    webpackList = Object.assign(webpackList, newWebpackList);
 
     var prefix = '//static.chtfund.com';//cdn服务地址
 
@@ -54,8 +54,7 @@ webpackList = Object.assign(webpackList, newWebpackList);
 // var named = require('vinyl-named')
 
 for (var i in webpackList) {
-    // webpackList[i] = [ 'babel-polyfill', webpackList[i].replace('/src/', '/middle/js/')]
-    webpackList[i] = [ webpackList[i].replace('/src/', '/middle/js/')]
+    webpackList[i] = webpackList[i].replace('/src/', '/middle/js/')
 }
 
 // Environment setup 环境设置
@@ -209,13 +208,23 @@ gulp.task('proxyTask', function() {
         middleware: function(connect, opt) {
             return [
                 proxy('/app', {
-                    target: 'https://app.htjf4.com',
+                    // target: 'https://app.htjf4.com',
                     // target: 'http://172.16.187.129:8080',//李亚楠
                     // target: 'http://192.168.50.254:8085',
-                    //target: 'https://app.chtfundtest.com',
+                    target: 'https://app.chtfundtest.com',
                     changeOrigin: true,
                     secure: false,
                 }),
+
+                proxy(['/wap', '/web/', '/jf/'], {
+                    // target: 'https://h5.htjf4.com',
+                    //  target: 'http://172.16.187.129:8080',//李亚楠
+                    // target: 'http://172.16.187.164:8081',
+                    target: 'https://h5.chtfundtest.com',
+                    changeOrigin: true,
+                    secure: false,
+                }),
+
             ]
         }
     });
@@ -262,7 +271,7 @@ if (options.env === '0') { //当开发环境的时候构建命令执行mock服�
 
 /**此任务默认执行，gulp启动时，先将所有文件打包一次**/
 gulp.task('initialTask', function(cb) {
-    plugins.sequence('clean', 'images', 'font', 'allServerResources', 'allServerResourcesFont', 'includeJs', 'includeCss', 'cssToHost', 'webpack', 'bfRev', 'html', 'rev', 'rootEnv', cb);
+    plugins.sequence('clean', 'images', 'font', 'allServerResources', 'includeJs', 'includeCss', 'cssToHost', 'webpack', 'bfRev', 'html', 'rev', 'rootEnv', cb);
 });
 
 
@@ -547,7 +556,6 @@ gulp.task("changePath", function(cb) {
     ], cb)
 })
 
-
 gulp.task("commonHtml", function(cb) {
 
     pump([
@@ -556,17 +564,6 @@ gulp.task("commonHtml", function(cb) {
         gulp.dest('middle/js/common/views')
 
     ], cb)
-
-
-gulp.task('allServerResourcesFont', function() {
-        return gulp.src('src/allServerResources/include/fonts/*')
-            .pipe(gulp.dest(host.path + 'allServerResources/include/fonts'));
-    })
-    //allServerResources中include文件的打包
-gulp.task('allServerResources', function() {
-    return gulp.src('src/allServerResources/include/*')
-        .pipe(gulp.dest(host.path + 'allServerResources/include'));
-
 })
 
 
@@ -646,6 +643,12 @@ gulp.task("allServerResourcesIncludeRoot", function( cb ) {
 
         gulp.src(['src/allServerResources/include/js/vendor/root.js']),
 
+        // plugins.babel({
+        //     compact: false,
+        //     presets: ['env'],
+        //     plugins: ['transform-runtime']
+        // }),
+
         //与host.path中的内容做比对
         plugins.changed(host.path, { hasChanged: plugins.changed.compareSha1Digest }),
 
@@ -719,7 +722,6 @@ gulp.task("allServerResourcesInclude", ['allServerResourcesIncludeRoot'],  funct
         plugins.changed(host.path, { hasChanged: plugins.changed.compareSha1Digest }),
 
         plugins.if(isWatch, plugins.debug({ title: 'js-有变动的文件:' })),
-
 
         plugins.if(options.env === '3' || options.env === '4', plugins.uglify({ //压缩
             mangle: false, //类型：Boolean 默认：true 是否修改变量名
@@ -1031,10 +1033,7 @@ gulp.task('commonImages', function( cb ) {
             return newJson;
         }),
 
-
         gulp.dest(host.path + 'rev/allServerResources/include/commonImg/')
-
-
 
     ], cb)
 });
@@ -1161,18 +1160,20 @@ gulp.task('html', function(cb) {
 
             var dcDomain = 'http://localhost:9099';
 
-            if (options.env == 2) {
+            if( options.env == 2){
                 //测试环境
                 dcDomain = 'https://dc.qasa.chtwm.com';
-            } else if (options.env == 3) {
+            }
+            else if( options.env == 3){
                 //预生产
                 dcDomain = 'https://dc.uata.haomalljf.com';
-            } else if (options.env == 4) {
+            }
+            else if( options.env == 4){
                 //生产
                 dcDomain = 'https://dc.chtwm.com';
             }
 
-            fileCon = fileCon.replace('@dcDomain', dcDomain);
+            fileCon = fileCon.replace('@dcDomain', dcDomain );
 
             file.contents = new Buffer(fileCon);
 
@@ -1305,7 +1306,7 @@ gulp.task('rootEnv', function() {
         for (var i = 0; i < rootName.length; i++) {
 
             (function(i) {
-                gulp.src(['src/allServerResources/include/js/vendor/root.js']) //- 读取 rev-manifest.json 文件
+                gulp.src(['src/include/js/vendor/root.js']) //- 读取 rev-manifest.json 文件
                     .pipe(
                         through.obj(function(file, enc, cb) {
                             //if (options.env != '0' ) {
