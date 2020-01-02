@@ -58,9 +58,11 @@ $(function () {
         fundType: splitUrl['fundType'] == '10300'||splitUrl['fundType'] == '10800' ? 1 : 0, //10300 货币基金类型，其余为普通基金类型
         init: function () {
             var that = this;
-            //页面初始化
-            that.getData();
+            that.getData(); // 获取基金详情
+            that.getFundCollectionInit() //收藏管理--判断是否被收藏
+            that.getData1(); // 查询基金的历史收益（货币基金）/历史净值（普通基金）
             that.getUserInfo();  //获取用户类型
+            that.events();
             $('.tips').hide()
         },
         changeVal: function (prop, num, isfalse) {
@@ -73,6 +75,7 @@ $(function () {
             }
             this.gV.json[prop] = value
         },
+        // 获取基金详情
         getData: function () {
             var that = this;
             // 请求页面数据
@@ -120,11 +123,8 @@ $(function () {
                         that.gV.discountStatus = true
                     }
                     
-                    $(".tplBox").html(html);
-                    that.getFundCollectionInit()
-                    that.getData1();
-                    that.getData2('1', 1);
-                    that.events();
+                    $(".tplBox").html(html); 
+                    that.getData2('1', 1); // 获取echarts数据
                     var historyStr = that.fundType ? '<div class="item_name">日期</div><div class="item_name">七日年化</div><div class="item_name">万份收益(元)</div>' : '<div class="item_name">日期</div><div class="item_name">单位净值</div><div class="item_name">累计净值</div><div class="item_name">日涨幅</div>'
                     $('.history_area >.history_item').html(historyStr);
 
