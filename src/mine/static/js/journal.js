@@ -8,7 +8,7 @@ var generateTemplate = require('@pathCommonJsComBus/generateTemplate.js');
 require('@pathCommonCom/pullRefresh/pullRefresh.js');
 
 $(function() {
-	let somePage = {
+	var somePage = {
 		//获取页面元素
 		$e: {
 			islogin: $(".islogin"),
@@ -71,7 +71,7 @@ $(function() {
                                 $(".list").css("display", "none")
                             } else {
                             	var beforeData = json.data.list;
-								// for(let i = 0; i < beforeData.length; i++) {
+								// for(var i = 0; i < beforeData.length; i++) {
 									//拿到页面要显示的时间
 									// beforeData[i].createTime1 = beforeData[i].createTime.split(" ")[1];
 									// if(beforeData[i].createTime.split(" ")[0] == that.gV.tempArr[that.gV.tempArr.length - 1]) {
@@ -88,7 +88,7 @@ $(function() {
 									// 		});
 									// 		that.gV.tempArr.push(beforeData[i].createTime.split(" ")[0]);
 									// 	} else {
-									// 		for(let j = 0; j < afterData.length; j++) {
+									// 		for(var j = 0; j < afterData.length; j++) {
 									// 			console.log(afterData[j].time)
 									// 			if(afterData[j].time == beforeData[i].createTime.split(" ")[0]) {
 									// 				afterData[j].list.push(beforeData[i]);
@@ -100,8 +100,8 @@ $(function() {
 									// var obj = {time: '',list:[]};
 								// }
 								function distinct (arr) {
-									for(let i = 0; i < arr.length; i++) {
-										for(let j = i + 1; j < arr.length ; j++) {
+									for(var i = 0; i < arr.length; i++) {
+										for(var j = i + 1; j < arr.length ; j++) {
 											if(arr[i] === arr[j]) {
 												arr.splice(j, 1)
 												j--;
@@ -208,7 +208,7 @@ $(function() {
 						if(json.data.list&&json.data.list.length){
 							var beforeData = json.data.list;
 						}
-						for(let i = 0; i < beforeData.length; i++) {
+						for(var i = 0; i < beforeData.length; i++) {
 							//拿到页面要显示的时间
 							beforeData[i].createTime1 = beforeData[i].createTime.split(" ")[1];
 							if(beforeData[i].createTime.split(" ")[0] == that.gV.tempArr[that.gV.tempArr.length - 1]) {
@@ -225,7 +225,7 @@ $(function() {
 									});
 									that.gV.tempArr.push(beforeData[i].createTime.split(" ")[0]);
 								} else {
-									for(let j = 0; j < afterData.length; j++) {
+									for(var j = 0; j < afterData.length; j++) {
 										console.log(afterData[j].time)
 										if(afterData[j].time == beforeData[i].createTime.split(" ")[0]) {
 											afterData[j].list.push(beforeData[i]);
