@@ -76,28 +76,7 @@ $(function() {
                     $.each(json.data.bannerList, function(i, el){
                         imgArr.push({imgUrl: el.imageUrlShowOnline, linkUrl:el.linkUrl});
                     })
-                    Slider( $('.banner'), imgArr );
-                    
-                    //此时所有切换区域的内容都是空的
-                    //设置切换区域的高度
-                    //计算节点高度并设置
-                    // $(".banner img")[0].onload=function(){
-                    //     if( !that.height ){
-                    //         var height = windowHeight - document.getElementById('scroll1').getBoundingClientRect().top;
-            
-                    //         if( window.currentIsApp ){
-                    //             //app，没有底部
-                    //             that.height = height - $('.tableHeader').height();
-                    //         }else{
-                    //             //非app
-                    //             that.height = height - $('.tableHeader').height() - $('.bottomNav').height();
-                    //         }
-                            
-                    //     }
-                    //     if( !$('.list').hasClass('setHeight') ){
-                    //         $('.list').height( that.height ).addClass('setHeight');
-                    //     }
-                    // }			     						
+                    Slider( $('.banner'), imgArr );			     						
                 },
                 callbackFail: function(json){
                     console.log(json)
