@@ -95,12 +95,12 @@ $(function () {
             this.bankList()
             this.events()
         },
-        setSearchTitle() {
+        setSearchTitle: function() {
             var that = this;
             generateTemplate(that.gV.searchTitleList, that.$e.recordSearchTitleBoxId, that.$e.searchTitleListTemplateId);
         },
         // 初始化mui上的遮罩层
-        initMask() {
+        initMask: function() {
             this.gV.mask = mui.createMask(function () {
                 $('.searchItem').removeClass('searchItemActive');
                 $("#recordSearchDetail").css("display", "none")
@@ -138,7 +138,7 @@ $(function () {
             });
         },
         // 查询交易记录列表
-        getRecordsData(t, da) {
+        getRecordsData: function(t, da) {
             var that = this;
             var propdata = {}
             propdata.applyType = da.applyType
@@ -279,7 +279,7 @@ $(function () {
             $.ajaxLoading(obj);
 
         },
-        events() {
+        events: function() {
             var that = this;
             // 筛选分类的点击事件
             mui("body").on('mdClick', '.searchItem', function () {
