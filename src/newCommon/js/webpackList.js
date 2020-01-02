@@ -353,6 +353,8 @@ module.exports = {
     './financial/static/js/publicPlacement/ordinarySetThrow': './src/financial/static/js/publicPlacement/ordinarySetThrow.js',
     //普通基金赎回
     './financial/static/js/publicPlacement/redemptionBuy': './src/financial/static/js/publicPlacement/redemptionBuy.js',
+    //普通基金赎回说明
+    './financial/static/js/publicPlacement/redemptionExplain': './src/financial/static/js/publicPlacement/redemptionExplain.js',
     // 现金管理
     './financial/static/js/publicPlacement/cashManagement': './src/financial/static/js/publicPlacement/cashManagement.js',
 

@@ -471,6 +471,8 @@ module.exports = function() {
     this.publicTradeDetail_url = go_url.no_url + '/account/views/publicTradeDetail/publicTradeDetail.html';
     //普通基金-赎回页面
     this.redemptionBuy_url = go_url.no_url + '/financial/views/publicPlacement/redemptionBuy.html';
+    //普通基金-赎回页面
+    this.redemptionExplain_url = go_url.no_url + '/financial/views/publicPlacement/redemptionExplain.html';
     //普通基金-买入页面
     this.fundTransformIn_url = go_url.no_url + '/financial/views/publicPlacement/fundTransformIn.html';
     //现金宝管理

@@ -528,10 +528,11 @@ $(function () {
                     'type':'auto',
                     'businessType':'publicProductShare',
                     'title': that.gV.secuSht,
-                    'des': '',
+                    'des': '一日托付,一心呵护',
                     'link': site_url.productPublicShare_url + splitUrl['fundCode'],
                     'img': ''
                 }
+                debugger
                 if (window.isAndroid){
                     window.jsObj.wxShare(JSON.stringify(shareObj));
                 }

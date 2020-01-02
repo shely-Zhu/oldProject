@@ -43,8 +43,8 @@ var gulp = require('gulp'),
 
     newWebpackList = require('./src/newCommon/js/webpackList.js'),
 
-    //把webpackList和newWebpackList合并
-    webpackList = Object.assign(webpackList, newWebpackList);
+//把webpackList和newWebpackList合并
+webpackList = Object.assign(webpackList, newWebpackList);
 
     var prefix = '//static.chtfund.com';//cdn服务地址
 
@@ -54,7 +54,8 @@ var gulp = require('gulp'),
 // var named = require('vinyl-named')
 
 for (var i in webpackList) {
-    webpackList[i] = webpackList[i].replace('/src/', '/middle/js/')
+    // webpackList[i] = [ 'babel-polyfill', webpackList[i].replace('/src/', '/middle/js/')]
+    webpackList[i] = [ webpackList[i].replace('/src/', '/middle/js/')]
 }
 
 // Environment setup 环境设置
@@ -645,7 +646,6 @@ gulp.task("allServerResourcesIncludeRoot", function( cb ) {
 
         gulp.src(['src/allServerResources/include/js/vendor/root.js']),
 
-
         //与host.path中的内容做比对
         plugins.changed(host.path, { hasChanged: plugins.changed.compareSha1Digest }),
 
@@ -720,6 +720,7 @@ gulp.task("allServerResourcesInclude", ['allServerResourcesIncludeRoot'],  funct
 
         plugins.if(isWatch, plugins.debug({ title: 'js-有变动的文件:' })),
 
+
         plugins.if(options.env === '3' || options.env === '4', plugins.uglify({ //压缩
             mangle: false, //类型：Boolean 默认：true 是否修改变量名
             compress: false, //类型：Boolean 默认：true 是否完全压缩
@@ -727,15 +728,6 @@ gulp.task("allServerResourcesInclude", ['allServerResourcesIncludeRoot'],  funct
                 beautify: true //只去注释，不压缩成一行
             }
         })),
-
-    // .pipe(plugins.if(options.env === '3' || options.env === '4', plugins.uglify({ //压缩
-    //     mangle: false, //类型：Boolean 默认：true 是否修改变量名
-    //     compress: false, //类型：Boolean 默认：true 是否完全压缩
-    //     output: {
-    //         beautify: true //只去注释，不压缩成一行
-    //     }
-    // })))
-
 
         plugins.rev(),
 
@@ -1042,12 +1034,6 @@ gulp.task('commonImages', function( cb ) {
 
         gulp.dest(host.path + 'rev/allServerResources/include/commonImg/')
 
-        //预上线环境时，去掉Log并压缩
-        //plugins.if(options.env === '3' || options.env === '4', plugins.removelogs()),
-        // plugins.if(options.env === '3' || options.env === '4', plugins.uglify({ //压缩
-        //     mangle: false, //类型：Boolean 默认：true 是否修改变量名
-        //     compress: false
-        // })),
 
 
     ], cb)

@@ -27,7 +27,7 @@ var playAudio = require('@pathCommonCom/audio/audio.js');
 
 
 $(function () {
-    let templatePage = {
+    var templatePage = {
         //获取页面元素
         $e: {
             contentWrap: $('#contentWrap'),
@@ -60,7 +60,7 @@ $(function () {
             this.events()
         },
         // 获取消息getnoticeItemData中心列表
-        getTemplateData() {
+        getTemplateData: function() {
             var that = this;
             var obj = [{
                 url: site_url.getArticle_api,
@@ -140,13 +140,13 @@ $(function () {
             $.ajaxLoading(obj);
         },
 
-        getTypeNet() {
-            let strCode = navigator.userAgent;
+        getTypeNet: function() {
+            var strCode = navigator.userAgent;
             console.log(navigator.userAgent.NetType);
             console.dir(navigator.userAgent);
             // alert(navigator.userAgent.toString());
             // alert(navigator.userAgent.NetType.toString());
-            // let stringNet= strCode .match(/NetType/\w+/) ? strCode .match(/NetType/\w+/)[0] : 'NetType/other';
+            // var stringNet= strCode .match(/NetType/\w+/) ? strCode .match(/NetType/\w+/)[0] : 'NetType/other';
             // var networkType= stringNet.toLowerCase().replace('nettype/', '');
             // if(networkType==='wifi'){
             // console.log('当前网络为wifi')
@@ -161,7 +161,7 @@ $(function () {
             // }
         },
 
-        events() {
+        events: function() {
             var that = this;
 
             mui("body").on('mdClick', '.btnHref', function() {

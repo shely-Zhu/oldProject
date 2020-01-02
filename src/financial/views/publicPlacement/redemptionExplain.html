@@ -1,0 +1,23 @@
+<!-- 私募交易规则
+@author yanruiting 2019-1-2 -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    @@include('@pathInclude/views/meta.html') 
+    <link rel="stylesheet" href="/financial/static/css/publicPlacement/redemptionExplain.css">  
+    <title>赎回说明</title>
+</head>
+<body>
+    @@include('@pathCommonCom/loading/listLoading.html')
+    <div id="richTemplateWrap">
+        @@include('@pathCommonViews/headBarConfig.html',{"bgColors":"#000,#eee","showType":"0","pathName":"赎回说明"})
+        <!--没有数据显示图标-->
+        @@include('@pathCommonCom/noData/noData.html', {"tipText": "暂无数据"})
+        <div id="contentWrap"></div>   
+    </div>          
+
+    @@include('@pathInclude/views/footer.html')
+    <script src="/financial/static/js/publicPlacement/redemptionExplain.js"></script>
+</body>
+</html>
