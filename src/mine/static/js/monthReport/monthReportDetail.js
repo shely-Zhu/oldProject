@@ -9,8 +9,6 @@ require('@pathCommonJs/ajaxLoading.js');
 
 require('@pathCommonJsCom/tabScroll.js');
 var splitUrl = require('@pathCommonJsCom/splitUrl.js')();
-//黑色提示条的显示和隐藏
-var tipAction = require('@pathCommonJsCom/tipAction.js');
 var moment = require('moment');
 //引入弹出层
 require('@pathCommonCom/elasticLayer/elasticLayer/elasticLayer.js');
