@@ -496,7 +496,7 @@ $(function() {
 		getTxt: function(){
 			var that = this;
 		},
-		setHeadLineHeight() {
+		setHeadLineHeight: function() {
 			if($("#HeadBarpathName").height() <= $(".backBtn").height()) {
 				$("#HeadBarpathName").removeClass("doubleLines").addClass("singleLine")
 			} else {

@@ -361,10 +361,10 @@ $(function() {
 				   that.data.isRedemptionFlag = jsonData.isRedemptionFlag; //是否可赎回(0否1是) int 类型
 				   that.data.supportFixedFlag = jsonData.isFixFlag;//是否可定投(0否1是) int 类型
 				   if(!that.data.isBuyFlag){//不可买入
-				   	 	$(".buyBtn").addClass("disable")
+				   	 	$(".buyBtn").addClass("disable").html("暂停赎回")
 				   }
 				   	if(!that.data.isRedemptionFlag){//不可赎回
-				   		$(".redeemBtn").addClass("disable")
+				   		$(".redeemBtn").addClass("disable").html("暂不可售")
 				   }
 					//项目名称
 					$('#HeadBarpathName').html( jsonData.fundName );

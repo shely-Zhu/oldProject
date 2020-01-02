@@ -38,14 +38,14 @@ $(function() {
             search: false, // 搜索
             drawArr: {
                 1: {},
-                2: {} ,
-                3: {} 
+                2: {},
+                3: {}
             }, //保存画图数据
             drawArrTime: {
-                1:"",
+                1: "",
                 2: "",
-                3:""
-            },//折线图截止时间
+                3: ""
+            }, //折线图截止时间
             noData: [
                 [],
                 [],
@@ -56,7 +56,11 @@ $(function() {
                 [],
                 []
             ], // 雷达数据
-            standardDate: [[],[],[]],// 雷达开始日期
+            standardDate: [
+                [],
+                [],
+                []
+            ], // 雷达开始日期
             fundCode: splitUrl['fundCode'],
             tipArr: [], // 提示集合
             noDataArr: ['暂无数据，成立时间不满1年', '暂无数据，成立时间不满3年', '暂无数据，成立时间不满5年']
@@ -66,7 +70,6 @@ $(function() {
             that.getData();
             that.events();
         },
-
         getData: function(t) {
             var that = this;
 
@@ -80,9 +83,9 @@ $(function() {
                     var dataInfo = json.data,
                         fundLableList_new = dataInfo.fundLableList[0];
                     dataInfo["fundLableList_new"] = fundLableList_new; // 标签只展示第一个处理
-                    dataInfo.newNetValue= dataInfo.newNetValue ? dataInfo.newNetValue : "--"
-                    dataInfo.newOneDayGains= dataInfo.newOneDayGains ? dataInfo.newOneDayGains : "--"
-                    dataInfo.yearEarnRate= dataInfo.yearEarnRate ? dataInfo.yearEarnRate : "--"
+                    dataInfo.newNetValue = dataInfo.newNetValue ? dataInfo.newNetValue : "--"
+                    dataInfo.newOneDayGains = dataInfo.newOneDayGains ? dataInfo.newOneDayGains : "--"
+                    dataInfo.yearEarnRate = dataInfo.yearEarnRate ? dataInfo.yearEarnRate : "--"
                     // 模板输出
                     generateTemplate(dataInfo, that.$e.ddTop, that.$e.firstTemp);
                     // 基金曲线名称赋值
@@ -99,25 +102,25 @@ $(function() {
                 needDataEmpty: true,
                 callbackDone: function(json) {
                     var dataList = json.data;
-                    $.each(dataList, function (i, j) { // 将数据组装成雷达图需要的数据
+                    $.each(dataList, function(i, j) { // 将数据组装成雷达图需要的数据
                         //根据ageLimit来分类
-                        var index = j.ageLimit == 1 ? 0: j.ageLimit == 3 ? 1 : 2;
+                        var index = j.ageLimit == 1 ? 0 : j.ageLimit == 3 ? 1 : 2;
                         that.gV.echartData[index].push(j.stability); // 稳定性
                         that.gV.echartData[index].push(j.earningPower); // 收益表现
                         that.gV.echartData[index].push(j.decisionCapability); //择股择时能力
                         that.gV.echartData[index].push(j.companyPower); // 基金公司实力
                         that.gV.echartData[index].push(j.antiRiskCapability); // 抗风险性
                         that.gV.echartData[index].push(j.totalScore); // 总分
-                        that.gV.standardDate[index]=j.standardDate;
+                        that.gV.standardDate[index] = j.standardDate;
                     })
-                    if (that.gV.echartData[0].length>0) {
+                    if (that.gV.echartData[0].length > 0) {
                         // todo,有没有可能没有值
                         radarChart(that.gV.echartData[0]);
                         $('.dd_date_1').html(that.gV.standardDate[0]);
                     } else {
-                        $('.radarEchart').css({ "display":"none"})
+                        $('.radarEchart').css({ "display": "none" })
                         $('.NoDataRada').html(that.gV.noDataArr[0]);
-                        $('.NoDataRada').css({"display": "block"});
+                        $('.NoDataRada').css({ "display": "block" });
                         $('.dd_date_1').html('--');
                     }
                     // 日期赋值
@@ -125,23 +128,23 @@ $(function() {
                 callbackFail: function(json) {
                     tipAction(json.msg);
                 },
-                callbackNoData: function (json) { // 暂无数据  
-                    $('.radarEchart').css({ "display":"none"})
+                callbackNoData: function(json) { // 暂无数据  
+                    $('.radarEchart').css({ "display": "none" })
                     $('.NoDataRada').html(that.gV.noDataArr[0]);
-                    $('.NoDataRada').css({"display": "block"});
-               }
+                    $('.NoDataRada').css({ "display": "block" });
+                }
             }, {
                 url: site_url.querySynthesizeQualitativeEvaluate_api, //基金诊断-综合定性评价
                 data: {
                     "fundCode": that.gV.fundCode,
                 },
                 needDataEmpty: false,
-                    callbackDone: function (json) {
-                        if (json.data.content) {
-                            that.$e.ddEvaluate.html(json.data.content);
-                        } else {
-                            that.$e.ddEvaluate.html("暂无数据");
-                        }
+                callbackDone: function(json) {
+                    if (json.data.content) {
+                        that.$e.ddEvaluate.html(json.data.content);
+                    } else {
+                        that.$e.ddEvaluate.html("暂无数据");
+                    }
                     // 日期赋值
                     if (json.data.standardDate) {
                         $('.dd_date_2').html(json.data.standardDate)
@@ -155,7 +158,7 @@ $(function() {
                 }
             }, {
                 url: site_url.queryDictionary_api, //基金诊断-字典接口
-                contentTypeSearch:true,
+                contentTypeSearch: true,
                 data: {
                     "keySets": 'fundDiagnosisKey',
                 },
@@ -169,7 +172,7 @@ $(function() {
                     tipAction(json.msg);
                 }
             }]
-            
+
             obj.push(that.getDrawData(1));
             $.ajaxLoading(obj);
         },
@@ -184,8 +187,8 @@ $(function() {
                 },
                 callbackDone: function(json) {
                     that.gV.drawArr[num] = json.data;
-                    $('.dd_line').css({ "display":"block"})
-                    $('.dd_lineNodata').css({ "display":"none"})
+                    $('.dd_line').css({ "display": "block" })
+                    $('.dd_lineNodata').css({ "display": "none" })
                     that.gV.drawArrTime[num] = json.data.time; // 统计时间
 
                     // 画图
@@ -196,21 +199,21 @@ $(function() {
                     $('.dd_date_3').html(that.gV.drawArrTime[num])
 
                 },
-                callbackFail: function (json) {
+                callbackFail: function(json) {
                     that.$e.listLoading.hide();
                     tipAction(json.message);
-                    $('.dd_line').css({ "display":"none"})
-                    $('.dd_lineNodata').css({ "display":"block"})
+                    $('.dd_line').css({ "display": "none" })
+                    $('.dd_lineNodata').css({ "display": "block" })
                 },
-                callbackNoData: function (json) {
-                    $('.dd_line').css({ "display":"none"})
-                    $('.dd_lineNodata').css({ "display":"block"})
+                callbackNoData: function(json) {
+                    $('.dd_line').css({ "display": "none" })
+                    $('.dd_lineNodata').css({ "display": "block" })
                 }
 
             };
             return obj;
         },
-        sendAjax:function(obj){
+        sendAjax: function(obj) {
             $.ajaxLoading([obj]);
         },
         dealData: function(jsonData, num) {
@@ -245,23 +248,23 @@ $(function() {
             mui("body").on('mdClick', '.dd_choice_1 .mui-col-xs-3', function(e) {
                 var i = $(this).index();
                 $(this).addClass("active").siblings().removeClass("active");
-               // $(".mui-control-item").addClass('active').siblings().removeClass('active');
+                // $(".mui-control-item").addClass('active').siblings().removeClass('active');
                 // 切换图表
                 if (that.gV.echartData[i].length != 0) {
-                    $('.radarEchart').css({"display": "block"})
-                    $('.NoDataRada').css({"display": "none"});
+                    $('.radarEchart').css({ "display": "block" })
+                    $('.NoDataRada').css({ "display": "none" });
                     radarChart(that.gV.echartData[i]);
                     var standardDate = that.gV.echartData[i].standardDate;
                     $('.dd_date_1').html(that.gV.standardDate[i]);
                 } else {
-                    $('.radarEchart').css({ "display":"none"})
-                    $('.NoDataRada').css({"display": "block"});
+                    $('.radarEchart').css({ "display": "none" })
+                    $('.NoDataRada').css({ "display": "block" });
                     $('.NoDataRada').html(that.gV.noDataArr[i]);
                     $('.dd_date_1').html('--');
-                    
+
                 }
-                
-            },{
+
+            }, {
                 'htmdEvt': 'diagnosisDetail_01'
             })
 
@@ -271,7 +274,7 @@ $(function() {
                 var num = $(this).attr('num');
                 $(this).addClass('active').siblings().removeClass('active');
                 // 画图
-                if (that.gV.drawArr[num] && that.gV.drawArr[num] != {}&&that.gV.drawArr[num].xArr&&that.gV.drawArr[num].xArr.length > 0) {
+                if (that.gV.drawArr[num] && that.gV.drawArr[num] != {} && that.gV.drawArr[num].xArr && that.gV.drawArr[num].xArr.length > 0) {
                     // 画图
                     lineChart(that.gV.drawArr, num, that.gV.noData, '基金收益率', that.$e.ddLine);
 
@@ -280,7 +283,7 @@ $(function() {
                 } else {
                     that.sendAjax(that.getDrawData(num))
                 }
-            },{
+            }, {
                 'htmdEvt': 'diagnosisDetail_02'
             })
 
@@ -289,25 +292,25 @@ $(function() {
                 var i = $(this).attr('num');
                 var value = that.gV.tipArr[i].value;
                 var tital;
-                if(i == 0){
+                if (i == 0) {
                     tital = "综合评分"
-                }else if(i == 1){
+                } else if (i == 1) {
                     tital = "综合定性评价"
-                }else if(i == 2){
+                } else if (i == 2) {
                     tital = "累计收益曲线"
-                }else{
-                    tital = "提示" 
+                } else {
+                    tital = "提示"
                 }
                 $.elasticLayerTypeTwo({
                     id: "tip",
                     title: tital,
                     p: '<p>' + value + '</p>',
                     buttonTxt: '知道了',
-                    htmdEvtYes:'diagnosisDetail_04',
+                    htmdEvtYes: 'diagnosisDetail_04',
                     zIndex: 100,
                 });
 
-            },{
+            }, {
                 'htmdEvt': 'diagnosisDetail_03'
             })
         }

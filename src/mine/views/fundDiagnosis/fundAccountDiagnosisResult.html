@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2019-12-09 15:48:30
- * @LastEditTime : 2019-12-30 10:27:16
+ * @LastEditTime : 2020-01-02 13:53:29
  * @LastEditors  : Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \htjf-app\src\mine\views\fundDiagnosis\fundAccountDiagnosisResult.html
@@ -33,6 +33,7 @@
                     <li class="mui-table-view-cell"><span class="left">职业</span>
                         <span class="mui-icon mui-icon-arrowright" type="professional"></span>
                         <span class="right" id="professional">请选择</span>
+                        <input id="professionalDescript" placeholder="技术工人"/>
                     </li>
                 </ul>
                 <ul class="mui-table-view mt20">
@@ -100,7 +101,7 @@
                     <div class="addOtherFundcodeList">
                         <div class="addOtherFundcodeBox">
                             <span class="left">其他</span>
-                            <span class="right mui-icon mui-icon-plusempty"></span>
+                            <span class="right mui-icon mui-icon-plusempty mr30"></span>
                         </div>
                         <div class="addOtherFundcodeBox_noData">暂未添加</div>
                         <div class="otherAddList">
@@ -211,7 +212,7 @@
             <ul class="mui-table-view">
                 <li class="mui-table-view-cell"><span class="left">基金代码</span><span class="right mr60"> <input type="text" class="mui-input-clear fundCode_input" placeholder="请输入基金代码"></span></li>
                 <li class="mui-table-view-cell"><span class="left">购买日期</span> <span class="mui-icon mui-icon-arrowright"></span><span class="right dataPick"></span></li>
-                <li class="mui-table-view-cell"><span class="left">购买金额</span><span class="right mr60"> <input type="text" class="mui-input-clear money_input" placeholder="请输入用户名"></span></li>
+                <li class="mui-table-view-cell"><span class="left">购买金额</span><span class="right mr60"> <input type="text" class="mui-input-clear money_input" placeholder="请输入金额"></span></li>
             </ul>
             <div class="warmMessage">基金代码,购买日期,购买金额不能为空</div>
             <div class="comfirmButtom mt20">
