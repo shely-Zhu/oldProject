@@ -411,6 +411,9 @@ $(function() {
                             $(".over").hide();
                             break;
                     }
+                },
+                callbackNoData:function(json){
+                    debugger
                 }
             }, {
                 url: site_url.queryUserAuthInfo_api,
@@ -640,12 +643,15 @@ $(function() {
                     $("#qrnhLine").addClass("hide")
                     $("#wfsyLine").addClass("hide")
                     $(".noDataHintEcharts").removeClass("hide")
+                    $(".lineWrap").hide()
                 },
                 callbackFail: function(json) {
                     that.data.echartsClickFlag = false;
                     $("#qrnhLine").addClass("hide")
                     $("#wfsyLine").addClass("hide")
                     $(".noDataHintEcharts").removeClass("hide")
+                    $(".lineWrap").hide()
+
                 }
             }];
             $.ajaxLoading(obj);
@@ -722,7 +728,8 @@ $(function() {
                     data: xAxisData,
                     axisLine: {
                         lineStyle: {
-                            color: '#FADFBB'
+                            color: '#FADFBB',
+                            width:0.5 //横网格线粗细
                         }
                     },
                     axisLabel: {
@@ -743,7 +750,8 @@ $(function() {
                     },
                     splitLine: {
                         lineStyle: {
-                            color: '#FADFBB'
+                            color: '#FADFBB',
+                            width:0.5
                         }
                     },
                     axisLabel: {

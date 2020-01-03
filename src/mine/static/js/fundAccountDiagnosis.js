@@ -22,7 +22,10 @@ $(function() {
         $e: {
             holdingBox: $('#holdingBox'), // 账户持仓情况
             holdingBoxTemp: $('#holdingBox-template'), // 账户持仓情况模板
-            diagnosis: $("#diagnosis-box") //诊断结论
+            diagnosis: $("#diagnosis-box"), //诊断结论
+            contentListBox:$("#contentListBox"),  //容器列表
+            noDataContent:$("#noDataContent"), // 无持仓容器
+            noData: $(".noData"),
         },
         gV: {
             pageCurrent: 1, // 账户持仓情况分页参数
@@ -159,10 +162,19 @@ $(function() {
                 callbackDone: function(json) {
                     var data = json.data.holdShareList;
                     if (!json.data) {
-                        window.location.href = site_url.noAccountHoldShare_url
+                       // window.location.href = site_url.noAccountHoldShare_url
+                          that.$e.noDataContent.show()
+                          that.$e.noData.show()
+                          that.$e.contentListBox.hide()
                     } else {
                         if (json.data.holdShareList.length == 0) {
-                            window.location.href = site_url.noAccountHoldShare_url
+                            that.$e.noDataContent.show()
+                            that.$e.noData.show()
+                            that.$e.contentListBox.hide()
+                        }else{
+                            that.$e.noDataContent.hide()
+                            that.$e.noData.hide()
+                            that.$e.contentListBox.show()
                         }
                     }
                     $("#holdingBox").html("")
@@ -171,11 +183,14 @@ $(function() {
 
                 },
                 callbackNoData: function() {
-                    window.location.href = site_url.noAccountHoldShare_url
+                    that.$e.noDataContent.show()
+                    that.$e.noData.show()
+                    that.$e.contentListBox.hide()
+                   // window.location.href = site_url.noAccountHoldShare_url
                 },
                 callbackFail: function(json) {
                     tipAction(json.msg);
-                    window.location.href = site_url.noAccountHoldShare_url
+                    //window.location.href = site_url.noAccountHoldShare_url
                 }
             }]
             $.ajaxLoading(obj);
@@ -447,7 +462,7 @@ $(function() {
                     var fundType = data.fundType; //基金风格
                     var assetConfig = data.assetConfig; //资产配置比例
                     var heavyIndustry = data.heavyIndustry; //重仓行业
-                    var bondIndustry = data.bondIndustry; //债券类型
+                    var bondIndustry = data.bondStyle; //债券类型
                     var str = "";
                     if (!!fundStyle) {
                         str = str + "当前账户风格为" + fundStyle + ","
@@ -491,14 +506,10 @@ $(function() {
 
 
             // 获取专属报告
-            mui("body").on("mdClick", ".btnBottom", function() {
-                that.getReport();
-            }, {
-                'htmdEvt': 'fundAccountDiagnosis_02'
-            });
-
             mui("body").on('mdClick', '.content .getReport', function() {
                 that.getConditionsOfOrder();
+            },{
+                'htmdEvt':'fundAccountDiagnosis_02'
             });
 
             //认证
@@ -527,6 +538,8 @@ $(function() {
                     default:
                         break;
                 }
+            },{
+                'htmdEvt':'fundAccountDiagnosis_03'
             });
             //一键认证
             mui("body").on('mdClick', ".tips .tips-btn", function(e) {
@@ -554,12 +567,29 @@ $(function() {
                     default:
                         break;
                 }
+            },{
+                'htmdEvt':'fundAccountDiagnosis_04'
             });
 
             mui("body").on('mdClick', ".icontips-close", function() {
 
                 $("#tips-wrap").hide()
 
+            },{
+                'htmdEvt':'fundAccountDiagnosis_05'
+            })
+
+            mui("body").on('mdClick','.noDataContent .getReport',function(){
+                that.getConditionsOfOrder();
+            },{
+                'htmdEvt':'fundAccountDiagnosis_02'
+            });
+            
+            mui("body").on('mdClick','.goUrl_list button',function(){
+                //跳理财首页
+                window.location.href = site_url.wealthIndex_url
+            },{
+                'htmdEvt':'fundAccountDiagnosis_06'
             })
         },
         //给饼图付渐变色

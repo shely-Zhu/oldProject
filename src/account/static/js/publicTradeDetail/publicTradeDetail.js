@@ -143,7 +143,11 @@ $(function () {
                         case "2":
                             //定投
                             that.showFundStatus(true, json.data);
-                            //定投展示定投计划
+                            if (splitUrl()["scheduledProtocolId"]){
+                                //定投id不为空时展示定投计划
+                                $('.plan').removeClass('hide');
+                            }
+
                             $('.plan').removeClass('hide');
                             break
                     }
@@ -171,7 +175,7 @@ $(function () {
                 $('.buy_info .fund_name').html(model.fundName);//买入产品
                 $('.buy_info .fund_amount').html(model.tradeAmount + '元');//买入金额
                 $('.buy_info .bank_icon').attr('src', model.bankThumbnailUrl);//支付方式的银行logo
-                $('.buy_info .bank_name').html(that.getPayInfo(model.bankName, model.bankAccountMask));//支付方式的银行名称
+                $('.buy_info .bank_name').html(that.getPayInfo(model.bankName, model.bankAccountMask,model));//支付方式的银行名称
                 $('.buy_info .pay_mode').html(model.payModeName);//支付方式
                 $('.buy_info .fund_date').html(model.tradeDate);//买入时间
             } else {
@@ -180,7 +184,7 @@ $(function () {
                 $('.redeem_info .item_1').html(model.fundName);//赎回产品
                 $('.redeem_info .item_2').html(model.confirmShares + ' 份');//赎回份额
                 $('.redeem_info .bank_icon').attr('src', model.bankThumbnailUrl);//到账银行卡icon
-                $('.redeem_info .item_3').html(that.getPayInfo(model.bankName, model.bankAccountMask));//到账银行卡描述
+                $('.redeem_info .item_3').html(that.getPayInfo(model.bankName, model.bankAccountMask,model));//到账银行卡描述
 //              $('.redeemOut').hide();//隐藏转出银行卡
                 //$('.redeem_bank').hide();//隐藏转出银行卡
                 $('.redeem_info .item_4').html(model.tradeDate);//赎回时间
@@ -220,7 +224,7 @@ $(function () {
                     $('.redeem_confirm_info .confirm_charge').html(model.confirmRate + " 元");//手续费
                     $('.redeem_confirm_info .confirm_amount').html(model.confirmAmount + " 元");//到账金额
                     $('.redeem_confirm_info .bank_icon').attr('src', model.bankThumbnailUrl);//银行logo
-                    $('.redeem_confirm_info .bank_name').html(that.getPayInfo(model.bankName, model.bankAccountMask));//银行名称
+                    $('.redeem_confirm_info .bank_name').html(that.getPayInfo(model.bankName, model.bankAccountMask,model));//银行名称
                     if(!!model.estimateArrivalDate){//到账时间
                     	$('.redeem_confirm_info .hours_account').html(model.estimateArrivalDate);//到账时间
                     }else{
@@ -307,7 +311,7 @@ $(function () {
                 $('.cash_buy_info .fund_name').html(model.fundName);//基金名称
                 $('.cash_buy_info .fund_amount').html(model.balanceMask + '元');//买入金额
                 $('.cash_buy_info .bank_icon').attr('src', model.bankThumbnailUrl);//需要后台加接口 支付方式的银行logo
-                $('.cash_buy_info .bank_name').html(that.getPayInfo(model.bankName, model.bankAccountMask));//支付方式的银行名称
+                $('.cash_buy_info .bank_name').html(that.getPayInfo(model.bankName, model.bankAccountMask,model));//支付方式的银行名称
                 $('.cash_buy_info .pay_mode').html('1' == model.payType? '汇款支付': '在线支付');//支付方式
                 $('.cash_buy_info .fund_date').html(model.applyDateTime);//买入时间
             } else {
@@ -316,7 +320,7 @@ $(function () {
                 $('.cash_redeem_info .item_1').html(model.fundName);//转出产品
                 $('.cash_redeem_info .item_2').html(model.balanceMask + '元');//转出金额
                 $('.cash_redeem_info .bank_icon').attr('src', model.bankThumbnailUrl);//转出至银行卡logo
-                $('.cash_redeem_info .item_3').html(that.getPayInfo(model.bankName, model.bankAccountMask));//转出至银行卡描述
+                $('.cash_redeem_info .item_3').html(that.getPayInfo(model.bankName, model.bankAccountMask,model));//转出至银行卡描述
                 $('.cash_redeem_info .pay_mode').html('1' == model.payType? '汇款支付': '在线支付');//支付方式
                 $('.cash_redeem_info .item_4').html(model.applyDateTime);//转出时间
             }
@@ -432,9 +436,15 @@ $(function () {
 	        }];
 	        $.ajaxLoading(obj);
         },
-        getPayInfo: function (bankName, bankAccountMask) {
+        getPayInfo: function (bankName, bankAccountMask,model) {
             var payModeText = bankAccountMask? bankAccountMask.substring(bankAccountMask.length - 4): '';
-            return bankName + payModeText;
+            if(!!model.secondFundName){
+            	$(".bank_icon").hide();
+            	$(".pay_mode").hide();
+            	return model.secondFundName + "(" + payModeText + ")"
+            }else{
+            	return bankName + payModeText;
+            }
         }
     };
     obj.init();

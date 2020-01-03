@@ -34,15 +34,17 @@ $(function() {
             //获取滑动图片的起始位置
             var xPX = 100 * ($('body').width() / 750) * 0.5;
             //获取每个滑动图片的外边距
-            var marW = 100 * ($('body').width() / 750) * 0.4;
+            var marW = 100 * ($('body').width() / 750) * 0.56;
             swiperShow = new Swiper(".show-swiper", {
                 slidesPerView: "auto", //
                 watchSlidesProgress: !0,
                 slidesOffsetBefore: xPX,
                 spaceBetween: marW,
                 resistanceRatio: 1,
-                loop: true, //是否循环
                 initialSlide: n, //图片滑动到第几个未开始位置
+                observer:true,//修改swiper自己或子元素时，自动初始化swiper
+                observeParents:true,//修改swiper的父元素时，自动初始化swiper
+                loop: true, //是否循环
                 on: {
                     progress: function(b) {
                         // for(i = 0; i < this.slides.length; i++){
@@ -71,7 +73,7 @@ $(function() {
                         $('.membershipDetailsContentBox p').html(text);
                         $(".tel").attr("href", "tel:" + commonSetting.serverPhone).html(commonSetting.serverPhone)
                         $('.linkBtnBox').html("<a href='javascript:void(0);' class='linkBtn goldBgButton' onclick='setGoUrl({{" + link + "}} , 'detailsUnderstandingDetails_01')'>了解详情</span>")
-                    }
+                    },
                 }
             });
         },
