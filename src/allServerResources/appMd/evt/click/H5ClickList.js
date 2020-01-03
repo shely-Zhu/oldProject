@@ -282,6 +282,7 @@ var clickList = {
 	"ordinarySetThrow_18" : { type:'click', evtid: 'ordinarySetThrow_18', topic: '定投-键盘', info: ''} ,
 	"ordinarySetThrow_19" : { type:'click', evtid: 'ordinarySetThrow_19', topic: '定投-周期选择', info: ''} ,
 	"ordinarySetThrow_20" : { type:'click', evtid: 'ordinarySetThrow_20', topic: '定投-返回', info: ''} ,
+	"ordinarySetThrow_21" : { type:'click', evtid: 'ordinarySetThrow_21', topic: '定投-《定期定额投资业务协议》', info: ''} ,
 	// publicDetail.html  公募产品详情页
 	"publicDetail_01" : { type:'click', evtid: 'publicDetail_01', topic: '公募产品详情页-基金经理', info: ''} ,
 	"publicDetail_02" : { type:'click', evtid: 'publicDetail_02', topic: '公募产品详情页-基金公司', info: ''} ,
