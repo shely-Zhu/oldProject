@@ -130,6 +130,7 @@ $(function() {
                         }
                     }
                     if(arr.length > 0) {
+                        $(".hopper").hide()
                         var sheet = arr[0] // 显示给用户第一个未确认的单子
                         var fileName = sheet.storageFileName
                         var filePath = sheet.storageFilePath
@@ -151,6 +152,9 @@ $(function() {
                         };
                         $.elasticLayer(obj)
                     }
+                },
+                callbackFail: function() {
+
                 }
             }];
             $.ajaxLoading(obj);
