@@ -35,7 +35,7 @@ $(function() {
             topc: $('#topc'), //提示信息
             tipIcon: $(".tipIcon"), //净值披露信息
             isElecContract: '', //是否是电子合同产品【0.否 1.是】
-            unitNetValueDes: '',
+            unitNetValueDes: '每周五24:00前更新上周净值',
             productNameTip:'',
             reourceData:true,   //标签内容
             collectAccountFlag:true,    //标签募集账号
