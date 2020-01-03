@@ -34,6 +34,24 @@ var clickList = {
 	//基金诊断
 	"fundAccountDiagnosis_01":{ type:'click', evtid: 'fundAccountDiagnosis_01', topic: '基金诊断-展开持仓按钮', info: ''},
 	"fundAccountDiagnosis_02":{ type:'click', evtid: 'fundAccountDiagnosis_02', topic: '基金诊断-获取专属报告按钮', info: ''},
+	"fundAccountDiagnosis_03":{ type:'click', evtid: 'fundAccountDiagnosis_03', topic: '基金诊断-单个认证按钮', info: ''},
+	"fundAccountDiagnosis_04":{ type:'click', evtid: 'fundAccountDiagnosis_04', topic: '基金诊断-一键认证按钮', info: ''},
+	"fundAccountDiagnosis_05":{ type:'click', evtid: 'fundAccountDiagnosis_05', topic: '基金诊断-隐藏一键认证按钮', info: ''},
+	"fundAccountDiagnosis_06":{ type:'click', evtid: 'fundAccountDiagnosis_06', topic: '基金诊断-无持仓跳转理财首页按钮', info: ''},
+	//基金账户诊断 --添加/编辑申请
+	"fundAccountDiagnosisResult_01":{ type:'click', evtid: 'fundAccountDiagnosisResult_01', topic: '账户诊断-添加其他基金时,购买时间事件', info: ''},
+	"fundAccountDiagnosisResult_02":{ type:'click', evtid: 'fundAccountDiagnosisResult_02', topic: '账户诊断-添加其他基金时,确定按钮', info: ''},
+	"fundAccountDiagnosisResult_03":{ type:'click', evtid: 'fundAccountDiagnosisResult_03', topic: '账户诊断-添加其他基金时,取消按钮', info: ''},
+	"fundAccountDiagnosisResult_04":{ type:'click', evtid: 'fundAccountDiagnosisResult_04', topic: '账户诊断-选择左箭头按钮事件', info: ''},
+	"fundAccountDiagnosisResult_05":{ type:'click', evtid: 'fundAccountDiagnosisResult_05', topic: '账户诊断-预期年化收益率/可承受最大回撤 弹框的确定按钮事件', info: ''},
+	"fundAccountDiagnosisResult_06":{ type:'click', evtid: 'fundAccountDiagnosisResult_06', topic: '账户诊断-预期年化收益率/可承受最大回撤 弹框的取消按钮事件', info: ''},
+	"fundAccountDiagnosisResult_07":{ type:'click', evtid: 'fundAccountDiagnosisResult_07', topic: '', info: '新增其他基金的删除按钮'},
+    "fundAccountDiagnosisResult_08":{ type:'click', evtid: 'fundAccountDiagnosisResult_08', topic: '', info: '新增其他基金的添加按钮'},
+	"fundAccountDiagnosisResult_09":{ type:'click', evtid: 'fundAccountDiagnosisResult_09', topic: '', info: '提交申请按钮'},
+	"fundAccountDiagnosisResult_10":{ type:'click', evtid: 'fundAccountDiagnosisResult_10', topic: '', info: '跳转到申请历史页面按钮'},
+	"fundAccountDiagnosisResult_11":{ type:'click', evtid: 'fundAccountDiagnosisResult_11', topic: '', info: '基金勾选事件'},
+
+	
 	// 添加已购买基金
 	"addAccountDiagnosisResult_01": { type:'click', evtid: 'addAccountDiagnosisResult_01', topic: '添加已购买基金-购买日期选择', info: ''},
 	"addAccountDiagnosisResult_02": { type:'click', evtid: 'addAccountDiagnosisResult_02', topic: '添加已购买基金-购买日期选择弹框取消按钮', info: ''},
