@@ -117,41 +117,37 @@ $(function() {
             var obj = [{
                 url: site_url.gainCustStorageList_api,
                 data: {
-                    "sourceType": 1
+                    sourceType: 1
                 },
-                needLoading: false,
+                contentTypeSearch: true,
                 callbackDone: function(json) {
-                    var jsonData = json.data || []
-                    // 筛选未确认的客户行为确认单
-                    var arr = []
-                    for(var i = 0 ; i < jsonData.length; i++) {
-                        if(jsonData[i].custConfirmFlag == 0) {
-                            arr.push(jsonData[i])
-                        }
-                    }
-                    if(arr.length > 0) {
+                    var jsonData = json.data[0] || []
+                    if(jsonData.length != 0) {
                         $(".hopper").hide()
-                        var sheet = arr[0] // 显示给用户第一个未确认的单子
-                        var fileName = sheet.storageFileName
-                        var filePath = sheet.storageFilePath
-                        var groupName = sheet.storageGroupName
+                        var fileName = jsonData.storageFileName
+                        var filePath = jsonData.storageFilePath
+                        var groupName = jsonData.storageGroupName
+                        var ordernum = jsonData.ordernum
                         var obj = {
                             title: '温馨提示',
-                            p: '<p>您预约的' + sheet.storageRelName +'产品已经为您生成客户行为确认单，请您查看并确认</p>',
+                            p: '<p>您预约的' + jsonData.storageRelName +'产品已经为您生成客户行为确认单，请您查看并确认</p>',
                             yesTxt: '立即查看',
                             zIndex: 100,
                             hideCelButton: true,
                             htmdEvtYes:'tobeConfirmTransaction_14',  // 埋点确定按钮属性
                             callback: function(t) {
                                 if(fileName.indexOf(".pdf") != -1) {
-                                    window.location.href = site_url.downloadNew_api + "?filePath=" + filePath + "&fileName=" + new Base64().encode(fileName) + "&groupName=" + groupName + "&show=1&acknowledgeBtn=true";
+                                    window.location.href = site_url.downloadNew_api + "?filePath=" + filePath + "&fileName=" + new Base64().encode(fileName) + "&groupName=" + groupName + '&ordernum=' + ordernum + "&show=1&acknowledgeBtn=true";
                                 } else {
-                                    window.location.href = site_url.downloadNew_api + "?filePath=" + filePath + "&fileName=" + new Base64().encode(fileName) + "&groupName=" + groupName + '&acknowledgeBtn=true'
+                                    window.location.href = site_url.downloadNew_api + "?filePath=" + filePath + "&fileName=" + new Base64().encode(fileName) + "&groupName=" + groupName + '&ordernum=' + ordernum + '&acknowledgeBtn=true'
                                 }
                             }
                         };
                         $.elasticLayer(obj)
                     }
+                },
+                callbackFail: function() {
+                    
                 }
             }];
             $.ajaxLoading(obj);
