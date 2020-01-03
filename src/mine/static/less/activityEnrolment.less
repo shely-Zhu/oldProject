@@ -6,7 +6,10 @@
 @import url("@pathCommonLessCom/alertBox.less");
 // @import url("@pathCommonCom/noData/noData.less");
 @import url("@pathCommonLessCom/headBarConfig.less");
-
+html{
+    height: 100%;
+    background: @c005;
+}
 .container{
     width: 100%;
     height:100%;
@@ -114,7 +117,8 @@
                     font-family:PingFangSC-Regular,PingFang SC;
                     font-weight:400;
                     position: relative;
-                    top:-.25rem;
+                    top:-.08rem;
+                    right: .05rem;
                 }
             }
         }
@@ -141,7 +145,7 @@
     // }
     .more{
         background: @c005;
-        margin-top: .3rem;
+        margin-top: .35rem;
         .title{
             display: flex;
             justify-content:center;
@@ -166,6 +170,10 @@
             }
             .secondp{
                 background:linear-gradient(90deg,rgba(102,102,102,1) 0%,rgba(102,102,102,0) 100%);
+                // background:url("/mine/static/img/line2@2x.png") no-repeat center center;
+                // width: 0.9rem;
+                // height: .04rem;
+                // background-size: 100% auto;
                 margin-left: .14rem;
             }
         }

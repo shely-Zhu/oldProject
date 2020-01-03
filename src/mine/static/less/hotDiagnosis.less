@@ -7,7 +7,7 @@
 html,
 body {
     height: 100%;
-    background: @c005;
+    background:@c005;
 }
 
 
@@ -75,6 +75,7 @@ body {
                 line-height: 0.7rem;
                 width: 100%;
                 border-radius: 0.04rem;
+                font-size: .24rem;
             }
 
             .mui-icon-search::before {
@@ -101,7 +102,9 @@ body {
                     background-color: @f7f7f7;
                     border-radius: 0.04rem;
                     position: relative;
-
+                    height: 0.7rem;
+                    line-height: 0.7rem;
+                    font-size: 0.24rem;
                     .branchSearchInput {
                         color: @878787;
                         display: inline-block;
@@ -181,16 +184,15 @@ body {
 
         // 热门诊断
         .h2_title {
+            font-size: 0.28rem;
             line-height: 0.86rem;
-            background:@c005;
-            font-family:PingFangSC-Semibold,PingFang SC;
-            font-weight:600;
+            font-weight: 700;
+            background: @c005;
             p{
-              width: 91%;
-              margin:0 auto;
-              border-bottom: .01rem solid @c004;
-              color: #272727;
-              font-size: 0.28rem;
+             width: 90%;
+             margin:0 auto;
+             border-bottom: .01rem solid @c004;   
+             color: @3c3c3c;
             }
         }
     }
@@ -198,7 +200,7 @@ body {
     // 热门列表
     .hotFundList {
         overflow: hidden;
-        margin-top: 1.6rem;
+        margin-top: 2.9rem;
 
         .card-theme,
         .search-list,.list{
@@ -211,7 +213,7 @@ body {
                 }
 
                 .imgNum {
-                    width: 0.3rem;
+                    width: 0.31rem;
                     padding-top: 0.1rem;
                 }
 
@@ -223,7 +225,7 @@ body {
                 }
 
                 .fontBold {
-                    color: @2d2f46;
+                    color: @272727;
                     font-size: 0.28rem;
                     line-height: 0.46rem;
                     font-family:PingFangSC-Regular,PingFang SC;
@@ -271,7 +273,8 @@ body {
 
     // 底部按钮     
     .btnBottom {
-        position: absolute;
+        // position: absolute;
+        position: fixed;
         bottom: 0.34rem;
         margin: 0.5%;
         height: 0.78rem;

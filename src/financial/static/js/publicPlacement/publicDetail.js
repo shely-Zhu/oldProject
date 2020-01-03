@@ -790,7 +790,7 @@ $(function () {
                     // renderMode : 'richText', 
                     extraCssText: [7, 15, 15, 15],
                     textStyle: {
-                        color: '#FADFBB'
+                        color: '#5B83FF'
                     },
                     confine: true,
                     axisPointer: {
@@ -803,11 +803,14 @@ $(function () {
                                 x2: 0,
                                 y2: 1,
                                 colorStops: [{
-                                    offset: 0, color: '#fff' // 0% 处的颜色
+                                    offset: 0,
+                                    color: '#fff' // 0% 处的颜色
                                 }, {
-                                    offset: 0.5, color: '#F1CDA8' // 0% 处的颜色
+                                    offset: 0.5,
+                                    color: '#081F6B' // 0% 处的颜色
                                 }, {
-                                    offset: 1, color: '#D2B280' // 0% 处的颜色
+                                    offset: 1,
+                                    color: '#5B83FF' // 0% 处的颜色
                                 }],
                                 global: false // 缺省为 false
                             }
@@ -826,7 +829,7 @@ $(function () {
                     data: xAxisData,
                     axisLine: {
                         lineStyle: {
-                            color: '#FADFBB'
+                            color: '#e5e5e5'
                         }
                     },
                     axisLabel: {
@@ -849,7 +852,7 @@ $(function () {
                     },
                     splitLine: {
                         lineStyle: {
-                            color: '#FADFBB'
+                            color: '#e5e5e5'
                         }
                     },
                     axisLabel: {
@@ -861,7 +864,7 @@ $(function () {
                 series: [{
                     type: 'line',
                     lineStyle: {
-                        color: '#FF364D97'
+                       color: '#677EC4'
                     },
                     itemStyle: {
                         show: false

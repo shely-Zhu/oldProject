@@ -8,6 +8,7 @@
 @import url("@pathCommonLess/components/elasticLayerTypeTwo.less");
 @import url("@pathCommonLessCom/headBarConfig.less");
 
+
 .diagnosisDetail {
     font-family: Helvetica, Arial, "Microsoft YaHei";
     //background-color: @f7f7f7;
@@ -64,36 +65,44 @@
             }
 
         }
-
-
     }
 
     // 顶部
     .dd_top {
         min-height: 13.8rem;
-        padding: 1.7rem 1.7rem 1.4rem 1.7rem;
-        background: @f75348;
-        color: @c005;
-        
+        padding: 5rem 1.7rem 2rem 1.7rem;
+        color: @c005;  
+        // background-color: #172960;  
+        background: url("/mine/static/img/zhenduan_head_bg@2x.png") no-repeat center center;
+        background-size: 100% auto;  
         .dd_name {
-            font-weight: bold;
-            font-size: 1.4rem;
-            margin-top: 1rem;
+            font-size:1.6rem;
+            font-family:PingFangSC-Semibold,PingFang SC;
+            font-weight:600;
+            color:@c005;
+            line-height:45px;
+            background:linear-gradient(180deg, rgba(251,226,189,1) 0%, rgba(226,181,128,1) 100%);
+            -webkit-background-clip:text;
+            -webkit-text-fill-color:transparent;
+            span{
+                font-size: 1.2rem;
+            }
         }
 
         .dd_tag_wrap {
-            margin-top: 0.7rem;
-            margin-bottom: 2.8rem;
+            margin-bottom: 1.8rem;
 
             .dd_tag {
                 display: inline-block;
                 padding: 0rem 0.5rem 0.1rem;
                 height: 1.8rem;
                 line-height:1.7rem;
-                font-size: 1rem;
+                font-size: .8rem;
                 margin-right: 0.4rem;
-                border: 1px solid rgba(255,255,255,.5);
+                opacity:0.7;
+                border:1px solid @c005;
                 margin-bottom: 0.5rem;
+                border-radius: 0.3rem;
             }
 
         }
@@ -101,8 +110,19 @@
         .dd_value {
             color: @c005;
             font-size: 1.7rem;
-            margin-bottom: 0.3rem;
+            margin-bottom: 0.6rem;
             font-weight: bold;
+            .left{
+                color:@c005;
+                background:linear-gradient(180deg, rgba(251,226,189,1) 0%, rgba(226,181,128,1) 100%);
+                -webkit-background-clip:text;
+                -webkit-text-fill-color:transparent;
+                font-size: 2.5rem;
+                text-align: left;
+            }
+            // .center{
+            //     text-align: left;
+            // }
         }
 
         .dd_text {
@@ -110,6 +130,9 @@
             opacity: 0.7;
             font-size: 1rem;
             line-height: 1.2rem;
+            .left{
+                text-align: left;
+            }
         }
     }
 
@@ -117,19 +140,21 @@
     .dd_score {
         .dd_choice_1 {
             font-size: 1.2rem;
-            color: @4d3a12;
+            color: @9B9B9B;
             margin-bottom: 1.9rem;
 
             .mui-col-xs-3.active {
 
                 span {
                     position: relative;
-
+                    font-family:PingFangSC-Semibold,PingFang SC;
+                    font-weight:600;
+                    color:@272727;
                     &:after {
                         height: 0.2rem;
                         width: 100%;
                         border-radius: 0.1rem;
-                        background: @fe4829;
+                        background:@C4925E;
                         position: absolute;
                         content: '';
                         left: 0;
@@ -176,17 +201,15 @@
             width: 27.2rem;
             height: 2.2rem;
             line-height: 2.2rem;
-            border: 1px solid @868e9e;
-            border-radius: 11rem;
+            border: 1px solid @364D97;
             color: @878787;
-            margin: 0 auto;
             overflow: hidden;
 
             span {
-                width: 8.9rem;
+                width: 33.33%;
                 text-align: center;
                 display: inline-block;
-                border-right: 1px solid @868e9e;
+                border-right: 1px solid @364D97;
                 float: left;
 
 
@@ -195,8 +218,9 @@
                 }
 
                 &.active {
-                    background: @fcfaf5;
-                    color: @2a2315;
+                    width: 33.33%;
+                    background:linear-gradient(135deg,rgba(108,131,201,1) 0%,rgba(6,29,106,1) 100%);
+                    color: @c005;
                 }
             }
         }
@@ -252,11 +276,11 @@
 
     // 底部
     .dd_bottom {
-        margin-top: 1.3rem;
+        padding-top: 1.5rem;
         margin-bottom: 1.7rem;
         font-size: 0.9rem;
         color: @878787;
-
+        background: @c005;
         .m1 {
             margin-bottom: 1rem;
         }
@@ -297,22 +321,21 @@
         font-size: 1.5rem !important;
     }
 }
-.diagnosisDetail_top{
-    background-color: #172960 !important;
-}
+
 .HeadBarConfigBox{
-    height: 2.28rem !important;
-    line-height: 2.28rem !important;
+    height: 4.28rem !important;
+    line-height: 4.28rem !important;
     #HeadBarpathName{
-        line-height:1.88rem !important;
-        font-size: 1.5rem;
+        line-height:4.88rem !important;
+        font-size: 1.4rem;
     }
     .backBtn{
-        left:0.5rem;
-        font-size: 1.5rem !important;
+        left:0.6rem;
+        font-size:1.6rem;
     } 
 
 }
+
 // .HeadBarConfigBox{
 //     background-color: #172960 !important;
 //     height:20px;

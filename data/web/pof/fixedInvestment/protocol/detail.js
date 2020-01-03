@@ -1,11 +1,8 @@
-
-
-
 // 使用 Mock
 var Mock = require('mockjs');
 
 //1. 积分
-var data = Mock.mock({ 
+var data = Mock.mock({
     message: "操作成功！",
     status: "0000",
     "data": {
@@ -20,7 +17,7 @@ var data = Mock.mock({
         capitalModeDesc: "在线支付",
         expiryDate: "99990101",
         firstExchdate: "201912",
-        fixState: "A",
+        fixState: "D",
         fixedPeriodMask: "每周 周一",
         fundCode: "000847",
         fundName: "中融货币A",

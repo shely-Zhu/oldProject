@@ -24,7 +24,7 @@ var financial = Mock.mock({
             endDate: "20190930",
             publishDate: "",
         },{
-            assetAllocationRatio: "0.00",
+            assetAllocationRatio: "16.30",
             assetType: "1110",
             assetTypeName: "股票",
             endDate: "20190930",
@@ -47,7 +47,40 @@ var financial = Mock.mock({
                 publishDate: "20190930",
             }
         ],
-        industryAllocation: [],
+        industryAllocation:[ // 行业配置信息
+            {
+              "publishDate":"2013-02-33",// 信息发布日期
+              "endDate":"2013-02-33",// 截止日期
+              "industryId":"3423",// 行业编号
+              "industryName":"大方第三方实得分",// 行业名称
+              "industryNav":"34",// 行业配置市值(元)
+              "industryAllocationRatio":"234" // 占基金资产比例(%)
+            },
+            {
+              "publishDate":"2013-02-33",// 信息发布日期
+              "endDate":"2013-02-33",// 截止日期
+              "industryId":"3423",// 行业编号
+              "industryName":"大方第三方实得分",// 行业名称
+              "industryNav":"34",// 行业配置市值(元)
+              "industryAllocationRatio":"234" // 占基金资产比例(%)
+            },
+            {
+              "publishDate":"2013-02-33",// 信息发布日期
+              "endDate":"2013-02-33",// 截止日期
+              "industryId":"3423",// 行业编号
+              "industryName":"大方第三方实得分",// 行业名称
+              "industryNav":"34",// 行业配置市值(元)
+              "industryAllocationRatio":"234" // 占基金资产比例(%)
+            },
+            {
+              "publishDate":"2013-02-33",// 信息发布日期
+              "endDate":"2013-02-33",// 截止日期
+              "industryId":"3423",// 行业编号
+              "industryName":"大方第三方实得分",// 行业名称
+              "industryNav":"34",// 行业配置市值(元)
+              "industryAllocationRatio":"234" // 占基金资产比例(%)
+            }
+        ],
         stockHoldings: [],
     }
   });

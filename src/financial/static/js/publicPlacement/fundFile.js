@@ -162,7 +162,7 @@ $(function () {
                     {
                         name: '',
                         type: 'pie',
-                        radius: ['46%', '70%'],
+                        radius: ['45%', '70%'],
                         center: ['30%', '47%'],
                         avoidLabelOverlap: false,
                         hoverAnimation: false,
@@ -293,6 +293,7 @@ $(function () {
                             }
                         }
                         pieData.push(item)
+                        console.log(pieData)
                     })
                     that.gV.pieData = pieData;
                     that.gV.pieData.forEach(function (item,index) {

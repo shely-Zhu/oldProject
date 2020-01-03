@@ -15,7 +15,6 @@
 }
 
 .newFundDetail{
-	// background:rgba(247,250,253,1);
 	background: @F7FAFD;
 	.newFundDetailTitle{
 		width: 100%;
@@ -30,6 +29,7 @@
 			color:@c005;
 			font-weight: 600;
 			text-align: center;
+			opacity: .6;
 		}
 		.subscriptionTime{
 			margin-top: 0.2rem;
@@ -98,6 +98,7 @@
 			.changgeRight{
 				color: @c009;
 				text-align: right;
+				font-size: .34rem;
 				span{
 					color: @9B9B9B;
 				}
@@ -109,6 +110,9 @@
 				}
 				.discountRate{
 					color: @c009;
+				}
+				.discountRatefirst{
+					margin-left: .37rem;
 				}
 			}
 			&:last-child{
@@ -141,6 +145,7 @@
 			background: @c005;
 			.purchaseRate{
 				color: @9B9B9B;
+				margin: 0 .13rem;
 			}
 		}
 		.buyButton{
@@ -247,9 +252,9 @@
 	top: -0.2rem !important;
 }
 #HeadBarpathName span:nth-of-type(2){
-	top: 0.38rem !important;
+	top: 0.3rem !important;
 	left: 50%;
-	margin-left: -0.7rem;
+	margin-left: -0.5rem;
 	position: absolute;
 	font-size: 0.24rem;
 }

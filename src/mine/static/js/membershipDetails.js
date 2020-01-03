@@ -11,6 +11,7 @@ var splitUrl = require('@pathCommonJsCom/splitUrl.js')();
 var swiperSizeMap = require('@pathCommonJs/components/swiper/swiperSizeMap.js');
 var generateTemplate = require('@pathCommonJsComBus/generateTemplate.js');
 
+
 $(function() {
     var somePage = {
         //获取页面元素

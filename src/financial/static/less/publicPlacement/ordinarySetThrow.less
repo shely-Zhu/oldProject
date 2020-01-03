@@ -115,10 +115,7 @@ body{
             .CostEstimate{
                 height: .4rem;
                 line-height: .4rem;
-                span{
-                   
-                    color:#272727;
-                }
+                color: #9B9B9B;
                 .num{
                     .line-rate{
                         &::before{
@@ -179,8 +176,7 @@ body{
 
             .onright-left{
                 float: right;
-                margin-right: .3rem;
-                
+                text-align: right;
                 .onright-left-one{
                     // display: flex;
                     justify-content: space-between;
@@ -261,8 +257,7 @@ body{
             margin-top: .28rem;
             .onright-left{
                 float: right;
-                margin-right: .3rem;
-                
+                text-align: right;
                 .onright-left-one{
                     // display: flex;
                     justify-content: space-between;
@@ -332,8 +327,9 @@ body{
             }
             .iconone{
                 margin-top: .18rem;
-                position: absolute;
-                right: .3rem;
+               float: right;
+               margin-right: .3rem;
+                color: #9B9B9B;
             }
         }
 
@@ -380,6 +376,9 @@ body{
         padding:0 .3rem;
         display: none;
     }
+    p{
+        color: @4A4A4A;
+    }
     .p2{
         height:.33rem;
         font-size:.24rem;
@@ -405,10 +404,13 @@ body{
 
             .file{
                 .item2{
-                    color: #333 !important;
+                    color: @4A4A4A !important;
                 }
                 a{
-                    color: @364D97 !important;
+                    color: @BB8E5F !important;
+                    span{
+                        vertical-align: middle;
+                    }
                 }
             }
         }

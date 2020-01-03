@@ -162,7 +162,7 @@ body{
 			.openButton{
 				height: 0.3rem;
 				width: 2.3rem;
-				margin: 0 auto;
+				margin: 0 auto .2rem;
 				.img{
 					display: block;
 				}
@@ -281,7 +281,7 @@ body{
 			}
 			.txt{
 				vertical-align: middle;
-				font-size: 0.28rem;
+				font-size: 0.24rem;
 			}
 		}
 		.titleWrap{
@@ -343,6 +343,7 @@ body{
 				.rightTitle{ 
 
 					float: right;
+					font-size: .28rem;
 				}
 			}
 			.lineDraw{
@@ -420,9 +421,22 @@ body{
 			    	}
 			    	&.active{
 			    		color: @272727;
-			    		font-weight: 600;
-			    		border-bottom: 0.06rem solid @C8AB7D;
-			    	}
+						font-weight: 600;
+						position: relative;
+    					border: none;
+						// border-bottom: 0.06rem solid @C8AB7D;
+						&:after {
+							position: absolute;
+							height: 0.06rem;
+							bottom: 0rem;
+							left: 50%;
+							margin-left: -.25rem;
+							content: '';
+							width: .5rem;
+							background: @C8AB7D;
+							border-radius: .03rem;
+						}
+					}
 			    }
 			}
 			.line{
