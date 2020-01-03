@@ -287,8 +287,6 @@ $(function () {
             //添加正负号
             if (value > 0){
                 return "+" + valueMask;
-            } else if (value < 0){
-                return "-" + valueMask;
             } else {
                 return valueMask;
             }
