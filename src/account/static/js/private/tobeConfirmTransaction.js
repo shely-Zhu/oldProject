@@ -134,10 +134,10 @@ $(function() {
                         var sheet = arr[0] // 显示给用户第一个未确认的单子
                         var fileName = sheet.storageFileName
                         var filePath = sheet.storageFilePath
-                        var groupName = sheet.groupName
+                        var groupName = sheet.storageGroupName
                         var obj = {
                             title: '温馨提示',
-                            p: '<p>您预约的' + sheet.productName +'产品已经为您生成客户行为确认单，请您查看并确认</p>',
+                            p: '<p>您预约的' + sheet.storageRelName +'产品已经为您生成客户行为确认单，请您查看并确认</p>',
                             yesTxt: '立即查看',
                             zIndex: 100,
                             hideCelButton: true,
@@ -152,9 +152,6 @@ $(function() {
                         };
                         $.elasticLayer(obj)
                     }
-                },
-                callbackFail: function() {
-
                 }
             }];
             $.ajaxLoading(obj);

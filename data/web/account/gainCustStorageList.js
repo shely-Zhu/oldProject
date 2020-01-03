@@ -18,9 +18,10 @@ var data=Mock.mock({
 		storageTime: '2019-10-15', // 存证时间
 		storageFilePath: 'http://baidu.com', // 文件路径
 		storageFileName: '确认单', // 文件名称
-		groupName: '分组',
-		productName: '小叮当'
-	}] 
+		storageGroupName: '分组', //  文件服务器组名
+		storageRelId: '666', // 项目id 或 基金代码 或 组合基金编号
+		storageRelName: '小叮当' // 项目名称 或 基金名称 或 组合基金名称
+	}]
 });
 
 module.exports=data;
