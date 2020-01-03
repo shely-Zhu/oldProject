@@ -62,7 +62,7 @@ $(function () {
             var that = this;
             mui("body").on('mdClick', 'footer', function (e) {
                 //再买一笔 跳转到产品详情页
-                if ("020" == that.gV.fundModel.fundBusinCode){
+                if (that.gV.fundModel.fundBusinCode && "020" == that.gV.fundModel.fundBusinCode){
                     //去新发基金
                     window.location.href = site_url.newFundDetail_url + '?fundCode=' + splitUrl()["fundCode"]+'&productStatus=0';
                 } else if (splitUrl()['isCash']){
