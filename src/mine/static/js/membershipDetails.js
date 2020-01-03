@@ -43,6 +43,8 @@ $(function() {
                 resistanceRatio: 1,
                 loop: true, //是否循环
                 initialSlide: n, //图片滑动到第几个未开始位置
+                observer:true,//修改swiper自己或子元素时，自动初始化swiper
+                observeParents:true,//修改swiper的父元素时，自动初始化swiper
                 on: {
                     progress: function(b) {
                         // for(i = 0; i < this.slides.length; i++){
