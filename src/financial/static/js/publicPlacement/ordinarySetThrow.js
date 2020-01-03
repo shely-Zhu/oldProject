@@ -966,8 +966,10 @@ $(function () {
 			}, {
 				htmdEvt: 'ordinarySetThrow_09'
 			}) ;
-			mui("body").on('mdClick','setGoUrl_1',function(){
+			mui("body").on('mdClick','.setGoUrl_1',function(){
 				window.location.href = site_url.superContent_url + '?id=63'
+			},{
+				htmdEvt: 'ordinarySetThrow_21'
 			})
 			//  ---忘记密码
 			mui("body").on('mdClick','#passwordWrap .forgetP',function(){

@@ -506,14 +506,10 @@ $(function() {
 
 
             // 获取专属报告
-            mui("body").on("mdClick", ".btnBottom", function() {
-                that.getReport();
-            }, {
-                'htmdEvt': 'fundAccountDiagnosis_02'
-            });
-
             mui("body").on('mdClick', '.content .getReport', function() {
                 that.getConditionsOfOrder();
+            },{
+                'htmdEvt':'fundAccountDiagnosis_02'
             });
 
             //认证
@@ -542,6 +538,8 @@ $(function() {
                     default:
                         break;
                 }
+            },{
+                'htmdEvt':'fundAccountDiagnosis_03'
             });
             //一键认证
             mui("body").on('mdClick', ".tips .tips-btn", function(e) {
@@ -569,28 +567,30 @@ $(function() {
                     default:
                         break;
                 }
+            },{
+                'htmdEvt':'fundAccountDiagnosis_04'
             });
 
             mui("body").on('mdClick', ".icontips-close", function() {
 
                 $("#tips-wrap").hide()
 
+            },{
+                'htmdEvt':'fundAccountDiagnosis_05'
             })
 
-            mui("body").on('mdClick','.getReport',function(){
+            mui("body").on('mdClick','.noDataContent .getReport',function(){
                 that.getConditionsOfOrder();
+            },{
+                'htmdEvt':'fundAccountDiagnosis_02'
             });
             
             mui("body").on('mdClick','.goUrl_list button',function(){
                 //跳理财首页
                 window.location.href = site_url.wealthIndex_url
+            },{
+                'htmdEvt':'fundAccountDiagnosis_06'
             })
-
-            mui("body").on('mdClick',".icontips-close",function(){
-                  
-                $("#tips-wrap").hide()
-             
-             })
         },
         //给饼图付渐变色
         getPieColor: function(val) {
