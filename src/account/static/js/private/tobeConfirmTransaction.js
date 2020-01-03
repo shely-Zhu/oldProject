@@ -127,6 +127,7 @@ $(function() {
                         var fileName = jsonData.storageFileName
                         var filePath = jsonData.storageFilePath
                         var groupName = jsonData.storageGroupName
+                        var ordernum = jsonData.ordernum
                         var obj = {
                             title: '温馨提示',
                             p: '<p>您预约的' + jsonData.storageRelName +'产品已经为您生成客户行为确认单，请您查看并确认</p>',
@@ -136,9 +137,9 @@ $(function() {
                             htmdEvtYes:'tobeConfirmTransaction_14',  // 埋点确定按钮属性
                             callback: function(t) {
                                 if(fileName.indexOf(".pdf") != -1) {
-                                    window.location.href = site_url.downloadNew_api + "?filePath=" + filePath + "&fileName=" + new Base64().encode(fileName) + "&groupName=" + groupName + "&show=1&acknowledgeBtn=true";
+                                    window.location.href = site_url.downloadNew_api + "?filePath=" + filePath + "&fileName=" + new Base64().encode(fileName) + "&groupName=" + groupName + '&ordernum=' + ordernum + "&show=1&acknowledgeBtn=true";
                                 } else {
-                                    window.location.href = site_url.downloadNew_api + "?filePath=" + filePath + "&fileName=" + new Base64().encode(fileName) + "&groupName=" + groupName + '&acknowledgeBtn=true'
+                                    window.location.href = site_url.downloadNew_api + "?filePath=" + filePath + "&fileName=" + new Base64().encode(fileName) + "&groupName=" + groupName + '&ordernum=' + ordernum + '&acknowledgeBtn=true'
                                 }
                             }
                         };
