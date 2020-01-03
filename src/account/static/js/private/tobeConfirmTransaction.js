@@ -72,17 +72,11 @@ $(function() {
                 $('.hopper').show();
                 $('#HeadBarpathName').attr("data", '已完成交易').html('已完成交易');
                 that.gV.type = 1;
+                // 判断是否存在未确认的客户行为确认单
+                that.judgeToBeConfirmedSheet()
             } else if (splitUrl['type'] == 'toBeConfirmed') {
-                try {
-                    $('.hopper').hide();
-                }catch(e) {
-                    console.log("hopper", e)
-                }
-                try {
-                    $('#HeadBarpathName').attr("data", '待确认交易').html('待确认交易');
-                }catch(e) {
-                    console.log("bar", e)
-                }
+                $('.hopper').hide();
+                $('#HeadBarpathName').attr("data", '待确认交易').html('待确认交易');
                 that.gV.type = 0;
             }
             mui.init({
@@ -116,6 +110,54 @@ $(function() {
                 //为$id添加hasPullUp  class
                 $('.list').addClass('hasPullUp');
             });
+        },
+        // 判断是否存在未确认的客户行为确认单
+        judgeToBeConfirmedSheet: function() {
+            var that = this;
+            var obj = [{
+                url: site_url.gainCustStorageList_api,
+                data: {
+                    "sourceType": 1
+                },
+                needLoading: false,
+                callbackDone: function(json) {
+                    var jsonData = json.data || []
+                    // 筛选未确认的客户行为确认单
+                    var arr = []
+                    for(var i = 0 ; i < jsonData.length; i++) {
+                        if(jsonData[i].custConfirmFlag == 0) {
+                            arr.push(jsonData[i])
+                        }
+                    }
+                    if(arr.length > 0) {
+                        $(".hopper").hide()
+                        var sheet = arr[0] // 显示给用户第一个未确认的单子
+                        var fileName = sheet.storageFileName
+                        var filePath = sheet.storageFilePath
+                        var groupName = sheet.groupName
+                        var obj = {
+                            title: '温馨提示',
+                            p: '<p>您预约的' + sheet.productName +'产品已经为您生成客户行为确认单，请您查看并确认</p>',
+                            yesTxt: '立即查看',
+                            zIndex: 100,
+                            hideCelButton: true,
+                            htmdEvtYes:'tobeConfirmTransaction_14',  // 埋点确定按钮属性
+                            callback: function(t) {
+                                if(fileName.indexOf(".pdf") != -1) {
+                                    window.location.href = site_url.downloadNew_api + "?filePath=" + filePath + "&fileName=" + new Base64().encode(fileName) + "&groupName=" + groupName + "&show=1&acknowledgeBtn=true";
+                                } else {
+                                    window.location.href = site_url.downloadNew_api + "?filePath=" + filePath + "&fileName=" + new Base64().encode(fileName) + "&groupName=" + groupName + '&acknowledgeBtn=true'
+                                }
+                            }
+                        };
+                        $.elasticLayer(obj)
+                    }
+                },
+                callbackFail: function() {
+
+                }
+            }];
+            $.ajaxLoading(obj);
         },
         getData: function(t, type) {
             var that = this;

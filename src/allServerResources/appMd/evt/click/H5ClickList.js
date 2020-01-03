@@ -445,6 +445,7 @@ var clickList = {
 	"tobeConfirmTransaction_11":{ type:'click', evtid: 'tobeConfirmTransaction_11', topic: '待确认交易_取消预约_确定', info: ''},
 	"tobeConfirmTransaction_12":{ type:'click', evtid: 'tobeConfirmTransaction_12', topic: '待确认交易_取消预约_取消', info: ''},
 	"tobeConfirmTransaction_13":{ type:'click', evtid: 'tobeConfirmTransaction_13', topic: '待确认交易_我知道了', info: ''},
+	"tobeConfirmTransaction_14":{ type:'click', evtid: 'tobeConfirmTransaction_14', topic: '已确认交易_未确认行为确认单_立即查看', info: ''},
 
 	"cashTreasure_0":{ type:'click', evtid: 'cashTreasure_0', topic: '现金宝详情_展开收起按钮点击', info: ''},
 	"cashTreasure_1":{ type:'click', evtid: 'cashTreasure_1', topic: '现金宝详情_折线图中月份点击', info: ''},
