@@ -29,7 +29,7 @@ var data = Mock.mock(
             "debitStatus":"1",
             "estimateArrivalDate":"2020-01-07",
             "estimateConfirmDate":"2020-01-06",
-            "fundBusinCode":"022",
+            "fundBusinCode":"020",
             "fundCode":"001388",
             "fundName":"中融新经济C",
             "fundStatus":"0",
