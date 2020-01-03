@@ -437,6 +437,8 @@ module.exports = function() {
     this.pofShare_url = go_url.no_url + '/financial/views/publicPlacement/share.html'
 
     /*------------------- 私募理财fang——le end ------------------------------*/
+    // 理财首页
+    this.accountIndex_url = go_url.no_url + '/account/views/accountIndex.html';
     this.optionalPublicDetail_url = go_url.no_url + '/account/views/public/optionalPublicDetail.html';
 
     // 收益分配明细页
@@ -569,6 +571,8 @@ module.exports = function() {
     this.marketCampaign_url = go_url.marketCampaign_url;
     // 点击立即绑定跳转验证用户身份页面
     this.bindFinancialer_url = go_url.no_url + '/homePage/views/bindFinancialer/bindFinancialer.html';
+    // 新发基金详情页
+    this.newFundDetail_url = go_url.no_url + '/financial/views/publicPlacement/newFundDetail.html';
 
     
 

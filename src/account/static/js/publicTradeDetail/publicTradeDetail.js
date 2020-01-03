@@ -52,6 +52,7 @@ $(function () {
             allotType: splitUrl()['allotType'],//交易类别 0：购买 1：赎回 2：定投, 3：分红
             isBuy: splitUrl()['isBuy'] == 'true',//是否为现金宝购买
             isCash: splitUrl()['isCash'],//是否为现金宝
+            fundModel: {},//普通基金详情model
         },
         init: function () {
             var that = this;
@@ -61,8 +62,16 @@ $(function () {
             var that = this;
             mui("body").on('mdClick', 'footer', function (e) {
                 //再买一笔 跳转到产品详情页
-                // window.location.href = site_url.productPublicDetail_url + '?fundCode=' + splitUrl()["fundCode"];
-                window.location.href = site_url.pofPublicDetail_url + '?fundCode=' + splitUrl()["fundCode"]+'&fundType='+splitUrl()["fundType"];
+                if (that.gV.fundModel.fundBusinCode && "020" == that.gV.fundModel.fundBusinCode){
+                    //去新发基金
+                    window.location.href = site_url.newFundDetail_url + '?fundCode=' + splitUrl()["fundCode"]+'&productStatus=0';
+                } else if (splitUrl()['isCash']){
+                    //去现金宝详情页
+                    window.location.href = site_url.superStreasureDetail_url + '?fundCode=' + splitUrl()["fundCode"];
+                } else {
+                    //去普通基金详情页
+                    window.location.href = site_url.pofPublicDetail_url + '?fundCode=' + splitUrl()["fundCode"]+'&fundType='+splitUrl()["fundType"];
+                }
             },{
                 'htmdEvt': 'publicTradeDetail_0'
             })
@@ -127,6 +136,7 @@ $(function () {
                         //根据撤单标记来展示撤单按钮
                         $(".cancel_order").removeClass('hide');
                     }
+                    that.gV.fundModel = json.data;
                     switch (that.gV.allotType) {
                         case "0":
                             //购买
@@ -393,6 +403,7 @@ $(function () {
                 //普通基金赎回不展示进度条 所以不判断
                 $('.trade_status_area .trade_status_date').eq(0).html(model.originalDate);//申请受理时间
                 if ("020" == model.fundBusinCode){
+                    //新发基金
                     //认购状态
                     $('.trade_status_area .trade_status_desc').eq(1).html("等待基金成立确认认购份额");//第二步左边名称
                     $('.trade_status_area .trade_status_desc').eq(2).html("预计查看确认");//第三步左边名称
@@ -409,24 +420,21 @@ $(function () {
             var that = this;
             var param = {
                 password: password,
-                applyId: that.gV.data.applyId,
-                tradeNo: that.gV.data.tradeNo,
+                applyId: splitUrl()['applyId'],
+                tradeNo: that.gV.fundModel.tradeNo,
+                fundCombinationFlag: splitUrl()['fundCombination'],
             }
             var obj = [{
 	            url: site_url.findSuperviseBank_api,
 	            data: param,
 	            needLogin:true,//需要判断是否登陆
                 callbackDone: function(json){  //成功后执行的函数
-                    if ("020" == model.fundBusinCode || "022" == model.fundBusinCode) {
+                    if ("020" == that.gV.fundModel.fundBusinCode || "022" == that.gV.fundModel.fundBusinCode) {
                         //认购、申购
                         tipAction("已撤单，申请金额将退还支付银行卡中");
                     } else {
                         tipAction("已撤单，您将继续持有该基金份额");
                     }
-                    /*setTimeout(() => {
-                        //2秒后刷新页面
-                        window.location.reload()
-                    }, 2000);*/
                     setTimeout(function() {
                         //2秒后刷新页面
                         window.location.reload()
