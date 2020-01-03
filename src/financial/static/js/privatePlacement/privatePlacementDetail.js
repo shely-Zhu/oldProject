@@ -722,7 +722,8 @@ $(function() {
                     data: xAxisData,
                     axisLine: {
                         lineStyle: {
-                            color: '#FADFBB'
+                            color: '#FADFBB',
+                            width:0.5 //横网格线粗细
                         }
                     },
                     axisLabel: {
@@ -743,7 +744,8 @@ $(function() {
                     },
                     splitLine: {
                         lineStyle: {
-                            color: '#FADFBB'
+                            color: '#FADFBB',
+                            width:0.5
                         }
                     },
                     axisLabel: {
