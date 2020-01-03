@@ -436,6 +436,7 @@ $(function () {
             var payModeText = bankAccountMask? bankAccountMask.substring(bankAccountMask.length - 4): '';
             if(!!model.secondFundName){
             	$(".bank_icon").hide();
+            	$(".pay_mode").hide();
             	return model.secondFundName + "(" + payModeText + ")"
             }else{
             	return bankName + payModeText;
