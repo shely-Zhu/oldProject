@@ -785,7 +785,7 @@ $(function () {
             myChart.setOption({
                 tooltip: {
                     trigger: 'axis',
-                    formatter: '<p style="font-size:0.36rem;color: #DAB57C;">{c}</p><p style="font-size:0.24rem;color:#4A4A4A">{b}</p>',
+                    formatter: '<p style="font-size:0.36rem;color: #4A61A9;">{c}</p><p style="font-size:0.24rem;color:#4A4A4A">{b}</p>',
                     backgroundColor: 'rgba(218,181,124, 0.1)',
                     // renderMode : 'richText', 
                     extraCssText: [7, 15, 15, 15],
@@ -861,7 +861,7 @@ $(function () {
                 series: [{
                     type: 'line',
                     lineStyle: {
-                        color: '#FADFBB'
+                        color: '#FF364D97'
                     },
                     itemStyle: {
                         show: false
@@ -876,9 +876,9 @@ $(function () {
                                 x2: 0,
                                 y2: 1,
                                 colorStops: [{
-                                    offset: 0, color: '#F2E3CA' // 0% 处的颜色
+                                    offset: 0, color: '#dfe7ff' // 0% 处的颜色
                                 }, {
-                                    offset: 1, color: '#fff' // 100% 处的颜色
+                                    offset: 1, color: '#fafbfe' // 100% 处的颜色
                                 }],
                                 global: false // 缺省为 false
                             }

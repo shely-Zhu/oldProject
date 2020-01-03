@@ -411,6 +411,9 @@ $(function() {
                             $(".over").hide();
                             break;
                     }
+                },
+                callbackNoData:function(json){
+                    debugger
                 }
             }, {
                 url: site_url.queryUserAuthInfo_api,
@@ -640,12 +643,15 @@ $(function() {
                     $("#qrnhLine").addClass("hide")
                     $("#wfsyLine").addClass("hide")
                     $(".noDataHintEcharts").removeClass("hide")
+                    $(".lineWrap").hide()
                 },
                 callbackFail: function(json) {
                     that.data.echartsClickFlag = false;
                     $("#qrnhLine").addClass("hide")
                     $("#wfsyLine").addClass("hide")
                     $(".noDataHintEcharts").removeClass("hide")
+                    $(".lineWrap").hide()
+
                 }
             }];
             $.ajaxLoading(obj);
