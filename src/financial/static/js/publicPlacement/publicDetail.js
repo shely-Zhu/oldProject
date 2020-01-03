@@ -88,6 +88,7 @@ $(function () {
             // 请求页面数据
             var obj = [{
                 url: site_url.newfundDetails_api,
+                
                 data: {
                     fundCode: splitUrl['fundCode'],
                     // fundCode:"000847",
@@ -175,6 +176,9 @@ $(function () {
                         $(".footer .fixed_investement_btn").css({"display":"none"})
                        // that.gV.fixedInvestementBtn.hide()
                     }
+                    if(!json.data.isBuyFlag){//不可买入
+                        $(".footer .buy_btn").addClass("disable").html("暂不可售")
+                   }
                   
                 },
                 callbackFail: function (json) {
@@ -372,7 +376,9 @@ $(function () {
             });
             // 买入
             mui("body").on('mdClick', ".footer .buy_btn", function (e) {
-            
+               if($(this).hasClass("disable")){
+                   return false
+               }
                 that.getConditionsOfOrder("into");
                // window.location.href = site_url.fundTransformIn_url + '?fundCode=' + fundCode + '&fundName=' + fundName;
                
