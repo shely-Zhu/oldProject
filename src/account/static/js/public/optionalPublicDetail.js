@@ -698,7 +698,7 @@ $(function() {
 					window.location.href = site_url.fundTransformIn_url+"?fundCode="+that.data.fundCode;
 			   }else if(type == "investement"){
 					//定投一键认证
-					window.location.href = site_url.ordinarySetThrow_url+"?fundCode="+that.data.fundCode;;			
+					window.location.href = site_url.ordinarySetThrow_url+"?fundCode="+that.data.fundCode+'&type=add';			
 			   }
 			},{
 				'htmdEvt': 'optionalPublicDetail_11'

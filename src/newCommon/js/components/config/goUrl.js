@@ -437,6 +437,8 @@ module.exports = function() {
     this.pofShare_url = go_url.no_url + '/financial/views/publicPlacement/share.html'
 
     /*------------------- 私募理财fang——le end ------------------------------*/
+    // 理财首页
+    this.accountIndex_url = go_url.no_url + '/account/views/accountIndex.html';
     this.optionalPublicDetail_url = go_url.no_url + '/account/views/public/optionalPublicDetail.html';
 
     // 收益分配明细页
