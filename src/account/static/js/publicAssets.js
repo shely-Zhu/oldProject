@@ -202,7 +202,7 @@ $(function () {
             //购买
             mui("body").on('mdClick', '.buy_btn', function (e) {
                 var fundCode = $(this).attr("fundCode")
-                window.location.href = site_url.fundTransformIn_url+"?fundCode="+fundCode;   
+                window.location.href = site_url.fundTransformIn_url+"?fundCode="+fundCode+"&noReload=1";   
                 return false;
             },{
                 'htmdEvt': 'publicAssets_4'
