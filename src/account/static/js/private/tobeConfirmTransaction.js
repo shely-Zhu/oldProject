@@ -119,7 +119,8 @@ $(function() {
                 data: {
                     "sourceType": 1
                 },
-                needLoading: false,
+                needLogin: true,
+                contentTypeSearch: true,
                 callbackDone: function(json) {
                     var jsonData = json.data || []
                     // 筛选未确认的客户行为确认单

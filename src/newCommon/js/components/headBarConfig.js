@@ -104,10 +104,10 @@ $(function() {
     //返回上一页
     mui("body").on('mdClick', '#goBack', function() {
         // 现金管理持仓列表（现金管理产品列表），点击返回按钮 返回至入口 ：首页/理财（icon）
-        var isCashManagement = window.location.href.indexOf('/financial/views/publicPlacement/cashManagement.html')==-1?false:true // 是否为现金管理持仓列表页        
+        //var isCashManagement = window.location.href.indexOf('/financial/views/publicPlacement/cashManagement.html')==-1?false:true // 是否为现金管理持仓列表页        
         // 我的定投计划列表页点击返回，返回到 首页/理财（icon）
-        var isMyInvestmentPlan = window.location.href.indexOf('/financial/views/publicPlacement/myInvestmentPlan.html')==-1?false:true // 是否为我的计划列表页
-        if (document.referrer == '' || isCashManagement || isMyInvestmentPlan) {
+        //var isMyInvestmentPlan = window.location.href.indexOf('/financial/views/publicPlacement/myInvestmentPlan.html')==-1?false:true // 是否为我的计划列表页
+        if (document.referrer == '') {
             // window.isAndroid是在root文件中定义的变量
             if (window.isAndroid) {
                 //这个是安卓操作系统
@@ -126,9 +126,15 @@ $(function() {
             // 定投详情点击返回，返回至我的定投计划列表页
             } else if (window.location.href.indexOf('/financial/views/publicPlacement/castSurelyDetails.html') != -1) {
                 location.href = site_url.myInvestmentPlan_url
+            // 现金管理持仓列表（现金管理产品列表）点击返回按钮 返回至入口 ：首页/理财（icon）,现只实现了跳转理财首页
+            } else if (window.location.href.indexOf('/financial/views/publicPlacement/cashManagement.html') != -1) {
+                location.href = site_url.wealthIndex_url
+            // 定投计划列表页点击返回，返回到 首页/理财（icon）现只实现了跳转理财首页
+            } else if (window.location.href.indexOf('/financial/views/publicPlacement/myInvestmentPlan.html') != -1) {
+                location.href = site_url.wealthIndex_url
             } else {
                 location.href = "javascript:history.go(-1)";
-            } 
+            }
         }
     }, {
         htmdEvt: 'goBackButton'
