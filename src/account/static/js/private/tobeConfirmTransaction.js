@@ -167,6 +167,7 @@ $(function() {
                 },
                 callbackNoData: function() {
                     if (that.gV.aP.pageNum == 1) {
+                        $(".list").hide()
                         that.getElements.noData.show();
                     }
 
