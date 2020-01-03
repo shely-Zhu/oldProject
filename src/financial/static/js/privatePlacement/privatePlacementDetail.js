@@ -411,6 +411,9 @@ $(function() {
                             $(".over").hide();
                             break;
                     }
+                },
+                callbackNoData:function(json){
+                    debugger
                 }
             }, {
                 url: site_url.queryUserAuthInfo_api,
@@ -640,12 +643,15 @@ $(function() {
                     $("#qrnhLine").addClass("hide")
                     $("#wfsyLine").addClass("hide")
                     $(".noDataHintEcharts").removeClass("hide")
+                    $(".lineWrap").hide()
                 },
                 callbackFail: function(json) {
                     that.data.echartsClickFlag = false;
                     $("#qrnhLine").addClass("hide")
                     $("#wfsyLine").addClass("hide")
                     $(".noDataHintEcharts").removeClass("hide")
+                    $(".lineWrap").hide()
+
                 }
             }];
             $.ajaxLoading(obj);
@@ -1480,7 +1486,7 @@ $(function() {
             });
             //点击查看明细跳转
             mui("body").on('mdClick', '.lookDetailed', function() {
-                window.location.href = site_url.tobeConfirmTransaction_url+"?type=toBeConfirmed&eruda=true"//查看明细跳转待确认明细
+                window.location.href = site_url.tobeConfirmTransaction_url+"?type=toBeConfirmed"//查看明细跳转待确认明细
             },{
                 htmdEvt: 'privatePlacementDetail_10'
             });
