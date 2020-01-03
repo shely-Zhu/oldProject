@@ -18,6 +18,7 @@ var data = Mock.mock({
     "data": {
         "total": 10,
         "pages": 20,
+        
         "list|10": [{
             "customerNo": "", //
             "prizeType|1": ["1","2"], //奖品类型
