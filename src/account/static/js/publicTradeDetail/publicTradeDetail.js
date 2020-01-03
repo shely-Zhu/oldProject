@@ -141,7 +141,11 @@ $(function () {
                         case "2":
                             //定投
                             that.showFundStatus(true, json.data);
-                            //定投展示定投计划
+                            if (splitUrl()["scheduledProtocolId"]){
+                                //定投id不为空时展示定投计划
+                                $('.plan').removeClass('hide');
+                            }
+
                             $('.plan').removeClass('hide');
                             break
                     }

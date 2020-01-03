@@ -146,7 +146,6 @@ $(function() {
                     // 基金简称 + 基金编码
                     $("#HeadBarpathName").html("<span>" + jsonData.secuSht + "</span>" + "</br><span class='secuId'>" + jsonData.trdCode + "</span>");
                     // that.setHeadLineHeight()
-
                     // 认购期
                     $('.subscriptionDate').html(jsonData.issBgnDt + '-' + jsonData.issEndDt);
                     // 新发基金倒计时
@@ -182,6 +181,7 @@ $(function() {
                     tipAction(json.message);
                 },
                 callbackNoData: function(json) {
+                    $('.subscriptionTime').html('<span>00</span>天<span>00</span>小时<span>00</span>分<span>00</span>秒');
                     tipAction(json.message);
                 },
             }]

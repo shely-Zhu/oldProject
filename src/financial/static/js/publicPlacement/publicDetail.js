@@ -88,6 +88,7 @@ $(function () {
             // 请求页面数据
             var obj = [{
                 url: site_url.newfundDetails_api,
+                
                 data: {
                     fundCode: splitUrl['fundCode'],
                     // fundCode:"000847",
@@ -175,6 +176,9 @@ $(function () {
                         $(".footer .fixed_investement_btn").css({"display":"none"})
                        // that.gV.fixedInvestementBtn.hide()
                     }
+                    if(!json.data.isBuyFlag){//不可买入
+                        $(".footer .buy_btn").addClass("disable").html("暂不可售")
+                   }
                   
                 },
                 callbackFail: function (json) {
@@ -372,7 +376,9 @@ $(function () {
             });
             // 买入
             mui("body").on('mdClick', ".footer .buy_btn", function (e) {
-            
+               if($(this).hasClass("disable")){
+                   return false
+               }
                 that.getConditionsOfOrder("into");
                // window.location.href = site_url.fundTransformIn_url + '?fundCode=' + fundCode + '&fundName=' + fundName;
                
@@ -785,7 +791,7 @@ $(function () {
             myChart.setOption({
                 tooltip: {
                     trigger: 'axis',
-                    formatter: '<p style="font-size:0.36rem;color: #1F3781;">{c}</p><p style="font-size:0.24rem;color:#4A4A4A">{b}</p>',
+                    formatter: '<p style="font-size:0.36rem;color: #4A61A9;">{c}</p><p style="font-size:0.24rem;color:#4A4A4A">{b}</p>',
                     backgroundColor: 'rgba(218,181,124, 0.1)',
                     // renderMode : 'richText', 
                     extraCssText: [7, 15, 15, 15],
@@ -879,11 +885,9 @@ $(function () {
                                 x2: 0,
                                 y2: 1,
                                 colorStops: [{
-                                    offset: 0,
-                                    color: '#5B83FF' // 0% 处的颜色
+                                    offset: 0, color: '#dfe7ff' // 0% 处的颜色
                                 }, {
-                                    offset: 1,
-                                    color: '#fff' // 100% 处的颜色
+                                    offset: 1, color: '#fafbfe' // 100% 处的颜色
                                 }],
                                 global: false // 缺省为 false
                             }
