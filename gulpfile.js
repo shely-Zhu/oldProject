@@ -270,6 +270,10 @@ if (options.env === '0') { //当开发环境的时候构建命令执行mock服�
 }
 
 /**此任务默认执行，gulp启动时，先将所有文件打包一次**/
+//gulp.task('initialTask', function(cb) {
+    //plugins.sequence('clean', 'images', 'font', 'allServerResources', 'includeJs', 'includeCss', 'cssToHost', 'webpack', 'bfRev', 'html', 'rev', 'rootEnv', cb);
+//});
+
 gulp.task('initialTask', function(cb) {
     plugins.sequence('clean', 'images', 'font', 'allServerResources', 'includeJs', 'includeCss', 'cssToHost', 'webpack', 'bfRev', 'html', 'rev', 'rootEnv', cb);
 });
@@ -1074,22 +1078,22 @@ gulp.task('font', function( cb ) {
     pump([
         gulp.src('src/include/fonts/*'),
 
-        plugins.rev(),
+        //plugins.rev(),
 
         gulp.dest(host.path + 'include/fonts'),
 
-        plugins.rev.manifest(),
+        //plugins.rev.manifest(),
 
         //修改manifest文件的路径
-        plugins.jsonEditor(function(json) {
-            var newJson = {};
-            for( var i in json ){
-                newJson['/include/fonts/' + i] = prefix + '/include/fonts/' + json[i];
-            }
-            return newJson;
-        }),
+        //plugins.jsonEditor(function(json) {
+            //var newJson = {};
+            //for( var i in json ){
+               // newJson['/include/fonts/' + i] = prefix + '/include/fonts/' + json[i];
+           //}
+            //return newJson;
+       // }),
 
-        gulp.dest(host.path + 'rev/include/fonts')
+       // gulp.dest(host.path + 'rev/include/fonts')
 
     ], cb)
 
@@ -1100,22 +1104,22 @@ gulp.task('allServerResources', function( cb ) {
     pump([
         gulp.src( ['src/allServerResources/include/fonts/*']),
 
-        plugins.rev(),
+        //plugins.rev(),
 
         gulp.dest(host.path + 'allServerResources/include/fonts'),
 
-        plugins.rev.manifest(),
+        //plugins.rev.manifest(),
 
         //修改manifest文件的路径
-        plugins.jsonEditor(function(json) {
-            var newJson = {};
-            for( var i in json ){
-                newJson['/allServerResources/include/fonts/' + i] = prefix + '/allServerResources/include/fonts/' + json[i];
-            }
-            return newJson;
-        }),
+        //plugins.jsonEditor(function(json) {
+            //var newJson = {};
+            //for( var i in json ){
+                //newJson['/allServerResources/include/fonts/' + i] = prefix + '/allServerResources/include/fonts/' + json[i];
+            //}
+            //return newJson;
+        //}),
 
-        gulp.dest( host.path + 'rev/allServerResources/include/fonts')
+        //gulp.dest( host.path + 'rev/allServerResources/include/fonts')
 
     ], cb)
 })
