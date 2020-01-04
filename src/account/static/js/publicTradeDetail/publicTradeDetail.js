@@ -217,7 +217,7 @@ $(function () {
                     if ("2" == model.debitStatus){
                         //扣款状态为已扣款 展示确认信息并填充
                         $('.buy_confirm_info').removeClass('hide');
-                        $('.buy_confirm_info .confirm_amount').html(model.confirmAmount);//确认金额
+                        $(newFunction()).html(model.confirmAmount);//确认金额
                         $('.buy_confirm_info .confirm_share').html(model.confirmShares + " 份");//确认份额
                         $('.buy_confirm_info .confirm_value').html(model.confirmNav);//确认净值中的净值
                         $('.buy_confirm_info .confirm_charge').html(model.confirmRate);//手续费
@@ -233,7 +233,7 @@ $(function () {
                         $('.redeem_confirm_info .confirm_value').html(model.confirmNav);//确认净值
                     }
                     $('.redeem_confirm_info .confirm_charge').html(model.confirmRate + " 元");//手续费
-                    $('.redeem_confirm_info .confirm_amount').html(model.confirmAmount + " 元");//到账金额
+                    $('.redeem_confirm_info .confirm_amount').html(model.accountAmount + " 元");//到账金额
                     $('.redeem_confirm_info .bank_icon').attr('src', model.bankThumbnailUrl);//银行logo
                     $('.redeem_confirm_info .bank_name').html(that.getPayInfo(model.bankName, model.bankAccountMask,model));//银行名称
                     if(!!model.estimateArrivalDate){//到账时间
@@ -460,3 +460,7 @@ $(function () {
     };
     obj.init();
 });
+
+function newFunction() {
+    return '.buy_confirm_info .confirm_amount';
+}
