@@ -132,7 +132,19 @@ $(function() {
             // 定投计划列表页点击返回，返回到 首页/理财（icon）现只实现了跳转理财首页
             } else if (window.location.href.indexOf('/financial/views/publicPlacement/myInvestmentPlan.html') != -1) {
                 location.href = site_url.wealthIndex_url
-            } else {
+            }else if(window.location.href.indexOf('/mine/views/fundDiagnosis/fundAccountDiagnosis.html') != -1){
+               //  console.log("基金账户诊断页面")
+                 if (window.isAndroid) {
+                    //这个是安卓操作系统
+                    window.jsObj.backNative();
+                }
+                // window.isIOS是在root文件中定义的变量
+                if (window.isIOS) {
+                    //这个是ios操作系统
+                    // window.webkit.messageHandlers.backNative.postMessage(JSON.stringify({ "type": "backNative" }));
+                    window.webkit.messageHandlers.backNative.postMessage("backNative" );
+                }
+            }else {
                 location.href = "javascript:history.go(-1)";
             }
         }
