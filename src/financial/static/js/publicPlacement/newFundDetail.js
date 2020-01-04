@@ -22,6 +22,7 @@ $(function() {
             singleaAuthenPath: "", //一键认证路径
             realLi: $('#real-condition>li'),
             tipsWrap: $("#tips-wrap"),
+            isHighAgeStatus:true,  //投资者年龄默认小于60的状态为true  大于就位false
         },
         init: function() {
             var that = this;
@@ -48,25 +49,48 @@ $(function() {
                         isReal = "", //是否实名认证，因为如果机构切一键认证是实名，点击需要提示弹框。
                         singleaAuthenPath = "", //一键认证跳转链接
                         singleaAuthen = false; //条件框是否展示
-                    if (jsonData.isWealthAccount != "1" && jsonData.isRiskEndure == "1" && jsonData.isPerfect == "1" && jsonData.isInvestFavour == "1") {
+                    if (jsonData.isWealthAccount == "0" && jsonData.isRiskEndure == "1" && jsonData.isPerfect == "1" && jsonData.isInvestFavour == "1") {
                         that.gV.realLi.hide();
                         that.gV.tipsWrap.hide();
                         $(".isRiskMatch_mask").show();
                         $(".isRiskMatchBox").show();
+                        if(jsonData.isHighAge=="1"&&that.gV.isHighAgeStatus){
+                            //年龄校验
+                             //that.gV.isHighAgeStatus = false;
+                             $(".isRiskMatchBox_match").hide()
+                             $(".isRiskMatchBox_noMatch").show()
+                             $(".isRiskMatchBox_header").html("您认/申购的基金产品风险等级为成长级/进取级，属中高/高风险产品，投资该产品可能产生较大损失。基于您的年龄情况，我司建议您综合考虑自身的身心承受能力、资金承受能力、风险承受能力及控制能力，审慎选择。")
+                             $(".isRiskMatchResult").html("继续购买")
+                             $(".isRiskMatchResult").attr("type","isHighAge")
+                             return false;
+                         }
+                         if(jsonData.isZdTaLimit == "1"){
+                             //中登校验
+                             $(".isRiskMatchBox_match").hide()
+                             $(".isRiskMatchBox_noMatch").show()
+                             $(".isRiskMatchBox_header").css({"line-height":"1.5rem"})
+                             $(".isRiskMatchBox_header").html("检测到您的证件类型无法购买该基金，请选购其他基金")
+                             $(".isRiskMatchResult").html("选购其他基金")
+                             $(".isRiskMatchResult").attr("type","isZdTaLimit")
+                             return false;
+                         }
                         if (jsonData.isRiskMatch == "1") {
                             //风险等级匹配
                             $(".isRiskMatchBox_match").show()
                             $(".isRiskMatchBox_noMatch").hide()
+                            $(".isRiskMatchBox_header").css({"line-height":"1.5rem"})
                             $(".isRiskMatchBox_header").html("你选择的产品与您现在的风险承受能力相匹配")
                         } else if (jsonData.isRiskMatch == "0") {
                             $(".isRiskMatchBox_noMatch").show()
                             $(".isRiskMatchBox_match").hide()
+                            $(".isRiskMatchBox_header").css({"line-height":"1.5rem"})
                             $(".isRiskMatchBox_header").html("你选择的产品与您现在的风险承受能力不相匹配")
                             $(".isRiskMatchResult").html("查看评测结果")
                             $(".isRiskMatchResult").attr("type", "noRisk")
                         } else if (jsonData.isRiskMatch == "2") {
                             $(".isRiskMatchBox_noMatch").show()
                             $(".isRiskMatchBox_match").hide()
+                            $(".isRiskMatchBox_header").css({"line-height":"1.5rem"})
                             $(".isRiskMatchBox_header").html("您的风险测评已过期,请重新进行风险测评")
                             $(".isRiskMatchResult").html("重新风测")
                             $(".isRiskMatchResult").attr("type", "repeatRisk")
@@ -285,6 +309,12 @@ $(function() {
                 } else if (type == "repeatRisk") {
                     //风测过期
                     window.location.href = site_url.riskAppraisal_url + "?type=private"
+                }else if(type == "isHighAge"){
+                    that.gV.isHighAgeStatus = false;
+                    that.getConditionsOfOrder()
+                }else if(type == "isZdTaLimit"){
+                     //跳理财首页
+                     window.location.href = site_url.wealthIndex_url
                 }
             }, {
                 htmdEvt: 'newFundDetail_6'
