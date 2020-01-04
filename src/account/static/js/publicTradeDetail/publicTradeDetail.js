@@ -62,7 +62,7 @@ $(function () {
             var that = this;
             mui("body").on('mdClick', 'footer', function (e) {
                 //再买一笔 跳转到产品详情页
-                if (that.gV.fundModel.fundBusinCode && "020" == that.gV.fundModel.fundBusinCode){
+                if (that.gV.fundModel && that.gV.fundModel.isNewFund){
                     //去新发基金
                     window.location.href = site_url.newFundDetail_url + '?fundCode=' + splitUrl()["fundCode"]+'&productStatus=0';
                 } else if (splitUrl()['isCash']){
@@ -196,6 +196,9 @@ $(function () {
 //              $('.redeemOut').hide();//隐藏转出银行卡
                 //$('.redeem_bank').hide();//隐藏转出银行卡
                 $('.redeem_info .item_4').html(model.tradeDate);//赎回时间
+                if(model.secondFundCode!=''){//货币基金赎回到货币基金时隐藏
+                    $(".isShowConfirm_date").hide()
+                }
             }
             
             /**
@@ -214,7 +217,7 @@ $(function () {
                     if ("2" == model.debitStatus){
                         //扣款状态为已扣款 展示确认信息并填充
                         $('.buy_confirm_info').removeClass('hide');
-                        $('.buy_confirm_info .confirm_amount').html(model.confirmAmount);//确认金额
+                        $(newFunction()).html(model.confirmAmount);//确认金额
                         $('.buy_confirm_info .confirm_share').html(model.confirmShares + " 份");//确认份额
                         $('.buy_confirm_info .confirm_value').html(model.confirmNav);//确认净值中的净值
                         $('.buy_confirm_info .confirm_charge').html(model.confirmRate);//手续费
@@ -230,7 +233,7 @@ $(function () {
                         $('.redeem_confirm_info .confirm_value').html(model.confirmNav);//确认净值
                     }
                     $('.redeem_confirm_info .confirm_charge').html(model.confirmRate + " 元");//手续费
-                    $('.redeem_confirm_info .confirm_amount').html(model.confirmAmount + " 元");//到账金额
+                    $('.redeem_confirm_info .confirm_amount').html(model.accountAmount + " 元");//到账金额
                     $('.redeem_confirm_info .bank_icon').attr('src', model.bankThumbnailUrl);//银行logo
                     $('.redeem_confirm_info .bank_name').html(that.getPayInfo(model.bankName, model.bankAccountMask,model));//银行名称
                     if(!!model.estimateArrivalDate){//到账时间
@@ -457,3 +460,7 @@ $(function () {
     };
     obj.init();
 });
+
+function newFunction() {
+    return '.buy_confirm_info .confirm_amount';
+}
