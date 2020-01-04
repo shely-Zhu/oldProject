@@ -18,17 +18,17 @@ body{
     color:@BB8E5F;
     width: 0.6rem;
     height: 0.6rem;
-    border: 0.01rem solid @BB8E5F;
+    border: 0.02rem solid @BB8E5F;
     border-radius: 50%;
     line-height: 0.6rem;
     text-align: center;
-    // font-weight: 600;
+    font-weight: 600;
 }
 .testone{
     color:@364D97;
     width: 0.6rem;
     height: 0.6rem;
-    border: 0.01rem solid @364D97;
+    border: 0.02rem solid @364D97;
     border-radius: 50%;
     line-height: 0.6rem;
     text-align: center;
@@ -42,7 +42,7 @@ body{
     border-radius: 50%;
     line-height: 0.6rem;
     text-align: center;
-    // font-weight: 600;
+    font-weight: 600;
 }
 .br{
     height: .3rem;
@@ -69,7 +69,7 @@ body{
             color:@c009;
             background: @c005;
             .contentLeft{
-                width: 1rem;
+                width: .9rem;
                 height: 100%;
                 // .photoleft{
                 //     width: 0.6rem;
@@ -93,9 +93,16 @@ body{
                 }
                 .leftUl{
                     text-align: left;
+                    li:last-child {
+                        font-weight: 600;
+                    }
                 }
                 .centerUl{
-                    text-align: center;
+                    li {
+                        width: 1.35rem;
+                        text-align: left;
+                        margin: 0 auto;
+                    }
                 }
                 .rightUl{
                     text-align: right;
