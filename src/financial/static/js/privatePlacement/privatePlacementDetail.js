@@ -763,7 +763,8 @@ $(function() {
                     axisLabel: {                   
                         formatter: function (value, index) {           
                             return value.toFixed(4) + '%';      
-                        }                
+                        },
+                        color:"#9B9B9B"               
                     }
                 },
                 series: [{
