@@ -27,8 +27,8 @@ body{
     width: 100%;
 }
 .list li{
-    border-left:0.04rem solid @BC965A;
-    border-radius: 16px 0 0 16px;
+    border-left:0.08rem solid @BC965A;
+    border-radius: .16rem;
     overflow: hidden;
     background-color: @FFFFFF;
     margin-bottom:0.3rem;
@@ -44,6 +44,11 @@ body{
     }
     .content{
         padding:0.3rem 0.3rem  0.3rem 0.16rem;
+        p:first-child {
+            b {
+                font-weight: 600;
+            }
+        }
         p{
             display:-webkit-box;
             margin-bottom:0.2rem;

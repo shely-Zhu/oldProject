@@ -95,6 +95,7 @@ $(function () {
 			that.getAgreeUrl();
 		},
 		getRate:function(val){
+		
 			var that = this;
 			var obj = [{
 				url: site_url.prfFundFeeRate_api,
@@ -104,6 +105,7 @@ $(function () {
 				},
 				//async: false,
 				needDataEmpty: true,
+				needLoading:false,
 				callbackDone: function (json) {
 					if (json.status == '0000') {
 						//费用估算有待完善
