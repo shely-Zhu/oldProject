@@ -16,7 +16,7 @@ var data=Mock.mock({
     },{
         mesType: 1,
         mesTitle: '产品公告',
-        mesContent: '防范金融诈骗特别提示，尊敬的客户：为了回…',
+        mesContent: '防范金融诈骗特别提示，尊敬的客户：为了回花花地方都是后i阿迪斯发…',
         readStatus: 0 // 0未读，1已读
     },{
         mesType: 2,
