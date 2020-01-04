@@ -3,7 +3,16 @@
 @import url("@pathCommonCom/noData/noData.less");
 @import url("@pathCommonLessCom/headBarConfig.less");
 body{
-    background:@c005;
+    background:#f7fafd;
+}
+.transactionDetail {
+    font-weight: 400;
+}
+.mui-table-view-cell:after {
+    background: none;
+}
+.mui-pull-caption {
+    font-weight: 400;
 }
 .test{
     color:@BB8E5F;
@@ -23,13 +32,13 @@ body{
     border-radius: 50%;
     line-height: 0.6rem;
     text-align: center;
-    // font-weight: 600;
+    font-weight: 600;
 }
 .testoneo{
     color:@59B1D6;
     width: 0.6rem;
     height: 0.6rem;
-    border: 0.01rem solid @59B1D6;
+    border: 0.02rem solid @59B1D6;
     border-radius: 50%;
     line-height: 0.6rem;
     text-align: center;
@@ -50,8 +59,10 @@ body{
             width: 100%;
             height: 1.36rem;
             border-bottom:0.01rem solid @c008;
-            border-top:0.01rem solid @c008;
+            //border-top:0.01rem solid @c008;
             padding-top: 0.4rem;
+            padding-left: .3rem;
+            padding-right: .3rem;
             font-size:0.24rem;
             font-family:PingFangSC-Regular,PingFang SC;
             font-weight:400;
@@ -60,7 +71,6 @@ body{
             .contentLeft{
                 width: 1rem;
                 height: 100%;
-                margin-left: 0.22rem;
                 // .photoleft{
                 //     width: 0.6rem;
                 //     height: 0.6rem;
@@ -74,7 +84,6 @@ body{
                 height: 100%;
                 display: flex;
                 flex: 1;
-                padding-right: 0.3rem;
                 .contentUl{
                     width: 33.33%;
                     // text-align: center;
