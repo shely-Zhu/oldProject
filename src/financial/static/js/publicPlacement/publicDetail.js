@@ -380,7 +380,6 @@ $(function () {
                    return false
                }
                 that.getConditionsOfOrder("into");
-               // window.location.href = site_url.fundTransformIn_url + '?fundCode=' + fundCode + '&fundName=' + fundName;
                
             },{
                 htmdEvt: 'publicDetail_07'
@@ -452,7 +451,7 @@ $(function () {
                  $(".isRiskMatchBox").hide();
                  if(type == "into"){
                     //买入一键认证
-                    window.location.href = site_url.fundTransformIn_url + '?fundCode=' + splitUrl['fundCode'] + '&fundName=' + that.gV.secuSht;
+                    window.location.href = site_url.fundTransformIn_url + '?fundCode=' + splitUrl['fundCode'] + '&fundName=' + that.gV.secuSht+"&noReload=1";
                 }else if(type == "investement"){
 
                     //定投一键认证

@@ -250,7 +250,6 @@ $(function() {
                 } else {
 
                     that.getConditionsOfOrder();
-                    //window.location.href = site_url.fundTransformIn_url + '?fundCode=' + that.getElements.fundCode + '&fundName=' + that.getElements.chiName;
                 }
 
             }, {
@@ -261,7 +260,7 @@ $(function() {
             mui("body").on('mdClick', ".isRiskMatchBox_match", function() {
                 $(".isRiskMatch_mask").hide();
                 $(".isRiskMatchBox").hide();
-                window.location.href = site_url.fundTransformIn_url + '?fundCode=' + that.getElements.fundCode + '&fundName=' + that.getElements.chiName;
+                window.location.href = site_url.fundTransformIn_url + '?fundCode=' + that.getElements.fundCode + '&fundName=' + that.getElements.chiName+"&noReload=1";
             }, {
                 htmdEvt: 'newFundDetail_4'
             })
