@@ -1048,22 +1048,22 @@ gulp.task('images', ['commonImages'], function( cb ) {
     pump([
         gulp.src(['src/**/img/**/*', '!src/newCommon/**/*']),
 
-        plugins.rev(),
+        //plugins.rev(),
 
         gulp.dest(host.path),
 
-        plugins.rev.manifest(),
+        //plugins.rev.manifest(),
 
         //修改manifest文件的路径
-        plugins.jsonEditor(function(json) {
-            var newJson = {};
-            for( var i in json ){
-                newJson['/' + i] = prefix + '/' + json[i];
-            }
-            return newJson;
-        }),
+        //plugins.jsonEditor(function(json) {
+            //var newJson = {};
+            //for( var i in json ){
+                //newJson['/' + i] = prefix + '/' + json[i];
+            //}
+            //return newJson;
+        //}),
 
-        gulp.dest( host.path + 'rev/img/')
+        //gulp.dest( host.path + 'rev/img/')
 
     ], cb)
 
