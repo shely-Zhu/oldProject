@@ -57,12 +57,13 @@ body{
         
         .membershipDetailsContentBox{
             width: 90%;
-            background: @c005;
+            background: url("/mine/static/img/quanyi_card_bg@2x.png");
+            background-size: 100% 100%;
             box-shadow: 0 .02rem .26rem 0 rgba(221,221,221,0.50);
             border-radius: .2rem;
             min-height: 7.84rem;
             margin: .7rem auto .92rem;
-            padding: .2rem .35rem .6rem .35rem;
+            padding: .7rem .35rem .6rem .35rem;
             h2{
                 display: inline;
                 margin: .4rem 0;
@@ -82,7 +83,7 @@ body{
                 color: @272727;
                 text-align: justify;
                 line-height: .5rem;
-                margin: .2rem 0 .5rem 0;
+                margin: .4rem 0 .5rem 0;
             }
             span{
                 &.title{
@@ -144,7 +145,10 @@ body{
     height: 1.4rem;
 }
 .show-swiper .swiper-slide.swiper-slide-active .goods{
-	transform: scale(1.4);
+    transform: scale(1.4);
+    p{
+        font-weight: 600;
+    }
 }
 .show-swiper .swiper-slide .goods {
 	width: 1.4rem;
@@ -176,7 +180,7 @@ body{
         color: @6C4517;
         letter-spacing: 0;
         line-height: 2.1rem;
-        font-weight: 550;
+        // font-weight: 550;
     }
 }
 
