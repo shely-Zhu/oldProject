@@ -863,7 +863,7 @@ $(function () {
                     axisLabel: {
                         show: true,
                         color: '#9B9B9B',
-                        formatter: '{value}%',
+                        formatter: '{value}',
                     },
                 },
                 series: [{

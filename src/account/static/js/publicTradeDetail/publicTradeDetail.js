@@ -196,6 +196,9 @@ $(function () {
 //              $('.redeemOut').hide();//隐藏转出银行卡
                 //$('.redeem_bank').hide();//隐藏转出银行卡
                 $('.redeem_info .item_4').html(model.tradeDate);//赎回时间
+                if(model.secondFundCode!=''){//货币基金赎回到货币基金时隐藏
+                    $(".isShowConfirm_date").hide()
+                }
             }
             
             /**
