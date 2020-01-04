@@ -963,22 +963,22 @@ gulp.task("allServerResourcesCss", function( cb ) {
         //也加上压缩处理
         plugins.if(options.env === '3' || options.env === '4', plugins.cssnano({ autoprefixer: false, zindex: false })),
 
-        plugins.rev(),
+        //plugins.rev(),
 
         gulp.dest(host.path),
 
-        plugins.rev.manifest(),
+        //plugins.rev.manifest(),
 
         //修改manifest文件的路径,增加cdn域名
-        plugins.jsonEditor(function(json) {
-            var newJson = {};
-            for( var i in json ){
-                newJson['/allServerResources/include/css/' + i] = prefix + '/allServerResources/include/css/' + json[i];
-            }
-            return newJson;
-        }),
+        //plugins.jsonEditor(function(json) {
+            //var newJson = {};
+            //for( var i in json ){
+                //newJson['/allServerResources/include/css/' + i] = prefix + '/allServerResources/include/css/' + json[i];
+            //}
+            //return newJson;
+        //}),
 
-        gulp.dest( host.path + 'rev/allServerResources/include/css')
+        //gulp.dest( host.path + 'rev/allServerResources/include/css')
 
     ], cb )
 })
@@ -992,22 +992,22 @@ gulp.task("includeCss", ['allServerResourcesCss'], function( cb ) {
         //也加上压缩处理
         plugins.if(options.env === '3' || options.env === '4', plugins.cssnano({ autoprefixer: false, zindex: false })),
 
-        plugins.rev(),
+        //plugins.rev(),
 
         gulp.dest(host.path),
 
-        plugins.rev.manifest(),
+        //plugins.rev.manifest(),
 
         //修改manifest文件的路径,增加cdn域名
-        plugins.jsonEditor(function(json) {
-            var newJson = {};
-            for( var i in json ){
-                newJson['/include/' + i] = prefix + '/include/' + json[i];
-            }
-            return newJson;
-        }),
+        //plugins.jsonEditor(function(json) {
+            //var newJson = {};
+            //for( var i in json ){
+               // newJson['/include/' + i] = prefix + '/include/' + json[i];
+            //}
+           // return newJson;
+        //}),
 
-        gulp.dest( host.path + 'rev/include/css')
+        //gulp.dest( host.path + 'rev/include/css')
 
     ], cb )
 })
