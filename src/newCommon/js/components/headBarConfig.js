@@ -38,7 +38,7 @@ $(function() {
     //IOS会在所有连接上拼接是否为刘海屏的标识，同时会存在session中。
     if (splitUrl['isIphoneX'] || window.isIphoneX) {
         window.isIphoneX = true;
-        $(".HeadBarConfigBox").css('margin-top', '0.2rem');
+        $(".HeadBarConfigBox").css('margin-top', '0.25rem');
     }
     //判断传入的值
     if ($("#HeadBarpathName").attr("data") == "@@pathName") {
