@@ -52,6 +52,7 @@ $(function () {
             allotType: splitUrl()['allotType'],//交易类别 0：购买 1：赎回 2：定投, 3：分红
             isBuy: splitUrl()['isBuy'] == 'true',//是否为现金宝购买
             isCash: splitUrl()['isCash'],//是否为现金宝
+            fundModel: {},//普通基金详情model
         },
         init: function () {
             var that = this;
@@ -61,8 +62,16 @@ $(function () {
             var that = this;
             mui("body").on('mdClick', 'footer', function (e) {
                 //再买一笔 跳转到产品详情页
-                // window.location.href = site_url.productPublicDetail_url + '?fundCode=' + splitUrl()["fundCode"];
-                window.location.href = site_url.pofPublicDetail_url + '?fundCode=' + splitUrl()["fundCode"]+'&fundType='+splitUrl()["fundType"];
+                if (that.gV.fundModel && that.gV.fundModel.isNewFund){
+                    //去新发基金
+                    window.location.href = site_url.newFundDetail_url + '?fundCode=' + splitUrl()["fundCode"]+'&productStatus=0';
+                } else if (splitUrl()['isCash']){
+                    //去现金宝详情页
+                    window.location.href = site_url.superStreasureDetail_url + '?fundCode=' + splitUrl()["fundCode"];
+                } else {
+                    //去普通基金详情页
+                    window.location.href = site_url.pofPublicDetail_url + '?fundCode=' + splitUrl()["fundCode"]+'&fundType='+splitUrl()["fundType"];
+                }
             },{
                 'htmdEvt': 'publicTradeDetail_0'
             })
@@ -127,6 +136,7 @@ $(function () {
                         //根据撤单标记来展示撤单按钮
                         $(".cancel_order").removeClass('hide');
                     }
+                    that.gV.fundModel = json.data;
                     switch (that.gV.allotType) {
                         case "0":
                             //购买
@@ -141,7 +151,11 @@ $(function () {
                         case "2":
                             //定投
                             that.showFundStatus(true, json.data);
-                            //定投展示定投计划
+                            if (splitUrl()["scheduledProtocolId"]){
+                                //定投id不为空时展示定投计划
+                                $('.plan').removeClass('hide');
+                            }
+
                             $('.plan').removeClass('hide');
                             break
                     }
@@ -158,12 +172,7 @@ $(function () {
                 $('.header .amount').html(model.tradeAmount);//交易申请金额 header中显示的后下面显示的金额都是这个 除了确认信息中的金额显示的是确认金额confirmAmount
             } else {
                 $('.header .amount').html(model.tradeShares);//交易申请份额
-                 //判断是否是货币基金
-                if(model.fundType=='10300'){
-                    $('.header .yuan').html("元");//更换单位
-                }else{
-                    $('.header .yuan').html("份");//更换单位
-                }
+                $('.header .yuan').html("份");//更换单位
             }
             $('.header .trade_status').html(model.tradeApplyDesc);//交易状态 例如待扣款
             $('.header .trade_status_des').html(model.tradeApplyDescMessage);//交易状态描述信息 例如等待给银行汇款 
@@ -174,7 +183,7 @@ $(function () {
                 $('.buy_info .fund_name').html(model.fundName);//买入产品
                 $('.buy_info .fund_amount').html(model.tradeAmount + '元');//买入金额
                 $('.buy_info .bank_icon').attr('src', model.bankThumbnailUrl);//支付方式的银行logo
-                $('.buy_info .bank_name').html(that.getPayInfo(model.bankName, model.bankAccountMask));//支付方式的银行名称
+                $('.buy_info .bank_name').html(that.getPayInfo(model.bankName, model.bankAccountMask,model));//支付方式的银行名称
                 $('.buy_info .pay_mode').html(model.payModeName);//支付方式
                 $('.buy_info .fund_date').html(model.tradeDate);//买入时间
             } else {
@@ -183,10 +192,13 @@ $(function () {
                 $('.redeem_info .item_1').html(model.fundName);//赎回产品
                 $('.redeem_info .item_2').html(model.confirmShares + ' 份');//赎回份额
                 $('.redeem_info .bank_icon').attr('src', model.bankThumbnailUrl);//到账银行卡icon
-                $('.redeem_info .item_3').html(that.getPayInfo(model.bankName, model.bankAccountMask));//到账银行卡描述
+                $('.redeem_info .item_3').html(that.getPayInfo(model.bankName, model.bankAccountMask,model));//到账银行卡描述
 //              $('.redeemOut').hide();//隐藏转出银行卡
                 //$('.redeem_bank').hide();//隐藏转出银行卡
                 $('.redeem_info .item_4').html(model.tradeDate);//赎回时间
+                if(model.secondFundCode!=''){//货币基金赎回到货币基金时隐藏
+                    $(".isShowConfirm_date").hide()
+                }
             }
             
             /**
@@ -223,7 +235,7 @@ $(function () {
                     $('.redeem_confirm_info .confirm_charge').html(model.confirmRate + " 元");//手续费
                     $('.redeem_confirm_info .confirm_amount').html(model.confirmAmount + " 元");//到账金额
                     $('.redeem_confirm_info .bank_icon').attr('src', model.bankThumbnailUrl);//银行logo
-                    $('.redeem_confirm_info .bank_name').html(that.getPayInfo(model.bankName, model.bankAccountMask));//银行名称
+                    $('.redeem_confirm_info .bank_name').html(that.getPayInfo(model.bankName, model.bankAccountMask,model));//银行名称
                     if(!!model.estimateArrivalDate){//到账时间
                     	$('.redeem_confirm_info .hours_account').html(model.estimateArrivalDate);//到账时间
                     }else{
@@ -310,7 +322,7 @@ $(function () {
                 $('.cash_buy_info .fund_name').html(model.fundName);//基金名称
                 $('.cash_buy_info .fund_amount').html(model.balanceMask + '元');//买入金额
                 $('.cash_buy_info .bank_icon').attr('src', model.bankThumbnailUrl);//需要后台加接口 支付方式的银行logo
-                $('.cash_buy_info .bank_name').html(that.getPayInfo(model.bankName, model.bankAccountMask));//支付方式的银行名称
+                $('.cash_buy_info .bank_name').html(that.getPayInfo(model.bankName, model.bankAccountMask,model));//支付方式的银行名称
                 $('.cash_buy_info .pay_mode').html('1' == model.payType? '汇款支付': '在线支付');//支付方式
                 $('.cash_buy_info .fund_date').html(model.applyDateTime);//买入时间
             } else {
@@ -319,7 +331,7 @@ $(function () {
                 $('.cash_redeem_info .item_1').html(model.fundName);//转出产品
                 $('.cash_redeem_info .item_2').html(model.balanceMask + '元');//转出金额
                 $('.cash_redeem_info .bank_icon').attr('src', model.bankThumbnailUrl);//转出至银行卡logo
-                $('.cash_redeem_info .item_3').html(that.getPayInfo(model.bankName, model.bankAccountMask));//转出至银行卡描述
+                $('.cash_redeem_info .item_3').html(that.getPayInfo(model.bankName, model.bankAccountMask,model));//转出至银行卡描述
                 $('.cash_redeem_info .pay_mode').html('1' == model.payType? '汇款支付': '在线支付');//支付方式
                 $('.cash_redeem_info .item_4').html(model.applyDateTime);//转出时间
             }
@@ -328,11 +340,7 @@ $(function () {
             //分红没有进度条 隐藏之
             $('.header .amount').html(splitUrl()['shares']);//交易申请份额
             //判断是否是货币基金
-            if(model.fundType=='10300'){
-                $('.header .yuan').html("元");//更换单位
-            }else{
-                $('.header .yuan').html("份");//更换单位
-            }
+            $('.header .yuan').html("份");//更换单位
             $('.header .trade_status').html('分红成功');//分红的交易状态为分红成功
 
             $('.trade_status_area').addClass('hide'); 
@@ -398,6 +406,7 @@ $(function () {
                 //普通基金赎回不展示进度条 所以不判断
                 $('.trade_status_area .trade_status_date').eq(0).html(model.originalDate);//申请受理时间
                 if ("020" == model.fundBusinCode){
+                    //新发基金
                     //认购状态
                     $('.trade_status_area .trade_status_desc').eq(1).html("等待基金成立确认认购份额");//第二步左边名称
                     $('.trade_status_area .trade_status_desc').eq(2).html("预计查看确认");//第三步左边名称
@@ -414,24 +423,21 @@ $(function () {
             var that = this;
             var param = {
                 password: password,
-                applyId: that.gV.data.applyId,
-                tradeNo: that.gV.data.tradeNo,
+                applyId: splitUrl()['applyId'],
+                tradeNo: that.gV.fundModel.tradeNo,
+                fundCombinationFlag: splitUrl()['fundCombination'],
             }
             var obj = [{
 	            url: site_url.findSuperviseBank_api,
 	            data: param,
 	            needLogin:true,//需要判断是否登陆
                 callbackDone: function(json){  //成功后执行的函数
-                    if ("020" == model.fundBusinCode || "022" == model.fundBusinCode) {
+                    if ("020" == that.gV.fundModel.fundBusinCode || "022" == that.gV.fundModel.fundBusinCode) {
                         //认购、申购
                         tipAction("已撤单，申请金额将退还支付银行卡中");
                     } else {
                         tipAction("已撤单，您将继续持有该基金份额");
                     }
-                    /*setTimeout(() => {
-                        //2秒后刷新页面
-                        window.location.reload()
-                    }, 2000);*/
                     setTimeout(function() {
                         //2秒后刷新页面
                         window.location.reload()
@@ -441,9 +447,15 @@ $(function () {
 	        }];
 	        $.ajaxLoading(obj);
         },
-        getPayInfo: function (bankName, bankAccountMask) {
+        getPayInfo: function (bankName, bankAccountMask,model) {
             var payModeText = bankAccountMask? bankAccountMask.substring(bankAccountMask.length - 4): '';
-            return bankName + payModeText;
+            if(!!model.secondFundName){
+            	$(".bank_icon").hide();
+            	$(".pay_mode").hide();
+            	return model.secondFundName + "(" + payModeText + ")"
+            }else{
+            	return bankName + payModeText;
+            }
         }
     };
     obj.init();

@@ -35,7 +35,7 @@ $(function() {
             topc: $('#topc'), //提示信息
             tipIcon: $(".tipIcon"), //净值披露信息
             isElecContract: '', //是否是电子合同产品【0.否 1.是】
-            unitNetValueDes: '',
+            unitNetValueDes: '每周五24:00前更新上周净值',
             productNameTip:'',
             reourceData:true,   //标签内容
             collectAccountFlag:true,    //标签募集账号
@@ -411,6 +411,9 @@ $(function() {
                             $(".over").hide();
                             break;
                     }
+                },
+                callbackNoData:function(json){
+                    debugger
                 }
             }, {
                 url: site_url.queryUserAuthInfo_api,
@@ -640,12 +643,15 @@ $(function() {
                     $("#qrnhLine").addClass("hide")
                     $("#wfsyLine").addClass("hide")
                     $(".noDataHintEcharts").removeClass("hide")
+                    $(".lineWrap").hide()
                 },
                 callbackFail: function(json) {
                     that.data.echartsClickFlag = false;
                     $("#qrnhLine").addClass("hide")
                     $("#wfsyLine").addClass("hide")
                     $(".noDataHintEcharts").removeClass("hide")
+                    $(".lineWrap").hide()
+
                 }
             }];
             $.ajaxLoading(obj);
@@ -722,7 +728,8 @@ $(function() {
                     data: xAxisData,
                     axisLine: {
                         lineStyle: {
-                            color: '#FADFBB'
+                            color: '#FADFBB',
+                            width:0.5 //横网格线粗细
                         }
                     },
                     axisLabel: {
@@ -743,7 +750,8 @@ $(function() {
                     },
                     splitLine: {
                         lineStyle: {
-                            color: '#FADFBB'
+                            color: '#FADFBB',
+                            width:0.5
                         }
                     },
                     axisLabel: {
@@ -1480,7 +1488,7 @@ $(function() {
             });
             //点击查看明细跳转
             mui("body").on('mdClick', '.lookDetailed', function() {
-                window.location.href = site_url.tobeConfirmTransaction_url+"?type=toBeConfirmed&eruda=true"//查看明细跳转待确认明细
+                window.location.href = site_url.tobeConfirmTransaction_url+"?type=toBeConfirmed"//查看明细跳转待确认明细
             },{
                 htmdEvt: 'privatePlacementDetail_10'
             });

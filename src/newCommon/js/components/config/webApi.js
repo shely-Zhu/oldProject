@@ -45,6 +45,8 @@ module.exports = function() {
     this.getJJSInTransitAssets_api = http_url.web_url + '/account/jjs/getJJSInTransitAssets'; // 查询金交所在途资产 
     //待确认，已确认列表
     this.getTradeList_api = http_url.web_url + '/pef/getTradeList'
+    // 
+    this.gainCustStorageList_api = http_url.web_url + '/account/gainCustStorageList'
         //取消预约产品
     this.fundReserveCancel_api = http_url.web_url + '/pef/fundReserveCancel'
         // 查询金交持仓资产、在途资产、总资产

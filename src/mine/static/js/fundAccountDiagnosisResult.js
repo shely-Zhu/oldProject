@@ -1,7 +1,7 @@
 /*
- * @Author: your name
+ * @Author: yanan
  * @Date: 2019-12-09 15:53:31
- * @LastEditTime : 2020-01-02 14:05:57
+ * @LastEditTime : 2020-01-03 17:15:22
  * @LastEditors  : Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \htjf-app\src\mine\static\js\fundAccountDiagnosisResult.js
@@ -9,10 +9,7 @@
 
 require('@pathCommonBase/base.js');
 require('@pathCommonJs/ajaxLoading.js');
-require('@pathCommonJs/components/elasticLayer.js');
 require('@pathCommonJs/components/elasticLayerTypeTwo.js');
-require('@pathCommonJs/components/headBarConfig.js');
-var tipAction = require('@pathCommonJs/components/tipAction.js');
 var splitUrl = require('@pathCommonJs/components/splitUrl.js')();
 var generateTemplate = require('@pathCommonJsComBus/generateTemplate.js');
 require('@pathIncludJs/vendor/mui/mui.picker.min.js');
@@ -455,6 +452,8 @@ $(function() {
                     that.gV.dataPickData = selectItems.value;
                     $(".dataPick")[0].textContent = selectItems.value;
                 })
+            },{
+                'htmdEvt':'fundAccountDiagnosisResult_01'
             })
             mui("body").on("mdClick", ".addOtherFund_content .comfirmButtom .addOtherTrue", function() {
                 var fundCode = $(".fundCode_input").val();
@@ -494,12 +493,16 @@ $(function() {
                 } else {
                     $(".warmMessage").show()
                 }
+            },{
+                'htmdEvt':'fundAccountDiagnosisResult_02'
             })
 
             mui("body").on("mdClick", ".addOtherFund_content .comfirmButtom .addOtherFalse", function() {
                 $(".warmMessage").hide()
                 $(".addOtherFund").hide()
                 $(".addOtherFund_content").hide()
+            },{
+                'htmdEvt':'fundAccountDiagnosisResult_03'
             })
             // 性别选择
             mui("body").on("mdClick", ".content-item .mui-icon-arrowright", function() {
@@ -538,19 +541,9 @@ $(function() {
                     that.gV.typeInput = "loss";
                 }
             }, {
-                'htmdEvt': 'fundAccountDiagnosisResult_01'
+                'htmdEvt': 'fundAccountDiagnosisResult_04'
             })
-            // 弹框内容选择
-            mui("body").on("mdClick", ".selectItemList ul li", function() {
-                var type = $(this).attr("type");
-                var val = $(this).find("span")[0].textContent;
-                var dicCode = $(this).attr("dicCode");
-                $(this).find(".radioCheckItemImg").show();
-                $(this).siblings().find(".radioCheckItemImg").hide();
-                $(".popup_true").attr("type", type).attr("val", val).attr("dicCode", dicCode);
-            }, {
-                'htmdEvt': 'fundAccountDiagnosisResult_02'
-            })
+     
 
             //弹出框确定按钮
             mui("body").on("mdClick", ".popup_true", function() {
@@ -618,14 +611,14 @@ $(function() {
                 $('.popuplist').css('display', 'none')
                 $(".mui-backdrop").remove()
             }, {
-                'htmdEvt': 'fundAccountDiagnosisResult_03'
+                'htmdEvt': 'fundAccountDiagnosisResult_05'
             })
             //弹出框取消按钮
             mui("body").on("mdClick", ".popup_cancel", function() {
                 $('.popuplist').css('display', 'none')
                 $(".mui-backdrop").remove()
             }, {
-                'htmdEvt': 'fundAccountDiagnosisResult_04'
+                'htmdEvt': 'fundAccountDiagnosisResult_06'
             })
 
             //新增其他的清除按钮
@@ -655,7 +648,7 @@ $(function() {
                     $(".addOtherFundcodeBox_noData").show();
                 }
             }, {
-                'htmdEvt': 'fundAccountDiagnosisResult_05'
+                'htmdEvt': 'fundAccountDiagnosisResult_07'
             })
 
             //新增其他新建添加按钮
@@ -666,7 +659,7 @@ $(function() {
                 $(".popup_true").attr("type", "addOtherFund");
                 // window.location.href = site_url.addAccountDiagnosisResult_url;
             }, {
-                'htmdEvt': 'fundAccountDiagnosisResult_06'
+                'htmdEvt': 'fundAccountDiagnosisResult_08'
             })
 
             //提交申请
@@ -677,11 +670,13 @@ $(function() {
                     that.updateFundDiagnosisApply()
                 }
             }, {
-                'htmdEvt': 'fundAccountDiagnosisResult_07'
+                'htmdEvt': 'fundAccountDiagnosisResult_09'
             })
      
             mui("body").on("mdClick",".elasticButtons",function(){
                 window.location.href = site_url.applyHistory_url 
+            }, {
+                'htmdEvt': 'fundAccountDiagnosisResult_10'
             } )
 
             //基金勾选
@@ -724,7 +719,7 @@ $(function() {
 
                 console.log("8888", status)
             }, {
-                'htmdEvt': 'fundAccountDiagnosisResult_08'
+                'htmdEvt': 'fundAccountDiagnosisResult_11'
             })
         },
 

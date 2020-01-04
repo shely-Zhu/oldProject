@@ -189,21 +189,4 @@ module.exports = {
 
     // 埋点
     './allServerResources/appMd/headerMd' : './src/allServerResources/appMd/headerMd.js',
-
-
-
-    // newPrivatePlacement 的相关文件的路径的地址
-    // 交易明细
-    // './wealthManagement/newPrivatePlacement/static/js/tradeDetail': "./src/wealthManagement/newPrivatePlacement/static/js/tradeDetail.js",
-    // // 产品亮点
-    // './wealthManagement/newPrivatePlacement/static/js/prvPic': './src/wealthManagement/newPrivatePlacement/static/js/prvPic.js',
-    // //私募详情材料页面JS
-    // './wealthManagement/newPrivatePlacement/static/js/prvMar': './src/wealthManagement/newPrivatePlacement/static/js/prvMar.js', 
-    // //私募详情页面JS
-    // './wealthManagement/newPrivatePlacement/static/js/prvDetail': './src/wealthManagement/newPrivatePlacement/static/js/prvDetail.js', 
-    // //历史净值JS
-    // './wealthManagement/newPrivatePlacement/static/js/hisValue': './src/wealthManagement/newPrivatePlacement/static/js/hisValue.js',
-    // // 赎回明细
-    // './wealthManagement/newPrivatePlacement/static/js/detailLists': "./src/wealthManagement/newPrivatePlacement/static/js/detailLists.js",
-
 }
