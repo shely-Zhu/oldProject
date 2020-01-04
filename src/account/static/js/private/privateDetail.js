@@ -444,7 +444,10 @@ $(function() {
 			    		show: false
 			    	},
 			    	axisLine: {
-			    		show: false
+			    		show: false,
+			    		lineStyle: {
+			    			color: '#9B9B9B'
+			    		}
 			    	},
 			    	splitLine:{
 			    		lineStyle: {
