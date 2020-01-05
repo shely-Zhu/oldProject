@@ -12,7 +12,15 @@
 .diagnosisDetail {
     font-family: Helvetica, Arial, "Microsoft YaHei";
     //background-color: @f7f7f7;
-
+    height: 20rem;
+    background: url("/mine/static/img/zhenduan_head_bg@2x.png") no-repeat center center;
+    background-size: 100% auto;  
+	.HeadBarConfigBox {
+        background:linear-gradient(135deg,rgba(71,90,149,1) 0%,rgba(3,19,73,1) 100%);
+        .backBtn {
+            top: 1rem;
+        }
+	}
     // 公共
     .right {
         text-align: right;
@@ -69,12 +77,12 @@
 
     // 顶部
     .dd_top {
-        min-height: 13.8rem;
-        padding: 5rem 1.7rem 2rem 1.7rem;
+        // min-height: 13.8rem;
+        padding: 5.4rem 1.7rem 2rem 1.7rem;
         color: @c005;  
         // background-color: #172960;  
-        background: url("/mine/static/img/zhenduan_head_bg@2x.png") no-repeat center center;
-        background-size: 100% auto;  
+        // background: url("/mine/static/img/zhenduan_head_bg@2x.png") no-repeat center center;
+        // background-size: 100% auto;  
         .dd_name {
             font-size:1.6rem;
             font-family:PingFangSC-Semibold,PingFang SC;
@@ -321,12 +329,13 @@
         font-size: 1.5rem !important;
     }
 }
-
 .HeadBarConfigBox{
-    height: 4.28rem !important;
-    line-height: 4.28rem !important;
+    height: 5.4rem !important;
+    line-height: 5.4rem !important;
     #HeadBarpathName{
-        line-height:4.88rem !important;
+        top: 2rem !important;
+        height: 3.4rem !important;
+        line-height:3.4rem !important;
         font-size: 1.4rem;
     }
     .backBtn{
