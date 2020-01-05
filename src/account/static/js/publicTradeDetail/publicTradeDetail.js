@@ -452,7 +452,6 @@ $(function () {
                         //2秒后刷新页面
                         window.location.reload()
                     }, 2000);
-                    
 	            }
 	        }];
 	        $.ajaxLoading(obj);
