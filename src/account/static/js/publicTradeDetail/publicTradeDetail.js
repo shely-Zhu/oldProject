@@ -438,7 +438,7 @@ $(function () {
                 fundCombinationFlag: splitUrl()['fundCombination'],
             }
             var obj = [{
-	            url: site_url.findSuperviseBank_api,
+	            url: site_url.pofUndoTradeApply_api,
 	            data: param,
 	            needLogin:true,//需要判断是否登陆
                 callbackDone: function(json){  //成功后执行的函数
