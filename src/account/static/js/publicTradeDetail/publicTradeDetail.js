@@ -62,7 +62,7 @@ $(function () {
             var that = this;
             mui("body").on('mdClick', 'footer', function (e) {
                 //再买一笔 跳转到产品详情页
-                if (that.gV.fundModel && that.gV.fundModel.isNewFund){
+                if (that.gV.fundModel && that.gV.fundModel.isNewFund==1){
                     //去新发基金
                     window.location.href = site_url.newFundDetail_url + '?fundCode=' + splitUrl()["fundCode"]+'&productStatus=0';
                 } else if (splitUrl()['isCash']){
@@ -87,7 +87,7 @@ $(function () {
             })
             mui("body").on('mdClick', '.buy_info .fund_item', function (e) {
                 //买入产品条目点击进入公募产品详情
-                if (that.gV.fundModel && that.gV.fundModel.isNewFund){
+                if (that.gV.fundModel && that.gV.fundModel.isNewFund == 1){
                     //去新发基金
                     window.location.href = site_url.newFundDetail_url + '?fundCode=' + splitUrl()["fundCode"]+'&productStatus=0';
                 } else if (splitUrl()['isCash']){
