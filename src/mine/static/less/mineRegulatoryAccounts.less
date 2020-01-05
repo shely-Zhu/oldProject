@@ -35,7 +35,7 @@ html{
     background-color: @F7FAFD;
     padding-bottom: 1rem;
     .br{
-        border-top:1px solid @e0e0e0;
+        border-top:1px solid #eee;
         position: fixed;
         top: 1.28rem;
         left: 0;
@@ -47,9 +47,14 @@ html{
         
         margin-bottom: .3rem;
         .toptitle{
-            font-size: .24rem;
+            font-size: .28rem;
             padding-top: .37rem;
             padding-bottom: .2rem;
+            padding-left: .3rem;
+            &>.iconfont {
+                font-size: .3rem;
+                color: #bbb;
+            }
             img{
                 display: inline-block;
                 width: .244rem;
@@ -58,7 +63,7 @@ html{
             }
             span{
                 font-family: PingFangSC-Regular;
-                font-size: .24rem;
+                font-size: .28rem;
                 color: @9B9B9B;
                 letter-spacing: 0;
                 text-align: justify;
@@ -66,7 +71,7 @@ html{
         }
         .topcontent{
             font-family: PingFangSC-Regular;
-            font-size: .24rem;
+            font-size: .28rem;
             color: @9B9B9B;
             letter-spacing: 0;
             text-align: justify;
@@ -80,12 +85,13 @@ html{
                 margin: 0 auto;
                 padding: .3rem 0;
             }
-            .topimg{
-                width: .267rem;
-                height:.267rem;
+            &>.topimg{
                 position: absolute;
-                top:-.1335rem;
+                width: .32rem;
+                height: .32rem;
+                top:-.16rem;
                 right: 0;
+                color: #bb8e5f;
             }
         }
     }
