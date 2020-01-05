@@ -6,7 +6,12 @@
 
 @import url("@pathCommonLessCom/headBarConfig.less");
 
-
+body {
+	background: #F7FAFD;
+}
+.mui-table-view {
+	background: #F7FAFD;
+}
 .mui-table-view:before{
 	height: 0;
 }
@@ -21,7 +26,11 @@
 .noneList{
 	display: none;
 }
-
+.yearUnit {
+	font-size: .32rem;
+	color: #BB8E5F;
+	font-weight: 400;
+}
 // 样式重置
 .adjustmentRecord {
 	.contentWrapper {
@@ -42,10 +51,16 @@
 		padding-left: 0;
 		font-size: 0.5rem;
 		overflow: visible;
+		background:url("/mine/static/img/mine_bg_ydtzbg@2x.png") no-repeat;
+		background-size: 100%;
+	}
+	.mui-card:first-child {
+		margin-top: 0!important;
 	}
 
 	.mui-table-view-cell{
 		overflow: visible;
+		padding: .3rem;
 	}
 
 	.mui-table-view:after{
@@ -53,7 +68,8 @@
 	}
 
 	.mui-table-view-cell.mui-active {
-		background-color: @c005;
+		background:url("/mine/static/img/mine_bg_ydtzbg@2x.png");
+		background-size: 100% auto;
 	}
 	.mui-table-view-cell>a:not(.mui-btn){
 		position:static;
@@ -70,7 +86,7 @@
 	}
 	.mui-table-view-cell.mui-collapse{
 		border-radius:0.3rem;
-
+		padding: 11px 15px;
 	}
 
 	.mui-table-view-cell.mui-collapse .mui-collapse-content {
@@ -79,13 +95,14 @@
 	}
 	.mui-navigate-right:after{
 		width: 2.3rem;
-		height: 0.3rem;
+		height: 0.4rem;
 		position: absolute;
 		top: 100%;
     	left: 0;
     	bottom:0;
     	margin:0.08rem auto;
-    	font-size: 0.2rem;
+		font-size: 0.32rem;
+		line-height: 0.4rem;
     	text-align: center;
     	-webkit-transform: translateY(-50%);
  		transform: translateY(-50%);
@@ -106,7 +123,7 @@
 	}
 	.mui-table-view.mui-card{
 		// width: 6.9rem;
-		margin:0.5rem auto;
+		margin-top: .5rem;
 		border-radius:0.3rem;
 	}
 
@@ -277,7 +294,7 @@
 		position: absolute;
 		top: 42%;
 		right: 0;
-		font-size: 0.24rem;
+		font-size: 0.3rem;
 		color: @9B9B9B;
 	}
 }

@@ -16,7 +16,7 @@ html{
     background-color: @F7FAFD;
     .choice{
         font-size:.28rem;
-        font-weight:600;
+        font-weight:400;
         line-height:40px;
         text-align: center;
         color: @9B9B9B;
@@ -26,6 +26,7 @@ html{
         left: 0;
         right: 0;
         z-index: 10;
+        // border-top: 1px solid @
         p{
             width: .5rem;
             height: .06rem;
@@ -34,8 +35,10 @@ html{
         }
         .active{
             color: @272727;
+            font-weight:600;
             p{
                 background: linear-gradient(to right, @6C83C9 0%, @061D6A 100%);
+                border-radius:.03rem;
             }
         }
     }
@@ -120,6 +123,9 @@ html{
                     top:-.08rem;
                     right: .05rem;
                 }
+            }
+            &:last-child{
+                border: none;
             }
         }
     }

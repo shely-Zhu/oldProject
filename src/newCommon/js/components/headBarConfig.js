@@ -38,7 +38,7 @@ $(function() {
     //IOS会在所有连接上拼接是否为刘海屏的标识，同时会存在session中。
     if (splitUrl['isIphoneX'] || window.isIphoneX) {
         window.isIphoneX = true;
-        $(".HeadBarConfigBox").css('margin-top', '0.2rem');
+        $(".HeadBarConfigBox").css('margin-top', '0.25rem');
     }
     //判断传入的值
     if ($("#HeadBarpathName").attr("data") == "@@pathName") {
@@ -103,6 +103,10 @@ $(function() {
     }
     //返回上一页
     mui("body").on('mdClick', '#goBack', function() {
+        // 现金管理持仓列表（现金管理产品列表），点击返回按钮 返回至入口 ：首页/理财（icon）
+        //var isCashManagement = window.location.href.indexOf('/financial/views/publicPlacement/cashManagement.html')==-1?false:true // 是否为现金管理持仓列表页        
+        // 我的定投计划列表页点击返回，返回到 首页/理财（icon）
+        //var isMyInvestmentPlan = window.location.href.indexOf('/financial/views/publicPlacement/myInvestmentPlan.html')==-1?false:true // 是否为我的计划列表页
         if (document.referrer == '') {
             // window.isAndroid是在root文件中定义的变量
             if (window.isAndroid) {
@@ -116,7 +120,33 @@ $(function() {
                 window.webkit.messageHandlers.backNative.postMessage("backNative" );
             }
         } else {
-            location.href = "javascript:history.go(-1)";
+            // 自选公募持仓列表页点击返回按钮 返回至账户首页
+            if (window.location.href.indexOf('/account/views/publicAssets.html') != -1) {
+                location.href = site_url.accountIndex_url
+            // 定投详情点击返回，返回至我的定投计划列表页
+            } else if (window.location.href.indexOf('/financial/views/publicPlacement/castSurelyDetails.html') != -1) {
+                location.href = site_url.myInvestmentPlan_url
+            // 现金管理持仓列表（现金管理产品列表）点击返回按钮 返回至入口 ：首页/理财（icon）,现只实现了跳转理财首页
+            } else if (window.location.href.indexOf('/financial/views/publicPlacement/cashManagement.html') != -1) {
+                location.href = site_url.wealthIndex_url
+            // 定投计划列表页点击返回，返回到 首页/理财（icon）现只实现了跳转理财首页
+            } else if (window.location.href.indexOf('/financial/views/publicPlacement/myInvestmentPlan.html') != -1) {
+                location.href = site_url.wealthIndex_url
+            }else if(window.location.href.indexOf('/mine/views/fundDiagnosis/fundAccountDiagnosis.html') != -1){
+               //  console.log("基金账户诊断页面")
+                 if (window.isAndroid) {
+                    //这个是安卓操作系统
+                    window.jsObj.backNative();
+                }
+                // window.isIOS是在root文件中定义的变量
+                if (window.isIOS) {
+                    //这个是ios操作系统
+                    // window.webkit.messageHandlers.backNative.postMessage(JSON.stringify({ "type": "backNative" }));
+                    window.webkit.messageHandlers.backNative.postMessage("backNative" );
+                }
+            }else {
+                location.href = "javascript:history.go(-1)";
+            }
         }
     }, {
         htmdEvt: 'goBackButton'

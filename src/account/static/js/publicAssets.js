@@ -121,6 +121,12 @@ $(function () {
                 $("#pageLists").html(html);
                 //模板渲染完毕后展示没有更多数据的样式
                 $('footer').removeClass('hide');
+
+                if(that.gV.data.fundDetailList.length==0&&that.gV.data.cashDetails.length==0){
+                     $(".noData").show()
+                     $('footer').hide()
+                }
+               
                 //渲染完模板后再添加事件
             } else {
                 //所有标位显示的区域都更换为****
@@ -202,7 +208,7 @@ $(function () {
             //购买
             mui("body").on('mdClick', '.buy_btn', function (e) {
                 var fundCode = $(this).attr("fundCode")
-                window.location.href = site_url.fundTransformIn_url+"?fundCode="+fundCode;   
+                window.location.href = site_url.fundTransformIn_url+"?fundCode="+fundCode+"&noReload=1";   
                 return false;
             },{
                 'htmdEvt': 'publicAssets_4'

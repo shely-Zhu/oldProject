@@ -95,6 +95,7 @@ $(function () {
 			that.getAgreeUrl();
 		},
 		getRate:function(val){
+		
 			var that = this;
 			var obj = [{
 				url: site_url.prfFundFeeRate_api,
@@ -104,6 +105,7 @@ $(function () {
 				},
 				//async: false,
 				needDataEmpty: true,
+				needLoading:false,
 				callbackDone: function (json) {
 					if (json.status == '0000') {
 						//费用估算有待完善
@@ -966,8 +968,10 @@ $(function () {
 			}, {
 				htmdEvt: 'ordinarySetThrow_09'
 			}) ;
-			mui("body").on('mdClick','setGoUrl_1',function(){
+			mui("body").on('mdClick','.setGoUrl_1',function(){
 				window.location.href = site_url.superContent_url + '?id=63'
+			},{
+				htmdEvt: 'ordinarySetThrow_21'
 			})
 			//  ---忘记密码
 			mui("body").on('mdClick','#passwordWrap .forgetP',function(){

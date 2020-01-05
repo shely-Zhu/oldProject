@@ -182,6 +182,8 @@ $(function () {
                                 e.tradeApplyStatusName = '待确认'
                             } else if (e.tradeApplyStatus == 3) {
                                 e.tradeApplyStatusName = '已撤单'
+                            }else if(e.tradeApplyStatus == 5){
+                                e.tradeApplyStatusName = '待确认'
                             }
 
                             e.sta = e.tradeApplyStatus == 1 ? 1 : 0;
