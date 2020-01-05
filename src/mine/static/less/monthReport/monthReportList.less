@@ -6,22 +6,18 @@
 
 @import url("@pathCommonLessCom/headBarConfig.less");
 
-
-.mui-table-view:before{
-	height: 0;
-}
-.mui-pull{
-	position:static;
-}
-.mui-pull-bottom-pocket{
-	overflow: visible;
-	padding-top: 0.2rem;
+body {
+	background: #F7FAFD;
 }
 
 .noneList{
 	display: none;
 }
-
+.yearUnit {
+	font-size: .32rem;
+	color: #BB8E5F;
+	font-weight: 400;
+}
 // 样式重置
 .adjustmentRecord {
 	.contentWrapper {
@@ -38,82 +34,6 @@
 		}
 	}
 
-	.mui-card {
-		padding-left: 0;
-		font-size: 0.5rem;
-		overflow: visible;
-		background:url("/mine/static/img/mine_bg_ydtzbg@2x.png") no-repeat center center;
-		background-size: 100% auto;
-	}
-
-	.mui-table-view-cell{
-		overflow: visible;
-	}
-
-	.mui-table-view:after{
-		height: 0;
-	}
-
-	.mui-table-view-cell.mui-active {
-		background:url("/mine/static/img/mine_bg_ydtzbg@2x.png");
-		background-size: 100% auto;
-	}
-	.mui-table-view-cell>a:not(.mui-btn){
-		position:static;
-		display: inline-block;
-		color: transparent;
-	}
-
-	.mui-table-view-cell>a:not(.mui-btn).mui-active {
-		background-color: @c005;
-	}
-
-	.latestAdjustment.mui-card {
-		box-shadow: none;
-	}
-	.mui-table-view-cell.mui-collapse{
-		border-radius:0.3rem;
-
-	}
-
-	.mui-table-view-cell.mui-collapse .mui-collapse-content {
-		margin-top: 0;
-		padding: 0 15px;
-	}
-	.mui-navigate-right:after{
-		width: 2.3rem;
-		height: 0.3rem;
-		position: absolute;
-		top: 100%;
-    	left: 0;
-    	bottom:0;
-    	margin:0.08rem auto;
-		font-size: 0.28rem;
-		line-height: 0.4rem;
-    	text-align: center;
-    	-webkit-transform: translateY(-50%);
- 		transform: translateY(-50%);
- 		text-decoration: none;
- 		color: #BB8E5F;
- 		-webkit-font-smoothing: antialiased;
- 		background: #FFFFFF;
-		box-shadow: 0 9px 8px 0 rgba(20,37,92,0.05);
- 		border-radius: 0 0 100px 100px;
-
-	}
-	
-	.mui-table-view-cell:after {
-		height: 0;
-	}
-	.marginTop{
-		margin-top: 0.5rem;
-	}
-	.mui-table-view.mui-card{
-		// width: 6.9rem;
-		margin:0.5rem auto;
-		border-radius:0.3rem;
-	}
-
 	// 隐藏头部
 	h2 {
 		display: none;
@@ -126,14 +46,44 @@
 	}
 
 }
+.active{
+	display: block;
+}
+
+.monthReportList{
+	position:relative;
+	width: 92%;
+	margin: 0.5rem auto 0;
+	background:url("/mine/static/img/mine_bg_ydtzbg@2x.png") no-repeat;
+	background-size: 100%;
+	box-shadow:0 0.09rem 0.08rem 0 rgba(20,37,92,0.05);
+	.monthReportListHeader{
+		height: 1.18rem;
+		margin:0.3rem 0 0 0.3rem;
+	}
+	.spread{
+		position: absolute;
+		width: 2.3rem;
+		height: 0.3rem;
+		line-height: 0.3rem;
+		left: 50%;
+		top: 100%;
+		margin-left: -1.15rem;
+		text-align: center;
+		background:rgba(255,255,255,1);
+		box-shadow:0 0.09rem 0.08rem 0 rgba(20,37,92,0.05);
+		border-radius:0 0 1rem 1rem;
+	}
+}
 
 // 持仓详情
 .latestAdjustment {
+	display: none;
 	position:relative;
 	padding: 0 0.32rem 0.16rem 0.32rem;
 	color: @c002;
 	text-align: left;
-	margin-bottom: 0.4rem;
+	// margin-bottom: 0.4rem;
 	font-size: 0.28rem;
 	border-top:1px solid @F7FAFD;
 	border-bottom-right-radius: 0.3rem;
@@ -254,6 +204,7 @@
 	color: @c002;
 }
 .monthYear{
+	font-size: 0.5rem;
 	font-weight: bold;
 	background: linear-gradient(to right, #F1CDA8, #B57E45);
     -webkit-background-clip: text;
@@ -283,6 +234,9 @@
 		right: 0;
 		font-size: 0.3rem;
 		color: @9B9B9B;
+	}
+	&:last-child{
+		border-bottom:0;
 	}
 }
 
