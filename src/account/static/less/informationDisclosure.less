@@ -20,9 +20,16 @@
 @import url("@pathCommonLessCom/headBarConfig.less");
 
 //产品材料
+.flexbox{
+    position: absolute;
+    left: 0;
+    top: 0;
+    border-top: 1px solid #ddd,
+}
 .prvMart {
     .contentWrapper {
-        overflow: auto;
+        // overflow: auto;
+          height: 100%;
     }
     .flexbox .mui-control-item{
         padding-right: 0!important;
@@ -34,8 +41,9 @@
     .mui-box {
         border-bottom: 1px solid @c008;
         position: relative;
-        height: 1.85rem;
+        // height: 1.85rem;
         padding-top: .3rem;
+        padding-bottom: .3rem;
         &:last-child {
             border-bottom: none;
         }
@@ -45,42 +53,51 @@
         // padding-right: 2.9rem;
 
         .item {
-            height:.46rem;
+            // height:.46rem;
             font-size:.32rem;
             .marName {
-                height:.46rem;
                 font-size:.24rem;
-                width:1.4rem;
-                height:.38rem;
+                display: inline-block;
                 background:linear-gradient(220deg,@F5ECD5 0%,@F8EAC9 100%);
                 border-radius:4px;
                 color: @C4925E;
+                padding: 0.03rem .22rem;
             }
 
         }
 
         .inro {
-            color: @c003;
+            color: #272727;
             font-size:.32rem;
             line-height:.45rem;
+            height:.46rem;
+            line-height:.45rem;
+            margin-top: .12rem;
         }
     }
     .jump {
         position: absolute;
-        right: .3rem;
+        right: .37rem;
         top: 50%;
         transform: translateY(-45%);
         -webkit-transform: translateY(-45%);
         font-size: .3rem;
-        color: @c001;
+        color: #9B9B9B;
     }
 
     .mui-slider .mui-segmented-control.mui-scroll-wrapper {
         overflow: auto;
+        height: .8rem;
+        padding-top: .18rem;
     }
-
+    .mui-slider .mui-segmented-control.mui-scroll-wrapper .mui-scroll.manyItem{
+        height: .8rem;
+    }
     .mui-slider .mui-segmented-control.mui-scroll-wrapper .mui-scroll.manyItem .mui-control-item {
+        padding-top: .1rem;
         margin-right: 1rem;
+        color: #9B9B9B;
+        font-size:.28rem;
     }
 
     .mui-slider .mui-segmented-control.mui-scroll-wrapper .mui-scroll .mui-control-item.mui-active {
@@ -98,6 +115,7 @@
         width: .5rem;
         height: .06rem;
         background: @C4925E;
+        border-radius: .03rem;
     }
 
     #slider .tab-scroll-action .mui-scroll .mui-table-view-cell {
@@ -114,10 +132,28 @@
         padding-left: .3rem;
     }
     .marDate {
-        color: @c003;
+        color: #9B9B9B;
         font-size: .24rem;
     }
 }
 .without .text{
     font-size: .32rem
+}
+.mui-slider .mui-segmented-control.mui-scroll-wrapper{
+    box-shadow:none
+}
+.mui-slider .mui-slider-group .mui-slider-item{
+    background:#F7FAFD; 
+}
+.prvMart #slider .tab-scroll-action .mui-scroll{
+    background: #fff;
+    margin-top: 1rem;
+    overflow: hidden;
+}
+.prvMart .mui-slider .mui-segmented-control.mui-scroll-wrapper .mui-scroll.manyItem .mui-control-item{
+    padding-top: .18rem;
+    padding-bottom: .4rem
+}
+.prvMart #slider .tab-scroll-action .mui-scroll .mui-table-view-cell{
+    margin-bottom: 8rem;
 }

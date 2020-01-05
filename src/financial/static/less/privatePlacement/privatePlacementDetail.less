@@ -16,12 +16,14 @@
 }
 #red{
 	background:linear-gradient(135deg,rgba(231,88,88,1) 0%,rgba(188,61,61,1) 100%);
-	border:none;
+	padding: 0.085rem 0.25rem;
+	border: none;
+	line-height: 0.35rem;
 }
 
 .privatePlacementDetail{
 	.privateDetailTitle{
-		padding: 1.28rem 0.3rem 0 0.3rem;
+		padding: 1.38rem 0.3rem 0 0.3rem;
 		height: 5.85rem;
 		background: url('/financial/static/img/privatePlacement/privateBackground.png') no-repeat;
 		border-radius:0 0 .3rem .3rem;
@@ -41,14 +43,15 @@
 			right: 0;
 			top: 50%;
 			// margin-top: -0.07rem;    
-			margin-top: 0.1rem;
-			font-size: 0.15rem;
-			color: @c005;
+			margin-top: 0.18rem;
+			font-size: 0.2rem;
+			color: #FFE2B9;
 		}
 		.introduction{
 			font-size: 0.26rem;
 			color: @c005;
 			margin-top: 0.05rem;
+			opacity: 0.7;
 		}
 		.invCore{
 			font-size: 0.6rem;
@@ -64,6 +67,7 @@
 			.netValueWord{
 				color: @F7E8CF;
 				font-size: 0.26rem;
+				opacity: 0.7;
 				.iconfont{
 					margin-right: 0.06rem;
 					font-size: 0.28rem;
@@ -84,12 +88,13 @@
 				font-size: 0.24rem;
 				font-weight: 500;
 				color: @c005;
+				opacity: 0.7;
 			}
 			.investmentAmountNum, .productDeadlineNum{
 				margin-top: 0.02rem;
 				font-weight: 0.28rem;
 				color: @c005;
-				font-weight: 500;
+				font-weight: 600;
 
 			}
 			.productLabel{
@@ -177,7 +182,6 @@
 		padding:0 0.3rem;
 		background: #ffffff;
 		height: 1rem;
-		border-top: 1px solid #E7E9ED;
 		border-bottom: 1px solid #E7E9ED;
 		display: -webkit-box;
 	    display: -ms-flexbox;
@@ -204,6 +208,7 @@
 				text-align: center;
 				box-sizing: border-box;
 				list-style: none;
+				width: 33.33%;
 			}
 			&>li:first-child {
 				border-left: none;
@@ -235,7 +240,7 @@
 					padding-left: 0.3rem;
 					height: 1rem;
 					font-size:0.32rem;
-					font-weight:600;
+					font-weight:500;
 					color:@272727;
 					line-height:1rem;
 					border-bottom: 0.01rem solid @c004;
@@ -248,9 +253,8 @@
 						background:@c005;
 						.mui-row{
 							width: 100%;
-							height: 1rem;
-							line-height:1rem;
-							padding:0 0.3rem;
+							line-height:.4rem;
+							padding:0.3rem;
 							display:flex;
 							justify-content:space-between;
 							border-bottom: 0.01rem dashed @E1E1E1;
@@ -279,6 +283,7 @@
 							font-size: 0.32rem;
 							padding:0 0.3rem;
 							border-bottom: 0.01rem solid @c004;
+							font-weight: 500;
 						}
 						.detailText{
 							width: 100%;
@@ -324,25 +329,30 @@
 			.panel1 > .basic;
 			.collectAccount{
 				width: 100%;
-				height: 5.7rem;
-				padding:0.3rem;
-				background: url('/financial/static/img/privatePlacement/accountBg.png') no-repeat;
+				padding:0.3rem 0.3rem 0 0.3rem;
+				ul{
+					background: url('/financial/static/img/privatePlacement/accountBg.png') no-repeat;
+					background-size: 100% auto;
+					padding: 0.3rem;
+				}
 		        ul li{
 		            margin: 0 auto;
 		            .title{
 		                font-size: .28rem;
 		                color: @272727;
 		                letter-spacing: 0;
-		                padding-top: .3rem;
-		                font-weight: 600;
+		                // padding-top: .3rem;
+						font-weight: 600;
+						margin-top: 0.1rem;
 		            }
 		            .copy{
 		                display: flex;
 		                justify-content: space-between;
-		                padding-bottom: .28rem;
+		                padding-bottom: .18rem;
 		                div{
-		                    font-size: .28rem;
-		                    color: @4A4A4A;
+		                    font-size: .26rem;
+							color: @4A4A4A;
+							margin-top: 0.1rem;
 		                }
 		                .copy_btn{
 		                    font-size: .24rem;
@@ -360,7 +370,7 @@
 		        }
 			}
 	        .copyAll{
-	        	width: 100%;
+	        	width: 93%;
 	        	height: 0.8rem;
 	        	margin: 0 auto;
 	        	line-height: 0.8rem;
@@ -369,8 +379,8 @@
 				font-size: 0.28rem;
 				color: @BB8E5F;
 				text-align: center;
-
-	        }
+				height: 0.8rem;
+			}
 			
 		}
 		// 产品材料
@@ -407,6 +417,7 @@
 							span{
 								font-size: 0.24rem;
 								float: right;
+								font-weight: 500;
 							}
 						}
 						.contentLink{
@@ -474,7 +485,6 @@
 	align-items: center;
 }
 
-
 // 私募产品详情页 -- 折线图style
 .lineWrap{
 	background: @c005;
@@ -528,6 +538,7 @@
 			font-size: 0.24rem;
 			border: 0.02rem solid @C8AB7D;
 			border-radius: 0.08rem;
+			margin-top: -0.18rem;
 			.time{
 				color: @C8AB7D;
 				text-align: center;
@@ -558,7 +569,9 @@
 }
 .riskGrade .changgeRight span{
 	font-size: .17rem;
-	margin-right: .13rem;
+	// margin-right: .13rem;
+	// padding-left: 0.7rem;
+	margin-right: 0.1rem;
 }
 .riskGrade .changgeRight span:first-child{
 	margin-left: .2rem;
@@ -566,14 +579,31 @@
 .riskGrade .changgeRight span:last-child{
 	margin-right: 0;
 }
+.blod-tit{
+	font-weight:bold;
+}
 .mui-col-xs-4{
 	width: 30%;
+	font-size: 0.28rem;
+	font-weight: 600;
 }
-.mui-col-xs-8{
-	width: 70%;
-	overflow: hidden;
-	text-overflow:ellipsis;
-	white-space: nowrap;
+.change{
+	width: 35%;
 }
+.companyName {
+	text-overflow: ellipsis;
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+
+    display: -moz-box;
+    -moz-line-clamp: 2;
+    -moz-box-orient: vertical;
+    white-space: pre-wrap;
+}
+ .mui-col-xs-8{
+	font-weight: 0.28rem;
+} 
 
 
