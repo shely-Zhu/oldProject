@@ -296,6 +296,10 @@ $(function () {
         showCashStatus: function (model) {
             //现金宝详情
             var that = this;
+            // 转出隐藏在线支付
+            if(model.tradeApplyStatus == '23' || model.tradeApplyStatus == '24' || model.tradeApplyStatus == '25') {
+                $(".pay_mode").hide();
+            };
             //转入失败与转出成功展示资金状态
             if ("20" == model.tradeApplyStatus || "23" == model.tradeApplyStatus){
                 //确认成功 包括转入成功与转出成功
