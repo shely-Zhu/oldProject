@@ -171,11 +171,11 @@ $(function() {
 				var $this = $(this);
 				if($this.parent().find('.latestAdjustment').css('display') == 'none'){
 					$this.parent().find('.latestAdjustment').show();
-					$('.spread').html('<span class="iconfont">&#xe62a;</span>')
+					$this.html('<span class="iconfont">&#xe62a;</span>')
 
 				}else{
 					$this.parent().find('.latestAdjustment').hide();
-					$('.spread').html('<span class="iconfont">&#xe609;</span>')
+					$this.html('<span class="iconfont">&#xe609;</span>')
 				}
 
 
