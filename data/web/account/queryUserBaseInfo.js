@@ -33,7 +33,7 @@ var data = Mock.mock({
         "investFavour": "0", //投资者分类【参照备注：空表示未做投资者分类 0：普通投资者 1：专业投资者 2：当然专业投资者-----------investorClassify
         "pofExpired": "", // 公募风险评测是否过期 0-风险测评没有过期  1-风险测评已过期
         "customerNo": "123456", //统一客户编号
-        "newcomer": "0", //是否新手账号
+        "newComer": "0", //是否新手账号
         "riskLevel": "", // 风险承受能力
         "endurePri": "", //投资偏好---------之前是investFavour\
         "endurePubIsold": '0', // 公募风险评测是否过期 0-否 1-是    -----------------------pofExpired

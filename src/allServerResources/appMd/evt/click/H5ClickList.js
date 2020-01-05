@@ -89,6 +89,7 @@ var clickList = {
 	//月度报告列表页
 	"monthReportList_01" : { type:'click', evtid: 'monthReportList_01', topic: '月度报告列表页-右箭头', info: ''} ,
 	"monthReportList_02" : { type:'click', evtid: 'monthReportList_02', topic: '浏览商品', info: ''} ,
+	"monthReportList_03" : { type:'click', evtid: 'monthReportList_03', topic: '列表展开收起', info: ''} ,
 	//修改分红方式
 	"bonusMethod_01" : { type:'click', evtid: 'bonusMethod_01', topic: '修改分红方式', info: ''} ,
 	// 组件弹层的点击事件
