@@ -66,6 +66,7 @@ $(function () {
                         needLoading: false,
                         callbackDone: function(json) {    
                             var data = json.data.pageList;
+                            console.log( data[1].fixStateStr)
                             if(that.gV.pageCurrent == 1 && data.length == 0) {
                                 $(".list").css("display", "none")
                                 that.$e.noData.show()
@@ -133,8 +134,8 @@ $(function () {
                                 }
                                 def && def.resolve( data, that.gV.pageCurrent);
                                 that.gV.pageCurrent++;
-                                
                             }
+                            
                         },
                         callbackNoData: function( json ){
                             if(that.gV.pageCurrent == 1) {
