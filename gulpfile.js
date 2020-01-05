@@ -141,7 +141,7 @@ var host = {
     ip: localIp, //本地ip
     // ip: '172.16.191.168', //本地ip
     middle: 'middle/',
-    //middleCssPath: 'middle/middleCss/' , //打包css文件的备份
+    middleCssPath: 'middle/middleCss/' , //打包css文件的备份
     middleHtmlPath: 'middle/middleHtml/', //打包html文件的备份
     middleHtmlPathRev: 'middle/middleHtmlRev/', //打包html文件的备份2
 };
@@ -275,7 +275,7 @@ if (options.env === '0') { //当开发环境的时候构建命令执行mock服�
 //});
 
 gulp.task('initialTask', function(cb) {
-    plugins.sequence('clean', 'images', 'font', 'allServerResources', 'includeJs', 'includeCss', 'cssToHost', 'webpack', 'bfRev', 'html', 'rev', 'rootEnv', cb);
+    plugins.sequence('clean', 'images', 'font', 'allServerResources', 'includeJs', 'includeCss', 'cssToHost', 'webpack', 'bfRev', 'html' , 'rev','rootEnv', cb);
 });
 
 
@@ -910,8 +910,12 @@ gulp.task("cssToHost", function( cb ) {
 
         //与host.path中的内容做比对
         plugins.changed(host.path, { hasChanged: plugins.changed.compareSha1Digest }),
+        //plugins.changed(host.middleCssPath, { hasChanged: plugins.changed.compareSha1Digest }),
 
         plugins.if(isWatch, plugins.debug({ title: 'css-有变动的文件:' })),
+
+        //输出到middleCssPath文件夹，用于再次修改时比对，此时还没有加版本号
+        //gulp.dest(host.middleCssPath),
 
         //修改当前文件的路径，将less替换为css
 
@@ -921,6 +925,7 @@ gulp.task("cssToHost", function( cb ) {
             this.push(file);
             cb()
         }),
+
 
         //打版本号
         plugins.rev(),
@@ -1048,22 +1053,22 @@ gulp.task('images', ['commonImages'], function( cb ) {
     pump([
         gulp.src(['src/**/img/**/*', '!src/newCommon/**/*']),
 
-        //plugins.rev(),
+        plugins.rev(),
 
         gulp.dest(host.path),
 
-        //plugins.rev.manifest(),
+        plugins.rev.manifest(),
 
         //修改manifest文件的路径
-        //plugins.jsonEditor(function(json) {
-            //var newJson = {};
-            //for( var i in json ){
-                //newJson['/' + i] = prefix + '/' + json[i];
-            //}
-            //return newJson;
-        //}),
+        plugins.jsonEditor(function(json) {
+            var newJson = {};
+            for( var i in json ){
+                newJson['/' + i] = prefix + '/' + json[i];
+            }
+            return newJson;
+        }),
 
-        //gulp.dest( host.path + 'rev/img/')
+        gulp.dest( host.path + 'rev/img/')
 
     ], cb)
 
@@ -1220,6 +1225,16 @@ gulp.task('rev', function() {
 
     //替换后的文件输出的目录
     .pipe(gulp.dest(host.path))
+
+    //如果是监听文件修改的，重启connect
+    .pipe(plugins.if(isWatch, plugins.connect.reload()))
+});
+
+gulp.task('revimg', function() {
+    //css,js，主要是针对img替换
+    gulp.src([host.middle + 'rev/img/*.json', host.path+'**/*.css'])
+        .pipe(plugins.revCollector())
+        .pipe(gulp.dest(host.path))
 
     //如果是监听文件修改的，重启connect
     .pipe(plugins.if(isWatch, plugins.connect.reload()))
