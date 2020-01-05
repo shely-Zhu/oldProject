@@ -36,10 +36,7 @@ var pathTitle = [{
 $(function() {
     var $headBarConfigBox = $("#HeadBarConfigBox");
     //IOS会在所有连接上拼接是否为刘海屏的标识，同时会存在session中。
-    var hairHeight = splitUrl['hairHeight']; 
-    if(hairHeight) {
-        $(".HeadBarConfigBox").css('padding-top', hairHeight+'px');
-    };
+       
     if (splitUrl['isIphoneX'] || window.isIphoneX) {
         window.isIphoneX = true;
         $(".HeadBarConfigBox").css('padding-top', '0.2rem');
