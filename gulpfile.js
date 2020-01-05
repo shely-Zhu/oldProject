@@ -735,22 +735,22 @@ gulp.task("allServerResourcesInclude", ['allServerResourcesIncludeRoot'],  funct
             }
         })),
 
-        plugins.rev(),
+        //plugins.rev(),
 
         gulp.dest(host.path + 'allServerResources/include/'),
 
-        plugins.rev.manifest(),
+        //plugins.rev.manifest(),
 
         //修改manifest文件的路径,增加cdn域名
-        plugins.jsonEditor(function(json) {
-            var newJson = {};
-            for( var i in json ){
-                newJson['/allServerResources/include/' + i] = prefix + '/allServerResources/include/' + json[i];
-            }
-            return newJson;
-        }),
+        //plugins.jsonEditor(function(json) {
+            //var newJson = {};
+            //for( var i in json ){
+                //newJson['/allServerResources/include/' + i] = prefix + '/allServerResources/include/' + json[i];
+            //}
+            //return newJson;
+        //}),
 
-        gulp.dest(host.path + 'rev/allServerResources/include/js')
+        //gulp.dest(host.path + 'rev/allServerResources/include/js')
 
     ], cb)
 })
