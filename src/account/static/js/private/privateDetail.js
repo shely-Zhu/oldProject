@@ -620,7 +620,7 @@ $(function() {
 	    			$('.type_4 .ktjshsqsj').parent().parent().css("display", "none")
 	    		}
 	    	}
-	    	$(".totalM").css({"background": "linear-gradient(360deg, rgba(186,140,112,1) 0%, rgba(244,210,192,1) 100%)", "-webkit-background-clip": "text", "-webkit-text-fill-color": "transparent"})
+	    	$(".totalM").css({"background": "linear-gradient(360deg, #FBE2BD 0%, #E2B580 100%)", "-webkit-background-clip": "text", "-webkit-text-fill-color": "transparent"})
 	    	// 显示各明细分类
 	    	var tradeRecordFlag = jsonData.tradeRecordFlag==1?true:false // 是否有交易明细(0否1是)
 	    	var incomeAssignFlag = jsonData.incomeAssignFlag==1?true:false // 是否有收益分配明细(0否1是)
