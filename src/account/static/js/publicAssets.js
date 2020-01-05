@@ -150,6 +150,7 @@ $(function () {
             //点击筛选银行卡
             mui("body").on('mdClick', '#bank_screen', function (e) {
                 that.gV.showBankList = !that.gV.showBankList;
+                $(".noData").hide()
                 if (that.gV.showBankList) {
                     $('.bank_list').show();
                     $('#bank_screen .iconfont').html('&#xe62a;');
