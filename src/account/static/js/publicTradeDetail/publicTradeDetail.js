@@ -140,7 +140,7 @@ $(function () {
                     switch (that.gV.allotType) {
                         case "0":
                             //购买
-                            that.showFundStatus(true, json.data);
+                            that.showFundStatus(that.gV.isBuy, json.data);
                             break
                         case "1":
                             //赎回
@@ -150,7 +150,7 @@ $(function () {
 
                         case "2":
                             //定投
-                            that.showFundStatus(true, json.data);
+                            that.showFundStatus(that.gV.isBuy, json.data);
                             if (splitUrl()["scheduledProtocolId"]){
                                 //定投id不为空时展示定投计划
                                 $('.plan').removeClass('hide');
