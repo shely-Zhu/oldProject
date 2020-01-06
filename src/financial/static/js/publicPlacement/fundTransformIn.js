@@ -211,6 +211,12 @@ $(function () {
 							$(".bank-pay").hide();
 							$(".onright-left-two").hide();
 						}
+						if(useEnv == '1'){//转账汇款隐藏限额。
+							that.$el.bankListTemplate.find(".bank-pay").hide()
+						}else{
+							that.$el.bankListTemplate.find(".bank-pay").show()
+						}
+						
 					}
                   
 				},
@@ -224,6 +230,11 @@ $(function () {
 							that.$el.popupTitle.html('选择汇款支付银行卡')
 						}
 						generateTemplate("", that.$el.popupUl, that.$el.bankListTemplate,true);
+						if(useEnv == '1'){//转账汇款隐藏限额。
+							that.$el.bankListTemplate.find(".bank-pay").hide()
+						}else{
+							that.$el.bankListTemplate.find(".bank-pay").show()
+						}
 					tipAction(json.message);
 				},
 				callbackFail:function(json){
