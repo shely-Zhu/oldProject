@@ -99,8 +99,7 @@ if (options.env == '0') {
     //明泽或股份
     console.log("当前是" + (options.envOrigin == '0' ? '明泽' : '股份'));
 
-    //本地时，不加cdn域名
-    prefix = '';
+    
 }
 
 
@@ -144,15 +143,24 @@ if (options.env === '0') {
     //开发环境和联调环境的包进dist
     host.path = 'dist/';
 
+    //不加cdn域名
+    prefix = '';
+
 } else if (options.env === '1') {
     //测试环境的包进ht_test
     host.path = 'ht_local/';
     host.zip_name = 'ht_local';
 
+    //不加cdn域名
+    prefix = '';
+
 } else if (options.env === '2') {
     //测试环境的包进ht_test
     host.path = 'ht_test/';
     host.zip_name = 'ht_test';
+
+    //不加cdn域名
+    prefix = '';
 
 } else if (options.env === '3') {
     //预生产的包进ht_pre_production
@@ -163,9 +171,13 @@ if (options.env === '0') {
     //生产的包进ht_production
     host.path = 'ht_production/';
     host.zip_name = 'ht_production';
+
 } else if (options.env === '5') {
     //生产的包进ht_production
     host.path = 'dist/';
+
+    //不加cdn域名
+    prefix = '';
 }
 
 
@@ -942,9 +954,41 @@ gulp.task("commonHtml", function(cb) {
     ], cb)
 })
 
+gulp.task("jsImgRev", function(cb) {
+
+    pump([
+        gulp.src([ host.path + 'rev/**/*.json']),
+
+        //这两个字符串转成对象
+        through.obj(function(file, enc, cb) {
+
+            var fileCon = file.contents.toString();
+            
+            fileCon = 'module.exports = ' + fileCon ;
+
+            file.contents = new Buffer(fileCon);
+
+            file.path = file.path.replace('.json', '.js');
+
+            this.push(file);
+
+            cb()
+        }),
+
+        gulp.dest('middle/jsImgRev/')
+
+    ], cb)
+})
+
+
 
 //非include文件夹下的js文件打包
-gulp.task("webpack", ['jsCpd', 'changePath', 'commonHtml'], function(cb) {
+gulp.task("webpack", ['jsCpd', 'changePath', 'commonHtml', 'jsImgRev'], function(cb) {
+
+    var imgRev_1 = require( './' +  host.middle + 'jsImgRev/allServerResources/include/commonImg/rev-manifest.js');
+
+    var imgRev_2 = require( './' + host.middle + 'jsImgRev/img/rev-manifest.js');
+
     //测试环境
     pump([
         gulp.src(['src/**/*.js']),
@@ -969,6 +1013,10 @@ gulp.task("webpack", ['jsCpd', 'changePath', 'commonHtml'], function(cb) {
             // placeholderFuncName: '__prefix'
         }),
 
+        plugins.replacePro(imgRev_1),
+
+        plugins.replacePro(imgRev_2),
+
         //添加changeLocalHistory、eruda和CustomEventIeFile的文件内容
         through.obj(function(file, enc, cb) {
 
@@ -976,6 +1024,7 @@ gulp.task("webpack", ['jsCpd', 'changePath', 'commonHtml'], function(cb) {
 
             var fileCon = file.contents.toString();
             fileCon = changeLocalHistoryFile + fileCon + erudaFile + CustomEventIeFile;
+            
             file.contents = new Buffer(fileCon);
             this.push(file);
             cb()
@@ -1005,7 +1054,7 @@ gulp.task("webpack", ['jsCpd', 'changePath', 'commonHtml'], function(cb) {
 });
 
 function changeCommonImg(file) {
-    //如果有用到common里面的图片的，全部把路径改成include
+    //如果有用到common里面的图片的，全部把路径改成/allServerResources/include
     var fileCon = file.contents.toString();
     var re = new RegExp("\/common\/[^\.]*\.(jpg|png|svg|jpeg|gif)", 'g');
     var commonImgArr = fileCon.match(re);
