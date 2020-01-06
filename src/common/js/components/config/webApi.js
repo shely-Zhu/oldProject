@@ -1,13 +1,8 @@
 /*
  * @page: pc wap 端共用接口
  * @Author: chengqingqing
-<<<<<<< HEAD
- * @Date:   2019-03-28
- * @Last Modified by:   Marte
-=======
  * @Date:   2019-03-28 
  * @Last Modified by:   songxiaoyu
->>>>>>> 28caca48b5a5940bc48e2c35e69e828ec2c30db0
  * @description:
  */
 
@@ -46,18 +41,9 @@ module.exports = function() {
     this.share_api = http_url.web_url + '/account/frontend/weixin/share'; //老带新微信分享
     this.oldRecommendNew_api = http_url.web_url + '/account/oldRecommendNew'; // 微信公众号获取参数
     // 其他资产
-<<<<<<< HEAD
-
-    this.getJJSInTransitAssets_api = http_url.web_url + '/account/jjs/getJJSInTransitAssets'; // 查询金交所在途资产
-    //待确认，已确认列表
-    this.getTradeList_api = http_url.web_url + '/pef/getTradeList'
-        // 查询金交持仓资产、在途资产、总资产
-    this.getJJSAssets_api = http_url.web_url + '/account/jjs/getJJSAssets';
-=======
     this.getJJSInTransitAssets_api = http_url.web_url + '/account/jjs/getJJSInTransitAssets'; // 查询金交所在途资产 
     // 查询金交持仓资产、在途资产、总资产
     this.getJJSAssets_api = http_url.web_url + '/account/jjs/getJJSAssets'; 
->>>>>>> 28caca48b5a5940bc48e2c35e69e828ec2c30db0
     // jjs持仓明细查询
     this.queryAssetsDetailByPages_api = http_url.web_url + '/account/jjs/queryAssetsDetailByPages'
 
@@ -359,19 +345,11 @@ module.exports = function() {
     //yan
     this.findMessageCenterById_api = http_url.web_url + '/content/frontend/findMessageCenterById'; //证监会要求查看详情
 
-<<<<<<< HEAD
-    this.queryTransferFunds_api= http_url.web_url +'/account/queryTransferFunds'; // 查询基金列表
-    this.newFundDetails_api = http_url.web_url + '/pof/fundDetails/frontend/newfundDetails';//基金年化查询
-    this.redemptionPay_api = http_url.web_url + '/pof/redemptionPay/redemptionPay';//赎回确认
-    this.findProtocolBasic_api = http_url.web_url + '/content/findProtocolBasic' ; //进入基金转出页面调用
-    this.cashList_api = http_url.web_url + '/account/bankCard/cashList';//查询银行卡转出
-=======
     this.queryTransferFunds_api = http_url.web_url + '/account/queryTransferFunds'; // 查询基金列表
     this.newFundDetails_api = http_url.web_url + '/pof/fundDetails/frontend/newfundDetails'; //基金年化查询
     this.redemptionPay_api = http_url.web_url + '/pof/redemptionPay/redemptionPay'; //赎回确认
     this.findProtocolBasic_api = http_url.web_url + '/content/findProtocolBasic'; //进入基金转出页面调用
     this.cashList_api = http_url.web_url + '/account/bankCard/cashList'; //查询银行卡转出
->>>>>>> 28caca48b5a5940bc48e2c35e69e828ec2c30db0
     this.findProtocolContent_api = http_url.web_url + '/content/frontend/findProtocolContent'; //转出协议查询
     this.doCashTreasureSell_api = http_url.web_url + '/pof/cash/doCashTreasureSell'
     this.getCashTreasureLimitInfo_api = http_url.web_url + '/pof/cash/forntend/getCashTreasureLimitInfo' //转出份额限定 单日等
