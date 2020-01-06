@@ -296,6 +296,10 @@ $(function () {
         showCashStatus: function (model) {
             //现金宝详情
             var that = this;
+            // 转出隐藏在线支付
+            if(model.tradeApplyStatus == '23' || model.tradeApplyStatus == '24' || model.tradeApplyStatus == '25') {
+                $(".pay_mode").hide();
+            };
             //转入失败与转出成功展示资金状态
             if ("20" == model.tradeApplyStatus || "23" == model.tradeApplyStatus){
                 //确认成功 包括转入成功与转出成功
@@ -438,7 +442,7 @@ $(function () {
                 fundCombinationFlag: splitUrl()['fundCombination'],
             }
             var obj = [{
-	            url: site_url.findSuperviseBank_api,
+	            url: site_url.pofUndoTradeApply_api,
 	            data: param,
 	            needLogin:true,//需要判断是否登陆
                 callbackDone: function(json){  //成功后执行的函数
@@ -452,7 +456,6 @@ $(function () {
                         //2秒后刷新页面
                         window.location.reload()
                     }, 2000);
-                    
 	            }
 	        }];
 	        $.ajaxLoading(obj);
