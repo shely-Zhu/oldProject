@@ -39,6 +39,7 @@ $(function() {
             productNameTip:'',
             reourceData:true,   //标签内容
             collectAccountFlag:true,    //标签募集账号
+            symboltype:'none',    //echarts 节点样式
         },
         data: {
             canClick: true,
@@ -662,6 +663,11 @@ $(function() {
             var that = this;
             console.log($('#qrnhLine')[0])
 
+            //判断有多少数据 只有一个值时 symbol 为circle 多组值时 symbol为 none
+            if( data.profitThoudDate.length == 1 ){
+                that.getElements.symboltype = 'circle'
+            }
+            
             if (type == 'qrnh') {
                 //画的是七日年化折线图
                 $("#qrnhLine").removeClass("hide");
@@ -775,7 +781,7 @@ $(function() {
                     itemStyle: {
                         show: false
                     },
-                    symbol: 'none',
+                    symbol: that.getElements.symboltype,
                     areaStyle: {
                         normal: {
                             color: {
