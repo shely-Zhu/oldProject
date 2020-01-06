@@ -42,7 +42,7 @@ var gulp = require('gulp'),
     //把webpackList和newWebpackList合并
     webpackList = Object.assign(webpackList, newWebpackList);
 
-    var prefix = 'http://static.chtfund.com';//cdn服务地址
+    var prefix = 'https://static.chtfund.com';//cdn服务地址
 
 for (var i in webpackList) {
     webpackList[i] = webpackList[i].replace('/src/', '/middle/js/')
