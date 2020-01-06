@@ -21,6 +21,10 @@ var monthReportDetail = {
 		noData: $('.noData'), //没有数据的结构
 		reportId:splitUrl['reportId'],   //活动的id
 		adjustmentTemp: $('#second-template'), // 最新调仓模板
+		reportTime:'',
+		monthReportTime:'',
+		month:'',
+		assetPerHtml:'',
 	},
 	pieChartData:'', // 画图的title
 	init: function(){  //初始化函数
@@ -85,12 +89,25 @@ var monthReportDetail = {
 				// 报告名称
 				$('#HeadBarpathName').html(json.reportName)
 				that.getElements.reportTime = json.reportTime;
-
 				var dateStr = json.reportTime;
 					dateStr = dateStr.replace(/年/g,"-");
 					dateStr = dateStr.replace(/月/g,"-");
 					dateStr = dateStr.replace(/日/g,"");
-				var now=moment(dateStr).format('YYYY-MM-DD');
+				var yearFor,monthFor,dayFor;
+				// 为兼容momentjs 和 new Date() 在ios、Safari上遇到的坑，对数据进行格式化
+				var timeStr = new Date(dateStr);
+					yearFor = timeStr.getFullYear() 
+					monthFor = timeStr.getMonth() + 1;
+					if (monthFor.toString().length == 1) {
+				        monthFor = "0" + monthFor;
+				    }
+				    dayFor = timeStr.getDate();
+				    if (dayFor.toString().length == 1) {
+				        dayFor = "0" + dayFor;
+				    }
+				    dataFor = yearFor + '-' + monthFor + '-' + dayFor;
+
+				var now=moment(dataFor).format('YYYY-MM-DD');
 
 				var year = now.substring(0,4);
 				var month = now.substring(5,7);
@@ -117,8 +134,11 @@ var monthReportDetail = {
 				var jsonData = json.data;
 				if($.util.objIsEmpty(jsonData.pefSaleList) && $.util.objIsEmpty(jsonData.generalModelList) && $.util.objIsEmpty(jsonData.pofList)){
 					//没有数据
+					var reportTimeHtml = '';
+					reportTimeHtml = '截止11'+that.getElements.reportTime+',您暂无持仓信息';
 					$('.holdNodata').show();
-					$('.holdNodata .text').html('截止'+that.getElements.reportTime+',您暂无持仓信息');
+					$('.holdNodata .text1').html(reportTimeHtml);
+					$('.holdNodata .text2').html('截止22'+that.getElements.reportTime+',您暂无持仓信息');
 				}else{
 					var pefSaleList = jsonData.pefSaleList;
 					jsonData.holdPosition = true;
@@ -184,7 +204,10 @@ var monthReportDetail = {
 			callbackNoData: function(json) {
 				//没有数据
 				$('.holdNodata').show();
-				$('.holdNodata .text').html('截止'+that.getElements.reportTime+',您暂无持仓信息');
+				var reportTimeHtml2 =  '';
+				reportTimeHtml2 = '截止33'+that.getElements.reportTime+',您暂无持仓信息';
+				$('.holdNodata .text').html(reportTimeHtml2);
+				$('.holdNodata .text').html('截止44'+that.getElements.reportTime+',您暂无持仓信息');
 
 			}
 
