@@ -178,6 +178,7 @@ $(function () {
             var that = this;
             //购买状态的处理
             //填充头部信息
+            debugger
             if (isBuy){
                 $('.header .amount').html(model.tradeAmount);//交易申请金额 header中显示的后下面显示的金额都是这个 除了确认信息中的金额显示的是确认金额confirmAmount
             } else {
