@@ -110,7 +110,7 @@
                         <div class="tip">{{myTip}}</div>
                     {{/if}}
                     <!-- todo 需要判断字段来是否显示 -->
-                    {{#if !isCash}}
+                    {{#if isBuyFlag}}
                         <div class="buy_btn fr blueBgButton" fundCode = {{fundCode}}>买入</div>
                     {{/if}}
                     {{#if isRedemptionFlag}}
