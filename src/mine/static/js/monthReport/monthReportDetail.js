@@ -89,7 +89,6 @@ var monthReportDetail = {
 				// 报告名称
 				$('#HeadBarpathName').html(json.reportName)
 				that.getElements.reportTime = json.reportTime;
-				debugger
 				var dateStr = json.reportTime;
 					dateStr = dateStr.replace(/年/g,"-");
 					dateStr = dateStr.replace(/月/g,"-");
