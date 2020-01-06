@@ -9,6 +9,8 @@
 require('@pathCommonBase/base.js');
 require('@pathCommonJs/ajaxLoading.js');
 var setCookie = require('@pathNewCommonJsCom/setCookie.js');
+var frozenAccount = require('@pathCommonJs/components/frozenAccount.js');
+require('@pathCommonCom/elasticLayer/elasticLayer/elasticLayer.js');
 
 $(function () {
 
@@ -219,19 +221,23 @@ $(function () {
                 var id = $(this).parent().parent().parent().parent().attr("id")
                 var tradeNo = $(this).parent().parent().parent().attr("data-tradeNo")
                 var fundCode = $(this).parent().parent().parent().attr("data-fundCode")
-                if(id =="cashPageLists" ){
-                    //现金宝
-                    var fundCode = that.gV.data.cashDetails[index].fundCode
-                    var productName = that.gV.data.cashDetails[index].fundName
-                    window.location.href = site_url.pofCashTransformOut_url + '?fundCode=' + fundCode + '&productName=' + new Base64().encode(productName);
-                }else if(id == "pageLists"){
-                     window.location.href = site_url.redemptionBuy_url + '?tradeNo=' + tradeNo + "&fundCode=" + fundCode
-                }else{
-                    return false
+                // 转出时判断是否有司法冻结
+                var flag = frozenAccount("buyFreeze", window.location.href,'','privateDetail_13')
+                if(!flag) {
+                    if(id =="cashPageLists" ){
+                        //现金宝
+                        var fundCode = that.gV.data.cashDetails[index].fundCode
+                        var productName = that.gV.data.cashDetails[index].fundName
+                        window.location.href = site_url.pofCashTransformOut_url + '?fundCode=' + fundCode + '&productName=' + new Base64().encode(productName);
+                    }else if(id == "pageLists"){
+                         window.location.href = site_url.redemptionBuy_url + '?tradeNo=' + tradeNo + "&fundCode=" + fundCode
+                    }else{
+                        return false
+                    }
                 }
                 
                
-                return false;
+                //return false;
             },{
                 'htmdEvt': 'publicAssets_5'
             })
