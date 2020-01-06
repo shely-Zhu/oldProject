@@ -299,7 +299,8 @@ $(function() {
 
                     //没有hasPullUp class，表示没有初始化，调用initMui，进行初始化
                     //并请求第一次数据
-                    that.initMui(t);
+                    // that.initMui(t);
+                    that.getData(t)
                 }
             }
             $.tabScroll(obj);
@@ -332,48 +333,47 @@ $(function() {
         },
 
         initMui: function($id) { //$id   就是滑动区域的 id 节点
-            var that = this;
-            w = $id.attr('id'), //获取节点的 id
-                s = '#' + w + ' .contentWrapper'; //id 拼接 查出content区域
+            // var that = this;
+            // w = $id.attr('id'), //获取节点的 id
+            //     s = '#' + w + ' .contentWrapper'; //id 拼接 查出content区域
 
-            mui.init({
-                pullRefresh: {
-                    container: s,
-                    up: {
-                        contentrefresh: '拼命加载中',
-                        contentnomore: '', //可选，请求完毕若没有更多数据时显示的提醒内容；
-                        callback: function() {
-                            //执行ajax请求
-                            that.getData($id, this, 'more');
+            // mui.init({
+            //     pullRefresh: {
+            //         container: s,
+            //         up: {
+            //             contentrefresh: '拼命加载中',
+            //             contentnomore: '', //可选，请求完毕若没有更多数据时显示的提醒内容；
+            //             callback: function() {
+            //                 //执行ajax请求
+                            that.getData($id);
 
-                        }
-                    }
-                }
-            });
+            //             }
+            //         }
+            //     }
+            // });
 
-            mui.ready(function() { //init后需要执行ready函数，才能够初始化出来
+            // mui.ready(function() { //init后需要执行ready函数，才能够初始化出来
 
-                //隐藏当前的加载中loading
-                if (!$id.hasClass('hasPullUp')) {
-                    $id.find('.mui-pull-bottom-pocket').addClass('mui-hidden'); //上拉显示更多
-                }
-
-                mui(".mui-slider").slider(); //就是左右切换 可以滑动的  初始化
-
-                //显示loading
-                that.getElements.listLoading.show();
-
-                //这一句初始化并第一次执行mui上拉加载的callback函数
-                mui(s).pullRefresh().pullupLoading();
+            //     //隐藏当前的加载中loading
+            //     if (!$id.hasClass('hasPullUp')) {
+            //         $id.find('.mui-pull-bottom-pocket').addClass('mui-hidden'); //上拉显示更多
+            //     }
 
 
-                //为$id添加hasPullUp  class
-                $($id).addClass('hasPullUp');
+            //     //显示loading
+            //     that.getElements.listLoading.show();
+
+            //     //这一句初始化并第一次执行mui上拉加载的callback函数
+            //     mui(s).pullRefresh().pullupLoading();
+
+
+            //     //为$id添加hasPullUp  class
+            //     $($id).addClass('hasPullUp');
 
 
 
-                // mui(s).pullRefresh().disablePullupToRefresh()
-            });
+            //     // mui(s).pullRefresh().disablePullupToRefresh()
+            // });
 
             // mui('.mui-slider').slider().stopped = true;
         },
@@ -405,13 +405,22 @@ $(function() {
                         that.beforeFunc();
 
                         //初始化第一屏区域的上拉加载
-                        that.initMui($('#scroll1'));
+                        // that.initMui($('#scroll1'));
+                        that.getData($('#scroll1'));
                     }
                 }
             }];
             $.ajaxLoading(obj);
         },
         getData: function($id, t) { // 获取产品数据的公用ajax方法;$id为各区域的 scroll+num id
+            if( $id.find(".mui-table-view-cell").height()>0){
+                $(".mui-slider").height($id.find(".mui-table-view-cell").height()+ $(".mui-slider .nav-wrapper").height())
+            }
+            if(!$id.find('.list_item').length>0){
+                mui(".mui-slider").slider(); //就是左右切换 可以滑动的  初始化
+            }else{
+                return false;
+            }
             var that = this;
             //获取产品列表
             var obj = [{
@@ -468,7 +477,23 @@ $(function() {
                                         $list = $("#move_" + index + " .list");
                                     $list.height(that.highHeight).addClass('noMove');
                                     // $list.addClass('noMove');
+                                    if (!$list.hasClass('setHeight')) {
 
+                                        //$('.list').each( function( i, el){
+            
+                                        //判断当前ul高度
+                                        var ulHeight = $list.find(".mui-table-view").height();
+                                        if (ulHeight < that.htmlHeight) {
+            
+                                            $list.height(that.highHeight).addClass('setHeight').addClass('noMove');
+                                            // $list.addClass('setHeight').addClass('noMove');
+                                        } else {
+                                            $list.height(that.highHeight).addClass('setHeight');
+                                            // $list.addClass('setHeight');
+                                        }
+            
+                                        //})
+                                    }
                                     // if( $("#move_"+index+" .noData").length ){
                                     //     //已经暂无数据了
                                     //     $('html').addClass('hidden');
@@ -480,44 +505,44 @@ $(function() {
                                     return false;
                                 } else {
                                     //有数据，没有更多了
-                                    t.endPullupToRefresh(true);
+                                    // t.endPullupToRefresh(true);
                                 }
                             } else {
                                 //其他页，没有更多了
-                                t.endPullupToRefresh(true);
+                                // t.endPullupToRefresh(true);
                             }
                         } else {
-                            t.endPullupToRefresh(false);
+                            // t.endPullupToRefresh(false);
                         }
 
                         $id.find('.contentWrapper .mui-pull-bottom-pocket').removeClass('mui-hidden');
-                        if (that.gV.ajaxArr[that.gV.current_index].pageCurrent == 1) {
+                        // if (that.gV.ajaxArr[that.gV.current_index].pageCurrent == 1) {
                             //第一屏
                             $id.find('.contentWrapper .mui-table-view-cell').html(that.html);
-                        } else {
-                            $id.find('.contentWrapper .mui-table-view-cell').append(that.html);
-                        }
+                        // } else {
+                        //     $id.find('.contentWrapper .mui-table-view-cell').append(that.html);
+                        // }
 
                         //获取当前展示的tab的索引
                         var index = $('#slider .tab-scroll-wrap .mui-active').index(),
                             $list = $("#move_" + index + " .list");
-                        if (!$list.hasClass('setHeight')) {
+                        // if (!$list.hasClass('setHeight')) {
 
-                            //$('.list').each( function( i, el){
+                        //     //$('.list').each( function( i, el){
 
-                            //判断当前ul高度
-                            var ulHeight = $list.find(".mui-table-view").height();
-                            if (ulHeight < that.htmlHeight) {
+                        //     //判断当前ul高度
+                        //     var ulHeight = $list.find(".mui-table-view").height();
+                        //     if (ulHeight < that.htmlHeight) {
 
-                                $list.height(that.highHeight).addClass('setHeight').addClass('noMove');
-                                // $list.addClass('setHeight').addClass('noMove');
-                            } else {
-                                $list.height(that.highHeight).addClass('setHeight');
-                                // $list.addClass('setHeight');
-                            }
+                        //         $list.height(that.highHeight).addClass('setHeight').addClass('noMove');
+                        //         // $list.addClass('setHeight').addClass('noMove');
+                        //     } else {
+                        //         $list.height(that.highHeight).addClass('setHeight');
+                        //         // $list.addClass('setHeight');
+                        //     }
 
-                            //})
-                        }
+                        //     //})
+                        // }
 
                         //隐藏loading
                         setTimeout(function() {
