@@ -25,6 +25,7 @@ require('@pathCommonJsCom/goTopMui.js');
 var splitUrl = require('@pathCommonJs/components/splitUrl.js')();
 var transcationTem = require('@pathCommonJsCom/account/transcationTem.js');
 var alwaysAjax = require('@pathCommonJs/components/alwaysAjax.js');
+var setCookie = require('@pathNewCommonJsCom/setCookie.js');
 
 $(function() {
     var data = {
@@ -68,10 +69,14 @@ $(function() {
             }
             //地址栏里confirmed代表已确认  toBeConfirmed代表待确认
             if (splitUrl['type'] == 'confirmed') {
+                $(".covering").show()
                 $('.hopper').show();
                 $('#HeadBarpathName').attr("data", '已完成交易').html('已完成交易');
                 that.gV.type = 1;
+                // 判断是否存在未确认的客户行为确认单
+                that.judgeToBeConfirmedSheet()
             } else if (splitUrl['type'] == 'toBeConfirmed') {
+                $(".covering").hide()
                 $('.hopper').hide();
                 $('#HeadBarpathName').attr("data", '待确认交易').html('待确认交易');
                 that.gV.type = 0;
@@ -82,7 +87,7 @@ $(function() {
                     up: {
                         //auto: false,
                         contentrefresh: '拼命加载中',
-                        contentnomore: '没有更多了', //可选，请求完毕若没有更多数据时显示的提醒内容；
+                        contentnomore: '暂无更多内容', //可选，请求完毕若没有更多数据时显示的提醒内容；
                         callback: function() {
                             // debugger
                             //执行ajax请求
@@ -108,6 +113,48 @@ $(function() {
                 $('.list').addClass('hasPullUp');
             });
         },
+        // 判断是否存在未确认的客户行为确认单
+        judgeToBeConfirmedSheet: function() {
+            var that = this;
+            var obj = [{
+                url: site_url.gainCustStorageList_api,
+                data: {
+                    sourceType: 1
+                },
+                contentTypeSearch: true,
+                callbackDone: function(json) {
+                    var jsonData = json.data[0] || []
+                    if(jsonData.length != 0) {
+                        $(".hopper").hide()
+                        $(".covering").hide()
+                        var fileName = jsonData.storageFileName
+                        var filePath = jsonData.storageFilePath
+                        var groupName = jsonData.storageGroupName
+                        var ordernum = jsonData.ordernum
+                        var obj = {
+                            title: '温馨提示',
+                            p: '<p>您预约的' + jsonData.storageRelName +'产品已经为您生成客户行为确认单，请您查看并确认</p>',
+                            yesTxt: '立即查看',
+                            zIndex: 100,
+                            hideCelButton: true,
+                            htmdEvtYes:'tobeConfirmTransaction_14',  // 埋点确定按钮属性
+                            callback: function(t) {
+                                if(fileName.indexOf(".pdf") != -1) {
+                                    window.location.href = site_url.downloadNew_api + "?filePath=" + filePath + "&fileName=" + new Base64().encode(fileName) + "&groupName=" + groupName + '&ordernum=' + ordernum + "&show=1&acknowledgeBtn=true";
+                                } else {
+                                    window.location.href = site_url.downloadNew_api + "?filePath=" + filePath + "&fileName=" + new Base64().encode(fileName) + "&groupName=" + groupName + '&ordernum=' + ordernum + '&acknowledgeBtn=true'
+                                }
+                            }
+                        };
+                        $.elasticLayer(obj)
+                    }
+                },
+                callbackFail: function() {
+                    
+                }
+            }];
+            $.ajaxLoading(obj);
+        },
         getData: function(t, type) {
             var that = this;
             var obj = [{
@@ -116,11 +163,12 @@ $(function() {
                     "pageNum": that.gV.aP.pageNum, //非必须，默认为1
                     "pageSize": "10", //非必须，默认为10
                     "isConfirm": that.gV.type,
-                    "businessType": that.gV.businessType,
+                    "confirmType": that.gV.businessType,
                 },
+                needLoading: false,
                 callbackDone: function(json) {
                     var data;
-                    if (json.data.pageList && json.data.pageList.length == 0) { // 没有记录不展示
+                    if (json.data.pageList && json.data.pageList.length == 0 && that.gV.aP.pageNum == 1) { // 没有记录不展示
                         $(".list").hide()
                         that.getElements.noData.show();
                         that.getElements.listLoading.hide();
@@ -153,11 +201,14 @@ $(function() {
                         $('.contentWrapper').find('.mui-pull-bottom-pocket').removeClass('mui-hidden');
                         // 将列表插入到页面上
                         transcationTem(data, that.getElements.contentWrap, that.getElements.transTemp, type)
-
-                    }, 200)
+                    }, 300)
                 },
                 callbackNoData: function() {
-                    that.getElements.noData.show();
+                    if (that.gV.aP.pageNum == 1) {
+                        $(".list").hide()
+                        that.getElements.noData.show();
+                    }
+
                 }
 
             }];
@@ -165,38 +216,59 @@ $(function() {
         },
         events: function() { //绑定事件
             var that = this;
-            alwaysAjax('.mui-table-view-cell');
-            mui("body").on('tap', '.hopper', function(e) {
+            alwaysAjax($('.contentWrapper'));
+            mui("body").on('mdClick', '.hopper', function(e) {
                     $('.mask').show();
                     $('.hopperCon').show();
+                    $(".covering").show()
 
+                }, {
+                    'htmdEvt': 'tobeConfirmTransaction_0'
                 })
+            mui("body").on('mdClick', '.covering', function(e) {
+                $('.hopperCon').hide();
+                $(".covering").hide()
+
+            }, {
+                'htmdEvt': 'tobeConfirmTransaction_14'
+            })    
                 //点击筛选数据
-            mui("body").on('tap', '.hopperCon li', function(e) {
+            mui("body").on('mdClick', '.hopperCon li', function(e) {
                     $('.list').show();
                     that.getElements.noData.hide();
                     $(this).addClass('active').siblings('li').removeClass('active');
                     $('.mask').hide();
                     $('.hopperCon').hide();
+                    $(".covering").hide();
                     that.gV.businessType = $(this).attr('data');
                     // 重置上拉加载
-                    mui('.contentWrapper').pullRefresh().refresh(true);
                     that.gV.aP.pageNum = 1;
                     that.getElements.contentWrap.html('');
                     //重新初始化
-                    that.getElements.listLoading.show();
                     that.getData(that.gV.aThis);
-                    mui('.contentWrapper').pullRefresh().scrollTo(0, 0, 0);
+                    $('.goTopBtn').hide();
+                    $('.contentWrap')[0].style.webkitTransform = "translate3d(0px, 0px, 0px) translateZ(0px)";
+                    $('.contentWrap')[0].style.webkitTransform = '2500ms';
+                }, {
+                    'htmdEvt': 'tobeConfirmTransaction_1'
                 })
                 // 点击遮罩隐藏
-            mui("body").on('tap', '.mask', function(e) {
-                    $('.mask').hide();
-                    $('.hopperCon').hide();
-                })
-                //取消受让、取消预约、取消转让
-            mui("body").on('tap', '.cancelBtn', function(e) {
+            mui("body").on('mdClick', '.mask', function(e) {
+                $('.mask').hide();
+                $('.hopperCon').hide();
+                $(".covering").hide();
+
+            }, {
+                'htmdEvt': 'tobeConfirmTransaction_2'
+            })
+
+
+            //取消受让、取消预约、取消转让
+            mui("body").on('mdClick', '.cancelBtn', function(e) {
+                    event.stopPropagation();
                     var type = $(this).attr('data-type');
-                    var id = $(this).attr('data-id');
+                    var reserveId = $(this).attr('data-reserveid');
+                    var proId = $(this).attr('data-projectid');
                     if (type == 'assign') { //转让
                         var obj = {
                             p: '<p>您确定要取消转让申请吗？</p>',
@@ -204,9 +276,11 @@ $(function() {
                             celTxt: '取消',
                             hideCelButton: false,
                             zIndex: 100,
+                            htmdEvtYes:'tobeConfirmTransaction_7',  // 埋点确定按钮属性
+                            htmdEvtCel:'tobeConfirmTransaction_8',  // 埋点取消按钮属性
                             callback: function(t) {
 
-                            },
+                            }
                         };
                         $.elasticLayer(obj)
 
@@ -218,6 +292,8 @@ $(function() {
                             celTxt: '取消',
                             hideCelButton: false,
                             zIndex: 100,
+                            htmdEvtYes:'tobeConfirmTransaction_9',  // 埋点确定按钮属性
+                            htmdEvtCel:'tobeConfirmTransaction_10',  // 埋点取消按钮属性
                             callback: function(t) {
 
                             },
@@ -225,22 +301,52 @@ $(function() {
                         $.elasticLayer(obj)
                     } else if (type == 'appointment') {
                         var obj = {
-                            p: '<p>您确定要预约吗？</p>',
+                            p: '<p>您确定要取消预约吗？</p>',
                             yesTxt: '确认',
                             celTxt: '取消',
                             hideCelButton: false,
                             zIndex: 100,
+                            htmdEvtYes:'tobeConfirmTransaction_11',  // 埋点确定按钮属性
+                            htmdEvtCel:'tobeConfirmTransaction_12',  // 埋点取消按钮属性
                             callback: function(t) {
+                                var obj = [{
+                                    url: site_url.fundReserveCancel_api,
+                                    contentTypeSearch: true,
+                                    data: {
+                                        "projectId": proId,
+                                        "reserveId": reserveId,
+                                    },
+                                    callbackDone: function(json) {
+                                        var data;
+                                        if (json.status == '0000') {
+                                            // 重置上拉加载
+                                            mui('.contentWrapper').pullRefresh().refresh(true);
+                                            that.gV.aP.pageNum = 1;
+                                            that.getElements.contentWrap.html('');
+                                            //重新初始化
+                                            that.getElements.listLoading.show();
+                                            that.getData(that.gV.aThis);
+                                            mui('.contentWrapper').pullRefresh().scrollTo(0, 0, 0);
+                                        }
+                                    },
+                                    callbackNoData: function() {
 
+                                    }
+
+                                }];
+                                $.ajaxLoading(obj);
                             },
                         };
                         $.elasticLayer(obj)
                     }
 
 
+                }, {
+                    'htmdEvt': 'tobeConfirmTransaction_3'
                 })
                 //点击状态文字出现弹框
-            mui("body").on('tap', '.openTip', function(e) {
+            mui("body").on('mdClick', '.openTip', function(e) {
+                    event.stopPropagation();
                     $('.mask').show();
                     var conText = $(this).siblings('.tipContent').html();
                     var obj = {
@@ -248,31 +354,60 @@ $(function() {
                         yesTxt: '我明白了',
                         hideCelButton: true,
                         zIndex: 100,
+                        htmdEvtYes:'tobeConfirmTransaction_13',  // 埋点确定按钮属性
                         callback: function(t) {
 
                         },
                     };
                     $.elasticLayer(obj);
 
+                }, {
+                    'htmdEvt': 'tobeConfirmTransaction_4'
                 })
                 //功能按钮
-            mui("body").on('tap', '.toDetail', function(e) {
-                var type = $(this).attr('type');
-                var reserveId = $(this).attr('reserveId');
-                var proId = $(this).attr('projectId');
-                if (type == 'toCertif') { //去合格投资者认证
+            var clickEvent = '';
+            mui("body").on('mdClick', '.toDetail', function(e) {
+                    event.stopPropagation();
+                    var type = $(this).attr('type'); //按钮类型
+                    var reserveId = $(this).attr('data-reserveid'); //预约id
+                    var proId = $(this).attr('data-projectid'); //项目id
+                    var isElec = $(this).attr('data-type'); //是否是电子合同
+                    var isAllowAppend = $(this).attr('data-firstorappend'); //是否首次追加
+                    var projectName = $(this).attr('data-projectname'); //项目名称
+                    var isQualified = $(this).attr('data-isqualified'); //是否满足合格投资者
+                    var isPubToPri = $(this).attr('data-ispubtopri'); //是否公转私
+                    if (type == 'toCertif') { //去合格投资者认证
+                        if (isElec == 0) {
+                            //非电子合同
+                            window.location.href = site_url.notElecSecondStep_url + '?isQualified=' + isQualified + '&projectName=' + projectName+'&projectId=' + proId;
+                        } else if (isElec == 1) {
+                            //电子合同跳转
+                            window.location.href = site_url.elecSecondStep_url + '?reserveId=' + reserveId + '&projectId=' + proId + '&projectName=' + projectName + '&isAllowAppend=' + isAllowAppend + '&isPubToPri=' + isPubToPri;
+                        }
+                    } else if (type == 'toSign') { //去签合同
+                        window.location.href = site_url.elecThirdStep_url + '?reserveId=' + reserveId + '&projectId=' + proId + '&projectName=' + projectName + '&isAllowAppend=' + isAllowAppend + '&isPubToPri=' + isPubToPri;
+                    } else if (type == 'toSee') { //查看合同
+                        window.location.href = site_url.seeSign_url + '?reserveId=' + reserveId;
+                        debugger
+                    } else if (type == 'toUploadM') { //去上传汇款凭证
+                        window.location.href = site_url.elecFourthStep_url + '?reserveId=' + reserveId + '&projectId=' + proId + '&projectName=' + projectName + '&isAllowAppend=' + isAllowAppend + '&isPubToPri=' + isPubToPri;
+                    } else if (type == 'toView') { //详情
+                        window.location.href = site_url.privatePlacementDetail_url + '?projectId=' + proId
+                    } else if (type == 'toVideo') { //视频双录
+                        window.location.href = site_url.realVideoTranscribe_url + '?type=toBeConfirmed';
+                    } else if (type == 'reAppointment') { //重新预约
 
-                } else if (type == 'toSign') { //去签合同
-                    window.location.href = site_url.elecFourthStep_url + '?reserveId=' + reserveId + '&projectId' + proId;
-                } else if (type == 'toSee') { //查看合同
-                    window.location.href = site_url.seeSign_url + '?reserveId=' + reserveId;
-                } else if (type == 'toUploadM') { //去上传汇款凭证
-                    window.location.href = site_url.elecFourthStep_url + '?reserveId=' + reserveId;
-                } else if (type == 'toView') { //详情
+                    }
 
-                } else if (type == 'toVideo') { //视频双录
-                }
-
+                }, {
+                    'htmdEvt': 'tobeConfirmTransaction_5'
+                })
+                // 点击每一条进入详情
+            mui("body").on('mdClick', '.transList', function(e) {
+                var proId = $(this).attr('data-projectid');
+                window.location.href = site_url.privatePlacementDetail_url + '?projectId=' + proId
+            }, {
+                'htmdEvt': 'tobeConfirmTransaction_6'
             })
         }
     };

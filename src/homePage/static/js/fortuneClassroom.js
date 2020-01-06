@@ -185,6 +185,7 @@ $(function() {
                 url: that.gV.siteUrlArr[that.gV.current_index], //调用第几个接口
                 data: that.gV.ajaxArr[that.gV.current_index], //传调用参数
                 needLogin: true,
+                needLoading: false,
                 callbackDone: function(json) {
                     console.log(json.data)
                     var jsonData = that.dealData(json.data.list),
@@ -239,20 +240,19 @@ $(function() {
                             t.endPullupToRefresh(false);
                         }
                         $id.find('.contentWrapper .mui-pull-bottom-pocket').removeClass('mui-hidden');
-                        console.log(that.gV.ajaxArr[that.gV.current_index].pageCurrent)
                         if (that.gV.ajaxArr[that.gV.current_index].pageCurrent == 1) {
                             //第一屏
                             $id.find('.contentWrapper .mui-table-view-cell').html(that.html);
                             for(var i = 0 ; i < that.gV.lazyClassArr.length; i++) {
                                 $("." + that.gV.lazyClassArr[i]).lazyload()
                             }
-                            alwaysAjax('#' + w + ' .mui-table-view-cell', s)
+                            alwaysAjax($('#' + w + ' .mui-table-view-cell'), s, 2)
                         } else {
                             $id.find('.contentWrapper .mui-table-view-cell').append(that.html);
                             for(var i = 0 ; i < that.gV.lazyClassArr.length; i++) {
                                 $("." + that.gV.lazyClassArr[i]).lazyload()
                             }
-                            alwaysAjax('#' + w + ' .mui-table-view-cell', s)
+                            alwaysAjax($('#' + w + ' .mui-table-view-cell'), s, 2)
                         }
                         //获取当前展示的tab的索引
                         var index = $('#slider .tab-scroll-wrap .mui-active').index(),
@@ -290,8 +290,10 @@ $(function() {
                 callbackNoData: function(json) {
                     t.endPullupToRefresh(false);
                     //没有数据
-                    $id.find('.mui-scroll .list').html(that.getElements.noData.clone(false)).addClass('noCon');
-                    $id.find('.noData').show();
+                    if(that.gV.ajaxArr[that.gV.current_index].pageCurrent == 1) {
+                        $id.find('.mui-scroll .list').html(that.getElements.noData.clone(false)).addClass('noCon');
+                        $id.find('.noData').show();
+                    }
                     setTimeout(function() {
                         that.getElements.listLoading.hide();
                     }, 100);
@@ -305,7 +307,7 @@ $(function() {
         },
         dealData: function(data) {
             $.each(data, function(a, b) {
-                if(b.articleBelong == 2) {
+                if(b.articleBelong == 6) { // 大咖直播 6
                     b.isLive = true
                 } else {
                     b.isLive = false
@@ -320,7 +322,7 @@ $(function() {
             mui("body").on('mdClick', '.roomItem' , function(){
                 var id = $(this).attr("id")
                 var articleBelong = $(this).attr("articleBelong")
-                window.location.href = site_url.articleTemplate_url + '?id=' + id + '&articleBelong=' + articleBelong + '&applyType=1'
+                window.location.href = site_url.articleTemplate_url + '?id=' + id + '&articleBelong=' + articleBelong
             },{
                 'htmdEvt': 'fortune_10'
             })

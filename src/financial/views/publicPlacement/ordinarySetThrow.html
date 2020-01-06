@@ -16,8 +16,9 @@
  
  <body>
      @@include('@pathCommonCom/loading/listLoading.html')
+     @@include('@pathCommonViews/headBarConfig.html',{"pathName":"定投"})
+
      <section class="container">
-         @@include('@pathCommonViews/headBarConfig.html',{"pathName":"定投"})
          <div class="br"></div>
          <div class="title">
              <span class="fundName"></span>
@@ -44,9 +45,9 @@
          <div class="onlinepay paymoney" pay-type="0">
              <div class="ff">在线支付</div>
              <div class="paymoney-right">
-                 <div class="onright-left">
-                 </div>
-                 <a class="iconfont iconone"  href="javascript:;">&#xe67d;</a>
+                <a class="iconfont iconone"  href="javascript:;">&#xe67d;</a>
+                <div class="onright-left">
+                </div>
              </div>
          </div>
 
@@ -67,16 +68,17 @@
                  <i>{{bankName}}</i>
                  <span>{{after4Num}}</span>
              </div>
-             <div class="onright-left-two">单笔限额{{singleNum}}，单日限额{{oneDayNum}}</div>
+             <div class="onright-left-two">单笔限额{{singleNum_w}}，单日限额{{oneDayNum_w}}</div>
              {{/each}}
          </script>
          <div class="p2">
              <div>
                  <span class="file">
                      <a href="javascript:;" class="item2"><span class="iconfont">&#xe668;</span><span>已阅读并同意</span></a>
+                     <a href="javascript:;" class="setGoUrl_1">《定期定额投资业务协议》 </a>、
                      <a href="javascript:;" class="setGoUrl">《公募基金风险揭示及售前告知书》</a>、
-                     <a class="contract" href="javascript:;">《基金合同》</a>、
-                     <a class="recruiting" href="javascript:;">《招募说明书》</a>
+                     <a href="javascript:;" class="contract goPreview">《基金合同》</a>、
+                     <a href="javascript:;" class="recruiting goPreview">《招募说明书》</a>
                  </span>
                  
              </div>
@@ -110,7 +112,7 @@
                      <img class="bank-img" src="{{bankThumbnailUrl}}" alt="">
                      <div class="div">
                          <div class="bank-name">{{bankName}}({{after4Num}})</div>
-                         <div class="bank-pay">单笔限额{{singleNum}}，单日限额{{oneDayNum}}</div>
+                         <div class="bank-pay">单笔限额{{singleNum_w}}，单日限额{{oneDayNum_w}}</div>
                      </div>
                      <img class="true" src="/common/img/account_icon_check@2x.png" alt="">
                  </li>

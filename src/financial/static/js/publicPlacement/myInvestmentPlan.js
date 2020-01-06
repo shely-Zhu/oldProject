@@ -11,19 +11,18 @@ require('@pathCommonJs/ajaxLoading.js');
 //下拉加载更多
 // require('@pathCommonJs/scrollFullPage.js');
 // 切换
-require('@pathCommonJsCom/tabScroll.js');
 require('@pathCommonJsCom/goTopMui.js');
-require('@pathCommonJs/components/elasticLayer.js');
-require('@pathCommonJs/components/elasticLayerTypeFive.js');
 var generateTemplate = require('@pathCommonJsComBus/generateTemplate.js');
+var tipAction = require('@pathCommonJs/components/tipAction.js');
+require('@pathCommonCom/pullRefresh/pullRefresh.js');
 $(function () {
     var somePage = {
         $e: {
             recordList: $('.contentWrap'), // 调仓记录
             investmentPlanTemp: $('#investmentPlan-template'), // 最新调仓模板
-            noDataOne: $('.noDataOne'), //没有数据的结构
-            nothing: $('.nothing'), //没有计划
+            noData: $(".noData"),
             endPlan: $(".endPlan"),  //已终止的定投计划
+            stopPlan:$(".stoppPlan"), //已暂停的定投计划
             listLoading: $('.listLoading'), //所有数据区域，第一次加载的loading结构
 
         },
@@ -32,21 +31,122 @@ $(function () {
             pageSize: 10,
             listLength: 0,
             fixStateNum : 0,
-            stopPlanList:[]    // 已终止的定投计划
+            stopNum:0,//暂停的定投计划数
+            stopPlanList:[],    // 已终止的定投计划
+            stopPlanList_1:[],  //已暂停的定投计划
+            accountType:"",
+            paddingStatus:false,  //有进行中的计划状态
         },
         init: function () {
             var that = this;
             that.initMui();
-            //that.getData()
+            that.getUserInfo();
             that.events();
         },
         //初始化mui的上拉加载
         initMui: function () {
             var that = this;
-            var height = windowHeight - $(".title").height() - $(".topTitle").height();
-            // var height = windowHeight - $(".title").height() - $(".topTitle").height() - $(".newPlan").height() - $(".noDataOne").height();
+            var height = windowHeight - $(".newPlan").height() - $(".topTitle").height();
             if (!$('.list').hasClass('setHeight')) {
                 $('.list').height(height).addClass('setHeight');
+            }
+            $.pullRefresh({
+                wrapper: $('.list'),
+                class: 'listItem',
+                template: that.$e.investmentPlanTemp, 
+                pageSize: that.gV.pageSize,
+                callback: function(def, t){
+                    var obj = [{
+                        url: site_url.protocolList_api,
+                        data: {
+                            "pageNo": that.gV.pageCurrent, //非必须，默认为1
+                            "pageSize": 10,//非必须，默认为10
+                        },
+                        needDataEmpty: true,
+                        needLoading: false,
+                        callbackDone: function(json) {    
+                            var data = json.data.pageList;
+                            if(that.gV.pageCurrent == 1 && data.length == 0) {
+                                $(".list").css("display", "none")
+                                that.$e.noData.show()
+                            } else {
+                                for (var i = 0; i < data.length; i++) {
+                                    if (data[i].fixState == 'A') {
+                                        data[i].fixStateStr = "进行中"
+                                        data[i].show = true
+                                        that.gV.paddingStatus = true
+                                    } else if (data[i].fixState == 'H') {
+                                        data[i].fixStateStr = "已终止"
+                                        data[i].show = false
+                                        that.gV.fixStateNum ++
+                                        that.gV.stopPlanList.push(data[i])
+                                    } else {
+                                        data[i].fixStateStr = "暂停"
+                                        data[i].show = true
+                                        that.gV.stopNum ++
+                                        that.gV.stopPlanList_1.push(data[i])
+                                    }
+                                    if(data[i].totalTradeTimes.length == 0){
+                                        data[i].totalTradeTimes_s = false
+                                    }else{
+                                        data[i].totalTradeTimes_s = true
+                                    }
+                                }
+                                if (that.gV.fixStateNum > 0) {
+                                    that.$e.endPlan.show()
+                                    var height = windowHeight - $(".newPlan").height() - $(".topTitle").height() - $(".endPlan").height();
+                                    $('.list .contentWrapper').height(height)
+                                    $(".stopPlan").html(that.gV.fixStateNum)
+
+                                } else {
+                                    that.$e.endPlan.hide()
+                                }
+                                if(that.gV.stopNum>0){
+                                    //that.$e.stopPlan.show()
+                                    var height = windowHeight - $(".newPlan").height() - $(".topTitle").height() - $(".endPlan").height();
+                                   // $('.list .contentWrapper').height(height)
+                                   // $(".stopPlan_1").html(that.gV.stopNum)
+                                }else{
+                                    that.$e.stopPlan.hide()
+                                }
+                                if(!that.gV.paddingStatus&&that.gV.stopNum==0){
+                                    that.$e.noData.show()
+                                    return 
+                                }
+                                def && def.resolve( data, that.gV.pageCurrent);
+                                if (that.gV.pageCurrent == 1) {
+                                    for (var i = 0; i < data.length; i++) {
+                                        if (data[i].fixStateStr == "暂停") {
+                                            $(".content-t span").eq(i).addClass("suspend")
+                                        }
+                                    }
+                                } else {
+                                    for (var i = 0; i < data.length; i++) {
+                                        if (data[i].fixStateStr == "暂停") {
+                                            $(".content-t span").eq(i + 15 * that.gV.pageCurrent - 15).addClass("suspend")
+                                        }
+                                    }
+                                }
+                                that.gV.pageCurrent++;
+                            }
+                            
+                        },
+                        callbackNoData: function( json ){
+                            if(that.gV.pageCurrent == 1) {
+                                $(".list").css("display", "none")
+                                that.$e.noData.show()
+                            }
+                            def && def.reject( json, that.gV.pageCurrent );
+                        },
+                        callbackFail: function(json) {
+                            def && def.reject( json, that.gV.pageCurrent );
+                        },
+                    }];
+                    $.ajaxLoading(obj); 
+                }
+            })
+            /*if (!$('.list .contentWrapper').hasClass('setHeight')) {
+                $('.list .contentWrapper').height(height).addClass('setHeight');
             }
             mui.init({
                 pullRefresh: {
@@ -57,6 +157,7 @@ $(function () {
                         contentnomore: '没有更多了', //可选，请求完毕若没有更多数据时显示的提醒内容；
                         callback: function () {
                             //执行ajax请求
+                            // that.$e.listLoading.show();
                             that.getData(this);
                         }
                     }
@@ -77,17 +178,12 @@ $(function () {
                 //这一句初始化并第一次执行mui上拉加载的callback函数
                 mui('.contentWrapper').pullRefresh().pullupLoading();
 
-                //隐藏loading，调试接口时需要去掉
-                //setTimeout(function(){
-                that.$e.listLoading.hide();
-                //}, 2000);
-
 
                 //为$id添加hasPullUp  class
                 $('.list').addClass('hasPullUp');
-            });
+            });*/
         },
-        getData: function (t) {
+        /*getData: function (t) {
             var that = this;
 
             var obj = [{
@@ -98,19 +194,19 @@ $(function () {
                 },
                 //async: false,
                 needDataEmpty: true,
+                needLoading: false,
                 callbackDone: function (json) {
-                    console.log(json);
+                    debugger
+                    that.$e.listLoading.hide();
                     var data;
                     if (json.data.pageList.length == 0) { // 没有记录不展示
-                        $(".list").hide()
+                        $(".contentWrapper").hide()
                         that.$e.nothing.show();
                         return false;
                     } else if (json.status == "0000" && json.data.pageList.length > 0) {
                         data = json.data.pageList;
                         that.$e.nothing.hide();
                     }
-                    setTimeout(function () {
-
                         if (data.length < that.gV.pageSize) {
 
                             if (that.gV.pageCurrent == 1) { //第一页时
@@ -135,7 +231,7 @@ $(function () {
                                 data[i].fixStateStr = "进行中"
                                 data[i].show = true
                             } else if (data[i].fixState == 'H') {
-                                data[i].fixStateStr = "终止"
+                                data[i].fixStateStr = "已终止"
                                 data[i].show = false
                                 that.gV.fixStateNum ++
                                 that.gV.stopPlanList.push(data[i])
@@ -149,17 +245,15 @@ $(function () {
                                 data[i].totalTradeTimes_s = true
                             }
                         }
-                        console.log('data',data)
                         if (that.gV.fixStateNum > 0) {
                             that.$e.endPlan.show()
+                            var height = windowHeight - $(".newPlan").height() - $(".topTitle").height() - $(".endPlan").height();
+                            $('.list .contentWrapper').height(height)
                             $(".stopPlan").html(that.gV.fixStateNum)
 
                         } else {
                             that.$e.endPlan.hide()
                         }
-
-                        // 将列表插入到页面上
-                        generateTemplate(data, that.$e.recordList, that.$e.investmentPlanTemp);
 
                         if (that.gV.pageCurrent == 1) {
                             for (var i = 0; i < data.length; i++) {
@@ -179,24 +273,50 @@ $(function () {
 
                             }
                         }
+                         // 将列表插入到页面上
+                         generateTemplate(data, that.$e.recordList, that.$e.investmentPlanTemp);
 
                         // 页面++
                         that.gV.pageCurrent++;
 
-
-
-                    }, 200)
-
                 },
+                callbackNoData:function(json){
+                    that.$e.nothing.show();
+					//tipAction(json.message);
+                },
+                callbackFail:function(json){
+					tipAction(json.message);
+				},
 
             }];
+            $.ajaxLoading(obj);
+        },*/
+        // 获取认证信息
+        getUserInfo: function() {
+            var that = this;
+            // 请求页面数据
+            var obj = [{
+                url: site_url.queryUserBaseInfo_api,
+                data: {},
+                callbackDone: function(json) {
+                    var data = json.data
+                    that.gV.accountType = data.accountType
+                },
+                callbackFail: function(json) {
+                    tipAction(json.msg);
+                }
+            }]
             $.ajaxLoading(obj);
         },
         events: function () {
             var that = this;
             //新增 跳原生定投排行页
             mui("body").on("mdClick", ".newPlan", function () {
-                window.location.href = site_url.investmentPlanRanking_url;
+                if(that.gV.accountType == 0 ||that.gV.accountType == 2){
+                    tipAction("暂不支持机构客户进行交易")
+                    return
+                }
+                window.location.href = site_url.investmentPlanRanking_url + '?flag=2';
             }, {
 				htmdEvt: 'myInvestmentPlan_01'
 			});
@@ -213,12 +333,12 @@ $(function () {
             mui("body").on("mdClick", ".goEndPlan", function () {
                 window.location.href = site_url.myInvestmentPlanH_url ;
             
-                sessionStorage.setItem('stopList',JSON.stringify(that.gV.stopPlanList))
+               // sessionStorage.setItem('stopList',JSON.stringify(that.gV.stopPlanList))
             }, {
-				htmdEvt: 'myInvestmentPlan_01'
+				htmdEvt: 'myInvestmentPlan_03'
 			});
 
-        },
+        }
     };
     somePage.init();
 

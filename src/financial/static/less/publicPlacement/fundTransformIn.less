@@ -17,7 +17,7 @@
 @import url("@pathCommonLess/mui/resetMuiPop.less");
 
 @import url("@pathCommonLessCom/headBarConfig.less");
-
+@import url("@pathCommonLess/components/elasticLayerTypeTwo.less");
 @import url('@pathCommonCom/elasticLayer/transOutRule/transOutRule.less');
 @import url("@pathCommonLessCom/payPassword.less");
 
@@ -46,16 +46,35 @@ body{
         line-height:1.05rem;
         // background: @c005;
         padding-left: .3rem;
-        margin-bottom: .3rem;
+        
         color: #272727;
         font-weight: bold;
         background: @c005;
     }
+    .warnInfo{
+        padding-left: .3rem;
+        height:.8rem;
+        line-height:.8rem;
+        background: #fff9f1;
+        display:none;
+        font-size:0;
+        .infoImg{
+            vertical-align: middle;
+            color:#ecc59c;
+            font-size:0.24rem;
+        }
+        .infoText{
+            vertical-align: middle;
+            color:#a7a29e;
+            font-size:0.24rem;
+            line-height: 0.24rem;
+            height:0.24rem;
+        }
+    }
     .money{
         background: @c005;
         padding: .3rem .26rem ;
-        // margin-bottom: .3rem;
-
+        margin-top: .3rem;
         .mfirst{
             display: flex;
             justify-content: space-between;
@@ -120,6 +139,7 @@ body{
                 }
                 .num{
                     .line-rate{
+                        padding-right: 8px;
                         &::before{
                             content: "——";
                             position:absolute;
@@ -132,19 +152,26 @@ body{
                     
                 }
             }
-            .payConfirm{
-                font-size:.12rem;
+            .payConfirm-f{
                 height: .4rem;
                 line-height: .4rem;
+                span{
+                    font-size:0.24rem !important;
+                }
             }
-            .brforre15{
-                font-size:.12rem;
+            .brforre15-f{
                 height: .4rem;
                 line-height: .4rem;
+                span{
+                    font-size:.24rem !important;
+                }
             }
-            .after15{
-                font-size:.12rem;
+            .after15-f{
                 line-height: .4rem;
+                font-size:0.14rem !important;
+                span{
+                    font-size:0.24rem !important;
+                }
             }
         }
     }
@@ -178,7 +205,7 @@ body{
             width: 100%;
 
             .onright-left{
-                float: right;
+                float: left;
                 margin-right: .3rem;
                 
                 .onright-left-one{
@@ -221,7 +248,6 @@ body{
                     line-height:37px;
                     // margin-bottom: .36rem;
                 }
-
                 &.pleaseSelect{
                     top: 50%;
                         transform: translateY(-50%);
@@ -260,11 +286,12 @@ body{
             margin-top: .28rem;
             .onright-left{
                 float: right;
-                margin-right: .98rem;
+                margin-right: .24rem;
                 
                 .onright-left-one{
                     // display: flex;
                     justify-content: space-between;
+                    text-align: right;
 
                     img, i, span{
                         vertical-align: middle;
@@ -302,6 +329,48 @@ body{
                     line-height:.37rem;
                     // margin-bottom: .36rem;
                 }
+                .onright-left-one.fundListCheck{
+                    // display: flex;
+                    justify-content: space-between;
+                    img, i, span{
+                        vertical-align: middle;
+                        display: inline-block;
+                    }
+                    img{
+                        width: .32rem;
+                        height: .32rem;
+                    }
+                    i{
+                        height: 0.32rem;
+                        font-size:.24rem;
+                        font-weight:400;
+                        color:@272727;
+                        line-height:.32rem;
+                    }
+                    span{
+                        height:.36rem;
+                        font-size:.32rem;
+                        font-weight:bold;
+                        color:@272727;
+                        line-height:.36rem;
+                        // margin-top: .29rem;
+                    }
+                    .checkFundName{
+                        height:.45rem;
+                        font-size:.32rem;
+                        font-weight:400;
+                        color:@272727;
+                        line-height:.45rem;
+                    }
+                }
+                .onright-left-two.fundListCheck{
+                    height:.37rem;
+                    font-size:.26rem;
+                    font-weight:400;
+                    color:@9B9B9B;
+                    line-height:.37rem;
+                    // margin-bottom: .36rem;
+                }
 
                 &.pleaseSelect{
                     top: 50%;
@@ -317,8 +386,8 @@ body{
                 width: .44rem;
                 height: .44rem;
                 color: @9B9B9B;
-                position: absolute;
-                right: .6rem;
+                float: right;
+                margin-right: .3rem;
                 display:none;
             }
             .iimg{
@@ -326,8 +395,8 @@ body{
                 width: .44rem;
                 height: .44rem;
                 color: @9B9B9B;
-                position: absolute;
-                right: .6rem;
+                float: right;
+                margin-right: .3rem;
             }
             
         }
@@ -364,19 +433,21 @@ body{
                 }
                 a{
                     color: @364D97 !important;
+                    span{
+                        vertical-align: middle;
+                    }
                 }
             }
         }
         
     }
     .btn_box{
-        position: fixed;
-        bottom: .34rem;
-        left: .3rem;
-        right: .3rem;
+        position: relative;
+        padding: 0 .3rem;
         text-align: center;
         letter-spacing: 2px;
-        margin: 0 auto;
+        margin: .1rem auto;
+        bottom: -.5rem;
         .btn{
             width: 100%;
             color: @c005;
@@ -443,67 +514,123 @@ body{
                 font-weight:400;
             }
         }
-        .popup-ul{
+        .popup-ul-box{
             overflow-y: scroll;
             height: 80%;
-            .popup-li{
-                display: flex;
-                border-bottom: 1px solid @E7E9ED;
-                .bank-img{
-                    width: .7rem;
-                    height: .7rem;
-                    margin: .33rem .2rem .33rem .3rem;
+            .popup-ul{
+                .popup-li{
+                    display: flex;
+                    border-bottom: 1px solid @E7E9ED;
+                    .bank-img{
+                        width: .7rem;
+                        height: .7rem;
+                        margin: .33rem .2rem .33rem .3rem;
+                    }
+                    .div{
+                        width: 72%;
+                        .bank-name{
+                            height:.45rem;
+                            font-size:.32rem;
+                            font-weight:400;
+                            color:@272727;
+                            line-height:.45rem;
+                            margin-top: .24rem;
+                            margin-bottom: .1rem;
+                        }
+                        .bank-pay{
+                            height:.33rem;
+                            font-size:.24rem;
+                            font-weight:400;
+                            color:@9B9B9B;
+                            line-height:.33rem;
+                            margin-bottom: .23rem;
+                        }
+                    }
+                    
+                    .true{
+                        width: .46rem;
+                        height: .46rem;
+                        margin-top: .45rem;
+                        display: none;
+                    }
                 }
-                .div{
-                    width: 72%;
-                    .bank-name{
+                .popup-last{
+                    display: flex;
+                    border-bottom: 1px solid @E7E9ED;
+                    .last-img{
+                        width:.54rem;
+                        height:.54rem;
+                        margin: .45rem .28rem .47rem .38rem;
+                    }
+                    .last-title{
                         height:.45rem;
                         font-size:.32rem;
                         font-weight:400;
                         color:@272727;
                         line-height:.45rem;
-                        margin-top: .24rem;
-                        margin-bottom: .1rem;
+                        margin: .46rem 3.46rem .45rem 0;
                     }
-                    .bank-pay{
-                        height:.33rem;
-                        font-size:.24rem;
-                        font-weight:400;
-                        color:@9B9B9B;
-                        line-height:.33rem;
-                        margin-bottom: .23rem;
+                    .iconone{
+                        color: @9B9B9B;
+                        margin-top: .53rem;
                     }
                 }
-                
-                .true{
-                    width: .46rem;
-                    height: .46rem;
-                    margin-top: .45rem;
-                    display: none;
-                }
             }
-            .popup-last{
-                display: flex;
-                border-bottom: 1px solid @E7E9ED;
-                .last-img{
-                    width:.54rem;
-                    height:.54rem;
-                    margin: .45rem .28rem .47rem .38rem;
+            .popup-ul2{
+                .popup-li{
+                    display: flex;
+                    border-bottom: 1px solid @E7E9ED;
+                    padding-left:.38rem;
+                    .bank-img{
+                        width: .7rem;
+                        height: .7rem;
+                        margin: .33rem .2rem .33rem .3rem;
+                    }
+                    .div{
+                        width: 72%;
+                        .bank-fundName{
+                            height:.45rem;
+                            font-size:.32rem;
+                            font-weight:400;
+                            color:#1b1bde;
+                            line-height:.45rem;
+                            margin-top: .24rem;
+                            margin-bottom: .1rem;
+                        }
+                        .bank-name{
+                            height:.33rem;
+                            font-size:.24rem;
+                            font-weight:400;
+                            color:@272727;
+                            line-height:.33rem;
+                            margin-top: .24rem;
+                            margin-bottom: .1rem;
+                        }
+                        .enableAmount{
+                            height:.33rem;
+                            font-size:.24rem;
+                            font-weight:400;
+                            color:@9B9B9B;
+                            line-height:.33rem;
+                            margin-top: .24rem;
+                            margin-bottom: .1rem;
+                            .title{
+                                color:@9B9B9B;
+                            }
+                        }
+                    }
+                    .true{
+                        width: .46rem;
+                        height: .46rem;
+                        margin-top: .45rem;
+                        display: none;
+                        margin-left:1.08rem;
+                    }
                 }
-                .last-title{
-                    height:.45rem;
-                    font-size:.32rem;
-                    font-weight:400;
-                    color:@272727;
-                    line-height:.45rem;
-                    margin: .46rem 3.46rem .45rem 0;
-                }
-                .iconone{
-                    color: @9B9B9B;
-                    margin-top: .53rem;
-                }
+               
             }
-        } 
+        }
+         
         
     }
 }
@@ -570,4 +697,8 @@ body{
         
     }
     
+}
+.elasticContent{
+    height: 6rem;
+    overflow: scroll;
 }

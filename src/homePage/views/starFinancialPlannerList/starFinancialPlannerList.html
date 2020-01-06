@@ -11,8 +11,8 @@
      <link rel="stylesheet" href="/homePage/static/css/starFinancialPlannerList.css">
      <link rel="stylesheet" href="/homePage/static/css/mui.indexedlist.css">
      <title>明星理财师理财师列表</title>
-     <script src="/include/js/adaptation_750ui.js"></script>
-     <script src="/include/js/moment.js"></script>
+     <!-- <script src="/allServerResources/include/js//adaptation_750ui.js"></script> -->
+     <!-- <script src="/allServerResources/include/js//moment.js"></script> -->
  </head>
  
  <body>
@@ -24,7 +24,7 @@
     <div id="activityDataBox">
         <!-- 活动列表搜索开始 -->
         <section id="activitySearch">
-            <a href="javascript:;" id="goBack">
+            <a href="javascript:void(0);" id="goBack">
                 <i class="iconfont">&#xe634;</i>
             </a>
             <!-- 搜索 -->
@@ -34,6 +34,9 @@
             <div class="activityCityBox">
                 <span id="locationCity" data-code="120000" data-parentId="120000"></span>
                 <i class="iconfont">&#xe609;</i>
+            </div>
+            <div class="Cutof">
+                <span>取消</span>
             </div>
         </section>
         <!-- 活动列表搜索结束 -->
@@ -77,13 +80,12 @@
         <!-- 活动列表没有数据结束 -->
     </div>
     <!-- 加载中loading -->
-    @@include('@pathCommonViews/loading/listLoading.html')
+    @@include('@pathCommonCom/loading/listLoading.html')
     @@include('@pathCommonViews/starFinancialPlannerList.html')
     @@include('@pathCommonViews/cityList.html')
     @@include('@pathInclude/views/footer.html')
    
-    <script src="/include/js/iscroll.js"></script>
-    <script src="/include/js/mui.indexedlist.js"></script>
+    <script src="/allServerResources/include/js/vendor/muiIndexedList/mui.indexedlist.js"></script>
     <script src="/homePage/static/js/starFinancialPlannerList.js"></script>
 
  </body>

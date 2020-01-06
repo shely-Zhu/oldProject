@@ -3,17 +3,21 @@
 @import url("@pathCommonLessCom/alertBox.less");
 @import url("@pathCommonLessCom/headBarConfig.less");
 body{
-    max-width: 7.5rem;
+    height: 100%;
+    width: 100%;
+    background: @F7FAFD;
 }
 #membershipDetailsBox{
-    width: 7.5rem;
+    width: 100%;
     min-height: 3.2rem;
     position: relative;
     .membershipDetailsSilderBgBox{
         position: absolute;
-        width: 7.5rem;
+        width: 100%;
         height: 3.2rem;
-        background-image: linear-gradient(160deg, @33457e 30%,@06174d 70%);
+        // background-image: linear-gradient(160deg, @33457e 30%,@06174d 70%);
+        background: url("/mine/static/img/xiangqing_head_bg@2x.png") no-repeat center center;
+        background-size: 100% 100%;
         left: 0;
         top:0;
         border-radius:0 0 .3rem .3rem;
@@ -52,22 +56,26 @@ body{
         overflow: hidden;
         
         .membershipDetailsContentBox{
-            width: 6.7rem;
-            background: @c005;
+            width: 90%;
+            background: url("/mine/static/img/quanyi_card_bg@2x.png");
+            background-size: 100% 100%;
             box-shadow: 0 .02rem .26rem 0 rgba(221,221,221,0.50);
             border-radius: .2rem;
             min-height: 7.84rem;
             margin: .7rem auto .92rem;
-            padding: .2rem .35rem .6rem .35rem;
+            padding: .7rem .35rem .6rem .35rem;
             h2{
-                font-family: PingFangSC-Semibold;
-                font-size: .44rem;
-                color: @272727;
-                letter-spacing: 0;
-                background: linear-gradient(to right, @683c0b, @ab7c4b);
-                -webkit-background-clip:text;
-                color: transparent;
+                display: inline;
                 margin: .4rem 0;
+                font-size: 0.44rem;
+                line-height: 0.8rem;
+                margin-top: 0.1rem;
+                color:rgba(39,39,39,1);
+                background:linear-gradient(239deg, rgba(187,142,95,1) 0%, rgba(108,69,23,1) 100%);
+                -webkit-background-clip:text;
+                -webkit-text-fill-color:transparent;
+                font-family:PingFangSC-Semibold,PingFang SC;
+                font-weight:bold;
             }
             p{
                 font-family: PingFangSC-Regular;
@@ -75,7 +83,7 @@ body{
                 color: @272727;
                 text-align: justify;
                 line-height: .5rem;
-                margin-bottom: .5rem;
+                margin: .4rem 0 .5rem 0;
             }
             span{
                 &.title{
@@ -137,7 +145,10 @@ body{
     height: 1.4rem;
 }
 .show-swiper .swiper-slide.swiper-slide-active .goods{
-	transform: scale(1.4);
+    transform: scale(1.4);
+    p{
+        font-weight: bold;
+    }
 }
 .show-swiper .swiper-slide .goods {
 	width: 1.4rem;
@@ -146,7 +157,9 @@ body{
 	text-align: center;
 	color: @c009;
     font-size: .24rem;
-    background-image: linear-gradient(-220deg, @F7EFDA 0%, @F3E7CD 100%);
+    // background-image: linear-gradient(-220deg, @F7EFDA 0%, @F3E7CD 100%);
+    background: url("/mine/static/img/quanyi_icon_big@2x.png") no-repeat center center;
+    background-size:100% 100%;
     border-radius: .2rem;
     position: relative;
     text-align: center;
@@ -166,7 +179,8 @@ body{
         font-size: .24rem;
         color: @6C4517;
         letter-spacing: 0;
-        line-height: 2rem;
+        line-height: 2.1rem;
+        // font-weight: 550;
     }
 }
 

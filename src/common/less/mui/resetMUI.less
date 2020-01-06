@@ -4,7 +4,8 @@
 
 @import url("../reset.less");
 @import url("../color.less");
-@import url("../../components/tipAction/tipAction.less");
+
+
 
 //按钮
 .mui-btn{
@@ -21,22 +22,22 @@ input[type],textarea{
     border-radius: 0;
     padding: 0;
     color: @c002;
-    height: 0.8rem;
+    height: 4rem;
 }
 textarea{
-    height:0.4rem;
-}
-.mui-input-row
-    .mui-input-clear~.mui-icon-clear,
-    .mui-input-password~.mui-icon-eye,
+    height:2rem;
+}            
+.mui-input-row 
+    .mui-input-clear~.mui-icon-clear, 
+    .mui-input-password~.mui-icon-eye, 
     .mui-input-speech~.mui-icon-speech{
         color: inherit;
-        width: 0.32rem;
-        margin-right: 0.24rem;
+        width: 1.6rem;
+        margin-right: 1.2rem;
         line-height: 100%;
         font-weight: normal;
         height: 100%;
-        margin-top: 0.24rem;
+        margin-top: 1.2rem;
        // position: relative;
         top: 0;
         right: 0;
@@ -48,24 +49,24 @@ textarea{
     transform: none;
 }
 
-.mui-btn.mui-active:enabled,
-.mui-btn:enabled:active,
-button.mui-active:enabled,
-button:enabled:active,
-input[type=button].mui-active:enabled,
-input[type=button]:enabled:active,
-input[type=reset].mui-active:enabled,
-input[type=reset]:enabled:active,
-input[type=submit].mui-active:enabled,
+.mui-btn.mui-active:enabled, 
+.mui-btn:enabled:active, 
+button.mui-active:enabled, 
+button:enabled:active, 
+input[type=button].mui-active:enabled, 
+input[type=button]:enabled:active, 
+input[type=reset].mui-active:enabled, 
+input[type=reset]:enabled:active, 
+input[type=submit].mui-active:enabled, 
 input[type=submit]:enabled:active{
     color: @c005;
-    background-color: @c006;
+    background-color: @c006; 
 }
 
-.mui-btn,
-button,
-input[type=button],
-input[type=reset],
+.mui-btn, 
+button, 
+input[type=button], 
+input[type=reset], 
 input[type=submit]{
     -webkit-transition: none;
     transition: none;
@@ -76,13 +77,13 @@ input[type=submit]{
     background: transparent;
 }
 
-.mui-card .mui-table-view .mui-table-view-cell:last-child,
-.mui-card .mui-table-view .mui-table-view-divider:last-child{
+.mui-card .mui-table-view .mui-table-view-cell:last-child, 
+.mui-card .mui-table-view .mui-table-view-divider:last-child{ 
     border-bottom-right-radius: 0;
     border-bottom-left-radius: 0;
-}
+} 
 
-.mui-card .mui-table-view .mui-table-view-cell:first-child,
+.mui-card .mui-table-view .mui-table-view-cell:first-child, 
 .mui-card .mui-table-view .mui-table-view-divider:first-child{
     border-top-left-radius: 0;
     border-top-right-radius: 0;
@@ -92,14 +93,14 @@ input[type=submit]{
     color: @c006;
 }
 
-.mui-btn-blue.mui-active:enabled,
-.mui-btn-blue:enabled:active,
-.mui-btn-primary.mui-active:enabled,
-.mui-btn-primary:enabled:active,
-input[type=submit].mui-active:enabled,
+.mui-btn-blue.mui-active:enabled, 
+.mui-btn-blue:enabled:active, 
+.mui-btn-primary.mui-active:enabled, 
+.mui-btn-primary:enabled:active, 
+input[type=submit].mui-active:enabled, 
 input[type=submit]:enabled:active{
     border: 0;
-}
+} 
 
 .mui-input-row label{
     font-family: "Microsoft YaHei", Arial, "Helvetica";
@@ -111,8 +112,8 @@ input[type=submit]:enabled:active{
     color: @c006;
 }
 .mui-bar-tab .mui-tab-item .mui-icon{
-    font-size: 0.48rem;
-    margin-bottom: 0.1rem;
+    font-size: 2.4rem;
+    margin-bottom: 0.5rem;
 }
 .mui-bar-tab .mui-tab-item{
     color: @c005;
@@ -123,49 +124,49 @@ input[type=submit]:enabled:active{
 //开关
 // .mui-switch.mui-active{
 //     background-color: @c013;
-//     border: 0.02rem solid  @c013;
+//     border: 0.1rem solid  @c013;
 // }
 
 
 //选项卡 公募/私募
 .publicOrPrivate{
 
-    padding: 0.18rem 0;
+    padding: 0.9rem 0;
     background: @c002;
-
+    
     .mui-segmented-control{
-        //width: 2.4rem;
-        //height: 0.5rem;
-        //line-height: 0.5rem;
+        //width: 12rem;
+        //height: 2.5rem;
+        //line-height: 2.5rem;
         border: none;
-        border-radius: 0.5rem;
+        border-radius: 2.5rem;
         margin: 0 auto;
         width: auto;
 
-
+        
         .publicOrPrivateBtn{
             color: @c005;
-            border: 0.02rem solid @c005;
-            width: 1.2rem;
+            border: 0.1rem solid @c005;
+            width: 6rem;
             line-height: 2;
             text-align: center;
             display: table-cell;
-
+            
             &:first-child{
-                border-bottom-left-radius: 0.5rem;
-                border-top-left-radius: 0.5rem;
-                border: 0.02rem solid @c005;
+                border-bottom-left-radius: 2.5rem;
+                border-top-left-radius: 2.5rem;
+                border: 0.1rem solid @c005;
             }
             &:last-child{
-                border-bottom-right-radius: 0.5rem;
-                border-top-right-radius: 0.5rem;
-                border: 0.02rem solid @c005;
+                border-bottom-right-radius: 2.5rem;
+                border-top-right-radius: 2.5rem;
+                border: 0.1rem solid @c005;
                 //border-left: none;
             }
 
             &.mui-active{
                 background-color: @c006;
-                border: 0.02rem solid @c006;
+                border: 0.1rem solid @c006;
             }
         }
     }
@@ -227,7 +228,7 @@ input[type=submit]:enabled:active{
         font-family: iconfont;
 
        color: @c006;
-       font-size: 0.4rem;
+       font-size: 2rem;
        transform-origin: 50%;
        vertical-align: middle;
        display: block;
@@ -249,15 +250,3 @@ input[type=submit]:enabled:active{
 @import url("../components/checkbox.less");
 
 @import url("../components/privateOrPublicTwo.less");
-
-/* mui下拉刷新有一条灰线重置掉 */
-.mui-table-view{
-    &:before{
-        height:0;
-    }
-
-    &:after{
-        height:0;
-    }
-
-}

@@ -12,6 +12,7 @@
 </head>
 
 <body>
+	@@include('@pathCommonCom/loading/listLoading.html')
 	<div class="transactionRules ">
 		@@include('@pathCommonViews/headBarConfig.html',{"bgColors":"#2C3E77,#273971","showType":"0","pathName":"交易规则"})
 		<div class="tplBox"></div>
@@ -120,7 +121,7 @@
 					{{#each fundRedeemFeeRate.detailList}}
 				<p class="tradeRateBuy">
 					<!-- <span>{{minValue}}日&lt;持有时长&lt;{{maxValue}}日万元</span> -->
-					<span>{{conditions}}</span>
+					<span class="label-left">{{conditions}}</span>
 
 					{{#if status}}
 					<span class="fontWeight">{{fundFeeRate}}</span>
@@ -132,9 +133,9 @@
 			</li>
 			<li class="tradeRate">
 				<p class="tradeRateTitle">管理费率</p>
-				<p class="tradeRateBuy"><span>管理费率</span><span class="fontWeight">{{managementFee}}(每年)</span></p>
-				<p class="tradeRateBuy"><span>托管费率</span><span class="fontWeight">{{custodyFee}}(每年)</span></p>
-				<p class="tradeRateBuy"><span>销售服务费率</span><span class="fontWeight">{{salesFee}}(每年)</span></p>
+				<p class="tradeRateBuy"><span class="label-left">管理费率</span><span class="fontWeight">{{managementFee}}(每年)</span></p>
+				<p class="tradeRateBuy"><span class="label-left">托管费率</span><span class="fontWeight">{{custodyFee}}(每年)</span></p>
+				<p class="tradeRateBuy"><span class="label-left">销售服务费率</span><span class="fontWeight">{{salesFee}}(每年)</span></p>
 			</li>
 		</ul>
 	</div>

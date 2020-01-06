@@ -14,7 +14,7 @@ var Mock = require('mockjs');
 
 //1. 接口数据
 var data = Mock.mock({
-    "status": "0000",
+    "status": "1000",
     "msg": "处理成功！",
     "data": {
         "fundCode": "", //基金代码

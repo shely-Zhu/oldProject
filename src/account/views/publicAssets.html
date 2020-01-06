@@ -12,10 +12,7 @@
 </head>
 
 <body>
-    <div class="trade_list">
-        交易记录
-    </div>
-    @@include('@pathCommonViews/headBarConfig.html',{"pathName":"自选公募","bgColors":"#475A95,#475A95","showType":"1"})
+    @@include('@pathCommonViews/headBarConfig.html',{"pathName":"自选公募","bgColors":"#23356D,#23356D","showType":"1"})
     <section class="container">
         <div class="banner">
             <div class="bannerTop clearfix">
@@ -40,7 +37,7 @@
         </div>
         <div class="divider"></div>
         <div id="bank_screen" class="bank_screen">
-            <div class="bank_screen_name fl">全部</div>
+            <div class="bank_screen_name fl">全部持有</div>
             <span class="iconfont fl">&#xe609;</span>
         </div>
         <div id="bank_list" class="bank_list hide">
@@ -76,7 +73,7 @@
     <script id="dataLists" type="text/x-handlebars-template">
 		{{! 左侧页面列表}}
 		{{#each this}}
-        <div class="hold_item">
+        <div class="hold_item" data-fundCode={{fundCode}} data-tradeNo={{tradeNo}}>
             <div class="divider"></div>
             {{#if_than_0 inTransitNum}}
                 <div class="be_confirmed_tag fr">{{inTransitNum}}笔待确认交易</div>
@@ -99,7 +96,11 @@
                     <div class="position_tip" data-fundcode={{fundCode}}></div>
                     <div class="text_gray position_e">持有收益(元)</div>
                     <div class="text_black position_f show_item">{{totalMoneyMask}}</div>
-                    <div class="text_black position_g show_item">{{incomeMask}}</div>
+                    {{#if_than_0 income}}
+                        <div class="text_red position_g show_item">+{{incomeMask}}</div>
+                    {{else}}
+                        <div class="text_green position_g show_item">{{incomeMask}}</div>
+                    {{/if_than_0}}
                     {{#if_than_0 addupIncome}}
                         <div class="text_red position_h show_item">+{{addupIncomeMask}}</div>
                     {{else}}
@@ -109,8 +110,8 @@
                         <div class="tip">{{myTip}}</div>
                     {{/if}}
                     <!-- todo 需要判断字段来是否显示 -->
-                    {{#if isBuyFlag}}
-                        <div class="buy_btn fr blueBgButton">买入</div>
+                    {{#if !isCash}}
+                        <div class="buy_btn fr blueBgButton" fundCode = {{fundCode}}>买入</div>
                     {{/if}}
                     {{#if isRedemptionFlag}}
                         <div class="redeem_btn fr goldBorderButton">赎回</div>
@@ -142,7 +143,11 @@
                     <div class="position_tip" data-fundcode={{fundCode}}></div>
                     <div class="text_gray position_e">持有收益(元)</div>
                     <div class="text_black position_f show_item">{{totalMoneyMask}}</div>
-                    <div class="text_black position_g show_item">{{incomeMask}}</div>
+                    {{#if_than_0 income}}
+                        <div class="text_red position_g show_item">+{{incomeMask}}</div>
+                    {{else}}
+                        <div class="text_green position_g show_item">{{incomeMask}}</div>
+                    {{/if_than_0}}
                     {{#if_than_0 holdIncome}}
                         <div class="text_red position_h show_item">+{{holdIncomeMask}}</div>
                     {{else}}
@@ -150,10 +155,10 @@
                     {{/if_than_0}}
                     <!-- todo 需要判断字段来是否显示 -->
                     {{#if isBuyFlag}}
-                        <div class="buy_btn fr blueBgButton">买入</div>
+                        <div class="buy_btn fr blueBgButton" fundCode={{fundCode}}>转入</div>
                     {{/if}}
                     {{#if isRedemptionFlag}}
-                        <div class="redeem_btn fr goldBorderButton">赎回</div>
+                        <div class="redeem_btn fr goldBorderButton">转出</div>
                     {{/if}}
                 </div>
             </div>
@@ -166,7 +171,7 @@
     <script id="bankLists" type="text/x-handlebars-template">
         {{! 左侧页面列表}}
 		{{#each this}}
-        <div class="bank_screen bank_item" bankAccount='{{bankAccount}}'>
+        <div class="bank_screen bank_item" bankAccount='{{bankAccountSecret}}'>
             <div class="bank_screen_name fl">{{bankName}}{{get_last_4_value bankAccountMask}}</div>
             <span class="iconfont fr hide">&#xe626;</span>
         </div>

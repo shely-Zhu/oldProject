@@ -15,7 +15,8 @@
 
 //回到顶部的样式
 @import url("@pathCommonLessCom/goTopMui.less");
-@import url("@pathCommonLess/components/elasticLayerTypeFive.less");
+//@import url("@pathCommonLess/components/elasticLayerTypeFive.less");
+@import url("@pathCommonCom/elasticLayer/elasticLayer/elasticLayer.less");
 @import url("@pathCommonLessCom/headBarConfig.less");
 @import url("@pathCommonCom/noData/noData.less");
 @import url("@pathCommonLessCom/payPassword.less");
@@ -34,6 +35,13 @@ html {
 .text_red {
     color: @F52323;
 }
+.colorGray {
+    color: @9B9B9B;
+    font-size: .32rem;
+}
+.againEnter {
+    z-index: 99999;
+}
 
 .cancel_order {
     //撤单按钮
@@ -44,6 +52,9 @@ html {
     color: @C4925E;
     z-index: 999;
 }
+.html {
+    background-color: @F7FAFD;
+}
 .container {
     background-color: @FFFFFF;
     .header {
@@ -53,11 +64,14 @@ html {
         border-bottom: 0.01rem solid @F7FAFD;
         text-align: center;
         .amount_area {
-            margin: 0.9rem auto 0;
+            margin: 0.8rem auto 0;
             color: #0E246C;
             .amount {
                 font-size: 0.68rem;
                 font-weight: bold;
+                background: linear-gradient(to right, @6C83C9, @0E246C);
+                -webkit-background-clip: text;
+                color: transparent;
             }
             .yuan {
                 font-size: 0.32rem;
@@ -74,6 +88,9 @@ html {
             font-size: 0.28rem;
             color: #4A4A4A;
         }
+    }
+    .buy_confirm_info,.redeem_confirm_info{
+        margin-bottom: .98rem;//防止确认时间看不到。
     }
     .trade_status_area{
         width: 100%;
@@ -123,6 +140,7 @@ html {
         line-height: 0.88rem;
         color: @272727;
         font-size: 0.28rem;
+        font-weight: 600;
     }
     .item {
         height: 1rem;
@@ -141,7 +159,12 @@ html {
         height: .27rem;
         margin: .36rem .18rem 0 0;
     }
-    .buy_info .pay_mode {
+    .divider {
+        height: 0.3rem;
+        width: 100%;
+        background-color: @F7FAFD;
+    }
+    .pay_mode {
         background-color: @EDF1FF;
         margin: .32rem 0 0 .18rem;
         width: 1.06rem;
@@ -150,11 +173,6 @@ html {
         text-align: center;
         color: @364D97;
         font-size: .24rem;
-    }
-    .divider {
-        height: 0.3rem;
-        width: 100%;
-        background-color: @F7FAFD;
     }
 
 

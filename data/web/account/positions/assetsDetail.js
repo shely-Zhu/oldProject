@@ -13,7 +13,7 @@ var data = Mock.mock({
     "code": "CS0000", 
     "msg": "处理成功！", 
     "data": {
-        "projectName": "恒天问津1号", //项目名称
+        "projectName": "恒天问津1号恒天问津1号恒天问津1号恒天恒天问津1号恒天问津1号恒天问津1号恒天", //项目名称
         "sevenYearYield":"4", //七日年化收益率
         "sevenYearYieldUpdateDate":"2019.33", //七日年化收益率更新时间 mm.dd
         "capitalisation":"100.00", //当前市值
@@ -42,7 +42,7 @@ var data = Mock.mock({
         "redemptionOpenFrequency":"132%",//赎回开放频率
         "tradeRecordFlag":"1",//是否有交易明细(0否1是)
         "incomeAssignFlag":"1",//是否有收益分配明细(0否1是)
-        "fundConfirmDealFalg":"0",//是否有基金确认书(0否1是)
+        "fundConfirmDealFalg":"1",//是否有基金确认书(0否1是)
         "ecFileName":"啦啦啦啦啦啦",//电子确认单名称(基金确认单)
         "ecFileUrl":"546545312123153455",//电子确认单文件路径
         "redemptionOpenFrequency": "小叮当小叮当小叮当" // 赎回开放指引

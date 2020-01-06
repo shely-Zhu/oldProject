@@ -6,33 +6,27 @@
  *  @description: js可以更换版本，但是html是分享出去的链接，不能变;
  *                 关闭弹层按钮，fixed定位在ios，app中会随着屏幕滚动，所以提出来
  * 
- * @Last Modified by:   songxiaoyu
- * @Last Modified time: 2018-07-30 15:38:48
+ * @Last Modified by: sunfuping
+ * @Last Modified time: 2019-12-30 19:13:34
  * @description: 推荐有礼大改版
  */
 
 
 
-// require('../../../include/js/vendor/config.js');
+require('../../../include/js/vendor/config.js');
 
-// //zepto模块 
-// require('../../../include/js/vendor/zepto/callback.js');
-// require('../../../include/js/vendor/zepto/deferred.js');
-// require('../../../include/js/vendor/mui/mui.picker.min.js');
+//zepto模块 
+require('../../../include/js/vendor/zepto/callback.js');
+require('../../../include/js/vendor/zepto/deferred.js');
+require('../../../include/js/vendor/mui/mui.picker.min.js');
 
-// require('../../../common/js/components/utils.js');
-// require('../../../common/js/ajaxLoading.js');
-// require('../../../common/js/components/elasticLayerTypeTwo.js');
-require('@pathIncludJs/vendor/mui/mui.picker.min.js');
-//zepto模块--callback
-require('@pathIncludJs/vendor/zepto/callback.js');
-//zepto模块--deferred
-require('@pathIncludJs/vendor/zepto/deferred.js');
-require('@pathCommonJs/ajaxLoading.js');
-require('@pathCommonBase/base.js');
+require('../../../common/js/components/utils.js');
+require('../../../common/js/ajaxLoading.js');
+require('../../../common/js/components/elasticLayerTypeTwo.js');
+
 var tipAction = require('../../../common/js/components/tipAction.js');
 var popPicker = require('../../../common/js/components/popPicker.js');
-var generateTemplate = require('@pathCommonJsComBus/generateTemplate.js');
+
 $(function() {
     var recommend = {
         getElements: {
@@ -41,10 +35,6 @@ $(function() {
             manager_show_wrap: $('.manager_show_wrap'), // 唯一理财师展示区域
             qrcode_wrap: $('.qrcode_wrap'), // 二维码区域
             inviting_friend_wrap: $('.inviting_friend_wrap'), // 邀请好友区域
-            recommend_lcs_text: $('.recommendLcsText'), // 邀请好友区域
-            popupUl: $('.popup-ul'), // 银行卡模板容器
-			bankListTemplate: $('#bankList-template'), //银行卡模板
-
         },
         setting: {
             ajaxArr: [], // 请求ajax的数组
@@ -58,10 +48,13 @@ $(function() {
         list: [], // 存放接口里获取的理财师数据
         phone: '', // 存放用户信息接口里取出来的脱敏手机号
         isWeiXin: true, // 标志是否在微信内打开，默认为true--是
+        customerNo:'',
         // 各图片的标志位类型
         // 按顺序为：老带新首页，老带新积分有礼，老带新规则说明，老带新二维码
         init: function() {
             var that = this;
+
+            that.getUserInfor();
 
             // 页面所处位置判断，逻辑处理
             that.judgePageLocation();
@@ -74,6 +67,28 @@ $(function() {
 
             //绑定事件
             that.events();
+        },
+        // 先请求接口，获取客户比那好
+        getUserInfor:function(){
+            var that = this;
+            var userObj = [{
+                url: site_url.queryUserBaseInfo_api,
+                data: {
+                    hmac: "", //预留的加密信息     
+                    params: { //请求的参数信息
+                    }
+                },
+                async: false,
+                needLogin: true,
+                callbackDone: function(json) {
+                    
+                    var jsonData = json.data;
+                    that.customerNo = jsonData.customerNo;
+                },
+                 
+            }]
+            $.ajaxLoading(userObj);
+
         },
         /**
          * [judgePageLocation 页面所处位置判断--微信，app中对应逻辑处理]
@@ -96,7 +111,7 @@ $(function() {
             if (window.currentIsApp) {
                 $('body').append('<iframe src="ldxshare://" id="ldx_share" style="position:absolute;z-index:1000;height:0;width:0;"></iframe>');
                 // 二维码下的提示文案，只有普通浏览器显示，微信和app内都不显示
-                $('.qrcode_wrap .code_tip').hide();;
+                $('.qrcode_wrap .code_tip').hide();
             }
         },
         // 是否实名认证判断
@@ -171,18 +186,18 @@ $(function() {
                     that.setting.weixinConf = Object.assign(that.setting.weixinConf, Object(data));
                     // 确保3个接口（鉴权，分享内容，分享链接）都请求成功，再设置分享链接
                     that.asyncAll();
-                }, function() {}, function() {}, true)
+                }, function() {}, function(){}, true)
             }
 
             // 获取理财师的接口
             that.generateAjaxObj(site_url.custBro_api, custBroData, function(data) {
                 console.log('获取理财师的接口callback')
-                    // 根据理财师处理页面逻辑
+                // 根据理财师处理页面逻辑
                 that.dealManagerLogic(data);
             }, function() {
                 //设置立即邀请好友的按钮状态为不可点
                 $('.btnButton .txt').addClass('disable').attr('disabled', 'disabled');
-            }, function() {
+            },function(){
                 // 没有理财师，生成包含客户信息的二维码
                 // 同步请求加密接口，拿到加密信息,通知app,生成二维码
                 that.generateShareLink();
@@ -195,7 +210,7 @@ $(function() {
                     $('.rule_des_wrap').show();
                     $('.rule_des_cont').html(data.pageList[0].content);
                 }
-            }, function() {}, function() {}, true)
+            }, function() {},function(){}, true)
 
             that.getData();
         },
@@ -205,19 +220,28 @@ $(function() {
                 shareUrl = '', // 分享出去链接
                 existMain = data.existMain,
                 advisor = data.advisor;
-            if (existMain == 1 && advisor.length > 1) {
-                $('.recommendLcsText').html("您的理财师：")
-                //无专属且理财师多于1位默认展示一个
-                $('.manager_show').html(advisor[0].codeName + advisor[0].empNo)
-                that.generateShareLink(advisor[0].empNo);
+                
+            if (advisor.length > 0) {
+                // if(existMain == 0 ){//感觉判断有问题默认展示一个的话，展示就可以了
+                    $('.recommendLcsText').html("您的理财师：")
+                    //无专属且理财师多于1位默认展示一个
+                    $('.manager_show').html(advisor[0].codeName + advisor[0].empNo)
+                    that.generateShareLink(advisor[0].empNo);
+                // }
                 that.list=advisor
-                debugger
+                // debugger
                 generateTemplate(advisor,that.getElements.popupUl, that.getElements.bankListTemplate,true);
-                $(".popup").show();
-            } else {
+                $('.recommendLcs').css('pointer-events','')
+                $('.choosePlanner').show()
+                $('.choose').show()
+                // $(".popup").show();
+            }else if( advisor.length == 0){
+                $('.recommendLcs').html('')
+                $('.choosePlanner').hide()
+            }else{
                 // 有专属理财师或者只有一位普通理财师
-                $('.recommendLcsText').html("您的理财师：")
-                $('.manager_show').html(advisor[0].codeName + advisor[0].empNo)
+                $('.manager_show_wrap .manager_show').html(advisor[0].codeName + advisor[0].empNo)
+                that.getElements.manager_show_wrap.show();
                 that.generateShareLink(advisor[0].empNo);
             }
         },
@@ -249,26 +273,29 @@ $(function() {
                     } else {
                         // 已实名认证
                         aesEncrypt = json.data.aesEncrypt;
-
                         //拼分享出去的链接
-                        shareUrl = site_url.newRecommend_url + '?url=' + aesEncrypt;
+                        
+                        // shareUrl = 'https://wx.chtwm.com/api/brand/index.html?activityId=pWhA5xJTKF4Zfst%2B9ycHqQ%3D%3D&channel=3&shareCustomerNo=' + that.customerNo;
+                        shareUrl = site_url.marketCampaign_url + '&shareCustomerNo=' + that.customerNo + '&shareEmpCode=' + num;
 
                         // 生成二维码
                         that.generateQrcode(shareUrl)
-
-                        //如果是app--设置ldxShare的值--- 需要拼凑对应的链接
-                        if (window.currentIsApp) {
-                            $('#ldx_share').attr('src', 'ldxShare://' + shareUrl);
-                        }
 
                         //如果是微信内打开--处理微信分享
                         if (that.isWeiXin) {
                             var obj = { "shareUrl": shareUrl };
                             // 设置分享url
                             that.setting.weixinConf = Object.assign(that.setting.weixinConf, obj)
-                                // 确保3个接口（鉴权，分享内容，分享链接）都请求成功，再设置分享链接
+                            // 确保3个接口（鉴权，分享内容，分享链接）都请求成功，再设置分享链接
                             that.getElements.inviting_friend_wrap.show();
                             that.asyncAll();
+                        }
+
+                        //如果是app--设置ldxShare的值--- 需要拼凑对应的链接
+                        if (window.currentIsApp) {
+                            $('#ldx_share').attr('src', 'ldxShare://' + shareUrl);
+                            // ios里显示了邀请按钮，做下隐藏
+                            that.getElements.inviting_friend_wrap.hide();
                         }
                     }
                 },
@@ -412,20 +439,14 @@ $(function() {
             var that = this;
 
             //点击选择理财师
-            mui("body").on('tap', '.popup-li', function() {
-                // //出现选择器
-                // debugger
-                // popPicker(1, that.list, $('.mui-table-view a'));
-                console.log(that.list)
-            })
-            //点击取消选择
-            
-            mui("body").on('tap', '.cancel', function() {
-               $(".popup").hide();
+            mui("body").on('tap', '.mui-navigate-right', function() {
+                //出现选择器
+                popPicker(1, that.list, $('.mui-table-view a'));
             })
 
             //点击--生成专属二维码
             mui("body").on('tap', '.generate_btn', function() {
+
                 //判断理财师是否已选择 
                 if (!$('.mui-table-view .mui-navigate-right').hasClass('hasSelect') && that.list.length) {
                     tipAction('请选择您的理财师');
@@ -443,8 +464,8 @@ $(function() {
                 // jQuery("#code").qrcode.clear();
                 // 生成新的二维码
                 that.generateShareLink(num)
-                    // 二维码显示
-                    // that.getElements.qrcode_wrap.show();
+                // 二维码显示
+                // that.getElements.qrcode_wrap.show();
             })
 
             //点击隐藏弹层
@@ -499,8 +520,8 @@ $(function() {
                     tipAction(json.message);
                     callbackFail && callbackFail();
                 },
-                callbackNoData: function() {
-                    callbackNoData();
+                callbackNoData:function(){
+                    callbackNoData(); 
                 }
             });
         },

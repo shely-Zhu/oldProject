@@ -5,6 +5,7 @@
 
 @import url("@pathCommonLess/mui/resetMUI.less");
 @import url("@pathCommonLessCom/headBarConfig.less");
+@import url("@pathCommonCom/noData/noData.less");
 .mui-card{
 	padding: 0 0.3rem;
 	box-shadow: 0 0 0 0;
@@ -15,6 +16,7 @@
 }
 .reward{
 	.contentHeader{
+		display: none;
 		margin-top: 0.37rem;
 		font-size: 0.24rem;
 		color: @9B9B9B;
@@ -24,9 +26,12 @@
 			margin-right: 0.08rem;
 		}
 	}
-	.rewardWrapper{
+	.contentWrapper{
 		overflow:hidden;
 		height: 100%;
+		.mui-table-view-cell{
+			padding-top: 0;
+		}
 		.entity{
 			width: 100%;
 			height: 2.2rem;
@@ -67,6 +72,7 @@
 			font-size: 0.44rem;
 			line-height: 1;
 			color: @272727;
+			font-weight: 700;
 		}
 		.rewardTime{
 			margin-top: 0.19rem;
@@ -172,7 +178,8 @@
 		    	}
 		    	.firstli{
 					font-size: 0.46rem;
-					color: @94715A;
+					line-height: .46rem;
+					color: #3d2511;
 					margin-bottom:0.23rem;
 				}
 				.secondli{
@@ -190,17 +197,36 @@
 					}
 				}
 				.secondliNum{
-					margin-bottom:0.01rem;
+					margin-bottom:0.08rem;
+					background: rgba(255,250,239,0.4);
+					color:rgba(61,37,17,1);
+					// line-height: 0.58rem;
+					font-size:.26rem;
+				}
+				.secondliPwd{
+					background: rgba(255,250,239,0.4);
+					color:rgba(61,37,17,1);
+					// line-height: 0.58rem;
+					font-size:.26rem;
 				}
 				.thirdli{
 					margin-top:0.69rem;
+					p:first-child{
+						font-weight: 700;
+					}
 
 				}
 				.fourli{
 					margin-top:0.50rem;
+					p:first-child{
+						font-weight: 700;
+					}
 				}
 				.fiveli{
 					margin-top:0.72rem;
+					p:first-child{
+						font-weight: 700;
+					}
 				}
 		    }
 		}

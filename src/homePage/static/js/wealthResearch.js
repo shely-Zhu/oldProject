@@ -10,8 +10,9 @@ require('@pathCommonJs/ajaxLoading.js');
 // 切换
 require('@pathCommonJsCom/tabScroll.js');
 require('@pathCommonJsCom/goTopMui.js');
-require('@pathCommonJs/components/elasticLayer.js');
-require('@pathCommonJs/components/elasticLayerTypeFive.js');
+require('@pathCommonCom/elasticLayer/elasticLayer/elasticLayer.js');
+// require('@pathCommonJs/components/elasticLayer.js');
+// require('@pathCommonJs/components/elasticLayerTypeFive.js');
 var splitUrl = require('@pathCommonJs/components/splitUrl.js')();
 var alwaysAjax = require('@pathCommonJs/components/alwaysAjax.js');
 
@@ -196,7 +197,7 @@ $(function() {
             //无缝滚动
             setTimeout(function() {
                     //无缝滚动
-                    alwaysAjax('#' + w + ' .mui-table-view-cell', s)
+                    alwaysAjax($('#' + w + ' .mui-table-view-cell'), s)
                 }, 1000)
                 // mui('.mui-slider').slider().stopped = true;
         },
@@ -244,6 +245,7 @@ $(function() {
                 url: that.gV.siteUrlArr[that.gV.current_index], //调用第几个接口
                 data: that.gV.ajaxArr[that.gV.current_index], //传调用参数
                 needLogin: true,
+                needLoading: false,
                 callbackDone: function(json) {
                     console.log(json.data)
                     var jsonData = json.data.list,
@@ -380,8 +382,10 @@ $(function() {
                     t.endPullupToRefresh(false);
 
                     //没有数据
-                    $id.find('.mui-scroll .list').html(that.getElements.noData.clone(false)).addClass('noCon');
-                    $id.find('.noData').show();
+                    if(that.gV.ajaxArr[that.gV.current_index].pageCurrent == 1) {
+                        $id.find('.mui-scroll .list').html(that.getElements.noData.clone(false)).addClass('noCon');
+                        $id.find('.noData').show();
+                    }
 
                     setTimeout(function() {
                         that.getElements.listLoading.hide();

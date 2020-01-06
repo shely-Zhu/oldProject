@@ -1,6 +1,6 @@
 //ajax调用
 require('../../../common/js/components/utils.js');
-require('@pathCommonBase/base.js');
+
 //ajax调用
 require('../../../common/js/ajaxLoading.js');
 //zepto模块--callback

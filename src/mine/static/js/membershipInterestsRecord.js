@@ -6,8 +6,7 @@ require('@pathCommonJs/ajaxLoading.js');
 require('@pathCommonJs/components/elasticLayer.js');
 require('@pathCommonJs/components/elasticLayerTypeTwo.js');
 var generateTemplate = require('@pathCommonJsComBus/generateTemplate.js');
-//无缝滚动
-var alwaysAjax = require('@pathCommonJs/components/alwaysAjax.js'); 
+require('@pathCommonCom/pullRefresh/pullRefresh.js');
 
 $(function(){
     var regulatory = {
@@ -48,8 +47,47 @@ $(function(){
         //初始化mui的上拉加载
         initMui: function() {
             var that = this
-            
-            mui.init({
+            var height = windowHeight - $(".HeadBarConfigBox").height() - $(".bannerposi").height();
+            if (!$('.li').hasClass('setHeight')) {
+                $('.li').height(height).addClass('setHeight');
+            }
+            $.pullRefresh({
+                wrapper: $('.li'),
+                class: 'listItem',
+                template: that.$e.fundListTemp, 
+                pageSize: that.gV.pageSize,
+                callback: function(def, t){
+                    var obj = [{
+                        url: site_url.queryGrowthDetailList_api, //成长值流水
+                        data: {
+                            "pageNo": that.gV.pageNo,
+                            "pageSize": that.gV.pageSize,
+                        },                        
+                        needDataEmpty: false,
+                        callbackDone: function(json) {     
+                            var data = json.data.pageList;
+                            if(that.gV.pageNo == 1 && data.length == 0) {
+                                $(".li").css("display", "none")
+                                that.$e.noData.show()
+                            } else {
+                                def && def.resolve( data, that.gV.pageNo);
+                                that.gV.pageNo++;
+                            }
+                        },
+                        callbackNoData: function( json ){  
+                            if(that.gV.pageNo == 1) {
+                                $(".li").css("display", "none")
+                            }
+                            def && def.reject( json, that.gV.pageNo );
+                        },
+                        callbackFail: function(json) {
+                            def && def.reject( json, that.gV.pageNo );
+                        },
+                    }];
+                    $.ajaxLoading(obj); 
+                }
+            })
+            /*mui.init({
                 pullRefresh: {
                     container: '.content',
                     up: {
@@ -86,7 +124,7 @@ $(function(){
 
                 //为$id添加hasPullUp  class
                 $('.content').addClass('hasPullUp');
-            });
+            });*/
         },
         getDataNum:function () {
             var that = this;
@@ -119,7 +157,7 @@ $(function(){
 			$.ajaxLoading(obj);
         },
             //数据初始化
-		getData:function(t){
+		/*getData:function(t){
             
             var that = this
 
@@ -175,7 +213,7 @@ $(function(){
                         // 将列表插入到页面上
                         generateTemplate(dataList, that.$e.hotFundList, that.$e.fundListTemp);
                         //无缝滚动
-                        alwaysAjax('.li',".content",100);
+                        alwaysAjax($('.li'),".content",100);
                     }, 200)
 
                 },
@@ -188,24 +226,24 @@ $(function(){
                     that.$e.listLoading.hide();
                     that.$e.noData.show();
                     
-                },
+                }
             }]
             $.ajaxLoading(obj);
 
-        },
+        },*/
         events: function(targetUrl) {
 			var that = this;
 
 
 
 	         mui("body").on('mdClick','.posioneright', function(){
-
-                    window.location.href = site_url.articleTemplate_url+ '?articleBelong=9&applyType=0';
+                    // 13成长值规则说明
+                    window.location.href = site_url.articleTemplate_url+ '?articleBelong=13';
                 }, {
                     'htmdEvt': 'adolesceRecord_01'
                 });
             
-		},
+		}
     }
     //调用函数
 	regulatory.init();

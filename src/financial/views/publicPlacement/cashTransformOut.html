@@ -13,11 +13,12 @@
      <title>转出</title>
    
  </head>
- <body>   
+ <body>
+    @@include('@pathCommonCom/loading/listLoading.html')
      <section class="container">
         @@include('@pathCommonViews/headBarConfig.html',{"pathName":"转出"}) 
         <div class="br"></div>
-        <div class="title" id="transformProductName">现金宝产品1</div>
+        <div class="title" id="transformProductName"></div>
 
         <div class="mui-row tabWrapper">
         	<div class="mui-col-sm-6 mui-col-xs-6 tab" type="fast" >
@@ -50,10 +51,10 @@
 	                <div class="onright-left">
 	                    <div class="onright-left-one">
 	                        <img class="defaultBankImgUrl" src="/financial/static/img/account_icon_bank logo@2x.png" alt="">
-	                        <i class="defaultBankName">中国建设银行</i>
-	                        <span class="defaultBankCode">0563</span>
+	                        <i class="defaultBankName"></i>
+	                        <span class="defaultBankCode"></span>
 	                    </div>
-	                    <div class="onright-left-two">可赎回<span class="singleNum">5万</span></div>
+	                    <div class="onright-left-two"><span>可赎回</span><span class="singleNum"></span><span>元</span></div>
 	                </div>
 	                
 	            </div>
@@ -66,19 +67,19 @@
             </div>
             <div class="msecond">
             	<span class="msecond-one">￥</span>
-                <input class="transformInput" type="text">
+                <input class="transformInput" id="transformInput" type="number">
                 <img class="clearMoney" src="/financial/static/img/icon_delete@2x.png"  alt="">
                 <span class="button tranoutAllMoney">全部</span>
              </div>
              <div class="clearfix explain">
-             	<div class="left" type='fast'>
+             	<div class="left tranTime" type='fast'>
              		2小时内到账<span class="iconfont">&#xe635;</span>
                  </div>
-                 <div class="left" type='common'>
+                 <div class="left tranTime" type='common'>
                         预计1-2个工作日到账<span class="iconfont">&#xe635;</span>
                  </div>
              	<div class="right" htmdEvt="cashTransformOut_right">
-             		<span class="transformRule">现金宝产品1转出规则</span><span class="iconfont">&#xe635;</span>
+             		<span class="transformRule"></span><span class="iconfont">&#xe635;</span>
              	</div>
              </div>
          </div>
@@ -175,7 +176,7 @@
                     <div class="bank-name"><span>{{bankName}}</span><span>(</span><span>{{carNum}}</span><span>)</span></div>
                     <div class="bank-pay">可赎回<span class="availableShare">{{availableShare}}</span>元</div>
                 </div>
-                <img class="true" src={{checkStatu}} alt="">
+                <img class="true radioCheckItemImg" src="/common/img/account_icon_check@2x.png" alt="">
             </li> 
         {{/each}}
 </script>
@@ -184,12 +185,9 @@
 
      @@include('@pathCommonCom/elasticLayer/transOutRule/transOutRule.html')
  
-     <!-- 加载中loading -->
-     @@include('@pathCommonCom/loading/listLoading.html')
- 
      @@include('@pathInclude/views/footer.html')
 
-     @@include('../../../common/views/payPassword.html') 
+     @@include('@pathCommonViews/payPassword.html') 
      <script src="/financial/static/js/publicPlacement/cashTransformOut.js"></script>
  
  </body>

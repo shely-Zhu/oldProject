@@ -3,15 +3,11 @@
 * @author zhangyanping 2019-11-19
 */
 
-
-
 require('@pathCommonBase/base.js');
 require('@pathCommonJs/ajaxLoading.js');
 
 var splitUrl = require('@pathCommonJsCom/splitUrl.js')();
 var Base64 = require('@pathIncludJs/vendor/base64/base64.js');
-//黑色提示条的显示和隐藏
-var tipAction = require('@pathCommonJsCom/tipAction.js');
 
 var consultProduct = {
 	
@@ -27,7 +23,6 @@ var consultProduct = {
 			var empNo =  splitUrl['empNo']==undefined ? splitUrl['empNo'] :'';
 			var empName =  splitUrl['empName']==undefined ? splitUrl['empName'] :'';
 			var productName =  new Base64().decode(splitUrl['productName']) ? new Base64().decode(splitUrl['productName']) :'';
-
 			var obj = [{
 				
 				url: site_url.reportContactNow_api,
@@ -44,10 +39,7 @@ var consultProduct = {
 
 					window.location.href = new Base64().decode(splitUrl['backUrl']);
 				
-				},
-				callbackFail: function(json){
-					tipAction(json.message);
-				},
+				}
 						
 			}]
 			$.ajaxLoading(obj);
@@ -55,7 +47,7 @@ var consultProduct = {
 		},{
 			'htmdEvt': 'consultProduct_01'
 		})
-	},
+	}
 }
 
 consultProduct.init();

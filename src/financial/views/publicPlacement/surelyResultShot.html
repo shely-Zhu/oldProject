@@ -1,0 +1,136 @@
+<!-- 定投结果 
+ @author wangjiajia 2019-11-23
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	@@include('@pathInclude/views/meta.html') 
+	<link rel="stylesheet" href="/financial/static/css/publicPlacement/surelyResultShot.css">  
+	<title>定投结果</title>
+</head>
+<body>
+    @@include('@pathCommonCom/loading/listLoading.html')
+    @@include('@pathCommonViews/headBarConfig.html',{"bgColors":"#2C3E77,#273971","showType":"0","pathName":"定投结果"}) 
+    <div class="resultsWrap">
+      <div class="resultTop">
+        <div class="photo">
+            <img src="/common/img/pic_success@2x.png" alt="">
+        </div>
+        <div class="succedText"></div>
+        <div class="proessBox cashInto">
+            <div class="proess-img">
+                <div class="right-proess"></div>
+                <div class="proess-line"></div>        
+                <div class="wait-proess shareTimeP"></div>    <!-- 流程 -->
+                <div class="proess-line"></div>
+                <div class="wait-proess earningsTimeP"></div>     <!-- 流程 -->
+            </div>
+            <div class="proess-title">
+              <p class="applyTime time">
+                  <span class="laber-left">申请时间</span>
+                  <span class="laber-right"></span>
+              </p>
+              <p class="shareTime time">
+                  <span class="laber-left">开始计算收益</span>
+                  <span class="laber-right"></span>
+              </p>
+              <p class="earningsTime time">
+                  <span class="laber-left">第一笔收益到账</span>
+                  <span class="laber-right"></span>
+              </p>
+            </div>
+        </div>
+        <div class="proessBox cashOut">
+            <div class="proess-img">
+              <div class="right-proess"></div>
+              <div class="proess-line"></div>
+              <div class="wait-proess toTimeP"></div>
+              <div class="wait-proess toTimeP mt20"></div>
+            </div>
+            <div class="proess-title">
+              <p class="applyTime time">
+                  <span class="laber-left">申请时间</span>
+                  <span class="laber-right"></span>
+              </p>
+              <p class="toTime time">
+                  <span class="laber-left">首次扣款日期</span>
+                  <span class="laber-right"></span>
+              </p>
+              <p class="toTime time mt20">
+                <span class="laber-left">后续<span class="shotData"></span>将扣款<span class="shotMoney"></span>元，非交易日顺延下一个交易日</span>
+              </p>
+            </div>
+        </div>
+      </div>
+      <div class="resultTopTwo">
+            <div class="photo">
+                    <img src="/common/img/pic_success2@2x.png" alt="">
+            </div>
+            <div class="succedText">申请失败</div>
+      </div>
+      <div class="listWrap">
+          <div class="listContent cashInto">
+              <ul class="listContentUl">
+                <li class="textcolor">定投产品</li>
+                <li>
+                    <span class="fundName"></span>&nbsp;
+                    <span class="fundCode"> </span>
+                  </li>
+              </ul>
+              <ul class="listContentUl">
+                  <li class="textcolor">定投金额</li>
+                  <li>
+                      <span class="amount"></span>
+                      <span class="unit">元</span>
+                  </li>
+              </ul>
+              <ul class="listContentUl">
+                  <li class="textcolor">支付方式</li>
+                  <li class="bank">
+                      <img class="banKImg" src="" alt="">
+                      <span class="bankName"></span>
+                      <span class="bankNum"></span>
+                  </li>
+                  <li class="onlinePay"><span class="payType"></span></li>
+              </ul>
+              
+          </div>
+          <div class="listContent cashOut">
+              <ul class="listContentUl">
+                <li class="textcolor">定投基金</li>
+                <li>
+                    <span class="fundName"></span>&nbsp;
+                    <span class="fundCode"> </span>
+                  </li>
+              </ul>
+              <ul class="listContentUl">
+                  <li class="textcolor">定投金额</li>
+                  <li>
+                      <span class="amount"></span>
+                      <span class="unit">元</span>
+                  </li>
+              </ul>
+              <ul class="listContentUl">
+                  <li class="textcolor payType">支付方式</li>
+                  <li>
+                    <span class="bank">
+                        <img class="banKImg" src="" alt="">
+                        <span class="bankName"></span>
+                        <span class="bankNum"></span>
+                    </span>
+                    <span class="onlinePay"><span class="payType"></span></span>
+                  </li>
+              </ul>
+              
+          </div>
+      </div>
+      <!-- 头部完成定位 -->
+      <div class="over">
+           完成
+      </div>
+    </div>
+
+	@@include('@pathInclude/views/footer.html')
+    <script src="/financial/static/js/publicPlacement/surelyResultShot.js"></script>
+</body>
+</html>

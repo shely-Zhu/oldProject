@@ -1,8 +1,8 @@
 <!--
  * @Author: your name
  * @Date: 2019-11-26 14:42:56
- * @LastEditTime: 2019-11-29 14:29:52
- * @LastEditors: your name
+ * @LastEditTime : 2019-12-30 14:19:20
+ * @LastEditors  : Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \htjf-app\src\financial\views\publicPlacement\cashManagement.html
  -->
@@ -19,19 +19,19 @@
 <head>
      @@include('@pathInclude/views/meta.html')
      <link rel="stylesheet" href="/financial/static/css/publicPlacement/cashManagement.css">
-     <title>公募监管账户</title>
+     <title>现金管理</title>
 </head>
 
 <body>
      <!--没有数据显示图标-->
      <!--@@include('@pathCommonCom/noData/noData.html', {"tipText": "暂无数据"})-->
      <!--加载显示图标-->
-     <!--@@include('@pathCommonCom/loading/listLoading.html')-->
+     @@include('@pathCommonCom/loading/listLoading.html')
      <div id="top">
           @@include('@pathCommonViews/headBarConfig.html',{"bgColors":"#384A81,#2A3C70","showType":"1","pathName":"现金管理"})
           @@include('@pathCommonViews/authenticationProcess.html',{"pathTitle":"认证信息"})
           <div class="topCon">
-               <div class="totalFundTitle">总资产（元）</div>
+               <div class="totalFundTitle">总资产(元)</div>
                <div class="totalFund justify_between flex">
                     <div class="fundValue"></div>
                     <div class="fundKnow" >了解现金管理<i class="iconfont">&#xe600;</i></div>
@@ -58,6 +58,17 @@
                     <div id="cashListCon"></div>
                </div>
           </div>
+
+          <div class="isRiskMatchBox">
+               <div class="isRiskMatchBox_contentBox">
+                       <div class='isRiskMatchBox_header'>你选择的产品与您现在的风险承受能力相匹配</div>
+                       <div class="isRiskMatchBox_footer">
+                            <div class="isRiskMatchBox_match">确定</div>
+                            <div class="isRiskMatchBox_noMatch"><button class="isRiskMatchBox_cancel">放弃购买</button> <button class="isRiskMatchResult">查看评测结果</button></div>
+                       </div>
+               </div>
+          </div>
+          <div class="isRiskMatch_mask"></div>
 
      </div>
 

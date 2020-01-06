@@ -6,14 +6,16 @@
 <html lang="en">
 
 <head>
-    @@include('@pathInclude/views/meta.html')
+    @@include('@pathNewInclude/views/meta.html')
     <link rel="stylesheet" href="/wealthResources/otherAssets/static/css/otherAssets.css">
     <title>其他资产</title>
 </head>
 
 <body>
-    @@include('@pathInclude/views/header.html') @@include('@pathCommonViews/headBarConfig.html',{"pathName":"其他资产","bgColors":"#3E3C3C,#3E3C3C","showType":"1"})
-    <!-- @@include('@pathCommonViews/load.html') -->
+
+    @@include('@pathNewCommonCom/loading/listLoading.html')
+    @@include('@pathNewCommonViews/headBarConfig.html',{"pathName":"其他资产","bgColors":"#3E3C3C,#3E3C3C","showType":"1"})
+    <!-- @@include('@pathNewCommonViews/load.html') -->
     <section class="container">
         <div class="banner">
             <div class="bannerTop clearfix">
@@ -43,10 +45,8 @@
             <p class="tipCon">待确认资产是指您的在途资产，产品成立后将归入已确认资产。</p>
             <div class="buttonOne">我明白了</div>
         </div>
-        <!-- 加载中loading -->
-        @@include('@pathCommonViews/loading/listLoading.html')
         <!-- 暂无数据 -->
-        @@include('@pathCommonViews/noDataImg.html',{"tipText":"暂无数据"})
+        @@include('@pathNewCommonViews/noDataImg.html',{"tipText":"暂无数据"})
     </section>
     <script id="first-template" type="text/x-handlebars-template">
         {{! 列表 内容 使用mui的上拉加载}}
@@ -62,7 +62,7 @@
                 </ul>
 
                 <!-- 返回顶部 -->
-                @@include('@pathCommonViews/goTop.html')
+                @@include('@pathNewCommonViews/goTop.html')
 
             </div>
         </div>
@@ -72,7 +72,8 @@
         <div class="datalist" fundCode="{{fundCode}}">
             <div class="proName clearfix">
                 <span class="proNameBefore"></span>
-                <p class="proNameCon">{{projectName}}</p>
+                <span class="proNameCon fl">{{projectName}}</span>
+                <span class="iconfont fr">&#xe636;</span>
                 <!-- <span class="proNameAfter"></span> -->
             </div>
             <div class="haveFundCon clearfix">
@@ -99,6 +100,7 @@
             <div class="proName clearfix">
                 <span class="proNameBefore"></span>
                 <p class="proNameCon">{{projectName}}</p>
+                <span class="iconfont fr">&#xe636;</span>
                 <!-- <span class="proNameAfter"></span> -->
             </div>
             <div class="fundCon clearfix">
@@ -122,7 +124,7 @@
 
         {{/each}} {{/if}}
     </script>
-    @@include('@pathInclude/views/footer.html') @@include('../../../common/views/load.html')
+    @@include('@pathNewInclude/views/footer.html') 
     <script src="/wealthResources/otherAssets/static/js/otherAssets.js"></script>
 </body>
 

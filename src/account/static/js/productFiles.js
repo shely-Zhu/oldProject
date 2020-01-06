@@ -49,6 +49,13 @@ $(function() {
               $(".openOff").show()
             }
           },
+          callbackFail: function(data) {
+            tipAction(data.message);
+            $(".content").hide()
+            $(".productCostWrap>.productCostTitle").hide()
+            $(".productCostWrap>.productCostDetail").hide()
+            $(".productCostWrap>.openOff").hide()
+          }
       }];
       $.ajaxLoading(obj);
   },
@@ -61,17 +68,35 @@ $(function() {
           //"projectId":"21970",//项目编号
           "fileType":"19,20,10,22,1",
         },
-        contentTypeSearch: true,
+        contentTypeSearch: false,
         //async: false,
         needDataEmpty: true,
         callbackDone: function(json) {
           var data = json.data
           if(data.length >0){
             $(".productCostTitleOne").show()
+            $.each(data, function(i, el) {
+              el.name = el.fileName.substring(0, el.fileName.indexOf("】") + 1);
+              el.marName = el.fileName.substring(el.fileName.indexOf("】") + 1);
+              if (el.fileName.indexOf(".pdf") != -1) {
+                  el.line = true; //线上可预览
+                  el.href = site_url.downloadNew_api + "?filePath=" + el.fileUrl + "&fileName=" + new Base64().encode(el.fileName) + "&groupName=" + el.groupName + "&show=1";
+              } else {
+                  el.line = false; //需下载
+                  el.href = site_url.downloadNew_api + "?filePath=" + el.fileUrl + "&fileName=" + new Base64().encode(el.fileName) + "&groupName=" + el.groupName;
+              }
+            })
           }
-          console.log(data)
           generateTemplate(data,$(".materialWrap"), that.$e.adjustmentTemp);
         },
+        callbackNoData: function() {
+          $(".productCostTitleOne").hide()
+          $(".materialWrap").hide()
+        },
+        callbackFail: function(data) {
+          $(".productCostTitleOne").hide()
+          $(".materialWrap").hide()
+        }
     }];
     $.ajaxLoading(obj);
   },
@@ -94,15 +119,7 @@ $(function() {
         'htmdEvt': 'productFiles_0'
       })
       mui("body").on('mdClick','.materialContent',function(e){
-        console.log($(this).attr('data-fileUrl'))
-        window.location.href=`/${$(this).attr('data-fileUrl')}`
-      //   if ($(this).attr('data-fileUrl').indexOf(".pdf") != -1) {
-      //     el.line = true; //线上可预览
-      //     el.href = site_url.download_api + "?filePath=" + el.fileUrl + "&fileName=" + new Base64().encode(el.fileName) + "&groupName=" + el.groupName + "&show=1";
-      // } else {
-      //     el.line = false; //需下载
-      //     el.href = site_url.download_api + "?filePath=" + el.fileUrl + "&fileName=" + new Base64().encode(el.fileName) + "&groupName=" + el.groupName;
-      // }
+        window.location.href = $(this).attr("href");
 			},{
         'htmdEvt': 'productFiles_1'
       })

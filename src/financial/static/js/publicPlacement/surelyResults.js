@@ -39,7 +39,7 @@ $(function () {
         payTypeOut:$(".cashOut .payType")   //支付方式
     },
     gV: { // 全局变量
-      allotNo:splitUrl['allotNo'],
+      allotNo:splitUrl['allotNo'] || '20190827034658',
       flag:splitUrl['flag'],  // 转出  out     转入  into     注意转出分普通和快速，，目前默认取得都是普通
       outType:splitUrl['outType'] || 'common', //转出类型   普通和快速  common   fast
     },
@@ -67,39 +67,41 @@ $(function () {
           var data = json.data;
           $("#loading").hide()
           if(json.status == '0000'){
-            if(data.tradeApplyStatus == '00' || data.tradeApplyStatus == '22' || data.tradeApplyStatus == '23' || data.tradeApplyStatus == '25'){   //转入中  || 转出中   || 成功
+            if(data.tradeApplyStatus == '20' || data.tradeApplyStatus == '22' || data.tradeApplyStatus == '23' || data.tradeApplyStatus == '25'){   //转入中  || 转出中   || 成功
               $(".resultTop").show()
-              that.$e.succedText.html(data.tradeApplyDesc)
+              //状态为转入中和转入成功全部统一为转入中
+              if(that.gV.flag =="out"){
+                that.$e.succedText.html("转出中")
+              }else if(that.gV.flag == "into"){
+                that.$e.succedText.html("转入中")
+              }
+              
               $(".resultTopTwo").hide()
-              $(".changeNone").removeClass("changeNone")
               if(that.gV.flag == 'into'){   // 转入
-                $("#HeadBarpathName").html('转入')
+                $("#HeadBarpathName").html('转入结果')
                 $(".cashInto").show()
                 $(".cashOut").hide()
                 if(data.tradeApplyStatus == '20'){
-                  that.$e.shareTimePInto.addClass('right-proess')
-                  that.$e.earningsTimePInto.addClass('right-proess')
-                }else{
                   if(data.isStartGainsDay){
                     that.$e.shareTimePInto.addClass('right-proess')
-                    if(data.isPaymentGainsDay){
-                      that.$e.earningsTimePInto.addClass('right-proess')
-                    }
+                  }
+                  if(data.isPaymentGainsDay){
+                    that.$e.earningsTimePInto.addClass('right-proess')
                   }
                 }
                 that.$e.applyTimeInto.html(data.applyDateTime)
-                that.$e.shareTimeInto.html(data.startGainsDayStr)
-                that.$e.earningsTimeInto.html(data.paymentGainsDayStr)
+                that.$e.shareTimeInto.html(data.startGainsDayStr + '&nbsp;24:00 前')
+                that.$e.earningsTimeInto.html(data.paymentGainsDayStr + '&nbsp;24:00 前')
                 that.$e.fundNameInto.html(data.fundName)
-                that.$e.fundCodeInto.html(data.fundCode)
+                //that.$e.fundCodeInto.html(data.fundCode)
                 that.$e.amountInto.html(data.balanceMask)
-                that.$e.banKImgInto.html(data.bankLogoUrl)
+                that.$e.banKImgInto.attr('src',data.bankThumbnailUrl)
                 that.$e.bankNameInto.html(data.bankName)
-                that.$e.bankNumInto.html(data.bankAccount.substr(data.bankAccount.length-4))
+                that.$e.bankNumInto.html(data.bankAccountMask.substr(data.bankAccountMask.length-4))
                 that.$e.payTypeInto.html('在线支付')
               }
               if(that.gV.flag == 'out'){   // 转出
-                $("#HeadBarpathName").html('转出')
+                $("#HeadBarpathName").html('转出结果')
                 $(".cashInto").hide()
                 $(".cashOut").show()
                 if(data.tradeApplyStatus == '23'){
@@ -112,59 +114,60 @@ $(function () {
                 that.$e.applyTimeOut.html(data.applyDateTime)
 
                 if(that.gV.outType == 'common'){
-                  that.$e.toTimeOut.html(data.estimateDateStr)   //普通转出
+                  that.$e.toTimeOut.html(data.estimateDateStr + '&nbsp;24:00 前')   //普通转出
                 }else{
-                  that.$e.toTimeOut.html(data.estimateTimeStr)    //快速转出
+                  that.$e.toTimeOut.html(data.estimateTimeStr + '&nbsp;24:00 前')    //快速转出
                 }
                 
                 that.$e.fundNameOut.html(data.paymentGainsDayStr)
                 that.$e.fundCodeOut.html(data.fundName)
-                that.$e.amountOut.html(data.fundCode)
-                that.$e.banKImgOut.html(data.balanceMask)
-                that.$e.bankNameOut.html(data.bankLogoUrl)
-                that.$e.bankNumOut.html(data.bankName)
-                that.$e.payTypeOut.html(data.bankAccount.substr(data.bankAccount.length-4))
+                that.$e.amountOut.html(data.sharesMask)
+                that.$e.banKImgOut.attr('src',data.bankThumbnailUrl)
+                that.$e.bankNameOut.html(data.bankName)
+                that.$e.bankNumOut.html(data.bankAccountMask.substr(data.bankAccountMask.length-4))
+                that.$e.payTypeOut.html('在线支付')
               }
             }
             if(data.tradeApplyStatus == '21' || data.tradeApplyStatus == '24'){   //转出失败   || 转入失败 
                 $(".resultTop").hide()
                 $(".resultTopTwo").show()
                 that.$e.errorText.html(data.tradeApplyDesc)
-                $(".changeNone").removeClass("changeNone")
                 if(that.gV.flag == 'into'){   // 转入
-                  $("#HeadBarpathName").html('转入')
+                  $("#HeadBarpathName").html('转入结果')
                   $(".cashInto").show()
                   $(".cashOut").hide()
                   that.$e.fundNameInto.html(data.fundName)
                   that.$e.fundCodeInto.html(data.fundCode)
                   that.$e.amountInto.html(data.balanceMask)
-                  that.$e.banKImgInto.html(data.bankLogoUrl)
+                  that.$e.banKImgInto.attr('src',data.bankThumbnailUrl)
                   that.$e.bankNameInto.html(data.bankName)
-                  that.$e.bankNumInto.html(data.bankAccount.substr(data.bankAccount.length-4))
+                  that.$e.bankNumInto.html(data.bankAccountMask.substr(data.bankAccountMask.length-4))
                   that.$e.payTypeInto.html('在线支付')
                 }
                 if(that.gV.flag == 'out'){   // 转出
-                  $("#HeadBarpathName").html('转出')
+                  $("#HeadBarpathName").html('转出结果')
                   $(".cashInto").hide()
                   $(".cashOut").show()
                   that.$e.fundCodeOut.html(data.fundName)
-                  that.$e.amountOut.html(data.fundCode)
-                  that.$e.banKImgOut.html(data.balanceMask)
-                  that.$e.bankNameOut.html(data.bankLogoUrl)
-                  that.$e.bankNumOut.html(data.bankName)
-                  that.$e.payTypeOut.html(data.bankAccount.substr(data.bankAccount.length-4))
+                  that.$e.amountOut.html(data.sharesMask)
+                  that.$e.banKImgOut.attr('src',data.bankThumbnailUrl)
+                  that.$e.bankNameOut.html(data.bankName)
+                  that.$e.bankNumOut.html(data.bankAccountMask.substr(data.bankAccountMask.length-4))
+                  // that.$e.payTypeOut.hide()
+                  $(".cashOut .listContentUl .onlinePay").hide()
+                  $(".cashOut .listContentUl .textcolor.payType").html('到账方式')
                 }
             }
-
-           
-
           }else{
             tipAction(json.message);
           }
         },
         callbackFail: function (json) {
           tipAction(json.message);
-        }
+        },
+        callbackNoData:function(json){
+					tipAction(json.message);
+				},
       }]
       $.ajaxLoading(obj);
 

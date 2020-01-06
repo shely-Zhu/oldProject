@@ -16,8 +16,7 @@
 </head>
 
 <body>
-    <!-- @@include('@pathCommonCom/loading/listLoading.html') -->
-
+    @@include('@pathCommonCom/loading/listLoading.html')
     <section class="container">
         @@include('@pathCommonViews/headBarConfig.html',{"pathName":"赎回"})
         <div class="br"></div>
@@ -35,9 +34,6 @@
                     <div class="onright-left-one listOnefund" style="display: none;margin-top: 10px;">
                         <div>
                             <span class="fundName"></span>
-                            <span>(</span>
-                            <span class="fundCode"></span>
-                            <span>)</span>
                         </div>
                         <div class="fundFooter">
                             <span>七日年化</span>
@@ -70,17 +66,7 @@
             <p>根据见证会要求，自2018年4月1日起，除货币市场基金与交易型开放式指数基金(ETF)外的开放式基金，持有少于7日(不含)时，需要收取不低于1.5%的赎回费</p>
             <a href="" class="findMessageCen">查看详情</a>
         </div>
-         <div class="p2">
-            <div>
-                <span class="file">
-                    <a href="javascript:;" class="item2"><span class="iconfont">&#xe668;</span><span>已阅读并同意</span></a>
-                    <a onclick="setGoUrl(site_url.agreementModel_url+'?id=47', '')">《公募基金风险揭示及售前告知书》</a>、
-                    <a class="contract" href="javascript:;">《基金合同》</a>、
-                    <a class="recruiting" href="javascript:;">《招募说明书》</a>
-                </span>
-                
-            </div>
-        </div>
+        
         <!-- 不可点击的样式是加class:disabled -->
         <div class="checkMessage">超出最大赎回份额</div>
         <button class="conformButton confirmeDemptionPay" disabled>确定</button>
@@ -162,17 +148,14 @@
 
     <script id="templateTransferFunds" type="text/x-handlebars-template">
             {{#each this}}
-            <li class="redemptionBuyBox-item popup-li-two radioCheckItem" checkStatu ="off" type="fund">
+            <li class="redemptionBuyBox-item popup-li-two radioCheckItem" checkStatu ="off" type="fund" fundCode={{fundCode}}>
                 <div class="div">
                     <div class="bank-name">
                         <span class="fundName">{{fundName}}</span>
-                        <span>(</span>
-                        <span class="fundCode">{{fundCode}}</span>
-                        <span>)</span>
                     </div>
-                    <div class="bank-pay">七日年化<span class="fundMessage">+37.66%</span></div>
+                    <div class="bank-pay">七日年化<span class="fundMessage"><span>+</span>{{annYldRat}}<span>%</span></span></div>
                 </div>
-                <img class="true radioCheckItemImg"  src="" alt="">
+                <img class="true radioCheckItemImg"  src="/common/img/account_icon_check@2x.png" alt="">
             </li>   
             {{/each}}
     </script>
@@ -180,7 +163,7 @@
     <!-- 加载中loading -->
     @@include('@pathCommonCom/loading/listLoading.html')
     @@include('@pathInclude/views/footer.html')
-    @@include('../../../common/views/payPassword.html') 
+    @@include('@pathCommonViews/payPassword.html') 
 
 
     <script src="/financial/static/js/publicPlacement/redemptionBuy.js"></script>

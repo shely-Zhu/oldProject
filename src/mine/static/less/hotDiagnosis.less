@@ -7,6 +7,7 @@
 html,
 body {
     height: 100%;
+    background:@c005;
 }
 
 
@@ -58,82 +59,92 @@ body {
     .fixedWrap {
         position: fixed;
         width: 100%;
-        height: 8rem;
+        height: 1.6rem;
         top: 0;
         z-index: 1000;
-
+        top: 0.3rem;
         // 诊断页面搜索区域
         .topSearch {
             background-color: @c005;
-            padding: 0.5rem 1.3rem;
+            padding: 0.1rem 0.26rem;
             .tip {
-                height: 2.8rem;
+                height: 0.7rem;
                 background-color: @f7f7f7;
                 color: @878787;
-                font-size: 1.1rem;
-                line-height: 2.8rem;
+                font-size: 0.24rem;
+                line-height: 0.7rem;
                 width: 100%;
-                border-radius: 0.2rem;
+                border-radius: 0.04rem;
+                font-size: .24rem;
             }
 
             .mui-icon-search::before {
-                font-size: 1.4rem;
-                margin-left: 0.7rem;
-                margin-right: 0.4rem;
+                font-size: 0.28rem;
+                margin-left: 0.14rem;
+                margin-right: 0.08rem;
             }
         }
 
 
         //搜索页面-搜索
         .branchSearchArea {
-
+  
             .branchHeader {
-                padding: 0.5rem 1.3rem;
+                padding: 0.1rem 0.3rem;
                 background-color: @c005;
                 width: 100%;
 
                 .mui-input-row {
-                    height: 2.8rem;
+                    height: 1rem;
                 }
 
                 .search {
                     background-color: @f7f7f7;
-                    border-radius: 0.2rem;
+                    border-radius: 0.04rem;
                     position: relative;
-
+                    height: 0.7rem;
+                    line-height: 0.7rem;
+                    font-size: 0.24rem;
                     .branchSearchInput {
                         color: @878787;
                         display: inline-block;
-                        font-size: 1.1rem;
-                        height: 2.8rem;
+                        font-size: 0.22rem;
+                        height: 0.56rem;
                         background-color: @f7f7f7;
                         width: 80%;
+                        position: relative;
+                        top:.02rem;
 
                         &::placeholder {
-                            color: @878787;
+                            color: @757784;
                         }
                     }
 
                     .searchicon {
-                        font-size: 1.4rem;
-                        margin-left: 0.7rem;
-                        margin-right: 0.4rem;
+                        font-size: 0.4rem;
+                        margin-left: 0.14rem;
+                        margin-right: 0.08rem;
                         display: inline-block;
                         color: @878787;
+                        font-weight: bold;
+                        position: relative;
+                        top: .02rem;
                     }
 
                     .mui-icon-clear {
-                        right: 0.6rem;
-                        font-size: 1.4rem;
-                        line-height: 2.5rem;
+                        right: 0.12rem;
+                        font-size: 0.28rem;
+                        line-height: 0.5rem;
                         margin: 0;
-                        width: 3rem;
-                        top: 0.4rem;
+                        width: 0.6rem;
+                        top: 0.08rem;
 
                         &:before {
                             content: '取消';
-                            color: @ff6905;
-                            font-size: 1.2rem;
+                            color: @757784;
+                            font-size: 0.24rem;
+                            position: relative;
+                            top:.03rem;
                         }
                     }
                 }
@@ -141,16 +152,16 @@ body {
                 .close {
                     color: @ff6905;
                     border: none;
-                    font-size: 1.2rem;
-                    width: 2.6rem;
+                    font-size: 0.24rem;
+                    width: 0.52rem;
                     text-align: center;
                     position: absolute;
-                    right: 0.9rem;
-                    top: -0.2rem;
+                    right: 0.18rem;
+                    top: -0.04rem;
                     padding: 0;
-                    line-height: 2.7rem;
+                    line-height: 0.54rem;
                     margin: 0;
-                    height: 2.5rem;
+                    height: 0.5rem;
                     background: transparent;
                 }
             }
@@ -159,88 +170,95 @@ body {
         // 搜索结果
         .resultWrap {
             display: none;
-            height: 5.1rem;
+            // height: 1.02rem;
             background: @f7f7f7;
 
             .searchResult {
                 background: @c005;
-                height: 4rem;
-                line-height: 4rem;
-                font-size: 1.2rem;
+                height: 0.8rem;
+                line-height: 0.8rem;
+                font-size: 0.24rem;
                 color: @858d9d;
-                padding: 0 1.7rem;
-                border-top: 1px solid @edeff3;
+                padding: 0 0.34rem;
+                border-bottom: 1px solid @edeff3;
 
                 .total{
-                    margin-left: 0.2rem;
-                    margin-right: 0.2rem;
+                    margin-left: 0.04rem;
+                    margin-right: 0.04rem;
                 }
             }
         }
 
         // 热门诊断
         .h2_title {
-            padding: 0 1.7rem;
-            color: @3c3c3c;
-            font-size: 1.4rem;
-            line-height: 4.3rem;
-            background-color: @f7f7f7;
+            font-size: 0.28rem;
+            line-height: 0.86rem;
             font-weight: 700;
+            background: @c005;
+            p{
+             width: 90%;
+             margin:0 auto;
+             border-bottom: .01rem solid @c004;   
+             color: @3c3c3c;
+            }
         }
     }
 
     // 热门列表
     .hotFundList {
         overflow: hidden;
-        margin-top: 8rem;
+        margin-top: 3.2rem;
 
         .card-theme,
-        .search-list {
+        .search-list,.list{
             .mui-row {
-                padding: 1.4rem 1.7rem;
+                padding: 0.28rem 0.34rem;
                 border-bottom: 1px solid @f6f9ff;
 
                 &:first-child{
-                    padding-top: 2.2rem;
+                    padding-top: 0.47rem;
                 }
 
                 .imgNum {
-                    width: 1.5rem;
-                    padding-top: 0.5rem;
+                    width: 0.31rem;
+                    padding-top: 0.1rem;
                 }
 
                 .fontNum {
                     color: @3c3c3c;
-                    font-size: 0.9rem;
-                    line-height: 2.3rem;
-                    margin-left: 0.4rem;
+                    font-size: 0.18rem;
+                    line-height: 0.46rem;
+                    margin-left: 0.08rem;
                 }
 
                 .fontBold {
-                    color: @2d2f46;
-                    font-size: 1.3rem;
-                    line-height: 2.3rem;
-
+                    color: @272727;
+                    font-size: 0.28rem;
+                    line-height: 0.46rem;
+                    font-family:PingFangSC-Regular,PingFang SC;
+                    font-weight:400;
                 }
 
                 .jumpIcon {
                     position: relative;
-
+                    top: .2rem;
                     &:after {
                         position: absolute;
                         content: '\e67d';
-                        font-size: 2rem;
+                        font-size: 0.4rem;
                         right: 0;
                         color: @999999;
-
+                        line-height: 0，85rem;
                     }
 
                 }
 
                 .lightColor {
-                    font-size: 1rem;
-                    line-height: 2rem;
+                    font-size: 0.28rem;
+                    line-height: 0.4rem;
                     color: @999999;
+                    font-family:PingFangSC-Regular,PingFang SC;
+                    font-weight:400;
                 }
             }
 
@@ -248,50 +266,50 @@ body {
 
             .small {
                 color: @c001;
-                font-size: 1.2rem;
-                margin-top: 0.5rem;
+                font-size: 0.24rem;
+                margin-top: 0.1rem;
             }
 
             .red {
                 color: @c010;
-                font-size: 1rem;
-                margin-top: 0.5rem;
+                font-size: 0.2rem;
+                margin-top: 0.1rem;
             }
         }
     }
 
     // 底部按钮     
     .btnBottom {
-        position: absolute;
-        bottom: 1.7rem;
-        margin: 2.5%;
-        height: 3.9rem;
-        line-height: 3.9rem;
+        // position: absolute;
+        position: fixed;
+        bottom: 0.34rem;
+        margin: 0.5%;
+        height: 0.78rem;
+        line-height: 0.78rem;
         width: 95%;
-        border-radius: 0.3rem;
-        border: solid 0.1rem @ededed;
+        border-radius: 0.06rem;
+        border: solid 0.02rem @ededed;
         background-color: @c005;
-        box-shadow: 0 0.1rem 0.4rem 0 rgba(0, 0, 0, 0.1);
-        padding: 0 1.8rem 0 1rem;
+        box-shadow: 0 0.02rem 0.08rem 0 rgba(0, 0, 0, 0.1);
+        padding: 0 0.36rem 0 0.2rem;
         color: @837046;
-
+        display: none;
         .imgBottom {
-            margin-top: 0.8rem;
-            width: 2.4rem;
+            margin-top: 0.16rem;
+            width: 0.48rem;
         }
 
         .fontBold {
-            padding-left: 1rem;
+            padding-left: 0.2rem;
             color: @837046;
         }
 
         .jumpIcon {
             position: relative;
-
             &:after {
                 position: absolute;
                 content: '\e67d';
-                font-size: 2rem;
+                font-size: 0.4rem;
                 right: 0;
                 color: @999999;
             }
@@ -306,10 +324,18 @@ body {
     .red{
         color: @ff6905;
     }
+    .zhanweifu{
+        background: @c005;
+    }
     .fixedWrap .HeadBarConfigBox a.backBtn{
         color: black !important;
-        margin-top: 13px;
-        margin-left: 3px;
-        font-size: 0.36rem;
+        font-size: 0.4rem;
+//      margin-top: -0.4rem;
+//      margin-left: -0.25rem;
+    }
+}
+.hotFundList {
+    .contentWrapper{
+       // margin-top: 1.5rem;
     }
 }

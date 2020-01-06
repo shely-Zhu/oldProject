@@ -2,15 +2,9 @@
 // @author caoqihai 2019-11-28
 
 require('@pathCommonBase/base.js');
-
-require('@pathCommonJsCom/utils.js');
 //ajax调用
 require('@pathCommonJs/ajaxLoading.js');
 
-//下拉加载更多
-// require('@pathCommonJs/scrollFullPage.js');
-require('@pathCommonJsCom/goTopMui.js');
-require('@pathCommonJs/components/headBarConfig.js');
 //黑色提示条的显示和隐藏
 var generateTemplate = require('@pathCommonJsComBus/generateTemplate.js');
 var splitUrl = require('@pathCommonJs/components/splitUrl.js')();
@@ -54,15 +48,23 @@ $(function () {
                 contentTypeSearch:true,
                 callbackDone: function (json) {
                     var dataList;
-
                     // 待定
                     if (json.data == '') { // 没有记录不展示
                         that.$e.noData.show();
                         return false;
-                    } else {
+                    } else { 
                         dataList = json.data;
+                        $.each(dataList, function(i, el) {
+                          var groupName = el.groupName?el.groupName:""
+                          if (el.contracturl.indexOf(".pdf") != -1) {
+                              el.line = true; //线上可预览
+                              el.href = site_url.mountDownload_api + "?url=" + el.contracturl + "&name=" + new Base64().encode(el.modulename) + "&show=1";
+                          } else {
+                              el.line = false; //需下载
+                              el.href = site_url.mountDownload_api + "?url=" + el.contracturl + "&name=" + new Base64().encode(el.modulename);
+                          }
+                        })
                     }
-
                     setTimeout(function () {
                         generateTemplate(dataList, that.$e.listSlot, that.$e.listTemp);
                     }, 200)
@@ -82,7 +84,12 @@ $(function () {
         },
         events: function (targetUrl) {
             var that = this;
-
+            mui("body").on('mdClick','.con',function(e){
+                var src=$(this).attr("href")
+                window.location.href=src
+            }, {
+                'htmdEvt': 'seeSign_0'
+            })
         },
     }
     //调用函数

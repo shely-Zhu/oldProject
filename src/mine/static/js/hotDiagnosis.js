@@ -13,7 +13,8 @@ require('@pathCommonJs/components/headBarConfig.js');
 var tipAction = require('@pathCommonJs/components/tipAction.js');
 var splitUrl = require('@pathCommonJs/components/splitUrl.js')();
 var generateTemplate = require('@pathCommonJsComBus/generateTemplate.js');
-require('@pathCommonJs/components/elasticLayerTypeTwo.js');
+// require('@pathCommonJs/components/elasticLayerTypeTwo.js');
+require('@pathCommonCom/pullRefresh/pullRefresh.js');
 
 
 $(function() {
@@ -32,11 +33,11 @@ $(function() {
         },
         init: function() {
             var that = this;
-            that.beforeFunc();
+            //that.beforeFunc();
             that.initMui(); // 兼容下面函数调用
             that.events();
         },
-        beforeFunc: function(t) {
+        /*beforeFunc: function(t) {
             var that = this;
 
             //设置切换区域的高度
@@ -46,11 +47,72 @@ $(function() {
             if (!$('.list .contentWrapper').hasClass('setHeight')) {
                 $('.list, .contentWrapper').height(height).addClass('setHeight');
             }
-        },
+        },*/
         //初始化mui的上拉加载
         initMui: function() {
             var that = this;
-            mui.init({
+            var height = windowHeight - $(".fixedWrap").height();
+            if (!$('.list').hasClass('setHeight')) {
+                $('.list').height(height).addClass('setHeight');
+            }
+
+            $.pullRefresh({
+                wrapper: $('.list'),
+                class: 'listItem',
+                template: that.$e.fundListTemp, 
+                pageSize: that.gV.pageSize,
+                callback: function(def, t){
+                    var obj = [{
+                        url: site_url.fundRecommend_api, //热门诊断推荐
+                        data: {
+                            "pageCurrent": that.gV.pageCurrent,
+                            "pageSize": 10,
+                        },
+                        needDataEmpty: false,
+                        needLoading: false,
+                        callbackDone: function(json) {     
+                            var data = json.data.pageList;
+                            if(that.gV.pageCurrent == 1 && data.length == 0) {
+                                $(".list").css("display", "none")
+                                that.$e.noData.show()
+                            } else {
+                                // 给data添加图片
+                                $.each(data, function(i, el) {
+                                    // 只有前3个需要加，大于3直接退出
+                                    if (i > 3) {
+                                        return false;
+                                    }
+                                    switch (el.serialNumber) {
+                                        case '1':
+                                            el.first = true;
+                                            break;
+                                        case '2':
+                                            el.second = true;
+                                            break;
+                                        case '3':
+                                            el.third = true;
+                                            break;
+                                    }
+                                })
+                                def && def.resolve( data, that.gV.pageCurrent);
+                                that.gV.pageCurrent++;
+                            }
+                        },
+                        callbackNoData: function( json ){  
+                            if(that.gV.pageCurrent == 1) {
+                                $(".list").css("display", "none")
+                                that.$e.noData.show()
+                            }
+                            def && def.reject( json, that.gV.pageCurrent );
+                        },
+                        callbackFail: function(json) {
+                            def && def.reject( json, that.gV.pageCurrent );
+                        },
+                    }];
+                    $.ajaxLoading(obj); 
+                }
+            })
+            /*mui.init({
                 pullRefresh: {
                     container: '.contentWrapper',
                     up: {
@@ -87,9 +149,9 @@ $(function() {
 
                 //为$id添加hasPullUp  class
                 $('.list').addClass('hasPullUp');
-            });
+            });*/
         },
-        getData: function(t) {
+        /*getData: function(t) {
             var that = this;
 
             mui('.contentWrapper').pullRefresh().pullupLoading();
@@ -102,6 +164,7 @@ $(function() {
 
                 },
                 needDataEmpty: false,
+                needLoading: false,
                 callbackDone: function(json) {
                     var dataList;
 
@@ -169,7 +232,7 @@ $(function() {
                 }
             }]
             $.ajaxLoading(obj);
-        },
+        },*/
         // 获取专属报告
         getReport: function() {
             var obj = [{
@@ -181,6 +244,7 @@ $(function() {
                         title: '提示',
                         p: '<p>提交申请成功！该功能暂未开发查询功能，稍后我们会尽快将专属诊断报告发送至您的专属理顾</p>',
                         buttonTxt: '知道了',
+                        htmdEvtYes:'hotDiagnosis_04',
                         zIndex: 100,
                     })
                 },
@@ -197,7 +261,7 @@ $(function() {
             mui("body").on("mdClick", ".topSearch", function() {
                 window.location.href = site_url.diagnosisSearch_url;
             }, {
-                'htmdEvt': 'diagnosisSearch_01'
+                'htmdEvt': 'hotDiagnosis_02'
             });
 
             // 跳转详情页
@@ -205,16 +269,16 @@ $(function() {
                 var fundCode = $($(this).find('.lightColor')[0]).html();
                 window.location.href = site_url.diagnosisDetail_url + '?fundCode=' + fundCode;
             }, {
-                'htmdEvt': 'diagnosisSearch_02'
+                'htmdEvt': 'hotDiagnosis_03'
             });
 
             // 获取专属报告
             mui("body").on("mdClick", ".btnBottom", function() {
                 that.getReport();
             }, {
-                'htmdEvt': 'diagnosisSearch_03'
+                'htmdEvt': 'hotDiagnosis_01'
             });
-        },
+        }
     };
     hotDiagnosis.init();
 });

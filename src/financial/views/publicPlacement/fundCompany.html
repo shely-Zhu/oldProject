@@ -12,9 +12,9 @@
 
 <body>
     <!--没有数据显示图标-->
-    <!-- @@include('@pathCommonCom/noData/noData.html', {"tipText": "暂无数据"}) -->
+    @@include('@pathCommonCom/noData/noData.html', {"tipText": "暂无数据"})
     <!--列表加载显示图标-->
-    <!-- @@include('@pathCommonCom/loading/listLoading.html') -->
+    @@include('@pathCommonCom/loading/listLoading.html')
     <!--公共页面头部-->
     @@include('@pathCommonViews/headBarConfig.html',{"pathName":"基金公司"})
     <div class="wrap">
@@ -36,9 +36,29 @@
                 <li><span class="blur_font">管理基金数</span><span class="content">{{ fundManagementCount }}</span></li>
                 <li><span class="blur_font">总经理</span><span class="content">{{ managerName }}</span></li>
                 <li><span class="blur_font">注册资金</span><span class="content">{{ registeredCapital }}亿</span></li>
-                <li><span class="blur_font">电话</span><span class="content">{{ telephoneNo }}</span></li>
-                <li><span class="blur_font">传真</span><span class="content">{{ faxNo }}</span></li>
-                <li><span class="blur_font">办公地址</span><span class="content">{{ officeAddress }}</span></li>
+                <li><span class="blur_font">电话</span>
+                    <span class="content">
+                        <div class="secondFloor">
+                            <ul>
+                                    {{#each telephoneNoList}}
+                                    <li><span class="content">{{telephoneNoListChild}}</span></li>
+                                    {{/ each}}
+                            </ul>
+                        </div>
+                    </span>
+                    </li>
+                <li><span class="blur_font">传真</span>
+                    <span class="content">
+                            <div class="secondFloor">
+                            <ul>
+                                    {{#each faxNolist}}
+                                    <li><span class="content">{{faxNoListChild}}</span></li>
+                                    {{/ each}}
+                            </ul>
+                        </div>
+                        </span>
+                    </li>
+                <li><span class="blur_font">办公地址</span><span class="content officeAddress">{{ officeAddress }}</span></li>
             </ul>
         </div>
         <div class="listBorder">

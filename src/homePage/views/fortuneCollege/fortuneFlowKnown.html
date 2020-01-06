@@ -16,15 +16,10 @@
      @@include('@pathCommonCom/noData/noData.html', {"tipText": "暂无数据"})
      <!--列表加载显示图标-->
      @@include('@pathCommonCom/loading/listLoading.html')
-     @@include('@pathCommonViews/headBarConfig.html',{"bgColors":"#384A81,#2A3C70","showType":"0","pathName":"财富学院早知道"})
-     <div class="list">
-          <div class="contentWrapper">
-               <ul class="mui-table-view ">
-                    <div class="knownList"></div>
-                    @@include('../../../common/views/goTop.html')
-               </ul>
-          </div>
-     </div>
+     @@include('@pathCommonViews/headBarConfig.html',{"bgColors":"#384A81,#2A3C70","showType":"0","pathName":"财富流向早知道"})
+     
+     <!-- 上拉加载容器 -->
+     <div class="list"></div>
 
      <script id="fortuneFlowList-template" type="text/x-handlebars-template">
           {{#each this}}
@@ -33,7 +28,7 @@
                     <img class="articalImg lazyload" src="/common/img/lazyImgList.png" data-original="{{imageUrlShowOnline}}" alt="">
                     <img class="play" src="/common/img/bofang@2x.png" alt="">
                </div>
-               <div class="itemContent">{{articleTimeStr}} | {{title}}</div>
+               <div class="itemContent"><b>{{articleTimeStr}}</b><b class="line"></b><b> {{title}}</b></div>
           </div>
           {{/each}}
     </script>

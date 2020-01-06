@@ -1,24 +1,27 @@
 
 require('@pathCommonBase/base.js');
 require('@pathCommonJs/ajaxLoading.js');
-var alwaysAjax = require('@pathCommonJs/components/alwaysAjax.js');
+/*var alwaysAjax = require('@pathCommonJs/components/alwaysAjax.js');*/
 var splitUrl = require('@pathCommonJs/components/splitUrl.js')();
 var generateTemplate = require('@pathCommonJsComBus/generateTemplate.js');
+require('@pathCommonCom/pullRefresh/pullRefresh.js');
 
 $(function() {
     var somePage = {
         $e: {
             adjustmentRecord: $('.adjustmentRecord'), // 调仓记录
             recordList: $('.contentWrap'), // 调仓记录
-            adjustmentTemp: $('#adjustment-template'), // 最新调仓模板
+            adjustmentTemp: $('#adjustment-template'), // 最新调仓模板  货币
+            adjustmentTemp_1: $('#adjustment-template_1'),
             noData: $('.noData'), //没有数据的结构
             listLoading: $('.listLoading'), //所有数据区域，第一次加载的loading结构
         },
         gV: { // 全局变量
             pageCurrent: 1, //当前页码，默认为1
-            pageSize: 10,
+            pageSize: 20,
             listLength: 0,
             fundCode: splitUrl['fundCode'],
+            fundType:splitUrl['fundType'],  //0 非货币 1 货币
         },
         init: function() {
             var that = this;
@@ -26,7 +29,7 @@ $(function() {
             that.events();
         },
         events:function(){
-            alwaysAjax('.contentWrap','.contentWrapper',100,100)
+            //alwaysAjax($('.contentWrap'),'.contentWrapper',100,100)
            
         },
         //初始化mui的上拉加载
@@ -36,7 +39,63 @@ $(function() {
             if (!$('.list').hasClass('setHeight')) {
                 $('.list').height(height).addClass('setHeight');
             }
-            mui.init({
+            var template;
+            if(that.gV.fundType=="1"){
+                //货币
+                template = that.$e.adjustmentTemp
+            }else{
+                template = that.$e.adjustmentTemp_1
+            }
+            $.pullRefresh({
+                wrapper: $('.list'),
+                class: 'listItem',
+                template: template,
+                pageSize: that.gV.pageSize,
+                callback: function(def, t){
+                    var obj = [{
+                        url: site_url.fundNetWorthList_api,
+                        data: {
+                            "pageCurrent": that.gV.pageCurrent, //非必须，默认为1
+                            "pageSize": that.gV.pageSize,//非必须，默认为10
+                            "fundCode":that.gV.fundCode,//项目编号
+                        },                        
+                        needDataEmpty: true,
+                        callbackDone: function(json) {     
+                            var data = json.data.pageList;
+                            var historyStr = that.gV.fundType=="1" ? '<li>日期</li><li>七日年化</li><li>万份收益(元)</li>' : '<li>日期</li><li>单位净值</li><li>累计净值</li><li>日涨幅</li>'
+                            $(".titleContent").html(historyStr)
+                            //data.fundType = that.fundType;
+                            if(that.gV.pageCurrent == 1 && data.length == 0) {
+                                $(".list").css("display", "none")
+                                that.$e.noData.show()
+                            } else {
+                                def && def.resolve( data, that.gV.pageCurrent);
+                                that.gV.pageCurrent++;
+                            }
+                            $.each($(".listItem .value"), function (i, v) {
+                                if (Number($(v).text().slice(0, $(v).text().length - 1)) > 0) {
+                                    $(v).addClass('value_red')
+                                } else if(Number($(v).text().slice(0, $(v).text().length - 1)) == 0) {
+                                    $(v).addClass('value_c')
+                                }else{
+                                    $(v).addClass('value_green')
+                                }
+                            });
+                        },
+                        callbackNoData: function( json ){  
+                            def && def.reject( json, that.gV.pageCurrent );
+                            if(that.gV.pageCurrent==1) {
+                                $(".list").css("display", "none")
+                            }
+                        },
+                        callbackFail: function(json) {
+                            def && def.reject( json, that.gV.pageCurrent );
+                        }
+                    }];
+                    $.ajaxLoading(obj); 
+                },
+            })
+            /*mui.init({
                 pullRefresh: {
                     container: '.contentWrapper',
                     up: {
@@ -73,9 +132,9 @@ $(function() {
 
                 //为$id添加hasPullUp  class
                 $('.list').addClass('hasPullUp');
-            });
+            });*/
         },
-        getData: function(t) {
+        /*getData: function(t) {
             var that = this;
             var obj = [{ //历史明细
                 url: site_url.fundNetWorthList_api,
@@ -156,7 +215,7 @@ $(function() {
                 },
             }];
             $.ajaxLoading(obj);
-        },
+        },*/
     };
     somePage.init();
 });

@@ -1,0 +1,287 @@
+<!--
+ * @Author: your name
+ * @Date: 2019-12-09 15:48:30
+ * @LastEditTime : 2020-01-02 13:53:29
+ * @LastEditors  : Please set LastEditors
+ * @Description: In User Settings Edit
+ * @FilePath: \htjf-app\src\mine\views\fundDiagnosis\fundAccountDiagnosisResult.html
+ -->
+<!DOCTYPE html>
+ <html>
+ 
+ <head>
+     @@include('@pathInclude/views/meta.html')
+     <link rel="stylesheet" href="/mine/static/css/fundAccountDiagnosisResult.css">
+     <title>基金账户诊断_提交申请</title>
+ </head>
+ 
+ <body>
+    @@include('@pathCommonCom/loading/listLoading.html')
+     <section class="fundAccountDiagnosis container">
+       @@include('@pathCommonViews/headBarConfig.html',{"pathName":"提交申请"})
+         <div class="content">
+             <div class="account-holdings">
+                 <p class="title-box">请您填写以下内容,以便我们为您提供专属诊断分析报告</p>
+             </div>
+             <div class="fund-allocation content-item">
+                <ul class="mui-table-view">
+                    <li class="mui-table-view-cell"><span class="left">年龄</span><span class="right mr60"> <input type="text" class="mui-input-clear userAge" placeholder="请输入年龄"></span></li>
+                    <li class="mui-table-view-cell"><span class="left">性别</span>
+                        <span class="mui-icon mui-icon-arrowright"  type="sex"></span>
+                        <span class="right" id="sex">请选择</span>
+                    </li>
+                    <li class="mui-table-view-cell"><span class="left">职业</span>
+                        <span class="mui-icon mui-icon-arrowright" type="professional"></span>
+                        <span class="right" id="professional">请选择</span>
+                        <input id="professionalDescript" placeholder="技术工人"/>
+                    </li>
+                </ul>
+                <ul class="mui-table-view mt20">
+                    <li class="mui-table-view-cell"><span class="left">投资年限</span>
+                        <span class="mui-icon mui-icon-arrowright" type="investment_year"></span>
+                        <span class="right" id="investment_year">请选择</span>
+                    </li>
+                    <li class="mui-table-view-cell"><span class="left">风险等级</span>
+                        <span class="mui-icon mui-icon-arrowright" type="riskLevel"></span>
+                        <span class="right riskLevel" id="riskLevel">请选择</span>
+                    </li>
+                    <li class="mui-table-view-cell"><span class="left">预计投资年限</span>
+                        <span class="mui-icon mui-icon-arrowright" type="expectedInvestment_year"></span>
+                        <span class="right" id="expectedInvestment_year">请选择</span>
+                    </li>
+                    <li class="mui-table-view-cell"><span class="left">流动性需求</span>
+                        <span class="mui-icon mui-icon-arrowright" type="liquidity"></span>
+                        <span class="right" id="liquidity">请选择</span>
+                    </li>
+                    <li class="mui-table-view-cell"><span class="left">预期年化收益率</span>
+                        <span class="mui-icon mui-icon-arrowright" type="yield"></span>
+                        <span class="rightMoreBox yieldControl">
+                            <span class="rightMore">%</span>
+                            <span class="rightMore" id="yield_second"></span>
+                            <span class="rightMore">-</span>
+                            <span class="rightMore" id="yield_first"></span>
+                        </span>
+                        
+                    </li>
+                    <li class="mui-table-view-cell"><span class="left">可承受最大回撤(亏损)</span>
+                        <span class="mui-icon mui-icon-arrowright" type="loss"></span>
+                        <span class="rightMoreBox lossControl">
+                                <span class="rightMore">%</span>
+                                <span class="rightMore" id="loss_second"></span>
+                                <span class="rightMore">-</span>
+                                <span class="rightMore" id="loss_first"></span>
+                        </span>
+                    </li>
+                </ul>
+
+                <div class="messageBox mt20">
+                    <div class="mt20">
+                        <span class="left">已购买基金</span><span class="ml20">请选择或增加需要诊断的基金</span>
+                    </div>
+                    <div class="mt20"> <span class="ml50">恒天</span></div>
+                    <ul class="mui-table-view mt20 selectFundCode templateTransferFundsList">
+                       <!--
+                        <li class="mui-table-view-cell">
+                            <input name="radio1" type="checkbox">
+                            <span class="fundCodeListItem">
+                                <span class="fundCodeListItem_tital">基金代码</span>
+                                <span class="fundCodeListItem_val">01234</span>
+                            </span>
+                            <span class="fundCodeListItem">
+                                    <span class="fundCodeListItem_tital">购买日期</span>
+                                    <span class="fundCodeListItem_val">2019-10-28</span>
+                                </span>
+                                <span class="fundCodeListItem">
+                                        <span class="fundCodeListItem_tital">金额</span>
+                                        <span class="fundCodeListItem_val">200000元</span>
+                                    </span>
+                        </li>
+                        -->
+                    </ul>
+                    <div class="addOtherFundcodeList">
+                        <div class="addOtherFundcodeBox">
+                            <span class="left">其他</span>
+                            <span class="right mui-icon mui-icon-plusempty mr30"></span>
+                        </div>
+                        <div class="addOtherFundcodeBox_noData">暂未添加</div>
+                        <div class="otherAddList">
+                            <ul class="mui-table-view mt20 selectFundCode">
+                            <!--    <li class="mui-table-view-cell"><span class="ml50">基金代码</span><span>01234</span><span class="ml20">购买日期</span><span>2019-10-28</span><span class="ml20">金额</span><span>200000元</span><span class="mui-icon mui-icon-close"></span></li> -->
+                            </ul>
+                            <div class="addNull"></div>
+                        </div>
+                        
+                    </div>
+
+                </div>
+                
+                <div class="comfirmButtom mt20">
+                    <button class="mui-btn mui-btn-warning submitButton">提交申请</button>
+                </div>
+                
+             </div>
+
+           
+
+             <div class="popuplist" style="display:none">
+                <div class="popup-content">
+                    <div class="popup-mask">
+                        <span class="popup_cancel">取消</span><span class="popup_true">确定</span>
+                    </div>
+                    <div class="selectItemList sex">
+                        <ul class="mui-table-view">
+                        <!--
+                            <li class="mui-table-view-cell" type="sex"><span>男</span> <img class="true radioCheckItemImg"  src="/common/img/account_icon_check@2x.png" alt=""></li>
+                            <li class="mui-table-view-cell" type="sex"><span>女</span><img class="true radioCheckItemImg"  src="/common/img/account_icon_check@2x.png" alt=""></li>
+                        -->
+                        </ul>
+                    </div>
+                    <div class="selectItemList professional">
+                        <ul class="mui-table-view">
+                            <!--
+                            <li class="mui-table-view-cell" type="professional"><span>企业单位</span> <img class="true radioCheckItemImg"  src="/common/img/account_icon_check@2x.png" alt=""></li>
+                            <li class="mui-table-view-cell" type="professional"><span>公务员</span> <img class="true radioCheckItemImg"  src="/common/img/account_icon_check@2x.png" alt=""></li>
+                            <li class="mui-table-view-cell" type="professional"><span>个体</span> <img class="true radioCheckItemImg"  src="/common/img/account_icon_check@2x.png" alt=""></li>
+                            <li class="mui-table-view-cell" type="professional"><span>退休</span> <img class="true radioCheckItemImg"  src="/common/img/account_icon_check@2x.png" alt=""></li>
+                            <li class="mui-table-view-cell" type="professional"><span>其他</span> <img class="true radioCheckItemImg"  src="/common/img/account_icon_check@2x.png" alt=""></li>
+                            -->
+                        </ul>
+                    </div>
+                    <div class="selectItemList investment_year">
+                            <ul class="mui-table-view">
+                               <!--
+                                <li class="mui-table-view-cell" type="investment_year"><span>没有经验</span> <img class="true radioCheckItemImg"  src="/common/img/account_icon_check@2x.png" alt=""></li>
+                                <li class="mui-table-view-cell" type="investment_year"><span>2年以下</span> <img class="true radioCheckItemImg"  src="/common/img/account_icon_check@2x.png" alt=""></li>
+                                <li class="mui-table-view-cell" type="investment_year"><span>2-5年</span> <img class="true radioCheckItemImg"  src="/common/img/account_icon_check@2x.png" alt=""></li>
+                                <li class="mui-table-view-cell" type="investment_year"><span>5-10年</span> <img class="true radioCheckItemImg"  src="/common/img/account_icon_check@2x.png" alt=""></li>
+                                <li class="mui-table-view-cell" type="investment_year"><span>10年以上</span> <img class="true radioCheckItemImg"  src="/common/img/account_icon_check@2x.png" alt=""></li>
+                               -->
+                            </ul>
+                    </div>
+                    <div class="selectItemList riskLevel">
+                            <ul class="mui-table-view">
+                                <!--
+                                <li class="mui-table-view-cell" type="riskLevel"><span>保守型</span> <img class="true radioCheckItemImg"  src="/common/img/account_icon_check@2x.png" alt=""></li>
+                                <li class="mui-table-view-cell" type="riskLevel"><span>稳健型</span> <img class="true radioCheckItemImg"  src="/common/img/account_icon_check@2x.png" alt=""></li>
+                                <li class="mui-table-view-cell" type="riskLevel"><span>成长型</span> <img class="true radioCheckItemImg"  src="/common/img/account_icon_check@2x.png" alt=""></li>
+                                -->
+                            </ul>
+                    </div>
+                    <div class="selectItemList expectedInvestment_year">
+                        <ul class="mui-table-view">
+                            <!--
+                            <li class="mui-table-view-cell" type="expectedInvestment_year"><span>2年以下</span><img class="true radioCheckItemImg"  src="/common/img/account_icon_check@2x.png" alt=""></li>
+                            <li class="mui-table-view-cell" type="expectedInvestment_year"><span>2-5年</span><img class="true radioCheckItemImg"  src="/common/img/account_icon_check@2x.png" alt=""></li>
+                            <li class="mui-table-view-cell" type="expectedInvestment_year"><span>5-10年</span> <img class="true radioCheckItemImg"  src="/common/img/account_icon_check@2x.png" alt=""></li>
+                            <li class="mui-table-view-cell" type="expectedInvestment_year"><span>10年以上</span> <img class="true radioCheckItemImg"  src="/common/img/account_icon_check@2x.png" alt=""></li>
+                            -->
+                        </ul>
+                    </div>
+                    <div class="selectItemList liquidity">
+                            <ul class="mui-table-view">
+                                <!--
+                                <li class="mui-table-view-cell" type="liquidity"><span>低</span> <img class="true radioCheckItemImg"  src="/common/img/account_icon_check@2x.png" alt=""></li>
+                                <li class="mui-table-view-cell" type="liquidity"><span>中</span> <img class="true radioCheckItemImg"  src="/common/img/account_icon_check@2x.png" alt=""></li>
+                                <li class="mui-table-view-cell" type="liquidity"><span>高</span> <img class="true radioCheckItemImg"  src="/common/img/account_icon_check@2x.png" alt=""></li>
+                                -->
+                            </ul>
+                    </div>
+                    <div class="selectItemList yield">
+                        <div class="mt20 listBox">
+                            <input class="yieldFirst" type="number" placeholder="请输入最低预期年化收益率"  max="100" />
+                            <span class="line">---</span>
+                            <input class="yieldSecond" type="number" placeholder="请输入最高预期年化收益率" max="100" />
+                        </div>
+
+                        <div class="warmMessage yieldWarmMessage"></div>
+                           
+                    </div>  
+                    <div class="selectItemList loss">
+                        <div class="mt20 listBox"> 
+                            <input class="lossFirst" type="number" placeholder="请输入最低可承受回撤" max="100"/>
+                            <span class="line">---</span>
+                            <input class="lossSecond" type="number" placeholder="请输入最高可承受回撤" max="100" />
+                        </div>
+                        <div class="warmMessage lossWarmMessage"></div>    
+                     </div>        
+                </div>
+        </div>
+        <div class="addOtherFund">   
+        </div>
+        <div class="addOtherFund_content">
+            <ul class="mui-table-view">
+                <li class="mui-table-view-cell"><span class="left">基金代码</span><span class="right mr60"> <input type="text" class="mui-input-clear fundCode_input" placeholder="请输入基金代码"></span></li>
+                <li class="mui-table-view-cell"><span class="left">购买日期</span> <span class="mui-icon mui-icon-arrowright"></span><span class="right dataPick"></span></li>
+                <li class="mui-table-view-cell"><span class="left">购买金额</span><span class="right mr60"> <input type="text" class="mui-input-clear money_input" placeholder="请输入金额"></span></li>
+            </ul>
+            <div class="warmMessage">基金代码,购买日期,购买金额不能为空</div>
+            <div class="comfirmButtom mt20">
+                <button class="mui-btn addOtherFalse">取消</button>
+                <button class="mui-btn addOtherTrue">确认添加</button>
+            </div>
+        </div>  
+          
+
+         </div>
+         
+    </div>
+     </section>
+    <script class="selectItem" type="text/x-handlebars-template">
+        {{#each this}}
+            <li class="mui-table-view-cell" type={{dicType}} dicCode = {{dicCode}}><span>{{value}}</span> <img class="true radioCheckItemImg"  src="/common/img/account_icon_check@2x.png" alt=""></li>
+        {{/each}}
+    </script> 
+     
+    <script id="templateTransferFunds" type="text/x-handlebars-template">
+        {{#each this}}
+        <li class="mui-table-view-cell" code={{fundCode}}>
+                <span class="nullStyle"></span>
+                <span class="fundCodeListItem">
+                    <span class="fundCodeListItem_tital">基金代码</span>
+                    <span class="fundCodeListItem_val">{{fundCode}}</span>
+                </span>
+                <span class="fundCodeListItem">
+                        <span class="fundCodeListItem_tital">购买日期</span>
+                        <span class="fundCodeListItem_val">{{purchaseDateStr}}</span>
+                    </span>
+                <span class="fundCodeListItem">
+                        <span class="fundCodeListItem_tital">金额</span>
+                        <span class="fundCodeListItem_val">{{purchaseAmount}}元</span>
+                </span>
+                <span class="mui-icon mui-icon-close"></span>
+            </li>
+       <!-- <li class="mui-table-view-cell" code={{fundCode}}><span class="ml50">基金代码</span><span>{{fundCode}}</span><span class="ml20">购买日期</span><span>{{dataPick}}</span><span class="ml20">金额</span><span>{{money}}元</span><span class="mui-icon mui-icon-close"></span></li>  -->
+        {{/each}}
+    </script>
+
+    <script id="readyPurchaseHTFunds" type="text/x-handlebars-template">
+        {{#each this}}
+        <li checkStatus = {{checkStatu}} fundCode={{fundCode}} purchaseDate={{purchaseDate}} purchaseAmount={{purchaseAmount}} diagnoseApplyId={{diagnoseApplyId}}>
+              {{#if checkStatu}}
+                <input type="checkbox" checked   listId = {{id}}>
+               {{else}} 
+               <input type="checkbox" listId = {{id}}>
+               {{/if}}
+                <span class="fundCodeListItem">
+                    <span class="fundCodeListItem_tital">基金代码</span>
+                    <span class="fundCodeListItem_val">{{fundCode}}</span>
+                </span>
+                <span class="fundCodeListItem">
+                        <span class="fundCodeListItem_tital">购买日期</span>
+                        <span class="fundCodeListItem_val">{{purchaseDateStr}}</span>
+                    </span>
+                    <span class="fundCodeListItem">
+                            <span class="fundCodeListItem_tital">金额</span>
+                            <span class="fundCodeListItem_val">{{purchaseAmount}}元</span>
+                    </span>
+            </li>
+        {{/each}}
+    </script>
+
+    
+     @@include('@pathInclude/views/footer.html')
+
+     <script src="/mine/static/js/fundAccountDiagnosisResult.js"></script>
+ </body>
+ 
+ </html>

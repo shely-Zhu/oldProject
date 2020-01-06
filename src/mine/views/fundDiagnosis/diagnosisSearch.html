@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2019-12-03 13:54:18
- * @LastEditTime: 2019-12-05 10:19:49
+ * @LastEditTime: 2019-12-10 11:21:05
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \htjf-app\src\mine\views\fundDiagnosis\diagnosisSearch.html
@@ -16,12 +16,13 @@
 <html>
 
 <head>
-    <meta charset="UTF-8">
+    <!--<meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <meta name="applicable-device" content="mobile">
     <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="black">
-    <link rel="stylesheet" href="../../../mine/static/css/hotDiagnosis.css">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">-->
+    @@include('@pathInclude/views/meta.html')	
+    <link rel="stylesheet" href="/mine/static/css/hotDiagnosis.css">
     <title>基金诊断</title>
 </head>
 
@@ -29,7 +30,8 @@
     <section class="hotDiagnosis clearfix">
         <div class="fixedWrap">
             <!-- 搜索 -->
-            @@include('@pathCommonViews/headBarConfig.html',{"bgColors":"#384A81,#2A3C70","showType":"1","pathName":"基金诊断"})
+            <!--@@include('@pathCommonViews/headBarConfig.html',{"bgColors":"#384A81,#2A3C70","showType":"1","pathName":"基金诊断"})-->
+            @@include('@pathCommonViews/headBarConfig.html',{"bgColors":"#384A81,#2A3C70","showType":"0","pathName":"基金诊断"})
             <div class="branchSearchArea">
                 <div class="branchHeader">
                     <div class="form-wrap">
@@ -65,7 +67,7 @@
             <!-- 没有数据 -->
             @@include('@pathCommonCom/noData/noData.html', {"tipText": "暂无数据"})
             <!-- 加载中loading -->
-            @@include('@pathCommonViews/loading/listLoading.html')
+            <!-- @@include('@pathCommonCom/loading/listLoading.html') -->
         </div>
     </section>
     <script id="fundList-template" type="text/x-handlebars-template">
@@ -81,11 +83,10 @@
         </div>
     {{/each}}
     </script>
+    
     @@include('@pathInclude/views/footer.html')
-    <!-- 添加埋点 -->
-    @@include('@pathInclude/views/header.html')
-    <script src="/include/js/iscroll.js"></script>
-    <script src="../../../mine/static/js/diagnosisSearch.js"></script>
+
+    <script src="/mine/static/js/diagnosisSearch.js"></script>
 </body>
 
 </html>

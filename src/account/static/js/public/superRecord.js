@@ -12,11 +12,13 @@ require('@pathCommonJs/ajaxLoading.js');
 // 切换
 require('@pathCommonJsCom/tabScroll.js');
 require('@pathCommonJsCom/goTopMui.js');
-require('@pathCommonJs/components/elasticLayer.js');
-require('@pathCommonJs/components/elasticLayerTypeFive.js');
-require('@pathCommonJs/components/headBarConfig.js');
+// require('@pathCommonCom/elasticLayer/elasticLayer/elasticLayer.js');
+/*require('@pathCommonJs/components/elasticLayerTypeFive.js');*/
+// require('@pathCommonJs/components/headBarConfig.js');
 var splitUrl = require('@pathCommonJs/components/splitUrl.js')();
 var alwaysAjax = require('@pathCommonJs/components/alwaysAjax.js');
+var setCookie = require('@pathNewCommonJsCom/setCookie.js');
+var getCookie = require('@pathNewCommonJsCom/getCookie.js');
 
 
 $(function() {
@@ -34,9 +36,9 @@ $(function() {
             ],
             aP: {
                 pageCurrent: 1,
-                pageSize: 10,
+                pageSize: 15,
             },
-            current_index: 0, //左右滑动区域的索引
+            current_index: getCookie("superTab")?getCookie("superTab"):0, //左右滑动区域的索引
             list_template: '', //列表的模板，生成后存放在这里
             ajaxArr: [], //存放每一个ajax请求的传参数据
             // 存放ajax请求地址  已持仓  待确认
@@ -56,8 +58,13 @@ $(function() {
             //拼模板，初始化左右滑动mui组件
             that.beforeFunc();
 
-            //初始化第一屏区域的上拉加载
-            that.initMui($('#scroll1'));
+            //初始化第一屏区域的上拉加载 判断存没存cookie
+            if(getCookie("superTab")){
+                console.log($('#scroll'+(parseInt(that.gV.current_index)+1)))
+                that.initMui($('#scroll'+(parseInt(that.gV.current_index)+1)));
+            }else{
+                that.initMui($('#scroll1'));
+            }
 
 
             //事件监听
@@ -102,6 +109,7 @@ $(function() {
                 needNavAction: false,
                 //needBlock: true,
                 navList: that.gV.navList, //导航
+                activeList:that.gV.current_index,
                 contentLength: that.gV.navList.length, //左右滑动的区域个数，即导航数组长度
                 contentList: contentArr, //此时只有框架，实际列表内容还未请求
                 callback: function(t) { //t返回的是 id 为 scroll1 / scroll2 这样的切换后当前区域中的节点
@@ -109,6 +117,7 @@ $(function() {
                     var index = t.attr('data-scroll');
                     //data-scroll属性即当前左右切换区域的索引
                     that.gV.current_index = index;
+                    setCookie("superTab",index) 
 
                     //判断当前区域是否已经初始化出来上拉加载
                     if (t.hasClass('hasPullUp')) {
@@ -205,10 +214,10 @@ $(function() {
             });
 
                 //无缝滚动
-                setTimeout(function() {
+                /*setTimeout(function() {
                     //无缝滚动
-                    alwaysAjax('#' + w + ' .mui-table-view-cell', s , 50)
-                }, 1000)
+                    alwaysAjax($('#' + w + ' .mui-table-view-cell'), s , 50)
+                }, 1000)*/
 
             // mui('.mui-slider').slider().stopped = true;
         },
@@ -219,17 +228,21 @@ $(function() {
                 url: that.gV.siteUrlArr[that.gV.current_index],//调用第几个接口
                 data: that.gV.ajaxArr[that.gV.current_index],//传调用参数
                 needLogin: true,
+                needLoading: false,
                 callbackDone: function(json) {
                     var jsonData = json.data,
                         pageList = jsonData.pageList;
 
                     if (!$.util.objIsEmpty(pageList)) {
-
                         pageList.map(function(e){
-
                             e.tobe = that.gV.current_index == 0 ? true : false;
+                            if(that.gV.current_index == "1"){
+                                if(e.fundBusinCode == "098"){
+                                    e.taconfirmFlagStatu = true
+                                }
+                            }
                         })
-
+                        
                         var list_html = that.gV.list_template(jsonData);//  把内容  放到  模板里
                         //设置这两参数，在initMui()中使用
                         //判断是否显示没有更多了等逻辑，以及插入新数据
@@ -291,7 +304,7 @@ $(function() {
                         } else {
                             t.endPullupToRefresh(false);
                         }
-
+                        console.log(that.gV.ajaxArr)
                         $id.find('.contentWrapper .mui-pull-bottom-pocket').removeClass('mui-hidden');
                         if (that.gV.ajaxArr[that.gV.current_index].pageCurrent == 1) {
                             //第一屏
@@ -325,7 +338,7 @@ $(function() {
                         setTimeout(function() {
                             that.getElements.listLoading.hide();
                         }, 100);
-
+                        alwaysAjax($id.find('.mui-table-view-cell'), $id.find(".contentWrapper"), 2)
                     }, 200)
 
 
@@ -358,8 +371,10 @@ $(function() {
                     t.endPullupToRefresh(false);
 
                     //没有数据
-                    $id.find('.mui-scroll .list').html(that.getElements.noData.clone(false)).addClass('noCon');
-                    $id.find('.noData').show();
+                    if(that.gV.ajaxArr[that.gV.current_index].pageCurrent == 1) {
+                        $id.find('.mui-scroll .list').html(that.getElements.noData.clone(false)).addClass('noCon');
+                        $id.find('.noData').show(); 
+                    }
 
                     setTimeout(function() {
                         that.getElements.listLoading.hide();
@@ -393,12 +408,13 @@ $(function() {
         events: function() { //绑定事件
             var that = this;
             //点击列表跳转
-            mui('body').on('tap','.datalist',function(){
+            mui('body').on('mdClick','.datalist',function(){
                 var applyId=$(this).attr('data-applyId');
                 var isBuy=$(this).attr('data-isBuy');
                 var isCash = true
-                window.location.href=site_url.publicTradeDetail_url+'?applyId='+applyId+'&isBuy='+isBuy 
-                                        +'&isCash='+isCash;
+               window.location.href=site_url.publicTradeDetail_url+'?applyId='+applyId+'&isBuy='+isBuy+'&isCash='+isCash;
+            },{
+                'htmdEvt': 'superRecord_0'
             });
         }
     };

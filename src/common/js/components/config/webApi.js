@@ -1,8 +1,13 @@
 /*
  * @page: pc wap 端共用接口
  * @Author: chengqingqing
+<<<<<<< HEAD
  * @Date:   2019-03-28
  * @Last Modified by:   Marte
+=======
+ * @Date:   2019-03-28 
+ * @Last Modified by:   songxiaoyu
+>>>>>>> 28caca48b5a5940bc48e2c35e69e828ec2c30db0
  * @description:
  */
 
@@ -41,16 +46,22 @@ module.exports = function() {
     this.share_api = http_url.web_url + '/account/frontend/weixin/share'; //老带新微信分享
     this.oldRecommendNew_api = http_url.web_url + '/account/oldRecommendNew'; // 微信公众号获取参数
     // 其他资产
+<<<<<<< HEAD
 
     this.getJJSInTransitAssets_api = http_url.web_url + '/account/jjs/getJJSInTransitAssets'; // 查询金交所在途资产
     //待确认，已确认列表
     this.getTradeList_api = http_url.web_url + '/pef/getTradeList'
         // 查询金交持仓资产、在途资产、总资产
     this.getJJSAssets_api = http_url.web_url + '/account/jjs/getJJSAssets';
+=======
+    this.getJJSInTransitAssets_api = http_url.web_url + '/account/jjs/getJJSInTransitAssets'; // 查询金交所在途资产 
+    // 查询金交持仓资产、在途资产、总资产
+    this.getJJSAssets_api = http_url.web_url + '/account/jjs/getJJSAssets'; 
+>>>>>>> 28caca48b5a5940bc48e2c35e69e828ec2c30db0
     // jjs持仓明细查询
     this.queryAssetsDetailByPages_api = http_url.web_url + '/account/jjs/queryAssetsDetailByPages'
 
-
+    
     /*-------------------账户相关 end ------------------------------*/
 
     /*-------------------内容相关------------------------------*/
@@ -67,8 +78,6 @@ module.exports = function() {
     this.findInvestorClassification_api = http_url.web_url + '/content/frontend/findInvestorClassification';
     //文件下载
     this.download_api = http_url.web_url + '/content/file/fastDFS/download'; //文件下载
-    //文件下载新
-    this.downloadNew_api = http_url.web_url + '/content/file/fastDFS/downloadNew'; //文件下载
     // 内容管理接口
     this.findContentByCategory_api = http_url.web_url + '/content/frontend/findContentByCategory'; // 内容管理接口
 
@@ -82,10 +91,11 @@ module.exports = function() {
 
 
     /*-------------------私募相关  ------------------------------*/
-    // this.prvDetail_api = http_url.web_url + '/pef/queryFundDetail'; //私募详情查询
+    this.prvDetail_api = http_url.web_url + '/pef/queryFundDetail'; //私募详情查询
     this.prvLevel_api = http_url.web_url + '/pef/queryBenefitLevel'; //受益级别查询
     this.prvHisValue_api = http_url.web_url + '/pef/queryHistoryNetValue'; //历史净值查询
     this.prvLight_api = http_url.web_url + '/pef/queryProductImage'; //产品亮点查询
+    this.queryReourceLabels_api = http_url.web_url + "/pef/queryReourceLabels"; //获取私募产品材料标签
     this.prvReource_api = http_url.web_url + '/pef/queryReourceList'; //产品材料接口
     this.recommend_api = http_url.web_url + '/pef/frontend/findRecommand'; //私募首页--产品推荐
     this.collect_info_api = http_url.web_url + '/pef/getRaiseInfo'; //查询产品募集信息
@@ -94,11 +104,7 @@ module.exports = function() {
 
     /*-------------------公募相关------------------------------*/
     this.query_api = http_url.web_url + '/pof/frontend/fund/query'; //热门诊断基金列表搜索
-    this.pofTotalAssets_api = http_url.web_url + '/account/pof/totalAssets'; // 公募总资产
-    this.fundNetWorthList_api = http_url.web_url + '/pof/fundDetails/frontend/fundNetWorthList'; //历史明细
-    this.queryIncomeList_api = http_url.web_url + '/account/pof/queryIncomeList'; //收益明细
 
-    this.cashQueryIncomeList_api = http_url.web_url + '/account/pof/cash/queryIncomeList'; //超宝收益明细
 
     /*-------------------公募相关 end ------------------------------*/
 
@@ -112,13 +118,7 @@ module.exports = function() {
 
     /*-------------------营销相关 end ------------------------------*/
 
-    /*-------------------生活-会员俱乐部 ------------------------------*/
-    this.getActivitiesList_api = http_url.web_url + '/marketing/activity/getActivitiesList'; //会员俱乐部-活动列表
-    this.getDetailActivity_api = http_url.web_url + '/marketing/activity/getDetailActivity'; //会员俱乐部-活动详情
-    this.activityApply_api = http_url.web_url + '/marketing/activityApply'; //会员俱乐部-立即报名
-    this.shareInfo_api = http_url.web_url + '/marketing/activity/shareInfo'; //会员俱乐部-分享给好友
 
-    /*-------------------生活-会员俱乐部 end ------------------------------*/
     /*-------------------银杏研究相关 ------------------------------*/
 
 
@@ -139,7 +139,7 @@ module.exports = function() {
 
     //文章模板接口
     //  this.getArticle_api = http_url.web_url + '/account/articleExample';
-    this.getArticle_api = http_url.web_url + '/content/frontend/getArticle';
+//  this.getArticle_api = http_url.web_url + '/content/frontend/getArticle';
     //信息披露
     this.queryReourceLabels_api = http_url.web_url + '/pef/queryReourceLabels';
     this.queryReourceList_api = http_url.web_url + '/pef/queryReourceList';
@@ -156,11 +156,9 @@ module.exports = function() {
     this.queryFinancialer_api = http_url.web_url + '/account/home/frontend/queryFinancialer';
 
     /*-------------------明星理财师结束 ------------------------------*/
-    //会员俱乐部-活动列表
-    this.getActivitiesList_api = http_url.web_url + '/marketing/activity/getActivitiesList';
     //会员俱乐部-活动-城市定位列表-根据城市类型或者首字母获取城市list
 
-    this.cityList_api = http_url.web_url + '/marketing/activity/cityList';
+    this.cityList_api = http_url.web_url + '/marketing/frontend/cityList';
     //我的奖励
     this.getPrizeInfo_api = http_url.web_url + "/account/myPrize/getPrizeInfo";
     //我的奖励查看详情
@@ -171,9 +169,9 @@ module.exports = function() {
 
     //会员俱乐部-活动列表-获取城市定位
     this.getCity_api = http_url.web_url + '/marketing/frontend/getCity'
-    //新增客户反馈
+        //新增客户反馈
     this.insertFeedback_api = http_url.web_url + '/account/insertFeedback'
-    //上传图片
+        //上传图片
     this.upload_api = http_url.web_url + '/content/file/upYun/upload'
 
     this.getCity_api = http_url.web_url + '/marketing/frontend/getCity';
@@ -216,6 +214,8 @@ module.exports = function() {
     this.getNoticeAndTransDynamic_api = http_url.web_url + '/account/account/getNoticeAndTransDynamic';
     //查询单条文章(APPCMS后台)
     this.getArticle_api = http_url.web_url + '/content/frontend/getArticle';
+    //查询了解恒天配置信息
+    this.queryHtInformation_api = http_url.web_url + '/account/home/frontend/queryHtInformation';
 
     /*------------------- 消息中心 end ------------------------------*/
 
@@ -320,6 +320,8 @@ module.exports = function() {
     this.prfFundFeeRate_api = http_url.web_url + '/pof/fundFeeRate/frontend/query'; //15.金服WEB-定投费率-查询
     this.prfFundList_api = http_url.web_url + '/pof/newIssue/frontend/fundList'; //16.金服WEB-新发基金-列表查询
     this.prfQuerynewsletter_api = http_url.web_url + '/pof/fundnewsletter/frontend/querynewsletter'; //17.金服WEB-基金时讯-查询
+    this.queryFundTransferAssetsDetail_api = http_url.web_url + '/account/queryFundTransferAssetsDetail'; // 金服WEB-基金时支付列表
+    this.collectFund_api = http_url.web_url + '/pof/fundCollection/frontend/collectFund'; // 自选基金-收藏管理（
 
 
     /*------------------- 私募理财fang——le end ------------------------------*/
@@ -328,7 +330,7 @@ module.exports = function() {
     this.queryFortuneCollegeFir_api = http_url.web_url + '/account/home/frontend/queryFortuneCollegeFir'; //财富翻译官/早知道
 
     this.getFortuneTabInfo_api = http_url.web_url + '/account/home/frontend/getFortuneTabInfo'; // 财富讲堂/财富研究 页签查询
-    this.queryFortuneArticleList_api = http_url.web_url + '/account/home/frontend/queryFortuneArticleList'; // 财富文章列表
+//  this.queryFortuneArticleList_api = http_url.web_url + '/account/home/frontend/queryFortuneArticleList'; // 财富文章列表
 
     //已报名活动
     this.getApplyActivity_api = http_url.web_url + '/marketing/activity/getApplyActivity';
@@ -357,16 +359,24 @@ module.exports = function() {
     //yan
     this.findMessageCenterById_api = http_url.web_url + '/content/frontend/findMessageCenterById'; //证监会要求查看详情
 
+<<<<<<< HEAD
     this.queryTransferFunds_api= http_url.web_url +'/account/queryTransferFunds'; // 查询基金列表
     this.newFundDetails_api = http_url.web_url + '/pof/fundDetails/frontend/newfundDetails';//基金年化查询
     this.redemptionPay_api = http_url.web_url + '/pof/redemptionPay/redemptionPay';//赎回确认
     this.findProtocolBasic_api = http_url.web_url + '/content/findProtocolBasic' ; //进入基金转出页面调用
     this.cashList_api = http_url.web_url + '/account/bankCard/cashList';//查询银行卡转出
+=======
+    this.queryTransferFunds_api = http_url.web_url + '/account/queryTransferFunds'; // 查询基金列表
+    this.newFundDetails_api = http_url.web_url + '/pof/fundDetails/frontend/newfundDetails'; //基金年化查询
+    this.redemptionPay_api = http_url.web_url + '/pof/redemptionPay/redemptionPay'; //赎回确认
+    this.findProtocolBasic_api = http_url.web_url + '/content/findProtocolBasic'; //进入基金转出页面调用
+    this.cashList_api = http_url.web_url + '/account/bankCard/cashList'; //查询银行卡转出
+>>>>>>> 28caca48b5a5940bc48e2c35e69e828ec2c30db0
     this.findProtocolContent_api = http_url.web_url + '/content/frontend/findProtocolContent'; //转出协议查询
     this.doCashTreasureSell_api = http_url.web_url + '/pof/cash/doCashTreasureSell'
-    this.getCashTreasureLimitInfo_api = http_url.web_url + '/pof/cash/forntend/getCashTreasureLimitInfo'  //转出份额限定 单日等
-    this.findProtocolContentRule_api = http_url.web_url + '/content/frontend/findProtocolContent';//转出规则查询
+    this.getCashTreasureLimitInfo_api = http_url.web_url + '/pof/cash/forntend/getCashTreasureLimitInfo' //转出份额限定 单日等
+    this.findProtocolContentRule_api = http_url.web_url + '/content/frontend/findProtocolContent'; //转出规则查询
 
-    this.queryFundTransferAssets_api = http_url.web_url+ '/account/queryFundTransferAssets'    //查询活期理财列表
+    this.queryFundTransferAssets_api = http_url.web_url + '/account/queryFundTransferAssets' //查询活期理财列表
 
 };

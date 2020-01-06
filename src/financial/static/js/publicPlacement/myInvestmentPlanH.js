@@ -8,13 +8,6 @@
 require('@pathCommonBase/base.js');
 //ajax调用
 require('@pathCommonJs/ajaxLoading.js');
-//下拉加载更多
-// require('@pathCommonJs/scrollFullPage.js');
-// 切换
-require('@pathCommonJsCom/tabScroll.js');
-require('@pathCommonJsCom/goTopMui.js');
-require('@pathCommonJs/components/elasticLayer.js');
-require('@pathCommonJs/components/elasticLayerTypeFive.js');
 var generateTemplate = require('@pathCommonJsComBus/generateTemplate.js');
 $(function () {
     var somePage = {
@@ -36,13 +29,42 @@ $(function () {
         getData: function (t) {
             var that = this;
             $(".listLoading").hide();
-            that.gV.dataList = JSON.parse(sessionStorage.getItem('stopList'));
+            var obj = [{
+                url: site_url.protocolList_api,
+                data: {
+                    "pageNo": 1, //非必须，默认为1
+                    "pageSize": 100,//非必须，默认为10
+                },
+                needDataEmpty: true,
+                needLoading: false,
+                callbackDone: function(json) {    
+                    var data = json.data.pageList;
+                    for(var i=0;i<data.length;i++){
+                        if(data[i].fixState == 'H'){
+                            that.gV.dataList.push(data[i])
+                        }
+                    }
+                    generateTemplate(that.gV.dataList, that.$e.recordList, that.$e.investmentPlanTemp);
+                        
+                },
+                callbackNoData: function( json ){
+                },
+                callbackFail: function(json) {
+                },
+            }];
+            $.ajaxLoading(obj);
+            //that.gV.dataList = JSON.parse(sessionStorage.getItem('stopList'));
             // 将列表插入到页面上
-            generateTemplate(that.gV.dataList, that.$e.recordList, that.$e.investmentPlanTemp);
            
         },
         events: function () {
-           
+            // 跳转详情页
+            mui("body").on("mdClick", ".investmentPlan-item", function (e) {
+                var scheduledProtocolId = $(this).data('id');
+                window.location.href = site_url.pofCastSurelyDetails_url + '?scheduledProtocolId=' + scheduledProtocolId;
+            }, {
+				htmdEvt: 'myInvestmentPlan_01'
+            });
         },
     };
     somePage.init();

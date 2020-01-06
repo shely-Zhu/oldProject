@@ -2,7 +2,7 @@
  * 我的  设置js文件
  * @author  yangjinlai 2017-03-07
  */
-require('@pathCommonBase/base.js');
+
 require('../../../../include/js/vendor/config.js');
 
 //zepto模块

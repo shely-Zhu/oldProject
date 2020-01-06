@@ -24,21 +24,12 @@
                  <li>日涨幅(%)</li>
              </ul>
          </div>
-         <div class="list">
-             <div class="contentWrapper">
-                 <ul class="mui-table-view">
-                     <li class="mui-table-view-cell">
-                         <div class="contentWrap">
-                                 <!-- 放置列表 -->
-                         </div>
-                     </li>
-                     @@include('@pathCommonViews/goTop.html')
-                 </ul>
-             </div>
-         </div>
+         @@include('@pathCommonCom/noData/noData.html', {"tipText": "暂无数据"})
+         <div class="list"></div>
+         
          <script id="adjustment-template" type="text/x-handlebars-template">
              {{#each this}}
-                <ul class="contentWrapUl">
+                <ul class="contentWrapUl listItem">
                      <li>{{trdDt}}</li>
                      <li>{{unitNav}}</li>
                      <li>{{accuUnitNav}}</li>
@@ -51,9 +42,6 @@
                  </ul>
              {{/each}}
          </script>
-         <div class="noDataMore">
-             @@include('@pathCommonCom/noData/noData.html', {"tipText": "暂无数据"})
-         </div>
      </div>
  
      @@include('@pathInclude/views/footer.html')

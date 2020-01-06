@@ -7,7 +7,7 @@ require('@pathCommonBase/base.js');
 require('@pathCommonJs/ajaxLoading.js');
 var splitUrl = require('@pathCommonJs/components/splitUrl.js')();
 var generateTemplate = require('@pathCommonJsComBus/generateTemplate.js');
-var alwaysAjax = require('@pathCommonJs/components/alwaysAjax.js'); 
+require('@pathCommonCom/pullRefresh/pullRefresh.js');
 
 $(function() {
 
@@ -38,8 +38,95 @@ $(function() {
             if (!$('.list').hasClass('setHeight')) {
                 $('.list').height(height).addClass('setHeight');
             }
+            $.pullRefresh({
+                wrapper: $('.list'),
+                class: 'listItem',
+                template: that.$e.adjustmentTemp, 
+                callback: function(def, t){
+                    var obj = [{
+                        url: site_url.dealDetailList_api,
+                        data: { 
+                            "pageNo": that.gV.pageCurrent, //非必须，默认为1
+                            "pageSize": that.gV.pageSize,//非必须，默认为10
+                            "projectId": that.gV.projectId,//项目id
+                        },                        
+                        needDataEmpty: true,
+                        callbackDone: function(json) {     
+                            var data = json.data.pageList;
+                            if(that.gV.pageCurrent == 1 && data.length == 0) {
+                                $(".list").css("display", "none")
+                                that.$e.noData.show()
+                                } else {
+                                    var len = json.data.pageList;
+                                for(var i =0;i<len.length;i++){
+                                    if(len[i].redemptionType == 0&&len[i].tradeType == 2){
+                                        len[i].redemptionType = "普通赎回"                              
+                                    }else if(len[i].redemptionType == 1&&len[i].tradeType == 2){
+                                        len[i].redemptionType = "快速赎回"
+                                    }
+                                }
+                                for(var i =0;i<len.length;i++){
+                                    if(len[i].tradeType == "2"){
+                                        len[i].tradeType = "赎回"
+                                    }else if(len[i].tradeType == "1"){                               
+                                        len[i].tradeType = "申购"
+                                    }else if(len[i].tradeType == "0"){
+                                        len[i].tradeType = "认购"
+                                    }
+                                }
+                                def && def.resolve( data, that.gV.pageCurrent);
+                                if(that.gV.pageCurrent == 1){
+                                    for(var i =0;i<len.length;i++){
+                                        if(len[i].tradeType == "赎回"){
+                                            $(".photoleft").eq(i).addClass("test")
+                                        }else if(len[i].tradeType == "申购"){                               
+                                            $(".photoleft").eq(i).addClass("testone")
+                                        }else if(len[i].tradeType == "认购"){
+                                            $(".photoleft").eq(i).addClass("testoneo")
+            
+                                        }
+                                    }
+                                }else{
+                                    for(var i =0;i<len.length;i++){
+                                        if(len[i].tradeType == "赎回"){
+                                            $(".photoleft").eq(i+15*that.gV.pageCurrent-15).addClass("test")
+                                        }else if(len[i].tradeType == "申购"){                               
+                                            $(".photoleft").eq(i+15*that.gV.pageCurrent-15).addClass("testone")
+                                        }else if(len[i].tradeType == "认购"){
+                                            $(".photoleft").eq(i+15*that.gV.pageCurrent-15).addClass("testoneo")
+            
+                                        }
+                                    }
+                                }
+                                for(var i =0;i<len.length;i++){
+                                    if(len[i].redemptionType == 0&&len[i].tradeType == 2){
+                                        len[i].redemptionType = "普通赎回"
+                                        
+                                    }else if(len[i].redemptionType == 1&&len[i].tradeType == 2){
+                                        len[i].redemptionType = "快速赎回"
 
-            mui.init({
+                                    }else if(len[i].redemptionType == ""){
+                                        $(".rightUl").eq(i).css("display","none")
+                                    }
+                                }
+                                that.gV.pageCurrent++;
+                            }
+                        },
+                        callbackNoData: function( json ){  
+                            if(that.gV.pageCurrent == 1) {
+                                $(".list").css("display", "none")
+                            }
+                            def && def.reject( json, that.gV.pageCurrent );
+                        },
+                        callbackFail: function(json) {
+                            def && def.reject( json, that.gV.pageCurrent );
+                        },
+                    }];
+                    $.ajaxLoading(obj); 
+                }
+            })
+
+            /*mui.init({
                 pullRefresh: {
                     container: '.contentWrapper',
                     up: {
@@ -76,9 +163,9 @@ $(function() {
 
                 //为$id添加hasPullUp  class
                 $('.list').addClass('hasPullUp');
-            });
+            });*/
         },
-        getData: function(t) {
+        /*getData: function(t) {
             var that = this;
             var obj = [{ // 系统调仓记录列表
                 url: site_url.dealDetailList_api,
@@ -194,9 +281,9 @@ $(function() {
                      
             }];
             $.ajaxLoading(obj);
-        },
+        },*/
         events:function(){
-            alwaysAjax()
+            //alwaysAjax($('.contentWrap'))
         }
     };
     somePage.init();

@@ -21,6 +21,7 @@ html {
 }
 .without{
 	margin-top: 1.7rem;
+	padding:0;
 	color: @c001;
 	.nodataImg{
 		width: 2.67rem;
@@ -87,6 +88,9 @@ html {
 .mui-slider .mui-slider-group{
 	margin-top: 0.4rem;
 }
+.monthReportDetail{
+	background:rgba(247,250,253,1)
+}
 
 .reportDetailHeader{
 	position: relative;
@@ -109,16 +113,18 @@ html {
 			.clientTitle{
 				font-size: 0.26rem;
 				color: @6C4517;
+				font-weight: 600;
 			}
 			.clientName{
+				display: inline;
 				margin-top: 0.1rem;
 				font-size: 0.48rem;
 				font-weight:600;
 				color: @995100;
-				background:linear-gradient(180deg, #CC9B68 100%, #995100 100%);
+				background:linear-gradient(180deg, rgba(204,155,104,1) 0%, rgba(153,81,0,1) 100%);
 				-webkit-background-clip:text;
 				-webkit-text-fill-color:transparent;
-
+				font-weight: 600;
 			}
 			.clientLevel{
 				height: 0.4rem;
@@ -141,12 +147,18 @@ html {
 			font-size: 0.26rem;
 			color:@6C4517;
 			font-weight:600;
+			.mui-col-xs-6{
+				p:first-child{
+					font-weight: 600;
+					color: #6C4517;
+				}
+			}
 		}
 		.reportComent{
 			margin-top: 0.06rem;
 			font-size: 0.38rem;
 			color: @93591A;
-			font-weight:500;
+			font-weight:600;
 		}
 		
 	}
@@ -156,6 +168,7 @@ html {
 .mui-content{
 	margin: 0 auto;
 	margin-top: 1.4rem;
+	background:transparent;
 }
 .datalist {
 	margin: 0 auto 0.05rem;
@@ -316,6 +329,10 @@ html {
 	.monthReportTipContent{
 		margin-top: 0.24rem;
 		text-align: justify;
+		.tipPosition,.tipCompare{
+			color: @272727;
+			font-weight: 600;
+		}
 		p{
 			font-size: 0.28rem;
 			color: @272727;
@@ -333,6 +350,7 @@ html {
 		margin-top: 0.3rem;
 		font-size: 0.28rem;
 		color:@272727;
+		font-weight: 600;
 	}
 	.holdProduct{
 		margin-top: 0.6rem;
@@ -357,6 +375,8 @@ html {
 	font-weight: 500;
 	color: @272727;
 	line-height: 1.05rem;
+	background: @c005;
+	font-weight: 600;
 
 }
 .proListCon{
@@ -368,6 +388,9 @@ html {
 	font-size: 0.28rem;
 	margin: 0 auto;
 	.assetsCon{
+		p{
+			font-weight: 600;
+		}
 		h2{
 			color: @272727;
 			font-size: 0.28rem;
@@ -387,7 +410,7 @@ html {
 				position: relative;
 				border-radius:0.1rem;
 				& h3{
-					width: 2.2rem;
+					width: 2.3rem;
 					height: 0.4rem;
 					text-indent: 0.28rem;
 					font-size: 0.2rem;
@@ -487,7 +510,6 @@ html {
 				font-weight: 600;
 				color: @272727;
 				border-bottom:0.06rem solid rgba(196,146,94,1);
-				border-radius:0.06rem;
 			}
 		}
 	}

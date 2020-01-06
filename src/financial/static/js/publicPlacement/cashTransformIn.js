@@ -46,7 +46,9 @@ $(function () {
 			password: "",
 			tradeAcco: '' , //交易账号
 			tradeSource: '' , //交易账号
-			singleNum:0
+			singleNum:0,
+			minValue:0,
+			doubleClickStatus:false,
 		},
 		webinit: function () {
 			var that = this;
@@ -77,7 +79,8 @@ $(function () {
 						that.$el.paymentGainsDayStr.html(data.paymentGainsDayStr)
 						that.gV.fundName = data.fundName
 						that.gV.fundCode = data.fundCode
-						that.$el.transformInput.attr('placeholder',data.purchaseAmountMask)
+						that.gV.minValue = data.purchaseAmount ? Number(data.purchaseAmount) : 0						
+						that.$el.transformInput.attr('placeholder',data.purchaseAmountMask+"元起")
 						// for (var index = 0; index < data.tradeLimitList.length; index++) {
 						// 	if(that.gV.fundBusinCode ==  data.tradeLimitList[index].fundBusinCode){
 						// 	   that.$el.transformInput.attr('placeholder',data.tradeLimitList[index].minValue)
@@ -89,7 +92,7 @@ $(function () {
 						
 					}
                   
-                },
+                }
 
             }];
             $.ajaxLoading(obj);
@@ -113,14 +116,26 @@ $(function () {
 						var data = [] ;
 						data = json.data.pageList;
 						data.forEach(function(element) {
-							element.after4Num = element.bankAccountMask.substr(element.bankAccountMask.length -4)
+							element.after4Num = element.bankAccountMask.substr(element.bankAccountMask.length -4);
+							element.singleNum_w = Number(element.singleNum)/10000 + '万'
+							element.oneDayNum_w = Number(element.oneDayNum)/10000 + '万'
 						});
 						generateTemplate(data, that.$el.popupUl, that.$el.bankListTemplate,true);
 						$("#loading").hide()
 						$('.popup').css('display','block')
+						that.gV.doubleClickStatus = true
 					}
                   
-                },
+				},
+				callbackNoData:function(json){
+					generateTemplate("", that.$el.popupUl, that.$el.bankListTemplate,true);
+						$("#loading").hide()
+						$('.popup').css('display','block')
+						that.gV.doubleClickStatus = true
+
+				},
+				callbackFail:function(json){
+				}
 
             }];
             $.ajaxLoading(obj);
@@ -133,7 +148,8 @@ $(function () {
             var obj = [{ 
                 url: site_url.fundMaterial_api,
                 data: {
-                    fundCode:that.gV.fundCode
+					fundCode:that.gV.fundCode,
+					// fundCode:"003075",
                 },
                 //async: false,
                 needDataEmpty: true,
@@ -142,12 +158,14 @@ $(function () {
 						// 将列表插入到页面上
 						var data = [] ;
 						data = json.data;
-						data.forEach(element => {
+						data.forEach(function(element){
 							if(element.materialType == '1'){
-								that.$el.contract.attr('href',element.linkAddress)
+								that.$el.contract.attr('datalink',element.linkAddress)
+								that.$el.contract.attr('type','1')
 							}
 							if(element.materialType == '2'){
-								that.$el.recruiting.attr('href',element.linkAddress)
+								that.$el.recruiting.attr('datalink',element.linkAddress)
+								that.$el.recruiting.attr('type','2')
 							}
 						});
 						
@@ -178,6 +196,12 @@ $(function () {
 					}
 					
 				},
+				callbackNoData:function(json){
+                    tipAction(json.message);
+                },
+                callbackFail:function(json){
+                    tipAction(json.message);
+                }
 
 			}];
 			$.ajaxLoading(obj);
@@ -187,7 +211,7 @@ $(function () {
 			var that = regulatory;
 			regulatory.gV.password = val
 			var obj = [{ 
-				url: site_url.pofCashBuy_api + '/mock',
+				url: site_url.pofCashBuy_api,
 				data: {
 					fundCode:that.gV.fundCode,
 					fundName:that.gV.fundName,
@@ -293,7 +317,7 @@ $(function () {
 
 			//点击转出规则
 			mui("body").on('mdClick','.goRule',function(){
-				window.location.href = site_url.transactionRules_url + '?fundCode=' + that.gV.fundCode;
+				window.location.href = site_url.pofTransactionRules_url + '?fundCode=' + that.gV.fundCode;
 			}, {
 				htmdEvt: 'cashTransformIn_04'
 			}) 
@@ -333,6 +357,8 @@ $(function () {
 					singleNum:$(this).attr('singleNum'),
 					oneDayNum:$(this).attr('oneDayNum'),
 					after4Num:$(this).attr('after4Num'),
+					singleNum_w:Number($(this).attr('singleNum'))/10000 + '万',
+					oneDayNum_w:Number($(this).attr('oneDayNum'))/10000 + '万',
 				});
 				generateTemplate(data, that.$el.onlinepay, that.$el.bankListCheckTemplate,true);
 				setTimeout(function(){
@@ -344,6 +370,7 @@ $(function () {
 
 			//点击同意协议
 			mui("body").on("mdClick", ".item2 .iconfont", function (e) {
+				$("#transformInput").blur()
 				if ($(this).hasClass("check")) {
 					$(this).removeClass("check").html('&#xe668;');
 					that.$el.confirmBtn.attr('disabled',true)
@@ -357,11 +384,31 @@ $(function () {
 			
 			//确定
 			mui("body").on('mdClick','.btn_box .btn',function(){
+				var val = $("#transformInput").val();
+				if(val==""){
+					tipAction("转入金额不能为空");
+					return
+				}
 				if(!!that.gV.bankAccountSecret){
-					if(Number(that.gV.balance) > Number(that.gV.singleNum)){
-						tipAction('单笔金额不能超过' + that.gV.singleNum + '元')
-						return
+			//		if(Number(that.gV.singleNum)<Number(that.gV.minValue)){
+			//			tipAction("银行卡限额"+that.gV.singleNum + '元')
+			//			return
+			//		}
+					if(!!that.gV.minValue){
+						if(Number(that.gV.balance) < Number(that.gV.minValue)){
+							tipAction('单笔金额不能小于' + that.gV.minValue + '元')
+							return
+						}else{
+							if(Number(that.gV.balance) > Number(that.gV.singleNum)){
+								tipAction('单笔金额不能超过' + that.gV.singleNum + '元')
+								return
+							}
+						}
 					}
+				//	if(Number(that.gV.balance) > Number(that.gV.singleNum)){
+				//		tipAction('单笔金额不能超过' + that.gV.singleNum + '元')
+				//		return
+				//	}
 					that.checkPayType()
 				}else{
 					//未选择银行卡提示信息
@@ -374,11 +421,11 @@ $(function () {
 			
 			//  ---《公募基金风险揭示及售前告知书》
 			mui("body").on('mdClick','.setGoUrl',function(){
-				window.location.href = site_url.agreementModel_url + '?id=47' + '&financial=true'
+				window.location.href = site_url.superContent_url + '?id=47'
 			}, {
 				htmdEvt: 'cashTransformIn_09'
 			}) ;
-
+			
 			//  ---忘记密码
 			mui("body").on('mdClick','#passwordWrap .forgetP',function(){
 				//跳往原生页面去修改密码
@@ -414,7 +461,7 @@ $(function () {
 			//密码校验不通过   ---找回密码
 			mui("body").on('mdClick','.error2 .elasticYes',function(){
 				//跳往原生页面去修改密码
-				window.location.href = site_url.pofRetrievePassword_url
+				window.location.href = site_url.pofForgotPassword_url
 			}, {
 				htmdEvt: 'cashTransformIn_14'
 			}) ;
@@ -429,13 +476,44 @@ $(function () {
 
 			//添加银行卡 -- 跳往原生
 			mui("body").on('mdClick','.popup-last',function(){
+				//判断是否是在线支付
+				var isonline = that.gV.payType==0?"?supportOnline=true":""
 				//跳往原生页面去修改密码
-				window.location.href = site_url.pofAddBankCard_url
+				if(that.gV.doubleClickStatus){
+                    window.location.href = site_url.pofAddBankCard_url+isonline
+				}
+				
 			}, {
 				htmdEvt: 'cashTransformIn_16'
 			}) ;
 
-		},
+			//  ---《基金合同》《招募说明书》
+			mui("body").on('mdClick','.goPreview',function(){
+				var link = $(this).attr('datalink')
+				var typInfo = $(this).attr('type') == '1' ? '基金合同' : '招募说明书'
+				window.location.href = site_url.agreementPreview_url + '?link=' + link +'&typInfo=' + encodeURI(typInfo)
+			}, {
+				htmdEvt: 'cashTransformIn_17'
+			}) ;
+			//返回按钮
+			mui("body").on('mdClick',"#goBack",function(){
+				history.go(-1)
+			})
+			//  ---
+			mui("body").on('mdClick','.container',function(e){
+				// debugger
+				var o = e.target || e.srcElement;//当前点击对象
+					if (o != document.getElementById("transformInput")) {
+						//隐藏键盘操作
+						$("#transformInput").blur()
+					}else{
+						$("#transformInput").focus()
+					}
+			}, {
+				htmdEvt: 'cashTransformIn_18'
+			}) ;
+		
+		}
 
 
 

@@ -8,7 +8,7 @@ var splitUrl = require('@pathCommonJs/components/splitUrl.js')();
 var generateTemplate = require('@pathCommonJsComBus/generateTemplate.js');
 
 $(function(){
-	let somePage = {
+	var somePage = {
 		//获取页面元素
 		$e:{
 			noticeConTemplateId: $("#noticeCon"), // 消息中心盒子
@@ -31,9 +31,6 @@ $(function(){
                     console.log(json.data)
                     var data=that.dealData(json.data);  
                     generateTemplate(data,that.$e.noticeConTemplateId,that.$e.noticeItemListTemplateId);               
-                },
-                callbackFail: function(json) {
-                    tipAction(json.message);
                 }
             }];                        
             $.ajaxLoading(obj); 

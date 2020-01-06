@@ -5,7 +5,7 @@
 // 使用 Mock
 var Mock = require('mockjs');
 
-/*var data = Mock.mock({"data":"","message":"操作成功,数据为空","status":"1000"})*/
+// var data = Mock.mock({"data":"","message":"操作成功,数据为空","status":"1000"})
 
 var data=Mock.mock({    
 	status:"0000",     
@@ -13,7 +13,7 @@ var data=Mock.mock({
 	data: { 
         total: 10,
         pages: 2,
-        "list|9": [{
+        "list|5": [{
             id: 1,
             mesType: 1,
             mesTitle: '关于恒天财富APP升级的公告',

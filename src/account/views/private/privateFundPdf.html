@@ -1,7 +1,7 @@
 <!-- /*
  * @Author: chennn 
  * @Date: 2019-11-22 10:36:47 
- * @Last Modified by:   chennn 
+ * @Last Modified by:   songxiaoyu  
  * @Last Modified time: 2019-11-22 10:36:47 
  */ -->
 
@@ -9,7 +9,7 @@
 <html lang="en">
 
 <head>
-    @@include('@pathInclude/views/meta.html')
+	@@include('@pathInclude/views/meta.html') 
     <link rel="stylesheet" href="/account/static/css/private/privateFundPdf.css">
     <title></title>
 </head>
@@ -23,7 +23,7 @@
 			<!--@@include('@pathCommonViews/headBarConfig.html',{"pathName":"基金确认书","bgColors":"#fff,#fff","showType":"1","goBackColor":"#272727","titleColor":"#272727"})-->
 			<!--公共页面头部-->
         	@@include('@pathCommonViews/headBarConfig.html',{"pathName":"基金确认书"})
-			<a class='downLoad' href="javaScript:;">下载</a>
+			<a href="javascript:void(0)" class='downLoad'>下载</a>
 		</div>
 		<div class='pdfContentBox'>
 			<div class='pdfContent' id='pdfBox'></div>
@@ -33,9 +33,12 @@
 
 	@@include('@pathInclude/views/footer.html')
 
-	<script src="/include/js/vendor/echarts/echarts.min.js"></script>
+	<script src="/allServerResources/include/js/vendor/echarts/echarts.min.js"></script>
 	<!-- pdf转canvas -->
-	<script src="/include/js/vendor/pdf/pdf.js"></script>
+	<script src="/allServerResources/include/js/vendor/pdf/pdf.js"></script>
+	<!--<script src='https://cdn.jsdelivr.net/npm/pdfjs-dist@2.0.288/build/pdf.min.js'></script>-->
+
+	<!--<script src='https://cdn.jsdelivr.net/npm/pdfjs-dist@2.0.288/build/pdf.worker.min.js'>-->
 	<script src="/account/static/js/private/privateFundPdf.js"></script>
 
 </body>

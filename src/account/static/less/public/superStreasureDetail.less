@@ -6,27 +6,26 @@
 @import url("@pathCommonLessCom/alertBox.less");
 @import url("@pathCommonLessCom/headBarConfig.less");
 @import url("@pathCommonCom/button/button.less");
-
-body{
-    max-width: 7.5rem;
-    background-color: @F7FAFD;
+html{
+    height: 100%;
+    background: @F7FAFD;
 }
+
  .fl{
      float: left;
  }
  .fr{
      float: right;
  }
- body,.mui-content{
-     background: @F7FAFD !important;
- }
+//  body,.mui-content{
+//      background: @F7FAFD !important;
+//  }
  .hide{
      display: none;
  }
  .container {
-     height: 100%;
+    //  height: 100%;
      width: 100%;
-     background: @F7FAFD;
  
      // 公募资产
      .banner {
@@ -103,7 +102,7 @@ body{
              margin-top:0.4rem;
          }
          .first_h_profit_box {
-             width: 3.58rem;
+             width: 50%;
          }
          .h_profit {
              font-size: 0.26rem;
@@ -130,13 +129,15 @@ body{
             font-family:PingFangSC-Regular,PingFang SC;
             font-weight:400;
             color:@272727;
+            background: @c005;
+            margin:0.2rem 0;
              .detailLi{
                  width: 50%;
                  height:50%;
                  display:flex;
                  justify-content:center;
-                 margin-top: 0.4rem;
-                 line-height: 0.9rem;
+                 margin-top: 0.3rem;
+                 line-height: 0.8rem;
                  .imgWrap{
                      padding-top: 0.1rem;
                      padding-right: 0.1rem;
@@ -154,19 +155,21 @@ body{
     //七日年化
     .data{
         width: 100%;
-        height: 1rem;
-        line-height: 1rem;
+        height: .84rem;
+        line-height: .84rem;
         font-size:0.32rem;
         font-family:PingFangSC-Semibold,PingFang SC;
         font-weight:600;
         color:@272727;
         padding-left: 0.25rem;
+        background: @c005;
     } 
      //折线图
      .lineDraw{
         padding-left: 0.3rem;
         padding-right: 0.3rem;
-
+        background: @c005;
+        padding-bottom: 0.3rem;
         .line{
             height: 4.5rem;
         }
@@ -177,12 +180,12 @@ body{
             font-size: 0.24rem;
             border: 0.02rem solid rgba(54,77,151,1);
             border-radius: 0.08rem;
-
+            display: flex;
             .time{
                 color: rgba(54,77,151,1);
                 text-align: center;
                 border-right: 0.02rem solid rgba(54,77,151,1);
-
+                flex: 1;
                 &:last-child{
                     border-right: 0;
                 }
@@ -190,7 +193,7 @@ body{
                 &.active{
                     background:linear-gradient(135deg,rgba(108,131,201,1) 0%,rgba(6,29,106,1) 100%);
                     color: @c005;
-
+                    margin-left: -0.05rem;
                 }
             }
                     
@@ -201,7 +204,7 @@ body{
     .textWrap{
         width: 100%;
         height: 100%;
-        padding: 0.5rem 0 1rem 0;
+        padding: 0.3rem 0 1.3rem 0;
         .rulestestWrap{
             width: 100%;
             padding: 0 0.3rem;
@@ -209,6 +212,7 @@ body{
             font-family:PingFangSC-Medium,PingFang SC;
             font-weight:500;
             color:@272727;
+            background: @c005;
             .materialContent{
                 width: 100%;
                 height: 1rem;
@@ -246,6 +250,10 @@ body{
             line-height: 0.98rem;
             font-size: 0.32rem;
         }
+        .footerBtnLeft{
+            background:#ccc;
+            pointer-events: none;
+        }
     }
    .titleTwo{
     position: fixed;
@@ -256,7 +264,83 @@ body{
     font-weight:400;
     color:rgba(255,255,255,1);
    }
- 
+   .isRiskMatch_mask{
+	background: #000;
+	top:0;
+	opacity: .6;
+	width: 100%;
+	height: 100%;
+	position: fixed;
+	display: none;
+}
+
+.isRiskMatchBox{
+	position: fixed;
+	width: 100%;
+	height: 100%;
+	top:0;
+	display: none;
+	z-index: 111111;
+	.isRiskMatchBox_contentBox{
+		position: absolute;
+		z-index: 111111;
+		top: 5rem;
+		left: 1.4rem;
+		width: 5.2rem;
+		height: 2.5rem;
+		background-color:#f2e1c1;
+		.isRiskMatchBox_header{
+			width: 100%;
+			height: 1.5rem;
+			text-align: center;
+			line-height: 1.5rem;
+			color: black;
+			font-weight: bold;
+			font-size: 0.22rem;
+			border-bottom: 2px solid #f2e1c1
+		}
+		.isRiskMatchBox_footer{
+			width: 100%;
+			height: 1rem;
+			background-color: #fdf3dc;
+			.isRiskMatchBox_match{
+				display: none;
+				width: 100%;
+				height: 1rem;
+				line-height: 1rem;
+				text-align: center;
+				font-weight: bold;
+			}
+			.isRiskMatchBox_noMatch{
+				display: block;
+				width: 100%;
+				height: 1rem;
+				button:nth-of-type(1){
+					width:calc(50% - 2px);
+					height:1rem;
+					border-left: 2px solid #eeeeee;
+					line-height: 1rem;
+					text-align: center;
+					font-weight: bold;
+					font-size: 0.2rem;
+				}
+				button:nth-of-type(2){
+					width: 50%;
+					height:1rem;
+					line-height: 1rem;
+					text-align: center;
+					font-weight: bold;
+					font-size: 0.2rem;
+				}
+			}
+		}
+	}
+}
+//  .zhanwei{
+//      width: 100%;
+//      height: 0.3rem;
+//      background:red;
+//  }
     
  
 

@@ -1,5 +1,5 @@
-//  超宝-交易记录
-// @author wangjiajia 2019-11-20 
+//  财富讲堂
+// @author liliang 2019-11-20 
 
 require('@pathCommonBase/base.js');
 require('@pathCommonJsCom/utils.js');
@@ -13,9 +13,10 @@ var splitUrl = require('@pathCommonJs/components/splitUrl.js');
 Slider = require('@pathCommonJs/components/sliderMui.js'); // 轮播
 require('@pathCommonJsCom/tabScroll.js');
 require('@pathCommonJsCom/goTopMui.js');
-require('@pathCommonJs/components/elasticLayer.js');
-require('@pathCommonJs/components/elasticLayerTypeFive.js');
-var splitUrl = require('@pathCommonJs/components/splitUrl.js')();
+require('@pathCommonCom/elasticLayer/elasticLayer/elasticLayer.js');
+// require('@pathCommonJs/components/elasticLayer.js');
+// require('@pathCommonJs/components/elasticLayerTypeFive.js');
+// var splitUrl = require('@pathCommonJs/components/splitUrl.js')();
 
 
 $(function() {
@@ -66,7 +67,7 @@ $(function() {
             var obj=[{
                  url: site_url.queryBanner_api,
                  data: {    
-                    type:"8"
+                    type:"25"
                 },
                 needDataEmpty: true,
                 callbackDone: function(json){
@@ -75,28 +76,7 @@ $(function() {
                     $.each(json.data.bannerList, function(i, el){
                         imgArr.push({imgUrl: el.imageUrlShowOnline, linkUrl:el.linkUrl});
                     })
-                    Slider( $('.banner'), imgArr );
-                    
-                    //此时所有切换区域的内容都是空的
-                    //设置切换区域的高度
-                    //计算节点高度并设置
-                    // $(".banner img")[0].onload=function(){
-                    //     if( !that.height ){
-                    //         var height = windowHeight - document.getElementById('scroll1').getBoundingClientRect().top;
-            
-                    //         if( window.currentIsApp ){
-                    //             //app，没有底部
-                    //             that.height = height - $('.tableHeader').height();
-                    //         }else{
-                    //             //非app
-                    //             that.height = height - $('.tableHeader').height() - $('.bottomNav').height();
-                    //         }
-                            
-                    //     }
-                    //     if( !$('.list').hasClass('setHeight') ){
-                    //         $('.list').height( that.height ).addClass('setHeight');
-                    //     }
-                    // }			     						
+                    Slider( $('.banner'), imgArr );			     						
                 },
                 callbackFail: function(json){
                     console.log(json)
@@ -114,16 +94,19 @@ $(function() {
                 },
                 needDataEmpty: true,
                 callbackDone: function(json){
-                    modelData=json.data.modelVO
-                    articleData=json.data.list
-                    console.log('我是什么',articleData)
-                    // 将列表插入到页面上
-                    generateTemplate(modelData,$('.translate .title'),$('#fortune-template'));
-                    generateTemplate(articleData,$('.translate .content'),$('#content-template'));     					
+                    if(json.data && json.data.list && json.data.list.length > 0) {
+                        $('.translate').removeClass('hide')
+                        modelData=json.data.modelVO
+                        articleData=json.data.list
+                        console.log('我是什么',articleData)
+                        // 将列表插入到页面上
+                        generateTemplate(modelData,$('.translate .title'),$('#fortune-template'));
+                        generateTemplate(articleData,$('.translate .content'),$('#content-template'));
+                    }   					
                 },
                 callbackFail: function(json){
                     console.log(json)
-                },
+                }
              }]
             $.ajaxLoading(obj);
         },
@@ -137,13 +120,16 @@ $(function() {
                 },
                 needDataEmpty: true,
                 callbackDone: function(json){
-                    modelData=json.data.modelVO
-                    articleData=json.data.list
-                    
-                    // 将列表插入到页面上
-                    generateTemplate(modelData,$('.fortuneVideo .title'),$('#fortuneCf-template'));     
-                    generateTemplate(articleData,$('.fortuneVideo ul'),$('#video-template'));
-                    $(".lazyload").lazyload()					
+                    if(json.data && json.data.list && json.data.list.length > 0) {
+                        $(".fortuneVideo").removeClass('hide')
+                        modelData=json.data.modelVO
+                        articleData=json.data.list
+                        
+                        // 将列表插入到页面上
+                        generateTemplate(modelData,$('.fortuneVideo .title'),$('#fortuneCf-template'));     
+                        generateTemplate(articleData,$('.fortuneVideo ul'),$('#video-template'));
+                        $(".lazyload").lazyload()
+                    }					
                 },
                 callbackFail: function(json){
                     console.log(json)
@@ -161,32 +147,42 @@ $(function() {
             },
             needDataEmpty: true,
             callbackDone: function(json){
-               listData=json.data.list
-               console.log(listData)
-               modelData=json.data.modelVO
-             const listTitle = listData.map(d => {
+                if(json.data && json.data.list && json.data.list.length > 0) {
+                    $(".forum").removeClass('hide')
+                    listData=json.data.list
+                   console.log(listData)
+                   modelData=json.data.modelVO
+                   var listTitle = [];
+                  var listContent = [];
+                  for(var i = 0 ; i < listData.length; i++) {
+                    listTitle.push({sonModelName: listData[i].sonModelName})
+                    listContent.push({listContent: listData[i].list})
+                  }
+                  console.log('我是listtitle',listTitle)
+                  console.log('我是listContent',listContent)
+                  generateTemplate(modelData,$('.forum .title'),$('#forum-template'));     
+                  generateTemplate(listTitle,$('.broadcast'),$('#forumTitle'));
+                  generateTemplate(listContent,$('.forumList'),$('#forumContent')); 
+                  $(".lazyload").lazyload()     
+                  setTimeout(function(){
+                    $('.broadcast').find('.bigspan').eq(0).addClass('getColor');
+                    $('.broadcast').find('.bigspan').eq(0).css({"paddingLeft":0,"borderLeft":'none'});
+                  },100)
+                  mui('.mui-scroll-wrapper').scroll({
+                    deceleration: 0.0005 //flick 减速系数，系数越大，滚动速度越慢，滚动距离越小，默认值0.0006 
+                  });
+                }
+             /*var listTitle = listData.map(d => {
                 return {
                  sonModelName: d.sonModelName,
                 }
               })
-              const listContent=listData.map(d => {
+              var listContent=listData.map(d => {
                 return {
                  listContent: d.list
                 }
-              })
-              console.log('我是listtitle',listTitle)
-              console.log('我是listContent',listContent)
-              generateTemplate(modelData,$('.forum .title'),$('#forum-template'));     
-              generateTemplate(listTitle,$('.broadcast'),$('#forumTitle'));
-              generateTemplate(listContent,$('.forumList'),$('#forumContent'));	
-              $(".lazyload").lazyload()		
-              setTimeout(()=>{
-                $('.broadcast').find('.bigspan').eq(0).addClass('getColor');
-                $('.broadcast').find('.bigspan').eq(0).css({"paddingLeft":0,"borderLeft":'none'});
-              },100)
-              mui('.mui-scroll-wrapper').scroll({
-                deceleration: 0.0005 //flick 减速系数，系数越大，滚动速度越慢，滚动距离越小，默认值0.0006 
-              });		
+              })*/
+              		
             },
             callbackFail: function(json){
                 console.log(json)
@@ -207,21 +203,30 @@ $(function() {
                listData=json.data.list
                console.log('我是财富研究',listData)
                modelData=json.data.modelVO
-             const listTitle = listData.map(d => {
+             /*var listTitle = listData.map(d => {
                 return {
                  sonModelName: d.sonModelName,
                 }
               })
-              const listContent=listData.map(d => {
+              var listContent=listData.map(d => {
                 return {
                  listContent: d.list
                 }
-              })
+              })*/
+              var listTitle = [];
+              var listContent = [];
+              for(var i = 0 ; i < listData.length; i++) {
+                listTitle.push({sonModelName: listData[i].sonModelName})
+                listContent.push({listContent: listData[i].list})
+              }
               console.log(modelData)
                generateTemplate(modelData,$('.tabContent .title'),$('#tabContent-template'));     
                generateTemplate(listTitle,$('.tab-t ol'),$('#titleTab'));
                generateTemplate(listContent,$('.tab-b'),$('#listContent'));	
-               setTimeout(()=>{
+               // setTimeout(()=>{
+               //  $('.tab-t').find('ol li a').eq(0).addClass('active');
+               // },100)
+               setTimeout(function(){
                 $('.tab-t').find('ol li a').eq(0).addClass('active');
                },100)		
             },
@@ -294,7 +299,8 @@ $(function() {
 
                     //没有hasPullUp class，表示没有初始化，调用initMui，进行初始化
                     //并请求第一次数据
-                    that.initMui(t);
+                    // that.initMui(t);
+                    that.getData(t)
                 }
             }
             $.tabScroll(obj);
@@ -327,47 +333,47 @@ $(function() {
         },
 
         initMui: function($id) { //$id   就是滑动区域的 id 节点
-            var that = this;
-            w = $id.attr('id'), //获取节点的 id
-                s = '#' + w + ' .contentWrapper'; //id 拼接 查出content区域
+            // var that = this;
+            // w = $id.attr('id'), //获取节点的 id
+            //     s = '#' + w + ' .contentWrapper'; //id 拼接 查出content区域
 
-            mui.init({
-                pullRefresh: {
-                    container: s,
-                    up: {
-                        contentrefresh: '拼命加载中',
-                        contentnomore: '', //可选，请求完毕若没有更多数据时显示的提醒内容；
-                        callback: function() {
-                            //执行ajax请求
-                            that.getData($id, this, 'more');
+            // mui.init({
+            //     pullRefresh: {
+            //         container: s,
+            //         up: {
+            //             contentrefresh: '拼命加载中',
+            //             contentnomore: '', //可选，请求完毕若没有更多数据时显示的提醒内容；
+            //             callback: function() {
+            //                 //执行ajax请求
+                            that.getData($id);
 
-                        }
-                    }
-                }
-            });
+            //             }
+            //         }
+            //     }
+            // });
 
-            mui.ready(function() { //init后需要执行ready函数，才能够初始化出来
+            // mui.ready(function() { //init后需要执行ready函数，才能够初始化出来
 
-                //隐藏当前的加载中loading
-                if (!$id.hasClass('hasPullUp')) {
-                    $id.find('.mui-pull-bottom-pocket').addClass('mui-hidden'); //上拉显示更多
-                }
-
-                mui(".mui-slider").slider(); //就是左右切换 可以滑动的  初始化
-
-                //显示loading
-                that.getElements.listLoading.show();
-
-                //这一句初始化并第一次执行mui上拉加载的callback函数
-                mui(s).pullRefresh().pullupLoading();
-
-                //为$id添加hasPullUp  class
-                $($id).addClass('hasPullUp');
+            //     //隐藏当前的加载中loading
+            //     if (!$id.hasClass('hasPullUp')) {
+            //         $id.find('.mui-pull-bottom-pocket').addClass('mui-hidden'); //上拉显示更多
+            //     }
 
 
+            //     //显示loading
+            //     that.getElements.listLoading.show();
 
-                // mui(s).pullRefresh().disablePullupToRefresh()
-            });
+            //     //这一句初始化并第一次执行mui上拉加载的callback函数
+            //     mui(s).pullRefresh().pullupLoading();
+
+
+            //     //为$id添加hasPullUp  class
+            //     $($id).addClass('hasPullUp');
+
+
+
+            //     // mui(s).pullRefresh().disablePullupToRefresh()
+            // });
 
             // mui('.mui-slider').slider().stopped = true;
         },
@@ -380,31 +386,41 @@ $(function() {
                 },
                 needDataEmpty: true,
                 callbackDone: function(json) {
-                    console.log('我是json',json)
-                    that.gV.navList = [];
-                    listData=json.data.list
-                    console.log('我是财富研究',listData)
-                    modelData=json.data.modelVO
-                    for (var i = 0; i < json.data.list.length; i++) {
-                        (function(i) {
-                            that.gV.navList[i] = {
-                                type: json.data.list[i].sonModelName,
-                                num: json.data.list[i].sonModelType
-                            }
-                        })(i);
+                    if(json.data && json.data.list && json.data.list.length > 0) {
+                        $('.tabContent').removeClass("hide")
+                        that.gV.navList = [];
+                        listData=json.data.list
+                        console.log('我是财富研究',listData)
+                        modelData=json.data.modelVO
+                        for (var i = 0; i < json.data.list.length; i++) {
+                            (function(i) {
+                                that.gV.navList[i] = {
+                                    type: json.data.list[i].sonModelName,
+                                    num: json.data.list[i].sonModelType
+                                }
+                            })(i);
+                        }
+                        generateTemplate(modelData,$('.tabContent .title'),$('#tabContent-template'));
+                        //拼模板，初始化左右滑动mui组件
+                        that.beforeFunc();
+
+                        //初始化第一屏区域的上拉加载
+                        // that.initMui($('#scroll1'));
+                        that.getData($('#scroll1'));
                     }
-                    generateTemplate(modelData,$('.tabContent .title'),$('#tabContent-template'));
-                    //拼模板，初始化左右滑动mui组件
-                    that.beforeFunc();
-
-                    //初始化第一屏区域的上拉加载
-                    that.initMui($('#scroll1'));
-
                 }
             }];
             $.ajaxLoading(obj);
         },
         getData: function($id, t) { // 获取产品数据的公用ajax方法;$id为各区域的 scroll+num id
+            if( $id.find(".mui-table-view-cell").height()>0){
+                $(".mui-slider").height($id.find(".mui-table-view-cell").height()+ $(".mui-slider .nav-wrapper").height())
+            }
+            if(!$id.find('.list_item').length>0){
+                mui(".mui-slider").slider(); //就是左右切换 可以滑动的  初始化
+            }else{
+                return false;
+            }
             var that = this;
             //获取产品列表
             var obj = [{
@@ -413,6 +429,7 @@ $(function() {
                    type:"29", //类型财富研究
                },
                 needLogin: true,
+                needLoading: false,
                 callbackDone: function(json) {
                     console.log(json.data)	
                     var jsonData = json.data.list[that.gV.current_index].list,
@@ -460,7 +477,23 @@ $(function() {
                                         $list = $("#move_" + index + " .list");
                                     $list.height(that.highHeight).addClass('noMove');
                                     // $list.addClass('noMove');
+                                    if (!$list.hasClass('setHeight')) {
 
+                                        //$('.list').each( function( i, el){
+            
+                                        //判断当前ul高度
+                                        var ulHeight = $list.find(".mui-table-view").height();
+                                        if (ulHeight < that.htmlHeight) {
+            
+                                            $list.height(that.highHeight).addClass('setHeight').addClass('noMove');
+                                            // $list.addClass('setHeight').addClass('noMove');
+                                        } else {
+                                            $list.height(that.highHeight).addClass('setHeight');
+                                            // $list.addClass('setHeight');
+                                        }
+            
+                                        //})
+                                    }
                                     // if( $("#move_"+index+" .noData").length ){
                                     //     //已经暂无数据了
                                     //     $('html').addClass('hidden');
@@ -472,50 +505,51 @@ $(function() {
                                     return false;
                                 } else {
                                     //有数据，没有更多了
-                                    t.endPullupToRefresh(true);
+                                    // t.endPullupToRefresh(true);
                                 }
                             } else {
                                 //其他页，没有更多了
-                                t.endPullupToRefresh(true);
+                                // t.endPullupToRefresh(true);
                             }
                         } else {
-                            t.endPullupToRefresh(false);
+                            // t.endPullupToRefresh(false);
                         }
 
                         $id.find('.contentWrapper .mui-pull-bottom-pocket').removeClass('mui-hidden');
-                        if (that.gV.ajaxArr[that.gV.current_index].pageCurrent == 1) {
+                        // if (that.gV.ajaxArr[that.gV.current_index].pageCurrent == 1) {
                             //第一屏
                             $id.find('.contentWrapper .mui-table-view-cell').html(that.html);
-                        } else {
-                            $id.find('.contentWrapper .mui-table-view-cell').append(that.html);
-                        }
+                        // } else {
+                        //     $id.find('.contentWrapper .mui-table-view-cell').append(that.html);
+                        // }
 
                         //获取当前展示的tab的索引
                         var index = $('#slider .tab-scroll-wrap .mui-active').index(),
                             $list = $("#move_" + index + " .list");
-                        if (!$list.hasClass('setHeight')) {
+                        // if (!$list.hasClass('setHeight')) {
 
-                            //$('.list').each( function( i, el){
+                        //     //$('.list').each( function( i, el){
 
-                            //判断当前ul高度
-                            var ulHeight = $list.find(".mui-table-view").height();
-                            if (ulHeight < that.htmlHeight) {
+                        //     //判断当前ul高度
+                        //     var ulHeight = $list.find(".mui-table-view").height();
+                        //     if (ulHeight < that.htmlHeight) {
 
-                                $list.height(that.highHeight).addClass('setHeight').addClass('noMove');
-                                // $list.addClass('setHeight').addClass('noMove');
-                            } else {
-                                $list.height(that.highHeight).addClass('setHeight');
-                                // $list.addClass('setHeight');
-                            }
+                        //         $list.height(that.highHeight).addClass('setHeight').addClass('noMove');
+                        //         // $list.addClass('setHeight').addClass('noMove');
+                        //     } else {
+                        //         $list.height(that.highHeight).addClass('setHeight');
+                        //         // $list.addClass('setHeight');
+                        //     }
 
-                            //})
-                        }
+                        //     //})
+                        // }
 
                         //隐藏loading
                         setTimeout(function() {
                             that.getElements.listLoading.hide();
+                            $('.lazyload').lazyload();
+
                         }, 100);
-                        $('.lazyload').lazyload();
                     }, 200)
 
 
@@ -548,8 +582,10 @@ $(function() {
                     t.endPullupToRefresh(false);
 
                     //没有数据
-                    $id.find('.mui-scroll .list').html(that.getElements.noData.clone(false)).addClass('noCon');
-                    $id.find('.noData').show();
+                    if(that.gV.ajaxArr[that.gV.current_index].pageCurrent == 1) {
+                        $id.find('.mui-scroll .list').html(that.getElements.noData.clone(false)).addClass('noCon');
+                        $id.find('.noData').show();
+                    }
 
                     setTimeout(function() {
                         that.getElements.listLoading.hide();
@@ -596,7 +632,7 @@ $(function() {
                 var id = $(this).attr("id")
                 var articleBelong = $(this).attr("articleBelong")
                 var applyType = $(this).attr("applyType")
-                window.location.href =site_url.wealthResearch_url + '?id=' + id + '&articleBelong=' + articleBelong + '&applyType='+applyType
+                window.location.href =site_url.articleTemplate_url + '?id=' + id + '&articleBelong=' + articleBelong 
             },{
                 'htmdEvt': 'fortune_07'
             })

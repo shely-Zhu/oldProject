@@ -9,14 +9,17 @@
  
  <head>
      @@include('@pathInclude/views/meta.html')
-     <link rel="stylesheet" href="../../../mine/static/css/fundAccountDiagnosis.css">
+     @@include('@pathCommonViews/authenticationProcess.html',{"pathTitle":"认证信息"})
+     <link rel="stylesheet" href="/mine/static/css/fundAccountDiagnosis.css">
      <title>基金账户诊断</title>
  </head>
  
  <body>
+    @@include('@pathCommonCom/loading/listLoading.html')
      <section class="fundAccountDiagnosis container">
        @@include('@pathCommonViews/headBarConfig.html',{"pathName":"基金账户诊断"})
-         <div class="content">
+       @@include('@pathCommonCom/noData/noData.html', {"tipText": "暂无持仓"})
+       <div class="content" id="contentListBox">
              <div class="account-holdings content-item">
                  <p class="title-box">
                      <span class="title">账户持仓情况</span>
@@ -90,15 +93,15 @@
                      <div class="assets-item stockAssetRatio">
                          <p class="leng">
                              <span class="point"></span>
-                             <span class="num">37.98%</span>
+                             <span class="num"></span>
                          </p>
-                         <p class="name">股票资产</p>
+                         <p class="name">股票</p>
                          <p class="shape"></p>
                      </div>
                      <div class="assets-item cashAssetRatio">
                          <p class="leng">
                              <span class="point"></span>
-                             <span class="num">17.77%</span>
+                             <span class="num"></span>
                          </p>
                          <p class="name">现金</p>
                          <p class="shape"></p>
@@ -106,17 +109,17 @@
                      <div class="assets-item bondAssetRatio">
                          <p class="leng">
                              <span class="point"></span>
-                             <span class="num">29.84%</span>
+                             <span class="num"></span>
                          </p>
-                         <p class="name">债券资产</p>
+                         <p class="name">债券</p>
                          <p class="shape"></p>
                      </div>
                      <div class="assets-item otherAssetRatio">
                          <p class="leng">
                              <span class="point"></span>
-                             <span class="num">28.12%</span>
+                             <span class="num"></span>
                          </p>
-                         <p class="name">其他资产</p>
+                         <p class="name">其他</p>
                          <p class="shape"></p>
                      </div>
                  </div>
@@ -140,15 +143,15 @@
                  </p>
                  <div id="account-style-box">
                      <div class="scratchable-latex">
-                         <div class="scratchable-item" data="11"></div>
-                         <div class="scratchable-item" data="12"></div>
-                         <div class="scratchable-item" data="13"></div>
-                         <div class="scratchable-item" data="21"></div>
-                         <div class="scratchable-item" data="22"></div>
-                         <div class="scratchable-item" data="23"></div>
-                         <div class="scratchable-item" data="31"></div>
-                         <div class="scratchable-item" data="32"></div>
-                         <div class="scratchable-item" data="33"></div>
+                         <div class="scratchable-item fl1" data="11"></div>
+                         <div class="scratchable-item fl2" data="12"></div>
+                         <div class="scratchable-item fl3" data="13"></div>
+                         <div class="scratchable-item fl4" data="21"></div>
+                         <div class="scratchable-item fl5" data="22"></div>
+                         <div class="scratchable-item fl6" data="23"></div>
+                         <div class="scratchable-item fl7" data="31"></div>
+                         <div class="scratchable-item fl8" data="32"></div>
+                         <div class="scratchable-item fl9" data="33"></div>
                          <div class="scratchable1 scratchable-left">大盘</div>
                          <div class="scratchable2 scratchable-left">中盘</div>
                          <div class="scratchable3 scratchable-left">小盘</div>
@@ -163,16 +166,43 @@
                      <span class="title">诊断结论</span>
                  </p>
                  <div id="diagnosis-box">
-                     嘻嘻嘻嘻嘻嘻嘻嘻寻寻寻寻寻寻寻寻寻寻寻寻
+                    
                  </div>
              </div>
+             <div class="getReport">获取深度诊断报告</div>
+             <div class="isRiskMatchBox">
+                <div class="isRiskMatchBox_contentBox">
+                       <div class='isRiskMatchBox_header'>你选择的产品与您现在的风险承受能力相匹配</div>
+                       <div class="isRiskMatchBox_footer">
+                           <div class="isRiskMatchBox_match">确定</div>
+                           <div class="isRiskMatchBox_noMatch"><button class="isRiskMatchBox_cancel">放弃购买</button> <button class="isRiskMatchResult">查看评测结果</button></div>
+                       </div>
+                </div>
+            </div>
+            <div class="isRiskMatch_mask"></div>
+         </div>
+         <div id="noDataContent">
+            <div class="fund-allocation content-item">
+                <div class="content_tital">持仓产品后可获得定制个性化投资分析报告</div>
+                <div class="goUrl_list"><button>去浏览产品</button></div>
+                <div class="getReport">获取深度诊断报告</div>
+           </div>
+           <div class="isRiskMatchBox">
+              <div class="isRiskMatchBox_contentBox">
+                     <div class='isRiskMatchBox_header'>你选择的产品与您现在的风险承受能力相匹配</div>
+                     <div class="isRiskMatchBox_footer">
+                         <div class="isRiskMatchBox_match">确定</div>
+                         <div class="isRiskMatchBox_noMatch"><button class="isRiskMatchBox_cancel">放弃购买</button> <button class="isRiskMatchResult">查看评测结果</button></div>
+                     </div>
+              </div>
+          </div>
+          <div class="isRiskMatch_mask"></div>
          </div>
      </section>
     
      @@include('@pathInclude/views/footer.html')
-     <!-- 添加埋点 -->
-     @@include('@pathInclude/views/header.html')
-     <script src="../../../mine/static/js/fundAccountDiagnosis.js"></script>
+     <script src="/allServerResources/include/js//vendor/echarts/echarts.min.js"></script>
+     <script src="/mine/static/js/fundAccountDiagnosis.js"></script>
  </body>
  
  </html>
