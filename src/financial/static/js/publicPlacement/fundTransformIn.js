@@ -350,7 +350,6 @@ $(function () {
 					
 					var data = [] ;
 					data = json.data;
-					debugger
 					if(json.status == '0000'){
 						if(!!that.gV.bugFundName){
 							window.location.href = site_url.pofSurelyResultsDetail_url + '?applyId=' + data.allotNo + '&fundBusinCode=' + 
@@ -407,6 +406,9 @@ $(function () {
 				}
 
 			}];
+			if(that.gV.fundOrBank == '2'){
+				obj.data.sourcefundcode = that.gV.fundCode
+			}
 			$.ajaxLoading(obj);
 		},
 		//费用计算
