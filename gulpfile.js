@@ -440,6 +440,127 @@ gulp.task('bfRev', function() {
 /*******************************版本号文件的备份 end****************************/
 
 
+
+/**********************图片打包任务*******************************/
+
+//newCommon文件夹里的图片打包，加cdn
+gulp.task('commonImages', function( cb ) {
+
+    pump([
+        gulp.src(['src/newCommon/**/*.{jpg,png,jpeg,svg,gif}']),
+
+        plugins.rev(),
+
+        gulp.dest(host.path + 'allServerResources/include/commonImg/'),
+
+        plugins.rev.manifest(),
+
+        // gulp.dest(host.path + 'rev/allServerResources/include/commonImg/'),
+
+        //修改manifest文件的路径
+        plugins.jsonEditor(function(json) {
+            var newJson = {};
+            for( var i in json ){
+                newJson['/allServerResources/include/commonImg/' + i] = prefix + '/allServerResources/include/commonImg/' + json[i];
+            }
+            return newJson;
+        }),
+
+        gulp.dest(host.path + 'rev/allServerResources/include/commonImg/')
+
+    ], cb)
+});
+
+
+//图片打包任务，全部打包和单独打包可共用
+//除newCommon里的图片打包，加cdn
+gulp.task('images', ['commonImages'], function( cb ) {
+    pump([
+        gulp.src(['src/**/img/**/*', '!src/newCommon/**/*']),
+
+        plugins.rev(),
+
+        gulp.dest(host.path),
+
+        plugins.rev.manifest(),
+
+        //修改manifest文件的路径
+        plugins.jsonEditor(function(json) {
+            var newJson = {};
+            for( var i in json ){
+                newJson['/' + i] = prefix + '/' + json[i];
+            }
+            return newJson;
+        }),
+
+        gulp.dest( host.path + 'rev/img/')
+
+    ], cb)
+
+
+});
+
+/****************************************************/
+
+
+/**********************************字体打包任务*************************/
+
+//mui所需的font文件夹打包
+gulp.task('font', function( cb ) {
+
+    pump([
+        gulp.src('src/include/fonts/*'),
+
+        plugins.rev(),
+
+        gulp.dest(host.path + 'include/fonts'),
+
+        plugins.rev.manifest(),
+
+        //修改manifest文件的路径
+        plugins.jsonEditor(function(json) {
+            var newJson = {};
+            for( var i in json ){
+               newJson['/include/fonts/' + i] = prefix + '/include/fonts/' + json[i];
+           }
+            return newJson;
+       }),
+
+       gulp.dest(host.path + 'rev/include/fonts')
+
+    ], cb)
+
+})
+
+gulp.task('allServerResources', function( cb ) {
+
+    pump([
+        gulp.src( ['src/allServerResources/include/fonts/*']),
+
+        plugins.rev(),
+
+        gulp.dest(host.path + 'allServerResources/include/fonts'),
+
+        plugins.rev.manifest(),
+
+        //修改manifest文件的路径
+        plugins.jsonEditor(function(json) {
+            var newJson = {};
+            for( var i in json ){
+                newJson['/allServerResources/include/fonts/' + i] = prefix + '/allServerResources/include/fonts/' + json[i];
+            }
+            return newJson;
+        }),
+
+        gulp.dest( host.path + 'rev/allServerResources/include/fonts')
+
+    ], cb)
+})
+
+/****************************************/
+
+
+
 function changeCommonImg(file) {
 
     //如果有用到common里面的图片的，全部把路径改成allServerResources/include/commonImg
@@ -735,22 +856,31 @@ gulp.task("allServerResourcesInclude", ['allServerResourcesIncludeRoot'],  funct
             }
         })),
 
-        //plugins.rev(),
+        plugins.rev(),
 
         gulp.dest(host.path + 'allServerResources/include/'),
 
-        //plugins.rev.manifest(),
+        plugins.rev.manifest(),
 
-        //修改manifest文件的路径,增加cdn域名
-        //plugins.jsonEditor(function(json) {
-            //var newJson = {};
-            //for( var i in json ){
-                //newJson['/allServerResources/include/' + i] = prefix + '/allServerResources/include/' + json[i];
-            //}
-            //return newJson;
-        //}),
+        // 修改manifest文件的路径,增加cdn域名
+        plugins.jsonEditor(function(json) {
+            var newJson = {};
+            for( var i in json ){
 
-        //gulp.dest(host.path + 'rev/allServerResources/include/js')
+                //在vendor里的文件不加版本号
+                if( i.indexOf('/vendor/') != -1){
+                    var str_1 = json[i].substring( json[i].lastIndexOf('-') , json[i].length - 1 );
+                    var str_2 =  str_1.substring(0, str_1.indexOf('.'));
+                    
+                    json[i] = json[i].replace(str_2, '');
+                }
+
+                newJson['/allServerResources/include/' + i] = prefix + '/allServerResources/include/' + json[i];
+            }
+            return newJson;
+        }),
+
+        gulp.dest(host.path + 'rev/allServerResources/include/js')
 
     ], cb)
 })
@@ -864,6 +994,14 @@ gulp.task("includeJs", ['allServerResourcesInclude', 'includeRoot'], function( c
         plugins.jsonEditor(function(json) {
             var newJson = {};
             for( var i in json ){
+
+                //在vendor里的文件不加版本号
+                if( i.indexOf('/vendor/') != -1){
+                    var str_1 = json[i].substring( json[i].lastIndexOf('-') , json[i].length - 1 );
+                    var str_2 =  str_1.substring(0, str_1.indexOf('.'));
+                    
+                    json[i] = json[i].replace(str_2, '');
+                }
                 newJson['/include/' + i] = prefix + '/include/' + json[i];
             }
             return newJson;
@@ -968,22 +1106,22 @@ gulp.task("allServerResourcesCss", function( cb ) {
         //也加上压缩处理
         plugins.if(options.env === '3' || options.env === '4', plugins.cssnano({ autoprefixer: false, zindex: false })),
 
-        //plugins.rev(),
+        plugins.rev(),
 
         gulp.dest(host.path),
 
-        //plugins.rev.manifest(),
+        plugins.rev.manifest(),
 
-        //修改manifest文件的路径,增加cdn域名
-        //plugins.jsonEditor(function(json) {
-            //var newJson = {};
-            //for( var i in json ){
-                //newJson['/allServerResources/include/css/' + i] = prefix + '/allServerResources/include/css/' + json[i];
-            //}
-            //return newJson;
-        //}),
+        // 修改manifest文件的路径,增加cdn域名
+        plugins.jsonEditor(function(json) {
+            var newJson = {};
+            for( var i in json ){
+                newJson['/allServerResources/include/css/' + i] = prefix + '/allServerResources/include/css/' + json[i];
+            }
+            return newJson;
+        }),
 
-        //gulp.dest( host.path + 'rev/allServerResources/include/css')
+        gulp.dest( host.path + 'rev/allServerResources/include/css')
 
     ], cb )
 })
@@ -997,137 +1135,30 @@ gulp.task("includeCss", ['allServerResourcesCss'], function( cb ) {
         //也加上压缩处理
         plugins.if(options.env === '3' || options.env === '4', plugins.cssnano({ autoprefixer: false, zindex: false })),
 
-        //plugins.rev(),
+        plugins.rev(),
 
         gulp.dest(host.path),
 
-        //plugins.rev.manifest(),
+        plugins.rev.manifest(),
 
         //修改manifest文件的路径,增加cdn域名
-        //plugins.jsonEditor(function(json) {
-            //var newJson = {};
-            //for( var i in json ){
-               // newJson['/include/' + i] = prefix + '/include/' + json[i];
-            //}
-           // return newJson;
-        //}),
+        plugins.jsonEditor(function(json) {
+            var newJson = {};
+            for( var i in json ){
+               newJson['/include/' + i] = prefix + '/include/' + json[i];
+            }
+           return newJson;
+        }),
 
-        //gulp.dest( host.path + 'rev/include/css')
+        gulp.dest( host.path + 'rev/include/css')
 
     ], cb )
 })
 
 
-/**********************图片打包任务*******************************/
-
-gulp.task('commonImages', function( cb ) {
-
-    pump([
-        gulp.src(['src/newCommon/**/*.{jpg,png,jpeg,svg,gif}']),
-
-        plugins.rev(),
-
-        gulp.dest(host.path + 'allServerResources/include/commonImg/'),
-
-        plugins.rev.manifest(),
-
-        // gulp.dest(host.path + 'rev/allServerResources/include/commonImg/'),
-
-        //修改manifest文件的路径
-        plugins.jsonEditor(function(json) {
-            var newJson = {};
-            for( var i in json ){
-                newJson['/allServerResources/include/commonImg/' + i] = prefix + '/allServerResources/include/commonImg/' + json[i];
-            }
-            return newJson;
-        }),
-
-        gulp.dest(host.path + 'rev/allServerResources/include/commonImg/')
-
-    ], cb)
-});
 
 
-//图片打包任务，全部打包和单独打包可共用
-gulp.task('images', ['commonImages'], function( cb ) {
-    pump([
-        gulp.src(['src/**/img/**/*', '!src/newCommon/**/*']),
 
-        plugins.rev(),
-
-        gulp.dest(host.path),
-
-        plugins.rev.manifest(),
-
-        //修改manifest文件的路径
-        plugins.jsonEditor(function(json) {
-            var newJson = {};
-            for( var i in json ){
-                newJson['/' + i] = prefix + '/' + json[i];
-            }
-            return newJson;
-        }),
-
-        gulp.dest( host.path + 'rev/img/')
-
-    ], cb)
-
-
-});
-
-/**********************************字体打包任务*************************/
-
-//mui所需的font文件夹打包
-gulp.task('font', function( cb ) {
-
-    pump([
-        gulp.src('src/include/fonts/*'),
-
-        //plugins.rev(),
-
-        gulp.dest(host.path + 'include/fonts'),
-
-        //plugins.rev.manifest(),
-
-        //修改manifest文件的路径
-        //plugins.jsonEditor(function(json) {
-            //var newJson = {};
-            //for( var i in json ){
-               // newJson['/include/fonts/' + i] = prefix + '/include/fonts/' + json[i];
-           //}
-            //return newJson;
-       // }),
-
-       // gulp.dest(host.path + 'rev/include/fonts')
-
-    ], cb)
-
-})
-
-gulp.task('allServerResources', function( cb ) {
-
-    pump([
-        gulp.src( ['src/allServerResources/include/fonts/*']),
-
-        //plugins.rev(),
-
-        gulp.dest(host.path + 'allServerResources/include/fonts'),
-
-        //plugins.rev.manifest(),
-
-        //修改manifest文件的路径
-        //plugins.jsonEditor(function(json) {
-            //var newJson = {};
-            //for( var i in json ){
-                //newJson['/allServerResources/include/fonts/' + i] = prefix + '/allServerResources/include/fonts/' + json[i];
-            //}
-            //return newJson;
-        //}),
-
-        //gulp.dest( host.path + 'rev/allServerResources/include/fonts')
-
-    ], cb)
-})
 
 
 /******************html文件打包****************************/
@@ -1208,9 +1239,49 @@ gulp.task('html', function(cb) {
 })
 
 
+gulp.task('cssRev', function() {
+
+    return gulp.src( [host.path + 'rev/**/*.json', host.path + '**/*.css']) //- 读取 rev-manifest.json 文件
+
+
+    .pipe(plugins.revCollector()) //- 执行html内版本号的替换
+
+    .pipe(plugins.if(isWatch, plugins.debug({ title: '替换版本号的文件' })))
+
+    //.pipe(plugins.if(isWatch, plugins.debug({ title: '替换版本号的文件' })))
+    //.pipe(plugins.if(options.env === '4', prefixUrl(prefix, null, '{{')))
+    //.pipe(prefixUrl(prefix))
+
+    //替换后的文件输出的目录
+    .pipe(gulp.dest(host.path))
+
+    //如果是监听文件修改的，重启connect
+    // .pipe(plugins.if(isWatch, plugins.connect.reload()))
+});
+
+
+gulp.task('jsRev', function() {
+
+    return gulp.src( [host.path + 'rev/**/*.json', host.path + '**/*.js']) //- 读取 rev-manifest.json 文件
+
+    .pipe(plugins.revCollector()) //- 执行html内版本号的替换
+
+    .pipe(plugins.if(isWatch, plugins.debug({ title: '替换版本号的文件' })))
+
+    //.pipe(plugins.if(isWatch, plugins.debug({ title: '替换版本号的文件' })))
+    //.pipe(plugins.if(options.env === '4', prefixUrl(prefix, null, '{{')))
+    //.pipe(prefixUrl(prefix))
+
+    //替换后的文件输出的目录
+    .pipe(gulp.dest(host.path))
+
+    //如果是监听文件修改的，重启connect
+    // .pipe(plugins.if(isWatch, plugins.connect.reload()))
+});
+
 //打包CSS、JS时的版本号替换，只替换rev文件夹里版本号文件中的版本号
 //并输出到 host.path
-gulp.task('rev', function() {
+gulp.task('rev', ['cssRev', 'jsRev'], function() {
 
     return gulp.src(revChangeSrc) //- 读取 rev-manifest.json 文件
 
@@ -1230,15 +1301,17 @@ gulp.task('rev', function() {
     .pipe(plugins.if(isWatch, plugins.connect.reload()))
 });
 
-gulp.task('revimg', function() {
-    //css,js，主要是针对img替换
-    gulp.src([host.middle + 'rev/img/*.json', host.path+'**/*.css'])
-        .pipe(plugins.revCollector())
-        .pipe(gulp.dest(host.path))
 
-    //如果是监听文件修改的，重启connect
-    .pipe(plugins.if(isWatch, plugins.connect.reload()))
-});
+
+// gulp.task('revimg', function() {
+//     //css,js，主要是针对img替换
+//     gulp.src([host.middle + 'rev/img/*.json', host.path+'**/*.css'])
+//         .pipe(plugins.revCollector())
+//         .pipe(gulp.dest(host.path))
+
+//     //如果是监听文件修改的，重启connect
+//     .pipe(plugins.if(isWatch, plugins.connect.reload()))
+// });
 
 
 gulp.task('getFileNum', function() {
