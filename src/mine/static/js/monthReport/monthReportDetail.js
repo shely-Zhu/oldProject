@@ -89,20 +89,20 @@ var monthReportDetail = {
 				// 报告名称
 				$('#HeadBarpathName').html(json.reportName)
 				that.getElements.reportTime = json.reportTime;
-
+				debugger
 				var dateStr = json.reportTime;
 					dateStr = dateStr.replace(/年/g,"-");
 					dateStr = dateStr.replace(/月/g,"-");
 					dateStr = dateStr.replace(/日/g,"");
 				var yearFor,monthFor,dayFor;
 				// 为兼容momentjs 和 new Date() 在ios、Safari上遇到的坑，对数据进行格式化
-				var dateStr = new Date(dateStr);
-					yearFor = dateStr.getFullYear() 
-					monthFor = dateStr.getMonth() + 1;
+				var timeStr = new Date(dateStr);
+					yearFor = timeStr.getFullYear() 
+					monthFor = timeStr.getMonth() + 1;
 					if (monthFor.toString().length == 1) {
 				        monthFor = "0" + monthFor;
 				    }
-				    dayFor = dateStr.getDate();
+				    dayFor = timeStr.getDate();
 				    if (dayFor.toString().length == 1) {
 				        dayFor = "0" + dayFor;
 				    }
@@ -138,8 +138,8 @@ var monthReportDetail = {
 					var reportTimeHtml = '';
 					reportTimeHtml = '截止11'+that.getElements.reportTime+',您暂无持仓信息';
 					$('.holdNodata').show();
-					$('.holdNodata .text').html(reportTimeHtml);
-					$('.holdNodata .text').html('截止22'+that.getElements.reportTime+',您暂无持仓信息');
+					$('.holdNodata .text1').html(reportTimeHtml);
+					$('.holdNodata .text2').html('截止22'+that.getElements.reportTime+',您暂无持仓信息');
 				}else{
 					var pefSaleList = jsonData.pefSaleList;
 					jsonData.holdPosition = true;
