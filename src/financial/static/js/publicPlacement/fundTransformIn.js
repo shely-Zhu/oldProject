@@ -204,7 +204,13 @@ $(function () {
 							element.oneDayNum_w = Number(element.oneDayNum)/10000 + '万'
 						});
 						generateTemplate(data, that.$el.popupUl, that.$el.bankListTemplate,true);
-						
+						if(that.gV.payType == '0'){
+							$(".bank-pay").show();
+							$(".onright-left-two").show();
+						} else if(that.gV.payType == '1') {
+							$(".bank-pay").hide();
+							$(".onright-left-two").hide();
+						}
 					}
                   
 				},
@@ -460,10 +466,15 @@ $(function () {
 			mui("body").on('mdClick','.paymoney',function(){
 				that.gV.payType = $(this).attr('pay-type')
 				if(that.gV.payType == '0'){
+					$(".bank-pay").show();
+					$(".onright-left-two").show();
 					if(that.gV.accountType === 0 || that.gV.accountType === 2){
 						tipAction('机构客户暂不支持在线支付');
 						return
 					}
+				}else  if(that.gV.payType == '1') {
+					$(".bank-pay").hide();
+					$(".onright-left-two").hide();
 				}
 				var useEnv = $(this).attr('pay-type')
 				$(".listLoading").show()
@@ -562,6 +573,8 @@ $(function () {
 					that.$el.remittance.html('')
 					that.$el.remittance.parent().find(".imgc").hide();
 					that.$el.remittance.parent().find(".iimg").show();
+					$(".bank-pay").show();
+					$(".onright-left-two").show();
 				}
 				if(that.gV.payType == '1'){
 					generateTemplate(data, that.$el.remittance, that.$el.bankListCheckTemplate,true);
@@ -570,6 +583,8 @@ $(function () {
 					that.$el.onlinepay.html('')
 					that.$el.onlinepay.parent().find(".imgc").hide();
 					that.$el.onlinepay.parent().find(".iimg").show();
+					$(".bank-pay").hide();
+					$(".onright-left-two").hide();
 				}
 				setTimeout(function(){
 					$('.popup').css('display','none')
