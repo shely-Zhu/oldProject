@@ -1200,7 +1200,7 @@ gulp.task('rootEnv', function() {
         for (var i = 0; i < rootName.length; i++) {
 
             (function(i) {
-                gulp.src(['src/allServerResources/js/vendor/root.js']) //- 读取 rev-manifest.json 文件
+                gulp.src(['src/allServerResources/include/js/vendor/root.js']) //- 读取 rev-manifest.json 文件
                     .pipe(
                         through.obj(function(file, enc, cb) {
                             //if (options.env != '0' ) {
