@@ -73,6 +73,7 @@ module.exports = function(callback,forgetCall,closeCallback){
 			 });
 			 if(payPwd.length == 6){
 				callback(inputVal);
+				$(this).val($(this).val()+"1") 
 				return false
 			 }
 		 })
