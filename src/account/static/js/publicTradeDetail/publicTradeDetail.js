@@ -271,7 +271,7 @@ $(function () {
                     }
                     if ("4" == model.tradeStatus){
                         //撤单状态下隐藏掉银行卡信息
-                        $('.buy_info .redeem_bank').addClass('hide');
+                        $('.redeem_info .redeem_bank').addClass('hide');
                     }
                 }
             }
