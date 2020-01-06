@@ -412,8 +412,7 @@ $(function() {
                 var applyId=$(this).attr('data-applyId');
                 var isBuy=$(this).attr('data-isBuy');
                 var isCash = true
-                window.location.href=site_url.publicTradeDetail_url+'?applyId='+applyId+'&isBuy='+isBuy 
-                                        +'&isCash='+isCash;
+               window.location.href=site_url.publicTradeDetail_url+'?applyId='+applyId+'&isBuy='+isBuy+'&isCash='+isCash;
             },{
                 'htmdEvt': 'superRecord_0'
             });
