@@ -297,7 +297,7 @@ $(function() {
                         name = name.substring(0, name.length - 1)
                     }
                     var parentid = data.provinceCode;
-                    $('#locationCity').text(name);
+                    $('#locationCity').html(name);
                     $('#locationCity').attr({
                         'data-code': code,
                         'data-parentid': parentid
