@@ -47,6 +47,7 @@ $(function() {
 			singleaAuthenPath : "", //一键认证跳转链接
 			end:"",
 			unit:"%",//折线图上是%还是不带%。
+			symboltype : 'none',	//echarts 节点样式
 		},
 		gV:{
 			singleaAuthenType:"",  //认证类型  买入into  定投 investement
@@ -197,6 +198,10 @@ $(function() {
 		//type必传
 		drawLine: function ( type, data) {
 			var that = this;
+			//判断有多少数据 只有一个值时 symbol 为circle 多组值时 symbol为 none
+			if(data.profitThoudDate.length == 1 ){
+				that.data.symboltype = 'circle'
+			}	
 			if( type == 'qrnh'){
 				var chartId = $('#qrnhLine')[0],
 					xAxisData = data.profitThoudDate;
@@ -309,9 +314,11 @@ $(function() {
 			    		color: '#061D6A'
 			    	},
 			    	itemStyle: {
-			    		show: false
+						normal: {
+							color: "#061D6A",
+						}
 			    	},
-			    	symbol: 'none',
+			    	symbol: that.data.symboltype,
 			    	areaStyle: {
 			    		normal: {
 			    			color: {
@@ -362,10 +369,16 @@ $(function() {
 				   that.data.isRedemptionFlag = jsonData.isRedemptionFlag; //是否可赎回(0否1是) int 类型
 				   that.data.supportFixedFlag = jsonData.isFixFlag;//是否可定投(0否1是) int 类型
 				   if(!that.data.isBuyFlag){//不可买入
-				   	 	$(".buyBtn").addClass("disable").html("暂停赎回")
+				   	 	$(".buyBtn").addClass("disable").html("暂不可售")
 				   }
 				   	if(!that.data.isRedemptionFlag){//不可赎回
-				   		$(".redeemBtn").addClass("disable").html("暂不可售")
+				   		$(".redeemBtn").addClass("disable").html("暂停赎回")
+				   }
+				   // 以普通基金方式购买持仓后上架成超宝的持仓不可买入，定投以及查看详情
+				   if(jsonData.isCash) {
+				   	    $(".customerService").css("display", "none")
+				   	    $(".buyBtn").addClass("disable")
+				   	    $(".fiedBtn").addClass("disable")
 				   }
 					//项目名称
 					$('#HeadBarpathName').html( jsonData.fundName );

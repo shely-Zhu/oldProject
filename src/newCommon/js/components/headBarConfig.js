@@ -35,10 +35,6 @@ var pathTitle = [{
 ]
 $(function() {
     var $headBarConfigBox = $("#HeadBarConfigBox");
-    //IOS会在所有连接上拼接是否为刘海屏的标识，同时会存在session中。
-    if (splitUrl['isIphoneX']) {
-        $(".HeadBarConfigBox").css('padding-top', '0.25rem');
-    }
     //判断传入的值
     if ($("#HeadBarpathName").attr("data") == "@@pathName") {
         var Request = {}
@@ -59,9 +55,25 @@ $(function() {
     if ($headBarConfigBox.attr("linesNum") != 2) {
         $("#HeadBarpathName").addClass("singleLine")
     }
+
+    var colors = $headBarConfigBox.attr('bgColors').split(",")
+    // 安卓刘海屏适配
+    var hairHeight = splitUrl['hairHeight']; 
+    if (splitUrl['hairHeight']){
+        hairHeight = splitUrl['hairHeight'] / 100 + 'rem';
+    } else if (splitUrl['isIphoneX']){
+        hairHeight = '0.25rem';
+    }
+
+    if(hairHeight) {
+        $('body').prepend('<div class="hairBox"></div>');
+        $('.hairBox').css({'width': '100%', 'height': hairHeight, 'background': colors[0]});
+        $('#HeadBarConfigBox').css('margin-top', hairHeight);
+    };
+
     //传人样式判断展示形式 
     if ($headBarConfigBox.attr('showType') == '1') {
-        var colors = $headBarConfigBox.attr('bgColors').split(",")
+        
         ClearStyle()
         $('.zhanweifu').css('display', 'none')
         //最新方案 headBar跟着页面一起滚动上去 先把这块滚动的注释掉。如果需要改回原方案 只需要吧这块放开 同时把headBar改为fixed即可

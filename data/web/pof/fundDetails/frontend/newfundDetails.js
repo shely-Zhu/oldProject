@@ -31,7 +31,7 @@ var data = Mock.mock({
         "invTypComDesc":"混合型",//基金投资类型描述
         "trDate":"2018-04-15",//交易日期（净值日期）
         "unitNav":0.907,//份额净值
-        "chgRat1d":1.002227,//日涨跌幅(日收益率)
+        "chgRat1d":-1.002227,//日涨跌幅(日收益率)
         "chgRat1w":0.777778,
         "chgRat1m":-2.577873,
         "chgRat3m":-4.526316,
