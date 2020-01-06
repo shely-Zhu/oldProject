@@ -766,7 +766,7 @@ $(function() {
             mui("body").on('mdClick', '.redeemBtn', function() {
             	// 先判断登录是否超时以及账户冻结状态    司法验证过期弹出提示框
 				if(that.data.redeemClickFlag) {
-					that.data.redeemClickFlag = frozenAccount("buyFreeze", window.location.href,'','privateDetail_13')
+					that.data.redeemClickFlag = frozenAccount("saleFreeze", window.location.href,'','privateDetail_13')
 					if(!that.data.redeemClickFlag) { // 验证通过则跳转赎回页面
 						$.elasticLayer({
 				            id: "tip",

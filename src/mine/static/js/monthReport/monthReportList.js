@@ -80,12 +80,12 @@ $(function() {
 						needDataEmpty: true,
                         callbackDone: function(json) {     
                             var data = json.data;
-                            if(that.gV.pageCurrent == 1 && data.length == 0) {
+                            if(data.length == 0) {
                                 $(".list").css("display", "none")
 								that.$e.noData.show();
 								$('body').css('background','#ffffff');
                             } else {
-								$('body').css('background','transparent');
+								// $('body').css('background','transparent');
                                 def && def.resolve( data, that.gV.pageCurrent);
                                 // 第一个调仓记录默认展开
                                 $('.list').find('ul').eq(0).find('.mui-collapse').addClass('mui-active');
@@ -123,16 +123,14 @@ $(function() {
 						$('body').css('background','#ffffff');
 					}
 					else{
-						$('body').css('background','transparent');
-                        // 第一个调仓记录默认展开
-                        $('.list').find('ul').eq(0).find('.monthReportListDetail').addClass('active');
-
                         var template = Handlebars.compile($("#adjustment-template").html());
 						//匹配json内容
 						var html = template(jsonData);
 						//输入模板
 						$('.list').html(html);
 
+                        // 第一个调仓记录默认展开
+                        $('.list').find('ul').eq(0).find('.latestAdjustment').css("display", "block");
 					}
 					
 				},

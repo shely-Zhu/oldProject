@@ -6,13 +6,15 @@
  *
  *value买入传buyFreeze  卖出传saleFreeze 
  *
+ * 买入 需要判断是否证件过期以及是否司法冻结 卖出只需判断是否司法冻结
+ *
  *url 调用的方法的当前页面 
  *
  * custType  机构客户和个人  如果拿不到传false   能拿到传具体的值
  * 
  */
 var tipAction = require('./tipAction.js');
-function isCustTypeOne(outdateFreezeStatus, lawFreezeStatus, url, custType, htmdEvt) {
+function isCustTypeOne(outdateFreezeStatus, lawFreezeStatus, url, custType, value, htmdEvt) {
     var f = false;
     var userObj = [{
             //由于恒小智-赎回用到了，改成新接口
@@ -32,7 +34,7 @@ function isCustTypeOne(outdateFreezeStatus, lawFreezeStatus, url, custType, htmd
                 
                 var jsonData = data.data;
                 // 获取客户是机构客户还是个人客户
-                f = elasticLayer(outdateFreezeStatus, lawFreezeStatus, url, jsonData.accountType, htmdEvt); // 调用弹框
+                f = elasticLayer(outdateFreezeStatus, lawFreezeStatus, url, jsonData.accountType, value, htmdEvt); // 调用弹框
             },
              
         }]
@@ -40,7 +42,7 @@ function isCustTypeOne(outdateFreezeStatus, lawFreezeStatus, url, custType, htmd
         return f;
 };
 
-function elasticLayer(outdateFreezeStatus, lawFreezeStatus, url, custType,htmdEvt) {
+function elasticLayer(outdateFreezeStatus, lawFreezeStatus, url, custType, value, htmdEvt) {
 
     var custType = (custType == "0" || custType == "2") ? true : false;  //机构为true
 
@@ -57,7 +59,7 @@ function elasticLayer(outdateFreezeStatus, lawFreezeStatus, url, custType,htmdEv
 			callback: function() {}
 		});
     	return true;
-	}/* else if(outdateFreezeStatus == 1) {
+	} else if(outdateFreezeStatus == 1 && value == 'buyFreeze') {
         var idDateObj = {
             title: '温馨提示',
             p: '您的证件已过期，补充证件信息后才可能继续交易',
@@ -76,7 +78,7 @@ function elasticLayer(outdateFreezeStatus, lawFreezeStatus, url, custType,htmdEv
         }
         $.elasticLayer(idDateObj);
         return true;
-    }*/
+    }
 };
 
 module.exports = function(value, url, custType,htmdEvt) {
@@ -98,13 +100,11 @@ module.exports = function(value, url, custType,htmdEvt) {
         		saleFreeze = data.saleFreeze;
         	if( (value == "buyFreeze" && buyFreeze == 1) || (value == "saleFreeze" && saleFreeze == 1) ) {
                 if(custType) { // 如果传客户类型调用弹框的方法
-                    r = elasticLayer(data.outdateFreezeStatus, data.lawFreezeStatus, url, custType, htmdEvt);
+                    r = elasticLayer(data.outdateFreezeStatus, data.lawFreezeStatus, url, custType, value, htmdEvt);
                 } else{ // 如果没传调用getuserinfo接口获取客户类型
-                    r = isCustTypeOne(data.outdateFreezeStatus, data.lawFreezeStatus, url, custType, htmdEvt);
+                    r = isCustTypeOne(data.outdateFreezeStatus, data.lawFreezeStatus, url, custType, value, htmdEvt);
                 }
-        		
         	}
-	
         },
         callbackFail: function(json) {
             tipAction(json.message);
