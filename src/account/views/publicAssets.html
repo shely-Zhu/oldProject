@@ -12,7 +12,7 @@
 </head>
 
 <body>
-    @@include('@pathCommonViews/headBarConfig.html',{"pathName":"自选公募","bgColors":"#475A95,#475A95","showType":"1"})
+    @@include('@pathCommonViews/headBarConfig.html',{"pathName":"自选公募","bgColors":"#23356D,#23356D","showType":"1"})
     <section class="container">
         <div class="banner">
             <div class="bannerTop clearfix">
@@ -37,7 +37,7 @@
         </div>
         <div class="divider"></div>
         <div id="bank_screen" class="bank_screen">
-            <div class="bank_screen_name fl">全部</div>
+            <div class="bank_screen_name fl">全部持有</div>
             <span class="iconfont fl">&#xe609;</span>
         </div>
         <div id="bank_list" class="bank_list hide">
@@ -155,7 +155,7 @@
                     {{/if_than_0}}
                     <!-- todo 需要判断字段来是否显示 -->
                     {{#if isBuyFlag}}
-                        <div class="buy_btn fr blueBgButton" fundCode={{fundCode}}>买入</div>
+                        <div class="buy_btn fr blueBgButton" fundCode={{fundCode}}>转入</div>
                     {{/if}}
                     {{#if isRedemptionFlag}}
                         <div class="redeem_btn fr goldBorderButton">转出</div>

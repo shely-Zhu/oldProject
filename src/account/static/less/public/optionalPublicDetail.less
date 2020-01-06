@@ -16,7 +16,7 @@
 
 
 body{
-	background: @F7FAFD
+	background: @F7FAFD;
 }
 
 .privateDetail{
@@ -181,20 +181,23 @@ body{
 			display: none;
 			background: @c005;
 			margin-bottom: 0.3rem;
-			padding: 0 0.4rem 0.4rem;
+			padding: 0 0.4rem 0.2rem;
 
 			.openDiv{
 				position: relative;
-				
+				margin-top: .2rem;
+				height: auto;
 				.num{
 					font-size: 0.3rem;
 					color: @4A4A4A;
+					line-height: .35rem;
 				}
 
 				.txt{
 					font-size: 0.26rem;
 					color: @9B9B9B;
 					margin-bottom: 0.04rem;
+					line-height: .37rem;
 				}
 			}
 		}
@@ -236,8 +239,8 @@ body{
 		text-align: center;
 		line-height: 1.4rem;
 		background: @c005;
-		margin-bottom: 0.3rem;
-
+		margin: 0.3rem 0;
+		display: flex;
 		.img{
 			height: 0.6rem;
 			width: 0.6rem;
@@ -249,6 +252,9 @@ body{
 		.txt{
 			vertical-align: middle;
 			font-size: 0.28rem;
+		}
+		.change{
+			float: left;
 		}
 	}
 
@@ -295,11 +301,13 @@ body{
                 }
                 &.active {
                     color: @272727;
-                    border-bottom: 0.06rem solid @061D6A;
+					border-bottom: 0.06rem solid @061D6A;
+					font-weight: 600;
                 }
             }
             .rightTitle {
-                float: right;
+				float: right;
+				font-size: 0.28rem;
             }
         }
         .lineDraw {
@@ -429,4 +437,12 @@ body{
 			}
 		}
 	}
+}
+.mui-col-xs-6{
+   height: 1rem;
+   line-height: 1rem;
+
+}
+.symx{
+    border-right:0.01rem solid @c004;
 }

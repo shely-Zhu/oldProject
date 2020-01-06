@@ -68,9 +68,9 @@ $(function () {
             var that = this;
             that.getData(); // 获取基金详情
             that.getFundCollectionInit() //收藏管理--判断是否被收藏
-            that.getData1(); // 查询基金的历史收益（货币基金）/历史净值（普通基金）
             that.getUserInfo();  //获取用户类型
             that.events();
+            // that.getData1(); // 查询基金的历史收益（货币基金）/历史净值（普通基金）
             $('.tips').hide()
         },
         changeVal: function (prop, num, isfalse) {
@@ -120,11 +120,13 @@ $(function () {
                     that.gV.json.fundType = that.fundType
                     that.gV.invTypCom = json.data.invTypCom
                     that.gV.secuSht = json.data.secuSht
-                    if(that.gV.json.tradeLimitFlag == "1"){
-                        that.gV.json.tradeLimitFlag2 = true
-                    }else{
-                        that.gV.json.tradeLimitFlag2 = false
-                    }
+                    //test
+                    that.gV.json.tradeLimitFlag2 = true
+                    // if(that.gV.json.tradeLimitFlag == "1"){
+                    //     that.gV.json.tradeLimitFlag2 = true
+                    // }else{
+                    //     that.gV.json.tradeLimitFlag2 = false
+                    // }
                     var html = template(that.gV.json); (html, "00");
                     if(!that.gV.json.discount){
                         that.gV.discountStatus = false
@@ -361,6 +363,10 @@ $(function () {
             var fundComId = json.fmcComId ? json.fmcComId : 'gz04tVwXga'
             var secuId = json.secuId ? json.secuId : '000846.OF'
             var fundName = json.chiName ? json.chiName : '中融货币市场基金'
+
+            window.onload = function(){
+                that.getData1();
+            }
             // 基金经理
             mui("body").on('mdClick', ".fundManager", function (e) {
                 window.location.href = site_url.pofFundManager_url + '?fundCode=' + fundCode

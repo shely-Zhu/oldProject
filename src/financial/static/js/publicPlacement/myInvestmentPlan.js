@@ -133,8 +133,8 @@ $(function () {
                                 }
                                 def && def.resolve( data, that.gV.pageCurrent);
                                 that.gV.pageCurrent++;
-                                
                             }
+                            
                         },
                         callbackNoData: function( json ){
                             if(that.gV.pageCurrent == 1) {

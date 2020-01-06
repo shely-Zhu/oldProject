@@ -7,7 +7,7 @@
 @import url("@pathCommonLessCom/headBarConfig.less");
 
 body{
-    max-width: 7.5rem;
+    width: 100%;
 }
 #top {
 	height: 4.92rem;
@@ -19,6 +19,7 @@ body{
 		padding: 1.58rem 0 .3rem .3rem;
 		.totalFundTitle {
 			font-size: .32rem;
+			font-weight: 600;
 			color:rgba(255,255,255,1);
 			line-height:.45rem;
 			background:linear-gradient(180deg, rgba(251,226,189,1) 0%, rgba(226,181,128,1) 100%);
@@ -53,6 +54,7 @@ body{
 		}
 		.profitContent {
 			margin-top: .45rem;
+			margin-right: .3rem;
 			.lineVertical {
 				width:0.02rem;
 				height:0.5rem;
@@ -60,11 +62,10 @@ body{
 				opacity:0.3;
 				margin-top: .23rem;
 				display: inline-block;
-				margin-left: 0.45rem;
-				margin-right: 0.45rem;
 			}
 			.profitCon {
 				display: inline-block;
+				width: 31%;
 				.profitTitle {
 					font-size: .26rem;
 					line-height: .26rem;
@@ -76,6 +77,12 @@ body{
 					margin-top: .2rem;
 					font-weight: 600;
 				}
+			}
+			.holdIncome {
+				text-align: center;
+			}
+			.addupIncome {
+				text-align: right;
 			}
 		}
 	}

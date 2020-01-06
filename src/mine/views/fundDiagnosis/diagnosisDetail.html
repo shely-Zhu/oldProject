@@ -9,7 +9,7 @@
 
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="viewport" content="width=device-width,user-scalable=no,initial-scale=1.0,maximum-scale=1.0,minimum-scale=1.0,viewport-fit=cover">
     <meta name="applicable-device" content="mobile">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black">
@@ -20,14 +20,14 @@
 </head>
 
 <body>
-       @@include('@pathCommonViews/headBarConfig.html',{"bgColors":"#384A81,#2A3C70","showType":"1","pathName":"基金诊断"})
         <!-- 加载中loading -->
         @@include('@pathCommonViews/loading/listLoading.html')
         <!-- 暂无数据 -->
         @@include('@pathCommonCom/noData/noData.html', {"tipText": "暂无数据"})
 
     <section class="diagnosisDetail">
-    <!-- 顶部 -->
+        <!-- 顶部 -->
+        @@include('@pathCommonViews/headBarConfig.html',{"bgColors":"#384A81,#2A3C70","showType":"1","pathName":"基金诊断"})
         <div class="dd_top diagnosisDetail_top">
         </div>
         <!-- 综合评分 -->

@@ -7,7 +7,7 @@
  * iconStype:icon的样式，也可以是文字。如果是icon传入对应的码例如：&#xe609;不穿显示客服热线的图标
  * serviceType：如果是1就显示，如果是0则不显示。主要控制右边图标的显示隐藏
  * 例如
- * @@include('@pathCommonViews/headBarConfig.html',{"pathName":"自选公募","bgColors":"#475A95,#475A95","showType":"1","serviceType":"1"})
+ * @@include('@pathCommonViews/headBarConfig.html',{"pathName":"自选公募","bgColors":"#23356D,#23356D","showType":"1","serviceType":"1"})
  * 
  * 
  * 
@@ -36,9 +36,8 @@ var pathTitle = [{
 $(function() {
     var $headBarConfigBox = $("#HeadBarConfigBox");
     //IOS会在所有连接上拼接是否为刘海屏的标识，同时会存在session中。
-    if (splitUrl['isIphoneX'] || window.isIphoneX) {
-        window.isIphoneX = true;
-        $(".HeadBarConfigBox").css('margin-top', '0.25rem');
+    if (splitUrl['isIphoneX']) {
+        $(".HeadBarConfigBox").css('padding-top', '0.25rem');
     }
     //判断传入的值
     if ($("#HeadBarpathName").attr("data") == "@@pathName") {
