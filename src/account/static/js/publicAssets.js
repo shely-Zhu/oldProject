@@ -152,6 +152,7 @@ $(function () {
             //点击筛选银行卡
             mui("body").on('mdClick', '#bank_screen', function (e) {
                 that.gV.showBankList = !that.gV.showBankList;
+                $(".noData").hide()
                 if (that.gV.showBankList) {
                     $('.bank_list').show();
                     $('#bank_screen .iconfont').html('&#xe62a;');
@@ -210,7 +211,7 @@ $(function () {
             //购买
             mui("body").on('mdClick', '.buy_btn', function (e) {
                 var fundCode = $(this).attr("fundCode")
-                window.location.href = site_url.fundTransformIn_url+"?fundCode="+fundCode+"&noReload=1";   
+                window.location.href = site_url.pofCashTransformIn_url+"?fundCode="+fundCode+"&noReload=1";   
                 return false;
             },{
                 'htmdEvt': 'publicAssets_4'
