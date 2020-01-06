@@ -58,16 +58,14 @@ $(function() {
 
     var colors = $headBarConfigBox.attr('bgColors').split(",")
     // 安卓刘海屏适配
-    var hairHeight = splitUrl['hairHeight']; 
-    if (splitUrl['hairHeight']){
-        hairHeight = splitUrl['hairHeight'] / 100 + 'rem';
-    } else if (splitUrl['isIphoneX']){
+    var hairHeight; 
+    if (splitUrl['hairHeight'] || splitUrl['isIphoneX']){
         hairHeight = '0.25rem';
     }
 
     if(hairHeight) {
         $('body').prepend('<div class="hairBox"></div>');
-        $('.hairBox').css({'width': '100%', 'height': hairHeight, 'background': colors[0]});
+        $('.hairBox').css({'width': '100%', 'height': hairHeight, 'background': colors[0], 'position': 'fixed', 'z-index': '999'});
         $('#HeadBarConfigBox').css('margin-top', hairHeight);
     };
 
@@ -82,9 +80,13 @@ $(function() {
             var tops = $(this).scrollTop();
             if (tops > 50) { //当window的scrolltop距离大于50时，
                 $headBarConfigBox.animate({ "background-image": "linear-gradient(to right," + colors[0] + " 40%, " + colors[1] + " 60%)", "color": "#fff" }, 'slow', 'ease-out')
+                $('.hairBox').animate({ "background-image": "linear-gradient(to right," + colors[0] + " 40%, " + colors[1] + " 60%)", "color": "#fff" }, 'slow', 'ease-out')
                 $("#HeadBarConfigBox a").css({ "color": "#fff" });
             } else {
                 ClearStyle()
+                if(hairHeight) {
+                    $('.hairBox').css('background', colors[0]);
+                };
             }
         });
         // 设置返回按钮和title的颜色
