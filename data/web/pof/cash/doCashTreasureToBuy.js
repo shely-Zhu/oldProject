@@ -15,7 +15,7 @@ var data = Mock.mock(
         payAgainAmount: "100.00",
         payAgainAmountMask: "100.00",
         paymentGainsDayStr: "12月23日",
-        purchaseAmount: "60000.00",
+        purchaseAmount: "10000.00",
         purchaseAmountMask: "60,000.00",
         startGainsDayStr: "12月22日",
         trdDt: "2019-12-06",
