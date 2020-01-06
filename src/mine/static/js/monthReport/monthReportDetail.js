@@ -135,8 +135,11 @@ var monthReportDetail = {
 				var jsonData = json.data;
 				if($.util.objIsEmpty(jsonData.pefSaleList) && $.util.objIsEmpty(jsonData.generalModelList) && $.util.objIsEmpty(jsonData.pofList)){
 					//没有数据
+					var reportTimeHtml = '';
+					reportTimeHtml = '截止11'+that.getElements.reportTime+',您暂无持仓信息';
 					$('.holdNodata').show();
-					$('.holdNodata .text').html('截止'+that.getElements.reportTime+',您暂无持仓信息');
+					$('.holdNodata .text').html(reportTimeHtml);
+					$('.holdNodata .text').html('截止22'+that.getElements.reportTime+',您暂无持仓信息');
 				}else{
 					var pefSaleList = jsonData.pefSaleList;
 					jsonData.holdPosition = true;
@@ -202,7 +205,10 @@ var monthReportDetail = {
 			callbackNoData: function(json) {
 				//没有数据
 				$('.holdNodata').show();
-				$('.holdNodata .text').html('截止'+that.getElements.reportTime+',您暂无持仓信息');
+				var reportTimeHtml2 =  '';
+				reportTimeHtml2 = '截止33'+that.getElements.reportTime+',您暂无持仓信息';
+				$('.holdNodata .text').html(reportTimeHtml2);
+				$('.holdNodata .text').html('截止44'+that.getElements.reportTime+',您暂无持仓信息');
 
 			}
 
