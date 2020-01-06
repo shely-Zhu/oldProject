@@ -2,7 +2,7 @@
  * @page: pc wap 端共用接口
  * @Author: chengqingqing
  * @Date:   2019-03-28
- * @Last Modified by:   songxiaoyu
+ * @Last Modified by:   Marte
  * @description:
  */
 
@@ -42,7 +42,7 @@ module.exports = function() {
     this.oldRecommendNew_api = http_url.web_url + '/account/oldRecommendNew'; // 微信公众号获取参数
     // 其他资产
 
-    this.getJJSInTransitAssets_api = http_url.web_url + '/account/jjs/getJJSInTransitAssets'; // 查询金交所在途资产 
+    this.getJJSInTransitAssets_api = http_url.web_url + '/account/jjs/getJJSInTransitAssets'; // 查询金交所在途资产
     //待确认，已确认列表
     this.getTradeList_api = http_url.web_url + '/pef/getTradeList'
         // 查询金交持仓资产、在途资产、总资产
@@ -356,7 +356,7 @@ module.exports = function() {
 
     //yan
     this.findMessageCenterById_api = http_url.web_url + '/content/frontend/findMessageCenterById'; //证监会要求查看详情
-    
+
     this.queryTransferFunds_api= http_url.web_url +'/account/queryTransferFunds'; // 查询基金列表
     this.newFundDetails_api = http_url.web_url + '/pof/fundDetails/frontend/newfundDetails';//基金年化查询
     this.redemptionPay_api = http_url.web_url + '/pof/redemptionPay/redemptionPay';//赎回确认
