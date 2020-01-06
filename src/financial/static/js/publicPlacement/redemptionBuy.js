@@ -200,20 +200,18 @@ $(function() {
                         $('.elasticLayer.transOutRule').show()
                         $(".elasticContent").html(res.message);
                     }
-                    that.getElements.confirmBtn.removeAttr("disabled");
+                    $(".confirmeDemptionPay").removeAttr("disabled");
                 },
                 callbackNoData: function(json) {
                     $("#passwordWrap").hide();
                     tipAction(json.message);
-                    that.getElements.confirmBtn.removeAttr("disabled");
+                    $(".confirmeDemptionPay").removeAttr("disabled");
                 },
                 callbackFail: function(json) {
                     $("#passwordWrap").hide();
                     tipAction(json.message);
-                    that.getElements.confirmBtn.removeAttr("disabled");
+                    $(".confirmeDemptionPay").removeAttr("disabled");
                 }
-
-
             }];
             $.ajaxLoading(obj);
         },
@@ -225,6 +223,10 @@ $(function() {
             that.gV.maxRedempShare = parmesDataList.enableShares;
             $(".maxMoneyContent span").text(that.gV.maxRedempShare)
             $(".msecond-one").attr("placeholder","最多可赎回"+that.gV.maxRedempShare+"份")
+        },
+        // 关闭密码弹框，按钮设置为可点击
+        closeCallBack: function() {
+            $(".confirmeDemptionPay").removeAttr("disabled");
         },
         /*
             绑定事件
@@ -318,7 +320,7 @@ $(function() {
                 $(".fake-box input").val('');
                 $(".msecond input").blur();
                 $("#passwordWrap").show();
-                payPass(that.cancelOrder);
+                payPass(that.cancelOrder, null, that.closeCallBack);
                 that.getElements.confirmBtn.attr('disabled', true)
             }, {
                 htmdEvt: 'redemptionBuy_08'
