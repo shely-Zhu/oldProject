@@ -100,11 +100,11 @@ var monthReportDetail = {
 					yearFor = dateStr.getFullYear() 
 					monthFor = dateStr.getMonth() + 1;
 					if (monthFor.toString().length == 1) {
-				        monthFor = "0" + m;
+				        monthFor = "0" + monthFor;
 				    }
 				    dayFor = dateStr.getDate();
 				    if (dayFor.toString().length == 1) {
-				        dayFor = "0" + m;
+				        dayFor = "0" + dayFor;
 				    }
 				    dataFor = yearFor + '-' + monthFor + '-' + dayFor;
 
