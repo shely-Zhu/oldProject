@@ -62,6 +62,7 @@ $(function () {
                 oneYear: {},
                 sinceNow: {}
             },
+            symboltype : 'none',	//echarts 节点样式
         },
         fundType: splitUrl['fundType'] == '10300'||splitUrl['fundType'] == '10800' ? 1 : 0, //10300 货币基金类型，其余为普通基金类型
         init: function () {
@@ -135,6 +136,7 @@ $(function () {
                     }
                     
                     $(".tplBox").html(html); 
+                    that.getData1();
                     that.getData2('1', 1); // 获取echarts数据
                     var historyStr = that.fundType ? '<div class="item_name">日期</div><div class="item_name">七日年化</div><div class="item_name">万份收益(元)</div>' : '<div class="item_name">日期</div><div class="item_name">单位净值</div><div class="item_name">累计净值</div><div class="item_name">日涨幅</div>'
                     $('.history_area >.history_item').html(historyStr);
@@ -363,10 +365,6 @@ $(function () {
             var fundComId = json.fmcComId ? json.fmcComId : 'gz04tVwXga'
             var secuId = json.secuId ? json.secuId : '000846.OF'
             var fundName = json.chiName ? json.chiName : '中融货币市场基金'
-
-            window.onload = function(){
-                that.getData1();
-            }
             // 基金经理
             mui("body").on('mdClick', ".fundManager", function (e) {
                 window.location.href = site_url.pofFundManager_url + '?fundCode=' + fundCode
@@ -815,6 +813,10 @@ $(function () {
         //type必传
         drawLine: function (type, data) {
             var that = this;
+            //判断有多少数据 只有一个值时 symbol 为circle 多组值时 symbol为 none
+			if(data.date.length == 1 ){
+				that.gV.symboltype = 'circle'
+			}	
             if (type == '1') {
                 //画的是七日年化折线图 或者单位净值
                 var chartId = document.getElementById("line1"),
@@ -912,9 +914,11 @@ $(function () {
                        color: '#677EC4'
                     },
                     itemStyle: {
-                        show: false
-                    },
-                    symbol: 'none',
+						normal: {
+							color: "#677EC4",
+						}
+			    	},
+                    symbol: that.gV.symboltype,
                     areaStyle: {
                         normal: {
                             color: {

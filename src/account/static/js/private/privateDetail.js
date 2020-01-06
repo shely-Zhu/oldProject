@@ -47,7 +47,8 @@ $(function() {
 			redeemRule: [],	// 赎回规则  按照=====切割
 			echartsClickFlag: false, // echarts图表查询单点标识 false为可点击
 			redeemClickFlag: true, // true为可点击
-			redeemPartion: ''	
+			redeemPartion: '',
+			symboltype : 'none',	//echarts 节点样式
 		},
 		init: function(){
 			var that = this;
@@ -245,7 +246,7 @@ $(function() {
 			    callbackDone: function(json) {
 			    	console.log(json)
 			    	that.data.echartsClickFlag = false;
-			    	var jsonData = json.data;
+					var jsonData = json.data;
 			    	//拼数据
 			       	$.each( jsonData, function(i, el){
 			       		newData.sevenIncomeRate.push( el.sevenYearYield);
@@ -353,6 +354,10 @@ $(function() {
 		//type必传
 		drawLine: function ( type, data) {
 			var that = this;
+			//判断有多少数据 只有一个值时 symbol 为circle 多组值时 symbol为 none
+			if(data.profitThoudDate.length == 1 ){
+				that.data.symboltype = 'circle'
+			}			
 			if( type == 'qrnh'){
 				//画的是七日年化折线图
 				$("#qrnhLine").removeClass("hide")
@@ -474,7 +479,7 @@ $(function() {
 			    	itemStyle: {
 			    		show: false
 			    	},
-			    	symbol: 'none',
+			    	symbol: that.data.symboltype,
 			    	areaStyle: {
 			    		normal: {
 			    			color: {
