@@ -22,7 +22,7 @@ var generateTemplate = require('@pathCommonJsComBus/generateTemplate.js');
 var getCookie = require('@pathNewCommonJsCom/getCookie.js');
 var Base64 = require('@pathIncludJs/vendor/base64/base64.js');
 var splitUrl = require('@pathCommonJs/components/splitUrl.js')();
-var frozenAccount = require('@pathCommonJs/components/frozenAccount.js');
+
 $(function() {
 
 	var privateDetail = {
@@ -786,11 +786,7 @@ $(function() {
 			mui("body").on('mdClick', '.redeemBtn', function(e) {
 			   	if(!that.data.isRedemptionFlag){//不可赎回
 			   		return false;
-				   }
-				   var result = frozenAccount("saleFreeze", window.location.href, false);
-					if( !!result ) {
-						return false;
-					};
+			   	}
 				window.location.href = site_url.redemptionBuy_url + "?tradeNo=" + splitUrl['tradeNo'] + "&fundCode=" + that.data.fundCode			
 			},{
                 'htmdEvt': 'optionalPublicDetail_8'
@@ -800,10 +796,6 @@ $(function() {
 				if(!that.data.isBuyFlag){//不可买入
 				   	 	return false;
 				   }
-				var result = frozenAccount("saleFreeze", window.location.href, false);
-				if( !!result ) {
-					return false;
-				};
 				that.getConditionsOfOrder("into");
 				that.gV.singleaAuthenType = "into"
 			//	window.location.href = site_url.fundTransformIn_url+"?fundCode="+that.data.fundCode;			
