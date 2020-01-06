@@ -18,7 +18,7 @@ require('@pathIncludJs/vendor/config.js');
 require('@pathCommonJs/components/utils.js');
 require('@pathCommonJs/components/headBarConfig.js');
 
-var timer = {
+/*var timer = {
     id:null,
     run:function (callback,time) {
         this.id = window.setInterval(callback,time);
@@ -27,7 +27,7 @@ var timer = {
         var that = this;
         this.id = window.clearInterval(that.id);
     }
-};
+};*/
 //var keyboardHeight = 0,
 //screenHeight = window.innerHeight;
 
@@ -48,7 +48,7 @@ var fixScroll = function(num,oHeight){//ios浏览器需要滚动
 
 }
 
-module.exports = function(callback,forgetCall){
+module.exports = function(callback,forgetCall,closeCallback){
 		//屏幕当前的高度
     	var oHeight = $(window).height();
 		$("#passwordWrap").show();
@@ -65,11 +65,6 @@ module.exports = function(callback,forgetCall){
 			for(var i = 0, len = payPwd.length; i < len; i++) {
 				$(".fake-box input").eq(i).val(payPwd[i]);
 			}
-			if(payPwd.length == 6){
-				 callback(inputVal);
-				return false;
-			}
-			 
 			$(".fake-box input").each(function() {
 				 var index = $(this).index();
 				 if(index >= len) {
@@ -77,8 +72,9 @@ module.exports = function(callback,forgetCall){
 				 }
 			 });
 			 if(payPwd.length == 6){
-			 	console.log(inputVal)
-				 callback(inputVal);
+				callback(inputVal);
+				$(this).val($(this).val()+"1") 
+				return false
 			 }
 		 })
 	   
@@ -118,6 +114,7 @@ module.exports = function(callback,forgetCall){
 			}
 			$("#passwordWrap").hide();
 			$(".passwordTop").css("margin-bottom","0")
+			closeCallback?closeCallback():''
 			
 		})
 		$(".forgetP").on('click',function(){
