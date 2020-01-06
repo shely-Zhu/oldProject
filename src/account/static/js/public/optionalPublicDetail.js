@@ -362,10 +362,16 @@ $(function() {
 				   that.data.isRedemptionFlag = jsonData.isRedemptionFlag; //是否可赎回(0否1是) int 类型
 				   that.data.supportFixedFlag = jsonData.isFixFlag;//是否可定投(0否1是) int 类型
 				   if(!that.data.isBuyFlag){//不可买入
-				   	 	$(".buyBtn").addClass("disable").html("暂停赎回")
+				   	 	$(".buyBtn").addClass("disable").html("暂不可售")
 				   }
 				   	if(!that.data.isRedemptionFlag){//不可赎回
-				   		$(".redeemBtn").addClass("disable").html("暂不可售")
+				   		$(".redeemBtn").addClass("disable").html("暂停赎回")
+				   }
+				   // 以普通基金方式购买持仓后上架成超宝的持仓不可买入，定投以及查看详情
+				   if(jsonData.isCash) {
+				   	    $(".customerService").css("display", "none")
+				   	    $(".buyBtn").addClass("disable")
+				   	    $(".fiedBtn").addClass("disable")
 				   }
 					//项目名称
 					$('#HeadBarpathName').html( jsonData.fundName );
