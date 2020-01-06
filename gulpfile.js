@@ -547,16 +547,11 @@ gulp.task("cssToHost", function() {
 
                     for( var i in commonImgArr ){
 
-                        console.log( 'commonImgArr[i]:' + commonImgArr[i] );
-
                         if( commonImgArr[i].indexOf('.css') != -1 && commonImgArr[i].indexOf('include') != -1 ){
 
                             var str = commonImgArr[i].substring( commonImgArr[i].indexOf('.'), commonImgArr[i].indexOf('include'));
                             var str_2 = commonImgArr[i].replace(str, prefix + '/');
                             
-                            console.log('str： ' + str);
-                            console.log('str_2： ' + str_2);
-
                             fileCon = fileCon.replace( commonImgArr[i] , str_2 )
                         }
                     }
