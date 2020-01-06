@@ -635,7 +635,10 @@ $(function () {
                 needLogin: false,
                 callbackDone: function (json) {
                    var fundCode = splitUrl['fundCode'];
-                   if(json.data.includes(fundCode)){
+                   //if(json.data.includes(fundCode)){
+                   // $(".selected_area").addClass('active')
+                   //}
+                   if(!!json.data&&json.data.length>0){
                     $(".selected_area").addClass('active')
                    }
                 },
