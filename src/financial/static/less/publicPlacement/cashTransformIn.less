@@ -386,13 +386,15 @@ body{
         
     }
     .btn_box{
-        position: absolute;
-        bottom: .34rem;
-        left: .3rem;
+        //如果是fixed会被键盘顶起
+//      position: absolute;
+//      bottom: .34rem;
+//      left: .3rem;
         right: .3rem;
         text-align: center;
         letter-spacing: 2px;
-        margin: 0 auto;
+        margin: 0 .3rem;
+        margin-top: 4rem;
         .btn{
             width: 100%;
             color: @c005;
