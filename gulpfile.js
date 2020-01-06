@@ -698,6 +698,14 @@ gulp.task("allServerResourcesInclude", function() {
             })
         )
 
+        .pipe(plugins.if(options.env === '3' || options.env === '4', plugins.uglify({ //压缩
+            mangle: false, //类型：Boolean 默认：true 是否修改变量名
+            compress: false, //类型：Boolean 默认：true 是否完全压缩
+            output: {
+                beautify: true //只去注释，不压缩成一行
+            }
+        })))
+
         // .pipe(gulp.dest(host.path + 'allServerResources/include/'))
 
         // .pipe(plugins.rev())
@@ -734,6 +742,16 @@ gulp.task("allServerResourcesInclude", function() {
                 cb()
             })
         )
+
+        //root.js不分环境都压缩
+        .pipe(plugins.uglify({ //压缩
+            mangle: false, //类型：Boolean 默认：true 是否修改变量名
+            compress: false, //类型：Boolean 默认：true 是否完全压缩
+            output: {
+                beautify: true //只去注释，不压缩成一行
+            }
+        }))
+
         .pipe(plugins.rev())
         .pipe(gulp.dest(host.path + 'allServerResources/include/'))
         .pipe(plugins.rev.manifest())
@@ -783,6 +801,15 @@ gulp.task("includeJs", ['htmd', 'allServerResourcesInclude'], function() {
         })
     )
 
+    .pipe(plugins.if(options.env === '3' || options.env === '4', plugins.uglify({ //压缩
+        mangle: false, //类型：Boolean 默认：true 是否修改变量名
+        compress: false, //类型：Boolean 默认：true 是否完全压缩
+        output: {
+            beautify: true //只去注释，不压缩成一行
+        }
+    })))
+    // 
+
     .pipe(gulp.dest(host.path + 'include/'))
 
     //root.js需要打版本号
@@ -794,6 +821,15 @@ gulp.task("includeJs", ['htmd', 'allServerResourcesInclude'], function() {
                 cb()
             })
         )
+
+    .pipe(plugins.uglify({ //压缩
+        mangle: false, //类型：Boolean 默认：true 是否修改变量名
+        compress: false, //类型：Boolean 默认：true 是否完全压缩
+        output: {
+            beautify: true //只去注释，不压缩成一行
+        }
+    }))
+
         .pipe(plugins.rev())
         .pipe(gulp.dest(host.path + 'include/'))
         .pipe(plugins.rev.manifest())
@@ -1200,32 +1236,39 @@ gulp.task('rootEnv', function() {
         for (var i = 0; i < rootName.length; i++) {
 
             (function(i) {
-                gulp.src(['src/allServerResources/include/js/vendor/root.js']) //- 读取 rev-manifest.json 文件
-                    .pipe(
-                        through.obj(function(file, enc, cb) {
-                            //if (options.env != '0' ) {
-                            //非本地环境时
+                gulp.src([ host.path + 'allServerResources/include/js/vendor/*.js']) //- 读取 rev-manifest.json 文件
+                
+                .pipe(
+                    through.obj(function(file, enc, cb) {
+                        //if (options.env != '0' ) {
+                        //非本地环境时
+                        
+                        if( file.path.indexOf('root') != -1 && file.path.indexOf('root.js') == -1){
                             var fileCon = file.contents.toString();
 
                             //替换真正的env和envOrigin变量，是根据root.js文件中第一行注释的//截取内容的，所以
                             //root.js中，envOrigin那一句后面，一定要有//的注释。。。。。
                             fileCon = 'var env = ' + options.env + ';\n' + 'var envOrigin = ' + i + ';\n' +
-                                fileCon.substring(fileCon.indexOf('//'));
+                                fileCon.substring(fileCon.indexOf('window'));
 
                             file.contents = new Buffer(fileCon);
-                            //}
+
                             this.push(file);
-                            cb()
-                        })
-                    )
+                        }
+                        
+                        //}
+                        
+                        cb()
+                    })
+                )
 
-                .pipe(plugins.rename(function(path) {
-                    console.log(rootName[i]);
-                    //如果图片是common中的
-                    path.basename = path.basename + '_' + rootName[i];
+                // .pipe(plugins.rename(function(path) {
+                //     console.log(rootName[i]);
+                //     //如果图片是common中的
+                //     path.basename = path.basename + '_' + rootName[i];
 
-                    console.log(path);
-                }))
+                //     console.log(path);
+                // }))
 
                 //如果是预生产/生产环境，需要去注释
                 // .pipe(plugins.if(options.env === '3' || options.env === '4', plugins.uglify({ //压缩
@@ -1238,7 +1281,7 @@ gulp.task('rootEnv', function() {
 
 
                 //替换后的文件修改文件名，打出到middle/root文件夹中
-                .pipe(gulp.dest(host.middle + 'root'))
+                .pipe(gulp.dest(host.middle + 'root/' + rootName[i] + '/' ))
             })(i)
 
         }
