@@ -63,21 +63,20 @@
             <div class="tit">{{fundName}}<span>[快速]</span></div>
             <div class="mon">
                 {{#if tobe}}
-                +
+                + {{balanceMask}}元
                 {{else}}
-                -
+                - {{sharesMask}}元
                 {{/if}}
-                {{sharesMask}}元
+               
             </div> 
             {{else}}
             <div class="tit">{{fundName}}</div>
             <div class="mon">
                 {{#if tobe}}
-                +
+                + {{balanceMask}}元
                 {{else}}
-                -
+                - {{sharesMask}}元
                 {{/if}}
-                {{balanceMask}}元
             </div> 
             {{/if}}
                        
