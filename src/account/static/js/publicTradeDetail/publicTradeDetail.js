@@ -320,7 +320,8 @@ $(function () {
             }
 
             //填充头部信息
-            $('.header .amount').html((that.gV.isBuy? "+": "-") + model.balanceMask);//交易申请金额 header中显示的后下面显示的金额都是这个 除了确认信息中的金额显示的是确认金额confirmAmount
+            //$('.header .amount').html((that.gV.isBuy? "+": "-") + model.balanceMask);//交易申请金额 header中显示的后下面显示的金额都是这个 除了确认信息中的金额显示的是确认金额confirmAmount
+            $(".header .amount").html(that.gV.isBuy?'+'+ model.balanceMask:'-'+model.sharesMask)
             $('.header .trade_status').html(model.tradeApplyDesc);//交易状态 例如待扣款
             if ('21' == model.tradeApplyStatus){
                 //转入失败 展示描述信息 并且把状态值变为红色
@@ -341,7 +342,8 @@ $(function () {
                 //展示现金宝赎回信息
                 $('.cash_redeem_info').removeClass('hide');
                 $('.cash_redeem_info .item_1').html(model.fundName);//转出产品
-                $('.cash_redeem_info .item_2').html(model.balanceMask + '元');//转出金额
+                //$('.cash_redeem_info .item_2').html(model.balanceMask + '元');//转出金额
+                $('.cash_redeem_info .item_2').html(that.gV.isBuy?model.balanceMask+'元':model.sharesMask+'元');//转出金额
                 $('.cash_redeem_info .bank_icon').attr('src', model.bankThumbnailUrl);//转出至银行卡logo
                 $('.cash_redeem_info .item_3').html(that.getPayInfo(model.bankName, model.bankAccountMask,model));//转出至银行卡描述
                 $('.cash_redeem_info .pay_mode').html('1' == model.payType? '汇款支付': '在线支付');//支付方式
