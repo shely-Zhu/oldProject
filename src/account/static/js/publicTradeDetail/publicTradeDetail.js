@@ -150,7 +150,7 @@ $(function () {
                     switch (that.gV.allotType) {
                         case "0":
                             //购买
-                            that.showFundStatus(that.gV.isBuy, json.data);
+                            that.showFundStatus(true, json.data);
                             break
                         case "1":
                             //赎回
@@ -159,8 +159,8 @@ $(function () {
                             break;
 
                         case "2":
-                            //定投
-                            that.showFundStatus(that.gV.isBuy, json.data);
+                            //定投 定投没有赎回
+                            that.showFundStatus(true, json.data);
                             if (splitUrl()["scheduledProtocolId"]){
                                 //定投id不为空时展示定投计划
                                 $('.plan').removeClass('hide');
@@ -178,6 +178,7 @@ $(function () {
             var that = this;
             //购买状态的处理
             //填充头部信息
+            debugger
             if (isBuy){
                 $('.header .amount').html(model.tradeAmount);//交易申请金额 header中显示的后下面显示的金额都是这个 除了确认信息中的金额显示的是确认金额confirmAmount
             } else {

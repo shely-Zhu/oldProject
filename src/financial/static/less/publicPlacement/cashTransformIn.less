@@ -95,7 +95,6 @@ body{
             .msecond-one, .transformInput{
                 height:.8rem;
                 font-size:.6rem;
-                font-weight:bold;
                 color:@272727;
                 line-height:.8rem;
             }
@@ -386,13 +385,15 @@ body{
         
     }
     .btn_box{
-        position: absolute;
-        bottom: .34rem;
-        left: .3rem;
+        //如果是fixed会被键盘顶起
+//      position: absolute;
+//      bottom: .34rem;
+//      left: .3rem;
         right: .3rem;
         text-align: center;
         letter-spacing: 2px;
-        margin: 0 auto;
+        margin: 0 .3rem;
+        margin-top: 4rem;
         .btn{
             width: 100%;
             color: @c005;
@@ -406,7 +407,7 @@ body{
         }
         .btn:disabled{
             opacity: 0.9;
-            background:#ccc
+            background: linear-gradient(to right, #B1BEE3 0%, #7F8CB4 100%);
         }
         
     }

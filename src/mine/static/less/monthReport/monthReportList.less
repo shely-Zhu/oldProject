@@ -7,7 +7,7 @@
 @import url("@pathCommonLessCom/headBarConfig.less");
 
 body {
-	background: #F7FAFD;
+	background:rgba(247,250,253,1);
 }
 
 .noneList{
@@ -20,6 +20,7 @@ body {
 }
 // 样式重置
 .adjustmentRecord {
+	padding-bottom:1.6rem;
 	.contentWrapper {
 		height: 100%;
 		overflow: hidden;
@@ -57,9 +58,13 @@ body {
 	background:url("/mine/static/img/mine_bg_ydtzbg@2x.png") no-repeat;
 	background-size: 100%;
 	box-shadow:0 0.09rem 0.08rem 0 rgba(20,37,92,0.05);
+	border-radius:0.3rem;
 	.monthReportListHeader{
 		height: 1.18rem;
-		margin:0.3rem 0 0 0.3rem;
+		border-radius: 0.3rem;
+	}
+	&:first-child{
+		margin: 0.28rem auto 0;
 	}
 	.spread{
 		position: absolute;
@@ -70,9 +75,13 @@ body {
 		top: 100%;
 		margin-left: -1.15rem;
 		text-align: center;
+		color: @BB8E5F;
 		background:rgba(255,255,255,1);
 		box-shadow:0 0.09rem 0.08rem 0 rgba(20,37,92,0.05);
 		border-radius:0 0 1rem 1rem;
+		.iconfont{
+			font-size: 0.2rem;
+		}
 	}
 }
 
@@ -88,13 +97,27 @@ body {
 	border-top:1px solid @F7FAFD;
 	border-bottom-right-radius: 0.3rem;
 	border-bottom-left-radius: 0.3rem;
+	background:rgba(255,255,255,1);
 	.circle_left{
 		position:absolute;
 		width: 0.15rem;
 		height: 0.3rem;
-		color:#000;
+		top: -0.2rem;
+		left: 0;
+		background:rgba(247,250,253,1);;
 		border-top-right-radius: 0.15rem;
 		border-bottom-right-radius: 0.15rem;
+	}
+	.circle_right{
+		position:absolute;
+		top: -0.2rem;
+		right: 0;
+		width: 0.15rem;
+		height: 0.3rem;
+		background:rgba(247,250,253,1);
+		border-top-left-radius: 0.15rem;
+		border-bottom-left-radius: 0.15rem;
+		
 	}
 	h2 {
 		height: 0.96rem;
@@ -204,11 +227,16 @@ body {
 	color: @c002;
 }
 .monthYear{
+	padding-top:0.3rem;
 	font-size: 0.5rem;
 	font-weight: bold;
-	background: linear-gradient(to right, #F1CDA8, #B57E45);
-    -webkit-background-clip: text;
-    color: transparent;
+    .years{
+    	margin-left: 0.3rem;
+		background: linear-gradient(to right, #F1CDA8, #B57E45);
+	    -webkit-background-clip: text;
+	    color: transparent;
+
+    }
 }
 .monthlyReport{
 	position:relative;

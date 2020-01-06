@@ -211,8 +211,11 @@ $(function () {
             //购买
             mui("body").on('mdClick', '.buy_btn', function (e) {
                 var fundCode = $(this).attr("fundCode")
-                window.location.href = site_url.pofCashTransformIn_url+"?fundCode="+fundCode+"&noReload=1";   
-                return false;
+                var flag = frozenAccount("buyFreeze", window.location.href,'','privateDetail_13')
+                if(!flag) {
+                    window.location.href = site_url.pofCashTransformIn_url+"?fundCode="+fundCode+"&noReload=1";   
+                }
+                return false
             },{
                 'htmdEvt': 'publicAssets_4'
             })
@@ -223,7 +226,7 @@ $(function () {
                 var tradeNo = $(this).parent().parent().parent().attr("data-tradeNo")
                 var fundCode = $(this).parent().parent().parent().attr("data-fundCode")
                 // 转出时判断是否有司法冻结
-                var flag = frozenAccount("buyFreeze", window.location.href,'','privateDetail_13')
+                var flag = frozenAccount("saleFreeze", window.location.href,'','privateDetail_13')
                 if(!flag) {
                     if(id =="cashPageLists" ){
                         //现金宝
@@ -236,9 +239,7 @@ $(function () {
                         return false
                     }
                 }
-                
-               
-                //return false;
+                return false
             },{
                 'htmdEvt': 'publicAssets_5'
             })
