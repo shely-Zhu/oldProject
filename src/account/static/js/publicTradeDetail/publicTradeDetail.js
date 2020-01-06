@@ -150,7 +150,7 @@ $(function () {
                     switch (that.gV.allotType) {
                         case "0":
                             //购买
-                            that.showFundStatus(that.gV.isBuy, json.data);
+                            that.showFundStatus(true, json.data);
                             break
                         case "1":
                             //赎回
@@ -159,14 +159,12 @@ $(function () {
                             break;
 
                         case "2":
-                            //定投
-                            that.showFundStatus(that.gV.isBuy, json.data);
+                            //定投 定投没有赎回
+                            that.showFundStatus(true, json.data);
                             if (splitUrl()["scheduledProtocolId"]){
                                 //定投id不为空时展示定投计划
                                 $('.plan').removeClass('hide');
                             }
-
-                            $('.plan').removeClass('hide');
                             break
                     }
 
@@ -258,8 +256,8 @@ $(function () {
                 //其余状态状态展示部分确认的信息
                 that.showTradeArea(false, model);
                 if ("9" == model.tradeStatus){
-                    if (isBuy){
-                        //未确认状态 展示汇款账户信息
+                    if (isBuy && '2' != that.gV.allotType && '1' == model.payType){
+                        //只有在普通基金+购买+未确认状态+非定投+汇款支付 才展示汇款账户信息
                         $('.account_info').removeClass('hide');
                         that.getRemittanceAccount();
                     }
