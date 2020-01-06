@@ -367,6 +367,8 @@ $(function () {
                     if(that.gV.pageCurrent3 == 1) {
                         $('.tplBox3').html(that.$e.emptyBox.clone(false)).addClass('noCon');
                         $('.tplBox3').find(".noData").show();
+                        var height=$("body").height() - $(".HeadBarConfigBox").height() -  $(".tabsBox").height() -30
+                        $('.tplBox3').height(height)
                         that.$e.listLoading.hide();
                         $(".tplBox3 .list").hide();
                         // $(".panel3").css("background", "none")

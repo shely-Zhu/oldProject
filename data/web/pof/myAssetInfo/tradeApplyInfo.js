@@ -44,7 +44,8 @@ var data = Mock.mock(
             "tradeDate":"2020-01-03 10:27:06",
             "tradeNo":"3974",
             "tradeShares":"0.00",
-            "tradeStatus":"9"
+            "tradeStatus":"9",
+            "isNewFund": true
         },
         "message":"操作成功！",
         "status":"0000"

@@ -27,31 +27,34 @@
 		</div>
 
 		<div class="adjustmentRecord">
-			<div class="list"></div>
+			<div class="list">
+				
+			</div>
 		</div>
 
 		<script id="adjustment-template" type="text/x-handlebars-template">
 			{{#each this}}
-			<ul class="mui-card mui-table-view marginTop listItem">
-				<li class="mui-table-view-cell mui-collapse">
-					<a href="javascript:void(0);" class="monthYear mui-navigate-right" >{{years}}</a>
 
-					<div class="mui-card marginTop latestAdjustment mui-collapse-content">
-						<div class='circle_left'></div>
-						<div class='circle_right'></div>
-						{{#each monthReportsList}}
-						<a href="javascript:void(0);" reportId={{reportId}} class='monthlyReport'>
-							<span class='reportName'>{{reportName}}</span>
-							<span class='reportTime'>{{reportTime}}</span>
-							<span class='iconfont detailLink'>&#xe600;</span>
-						</a>
-						{{/each}}
-					</div>
+				<ul class="monthReportList">
+					<li class="monthReportListDetail">
+						<div class="monthReportListHeader monthYear">{{years}}<span class="yearUnit">年</span></div>
 
-				</li>
-				{{!--
-				<a href="javascript:void(0);" class="mui-navigate-right"></a> --}}
-			</ul>
+						<div class="latestAdjustment">
+							<div class='circle_left'></div>
+							<div class='circle_right'></div>
+							{{#each monthReportsList}}
+								<a href="javascript:void(0);" reportId={{reportId}} class='monthlyReport'>
+									<span class='reportName'>{{reportName}}</span>
+									<span class='reportTime'>{{reportTime}}</span>
+									<span class='iconfont detailLink'>&#xe600;</span>
+								</a>
+							{{/each}}
+						</div> 
+						<div class="spread"><span class='iconfont'>&#xe609;</span></div>
+					</li>
+				
+				</ul>
+
 			{{/each}}
 		</script>
 

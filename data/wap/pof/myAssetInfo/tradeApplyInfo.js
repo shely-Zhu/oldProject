@@ -37,7 +37,8 @@ var data = Mock.mock({
          tradeNo:"0053",// 交易账号
          bankAccount:"3217220200005522134",// 银行账户 
          bankIdNo:"63",// 银行编号 
-         bankName:"工商银行" // 银行名称 
+         bankName:"工商银行", // 银行名称 
+         isNewFund: true
     }
 });
 module.exports=data;
