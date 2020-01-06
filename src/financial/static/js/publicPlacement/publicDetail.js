@@ -135,6 +135,7 @@ $(function () {
                     }
                     
                     $(".tplBox").html(html); 
+                    that.getData1();
                     that.getData2('1', 1); // 获取echarts数据
                     var historyStr = that.fundType ? '<div class="item_name">日期</div><div class="item_name">七日年化</div><div class="item_name">万份收益(元)</div>' : '<div class="item_name">日期</div><div class="item_name">单位净值</div><div class="item_name">累计净值</div><div class="item_name">日涨幅</div>'
                     $('.history_area >.history_item').html(historyStr);
@@ -363,10 +364,6 @@ $(function () {
             var fundComId = json.fmcComId ? json.fmcComId : 'gz04tVwXga'
             var secuId = json.secuId ? json.secuId : '000846.OF'
             var fundName = json.chiName ? json.chiName : '中融货币市场基金'
-
-            window.onload = function(){
-                that.getData1();
-            }
             // 基金经理
             mui("body").on('mdClick', ".fundManager", function (e) {
                 window.location.href = site_url.pofFundManager_url + '?fundCode=' + fundCode
