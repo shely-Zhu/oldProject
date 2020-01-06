@@ -198,7 +198,7 @@ $(function () {
                 //展示赎回信息区域
                 $('.redeem_info').removeClass('hide');
                 $('.redeem_info .item_1').html(model.fundName);//赎回产品
-                $('.redeem_info .item_2').html(model.confirmShares + ' 份');//赎回份额
+                $('.redeem_info .item_2').html(model.tradeShares + ' 份');//赎回份额
                 $('.redeem_info .bank_icon').attr('src', model.bankThumbnailUrl);//到账银行卡icon
                 $('.redeem_info .item_3').html(that.getPayInfo(model.bankName, model.bankAccountMask,model));//到账银行卡描述
 //              $('.redeemOut').hide();//隐藏转出银行卡
@@ -234,7 +234,7 @@ $(function () {
                 } else {
                     //赎回为确认状态 展示赎回确认信息
                     $('.redeem_confirm_info').removeClass('hide');
-                    $('.redeem_confirm_info .confirm_share').html(model.confirmShares + " 份");//确认份额
+                    $('.redeem_confirm_info .confirm_share').html(model.tradeShares + " 份");//确认份额
                     if(model.confirmDate && model.confirmDate != '') {
                         $('.redeem_confirm_info .confirm_value').html(model.confirmNav + '(<span class="colorGray">'+ model.confirmDate +'</span>)');//确认净值
                     } else {

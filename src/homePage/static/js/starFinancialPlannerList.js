@@ -86,12 +86,13 @@ $(function() {
         //有数据获取列表
         getData: function(t) {
             var that = this;
+            var cityName =$('#locationCity').html()=='全部' ? '' : $('#locationCity').html();
             var obj = [{ // 系统调仓记录列表
                 url: site_url.queryFinancialer_api,
                 // url:'http://172.16.187.164:8081/web/marketing/activity/getActivitiesList',
                 data: {
                     code: $.trim($('.mui-input-clear').val().replace(/'/g, '')),
-                    cityName: $('#locationCity').html(),
+                    cityName:cityName ,
                     "pageNum": that.gV.startPage, //非必须，默认为1
                     "pageSize": that.gV.pageSize //非必须，默认为10
                 },
@@ -294,8 +295,9 @@ $(function() {
                     var code = data.cityCode;
                     var name = data.cityName;
                     if (name.split('').reverse().join('').charAt(0) == '市') {
-                        name = name.substring(0, name.length - 1)
+                        name = name?name.substring(0, name.length - 1):"全部"
                     }
+                    name=name?name:"全部"
                     var parentid = data.provinceCode;
                     $('#locationCity').html(name);
                     $('#locationCity').attr({
