@@ -21,6 +21,10 @@ var monthReportDetail = {
 		noData: $('.noData'), //没有数据的结构
 		reportId:splitUrl['reportId'],   //活动的id
 		adjustmentTemp: $('#second-template'), // 最新调仓模板
+		reportTime:'',
+		monthReportTime:'',
+		month:'',
+		assetPerHtml:'',
 	},
 	pieChartData:'', // 画图的title
 	init: function(){  //初始化函数
@@ -90,7 +94,21 @@ var monthReportDetail = {
 					dateStr = dateStr.replace(/年/g,"-");
 					dateStr = dateStr.replace(/月/g,"-");
 					dateStr = dateStr.replace(/日/g,"");
-				var now=moment(dateStr).format('YYYY-MM-DD');
+				var yearFor,monthFor,dayFor;
+				// 为兼容momentjs 和 new Date() 在ios、Safari上遇到的坑，对数据进行格式化
+				var dateStr = new Date(dateStr);
+					yearFor = dateStr.getFullYear() 
+					monthFor = dateStr.getMonth() + 1;
+					if (monthFor.toString().length == 1) {
+				        monthFor = "0" + m;
+				    }
+				    dayFor = dateStr.getDate();
+				    if (dayFor.toString().length == 1) {
+				        dayFor = "0" + m;
+				    }
+				    dataFor = yearFor + '-' + monthFor + '-' + dayFor;
+
+				var now=moment(dataFor).format('YYYY-MM-DD');
 
 				var year = now.substring(0,4);
 				var month = now.substring(5,7);
