@@ -437,7 +437,7 @@ var monthReportDetail = {
 
 					})
 
-					//调用画图方法
+				//调用画图方法
 					that.bingtu(1);
 					that.typeCompare();
 				}
@@ -452,7 +452,11 @@ var monthReportDetail = {
 
 						for(var m in result){
 							if(result[m].productType == '173'){
-								result[m].flag2 = true;
+								if(result[m].isPrivateSale == '1'){
+									result[m].flag2 = true;
+								}else{
+									result[m].flag1 = true;
+								}
 							}
 							else if(result[m].productType == '177'){
 								result[m].flag3 = true;

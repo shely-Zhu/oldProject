@@ -35,6 +35,11 @@ var pathTitle = [{
 ]
 $(function() {
     var $headBarConfigBox = $("#HeadBarConfigBox");
+    // 安卓刘海屏适配
+     var hairHeight = splitUrl['hairHeight']; 
+    if(hairHeight) {
+        $(".HeadBarConfigBox").css('padding-top', hairHeight+'px');
+    };
     //IOS会在所有连接上拼接是否为刘海屏的标识，同时会存在session中。
     if (splitUrl['isIphoneX']) {
         $(".HeadBarConfigBox").css('padding-top', '0.25rem');
