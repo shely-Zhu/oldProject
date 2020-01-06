@@ -288,7 +288,7 @@ $(function() {
             // 文案提示
             mui("body").on('mdClick', '.dd_icon', function() {
                 var i = $(this).attr('num');
-                var value = that.gV.tipArr[i].value;
+                var value = that.gV.tipArr[i].text;
                 var tital;
                 if (i == 0) {
                     tital = "综合评分"
