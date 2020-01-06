@@ -35,7 +35,8 @@ $(function() {
                 sixMonth: {},
                 oneYear: {},
                 sinceNow: {}
-            }
+            },
+            symboltype : 'none',	//echarts 节点样式
         },
         init: function() {
             var that = this;
@@ -49,6 +50,10 @@ $(function() {
         },
         drawLine: function(data) {
             var that = this;
+            //判断有多少数据 只有一个值时 symbol 为circle 多组值时 symbol为 none
+			if(data.profitThoudDate.length == 1 ){
+				that.gL.symboltype = 'circle'
+			}	
             var xAxisData = data.profitThoudDate,
                 seriesData = data.sevenIncomeRate,
                 maxNum = data.sevenIncomeRate[0],
@@ -176,7 +181,7 @@ $(function() {
                     itemStyle: {
                         show: false
                     },
-                    symbol: 'none',
+                    symbol: that.gL.symboltype,
                     areaStyle: {
                         normal: {
                             color: {
