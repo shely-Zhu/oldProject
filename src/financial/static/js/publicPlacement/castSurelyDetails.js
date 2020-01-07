@@ -124,9 +124,6 @@ $(function() {
                         var html = template(json);
                         $(".tplBox").html(html);
 
-                    },
-                    callbackFail: function(json) {
-                        tipAction(json.msg);
                     }
                 }]
                 $.ajaxLoading(obj);
