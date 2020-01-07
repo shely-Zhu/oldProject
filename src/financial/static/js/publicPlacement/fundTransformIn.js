@@ -87,9 +87,6 @@ $(function () {
                 callbackDone: function (json) {
                     var data = json.data
                     that.gV.accountType = data.accountType
-                },
-                callbackFail: function (json) {
-                    tipAction(json.msg);
                 }
             }]
             $.ajaxLoading(obj);
@@ -237,10 +234,7 @@ $(function () {
 							that.$el.bankListTemplate.find(".bank-pay").show()
 						}
 					tipAction(json.message);
-				},
-				callbackFail:function(json){
-					tipAction(json.message);
-				},
+				}
 
             }];
             $.ajaxLoading(obj);

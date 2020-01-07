@@ -48,9 +48,7 @@ $(function () {
                         
                 },
                 callbackNoData: function( json ){
-                },
-                callbackFail: function(json) {
-                },
+                }
             }];
             $.ajaxLoading(obj);
             //that.gV.dataList = JSON.parse(sessionStorage.getItem('stopList'));

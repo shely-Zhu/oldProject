@@ -115,13 +115,7 @@ var monthReportDetail = {
 				that.queryInvestProdHoldShareList();
 				that.assetAnalysis();
 
-			},
-			callbackFail: function(json) {
-				//请求失败，
-				//显示错误提示
-				tipAction(json.message);
-			}
-			
+			}		
 		},
 		]
 		$.ajaxLoading(obj);
