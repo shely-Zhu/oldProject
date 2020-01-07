@@ -394,9 +394,6 @@ $(function() {
                 },
                 callbackNoData: function(json) {
                     tipAction(json.message);
-                },
-                callbackFail: function(json) {
-                    tipAction(json.message);
                 }
 
             }];
@@ -462,9 +459,6 @@ $(function() {
                     },1000)
                 },
                 callbackNoData: function(json) {
-                    tipAction(json.message);
-                },
-                callbackFail: function(json) {
                     tipAction(json.message);
                 }
             }];

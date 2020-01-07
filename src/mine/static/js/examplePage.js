@@ -86,11 +86,6 @@ $(function() {
 					
 //					that.getElements.aaaa.html("快点点我")
 //					that.getElements.contentImg.attr({"src":json.data[0].content})
-				},
-				callbackFail: function(json) { //失败后执行的函数
-					tipAction(json.message);	
-					console.log(json.message)
-					console.log("22222")
 				}
 			}]
 			$.ajaxLoading(obj);

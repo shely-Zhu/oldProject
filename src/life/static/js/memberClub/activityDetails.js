@@ -88,10 +88,6 @@ $(function() {
                         that.$e.actIntroduce.html($(data.actIntroduce));
                         $(".lazyload").lazyload()
 
-                    },
-                    callbackFail: function(json) {
-                        console.log(json.message)
-                        tipAction(json.message);      
                     }
                 }];
                 $.ajaxLoading(obj);
@@ -150,9 +146,6 @@ $(function() {
 						}else{
 							that.signUp();
 						}
-            	    },
-            	    callbackFail: function(json) {
-						tipAction(json.message);
             	    }
             	}];
             	$.ajaxLoading(obj);
@@ -424,10 +417,6 @@ $(function() {
                             }
                         // }
 
-                    },
-                    callbackFail: function(json) {
-                        console.log(json.message)
-                        tipAction(json.message);
                     }
                 }];
                 $.ajaxLoading(obj);
