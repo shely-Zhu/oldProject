@@ -557,13 +557,14 @@ var monthReportDetail = {
 		var endDate = moment(startDate).endOf('month');
 
 		// just for demonstration:
-		console.log(startDate.toDate());
-		console.log(endDate.toDate());
+		// console.log(startDate.toDate());
+		// console.log(endDate.toDate());
 		// make sure to call toDate() for plain JavaScript date type
 
 
 		// $('.startDate').html(moment(startDate).format('YYYY-MM-DD'));
-		var yearMonthDay = moment(endDate).format('YYYY-MM-DD');
+		var lastday = new Date(year,month,0).getDate();
+		var yearMonthDay = year+ '-' + month + '-' + lastday
 		// $('.endDate').text(moment(endDate).format('YYYY-MM-DD').toString());
 		$('.tipInfo .endDate').text(yearMonthDay);
 		return { start: startDate, end: endDate };

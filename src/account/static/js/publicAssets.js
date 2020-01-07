@@ -90,9 +90,6 @@ $(function () {
                     that.chooseTipDesc();
                     that.renderView();
                     that.events();
-                },
-                callbackFail: function (data) {
-                    console.log('加载失败');
                 }
             }];
             $.ajaxLoading(obj);
