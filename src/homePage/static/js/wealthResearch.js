@@ -195,10 +195,10 @@ $(function() {
                 // mui(s).pullRefresh().disablePullupToRefresh()
             });
             //无缝滚动
-            setTimeout(function() {
+            // setTimeout(function() {
                     //无缝滚动
-                    alwaysAjax($('#' + w + ' .mui-table-view-cell'), s)
-                }, 1000)
+                    
+                // }, 1000)
                 // mui('.mui-slider').slider().stopped = true;
         },
         getTabsListData: function(t) {
@@ -262,7 +262,7 @@ $(function() {
                         //重设当前页码
                         if (!$.util.objIsEmpty(pageList)) {
                             //设置每个ajax传参数据中的当前页码
-                            that.gV.ajaxArr[that.gV.current_index].pageCurrent++;
+                            that.gV.ajaxArr[that.gV.current_index].pageNo++;
                         }
                     } else {
                         //没有数据
@@ -274,8 +274,9 @@ $(function() {
                     setTimeout(function() {
                         //that.listLength  是上面ajax 请求完数据  赋值的 长度 作为判断的依据
                         //that.gV.aP.pageSize  是  gV  里面设置的 
-                        if (that.listLength < that.gV.aP.pageSize) {
 
+                        if (that.listLength < that.gV.aP.pageSize) {
+                            
                             if (that.gV.ajaxArr[that.gV.current_index].pageCurrent == 1) {
                                 //第一页时
                                 if (that.listLength == 0) {
@@ -320,8 +321,10 @@ $(function() {
                         if (that.gV.ajaxArr[that.gV.current_index].pageCurrent == 1) {
                             //第一屏
                             $id.find('.contentWrapper .mui-table-view-cell').html(that.html);
+                            alwaysAjax($('#' + w + ' .mui-table-view-cell'), s, 2)
                         } else {
                             $id.find('.contentWrapper .mui-table-view-cell').append(that.html);
+                            alwaysAjax($('#' + w + ' .mui-table-view-cell'), s, 2)
                         }
                         //获取当前展示的tab的索引
                         var index = $('#slider .tab-scroll-wrap .mui-active').index(),
@@ -352,7 +355,7 @@ $(function() {
 
                     }, 200)
 
-
+                   
 
                 },
                 callbackFail: function(json) {
