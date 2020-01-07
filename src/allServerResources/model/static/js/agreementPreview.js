@@ -25,7 +25,6 @@ $(function() {
             var that = this;
             that.event()
             // that.$el.showPreview.attr('src',splitUrl['link'])
-            debugger
             that.gV.url = 'https:' + window.location.href.split('link=')[1].split('&typInfo=')[0].split(":")[1];
             $("#uploadService").attr('href',that.gV.url)
             that.gV.typInfo =  decodeURI(window.location.href.split('link=')[1].split('&typInfo=')[1]);

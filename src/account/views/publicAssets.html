@@ -73,7 +73,7 @@
     <script id="dataLists" type="text/x-handlebars-template">
 		{{! 左侧页面列表}}
 		{{#each this}}
-        <div class="hold_item" fundCode={{fundCode}} data-tradeNo={{tradeNo}}>
+        <div class="hold_item" data-fundCode={{fundCode}} data-tradeNo={{tradeNo}}>
             <div class="divider"></div>
             {{#if_than_0 inTransitNum}}
                 <div class="be_confirmed_tag fr">{{inTransitNum}}笔待确认交易</div>
