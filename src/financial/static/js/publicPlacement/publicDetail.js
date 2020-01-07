@@ -188,9 +188,6 @@ $(function () {
                    }
                   
                 },
-                callbackFail: function (json) {
-                    tipAction(json.message);
-                },
                 callbackNoData:function(json){
 					tipAction(json.message);
 				},
@@ -209,9 +206,6 @@ $(function () {
                 callbackDone: function (json) {
                     var data = json.data
                     that.gV.accountType = data.accountType
-                },
-                callbackFail: function (json) {
-                    tipAction(json.message);
                 },
                 callbackNoData:function(json){
 					tipAction(json.message);
@@ -339,11 +333,6 @@ $(function () {
 							that.gV.realLi.eq(4).hide()
                         }
                         that.gV.realLi.eq(4).hide()
-
-                },
-                callbackFail: function(json) { //失败后执行的函数
-                   tipAction(json.message);
-					//that.data.canClick = true; //变为可点击
 
                 },
                 callbackNoData:function(argument) {
@@ -651,9 +640,6 @@ $(function () {
                     $(".selected_area").addClass('active')
                    }
                 },
-                callbackFail: function (json) {
-                    tipAction(json.message);
-                }
             }]
             $.ajaxLoading(obj);
         },
@@ -685,9 +671,6 @@ $(function () {
                         tipAction('删除自选成功');
                     }
                     
-                },
-                callbackFail: function (json) {
-                    tipAction(json.message);
                 }
             }]
             $.ajaxLoading(obj);
@@ -726,9 +709,6 @@ $(function () {
                             $(v).addClass('value_green')
                         }
                     });
-                },
-                callbackFail: function (json) {
-                    tipAction(json.msg);
                 }
             }]
             $.ajaxLoading(obj);
@@ -814,9 +794,6 @@ $(function () {
 
                     that.drawLine(type, newData)
 
-                },
-                callbackFail: function (json) {
-                    tipAction(json.msg);
                 }
             }]
             $.ajaxLoading(obj);
