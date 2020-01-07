@@ -135,10 +135,7 @@ $(function () {
 						$('.popup').css('display','block')
 						that.gV.doubleClickStatus = true
 
-				},
-				callbackFail:function(json){
 				}
-
             }];
             $.ajaxLoading(obj);
 		},
