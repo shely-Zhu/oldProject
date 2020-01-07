@@ -55,8 +55,11 @@ $(function() {
     if ($headBarConfigBox.attr("linesNum") != 2) {
         $("#HeadBarpathName").addClass("singleLine")
     }
-
-    var colors = $headBarConfigBox.attr('bgColors').split(",")
+    //判断有没有这个属性
+    if( $headBarConfigBox.attr('bgColors')){
+        var colors = $headBarConfigBox.attr('bgColors').split(",") 
+    }
+    
     // 安卓刘海屏适配
     var hairHeight; 
     if (splitUrl['hairHeight'] || splitUrl['isIphoneX']){
