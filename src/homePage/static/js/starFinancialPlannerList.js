@@ -103,7 +103,7 @@ $(function() {
                     console.log('我是内容', json);
                     var data = json.data.financialerList;
                     console.log(data)
-                    if (json.data.matchedFinancialer == '0') {
+                    if (json.data.matchedFinancialer == '0' && that.gV.startPage == 1) {
                         t.endPullupToRefresh(true);
                         that.$e.activityListDataBox.hide();
                         that.$e.activityListDataNoBox.show();
@@ -115,9 +115,20 @@ $(function() {
                     that.$e.activityListDataNoBox.hide();
                     setTimeout(function() {
                         if (data.length < that.gV.pageSize) {
-                            t.endPullupToRefresh(true);
+                            if (that.gV.startPage == 1) { //第一页时
+                                if (data.length == 0) {
+                                    // 暂无数据显示
+                                    that.getElements.noData.show();
+                                    return false;
+
+                                } else { // 没有更多数据了
+                                    t.endPullupToRefresh(true);
+                                }
+                            } else {
+                                //其他页-没有更多数据
+                                t.endPullupToRefresh(true);
+                            }
                         } else { // 还有更多数据
-                            mui('.contentWrapper').pullRefresh().refresh(true);
                             t.endPullupToRefresh(false);
                         }
                         // 页面++
@@ -128,7 +139,7 @@ $(function() {
                         // 将列表插入到页面上
                         generateTemplate(data, that.$e.recordList, that.$e.starFinancialPlannerListTemplateId)
                         //无缝滚动
-                        alwaysAjax($(".recordList"))
+                        alwaysAjax($(".recordList"), null, 2);
                         $(".lazyload").lazyload()
 
                     }, 200)

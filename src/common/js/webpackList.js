@@ -189,5 +189,4 @@ module.exports = {
 
     // 埋点
     './allServerResources/appMd/headerMd' : './src/allServerResources/appMd/headerMd.js',
-
 }
