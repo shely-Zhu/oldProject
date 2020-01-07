@@ -75,6 +75,7 @@ $(function() {
                             "pageSize": that.gV.pageSize
                         },
                         needDataEmpty: true,
+                        needLoading: false,
                         callbackDone: function(json) {
                             var data = json.data.list;
                             if (that.gV.pageCurrent == 1 && data.length == 0) {

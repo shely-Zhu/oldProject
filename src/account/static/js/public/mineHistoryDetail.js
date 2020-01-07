@@ -60,6 +60,7 @@ $(function() {
                             "fundCode":that.gV.fundCode,//项目编号
                         },                        
                         needDataEmpty: true,
+                        needLoading: false,
                         callbackDone: function(json) {     
                             var data = json.data.pageList;
                             var historyStr = that.gV.fundType=="1" ? '<li>日期</li><li>七日年化</li><li>万份收益(元)</li>' : '<li>日期</li><li>单位净值</li><li>累计净值</li><li>日涨幅</li>'
