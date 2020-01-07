@@ -58,16 +58,11 @@ $(function() {
 
     var colors = $headBarConfigBox.attr('bgColors').split(",")
     // 安卓刘海屏适配
-    var hairHeight; 
     if (splitUrl['hairHeight'] || splitUrl['isIphoneX']){
-        hairHeight = '0.25rem';
-    }
-
-    if(hairHeight) {
         $('body').prepend('<div class="hairBox"></div>');
-        $('.hairBox').css({'width': '100%', 'height': hairHeight, 'background': colors[0], 'position': 'fixed', 'z-index': '999'});
-        $('#HeadBarConfigBox').css('margin-top', hairHeight);
-    };
+        $('.hairBox').css({'width': '100%', 'height': '0.26rem', 'background': colors[0], 'position': 'fixed', 'z-index': '999'});
+        $('#HeadBarConfigBox').css('margin-top', '0.24rem');
+    }
 
     //传人样式判断展示形式 
     if ($headBarConfigBox.attr('showType') == '1') {
