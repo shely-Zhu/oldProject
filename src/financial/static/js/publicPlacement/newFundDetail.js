@@ -201,9 +201,6 @@ $(function() {
                     // }
                     that.getElements.chiName = jsonData.chiName;
                 },
-                callbackFail: function(json) {
-                    tipAction(json.message);
-                },
                 callbackNoData: function(json) {
                     $('.subscriptionTime').html('<span>00</span>天<span>00</span>小时<span>00</span>分<span>00</span>秒');
                 },
