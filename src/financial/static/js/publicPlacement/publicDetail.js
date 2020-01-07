@@ -122,12 +122,12 @@ $(function () {
                     that.gV.invTypCom = json.data.invTypCom
                     that.gV.secuSht = json.data.secuSht
                     //test
-                    that.gV.json.tradeLimitFlag2 = true
-                    // if(that.gV.json.tradeLimitFlag == "1"){
-                    //     that.gV.json.tradeLimitFlag2 = true
-                    // }else{
-                    //     that.gV.json.tradeLimitFlag2 = false
-                    // }
+                   // that.gV.json.tradeLimitFlag2 = true
+                    if(that.gV.json.tradeLimitFlag == "1"){
+                        that.gV.json.tradeLimitFlag2 = true
+                    }else{
+                        that.gV.json.tradeLimitFlag2 = false
+                    }
                     var html = template(that.gV.json); (html, "00");
                     if(!that.gV.json.discount){
                         that.gV.discountStatus = false
