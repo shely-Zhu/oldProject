@@ -49,9 +49,6 @@ $(function () {
           var html = template(json.data.pageList);
           $("#cashListCon").html(html);
 
-        },
-        callbackFail: function (json) {
-          tipAction(json.msg);
         }
       }]
       $.ajaxLoading(obj);
@@ -66,9 +63,6 @@ $(function () {
           $('.income .profitValue').html(json.incomeMask);
           $('.holdIncome .profitValue').html(json.holdIncomeMask);
           $('.addupIncome .profitValue').html(json.addupIncome);
-        },
-        callbackFail: function (json) {
-          tipAction(json.msg);
         }
       }]
       $.ajaxLoading(obj1);
@@ -85,9 +79,6 @@ $(function () {
           callbackDone: function (json) {
               var data = json.data
               that.gV.accountType = data.accountType
-          },
-          callbackFail: function (json) {
-              tipAction(json.msg);
           }
       }]
       $.ajaxLoading(obj);
@@ -136,11 +127,6 @@ $(function () {
                           $(".isRiskMatchResult").html("重新风测")
                           $(".isRiskMatchResult").attr("type","repeatRisk")
                       }
-
-          },
-          callbackFail: function(json) { //失败后执行的函数
-             tipAction(json.message);
-    //that.data.canClick = true; //变为可点击
 
           },
           callbackNoData:function(argument) {
