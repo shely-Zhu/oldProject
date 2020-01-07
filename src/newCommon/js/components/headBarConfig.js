@@ -84,7 +84,7 @@ $(function() {
                 $("#HeadBarConfigBox a").css({ "color": "#fff" });
             } else {
                 ClearStyle()
-                if(hairHeight) {
+                if(splitUrl['hairHeight']) {
                     $('.hairBox').css('background', colors[0]);
                 };
             }
