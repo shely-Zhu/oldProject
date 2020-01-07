@@ -6,8 +6,8 @@
  *  @description: js可以更换版本，但是html是分享出去的链接，不能变;
  *                 关闭弹层按钮，fixed定位在ios，app中会随着屏幕滚动，所以提出来
  * 
- * @Last Modified by:   songxiaoyu
- * @Last Modified time: 2018-07-30 15:38:48
+ * @Last Modified by: sunfuping
+ * @Last Modified time: 2019-12-30 19:13:34
  * @description: 推荐有礼大改版
  */
 
@@ -276,7 +276,7 @@ $(function() {
                         //拼分享出去的链接
                         
                         // shareUrl = 'https://wx.chtwm.com/api/brand/index.html?activityId=pWhA5xJTKF4Zfst%2B9ycHqQ%3D%3D&channel=3&shareCustomerNo=' + that.customerNo;
-                        shareUrl = site_url.marketCampaign_url + '&shareCustomerNo=' + that.customerNo;
+                        shareUrl = site_url.marketCampaign_url + '&shareCustomerNo=' + that.customerNo + '&shareEmpCode=' + num;
 
                         // 生成二维码
                         that.generateQrcode(shareUrl)

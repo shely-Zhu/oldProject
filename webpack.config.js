@@ -56,20 +56,18 @@ module.exports = {
     module: {
         //各种加载器，即让各种文件格式可用require引用
         loaders: [
-
-            {
-                test: /\.js$/,
+            { 
+                test: /\.js$/, 
                 loader: 'babel-loader',
                 include: /node_modules/,
                 exclude: /node_modules/,
             },
-
        ]
 
 
         // rules: [
-        //   { test: /\.js$/,
-        //     //loader: 'babel',
+        //   { test: /\.js$/, 
+        //     //loader: 'babel', 
         //     exclude: /node_modules/ ,
         //     // use: {
         //     //     loader: 'babel-loader', // 对符合上面约束条件的文件 使用的 loader
@@ -78,7 +76,7 @@ module.exports = {
         //     //         plugins: ['transform-runtime']
         //     //     }
         //     // },
-
+            
         //     loader: {
         //         loader: 'babel-loader',
         //     },
@@ -89,13 +87,15 @@ module.exports = {
         //     //     plugins: ['transform-runtime']
         //     // }
 
+        //     //query: {compact: false},
+
         //     },
         //     {// 转译html文件
         //         test: /\.html$/,
         //         use: [
         //           'html-loader'
         //         ]
-        //     },
+        //     }, 
         //   // {test: /\.less$/, loader: 'style-loader!css-loader?minimize&-autoprefixer!postcss-loader!less-loader'}
         // ]
     },

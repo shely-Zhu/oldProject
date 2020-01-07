@@ -91,7 +91,7 @@ $(function() {
                     },
                     callbackFail: function(json) {
                         console.log(json.message)
-                        tipAction(json.message);
+                        tipAction(json.message);      
                     }
                 }];
                 $.ajaxLoading(obj);
