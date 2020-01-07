@@ -235,7 +235,7 @@ var monthReportDetail = {
 					var reportTimeHtml = '';
 					reportTimeHtml = '截止11'+that.getElements.reportTime+',您暂无持仓信息';
 					$('.holdNodata').show();
-					$('.holdNodata .text1').html(reportTimeHtml);
+					$('.holdNodata .text1').text(reportTimeHtml);
 					$('.holdNodata .text2').html('截止22'+that.getElements.reportTime+',您暂无持仓信息');
 				}else{
 					var pefSaleList = jsonData.pefSaleList;
