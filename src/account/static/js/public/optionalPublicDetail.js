@@ -461,7 +461,7 @@ $(function() {
 					//that.data.canClick = true; //变为可点击
 
                 },
-                callbackNoData:function(argument) {
+                callbackNoData:function(json) {
                     tipAction(json.message);
                 }
             }];
