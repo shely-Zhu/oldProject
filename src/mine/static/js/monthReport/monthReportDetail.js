@@ -110,6 +110,9 @@ var monthReportDetail = {
 				var year = now.substring(0,4);
 				var month = now.substring(5,7);
 				that.getElements.month = month;
+				var dayTime = json.reportTime;
+				var year = dayTime.split('-')[0];
+				var month = dayTime.split('-')[1].split('-')[0];
 				that.getMonthDateRange(year,month);
 				
 				that.queryInvestProdHoldShareList();
