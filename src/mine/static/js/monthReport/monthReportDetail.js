@@ -33,7 +33,7 @@ var monthReportDetail = {
 		// 交易明细
 		that.commonAjax();
 		// 资产情况分析
-		that.assetAnalysis();
+		// that.assetAnalysis();
 		//事件监听
 		that.events();
 	},
@@ -71,7 +71,7 @@ var monthReportDetail = {
 			},
 			needLogin: true,
 			needDataEmpty: true,
-			async: false,
+			// async: false,
 			callbackDone: function(jsons) {
 				$(".netLoading").hide()
 				var json=jsons.data;
@@ -113,6 +113,7 @@ var monthReportDetail = {
 				that.getMonthDateRange(year,month);
 				
 				that.queryInvestProdHoldShareList();
+				that.assetAnalysis();
 
 			},
 			callbackFail: function(json) {
@@ -226,7 +227,7 @@ var monthReportDetail = {
 			},
 			needLogin: true,
 			needDataEmpty: true,
-			async: false,
+			// async: false,
 			callbackDone: function(json) {
 				$(".netLoading").hide()
 				var jsonData = json.data;
@@ -235,7 +236,7 @@ var monthReportDetail = {
 					var reportTimeHtml = '';
 					reportTimeHtml = '截止11'+that.getElements.reportTime+',您暂无持仓信息';
 					$('.holdNodata').show();
-					$('.holdNodata .text1').html(reportTimeHtml);
+					$('.holdNodata .text1').text(reportTimeHtml);
 					$('.holdNodata .text2').html('截止22'+that.getElements.reportTime+',您暂无持仓信息');
 				}else{
 					var pefSaleList = jsonData.pefSaleList;
@@ -656,7 +657,7 @@ var monthReportDetail = {
 
 		// $('.startDate').html(moment(startDate).format('YYYY-MM-DD'));
 
-		$('.endDate').html(moment(endDate).format('YYYY-MM-DD'));
+		$('.endDate').text(moment(endDate).format('YYYY-MM-DD').toString());
 
 		return { start: startDate, end: endDate };
 
