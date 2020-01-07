@@ -67,10 +67,6 @@ $(function() {
                     })
 
                 },
-                callbackFail: function(json) { //失败后执行的函数
-                    tipAction(json.message);
-
-                },
                 callbackNoData: function(json) {
 
                 }
@@ -98,10 +94,6 @@ $(function() {
                     that.$e.contentWrap.eq(num * 1).html(resData.content);
 
 
-
-                },
-                callbackFail: function(json) { //失败后执行的函数
-                    tipAction(json.message);
 
                 },
                 callbackNoData: function(json) {

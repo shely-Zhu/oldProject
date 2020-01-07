@@ -188,9 +188,6 @@ $(function () {
                    }
                   
                 },
-                callbackFail: function (json) {
-                    tipAction(json.message);
-                },
                 callbackNoData:function(json){
 					tipAction(json.message);
 				},
@@ -209,9 +206,6 @@ $(function () {
                 callbackDone: function (json) {
                     var data = json.data
                     that.gV.accountType = data.accountType
-                },
-                callbackFail: function (json) {
-                    tipAction(json.message);
                 },
                 callbackNoData:function(json){
 					tipAction(json.message);
@@ -246,13 +240,12 @@ $(function () {
                             if(jsonData.isWealthAccount == "0"&&jsonData.isRiskEndure == "1"&&jsonData.isPerfect == "1"&&jsonData.isInvestFavour=="1"){
                                 that.gV.realLi.hide();
                                 that.gV.tipsWrap.hide();
-                                $(".isRiskMatchBox").show();
-                                $(".isRiskMatch_mask").show();
                                 if(jsonData.isIdnovalid=="1"){
                                     //证件已过期
                                     tipAction('因过期原因该账户被冻结，请联系理财师或咨询客服！客服电话：400-8980-618');
                                     return false;
-                                 }
+                                }
+
                                 if(jsonData.isHighAge=="1"&&that.gV.isHighAgeStatus){
                                    //年龄校验
                                     //that.gV.isHighAgeStatus = false;
@@ -272,6 +265,9 @@ $(function () {
                                     $(".isRiskMatchResult").attr("type","isZdTaLimit")
                                     return false;
                                 }
+
+                                $(".isRiskMatchBox").show();
+                                $(".isRiskMatch_mask").show();
 
                                 if(jsonData.isRiskMatch == "1"){
                                     //风险等级匹配
@@ -337,11 +333,6 @@ $(function () {
 							that.gV.realLi.eq(4).hide()
                         }
                         that.gV.realLi.eq(4).hide()
-
-                },
-                callbackFail: function(json) { //失败后执行的函数
-                   tipAction(json.message);
-					//that.data.canClick = true; //变为可点击
 
                 },
                 callbackNoData:function(argument) {
@@ -649,9 +640,6 @@ $(function () {
                     $(".selected_area").addClass('active')
                    }
                 },
-                callbackFail: function (json) {
-                    tipAction(json.message);
-                }
             }]
             $.ajaxLoading(obj);
         },
@@ -683,9 +671,6 @@ $(function () {
                         tipAction('删除自选成功');
                     }
                     
-                },
-                callbackFail: function (json) {
-                    tipAction(json.message);
                 }
             }]
             $.ajaxLoading(obj);
@@ -724,9 +709,6 @@ $(function () {
                             $(v).addClass('value_green')
                         }
                     });
-                },
-                callbackFail: function (json) {
-                    tipAction(json.msg);
                 }
             }]
             $.ajaxLoading(obj);
@@ -812,9 +794,6 @@ $(function () {
 
                     that.drawLine(type, newData)
 
-                },
-                callbackFail: function (json) {
-                    tipAction(json.msg);
                 }
             }]
             $.ajaxLoading(obj);

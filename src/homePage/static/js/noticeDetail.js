@@ -48,9 +48,6 @@ $(function(){
                     var data=json.data; 
                     $("#informsDetailContent")[0].innerHTML = data.mesContent
                      //generateTemplate(data,that.$e.noticeConTemplateId,that.$e.noticeItemListTemplateId);               
-                },
-                callbackFail: function(json) {
-                    //tipAction(json.message);
                 }
             }];                        
             $.ajaxLoading(obj); 
