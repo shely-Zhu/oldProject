@@ -166,9 +166,6 @@ $(function() {
                     }, 200)
 
                 },
-                callbackFail: function(json) {
-                    tipAction(json.msg);
-                },
                 callbackNoData: function() {
                     if (num == 0) {
                         $('.listHasData0 .NoDataMore').show();
@@ -221,10 +218,6 @@ $(function() {
                         window.webkit.messageHandlers.wxShare.postMessage(JSON.stringify(wxShare));
                     }
                 },
-                callbackFail: function(json) {
-                    console.log(json.message)
-                    tipAction(json.message);
-                }
             }];
             $.ajaxLoading(obj);
         },

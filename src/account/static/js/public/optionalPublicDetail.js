@@ -456,11 +456,6 @@ $(function() {
 					}
 					that.getTypeOneData()
                 },
-                callbackFail: function(json) { //失败后执行的函数
-                //    tipAction(json.message);
-					//that.data.canClick = true; //变为可点击
-
-                },
                 callbackNoData:function(argument) {
                     tipAction(json.message);
                 }
@@ -786,26 +781,33 @@ $(function() {
 			mui("body").on('mdClick', '.redeemBtn', function(e) {
 			   	if(!that.data.isRedemptionFlag){//不可赎回
 			   		return false;
-				   }
-				   var result = frozenAccount("saleFreeze", window.location.href, false);
-					if( !!result ) {
-						return false;
-					};
-				window.location.href = site_url.redemptionBuy_url + "?tradeNo=" + splitUrl['tradeNo'] + "&fundCode=" + that.data.fundCode			
+				}
+			    var result = frozenAccount("saleFreeze", window.location.href, false);
+				if( !result ) {
+					window.location.href = site_url.redemptionBuy_url + "?tradeNo=" + splitUrl['tradeNo'] + "&fundCode=" + that.data.fundCode			
+				};
 			},{
                 'htmdEvt': 'optionalPublicDetail_8'
             })
 			// //点击买入
 			mui("body").on('mdClick', '.buyBtn', function(e) {
 				if(!that.data.isBuyFlag){//不可买入
-				   	 	return false;
-				   }
+			   	 	return false;
+			    }
+				var result = frozenAccount("buyFreeze", window.location.href, false);
+				if(!result) {
+					that.getConditionsOfOrder("into");
+					that.gV.singleaAuthenType = "into"
+				}
+				/*if(!that.data.isBuyFlag){//不可买入
+			   	 	return false;
+			    }
 				var result = frozenAccount("saleFreeze", window.location.href, false);
 				if( !!result ) {
 					return false;
 				};
 				that.getConditionsOfOrder("into");
-				that.gV.singleaAuthenType = "into"
+				that.gV.singleaAuthenType = "into"*/
 			//	window.location.href = site_url.fundTransformIn_url+"?fundCode="+that.data.fundCode;			
 			},{
                 'htmdEvt': 'optionalPublicDetail_9'

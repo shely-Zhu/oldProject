@@ -77,10 +77,7 @@ $(function() {
                         imgArr.push({imgUrl: el.imageUrlShowOnline, linkUrl:el.linkUrl});
                     })
                     Slider( $('.banner'), imgArr );			     						
-                },
-                callbackFail: function(json){
-                    console.log(json)
-                },
+                }
              }]
             $.ajaxLoading(obj);
         },
@@ -103,9 +100,6 @@ $(function() {
                         generateTemplate(modelData,$('.translate .title'),$('#fortune-template'));
                         generateTemplate(articleData,$('.translate .content'),$('#content-template'));
                     }   					
-                },
-                callbackFail: function(json){
-                    console.log(json)
                 }
              }]
             $.ajaxLoading(obj);
@@ -130,10 +124,7 @@ $(function() {
                         generateTemplate(articleData,$('.fortuneVideo ul'),$('#video-template'));
                         $(".lazyload").lazyload()
                     }					
-                },
-                callbackFail: function(json){
-                    console.log(json)
-                },
+                }
              }]
             $.ajaxLoading(obj);
         },
@@ -183,10 +174,7 @@ $(function() {
                 }
               })*/
               		
-            },
-            callbackFail: function(json){
-                console.log(json)
-            },
+            }
          }]
         $.ajaxLoading(obj);
     },
@@ -229,10 +217,7 @@ $(function() {
                setTimeout(function(){
                 $('.tab-t').find('ol li a').eq(0).addClass('active');
                },100)		
-            },
-            callbackFail: function(json){
-                console.log(json)
-            },
+            }
          }]
         $.ajaxLoading(obj);
     },
@@ -414,7 +399,7 @@ $(function() {
         },
         getData: function($id, t) { // 获取产品数据的公用ajax方法;$id为各区域的 scroll+num id
             if( $id.find(".mui-table-view-cell").height()>0){
-                $(".mui-slider").height($id.find(".mui-table-view-cell").height()+ $(".mui-slider .nav-wrapper").height())
+                $("#slider").height($id.find(".mui-table-view-cell").height()+ $(".mui-slider .nav-wrapper").height())
             }
             if(!$id.find('.list_item').length>0){
                 mui(".mui-slider").slider(); //就是左右切换 可以滑动的  初始化

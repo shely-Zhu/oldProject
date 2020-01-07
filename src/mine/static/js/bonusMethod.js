@@ -99,9 +99,6 @@ $(function() {
                 callbackDone: function(json) {
                     window.location.href = site_url.optionalPublicDetail_url
                 },
-                callbackFail: function(err) {
-                    tipAction(err.message)
-                }
             }]
             $.ajaxLoading(obj);
         },
