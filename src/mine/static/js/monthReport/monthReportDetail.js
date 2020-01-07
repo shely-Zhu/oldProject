@@ -73,7 +73,6 @@ var monthReportDetail = {
 			needDataEmpty: true,
 			async: false,
 			callbackDone: function(jsons) {
-				debugger
 				$(".netLoading").hide()
 				var json=jsons.data;
 				// 报告月份
@@ -84,8 +83,6 @@ var monthReportDetail = {
 				$('.lifeTerm').html(json.lifeTerm);
 				// 风险等级
 				$('.riskLevel').html(json.riskLevel);
-				// 报告日期
-				$('.reportTime').html(json.reportTime);
 
 				// 报告名称
 				$('#HeadBarpathName').html(json.reportName)
@@ -114,6 +111,8 @@ var monthReportDetail = {
 				var month = now.substring(5,7);
 				that.getElements.month = month;
 				that.getMonthDateRange(year,month);
+				
+				that.queryInvestProdHoldShareList();
 
 			},
 			callbackFail: function(json) {
@@ -122,7 +121,105 @@ var monthReportDetail = {
 				tipAction(json.message);
 			}
 			
-		},{
+		},
+		// {
+		// 	url: site_url.queryInvestProdHoldShareList_api,   // 持仓总览  报告的月末持仓总览
+		// 	data: {
+		// 		reportId: that.getElements.reportId
+		// 	},
+		// 	needLogin: true,
+		// 	needDataEmpty: true,
+		// 	async: false,
+		// 	callbackDone: function(json) {
+		// 		$(".netLoading").hide()
+		// 		var jsonData = json.data;
+		// 		if($.util.objIsEmpty(jsonData.pefSaleList) && $.util.objIsEmpty(jsonData.generalModelList) && $.util.objIsEmpty(jsonData.pofList)){
+		// 			//没有数据
+		// 			var reportTimeHtml = '';
+		// 			reportTimeHtml = '截止11'+that.getElements.reportTime+',您暂无持仓信息';
+		// 			$('.holdNodata').show();
+		// 			$('.holdNodata .text1').html(reportTimeHtml);
+		// 			$('.holdNodata .text2').html('截止22'+that.getElements.reportTime+',您暂无持仓信息');
+		// 		}else{
+		// 			var pefSaleList = jsonData.pefSaleList;
+		// 			jsonData.holdPosition = true;
+
+		// 			if(!$.util.objIsEmpty(pefSaleList)){
+		// 				jsonData.flag1 = true;  // 展示月末持仓私募基金的标识
+		// 				jsonData.flag2 = false;  // 展示月末持仓公募基金的标识
+		// 				jsonData.flag3 = false;  // 展示月末持仓其他基金的标识
+
+		// 				// 私募数据展示的规则
+		// 				// 看业绩比较基准和净值哪个有值：
+		// 				// （1）若业绩比较基准有值，且没有净值，显示产品名称、持有资产、        业绩比较基准；
+		// 				// （2）若有净值，且业绩比较基准没值，  显示产品名称、持有资产、持有份额、            参考净值；
+		// 				// （3）若业绩比较基准和净值均没有，  则显示产品名称、持有资产、持有份额；
+		// 				// （4）若业绩比较基准和净值均有，    则显示产品名称、持有资产、持有份额、业绩比较基准、参考净值。
+
+		// 				$.each(pefSaleList, function(i,el){
+		// 					pefSaleList[i].pefSaleFlag1 = true;
+		// 					pefSaleList[i].pefSaleFlag2 = true;
+		// 					pefSaleList[i].pefSaleFlag3 = true;
+
+		// 					if(!!el.investPerformanceComparison){  // 业绩比较基准有值时
+		// 						if(!el.netValue){  // 净值没有数据时
+		// 							pefSaleList[i].pefSaleFlag1 = false;
+		// 							pefSaleList[i].pefSaleFlag3 = false;
+		// 						}
+
+		// 					}else{   // 业绩比较基准没有值时
+		// 						if(!el.netValue){  // 净值没有数据时
+		// 							pefSaleList[i].pefSaleFlag2 = false;
+		// 							pefSaleList[i].pefSaleFlag3 = false;
+		// 						}
+		// 						else{   // 净值有数据时
+		// 							pefSaleList[i].pefSaleFlag2 = false;
+		// 						}
+		// 					}
+
+		// 				})
+
+		// 				generateTemplate(jsonData,$(".holdPosition"), that.getElements.adjustmentTemp);
+
+		// 			}
+		// 			if(!$.util.objIsEmpty(jsonData.pofList)){
+		// 				jsonData.flag2 = true;
+		// 				jsonData.flag1 = false;
+		// 				jsonData.flag3 = false;
+		// 				generateTemplate(jsonData,$(".holdPosition"), that.getElements.adjustmentTemp);
+		// 			}
+		// 			if(!$.util.objIsEmpty(jsonData.generalModelList)){
+		// 				jsonData.flag3 = true;
+		// 				jsonData.flag1 = false;
+		// 				jsonData.flag2 = false;
+		// 				generateTemplate(jsonData,$(".holdPosition"), that.getElements.adjustmentTemp);
+		// 			}
+		// 		}
+
+		// 	},
+		// 	callbackFail: function(json) {
+		// 		//请求失败，
+		// 		//显示错误提示
+		// 		tipAction(json.message);
+		// 	},
+		// 	callbackNoData: function(json) {
+		// 		//没有数据
+		// 		$('.holdNodata').show();
+		// 		var reportTimeHtml2 =  '';
+		// 		reportTimeHtml2 = '截止33'+that.getElements.reportTime+',您暂无持仓信息';
+		// 		$('.holdNodata .text').html(reportTimeHtml2);
+		// 		$('.holdNodata .text').html('截止44'+that.getElements.reportTime+',您暂无持仓信息');
+
+		// 	}
+
+		// }
+		]
+		$.ajaxLoading(obj);
+	},
+	queryInvestProdHoldShareList:function(){
+		var that = this;
+
+		var obj = [{
 			url: site_url.queryInvestProdHoldShareList_api,   // 持仓总览  报告的月末持仓总览
 			data: {
 				reportId: that.getElements.reportId
@@ -138,7 +235,7 @@ var monthReportDetail = {
 					var reportTimeHtml = '';
 					reportTimeHtml = '截止11'+that.getElements.reportTime+',您暂无持仓信息';
 					$('.holdNodata').show();
-					$('.holdNodata .text1').html(reportTimeHtml);
+					$('.holdNodata .text1').text(reportTimeHtml);
 					$('.holdNodata .text2').html('截止22'+that.getElements.reportTime+',您暂无持仓信息');
 				}else{
 					var pefSaleList = jsonData.pefSaleList;
