@@ -68,7 +68,7 @@ $(function () {
         init: function () {
             var that = this;
             that.getData(); // 获取基金详情
-            that.getFundCollectionInit() //收藏管理--判断是否被收藏
+
             that.getUserInfo();  //获取用户类型
             that.events();
             // that.getData1(); // 查询基金的历史收益（货币基金）/历史净值（普通基金）
@@ -98,11 +98,12 @@ $(function () {
                 callbackDone: function (json) {
                     that.gV.json = json.data
                     that.gV.json.fundType = that.fundType
+                    that.gV.json.chgRat1d = that.gV.json.chgRat1d.toFixed(2)
                     if(that.gV.json.chgRat1d > 0){
-                        that.gV.json.chgRat1d_s  = '+' + that.gV.json.chgRat1d.toFixed(2)
+                        that.gV.json.chgRat1d_s  = '+' + Number(that.gV.json.chgRat1d).toFixed(2)
                     }
                     if(that.gV.json.annYldRat > 0){
-                        that.gV.json.annYldRat_s  = '+' + that.gV.json.annYldRat.toFixed(2)
+                        that.gV.json.annYldRat_s  = '+' +Number(that.gV.json.annYldRat).toFixed(2)
                     }
                     that.gV.json.tradeLimitList.forEach(function(item){
                         if(item.fundBusinCode == that.gV.fundBusinCode){
@@ -122,12 +123,12 @@ $(function () {
                     that.gV.invTypCom = json.data.invTypCom
                     that.gV.secuSht = json.data.secuSht
                     //test
-                    that.gV.json.tradeLimitFlag2 = true
-                    // if(that.gV.json.tradeLimitFlag == "1"){
-                    //     that.gV.json.tradeLimitFlag2 = true
-                    // }else{
-                    //     that.gV.json.tradeLimitFlag2 = false
-                    // }
+                   // that.gV.json.tradeLimitFlag2 = true
+                    if(that.gV.json.tradeLimitFlag == "1"){
+                        that.gV.json.tradeLimitFlag2 = true
+                    }else{
+                        that.gV.json.tradeLimitFlag2 = false
+                    }
                     var html = template(that.gV.json); (html, "00");
                     if(!that.gV.json.discount){
                         that.gV.discountStatus = false
@@ -136,6 +137,7 @@ $(function () {
                     }
                     
                     $(".tplBox").html(html); 
+                    that.getFundCollectionInit() //收藏管理--判断是否被收藏
                     that.getData1();
                     that.getData2('1', 1); // 获取echarts数据
                     var historyStr = that.fundType ? '<div class="item_name">日期</div><div class="item_name">七日年化</div><div class="item_name">万份收益(元)</div>' : '<div class="item_name">日期</div><div class="item_name">单位净值</div><div class="item_name">累计净值</div><div class="item_name">日涨幅</div>'
