@@ -74,6 +74,8 @@ $(function() {
 					that.$e.top.find('.income').html(yesterdayIncomeMask);
 					that.$e.top.find('.addupIncome').html(accumIncomeMask);
 					that.$e.combiT.html(that.gV.combName);
+					// 买入按钮暂不可用
+					that.$e.buyBtn.attr("disabled", true).addClass('disable').html("暂不可售");
 
 					that.$e.buyBtn.attr("disabled", true).addClass('disable').html("暂不可售");
 

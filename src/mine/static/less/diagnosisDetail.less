@@ -12,13 +12,12 @@
 .diagnosisDetail {
     font-family: Helvetica, Arial, "Microsoft YaHei";
     //background-color: @f7f7f7;
-    height: 20rem;
-    background: url("/mine/static/img/zhenduan_head_bg@2x.png") no-repeat center center;
-    background-size: 100% auto;  
+    background-size: 100% auto;
+    -webkit-overflow-scrolling: touch;/*必要代码 让页面滚动流畅*/
 	.HeadBarConfigBox {
-        background:linear-gradient(135deg,rgba(71,90,149,1) 0%,rgba(3,19,73,1) 100%);
+        // background:linear-gradient(135deg,rgba(71,90,149,1) 0%,rgba(3,19,73,1) 100%);
         .backBtn {
-            top: 1rem;
+            top: 0.5rem;
         }
 	}
     // 公共
@@ -83,6 +82,7 @@
         // background-color: #172960;  
         // background: url("/mine/static/img/zhenduan_head_bg@2x.png") no-repeat center center;
         // background-size: 100% auto;  
+        background: url("/mine/static/img/zhenduan_head_bg@2x.png") no-repeat center center;
         .dd_name {
             font-size:1.6rem;
             font-family:PingFangSC-Semibold,PingFang SC;

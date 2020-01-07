@@ -63,7 +63,8 @@ $(function () {
 			bugFundName:"", //在线支付为 基金支付时 的基金名称
 			enableAmount:0,  //选择基金支付 可用余额
 			accountType:null,   //客户类型  0-机构 1-个人
-			doubleClickStatus:false
+			doubleClickStatus:false,
+			buyFundCode:"",  // 在线支付选货币基金的基金代码
 		},
 		webinit: function () {
 			var that = this;
@@ -408,7 +409,11 @@ $(function () {
 
 			}];
 			if(that.gV.fundOrBank == '2'){
+<<<<<<< HEAD
   					obj.data.sourcefundcode = that.gV.fundCode
+=======
+  					obj[0].data.sourcefundcode = that.gV.buyFundCode
+>>>>>>> fc3a786802aade328b2dcb6f4a7b763d3b918ada
   				}
 			$.ajaxLoading(obj);
 		},
@@ -564,6 +569,7 @@ $(function () {
 					that.gV.bankAccountSecret = $(this).attr('bankAccoutEncrypt');
 					that.gV.enableAmount = $(this).attr('enableAmount')
 					that.gV.bugFundName = $(this).attr('fundName');
+					that.gV.buyFundCode = $(this).attr('fundCode')
 					data.push({
 						// bankThumbnailUrl:$(this).attr('bankThumbnailUrl'),
 						fundName:$(this).attr('fundName'),
@@ -633,22 +639,24 @@ $(function () {
 						return
 					}
 				}
-				if(!!that.gV.maxValue){
+				if(!!that.gV.maxValue){//最大买入都校验
 					if(Number(that.gV.balance) > Number(that.gV.maxValue)){
 						tipAction('最大买入金额不能超过' + that.gV.maxValue + '元')
 						return
 					}
 				}
 				if(!!that.gV.bankAccountSecret){
-					if(that.gV.fundOrBank == '2'){
-						if(Number(that.gV.balance) > Number(that.gV.enableAmount)){
-							tipAction('单笔金额不能超过' + that.gV.enableAmount + '元')
-							return
-						}
-					}else{
-						if(Number(that.gV.balance) > Number(that.gV.singleNum)){
-							tipAction('单笔金额不能超过' + that.gV.singleNum + '元')
-							return
+					if(that.gV.payType == "0"){//在线支付校验单笔金额。转账汇款不校验
+						if(that.gV.fundOrBank == '2'){
+							if(Number(that.gV.balance) > Number(that.gV.enableAmount)){
+								tipAction('单笔金额不能超过' + that.gV.enableAmount + '元')
+								return
+							}
+						}else{
+							if(Number(that.gV.balance) > Number(that.gV.singleNum)){
+								tipAction('单笔金额不能超过' + that.gV.singleNum + '元')
+								return
+							}
 						}
 					}
 					that.checkPayType()
