@@ -98,6 +98,7 @@ $(function () {
                 callbackDone: function (json) {
                     that.gV.json = json.data
                     that.gV.json.fundType = that.fundType
+                    that.gV.json.chgRat1d = that.gV.json.chgRat1d.toFixed(2)
                     if(that.gV.json.chgRat1d > 0){
                         that.gV.json.chgRat1d_s  = '+' + that.gV.json.chgRat1d.toFixed(2)
                     }
