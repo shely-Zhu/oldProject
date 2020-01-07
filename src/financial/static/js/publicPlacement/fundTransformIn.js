@@ -408,7 +408,7 @@ $(function () {
 
 			}];
 			if(that.gV.fundOrBank == '2'){
-  					obj.data.sourcefundcode = that.gV.fundCode
+  					obj[0].data.sourcefundcode = that.gV.fundCode
   				}
 			$.ajaxLoading(obj);
 		},

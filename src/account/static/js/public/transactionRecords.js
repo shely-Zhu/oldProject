@@ -26,7 +26,7 @@ $(function () {
         //全局变量
         gV: {
             pageNum: 1, //当前页码，默认为1
-            pageSize: 10,
+            pageSize: 20,
             mask: null,
             searchTitleList: [{
                 title: '全部',
@@ -215,7 +215,7 @@ $(function () {
                         that.gV.pageNum++;
                         // 将交易记录列表插入到页面上
                         generateTemplate(data, that.$e.recordListWraperBoxId, that.$e.recordListTemplateId);
-                        alwaysAjax($('.mui-table-view-cell'), ".contentWrapper", 100);
+                        alwaysAjax($('.mui-table-view-cell'), ".contentWrapper", 2);
                     }, 200)
                 },
                 callbackFail: function (json) {
