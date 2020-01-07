@@ -146,7 +146,7 @@ $(function() {
                                 }
                                 that.$el.applyTimeRedemption.html(json.data.originalDate)
                                 that.$el.shareTimeRedemption.html(json.data.estimateConfirmDate + ' 24:00前')
-                                that.$el.earningsTimeRedemption.html(json.data.confirmDate + ' 24:00前')
+                                that.$el.earningsTimeRedemption.html(json.data.estimateArrivalDate + ' 24:00前')
                                 // that.$el.payTypeRedemption.html('在线支付')
                             }
                         }

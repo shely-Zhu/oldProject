@@ -227,6 +227,7 @@ $(function() {
         },
         //获取初始数据
         getDataReq: function() { //数据接口
+
             var that = this;
             var obj = [{
                 url: site_url.getAssetsCashInfo_api,
@@ -253,7 +254,7 @@ $(function() {
                     $("#HeadBarpathName").text(data.fundName ? data.fundName : "--")
                     $(".titleTwo").text(data.fundCode ? data.fundCode : "--")
                     $(".totalM").css({ "background": "linear-gradient(360deg, rgba(186,140,112,1) 0%, rgba(244,210,192,1) 100%)", "-webkit-background-clip": "text", "-webkit-text-fill-color": "transparent" })
-                }
+                },
             }];
             $.ajaxLoading(obj);
         },

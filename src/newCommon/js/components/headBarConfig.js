@@ -55,10 +55,13 @@ $(function() {
     if ($headBarConfigBox.attr("linesNum") != 2) {
         $("#HeadBarpathName").addClass("singleLine")
     }
-
-    var colors = $headBarConfigBox.attr('bgColors').split(",")
-    // 安卓刘海屏适配
-    if (splitUrl['hairHeight'] || splitUrl['isIphoneX']){
+    //判断有没有这个属性
+    if( $headBarConfigBox.attr('bgColors')){
+        var colors = $headBarConfigBox.attr('bgColors').split(",") 
+    }
+    
+    // 安卓IOS刘海屏适配
+    if (splitUrl['hairHeight'] || "true" == splitUrl['isIphoneX']){
         $('body').prepend('<div class="hairBox"></div>');
         $('.hairBox').css({'width': '100%', 'height': '0.26rem', 'background': colors[0], 'position': 'fixed', 'z-index': '999'});
         $('#HeadBarConfigBox').css('margin-top', '0.24rem');
@@ -75,11 +78,13 @@ $(function() {
             var tops = $(this).scrollTop();
             if (tops > 10) { //当window的scrolltop距离大于50时，
                 $headBarConfigBox.animate({ "background-image": "linear-gradient(to right," + colors[0] + " 40%, " + colors[1] + " 60%)", "color": "#fff" }, 'slow', 'ease-out')
-                $('.hairBox').animate({ "background-image": "linear-gradient(to right," + colors[0] + " 40%, " + colors[1] + " 60%)", "color": "#fff" }, 'slow', 'ease-out')
                 $("#HeadBarConfigBox a").css({ "color": "#fff" });
+                if(splitUrl['hairHeight']) {
+                    $('.hairBox').animate({ "background-image": "linear-gradient(to right," + colors[0] + " 40%, " + colors[1] + " 60%)", "color": "#fff" }, 'slow', 'ease-out')
+                };
             } else {
                 ClearStyle()
-                if(hairHeight) {
+                if(splitUrl['hairHeight']) {
                     $('.hairBox').css('background', colors[0]);
                 };
             }

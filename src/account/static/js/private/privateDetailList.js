@@ -254,7 +254,7 @@ $(function() {
                                 //第一页时
                                 if (that.listLength == 0) {
                                     //没有数据
-                                    $id.find('.list .contentWrapper li').html(that.getElements.noData.clone(false)).addClass('noCon');
+                                    $id.find('.mui-scroll .mui-table-view-cell').html(that.getElements.noData.clone(false)).addClass('noCon');
                                     $id.find('.noData').show();
 
                                     //隐藏loading，调试接口时需要去掉
@@ -359,7 +359,8 @@ $(function() {
 
                     //没有数据
                     if(that.gV.ajaxArr[that.gV.current_index].pageNum == 1) {
-                        $id.find('.mui-scroll .list').html(that.getElements.noData.clone(false)).addClass('noCon');
+                        $id.find('.mui-scroll .mui-table-view-cell').html(that.getElements.noData.clone(false)).addClass('noCon');
+                        //$id.find('.mui-scroll .list').html(that.getElements.noData.clone(false)).addClass('noCon');
                         $id.find('.noData').show();
                     } 
 
