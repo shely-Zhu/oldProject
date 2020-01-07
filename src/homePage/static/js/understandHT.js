@@ -21,6 +21,12 @@ $(function() {
         //页面初始化函数
         init: function() {
             var that = this;
+            var sliderHeight = $(window).height() - $(".tabBar").height() - $("#HeadBarConfigBox").height();//获取tab切换内容区高度。
+            // 安卓IOS刘海屏适配
+    		if (splitUrl['hairHeight'] || "true" == splitUrl['isIphoneX']){//重新设置高度，防止出现空白
+            	$("#tabHT").css("top","1.53rem");
+            	$("#drapUpWrapper .mui-slider-item").css("height",sliderHeight)
+            }
             $(".tabBar b").eq(that.gV.sortType * 1).addClass('borderBottom');
             $(".tabBar a").eq(that.gV.sortType * 1).addClass('mui-active');
             that.getTemplateData(that.gV.articleBelong, that.gV.sortType);
