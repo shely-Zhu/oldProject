@@ -557,7 +557,7 @@ var monthReportDetail = {
 		// make sure to call toDate() for plain JavaScript date type
 
 
-		$('.startDate').html(moment(startDate).format('YYYY-MM-DD'));
+		// $('.startDate').html(moment(startDate).format('YYYY-MM-DD'));
 
 		$('.endDate').html(moment(endDate).format('YYYY-MM-DD'));
 
