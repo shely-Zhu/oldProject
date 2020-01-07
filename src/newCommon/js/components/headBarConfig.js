@@ -78,7 +78,7 @@ $(function() {
 
         $(window).scroll(function() {
             var tops = $(this).scrollTop();
-            if (tops > 50) { //当window的scrolltop距离大于50时，
+            if (tops > 10) { //当window的scrolltop距离大于50时，
                 $headBarConfigBox.animate({ "background-image": "linear-gradient(to right," + colors[0] + " 40%, " + colors[1] + " 60%)", "color": "#fff" }, 'slow', 'ease-out')
                 $('.hairBox').animate({ "background-image": "linear-gradient(to right," + colors[0] + " 40%, " + colors[1] + " 60%)", "color": "#fff" }, 'slow', 'ease-out')
                 $("#HeadBarConfigBox a").css({ "color": "#fff" });
