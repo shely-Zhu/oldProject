@@ -72,6 +72,8 @@ $(function () {
 				callbackDone: function (json) {
 					if (json.status == '0000' || json.status == '4000') {
 						var data = json.data;
+						var tradeLimitList2 = []
+
 						$("#loading").hide()
 						that.$el.fundName.html(data.fundName)
 						that.$el.fundCode.html(data.fundCode)
@@ -80,7 +82,7 @@ $(function () {
 						that.gV.fundName = data.fundName
 						that.gV.fundCode = data.fundCode
 						that.gV.minValue = data.purchaseAmount ? Number(data.purchaseAmount) : 0						
-						that.$el.transformInput.attr('placeholder',data.purchaseAmountMask+"元起")
+						that.$el.transformInput.attr('placeholder',Number(data.payAgainAmount).toFixed(0)+"元起")
 						// for (var index = 0; index < data.tradeLimitList.length; index++) {
 						// 	if(that.gV.fundBusinCode ==  data.tradeLimitList[index].fundBusinCode){
 						// 	   that.$el.transformInput.attr('placeholder',data.tradeLimitList[index].minValue)

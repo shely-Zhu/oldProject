@@ -110,8 +110,11 @@
                         <div class="tip">{{myTip}}</div>
                     {{/if}}
                     <!-- todo 需要判断字段来是否显示 -->
-                    {{#if !isCash}}
-                        <div class="buy_btn fr blueBgButton" fundCode = {{fundCode}}>买入</div>
+                    {{#if isCash}}
+                    {{else}}
+                        {{#if isBuyFlag}}
+                        <div class="buy_btn fr blueBgButton" fundCode = {{fundCode}} fundName={{fundName}}>买入</div>
+                        {{/if}}
                     {{/if}}
                     {{#if isRedemptionFlag}}
                         <div class="redeem_btn fr goldBorderButton">赎回</div>
@@ -129,7 +132,7 @@
     <script id="cashLists" type="text/x-handlebars-template">
 		{{! 左侧页面列表}}
 		{{#each this}}
-        <div class="hold_item" fundName={{fundName}} fundCode={{fundCode}}>
+        <div class="hold_item" fundCode={{fundCode}}>
             <div class="divider"></div>
             <div class="title">
                 <div class="divider_tag"></div>
@@ -155,7 +158,7 @@
                     {{/if_than_0}}
                     <!-- todo 需要判断字段来是否显示 -->
                     {{#if isBuyFlag}}
-                        <div class="buy_btn fr blueBgButton" fundCode={{fundCode}}>转入</div>
+                        <div class="buy_btn fr blueBgButton" fundCode={{fundCode}} fundName={{fundName}} >转入</div>
                     {{/if}}
                     {{#if isRedemptionFlag}}
                         <div class="redeem_btn fr goldBorderButton">转出</div>

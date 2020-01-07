@@ -41,7 +41,7 @@ $(function(){
                         }
                     },
                     needLogin: true,
-                    needLoading:true,
+                    needLoading:false,
                     needDataEmpty: false, //需要判断data是否为空
                     callbackDone: function(json) {
                         var jsonData = json.data;

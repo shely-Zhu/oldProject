@@ -79,6 +79,7 @@ $(function () {
 			nextDeductingDay:'',  //扣款周期
 			singleNum:0,   //单日限额
 			doubleClickStatus:false,
+			clientHeight:document.documentElement.clientHeight,
 		},
 		webinit: function () {
 			var that = this;
@@ -189,7 +190,7 @@ $(function () {
 						}
 						for (var i = 0; i < tradeLimitList2.length; i++) {
 							if(i + 1 == tradeLimitList2.length){
-								that.$el.transformInput.attr('placeholder',tradeLimitList2[i].minValue +"元起")
+								that.$el.transformInput.attr('placeholder',Number(tradeLimitList2[i].minValue).toFixed(0) +"元起")
 								that.$el.transformInput.attr('min',Number(tradeLimitList2[i].minValue).toFixed(0))
 								that.$el.transformInput.attr('max',Number(tradeLimitList2[i].maxValue).toFixed(0))
 								that.gV.minValue =   Number(tradeLimitList2[i].minValue).toFixed(0)  // 起投金额
@@ -841,6 +842,13 @@ $(function () {
 			// },{
 			// 	htmdEvt: 'ordinarySetThrow_20'
 			// })
+			$(window).resize(function() {//解决键盘抬起将确认按钮顶起问题
+				if(that.gV.clientHeight>document.documentElement.clientHeight) {//键盘抬起将按钮隐藏
+					$(".btn_box").hide()
+				} else {//键盘消失将按钮显示
+					$(".btn_box").show()
+				}
+			});
 
 			mui("body").on('mdClick','.popup-close',function(){
 				$('.popup').css('display','none')
