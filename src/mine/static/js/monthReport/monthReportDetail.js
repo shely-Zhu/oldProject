@@ -73,7 +73,6 @@ var monthReportDetail = {
 			needDataEmpty: true,
 			async: false,
 			callbackDone: function(jsons) {
-				debugger
 				$(".netLoading").hide()
 				var json=jsons.data;
 				// 报告月份
