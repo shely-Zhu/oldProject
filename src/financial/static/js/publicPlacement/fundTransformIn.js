@@ -408,7 +408,7 @@ $(function () {
 
 			}];
 			if(that.gV.fundOrBank == '2'){
-  					obj.data.sourcefundcode = that.gV.fundCode
+  					obj[0].data.sourcefundcode = that.gV.fundCode
   				}
 			$.ajaxLoading(obj);
 		},
@@ -633,22 +633,24 @@ $(function () {
 						return
 					}
 				}
-				if(!!that.gV.maxValue){
+				if(!!that.gV.maxValue){//最大买入都校验
 					if(Number(that.gV.balance) > Number(that.gV.maxValue)){
 						tipAction('最大买入金额不能超过' + that.gV.maxValue + '元')
 						return
 					}
 				}
 				if(!!that.gV.bankAccountSecret){
-					if(that.gV.fundOrBank == '2'){
-						if(Number(that.gV.balance) > Number(that.gV.enableAmount)){
-							tipAction('单笔金额不能超过' + that.gV.enableAmount + '元')
-							return
-						}
-					}else{
-						if(Number(that.gV.balance) > Number(that.gV.singleNum)){
-							tipAction('单笔金额不能超过' + that.gV.singleNum + '元')
-							return
+					if(that.gV.payType == "0"){//在线支付校验单笔金额。转账汇款不校验
+						if(that.gV.fundOrBank == '2'){
+							if(Number(that.gV.balance) > Number(that.gV.enableAmount)){
+								tipAction('单笔金额不能超过' + that.gV.enableAmount + '元')
+								return
+							}
+						}else{
+							if(Number(that.gV.balance) > Number(that.gV.singleNum)){
+								tipAction('单笔金额不能超过' + that.gV.singleNum + '元')
+								return
+							}
 						}
 					}
 					that.checkPayType()

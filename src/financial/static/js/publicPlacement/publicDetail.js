@@ -98,6 +98,7 @@ $(function () {
                 callbackDone: function (json) {
                     that.gV.json = json.data
                     that.gV.json.fundType = that.fundType
+                    that.gV.json.chgRat1d = that.gV.json.chgRat1d.toFixed(2)
                     if(that.gV.json.chgRat1d > 0){
                         that.gV.json.chgRat1d_s  = '+' + that.gV.json.chgRat1d.toFixed(2)
                     }
@@ -122,12 +123,12 @@ $(function () {
                     that.gV.invTypCom = json.data.invTypCom
                     that.gV.secuSht = json.data.secuSht
                     //test
-                    that.gV.json.tradeLimitFlag2 = true
-                    // if(that.gV.json.tradeLimitFlag == "1"){
-                    //     that.gV.json.tradeLimitFlag2 = true
-                    // }else{
-                    //     that.gV.json.tradeLimitFlag2 = false
-                    // }
+                   // that.gV.json.tradeLimitFlag2 = true
+                    if(that.gV.json.tradeLimitFlag == "1"){
+                        that.gV.json.tradeLimitFlag2 = true
+                    }else{
+                        that.gV.json.tradeLimitFlag2 = false
+                    }
                     var html = template(that.gV.json); (html, "00");
                     if(!that.gV.json.discount){
                         that.gV.discountStatus = false
