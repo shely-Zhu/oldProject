@@ -33,7 +33,7 @@ var monthReportDetail = {
 		// 交易明细
 		that.commonAjax();
 		// 资产情况分析
-		that.assetAnalysis();
+		// that.assetAnalysis();
 		//事件监听
 		that.events();
 	},
@@ -71,7 +71,7 @@ var monthReportDetail = {
 			},
 			needLogin: true,
 			needDataEmpty: true,
-			async: false,
+			// async: false,
 			callbackDone: function(jsons) {
 				$(".netLoading").hide()
 				var json=jsons.data;
@@ -113,6 +113,7 @@ var monthReportDetail = {
 				that.getMonthDateRange(year,month);
 				
 				that.queryInvestProdHoldShareList();
+				that.assetAnalysis();
 
 			},
 			callbackFail: function(json) {
@@ -226,7 +227,7 @@ var monthReportDetail = {
 			},
 			needLogin: true,
 			needDataEmpty: true,
-			async: false,
+			// async: false,
 			callbackDone: function(json) {
 				$(".netLoading").hide()
 				var jsonData = json.data;
@@ -656,7 +657,7 @@ var monthReportDetail = {
 
 		// $('.startDate').html(moment(startDate).format('YYYY-MM-DD'));
 
-		$('.endDate').html(moment(endDate).format('YYYY-MM-DD'));
+		$('.endDate').text(moment(endDate).format('YYYY-MM-DD').toString());
 
 		return { start: startDate, end: endDate };
 
