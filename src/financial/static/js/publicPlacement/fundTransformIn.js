@@ -63,7 +63,8 @@ $(function () {
 			bugFundName:"", //在线支付为 基金支付时 的基金名称
 			enableAmount:0,  //选择基金支付 可用余额
 			accountType:null,   //客户类型  0-机构 1-个人
-			doubleClickStatus:false
+			doubleClickStatus:false,
+			buyFundCode:"",  // 在线支付选货币基金的基金代码
 		},
 		webinit: function () {
 			var that = this;
@@ -354,10 +355,10 @@ $(function () {
 					if(json.status == '0000'){
 						if(!!that.gV.bugFundName){
 							window.location.href = site_url.pofSurelyResultsDetail_url + '?applyId=' + data.allotNo + '&fundBusinCode=' +
-							that.gV.fundBusinCode + "&fundCode=" + that.gV.fundCode + "&payType=" +that.gV.payType + '&flag=buy'+'&bugFundName='+encodeURI(that.gV.bugFundName);
+							data.fundBusinCode + "&fundCode=" + that.gV.fundCode + "&payType=" +that.gV.payType + '&flag=buy'+'&bugFundName='+encodeURI(that.gV.bugFundName);
 						}else{
 							window.location.href = site_url.pofSurelyResultsDetail_url + '?applyId=' + data.allotNo + '&fundBusinCode=' +
-							that.gV.fundBusinCode + "&fundCode=" + that.gV.fundCode + "&payType=" +that.gV.payType + '&flag=buy'+'&bugFundName=false'
+							data.fundBusinCode + "&fundCode=" + that.gV.fundCode + "&payType=" +that.gV.payType + '&flag=buy'+'&bugFundName=false'
 						}
 
 					}
@@ -408,7 +409,7 @@ $(function () {
 
 			}];
 			if(that.gV.fundOrBank == '2'){
-  					obj[0].data.sourcefundcode = that.gV.fundCode
+  					obj[0].data.sourcefundcode = that.gV.buyFundCode
   				}
 			$.ajaxLoading(obj);
 		},
@@ -564,6 +565,7 @@ $(function () {
 					that.gV.bankAccountSecret = $(this).attr('bankAccoutEncrypt');
 					that.gV.enableAmount = $(this).attr('enableAmount')
 					that.gV.bugFundName = $(this).attr('fundName');
+					that.gV.buyFundCode = $(this).attr('fundCode')
 					data.push({
 						// bankThumbnailUrl:$(this).attr('bankThumbnailUrl'),
 						fundName:$(this).attr('fundName'),
