@@ -71,7 +71,7 @@ function elasticLayer(outdateFreezeStatus, lawFreezeStatus, url, custType, value
                     t.hide();
                 }else{
                     t.hide();
-                    window.location.href = site_url.perBass_url + '?originUrl=' + new Base64().encode(url); // 点击完善资料跳转到基本信息页
+                    window.location.href = site_url.perfectInfo_url + '?originUrl=' + new Base64().encode(url); // 点击完善资料跳转到基本信息页
                 }
             },
 

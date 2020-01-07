@@ -64,6 +64,7 @@ $(function(){
                             "pageSize": that.gV.pageSize,
                         },                        
                         needDataEmpty: false,
+                        needLoading: false,
                         callbackDone: function(json) {     
                             var data = json.data.pageList;
                             if(that.gV.pageNo == 1 && data.length == 0) {

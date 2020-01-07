@@ -63,6 +63,7 @@ $(function() {
                 class: 'list-wrap',
                 template: that.getElements.transTemp, 
                 pageSize: that.gV.aP.pageSize,
+                needLoading: false,
                 callback: function(def, t){
                     var obj = [{
                         url: site_url.yieldAssignList_api,
