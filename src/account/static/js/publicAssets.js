@@ -210,7 +210,6 @@ $(function () {
             })
             //购买
             mui("body").on('mdClick', '.buy_btn', function (e) {
-                debugger
                 var fundCode = $(this).attr("fundCode");
                 var fundName = $(this).attr("fundName");
                 var id = $(this).parent().parent().parent().parent().attr("id")
