@@ -8,7 +8,12 @@ var path         = require('path');
 var PLUGIN_NAME  = 'gulp-rev-collector';
 
 var defaults = {
-    revSuffix: '-[0-9a-f]{8,10}-?'
+    revSuffix: '-[0-9a-f]{8,10}-?',
+    extMap: {
+        '.scss': '.css',
+        '.less': '.css',
+        '.jsx': '.js'
+    }
 };
 
 function _getManifestData(file, opts) {
@@ -28,8 +33,16 @@ function _getManifestData(file, opts) {
         if (_.isObject(json)) {
             var isRev = 1;
             Object.keys(json).forEach(function (key) {
-                //if ( !_.isString(json[key]) || path.basename(json[key]).replace(new RegExp( opts.revSuffix ), '' ) !==  path.basename(key) ) {
-                if ( !_.isString(json[key]) || path.basename(json[key]).split('?')[0] !== path.basename(key) ) {
+                if (!_.isString(json[key])) {
+                    isRev = 0;
+                    return;
+                }
+                var cleanReplacement =  path.basename(json[key]).replace(new RegExp( opts.revSuffix ), '' );
+                if (!~[
+                        path.basename(key),
+                        _mapExtnames(path.basename(key), opts)
+                    ].indexOf(cleanReplacement)
+                ) {
                     isRev = 0;
                 }
             });
@@ -41,6 +54,17 @@ function _getManifestData(file, opts) {
 
     }
     return data;
+}
+
+// Issue #30 extnames normalisation
+function _mapExtnames(filename, opts) {
+    var fileExt = path.extname(filename);
+    Object.keys(opts.extMap).forEach(function (ext) {
+        if (fileExt === ext) {
+            filename = filename.replace(new RegExp( '\\' + ext + '$' ), opts.extMap[ext]);
+        }
+    });
+    return filename;
 }
 
 function escPathPattern(pattern) {
@@ -78,12 +102,32 @@ function revCollector(opts) {
             });
         }
 
+        if (opts.collectedManifest) {
+            this.push(
+                new gutil.File({
+                    path: opts.collectedManifest,
+                    contents: new Buffer(JSON.stringify(manifest, null, "\t"))
+                })
+            );
+        }
+
         for (var key in manifest) {
             var patterns = [ escPathPattern(key) ];
             if (opts.replaceReved) {
-                patterns.push( escPathPattern( (path.dirname(key) === '.' ? '' : closeDirBySep(path.dirname(key)) ) + path.basename(key, path.extname(key)) )
-                            + opts.revSuffix
-                            + escPathPattern( path.extname(key) )
+                var patternExt = path.extname(key);
+                if (patternExt in opts.extMap) {
+                    patternExt = '(' + escPathPattern(patternExt) + '|' + escPathPattern(opts.extMap[patternExt]) + ')';
+                } else {
+                    patternExt = escPathPattern(patternExt);
+                }
+                patterns.push( escPathPattern( (path.dirname(key) === '.' ? '' : closeDirBySep(path.dirname(key)) ) )
+                            + path.basename(key, path.extname(key))
+                                .split('.')
+                                .map(function(part){
+                                    return escPathPattern(part) + '(' + opts.revSuffix + ')?';
+                                })
+                                .join('\\.')
+                            + patternExt
                         );
             }
 
@@ -102,9 +146,21 @@ function revCollector(opts) {
             } else {
                 patterns.forEach(function (pattern) {
                     // without dirReplacements we must leave asset filenames with prefixes in its original state
+                    var prefixDelim = '([\/\\\\\'"';
+                    // if dir part in pattern exists, all exsotoic symbols should be correct processed using dirReplacements
+                    if (/[\\\\\/]/.test(pattern)) {
+                        prefixDelim += '\(=';
+                    } else {
+                        if (!/[\(\)]/.test(pattern)) {
+                            prefixDelim += '\(';
+                        }
+                        if (!~pattern.indexOf('=')) {
+                            prefixDelim += '=';
+                        }
+                    }
+                    prefixDelim += '])';
                     changes.push({
-                        //regexp: new RegExp( '([\/\\\\\'"])' + pattern, 'g' ),
-                        regexp: new RegExp( '([\/\\\\\'"])' + pattern+'(\\?v=\\w{10})?', 'g' ),
+                        regexp: new RegExp( prefixDelim + pattern, 'g' ),
                         patternLength: pattern.length,
                         replacement: '$1' + manifest[key]
                     });
@@ -120,33 +176,14 @@ function revCollector(opts) {
             }
         );
         mutables.forEach(function (file){
-
-            var t = this,
-                fileChange = false;
-
             if (!file.isNull()) {
-
                 var src = file.contents.toString('utf8');
-
                 changes.forEach(function (r) {
-
-                    var rep = r.replacement.substring( 2, r.replacement.lastIndexOf('?') );
-
-                    //有该项的时候才替换
-                    if( src.indexOf(rep) != -1){ 
-                        fileChange = true;
-                        src = src.replace(r.regexp, r.replacement);
-                        file.contents = new Buffer(src);
-                    }
+                    src = src.replace(r.regexp, r.replacement);
                 });
-
-                if( fileChange ){
-                    //将替换版本号的文件返回
-                    t.push(file);
-                }
-                
+                file.contents = new Buffer(src);
             }
-            
+            this.push(file);
         }, this);
 
         cb();

@@ -65,17 +65,14 @@ $(function () {
                 callbackDone: function (json) {
                     $(".blueBgButton").removeClass("disable")
                     tipAction("  意见提交成功,感谢您的反馈")
-                    setTimeout(function(){
-                        if (window.isAndroid) {
-                            //这个是安卓操作系统
-                            window.jsObj.backNative();
-                        }
-                        if (window.isIOS) {
-                            //这个是ios操作系统
-                            window.webkit.messageHandlers.backNative.postMessage('backNative');
-                        }
-                    },2000)
-                    
+                    if (window.isAndroid) {
+                        //这个是安卓操作系统
+                        window.jsObj.backNative();
+                    }
+                    if (window.isIOS) {
+                        //这个是ios操作系统
+                        window.webkit.messageHandlers.backNative.postMessage('backNative');
+                    }
                 },
                 callbackFail: function(json) {
                     $(".blueBgButton").removeClass("disable")

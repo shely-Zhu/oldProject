@@ -84,8 +84,6 @@ $(function() {
 
                         // 第一个调仓记录默认展开
                         $('.list').find('ul').eq(0).find('.latestAdjustment').css("display", "block");
-						// 第一个调仓记录箭头更换样式   
-						$('.list').find('ul').eq(0).find(".spread").html('<span class="iconfont">&#xe62a;</span>')
 					}
 					
 				},

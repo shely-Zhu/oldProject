@@ -55,17 +55,19 @@ $(function() {
     if ($headBarConfigBox.attr("linesNum") != 2) {
         $("#HeadBarpathName").addClass("singleLine")
     }
-    //判断有没有这个属性
-    if( $headBarConfigBox.attr('bgColors')){
-        var colors = $headBarConfigBox.attr('bgColors').split(",") 
+
+    var colors = $headBarConfigBox.attr('bgColors').split(",")
+    // 安卓刘海屏适配
+    var hairHeight; 
+    if (splitUrl['hairHeight'] || splitUrl['isIphoneX']){
+        hairHeight = '0.25rem';
     }
-    
-    // 安卓IOS刘海屏适配
-    if (splitUrl['hairHeight'] || "true" == splitUrl['isIphoneX']){
+
+    if(hairHeight) {
         $('body').prepend('<div class="hairBox"></div>');
-        $('.hairBox').css({'width': '100%', 'height': '0.26rem', 'background': colors[0], 'position': 'fixed', 'z-index': '999'});
-        $('#HeadBarConfigBox').css('margin-top', '0.24rem');
-    }
+        $('.hairBox').css({'width': '100%', 'height': hairHeight, 'background': colors[0], 'position': 'fixed', 'z-index': '999'});
+        $('#HeadBarConfigBox').css('margin-top', hairHeight);
+    };
 
     //传人样式判断展示形式 
     if ($headBarConfigBox.attr('showType') == '1') {
@@ -76,15 +78,13 @@ $(function() {
 
         $(window).scroll(function() {
             var tops = $(this).scrollTop();
-            if (tops > 10) { //当window的scrolltop距离大于50时，
+            if (tops > 50) { //当window的scrolltop距离大于50时，
                 $headBarConfigBox.animate({ "background-image": "linear-gradient(to right," + colors[0] + " 40%, " + colors[1] + " 60%)", "color": "#fff" }, 'slow', 'ease-out')
+                $('.hairBox').animate({ "background-image": "linear-gradient(to right," + colors[0] + " 40%, " + colors[1] + " 60%)", "color": "#fff" }, 'slow', 'ease-out')
                 $("#HeadBarConfigBox a").css({ "color": "#fff" });
-                if(splitUrl['hairHeight']) {
-                    $('.hairBox').animate({ "background-image": "linear-gradient(to right," + colors[0] + " 40%, " + colors[1] + " 60%)", "color": "#fff" }, 'slow', 'ease-out')
-                };
             } else {
                 ClearStyle()
-                if(splitUrl['hairHeight']) {
+                if(hairHeight) {
                     $('.hairBox').css('background', colors[0]);
                 };
             }

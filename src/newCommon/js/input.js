@@ -328,16 +328,6 @@ if (windowHref.indexOf('register.html') != -1 ||
                     }
                 })
             }
-            if (that.attrCheck == 'orgAddMessage') {
-                //限制输入6位数字
-                that.$el.on('keyup', function(e) {
-                    if ($(this).val().length >= 201) {
-                        //截取6位
-                        $(this).val($.trim($(this).val()).substring(0, 200));
-                        that.showError("最多可输入200字", this);
-                    }
-                })
-            }
             //实名认证---证件类型的选择
             //点击证件类型下拉列表
             if (that.attrCheck == 'idTypeSelect') {
