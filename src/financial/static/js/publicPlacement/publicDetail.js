@@ -100,10 +100,10 @@ $(function () {
                     that.gV.json.fundType = that.fundType
                     that.gV.json.chgRat1d = that.gV.json.chgRat1d.toFixed(2)
                     if(that.gV.json.chgRat1d > 0){
-                        that.gV.json.chgRat1d_s  = '+' + that.gV.json.chgRat1d.toFixed(2)
+                        that.gV.json.chgRat1d_s  = '+' + Number(that.gV.json.chgRat1d).toFixed(2)
                     }
                     if(that.gV.json.annYldRat > 0){
-                        that.gV.json.annYldRat_s  = '+' + that.gV.json.annYldRat.toFixed(2)
+                        that.gV.json.annYldRat_s  = '+' +Number(that.gV.json.annYldRat).toFixed(2)
                     }
                     that.gV.json.tradeLimitList.forEach(function(item){
                         if(item.fundBusinCode == that.gV.fundBusinCode){

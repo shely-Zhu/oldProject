@@ -69,14 +69,12 @@ $(function() {
             }
             //地址栏里confirmed代表已确认  toBeConfirmed代表待确认
             if (splitUrl['type'] == 'confirmed') {
-                $(".covering").show()
                 $('.hopper').show();
                 $('#HeadBarpathName').attr("data", '已完成交易').html('已完成交易');
                 that.gV.type = 1;
                 // 判断是否存在未确认的客户行为确认单
                 that.judgeToBeConfirmedSheet()
             } else if (splitUrl['type'] == 'toBeConfirmed') {
-                $(".covering").hide()
                 $('.hopper').hide();
                 $('#HeadBarpathName').attr("data", '待确认交易').html('待确认交易');
                 that.gV.type = 0;

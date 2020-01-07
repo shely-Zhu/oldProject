@@ -62,10 +62,8 @@ $(function() {
     
     // 安卓IOS刘海屏适配
     if (splitUrl['hairHeight'] || "true" == splitUrl['isIphoneX']){
-        if (splitUrl['hairHeight']){
-            $('body').prepend('<div class="hairBox"></div>');
-            $('.hairBox').css({'width': '100%', 'height': '0.26rem', 'background': colors[0], 'position': 'fixed', 'z-index': '999'});
-        }
+        $('body').prepend('<div class="hairBox"></div>');
+        $('.hairBox').css({'width': '100%', 'height': '0.26rem', 'background': colors[0], 'position': 'fixed', 'z-index': '999'});
         $('#HeadBarConfigBox').css('margin-top', '0.24rem');
     }
 
@@ -80,8 +78,10 @@ $(function() {
             var tops = $(this).scrollTop();
             if (tops > 10) { //当window的scrolltop距离大于50时，
                 $headBarConfigBox.animate({ "background-image": "linear-gradient(to right," + colors[0] + " 40%, " + colors[1] + " 60%)", "color": "#fff" }, 'slow', 'ease-out')
-                $('.hairBox').animate({ "background-image": "linear-gradient(to right," + colors[0] + " 40%, " + colors[1] + " 60%)", "color": "#fff" }, 'slow', 'ease-out')
                 $("#HeadBarConfigBox a").css({ "color": "#fff" });
+                if(splitUrl['hairHeight']) {
+                    $('.hairBox').animate({ "background-image": "linear-gradient(to right," + colors[0] + " 40%, " + colors[1] + " 60%)", "color": "#fff" }, 'slow', 'ease-out')
+                };
             } else {
                 ClearStyle()
                 if(splitUrl['hairHeight']) {
