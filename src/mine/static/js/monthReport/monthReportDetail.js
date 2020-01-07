@@ -72,9 +72,10 @@ var monthReportDetail = {
 			needLogin: true,
 			needDataEmpty: true,
 			async: false,
-			callbackDone: function(json) {
+			callbackDone: function(jsons) {
+				debugger
 				$(".netLoading").hide()
-				var json=json.data;
+				var json=jsons.data;
 				// 报告月份
 				that.getElements.monthReportTime = json.month;
 				$('.reportMonth').html(json.month);

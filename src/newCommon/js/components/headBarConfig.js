@@ -55,12 +55,17 @@ $(function() {
     if ($headBarConfigBox.attr("linesNum") != 2) {
         $("#HeadBarpathName").addClass("singleLine")
     }
-
-    var colors = $headBarConfigBox.attr('bgColors').split(",")
-    // 安卓刘海屏适配
-    if (splitUrl['hairHeight'] || splitUrl['isIphoneX']){
-        $('body').prepend('<div class="hairBox"></div>');
-        $('.hairBox').css({'width': '100%', 'height': '0.26rem', 'background': colors[0], 'position': 'fixed', 'z-index': '999'});
+    //判断有没有这个属性
+    if( $headBarConfigBox.attr('bgColors')){
+        var colors = $headBarConfigBox.attr('bgColors').split(",") 
+    }
+    
+    // 安卓IOS刘海屏适配
+    if (splitUrl['hairHeight'] || "true" == splitUrl['isIphoneX']){
+        if (splitUrl['hairHeight']){
+            $('body').prepend('<div class="hairBox"></div>');
+            $('.hairBox').css({'width': '100%', 'height': '0.26rem', 'background': colors[0], 'position': 'fixed', 'z-index': '999'});
+        }
         $('#HeadBarConfigBox').css('margin-top', '0.24rem');
     }
 
