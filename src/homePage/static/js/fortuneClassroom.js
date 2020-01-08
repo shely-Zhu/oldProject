@@ -326,6 +326,11 @@ $(function() {
             },{
                 'htmdEvt': 'fortune_10'
             })
+            mui("body").on('mdClick', '.mui-table-view-cell' , function(){
+                $(".mui-table-view-cell").removeClass("mui-active")
+            },{
+                'htmdEvt': 'fortune_11'
+            })
         }
     };
     data.init();

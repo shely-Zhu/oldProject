@@ -106,9 +106,11 @@ $(function () {
                         })
 
                     }else if(resData.h5Type == "2") {
-
-
-                        that.$e.artTitle.find("p").html(resData.title);//文章title
+                        // 含有标题时才展示该区域
+                        if(resData.title) {
+                            that.$e.artTitle.removeClass("hide")
+                            that.$e.artTitle.find("p").html(resData.title);//文章title
+                        }
 
                         //如果音频路径不为空的话则隐藏音频dom元素
                         if (resData.voiceAttachUrl.length != 0) {
@@ -123,6 +125,10 @@ $(function () {
 
 
                     }else if (resData.h5Type == "3") {//产品推荐
+                        //内容去边距不留白
+                        that.$e.contentWrap.css({
+                            "padding": "0"
+                        })
                         //给底部按钮加文字和跳转链接
                          that.$e.btnButton.show();
                         that.$e.btnHref.html(resData.buttonLabel).show();

@@ -93,7 +93,8 @@
     }
     .mui-table-view-cell{
         padding: 0;
-        padding: .4rem .3rem 0 .3rem;
+        padding: .2rem .3rem 0 .3rem;
+        background: #F7FAFD;
     }
     .mui-table-view-cell:after{
         height: 0;
@@ -182,6 +183,7 @@
     .activityNoList{
         padding: .4rem .3rem;
         background-color: @c005;
+        display: none;
         h3{
             font-family: PingFangSC-Semibold;
             font-size: .32rem;
@@ -198,6 +200,7 @@
         border-bottom: 1px solid @c007;
         position: relative;
         background-color: @c005;
+        display: none;
         img{
             position: absolute;
             width: 2.19rem;
@@ -282,15 +285,15 @@
 .mui-spinner:after{
     font-size: 1rem;
 }
-.mui-pull{
-    bottom: -.45rem;
-}
+// .mui-pull{
+//     bottom: -.45rem;
+// }
 .mui-spinner:after{
     font-size: 0.4rem;
 }
-.mui-pull-bottom-pocket{
-    height: 20px;
-}
+// .mui-pull-bottom-pocket{
+//     height: 20px;
+// }
 .mui-search:before{
     font-size: 21px;
     top: 74%;
@@ -349,7 +352,7 @@
             .starFinancialPlannerCodeBg{
                 width: 1.2rem;
                 text-align: center;
-                background-color: @c005;
+                background-color: rgba(255,255,255,0.4);
                 opacity: 0.4;
                 border-radius: .25rem;
                 height: .36rem;
@@ -441,6 +444,7 @@
 
 .mui-search .mui-placeholder {
     line-height: .6rem;
+    font-size: 16px;
 }
 
 .warmPrompt {
