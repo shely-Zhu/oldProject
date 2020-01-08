@@ -476,7 +476,7 @@ $(function() {
 					}
 					that.getTypeOneData()
                 },
-                callbackNoData:function(argument) {
+                callbackNoData:function(json) {
                     tipAction(json.message);
                 }
             }];
@@ -666,7 +666,7 @@ $(function() {
 					//that.data.canClick = true; //变为可点击
 
                 },
-                callbackNoData:function(argument) {
+                callbackNoData:function(json) {
                     tipAction(json.message);
                 }
             }];
@@ -707,7 +707,7 @@ $(function() {
 					 //that.data.canClick = true; //变为可点击
  
 				 },
-				 callbackNoData:function(argument) {
+				 callbackNoData:function(json) {
 					 tipAction(json.message);
 				 }
 
