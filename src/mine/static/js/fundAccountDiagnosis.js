@@ -543,14 +543,17 @@ $(function() {
         },
         events: function() {
             var that = this;
-            mui("body").on("mdClick", ".account-holdings .down", function() {
-                if ($(this).hasClass('up')) {
-                    $(this).removeClass('up')
+            mui("body").on("mdClick", ".account-holdings .more-data", function() {
+                if ($(this).find('.down').hasClass('up')) {
+                    $(this).find('.down').removeClass('up');
+                    $(this).find('.txt').html('展开全部持仓');
+
                     that.gV.pageSize = 5
                 } else {
-                    $(this).addClass('up')
+                    $(this).find('.down').addClass('up');
+                    $(this).find('.txt').html('收起部分持仓');
                     that.gV.pageSize = 100000
-                }
+                } 
 
                 that.getHoldData();
             }, {

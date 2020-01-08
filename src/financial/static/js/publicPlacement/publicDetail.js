@@ -2,6 +2,7 @@
  * 公募资产详情页
  *
  * @author shiyunrui 20191123
+ * update:chentiancheng
  *
  * 具体可以参考 privateDetail.js
  */
@@ -512,7 +513,7 @@ $(function () {
                     case 3:  //投资者分类
                         if(that.gV.isWealthAccountStatus){
                             //开通了账户
-                            if(jsonData.investorStatus =="0"&&that.gV.userStatus==""){
+                            if(that.gV.json.investorStatus =="0"&&that.gV.userStatus==""){
                                 //申请为投资者
                                 window.location.href = site_url.investorClassificationResult_url
                             }else{
@@ -581,7 +582,7 @@ $(function () {
                     case "isInvestFavour":  //投资者分类
                     if(that.gV.isWealthAccountStatus){
                         //开通了账户
-                        if(jsonData.investorStatus =="0"&&that.gV.userStatus==""){
+                        if(that.gV.json.investorStatus =="0"&&that.gV.userStatus==""){
                             //申请为投资者
                             window.location.href = site_url.investorClassificationResult_url
                         }else{
