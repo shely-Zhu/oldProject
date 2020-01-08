@@ -242,7 +242,6 @@ $(function() {
                         t.endPullupToRefresh(false);
                         $id.find('.mui-scroll .list').html(that.getElements.noData.clone(false)).addClass('noCon');
                         $id.find('.noData').show();
-                        that.getElements.noData.show()
                     }
 
                     //有数据
