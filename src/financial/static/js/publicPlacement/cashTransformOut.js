@@ -34,7 +34,7 @@ $(function () {
 	var regulatory = {
 
 		gv:{
-		   productName:new Base64().decode(splitUrl['productName']),   //产品名称
+		   productName: '',   //产品名称
 		   transformTotalMoney:"",   //产品转出总额度
 		   transformMoney:"",    //产品转出额度
 		   dailyOnceMaxLimit:"",  //单日最高限额 整数
@@ -91,7 +91,9 @@ $(function () {
 			that.findProtocolBasi();
 			that.cashListWiki();
 			that.pofCashLimit();
-			
+			if(splitUrl['productName']) {
+				that.gv.productName = new Base64().decode(splitUrl['productName'])
+			}
 		},
 
         /*
