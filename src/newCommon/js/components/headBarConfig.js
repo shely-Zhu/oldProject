@@ -106,13 +106,15 @@ $(function() {
         if (!!$headBarConfigBox.attr('iconStype') && $headBarConfigBox.attr('iconStype') !== "@@iconStype") { //如果右上角图标有配显示配置的
             $("#customerService").show().html($headBarConfigBox.attr('iconStype'));
         } else { //负责显示默认的
-            $("#customerService").show();
+            $("#customerService").html("&#xe63f;").show();
             //返回上一页
             //$("#customerService").on("click",function(){
             //              客服热线要跳转的链接
             //              location.href= site_url.historyDetail_url;
             // })
         }
+    } else if($headBarConfigBox.attr('doneType') == '1') {
+        $("#customerService").css("fontSize","0.32rem").html("完成").show();
     }
     //返回上一页
     mui("body").on('mdClick', '#goBack', function() {
@@ -164,14 +166,23 @@ $(function() {
     }, {
         htmdEvt: 'goBackButton'
     });
-   
+    if ($headBarConfigBox.attr('serviceType') == '1') { //如果图标显示
     //跳转客服页面  app进行拦截
-    mui("body").on('mdClick', '#customerService', function() {
-        window.location.href = site_url.onlineCustomerTransfer_url;
-    }, {
-        htmdEvt: 'customerService'
-    });
-   
+        mui("body").on('mdClick', '#customerService', function() {
+            window.location.href = site_url.onlineCustomerTransfer_url;
+        }, {
+            htmdEvt: 'customerService'
+        });
+    } else if($headBarConfigBox.attr('doneType') == '1' && window.location.href.indexOf('surelyResultShot.html') != -1) {
+        // 定投详情
+        // doneType == 1 完成按钮
+        mui("body").on('mdClick', '#customerService', function() {
+            window.location.href = site_url.pofCastSurelyDetails_url + "?scheduledProtocolId=" +splitUrl["scheduledProtocolId"];
+        }, {
+            htmdEvt: 'customerService'
+        });
+        
+    };
 })
 //字符串截取
 function GetRequest() {
