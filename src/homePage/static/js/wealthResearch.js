@@ -220,6 +220,7 @@ $(function() {
                     console.log(json.data)
                     var jsonData = json.data.list,
                         pageList = jsonData;
+                        that.getElements.noData.hide()
                     if (!$.util.objIsEmpty(pageList)) {
 
                         jsonData.tobe = that.gV.current_index == 0 ? 0 : 1;
@@ -238,6 +239,10 @@ $(function() {
                         //没有数据
                         that.listLength = 0;
                         that.html = '';
+                        t.endPullupToRefresh(false);
+                        $id.find('.mui-scroll .list').html(that.getElements.noData.clone(false)).addClass('noCon');
+                        $id.find('.noData').show();
+                        that.getElements.noData.show()
                     }
 
                     //有数据
@@ -360,6 +365,12 @@ $(function() {
         },
         events: function() { //绑定事件
             var that = this;
+            mui("body").on('mdClick', '.list_item', function(e) {
+                var $this = $(this);
+               window.location.href = site_url.articleTemplate_url + "?id=" + $this.attr('id') + '&articleBelong=' + $this.attr('articleBelong');
+            }, {
+                'htmdEvt': 'wealthResearch_01'
+            })
         }
     };
     data.init();
