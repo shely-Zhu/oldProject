@@ -3,11 +3,8 @@
 * @author yanruiting 2019-11-18
 */
 @import url('@pathCommonLess/components/iconfont.less');
-//@import url("@pathCommonLess/reset.less");
-//@import url('@pathCommonLess/mui/resetMUI.less');
 @import url("@pathCommonLess/color.less");
 @import url("@pathCommonLessCom/headBarConfig.less");
-@import url("@pathCommonCom/noData/noData.less");
 
 body{
     max-width: 100%;
@@ -16,7 +13,10 @@ body{
 html {
     background: @c011;
 }
-body,h1,h2,h3,h4,h5,h6,p,ul,li,img,i,iframe,a,input,button{
+.hide{
+    display: none;
+}
+/* body,h1,h2,h3,h4,h5,h6,p,ul,li,img,i,iframe,a,input,button{
     margin: 0;
     padding: 0;
     border: 0;
@@ -26,25 +26,12 @@ body,h1,h2,h3,h4,h5,h6,p,ul,li,img,i,iframe,a,input,button{
     -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
     list-style: none;
     text-decoration: none;
-}
+} */
 .againEnter {
     display: none;
     .tipWrapper {
         display: none;
     }
-}
-#loading {
-    top: 1.28rem!important;
-}
-#emptyBox .nodataImg {
-    margin: 0 auto;
-}
-#emptyBox {
-    text-align: center;
-}
-#emptyBox img {
-    width: 100%;
-    height: 100%;
 }
 #informsDetailBox {
 	width: 100%;
@@ -59,12 +46,17 @@ body,h1,h2,h3,h4,h5,h6,p,ul,li,img,i,iframe,a,input,button{
         background: #F3F5F7;
     	#informsDetailCon {
             background: @c005;
+<<<<<<< HEAD
+=======
+            //background: red;
+>>>>>>> 8dee229c0a41f3db469b9c89bdf929335d07ea65
             height: 100%;
             .noticeLogo {
                 width: 100%;
-                height: auto;
+                height: 100%;
+                display: block;
             }
-            /* .detailTitle {
+            .detailTitle {
                 height: 1.26rem;
                 font-size: .32rem;
                 font-weight: 600;
@@ -77,6 +69,7 @@ body,h1,h2,h3,h4,h5,h6,p,ul,li,img,i,iframe,a,input,button{
                 font-size: .28rem;
                 line-height: .54rem;
                 color: #4E4E4E;
+                white-space:pre;
                 .detailUser {
                     margin-bottom: .2rem;
                 }
@@ -90,7 +83,7 @@ body,h1,h2,h3,h4,h5,h6,p,ul,li,img,i,iframe,a,input,button{
                 .detailDate {
                     margin-top: .06rem;
                 }
-            } */
+            }
         }
     }
 }

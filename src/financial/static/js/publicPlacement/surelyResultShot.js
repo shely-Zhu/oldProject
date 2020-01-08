@@ -53,8 +53,14 @@ $(function () {
     init: function () {
       var that = this;
       that.getData();
-      that.event()
+      that.event();
+      // that.initStyle();
     },
+    // initStyle: function() {
+    //   $('#customerService').html("完成").css("fontSize","0.32rem").on("click",function(){
+    //     window.location.href = site_url.pofCastSurelyDetails_url + "?scheduledProtocolId=" +splitUrl["scheduledProtocolId"];
+    //   });
+    // },
     getData:function(){
         var that = this;
         var obj = [{
