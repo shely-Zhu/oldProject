@@ -571,11 +571,14 @@ var clickList = {
 	"wealthResearch_1":{ type:'click', evtid: 'wealthResearch_1', topic: '财富研究2', info: ''},
 	"wealthResearch_2":{ type:'click', evtid: 'wealthResearch_2', topic: '财富研究3', info: ''},
 	"wealthResearch_3":{ type:'click', evtid: 'wealthResearch_3', topic: '财富研究4', info: ''},
-
+	// 财富学院1
 	"fortuneCollegeList_0":{ type:'click', evtid: 'fortuneCollegeList_0', topic: '财富学院1', info: ''},
 	"fortuneCollegeList_1":{ type:'click', evtid: 'fortuneCollegeList_1', topic: '财富学院2', info: ''},
 	"fortuneCollegeList_2":{ type:'click', evtid: 'fortuneCollegeList_2', topic: '财富学院3', info: ''},
 	"fortuneCollegeList_3":{ type:'click', evtid: 'fortuneCollegeList_3', topic: '财富学院4', info: ''},
+
+	"wealthResearch_01":{ type:'click', evtid: 'wealthResearch_01', topic: '财富学院4', info: ''},
+	
 	
 	
 
