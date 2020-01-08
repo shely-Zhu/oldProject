@@ -39,6 +39,8 @@ var clickList = {
 	"fundAccountDiagnosis_05":{ type:'click', evtid: 'fundAccountDiagnosis_05', topic: '基金诊断-隐藏一键认证按钮', info: ''},
 	"fundAccountDiagnosis_06":{ type:'click', evtid: 'fundAccountDiagnosis_06', topic: '基金诊断-无持仓跳转理财首页按钮', info: ''},
 	"fundAccountDiagnosis_07":{ type:'click', evtid: 'fundAccountDiagnosis_07', topic: '基金诊断-无持仓情况下获取专属报告按钮', info: ''},
+	"fundAccountDiagnosis_08":{ type:'click', evtid: 'fundAccountDiagnosis_08', topic: '基金诊断-明白按钮', info: ''},
+	"fundAccountDiagnosis_09":{ type:'click', evtid: 'fundAccountDiagnosis_09', topic: '基金诊断-失败', info: ''},
 	//基金账户诊断 --添加/编辑申请
 	"fundAccountDiagnosisResult_01":{ type:'click', evtid: 'fundAccountDiagnosisResult_01', topic: '账户诊断-添加其他基金时,购买时间事件', info: ''},
 	"fundAccountDiagnosisResult_02":{ type:'click', evtid: 'fundAccountDiagnosisResult_02', topic: '账户诊断-添加其他基金时,确定按钮', info: ''},
@@ -563,6 +565,22 @@ var clickList = {
 
 	"articleTemplate_01":{ type:'click', evtid: 'articleTemplate_01', topic: '立即跳转', info: ''},
 	"articleTemplate_02":{ type:'click', evtid: 'articleTemplate_02', topic: '调用视频播放', info: ''},
+
+	// mui切换的埋点
+	"wealthResearch_0":{ type:'click', evtid: 'wealthResearch_0', topic: '财富研究1', info: ''},
+	"wealthResearch_1":{ type:'click', evtid: 'wealthResearch_1', topic: '财富研究2', info: ''},
+	"wealthResearch_2":{ type:'click', evtid: 'wealthResearch_2', topic: '财富研究3', info: ''},
+	"wealthResearch_3":{ type:'click', evtid: 'wealthResearch_3', topic: '财富研究4', info: ''},
+	// 财富学院1
+	"fortuneCollegeList_0":{ type:'click', evtid: 'fortuneCollegeList_0', topic: '财富学院1', info: ''},
+	"fortuneCollegeList_1":{ type:'click', evtid: 'fortuneCollegeList_1', topic: '财富学院2', info: ''},
+	"fortuneCollegeList_2":{ type:'click', evtid: 'fortuneCollegeList_2', topic: '财富学院3', info: ''},
+	"fortuneCollegeList_3":{ type:'click', evtid: 'fortuneCollegeList_3', topic: '财富学院4', info: ''},
+
+	"wealthResearch_01":{ type:'click', evtid: 'wealthResearch_01', topic: '财富学院4', info: ''},
+	
+	
+	
 
 	
 }

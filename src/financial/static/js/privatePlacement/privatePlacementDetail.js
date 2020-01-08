@@ -1,5 +1,11 @@
+/*
 //  私募基金产品详情
-//  @author zhangyanping 2019-11-25 tian
+//  @author zhangyanping 2019-11-25 
+
+    update:chentiancheng 2020-01-08 
+    删除司法冻结文案
+
+*/
 
 require('@pathCommonBase/base.js');
 
@@ -948,7 +954,7 @@ $(function() {
                         if (v.conditionType == 1 && !v.isSatisfied) { //财富账户是否开通，需要给app携带，0未开通，1开通
                             that.data.isOpenWealth = 0;
                         }
-                        if (v.conditionType == 5 && !v.isSatisfied) { //合格投资者认证是否满足，需要给app携带
+                        if (v.conditionType == 5 && v.isSatisfied) { //合格投资者认证是否满足，需要给app携带
                             that.data.isSatisfied = v.isSatisfied
                         }
                         if (v.conditionType == 6 && !!v.isPopup) { //是否弹出期限不符弹框
@@ -1432,13 +1438,12 @@ $(function() {
                     if (that.data.buyFreeze == "1" && that.data.lawFreezeStatus == "1") { //如果禁止买入且司法冻结，首先提示
                     	that.data.canClick = true;//这里必须改成true，否则取消后按钮不生效了。
                         var obj = {
-                            title: '',
+                            title: '温馨提示',
                             id: 'buyFreeze',
                             p: '因司法原因该账户被冻结，请联系客服咨询！客服电话：400-8980-618',
                             yesTxt: '确认',
-                            celTxt: "取消",
                             htmdEvtYes:'privatePlacementDetail_32',  // 埋点确定按钮属性
-                            htmdEvtCel:'privatePlacementDetail_33',  // 埋点取消按钮属性
+                            hideCelButton: true, //为true时隐藏cel按钮，仅使用yes按钮的所有属性
                             zIndex: 100,
                             callback: function(t) {
 

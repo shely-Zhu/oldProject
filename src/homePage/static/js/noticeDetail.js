@@ -54,8 +54,12 @@ $(function(){
                 needDataEmpty: true,
                 callbackDone: function(json) {
                     var data=json.data; 
-                    $("#informsDetailContent")[0].innerHTML = data.mesContent
-                     //generateTemplate(data,that.$e.noticeConTemplateId,that.$e.noticeItemListTemplateId);               
+                    if(data.mesTitle && data.mesTitle != '') {
+                        $(".detailTitle").show()
+                        $(".detailTitle").html(data.mesTitle)
+                    }
+                    console.log(data.mesContent)
+                    $(".detailContentCon").html(data.mesContent)
                 }
             }];                        
             $.ajaxLoading(obj); 
