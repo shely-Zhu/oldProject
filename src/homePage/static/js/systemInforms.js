@@ -79,6 +79,7 @@ $(function() {
                                 def && def.resolve( that.dealData(data), that.gV.pageCurrent);
                                 that.gV.pageCurrent++;
                             }
+                            $(".netLoading").hide()
                         },
                         callbackNoData: function( json ){  
                             if(that.gV.pageCurrent == 1) {
