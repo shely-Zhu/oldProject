@@ -102,34 +102,34 @@ $(function() {
 
                     }
                     that.gV.singleaAuthenPath = that.getSingleaAuthenPath(jsonData);
-                    if (jsonData.isWealthAccount == "1") {
-                        //是否开通财富账户
+                    if(jsonData.isWealthAccount=="0"){
+                        //是否开通财富账户   0开通  非0 没有开通  6
+                        that.gV.realLi.eq(0).hide()  
+                    }else{
                         that.gV.realLi.eq(0).show()
-                    } else {
-                        that.gV.realLi.eq(0).hide()
                     }
-                    if (jsonData.isRiskEndure == "0" || jsonData.isRiskEndure == null) {
+                    if(jsonData.isRiskEndure=="0"||jsonData.isRiskEndure == null){
                         //是否风测
-                        that.gV.realLi.eq(1).show()
-                    } else {
+                        that.gV.realLi.eq(1).show()  
+                    }else{
                         that.gV.realLi.eq(1).hide()
                     }
-                    if (jsonData.isPerfect == "0" || jsonData.isPerfect == null) {
-                        //是否完善资料
-                        that.gV.realLi.eq(2).show()
-                    } else {
+                    if(jsonData.isPerfect=="0" ||jsonData.isPerfect== null||jsonData.isWealthAccount == "5"){
+                        //是否完善资料  isWealthAccount 用户过期
+                        that.gV.realLi.eq(2).show()  
+                    }else{
                         that.gV.realLi.eq(2).hide()
                     }
-                    if (jsonData.isInvestFavour == "0" || jsonData.isInvestFavour == null) {
+                    if(jsonData.isInvestFavour=="0" || jsonData.isInvestFavour == null){
                         //是否投资者分类
-                        that.gV.realLi.eq(3).show()
-                    } else {
+                        that.gV.realLi.eq(3).show()  
+                    }else{
                         that.gV.realLi.eq(3).hide()
                     }
-                    if (jsonData.isRiskMatch == "0" || jsonData.isRiskMatch == null) {
+                    if(jsonData.isRiskMatch=="0" || jsonData.isRiskMatch == null){
                         //是否风险等级
-                        that.gV.realLi.eq(4).show()
-                    } else {
+                        that.gV.realLi.eq(4).show()  
+                    }else{
                         that.gV.realLi.eq(4).hide()
                     }
                     that.gV.realLi.eq(4).hide()
