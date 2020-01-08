@@ -54,6 +54,7 @@ $(function() {
 			isHighAgeStatus:true,  //投资者年龄默认小于60的状态为true  大于就位false
 			isWealthAccountStatus:"", //是否开通账户状态
 			accountType:null,   //客户类型  0-机构 1-个人
+			userStatus:"", // 为空则是新用户   为0普通投资者  为1专业投资者
 		},
 
 		init: function(){
@@ -62,6 +63,7 @@ $(function() {
 			// that.getTypeOneData()
 			that.getData()
 			that.getUserInfo();  //获取用户类型
+			that.getUserInfo_1(); //用户身份信息
 			that.event()
 		},
 
@@ -479,6 +481,21 @@ $(function() {
             }];
             $.ajaxLoading(obj);
 		},
+		  //获取用户信息
+		  getUserInfo_1:function(){
+			var that = this;
+			var obj = [{
+				url:site_url.user_api,
+				data:{
+
+				},
+				callbackDone:function(json){
+					var data = json.data
+				    that.gV.userStatus = data.investFavour
+				}
+			}];
+			$.ajaxLoading(obj);
+		},
 		// 获取客户类型
         getUserInfo: function () {
             var that = this;
@@ -633,6 +650,12 @@ $(function() {
 							that.data.realLi.eq(4).show()  
 						}else{
 							that.data.realLi.eq(4).hide()
+						}
+						if(jsonData.investorStatus =="0"&&that.gV.userStatus==""){
+                            //直接申请为专业投资者
+                            that.gV.tipsWrap.show()
+                            that.gV.realLi.show();
+                            that.gV.realLi.eq(3).show()  
                         }
 						that.data.realLi.eq(4).hide() 
 
@@ -926,7 +949,12 @@ $(function() {
 					case 3:  //投资者分类
 					if(that.gV.isWealthAccountStatus){
 						//开通了账户
-						window.location.href = site_url.investorClassification_url
+						if(jsonData.investorStatus =="0"&&that.gV.userStatus==""){
+							//申请为投资者
+							window.location.href = site_url.investorClassificationResult_url
+						}else{
+							window.location.href = site_url.investorClassification_url
+						}
 					}else{
 						$("#tips-wrap").hide()
 						$(".isRiskMatchBox").show();
@@ -990,7 +1018,12 @@ $(function() {
 					case "isInvestFavour":  //投资者分类
 					if(that.gV.isWealthAccountStatus){
                         //开通了账户
-                        window.location.href = site_url.investorClassification_url
+                        if(jsonData.investorStatus =="0"&&that.gV.userStatus==""){
+							//申请为投资者
+							window.location.href = site_url.investorClassificationResult_url
+						}else{
+							window.location.href = site_url.investorClassification_url
+						}
                     }else{
                         $("#tips-wrap").hide()
                         $(".isRiskMatchBox").show();

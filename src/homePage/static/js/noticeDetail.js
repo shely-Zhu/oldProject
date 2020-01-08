@@ -54,17 +54,12 @@ $(function(){
                 needDataEmpty: true,
                 callbackDone: function(json) {
                     var data=json.data; 
-                    if(data.mesContent && data.mesContent != '') {
-                        $("#informsDetailContent")[0].innerHTML = data.mesContent
-                    } else {
-                        //$(".noData").show()
-                        //$("#informsDetailBox").hide()
+                    if(data.mesTitle && data.mesTitle != '') {
+                        $(".detailTitle").show()
+                        $(".detailTitle").html(data.mesTitle)
                     }
-                    //generateTemplate(data,that.$e.noticeConTemplateId,that.$e.noticeItemListTemplateId);               
-                },
-                callbackNoData: function() {
-                    /*$(".noData").show()
-                    $("#informsDetailBox").hide()*/
+                    console.log(data.mesContent)
+                    $(".detailContentCon").html(data.mesContent)
                 }
             }];                        
             $.ajaxLoading(obj); 
