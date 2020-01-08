@@ -244,11 +244,13 @@ $(function () {
                     $('.redeem_confirm_info .confirm_amount').html(model.accountAmount + " 元");//到账金额
                     $('.redeem_confirm_info .bank_icon').attr('src', model.bankThumbnailUrl);//银行logo
                     $('.redeem_confirm_info .bank_name').html(that.getPayInfo(model.bankName, model.bankAccountMask,model));//银行名称
-                    if(!!model.estimateArrivalDate){//到账时间
+                    // 赎回成功页,因到账时间取不到时分秒,已与产品确认不展示该字段
+                    $(".hoursItem").hide();
+                    /*if(!!model.estimateArrivalDate){//到账时间
                     	$('.redeem_confirm_info .hours_account').html(model.estimateArrivalDate);//到账时间
                     }else{
                     	$(".hoursItem").hide();//到账时间有就显示
-                    }
+                    }*/
                 }
                 //确定状态显示全部确认的信息
                 that.showTradeArea(true, model);

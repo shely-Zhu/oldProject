@@ -68,7 +68,7 @@ $(function () {
         init: function () {
             var that = this;
             that.getData(); // 获取基金详情
-            that.getFundCollectionInit() //收藏管理--判断是否被收藏
+
             that.getUserInfo();  //获取用户类型
             that.events();
             // that.getData1(); // 查询基金的历史收益（货币基金）/历史净值（普通基金）
@@ -98,11 +98,12 @@ $(function () {
                 callbackDone: function (json) {
                     that.gV.json = json.data
                     that.gV.json.fundType = that.fundType
+                    that.gV.json.chgRat1d = that.gV.json.chgRat1d.toFixed(2)
                     if(that.gV.json.chgRat1d > 0){
-                        that.gV.json.chgRat1d_s  = '+' + that.gV.json.chgRat1d.toFixed(2)
+                        that.gV.json.chgRat1d_s  = '+' + Number(that.gV.json.chgRat1d).toFixed(2)
                     }
                     if(that.gV.json.annYldRat > 0){
-                        that.gV.json.annYldRat_s  = '+' + that.gV.json.annYldRat.toFixed(2)
+                        that.gV.json.annYldRat_s  = '+' +Number(that.gV.json.annYldRat).toFixed(2)
                     }
                     that.gV.json.tradeLimitList.forEach(function(item){
                         if(item.fundBusinCode == that.gV.fundBusinCode){
@@ -122,12 +123,12 @@ $(function () {
                     that.gV.invTypCom = json.data.invTypCom
                     that.gV.secuSht = json.data.secuSht
                     //test
-                    that.gV.json.tradeLimitFlag2 = true
-                    // if(that.gV.json.tradeLimitFlag == "1"){
-                    //     that.gV.json.tradeLimitFlag2 = true
-                    // }else{
-                    //     that.gV.json.tradeLimitFlag2 = false
-                    // }
+                   // that.gV.json.tradeLimitFlag2 = true
+                    if(that.gV.json.tradeLimitFlag == "1"){
+                        that.gV.json.tradeLimitFlag2 = true
+                    }else{
+                        that.gV.json.tradeLimitFlag2 = false
+                    }
                     var html = template(that.gV.json); (html, "00");
                     if(!that.gV.json.discount){
                         that.gV.discountStatus = false
@@ -136,6 +137,7 @@ $(function () {
                     }
                     
                     $(".tplBox").html(html); 
+                    that.getFundCollectionInit() //收藏管理--判断是否被收藏
                     that.getData1();
                     that.getData2('1', 1); // 获取echarts数据
                     var historyStr = that.fundType ? '<div class="item_name">日期</div><div class="item_name">七日年化</div><div class="item_name">万份收益(元)</div>' : '<div class="item_name">日期</div><div class="item_name">单位净值</div><div class="item_name">累计净值</div><div class="item_name">日涨幅</div>'
@@ -186,9 +188,6 @@ $(function () {
                    }
                   
                 },
-                callbackFail: function (json) {
-                    tipAction(json.message);
-                },
                 callbackNoData:function(json){
 					tipAction(json.message);
 				},
@@ -207,9 +206,6 @@ $(function () {
                 callbackDone: function (json) {
                     var data = json.data
                     that.gV.accountType = data.accountType
-                },
-                callbackFail: function (json) {
-                    tipAction(json.message);
                 },
                 callbackNoData:function(json){
 					tipAction(json.message);
@@ -244,8 +240,12 @@ $(function () {
                             if(jsonData.isWealthAccount == "0"&&jsonData.isRiskEndure == "1"&&jsonData.isPerfect == "1"&&jsonData.isInvestFavour=="1"){
                                 that.gV.realLi.hide();
                                 that.gV.tipsWrap.hide();
-                                $(".isRiskMatchBox").show();
-                                $(".isRiskMatch_mask").show();
+                                if(jsonData.isIdnovalid=="1"){
+                                    //证件已过期
+                                    tipAction('因过期原因该账户被冻结，请联系理财师或咨询客服！客服电话：400-8980-618');
+                                    return false;
+                                }
+
                                 if(jsonData.isHighAge=="1"&&that.gV.isHighAgeStatus){
                                    //年龄校验
                                     //that.gV.isHighAgeStatus = false;
@@ -265,6 +265,9 @@ $(function () {
                                     $(".isRiskMatchResult").attr("type","isZdTaLimit")
                                     return false;
                                 }
+
+                                $(".isRiskMatchBox").show();
+                                $(".isRiskMatch_mask").show();
 
                                 if(jsonData.isRiskMatch == "1"){
                                     //风险等级匹配
@@ -294,25 +297,22 @@ $(function () {
                                 that.gV.tipsWrap.show()
                                 that.gV.realLi.show();    
                             }
-
-
                       
-                        that.gV.singleaAuthenPath = that.getSingleaAuthenPath(jsonData);
-                       
+                        that.gV.singleaAuthenPath = that.getSingleaAuthenPath(jsonData);              
 						if(jsonData.isWealthAccount=="0"){
-							//是否开通财富账户   0开通  非0 没有开通
+							//是否开通财富账户   0开通  非0 没有开通  6
 							that.gV.realLi.eq(0).hide()  
 						}else{
 							that.gV.realLi.eq(0).show()
-						}
+                        }
 						if(jsonData.isRiskEndure=="0"||jsonData.isRiskEndure == null){
 							//是否风测
 							that.gV.realLi.eq(1).show()  
 						}else{
 							that.gV.realLi.eq(1).hide()
 						}
-						if(jsonData.isPerfect=="0" ||jsonData.isPerfect== null){
-							//是否完善资料
+						if(jsonData.isPerfect=="0" ||jsonData.isPerfect== null||jsonData.isWealthAccount == "5"){
+							//是否完善资料  isWealthAccount 用户过期
 							that.gV.realLi.eq(2).show()  
 						}else{
 							that.gV.realLi.eq(2).hide()
@@ -330,12 +330,6 @@ $(function () {
 							that.gV.realLi.eq(4).hide()
                         }
                         that.gV.realLi.eq(4).hide()
-
-                },
-                callbackFail: function(json) { //失败后执行的函数
-                   tipAction(json.message);
-					//that.data.canClick = true; //变为可点击
-
                 },
                 callbackNoData:function(argument) {
                     tipAction(json.message);
@@ -642,9 +636,6 @@ $(function () {
                     $(".selected_area").addClass('active')
                    }
                 },
-                callbackFail: function (json) {
-                    tipAction(json.message);
-                }
             }]
             $.ajaxLoading(obj);
         },
@@ -676,9 +667,6 @@ $(function () {
                         tipAction('删除自选成功');
                     }
                     
-                },
-                callbackFail: function (json) {
-                    tipAction(json.message);
                 }
             }]
             $.ajaxLoading(obj);
@@ -717,9 +705,6 @@ $(function () {
                             $(v).addClass('value_green')
                         }
                     });
-                },
-                callbackFail: function (json) {
-                    tipAction(json.msg);
                 }
             }]
             $.ajaxLoading(obj);
@@ -805,9 +790,6 @@ $(function () {
 
                     that.drawLine(type, newData)
 
-                },
-                callbackFail: function (json) {
-                    tipAction(json.msg);
                 }
             }]
             $.ajaxLoading(obj);

@@ -75,9 +75,6 @@ var prvMar = {
                 }
 
             },
-            callbackFail: function(data) {
-                tipAction(data.msg);
-            },
             callbackNoData: function() {
                 $('.without.noData').show();
 

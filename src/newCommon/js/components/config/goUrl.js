@@ -333,6 +333,8 @@ module.exports = function() {
     this.journal_url = go_url.no_url + '/mine/views/journal.html'
         //承接h5的模板页地址
     this.examplePage_url = go_url.no_url + '/mine/views/examplePage.html';
+    // 完善资料页面
+    this.perfectInfo_url = go_url.no_url + '/mine/views/perfectInfo.html';
     /*-------------------------------我的页面 end -----------------------*/
 
     /*-------------------------------活动列表 start -----------------------*/

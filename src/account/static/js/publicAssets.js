@@ -90,9 +90,6 @@ $(function () {
                     that.chooseTipDesc();
                     that.renderView();
                     that.events();
-                },
-                callbackFail: function (data) {
-                    console.log('加载失败');
                 }
             }];
             $.ajaxLoading(obj);
@@ -210,7 +207,6 @@ $(function () {
             })
             //购买
             mui("body").on('mdClick', '.buy_btn', function (e) {
-                debugger
                 var fundCode = $(this).attr("fundCode");
                 var fundName = $(this).attr("fundName");
                 var id = $(this).parent().parent().parent().parent().attr("id")

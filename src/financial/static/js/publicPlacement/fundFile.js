@@ -326,6 +326,7 @@ $(function () {
                     pageCurrent: that.gV.pageCurrent3,
                     pageSize: that.gV.pageSize3
                 },
+                needLoading: false,
                 callbackDone: function (json) {
                     var data = json.data.pageList || []
                     setTimeout(function() {
@@ -396,6 +397,7 @@ $(function () {
                     pageCurrent: that.gV.pageCurrent4,
                     pageSize: that.gV.pageSize4
                 },
+                needLoading: false,
                 callbackDone: function (json) {
                     var data = json.data.pageList || []
                     setTimeout(function() {

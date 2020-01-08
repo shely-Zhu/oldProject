@@ -301,9 +301,6 @@ $(function () {
                 callbackDone: function(json) {
                     var data = json.data
                     that.gV.accountType = data.accountType
-                },
-                callbackFail: function(json) {
-                    tipAction(json.msg);
                 }
             }]
             $.ajaxLoading(obj);

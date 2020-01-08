@@ -134,9 +134,6 @@ $(function() {
                     }, 200)
 
                 },
-                callbackFail: function(json) {
-
-                },
                 callbackNoData: function(json) {
                     that.$e.listLoading.hide();
                 }
@@ -212,9 +209,6 @@ $(function() {
                     }, 200)
 
                 },
-                callbackFail: function(json) {
-
-                },
                 callbackNoData: function(json) {
 
                 }
@@ -276,10 +270,6 @@ $(function() {
                         window.indexedList = new mui.IndexedList($('#list')[0]);
                     });
                 },
-                callbackFail: function(json) {
-                    console.log(json.message)
-                    tipAction(json.message);
-                }
             }];
             $.ajaxLoading(obj);
         },
@@ -306,10 +296,6 @@ $(function() {
                     });
                     that.initMui();
                 },
-                callbackFail: function(json) {
-                    console.log(json.message)
-                    tipAction(json.message);
-                }
             }];
             $.ajaxLoading(obj);
         },
