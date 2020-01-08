@@ -111,8 +111,8 @@ var monthReportDetail = {
 				var month = now.substring(5,7);
 				that.getElements.month = month;
 				var dayTime = json.reportTime;
-				var year = dayTime.split('-')[0];
-				var month = dayTime.split('-')[1].split('-')[0];
+				var year = dayTime.split('年')[0];
+				var month = dayTime.split('年')[1].split('月')[0];
 				that.getMonthDateRange(year,month);
 				
 				that.queryInvestProdHoldShareList();
