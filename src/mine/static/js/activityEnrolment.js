@@ -108,6 +108,7 @@ $(function() {
                             morelist.actEndDate = morelist.actEndDate ? moment(morelist.actEndDate).format('MM月至DD日') : '';
                         }
                         setTimeout(function() {
+                            $(".more").show()
                             generateTemplate(morelist, that.$e.moreSlot, that.$e.moreTemp);
                         }, 200)
                     }

@@ -12,23 +12,23 @@ var setCookie = require('@pathNewCommonJsCom/setCookie.js');
 var frozenAccount = require('@pathCommonJs/components/frozenAccount.js');
 require('@pathCommonCom/elasticLayer/elasticLayer/elasticLayer.js');
 
-$(function () {
+$(function() {
 
     var somePage = {
         gV: { // 全局变量
             showBankList: false,
-            data: '',//请求到的总资产data
-            isShowInfo: true,//是否展示信息 默认展示
+            data: '', //请求到的总资产data
+            isShowInfo: true, //是否展示信息 默认展示
             listLoading: $('.listLoading') //所有数据区域，第一次加载的loading结构
 
         },
-        init: function () {
+        init: function() {
             var that = this;
             that.getData('');
             that.getBankList();
             that.initRightBtn();
         },
-        getBankList: function () {
+        getBankList: function() {
             //查询银行卡列表
             var that = this;
             var param = {
@@ -39,18 +39,18 @@ $(function () {
             var obj = [{
                 url: site_url.normalPofList_api,
                 data: param,
-                needLogin: true,//需要判断是否登陆
+                needLogin: true, //需要判断是否登陆
                 //needDataEmpty: false,//不需要判断data是否为空
-                callbackDone: function (json) {  //成功后执行的函数
+                callbackDone: function(json) { //成功后执行的函数
                     if (json.data.pageList.length) {
                         //获取银行卡后四位
-                        Handlebars.registerHelper("get_last_4_value", function (value, options) {
-                            if (value.length > 4){
+                        Handlebars.registerHelper("get_last_4_value", function(value, options) {
+                            if (value.length > 4) {
                                 return ' - ' + value.substring(value.length - 4);
                             }
                             return '';
                         });
-                        json.data.pageList.unshift({'bankName': '全部', 'bankAccountMask': ''})
+                        json.data.pageList.unshift({ 'bankName': '全部', 'bankAccountMask': '' })
                         var tplm = $("#bankLists").html();
                         var template = Handlebars.compile(tplm);
                         var html = template(json.data.pageList);
@@ -63,7 +63,7 @@ $(function () {
             $.ajaxLoading(obj);
 
         },
-        getData: function (bankAccount) {
+        getData: function(bankAccount) {
             var that = this;
             var obj = [{ // 公募总资产
                 url: site_url.pofTotalAssets_api,
@@ -72,15 +72,15 @@ $(function () {
                 },
                 //async: false,
                 needDataEmpty: true,
-                callbackDone: function (json) {
-                    if (json.status == '1000'){
+                callbackDone: function(json) {
+                    if (json.status == '1000') {
                         $('.noData').show();
                         return;
                     }
                     that.gV.listLoading.hide();
                     that.gV.data = json.data;
                     //设置比较器
-                    Handlebars.registerHelper("if_than_0", function (value, options) {
+                    Handlebars.registerHelper("if_than_0", function(value, options) {
                         if (value > 0) {
                             return options.fn(this);
                         } else {
@@ -90,14 +90,17 @@ $(function () {
                     that.chooseTipDesc();
                     that.renderView();
                     that.events();
+                },
+                callbackNoData: function(json) {
+                    $('.noData').show();
                 }
             }];
             $.ajaxLoading(obj);
         },
-        renderView: function (){
+        renderView: function() {
             var that = this;
             //渲染整个页面 flag=true 渲染真实数据  flag=false 渲染成为***
-            if (that.gV.isShowInfo){
+            if (that.gV.isShowInfo) {
                 //总资产
                 $('.totalM').html(that.gV.data.myAssetTotalMask);
                 //待确认金额
@@ -106,13 +109,13 @@ $(function () {
                 $('.first_h_profit_box .h_profit_value').html(that.addSymbol(that.gV.data.todayProfit, that.gV.data.todayProfitMask));
                 //持仓总收益
                 $('.second_h_profit_box .h_profit_value').html(that.addSymbol(that.gV.data.cumulativeProfit, that.gV.data.cumulativeProfitMask));
-                
+
                 //现金宝列表渲染
                 var tplm = $("#cashLists").html();
                 var template = Handlebars.compile(tplm);
                 var html = template(that.gV.data.cashDetails);
                 $("#cashPageLists").html(html);
-                
+
                 //普通基金列表渲染
                 var tplm = $("#dataLists").html();
                 var template = Handlebars.compile(tplm);
@@ -121,11 +124,11 @@ $(function () {
                 //模板渲染完毕后展示没有更多数据的样式
                 $('footer').removeClass('hide');
 
-                if(that.gV.data.fundDetailList.length==0&&that.gV.data.cashDetails.length==0){
-                     $(".noData").show()
-                     $('footer').hide()
+                if (that.gV.data.fundDetailList.length == 0 && that.gV.data.cashDetails.length == 0) {
+                    $(".noData").show()
+                    $('footer').hide()
                 }
-               
+
                 //渲染完模板后再添加事件
             } else {
                 //所有标位显示的区域都更换为****
@@ -133,21 +136,21 @@ $(function () {
                 $('.position_h').css('color', '#272727');
             }
         },
-        initRightBtn: function(){
+        initRightBtn: function() {
             //初始化右上角的按钮btn
-            $('.rightBtn').show().html('交易记录').css('color','#fff');
-            mui("body").on('mdClick', '.rightBtn', function (e) {
-                setCookie("transactionRecordsAjaxData","", -1);
-                setCookie("transactionRecordsShowData","", -1);
+            $('.rightBtn').show().html('交易记录').css('color', '#fff');
+            mui("body").on('mdClick', '.rightBtn', function(e) {
+                setCookie("transactionRecordsAjaxData", "", -1);
+                setCookie("transactionRecordsShowData", "", -1);
                 window.location.href = site_url.transactionRecords_url;
-            },{
+            }, {
                 'htmdEvt': 'publicAssets_0'
             })
         },
-        bankEvents: function () { //绑定事件
+        bankEvents: function() { //绑定事件
             var that = this;
             //点击筛选银行卡
-            mui("body").on('mdClick', '#bank_screen', function (e) {
+            mui("body").on('mdClick', '#bank_screen', function(e) {
                 that.gV.showBankList = !that.gV.showBankList;
                 $(".noData").hide()
                 if (that.gV.showBankList) {
@@ -157,11 +160,11 @@ $(function () {
                     $('.bank_list').hide();
                     $('#bank_screen .iconfont').html('&#xe609;');
                 }
-            },{
+            }, {
                 'htmdEvt': 'publicAssets_11'
             })
             //银行卡列表点击
-            mui("body").on('mdClick', '.bank_item', function (e) {
+            mui("body").on('mdClick', '.bank_item', function(e) {
                 $(this).find('.iconfont').removeClass('hide');
                 $(this).siblings().find('.iconfont').addClass('hide');
                 $(this).addClass('bank_listactive');
@@ -175,116 +178,116 @@ $(function () {
                 that.gV.showBankList = !that.gV.showBankList;
                 $('.bank_list').hide();
                 $('#bank_screen .iconfont').html('&#xe609;');
-            },{
+            }, {
                 'htmdEvt': 'publicAssets_12'
             })
         },
-        events: function () { //绑定事件
+        events: function() { //绑定事件
             var that = this;
             //普通基金item的点击 进入持仓详情
-            mui("body").on('mdClick', '#pageLists .hold_item', function (e) {
+            mui("body").on('mdClick', '#pageLists .hold_item', function(e) {
                 var index = $(this).index();
                 var fundCode = $(this).attr("data-fundCode")
                 var tradeNo = $(this).attr("data-tradeNo")
-                window.location.href=site_url.optionalPublicDetail_url+'?fundCode='+fundCode+'&tradeNo='+tradeNo
-            },{
+                window.location.href = site_url.optionalPublicDetail_url + '?fundCode=' + fundCode + '&tradeNo=' + tradeNo
+            }, {
                 'htmdEvt': 'publicAssets_1'
             })
             //现金宝基金item的点击 进入持仓详情
-            mui("body").on('mdClick', '#cashPageLists .hold_item', function (e) {
+            mui("body").on('mdClick', '#cashPageLists .hold_item', function(e) {
                 var index = $(this).index();
-                window.location.href=site_url.superStreasureDetail_url + '?fundCode=' + that.gV.data.cashDetails[index].fundCode;
-            },{
+                window.location.href = site_url.superStreasureDetail_url + '?fundCode=' + that.gV.data.cashDetails[index].fundCode;
+            }, {
                 'htmdEvt': 'publicAssets_2'
             })
             //点击持仓列表的感叹号 进入交易明细明细
-            mui("body").on('mdClick', '.position_tip', function (e) {
+            mui("body").on('mdClick', '.position_tip', function(e) {
                 //跳转到收益明细
                 window.location.href = site_url.returnsDetail_url + '?fundCode=' + $(this).attr('data-fundcode');
                 return false;
-            },{
+            }, {
                 'htmdEvt': 'publicAssets_3'
             })
             //购买
-            mui("body").on('mdClick', '.buy_btn', function (e) {
+            mui("body").on('mdClick', '.buy_btn', function(e) {
                 var fundCode = $(this).attr("fundCode");
                 var fundName = $(this).attr("fundName");
                 var id = $(this).parent().parent().parent().parent().attr("id")
-                var flag = frozenAccount("buyFreeze", window.location.href,'','privateDetail_13')
-                if(!flag) {
-                    if (id =="cashPageLists"){
+                var flag = frozenAccount("buyFreeze", window.location.href, '', 'privateDetail_13')
+                if (!flag) {
+                    if (id == "cashPageLists") {
                         //现金宝
-                        window.location.href = site_url.pofCashTransformIn_url+"?fundCode="+fundCode+"&noReload=1";   
+                        window.location.href = site_url.pofCashTransformIn_url + "?fundCode=" + fundCode + "&noReload=1";
                     } else {
                         //普通基金
                         window.location.href = site_url.fundTransformIn_url + '?fundCode=' + fundCode + '&fundName=' + fundName;
                     }
                 }
                 return false
-            },{
+            }, {
                 'htmdEvt': 'publicAssets_4'
             })
             //赎回
-            mui("body").on('mdClick', '.redeem_btn', function (e) {
+            mui("body").on('mdClick', '.redeem_btn', function(e) {
                 var index = $(this).parent().parent().parent().index();
                 var id = $(this).parent().parent().parent().parent().attr("id")
                 var tradeNo = $(this).parent().parent().parent().attr("data-tradeNo")
                 var fundCode = $(this).parent().parent().parent().attr("data-fundCode")
                 // 转出时判断是否有司法冻结
-                var flag = frozenAccount("saleFreeze", window.location.href,'','privateDetail_13')
-                if(!flag) {
-                    if(id =="cashPageLists" ){
+                var flag = frozenAccount("saleFreeze", window.location.href, '', 'privateDetail_13')
+                if (!flag) {
+                    if (id == "cashPageLists") {
                         //现金宝
                         var fundCode = that.gV.data.cashDetails[index].fundCode
                         var productName = that.gV.data.cashDetails[index].fundName
                         window.location.href = site_url.pofCashTransformOut_url + '?fundCode=' + fundCode + '&productName=' + new Base64().encode(productName);
-                    }else if(id == "pageLists"){
-                         window.location.href = site_url.redemptionBuy_url + '?tradeNo=' + tradeNo + "&fundCode=" + fundCode
-                    }else{
+                    } else if (id == "pageLists") {
+                        window.location.href = site_url.redemptionBuy_url + '?tradeNo=' + tradeNo + "&fundCode=" + fundCode
+                    } else {
                         return false
                     }
                 }
                 return false
-            },{
+            }, {
                 'htmdEvt': 'publicAssets_5'
             })
             // 头部文案提示(金钱展示隐藏)
-            mui("body").on('mdClick', '.j_icon', function (e) {
+            mui("body").on('mdClick', '.j_icon', function(e) {
                 $('.j_icon').addClass('eyecose');
                 that.gV.isShowInfo = false;
                 that.renderView();
-            },{
+            }, {
                 'htmdEvt': 'publicAssets_6'
             })
-            mui("body").on('mdClick', '.eyecose', function (e) {
+            mui("body").on('mdClick', '.eyecose', function(e) {
                 $('.j_icon').removeClass('eyecose');
                 that.gV.isShowInfo = true;
                 that.renderView();
-            },{
+            }, {
                 'htmdEvt': 'publicAssets_7'
             })
             //打开资产组成说明
-            mui("body").on('mdClick', '.assetsBtn', function (e) {
+            mui("body").on('mdClick', '.assetsBtn', function(e) {
                 $('.mask').show();
                 $('.tipContainer').show();
-            },{
+            }, {
                 'htmdEvt': 'publicAssets_8'
             })
             //关闭资产组成说明
-            mui("body").on('mdClick', '.buttonOne', function (e) {
+            mui("body").on('mdClick', '.buttonOne', function(e) {
                 $('.mask').hide();
                 $('.tipContainer').hide();
-            },{
+            }, {
                 'htmdEvt': 'publicAssets_9'
             })
-            mui('body').on('mdClick', '.position_tip', function (e){
-                
+            mui('body').on('mdClick', '.position_tip', function(e) {
+
                 return false;
-            },{
+            }, {
                 'htmdEvt': 'publicAssets_10'
             })
         },
-        chooseTipDesc: function(){
+        chooseTipDesc: function() {
             var that = this;
             /*that.gV.data.fundDetailList.forEach(element => {
                 //自己处理一下文案的显示
@@ -294,17 +297,17 @@ $(function () {
                     element.myTip = element.canBeSpentMsg;
                 }
             });*/
-            for(var i = 0 ; i < that.gV.data.fundDetailList.length; i++) {
-                if(that.gV.data.fundDetailList[i].isShowDivideMsg == '1' && that.gV.data.fundDetailList[i].divideMsg) {
+            for (var i = 0; i < that.gV.data.fundDetailList.length; i++) {
+                if (that.gV.data.fundDetailList[i].isShowDivideMsg == '1' && that.gV.data.fundDetailList[i].divideMsg) {
                     that.gV.data.fundDetailList[i].myTip = that.gV.data.fundDetailList[i].divideMsg;
-                } else if (that.gV.data.fundDetailList[i].canBeSpentMsg){
+                } else if (that.gV.data.fundDetailList[i].canBeSpentMsg) {
                     that.gV.data.fundDetailList[i].myTip = that.gV.data.fundDetailList[i].canBeSpentMsg;
                 }
             }
         },
-        addSymbol: function (value, valueMask) {
+        addSymbol: function(value, valueMask) {
             //添加正负号
-            if (value > 0){
+            if (value > 0) {
                 return "+" + valueMask;
             } else {
                 return valueMask;
