@@ -10,6 +10,7 @@ require('@pathCommonBase/base.js');
 require('@pathCommonJs/ajaxLoading.js');
 var splitUrl = require('@pathCommonJs/components/splitUrl.js')();
 var generateTemplate = require('@pathCommonJsComBus/generateTemplate.js');
+var frozenAccount = require('@pathCommonJs/components/frozenAccount.js');
 
 
 
@@ -456,13 +457,27 @@ $(function() {
                 })
                 //点击转出跳转
             mui("body").on('mdClick', '.rollOutBtn', function(e) {
+
+                // 账户过期弹窗
+                var result = frozenAccount("saleFreeze", window.location.href, false);
+                if( !result ) {
                     window.location.href = site_url.pofCashTransformOut_url + '?fundCode=' + that.gL.fundCode + '&productName=' + new Base64().encode(that.gL.fundName);
+                };
+
                 }, {
                     'htmdEvt': 'superStreasureDetail_2'
                 })
                 //点击转入跳转
             mui("body").on('mdClick', '.shiftToBtn', function(e) {
-                      that.getConditionsOfOrder(that.gL.fundCode)
+
+                // 账户过期弹窗
+                var result = frozenAccount("buyFreeze", window.location.href, false);
+                if(!result) {
+                    that.getConditionsOfOrder(that.gL.fundCode)
+                }
+
+
+
           //      if (that.gL.accountType === 0 || that.gL.accountType === 2) {
           //          tipAction('暂不支持机构客户进行交易');
           //      } else {
