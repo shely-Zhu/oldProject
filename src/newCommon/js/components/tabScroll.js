@@ -72,7 +72,7 @@
             }
 
             $.each(that.options.navList, function(i, el) {
-                html += '<a class="mui-control-item" href="#move_' + i + '" code=' + el.code + '>' + el.type + '</a>';
+                html += '<a class="mui-control-item" href="#move_' + i + '" num="' + el.num + '" htmdEvt="' + el.htmdEvt + '">' + el.type + '</a>';
             })
             html += '</div></div>';
 
@@ -139,6 +139,10 @@
             //监听mui的tab滑动事件
             document.getElementById('slider').addEventListener('slide', function(e) {
                 console.log('当前索引    ' + e.detail.slideNumber);
+
+                var htmdEvtMui = $('.mui-control-item').eq(Number(e.detail.slideNumber)).attr('htmdEvt');
+
+                window._submitMd && window._submitMd( 3, htmdEvtMui );
 
                 //有内容，不执行
                 if ($('.mui-scroll-wrapper').eq(Number(e.detail.slideNumber) + 1).find('.listCont').hasClass('hasData')) {
