@@ -11,7 +11,7 @@ var data=Mock.mock({
 	message:"success", 
 	data: { 
         modelName:'1',
-        'financialerList|5':[
+        'financialerList':[
             {
                 name:'阎环环',//理财师名字
                 code:'H012345',//理财师工号

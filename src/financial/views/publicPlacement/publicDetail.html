@@ -161,20 +161,32 @@
 						<div class="arrow fundManager">
 							<span class="img"></span>
 						</div>
-						<div class="desc fundManager">
+						{{#if fundManager}}
+						<div class="desc fundManagerText fundManager">
 							{{fundManager}}
 						</div>
+						{{else}}
+						<div class="desc fundManagerText fundManager">
+							--
+						</div>
+						{{/if}}
 					</div>
 					<div class="titleWrap">
 						<div class="title nobold">
 							基金公司
 						</div>
-						<div class="arrow fundCompany">
+						<div class="arrow">
 							<span class="img"></span>
 						</div>
-						<div class="desc fundCompany">
+						{{#if fmcComName}}
+						<div class="desc fundCompanyText fundCompany">
 							{{fmcComName}}
 						</div>
+						{{else}}
+						<div class="desc fundCompanyText fundCompany">
+							--
+						</div>
+						{{/if}}
 					</div>
 					<div class="company_info">
 						基金销售服务由北京恒天明泽基金销售有限公司提供

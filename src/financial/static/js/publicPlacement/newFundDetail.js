@@ -191,9 +191,9 @@ $(function() {
 
                     that.getElements.secuId = jsonData.secuId;
                     // 基金经理
-                    $('.fundManagerTxt').html(jsonData.fundManager);
+                    $('.fundManagerTxt').html(jsonData.fundManager?jsonData.fundManager:"--");
                     // 基金公司
-                    $('.fundCompanyTxt').html(jsonData.fmcComName);
+                    $('.fundCompanyTxt').html(jsonData.fmcComName?jsonData.fmcComName:"--");
                     that.getElements.fmcComId = jsonData.fmcComId;
 
                     // if(that.getElements.productStatus == 1){
@@ -250,14 +250,18 @@ $(function() {
 
             // 基金经理
             mui("body").on('mdClick', ".fundManager", function(e) {
-                window.location.href = site_url.pofFundManager_url + '?fundCode=' + that.getElements.fundCode;
+                if($(".fundManagerTxt").html() != "--"){
+                    window.location.href = site_url.pofFundManager_url + '?fundCode=' + that.getElements.fundCode;
+                }
             }, {
                 htmdEvt: 'newFundDetail_1'
             });
 
             // 基金公司
             mui("body").on('mdClick', ".fundCompany", function(e) {
-                window.location.href = site_url.pofFundCompany_url + '?fundComId=' + that.getElements.fmcComId;
+                if($(".fundCompanyTxt").html() != "--"){
+                  window.location.href = site_url.pofFundCompany_url + '?fundComId=' + that.getElements.fmcComId;                  
+                }
             }, {
                 htmdEvt: 'newFundDetail_2'
             });
