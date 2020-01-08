@@ -360,6 +360,12 @@ $(function() {
         },
         events: function() { //绑定事件
             var that = this;
+            mui("body").on('mdClick', '.list_item', function(e) {
+                var $this = $(this);
+               window.location.href = site_url.articleTemplate_url + "?id=" + $this.attr('id') + '&articleBelong=' + $this.attr('articleBelong');
+            }, {
+                'htmdEvt': 'wealthResearch_01'
+            })
         }
     };
     data.init();
