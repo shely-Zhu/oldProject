@@ -382,13 +382,17 @@ $(function () {
             var fundName = json.chiName ? json.chiName : '中融货币市场基金'
             // 基金经理
             mui("body").on('mdClick', ".fundManager", function (e) {
-                window.location.href = site_url.pofFundManager_url + '?fundCode=' + fundCode
+                if(that.gV.json.fundManager!=""){
+                    window.location.href = site_url.pofFundManager_url + '?fundCode=' + fundCode                                   
+                }
             },{
                 htmdEvt: 'publicDetail_01'
             });
             // 基金公司
             mui("body").on('mdClick', ".fundCompany", function (e) {
-                window.location.href = site_url.pofFundCompany_url + '?fundComId=' + fundComId
+                if(that.gV.json.fmcComName!=""){
+                    window.location.href = site_url.pofFundCompany_url + '?fundComId=' + fundComId
+                }
             },{
                 htmdEvt: 'publicDetail_02'
             });
