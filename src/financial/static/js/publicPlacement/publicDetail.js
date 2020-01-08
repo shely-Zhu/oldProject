@@ -67,6 +67,9 @@ $(function () {
             userStatus:"", // 为空则是新用户   为0普通投资者  为1专业投资者
         },
         fundType: splitUrl['fundType'] == '10300'||splitUrl['fundType'] == '10800' ? 1 : 0, //10300 货币基金类型，其余为普通基金类型
+        fundComId: '',   //基金公司ID
+        secuId:'', // 基金编码
+        chiName:'', // 基金名称
         init: function () {
             var that = this;
             that.getData(); // 获取基金详情
@@ -99,9 +102,14 @@ $(function () {
                     // fundCode:"000847",
                 },
                 callbackDone: function (json) {
-                    that.gV.json = json.data
-                    that.gV.json.fundType = that.fundType
-                    that.gV.json.chgRat1d = that.gV.json.chgRat1d.toFixed(2)
+
+                    that.fundComId = json.data.fmcComId ? json.data.fmcComId : 'gz04tVwXga';
+                    that.secuId = json.data.secuId ? json.data.secuId : '000846.OF';
+                    that.chiName = json.data.chiName ? json.data.chiName : '中融货币市场基金';
+
+                    that.gV.json = json.data;
+                    that.gV.json.fundType = that.fundType;
+                    that.gV.json.chgRat1d = that.gV.json.chgRat1d.toFixed(2);
                     if(that.gV.json.chgRat1d > 0){
                         that.gV.json.chgRat1d_s  = '+' + Number(that.gV.json.chgRat1d).toFixed(2)
                     }
@@ -398,15 +406,11 @@ $(function () {
         },
         events: function () {
             var that = this;
-            var json = that.gV.json
             var fundCode = splitUrl['fundCode']
-            var fundComId = json.fmcComId ? json.fmcComId : 'gz04tVwXga'
-            var secuId = json.secuId ? json.secuId : '000846.OF'
-            var fundName = json.chiName ? json.chiName : '中融货币市场基金'
             // 基金经理
             mui("body").on('mdClick', ".fundManager", function (e) {
                 if(that.gV.json.fundManager!=""){
-                    window.location.href = site_url.pofFundManager_url + '?fundCode=' + fundCode                                   
+                    window.location.href = site_url.pofFundManager_url + '?fundCode=' + fundCode;
                 }
             },{
                 htmdEvt: 'publicDetail_01'
@@ -414,14 +418,14 @@ $(function () {
             // 基金公司
             mui("body").on('mdClick', ".fundCompany", function (e) {
                 if(that.gV.json.fmcComName!=""){
-                    window.location.href = site_url.pofFundCompany_url + '?fundComId=' + fundComId
+                    window.location.href = site_url.pofFundCompany_url + '?fundComId=' + that.fundComId;
                 }
             },{
                 htmdEvt: 'publicDetail_02'
             });
             // 基金档案
             mui("body").on('mdClick', ".fundFile", function (e) {
-                window.location.href = site_url.pofFundFile_url + '?secuId=' + secuId + '&fundCode=' + fundCode;
+                window.location.href = site_url.pofFundFile_url + '?secuId=' + that.secuId + '&fundCode=' + fundCode;
             },{
                 htmdEvt: 'publicDetail_03'
             });
@@ -710,7 +714,6 @@ $(function () {
                     'link': site_url.productPublicShare_url + splitUrl['fundCode'],
                     'img': ''
                 }
-                debugger
                 if (window.isAndroid){
                     window.jsObj.wxShare(JSON.stringify(shareObj));
                 }
