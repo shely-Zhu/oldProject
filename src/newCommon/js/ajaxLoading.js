@@ -364,9 +364,9 @@ var splitUrl = require('./components/splitUrl.js')();
                         if (needLoading) {
                             requestCount -= 1;
                             console.log('done: ' + param.url + "----" + requestCount);
-                            if (requestCount == 0){
-                                $('.netLoading').hide();//数据请求成功 遮罩隐藏
-                            }
+                        }
+                        if (requestCount == 0){
+                            $('.netLoading').hide();//数据请求成功 遮罩隐藏
                         }
                     })
             }

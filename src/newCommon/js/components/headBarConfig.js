@@ -90,10 +90,10 @@ $(function() {
             }
         });
         // 设置返回按钮和title的颜色
-        var goBackColor = $("#HeadBarConfigBox a").attr('goBackColor');
+        var goBackColor = $("#HeadBarConfigBox i").attr('goBackColor');
         var titleColor = $("#HeadBarConfigBox span").attr('titleColor');
         if (goBackColor) {
-            $("#HeadBarConfigBox a").css({ 'color': goBackColor });
+            $("#HeadBarConfigBox i").css({ 'color': goBackColor });
         }
         if (titleColor) {
             $("#HeadBarConfigBox span").css({ 'color': titleColor });
