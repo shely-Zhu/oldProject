@@ -954,7 +954,7 @@ $(function() {
                         if (v.conditionType == 1 && !v.isSatisfied) { //财富账户是否开通，需要给app携带，0未开通，1开通
                             that.data.isOpenWealth = 0;
                         }
-                        if (v.conditionType == 5 && !v.isSatisfied) { //合格投资者认证是否满足，需要给app携带
+                        if (v.conditionType == 5 && v.isSatisfied) { //合格投资者认证是否满足，需要给app携带
                             that.data.isSatisfied = v.isSatisfied
                         }
                         if (v.conditionType == 6 && !!v.isPopup) { //是否弹出期限不符弹框
