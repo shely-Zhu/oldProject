@@ -464,7 +464,7 @@ $(function() {
             // })
             // 点击--分享给好友
             mui("body").on('mdClick', '.recommendShareFriend', function() {
-                debugger
+                // debugger
                 // if(that.list.length < 0){
                 //     // 当没有理财师的时候提示？
                 //     // tipAction('完成实名认证后才可以推荐好友哦')
@@ -482,7 +482,7 @@ $(function() {
             })
             // 点击--分享到朋友圈
             mui("body").on('mdClick', '.recommendShareWechart', function() {
-                debugger
+                // debugger
                 if(that.list.length < 0){
                     // tipAction('完成实名认证后才可以推荐好友哦')
                 }
