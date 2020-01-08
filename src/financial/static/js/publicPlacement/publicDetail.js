@@ -63,6 +63,7 @@ $(function () {
                 sinceNow: {}
             },
             symboltype : 'none',	//echarts 节点样式
+            isWealthAccountStatus:"", //是否开通账户状态
         },
         fundType: splitUrl['fundType'] == '10300'||splitUrl['fundType'] == '10800' ? 1 : 0, //10300 货币基金类型，其余为普通基金类型
         init: function () {
@@ -290,12 +291,39 @@ $(function () {
                                 that.gV.tipsWrap.show()
                                 that.gV.realLi.show();    
                             }
-                      
                         that.gV.singleaAuthenPath = that.getSingleaAuthenPath(jsonData);              
 						if(jsonData.isWealthAccount=="0"){
-							//是否开通财富账户   0开通  非0 没有开通  6
+                            //是否开通财富账户   0开通  非0 没有开通  6
+                            that.gV.isWealthAccountStatus = true
 							that.gV.realLi.eq(0).hide()  
 						}else{
+                            that.gV.isWealthAccountStatus =false
+                            if(jsonData.isWealthAccount == "6"){
+                                //司法冻结
+                                that.gV.tipsWrap.hide()
+                                that.gV.realLi.hide(); 
+                                $("#tips-wrap").hide()
+                                $(".isRiskMatchBox").show();
+                                $(".isRiskMatch_mask").show();
+                                $(".isRiskMatchBox_match").show()
+                                $(".isRiskMatchBox_noMatch").hide()
+                                $(".isRiskMatchBox_header").html("因司法原因该账户被冻结，请联系客服咨询，客服电话：400-8980-618")
+                            }
+
+                            if(jsonData.isWealthAccount == "5"){
+                                //身份过期
+                                that.gV.tipsWrap.hide()
+                                that.gV.realLi.hide(); 
+                                $("#tips-wrap").hide()
+                                $(".isRiskMatchBox").show();
+                                $(".isRiskMatch_mask").show();
+                                $(".isRiskMatchBox_match").hide()
+                                $(".isRiskMatchBox_noMatch").show()
+                                $(".isRiskMatchBox_cancel").html("取消")
+                                $(".isRiskMatchResult").html("完善资料")
+                                $(".isRiskMatchResult").attr("type","overdue")
+                                $(".isRiskMatchBox_header").html("您的证件已过期，补充证件信息后才可以继续交易")
+                            }
 							that.gV.realLi.eq(0).show()
                         }
 						if(jsonData.isRiskEndure=="0"||jsonData.isRiskEndure == null){
@@ -304,8 +332,8 @@ $(function () {
 						}else{
 							that.gV.realLi.eq(1).hide()
 						}
-						if(jsonData.isPerfect=="0" ||jsonData.isPerfect== null||jsonData.isWealthAccount == "5"){
-							//是否完善资料  isWealthAccount 用户过期
+						if(jsonData.isPerfect=="0" ||jsonData.isPerfect== null){
+							//是否完善资料   
 							that.gV.realLi.eq(2).show()  
 						}else{
 							that.gV.realLi.eq(2).hide()
@@ -354,13 +382,17 @@ $(function () {
             var fundName = json.chiName ? json.chiName : '中融货币市场基金'
             // 基金经理
             mui("body").on('mdClick', ".fundManager", function (e) {
-                window.location.href = site_url.pofFundManager_url + '?fundCode=' + fundCode
+                if(that.gV.json.fundManager!=""){
+                    window.location.href = site_url.pofFundManager_url + '?fundCode=' + fundCode                                   
+                }
             },{
                 htmdEvt: 'publicDetail_01'
             });
             // 基金公司
             mui("body").on('mdClick', ".fundCompany", function (e) {
-                window.location.href = site_url.pofFundCompany_url + '?fundComId=' + fundComId
+                if(that.gV.json.fmcComName!=""){
+                    window.location.href = site_url.pofFundCompany_url + '?fundComId=' + fundComId
+                }
             },{
                 htmdEvt: 'publicDetail_02'
             });
@@ -408,7 +440,19 @@ $(function () {
                 var type = $(this).parent().index()
                 switch (type) {
                     case 0:   //开通账户
-                        window.location.href = site_url.realName_url
+                        if(that.gV.accountType == 0|| that.gV.accountType == 2){
+                            //机构
+                            $("#tips-wrap").hide()
+                            $(".isRiskMatchBox").show();
+                            $(".isRiskMatch_mask").show();
+                            $(".isRiskMatchBox_match").show()
+                            $(".isRiskMatchBox_noMatch").hide()
+                            $(".isRiskMatchBox_header").html("请联系您的理财师或者拨打客服电话 400-8980-618 进行线下开户")
+                        }else{
+                            //个人
+                            window.location.href = site_url.realName_url
+
+                        }
                         break;
 
                     case 1:   //风险评测
@@ -416,11 +460,34 @@ $(function () {
                         break;
 
                     case 2:   //完善基本信息
-                        window.location.href = site_url.completeInformation_url
+                        if(that.gV.accountType == 0|| that.gV.accountType == 2){
+                            //机构
+                            $("#tips-wrap").hide()
+                            $(".isRiskMatchBox").show();
+                            $(".isRiskMatch_mask").show();
+                            $(".isRiskMatchBox_match").show()
+                            $(".isRiskMatchBox_noMatch").hide()
+                            $(".isRiskMatchBox_header").html("机构客户如需调整基本信息请联系您的理财师")
+                        }else{
+                            //个人
+                            window.location.href = site_url.completeInformation_url
+
+                        }
                         break;
 
                     case 3:  //投资者分类
-                        window.location.href = site_url.investorClassification_url
+                        if(that.gV.isWealthAccountStatus){
+                            //开通了账户
+                            window.location.href = site_url.investorClassification_url
+                        }else{
+                            $("#tips-wrap").hide()
+                            $(".isRiskMatchBox").show();
+                            $(".isRiskMatch_mask").show();
+                            $(".isRiskMatchBox_match").show()
+                            $(".isRiskMatchBox_noMatch").hide()
+                            $(".isRiskMatchBox_header").html("您尚未进行身份认证,认证完成后才可进行投资者分类认证")
+                        }
+                        
                         break;
                     case 4:  //合格投资者认证
                         window.location.href = site_url.chooseQualifiedInvestor_url
@@ -438,20 +505,53 @@ $(function () {
                 var key = that.gV.singleaAuthenPath;
                 switch (key) {
                     case "isWealthAccount":   //开通账户
+                    if(that.gV.accountType == 0|| that.gV.accountType == 2){
+                        //机构
+                        $("#tips-wrap").hide()
+                        $(".isRiskMatchBox").show();
+                        $(".isRiskMatch_mask").show();
+                        $(".isRiskMatchBox_match").show()
+                        $(".isRiskMatchBox_noMatch").hide()
+                        $(".isRiskMatchBox_header").html("请联系您的理财师或者拨打客服电话 400-8980-618 进行线下开户")
+                    }else{
+                        //个人
                         window.location.href = site_url.realName_url
-                        break;
 
+                    }
+                    break;
                     case "isRiskEndure":   //私募风险评测  type=private type=asset 资管风测
                         window.location.href = site_url.riskAppraisal_url + "?type=private"
                         break;
 
                     case "isPerfect":   //完善基本信息
+                    if(that.gV.accountType == 0|| that.gV.accountType == 2){
+                        //机构
+                        $("#tips-wrap").hide()
+                        $(".isRiskMatchBox").show();
+                        $(".isRiskMatch_mask").show();
+                        $(".isRiskMatchBox_match").show()
+                        $(".isRiskMatchBox_noMatch").hide()
+                        $(".isRiskMatchBox_header").html("机构客户如需调整基本信息请联系您的理财师")
+                    }else{
+                        //个人
                         window.location.href = site_url.completeInformation_url
-                        break;
 
+                    }
+                    break;
                     case "isInvestFavour":  //投资者分类
+                    if(that.gV.isWealthAccountStatus){
+                        //开通了账户
                         window.location.href = site_url.investorClassification_url
-                        break;
+                    }else{
+                        $("#tips-wrap").hide()
+                        $(".isRiskMatchBox").show();
+                        $(".isRiskMatch_mask").show();
+                        $(".isRiskMatchBox_match").show()
+                        $(".isRiskMatchBox_noMatch").hide()
+                        $(".isRiskMatchBox_header").html("您尚未进行身份认证,认证完成后才可进行投资者分类认证")
+                    }
+                    
+                    break;
                     case "isRiskMatch":  //合格投资者认证
                         window.location.href = site_url.chooseQualifiedInvestor_url
                         break;
@@ -468,6 +568,10 @@ $(function () {
                  var type = that.gV.singleaAuthenType;
                  $(".isRiskMatch_mask").hide();
                  $(".isRiskMatchBox").hide();
+                 if(!that.gV.isWealthAccountStatus||that.gV.accountType == 0|| that.gV.accountType == 2){
+                     //未开通账户
+                     return false
+                 }
                  if(type == "into"){
                     //买入一键认证
                     window.location.href = site_url.fundTransformIn_url + '?fundCode=' + splitUrl['fundCode'] + '&fundName=' + that.gV.secuSht+"&noReload=1";
@@ -514,6 +618,9 @@ $(function () {
                 }else if(type == "isZdTaLimit"){
                      //跳理财首页
                     window.location.href = site_url.wealthIndex_url
+                }else if(type = "overdue"){
+                    //身份证过期
+                    window.location.href = site_url.completeInformation_url
                 }
                
             },{
@@ -622,9 +729,6 @@ $(function () {
                 needLogin: false,
                 callbackDone: function (json) {
                    var fundCode = splitUrl['fundCode'];
-                   //if(json.data.includes(fundCode)){
-                   // $(".selected_area").addClass('active')
-                   //}
                    if(!!json.data&&json.data.length>0){
                     $(".selected_area").addClass('active')
                    }

@@ -72,7 +72,7 @@
             }
 
             $.each(that.options.navList, function(i, el) {
-                html += '<a class="mui-control-item" href="#move_' + i + '" code=' + el.code + '>' + el.type + '</a>';
+                html += '<a class="mui-control-item" href="#move_' + i + '" num="' + el.num + '" htmdEvt="' + el.htmdEvt + '">' + el.type + '</a>';
             })
             html += '</div></div>';
 
