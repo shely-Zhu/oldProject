@@ -47,6 +47,7 @@ $(function() {
                             "projectId":that.gV.projectId,//项目编号
                         },                        
                         needDataEmpty: true,
+                        needLoading: false,
                         callbackDone: function(json) {     
                             var data = json.data.pageList;
                             if(that.gV.pageCurrent == 1 && data.length == 0) {
