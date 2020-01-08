@@ -93,10 +93,7 @@ $(function() {
                     if(that.gV.pageCurrent == 1) {
                         $(".list").css("display", "none")
                     }
-                },
-                callbackFail: function(json) {
-                	tipAction(json.message);
-                },
+                }
 			}];
 			$.ajaxLoading(Obj);
 		},

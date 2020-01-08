@@ -159,9 +159,6 @@ $(function() {
                         }, 200)
 
                     },
-                    callbackFail: function(json) {
-                        tipAction(json.message);
-                    },
                     callbackNoData: function(json) {
                         if (!json.data.activityVoPageInfo && that.gV.startPage == 1) {
                             var topHeitgh = $('#activitySearch').height();
@@ -261,10 +258,6 @@ $(function() {
                         mui.ready(function() {
                             window.indexedList = new mui.IndexedList($('#list')[0]);
                         });
-                    },
-                    callbackFail: function(json) {
-                        console.log(json.message)
-                        tipAction(json.message);
                     }
                 }];
                 $.ajaxLoading(obj);
@@ -286,10 +279,6 @@ $(function() {
                         });
                         that.gV.actCityName = name;
                         that.initMui();
-                    },
-                    callbackFail: function(json) {
-                        console.log(json.message)
-                        tipAction(json.message);
                     }
                 }];
                 $.ajaxLoading(obj);

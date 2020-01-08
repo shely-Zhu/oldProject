@@ -113,9 +113,6 @@ $(function() {
                         $(".recommendBoxUserName").html(json.data.oldName)
                         that.initialPage()
                     }
-                },
-                callbackFail: function(json) {
-                    tipAction(json.message);
                 }
 
             }];

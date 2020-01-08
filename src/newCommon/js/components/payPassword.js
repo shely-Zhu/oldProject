@@ -36,13 +36,24 @@ var fixScroll = function(num,oHeight){//ios浏览器需要滚动
 	var u = navigator.userAgent;
 	var isiOS = !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/); //ios终端
 	var isAndroid = u.indexOf('Android') > -1 || u.indexOf('Linux') > -1; //g
+	var str= navigator.userAgent.toLowerCase(); 
+    var ver=str.match(/cpu iphone os (.*?) like mac os/);
 	if (isiOS && num == 1) {
 		window.scrollTo(0, 0);
 	}else if(isiOS && num == 2){
-		window.scrollTo(0, 1000);//滚动到可是区域 普通iphone可以滚动到可是区域
+//		document.querySelectorById('#passwordWrap').scrollTop = document.querySelectorById('#passwordWrap').scrollHeight;
+//		document.body.scrollTop = document.body.scrollHeight;
+		var IOSversion = navigator.userAgent.match(/os\s+(\d+)/i)[1] - 0;//获取iOS的系统版本号
+		var isIOS = !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/); //iOS终端
+		if (isIOS && IOSversion <= "11") {
+			document.querySelectorById('#passwordWrap').scroll(0,1000)//iphonex可以滚动到顶部，新版本ios11以上
+		}else{
+			window.scrollTo(0, 1000);//滚动到可是区域 普通iphone可以滚动到可是区域。老版本
+		}
+			
 
-		document.activeElement.scrollIntoViewIfNeeded();//将不在浏览器窗口的可见区域内的元素滚动到浏览器窗口的可见区域。 如果该元素已经在浏览器窗口的可见区域内，则不会发生滚动
-		document.querySelectorById('#passwordWrap').scroll(0,1000)//iphonex可以滚动到顶部
+
+//		document.activeElement.scrollIntoViewIfNeeded();//将不在浏览器窗口的可见区域内的元素滚动到浏览器窗口的可见区域。 如果该元素已经在浏览器窗口的可见区域内，则不会发生滚动
 
 	}
 
@@ -117,13 +128,16 @@ module.exports = function(callback,forgetCall,closeCallback){
 			closeCallback?closeCallback():''
 			
 		})
-		$(".forgetP").on('click',function(){
+		mui("body").on('mdClick','.forgetP',function(){
 			if(!!forgetCall){//如果参数不为空,走传进来的方法
-
+				forgetCall()
 			}else{
-				
+				//跳往原生页面去修改密码
+				window.location.href = site_url.pofForgotPassword_url
 			}
-		})
+		}, {
+			htmdEvt: 'cashTransformIn_12'
+		}) ;
 
 
 }

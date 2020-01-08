@@ -475,9 +475,6 @@ $(function() {
                 callbackNoData: function(json) {
                     // tipAction(json.message);
                     $(".performanceComparison").hide()
-                },
-                callbackFail: function(json) {
-                    tipAction(json.message);
                 }
             }];
             $.ajaxLoading(obj);
@@ -844,10 +841,6 @@ $(function() {
                     }
 
                 },
-                callbackFail: function(json) { //失败后执行的函数
-                    tipAction(json.message);
-
-                },
                 callbackNoData: function(json) {
                     $('.lightPointCon').hide();
                 }
@@ -907,6 +900,8 @@ $(function() {
                 jumpUrl = site_url.qualifiedInvestorResult_url
             }else if (v.conditionJump == 8) { //信息查看（修改证件有效期） 
                 jumpUrl = site_url.completeInfoEditModify_url
+            }else if (v.conditionJump == 9) { //跳转到普通风测
+                jumpUrl = site_url.riskAppraisal_url + '?type=private';
             }else if (v.conditionJump == 11) { //跳转到进身份证上传页面
                 jumpUrl = site_url.realIdcard_url
             } else if (v.conditionJump == 12) { //跳转到人脸识别页面
