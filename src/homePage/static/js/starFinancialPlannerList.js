@@ -347,6 +347,8 @@ $(function() {
                 var txt = $(this).text();
                 var code = $(this).attr('data-code');
                 var parentId = $(this).attr('data-parentId');
+                $('.activityNoListBox').hide()
+                $('.activityNoList').hide()
                 $('#activityDataBox').show();
                 $('#cityListBox').hide();
                 $('#loading').show();
