@@ -456,11 +456,6 @@ $(function() {
 					}
 					that.getTypeOneData()
                 },
-                callbackFail: function(json) { //失败后执行的函数
-                //    tipAction(json.message);
-					//that.data.canClick = true; //变为可点击
-
-                },
                 callbackNoData:function(argument) {
                     tipAction(json.message);
                 }
@@ -546,19 +541,19 @@ $(function() {
 						}
 						that.data.singleaAuthenPath = that.getSingleaAuthenPath(jsonData);
 						if(jsonData.isWealthAccount=="0"){
-							//是否开通财富账户  0开通  非0 没有开通
+							//是否开通财富账户   0开通  非0 没有开通  6
 							that.data.realLi.eq(0).hide()  
 						}else{
 							that.data.realLi.eq(0).show()
-						}
+                        }
 						if(jsonData.isRiskEndure=="0"||jsonData.isRiskEndure == null){
 							//是否风测
 							that.data.realLi.eq(1).show()  
 						}else{
 							that.data.realLi.eq(1).hide()
 						}
-						if(jsonData.isPerfect=="0" ||jsonData.isPerfect== null){
-							//是否完善资料
+						if(jsonData.isPerfect=="0" ||jsonData.isPerfect== null||jsonData.isWealthAccount == "5"){
+							//是否完善资料  isWealthAccount 用户过期
 							that.data.realLi.eq(2).show()  
 						}else{
 							that.data.realLi.eq(2).hide()
@@ -568,13 +563,13 @@ $(function() {
 							that.data.realLi.eq(3).show()  
 						}else{
 							that.data.realLi.eq(3).hide()
-						}
+                        }
 						if(jsonData.isRiskMatch=="0" || jsonData.isRiskMatch == null){
 							//是否风险等级
 							that.data.realLi.eq(4).show()  
 						}else{
 							that.data.realLi.eq(4).hide()
-						}
+                        }
 						that.data.realLi.eq(4).hide() 
 
                 },
@@ -786,26 +781,33 @@ $(function() {
 			mui("body").on('mdClick', '.redeemBtn', function(e) {
 			   	if(!that.data.isRedemptionFlag){//不可赎回
 			   		return false;
-				   }
-				   var result = frozenAccount("saleFreeze", window.location.href, false);
-					if( !!result ) {
-						return false;
-					};
-				window.location.href = site_url.redemptionBuy_url + "?tradeNo=" + splitUrl['tradeNo'] + "&fundCode=" + that.data.fundCode			
+				}
+			    var result = frozenAccount("saleFreeze", window.location.href, false);
+				if( !result ) {
+					window.location.href = site_url.redemptionBuy_url + "?tradeNo=" + splitUrl['tradeNo'] + "&fundCode=" + that.data.fundCode			
+				};
 			},{
                 'htmdEvt': 'optionalPublicDetail_8'
             })
 			// //点击买入
 			mui("body").on('mdClick', '.buyBtn', function(e) {
 				if(!that.data.isBuyFlag){//不可买入
-				   	 	return false;
-				   }
+			   	 	return false;
+			    }
+				var result = frozenAccount("buyFreeze", window.location.href, false);
+				if(!result) {
+					that.getConditionsOfOrder("into");
+					that.gV.singleaAuthenType = "into"
+				}
+				/*if(!that.data.isBuyFlag){//不可买入
+			   	 	return false;
+			    }
 				var result = frozenAccount("saleFreeze", window.location.href, false);
 				if( !!result ) {
 					return false;
 				};
 				that.getConditionsOfOrder("into");
-				that.gV.singleaAuthenType = "into"
+				that.gV.singleaAuthenType = "into"*/
 			//	window.location.href = site_url.fundTransformIn_url+"?fundCode="+that.data.fundCode;			
 			},{
                 'htmdEvt': 'optionalPublicDetail_9'

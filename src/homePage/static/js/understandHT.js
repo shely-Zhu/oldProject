@@ -22,7 +22,8 @@ $(function() {
         init: function() {
             var that = this;
             var sliderHeight = $(window).height() - $(".tabBar").height() - $("#HeadBarConfigBox").height();//获取tab切换内容区高度。
-            if(splitUrl['hairHeight'] || splitUrl['isIphoneX']) {//重新设置高度，防止出现空白
+            // 安卓IOS刘海屏适配
+    		if (splitUrl['hairHeight'] || "true" == splitUrl['isIphoneX']){//重新设置高度，防止出现空白
             	$("#tabHT").css("top","1.53rem");
             	$("#drapUpWrapper .mui-slider-item").css("height",sliderHeight)
             }
@@ -66,10 +67,6 @@ $(function() {
                     })
 
                 },
-                callbackFail: function(json) { //失败后执行的函数
-                    tipAction(json.message);
-
-                },
                 callbackNoData: function(json) {
 
                 }
@@ -97,10 +94,6 @@ $(function() {
                     that.$e.contentWrap.eq(num * 1).html(resData.content);
 
 
-
-                },
-                callbackFail: function(json) { //失败后执行的函数
-                    tipAction(json.message);
 
                 },
                 callbackNoData: function(json) {

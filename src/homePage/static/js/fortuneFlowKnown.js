@@ -135,6 +135,7 @@ $(function() {
                             "articleBelong": that.gV.articleBelong
                         },
                         needDataEmpty: true,
+                        needLoading: false,
                         callbackDone: function(json) {
                             
                             var data = json.data;

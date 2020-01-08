@@ -33,7 +33,7 @@ var monthReportDetail = {
 		// 交易明细
 		that.commonAjax();
 		// 资产情况分析
-		that.assetAnalysis();
+		// that.assetAnalysis();
 		//事件监听
 		that.events();
 	},
@@ -71,9 +71,8 @@ var monthReportDetail = {
 			},
 			needLogin: true,
 			needDataEmpty: true,
-			async: false,
+			// async: false,
 			callbackDone: function(jsons) {
-				debugger
 				$(".netLoading").hide()
 				var json=jsons.data;
 				// 报告月份
@@ -84,8 +83,6 @@ var monthReportDetail = {
 				$('.lifeTerm').html(json.lifeTerm);
 				// 风险等级
 				$('.riskLevel').html(json.riskLevel);
-				// 报告日期
-				$('.reportTime').html(json.reportTime);
 
 				// 报告名称
 				$('#HeadBarpathName').html(json.reportName)
@@ -113,33 +110,47 @@ var monthReportDetail = {
 				var year = now.substring(0,4);
 				var month = now.substring(5,7);
 				that.getElements.month = month;
-				that.getMonthDateRange(year,month);
+				var dayTime = json.reportTime;
+				if(dayTime.indexOf('年') != -1) {
+					year = dayTime.split('年')[0];
+					month = dayTime.split('年')[1].split('月')[0];
+					that.getMonthDateRange(year,month);
+				} else if(dayTime.indexOf('-') != -1) {
+					year = dayTime.split('-')[0];
+					month = dayTime.split('-')[1].split('-')[0];
+					that.getMonthDateRange(year,month);
+				} else{
+					that.getMonthDateRange(year,month);
+				}
+				that.queryInvestProdHoldShareList();
+				that.assetAnalysis();
 
-			},
-			callbackFail: function(json) {
-				//请求失败，
-				//显示错误提示
-				tipAction(json.message);
-			}
-			
-		},{
+			}		
+		},
+		]
+		$.ajaxLoading(obj);
+	},
+	queryInvestProdHoldShareList:function(){
+		var that = this;
+
+		var obj = [{
 			url: site_url.queryInvestProdHoldShareList_api,   // 持仓总览  报告的月末持仓总览
 			data: {
 				reportId: that.getElements.reportId
 			},
 			needLogin: true,
 			needDataEmpty: true,
-			async: false,
+			// async: false,
 			callbackDone: function(json) {
 				$(".netLoading").hide()
 				var jsonData = json.data;
 				if($.util.objIsEmpty(jsonData.pefSaleList) && $.util.objIsEmpty(jsonData.generalModelList) && $.util.objIsEmpty(jsonData.pofList)){
 					//没有数据
 					var reportTimeHtml = '';
-					reportTimeHtml = '截止11'+that.getElements.reportTime+',您暂无持仓信息';
+					reportTimeHtml = '截止'+that.getElements.reportTime+',您暂无持仓信息';
 					$('.holdNodata').show();
-					$('.holdNodata .text1').html(reportTimeHtml);
-					$('.holdNodata .text2').html('截止22'+that.getElements.reportTime+',您暂无持仓信息');
+					$('.holdNodata .text').text(reportTimeHtml);
+
 				}else{
 					var pefSaleList = jsonData.pefSaleList;
 					jsonData.holdPosition = true;
@@ -206,10 +217,8 @@ var monthReportDetail = {
 				//没有数据
 				$('.holdNodata').show();
 				var reportTimeHtml2 =  '';
-				reportTimeHtml2 = '截止33'+that.getElements.reportTime+',您暂无持仓信息';
+				reportTimeHtml2 = '截止'+that.getElements.reportTime+',您暂无持仓信息';
 				$('.holdNodata .text').html(reportTimeHtml2);
-				$('.holdNodata .text').html('截止44'+that.getElements.reportTime+',您暂无持仓信息');
-
 			}
 
 		}]
@@ -552,15 +561,16 @@ var monthReportDetail = {
 		var endDate = moment(startDate).endOf('month');
 
 		// just for demonstration:
-		console.log(startDate.toDate());
-		console.log(endDate.toDate());
+		// console.log(startDate.toDate());
+		// console.log(endDate.toDate());
 		// make sure to call toDate() for plain JavaScript date type
 
 
 		// $('.startDate').html(moment(startDate).format('YYYY-MM-DD'));
-
-		$('.endDate').html(moment(endDate).format('YYYY-MM-DD'));
-
+		var lastday = new Date(year,month,0).getDate();
+		var yearMonthDay = year+ '-' + month + '-' + lastday
+		// $('.endDate').text(moment(endDate).format('YYYY-MM-DD').toString());
+		$('.tipInfo .endDate').text(yearMonthDay);
 		return { start: startDate, end: endDate };
 
 	},

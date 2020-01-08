@@ -62,10 +62,8 @@ $(function() {
     
     // 安卓IOS刘海屏适配
     if (splitUrl['hairHeight'] || "true" == splitUrl['isIphoneX']){
-        if (splitUrl['hairHeight']){
-            $('body').prepend('<div class="hairBox"></div>');
-            $('.hairBox').css({'width': '100%', 'height': '0.26rem', 'background': colors[0], 'position': 'fixed', 'z-index': '999'});
-        }
+        $('body').prepend('<div class="hairBox"></div>');
+        $('.hairBox').css({'width': '100%', 'height': '0.26rem', 'background': colors[0], 'position': 'fixed', 'z-index': '999'});
         $('#HeadBarConfigBox').css('margin-top', '0.24rem');
     }
 

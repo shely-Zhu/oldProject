@@ -187,10 +187,6 @@ $(function() {
                     that.$e.noData.show()
                     that.$e.contentListBox.hide()
                    // window.location.href = site_url.noAccountHoldShare_url
-                },
-                callbackFail: function(json) {
-                    tipAction(json.msg);
-                    //window.location.href = site_url.noAccountHoldShare_url
                 }
             }]
             $.ajaxLoading(obj);
@@ -229,9 +225,6 @@ $(function() {
                     }
 
                     that.drawCircle()
-                },
-                callbackFail: function(json) {
-                    tipAction(json.msg);
                 }
             }]
             $.ajaxLoading(obj);
@@ -324,9 +317,6 @@ $(function() {
                         // 'background':'linear-gradient(to left,#FBE2BD,#D69549)'});
                     }
 
-                },
-                callbackFail: function(json) {
-                    tipAction(json.msg);
                 }
             }]
             $.ajaxLoading(obj);
@@ -351,18 +341,18 @@ $(function() {
                     var data = json.data.industryConfigRatioList;
                     // that.gV.heavyBar.barData = data;
                     var newData = [];
-                    data.forEach(function(item) {
-                        if (Number(item.industryNavRatio) > 0) {
-                            item.industryNavRatio = (Number(item.industryNavRatio) * 100).toFixed(2);
-                            newData.push(item)
-                        }
-                    })
+                    if(!!data&&data.length>0){
+                        data.forEach(function(item) {
+                            if (Number(item.industryNavRatio) > 0) {
+                                item.industryNavRatio = (Number(item.industryNavRatio) * 100).toFixed(2);
+                                newData.push(item)
+                            }
+                        })
+                    }
+                    
                     that.gV.heavyBar.barData = newData
                     that.drawBar(newData, "heavy-warehouse-box");
 
-                },
-                callbackFail: function(json) {
-                    tipAction(json.msg);
                 }
             }]
             $.ajaxLoading(obj);
@@ -414,9 +404,6 @@ $(function() {
 
                     that.drawBar(newData, "volume-distribution-box")
 
-                },
-                callbackFail: function(json) {
-                    tipAction(json.msg);
                 }
             }];
             $.ajaxLoading(obj);
@@ -441,9 +428,6 @@ $(function() {
                     $(".fl8").html(data[8]);
                     $(".fl9").html(data[9]);
 
-                },
-                callbackFail: function(json) {
-                    tipAction(json.msg);
                 }
             }]
             $.ajaxLoading(obj);
@@ -481,9 +465,6 @@ $(function() {
                     }
                     //var star = "当前账户风格为'fundStyle'，配置‘fundType’型基金较多，‘assetConfig’仓位较高，重仓行业为‘heavyIndustry’，债券中‘bondStyle’占比较多"
                     that.$e.diagnosis.html(str)
-                },
-                callbackFail: function(json) {
-                    tipAction(json.msg);
                 }
             }]
             $.ajaxLoading(obj);
@@ -579,10 +560,10 @@ $(function() {
                 'htmdEvt':'fundAccountDiagnosis_05'
             })
 
-            mui("body").on('mdClick','.noDataContent .getReport',function(){
+            mui("body").on('mdClick','.noDatagetReport',function(){
                 that.getConditionsOfOrder();
             },{
-                'htmdEvt':'fundAccountDiagnosis_02'
+                'htmdEvt':'fundAccountDiagnosis_07'
             });
             
             mui("body").on('mdClick','.goUrl_list button',function(){
@@ -656,9 +637,11 @@ $(function() {
             var optionData = []
             var pieData = that.gV.pie.pieData
             console.log("pieData", pieData)
-            pieData.forEach(function(n){
-                optionData.push(n.name)
-            })
+            if(!!pieData&&pieData.length>0){
+                pieData.forEach(function(n){
+                    optionData.push(n.name)
+                })
+            }
             // 指定图表的配置项和数据
             var option = {
                 legend: {

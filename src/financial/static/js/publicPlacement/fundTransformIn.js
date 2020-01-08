@@ -87,9 +87,6 @@ $(function () {
                 callbackDone: function (json) {
                     var data = json.data
                     that.gV.accountType = data.accountType
-                },
-                callbackFail: function (json) {
-                    tipAction(json.msg);
                 }
             }]
             $.ajaxLoading(obj);
@@ -157,7 +154,7 @@ $(function () {
 						}
 						for (var i = 0; i < tradeLimitList2.length; i++) {
 							if(i + 1 == tradeLimitList2.length){
-								that.$el.transformInput.attr('placeholder',tradeLimitList2[i].minValue + '元起')
+								that.$el.transformInput.attr('placeholder',Number(tradeLimitList2[i].minValue).toFixed(0) + '元起')
 								that.$el.transformInput.attr('min',Number(tradeLimitList2[i].minValue).toFixed(0))
 								that.$el.transformInput.attr('max',Number(tradeLimitList2[i].maxValue).toFixed(0))
 								that.gV.minValue =   Number(tradeLimitList2[i].minValue).toFixed(0)  // 起投金额
@@ -237,10 +234,7 @@ $(function () {
 							that.$el.bankListTemplate.find(".bank-pay").show()
 						}
 					tipAction(json.message);
-				},
-				callbackFail:function(json){
-					tipAction(json.message);
-				},
+				}
 
             }];
             $.ajaxLoading(obj);
@@ -355,10 +349,10 @@ $(function () {
 					if(json.status == '0000'){
 						if(!!that.gV.bugFundName){
 							window.location.href = site_url.pofSurelyResultsDetail_url + '?applyId=' + data.allotNo + '&fundBusinCode=' +
-							that.gV.fundBusinCode + "&fundCode=" + that.gV.fundCode + "&payType=" +that.gV.payType + '&flag=buy'+'&bugFundName='+encodeURI(that.gV.bugFundName);
+							data.fundBusinCode + "&fundCode=" + that.gV.fundCode + "&payType=" +that.gV.payType + '&flag=buy'+'&bugFundName='+encodeURI(that.gV.bugFundName);
 						}else{
 							window.location.href = site_url.pofSurelyResultsDetail_url + '?applyId=' + data.allotNo + '&fundBusinCode=' +
-							that.gV.fundBusinCode + "&fundCode=" + that.gV.fundCode + "&payType=" +that.gV.payType + '&flag=buy'+'&bugFundName=false'
+							data.fundBusinCode + "&fundCode=" + that.gV.fundCode + "&payType=" +that.gV.payType + '&flag=buy'+'&bugFundName=false'
 						}
 
 					}

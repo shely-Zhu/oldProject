@@ -188,9 +188,6 @@ $(function () {
                    }
                   
                 },
-                callbackFail: function (json) {
-                    tipAction(json.message);
-                },
                 callbackNoData:function(json){
 					tipAction(json.message);
 				},
@@ -209,9 +206,6 @@ $(function () {
                 callbackDone: function (json) {
                     var data = json.data
                     that.gV.accountType = data.accountType
-                },
-                callbackFail: function (json) {
-                    tipAction(json.message);
                 },
                 callbackNoData:function(json){
 					tipAction(json.message);
@@ -296,25 +290,22 @@ $(function () {
                                 that.gV.tipsWrap.show()
                                 that.gV.realLi.show();    
                             }
-
-
                       
-                        that.gV.singleaAuthenPath = that.getSingleaAuthenPath(jsonData);
-                       
+                        that.gV.singleaAuthenPath = that.getSingleaAuthenPath(jsonData);              
 						if(jsonData.isWealthAccount=="0"){
-							//是否开通财富账户   0开通  非0 没有开通
+							//是否开通财富账户   0开通  非0 没有开通  6
 							that.gV.realLi.eq(0).hide()  
 						}else{
 							that.gV.realLi.eq(0).show()
-						}
+                        }
 						if(jsonData.isRiskEndure=="0"||jsonData.isRiskEndure == null){
 							//是否风测
 							that.gV.realLi.eq(1).show()  
 						}else{
 							that.gV.realLi.eq(1).hide()
 						}
-						if(jsonData.isPerfect=="0" ||jsonData.isPerfect== null){
-							//是否完善资料
+						if(jsonData.isPerfect=="0" ||jsonData.isPerfect== null||jsonData.isWealthAccount == "5"){
+							//是否完善资料  isWealthAccount 用户过期
 							that.gV.realLi.eq(2).show()  
 						}else{
 							that.gV.realLi.eq(2).hide()
@@ -332,12 +323,6 @@ $(function () {
 							that.gV.realLi.eq(4).hide()
                         }
                         that.gV.realLi.eq(4).hide()
-
-                },
-                callbackFail: function(json) { //失败后执行的函数
-                   tipAction(json.message);
-					//that.data.canClick = true; //变为可点击
-
                 },
                 callbackNoData:function(argument) {
                     tipAction(json.message);
@@ -644,9 +629,6 @@ $(function () {
                     $(".selected_area").addClass('active')
                    }
                 },
-                callbackFail: function (json) {
-                    tipAction(json.message);
-                }
             }]
             $.ajaxLoading(obj);
         },
@@ -678,9 +660,6 @@ $(function () {
                         tipAction('删除自选成功');
                     }
                     
-                },
-                callbackFail: function (json) {
-                    tipAction(json.message);
                 }
             }]
             $.ajaxLoading(obj);
@@ -719,9 +698,6 @@ $(function () {
                             $(v).addClass('value_green')
                         }
                     });
-                },
-                callbackFail: function (json) {
-                    tipAction(json.msg);
                 }
             }]
             $.ajaxLoading(obj);
@@ -807,9 +783,6 @@ $(function () {
 
                     that.drawLine(type, newData)
 
-                },
-                callbackFail: function (json) {
-                    tipAction(json.msg);
                 }
             }]
             $.ajaxLoading(obj);
