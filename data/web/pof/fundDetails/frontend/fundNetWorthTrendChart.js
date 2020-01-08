@@ -14,6 +14,8 @@
 // 使用 Mock
 var Mock = require('mockjs');
 
+/*var data = Mock.mock({"status": "1000", "data": [], "message": "数据为空"})*/
+
 //1. 积分
 var data = Mock.mock({ 
     "hmac": "hmac", 

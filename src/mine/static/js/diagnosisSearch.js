@@ -31,6 +31,7 @@ $(function() {
         },
         init: function() {
             var that = this;
+            that.$e.listLoading.hide()
             that.beforeFunc();
             that.events();
         },

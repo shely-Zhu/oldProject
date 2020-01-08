@@ -111,10 +111,17 @@ var monthReportDetail = {
 				var month = now.substring(5,7);
 				that.getElements.month = month;
 				var dayTime = json.reportTime;
-				var year = dayTime.split('年')[0];
-				var month = dayTime.split('年')[1].split('月')[0];
-				that.getMonthDateRange(year,month);
-				
+				if(dayTime.indexOf('年') != -1) {
+					year = dayTime.split('年')[0];
+					month = dayTime.split('年')[1].split('月')[0];
+					that.getMonthDateRange(year,month);
+				} else if(dayTime.indexOf('-') != -1) {
+					year = dayTime.split('-')[0];
+					month = dayTime.split('-')[1].split('-')[0];
+					that.getMonthDateRange(year,month);
+				} else{
+					that.getMonthDateRange(year,month);
+				}
 				that.queryInvestProdHoldShareList();
 				that.assetAnalysis();
 

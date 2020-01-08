@@ -267,6 +267,7 @@ $(function() {
                                     var index = $('#slider .tab-scroll-wrap .mui-active').index(),
                                         $list = $("#move_" + index + " .list");
                                     $list.height(that.highHeight).addClass('noMove');
+                                    debugger
                                     // $list.addClass('noMove');
 
                                     // if( $("#move_"+index+" .noData").length ){
@@ -306,7 +307,8 @@ $(function() {
                             //$('.list').each( function( i, el){
 
                             //判断当前ul高度
-                            var ulHeight = $list.find(".mui-table-view").height();
+                            debugger
+                            var ulHeight = $list.find(".mui-table-view").height() 
                             if (ulHeight < that.htmlHeight) {
 
                                 $list.height(that.highHeight).addClass('setHeight').addClass('noMove');
