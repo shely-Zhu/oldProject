@@ -30,6 +30,7 @@ $(function() {
         gV: {
             accountType:null,   //客户类型  0-机构 1-个人
             isWealthAccountStatus:"", //是否开通账户状态
+            userStatus:"", // 为空则是新用户   为0普通投资者  为1专业投资者
             pageCurrent: 1, // 账户持仓情况分页参数
             pageSize: 5, // 账户持仓情况分页参数
             holdList: [], // 账户持仓情况
@@ -60,12 +61,28 @@ $(function() {
         },
         init: function() {
             var that = this;
+            that.getUserInfo_1(); //用户身份信息
             that.getHoldData(); //账户持仓详情
             // that.drawCircle();
             //that.drawBar()
             that.getUserInfo();  //获取用户类型
             that.events();
         },
+        //获取用户信息
+		getUserInfo_1:function(){
+			var that = this;
+			var obj = [{
+				url:site_url.user_api,
+				data:{
+
+				},
+				callbackDone:function(json){
+					var data = json.data
+				    that.gV.userStatus = data.investFavour
+				}
+			}];
+			$.ajaxLoading(obj);
+		},
           // 获取客户类型
           getUserInfo: function () {
             var that = this;
@@ -172,6 +189,12 @@ $(function() {
                         that.gV.realLi.eq(4).show()
                     } else {
                         that.gV.realLi.eq(4).hide()
+                    }
+                    if(jsonData.investorStatus =="0"&&that.gV.userStatus==""){
+                        //直接申请为专业投资者
+                        that.gV.tipsWrap.show()
+                        that.gV.realLi.show();
+                        that.gV.realLi.eq(3).show()  
                     }
                     that.gV.realLi.eq(4).hide()
 
@@ -585,7 +608,12 @@ $(function() {
                     case 3: //投资者分类
                     if(that.gV.isWealthAccountStatus){
                         //开通了账户
-                        window.location.href = site_url.investorClassification_url
+                        if(jsonData.investorStatus =="0"&&that.gV.userStatus==""){
+                            //申请为投资者
+                            window.location.href = site_url.investorClassificationResult_url
+                        }else{
+                            window.location.href = site_url.investorClassification_url
+                        }
                     }else{
                         $("#tips-wrap").hide()
                         $(".isRiskMatchBox").show();
@@ -649,7 +677,12 @@ $(function() {
                     case "isInvestFavour": //投资者分类
                     if(that.gV.isWealthAccountStatus){
                         //开通了账户
-                        window.location.href = site_url.investorClassification_url
+                        if(jsonData.investorStatus =="0"&&that.gV.userStatus==""){
+                            //申请为投资者
+                            window.location.href = site_url.investorClassificationResult_url
+                        }else{
+                            window.location.href = site_url.investorClassification_url
+                        }
                     }else{
                         $("#tips-wrap").hide()
                         $(".isRiskMatchBox").show();

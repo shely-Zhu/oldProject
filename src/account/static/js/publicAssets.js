@@ -4,6 +4,9 @@
  * @Date:   2019-11-19
  * @description:
  * 公募持仓页面
+ * update:chentiancheng 2020-01-08
+ * @description:
+ * 新增事件clickEvent方法
  */
 
 require('@pathCommonBase/base.js');
@@ -25,76 +28,69 @@ $(function() {
         init: function() {
             var that = this;
             that.getData('');
-            that.getBankList();
             that.initRightBtn();
-        },
-        getBankList: function() {
-            //查询银行卡列表
-            var that = this;
-            var param = {
-                useEnv: 1
-            };
-
-            //发送ajax请求
-            var obj = [{
-                url: site_url.normalPofList_api,
-                data: param,
-                needLogin: true, //需要判断是否登陆
-                //needDataEmpty: false,//不需要判断data是否为空
-                callbackDone: function(json) { //成功后执行的函数
-                    if (json.data.pageList.length) {
-                        //获取银行卡后四位
-                        Handlebars.registerHelper("get_last_4_value", function(value, options) {
-                            if (value.length > 4) {
-                                return ' - ' + value.substring(value.length - 4);
-                            }
-                            return '';
-                        });
-                        json.data.pageList.unshift({ 'bankName': '全部', 'bankAccountMask': '' })
-                        var tplm = $("#bankLists").html();
-                        var template = Handlebars.compile(tplm);
-                        var html = template(json.data.pageList);
-                        $("#bank_list").html(html);
-                        //渲染模板后设置点击事件
-                        that.bankEvents();
-                    }
-                }
-            }];
-            $.ajaxLoading(obj);
-
+            that.clickEvent();
         },
         getData: function(bankAccount) {
             var that = this;
-            var obj = [{ // 公募总资产
-                url: site_url.pofTotalAssets_api,
-                data: {
-                    bankAccount: bankAccount,
-                },
-                //async: false,
-                needDataEmpty: true,
-                callbackDone: function(json) {
-                    if (json.status == '1000') {
-                        $('.noData').show();
-                        return;
-                    }
-                    that.gV.listLoading.hide();
-                    that.gV.data = json.data;
-                    //设置比较器
-                    Handlebars.registerHelper("if_than_0", function(value, options) {
-                        if (value > 0) {
-                            return options.fn(this);
-                        } else {
-                            return options.inverse(this);
+            var obj = [{
+                    url: site_url.normalPofList_api, //查询银行卡列表
+                    data: {
+                        useEnv: 1
+                    },
+                    needLogin: true, //需要判断是否登陆
+                    needLoading: false, // 接口请求完不隐藏loading
+                    callbackDone: function(json) { //成功后执行的函数
+                        if (json.data.pageList.length) {
+                            //获取银行卡后四位
+                            Handlebars.registerHelper("get_last_4_value", function(value, options) {
+                                if (value.length > 4) {
+                                    return ' - ' + value.substring(value.length - 4);
+                                }
+                                return '';
+                            });
+                            json.data.pageList.unshift({ 'bankName': '全部', 'bankAccountMask': '' })
+                            var tplm = $("#bankLists").html();
+                            var template = Handlebars.compile(tplm);
+                            var html = template(json.data.pageList);
+                            $("#bank_list").html(html);
+                            //渲染模板后设置点击事件
+                            that.bankEvents();
                         }
-                    });
-                    that.chooseTipDesc();
-                    that.renderView();
-                    that.events();
+                    }
                 },
-                callbackNoData: function(json) {
-                    $('.noData').show();
+                { // 公募总资产
+                    url: site_url.pofTotalAssets_api,
+                    data: {
+                        bankAccount: bankAccount,
+                    },
+                    //async: false,
+                    needDataEmpty: true,
+                    needLoading: false, // 接口请求完不隐藏loading
+                    callbackDone: function(json) {
+                        if (json.status == '1000') {
+                            $('.noData').show();
+                            return;
+                        }
+                        that.gV.listLoading.hide();
+                        that.gV.data = json.data;
+                        //设置比较器
+                        Handlebars.registerHelper("if_than_0", function(value, options) {
+                            if (value > 0) {
+                                return options.fn(this);
+                            } else {
+                                return options.inverse(this);
+                            }
+                        });
+                        that.chooseTipDesc();
+                        that.renderView();
+                        that.events();
+                    },
+                    callbackNoData: function(json) {
+                        $('.noData').show();
+                    }
                 }
-            }];
+            ];
             $.ajaxLoading(obj);
         },
         renderView: function() {
@@ -266,6 +262,10 @@ $(function() {
             }, {
                 'htmdEvt': 'publicAssets_7'
             })
+            
+        },
+        //点击事件
+        clickEvent:function(){
             //打开资产组成说明
             mui("body").on('mdClick', '.assetsBtn', function(e) {
                 $('.mask').show();

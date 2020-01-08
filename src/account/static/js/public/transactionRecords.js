@@ -215,7 +215,7 @@ $(function () {
                         that.gV.pageNum++;
                         // 将交易记录列表插入到页面上
                         generateTemplate(data, that.$e.recordListWraperBoxId, that.$e.recordListTemplateId);
-                        alwaysAjax($('.mui-table-view-cell'), ".contentWrapper", 2);
+                        // alwaysAjax($('#list .mui-table-view-cell'), "#list .contentWrapper", 2);
                     }, 200)
                 },
                 callbackFail: function (json) {
@@ -279,6 +279,7 @@ $(function () {
         events: function() {
             var that = this;
             // 筛选分类的点击事件
+            alwaysAjax($('.contentWrapper'));
             mui("body").on('mdClick', '.searchItem', function () {
                 if ($(this).is('.searchItemActive')) {
                     $(this).removeClass("searchItemActive").siblings('.searchItem').removeClass('searchItemActive');

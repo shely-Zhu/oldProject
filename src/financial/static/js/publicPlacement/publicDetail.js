@@ -64,13 +64,18 @@ $(function () {
             },
             symboltype : 'none',	//echarts 节点样式
             isWealthAccountStatus:"", //是否开通账户状态
+            userStatus:"", // 为空则是新用户   为0普通投资者  为1专业投资者
         },
         fundType: splitUrl['fundType'] == '10300'||splitUrl['fundType'] == '10800' ? 1 : 0, //10300 货币基金类型，其余为普通基金类型
+        fundComId: '',   //基金公司ID
+        secuId:'', // 基金编码
+        chiName:'', // 基金名称
         init: function () {
             var that = this;
             that.getData(); // 获取基金详情
 
             that.getUserInfo();  //获取用户类型
+            that.getUserInfo_1(); //用户身份信息
             that.events();
             // that.getData1(); // 查询基金的历史收益（货币基金）/历史净值（普通基金）
             $('.tips').hide()
@@ -97,9 +102,14 @@ $(function () {
                     // fundCode:"000847",
                 },
                 callbackDone: function (json) {
-                    that.gV.json = json.data
-                    that.gV.json.fundType = that.fundType
-                    that.gV.json.chgRat1d = that.gV.json.chgRat1d.toFixed(2)
+
+                    that.fundComId = json.data.fmcComId ? json.data.fmcComId : 'gz04tVwXga';
+                    that.secuId = json.data.secuId ? json.data.secuId : '000846.OF';
+                    that.chiName = json.data.chiName ? json.data.chiName : '中融货币市场基金';
+
+                    that.gV.json = json.data;
+                    that.gV.json.fundType = that.fundType;
+                    that.gV.json.chgRat1d = that.gV.json.chgRat1d.toFixed(2);
                     if(that.gV.json.chgRat1d > 0){
                         that.gV.json.chgRat1d_s  = '+' + Number(that.gV.json.chgRat1d).toFixed(2)
                     }
@@ -195,6 +205,21 @@ $(function () {
             }]
             $.ajaxLoading(obj);
         },
+        //获取用户信息
+		getUserInfo_1:function(){
+			var that = this;
+			var obj = [{
+				url:site_url.user_api,
+				data:{
+
+				},
+				callbackDone:function(json){
+					var data = json.data
+				    that.gV.userStatus = data.investFavour
+				}
+			}];
+			$.ajaxLoading(obj);
+		},
         // 获取客户类型
         getUserInfo: function () {
             var that = this;
@@ -241,8 +266,12 @@ $(function () {
                             if(jsonData.isWealthAccount == "0"&&jsonData.isRiskEndure == "1"&&jsonData.isPerfect == "1"&&jsonData.isInvestFavour=="1"){
                                 that.gV.realLi.hide();
                                 that.gV.tipsWrap.hide();
-                                $(".isRiskMatchBox").show();
-                                $(".isRiskMatch_mask").show();
+                                if(jsonData.isIdnovalid=="1"){
+                                    //证件已过期
+                                    tipAction('因过期原因该账户被冻结，请联系理财师或咨询客服！客服电话：400-8980-618');
+                                    return false;
+                                }
+
                                 if(jsonData.isHighAge=="1"&&that.gV.isHighAgeStatus){
                                    //年龄校验
                                     //that.gV.isHighAgeStatus = false;
@@ -262,6 +291,9 @@ $(function () {
                                     $(".isRiskMatchResult").attr("type","isZdTaLimit")
                                     return false;
                                 }
+
+                                $(".isRiskMatchBox").show();
+                                $(".isRiskMatch_mask").show();
 
                                 if(jsonData.isRiskMatch == "1"){
                                     //风险等级匹配
@@ -350,6 +382,12 @@ $(function () {
 						}else{
 							that.gV.realLi.eq(4).hide()
                         }
+                        if(jsonData.investorStatus =="0"&&that.gV.userStatus==""){
+                            //直接申请为专业投资者
+                            that.gV.tipsWrap.show()
+                            that.gV.realLi.show();
+                            that.gV.realLi.eq(3).show()  
+                        }
                         that.gV.realLi.eq(4).hide()
                 },
                 callbackNoData:function(argument) {
@@ -375,15 +413,11 @@ $(function () {
         },
         events: function () {
             var that = this;
-            var json = that.gV.json
             var fundCode = splitUrl['fundCode']
-            var fundComId = json.fmcComId ? json.fmcComId : 'gz04tVwXga'
-            var secuId = json.secuId ? json.secuId : '000846.OF'
-            var fundName = json.chiName ? json.chiName : '中融货币市场基金'
             // 基金经理
             mui("body").on('mdClick', ".fundManager", function (e) {
                 if(that.gV.json.fundManager!=""){
-                    window.location.href = site_url.pofFundManager_url + '?fundCode=' + fundCode                                   
+                    window.location.href = site_url.pofFundManager_url + '?fundCode=' + fundCode;
                 }
             },{
                 htmdEvt: 'publicDetail_01'
@@ -391,14 +425,14 @@ $(function () {
             // 基金公司
             mui("body").on('mdClick', ".fundCompany", function (e) {
                 if(that.gV.json.fmcComName!=""){
-                    window.location.href = site_url.pofFundCompany_url + '?fundComId=' + fundComId
+                    window.location.href = site_url.pofFundCompany_url + '?fundComId=' + that.fundComId;
                 }
             },{
                 htmdEvt: 'publicDetail_02'
             });
             // 基金档案
             mui("body").on('mdClick', ".fundFile", function (e) {
-                window.location.href = site_url.pofFundFile_url + '?secuId=' + secuId + '&fundCode=' + fundCode;
+                window.location.href = site_url.pofFundFile_url + '?secuId=' + that.secuId + '&fundCode=' + fundCode;
             },{
                 htmdEvt: 'publicDetail_03'
             });
@@ -478,7 +512,13 @@ $(function () {
                     case 3:  //投资者分类
                         if(that.gV.isWealthAccountStatus){
                             //开通了账户
-                            window.location.href = site_url.investorClassification_url
+                            if(jsonData.investorStatus =="0"&&that.gV.userStatus==""){
+                                //申请为投资者
+                                window.location.href = site_url.investorClassificationResult_url
+                            }else{
+                                window.location.href = site_url.investorClassification_url
+                            }
+                           
                         }else{
                             $("#tips-wrap").hide()
                             $(".isRiskMatchBox").show();
@@ -541,7 +581,12 @@ $(function () {
                     case "isInvestFavour":  //投资者分类
                     if(that.gV.isWealthAccountStatus){
                         //开通了账户
-                        window.location.href = site_url.investorClassification_url
+                        if(jsonData.investorStatus =="0"&&that.gV.userStatus==""){
+                            //申请为投资者
+                            window.location.href = site_url.investorClassificationResult_url
+                        }else{
+                            window.location.href = site_url.investorClassification_url
+                        }
                     }else{
                         $("#tips-wrap").hide()
                         $(".isRiskMatchBox").show();
@@ -676,7 +721,6 @@ $(function () {
                     'link': site_url.productPublicShare_url + splitUrl['fundCode'],
                     'img': ''
                 }
-                debugger
                 if (window.isAndroid){
                     window.jsObj.wxShare(JSON.stringify(shareObj));
                 }
