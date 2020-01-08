@@ -140,10 +140,6 @@
             document.getElementById('slider').addEventListener('slide', function(e) {
                 console.log('当前索引    ' + e.detail.slideNumber);
 
-                var htmdEvtMui = $('.mui-control-item').eq(Number(e.detail.slideNumber)).attr('htmdEvt');
-
-                window._submitMd && window._submitMd( 3, htmdEvtMui );
-
                 //有内容，不执行
                 if ($('.mui-scroll-wrapper').eq(Number(e.detail.slideNumber) + 1).find('.listCont').hasClass('hasData')) {
                     console.log('有内容，不执行');
