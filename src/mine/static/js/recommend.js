@@ -1,15 +1,10 @@
 /*
- * @page: 老带新----推荐有礼
- * 
- * @Author: yangjinlai
- * @Date:   2017-10-27 10:48:29
- *  @description: js可以更换版本，但是html是分享出去的链接，不能变;
- *                 关闭弹层按钮，fixed定位在ios，app中会随着屏幕滚动，所以提出来
- * 
- * @Last Modified by:   songxiaoyu
- * @Last Modified time: 2018-07-30 15:38:48
- * @description: 推荐有礼大改版
- */
+* @page: 老带新邀请好友
+* 
+* @Author: chentinacheng
+* @Date:   2019-12
+*
+*/
 
 require('@pathIncludJs/vendor/mui/mui.picker.min.js');
 require('@pathCommonJs/ajaxLoading.js');
