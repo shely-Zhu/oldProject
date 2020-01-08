@@ -106,9 +106,11 @@ $(function () {
                         })
 
                     }else if(resData.h5Type == "2") {
-
-
-                        that.$e.artTitle.find("p").html(resData.title);//文章title
+                        // 含有标题时才展示该区域
+                        if(resData.title) {
+                            that.$e.artTitle.removeClass("hide")
+                            that.$e.artTitle.find("p").html(resData.title);//文章title
+                        }
 
                         //如果音频路径不为空的话则隐藏音频dom元素
                         if (resData.voiceAttachUrl.length != 0) {
