@@ -103,6 +103,7 @@ $(function() {
                     console.log('我是内容', json);
                     var data = json.data.financialerList;
                     console.log(data)
+                    that.$e.listLoading.hide();
                     if (json.data.matchedFinancialer == '0' && that.gV.startPage == 1) {
                         t.endPullupToRefresh(true);
                         that.$e.activityListDataBox.hide();
@@ -146,6 +147,9 @@ $(function() {
 
                     }, 200)
 
+                },
+                callbackFail: function(json) {
+                    that.$e.listLoading.hide();
                 },
                 callbackNoData: function(json) {
                     that.$e.listLoading.hide();
@@ -222,6 +226,9 @@ $(function() {
                     }, 200)
 
                 },
+                callbackFail: function(json) {
+
+                },
                 callbackNoData: function(json) {
 
                 }
@@ -283,6 +290,10 @@ $(function() {
                         window.indexedList = new mui.IndexedList($('#list')[0]);
                     });
                 },
+                callbackFail: function(json) {
+                    console.log(json.message)
+                    tipAction(json.message);
+                }
             }];
             $.ajaxLoading(obj);
         },
@@ -309,6 +320,10 @@ $(function() {
                     });
                     that.initMui();
                 },
+                callbackFail: function(json) {
+                    console.log(json.message)
+                    tipAction(json.message);
+                }
             }];
             $.ajaxLoading(obj);
         },
@@ -346,6 +361,7 @@ $(function() {
                 var activitySearchInputWidth = document.documentElement.clientWidth - $('#activitySearch a').width() - $('.activityCityBox').width() - 30;
                 $('.activitySearchInput').width(activitySearchInputWidth);
                 mui('.contentWrapper').pullRefresh().scrollTo(0, 0, 100);
+                that.$e.listLoading.show()
             }, {
                 'htmdEvt': 'starFinancialPlannerList_01'
             });
