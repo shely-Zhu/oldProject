@@ -135,7 +135,9 @@ $(function() {
                         that.gV.startPage++;
                         //去掉mui-pull-bottom-pocket的mui-hidden
                         $('.contentWrapper').find('.mui-pull-bottom-pocket').removeClass('mui-hidden');
-
+                        $.each(data,function(i,el) {
+                            el.isPass == "Y"? el.isPass = 1 : el.isPass = 0
+                        })
                         // 将列表插入到页面上
                         generateTemplate(data, that.$e.recordList, that.$e.starFinancialPlannerListTemplateId)
                         //无缝滚动
