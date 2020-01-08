@@ -66,7 +66,7 @@ $(function() {
                             var _this = this
                             setTimeout(function() {
                                 that.getData(_this);
-                            }, 100)
+                            }, 200)
                         }
                     }
                 }
@@ -74,9 +74,9 @@ $(function() {
             //init后需要执行ready函数，才能够初始化出来
             mui.ready(function() {
                 //隐藏当前的加载中loading
-                if (!$('.activityList').hasClass('hasPullUp')) {
+                 if (!$('.activityList').hasClass('hasPullUp')) {
                     $('.activityList').find('.mui-pull-bottom-pocket').addClass('mui-hidden');
-                }
+                 }
                 //这一句初始化并第一次执行mui上拉加载的callback函数
                 mui('.contentWrapper').pullRefresh().pullupLoading();
                 //为$id添加hasPullUp  class
@@ -160,6 +160,9 @@ $(function() {
         //推荐列表
         getRecommend: function(data) {
             var that = this;
+            $('.activityNoListBox').show()
+            $('.activityNoList').show()
+
             var topHeitgh = $('#activitySearch').height();
             var noBox = $('.activityNoListBox').height();
             var noListM = parseInt(that.getStyle($('.activityNoList')[0], 'marginTop'));
@@ -361,7 +364,6 @@ $(function() {
                 var activitySearchInputWidth = document.documentElement.clientWidth - $('#activitySearch a').width() - $('.activityCityBox').width() - 30;
                 $('.activitySearchInput').width(activitySearchInputWidth);
                 mui('.contentWrapper').pullRefresh().scrollTo(0, 0, 100);
-                that.$e.listLoading.show()
             }, {
                 'htmdEvt': 'starFinancialPlannerList_01'
             });
