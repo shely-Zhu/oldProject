@@ -25,7 +25,7 @@ $(function(){
 		init:function(){
             var that=this;          
             that.getInformsDetail();
-            that.getTitle()
+            that.getTitle();
         },
         getTitle:function() {
             switch(this.gV.mesType) {
