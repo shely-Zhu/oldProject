@@ -31,6 +31,7 @@ $(function() {
         },
         init: function() {
             var that = this;
+            that.$e.listLoading.hide()
             that.beforeFunc();
             that.events();
         },
@@ -152,9 +153,6 @@ $(function() {
                     //隐藏回到顶部按钮
                     $('.goTopBtn').hide();
 
-                },
-                callbackFail: function(json) {
-                    tipAction(json.msg);
                 }
             }]
             $.ajaxLoading(obj);

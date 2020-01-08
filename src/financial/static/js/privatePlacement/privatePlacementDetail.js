@@ -1,5 +1,11 @@
+/*
 //  私募基金产品详情
-//  @author zhangyanping 2019-11-25 tian
+//  @author zhangyanping 2019-11-25 
+
+    update:chentiancheng 2020-01-08 
+    删除司法冻结文案
+
+*/
 
 require('@pathCommonBase/base.js');
 
@@ -475,9 +481,6 @@ $(function() {
                 callbackNoData: function(json) {
                     // tipAction(json.message);
                     $(".performanceComparison").hide()
-                },
-                callbackFail: function(json) {
-                    tipAction(json.message);
                 }
             }];
             $.ajaxLoading(obj);
@@ -844,10 +847,6 @@ $(function() {
                     }
 
                 },
-                callbackFail: function(json) { //失败后执行的函数
-                    tipAction(json.message);
-
-                },
                 callbackNoData: function(json) {
                     $('.lightPointCon').hide();
                 }
@@ -907,6 +906,8 @@ $(function() {
                 jumpUrl = site_url.qualifiedInvestorResult_url
             }else if (v.conditionJump == 8) { //信息查看（修改证件有效期） 
                 jumpUrl = site_url.completeInfoEditModify_url
+            }else if (v.conditionJump == 9) { //跳转到普通风测
+                jumpUrl = site_url.riskAppraisal_url + '?type=private';
             }else if (v.conditionJump == 11) { //跳转到进身份证上传页面
                 jumpUrl = site_url.realIdcard_url
             } else if (v.conditionJump == 12) { //跳转到人脸识别页面
@@ -1437,13 +1438,12 @@ $(function() {
                     if (that.data.buyFreeze == "1" && that.data.lawFreezeStatus == "1") { //如果禁止买入且司法冻结，首先提示
                     	that.data.canClick = true;//这里必须改成true，否则取消后按钮不生效了。
                         var obj = {
-                            title: '',
+                            title: '温馨提示',
                             id: 'buyFreeze',
                             p: '因司法原因该账户被冻结，请联系客服咨询！客服电话：400-8980-618',
                             yesTxt: '确认',
-                            celTxt: "取消",
                             htmdEvtYes:'privatePlacementDetail_32',  // 埋点确定按钮属性
-                            htmdEvtCel:'privatePlacementDetail_33',  // 埋点取消按钮属性
+                            hideCelButton: true, //为true时隐藏cel按钮，仅使用yes按钮的所有属性
                             zIndex: 100,
                             callback: function(t) {
 

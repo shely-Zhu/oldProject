@@ -28,6 +28,8 @@ $(function() {
             noData: $(".noData"),
         },
         gV: {
+            accountType:null,   //客户类型  0-机构 1-个人
+            isWealthAccountStatus:"", //是否开通账户状态
             pageCurrent: 1, // 账户持仓情况分页参数
             pageSize: 5, // 账户持仓情况分页参数
             holdList: [], // 账户持仓情况
@@ -67,8 +69,27 @@ $(function() {
             that.getDiagnosisData() // 诊断结论
             // that.drawCircle();
             //that.drawBar()
-
+            that.getUserInfo();  //获取用户类型
             that.events();
+        },
+          // 获取客户类型
+          getUserInfo: function () {
+            var that = this;
+            // 请求页面数据
+            var obj = [{
+                url: site_url.queryUserBaseInfo_api,
+                data: {
+                },
+                needLogin: false,
+                callbackDone: function (json) {
+                    var data = json.data
+                    that.gV.accountType = data.accountType
+                },
+                callbackNoData:function(json){
+					tipAction(json.message);
+				},
+            }]
+            $.ajaxLoading(obj);
         },
         getConditionsOfOrder: function() {
             var that = this;
@@ -89,7 +110,7 @@ $(function() {
                         isReal = "", //是否实名认证，因为如果机构切一键认证是实名，点击需要提示弹框。
                         singleaAuthenPath = "", //一键认证跳转链接
                         singleaAuthen = false; //条件框是否展示
-                    if (jsonData.isWealthAccount != "1" && jsonData.isRiskEndure == "1" && jsonData.isPerfect == "1" && jsonData.isInvestFavour == "1") {
+                    if (jsonData.isWealthAccount == "0" && jsonData.isRiskEndure == "1" && jsonData.isPerfect == "1" && jsonData.isInvestFavour == "1") {
                         that.gV.realLi.hide();
                         that.gV.tipsWrap.hide();
                         window.location.href = site_url.applyHistory_url
@@ -100,11 +121,39 @@ $(function() {
 
                     }
                     that.gV.singleaAuthenPath = that.getSingleaAuthenPath(jsonData);
-                    if (jsonData.isWealthAccount == "1") {
+                    if (jsonData.isWealthAccount == "0") {
                         //是否开通财富账户
-                        that.gV.realLi.eq(0).show()
-                    } else {
+                        that.gV.isWealthAccountStatus = true
                         that.gV.realLi.eq(0).hide()
+                    } else {
+                        that.gV.isWealthAccountStatus =false
+                        if(jsonData.isWealthAccount == "6"){
+                            //司法冻结
+                            that.gV.tipsWrap.hide()
+                            that.gV.realLi.hide(); 
+                            $("#tips-wrap").hide()
+                            $(".isRiskMatchBox").show();
+                            $(".isRiskMatch_mask").show();
+                            $(".isRiskMatchBox_match").show()
+                            $(".isRiskMatchBox_noMatch").hide()
+                            $(".isRiskMatchBox_header").html("因司法原因该账户被冻结，请联系客服咨询，客服电话：400-8980-618")
+                        }
+
+                        if(jsonData.isWealthAccount == "5"){
+                            //身份过期
+                            that.gV.tipsWrap.hide()
+                            that.gV.realLi.hide(); 
+                            $("#tips-wrap").hide()
+                            $(".isRiskMatchBox").show();
+                            $(".isRiskMatch_mask").show();
+                            $(".isRiskMatchBox_match").hide()
+                            $(".isRiskMatchBox_noMatch").show()
+                            $(".isRiskMatchBox_cancel").html("取消")
+                            $(".isRiskMatchResult").html("完善资料")
+                            $(".isRiskMatchResult").attr("type","overdue")
+                            $(".isRiskMatchBox_header").html("您的证件已过期，补充证件信息后才可以继续交易")
+                        }
+                        that.gV.realLi.eq(0).show()
                     }
                     if (jsonData.isRiskEndure == "0" || jsonData.isRiskEndure == null) {
                         //是否风测
@@ -113,7 +162,7 @@ $(function() {
                         that.gV.realLi.eq(1).hide()
                     }
                     if (jsonData.isPerfect == "0" || jsonData.isPerfect == null) {
-                        //是否完善资料
+                        //是否完善资料 isWealthAccount 5 用户过期
                         that.gV.realLi.eq(2).show()
                     } else {
                         that.gV.realLi.eq(2).hide()
@@ -139,7 +188,7 @@ $(function() {
         getSingleaAuthenPath: function(data) {
             var that = this;
             var singleaAuthenPath = "";
-            if (data.isWealthAccount == "1") {
+            if (data.isWealthAccount != "0") {
                 return singleaAuthenPath = "isWealthAccount"
             } else if (data.isRiskEndure != "1") {
                 return singleaAuthenPath = "isRiskEndure"
@@ -187,10 +236,6 @@ $(function() {
                     that.$e.noData.show()
                     that.$e.contentListBox.hide()
                    // window.location.href = site_url.noAccountHoldShare_url
-                },
-                callbackFail: function(json) {
-                    tipAction(json.msg);
-                    //window.location.href = site_url.noAccountHoldShare_url
                 }
             }]
             $.ajaxLoading(obj);
@@ -229,9 +274,6 @@ $(function() {
                     }
 
                     that.drawCircle()
-                },
-                callbackFail: function(json) {
-                    tipAction(json.msg);
                 }
             }]
             $.ajaxLoading(obj);
@@ -324,9 +366,6 @@ $(function() {
                         // 'background':'linear-gradient(to left,#FBE2BD,#D69549)'});
                     }
 
-                },
-                callbackFail: function(json) {
-                    tipAction(json.msg);
                 }
             }]
             $.ajaxLoading(obj);
@@ -363,9 +402,6 @@ $(function() {
                     that.gV.heavyBar.barData = newData
                     that.drawBar(newData, "heavy-warehouse-box");
 
-                },
-                callbackFail: function(json) {
-                    tipAction(json.msg);
                 }
             }]
             $.ajaxLoading(obj);
@@ -417,9 +453,6 @@ $(function() {
 
                     that.drawBar(newData, "volume-distribution-box")
 
-                },
-                callbackFail: function(json) {
-                    tipAction(json.msg);
                 }
             }];
             $.ajaxLoading(obj);
@@ -444,9 +477,6 @@ $(function() {
                     $(".fl8").html(data[8]);
                     $(".fl9").html(data[9]);
 
-                },
-                callbackFail: function(json) {
-                    tipAction(json.msg);
                 }
             }]
             $.ajaxLoading(obj);
@@ -484,9 +514,6 @@ $(function() {
                     }
                     //var star = "当前账户风格为'fundStyle'，配置‘fundType’型基金较多，‘assetConfig’仓位较高，重仓行业为‘heavyIndustry’，债券中‘bondStyle’占比较多"
                     that.$e.diagnosis.html(str)
-                },
-                callbackFail: function(json) {
-                    tipAction(json.msg);
                 }
             }]
             $.ajaxLoading(obj);
@@ -520,20 +547,55 @@ $(function() {
                 var type = $(this).parent().index()
                 switch (type) {
                     case 0: //开通账户
+                    if(that.gV.accountType == 0|| that.gV.accountType == 2){
+                        //机构
+                        $("#tips-wrap").hide()
+                        $(".isRiskMatchBox").show();
+                        $(".isRiskMatch_mask").show();
+                        $(".isRiskMatchBox_match").show()
+                        $(".isRiskMatchBox_noMatch").hide()
+                        $(".isRiskMatchBox_header").html("请联系您的理财师或者拨打客服电话 400-8980-618 进行线下开户")
+                    }else{
+                        //个人
                         window.location.href = site_url.realName_url
-                        break;
+
+                    }
+                    break;
 
                     case 1: //风险评测
                         window.location.href = site_url.riskAppraisal_url + "?type=private"
                         break;
 
                     case 2: //完善基本信息
+                    if(that.gV.accountType == 0|| that.gV.accountType == 2){
+                        //机构
+                        $("#tips-wrap").hide()
+                        $(".isRiskMatchBox").show();
+                        $(".isRiskMatch_mask").show();
+                        $(".isRiskMatchBox_match").show()
+                        $(".isRiskMatchBox_noMatch").hide()
+                        $(".isRiskMatchBox_header").html("机构客户如需调整基本信息请联系您的理财师")
+                    }else{
+                        //个人
                         window.location.href = site_url.completeInformation_url
-                        break;
+
+                    }
+                    break;
 
                     case 3: //投资者分类
+                    if(that.gV.isWealthAccountStatus){
+                        //开通了账户
                         window.location.href = site_url.investorClassification_url
-                        break;
+                    }else{
+                        $("#tips-wrap").hide()
+                        $(".isRiskMatchBox").show();
+                        $(".isRiskMatch_mask").show();
+                        $(".isRiskMatchBox_match").show()
+                        $(".isRiskMatchBox_noMatch").hide()
+                        $(".isRiskMatchBox_header").html("您尚未进行身份认证,认证完成后才可进行投资者分类认证")
+                    }
+                    
+                    break;
                     case 4: //合格投资者认证
                         window.location.href = site_url.chooseQualifiedInvestor_url
                         break;
@@ -549,20 +611,55 @@ $(function() {
                 var key = that.gV.singleaAuthenPath;
                 switch (key) {
                     case "isWealthAccount": //开通账户
+                    if(that.gV.accountType == 0|| that.gV.accountType == 2){
+                        //机构
+                        $("#tips-wrap").hide()
+                        $(".isRiskMatchBox").show();
+                        $(".isRiskMatch_mask").show();
+                        $(".isRiskMatchBox_match").show()
+                        $(".isRiskMatchBox_noMatch").hide()
+                        $(".isRiskMatchBox_header").html("请联系您的理财师或者拨打客服电话 400-8980-618 进行线下开户")
+                    }else{
+                        //个人
                         window.location.href = site_url.realName_url
-                        break;
+
+                    }
+                    break;
 
                     case "isRiskEndure": //私募风险评测  type=private type=asset 资管风测
                         window.location.href = site_url.riskAppraisal_url + "?type=private"
                         break;
 
                     case "isPerfect": //完善基本信息
+                    if(that.gV.accountType == 0|| that.gV.accountType == 2){
+                        //机构
+                        $("#tips-wrap").hide()
+                        $(".isRiskMatchBox").show();
+                        $(".isRiskMatch_mask").show();
+                        $(".isRiskMatchBox_match").show()
+                        $(".isRiskMatchBox_noMatch").hide()
+                        $(".isRiskMatchBox_header").html("机构客户如需调整基本信息请联系您的理财师")
+                    }else{
+                        //个人
                         window.location.href = site_url.completeInformation_url
-                        break;
+
+                    }
+                    break;
 
                     case "isInvestFavour": //投资者分类
+                    if(that.gV.isWealthAccountStatus){
+                        //开通了账户
                         window.location.href = site_url.investorClassification_url
-                        break;
+                    }else{
+                        $("#tips-wrap").hide()
+                        $(".isRiskMatchBox").show();
+                        $(".isRiskMatch_mask").show();
+                        $(".isRiskMatchBox_match").show()
+                        $(".isRiskMatchBox_noMatch").hide()
+                        $(".isRiskMatchBox_header").html("您尚未进行身份认证,认证完成后才可进行投资者分类认证")
+                    }
+                    
+                    break;
                     case "isRiskMatch": //合格投资者认证
                         window.location.href = site_url.chooseQualifiedInvestor_url
                         break;
@@ -573,6 +670,39 @@ $(function() {
             },{
                 'htmdEvt':'fundAccountDiagnosis_04'
             });
+              //风测等级匹配成功
+              mui("body").on('mdClick',".isRiskMatchBox_match",function(){
+                var type = that.gV.singleaAuthenType;
+                $(".isRiskMatch_mask").hide();
+                $(".isRiskMatchBox").hide();
+           },{
+               htmdEvt: 'fundAccountDiagnosis_08'
+           })
+             //风险等级匹配失败结果跳转
+             mui("body").on("mdClick",".isRiskMatchResult",function(){
+                $(".isRiskMatch_mask").hide();
+                $(".isRiskMatchBox").hide();
+                var type = $(this).attr("type");
+                if(type == "noRisk"){
+                    //未风测
+                    window.location.href = site_url.riskAppraisal_url + "?type=private"
+                }else if(type == "repeatRisk"){
+                    //风测过期
+                    window.location.href = site_url.riskAppraisal_url + "?type=private"
+                }else if(type == "isHighAge"){
+                    that.gV.isHighAgeStatus = false;
+                    that.getConditionsOfOrder(that.gV.singleaAuthenType)
+                }else if(type == "isZdTaLimit"){
+                     //跳理财首页
+                    window.location.href = site_url.wealthIndex_url
+                }else if(type = "overdue"){
+                    //身份证过期
+                    window.location.href = site_url.completeInformation_url
+                }
+               
+            },{
+                htmdEvt: 'fundAccountDiagnosis_09'
+            })
 
             mui("body").on('mdClick', ".icontips-close", function() {
 

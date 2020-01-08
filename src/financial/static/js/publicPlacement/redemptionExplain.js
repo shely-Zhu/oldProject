@@ -44,9 +44,6 @@ $(function(){
                 callbackNoData: function(json) {
                     that.$e.noDataCon.show()
                     that.$e.contentWrap.hide()
-                },
-                callbackFail: function(json) {
-                    tipAction(json.message);
                 }
             }];
             $.ajaxLoading(obj);
