@@ -237,7 +237,7 @@ $(function () {
             var obj1 = [{ //基金基本概况查询
                 url: site_url.prfFundBasicProfile_api,
                 data: {
-                    fundCode: getQueryString('fundCode') ? getQueryString('fundCode') : '000847'
+                    fundCode: splitUrl['fundCode'] ? splitUrl['fundCode'] : '000847'
                 },
                 callbackDone: function (json) {
                     json = json.data
@@ -266,7 +266,7 @@ $(function () {
             var obj2 = [{ //基金投资组合信息查询
                 url: site_url.prfFnvestmentPortfolio_api,
                 data: {
-                    fundCode: getQueryString('fundCode') ? getQueryString('fundCode') : '000847'
+                    fundCode: splitUrl['fundCode'] ? splitUrl['fundCode'] : '000847'
                 },
                 callbackDone: function (json) {
 
@@ -322,7 +322,7 @@ $(function () {
             var obj3 = [{
                 url: site_url.prfFundDividendList_api,
                 data: {
-                    fundCode: getQueryString('fundCode'),
+                    fundCode: splitUrl['fundCode'],
                     pageCurrent: that.gV.pageCurrent3,
                     pageSize: that.gV.pageSize3
                 },
@@ -393,7 +393,7 @@ $(function () {
             var obj4 = [{
                 url: site_url.prfFundNoticeList_api,
                 data: {
-                    secuId: getQueryString('secuId'),
+                    secuId: splitUrl['secuId'],
                     pageCurrent: that.gV.pageCurrent4,
                     pageSize: that.gV.pageSize4
                 },
