@@ -277,6 +277,7 @@ $(function() {
                 tipAction(str)
                 return false
            }
+           that.gV.userAge = $(".userAge").val();
            return true
         },
         initParmis:function(){
