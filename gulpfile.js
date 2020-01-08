@@ -99,7 +99,7 @@ if (options.env == '0') {
     //明泽或股份
     console.log("当前是" + (options.envOrigin == '0' ? '明泽' : '股份'));
 
-    
+
 }
 
 
@@ -217,12 +217,7 @@ gulp.task('proxyTask', function() {
                     // target: 'https://app.htjf4.com',
                     // target: 'http://172.16.187.129:8080',//李亚楠
                     // target: 'http://192.168.50.254:8085',
-<<<<<<< HEAD
                     target: 'https://app.chtfundtest.com',
-=======
-                    // target: 'https://app.chtfundtest.com',
-                    target:"https://app.haomaojf.com",
->>>>>>> 502988869c2bfc7766ba0b3a7cf6afa94d40b6a0
                     changeOrigin: true,
                     secure: false,
                 }),
@@ -231,12 +226,7 @@ gulp.task('proxyTask', function() {
                     // target: 'https://h5.htjf4.com',
                     //  target: 'http://172.16.187.129:8080',//李亚楠
                     // target: 'http://172.16.187.164:8081',
-<<<<<<< HEAD
                     target: 'https://h5.chtfundtest.com',
-=======
-                    // target: 'https://h5.chtfundtest.com',
-                    target:"https://h5.haomaojf.com",
->>>>>>> 502988869c2bfc7766ba0b3a7cf6afa94d40b6a0
                     changeOrigin: true,
                     secure: false,
                 }),
@@ -573,7 +563,7 @@ gulp.task("cssToHost", function() {
 
                             var str = commonImgArr[i].substring( commonImgArr[i].indexOf('.'), commonImgArr[i].indexOf('include'));
                             var str_2 = commonImgArr[i].replace(str, prefix + '/');
-                            
+
                             fileCon = fileCon.replace( commonImgArr[i] , str_2 )
                         }
                     }
@@ -611,7 +601,7 @@ gulp.task("cssToHost", function() {
                     var str_1 = url;
                 }
                 return str_1;
-                
+
             },
             prepend: '',
             // append: '?cache-buster'
@@ -651,7 +641,7 @@ gulp.task("cssToHost", function() {
         //打版本号
         .pipe(plugins.rev())
 
-        
+
 
         .pipe(gulp.dest(host.path))
         .pipe(plugins.rev.manifest())
@@ -742,7 +732,7 @@ gulp.task("allServerResourcesInclude", function() {
         //     var newJson = {};
         //     for( var i in json ){
 
-        //         if( json[i].indexOf('root.js') == -1) { 
+        //         if( json[i].indexOf('root.js') == -1) {
         //             var str_1 = json[i].substring( json[i].lastIndexOf('-') , json[i].length - 1 );
         //             var str_2 =  str_1.substring(0, str_1.indexOf('.'));
         //             json[i] = json[i].replace(str_2, '');
@@ -830,7 +820,7 @@ gulp.task("includeJs", ['htmd', 'allServerResourcesInclude'], function() {
             beautify: true //只去注释，不压缩成一行
         }
     })))
-    // 
+    //
 
     .pipe(gulp.dest(host.path + 'include/'))
 
@@ -973,7 +963,7 @@ gulp.task("jsImgRev", function(cb) {
         through.obj(function(file, enc, cb) {
 
             var fileCon = file.contents.toString();
-            
+
             fileCon = 'module.exports = ' + fileCon ;
 
             file.contents = new Buffer(fileCon);
@@ -1034,7 +1024,7 @@ gulp.task("webpack", ['jsCpd', 'changePath', 'commonHtml', 'jsImgRev'], function
 
             var fileCon = file.contents.toString();
             fileCon = changeLocalHistoryFile + fileCon + erudaFile + CustomEventIeFile;
-            
+
             file.contents = new Buffer(fileCon);
             this.push(file);
             cb()
@@ -1297,12 +1287,12 @@ gulp.task('rootEnv', function() {
 
             (function(i) {
                 gulp.src([ host.path + 'allServerResources/include/js/vendor/*.js']) //- 读取 rev-manifest.json 文件
-                
+
                 .pipe(
                     through.obj(function(file, enc, cb) {
                         //if (options.env != '0' ) {
                         //非本地环境时
-                        
+
                         if( file.path.indexOf('root') != -1 && file.path.indexOf('root.js') == -1){
                             var fileCon = file.contents.toString();
 
@@ -1315,9 +1305,9 @@ gulp.task('rootEnv', function() {
 
                             this.push(file);
                         }
-                        
+
                         //}
-                        
+
                         cb()
                     })
                 )
