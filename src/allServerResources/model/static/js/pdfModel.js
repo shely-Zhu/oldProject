@@ -100,9 +100,15 @@ var pdfModel={
 					// Render PDF page into canvas context
 					//
 					page.render({canvasContext: context, viewport: viewport});
+				})
+				.catch(function(err) {
+					tipAction("pdf文件打开失败")
 				});
 			}
 			
+		})
+		.catch(function(err) {
+			tipAction("pdf文件打开失败")
 		});
 		
 	}
