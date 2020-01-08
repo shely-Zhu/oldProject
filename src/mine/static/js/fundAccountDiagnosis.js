@@ -61,12 +61,6 @@ $(function() {
         init: function() {
             var that = this;
             that.getHoldData(); //账户持仓详情
-            that.getPieData() //基金配置比例详情
-            that.getAssetData() //资产配置比例
-            that.getHeavyData() // 重仓行业配置
-            that.getVolumeData() // 组合券种分布
-            that.getAccountStyleData() // 账户风格
-            that.getDiagnosisData() // 诊断结论
             // that.drawCircle();
             //that.drawBar()
             that.getUserInfo();  //获取用户类型
@@ -224,6 +218,12 @@ $(function() {
                             that.$e.noDataContent.hide()
                             that.$e.noData.hide()
                             that.$e.contentListBox.show()
+                            that.getPieData() //基金配置比例详情
+                            that.getAssetData() //资产配置比例
+                            that.getHeavyData() // 重仓行业配置
+                            that.getVolumeData() // 组合券种分布
+                            that.getAccountStyleData() // 账户风格
+                            that.getDiagnosisData() // 诊断结论
                         }
                     }
                     $("#holdingBox").html("")
