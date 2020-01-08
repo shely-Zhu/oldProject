@@ -88,13 +88,6 @@ $(function() {
                         that.$e.actIntroduce.html($(data.actIntroduce));
                         $(".lazyload").lazyload()
 
-<<<<<<< HEAD
-                    },
-                    callbackFail: function(json) {
-                        console.log(json.message)
-                        tipAction(json.message);
-=======
->>>>>>> 0176bb8ae648d1cff625aee3eeea542b9d6bd573
                     }
                 }];
                 $.ajaxLoading(obj);
