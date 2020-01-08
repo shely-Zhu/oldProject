@@ -1190,7 +1190,8 @@ gulp.task('rev', function() {
     .pipe(plugins.if(isWatch, plugins.debug({ title: '替换版本号的文件' })))
 
     //.pipe(plugins.if(isWatch, plugins.debug({ title: '替换版本号的文件' })))
-    .pipe(plugins.if(options.env === '4', prefixUrl(prefix, null, '{{')))
+    // 下面这句话不知道是做什么的  暂时注释了
+    // .pipe(plugins.if(options.env === '4', prefixUrl(prefix, null, '{{')))
     .pipe(prefixUrl(prefix))
 
     //替换后的文件输出的目录
