@@ -14,6 +14,7 @@ require('@pathCommonBase/base.js');
 require('@pathCommonJs/ajaxLoading.js');
 
 require('@pathCommonJs/components/authenticationProcess.js');
+var authenticationProcess = require('@pathNewCommonCom/authenticationProcess/authenticationProcess.js');
 //引入弹出层
 require('@pathCommonCom/elasticLayer/elasticLayer/elasticLayer.js');
 
@@ -670,7 +671,6 @@ $(function() {
                 }
             }];
             $.ajaxLoading(obj);
-
 		},
 		getJumpUrl: function(v) { //获取跳转链接
             var jumpUrl = ""; //跳转链接
