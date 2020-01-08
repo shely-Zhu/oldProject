@@ -39,6 +39,8 @@ var clickList = {
 	"fundAccountDiagnosis_05":{ type:'click', evtid: 'fundAccountDiagnosis_05', topic: '基金诊断-隐藏一键认证按钮', info: ''},
 	"fundAccountDiagnosis_06":{ type:'click', evtid: 'fundAccountDiagnosis_06', topic: '基金诊断-无持仓跳转理财首页按钮', info: ''},
 	"fundAccountDiagnosis_07":{ type:'click', evtid: 'fundAccountDiagnosis_07', topic: '基金诊断-无持仓情况下获取专属报告按钮', info: ''},
+	"fundAccountDiagnosis_08":{ type:'click', evtid: 'fundAccountDiagnosis_08', topic: '基金诊断-明白按钮', info: ''},
+	"fundAccountDiagnosis_09":{ type:'click', evtid: 'fundAccountDiagnosis_09', topic: '基金诊断-失败', info: ''},
 	//基金账户诊断 --添加/编辑申请
 	"fundAccountDiagnosisResult_01":{ type:'click', evtid: 'fundAccountDiagnosisResult_01', topic: '账户诊断-添加其他基金时,购买时间事件', info: ''},
 	"fundAccountDiagnosisResult_02":{ type:'click', evtid: 'fundAccountDiagnosisResult_02', topic: '账户诊断-添加其他基金时,确定按钮', info: ''},
