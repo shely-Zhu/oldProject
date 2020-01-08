@@ -4,6 +4,9 @@
  * @Date:   2019-11-19
  * @description:
  * 公募持仓页面
+ * update:chentiancheng 2020-01-08
+ * @description:
+ * 新增事件clickEvent方法
  */
 
 require('@pathCommonBase/base.js');
@@ -27,6 +30,7 @@ $(function() {
             that.getData('');
             that.getBankList();
             that.initRightBtn();
+            that.clickEvent();
         },
         getBankList: function() {
             //查询银行卡列表
@@ -266,6 +270,10 @@ $(function() {
             }, {
                 'htmdEvt': 'publicAssets_7'
             })
+            
+        },
+        //点击事件
+        clickEvent:function(){
             //打开资产组成说明
             mui("body").on('mdClick', '.assetsBtn', function(e) {
                 $('.mask').show();

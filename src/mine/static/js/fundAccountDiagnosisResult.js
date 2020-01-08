@@ -526,26 +526,28 @@ $(function() {
                         that.gV.otherFundCodeData = arr
                     }
 
-                    $(".warmMessage").hide()
+//                  $(".warmMessage").hide()
+					$(".warmMessage").css("visibility","hidden")
                     $(".addOtherFund").hide()
                     $(".addOtherFund_content").hide()
                     that.initAddOtherFundCode()
                 } else {
-                    $(".warmMessage").show()
+//                  $(".warmMessage").show()
+                    $(".warmMessage").css("visibility","show")
                 }
             },{
                 'htmdEvt':'fundAccountDiagnosisResult_02'
             })
 
             mui("body").on("mdClick", ".addOtherFund_content .comfirmButtom .addOtherFalse", function() {
-                $(".warmMessage").hide()
+                $(".warmMessage").css("visibility","hidden")
                 $(".addOtherFund").hide()
                 $(".addOtherFund_content").hide()
             },{
                 'htmdEvt':'fundAccountDiagnosisResult_03'
             })
             // 性别选择
-            mui("body").on("mdClick", ".content-item .mui-icon-arrowright", function() {
+            mui("body").on("mdClick", ".content-item .mui-icon-arrowright,.content-item .right", function() {
                 var type = $(this).attr("type");
                 // $('.popuplist').css('display', 'block')
                 $(".popup-content .selectItemList").hide();
