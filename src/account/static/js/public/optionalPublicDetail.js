@@ -14,6 +14,7 @@ require('@pathCommonBase/base.js');
 require('@pathCommonJs/ajaxLoading.js');
 
 require('@pathCommonJs/components/authenticationProcess.js');
+var authenticationProcess = require('@pathNewCommonCom/authenticationProcess/authenticationProcess.js');
 //引入弹出层
 require('@pathCommonCom/elasticLayer/elasticLayer/elasticLayer.js');
 
@@ -475,7 +476,7 @@ $(function() {
 					}
 					that.getTypeOneData()
                 },
-                callbackNoData:function(argument) {
+                callbackNoData:function(json) {
                     tipAction(json.message);
                 }
             }];
@@ -665,12 +666,11 @@ $(function() {
 					//that.data.canClick = true; //变为可点击
 
                 },
-                callbackNoData:function(argument) {
+                callbackNoData:function(json) {
                     tipAction(json.message);
                 }
             }];
             $.ajaxLoading(obj);
-
 		},
 		getJumpUrl: function(v) { //获取跳转链接
             var jumpUrl = ""; //跳转链接
@@ -707,7 +707,7 @@ $(function() {
 					 //that.data.canClick = true; //变为可点击
  
 				 },
-				 callbackNoData:function(argument) {
+				 callbackNoData:function(json) {
 					 tipAction(json.message);
 				 }
 
