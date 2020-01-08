@@ -1,4 +1,9 @@
 // 蔡文琦 2019-11-25 基金公司页面 js
+/* 
+update: chentiancheng 2020-01-08 
+@非空判断
+
+*/
 
 require('@pathCommonBase/base.js');
 require('@pathCommonJs/ajaxLoading.js');
@@ -64,7 +69,24 @@ $(function () {
           }
           json.faxNolist = faxNolist;
           json.telephoneNoList = telephoneNoList;
-
+          //判断当前股东列表无数据的情况时
+          if(json.shareholderInfo.length==0){
+            json.shareholderInfo={
+              holdShares: "--",
+              holdSharesRatio: "--",
+              publishDate: "--",
+              shareholderId: "--",
+              shareholderName: "--"
+            }
+          }
+          //判断当前产品列表无数据的情况时
+          if(json.scaleInfo.length==0){
+            json.scaleInfo={
+              fundCount: "--",
+              fundNav: "--",
+              fundTypeName: "--" 
+            }
+          }
           var html = template(json);
           $(".tplBox").html(html);
 
