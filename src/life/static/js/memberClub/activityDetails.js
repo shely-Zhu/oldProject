@@ -364,18 +364,28 @@ $(function() {
                             };
                             $.elasticLayer(obj)
                         } else {
-                            var obj = {
-                                title: '温馨提示', //如果不传，默认不显示标题
-                                p: '<p>' + data.message + '</p>',
-                                yesTxt: '我明白了',
-                                hideCelButton: true,
-                                zIndex: 100,
-                                htmdEvtYes:'activityDetails_24',  // 埋点确定按钮属性
-                                callback: function(t) {
 
-                                },
-                            };
-                            $.elasticLayer(obj)
+                            if (!!data.message) {
+                                var obj = {
+                                    title: '温馨提示', //如果不传，默认不显示标题
+                                    p: '<p>' + data.message + '</p>',
+                                    yesTxt: '我明白了',
+                                    hideCelButton: true,
+                                    zIndex: 100,
+                                    htmdEvtYes:'activityDetails_24',  // 埋点确定按钮属性
+                                    callback: function(t) {
+
+                                    },
+                                };
+                                $.elasticLayer(obj)
+                            }
+                            else{
+                                tipAction( '系统开小差啦，请联系客服 400-8980-618' );
+                            }
+
+
+
+                            
                         }
                     }
                 }];
