@@ -9,8 +9,6 @@ require('@pathCommonJs/ajaxLoading.js');
 
 require('@pathCommonJsCom/tabScroll.js');
 var splitUrl = require('@pathCommonJsCom/splitUrl.js')();
-//黑色提示条的显示和隐藏
-var tipAction = require('@pathCommonJsCom/tipAction.js');
 var moment = require('moment');
 //引入弹出层
 require('@pathCommonCom/elasticLayer/elasticLayer/elasticLayer.js');
@@ -23,6 +21,10 @@ var monthReportDetail = {
 		noData: $('.noData'), //没有数据的结构
 		reportId:splitUrl['reportId'],   //活动的id
 		adjustmentTemp: $('#second-template'), // 最新调仓模板
+		reportTime:'',
+		monthReportTime:'',
+		month:'',
+		assetPerHtml:'',
 	},
 	pieChartData:'', // 画图的title
 	init: function(){  //初始化函数
@@ -31,7 +33,7 @@ var monthReportDetail = {
 		// 交易明细
 		that.commonAjax();
 		// 资产情况分析
-		that.assetAnalysis();
+		// that.assetAnalysis();
 		//事件监听
 		that.events();
 	},
@@ -69,10 +71,10 @@ var monthReportDetail = {
 			},
 			needLogin: true,
 			needDataEmpty: true,
-			async: false,
-			callbackDone: function(json) {
+			// async: false,
+			callbackDone: function(jsons) {
 				$(".netLoading").hide()
-				var json=json.data;
+				var json=jsons.data;
 				// 报告月份
 				that.getElements.monthReportTime = json.month;
 				$('.reportMonth').html(json.month);
@@ -81,46 +83,74 @@ var monthReportDetail = {
 				$('.lifeTerm').html(json.lifeTerm);
 				// 风险等级
 				$('.riskLevel').html(json.riskLevel);
-				// 报告日期
-				$('.reportTime').html(json.reportTime);
 
 				// 报告名称
 				$('#HeadBarpathName').html(json.reportName)
 				that.getElements.reportTime = json.reportTime;
-
 				var dateStr = json.reportTime;
 					dateStr = dateStr.replace(/年/g,"-");
 					dateStr = dateStr.replace(/月/g,"-");
 					dateStr = dateStr.replace(/日/g,"");
-				var now=moment(dateStr).format('YYYY-MM-DD');
+				var yearFor,monthFor,dayFor;
+				// 为兼容momentjs 和 new Date() 在ios、Safari上遇到的坑，对数据进行格式化
+				var timeStr = new Date(dateStr);
+					yearFor = timeStr.getFullYear() 
+					monthFor = timeStr.getMonth() + 1;
+					if (monthFor.toString().length == 1) {
+				        monthFor = "0" + monthFor;
+				    }
+				    dayFor = timeStr.getDate();
+				    if (dayFor.toString().length == 1) {
+				        dayFor = "0" + dayFor;
+				    }
+				    dataFor = yearFor + '-' + monthFor + '-' + dayFor;
+
+				var now=moment(dataFor).format('YYYY-MM-DD');
 
 				var year = now.substring(0,4);
 				var month = now.substring(5,7);
 				that.getElements.month = month;
-				that.getMonthDateRange(year,month);
+				var dayTime = json.reportTime;
+				if(dayTime.indexOf('年') != -1) {
+					year = dayTime.split('年')[0];
+					month = dayTime.split('年')[1].split('月')[0];
+					that.getMonthDateRange(year,month);
+				} else if(dayTime.indexOf('-') != -1) {
+					year = dayTime.split('-')[0];
+					month = dayTime.split('-')[1].split('-')[0];
+					that.getMonthDateRange(year,month);
+				} else{
+					that.getMonthDateRange(year,month);
+				}
+				that.queryInvestProdHoldShareList();
+				that.assetAnalysis();
 
-			},
-			callbackFail: function(json) {
-				//请求失败，
-				//显示错误提示
-				tipAction(json.message);
-			}
-			
-		},{
+			}		
+		},
+		]
+		$.ajaxLoading(obj);
+	},
+	queryInvestProdHoldShareList:function(){
+		var that = this;
+
+		var obj = [{
 			url: site_url.queryInvestProdHoldShareList_api,   // 持仓总览  报告的月末持仓总览
 			data: {
 				reportId: that.getElements.reportId
 			},
 			needLogin: true,
 			needDataEmpty: true,
-			async: false,
+			// async: false,
 			callbackDone: function(json) {
 				$(".netLoading").hide()
 				var jsonData = json.data;
 				if($.util.objIsEmpty(jsonData.pefSaleList) && $.util.objIsEmpty(jsonData.generalModelList) && $.util.objIsEmpty(jsonData.pofList)){
 					//没有数据
+					var reportTimeHtml = '';
+					reportTimeHtml = '截止'+that.getElements.reportTime+',您暂无持仓信息';
 					$('.holdNodata').show();
-					$('.holdNodata .text').html('截止'+that.getElements.reportTime+',您暂无持仓信息');
+					$('.holdNodata .text').text(reportTimeHtml);
+
 				}else{
 					var pefSaleList = jsonData.pefSaleList;
 					jsonData.holdPosition = true;
@@ -186,8 +216,9 @@ var monthReportDetail = {
 			callbackNoData: function(json) {
 				//没有数据
 				$('.holdNodata').show();
-				$('.holdNodata .text').html('截止'+that.getElements.reportTime+',您暂无持仓信息');
-
+				var reportTimeHtml2 =  '';
+				reportTimeHtml2 = '截止'+that.getElements.reportTime+',您暂无持仓信息';
+				$('.holdNodata .text').html(reportTimeHtml2);
 			}
 
 		}]
@@ -313,7 +344,6 @@ var monthReportDetail = {
 
 						that.pieChartDataDetail.push(dataDetail) ;
 
-
 					})
 
 					//调用画图方法
@@ -322,8 +352,8 @@ var monthReportDetail = {
 
 				}
 				else{
-					// $('.assetAnalyse').hide();
-					// $('.pieBox').hide();
+					$('.assetAnalyse').hide();
+					$('.pieBox.assetAnalyse').hide();
 				}
 				// 资产情况分析
 				if(!$.util.objIsEmpty(data)){
@@ -440,7 +470,7 @@ var monthReportDetail = {
 
 					})
 
-					//调用画图方法
+				//调用画图方法
 					that.bingtu(1);
 					that.typeCompare();
 				}
@@ -455,7 +485,11 @@ var monthReportDetail = {
 
 						for(var m in result){
 							if(result[m].productType == '173'){
-								result[m].flag2 = true;
+								if(result[m].isPrivateSale == '1'){
+									result[m].flag2 = true;
+								}else{
+									result[m].flag1 = true;
+								}
 							}
 							else if(result[m].productType == '177'){
 								result[m].flag3 = true;
@@ -527,15 +561,16 @@ var monthReportDetail = {
 		var endDate = moment(startDate).endOf('month');
 
 		// just for demonstration:
-		console.log(startDate.toDate());
-		console.log(endDate.toDate());
+		// console.log(startDate.toDate());
+		// console.log(endDate.toDate());
 		// make sure to call toDate() for plain JavaScript date type
 
 
-		$('.startDate').html(moment(startDate).format('YYYY-MM-DD'));
-
-		$('.endDate').html(moment(endDate).format('YYYY-MM-DD'));
-
+		// $('.startDate').html(moment(startDate).format('YYYY-MM-DD'));
+		var lastday = new Date(year,month,0).getDate();
+		var yearMonthDay = year+ '-' + month + '-' + lastday
+		// $('.endDate').text(moment(endDate).format('YYYY-MM-DD').toString());
+		$('.tipInfo .endDate').text(yearMonthDay);
 		return { start: startDate, end: endDate };
 
 	},
@@ -650,7 +685,7 @@ var monthReportDetail = {
 					
 				},
 				needLogin: true, //需要判断登录情况
-				needDataEmpty: false,//不需要判断data是否为空
+				needDataEmpty: true,//不需要判断data是否为空
 				callbackDone: function(json){
 					var result = json.data;
 					// 判断是否有专属理财师和服务理财师
@@ -671,6 +706,7 @@ var monthReportDetail = {
                             p: '<p>非常感谢选择恒天财富！我们将尽快安排专业人员与您联系，请保持手机畅通</p>',
                             hideCelButton: true,
                             zIndex: 100,
+                            htmdEvtYes:'monthReportDetail_06',  // 埋点确定按钮属性
                             callback: function(t) {
 
                             },
@@ -705,20 +741,9 @@ var monthReportDetail = {
 						var now = new Date();
 						var hh = now.getHours();
 
-						if(8 <= hh && hh <= 20){
+						if(8 <= hh && hh < 20){
 							 //跳转客服页面
-							var obj = [{
-								url: site_url.getToken_api,
-								data: {
-								},
-								needDataEmpty:false,
-								callbackDone: function(json) {
-									var token = json.data.token;
-									// 跳转第三方客服地址
-									window.location.href = site_url.onlineCustomer_url + '&token=' + token;
-								},     
-							}];
-							$.ajaxLoading(obj);
+							window.location.href = site_url.onlineCustomerTransfer_url;
 						}else{
 							window.location.href = site_url.consultProduct_url +'?empNo='+ that.getElements.plannerNum + '&empName=' + that.getElements.plannerName + '&productName=' + new Base64().encode(that.getElements.productName) + '&backUrl=' + new Base64().encode(window.location.href) ;
 						}
@@ -726,8 +751,19 @@ var monthReportDetail = {
 					}
 				},
 				callbackFail: function(json){
-					
+					tipAction(json.message)
 				},
+				callbackNoData:function(json){
+					var now = new Date();
+					var hh = now.getHours();
+
+					if(8 <= hh && hh < 20){
+						 //跳转客服页面
+						window.location.href = site_url.onlineCustomerTransfer_url;
+					}else{
+						window.location.href = site_url.consultProduct_url +'?empNo='+ that.getElements.plannerNum + '&empName=' + that.getElements.plannerName + '&productName=' + new Base64().encode(that.getElements.productName) + '&backUrl=' + new Base64().encode(window.location.href) ;
+					}
+				}
 			}]
 			$.ajaxLoading(obj);
 

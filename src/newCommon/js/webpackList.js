@@ -199,6 +199,8 @@ module.exports = {
     './mine/static/js/fundAccountDiagnosisResult': './src/mine/static/js/fundAccountDiagnosisResult.js',
     //基金账户诊断 -- 添加已购买基金
     './mine/static/js/addAccountDiagnosisResult': './src/mine/static/js/addAccountDiagnosisResult.js',
+    //基金账户诊断---无持仓页面
+    './mine/static/js/noAccountHoldShare': './src/mine/static/js/noAccountHoldShare.js',
     //基金账户诊断 -- 申请记录页面
     './mine/static/js/applyHistory': './src/mine/static/js/applyHistory.js',
     // 标普模型
@@ -313,7 +315,7 @@ module.exports = {
     // 自选公募交易记录
     './account/static/js/public/transactionRecords': './src/account/static/js/public/transactionRecords.js',
     // 自选公募交易明细
-    './account/static/js/public/transactionDetail': './src/account/static/js/public/transactionDetail.js',
+    './account/static/js/public/superTransactionRecord': './src/account/static/js/public/superTransactionRecord.js',
 
     // 自选公募--超宝详情
     './account/static/js/public/superStreasureDetail': './src/account/static/js/public/superStreasureDetail.js',
@@ -330,6 +332,9 @@ module.exports = {
 
     //普通基金定投结果
     './financial/static/js/publicPlacement/surelyResults': './src/financial/static/js/publicPlacement/surelyResults.js',
+
+    //定投结果展示
+    './financial/static/js/publicPlacement/surelyResultShot': './src/financial/static/js/publicPlacement/surelyResultShot.js',
 
     //普通基金定投结果详情
     './financial/static/js/publicPlacement/surelyResultsDetail': './src/financial/static/js/publicPlacement/surelyResultsDetail.js',
@@ -348,6 +353,8 @@ module.exports = {
     './financial/static/js/publicPlacement/ordinarySetThrow': './src/financial/static/js/publicPlacement/ordinarySetThrow.js',
     //普通基金赎回
     './financial/static/js/publicPlacement/redemptionBuy': './src/financial/static/js/publicPlacement/redemptionBuy.js',
+    //普通基金赎回说明
+    './financial/static/js/publicPlacement/redemptionExplain': './src/financial/static/js/publicPlacement/redemptionExplain.js',
     // 现金管理
     './financial/static/js/publicPlacement/cashManagement': './src/financial/static/js/publicPlacement/cashManagement.js',
 
@@ -394,7 +401,7 @@ module.exports = {
     './account/static/js/public/returnsDetail': "./src/account/static/js/public/returnsDetail.js",
 
     // 私募交易规则
-    './account/static/js/private/transactionRules': "./src/account/static/js/private/transactionRules.js",
+    './account/static/js/private/privateTransactionRules': "./src/account/static/js/private/privateTransactionRules.js",
     //私募详情列表页
     './account/static/js/private/privateDetailList': "./src/account/static/js/private/privateDetailList.js",
 }

@@ -9,6 +9,7 @@
     <title>模板</title>
 </head>
 <body>
+    @@include('@pathCommonCom/loading/listLoading.html')
     <div id="richTemplateWrap" class="articleTemplate">
         @@include('@pathCommonViews/headBarConfig.html',{"bgColors":"#000,#eee","showType":"0","pathName":""})
         <div class='imgCont'><img src="" alt="" /></div>
@@ -16,7 +17,7 @@
         <div class="artHeaderCont">
             <div class="artImg" id="video_wrapper"><img src="" alt=""><div class="videoButton"><div class="mask"></div><span></span><i class="iconfont playIcon videoPlayIcon">&#xe640;</i></div></div>
             <!-- <div class="videoArea"><img class="videoImg" src="/include/img/arcticleheaderimg.png" alt="" /></div> -->
-            <div class="artTitle">
+            <div class="artTitle hide">
                 <p class="ellipsis_two"><!-- 11.13|资金买方资金买方头部文案头部文案头部文案头部文案头部文案 --></p>
             </div>
 
@@ -31,7 +32,7 @@
 
 
         <div class="btnButton">
-            <a href="javascript:void(0);" class="mui-btn btnHref" ></a>
+            <a href="javascript:void(0);" class="mui-btn btnHref"></a>
         </div>
     </div>
 

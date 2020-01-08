@@ -5,7 +5,7 @@
 
  <script id="starFinancialPlannerList-template" type="text/x-handlebars-template">
     {{#each this}}
-    <div class="mui-card">
+    <div class="mui-card" code="{{code}}">
         <div class="starFinancialPlannerListLeftBox">
             <div class="left">
                 <div class="starFinancialPlannerPhotoBox">
@@ -24,12 +24,12 @@
         </div>
         <div class="starFinancialPlannerListRightBox">
             <div class="certificateBox">
-                {{#if certificate}}
+                {{#if isPass}}
                 <p class="font1">专业证书</p>
                 <i class="icon1"></i>
                 <p class="font2">AMAC</p>
-                <i class="icon2"></i>
-                <p class="font2">CFA</p>
+                <!-- <i class="icon2"></i>
+                <p class="font2">CFA</p> -->
                 {{/if}}
             </div>
             <div class="starFinancialPlannerTitleBox">

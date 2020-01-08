@@ -57,7 +57,8 @@ var tradeList = {
 
                 // 不同风险等级的描述文案
                 that.findContentByCategory();
-
+                // 按钮置灰暂不可用
+               $('.developPlans').attr("disabled", true).addClass('disable');
             },
             callbackFail: function(json) {
                 tipAction(json.message);

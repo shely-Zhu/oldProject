@@ -116,7 +116,7 @@ var splitUrl = require('./components/splitUrl.js')();
                 needDataEmpty: true, //需要判断data是否为空
                 needLoading: true, //需要显示loading遮罩
                 callbackDone: function() {},
-                callbackFail: function() {},
+                callbackFail: null,
                 callbackNoData: function() {},
                 //formData
                 formData: false, //判断是否需要使用formData上传
@@ -235,7 +235,7 @@ var splitUrl = require('./components/splitUrl.js')();
                     if (data.status != '0000' && data.status != '4007' && data.status != '1000') {
                         //数据请求失败的情况
                         if (!data.message) {
-                            data.message = '处理异常，请联系客服 400-8980-618';
+                            data.message = '系统开小差啦，请联系客服 400-8980-618';
                         }
 
 
@@ -251,7 +251,7 @@ var splitUrl = require('./components/splitUrl.js')();
                         //需要判断数据是否为空
                         // if ($.util.objIsEmpty(json)) {
                             //数据为空，如果有传callbackNoData，执行
-                            obj.callbackNoData( json );
+                            obj.callbackNoData( data );
                             return false;
                         // }
                     }

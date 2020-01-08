@@ -14,7 +14,7 @@
 <body>
 	@@include('@pathCommonCom/loading/listLoading.html') 
 	<div class="publicDetail ">
-		@@include('@pathCommonViews/headBarConfig.html',{"pathName":"普通基金","bgColors":"#475A95,#475A95","showType":"1","serviceType":"1"})
+		@@include('@pathCommonViews/headBarConfig.html',{"pathName":"普通基金","bgColors":"#22346D,#031349","showType":"1","serviceType":"1"})
 		<div class="tplBox"></div>
 	</div>
 	@@include('@pathCommonViews/authenticationProcess.html',{"pathTitle":"认证信息"})
@@ -27,7 +27,7 @@
 					<!-- <div class="service"></div> -->
 					<div class="day_gain">七日年化</div>
 					<div class="day_gain_value">{{annYldRat_s}}%</div>
-					<div class="new_worth">万份收益({{trDate}})</div>
+					<div class="new_worth">万份收益</div>
 					<div class="new_worth_value">{{unitYld}}</div>
 					<div class="type">
 						<div class="type_1">{{riskLevelName}}</div>
@@ -39,13 +39,13 @@
 				<div class="topContent">    <!-- 非10300 -->
 					<!-- <div class="service"></div> -->
 					<div class="day_gain">日涨幅</div>
-					<div class="day_gain_value">{{chgRat1d_s}}%</div>
+					<div class="day_gain_value">{{chgRat1d}}%</div>
 					<div class="new_worth">最新净值({{trDate}})</div>
-					<div class="new_worth_value">{{unitNav}}</div>
+					<div class="new_worth_value">{{unitNavRetainFourStr}}</div>
 					<div class="type">
 						<div class="type_1">{{riskLevelName}}</div>
 						<div class="type_2">{{invTypComDesc}}</div>
-						<div class="type_3">10000.0元起购</div>
+						<div class="type_2">{{minValue}}元起购</div>
 					</div>
 				</div>
 				{{/if}}
@@ -94,13 +94,13 @@
 					</div>
 					<div class="history_area">
 						<div class="titleWrap">
-							<div class="title">
-								历史净值
+							<div class="title" id="history_tital">
+								
 							</div>
 							<div class="arrow history_more">
 								<span class="img"></span>
 							</div>
-							<div class="desc history_more">
+							<div class="desc history_more mr_03">
 								<span>查看更多</span>
 							</div>
 						</div>
@@ -113,7 +113,7 @@
 							<div class="arrow rule">
 								<span class="img"></span>
 							</div>
-							<div class="desc rule">
+							<div class="desc rule mr_03">
 								<span class="ruleName">买入/卖出规则</span>
 							</div>
 						</div>
@@ -136,7 +136,7 @@
 							<div class="line_left"></div>
 							<div class="line_right"></div>
 						</div>
-						<div class="line_desc">15:00后采用转账汇款方式的认申购款将视作下一个工作日的交易款项</div>
+						<div class="line_desc">15:00后采用转账汇款方式的认申购款将视作下一个工作日的交易款项。</div>
 					</div>
 					<div class="titleWrap">
 						<div class="title">
@@ -161,20 +161,32 @@
 						<div class="arrow fundManager">
 							<span class="img"></span>
 						</div>
-						<div class="desc fundManager">
+						{{#if fundManager}}
+						<div class="desc fundManagerText fundManager">
 							{{fundManager}}
 						</div>
+						{{else}}
+						<div class="desc fundManagerText fundManager">
+							--
+						</div>
+						{{/if}}
 					</div>
 					<div class="titleWrap">
 						<div class="title nobold">
 							基金公司
 						</div>
-						<div class="arrow fundCompany">
+						<div class="arrow">
 							<span class="img"></span>
 						</div>
-						<div class="desc fundCompany">
+						{{#if fmcComName}}
+						<div class="desc fundCompanyText fundCompany">
 							{{fmcComName}}
 						</div>
+						{{else}}
+						<div class="desc fundCompanyText fundCompany">
+							--
+						</div>
+						{{/if}}
 					</div>
 					<div class="company_info">
 						基金销售服务由北京恒天明泽基金销售有限公司提供
@@ -194,6 +206,17 @@
 					<div class="fixed_investement_btn"  type="3">定投</div>
 					<div class="buy_btn"  type="4">买入</div>
 				</div>
+				<div class="isRiskMatchBox">
+					<div class="isRiskMatchBox_contentBox">
+						   <div class="headTital">尊敬的用户</div>
+						   <div class='isRiskMatchBox_header'>你选择的产品与您现在的风险承受能力相匹配</div>
+						   <div class="isRiskMatchBox_footer">
+							   <div class="isRiskMatchBox_match">明白了</div>
+							   <div class="isRiskMatchBox_noMatch"><button class="isRiskMatchBox_cancel">放弃购买</button> <button class="isRiskMatchResult">查看评测结果</button></div>
+						   </div>
+					</div>
+				</div>
+				<div class="isRiskMatch_mask"></div>
 			</div>
 		</script>
 		<script id="dataLists1" type="text/x-handlebars-template">
@@ -202,8 +225,8 @@
 					{{#each pageList}}
 					<div class="history_item" data="{{fundType}}">
 						<div class="item_value_1">{{trdDt}}</div>
-						<div class="item_value_1">{{unitYld}}</div>
 						<div class="item_value_2 value">{{annYldRat}}%</div>
+						<div class="item_value_1">{{unitYld}}</div>
 					</div>
 				{{/each}}
 				{{else}}
@@ -220,6 +243,7 @@
 		</script>
 		<script src="/allServerResources/include/js//vendor/echarts/echarts.min.js"></script>
 		<script src="/financial/static/js/publicPlacement/publicDetail.js"></script>
+		<!-- <script src="https://cdn.jsdelivr.net/npm/eruda"></script> -->
 	</body>
 
 </html>

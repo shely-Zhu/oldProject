@@ -9,7 +9,7 @@ var splitUrl = require('@pathCommonJs/components/splitUrl.js')();
 var generateTemplate = require('@pathCommonJsComBus/generateTemplate.js');
 var alwaysAjax = require('@pathCommonJs/components/alwaysAjax.js');
 var moment = require('moment');
-require('@pathCommonJs/components/headBarConfig.js');
+// require('@pathCommonJs/components/headBarConfig.js');
 
 $(function() {
     var activityList = {
@@ -43,6 +43,7 @@ $(function() {
                 // that.getCityListData();
                 that.getCity();
                 that.events();
+                // $("img")
             },
             //初始化mui的上拉加载
             initMui: function() {
@@ -95,12 +96,9 @@ $(function() {
                     },
                     needDataEmpty: true,
                     callbackDone: function(json) {
-
-                        console.log(json.data);
                         if (!json.data.activityVoPageInfo && that.gV.startPage == 1) {
                             var topHeitgh = $('#activitySearch').height();
                             var height = windowHeight - topHeitgh;
-
                             $('.activityListDataNoBox').height(height);
                             t.endPullupToRefresh(true);
                             that.$e.activityListDataBox.hide();
@@ -115,12 +113,16 @@ $(function() {
                                 actType: json.data.defaultRecommend.linkType,
                                 actId: json.data.defaultRecommend.id,
                                 actImgUrl: json.data.defaultRecommend.filePath,
-                                actName: json.data.defaultRecommend.title
+                                // actName: json.data.defaultRecommend.title
                             }];
                             that.getNoData(noList);
                             return false;
                         }
-                        var data = json.data.activityVoPageInfo.list;
+                        if(json.data.activityVoPageInfo) {
+                            var data = json.data.activityVoPageInfo.list
+                        } else {
+                            var data = []
+                        }
                         that.$e.activityListDataBox.show();
                         that.$e.activityListDataNoBox.hide();
                         setTimeout(function() {
@@ -152,22 +154,16 @@ $(function() {
                             }
                             // 将列表插入到页面上
                             generateTemplate(list, that.$e.recordList, that.$e.activityListTemp)
-                            alwaysAjax($(".recordList"));
+                            alwaysAjax($(".recordList"), null, 2);
                             $(".lazyload").lazyload()
                         }, 200)
 
-                    },
-                    callbackFail: function(json) {
-                        console.log(json.message)
-                        tipAction(json.message);
                     },
                     callbackNoData: function(json) {
                         if (!json.data.activityVoPageInfo && that.gV.startPage == 1) {
                             var topHeitgh = $('#activitySearch').height();
                             var height = windowHeight - topHeitgh;
-
                             $('.activityListDataNoBox').height(height);
-
                             t.endPullupToRefresh(true);
                             that.$e.activityListDataBox.hide();
                             that.$e.activityListDataNoBox.show();
@@ -225,6 +221,7 @@ $(function() {
                     needLoading: true,
                     callbackDone: function(json) {
                         $('#loading').hide();
+                        $('.netLoading').hide();
                         console.log(json);
                         var data = json.data;
                         var res = [];
@@ -261,10 +258,6 @@ $(function() {
                         mui.ready(function() {
                             window.indexedList = new mui.IndexedList($('#list')[0]);
                         });
-                    },
-                    callbackFail: function(json) {
-                        console.log(json.message)
-                        tipAction(json.message);
                     }
                 }];
                 $.ajaxLoading(obj);
@@ -279,17 +272,13 @@ $(function() {
                         var code = data.cityCode;
                         var name = data.cityName;
                         var parentid = data.provinceCode;
-                        $('#locationCity').text(name);
+                        $('#locationCity').text(name || '全国');
                         $('#locationCity').attr({
                             'data-name': name,
                             'data-parentid': parentid
                         });
                         that.gV.actCityName = name;
                         that.initMui();
-                    },
-                    callbackFail: function(json) {
-                        console.log(json.message)
-                        tipAction(json.message);
                     }
                 }];
                 $.ajaxLoading(obj);
@@ -311,8 +300,8 @@ $(function() {
                     var txt = $(this).text();
                     var name = $(this).attr('data-name');
                     var parentId = $(this).attr('data-parentId');
-                    $('#activityDataBox').show();
                     $('#cityListBox').hide();
+                    $('#activityDataBox').show();
                     $('#loading').show();
                     $('.recordList').html('');
                     $('#locationCity').text(txt);
@@ -356,9 +345,11 @@ $(function() {
                 });
                 //点击选择城市头部返回效果
                 mui('#activitySearch').on('mdClick', '.goBack', function() {
-                        $('#cityListBox').hide();
-                        $('#activityDataBox').show();
-                    })
+                    $('#cityListBox').hide();
+                    $('#activityDataBox').show();
+                },{
+                    htmdEvt: 'activityList_8'
+                })
                     //点击定位选择右侧索引效果
                 mui('#cityListBox').on('mdClick', '.mui-indexed-list-bar a', function() {
                     var txt = $(this).text();

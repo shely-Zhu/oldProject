@@ -134,7 +134,7 @@
 	 		    <div class="mui-col-sm-6 mui-col-xs-6 symx">
 	 		    	<img class="img" src="/account/static/img/account_icon_symx.png">
 	 		        <span class="txt">收益明细</span>
-	 		    </div>
+				</div>
 	 		    <div class="mui-col-sm-6 mui-col-xs-6 jyjl">
 	 		       	<img class="img" src="/account/static/img/account_icon_jyjl.png">
 	 		        <span class="txt">交易记录</span>
@@ -158,6 +158,8 @@
 	 				<div id="qrnhLine" class="line"></div>
 	 				<!-- 万份收益折线图 -->
 	 				<div id="wfsyLine" class="hide line"></div>
+	 				<!-- 无数据提示 -->
+	 				<div class="hide noDataHintEcharts">暂无数据</div>
 	 				<div class='mui-row tab'>
 	 					<span class="mui-col-sm-2 mui-col-xs-2 time oneMonth active" num="0">近一个月</span>
 	 					<span class="mui-col-sm-2 mui-col-xs-2 time threeMonth" num="1">近三个月</span>
@@ -193,11 +195,24 @@
 
  			</div>
 
-	 	</div>
+		 </div>
+		 <div class="isRiskMatchBox">
+			<div class="isRiskMatchBox_contentBox">
+				<div class="headTital">尊敬的用户</div>
+				   <div class='isRiskMatchBox_header'>你选择的产品与您现在的风险承受能力相匹配</div>
+				   <div class="isRiskMatchBox_footer">
+					   <div class="isRiskMatchBox_match">确定</div>
+					   <div class="isRiskMatchBox_noMatch"><button class="isRiskMatchBox_cancel">放弃购买</button> <button class="isRiskMatchResult">查看评测结果</button></div>
+				   </div>
+			</div>
+		</div>
+		<div class="isRiskMatch_mask"></div>
 	</div>
+	@@include('@pathCommonViews/authenticationProcess.html',{"pathTitle":"购买私募产品前，请完成以下认证"}) 
 	
 	@@include('@pathInclude/views/footer.html')
 	<script src="/allServerResources/include/js/vendor/echarts/echarts.min.js"></script>
+	<script src="/allServerResources/include/js//vendor/clipboard/clipboard.js"></script>
 	<script src="/account/static/js/public/optionalPublicDetail.js"></script>
 
 </body>

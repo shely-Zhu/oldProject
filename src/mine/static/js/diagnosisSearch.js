@@ -8,8 +8,8 @@
 require('@pathCommonBase/base.js');
 require('@pathCommonJs/components/utils.js');
 require('@pathCommonJs/ajaxLoading.js');
-require('@pathCommonJs/components/elasticLayer.js');
-require('@pathCommonJs/components/headBarConfig.js');
+// require('@pathCommonJs/components/elasticLayer.js');
+// require('@pathCommonJs/components/headBarConfig.js');
 var tipAction = require('@pathCommonJs/components/tipAction.js');
 var splitUrl = require('@pathCommonJs/components/splitUrl.js')();
 var generateTemplate = require('@pathCommonJsComBus/generateTemplate.js');
@@ -31,6 +31,7 @@ $(function() {
         },
         init: function() {
             var that = this;
+            that.$e.listLoading.hide()
             that.beforeFunc();
             that.events();
         },
@@ -41,9 +42,9 @@ $(function() {
             //计算节点高度并设置
             var height = windowHeight - $('.fixedWrap').height();
 
-            if (!$('.list .contentWrapper').hasClass('setHeight')) {
-                $('.list, .contentWrapper').height(height).addClass('setHeight');
-            }
+            // if (!$('.list .contentWrapper').hasClass('setHeight')) {
+            //     $('.list, .contentWrapper').height(height).addClass('setHeight');
+            // }
         },
         // 初始化mui的上拉加载
         initMui: function() {
@@ -152,9 +153,6 @@ $(function() {
                     //隐藏回到顶部按钮
                     $('.goTopBtn').hide();
 
-                },
-                callbackFail: function(json) {
-                    tipAction(json.msg);
                 }
             }]
             $.ajaxLoading(obj);

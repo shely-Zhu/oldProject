@@ -3,38 +3,50 @@
 @import url("@pathCommonCom/noData/noData.less");
 @import url("@pathCommonLessCom/headBarConfig.less");
 body{
-    max-width: 7.5rem;
-    background:@c005;
+    background:#f7fafd;
+}
+.transactionDetail {
+    font-weight: 400;
+}
+.mui-table-view-cell:after {
+    background: none;
+}
+.mui-pull-caption {
+    font-weight: 400;
 }
 .test{
     color:@BB8E5F;
     width: 0.6rem;
     height: 0.6rem;
-    border: 0.01rem solid @BB8E5F;
+    border: 0.02rem solid @BB8E5F;
     border-radius: 50%;
     line-height: 0.6rem;
     text-align: center;
-    // font-weight: 600;
+    font-weight: 600;
 }
 .testone{
     color:@364D97;
     width: 0.6rem;
     height: 0.6rem;
-    border: 0.01rem solid @364D97;
+    border: 0.02rem solid @364D97;
     border-radius: 50%;
     line-height: 0.6rem;
     text-align: center;
-    // font-weight: 600;
+    font-weight: 600;
 }
 .testoneo{
     color:@59B1D6;
     width: 0.6rem;
     height: 0.6rem;
-    border: 0.01rem solid @59B1D6;
+    border: 0.02rem solid @59B1D6;
     border-radius: 50%;
     line-height: 0.6rem;
     text-align: center;
-    // font-weight: 600;
+    font-weight: 600;
+}
+.br{
+    height: .3rem;
+    background:@F7FAFD;
 }
 .list {
     // margin-top: 1rem;
@@ -47,17 +59,18 @@ body{
             width: 100%;
             height: 1.36rem;
             border-bottom:0.01rem solid @c008;
-            border-top:0.01rem solid @c008;
+            //border-top:0.01rem solid @c008;
             padding-top: 0.4rem;
+            padding-left: .3rem;
+            padding-right: .3rem;
             font-size:0.24rem;
             font-family:PingFangSC-Regular,PingFang SC;
             font-weight:400;
             color:@c009;
             background: @c005;
             .contentLeft{
-                width: 1rem;
+                width: .9rem;
                 height: 100%;
-                margin-left: 0.22rem;
                 // .photoleft{
                 //     width: 0.6rem;
                 //     height: 0.6rem;
@@ -68,9 +81,9 @@ body{
                 // }
             }
             .contentRight{
-                width: 5.8rem;
                 height: 100%;
                 display: flex;
+                flex: 1;
                 .contentUl{
                     width: 33.33%;
                     // text-align: center;
@@ -80,9 +93,16 @@ body{
                 }
                 .leftUl{
                     text-align: left;
+                    li:last-child {
+                        font-weight: 600;
+                    }
                 }
                 .centerUl{
-                    text-align: center;
+                    li {
+                        padding-left: .3rem;
+                        text-align: left;
+                        margin: 0 auto;
+                    }
                 }
                 .rightUl{
                     text-align: right;

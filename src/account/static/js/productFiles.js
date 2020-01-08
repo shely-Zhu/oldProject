@@ -119,11 +119,7 @@ $(function() {
         'htmdEvt': 'productFiles_0'
       })
       mui("body").on('mdClick','.materialContent',function(e){
-        var src=$(this).attr("href")
-        var form = document.createElement('form');
-        form.action = src;
-        document.getElementsByTagName('body')[0].appendChild(form);
-        form.submit();
+        window.location.href = $(this).attr("href");
 			},{
         'htmdEvt': 'productFiles_1'
       })

@@ -48,8 +48,9 @@ $(function() {
                             "fundCode":that.gV.fundCode,//项目编号
                         },                        
                         needDataEmpty: true,
+                        needLoading: false,
                         callbackDone: function(json) {     
-                            var data = json.data.list;
+                            var data = json.data.pageList ||[];
                             if(that.gV.pageCurrent == 1 && data.length == 0) {
                                 $(".list").css("display", "none")
                                 that.$e.noData.show()

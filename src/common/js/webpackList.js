@@ -167,9 +167,6 @@ module.exports = {
     './personal/static/js/growth/growthValue' : './src/personal/static/js/growth/growthValue.js',
     //成长值规则
     './personal/static/js/growth/growthReg' : './src/personal/static/js/growth/growthReg.js',
- 
-
-    
 
     // 基金诊断
     './commonResources/fundDiagnosis/static/js/hotDiagnosis' : './src/commonResources/fundDiagnosis/static/js/hotDiagnosis.js',
@@ -177,7 +174,6 @@ module.exports = {
     './commonResources/fundDiagnosis/static/js/diagnosisDetail' : './src/commonResources/fundDiagnosis/static/js/diagnosisDetail.js',
     // 基金诊断搜索页
     './commonResources/fundDiagnosis/static/js/diagnosisSearch' : './src/commonResources/fundDiagnosis/static/js/diagnosisSearch.js',
-
 
     // 标普模型
     './personal/static/js/spAssetModel': "./src/personal/static/js/spAssetModel.js",
@@ -193,5 +189,4 @@ module.exports = {
 
     // 埋点
     './allServerResources/appMd/headerMd' : './src/allServerResources/appMd/headerMd.js',
-
 }

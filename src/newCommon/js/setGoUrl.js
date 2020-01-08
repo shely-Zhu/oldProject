@@ -12,7 +12,7 @@
 window.setGoUrl = function(url, htmdEvt ){
 
 	//发送埋点请求
-	window._submitMd && window._submitMd( 3, 'htmdEvt' );
+	window._submitMd && window._submitMd( 3, htmdEvt );
 
 	window.location.href = url;
 

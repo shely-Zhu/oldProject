@@ -16,6 +16,7 @@
 
 @import url('@pathCommonCom/elasticLayer/transOutRule/transOutRule.less');
 @import url("@pathCommonLessCom/payPassword.less");
+@import url("@pathCommonCom/noData/noData.less");
 
 html,
 body {
@@ -26,7 +27,7 @@ body {
         .addApply{
             position: fixed;
             right: 0.3rem;
-            z-index: 200000;
+            z-index: 2000000;
             color:#364D97 ;
             top: 0.65rem;
             font-size: 0.3rem;
@@ -87,7 +88,7 @@ body {
             display: inline-block;
             float: left;
             margin-left: 0.5rem;
-            margin-top: 0.2rem;
+            //margin-top: 0.2rem;
             font-weight: bold;
             
         }
@@ -101,8 +102,8 @@ body {
         .mui-table-view > .mui-table-view-cell > .mui-icon{
             display: inline-block;
             float: right;
-            margin-top: 0.15rem;
             margin-right: 0.1rem;
+            line-height: 1rem;
         }
         .mt20{
             margin-top: 0.2rem;
@@ -136,7 +137,7 @@ body {
                     display: inline-block;
                     float:right;
                     margin-right: 0.1rem;
-                    margin-top: 0.1rem;
+                    line-height: 0.8rem;
                 }
                 .right_down{
                     display: none;
@@ -146,6 +147,7 @@ body {
                 display: none;
                 .editHistory{
                     color: #364D97;
+                    line-height: 1rem;
                 }
             }
         }

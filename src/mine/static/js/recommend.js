@@ -1,15 +1,10 @@
 /*
- * @page: 老带新----推荐有礼
- * 
- * @Author: yangjinlai
- * @Date:   2017-10-27 10:48:29
- *  @description: js可以更换版本，但是html是分享出去的链接，不能变;
- *                 关闭弹层按钮，fixed定位在ios，app中会随着屏幕滚动，所以提出来
- * 
- * @Last Modified by:   songxiaoyu
- * @Last Modified time: 2018-07-30 15:38:48
- * @description: 推荐有礼大改版
- */
+* @page: 老带新邀请好友
+* 
+* @Author: chentinacheng
+* @Date:   2019-12
+*
+*/
 
 require('@pathIncludJs/vendor/mui/mui.picker.min.js');
 require('@pathCommonJs/ajaxLoading.js');
@@ -39,7 +34,10 @@ $(function() {
             weixinConf: {}, // 微信分享内容对象
             title: '', // 微信分享title设置
             imageUrl: '', // 微信分享图片设置
+            imageUrlApp: '', // 微信分享图片设置
             introduction: '', // 微信分享简介设置
+            shareUrl:'',
+            customerNo:'',
             // advisor:[],
         },
         list: [], // 存放接口里获取的理财师数据
@@ -101,13 +99,22 @@ $(function() {
                     if (json.data.recommendable == 1) {
                         // 未实名认证
                         tipAction('完成实名认证后才可以推荐好友哦', function() {
-                            window.location.href = site_url.mine_url;
+                        if (window.isAndroid) {
+                            //这个是安卓操作系统
+                            window.jsObj.backNative();
+                        }
+                        if (window.isIOS) {
+                            //这个是ios操作系统
+                            window.webkit.messageHandlers.backNative.postMessage('backNative');
+                        }   
                         })
                     } else {
                         // 已实名认证，初始化页面
+                        $(".recommendBoxUserName").html(json.data.oldName)
                         that.initialPage()
                     }
                 }
+
             }];
             $.ajaxLoading(obj);
         },
@@ -140,27 +147,26 @@ $(function() {
                 pageSize: "1"
             };
 
-            // 如果是微信浏览器
-            if (that.isWeiXin) {
-                // 为性能，提前请求鉴权接口，分享内容接口，
+            // // 如果是微信浏览器
+            // if (that.isWeiXin) {
+            //     // 为性能，提前请求鉴权接口，分享内容接口，
 
-                // 请求微信鉴权接口
-                that.generateAjaxObj(site_url.share_api, shareData, function(data) {
-                    //  微信config设置
-                    that.dealWeiXinSet(data);
-                })
+            //     // 请求微信鉴权接口
+            //     that.generateAjaxObj(site_url.share_api, shareData, function(data) {
+            //         //  微信config设置
+            //         that.dealWeiXinSet(data);
+            //     })
+            // }
 
-                // 请求微信分享内容接口
-                that.generateAjaxObj(site_url.findContentByCategory_api, wxData, function(data) {
-                    // 将数据存储起来，待一会生成链接使用，为性能，提前请求接口
-                    var data = data.pageList[0];
+            // 请求微信分享内容接口
+            that.generateAjaxObj(site_url.findContentByCategory_api, wxData, function(data) {
+                // 将数据存储起来，待一会生成链接使用，为性能，提前请求接口
+                var data = data.pageList[0];
 
-                    that.setting.weixinConf = Object.assign(that.setting.weixinConf, Object(data));
-                    // 确保3个接口（鉴权，分享内容，分享链接）都请求成功，再设置分享链接
-                    that.asyncAll();
-                }, function() {}, function() {}, true)
-            }
-
+                that.setting.weixinConf = Object.assign(that.setting.weixinConf, Object(data));
+                // 确保3个接口（鉴权，分享内容，分享链接）都请求成功，再设置分享链接
+                that.asyncAll();
+            }, function() {}, function() {}, true)
             // 获取理财师的接口
             that.generateAjaxObj(site_url.custBro_api, custBroData, function(data) {
                 // 根据理财师处理页面逻辑
@@ -189,12 +195,13 @@ $(function() {
         },
         // 有数据返回的   根据理财师处理页面逻辑
         dealManagerLogic: function(data) {
+            // debugger
             var that = this,
                 shareUrl = '', // 分享出去链接
                 existMain = data.existMain;
                 advisor = data.advisor;
                 that.getElements.existMain=existMain;
-                
+                that.setting.customerNo=data.customerNo
             if (existMain == 0 && advisor.length > 1) {
                 $('.recommendLcsText').html("您的理财师：")
                 //无专属且理财师多于1位默认展示一个
@@ -224,77 +231,37 @@ $(function() {
          * @author songxiaoyu 2018-07-18
          */
         generateShareLink: function(num,sharingType) {
-            var that = this,
-                aesEncrypt = ''; // 加密信息
+            var that = this;
+                    //拼分享出去的链接
 
-            that.setting.ajaxArr.push({
-                url: site_url.oldRecommendNew_api,
-                data: {
-                    empNo: num || '' //理财师工号
-                },
-                async: false, // 同步请求
-                needLogin: true,
-                needDataEmpty: false,
-                callbackDone: function(json) {
-                    var wxShare={
-                        'type': sharingType,     // auto 原生自己分享框  wechatMoments 朋友圈   friends 朋友
-                        'businessType': '',   //life,业务类型
-                        'title': '',    //标题
-                        'des': '',   //简介
-                        'link': '',   //链接
-                        'img':'',   // 图标
-                    }
-
-                    if (json.data.recommendable == 1) {
-                        // 未实名认证
-                        tipAction('完成实名认证后才可以推荐好友哦', function() {
-                            window.location.href = site_url.realNameStepOne_url;
-                        })
-                    } else {
-                        $(".recommendBoxUserName").html(json.data.oldName)
-                        // 已实名认证
-                        
-                        //拼分享出去的链接
-                        shareUrl = site_url.marketCampaign_url + '&shareCustomerNo=' + that.customerNo + '&shareEmpCode=' + num;
-
-                        wxShare.link = shareUrl;
-
+                   var shareUrl = site_url.marketCampaign_url + '&shareCustomerNo=' + that.setting.customerNo + '&shareEmpCode=' + num;
+                   that.setting.shareUrl=shareUrl
                         // 生成二维码
-                        that.generateQrcode(shareUrl)
-
-                        //如果是app--设置ldxShare的值--- 需要拼凑对应的链接
-                        if (window.currentIsApp) {
-                            // $('#ldx_share').attr('src', 'ldxShare://' + shareUrl + '&sharingType=' + sharingType);
-                            if(window.isAndroid){
-                                window.jsObj.wxShare(wxShare)
-                            }
-                            if(window.isIOS){
-                                window.webkit.messageHandlers.wxShare.postMessage(wxShare)
-                            }
-                        }
-
-                        //如果是微信内打开--处理微信分享
-                        if (that.isWeiXin) {
-                            var obj = { "shareUrl": shareUrl };
-                            // 设置分享url
-                            that.setting.weixinConf = Object.assign(that.setting.weixinConf, obj)
-                                // 确保3个接口（鉴权，分享内容，分享链接）都请求成功，再设置分享链接
-                            that.getElements.inviting_friend_wrap.show();
-                            that.asyncAll();
-                        }
+                    that.generateQrcode(shareUrl)
+        },
+        wxShareSend: function(type){
+            var that=this;
+                    var shareObj={
+                        'type': type,     // auto 原生自己分享框  wechatMoments 朋友圈   friends 朋友
+                        'businessType': 'ldx',   //life,业务类型
+                        'title': that.setting.weixinConf.title?that.setting.weixinConf.title:"",    //标题
+                        'des':'邀请好友，分享精彩',   //简介
+                        'link': that.setting.shareUrl?that.setting.shareUrl:'',   //链接
+                        'img':that.setting.weixinConf.imageUrlApp?that.setting.weixinConf.imageUrlApp:"",   // 图标
                     }
-                },
-                callbackFail: function(json) {
-                    $this.removeClass('disable').removeAttr('disabled');
-                    tipAction(json.message);
-                }
-            })
-            that.getData();
+                //如果是app--设置ldxShare的值--- 需要拼凑对应的链接
+                // if (window.currentIsApp) {
+                    if(window.isAndroid){
+                        window.jsObj.wxShare(JSON.stringify(shareObj))
+                    }
+                    if(window.isIOS){
+                        window.webkit.messageHandlers.wxShare.postMessage(JSON.stringify(shareObj))
+                    }
+                // }
         },
         // 微信鉴权设置
         dealWeiXinSet: function(data) {
             var that = this;
-
             wx.config({
                 // debug: true,
                 appId: data.appid,
@@ -360,7 +327,7 @@ $(function() {
                 title: that.setting.weixinConf.title, // 分享标题
                 desc: that.setting.weixinConf.introduction, // 分享描述
                 link: that.setting.weixinConf.shareUrl, // 分享链接
-                imgUrl: that.setting.weixinConf.imageUrl, // 分享图标
+                imgUrl: that.setting.weixinConf.imageUrlApp, // 分享图标
                 success: function() {
                     // 用户确认分享后执行的回调函数
                     //隐藏分享提示浮层
@@ -380,7 +347,7 @@ $(function() {
             wx.onMenuShareTimeline({
                 title: that.setting.weixinConf.title, // 分享标题
                 link: that.setting.weixinConf.shareUrl, // 分享链接
-                imgUrl: that.setting.weixinConf.imageUrl, // 分享图标
+                imgUrl: that.setting.weixinConf.imageUrlApp, // 分享图标
                 success: function() {
                     // 用户确认分享后执行的回调函数
                     //隐藏分享提示浮层
@@ -497,31 +464,38 @@ $(function() {
             // })
             // 点击--分享给好友
             mui("body").on('mdClick', '.recommendShareFriend', function() {
-                if(that.list.length < 0){
-                    // 当没有理财师的时候提示？
-                    // tipAction('完成实名认证后才可以推荐好友哦')
-                }
+                // debugger
+                // if(that.list.length < 0){
+                //     // 当没有理财师的时候提示？
+                //     // tipAction('完成实名认证后才可以推荐好友哦')
+                // }
                 if(that.getElements.existMain == 1){
-                    that.generateShareLink(that.getElements.empNo,"friends");
+                    // that.generateShareLink(that.getElements.empNo,"friends");
+                    that.wxShareSend("friends")
                 }else{
-                    that.generateShareLink(that.list[index].empNo,"friends");
+                    // that.generateShareLink(that.list[index].empNo,"friends");
+                    that.wxShareSend("friends")
                 }
-                tipAction('分享成功')
+                // tipAction('分享成功')
             },{
                 'htmdEvt': 'recommend_5'
             })
             // 点击--分享到朋友圈
             mui("body").on('mdClick', '.recommendShareWechart', function() {
+                // debugger
                 if(that.list.length < 0){
                     // tipAction('完成实名认证后才可以推荐好友哦')
                 }
                 if(that.getElements.existMain == 1){
-                    that.generateShareLink(that.getElements.empNo,"friends");
+                    // that.generateShareLink(that.getElements.empNo,"wechatMoments");
+                    that.wxShareSend("wechatMoments")
+
                 }else{
-                    that.generateShareLink(that.list[index].empNo,"friends");
+                    // that.generateShareLink(that.list[index].empNo,"wechatMoments");
+                    that.wxShareSend("wechatMoments")
                 }
                 // that.generateShareLink(that.list[index].empNo,"wechatMoments");
-                tipAction('分享成功')
+                // tipAction('分享成功')
             },{
                 'htmdEvt': 'recommend_6'
             })
@@ -537,7 +511,6 @@ $(function() {
          */
         generateAjaxObj: function(url, data, callback, callbackFail, callbackNoData, contentTypeSearch) {
             var that = this;
-
             that.setting.ajaxArr.push({
                 url: url,
                 data: data,
@@ -549,7 +522,11 @@ $(function() {
                     var jsonData = json.data;
                     //隐藏loading
                     // that.getElements.listLoading.hide();
+                    if(json.status=='1000'){
+                        tipAction(json.message);
+                    }
                     callback(jsonData);
+
                 },
                 callbackFail: function(json) {
                     // that.getElements.listLoading.hide();

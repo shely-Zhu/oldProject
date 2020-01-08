@@ -5,8 +5,9 @@
 @import url("@pathCommonLessCom/alertBox.less");
 @import url("@pathCommonLessCom/headBarConfig.less");
 body{
-    max-width: 7.5rem;
+    width: 100%;
     // background:@c005;
+    background: @F7FAFD;
 }
 html{
     height: 100%;   
@@ -30,7 +31,7 @@ html{
             padding-top:1.5rem;
             img{
                 width:1.62rem;
-                height:1.21rem;
+                height:1.4rem;
             }
         }
         .succedText{
@@ -49,7 +50,8 @@ html{
             overflow: hidden;
             display:none;
             .proess-img{
-                float: left;
+               // float: left;
+               position: absolute;
                 width:0.36rem;
                 height:1.76rem ;
                 
@@ -73,8 +75,10 @@ html{
                 }
             }
             .proess-title{
-                float: left;
-                width:6.54rem;
+                //float: left;
+                position: absolute;
+                left: 0.7rem;
+                width:6.2rem;
                 height:1.76rem ;
                 overflow: hidden;
                 padding-left:0.13rem;
@@ -106,19 +110,26 @@ html{
                 }
             }
         }
+        .cashInto{
+            height: 1.4rem;
+        }
         .proessBox.cashOut{
             width: 100%;
             box-sizing: border-box;
             padding:0 0.3rem;
             overflow: hidden;
+            height: 1.2rem;
             .proess-img{
-                float: left;
+               // float: left;
+               position: absolute;
                 width:0.36rem;
                 height:1.06rem ;
             }
             .proess-title{
-                float: left;
-                width:6.54rem;
+               // float: left;
+               position: absolute;
+               left: 0.7rem;
+               width:6.4rem;
                 height:1.06rem ;
                 overflow: hidden;
                 padding-left:0.13rem;
@@ -174,6 +185,9 @@ html{
                 li{
                     line-height: 1rem;
                     height: 1rem;
+                    .amount{
+                        font-weight: bold;
+                    }
                 }
                 .bank{
                     width:4.2rem;
@@ -183,11 +197,15 @@ html{
                         height: .3rem;
                         display: inline-block;
                     }
+                    .bankNum{
+                        font-weight: bold;
+                    }
                     span{
                         display: inline-block;
                     }
                 }
                 .textcolor{
+                    font-weight: 600;
                     color: @364D97;
                 }
                 .onlinePay span{
@@ -224,17 +242,18 @@ html{
             padding-left: 2.9rem;
             padding-top:1.5rem;
             img{
-                width:1.62rem;
-                height:1.21rem;
+                width:1.8rem;
+                height:1.4rem;
             }
         }
         .succedText{
             width: 100%;
             text-align: center;
-            font-size:0.32rem;
+            font-size:0.28rem;
             font-family:PingFangSC-Regular,PingFang SC;
             font-weight:400;
             color:@272727;
+            margin-top: 0.47rem;
             // margin-bottom: 1.2rem;
         }
     }

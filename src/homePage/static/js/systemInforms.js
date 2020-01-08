@@ -10,7 +10,7 @@ var generateTemplate = require('@pathCommonJsComBus/generateTemplate.js');
 require('@pathCommonCom/pullRefresh/pullRefresh.js');
 
 $(function() {
-    let somePage = {
+    var somePage = {
         //获取页面元素
         $e: {
             informsListWrapperId: $("#informsListWrapper"), // 消息列表盒子
@@ -69,6 +69,7 @@ $(function() {
                             "mesType": that.gV.mesType
                         },                        
                         needDataEmpty: true,
+                        needLoading: false,
                         callbackDone: function(json) {     
                             var data = json.data.list;
                             if(that.gV.pageCurrent == 1 && data.length == 0) {
@@ -78,6 +79,7 @@ $(function() {
                                 def && def.resolve( that.dealData(data), that.gV.pageCurrent);
                                 that.gV.pageCurrent++;
                             }
+                            $(".netLoading").hide()
                         },
                         callbackNoData: function( json ){  
                             if(that.gV.pageCurrent == 1) {
@@ -187,6 +189,11 @@ $(function() {
             $.each(data, function(a, b) {
                 b.date = b.createTimeStr.split(" ")[0]
                 b.time = b.createTimeStr.split(" ")[1]
+                if(b.readStatus == 0) {
+                    b.badgeFlag = true
+                } else {
+                    b.badgeFlag = false
+                }
             })
             return data;
         },

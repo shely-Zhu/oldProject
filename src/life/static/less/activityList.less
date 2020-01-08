@@ -12,6 +12,13 @@
 @import url("@pathCommonLessCom/cityList.less");
 // 没有数据
 @import url("@pathCommonLessCom/noDataImg.less");
+@media screen and (device-aspect-ratio: 40/71) {
+       .activityListBottomBox{
+           i{
+               width: 2rem !important;
+           } 
+       } 
+}
 
 #activitySearch{
     position: relative;
@@ -43,6 +50,30 @@
             position: absolute;
             top: 0;
         }
+        .mui-placeholder{
+            font-size: 14px;
+            position: absolute;
+            z-index: 1;
+            top: 0;
+            /* right: 0; */
+            bottom: 0;
+            /* left: 0; */
+            display: inline-block;
+            height: .6rem;
+            line-height: .6rem;
+            text-align: left;
+            color: #8d9a9c;
+            border: 0;
+            border-radius: 6px;
+            background: 0 0;
+            padding-left: .17rem;
+            .mui-icon-search:before{
+                color: #8D919C;
+            }
+            span:last-child{
+                color: #8D919C;
+            }
+        }
     }
     .activityCityBox{
         position: absolute;
@@ -50,6 +81,8 @@
         height: .88rem;
         line-height: .88rem;
         top:.4rem;
+        width: 1.7rem;
+        
         span{
             font-family: PingFangSC-Regular;
             font-size: .34rem;
@@ -58,15 +91,21 @@
             display: block;
             float: left;
             margin-right: .25rem;
-            
+            width: 1.2rem;
+            overflow:hidden;/*超出部分隐藏*/
+            white-space: nowrap;/*不换行*/
+            text-overflow:ellipsis;/*超出部分文字以...显示*/ 
+            text-align: right;      
         }
         i{
-            float: left;
+            float: right;
             width: .25rem;
-            height: .12rem;
-            background: url('/common/img/Life_icon_position@2x.png') no-repeat;
-            background-size: .25rem .12rem;
-            margin-top: .36rem;
+            // height: .12rem;
+            // background: url('/common/img/Life_icon_position@2x.png') no-repeat;
+            // background-size: .25rem .12rem;
+            // margin-top: .36rem;
+            line-height: .88rem;
+            color: #878787;
         }
     }
 }
@@ -105,7 +144,7 @@
         position: relative;
         &>a{
             position: absolute;
-            width: 6.9rem;
+            width: 100%;
             height: 4.1rem;
             left: 0;
             top: 0;
@@ -119,12 +158,12 @@
             }
             i{
                 position: absolute;
-                height: .47rem;
+                // height: .47rem;
                 line-height: .47rem;
                 font-family: PingFangSC-Regular;
                 font-size: .24rem;
                 color: @c005;
-                background-image: linear-gradient(-225deg, @475A95 0%, @15255B 100%);
+                background-image: linear-gradient(-225deg,@15255B  0%, @475A95 100%);
                 border-radius: .04rem;
                 padding: 0 .16rem;
                 left: .32rem;
@@ -144,6 +183,7 @@
                 text-overflow: ellipsis;
                 width: 100%;
                 white-space: nowrap;
+                font-weight: 600;
             }
             p{
                 font-family: PingFangSC-Regular;
@@ -155,13 +195,13 @@
                 i{
                     display: inline-block;
                     font-style: normal;
-                    width: 1.51rem;
+                    width: 1.61rem;
                     height: .36rem;
                     text-align: center;
                     line-height: .36rem;
                     border-radius: .04rem;
                     margin-right: .1rem;
-                    background-image: linear-gradient(-135deg, @FFF6E2 0%, @DDCDA4 100%);
+                    background-image: linear-gradient(-135deg,@DDCDA4  0%, @FFF6E2 100%);
                     font-family: PingFangSC-Regular;
                     font-size: .24rem;
                     color: @976026;
@@ -178,6 +218,7 @@
             color: @272727;
             letter-spacing: 0;
             line-height: .44rem;
+            font-weight: 600;
             margin-bottom: .2rem;
         }
     }
@@ -185,7 +226,7 @@
         
         width: 100%;
         height: 3.7rem;
-        border-bottom: 1px solid @c007;
+        border-bottom: .2rem solid rgba(117,119,132,0.1);
         position: relative;
         img{
             position: absolute;
@@ -199,7 +240,8 @@
             text-align: center;
             font-size: .32rem;
             top: 2.79rem;
-            width: 7.5rem;
+            width: 100%;
+            color: rgba(78,78,78,1);
             
         }
     }
@@ -233,6 +275,7 @@
             &.hot{
                 background-color: @c005;
             }
+            
             &.mui-table-view-cell{
                 height: .75rem;
                 background-color: @c005;
@@ -242,6 +285,13 @@
                 line-height: .7rem;
             }
         }
+        li:nth-child(3){
+            &.hot{
+                color: #1E53FF;
+            }
+            
+
+        }
     }
     .mui-indexed-list-bar{
         padding-top: 40px;
@@ -249,7 +299,7 @@
     .hotCity{
         padding: .09rem .06rem;
         overflow: hidden;
-        width: 7.5rem;
+        width: 100%;
         span{
             width: 1.4rem;
             height: .6rem;
@@ -264,7 +314,7 @@
 	        white-space: nowrap;
         }
         .hotBox{
-            width: 7.7rem;
+            width: 100%;
         }
     }
 }
@@ -284,6 +334,12 @@
     font-size: 21px;
     top: 74%;
     z-index: 6;
+}
+.mui-search input{
+    background: rgba(117,119,132,0.3);
+}
+.mui-search.mui-active:before{
+    display: none;
 }
 // .goTopBtn{
 //     position: absolute;
@@ -306,4 +362,7 @@
     font-size: .4rem;
     width: 5rem;
     padding: 0.1rem .05rem;
+}
+.mui-table-view-cell.mui-active{
+    background: #f2f2f2;   
 }

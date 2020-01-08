@@ -5,10 +5,6 @@ require('@pathCommonBase/base.js');
 //ajax调用
 require('@pathCommonJs/ajaxLoading.js');
 
-//下拉加载更多
-// require('@pathCommonJs/scrollFullPage.js');
-require('@pathCommonJsCom/goTopMui.js');
-require('@pathCommonJs/components/headBarConfig.js');
 //黑色提示条的显示和隐藏
 var generateTemplate = require('@pathCommonJsComBus/generateTemplate.js');
 var splitUrl = require('@pathCommonJs/components/splitUrl.js')();
@@ -52,7 +48,6 @@ $(function () {
                 contentTypeSearch:true,
                 callbackDone: function (json) {
                     var dataList;
-
                     // 待定
                     if (json.data == '') { // 没有记录不展示
                         that.$e.noData.show();
@@ -61,12 +56,12 @@ $(function () {
                         dataList = json.data;
                         $.each(dataList, function(i, el) {
                           var groupName = el.groupName?el.groupName:""
-                          if (el.modulename.indexOf(".pdf") != -1) {
+                          if (el.contracturl.indexOf(".pdf") != -1) {
                               el.line = true; //线上可预览
-                              el.href = site_url.downloadNew_api + "?filePath=" + el.contracturl + "&fileName=" + new Base64().encode(el.modulename) + "&groupName=" + groupName + "&show=1";
+                              el.href = site_url.mountDownload_api + "?url=" + el.contracturl + "&name=" + new Base64().encode(el.modulename) + "&show=1";
                           } else {
                               el.line = false; //需下载
-                              el.href = site_url.downloadNew_api + "?filePath=" + el.contracturl + "&fileName=" + new Base64().encode(el.modulename) + "&groupName=" + groupName;
+                              el.href = site_url.mountDownload_api + "?url=" + el.contracturl + "&name=" + new Base64().encode(el.modulename);
                           }
                         })
                     }
@@ -90,12 +85,8 @@ $(function () {
         events: function (targetUrl) {
             var that = this;
             mui("body").on('mdClick','.con',function(e){
-                console.log($(this).attr("href"))
-               var src=$(this).attr("href")
-                var form = document.createElement('form');
-                form.action = src;
-                document.getElementsByTagName('body')[0].appendChild(form);
-                form.submit();
+                var src=$(this).attr("href")
+                window.location.href=src
             }, {
                 'htmdEvt': 'seeSign_0'
             })

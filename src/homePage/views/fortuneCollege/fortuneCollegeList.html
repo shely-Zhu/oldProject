@@ -24,7 +24,7 @@
                <div class="wrapper">
                     <div class="banner">
                     </div>
-                    <div class="hotWords translate">
+                    <div class="hotWords translate hide">
                          <div class="title">
                              
                          </div>
@@ -32,7 +32,7 @@
                               
                          </div>
                     </div>
-                    <div class="hotWords fortuneVideo">
+                    <div class="hotWords fortuneVideo hide">
                          <div class="title">
                              
                          </div>
@@ -42,7 +42,7 @@
                               </ul>
                          </div>
                     </div>
-                    <div class="hotWords forum">
+                    <div class="hotWords forum hide">
                          <div class="title">
                              
                          </div>
@@ -55,7 +55,7 @@
                               
                          </div>
                     </div>
-                    <div class="hotWords tabContent">
+                    <div class="hotWords tabContent hide">
                          <div class="title">
                              
                          </div>
@@ -104,7 +104,7 @@
                <p>{{title}}</p>
                <span>{{createTimeStr}}</span>
           </div>
-          <div class="list_itemR" ><img class="lazyload" src="{{imageUrlShowOnline}}" alt=""></div>
+          <div class="list_itemR" ><img class="lazyload" src="/common/img/lazyImgList.png" data-original="{{imageUrlShowOnline}}"></div>
      </div>
 
      {{/each}}
@@ -116,25 +116,27 @@
 
      <!-- 翻译官 -->
      <script id="fortune-template" type="text/x-handlebars-template">
-               <h2>{{modelName}}</h2>
-               <p><a href="javascript:void(0);"  onclick="setGoUrl(site_url.pastHotWords_url,  'fortune_00')">查看往期热词</a><i class="iconfont">&#xe636;</i></p>
+          <h2>{{modelName}}</h2>
+          <p><a href="javascript:void(0);" onclick="setGoUrl( '{{modelUrl}}', 'fortune_00')">查看往期热词</a><i class="iconfont">&#xe636;</i></p>
      </script>
      <script id="content-template" type="text/x-handlebars-template">
           {{#each this}}
-          <p class="con-t">
-               <span>第{{numPeriods}}期</span><b>{{titleFir}}</b>
-          </p>
-          <p class="con-b">
-               <span>{{titleSec}}</span>
-               <!-- <span class="span-l">中信建投:</span>
-               <span class="span-r">鉴定看涨A股将迎来戴维斯双击</span> -->
-          </p>
+          <a href="{{externalUrl}}">
+               <p class="con-t">
+                    <span>第{{numPeriods}}期</span><b>{{titleFir}}</b>
+               </p>
+               <p class="con-b">
+                    <span>{{titleSec}}</span>
+                    <!-- <span class="span-l">中信建投:</span>
+                    <span class="span-r">鉴定看涨A股将迎来戴维斯双击</span> -->
+               </p>
+          </a>
           {{/each}}
      </script>
      <!-- 早知道 -->
      <script id="fortuneCf-template" type="text/x-handlebars-template">
           <h2>{{modelName}}</h2>
-          <p><a href="javascript:void(0);" onclick="setGoUrl( site_url.fortuneFlowKnown_url+'?articleBelong={{articleBelong}}', 'fortune_01')" >播放往期内容</a><i class="iconfont">&#xe636;</i></p>
+          <p><a href="javascript:void(0);" onclick="setGoUrl( '{{modelUrl}}', 'fortune_01')" >播放往期内容</a><i class="iconfont">&#xe636;</i></p>
      </script>
      <script id="video-template" type="text/x-handlebars-template">
           {{#each this}}
@@ -147,7 +149,7 @@
                                    <img src="/common/img/bofang@2x.png" alt="">
                               </i>
                               <span>
-                                        {{title}}
+                                   {{title}}
                               </span>
                          </p>
                     </a>
@@ -159,7 +161,7 @@
      <script id="forum-template" type="text/x-handlebars-template">
           <h2>{{modelName}}</h2>
           <!-- <i><a href="{{modelUrl}}" htmdEvt = "fortune_all">全部</a><i class="iconfont">&#xe636;</i></p> -->
-          <p><a href="javascript:void(0);" onclick="setGoUrl( site_url.fortuneClassroom_url, 'fortune_03')">全部</a><i class="iconfont">&#xe636;</i></p>
+          <p><a href="javascript:void(0);" onclick="setGoUrl('{{modelUrl}}', 'fortune_03')">全部</a><i class="iconfont">&#xe636;</i></p>
      </script>
      <script id="forumTitle" type="text/x-handlebars-template">
           {{#each this}}
@@ -173,11 +175,9 @@
                          <div class="mui-scroll-wrapper mui-slider-indicator mui-segmented-control mui-segmented-control-inverted">
                               <div class="mui-scroll">
                                    {{#each listContent}}
-                                        <!-- <a href="fortuneClassroom.html" style="width:6.2rem;height:4rem;display: block;position: absolute;;left:0;top:0;" class="mui-control-item"> </a> -->
-                                        <!-- <a htmdEvt = "fortune_allList" onclick="window.location.href=site_url.fortuneClassroom_url+'?id={{id}}&articleBelong={{articleBelong}}&applyType={{applyType}}';"> -->
                                         <a  href="javascript:void(0);" onclick="setGoUrl( site_url.articleTemplate_url+'?id={{id}}&articleBelong={{articleBelong}}', 'fortune_05')">
                                              <div class="mui-control-item conten">
-                                                  <img style="width:3.2rem;height:3rem;" class="lazyload" src="/common/img/lazyImgList.png" data-original="{{imageUrlShowOnline}}" alt="">
+                                                  <img style="width:6.2rem;height:6rem;" class="lazyload" src="/common/img/lazyImgList.png" data-original="{{imageUrlShowOnline}}" alt="">
                                                   <div class="con">
                                                        <h4>{{title}}</h4>
                                                        <p>{{intro}}</p>
@@ -196,7 +196,7 @@
      <script id="tabContent-template" type="text/x-handlebars-template">
           <h2>{{modelName}}</h2>
           <!-- <i><a htmdEvt = "fortune_studies" href="{{modelUrl}}" >查看全部研究</a><i class="iconfont">&#xe636;</i></p> -->
-          <p><a href="javascript:void(0);" onclick="setGoUrl(site_url.wealthResearch_url, 'fortune_06')" >查看全部研究</a><i class="iconfont">&#xe636;</i></p>
+          <p><a href="javascript:void(0);" onclick="setGoUrl('{{modelUrl}}', 'fortune_06')" >查看全部研究</a><i class="iconfont">&#xe636;</i></p>
      </script>
 
      @@include('@pathInclude/views/footer.html')

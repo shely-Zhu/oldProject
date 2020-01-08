@@ -6,13 +6,15 @@
  *
  *value买入传buyFreeze  卖出传saleFreeze 
  *
+ * 买入 需要判断是否证件过期以及是否司法冻结 卖出只需判断是否司法冻结
+ *
  *url 调用的方法的当前页面 
  *
  * custType  机构客户和个人  如果拿不到传false   能拿到传具体的值
  * 
  */
 var tipAction = require('./tipAction.js');
-function isCustTypeOne(outdateFreezeStatus, lawFreezeStatus, url, custType) {
+function isCustTypeOne(outdateFreezeStatus, lawFreezeStatus, url, custType, value, htmdEvt) {
     var f = false;
     var userObj = [{
             //由于恒小智-赎回用到了，改成新接口
@@ -32,7 +34,7 @@ function isCustTypeOne(outdateFreezeStatus, lawFreezeStatus, url, custType) {
                 
                 var jsonData = data.data;
                 // 获取客户是机构客户还是个人客户
-                f = elasticLayer(outdateFreezeStatus, lawFreezeStatus, url, jsonData.accountType); // 调用弹框
+                f = elasticLayer(outdateFreezeStatus, lawFreezeStatus, url, jsonData.accountType, value, htmdEvt); // 调用弹框
             },
              
         }]
@@ -40,7 +42,7 @@ function isCustTypeOne(outdateFreezeStatus, lawFreezeStatus, url, custType) {
         return f;
 };
 
-function elasticLayer(outdateFreezeStatus, lawFreezeStatus, url, custType) {
+function elasticLayer(outdateFreezeStatus, lawFreezeStatus, url, custType, value, htmdEvt) {
 
     var custType = (custType == "0" || custType == "2") ? true : false;  //机构为true
 
@@ -53,10 +55,11 @@ function elasticLayer(outdateFreezeStatus, lawFreezeStatus, url, custType) {
             yesButtonPosition: 'left',
 			buttonTxt: '确认',
 			zIndex: 100,
+            htmdEvtYes:htmdEvt,
 			callback: function() {}
 		});
     	return true;
-	}/* else if(outdateFreezeStatus == 1) {
+	} else if(outdateFreezeStatus == 1 && value == 'buyFreeze') {
         var idDateObj = {
             title: '温馨提示',
             p: '您的证件已过期，补充证件信息后才可能继续交易',
@@ -68,17 +71,17 @@ function elasticLayer(outdateFreezeStatus, lawFreezeStatus, url, custType) {
                     t.hide();
                 }else{
                     t.hide();
-                    window.location.href = site_url.perBass_url + '?originUrl=' + new Base64().encode(url); // 点击完善资料跳转到基本信息页
+                    window.location.href = site_url.perfectInfo_url + '?originUrl=' + new Base64().encode(url); // 点击完善资料跳转到基本信息页
                 }
             },
 
         }
         $.elasticLayer(idDateObj);
         return true;
-    }*/
+    }
 };
 
-module.exports = function(value, url, custType) {
+module.exports = function(value, url, custType,htmdEvt) {
 	var r = false;
 
 	var alterMsgStatus = [{
@@ -97,13 +100,11 @@ module.exports = function(value, url, custType) {
         		saleFreeze = data.saleFreeze;
         	if( (value == "buyFreeze" && buyFreeze == 1) || (value == "saleFreeze" && saleFreeze == 1) ) {
                 if(custType) { // 如果传客户类型调用弹框的方法
-                    r = elasticLayer(data.outdateFreezeStatus, data.lawFreezeStatus, url, custType);
+                    r = elasticLayer(data.outdateFreezeStatus, data.lawFreezeStatus, url, custType, value, htmdEvt);
                 } else{ // 如果没传调用getuserinfo接口获取客户类型
-                    r = isCustTypeOne(data.outdateFreezeStatus, data.lawFreezeStatus, url, custType);
+                    r = isCustTypeOne(data.outdateFreezeStatus, data.lawFreezeStatus, url, custType, value, htmdEvt);
                 }
-        		
         	}
-	
         },
         callbackFail: function(json) {
             tipAction(json.message);

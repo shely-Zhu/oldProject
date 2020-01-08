@@ -3,7 +3,7 @@
 @import url("@pathCommonLessCom/headBarConfig.less");
 @import url("@pathCommonCom/noData/noData.less");
 body{
-    max-width: 7.5rem;
+    width: 100%;
     background:@c005;
 }
 html{
@@ -110,4 +110,22 @@ html{
 
 .mui-table-view-cell{
     padding: 0;
+}
+.value_red {
+	font-size: 0.3rem;
+	color: @F52323;
+}
+.value_red::before{
+	content: "+";
+}
+.value_c {
+	font-size: 0.3rem; 
+	color: #ccc;
+}
+// .value_c::before{
+// 	content: "=";
+// }
+.value_green {
+	font-size: 0.3rem; 
+	color: @008000;
 }

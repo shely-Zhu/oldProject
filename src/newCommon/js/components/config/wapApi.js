@@ -159,6 +159,8 @@ module.exports = function () {
    this.heavyIndustryConfigRatioDetail_api = http_url.wapApi_url + '/pof/accountDiagnosis/heavyIndustryConfigRatioDetail';
    // 组合券种分布
    this.bondTypeAndValue_api = http_url.wapApi_url + '/pof/accountDiagnosis/bondTypeAndValue';
+   //账户风格  
+    this.diagnosisAccountStyle_api = http_url.wapApi_url + '/pof/accountDiagnosis/diagnosisAccountStyle';
    // 诊断结果
-   this.bondTypeAndValue_api = http_url.wapApi_url + '/pof/accountDiagnosis/diagnoseResult';
+   this.diagnoseResult_api = http_url.wapApi_url + '/pof/accountDiagnosis/diagnoseResult';
 };

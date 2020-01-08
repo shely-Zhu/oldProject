@@ -10,7 +10,6 @@
 require('@pathCommonBase/base.js');
 //ajax调用
 require('@pathCommonJs/ajaxLoading.js');
-require('@pathCommonJsCom/goTopMui.js');
 
 var splitUrl = require('@pathCommonJs/components/splitUrl.js');
 var generateTemplate = require('@pathCommonJsComBus/generateTemplate.js');
@@ -64,6 +63,7 @@ $(function() {
                 class: 'list-wrap',
                 template: that.getElements.transTemp, 
                 pageSize: that.gV.aP.pageSize,
+                needLoading: false,
                 callback: function(def, t){
                     var obj = [{
                         url: site_url.yieldAssignList_api,

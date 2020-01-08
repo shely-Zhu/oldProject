@@ -4,8 +4,8 @@
  * @Author: yangjinlai
  * @Date:   2017-10-27 10:48:29
  *  
- * @Last Modified by:   songxiaoyu
- * @Last Modified time: 2018-07-18 09:55:42
+ * @Last Modified by: sunfuping
+ * @Last Modified time: 2019-12-29 18:24:14
  * @description: 推荐有礼大改版
  *               有富文本，不能引入reset
  */
@@ -39,10 +39,11 @@ body {
 
 .recommend_wrap {
     width: 100%;
-    height: 100%;
+    // height: 100%;
     background: url("/mine/static/img/pic_bg1.png") no-repeat ;
-    padding:2.2rem .65rem  0 .65rem ;
+    padding:2.2rem .65rem  1.38rem .65rem ;
     .recommendBox{
+        position: relative;
         width:6.20rem;
         height:7.64rem;
         background:linear-gradient(137deg,rgba(255,252,244,1) 0%,rgba(238,223,189,1) 100%);
@@ -58,12 +59,13 @@ body {
         -webkit-background-clip:text;
         -webkit-text-fill-color:transparent;
         color: transparent;
-        padding-top: .8rem;
+        padding-top: .4rem;
     }
     .recommendBoxText{
         margin-top: .1rem;
         font-size: .28rem;
         line-height: .4rem;
+        color: @6C4517;
     }
     .recommendQRCode{
         width: 4.3rem;
@@ -75,14 +77,19 @@ body {
         }
     }
     .recommendLcs{
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        right: 0;
         margin: 0 auto;
         margin-top: .40rem;
-        width: 4.7rem;
-        height: .54rem;
-        background: url("/mine/static/img/pic_lcs\ bg.png") no-repeat;
-        background-size: 4.7rem;
-        line-height: .54rem;
-        color: @FFFFFF;
+        width: 5.86rem;
+        height: .98rem;
+        background: url(/mine/static/img/pic_lcsbg@2x.png) no-repeat center;
+        background-size: 5.86rem .98rem;
+        line-height: .98rem ;
+        color: #fff;
+        font-size: 0.3rem;
         .choose{
             font-size: .24rem;
             color: @FFFFFF;
@@ -106,13 +113,13 @@ body {
         p{
             color: @FFFFFF;
         }
-        .recommendShareWechart{
+        .recommendShareFriend{
             flex: 1;
             i{
-                border-right: 1px solid @FFFFFF;
+                border-right: 1px solid rgba(245,237,216,0.4);
             }
         }
-        .recommendShareFriend{
+        .recommendShareWechart{
             flex: 1;
             i{
                 border: none;

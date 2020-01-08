@@ -16,7 +16,7 @@ body{
 	background: @F7FAFD;
 	width: 100%;
 }
-#HeadBarpathName {
+/* #HeadBarpathName {
 	line-height: .45rem;
 	overflow: hidden;
     text-overflow: ellipsis;
@@ -29,11 +29,17 @@ body{
     -moz-box-orient: vertical;
     white-space: pre-wrap;
     padding-top: .2rem;
-}
+} */
 .customerService {
 	color: #606372!important;
 	font-size: .44rem!important;
 	font-weight: 600;
+}
+.gradual {
+	background:linear-gradient(180deg, #FBE2BD 0%, #E2B580 100%);;
+    -webkit-background-clip:text;
+    -webkit-text-fill-color:transparent;
+    font-weight: 600;
 }
 .privateDetail{
 	width: 100%;
@@ -90,9 +96,13 @@ body{
 				height: 4.5rem;
 				background-size: 100% 100%;
 				.bannerTop {
-				    color: @F7DDCF;
 				    margin: 0 0.3rem;
-				    padding-top: 1.54rem;
+					padding-top: 1.54rem;
+					.j_text {
+						background:linear-gradient(180deg, #FBE2BD 0%, #E2B580 100%);
+						-webkit-background-clip:text;
+						-webkit-text-fill-color:transparent;
+					}
 				    .sum {
 				        font-size: 0.26rem;
 				        line-height: .38rem;
@@ -116,7 +126,7 @@ body{
 				    margin: 0.1rem 0.3rem 0.22rem;
 				    font-weight:bold;
 				    color:rgba(153,81,0,1);
-				    background:linear-gradient(360deg, rgba(186,140,112,1) 0%, rgba(244,210,192,1) 100%);
+				    background:linear-gradient(180deg, #FBE2BD 0%, #E2B580 100%);;
 				    -webkit-background-clip:text;
 				    -webkit-text-fill-color:transparent;
 				}
@@ -148,6 +158,7 @@ body{
 				        	.smallDate {
 				        		color: @c005;
 				            	opacity: 0.7;
+				            	margin-left: .12rem;
 				        	}
 				        }
 				    }
@@ -162,7 +173,7 @@ body{
 			.openButton{
 				height: 0.3rem;
 				width: 2.3rem;
-				margin: 0 auto;
+				margin: 0 auto .2rem;
 				.img{
 					display: block;
 				}
@@ -230,6 +241,9 @@ body{
 				text-align: left;
 				padding-left: .3rem;
 				display: none;
+				&>div>.arrow {
+					line-height: .6rem;
+				}
 				.arrow {
 					color: @9B9B9B;
 					.img {
@@ -258,6 +272,7 @@ body{
 					width: 1px;
 					height: .6rem;
 					background: #A9A9A9;
+					opacity: 0.4;
 				}
 				&>.actionCon {
 					flex: 1;
@@ -278,7 +293,7 @@ body{
 			}
 			.txt{
 				vertical-align: middle;
-				font-size: 0.28rem;
+				font-size: 0.24rem;
 			}
 		}
 		.titleWrap{
@@ -331,7 +346,20 @@ body{
 					} 
 					&.active{
 						color: @272727;
-						border-bottom: 0.06rem solid @C8AB7D;
+						//border-bottom: 0.06rem solid @C8AB7D;
+						font-weight: 600;
+						position: relative;
+						&:after {
+							position: absolute;
+							height: 0.06rem;
+							bottom: 0rem;
+							left: 50%;
+							margin-left: -.64rem;
+							content: '';
+							width: 1.28rem;
+							background: @C8AB7D;
+							border-radius: .03rem;
+						}
 					}
 					&.noBorderBottm {
 						border-bottom: none!important;
@@ -340,6 +368,7 @@ body{
 				.rightTitle{ 
 
 					float: right;
+					font-size: .28rem;
 				}
 			}
 			.lineDraw{
@@ -384,18 +413,25 @@ body{
 			}
 			.dealBottom{
 				padding-left: 0.3rem;
+				&>.titleWrap {
+					display: flex;
+					justify-content: space-between;
+				}
 			}
-			.dealRegMid {
-				padding: 0 .3rem .3rem;
-				border-bottom: 1px solid @E7E9ED;
-				.detail {
-					font-size: .28rem;
-					line-height: .4rem;
-					color: @9B9B9B;
-					li::before {
-						content: '\02022';
+			.dealRegMidCon {
+				padding-left: .3rem;
+				.dealRegMid {
+					padding: 0 .3rem .3rem 0;
+					border-bottom: 1px solid @E7E9ED;
+					.detail {
+						font-size: .28rem;
+						line-height: .4rem;
 						color: @9B9B9B;
-						padding-right: .2rem;
+						li::before {
+							content: '\02022';
+							color: @9B9B9B;
+							padding-right: .2rem;
+						}
 					}
 				}
 			}
@@ -413,15 +449,31 @@ body{
 			    	}
 			    	&.active{
 			    		color: @272727;
-			    		font-weight: 600;
-			    		border-bottom: 0.06rem solid @C8AB7D;
-			    	}
+						font-weight: 600;
+						position: relative;
+    					border: none;
+						// border-bottom: 0.06rem solid @C8AB7D;
+						&:after {
+							position: absolute;
+							height: 0.06rem;
+							bottom: 0rem;
+							left: 50%;
+							margin-left: -.25rem;
+							content: '';
+							width: .5rem;
+							background: @C8AB7D;
+							border-radius: .03rem;
+						}
+					}
 			    }
 			}
 			.line{
 				font-size: 0.28rem;
 				color: @9B9B9B;
 				margin-bottom: 0.3rem;
+				.line_bottom {
+					color: @272727;
+				}
 				.lineDiv {
 					margin: .08rem 0;
 				}
@@ -463,5 +515,8 @@ body{
 	color: #272727;
 }
 #tip .elasticCel {
+	color: #9B9B9B;
+}
+.grayIcon {
 	color: #9B9B9B;
 }

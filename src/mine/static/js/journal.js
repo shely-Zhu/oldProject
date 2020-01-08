@@ -8,7 +8,7 @@ var generateTemplate = require('@pathCommonJsComBus/generateTemplate.js');
 require('@pathCommonCom/pullRefresh/pullRefresh.js');
 
 $(function() {
-	let somePage = {
+	var somePage = {
 		//获取页面元素
 		$e: {
 			islogin: $(".islogin"),
@@ -28,7 +28,7 @@ $(function() {
 		//页面初始化函数
 		init: function() {
 			//启用事件处理
-			$.each(this.$e.islogin, (index, item) => {
+			$.each(this.$e.islogin, function(index, item) {
 				console.log($(item).html())
 				if($(item).html() == "退出") {
 					$(item).css({
@@ -64,41 +64,75 @@ $(function() {
 						},
 						//async: false,
 						contentTypeSearch: true,
-						needDataEmpty: false,                       
+						needDataEmpty: false,  
+						// needLoading: false,                     
                         callbackDone: function(json) {     
                             var data = json.data.list;
                             if(that.gV.pageCurrent == 1 && data.length == 0) {
                                 $(".list").css("display", "none")
                             } else {
                             	var beforeData = json.data.list;
-								for(let i = 0; i < beforeData.length; i++) {
+								// for(var i = 0; i < beforeData.length; i++) {
 									//拿到页面要显示的时间
-									beforeData[i].createTime1 = beforeData[i].createTime.split(" ")[1];
-									if(beforeData[i].createTime.split(" ")[0] == that.gV.tempArr[that.gV.tempArr.length - 1]) {
-										afterData.push({
-											time: "",
-											list: [beforeData[i]]
-										});
-									} else {
-										//当日期数组中没有新获取的数据中的时间时
-										if(that.gV.tempArr.indexOf(beforeData[i].createTime.split(" ")[0]) === -1) {
-											afterData.push({
-												time: beforeData[i].createTime.split(" ")[0],
-												list: [beforeData[i]]
-											});
-											that.gV.tempArr.push(beforeData[i].createTime.split(" ")[0]);
-										} else {
-											for(let j = 0; j < afterData.length; j++) {
-												console.log(afterData[j].time)
-												if(afterData[j].time == beforeData[i].createTime.split(" ")[0]) {
-													afterData[j].list.push(beforeData[i]);
-													break;
-												}
+									// beforeData[i].createTime1 = beforeData[i].createTime.split(" ")[1];
+									// if(beforeData[i].createTime.split(" ")[0] == that.gV.tempArr[that.gV.tempArr.length - 1]) {
+									// 	afterData.push({
+									// 		time: "",
+									// 		list: [beforeData[i]]
+									// 	});
+									// } else {
+									// 	//当日期数组中没有新获取的数据中的时间时
+									// 	if(that.gV.tempArr.indexOf(beforeData[i].createTime.split(" ")[0]) === -1) {
+									// 		afterData.push({
+									// 			time: beforeData[i].createTime.split(" ")[0],
+									// 			list: [beforeData[i]]
+									// 		});
+									// 		that.gV.tempArr.push(beforeData[i].createTime.split(" ")[0]);
+									// 	} else {
+									// 		for(var j = 0; j < afterData.length; j++) {
+									// 			console.log(afterData[j].time)
+									// 			if(afterData[j].time == beforeData[i].createTime.split(" ")[0]) {
+									// 				afterData[j].list.push(beforeData[i]);
+									// 				break;
+									// 			}
+									// 		}
+									// 	};
+									// }
+									// var obj = {time: '',list:[]};
+								// }
+								function distinct (arr) {
+									for(var i = 0; i < arr.length; i++) {
+										for(var j = i + 1; j < arr.length ; j++) {
+											if(arr[i] === arr[j]) {
+												arr.splice(j, 1)
+												j--;
 											}
-										};
+										}
 									}
 								}
-                                def && def.resolve( afterData, that.gV.pageCurrent);
+								var arr = []
+								var timeArr = []
+								for(var i = 0 ; i < beforeData.length; i++) {
+									timeArr.push(beforeData[i].createTime.split(" ")[0])
+								}
+
+								distinct(timeArr)
+
+								for(var j = 0; j < timeArr.length; j++) {
+									var obj = {}
+									obj.time = timeArr[j]
+									var list = []
+									for(var m = 0 ; m < beforeData.length; m++) {
+										if(beforeData[m].createTime.split(" ")[0] == timeArr[j]) {
+											beforeData[m].createTime1 = beforeData[m].createTime.split(" ")[1]
+											list.push(beforeData[m])
+										}
+									}
+									obj.list = list
+									arr.push(obj)
+								}
+									
+                                def && def.resolve( arr, that.gV.pageCurrent);
                                 that.gV.pageCurrent++;
                             }
                         },
@@ -175,7 +209,7 @@ $(function() {
 						if(json.data.list&&json.data.list.length){
 							var beforeData = json.data.list;
 						}
-						for(let i = 0; i < beforeData.length; i++) {
+						for(var i = 0; i < beforeData.length; i++) {
 							//拿到页面要显示的时间
 							beforeData[i].createTime1 = beforeData[i].createTime.split(" ")[1];
 							if(beforeData[i].createTime.split(" ")[0] == that.gV.tempArr[that.gV.tempArr.length - 1]) {
@@ -192,7 +226,7 @@ $(function() {
 									});
 									that.gV.tempArr.push(beforeData[i].createTime.split(" ")[0]);
 								} else {
-									for(let j = 0; j < afterData.length; j++) {
+									for(var j = 0; j < afterData.length; j++) {
 										console.log(afterData[j].time)
 										if(afterData[j].time == beforeData[i].createTime.split(" ")[0]) {
 											afterData[j].list.push(beforeData[i]);

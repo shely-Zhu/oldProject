@@ -74,12 +74,16 @@ $(function() {
 					that.$e.top.find('.income').html(yesterdayIncomeMask);
 					that.$e.top.find('.addupIncome').html(accumIncomeMask);
 					that.$e.combiT.html(that.gV.combName);
+					// 买入按钮暂不可用
+					that.$e.buyBtn.attr("disabled", true).addClass('disable').html("暂不可售");
+
+					that.$e.buyBtn.attr("disabled", true).addClass('disable').html("暂不可售");
 
 					// 有待确认金额，赎回按钮,买入按钮不可用
 					if ((valueOnway != 0) && !!valueOnway) {
 						that.$e.amountCom.find('.alignR').html(valueOnwayMask)
 						that.$e.redemption.attr("disabled", true).addClass('disable');
-						that.$e.buyBtn.attr("disabled", true).addClass('disable');
+						// that.$e.buyBtn.attr("disabled", true).addClass('disable');
 					} else {
 						// 隐藏待确认金额区域
 						that.$e.amountCom.hide()

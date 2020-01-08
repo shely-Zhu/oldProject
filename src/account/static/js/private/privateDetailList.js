@@ -16,6 +16,7 @@ require('@pathCommonCom/elasticLayer/elasticLayer/elasticLayer.js');
 var splitUrl = require('@pathCommonJs/components/splitUrl.js')();
 var transcationTem = require('@pathCommonJsCom/account/transcationTem.js');
 var alwaysAjax = require('@pathCommonJs/components/alwaysAjax.js');
+var setCookie = require('@pathNewCommonJsCom/setCookie.js');
 
 $(function() {
     var data = {
@@ -56,7 +57,7 @@ $(function() {
 
             //初始化第一屏区域的上拉加载
             that.initMui($('#scroll1'));
-            window.sessionStorage.setItem('isconfirm', 0);
+            setCookie('isconfirm', 0)
         },
 
         beforeFunc: function() { //拼模板，初始化左右滑动mui组件
@@ -107,10 +108,10 @@ $(function() {
                     if (index == 1) {
                         //已确认
                         $('.hopper').show();
-                        window.sessionStorage.setItem('isconfirm', 1);
+                        setCookie('isconfirm', 1)
                     } else {
                         $('.hopper').hide();
-                        window.sessionStorage.setItem('isconfirm', 0);
+                        setCookie('isconfirm', 0)
                     }
                     //data-scroll属性即当前左右切换区域的索引
                     that.gV.current_index = index;
@@ -253,7 +254,7 @@ $(function() {
                                 //第一页时
                                 if (that.listLength == 0) {
                                     //没有数据
-                                    $id.find('.list .contentWrapper li').html(that.getElements.noData.clone(false)).addClass('noCon');
+                                    $id.find('.mui-scroll .mui-table-view-cell').html(that.getElements.noData.clone(false)).addClass('noCon');
                                     $id.find('.noData').show();
 
                                     //隐藏loading，调试接口时需要去掉
@@ -266,6 +267,7 @@ $(function() {
                                     var index = $('#slider .tab-scroll-wrap .mui-active').index(),
                                         $list = $("#move_" + index + " .list");
                                     $list.height(that.highHeight).addClass('noMove');
+                                    debugger
                                     // $list.addClass('noMove');
 
                                     // if( $("#move_"+index+" .noData").length ){
@@ -305,7 +307,8 @@ $(function() {
                             //$('.list').each( function( i, el){
 
                             //判断当前ul高度
-                            var ulHeight = $list.find(".mui-table-view").height();
+                            debugger
+                            var ulHeight = $list.find(".mui-table-view").height() 
                             if (ulHeight < that.htmlHeight) {
 
                                 $list.height(that.highHeight).addClass('setHeight').addClass('noMove');
@@ -324,7 +327,7 @@ $(function() {
                         }, 100);
                         transcationTem(jsonData, $id.find('.list li'), $('#trans-template'))
                             //无缝滚动
-                        alwaysAjax($id.find('.mui-table-view-cell'), $id.find(".contentWrapper"))
+                        alwaysAjax($id.find('.mui-table-view-cell'), $id.find(".contentWrapper"), 2)
                     }, 200)
 
 
@@ -357,8 +360,11 @@ $(function() {
                     t.endPullupToRefresh(false);
 
                     //没有数据
-                    $id.find('.mui-scroll .list').html(that.getElements.noData.clone(false)).addClass('noCon');
-                    $id.find('.noData').show();
+                    if(that.gV.ajaxArr[that.gV.current_index].pageNum == 1) {
+                        $id.find('.mui-scroll .mui-table-view-cell').html(that.getElements.noData.clone(false)).addClass('noCon');
+                        //$id.find('.mui-scroll .list').html(that.getElements.noData.clone(false)).addClass('noCon');
+                        $id.find('.noData').show();
+                    } 
 
                     setTimeout(function() {
                         that.getElements.listLoading.hide();
@@ -439,6 +445,8 @@ $(function() {
                             hideCelButton: false,
                             zIndex: 100,
                             yesButtonPosition: 'left',
+                            htmdEvtYes:'privateDetailList_8',
+                            htmdEvtCel:'privateDetailList_9',
                             callback: function(t) {
 
                             },
@@ -454,6 +462,8 @@ $(function() {
                             celTxt: '取消',
                             hideCelButton: false,
                             zIndex: 100,
+                            htmdEvtYes:'privateDetailList_10',
+                            htmdEvtCel:'privateDetailList_11',
                             callback: function(t) {
 
                             },
@@ -466,6 +476,8 @@ $(function() {
                             celTxt: '取消',
                             hideCelButton: false,
                             zIndex: 100,
+                            htmdEvtYes:'privateDetailList_12',
+                            htmdEvtCel:'privateDetailList_13',
                             callback: function(t) {
                                 var obj = [{
                                     url: site_url.fundReserveCancel_api,
@@ -520,6 +532,7 @@ $(function() {
                         yesTxt: '我明白了',
                         hideCelButton: true,
                         zIndex: 100,
+                        htmdEvtYes:'privateDetailList_14',
                         callback: function(t) {
 
                         },

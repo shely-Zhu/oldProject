@@ -9,7 +9,7 @@
 	<title>交易记录</title>
 </head>
 <body>
-        @@include('@pathCommonViews/headBarConfig.html',{"pathName":"","bgColors":"#475A95,#475A95","showType":"1"})
+        @@include('@pathCommonViews/headBarConfig.html',{"pathName":"","bgColors":"#23356D,#23356D","showType":"1"})
         <section class="container">
             <div class="banner">
                 <div class="bannerTop clearfix">
@@ -28,6 +28,7 @@
                     </div>
                 </div>
             </div>
+            <div class="zhanwei"></div>
             <div class="detailWrap">
               <ul class="detailWrapUl">
                  <li class="detailLi addLi">
@@ -57,10 +58,11 @@
                 <!-- 万份收益折线图 -->
                 <div id="wfsyLine" class="hide line"></div>
                 <div class='mui-row tab'>
-                    <span class="mui-col-sm-3 mui-col-xs-3 time oneMonth active" num="1">近一个月</span>
-                    <span class="mui-col-sm-3 mui-col-xs-3 time threeMonth" num="3">近三个月</span>
-                    <span class="mui-col-sm-3 mui-col-xs-3 time newYear" num="12">近一年</span>
-                    <span class="mui-col-sm-3 mui-col-xs-3 time sinceNow" num="13">成立至今</span>
+                    <span class="time oneMonth active" num="1">近一个月</span>
+                    <span class="time threeMonth" num="3">近三个月</span>
+                    <span class="time threeMonth" num="6">近六个月</span>
+                    <span class="time newYear" num="12">近一年</span>
+                    <span class="time sinceNow" num="13">成立至今</span>
                 </div>
             </div>
             <div class="textWrap">
@@ -73,6 +75,16 @@
                     <div class="footerBtnRight mui-col-sm-6 mui-col-xs-6 shiftToBtn blueBgButton">转入</div>
             </div>
             <div class="titleTwo"></div>
+            <div class="isRiskMatchBox">
+                <div class="isRiskMatchBox_contentBox">
+                        <div class='isRiskMatchBox_header'>你选择的产品与您现在的风险承受能力相匹配</div>
+                        <div class="isRiskMatchBox_footer">
+                             <div class="isRiskMatchBox_match">确定</div>
+                             <div class="isRiskMatchBox_noMatch"><button class="isRiskMatchBox_cancel">放弃购买</button> <button class="isRiskMatchResult">查看评测结果</button></div>
+                        </div>
+                </div>
+           </div>
+           <div class="isRiskMatch_mask"></div>
             <script id="adjustment-template" type="text/x-handlebars-template">
                 {{#each this}}
                 <ul data-id='{{id}}' class="materialContent">

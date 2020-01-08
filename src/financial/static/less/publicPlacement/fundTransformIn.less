@@ -17,7 +17,7 @@
 @import url("@pathCommonLess/mui/resetMuiPop.less");
 
 @import url("@pathCommonLessCom/headBarConfig.less");
-
+@import url("@pathCommonLess/components/elasticLayerTypeTwo.less");
 @import url('@pathCommonCom/elasticLayer/transOutRule/transOutRule.less');
 @import url("@pathCommonLessCom/payPassword.less");
 
@@ -139,6 +139,7 @@ body{
                 }
                 .num{
                     .line-rate{
+                        padding-right: 8px;
                         &::before{
                             content: "——";
                             position:absolute;
@@ -155,21 +156,21 @@ body{
                 height: .4rem;
                 line-height: .4rem;
                 span{
-                    font-size:0.14rem !important;
+                    // font-size:0.24rem !important;
                 }
             }
             .brforre15-f{
                 height: .4rem;
                 line-height: .4rem;
                 span{
-                    font-size:.14rem !important;
+                    // font-size:.24rem !important;
                 }
             }
             .after15-f{
                 line-height: .4rem;
-                font-size:0.14rem !important;
+                // font-size:0.14rem !important;
                 span{
-                    font-size:0.14rem !important;
+                    // font-size:0.24rem !important;
                 }
             }
         }
@@ -204,7 +205,7 @@ body{
             width: 100%;
 
             .onright-left{
-                float: right;
+                float: left;
                 margin-right: .3rem;
                 
                 .onright-left-one{
@@ -285,11 +286,12 @@ body{
             margin-top: .28rem;
             .onright-left{
                 float: right;
-                margin-right: .98rem;
+                margin-right: .24rem;
                 
                 .onright-left-one{
                     // display: flex;
                     justify-content: space-between;
+                    text-align: right;
 
                     img, i, span{
                         vertical-align: middle;
@@ -384,8 +386,8 @@ body{
                 width: .44rem;
                 height: .44rem;
                 color: @9B9B9B;
-                position: absolute;
-                right: .6rem;
+                float: right;
+                margin-right: .3rem;
                 display:none;
             }
             .iimg{
@@ -393,8 +395,8 @@ body{
                 width: .44rem;
                 height: .44rem;
                 color: @9B9B9B;
-                position: absolute;
-                right: .6rem;
+                float: right;
+                margin-right: .3rem;
             }
             
         }
@@ -431,19 +433,21 @@ body{
                 }
                 a{
                     color: @364D97 !important;
+                    span{
+                        vertical-align: middle;
+                    }
                 }
             }
         }
         
     }
     .btn_box{
-        position: fixed;
-        bottom: .34rem;
-        left: .3rem;
-        right: .3rem;
+        position: relative;
+        padding: 0 .3rem;
         text-align: center;
         letter-spacing: 2px;
-        margin: 0 auto;
+        margin: .1rem auto;
+        bottom: -.5rem;
         .btn{
             width: 100%;
             color: @c005;
@@ -693,4 +697,8 @@ body{
         
     }
     
+}
+.elasticContent{
+    height: 6rem;
+    overflow: scroll;
 }

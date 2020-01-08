@@ -8,7 +8,7 @@ require('@pathCommonJs/ajaxLoading.js');
 var generateTemplate = require('@pathCommonJsComBus/generateTemplate.js');
 
 $(function() {
-	let somePage = {
+	var somePage = {
 		//获取页面元素
 		$e: {
             lis: $(".wrap li"),
@@ -20,10 +20,29 @@ $(function() {
 		init: function() {
 			var that = this;  
 			that.events()
+			that.getUserInfo()
+		},
+		        // 获取认证信息
+		getUserInfo: function() {
+			var that = this;
+			// 请求页面数据
+			var obj = [{
+				url: site_url.queryUserBaseInfo_api,
+				data: {},
+				callbackDone: function(json) {
+					var data = json.data
+					if(data.accountType == 1){
+						$(".type").show()
+					}else{
+						$(".type").hide()
+					}
+				}
+			}]
+			$.ajaxLoading(obj);
 		},
 		//注册事件
 		events: function() {
-            let that = this;
+            var that = this;
             mui("body").on('mdClick','.wrap li',function(e){
 				var numAtr = $(this).attr('num');
 				if(numAtr == 1){

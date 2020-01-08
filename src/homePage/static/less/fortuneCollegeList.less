@@ -14,38 +14,25 @@
 //回到顶部的样式
 @import url("@pathCommonLessCom/goTopMui.less");
 @import url("@pathCommonCom/elasticLayer/elasticLayer/elasticLayer.less");
-// @import url("@pathCommonLess/components/elasticLayerTypeFive.less");
-
-// .mui-slider-indicator /deep/ .mui-indicator{
-// 	width:0.1rem !important;
-// 	height:0.1rem !important;
-// }
-// /deep/ .mui-active{
-// 	background: #fff !important;
-
-// }
-// .box /deep/ .mui-slider-indicator{
-// 	bottom:0px !important;
-// }
-.mui-indicator{
-	margin-right:0.2rem !important;
+.hide {
+	display: none;
 }
 .boxA{
 	.banner{
 		position: relative;
-		// .mui-slider-indicator .mui-indicator{
-		// 	width:0.08rem !important;
-		// 	height:0.08rem !important;
-		// 	background:rgba(255,255,255,0.5) !important;
-		// }
-		// .mui-slider-indicator{
-		// 	bottom:8px !important;
-		// }
-		// .mui-slider-indicator .mui-indicator.mui-active{
-		// 	width: 0.16rem !important;
-		// 	height:0.08rem !important;
-		// 	background:@FFFFFF !important;
-		// }
+		.mui-slider-indicator .mui-indicator{
+			width:0.08rem !important;
+			height:0.08rem !important;
+			background:rgba(255,255,255,0.5) !important;
+		}
+		.mui-slider-indicator{
+			bottom:0.3rem !important;
+		}
+		.mui-slider-indicator .mui-indicator.mui-active{
+			width: 0.16rem !important;
+			height:0.08rem !important;
+			background:@FFFFFF !important;
+		}
 	}
 	.hotWords{
 		padding:0.3rem;
@@ -57,20 +44,22 @@
 			h2{
 				color:@272727;
 				font-size:0.44rem;
+				font-weight: 600;
 				-webkit-box-flex:1;
 			}
 			p{
 				a{
 					color:@9B9B9B;
-					font-size:0.28rem;	
+					font-size:0.28rem;
+					margin-right: 0.1rem;	
 				}
-				
 				-webkit-box-flex:1;
 				text-align: right;
 				line-height:0.6rem;
 				i{
 					color:@9B9B9B;
-                    font-size:0.12rem;
+					font-size:0.2rem;
+					line-height:0.4rem;
 				}
 			}
 		}
@@ -80,13 +69,14 @@
 			margin-bottom:0.3rem;
 			.getColor{
 				color:@272727;
+				font-weight: 600;
 			}
 			strong{
 				color:@061D6A;
 			}
 			span{
 				color:@9B9B9B;
-				border-left:1px solid @272727;
+				border-left:2px solid @272727;
 				padding-left:0.14rem;
 				display:inline-block;
 				margin-right:0.04rem;
@@ -137,7 +127,12 @@
 			ul li{
 				margin-bottom:0.3rem;
 				position: relative;
+				img{
+					border-radius: 0.16rem;
+				}
 				p{
+					border-bottom-left-radius: .16rem;
+					border-bottom-right-radius: .16rem;
 					i{
 						margin-right:0.1rem;
 						img{
@@ -169,22 +164,27 @@
 			display:block;
 		}
 		div{
-			/deep/ .mui-scroll-wrapper{
+			.mui-scroll-wrapper{
 				height:3.7rem !important;
 				width:100% !important;
 			}
-			/deep/ .mui-scroll-wrapper img{
+		   .mui-scroll-wrapper img{
 				height:2.7rem !important;
 				width:6.3rem !important;
 			}
 			.mui-control-item{
 				padding:0 !important;
 			}
-			/deep/ .mui-card{
+		   .mui-card{
 				padding-left:0 !important;
 			}
 			.mui-control-item{
 				padding-right:0.3rem !important;
+			}
+			.conten{
+				img{
+					border-radius: .16rem;
+				}
 			}
 			.conten .con{
 				h4{
@@ -271,9 +271,6 @@
 				
 					// 其他资产列表
 					.myAsset {
-						
-				
-				
 						// nav重置
 						.mui-slider .mui-segmented-control.mui-scroll-wrapper {
 							background: none;
@@ -295,7 +292,7 @@
 								color: @272727;
 								position: relative;
 								border: none;
-				
+				                font-weight: 600;
 								&:after {
 									position: absolute;
 									height: 0.06rem;
@@ -437,7 +434,7 @@
 						position: absolute;
 						left:0.27rem;
 						top:0.35rem;
-						width:4.2rem;
+						width:5.2rem;
 						p{
 							color:@FFFFFF;
 							font-size:0.38rem;
@@ -451,7 +448,8 @@
 					.list_itemR{
 						img{
 							width:100%;
-							display: block;	
+							display: block;
+							border-radius: .16rem;	
 						}
 					}
 				}			
@@ -459,3 +457,18 @@
 		}
 	}
 }
+.boxA .fortuneVideo .fortuneList ul li p{
+	font-weight: 600;
+}
+.mui-segmented-control.mui-scroll-wrapper .mui-scroll{
+	height: 100%;
+	a{
+		display: inline-block;
+		height: 100%;
+	}
+}
+.forumList{
+	height: 3.7rem;
+}
+
+

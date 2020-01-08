@@ -18,8 +18,9 @@
 		<!--公共页面头部-->
 		@@include('@pathCommonViews/headBarConfig.html',{"pathName":"登录日志查询"})
 		<!--提示部分-->
-		<div class="tips">
-			<img src="/common/img/zhuyi@2x.png" />温馨提示:地点信息仅供参考
+		<div class="tips iconfont">
+			<!-- <img src="/common/img/zhuyi@2x.png" />温馨提示:地点信息仅供参考 -->
+			&#xe635; 温馨提示:地点信息仅供参考
 		</div>
 		<!--列表部分-->
 		<!--<div class="list recordList">-->
@@ -52,15 +53,18 @@
 		</div>
 		<script id="adjustment-template" type="text/x-handlebars-template">
 			{{#each this}}
-				{{#if time}}<div class="list-time listItem">{{time}}</div>{{/if}}
+			<div class="listBox">
+				<!-- {{#if time}}<div class="list-time listItem">{{time}}</div>{{/if}} -->
+				<div class="list-time">{{time}}</div>
 				{{#each list}}
 					<div class="list-wrap mui-table-view recordList listItem">
 						<span class="equipment-name">{{userAgent}}</span>
-						{{#if typeDes}} <span class="islogin">登录</span> {{else}} <span class="islogin red">退出</span> {{/if}}
+						{{#if typeDes}} <span class="islogin">{{typeDes}}</span> {{else}} <span class="islogin red">退出</span> {{/if}}
 						<span class="address">{{ipArea}}{{clientIp}}</span>
 						<span class="login-time">{{createTime1}}</span>
 					</div>
 				{{/each}}
+			</div>
 			{{/each}}
 		</script>
 		@@include('@pathInclude/views/footer.html')

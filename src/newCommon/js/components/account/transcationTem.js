@@ -9,6 +9,8 @@
 
 var generateTemplate = require('@pathCommonJsComBus/generateTemplate.js');
 var splitUrl = require('@pathCommonJs/components/splitUrl.js')();
+var getCookie = require('@pathNewCommonJsCom/getCookie.js');
+var setCookie = require('@pathNewCommonJsCom/setCookie.js');
 var isConfirm = splitUrl['type'];
 // 按钮变量
 var operationNoStr = '';
@@ -17,14 +19,14 @@ module.exports = function(data, $ele, $id, type) {
     var $ele = $ele || $('.contentWrap'),
         $id = $id || $('#trans-template');
     if (isConfirm == 'confirmed') {
-        window.sessionStorage.setItem('isconfirm', 1);
+        setCookie('isconfirm', 1)
     } else if (isConfirm == 'toBeConfirmed') {
-        window.sessionStorage.setItem('isconfirm', 0);
+        setCookie('isconfirm', 0)
     }
     for (var i = 0; i < data.length; i++) {
         // 是否确认交易isConfirm 1-确认 0-未确认
-        data[i].isConfirmTrans = window.sessionStorage.getItem('isconfirm') == 1 ? 1 : 0; //已确认
-        data[i].notConfirmTrans = window.sessionStorage.getItem('isconfirm') == 0 ? 1 : 0; //未确认
+        data[i].isConfirmTrans = getCookie('isconfirm') == 1 ? 1 : 0; //已确认
+        data[i].notConfirmTrans = getCookie('isconfirm') == 0 ? 1 : 0; //未确认
         // 申购/认购
         data[i].businessType01 = (data[i].businessType == 0 || data[i].businessType == 1) ? 1 : 0;
         data[i].businessType0 = data[i].businessType == 0 && (data[i].leftTopStatus == 5) ? 1 : 0; //认购
@@ -81,7 +83,6 @@ module.exports = function(data, $ele, $id, type) {
 
         data[i].appointmentSuccess = data[i].leftBottomStatus == 18 ? 1 : 0; //合同审核成功
         data[i].appointmentFailed = data[i].leftBottomStatus == 19 ? 1 : 0; //合同审核失败
-
         //赎回
         data[i].businessTypeRedeem = (data[i].businessType == 2) || (data[i].businessType == 9) || (data[i].businessType == 8) ? 1 : 0;
         //分红
@@ -94,7 +95,7 @@ module.exports = function(data, $ele, $id, type) {
         data[i].businessType4 = data[i].businessType == 4 ? 1 : 0;
         //是否签约中 展示转受让双录状态
         data[i].signing = (data[i].assignSubStatus == '05') || (data[i].assigneeSubStatus == '03') ? 1 : 0;
-
+        data[i].redeemDate = data[i].redeemDate?data[i].redeemDate:'--'
 
     }
     console.log(data)

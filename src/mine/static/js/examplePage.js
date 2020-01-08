@@ -51,8 +51,8 @@ $(function() {
             }*/
            
            //获取地址栏的数据
-           	let arg = [];
-           	let path = window.location.href;
+           	var arg = [];
+           	var path = window.location.href;
            	var s = path.substring(path.indexOf('?') + 1);
            	var ss = s.split('&');
            	for( var i = 0; i< ss.length; i++){
@@ -79,18 +79,13 @@ $(function() {
 					that.getElements.applyType.html(that.gV.showData.applyType);
 					that.getElements.articleTitle.html(that.gV.showData.articleTitle);
 //					that.getElements.a.attr({"href":json.data.data.videoAttachUrl})
-					let src = json.data.data.videoAttachUrl;
-					let sourceDom = $("<source src=\""+ src +"\">");
+					var src = json.data.data.videoAttachUrl;
+					var sourceDom = $("<source src=\""+ src +"\">");
 					that.getElements.video.append(sourceDom);
 					that.getElements.video[0].play();
 					
 //					that.getElements.aaaa.html("快点点我")
 //					that.getElements.contentImg.attr({"src":json.data[0].content})
-				},
-				callbackFail: function(json) { //失败后执行的函数
-					tipAction(json.message);	
-					console.log(json.message)
-					console.log("22222")
 				}
 			}]
 			$.ajaxLoading(obj);

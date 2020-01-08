@@ -48,7 +48,7 @@
 
     <script id="second-template" type="text/x-handlebars-template">
         {{! 左侧页面列表}} {{#each this}}
-        <div class="list_item clearfix">
+        <div class="list_item clearfix" id='{{id}}' articleBelong='{{articleBelong}}'>
             <div class="list_itemL">
                 <p>{{title}}</p>
                 <span>{{articleTimeStr}}</span>
@@ -60,10 +60,6 @@
     </script>
     @@include('@pathInclude/views/footer.html')
     <script src="/homePage/static/js/wealthResearch.js"></script>
-
-
-
-
 </body>
 
 </html>

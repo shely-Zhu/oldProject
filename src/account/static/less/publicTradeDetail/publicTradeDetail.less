@@ -35,6 +35,13 @@ html {
 .text_red {
     color: @F52323;
 }
+.colorGray {
+    color: @9B9B9B;
+    font-size: .32rem;
+}
+.againEnter {
+    z-index: 99999;
+}
 
 .cancel_order {
     //撤单按钮
@@ -43,7 +50,10 @@ html {
     right: .3rem;
     font-size: .3rem;
     color: @C4925E;
-    z-index: 999;
+    z-index: 100000000000;
+}
+.html {
+    background-color: @F7FAFD;
 }
 .container {
     background-color: @FFFFFF;
@@ -54,11 +64,14 @@ html {
         border-bottom: 0.01rem solid @F7FAFD;
         text-align: center;
         .amount_area {
-            margin: 0.9rem auto 0;
+            margin: 0.8rem auto 0;
             color: #0E246C;
             .amount {
                 font-size: 0.68rem;
                 font-weight: bold;
+                background: linear-gradient(to right, @6C83C9, @0E246C);
+                -webkit-background-clip: text;
+                color: transparent;
             }
             .yuan {
                 font-size: 0.32rem;
@@ -75,6 +88,9 @@ html {
             font-size: 0.28rem;
             color: #4A4A4A;
         }
+    }
+    .buy_confirm_info,.redeem_confirm_info{
+        margin-bottom: .98rem;//防止确认时间看不到。
     }
     .trade_status_area{
         width: 100%;
@@ -124,6 +140,7 @@ html {
         line-height: 0.88rem;
         color: @272727;
         font-size: 0.28rem;
+        font-weight: 600;
     }
     .item {
         height: 1rem;

@@ -37,7 +37,16 @@
 
 				</div>
 				<div class="panel panel3 tplBox3">
-					{{#each this}}
+					<div class="list">
+			            <div class="contentWrapper">
+			                <ul class="mui-table-view">
+			                    <li class="mui-table-view-cell tplBox3Wrapper"></li>
+			                </ul>
+			                <!-- 返回顶部 -->
+			                @@include('@pathCommonViews/goTop.html')
+			            </div>
+			        </div>
+					<!-- {{#each this}}
 					<div class="profitItemCon">
 						<div class="profitItem">
 							<div class="itemTitle">分红日期</div>
@@ -60,10 +69,18 @@
 							<div class="itemValue">1223333.00</div>
 						</div>
 					</div>
-					{{/each}}
+					{{/each}} -->
 				</div>
 				<div class="panel panel4 tplBox4" style="height:500px">
-
+					<div class="list">
+			            <div class="contentWrapper">
+			                <ul class="mui-table-view">
+			                    <li class="mui-table-view-cell tplBox4Wrapper"></li>
+			                </ul>
+			                <!-- 返回顶部 -->
+			                @@include('@pathCommonViews/goTop.html')
+			            </div>
+			        </div>
 				</div>
 			</div>
 		</div>
@@ -195,6 +212,7 @@
 	<script id="dataLists4"  type="text/x-handlebars-template">
 	<div class="noticeWrap">
 		{{#each this}}
+		<div class="contentBox">
 			<div class="content" linkRul="{{linkAddress}}" type='3' typInfo="{{typInfo}}">
 				<ul class="noticeWrapUl">
 					<li class="description">{{typInfo}}</li>
@@ -204,6 +222,7 @@
 					{{title}}
 				</div>
 			</div>
+		</div>
 		{{/each}}
 	</div>
 	</script>

@@ -25,6 +25,7 @@ require('@pathCommonJsCom/goTopMui.js');
 var splitUrl = require('@pathCommonJs/components/splitUrl.js')();
 var transcationTem = require('@pathCommonJsCom/account/transcationTem.js');
 var alwaysAjax = require('@pathCommonJs/components/alwaysAjax.js');
+var setCookie = require('@pathNewCommonJsCom/setCookie.js');
 
 $(function() {
     var data = {
@@ -71,6 +72,8 @@ $(function() {
                 $('.hopper').show();
                 $('#HeadBarpathName').attr("data", '已完成交易').html('已完成交易');
                 that.gV.type = 1;
+                // 判断是否存在未确认的客户行为确认单
+                that.judgeToBeConfirmedSheet()
             } else if (splitUrl['type'] == 'toBeConfirmed') {
                 $('.hopper').hide();
                 $('#HeadBarpathName').attr("data", '待确认交易').html('待确认交易');
@@ -107,6 +110,48 @@ $(function() {
                 //为$id添加hasPullUp  class
                 $('.list').addClass('hasPullUp');
             });
+        },
+        // 判断是否存在未确认的客户行为确认单
+        judgeToBeConfirmedSheet: function() {
+            var that = this;
+            var obj = [{
+                url: site_url.gainCustStorageList_api,
+                data: {
+                    sourceType: 1
+                },
+                contentTypeSearch: true,
+                callbackDone: function(json) {
+                    var jsonData = json.data[0] || []
+                    if(jsonData.length != 0) {
+                        $(".hopper").hide()
+                        $(".covering").hide()
+                        var fileName = jsonData.storageFileName
+                        var filePath = jsonData.storageFilePath
+                        var groupName = jsonData.storageGroupName
+                        var ordernum = jsonData.ordernum
+                        var obj = {
+                            title: '温馨提示',
+                            p: '<p>您预约的' + jsonData.storageRelName +'产品已经为您生成客户行为确认单，请您查看并确认</p>',
+                            yesTxt: '立即查看',
+                            zIndex: 100,
+                            hideCelButton: true,
+                            htmdEvtYes:'tobeConfirmTransaction_14',  // 埋点确定按钮属性
+                            callback: function(t) {
+                                if(fileName.indexOf(".pdf") != -1) {
+                                    window.location.href = site_url.downloadNew_api + "?filePath=" + filePath + "&fileName=" + new Base64().encode(fileName) + "&groupName=" + groupName + '&ordernum=' + ordernum + "&show=1&acknowledgeBtn=true";
+                                } else {
+                                    window.location.href = site_url.downloadNew_api + "?filePath=" + filePath + "&fileName=" + new Base64().encode(fileName) + "&groupName=" + groupName + '&ordernum=' + ordernum + '&acknowledgeBtn=true'
+                                }
+                            }
+                        };
+                        $.elasticLayer(obj)
+                    }
+                },
+                callbackFail: function() {
+                  
+                }
+            }];
+            $.ajaxLoading(obj);
         },
         getData: function(t, type) {
             var that = this;
@@ -154,11 +199,11 @@ $(function() {
                         $('.contentWrapper').find('.mui-pull-bottom-pocket').removeClass('mui-hidden');
                         // 将列表插入到页面上
                         transcationTem(data, that.getElements.contentWrap, that.getElements.transTemp, type)
-
-                    }, 200)
+                    }, 300)
                 },
                 callbackNoData: function() {
                     if (that.gV.aP.pageNum == 1) {
+                        $(".list").hide()
                         that.getElements.noData.show();
                     }
 
@@ -173,10 +218,18 @@ $(function() {
             mui("body").on('mdClick', '.hopper', function(e) {
                     $('.mask').show();
                     $('.hopperCon').show();
+                    $(".covering").show()
 
                 }, {
                     'htmdEvt': 'tobeConfirmTransaction_0'
                 })
+            mui("body").on('mdClick', '.covering', function(e) {
+                $('.hopperCon').hide();
+                $(".covering").hide()
+
+            }, {
+                'htmdEvt': 'tobeConfirmTransaction_14'
+            })    
                 //点击筛选数据
             mui("body").on('mdClick', '.hopperCon li', function(e) {
                     $('.list').show();
@@ -184,6 +237,7 @@ $(function() {
                     $(this).addClass('active').siblings('li').removeClass('active');
                     $('.mask').hide();
                     $('.hopperCon').hide();
+                    $(".covering").hide();
                     that.gV.businessType = $(this).attr('data');
                     // 重置上拉加载
                     that.gV.aP.pageNum = 1;
@@ -200,6 +254,8 @@ $(function() {
             mui("body").on('mdClick', '.mask', function(e) {
                 $('.mask').hide();
                 $('.hopperCon').hide();
+                $(".covering").hide();
+
             }, {
                 'htmdEvt': 'tobeConfirmTransaction_2'
             })
@@ -218,6 +274,8 @@ $(function() {
                             celTxt: '取消',
                             hideCelButton: false,
                             zIndex: 100,
+                            htmdEvtYes:'tobeConfirmTransaction_7',  // 埋点确定按钮属性
+                            htmdEvtCel:'tobeConfirmTransaction_8',  // 埋点取消按钮属性
                             callback: function(t) {
 
                             }
@@ -232,6 +290,8 @@ $(function() {
                             celTxt: '取消',
                             hideCelButton: false,
                             zIndex: 100,
+                            htmdEvtYes:'tobeConfirmTransaction_9',  // 埋点确定按钮属性
+                            htmdEvtCel:'tobeConfirmTransaction_10',  // 埋点取消按钮属性
                             callback: function(t) {
 
                             },
@@ -244,6 +304,8 @@ $(function() {
                             celTxt: '取消',
                             hideCelButton: false,
                             zIndex: 100,
+                            htmdEvtYes:'tobeConfirmTransaction_11',  // 埋点确定按钮属性
+                            htmdEvtCel:'tobeConfirmTransaction_12',  // 埋点取消按钮属性
                             callback: function(t) {
                                 var obj = [{
                                     url: site_url.fundReserveCancel_api,
@@ -290,6 +352,7 @@ $(function() {
                         yesTxt: '我明白了',
                         hideCelButton: true,
                         zIndex: 100,
+                        htmdEvtYes:'tobeConfirmTransaction_13',  // 埋点确定按钮属性
                         callback: function(t) {
 
                         },
@@ -314,7 +377,7 @@ $(function() {
                     if (type == 'toCertif') { //去合格投资者认证
                         if (isElec == 0) {
                             //非电子合同
-                            window.location.href = site_url.notElecSecondStep_url + '?isQualified=' + isQualified + '&projectName=' + projectName;
+                            window.location.href = site_url.notElecSecondStep_url + '?isQualified=' + isQualified + '&projectName=' + projectName+'&projectId=' + proId;
                         } else if (isElec == 1) {
                             //电子合同跳转
                             window.location.href = site_url.elecSecondStep_url + '?reserveId=' + reserveId + '&projectId=' + proId + '&projectName=' + projectName + '&isAllowAppend=' + isAllowAppend + '&isPubToPri=' + isPubToPri;
@@ -323,6 +386,7 @@ $(function() {
                         window.location.href = site_url.elecThirdStep_url + '?reserveId=' + reserveId + '&projectId=' + proId + '&projectName=' + projectName + '&isAllowAppend=' + isAllowAppend + '&isPubToPri=' + isPubToPri;
                     } else if (type == 'toSee') { //查看合同
                         window.location.href = site_url.seeSign_url + '?reserveId=' + reserveId;
+                        debugger
                     } else if (type == 'toUploadM') { //去上传汇款凭证
                         window.location.href = site_url.elecFourthStep_url + '?reserveId=' + reserveId + '&projectId=' + proId + '&projectName=' + projectName + '&isAllowAppend=' + isAllowAppend + '&isPubToPri=' + isPubToPri;
                     } else if (type == 'toView') { //详情

@@ -18,7 +18,7 @@
         @@include('@pathCommonCom/noData/noData.html', {"tipText": "暂无数据"})
         <!-- 加载中loading -->
         @@include('@pathCommonCom/loading/listLoading.html')
-        @@include('@pathCommonViews/headBarConfig.html',{"pathName":"财富学院"})
+        @@include('@pathCommonViews/headBarConfig.html',{"pathName":"财富讲堂"})
         <div class="br"></div>
         <div class="mui-content  myAsset">
             <!-- 放置页面内容 -->
@@ -54,8 +54,10 @@
                 <div class="roomContent">{{intro}}</div>
             </div>
         {{else}}
-            <div class="roomItem knowledgeItem" id="{{id}}" articleBelong="{{articleBelong}}">
-                <div class="roomImg"><img class="{{lazyClass}}" src="/common/img/lazyImgList.png" data-original="{{imageUrlShowOnline}}" alt=""></div>
+            <div class="knowledgeItem" id="{{id}}" articleBelong="{{articleBelong}}">
+                
+                    <img class="{{lazyClass}}" src="/common/img/lazyImgList.png" data-original="{{imageUrlShowOnline}}" alt="">
+                
                 <div class="roomTitle">{{title}}</div>
                 <div class="roomContent">{{intro}}</div>
            </div>
