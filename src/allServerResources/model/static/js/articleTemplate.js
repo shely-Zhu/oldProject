@@ -130,7 +130,7 @@ $(function () {
                             "padding": "0"
                         })
                         //给底部按钮加文字和跳转链接
-                         that.$e.btnButton.show();
+                        that.$e.btnButton.show();
                         that.$e.btnHref.html(resData.buttonLabel).show();
 
                         that.gV.fundCode = resData.recomCodes;
@@ -175,7 +175,7 @@ $(function () {
                 //后续找小宇确认跳转逻辑和连接
                 if (that.recomTypes == "1") {//1-超级现金宝
 
-                    window.location.href = site_url.superStreasureDetail_url;
+                    window.location.href = site_url.superStreasureDetail_url + '?fundCode=' + that.gV.fundCode;
 
                 } else if (that.recomTypes == "2") {
 
