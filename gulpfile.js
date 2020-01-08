@@ -621,12 +621,6 @@ gulp.task("cssToHost", function() {
                 cb()
             })
         )
-<<<<<<< HEAD
-        //.pipe(gulp.dest(host.path))
-
-    //打版本号
-    .pipe(plugins.rev())
-=======
 
         //与host.path中的内容做比对
         .pipe(plugins.changed(host.path, { hasChanged: plugins.changed.compareSha1Digest }))
@@ -649,7 +643,6 @@ gulp.task("cssToHost", function() {
 
 
 
->>>>>>> f63472146a723d01897f3492223fc054faf5c27e
         .pipe(gulp.dest(host.path))
         .pipe(plugins.rev.manifest())
         .pipe(gulp.dest(host.path + 'rev/css/'))
@@ -725,11 +718,7 @@ gulp.task("allServerResourcesInclude", function() {
             }
         })))
 
-<<<<<<< HEAD
-    //.pipe(gulp.dest(host.path + 'allServerResources/include/'))
-=======
         // .pipe(gulp.dest(host.path + 'allServerResources/include/'))
->>>>>>> f63472146a723d01897f3492223fc054faf5c27e
 
         // .pipe(plugins.rev())
 
@@ -824,9 +813,6 @@ gulp.task("includeJs", ['htmd', 'allServerResourcesInclude'], function() {
         })
     )
 
-<<<<<<< HEAD
-    //.pipe(gulp.dest(host.path + 'include/'))
-=======
     .pipe(plugins.if(options.env === '3' || options.env === '4', plugins.uglify({ //压缩
         mangle: false, //类型：Boolean 默认：true 是否修改变量名
         compress: false, //类型：Boolean 默认：true 是否完全压缩
@@ -837,7 +823,6 @@ gulp.task("includeJs", ['htmd', 'allServerResourcesInclude'], function() {
     //
 
     .pipe(gulp.dest(host.path + 'include/'))
->>>>>>> f63472146a723d01897f3492223fc054faf5c27e
 
     //root.js需要打版本号
     .pipe(
@@ -1061,11 +1046,7 @@ gulp.task("webpack", ['jsCpd', 'changePath', 'commonHtml', 'jsImgRev'], function
 
         plugins.rev(),
         gulp.dest(host.path),
-<<<<<<< HEAD
-        plugins.debug({ title: 'js文件对应的节点。。。。。。。。。。。。' })
-=======
         //plugins.debug({ title: 'js文件对应的节点。。。。。。。。。。。。' }),
->>>>>>> f63472146a723d01897f3492223fc054faf5c27e
         plugins.rev.manifest(),
         gulp.dest(host.path + 'rev/js')
 

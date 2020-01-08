@@ -2,13 +2,7 @@
   "name": "webpc_htcf",
   "version": "3.1.0",
   "private": true,
-<<<<<<< HEAD
-  "scripts": {
-
-  },
-=======
   "scripts": {},
->>>>>>> f63472146a723d01897f3492223fc054faf5c27e
   "dependencies": {
     "antd": "0.12.17",
     "babel": "6.23.0",
