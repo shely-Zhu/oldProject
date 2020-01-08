@@ -190,6 +190,16 @@ $(function() {
 			       		case 4: that.data['qrnhWfsy'].sinceNow = newData;break;
 			       	}
 			       	that.drawLine( type, newData);			       	
+			    },
+			    callbackNoData: function() {
+			    	$("#qrnhLine").addClass("hide")
+                    $("#wfsyLine").addClass("hide")
+                    $(".noDataHintEcharts").removeClass("hide")
+			    },
+			    callbackFail: function() {
+			    	$("#qrnhLine").addClass("hide")
+                    $("#wfsyLine").addClass("hide")
+                    $(".noDataHintEcharts").removeClass("hide")
 			    }
 			}];
 			$.ajaxLoading(obj);
@@ -203,6 +213,8 @@ $(function() {
 				that.data.symboltype = 'circle'
 			}	
 			if( type == 'qrnh'){
+				$("#qrnhLine").removeClass("hide")
+				$(".noDataHintEcharts").addClass("hide")
 				var chartId = $('#qrnhLine')[0],
 					xAxisData = data.profitThoudDate;
 					if( that.data.projectType != "10300" ){ //非货币基金
@@ -214,6 +226,8 @@ $(function() {
 					}
 			} else if( type == 'wfsy'){
 				//画的是万份收益折线图
+				$("#wfsyLine").removeClass("hide")
+				$(".noDataHintEcharts").addClass("hide")
 				var chartId = $('#wfsyLine')[0],
 					xAxisData = data.profitThoudDate;
 					if( that.data.projectType != "10300" ){ //非货币基金

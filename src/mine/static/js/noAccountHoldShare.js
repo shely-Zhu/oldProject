@@ -39,7 +39,7 @@ $(function() {
         },
         init: function() {
             var that = this;
-
+            $(".listLoading").hide()
             that.events();
         },
         getConditionsOfOrder:function(){
