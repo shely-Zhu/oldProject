@@ -50,7 +50,7 @@ module.exports = function() {
     this.resetPassword_url = go_url.cft_url + '/user/views/forgetLoginPassword/resetPassword.html';
 
     //协议模板
-    this.agreementModel_url = go_url.no_url + '/allServerResources/include/views/agreementModel.html';
+    this.agreementModel_url = go_url.no_url + '/include/views/agreementModel.html';
 
     //首页
     this.index_url = go_url.no_url + '/index/views/index.html';
@@ -145,9 +145,9 @@ module.exports = function() {
     this.cashXml_url = go_url.no_url + '/cashTreasure/views/cashXml.html';
 
     //实名认证下的三个协议
-    this.tradeserviceAgreement_url = go_url.no_url + '/allServerResources/include/views/agreementModel.html?id=81';
-    this.investorinterests_url = go_url.no_url + '/allServerResources/include/views/agreementModel.html?id=82';
-    this.bankAuthorization_url = go_url.no_url + '/allServerResources/include/views/agreementModel.html?id=83';
+    this.tradeserviceAgreement_url = go_url.no_url + '/include/views/agreementModel.html?id=81';
+    this.investorinterests_url = go_url.no_url + '/include/views/agreementModel.html?id=82';
+    this.bankAuthorization_url = go_url.no_url + '/include/views/agreementModel.html?id=83';
 
     /*----------------------------------------投资者分类 start----------------------------------*/
     //分类页面
