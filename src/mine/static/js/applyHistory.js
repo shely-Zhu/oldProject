@@ -87,9 +87,9 @@ $(function() {
             }, {
                 'htmdEvt': 'applyHistory_02'
             })
-            //点击修改跳转到基金申请页面
-            mui("body").on("mdClick", ".editHistory", function() {
-                var id = $(this).attr("applyId");
+            //点击修改跳转到基金申请页面，点击事件加上右边的箭头
+            mui("body").on("mdClick", ".content-item .mui-table-view-cell .editHistory, .content-item .mui-table-view-cell .mui-icon-arrowright", function() {
+                var id = $(this).parents('.mui-table-view-cell').attr("applyId");
                 window.location.href = site_url.fundAccountDiagnosisResult_url + "?type=edit" + "&applyId=" + id
             }, {
                 'htmdEvt': 'applyHistory_03'
