@@ -57,14 +57,14 @@ $(function(){
                     if(data.mesContent && data.mesContent != '') {
                         $("#informsDetailContent")[0].innerHTML = data.mesContent
                     } else {
-                        $(".noData").show()
-                        $("#informsDetailBox").hide()
+                        //$(".noData").show()
+                        //$("#informsDetailBox").hide()
                     }
                     //generateTemplate(data,that.$e.noticeConTemplateId,that.$e.noticeItemListTemplateId);               
                 },
                 callbackNoData: function() {
-                    $(".noData").show()
-                    $("#informsDetailBox").hide()
+                    /*$(".noData").show()
+                    $("#informsDetailBox").hide()*/
                 }
             }];                        
             $.ajaxLoading(obj); 
