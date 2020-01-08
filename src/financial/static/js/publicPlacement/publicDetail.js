@@ -266,8 +266,12 @@ $(function () {
                             if(jsonData.isWealthAccount == "0"&&jsonData.isRiskEndure == "1"&&jsonData.isPerfect == "1"&&jsonData.isInvestFavour=="1"){
                                 that.gV.realLi.hide();
                                 that.gV.tipsWrap.hide();
-                                $(".isRiskMatchBox").show();
-                                $(".isRiskMatch_mask").show();
+                                if(jsonData.isIdnovalid=="1"){
+                                    //证件已过期
+                                    tipAction('因过期原因该账户被冻结，请联系理财师或咨询客服！客服电话：400-8980-618');
+                                    return false;
+                                }
+
                                 if(jsonData.isHighAge=="1"&&that.gV.isHighAgeStatus){
                                    //年龄校验
                                     //that.gV.isHighAgeStatus = false;
@@ -287,6 +291,9 @@ $(function () {
                                     $(".isRiskMatchResult").attr("type","isZdTaLimit")
                                     return false;
                                 }
+
+                                $(".isRiskMatchBox").show();
+                                $(".isRiskMatch_mask").show();
 
                                 if(jsonData.isRiskMatch == "1"){
                                     //风险等级匹配
