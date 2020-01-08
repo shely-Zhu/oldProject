@@ -66,7 +66,7 @@ $(function() {
                             var _this = this
                             setTimeout(function() {
                                 that.getData(_this);
-                            }, 100)
+                            }, 200)
                         }
                     }
                 }
@@ -74,9 +74,9 @@ $(function() {
             //init后需要执行ready函数，才能够初始化出来
             mui.ready(function() {
                 //隐藏当前的加载中loading
-                if (!$('.activityList').hasClass('hasPullUp')) {
+                 if (!$('.activityList').hasClass('hasPullUp')) {
                     $('.activityList').find('.mui-pull-bottom-pocket').addClass('mui-hidden');
-                }
+                 }
                 //这一句初始化并第一次执行mui上拉加载的callback函数
                 mui('.contentWrapper').pullRefresh().pullupLoading();
                 //为$id添加hasPullUp  class
@@ -103,6 +103,7 @@ $(function() {
                     console.log('我是内容', json);
                     var data = json.data.financialerList;
                     console.log(data)
+                    that.$e.listLoading.hide();
                     if (json.data.matchedFinancialer == '0' && that.gV.startPage == 1) {
                         t.endPullupToRefresh(true);
                         that.$e.activityListDataBox.hide();
@@ -135,7 +136,9 @@ $(function() {
                         that.gV.startPage++;
                         //去掉mui-pull-bottom-pocket的mui-hidden
                         $('.contentWrapper').find('.mui-pull-bottom-pocket').removeClass('mui-hidden');
-
+                        $.each(data,function(i,el) {
+                            el.isPass == "Y"? el.isPass = 1 : el.isPass = 0
+                        })
                         // 将列表插入到页面上
                         generateTemplate(data, that.$e.recordList, that.$e.starFinancialPlannerListTemplateId)
                         //无缝滚动
@@ -144,6 +147,9 @@ $(function() {
 
                     }, 200)
 
+                },
+                callbackFail: function(json) {
+                    that.$e.listLoading.hide();
                 },
                 callbackNoData: function(json) {
                     that.$e.listLoading.hide();
@@ -154,6 +160,9 @@ $(function() {
         //推荐列表
         getRecommend: function(data) {
             var that = this;
+            $('.activityNoListBox').show()
+            $('.activityNoList').show()
+
             var topHeitgh = $('#activitySearch').height();
             var noBox = $('.activityNoListBox').height();
             var noListM = parseInt(that.getStyle($('.activityNoList')[0], 'marginTop'));
@@ -220,6 +229,9 @@ $(function() {
                     }, 200)
 
                 },
+                callbackFail: function(json) {
+
+                },
                 callbackNoData: function(json) {
 
                 }
@@ -281,6 +293,10 @@ $(function() {
                         window.indexedList = new mui.IndexedList($('#list')[0]);
                     });
                 },
+                callbackFail: function(json) {
+                    console.log(json.message)
+                    tipAction(json.message);
+                }
             }];
             $.ajaxLoading(obj);
         },
@@ -307,6 +323,10 @@ $(function() {
                     });
                     that.initMui();
                 },
+                callbackFail: function(json) {
+                    console.log(json.message)
+                    tipAction(json.message);
+                }
             }];
             $.ajaxLoading(obj);
         },
@@ -327,6 +347,8 @@ $(function() {
                 var txt = $(this).text();
                 var code = $(this).attr('data-code');
                 var parentId = $(this).attr('data-parentId');
+                $('.activityNoListBox').hide()
+                $('.activityNoList').hide()
                 $('#activityDataBox').show();
                 $('#cityListBox').hide();
                 $('#loading').show();

@@ -128,13 +128,16 @@ module.exports = function(callback,forgetCall,closeCallback){
 			closeCallback?closeCallback():''
 			
 		})
-		$(".forgetP").on('click',function(){
+		mui("body").on('mdClick','.forgetP',function(){
 			if(!!forgetCall){//如果参数不为空,走传进来的方法
-
+				forgetCall()
 			}else{
-				
+				//跳往原生页面去修改密码
+				window.location.href = site_url.pofForgotPassword_url
 			}
-		})
+		}, {
+			htmdEvt: 'cashTransformIn_12'
+		}) ;
 
 
 }
