@@ -7,6 +7,11 @@
  * @FilePath: \htjf-app\src\mine\static\js\fundAccountDiagnosisResult.js
  */
 
+/*
+ * @Author: tianjunguo 修改样式，增加请选择
+ * @Date: 2019-1-9 
+ */
+
 require('@pathCommonBase/base.js');
 require('@pathCommonJs/ajaxLoading.js');
 require('@pathCommonJs/components/elasticLayerTypeTwo.js');
@@ -479,9 +484,10 @@ $(function() {
                 type: 'date'
             });
             // 购买日期选择
-            mui("body").on("mdClick", ".addOtherFund_content .mui-icon-arrowright", function() {
+            mui("body").on("mdClick", ".addOtherFund_content .mui-icon-arrowright,#dataPickDec", function() {
                 var type = $(this).attr("type");
                 $('.popup').show()
+                $("#dataPickDec").hide();
                 //$('.popup-content .popup-mask').hide();
                 $('.mui-dtpicker').show()
                 that.gV.dataPickData = "";
@@ -527,19 +533,20 @@ $(function() {
                     }
 
 //                  $(".warmMessage").hide()
-					$(".warmMessage").css("visibility","hidden")
+                    $(".warmMessage").css("visibility","hidden")
                     $(".addOtherFund").hide()
                     $(".addOtherFund_content").hide()
                     that.initAddOtherFundCode()
                 } else {
 //                  $(".warmMessage").show()
-                    $(".warmMessage").css("visibility","show")
+                    $(".warmMessage").css("visibility","visible")
                 }
             },{
                 'htmdEvt':'fundAccountDiagnosisResult_02'
             })
 
             mui("body").on("mdClick", ".addOtherFund_content .comfirmButtom .addOtherFalse", function() {
+//              $(".warmMessage").hide()
                 $(".warmMessage").css("visibility","hidden")
                 $(".addOtherFund").hide()
                 $(".addOtherFund_content").hide()
@@ -574,10 +581,12 @@ $(function() {
                 } else if (type == "yield") {
                     $('.popuplist').css('display', 'block')
                     $('.popup-mask').show();
+                    $('#yearOwn').hide();
                     $(".popup-content .yield").show()
                     that.gV.typeInput = "yield";
                 } else if (type == "loss") {
                     $('.popuplist').css('display', 'block')
+                    $("#maxLossOwn").hide();
                     $('.popup-mask').show();
                     $(".popup-content .loss").show()
                     that.gV.typeInput = "loss";
@@ -657,6 +666,9 @@ $(function() {
             })
             //弹出框取消按钮
             mui("body").on("mdClick", ".popup_cancel", function() {
+            	$('#yearOwn').show();
+            	$('#maxLossOwn').show();
+            	$('#dataPickDec').show();
                 $('.popuplist').css('display', 'none')
                 $(".mui-backdrop").remove()
             }, {

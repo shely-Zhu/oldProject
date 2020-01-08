@@ -55,7 +55,8 @@
                     </li>
                     <li class="mui-table-view-cell"><span class="left">预期年化收益率</span>
                         <span class="mui-icon mui-icon-arrowright" type="yield"></span>
-                        <span class="rightMoreBox yieldControl" type="yield">
+                        <span class="right" id="yearOwn" type="yield">请选择</span>
+                        <span class="rightMoreBox yieldControl">
                             <span class="rightMore">%</span>
                             <span class="rightMore" id="yield_second"></span>
                             <span class="rightMore">-</span>
@@ -65,7 +66,8 @@
                     </li>
                     <li class="mui-table-view-cell"><span class="left">可承受最大回撤(亏损)</span>
                         <span class="mui-icon mui-icon-arrowright" type="loss"></span>
-                        <span class="rightMoreBox lossControl" type="loss">
+                        <!--<span class="right" id="maxLossOwn" type="loss">请选择</span>-->
+                        <span class="rightMoreBox lossControl">
                                 <span class="rightMore">%</span>
                                 <span class="rightMore" id="loss_second"></span>
                                 <span class="rightMore">-</span>
@@ -211,7 +213,7 @@
         <div class="addOtherFund_content">
             <ul class="mui-table-view">
                 <li class="mui-table-view-cell"><span class="left">基金代码</span><span class="right mr60"> <input type="text" class="mui-input-clear fundCode_input" placeholder="请输入基金代码"></span></li>
-                <li class="mui-table-view-cell"><span class="left">购买日期</span> <span class="mui-icon mui-icon-arrowright"></span><span class="right dataPick"></span></li>
+                <li class="mui-table-view-cell"><span class="left">购买日期</span> <span class="mui-icon mui-icon-arrowright"></span><span class="right" id="dataPickDec">请选择</span><span class="right dataPick"></span></li>
                 <li class="mui-table-view-cell"><span class="left">购买金额</span><span class="right mr60"> <input type="text" class="mui-input-clear money_input" placeholder="请输入金额"></span></li>
             </ul>
             <div class="warmMessage">基金代码,购买日期,购买金额不能为空</div>
