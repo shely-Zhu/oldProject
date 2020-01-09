@@ -32,8 +32,8 @@ $(function() {
         init: function() {
             var that = this;
             that.getData();
-            that.getUserInfo();  //获取用户类型
-            that.getUserInfo_1(); //用户身份信息
+           // that.getUserInfo();  //获取用户类型
+           // that.getUserInfo_1(); //用户身份信息
             that.events();
         },
          //获取用户信息
@@ -347,6 +347,8 @@ $(function() {
             // 买入
             mui("body").on('mdClick', ".buyButton", function(e) {
                 var $this = $(this);
+                that.getUserInfo();  //获取用户类型
+                that.getUserInfo_1(); //用户身份信息
                 if ($this.hasClass("disable")) {
                     return false;
                 } else {
