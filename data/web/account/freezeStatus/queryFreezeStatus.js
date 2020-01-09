@@ -9,17 +9,7 @@
 var Mock = require('mockjs');
 
 //这里直接返回的就是JSON格式
-var data = {
-	"data":{
-		"buyFreeze":1,
-		"customerNo":468171,
-		"lawFreezeStatus":0,
-		"outdateFreezeStatus":0,
-		"saleFreeze":1
-	},
-	"message":"查询成功",
-	"status":"0000"
-}
+var data = {"data":{"buyFreeze":1,"customerNo":564703,"lawFreezeStatus":0,"outdateFreezeStatus":1,"saleFreeze":0},"message":"查询成功","status":"0000"}
 /*var data = Mock.mock({
     "hmac": "hmac",
     "status": "0000",

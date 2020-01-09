@@ -1367,6 +1367,11 @@ gulp.task('reNameRoot', ['rootEnv'], function() {
             cb()
         }),
 
+        plugins.if(options.env === '3' || options.env === '4', plugins.rev()),
+
+        plugins.if(options.env === '3' || options.env === '4', gulp.dest(host.path + 'allServerResources/include/js/vendor/'))
+
+
 
         //预生产、生产环境执行
         // plugins.if( options.env == 3 || options.env == 4 , vinylPaths(del) )

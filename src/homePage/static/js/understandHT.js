@@ -91,7 +91,7 @@ $(function() {
                         wrap_template = Handlebars.compile(wrap_source),
                         wrap_html = wrap_template(data); //模板生成
 
-                    $('.tabBar').html( wrap_html);
+                    // $('.tabBar').html( wrap_html);
 
                     //定位到第二个
                     $('.tabBar .tabA').eq( that.gV.sortType ).addClass('active');
@@ -109,7 +109,7 @@ $(function() {
                     var height = window.screen.height - $('.tabImg')[0].getBoundingClientRect().top;
 
                     
-                    $('.tabImg').height( '<div>'+window.screen.height+'</div>' + '<div>'+document.documentElement.clientHeight+'</div>' + '<div>'+$('body').height()+'</div>' + height);
+                    $('.tabImg').html( '<div>'+height+'</div>' + '<div>'+window.screen.height+'</div>' + '<div>'+document.documentElement.clientHeight+'</div>' + '<div>'+$('body').height()+'</div>' + wrap_html);
 
                     // $('.list').height(height);
                     
