@@ -218,6 +218,7 @@ gulp.task('proxyTask', function() {
                     // target: 'http://172.16.187.129:8080',//李亚楠
                     // target: 'http://192.168.50.254:8085',
                     target: 'https://app.chtfundtest.com',
+                    // target:"https://app.haomaojf.com",
                     changeOrigin: true,
                     secure: false,
                 }),
@@ -227,6 +228,7 @@ gulp.task('proxyTask', function() {
                     //  target: 'http://172.16.187.129:8080',//李亚楠
                     // target: 'http://172.16.187.164:8081',
                     target: 'https://h5.chtfundtest.com',
+                    // target:"https://h5.haomaojf.com",
                     changeOrigin: true,
                     secure: false,
                 }),
@@ -552,6 +554,7 @@ gulp.task("cssToHost", function() {
 
                 //处理mui的引用
                 var fileCon = file.contents.toString();
+
                 // var re = new RegExp("@import[^\.]*\.css", 'g');
                 var commonImgArr = fileCon.match( /(@import)[^)]*\)/g );
 
@@ -559,9 +562,19 @@ gulp.task("cssToHost", function() {
 
                     for( var i in commonImgArr ){
 
-                        if( commonImgArr[i].indexOf('.css') != -1 && commonImgArr[i].indexOf('include') != -1 ){
+                        //老版本的代码
+                        if(  commonImgArr[i].indexOf('.css') != -1 && commonImgArr[i].indexOf('include') != -1 ){
 
-                            var str = commonImgArr[i].substring( commonImgArr[i].indexOf('.'), commonImgArr[i].indexOf('include'));
+                            //先判断有没有allServerResources的
+                            if( commonImgArr[i].indexOf('allServerResources') != -1 ){
+                                //新代码的
+                                var str = commonImgArr[i].substring( commonImgArr[i].indexOf('.'), commonImgArr[i].indexOf('allServerResources'));
+                            }
+                            else{
+                                //旧代码的
+                                var str = commonImgArr[i].substring( commonImgArr[i].indexOf('.'), commonImgArr[i].indexOf('include'));
+                            }
+                            
                             var str_2 = commonImgArr[i].replace(str, prefix + '/');
 
                             fileCon = fileCon.replace( commonImgArr[i] , str_2 )

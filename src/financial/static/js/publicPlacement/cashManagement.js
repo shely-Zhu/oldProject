@@ -59,10 +59,10 @@ $(function () {
         },
         callbackDone: function (json) {
           json = json.data
-          $('.fundValue').html(json.totalMoney);
-          $('.income .profitValue').html(json.incomeMask);
-          $('.holdIncome .profitValue').html(json.holdIncomeMask);
-          $('.addupIncome .profitValue').html(json.addupIncome);
+          $('.fundValue').html(json.totalMoney==''?'0.00':json.totalMoney);
+          $('.income .profitValue').html(json.incomeMask==""?"0.00":json.incomeMask);
+          $('.holdIncome .profitValue').html(json.holdIncomeMask==""?"0.00":json.holdIncomeMask);
+          $('.addupIncome .profitValue').html(json.addupIncome==''?'0.00':json.addupIncome);
         }
       }]
       $.ajaxLoading(obj1);
@@ -173,7 +173,6 @@ $(function () {
       //了解现金管理
       mui("body").on("mdClick", ".fundKnow", function () { 
        window.location.href  = site_url.articleTemplate_url + '?articleBelong=12'
-       
       },{
         htmdEvt: 'cashManagement_04'
       });
