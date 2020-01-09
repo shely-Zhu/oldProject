@@ -37,13 +37,15 @@ $(function() {
              // $("body").height( $(window).height() );
 
             $('body').css({
-                            position: 'fixed',
-                            '-webkit-overflow-scrolling': 'auto',
-                            top: 0,
-                            right:0,
-                            left: 0,
-                            bottom:0
-                        })
+                position: 'fixed',
+                '-webkit-overflow-scrolling': 'auto',
+                top: 0,
+                right:0,
+                left: 0,
+                bottom:0,
+                height: '100%',
+                windth: '100%'
+            })
 
             var height = windowHeight - $('.tabImg')[0].getBoundingClientRect().top;
 
