@@ -21,7 +21,8 @@ module.exports = function(type, fundCode, userStatus, accountType, url) {
 			tipsWrap:$("#tips-wrap"),
 			realLi: $('#real-condition>li'), // 条件下的五条
 			singleaAuthenPath : "", //一键认证跳转链接
-			privatePlacementDetail: ''
+			privatePlacementDetail: '',
+			investorStatus: "" // 审核状态
 		},
         gV: {
         	isWealthAccountStatus: '',// 是否开通财富账户
@@ -57,6 +58,7 @@ module.exports = function(type, fundCode, userStatus, accountType, url) {
                         isReal = "", //是否实名认证，因为如果机构切一键认证是实名，点击需要提示弹框。
                         singleaAuthenPath = "", //一键认证跳转链接
 						singleaAuthen = false; //条件框是否展示
+						that.data.investorStatus = jsonData.investorStatus
 						// 当满足四个条件之后
 						if(jsonData.isWealthAccount == "0"&&jsonData.isRiskEndure == "1"&&jsonData.isPerfect == "1"&&jsonData.isInvestFavour=="1"){
 							that.data.tipsWrap.hide()
@@ -158,22 +160,13 @@ module.exports = function(type, fundCode, userStatus, accountType, url) {
 							that.data.realLi.eq(2).hide()
 						}
 						if(jsonData.isInvestFavour=="0" || jsonData.isInvestFavour == null){
-							//是否投资者分类
-							that.data.realLi.eq(3).show()  
+							//先判断是否进行投资者分类，没有则显示未认证，如果是再判断投资者状态
+							that.data.realLi.eq(3).show() 
+							if(jsonData.investorStatus =="0"&&that.gV.userStatus=="") {
+								that.data.realLi.eq(3).find(".bank-status").html("未审核")
+							}
 						}else{
 							that.data.realLi.eq(3).hide()
-                        }
-						if(jsonData.isRiskMatch=="0" || jsonData.isRiskMatch == null){
-							//是否风险等级
-							that.data.realLi.eq(4).show()  
-						}else{
-							that.data.realLi.eq(4).hide()
-						}
-						if(jsonData.investorStatus =="0"&&that.gV.userStatus==""){
-                            //直接申请为专业投资者
-                            that.data.tipsWrap.show()
-                            that.data.realLi.show();
-                            that.data.realLi.eq(3).show()  
                         }
 						that.data.realLi.eq(4).hide() 
 
@@ -246,7 +239,7 @@ module.exports = function(type, fundCode, userStatus, accountType, url) {
 					case 3:  //投资者分类
 					if(that.gV.isWealthAccountStatus){
 						//开通了账户
-						if(jsonData.investorStatus =="0"&&that.gV.userStatus==""){
+						if(that.data.investorStatus =="0"&&that.gV.userStatus==""){
 							//申请为投资者
 							window.location.href = site_url.investorClassificationResult_url
 						}else{
@@ -315,7 +308,7 @@ module.exports = function(type, fundCode, userStatus, accountType, url) {
 					case "isInvestFavour":  //投资者分类
 					if(that.gV.isWealthAccountStatus){
                         //开通了账户
-                        if(jsonData.investorStatus =="0"&&that.gV.userStatus==""){
+                        if(that.data.investorStatus =="0"&&that.gV.userStatus==""){
 							//申请为投资者
 							window.location.href = site_url.investorClassificationResult_url
 						}else{
