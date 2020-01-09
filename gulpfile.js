@@ -279,7 +279,7 @@ if (options.env === '0') { //当开发环境的时候构建命令执行mock服�
 
 /**此任务默认执行，gulp启动时，先将所有文件打包一次**/
 gulp.task('initialTask', function(cb) {
-    plugins.sequence('clean', 'images', 'font', 'allServerResources', 'allServerResourcesFont', 'includeJs', 'includeCss', 'cssToHost', 'webpack', 'bfRev', 'html', 'rev', 'rootEnv', cb);
+    plugins.sequence('clean', 'images', 'font', 'allServerResources', 'allServerResourcesFont', 'includeJs', 'includeCss', 'cssToHost', 'webpack', 'bfRev', 'html', 'rev', 'reNameRoot', cb);
 });
 
 
@@ -778,15 +778,8 @@ gulp.task("allServerResourcesInclude", function() {
         }))
 
         .pipe(plugins.rev())
-
-        //预生产和生产，打包到middle里
-        .pipe(plugins.if(options.env === '3' || options.env === '4', gulp.dest( host.middle + 'rootJs/')))
-        
-        //其他环境，打到原路径里
-        .pipe(plugins.if(options.env != '3' && options.env != '4', gulp.dest( host.path + 'allServerResources/include/')))
-
+        .pipe(gulp.dest(host.path + 'allServerResources/include/'))
         .pipe(plugins.rev.manifest())
-
         .pipe(gulp.dest(host.path + 'rev/allServerResources/include/js'));
 })
 
@@ -1307,7 +1300,7 @@ gulp.task('rootEnv', function() {
         for (var i = 0; i < rootName.length; i++) {
 
             (function(i) {
-                gulp.src([ host.middle + 'rootJs/*.js']) //- 读取 rev-manifest.json 文件
+                gulp.src([ host.path + 'allServerResources/include/js/vendor/*.js']) //- 读取 rev-manifest.json 文件
 
                 .pipe(
                     through.obj(function(file, enc, cb) {
@@ -1367,8 +1360,8 @@ gulp.task('rootEnv', function() {
 //不可以在allServerResources里面有root-**.js文件的，否则cdn服务器同步文件会在运维copy不同环境
 //的root.js之前执行，导致cdn服务器copy过去的是未修改env变量的文件
 //这里在生成不同环境root.js之后，重命名预生产、生产环境的root.js，防止此情况出现
-// gulp.task('reNameRoot', ['rootEnv'], function() {
+gulp.task('reNameRoot', ['rootEnv'], function() {
 
-//     plugins.if(options.env === '3' || options.env === '4',del([ host.path + 'allServerResources/include/js/vendor/' + fileName, host.path + 'allServerResources/include/js/vendor/root.js' ]))
+    // plugins.if(options.env === '3' || options.env === '4',del([ host.path + 'allServerResources/include/js/vendor/' + fileName, host.path + 'allServerResources/include/js/vendor/root.js' ]))
 
-// })
+})
