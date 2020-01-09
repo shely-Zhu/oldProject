@@ -295,8 +295,12 @@ $(function() {
              that.$e.liquidity[0].textContent = that.escapeCode(that.gV.liquidityDataCode,"fundDiagnosisLiquidityRequirement");  //流动性
              if(!!that.gV.yield_firstData || !! that.gV.yield_secondData){
                 that.$e.yieldControl.show();
+                $("#yearOwn").hide();
+                $("#maxLossOwn").hide();
              }else{
                 that.$e.yieldControl.hide();
+                $("#yearOwn").show();
+                $("#maxLossOwn").show();
              }
 
              if(!!that.gV.loss_firstData || !!that.gV.loss_secondData){
@@ -633,7 +637,8 @@ $(function() {
                     that.gV.yield_secondData = secondVal;
                     that.gV.yield_firstData = firstVal
                     that.$e.yieldControl.show();
-
+                    $("#yearOwn").hide();
+                    $("#maxLossOwn").hide();
                 } else if (that.gV.typeInput == "loss") {
                     var firstVal = $(".lossFirst").val();
                     var secondVal = $(".lossSecond").val();

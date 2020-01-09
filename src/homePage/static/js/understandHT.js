@@ -36,18 +36,18 @@ $(function() {
 
              // $("body").height( $(window).height() );
              
-            $('html').height( window.screen.height ).width( window.screen.width );
+            // $('html').height( window.screen.height ).width( window.screen.width );
 
-            $('body').css({
-                position: 'fixed',
-                '-webkit-overflow-scrolling': 'auto',
-                top: 0,
-                right:0,
-                left: 0,
-                bottom:0,
-                height: '100%',
-                width: '100%'
-            })
+            // $('body').css({
+            //     position: 'fixed',
+            //     '-webkit-overflow-scrolling': 'auto',
+            //     top: 0,
+            //     right:0,
+            //     left: 0,
+            //     bottom:0,
+            //     height: '100%',
+            //     width: '100%'
+            // })
 
             // var height = windowHeight - $('.tabImg')[0].getBoundingClientRect().top;
             
@@ -93,7 +93,7 @@ $(function() {
                         wrap_template = Handlebars.compile(wrap_source),
                         wrap_html = wrap_template(data); //模板生成
 
-                    // $('.tabBar').html( wrap_html);
+                    $('.tabBar').html( wrap_html);
 
                     //定位到第二个
                     $('.tabBar .tabA').eq( that.gV.sortType ).addClass('active');
@@ -108,14 +108,15 @@ $(function() {
 
                     // $('.tabBar .tabA.active').next().next().html( $('.tabImg')[0].getBoundingClientRect().top);
 
-                    var height = $('body').height() - $('.tabImg')[0].getBoundingClientRect().top;
+                    // var height = $('body').height() - $('.tabImg')[0].getBoundingClientRect().top;
 
+                    // $('.tabImg').html()
                     
-                    $('.tabImg').html( '<div>'+height+'</div>' + '<div>'+window.screen.height+'</div>' + '<div>'+document.documentElement.clientHeight+'</div>' + '<div>'+$('body').height()+'</div>' + wrap_html);
+                    // $('.tabImg').html( '<div>'+height+'</div>' + '<div>'+window.screen.height+'</div>' + '<div>'+document.documentElement.clientHeight+'</div>' + '<div>'+$('body').height()+'</div>' + wrap_html);
 
                     // $('.list').height(height);
                     
-                    $('.tabImg').height(height);
+                    // $('.tabImg').height(height);
 
                     // $.each( data, function(i, el){
                     //     that.setting.navList.push({
