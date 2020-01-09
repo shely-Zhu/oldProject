@@ -14,6 +14,7 @@ require('@pathCommonBase/base.js');
 require('@pathCommonJs/ajaxLoading.js');
 
 require('@pathCommonJs/components/authenticationProcess.js');
+var authenticationProcess = require('@pathNewCommonCom/authenticationProcess/authenticationProcess.js');
 //引入弹出层
 require('@pathCommonCom/elasticLayer/elasticLayer/elasticLayer.js');
 
@@ -476,7 +477,7 @@ $(function() {
 					}
 					that.getTypeOneData()
                 },
-                callbackNoData:function(argument) {
+                callbackNoData:function(json) {
                     tipAction(json.message);
                 }
             }];
@@ -667,12 +668,11 @@ $(function() {
 					//that.data.canClick = true; //变为可点击
 
                 },
-                callbackNoData:function(argument) {
+                callbackNoData:function(json) {
                     tipAction(json.message);
                 }
             }];
             $.ajaxLoading(obj);
-
 		},
 		getJumpUrl: function(v) { //获取跳转链接
             var jumpUrl = ""; //跳转链接
@@ -709,7 +709,7 @@ $(function() {
 					 //that.data.canClick = true; //变为可点击
  
 				 },
-				 callbackNoData:function(argument) {
+				 callbackNoData:function(json) {
 					 tipAction(json.message);
 				 }
 
@@ -887,8 +887,8 @@ $(function() {
             })
 			// //点击买入
 			mui("body").on('mdClick', '.buyBtn', function(e) {
-				that.getUserInfo_1()
-				that.getUserInfo()
+				that.getUserInfo_1();
+				that.getUserInfo();
 				if(!that.data.isBuyFlag){//不可买入
 			   	 	return false;
 			    }
@@ -1032,9 +1032,9 @@ $(function() {
                         $("#tips-wrap").hide()
                         $(".isRiskMatchBox").show();
                         $(".isRiskMatch_mask").show();
-                        $(".isRiskMatchBox_match").show()
-                        $(".isRiskMatchBox_noMatch").hide()
-                        $(".isRiskMatchBox_header").html("您尚未进行身份认证,认证完成后才可进行投资者分类认证")
+                        $(".isRiskMatchBox_match").show();
+                        $(".isRiskMatchBox_noMatch").hide();
+                        $(".isRiskMatchBox_header").html("您尚未进行身份认证,认证完成后才可进行投资者分类认证");
                     }
                     
                     break;
@@ -1050,14 +1050,14 @@ $(function() {
 			});
 			//点击定投
 			mui("body").on('mdClick', '.fiedBtn', function(e) {
-				that.getUserInfo()
-				that.getUserInfo_1()
+				that.getUserInfo();
+				that.getUserInfo_1();
 				that.getConditionsOfOrder("investement");
-				that.gV.singleaAuthenType = "investement"
+				that.gV.singleaAuthenType = "investement";
 				//window.location.href = site_url.ordinarySetThrow_url+"?fundCode="+that.data.fundCode;;			
 			},{
                 'htmdEvt': 'optionalPublicDetail_10'
-            })
+            });
 			
 		}
 
