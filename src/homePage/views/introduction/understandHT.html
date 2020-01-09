@@ -12,8 +12,24 @@
 		<!-- 加载中loading -->
 		@@include('@pathCommonCom/loading/listLoading.html')
 		@@include('@pathCommonViews/headBarConfig.html',{"bgColors":"#384A81,#2A3C70","showType":"1","pathName":"了解恒天"})
+
+		<div class="muiSlider">
+			
+			<div class="mui-row tabBar">
+			    <!-- <a  class="mui-col-sm-3 mui-col-xs-3 tabA" href="javascript:;" belong="101">公司简介<b></b></a>
+			    <a  class="mui-col-sm-3 mui-col-xs-3 tabA active" href="javascript:;" belong="102">公司荣誉<b></b></a>
+			    <a  class="mui-col-sm-3 mui-col-xs-3 tabA" href="javascript:;" belong="103">风控体系<b></b></a>
+			    <a  class="mui-col-sm-3 mui-col-xs-3 tabA" href="javascript:;" belong="104">安全认证<b></b></a> -->
+			</div>
+
+			<div class="tabImg"></div>
+			<div class="tabImg"></div>
+			<div class="tabImg"></div>
+			<div class="tabImg"></div>
+
+		</div>
 		
-		<div class="mui-slider" id="tabHT">
+		<!-- <div class="mui-slider" id="tabHT">
 		    <div class="mui-slider-indicator mui-segmented-control mui-segmented-control-inverted tabBar">
 		        <a  class="mui-control-item" href="#item1" belong="101">公司简介<b></b></a>
 		        <a  class="mui-control-item" href="#item2" belong="102">公司荣誉<b></b></a>
@@ -26,8 +42,17 @@
 		        <div id="item3" class="mui-slider-item mui-control-content"></div>
 		        <div id="item4" class="mui-slider-item mui-control-content"></div>                  
 		    </div>
-		</div>
+		</div> -->
 		
+		<script id="title-template" type="text/x-handlebars-template">
+		    {{#each this}}
+		    <div class="mui-col-sm-3 mui-col-xs-3 tabA">
+		    	<span>{{titleFst}}</span>
+		    	<span class="borderBottom"></span>
+		    </div>
+		    {{/each}}
+		</script>
+
 		@@include('@pathInclude/views/footer.html')
 		<script src="/homePage/static/js/understandHT.js"></script>
 		<!-- <script src="/acount/static/js/informationDisclosure.js"></script> -->
