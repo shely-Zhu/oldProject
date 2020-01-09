@@ -106,9 +106,10 @@ $(function() {
 
                     $('.tabBar .tabA.active').next().next().html( $('.tabImg')[0].getBoundingClientRect().top);
 
-                    var height = document.documentElement.clientHeight - $('.tabImg')[0].getBoundingClientRect().top;
+                    var height = window.screen.height - $('.tabImg')[0].getBoundingClientRect().top;
 
                     
+                    $('.tabImg').height( '<div>'+window.screen.height+'</div>' + '<div>'+document.documentElement.clientHeight+'</div>' + '<div>'+$('body').height()+'</div>' + height);
 
                     // $('.list').height(height);
                     

@@ -431,12 +431,13 @@ $(function() {
         updateFundDiagnosisApply: function() {
             //修改基金诊断申请
             var that = this;
+            debugger
             var obj = [{
                 url:site_url.updateFundDiagnosisApply_api,
                 needDataEmpty:true,
                 data:{
                     id:that.gV.applyId,  //主键
-                    age:that.gV.userAge, //年龄
+                    age:$(".userAge").val() , //年龄
                     birthDate:that.gV.birthDate,  //出生日期
                     sex:(!!that.$e.sex.attr("num"))?that.$e.sex.attr("num"):that.gV.sexDataCode, //性别
                     evocation:(!!that.$e.professional.attr("num"))? that.$e.professional.attr("num"):that.gV.professionalDataCode, //职业
