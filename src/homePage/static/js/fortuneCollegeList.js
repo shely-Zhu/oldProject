@@ -1,5 +1,10 @@
 //  财富讲堂
 // @author liliang 2019-11-20 
+/*
+
+update chentiancheng 2020年1月9日23:58:11
+
+*/
 
 require('@pathCommonBase/base.js');
 require('@pathCommonJsCom/utils.js');
