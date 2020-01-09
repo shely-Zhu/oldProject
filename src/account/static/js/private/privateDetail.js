@@ -326,7 +326,7 @@ $(function() {
 			       		newData.unitAssets.push( el.unitNetValue);
 			       		newData.assetsDate.push( el.netValueDate);
 			       		newData.accumulativeAssets.push( el.accuNetValue);
-			       	})
+					   })
 			       	switch(Number(num)) {
 			       		case 0: that.data['dwjzljjz'].oneMonth = newData;break;
 			       		case 1: that.data['dwjzljjz'].threeMonth = newData;break;
@@ -355,7 +355,7 @@ $(function() {
 		drawLine: function ( type, data) {
 			var that = this;
 			//判断有多少数据 只有一个值时 symbol 为circle 多组值时 symbol为 none
-			if(data.profitThoudDate.length == 1 ){
+			if(data.assetsDate && data.assetsDate.length == 1 ){
 				that.data.symboltype = 'circle'
 			}			
 			if( type == 'qrnh'){

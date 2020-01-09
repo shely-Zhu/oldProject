@@ -100,10 +100,6 @@
      <script id="second-template" type="text/x-handlebars-template">
      {{! 左侧页面列表}} {{#each this}}
      <div class="list_item clearfix" id={{id}} articleBelong={{articleBelong}} applyType={{applyType}}>
-          <div class="list_itemL">
-               <p>{{title}}</p>
-               <span>{{createTimeStr}}</span>
-          </div>
           <div class="list_itemR" ><img class="lazyload" src="/common/img/lazyImgList.png" data-original="{{imageUrlShowOnline}}"></div>
      </div>
 
@@ -117,7 +113,7 @@
      <!-- 翻译官 -->
      <script id="fortune-template" type="text/x-handlebars-template">
           <h2>{{modelName}}</h2>
-          <p><a href="javascript:void(0);" onclick="setGoUrl( '{{modelUrl}}', 'fortune_00')">查看往期热词</a><i class="iconfont">&#xe636;</i></p>
+          <p><a href="javascript:void(0);" onclick="setGoUrl(site_url.pastHotWords_url, 'fortune_00')">查看往期热词</a><i class="iconfont">&#xe636;</i></p>
      </script>
      <script id="content-template" type="text/x-handlebars-template">
           {{#each this}}

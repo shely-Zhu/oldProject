@@ -31,36 +31,36 @@ var prvMar = {
         current_index: 0, //左右滑动区域的索引
         current_label: 0, //标签对应的编号，ajax请求需要
     },
-    init: function() { //初始化函数
+    init: function () { //初始化函数
         var that = this;
         that.getReourceLabels(); // 获取标签
         that.events();
     },
-    getReourceLabels: function() { // 获取标签
+    getReourceLabels: function () { // 获取标签
         var that = this;
 
         var obj = [{
-			url: site_url.queryReourceLabels_api,
-			// url: site_url.queryReourceList_api,
-			data: {
-                "projectId":that.status.projectId
+            url: site_url.queryReourceLabels_api,
+            // url: site_url.queryReourceList_api,
+            data: {
+                "projectId": that.status.projectId
             },
             needLogin: true, //需要判断是否登陆
             async: false,
             needDataEmpty: true, //需要判断data是否为空
             contentTypeSearch: false,
-            callbackDone: function(json) {
+            callbackDone: function (json) {
                 var labelArr = json.data;
-                for (var i =0; i < labelArr.length ; i++) {
-                    if(labelArr[i] == -1) {
-                        labelArr.splice(i,1);
+                for (var i = 0; i < labelArr.length; i++) {
+                    if (labelArr[i] == -1) {
+                        labelArr.splice(i, 1);
                     }
                 }
 
-                if(labelArr.length == 0){
-                    $(".noDataOne").show()
-                }else{
-                    labelArr.map(function(x) {
+                if (labelArr.length == 0) {
+                    $('.without.noData').show();
+                } else {
+                    labelArr.map(function (x) {
                         var ele = {};
 
                         ele.type = that.setting.navAllList[x];
@@ -75,14 +75,14 @@ var prvMar = {
                 }
 
             },
-            callbackNoData: function() {
+            callbackNoData: function () {
                 $('.without.noData').show();
 
             }
-		}]
+        }]
         $.ajaxLoading(obj);
     },
-    initMui: function($id) { //$id   就是滑动区域的 id 节点
+    initMui: function ($id) { //$id   就是滑动区域的 id 节点
         var that = this;
         w = $id.attr('id'), //获取节点的 id
             s = '#' + w + ' .contentWrapper'; //id 拼接 查出content区域
@@ -92,7 +92,7 @@ var prvMar = {
                 up: {
                     contentrefresh: '拼命加载中',
                     contentnomore: '暂无更多内容', //可选，请求完毕若没有更多数据时显示的提醒内容；
-                    callback: function() {
+                    callback: function () {
                         //执行ajax请求
                         that.getData($id, this, 'more');
 
@@ -100,7 +100,7 @@ var prvMar = {
                 }
             }
         });
-        mui.ready(function() { //init后需要执行ready函数，才能够初始化出来
+        mui.ready(function () { //init后需要执行ready函数，才能够初始化出来
             //隐藏当前的加载中loading
             if (!$id.hasClass('hasPullUp')) {
                 $id.find('.mui-pull-bottom-pocket').addClass('mui-hidden'); //上拉显示更多
@@ -118,7 +118,7 @@ var prvMar = {
             
         }, 1000)*/
     },
-    beforeFunc: function() { //拼模板，初始化左右滑动mui组件
+    beforeFunc: function () { //拼模板，初始化左右滑动mui组件
         var that = this,
             contentArr = [],
             obj = {},
@@ -137,7 +137,7 @@ var prvMar = {
             wrap_template = Handlebars.compile(wrap_source),
             wrap_html = wrap_template({ content: list_html });
 
-        $.each(that.setting.navList, function(i, el) {
+        $.each(that.setting.navList, function (i, el) {
 
             //循环导航配置，contentArr的个数和导航个数应该是一样的
             contentArr.push({
@@ -153,7 +153,7 @@ var prvMar = {
             navList: that.setting.navList, //导航
             contentLength: that.setting.navList.length, //左右滑动的区域个数，即导航数组长度
             contentList: contentArr, //此时只有框架，实际列表内容还未请求
-            callback: function(t) {
+            callback: function (t) {
                 //t返回的是 id 为 scroll1 / scroll2 这样的切换后当前区域中的节点
 
                 //data-scroll属性即当前左右切换区域的索引
@@ -182,7 +182,7 @@ var prvMar = {
             $('.list').height(height).addClass('setHeight');
         }
     },
-    getData: function($id, t) {
+    getData: function ($id, t) {
 
         var that = this,
             fileType = '',
@@ -193,39 +193,50 @@ var prvMar = {
         obj = [{ //获取产品列表
             url: site_url.prvReource_api, //私募产品列表  queryReourceList.action
             // data: {
-                // hmac: "", //预留的加密信息 非必填项
-                data: { //请求的参数信息
-                    projectId: that.status.projectId, // 产品代码
-                    fileType: fileType,
+            // hmac: "", //预留的加密信息 非必填项
+            data: { //请求的参数信息
+                projectId: that.status.projectId, // 产品代码
+                fileType: fileType,
                 // }
             },
             needLogin: true,
             needDataEmpty: true,
             async: false,
             contentTypeSearch: false,
-            callbackDone: function(json) {
-                var json = json.data;     
-                $.each(json, function(i, el) {
-                    el.name = el.fileName.substring(1, el.fileName.indexOf("】") + 1);
-                    el.names = el.fileName.substring(1, el.fileName.indexOf("】"));
-                    el.marName = el.fileName.substring(el.fileName.indexOf("】") + 1);
-                    if (el.fileName.indexOf(".pdf") != -1) {
-                        el.line = true; //线上可预览
-                        el.href = site_url.downloadNew_api + "?filePath=" + el.fileUrl + "&fileName=" + new Base64().encode(el.fileName) + "&groupName=" + el.groupName + "&show=1";
-                    } else {
-                        el.line = false; //需下载
-                        el.href = site_url.downloadNew_api + "?filePath=" + el.fileUrl + "&fileName=" + new Base64().encode(el.fileName) + "&groupName=" + el.groupName;
-                    }
-                })
+            callbackDone: function (json) {
+                var json = json.data;
+                if (json.length == 0) {
+                    //没有数据
+                    $id.find('.mui-scroll .list').html(that.getElements.noData.clone(false)).addClass('noCon');
+                    $id.find('.noData').show();
 
-                that.setting.html = that.setting.list_template(json);
+                    setTimeout(function () {
+                        that.getElements.listLoading.hide();
+                    }, 100);
+                } else {
+                    $.each(json, function (i, el) {
+                        el.name = el.fileName.substring(1, el.fileName.indexOf("】") + 1);
+                        el.names = el.fileName.substring(1, el.fileName.indexOf("】"));
+                        el.marName = el.fileName.substring(el.fileName.indexOf("】") + 1);
+                        if (el.fileName.indexOf(".pdf") != -1) {
+                            el.line = true; //线上可预览
+                            el.href = site_url.downloadNew_api + "?filePath=" + el.fileUrl + "&fileName=" + new Base64().encode(el.fileName) + "&groupName=" + el.groupName + "&show=1";
+                        } else {
+                            el.line = false; //需下载
+                            el.href = site_url.downloadNew_api + "?filePath=" + el.fileUrl + "&fileName=" + new Base64().encode(el.fileName) + "&groupName=" + el.groupName;
+                        }
+                    })
 
-                $id.find('.contentWrapper .mui-table-view-cell').html(that.setting.html);
-                that.getElements.listLoading.hide();
-                $id.addClass('hasPullUp');
+                    that.setting.html = that.setting.list_template(json);
+
+                    $id.find('.contentWrapper .mui-table-view-cell').html(that.setting.html);
+                    that.getElements.listLoading.hide();
+                    $id.addClass('hasPullUp');
+
+                }
 
             },
-            callbackFail: function(json) {
+            callbackFail: function (json) {
                 //请求失败，
                 //隐藏loading
                 //that.getElements.listLoading.hide();
@@ -236,17 +247,17 @@ var prvMar = {
                 // $('.contentWrapper').find('.mui-pull-bottom-pocket').removeClass('mui-hidden');
 
                 //隐藏loading，调试接口时需要去掉
-                setTimeout(function() {
+                setTimeout(function () {
                     that.getElements.listLoading.hide();
                 }, 100);
                 //return false;
             },
-            callbackNoData: function(json) {
+            callbackNoData: function (json) {
                 //没有数据
                 $id.find('.mui-scroll .list').html(that.getElements.noData.clone(false)).addClass('noCon');
                 $id.find('.noData').show();
 
-                setTimeout(function() {
+                setTimeout(function () {
                     that.getElements.listLoading.hide();
                 }, 100);
             }
@@ -254,17 +265,17 @@ var prvMar = {
         }]
         $.ajaxLoading(obj);
     },
-    getFileType: function() { //获取标签编号
+    getFileType: function () { //获取标签编号
         var that = this;
         that.status.current_label = that.getElements.midContent.find('.nav-wrapper .mui-control-item.mui-active').attr('code');
-        return that.setting.ajaxParamList[that.status.current_label];  
+        return that.setting.ajaxParamList[that.status.current_label];
     },
-    events: function() {
-        mui("body").on("mdClick", ".mui-box", function() {
+    events: function () {
+        mui("body").on("mdClick", ".mui-box", function () {
             // if(window.currentIsApp){
-                window.location.href = $(this).attr("href");
+            window.location.href = $(this).attr("href");
             // }else{
-                // window.open($(this).attr("href"));
+            // window.open($(this).attr("href"));
             // }
             // debugger
             // var src=$(this).attr("href")
@@ -272,9 +283,9 @@ var prvMar = {
             // form.action = src;
             // document.getElementsByTagName('body')[0].appendChild(form);
             // form.submit();
-        },{
-            'htmdEvt': 'informationDisclosure_0'
-        })
+        }, {
+                'htmdEvt': 'informationDisclosure_0'
+            })
     }
 }
 prvMar.init();
