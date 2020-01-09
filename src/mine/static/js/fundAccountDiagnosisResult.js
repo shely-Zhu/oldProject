@@ -1,7 +1,7 @@
 /*
  * @Author: yanan
  * @Date: 2019-12-09 15:53:31
- * @LastEditTime : 2020-01-06 17:10:25
+ * @LastEditTime : 2020-01-09 17:41:49
  * @LastEditors  : Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \htjf-app\src\mine\static\js\fundAccountDiagnosisResult.js
@@ -418,6 +418,11 @@ $(function() {
                     if (json.data) {
                         that.initData(json.data);
                         that.initParmis();
+                        if(json.data.applyStatus=="3"||json.data.applyStatus == "4"){
+                            $(".submitButton").attr('disabled', true)
+                        }else{
+                            $(".submitButton").removeAttr("disabled");
+                        }
                     }
                 }
             }];
