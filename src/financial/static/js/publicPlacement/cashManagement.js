@@ -26,8 +26,8 @@ $(function () {
       $('.tips').hide()
       that.getData();
       that.events();
-      that.getUserInfo();  //获取用户类型
-      that.getUserInfo_1();  // 获取用户信息
+      /*that.getUserInfo();  //获取用户类型
+      that.getUserInfo_1();  // 获取用户信息*/
 
     },
     getData: function () {
@@ -165,6 +165,8 @@ $(function () {
 			});
       // 转入
       mui("body").on("mdClick", ".fundIn", function () {
+        that.getUserInfo();  //获取用户类型
+        that.getUserInfo_1();  // 获取用户信息
         var fundCode = $(this).parent().parent().find(".itemTop .itemTitle span").eq(0).attr("fundCode")
         var fundName = $(this).parent().parent().find(".itemTop .itemTitle span").eq(0).attr("fundName")
         that.gV.transformInFundCode = fundCode;
