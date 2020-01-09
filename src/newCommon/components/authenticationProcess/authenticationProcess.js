@@ -86,19 +86,19 @@ module.exports = function(type, fundCode, userStatus, accountType, url) {
                                 //风险等级匹配
                                 $(".isRiskMatchBox_match").show()
 								$(".isRiskMatchBox_noMatch").hide()
-								$(".isRiskMatchBox_header").css({"line-height":"1.5rem"})
+								// $(".isRiskMatchBox_header").css({"line-height":"1.5rem"})
                                 $(".isRiskMatchBox_header").html("你选择的产品与您现在的风险承受能力相匹配")
                             }else if(jsonData.isRiskMatch == "0"){
                                 $(".isRiskMatchBox_noMatch").show()
 								$(".isRiskMatchBox_match").hide()
-								$(".isRiskMatchBox_header").css({"line-height":"1.5rem"})
+								// $(".isRiskMatchBox_header").css({"line-height":"1.5rem"})
                                 $(".isRiskMatchBox_header").html("你选择的产品与您现在的风险承受能力不相匹配")
                                 $(".isRiskMatchResult").html("查看评测结果")
                                 $(".isRiskMatchResult").attr("type","noRisk")
                             }else if(jsonData.isRiskMatch == "2"){
                                 $(".isRiskMatchBox_noMatch").show()
 								$(".isRiskMatchBox_match").hide()
-								$(".isRiskMatchBox_header").css({"line-height":"1.5rem"})
+								// $(".isRiskMatchBox_header").css({"line-height":"1.5rem"})
                                 $(".isRiskMatchBox_header").html("您的风险测评已过期,请重新进行风险测评")
                                 $(".isRiskMatchResult").html("重新风测")
                                 $(".isRiskMatchResult").attr("type","repeatRisk")
