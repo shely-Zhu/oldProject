@@ -824,9 +824,6 @@ $(function() {
 			   }else if(type == "investement"){
 					//定投一键认证
 					window.location.href = site_url.ordinarySetThrow_url+"?fundCode="+that.data.fundCode+'&type=add';			
-			   }else if(type == "redemption"){
-					//赎回一键认证
-					window.location.href = site_url.redemptionBuy_url + "?tradeNo=" + splitUrl['tradeNo'] + "&fundCode=" + that.data.fundCode			
 			   }
 			},{
 				'htmdEvt': 'optionalPublicDetail_11'
@@ -885,8 +882,9 @@ $(function() {
 				}
 			    var result = frozenAccount("saleFreeze", window.location.href, false);
 				if( !result ) {
-					that.getConditionsOfOrder("redemption");
-					that.gV.singleaAuthenType = "redemption"		
+					//that.getConditionsOfOrder("redemption");
+					//that.gV.singleaAuthenType = "redemption"
+					window.location.href = site_url.redemptionBuy_url + "?tradeNo=" + splitUrl['tradeNo'] + "&fundCode=" + that.data.fundCode				
 				};
 			},{
                 'htmdEvt': 'optionalPublicDetail_8'
