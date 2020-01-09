@@ -3,6 +3,8 @@
 * @Author: yangjinlai
 * @Date:   2019-11-25
 *
+@Author: caoqihai
+* @Date:   2020-1-9  .跳转的页面 拼接参数 flag 结果类型 基金买入buy 基金赎回 redemption 
 */
 
 require('@pathCommonBase/base.js');
@@ -349,7 +351,7 @@ $(function () {
 					if(json.status == '0000'){
 						if(!!that.gV.bugFundName){
 							window.location.href = site_url.pofSurelyResultsDetail_url + '?applyId=' + data.allotNo + '&fundBusinCode=' +
-							data.fundBusinCode + "&fundCode=" + that.gV.fundCode + "&payType=" +that.gV.payType + '&flag=buy'+'&bugFundName='+encodeURI(that.gV.bugFundName);
+							data.fundBusinCode + "&fundCode=" + that.gV.fundCode + "&payType=" +that.gV.payType + '&flag=redemption'+'&bugFundName='+encodeURI(that.gV.bugFundName);
 						}else{
 							window.location.href = site_url.pofSurelyResultsDetail_url + '?applyId=' + data.allotNo + '&fundBusinCode=' +
 							data.fundBusinCode + "&fundCode=" + that.gV.fundCode + "&payType=" +that.gV.payType + '&flag=buy'+'&bugFundName=false'
