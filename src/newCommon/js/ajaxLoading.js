@@ -235,7 +235,7 @@ var splitUrl = require('./components/splitUrl.js')();
                     if (data.status != '0000' && data.status != '4007' && data.status != '1000') {
                         //数据请求失败的情况
                         if (!data.message) {
-                            data.message = '处理异常，请联系客服 400-8980-618';
+                            data.message = '系统开小差啦，请联系客服 400-8980-618';
                         }
 
 
@@ -364,9 +364,9 @@ var splitUrl = require('./components/splitUrl.js')();
                         if (needLoading) {
                             requestCount -= 1;
                             console.log('done: ' + param.url + "----" + requestCount);
-                            if (requestCount == 0){
-                                $('.netLoading').hide();//数据请求成功 遮罩隐藏
-                            }
+                        }
+                        if (requestCount == 0){
+                            $('.netLoading').hide();//数据请求成功 遮罩隐藏
                         }
                     })
             }

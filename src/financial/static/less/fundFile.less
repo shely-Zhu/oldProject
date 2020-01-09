@@ -18,6 +18,7 @@ body{
 .content {
     display: inline-block;
     width: 100%;
+    background: #F7FAFD;
     .tabsBox{
         width: 100%;
         display: -webkit-box;
@@ -47,7 +48,7 @@ body{
             &>li {
                 text-align: center;
                 box-sizing: border-box;
-                width: 1.725rem;
+                width: 1.68rem;
                 list-style: none;
                 display: block;
                 float: left;
@@ -68,9 +69,11 @@ body{
         }
     }
     .wrap {
+        // background: #FFFFFF;
         .panel {
             display: none;
             border-top: none;
+            height: 100%;
             &.active {
                 display: block;
             }
@@ -107,10 +110,10 @@ body{
                             padding:0 0.3rem;
                             display:flex;
                             justify-content:space-between;
-                            border-bottom: 0.01rem solid @c004;
+                            border-bottom: 0.01rem  dashed  @c004;
                             font-size:0.28rem;
                             font-family:PingFangSC-Medium,PingFang SC;
-                            font-weight:500;
+                            font-weight:600;
                             color:@364D97;
                             .info{
                                 font-size: 0.32rem;
@@ -119,6 +122,9 @@ body{
                             .changgeRight{
                                 color: @4A4A4A;
                             }
+                        }
+                        .contentUl:last-child{
+                            border-bottom: 0.01rem  solid  @c004;
                         }
                     }
                     .textContent{
@@ -139,7 +145,7 @@ body{
                             width: 100%;
                             line-height:0.4rem;
                             color: @4A4A4A;
-                            font-size: 0.14rem;
+                            font-size: 0.28rem;
                             padding:0.3rem 0.3rem;
                             border-bottom: 0.01rem solid @c004;
                             background:@c005;
@@ -198,8 +204,10 @@ body{
                         background:rgba(248,249,252,1);
                         .industryConfigurationTd {
                             flex: 1;
-                            height: .88rem;
-                            line-height: .88rem;
+                            //height: .88rem;
+                            //line-height: .88rem;
+                            min-height: 0.88rem;
+                            line-height: 0.4rem;
                         }
                         &:last-child {
                             border: none;
@@ -210,8 +218,7 @@ body{
         }
         .panel3 {
             margin-top: .3rem;
-            background: @c005;
-            padding: 0 .3rem;
+            background: #fff;
             .profitItemCon {
                 padding: .3rem 0 .02rem;
                 display: flex;
@@ -239,14 +246,21 @@ body{
         }
         .panel4{
             width: 100%;
+            .tplBox4Wrapper{
+                padding: 0;
+            }
             .noticeWrap{
               width: 100%;
               background:@c005;
               margin-top: 0.2rem;
+              .contentBox{
+                border-bottom: 0.01rem solid @c004;
+                padding: 11px 15px;
+              }
               .content{
                   width: 100%;
-                  border-bottom: 0.01rem solid @c004;
                   padding:0.4rem 0;
+                  border-radius: 6px;
                   .noticeWrapUl{
                     width: 90%;
                     margin: 0 auto;
@@ -296,4 +310,10 @@ body{
 .contentWrapper {
     height: 100%;
     overflow: hidden;
+}
+.tplBox4 .mui-table-view-cell.mui-active{
+    background-color: #F7FAFD;
+}
+.tplBox3 .mui-table-view-cell.mui-active{
+    background-color: #ffffff;
 }

@@ -17,6 +17,17 @@
 @import url('@pathCommonCom/elasticLayer/transOutRule/transOutRule.less');
 @import url("@pathCommonLessCom/payPassword.less");
 
+.mui-dtpicker{
+    .mui-dtpicker-header{
+        // padding: 0;
+        height: 0.8rem;
+        line-height: 0.8rem;
+        border-bottom: 1px solid #eee;
+        margin-bottom: 0.24rem;
+    }
+}
+
+
 html,
 body {
     height: 100%;
@@ -119,19 +130,41 @@ body {
             display: inline-block;
             float: left;
             margin-left: 0.5rem;
-            margin-top: 0.2rem;
+            margin-top: 0;
             font-weight: bold;
+            line-height: 1rem;
+        }
+        .addOtherFund_content> .mui-table-view{
+            .mui-table-view-cell{
+                height: 1rem;
+                line-height: 1rem;
+                .mui-icon{
+                    line-height: 1rem;
+                }
+                .left{
+                    height: 1rem;
+                    margin-left: .3rem;
+                    margin-top: 0;
+                }
+                .right{
+                    line-height: 1rem;
+                }
+            }
             
         }
         .mui-table-view > .mui-table-view-cell > .right{
             display: inline-block;
             float: right;
-            width: 1.8rem;
-            line-height: 0.8rem;
+            width: 3rem;
+            line-height: 1rem;
             text-align: right;
             input{
                 text-align: right;
             }
+        }
+        .mui-table-view > .mui-table-view-cell > .mui-input-clear{
+            height: 1rem;
+            margin-right: .3rem;
         }
         .rightMoreBox{
             position: absolute;
@@ -181,8 +214,9 @@ body {
         .mui-table-view > .mui-table-view-cell > .mui-icon{
             display: inline-block;
             float: right;
-            margin-top: 0.15rem;
+            margin-top: 0;
             margin-right: 0.1rem;
+            line-height: 1rem;
         }
         select {
             margin-bottom: 0;
@@ -267,9 +301,9 @@ body {
         }
         .warmMessage{
             width: 100%;
-            height: 1rem;
+//          height: 1rem;
             text-align:center;
-            line-height: 1rem;
+//          line-height: 1rem;
             color: red;
         }
         .addOtherFundcodeBox{
@@ -292,6 +326,18 @@ body {
         }
         
     }
+}
+.unchecked{//未选中样式
+    color: #3c6a28;
+    margin-left: .5rem;
+    background: gray;
+    font-size: .25rem;
+}
+.checked{
+   color: darkgreen;
+    margin-left: .5rem;
+    background: gray;
+    font-size: .25rem; 
 }
 .elasticWrapper{
     min-height: 80px;
@@ -328,6 +374,10 @@ body {
     background-color: black;
     opacity: 0.6;
 }
+.warmMessage{
+    display: none;
+//  visibility: hidden;
+}
 .addOtherFund_content{
     position: fixed;
     display: none;
@@ -340,6 +390,10 @@ body {
     .comfirmButtom{
         text-align: center;
     }
+    .warmMessage{
+        display: block;
+        visibility: hidden;
+    }
     .addOtherFalse,.addOtherTrue{
         width: 2rem;
         height: 0.8rem;
@@ -348,9 +402,6 @@ body {
         margin-left: 0.2rem;
         display: inline-block;
     }
-}
-.warmMessage{
-    display: none;
 }
 .mr30{
     margin-right: 0.3rem !important;

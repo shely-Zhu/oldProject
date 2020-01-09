@@ -6,110 +6,50 @@
 // 使用 Mock
 var Mock = require('mockjs');
 
-var data = Mock.mock({
-    "status": "0000",
-    "message": "处理成功！",
-    "data": {
-
-        bankAccountMask: "1111111111111111111",//交易申请编号
-
-        applyId: "",//交易申请编号
-
-        fundName: "中融3-5年信用债A",//基金名称
-
-        fundCode: "",//基金代码
-
-        fundType: "",//基金类型
-
-        fundStatus: "",//基金交易状态
-
-        fundBusinCode: "020",//业务大类
-
-        capitalMode: "",//资金方式
-
-        payModeName: "汇款支付",//支付方式名称
-
-        tradeShares: "1,000,000",//交易申请份额(赎回交易使用)
-
-        tradeAmount: "1,000,000.00",//交易申请金额(认/申购交易使用)
-
-        tradeStatus: "0",//交易申请状态
-
-        tradeApplyDesc: "待扣款",//交易状态信息
-
-        tradeApplyDescMessage: "等待银行汇款",//交易状态描述
-
-        debitStatus: "",//扣款状态
-
-        tradeDate: "2017-09-01 11:00:35",//交易申请日期
-
-        originalDate: "2016-09-01 11:00:35",//原交易日期
-
-        estimateConfirmDate: "2018-08-01 11:00:35",//预估确认日期
-
-        estimateArrivalDate: "2019-09-01 11:00:35",//预估到账日期
-
-        confirmShares: "1,000份",//确认份额
-
-        confirmAmount: "1,000,000.00",//确认金额
-
-        confirmNav: "1.02",//确认净值
-
-        confirmRate: "120.00",//手续费
-
-        confirmDate: "2019-09-01 11:00:35",//确认日期
-
-        tradeNo: "",//交易账号
-
-        bankAccount: "6230221111111117",//银行账户
-
-        bankIdNo: "",//银行编号
-
-        bankLogoUrl: "http://hbimg.b0.upaiyun.com/a9d854a213470cd3805bc9404b03f9179a8532b81b814-RUgwaI_fw658",//银行logoUrl
-
-        bankName: "中国工商银行",//银行名称
-
-        cancelable: 0,//可撤单标记1-可撤单；0-不可撤单
-
-        secondFundName: "",
-
-        secondFundCode: "",
-
-        combinationFundInfo: [//组合基金信息列表
-
-            {
-
-                fundCode: "",//基金代码
-
-                fundName: "",//基金全称
-
-                fundAbbreviation: "",//基金简称
-
-                fundType: "",//基金类型
-
-                fundStatus: "",//基金状态
-
-                combinationProportion: "",//组合权重
-
-                tradeShares: "",//交易份额
-
-                tradeAmount: "1,000,000.00",//交易金额
-
-                confirmDate: "",//确认日期
-
-                confirmShares: "",//确认份额
-
-                confirmAmount: "",//确认金额
-
-                confirmNav: "",//确认净值
-
-                confirmRate: ""//手续费
-
-            }
-
-        ]
-
+var data = Mock.mock(
+    {
+        "data":{
+            "applyId":"20200102005811",
+            "bankAccount":"f743e034adf375c7a4dbf1725ddca572dee2768fa5d318c36f598819853312d5",
+            "bankAccountMask":"623022******4622",
+            "bankIdNo":"012",
+            "bankLogoUrl":"http://www.img.chtwm.com/group2/M00/00/2E/CmQVXVuI0BCAQKqQAAAQIdV4nY8539.jpg",
+            "bankName":"华夏银行",
+            "bankThumbnailUrl":"http://www.img.chtwm.com/group2/M00/00/2E/CmQVXVuI0XuABh-rAAANKzFrWkU393.png",
+            "cancelable":"1",
+            "capitalMode":"M",
+            "combinationFundInfo":[
+    
+            ],
+            "confirmAmount":"500.00",
+            "confirmDate":"2020-01-06",
+            "confirmNav":"1.0000",
+            "confirmRate":"0.00",
+            "confirmShares":"500.00",
+            "debitStatus":"1",
+            "estimateArrivalDate":"2020-01-07",
+            "estimateConfirmDate":"2020-01-06",
+            "fundBusinCode":"020",
+            "fundCode":"001388",
+            "fundName":"中融新经济C",
+            "fundStatus":"0",
+            "fundType":"10400",
+            "originalDate":"2020-01-03 10:27:06",
+            "payModeName":"在线支付",
+            "secondFundCode":"",
+            "secondFundName":"",
+            "tradeAmount":"500.00",
+            "tradeApplyDesc":"买入失败",
+            "tradeApplyDescMessage":"",
+            "tradeDate":"2020-01-03 10:27:06",
+            "tradeNo":"3974",
+            "tradeShares":"0.00",
+            "tradeStatus":"9",
+            "isNewFund": true
+        },
+        "message":"操作成功！",
+        "status":"0000"
     }
-});
+);
 
 module.exports = data;

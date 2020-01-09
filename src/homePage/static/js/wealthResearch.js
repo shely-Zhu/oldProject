@@ -1,4 +1,4 @@
-//  超宝-交易记录
+//  财富研究
 // @author wangjiajia 2019-11-20 
 
 require('@pathCommonBase/base.js');
@@ -10,10 +10,6 @@ require('@pathCommonJs/ajaxLoading.js');
 // 切换
 require('@pathCommonJsCom/tabScroll.js');
 require('@pathCommonJsCom/goTopMui.js');
-require('@pathCommonCom/elasticLayer/elasticLayer/elasticLayer.js');
-// require('@pathCommonJs/components/elasticLayer.js');
-// require('@pathCommonJs/components/elasticLayerTypeFive.js');
-var splitUrl = require('@pathCommonJs/components/splitUrl.js')();
 var alwaysAjax = require('@pathCommonJs/components/alwaysAjax.js');
 
 $(function() {
@@ -23,17 +19,9 @@ $(function() {
             listLoading: $('.listLoading'), //所有数据区域，第一次加载的loading结构
         },
         gV: { //一些设置
-            navList: [ //导航
-                { type: '买入', num: '0' },
-                { type: '定投', num: '2' },
-                { type: '分红', num: '3' },
-                { type: '赎回', num: '1' },
-            ],
             aP: {
                 pageCurrent: 1,
                 pageSize: 10,
-                fundCode: splitUrl['fundCode'],
-                tradeNo: splitUrl['tradeNo'],
             },
             current_index: 0, //左右滑动区域的索引
             list_template: '', //列表的模板，生成后存放在这里
@@ -106,15 +94,6 @@ $(function() {
                         //有这个class，表示已经初始化，不再执行下一步
                         //但需要重置html的overflow
 
-                        //var index = $('#slider .tab-scroll-wrap .mui-active').index();
-
-                        // if( $("#move_"+that.gV.current_index+" .noData").length ){
-                        //     //已经暂无数据了
-                        //     $('html').addClass('hidden');
-                        // }
-                        // else{
-                        //     $('html').removeClass('hidden');
-                        // }
                         return false;
                     }
 
@@ -140,9 +119,6 @@ $(function() {
 
                 console.log('距顶部距离：' + that.gV.listToTop);
 
-                //that.highHeight = windowHeight-that.gV.navHeight;
-
-                // that.highHeight = $('html').height() - that.gV.listToTop;
                 that.highHeight = windowHeight - that.gV.listToTop;
             }
 
@@ -191,15 +167,8 @@ $(function() {
                 $($id).addClass('hasPullUp');
 
 
-
-                // mui(s).pullRefresh().disablePullupToRefresh()
             });
-            //无缝滚动
-            setTimeout(function() {
-                    //无缝滚动
-                    alwaysAjax($('#' + w + ' .mui-table-view-cell'), s)
-                }, 1000)
-                // mui('.mui-slider').slider().stopped = true;
+           
         },
         getTabsListData: function(t) {
             var that = this;
@@ -216,7 +185,8 @@ $(function() {
                         (function(i) {
                             that.gV.navList[i] = {
                                 type: json.data[i].sonModelName,
-                                num: json.data[i].sonModelType
+                                num: json.data[i].sonModelType,
+                                htmdEvt:'wealthResearch_' + i,
                             }
                         })(i);
                     }
@@ -250,6 +220,7 @@ $(function() {
                     console.log(json.data)
                     var jsonData = json.data.list,
                         pageList = jsonData;
+                        that.getElements.noData.hide()
                     if (!$.util.objIsEmpty(pageList)) {
 
                         jsonData.tobe = that.gV.current_index == 0 ? 0 : 1;
@@ -262,20 +233,24 @@ $(function() {
                         //重设当前页码
                         if (!$.util.objIsEmpty(pageList)) {
                             //设置每个ajax传参数据中的当前页码
-                            that.gV.ajaxArr[that.gV.current_index].pageCurrent++;
+                            that.gV.ajaxArr[that.gV.current_index].pageNo++;
                         }
                     } else {
                         //没有数据
                         that.listLength = 0;
                         that.html = '';
+                        t.endPullupToRefresh(false);
+                        $id.find('.mui-scroll .list').html(that.getElements.noData.clone(false)).addClass('noCon');
+                        $id.find('.noData').show();
                     }
 
                     //有数据
                     setTimeout(function() {
                         //that.listLength  是上面ajax 请求完数据  赋值的 长度 作为判断的依据
                         //that.gV.aP.pageSize  是  gV  里面设置的 
-                        if (that.listLength < that.gV.aP.pageSize) {
 
+                        if (that.listLength < that.gV.aP.pageSize) {
+                            
                             if (that.gV.ajaxArr[that.gV.current_index].pageCurrent == 1) {
                                 //第一页时
                                 if (that.listLength == 0) {
@@ -293,15 +268,6 @@ $(function() {
                                     var index = $('#slider .tab-scroll-wrap .mui-active').index(),
                                         $list = $("#move_" + index + " .list");
                                     $list.height(that.highHeight).addClass('noMove');
-                                    // $list.addClass('noMove');
-
-                                    // if( $("#move_"+index+" .noData").length ){
-                                    //     //已经暂无数据了
-                                    //     $('html').addClass('hidden');
-                                    // }
-                                    // else{
-                                    //     $('html').removeClass('hidden');
-                                    // }
 
                                     return false;
                                 } else {
@@ -320,8 +286,10 @@ $(function() {
                         if (that.gV.ajaxArr[that.gV.current_index].pageCurrent == 1) {
                             //第一屏
                             $id.find('.contentWrapper .mui-table-view-cell').html(that.html);
+                            alwaysAjax($('#' + w + ' .mui-table-view-cell'), s, 2)
                         } else {
                             $id.find('.contentWrapper .mui-table-view-cell').append(that.html);
+                            alwaysAjax($('#' + w + ' .mui-table-view-cell'), s, 2)
                         }
                         //获取当前展示的tab的索引
                         var index = $('#slider .tab-scroll-wrap .mui-active').index(),
@@ -352,7 +320,7 @@ $(function() {
 
                     }, 200)
 
-
+                   
 
                 },
                 callbackFail: function(json) {
@@ -370,13 +338,6 @@ $(function() {
                         that.getElements.listLoading.hide();
                     }, 100);
 
-                    //获取当前展示的tab的索引
-                    // var index = $('#slider .tab-scroll-wrap .mui-active').index(),
-                    //     $list = $("#move_"+index+" .list");
-
-                    // $list.addClass('noMove');
-
-                    //return false;
                 },
                 callbackNoData: function(json) {
                     t.endPullupToRefresh(false);
@@ -396,28 +357,19 @@ $(function() {
                         $list = $("#move_" + index + " .list");
 
                     $list.height(that.highHeight).addClass('noMove');
-
-
-                    //如果是其他资产页面
-                    //if( window.location.href.indexOf('/wealthResources/otherAssets/views/jjsAssets.html') != -1){
-
-                    //获取当前展示的tab的索引
-                    //var index = $('#slider .tab-scroll-wrap .mui-active').index();
-
-                    // if( $("#move_"+index+" .noData").length ){
-                    //     //已经暂无数据了
-                    //     $('html').addClass('hidden');
-                    // }
-                    // else{
-                    //     $('html').removeClass('hidden');
-                    // }
-                    //}
+                  
                 }
             }]
             $.ajaxLoading(obj);
         },
         events: function() { //绑定事件
             var that = this;
+            mui("body").on('mdClick', '.list_item', function(e) {
+                var $this = $(this);
+               window.location.href = site_url.articleTemplate_url + "?id=" + $this.attr('id') + '&articleBelong=' + $this.attr('articleBelong');
+            }, {
+                'htmdEvt': 'wealthResearch_01'
+            })
         }
     };
     data.init();

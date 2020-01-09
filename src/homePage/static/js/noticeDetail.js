@@ -18,13 +18,14 @@ $(function(){
 		//全局变量
 		gV:{
             mesType: splitUrl['mesType'], // 1产品公告；2活动通知；3交易动态4;系统通知
-            noticeId: splitUrl['noticeId'],
+            noticeId: splitUrl['noticeId'], // 消息id, 消息列表页跳转时查询
+            batchNo: splitUrl['batchNo'], // 批次号，app推送时根据这个查询
         },
 		//页面初始化函数
 		init:function(){
             var that=this;          
             that.getInformsDetail();
-            that.getTitle()
+            that.getTitle();
         },
         getTitle:function() {
             switch(this.gV.mesType) {
@@ -37,20 +38,28 @@ $(function(){
         // 获取通知详情
         getInformsDetail:function() {
         	var that=this;
+            if(that.gV.noticeId) {
+                var params = {
+                    id: that.gV.noticeId
+                }
+            } else if (that.gV.batchNo) {
+                var params = {
+                    batchNo: that.gV.batchNo
+                }
+            }
             var obj=[{
                 url: site_url.getNoticeAndTransDynamic_api,
-                data:{
-                    id: that.gV.noticeId
-                },
+                data:params,
                 needLogin: true, //需要判断登录是否过期
                 needDataEmpty: true,
                 callbackDone: function(json) {
                     var data=json.data; 
-                    $("#informsDetailContent")[0].innerHTML = data.mesContent
-                     //generateTemplate(data,that.$e.noticeConTemplateId,that.$e.noticeItemListTemplateId);               
-                },
-                callbackFail: function(json) {
-                    //tipAction(json.message);
+                    if(data.mesTitle && data.mesTitle != '') {
+                        $(".detailTitle").show()
+                        $(".detailTitle").html(data.mesTitle)
+                    }
+                    console.log(data.mesContent)
+                    $(".detailContentCon").html(data.mesContent)
                 }
             }];                        
             $.ajaxLoading(obj); 

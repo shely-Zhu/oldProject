@@ -88,9 +88,6 @@ $(function() {
                     generateTemplate(dataInfo, that.$e.ddTop, that.$e.firstTemp);
                     // 基金曲线名称赋值
                     $('.dd_line_legend .dd_red').html(dataInfo.fundName);
-                },
-                callbackFail: function(json) {
-                    tipAction(json.msg);
                 }
             }, {
                 url: site_url.queryRadarChartList_api, //基金诊断-雷达图
@@ -123,9 +120,6 @@ $(function() {
                     }
                     // 日期赋值
                 },
-                callbackFail: function(json) {
-                    tipAction(json.msg);
-                },
                 callbackNoData: function(json) { // 暂无数据  
                     $('.radarEchart').css({ "display": "none" })
                     $('.NoDataRada').html(that.gV.noDataArr[0]);
@@ -147,9 +141,6 @@ $(function() {
                     if (json.data.standardDate) {
                         $('.dd_date_2').html(json.data.standardDate)
                     }
-                },
-                callbackFail: function(json) {
-                    tipAction(json.msg);
                 },
                 callbackNoData: function(json) {
                     that.$e.ddEvaluate.html("暂无数据");
@@ -288,7 +279,7 @@ $(function() {
             // 文案提示
             mui("body").on('mdClick', '.dd_icon', function() {
                 var i = $(this).attr('num');
-                var value = that.gV.tipArr[i].value;
+                var value = that.gV.tipArr[i].text;
                 var tital;
                 if (i == 0) {
                     tital = "综合评分"

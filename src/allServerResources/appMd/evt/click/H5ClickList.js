@@ -34,6 +34,27 @@ var clickList = {
 	//基金诊断
 	"fundAccountDiagnosis_01":{ type:'click', evtid: 'fundAccountDiagnosis_01', topic: '基金诊断-展开持仓按钮', info: ''},
 	"fundAccountDiagnosis_02":{ type:'click', evtid: 'fundAccountDiagnosis_02', topic: '基金诊断-获取专属报告按钮', info: ''},
+	"fundAccountDiagnosis_03":{ type:'click', evtid: 'fundAccountDiagnosis_03', topic: '基金诊断-单个认证按钮', info: ''},
+	"fundAccountDiagnosis_04":{ type:'click', evtid: 'fundAccountDiagnosis_04', topic: '基金诊断-一键认证按钮', info: ''},
+	"fundAccountDiagnosis_05":{ type:'click', evtid: 'fundAccountDiagnosis_05', topic: '基金诊断-隐藏一键认证按钮', info: ''},
+	"fundAccountDiagnosis_06":{ type:'click', evtid: 'fundAccountDiagnosis_06', topic: '基金诊断-无持仓跳转理财首页按钮', info: ''},
+	"fundAccountDiagnosis_07":{ type:'click', evtid: 'fundAccountDiagnosis_07', topic: '基金诊断-无持仓情况下获取专属报告按钮', info: ''},
+	"fundAccountDiagnosis_08":{ type:'click', evtid: 'fundAccountDiagnosis_08', topic: '基金诊断-明白按钮', info: ''},
+	"fundAccountDiagnosis_09":{ type:'click', evtid: 'fundAccountDiagnosis_09', topic: '基金诊断-失败', info: ''},
+	//基金账户诊断 --添加/编辑申请
+	"fundAccountDiagnosisResult_01":{ type:'click', evtid: 'fundAccountDiagnosisResult_01', topic: '账户诊断-添加其他基金时,购买时间事件', info: ''},
+	"fundAccountDiagnosisResult_02":{ type:'click', evtid: 'fundAccountDiagnosisResult_02', topic: '账户诊断-添加其他基金时,确定按钮', info: ''},
+	"fundAccountDiagnosisResult_03":{ type:'click', evtid: 'fundAccountDiagnosisResult_03', topic: '账户诊断-添加其他基金时,取消按钮', info: ''},
+	"fundAccountDiagnosisResult_04":{ type:'click', evtid: 'fundAccountDiagnosisResult_04', topic: '账户诊断-选择左箭头按钮事件', info: ''},
+	"fundAccountDiagnosisResult_05":{ type:'click', evtid: 'fundAccountDiagnosisResult_05', topic: '账户诊断-预期年化收益率/可承受最大回撤 弹框的确定按钮事件', info: ''},
+	"fundAccountDiagnosisResult_06":{ type:'click', evtid: 'fundAccountDiagnosisResult_06', topic: '账户诊断-预期年化收益率/可承受最大回撤 弹框的取消按钮事件', info: ''},
+	"fundAccountDiagnosisResult_07":{ type:'click', evtid: 'fundAccountDiagnosisResult_07', topic: '', info: '新增其他基金的删除按钮'},
+    "fundAccountDiagnosisResult_08":{ type:'click', evtid: 'fundAccountDiagnosisResult_08', topic: '', info: '新增其他基金的添加按钮'},
+	"fundAccountDiagnosisResult_09":{ type:'click', evtid: 'fundAccountDiagnosisResult_09', topic: '', info: '提交申请按钮'},
+	"fundAccountDiagnosisResult_10":{ type:'click', evtid: 'fundAccountDiagnosisResult_10', topic: '', info: '跳转到申请历史页面按钮'},
+	"fundAccountDiagnosisResult_11":{ type:'click', evtid: 'fundAccountDiagnosisResult_11', topic: '', info: '基金勾选事件'},
+
+	
 	// 添加已购买基金
 	"addAccountDiagnosisResult_01": { type:'click', evtid: 'addAccountDiagnosisResult_01', topic: '添加已购买基金-购买日期选择', info: ''},
 	"addAccountDiagnosisResult_02": { type:'click', evtid: 'addAccountDiagnosisResult_02', topic: '添加已购买基金-购买日期选择弹框取消按钮', info: ''},
@@ -71,6 +92,7 @@ var clickList = {
 	//月度报告列表页
 	"monthReportList_01" : { type:'click', evtid: 'monthReportList_01', topic: '月度报告列表页-右箭头', info: ''} ,
 	"monthReportList_02" : { type:'click', evtid: 'monthReportList_02', topic: '浏览商品', info: ''} ,
+	"monthReportList_03" : { type:'click', evtid: 'monthReportList_03', topic: '列表展开收起', info: ''} ,
 	//修改分红方式
 	"bonusMethod_01" : { type:'click', evtid: 'bonusMethod_01', topic: '修改分红方式', info: ''} ,
 	// 组件弹层的点击事件
@@ -264,6 +286,7 @@ var clickList = {
 	"ordinarySetThrow_18" : { type:'click', evtid: 'ordinarySetThrow_18', topic: '定投-键盘', info: ''} ,
 	"ordinarySetThrow_19" : { type:'click', evtid: 'ordinarySetThrow_19', topic: '定投-周期选择', info: ''} ,
 	"ordinarySetThrow_20" : { type:'click', evtid: 'ordinarySetThrow_20', topic: '定投-返回', info: ''} ,
+	"ordinarySetThrow_21" : { type:'click', evtid: 'ordinarySetThrow_21', topic: '定投-《定期定额投资业务协议》', info: ''} ,
 	// publicDetail.html  公募产品详情页
 	"publicDetail_01" : { type:'click', evtid: 'publicDetail_01', topic: '公募产品详情页-基金经理', info: ''} ,
 	"publicDetail_02" : { type:'click', evtid: 'publicDetail_02', topic: '公募产品详情页-基金公司', info: ''} ,
@@ -445,6 +468,7 @@ var clickList = {
 	"tobeConfirmTransaction_11":{ type:'click', evtid: 'tobeConfirmTransaction_11', topic: '待确认交易_取消预约_确定', info: ''},
 	"tobeConfirmTransaction_12":{ type:'click', evtid: 'tobeConfirmTransaction_12', topic: '待确认交易_取消预约_取消', info: ''},
 	"tobeConfirmTransaction_13":{ type:'click', evtid: 'tobeConfirmTransaction_13', topic: '待确认交易_我知道了', info: ''},
+	"tobeConfirmTransaction_14":{ type:'click', evtid: 'tobeConfirmTransaction_14', topic: '已确认交易_未确认行为确认单_立即查看', info: ''},
 
 	"cashTreasure_0":{ type:'click', evtid: 'cashTreasure_0', topic: '现金宝详情_展开收起按钮点击', info: ''},
 	"cashTreasure_1":{ type:'click', evtid: 'cashTreasure_1', topic: '现金宝详情_折线图中月份点击', info: ''},
@@ -541,6 +565,22 @@ var clickList = {
 
 	"articleTemplate_01":{ type:'click', evtid: 'articleTemplate_01', topic: '立即跳转', info: ''},
 	"articleTemplate_02":{ type:'click', evtid: 'articleTemplate_02', topic: '调用视频播放', info: ''},
+
+	// mui切换的埋点
+	"wealthResearch_0":{ type:'click', evtid: 'wealthResearch_0', topic: '财富研究1', info: ''},
+	"wealthResearch_1":{ type:'click', evtid: 'wealthResearch_1', topic: '财富研究2', info: ''},
+	"wealthResearch_2":{ type:'click', evtid: 'wealthResearch_2', topic: '财富研究3', info: ''},
+	"wealthResearch_3":{ type:'click', evtid: 'wealthResearch_3', topic: '财富研究4', info: ''},
+	// 财富学院1
+	"fortuneCollegeList_0":{ type:'click', evtid: 'fortuneCollegeList_0', topic: '财富学院1', info: ''},
+	"fortuneCollegeList_1":{ type:'click', evtid: 'fortuneCollegeList_1', topic: '财富学院2', info: ''},
+	"fortuneCollegeList_2":{ type:'click', evtid: 'fortuneCollegeList_2', topic: '财富学院3', info: ''},
+	"fortuneCollegeList_3":{ type:'click', evtid: 'fortuneCollegeList_3', topic: '财富学院4', info: ''},
+
+	"wealthResearch_01":{ type:'click', evtid: 'wealthResearch_01', topic: '财富学院4', info: ''},
+	
+	
+	
 
 	
 }

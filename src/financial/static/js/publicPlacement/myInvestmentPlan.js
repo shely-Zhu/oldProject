@@ -109,32 +109,27 @@ $(function () {
                                 }else{
                                     that.$e.stopPlan.hide()
                                 }
-
+                                if(!that.gV.paddingStatus&&that.gV.stopNum==0){
+                                    that.$e.noData.show()
+                                    return 
+                                }
+                                def && def.resolve( data, that.gV.pageCurrent);
                                 if (that.gV.pageCurrent == 1) {
                                     for (var i = 0; i < data.length; i++) {
                                         if (data[i].fixStateStr == "暂停") {
                                             $(".content-t span").eq(i).addClass("suspend")
-                                        } else {
-
                                         }
                                     }
                                 } else {
                                     for (var i = 0; i < data.length; i++) {
                                         if (data[i].fixStateStr == "暂停") {
                                             $(".content-t span").eq(i + 15 * that.gV.pageCurrent - 15).addClass("suspend")
-                                        } else {
-
                                         }
                                     }
                                 }
-                                if(!that.gV.paddingStatus&&that.gV.stopNum==0){
-                                    that.$e.noData.show()
-                                    return 
-                                }
-                                def && def.resolve( data, that.gV.pageCurrent);
                                 that.gV.pageCurrent++;
-                                
                             }
+                            
                         },
                         callbackNoData: function( json ){
                             if(that.gV.pageCurrent == 1) {
@@ -306,9 +301,6 @@ $(function () {
                 callbackDone: function(json) {
                     var data = json.data
                     that.gV.accountType = data.accountType
-                },
-                callbackFail: function(json) {
-                    tipAction(json.msg);
                 }
             }]
             $.ajaxLoading(obj);

@@ -88,10 +88,6 @@ $(function() {
                         that.$e.actIntroduce.html($(data.actIntroduce));
                         $(".lazyload").lazyload()
 
-                    },
-                    callbackFail: function(json) {
-                        console.log(json.message)
-                        tipAction(json.message);
                     }
                 }];
                 $.ajaxLoading(obj);
@@ -150,9 +146,6 @@ $(function() {
 						}else{
 							that.signUp();
 						}
-            	    },
-            	    callbackFail: function(json) {
-						tipAction(json.message);
             	    }
             	}];
             	$.ajaxLoading(obj);
@@ -371,18 +364,28 @@ $(function() {
                             };
                             $.elasticLayer(obj)
                         } else {
-                            var obj = {
-                                title: '温馨提示', //如果不传，默认不显示标题
-                                p: '<p>' + data.message + '</p>',
-                                yesTxt: '我明白了',
-                                hideCelButton: true,
-                                zIndex: 100,
-                                htmdEvtYes:'activityDetails_24',  // 埋点确定按钮属性
-                                callback: function(t) {
 
-                                },
-                            };
-                            $.elasticLayer(obj)
+                            if (!!data.message) {
+                                var obj = {
+                                    title: '温馨提示', //如果不传，默认不显示标题
+                                    p: '<p>' + data.message + '</p>',
+                                    yesTxt: '我明白了',
+                                    hideCelButton: true,
+                                    zIndex: 100,
+                                    htmdEvtYes:'activityDetails_24',  // 埋点确定按钮属性
+                                    callback: function(t) {
+
+                                    },
+                                };
+                                $.elasticLayer(obj)
+                            }
+                            else{
+                                tipAction( '系统开小差啦，请联系客服 400-8980-618' );
+                            }
+
+
+
+                            
                         }
                     }
                 }];
@@ -411,12 +414,10 @@ $(function() {
                                 img: that.$e.bgimg.attr("data-original"),
                             }
                             // window.isAndroid是在root文件中定义的变量
-
-                        if (window.currentIsApp) {
+                        // if (window.currentIsApp) {
                             if (window.isAndroid) {
                                 //这个是安卓操作系统
                                 window.jsObj.wxShare(JSON.stringify(wxShare));
-
                             }
                             // window.isIOS是在root文件中定义的变量
                             if (window.isIOS) {
@@ -424,12 +425,8 @@ $(function() {
                                 window.webkit.messageHandlers.wxShare.postMessage(JSON.stringify(wxShare));
 
                             }
-                        }
+                        // }
 
-                    },
-                    callbackFail: function(json) {
-                        console.log(json.message)
-                        tipAction(json.message);
                     }
                 }];
                 $.ajaxLoading(obj);

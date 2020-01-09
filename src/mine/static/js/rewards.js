@@ -75,14 +75,15 @@ $(function() {
                             "pageSize": that.gV.pageSize
                         },
                         needDataEmpty: true,
+                        needLoading: false,
                         callbackDone: function(json) {
                             var data = json.data.list;
-
                             if (that.gV.pageCurrent == 1 && data.length == 0) {
                                 $(".list").css("display", "none");
                                 $('.without.noData').show();
-                                $('.contentHeader').hide();
+                                // $('.contentHeader').hide();
                             } else {
+                                $(".contentHeader").show()
                                 $.each(json.data.list, function(i, el) {
 
                                     if (el.isAvailable == "0") {

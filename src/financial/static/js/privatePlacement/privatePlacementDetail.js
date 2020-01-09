@@ -1,5 +1,11 @@
+/*
 //  私募基金产品详情
-//  @author zhangyanping 2019-11-25 tian
+//  @author zhangyanping 2019-11-25 
+
+    update:chentiancheng 2020-01-08 
+    删除司法冻结文案
+
+*/
 
 require('@pathCommonBase/base.js');
 
@@ -35,10 +41,11 @@ $(function() {
             topc: $('#topc'), //提示信息
             tipIcon: $(".tipIcon"), //净值披露信息
             isElecContract: '', //是否是电子合同产品【0.否 1.是】
-            unitNetValueDes: '',
+            unitNetValueDes: '每周五24:00前更新上周净值',
             productNameTip:'',
             reourceData:true,   //标签内容
             collectAccountFlag:true,    //标签募集账号
+            symboltype:'none',    //echarts 节点样式
         },
         data: {
             canClick: true,
@@ -208,9 +215,9 @@ $(function() {
                         })
                     }
                     //0 债权投资;1 证券投资（二级市场）;2 股权投资;3 海外投资;4 其他
-                    if (jsonData.investDirect == "0" || jsonData.investDirect == "2" || jsonData.investDirect == "4") { // 债权投资、股权投资、其他服务不展示
+                    if (jsonData.investDirect == "2" || jsonData.investDirect == "4") { // 债权投资、股权投资、其他服务不展示
                         that.getElements.tipIcon.hide();
-                    } else if (jsonData.investDirect == "1" || jsonData.investDirect == "3") { // 海外投资  （证券投资）二级市场展示
+                    } else if (jsonData.investDirect == "0" || jsonData.investDirect == "1" || jsonData.investDirect == "3") { // 海外投资  （证券投资）二级市场展示
                         that.getElements.tipIcon.show();
                         var productModule = 'netValueCycleAPP';
                         that.queryProductImage(productModule);
@@ -411,6 +418,9 @@ $(function() {
                             $(".over").hide();
                             break;
                     }
+                },
+                callbackNoData:function(json){
+                    debugger
                 }
             }, {
                 url: site_url.queryUserAuthInfo_api,
@@ -471,9 +481,6 @@ $(function() {
                 callbackNoData: function(json) {
                     // tipAction(json.message);
                     $(".performanceComparison").hide()
-                },
-                callbackFail: function(json) {
-                    tipAction(json.message);
                 }
             }];
             $.ajaxLoading(obj);
@@ -640,12 +647,15 @@ $(function() {
                     $("#qrnhLine").addClass("hide")
                     $("#wfsyLine").addClass("hide")
                     $(".noDataHintEcharts").removeClass("hide")
+                    $(".lineWrap").hide()
                 },
                 callbackFail: function(json) {
                     that.data.echartsClickFlag = false;
                     $("#qrnhLine").addClass("hide")
                     $("#wfsyLine").addClass("hide")
                     $(".noDataHintEcharts").removeClass("hide")
+                    $(".lineWrap").hide()
+
                 }
             }];
             $.ajaxLoading(obj);
@@ -656,6 +666,11 @@ $(function() {
             var that = this;
             console.log($('#qrnhLine')[0])
 
+            //判断有多少数据 只有一个值时 symbol 为circle 多组值时 symbol为 none
+            if( data.profitThoudDate.length == 1 ){
+                that.getElements.symboltype = 'circle'
+            }
+            
             if (type == 'qrnh') {
                 //画的是七日年化折线图
                 $("#qrnhLine").removeClass("hide");
@@ -722,7 +737,8 @@ $(function() {
                     data: xAxisData,
                     axisLine: {
                         lineStyle: {
-                            color: '#FADFBB'
+                            color: '#FADFBB',
+                            width:0.5 //横网格线粗细
                         }
                     },
                     axisLabel: {
@@ -743,7 +759,8 @@ $(function() {
                     },
                     splitLine: {
                         lineStyle: {
-                            color: '#FADFBB'
+                            color: '#FADFBB',
+                            width:0.5
                         }
                     },
                     axisLabel: {
@@ -755,7 +772,8 @@ $(function() {
                     axisLabel: {                   
                         formatter: function (value, index) {           
                             return value.toFixed(4) + '%';      
-                        }                
+                        },
+                        color:"#9B9B9B"               
                     }
                 },
                 series: [{
@@ -766,7 +784,7 @@ $(function() {
                     itemStyle: {
                         show: false
                     },
-                    symbol: 'none',
+                    symbol: that.getElements.symboltype,
                     areaStyle: {
                         normal: {
                             color: {
@@ -829,10 +847,6 @@ $(function() {
                     }
 
                 },
-                callbackFail: function(json) { //失败后执行的函数
-                    tipAction(json.message);
-
-                },
                 callbackNoData: function(json) {
                     $('.lightPointCon').hide();
                 }
@@ -892,6 +906,8 @@ $(function() {
                 jumpUrl = site_url.qualifiedInvestorResult_url
             }else if (v.conditionJump == 8) { //信息查看（修改证件有效期） 
                 jumpUrl = site_url.completeInfoEditModify_url
+            }else if (v.conditionJump == 9) { //跳转到普通风测
+                jumpUrl = site_url.riskAppraisal_url + '?type=private';
             }else if (v.conditionJump == 11) { //跳转到进身份证上传页面
                 jumpUrl = site_url.realIdcard_url
             } else if (v.conditionJump == 12) { //跳转到人脸识别页面
@@ -938,7 +954,7 @@ $(function() {
                         if (v.conditionType == 1 && !v.isSatisfied) { //财富账户是否开通，需要给app携带，0未开通，1开通
                             that.data.isOpenWealth = 0;
                         }
-                        if (v.conditionType == 5 && !v.isSatisfied) { //合格投资者认证是否满足，需要给app携带
+                        if (v.conditionType == 5 && v.isSatisfied) { //合格投资者认证是否满足，需要给app携带
                             that.data.isSatisfied = v.isSatisfied
                         }
                         if (v.conditionType == 6 && !!v.isPopup) { //是否弹出期限不符弹框
@@ -1422,13 +1438,12 @@ $(function() {
                     if (that.data.buyFreeze == "1" && that.data.lawFreezeStatus == "1") { //如果禁止买入且司法冻结，首先提示
                     	that.data.canClick = true;//这里必须改成true，否则取消后按钮不生效了。
                         var obj = {
-                            title: '',
+                            title: '温馨提示',
                             id: 'buyFreeze',
                             p: '因司法原因该账户被冻结，请联系客服咨询！客服电话：400-8980-618',
                             yesTxt: '确认',
-                            celTxt: "取消",
                             htmdEvtYes:'privatePlacementDetail_32',  // 埋点确定按钮属性
-                            htmdEvtCel:'privatePlacementDetail_33',  // 埋点取消按钮属性
+                            hideCelButton: true, //为true时隐藏cel按钮，仅使用yes按钮的所有属性
                             zIndex: 100,
                             callback: function(t) {
 
@@ -1480,7 +1495,7 @@ $(function() {
             });
             //点击查看明细跳转
             mui("body").on('mdClick', '.lookDetailed', function() {
-                window.location.href = site_url.tobeConfirmTransaction_url+"?type=toBeConfirmed&eruda=true"//查看明细跳转待确认明细
+                window.location.href = site_url.tobeConfirmTransaction_url+"?type=toBeConfirmed"//查看明细跳转待确认明细
             },{
                 htmdEvt: 'privatePlacementDetail_10'
             });

@@ -9,7 +9,6 @@
 
 @import url("@pathCommonLess/chtwm.less");
 @import url("@pathCommonLess/app.less");
-@import url("@pathCommonLessCom/alertBox.less");
 @import url("@pathCommonLessCom/tabScroll.less");
 @import url("@pathCommonCom/button/button.less");
 
@@ -30,6 +29,7 @@ html {
 }
 body,.mui-content{
     background: @F7FAFD !important;
+    height: 100%;
 }
 .hide{
     display: none;
@@ -72,7 +72,7 @@ body,.mui-content{
             .assetsBtn{
                 width: 1.5rem;
                 height: 0.4rem;
-                background: rgba(255, 255, 255, 0.1);
+                background: @283d86;
                 border-radius: 0.25rem;
                 font-size: 0.2rem;
                 text-align: center;
@@ -145,6 +145,7 @@ body,.mui-content{
         }
         .bank_screen.bank_listactive{
             color: @364D97;
+            font-weight: 600;
         }
     }
 
@@ -261,13 +262,15 @@ body,.mui-content{
             }
             .tip {
                 position: absolute;
-                top: 1.25rem;
+                top: 1.3rem;
+                left: -.16rem;
                 height: 0.36rem;
                 line-height: 0.36rem;
                 color: @BB8E5F;
                 font-size: 0.2rem;
                 padding: 0 0.1rem;
                 background: linear-gradient(to right, @F5ECD5, @F0DFBA);
+                transform: scalex(0.9);
                 border-radius: 0.05rem;
             }
             .redeem_btn {
@@ -414,4 +417,7 @@ body,.mui-content{
         font-family:PingFangSC-Regular,PingFang SC;
         font-weight:400;
     }
+}
+.without{
+    padding-top: 1.3rem;
 }

@@ -31,7 +31,7 @@ var data = Mock.mock({
 		"reserveStatus": "2",//预约状态
 		"reserveTime": "2016-12-12",//预约日期
 		"riskDisclosure": "12",//风险提示书id
-		"projectIssuer": "北京中岩投资管理有限公司",//管理机构
+		"projectIssuer": "北京中岩投资管理有限公司北京中岩投资管理有限公司北京中岩投资管理北京中岩投资管理有限公司北京中岩投资管理有限公司北京中岩投资管理",//管理机构
 		"incomeModeDesc": "类固收",//收益分配方式
 		"taFundCode": "1",   // 电子合同代码
 		"incomeMode": "1",//收益分配方式【原值 2.类固收 3.浮收】   收益分配方式 (0:代表原来的2 ;其它数字代表原来的3)
@@ -68,7 +68,7 @@ var data = Mock.mock({
         "redemptionOpenFrequency": "",  // 赎回开放频率
         "surplusLevel": "",  //剩余额度
         "customerType":"1",   // 客户类型（允许购买客户类型 1.个人 0.机构 ）
-        "incomeModeJF":"0",  //收益分配方式金服（0固收 1浮收普通 2浮收稳裕）
+        "incomeModeJF":"1",  //收益分配方式金服（0固收 1浮收普通 2浮收稳裕）
         "investArea":"投资领域",   // 投资领域
         "setupDate": "成立日期",   //成立日期yyyy/MM/dd
         "investWay": "投资方式",   //投资方式

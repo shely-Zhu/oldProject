@@ -34,7 +34,7 @@ $(function () {
 	var regulatory = {
 
 		gv:{
-		   productName:new Base64().decode(splitUrl['productName']),   //产品名称
+		   productName: '',   //产品名称
 		   transformTotalMoney:"",   //产品转出总额度
 		   transformMoney:"",    //产品转出额度
 		   dailyOnceMaxLimit:"",  //单日最高限额 整数
@@ -91,7 +91,9 @@ $(function () {
 			that.findProtocolBasi();
 			that.cashListWiki();
 			that.pofCashLimit();
-			
+			if(splitUrl['productName']) {
+				that.gv.productName = new Base64().decode(splitUrl['productName'])
+			}
 		},
 
         /*
@@ -127,14 +129,16 @@ $(function () {
 					},
 					needDataEmpty:true,
 					callbackDone:function(json){
-						console.log("88888")
 						that.gv.ruleList = json.data;
 						that.$e.el_transformRule[0].textContent = that.gv.ruleList[2].title;
 						that.$e.el_transformRule.attr("ruleId",that.gv.ruleList[2].id);
 						that.$e.el_transformRule_icon.attr("ruleId",that.gv.ruleList[2].id);
-
 						that.$e.el_agreementRule[0].textContent = that.gv.ruleList[1].title;
 						that.$e.el_agreementRule.attr('ruleId',that.gv.ruleList[1].id);
+						
+						// if(that.$e.el_transformRule[0].textContent!=""){
+						// 	$(".cashRight").show()
+						// }
 					}
 				}
 			]
@@ -428,7 +432,10 @@ $(function () {
 			//$(".confirmeDemptionPay").on('click',function(){
 				var val =$(".msecond input")[0].value;
 				that.gv.transformMoney = val;
-				if(parseFloat(that.gv.transformMoney)>that.gv.dailyOnceMaxLimit){
+				if(parseFloat(that.gv.transformMoney) < 0.01) {
+					tipAction("转出金额最小值为0.01元")
+					return
+				}else if(parseFloat(that.gv.transformMoney)>that.gv.dailyOnceMaxLimit){
 					//$(".checkMessage").css({"display":"block"});
 					//$(".checkMessage").html("转出金额超过单笔最高限额");
 					tipAction("转出金额超过单笔最高限额"+that.gv.dailyOnceMaxLimit + "元")

@@ -52,8 +52,16 @@ $(function() {
                             tital: objArr[index],
                             dataList: objData[objArr[index]]
                         };
+                        for(var i in obj.dataList){
+                            //诊断申请状态： 1-提交成功  2-待确认需求  3-需求已确认 4-报告已发送  提交成功和待确认需求可修改
+                            if(obj.dataList[i].applyStatus == 3 || obj.dataList[i].applyStatus == 4 ){
+                                obj.dataList[i].editFlag =false;
+                            }else{
+                                obj.dataList[i].editFlag =true;
+                            }
+                        }
                         that.gV.listData.push(obj)
-                    }
+                    }              
                     generateTemplate(that.gV.listData, that.$e.historyBox, that.$e.historyTemplate);
                     // console.log("9090", that.gV.listData)
                 },
@@ -79,9 +87,9 @@ $(function() {
             }, {
                 'htmdEvt': 'applyHistory_02'
             })
-            //点击修改跳转到基金申请页面
-            mui("body").on("mdClick", ".editHistory", function() {
-                var id = $(this).attr("applyId");
+            //点击修改跳转到基金申请页面，点击事件加上右边的箭头
+            mui("body").on("mdClick", ".content-item .mui-table-view-cell .editHistory, .content-item .mui-table-view-cell .mui-icon-arrowright", function() {
+                var id = $(this).parents('.mui-table-view-cell').attr("applyId");
                 window.location.href = site_url.fundAccountDiagnosisResult_url + "?type=edit" + "&applyId=" + id
             }, {
                 'htmdEvt': 'applyHistory_03'

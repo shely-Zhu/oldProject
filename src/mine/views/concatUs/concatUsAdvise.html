@@ -1,13 +1,14 @@
 <!-- 联系我们-意见反馈
      @author 陈天成 2019-11-11
+     update 2020-01-08  chentiancheng
 -->
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
     @@include('@pathInclude/views/meta.html')
-    <link rel="stylesheet" href="/mine/static/css/concatUsAdvise.css">
     <link rel="stylesheet" href="/mine/static/css/uploadMaterial.css">
+    <link rel="stylesheet" href="/mine/static/css/concatUsAdvise.css">
     <title>联系我们-意见反馈</title>
 </head>
 
@@ -20,7 +21,8 @@
         <!--身体  -->
         <div class="concatUsAdvisePageMain  uploadMaterial">
             <div class="concatUsAdvisePageMainQuestion">
-                <h3 class="concatUsAdvisePageMainAdviceType">请选择您的反馈类型</h3>
+                <div class="ishair"></div>
+                <h3 class="concatUsAdvisePageMainAdviceType">请选择您的反馈类型<span class="message">提交成功后我们将在5个工作日内与您联系</span></h3>
                 <ul class="mui-table-view">
                     <li class="mui-input-row mui-table-view-cell mui-radio mui-right list mui-selected">
                         <label class="blod"></label>
@@ -46,7 +48,7 @@
             <div class="concatUsAdvisePageMainAdvice">
                 <h3 class="concatUsAdvisePageMainAdviceTitle">请您补充详细问题或意见</h3>
                 <div class="mui-input-row concatUsAdvisePageMainAdviceContent">
-                    <textarea maxlength="200" value="" placeholder="请输入1-200字的描述" needCheck="true" htmdEvt="feedback_addImg" class="textarea" check="regAddress"></textarea>
+                    <textarea maxlength="200" value="" placeholder="请输入1-200字的描述" needCheck="true" htmdEvt="feedback_addImg" class="textarea" check="orgAddMessage"></textarea>
                     <span class="haveMany"  data="0/200">0/200</span>
                 </div>
                 <h3 class="concatUsAdvisePageMainAdviceTitle">请您提供对应问题截图或照片</h3>

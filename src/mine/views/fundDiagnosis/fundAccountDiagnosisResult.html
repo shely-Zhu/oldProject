@@ -25,36 +25,38 @@
              </div>
              <div class="fund-allocation content-item">
                 <ul class="mui-table-view">
-                    <li class="mui-table-view-cell"><span class="left">年龄</span><span class="right mr60"> <input type="text" class="mui-input-clear userAge" placeholder="请输入年龄"></span></li>
+                    <!--<li class="mui-table-view-cell"><span class="left">年龄</span><span class="right mr60"> <input type="text" class="mui-input-clear userAge" placeholder="请输入年龄"></span></li>-->
+                    <li class="mui-table-view-cell"><span class="left">年龄</span><input type="text" class="mui-input-clear userAge right" placeholder="请输入年龄"></li>
                     <li class="mui-table-view-cell"><span class="left">性别</span>
                         <span class="mui-icon mui-icon-arrowright"  type="sex"></span>
-                        <span class="right" id="sex">请选择</span>
+                        <span class="right" id="sex" type="sex">请选择</span>
                     </li>
                     <li class="mui-table-view-cell"><span class="left">职业</span>
                         <span class="mui-icon mui-icon-arrowright" type="professional"></span>
-                        <span class="right" id="professional">请选择</span>
+                        <span class="right" id="professional" type="professional">请选择</span>
                         <input id="professionalDescript" placeholder="技术工人"/>
                     </li>
                 </ul>
                 <ul class="mui-table-view mt20">
                     <li class="mui-table-view-cell"><span class="left">投资年限</span>
                         <span class="mui-icon mui-icon-arrowright" type="investment_year"></span>
-                        <span class="right" id="investment_year">请选择</span>
+                        <span class="right" id="investment_year" type="investment_year">请选择</span>
                     </li>
                     <li class="mui-table-view-cell"><span class="left">风险等级</span>
                         <span class="mui-icon mui-icon-arrowright" type="riskLevel"></span>
-                        <span class="right riskLevel" id="riskLevel">请选择</span>
+                        <span class="right" id="riskLevel" type="riskLevel">请选择</span>
                     </li>
                     <li class="mui-table-view-cell"><span class="left">预计投资年限</span>
                         <span class="mui-icon mui-icon-arrowright" type="expectedInvestment_year"></span>
-                        <span class="right" id="expectedInvestment_year">请选择</span>
+                        <span class="right" id="expectedInvestment_year" type="expectedInvestment_year">请选择</span>
                     </li>
                     <li class="mui-table-view-cell"><span class="left">流动性需求</span>
                         <span class="mui-icon mui-icon-arrowright" type="liquidity"></span>
-                        <span class="right" id="liquidity">请选择</span>
+                        <span class="right" id="liquidity" type="liquidity">请选择</span>
                     </li>
                     <li class="mui-table-view-cell"><span class="left">预期年化收益率</span>
                         <span class="mui-icon mui-icon-arrowright" type="yield"></span>
+                        <span class="right" id="yearOwn" type="yield">请选择</span>
                         <span class="rightMoreBox yieldControl">
                             <span class="rightMore">%</span>
                             <span class="rightMore" id="yield_second"></span>
@@ -65,6 +67,7 @@
                     </li>
                     <li class="mui-table-view-cell"><span class="left">可承受最大回撤(亏损)</span>
                         <span class="mui-icon mui-icon-arrowright" type="loss"></span>
+                        <span class="right" id="maxLossOwn" type="loss">请选择</span>
                         <span class="rightMoreBox lossControl">
                                 <span class="rightMore">%</span>
                                 <span class="rightMore" id="loss_second"></span>
@@ -211,11 +214,11 @@
         <div class="addOtherFund_content">
             <ul class="mui-table-view">
                 <li class="mui-table-view-cell"><span class="left">基金代码</span><span class="right mr60"> <input type="text" class="mui-input-clear fundCode_input" placeholder="请输入基金代码"></span></li>
-                <li class="mui-table-view-cell"><span class="left">购买日期</span> <span class="mui-icon mui-icon-arrowright"></span><span class="right dataPick"></span></li>
+                <li class="mui-table-view-cell"><span class="left">购买日期</span> <span class="mui-icon mui-icon-arrowright"></span><span class="right" id="dataPickDec">请选择</span><span class="right dataPick"></span></li>
                 <li class="mui-table-view-cell"><span class="left">购买金额</span><span class="right mr60"> <input type="text" class="mui-input-clear money_input" placeholder="请输入金额"></span></li>
             </ul>
             <div class="warmMessage">基金代码,购买日期,购买金额不能为空</div>
-            <div class="comfirmButtom mt20">
+            <div class="comfirmButtom">
                 <button class="mui-btn addOtherFalse">取消</button>
                 <button class="mui-btn addOtherTrue">确认添加</button>
             </div>
@@ -259,8 +262,10 @@
         <li checkStatus = {{checkStatu}} fundCode={{fundCode}} purchaseDate={{purchaseDate}} purchaseAmount={{purchaseAmount}} diagnoseApplyId={{diagnoseApplyId}}>
               {{#if checkStatu}}
                 <input type="checkbox" checked   listId = {{id}}>
+                	<!--<span class='iconfont checked'>&#xe609;</span>-->
                {{else}} 
                <input type="checkbox" listId = {{id}}>
+               		<!--<span class='iconfont unchecked'>&#xe609;</span>-->
                {{/if}}
                 <span class="fundCodeListItem">
                     <span class="fundCodeListItem_tital">基金代码</span>

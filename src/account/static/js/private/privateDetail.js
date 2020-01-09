@@ -47,7 +47,8 @@ $(function() {
 			redeemRule: [],	// 赎回规则  按照=====切割
 			echartsClickFlag: false, // echarts图表查询单点标识 false为可点击
 			redeemClickFlag: true, // true为可点击
-			redeemPartion: ''	
+			redeemPartion: '',
+			symboltype : 'none',	//echarts 节点样式
 		},
 		init: function(){
 			var that = this;
@@ -245,7 +246,7 @@ $(function() {
 			    callbackDone: function(json) {
 			    	console.log(json)
 			    	that.data.echartsClickFlag = false;
-			    	var jsonData = json.data;
+					var jsonData = json.data;
 			    	//拼数据
 			       	$.each( jsonData, function(i, el){
 			       		newData.sevenIncomeRate.push( el.sevenYearYield);
@@ -353,6 +354,10 @@ $(function() {
 		//type必传
 		drawLine: function ( type, data) {
 			var that = this;
+			//判断有多少数据 只有一个值时 symbol 为circle 多组值时 symbol为 none
+			if(data.profitThoudDate.length == 1 ){
+				that.data.symboltype = 'circle'
+			}			
 			if( type == 'qrnh'){
 				//画的是七日年化折线图
 				$("#qrnhLine").removeClass("hide")
@@ -444,7 +449,10 @@ $(function() {
 			    		show: false
 			    	},
 			    	axisLine: {
-			    		show: false
+			    		show: false,
+			    		lineStyle: {
+			    			color: '#9B9B9B'
+			    		}
 			    	},
 			    	splitLine:{
 			    		lineStyle: {
@@ -471,7 +479,7 @@ $(function() {
 			    	itemStyle: {
 			    		show: false
 			    	},
-			    	symbol: 'none',
+			    	symbol: that.data.symboltype,
 			    	areaStyle: {
 			    		normal: {
 			    			color: {
@@ -617,7 +625,7 @@ $(function() {
 	    			$('.type_4 .ktjshsqsj').parent().parent().css("display", "none")
 	    		}
 	    	}
-	    	$(".totalM").css({"background": "linear-gradient(360deg, rgba(186,140,112,1) 0%, rgba(244,210,192,1) 100%)", "-webkit-background-clip": "text", "-webkit-text-fill-color": "transparent"})
+	    	$(".totalM").css({"background": "linear-gradient(360deg, #FBE2BD 0%, #E2B580 100%)", "-webkit-background-clip": "text", "-webkit-text-fill-color": "transparent"})
 	    	// 显示各明细分类
 	    	var tradeRecordFlag = jsonData.tradeRecordFlag==1?true:false // 是否有交易明细(0否1是)
 	    	var incomeAssignFlag = jsonData.incomeAssignFlag==1?true:false // 是否有收益分配明细(0否1是)
@@ -763,7 +771,7 @@ $(function() {
             mui("body").on('mdClick', '.redeemBtn', function() {
             	// 先判断登录是否超时以及账户冻结状态    司法验证过期弹出提示框
 				if(that.data.redeemClickFlag) {
-					that.data.redeemClickFlag = frozenAccount("buyFreeze", window.location.href,'','privateDetail_13')
+					that.data.redeemClickFlag = frozenAccount("saleFreeze", window.location.href,'','privateDetail_13')
 					if(!that.data.redeemClickFlag) { // 验证通过则跳转赎回页面
 						$.elasticLayer({
 				            id: "tip",

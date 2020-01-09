@@ -13,7 +13,7 @@ var data = {
 	"data":{
 		"buyFreeze":1,
 		"customerNo":468171,
-		"lawFreezeStatus":1,
+		"lawFreezeStatus":0,
 		"outdateFreezeStatus":1,
 		"saleFreeze":1
 	},

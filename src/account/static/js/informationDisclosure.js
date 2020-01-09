@@ -33,9 +33,7 @@ var prvMar = {
     },
     init: function() { //初始化函数
         var that = this;
-
         that.getReourceLabels(); // 获取标签
-
         that.events();
     },
     getReourceLabels: function() { // 获取标签
@@ -72,12 +70,10 @@ var prvMar = {
                     });
 
                     that.beforeFunc(); //拼模板，初始化左右滑动mui组件
-                    that.getData($('#scroll1')); //初始化第一屏
+                    that.initMui($('#scroll1')); //初始化第一屏
+                    // that.getData($('#scroll1'));
                 }
 
-            },
-            callbackFail: function(data) {
-                tipAction(data.msg);
             },
             callbackNoData: function() {
                 $('.without.noData').show();
@@ -85,6 +81,42 @@ var prvMar = {
             }
 		}]
         $.ajaxLoading(obj);
+    },
+    initMui: function($id) { //$id   就是滑动区域的 id 节点
+        var that = this;
+        w = $id.attr('id'), //获取节点的 id
+            s = '#' + w + ' .contentWrapper'; //id 拼接 查出content区域
+        mui.init({
+            pullRefresh: {
+                container: s,
+                up: {
+                    contentrefresh: '拼命加载中',
+                    contentnomore: '暂无更多内容', //可选，请求完毕若没有更多数据时显示的提醒内容；
+                    callback: function() {
+                        //执行ajax请求
+                        that.getData($id, this, 'more');
+
+                    }
+                }
+            }
+        });
+        mui.ready(function() { //init后需要执行ready函数，才能够初始化出来
+            //隐藏当前的加载中loading
+            if (!$id.hasClass('hasPullUp')) {
+                $id.find('.mui-pull-bottom-pocket').addClass('mui-hidden'); //上拉显示更多
+            }
+            mui(".mui-slider").slider(); //就是左右切换 可以滑动的  初始化
+            //显示loading
+            that.getElements.listLoading.show();
+            //这一句初始化并第一次执行mui上拉加载的callback函数
+            mui(s).pullRefresh().pullupLoading();
+            //为$id添加hasPullUp  class
+            $($id).addClass('hasPullUp');
+        });
+        //无缝滚动
+        /*setTimeout(function() {
+            
+        }, 1000)*/
     },
     beforeFunc: function() { //拼模板，初始化左右滑动mui组件
         var that = this,
@@ -96,7 +128,7 @@ var prvMar = {
         var source = $('#prvMar-template').html(),
             template = Handlebars.compile(source),
             list_html = template();
-
+        // debugger
         //将生成的模板内容存到that.list_template上
         that.setting.list_template = template;
 
@@ -136,14 +168,16 @@ var prvMar = {
                     return false;
                 }
                 //没有初始化，请求第一次数据
-                that.getData(t);
+                // that.getData(t);
+                that.initMui(t);
+
             }
         }
         $.tabScroll(obj);
 
         //设置切换区域的高度
         //计算节点高度并设置
-        var height = windowHeight - document.getElementById('scroll1').getBoundingClientRect().top;
+        var height = windowHeight - $(".nav-wrapper").height() - 1 - document.getElementById('scroll1').getBoundingClientRect().top;
         if (!$('.list').hasClass('setHeight')) {
             $('.list').height(height).addClass('setHeight');
         }
@@ -172,7 +206,8 @@ var prvMar = {
             callbackDone: function(json) {
                 var json = json.data;     
                 $.each(json, function(i, el) {
-                    el.name = el.fileName.substring(0, el.fileName.indexOf("】") + 1);
+                    el.name = el.fileName.substring(1, el.fileName.indexOf("】") + 1);
+                    el.names = el.fileName.substring(1, el.fileName.indexOf("】"));
                     el.marName = el.fileName.substring(el.fileName.indexOf("】") + 1);
                     if (el.fileName.indexOf(".pdf") != -1) {
                         el.line = true; //线上可预览

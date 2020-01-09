@@ -219,7 +219,6 @@ $(function() {
                 url: that.gV.siteUrlArr[that.gV.current_index], //调用第几个接口
                 data: that.gV.ajaxArr[that.gV.current_index], //传调用参数
                 needLogin: true,
-                needLoading: false,
                 callbackDone: function(json) {
                     console.log(json.data)
                     var jsonData = json.data.pageList,
@@ -254,7 +253,7 @@ $(function() {
                                 //第一页时
                                 if (that.listLength == 0) {
                                     //没有数据
-                                    $id.find('.list .contentWrapper li').html(that.getElements.noData.clone(false)).addClass('noCon');
+                                    $id.find('.mui-scroll .mui-table-view-cell').html(that.getElements.noData.clone(false)).addClass('noCon');
                                     $id.find('.noData').show();
 
                                     //隐藏loading，调试接口时需要去掉
@@ -267,6 +266,7 @@ $(function() {
                                     var index = $('#slider .tab-scroll-wrap .mui-active').index(),
                                         $list = $("#move_" + index + " .list");
                                     $list.height(that.highHeight).addClass('noMove');
+                                    debugger
                                     // $list.addClass('noMove');
 
                                     // if( $("#move_"+index+" .noData").length ){
@@ -306,7 +306,8 @@ $(function() {
                             //$('.list').each( function( i, el){
 
                             //判断当前ul高度
-                            var ulHeight = $list.find(".mui-table-view").height();
+                            debugger
+                            var ulHeight = $list.find(".mui-table-view").height() 
                             if (ulHeight < that.htmlHeight) {
 
                                 $list.height(that.highHeight).addClass('setHeight').addClass('noMove');
@@ -359,7 +360,8 @@ $(function() {
 
                     //没有数据
                     if(that.gV.ajaxArr[that.gV.current_index].pageNum == 1) {
-                        $id.find('.mui-scroll .list').html(that.getElements.noData.clone(false)).addClass('noCon');
+                        $id.find('.mui-scroll .mui-table-view-cell').html(that.getElements.noData.clone(false)).addClass('noCon');
+                        //$id.find('.mui-scroll .list').html(that.getElements.noData.clone(false)).addClass('noCon');
                         $id.find('.noData').show();
                     } 
 

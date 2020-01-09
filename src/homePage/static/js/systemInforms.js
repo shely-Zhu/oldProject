@@ -69,6 +69,7 @@ $(function() {
                             "mesType": that.gV.mesType
                         },                        
                         needDataEmpty: true,
+                        needLoading: false,
                         callbackDone: function(json) {     
                             var data = json.data.list;
                             if(that.gV.pageCurrent == 1 && data.length == 0) {
@@ -78,6 +79,7 @@ $(function() {
                                 def && def.resolve( that.dealData(data), that.gV.pageCurrent);
                                 that.gV.pageCurrent++;
                             }
+                            $(".netLoading").hide()
                         },
                         callbackNoData: function( json ){  
                             if(that.gV.pageCurrent == 1) {

@@ -37,6 +37,7 @@ var data = Mock.mock({
                 "allocationAmount":'100', // 配置金额
                 "allocationRatio":'0.1000',// 配置比例
                 "productType":'173',// 产品类型
+                "isPrivateSale":1, //私募产品在金服是否可售标识 1 私募可售 0 非私募可售
                 "subdivisionStrategy":'www',  // 产品类别
                 "sevenYearYield":'32',  // 七日年化收益率
             },{//产品列表
@@ -47,6 +48,7 @@ var data = Mock.mock({
                 "allocationAmount":'100', // 配置金额
                 "allocationRatio":'0.1000',// 配置比例
                 "productType":'173',// 产品类型
+                "isPrivateSale":1 ,//私募产品在金服是否可售标识 1 私募可售 0 非私募可售
                 "subdivisionStrategy":'www',  // 产品类别
                 "sevenYearYield":'32',  // 七日年化收益率
             },{//产品列表

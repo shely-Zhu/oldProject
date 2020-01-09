@@ -18,11 +18,12 @@
     @@include('@pathCommonCom/loading/listLoading.html')
      <section class="fundAccountDiagnosis container">
        @@include('@pathCommonViews/headBarConfig.html',{"pathName":"基金账户诊断"})
-         <div class="content">
+       @@include('@pathCommonCom/noData/noData.html', {"tipText": "暂无持仓"})
+       <div class="content" id="contentListBox">
              <div class="account-holdings content-item">
                  <p class="title-box">
                      <span class="title">账户持仓情况</span>
-                     <span class="more-data">展开全部持仓<span class="down"></span></span>
+                     <span class="more-data"><span class="txt">展开全部持仓</span><span class="down"></span></span>
                  </p>
                  <div id="holdingBox">
                      <!-- <div class="holding-item">
@@ -179,6 +180,24 @@
                 </div>
             </div>
             <div class="isRiskMatch_mask"></div>
+         </div>
+         <div id="noDataContent">
+            <div class="fund-allocation content-item">
+                <div class="content_tital">持仓产品后可获得定制个性化投资分析报告</div>
+                <div class="goUrl_list"><button>去浏览产品</button></div>
+                <div class="getReport noDatagetReport">获取深度诊断报告</div>
+           </div>
+           <div class="isRiskMatchBox">
+              <div class="isRiskMatchBox_contentBox">
+                <div class="headTital">尊敬的用户</div>
+                     <div class='isRiskMatchBox_header'>你选择的产品与您现在的风险承受能力相匹配</div>
+                     <div class="isRiskMatchBox_footer">
+                         <div class="isRiskMatchBox_match">明白了</div>
+                         <div class="isRiskMatchBox_noMatch"><button class="isRiskMatchBox_cancel">放弃购买</button> <button class="isRiskMatchResult">查看评测结果</button></div>
+                     </div>
+              </div>
+          </div>
+          <div class="isRiskMatch_mask"></div>
          </div>
      </section>
     

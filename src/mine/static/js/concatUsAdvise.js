@@ -1,12 +1,13 @@
 /**
 * 联系我们，意见反馈
 * @author chentiancheng 2019-11-14
+update 2020-01-08  chentiancheng
 */
 require('@pathCommonBase/base.js');
 require('@pathCommonJs/ajaxLoading.js');
 // require('@pathCommonJs/components/headBarConfig.js');
 var uploadFile = require('@pathCommonCom/uplaoderFile/concatUsAdviseUploaderFile.js')
-// var splitUrl = require('@pathCommonJs/components/splitUrl.js')();
+var splitUrl = require('@pathCommonJs/components/splitUrl.js')();
 // var generateTemplate = require('@pathCommonJsComBus/generateTemplate.js');
 $(function () {
     var concatUsAdvise = {
@@ -21,6 +22,9 @@ $(function () {
             $(".list").eq(0).hide()
             $('.listLoading').hide()
             uploadFile(that.asyncAll, that, 1); //插件初始化
+            if(splitUrl['hairHeight']){
+                $(".ishair").show()
+            }
             that.event()
             //初始化时隐藏加载
         },
@@ -65,14 +69,17 @@ $(function () {
                 callbackDone: function (json) {
                     $(".blueBgButton").removeClass("disable")
                     tipAction("  意见提交成功,感谢您的反馈")
-                    if (window.isAndroid) {
-                        //这个是安卓操作系统
-                        window.jsObj.backNative();
-                    }
-                    if (window.isIOS) {
-                        //这个是ios操作系统
-                        window.webkit.messageHandlers.backNative.postMessage('backNative');
-                    }
+                    setTimeout(function(){
+                        if (window.isAndroid) {
+                            //这个是安卓操作系统
+                            window.jsObj.backNative();
+                        }
+                        if (window.isIOS) {
+                            //这个是ios操作系统
+                            window.webkit.messageHandlers.backNative.postMessage('backNative');
+                        }
+                    },2000)
+                    
                 },
                 callbackFail: function(json) {
                     $(".blueBgButton").removeClass("disable")

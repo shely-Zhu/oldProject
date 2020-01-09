@@ -4,11 +4,12 @@
 @import url('@pathCommonLess/mui/resetMUI.less');
 @import url("@pathCommonLessCom/headBarConfig.less");
 body{
-    max-width: 7.5rem;
+    width: 100%;
     // background:@c005;
 }
 html{
-    height: 100%;   
+    height: 100%;
+    background:@c005;
 }
 .resultsWrap{
     width: 100%;
@@ -30,14 +31,14 @@ html{
             padding-left: 2.7rem;
             padding-top:1rem;
             img{
-                width:2.2rem;
-                // height:2.2rem;
+                width:1.8rem;
+                height:1.21rem;
             }
         }
         .succedText{
             width: 100%;
             text-align: center;
-            font-size:0.32rem;
+            font-size:0.28rem;
             font-family:PingFangSC-Regular,PingFang SC;
             font-weight:400;
             color:@272727;
@@ -150,7 +151,7 @@ html{
         .listContent{
             width: 100%;
             .listContentUl{
-                width: 95%;
+                width: 91%;
                 margin: 0 auto;
                 height: 1rem;
                 border-bottom: 0.01rem solid @c004;
@@ -207,9 +208,9 @@ html{
     }
     .over{
         position: absolute;
-        top: -0.7rem;
+        top: -0.8rem;
         right: 0.32rem;
-        z-index: 999;
+        z-index: 10000000;
         font-size:0.3rem;
         font-family:PingFangSC-Regular,PingFang SC;
         font-weight:400;
@@ -226,10 +227,11 @@ html{
         .photo{
             width: 100%;
             // height:2.2rem;
-            padding-top:1rem;
+            // padding-top:1rem;
+            padding:1rem 0;
             text-align: center;
             img{
-                width:2.2rem;
+                width:1.8rem;
                 // height:2.2rem;
                 display:inline-block;
             }
@@ -240,6 +242,7 @@ html{
                 font-family:PingFangSC-Regular,PingFang SC;
                 font-weight:400;
                 color:@272727;
+                margin-top: 0.2rem;
             }
         }
         .proessBox{
@@ -247,11 +250,12 @@ html{
             box-sizing: border-box;
             padding:0 0.3rem;
             overflow: hidden;
+            min-height: 1.4rem;
             .proess-img{
-                float: left;
+                //float: left;
                 width:0.36rem;
                 height:1.76rem ;
-                
+                position: absolute;
                 .proess-line{
                     width: 100%;
                     height: 0.34rem;
@@ -272,8 +276,10 @@ html{
                 }
             }
             .proess-title{
-                float: left;
-                width:6.54rem;
+               // float: left;
+                position: absolute;
+                left: 0.7rem;
+                width:6.46rem;
                 height:1.76rem ;
                 overflow: hidden;
                 padding-left:0.13rem;

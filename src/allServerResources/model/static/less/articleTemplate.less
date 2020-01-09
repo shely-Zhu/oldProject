@@ -3,18 +3,22 @@
 
 @import url("@pathInclude/css/mui.min.css");
 @import url('@pathCommonLess/mui/resetMUI.less');
-@import url("@pathCommonLess/reset.less");
+/* @import url("@pathCommonLess/reset.less"); */
 @import url("@pathCommonLess/color.less");
 
 @import url("@pathCommonLessCom/againEnter.less");
 @import url("@pathCommonLessCom/alertBox.less");
 @import url("@pathCommonLessCom/headBarConfig.less");
+@import url('@pathCommonLess/components/iconfont.less');
 
 /* 音频组件less */
 @import url("@pathCommonCom/audio/audio.less");
 
 body{
     background:@FFFFFF;
+}
+.hide {
+    display: none;
 }
 .btnButton{
     width: 100%;
@@ -49,7 +53,7 @@ body{
             background:@FFFFFF;
             width: 0.4rem;
             height:0.4rem;
-            position:absolute;
+            position: absolute;
             top:50%;
             left: 50%;
             margin:-0.2rem 0 0 -0.2rem;
@@ -81,7 +85,7 @@ body{
     }
 
     .videoPlayIcon{
-        position:absolute;
+        position: absolute;
         top:50%;
         left:50%;
         margin:-0.35rem 0 0 -0.35rem;

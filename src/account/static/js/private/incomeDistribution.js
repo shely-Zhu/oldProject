@@ -66,6 +66,7 @@ $(function() {
                 callback: function(def, t){
                     var obj = [{
                         url: site_url.yieldAssignList_api,
+                        needLoading: false,
                         data: {
                             "projectId":splitUrl()["projectId"] ,
                             "pageNo": that.gV.aP.pageNo, //非必须，默认为1

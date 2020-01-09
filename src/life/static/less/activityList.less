@@ -19,7 +19,9 @@
            } 
        } 
 }
-
+.activityListDataNoBox{
+    display:none;
+}
 #activitySearch{
     position: relative;
     width: 100%;
@@ -56,18 +58,18 @@
             top: 0;
         }
         .mui-placeholder{
-            font-size: 16px;
+            font-size: 14px;
             position: absolute;
             z-index: 1;
             top: 0;
             /* right: 0; */
             bottom: 0;
             /* left: 0; */
-            display: inline-block;
+            // display: inline-block;
             height: .6rem;
             line-height: .6rem;
             text-align: left;
-            color: #999;
+            color: #8d9a9c;
             border: 0;
             border-radius: 6px;
             background: 0 0;
@@ -367,4 +369,7 @@
     font-size: .4rem;
     width: 5rem;
     padding: 0.1rem .05rem;
+}
+.mui-table-view-cell.mui-active{
+    background: #f2f2f2;   
 }

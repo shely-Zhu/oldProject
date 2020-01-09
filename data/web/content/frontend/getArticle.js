@@ -9,14 +9,14 @@ var data = Mock.mock({
     "articleTimeStr": "11:34",//音频播放时间
     "author": "purpleZhao",//作者
     "buttonLabel": "立即转入现金管理",//按钮文案
-    "content": "<p><span style=\"color: rgb(34, 34, 34); font-family: Consolas, &#39;Lucida Console&#39;, monospace; font-size: 12px; line-height: normal; white-space: pre-wrap;\">富文本编辑区域内容</span></p >",
+    "content": "<p><img src='http://172.16.163.99:85/group2/M00/02/8D/rBCjRF35zPSAHSXOAF_MBbT3-sk084.png'/><img src='http://172.16.163.99:85/group2/M00/02/88/rBCjRF26j3-AaxveAAFKebrcAVE531.jpg'/></p>",
     "createId": "H023512",
     "createName": "",
     "createTime": 1573085434000,
     "createTimeStr": "2019-11-07 08:10:34",
     "externalUrl": "",
     "h5Title": "模板页面",//模板title
-    "h5Type": "3",//模板类型
+    "h5Type": "1",//模板类型
     "id": 8,
     "imageAttachId": 56,
     "imageAttachName": "",

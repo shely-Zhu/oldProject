@@ -31,6 +31,7 @@ $(function() {
         },
         init: function() {
             var that = this;
+            that.$e.listLoading.hide()
             that.beforeFunc();
             that.events();
         },
@@ -41,9 +42,9 @@ $(function() {
             //计算节点高度并设置
             var height = windowHeight - $('.fixedWrap').height();
 
-            if (!$('.list .contentWrapper').hasClass('setHeight')) {
-                $('.list, .contentWrapper').height(height).addClass('setHeight');
-            }
+            // if (!$('.list .contentWrapper').hasClass('setHeight')) {
+            //     $('.list, .contentWrapper').height(height).addClass('setHeight');
+            // }
         },
         // 初始化mui的上拉加载
         initMui: function() {
@@ -152,9 +153,6 @@ $(function() {
                     //隐藏回到顶部按钮
                     $('.goTopBtn').hide();
 
-                },
-                callbackFail: function(json) {
-                    tipAction(json.msg);
                 }
             }]
             $.ajaxLoading(obj);

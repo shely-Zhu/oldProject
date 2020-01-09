@@ -26,7 +26,7 @@ $(function () {
         //全局变量
         gV: {
             pageNum: 1, //当前页码，默认为1
-            pageSize: 10,
+            pageSize: 20,
             mask: null,
             searchTitleList: [{
                 title: '全部',
@@ -182,6 +182,8 @@ $(function () {
                                 e.tradeApplyStatusName = '待确认'
                             } else if (e.tradeApplyStatus == 3) {
                                 e.tradeApplyStatusName = '已撤单'
+                            }else if(e.tradeApplyStatus == 5){
+                                e.tradeApplyStatusName = '待确认'
                             }
 
                             e.sta = e.tradeApplyStatus == 1 ? 1 : 0;
@@ -213,7 +215,7 @@ $(function () {
                         that.gV.pageNum++;
                         // 将交易记录列表插入到页面上
                         generateTemplate(data, that.$e.recordListWraperBoxId, that.$e.recordListTemplateId);
-                        alwaysAjax($('.mui-table-view-cell'), ".contentWrapper", 100);
+                        // alwaysAjax($('#list .mui-table-view-cell'), "#list .contentWrapper", 2);
                     }, 200)
                 },
                 callbackFail: function (json) {
@@ -269,11 +271,6 @@ $(function () {
 
 
 
-                },
-                callbackFail: function (json) {  //失败后执行的函数
-
-                    tipAction(json.msg);
-
                 }
             }];
             $.ajaxLoading(obj);
@@ -282,6 +279,7 @@ $(function () {
         events: function() {
             var that = this;
             // 筛选分类的点击事件
+            alwaysAjax($('.contentWrapper'));
             mui("body").on('mdClick', '.searchItem', function () {
                 if ($(this).is('.searchItemActive')) {
                     $(this).removeClass("searchItemActive").siblings('.searchItem').removeClass('searchItemActive');

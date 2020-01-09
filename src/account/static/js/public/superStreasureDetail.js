@@ -8,8 +8,10 @@ require('@pathCommonBase/base.js');
 
 // require('@pathCommonJs/components/headBarConfig.js');
 require('@pathCommonJs/ajaxLoading.js');
+require('@pathCommonCom/elasticLayer/elasticLayer/elasticLayer.js');
 var splitUrl = require('@pathCommonJs/components/splitUrl.js')();
 var generateTemplate = require('@pathCommonJsComBus/generateTemplate.js');
+var frozenAccount = require('@pathCommonJs/components/frozenAccount.js');
 
 
 
@@ -35,7 +37,8 @@ $(function() {
                 sixMonth: {},
                 oneYear: {},
                 sinceNow: {}
-            }
+            },
+            symboltype : 'none',	//echarts 节点样式
         },
         init: function() {
             var that = this;
@@ -49,6 +52,10 @@ $(function() {
         },
         drawLine: function(data) {
             var that = this;
+            //判断有多少数据 只有一个值时 symbol 为circle 多组值时 symbol为 none
+			if(data.profitThoudDate.length == 1 ){
+				that.gL.symboltype = 'circle'
+			}	
             var xAxisData = data.profitThoudDate,
                 seriesData = data.sevenIncomeRate,
                 maxNum = data.sevenIncomeRate[0],
@@ -176,7 +183,7 @@ $(function() {
                     itemStyle: {
                         show: false
                     },
-                    symbol: 'none',
+                    symbol: that.gL.symboltype,
                     areaStyle: {
                         normal: {
                             color: {
@@ -222,6 +229,7 @@ $(function() {
         },
         //获取初始数据
         getDataReq: function() { //数据接口
+
             var that = this;
             var obj = [{
                 url: site_url.getAssetsCashInfo_api,
@@ -248,7 +256,7 @@ $(function() {
                     $("#HeadBarpathName").text(data.fundName ? data.fundName : "--")
                     $(".titleTwo").text(data.fundCode ? data.fundCode : "--")
                     $(".totalM").css({ "background": "linear-gradient(360deg, rgba(186,140,112,1) 0%, rgba(244,210,192,1) 100%)", "-webkit-background-clip": "text", "-webkit-text-fill-color": "transparent" })
-                }
+                },
             }];
             $.ajaxLoading(obj);
         },
@@ -450,13 +458,27 @@ $(function() {
                 })
                 //点击转出跳转
             mui("body").on('mdClick', '.rollOutBtn', function(e) {
+
+                // 账户过期弹窗
+                var result = frozenAccount("saleFreeze", window.location.href, false);
+                if( !result ) {
                     window.location.href = site_url.pofCashTransformOut_url + '?fundCode=' + that.gL.fundCode + '&productName=' + new Base64().encode(that.gL.fundName);
+                };
+
                 }, {
                     'htmdEvt': 'superStreasureDetail_2'
                 })
                 //点击转入跳转
             mui("body").on('mdClick', '.shiftToBtn', function(e) {
-                      that.getConditionsOfOrder(that.gL.fundCode)
+
+                // 账户过期弹窗
+                var result = frozenAccount("buyFreeze", window.location.href, false);
+                if(!result) {
+                    that.getConditionsOfOrder(that.gL.fundCode)
+                }
+
+
+
           //      if (that.gL.accountType === 0 || that.gL.accountType === 2) {
           //          tipAction('暂不支持机构客户进行交易');
           //      } else {

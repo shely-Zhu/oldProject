@@ -66,7 +66,7 @@ $(function() {
                             var _this = this
                             setTimeout(function() {
                                 that.getData(_this);
-                            }, 100)
+                            }, 200)
                         }
                     }
                 }
@@ -74,9 +74,9 @@ $(function() {
             //init后需要执行ready函数，才能够初始化出来
             mui.ready(function() {
                 //隐藏当前的加载中loading
-                if (!$('.activityList').hasClass('hasPullUp')) {
+                 if (!$('.activityList').hasClass('hasPullUp')) {
                     $('.activityList').find('.mui-pull-bottom-pocket').addClass('mui-hidden');
-                }
+                 }
                 //这一句初始化并第一次执行mui上拉加载的callback函数
                 mui('.contentWrapper').pullRefresh().pullupLoading();
                 //为$id添加hasPullUp  class
@@ -86,12 +86,13 @@ $(function() {
         //有数据获取列表
         getData: function(t) {
             var that = this;
+            var cityName =$('#locationCity').html()=='全部' ? '' : $('#locationCity').html();
             var obj = [{ // 系统调仓记录列表
                 url: site_url.queryFinancialer_api,
                 // url:'http://172.16.187.164:8081/web/marketing/activity/getActivitiesList',
                 data: {
                     code: $.trim($('.mui-input-clear').val().replace(/'/g, '')),
-                    cityName: $('#locationCity').html(),
+                    cityName:cityName ,
                     "pageNum": that.gV.startPage, //非必须，默认为1
                     "pageSize": that.gV.pageSize //非必须，默认为10
                 },
@@ -102,7 +103,8 @@ $(function() {
                     console.log('我是内容', json);
                     var data = json.data.financialerList;
                     console.log(data)
-                    if (json.data.matchedFinancialer == '0') {
+                    that.$e.listLoading.hide();
+                    if (json.data.matchedFinancialer == '0' && that.gV.startPage == 1) {
                         t.endPullupToRefresh(true);
                         that.$e.activityListDataBox.hide();
                         that.$e.activityListDataNoBox.show();
@@ -114,27 +116,40 @@ $(function() {
                     that.$e.activityListDataNoBox.hide();
                     setTimeout(function() {
                         if (data.length < that.gV.pageSize) {
-                            t.endPullupToRefresh(true);
+                            if (that.gV.startPage == 1) { //第一页时
+                                if (data.length == 0) {
+                                    // 暂无数据显示
+                                    that.getElements.noData.show();
+                                    return false;
+
+                                } else { // 没有更多数据了
+                                    t.endPullupToRefresh(true);
+                                }
+                            } else {
+                                //其他页-没有更多数据
+                                t.endPullupToRefresh(true);
+                            }
                         } else { // 还有更多数据
-                            mui('.contentWrapper').pullRefresh().refresh(true);
                             t.endPullupToRefresh(false);
                         }
                         // 页面++
                         that.gV.startPage++;
                         //去掉mui-pull-bottom-pocket的mui-hidden
                         $('.contentWrapper').find('.mui-pull-bottom-pocket').removeClass('mui-hidden');
-
+                        $.each(data,function(i,el) {
+                            el.isPass == "Y"? el.isPass = 1 : el.isPass = 0
+                        })
                         // 将列表插入到页面上
                         generateTemplate(data, that.$e.recordList, that.$e.starFinancialPlannerListTemplateId)
                         //无缝滚动
-                        alwaysAjax($(".recordList"))
+                        alwaysAjax($(".recordList"), null, 2);
                         $(".lazyload").lazyload()
 
                     }, 200)
 
                 },
                 callbackFail: function(json) {
-
+                    that.$e.listLoading.hide();
                 },
                 callbackNoData: function(json) {
                     that.$e.listLoading.hide();
@@ -145,6 +160,9 @@ $(function() {
         //推荐列表
         getRecommend: function(data) {
             var that = this;
+            $('.activityNoListBox').show()
+            $('.activityNoList').show()
+
             var topHeitgh = $('#activitySearch').height();
             var noBox = $('.activityNoListBox').height();
             var noListM = parseInt(that.getStyle($('.activityNoList')[0], 'marginTop'));
@@ -294,10 +312,11 @@ $(function() {
                     var code = data.cityCode;
                     var name = data.cityName;
                     if (name.split('').reverse().join('').charAt(0) == '市') {
-                        name = name.substring(0, name.length - 1)
+                        name = name?name.substring(0, name.length - 1):"全部"
                     }
+                    name=name?name:"全部"
                     var parentid = data.provinceCode;
-                    $('#locationCity').text(name);
+                    $('#locationCity').html(name);
                     $('#locationCity').attr({
                         'data-code': code,
                         'data-parentid': parentid
@@ -328,6 +347,8 @@ $(function() {
                 var txt = $(this).text();
                 var code = $(this).attr('data-code');
                 var parentId = $(this).attr('data-parentId');
+                $('.activityNoListBox').hide()
+                $('.activityNoList').hide()
                 $('#activityDataBox').show();
                 $('#cityListBox').hide();
                 $('#loading').show();

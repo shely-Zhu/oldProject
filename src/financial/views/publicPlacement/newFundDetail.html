@@ -17,7 +17,7 @@
 	<!--加载图标-->
 	@@include('@pathCommonCom/loading/listLoading.html')
 	<div class="newFundDetail">
-		@@include('@pathCommonViews/headBarConfig.html',{"pathName":"","bgColors":"#475A95,#475A95","showType":"1","serviceType":"1"})
+		@@include('@pathCommonViews/headBarConfig.html',{"pathName":"","bgColors":"#22346D,#031349","showType":"1","serviceType":"1"})
 		<div class="newFundDetailTitle">
 			<div class="subscription">认购期：<span class="subscriptionDate"></span> 距离认购期结束还剩</div>
 			<div class="subscriptionTime"></div>
@@ -80,15 +80,15 @@
 			<div class="moduleName">产品档案</div>
 			<div class="contentWrap">
 				<ul class="mui-row">
-					<li class="mui-col-sm-4 mui-col-xs-4  mui-row-second">基金档案</li>
+					<li class="mui-col-sm-4 mui-col-xs-4 fundListName">基金档案</li>
 					<li class="changgeRight mui-col-sm-8 mui-col-xs-8 fundFile"><span>概括、公告</span><span class="iconfont">&#xe636;</span></li>
 				</ul>
 				<ul class="mui-row">
-					<li class="mui-col-sm-4 mui-col-xs-4  mui-row-second">基金经理</li>
+					<li class="mui-col-sm-4 mui-col-xs-4 fundListName">基金经理</li>
 					<li class="changgeRight mui-col-sm-8 mui-col-xs-8 fundManager"><span class="fundManagerTxt"></span><span class="iconfont">&#xe636;</span></li>
 				</ul>
 				<ul class="mui-row">
-					<li class="mui-col-sm-4 mui-col-xs-4  mui-row-second">基金公司</li>
+					<li class="mui-col-sm-4 mui-col-xs-4 fundListName">基金公司</li>
 					<li class="changgeRight mui-col-sm-8 mui-col-xs-8 fundCompany"><span class="fundCompanyTxt"></span><span class="iconfont">&#xe636;</span></li>
 				</ul>
 			</div>
@@ -102,9 +102,10 @@
 
 		<div class="isRiskMatchBox">
 			<div class="isRiskMatchBox_contentBox">
+				<div class="headTital">尊敬的用户</div>
 				   <div class='isRiskMatchBox_header'>你选择的产品与您现在的风险承受能力相匹配</div>
 				   <div class="isRiskMatchBox_footer">
-					   <div class="isRiskMatchBox_match">确定</div>
+					   <div class="isRiskMatchBox_match">明白了</div>
 					   <div class="isRiskMatchBox_noMatch"><button class="isRiskMatchBox_cancel">放弃购买</button> <button class="isRiskMatchResult">查看评测结果</button></div>
 				   </div>
 			</div>

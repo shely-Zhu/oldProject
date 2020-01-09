@@ -6,7 +6,6 @@
 
 @import url("@pathCommonLessCom/headBarConfig.less");
 
-
 .container{
     width: 100%;
     height:100%;
@@ -56,8 +55,8 @@
                 display: flex;
                 justify-content:space-between;
                 .posioneleft{
-                    font-size: .22rem;
-                    color: @4b1d00;
+                    font-size: .24rem;
+                    color: @6C4517;
                     margin-top: .5rem;
                     margin-left: .32rem;
                     line-height: .5rem;
@@ -75,9 +74,10 @@
                     span{
                         position: relative;
                         left:.1rem;
+                        top: -.02rem;
                     }
                     .iconone{
-                        font-size: .14rem;
+                        font-size: .3rem;
                         color: @c005;
                     }
                 }
@@ -117,8 +117,8 @@
                     }
                 }
                 .positworight2{
-                    font-size: .22rem;
-                    color: @4b1d00;
+                    font-size: .24rem;
+                    color: @6C4517;
                     font-weight: bold;
                     margin-right: .34rem;
                     margin-top: .25rem;
@@ -140,7 +140,7 @@
                 display: flex;
                 justify-content:flex-end ;
                 font-size: .22rem;
-                color: @4b1d00;
+                color: @6C4517;
                 .posifourright{
                     font-weight: bold;
                     margin-right: .34rem;
@@ -188,8 +188,8 @@
                 }
             }
             .litwo{
-                font-size: .22rem;
-                color: @7e7e7e;
+                font-size: .24rem;
+                color: @9B9B9B;
                 display: flex;
                 justify-content:space-between;
                 // margin: 0 .4rem;
@@ -197,11 +197,17 @@
                 // padding-right: .4rem;
                 padding-bottom: .2rem;
                 border-bottom: 1px solid @eaebef;
+                align-items:flex-end;
             }
         }
     }
     .mui-table-view{
-        background:@c005;
+        background:#FFFFFF;
+
+        //重置mui的点击底色变色的样式
+        .mui-table-view-cell.mui-active{
+            background-color: #fff;
+        }
     }
     // .blackBg{
     //     width: 2rem!important;
@@ -213,4 +219,8 @@
     //     top: -1.6rem;
     
     // }
+}
+
+.mui-table-view-cell{
+    padding: 0 0.4rem;
 }

@@ -45,8 +45,6 @@
             <p class="tipCon">待确认资产是指您的在途资产，产品成立后将归入已确认资产。</p>
             <div class="buttonOne">我明白了</div>
         </div>
-        <!-- 加载中loading -->
-        @@include('@pathNewCommonViews/loading/listLoading.html')
         <!-- 暂无数据 -->
         @@include('@pathNewCommonViews/noDataImg.html',{"tipText":"暂无数据"})
     </section>
@@ -74,7 +72,8 @@
         <div class="datalist" fundCode="{{fundCode}}">
             <div class="proName clearfix">
                 <span class="proNameBefore"></span>
-                <p class="proNameCon">{{projectName}}</p>
+                <span class="proNameCon fl">{{projectName}}</span>
+                <span class="iconfont fr">&#xe636;</span>
                 <!-- <span class="proNameAfter"></span> -->
             </div>
             <div class="haveFundCon clearfix">
@@ -101,6 +100,7 @@
             <div class="proName clearfix">
                 <span class="proNameBefore"></span>
                 <p class="proNameCon">{{projectName}}</p>
+                <span class="iconfont fr">&#xe636;</span>
                 <!-- <span class="proNameAfter"></span> -->
             </div>
             <div class="fundCon clearfix">

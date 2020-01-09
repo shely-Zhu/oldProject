@@ -62,7 +62,7 @@
     position: absolute;
     bottom: 0;
     right: 0;
-    z-index: 1000;
+    z-index:1000000;
     
   }
   .hopperCon{
@@ -160,7 +160,7 @@
       p{
         color: @9B9B9B;
         font-size: 0.24rem;
-        margin-bottom: 0.15rem;
+        margin-bottom: 0.1rem;
       }
       span{
         font-size: 0.26rem;
@@ -248,11 +248,11 @@
       }
       .cancelBtn{
         width:auto;
-        height:0.46rem;
+        height:0.5rem;
         border-radius:0.25rem;
         float: right;
         font-size: 0.24rem;
-        line-height: 0.46rem;
+        line-height: 0.5rem;
         margin-right: 0.1rem;
         padding: 0 0.3rem;
       }
@@ -329,4 +329,15 @@
       line-height: 1rem;
   }
   
+}
+.covering{
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background:@c009;
+  opacity: 0.7;
+  z-index: 1000;
+  display: none;
 }

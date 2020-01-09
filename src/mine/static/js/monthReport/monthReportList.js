@@ -10,7 +10,7 @@ require('@pathCommonJs/ajaxLoading.js');
 
 var splitUrl = require('@pathCommonJs/components/splitUrl.js')();
 var generateTemplate = require('@pathCommonJsComBus/generateTemplate.js');
-require('@pathCommonCom/pullRefresh/pullRefresh.js');
+// require('@pathCommonCom/pullRefresh/pullRefresh.js');
 
 
 $(function() {
@@ -31,27 +31,22 @@ $(function() {
 		},
 		init: function() {
 			var that = this;
-			that.initMui();
-			//that.getUserInfo();
+			that.getUserInfo();
 			that.events();
 		},
 		getUserInfo:function(){
 			var that = this;
 			var Obj=[{ // 是否新手账号
-				url: site_url.user_api,
-				data: {
-					hmac: "", //预留的加密信息
-					params: { //请求的参数信息
-					}
-				},
+				url: site_url.queryUserBaseInfo_api,
+				data: {},
 				needLogin: true, //判断登录是否过期
 				callbackDone: function(json) { //成功后执行的函数
 					var jsonData = json.data;
 
 					//判断已成交客户
-					if( jsonData.newComer == 0){
+					if( jsonData.newComer == '0'){
 						//已成交客户
-						that.initMui();
+						that.queryMonthlyReport();
 					}
 					else{
 						$('.noneList').show();
@@ -64,54 +59,46 @@ $(function() {
 			$.ajaxLoading(Obj);
 
 		},
-		//初始化mui的上拉加载
-		initMui: function() {
+		
+		// 月度报告列表页数据的获取
+		queryMonthlyReport:function(){
 			var that = this;
+			var Obj=[{ // 是否新手账号
+				url: site_url.queryMonthlyReport_api,
+				data: {},
+				needDataEmpty: true,
+				needLogin: true, //判断登录是否过期
+				callbackDone: function(json) { //成功后执行的函数
+					var jsonData = json.data;
+					if(jsonData.length == 0){
+						$(".list").css("display", "none")
+						that.$e.noData.show();
+						$('body').css('background','#ffffff');
+					}
+					else{
+                        var template = Handlebars.compile($("#adjustment-template").html());
+						//匹配json内容
+						var html = template(jsonData);
+						//输入模板
+						$('.list').html(html);
 
-			var height = windowHeight;
-			if (!$('.list').hasClass('setHeight')) {
-				$('.list').height(height).addClass('setHeight');
-			}
-
-			$.pullRefresh({
-                wrapper: $('.list'),
-                class: 'listItem',
-                template: that.$e.adjustmentTemp, 
-                pageSize: that.gV.pageSize,
-                callback: function(def, t){
-                    var obj = [{
-                        url: site_url.queryMonthlyReport_api,
-						data: {},
-						needDataEmpty: true,
-                        callbackDone: function(json) {     
-                            var data = json.data;
-                            if(that.gV.pageCurrent == 1 && data.length == 0) {
-                                $(".list").css("display", "none")
-								that.$e.noData.show();
-								$('body').css('background','#ffffff');
-                            } else {
-								$('body').css('background','transparent');
-                                def && def.resolve( data, that.gV.pageCurrent);
-                                // 第一个调仓记录默认展开
-                                $('.list').find('ul').eq(0).find('.mui-collapse').addClass('mui-active');
-                                that.gV.pageCurrent++;
-                            }
-                        },
-                        callbackNoData: function( json ){  
-                            if(that.gV.pageCurrent == 1) {
-                                $(".list").css("display", "none")
-                            }
-                            def && def.reject( json, that.gV.pageCurrent );
-                        },
-                        callbackFail: function(json) {
-                            def && def.reject( json, that.gV.pageCurrent );
-                        },
-                    }];
-                    $.ajaxLoading(obj); 
+                        // 第一个调仓记录默认展开
+                        $('.list').find('ul').eq(0).find('.latestAdjustment').css("display", "block");
+						// 第一个调仓记录箭头更换样式   
+						$('.list').find('ul').eq(0).find(".spread").html('<span class="iconfont">&#xe62a;</span>')
+					}
+					
+				},
+				callbackNoData: function( json ){  
+                    if(that.gV.pageCurrent == 1) {
+                        $(".list").css("display", "none")
+                    }
                 }
-            })
-
+			}];
+			$.ajaxLoading(Obj);
 		},
+
+
 		events: function() {
 			var that = this;
 
@@ -120,7 +107,7 @@ $(function() {
 				window.location.href = site_url.monthReportDetail_url + '?reportId=' + $this.attr('reportId');
 				
 			},{
-				'htmdEvt': 'monthReportList_01'
+			'htmdEvt': 'monthReportList_01'
 			})
 
 			mui("body").on('mdClick', '.productBtn', function() {
@@ -128,6 +115,23 @@ $(function() {
 				window.location.href = site_url.wealthIndex_url;
 			},{
 				'htmdEvt': 'monthReportList_02'
+			})
+
+			mui("body").on('mdClick', '.spread', function() {
+				var $this = $(this);
+				if($this.parent().find('.latestAdjustment').css('display') == 'none'){
+					$this.parent().find('.latestAdjustment').show();
+					$this.html('<span class="iconfont">&#xe62a;</span>')
+
+				}else{
+					$this.parent().find('.latestAdjustment').hide();
+					$this.html('<span class="iconfont">&#xe609;</span>')
+				}
+
+
+				
+			},{
+				'htmdEvt': 'monthReportList_03'
 			})
 
 		}
