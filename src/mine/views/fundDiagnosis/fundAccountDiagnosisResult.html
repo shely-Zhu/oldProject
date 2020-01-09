@@ -262,8 +262,10 @@
         <li checkStatus = {{checkStatu}} fundCode={{fundCode}} purchaseDate={{purchaseDate}} purchaseAmount={{purchaseAmount}} diagnoseApplyId={{diagnoseApplyId}}>
               {{#if checkStatu}}
                 <input type="checkbox" checked   listId = {{id}}>
+                	<!--<span class='iconfont checked'>&#xe609;</span>-->
                {{else}} 
                <input type="checkbox" listId = {{id}}>
+               		<!--<span class='iconfont unchecked'>&#xe609;</span>-->
                {{/if}}
                 <span class="fundCodeListItem">
                     <span class="fundCodeListItem_tital">基金代码</span>
