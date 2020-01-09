@@ -172,6 +172,7 @@ $(function() {
                         // that.gV.content[belong] = resData;
                         $('.tabImg').hide();
                         $('.tabImg').eq(index).show().html(resData.content);
+                        window.scrollTo(0, 0);
 
                         // t.addClass('hasPullUp').find('.img').html(resData.content);
 
@@ -188,6 +189,7 @@ $(function() {
                 //有数据的时候直接显示
                 $('.tabImg').hide();
                 $('.tabImg').eq(index).show();
+                window.scrollTo(0, 0);
             }
             //          num = num ? num : splitUrl['type'] * 1;//首次进来请求用路径中的articleBelong，点击的时候使用对应的articleBelong。
             
