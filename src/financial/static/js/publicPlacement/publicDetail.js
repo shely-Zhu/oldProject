@@ -9,7 +9,6 @@
 
 require('@pathCommonBase/base.js');
 require('@pathCommonJs/ajaxLoading.js');
-var authenticationProcess = require('@pathCommonJs/components/authenticationProcess.js');
 var generateTemplate = require('@pathCommonJsComBus/generateTemplate.js');
 var splitUrl = require('@pathCommonJs/components/splitUrl.js')();
 var frozenAccount = require('@pathCommonJs/components/frozenAccount.js');
@@ -27,6 +26,7 @@ getQueryString = function (name) {
     var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)");
     var r = window.location.search.substr(1).match(reg);
     if (r != null) return unescape(r[2]); return '';
+}
 $(function () {
     var fundCode
     var regard = {
@@ -76,8 +76,8 @@ $(function () {
             var that = this;
             that.getData(); // 获取基金详情
 
-            that.getUserInfo();  //获取用户类型
-            that.getUserInfo_1(); //用户身份信息
+            /*that.getUserInfo();  //获取用户类型
+            that.getUserInfo_1(); //用户身份信息*/
             that.events();
             // that.getData1(); // 查询基金的历史收益（货币基金）/历史净值（普通基金）
             $('.tips').hide()
@@ -455,10 +455,9 @@ $(function () {
 
             // 定投
             mui("body").on('mdClick', ".footer .fixed_investement_btn", function (e) {
+                that.getUserInfo();
+                that.getUserInfo_1();
                 //定投一键认证
-                if(!that.gV.fixedInvestementBtnStatu){
-                    return
-                }
                 if(that.gV.accountType === 0 || that.gV.accountType === 2){
                     tipAction('暂不支持机构客户进行交易');
                 }else{

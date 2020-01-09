@@ -35,17 +35,19 @@ $(function() {
             var that = this;
 
              // $("body").height( $(window).height() );
+             
+            // $('html').height( window.screen.height ).width( window.screen.width );
 
-            $('body').css({
-                position: 'fixed',
-                '-webkit-overflow-scrolling': 'auto',
-                top: 0,
-                right:0,
-                left: 0,
-                bottom:0,
-                height: '100%',
-                width: '100%'
-            })
+            // $('body').css({
+            //     position: 'fixed',
+            //     '-webkit-overflow-scrolling': 'auto',
+            //     top: 0,
+            //     right:0,
+            //     left: 0,
+            //     bottom:0,
+            //     height: '100%',
+            //     width: '100%'
+            // })
 
             // var height = windowHeight - $('.tabImg')[0].getBoundingClientRect().top;
             
@@ -96,24 +98,25 @@ $(function() {
                     //定位到第二个
                     $('.tabBar .tabA').eq( that.gV.sortType ).addClass('active');
 
-                    $('.tabBar .tabA').eq(3).html(  window.screen.height + ' ' + window.screen.availHeight  );
+                    // $('.tabBar .tabA').eq(3).html(  window.screen.height + ' ' + window.screen.availHeight  );
 
                     
 
-                    $('.tabBar .tabA.active').html( $('body').height() + ' ' +  document.documentElement.clientHeight  );
+                    // $('.tabBar .tabA.active').html( $('body').height() + ' ' +  document.documentElement.clientHeight  );
 
-                    $('.tabBar .tabA.active').next().html( windowHeight + ' ' + window.innerHeight);
+                    // $('.tabBar .tabA.active').next().html( windowHeight + ' ' + window.innerHeight);
 
-                    $('.tabBar .tabA.active').next().next().html( $('.tabImg')[0].getBoundingClientRect().top);
+                    // $('.tabBar .tabA.active').next().next().html( $('.tabImg')[0].getBoundingClientRect().top);
 
-                    var height = window.screen.height - $('.tabImg')[0].getBoundingClientRect().top;
+                    // var height = $('body').height() - $('.tabImg')[0].getBoundingClientRect().top;
 
+                    // $('.tabImg').html()
                     
-                    $('.tabImg').height( '<div>'+window.screen.height+'</div>' + '<div>'+document.documentElement.clientHeight+'</div>' + '<div>'+$('body').height()+'</div>' + height);
+                    // $('.tabImg').html( '<div>'+height+'</div>' + '<div>'+window.screen.height+'</div>' + '<div>'+document.documentElement.clientHeight+'</div>' + '<div>'+$('body').height()+'</div>' + wrap_html);
 
                     // $('.list').height(height);
                     
-                    $('.tabImg').height(height);
+                    // $('.tabImg').height(height);
 
                     // $.each( data, function(i, el){
                     //     that.setting.navList.push({
