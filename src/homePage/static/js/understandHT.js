@@ -18,7 +18,7 @@ $(function() {
         //全局变量
         gV: {
             articleBelong: splitUrl['articleBelong'],
-            sortType: splitUrl['type'] * 1,
+            sortType: splitUrl['type'] ? splitUrl['type'] * 1 : 0,
             belong: ['101', '102', '103', '104'],  //按导航顺序从左到右的位置，写死的
             // content: {} , //保存各个tab请求过来的数据
         },
@@ -44,14 +44,12 @@ $(function() {
                 left: 0,
                 bottom:0,
                 height: '100%',
-                windth: '100%'
+                width: '100%'
             })
 
-            var height = windowHeight - $('.tabImg')[0].getBoundingClientRect().top;
-
-            // $('.list').height(height);
+            // var height = windowHeight - $('.tabImg')[0].getBoundingClientRect().top;
             
-            $('.tabImg').height(height);
+            
 
 
 
@@ -98,7 +96,19 @@ $(function() {
                     //定位到第二个
                     $('.tabBar .tabA').eq( that.gV.sortType ).addClass('active');
 
+                    $('.tabBar .tabA.active').html( $('body').height());
 
+                    $('.tabBar .tabA.active').next().html( windowHeight);
+
+                    $('.tabBar .tabA.active').next().next().html( $('.tabImg')[0].getBoundingClientRect().top);
+
+                    var height = $('body').height() - $('.tabImg')[0].getBoundingClientRect().top;
+
+                    
+
+                    // $('.list').height(height);
+                    
+                    $('.tabImg').height(height);
 
                     // $.each( data, function(i, el){
                     //     that.setting.navList.push({
