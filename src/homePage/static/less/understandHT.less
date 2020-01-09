@@ -6,39 +6,100 @@
 @import url("@pathCommonLessCom/alertBox.less");
 @import url("@pathCommonLessCom/headBarConfig.less");
 
+
 //@body_center_height: calc(100% - 216px);
 
 .HeadBarConfigBox {
 	background:linear-gradient(116deg,rgba(56,74,129,1) 0%,rgba(42,60,112,1) 100%)!important;
 }
+.zhanweifu{
+	display: block !important;
+}
 .mui-slider .mui-segmented-control.mui-segmented-control-inverted~.mui-slider-group .mui-slider-item {
 	border: none!important;
 }
 .borderBottom {
-  	display: block;
+  	display: none;
     width: 1.06rem;
     height: 0.03rem;
     background:linear-gradient(135deg,rgba(247,208,164,1) 0%,rgba(241,198,154,1) 100%);
 	border-radius:1px;
 	margin: 0 auto;
 }
-#tabHT {
-	//margin-top: 1.28rem;
-	position: fixed;
-	top: 1.28rem;
-	.mui-slider-indicator {
+
+.muiSlider{
+	// position: fixed;
+	// top: 1.28rem;
+	// left: 0;
+	// right: 0;
+
+	.tabBar{
 		height: .88rem;
 		background:linear-gradient(116deg,rgba(56,74,129,1) 0%,rgba(42,60,112,1) 100%)!important;
-		.mui-control-item {
+		line-height: 34px;
+
+		.tabA{
 			color: @c005;
-			line-height: 34px;
+			text-align: center;
+			font-size: .28rem;
 		}
-		.mui-active {
+
+		.active {
 			color: #F7D0A4;
+
+			.borderBottom{
+				display: block;
+			}
+
+			// &::after{
+			// 	display: block;
+			//     width: 1.06rem;
+			//     height: 0.03rem;
+			//     background:linear-gradient(135deg,rgba(247,208,164,1) 0%,rgba(241,198,154,1) 100%);
+			// 	border-radius:1px;
+			// 	margin: 0 auto;
+			// }
 		}
 	}
+
+	.tabImg{
+		overflow-y: scroll;
+	}
+
+	// .tab-scroll-action{
+
+	// 	.mui-control-content{
+
+						
+	// 		.mui-scroll-wrapper{
+	// 			overflow-y: scroll; 
+
+	// 		}
+
+	// 	}
+
+		
+	// }
 }
-#drapUpWrapper .mui-slider-item{
-    height:calc(~"100vh - 20px");
-    overflow: scroll;
-}
+    
+
+// #tabHT {
+// 	//margin-top: 1.28rem;
+// 	position: fixed;
+// 	top: 1.28rem;
+// 	.mui-slider-indicator {
+// 		height: .88rem;
+// 		background:linear-gradient(116deg,rgba(56,74,129,1) 0%,rgba(42,60,112,1) 100%)!important;
+// 		.mui-control-item {
+// 			color: @c005;
+// 			line-height: 34px;
+// 		}
+// 		.mui-active {
+// 			color: #F7D0A4;
+// 		}
+// 	}
+// }
+// #drapUpWrapper .mui-slider-item{
+//     height:calc(~"100vh - 20px");
+//     overflow: scroll;
+// }
