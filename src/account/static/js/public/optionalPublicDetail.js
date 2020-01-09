@@ -627,7 +627,7 @@ $(function() {
                                 $(".isRiskMatchResult").attr("type","overdue")
                                 $(".isRiskMatchBox_header").html("您的证件已过期，补充证件信息后才可以继续交易")
                             }*/
-							//that.data.realLi.eq(0).show()
+							that.data.realLi.eq(0).show()
                         }
 						if(jsonData.isRiskEndure=="0"||jsonData.isRiskEndure == null){
 							//是否风测

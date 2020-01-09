@@ -2,9 +2,10 @@ require('@pathCommonBase/base.js');
 require('@pathCommonJsCom/tabScroll.js')
 require('@pathCommonJs/ajaxLoading.js');
 //黑色提示条
-var authenticationProcess = require('@pathCommonJs/components/authenticationProcess.js');
+var authenticationProcess = require('@pathCommonCom/authenticationProcess/authenticationProcess.js');
 var generateTemplate = require('@pathCommonJsComBus/generateTemplate.js');
 var splitUrl = require('@pathCommonJs/components/splitUrl.js');
+var frozenAccount = require('@pathCommonJs/components/frozenAccount.js');
 
 $(function () {
 
@@ -26,6 +27,7 @@ $(function () {
       that.getData();
       that.events();
       that.getUserInfo();  //获取用户类型
+      that.getUserInfo_1();  // 获取用户信息
 
     },
     getData: function () {
@@ -81,6 +83,21 @@ $(function () {
               that.gV.accountType = data.accountType
           }
       }]
+      $.ajaxLoading(obj);
+    },
+    //获取用户信息
+      getUserInfo_1:function(){
+      var that = this;
+      var obj = [{
+        url:site_url.user_api,
+        data:{
+
+        },
+        callbackDone:function(json){
+          var data = json.data
+            that.gV.userStatus = data.investFavour
+        }
+      }];
       $.ajaxLoading(obj);
     },
     	 // 客户预约产品所需条件
@@ -146,7 +163,7 @@ $(function () {
       }, {
 				htmdEvt: 'cashManagement_01'
 			});
-
+      // 转入
       mui("body").on("mdClick", ".fundIn", function () {
         var fundCode = $(this).parent().parent().find(".itemTop .itemTitle span").eq(0).attr("fundCode")
         var fundName = $(this).parent().parent().find(".itemTop .itemTitle span").eq(0).attr("fundName")
@@ -155,17 +172,30 @@ $(function () {
         if(that.gV.accountType === 0 || that.gV.accountType === 2){
           tipAction('暂不支持机构客户进行交易');
         }else{
-          that.getConditionsOfOrder(fundCode)
+          // 先判断是否司法冻结以及身份过期，再判断一键认证
+          var result = frozenAccount("buyFreeze", window.location.href, that.gV.accountType);
+          if( !result ) {
+            var url = site_url.pofCashTransformIn_url + '?fundCode='+ fundCode + '&fundName=' + fundName;
+            authenticationProcess("fundIn", fundCode, that.gV.userStatus, that.gV.accountType, url)
+          };
+          //that.getConditionsOfOrder(fundCode)
+          //authenticationProcess("info", fundCode, that.gV.userStatus, that.gV.accountType)
           //window.location.href = site_url.pofCashTransformIn_url + '?fundCode='+ fundCode + '&fundName=' + fundName;
         }
       }, {
 				htmdEvt: 'cashManagement_02'
 			});
+      // 转出
       mui("body").on("mdClick", ".fundOut", function () {
         var money = $($(this).parent().siblings()[1]).find(".centerValue").eq(0)[0].textContent;
         var productName = $(this).parent().parent().find(".itemTop .itemTitle span").eq(0)[0].innerHTML;
         var fundCode = $(this).parent().parent().find(".itemTop .itemTitle span").eq(0).attr("fundCode")
-        window.location.href = site_url.pofCashTransformOut_url + '?fundCode=' + fundCode + '&productName=' + new Base64().encode(productName);;
+        // 先判断是否司法冻结以及身份过期，再判断一键认证
+        var result = frozenAccount("saleFreeze", window.location.href, that.gV.accountType);
+        if( !result ) {
+          var url = window.location.href = site_url.pofCashTransformOut_url + '?fundCode=' + fundCode + '&productName=' + new Base64().encode(productName);
+          authenticationProcess("fundOut", fundCode, that.gV.userStatus, that.gV.accountType, url)
+        };
       }, {
 				htmdEvt: 'cashManagement_03'
 			});
