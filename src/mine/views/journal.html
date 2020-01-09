@@ -11,8 +11,7 @@
 	</head>
 
 	<body>
-		<!--没有数据显示图标-->
-		@@include('@pathCommonCom/noData/noData.html', {"tipText": "暂无数据"})
+		
 		<!--列表加载显示图标-->
 		@@include('@pathCommonCom/loading/listLoading.html')
 		<!--公共页面头部-->
@@ -67,6 +66,8 @@
 			</div>
 			{{/each}}
 		</script>
+		<!--没有数据显示图标-->
+		@@include('@pathCommonCom/noData/noData.html', {"tipText": "暂无数据"})
 		@@include('@pathInclude/views/footer.html')
 
 		<script src="/mine/static/js/journal.js"></script>
