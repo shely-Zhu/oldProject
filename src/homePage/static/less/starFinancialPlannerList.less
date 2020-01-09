@@ -13,7 +13,13 @@
 // 没有数据
 @import url("@pathCommonCom/noData/noData.less");
 @import url("@pathCommonCom/elasticLayer/elasticLayer/elasticLayer.less");
-
+html{
+    height: 100%;
+    // background: red;
+}
+.activityListDataBox{
+    background: @F7FAFD;
+}
 #activitySearch{
     width: 100%;
     height: 1.28rem;
@@ -462,4 +468,16 @@
 }
 .text_left {
     text-align: left !important;
+}
+.mui-search .mui-placeholder{
+    font-size:0.26rem;
+    text-align: left;
+    padding-left: 0.2rem;
+
+}
+.mui-search .mui-placeholder .mui-icon{
+    color: #999;
+}
+.mui-bar-nav{
+    box-shadow:0;
 }
