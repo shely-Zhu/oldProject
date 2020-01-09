@@ -496,7 +496,7 @@ $(function () {
 			}) ;
 			//返回按钮
 			mui("body").on('mdClick',"#goBack",function(){
-				history.go(-1)
+				
 			})
 			//  ---
 			mui("body").on('mdClick','.container',function(e){
