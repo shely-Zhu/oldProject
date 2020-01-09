@@ -69,7 +69,8 @@ $(function() {
                         callbackDone: function(json) {     
                             var data = json.data.list;
                             if(that.gV.pageCurrent == 1 && data.length == 0) {
-                                $(".list").css("display", "none")
+								$(".list").css("display", "none")
+								that.$e.noData.show();
                             } else {
                             	var beforeData = json.data.list;
 								// for(var i = 0; i < beforeData.length; i++) {
@@ -138,7 +139,8 @@ $(function() {
                         },
                         callbackNoData: function( json ){  
                             if(that.gV.pageCurrent == 1) {
-                                $(".list").css("display", "none")
+								$(".list").css("display", "none")
+								that.$e.noData.show();
                             }
                             def && def.reject( json, that.gV.pageCurrent );
                         },
