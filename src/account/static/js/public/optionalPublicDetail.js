@@ -642,6 +642,16 @@ $(function() {
 							that.data.realLi.eq(2).hide()
 						}
 						if(jsonData.isInvestFavour=="0" || jsonData.isInvestFavour == null){
+							//先判断是否进行投资者分类，没有则显示未认证，如果是再判断投资者状态
+							that.data.realLi.eq(3).show() 
+							if(jsonData.investorStatus =="0"&&that.gV.userStatus=="") {
+								that.data.realLi.eq(3).find(".bank-status").html("未审核")
+							}
+						}else{
+							that.data.realLi.eq(3).hide()
+                        }
+						that.data.realLi.eq(4).hide() 
+						/*if(jsonData.isInvestFavour=="0" || jsonData.isInvestFavour == null){
 							//是否投资者分类
 							that.data.realLi.eq(3).show()  
 						}else{
@@ -655,14 +665,11 @@ $(function() {
 						}
 						if( that.gV.investorStatus=="0"&&that.gV.userStatus==""){
                             //直接申请为专业投资者
-                            that.data.tipsWrap.show()
-                            that.data.realLi.show();
-                            that.data.realLi.eq(3).show() 
-                            /*that.gV.tipsWrap.show()
+                            that.gV.tipsWrap.show()
                             that.gV.realLi.show();
-                            that.gV.realLi.eq(3).show() */ 
+                            that.gV.realLi.eq(3).show()
                         }
-						that.data.realLi.eq(4).hide() 
+						that.data.realLi.eq(4).hide()*/ 
 
                 },
                 callbackFail: function(json) { //失败后执行的函数
