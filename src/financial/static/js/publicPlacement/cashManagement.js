@@ -193,8 +193,7 @@ $(function () {
         // 先判断是否司法冻结以及身份过期，再判断一键认证
         var result = frozenAccount("saleFreeze", window.location.href, that.gV.accountType);
         if( !result ) {
-          var url = window.location.href = site_url.pofCashTransformOut_url + '?fundCode=' + fundCode + '&productName=' + new Base64().encode(productName);
-          authenticationProcess("fundOut", fundCode, that.gV.userStatus, that.gV.accountType, url)
+          window.location.href = site_url.pofCashTransformOut_url + '?fundCode=' + fundCode + '&productName=' + new Base64().encode(productName);
         };
       }, {
 				htmdEvt: 'cashManagement_03'
