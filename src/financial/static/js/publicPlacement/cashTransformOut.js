@@ -129,14 +129,16 @@ $(function () {
 					},
 					needDataEmpty:true,
 					callbackDone:function(json){
-						console.log("88888")
 						that.gv.ruleList = json.data;
 						that.$e.el_transformRule[0].textContent = that.gv.ruleList[2].title;
 						that.$e.el_transformRule.attr("ruleId",that.gv.ruleList[2].id);
 						that.$e.el_transformRule_icon.attr("ruleId",that.gv.ruleList[2].id);
-
 						that.$e.el_agreementRule[0].textContent = that.gv.ruleList[1].title;
 						that.$e.el_agreementRule.attr('ruleId',that.gv.ruleList[1].id);
+						
+						// if(that.$e.el_transformRule[0].textContent!=""){
+						// 	$(".cashRight").show()
+						// }
 					}
 				}
 			]
