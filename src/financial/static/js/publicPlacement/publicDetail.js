@@ -76,8 +76,8 @@ $(function () {
             var that = this;
             that.getData(); // 获取基金详情
 
-            that.getUserInfo();  //获取用户类型
-            that.getUserInfo_1(); //用户身份信息
+            /*that.getUserInfo();  //获取用户类型
+            that.getUserInfo_1(); //用户身份信息*/
             that.events();
             // that.getData1(); // 查询基金的历史收益（货币基金）/历史净值（普通基金）
             $('.tips').hide()
