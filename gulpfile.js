@@ -1362,6 +1362,6 @@ gulp.task('rootEnv', function() {
 //这里在生成不同环境root.js之后，重命名预生产、生产环境的root.js，防止此情况出现
 gulp.task('reNameRoot', ['rootEnv'], function() {
 
-    plugins.if(options.env === '3' || options.env === '4',del([ host.path + 'allServerResources/include/js/vendor/' + fileName, host.path + 'allServerResources/include/js/vendor/root.js' ]))
+    // plugins.if(options.env === '3' || options.env === '4',del([ host.path + 'allServerResources/include/js/vendor/' + fileName, host.path + 'allServerResources/include/js/vendor/root.js' ]))
 
 })
