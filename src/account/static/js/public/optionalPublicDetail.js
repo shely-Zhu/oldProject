@@ -55,6 +55,7 @@ $(function() {
 			isWealthAccountStatus:"", //是否开通账户状态
 			accountType:null,   //客户类型  0-机构 1-个人
 			userStatus:"", // 为空则是新用户   为0普通投资者  为1专业投资者
+			investorStatus: '' // 投资者状态
 		},
 
 		init: function(){
@@ -62,8 +63,8 @@ $(function() {
 			that.setDomDataOne(splitUrl["fundCode"])
 			// that.getTypeOneData()
 			that.getData()
-			that.getUserInfo();  //获取用户类型
-			that.getUserInfo_1(); //用户身份信息
+			//that.getUserInfo();  //获取用户类型
+			//that.getUserInfo_1(); //用户身份信息
 			that.event()
 		},
 
@@ -540,6 +541,7 @@ $(function() {
                         isReal = "", //是否实名认证，因为如果机构切一键认证是实名，点击需要提示弹框。
                         singleaAuthenPath = "", //一键认证跳转链接
 						singleaAuthen = false; //条件框是否展示
+						that.gV.investorStatus = jsonData.investorStatus || ''
 						if(jsonData.isWealthAccount == "0"&&jsonData.isRiskEndure == "1"&&jsonData.isPerfect == "1"&&jsonData.isInvestFavour=="1"){
 							that.data.tipsWrap.hide()
 							that.data.realLi.hide();
@@ -651,7 +653,7 @@ $(function() {
 						}else{
 							that.data.realLi.eq(4).hide()
 						}
-						if(jsonData.investorStatus =="0"&&that.gV.userStatus==""){
+						if( that.gV.investorStatus=="0"&&that.gV.userStatus==""){
                             //直接申请为专业投资者
                             that.gV.tipsWrap.show()
                             that.gV.realLi.show();
@@ -885,6 +887,8 @@ $(function() {
             })
 			// //点击买入
 			mui("body").on('mdClick', '.buyBtn', function(e) {
+				that.getUserInfo_1()
+				that.getUserInfo()
 				if(!that.data.isBuyFlag){//不可买入
 			   	 	return false;
 			    }
@@ -949,7 +953,7 @@ $(function() {
 					case 3:  //投资者分类
 					if(that.gV.isWealthAccountStatus){
 						//开通了账户
-						if(jsonData.investorStatus =="0"&&that.gV.userStatus==""){
+						if(that.gV.investorStatus =="0"&&that.gV.userStatus==""){
 							//申请为投资者
 							window.location.href = site_url.investorClassificationResult_url
 						}else{
@@ -1018,7 +1022,7 @@ $(function() {
 					case "isInvestFavour":  //投资者分类
 					if(that.gV.isWealthAccountStatus){
                         //开通了账户
-                        if(jsonData.investorStatus =="0"&&that.gV.userStatus==""){
+                        if(that.gV.investorStatus =="0"&&that.gV.userStatus==""){
 							//申请为投资者
 							window.location.href = site_url.investorClassificationResult_url
 						}else{
@@ -1046,6 +1050,8 @@ $(function() {
 			});
 			//点击定投
 			mui("body").on('mdClick', '.fiedBtn', function(e) {
+				that.getUserInfo()
+				that.getUserInfo_1()
 				that.getConditionsOfOrder("investement");
 				that.gV.singleaAuthenType = "investement"
 				//window.location.href = site_url.ordinarySetThrow_url+"?fundCode="+that.data.fundCode;;			

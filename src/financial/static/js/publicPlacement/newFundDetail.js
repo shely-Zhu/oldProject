@@ -8,6 +8,7 @@ require('@pathCommonBase/base.js');
 require('@pathCommonJs/ajaxLoading.js');
 var splitUrl = require('@pathCommonJs/components/splitUrl.js')();
 var moment = require('moment');
+var frozenAccount = require('@pathCommonJs/components/frozenAccount.js');
 
 $(function() {
     var newFundDetail = {
@@ -26,12 +27,13 @@ $(function() {
             accountType:null, //客户类型  0-机构 1-个人
             isWealthAccountStatus:"", //是否开通账户状态
             userStatus:"", // 为空则是新用户   为0普通投资者  为1专业投资者
+            investorStatus: '' // 投资者状态
         },
         init: function() {
             var that = this;
             that.getData();
-            that.getUserInfo();  //获取用户类型
-            that.getUserInfo_1(); //用户身份信息
+           // that.getUserInfo();  //获取用户类型
+           // that.getUserInfo_1(); //用户身份信息
             that.events();
         },
          //获取用户信息
@@ -87,53 +89,57 @@ $(function() {
                         isReal = "", //是否实名认证，因为如果机构切一键认证是实名，点击需要提示弹框。
                         singleaAuthenPath = "", //一键认证跳转链接
                         singleaAuthen = false; //条件框是否展示
+                    that.gV.investorStatus = jsonData.investorStatus || ''
                     if (jsonData.isWealthAccount == "0" && jsonData.isRiskEndure == "1" && jsonData.isPerfect == "1" && jsonData.isInvestFavour == "1") {
-                        that.gV.realLi.hide();
-                        that.gV.tipsWrap.hide();
-                        $(".isRiskMatch_mask").show();
-                        $(".isRiskMatchBox").show();
-                        if(jsonData.isHighAge=="1"&&that.gV.isHighAgeStatus){
-                            //年龄校验
-                             //that.gV.isHighAgeStatus = false;
-                             $(".isRiskMatchBox_match").hide()
-                             $(".isRiskMatchBox_noMatch").show()
-                             $(".isRiskMatchBox_header").html("您认/申购的基金产品风险等级为成长级/进取级，属中高/高风险产品，投资该产品可能产生较大损失。基于您的年龄情况，我司建议您综合考虑自身的身心承受能力、资金承受能力、风险承受能力及控制能力，审慎选择。")
-                             $(".isRiskMatchResult").html("继续购买")
-                             $(".isRiskMatchResult").attr("type","isHighAge")
-                             return false;
-                         }
-                         if(jsonData.isZdTaLimit == "1"){
-                             //中登校验
-                             $(".isRiskMatchBox_match").hide()
-                             $(".isRiskMatchBox_noMatch").show()
-                             $(".isRiskMatchBox_header").css({"line-height":"1.5rem"})
-                             $(".isRiskMatchBox_header").html("检测到您的证件类型无法购买该基金，请选购其他基金")
-                             $(".isRiskMatchResult").html("选购其他基金")
-                             $(".isRiskMatchResult").attr("type","isZdTaLimit")
-                             return false;
-                         }
-                        if (jsonData.isRiskMatch == "1") {
-                            //风险等级匹配
-                            $(".isRiskMatchBox_match").show()
-                            $(".isRiskMatchBox_noMatch").hide()
-                            $(".isRiskMatchBox_header").css({"line-height":"1.5rem"})
-                            $(".isRiskMatchBox_header").html("你选择的产品与您现在的风险承受能力相匹配")
-                        } else if (jsonData.isRiskMatch == "0") {
-                            $(".isRiskMatchBox_noMatch").show()
-                            $(".isRiskMatchBox_match").hide()
-                            $(".isRiskMatchBox_header").css({"line-height":"1.5rem"})
-                            $(".isRiskMatchBox_header").html("你选择的产品与您现在的风险承受能力不相匹配")
-                            $(".isRiskMatchResult").html("查看评测结果")
-                            $(".isRiskMatchResult").attr("type", "noRisk")
-                        } else if (jsonData.isRiskMatch == "2") {
-                            $(".isRiskMatchBox_noMatch").show()
-                            $(".isRiskMatchBox_match").hide()
-                            $(".isRiskMatchBox_header").css({"line-height":"1.5rem"})
-                            $(".isRiskMatchBox_header").html("您的风险测评已过期,请重新进行风险测评")
-                            $(".isRiskMatchResult").html("重新风测")
-                            $(".isRiskMatchResult").attr("type", "repeatRisk")
-                        }
-
+                        // 完成四种审核后，再判断是否进行司法冻结以及身份过期验证
+                        var result = frozenAccount("buyFreeze", window.location.href, false);
+                        if( !result ) {
+                            that.gV.realLi.hide();
+                            that.gV.tipsWrap.hide();
+                            $(".isRiskMatch_mask").show();
+                            $(".isRiskMatchBox").show();
+                            if(jsonData.isHighAge=="1"&&that.gV.isHighAgeStatus){
+                                //年龄校验
+                                 //that.gV.isHighAgeStatus = false;
+                                 $(".isRiskMatchBox_match").hide()
+                                 $(".isRiskMatchBox_noMatch").show()
+                                 $(".isRiskMatchBox_header").html("您认/申购的基金产品风险等级为成长级/进取级，属中高/高风险产品，投资该产品可能产生较大损失。基于您的年龄情况，我司建议您综合考虑自身的身心承受能力、资金承受能力、风险承受能力及控制能力，审慎选择。")
+                                 $(".isRiskMatchResult").html("继续购买")
+                                 $(".isRiskMatchResult").attr("type","isHighAge")
+                                 return false;
+                             }
+                             if(jsonData.isZdTaLimit == "1"){
+                                 //中登校验
+                                 $(".isRiskMatchBox_match").hide()
+                                 $(".isRiskMatchBox_noMatch").show()
+                                 $(".isRiskMatchBox_header").css({"line-height":"1.5rem"})
+                                 $(".isRiskMatchBox_header").html("检测到您的证件类型无法购买该基金，请选购其他基金")
+                                 $(".isRiskMatchResult").html("选购其他基金")
+                                 $(".isRiskMatchResult").attr("type","isZdTaLimit")
+                                 return false;
+                             }
+                            if (jsonData.isRiskMatch == "1") {
+                                //风险等级匹配
+                                $(".isRiskMatchBox_match").show()
+                                $(".isRiskMatchBox_noMatch").hide()
+                                $(".isRiskMatchBox_header").css({"line-height":"1.5rem"})
+                                $(".isRiskMatchBox_header").html("你选择的产品与您现在的风险承受能力相匹配")
+                            } else if (jsonData.isRiskMatch == "0") {
+                                $(".isRiskMatchBox_noMatch").show()
+                                $(".isRiskMatchBox_match").hide()
+                                $(".isRiskMatchBox_header").css({"line-height":"1.5rem"})
+                                $(".isRiskMatchBox_header").html("你选择的产品与您现在的风险承受能力不相匹配")
+                                $(".isRiskMatchResult").html("查看评测结果")
+                                $(".isRiskMatchResult").attr("type", "noRisk")
+                            } else if (jsonData.isRiskMatch == "2") {
+                                $(".isRiskMatchBox_noMatch").show()
+                                $(".isRiskMatchBox_match").hide()
+                                $(".isRiskMatchBox_header").css({"line-height":"1.5rem"})
+                                $(".isRiskMatchBox_header").html("您的风险测评已过期,请重新进行风险测评")
+                                $(".isRiskMatchResult").html("重新风测")
+                                $(".isRiskMatchResult").attr("type", "repeatRisk")
+                            }           
+                        };
                     } else {
                         that.gV.tipsWrap.show()
                         that.gV.realLi.show();
@@ -341,6 +347,8 @@ $(function() {
             // 买入
             mui("body").on('mdClick', ".buyButton", function(e) {
                 var $this = $(this);
+                that.getUserInfo();  //获取用户类型
+                that.getUserInfo_1(); //用户身份信息
                 if ($this.hasClass("disable")) {
                     return false;
                 } else {
@@ -442,7 +450,7 @@ $(function() {
                     case 3: //投资者分类
                     if(that.gV.isWealthAccountStatus){
                         //开通了账户
-                        if(jsonData.investorStatus =="0"&&that.gV.userStatus==""){
+                        if(that.gV.investorStatus =="0"&&that.gV.userStatus==""){
                             //申请为投资者
                             window.location.href = site_url.investorClassificationResult_url
                         }else{
@@ -510,8 +518,10 @@ $(function() {
 
                     case "isInvestFavour": //投资者分类
                     if(that.gV.isWealthAccountStatus){
-                        //开通了账户
-                        if(jsonData.investorStatus =="0"&&that.gV.userStatus==""){
+                        //开通了账户  
+                        // userStatus 为空则是新用户   为0普通投资者  为1专业投资者
+                        // 投资者状态（0.待审核）
+                        if(that.gV.investorStatus =="0"&&that.gV.userStatus==""){
                             //申请为投资者
                             window.location.href = site_url.investorClassificationResult_url
                         }else{

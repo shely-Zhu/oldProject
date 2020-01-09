@@ -17,6 +17,7 @@ $(function() {
         getElements: {
             noData: $('.noData'), //没有数据的结构
             listLoading: $('.listLoading'), //所有数据区域，第一次加载的loading结构
+            noData1:$('.tab-b .noData')
         },
         gV: { //一些设置
             aP: {
@@ -31,6 +32,7 @@ $(function() {
             listToTop: '', // 滑动区域距离顶部距离
             navToTop: '', // 滑动nav距离顶部距离
             navHeight: '', // nav高度
+            ul2NoData : [], //财富研究没有数据存储下标
 
         },
         html: '', //存放生成的html
@@ -305,6 +307,7 @@ $(function() {
             $.ajaxLoading(obj);
         },
         getData: function($id, t) { // 获取产品数据的公用ajax方法;$id为各区域的 scroll+num id
+            var that = this;
             if( $id.find(".mui-table-view-cell").height()>0){
                 $("#slider").height($id.find(".mui-table-view-cell").height()+ $(".mui-slider .nav-wrapper").height())
             }
@@ -313,7 +316,13 @@ $(function() {
             }else{
                 return false;
             }
-            var that = this;
+            // if(that.gV.ul2NoData.indexOf(that.gV.current_index.toString()) != -1){
+            //     // debugger
+            //     $(".mui-table-view-cell").height('0px')
+            //     return false;
+            // }
+
+            
             //获取产品列表
             var obj = [{
                 url: site_url.queryFortuneCollegeSec_api,
@@ -343,6 +352,8 @@ $(function() {
                         //没有数据
                         that.listLength = 0;
                         that.html = '';
+                        // that.getElements.noData1.show()
+                        that.gV.ul2NoData.push(that.gV.current_index.toString())
                     }
 
                     //有数据

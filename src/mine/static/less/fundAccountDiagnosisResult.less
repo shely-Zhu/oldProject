@@ -17,6 +17,17 @@
 @import url('@pathCommonCom/elasticLayer/transOutRule/transOutRule.less');
 @import url("@pathCommonLessCom/payPassword.less");
 
+.mui-dtpicker{
+    .mui-dtpicker-header{
+        // padding: 0;
+        height: 0.8rem;
+        line-height: 0.8rem;
+        border-bottom: 1px solid #eee;
+        margin-bottom: 0.24rem;
+    }
+}
+
+
 html,
 body {
     height: 100%;
@@ -150,6 +161,10 @@ body {
             input{
                 text-align: right;
             }
+        }
+        .mui-table-view > .mui-table-view-cell > .mui-input-clear{
+            height: 1rem;
+            margin-right: .3rem;
         }
         .rightMoreBox{
             position: absolute;
@@ -311,6 +326,18 @@ body {
         }
         
     }
+}
+.unchecked{//未选中样式
+    color: #3c6a28;
+    margin-left: .5rem;
+    background: gray;
+    font-size: .25rem;
+}
+.checked{
+   color: darkgreen;
+    margin-left: .5rem;
+    background: gray;
+    font-size: .25rem; 
 }
 .elasticWrapper{
     min-height: 80px;

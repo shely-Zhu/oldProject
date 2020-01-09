@@ -149,8 +149,8 @@ $(function() {
                             $('.contentWrapper').find('.mui-pull-bottom-pocket').removeClass('mui-hidden');
                             var list = data;
                             for (var i = 0; i < list.length; i++) {
-                                list[i].actStartDate = list[i].actStartDate ? moment(list[i].actStartDate).format('MM月至DD日') : '';
-                                list[i].actEndDate = list[i].actEndDate ? moment(list[i].actEndDate).format('MM月至DD日') : '';
+                                list[i].actStartDate = list[i].actStartDate ? moment(list[i].actStartDate).format('MM月DD日') : '';
+                                list[i].actEndDate = list[i].actEndDate ? moment(list[i].actEndDate).format('MM月DD日') : '';
                             }
                             // 将列表插入到页面上
                             generateTemplate(list, that.$e.recordList, that.$e.activityListTemp)

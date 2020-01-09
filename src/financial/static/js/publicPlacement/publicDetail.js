@@ -2,6 +2,7 @@
  * 公募资产详情页
  *
  * @author shiyunrui 20191123
+ * update:chentiancheng
  *
  * 具体可以参考 privateDetail.js
  */
@@ -65,6 +66,7 @@ $(function () {
             symboltype : 'none',	//echarts 节点样式
             isWealthAccountStatus:"", //是否开通账户状态
             userStatus:"", // 为空则是新用户   为0普通投资者  为1专业投资者
+            investorStatus: '' // 投资者状态
         },
         fundType: splitUrl['fundType'] == '10300'||splitUrl['fundType'] == '10800' ? 1 : 0, //10300 货币基金类型，其余为普通基金类型
         fundComId: '',   //基金公司ID
@@ -74,8 +76,8 @@ $(function () {
             var that = this;
             that.getData(); // 获取基金详情
 
-            that.getUserInfo();  //获取用户类型
-            that.getUserInfo_1(); //用户身份信息
+          //  that.getUserInfo();  //获取用户类型
+           // that.getUserInfo_1(); //用户身份信息
             that.events();
             // that.getData1(); // 查询基金的历史收益（货币基金）/历史净值（普通基金）
             $('.tips').hide()
@@ -263,11 +265,16 @@ $(function () {
                         isReal = "", //是否实名认证，因为如果机构切一键认证是实名，点击需要提示弹框。
                         singleaAuthenPath = "", //一键认证跳转链接
                         singleaAuthen = false; //条件框是否展示
+                        that.gV.investorStatus = jsonData.investorStatus || ''
                             if(jsonData.isWealthAccount == "0"&&jsonData.isRiskEndure == "1"&&jsonData.isPerfect == "1"&&jsonData.isInvestFavour=="1"){
                                 that.gV.realLi.hide();
                                 that.gV.tipsWrap.hide();
-                                $(".isRiskMatchBox").show();
-                                $(".isRiskMatch_mask").show();
+                                if(jsonData.isIdnovalid=="1"){
+                                    //证件已过期
+                                    tipAction('因过期原因该账户被冻结，请联系理财师或咨询客服！客服电话：400-8980-618');
+                                    return false;
+                                }
+
                                 if(jsonData.isHighAge=="1"&&that.gV.isHighAgeStatus){
                                    //年龄校验
                                     //that.gV.isHighAgeStatus = false;
@@ -287,6 +294,9 @@ $(function () {
                                     $(".isRiskMatchResult").attr("type","isZdTaLimit")
                                     return false;
                                 }
+
+                                $(".isRiskMatchBox").show();
+                                $(".isRiskMatch_mask").show();
 
                                 if(jsonData.isRiskMatch == "1"){
                                     //风险等级匹配
@@ -375,7 +385,7 @@ $(function () {
 						}else{
 							that.gV.realLi.eq(4).hide()
                         }
-                        if(jsonData.investorStatus =="0"&&that.gV.userStatus==""){
+                        if(that.gV.investorStatus =="0"&&that.gV.userStatus==""){
                             //直接申请为专业投资者
                             that.gV.tipsWrap.show()
                             that.gV.realLi.show();
@@ -445,6 +455,8 @@ $(function () {
 
             // 定投
             mui("body").on('mdClick', ".footer .fixed_investement_btn", function (e) {
+                that.getUserInfo();
+                that.getUserInfo_1();
                 that.getConditionsOfOrder("investement");
                 that.gV.singleaAuthenType = "investement"
             },{
@@ -452,6 +464,8 @@ $(function () {
             });
             // 买入
             mui("body").on('mdClick', ".footer .buy_btn", function (e) {
+                that.getUserInfo();
+                that.getUserInfo_1();
                if($(this).hasClass("disable")){
                    return false
                }
@@ -505,7 +519,7 @@ $(function () {
                     case 3:  //投资者分类
                         if(that.gV.isWealthAccountStatus){
                             //开通了账户
-                            if(jsonData.investorStatus =="0"&&that.gV.userStatus==""){
+                            if(that.gV.investorStatus =="0"&&that.gV.userStatus==""){
                                 //申请为投资者
                                 window.location.href = site_url.investorClassificationResult_url
                             }else{
@@ -574,7 +588,7 @@ $(function () {
                     case "isInvestFavour":  //投资者分类
                     if(that.gV.isWealthAccountStatus){
                         //开通了账户
-                        if(jsonData.investorStatus =="0"&&that.gV.userStatus==""){
+                        if(that.gV.json.investorStatus =="0"&&that.gV.userStatus==""){
                             //申请为投资者
                             window.location.href = site_url.investorClassificationResult_url
                         }else{

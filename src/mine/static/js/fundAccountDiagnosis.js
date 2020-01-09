@@ -31,6 +31,7 @@ $(function() {
             accountType:null,   //客户类型  0-机构 1-个人
             isWealthAccountStatus:"", //是否开通账户状态
             userStatus:"", // 为空则是新用户   为0普通投资者  为1专业投资者
+            investorStatus: '', // 投资者状态
             pageCurrent: 1, // 账户持仓情况分页参数
             pageSize: 5, // 账户持仓情况分页参数
             holdList: [], // 账户持仓情况
@@ -61,11 +62,11 @@ $(function() {
         },
         init: function() {
             var that = this;
-            that.getUserInfo_1(); //用户身份信息
+           // that.getUserInfo_1(); //用户身份信息
             that.getHoldData(); //账户持仓详情
             // that.drawCircle();
             //that.drawBar()
-            that.getUserInfo();  //获取用户类型
+          //  that.getUserInfo();  //获取用户类型
             that.events();
         },
         //获取用户信息
@@ -121,6 +122,7 @@ $(function() {
                         isReal = "", //是否实名认证，因为如果机构切一键认证是实名，点击需要提示弹框。
                         singleaAuthenPath = "", //一键认证跳转链接
                         singleaAuthen = false; //条件框是否展示
+                        that.gV.investorStatus = jsonData.investorStatus || ''
                     if (jsonData.isWealthAccount == "0" && jsonData.isRiskEndure == "1" && jsonData.isPerfect == "1" && jsonData.isInvestFavour == "1") {
                         that.gV.realLi.hide();
                         that.gV.tipsWrap.hide();
@@ -190,7 +192,7 @@ $(function() {
                     } else {
                         that.gV.realLi.eq(4).hide()
                     }
-                    if(jsonData.investorStatus =="0"&&that.gV.userStatus==""){
+                    if(that.gV.investorStatus =="0"&&that.gV.userStatus==""){
                         //直接申请为专业投资者
                         that.gV.tipsWrap.show()
                         that.gV.realLi.show();
@@ -543,14 +545,17 @@ $(function() {
         },
         events: function() {
             var that = this;
-            mui("body").on("mdClick", ".account-holdings .down", function() {
-                if ($(this).hasClass('up')) {
-                    $(this).removeClass('up')
+            mui("body").on("mdClick", ".account-holdings .more-data", function() {
+                if ($(this).find('.down').hasClass('up')) {
+                    $(this).find('.down').removeClass('up');
+                    $(this).find('.txt').html('展开全部持仓');
+
                     that.gV.pageSize = 5
                 } else {
-                    $(this).addClass('up')
+                    $(this).find('.down').addClass('up');
+                    $(this).find('.txt').html('收起部分持仓');
                     that.gV.pageSize = 100000
-                }
+                } 
 
                 that.getHoldData();
             }, {
@@ -560,6 +565,8 @@ $(function() {
 
             // 获取专属报告
             mui("body").on('mdClick', '.content .getReport', function() {
+                that.getUserInfo_1();
+                that.getUserInfo();
                 that.getConditionsOfOrder();
             },{
                 'htmdEvt':'fundAccountDiagnosis_02'
@@ -608,7 +615,7 @@ $(function() {
                     case 3: //投资者分类
                     if(that.gV.isWealthAccountStatus){
                         //开通了账户
-                        if(jsonData.investorStatus =="0"&&that.gV.userStatus==""){
+                        if(that.gV.investorStatus =="0"&&that.gV.userStatus==""){
                             //申请为投资者
                             window.location.href = site_url.investorClassificationResult_url
                         }else{
@@ -677,7 +684,7 @@ $(function() {
                     case "isInvestFavour": //投资者分类
                     if(that.gV.isWealthAccountStatus){
                         //开通了账户
-                        if(jsonData.investorStatus =="0"&&that.gV.userStatus==""){
+                        if(that.gV.investorStatus =="0"&&that.gV.userStatus==""){
                             //申请为投资者
                             window.location.href = site_url.investorClassificationResult_url
                         }else{
@@ -746,6 +753,8 @@ $(function() {
             })
 
             mui("body").on('mdClick','.noDatagetReport',function(){
+                that.getUserInfo();
+                that.getUserInfo_1();
                 that.getConditionsOfOrder();
             },{
                 'htmdEvt':'fundAccountDiagnosis_07'

@@ -62,9 +62,12 @@
                 </div>
             <ul class="mui-table-view">
                 {{#each dataList}}
-                <li class="mui-table-view-cell"><span class="left">{{applyDateStr}}</span><span class="mui-icon mui-icon-arrowright"></span>
+                <li class="mui-table-view-cell" applyId="{{id}}">
+                    <span class="left">{{applyDateStr}}</span>
+
                     {{#if editFlag}}
-                    <span class="right editHistory"  applyId = {{id}}>修改</span>
+                    <span class="mui-icon mui-icon-arrowright"></span>
+                    <span class="right editHistory">修改</span>
                     {{/if}}
                 </li>
                 {{/each}}

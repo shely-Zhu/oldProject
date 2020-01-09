@@ -63,7 +63,7 @@ $(function() {
     // 安卓IOS刘海屏适配
     if (splitUrl['hairHeight'] || "true" == splitUrl['isIphoneX']){
         $('body').prepend('<div class="hairBox"></div>');
-        $('.hairBox').css({'width': '100%', 'height': '0.26rem', 'background': colors[0], 'position': 'fixed', 'z-index': '999'});
+        $('.hairBox').css({'width': '100%', 'height': '0.26rem', 'background': colors[0] || "#FFF", 'position': 'fixed', 'z-index': '999'});
         $('#HeadBarConfigBox').css('margin-top', '0.24rem');
     }
 
@@ -90,10 +90,10 @@ $(function() {
             }
         });
         // 设置返回按钮和title的颜色
-        var goBackColor = $("#HeadBarConfigBox a").attr('goBackColor');
+        var goBackColor = $("#HeadBarConfigBox i").attr('goBackColor');
         var titleColor = $("#HeadBarConfigBox span").attr('titleColor');
         if (goBackColor) {
-            $("#HeadBarConfigBox a").css({ 'color': goBackColor });
+            $("#HeadBarConfigBox i").css({ 'color': goBackColor });
         }
         if (titleColor) {
             $("#HeadBarConfigBox span").css({ 'color': titleColor });
