@@ -492,6 +492,17 @@ $(function() {
             },{
                 'htmdEvt': 'fortune_07'
             })
+            mui("body").on('mdClick', '.whereGo' , function(){
+                if($(this).attr("externalUrl")){
+                    window.location.href = $(this).attr("externalUrl")
+                }else{
+                    window.location.href = site_url.articleTemplate_url+'?id=' + $(this).attr("id") + '&articleBelong=' +  $(this).attr("articleBelong")
+                }
+
+            },{
+                'htmdEvt': 'fortune_02'
+            })
+            
         }
     };
     data.init();
