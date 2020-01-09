@@ -187,7 +187,6 @@ $(function () {
       //了解现金管理
       mui("body").on("mdClick", ".fundKnow", function () { 
        window.location.href  = site_url.articleTemplate_url + '?articleBelong=12'
-       
       },{
         htmdEvt: 'cashManagement_04'
       });

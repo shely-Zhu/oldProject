@@ -124,7 +124,7 @@ $(function () {
 
                     }else if (resData.h5Type == "3") {//产品推荐
                         //给底部按钮加文字和跳转链接
-                         that.$e.btnButton.show();
+                        that.$e.btnButton.show();
                         that.$e.btnHref.html(resData.buttonLabel).show();
 
                         that.gV.fundCode = resData.recomCodes;
