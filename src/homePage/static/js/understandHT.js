@@ -36,7 +36,7 @@ $(function() {
 
              // $("body").height( $(window).height() );
              
-            $('html').height( window.screen.height ).width( indow.screen.width );
+            $('html').height( window.screen.height ).width( window.screen.width );
 
             $('body').css({
                 position: 'fixed',
