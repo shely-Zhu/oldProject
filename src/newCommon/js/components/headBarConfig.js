@@ -62,9 +62,7 @@ $(function() {
     
     // 安卓IOS刘海屏适配
     if (splitUrl['hairHeight'] || "true" == splitUrl['isIphoneX']){
-        $('body').prepend('<div class="hairBox"></div>');
-        $('.hairBox').css({'width': '100%', 'height': '0.26rem', 'background': colors[0] || "#FFF", 'position': 'fixed', 'z-index': '999'});
-        $('#HeadBarConfigBox').css('margin-top', '0.24rem');
+        $('#HeadBarConfigBox').css({'padding-top': '0.24rem', 'height': '1.2rem'});
     }
 
     //传人样式判断展示形式 
@@ -79,14 +77,8 @@ $(function() {
             if (tops > 10) { //当window的scrolltop距离大于50时，
                 $headBarConfigBox.animate({ "background-image": "linear-gradient(to right," + colors[0] + " 40%, " + colors[1] + " 60%)", "color": "#fff" }, 'slow', 'ease-out')
                 $("#HeadBarConfigBox a").css({ "color": "#fff" });
-                if(splitUrl['hairHeight']) {
-                    $('.hairBox').animate({ "background-image": "linear-gradient(to right," + colors[0] + " 40%, " + colors[1] + " 60%)", "color": "#fff" }, 'slow', 'ease-out')
-                };
             } else {
                 ClearStyle()
-                if(splitUrl['hairHeight']) {
-                    $('.hairBox').css('background', colors[0]);
-                };
             }
         });
         // 设置返回按钮和title的颜色
