@@ -62,7 +62,9 @@
     <script id="activityEn-template" type="text/x-handlebars-template">
         {{#each this}}
         <li class="clickli" data-actType="{{actType}}" data-actId="{{actId}}" >
+            {{#if imgurl}}
             <img class="lazyload" src="/common/img/lazyImgList1.png" data-original="{{htjfGeneralizeImgUrl}}" alt=""> 
+            {{/if}}
             <p>{{actName}}</p>
             {{#if actTypestatus}}
             <div class="sign">

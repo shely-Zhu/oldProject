@@ -7,10 +7,12 @@
 * fundCode 基金编号
 * userStatus 为空则是新用户   为0普通投资者  为1专业投资者
 * accountType  客户类型  0-机构 1-个人
+*
+* url 认证成功跳转页面
 * 
 */
 
-module.exports = function(type, fundCode, userStatus, accountType) {
+module.exports = function(type, fundCode, userStatus, accountType, url) {
 	var auth = {
 		$e:{
             
@@ -381,13 +383,14 @@ module.exports = function(type, fundCode, userStatus, accountType) {
 					//未开通账户
 					return false
 				}
-				if(type == "into"){
+				window.location.href = url
+				/*if(type == "into"){
 					//买入一键认证
 					window.location.href = site_url.fundTransformIn_url+"?fundCode="+that.data.fundCode+"&noReload=1";
 			   }else if(type == "investement"){
 					//定投一键认证
 					window.location.href = site_url.ordinarySetThrow_url+"?fundCode="+that.data.fundCode+'&type=add';			
-			   }
+			   }*/
 			},{
 				'htmdEvt': 'optionalPublicDetail_11'
 			})

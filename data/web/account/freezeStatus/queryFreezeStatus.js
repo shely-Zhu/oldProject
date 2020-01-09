@@ -14,7 +14,7 @@ var data = {
 		"buyFreeze":1,
 		"customerNo":468171,
 		"lawFreezeStatus":0,
-		"outdateFreezeStatus":1,
+		"outdateFreezeStatus":0,
 		"saleFreeze":1
 	},
 	"message":"查询成功",
