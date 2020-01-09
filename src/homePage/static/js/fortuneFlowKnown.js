@@ -70,7 +70,7 @@ $(function() {
                         data: {
                             "pageNo": that.gV.pageCurrent, //非必须，默认为1
                             "pageSize": that.gV.pageSize, //非必须，默认为10
-                            "articleBelong": that.gV.articleBelong
+                            "articleBelong": "3"//3为财富学院早知道
                         },
                         needDataEmpty: true,
                         needLoading: false,

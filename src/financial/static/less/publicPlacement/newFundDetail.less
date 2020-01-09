@@ -281,22 +281,24 @@
 	display: none;
 	.isRiskMatchBox_contentBox{
 		position: absolute;
+		border-radius: 0.05rem;
 		top: 5rem;
 		left: 1.4rem;
 		width: 5.2rem;
 		height: 2.5rem;
-		background-color:#f2e1c1;
+		background:linear-gradient(220deg,rgba(245,236,213,1) 0%,rgba(240,223,186,1) 100%);
 		.isRiskMatchBox_header{
 			width: 100%;
 			min-height: 1.5rem;
 			text-align: center;
 			//line-height: 1.5rem;
-			color: black;
 			font-weight: bold;
-			font-size: 0.22rem;
+			font-size: 0.28rem;
 			border-bottom: 2px solid #f2e1c1;
-			padding-top: 0.2rem;
-			padding-bottom: 0.2rem;
+			padding: 0.2rem 0.3rem;
+			font-family:PingFangSC-Regular,PingFang SC;
+			font-weight:400;
+			color:rgba(39,39,39,1);
 		}
 		.isRiskMatchBox_footer{
 			width: 100%;
@@ -308,28 +310,42 @@
 				height: 1rem;
 				line-height: 1rem;
 				text-align: center;
-				font-weight: bold;
+				// font-weight: bold;
+				font-size: 0.28rem;
+				color: #272727;
+				border-radius: 0.05rem;
+				background:#FDF3DD;
 			}
 			.isRiskMatchBox_noMatch{
 				display: block;
 				width: 100%;
 				height: 1rem;
+				background:#F0DFBA;
+				border-radius: 0.05rem;
 				button:nth-of-type(1){
 					width:calc(50% - 2px);
 					height:1rem;
-					border-left: 2px solid #eeeeee;
+					// border-left: 2px solid #eeeeee;
 					line-height: 1rem;
 					text-align: center;
-					font-weight: bold;
-					font-size: 0.2rem;
+					// font-weight: bold;
+					font-size: 0.28rem;
+					color: #9B9B9B;
+					background:#FDF3DD;
+					border-radius: 0.05rem;
+					border-right: 0.01rem solid #fdf3dc;
 				}
 				button:nth-of-type(2){
 					width: 50%;
 					height:1rem;
 					line-height: 1rem;
 					text-align: center;
-					font-weight: bold;
-					font-size: 0.2rem;
+					// font-weight: bold;
+					font-size: 0.28rem;
+					color: #272727;
+					border-radius: 0.05rem;
+					background:#FDF3DD;
+
 				}
 			}
 		}
@@ -338,9 +354,10 @@
 .headTital{
 	width: 100%;
 	text-align: center;
-	height: 0.6rem;
-	line-height: 0.6rem;
-	font-size: 0.2rem;
+	// height: 0.6rem;
+	line-height: 1rem;
+	font-size: 0.32rem;
+	font-weight: 800;
 }
 
 
