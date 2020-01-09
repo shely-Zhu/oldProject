@@ -26,7 +26,7 @@ var gulp = require('gulp'),
     os = require('os'),
     minimist = require('minimist'), //命令行替换变量
     glob = require('glob'),
-
+    // vinylPaths = require('vinyl-paths'),
     prefixUrl = require('gulp-prefix'),
     modifyCssUrls = require('gulp-modify-css-urls'),//给文件中的所有路径添加前缀
     // cdnify = require('gulp-cdnify'),
@@ -279,7 +279,7 @@ if (options.env === '0') { //当开发环境的时候构建命令执行mock服�
 
 /**此任务默认执行，gulp启动时，先将所有文件打包一次**/
 gulp.task('initialTask', function(cb) {
-    plugins.sequence('clean', 'images', 'font', 'allServerResources', 'allServerResourcesFont', 'includeJs', 'includeCss', 'cssToHost', 'webpack', 'bfRev', 'html', 'rev', 'rootEnv', cb);
+    plugins.sequence('clean', 'images', 'font', 'allServerResources', 'allServerResourcesFont', 'includeJs', 'includeCss', 'cssToHost', 'webpack', 'bfRev', 'html', 'rev', 'reNameRoot', cb);
 });
 
 
@@ -1350,3 +1350,28 @@ gulp.task('rootEnv', function() {
         }
     }
 });
+
+//预生产、生产环境，因为使用了cdn，同时运维那边部署是
+//不可以在allServerResources里面有root-**.js文件的，否则cdn服务器同步文件会在运维copy不同环境
+//的root.js之前执行，导致cdn服务器copy过去的是未修改env变量的文件
+//这里在生成不同环境root.js之后，重命名预生产、生产环境的root.js，防止此情况出现
+gulp.task('reNameRoot', ['rootEnv'], function() {
+
+    pump([
+        gulp.src(['src/allServerResources/include/js/vendor/*.js']),
+
+        through.obj(function(file, enc, cb) {
+            if( file.path.indexOf('root') != -1){
+                this.push(file);
+            }
+            cb()
+        }),
+
+
+        //预生产、生产环境执行
+        // plugins.if( options.env == 3 || options.env == 4 , vinylPaths(del) )
+
+        // gulp.dest( host.path + 'allServerResources/include/js/vendor/')
+    ])
+
+})

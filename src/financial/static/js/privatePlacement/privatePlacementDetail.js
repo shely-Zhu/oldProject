@@ -5,6 +5,10 @@
     update:chentiancheng 2020-01-08 
     删除司法冻结文案
 
+    updata :caoqihai 2020-1-8
+    身份证过期  不弹出弹窗 直接到原生
+    that.$e.realLi.eq(2).find(".tips-li-right").attr("conditionjump")!=8&&that.$e.realLi.eq(2).find(".tips-li-right").attr("conditiontype")!=3
+
 */
 
 require('@pathCommonBase/base.js');
@@ -420,7 +424,6 @@ $(function() {
                     }
                 },
                 callbackNoData:function(json){
-                    debugger
                 }
             }, {
                 url: site_url.queryUserAuthInfo_api,
@@ -981,7 +984,7 @@ $(function() {
                         }
                         //对应的条件认证到哪里
                         that.$e.realLi.eq(e * 1).find(".tips-li-right").on('click', function() {
-                            if($(this).attr('conditionJump')!=that.$e.realLi.eq(0).find(".tips-li-right").attr("conditionJump")&&that.$e.realLi.eq(0).find(".tips-li-right").attr("conditionType")==1){
+                            if($(this).attr('conditionJump')!=that.$e.realLi.eq(0).find(".tips-li-right").attr("conditionJump")&&that.$e.realLi.eq(0).find(".tips-li-right").attr("conditionType")==1&&that.$e.realLi.eq(2).find(".tips-li-right").attr("conditionjump")!=8&&that.$e.realLi.eq(2).find(".tips-li-right").attr("conditiontype")!=3){
                                     // $("#tips-wrap").hide();
                                     var obj = {
                                         title: '尊敬的客户',
