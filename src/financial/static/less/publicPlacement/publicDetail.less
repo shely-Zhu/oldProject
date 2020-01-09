@@ -14,6 +14,9 @@ body{
 	background: @F7FAFD;
 	position: relative;
 }
+.isRiskMatchBox .isRiskMatchBox_contentBox {
+	z-index: 999999999;//此处是因为echarts折线图的提示会影响到提示框 所以提示框的层级变大
+}
 .fl {
 	float: left;
 }
