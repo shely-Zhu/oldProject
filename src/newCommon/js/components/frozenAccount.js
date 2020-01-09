@@ -14,6 +14,7 @@
  * 
  */
 var tipAction = require('./tipAction.js');
+require('@pathCommonCom/elasticLayer/elasticLayer/elasticLayer.js');
 
 function isCustTypeOne(outdateFreezeStatus, lawFreezeStatus, url, custType, value, htmdEvt) {
     var f = false;
