@@ -1288,6 +1288,7 @@ gulp.task('dataFile', function() {
 });
 
 
+var fileName = '';
 
 //联调/测试/预生产/生产环境，把root打出对应的环境的四个文件（财富，明泽，中岩，融泽），红硕直接复制
 gulp.task('rootEnv', function() {
@@ -1307,6 +1308,10 @@ gulp.task('rootEnv', function() {
                         //非本地环境时
 
                         if( file.path.indexOf('root') != -1 && file.path.indexOf('root.js') == -1){
+
+                            //保存文件名
+                            fileName = file.path.substring( file.path.indexOf('root'), file.path.length-1 );
+                            
                             var fileCon = file.contents.toString();
 
                             //替换真正的env和envOrigin变量，是根据root.js文件中第一行注释的//截取内容的，所以
@@ -1357,21 +1362,6 @@ gulp.task('rootEnv', function() {
 //这里在生成不同环境root.js之后，重命名预生产、生产环境的root.js，防止此情况出现
 gulp.task('reNameRoot', ['rootEnv'], function() {
 
-    pump([
-        gulp.src(['src/allServerResources/include/js/vendor/*.js']),
-
-        through.obj(function(file, enc, cb) {
-            if( file.path.indexOf('root') != -1){
-                this.push(file);
-            }
-            cb()
-        }),
-
-
-        //预生产、生产环境执行
-        // plugins.if( options.env == 3 || options.env == 4 , vinylPaths(del) )
-
-        // gulp.dest( host.path + 'allServerResources/include/js/vendor/')
-    ])
+    // plugins.if(options.env === '3' || options.env === '4',del([ host.path + 'allServerResources/include/js/vendor/' + fileName, host.path + 'allServerResources/include/js/vendor/root.js' ]))
 
 })
