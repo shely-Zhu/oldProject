@@ -780,7 +780,7 @@ gulp.task("allServerResourcesInclude", function() {
         .pipe(plugins.rev())
 
         //预生产和生产，打包到middle里
-        .pipe(plugins.if(options.env === '3' || options.env === '4', gulp.dest( host.middle + 'rootJs/')))
+        .pipe(plugins.if(options.env === '3' || options.env === '4', gulp.dest( host.middle + 'bfMiddleFile/')))
         
         //其他环境，打到原路径里
         .pipe(plugins.if(options.env != '3' && options.env != '4', gulp.dest( host.path + 'allServerResources/include/')))
@@ -1307,7 +1307,7 @@ gulp.task('rootEnv', function() {
         for (var i = 0; i < rootName.length; i++) {
 
             (function(i) {
-                gulp.src([ host.middle + 'rootJs/**/*.js']) //- 读取 rev-manifest.json 文件
+                gulp.src([ host.middle + 'bfMiddleFile/**/*.js']) //- 读取 rev-manifest.json 文件
 
                 .pipe(
                     through.obj(function(file, enc, cb) {
@@ -1316,9 +1316,6 @@ gulp.task('rootEnv', function() {
 
                         if( file.path.indexOf('root') != -1 && file.path.indexOf('root.js') == -1){
 
-                            //保存文件名
-                            fileName = file.path.substring( file.path.indexOf('root'), file.path.length-1 );
-                            
                             var fileCon = file.contents.toString();
 
                             //替换真正的env和envOrigin变量，是根据root.js文件中第一行注释的//截取内容的，所以

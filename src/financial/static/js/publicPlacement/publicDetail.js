@@ -458,9 +458,6 @@ $(function () {
                 that.getUserInfo();
                 that.getUserInfo_1();
                 //定投一键认证
-                if(!that.gV.fixedInestementBtnStatu){
-                    return
-                }
                 if(that.gV.accountType === 0 || that.gV.accountType === 2){
                     tipAction('暂不支持机构客户进行交易');
                 }else{
