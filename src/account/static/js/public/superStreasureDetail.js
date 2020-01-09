@@ -12,6 +12,7 @@ require('@pathCommonCom/elasticLayer/elasticLayer/elasticLayer.js');
 var splitUrl = require('@pathCommonJs/components/splitUrl.js')();
 var generateTemplate = require('@pathCommonJsComBus/generateTemplate.js');
 var frozenAccount = require('@pathCommonJs/components/frozenAccount.js');
+var authenticationProcess = require('@pathCommonCom/authenticationProcess/authenticationProcess.js');
 
 
 
@@ -209,6 +210,21 @@ $(function() {
 
             // 使用刚指定的配置项和数据显示图表。
             myChart.setOption(option);
+        },
+        //获取用户信息
+        getUserInfo_1:function(){
+          var that = this;
+          var obj = [{
+            url:site_url.user_api,
+            data:{
+
+            },
+            callbackDone:function(json){
+              var data = json.data
+                that.gL.userStatus = data.investFavour
+            }
+          }];
+          $.ajaxLoading(obj);
         },
         // 获取认证信息
         getUserInfo: function() {
@@ -470,12 +486,24 @@ $(function() {
                 })
                 //点击转入跳转
             mui("body").on('mdClick', '.shiftToBtn', function(e) {
+                $(".isRiskMatch_mask").hide();
+                $(".isRiskMatchBox").hide();
+                if (that.gL.accountType === 0 || that.gL.accountType === 2) {
+                    tipAction('暂不支持机构客户进行交易');
+                } else {
+                    // 先判断是否司法冻结以及身份过期，再判断一键认证
+                    var result = frozenAccount("buyFreeze", window.location.href, that.gL.accountType);
+                    if( !result ) {
+                        var url = site_url.pofCashTransformIn_url+ "?fundName=" +that.gL.fundName + "&fundCode=" +that.gL.fundCode;
+                        authenticationProcess("", that.gL.fundCode, that.gL.userStatus, that.gL.accountType, url)
+                    };
+                }
 
                 // 账户过期弹窗
-                var result = frozenAccount("buyFreeze", window.location.href, false);
+                /*var result = frozenAccount("buyFreeze", window.location.href, false);
                 if(!result) {
                     that.getConditionsOfOrder(that.gL.fundCode)
-                }
+                }*/
 
 
 
@@ -492,7 +520,7 @@ $(function() {
             })
 
                      //风测等级匹配成功
-         mui("body").on('mdClick',".isRiskMatchBox_match",function(){
+         /*mui("body").on('mdClick',".isRiskMatchBox_match",function(){
             $(".isRiskMatch_mask").hide();
             $(".isRiskMatchBox").hide();
             if (that.gL.accountType === 0 || that.gL.accountType === 2) {
@@ -522,7 +550,7 @@ $(function() {
             window.location.href = site_url.riskAppraisal_url + "?type=private"
         }
        
-    })
+    })*/
                 //点击历史记录
             mui("body").on('mdClick', '.recordBtn', function(e) {
                 window.location.href = site_url.superRecord_url+ "?fundCode=" +that.gL.fundCode;
