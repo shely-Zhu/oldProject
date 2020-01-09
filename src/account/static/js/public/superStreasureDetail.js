@@ -49,7 +49,7 @@ $(function() {
             console.log("你是真的不执行吗?")
             that.getTimeReq()
             that.event();
-            that.getUserInfo(); //获取用户类型
+            //that.getUserInfo(); //获取用户类型
         },
         drawLine: function(data) {
             var that = this;
@@ -486,6 +486,8 @@ $(function() {
                 })
                 //点击转入跳转
             mui("body").on('mdClick', '.shiftToBtn', function(e) {
+                that.getUserInfo()
+                that.getUserInfo_1()
                 $(".isRiskMatch_mask").hide();
                 $(".isRiskMatchBox").hide();
                 if (that.gL.accountType === 0 || that.gL.accountType === 2) {

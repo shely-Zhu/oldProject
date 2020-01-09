@@ -33,8 +33,8 @@ $(function() {
         init: function() {
             var that = this;
             that.getData();
-            that.getUserInfo();  //获取用户类型
-            that.getUserInfo_1(); //用户身份信息
+            /*that.getUserInfo();  //获取用户类型
+            that.getUserInfo_1(); //用户身份信息*/
             that.events();
         },
          //获取用户信息
@@ -347,6 +347,8 @@ $(function() {
 
             // 买入
             mui("body").on('mdClick', ".buyButton", function(e) {
+                that.getUserInfo();  //获取用户类型
+                that.getUserInfo_1(); //用户身份信息
                 var $this = $(this);
                 if ($this.hasClass("disable")) {
                     return false;
@@ -355,7 +357,7 @@ $(function() {
                     var result = frozenAccount("buyFreeze", window.location.href, that.gV.accountType);
                     if( !result ) {
                        var url = site_url.fundTransformIn_url + '?fundCode=' + that.getElements.fundCode + '&fundName=' + that.getElements.chiName+"&noReload=1";
-                       authenticationProcess("fundIn", that.gV.fundCode, that.gV.userStatus, that.gV.accountType, url)
+                       authenticationProcess("fundIn", that.getElements.fundCode, that.gV.userStatus, that.gV.accountType, url)
                     };
                     //that.getConditionsOfOrder();
                 }

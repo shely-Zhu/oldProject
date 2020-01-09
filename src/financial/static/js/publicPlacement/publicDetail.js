@@ -9,7 +9,6 @@
 
 require('@pathCommonBase/base.js');
 require('@pathCommonJs/ajaxLoading.js');
-var authenticationProcess = require('@pathCommonJs/components/authenticationProcess.js');
 var generateTemplate = require('@pathCommonJsComBus/generateTemplate.js');
 var splitUrl = require('@pathCommonJs/components/splitUrl.js')();
 var frozenAccount = require('@pathCommonJs/components/frozenAccount.js');
@@ -456,8 +455,10 @@ $(function () {
 
             // 定投
             mui("body").on('mdClick', ".footer .fixed_investement_btn", function (e) {
+                that.getUserInfo();
+                that.getUserInfo_1();
                 //定投一键认证
-                if(!that.gV.fixedInvestementBtnStatu){
+                if(!that.gV.fixedInestementBtnStatu){
                     return
                 }
                 if(that.gV.accountType === 0 || that.gV.accountType === 2){

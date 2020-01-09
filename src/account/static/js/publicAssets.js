@@ -31,8 +31,8 @@ $(function() {
             that.getData('');
             that.initRightBtn();
             that.clickEvent();
-            that.getUserInfo();  //获取用户类型
-            that.getUserInfo_1();  // 获取用户信息
+           /* that.getUserInfo();  //获取用户类型
+            that.getUserInfo_1();  */// 获取用户信息
         },
         // 获取认证信息
         getUserInfo: function () {
@@ -239,6 +239,8 @@ $(function() {
             })
             //购买
             mui("body").on('mdClick', '.buy_btn', function(e) {
+                that.getUserInfo();  //获取用户类型
+                that.getUserInfo_1();  // 获取用户信息
                 var fundCode = $(this).attr("fundCode");
                 var fundName = $(this).attr("fundName");
                 var id = $(this).parent().parent().parent().parent().attr("id")
