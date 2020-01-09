@@ -14,7 +14,6 @@ require('@pathCommonBase/base.js');
 require('@pathCommonJs/ajaxLoading.js');
 
 require('@pathCommonJs/components/authenticationProcess.js');
-var authenticationProcess = require('@pathNewCommonCom/authenticationProcess/authenticationProcess.js');
 //引入弹出层
 require('@pathCommonCom/elasticLayer/elasticLayer/elasticLayer.js');
 
