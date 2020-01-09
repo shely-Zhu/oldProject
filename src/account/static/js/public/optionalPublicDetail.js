@@ -655,9 +655,12 @@ $(function() {
 						}
 						if( that.gV.investorStatus=="0"&&that.gV.userStatus==""){
                             //直接申请为专业投资者
-                            that.gV.tipsWrap.show()
+                            that.data.tipsWrap.show()
+                            that.data.realLi.show();
+                            that.data.realLi.eq(3).show() 
+                            /*that.gV.tipsWrap.show()
                             that.gV.realLi.show();
-                            that.gV.realLi.eq(3).show()  
+                            that.gV.realLi.eq(3).show() */ 
                         }
 						that.data.realLi.eq(4).hide() 
 
@@ -821,6 +824,9 @@ $(function() {
 			   }else if(type == "investement"){
 					//定投一键认证
 					window.location.href = site_url.ordinarySetThrow_url+"?fundCode="+that.data.fundCode+'&type=add';			
+			   }else if(type == "investement"){
+					//赎回一键认证
+					window.location.href = site_url.redemptionBuy_url + "?tradeNo=" + splitUrl['tradeNo'] + "&fundCode=" + that.data.fundCode			
 			   }
 			},{
 				'htmdEvt': 'optionalPublicDetail_11'
@@ -879,7 +885,9 @@ $(function() {
 				}
 			    var result = frozenAccount("saleFreeze", window.location.href, false);
 				if( !result ) {
-					window.location.href = site_url.redemptionBuy_url + "?tradeNo=" + splitUrl['tradeNo'] + "&fundCode=" + that.data.fundCode			
+					that.getConditionsOfOrder("redemption");
+					that.gV.singleaAuthenType = "redemption"
+					//window.location.href = site_url.redemptionBuy_url + "?tradeNo=" + splitUrl['tradeNo'] + "&fundCode=" + that.data.fundCode			
 				};
 			},{
                 'htmdEvt': 'optionalPublicDetail_8'
