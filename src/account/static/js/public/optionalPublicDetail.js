@@ -602,7 +602,7 @@ $(function() {
 							that.data.realLi.eq(0).hide()  
 						}else{
 							that.gV.isWealthAccountStatus = false
-							if(jsonData.isWealthAccount == "6"){
+							/*if(jsonData.isWealthAccount == "6"){
                                 //司法冻结
                                 that.gV.tipsWrap.hide()
                                 that.gV.realLi.hide(); 
@@ -612,9 +612,9 @@ $(function() {
                                 $(".isRiskMatchBox_match").show()
                                 $(".isRiskMatchBox_noMatch").hide()
                                 $(".isRiskMatchBox_header").html("因司法原因该账户被冻结，请联系客服咨询，客服电话：400-8980-618")
-                            }
+                            }*/
 
-                            if(jsonData.isWealthAccount == "5"){
+                            /*if(jsonData.isWealthAccount == "5"){
                                 //身份过期
                                 that.gV.tipsWrap.hide()
                                 that.gV.realLi.hide(); 
@@ -627,8 +627,8 @@ $(function() {
                                 $(".isRiskMatchResult").html("完善资料")
                                 $(".isRiskMatchResult").attr("type","overdue")
                                 $(".isRiskMatchBox_header").html("您的证件已过期，补充证件信息后才可以继续交易")
-                            }
-							that.data.realLi.eq(0).show()
+                            }*/
+							//that.data.realLi.eq(0).show()
                         }
 						if(jsonData.isRiskEndure=="0"||jsonData.isRiskEndure == null){
 							//是否风测
@@ -897,15 +897,6 @@ $(function() {
 					that.getConditionsOfOrder("into");
 					that.gV.singleaAuthenType = "into"
 				}
-				/*if(!that.data.isBuyFlag){//不可买入
-			   	 	return false;
-			    }
-				var result = frozenAccount("saleFreeze", window.location.href, false);
-				if( !!result ) {
-					return false;
-				};
-				that.getConditionsOfOrder("into");
-				that.gV.singleaAuthenType = "into"*/
 			//	window.location.href = site_url.fundTransformIn_url+"?fundCode="+that.data.fundCode;			
 			},{
                 'htmdEvt': 'optionalPublicDetail_9'
@@ -1052,8 +1043,11 @@ $(function() {
 			mui("body").on('mdClick', '.fiedBtn', function(e) {
 				that.getUserInfo();
 				that.getUserInfo_1();
-				that.getConditionsOfOrder("investement");
-				that.gV.singleaAuthenType = "investement";
+				var result = frozenAccount("buyFreeze", window.location.href, false);
+				if(!result) {
+					that.getConditionsOfOrder("investement");
+					that.gV.singleaAuthenType = "investement";
+				}
 				//window.location.href = site_url.ordinarySetThrow_url+"?fundCode="+that.data.fundCode;;			
 			},{
                 'htmdEvt': 'optionalPublicDetail_10'
