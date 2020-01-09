@@ -420,7 +420,6 @@ $(function() {
                     }
                 },
                 callbackNoData:function(json){
-                    debugger
                 }
             }, {
                 url: site_url.queryUserAuthInfo_api,

@@ -117,7 +117,7 @@ module.exports = function(type, fundCode, userStatus, accountType, url) {
 							that.data.realLi.eq(0).hide()  
 						}else{
 							that.gV.isWealthAccountStatus = false
-							if(jsonData.isWealthAccount == "6"){
+							/*if(jsonData.isWealthAccount == "6"){
                                 //司法冻结
                                 that.gV.tipsWrap.hide()
                                 that.gV.realLi.hide(); 
@@ -142,7 +142,7 @@ module.exports = function(type, fundCode, userStatus, accountType, url) {
                                 $(".isRiskMatchResult").html("完善资料")
                                 $(".isRiskMatchResult").attr("type","overdue")
                                 $(".isRiskMatchBox_header").html("您的证件已过期，补充证件信息后才可以继续交易")
-                            }
+                            }*/
 							that.data.realLi.eq(0).show()
                         }
 						if(jsonData.isRiskEndure=="0"||jsonData.isRiskEndure == null){
@@ -171,16 +171,15 @@ module.exports = function(type, fundCode, userStatus, accountType, url) {
 						}
 						if(jsonData.investorStatus =="0"&&that.gV.userStatus==""){
                             //直接申请为专业投资者
-                            that.gV.tipsWrap.show()
-                            that.gV.realLi.show();
-                            that.gV.realLi.eq(3).show()  
+                            that.data.tipsWrap.show()
+                            that.data.realLi.show();
+                            that.data.realLi.eq(3).show()  
                         }
 						that.data.realLi.eq(4).hide() 
 
                 },
                 callbackFail: function(json) { //失败后执行的函数
                    tipAction(json.message);
-
                 },
                 callbackNoData:function(argument) {
                     tipAction(json.message);
@@ -369,7 +368,7 @@ module.exports = function(type, fundCode, userStatus, accountType, url) {
                     window.location.href = site_url.wealthIndex_url
                 }else if(type = "overdue"){
                     //身份证过期
-                    window.location.href = site_url.completeInformation_url
+                    window.location.href = site_url.completeInfoEditModify_url
                 }
 			},{
 				'htmdEvt': 'optionalPublicDetail_13'
