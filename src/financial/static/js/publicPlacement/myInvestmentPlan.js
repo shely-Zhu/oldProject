@@ -39,6 +39,10 @@ $(function () {
         },
         init: function () {
             var that = this;
+
+            $('.newPlan').html( $('html').height() + ', ' + window.screen.height + ', ' + document.documentElement.offsetHeight);
+
+
             that.initMui();
             that.getUserInfo();
             that.events();
@@ -61,6 +65,7 @@ $(function () {
                         data: {
                             "pageNo": that.gV.pageCurrent, //非必须，默认为1
                             "pageSize": 10,//非必须，默认为10
+                            "fixStatus": 'A' //定投协议状态 A-正常状态 H-终止状态
                         },
                         needDataEmpty: true,
                         needLoading: false,
@@ -75,12 +80,17 @@ $(function () {
                                         data[i].fixStateStr = "进行中"
                                         data[i].show = true
                                         that.gV.paddingStatus = true
-                                    } else if (data[i].fixState == 'H') {
-                                        data[i].fixStateStr = "已终止"
-                                        data[i].show = false
-                                        that.gV.fixStateNum ++
-                                        that.gV.stopPlanList.push(data[i])
-                                    } else {
+                                    } 
+
+                                    //已终止的数据后台不会返回，这里H的判断实际上不需要
+                                    // else if (data[i].fixState == 'H') {
+                                    //     data[i].fixStateStr = "已终止"
+                                    //     data[i].show = false
+                                    //     that.gV.fixStateNum ++
+                                    //     that.gV.stopPlanList.push(data[i])
+                                    // } 
+                                    //
+                                    else {
                                         data[i].fixStateStr = "暂停"
                                         data[i].show = true
                                         that.gV.stopNum ++
@@ -92,15 +102,15 @@ $(function () {
                                         data[i].totalTradeTimes_s = true
                                     }
                                 }
-                                if (that.gV.fixStateNum > 0) {
-                                    that.$e.endPlan.show()
-                                    // var height = windowHeight - $(".newPlan").height() - $(".topTitle").height() - $(".endPlan").height();
-                                    // $('.list .contentWrapper').height(height)
-                                    $(".stopPlan").html(that.gV.fixStateNum)
+                                // if (that.gV.fixStateNum > 0) {
+                                //     that.$e.endPlan.show()
+                                //     // var height = windowHeight - $(".newPlan").height() - $(".topTitle").height() - $(".endPlan").height();
+                                //     // $('.list .contentWrapper').height(height)
+                                //     $(".stopPlan").html(that.gV.fixStateNum)
 
-                                } else {
-                                    that.$e.endPlan.hide()
-                                }
+                                // } else {
+                                //     that.$e.endPlan.hide()
+                                // }
                                 if(that.gV.stopNum>0){
                                     //that.$e.stopPlan.show()
                                     // var height = windowHeight - $(".newPlan").height() - $(".topTitle").height() - $(".endPlan").height();
@@ -129,6 +139,9 @@ $(function () {
                                     }
                                 }
                                 that.gV.pageCurrent++;
+
+                                //请求已终止的定投列表，获取数量
+                                that.getStopList();
                             }
                             
                         },
@@ -184,6 +197,58 @@ $(function () {
                 $('.list').addClass('hasPullUp');
             });*/
         },
+
+        //获取中止状态的定投数量
+        getStopList: function(){
+            var that = this;
+            var obj = [{
+                url: site_url.protocolList_api,
+                data: {
+                    "pageNo": that.gV.pageCurrent, //非必须，默认为1
+                    "pageSize": 10,//非必须，默认为10
+                    "fixStatus": 'H' //定投协议状态 A-正常状态 H-终止状态
+                },
+                needDataEmpty: true,
+                needLoading: false,
+                callbackDone: function(json) {    
+                    var data = json.data.pageList;
+
+                    if( data && data.length ){
+                        // $.each( data, function(i, el){
+                        //     if (el.fixState == 'H') {
+                        //         that.gV.fixStateNum ++;
+                        //     } 
+                        // })
+                        
+                        if (that.gV.fixStateNum > 0) {
+                            //展示已终止的定投数量
+                            that.$e.endPlan.show()
+                            // var height = windowHeight - $(".newPlan").height() - $(".topTitle").height() - $(".endPlan").height();
+                            // $('.list .contentWrapper').height(height)
+                            $(".stopPlan").html(that.gV.fixStateNum)
+                        } else {
+                            that.$e.endPlan.hide()
+                        }
+                    }
+
+                    // if (that.gV.fixStateNum > 0) {
+                    //     //展示已终止的定投数量
+                    //     that.$e.endPlan.show()
+                    //     // var height = windowHeight - $(".newPlan").height() - $(".topTitle").height() - $(".endPlan").height();
+                    //     // $('.list .contentWrapper').height(height)
+                    //     $(".stopPlan").html(that.gV.fixStateNum)
+                    // } else {
+                    //     that.$e.endPlan.hide()
+                    // }
+                },
+                callbackNoData: function( json ){
+                },
+                callbackFail: function(json) {
+                },
+            }];
+            $.ajaxLoading(obj); 
+        },
+
         /*getData: function (t) {
             var that = this;
 
@@ -283,11 +348,11 @@ $(function () {
                 },
                 callbackNoData:function(json){
                     that.$e.nothing.show();
-					//tipAction(json.message);
+                    //tipAction(json.message);
                 },
                 callbackFail:function(json){
-					tipAction(json.message);
-				},
+                    tipAction(json.message);
+                },
 
             }];
             $.ajaxLoading(obj);
@@ -316,15 +381,15 @@ $(function () {
                 }
                 window.location.href = site_url.investmentPlanRanking_url + '?flag=2';
             }, {
-				htmdEvt: 'myInvestmentPlan_01'
-			});
+                htmdEvt: 'myInvestmentPlan_01'
+            });
 
             // 跳转详情页
             mui("body").on("mdClick", ".investmentPlan-item", function (e) {
                 var scheduledProtocolId = $(this).data('id');
                 window.location.href = site_url.pofCastSurelyDetails_url + '?scheduledProtocolId=' + scheduledProtocolId;
             }, {
-				htmdEvt: 'myInvestmentPlan_02'
+                htmdEvt: 'myInvestmentPlan_02'
             });
             
             //跳往已终止的定投计划
@@ -333,8 +398,8 @@ $(function () {
             
                // sessionStorage.setItem('stopList',JSON.stringify(that.gV.stopPlanList))
             }, {
-				htmdEvt: 'myInvestmentPlan_03'
-			});
+                htmdEvt: 'myInvestmentPlan_03'
+            });
 
         }
     };
