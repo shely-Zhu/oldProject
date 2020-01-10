@@ -42,9 +42,9 @@ $(function() {
             //计算节点高度并设置
             var height = windowHeight - $('.fixedWrap').height();
 
-            // if (!$('.list .contentWrapper').hasClass('setHeight')) {
-            //     $('.list, .contentWrapper').height(height).addClass('setHeight');
-            // }
+            if (!$('.list .contentWrapper').hasClass('setHeight')) {
+                $('.list, .contentWrapper').height(height).addClass('setHeight');
+            }
         },
         // 初始化mui的上拉加载
         initMui: function() {
@@ -241,6 +241,7 @@ $(function() {
 
             // 搜索取消按钮
             mui("body").on("mdClick", ".mui-icon-clear", function (event) {
+                that.$e.resultWrap.hide();
                 that.$e.hotFundList.html('');
                 that.$e.resultWrap.find('.total').html('--');
                 that.$e.resultWrap.find('.word').html('');

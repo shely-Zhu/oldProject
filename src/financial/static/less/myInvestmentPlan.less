@@ -9,15 +9,29 @@ body{
     background-color: @F7FAFD;
 
 }
+
+html, body{
+    height: 100%;
+}
+
 .goTopBtn{
     bottom:2.56rem;
 }
 .wrap{
     .list{
+
+        //重置mui列表点击的底色变色
+            .mui-table-view-cell.mui-active{
+                background-color: #F7FAFD;
+            }
+
         li{
             margin-bottom:0.3rem;
             background-color: @FFFFFF;
             padding:0.3rem;
+
+            
+
             .content-t{
                 display:-webkit-box;
                 margin-bottom:0.2rem;
@@ -119,7 +133,8 @@ body{
     padding:0.5rem 0;
     position: fixed;
     left:0 ;
-    bottom:1.98rem;
+    // bottom:1.98rem;
+    bottom: 0.98rem;
     a{
         color:@364D97;
         font-size:0.28rem;

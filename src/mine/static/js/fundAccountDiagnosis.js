@@ -32,6 +32,8 @@ $(function() {
             isWealthAccountStatus:"", //是否开通账户状态
             userStatus:"", // 为空则是新用户   为0普通投资者  为1专业投资者
             investorStatus: '', // 投资者状态
+            checkClick:true, //为无持仓情况下，不调用后面的接口
+            checkClick_1:false,   //判断其他接口是否被调用过
             pageCurrent: 1, // 账户持仓情况分页参数
             pageSize: 5, // 账户持仓情况分页参数
             holdList: [], // 账户持仓情况
@@ -234,22 +236,28 @@ $(function() {
                           that.$e.noDataContent.show()
                           that.$e.noData.show()
                           that.$e.contentListBox.hide()
+                          that.gV.checkClick = false;
                     } else {
                         if (json.data.holdShareList.length == 0) {
                             that.$e.noDataContent.show()
                             that.$e.noData.show()
                             that.$e.contentListBox.hide()
+                            that.gV.checkClick = false;
                         }else{
                             that.$e.noDataContent.hide()
                             that.$e.noData.hide()
                             that.$e.contentListBox.show()
-                            that.getPieData() //基金配置比例详情
-                            that.getAssetData() //资产配置比例
-                            that.getHeavyData() // 重仓行业配置
-                            that.getVolumeData() // 组合券种分布
-                            that.getAccountStyleData() // 账户风格
-                            that.getDiagnosisData() // 诊断结论
+                            that.gV.checkClick = true;
                         }
+                    }
+                    if(that.gV.checkClick&&!that.gV.checkClick_1){
+                        that.getPieData() //基金配置比例详情
+                        that.getAssetData() //资产配置比例
+                        that.getHeavyData() // 重仓行业配置
+                        that.getVolumeData() // 组合券种分布
+                        that.getAccountStyleData() // 账户风格
+                        that.getDiagnosisData() // 诊断结论
+                        that.gV.checkClick_1 = true
                     }
                     $("#holdingBox").html("")
                     // 将列表插入到页面上
@@ -556,7 +564,7 @@ $(function() {
                     $(this).find('.txt').html('收起部分持仓');
                     that.gV.pageSize = 100000
                 } 
-
+                that.gV.checkClick = false;
                 that.getHoldData();
             }, {
                 'htmdEvt': 'fundAccountDiagnosis_01'

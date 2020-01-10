@@ -67,8 +67,8 @@ $(function () {
                         callbackDone: function(json) {    
                             var data = json.data.pageList;
                             if(that.gV.pageCurrent == 1 && data.length == 0) {
-                                $(".list").css("display", "none")
-                                that.$e.noData.show()
+                                $(".list").css("display", "none");
+                                that.$e.noData.show();
                             } else {
                                 for (var i = 0; i < data.length; i++) {
                                     if (data[i].fixState == 'A') {
@@ -94,8 +94,8 @@ $(function () {
                                 }
                                 if (that.gV.fixStateNum > 0) {
                                     that.$e.endPlan.show()
-                                    var height = windowHeight - $(".newPlan").height() - $(".topTitle").height() - $(".endPlan").height();
-                                    $('.list .contentWrapper').height(height)
+                                    // var height = windowHeight - $(".newPlan").height() - $(".topTitle").height() - $(".endPlan").height();
+                                    // $('.list .contentWrapper').height(height)
                                     $(".stopPlan").html(that.gV.fixStateNum)
 
                                 } else {
@@ -103,17 +103,18 @@ $(function () {
                                 }
                                 if(that.gV.stopNum>0){
                                     //that.$e.stopPlan.show()
-                                    var height = windowHeight - $(".newPlan").height() - $(".topTitle").height() - $(".endPlan").height();
+                                    // var height = windowHeight - $(".newPlan").height() - $(".topTitle").height() - $(".endPlan").height();
                                    // $('.list .contentWrapper').height(height)
                                    // $(".stopPlan_1").html(that.gV.stopNum)
                                 }else{
                                     that.$e.stopPlan.hide()
                                 }
                                 if(!that.gV.paddingStatus&&that.gV.stopNum==0){
-                                    that.$e.noData.show()
-                                    return 
+                                    $(".list").css("display", "none");
+                                    that.$e.noData.show();
+                                    return ;
                                 }
-                                def && def.resolve( data, that.gV.pageCurrent);
+                                def && def.resolve( data, that.gV.pageCurrent); 
                                 if (that.gV.pageCurrent == 1) {
                                     for (var i = 0; i < data.length; i++) {
                                         if (data[i].fixStateStr == "暂停") {

@@ -117,7 +117,7 @@
      </script>
      <script id="content-template" type="text/x-handlebars-template">
           {{#each this}}
-          <a href="{{externalUrl}}">
+          <a class="interpreter" externalUrl='{{externalUrl}}'  id='{{id}}'  articleBelong='{{articleBelong}}'>
                <p class="con-t">
                     <span>第{{numPeriods}}期</span><b>{{titleFir}}</b>
                </p>
@@ -140,7 +140,7 @@
                     <!-- <a htmdEvt = "fortune_videoList" onclick="window.location.href=site_url.fortuneFlowKnown_url+'?articleBelong={{articleBelong}}'"> 
                          onclick="setGoUrl( site_url.articleTemplate_url+'?id={{id}}&articleBelong={{articleBelong}}', 'fortune_02')"     
                     -->
-                    <a class="whereGo" href="javascript:void(0);"  externalUrl={{externalUrl}} id={{id}}  articleBelong={{articleBelong}} fortune_02={{fortune_02}} >
+                    <a class="whereGo" href="javascript:void(0);"  externalUrl='{{externalUrl}}'  id='{{id}}'  articleBelong='{{articleBelong}}' fortune_02='{{fortune_02}}' >
                          <img class="lazyload" src="/common/img/lazyImgList.png" data-original="{{imageUrlShowOnline}}" alt="">
                          <p>
                               <i class="iconfont">
@@ -173,7 +173,7 @@
                          <div class="mui-scroll-wrapper mui-slider-indicator mui-segmented-control mui-segmented-control-inverted">
                               <div class="mui-scroll">
                                    {{#each listContent}}
-                                        <a class="whereGo"  href="javascript:void(0);" externalUrl={{externalUrl}} id={{id}}  articleBelong={{articleBelong}} fortune_05={{fortune_05}}>
+                                        <a class="whereGo"  href="javascript:void(0);" externalUrl='{{externalUrl}}' id='{{id}}' articleBelong='{{articleBelong}}' fortune_05='{{fortune_05}}'>
                                              <div class="mui-control-item conten">
                                                   <img style="width:6.2rem;height:6rem;" class="lazyload" src="/common/img/lazyImgList.png" data-original="{{imageUrlShowOnline}}" alt="">
                                                   <div class="con">

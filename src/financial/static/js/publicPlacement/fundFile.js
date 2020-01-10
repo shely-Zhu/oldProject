@@ -510,9 +510,12 @@ $(function () {
 			});
             //基金公告跳转
             mui("body").on('mdClick', '.tplBox4 .content', function () {
+                var fileName=''
                 var link = $(this).attr('linkRul')
+                fileName=link.split("?")
+                fileName=fileName[0].substring(fileName[0].lastIndexOf('.'))
                 var typInfo = $(this).attr('typInfo')
-				window.location.href = site_url.agreementPreview_url + '?link=' + link + '&typInfo=' + encodeURI(typInfo)
+				window.location.href = site_url.agreementPreview_url + '?link=' + link + '&fileName=' + encodeURI(typInfo+fileName)
             }, {
 				htmdEvt: 'fundFile_02'
 			})
