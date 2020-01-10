@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2019-11-26 14:42:56
- * @LastEditTime: 2019-12-18 14:52:02
+ * @LastEditTime : 2020-01-10 14:10:52
  * @LastEditors  : Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \htjf-app\src\financial\static\js\publicPlacement\redemptionBuy.js
@@ -142,10 +142,26 @@ $(function() {
                     })
                     that.gV.transferFunds = arr;
                     // 将列表插入到页面上
+                    var fundCodeList= [];
+                    var Redata = [];
+                    debugger
                     for (var i = 0; i < that.gV.transferFunds.length; i++) {
                         var code = that.gV.transferFunds[i].fundCode;
-                        var Redata = that.searchNewfundDetails(code);
-                        that.gV.transferFunds[i].annYldRat = Redata;
+                       // Redata = that.searchNewfundDetails(code);
+                        fundCodeList.push(code)
+                       // that.gV.transferFunds[i].annYldRat = Redata;
+                    }
+                    Redata = that.searchNewfundDetails(fundCodeList);
+                    for (var i = 0; i < that.gV.transferFunds.length; i++) {
+                        var code = that.gV.transferFunds[i].fundCode;
+                         if(Redata.length>0){
+                             for(var j = 0 ;j<Redata.length ; j++){
+                                 if(code == Redata[j].trdCode){
+                                    that.gV.transferFunds[i].annYldRat = Redata[j].annYldRat
+                                 }
+                             }
+                         }
+                       // that.gV.transferFunds[i].annYldRat = Redata;
                     }
                     generateTemplate(that.gV.transferFunds, that.getElements.TransferFundsContent, that.getElements.templateTransferFunds);
                 }
@@ -153,18 +169,19 @@ $(function() {
             $.ajaxLoading(obj);
         },
         //查询基金七日年化
-        searchNewfundDetails: function(code) {
+        searchNewfundDetails: function(codeList) {
             var that = this;
             var callbackData;
             var obj = [{
-                url: site_url.newfundDetails_api,
+                url: site_url.newfundDetailList_api,
                 needDataEmpty: true,
                 async: false,
-                data: {
-                    fundCode: code
-                },
+                data: codeList,
                 callbackDone: function(json) {
-                    callbackData = json.data.annYldRat
+                    //callbackData = json.data.annYldRat
+                    if(json.status == '0000'){
+                        callbackData = json.data
+                    }
                 },
 
 
