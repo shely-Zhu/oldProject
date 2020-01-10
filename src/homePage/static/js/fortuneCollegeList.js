@@ -493,11 +493,31 @@ $(function() {
                 var id = $(this).attr("id")
                 var articleBelong = $(this).attr("articleBelong")
                 var applyType = $(this).attr("applyType")
-                window.location.href =site_url.articleTemplate_url + '?id=' + id + '&articleBelong=' + articleBelong 
+                if($(this).attr("externalUrl")){
+                    if($(this).attr("externalUrl").indexOf("?") != -1) {
+                        window.location.href = $(this).attr("externalUrl") + "&isHtOuterLinkUniqueIdentification=true"
+                    } else{
+                        window.location.href = $(this).attr("externalUrl") + "?isHtOuterLinkUniqueIdentification=true"
+                    }
+                }else{
+                    window.location.href =site_url.articleTemplate_url + '?id=' + id + '&articleBelong=' + articleBelong 
+                }
             },{
                 'htmdEvt': 'fortune_07'
             })
             mui("body").on('mdClick', '.whereGo' , function(){
+<<<<<<< HEAD
+                if($(this).attr("externalUrl")){
+                    if($(this).attr("externalUrl").indexOf("?") != -1) {
+                        window.location.href = $(this).attr("externalUrl") + "&isHtOuterLinkUniqueIdentification=true"
+                    } else{
+                        window.location.href = $(this).attr("externalUrl") + "?isHtOuterLinkUniqueIdentification=true"
+                    }
+                }else{
+                    window.location.href = site_url.articleTemplate_url+'?id=' + $(this).attr("id") + '&articleBelong=' +  $(this).attr("articleBelong")
+                }
+
+=======
                 var that=this
                 setTimeout(function() {
                     if($(that).attr("externalUrl")){
@@ -506,10 +526,22 @@ $(function() {
                         window.location.href = site_url.articleTemplate_url+'?id=' + $(that).attr("id") + '&articleBelong=' +  $(that).attr("articleBelong")
                     }
                 }, 300);
+>>>>>>> bf9ff49802c4a79fd1d9d014011b218ec92d84a5
             },{
                 'htmdEvt': 'fortune_02'
             })
-            
+            mui("body").on("tap",'.interpreter', function(){
+                if($(this).attr("externalUrl")){
+                    if($(this).attr("externalUrl").indexOf("?") != -1) {
+                        window.location.href = $(this).attr("externalUrl") + "&isHtOuterLinkUniqueIdentification=true"
+                    } else{
+                        window.location.href = $(this).attr("externalUrl") + "?isHtOuterLinkUniqueIdentification=true"
+                    }
+                }else{
+                    window.location.href = site_url.articleTemplate_url+'?id=' + $(this).attr("id") + '&articleBelong=' +  $(this).attr("articleBelong")
+                }
+
+            })
         }
     };
     data.init();
