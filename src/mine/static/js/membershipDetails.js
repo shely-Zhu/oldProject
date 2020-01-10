@@ -1,6 +1,8 @@
 /**
  * 会员权益详情
  * @author liuhongyu 2019-11-12
+ * 
+ * updata caoqihai 2020-1-10  修改显示了解详情
  */
 
 require('@pathCommonBase/base.js');
@@ -72,13 +74,14 @@ $(function() {
                         $('.membershipDetailsContentBox h2').text(name);
                         $('.membershipDetailsContentBox p').html(text);
                         $(".tel").attr("href", "tel:" + commonSetting.serverPhone).html(commonSetting.serverPhone)
-                        $('.linkBtnBox').html("<a href='javascript:void(0);' class='linkBtn goldBgButton' onclick='setGoUrl({{" + link + "}} , 'detailsUnderstandingDetails_01')'>了解详情</span>")
+                        $('.linkBtnBox a').attr('onclick','setGoUrl( "'+link+'", "detailsUnderstandingDetails_01")')
                     },
                 }
             });
         },
         //获取会员权益详情
         getMembershipDetailsData: function() {
+            debugger
             var that = this;
             var obj = [{
                 url: site_url.findBenefitByLevel_api,
