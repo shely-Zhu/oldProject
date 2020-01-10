@@ -70,8 +70,8 @@
                 </div>
                 {{#each shareholderInfo}}
         <div class="shareholderList">
-                    <div class="shareholderName">{{ shareholderName }}</div>
-                    <div class="shareholderScale">{{ holdSharesRatio }}%</div>
+                    <div class="shareholderName ellipsis">{{ shareholderName }}</div>
+                    <div class="shareholderScale">{{ holdSharesRatio }}</div>
                 </div>
                 {{/ each}}
     </div>
@@ -86,7 +86,7 @@
                 </div>
                 {{#each scaleInfo}}
         <div class="productList">
-                    <div class="productName">{{ fundTypeName }}</div>
+                    <div class="productName ellipsis">{{ fundTypeName }}</div>
                     <div class="productNum">{{ fundCount }}</div>
                     <div class="productScale">{{ fundNav }}</div>
                 </div>
