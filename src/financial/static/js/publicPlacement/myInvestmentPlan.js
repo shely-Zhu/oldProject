@@ -40,7 +40,7 @@ $(function () {
         init: function () {
             var that = this;
 
-            $('.newPlan').html( $('html').height() + ', ' + window.screen.height + ', ' + document.documentElement.offsetHeight);
+            // $('.newPlan').html( $('html').height() + ', ' + window.screen.height + ', ' + document.documentElement.offsetHeight);
             
             $('.height').height( window.screen.height );
 
