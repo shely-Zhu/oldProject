@@ -17,9 +17,9 @@ var data = Mock.mock({
     "status": "0000", 
     "msg": "处理成功！", 
     "data": {
-        "pageList|6":[
+        "pageList|10":[
             {
-                fixState: "A",
+                "fixState|1": ["A", "P"],
                 fixedBalance: "1002.00",
                 fixedBalanceMask: "1,002.00",
                 fixedDay: "2019-12-19",
@@ -30,19 +30,32 @@ var data = Mock.mock({
                 protocolPeriodUnit: "每月 6日",
                 scheduledProtocolId: "201912180046",
                 totalTradeTimes: "0",
-            },{
-                fixState: "P",
-                fixedBalance: "1000.00",
-                fixedBalanceMask: "1,000.00",
-                fixedDay: "2019-12-19",
-                fundCode: "000846",
-                fundName: "中融货币C",
-                nextFixrequestDate: "2020-01-02",
-                payBank: "",
-                protocolPeriodUnit: "每月 1日",
-                scheduledProtocolId: "201912180045",
-                totalTradeTimes: "0",
             }
+            // ,{
+            //     fixState: "P",
+            //     fixedBalance: "1000.00",
+            //     fixedBalanceMask: "1,000.00",
+            //     fixedDay: "2019-12-19",
+            //     fundCode: "000846",
+            //     fundName: "中融货币C",
+            //     nextFixrequestDate: "2020-01-02",
+            //     payBank: "",
+            //     protocolPeriodUnit: "每月 1日",
+            //     scheduledProtocolId: "201912180045",
+            //     totalTradeTimes: "0",
+            // },{
+            //     fixState: "P",
+            //     fixedBalance: "1000.00",
+            //     fixedBalanceMask: "1,000.00",
+            //     fixedDay: "2019-12-19",
+            //     fundCode: "000847",
+            //     fundName: "中融货币A",
+            //     nextFixrequestDate: "2020-01-02",
+            //     payBank: "",
+            //     protocolPeriodUnit: "每月 1日",
+            //     scheduledProtocolId: "201912180044",
+            //     totalTradeTimes: "0",
+            // }
         ]
     }
 });
