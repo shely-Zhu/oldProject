@@ -1,3 +1,4 @@
+
 /**
  * 私募资产详情页
  *
@@ -8,7 +9,8 @@
 @import url("@pathCommonLess/chtwm.less");
 @import url("@pathCommonLess/app.less");
 @import url("@pathCommonLessCom/headBarConfig.less");
-@import url("@pathCommonLessCom/authenticationProcess.less");
+@import url("@pathCommonLessCom/authenticationProcess.less"); 
+@import url("@pathCommonCom/elasticLayer/elasticLayer/elasticLayer.less");
 
 body{
 	background: @F7FAFD;
@@ -122,7 +124,7 @@ body{
 				border-radius: 0.08rem;
 				background-color: rgba(255,255,255,0.7);
 				color: @364D97;
-				margin-left: 0.2rem;
+				margin-left: 0.05rem;
 				box-sizing: border-box;
 			}
 		}
@@ -426,11 +428,11 @@ body{
 			
 			border-right: 0.01rem solid @E7E9ED;
 			.img {
-				margin-top: .18rem;
-				height: .36rem;
-				
+				margin: .1rem auto 0;
+				width: .4rem;
+    		height: .39rem;
 				background: url("/financial/static/img/publicPlacement/public_detail_share.png") no-repeat;
-				background-size: .36rem;
+				background-size: 100% 100%;
 				background-position: center;
 			}
 			.text {
@@ -600,4 +602,8 @@ font-size: 0.24rem;
 	line-height: 1.32rem;
 	font-size: 0.32rem;
 	font-weight: 800;
+}
+.isRiskMatchBox .isRiskMatchBox_contentBox .isRiskMatchBox_header{
+	min-height: 1rem;
+	padding-bottom: 0rem;
 }

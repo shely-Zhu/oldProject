@@ -26,8 +26,8 @@ $(function () {
       $('.tips').hide()
       that.getData();
       that.events();
-      that.getUserInfo();  //获取用户类型
-      that.getUserInfo_1();  // 获取用户信息
+      /*that.getUserInfo();  //获取用户类型
+      that.getUserInfo_1();  // 获取用户信息*/
 
     },
     getData: function () {
@@ -165,6 +165,8 @@ $(function () {
 			});
       // 转入
       mui("body").on("mdClick", ".fundIn", function () {
+        that.getUserInfo();  //获取用户类型
+        that.getUserInfo_1();  // 获取用户信息
         var fundCode = $(this).parent().parent().find(".itemTop .itemTitle span").eq(0).attr("fundCode")
         var fundName = $(this).parent().parent().find(".itemTop .itemTitle span").eq(0).attr("fundName")
         that.gV.transformInFundCode = fundCode;
@@ -193,8 +195,7 @@ $(function () {
         // 先判断是否司法冻结以及身份过期，再判断一键认证
         var result = frozenAccount("saleFreeze", window.location.href, that.gV.accountType);
         if( !result ) {
-          var url = window.location.href = site_url.pofCashTransformOut_url + '?fundCode=' + fundCode + '&productName=' + new Base64().encode(productName);
-          authenticationProcess("fundOut", fundCode, that.gV.userStatus, that.gV.accountType, url)
+          window.location.href = site_url.pofCashTransformOut_url + '?fundCode=' + fundCode + '&productName=' + new Base64().encode(productName);
         };
       }, {
 				htmdEvt: 'cashManagement_03'

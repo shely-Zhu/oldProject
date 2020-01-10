@@ -8,6 +8,7 @@ require('@pathCommonBase/base.js');
 require('@pathCommonJs/ajaxLoading.js');
 var splitUrl = require('@pathCommonJs/components/splitUrl.js')();
 var moment = require('moment');
+var authenticationProcess = require('@pathCommonCom/authenticationProcess/authenticationProcess.js');
 var frozenAccount = require('@pathCommonJs/components/frozenAccount.js');
 
 $(function() {
@@ -32,8 +33,8 @@ $(function() {
         init: function() {
             var that = this;
             that.getData();
-           // that.getUserInfo();  //获取用户类型
-           // that.getUserInfo_1(); //用户身份信息
+            /*that.getUserInfo();  //获取用户类型
+            that.getUserInfo_1(); //用户身份信息*/
             that.events();
         },
          //获取用户信息
@@ -70,7 +71,7 @@ $(function() {
             }]
             $.ajaxLoading(obj);
         },
-        getConditionsOfOrder: function() {
+        /*getConditionsOfOrder: function() {
             var that = this;
 
             var obj = [{
@@ -215,8 +216,8 @@ $(function() {
                 }
             }];
             $.ajaxLoading(obj);
-        },
-        getSingleaAuthenPath: function(data) {
+        },*/
+        /*getSingleaAuthenPath: function(data) {
             var that = this;
             var singleaAuthenPath = "";
             if (data.isWealthAccount == "1") {
@@ -228,7 +229,7 @@ $(function() {
             } else if (data.isInvestFavour != "1") {
                 return singleaAuthenPath = 'isInvestFavour'
             }
-        },
+        },*/
         getData: function() {
             var that = this;
             // 请求页面数据
@@ -346,14 +347,19 @@ $(function() {
 
             // 买入
             mui("body").on('mdClick', ".buyButton", function(e) {
-                var $this = $(this);
                 that.getUserInfo();  //获取用户类型
                 that.getUserInfo_1(); //用户身份信息
+                var $this = $(this);
                 if ($this.hasClass("disable")) {
                     return false;
                 } else {
-
-                    that.getConditionsOfOrder();
+                    // 先判断是否司法冻结以及身份过期，再判断一键认证
+                    var result = frozenAccount("buyFreeze", window.location.href, that.gV.accountType);
+                    if( !result ) {
+                       var url = site_url.fundTransformIn_url + '?fundCode=' + that.getElements.fundCode + '&fundName=' + that.getElements.chiName+"&noReload=1";
+                       authenticationProcess("fundIn", that.getElements.fundCode, that.gV.userStatus, that.gV.accountType, url)
+                    };
+                    //that.getConditionsOfOrder();
                 }
 
             }, {
@@ -361,7 +367,7 @@ $(function() {
             });
 
             //风测等级匹配成功
-            mui("body").on('mdClick', ".isRiskMatchBox_match", function() {
+            /*mui("body").on('mdClick', ".isRiskMatchBox_match", function() {
                 $(".isRiskMatch_mask").hide();
                 $(".isRiskMatchBox").hide();
                 if(!that.gV.isWealthAccountStatus||that.gV.accountType == 0|| that.gV.accountType == 2){
@@ -405,10 +411,10 @@ $(function() {
                 }
             }, {
                 htmdEvt: 'newFundDetail_6'
-            })
+            })*/
 
             //认证
-            mui("body").on('mdClick', ".tips-li .tips-li-right", function(e) {
+            /*mui("body").on('mdClick', ".tips-li .tips-li-right", function(e) {
                 var type = $(this).parent().index()
                 switch (type) {
                     case 0: //开通账户
@@ -546,7 +552,7 @@ $(function() {
                 }
             }, {
                 htmdEvt: 'newFundDetail_8'
-            });
+            });*/
         },
     }
     /*调用*/

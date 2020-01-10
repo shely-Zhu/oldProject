@@ -11,9 +11,10 @@
 
 require('@pathCommonBase/base.js');
 require('@pathCommonJs/ajaxLoading.js');
-var setCookie = require('@pathNewCommonJsCom/setCookie.js');
+var setCookie = require('@pathCommonJsCom/setCookie.js');
 var frozenAccount = require('@pathCommonJs/components/frozenAccount.js');
 require('@pathCommonCom/elasticLayer/elasticLayer/elasticLayer.js');
+var authenticationProcess = require('@pathCommonCom/authenticationProcess/authenticationProcess.js');
 
 $(function() {
 
@@ -30,6 +31,38 @@ $(function() {
             that.getData('');
             that.initRightBtn();
             that.clickEvent();
+           /* that.getUserInfo();  //获取用户类型
+            that.getUserInfo_1();  */// 获取用户信息
+        },
+        // 获取认证信息
+        getUserInfo: function () {
+          var that = this;
+          // 请求页面数据
+          var obj = [{
+              url: site_url.queryUserBaseInfo_api,
+              data: {
+              },
+              callbackDone: function (json) {
+                  var data = json.data
+                  that.gV.accountType = data.accountType
+              }
+          }]
+          $.ajaxLoading(obj);
+        },
+        //获取用户信息
+          getUserInfo_1:function(){
+          var that = this;
+          var obj = [{
+            url:site_url.user_api,
+            data:{
+
+            },
+            callbackDone:function(json){
+              var data = json.data
+                that.gV.userStatus = data.investFavour
+            }
+          }];
+          $.ajaxLoading(obj);
         },
         getData: function(bankAccount) {
             var that = this;
@@ -206,6 +239,8 @@ $(function() {
             })
             //购买
             mui("body").on('mdClick', '.buy_btn', function(e) {
+                that.getUserInfo();  //获取用户类型
+                that.getUserInfo_1();  // 获取用户信息
                 var fundCode = $(this).attr("fundCode");
                 var fundName = $(this).attr("fundName");
                 var id = $(this).parent().parent().parent().parent().attr("id")
@@ -213,10 +248,13 @@ $(function() {
                 if (!flag) {
                     if (id == "cashPageLists") {
                         //现金宝
-                        window.location.href = site_url.pofCashTransformIn_url + "?fundCode=" + fundCode + "&noReload=1";
+                        var url = site_url.pofCashTransformIn_url + "?fundCode=" + fundCode + "&noReload=1";
+                        authenticationProcess("", fundCode, that.gV.userStatus, that.gV.accountType, url)
                     } else {
                         //普通基金
-                        window.location.href = site_url.fundTransformIn_url + '?fundCode=' + fundCode + '&fundName=' + fundName;
+                        var url = site_url.fundTransformIn_url + '?fundCode=' + fundCode + '&fundName=' + fundName;
+                        authenticationProcess("", fundCode, that.gV.userStatus, that.gV.accountType, url)
+                        //window.location.href = site_url.fundTransformIn_url + '?fundCode=' + fundCode + '&fundName=' + fundName;
                     }
                 }
                 return false

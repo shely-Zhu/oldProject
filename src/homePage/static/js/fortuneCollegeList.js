@@ -1,5 +1,10 @@
 //  财富讲堂
 // @author liliang 2019-11-20 
+/*
+
+update chentiancheng 2020年1月9日23:58:11
+
+*/
 
 require('@pathCommonBase/base.js');
 require('@pathCommonJsCom/utils.js');
@@ -492,6 +497,17 @@ $(function() {
             },{
                 'htmdEvt': 'fortune_07'
             })
+            mui("body").on('mdClick', '.whereGo' , function(){
+                if($(this).attr("externalUrl")){
+                    window.location.href = $(this).attr("externalUrl")
+                }else{
+                    window.location.href = site_url.articleTemplate_url+'?id=' + $(this).attr("id") + '&articleBelong=' +  $(this).attr("articleBelong")
+                }
+
+            },{
+                'htmdEvt': 'fortune_02'
+            })
+            
         }
     };
     data.init();

@@ -9,9 +9,10 @@
 
 require('@pathCommonBase/base.js');
 require('@pathCommonJs/ajaxLoading.js');
-var authenticationProcess = require('@pathCommonJs/components/authenticationProcess.js');
 var generateTemplate = require('@pathCommonJsComBus/generateTemplate.js');
 var splitUrl = require('@pathCommonJs/components/splitUrl.js')();
+var frozenAccount = require('@pathCommonJs/components/frozenAccount.js');
+var authenticationProcess = require('@pathCommonCom/authenticationProcess/authenticationProcess.js');
 //是否大于0的判断器 用于设置涨红跌绿 可以参考publicAssets.js
 Handlebars.registerHelper("if_than_0", function (value, options) {
     if (value > 0) {
@@ -26,7 +27,6 @@ getQueryString = function (name) {
     var r = window.location.search.substr(1).match(reg);
     if (r != null) return unescape(r[2]); return '';
 }
-console.log(authenticationProcess, "authenticationProcess");
 $(function () {
     var fundCode
     var regard = {
@@ -76,8 +76,8 @@ $(function () {
             var that = this;
             that.getData(); // 获取基金详情
 
-          //  that.getUserInfo();  //获取用户类型
-           // that.getUserInfo_1(); //用户身份信息
+            /*that.getUserInfo();  //获取用户类型
+            that.getUserInfo_1(); //用户身份信息*/
             that.events();
             // that.getData1(); // 查询基金的历史收益（货币基金）/历史净值（普通基金）
             $('.tips').hide()
@@ -242,7 +242,7 @@ $(function () {
             $.ajaxLoading(obj);
         },
         	 // 客户预约产品所需条件
-		 getConditionsOfOrder: function(type) {
+		 /*getConditionsOfOrder: function(type) {
             var type = type;
             var that = this;
 
@@ -400,8 +400,8 @@ $(function () {
             }];
             $.ajaxLoading(obj);
 
-        },
-        getSingleaAuthenPath:function(data){
+        },*/
+        /*getSingleaAuthenPath:function(data){
            var that = this;
            var singleaAuthenPath="";
            if(data.isWealthAccount != "0"){
@@ -413,7 +413,7 @@ $(function () {
            }else if(data.isInvestFavour != "1"){
             return  singleaAuthenPath = 'isInvestFavour'
            }
-        },
+        },*/
         events: function () {
             var that = this;
             var fundCode = splitUrl['fundCode']
@@ -457,8 +457,20 @@ $(function () {
             mui("body").on('mdClick', ".footer .fixed_investement_btn", function (e) {
                 that.getUserInfo();
                 that.getUserInfo_1();
-                that.getConditionsOfOrder("investement");
-                that.gV.singleaAuthenType = "investement"
+                //定投一键认证
+                if(that.gV.accountType === 0 || that.gV.accountType === 2){
+                    tipAction('暂不支持机构客户进行交易');
+                }else{
+                    // 先判断是否司法冻结以及身份过期，再判断一键认证
+                    var result = frozenAccount("buyFreeze", window.location.href, that.gV.accountType);
+                    if( !result ) {
+                      var fundCode = splitUrl['fundCode']
+                      var url = site_url.pofOrdinarySetThrow_url + '?fundCode=' + fundCode + '&fundName=' + that.gV.secuSht + '&type=add';
+                      authenticationProcess("", fundCode, that.gV.userStatus, that.gV.accountType, url)
+                    };
+                }
+                /*that.getConditionsOfOrder("investement");
+                that.gV.singleaAuthenType = "investement"*/
             },{
                 htmdEvt: 'publicDetail_06'
             });
@@ -469,15 +481,22 @@ $(function () {
                if($(this).hasClass("disable")){
                    return false
                }
-                that.getConditionsOfOrder("into");
-                that.gV.singleaAuthenType = "into"
+               // 先判断是否司法冻结以及身份过期，再判断一键认证
+               var result = frozenAccount("buyFreeze", window.location.href, that.gV.accountType);
+               if( !result ) {
+                var fundCode = splitUrl['fundCode']
+                  var url = site_url.fundTransformIn_url + '?fundCode=' + fundCode + '&fundName=' + that.gV.secuSht+"&noReload=1";
+                  authenticationProcess("", fundCode, that.gV.userStatus, that.gV.accountType, url)
+                };
+                /*that.getConditionsOfOrder("into");
+                that.gV.singleaAuthenType = "into"*/
                // window.location.href = site_url.fundTransformIn_url + '?fundCode=' + fundCode + '&fundName=' + fundName;
                
             },{
                 htmdEvt: 'publicDetail_07'
             });
             //认证
-            mui("body").on('mdClick', ".tips-li .tips-li-right", function (e) {
+            /*mui("body").on('mdClick', ".tips-li .tips-li-right", function (e) {
                 var type = $(this).parent().index()
                 switch (type) {
                     case 0:   //开通账户
@@ -677,7 +696,7 @@ $(function () {
                
             },{
                 htmdEvt: 'publicDetail_17'
-            })
+            })*/
 
             // 七日年华 万份收益
             mui("body").on('mdClick', "#redeemNav .navSpan ", function (e) {

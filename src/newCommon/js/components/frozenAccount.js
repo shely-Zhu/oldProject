@@ -14,6 +14,7 @@
  * 
  */
 var tipAction = require('./tipAction.js');
+require('@pathCommonCom/elasticLayer/elasticLayer/elasticLayer.js');
 
 function isCustTypeOne(outdateFreezeStatus, lawFreezeStatus, url, custType, value, htmdEvt) {
     var f = false;
@@ -52,7 +53,7 @@ function elasticLayer(outdateFreezeStatus, lawFreezeStatus, url, custType, value
         $.elasticLayer({
             id: "tip",
             title: '温馨提示',
-            p: '<p>因司法原因该账户被冻结，请联系客服咨询！客服电话：400-8980-618！</p>',
+            p: '<p>因司法原因该账户被冻结，请联系客服咨询！客服电话：400-8980-618</p>',
             yesTxt: '确定',
             hideCelButton: true, //为true时隐藏cel按钮，仅使用yes按钮的所有属性
             htmdEvtYes: htmdEvt,
@@ -67,7 +68,7 @@ function elasticLayer(outdateFreezeStatus, lawFreezeStatus, url, custType, value
 
             idDateObj = {
                 title: '温馨提示',
-                p: '您的证件已过期，补充证件信息后才可能继续交易',
+                p: '因过期原因该账户被冻结，请联系理财师或咨询客服！客服电话：400-8980-618',
                 htmdEvtYes: htmdEvt,
                 yesTxt: '明白了',
                 hideCelButton: true, //为true时隐藏cel按钮，仅使用yes按钮的所有属性

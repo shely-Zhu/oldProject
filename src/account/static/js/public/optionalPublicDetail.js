@@ -570,19 +570,19 @@ $(function() {
                                 //风险等级匹配
                                 $(".isRiskMatchBox_match").show()
 								$(".isRiskMatchBox_noMatch").hide()
-								$(".isRiskMatchBox_header").css({"line-height":"1.5rem"})
+								// $(".isRiskMatchBox_header").css({"line-height":"1.5rem"})
                                 $(".isRiskMatchBox_header").html("你选择的产品与您现在的风险承受能力相匹配")
                             }else if(jsonData.isRiskMatch == "0"){
                                 $(".isRiskMatchBox_noMatch").show()
 								$(".isRiskMatchBox_match").hide()
-								$(".isRiskMatchBox_header").css({"line-height":"1.5rem"})
+								// $(".isRiskMatchBox_header").css({"line-height":"1.5rem"})
                                 $(".isRiskMatchBox_header").html("你选择的产品与您现在的风险承受能力不相匹配")
                                 $(".isRiskMatchResult").html("查看评测结果")
                                 $(".isRiskMatchResult").attr("type","noRisk")
                             }else if(jsonData.isRiskMatch == "2"){
                                 $(".isRiskMatchBox_noMatch").show()
 								$(".isRiskMatchBox_match").hide()
-								$(".isRiskMatchBox_header").css({"line-height":"1.5rem"})
+								// $(".isRiskMatchBox_header").css({"line-height":"1.5rem"})
                                 $(".isRiskMatchBox_header").html("您的风险测评已过期,请重新进行风险测评")
                                 $(".isRiskMatchResult").html("重新风测")
                                 $(".isRiskMatchResult").attr("type","repeatRisk")
@@ -642,6 +642,16 @@ $(function() {
 							that.data.realLi.eq(2).hide()
 						}
 						if(jsonData.isInvestFavour=="0" || jsonData.isInvestFavour == null){
+							//先判断是否进行投资者分类，没有则显示未认证，如果是再判断投资者状态
+							that.data.realLi.eq(3).show() 
+							if(jsonData.investorStatus =="0"&&that.gV.userStatus=="") {
+								that.data.realLi.eq(3).find(".bank-status").html("未审核")
+							}
+						}else{
+							that.data.realLi.eq(3).hide()
+                        }
+						that.data.realLi.eq(4).hide() 
+						/*if(jsonData.isInvestFavour=="0" || jsonData.isInvestFavour == null){
 							//是否投资者分类
 							that.data.realLi.eq(3).show()  
 						}else{
@@ -655,14 +665,11 @@ $(function() {
 						}
 						if( that.gV.investorStatus=="0"&&that.gV.userStatus==""){
                             //直接申请为专业投资者
-                            that.data.tipsWrap.show()
-                            that.data.realLi.show();
-                            that.data.realLi.eq(3).show() 
-                            /*that.gV.tipsWrap.show()
+                            that.gV.tipsWrap.show()
                             that.gV.realLi.show();
-                            that.gV.realLi.eq(3).show() */ 
+                            that.gV.realLi.eq(3).show()
                         }
-						that.data.realLi.eq(4).hide() 
+						that.data.realLi.eq(4).hide()*/ 
 
                 },
                 callbackFail: function(json) { //失败后执行的函数
@@ -824,9 +831,6 @@ $(function() {
 			   }else if(type == "investement"){
 					//定投一键认证
 					window.location.href = site_url.ordinarySetThrow_url+"?fundCode="+that.data.fundCode+'&type=add';			
-			   }else if(type == "investement"){
-					//赎回一键认证
-					window.location.href = site_url.redemptionBuy_url + "?tradeNo=" + splitUrl['tradeNo'] + "&fundCode=" + that.data.fundCode			
 			   }
 			},{
 				'htmdEvt': 'optionalPublicDetail_11'
@@ -885,9 +889,9 @@ $(function() {
 				}
 			    var result = frozenAccount("saleFreeze", window.location.href, false);
 				if( !result ) {
-					that.getConditionsOfOrder("redemption");
-					that.gV.singleaAuthenType = "redemption"
-					//window.location.href = site_url.redemptionBuy_url + "?tradeNo=" + splitUrl['tradeNo'] + "&fundCode=" + that.data.fundCode			
+					//that.getConditionsOfOrder("redemption");
+					//that.gV.singleaAuthenType = "redemption"
+					window.location.href = site_url.redemptionBuy_url + "?tradeNo=" + splitUrl['tradeNo'] + "&fundCode=" + that.data.fundCode				
 				};
 			},{
                 'htmdEvt': 'optionalPublicDetail_8'

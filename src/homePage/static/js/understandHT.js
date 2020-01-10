@@ -18,7 +18,7 @@ $(function() {
         //全局变量
         gV: {
             articleBelong: splitUrl['articleBelong'],
-            sortType: splitUrl['type'] * 1,
+            sortType: splitUrl['type'] ? splitUrl['type'] * 1 : 0,
             belong: ['101', '102', '103', '104'],  //按导航顺序从左到右的位置，写死的
             // content: {} , //保存各个tab请求过来的数据
         },
@@ -35,21 +35,23 @@ $(function() {
             var that = this;
 
              // $("body").height( $(window).height() );
+             
+            // $('html').height( window.screen.height ).width( window.screen.width );
 
-            $('body').css({
-                            position: 'fixed',
-                            '-webkit-overflow-scrolling': 'auto',
-                            top: 0,
-                            right:0,
-                            left: 0,
-                            bottom:0
-                        })
+            // $('body').css({
+            //     position: 'fixed',
+            //     '-webkit-overflow-scrolling': 'auto',
+            //     top: 0,
+            //     right:0,
+            //     left: 0,
+            //     bottom:0,
+            //     height: '100%',
+            //     width: '100%'
+            // })
 
-            var height = windowHeight - $('.tabImg')[0].getBoundingClientRect().top;
-
-            // $('.list').height(height);
+            // var height = windowHeight - $('.tabImg')[0].getBoundingClientRect().top;
             
-            $('.tabImg').height(height);
+            
 
 
 
@@ -96,7 +98,25 @@ $(function() {
                     //定位到第二个
                     $('.tabBar .tabA').eq( that.gV.sortType ).addClass('active');
 
+                    // $('.tabBar .tabA').eq(3).html(  window.screen.height + ' ' + window.screen.availHeight  );
 
+                    
+
+                    // $('.tabBar .tabA.active').html( $('body').height() + ' ' +  document.documentElement.clientHeight  );
+
+                    // $('.tabBar .tabA.active').next().html( windowHeight + ' ' + window.innerHeight);
+
+                    // $('.tabBar .tabA.active').next().next().html( $('.tabImg')[0].getBoundingClientRect().top);
+
+                    // var height = $('body').height() - $('.tabImg')[0].getBoundingClientRect().top;
+
+                    // $('.tabImg').html()
+                    
+                    // $('.tabImg').html( '<div>'+height+'</div>' + '<div>'+window.screen.height+'</div>' + '<div>'+document.documentElement.clientHeight+'</div>' + '<div>'+$('body').height()+'</div>' + wrap_html);
+
+                    // $('.list').height(height);
+                    
+                    // $('.tabImg').height(height);
 
                     // $.each( data, function(i, el){
                     //     that.setting.navList.push({
@@ -152,6 +172,7 @@ $(function() {
                         // that.gV.content[belong] = resData;
                         $('.tabImg').hide();
                         $('.tabImg').eq(index).show().html(resData.content);
+                        window.scrollTo(0, 0);
 
                         // t.addClass('hasPullUp').find('.img').html(resData.content);
 
@@ -168,6 +189,7 @@ $(function() {
                 //有数据的时候直接显示
                 $('.tabImg').hide();
                 $('.tabImg').eq(index).show();
+                window.scrollTo(0, 0);
             }
             //          num = num ? num : splitUrl['type'] * 1;//首次进来请求用路径中的articleBelong，点击的时候使用对应的articleBelong。
             

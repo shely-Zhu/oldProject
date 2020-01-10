@@ -10,6 +10,7 @@
 </head>
 <body>
         @@include('@pathCommonViews/headBarConfig.html',{"pathName":"","bgColors":"#23356D,#23356D","showType":"1"})
+        @@include('@pathCommonViews/authenticationProcess.html',{"pathTitle":"认证信息"})
         <section class="container">
             <div class="banner">
                 <div class="bannerTop clearfix">
@@ -103,6 +104,17 @@
     
     
         </section>
+
+        <div class="isRiskMatchBox">
+           <div class="isRiskMatchBox_contentBox">
+                   <div class='isRiskMatchBox_header'>你选择的产品与您现在的风险承受能力相匹配</div>
+                   <div class="isRiskMatchBox_footer">
+                        <div class="isRiskMatchBox_match">确定</div>
+                        <div class="isRiskMatchBox_noMatch"><button class="isRiskMatchBox_cancel">放弃购买</button> <button class="isRiskMatchResult">查看评测结果</button></div>
+                   </div>
+           </div>
+      </div>
+      <div class="isRiskMatch_mask"></div>
 
 
     @@include('@pathInclude/views/footer.html')
