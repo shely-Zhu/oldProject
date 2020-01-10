@@ -67,8 +67,8 @@ $(function () {
                         callbackDone: function(json) {    
                             var data = json.data.pageList;
                             if(that.gV.pageCurrent == 1 && data.length == 0) {
-                                $(".list").css("display", "none")
-                                that.$e.noData.show()
+                                $(".list").css("display", "none");
+                                that.$e.noData.show();
                             } else {
                                 for (var i = 0; i < data.length; i++) {
                                     if (data[i].fixState == 'A') {
@@ -110,10 +110,11 @@ $(function () {
                                     that.$e.stopPlan.hide()
                                 }
                                 if(!that.gV.paddingStatus&&that.gV.stopNum==0){
-                                    that.$e.noData.show()
-                                    return 
+                                    $(".list").css("display", "none");
+                                    that.$e.noData.show();
+                                    return ;
                                 }
-                                def && def.resolve( data, that.gV.pageCurrent);
+                                def && def.resolve( data, that.gV.pageCurrent); 
                                 if (that.gV.pageCurrent == 1) {
                                     for (var i = 0; i < data.length; i++) {
                                         if (data[i].fixStateStr == "暂停") {

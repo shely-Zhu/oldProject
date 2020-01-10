@@ -62,7 +62,7 @@ $(function() {
     
     // 安卓IOS刘海屏适配
     if (splitUrl['hairHeight'] || "true" == splitUrl['isIphoneX']){
-        $('#HeadBarConfigBox').css({'padding-top': '0.24rem', 'height': '1.2rem'});
+        $('#HeadBarConfigBox').css('padding-top', '0.3rem');
     }
 
     //传人样式判断展示形式 

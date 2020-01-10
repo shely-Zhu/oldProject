@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2019-11-26 14:42:56
- * @LastEditTime : 2020-01-10 14:10:52
+ * @LastEditTime : 2020-01-10 14:34:39
  * @LastEditors  : Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \htjf-app\src\financial\static\js\publicPlacement\redemptionBuy.js
@@ -133,7 +133,6 @@ $(function() {
                     type: "2"
                 },
                 callbackDone: function(json) {
-                    console.log("88888", json);
                     var arr = [];
                     json.data.forEach(function(item) {
                         if (item.fundCode != that.gV.fundCode) {
@@ -144,12 +143,9 @@ $(function() {
                     // 将列表插入到页面上
                     var fundCodeList= [];
                     var Redata = [];
-                    debugger
                     for (var i = 0; i < that.gV.transferFunds.length; i++) {
                         var code = that.gV.transferFunds[i].fundCode;
-                       // Redata = that.searchNewfundDetails(code);
                         fundCodeList.push(code)
-                       // that.gV.transferFunds[i].annYldRat = Redata;
                     }
                     Redata = that.searchNewfundDetails(fundCodeList);
                     for (var i = 0; i < that.gV.transferFunds.length; i++) {
@@ -161,7 +157,6 @@ $(function() {
                                  }
                              }
                          }
-                       // that.gV.transferFunds[i].annYldRat = Redata;
                     }
                     generateTemplate(that.gV.transferFunds, that.getElements.TransferFundsContent, that.getElements.templateTransferFunds);
                 }
@@ -178,16 +173,15 @@ $(function() {
                 async: false,
                 data: codeList,
                 callbackDone: function(json) {
-                    //callbackData = json.data.annYldRat
                     if(json.status == '0000'){
-                        callbackData = json.data
+                        callbackData = json.data;
                     }
                 },
 
 
             }];
             $.ajaxLoading(obj);
-            return callbackData
+            return callbackData;
         },
         //赎回确认
         cancelOrder: function(password) {
