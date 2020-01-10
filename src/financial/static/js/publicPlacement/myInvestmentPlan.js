@@ -41,7 +41,8 @@ $(function () {
             var that = this;
 
             $('.newPlan').html( $('html').height() + ', ' + window.screen.height + ', ' + document.documentElement.offsetHeight);
-
+            
+            $('.height').height( window.screen.height );
 
             that.initMui();
             that.getUserInfo();
@@ -220,12 +221,14 @@ $(function () {
                         //     } 
                         // })
                         
+                        that.gV.fixStateNum  = data.length;
+                        
                         if (that.gV.fixStateNum > 0) {
                             //展示已终止的定投数量
                             that.$e.endPlan.show()
                             // var height = windowHeight - $(".newPlan").height() - $(".topTitle").height() - $(".endPlan").height();
                             // $('.list .contentWrapper').height(height)
-                            $(".stopPlan").html(that.gV.fixStateNum)
+                            $(".stopPlan").html( that.gV.fixStateNum )
                         } else {
                             that.$e.endPlan.hide()
                         }
