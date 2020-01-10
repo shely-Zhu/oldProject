@@ -130,7 +130,13 @@ $(function() {
                                 if (that.gV.startPage == 1) { //第一页时
                                     if (data.length == 0) {
                                         // 暂无数据显示
-                                        that.getElements.noData.show();
+                                        var topHeitgh = $('#activitySearch').height();
+                            var height = windowHeight - topHeitgh;
+                            $('.activityListDataNoBox').height(height);
+                            t.endPullupToRefresh(true);
+                            that.$e.activityListDataBox.hide();
+                            that.$e.activityListDataNoBox.show();
+                            that.getNoData();
                                         return false;
 
                                     } else { // 没有更多数据了
