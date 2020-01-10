@@ -26,7 +26,7 @@ $(function() {
             pageCurrent: 1,
             pageSize: 10,
 			fortuneFlowList: [],
-            articleBelong : splitUrl['articleBelong'], // 文章类型
+            // articleBelong : splitUrl['articleBelong'], // 文章类型
             wrapperName:null
 		},
 		//页面初始化函数
@@ -70,7 +70,7 @@ $(function() {
                         data: {
                             "pageNo": that.gV.pageCurrent, //非必须，默认为1
                             "pageSize": that.gV.pageSize, //非必须，默认为10
-                            "articleBelong": "3"//3为财富学院早知道
+                            "articleBelong": "5"//5为财富学院早知道
                         },
                         needDataEmpty: true,
                         needLoading: false,
@@ -114,8 +114,16 @@ $(function() {
             var that=this
             // 列表页跳转到详情页
 			mui("body").on('mdClick', '.knownItem' , function(){
-                var id = $(this).attr("id")
-                window.location.href = site_url.articleTemplate_url + '?id=' + id + '&articleBelong=' + that.gV.articleBelong
+                if($this.attr("externalUrl")){
+                    if($this.attr("externalUrl").indexOf("?") != -1) {
+                        window.location.href = $this.attr("externalUrl") + "&isHtOuterLinkUniqueIdentification=true"
+                    } else{
+                        window.location.href = $this.attr("externalUrl") + "?isHtOuterLinkUniqueIdentification=true"
+                    }
+                }else{
+                    window.location.href = site_url.articleTemplate_url + '?id=' + id + '&articleBelong=5'
+                }
+                
             },{
                 'htmdEvt': 'fortune_09'
             })
