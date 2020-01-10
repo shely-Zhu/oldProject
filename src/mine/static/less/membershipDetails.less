@@ -55,73 +55,77 @@ body{
         padding-top: 2.5rem;
         overflow: hidden;
         
-        .membershipDetailsContentBox{
+        .membershipDetailsContentBox {
             width: 90%;
             background: url("/mine/static/img/quanyi_card_bg@2x.png");
-            background-size: 100% 100%;
+            background-size: cover;
+            background-repeat: no-repeat;
             box-shadow: 0 .02rem .26rem 0 rgba(221,221,221,0.50);
             border-radius: .2rem;
             min-height: 7.84rem;
             margin: .7rem auto .92rem;
-            padding: .7rem .35rem .6rem .35rem;
-            h2{
-                display: inline;
-                margin: .4rem 0;
-                font-size: 0.44rem;
-                line-height: 0.8rem;
-                margin-top: 0.1rem;
-                color:rgba(39,39,39,1);
-                background:linear-gradient(239deg, rgba(187,142,95,1) 0%, rgba(108,69,23,1) 100%);
-                -webkit-background-clip:text;
-                -webkit-text-fill-color:transparent;
-                font-family:PingFangSC-Semibold,PingFang SC;
-                font-weight:bold;
-            }
-            p{
-                font-family: PingFangSC-Regular;
-                font-size: .28rem;
-                color: @272727;
-                text-align: justify;
-                line-height: .5rem;
-                margin: .4rem 0 .5rem 0;
-            }
-            span{
-                &.title{
+            .membershipDetailsContentBox_next{
+                padding: .7rem .35rem .6rem .35rem;
+                h2{
+                    display: inline;
+                    margin: .4rem 0;
+                    font-size: 0.44rem;
+                    line-height: 0.8rem;
+                    margin-top: 0.1rem;
+                    color:rgba(39,39,39,1);
+                    background:linear-gradient(239deg, rgba(187,142,95,1) 0%, rgba(108,69,23,1) 100%);
+                    -webkit-background-clip:text;
+                    -webkit-text-fill-color:transparent;
+                    font-family:PingFangSC-Semibold,PingFang SC;
+                    font-weight:bold;
+                }
+                p{
+                    font-family: PingFangSC-Regular;
+                    font-size: .28rem;
+                    color: @272727;
+                    text-align: justify;
+                    line-height: .5rem;
+                    margin: .4rem 0 .5rem 0;
+                }
+                span{
+                    &.title{
+                        font-family: PingFangSC-Regular;
+                        font-size: .24rem;
+                        color: @9B9B9B;
+                        text-align: center;
+                        display: block;
+                        margin-bottom: .1rem;
+                    }
+                }
+                &>a.tel{
                     font-family: PingFangSC-Regular;
                     font-size: .24rem;
-                    color: @9B9B9B;
+                    color: @BE894D;
                     text-align: center;
                     display: block;
-                    margin-bottom: .1rem;
                 }
-            }
-            &>a.tel{
-                font-family: PingFangSC-Regular;
-                font-size: .24rem;
-                color: @BE894D;
-                text-align: center;
-                display: block;
-            }
-            .linkBtnBox{
-                text-align: center;
-                margin-top: .86rem;
-                height: .8rem;
-                position: relative;
-                a{
-                    position: absolute;
-                    left: 50%;
-                    top: 0;
-                    width: 4.1rem;
+                .linkBtnBox{
+                    text-align: center;
+                    margin-top: .86rem;
                     height: .8rem;
-                    margin-left: -2.05rem;
-                    //background-image: linear-gradient(-135deg, @F1CDA8 0%, @B57E45 100%);
-                    border-radius: .04rem;
-                    font-family: PingFangSC-Regular;
-                    font-size: .32rem;
-                    //color: @c005;
-                    letter-spacing: 0;
-                    //text-align: center;
-                    line-height: .8rem;
+                    position: relative;
+                    a{
+                        position: absolute;
+                        left: 50%;
+                        top: 0;
+                        width: 4.1rem;
+                        height: .8rem;
+                        margin-left: -2.05rem;
+                        //background-image: linear-gradient(-135deg, @F1CDA8 0%, @B57E45 100%);
+                        border-radius: .04rem;
+                        font-family: PingFangSC-Regular;
+                        font-size: .32rem;
+                        //color: @c005;
+                        letter-spacing: 0;
+                        //text-align: center;
+                        line-height: .8rem;
+                        color: @c005;
+                    }
                 }
             }
             

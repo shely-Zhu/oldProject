@@ -189,6 +189,10 @@ $(function() {
                 },
 
             }];
+            if (decodeURI(splitUrl['bugFundName']) != "false") {
+               obj[0].data.isMoneyBuyPub = "1"
+            }
+
             $.ajaxLoading(obj);
         },
         //获取本公司账户信息

@@ -370,7 +370,7 @@ $(function() {
                     id:"",  //主键 
                     age:that.gV.userAge, //年龄
                     birthDate:that.gV.birthDate,  //出生日期
-                    sex:(!!that.$e.sex.attr("num"))?that.$e.sex.attr("num"):that.gV.sexDataCode, //性别
+                    sex:that.gV.sexDataCode?that.gV.sexDataCode:that.$e.sex.attr("num"), //性别
                     evocation:(!!that.$e.professional.attr("num"))? that.$e.professional.attr("num"):that.gV.professionalDataCode, //职业
                     evocationExtension:that.$e.professionalDescript.val(),//职业描述
                     investDurationLevel:(!!that.$e.investment_year.attr("num"))?that.$e.investment_year.attr("num"):that.gV.investment_yearDataCode, //投资年限
@@ -443,7 +443,7 @@ $(function() {
                     id:that.gV.applyId,  //主键
                     age:$(".userAge").val() , //年龄
                     birthDate:that.gV.birthDate,  //出生日期
-                    sex:(!!that.$e.sex.attr("num"))?that.$e.sex.attr("num"):that.gV.sexDataCode, //性别
+                    sex:that.gV.sexDataCode?"男":"女", //性别
                     evocation:(!!that.$e.professional.attr("num"))? that.$e.professional.attr("num"):that.gV.professionalDataCode, //职业
                     evocationExtension:that.$e.professionalDescript.val(),//职业描述
                     investDurationLevel:(!!that.$e.investment_year.attr("num"))?that.$e.investment_year.attr("num"):that.gV.investment_yearDataCode, //投资年限
