@@ -506,7 +506,6 @@ $(function() {
                 'htmdEvt': 'fortune_07'
             })
             mui("body").on('mdClick', '.whereGo' , function(){
-<<<<<<< HEAD
                 if($(this).attr("externalUrl")){
                     if($(this).attr("externalUrl").indexOf("?") != -1) {
                         window.location.href = $(this).attr("externalUrl") + "&isHtOuterLinkUniqueIdentification=true"
@@ -517,16 +516,6 @@ $(function() {
                     window.location.href = site_url.articleTemplate_url+'?id=' + $(this).attr("id") + '&articleBelong=' +  $(this).attr("articleBelong")
                 }
 
-=======
-                var that=this
-                setTimeout(function() {
-                    if($(that).attr("externalUrl")){
-                        window.location.href = $(that).attr("externalUrl")
-                    }else{
-                        window.location.href = site_url.articleTemplate_url+'?id=' + $(that).attr("id") + '&articleBelong=' +  $(that).attr("articleBelong")
-                    }
-                }, 300);
->>>>>>> bf9ff49802c4a79fd1d9d014011b218ec92d84a5
             },{
                 'htmdEvt': 'fortune_02'
             })
