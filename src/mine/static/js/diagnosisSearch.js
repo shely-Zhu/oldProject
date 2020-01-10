@@ -241,6 +241,7 @@ $(function() {
 
             // 搜索取消按钮
             mui("body").on("mdClick", ".mui-icon-clear", function (event) {
+                that.$e.resultWrap.hide();
                 that.$e.hotFundList.html('');
                 that.$e.resultWrap.find('.total').html('--');
                 that.$e.resultWrap.find('.word').html('');
