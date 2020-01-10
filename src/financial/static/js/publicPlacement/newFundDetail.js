@@ -262,9 +262,15 @@ $(function() {
                     }
                     // 认购流程的募集期
                     $('.collectDate').html(jsonData.issEndDt.substring(5));
-                    // 购买费率
-                    $('.purchaseRate').html(jsonData.purchaseRate + '%');
-                    $('.discountRate').html(jsonData.discount / 100 + '%');
+                    
+                    // 当折扣率为0时，只显示黑色不带删除线的购买费率
+                    if(jsonData.discount == 0) {
+                        $('.discountRate').html(jsonData.purchaseRate + '%');
+                    } else {
+                        // 购买费率
+                        $('.purchaseRate').html(jsonData.purchaseRate + '%');
+                        $('.discountRate').html(jsonData.discount / 100 + '%');
+                    }
                     // 认购起点
                     $(".buyStart").html(jsonData.tradeLimitList[0].minValue);
 
