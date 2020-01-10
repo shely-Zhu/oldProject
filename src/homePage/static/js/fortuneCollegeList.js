@@ -493,13 +493,25 @@ $(function() {
                 var id = $(this).attr("id")
                 var articleBelong = $(this).attr("articleBelong")
                 var applyType = $(this).attr("applyType")
-                window.location.href =site_url.articleTemplate_url + '?id=' + id + '&articleBelong=' + articleBelong 
+                if($(this).attr("externalUrl")){
+                    if($(this).attr("externalUrl").indexOf("?") != -1) {
+                        window.location.href = $(this).attr("externalUrl") + "&isHtOuterLinkUniqueIdentification=true"
+                    } else{
+                        window.location.href = $(this).attr("externalUrl") + "?isHtOuterLinkUniqueIdentification=true"
+                    }
+                }else{
+                    window.location.href =site_url.articleTemplate_url + '?id=' + id + '&articleBelong=' + articleBelong 
+                }
             },{
                 'htmdEvt': 'fortune_07'
             })
             mui("body").on('mdClick', '.whereGo' , function(){
                 if($(this).attr("externalUrl")){
-                    window.location.href = $(this).attr("externalUrl")
+                    if($(this).attr("externalUrl").indexOf("?") != -1) {
+                        window.location.href = $(this).attr("externalUrl") + "&isHtOuterLinkUniqueIdentification=true"
+                    } else{
+                        window.location.href = $(this).attr("externalUrl") + "?isHtOuterLinkUniqueIdentification=true"
+                    }
                 }else{
                     window.location.href = site_url.articleTemplate_url+'?id=' + $(this).attr("id") + '&articleBelong=' +  $(this).attr("articleBelong")
                 }
@@ -507,7 +519,18 @@ $(function() {
             },{
                 'htmdEvt': 'fortune_02'
             })
-            
+            mui("body").on("tap",'.interpreter', function(){
+                if($(this).attr("externalUrl")){
+                    if($(this).attr("externalUrl").indexOf("?") != -1) {
+                        window.location.href = $(this).attr("externalUrl") + "&isHtOuterLinkUniqueIdentification=true"
+                    } else{
+                        window.location.href = $(this).attr("externalUrl") + "?isHtOuterLinkUniqueIdentification=true"
+                    }
+                }else{
+                    window.location.href = site_url.articleTemplate_url+'?id=' + $(this).attr("id") + '&articleBelong=' +  $(this).attr("articleBelong")
+                }
+
+            })
         }
     };
     data.init();

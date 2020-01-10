@@ -124,6 +124,7 @@ $(function() {
             that.gV.userAge = data.age;  //年龄
             that.gV.birthDate = data.birthDate ; //出生日期
             that.gV.sexDataCode = data.sex;  //性别
+            // that.gV.sexData = data.sex;  //性别
             that.gV.professionalDataCode = data.evocation ;  //职业
             that.gV.professionalDescriptData = data.evocationExtension; //职业描述
             that.gV.investment_yearDataCode = data.investDurationLevel;  //投资年限
@@ -170,10 +171,15 @@ $(function() {
                          val = item.value
                     }
                 })*/
-                for (var i = 0; i < that.gV.fundDiagnosisSexDicData.length; i++) {
-                    if (that.gV.fundDiagnosisSexDicData[i].dicCode == code) {
-                        val = that.gV.fundDiagnosisSexDicData[i].text
-                    }
+                // for (var i = 0; i < that.gV.fundDiagnosisSexDicData.length; i++) {
+                //     if (that.gV.fundDiagnosisSexDicData[i].dicCode == code) {
+                //         val = that.gV.fundDiagnosisSexDicData[i].text
+                //     }
+                // }
+                if(code){
+                    val = "男";
+                }else{
+                    val = "女";
                 }
             } else if (type == 'fundDiagnosisVocation') {
                 /*that.gV.fundDiagnosisVocationDicData.forEach(function(item){
@@ -236,7 +242,7 @@ $(function() {
         mandatory:function(){
             var  that = this;
            var str = "" ;
-           if(!that.$e.userAge[0].value){
+           if(that.$e.userAge[0].value == "" || that.$e.userAge[0].value == null){
                str = "请填写您的年龄"
                tipAction(str)
                return false
@@ -435,7 +441,6 @@ $(function() {
         updateFundDiagnosisApply: function() {
             //修改基金诊断申请
             var that = this;
-            debugger
             var obj = [{
                 url:site_url.updateFundDiagnosisApply_api,
                 needDataEmpty:true,
@@ -669,6 +674,8 @@ $(function() {
                     that.gV.loss_secondData = secondVal;
                     that.gV.loss_firstData = firstVal;
                     that.$e.lossControl.show();
+                    $("#yearOwn").hide();
+                    $("#maxLossOwn").hide();
                 }
                 $(this).attr("type", "")
                 $('.popuplist').css('display', 'none')
@@ -681,8 +688,17 @@ $(function() {
             	$('#yearOwn').show();
             	$('#maxLossOwn').show();
             	$('#dataPickDec').show();
-                $('.popuplist').css('display', 'none')
+                
                 $(".mui-backdrop").remove()
+                if(that.gV.yield_secondData != "" && that.gV.yield_firstData != ""){
+                    $("#yearOwn").hide();
+                    $('.popuplist').css('display', 'none')
+                }
+                if(that.gV.loss_secondData != "" && that.gV.loss_firstData != ""){
+                    $("#maxLossOwn").hide();
+                    $('.popuplist').css('display', 'none')
+                }
+               
             }, {
                 'htmdEvt': 'fundAccountDiagnosisResult_06'
             })
