@@ -22,12 +22,15 @@
 .activityListDataNoBox{
     display:none;
 }
+body{
+    background-color: @F7FAFD;
+}
 #activitySearch{
     position: relative;
     width: 100%;
     height: 1.28rem;
     background-color: @c005;
-    border-bottom: 1px solid @c007;
+    border-bottom: 1px solid @DDDDDD;
     a{
         display: inline-block;
         width: .88rem;
@@ -79,6 +82,7 @@
             }
             span:last-child{
                 color: #8D919C;
+                line-height: 0.6rem;
             }
         }
     }
@@ -88,7 +92,7 @@
         height: .88rem;
         line-height: .88rem;
         top:.4rem;
-        width: 1.7rem;
+        // width: 1.7rem;
         
         span{
             font-family: PingFangSC-Regular;
@@ -97,7 +101,7 @@
             text-align: center;
             display: block;
             float: left;
-            margin-right: .25rem;
+            margin-right: .15rem;
             width: 1.2rem;
             overflow:hidden;/*超出部分隐藏*/
             white-space: nowrap;/*不换行*/
@@ -130,7 +134,7 @@
     }
     .mui-table-view-cell{
         padding: 0;
-        padding: .4rem .3rem 0 .3rem;
+        padding: .4rem .3rem 0;
     }
     .mui-table-view-cell:after{
         height: 0;
@@ -165,7 +169,6 @@
             }
             i{
                 position: absolute;
-                // height: .47rem;
                 line-height: .47rem;
                 font-family: PingFangSC-Regular;
                 font-size: .24rem;
@@ -173,7 +176,7 @@
                 background-image: linear-gradient(-225deg,@15255B  0%, @475A95 100%);
                 border-radius: .04rem;
                 padding: 0 .16rem;
-                left: .32rem;
+                margin: 0 0.32rem;
                 bottom: .4rem;
                 font-style: normal;
             }
@@ -233,7 +236,7 @@
         
         width: 100%;
         height: 3.7rem;
-        border-bottom: .2rem solid rgba(117,119,132,0.1);
+        border-bottom: .1rem solid @F7FAFD;
         position: relative;
         img{
             position: absolute;
