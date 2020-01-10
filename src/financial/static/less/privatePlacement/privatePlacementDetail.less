@@ -12,6 +12,7 @@
 @import url("@pathCommonLessCom/authenticationProcess.less");
 html{
 	height: 100%;
+	background: @F7FAFD;
 }
 .without{
 	padding-top: 0;
@@ -115,7 +116,6 @@ html{
 		.appointment{
 			margin-top: 0.2rem;
 			font-size: 0.26rem;
-			line-height: 1;
 			color: @c005;
 			text-align: center;
 
@@ -125,7 +125,7 @@ html{
 	.investmentTip{
 		font-size: 0.28rem;
 		color: @9B9B9B;
-		padding:0.3rem 0.3rem 1.73rem;
+		padding:0.2rem 0.3rem 1.73rem;
 		background-color: @F7FAFD;
 	}
 
@@ -260,7 +260,7 @@ html{
 							padding:0.3rem;
 							display:flex;
 							justify-content:space-between;
-							border-bottom: 0.01rem dashed @E1E1E1;
+							// border-bottom: 0.01rem solid @E1E1E1;
 							font-size:0.28rem;
 							font-weight:500;
 							color:@BB8E5F;
@@ -374,16 +374,18 @@ html{
 		        }
 			}
 	        .copyAll{
-	        	width: 93%;
+	        	// width: 93%;
 	        	height: 0.8rem;
 	        	margin: 0 auto;
 	        	line-height: 0.8rem;
-	        	background:rgba(210,179,129,0.1);
+				// background:#D2B381;
+				background: rgba(210, 179, 129, 0.1);
 				border-radius:0 0 0.1rem 0.1rem;
 				font-size: 0.28rem;
 				color: @BB8E5F;
 				text-align: center;
 				height: 0.8rem;
+				margin: 0 0.3rem;
 			}
 			
 		}
@@ -392,7 +394,7 @@ html{
 			margin-top: .3rem;
 			.textContent{
 				width: 100%;
-				padding: 0 .3rem;
+				// padding: 0 .3rem;
 				margin-top: 0.2rem;
 				background:@c005;
 				// margin: 0.2rem 0;
@@ -402,8 +404,10 @@ html{
 					line-height: 1rem;
 					color: @4A4A4A;
 					font-size: 0.32rem;
-					padding:0 0.3rem;
+					// padding:0 0.3rem;
+					font-weight: 600;
 					border-bottom: 0.01rem solid @c004;
+					text-indent: 0.3rem;
 				}
 				.detailText{
 					padding: 0.3rem 0;
@@ -413,11 +417,13 @@ html{
 						// height: 1.54rem;
 						background:rgba(248,249,252,1);
 						border-radius:0.06rem;
+						margin-bottom: 0.2rem;
 						.contentTitle{
 							font-size: 0.3rem;
 							color: @BB8E5F;
 							font-weight:600;
 							color:rgba(187,142,95,1);
+							line-height: 0.42rem;
 							span{
 								font-size: 0.24rem;
 								float: right;
@@ -609,4 +615,7 @@ html{
  .mui-col-xs-8{
 	font-weight: 0.28rem;
 } 
+.customerService{
+	opacity: 0.5 !important;
+}
 
