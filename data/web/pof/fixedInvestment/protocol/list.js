@@ -17,7 +17,7 @@ var data = Mock.mock({
     "status": "0000", 
     "msg": "处理成功！", 
     "data": {
-        "pageList|5":[
+        "pageList|6":[
             {
                 fixState: "A",
                 fixedBalance: "1002.00",
@@ -41,18 +41,6 @@ var data = Mock.mock({
                 payBank: "",
                 protocolPeriodUnit: "每月 1日",
                 scheduledProtocolId: "201912180045",
-                totalTradeTimes: "0",
-            },{
-                fixState: "P",
-                fixedBalance: "1000.00",
-                fixedBalanceMask: "1,000.00",
-                fixedDay: "2019-12-19",
-                fundCode: "000847",
-                fundName: "中融货币A",
-                nextFixrequestDate: "2020-01-02",
-                payBank: "",
-                protocolPeriodUnit: "每月 1日",
-                scheduledProtocolId: "201912180044",
                 totalTradeTimes: "0",
             }
         ]
