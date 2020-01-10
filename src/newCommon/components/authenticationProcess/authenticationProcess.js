@@ -28,7 +28,8 @@ module.exports = function(type, fundCode, userStatus, accountType, url) {
         gV: {
         	isWealthAccountStatus: '',// 是否开通财富账户
         	userStatus: userStatus,
-        	accountType: accountType
+        	accountType: accountType,
+        	isHighAgeStatus:true,  //投资者年龄默认小于60的状态为true  大于就位false
         },
         init: function() {
             var that = this;
@@ -377,7 +378,7 @@ module.exports = function(type, fundCode, userStatus, accountType, url) {
                     window.location.href = site_url.riskAppraisal_url + "?type=private"
                 }else if(type == "isHighAge"){
                     that.gV.isHighAgeStatus = false;
-                    that.getConditionsOfOrder(that.gV.singleaAuthenType)
+                    that.initAuth(that.gV.singleaAuthenType)
                 }else if(type == "isZdTaLimit"){
                      //跳理财首页
                     window.location.href = site_url.wealthIndex_url
