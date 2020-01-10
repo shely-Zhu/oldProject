@@ -1,7 +1,7 @@
 /*
  * @Author: yanan
  * @Date: 2019-12-09 15:53:31
- * @LastEditTime : 2020-01-09 17:41:49
+ * @LastEditTime : 2020-01-10 11:37:21
  * @LastEditors  : Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \htjf-app\src\mine\static\js\fundAccountDiagnosisResult.js
@@ -611,23 +611,23 @@ $(function() {
                 if (that.gV.typeInput == "yield") {
                     var firstVal = $(".yieldFirst").val();
                     var secondVal = $(".yieldSecond").val();
-                    if (secondVal < firstVal) {
+                    if (secondVal == "" || firstVal == "") {
                         $(".yieldWarmMessage").show();
-                        $(".yieldWarmMessage").html("最大年化收益率大于最小年化收益")
+                        $(".yieldWarmMessage").html("年化收益不能为空")
                         return;
                     } else {
                         $(".yieldWarmMessage").hide();
                     }
                     if (secondVal > 100 || firstVal > 100) {
                         $(".yieldWarmMessage").show();
-                        $(".yieldWarmMessage").html("年化收益小于100")
+                        $(".yieldWarmMessage").html("年化收益应小于100")
                         return;
                     } else {
                         $(".yieldWarmMessage").hide();
                     }
-                    if (secondVal == "" || firstVal == "") {
+                    if (secondVal < firstVal) {
                         $(".yieldWarmMessage").show();
-                        $(".yieldWarmMessage").html("年化收益不能为空")
+                        $(".yieldWarmMessage").html("最大年化收益率应大于最小年化收益")
                         return;
                     } else {
                         $(".yieldWarmMessage").hide();
@@ -642,27 +642,28 @@ $(function() {
                 } else if (that.gV.typeInput == "loss") {
                     var firstVal = $(".lossFirst").val();
                     var secondVal = $(".lossSecond").val();
-                    if (secondVal < firstVal) {
+                    if (secondVal == "" || firstVal == "") {
                         $(".lossWarmMessage").show();
-                        $(".lossWarmMessage").html("最大可承受回撤大于最小可承受回撤")
+                        $(".lossWarmMessage").html("最大可承受回撤不能为空")
                         return;
                     } else {
                         $(".lossWarmMessage").hide();
                     }
                     if (secondVal > 100 || firstVal > 100) {
                         $(".lossWarmMessage").show();
-                        $(".lossWarmMessage").html("年化收益小于100")
+                        $(".lossWarmMessage").html("最大可承受回撤应小于100")
                         return;
                     } else {
                         $(".lossWarmMessage").hide();
                     }
-                    if (secondVal == "" || firstVal == "") {
+                    if (secondVal < firstVal) {
                         $(".lossWarmMessage").show();
-                        $(".lossWarmMessage").html("年化收益不能为空")
+                        $(".lossWarmMessage").html("最大可承受回撤应大于最小可承受回撤")
                         return;
                     } else {
                         $(".lossWarmMessage").hide();
                     }
+                    
                     that.$e.loss_first[0].textContent = firstVal;
                     that.$e.loss_second[0].textContent = secondVal;
                     that.gV.loss_secondData = secondVal;
