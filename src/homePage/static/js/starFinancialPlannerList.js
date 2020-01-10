@@ -46,7 +46,14 @@ $(function() {
         },
         //初始化mui的上拉加载
         initMui: function() {
+            
+            if($('.activityCityBox').width()){
+                var activitySearchInputWidth = document.documentElement.clientWidth - $('#activitySearch a').width() - $('.activityCityBox').width() - 30;
 
+            }else{
+                var activitySearchInputWidth = document.documentElement.clientWidth - $('#activitySearch a').width() - $('.Cutof').width() - 30;
+            }
+            $('.activitySearchInput').width(activitySearchInputWidth);
             var that = this;
             var topHeitgh = $('#activitySearch').height();
             var height = windowHeight - topHeitgh;
@@ -54,9 +61,6 @@ $(function() {
             if (!$('.activityList').hasClass('setHeight')) {
                 $('.activityList').height(height).addClass('setHeight');
             }
-            var activitySearchInputWidth = document.documentElement.clientWidth - $('#activitySearch a').width() - $('.activityCityBox').width() - 30;
-            $('.activitySearchInput').width(activitySearchInputWidth);
-
             mui.init({
                 pullRefresh: {
                     container: '.contentWrapper',
