@@ -122,6 +122,7 @@ html{
         background:url('/common/img/wave_bg.png') no-repeat;
         background-size: 6.9rem 3.5rem;
         padding: 0 .32rem 0 .29rem;
+        display: flex;
         &>a{
             position: absolute;
             width: 6.9rem;
@@ -315,7 +316,7 @@ html{
 
 .starFinancialPlannerListLeftBox{
     width: 1.57rem;
-    float: left;
+    // float: left;
     .left{
         width: 1.55rem;
         float: left;
@@ -394,9 +395,11 @@ html{
 }
 
 .starFinancialPlannerListRightBox{
-    float: left;
+    // float: left;
     margin-left: .35rem;
     margin-top: .5rem;
+    flex: 1;
+    width: 100%;
     .certificateBox{
         height: .54rem;
         p{
@@ -438,7 +441,8 @@ html{
         font-weight:400;
         color:@c005;
         line-height:.36rem;
-        width: 4.3rem;
+        // width: 4.3rem;
+        width: 100%;
         text-align: justify;
         display: -webkit-box;
         -webkit-box-orient: vertical;

@@ -1,3 +1,12 @@
+/*
+<!--了解恒天-->
+<!--author:caiwenqi-->
+<!--time：2019-11-15-->
+update：chentiancheng 2020年1月10日14:55:45
+
+*/ 
+
+
 require('@pathCommonBase/base.js');
 require('@pathCommonCom/tabScroll/tabScroll.js')
 require('@pathCommonJs/ajaxLoading.js');
