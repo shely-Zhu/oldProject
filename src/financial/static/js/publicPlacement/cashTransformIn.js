@@ -489,8 +489,10 @@ $(function () {
 			//  ---《基金合同》《招募说明书》
 			mui("body").on('mdClick','.goPreview',function(){
 				var link = $(this).attr('datalink')
+				var links=link.split("?")
+			    var fileNames=links[0].substring(links[0].lastIndexOf('.'))
 				var typInfo = $(this).attr('type') == '1' ? '基金合同' : '招募说明书'
-				window.location.href = site_url.agreementPreview_url + '?link=' + link +'&typInfo=' + encodeURI(typInfo)
+				window.location.href = site_url.agreementPreview_url + '?link=' + link +'&typInfo=' + encodeURI(typInfo+fileNames)
 			}, {
 				htmdEvt: 'cashTransformIn_17'
 			}) ;

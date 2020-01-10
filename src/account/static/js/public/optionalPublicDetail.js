@@ -245,7 +245,8 @@ $(function() {
 					    var seriesData = data.profitThoudValue;
 					}
 			}
-			var myChart = echarts.init( chartId );
+			// {width:$(".line_area").width(),height:$(".line_area").height()}
+			var myChart = echarts.init( chartId,{},{width:$(".lineDraw").width(),height:$(".lineDraw").height()} );
 			myChart.setOption({
 			    tooltip: {
 			    	trigger: 'axis',
