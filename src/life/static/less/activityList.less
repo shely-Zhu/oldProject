@@ -12,13 +12,15 @@
 @import url("@pathCommonLessCom/cityList.less");
 // 没有数据
 @import url("@pathCommonLessCom/noDataImg.less");
+
 @media screen and (device-aspect-ratio: 40/71) {
-       .activityListBottomBox{
-           i{
-               width: 2rem !important;
-           } 
+   .activityListBottomBox{
+       i{
+           width: 2rem !important;
        } 
+   } 
 }
+
 .activityListDataNoBox{
     display:none;
 }
@@ -77,6 +79,10 @@ body{
             border-radius: 6px;
             background: 0 0;
             padding-left: .17rem;
+
+            //加上这条防止ios点击两下才出现光标
+            pointer-events: none;
+
             .mui-icon-search:before{
                 color: #8D919C;
             }

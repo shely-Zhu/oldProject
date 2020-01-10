@@ -54,6 +54,8 @@ $(function() {
             if (!$('.activityList').hasClass('setHeight')) {
                 $('.activityList').height(height).addClass('setHeight');
             }
+            var activitySearchInputWidth = document.documentElement.clientWidth - $('#activitySearch a').width() - $('.activityCityBox').width() - 30;
+            $('.activitySearchInput').width(activitySearchInputWidth);
 
             mui.init({
                 pullRefresh: {

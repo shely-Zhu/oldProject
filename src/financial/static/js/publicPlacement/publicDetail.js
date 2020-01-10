@@ -980,7 +980,7 @@ $(function () {
                     xAxisData = data.date,
                     seriesData = data.big;
             }
-            var myChart = echarts.init(chartId);
+            var myChart = echarts.init(chartId,{},{width:$(".line_area").width(),height:$(".line_area").height()});
             myChart.setOption({
                 tooltip: {
                     trigger: 'axis',
