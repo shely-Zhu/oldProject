@@ -90,7 +90,7 @@ $(function() {
                             default:
                                 break;
                         }
-                        if (fixState == '已终止') {
+                        if (fixState == '已终止' || fixState == '删除' || fixState == '签约失败') {
                             $(".fixState").addClass("redColor")
                         } else {
                             $(".fixState").removeClass("redColor")
