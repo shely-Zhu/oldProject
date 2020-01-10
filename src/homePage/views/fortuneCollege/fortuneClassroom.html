@@ -45,7 +45,7 @@
         {{! 左侧页面列表}} 
         {{#each this}}
         {{#if isLive}}
-            <div class="roomItem item" id="{{id}}" articleBelong="{{articleBelong}}">
+            <div class="roomItem item" id="{{id}}" articleBelong="{{articleBelong}}" externalUrl="{{externalUrl}}">
                 <div class="roomVideo">
                     <img class="articalImg {{lazyClass}}" src="/common/img/lazyImgList.png" data-original="{{imageUrlShowOnline}}" alt="">
                     <img class="play" src="/common/img/bofang@2x.png" alt="">
@@ -54,7 +54,7 @@
                 <div class="roomContent">{{intro}}</div>
             </div>
         {{else}}
-            <div class="knowledgeItem" id="{{id}}" articleBelong="{{articleBelong}}">
+            <div class="knowledgeItem" id="{{id}}" articleBelong="{{articleBelong}}" externalUrl="{{externalUrl}}">
                 
                     <img class="{{lazyClass}}" src="/common/img/lazyImgList.png" data-original="{{imageUrlShowOnline}}" alt="">
                 
