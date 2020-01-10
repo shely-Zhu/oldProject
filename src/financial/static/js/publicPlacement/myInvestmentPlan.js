@@ -94,8 +94,8 @@ $(function () {
                                 }
                                 if (that.gV.fixStateNum > 0) {
                                     that.$e.endPlan.show()
-                                    var height = windowHeight - $(".newPlan").height() - $(".topTitle").height() - $(".endPlan").height();
-                                    $('.list .contentWrapper').height(height)
+                                    // var height = windowHeight - $(".newPlan").height() - $(".topTitle").height() - $(".endPlan").height();
+                                    // $('.list .contentWrapper').height(height)
                                     $(".stopPlan").html(that.gV.fixStateNum)
 
                                 } else {
@@ -103,7 +103,7 @@ $(function () {
                                 }
                                 if(that.gV.stopNum>0){
                                     //that.$e.stopPlan.show()
-                                    var height = windowHeight - $(".newPlan").height() - $(".topTitle").height() - $(".endPlan").height();
+                                    // var height = windowHeight - $(".newPlan").height() - $(".topTitle").height() - $(".endPlan").height();
                                    // $('.list .contentWrapper').height(height)
                                    // $(".stopPlan_1").html(that.gV.stopNum)
                                 }else{
