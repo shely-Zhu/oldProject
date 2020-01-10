@@ -203,13 +203,13 @@ $(function() {
             mui("body").on('mdClick', '.tabA', function(e) {
                 var $this = $(this),
                     index = $(this).index();
-
                 $(this).siblings('.tabA').removeClass('active');
 
                 $(this).addClass('active');
                 // $("b").removeClass('borderBottom');
                 // $(".tabBar b").eq(index).addClass('borderBottom');
                 that.getTemplateData( that.gV.belong[index], index);
+                that.$e.HeadBarpathName.text($this.text());
             }, {
                 'htmdEvt': 'understandTab_00'
             })
