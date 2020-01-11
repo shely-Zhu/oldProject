@@ -662,10 +662,7 @@ $(function () {
                 var time = that.gV.time
 
                 var myDate = new Date();
-                myDate.getYear(); //获取当前年份(2位)
-                myDate.getMonth(); //获取当前月份(0-11,0代表1月)
-                myDate.getDate(); //获取当前日(1-31)
-                var end =  myDate.getYear()+'-'+ parseInt(myDate.getMonth()+1)+'-'+myDate.getDate();
+                var end =  myDate.getFullYear()+'-'+ parseInt(myDate.getMonth()+1)+'-'+myDate.getDate();
                 that.gV.type = type
                 if (time) {
                     that.getData2(type, time);
@@ -680,10 +677,7 @@ $(function () {
                 $(this).addClass('active').siblings().removeClass('active');
                 var time = Number($(this).attr('time'))
                 var myDate = new Date();
-                myDate.getYear(); //获取当前年份(2位)
-                myDate.getMonth(); //获取当前月份(0-11,0代表1月)
-                myDate.getDate(); //获取当前日(1-31)
-                var end =  myDate.getYear()+'-'+ parseInt(myDate.getMonth()+1)+'-'+myDate.getDate();
+                var end = myDate.getFullYear()+'-'+ parseInt(myDate.getMonth()+1)+'-'+myDate.getDate();
                 that.gV.time = time
                 if (time) {
                     that.getData2(that.gV.type, time);

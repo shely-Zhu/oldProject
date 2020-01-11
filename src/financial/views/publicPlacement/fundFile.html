@@ -7,46 +7,44 @@
 <html lang="en">
 
 <head>
-	@@include('@pathInclude/views/meta.html')
-	<link rel="stylesheet" href="/financial/static/css/fundFile.css">
-	<title>基本档案</title>
+    @@include('@pathInclude/views/meta.html')
+    <link rel="stylesheet" href="/financial/static/css/fundFile.css">
+    <title>基金档案</title>
 
-<body>
-	<!-- 加载中loading -->
-	@@include('@pathCommonCom/loading/listLoading.html')
-	
-	@@include('@pathCommonViews/headBarConfig.html',{"bgColors":"#2C3E77,#273971","showType":"0","pathName":"基本档案"})
+    <body>
+        <!-- 加载中loading -->
+        @@include('@pathCommonCom/loading/listLoading.html') @@include('@pathCommonViews/headBarConfig.html',{"bgColors":"#2C3E77,#273971","showType":"0","pathName":"基金档案"})
 
-	<div class="mui-content midContent">
-		<div class="content">
-			<div class="tabsBox">
-				<div class="tabs">
-					<li class="active">基本概括</li>
-					<li>投资组合</li>
-					<li>历史分红</li>
-					<li>基金公告</li>
-				</div>
-			</div>
-			<div class="wrap">
-				<!-- 暂无数据 -->
-				@@include('@pathCommonCom/noData/noData.html', {"tipText": "暂无数据"})
-				<div class="panel panel1 active tplBox1">
+        <div class="mui-content midContent">
+            <div class="content">
+                <div class="tabsBox">
+                    <div class="tabs">
+                        <li class="active">基本概括</li>
+                        <li>投资组合</li>
+                        <li>历史分红</li>
+                        <li>基金公告</li>
+                    </div>
+                </div>
+                <div class="wrap">
+                    <!-- 暂无数据 -->
+                    @@include('@pathCommonCom/noData/noData.html', {"tipText": "暂无数据"})
+                    <div class="panel panel1 active tplBox1">
 
-				</div>
-				<div class="panel panel2 tplBox2">
+                    </div>
+                    <div class="panel panel2 tplBox2">
 
-				</div>
-				<div class="panel panel3 tplBox3">
-					<div class="list">
-			            <div class="contentWrapper">
-			                <ul class="mui-table-view">
-			                    <li class="mui-table-view-cell tplBox3Wrapper"></li>
-			                </ul>
-			                <!-- 返回顶部 -->
-			                @@include('@pathCommonViews/goTop.html')
-			            </div>
-			        </div>
-					<!-- {{#each this}}
+                    </div>
+                    <div class="panel panel3 tplBox3">
+                        <div class="list">
+                            <div class="contentWrapper">
+                                <ul class="mui-table-view">
+                                    <li class="mui-table-view-cell tplBox3Wrapper"></li>
+                                </ul>
+                                <!-- 返回顶部 -->
+                                @@include('@pathCommonViews/goTop.html')
+                            </div>
+                        </div>
+                        <!-- {{#each this}}
 					<div class="profitItemCon">
 						<div class="profitItem">
 							<div class="itemTitle">分红日期</div>
@@ -70,165 +68,165 @@
 						</div>
 					</div>
 					{{/each}} -->
-				</div>
-				<div class="panel panel4 tplBox4" style="height:500px">
-					<div class="list">
-			            <div class="contentWrapper">
-			                <ul class="mui-table-view">
-			                    <li class="mui-table-view-cell tplBox4Wrapper"></li>
-			                </ul>
-			                <!-- 返回顶部 -->
-			                @@include('@pathCommonViews/goTop.html')
-			            </div>
-			        </div>
-				</div>
-			</div>
-		</div>
-	</div>
-	<script id="dataLists1" type="text/x-handlebars-template"> 
-	     <div class="basic">
-			<div class="name">{{ fundName }}</div>
-			<div class="contentWrap">
-				<div class="content">
-					<ul class="contentUl">
-						<li class="info">基本信息</li>
-					</ul>
-					<ul class="contentUl">
-						<li>基金代码</li>
-						<li class="changgeRight">{{ fundCode }}</li>
-					</ul>
-					<ul class="contentUl">
-						<li>基金类型</li>
-						<li class="changgeRight">{{ fundTypeName }}</li>
-					</ul>
-					<ul class="contentUl">
-						<li>风险等级</li>
-						{{#if riskLevelName}}
-						<li class="changgeRight">{{ riskLevelName }}</li>
-						{{else}}
-						<li class="changgeRight">--</li>
-						{{/if}}
-					</ul>
-					<ul class="contentUl">
-						<li>成立日期</li>
-						<li class="changgeRight">{{ establishDate }}</li>
-					</ul>
-					<ul class="contentUl">
-						<li>资产净值</li>
-						<li class="changgeRight">{{ assetValue }}亿({{ assetValueTime }})</li>
-					</ul>
-					<ul class="contentUl">
-						<li>分红方式</li>
-						<li class="changgeRight">{{ dividendWay }}</li>
-					</ul>
-					<ul class="contentUl">
-						<li>基金托管人</li>
-						<li class="changgeRight">{{ custComName }}</li>
-					</ul>
-				</div>
-				<div class="textContent">
-					<div class="textTitle">
-						投资范围
-			</div>
-					<div class="detailText">
-						{{ investmentScope }}
-					</div>
-					<div class="textTitle">
-						风险收益目标
-			</div>
-					<div class="detailText">
-						{{ riskTarget }}
-					</div>
-				</div>
-				<div class="textContent">
-					<div class="textTitle">
-						风险收益特征
-			</div>
-					<div class="detailText">
-						{{ riskCharacteristics }}
-					</div>
-				</div>
-			</div>
-		</div>
+                    </div>
+                    <div class="panel panel4 tplBox4" style="height:500px">
+                        <div class="list">
+                            <div class="contentWrapper">
+                                <ul class="mui-table-view">
+                                    <li class="mui-table-view-cell tplBox4Wrapper"></li>
+                                </ul>
+                                <!-- 返回顶部 -->
+                                @@include('@pathCommonViews/goTop.html')
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <script id="dataLists1"  type="text/x-handlebars-template">
+            <div class="basic">
+                <div class="name">{{ fundName }}</div>
+                <div class="contentWrap">
+                    <div class="content">
+                        <ul class="contentUl">
+                            <li class="info">基本信息</li>
+                        </ul>
+                        <ul class="contentUl">
+                            <li>基金代码</li>
+                            <li class="changgeRight">{{ fundCode }}</li>
+                        </ul>
+                        <ul class="contentUl">
+                            <li>基金类型</li>
+                            <li class="changgeRight">{{ fundTypeName }}</li>
+                        </ul>
+                        <ul class="contentUl">
+                            <li>风险等级</li>
+                            {{#if riskLevelName}}
+                            <li class="changgeRight">{{ riskLevelName }}</li>
+                            {{else}}
+                            <li class="changgeRight">--</li>
+                            {{/if}}
+                        </ul>
+                        <ul class="contentUl">
+                            <li>成立日期</li>
+                            <li class="changgeRight">{{ establishDate }}</li>
+                        </ul>
+                        <ul class="contentUl">
+                            <li>资产净值</li>
+                            <li class="changgeRight">{{ assetValue }}亿({{ assetValueTime }})</li>
+                        </ul>
+                        <ul class="contentUl">
+                            <li>分红方式</li>
+                            <li class="changgeRight">{{ dividendWay }}</li>
+                        </ul>
+                        <ul class="contentUl">
+                            <li>基金托管人</li>
+                            <li class="changgeRight">{{ custComName }}</li>
+                        </ul>
+                    </div>
+                    <div class="textContent">
+                        <div class="textTitle">
+                            投资范围
+                        </div>
+                        <div class="detailText">
+                            {{ investmentScope }}
+                        </div>
+                        <div class="textTitle">
+                            风险收益目标
+                        </div>
+                        <div class="detailText">
+                            {{ riskTarget }}
+                        </div>
+                    </div>
+                    <div class="textContent">
+                        <div class="textTitle">
+                            风险收益特征
+                        </div>
+                        <div class="detailText">
+                            {{ riskCharacteristics }}
+                        </div>
+                    </div>
+                </div>
+            </div>
 
 
-	</script>
-	<script id="dataLists2"  type="text/x-handlebars-template">
-	<div>
-			<div class="totalFundCon">
-						<div class="circleTitleCon">
-							<div class="circleTitle">总资产(元)</div>
-							<div class="circleValue">{{assetValue}}亿</div>
-						</div>
-						<div class="circle"></div>
-					</div>
-					<div class="industryConfiguration">
-						<div class="industryConfigurationTitle">行业配置</div>
-						<div class="industryConfigurationTable">
-							<div class="industryConfigurationHead flex justify_center align_center">
-								<div class="industryConfigurationTd">行业名称</div>
-								<div class="industryConfigurationTd">市值(万元)</div>
-								<div class="industryConfigurationTd">占净值比(%)</div>
-							</div>
-							{{#each industryAllocation}}
-							<div class="industryConfigurationTr flex justify_center align_center">
-								<div class="industryConfigurationTd">{{industryName }}</div>
-								<div class="industryConfigurationTd">{{industryNav}}</div>
-								<div class="industryConfigurationTd">{{industryAllocationRatio}}</div>
-							</div>
-							{{/each}}
-						</div>
-					</div>
-	</div>
-	</script>
-	<script id="dataLists3"  type="text/x-handlebars-template">
-	<div>
-		{{#each this}}
-		<div class="profitItemCon">
-			<div class="profitItem">
-				<div class="itemTitle">分红日期</div>
-				<div class="itemValue">{{dividendOfDate}}</div>
-			</div>
-			<div class="profitItem">
-				<div class="itemTitle">权益登记</div>
-				<div class="itemValue">1,000,000,000.00</div>
-			</div>
-			<div class="profitItem">
-				<div class="itemTitle">除息日</div>
-				<div class="itemValue">{{exRdDtOtc}}</div>
-			</div>
-			<div class="profitItem">
-				<div class="itemTitle">每份分红</div>
-				<div class="itemValue">1222.00</div>
-			</div>
-			<div class="profitItem">
-				<div class="itemTitle">累计分红</div>
-				<div class="itemValue">{{accuCash}}</div>
-			</div>
-		</div>
-		{{/each}}
-	</div>
-	</script>
-	<script id="dataLists4"  type="text/x-handlebars-template">
-	<div class="noticeWrap">
-		{{#each this}}
-		<div class="contentBox">
-			<div class="content" linkRul="{{linkAddress}}" type='3' typInfo="{{typInfo}}">
-				<ul class="noticeWrapUl">
-					<li class="description">{{typInfo}}</li>
-					<li class="time">{{publishDate}}</li>
-				</ul>
-				<div class="textField">
-					{{title}}
-				</div>
-			</div>
-		</div>
-		{{/each}}
-	</div>
-	</script>
-</body>
-@@include('@pathInclude/views/footer.html')
-<script src="/allServerResources/include/js//vendor/echarts/echarts.min.js"></script>
-<script src="/financial/static/js/publicPlacement/fundFile.js"></script>
+            </script>
+            <script id="dataLists2"  type="text/x-handlebars-template">
+                <div>
+                    <div class="totalFundCon">
+                        <div class="circleTitleCon">
+                            <div class="circleTitle">总资产(元)</div>
+                            <div class="circleValue">{{assetValue}}亿</div>
+                        </div>
+                        <div class="circle"></div>
+                    </div>
+                    <div class="industryConfiguration">
+                        <div class="industryConfigurationTitle">行业配置</div>
+                        <div class="industryConfigurationTable">
+                            <div class="industryConfigurationHead flex justify_center align_center">
+                                <div class="industryConfigurationTd">行业名称</div>
+                                <div class="industryConfigurationTd">市值(万元)</div>
+                                <div class="industryConfigurationTd">占净值比(%)</div>
+                            </div>
+                            {{#each industryAllocation}}
+                            <div class="industryConfigurationTr flex justify_center align_center">
+                                <div class="industryConfigurationTd">{{industryName }}</div>
+                                <div class="industryConfigurationTd">{{industryNav}}</div>
+                                <div class="industryConfigurationTd">{{industryAllocationRatio}}</div>
+                            </div>
+                            {{/each}}
+                        </div>
+                    </div>
+                </div>
+            </script>
+            <script id="dataLists3"  type="text/x-handlebars-template">
+                <div>
+                    {{#each this}}
+                    <div class="profitItemCon">
+                        <div class="profitItem">
+                            <div class="itemTitle">分红日期</div>
+                            <div class="itemValue">{{dividendOfDate}}</div>
+                        </div>
+                        <div class="profitItem">
+                            <div class="itemTitle">权益登记</div>
+                            <div class="itemValue">1,000,000,000.00</div>
+                        </div>
+                        <div class="profitItem">
+                            <div class="itemTitle">除息日</div>
+                            <div class="itemValue">{{exRdDtOtc}}</div>
+                        </div>
+                        <div class="profitItem">
+                            <div class="itemTitle">每份分红</div>
+                            <div class="itemValue">1222.00</div>
+                        </div>
+                        <div class="profitItem">
+                            <div class="itemTitle">累计分红</div>
+                            <div class="itemValue">{{accuCash}}</div>
+                        </div>
+                    </div>
+                    {{/each}}
+                </div>
+            </script>
+            <script id="dataLists4"  type="text/x-handlebars-template">
+                <div class="noticeWrap">
+                    {{#each this}}
+                    <div class="contentBox">
+                        <div class="content" linkRul="{{linkAddress}}" type='3' typInfo="{{typInfo}}">
+                            <ul class="noticeWrapUl">
+                                <li class="description">{{typInfo}}</li>
+                                <li class="time">{{publishDate}}</li>
+                            </ul>
+                            <div class="textField">
+                                {{title}}
+                            </div>
+                        </div>
+                    </div>
+                    {{/each}}
+                </div>
+            </script>
+    </body>
+    @@include('@pathInclude/views/footer.html')
+    <script src="/allServerResources/include/js//vendor/echarts/echarts.min.js"></script>
+    <script src="/financial/static/js/publicPlacement/fundFile.js"></script>
 
 </html>
