@@ -149,6 +149,13 @@ $(function() {
                                 that.$el.earningsTimeRedemption.html(json.data.estimateArrivalDate + ' 24:00前')
                                 // that.$el.payTypeRedemption.html('在线支付')
                             }
+                            
+                            if (json.data.secondFundName && json.data.secondFundCode){
+                                //是货基购基
+                                $('.normalBuyArea').hide();
+                                $('.fundBuyArea').show();
+                                $('.fundBuyName').html(json.data.secondFundName);
+                            }
                         }
                         if (that.gV.payType == '1') { // 买入汇款支付
                             $(".resultTop").show()
@@ -180,8 +187,6 @@ $(function() {
                             that.$el.bankName2Redemption.html(json.data.bankName)
                             that.$el.bankNum2Redemption.html(json.data.bankAccountMask.substr(json.data.bankAccountMask.length - 4))
                         }
-
-
                     } else {
                         tipAction(json.message);
                     }
