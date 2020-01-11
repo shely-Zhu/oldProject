@@ -4,7 +4,7 @@
 * @Date:   2019-11-25
 *
 @Author: caoqihai
-* @Date:   2020-1-9  .跳转的页面 拼接参数 flag 结果类型 基金买入buy 基金赎回 redemption 
+* @Date:   2020-1-11  修改输入密码后收起软键盘
 */
 
 require('@pathCommonBase/base.js');
@@ -326,6 +326,7 @@ $(function () {
 		},
 		//校验密码
 		checkPassword: function(val) {
+			$('input').blur()
 			var that = regulatory;
 			regulatory.gV.password = val
 			var obj = [{
