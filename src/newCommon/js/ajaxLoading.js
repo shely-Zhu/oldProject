@@ -313,7 +313,7 @@ var splitUrl = require('./components/splitUrl.js')();
                             timerStart = false;
                             $('.netLoading').css('z-index', '99999');
                             $('.listLoading').hide();
-                        }, 300)
+                        }, 15000)
                     }
 
                     //调用ajaxFunc，发送ajax请求
