@@ -4,11 +4,7 @@ require('@pathCommonJs/ajaxLoading.js');
 var splitUrl = require('@pathCommonJs/components/splitUrl.js')();
 var generateTemplate = require('@pathCommonJsComBus/generateTemplate.js');
 //var alwaysAjax = require('@pathCommonJs/components/alwaysAjax.js');
-getQueryString = function (name) {
-    var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)");
-    var r = window.location.search.substr(1).match(reg);
-    if (r != null) return unescape(r[2]); return '';
-}
+
 $(function () {
     var somePage = {
         //获取页面元素
