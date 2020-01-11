@@ -214,8 +214,9 @@ $(function() {
                     
 
                     // 滚动区域回到顶部
-                    $('.contentWrap')[0].style.webkitTransform = "translate3d(0px, 0px, 0px) translateZ(0px)";
-                    $('.contentWrap')[0].style.webkitTransform = '2500ms';
+                    mui('.contentWrapper').pullRefresh().scrollTo(0, 0, 0);
+                    // $('.contentWrapper ul') && ($('.contentWrapper ul')[0].style.webkitTransform = "translate3d(0px, 0px, 0px) translateZ(0px)");
+                    // $('.contentWrapper ul') && ($('.contentWrapper ul')[0].style.webkitTransform = '2500ms');
 
                     //清空页面后重置上拉加载，使回到顶部
                     // mui('.contentWrapper').pullRefresh().refresh(true);
