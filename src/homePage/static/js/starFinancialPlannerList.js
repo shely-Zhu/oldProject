@@ -1,7 +1,7 @@
 /**
  * 会员俱乐部-活动列表
  * @author  liuhongyu 2019 10-31
- * update chentiancheng 2020年1月11日15:01:20
+ * update chentiancheng 2020年1月11日17:02:29
  */
 
 require('@pathCommonBase/base.js');
@@ -472,7 +472,7 @@ $(function() {
                                     htmdEvtCel: 'starFinancialPlannerList_15',
                                     callback: function() {
                                         // 点击立即绑定跳转验证用户身份页面
-                                        window.location.href = site_url.bindFinancialer_url + '?financialerId=' + financialerId + '&type=1&name'+starFinancialPlannerName
+                                        window.location.href = site_url.bindFinancialer_url + '?financialerId=' + financialerId + '&type=1&name='+starFinancialPlannerName
                                     },
                                     callbackCel: function() {
                                         that.gV.FinancialerClickFlag = true

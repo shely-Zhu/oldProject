@@ -3,8 +3,9 @@
  *
  * @author shiyunrui 20191123
  * update:chentiancheng
- *
+ * 2020年1月11日21:03:10
  * 具体可以参考 privateDetail.js
+ *
  */
 
 require('@pathCommonBase/base.js');
@@ -21,12 +22,7 @@ Handlebars.registerHelper("if_than_0", function (value, options) {
         return options.inverse(this);
     }
 });
-//获取地址栏参数
-getQueryString = function (name) {
-    var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)");
-    var r = window.location.search.substr(1).match(reg);
-    if (r != null) return unescape(r[2]); return '';
-}
+
 $(function () {
     var fundCode
     var regard = {
@@ -181,11 +177,11 @@ $(function () {
                         $(".footer .fixed_investement_btn").css({"display":"block"})
                         that.gV.fixedInvestementBtnStatu = true
                         if(that.gV.json.cashTreasure == "1"){
-                            $(".footer .fixed_investement_btn").attr("disabled",true)
+                            $(".footer .fixed_investement_btn").attr("disabled",true).css({"display":"none"});
                             that.gV.fixedInvestementBtnStatu = false
                         }
                         if(that.gV.json.fundStatus=="3"||that.gV.json.fundStatus=="5"){
-                            $(".footer .fixed_investement_btn").attr("disabled",true)
+                            $(".footer .fixed_investement_btn").attr("disabled",true).css({"display":"none"});
                             that.gV.fixedInvestementBtnStatu = false
                         }
                        // that.gV.fixedInvestementBtn.show()
@@ -194,7 +190,8 @@ $(function () {
                        // that.gV.fixedInvestementBtn.hide()
                     }
                     if(!json.data.isBuyFlag){//不可买入
-                        $(".footer .buy_btn").addClass("disable").html("暂不可售")
+                        $(".footer .buy_btn").addClass("disable").html("暂不可售");
+                        $(".footer .fixed_investement_btn").attr("disabled",true).css({"display":"none"});
                    }
                   
                 },
