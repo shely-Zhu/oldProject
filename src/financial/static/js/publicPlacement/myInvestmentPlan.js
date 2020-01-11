@@ -40,11 +40,16 @@ $(function () {
         init: function () {
             var that = this;
 
-            $('.newPlan').html( $('html').height() + ', ' + window.screen.height + ', ' + document.documentElement.offsetHeight);
-            
-            $('html').height( window.screen.height ).css('background','yellow');
+            var wHeight = window.screen.height;
 
-            $('body').css('background','red');
+            //处理7p 8p页面初始底部白条
+            $(".newPlan").html( $('html').height() + ' ' + wHeight) ;
+            
+            if( $('html').height() < wHeight ){
+                $('html').height( wHeight );
+            }
+
+
 
             that.initMui();
             that.getUserInfo();
