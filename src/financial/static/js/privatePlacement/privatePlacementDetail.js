@@ -885,10 +885,11 @@ $(function() {
                 needLogin: true, //需要判断是否登陆
                 callbackDone: function(json) { //成功后执行的函数
 
-                    $('#name').html(json.data.accountName);
-                    $('#number').html(json.data.account);
-                    $('#linenum').html(json.data.bankName);
-                    $('#openingBank').html(json.data.branchBankName);
+                    //添加数据判断，有的时候才显示
+                    json.data.accountName && $('#name').html(json.data.accountName);
+                    json.data.account && $('#number').html(json.data.account);
+                    json.data.bankName && $('#linenum').html(json.data.bankName);
+                    json.data.branchBankName && $('#openingBank').html(json.data.branchBankName);
 
                     $('#topc').html(json.data.remarks);
 

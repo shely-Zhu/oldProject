@@ -13,11 +13,14 @@ require('@pathCommonJs/ajaxLoading.js');
 var tipAction = require('@pathCommonJs/components/tipAction.js');
 var splitUrl = require('@pathCommonJs/components/splitUrl.js')();
 var generateTemplate = require('@pathCommonJsComBus/generateTemplate.js');
+var alwaysAjax = require('@pathCommonJs/components/alwaysAjax.js');
+// 切换
+require('@pathCommonJsCom/goTopMui.js');
 
 $(function() {
     var hotDiagnosis = {
         $e: {
-            hotFundList: $('.hotFundList .card-theme'), // 搜索列表
+            hotFundList: $('.hotFundList .list_li'), // 搜索列表
             resultWrap: $('.resultWrap'), // 搜索结果
             fundListTemp: $('#fundList-template'), // 基金区域
             listLoading: $('.listLoading'), //所有数据区域，第一次加载的loading结构
@@ -127,7 +130,7 @@ $(function() {
                         if( $('.list').hasClass('refresh') ){
                             //当前为重新搜索，模板结构需要html进去
                             generateTemplate(dataList, that.$e.hotFundList, that.$e.fundListTemp,true);
-                            
+                            alwaysAjax($('.mui-table-view-cell'));
                             //去掉list的refresh class
                             $('.list').removeClass('refresh');
 
@@ -139,6 +142,7 @@ $(function() {
                             $('.branchBody').find('.contentWrapper .mui-table-view-cell .mui-card').append(that.html);  
 
                             generateTemplate(dataList, that.$e.hotFundList, that.$e.fundListTemp);
+                            alwaysAjax($('.mui-table-view-cell'));
                         }
 
                         //去掉mui-pull-bottom-pocket的mui-hidden

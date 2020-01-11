@@ -214,7 +214,7 @@ $(function() {
         },
         events: function() { //绑定事件
             var that = this;
-            alwaysAjax($('.contentWrapper'));
+            alwaysAjax();
             mui("body").on('mdClick', '.hopper', function(e) {
                 $('.mask').show();
                 $('.hopperCon').show();

@@ -7,13 +7,8 @@ require('@pathCommonBase/base.js');
 
 require('@pathCommonJs/ajaxLoading.js');
 var generateTemplate = require('@pathCommonJsComBus/generateTemplate.js');
-var splitUrl = require('@pathCommonJs/components/splitUrl.js');
-//获取地址栏参数
-getQueryString = function (name) {
-  var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)");
-  var r = window.location.search.substr(1).match(reg);
-  if (r != null) return unescape(r[2]); return '';
-}
+var splitUrl = require('@pathCommonJs/components/splitUrl.js')();
+
 $(function () {
   var fundCode
   var regard = {
@@ -34,7 +29,7 @@ $(function () {
       var obj = [{
         url: site_url.newfundDetails_api,
         data: {
-          fundCode: getQueryString('fundCode')
+          fundCode: splitUrl['fundCode']
         },
         callbackDone: function (json) {
           json = json.data

@@ -7,15 +7,9 @@ require('@pathCommonBase/base.js');
 require('@pathCommonJs/ajaxLoading.js');
 // require('@pathCommonJs/components/headBarConfig.js');
 var generateTemplate = require('@pathCommonJsComBus/generateTemplate.js');
-var splitUrl = require('@pathCommonJs/components/splitUrl.js');
+var splitUrl = require('@pathCommonJs/components/splitUrl.js')();
 var payPass = require('@pathCommonJsCom/payPassword.js');
 //获取地址栏参数
-getQueryString = function(name) {
-    var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)");
-    var r = window.location.search.substr(1).match(reg);
-    if (r != null) return unescape(r[2]);
-    return '';
-}
 $(function() {
     var fundCode
     var regard = {
@@ -35,7 +29,7 @@ $(function() {
             getData: function() {
 
                 var that = this;
-                var scheduledProtocolId = getQueryString('scheduledProtocolId')
+                var scheduledProtocolId = splitUrl['scheduledProtocolId']
                     //请求页面数据
                 var obj = [{
                     url: site_url.pofFixedDetail_api,
@@ -170,7 +164,7 @@ $(function() {
                 });
                 // 修改
                 mui("body").on("mdClick", ".edit", function(e) {
-                    var scheduledProtocolId = getQueryString('scheduledProtocolId')
+                    var scheduledProtocolId = splitUrl['scheduledProtocolId']
                     window.location.href = site_url.pofOrdinarySetThrow_url + '?scheduledProtocolId=' + scheduledProtocolId + '&fundCode=' + fundCode;
                 }, {
                     htmdEvt: 'castSurelyDetails_02'

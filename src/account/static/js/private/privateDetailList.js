@@ -1,5 +1,6 @@
 //  私募交易详情-待确认交易，已确认交易
 // @author peicongcong 2019-12-02
+// update chentiancheng 2020-01-08 11:57 
 
 require('@pathCommonBase/base.js');
 require('@pathCommonJsCom/utils.js');
@@ -219,6 +220,7 @@ $(function() {
                 url: that.gV.siteUrlArr[that.gV.current_index], //调用第几个接口
                 data: that.gV.ajaxArr[that.gV.current_index], //传调用参数
                 needLogin: true,
+                needLoading: false,
                 callbackDone: function(json) {
                     console.log(json.data)
                     var jsonData = json.data.pageList,
@@ -266,6 +268,7 @@ $(function() {
                                     var index = $('#slider .tab-scroll-wrap .mui-active').index(),
                                         $list = $("#move_" + index + " .list");
                                     $list.height(that.highHeight).addClass('noMove');
+                                    debugger
                                     // $list.addClass('noMove');
 
                                     // if( $("#move_"+index+" .noData").length ){
@@ -305,7 +308,8 @@ $(function() {
                             //$('.list').each( function( i, el){
 
                             //判断当前ul高度
-                            var ulHeight = $list.find(".mui-table-view").height()
+                            debugger
+                            var ulHeight = $list.find(".mui-table-view").height() 
                             if (ulHeight < that.htmlHeight) {
 
                                 $list.height(that.highHeight).addClass('setHeight').addClass('noMove');
@@ -357,11 +361,11 @@ $(function() {
                     t.endPullupToRefresh(false);
 
                     //没有数据
-                    if (that.gV.ajaxArr[that.gV.current_index].pageNum == 1) {
+                    if(that.gV.ajaxArr[that.gV.current_index].pageNum == 1) {
                         $id.find('.mui-scroll .mui-table-view-cell').html(that.getElements.noData.clone(false)).addClass('noCon');
                         //$id.find('.mui-scroll .list').html(that.getElements.noData.clone(false)).addClass('noCon');
                         $id.find('.noData').show();
-                    }
+                    } 
 
                     setTimeout(function() {
                         that.getElements.listLoading.hide();
@@ -442,8 +446,8 @@ $(function() {
                             hideCelButton: false,
                             zIndex: 100,
                             yesButtonPosition: 'left',
-                            htmdEvtYes: 'privateDetailList_8',
-                            htmdEvtCel: 'privateDetailList_9',
+                            htmdEvtYes:'privateDetailList_8',
+                            htmdEvtCel:'privateDetailList_9',
                             callback: function(t) {
 
                             },
@@ -459,8 +463,8 @@ $(function() {
                             celTxt: '取消',
                             hideCelButton: false,
                             zIndex: 100,
-                            htmdEvtYes: 'privateDetailList_10',
-                            htmdEvtCel: 'privateDetailList_11',
+                            htmdEvtYes:'privateDetailList_10',
+                            htmdEvtCel:'privateDetailList_11',
                             callback: function(t) {
 
                             },
@@ -473,8 +477,8 @@ $(function() {
                             celTxt: '取消',
                             hideCelButton: false,
                             zIndex: 100,
-                            htmdEvtYes: 'privateDetailList_12',
-                            htmdEvtCel: 'privateDetailList_13',
+                            htmdEvtYes:'privateDetailList_12',
+                            htmdEvtCel:'privateDetailList_13',
                             callback: function(t) {
                                 var obj = [{
                                     url: site_url.fundReserveCancel_api,
@@ -529,7 +533,7 @@ $(function() {
                         yesTxt: '我明白了',
                         hideCelButton: true,
                         zIndex: 100,
-                        htmdEvtYes: 'privateDetailList_14',
+                        htmdEvtYes:'privateDetailList_14',
                         callback: function(t) {
 
                         },
@@ -566,9 +570,9 @@ $(function() {
                     } else if (type == 'toUploadM') { //去上传汇款凭证
                         window.location.href = site_url.elecFourthStep_url + '?reserveId=' + reserveId + '&projectId=' + proId + '&projectName=' + projectName + '&isAllowAppend=' + isAllowAppend + '&isPubToPri=' + isPubToPri;
                     } else if (type == 'toView') { //详情
-                        window.location.href = site_url.privatePlacementDetail_url + '?projectId=' + proId;
+                        window.location.href = site_url.privatePlacementDetail_url + '?projectId=' + proId
                     } else if (type == 'toVideo') { //视频双录
-                        window.location.href = site_url.realVideoTranscribe_url + '?type=toBeConfirmed&projectId=' + proId;
+                        window.location.href = site_url.realVideoTranscribe_url + '?type=toBeConfirmed';
                     } else if (type == 'toDown') { //下载电子合同
 
                     } else if (type == 'reAppointment') { //重新预约

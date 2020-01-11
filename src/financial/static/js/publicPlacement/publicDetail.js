@@ -3,8 +3,9 @@
  *
  * @author shiyunrui 20191123
  * update:chentiancheng
- *
+ * 2020年1月11日21:03:10
  * 具体可以参考 privateDetail.js
+ *
  */
 
 require('@pathCommonBase/base.js');
@@ -21,17 +22,12 @@ Handlebars.registerHelper("if_than_0", function (value, options) {
         return options.inverse(this);
     }
 });
-//获取地址栏参数
-getQueryString = function (name) {
-    var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)");
-    var r = window.location.search.substr(1).match(reg);
-    if (r != null) return unescape(r[2]); return '';
-}
+
 $(function () {
     var fundCode
     var regard = {
         gV: {
-            fundBusinCode: '022',
+            fundBusinCode:'022',
             json: {},
             type: '1',//'1'七年 '2'万份
             time: 1,// 1月份 3 季度 6半年 12 一年 0成立以来
@@ -68,7 +64,7 @@ $(function () {
             userStatus:"", // 为空则是新用户   为0普通投资者  为1专业投资者
             investorStatus: '' // 投资者状态
         },
-        fundType: splitUrl['fundType'] == '10300'||splitUrl['fundType'] == '10800' ? 1 : 0, //10300 货币基金类型，其余为普通基金类型
+        fundType: splitUrl['fundType'] == '10300'||splitUrl['fundType'] == '10800'||splitUrl['fundType'] == '2' ? 1 : 0, //10300 或者10800或者3（3的时候是从活期理财页面跳转过来的时候带过来的是3）货币基金类型，其余为普通基金类型
         fundComId: '',   //基金公司ID
         secuId:'', // 基金编码
         chiName:'', // 基金名称
