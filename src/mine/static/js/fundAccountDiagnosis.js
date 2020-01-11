@@ -231,14 +231,14 @@ $(function() {
                     // 先判断实名认证，
                     if(jsonData.idnoCheckflag == 1) { // 实名认证
                         // 再判断是否风测
-                        if(jsonData.isRiskMatch == "1"){ // 风测过
+                        if(jsonData.isRiskEndure == "1"){ // 风测过
                             // 跳转申请记录页面
                             window.location.href = site_url.applyHistory_url
                         }else {
                             $.elasticLayer({
                                 id: "tip",
                                 title: '尊敬的客户',
-                                p: '<p>为订制更专业的诊断报告，请您先完成风险测评。</p>',
+                                p: '<p>为定制更专业的诊断报告，请您先完成风险测评。</p>',
                                 zIndex: 100,
                                 yesButtonPosition: 'right',
                                 hideCelButton: false,
@@ -256,7 +256,7 @@ $(function() {
                         $.elasticLayer({
                             id: "tip",
                             title: '尊敬的客户',
-                            p: '<p>为订制更专业的诊断报告，请您先完成身份信息认证。</p>',
+                            p: '<p>为定制更专业的诊断报告，请您先完成身份信息认证。</p>',
                             zIndex: 100,
                             yesButtonPosition: 'right',
                             hideCelButton: false,

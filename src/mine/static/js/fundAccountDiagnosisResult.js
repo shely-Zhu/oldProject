@@ -616,18 +616,18 @@ $(function() {
             }, {
                 'htmdEvt': 'fundAccountDiagnosisResult_04'
             })
-            $(".loss_first").on("blur" , function() {
+            $(".yield_first").on("input" , function() {
                 var val = $(this).val()
-                that.gV.loss_secondData = val;
-                if(val){
-                    $(".iptRight2").css("color","black")
-                }
-            })
-            $(".yield_first").on("blur" , function() {
-                var val = $(this).val()
-                that.gV.yield_secondData = val;
+                that.gV.yield_secondData = val*1;
                 if(val){
                     $(".iptRight1").css("color","black")
+                }
+            })
+            $(".loss_first").on("input" , function() {
+                var val = $(this).val()
+                that.gV.loss_secondData = val*1;
+                if(val){
+                    $(".iptRight2").css("color","black")
                 }
             })
             //弹出框确定按钮

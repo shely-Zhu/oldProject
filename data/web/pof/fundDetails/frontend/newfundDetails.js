@@ -61,7 +61,7 @@ var data = Mock.mock({
         "annYldRat":0,//最近7日折算年收益率
         "riskLevel":"3",//基金风险等级
         "riskLevelName":"中等风险",//基金风险等级名称
-        "fundStatus":"0",//基金状态
+        "fundStatus":"5",//基金状态
         "purchaseRate":"1.5",//购买费率
         "discount":"10.0",//折扣率
         "redemptionRate":"",//赎回费率

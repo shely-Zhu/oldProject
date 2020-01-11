@@ -177,11 +177,11 @@ $(function () {
                         $(".footer .fixed_investement_btn").css({"display":"block"})
                         that.gV.fixedInvestementBtnStatu = true
                         if(that.gV.json.cashTreasure == "1"){
-                            $(".footer .fixed_investement_btn").attr("disabled",true)
+                            $(".footer .fixed_investement_btn").attr("disabled",true).css({"display":"none"});
                             that.gV.fixedInvestementBtnStatu = false
                         }
                         if(that.gV.json.fundStatus=="3"||that.gV.json.fundStatus=="5"){
-                            $(".footer .fixed_investement_btn").attr("disabled",true)
+                            $(".footer .fixed_investement_btn").attr("disabled",true).css({"display":"none"});
                             that.gV.fixedInvestementBtnStatu = false
                         }
                        // that.gV.fixedInvestementBtn.show()
@@ -190,7 +190,8 @@ $(function () {
                        // that.gV.fixedInvestementBtn.hide()
                     }
                     if(!json.data.isBuyFlag){//不可买入
-                        $(".footer .buy_btn").addClass("disable").html("暂不可售")
+                        $(".footer .buy_btn").addClass("disable").html("暂不可售");
+                        $(".footer .fixed_investement_btn").attr("disabled",true).css({"display":"none"});
                    }
                   
                 },
