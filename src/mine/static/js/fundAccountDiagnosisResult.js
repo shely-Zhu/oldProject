@@ -318,9 +318,9 @@ $(function() {
             //     that.$e.lossControl.hide();
             //  }
             //  that.$e.yield_first[0].textContent = that.gV.yield_firstData ==""?"请选择":that.gV.yield_firstData;
-             that.$e.yield_first[0].value = that.gV.yield_secondData ==""?"请选择":that.gV.yield_secondData;
+             that.$e.yield_first[0].value = that.gV.yield_secondData ===""?"请输入":that.gV.yield_secondData;
             //  that.$e.loss_first[0].textContent = that.gV.loss_firstData ==""?"请选择":that.gV.loss_firstData;
-             that.$e.loss_first[0].value = that.gV.loss_secondData ==""?"请选择":that.gV.loss_secondData;
+             that.$e.loss_first[0].value = that.gV.loss_secondData ===""?"请输入":that.gV.loss_secondData;
         },
         queryDictionary: function() {
             //字典
