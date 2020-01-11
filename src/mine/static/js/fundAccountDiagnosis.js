@@ -7,13 +7,15 @@
  */
 require('@pathCommonBase/base.js');
 require('@pathCommonJs/ajaxLoading.js');
-require('@pathCommonJs/components/elasticLayer.js');
-require('@pathCommonJs/components/elasticLayerTypeTwo.js');
+/*require('@pathCommonJs/components/elasticLayer.js');
+require('@pathCommonJs/components/elasticLayerTypeTwo.js');*/
 require('@pathCommonJs/components/headBarConfig.js');
 var tipAction = require('@pathCommonJs/components/tipAction.js');
 var splitUrl = require('@pathCommonJs/components/splitUrl.js')();
 var generateTemplate = require('@pathCommonJsComBus/generateTemplate.js');
-require('@pathCommonJs/components/elasticLayerTypeTwo.js');
+/*require('@pathCommonJs/components/elasticLayerTypeTwo.js');*/
+require('@pathCommonJs/components/authenticationProcess.js');
+require('@pathCommonCom/elasticLayer/elasticLayer/elasticLayer.js');
 
 
 $(function() {
@@ -105,7 +107,7 @@ $(function() {
             }]
             $.ajaxLoading(obj);
         },
-        getConditionsOfOrder: function() {
+        /*getConditionsOfOrder: function() {
             var that = this;
 
             var obj = [{
@@ -218,6 +220,63 @@ $(function() {
             } else if (data.isInvestFavour != "1") {
                 return singleaAuthenPath = 'isInvestFavour'
             }
+        },*/
+        // 只判断用户是否实名以及是否风测
+        getConditionsOfOrder: function() {
+            var that = this;
+            var obj = [{
+                url: site_url.user_api,
+                callbackDone: function(json) { //成功后执行的函数
+                    var jsonData = json.data
+                    // 先判断实名认证，
+                    if(jsonData.idnoCheckflag == 1) { // 实名认证
+                        // 再判断是否风测
+                        if(jsonData.isRiskMatch == "1"){ // 风测过
+                            // 跳转申请记录页面
+                            window.location.href = site_url.applyHistory_url
+                        }else {
+                            $.elasticLayer({
+                                id: "tip",
+                                title: '尊敬的客户',
+                                p: '<p>为订制更专业的诊断报告，请您先完成风险测评。</p>',
+                                zIndex: 100,
+                                yesButtonPosition: 'right',
+                                hideCelButton: false,
+                                yesTxt: '立即去测评',
+                                callback: function() {
+                                    // 跳转风测页面
+                                    window.location.href = site_url.riskAppraisal_url + "?type=private"
+                                },
+                                callbackCel: function() {
+                                    
+                                }
+                            });
+                        }
+                    } else { // 未实名
+                        $.elasticLayer({
+                            id: "tip",
+                            title: '尊敬的客户',
+                            p: '<p>为订制更专业的诊断报告，请您先完成身份信息认证。</p>',
+                            zIndex: 100,
+                            yesButtonPosition: 'right',
+                            hideCelButton: false,
+                            yesTxt: '立即去认证',
+                            callback: function() {
+                                // 跳转实名认证页面
+                                window.location.href = site_url.realName_url
+                            },
+                            callbackCel: function() {
+                                
+                            }
+                        });
+                    }     
+                },
+                callbackNoData:function(argument) {
+                    tipAction(json.message);
+                }
+            }];
+            $.ajaxLoading(obj);
+      
         },
         getHoldData: function(t) {
             var that = this;
@@ -573,15 +632,22 @@ $(function() {
 
             // 获取专属报告
             mui("body").on('mdClick', '.content .getReport', function() {
-                that.getUserInfo_1();
-                that.getUserInfo();
                 that.getConditionsOfOrder();
             },{
                 'htmdEvt':'fundAccountDiagnosis_02'
             });
 
+            //未实名或未风测
+            mui("body").on("mdClick",".isRiskMatchBox_cancel",function(){
+                $(".isRiskMatch_mask").hide();
+                $(".isRiskMatchBox").hide();
+              // that.gV.isRiskMatchBox.hide();
+            },{
+                'htmdEvt': 'fundAccountDiagnosis_03'
+            })
+
             //认证
-            mui("body").on('mdClick', ".tips-li .tips-li-right", function(e) {
+            /*mui("body").on('mdClick', ".tips-li .tips-li-right", function(e) {
                 var type = $(this).parent().index()
                 switch (type) {
                     case 0: //开通账户
@@ -750,7 +816,7 @@ $(function() {
                
             },{
                 htmdEvt: 'fundAccountDiagnosis_09'
-            })
+            })*/
 
             mui("body").on('mdClick', ".icontips-close", function() {
 
