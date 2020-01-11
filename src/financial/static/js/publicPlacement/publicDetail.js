@@ -888,7 +888,6 @@ $(function () {
             time = time === 0 ? "" : time
             var that = this;
             //判断是否已经有数据了，有的话不再请求接口
-            debugger
             if( time == '' && that.gV['echartsData'].sinceNow.date && that.gV['echartsData'].sinceNow.date.length){
                 // 成立至今
                 that.drawLine( type, that.gV['echartsData'].sinceNow );

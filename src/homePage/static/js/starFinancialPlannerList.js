@@ -56,8 +56,12 @@ $(function() {
                 $('.activitySearchInput').width(activitySearchInputWidth);
                 var that = this;
                 var topHeitgh = $('#activitySearch').height();
-                var height = windowHeight - topHeitgh;
-
+                var wHeight = window.screen.height;
+                //处理7p 8p页面初始底部白条
+                if( $('html').height() < wHeight ){
+                    $('html').height( wHeight );
+                }
+                var height = $('html').height() - topHeitgh;
                 if (!$('.activityList').hasClass('setHeight')) {
                     $('.activityList').height(height).addClass('setHeight');
                 }
