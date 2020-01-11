@@ -31,6 +31,37 @@ $(function() {
             that.getData('');
             that.initRightBtn();
             that.clickEvent();
+            that.bankEvents();
+        },
+        // 获取认证信息
+        getUserInfo: function () {
+          var that = this;
+          // 请求页面数据
+          var obj = [{
+              url: site_url.queryUserBaseInfo_api,
+              data: {
+              },
+              callbackDone: function (json) {
+                  var data = json.data
+                  that.gV.accountType = data.accountType
+              }
+          }]
+          $.ajaxLoading(obj);
+        },
+        //获取用户信息
+          getUserInfo_1:function(){
+          var that = this;
+          var obj = [{
+            url:site_url.user_api,
+            data:{
+
+            },
+            callbackDone:function(json){
+              var data = json.data
+                that.gV.userStatus = data.investFavour
+            }
+          }];
+          $.ajaxLoading(obj);
         },
         getData: function(bankAccount) {
             var that = this;
@@ -55,8 +86,6 @@ $(function() {
                             var template = Handlebars.compile(tplm);
                             var html = template(json.data.pageList);
                             $("#bank_list").html(html);
-                            //渲染模板后设置点击事件
-                            that.bankEvents();
                         }
                     }
                 },
