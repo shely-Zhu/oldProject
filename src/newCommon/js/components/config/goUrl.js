@@ -314,19 +314,19 @@ module.exports = function() {
     this.hotDiagnosis_url = go_url.no_url + '/mine/views/fundDiagnosis/hotDiagnosis_url.html';
     // 诊断搜索页面
     this.diagnosisSearch_url = go_url.no_url + '/mine/views/fundDiagnosis/diagnosisSearch.html';
-    //基金账户诊断--新增基金页面                                                           
+    //基金账户诊断--新增基金页面
     this.addAccountDiagnosisResult_url = go_url.no_url + '/mine/views/fundDiagnosis/addAccountDiagnosisResult.html';
     //基金账户诊断 -- 申请页面
     this.fundAccountDiagnosisResult_url = go_url.no_url + '/mine/views/fundDiagnosis/fundAccountDiagnosisResult.html';
     // 诊断详情页
     this.diagnosisDetail_url = go_url.no_url + '/mine/views/fundDiagnosis/diagnosisDetail.html';
-    
+
     //账户诊断 ---持仓空白页
     this.noAccountHoldShare_url = go_url.no_url+'/mine/views/fundDiagnosis/noAccountHoldShare.html';
 
     //账户诊断---历史申请记录
     this.applyHistory_url = go_url.no_url + '/mine/views/fundDiagnosis/applyHistory.html'
-    
+
     /*-------------------------------基金诊断 end -----------------------*/
     /*-------------------------------我的页面 start -----------------------*/
     //登录日志查询页面
@@ -364,7 +364,7 @@ module.exports = function() {
     this.completeInformation_url = go_url.no_url + '/mine/views/information/completeInformation.html';
     //理财师->绑定理财师
     this.addFinancialer_url = go_url.no_url + '/mine/views/financialer/addFinancialer.html';
-     //活动详情->信息查看（修改证件有效期） 
+     //活动详情->信息查看（修改证件有效期）
      this.completeInfoEditModify_url = go_url.no_url + '/mine/views/information/completeInfoEditModify.html';
     //活动详情->投资者分类申请
     this.investorClassification_url = go_url.no_url + '/mine/views/investorClassification/investorClassification.html';
@@ -475,7 +475,7 @@ module.exports = function() {
     this.publicTradeDetail_url = go_url.no_url + '/account/views/publicTradeDetail/publicTradeDetail.html';
     //普通基金-赎回页面
     this.redemptionBuy_url = go_url.no_url + '/financial/views/publicPlacement/redemptionBuy.html';
-    //普通基金-赎回页面
+    //普通基金-赎回说明页面
     this.redemptionExplain_url = go_url.no_url + '/financial/views/publicPlacement/redemptionExplain.html';
     //普通基金-买入页面
     this.fundTransformIn_url = go_url.no_url + '/financial/views/publicPlacement/fundTransformIn.html';
@@ -559,7 +559,7 @@ module.exports = function() {
     this.pofDemo_url = go_url.no_url + '/mine/views/bankCard/demo.html';
     //举贤荐才
     this.recruit_url = go_url.no_url + '/about/views/recruit.html';
-    //专业可靠的理财平台-恒天财富    
+    //专业可靠的理财平台-恒天财富
     this.consult_url = go_url.no_url + '/about/views/baidu/consult.html';
     //交易明细
     this.tradeDetailOne_url = go_url.no_url + '/personal/views/tradeDetail.html';
@@ -576,7 +576,7 @@ module.exports = function() {
     // 新发基金详情页
     this.newFundDetail_url = go_url.no_url + '/financial/views/publicPlacement/newFundDetail.html';
 
-    
+
 
 
 };

@@ -1,8 +1,8 @@
-<!-- /**  
+<!-- /**
  * @Page:  普通基金产品详情页_定投
- * @Author: caoqihai  
+ * @Author: caoqihai
  * @Date:   2019-11-23
- * 
+ *
  */ -->
 
 <!DOCTYPE html>
@@ -12,7 +12,7 @@
     @@include('@pathInclude/views/meta.html')
     <link rel="stylesheet" href="/financial/static/css/publicPlacement/redemptionBuy.css">
     <title>公募监管账户</title>
-    
+
 </head>
 
 <body>
@@ -38,11 +38,11 @@
                         <div class="fundFooter">
                             <span>七日年化</span>
                             <span class="fundMessage"></span>
-                        </div>    
+                        </div>
                         <br/>
                     </div>
                     <div class="onright-left-two maxMoneyContent">可赎回<span></span>份额</div>
-                    
+
                 </div>
                 <!-- <div class="toChoose">请选择银行卡</div> -->
                 <a class="iconfont iconone"  href="javascript:;">&#xe67d;</a>
@@ -63,10 +63,10 @@
             <div class="pay"><span>预计到账时间：</span><span class="payTime"></span></div>
         </div>
         <div class="tip">
-            <p>根据见证会要求，自2018年4月1日起，除货币市场基金与交易型开放式指数基金(ETF)外的开放式基金，持有少于7日(不含)时，需要收取不低于1.5%的赎回费</p>
-            <a href="" class="findMessageCen">查看详情</a>
+            <p>根据证监会要求，自2018年4月1日起，除货币市场基金与交易型开放式指数基金(ETF)外的开放式基金，持有少于7日(不含)时，需要收取不低于1.5%的赎回费</p>
+            <a href="javascript:;" class="findMessageCen">查看详情</a>
         </div>
-        
+
         <!-- 不可点击的样式是加class:disabled -->
         <div class="checkMessage">超出最大赎回份额</div>
         <button class="conformButton confirmeDemptionPay" disabled>确定</button>
@@ -101,8 +101,8 @@
                         <div class="bank-pay">单笔限额5万，单日限额10万</div>
                     </div>
                     <img class="true radioCheckItemImg"  src="/common/img/account_icon_check@2x.png" alt="">
-                </li> 
-          
+                </li>
+
             </ul>
             <div class="title">赎回至其他基金</div>
             <div class="messageTip">*赎回金额将用于购买其他基金</div>
@@ -122,13 +122,13 @@
                     <img class="true" src="/common/img/account_icon_check@2x.png" alt="">
                 </li>
                 -->
-            
+
             </ul>
         </div>
     </div>
 
 
-        
+
 <div class="elasticLayer transOutRule" id="tip" style="z-index:100">
         <div class="elasticWrapper">
             <div class="elasticMid">
@@ -139,7 +139,7 @@
                     <p class="elasticP">普通转出：无限额限制，预计到账时间T+1工作日。</p>
                     -->
                 </div>
-                
+
             </div>
             <div class="elasticButtons"  htmdEvt="cashTransformOut_elasticButtons">明白了</button>
             </div>
@@ -156,14 +156,14 @@
                     <div class="bank-pay">七日年化<span class="fundMessage"><span>+</span>{{annYldRat}}<span>%</span></span></div>
                 </div>
                 <img class="true radioCheckItemImg"  src="/common/img/account_icon_check@2x.png" alt="">
-            </li>   
+            </li>
             {{/each}}
     </script>
 
     <!-- 加载中loading -->
     @@include('@pathCommonCom/loading/listLoading.html')
     @@include('@pathInclude/views/footer.html')
-    @@include('@pathCommonViews/payPassword.html') 
+    @@include('@pathCommonViews/payPassword.html')
 
 
     <script src="/financial/static/js/publicPlacement/redemptionBuy.js"></script>

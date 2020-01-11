@@ -1,8 +1,8 @@
-<!-- /**  
+<!-- /**
  * @Page:  财富学院
- * @Author: liliang 
+ * @Author: liliang
  * @Date:   2019-11-25
- * 
+ *
  */ -->
 
  <!DOCTYPE html>
@@ -26,25 +26,25 @@
                     </div>
                     <div class="hotWords translate hide">
                          <div class="title">
-                             
+
                          </div>
                          <div class="content">
-                              
+
                          </div>
                     </div>
                     <div class="hotWords fortuneVideo hide">
                          <div class="title">
-                             
+
                          </div>
                          <div class="fortuneList">
                               <ul>
-                                   
+
                               </ul>
                          </div>
                     </div>
                     <div class="hotWords forum hide">
                          <div class="title">
-                             
+
                          </div>
                          <div class="broadcast">
                               <!-- <span class="bigspan">大咖直播</span>
@@ -52,12 +52,12 @@
                               <span class="bigspan">知时讲堂</span> -->
                          </div>
                          <div class="forumList">
-                              
+
                          </div>
                     </div>
                     <div class="hotWords tabContent hide">
                          <div class="title">
-                             
+
                          </div>
                          <div class="tab">
                               <div class="tab-b">
@@ -76,7 +76,7 @@
                </div>
           </div>
      </div>
-       
+
      <script id="first-template" type="text/x-handlebars-template">
      {{! 列表 内容 使用mui的上拉加载}}
      <div class="list">
@@ -105,10 +105,10 @@
 
      {{/each}}
      </script>
-     
+
      @@include('@pathCommonViews/goTop.html')
 
-     
+
 
      <!-- 翻译官 -->
      <script id="fortune-template" type="text/x-handlebars-template">
@@ -161,7 +161,7 @@
      </script>
      <script id="forumTitle" type="text/x-handlebars-template">
           {{#each this}}
-             <span  class="bigspan">{{sonModelName}}</span> 
+             <span  class="bigspan">{{sonModelName}}</span>
           {{/each}}
      </script>
      <script id="forumContent" type="text/x-handlebars-template">
@@ -171,7 +171,7 @@
                          <div class="mui-scroll-wrapper mui-slider-indicator mui-segmented-control mui-segmented-control-inverted">
                               <div class="mui-scroll">
                                    {{#each listContent}}
-                                        <a  href="javascript:void(0);" onclick="setGoUrl( site_url.articleTemplate_url+'?id={{id}}&articleBelong={{articleBelong}}', 'fortune_05')">
+                                        <a  href="javascript:void(0);" link-data = {{externalUrl}} onclick="setGoUrl( site_url.articleTemplate_url+'?id={{id}}&articleBelong={{articleBelong}}', 'fortune_05')">
                                              <div class="mui-control-item conten">
                                                   <img style="width:6.2rem;height:6rem;" class="lazyload" src="/common/img/lazyImgList.png" data-original="{{imageUrlShowOnline}}" alt="">
                                                   <div class="con">
@@ -196,8 +196,8 @@
      </script>
 
      @@include('@pathInclude/views/footer.html')
-     
+
      <script src="/homePage/static/js/fortuneCollegeList.js"></script>
- 
+
  </body>
  </html>
