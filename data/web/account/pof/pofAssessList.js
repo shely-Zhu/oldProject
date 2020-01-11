@@ -49,7 +49,7 @@ var data=Mock.mock({
 		"holdIncomeMask":0.54564,// 持有收益千分位
 		"isShowDivideMsg":0, //0否1是(是否显示分红文案)
 		"divideMsg":"最近有分红",
-		"isBuyFlag":1,//是否可购买(0否1是) int类型
+		"isBuyFlag":0,//是否可购买(0否1是) int类型
 		"isRedemptionFlag":1, //是否可赎回(0否1是) int 类型
 		"isFixFlag":1,//是否可定投(0否1是) int 类型
 		"canBeSpent":"0",//支持货基购基  0为支持  1为不支持

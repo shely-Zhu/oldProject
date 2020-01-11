@@ -391,7 +391,9 @@ $(function() {
 				   that.data.isRedemptionFlag = jsonData.isRedemptionFlag; //是否可赎回(0否1是) int 类型
 				   that.data.supportFixedFlag = jsonData.isFixFlag;//是否可定投(0否1是) int 类型
 				   if(!that.data.isBuyFlag){//不可买入
-				   	 	$(".buyBtn").addClass("disable").html("暂不可售")
+				   	 	$(".buyBtn").addClass("disable").html("暂不可售");
+				   	 	// $(".fiedBtn").css("display", "none");
+
 				   }
 				   	if(!that.data.isRedemptionFlag){//不可赎回
 				   		$(".redeemBtn").addClass("disable").html("暂停赎回")
