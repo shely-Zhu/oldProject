@@ -472,7 +472,7 @@ $(function() {
                                     htmdEvtCel: 'starFinancialPlannerList_15',
                                     callback: function() {
                                         // 点击立即绑定跳转验证用户身份页面
-                                        window.location.href = site_url.bindFinancialer_url + '?financialerId=' + financialerId + '&type=1&name'+starFinancialPlannerName
+                                        window.location.href = site_url.bindFinancialer_url + '?financialerId=' + financialerId + '&type=1&name='+starFinancialPlannerName
                                     },
                                     callbackCel: function() {
                                         that.gV.FinancialerClickFlag = true
