@@ -26,8 +26,6 @@ $(function () {
       $('.tips').hide()
       that.getData();
       that.events();
-      /*that.getUserInfo();  //获取用户类型
-      that.getUserInfo_1();  // 获取用户信息*/
 
     },
     getData: function () {
@@ -69,36 +67,6 @@ $(function () {
       }]
       $.ajaxLoading(obj1);
 
-    },
-     // 获取认证信息
-    getUserInfo: function () {
-      var that = this;
-      // 请求页面数据
-      var obj = [{
-          url: site_url.queryUserBaseInfo_api,
-          data: {
-          },
-          callbackDone: function (json) {
-              var data = json.data
-              that.gV.accountType = data.accountType
-          }
-      }]
-      $.ajaxLoading(obj);
-    },
-    //获取用户信息
-      getUserInfo_1:function(){
-      var that = this;
-      var obj = [{
-        url:site_url.user_api,
-        data:{
-
-        },
-        callbackDone:function(json){
-          var data = json.data
-            that.gV.userStatus = data.investFavour
-        }
-      }];
-      $.ajaxLoading(obj);
     },
     	 // 客户预约产品所需条件
 		 getConditionsOfOrder: function(fundCode) {
@@ -165,25 +133,16 @@ $(function () {
 			});
       // 转入
       mui("body").on("mdClick", ".fundIn", function () {
-        that.getUserInfo();  //获取用户类型
-        that.getUserInfo_1();  // 获取用户信息
         var fundCode = $(this).parent().parent().find(".itemTop .itemTitle span").eq(0).attr("fundCode")
         var fundName = $(this).parent().parent().find(".itemTop .itemTitle span").eq(0).attr("fundName")
         that.gV.transformInFundCode = fundCode;
         that.gV.transformInFundName = fundName;
-        if(that.gV.accountType === 0 || that.gV.accountType === 2){
-          tipAction('暂不支持机构客户进行交易');
-        }else{
-          // 先判断是否司法冻结以及身份过期，再判断一键认证
-          var result = frozenAccount("buyFreeze", window.location.href, that.gV.accountType);
-          if( !result ) {
-            var url = site_url.pofCashTransformIn_url + '?fundCode='+ fundCode + '&fundName=' + fundName;
-            authenticationProcess("fundIn", fundCode, that.gV.userStatus, that.gV.accountType, url)
-          };
-          //that.getConditionsOfOrder(fundCode)
-          //authenticationProcess("info", fundCode, that.gV.userStatus, that.gV.accountType)
-          //window.location.href = site_url.pofCashTransformIn_url + '?fundCode='+ fundCode + '&fundName=' + fundName;
-        }
+        // 先判断是否司法冻结以及身份过期，再判断一键认证
+        var result = frozenAccount("buyFreeze", window.location.href, false);
+        if( !result ) {
+          var url = site_url.pofCashTransformIn_url + '?fundCode='+ fundCode + '&fundName=' + fundName;
+          authenticationProcess(fundCode, url)
+        };
       }, {
 				htmdEvt: 'cashManagement_02'
 			});
@@ -193,7 +152,7 @@ $(function () {
         var productName = $(this).parent().parent().find(".itemTop .itemTitle span").eq(0)[0].innerHTML;
         var fundCode = $(this).parent().parent().find(".itemTop .itemTitle span").eq(0).attr("fundCode")
         // 先判断是否司法冻结以及身份过期，再判断一键认证
-        var result = frozenAccount("saleFreeze", window.location.href, that.gV.accountType);
+        var result = frozenAccount("saleFreeze", window.location.href, false);
         if( !result ) {
           window.location.href = site_url.pofCashTransformOut_url + '?fundCode=' + fundCode + '&productName=' + new Base64().encode(productName);
         };
@@ -235,7 +194,7 @@ $(function () {
       htmdEvt: 'cashManagement_05'
     });
     //一键认证
-    mui("body").on('mdClick', ".tips .tips-btn", function (e) {
+    /*mui("body").on('mdClick', ".tips .tips-btn", function (e) {
         window.location.href = site_url.realName_url
     },{
       htmdEvt: 'cashManagement_06'
@@ -273,7 +232,7 @@ $(function () {
               window.location.href = site_url.riskAppraisal_url + "?type=private"
           }
          
-      })
+      })*/
 
       // // 跳转详情页
       // mui("body").on("tap", ".hd_to_detail", function (e) {
