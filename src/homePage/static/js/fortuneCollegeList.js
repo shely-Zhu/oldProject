@@ -1,14 +1,10 @@
 //  财富讲堂
-<<<<<<< HEAD
-// @author liliang 2019-11-20
-=======
 // @author liliang 2019-11-20 
 /*
 
 update chentiancheng 2020年1月9日23:58:11
 
 */
->>>>>>> 49e59e87ee1458bd921be54eae788996ab8af8e3
 
 require('@pathCommonBase/base.js');
 require('@pathCommonJsCom/utils.js');
