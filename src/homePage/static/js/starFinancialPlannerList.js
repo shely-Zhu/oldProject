@@ -1,6 +1,7 @@
 /**
  * 会员俱乐部-活动列表
  * @author  liuhongyu 2019 10-31
+ * update chentiancheng 2020年1月11日15:01:20
  */
 
 require('@pathCommonBase/base.js');
@@ -56,8 +57,12 @@ $(function() {
                 $('.activitySearchInput').width(activitySearchInputWidth);
                 var that = this;
                 var topHeitgh = $('#activitySearch').height();
-                var height = windowHeight - topHeitgh;
-
+                var wHeight = window.screen.height;
+                //处理7p 8p页面初始底部白条
+                if( $('html').height() < wHeight ){
+                    $('html').height( wHeight );
+                }
+                var height = $('html').height() - topHeitgh;
                 if (!$('.activityList').hasClass('setHeight')) {
                     $('.activityList').height(height).addClass('setHeight');
                 }

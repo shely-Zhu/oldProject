@@ -81,10 +81,12 @@ $(function() {
                     var dataList;
 
                     if (json.data.totalCount == 0) { // 没有记录不展示
+                        $(".list").css("display", "none");
                         that.$e.noData.show();
                         return false;
                     } else {
-                        that.$e.noData.hide()
+                        that.$e.noData.hide();
+                        $('.list').show();
                         that.$e.resultWrap.find('.total').html(json.data.totalCount);
                         that.$e.resultWrap.find('.word').html(key);
                         dataList = json.data.pageList;
@@ -100,7 +102,11 @@ $(function() {
 
                                 if (dataList.length == 0) {
                                     // 暂无数据显示
+                                    $(".list").css("display", "none");
                                     that.$e.noData.show();
+
+                                    t.endPullupToRefresh(false);
+
                                     return false;
 
                                 } else { // 没有更多数据了
@@ -126,7 +132,7 @@ $(function() {
                             $('.list').removeClass('refresh');
 
                             //隐藏回到顶部按钮
-                            $('.goTopBtn').hide();
+                            // $('.goTopBtn').hide();
 
                         }else{
                             //非重新搜索，即上拉发起的请求，结果append进去
@@ -150,6 +156,8 @@ $(function() {
                     that.$e.resultWrap.find('.total').html(0);
                     that.$e.listLoading.hide()
                     t.endPullupToRefresh(true);
+
+                    $(".list").css("display", "none");
                     that.$e.noData.show()    
                     //隐藏回到顶部按钮
                     $('.goTopBtn').hide();
@@ -186,7 +194,7 @@ $(function() {
                     that.initMui();
 
                     //初始化后，隐藏上拉文字
-                    $('.list').find('.mui-pull-bottom-pocket').addClass('mui-hidden');
+                    // $('.list').find('.mui-pull-bottom-pocket').addClass('mui-hidden');
 
                     //请求第一次数据
                     mui('.contentWrapper').pullRefresh().pullupLoading();
@@ -195,22 +203,34 @@ $(function() {
                 } else {
                     //已初始化，
                     //refresh表示当前为搜索新数据，该class会在数据插入页面后去掉
-                    $('.list').addClass('refresh');
+                    $('.list').show().addClass('refresh');
 
                     //清空当前页面
                     that.$e.hotFundList.html('');
 
+                    //重设当前页码为1
+                    that.gV.pageCurrent = 1;
+
+                    
+
+                    // 滚动区域回到顶部
+                    $('.contentWrap')[0].style.webkitTransform = "translate3d(0px, 0px, 0px) translateZ(0px)";
+                    $('.contentWrap')[0].style.webkitTransform = '2500ms';
+
                     //清空页面后重置上拉加载，使回到顶部
-                    mui('.contentWrapper').pullRefresh().refresh(true);
+                    // mui('.contentWrapper').pullRefresh().refresh(true);
+
+                    //上拉，发送ajax请求
+                    mui('.contentWrapper').pullRefresh().pullupLoading();
 
                     //隐藏上拉文字
                     $('.list').find('.mui-pull-bottom-pocket').addClass('mui-hidden');
 
-                    //重设当前页码为1
-                    that.gV.pageCurrent = 1;
+                    // //重设当前页码为1
+                    // that.gV.pageCurrent = 1;
 
-                    //上拉，发送ajax请求
-                    mui('.contentWrapper').pullRefresh().pullupLoading();
+                    // //上拉，发送ajax请求
+                    // mui('.contentWrapper').pullRefresh().pullupLoading();
                 }
             } else {
                 //当数据清空时
