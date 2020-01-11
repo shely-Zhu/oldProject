@@ -12,7 +12,7 @@
 * 
 */
 
-module.exports = function(type, fundCode, userStatus, accountType, url) {
+module.exports = function(fundCode, url) {
 	var auth = {
 		$e:{
             
@@ -27,15 +27,35 @@ module.exports = function(type, fundCode, userStatus, accountType, url) {
 		},
         gV: {
         	isWealthAccountStatus: '',// 是否开通财富账户
-        	userStatus: userStatus,
-        	accountType: accountType,
+        	userStatus: '', // '' 新用户 0-普通投资者;1-专业投资者；2-已过期；
+            accountType: '', // 用户类型 1 个人
         	isHighAgeStatus:true,  //投资者年龄默认小于60的状态为true  大于就位false
         },
         init: function() {
             var that = this;
-            // 获取用户各审核情况，共5条
-            that.initAuth();
+            // 获取用户状态以及用户类型
+            that.getUserInfo();
             that.events();
+        },
+        getUserInfo: function() {
+        	var that = this;
+            // 请求页面数据
+            var obj = [{
+                url: site_url.queryUserAuthInfo_api,
+                data: {
+                },
+                callbackDone: function (json) {
+                    var data = json.data
+                    that.gV.accountType = data.accountType
+                    that.gV.userStatus = data.investFavour
+                    // 获取用户各审核情况，共5条
+        			that.initAuth();
+                },
+                callbackNoData:function(json){
+					tipAction(json.message);
+				},
+            }]
+            $.ajaxLoading(obj);
         },
         initAuth: function() {
         	var that = this;
