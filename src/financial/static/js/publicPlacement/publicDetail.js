@@ -31,7 +31,7 @@ $(function () {
     var fundCode
     var regard = {
         gV: {
-            fundBusinCode: '022',
+            fundBusinCode:'022',
             json: {},
             type: '1',//'1'七年 '2'万份
             time: 1,// 1月份 3 季度 6半年 12 一年 0成立以来
