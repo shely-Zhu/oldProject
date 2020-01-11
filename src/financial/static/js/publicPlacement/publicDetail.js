@@ -31,7 +31,7 @@ $(function () {
     var fundCode
     var regard = {
         gV: {
-            fundBusinCode: '022',
+            fundBusinCode:'022',
             json: {},
             type: '1',//'1'七年 '2'万份
             time: 1,// 1月份 3 季度 6半年 12 一年 0成立以来
@@ -888,7 +888,6 @@ $(function () {
             time = time === 0 ? "" : time
             var that = this;
             //判断是否已经有数据了，有的话不再请求接口
-            debugger
             if( time == '' && that.gV['echartsData'].sinceNow.date && that.gV['echartsData'].sinceNow.date.length){
                 // 成立至今
                 that.drawLine( type, that.gV['echartsData'].sinceNow );

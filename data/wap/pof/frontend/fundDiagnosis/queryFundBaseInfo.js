@@ -20,11 +20,11 @@ var data = Mock.mock({
     "data": {
         "fundCode": "000846", //基金代码
         "fundName": "基金名称gagagaga", //基金名称
-        "newNetValue": "1", //最新净值
-        "newOneDayGains": "2", //最新日涨幅
-        "yearEarnRate": "12", //年化收益率
+        "newNetValue": "9.99", //最新净值
+        "newOneDayGains": "999.99", //最新日涨幅
+        "yearEarnRate": "999.99", //年化收益率
         "type": "这是type", //,
-        "fundState": "12", //基金状态
+        "fundState": "999.99", //基金状态
         "grade":"5", //评级
         "fundLableList": ['这是标签'] //基金标签
 

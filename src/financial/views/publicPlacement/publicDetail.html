@@ -30,8 +30,12 @@
 					<div class="new_worth">万份收益</div>
 					<div class="new_worth_value">{{unitYld}}</div>
 					<div class="type">
+						{{#if riskLevelName}}
 						<div class="type_1">{{riskLevelName}}</div>
+						{{/if}}
+						{{#if invTypComDesc}}
 						<div class="type_2">{{invTypComDesc}}</div>
+						{{/if}}
 						<!-- <div class="type_3">10000.0元起购</div> -->
 					</div>
 				</div>
@@ -43,9 +47,15 @@
 					<div class="new_worth">最新净值({{trDate}})</div>
 					<div class="new_worth_value">{{unitNavRetainFourStr}}</div>
 					<div class="type">
+						{{#if riskLevelName}}
 						<div class="type_1">{{riskLevelName}}</div>
+						{{/if}}
+						{{#if invTypComDesc}}
 						<div class="type_2">{{invTypComDesc}}</div>
+						{{/if}}
+						{{#if minValue}}
 						<div class="type_2">{{minValue}}元起购</div>
+						{{/if}}
 					</div>
 				</div>
 				{{/if}}
