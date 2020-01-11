@@ -84,6 +84,7 @@ $(function() {
                         that.$e.noData.show();
                         return false;
                     } else {
+                        that.$e.noData.hide()
                         that.$e.resultWrap.find('.total').html(json.data.totalCount);
                         that.$e.resultWrap.find('.word').html(key);
                         dataList = json.data.pageList;
@@ -149,7 +150,7 @@ $(function() {
                     that.$e.resultWrap.find('.total').html(0);
                     that.$e.listLoading.hide()
                     t.endPullupToRefresh(true);
-                        
+                    that.$e.noData.show()    
                     //隐藏回到顶部按钮
                     $('.goTopBtn').hide();
 
