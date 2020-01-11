@@ -73,7 +73,7 @@ $(function() {
                         callbackDone: function(json) {     
                             var data = json.data.pageList;
                             if(that.gV.pageCurrent == 1 && data.length == 0) {
-                                $(".list").css("display", "none")
+                                $(".list").css("display", "none");
                                 that.$e.noData.show()
                             } else {
                                 // 给data添加图片
@@ -100,7 +100,7 @@ $(function() {
                         },
                         callbackNoData: function( json ){  
                             if(that.gV.pageCurrent == 1) {
-                                $(".list").css("display", "none")
+                                $(".list").css("display", "none");
                                 that.$e.noData.show()
                             }
                             def && def.reject( json, that.gV.pageCurrent );

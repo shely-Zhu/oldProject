@@ -122,7 +122,7 @@ $(function() {
                 contentTypeSearch: true,
                 callbackDone: function(json) {
                     var jsonData = json.data[0] || []
-                    if(jsonData.length != 0) {
+                    if (jsonData.length != 0) {
                         $(".hopper").hide()
                         $(".covering").hide()
                         var fileName = jsonData.storageFileName
@@ -131,13 +131,13 @@ $(function() {
                         var ordernum = jsonData.ordernum
                         var obj = {
                             title: '温馨提示',
-                            p: '<p>您预约的' + jsonData.storageRelName +'产品已经为您生成客户行为确认单，请您查看并确认</p>',
+                            p: '<p>您预约的' + jsonData.storageRelName + '产品已经为您生成客户行为确认单，请您查看并确认</p>',
                             yesTxt: '立即查看',
                             zIndex: 100,
                             hideCelButton: true,
-                            htmdEvtYes:'tobeConfirmTransaction_14',  // 埋点确定按钮属性
+                            htmdEvtYes: 'tobeConfirmTransaction_14', // 埋点确定按钮属性
                             callback: function(t) {
-                                if(fileName.indexOf(".pdf") != -1) {
+                                if (fileName.indexOf(".pdf") != -1) {
                                     window.location.href = site_url.downloadNew_api + "?filePath=" + filePath + "&fileName=" + new Base64().encode(fileName) + "&groupName=" + groupName + '&ordernum=' + ordernum + "&show=1&acknowledgeBtn=true";
                                 } else {
                                     window.location.href = site_url.downloadNew_api + "?filePath=" + filePath + "&fileName=" + new Base64().encode(fileName) + "&groupName=" + groupName + '&ordernum=' + ordernum + '&acknowledgeBtn=true'
@@ -148,7 +148,7 @@ $(function() {
                     }
                 },
                 callbackFail: function() {
-                  
+
                 }
             }];
             $.ajaxLoading(obj);
@@ -216,20 +216,20 @@ $(function() {
             var that = this;
             alwaysAjax($('.contentWrapper'));
             mui("body").on('mdClick', '.hopper', function(e) {
-                    $('.mask').show();
-                    $('.hopperCon').show();
-                    $(".covering").show()
-
-                }, {
-                    'htmdEvt': 'tobeConfirmTransaction_0'
-                })
-            mui("body").on('mdClick', '.covering', function(e) {
-                $('.hopperCon').hide();
-                $(".covering").hide()
+                $('.mask').show();
+                $('.hopperCon').show();
+                $(".covering").show()
 
             }, {
-                'htmdEvt': 'tobeConfirmTransaction_14'
-            })    
+                'htmdEvt': 'tobeConfirmTransaction_0'
+            })
+            mui("body").on('mdClick', '.covering', function(e) {
+                    $('.hopperCon').hide();
+                    $(".covering").hide()
+
+                }, {
+                    'htmdEvt': 'tobeConfirmTransaction_14'
+                })
                 //点击筛选数据
             mui("body").on('mdClick', '.hopperCon li', function(e) {
                     $('.list').show();
@@ -274,8 +274,8 @@ $(function() {
                             celTxt: '取消',
                             hideCelButton: false,
                             zIndex: 100,
-                            htmdEvtYes:'tobeConfirmTransaction_7',  // 埋点确定按钮属性
-                            htmdEvtCel:'tobeConfirmTransaction_8',  // 埋点取消按钮属性
+                            htmdEvtYes: 'tobeConfirmTransaction_7', // 埋点确定按钮属性
+                            htmdEvtCel: 'tobeConfirmTransaction_8', // 埋点取消按钮属性
                             callback: function(t) {
 
                             }
@@ -290,8 +290,8 @@ $(function() {
                             celTxt: '取消',
                             hideCelButton: false,
                             zIndex: 100,
-                            htmdEvtYes:'tobeConfirmTransaction_9',  // 埋点确定按钮属性
-                            htmdEvtCel:'tobeConfirmTransaction_10',  // 埋点取消按钮属性
+                            htmdEvtYes: 'tobeConfirmTransaction_9', // 埋点确定按钮属性
+                            htmdEvtCel: 'tobeConfirmTransaction_10', // 埋点取消按钮属性
                             callback: function(t) {
 
                             },
@@ -304,8 +304,8 @@ $(function() {
                             celTxt: '取消',
                             hideCelButton: false,
                             zIndex: 100,
-                            htmdEvtYes:'tobeConfirmTransaction_11',  // 埋点确定按钮属性
-                            htmdEvtCel:'tobeConfirmTransaction_12',  // 埋点取消按钮属性
+                            htmdEvtYes: 'tobeConfirmTransaction_11', // 埋点确定按钮属性
+                            htmdEvtCel: 'tobeConfirmTransaction_12', // 埋点取消按钮属性
                             callback: function(t) {
                                 var obj = [{
                                     url: site_url.fundReserveCancel_api,
@@ -352,7 +352,7 @@ $(function() {
                         yesTxt: '我明白了',
                         hideCelButton: true,
                         zIndex: 100,
-                        htmdEvtYes:'tobeConfirmTransaction_13',  // 埋点确定按钮属性
+                        htmdEvtYes: 'tobeConfirmTransaction_13', // 埋点确定按钮属性
                         callback: function(t) {
 
                         },
@@ -383,9 +383,9 @@ $(function() {
                     } else if (type == 'toUploadM') { //去上传汇款凭证
                         window.location.href = site_url.elecFourthStep_url + '?reserveId=' + reserveId + '&projectId=' + proId + '&projectName=' + projectName + '&isAllowAppend=' + isAllowAppend + '&isPubToPri=' + isPubToPri;
                     } else if (type == 'toView') { //详情
-                        window.location.href = site_url.privatePlacementDetail_url + '?projectId=' + proId
+                        window.location.href = site_url.privatePlacementDetail_url + '?projectId=' + proId;
                     } else if (type == 'toVideo') { //视频双录
-                        window.location.href = site_url.realVideoTranscribe_url + '?type=toBeConfirmed';
+                        window.location.href = site_url.realVideoTranscribe_url + '?type=toBeConfirmed&projectId=' + proId;
                     } else if (type == 'reAppointment') { //重新预约
 
                     }

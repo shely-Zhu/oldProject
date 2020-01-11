@@ -211,38 +211,6 @@ $(function() {
             // 使用刚指定的配置项和数据显示图表。
             myChart.setOption(option);
         },
-        //获取用户信息
-        getUserInfo_1:function(){
-          var that = this;
-          var obj = [{
-            url:site_url.user_api,
-            data:{
-
-            },
-            callbackDone:function(json){
-              var data = json.data
-                that.gL.userStatus = data.investFavour
-            }
-          }];
-          $.ajaxLoading(obj);
-        },
-        // 获取认证信息
-        getUserInfo: function() {
-            var that = this;
-            // 请求页面数据
-            var obj = [{
-                url: site_url.queryUserBaseInfo_api,
-                data: {},
-                callbackDone: function(json) {
-                    var data = json.data
-                    that.gL.accountType = data.accountType
-                },
-                callbackFail: function(json) {
-                    tipAction(json.msg);
-                }
-            }]
-            $.ajaxLoading(obj);
-        },
         //获取初始数据
         getDataReq: function() { //数据接口
 
@@ -486,20 +454,14 @@ $(function() {
                 })
                 //点击转入跳转
             mui("body").on('mdClick', '.shiftToBtn', function(e) {
-                that.getUserInfo()
-                that.getUserInfo_1()
                 $(".isRiskMatch_mask").hide();
                 $(".isRiskMatchBox").hide();
-                if (that.gL.accountType === 0 || that.gL.accountType === 2) {
-                    tipAction('暂不支持机构客户进行交易');
-                } else {
-                    // 先判断是否司法冻结以及身份过期，再判断一键认证
-                    var result = frozenAccount("buyFreeze", window.location.href, that.gL.accountType);
-                    if( !result ) {
-                        var url = site_url.pofCashTransformIn_url+ "?fundName=" +that.gL.fundName + "&fundCode=" +that.gL.fundCode;
-                        authenticationProcess("", that.gL.fundCode, that.gL.userStatus, that.gL.accountType, url)
-                    };
-                }
+                // 先判断是否司法冻结以及身份过期，再判断一键认证
+                var result = frozenAccount("buyFreeze", window.location.href, false);
+                if( !result ) {
+                    var url = site_url.pofCashTransformIn_url+ "?fundName=" +that.gL.fundName + "&fundCode=" +that.gL.fundCode;
+                    authenticationProcess(that.gL.fundCode, url)
+                };
 
                 // 账户过期弹窗
                 /*var result = frozenAccount("buyFreeze", window.location.href, false);

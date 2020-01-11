@@ -60,6 +60,7 @@ body{
 	z-index: 999;
 }
 .publicDetail{
+	padding-bottom: .6rem;
 	.hide{
 		display: none ;
 	}
@@ -394,13 +395,45 @@ body{
 			text-align: center;
 			background-color: @F7FAFD;
 		}
+		// .divider-top {
+		// 	height: .6rem;
+		// 	line-height: .6rem;
+		// 	text-align: center;
+		// 	color: @9B9B9B;
+		// 	background-color: @FFFFFF;
+		// 	position: fixed;
+		// 	width: 100%;
+		// 	bottom: 0.98rem;
+		// 	.line-rate{
+		// 		&::before{
+		// 			content: "——";
+		// 			position:absolute;
+		// 		}
+		// 	}
+		// }
+		.divider {
+			height: 0.98rem;
+			background-color: @FFFFFF;
+		}
+	}
+	.footer {
+		width: 100%;
+		// height: .98rem;
+		text-align:center;
+		position: fixed;
+		bottom: 0;
+		// display: flex;
+		border-top: 0.01rem solid @E7E9ED;
+		background-color: @FFFFFF;
+
 		.divider-top {
 			height: .6rem;
 			line-height: .6rem;
 			text-align: center;
 			color: @9B9B9B;
 			background-color: @FFFFFF;
-			position: sticky;
+			position: fixed;
+			width: 100%;
 			bottom: 0.98rem;
 			.line-rate{
 				&::before{
@@ -409,25 +442,17 @@ body{
 				}
 			}
 		}
-		.divider {
-			height: 0.98rem;
-			background-color: @FFFFFF;
+
+		.footerDiv{
+			display: flex;
+			height: .98rem;
 		}
-	}
-	.footer {
-		width: 100%;
-		height: .98rem;
-		text-align:center;
-		position: fixed;
-		bottom: 0;
-		display: flex;
-		border-top: 0.01rem solid @E7E9ED;
-		background-color: @FFFFFF;
 		.share_area {
 			width: 1.25rem;
 			height: 100%;
-			
+			border-top: 0.01rem solid #E7E9ED;
 			border-right: 0.01rem solid @E7E9ED;
+
 			.img {
 				margin: .1rem auto 0;
 				width: .4rem;
@@ -446,6 +471,7 @@ body{
 			width: 1.25rem;
 			height: 100%;
 			border-right: 0.01rem solid @E7E9ED;
+			border-top: 0.01rem solid #E7E9ED;
 			text-align: center;
 			font-size: 0;
 			color: @9B9B9B;
@@ -539,20 +565,29 @@ font-size: 0.24rem;
 	display: none;
 	z-index: 11111111;
 	overflow: hidden;
+	.isRiskMatchBoxSmall{
+		position: relative;
+		width: 100%;
+		height: 100%;
+	}
 	.isRiskMatchBox_contentBox{
 		position: absolute;
 		z-index: 1111111;
 		top: 5rem;
-		left: 1.4rem;
+		left: 0;
+		right: 0;
+		margin: auto;
 		width: 5.2rem;
 		border-radius: .16rem;
 		background:linear-gradient(220deg,rgba(245,236,213,1) 0%,rgba(240,223,186,1) 100%);
 		.isRiskMatchBox_header{
 			width: 100%;
 			text-align: center;
-			// padding: 0 .4rem .63rem .4rem;
+			padding: 0 .4rem .63rem .4rem;
 			color: #272727;
 			font-size: 0.28rem;
+			background: linear-gradient(220deg, #f5ecd5 0%, #f0dfba 100%);
+			line-height: .42rem;
 		}
 		.isRiskMatchBox_footer{
 			width: 100%;
@@ -609,7 +644,7 @@ font-size: 0.24rem;
 }
 .isRiskMatchBox .isRiskMatchBox_contentBox .isRiskMatchBox_header{
 	min-height: 1rem;
-	padding-bottom: 0rem;
+	// padding-bottom: 0rem;
 }
 .customerService{
 	opacity: .4 !important;

@@ -515,7 +515,7 @@ $(function () {
                 fileName=link.split("?")
                 fileName=fileName[0].substring(fileName[0].lastIndexOf('.'))
                 var typInfo = $(this).attr('typInfo')
-				window.location.href = link + '&fileName=' + encodeURI(typInfo+fileName)
+				window.location.href = link + '&fileName=' + new Base64().encode(typInfo+fileName) 
             }, {
 				htmdEvt: 'fundFile_02'
 			})

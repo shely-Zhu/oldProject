@@ -57,7 +57,10 @@ $(function() {
                         $('.bankAccountMask').html(json.bankAccountMask);
                         $('.signDate').html(json.signDateMask);
                         $('.bankNo').html(json.bankAccountMask.substr(json.bankAccountMask.length - 4));
-                        $('.bankThumbnailUrl').attr('src', json.bankThumbnailUrl);
+                        // $('.bankThumbnailUrl').attr('src', json.bankThumbnailUrl);
+                        //银行logo取字段为thumbnailUrl
+                        $('.bankThumbnailUrl').attr('src', json.thumbnailUrl);
+                        
                         $('.totalCfmShareMask').html(json.totalCfmShareMask);
                         $('.serviceCharge').html('含手续费' + json.serviceCharge + '元');
                         fundCode = json.fundCode

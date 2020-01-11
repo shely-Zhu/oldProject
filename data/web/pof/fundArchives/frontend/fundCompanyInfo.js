@@ -14,7 +14,7 @@ var data = Mock.mock({
         webSite: "www.baidu.com", // 网址
         officeAddress: "山东省高校合格卢卡斯得分", // 办公地址
         fundManagementCount: "11111112222", // 管理基金数
-        shareholderInfo: [ // 股东信息
+        "shareholderInfo|6": [ // 股东信息
             {
                 publishDate: "2018-09-09", // 信息发布日期
                 shareholderId: "112222", // 股东ID
@@ -29,7 +29,7 @@ var data = Mock.mock({
                 holdSharesRatio: "2" // 持股比例(%)
             },
         ],
-        scaleInfo: [ // 规模信息
+        "scaleInfo|6": [ // 规模信息
             {
                 fundTypeName: "基金类型名称", // 基金类型名称
                 fundCount: "100", // 基金数量

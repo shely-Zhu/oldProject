@@ -50,6 +50,7 @@ $(function() {
             reourceData:true,   //标签内容
             collectAccountFlag:true,    //标签募集账号
             symboltype:'none',    //echarts 节点样式
+            priceLimitArr: {}, //保存各个时段涨跌幅数据
         },
         data: {
             canClick: true,
@@ -581,9 +582,14 @@ $(function() {
                 profitThoudDate: [], //存放折线图净值日期
             }
 
+            if( !!that.getElements.priceLimitArr[num] ){
+                $(".priceLimit span").html( that.getElements.priceLimitArr[num] );
+            }
+            
             if (num == 0 && that.data['dwjzljjz'].oneMonth.profitThoudDate && that.data['dwjzljjz'].oneMonth.profitThoudDate.length) {
                 //请求的是近一个月的数据
                 that.drawLine(type, that.data['dwjzljjz'].oneMonth);
+                //展示涨跌幅数据
                 return false;
             } else if (num == 1 && that.data['dwjzljjz'].threeMonth.profitThoudDate && that.data['dwjzljjz'].threeMonth.profitThoudDate.length) {
                 //近三个月
@@ -614,8 +620,14 @@ $(function() {
                 needLogin: true,
                 callbackDone: function(json) {
                     var jsonData = json.data;
-                    // debugger
-                    $(".priceLimit span").html(jsonData.pageList[0].unitNetChangePercent);
+
+                    var unitNetChangePercent = jsonData.pageList[0].unitNetChangePercent;
+
+                    //显示到页面上
+                    $(".priceLimit span").html(unitNetChangePercent);
+
+                    //保存各个时段涨跌幅数据
+                    that.getElements.priceLimitArr[num] = unitNetChangePercent;
 
                     //拼数据
                     $.each(jsonData.pageList, function(i, el) {

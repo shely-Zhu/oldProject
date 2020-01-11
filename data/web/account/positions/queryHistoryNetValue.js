@@ -40,9 +40,9 @@ var Mock = require('mockjs');
 var data = Mock.mock({
     "data": {
         "pageItems": { "totalCount": 3, "totalPages": 1 },
-        "pageList": [
-            { "accuNetChangePercent": "-9.35", "accuNetValue": "1.2631", "netValueBeginDate": "2019/08/24", "netValueDate": "2019/10/11", "netValueEndDate": "2019/11/22", "projectName": "", "unitNetChangePercent": "-84.11", "unitNetValue": "0.1806", "unitNetValueGrowthRate": "-45.55" },
-            // { "accuNetChangePercent": "-9.35", "accuNetValue": "0.9448", "netValueBeginDate": "2019/08/24", "netValueDate": "2019/10/10", "netValueEndDate": "2019/11/22", "projectName": "", "unitNetChangePercent": "-84.11", "unitNetValue": "0.3317", "unitNetValueGrowthRate": "-70.82" },
+        "pageList|2": [
+            { "accuNetChangePercent": "-9.35", "accuNetValue": "1.2631", "netValueBeginDate": "2019/08/24", "netValueDate": "2019/10/11", "netValueEndDate": "2019/11/22", "projectName": "", "unitNetChangePercent|1": ["-84.11", "3", "2.234"], "unitNetValue": "0.1806", "unitNetValueGrowthRate": "-45.55" },
+            // { "accuNetChangePercent": "-9.35", "accuNetValue": "0.9448", "netValueBeginDate": "2019/08/24", "netValueDate": "2019/10/10", "netValueEndDate": "2019/11/22", "projectName": "", "unitNetChangePercent": "-3", "unitNetValue": "0.3317", "unitNetValueGrowthRate": "-70.82" },
             // { "accuNetChangePercent": "-9.35", "accuNetValue": "1.3934", "netValueBeginDate": "2019/08/24", "netValueDate": "2019/10/10", "netValueEndDate": "2019/11/22", "projectName": "", "unitNetChangePercent": "-84.11", "unitNetValue": "1.1367", "unitNetValueGrowthRate": "13.67" },
             // { "accuNetChangePercent": "-9.35", "accuNetValue": "1.2631", "netValueBeginDate": "2019/08/24", "netValueDate": "2019/10/11", "netValueEndDate": "2019/11/22", "projectName": "", "unitNetChangePercent": "-84.11", "unitNetValue": "0.1806", "unitNetValueGrowthRate": "-45.55" },
             // { "accuNetChangePercent": "-9.35", "accuNetValue": "0.9448", "netValueBeginDate": "2019/08/24", "netValueDate": "2019/10/10", "netValueEndDate": "2019/11/22", "projectName": "", "unitNetChangePercent": "-84.11", "unitNetValue": "0.3317", "unitNetValueGrowthRate": "-70.82" },

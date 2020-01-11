@@ -28,6 +28,7 @@
 
 <body>
     @@include('@pathCommonCom/loading/listLoading.html')
+
     <section class="hotDiagnosis clearfix">
         <div class="fixedWrap">
             <!-- 搜索 -->
@@ -56,17 +57,19 @@
                 <div class="contentWrapper">
                     <ul class="mui-table-view">
                         <li class="mui-table-view-cell list_li">
-                            <div class="card-theme">
-                                <!--放置列表-->
-                            </div>
+                            <!-- <div class="card-theme">
+                                放置列表
+                            </div> -->
                         </li>
                     </ul>
                     <!-- 返回顶部 -->
                     @@include('@pathCommonViews/goTop.html')
                 </div>
             </div>
+
             <!-- 没有数据 -->
             @@include('@pathCommonCom/noData/noData.html', {"tipText": "暂无数据"})
+
             <!-- 加载中loading -->
             <!-- @@include('@pathCommonCom/loading/listLoading.html') -->
         </div>

@@ -201,29 +201,35 @@
 					<div class="company_info">
 						基金销售服务由北京恒天明泽基金销售有限公司提供
 					</div>
-					<div class="divider-top"></div>
+					{{! 原position: sticky;的样式有兼容性问题，挪到footer结构里 }}
+					{{! <div class="divider-top"></div> }}
 					<div class="divider"></div>
 				</div>
 				<div class="footer">
-					<div class="share_area" type="1">
-						<div class="img"></div>
-						<div class="text">分享</div>
+					<div class="divider-top"></div>
+					<div class="footerDiv">
+						<div class="share_area" type="1">
+							<div class="img"></div>
+							<div class="text">分享</div>
+						</div>
+						<div class="selected_area"  type="2">
+							<div class="img"></div>
+							<div class="text">加自选</div>
+						</div>
+						<div class="fixed_investement_btn"  type="3">定投</div>
+						<div class="buy_btn"  type="4">买入</div>
 					</div>
-					<div class="selected_area"  type="2">
-						<div class="img"></div>
-						<div class="text">加自选</div>
-					</div>
-					<div class="fixed_investement_btn"  type="3">定投</div>
-					<div class="buy_btn"  type="4">买入</div>
 				</div>
 				<div class="isRiskMatchBox">
-					<div class="isRiskMatchBox_contentBox">
-						   <div class="headTital">尊敬的用户</div>
-						   <div class='isRiskMatchBox_header'>你选择的产品与您现在的风险承受能力相匹配</div>
-						   <div class="isRiskMatchBox_footer">
-							   <div class="isRiskMatchBox_match">明白了</div>
-							   <div class="isRiskMatchBox_noMatch"><button class="isRiskMatchBox_cancel">放弃购买</button> <button class="isRiskMatchResult">查看评测结果</button></div>
-						   </div>
+					<div class="isRiskMatchBoxSmall">
+						<div class="isRiskMatchBox_contentBox">
+							<div class="headTital">尊敬的用户</div>
+							<div class='isRiskMatchBox_header'>你选择的产品与您现在的风险承受能力相匹配</div>
+							<div class="isRiskMatchBox_footer">
+								<div class="isRiskMatchBox_match">明白了</div>
+								<div class="isRiskMatchBox_noMatch"><button class="isRiskMatchBox_cancel">放弃购买</button> <button class="isRiskMatchResult">查看评测结果</button></div>
+							</div>
+						</div>
 					</div>
 				</div>
 				<div class="isRiskMatch_mask"></div>

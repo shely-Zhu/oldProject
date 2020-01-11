@@ -305,7 +305,7 @@ $(function() {
                             //$('.list').each( function( i, el){
 
                             //判断当前ul高度
-                            var ulHeight = $list.find(".mui-table-view").height() 
+                            var ulHeight = $list.find(".mui-table-view").height()
                             if (ulHeight < that.htmlHeight) {
 
                                 $list.height(that.highHeight).addClass('setHeight').addClass('noMove');
@@ -357,11 +357,11 @@ $(function() {
                     t.endPullupToRefresh(false);
 
                     //没有数据
-                    if(that.gV.ajaxArr[that.gV.current_index].pageNum == 1) {
+                    if (that.gV.ajaxArr[that.gV.current_index].pageNum == 1) {
                         $id.find('.mui-scroll .mui-table-view-cell').html(that.getElements.noData.clone(false)).addClass('noCon');
                         //$id.find('.mui-scroll .list').html(that.getElements.noData.clone(false)).addClass('noCon');
                         $id.find('.noData').show();
-                    } 
+                    }
 
                     setTimeout(function() {
                         that.getElements.listLoading.hide();
@@ -429,107 +429,96 @@ $(function() {
                 })
                 //取消受让、取消预约、取消转让
             mui("body").on('mdClick', '.cancelBtn', function(e) {
-                    event.stopPropagation();
-                    var type = $(this).attr('data-type');
-                    var id = $(this).attr('data-id');
-                    var reserveId = $(this).attr('data-reserveid');
-                    var proId = $(this).attr('data-projectid');
-                    if (type == 'assign') { //转让
-                        var obj = {
-                            p: '<p>您确定要取消转让申请吗？</p>',
-                            yesTxt: '确认',
-                            celTxt: '取消',
-                            hideCelButton: false,
-                            zIndex: 100,
-                            yesButtonPosition: 'left',
-                            htmdEvtYes:'privateDetailList_8',
-                            htmdEvtCel:'privateDetailList_9',
-                            callback: function(t) {
+                event.stopPropagation();
+                var type = $(this).attr('data-type');
+                var id = $(this).attr('data-id');
+                var reserveId = $(this).attr('data-reserveid');
+                var proId = $(this).attr('data-projectid');
+                if (type == 'assign') { //转让
+                    var obj = {
+                        p: '<p>您确定要取消转让申请吗？</p>',
+                        yesTxt: '确认',
+                        celTxt: '取消',
+                        hideCelButton: false,
+                        zIndex: 100,
+                        yesButtonPosition: 'left',
+                        htmdEvtYes: 'privateDetailList_8',
+                        htmdEvtCel: 'privateDetailList_9',
+                        callback: function(t) {
 
-                            },
-                        };
-                        $.elasticLayer(obj)
+                        },
+                    };
+                    $.elasticLayer(obj)
 
-                        // that.openTipCon('assign', '您确定要取消转让申请吗？', id);
 
-                    } else if (type == 'assignee') {
-                        var obj = {
-                            p: '<p>您确定要取消受让申请吗？</p>',
-                            yesTxt: '确认',
-                            celTxt: '取消',
-                            hideCelButton: false,
-                            zIndex: 100,
-                            htmdEvtYes:'privateDetailList_10',
-                            htmdEvtCel:'privateDetailList_11',
-                            callback: function(t) {
+                } else if (type == 'assignee') {
+                    var obj = {
+                        p: '<p>您确定要取消受让申请吗？</p>',
+                        yesTxt: '确认',
+                        celTxt: '取消',
+                        hideCelButton: false,
+                        zIndex: 100,
+                        htmdEvtYes: 'privateDetailList_10',
+                        htmdEvtCel: 'privateDetailList_11',
+                        callback: function(t) {
 
-                            },
-                        };
-                        $.elasticLayer(obj)
-                    } else if (type == 'appointment') {
-                        var obj = {
-                            p: '<p>您确定要取消预约吗？</p>',
-                            yesTxt: '确认',
-                            celTxt: '取消',
-                            hideCelButton: false,
-                            zIndex: 100,
-                            htmdEvtYes:'privateDetailList_12',
-                            htmdEvtCel:'privateDetailList_13',
-                            callback: function(t) {
-                                var obj = [{
-                                    url: site_url.fundReserveCancel_api,
-                                    contentTypeSearch: true,
-                                    data: {
-                                        "projectId": proId,
-                                        "reserveId": reserveId,
-                                    },
-                                    callbackDone: function(json) {
-                                        var data;
-                                        if (json.status == '0000') {
-                                            that.gV.ajaxArr[0].pageNum = 1;
-                                            $('#scroll1 .contentWrapper li').html('');
-                                            //重新初始化
-                                            that.initMui($('#scroll1'));
-                                            mui('#scroll1 .contentWrapper').pullRefresh().scrollTo(0, 0, 0);
-                                        }
-                                    },
-                                    callbackNoData: function() {
-
+                        },
+                    };
+                    $.elasticLayer(obj)
+                } else if (type == 'appointment') {
+                    var obj = {
+                        p: '<p>您确定要取消预约吗？</p>',
+                        yesTxt: '确认',
+                        celTxt: '取消',
+                        hideCelButton: false,
+                        zIndex: 100,
+                        htmdEvtYes: 'privateDetailList_12',
+                        htmdEvtCel: 'privateDetailList_13',
+                        callback: function(t) {
+                            var obj = [{
+                                url: site_url.fundReserveCancel_api,
+                                contentTypeSearch: true,
+                                data: {
+                                    "projectId": proId,
+                                    "reserveId": reserveId,
+                                },
+                                callbackDone: function(json) {
+                                    var data;
+                                    if (json.status == '0000') {
+                                        that.gV.ajaxArr[0].pageNum = 1;
+                                        $('#scroll1 .contentWrapper li').html('');
+                                        //重新初始化
+                                        that.initMui($('#scroll1'));
+                                        mui('#scroll1 .contentWrapper').pullRefresh().scrollTo(0, 0, 0);
                                     }
+                                },
+                                callbackNoData: function() {
 
-                                }];
-                                $.ajaxLoading(obj);
-                            },
-                        };
-                        $.elasticLayer(obj)
-                    }
+                                }
+
+                            }];
+                            $.ajaxLoading(obj);
+                        },
+                    };
+                    $.elasticLayer(obj)
+                }
 
 
-                }, {
-                    'htmdEvt': 'privateDetailList_3'
-                })
-                // 点击我明白了
-                // mui("body").on('mdClick', '.tipContainer .buttonOne', function(e) {
-                //         $('.mask').hide();
-                //         $('#tipConOne').hide();
-                //         var conText = $(this).siblings('tipContent').html;
-                //         that.openTipConOne(conText);
+            }, {
+                'htmdEvt': 'privateDetailList_3'
+            })
 
-            //     }, {
-            //         'htmdEvt': 'privateDetailList_4'
-            //     })
             //点击状态文字出现弹框
             mui("body").on('mdClick', '.openTip', function(e) {
                     event.stopPropagation();
-                    $('.mask').show();
                     $('#tipConOne').show();
-                    var conText = $(this).siblings('tipContent').html;
+                    var conText = $(this).siblings('.tipContent').html();
                     var obj = {
                         p: '<p>' + conText + '</p>',
                         yesTxt: '我明白了',
                         hideCelButton: true,
                         zIndex: 100,
-                        htmdEvtYes:'privateDetailList_14',
+                        htmdEvtYes: 'privateDetailList_14',
                         callback: function(t) {
 
                         },
@@ -566,9 +555,9 @@ $(function() {
                     } else if (type == 'toUploadM') { //去上传汇款凭证
                         window.location.href = site_url.elecFourthStep_url + '?reserveId=' + reserveId + '&projectId=' + proId + '&projectName=' + projectName + '&isAllowAppend=' + isAllowAppend + '&isPubToPri=' + isPubToPri;
                     } else if (type == 'toView') { //详情
-                        window.location.href = site_url.privatePlacementDetail_url + '?projectId=' + proId
+                        window.location.href = site_url.privatePlacementDetail_url + '?projectId=' + proId;
                     } else if (type == 'toVideo') { //视频双录
-                        window.location.href = site_url.realVideoTranscribe_url + '?type=toBeConfirmed';
+                        window.location.href = site_url.realVideoTranscribe_url + '?type=toBeConfirmed&projectId=' + proId;
                     } else if (type == 'toDown') { //下载电子合同
 
                     } else if (type == 'reAppointment') { //重新预约
