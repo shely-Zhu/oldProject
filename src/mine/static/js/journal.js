@@ -47,6 +47,7 @@ $(function() {
 			var that = this;
 			var height = window.innerHeight - $('#HeadBarConfigBox').height()-$('.tips').height();
 
+			$(".tips").css("top",$(".HeadBarConfigBox").height())
 			if(!$('.list').hasClass('setHeight')) {
 				$('.list').height(height).addClass('setHeight');
 			}

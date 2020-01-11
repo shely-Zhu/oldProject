@@ -1,6 +1,10 @@
-<!-- 超宝-交易记录
- @author wangjiajia 2019-11-20 -->
+<!--  超宝-交易记录
+* @author peicongcong 
+* Date:  2019-11-21
+* @description:
+  @Update person:
 
+-->
 
 
 <!DOCTYPE html>
@@ -47,14 +51,13 @@
     </script>
 
     <script id="second-template" type="text/x-handlebars-template">
-        {{! 左侧页面列表}} 
-        {{#each this}}
-        <div class="list_item clearfix" id='{{id}}' articleBelong='{{articleBelong}}' externalUrl='{{externalUrl}}'>
+        {{! 左侧页面列表}} {{#each this}}
+        <div class="list_item clearfix">
             <div class="list_itemL">
                 <p>{{title}}</p>
                 <span>{{articleTimeStr}}</span>
             </div>
-            <div class="list_itemR"><img class="lazyload" src="/common/img/lazyImgList3.png" data-original="{{imageUrlShowOnline}}" alt=""></div>
+            <div class="list_itemR"><img class="lazyload" src="/common/img/lazyImgList.png" data-original="{{imageUrlShowOnline}}" alt=""></div>
         </div>
 
         {{/each}}
