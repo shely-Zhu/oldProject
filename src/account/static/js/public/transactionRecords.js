@@ -279,7 +279,7 @@ $(function () {
         events: function() {
             var that = this;
             // 筛选分类的点击事件
-            alwaysAjax($('.contentWrapper'));
+            alwaysAjax();
             mui("body").on('mdClick', '.searchItem', function () {
                 if ($(this).is('.searchItemActive')) {
                     $(this).removeClass("searchItemActive").siblings('.searchItem').removeClass('searchItemActive');

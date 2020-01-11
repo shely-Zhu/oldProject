@@ -11,7 +11,7 @@ var data=Mock.mock({
 	"code":"CS0000",//"CF0001" 操作失败;"CS0000" 操作成功;
 	"msg":"success",//返回提示信息
 	"data":{
-		"pageList|10":[
+		"pageList|20":[
 			{
 			"fundName":"新沃货币",//基金名称
 			"tradeApplyStatus":"0",//交易状态

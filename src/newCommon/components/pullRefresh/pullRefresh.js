@@ -257,7 +257,7 @@ require('@pathCommonJsCom/goTopMui.js');
 
                  	    //隐藏loading，调试接口时需要去掉
                  	    //setTimeout(function(){
-                 	    $('.listLoading').hide();
+                 	    // $('.listLoading').hide();
                  	    //}, 2000);
 
 
