@@ -63,6 +63,7 @@ $(function() {
     // 安卓IOS刘海屏适配
     if (splitUrl['hairHeight'] || "true" == splitUrl['isIphoneX']){
         $headBarConfigBox.css('height', '1.48rem').children().css('margin-top', '0.2rem');
+        $(".zhanweifu").css("height","1.48rem");
     }
 
     //传人样式判断展示形式 

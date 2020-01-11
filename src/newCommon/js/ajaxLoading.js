@@ -92,6 +92,7 @@ var splitUrl = require('./components/splitUrl.js')();
             //请求次数 页面每次发一个ajax请求，次数+1，当次数为0的时候再隐藏遮罩层
             var requestCount = 0;
             var needLoading = true;
+            var timerStart = false;//30秒的定时器是否开启 为了防止特殊情况接口时间太长 开启一个30秒的定时器 30秒后允许点击headBar
 
             //默认配置
             var defaults = {
@@ -298,19 +299,21 @@ var splitUrl = require('./components/splitUrl.js')();
                         //每次请求都把请求次数+1
                         requestCount ++;
                         console.log('start: ' + el.url + '----' + requestCount);
-                        if (1 == requestCount){
-                            //页面第一次请求的时候 设置一个定时器 防止出现遮罩层隐藏不了的情况
-                            // setTimeout(function() {
-                            //     requestCount = 0;
-                            //     $('.netLoading').hide();
-                            //     $('.listLoading').hide();
-                            // }, 5000)
-                        }
                         //needLoading为true时，显示$('#loading')遮罩
                         if ('none' == $('.listLoading').css('display')){
                             //排除一进页面就发送请求的情况，这种情况只显示页面的遮罩层即可，否则两种loading框切换会很丑
                             $('.netLoading').show();
                         }
+                    }
+
+                    if (!timerStart){
+                        timerStart = true;
+                        setTimeout(function() {
+                            //如果30秒后loading框还存在 就把弹层的z-index变低 允许headBar可点击。
+                            timerStart = false;
+                            $('.netLoading').css('z-index', '99999');
+                            $('.listLoading').hide();
+                        }, 300)
                     }
 
                     //调用ajaxFunc，发送ajax请求
