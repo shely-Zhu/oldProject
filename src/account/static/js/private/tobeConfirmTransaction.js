@@ -383,7 +383,7 @@ $(function() {
                     } else if (type == 'toUploadM') { //去上传汇款凭证
                         window.location.href = site_url.elecFourthStep_url + '?reserveId=' + reserveId + '&projectId=' + proId + '&projectName=' + projectName + '&isAllowAppend=' + isAllowAppend + '&isPubToPri=' + isPubToPri;
                     } else if (type == 'toView') { //详情
-                        window.location.href = site_url.privatePlacementDetail_url + '?projectId=' + proId
+                        window.location.href = site_url.privatePlacementDetail_url + '?projectId=' + proId;
                     } else if (type == 'toVideo') { //视频双录
                         window.location.href = site_url.realVideoTranscribe_url + '?type=toBeConfirmed&projectId=' + proId;
                     } else if (type == 'reAppointment') { //重新预约

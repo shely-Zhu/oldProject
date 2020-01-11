@@ -236,21 +236,19 @@ $(function() {
             })
             //购买
             mui("body").on('mdClick', '.buy_btn', function(e) {
-                that.getUserInfo();  //获取用户类型
-                that.getUserInfo_1();  // 获取用户信息
                 var fundCode = $(this).attr("fundCode");
                 var fundName = $(this).attr("fundName");
                 var id = $(this).parent().parent().parent().parent().attr("id")
-                var flag = frozenAccount("buyFreeze", window.location.href, '', 'privateDetail_13')
+                var flag = frozenAccount("buyFreeze", window.location.href, false, 'privateDetail_13')
                 if (!flag) {
                     if (id == "cashPageLists") {
                         //现金宝
                         var url = site_url.pofCashTransformIn_url + "?fundCode=" + fundCode + "&noReload=1";
-                        authenticationProcess("", fundCode, that.gV.userStatus, that.gV.accountType, url)
+                        authenticationProcess(fundCode, url)
                     } else {
                         //普通基金
                         var url = site_url.fundTransformIn_url + '?fundCode=' + fundCode + '&fundName=' + fundName;
-                        authenticationProcess("", fundCode, that.gV.userStatus, that.gV.accountType, url)
+                        authenticationProcess(fundCode, url)
                         //window.location.href = site_url.fundTransformIn_url + '?fundCode=' + fundCode + '&fundName=' + fundName;
                     }
                 }
