@@ -6,6 +6,9 @@
 @import url("@pathCommonLess/mui/resetMUI.less");
 @import url("@pathCommonLessCom/headBarConfig.less");
 @import url("@pathCommonCom/noData/noData.less");
+body{
+	background-color: @F7FAFD;
+}
 .mui-card{
 	padding: 0 0.3rem;
 	box-shadow: 0 0 0 0;
@@ -34,7 +37,7 @@
 
 			//重置mui列表点击时的底色变色
 			&.mui-active{
-				background-color: #fff; 
+				background-color: @F7FAFD; 
 			}
 		}
 		.entity{
@@ -77,6 +80,7 @@
 			font-size: 0.44rem;
 			color: @272727;
 			font-weight: 700;
+			width: 75%;
 		}
 		.rewardTime{
 			margin-top: 0.19rem;
@@ -174,14 +178,15 @@
 					P:nth-child(1){
 						font-size:0.28rem;
 						color: @634C32;
+						margin-bottom: 0.1rem;
 					}
 					P:nth-child(2){
 						font-size: 0.26rem;
-						/* color: #382918; */
+						color: #382918;
 					}
 		    	}
 		    	.firstli{
-					font-size: 0.46rem;
+					font-size: 0.4rem;
 					line-height: .46rem;
 					color: #3d2511;
 					margin-bottom:0.23rem;

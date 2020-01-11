@@ -22,12 +22,14 @@ module.exports = function(type, fundCode, userStatus, accountType, url) {
 			realLi: $('#real-condition>li'), // 条件下的五条
 			singleaAuthenPath : "", //一键认证跳转链接
 			privatePlacementDetail: '',
-			investorStatus: "" // 审核状态
+			investorStatus: "", // 审核状态
+			isWealthAccount: '' // 账户状态
 		},
         gV: {
         	isWealthAccountStatus: '',// 是否开通财富账户
         	userStatus: userStatus,
-        	accountType: accountType
+        	accountType: accountType,
+        	isHighAgeStatus:true,  //投资者年龄默认小于60的状态为true  大于就位false
         },
         init: function() {
             var that = this;
@@ -59,6 +61,7 @@ module.exports = function(type, fundCode, userStatus, accountType, url) {
                         singleaAuthenPath = "", //一键认证跳转链接
 						singleaAuthen = false; //条件框是否展示
 						that.data.investorStatus = jsonData.investorStatus
+						that.data.isWealthAccount = jsonData.isWealthAccount
 						// 当满足四个条件之后
 						if(jsonData.isWealthAccount == "0"&&jsonData.isRiskEndure == "1"&&jsonData.isPerfect == "1"&&jsonData.isInvestFavour=="1"){
 							that.data.tipsWrap.hide()
@@ -210,9 +213,19 @@ module.exports = function(type, fundCode, userStatus, accountType, url) {
 						$(".isRiskMatchBox_noMatch").hide()
 						$(".isRiskMatchBox_header").html("请联系您的理财师或者拨打客服电话 400-8980-618 进行线下开户")
 					}else{
-						//个人
-						window.location.href = site_url.realName_url
-
+						// 个人 根据账户的不同状态跳转到相对应的页面 
+						switch(String(that.data.isWealthAccount)) {
+							// 身份证上传
+							case '1': window.location.href = site_url.realName_url;break;
+							// 人脸识别
+							case '2': window.location.href = site_url.realFaceCheck_url;break;
+							// 3a 进线下申请状态-视频双录
+							case '3a': window.location.href = site_url.realVideoTranscribe_url + '?type=default';break;
+							// 3b 进线下申请状态-影像采集
+							case '3b': window.location.href = site_url.realOffline_url;break;
+							// 4 视频双录
+							case '4': window.location.href = site_url.realVideoTranscribe_url + '?type=default';break;
+						}
 					}
 					break;
 
@@ -279,9 +292,19 @@ module.exports = function(type, fundCode, userStatus, accountType, url) {
                         $(".isRiskMatchBox_noMatch").hide()
                         $(".isRiskMatchBox_header").html("请联系您的理财师或者拨打客服电话 400-8980-618 进行线下开户")
                     }else{
-                        //个人
-                        window.location.href = site_url.realName_url
-
+                        // 个人 根据账户的不同状态跳转到相对应的页面 
+						switch(String(that.data.isWealthAccount)) {
+							// 身份证上传
+							case '1': window.location.href = site_url.realName_url;break;
+							// 人脸识别
+							case '2': window.location.href = site_url.realFaceCheck_url;break;
+							// 3a 进线下申请状态-视频双录
+							case '3a': window.location.href = site_url.realVideoTranscribe_url + '?type=default';break;
+							// 3b 进线下申请状态-影像采集
+							case '3b': window.location.href = site_url.realOffline_url;break;
+							// 4 视频双录
+							case '4': window.location.href = site_url.realVideoTranscribe_url + '?type=default';break;
+						}
                     }
                     break;
 
@@ -355,7 +378,7 @@ module.exports = function(type, fundCode, userStatus, accountType, url) {
                     window.location.href = site_url.riskAppraisal_url + "?type=private"
                 }else if(type == "isHighAge"){
                     that.gV.isHighAgeStatus = false;
-                    that.getConditionsOfOrder(that.gV.singleaAuthenType)
+                    that.initAuth(that.gV.singleaAuthenType)
                 }else if(type == "isZdTaLimit"){
                      //跳理财首页
                     window.location.href = site_url.wealthIndex_url

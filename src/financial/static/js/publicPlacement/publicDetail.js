@@ -706,7 +706,12 @@ $(function () {
                 $(divs[index]).show().siblings().hide()
                 var type = Number($(this).attr('type'))
                 var time = that.gV.time
-                var end = new Date().toLocaleString().split(" ")[0].replace(/\//g, '-')
+
+                var myDate = new Date();
+                myDate.getYear(); //获取当前年份(2位)
+                myDate.getMonth(); //获取当前月份(0-11,0代表1月)
+                myDate.getDate(); //获取当前日(1-31)
+                var end =  myDate.getYear()+'-'+ parseInt(myDate.getMonth()+1)+'-'+myDate.getDate();
                 that.gV.type = type
                 if (time) {
                     that.getData2(type, time);
@@ -719,9 +724,12 @@ $(function () {
             //月 季 本年 一年 成立以来
             mui("body").on('mdClick', ".lineWrap .tab span ", function (e) {
                 $(this).addClass('active').siblings().removeClass('active');
-
                 var time = Number($(this).attr('time'))
-                var end = new Date().toLocaleString().split(" ")[0].replace(/\//g, '-')
+                var myDate = new Date();
+                myDate.getYear(); //获取当前年份(2位)
+                myDate.getMonth(); //获取当前月份(0-11,0代表1月)
+                myDate.getDate(); //获取当前日(1-31)
+                var end =  myDate.getYear()+'-'+ parseInt(myDate.getMonth()+1)+'-'+myDate.getDate();
                 that.gV.time = time
                 if (time) {
                     that.getData2(that.gV.type, time);
@@ -980,7 +988,7 @@ $(function () {
                     xAxisData = data.date,
                     seriesData = data.big;
             }
-            var myChart = echarts.init(chartId);
+            var myChart = echarts.init(chartId,{},{width:$(".line_area").width(),height:$(".line_area").height()});
             myChart.setOption({
                 tooltip: {
                     trigger: 'axis',

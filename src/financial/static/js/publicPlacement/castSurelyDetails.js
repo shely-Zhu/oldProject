@@ -57,7 +57,10 @@ $(function() {
                         $('.bankAccountMask').html(json.bankAccountMask);
                         $('.signDate').html(json.signDateMask);
                         $('.bankNo').html(json.bankAccountMask.substr(json.bankAccountMask.length - 4));
-                        $('.bankThumbnailUrl').attr('src', json.bankThumbnailUrl);
+                        // $('.bankThumbnailUrl').attr('src', json.bankThumbnailUrl);
+                        //银行logo取字段为thumbnailUrl
+                        $('.bankThumbnailUrl').attr('src', json.thumbnailUrl);
+                        
                         $('.totalCfmShareMask').html(json.totalCfmShareMask);
                         $('.serviceCharge').html('含手续费' + json.serviceCharge + '元');
                         fundCode = json.fundCode
@@ -90,7 +93,7 @@ $(function() {
                             default:
                                 break;
                         }
-                        if (fixState == '已终止') {
+                        if (fixState == '已终止' || fixState == '删除' || fixState == '签约失败') {
                             $(".fixState").addClass("redColor")
                         } else {
                             $(".fixState").removeClass("redColor")
