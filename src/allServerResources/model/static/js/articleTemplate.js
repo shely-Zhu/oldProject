@@ -123,11 +123,12 @@ $(function () {
                             playAudio(resData.voiceAttachUrl,resData.voiceAttachName,resData.fileSize);
                         }
 
-
+                    
                     }else if (resData.h5Type == "3") {//产品推荐
                         //内容去边距不留白
                         that.$e.contentWrap.css({
-                            "padding": "0"
+                            "padding": "0",
+                            "marginBottom": ".98rem"
                         })
                         //给底部按钮加文字和跳转链接
                         that.$e.btnButton.show();
