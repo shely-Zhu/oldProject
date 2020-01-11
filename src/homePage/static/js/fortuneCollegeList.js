@@ -1,10 +1,14 @@
 //  财富讲堂
+<<<<<<< HEAD
+// @author liliang 2019-11-20
+=======
 // @author liliang 2019-11-20 
 /*
 
 update chentiancheng 2020年1月9日23:58:11
 
 */
+>>>>>>> 49e59e87ee1458bd921be54eae788996ab8af8e3
 
 require('@pathCommonBase/base.js');
 require('@pathCommonJsCom/utils.js');
@@ -58,17 +62,17 @@ $(function() {
             var that =this;
             var obj=[{
                  url: site_url.queryBanner_api,
-                 data: {    
+                 data: {
                     type:"25"
                 },
                 needDataEmpty: true,
                 callbackDone: function(json){
                     var imgArr = [];
-    
+
                     $.each(json.data.bannerList, function(i, el){
                         imgArr.push({imgUrl: el.imageUrlShowOnline, linkUrl:el.linkUrl});
                     })
-                    Slider( $('.banner'), imgArr );			     						
+                    Slider( $('.banner'), imgArr );
                 }
              }]
             $.ajaxLoading(obj);
@@ -78,7 +82,7 @@ $(function() {
             var that =this;
             var obj=[{
                  url: site_url.queryFortuneCollegeFir_api,
-                 data: {    
+                 data: {
                     type:"26", //类型金牌翻译官
                 },
                 needDataEmpty: true,
@@ -91,7 +95,7 @@ $(function() {
                         // 将列表插入到页面上
                         generateTemplate(modelData,$('.translate .title'),$('#fortune-template'));
                         generateTemplate(articleData,$('.translate .content'),$('#content-template'));
-                    }   					
+                    }
                 }
              }]
             $.ajaxLoading(obj);
@@ -101,7 +105,7 @@ $(function() {
             var that =this;
             var obj=[{
                  url: site_url.queryFortuneCollegeFir_api,
-                 data: {    
+                 data: {
                     type:"27", //类型财富早知道
                 },
                 needDataEmpty: true,
@@ -110,12 +114,14 @@ $(function() {
                         $(".fortuneVideo").removeClass('hide')
                         modelData=json.data.modelVO
                         articleData=json.data.list
-                        
+
                         // 将列表插入到页面上
-                        generateTemplate(modelData,$('.fortuneVideo .title'),$('#fortuneCf-template'));     
+                        generateTemplate(modelData,$('.fortuneVideo .title'),$('#fortuneCf-template'));
                         generateTemplate(articleData,$('.fortuneVideo ul'),$('#video-template'));
                         $(".lazyload").lazyload()
-                    }					
+
+
+                    }
                 }
              }]
             $.ajaxLoading(obj);
@@ -125,7 +131,7 @@ $(function() {
         var that =this;
         var obj=[{
              url: site_url.queryFortuneCollegeSec_api,
-             data: {    
+             data: {
                 type:"28", //类型财富讲堂
             },
             needDataEmpty: true,
@@ -143,16 +149,16 @@ $(function() {
                   }
                   console.log('我是listtitle',listTitle)
                   console.log('我是listContent',listContent)
-                  generateTemplate(modelData,$('.forum .title'),$('#forum-template'));     
+                  generateTemplate(modelData,$('.forum .title'),$('#forum-template'));
                   generateTemplate(listTitle,$('.broadcast'),$('#forumTitle'));
-                  generateTemplate(listContent,$('.forumList'),$('#forumContent')); 
-                  $(".lazyload").lazyload()     
+                  generateTemplate(listContent,$('.forumList'),$('#forumContent'));
+                  $(".lazyload").lazyload()
                   setTimeout(function(){
                     $('.broadcast').find('.bigspan').eq(0).addClass('getColor');
                     $('.broadcast').find('.bigspan').eq(0).css({"paddingLeft":0,"borderLeft":'none'});
                   },100)
                   mui('.mui-scroll-wrapper').scroll({
-                    deceleration: 0.0005 //flick 减速系数，系数越大，滚动速度越慢，滚动距离越小，默认值0.0006 
+                    deceleration: 0.0005 //flick 减速系数，系数越大，滚动速度越慢，滚动距离越小，默认值0.0006
                   });
                 }
             }
@@ -164,7 +170,7 @@ $(function() {
         var that =this;
         var obj=[{
              url: site_url.queryFortuneCollegeSec_api,
-             data: {    
+             data: {
                 type:"29", //类型财富研究
             },
             needDataEmpty: true,
@@ -172,7 +178,7 @@ $(function() {
                listData=json.data.list
                console.log('我是财富研究',listData)
                modelData=json.data.modelVO
-            
+
               var listTitle = [];
               var listContent = [];
               for(var i = 0 ; i < listData.length; i++) {
@@ -180,13 +186,13 @@ $(function() {
                 listContent.push({listContent: listData[i].list})
               }
               console.log(modelData)
-               generateTemplate(modelData,$('.tabContent .title'),$('#tabContent-template'));     
+               generateTemplate(modelData,$('.tabContent .title'),$('#tabContent-template'));
                generateTemplate(listTitle,$('.tab-t ol'),$('#titleTab'));
-               generateTemplate(listContent,$('.tab-b'),$('#listContent'));	
-               
+               generateTemplate(listContent,$('.tab-b'),$('#listContent'));
+
                setTimeout(function(){
                 $('.tab-t').find('ol li a').eq(0).addClass('active');
-               },100)		
+               },100)
             }
          }]
         $.ajaxLoading(obj);
@@ -237,7 +243,7 @@ $(function() {
 
                     //判断当前区域是否已经初始化出来上拉加载
                     if (t.hasClass('hasPullUp')) {
-                      
+
                         return false;
                     }
 
@@ -271,7 +277,7 @@ $(function() {
         },
 
         initMui: function($id) { //$id   就是滑动区域的 id 节点
-          
+
             that.getData($id);
 
         },
@@ -327,23 +333,23 @@ $(function() {
             //     return false;
             // }
 
-            
+
             //获取产品列表
             var obj = [{
                 url: site_url.queryFortuneCollegeSec_api,
-                data: {    
+                data: {
                    type:"29", //类型财富研究
                },
                 needLogin: true,
                 needLoading: false,
                 callbackDone: function(json) {
-                    console.log(json.data)	
+                    console.log(json.data)
                     var jsonData = json.data.list[that.gV.current_index].list,
                         pageList = jsonData;
                     if (!$.util.objIsEmpty(pageList)) {
 
-                        jsonData.tobe = that.gV.current_index == 0 ? 0 : 1;    
-                        var list_html = that.gV.list_template(jsonData); //  把内容  放到  模板里	
+                        jsonData.tobe = that.gV.current_index == 0 ? 0 : 1;
+                        var list_html = that.gV.list_template(jsonData); //  把内容  放到  模板里
                         //设置这两参数，在initMui()中使用
                         //判断是否显示没有更多了等逻辑，以及插入新数据
                         that.listLength = pageList.length;
@@ -364,7 +370,7 @@ $(function() {
                     //有数据
                     setTimeout(function() {
                         //that.listLength  是上面ajax 请求完数据  赋值的 长度 作为判断的依据
-                        //that.gV.aP.pageSize  是  gV  里面设置的 
+                        //that.gV.aP.pageSize  是  gV  里面设置的
                         if (that.listLength < that.gV.aP.pageSize) {
 
                             if (that.gV.ajaxArr[that.gV.current_index].pageCurrent == 1) {
@@ -388,18 +394,18 @@ $(function() {
                                     if (!$list.hasClass('setHeight')) {
 
                                         //$('.list').each( function( i, el){
-            
+
                                         //判断当前ul高度
                                         var ulHeight = $list.find(".mui-table-view").height();
                                         if (ulHeight < that.htmlHeight) {
-            
+
                                             $list.height(that.highHeight).addClass('setHeight').addClass('noMove');
                                             // $list.addClass('setHeight').addClass('noMove');
                                         } else {
                                             $list.height(that.highHeight).addClass('setHeight');
                                             // $list.addClass('setHeight');
                                         }
-            
+
                                         //})
                                     }
 
@@ -493,6 +499,9 @@ $(function() {
                 var id = $(this).attr("id")
                 var articleBelong = $(this).attr("articleBelong")
                 var applyType = $(this).attr("applyType")
+<<<<<<< HEAD
+                window.location.href =site_url.articleTemplate_url + '?id=' + id + '&articleBelong=' + articleBelong
+=======
                 if($(this).attr("externalUrl")){
                     if($(this).attr("externalUrl").indexOf("?") != -1) {
                         window.location.href = $(this).attr("externalUrl") + "&isHtOuterLinkUniqueIdentification=true"
@@ -502,6 +511,7 @@ $(function() {
                 }else{
                     window.location.href =site_url.articleTemplate_url + '?id=' + id + '&articleBelong=' + articleBelong 
                 }
+>>>>>>> 49e59e87ee1458bd921be54eae788996ab8af8e3
             },{
                 'htmdEvt': 'fortune_07'
             })
