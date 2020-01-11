@@ -1,18 +1,15 @@
 /*
  * @page:产品档案
  * @Author: wangjiajia
+ * chentiancheng
+ * 2020年1月11日21:02:34
  */
 require('@pathCommonBase/base.js');
 require('@pathCommonJs/ajaxLoading.js');
 
 var splitUrl = require('@pathCommonJs/components/splitUrl.js')();
 var generateTemplate = require('@pathCommonJsComBus/generateTemplate.js');
-//获取地址栏参数
-getQueryString = function (name) {
-  var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)");
-  var r = window.location.search.substr(1).match(reg);
-  if (r != null) return unescape(r[2]); return '';
-}
+
 $(function () {
   var somePage = {
     $e: {
@@ -31,7 +28,7 @@ $(function () {
       var obj = [{
         url: site_url.prfFundManagerInfo_api,
         data: {
-          fundCode: getQueryString('fundCode')
+          fundCode: splitUrl['fundCode']
           // fundCode:"000847"
         },
         callbackDone: function (json) {

@@ -454,7 +454,8 @@ body{
 			border-right: 0.01rem solid @E7E9ED;
 
 			.img {
-				margin: .1rem auto 0;
+				// margin: .1rem auto 0;
+				margin: .16rem auto 0;
 				width: .4rem;
     		height: .39rem;
 				background: url("/financial/static/img/publicPlacement/public_detail_share.png") no-repeat;
@@ -476,7 +477,8 @@ body{
 			font-size: 0;
 			color: @9B9B9B;
 			.img {
-				margin-top: .18rem;
+				// margin-top: .18rem;
+				margin-top: .16rem;
 				display: inline-block;
 				width: .4rem;
 				height: .39rem;
@@ -491,9 +493,9 @@ body{
 		.selected_area.active {
 			color: #0E246C;
 			.img {
-				margin-top: .1rem;
-				width: .4rem;
-				height: .39rem;
+				// margin-top: .1rem;
+				// width: .4rem;
+				// height: .39rem;
 				background: url("/financial/static/img/publicPlacement/shoucang@2x_active.png") 0 0 no-repeat;
 				background-size: 100% 100%;
 			}
@@ -513,6 +515,9 @@ body{
 			flex: 1;
 			background:linear-gradient(to right,@6C83C9,@061D6A);
 			color: @FFFFFF;
+			&.disable{
+				background:linear-gradient(135deg,#B1BDE2 0%,#7F8CB4 100%);
+			}
 		}
 	}
 }
