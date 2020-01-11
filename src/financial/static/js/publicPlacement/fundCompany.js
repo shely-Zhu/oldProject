@@ -1,6 +1,6 @@
 // 蔡文琦 2019-11-25 基金公司页面 js
 /* 
-update: chentiancheng 2020-01-08 
+update: chentiancheng  2020年1月11日21:00:56 
 @非空判断
 
 */
@@ -10,12 +10,7 @@ require('@pathCommonJs/ajaxLoading.js');
 
 var splitUrl = require('@pathCommonJs/components/splitUrl.js')();
 var generateTemplate = require('@pathCommonJsComBus/generateTemplate.js');
-//获取地址栏参数
-getQueryString = function (name) {
-  var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)");
-  var r = window.location.search.substr(1).match(reg);
-  if (r != null) return unescape(r[2]); return '';
-}
+
 
 
 $(function () {
@@ -37,7 +32,7 @@ $(function () {
       var obj = [{
         url: site_url.prfFundCompanyInfo_api,
         data: {
-          fundComId: getQueryString('fundComId')
+          fundComId: splitUrl['fundComId']
         },
         callbackDone: function (json) {
 
