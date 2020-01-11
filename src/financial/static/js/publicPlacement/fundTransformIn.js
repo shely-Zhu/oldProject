@@ -4,7 +4,7 @@
 * @Date:   2019-11-25
 *
 @Author: caoqihai
-* @Date:   2020-1-9  .跳转的页面 拼接参数 flag 结果类型 基金买入buy 基金赎回 redemption 
+* @Date:   2020-1-11  修改输入密码后收起软键盘
 */
 
 require('@pathCommonBase/base.js');
@@ -207,9 +207,11 @@ $(function () {
 						if(that.gV.payType == '0'){
 							$(".bank-pay").show();
 							$(".onright-left-two").show();
+							$(".onright-left").removeClass("onright-left-one-one")
 						} else if(that.gV.payType == '1') {
 							$(".bank-pay").hide();
 							$(".onright-left-two").hide();
+							$(".onright-left").addClass("onright-left-one-one")
 						}
 						if(useEnv == '1'){//转账汇款隐藏限额。
 							that.$el.bankListTemplate.find(".bank-pay").hide()
@@ -324,6 +326,7 @@ $(function () {
 		},
 		//校验密码
 		checkPassword: function(val) {
+			$('input').blur()
 			var that = regulatory;
 			regulatory.gV.password = val
 			var obj = [{
@@ -351,7 +354,7 @@ $(function () {
 					if(json.status == '0000'){
 						if(!!that.gV.bugFundName){
 							window.location.href = site_url.pofSurelyResultsDetail_url + '?applyId=' + data.allotNo + '&fundBusinCode=' +
-							data.fundBusinCode + "&fundCode=" + that.gV.fundCode + "&payType=" +that.gV.payType + '&flag=redemption'+'&bugFundName='+encodeURI(that.gV.bugFundName);
+							data.fundBusinCode + "&fundCode=" + that.gV.fundCode + "&payType=" +that.gV.payType + '&flag=buy'+'&bugFundName='+encodeURI(that.gV.bugFundName);
 						}else{
 							window.location.href = site_url.pofSurelyResultsDetail_url + '?applyId=' + data.allotNo + '&fundBusinCode=' +
 							data.fundBusinCode + "&fundCode=" + that.gV.fundCode + "&payType=" +that.gV.payType + '&flag=buy'+'&bugFundName=false'
@@ -479,6 +482,7 @@ $(function () {
 				if(that.gV.payType == '0'){
 					$(".bank-pay").show();
 					$(".onright-left-two").show();
+					$(".onright-left").removeClass("onright-left-one-one")
 					if(that.gV.accountType === 0 || that.gV.accountType === 2){
 						tipAction('机构客户暂不支持在线支付');
 						return
@@ -486,6 +490,7 @@ $(function () {
 				}else  if(that.gV.payType == '1') {
 					$(".bank-pay").hide();
 					$(".onright-left-two").hide();
+					$(".onright-left").addClass("onright-left-one-one")
 				}
 				var useEnv = $(this).attr('pay-type')
 				$(".listLoading").show()
@@ -587,6 +592,7 @@ $(function () {
 					that.$el.remittance.parent().find(".iimg").show();
 					$(".bank-pay").show();
 					$(".onright-left-two").show();
+					$(".onright-left").removeClass("onright-left-one-one")
 				}
 				if(that.gV.payType == '1'){
 					generateTemplate(data, that.$el.remittance, that.$el.bankListCheckTemplate,true);
@@ -597,6 +603,7 @@ $(function () {
 					that.$el.onlinepay.parent().find(".iimg").show();
 					$(".bank-pay").hide();
 					$(".onright-left-two").hide();
+					$(".onright-left").addClass("onright-left-one-one")
 				}
 				setTimeout(function(){
 					$('.popup').css('display','none')

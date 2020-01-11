@@ -318,14 +318,53 @@ $(function() {
         },
         events: function() { //绑定事件
             var that = this;
-            // 列表页跳转到详情页
+            // 大咖直播跳转到详情页
             mui("body").on('mdClick', '.roomItem' , function(){
-                var id = $(this).attr("id")
-                var articleBelong = $(this).attr("articleBelong")
-                window.location.href = site_url.articleTemplate_url + '?id=' + id + '&articleBelong=' + articleBelong
+                if($(this).attr("externalUrl")){
+                    if($(this).attr("externalUrl").indexOf("?") != -1) {
+                        window.location.href = $(this).attr("externalUrl") + "&isHtOuterLinkUniqueIdentification=true"
+                    } else{
+                        window.location.href = $(this).attr("externalUrl") + "?isHtOuterLinkUniqueIdentification=true"
+                    }
+                }else{
+                    var id = $(this).attr("id")
+                    var articleBelong = $(this).attr("articleBelong")
+                    window.location.href = site_url.articleTemplate_url + '?id=' + id + '&articleBelong=' + articleBelong
+                }
             },{
                 'htmdEvt': 'fortune_10'
             })
+            // 知识讲堂跳转到详情页
+            mui("body").on('mdClick', '.knowledgeItem' , function(){
+                if($(this).attr("externalUrl")){
+                    if($(this).attr("externalUrl").indexOf("?") != -1) {
+                        window.location.href = $(this).attr("externalUrl") + "&isHtOuterLinkUniqueIdentification=true"
+                    } else{
+                        window.location.href = $(this).attr("externalUrl") + "?isHtOuterLinkUniqueIdentification=true"
+                    }
+                }else{
+                    var id = $(this).attr("id")
+                    var articleBelong = $(this).attr("articleBelong")
+                    window.location.href = site_url.articleTemplate_url + '?id=' + id + '&articleBelong=' + articleBelong
+                }
+            },{
+                'htmdEvt': 'fortune_10'
+            });
+            mui("body").on('mdClick', '.roomItem' , function(){
+                if($(this).attr("externalUrl")){
+                    if($(this).attr("externalUrl").indexOf("?") != -1) {
+                        window.location.href = $(this).attr("externalUrl") + "&isHtOuterLinkUniqueIdentification=true"
+                    } else{
+                        window.location.href = $(this).attr("externalUrl") + "?isHtOuterLinkUniqueIdentification=true"
+                    }
+                }else{
+                    var id = $(this).attr("id")
+                    var articleBelong = $(this).attr("articleBelong")
+                    window.location.href = site_url.articleTemplate_url + '?id=' + id + '&articleBelong=' + articleBelong
+                }
+            },{
+                'htmdEvt': 'fortune_10'
+            });
             mui("body").on('mdClick', '.mui-table-view-cell' , function(){
                 $(".mui-table-view-cell").removeClass("mui-active")
             },{

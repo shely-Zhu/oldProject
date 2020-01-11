@@ -1,3 +1,12 @@
+/*
+<!--了解恒天-->
+<!--author:caiwenqi-->
+<!--time：2019-11-15-->
+update：chentiancheng 2020年1月10日14:55:45
+
+*/ 
+
+
 require('@pathCommonBase/base.js');
 require('@pathCommonCom/tabScroll/tabScroll.js')
 require('@pathCommonJs/ajaxLoading.js');
@@ -35,17 +44,19 @@ $(function() {
             var that = this;
 
              // $("body").height( $(window).height() );
+             
+            // $('html').height( window.screen.height ).width( window.screen.width );
 
-            $('body').css({
-                position: 'fixed',
-                '-webkit-overflow-scrolling': 'auto',
-                top: 0,
-                right:0,
-                left: 0,
-                bottom:0,
-                height: '100%',
-                width: '100%'
-            })
+            // $('body').css({
+            //     position: 'fixed',
+            //     '-webkit-overflow-scrolling': 'auto',
+            //     top: 0,
+            //     right:0,
+            //     left: 0,
+            //     bottom:0,
+            //     height: '100%',
+            //     width: '100%'
+            // })
 
             // var height = windowHeight - $('.tabImg')[0].getBoundingClientRect().top;
             
@@ -96,24 +107,25 @@ $(function() {
                     //定位到第二个
                     $('.tabBar .tabA').eq( that.gV.sortType ).addClass('active');
 
-                    $('.tabBar .tabA').eq(3).html(  window.screen.height + ' ' + window.screen.availHeight  );
+                    // $('.tabBar .tabA').eq(3).html(  window.screen.height + ' ' + window.screen.availHeight  );
 
                     
 
-                    $('.tabBar .tabA.active').html( $('body').height() + ' ' +  document.documentElement.clientHeight  );
+                    // $('.tabBar .tabA.active').html( $('body').height() + ' ' +  document.documentElement.clientHeight  );
 
-                    $('.tabBar .tabA.active').next().html( windowHeight + ' ' + window.innerHeight);
+                    // $('.tabBar .tabA.active').next().html( windowHeight + ' ' + window.innerHeight);
 
-                    $('.tabBar .tabA.active').next().next().html( $('.tabImg')[0].getBoundingClientRect().top);
+                    // $('.tabBar .tabA.active').next().next().html( $('.tabImg')[0].getBoundingClientRect().top);
 
-                    var height = window.screen.height - $('.tabImg')[0].getBoundingClientRect().top;
+                    // var height = $('body').height() - $('.tabImg')[0].getBoundingClientRect().top;
 
+                    // $('.tabImg').html()
                     
-                    $('.tabImg').height( '<div>'+window.screen.height+'</div>' + '<div>'+document.documentElement.clientHeight+'</div>' + '<div>'+$('body').height()+'</div>' + height);
+                    // $('.tabImg').html( '<div>'+height+'</div>' + '<div>'+window.screen.height+'</div>' + '<div>'+document.documentElement.clientHeight+'</div>' + '<div>'+$('body').height()+'</div>' + wrap_html);
 
                     // $('.list').height(height);
                     
-                    $('.tabImg').height(height);
+                    // $('.tabImg').height(height);
 
                     // $.each( data, function(i, el){
                     //     that.setting.navList.push({
@@ -169,6 +181,7 @@ $(function() {
                         // that.gV.content[belong] = resData;
                         $('.tabImg').hide();
                         $('.tabImg').eq(index).show().html(resData.content);
+                        window.scrollTo(0, 0);
 
                         // t.addClass('hasPullUp').find('.img').html(resData.content);
 
@@ -185,6 +198,7 @@ $(function() {
                 //有数据的时候直接显示
                 $('.tabImg').hide();
                 $('.tabImg').eq(index).show();
+                window.scrollTo(0, 0);
             }
             //          num = num ? num : splitUrl['type'] * 1;//首次进来请求用路径中的articleBelong，点击的时候使用对应的articleBelong。
             
@@ -198,13 +212,13 @@ $(function() {
             mui("body").on('mdClick', '.tabA', function(e) {
                 var $this = $(this),
                     index = $(this).index();
-
                 $(this).siblings('.tabA').removeClass('active');
 
                 $(this).addClass('active');
                 // $("b").removeClass('borderBottom');
                 // $(".tabBar b").eq(index).addClass('borderBottom');
                 that.getTemplateData( that.gV.belong[index], index);
+                that.$e.HeadBarpathName.text($this.text());
             }, {
                 'htmdEvt': 'understandTab_00'
             })

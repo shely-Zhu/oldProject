@@ -13,7 +13,7 @@ var liveData = Mock.mock({
         "pageSize": 10,
         "total": 3,
         "pages": 0,
-        "list|11": [{
+        "list": [{
             applyType: 0,
             articleBelong: "2", // 2 为大咖直播
             articleTime: "2019-11-27T00:00:00.000+0000",

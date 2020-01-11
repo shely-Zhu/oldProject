@@ -33,11 +33,11 @@ $(function() {
         },
         init: function() {
             var that = this;
-            //that.beforeFunc();
+            that.beforeFunc();
             that.initMui(); // 兼容下面函数调用
             that.events();
         },
-        /*beforeFunc: function(t) {
+        beforeFunc: function(t) {
             var that = this;
 
             //设置切换区域的高度
@@ -47,7 +47,7 @@ $(function() {
             if (!$('.list .contentWrapper').hasClass('setHeight')) {
                 $('.list, .contentWrapper').height(height).addClass('setHeight');
             }
-        },*/
+        },
         //初始化mui的上拉加载
         initMui: function() {
             var that = this;
@@ -79,7 +79,7 @@ $(function() {
                                 // 给data添加图片
                                 $.each(data, function(i, el) {
                                     // 只有前3个需要加，大于3直接退出
-                                    if (i > 3) {
+                                    if (i > 2) {
                                         return false;
                                     }
                                     switch (el.serialNumber) {

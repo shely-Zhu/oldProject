@@ -42,9 +42,9 @@ $(function() {
             //计算节点高度并设置
             var height = windowHeight - $('.fixedWrap').height();
 
-            // if (!$('.list .contentWrapper').hasClass('setHeight')) {
-            //     $('.list, .contentWrapper').height(height).addClass('setHeight');
-            // }
+            if (!$('.list .contentWrapper').hasClass('setHeight')) {
+                $('.list, .contentWrapper').height(height).addClass('setHeight');
+            }
         },
         // 初始化mui的上拉加载
         initMui: function() {
@@ -84,6 +84,7 @@ $(function() {
                         that.$e.noData.show();
                         return false;
                     } else {
+                        that.$e.noData.hide()
                         that.$e.resultWrap.find('.total').html(json.data.totalCount);
                         that.$e.resultWrap.find('.word').html(key);
                         dataList = json.data.pageList;
@@ -149,7 +150,7 @@ $(function() {
                     that.$e.resultWrap.find('.total').html(0);
                     that.$e.listLoading.hide()
                     t.endPullupToRefresh(true);
-                        
+                    that.$e.noData.show()    
                     //隐藏回到顶部按钮
                     $('.goTopBtn').hide();
 
@@ -241,6 +242,7 @@ $(function() {
 
             // 搜索取消按钮
             mui("body").on("mdClick", ".mui-icon-clear", function (event) {
+                that.$e.resultWrap.hide();
                 that.$e.hotFundList.html('');
                 that.$e.resultWrap.find('.total').html('--');
                 that.$e.resultWrap.find('.word').html('');

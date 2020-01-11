@@ -2,7 +2,7 @@
 * @page: 活动列表
 * @Author: liuhongyu
 * @Date:   2019-10-30
-* @description:
+* @description: chentiancheng 2020年1月10日16:15:34
 */
 
 //引入mui
@@ -13,7 +13,13 @@
 // 没有数据
 @import url("@pathCommonCom/noData/noData.less");
 @import url("@pathCommonCom/elasticLayer/elasticLayer/elasticLayer.less");
-
+html{
+    height: 100%;
+    // background: red;
+}
+.activityListDataBox{
+    background: @F7FAFD;
+}
 #activitySearch{
     width: 100%;
     height: 1.28rem;
@@ -43,6 +49,7 @@
             border-radius: .3rem;
             position: absolute;
             top: 0;
+            padding-right: 2em;
         }
     }
     .activityCityBox{
@@ -116,6 +123,7 @@
         background:url('/common/img/wave_bg.png') no-repeat;
         background-size: 6.9rem 3.5rem;
         padding: 0 .32rem 0 .29rem;
+        display: flex;
         &>a{
             position: absolute;
             width: 6.9rem;
@@ -200,13 +208,15 @@
         border-bottom: 1px solid @c007;
         position: relative;
         background-color: @c005;
+        padding-top: .37rem;
         display: none;
         img{
-            position: absolute;
+            // position: absolute;
             width: 2.19rem;
             height: 2.18rem;
-            top: .37rem;
-            left: 2.65rem;
+            // top: .37rem;
+            // left: 2.65rem;
+            margin: 0 auto;
         }
         p{
             position: absolute;
@@ -222,11 +232,11 @@
 .mui-input-row .mui-input-clear ~ .mui-icon-clear, .mui-input-password ~ .mui-icon-eye, .mui-input-speech ~ .mui-icon-speech{
     color: inherit;
     width: .16rem;
-    margin-right: .12rem;
+    margin-right: .2rem;
     line-height: 100%;
     font-weight: normal;
     height: 100%;
-    margin-top: .12rem;
+    margin-top: .1rem;
     top: 0;
     right: .2rem;
 }
@@ -309,7 +319,7 @@
 
 .starFinancialPlannerListLeftBox{
     width: 1.57rem;
-    float: left;
+    // float: left;
     .left{
         width: 1.55rem;
         float: left;
@@ -388,9 +398,11 @@
 }
 
 .starFinancialPlannerListRightBox{
-    float: left;
+    // float: left;
     margin-left: .35rem;
     margin-top: .5rem;
+    flex: 1;
+    width: 100%;
     .certificateBox{
         height: .54rem;
         p{
@@ -432,7 +444,8 @@
         font-weight:400;
         color:@c005;
         line-height:.36rem;
-        width: 4.3rem;
+        // width: 4.3rem;
+        width: 100%;
         text-align: justify;
         display: -webkit-box;
         -webkit-box-orient: vertical;
@@ -462,4 +475,16 @@
 }
 .text_left {
     text-align: left !important;
+}
+.mui-search .mui-placeholder{
+    font-size:0.26rem;
+    text-align: left;
+    padding-left: 0.2rem;
+
+}
+.mui-search .mui-placeholder .mui-icon{
+    color: #999;
+}
+.mui-bar-nav{
+    box-shadow:0;
 }

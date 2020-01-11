@@ -6,13 +6,16 @@
 @import url("@pathCommonLessCom/alertBox.less");
 @import url("@pathCommonLessCom/headBarConfig.less");
 @import url("@pathCommonLessCom/authenticationProcess.less");
+@import url("@pathCommonCom/elasticLayer/elasticLayer/elasticLayer.less");
 
 body{
-    width: 100%;
+		width: 100%;
+		background-color: @F7FAFD;
 }
 #top {
 	height: 4.92rem;
 	background: url('/financial/static/img/cash_bg.png') no-repeat;
+	background-size: 100% 100%;
 	.HeadBarConfigBox {
 		background:linear-gradient(135deg,rgba(71,90,149,1) 0%,rgba(3,19,73,1) 100%);
 	}
@@ -63,12 +66,10 @@ body{
 				opacity:0.3;
 				margin-top: .23rem;
 				display: inline-block;
-				margin-left: 0.25rem;
-				margin-right: 0.25rem;
 			}
 			.profitCon {
 				display: inline-block;
-				//width: 31%;
+				width: 31%;
 				.profitTitle {
 					font-size: .26rem;
 					line-height: .26rem;

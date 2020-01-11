@@ -9,7 +9,6 @@
 
 require('@pathCommonBase/base.js');
 require('@pathCommonJs/ajaxLoading.js');
-var authenticationProcess = require('@pathCommonJs/components/authenticationProcess.js');
 var generateTemplate = require('@pathCommonJsComBus/generateTemplate.js');
 var splitUrl = require('@pathCommonJs/components/splitUrl.js')();
 var frozenAccount = require('@pathCommonJs/components/frozenAccount.js');
@@ -27,6 +26,7 @@ getQueryString = function (name) {
     var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)");
     var r = window.location.search.substr(1).match(reg);
     if (r != null) return unescape(r[2]); return '';
+}
 $(function () {
     var fundCode
     var regard = {
@@ -76,8 +76,8 @@ $(function () {
             var that = this;
             that.getData(); // 获取基金详情
 
-            that.getUserInfo();  //获取用户类型
-            that.getUserInfo_1(); //用户身份信息
+            /*that.getUserInfo();  //获取用户类型
+            that.getUserInfo_1(); //用户身份信息*/
             that.events();
             // that.getData1(); // 查询基金的历史收益（货币基金）/历史净值（普通基金）
             $('.tips').hide()
@@ -455,10 +455,9 @@ $(function () {
 
             // 定投
             mui("body").on('mdClick', ".footer .fixed_investement_btn", function (e) {
+                that.getUserInfo();
+                that.getUserInfo_1();
                 //定投一键认证
-                if(!that.gV.fixedInvestementBtnStatu){
-                    return
-                }
                 if(that.gV.accountType === 0 || that.gV.accountType === 2){
                     tipAction('暂不支持机构客户进行交易');
                 }else{
@@ -707,7 +706,12 @@ $(function () {
                 $(divs[index]).show().siblings().hide()
                 var type = Number($(this).attr('type'))
                 var time = that.gV.time
-                var end = new Date().toLocaleString().split(" ")[0].replace(/\//g, '-')
+
+                var myDate = new Date();
+                myDate.getYear(); //获取当前年份(2位)
+                myDate.getMonth(); //获取当前月份(0-11,0代表1月)
+                myDate.getDate(); //获取当前日(1-31)
+                var end =  myDate.getYear()+'-'+ parseInt(myDate.getMonth()+1)+'-'+myDate.getDate();
                 that.gV.type = type
                 if (time) {
                     that.getData2(type, time);
@@ -720,9 +724,12 @@ $(function () {
             //月 季 本年 一年 成立以来
             mui("body").on('mdClick', ".lineWrap .tab span ", function (e) {
                 $(this).addClass('active').siblings().removeClass('active');
-
                 var time = Number($(this).attr('time'))
-                var end = new Date().toLocaleString().split(" ")[0].replace(/\//g, '-')
+                var myDate = new Date();
+                myDate.getYear(); //获取当前年份(2位)
+                myDate.getMonth(); //获取当前月份(0-11,0代表1月)
+                myDate.getDate(); //获取当前日(1-31)
+                var end =  myDate.getYear()+'-'+ parseInt(myDate.getMonth()+1)+'-'+myDate.getDate();
                 that.gV.time = time
                 if (time) {
                     that.getData2(that.gV.type, time);
@@ -881,6 +888,7 @@ $(function () {
             time = time === 0 ? "" : time
             var that = this;
             //判断是否已经有数据了，有的话不再请求接口
+            debugger
             if( time == '' && that.gV['echartsData'].sinceNow.date && that.gV['echartsData'].sinceNow.date.length){
                 // 成立至今
                 that.drawLine( type, that.gV['echartsData'].sinceNow );
@@ -981,7 +989,7 @@ $(function () {
                     xAxisData = data.date,
                     seriesData = data.big;
             }
-            var myChart = echarts.init(chartId);
+            var myChart = echarts.init(chartId,{},{width:$(".line_area").width(),height:$(".line_area").height()});
             myChart.setOption({
                 tooltip: {
                     trigger: 'axis',

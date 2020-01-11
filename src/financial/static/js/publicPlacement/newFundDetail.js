@@ -33,8 +33,8 @@ $(function() {
         init: function() {
             var that = this;
             that.getData();
-            that.getUserInfo();  //获取用户类型
-            that.getUserInfo_1(); //用户身份信息
+            /*that.getUserInfo();  //获取用户类型
+            that.getUserInfo_1(); //用户身份信息*/
             that.events();
         },
          //获取用户信息
@@ -262,9 +262,15 @@ $(function() {
                     }
                     // 认购流程的募集期
                     $('.collectDate').html(jsonData.issEndDt.substring(5));
-                    // 购买费率
-                    $('.purchaseRate').html(jsonData.purchaseRate + '%');
-                    $('.discountRate').html(jsonData.discount / 100 + '%');
+                    
+                    // 当折扣率为0时，只显示黑色不带删除线的购买费率
+                    if(jsonData.discount == 0) {
+                        $('.discountRate').html(jsonData.purchaseRate + '%');
+                    } else {
+                        // 购买费率
+                        $('.purchaseRate').html(jsonData.purchaseRate + '%');
+                        $('.discountRate').html(jsonData.discount / 100 + '%');
+                    }
                     // 认购起点
                     $(".buyStart").html(jsonData.tradeLimitList[0].minValue);
 
@@ -347,6 +353,8 @@ $(function() {
 
             // 买入
             mui("body").on('mdClick', ".buyButton", function(e) {
+                that.getUserInfo();  //获取用户类型
+                that.getUserInfo_1(); //用户身份信息
                 var $this = $(this);
                 if ($this.hasClass("disable")) {
                     return false;
@@ -355,7 +363,7 @@ $(function() {
                     var result = frozenAccount("buyFreeze", window.location.href, that.gV.accountType);
                     if( !result ) {
                        var url = site_url.fundTransformIn_url + '?fundCode=' + that.getElements.fundCode + '&fundName=' + that.getElements.chiName+"&noReload=1";
-                       authenticationProcess("fundIn", that.gV.fundCode, that.gV.userStatus, that.gV.accountType, url)
+                       authenticationProcess("fundIn", that.getElements.fundCode, that.gV.userStatus, that.gV.accountType, url)
                     };
                     //that.getConditionsOfOrder();
                 }

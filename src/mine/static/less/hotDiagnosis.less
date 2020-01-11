@@ -9,7 +9,12 @@ body {
     height: 100%;
     background:@c005;
 }
-
+#HeadBarConfigBox{
+    border-bottom: 0.01rem solid #ddd;
+}
+.without {
+    padding-top: 4.3rem;
+}
 
 .clearfix {
     &:after {
@@ -38,7 +43,7 @@ body {
 
         .mui-table-view-cell {
             padding:0;
-
+            height: 100%;
 
             &:after {
                 content: none;
@@ -114,7 +119,7 @@ body {
                         width: 80%;
                         position: relative;
                         top:.02rem;
-
+                        padding-right: .3rem; // 适配荣耀10搜索内容与取消按钮重合问题
                         &::placeholder {
                             color: @757784;
                         }

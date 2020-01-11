@@ -1,7 +1,7 @@
 /*
  * @Author: yanan
  * @Date: 2019-12-09 15:53:31
- * @LastEditTime : 2020-01-09 17:41:49
+ * @LastEditTime : 2020-01-10 11:37:21
  * @LastEditors  : Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \htjf-app\src\mine\static\js\fundAccountDiagnosisResult.js
@@ -124,6 +124,7 @@ $(function() {
             that.gV.userAge = data.age;  //年龄
             that.gV.birthDate = data.birthDate ; //出生日期
             that.gV.sexDataCode = data.sex;  //性别
+            // that.gV.sexData = data.sex;  //性别
             that.gV.professionalDataCode = data.evocation ;  //职业
             that.gV.professionalDescriptData = data.evocationExtension; //职业描述
             that.gV.investment_yearDataCode = data.investDurationLevel;  //投资年限
@@ -170,10 +171,15 @@ $(function() {
                          val = item.value
                     }
                 })*/
-                for (var i = 0; i < that.gV.fundDiagnosisSexDicData.length; i++) {
-                    if (that.gV.fundDiagnosisSexDicData[i].dicCode == code) {
-                        val = that.gV.fundDiagnosisSexDicData[i].text
-                    }
+                // for (var i = 0; i < that.gV.fundDiagnosisSexDicData.length; i++) {
+                //     if (that.gV.fundDiagnosisSexDicData[i].dicCode == code) {
+                //         val = that.gV.fundDiagnosisSexDicData[i].text
+                //     }
+                // }
+                if(code){
+                    val = "男";
+                }else{
+                    val = "女";
                 }
             } else if (type == 'fundDiagnosisVocation') {
                 /*that.gV.fundDiagnosisVocationDicData.forEach(function(item){
@@ -236,7 +242,7 @@ $(function() {
         mandatory:function(){
             var  that = this;
            var str = "" ;
-           if(!that.$e.userAge[0].value){
+           if(that.$e.userAge[0].value == "" || that.$e.userAge[0].value == null){
                str = "请填写您的年龄"
                tipAction(str)
                return false
@@ -295,8 +301,12 @@ $(function() {
              that.$e.liquidity[0].textContent = that.escapeCode(that.gV.liquidityDataCode,"fundDiagnosisLiquidityRequirement");  //流动性
              if(!!that.gV.yield_firstData || !! that.gV.yield_secondData){
                 that.$e.yieldControl.show();
+                $("#yearOwn").hide();
+                $("#maxLossOwn").hide();
              }else{
                 that.$e.yieldControl.hide();
+                $("#yearOwn").show();
+                $("#maxLossOwn").show();
              }
 
              if(!!that.gV.loss_firstData || !!that.gV.loss_secondData){
@@ -431,7 +441,6 @@ $(function() {
         updateFundDiagnosisApply: function() {
             //修改基金诊断申请
             var that = this;
-            debugger
             var obj = [{
                 url:site_url.updateFundDiagnosisApply_api,
                 needDataEmpty:true,
@@ -607,23 +616,23 @@ $(function() {
                 if (that.gV.typeInput == "yield") {
                     var firstVal = $(".yieldFirst").val();
                     var secondVal = $(".yieldSecond").val();
-                    if (secondVal < firstVal) {
+                    if (secondVal == "" || firstVal == "") {
                         $(".yieldWarmMessage").show();
-                        $(".yieldWarmMessage").html("最大年化收益率大于最小年化收益")
+                        $(".yieldWarmMessage").html("年化收益不能为空")
                         return;
                     } else {
                         $(".yieldWarmMessage").hide();
                     }
                     if (secondVal > 100 || firstVal > 100) {
                         $(".yieldWarmMessage").show();
-                        $(".yieldWarmMessage").html("年化收益小于100")
+                        $(".yieldWarmMessage").html("年化收益应小于100")
                         return;
                     } else {
                         $(".yieldWarmMessage").hide();
                     }
-                    if (secondVal == "" || firstVal == "") {
+                    if (secondVal < firstVal) {
                         $(".yieldWarmMessage").show();
-                        $(".yieldWarmMessage").html("年化收益不能为空")
+                        $(".yieldWarmMessage").html("最大年化收益率应大于最小年化收益")
                         return;
                     } else {
                         $(".yieldWarmMessage").hide();
@@ -633,36 +642,40 @@ $(function() {
                     that.gV.yield_secondData = secondVal;
                     that.gV.yield_firstData = firstVal
                     that.$e.yieldControl.show();
-
+                    $("#yearOwn").hide();
+                    $("#maxLossOwn").hide();
                 } else if (that.gV.typeInput == "loss") {
                     var firstVal = $(".lossFirst").val();
                     var secondVal = $(".lossSecond").val();
-                    if (secondVal < firstVal) {
+                    if (secondVal == "" || firstVal == "") {
                         $(".lossWarmMessage").show();
-                        $(".lossWarmMessage").html("最大可承受回撤大于最小可承受回撤")
+                        $(".lossWarmMessage").html("最大可承受回撤不能为空")
                         return;
                     } else {
                         $(".lossWarmMessage").hide();
                     }
                     if (secondVal > 100 || firstVal > 100) {
                         $(".lossWarmMessage").show();
-                        $(".lossWarmMessage").html("年化收益小于100")
+                        $(".lossWarmMessage").html("最大可承受回撤应小于100")
                         return;
                     } else {
                         $(".lossWarmMessage").hide();
                     }
-                    if (secondVal == "" || firstVal == "") {
+                    if (secondVal < firstVal) {
                         $(".lossWarmMessage").show();
-                        $(".lossWarmMessage").html("年化收益不能为空")
+                        $(".lossWarmMessage").html("最大可承受回撤应大于最小可承受回撤")
                         return;
                     } else {
                         $(".lossWarmMessage").hide();
                     }
+                    
                     that.$e.loss_first[0].textContent = firstVal;
                     that.$e.loss_second[0].textContent = secondVal;
                     that.gV.loss_secondData = secondVal;
                     that.gV.loss_firstData = firstVal;
                     that.$e.lossControl.show();
+                    $("#yearOwn").hide();
+                    $("#maxLossOwn").hide();
                 }
                 $(this).attr("type", "")
                 $('.popuplist').css('display', 'none')
@@ -675,8 +688,17 @@ $(function() {
             	$('#yearOwn').show();
             	$('#maxLossOwn').show();
             	$('#dataPickDec').show();
-                $('.popuplist').css('display', 'none')
+                
                 $(".mui-backdrop").remove()
+                if(that.gV.yield_secondData != "" && that.gV.yield_firstData != ""){
+                    $("#yearOwn").hide();
+                    $('.popuplist').css('display', 'none')
+                }
+                if(that.gV.loss_secondData != "" && that.gV.loss_firstData != ""){
+                    $("#maxLossOwn").hide();
+                    $('.popuplist').css('display', 'none')
+                }
+               
             }, {
                 'htmdEvt': 'fundAccountDiagnosisResult_06'
             })

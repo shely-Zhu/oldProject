@@ -1,6 +1,8 @@
 /**
  * 基金档案 样式
  * @yangjinlai 2017-03-21
+ update caoqihai 2020-1-10
+ 修改 行业配置居中  和 暂无数据 样式
  */
  @import url('@pathCommonLess/mui/resetMUI.less');
  @import url("@pathCommonLessCom/alertBox.less");
@@ -13,6 +15,7 @@ html{
 }
 body{
     height: 100%;
+    background: @F7FAFD;
 }
 // tab 组件
 .content {
@@ -206,8 +209,10 @@ body{
                             flex: 1;
                             //height: .88rem;
                             //line-height: .88rem;
-                            min-height: 0.88rem;
-                            line-height: 0.4rem;
+                            // min-height: 0.88rem;
+                            // line-height: 0.88rem;
+                            padding-top: .2rem;
+                            padding-bottom: .2rem;
                         }
                         &:last-child {
                             border: none;
@@ -316,4 +321,7 @@ body{
 }
 .tplBox3 .mui-table-view-cell.mui-active{
     background-color: #ffffff;
+}
+.without{
+    background: @F7FAFD!important;
 }

@@ -16,6 +16,8 @@ getQueryString = function (name) {
   var r = window.location.search.substr(1).match(reg);
   if (r != null) return unescape(r[2]); return '';
 }
+
+
 $(function () {
   var somePage = {
     $e: {
@@ -79,6 +81,13 @@ $(function () {
               shareholderName: "--"
             }
           }
+          else{
+            //有数据，但字段没有值时
+            $.each( json.shareholderInfo, function(i, el){
+               el.shareholderName = el.shareholderName ? el.shareholderName : '--';
+               el.holdSharesRatio = el.holdSharesRatio ? el.holdSharesRatio : '--';
+            })
+          }
           //判断当前产品列表无数据的情况时
           if(json.scaleInfo.length==0){
             json.scaleInfo={
@@ -86,6 +95,14 @@ $(function () {
               fundNav: "--",
               fundTypeName: "--" 
             }
+          }
+          else{
+            //有数据，但字段没有值时
+            $.each( json.scaleInfo, function(i, el){
+               el.fundTypeName = el.fundTypeName ? el.fundTypeName : '--';
+               el.fundCount = el.fundCount ? el.fundCount : '--';
+               el.fundNav = el.fundNav ? el.fundNav : '--';
+            })
           }
           var html = template(json);
           $(".tplBox").html(html);

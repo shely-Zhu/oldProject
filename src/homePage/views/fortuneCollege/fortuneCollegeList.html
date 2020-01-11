@@ -99,7 +99,7 @@
 
      <script id="second-template" type="text/x-handlebars-template">
      {{! 左侧页面列表}} {{#each this}}
-     <div class="list_item clearfix" id={{id}} articleBelong={{articleBelong}} applyType={{applyType}}>
+     <div class="list_item clearfix" id='{{id}}' articleBelong='{{articleBelong}}' applyType='{{applyType}}' externalUrl='{{externalUrl}}'>
           <div class="list_itemR" ><img class="lazyload" src="/common/img/lazyImgList.png" data-original="{{imageUrlShowOnline}}"></div>
      </div>
 
@@ -117,7 +117,7 @@
      </script>
      <script id="content-template" type="text/x-handlebars-template">
           {{#each this}}
-          <a href="{{externalUrl}}">
+          <a class="interpreter" externalUrl='{{externalUrl}}'  id='{{id}}'  articleBelong='{{articleBelong}}'>
                <p class="con-t">
                     <span>第{{numPeriods}}期</span><b>{{titleFir}}</b>
                </p>
@@ -132,13 +132,15 @@
      <!-- 早知道 -->
      <script id="fortuneCf-template" type="text/x-handlebars-template">
           <h2>{{modelName}}</h2>
-          <p><a href="javascript:void(0);" onclick="setGoUrl( '{{modelUrl}}', 'fortune_01')" >播放往期内容</a><i class="iconfont">&#xe636;</i></p>
+          <p><a href="javascript:void(0);"   onclick="setGoUrl( '{{modelUrl}}', 'fortune_01')" >播放往期内容</a><i class="iconfont">&#xe636;</i></p>
      </script>
      <script id="video-template" type="text/x-handlebars-template">
           {{#each this}}
                <li>
-                    <!-- <a htmdEvt = "fortune_videoList" onclick="window.location.href=site_url.fortuneFlowKnown_url+'?articleBelong={{articleBelong}}'"> -->
-                    <a href="javascript:void(0);" onclick="setGoUrl( site_url.articleTemplate_url+'?id={{id}}&articleBelong={{articleBelong}}', 'fortune_02')">
+                    <!-- <a htmdEvt = "fortune_videoList" onclick="window.location.href=site_url.fortuneFlowKnown_url+'?articleBelong={{articleBelong}}'"> 
+                         onclick="setGoUrl( site_url.articleTemplate_url+'?id={{id}}&articleBelong={{articleBelong}}', 'fortune_02')"     
+                    -->
+                    <a class="whereGo" href="javascript:void(0);"  externalUrl='{{externalUrl}}'  id='{{id}}'  articleBelong='{{articleBelong}}' fortune_02='{{fortune_02}}' >
                          <img class="lazyload" src="/common/img/lazyImgList.png" data-original="{{imageUrlShowOnline}}" alt="">
                          <p>
                               <i class="iconfont">
@@ -171,7 +173,7 @@
                          <div class="mui-scroll-wrapper mui-slider-indicator mui-segmented-control mui-segmented-control-inverted">
                               <div class="mui-scroll">
                                    {{#each listContent}}
-                                        <a  href="javascript:void(0);" link-data = {{externalUrl}} onclick="setGoUrl( site_url.articleTemplate_url+'?id={{id}}&articleBelong={{articleBelong}}', 'fortune_05')">
+                                        <a class="whereGo"  href="javascript:void(0);" externalUrl='{{externalUrl}}' id='{{id}}' articleBelong='{{articleBelong}}' fortune_05='{{fortune_05}}'>
                                              <div class="mui-control-item conten">
                                                   <img style="width:6.2rem;height:6rem;" class="lazyload" src="/common/img/lazyImgList.png" data-original="{{imageUrlShowOnline}}" alt="">
                                                   <div class="con">

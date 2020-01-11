@@ -1,5 +1,14 @@
 //  财富讲堂
+<<<<<<< HEAD
 // @author liliang 2019-11-20
+=======
+// @author liliang 2019-11-20 
+/*
+
+update chentiancheng 2020年1月9日23:58:11
+
+*/
+>>>>>>> 49e59e87ee1458bd921be54eae788996ab8af8e3
 
 require('@pathCommonBase/base.js');
 require('@pathCommonJsCom/utils.js');
@@ -490,9 +499,47 @@ $(function() {
                 var id = $(this).attr("id")
                 var articleBelong = $(this).attr("articleBelong")
                 var applyType = $(this).attr("applyType")
+<<<<<<< HEAD
                 window.location.href =site_url.articleTemplate_url + '?id=' + id + '&articleBelong=' + articleBelong
+=======
+                if($(this).attr("externalUrl")){
+                    if($(this).attr("externalUrl").indexOf("?") != -1) {
+                        window.location.href = $(this).attr("externalUrl") + "&isHtOuterLinkUniqueIdentification=true"
+                    } else{
+                        window.location.href = $(this).attr("externalUrl") + "?isHtOuterLinkUniqueIdentification=true"
+                    }
+                }else{
+                    window.location.href =site_url.articleTemplate_url + '?id=' + id + '&articleBelong=' + articleBelong 
+                }
+>>>>>>> 49e59e87ee1458bd921be54eae788996ab8af8e3
             },{
                 'htmdEvt': 'fortune_07'
+            })
+            mui("body").on('mdClick', '.whereGo' , function(){
+                if($(this).attr("externalUrl")){
+                    if($(this).attr("externalUrl").indexOf("?") != -1) {
+                        window.location.href = $(this).attr("externalUrl") + "&isHtOuterLinkUniqueIdentification=true"
+                    } else{
+                        window.location.href = $(this).attr("externalUrl") + "?isHtOuterLinkUniqueIdentification=true"
+                    }
+                }else{
+                    window.location.href = site_url.articleTemplate_url+'?id=' + $(this).attr("id") + '&articleBelong=' +  $(this).attr("articleBelong")
+                }
+
+            },{
+                'htmdEvt': 'fortune_02'
+            })
+            mui("body").on("tap",'.interpreter', function(){
+                if($(this).attr("externalUrl")){
+                    if($(this).attr("externalUrl").indexOf("?") != -1) {
+                        window.location.href = $(this).attr("externalUrl") + "&isHtOuterLinkUniqueIdentification=true"
+                    } else{
+                        window.location.href = $(this).attr("externalUrl") + "?isHtOuterLinkUniqueIdentification=true"
+                    }
+                }else{
+                    window.location.href = site_url.articleTemplate_url+'?id=' + $(this).attr("id") + '&articleBelong=' +  $(this).attr("articleBelong")
+                }
+
             })
         }
     };

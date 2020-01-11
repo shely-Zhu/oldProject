@@ -21,12 +21,15 @@ module.exports = function(type, fundCode, userStatus, accountType, url) {
 			tipsWrap:$("#tips-wrap"),
 			realLi: $('#real-condition>li'), // 条件下的五条
 			singleaAuthenPath : "", //一键认证跳转链接
-			privatePlacementDetail: ''
+			privatePlacementDetail: '',
+			investorStatus: "", // 审核状态
+			isWealthAccount: '' // 账户状态
 		},
         gV: {
         	isWealthAccountStatus: '',// 是否开通财富账户
         	userStatus: userStatus,
-        	accountType: accountType
+        	accountType: accountType,
+        	isHighAgeStatus:true,  //投资者年龄默认小于60的状态为true  大于就位false
         },
         init: function() {
             var that = this;
@@ -57,6 +60,8 @@ module.exports = function(type, fundCode, userStatus, accountType, url) {
                         isReal = "", //是否实名认证，因为如果机构切一键认证是实名，点击需要提示弹框。
                         singleaAuthenPath = "", //一键认证跳转链接
 						singleaAuthen = false; //条件框是否展示
+						that.data.investorStatus = jsonData.investorStatus
+						that.data.isWealthAccount = jsonData.isWealthAccount
 						// 当满足四个条件之后
 						if(jsonData.isWealthAccount == "0"&&jsonData.isRiskEndure == "1"&&jsonData.isPerfect == "1"&&jsonData.isInvestFavour=="1"){
 							that.data.tipsWrap.hide()
@@ -86,19 +91,19 @@ module.exports = function(type, fundCode, userStatus, accountType, url) {
                                 //风险等级匹配
                                 $(".isRiskMatchBox_match").show()
 								$(".isRiskMatchBox_noMatch").hide()
-								$(".isRiskMatchBox_header").css({"line-height":"1.5rem"})
+								// $(".isRiskMatchBox_header").css({"line-height":"1.5rem"})
                                 $(".isRiskMatchBox_header").html("你选择的产品与您现在的风险承受能力相匹配")
                             }else if(jsonData.isRiskMatch == "0"){
                                 $(".isRiskMatchBox_noMatch").show()
 								$(".isRiskMatchBox_match").hide()
-								$(".isRiskMatchBox_header").css({"line-height":"1.5rem"})
+								// $(".isRiskMatchBox_header").css({"line-height":"1.5rem"})
                                 $(".isRiskMatchBox_header").html("你选择的产品与您现在的风险承受能力不相匹配")
                                 $(".isRiskMatchResult").html("查看评测结果")
                                 $(".isRiskMatchResult").attr("type","noRisk")
                             }else if(jsonData.isRiskMatch == "2"){
                                 $(".isRiskMatchBox_noMatch").show()
 								$(".isRiskMatchBox_match").hide()
-								$(".isRiskMatchBox_header").css({"line-height":"1.5rem"})
+								// $(".isRiskMatchBox_header").css({"line-height":"1.5rem"})
                                 $(".isRiskMatchBox_header").html("您的风险测评已过期,请重新进行风险测评")
                                 $(".isRiskMatchResult").html("重新风测")
                                 $(".isRiskMatchResult").attr("type","repeatRisk")
@@ -158,22 +163,13 @@ module.exports = function(type, fundCode, userStatus, accountType, url) {
 							that.data.realLi.eq(2).hide()
 						}
 						if(jsonData.isInvestFavour=="0" || jsonData.isInvestFavour == null){
-							//是否投资者分类
-							that.data.realLi.eq(3).show()  
+							//先判断是否进行投资者分类，没有则显示未认证，如果是再判断投资者状态
+							that.data.realLi.eq(3).show() 
+							if(jsonData.investorStatus =="0"&&that.gV.userStatus=="") {
+								that.data.realLi.eq(3).find(".bank-status").html("未审核")
+							}
 						}else{
 							that.data.realLi.eq(3).hide()
-                        }
-						if(jsonData.isRiskMatch=="0" || jsonData.isRiskMatch == null){
-							//是否风险等级
-							that.data.realLi.eq(4).show()  
-						}else{
-							that.data.realLi.eq(4).hide()
-						}
-						if(jsonData.investorStatus =="0"&&that.gV.userStatus==""){
-                            //直接申请为专业投资者
-                            that.data.tipsWrap.show()
-                            that.data.realLi.show();
-                            that.data.realLi.eq(3).show()  
                         }
 						that.data.realLi.eq(4).hide() 
 
@@ -217,9 +213,19 @@ module.exports = function(type, fundCode, userStatus, accountType, url) {
 						$(".isRiskMatchBox_noMatch").hide()
 						$(".isRiskMatchBox_header").html("请联系您的理财师或者拨打客服电话 400-8980-618 进行线下开户")
 					}else{
-						//个人
-						window.location.href = site_url.realName_url
-
+						// 个人 根据账户的不同状态跳转到相对应的页面 
+						switch(String(that.data.isWealthAccount)) {
+							// 身份证上传
+							case '1': window.location.href = site_url.realName_url;break;
+							// 人脸识别
+							case '2': window.location.href = site_url.realFaceCheck_url;break;
+							// 3a 进线下申请状态-视频双录
+							case '3a': window.location.href = site_url.realVideoTranscribe_url + '?type=default';break;
+							// 3b 进线下申请状态-影像采集
+							case '3b': window.location.href = site_url.realOffline_url;break;
+							// 4 视频双录
+							case '4': window.location.href = site_url.realVideoTranscribe_url + '?type=default';break;
+						}
 					}
 					break;
 
@@ -246,7 +252,7 @@ module.exports = function(type, fundCode, userStatus, accountType, url) {
 					case 3:  //投资者分类
 					if(that.gV.isWealthAccountStatus){
 						//开通了账户
-						if(jsonData.investorStatus =="0"&&that.gV.userStatus==""){
+						if(that.data.investorStatus =="0"&&that.gV.userStatus==""){
 							//申请为投资者
 							window.location.href = site_url.investorClassificationResult_url
 						}else{
@@ -286,9 +292,19 @@ module.exports = function(type, fundCode, userStatus, accountType, url) {
                         $(".isRiskMatchBox_noMatch").hide()
                         $(".isRiskMatchBox_header").html("请联系您的理财师或者拨打客服电话 400-8980-618 进行线下开户")
                     }else{
-                        //个人
-                        window.location.href = site_url.realName_url
-
+                        // 个人 根据账户的不同状态跳转到相对应的页面 
+						switch(String(that.data.isWealthAccount)) {
+							// 身份证上传
+							case '1': window.location.href = site_url.realName_url;break;
+							// 人脸识别
+							case '2': window.location.href = site_url.realFaceCheck_url;break;
+							// 3a 进线下申请状态-视频双录
+							case '3a': window.location.href = site_url.realVideoTranscribe_url + '?type=default';break;
+							// 3b 进线下申请状态-影像采集
+							case '3b': window.location.href = site_url.realOffline_url;break;
+							// 4 视频双录
+							case '4': window.location.href = site_url.realVideoTranscribe_url + '?type=default';break;
+						}
                     }
                     break;
 
@@ -315,7 +331,7 @@ module.exports = function(type, fundCode, userStatus, accountType, url) {
 					case "isInvestFavour":  //投资者分类
 					if(that.gV.isWealthAccountStatus){
                         //开通了账户
-                        if(jsonData.investorStatus =="0"&&that.gV.userStatus==""){
+                        if(that.data.investorStatus =="0"&&that.gV.userStatus==""){
 							//申请为投资者
 							window.location.href = site_url.investorClassificationResult_url
 						}else{
@@ -362,7 +378,7 @@ module.exports = function(type, fundCode, userStatus, accountType, url) {
                     window.location.href = site_url.riskAppraisal_url + "?type=private"
                 }else if(type == "isHighAge"){
                     that.gV.isHighAgeStatus = false;
-                    that.getConditionsOfOrder(that.gV.singleaAuthenType)
+                    that.initAuth(that.gV.singleaAuthenType)
                 }else if(type == "isZdTaLimit"){
                      //跳理财首页
                     window.location.href = site_url.wealthIndex_url
