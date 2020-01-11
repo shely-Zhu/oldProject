@@ -40,7 +40,7 @@ $(function () {
         init: function () {
             var that = this;
 
-            // $('.newPlan').html( $('html').height() + ', ' + window.screen.height + ', ' + document.documentElement.offsetHeight);
+            $('.newPlan').html( $('html').height() + ', ' + window.screen.height + ', ' + document.documentElement.offsetHeight);
             
             $('.height').height( window.screen.height );
 
@@ -61,6 +61,11 @@ $(function () {
                 template: that.$e.investmentPlanTemp, 
                 pageSize: that.gV.pageSize,
                 callback: function(def, t){
+
+                    //请求已终止的定投列表，获取数量
+                    that.getStopList();
+
+                    
                     var obj = [{
                         url: site_url.protocolList_api,
                         data: {
@@ -141,8 +146,7 @@ $(function () {
                                 }
                                 that.gV.pageCurrent++;
 
-                                //请求已终止的定投列表，获取数量
-                                that.getStopList();
+                                
                             }
                             
                         },
@@ -158,6 +162,8 @@ $(function () {
                         },
                     }];
                     $.ajaxLoading(obj); 
+
+
                 }
             })
             /*if (!$('.list .contentWrapper').hasClass('setHeight')) {
