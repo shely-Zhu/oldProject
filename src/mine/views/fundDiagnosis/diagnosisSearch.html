@@ -28,6 +28,8 @@
 
 <body>
     @@include('@pathCommonCom/loading/listLoading.html')
+    <!-- 没有数据 -->
+    @@include('@pathCommonCom/noData/noData.html', {"tipText": "暂无数据"})
     <section class="hotDiagnosis clearfix">
         <div class="fixedWrap">
             <!-- 搜索 -->
@@ -65,8 +67,6 @@
                     @@include('@pathCommonViews/goTop.html')
                 </div>
             </div>
-            <!-- 没有数据 -->
-            @@include('@pathCommonCom/noData/noData.html', {"tipText": "暂无数据"})
             <!-- 加载中loading -->
             <!-- @@include('@pathCommonCom/loading/listLoading.html') -->
         </div>
