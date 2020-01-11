@@ -3,8 +3,9 @@
  *
  * @author shiyunrui 20191123
  * update:chentiancheng
- * 2020年1月11日17:02:41
+ * 2020年1月11日21:03:10
  * 具体可以参考 privateDetail.js
+ *
  */
 
 require('@pathCommonBase/base.js');
@@ -21,12 +22,7 @@ Handlebars.registerHelper("if_than_0", function (value, options) {
         return options.inverse(this);
     }
 });
-//获取地址栏参数
-getQueryString = function (name) {
-    var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)");
-    var r = window.location.search.substr(1).match(reg);
-    if (r != null) return unescape(r[2]); return '';
-}
+
 $(function () {
     var fundCode
     var regard = {
