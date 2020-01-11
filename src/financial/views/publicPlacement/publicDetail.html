@@ -30,8 +30,12 @@
 					<div class="new_worth">万份收益</div>
 					<div class="new_worth_value">{{unitYld}}</div>
 					<div class="type">
+						{{#if riskLevelName}}
 						<div class="type_1">{{riskLevelName}}</div>
+						{{/if}}
+						{{#if invTypComDesc}}
 						<div class="type_2">{{invTypComDesc}}</div>
+						{{/if}}
 						<!-- <div class="type_3">10000.0元起购</div> -->
 					</div>
 				</div>
@@ -43,9 +47,15 @@
 					<div class="new_worth">最新净值({{trDate}})</div>
 					<div class="new_worth_value">{{unitNavRetainFourStr}}</div>
 					<div class="type">
+						{{#if riskLevelName}}
 						<div class="type_1">{{riskLevelName}}</div>
+						{{/if}}
+						{{#if invTypComDesc}}
 						<div class="type_2">{{invTypComDesc}}</div>
+						{{/if}}
+						{{#if minValue}}
 						<div class="type_2">{{minValue}}元起购</div>
+						{{/if}}
 					</div>
 				</div>
 				{{/if}}
@@ -191,20 +201,24 @@
 					<div class="company_info">
 						基金销售服务由北京恒天明泽基金销售有限公司提供
 					</div>
-					<div class="divider-top"></div>
+					{{! 原position: sticky;的样式有兼容性问题，挪到footer结构里 }}
+					{{! <div class="divider-top"></div> }}
 					<div class="divider"></div>
 				</div>
 				<div class="footer">
-					<div class="share_area" type="1">
-						<div class="img"></div>
-						<div class="text">分享</div>
+					<div class="divider-top"></div>
+					<div class="footerDiv">
+						<div class="share_area" type="1">
+							<div class="img"></div>
+							<div class="text">分享</div>
+						</div>
+						<div class="selected_area"  type="2">
+							<div class="img"></div>
+							<div class="text">加自选</div>
+						</div>
+						<div class="fixed_investement_btn"  type="3">定投</div>
+						<div class="buy_btn"  type="4">买入</div>
 					</div>
-					<div class="selected_area"  type="2">
-						<div class="img"></div>
-						<div class="text">加自选</div>
-					</div>
-					<div class="fixed_investement_btn"  type="3">定投</div>
-					<div class="buy_btn"  type="4">买入</div>
 				</div>
 				<div class="isRiskMatchBox">
 					<div class="isRiskMatchBoxSmall">

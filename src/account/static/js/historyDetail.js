@@ -17,7 +17,8 @@ $(function() {
         },
         gV: { // 全局变量
             pageCurrent: 1, //当前页码，默认为1
-            pageSize: 10,
+            // pageSize: 10,
+            pageSize: 20, //10条时充不满屏幕，改为20条
             listLength: 0,
             projectId: splitUrl['projectId'],
         },

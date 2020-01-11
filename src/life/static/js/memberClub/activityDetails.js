@@ -36,6 +36,13 @@ $(function() {
             //初始化
             init: function() {
                 var that = this;
+
+                //处理7p 8p页面初始底部白条
+                var wHeight = window.screen.height;
+                if( $('html').height() < wHeight ){
+                    $('html').height( wHeight );
+                }
+
                 that.events();
                 if (splitUrl['isNeedLogin'] == 0) {
                     that.gV.isNeedLogin = false;

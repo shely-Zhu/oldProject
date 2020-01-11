@@ -293,10 +293,13 @@ body{
                     font-family:PingFangSC-Regular,PingFang SC;
                     font-weight:400;
                     color:@4E4E4E;
-                    display: -webkit-box;
+//                  display: -webkit-box;
                     -webkit-box-orient: vertical;
                     -webkit-line-clamp: 1;
-                    overflow: hidden;
+//                  overflow: hidden;
+                    white-space:nowrap; 
+                    overflow:hidden;
+                    text-overflow:ellipsis;
                 }
               }
             }
@@ -322,6 +325,6 @@ body{
 .tplBox3 .mui-table-view-cell.mui-active{
     background-color: #ffffff;
 }
-.without{
-    background: @F7FAFD!important;
-}
+//.without{
+//  background: @F7FAFD!important;
+//}
