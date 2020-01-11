@@ -485,7 +485,7 @@ $(function() {
             $.ajaxLoading(obj);
 		},
 		  //获取用户信息
-		  getUserInfo_1:function(){
+		  /*getUserInfo_1:function(){
 			var that = this;
 			var obj = [{
 				url:site_url.user_api,
@@ -517,7 +517,7 @@ $(function() {
 				},
             }]
             $.ajaxLoading(obj);
-        },
+        },*/
 
 		 // 客户预约产品所需条件
 		 getConditionsOfOrder: function(type) {
@@ -901,15 +901,30 @@ $(function() {
             })
 			// //点击买入
 			mui("body").on('mdClick', '.buyBtn', function(e) {
-				that.getUserInfo_1();
-				that.getUserInfo();
+				/*that.getUserInfo_1();
+				that.getUserInfo();*/
 				if(!that.data.isBuyFlag){//不可买入
 			   	 	return false;
 			    }
 				var result = frozenAccount("buyFreeze", window.location.href, false);
 				if(!result) {
-					that.getConditionsOfOrder("into");
-					that.gV.singleaAuthenType = "into"
+					var obj = [{
+		                url: site_url.queryUserAuthInfo_api,
+		                data: {
+		                },
+		                callbackDone: function (json) {
+		                    var data = json.data
+		                    that.gV.accountType = data.accountType
+		                    that.gV.userStatus = data.investFavour
+		                    // 获取用户各审核情况，共5条
+		        			that.getConditionsOfOrder("into");
+							that.gV.singleaAuthenType = "into"
+		                },
+		                callbackNoData:function(json){
+							tipAction(json.message);
+						},
+		            }]
+		            $.ajaxLoading(obj);
 				}
 			//	window.location.href = site_url.fundTransformIn_url+"?fundCode="+that.data.fundCode;			
 			},{
@@ -1075,12 +1090,27 @@ $(function() {
 			});
 			//点击定投
 			mui("body").on('mdClick', '.fiedBtn', function(e) {
-				that.getUserInfo();
-				that.getUserInfo_1();
+				/*that.getUserInfo();
+				that.getUserInfo_1();*/
 				var result = frozenAccount("buyFreeze", window.location.href, false);
 				if(!result) {
-					that.getConditionsOfOrder("investement");
-					that.gV.singleaAuthenType = "investement";
+					var obj = [{
+		                url: site_url.queryUserAuthInfo_api,
+		                data: {
+		                },
+		                callbackDone: function (json) {
+		                    var data = json.data
+		                    that.gV.accountType = data.accountType
+		                    that.gV.userStatus = data.investFavour
+		                    // 获取用户各审核情况，共5条
+		        			that.getConditionsOfOrder("investement");
+							that.gV.singleaAuthenType = "investement";
+		                },
+		                callbackNoData:function(json){
+							tipAction(json.message);
+						},
+		            }]
+		            $.ajaxLoading(obj);
 				}
 				//window.location.href = site_url.ordinarySetThrow_url+"?fundCode="+that.data.fundCode;;			
 			},{
