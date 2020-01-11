@@ -31,8 +31,7 @@ $(function() {
             that.getData('');
             that.initRightBtn();
             that.clickEvent();
-           /* that.getUserInfo();  //获取用户类型
-            that.getUserInfo_1();  */// 获取用户信息
+            that.bankEvents();
         },
         // 获取认证信息
         getUserInfo: function () {
@@ -87,8 +86,6 @@ $(function() {
                             var template = Handlebars.compile(tplm);
                             var html = template(json.data.pageList);
                             $("#bank_list").html(html);
-                            //渲染模板后设置点击事件
-                            that.bankEvents();
                         }
                     }
                 },
