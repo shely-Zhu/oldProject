@@ -79,7 +79,7 @@ $(function() {
                                 // 给data添加图片
                                 $.each(data, function(i, el) {
                                     // 只有前3个需要加，大于3直接退出
-                                    if (i > 3) {
+                                    if (i > 2) {
                                         return false;
                                     }
                                     switch (el.serialNumber) {
