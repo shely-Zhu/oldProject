@@ -18,6 +18,8 @@
 </head>
 
 <body>
+    <!-- 没有数据 -->
+    @@include('@pathCommonViews/noData.html')
     <section class="hotDiagnosis clearfix">
         <div class="fixedWrap">
             <!-- 搜索 -->
@@ -45,8 +47,6 @@
                     @@include('@pathCommonViews/goTop.html')
                 </div>
             </div>
-            <!-- 没有数据 -->
-            @@include('@pathCommonViews/noData.html')
             <!-- 加载中loading -->
             @@include('@pathCommonViews/loading/listLoading.html')
         </div>
