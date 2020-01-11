@@ -42,7 +42,9 @@ $(function () {
 
             $('.newPlan').html( $('html').height() + ', ' + window.screen.height + ', ' + document.documentElement.offsetHeight);
             
-            $('html').height( window.screen.height );
+            $('html').height( window.screen.height ).css('background','yellow');
+
+            $('body').css('background','red');
 
             that.initMui();
             that.getUserInfo();
