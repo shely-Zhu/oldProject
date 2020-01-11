@@ -42,7 +42,7 @@ $(function () {
 
             $('.newPlan').html( $('html').height() + ', ' + window.screen.height + ', ' + document.documentElement.offsetHeight);
             
-            $('.height').height( window.screen.height );
+            $('html').height( window.screen.height );
 
             that.initMui();
             that.getUserInfo();
@@ -65,7 +65,7 @@ $(function () {
                     //请求已终止的定投列表，获取数量
                     that.getStopList();
 
-                    
+
                     var obj = [{
                         url: site_url.protocolList_api,
                         data: {
