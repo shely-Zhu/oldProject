@@ -1,6 +1,7 @@
 /**
  * 会员俱乐部-活动列表
  * @author  liuhongyu 2019 10-31
+ * update chentiancheng 2020年1月11日15:01:20
  */
 
 require('@pathCommonBase/base.js');
