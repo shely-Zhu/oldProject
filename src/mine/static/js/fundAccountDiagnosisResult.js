@@ -41,9 +41,9 @@ $(function() {
             expectedInvestment_year:$("#expectedInvestment_year"), //预计投资年限
             liquidity:$("#liquidity"),  //流动性需求
             // yield_second:$("#yield_second"), // 最高预期年化收益
-            yield_first:$("#yield_first"),  // 最低预期年化收益
+            yield_first:$(".yield_first"),  // 最低预期年化收益
             // loss_second:$("#loss_second"),  //最高承受最大回撤
-            loss_first:$("#loss_first"),    // 最低承受最大回撤
+            loss_first:$(".loss_first"),    // 最低承受最大回撤
             yieldControl:$(".yieldControl"), //年化收益数据显示容器
             lossControl:$(".lossControl"),   // 可承受数据显示容器
             fundDiagnosisSexTemplate:$(".popup-content .sex ul"), //性别下拉列表容器
@@ -267,25 +267,24 @@ $(function() {
                tipAction(str)
                return false
            }else if(that.$e.liquidity[0].textContent=="请选择"){
-            str = "请选择您的流动性需求"
-            tipAction(str)
-            return false
+                str = "请选择您的流动性需求"
+                tipAction(str)
+                return false
+           }else if(!that.$e.yield_first[0].value){
+            // &&!that.$e.yield_second[0].textContent
+                str = "请填写您的预期年化收益"
+                tipAction(str)
+                return false
+           }else if(!that.$e.loss_first[0].value){
+            // &&!that.$e.loss_second[0].textContent
+                str = "请填写您的最大回撤"
+                tipAction(str)
+                return false
+           }else if(that.gV.selectPurchaseHTFunds.length==0&&that.gV.otherFundCodeData.length==0){
+                str = "请您勾选一笔基金或者添加一笔基金"
+                tipAction(str)
+                return false
            }
-        //    else if(!that.$e.yield_first[0].textContent){
-        //     // &&!that.$e.yield_second[0].textContent
-        //     str = "请填写您的预期年化收益"
-        //     tipAction(str)
-        //     return false
-        //    }else if(!that.$e.loss_first[0].textContent){
-        //     // &&!that.$e.loss_second[0].textContent
-        //     str = "请填写您的最大回撤"
-        //     tipAction(str)
-        //     return false
-        //    }else if(that.gV.selectPurchaseHTFunds.length==0&&that.gV.otherFundCodeData.length==0){
-        //         str = "请您勾选一笔基金或者添加一笔基金"
-        //         tipAction(str)
-        //         return false
-        //    }
            return true
         },
         initParmis:function(){
@@ -303,25 +302,25 @@ $(function() {
              that.$e.expectedInvestment_year[0].textContent = that.escapeCode(that.gV.expectedInvestment_yearDataCode,"fundDiagnosisEInvestDurationLevel"); //预期年限
              that.$e.liquidity[0].textContent = that.escapeCode(that.gV.liquidityDataCode,"fundDiagnosisLiquidityRequirement");  //流动性
             //  || !! that.gV.yield_secondData
-             if(!!that.gV.yield_firstData){
-                that.$e.yieldControl.show();
-                $("#yearOwn").hide();
-                $("#maxLossOwn").hide();
-             }else{
-                that.$e.yieldControl.hide();
-                $("#yearOwn").show();
-                $("#maxLossOwn").show();
-             }
+            //  if(!!that.gV.yield_firstData){
+            //     that.$e.yieldControl.show();
+            //     $("#yearOwn").hide();
+            //     $("#maxLossOwn").hide();
+            //  }else{
+            //     that.$e.yieldControl.hide();
+            //     $("#yearOwn").show();
+            //     $("#maxLossOwn").show();
+            //  }
             //  || !!that.gV.loss_secondData
-             if(!!that.gV.loss_firstData){
-                that.$e.lossControl.show();
-             }else{
-                that.$e.lossControl.hide();
-             }
+            //  if(!!that.gV.loss_firstData){
+            //     that.$e.lossControl.show();
+            //  }else{
+            //     that.$e.lossControl.hide();
+            //  }
             //  that.$e.yield_first[0].textContent = that.gV.yield_firstData ==""?"请选择":that.gV.yield_firstData;
-            //  that.$e.yield_second[0].textContent = that.gV.yield_secondData ==""?"请选择":that.gV.yield_secondData;
+             that.$e.yield_first[0].value = that.gV.yield_secondData ==""?"请选择":that.gV.yield_secondData;
             //  that.$e.loss_first[0].textContent = that.gV.loss_firstData ==""?"请选择":that.gV.loss_firstData;
-            //  that.$e.loss_second[0].textContent = that.gV.loss_secondData ==""?"请选择":that.gV.loss_secondData;
+             that.$e.loss_first[0].value = that.gV.loss_secondData ==""?"请选择":that.gV.loss_secondData;
         },
         queryDictionary: function() {
             //字典

@@ -33,43 +33,7 @@ $(function() {
         init: function() {
             var that = this;
             that.getData();
-            /*that.getUserInfo();  //获取用户类型
-            that.getUserInfo_1(); //用户身份信息*/
             that.events();
-        },
-         //获取用户信息
-		getUserInfo_1:function(){
-			var that = this;
-			var obj = [{
-				url:site_url.user_api,
-				data:{
-
-				},
-				callbackDone:function(json){
-					var data = json.data
-				    that.gV.userStatus = data.investFavour
-				}
-			}];
-			$.ajaxLoading(obj);
-		},
-         // 获取客户类型
-         getUserInfo: function () {
-            var that = this;
-            // 请求页面数据
-            var obj = [{
-                url: site_url.queryUserBaseInfo_api,
-                data: {
-                },
-                needLogin: false,
-                callbackDone: function (json) {
-                    var data = json.data
-                    that.gV.accountType = data.accountType
-                },
-                callbackNoData:function(json){
-					tipAction(json.message);
-				},
-            }]
-            $.ajaxLoading(obj);
         },
         /*getConditionsOfOrder: function() {
             var that = this;
@@ -353,17 +317,15 @@ $(function() {
 
             // 买入
             mui("body").on('mdClick', ".buyButton", function(e) {
-                that.getUserInfo();  //获取用户类型
-                that.getUserInfo_1(); //用户身份信息
                 var $this = $(this);
                 if ($this.hasClass("disable")) {
                     return false;
                 } else {
                     // 先判断是否司法冻结以及身份过期，再判断一键认证
-                    var result = frozenAccount("buyFreeze", window.location.href, that.gV.accountType);
+                    var result = frozenAccount("buyFreeze", window.location.href, false);
                     if( !result ) {
                        var url = site_url.fundTransformIn_url + '?fundCode=' + that.getElements.fundCode + '&fundName=' + that.getElements.chiName+"&noReload=1";
-                       authenticationProcess("fundIn", that.getElements.fundCode, that.gV.userStatus, that.gV.accountType, url)
+                       authenticationProcess(that.getElements.fundCode, url)
                     };
                     //that.getConditionsOfOrder();
                 }

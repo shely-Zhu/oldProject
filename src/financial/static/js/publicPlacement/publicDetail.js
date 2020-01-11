@@ -75,9 +75,6 @@ $(function () {
         init: function () {
             var that = this;
             that.getData(); // 获取基金详情
-
-            /*that.getUserInfo();  //获取用户类型
-            that.getUserInfo_1(); //用户身份信息*/
             that.events();
             // that.getData1(); // 查询基金的历史收益（货币基金）/历史净值（普通基金）
             $('.tips').hide()
@@ -200,40 +197,6 @@ $(function () {
                         $(".footer .buy_btn").addClass("disable").html("暂不可售")
                    }
                   
-                },
-                callbackNoData:function(json){
-					tipAction(json.message);
-				},
-            }]
-            $.ajaxLoading(obj);
-        },
-        //获取用户信息
-		getUserInfo_1:function(){
-			var that = this;
-			var obj = [{
-				url:site_url.user_api,
-				data:{
-
-				},
-				callbackDone:function(json){
-					var data = json.data
-				    that.gV.userStatus = data.investFavour
-				}
-			}];
-			$.ajaxLoading(obj);
-		},
-        // 获取客户类型
-        getUserInfo: function () {
-            var that = this;
-            // 请求页面数据
-            var obj = [{
-                url: site_url.queryUserBaseInfo_api,
-                data: {
-                },
-                needLogin: false,
-                callbackDone: function (json) {
-                    var data = json.data
-                    that.gV.accountType = data.accountType
                 },
                 callbackNoData:function(json){
 					tipAction(json.message);
@@ -455,20 +418,13 @@ $(function () {
 
             // 定投
             mui("body").on('mdClick', ".footer .fixed_investement_btn", function (e) {
-                that.getUserInfo();
-                that.getUserInfo_1();
-                //定投一键认证
-                if(that.gV.accountType === 0 || that.gV.accountType === 2){
-                    tipAction('暂不支持机构客户进行交易');
-                }else{
-                    // 先判断是否司法冻结以及身份过期，再判断一键认证
-                    var result = frozenAccount("buyFreeze", window.location.href, that.gV.accountType);
-                    if( !result ) {
-                      var fundCode = splitUrl['fundCode']
-                      var url = site_url.pofOrdinarySetThrow_url + '?fundCode=' + fundCode + '&fundName=' + that.gV.secuSht + '&type=add';
-                      authenticationProcess("", fundCode, that.gV.userStatus, that.gV.accountType, url)
-                    };
-                }
+                // 先判断是否司法冻结以及身份过期，再判断一键认证
+                var result = frozenAccount("buyFreeze", window.location.href, false);
+                if( !result ) {
+                  var fundCode = splitUrl['fundCode']
+                  var url = site_url.pofOrdinarySetThrow_url + '?fundCode=' + fundCode + '&fundName=' + that.gV.secuSht + '&type=add';
+                  authenticationProcess(fundCode, url)
+                };
                 /*that.getConditionsOfOrder("investement");
                 that.gV.singleaAuthenType = "investement"*/
             },{
@@ -476,17 +432,15 @@ $(function () {
             });
             // 买入
             mui("body").on('mdClick', ".footer .buy_btn", function (e) {
-                that.getUserInfo();
-                that.getUserInfo_1();
                if($(this).hasClass("disable")){
                    return false
                }
                // 先判断是否司法冻结以及身份过期，再判断一键认证
-               var result = frozenAccount("buyFreeze", window.location.href, that.gV.accountType);
+               var result = frozenAccount("buyFreeze", window.location.href, false);
                if( !result ) {
                 var fundCode = splitUrl['fundCode']
                   var url = site_url.fundTransformIn_url + '?fundCode=' + fundCode + '&fundName=' + that.gV.secuSht+"&noReload=1";
-                  authenticationProcess("", fundCode, that.gV.userStatus, that.gV.accountType, url)
+                  authenticationProcess(fundCode, url)
                 };
                 /*that.getConditionsOfOrder("into");
                 that.gV.singleaAuthenType = "into"*/
@@ -708,10 +662,7 @@ $(function () {
                 var time = that.gV.time
 
                 var myDate = new Date();
-                myDate.getYear(); //获取当前年份(2位)
-                myDate.getMonth(); //获取当前月份(0-11,0代表1月)
-                myDate.getDate(); //获取当前日(1-31)
-                var end =  myDate.getYear()+'-'+ parseInt(myDate.getMonth()+1)+'-'+myDate.getDate();
+                var end =  myDate.getFullYear()+'-'+ parseInt(myDate.getMonth()+1)+'-'+myDate.getDate();
                 that.gV.type = type
                 if (time) {
                     that.getData2(type, time);
@@ -726,10 +677,7 @@ $(function () {
                 $(this).addClass('active').siblings().removeClass('active');
                 var time = Number($(this).attr('time'))
                 var myDate = new Date();
-                myDate.getYear(); //获取当前年份(2位)
-                myDate.getMonth(); //获取当前月份(0-11,0代表1月)
-                myDate.getDate(); //获取当前日(1-31)
-                var end =  myDate.getYear()+'-'+ parseInt(myDate.getMonth()+1)+'-'+myDate.getDate();
+                var end = myDate.getFullYear()+'-'+ parseInt(myDate.getMonth()+1)+'-'+myDate.getDate();
                 that.gV.time = time
                 if (time) {
                     that.getData2(that.gV.type, time);
