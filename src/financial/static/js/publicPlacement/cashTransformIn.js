@@ -190,16 +190,21 @@ $(function () {
 				callbackDone: function(json) {
 					if(json.status == '0000'){
 						payPass(that.checkPassword);
+						that.$el.confirmBtn.removeAttr("disabled");
+
 					}else{
 						tipAction(json.message);
+					that.$el.confirmBtn.removeAttr("disabled");
 					}
 					
 				},
 				callbackNoData:function(json){
-                    tipAction(json.message);
+					tipAction(json.message);
+					that.$el.confirmBtn.removeAttr("disabled");					
                 },
                 callbackFail:function(json){
-                    tipAction(json.message);
+					tipAction(json.message);
+					that.$el.confirmBtn.removeAttr("disabled");
                 }
 
 			}];
@@ -408,7 +413,9 @@ $(function () {
 				//		tipAction('单笔金额不能超过' + that.gV.singleNum + '元')
 				//		return
 				//	}
+ 				    that.$el.confirmBtn.attr('disabled',true)
 					that.checkPayType()
+					// that.$el.confirmBtn.removeAttr("disabled");
 				}else{
 					//未选择银行卡提示信息
 					tipAction("请选择银行卡！");
