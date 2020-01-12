@@ -51,7 +51,7 @@ var prvRec = {
         that.ajaxFail = false;
 
         var obj = [{
-                url: site_url.queryUserBaseInfo_api,
+                url: site_url.user_api,
                 data: {
                 },
                 needDataEmpty: false,
@@ -59,15 +59,11 @@ var prvRec = {
                     var jsonData = data.data;
                     if (jsonData.idnoCheckflag == "1") { //是否实名认证
                         that.name = jsonData.name;
-                        if (jsonData.identityType == "0") { //身份证
-                            if (jsonData.identityNo.length == "15") {
-                                jsonData.identityNo.substring(14, 15) % 2 == 0 ? that.gender = "女士" : that.gender = "先生";
-                            } else if (jsonData.identityNo.length == "18") {
-                                jsonData.identityNo.substring(16, 17) % 2 == 0 ? that.gender = "女士" : that.gender = "先生";
-                            }
-                            $(".user .userName").html('<span class="name">' + that.name + '</span> <span class="gender">' + that.gender + '</span>');
-                        } else {
+                        if(jsonData.sex == "" || jsonData.sex == null) {
                             $(".user .userName").html('<span class="name">' + that.name + '</span>');
+                        } else{
+                            jsonData.sex == 0 ? that.gender = "女士" : that.gender = "先生";
+                            $(".user .userName").html('<span class="name">' + that.name + '</span> <span class="gender">' + that.gender + '</span>');
                         }
                     } else {
                         $(".user .userName").html('<span class="name">尊敬的客户</span>');
