@@ -390,11 +390,23 @@ $(function() {
 				   that.data.isBuyFlag = jsonData.isBuyFlag;//是否可购买(0否1是) int类型
 				   that.data.isRedemptionFlag = jsonData.isRedemptionFlag; //是否可赎回(0否1是) int 类型
 				   that.data.supportFixedFlag = jsonData.isFixFlag;//是否可定投(0否1是) int 类型
-				   if(!that.data.isBuyFlag){//不可买入
-				   	 	$(".buyBtn").addClass("disable").html("暂不可售");
-				   	 	// $(".fiedBtn").css("display", "none");
+				   // 判断是否可以定投和是否可售，不同展示，不可售的时候定投按钮不展示
+				   if(that.data.supportFixedFlag == 1){//支持定投展示定投按钮,1支持定投
+						if(!that.data.isBuyFlag){  //不可买入
+							$('.footer').eq(0).show()
+					   	 	$('.footer').eq(1).hide()
+					   	 	$(".buyBtn").addClass("disable").html("暂不可售");
+					   	 }else{
+					   	 	$('.footer').eq(1).show()
+					   	 }
+					}else{
+						$('.footer').eq(0).show()
+						if(!that.data.isBuyFlag){  //不可买入
+							$(".buyBtn").addClass("disable").html("暂不可售");
+						}
+					}
 
-				   }
+
 				   	if(!that.data.isRedemptionFlag){//不可赎回
 				   		$(".redeemBtn").addClass("disable").html("暂停赎回")
 				   }
@@ -452,11 +464,6 @@ $(function() {
 						$('.lineWrap .wfsy').text("累计净值");
 					}
 					$(".totalM").css({ "background": "linear-gradient(360deg, rgba(186,140,112,1) 0%, rgba(244,210,192,1) 100%)", "-webkit-background-clip": "text", "-webkit-text-fill-color": "transparent" })
-                    if(that.data.supportFixedFlag == 1){//支持定投展示定投按钮,1支持定投
-						$('.footer').eq(1).show()
-					}else{
-						$('.footer').eq(0).show()
-					}
 					if( that.data.projectType == "10300" ){//10300货币类型
 						$(".dealReg").hide()
 						//货币基金
@@ -486,40 +493,6 @@ $(function() {
             }];
             $.ajaxLoading(obj);
 		},
-		  //获取用户信息
-		  /*getUserInfo_1:function(){
-			var that = this;
-			var obj = [{
-				url:site_url.user_api,
-				data:{
-
-				},
-				callbackDone:function(json){
-					var data = json.data
-				    that.gV.userStatus = data.investFavour
-				}
-			}];
-			$.ajaxLoading(obj);
-		},
-		// 获取客户类型
-        getUserInfo: function () {
-            var that = this;
-            // 请求页面数据
-            var obj = [{
-                url: site_url.queryUserBaseInfo_api,
-                data: {
-                },
-                needLogin: false,
-                callbackDone: function (json) {
-                    var data = json.data
-                    that.gV.accountType = data.accountType
-                },
-                callbackNoData:function(json){
-					tipAction(json.message);
-				},
-            }]
-            $.ajaxLoading(obj);
-        },*/
 
 		 // 客户预约产品所需条件
 		 getConditionsOfOrder: function(type) {
@@ -892,7 +865,7 @@ $(function() {
 			   	if(!that.data.isRedemptionFlag){//不可赎回
 			   		return false;
 				}
-			    var result = frozenAccount("saleFreeze", window.location.href, false);
+			    var result = frozenAccount("saleFreeze", window.location.href, false,'optionalPublicDetail_16');
 				if( !result ) {
 					//that.getConditionsOfOrder("redemption");
 					//that.gV.singleaAuthenType = "redemption"
@@ -908,7 +881,7 @@ $(function() {
 				if(!that.data.isBuyFlag){//不可买入
 			   	 	return false;
 			    }
-				var result = frozenAccount("buyFreeze", window.location.href, false);
+				var result = frozenAccount("buyFreeze", window.location.href, false,'optionalPublicDetail_17');
 				if(!result) {
 					var obj = [{
 		                url: site_url.queryUserAuthInfo_api,
@@ -1094,7 +1067,7 @@ $(function() {
 			mui("body").on('mdClick', '.fiedBtn', function(e) {
 				/*that.getUserInfo();
 				that.getUserInfo_1();*/
-				var result = frozenAccount("buyFreeze", window.location.href, false);
+				var result = frozenAccount("buyFreeze", window.location.href, false,'optionalPublicDetail_18');
 				if(!result) {
 					var obj = [{
 		                url: site_url.queryUserAuthInfo_api,

@@ -411,12 +411,15 @@ $(function () {
 					if(json.status == '0000'){
 						if(that.gV.type == 'add'){
 							payPass(that.checkPassword);
+							that.$el.confirmBtn.removeAttr("disabled");
 						}
 						if(that.gV.type == 'edit'){
 							payPass(that.checkPassword_edit);
+							that.$el.confirmBtn.removeAttr("disabled");
 						}
 					}else{
 						tipAction(json.message);
+						that.$el.confirmBtn.removeAttr("disabled");
 					}
 					
 				},
@@ -959,8 +962,8 @@ $(function () {
 						tipAction('单笔金额不能超过' + that.gV.singleNum + '元')
 						return
 					}
+					that.$el.confirmBtn.attr('disabled',true)
 					that.checkPayType()
-					
 				}else{
 					//未选择银行卡提示信息
 					tipAction("请选择银行卡！");
