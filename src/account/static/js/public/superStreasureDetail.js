@@ -434,87 +434,39 @@ $(function() {
                 'htmdEvt': 'superStreasureDetail_0'
             })
             mui("body").on('mdClick', '.materialContent', function(e) {
-                    var id = $(this).attr('data-id');
-                    window.location.href = site_url.superContent_url + "?id=" + id;
+                var id = $(this).attr('data-id');
+                window.location.href = site_url.superContent_url + "?id=" + id;
 
-                }, {
-                    'htmdEvt': 'superStreasureDetail_1'
-                })
+            }, {
+                'htmdEvt': 'superStreasureDetail_1'
+            })
                 //点击转出跳转
             mui("body").on('mdClick', '.rollOutBtn', function(e) {
 
                 // 账户过期弹窗
-                var result = frozenAccount("saleFreeze", window.location.href, false);
+                var result = frozenAccount("saleFreeze", window.location.href, false,'superStreasureDetail_6');
                 if( !result ) {
                     window.location.href = site_url.pofCashTransformOut_url + '?fundCode=' + that.gL.fundCode + '&productName=' + new Base64().encode(that.gL.fundName);
                 };
 
-                }, {
-                    'htmdEvt': 'superStreasureDetail_2'
-                })
+            }, {
+                'htmdEvt': 'superStreasureDetail_2'
+            })
                 //点击转入跳转
             mui("body").on('mdClick', '.shiftToBtn', function(e) {
                 $(".isRiskMatch_mask").hide();
                 $(".isRiskMatchBox").hide();
                 // 先判断是否司法冻结以及身份过期，再判断一键认证
-                var result = frozenAccount("buyFreeze", window.location.href, false);
+                var result = frozenAccount("buyFreeze", window.location.href, false,'superStreasureDetail_7');
                 if( !result ) {
                     var url = site_url.pofCashTransformIn_url+ "?fundName=" +that.gL.fundName + "&fundCode=" +that.gL.fundCode;
-                    authenticationProcess(that.gL.fundCode, url)
+                    authenticationProcess(that.gL.fundCode, url,'superStreasureDetail')
                 };
-
-                // 账户过期弹窗
-                /*var result = frozenAccount("buyFreeze", window.location.href, false);
-                if(!result) {
-                    that.getConditionsOfOrder(that.gL.fundCode)
-                }*/
-
-
-
-          //      if (that.gL.accountType === 0 || that.gL.accountType === 2) {
-          //          tipAction('暂不支持机构客户进行交易');
-          //      } else {
-           //         window.location.href = site_url.pofCashTransformIn_url+ "?fundName=" +that.gL.fundName + "&fundCode=" +that.gL.fundCode;
-            //        // window.location.href = site_url.pofCashTransformIn_url+ "?fundName=" +"jfskdjfhk"+ "&fundCode=" + that.gL.fundCode;
-
-            //    }
 
             }, {
                 'htmdEvt': 'superStreasureDetail_3'
             })
 
-                     //风测等级匹配成功
-         /*mui("body").on('mdClick',".isRiskMatchBox_match",function(){
-            $(".isRiskMatch_mask").hide();
-            $(".isRiskMatchBox").hide();
-            if (that.gL.accountType === 0 || that.gL.accountType === 2) {
-                         tipAction('暂不支持机构客户进行交易');
-            } else {
-                        window.location.href = site_url.pofCashTransformIn_url+ "?fundName=" +that.gL.fundName + "&fundCode=" +that.gL.fundCode;
-                    }
-       })
-
-      //风险等级匹配失败
-      mui("body").on("mdClick",".isRiskMatchBox_cancel",function(){
-        $(".isRiskMatch_mask").hide();
-        $(".isRiskMatchBox").hide();
-       // that.gV.isRiskMatchBox.hide();
-    })
-
-     //风险等级匹配失败结果跳转
-    mui("body").on("mdClick",".isRiskMatchResult",function(){
-        $(".isRiskMatch_mask").hide();
-        $(".isRiskMatchBox").hide();
-        var type = $(this).attr("type");
-        if(type == "noRisk"){
-            //未风测
-            window.location.href = site_url.riskAppraisal_url + "?type=private"
-        }else if(type == "repeatRisk"){
-            //风测过期
-            window.location.href = site_url.riskAppraisal_url + "?type=private"
-        }
-       
-    })*/
                 //点击历史记录
             mui("body").on('mdClick', '.recordBtn', function(e) {
                 window.location.href = site_url.superRecord_url+ "?fundCode=" +that.gL.fundCode;

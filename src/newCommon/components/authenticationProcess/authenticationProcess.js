@@ -9,10 +9,13 @@
 * accountType  客户类型  0-机构 1-个人
 *
 * url 认证成功跳转页面
+
+* @author zhangyanping  2020-01-12
+* 添加组件的埋点的相关的代码
 * 
 */
 
-module.exports = function(fundCode, url) {
+module.exports = function(fundCode, url,htmdEvt) {
 	var auth = {
 		$e:{
             
@@ -296,7 +299,7 @@ module.exports = function(fundCode, url) {
 						break;
 				}
 			},{
-				'htmdEvt': 'optionalPublicDetail_14'
+				'htmdEvt': htmdEvt + '_001'
 			});
 				//一键认证
 			mui("body").on('mdClick', ".tips .tips-btn", function (e) {
@@ -375,7 +378,7 @@ module.exports = function(fundCode, url) {
 						break;
 				}
 			},{
-				'htmdEvt': 'optionalPublicDetail_15'
+				'htmdEvt': htmdEvt + '_002'
 			});
         	//风险等级匹配失败
 			mui("body").on("mdClick",".isRiskMatchBox_cancel",function(){
@@ -383,7 +386,7 @@ module.exports = function(fundCode, url) {
 				$(".isRiskMatchBox").hide();
 			  // that.gV.isRiskMatchBox.hide();
 			},{
-				'htmdEvt': 'optionalPublicDetail_12'
+				'htmdEvt': htmdEvt + '_003'
 			})
 			//风险等级匹配失败结果跳转
 			mui("body").on("mdClick",".isRiskMatchResult",function(){
@@ -407,7 +410,7 @@ module.exports = function(fundCode, url) {
                     window.location.href = site_url.completeInfoEditModify_url
                 }
 			},{
-				'htmdEvt': 'optionalPublicDetail_13'
+				'htmdEvt': htmdEvt + '_004'
 			})
         	//风测等级匹配成功
         	mui("body").on('mdClick',".isRiskMatchBox_match",function(){
@@ -419,25 +422,28 @@ module.exports = function(fundCode, url) {
 					return false
 				}
 				window.location.href = url
-				/*if(type == "into"){
-					//买入一键认证
-					window.location.href = site_url.fundTransformIn_url+"?fundCode="+that.data.fundCode+"&noReload=1";
-			   }else if(type == "investement"){
-					//定投一键认证
-					window.location.href = site_url.ordinarySetThrow_url+"?fundCode="+that.data.fundCode+'&type=add';			
-			   }*/
+				
 			},{
-				'htmdEvt': 'optionalPublicDetail_11'
+				'htmdEvt': htmdEvt + '_005'
 			})
         	// 点击弹窗或关闭按钮隐藏
             var  maskheight =  window.innerHeight - $('.tips-content').height();
             $('.tips-mask').height(maskheight)
-			$('body').on('tap', '.icontips-close', function () {
+            mui("body").on('mdClick',".icontips-close",function(){
 				$('.tips').css('display', 'none')
-			})
-			$('body').on('tap', '.tips-mask', function () {
+            },{
+            	'htmdEvt': htmdEvt + '_006'
+            })
+            mui("body").on('mdClick',".tips-mask",function(){
 				$('.tips').css('display', 'none')
-			})
+            },{
+            	'htmdEvt': htmdEvt + '_007'
+            })
+			// $('body').on('tap', '.icontips-close', function () {
+			// })
+			// $('body').on('tap', '.tips-mask', function () {
+			// 	$('.tips').css('display', 'none')
+			// })
 		},
 	}
 	auth.init();
