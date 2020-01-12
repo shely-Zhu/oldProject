@@ -10,7 +10,7 @@ var data = Mock.mock({
     "status": "0000", 
     "msg": "处理成功！", 
     "data": { 
-        "isWealthAccount":1,//是否开通财富账户:
+        "isWealthAccount":0,//是否开通财富账户:
 /*0、是
  1、身份证上传
  2、人脸识别
