@@ -315,8 +315,10 @@ $(function () {
 				callbackDone: function(json) {
 					if(json.status == '0000'){
 						payPass(that.checkPassword);
+						that.$el.confirmBtn.removeAttr("disabled");
 					}else{
 						tipAction(json.message);
+						that.$el.confirmBtn.removeAttr("disabled");
 					}
 
 				},
@@ -658,6 +660,7 @@ $(function () {
 							}
 						}
 					}
+					that.$el.confirmBtn.attr('disabled',true)
 					that.checkPayType()
 				}else{
 					//未选择银行卡提示信息

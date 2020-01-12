@@ -52,7 +52,7 @@
 
     <script id="second-template" type="text/x-handlebars-template">
         {{! 左侧页面列表}} {{#each this}}
-        <div class="list_item clearfix">
+        <div class="list_item clearfix" id='{{id}}' articleBelong='{{articleBelong}}' externalUrl='{{externalUrl}}'>
             <div class="list_itemL">
                 <p>{{title}}</p>
                 <span>{{articleTimeStr}}</span>
