@@ -231,7 +231,7 @@ $(function() {
                     // 先判断实名认证，
                     if(jsonData.idnoCheckflag == 1) { // 实名认证
                         // 再判断是否风测
-                        if(jsonData.isRiskEndure == "1"){ // 风测过
+                        if(jsonData.isRiskEndure == 1){ // 风测过
                             // 跳转申请记录页面
                             window.location.href = site_url.applyHistory_url
                         }else {
@@ -276,6 +276,7 @@ $(function() {
                 }
             }];
             $.ajaxLoading(obj);
+            debugger
       
         },
         getHoldData: function(t) {

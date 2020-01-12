@@ -64,7 +64,7 @@ $(function () {
             userStatus:"", // 为空则是新用户   为0普通投资者  为1专业投资者
             investorStatus: '' // 投资者状态
         },
-        fundType: splitUrl['fundType'] == '10300'||splitUrl['fundType'] == '10800'||splitUrl['fundType'] == '2' ? 1 : 0, //10300 或者10800或者3（3的时候是从活期理财页面跳转过来的时候带过来的是3）货币基金类型，其余为普通基金类型
+        fundType: splitUrl['fundType'] == '10300'||splitUrl['fundType'] == '10800' ? 1 : 0, //10300 或者10800或者3（3的时候是从活期理财页面跳转过来的时候带过来的是3）货币基金类型，其余为普通基金类型
         fundComId: '',   //基金公司ID
         secuId:'', // 基金编码
         chiName:'', // 基金名称
@@ -177,11 +177,11 @@ $(function () {
                         $(".footer .fixed_investement_btn").css({"display":"block"})
                         that.gV.fixedInvestementBtnStatu = true
                         if(that.gV.json.cashTreasure == "1"){
-                            $(".footer .fixed_investement_btn").attr("disabled",true)
+                            $(".footer .fixed_investement_btn").attr("disabled",true).css({"display":"none"});
                             that.gV.fixedInvestementBtnStatu = false
                         }
                         if(that.gV.json.fundStatus=="3"||that.gV.json.fundStatus=="5"){
-                            $(".footer .fixed_investement_btn").attr("disabled",true)
+                            $(".footer .fixed_investement_btn").attr("disabled",true).css({"display":"none"});
                             that.gV.fixedInvestementBtnStatu = false
                         }
                        // that.gV.fixedInvestementBtn.show()
@@ -190,7 +190,8 @@ $(function () {
                        // that.gV.fixedInvestementBtn.hide()
                     }
                     if(!json.data.isBuyFlag){//不可买入
-                        $(".footer .buy_btn").addClass("disable").html("暂不可售")
+                        $(".footer .buy_btn").addClass("disable").html("暂不可售");
+                        $(".footer .fixed_investement_btn").attr("disabled",true).css({"display":"none"});
                    }
                   
                 },

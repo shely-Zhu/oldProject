@@ -182,9 +182,12 @@ require('@pathCommonJsCom/goTopMui.js');
                         });*/
                     // }
                  },
-                 failData: function(t, data) {
+                 failData: function(t, data, pageCurrent) {
                     if(data.status == 1000) {
-                        $(".noData").show()
+                        t.endPullupToRefresh(true);
+                        if(pageCurrent == 1) {
+                            $(".noData").show()
+                        }
                     } else {
                         tipAction(data.message)
                     }
@@ -218,7 +221,7 @@ require('@pathCommonJsCom/goTopMui.js');
                                         console.log( "失败", defData );
 
                                         //that.dealData( t, defData, pageCurrent);
-                                        that.failData(t, defData)
+                                        that.failData(t, defData, pageCurrent)
                                         
                                     })
                                     .done(function( defData, pageCurrent ) {

@@ -13,7 +13,7 @@ var data=Mock.mock({
 	"data":{
 		"pageList|20":[
 			{
-			"fundName":"新沃货币",//基金名称
+			"fundName":"新沃货币新沃货币新沃货币新沃货币新沃货币新沃货币新沃货币新沃货币新沃货币新沃货币",//基金名称
 			"tradeApplyStatus":"0",//交易状态
 			"tradeApplyDesc":"交易失败",//交易状态描述
 			"fundCode":"001916",//基金代码
