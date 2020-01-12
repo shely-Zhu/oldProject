@@ -38,9 +38,10 @@
     position: fixed;
     top: 1.28rem;
     z-index: 2;
+    
 }
 .notes{
-    font-size: .2rem;
+    font-size: .24rem;
     font-weight:400;
     color:@9B9B9B;
     line-height: 0.4rem;
@@ -161,8 +162,10 @@ body {
         .mui-table-view > .mui-table-view-cell > .left{
             display: inline-block;
             float: left;
-            margin-left: 0.5rem;
+            margin-left: 0.3rem;
             margin-top: 0;
+            font-size: .32rem;
+            color: #272727;
             font-weight: bold;
             line-height: 1rem;
         }
@@ -189,8 +192,10 @@ body {
             display: inline-block;
             float: right;
             width: 3rem;
+            font-size: .32rem;
             line-height: 1rem;
             text-align: right;
+            color: #272727;
             input{
                 text-align: right;
             }
@@ -266,10 +271,24 @@ body {
         }
         .messageBox{
             background-color: white;
+            .divider {
+                display: inline-block;
+                width: .06rem;
+                height: .28rem;
+                background: linear-gradient(146deg,rgba(102,132,199,1) 0%,rgba(54,77,151,1) 100%);
+                margin-left: .3rem;
+            }
+            .title {
+                margin-left: .1rem;
+                font-size: .28rem;
+                color: #272727;
+            }
         }
         .messageBox .left{
+            font-size: .32rem;
+            color: #272727;
             font-weight: bold;
-            margin-left: 0.5rem;
+            margin-left: 0.3rem;
             margin-top: 0.2rem;
             display: inline-block;
         }
@@ -278,6 +297,8 @@ body {
         }
         .ml20{
             margin-left: 0.2rem;
+            color: #9b9b9b;
+            font-size: .24rem;
         }
         .ml50{
             margin-left: 0.5rem;
@@ -342,7 +363,7 @@ body {
         .addOtherFundcodeBox{
             .left{
                 display: inline-block;
-                margin-left: 0.5rem;
+                margin-left: 0.3rem;
                 font-weight: bold;
             }
             .right{
@@ -419,7 +440,7 @@ body {
     left: 5%;
     width: 90%;
     background: #ececec;
-    height: 5.2rem;
+    padding-bottom: .3rem;
     .comfirmButtom{
         text-align: center;
     }
