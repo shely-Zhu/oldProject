@@ -9,13 +9,17 @@
 * accountType  客户类型  0-机构 1-个人
 *
 * url 认证成功跳转页面
+<<<<<<< HEAD
 
 * @author zhangyanping  2020-01-12
 * 添加组件的埋点的相关的代码
 * 
+*
+*
+* judgeCompanyFlag // true 需判断机构不可转入或买入或定投 false 机构可转入或买入或定投
 */
 
-module.exports = function(fundCode, url,htmdEvt) {
+module.exports = function(fundCode, url, judgeCompanyFlag,htmdEvt) {
 	var auth = {
 		$e:{
             
@@ -51,8 +55,24 @@ module.exports = function(fundCode, url,htmdEvt) {
                     var data = json.data
                     that.gV.accountType = data.accountType
                     that.gV.userStatus = data.investFavour
-                    // 获取用户各审核情况，共5条
-        			that.initAuth();
+                    // true 判断机构可不可操作买入等按钮
+                    if(judgeCompanyFlag) {
+                    	if(that.gV.accountType == 1) {
+                    		that.initAuth();
+                    	} else {
+                    		$.elasticLayer({
+					            id: "tip",
+					            title: '提示',
+					            p: '<p>暂不支持机构客户进行交易</p>',
+					            zIndex: 100,
+					            hideCelButton: true,
+					            yesTxt: '明白了'
+					        });
+                    	}
+                    } else {
+                    	// 获取用户各审核情况，共5条
+                    	that.initAuth();
+                    }
                 },
                 callbackNoData:function(json){
 					tipAction(json.message);
@@ -417,7 +437,7 @@ module.exports = function(fundCode, url,htmdEvt) {
 				var type = that.gV.singleaAuthenType;
 				$(".isRiskMatch_mask").hide();
 				$(".isRiskMatchBox").hide();
-				if(!that.gV.isWealthAccountStatus||that.gV.accountType == 0|| that.gV.accountType == 2){
+				if(!that.gV.isWealthAccountStatus){
 					//未开通账户
 					return false
 				}

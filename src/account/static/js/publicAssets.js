@@ -244,11 +244,11 @@ $(function() {
                     if (id == "cashPageLists") {
                         //现金宝
                         var url = site_url.pofCashTransformIn_url + "?fundCode=" + fundCode + "&noReload=1";
-                        authenticationProcess(fundCode, url,'publicAssets_cash')
+                        authenticationProcess(fundCode, url, true,'publicAssets_cash')
                     } else {
                         //普通基金
                         var url = site_url.fundTransformIn_url + '?fundCode=' + fundCode + '&fundName=' + fundName;
-                        authenticationProcess(fundCode, url,'publicAssets')
+                        authenticationProcess(fundCode, url, false,'publicAssets')
                         //window.location.href = site_url.fundTransformIn_url + '?fundCode=' + fundCode + '&fundName=' + fundName;
                     }
                 }

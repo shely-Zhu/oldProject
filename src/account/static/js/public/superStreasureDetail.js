@@ -460,7 +460,7 @@ $(function() {
                 var result = frozenAccount("buyFreeze", window.location.href, false,'superStreasureDetail_7');
                 if( !result ) {
                     var url = site_url.pofCashTransformIn_url+ "?fundName=" +that.gL.fundName + "&fundCode=" +that.gL.fundCode;
-                    authenticationProcess(that.gL.fundCode, url,'superStreasureDetail')
+                    authenticationProcess(that.gL.fundCode, url, true,'superStreasureDetail')
                 };
 
             }, {

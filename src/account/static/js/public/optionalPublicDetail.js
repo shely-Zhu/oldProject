@@ -799,16 +799,17 @@ $(function() {
 				var type = that.gV.singleaAuthenType;
 				$(".isRiskMatch_mask").hide();
 				$(".isRiskMatchBox").hide();
-				if(!that.gV.isWealthAccountStatus||that.gV.accountType == 0|| that.gV.accountType == 2){
+				/*if(!that.gV.isWealthAccountStatus||that.gV.accountType == 0|| that.gV.accountType == 2){
 					//未开通账户
 					return false
-				}
+				}*/
+				// 机构可以买入，但不可定投
 				if(type == "into"){
 					//买入一键认证
 					window.location.href = site_url.fundTransformIn_url+"?fundCode="+that.data.fundCode+"&noReload=1";
 			   }else if(type == "investement"){
 					//定投一键认证
-					window.location.href = site_url.ordinarySetThrow_url+"?fundCode="+that.data.fundCode+'&type=add';			
+					window.location.href = site_url.ordinarySetThrow_url+"?fundCode="+that.data.fundCode+'&type=add';
 			   }
 			},{
 				'htmdEvt': 'optionalPublicDetail_11'
@@ -1077,9 +1078,21 @@ $(function() {
 		                    var data = json.data
 		                    that.gV.accountType = data.accountType
 		                    that.gV.userStatus = data.investFavour
-		                    // 获取用户各审核情况，共5条
-		        			that.getConditionsOfOrder("investement");
-							that.gV.singleaAuthenType = "investement";
+		                    // 机构不可定投
+		                    if(that.gV.accountType == 1) {
+		                    	// 获取用户各审核情况，共5条
+			        			that.getConditionsOfOrder("investement");
+								that.gV.singleaAuthenType = "investement";
+		                    } else {
+		                    	$.elasticLayer({
+						            id: "tip",
+						            title: '提示',
+						            p: '<p>暂不支持机构客户进行交易</p>',
+						            zIndex: 100,
+						            hideCelButton: true,
+						            yesTxt: '明白了'
+						        });
+		                    }
 		                },
 		                callbackNoData:function(json){
 							tipAction(json.message);

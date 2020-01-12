@@ -166,7 +166,7 @@ $(function() {
                     var result = frozenAccount("buyFreeze", window.location.href, false,'newFundDetail_4');
                     if( !result ) {
                        var url = site_url.fundTransformIn_url + '?fundCode=' + that.getElements.fundCode + '&fundName=' + that.getElements.chiName+"&noReload=1";
-                       authenticationProcess(that.getElements.fundCode, url,'newFundDetail')
+                       authenticationProcess(that.getElements.fundCode, url, false,'newFundDetail')
                     };
                     //that.getConditionsOfOrder();
                 }
