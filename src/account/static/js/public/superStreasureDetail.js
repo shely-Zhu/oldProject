@@ -460,7 +460,7 @@ $(function() {
                 var result = frozenAccount("buyFreeze", window.location.href, false);
                 if( !result ) {
                     var url = site_url.pofCashTransformIn_url+ "?fundName=" +that.gL.fundName + "&fundCode=" +that.gL.fundCode;
-                    authenticationProcess(that.gL.fundCode, url)
+                    authenticationProcess(that.gL.fundCode, url, true)
                 };
 
                 // 账户过期弹窗
