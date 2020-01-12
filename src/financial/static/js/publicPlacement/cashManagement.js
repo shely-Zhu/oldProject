@@ -141,7 +141,7 @@ $(function () {
         var result = frozenAccount("buyFreeze", window.location.href, false,'cashManagement_07');
         if( !result ) {
           var url = site_url.pofCashTransformIn_url + '?fundCode='+ fundCode + '&fundName=' + fundName;
-          authenticationProcess(fundCode, url)
+          authenticationProcess(fundCode, url, true)
         };
       }, {
 				htmdEvt: 'cashManagement_02'

@@ -420,7 +420,7 @@ $(function () {
                 if( !result ) {
                   var fundCode = splitUrl['fundCode']
                   var url = site_url.pofOrdinarySetThrow_url + '?fundCode=' + fundCode + '&fundName=' + that.gV.secuSht + '&type=add';
-                  authenticationProcess(fundCode, url)
+                  authenticationProcess(fundCode, url, true)
                 };
                 /*that.getConditionsOfOrder("investement");
                 that.gV.singleaAuthenType = "investement"*/
@@ -437,7 +437,7 @@ $(function () {
                if( !result ) {
                 var fundCode = splitUrl['fundCode']
                   var url = site_url.fundTransformIn_url + '?fundCode=' + fundCode + '&fundName=' + that.gV.secuSht+"&noReload=1";
-                  authenticationProcess(fundCode, url)
+                  authenticationProcess(fundCode, url, false)
                 };
                 /*that.getConditionsOfOrder("into");
                 that.gV.singleaAuthenType = "into"*/
