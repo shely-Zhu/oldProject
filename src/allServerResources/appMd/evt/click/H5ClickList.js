@@ -177,6 +177,8 @@ var clickList = {
 	"cashManagement_04" : { type:'click', evtid: 'cashManagement_04', topic: '现金管理-了解现金管理', info: ''} ,
 	"cashManagement_05" : { type:'click', evtid: 'cashManagement_05', topic: '现金管理-认证', info: ''} ,
 	"cashManagement_06" : { type:'click', evtid: 'cashManagement_06', topic: '现金管理-一键认证', info: ''} ,
+	"cashManagement_07" : { type:'click', evtid: 'cashManagement_07', topic: '现金管理-转入账户冻结判断', info: ''} ,
+	"cashManagement_08" : { type:'click', evtid: 'cashManagement_08', topic: '现金管理-转出账户冻结判断', info: ''} ,
 	//现金转入  cashTransformIn.html
 	"cashTransformIn_01" : { type:'click', evtid: 'cashTransformIn_01', topic: '现金转入-打开银行卡列表', info: ''} ,
 	"cashTransformIn_02" : { type:'click', evtid: 'cashTransformIn_02', topic: '现金转入-关闭银行卡列表', info: ''} ,
@@ -492,6 +494,11 @@ var clickList = {
 	"optionalPublicDetail_13":{ type:'click', evtid: 'optionalPublicDetail_13', topic: '公募自选资产详情页_风险等级匹配失败结果跳转', info: ''},
 	"optionalPublicDetail_14":{ type:'click', evtid: 'optionalPublicDetail_14', topic: '公募自选资产详情页_认证', info: ''},
 	"optionalPublicDetail_15":{ type:'click', evtid: 'optionalPublicDetail_15', topic: '公募自选资产详情页_一键认证', info: ''},
+	"optionalPublicDetail_16":{ type:'click', evtid: 'optionalPublicDetail_16', topic: '公募自选资产详情页_赎回判断', info: ''},
+	"optionalPublicDetail_17":{ type:'click', evtid: 'optionalPublicDetail_17', topic: '公募自选资产详情页_买入判断', info: ''},
+	"optionalPublicDetail_18":{ type:'click', evtid: 'optionalPublicDetail_18', topic: '公募自选资产详情页_定投判断', info: ''},
+
+
 
 	"superRecord_0":{ type:'click', evtid: 'superRecord_0', topic: '超宝基金产品-交易记录_列表点击', info: ''},
 	

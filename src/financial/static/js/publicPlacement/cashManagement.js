@@ -138,7 +138,7 @@ $(function () {
         that.gV.transformInFundCode = fundCode;
         that.gV.transformInFundName = fundName;
         // 先判断是否司法冻结以及身份过期，再判断一键认证
-        var result = frozenAccount("buyFreeze", window.location.href, false);
+        var result = frozenAccount("buyFreeze", window.location.href, false,'cashManagement_07');
         if( !result ) {
           var url = site_url.pofCashTransformIn_url + '?fundCode='+ fundCode + '&fundName=' + fundName;
           authenticationProcess(fundCode, url)
@@ -152,7 +152,7 @@ $(function () {
         var productName = $(this).parent().parent().find(".itemTop .itemTitle span").eq(0)[0].innerHTML;
         var fundCode = $(this).parent().parent().find(".itemTop .itemTitle span").eq(0).attr("fundCode")
         // 先判断是否司法冻结以及身份过期，再判断一键认证
-        var result = frozenAccount("saleFreeze", window.location.href, false);
+        var result = frozenAccount("saleFreeze", window.location.href, false,'cashManagement_08');
         if( !result ) {
           window.location.href = site_url.pofCashTransformOut_url + '?fundCode=' + fundCode + '&productName=' + new Base64().encode(productName);
         };
