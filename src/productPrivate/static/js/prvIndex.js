@@ -110,7 +110,6 @@ var index = {
                             jsonData.maskCertNo.substring(14, 15) % 2 == 0 ? that.gender = "女士" : that.gender = "先生";
                         } else if (jsonData.maskCertNo.length == "18") {
                             jsonData.maskCertNo.substring(16, 17) % 2 == 0 ? that.gender = "女士" : that.gender = "先生";
-                        }
                     } else {
                         that.idNum = false;
                     }
