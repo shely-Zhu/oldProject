@@ -42,21 +42,48 @@ var tradeList = {
             callbackDone: function(json) {
                 var jsonData = json.data;
 
-
                 riskLevel = Number(jsonData.endurePri); // 风险承受能力
 
-                var src = '/intelligentInvestment/static/img/' + riskLevel + '.png';
+                //兼容cdn处理
+                var riskImg = {
+                    riskImg_1: false,
+                    riskImg_2: false,
+                    riskImg_3: false,
+                    riskImg_4: false,
+                    riskImg_5: false,
+                }; 
+
+                if( riskLevel == 1){
+                    riskImg.riskImg_1 = true;
+                }
+                else if( riskLevel == 2){
+                    riskImg.riskImg_2 = true;
+                }
+                else if( riskLevel == 3){
+                    riskImg.riskImg_3 = true;
+                }
+                else if( riskLevel == 4){
+                    riskImg.riskImg_4 = true;
+                }
+                else if( riskLevel == 5){
+                    riskImg.riskImg_5 = true;
+                }
+
+                var myTemplate = Handlebars.compile($("#img_template").html());
+                $('.images').html(myTemplate(riskImg));
+
+                // var src = '/intelligentInvestment/static/img/' + riskLevel + '.png';
                 // 风险等级对应的参数
                 that.typeSelect(riskLevel);
 
                 //风险等级对应的图片
-                $('.images img').attr('src', src);
+                // $('.images img').attr('src', src);
 
                 // 风险承受能力
-                $('.riskType').html(that.typeObj.typePd);
+                $('.riskType').html(that.typeObj.typePd); 
 
                 // 不同风险等级的描述文案
-                that.findContentByCategory();
+                that.findContentByCategory(); 
                 // 按钮置灰暂不可用
                $('.developPlans').attr("disabled", true).addClass('disable');
             },
