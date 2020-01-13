@@ -498,24 +498,56 @@ $(function() {
         },
        events:function(){
             var that = this;
-            var dtPicker = new mui.DtPicker({
-                type: 'date'
-            });
+            // var dtPicker = new mui.DtPicker({
+            //     type: 'date'
+            // });
             // 购买日期选择
-            mui("body").on("mdClick", ".addOtherFund_content .mui-icon-arrowright,#dataPickDec", function() {
-                var type = $(this).attr("type");
-                $('.popup').show()
-                $("#dataPickDec").hide();
-                //$('.popup-content .popup-mask').hide();
-                $('.mui-dtpicker').show()
-                that.gV.dataPickData = "";
-                // 监听日期选择点击事件
-                dtPicker.show(function(selectItems) {
-                    $('.popup-mask').show();
-                    // $('.popup').css('display', 'none')
-                    that.gV.dataPickData = selectItems.value;
-                    $(".dataPick")[0].textContent = selectItems.value;
-                })
+            mui("body").on("mdClick", ".addOtherFund_content .mui-icon-arrowright,.addOtherFund_content .dataPick,#dataPickDec", function() {
+                if($('.addOtherFund_content .dataPick').text() =='请选择'||$('.addOtherFund_content .dataPick').text()==''){
+                    $('.addOtherFund_content .dataPick').text('请选择');
+                    if($('body').find('.mui-dtpicker').length==0){
+                        var dtPicker = new mui.DtPicker({
+                            type: 'date'
+                        });
+                        var type = $(this).attr("type");
+                        $('.popup').show()
+                        $("#dataPickDec").hide();
+                        //$('.popup-content .popup-mask').hide();
+                        $('.mui-dtpicker').show()
+                        that.gV.dataPickData = "";
+                        // 监听日期选择点击事件
+                        dtPicker.show(function(selectItems) {
+                            $('.popup-mask').show();
+                            // $('.popup').css('display', 'none')
+                            that.gV.dataPickData = selectItems.value;
+                            $(".dataPick")[0].textContent = selectItems.value;
+                        })
+                    }
+                }else{
+                    $('.mui-dtpicker').remove();
+                    $('.mui-backdrop').remove();
+                    if($('body').find('.mui-dtpicker').length<=1){
+                    var dtPicker = new mui.DtPicker({
+                        type: 'date'
+                    });
+                    var type = $(this).attr("type");
+                    $('.popup').show()
+                    $("#dataPickDec").hide();
+                    //$('.popup-content .popup-mask').hide();
+                    $('.mui-dtpicker').show()
+                    that.gV.dataPickData = "";
+                    // 监听日期选择点击事件
+                    dtPicker.show(function(selectItems) {
+                        $('.popup-mask').show();
+                        // $('.popup').css('display', 'none')
+                        that.gV.dataPickData = selectItems.value;
+                        $(".dataPick")[0].textContent = selectItems.value;
+                    })
+                }
+                    
+                }
+                
+                
             },{
                 'htmdEvt':'fundAccountDiagnosisResult_01'
             })

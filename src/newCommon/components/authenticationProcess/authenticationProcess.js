@@ -9,11 +9,10 @@
 * accountType  客户类型  0-机构 1-个人
 *
 * url 认证成功跳转页面
-<<<<<<< HEAD
 
 * @author zhangyanping  2020-01-12
 * 添加组件的埋点的相关的代码
-* 
+* htmdEvt 代表埋点的属性，如当前页面只引用该组件一次，则htmdEvt的值为当前页面名，若多次引用，则需区分引用的场景，传入不同的值
 *
 *
 * judgeCompanyFlag // true 需判断机构不可转入或买入或定投 false 机构可转入或买入或定投

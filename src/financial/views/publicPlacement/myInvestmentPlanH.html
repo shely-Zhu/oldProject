@@ -27,40 +27,37 @@
                     </ul>
                 </div>
                 @@include('@pathCommonViews/goTop.html')
-                
+
             </section>
         </div>
         <script id="investmentPlan-template" type="text/x-handlebars-template">
-                {{#each this}}
-                    <li class="investmentPlan-item" data-id={{scheduledProtocolId}}>
-                        <div class="content-t">
-                            <h2>{{fundName}}</h2>
-                            <span>{{fixStateStr}}<i class="iconfont">&#xe636;</i></span>
-                        </div>
-                        <div class="content-c"> 
-                            <p>
-                                <span class="span-l">累积定投（元）</span>
-                                <span class="span-r">{{fixedBalanceMask}}</span>
-                            </p>
-                            <p>
-                                <span class="span-l">已投期数</span>
-                                {{#if totalTradeTimes_s}}
-                                <span class="span-r">{{totalTradeTimes}}</span>
-                                {{else}}
-                                <span class="span-r">--</span>
-                                {{/if}}
-                            </p>
-                            <p>
+            {{#each this}}
+            <li class="investmentPlan-item" data-id={{scheduledProtocolId}}>
+                <div class="content-t">
+                    <h2>{{fundName}}</h2>
+                    <span class="suspend">{{fixStateStr}}<i class="iconfont">&#xe636;</i></span>
+                </div>
+                <div class="content-c">
+                    <p>
+                        <span class="span-l">累积定投（元）</span>
+                        <span class="span-r">{{fixedBalanceMask}}</span>
+                    </p>
+                    <p>
+                        <span class="span-l">已投期数</span> {{#if totalTradeTimes_s}}
+                        <span class="span-r">{{totalTradeTimes}}</span> {{else}}
+                        <span class="span-r">--</span> {{/if}}
+                    </p>
+                    <p>
 
-                            </p>
-                        </div>
-                        <div class="content-b">
-                            每日一投定投{{fixedBalance}}元，下次扣款日期：{{nextFixrequestDate}}
-                        </div>
-                    </li>
-                {{/each}}
-            </script>
-        
+                    </p>
+                </div>
+                <div class="content-b">
+                    每日一投定投{{fixedBalance}}元，下次扣款日期：{{nextFixrequestDate}}
+                </div>
+            </li>
+            {{/each}}
+        </script>
+
     </div>
     @@include('@pathInclude/views/footer.html')
     <script src="/financial/static/js/publicPlacement/myInvestmentPlanH.js"></script>
