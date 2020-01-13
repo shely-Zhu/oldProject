@@ -38,9 +38,14 @@ if (!window.mdCallBack){
 //调用原生的函数 然后从 mdCallBack 回调中拿到原生的数据，合并H5的数据后发送到埋点服务器
 if (window.isAndroid) {
 	//这个是安卓操作系统
-	window.jsObj.baseMd();
+	if (window.jsObj){
+		window.jsObj.baseMd();
+	}
+	
 }
 if (window.isIOS) { 
 	//这个是ios操作系统
-	window.webkit.messageHandlers.baseMd.postMessage("baseMd");
+	if (window.webkit){
+		window.webkit.messageHandlers.baseMd.postMessage("baseMd");
+	}
 }
