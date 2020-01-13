@@ -1143,7 +1143,7 @@ gulp.task('html', function(cb) {
             }
             else if( options.env == 4){
                 //生产
-                dcDomain = 'https://dc.chtwm.com';
+                dcDomain = 'https://dcnew.chtwm.com';
             }
 
             fileCon = fileCon.replace('@dcDomain', dcDomain );
