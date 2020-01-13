@@ -11,6 +11,8 @@ require('@pathCommonBase/base.js');
 //ajax调用
 require('@pathCommonJs/ajaxLoading.js');
 require('@pathCommonCom/elasticLayer/transOutRule/transOutRule.js');
+//引入弹出层
+require('@pathCommonCom/elasticLayer/elasticLayer/elasticLayer.js');
 require('@pathCommonJs/components/elasticLayerTypeTwo.js');
 var splitUrl = require('@pathCommonJs/components/splitUrl.js')();
 var generateTemplate = require('@pathCommonJsComBus/generateTemplate.js');
@@ -42,6 +44,7 @@ $(function () {
 			popupTitle:$(".popup .bank-title"),  //银行卡弹窗标题
 		},
 		gV: { // 全局变量
+			identityType:"",//证件类型
 			fundBusinCode: '022',
 			fundStatus: '', //基金状态
 			balance: 0, //发生金额
@@ -89,6 +92,7 @@ $(function () {
                 callbackDone: function (json) {
                     var data = json.data
                     that.gV.accountType = data.accountType
+                    that.gV.identityType = data.identityType
                 }
             }]
             $.ajaxLoading(obj);
@@ -727,11 +731,24 @@ $(function () {
 			}) ;
 			//添加银行卡 -- 跳往原生
 			mui("body").on('mdClick','.popup-last',function(){
-				//判断是否是在线支付
-				var isonline = that.gV.payType==0?"?supportOnline=true":""
-				//跳往原生页面去修改密码
-				if(that.gV.doubleClickStatus){
-                    window.location.href = site_url.pofAddBankCard_url+isonline
+				if(that.gV.identityType != "0"){//非身份证认证客户添加银行卡需要提示
+					$.elasticLayer({
+			            id: "tip",
+			            title: '尊敬的客户',
+			            p: '<p>非身份证件客户如需添加银行卡，请联系您的理财师或拨打客服电话：400-8980-618</p>',
+			            zIndex: 10000,
+			            hideCelButton: true,
+			            yesTxt: '明白了'
+			        });
+//			        return false
+				}else{
+					//判断是否是在线支付
+					var isonline = that.gV.payType==0?"?supportOnline=true":""
+					//跳往原生页面去修改密码
+					if(that.gV.doubleClickStatus){
+	                    window.location.href = site_url.pofAddBankCard_url+isonline
+					}
+					
 				}
 
 			}, {

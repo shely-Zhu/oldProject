@@ -1,10 +1,9 @@
-
 /**
  * 调用埋点文件
  *
  * @author  yangjinlai 20191217
  */
-	
+
 //引入本项目所需的其他文件
 var mdPathList = require('./evt/path/H5PathList.js');
 var mdClickList = require('./evt/click/H5ClickList.js');
@@ -46,6 +45,3 @@ if (window.isIOS) {
 	//这个是ios操作系统
 	window.webkit.messageHandlers.baseMd.postMessage("baseMd");
 }
-
-
-
