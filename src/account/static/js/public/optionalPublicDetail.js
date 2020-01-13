@@ -231,6 +231,7 @@ $(function() {
 						//画的是七日年化折线图
 					    var seriesData = data.sevenIncomeRate;
 					}
+				var myChart = echarts.init( chartId,{},{width:$(".qrnhLine").width(),height:$(".qrnhLine").height()} );
 			} else if( type == 'wfsy'){
 				//画的是万份收益折线图
 				$("#wfsyLine").removeClass("hide")
@@ -244,9 +245,12 @@ $(function() {
 						//画的是万份受益折线图
 					    var seriesData = data.profitThoudValue;
 					}
+				var myChart = echarts.init( chartId,{},{width:$(".wfsyLine").width(),height:$(".wfsyLine").height()} );
 			}
+			
 			// {width:$(".line_area").width(),height:$(".line_area").height()}
-			var myChart = echarts.init( chartId,{},{width:$(".lineDraw").width(),height:$(".lineDraw").height()} );
+			// var myChart = echarts.init( chartId,{},{width:$(".lineDraw").width(),height:$(".lineDraw").height()} );
+			
 			myChart.setOption({
 			    tooltip: {
 			    	trigger: 'axis',
@@ -757,15 +761,17 @@ $(function() {
 					}
 					$('#qrnhLine').removeClass('hide');
 					$('#wfsyLine').addClass('hide');
+					that.drawLine( 'qrnh', that.data['qrnhWfsy'].oneMonth );	
 				}
 				else{
 					that.data.unit = "";//万份受益没有百分号
 					$('#wfsyLine').removeClass('hide');
 					$('#qrnhLine').addClass('hide');
+					that.drawLine( 'wfsy', that.data['qrnhWfsy'].oneMonth );	
 				}
 				$('.lineDraw .time').removeClass('active');
 				$('.lineDraw .oneMonth').addClass('active');
-				that.drawLine( 'wfsy', that.data['qrnhWfsy'].oneMonth );			
+				// that.drawLine( 'wfsy', that.data['qrnhWfsy'].oneMonth );			
 			},{
                 'htmdEvt': 'optionalPublicDetail_2'
             })
@@ -799,16 +805,17 @@ $(function() {
 				var type = that.gV.singleaAuthenType;
 				$(".isRiskMatch_mask").hide();
 				$(".isRiskMatchBox").hide();
-				if(!that.gV.isWealthAccountStatus||that.gV.accountType == 0|| that.gV.accountType == 2){
+				/*if(!that.gV.isWealthAccountStatus||that.gV.accountType == 0|| that.gV.accountType == 2){
 					//未开通账户
 					return false
-				}
+				}*/
+				// 机构可以买入，但不可定投
 				if(type == "into"){
 					//买入一键认证
 					window.location.href = site_url.fundTransformIn_url+"?fundCode="+that.data.fundCode+"&noReload=1";
 			   }else if(type == "investement"){
 					//定投一键认证
-					window.location.href = site_url.ordinarySetThrow_url+"?fundCode="+that.data.fundCode+'&type=add';			
+					window.location.href = site_url.ordinarySetThrow_url+"?fundCode="+that.data.fundCode+'&type=add';
 			   }
 			},{
 				'htmdEvt': 'optionalPublicDetail_11'
@@ -1077,9 +1084,21 @@ $(function() {
 		                    var data = json.data
 		                    that.gV.accountType = data.accountType
 		                    that.gV.userStatus = data.investFavour
-		                    // 获取用户各审核情况，共5条
-		        			that.getConditionsOfOrder("investement");
-							that.gV.singleaAuthenType = "investement";
+		                    // 机构不可定投
+		                    if(that.gV.accountType == 1) {
+		                    	// 获取用户各审核情况，共5条
+			        			that.getConditionsOfOrder("investement");
+								that.gV.singleaAuthenType = "investement";
+		                    } else {
+		                    	$.elasticLayer({
+						            id: "tip",
+						            title: '提示',
+						            p: '<p>暂不支持机构客户进行交易</p>',
+						            zIndex: 100,
+						            hideCelButton: true,
+						            yesTxt: '明白了'
+						        });
+		                    }
 		                },
 		                callbackNoData:function(json){
 							tipAction(json.message);

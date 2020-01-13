@@ -89,11 +89,11 @@ $(function() {
                                 }else{
                                     for(var i =0;i<len.length;i++){
                                         if(len[i].tradeType == "赎回"){
-                                            $(".photoleft").eq(i+15*that.gV.pageCurrent-15).addClass("test")
+                                            $(".photoleft").eq(i+10*that.gV.pageCurrent-10).addClass("test")
                                         }else if(len[i].tradeType == "申购"){                               
-                                            $(".photoleft").eq(i+15*that.gV.pageCurrent-15).addClass("testone")
+                                            $(".photoleft").eq(i+10*that.gV.pageCurrent-10).addClass("testone")
                                         }else if(len[i].tradeType == "认购"){
-                                            $(".photoleft").eq(i+15*that.gV.pageCurrent-15).addClass("testoneo")
+                                            $(".photoleft").eq(i+10*that.gV.pageCurrent-10).addClass("testoneo")
             
                                         }
                                     }

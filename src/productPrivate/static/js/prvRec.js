@@ -59,10 +59,10 @@ var prvRec = {
                     var jsonData = data.data;
                     if (jsonData.idnoCheckflag == "1") { //是否实名认证
                         that.name = jsonData.name;
-                        if(jsonData.sex == "" || jsonData.sex == null) {
+                        if(jsonData.sex === "" || jsonData.sex === null) {
                             $(".user .userName").html('<span class="name">' + that.name + '</span>');
                         } else{
-                            jsonData.sex == 0 ? that.gender = "女士" : that.gender = "先生";
+                            jsonData.sex == '0' ? that.gender = "女士" : that.gender = "先生";
                             $(".user .userName").html('<span class="name">' + that.name + '</span> <span class="gender">' + that.gender + '</span>');
                         }
                     } else {

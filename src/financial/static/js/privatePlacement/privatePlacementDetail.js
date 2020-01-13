@@ -1091,7 +1091,7 @@ $(function() {
                     if (!!isPopup && !singleaAuthen) { //如果弹出售前告知书
                         //发送ajax请求
                         var ReourceListobj = [{
-                            url: site_url.queryReourceList_api,
+                            url: site_url.queryReourceListNew_api,
                             data: {
                                 projectId: that.$e.projectId,
                                 fileType: isPopup

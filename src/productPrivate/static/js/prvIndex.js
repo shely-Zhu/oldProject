@@ -116,7 +116,7 @@ var index = {
                     }
                 }
                 that.getData();
-            },
+            }
              
         }]
         $.ajaxLoading(userObj);
