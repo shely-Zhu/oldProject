@@ -19,6 +19,19 @@ var pcParam = {
 
 pcParam.cn = splitUrl['cn'] ? splitUrl['cn'] : '';
 
+if(window.location.href.indexOf('/homePage/views/fortuneCollege/wealthResearch.html') != -1){ // 财富研究
+    if (window.isAndroid && window.jsObj) {
+        //这个是安卓操作系统
+        var md =  window.jsObj.baseMd();
+        md && $.extend({}, pcParam, md);
+    }
+    if (window.isIOS && window.webkit) {
+        //这个是ios操作系统
+        var md = window.webkit.messageHandlers.baseMd.postMessage("baseMd" )
+        md && $.extend({}, pcParam, md);
+    }
+}
+
 var mdObj = {
 	pf: 1, //pf参数，表示当前项目
 	type: "app",  //pc/app/wap
@@ -29,6 +42,7 @@ var mdObj = {
 	//除了埋点底层文件中配置的公用参数外，本项目埋点需要的其他参数，作为otherParam传过去，如没有可不传
 	otherParams: pcParam
 }
+
 
 window._htmd && window._htmd(mdObj);
 
