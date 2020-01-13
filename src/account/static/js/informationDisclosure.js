@@ -40,8 +40,7 @@ var prvMar = {
         var that = this;
 
         var obj = [{
-            url: site_url.queryReourceLabels_api,
-            // url: site_url.queryReourceList_api,
+            url: site_url.queryReourceLabelsNew_api,
             data: {
                 "projectId": that.status.projectId
             },

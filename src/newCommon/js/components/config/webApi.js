@@ -152,8 +152,12 @@ module.exports = function() {
     //  this.getArticle_api = http_url.web_url + '/account/articleExample';
     this.getArticle_api = http_url.web_url + '/content/frontend/getArticle';
     //信息披露
+    // 不加New的是 www-from格式的请求 ，加new的是json请求
     this.queryReourceLabels_api = http_url.web_url + '/pef/queryReourceLabels';
+    this.queryReourceLabelsNew_api = http_url.web_url + '/pef/queryReourceLabelsNew';
     this.queryReourceList_api = http_url.web_url + '/pef/queryReourceList';
+    this.queryReourceListNew_api = http_url.web_url + '/pef/queryReourceListNew';
+
     //修改分红方式接口
     this.updateDividend_api = http_url.web_url + '/pof/dividend/updateDividend';
 

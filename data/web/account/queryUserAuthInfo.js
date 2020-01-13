@@ -17,7 +17,7 @@ var data = Mock.mock({
         "buyFreeze": "0",
         "customerNo": 486472,
         "dealStatus": 0,
-        "endurePri": "1",
+        "endurePri": "5",
         "endurePriDesc": "保守型",
         "endurePriIsold": 0,
         "endurePubIsold": 0,
