@@ -124,7 +124,9 @@ $(function () {
                     that.changeVal('chgRat3m', 2)
                     that.changeVal('chgRat1y', 2)
                     that.changeVal('chgRatBgn', 2)
-                    that.gV.json.trDate = that.gV.json.trDate.slice(5)
+                    if(that.gV.json.trDate){
+                        that.gV.json.trDate = that.gV.json.trDate.slice(5)
+                    }
                     that.gV.json.fundType = that.fundType
                     that.gV.invTypCom = json.data.invTypCom
                     that.gV.secuSht = json.data.secuSht
