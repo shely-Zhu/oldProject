@@ -375,7 +375,13 @@ $(function() {
                     var isQualified = $(this).attr('data-isqualified'); //是否满足合格投资者
                     var isPubToPri = $(this).attr('data-ispubtopri'); //是否公转私
                     if (type == 'toCertif') { //去合格投资者认证
-                        window.location.href = site_url.qualifiedInvestorResult_url;
+                        if (isElec == 0) {
+                            //非电子合同
+                            window.location.href = site_url.notElecSecondStep_url + '?isQualified=' + isQualified + '&projectName=' + projectName + '&projectId=' + proId;
+                        } else if (isElec == 1) {
+                            //电子合同跳转
+                            window.location.href = site_url.elecSecondStep_url + '?reserveId=' + reserveId + '&projectId=' + proId + '&projectName=' + projectName + '&isAllowAppend=' + isAllowAppend + '&isPubToPri=' + isPubToPri;
+                        }
                     } else if (type == 'toSign') { //去签合同
                         window.location.href = site_url.elecThirdStep_url + '?reserveId=' + reserveId + '&projectId=' + proId + '&projectName=' + projectName + '&isAllowAppend=' + isAllowAppend + '&isPubToPri=' + isPubToPri;
                     } else if (type == 'toSee') { //查看合同
