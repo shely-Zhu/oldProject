@@ -12,7 +12,7 @@
     fundCode	基金编号
     fundBusinCode	业务大类编号
     allotType	交易类别 0：购买 1：赎回 2：定投, 3：分红
-    Fixbusinflag	业务辅助代码
+    fixbusinflag	业务辅助代码
     scheduledProtocolId   定投编号
 
     超宝现金宝需要带入的参数
@@ -138,7 +138,7 @@ $(function () {
                     fundCode: splitUrl()['fundCode'],
                     fundBusinCode: splitUrl()['fundBusinCode'],
                     allotType: that.gV.allotType,
-                    Fixbusinflag: splitUrl()['Fixbusinflag'],
+                    fixbusinflag: splitUrl()['fixbusinflag'],
                 },
                 callbackDone: function (json) {
                     that.events();
