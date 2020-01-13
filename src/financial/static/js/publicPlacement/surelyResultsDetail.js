@@ -89,8 +89,9 @@ $(function() {
                     applyId: that.gV.applyId,
                     fundCode: that.gV.fundCode,
                     fundBusinCode: that.gV.fundBusinCode,
+                    fixbusinflag: splitUrl['fixbusinflag']
                 },
-                //async: false,
+                //async: false, 
                 needDataEmpty: true,
                 callbackDone: function(json) {
                     if (json.status == '0000') {
