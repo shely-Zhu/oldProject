@@ -10,7 +10,8 @@ require('@pathCommonBase/base.js');
 require('@pathCommonJs/ajaxLoading.js');
 
 require('@pathIncludJs/vendor/mui/mui.picker.min.js');
-require('@pathCommonJs/components/elasticLayer.js');
+//require('@pathCommonJs/components/elasticLayer.js');
+require('@pathCommonCom/elasticLayer/elasticLayer/elasticLayer.js');
 // require('@pathCommonJs/components/headBarConfig.js');
 var splitUrl = require('@pathCommonJs/components/splitUrl.js')();
 require('@pathCommonCom/elasticLayer/transOutRule/transOutRule.js');
@@ -55,7 +56,7 @@ $(function () {
 			
 			password: "",
 			
-			
+			identityType:"",//证件类型
 			nextDeductingDayFromate:'',  //定投协议签署入参（firstExchdate）专用
 			dayInWeek:'',  //app定投协议签署页面展示用,如果是8,说明此参数无效
 			dayInMonth:'',  //日期,定投协议签署,每日定投时候专用，如果为32,此参数无效
@@ -94,6 +95,21 @@ $(function () {
 			}
 			
 			that.getAgreeUrl();
+		},
+		// 获取客户类型
+        getUserInfo: function () {
+            var that = this;
+            // 请求页面数据
+            var obj = [{
+                url: site_url.queryUserBaseInfo_api,
+                data: {
+                },
+                callbackDone: function (json) {
+                    var data = json.data;
+                    that.gV.identityType = data.identityType
+                }
+            }]
+            $.ajaxLoading(obj);
 		},
 		getRate:function(val){
 		
@@ -1031,11 +1047,23 @@ $(function () {
 
 			//添加银行卡 -- 跳往原生
 			mui("body").on('mdClick','.popup-last',function(){
-				//判断是否是在线支付
-				var isonline = that.gV.payType==0?"?supportOnline=true":""
-				//跳往原生页面去修改密码
-				if(that.gV.doubleClickStatus){
-                    window.location.href = site_url.pofAddBankCard_url+isonline
+				if(that.gV.identityType != "0"){//非身份证认证客户添加银行卡需要提示
+					$.elasticLayer({
+			            id: "tip",
+			            title: '尊敬的客户',
+			            p: '<p>非身份证件客户如需添加银行卡，请联系您的理财师或拨打客服电话：400-8980-618</p>',
+			            zIndex: 10000,
+			            hideCelButton: true,
+			            yesTxt: '明白了'
+			       })
+				}else{
+					//判断是否是在线支付
+					var isonline = that.gV.payType==0?"?supportOnline=true":""
+					//跳往原生页面去修改密码
+					if(that.gV.doubleClickStatus){
+	                    window.location.href = site_url.pofAddBankCard_url+isonline
+					}
+					
 				}
 			}, {
 				htmdEvt: 'ordinarySetThrow_16'
