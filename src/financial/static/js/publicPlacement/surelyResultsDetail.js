@@ -89,7 +89,8 @@ $(function() {
                     applyId: that.gV.applyId,
                     fundCode: that.gV.fundCode,
                     fundBusinCode: that.gV.fundBusinCode,
-                    fixbusinflag: splitUrl['fixbusinflag']
+                    fixbusinflag: splitUrl['fixbusinflag'],
+                    isMoneyBuyPub: that.gV.flag == 'buy'? '1': '',
                 },
                 //async: false, 
                 needDataEmpty: true,
@@ -195,9 +196,6 @@ $(function() {
                 },
 
             }];
-            if (decodeURI(splitUrl['bugFundName']) != "false") {
-               obj[0].data.isMoneyBuyPub = "1"
-            }
 
             $.ajaxLoading(obj);
         },
