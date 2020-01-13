@@ -191,7 +191,7 @@ $(function() {
                         allotType: "2", //定投为2 买回0 赎回1
                         Fixbusinflag: "",
                     };
-                    window.location.href = site_url.publicTradeDetail_url + '?applyId=' + obj.applyId + '&fundCombination=' + obj.fundCombination + '&fundCode=' + obj.fundCode + '&fundBusinCode=' + obj.fundBusinCode + '&allotType=' + obj.allotType + '&Fixbusinflag=' + obj.Fixbusinflag
+                    window.location.href = site_url.publicTradeDetail_url + '?applyId=' + obj.applyId + '&fundCombination=' + obj.fundCombination + '&fundCode=' + obj.fundCode + '&fundBusinCode=' + obj.fundBusinCode + '&allotType=' + obj.allotType + '&fixbusinflag=' + obj.Fixbusinflag
 
                 }, {
                     htmdEvt: 'castSurelyDetails_04'

@@ -2,6 +2,8 @@
  * 会员俱乐部-活动列表
  * @author  liuhongyu 2019 10-31
  * update chentiancheng 2020年1月11日17:02:29
+ * update caoqihai 2020-1-13
+ * 修改  pageSize 为 5
  */
 
 require('@pathCommonBase/base.js');
@@ -28,7 +30,7 @@ $(function() {
             gV: { // 全局变量
                 groupCode: splitUrl['groupCode'], // 组合编号，从我的持仓进
                 startPage: 1, //当前页码，默认为1
-                pageSize: 10, //一页最大返回list个数
+                pageSize: 5, //一页最大返回list个数
                 listLength: 0,
                 actName: $('.activitySearchInput input').val(), //活动名称
                 actProvinceNO: $('#locationCity').attr('data-parentid'), //活动省份编号
