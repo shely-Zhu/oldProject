@@ -276,7 +276,6 @@ $(function() {
                 }
             }];
             $.ajaxLoading(obj);
-            debugger
       
         },
         getHoldData: function(t) {
@@ -288,7 +287,7 @@ $(function() {
                     "pageSize": that.gV.pageSize,
 
                 },
-                needDataEmpty: false,
+                needDataEmpty: true,
                 callbackDone: function(json) {
                     var data = json.data.holdShareList;
                     if (!json.data) {
