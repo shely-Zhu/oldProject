@@ -231,6 +231,7 @@ $(function() {
 						//画的是七日年化折线图
 					    var seriesData = data.sevenIncomeRate;
 					}
+				var myChart = echarts.init( chartId,{},{width:$(".qrnhLine").width(),height:$(".qrnhLine").height()} );
 			} else if( type == 'wfsy'){
 				//画的是万份收益折线图
 				$("#wfsyLine").removeClass("hide")
@@ -244,9 +245,12 @@ $(function() {
 						//画的是万份受益折线图
 					    var seriesData = data.profitThoudValue;
 					}
+				var myChart = echarts.init( chartId,{},{width:$(".wfsyLine").width(),height:$(".wfsyLine").height()} );
 			}
+			
 			// {width:$(".line_area").width(),height:$(".line_area").height()}
-			var myChart = echarts.init( chartId,{},{width:$(".lineDraw").width(),height:$(".lineDraw").height()} );
+			// var myChart = echarts.init( chartId,{},{width:$(".lineDraw").width(),height:$(".lineDraw").height()} );
+			
 			myChart.setOption({
 			    tooltip: {
 			    	trigger: 'axis',
@@ -757,15 +761,17 @@ $(function() {
 					}
 					$('#qrnhLine').removeClass('hide');
 					$('#wfsyLine').addClass('hide');
+					that.drawLine( 'qrnh', that.data['qrnhWfsy'].oneMonth );	
 				}
 				else{
 					that.data.unit = "";//万份受益没有百分号
 					$('#wfsyLine').removeClass('hide');
 					$('#qrnhLine').addClass('hide');
+					that.drawLine( 'wfsy', that.data['qrnhWfsy'].oneMonth );	
 				}
 				$('.lineDraw .time').removeClass('active');
 				$('.lineDraw .oneMonth').addClass('active');
-				that.drawLine( 'wfsy', that.data['qrnhWfsy'].oneMonth );			
+				// that.drawLine( 'wfsy', that.data['qrnhWfsy'].oneMonth );			
 			},{
                 'htmdEvt': 'optionalPublicDetail_2'
             })
