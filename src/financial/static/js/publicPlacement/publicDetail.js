@@ -296,6 +296,13 @@ $(function () {
             });
             //月 季 本年 一年 成立以来
             mui("body").on('mdClick', ".lineWrap .tab span ", function (e) {
+                if(that.gV.type==1){
+                    $("#line1").show()
+                    $(".noDataHintEcharts").hide()
+                }else{
+                    $("#line2").show()
+                    $(".noDataHintEcharts").hide()     
+                }
                 $(this).addClass('active').siblings().removeClass('active');
                 var time = Number($(this).attr('time'))
                 var myDate = new Date();
@@ -535,6 +542,11 @@ $(function () {
 
                     that.drawLine(type, newData)
 
+                },
+                callbackNoData:function(){
+                    $("#line1").hide()
+                    $("#line2").hide()
+                    $(".noDataHintEcharts").show()
                 }
             }]
             $.ajaxLoading(obj);
