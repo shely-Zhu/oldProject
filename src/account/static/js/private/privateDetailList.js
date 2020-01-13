@@ -515,7 +515,6 @@ $(function() {
                 //点击状态文字出现弹框
             mui("body").on('mdClick', '.openTip', function(e) {
                     event.stopPropagation();
-                    $('.mask').show();
                     $('#tipConOne').show();
                     var conText = $(this).siblings('.tipContent').html();
                     var obj = {
