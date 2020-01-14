@@ -184,7 +184,7 @@ $(function() {
                     // 一句话产品详情
                     $('.introduction').html(jsonData.productLightspot);
                     // 净值日期 非空判断
-                    if (jsonData.netValueDate == null || jsonData.netValueDate == "" || jsonData.netValueDate == undefined) {
+                    if (jsonData.netValueDate == null || jsonData.netValueDate == "" || jsonData.netValueDate == undefined || jsonData.netValueDate == '--') {
                         $('.netValueDate').html('--');
                     } else {
                         if(jsonData.incomeModeJF == '2'){
