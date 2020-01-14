@@ -28,7 +28,7 @@ $(function() {
         },
         gV: {
             pageCurrent: 1, //当前页码，默认为1
-            pageSize: 10,
+            pageSize: 15,
             search: false, // 搜索
         },
         init: function() {
