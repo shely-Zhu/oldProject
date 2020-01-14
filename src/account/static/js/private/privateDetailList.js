@@ -58,7 +58,7 @@ $(function() {
 
             //初始化第一屏区域的上拉加载
             that.initMui($('#scroll1'));
-            setCookie('isconfirm', 0)
+            setCookie('isconfirm', 0);
         },
 
         beforeFunc: function() { //拼模板，初始化左右滑动mui组件
@@ -109,10 +109,10 @@ $(function() {
                     if (index == 1) {
                         //已确认
                         $('.hopper').show();
-                        setCookie('isconfirm', 1)
+                        setCookie('isconfirm', 1);
                     } else {
                         $('.hopper').hide();
-                        setCookie('isconfirm', 0)
+                        setCookie('isconfirm', 0);
                     }
                     //data-scroll属性即当前左右切换区域的索引
                     that.gV.current_index = index;
@@ -165,7 +165,7 @@ $(function() {
 
 
             // 为实现滚动区域滚动到顶部，定位，添加遮罩层
-            $('.scroll_mask').css('top', that.gV.listToTop)
+            $('.scroll_mask').css('top', that.gV.listToTop);
         },
 
         initMui: function($id) { //$id   就是滑动区域的 id 节点
@@ -268,7 +268,6 @@ $(function() {
                                     var index = $('#slider .tab-scroll-wrap .mui-active').index(),
                                         $list = $("#move_" + index + " .list");
                                     $list.height(that.highHeight).addClass('noMove');
-                                    debugger
                                     // $list.addClass('noMove');
 
                                     // if( $("#move_"+index+" .noData").length ){
@@ -308,8 +307,7 @@ $(function() {
                             //$('.list').each( function( i, el){
 
                             //判断当前ul高度
-                            debugger
-                            var ulHeight = $list.find(".mui-table-view").height()
+                            var ulHeight = $list.find(".mui-table-view").height();
                             if (ulHeight < that.htmlHeight) {
 
                                 $list.height(that.highHeight).addClass('setHeight').addClass('noMove');
@@ -326,9 +324,9 @@ $(function() {
                         setTimeout(function() {
                             that.getElements.listLoading.hide();
                         }, 100);
-                        transcationTem(jsonData, $id.find('.list li'), $('#trans-template'))
+                        transcationTem(jsonData, $id.find('.list li'), $('#trans-template'));
                             //无缝滚动
-                        alwaysAjax($id.find('.mui-table-view-cell'), $id.find(".contentWrapper"), 2)
+                        alwaysAjax($id.find('.mui-table-view-cell'), $id.find(".contentWrapper"), 2);
                     }, 200)
 
 
@@ -452,7 +450,7 @@ $(function() {
 
                             },
                         };
-                        $.elasticLayer(obj)
+                        $.elasticLayer(obj);
 
                         // that.openTipCon('assign', '您确定要取消转让申请吗？', id);
 
@@ -469,7 +467,7 @@ $(function() {
 
                             },
                         };
-                        $.elasticLayer(obj)
+                        $.elasticLayer(obj);
                     } else if (type == 'appointment') {
                         var obj = {
                             p: '<p>您确定要取消预约吗？</p>',
@@ -505,7 +503,7 @@ $(function() {
                                 $.ajaxLoading(obj);
                             },
                         };
-                        $.elasticLayer(obj)
+                        $.elasticLayer(obj);
                     }
 
 
@@ -559,7 +557,7 @@ $(function() {
                     } else if (type == 'toUploadM') { //去上传汇款凭证
                         window.location.href = site_url.elecFourthStep_url + '?reserveId=' + reserveId + '&projectId=' + proId + '&projectName=' + projectName + '&isAllowAppend=' + isAllowAppend + '&isPubToPri=' + isPubToPri;
                     } else if (type == 'toView') { //详情
-                        window.location.href = site_url.privatePlacementDetail_url + '?projectId=' + proId
+                        window.location.href = site_url.privatePlacementDetail_url + '?projectId=' + proId;
                     } else if (type == 'toVideo') { //视频双录
                         window.location.href = site_url.realVideoTranscribe_url + '?type=toBeConfirmed';
                     } else if (type == 'toDown') { //下载电子合同
@@ -575,7 +573,7 @@ $(function() {
                 // 点击每一条进入详情
             mui("body").on('mdClick', '.transList', function(e) {
                 var proId = $(this).attr('data-projectid');
-                window.location.href = site_url.privatePlacementDetail_url + '?projectId=' + proId
+                window.location.href = site_url.privatePlacementDetail_url + '?projectId=' + proId;
             }, {
                 'htmdEvt': 'privateDetailList_7'
             })

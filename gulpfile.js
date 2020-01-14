@@ -1,4 +1,3 @@
-
 'use strict';
 
 /**
@@ -29,7 +28,7 @@ var gulp = require('gulp'),
     glob = require('glob'),
     // vinylPaths = require('vinyl-paths'),
     prefixUrl = require('gulp-prefix'),
-    modifyCssUrls = require('gulp-modify-css-urls'),//给文件中的所有路径添加前缀
+    modifyCssUrls = require('gulp-modify-css-urls'), //给文件中的所有路径添加前缀
     // cdnify = require('gulp-cdnify'),
 
     //其他所需文件
@@ -43,7 +42,7 @@ var gulp = require('gulp'),
     //把webpackList和newWebpackList合并
     webpackList = Object.assign(webpackList, newWebpackList);
 
-    var prefix = 'https://static.chtfund.com';//cdn服务地址
+var prefix = 'https://static.chtfund.com'; //cdn服务地址
 
 for (var i in webpackList) {
     webpackList[i] = webpackList[i].replace('/src/', '/middle/js/')
@@ -168,10 +167,16 @@ if (options.env === '0') {
     host.path = 'ht_pre_production/';
     host.zip_name = 'ht_pre_production';
 
+    //不加cdn域名
+    prefix = '';
+
 } else if (options.env === '4') {
     //生产的包进ht_production
     host.path = 'ht_production/';
     host.zip_name = 'ht_production';
+
+    //不加cdn域名
+    prefix = '';
 
 } else if (options.env === '5') {
     //生产的包进ht_production
@@ -218,8 +223,8 @@ gulp.task('proxyTask', function() {
                     // target: 'https://app.htjf4.com',
                     // target: 'http://172.16.187.129:8080',//李亚楠
                     // target: 'http://192.168.50.254:8085',
-                    // target: 'https://app.chtfundtest.com',
-                    target:"https://app.haomaojf.com",
+                    target: 'https://app.chtfundtest.com',
+                    // target:"https://app.haomaojf.com",
                     changeOrigin: true,
                     secure: false,
                 }),
@@ -228,8 +233,8 @@ gulp.task('proxyTask', function() {
                     // target: 'https://h5.htjf4.com',
                     //  target: 'http://172.16.187.129:8080',//李亚楠
                     // target: 'http://172.16.187.164:8081',
-                    // target: 'https://h5.chtfundtest.com',
-                    target:"https://h5.haomaojf.com",
+                    target: 'https://h5.chtfundtest.com',
+                    // target:"https://h5.haomaojf.com",
                     changeOrigin: true,
                     secure: false,
                 }),
@@ -452,36 +457,36 @@ gulp.task('bfRev', function() {
 
 /*******************************各种打包任务***********************************/
 
-gulp.task('commonImages', function( cb ) {
+gulp.task('commonImages', function(cb) {
     pump([
-        gulp.src(['src/newCommon/**/*.{jpg,png,jpeg,svg,gif}']),
+            gulp.src(['src/newCommon/**/*.{jpg,png,jpeg,svg,gif}']),
 
-        plugins.rev(),
+            plugins.rev(),
 
-        gulp.dest(host.path + 'allServerResources/include/commonImg/'),
+            gulp.dest(host.path + 'allServerResources/include/commonImg/'),
 
-        plugins.rev.manifest(),
+            plugins.rev.manifest(),
 
-        //修改manifest文件的路径
-        plugins.jsonEditor(function(json) {
-            var newJson = {};
-            for( var i in json ){
+            //修改manifest文件的路径
+            plugins.jsonEditor(function(json) {
+                var newJson = {};
+                for (var i in json) {
 
-                // var str_1 = json[i].substring( json[i].lastIndexOf('-') , json[i].length - 1 );
-                // var str_2 =  str_1.substring(0, str_1.indexOf('.'));
+                    // var str_1 = json[i].substring( json[i].lastIndexOf('-') , json[i].length - 1 );
+                    // var str_2 =  str_1.substring(0, str_1.indexOf('.'));
 
-                // json[i] = json[i].replace(str_2, '');
+                    // json[i] = json[i].replace(str_2, '');
 
-                newJson['/allServerResources/include/commonImg/' + i] = prefix + '/allServerResources/include/commonImg/' + json[i];
+                    newJson['/allServerResources/include/commonImg/' + i] = prefix + '/allServerResources/include/commonImg/' + json[i];
 
-                // newJson['/' + i] = prefix + '/' + json[i];
-            }
-            return newJson;
-        }),
+                    // newJson['/' + i] = prefix + '/' + json[i];
+                }
+                return newJson;
+            }),
 
-        gulp.dest( host.path + 'rev/allServerResources/include/commonImg/')
+            gulp.dest(host.path + 'rev/allServerResources/include/commonImg/')
 
-    ], cb)
+        ], cb)
         // .pipe(gulp.dest(host.path + 'allServerResources/include/commonImg/'));
 });
 
@@ -501,7 +506,7 @@ gulp.task('images', ['commonImages'], function(cb) {
         //修改manifest文件的路径
         plugins.jsonEditor(function(json) {
             var newJson = {};
-            for( var i in json ){
+            for (var i in json) {
 
                 // var str_1 = json[i].substring( json[i].lastIndexOf('-') , json[i].length - 1 );
                 // var str_2 =  str_1.substring(0, str_1.indexOf('.'));
@@ -513,7 +518,7 @@ gulp.task('images', ['commonImages'], function(cb) {
             return newJson;
         }),
 
-        gulp.dest( host.path + 'rev/img/')
+        gulp.dest(host.path + 'rev/img/')
     ], cb)
 });
 
@@ -538,111 +543,107 @@ gulp.task('allServerResources', function() {
 //并且生成版本号文件
 gulp.task("cssToHost", function() {
 
-    var imgRev_1 = fs.readFileSync( host.path + 'rev/allServerResources/include/commonImg/rev-manifest.json', 'utf-8');
+    var imgRev_1 = fs.readFileSync(host.path + 'rev/allServerResources/include/commonImg/rev-manifest.json', 'utf-8');
 
-    var imgRev_2 = fs.readFileSync( host.path + 'rev/img/rev-manifest.json', 'utf-8');
+    var imgRev_2 = fs.readFileSync(host.path + 'rev/img/rev-manifest.json', 'utf-8');
 
     //测试环境
     return gulp.src(['src/**/*.less', '!src/common/**/*.less', '!src/newCommon/**/*.less'])
 
-        //通过through处理相对路径
-        .pipe(
-            through.obj(function(file, enc, cb) {
+    //通过through处理相对路径
+    .pipe(
+        through.obj(function(file, enc, cb) {
 
-                file = changeCommonImg(file);
+            file = changeCommonImg(file);
 
-                file = pathVar(file);
+            file = pathVar(file);
 
-                //处理mui的引用
-                var fileCon = file.contents.toString();
+            //处理mui的引用
+            var fileCon = file.contents.toString();
 
-                // var re = new RegExp("@import[^\.]*\.css", 'g');
-                var commonImgArr = fileCon.match( /(@import)[^)]*\)/g );
+            // var re = new RegExp("@import[^\.]*\.css", 'g');
+            var commonImgArr = fileCon.match(/(@import)[^)]*\)/g);
 
-                if( commonImgArr && commonImgArr.length ){
+            if (commonImgArr && commonImgArr.length) {
 
-                    for( var i in commonImgArr ){
+                for (var i in commonImgArr) {
 
-                        //老版本的代码
-                        if(  commonImgArr[i].indexOf('.css') != -1 && commonImgArr[i].indexOf('include') != -1 ){
+                    //老版本的代码
+                    if (commonImgArr[i].indexOf('.css') != -1 && commonImgArr[i].indexOf('include') != -1) {
 
-                            //先判断有没有allServerResources的
-                            if( commonImgArr[i].indexOf('allServerResources') != -1 ){
-                                //新代码的
-                                var str = commonImgArr[i].substring( commonImgArr[i].indexOf('.'), commonImgArr[i].indexOf('allServerResources'));
-                            }
-                            else{
-                                //旧代码的
-                                var str = commonImgArr[i].substring( commonImgArr[i].indexOf('.'), commonImgArr[i].indexOf('include'));
-                            }
-                            
-                            var str_2 = commonImgArr[i].replace(str, prefix + '/');
-
-                            fileCon = fileCon.replace( commonImgArr[i] , str_2 )
+                        //先判断有没有allServerResources的
+                        if (commonImgArr[i].indexOf('allServerResources') != -1) {
+                            //新代码的
+                            var str = commonImgArr[i].substring(commonImgArr[i].indexOf('.'), commonImgArr[i].indexOf('allServerResources'));
+                        } else {
+                            //旧代码的
+                            var str = commonImgArr[i].substring(commonImgArr[i].indexOf('.'), commonImgArr[i].indexOf('include'));
                         }
+
+                        var str_2 = commonImgArr[i].replace(str, prefix + '/');
+
+                        fileCon = fileCon.replace(commonImgArr[i], str_2)
                     }
                 }
+            }
 
-                file.contents = new Buffer(fileCon);
+            file.contents = new Buffer(fileCon);
 
-                this.push(file);
-                cb()
-            })
-        )
+            this.push(file);
+            cb()
+        })
+    )
 
-        .pipe(plugins.less())
+    .pipe(plugins.less())
 
-        //给css文件里面所有的图片添加cdn的域名
-        .pipe(modifyCssUrls({
-            modify(url, filePath) {
+    //给css文件里面所有的图片添加cdn的域名
+    .pipe(modifyCssUrls({
+        modify(url, filePath) {
 
-                //从图片rev文件里找到那一条
-                if( imgRev_2.indexOf(url) != -1){
+            //从图片rev文件里找到那一条
+            if (imgRev_2.indexOf(url) != -1) {
 
-                    //在第一个文件里寻找
-                    var str = imgRev_2.substring( imgRev_2.indexOf(url) + url.length + 4, imgRev_2.length - 1  );
-                }
+                //在第一个文件里寻找
+                var str = imgRev_2.substring(imgRev_2.indexOf(url) + url.length + 4, imgRev_2.length - 1);
+            } else if (imgRev_1.indexOf(url) != -1) {
+                //在第一个文件里寻找
+                var str = imgRev_1.substring(imgRev_1.indexOf(url) + url.length + 4, imgRev_1.length - 1);
+            }
 
-                else if( imgRev_1.indexOf(url) != -1){
-                    //在第一个文件里寻找
-                    var str = imgRev_1.substring( imgRev_1.indexOf(url) + url.length + 4, imgRev_1.length - 1  );
-                }
+            if (!!str) {
+                var str_1 = str.substring(0, str.indexOf('\"'));
+            } else {
+                var str_1 = url;
+            }
+            return str_1;
 
-                if( !!str ){
-                    var str_1 = str.substring(0, str.indexOf('\"') );
-                }
-                else{
-                    var str_1 = url;
-                }
-                return str_1;
-
-            },
-            prepend: '',
-            // append: '?cache-buster'
-        }))
+        },
+        prepend: '',
+        // append: '?cache-buster'
+    }))
 
 
-        //预上线/线上环境时，压缩css
-        //设置这两个参数，防止去掉浏览器前缀和z-index值的变化
-        .pipe(plugins.if(options.env === '3' || options.env === '4', plugins.cssnano({ autoprefixer: false, zindex: false })))
+    //预上线/线上环境时，压缩css
+    //设置这两个参数，防止去掉浏览器前缀和z-index值的变化
+    .pipe(plugins.if(options.env === '3' || options.env === '4', plugins.cssnano({ autoprefixer: false, zindex: false })))
 
-        //修改当前文件的路径，将less替换为css
-        .pipe(
-            through.obj(function(file, enc, cb) {
-                //修改当前文件的路径到host.path下，且替换路径中的less为css
-                file.path = file.path.replace('less', 'css');
-                this.push(file);
-                cb()
-            })
-        )
+    //修改当前文件的路径，将less替换为css
+    .pipe(
+        through.obj(function(file, enc, cb) {
+            //修改当前文件的路径到host.path下，且替换路径中的less为css
+            file.path = file.path.replace('less', 'css');
+            this.push(file);
+            cb()
+        })
+    )
 
-        //与host.path中的内容做比对
-        .pipe(plugins.changed(host.path, { hasChanged: plugins.changed.compareSha1Digest }))
+    //与host.path中的内容做比对
+    .pipe(plugins.changed(host.path, { hasChanged: plugins.changed.compareSha1Digest }))
 
-        .pipe(plugins.if(isWatch, plugins.debug({ title: 'css-有变动的文件:' })))
+    .pipe(plugins.if(isWatch, plugins.debug({ title: 'css-有变动的文件:' })))
 
-        //修改当前文件的路径，将less替换为css
-        .pipe(
+    //修改当前文件的路径，将less替换为css
+    .pipe(
             through.obj(function(file, enc, cb) {
                 //修改当前文件的路径到host.path下，且替换路径中的less为css
                 file.path = file.path.replace('less', 'css');
@@ -652,12 +653,12 @@ gulp.task("cssToHost", function() {
         )
         //.pipe(gulp.dest(host.path))
 
-        //打版本号
-        .pipe(plugins.rev())
+    //打版本号
+    .pipe(plugins.rev())
 
 
 
-        .pipe(gulp.dest(host.path))
+    .pipe(gulp.dest(host.path))
         .pipe(plugins.rev.manifest())
         .pipe(gulp.dest(host.path + 'rev/css/'))
 })
@@ -667,8 +668,8 @@ gulp.task("includeCss", function() {
 
     return gulp.src(includeCssSrc)
 
-        //也加上压缩处理
-        .pipe(plugins.if(options.env === '3' || options.env === '4', plugins.cssnano({ autoprefixer: false, zindex: false })))
+    //也加上压缩处理
+    .pipe(plugins.if(options.env === '3' || options.env === '4', plugins.cssnano({ autoprefixer: false, zindex: false })))
         .pipe(gulp.dest(host.path))
 })
 
@@ -685,100 +686,100 @@ gulp.task("allServerResourcesInclude", function() {
 
     return gulp.src(['src/allServerResources/include/**/*.js'])
 
-        //与host.path中的内容做比对
-        .pipe(plugins.changed(host.path, { hasChanged: plugins.changed.compareSha1Digest }))
+    //与host.path中的内容做比对
+    .pipe(plugins.changed(host.path, { hasChanged: plugins.changed.compareSha1Digest }))
 
-        .pipe(plugins.if(isWatch, plugins.debug({ title: 'js-有变动的文件:' })))
+    .pipe(plugins.if(isWatch, plugins.debug({ title: 'js-有变动的文件:' })))
 
-        // .pipe(plugins.if(options.env === '3' || options.env === '4', plugins.uglify({ //压缩
-        //     mangle: false, //类型：Boolean 默认：true 是否修改变量名
-        //     compress: false, //类型：Boolean 默认：true 是否完全压缩
-        //     output: {
-        //         beautify: true //只去注释，不压缩成一行
-        //     }
-        // })))
+    // .pipe(plugins.if(options.env === '3' || options.env === '4', plugins.uglify({ //压缩
+    //     mangle: false, //类型：Boolean 默认：true 是否修改变量名
+    //     compress: false, //类型：Boolean 默认：true 是否完全压缩
+    //     output: {
+    //         beautify: true //只去注释，不压缩成一行
+    //     }
+    // })))
 
-        //对root.js做一些修改
-        .pipe(
-            through.obj(function(file, enc, cb) {
+    //对root.js做一些修改
+    .pipe(
+        through.obj(function(file, enc, cb) {
 
-                file = changeCommonImg(file);
+            file = changeCommonImg(file);
 
-                if (file.path.indexOf('root.js') != -1 && (options.env == '0' || options.env == "5")) {
-                    // if (file.path.indexOf('root.js') != -1 && (options.env == '0')) {
-                    //如果是本地或联调环境，修改env和envOrigin的值
-                    //且替换root.js里的本地ip
-                    //因测试、预生产、生产环境的root需运维在发版时在对应环境上修改
-                    //此处不处理
-                    var fileCon = file.contents.toString();
+            if (file.path.indexOf('root.js') != -1 && (options.env == '0' || options.env == "5")) {
+                // if (file.path.indexOf('root.js') != -1 && (options.env == '0')) {
+                //如果是本地或联调环境，修改env和envOrigin的值
+                //且替换root.js里的本地ip
+                //因测试、预生产、生产环境的root需运维在发版时在对应环境上修改
+                //此处不处理
+                var fileCon = file.contents.toString();
 
-                    fileCon = fileCon.replace(/localIp/g, localIp);
+                fileCon = fileCon.replace(/localIp/g, localIp);
 
-                    fileCon = 'var env = ' + options.env + ';\n' + 'var envOrigin = ' +
-                        options.envOrigin + ';\n' + fileCon.substring(fileCon.indexOf('//'));
+                fileCon = 'var env = ' + options.env + ';\n' + 'var envOrigin = ' +
+                    options.envOrigin + ';\n' + fileCon.substring(fileCon.indexOf('//'));
 
-                    file.contents = new Buffer(fileCon);
-                }
+                file.contents = new Buffer(fileCon);
+            }
+            this.push(file);
+            cb()
+        })
+    )
+
+    .pipe(plugins.if(options.env === '3' || options.env === '4', plugins.uglify({ //压缩
+        mangle: false, //类型：Boolean 默认：true 是否修改变量名
+        compress: false, //类型：Boolean 默认：true 是否完全压缩
+        output: {
+            beautify: true //只去注释，不压缩成一行
+        }
+    })))
+
+    // .pipe(gulp.dest(host.path + 'allServerResources/include/'))
+
+    // .pipe(plugins.rev())
+
+    .pipe(gulp.dest(host.path + 'allServerResources/include/'))
+
+    // .pipe(plugins.rev.manifest())
+
+
+    //修改manifest文件的路径
+    // .pipe(plugins.jsonEditor(function(json) {
+    //     var newJson = {};
+    //     for( var i in json ){
+
+    //         if( json[i].indexOf('root.js') == -1) {
+    //             var str_1 = json[i].substring( json[i].lastIndexOf('-') , json[i].length - 1 );
+    //             var str_2 =  str_1.substring(0, str_1.indexOf('.'));
+    //             json[i] = json[i].replace(str_2, '');
+    //         }
+    //         newJson['/' + i] = prefix + '/' + json[i];
+    //     }
+    //     return newJson;
+    // }))
+
+    // .pipe(gulp.dest(host.path + 'rev/allServerResources/include/js'));
+
+
+    //root.js需要打版本号
+    .pipe(
+        through.obj(function(file, enc, cb) {
+            if (file.path.indexOf('root.js') != -1) {
                 this.push(file);
-                cb()
-            })
-        )
-
-        .pipe(plugins.if(options.env === '3' || options.env === '4', plugins.uglify({ //压缩
-            mangle: false, //类型：Boolean 默认：true 是否修改变量名
-            compress: false, //类型：Boolean 默认：true 是否完全压缩
-            output: {
-                beautify: true //只去注释，不压缩成一行
             }
-        })))
+            cb()
+        })
+    )
 
-        // .pipe(gulp.dest(host.path + 'allServerResources/include/'))
+    //root.js不分环境都压缩
+    .pipe(plugins.uglify({ //压缩
+        mangle: false, //类型：Boolean 默认：true 是否修改变量名
+        compress: false, //类型：Boolean 默认：true 是否完全压缩
+        output: {
+            beautify: true //只去注释，不压缩成一行
+        }
+    }))
 
-        // .pipe(plugins.rev())
-
-        .pipe(gulp.dest(host.path + 'allServerResources/include/'))
-
-        // .pipe(plugins.rev.manifest())
-
-
-        //修改manifest文件的路径
-        // .pipe(plugins.jsonEditor(function(json) {
-        //     var newJson = {};
-        //     for( var i in json ){
-
-        //         if( json[i].indexOf('root.js') == -1) {
-        //             var str_1 = json[i].substring( json[i].lastIndexOf('-') , json[i].length - 1 );
-        //             var str_2 =  str_1.substring(0, str_1.indexOf('.'));
-        //             json[i] = json[i].replace(str_2, '');
-        //         }
-        //         newJson['/' + i] = prefix + '/' + json[i];
-        //     }
-        //     return newJson;
-        // }))
-
-        // .pipe(gulp.dest(host.path + 'rev/allServerResources/include/js'));
-
-
-        //root.js需要打版本号
-        .pipe(
-            through.obj(function(file, enc, cb) {
-                if (file.path.indexOf('root.js') != -1) {
-                    this.push(file);
-                }
-                cb()
-            })
-        )
-
-        //root.js不分环境都压缩
-        .pipe(plugins.uglify({ //压缩
-            mangle: false, //类型：Boolean 默认：true 是否修改变量名
-            compress: false, //类型：Boolean 默认：true 是否完全压缩
-            output: {
-                beautify: true //只去注释，不压缩成一行
-            }
-        }))
-
-        .pipe(plugins.rev())
+    .pipe(plugins.rev())
         .pipe(gulp.dest(host.path + 'allServerResources/include/'))
         .pipe(plugins.rev.manifest())
         .pipe(gulp.dest(host.path + 'rev/allServerResources/include/js'));
@@ -828,25 +829,25 @@ gulp.task("includeJs", ['htmd', 'allServerResourcesInclude'], function() {
     )
 
     .pipe(plugins.if(options.env === '3' || options.env === '4', plugins.uglify({ //压缩
-        mangle: false, //类型：Boolean 默认：true 是否修改变量名
-        compress: false, //类型：Boolean 默认：true 是否完全压缩
-        output: {
-            beautify: true //只去注释，不压缩成一行
-        }
-    })))
-    //
+            mangle: false, //类型：Boolean 默认：true 是否修改变量名
+            compress: false, //类型：Boolean 默认：true 是否完全压缩
+            output: {
+                beautify: true //只去注释，不压缩成一行
+            }
+        })))
+        //
 
     .pipe(gulp.dest(host.path + 'include/'))
 
     //root.js需要打版本号
     .pipe(
-            through.obj(function(file, enc, cb) {
-                if (file.path.indexOf('root.js') != -1) {
-                    this.push(file);
-                }
-                cb()
-            })
-        )
+        through.obj(function(file, enc, cb) {
+            if (file.path.indexOf('root.js') != -1) {
+                this.push(file);
+            }
+            cb()
+        })
+    )
 
     .pipe(plugins.uglify({ //压缩
         mangle: false, //类型：Boolean 默认：true 是否修改变量名
@@ -856,7 +857,7 @@ gulp.task("includeJs", ['htmd', 'allServerResourcesInclude'], function() {
         }
     }))
 
-        .pipe(plugins.rev())
+    .pipe(plugins.rev())
         .pipe(gulp.dest(host.path + 'include/'))
         .pipe(plugins.rev.manifest())
         .pipe(gulp.dest(host.path + 'rev/include/js'));
@@ -971,14 +972,14 @@ gulp.task("commonHtml", function(cb) {
 gulp.task("jsImgRev", function(cb) {
 
     pump([
-        gulp.src([ host.path + 'rev/**/*.json']),
+        gulp.src([host.path + 'rev/**/*.json']),
 
         //这两个字符串转成对象
         through.obj(function(file, enc, cb) {
 
             var fileCon = file.contents.toString();
 
-            fileCon = 'module.exports = ' + fileCon ;
+            fileCon = 'module.exports = ' + fileCon;
 
             file.contents = new Buffer(fileCon);
 
@@ -999,9 +1000,9 @@ gulp.task("jsImgRev", function(cb) {
 //非include文件夹下的js文件打包
 gulp.task("webpack", ['jsCpd', 'changePath', 'commonHtml', 'jsImgRev'], function(cb) {
 
-    var imgRev_1 = require( './' +  host.middle + 'jsImgRev/allServerResources/include/commonImg/rev-manifest.js');
+    var imgRev_1 = require('./' + host.middle + 'jsImgRev/allServerResources/include/commonImg/rev-manifest.js');
 
-    var imgRev_2 = require( './' + host.middle + 'jsImgRev/img/rev-manifest.js');
+    var imgRev_2 = require('./' + host.middle + 'jsImgRev/img/rev-manifest.js');
 
     //测试环境
     pump([
@@ -1133,20 +1134,18 @@ gulp.task('html', function(cb) {
 
             var dcDomain = 'http://localhost:9099';
 
-            if( options.env == 2){
+            if (options.env == 2) {
                 //测试环境
                 dcDomain = 'https://dc.qasa.chtwm.com';
-            }
-            else if( options.env == 3){
+            } else if (options.env == 3) {
                 //预生产
                 dcDomain = 'https://dc.uata.haomalljf.com';
-            }
-            else if( options.env == 4){
+            } else if (options.env == 4) {
                 //生产
                 dcDomain = 'https://dcnew.chtwm.com';
             }
 
-            fileCon = fileCon.replace('@dcDomain', dcDomain );
+            fileCon = fileCon.replace('@dcDomain', dcDomain);
 
             file.contents = new Buffer(fileCon);
 
@@ -1198,8 +1197,8 @@ gulp.task('rev', function() {
 
 
     .pipe(plugins.revCollector({
-        replaceReved: true
-    })) //- 执行html内版本号的替换
+            replaceReved: true
+        })) //- 执行html内版本号的替换
 
     .pipe(plugins.if(isWatch, plugins.debug({ title: '替换版本号的文件' })))
 
@@ -1300,14 +1299,14 @@ gulp.task('rootEnv', function() {
         for (var i = 0; i < rootName.length; i++) {
 
             (function(i) {
-                gulp.src([ host.path + 'allServerResources/include/js/vendor/*.js']) //- 读取 rev-manifest.json 文件
+                gulp.src([host.path + 'allServerResources/include/js/vendor/*.js']) //- 读取 rev-manifest.json 文件
 
                 .pipe(
                     through.obj(function(file, enc, cb) {
                         //if (options.env != '0' ) {
                         //非本地环境时
 
-                        if( file.path.indexOf('root') != -1 && file.path.indexOf('root.js') == -1){
+                        if (file.path.indexOf('root') != -1 && file.path.indexOf('root.js') == -1) {
                             var fileCon = file.contents.toString();
 
                             //替换真正的env和envOrigin变量，是根据root.js文件中第一行注释的//截取内容的，所以
@@ -1345,7 +1344,7 @@ gulp.task('rootEnv', function() {
 
 
                 //替换后的文件修改文件名，打出到middle/root文件夹中
-                .pipe(gulp.dest(host.middle + 'root/' + rootName[i] + '/' ))
+                .pipe(gulp.dest(host.middle + 'root/' + rootName[i] + '/'))
             })(i)
 
         }
