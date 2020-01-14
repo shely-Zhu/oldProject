@@ -20,6 +20,8 @@
 <body>
     <!-- 没有数据 -->
     @@include('@pathCommonViews/noData.html')
+    <!-- 加载中loading -->
+    @@include('@pathCommonViews/loading/listLoading.html')
     <section class="hotDiagnosis clearfix">
         <div class="fixedWrap">
             <!-- 搜索 -->
@@ -33,23 +35,7 @@
             <h2 class="h2_title">热门诊断</h2>
         </div>
         <!--热门诊断-->
-        <div class="hotFundList">
-            <div class="haveData list">
-                <div class="contentWrapper">
-                    <ul class="mui-table-view">
-                        <li class="mui-table-view-cell">
-                            <div class="card-theme">
-                                <!--放置热门列表-->
-                            </div>
-                        </li>
-                    </ul>
-                    <!-- 返回顶部 -->
-                    @@include('@pathCommonViews/goTop.html')
-                </div>
-            </div>
-            <!-- 加载中loading -->
-            @@include('@pathCommonViews/loading/listLoading.html')
-        </div>
+        <div class="haveData list"></div>
         <!-- 底部按钮 -->
         <div class="mui-row btnBottom">
             <div class="mui-col-xs-1">
@@ -65,7 +51,7 @@
     </section>
     <script id="fundList-template" type="text/x-handlebars-template">
     {{#each this}}
-        <div class="mui-row hd_to_detail">
+        <div class="mui-row hd_to_detail listItem">
             <div class="mui-col-xs-1">
                 {{#if first}}
                     <img class="imgNum" src="/commonResources/fundDiagnosis/static/img/first.png" >

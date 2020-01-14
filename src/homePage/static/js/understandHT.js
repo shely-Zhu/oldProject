@@ -86,7 +86,7 @@ $(function() {
             
             that.getTitleData();
 
-            that.getTemplateData( that.gV.belong[ that.gV.sortType ], that.gV.sortType )
+            that.getTemplateData( that.gV.belong[ that.gV.sortType ], that.gV.sortType );
 
             that.events();
         },
