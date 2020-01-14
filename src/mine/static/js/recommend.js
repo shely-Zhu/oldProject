@@ -82,7 +82,6 @@ $(function() {
                 needLogin: true,
                 callbackDone: function(json) {
                     var jsonData = json.data;
-                    debugger
                     that.setting.customerNo = jsonData.customerNo;
                 },
                     
