@@ -65,8 +65,8 @@ $(function(){
                         },                        
                         needDataEmpty: false,
                         needLoading: false,
-                        callbackDone: function(json) {     
-                            var data = json.data.pageList;
+                        callbackDone: function(json) {    
+                            var data = json.data.pageList?json.data.pageList:[];
                             if(that.gV.pageNo == 1 && data.length == 0) {
                                 $(".li").css("display", "none")
                                 that.$e.noData.show()
@@ -76,8 +76,10 @@ $(function(){
                             }
                         },
                         callbackNoData: function( json ){  
+                         
                             if(that.gV.pageNo == 1) {
                                 $(".li").css("display", "none")
+
                             }
                             def && def.reject( json, that.gV.pageNo );
                         },
