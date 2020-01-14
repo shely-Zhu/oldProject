@@ -359,6 +359,7 @@ var clickList = {
 	"fortune_06" : { type:'click', evtid: 'fortune_06', topic: '财富研究', info: ''} ,
 	"fortune_07" : { type:'click', evtid: 'fortune_07', topic: '财富研究列表', info: ''} ,
 	"fortune_08" : { type:'click', evtid: 'fortune_08', topic: '财富研究tab', info: ''} ,
+	"fortune_13":{ type:'click', evtid: 'fortune_13', topic: '财富学院金融翻译官', info: ''} ,
 	//fortuneFlowKnown.html
 	"fortune_09" : { type:'click', evtid: 'fortune_09', topic: '早知道列表', info: ''} ,
 	//fortuneClassroom.html

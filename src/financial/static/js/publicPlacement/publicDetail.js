@@ -638,6 +638,7 @@ $(function () {
                     axisTick: {
                         show: false
                     },
+                    min: 'dataMin',
                     axisLine: {
                         show: false
                     },

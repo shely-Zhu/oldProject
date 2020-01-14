@@ -183,36 +183,58 @@ $(function() {
 
                     // //在跳转模板的时候。首先判断是否是apps域名下的
 
-                    // if (window.location.hostname.indexOf('apps.') == 0) {
-                    //     if (splitUrl()['type'] == "publicOffering") {
-                    //         domainName = go_url.pofapp_url;
-                    //     }
-                    // } else if (envOrigin == '1') {
-                    //     domainName = go_url.wap_url;
-                    // } else {
-                    //     domainName = '';
-                    // }
-
-                    //如果域名用的是私募的apps.chtfund.com但是参数type=publicOffering前端需要将详情页定位到app的公募的域名上面去
-                    //之所以这么做是因为后台程龙代码做转发的时候banner配置的路径只转发了wap和apps的，无法转发apppof的，所以前端暂时控制
-                    if (splitUrl()['type'] == "publicOffering") { //是apppof
-
-                        $(".pubLocal").eq(i).attr("href", "/financial/views/publicPlacement/publicDetail.html?fundCode=" + el.productCode + "&fundType=" + el.pofType);
-
-                    } else if (splitUrl()['type'] == "privatePlacement") {
-
-                        //私募模板全部相处路径跳转（不区分app还是wap）//反之跳转wap对应的产品详情
-                        $(".priLocal").eq(i).attr("href", "/financial/views/privatePlacement/privatePlacementDetail.html?projectId=" + el.productCode);
-
-                    } else if (splitUrl()['type'] == "others") { //出图片不做处理
-
-                        console.log("type is others");
-
-
-                    } else { //type=publicOffering和wap的域名的时候的跳转路径
-
-                        $(".pubLocal").eq(i).attr("href", "/financial/views/publicPlacement/publicDetail.html?fundCode=" + el.productCode + "&fundType=" + el.pofType);
+                    if (window.location.hostname.indexOf('apps.') == 0) {
+                        if (splitUrl()['type'] == "publicOffering") {
+                            domainName = go_url.pofapp_url;
+                        }
+                    }else if(window.location.hostname.indexOf('h5.') != -1) {
+                        domainName = go_url.h5_url;
                     }
+                    else if (envOrigin == '1') {
+                        domainName = go_url.wap_url;
+                    } else {
+                        domainName = '';
+                    }
+
+                    if(window.location.hostname.indexOf('h5.') != -1){
+                        //如果域名用的是私募的apps.chtfund.com但是参数type=publicOffering前端需要将详情页定位到app的公募的域名上面去
+                        //之所以这么做是因为后台程龙代码做转发的时候banner配置的路径只转发了wap和apps的，无法转发apppof的，所以前端暂时控制
+                        if (splitUrl()['type'] == "publicOffering") { //是apppof
+                            $(".pubLocal").eq(i).attr("href", domainName + "/financial/views/publicPlacement/publicDetail.html?fundCode=" + el.productCode + "&fundType=" + el.pofType);
+                        } else if (splitUrl()['type'] == "privatePlacement") {
+                            //私募模板全部相处路径跳转（不区分app还是wap）//反之跳转wap对应的产品详情
+                            $(".priLocal").eq(i).attr("href", domainName + "/financial/views/privatePlacement/privatePlacementDetail.html?projectId=" + el.productCode);
+                        } else if (splitUrl()['type'] == "others") { //出图片不做处理
+                            console.log("type is others");
+                        } else { //type=publicOffering和wap的域名的时候的跳转路径
+                            $(".pubLocal").eq(i).attr("href", domainName + "/financial/views/publicPlacement/publicDetail.html?fundCode=" + el.productCode + "&fundType=" + el.pofType);
+                        }
+                    }else if (window.location.hostname.indexOf('apps.') != -1){
+                        //如果域名用的是私募的apps.chtfund.com但是参数type=publicOffering前端需要将详情页定位到app的公募的域名上面去
+                        //之所以这么做是因为后台程龙代码做转发的时候banner配置的路径只转发了wap和apps的，无法转发apppof的，所以前端暂时控制
+                        if (splitUrl()['type'] == "publicOffering") { //是apppof
+                            $(".pubLocal").eq(i).attr("href", domainName + "/productPublic/views/productDetail.html?fundCode=" + el.productCode + "&fundStatus=" + el.fundStatus);
+                        } else if (splitUrl()['type'] == "privatePlacement") {
+                            //私募模板全部相处路径跳转（不区分app还是wap）//反之跳转wap对应的产品详情
+                            $(".priLocal").eq(i).attr("href", domainName + "/productPrivate/views/prdPrvDetails.html?fundCode=" + el.productCode);
+                        } else if (splitUrl()['type'] == "others") { //出图片不做处理
+                            console.log("type is others");
+                        } else { //type=publicOffering和wap的域名的时候的跳转路径
+                            $(".pubLocal").eq(i).attr("href", domainName + "/productPublic/views/productDetail.html?fundCode=" + el.productCode + "&fundStatus=" + el.fundStatus);
+                        }
+                    }else{
+                        if (splitUrl()['type'] == "publicOffering") { //是apppof
+                            $(".pubLocal").eq(i).attr("href", domainName + "/productPublic/views/productDetail.html?fundCode=" + el.productCode + "&fundStatus=" + el.fundStatus);
+                        } else if (splitUrl()['type'] == "privatePlacement") {
+                            //私募模板全部相处路径跳转（不区分app还是wap）//反之跳转wap对应的产品详情
+                            $(".priLocal").eq(i).attr("href", domainName + "/productPrivate/views/prdPrvDetails.html?fundCode=" + el.productCode);
+                        } else if (splitUrl()['type'] == "others") { //出图片不做处理
+                            console.log("type is others");
+                        } else { //type=publicOffering和wap的域名的时候的跳转路径
+                            $(".pubLocal").eq(i).attr("href", domainName + "/productPublic/views/productDetail.html?fundCode=" + el.productCode + "&fundStatus=" + el.fundStatus);
+                        }
+                    }
+
                 });
 
                 that.getElements.contentBox.show(); //模板显示
