@@ -97,6 +97,12 @@ var mock_server = "http://localIp:8088", //前端本地开发时，接口调用�
     pofapp_haomaojf = "https://pofapp.haomaojf.com",
     pofapp_online = "https://pofapp.chtfund.com",
 
+    // app改版后h5的域名地址 静态资源所在服务器
+    h5_local = "https:/h5.htjf4.com",
+    h5_test = "https://h5.chtfuntest.com",
+    h5_haomaojf = "https://h5.haomaojf.com",
+    h5_online = "https://h5.chtfund.com",
+
 
     // sso登录域名
     sso_local = "https://sso.chtwmlocal.com",
@@ -199,6 +205,7 @@ if (!window.currentIsApp) {
         go_url.oauth_url = oauth_local_test; // 跳转地址需要
         go_url.onlineCustomer_url = onlineCustomer_test; // 在线客服
         go_url.marketCampaign_url = recommend_test;  // 营销活动
+        go_url.h5_url = h5_test;   // h5 静态资源
 
 
         if (envOrigin == 0) {
@@ -244,6 +251,7 @@ if (!window.currentIsApp) {
         go_url.oauth_url = oauth_local_test; // oauth域名
         go_url.onlineCustomer_url = onlineCustomer_test; // 在线客服
         go_url.marketCampaign_url = recommend_test;  // 营销活动
+        go_url.h5_url = h5_test;   // h5 静态资源
 
 
 
@@ -290,6 +298,7 @@ if (!window.currentIsApp) {
         go_url.oauth_url = oauth_haomaojf;
         go_url.onlineCustomer_url = onlineCustomer_haomaojf; // 在线客服
         go_url.marketCampaign_url = recommend_haomaojf;  // 营销活动
+        go_url.h5_url = h5_haomaojf;   // h5 静态资源
 
         if (envOrigin == 0) {
             //明泽
@@ -335,6 +344,7 @@ if (!window.currentIsApp) {
         go_url.oauth_url = oauth_online; // oauth域名
         go_url.onlineCustomer_url = onlineCustomer_online; // 在线客服
         go_url.marketCampaign_url = recommend_online;  // 营销活动
+        go_url.h5_url = h5_online;   // h5 静态资源
 
         if (envOrigin == 0) {
             //明泽
@@ -375,6 +385,7 @@ if (!window.currentIsApp) {
         d_url = d_url_local;
         go_url.marketCampaign_url = recommend_test;  // 营销活动
         go_url.onlineCustomer_url = onlineCustomer_test; // 在线客服
+        go_url.h5_url = h5_test;   // h5 静态资源
 
         if (envOrigin == 0) {
             //明泽
@@ -393,6 +404,7 @@ if (!window.currentIsApp) {
         d_url = d_url_test;
         go_url.marketCampaign_url = recommend_test;  // 营销活动
         go_url.onlineCustomer_url = onlineCustomer_test; // 在线客服
+        go_url.h5_url = h5_test;   // h5 静态资源
 
         if (envOrigin == 0) {
             //明泽
@@ -411,6 +423,7 @@ if (!window.currentIsApp) {
         d_url = d_url_haomaojf;
         go_url.marketCampaign_url = recommend_haomaojf;  // 营销活动
         go_url.onlineCustomer_url = onlineCustomer_haomaojf; // 在线客服
+        go_url.h5_url = h5_haomaojf;   // h5 静态资源
 
         if (envOrigin == 0) {
             //明泽
@@ -430,6 +443,7 @@ if (!window.currentIsApp) {
         d_url = d_url_online;
         go_url.marketCampaign_url = recommend_online;  // 营销活动
         go_url.onlineCustomer_url = onlineCustomer_online; // 在线客服
+        go_url.h5_url = h5_online;   // h5 静态资源
 
         if (envOrigin == 0) {
             //明泽

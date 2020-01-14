@@ -144,9 +144,9 @@ $(function() {
                         $("#wfsyLine").removeClass("hide");
                         // 涨跌幅
                         $('.priceLimit').removeClass('hide');
-                        // 单位净值
+                        // 单位净值  跟产品经理确认，这里展示后台返回的数据
                         if (jsonData.unitNetValue == null || jsonData.unitNetValue == "" || jsonData.unitNetValue == undefined) {
-                            $('.netValue').html('1.0000')
+                            $('.netValue').html('--')
                         } else {
                             $('.netValue').html(jsonData.unitNetValue);
                         }

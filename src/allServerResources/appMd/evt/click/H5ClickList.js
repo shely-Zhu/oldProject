@@ -362,8 +362,8 @@ var clickList = {
 	//fortuneFlowKnown.html
 	"fortune_09" : { type:'click', evtid: 'fortune_09', topic: '早知道列表', info: ''} ,
 	//fortuneClassroom.html
-	"fortune_10" : { type:'click', evtid: 'fortune_10', topic: '财富讲堂列表', info: ''} ,
-	"fortune_11" : { type:'click', evtid: 'fortune_11', topic: '财富讲堂详情tab', info: ''},
+	"fortune_10" : { type:'click', evtid: 'fortune_10', topic: '财富讲堂-大咖直播列表点击', info: ''} ,
+	"fortune_11" : { type:'click', evtid: 'fortune_11', topic: '财富讲堂-知识讲堂列表点击', info: ''},
 	//wealthResearch.html
 	"fortune_12":{ type:'click', evtid: 'fortune_12', topic: '财富研究详情tab', info: ''} ,
 	//understandHT.html
