@@ -423,6 +423,9 @@ $(function () {
 				},
 				//async: false,
 				needDataEmpty: true,
+				callbackLoginBack: function() {
+					that.$el.confirmBtn.removeAttr("disabled");
+				},
 				callbackDone: function(json) {
 					if(json.status == '0000'){
 						if(that.gV.type == 'add'){
@@ -439,6 +442,13 @@ $(function () {
 					}
 					
 				},
+				callbackFail: function(json) {
+					tipAction(json.message)
+					that.$el.confirmBtn.removeAttr("disabled");
+				},
+				callbackNoData: function() {
+					that.$el.confirmBtn.removeAttr("disabled");
+				}
 
 			}];
 			$.ajaxLoading(obj);

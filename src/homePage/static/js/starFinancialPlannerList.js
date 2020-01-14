@@ -484,6 +484,10 @@ $(function() {
                             callbackFail: function(data) {
                                 that.gV.FinancialerClickFlag = true;
                                 tipAction(data.message);
+                            },
+                            //如果没有登陆 去登录页面 变成可点击
+                            callbackLoginBack: function(){
+                                that.gV.FinancialerClickFlag = true;
                             }
                         }];
                         $.ajaxLoading(obj);
