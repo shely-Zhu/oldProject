@@ -110,6 +110,8 @@ $(function() {
                     // 根据收益分配方式区分 0固收 1浮收普通 2浮收稳裕 
                     console.log(that.data.incomeModeJF,jsonData.incomeModeJF)
                     that.data.incomeModeJF = jsonData.incomeModeJF;
+                    //默认隐藏
+                    $(".tipIcon").hide()
                     if (jsonData.incomeModeJF == '0') {
                         // 头部不同的展示
                         $('.fixedIncome').removeClass('hide');
@@ -144,8 +146,9 @@ $(function() {
                         $("#wfsyLine").removeClass("hide");
                         // 涨跌幅
                         $('.priceLimit').removeClass('hide');
-                        // 单位净值  跟产品经理确认，这里展示后台返回的数据
-                        if (jsonData.unitNetValue == null || jsonData.unitNetValue == "" || jsonData.unitNetValue == undefined) {
+                        // 单位净值  跟产品经理确认，这里展示后台返回的数据  产品肖金凤说页面展示的是净值时展示小问号提示按钮
+                        $(".tipIcon").show()
+                        if (jsonData.unitNetValue == null || jsonData.unitNetValue == "" || jsonData.unitNetValue == undefined || jsonData.unitNetValue == '--') {
                             $('.netValue').html('--')
                         } else {
                             $('.netValue').html(jsonData.unitNetValue);
@@ -221,9 +224,9 @@ $(function() {
                     }
                     //0 债权投资;1 证券投资（二级市场）;2 股权投资;3 海外投资;4 其他
                     if (jsonData.investDirect == "2" || jsonData.investDirect == "4") { // 债权投资、股权投资、其他服务不展示
-                        that.getElements.tipIcon.hide();
+                        // that.getElements.tipIcon.hide();
                     } else if (jsonData.investDirect == "0" || jsonData.investDirect == "1" || jsonData.investDirect == "3") { // 海外投资  （证券投资）二级市场展示
-                        that.getElements.tipIcon.show();
+                        // that.getElements.tipIcon.show();
                         var productModule = 'netValueCycleAPP';
                         that.queryProductImage(productModule);
                     };
