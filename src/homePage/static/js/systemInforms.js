@@ -27,12 +27,12 @@ $(function() {
         //页面初始化函数
         init: function() {
             var that = this;
-            this.getTitle()
+            this.getTitle();
             that.initMui();
             this.events()
         },
         getTitle: function() {
-            var mesType = Number(this.gV.mesType)
+            var mesType = Number(this.gV.mesType);
             switch (mesType) {
                 case 0:
                     $("#HeadBarpathName").html("系统通知");
@@ -46,7 +46,7 @@ $(function() {
                 case 3:
                     $("#HeadBarpathName").html("交易动态");
                     break;
-            }
+            };
         },
         //初始化mui的上拉加载
         initMui: function() {
@@ -79,11 +79,11 @@ $(function() {
                                 def && def.resolve( that.dealData(data), that.gV.pageCurrent);
                                 that.gV.pageCurrent++;
                             }
-                            $(".netLoading").hide()
+                            $(".netLoading").hide();
                         },
                         callbackNoData: function( json ){  
                             if(that.gV.pageCurrent == 1) {
-                                $(".list").css("display", "none")
+                                $(".list").css("display", "none");
                             }
                             def && def.reject( json, that.gV.pageCurrent );
                         },
@@ -187,12 +187,12 @@ $(function() {
         },*/
         dealData: function(data) {
             $.each(data, function(a, b) {
-                b.date = b.createTimeStr.split(" ")[0]
-                b.time = b.createTimeStr.split(" ")[1]
+                b.date = b.createTimeStr.split(" ")[0];
+                b.time = b.createTimeStr.split(" ")[1];
                 if(b.readStatus == 0) {
-                    b.badgeFlag = true
+                    b.badgeFlag = true;
                 } else {
-                    b.badgeFlag = false
+                    b.badgeFlag = false;
                 }
             })
             return data;

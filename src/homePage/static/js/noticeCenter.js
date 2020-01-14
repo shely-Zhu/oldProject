@@ -17,7 +17,7 @@ $(function(){
 		//页面初始化函数
 		init:function(){         
             this.getnoticeItemData();
-            this.events()
+            this.events();
         },
         // 获取消息getnoticeItemData中心列表
         getnoticeItemData:function() {
@@ -28,7 +28,7 @@ $(function(){
                 needLogin: true, //需要判断登录是否过期
                 needDataEmpty: true,
                 callbackDone: function(json) {
-                    console.log(json.data)
+                    console.log(json.data);
                     var data=that.dealData(json.data);  
                     generateTemplate(data,that.$e.noticeConTemplateId,that.$e.noticeItemListTemplateId);               
                 }
@@ -45,12 +45,12 @@ $(function(){
                     case 3: b.logoSrc = '/homePage/static/img/home_icon_transaction@2x.png'; b.mesTitle = "交易动态";break;
                 }
                 if(b.readStatus == 0) {
-                    b.badgeFlag = true
+                    b.badgeFlag = true;
                 } else {
-                    b.badgeFlag = false
+                    b.badgeFlag = false;
                 }
             })
-            console.log(data)
+            console.log(data);
             return data;
         },
         events:function() {
@@ -60,7 +60,7 @@ $(function(){
                 window.location.href = site_url.systemInforms_url + '?mesType=' + $(this).attr('mesType');
             },{
                 'htmdEvt': 'notice_00'
-            })
+            });
         },
 	};
 	somePage.init();

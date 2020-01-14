@@ -47,10 +47,10 @@ $(function() {
 
 
             that.getTabsListData(); //获取tabs标签
-            that.getDataBanner()
-            that.getFortuneCollegeFir()
-            that.getFortuneCollegeFirCf()
-            that.getFortuneForum()
+            that.getDataBanner();
+            that.getFortuneCollegeFir();
+            that.getFortuneCollegeFirCf();
+            that.getFortuneForum();
             //事件监听
             that.events();
         },
@@ -67,7 +67,7 @@ $(function() {
 
                     $.each(json.data.bannerList, function(i, el) {
                         imgArr.push({ imgUrl: el.imageUrlShowOnline, linkUrl: el.linkUrl });
-                    })
+                    });
                     Slider($('.banner'), imgArr);
                 }
             }]
@@ -84,10 +84,10 @@ $(function() {
                 needDataEmpty: true,
                 callbackDone: function(json) {
                     if (json.data && json.data.list && json.data.list.length > 0) {
-                        $('.translate').removeClass('hide')
-                        modelData = json.data.modelVO
-                        articleData = json.data.list
-                        console.log('我是什么', articleData)
+                        $('.translate').removeClass('hide');
+                        modelData = json.data.modelVO;
+                        articleData = json.data.list;
+                        console.log('我是什么', articleData);
                         // 将列表插入到页面上
                         generateTemplate(modelData, $('.translate .title'), $('#fortune-template'));
                         generateTemplate(articleData, $('.translate .content'), $('#content-template'));
@@ -107,14 +107,14 @@ $(function() {
                 needDataEmpty: true,
                 callbackDone: function(json) {
                     if (json.data && json.data.list && json.data.list.length > 0) {
-                        $(".fortuneVideo").removeClass('hide')
-                        modelData = json.data.modelVO
-                        articleData = json.data.list
+                        $(".fortuneVideo").removeClass('hide');
+                        modelData = json.data.modelVO;
+                        articleData = json.data.list;
 
                         // 将列表插入到页面上
                         generateTemplate(modelData, $('.fortuneVideo .title'), $('#fortuneCf-template'));
                         generateTemplate(articleData, $('.fortuneVideo ul'), $('#video-template'));
-                        $(".lazyload").lazyload()
+                        $(".lazyload").lazyload();
                     }
                 }
             }]
@@ -131,26 +131,26 @@ $(function() {
                 needDataEmpty: true,
                 callbackDone: function(json) {
                     if (json.data && json.data.list && json.data.list.length > 0) {
-                        $(".forum").removeClass('hide')
-                        listData = json.data.list
-                        console.log(listData)
-                        modelData = json.data.modelVO
+                        $(".forum").removeClass('hide');
+                        listData = json.data.list;
+                        console.log(listData);
+                        modelData = json.data.modelVO;
                         var listTitle = [];
                         var listContent = [];
                         for (var i = 0; i < listData.length; i++) {
                             listTitle.push({ sonModelName: listData[i].sonModelName })
                             listContent.push({ listContent: listData[i].list })
-                        }
-                        console.log('我是listtitle', listTitle)
-                        console.log('我是listContent', listContent)
+                        };
+                        console.log('我是listtitle', listTitle);
+                        console.log('我是listContent', listContent);
                         generateTemplate(modelData, $('.forum .title'), $('#forum-template'));
                         generateTemplate(listTitle, $('.broadcast'), $('#forumTitle'));
                         generateTemplate(listContent, $('.forumList'), $('#forumContent'));
-                        $(".lazyload").lazyload()
+                        $(".lazyload").lazyload();
                         setTimeout(function() {
                             $('.broadcast').find('.bigspan').eq(0).addClass('getColor');
                             $('.broadcast').find('.bigspan').eq(0).css({ "paddingLeft": 0, "borderLeft": 'none' });
-                        }, 100)
+                        }, 100);
                         mui('.mui-scroll-wrapper').scroll({
                             deceleration: 0.0005 //flick 减速系数，系数越大，滚动速度越慢，滚动距离越小，默认值0.0006 
                         });
@@ -188,7 +188,7 @@ $(function() {
                     id: i,
                     content: wrap_html
                 })
-            })
+            });
 
             var obj = {
                 wrapper: $('.myAsset'), //存放整个组件的区域
@@ -212,9 +212,9 @@ $(function() {
                     //没有hasPullUp class，表示没有初始化，调用initMui，进行初始化
                     //并请求第一次数据
                     // that.initMui(t);
-                    that.getData(t)
+                    that.getData(t);
                 }
-            }
+            };
             $.tabScroll(obj);
 
             //此时所有切换区域的内容都是空的
@@ -254,11 +254,11 @@ $(function() {
                 needDataEmpty: true,
                 callbackDone: function(json) {
                     if (json.data && json.data.list && json.data.list.length > 0) {
-                        $('.tabContent').removeClass("hide")
+                        $('.tabContent').removeClass("hide");
                         that.gV.navList = [];
-                        listData = json.data.list
-                        console.log('我是财富研究', listData)
-                        modelData = json.data.modelVO
+                        listData = json.data.list;
+                        console.log('我是财富研究', listData);
+                        modelData = json.data.modelVO;
                         for (var i = 0; i < json.data.list.length; i++) {
                             (function(i) {
                                 that.gV.navList[i] = {
@@ -267,7 +267,7 @@ $(function() {
                                     htmdEvt: 'fortuneCollegeList_' + i,
                                 }
                             })(i);
-                        }
+                        };
                         generateTemplate(modelData, $('.tabContent .title'), $('#tabContent-template'));
                         //拼模板，初始化左右滑动mui组件
                         that.beforeFunc();
@@ -283,7 +283,7 @@ $(function() {
         getData: function($id, t) { // 获取产品数据的公用ajax方法;$id为各区域的 scroll+num id
             var that = this;
             if ($id.find(".mui-table-view-cell").height() > 0) {
-                $("#slider").height($id.find(".mui-table-view-cell").height() + $(".mui-slider .nav-wrapper").height())
+                $("#slider").height($id.find(".mui-table-view-cell").height() + $(".mui-slider .nav-wrapper").height());
             }
             if (!$id.find('.list_item').length > 0) {
                 mui(".mui-slider").slider(); //就是左右切换 可以滑动的  初始化
@@ -465,17 +465,17 @@ $(function() {
             });
             // 列表页跳转到详情页
             mui("body").on('mdClick', '.list_item', function() {
-                var id = $(this).attr("id")
-                var articleBelong = $(this).attr("articleBelong")
-                var applyType = $(this).attr("applyType")
+                var id = $(this).attr("id");
+                var articleBelong = $(this).attr("articleBelong");
+                var applyType = $(this).attr("applyType");
                 if ($(this).attr("externalUrl")) {
                     if ($(this).attr("externalUrl").indexOf("?") != -1) {
-                        window.location.href = $(this).attr("externalUrl") + "&isHtOuterLinkUniqueIdentification=true"
+                        window.location.href = $(this).attr("externalUrl") + "&isHtOuterLinkUniqueIdentification=true";
                     } else {
-                        window.location.href = $(this).attr("externalUrl") + "?isHtOuterLinkUniqueIdentification=true"
+                        window.location.href = $(this).attr("externalUrl") + "?isHtOuterLinkUniqueIdentification=true";
                     }
                 } else {
-                    window.location.href = site_url.articleTemplate_url + '?id=' + id + '&articleBelong=' + articleBelong
+                    window.location.href = site_url.articleTemplate_url + '?id=' + id + '&articleBelong=' + articleBelong;
                 }
             }, {
                 'htmdEvt': 'fortune_07'
@@ -483,12 +483,12 @@ $(function() {
             mui("body").on('mdClick', '.whereGo', function() {
                 if ($(this).attr("externalUrl")) {
                     if ($(this).attr("externalUrl").indexOf("?") != -1) {
-                        window.location.href = $(this).attr("externalUrl") + "&isHtOuterLinkUniqueIdentification=true"
+                        window.location.href = $(this).attr("externalUrl") + "&isHtOuterLinkUniqueIdentification=true";
                     } else {
-                        window.location.href = $(this).attr("externalUrl") + "?isHtOuterLinkUniqueIdentification=true"
+                        window.location.href = $(this).attr("externalUrl") + "?isHtOuterLinkUniqueIdentification=true";
                     }
                 } else {
-                    window.location.href = site_url.articleTemplate_url + '?id=' + $(this).attr("id") + '&articleBelong=' + $(this).attr("articleBelong")
+                    window.location.href = site_url.articleTemplate_url + '?id=' + $(this).attr("id") + '&articleBelong=' + $(this).attr("articleBelong");
                 }
 
             }, {
