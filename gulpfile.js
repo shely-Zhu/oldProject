@@ -168,10 +168,16 @@ if (options.env === '0') {
     host.path = 'ht_pre_production/';
     host.zip_name = 'ht_pre_production';
 
+    //不加cdn域名
+    prefix = '';
+
 } else if (options.env === '4') {
     //生产的包进ht_production
     host.path = 'ht_production/';
     host.zip_name = 'ht_production';
+
+    //不加cdn域名
+    prefix = '';
 
 } else if (options.env === '5') {
     //生产的包进ht_production
