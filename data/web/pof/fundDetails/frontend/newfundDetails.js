@@ -47,6 +47,7 @@ var data = Mock.mock({
         "chgRat1mRk":1543,
         "chgRat3mRk":1417,
         "chgRat6mRk":1785,
+        'discountRate': '24.00',
         "chgRat1yRk":1375,
         "chgRat2yRk":817,
         "chgRat3yRk":0,
