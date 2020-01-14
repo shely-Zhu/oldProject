@@ -85,6 +85,8 @@ module.exports = {
     './include/js/modelPage/activityModel': './src/include/js/modelPage/activityModel.js',
     // pdfModel
     './allServerResources/model/static/js/pdfModel': './src/allServerResources/model/static/js/pdfModel.js',
+    // 模板页
+    './allServerResources/model/static/js/activityModel': './src/allServerResources/model/static/js/activityModel.js',
 
     //老带新
     './user/static/js/recommendRegister': "./src/user/static/js/recommendRegister.js", //注册

@@ -124,7 +124,9 @@ $(function () {
                     that.changeVal('chgRat3m', 2)
                     that.changeVal('chgRat1y', 2)
                     that.changeVal('chgRatBgn', 2)
-                    that.gV.json.trDate = that.gV.json.trDate.slice(5)
+                    if(that.gV.json.trDate){
+                        that.gV.json.trDate = that.gV.json.trDate.slice(5)
+                    }
                     that.gV.json.fundType = that.fundType
                     that.gV.invTypCom = json.data.invTypCom
                     that.gV.secuSht = json.data.secuSht
@@ -296,6 +298,13 @@ $(function () {
             });
             //月 季 本年 一年 成立以来
             mui("body").on('mdClick', ".lineWrap .tab span ", function (e) {
+                if(that.gV.type==1){
+                    $("#line1").show()
+                    $(".noDataHintEcharts").hide()
+                }else{
+                    $("#line2").show()
+                    $(".noDataHintEcharts").hide()     
+                }
                 $(this).addClass('active').siblings().removeClass('active');
                 var time = Number($(this).attr('time'))
                 var myDate = new Date();
@@ -535,6 +544,11 @@ $(function () {
 
                     that.drawLine(type, newData)
 
+                },
+                callbackNoData:function(){
+                    $("#line1").hide()
+                    $("#line2").hide()
+                    $(".noDataHintEcharts").show()
                 }
             }]
             $.ajaxLoading(obj);

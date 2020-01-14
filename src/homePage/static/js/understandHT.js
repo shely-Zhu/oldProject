@@ -42,6 +42,12 @@ $(function() {
         //页面初始化函数
         init: function() {
             var that = this;
+                //处理7p 8p页面初始底部白条
+                var wHeight = window.screen.height;
+                if( $('html').height() < wHeight ){
+                    $('html').height( wHeight );
+                }
+
 
              // $("body").height( $(window).height() );
              

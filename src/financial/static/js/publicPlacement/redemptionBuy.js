@@ -206,7 +206,7 @@ $(function() {
                     $("#passwordWrap").hide();
                     if (res.status == '0000') {
                         window.location.href = site_url.pofSurelyResultsDetail_url + '?applyId=' + data.allotNo + '&fundBusinCode=' +
-                            "024" + "&fundCode=" + regulatory.gV.dataList.fundCode + '&flag=redemption';
+                            "024" + "&fundCode=" + regulatory.gV.dataList.fundCode + '&flag=redemption' + '&fixbusinflag=' + data.fixbusinflag;
                     } else {
                         $('.elasticLayer.transOutRule').show()
                         $(".elasticContent").html(res.message);

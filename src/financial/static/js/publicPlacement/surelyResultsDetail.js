@@ -89,7 +89,8 @@ $(function() {
                     applyId: that.gV.applyId,
                     fundCode: that.gV.fundCode,
                     fundBusinCode: that.gV.fundBusinCode,
-                    fixbusinflag: splitUrl['fixbusinflag']
+                    fixbusinflag: splitUrl['fixbusinflag'],
+                    isMoneyBuyPub: that.gV.flag == 'buy'? '1': '',
                 },
                 //async: false, 
                 needDataEmpty: true,
@@ -148,14 +149,14 @@ $(function() {
                                 that.$el.applyTimeRedemption.html(json.data.originalDate)
                                 that.$el.shareTimeRedemption.html(json.data.estimateConfirmDate + ' 24:00前')
                                 that.$el.earningsTimeRedemption.html(json.data.estimateArrivalDate + ' 24:00前')
-                                // that.$el.payTypeRedemption.html('在线支付')
+                                that.$el.payTypeRedemption.html('在线支付')
                             }
                             
                             if (json.data.secondFundName && json.data.secondFundCode){
                                 //是货基购基
-                                $('.normalBuyArea').hide();
-                                $('.fundBuyArea').show();
-                                $('.fundBuyName').html(json.data.secondFundName);
+                                $('.normalArea').hide();
+                                $('.fundArea').show();
+                                $('.fundTransName').html(json.data.secondFundName);
                             }
                         }
                         if (that.gV.payType == '1') { // 买入汇款支付
@@ -195,9 +196,6 @@ $(function() {
                 },
 
             }];
-            if (decodeURI(splitUrl['bugFundName']) != "false") {
-               obj[0].data.isMoneyBuyPub = "1"
-            }
 
             $.ajaxLoading(obj);
         },
