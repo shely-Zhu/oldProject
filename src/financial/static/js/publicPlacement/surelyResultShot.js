@@ -71,24 +71,24 @@ $(function () {
             callbackDone:function(json){
               var data = json.data;
                if(json.status == '0000'){
-                $(".resultTop").show()
+                $(".resultTop").show();
                 //状态为转入中和转入成功全部统一为转入中
-                that.$e.succedText.html("申请成功")
-                var str= that.gV.applyDate.slice(0,4)+'-'+that.gV.applyDate.slice(4,6)+'-'+that.gV.applyDate.slice(6,8)
-                that.$e.applyTimeOut.html(str)
-                that.$e.toTimeOut.html(data.nextFixrequestDateMask + '&nbsp;24:00 前')
-                that.$e.earningsTimeInto.html(data.paymentGainsDayStr + '&nbsp;24:00 前')
-                $(".shotData")[0].textContent = data.fixedPeriodMask
-                $(".shotMoney")[0].textContent = data.balance
-                that.$e.fundNameOut.html(data.fundName)
-                that.$e.fundCodeOut.html(data.fundCode)
-                $(".cashOut").show()
+                that.$e.succedText.html("申请成功");
+                var str= that.gV.applyDate.slice(0,4)+'-'+that.gV.applyDate.slice(4,6)+'-'+that.gV.applyDate.slice(6,8);
+                that.$e.applyTimeOut.html(str);
+                that.$e.toTimeOut.html(data.nextFixrequestDateMask + '&nbsp;24:00 前');
+                that.$e.earningsTimeInto.html(data.paymentGainsDayStr + '&nbsp;24:00 前');
+                $(".shotData")[0].textContent = data.fixedPeriodMask;
+                $(".shotMoney")[0].textContent = data.balance;
+                that.$e.fundNameOut.html(data.fundName);
+                that.$e.fundCodeOut.html(data.fundCode);
+                $(".cashOut").show();
                 //that.$e.fundCodeInto.html(data.fundCode)
-                that.$e.amountOut.html(data.balanceMask)
-                that.$e.banKImgOut.attr('src',data.thumbnailUrl)
-                that.$e.bankNameOut.html(data.bankName)
-                that.$e.bankNumOut.html(data.bankAccountMask.substr(data.bankAccountMask.length-4))
-                that.$e.payTypeOut.html('在线支付')
+                that.$e.amountOut.html(data.balanceMask);
+                that.$e.banKImgOut.attr('src',data.thumbnailUrl);
+                that.$e.bankNameOut.html(data.bankName);
+                that.$e.bankNumOut.html(data.bankAccountMask.substr(data.bankAccountMask.length-4));
+                that.$e.payTypeOut.html('在线支付');
                }
             }
 

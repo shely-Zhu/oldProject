@@ -435,9 +435,9 @@ $(function () {
                // 先判断是否司法冻结以及身份过期，再判断一键认证
                var result = frozenAccount("buyFreeze", window.location.href, false);
                if( !result ) {
-                var fundCode = splitUrl['fundCode']
+                var fundCode = splitUrl['fundCode'];
                   var url = site_url.fundTransformIn_url + '?fundCode=' + fundCode + '&fundName=' + that.gV.secuSht+"&noReload=1";
-                  authenticationProcess(fundCode, url)
+                  authenticationProcess(fundCode, url);
                 };
                 /*that.getConditionsOfOrder("into");
                 that.gV.singleaAuthenType = "into"*/
@@ -652,15 +652,15 @@ $(function () {
             // 七日年华 万份收益
             mui("body").on('mdClick', "#redeemNav .navSpan ", function (e) {
                 $(this).addClass('active').siblings().removeClass('active');
-                var divs = $('.lineWrap .line_area>div')
-                var index = $(this).index()
-                $(divs[index]).show().siblings().hide()
-                var type = Number($(this).attr('type'))
-                var time = that.gV.time
+                var divs = $('.lineWrap .line_area>div');
+                var index = $(this).index();
+                $(divs[index]).show().siblings().hide();
+                var type = Number($(this).attr('type'));
+                var time = that.gV.time;
 
                 var myDate = new Date();
                 var end =  myDate.getFullYear()+'-'+ parseInt(myDate.getMonth()+1)+'-'+myDate.getDate();
-                that.gV.type = type
+                that.gV.type = type;
                 if (time) {
                     that.getData2(type, time);
                 } else {
@@ -672,10 +672,10 @@ $(function () {
             //月 季 本年 一年 成立以来
             mui("body").on('mdClick', ".lineWrap .tab span ", function (e) {
                 $(this).addClass('active').siblings().removeClass('active');
-                var time = Number($(this).attr('time'))
+                var time = Number($(this).attr('time'));
                 var myDate = new Date();
                 var end = myDate.getFullYear()+'-'+ parseInt(myDate.getMonth()+1)+'-'+myDate.getDate();
-                that.gV.time = time
+                that.gV.time = time;
                 if (time) {
                     that.getData2(that.gV.type, time);
                 } else {
@@ -718,13 +718,13 @@ $(function () {
                     invTypCom:that.gV.invTypCom,
                 }
                 if($(this).hasClass('active')){
-                    $(this).removeClass('active') 
-                    prams.collected = '0'
+                    $(this).removeClass('active') ;
+                    prams.collected = '0';
                 }else{
-                    $(this).addClass('active')
-                    prams.collected = '1'
+                    $(this).addClass('active');
+                    prams.collected = '1';
                 }
-                that.getFundCollection(prams)
+                that.getFundCollection(prams);
             },{
                 htmdEvt: 'publicDetail_14'
             });
@@ -753,7 +753,7 @@ $(function () {
                 callbackDone: function (json) {
                    var fundCode = splitUrl['fundCode'];
                    if(!!json.data&&json.data.length>0){
-                    $(".selected_area").addClass('active')
+                    $(".selected_area").addClass('active');
                    }
                 },
             }]
@@ -771,7 +771,7 @@ $(function () {
                 }
             }
             var manageList = [];
-            manageList.push(prams)
+            manageList.push(prams);
             // 请求页面数据
             var obj = [{
                 url: site_url.collectFund_api,
@@ -802,27 +802,27 @@ $(function () {
                     pageSize: 4,
                 },
                 callbackDone: function (json) {
-                    json = json.data
+                    json = json.data;
                     var tplm = $("#dataLists1").html();
                     if(that.fundType){
-                        $("#history_tital").html("历史收益")
+                        $("#history_tital").html("历史收益");
                             //货币 
                     }else{
-                        $("#history_tital").html("历史净值")
+                        $("#history_tital").html("历史净值");
                     }
                     var template = Handlebars.compile(tplm);
                     $.each(json.pageList, function (i, v) {
                     })
-                    json.fundType = that.fundType
+                    json.fundType = that.fundType;
                     var html = template(json);
                     $(".tplBox1").html(html);
                     $.each($(".history_item .value"), function (i, v) {
                         if (Number($(v).text().slice(0, $(v).text().length - 1)) > 0) {
-                            $(v).addClass('value_red')
+                            $(v).addClass('value_red');
                         } else if(Number($(v).text().slice(0, $(v).text().length - 1)) == 0) {
-                            $(v).addClass('value_c')
+                            $(v).addClass('value_c');
                         }else{
-                            $(v).addClass('value_green')
+                            $(v).addClass('value_green');
                         }
                     });
                 }
@@ -830,7 +830,7 @@ $(function () {
             $.ajaxLoading(obj);
         },
         getData2: function (type, time, end) {
-            time = time === 0 ? "" : time
+            time = time === 0 ? "" : time;
             var that = this;
             //判断是否已经有数据了，有的话不再请求接口
             if( time == '' && that.gV['echartsData'].sinceNow.date && that.gV['echartsData'].sinceNow.date.length){
@@ -869,16 +869,16 @@ $(function () {
                 url: site_url.prfFundNetWorthTrendChart_api,
                 data: dataOpt,
                 callbackDone: function (json) {
-                    json = json.data.pageList
+                    json = json.data.pageList;
                     //拼数据
                     $.each( json, function(i, v){
-                        newData.date.push(v.trdDt)
+                        newData.date.push(v.trdDt);
                         if (that.fundType) {
-                            newData.seven.push(v.annYldRat)
-                            newData.big.push(v.unitYld)
+                            newData.seven.push(v.annYldRat);
+                            newData.big.push(v.unitYld);
                         } else {
-                            newData.seven.push(v.unitNav)
-                            newData.big.push(v.accuUnitNav)
+                            newData.seven.push(v.unitNav);
+                            newData.big.push(v.accuUnitNav);
                         }
                     })
                     switch(Number(time)) {
@@ -908,7 +908,7 @@ $(function () {
                     // newData.seven = [json[0].annYldRat, json[Math.ceil(json.length / 2)].annYldRat, json[json.length - 1].annYldRat]
                     // newData.big = [json[0].unitYld, json[Math.ceil(json.length / 2)].unitYld, json[json.length - 1].unitYld]
 
-                    that.drawLine(type, newData)
+                    that.drawLine(type, newData);
 
                 }
             }]
@@ -920,7 +920,7 @@ $(function () {
             var that = this;
             //判断有多少数据 只有一个值时 symbol 为circle 多组值时 symbol为 none
 			if(data.date.length == 1 ){
-				that.gV.symboltype = 'circle'
+				that.gV.symboltype = 'circle';
 			}	
             if (type == '1') {
                 //画的是七日年化折线图 或者单位净值
@@ -1048,5 +1048,5 @@ $(function () {
 
     }
     /*调用*/
-    regard.init()
+    regard.init();
 })

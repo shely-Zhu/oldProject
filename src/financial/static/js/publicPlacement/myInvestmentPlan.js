@@ -86,9 +86,9 @@ $(function () {
                             } else {
                                 for (var i = 0; i < data.length; i++) {
                                     if (data[i].fixState == 'A') {
-                                        data[i].fixStateStr = "进行中"
-                                        data[i].show = true
-                                        that.gV.paddingStatus = true
+                                        data[i].fixStateStr = "进行中";
+                                        data[i].show = true;
+                                        that.gV.paddingStatus = true;
                                     } 
 
                                     //已终止的数据后台不会返回，这里H的判断实际上不需要
@@ -100,15 +100,15 @@ $(function () {
                                     // } 
                                     //
                                     else {
-                                        data[i].fixStateStr = "暂停"
-                                        data[i].show = true
-                                        that.gV.stopNum ++
-                                        that.gV.stopPlanList_1.push(data[i])
+                                        data[i].fixStateStr = "暂停";
+                                        data[i].show = true;
+                                        that.gV.stopNum ++;
+                                        that.gV.stopPlanList_1.push(data[i]);
                                     }
                                     if(data[i].totalTradeTimes.length == 0){
-                                        data[i].totalTradeTimes_s = false
+                                        data[i].totalTradeTimes_s = false;
                                     }else{
-                                        data[i].totalTradeTimes_s = true
+                                        data[i].totalTradeTimes_s = true;
                                     }
                                 }
                                 // if (that.gV.fixStateNum > 0) {
@@ -126,7 +126,7 @@ $(function () {
                                    // $('.list .contentWrapper').height(height)
                                    // $(".stopPlan_1").html(that.gV.stopNum)
                                 }else{
-                                    that.$e.stopPlan.hide()
+                                    that.$e.stopPlan.hide();
                                 }
                                 if(!that.gV.paddingStatus&&that.gV.stopNum==0){
                                     $(".list").css("display", "none");
@@ -137,7 +137,7 @@ $(function () {
                                 if (that.gV.pageCurrent == 1) {
                                     for (var i = 0; i < data.length; i++) {
                                         if (data[i].fixStateStr == "暂停") {
-                                            $(".content-t span").eq(i).addClass("suspend")
+                                            $(".content-t span").eq(i).addClass("suspend");
                                         }
                                     }
                                 } else {
@@ -155,8 +155,8 @@ $(function () {
                         },
                         callbackNoData: function( json ){
                             if(that.gV.pageCurrent == 1) {
-                                $(".list").css("display", "none")
-                                that.$e.noData.show()
+                                $(".list").css("display", "none");
+                                that.$e.noData.show();
                             }
                             def && def.reject( json, that.gV.pageCurrent );
                         },
@@ -234,12 +234,12 @@ $(function () {
                         
                         if (that.gV.fixStateNum > 0) {
                             //展示已终止的定投数量
-                            that.$e.endPlan.show()
+                            that.$e.endPlan.show();
                             // var height = windowHeight - $(".newPlan").height() - $(".topTitle").height() - $(".endPlan").height();
                             // $('.list .contentWrapper').height(height)
-                            $(".stopPlan").html( that.gV.fixStateNum )
+                            $(".stopPlan").html( that.gV.fixStateNum );
                         } else {
-                            that.$e.endPlan.hide()
+                            that.$e.endPlan.hide();
                         }
                     }
 
@@ -377,8 +377,8 @@ $(function () {
                 url: site_url.queryUserBaseInfo_api,
                 data: {},
                 callbackDone: function(json) {
-                    var data = json.data
-                    that.gV.accountType = data.accountType
+                    var data = json.data;
+                    that.gV.accountType = data.accountType;
                 }
             }]
             $.ajaxLoading(obj);
@@ -388,7 +388,7 @@ $(function () {
             //新增 跳原生定投排行页
             mui("body").on("mdClick", ".newPlan", function () {
                 if(that.gV.accountType == 0 ||that.gV.accountType == 2){
-                    tipAction("暂不支持机构客户进行交易")
+                    tipAction("暂不支持机构客户进行交易");
                     return
                 }
                 window.location.href = site_url.investmentPlanRanking_url + '?flag=2';

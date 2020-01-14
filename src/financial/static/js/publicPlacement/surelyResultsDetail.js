@@ -63,22 +63,22 @@ $(function() {
         },
         init: function() {
             var that = this;
-            $("#goBack").hide()
+            $("#goBack").hide();
             $('#loading').show();
             $('.proess-success').hide();
             $('.proess-ongoing').hide();
             $('.proess-error').hide();
             if (that.gV.flag == 'buy') { //基金买入
-                $(".buy-result").show()
-                $("#HeadBarpathName").html('买入结果')
+                $(".buy-result").show();
+                $("#HeadBarpathName").html('买入结果');
                 that.getData(); //查询结果可能要根据flag来
             }
             if (that.gV.flag == 'redemption') { //基金赎回
-                $(".redemption-result").show()
-                $("#HeadBarpathName").html('赎回结果')
+                $(".redemption-result").show();
+                $("#HeadBarpathName").html('赎回结果');
                 that.getData(); //查询结果可能要根据flag来
             }
-            that.event()
+            that.event();
         },
         //获取交易结果
         getData: function() {
@@ -96,57 +96,57 @@ $(function() {
                     if (json.status == '0000') {
                         if (that.gV.payType == '0') {
                             $('#loading').hide();
-                            $(".resultTop").hide()
-                            $(".resultTopTwo").show()
-                            that.$el.succedText.html(json.data.tradeApplyDesc)
+                            $(".resultTop").hide();
+                            $(".resultTopTwo").show();
+                            that.$el.succedText.html(json.data.tradeApplyDesc);
                             if (that.gV.flag == 'buy') {
                                 if (json.data.debitStatus != '1' && json.data.tradeStatus == '5') {
-                                    $(".buy-result").show()
-                                    that.$el.shareTimePBuy.addClass('right-proess')
-                                    that.$el.earningsTimePBuy.addClass('right-proess')
-                                    $(".proess-success").show()
+                                    $(".buy-result").show();
+                                    that.$el.shareTimePBuy.addClass('right-proess');
+                                    that.$el.earningsTimePBuy.addClass('right-proess');
+                                    $(".proess-success").show();
                                 } else {
                                     if (json.data.tradeStatus == '0') { //申请失败
-                                        $(".proess-error").show()
-                                        $(".buy-result").hide()
+                                        $(".proess-error").show();
+                                        $(".buy-result").hide();
                                     } else if (json.data.tradeStatus == '1') { //申请成功
-                                        $(".proess-success").show()
-                                        that.$el.shareTimePBuy.addClass('right-proess')
-                                        that.$el.earningsTimePBuy.addClass('right-proess')
+                                        $(".proess-success").show();
+                                        that.$el.shareTimePBuy.addClass('right-proess');
+                                        that.$el.earningsTimePBuy.addClass('right-proess');
                                     } else {
-                                        $(".proess-ongoing").show()
+                                        $(".proess-ongoing").show();
                                     }
                                 }
-                                that.$el.applyTimeBuy.html(json.data.originalDate)
-                                that.$el.shareTimeBuy.html(json.data.estimateConfirmDate + "&nbsp; 24:00前")
-                                that.$el.earningsTimeBuy.html(json.data.estimateArrivalDate + "&nbsp; 24:00前")
+                                that.$el.applyTimeBuy.html(json.data.originalDate);
+                                that.$el.shareTimeBuy.html(json.data.estimateConfirmDate + "&nbsp; 24:00前");
+                                that.$el.earningsTimeBuy.html(json.data.estimateArrivalDate + "&nbsp; 24:00前");
                                 if (decodeURI(splitUrl['bugFundName']) != "false") {
-                                    that.$el.buyFundName[0].textContent = decodeURI(splitUrl['bugFundName'])
+                                    that.$el.buyFundName[0].textContent = decodeURI(splitUrl['bugFundName']);
                                 }
 
-                                that.$el.payTypeBuy.html('在线支付')
+                                that.$el.payTypeBuy.html('在线支付');
                             }
                             if (that.gV.flag == 'redemption') {
                                 if (json.data.debitStatus != '1' && json.data.tradeStatus == '5') {
-                                    $(".redemption-result").show()
-                                    that.$el.shareTimePRedemption.addClass('right-proess')
-                                    that.$el.earningsTimePRedemption.addClass('right-proess')
-                                    $(".proess-success").show()
+                                    $(".redemption-result").show();
+                                    that.$el.shareTimePRedemption.addClass('right-proess');
+                                    that.$el.earningsTimePRedemption.addClass('right-proess');
+                                    $(".proess-success").show();
                                 } else {
                                     if (json.data.tradeStatus == '0') { //申请失败
-                                        $(".proess-error").show()
-                                        $(".buy-result").hide()
+                                        $(".proess-error").show();
+                                        $(".buy-result").hide();
                                     } else if (json.data.tradeStatus == '1') { //申请成功
-                                        $(".proess-success").show()
-                                        that.$el.shareTimePBuy.addClass('right-proess')
-                                        that.$el.earningsTimePBuy.addClass('right-proess')
+                                        $(".proess-success").show();
+                                        that.$el.shareTimePBuy.addClass('right-proess');
+                                        that.$el.earningsTimePBuy.addClass('right-proess');
                                     } else {
-                                        $(".proess-ongoing").show()
+                                        $(".proess-ongoing").show();
                                     }
                                 }
-                                that.$el.applyTimeRedemption.html(json.data.originalDate)
-                                that.$el.shareTimeRedemption.html(json.data.estimateConfirmDate + ' 24:00前')
-                                that.$el.earningsTimeRedemption.html(json.data.estimateArrivalDate + ' 24:00前')
+                                that.$el.applyTimeRedemption.html(json.data.originalDate);
+                                that.$el.shareTimeRedemption.html(json.data.estimateConfirmDate + ' 24:00前');
+                                that.$el.earningsTimeRedemption.html(json.data.estimateArrivalDate + ' 24:00前');
                                 // that.$el.payTypeRedemption.html('在线支付')
                             }
                             
@@ -158,34 +158,34 @@ $(function() {
                             }
                         }
                         if (that.gV.payType == '1') { // 买入汇款支付
-                            $(".resultTop").show()
-                            $(".resultTopTwo").hide()
-                            $(".listWrap .buy-result").show()
-                            $(".changeNone").addClass("changeNone")
-                            that.getBankInfo()
-                            that.$el.amount1.html(json.data.tradeAmount)
+                            $(".resultTop").show();
+                            $(".resultTopTwo").hide();
+                            $(".listWrap .buy-result").show();
+                            $(".changeNone").addClass("changeNone");
+                            that.getBankInfo();
+                            that.$el.amount1.html(json.data.tradeAmount);
                             // that.$el.buyStatusText.html(json.data.tradeApplyDesc)
-                            that.$el.bankName.html(json.data.bankName)
-                            that.$el.bankNum.html(json.data.bankAccountMask.substr(json.data.bankAccountMask.length - 4))
-                            that.$el.payTypeBuy.html('汇款支付')
+                            that.$el.bankName.html(json.data.bankName);
+                            that.$el.bankNum.html(json.data.bankAccountMask.substr(json.data.bankAccountMask.length - 4));
+                            that.$el.payTypeBuy.html('汇款支付');
                         }
                         if (that.gV.flag == 'buy') {
-                            that.$el.fundNameBuy.html(json.data.fundName)
-                            that.$el.fundCodeBuy.html(json.data.fundCode)
-                            that.$el.amount2Buy.html(json.data.tradeAmount)
+                            that.$el.fundNameBuy.html(json.data.fundName);
+                            that.$el.fundCodeBuy.html(json.data.fundCode);
+                            that.$el.amount2Buy.html(json.data.tradeAmount);
                             if (decodeURI(splitUrl['bugFundName']) == "false") {
-                                that.$el.banKImgbanKImgBuy.attr('src', json.data.bankThumbnailUrl)
+                                that.$el.banKImgbanKImgBuy.attr('src', json.data.bankThumbnailUrl);
                             }
-                            that.$el.bankName2Buy.html(json.data.bankName)
-                            that.$el.bankNum2Buy.html(json.data.bankAccountMask.substr(json.data.bankAccountMask.length - 4))
+                            that.$el.bankName2Buy.html(json.data.bankName);
+                            that.$el.bankNum2Buy.html(json.data.bankAccountMask.substr(json.data.bankAccountMask.length - 4));
                         }
                         if (that.gV.flag == 'redemption') {
-                            that.$el.fundNameRedemption.html(json.data.fundName)
-                            that.$el.fundCodeRedemption.html(json.data.fundCode)
-                            that.$el.amount2Redemption.html(json.data.tradeShares)
-                            that.$el.banKImgRedemption.attr('src', json.data.bankThumbnailUrl)
-                            that.$el.bankName2Redemption.html(json.data.bankName)
-                            that.$el.bankNum2Redemption.html(json.data.bankAccountMask.substr(json.data.bankAccountMask.length - 4))
+                            that.$el.fundNameRedemption.html(json.data.fundName);
+                            that.$el.fundCodeRedemption.html(json.data.fundCode);
+                            that.$el.amount2Redemption.html(json.data.tradeShares);
+                            that.$el.banKImgRedemption.attr('src', json.data.bankThumbnailUrl);
+                            that.$el.bankName2Redemption.html(json.data.bankName);
+                            that.$el.bankNum2Redemption.html(json.data.bankAccountMask.substr(json.data.bankAccountMask.length - 4));
                         }
                     } else {
                         tipAction(json.message);
@@ -195,7 +195,7 @@ $(function() {
 
             }];
             if (decodeURI(splitUrl['bugFundName']) != "false") {
-               obj[0].data.isMoneyBuyPub = "1"
+               obj[0].data.isMoneyBuyPub = "1";
             }
 
             $.ajaxLoading(obj);
@@ -213,10 +213,10 @@ $(function() {
                 callbackDone: function(json) {
                     if (json.status == '0000') {
                         $('#loading').hide();
-                        that.$el.accountName.html(json.data.accountName)
-                        that.$el.bankAccount.html(json.data.bankAccount)
-                        that.$el.bankNo.html(json.data.bankNo)
-                        that.$el.bankAdress.html(json.data.bankAccountName)
+                        that.$el.accountName.html(json.data.accountName);
+                        that.$el.bankAccount.html(json.data.bankAccount);
+                        that.$el.bankNo.html(json.data.bankNo);
+                        that.$el.bankAdress.html(json.data.bankAccountName);
 
                     } else {
                         tipAction(json.message);
@@ -231,14 +231,14 @@ $(function() {
             var that = this;
             mui("body").on('mdClick', '.over', function() {
                 //跳往持仓列表页
-                window.location.href = site_url.publicAssets_url
+                window.location.href = site_url.publicAssets_url;
             }, {
                 htmdEvt: 'surelyResultsDetail_01'
             })
         },
         objcallback: function(json) {
-            console.log(json)
+            console.log(json);
         }
     }
-    somePage.init()
+    somePage.init();
 })

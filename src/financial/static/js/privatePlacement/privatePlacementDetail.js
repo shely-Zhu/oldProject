@@ -109,7 +109,7 @@ $(function() {
                         businessCompareReferenceMax = jsonData.businessCompareReferenceMax;
                     // 根据收益分配方式区分 0固收 1浮收普通 2浮收稳裕 
                     console.log(that.data.incomeModeJF,jsonData.incomeModeJF)
-                    that.data.incomeModeJF = jsonData.incomeModeJF
+                    that.data.incomeModeJF = jsonData.incomeModeJF;
                     if (jsonData.incomeModeJF == '0') {
                         // 头部不同的展示
                         $('.fixedIncome').removeClass('hide');
@@ -126,7 +126,7 @@ $(function() {
                             }
                         } else {
                             $(".fixedIncome .netValue").html(businessCompareReferenceMin + "%-" + businessCompareReferenceMax + "%");
-                            console.log($(".fixedIncome .netValue").html().length)
+                            console.log($(".fixedIncome .netValue").html().length);
                             if($(".fixedIncome .netValue").html().length>7){
                                 $(".fixedIncome .netValue").css({"font-size":'0.4rem',"display":"inline-block","margin-top":"0.2rem"})
                             }
@@ -146,7 +146,7 @@ $(function() {
                         $('.priceLimit').removeClass('hide');
                         // 单位净值
                         if (jsonData.unitNetValue == null || jsonData.unitNetValue == "" || jsonData.unitNetValue == undefined) {
-                            $('.netValue').html('1.0000')
+                            $('.netValue').html('1.0000');
                         } else {
                             $('.netValue').html(jsonData.unitNetValue);
                         }
@@ -173,27 +173,27 @@ $(function() {
                     // console.log($('.productNameTip').text().length)
                     //判断字符长度大于40  出现弹框
                     if($('.productNameTip').text().length>40){
-                        var dataText=jsonData.productName
-                            dataText=dataText.substring(0,40)
-                            dataText=dataText+"..."
+                        var dataText=jsonData.productName;
+                            dataText=dataText.substring(0,40);
+                            dataText=dataText+"...";;
                             $('.productNameTip').html(dataText);
-                        $(".nameTip").show()
+                        $(".nameTip").show();
                     }else{
-                        $(".nameTip").hide()
+                        $(".nameTip").hide();
                     }
                     // 一句话产品详情
                     $('.introduction').html(jsonData.productLightspot);
                     // 净值日期 非空判断
                     if (jsonData.netValueDate == null || jsonData.netValueDate == "" || jsonData.netValueDate == undefined) {
-                        $('.netValueDate').html('--')
+                        $('.netValueDate').html('--');
                     } else {
                         if(jsonData.incomeModeJF == '2'){
                             var now = jsonData.profitThoudDate;
                         }else{
                         var now = moment(jsonData.netValueDate).format('YYYY-MM-DD');
-                            now= now.substring(5)
+                            now= now.substring(5);
                         }
-                        $('.netValueDate').html(now)
+                        $('.netValueDate').html(now);
                     }
                     // 起投金额
                     $('.investmentAmountNum').html(jsonData.investStart + '万');
@@ -203,7 +203,7 @@ $(function() {
                     if(jsonData.orderCondition && jsonData.orderCondition!='') {
                         $('.appointment span').html(jsonData.orderCondition);
                     } else {
-                        $(".appointment").hide()
+                        $(".appointment").hide();
                     }
                     // 产品特点标签
                     that.getElements.isElecContract = jsonData.isElecContract; // 是否是电子合同产品【0.否 1.是】
@@ -211,9 +211,9 @@ $(function() {
                         // var projectLable = jsonData.projectLable;
                         $.each(jsonData.projectLable, function(i, el) {
                             if(el == '关注度高'){
-                               projectLableHtml = '<span id="red">' + el + '</span>'  
+                               projectLableHtml = '<span id="red">' + el + '</span>';
                             }else{
-                                projectLableHtml = '<span>' + el + '</span>'
+                                projectLableHtml = '<span>' + el + '</span>';
                             }
                             // projectLableHtml = '<span>' + el + '</span>'
                             $('.productLabel').append(projectLableHtml);
@@ -238,7 +238,7 @@ $(function() {
                     }
                     // 募集起截止日
                     if (jsonData.projectUpTime && jsonData.projectDownTime) {
-                        $('.deadline').html(jsonData.projectUpTime + '~' + jsonData.projectDownTime)
+                        $('.deadline').html(jsonData.projectUpTime + '~' + jsonData.projectDownTime);
                     } else {
                         $('.deadlineMj').hide();
                     }
@@ -250,14 +250,14 @@ $(function() {
                     }
                     // 风险等级
                     if(jsonData.productRiskLevelDesc){
-                        var startHtml=""
+                        var startHtml="";
                             //星星
                             for(var i=0;i<jsonData.productRiskLevel;i++){
-                                startHtml+="<span class='iconfont starLight'>&#xe639;</span>"
+                                startHtml+="<span class='iconfont starLight'>&#xe639;</span>";
                             }
                             //空白星星
                             for(var j=5;j>jsonData.productRiskLevel;j--){
-                                startHtml+="<span class='iconfont starDefault'>&#xe63b;</span>"
+                                startHtml+="<span class='iconfont starDefault'>&#xe63b;</span>";
                             }
                         $('.riskGrade .changgeRight').html(jsonData.productRiskLevelDesc+startHtml);
                     }else{
@@ -484,7 +484,7 @@ $(function() {
                 },
                 callbackNoData: function(json) {
                     // tipAction(json.message);
-                    $(".performanceComparison").hide()
+                    $(".performanceComparison").hide();
                 }
             }];
             $.ajaxLoading(obj);
@@ -530,7 +530,7 @@ $(function() {
                 },
                 needLogin: true,
                 callbackDone: function(json) {
-                    console.log(json)
+                    console.log(json);
                     that.data.echartsClickFlag = false;
                     var jsonData = json.data;
                     //拼数据
@@ -560,15 +560,15 @@ $(function() {
                 },
                 callbackNoData: function(json) {
                     that.data.echartsClickFlag = false;
-                    $("#qrnhLine").addClass("hide")
-                    $("#wfsyLine").addClass("hide")
-                    $(".noDataHintEcharts").removeClass("hide")
+                    $("#qrnhLine").addClass("hide");
+                    $("#wfsyLine").addClass("hide");
+                    $(".noDataHintEcharts").removeClass("hide");
                 },
                 callbackFail: function(json) {
                     that.data.echartsClickFlag = false;
-                    $("#qrnhLine").addClass("hide")
-                    $("#wfsyLine").addClass("hide")
-                    $(".noDataHintEcharts").removeClass("hide")
+                    $("#qrnhLine").addClass("hide");
+                    $("#wfsyLine").addClass("hide");
+                    $(".noDataHintEcharts").removeClass("hide");
                 }
             }];
             $.ajaxLoading(obj);
@@ -659,17 +659,17 @@ $(function() {
                 },
                 callbackNoData: function(json) {
                     that.data.echartsClickFlag = false;
-                    $("#qrnhLine").addClass("hide")
-                    $("#wfsyLine").addClass("hide")
-                    $(".noDataHintEcharts").removeClass("hide")
-                    $(".lineWrap").hide()
+                    $("#qrnhLine").addClass("hide");
+                    $("#wfsyLine").addClass("hide");
+                    $(".noDataHintEcharts").removeClass("hide");
+                    $(".lineWrap").hide();
                 },
                 callbackFail: function(json) {
                     that.data.echartsClickFlag = false;
-                    $("#qrnhLine").addClass("hide")
-                    $("#wfsyLine").addClass("hide")
-                    $(".noDataHintEcharts").removeClass("hide")
-                    $(".lineWrap").hide()
+                    $("#qrnhLine").addClass("hide");
+                    $("#wfsyLine").addClass("hide");
+                    $(".noDataHintEcharts").removeClass("hide");
+                    $(".lineWrap").hide();
 
                 }
             }];
@@ -679,11 +679,11 @@ $(function() {
         //type必传
         drawLine: function(type, data) {
             var that = this;
-            console.log($('#qrnhLine')[0])
+            console.log($('#qrnhLine')[0]);
 
             //判断有多少数据 只有一个值时 symbol 为circle 多组值时 symbol为 none
             if( data.profitThoudDate.length == 1 ){
-                that.getElements.symboltype = 'circle'
+                that.getElements.symboltype = 'circle';
             }
             
             if (type == 'qrnh') {
@@ -697,8 +697,8 @@ $(function() {
                     seriesData = data.sevenIncomeRate;
             } else if (type == 'wfsy') {
                 //画的是历史业绩折线图
-                $("#wfsyLine").removeClass("hide")
-                $(".noDataHintEcharts").addClass("hide")
+                $("#wfsyLine").removeClass("hide");
+                $(".noDataHintEcharts").addClass("hide");
                 var chartId = $('#wfsyLine')[0],
                     xAxisData = data.profitThoudDate,
                     seriesData = data.sevenIncomeRate;
@@ -868,7 +868,7 @@ $(function() {
             }];
             $.ajaxLoading(obj);
             //懒加载
-            $(".lazyload").lazyload()
+            $(".lazyload").lazyload();
         },
 
         // 募集账户信息
@@ -907,31 +907,31 @@ $(function() {
             var that = this;
             var jumpUrl = ""; //跳转链接
             if (v.conditionJump == 1) { //跳转到认证中心页面
-                jumpUrl = site_url.realName_url
+                jumpUrl = site_url.realName_url;
             } else if (v.conditionJump == 2) { //跳转到完善信息页面
-                jumpUrl = site_url.completeInformation_url
+                jumpUrl = site_url.completeInformation_url;
             } else if (v.conditionJump == 3) { //跳转到专项风测页面
-                jumpUrl = site_url.riskAppraisal_url + "?type=asset"
+                jumpUrl = site_url.riskAppraisal_url + "?type=asset";
             } else if (v.conditionJump == 4) { //跳转到投资者分类申请页面
                 jumpUrl = site_url.investorClassification_url+ "?isOpenAcc=" + that.data.isOpenWealth;
             } else if (v.conditionJump == 5) { //跳转到投资者分类结果页页面
-                jumpUrl = site_url.investorClassificationResult_url
+                jumpUrl = site_url.investorClassificationResult_url;
             } else if (v.conditionJump == 6) { //跳转到合格投资者申请 页面
                 jumpUrl = site_url.chooseQualifiedInvestor_url + "?isOpenAcc=" + that.data.isOpenWealth;
             } else if (v.conditionJump == 7) { //跳转到合格投资者结果页面
-                jumpUrl = site_url.qualifiedInvestorResult_url
+                jumpUrl = site_url.qualifiedInvestorResult_url;
             }else if (v.conditionJump == 8) { //信息查看（修改证件有效期） 
-                jumpUrl = site_url.completeInfoEditModify_url
+                jumpUrl = site_url.completeInfoEditModify_url;
             }else if (v.conditionJump == 9) { //跳转到普通风测
                 jumpUrl = site_url.riskAppraisal_url + '?type=private';
             }else if (v.conditionJump == 11) { //跳转到进身份证上传页面
-                jumpUrl = site_url.realIdcard_url
+                jumpUrl = site_url.realIdcard_url;
             } else if (v.conditionJump == 12) { //跳转到人脸识别页面
-                jumpUrl = site_url.realFaceCheck_url
+                jumpUrl = site_url.realFaceCheck_url;
             } else if (v.conditionJump == "13b") { //跳转到线下申请状态页面
-                jumpUrl = site_url.realOffline_url
+                jumpUrl = site_url.realOffline_url;
             } else if (v.conditionJump == 14 || v.conditionJump == "13a") { //跳转到视频双录状态页面
-                jumpUrl = site_url.realVideoTranscribe_url + '?type=default'
+                jumpUrl = site_url.realVideoTranscribe_url + '?type=default';
             }
             return jumpUrl;
         },
@@ -971,7 +971,7 @@ $(function() {
                             that.data.isOpenWealth = 0;
                         }
                         if (v.conditionType == 5 && v.isSatisfied) { //合格投资者认证是否满足，需要给app携带
-                            that.data.isSatisfied = v.isSatisfied
+                            that.data.isSatisfied = v.isSatisfied;
                         }
                         if (v.conditionType == 6 && !!v.isPopup) { //是否弹出期限不符弹框
                             isRiskPopup = v.isPopup;
@@ -980,7 +980,7 @@ $(function() {
                             $("#tips-wrap").show(); //显示预约条件
                             singleaAuthen = true;
                             if (!singleaAuthenPath) { //获取一键认证的链接。有值的第一个
-                                singleaAuthenPath = that.getJumpUrl(v)
+                                singleaAuthenPath = that.getJumpUrl(v);
                                 if (v.conditionType == 1) { //下面一键认证如果是实名认证且机构需要点击需要弹框提示，这里记录。且不能覆盖
                                     isReal = true; //判断
                                 }
@@ -991,9 +991,9 @@ $(function() {
                             that.$e.realLi.eq(Number(e)).show();
                             that.$e.realLi.eq(Number(e)).find(".bank-status").html(v.statusDesc);
                             jumpUrl = that.getJumpUrl(v); //获取跳转Url。
-                            that.$e.realLi.eq(e * 1).find(".tips-li-right").attr("jumpUrl",jumpUrl)
-                            that.$e.realLi.eq(e * 1).find(".tips-li-right").attr("conditionType",v.conditionType)
-                            that.$e.realLi.eq(e * 1).find(".tips-li-right").attr("conditionJump",v.conditionJump)
+                            that.$e.realLi.eq(e * 1).find(".tips-li-right").attr("jumpUrl",jumpUrl);
+                            that.$e.realLi.eq(e * 1).find(".tips-li-right").attr("conditionType",v.conditionType);
+                            that.$e.realLi.eq(e * 1).find(".tips-li-right").attr("conditionJump",v.conditionJump);
                         }
                         //对应的条件认证到哪里
                         that.$e.realLi.eq(e * 1).find(".tips-li-right").on('click', function() {
@@ -1012,7 +1012,7 @@ $(function() {
                                             window.location.href =that.$e.realLi.eq(0).find(".tips-li-right").attr("jumpUrl")  
                                         }
                                     };
-                                    $.elasticLayer(obj)
+                                    $.elasticLayer(obj);
                                     return
                             }
                             if (v.conditionType == "1" && that.data.custType != "1") { //如果是实名认证跳转，机构不支持线上开户，弹框提示
@@ -1028,7 +1028,7 @@ $(function() {
                                     zIndex: 100,
                                     callback: function(t) {}
                                 };
-                                $.elasticLayer(obj)
+                                $.elasticLayer(obj);
 
                             } else if(v.conditionType == "3" && that.data.custType != "1"){//完善信息和税收声明未完成时，机构客户不支持线上完善资料
                             	$("#tips-wrap").hide();
@@ -1043,7 +1043,7 @@ $(function() {
                                     zIndex: 100,
                                     callback: function(t) {}
                                 };
-                                $.elasticLayer(obj)
+                                $.elasticLayer(obj);
                             }else {
                                 window.location.href = jumpUrl;
                             }
@@ -1079,7 +1079,7 @@ $(function() {
                                     zIndex: 100,
                                     callback: function(t) {}
                                 };
-                                $.elasticLayer(obj)
+                                $.elasticLayer(obj);
                             } else {
                                 window.location.href = singleaAuthenPath;//
                             }
@@ -1179,7 +1179,7 @@ $(function() {
                                         };
 //                                      $.elasticLayer(objPop) 
 									}
-                                    $.elasticLayer(objElasticLayer)
+                                    $.elasticLayer(objElasticLayer);
                                 if (!singleaAuthen) { //如果v.show都是0，则不展示预约框,跳转到相应链接
                                     $("#tips-wrap").hide();
                                 }
@@ -1322,7 +1322,7 @@ $(function() {
                     if (that.data.custType == "1") { //客户类型【0.机构 1.个人】 
                         //跳转到电子合同追加页面
                         window.location.href = site_url.orderLimit_url + "?fundCode=" + that.$e.projectId + "&isAllowAppend=" +
-                            that.data.fundDetailObj.isAllowAppend + '&isSatisfied=' + that.data.isSatisfied
+                            that.data.fundDetailObj.isAllowAppend + '&isSatisfied=' + that.data.isSatisfied;
                     } else {
                         //跳转到普通预约
                         window.location.href = site_url.registration_url + "?fundCode=" + that.$e.projectId + "&isAllowAppend=" +
@@ -1333,7 +1333,7 @@ $(function() {
                     if (that.data.custType == "1") { //客户类型【0.机构 1.个人】 
                         //跳转到电子合同预约页面
                         window.location.href = site_url.orderLimit_url + "?fundCode=" + that.$e.projectId + "&isAllowAppend=" +
-                            that.data.fundDetailObj.isAllowAppend + '&isSatisfied=' + that.data.isSatisfied
+                            that.data.fundDetailObj.isAllowAppend + '&isSatisfied=' + that.data.isSatisfied;
                     } else {
                         //跳转到普通预约
                         window.location.href = site_url.registration_url + "?fundCode=" + that.$e.projectId + "&isAllowAppend=" +
@@ -1359,7 +1359,7 @@ $(function() {
                 if (spanHeight > 50) {
                     $('.clientLevel .changgeRight').css({
                         lineHeight: '0.5rem'
-                    })
+                    });
                 }
                 // tab点击切换时请求接口
                 if ($(this).index() == 1) {
@@ -1481,7 +1481,7 @@ $(function() {
             // 点击产品材料
             mui("body").on('mdClick', '.contentLink', function() {
                 var $this = $(this);
-                console.log($this.attr('href'))
+                console.log($this.attr('href'));
                 window.location.href = $this.attr('href');
             }, {
                 'htmdEvt': 'privatePlacementDetail_07'
@@ -1499,7 +1499,7 @@ $(function() {
 
                     },
                 };
-                $.elasticLayer(obj)
+                $.elasticLayer(obj);
             }, {
                 'htmdEvt': 'privatePlacementDetail_08'
             })
@@ -1511,7 +1511,7 @@ $(function() {
             });
             //点击查看明细跳转
             mui("body").on('mdClick', '.lookDetailed', function() {
-                window.location.href = site_url.tobeConfirmTransaction_url+"?type=toBeConfirmed"//查看明细跳转待确认明细
+                window.location.href = site_url.tobeConfirmTransaction_url+"?type=toBeConfirmed";//查看明细跳转待确认明细
             },{
                 htmdEvt: 'privatePlacementDetail_10'
             });
@@ -1526,7 +1526,7 @@ $(function() {
                     zIndex: 100,
                     hideCelButton: true, //为true时隐藏cel按钮，仅使用yes按钮的所有属性
                 };
-                $.elasticLayer(obj)
+                $.elasticLayer(obj);
             },{
                 htmdEvt: 'privatePlacementDetail_11'
             })

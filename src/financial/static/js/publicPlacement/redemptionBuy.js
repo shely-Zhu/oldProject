@@ -58,7 +58,7 @@ $(function() {
         },
         init: function() {
             var that = this;
-            that.getPublicFundDetail()
+            that.getPublicFundDetail();
         },
         getPublicFundDetail: function() {
             var that = this;
@@ -96,7 +96,7 @@ $(function() {
             $(".pay span.payTime").html(that.gV.dataList.estimateArrivalDate);
             // $(".msecond input").val(that.gV.dataList.enableShares);
             $(".listSecondCar span.name").html(that.gV.dataList.bankName);
-            $(".popupCarList .bank-img").attr("src", that.gV.dataList.bankThumbnailUrl)
+            $(".popupCarList .bank-img").attr("src", that.gV.dataList.bankThumbnailUrl);
         },
         //查看详情提交
         /*findMessageCen:function(id){
@@ -136,7 +136,7 @@ $(function() {
                     var arr = [];
                     json.data.forEach(function(item) {
                         if (item.fundCode != that.gV.fundCode) {
-                            arr.push(item)
+                            arr.push(item);
                         }
                     })
                     that.gV.transferFunds = arr;
@@ -145,7 +145,7 @@ $(function() {
                     var Redata = [];
                     for (var i = 0; i < that.gV.transferFunds.length; i++) {
                         var code = that.gV.transferFunds[i].fundCode;
-                        fundCodeList.push(code)
+                        fundCodeList.push(code);
                     }
                     Redata = that.searchNewfundDetails(fundCodeList);
                     for (var i = 0; i < that.gV.transferFunds.length; i++) {
@@ -153,7 +153,7 @@ $(function() {
                          if(Redata.length>0){
                              for(var j = 0 ;j<Redata.length ; j++){
                                  if(code == Redata[j].trdCode){
-                                    that.gV.transferFunds[i].annYldRat = Redata[j].annYldRat
+                                    that.gV.transferFunds[i].annYldRat = Redata[j].annYldRat;
                                  }
                              }
                          }
@@ -232,8 +232,8 @@ $(function() {
             that.gV.fundCode = parmesDataList.fundCode;
             //that.gV.nowRedempShare = parmesDataList.enableShares;
             that.gV.maxRedempShare = parmesDataList.enableShares;
-            $(".maxMoneyContent span").text(that.gV.maxRedempShare)
-            $(".msecond-one").attr("placeholder","最多可赎回"+that.gV.maxRedempShare+"份")
+            $(".maxMoneyContent span").text(that.gV.maxRedempShare);
+            $(".msecond-one").attr("placeholder","最多可赎回"+that.gV.maxRedempShare+"份");
         },
         // 关闭密码弹框，按钮设置为可点击
         closeCallBack: function() {
@@ -245,19 +245,19 @@ $(function() {
         events: function() {
             var that = this;
             mui("body").on('mdClick', '.onright', function() {
-                $('.popup').css('display', 'block')
+                $('.popup').css('display', 'block');
             }, {
                 htmdEvt: 'redemptionBuy_01'
             })
 
             mui("body").on('mdClick', '.popup-close', function() {
-                $('.popup').css('display', 'none')
+                $('.popup').css('display', 'none');
             }, {
                 htmdEvt: 'redemptionBuy_02'
             })
 
             mui("body").on('mdClick', '.popup-mask', function() {
-                $('.popup').css('display', 'none')
+                $('.popup').css('display', 'none');
             }, {
                 htmdEvt: 'redemptionBuy_03'
             })
@@ -265,7 +265,7 @@ $(function() {
             mui("body").on('mdClick', '.findMessageCen', function() {
                 var id = "79";
                 // 跳转赎回说明页面
-                window.location.href = site_url.redemptionExplain_url + '?id=' + id
+                window.location.href = site_url.redemptionExplain_url + '?id=' + id;
                 // that.findMessageCen(id);
             }, {
                 htmdEvt: 'redemptionBuy_04'
@@ -277,7 +277,7 @@ $(function() {
                 if (type == 'car') {
                     //银行
                     $(".transferFundsContent li").attr("checkStatu", "off");
-                    $(".transferFundsContent li .radioCheckItemImg").css({ "display": "none" })
+                    $(".transferFundsContent li .radioCheckItemImg").css({ "display": "none" });
 
                     $(".listOnefund").css({ "display": "none" });
                     $(".listOneCar").css({ "display": "flex" });
@@ -286,7 +286,7 @@ $(function() {
                     $(this).siblings().find(".radioCheckItemImg").css({ "display": "none" });
                 } else if (type == 'fund') {
                     // $(".carContent li").attr("checkStatu","off");
-                    $(".carContent li .radioCheckItemImg").css({ "display": "none" })
+                    $(".carContent li .radioCheckItemImg").css({ "display": "none" });
                     //$(this).siblings().attr("checkStatu","off");
                     $(this).siblings().find(".radioCheckItemImg").css({ "display": "none" });
                     $(".listOnefund").css({ "display": "block" });
@@ -303,7 +303,7 @@ $(function() {
                 }
                 //  $(this).attr("checkStatu","on");
                 $(this).find(".radioCheckItemImg").css({ "display": "block" });
-                $('.popup').css('display', 'none')
+                $('.popup').css('display', 'none');
 
                 //  that.confirmCheck();
             }, {
@@ -319,7 +319,7 @@ $(function() {
 
             // 交易规则
             mui("body").on("mdClick", ".goPofTransactionRules", function(e) {
-                window.location.href = site_url.pofTransactionRules_url + '?fundCode=' + regulatory.gV.dataList.fundCode
+                window.location.href = site_url.pofTransactionRules_url + '?fundCode=' + regulatory.gV.dataList.fundCode;
             }, {
                 htmdEvt: 'redemptionBuy_07'
             });
@@ -327,19 +327,19 @@ $(function() {
             //赎回确认
             mui("body").on('mdClick', '.confirmeDemptionPay', function() {
                 // $(".confirmeDemptionPay").on('click',function(){
-                $(".pwd-input").val('')
+                $(".pwd-input").val('');
                 $(".fake-box input").val('');
                 $(".msecond input").blur();
                 $("#passwordWrap").show();
                 payPass(that.cancelOrder, null, that.closeCallBack);
-                that.getElements.confirmBtn.attr('disabled', true)
+                that.getElements.confirmBtn.attr('disabled', true);
             }, {
                 htmdEvt: 'redemptionBuy_08'
             })
 
             //忘记密码跳转
             mui("body").on("mdClick", ".passwordTop .forgetP", function() {
-                window.location.href = site_url.pofForgotPassword_url
+                window.location.href = site_url.pofForgotPassword_url;
             }, {
                 htmdEvt: 'redemptionBuy_12'
             })
@@ -349,13 +349,13 @@ $(function() {
                 if (parseFloat(that.gV.maxRedempShare) < parseFloat(that.gV.nowRedempShare)) {
                     //  $(".checkMessage").css({"display":"block"});
                     // $(".checkMessage").html("超出最大赎回份额")
-                    tipAction("超出最大赎回份额" + that.gV.maxRedempShare)
+                    tipAction("超出最大赎回份额" + that.gV.maxRedempShare);
                     return
                 } else {
                     $(".checkMessage").css({ "display": "none" });
                 }
                 if ($(this)[0].value == "") {
-                    that.getElements.confirmBtn.attr('disabled', true)
+                    that.getElements.confirmBtn.attr('disabled', true);
                 } else {
                     that.getElements.confirmBtn.removeAttr("disabled");
                 }
@@ -367,14 +367,14 @@ $(function() {
                 that.gV.nowRedempShare = $(".msecond input")[0].value;
                 if ($(this).hasClass("check")) {
                     $(this).removeClass("check").html('&#xe668;');
-                    that.getElements.confirmBtn.attr('disabled', true)
+                    that.getElements.confirmBtn.attr('disabled', true);
 
                 } else {
                     $(this).addClass("check").html('&#xe669;');
                     if (that.gV.nowRedempShare != "") {
                         that.getElements.confirmBtn.removeAttr("disabled");
                     } else {
-                        that.getElements.confirmBtn.attr('disabled', true)
+                        that.getElements.confirmBtn.attr('disabled', true);
                     }
                 }
             }, {
@@ -382,13 +382,13 @@ $(function() {
             });
             //忘记密码跳转
             mui("body").on("mdClick", ".passwordTop .forgetP", function() {
-                window.location.href = site_url.pofForgotPassword_url
+                window.location.href = site_url.pofForgotPassword_url;
             }, {
                 htmdEvt: 'redemptionBuy_10'
             })
 
             mui('body').on('tap', '.elasticLayer.transOutRule .elasticButtons', function() {
-                $('.elasticLayer.transOutRule').hide()
+                $('.elasticLayer.transOutRule').hide();
             }, {
                 htmdEvt: 'redemptionBuy_11'
             })

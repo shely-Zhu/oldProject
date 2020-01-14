@@ -241,51 +241,51 @@ $(function() {
         },
         mandatory:function(){
             var  that = this;
-           var str = "" ;
-           if(that.$e.userAge[0].value == "" || that.$e.userAge[0].value == null){
+            var str = "" ;
+            if(that.$e.userAge[0].value == "" || that.$e.userAge[0].value == null){
                str = "请填写您的年龄"
                tipAction(str)
                return false
-           }else if(that.$e.professional[0].textContent=="请选择"){
+            }else if(that.$e.professional[0].textContent=="请选择"){
                str = "请选择您的性别"
                tipAction(str)
                return false
-           }else if(that.$e.professional[0].textContent=="请选择"){
-            str = "请选择您的职业"
-            tipAction(str)
-            return false
-           }else if(that.$e.investment_year[0].textContent=="请选择"){
-               str = "请选择您的投资年限"
-               tipAction(str)
-               return false
-           }else if(that.$e.riskLevel[0].textContent=="请选择"){
-               str = "请选择您的风险等级"
-               tipAction(str)
-               return false
-           }else if(that.$e.expectedInvestment_year[0].textContent=="请选择"){
-               str = "请选择您的预计投资年限"
-               tipAction(str)
-               return false
-           }else if(that.$e.liquidity[0].textContent=="请选择"){
+            }else if(that.$e.professional[0].textContent=="请选择"){
+                str = "请选择您的职业"
+                tipAction(str)
+                return false
+            }else if(that.$e.investment_year[0].textContent=="请选择"){
+                str = "请选择您的投资年限"
+                tipAction(str)
+                return false
+            }else if(that.$e.riskLevel[0].textContent=="请选择"){
+                str = "请选择您的风险等级"
+                tipAction(str)
+                return false
+            }else if(that.$e.expectedInvestment_year[0].textContent=="请选择"){
+                str = "请选择您的预计投资年限"
+                tipAction(str)
+                return false
+            }else if(that.$e.liquidity[0].textContent=="请选择"){
                 str = "请选择您的流动性需求"
                 tipAction(str)
                 return false
-           }else if(!that.$e.yield_first[0].value){
+            }else if(!that.$e.yield_first[0].value){
             // &&!that.$e.yield_second[0].textContent
                 str = "请填写您的预期年化收益"
                 tipAction(str)
                 return false
-           }else if(!that.$e.loss_first[0].value){
+            }else if(!that.$e.loss_first[0].value){
             // &&!that.$e.loss_second[0].textContent
                 str = "请填写您的最大回撤"
                 tipAction(str)
                 return false
-           }else if(that.gV.selectPurchaseHTFunds.length==0&&that.gV.otherFundCodeData.length==0){
+            }else if(that.gV.selectPurchaseHTFunds.length==0&&that.gV.otherFundCodeData.length==0){
                 str = "请您勾选一笔基金或者添加一笔基金"
                 tipAction(str)
                 return false
-           }
-           return true
+            }
+            return true
         },
         initParmis:function(){
              var that = this;

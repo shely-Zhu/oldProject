@@ -22,7 +22,7 @@ $(function () {
         },
         init: function () {
             var that = this;
-            that.getData()
+            that.getData();
             that.events();
         },
       
@@ -41,7 +41,7 @@ $(function () {
                     var data = json.data.pageList;
                     for(var i=0;i<data.length;i++){
                         if(data[i].fixState == 'H'){
-                            that.gV.dataList.push(data[i])
+                            that.gV.dataList.push(data[i]);
                         }
                     }
                     generateTemplate(that.gV.dataList, that.$e.recordList, that.$e.investmentPlanTemp);

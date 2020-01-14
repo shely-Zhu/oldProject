@@ -23,7 +23,7 @@ $(function () {
       var that = this;
 
       //页面初始化
-      $('.tips').hide()
+      $('.tips').hide();
       that.getData();
       that.events();
 
@@ -39,9 +39,9 @@ $(function () {
         callbackDone: function (json) {
           json.data.pageList.forEach(function(item){
             if(Number(item.totalMoney) === 0){
-              item.show = false
+              item.show = false;
             }else{
-              item.show = true
+              item.show = true;
             }
           });
           var tplm = $("#dataLists").html();
@@ -58,7 +58,7 @@ $(function () {
         data: {
         },
         callbackDone: function (json) {
-          json = json.data
+          json = json.data;
           $('.fundValue').html(json.totalMoney==''?'0.00':json.totalMoney);
           $('.income .profitValue').html(json.incomeMask==""?"0.00":json.incomeMask);
           $('.holdIncome .profitValue').html(json.holdIncomeMask==""?"0.00":json.holdIncomeMask);
@@ -96,21 +96,21 @@ $(function () {
                     $(".isRiskMatch_mask").show();
                     if(jsonData.isRiskMatch == "1"){
                           //风险等级匹配
-                          $(".isRiskMatchBox_match").show()
-                          $(".isRiskMatchBox_noMatch").hide()
-                          $(".isRiskMatchBox_header").html("你选择的产品与您现在的风险承受能力相匹配")
+                          $(".isRiskMatchBox_match").show();
+                          $(".isRiskMatchBox_noMatch").hide();
+                          $(".isRiskMatchBox_header").html("你选择的产品与您现在的风险承受能力相匹配");
                       }else if(jsonData.isRiskMatch == "0"){
-                          $(".isRiskMatchBox_noMatch").show()
-                          $(".isRiskMatchBox_match").hide()
-                          $(".isRiskMatchBox_header").html("你选择的产品与您现在的风险承受能力不相匹配")
-                          $(".isRiskMatchResult").html("查看评测结果")
-                          $(".isRiskMatchResult").attr("type","noRisk")
+                          $(".isRiskMatchBox_noMatch").show();
+                          $(".isRiskMatchBox_match").hide();
+                          $(".isRiskMatchBox_header").html("你选择的产品与您现在的风险承受能力不相匹配");
+                          $(".isRiskMatchResult").html("查看评测结果");
+                          $(".isRiskMatchResult").attr("type","noRisk");
                       }else if(jsonData.isRiskMatch == "2"){
-                          $(".isRiskMatchBox_noMatch").show()
-                          $(".isRiskMatchBox_match").hide()
-                          $(".isRiskMatchBox_header").html("您的风险测评已过期,请重新进行风险测评")
-                          $(".isRiskMatchResult").html("重新风测")
-                          $(".isRiskMatchResult").attr("type","repeatRisk")
+                          $(".isRiskMatchBox_noMatch").show();
+                          $(".isRiskMatchBox_match").hide();
+                          $(".isRiskMatchBox_header").html("您的风险测评已过期,请重新进行风险测评");
+                          $(".isRiskMatchResult").html("重新风测");
+                          $(".isRiskMatchResult").attr("type","repeatRisk");
                       }
 
           },
@@ -126,22 +126,22 @@ $(function () {
       var that = this;
       //调往现金宝详情
       mui("body").on("mdClick", ".cashItem .itemTitle", function () {
-        var fundCode = $(this).attr("fundCode")
+        var fundCode = $(this).attr("fundCode");
         window.location.href = site_url.superStreasureDetail_url + '?fundCode='+ fundCode ;
       }, {
 				htmdEvt: 'cashManagement_01'
 			});
       // 转入
       mui("body").on("mdClick", ".fundIn", function () {
-        var fundCode = $(this).parent().parent().find(".itemTop .itemTitle span").eq(0).attr("fundCode")
-        var fundName = $(this).parent().parent().find(".itemTop .itemTitle span").eq(0).attr("fundName")
+        var fundCode = $(this).parent().parent().find(".itemTop .itemTitle span").eq(0).attr("fundCode");
+        var fundName = $(this).parent().parent().find(".itemTop .itemTitle span").eq(0).attr("fundName");
         that.gV.transformInFundCode = fundCode;
         that.gV.transformInFundName = fundName;
         // 先判断是否司法冻结以及身份过期，再判断一键认证
         var result = frozenAccount("buyFreeze", window.location.href, false);
         if( !result ) {
           var url = site_url.pofCashTransformIn_url + '?fundCode='+ fundCode + '&fundName=' + fundName;
-          authenticationProcess(fundCode, url)
+          authenticationProcess(fundCode, url);
         };
       }, {
 				htmdEvt: 'cashManagement_02'
@@ -150,7 +150,7 @@ $(function () {
       mui("body").on("mdClick", ".fundOut", function () {
         var money = $($(this).parent().siblings()[1]).find(".centerValue").eq(0)[0].textContent;
         var productName = $(this).parent().parent().find(".itemTop .itemTitle span").eq(0)[0].innerHTML;
-        var fundCode = $(this).parent().parent().find(".itemTop .itemTitle span").eq(0).attr("fundCode")
+        var fundCode = $(this).parent().parent().find(".itemTop .itemTitle span").eq(0).attr("fundCode");
         // 先判断是否司法冻结以及身份过期，再判断一键认证
         var result = frozenAccount("saleFreeze", window.location.href, false);
         if( !result ) {
@@ -162,7 +162,7 @@ $(function () {
 
       //了解现金管理
       mui("body").on("mdClick", ".fundKnow", function () { 
-       window.location.href  = site_url.articleTemplate_url + '?articleBelong=12'
+       window.location.href  = site_url.articleTemplate_url + '?articleBelong=12';
       },{
         htmdEvt: 'cashManagement_04'
       });
@@ -172,19 +172,19 @@ $(function () {
         var type = $(this).attr('type')
         switch (type) {
             case "1":
-                window.location.href = site_url.realName_url
+                window.location.href = site_url.realName_url;
                 break;
 
             case "2":
-                window.location.href = site_url.realName_url
+                window.location.href = site_url.realName_url;
                 break;
 
             case "3":
-                window.location.href = site_url.realName_url
+                window.location.href = site_url.realName_url;
                 break;
 
             case "4":
-                window.location.href = site_url.realName_url
+                window.location.href = site_url.realName_url;
                 break;
 
             default:

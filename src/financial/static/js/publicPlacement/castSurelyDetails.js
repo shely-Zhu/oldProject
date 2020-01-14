@@ -11,7 +11,7 @@ var splitUrl = require('@pathCommonJs/components/splitUrl.js')();
 var payPass = require('@pathCommonJsCom/payPassword.js');
 //获取地址栏参数
 $(function() {
-    var fundCode
+    var fundCode;
     var regard = {
 
             init: function() {
@@ -29,7 +29,7 @@ $(function() {
             getData: function() {
 
                 var that = this;
-                var scheduledProtocolId = splitUrl['scheduledProtocolId']
+                var scheduledProtocolId = splitUrl['scheduledProtocolId'];
                     //请求页面数据
                 var obj = [{
                     url: site_url.pofFixedDetail_api,
@@ -37,9 +37,9 @@ $(function() {
                         scheduledProtocolId: scheduledProtocolId
                     },
                     callbackDone: function(json) {
-                        json = json.data
-                        that.gV.copyJson = JSON.parse(JSON.stringify(json))
-                        that.gV.copyJson.scheduledProtocolId = scheduledProtocolId
+                        json = json.data;
+                        that.gV.copyJson = JSON.parse(JSON.stringify(json));
+                        that.gV.copyJson.scheduledProtocolId = scheduledProtocolId;
                         $('.fundName').html(json.fundName + ' ' + json.fundCode);
                         $('.balanceMask').html(json.balanceMask);
                         $('.totalTradeTimes').html(json.totalTradeTimes);
@@ -57,64 +57,64 @@ $(function() {
                         
                         $('.totalCfmShareMask').html(json.totalCfmShareMask);
                         $('.serviceCharge').html('含手续费' + json.serviceCharge + '元');
-                        fundCode = json.fundCode
-                        that.gV.json = json
+                        fundCode = json.fundCode;
+                        that.gV.json = json;
                         that.events();
-                        var fixState, str
+                        var fixState, str;
                         switch (json.fixState) {
                             case 'A':
-                                fixState = "进行中"
-                                str = '<div type="1" >终止</div> <div class="cen" type="0"  >暂停</div> <div class="active edit ">修改</div>'
+                                fixState = "进行中";
+                                str = '<div type="1" >终止</div> <div class="cen" type="0"  >暂停</div> <div class="active edit ">修改</div>';
                                 break;
 
                             case 'H':
-                                fixState = "已终止"
-                                str = ""
+                                fixState = "已终止";
+                                str = "";
                                 $('.nextFixrequestDateMask').html('已终止');
                                 break;
 
                             case 'P':
-                                fixState = "已暂停"
+                                fixState = "已暂停";
                                 str = '<div type="1"  >终止</div> <div class="active" type="2" >续投</div>';
                                 break;
                             case 'D':
-                                fixState = "删除"
+                                fixState = "删除";
                                 break;
                             case 'F':
-                                fixState = "签约失败"
+                                fixState = "签约失败";
                                 break;
 
                             default:
                                 break;
                         }
                         if (fixState == '已终止' || fixState == '删除' || fixState == '签约失败') {
-                            $(".fixState").addClass("redColor")
+                            $(".fixState").addClass("redColor");
                         } else {
-                            $(".fixState").removeClass("redColor")
+                            $(".fixState").removeClass("redColor");
                         }
                         if (fixState == '已暂停') {
-                            $(".fixState").addClass("yellowColor")
+                            $(".fixState").addClass("yellowColor");
                         } else {
-                            $(".fixState").removeClass("yellowColor")
+                            $(".fixState").removeClass("yellowColor");
                         }
                         $('.fixState').html(fixState);
                         $('.footer').html(str);
                         var tplm = $("#dataLists").html();
                         var template = Handlebars.compile(tplm);
-                        var tradeRecord = json.tradeRecord
-                        json.tradeRecordStutas = tradeRecord.length > 0 ? 1 : 0
+                        var tradeRecord = json.tradeRecord;
+                        json.tradeRecordStutas = tradeRecord.length > 0 ? 1 : 0;
                         tradeRecord.forEach(function(n) {
-                            n.tradeTime = n.tradeTime.split(" ")[0]
-                            n.status = n.status === "1" ? 1 : 0
+                            n.tradeTime = n.tradeTime.split(" ")[0];
+                            n.status = n.status === "1" ? 1 : 0;
                         });
                         if (json.tradeRecord.length > 0) {
                             for (var i = 0; i < json.tradeRecord.length; i++) {
                                 if (json.tradeRecord[i].status == "1") {
-                                    json.tradeRecord[i].statusDesc_1 = "定投成功"
+                                    json.tradeRecord[i].statusDesc_1 = "定投成功";
                                 } else if (json.tradeRecord[i].status == "3") {
-                                    json.tradeRecord[i].statusDesc_1 = "待确认"
+                                    json.tradeRecord[i].statusDesc_1 = "待确认";
                                 } else {
-                                    json.tradeRecord[i].statusDesc_1 = "定投失败"
+                                    json.tradeRecord[i].statusDesc_1 = "定投失败";
                                 }
                             }
                         }
@@ -126,28 +126,28 @@ $(function() {
                 $.ajaxLoading(obj);
             },
             changeStatus: function(pwd, type) {
-                var tip = ['定投计划已暂停', '定投计划已终止', '续投成功']
-                var fixStateArr = ['P', 'H', 'A']
-                var msg = tip[Number(type)]
+                var tip = ['定投计划已暂停', '定投计划已终止', '续投成功'];
+                var fixStateArr = ['P', 'H', 'A'];
+                var msg = tip[Number(type)];
                 var that = this;
-                that.gV.copyJson.fixState = fixStateArr[Number(type)]
-                that.gV.copyJson.password = pwd
+                that.gV.copyJson.fixState = fixStateArr[Number(type)];
+                that.gV.copyJson.password = pwd;
                     //请求页面数据
                 var obj = [{
                     url: site_url.pofFixedChange_api,
                     data: that.gV.copyJson,
                     callbackDone: function(json) {
                         tipAction(msg);
-                        $("#passwordWrap").hide()
+                        $("#passwordWrap").hide();
                         $("#passwordWrap input").val("");
                         setTimeout(function() {
                             //window.history.go(-1)
-                            window.location.href = site_url.myInvestmentPlan_url
+                            window.location.href = site_url.myInvestmentPlan_url;
                         }, 800)
                     },
                     callbackFail: function(json) {
                         tipAction(json.message);
-                        $("#passwordWrap").hide()
+                        $("#passwordWrap").hide();
                         $("#passwordWrap input").val("");
                     }
                 }]
@@ -155,7 +155,7 @@ $(function() {
             },
             events: function() {
                 var that = this;
-                var fundType = that.gV.json.fundType
+                var fundType = that.gV.json.fundType;
                     // 详情
                 mui("body").on("mdClick", ".posRight", function() {
                     window.location.href = site_url.pofPublicDetail_url + '?fundCode=' + fundCode + '&fundType=' + fundType;
@@ -164,18 +164,18 @@ $(function() {
                 });
                 // 修改
                 mui("body").on("mdClick", ".edit", function(e) {
-                    var scheduledProtocolId = splitUrl['scheduledProtocolId']
+                    var scheduledProtocolId = splitUrl['scheduledProtocolId'];
                     window.location.href = site_url.pofOrdinarySetThrow_url + '?scheduledProtocolId=' + scheduledProtocolId + '&fundCode=' + fundCode;
                 }, {
                     htmdEvt: 'castSurelyDetails_02'
                 });
                 // 终止 暂停 续投
                 mui("body").on("mdClick", ".footer >div", function(e) {
-                    var type = $(this).attr('type')
+                    var type = $(this).attr('type');
                     if (!type) return
                     $("#passwordWrap").show();
                     payPass(function(pwd) {
-                        that.changeStatus(pwd, type)
+                        that.changeStatus(pwd, type);
                     });
                 }, {
                     htmdEvt: 'castSurelyDetails_03'
@@ -191,7 +191,7 @@ $(function() {
                         allotType: "2", //定投为2 买回0 赎回1
                         Fixbusinflag: "",
                     };
-                    window.location.href = site_url.publicTradeDetail_url + '?applyId=' + obj.applyId + '&fundCombination=' + obj.fundCombination + '&fundCode=' + obj.fundCode + '&fundBusinCode=' + obj.fundBusinCode + '&allotType=' + obj.allotType + '&Fixbusinflag=' + obj.Fixbusinflag
+                    window.location.href = site_url.publicTradeDetail_url + '?applyId=' + obj.applyId + '&fundCombination=' + obj.fundCombination + '&fundCode=' + obj.fundCode + '&fundBusinCode=' + obj.fundBusinCode + '&allotType=' + obj.allotType + '&Fixbusinflag=' + obj.Fixbusinflag;
 
                 }, {
                     htmdEvt: 'castSurelyDetails_04'
