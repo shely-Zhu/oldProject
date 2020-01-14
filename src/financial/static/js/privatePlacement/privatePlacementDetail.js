@@ -145,12 +145,11 @@ $(function() {
                         // 涨跌幅
                         $('.priceLimit').removeClass('hide');
                         // 单位净值  跟产品经理确认，这里展示后台返回的数据
-                        $('.netValue').html(jsonData.unitNetValue);
-                        // if (jsonData.unitNetValue == null || jsonData.unitNetValue == "" || jsonData.unitNetValue == undefined) {
-                        //     $('.netValue').html('1.0000')
-                        // } else {
-                        //     $('.netValue').html(jsonData.unitNetValue);
-                        // }
+                        if (jsonData.unitNetValue == null || jsonData.unitNetValue == "" || jsonData.unitNetValue == undefined) {
+                            $('.netValue').html('--')
+                        } else {
+                            $('.netValue').html(jsonData.unitNetValue);
+                        }
                         // 折线图
                         that.getTypeOneData(that.$e.lineType);
 
