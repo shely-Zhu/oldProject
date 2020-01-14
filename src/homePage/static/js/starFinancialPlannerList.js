@@ -413,7 +413,7 @@ $(function() {
                         // 登陆状态下先判断该用户是否绑定过理财师，未登录状态下直接跳转开户页面
                         // 先判断该用户是否绑定过理财师
                     if (that.gV.FinancialerClickFlag) {
-                        that.gV.FinancialerClickFlag = false;
+                        
                         var obj = [{
                             url: site_url.queryMyFinancialerList_api,
                             data: {},
@@ -422,6 +422,7 @@ $(function() {
                             callbackDone: function(json) {
                                 // 绑定过理财师提示用户已绑定
                                 var data = json.data.exclusiveFinancialerList || []
+                                that.gV.FinancialerClickFlag = false;
                                 if (data.length > 0) {
                                     $.elasticLayer({
                                         id: "tip",
