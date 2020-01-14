@@ -9,7 +9,7 @@ require('@pathCommonBase/base.js');
 //ajax调用
 require('@pathCommonJs/ajaxLoading.js');
 var generateTemplate = require('@pathCommonJsComBus/generateTemplate.js');
-$(function () {
+$(function() {
     var somePage = {
         $e: {
             recordList: $('.contentWrap'), // 调仓记录
@@ -18,50 +18,50 @@ $(function () {
 
         },
         gV: { // 全局变量
-           dataList:[]
+            dataList: []
         },
-        init: function () {
+        init: function() {
             var that = this;
-            that.getData()
+            that.getData();
             that.events();
         },
-      
-        getData: function (t) {
+
+        getData: function(t) {
             var that = this;
             $(".listLoading").hide();
             var obj = [{
                 url: site_url.protocolList_api,
                 data: {
                     "pageNo": 1, //非必须，默认为1
-                    "pageSize": 100,//非必须，默认为10
+                    "pageSize": 100, //非必须，默认为10
+                    "fixStatus": 'H' //定投协议状态 A-正常状态 H-终止状态
                 },
                 needDataEmpty: true,
                 needLoading: false,
-                callbackDone: function(json) {    
+                callbackDone: function(json) {
                     var data = json.data.pageList;
-                    for(var i=0;i<data.length;i++){
-                        if(data[i].fixState == 'H'){
+                    for (var i = 0; i < data.length; i++) {
+                        if (data[i].fixState == 'H') {
                             that.gV.dataList.push(data[i])
                         }
                     }
                     generateTemplate(that.gV.dataList, that.$e.recordList, that.$e.investmentPlanTemp);
-                        
+
                 },
-                callbackNoData: function( json ){
-                }
+                callbackNoData: function(json) {}
             }];
             $.ajaxLoading(obj);
             //that.gV.dataList = JSON.parse(sessionStorage.getItem('stopList'));
             // 将列表插入到页面上
-           
+
         },
-        events: function () {
+        events: function() {
             // 跳转详情页
-            mui("body").on("mdClick", ".investmentPlan-item", function (e) {
+            mui("body").on("mdClick", ".investmentPlan-item", function(e) {
                 var scheduledProtocolId = $(this).data('id');
                 window.location.href = site_url.pofCastSurelyDetails_url + '?scheduledProtocolId=' + scheduledProtocolId;
             }, {
-				htmdEvt: 'myInvestmentPlan_01'
+                htmdEvt: 'myInvestmentPlan_01'
             });
         },
     };

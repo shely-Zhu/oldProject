@@ -48,7 +48,7 @@ $(function () {
                 'htmdEvt': 'concatUsAdvise_01'
             })
             //文本事件
-            mui("body").on('keyup','.textarea', function(){
+            mui("body").on('input','.textarea', function(){
                 that.gD.feedbackDesc = $(".textarea").val()
                 $(".haveMany").text(that.gD.feedbackDesc.length+'/200')
             })
@@ -61,7 +61,7 @@ $(function () {
                 url: site_url.insertFeedback_api,
                 data: {
                     feedbackType: Number(that.gD.feedbackType),
-                    feedbackDesc: that.gD.feedbackDesc,
+                    feedbackDesc: $(".textarea").val(),
                     imgIds: that.gD.idArr
                 },
                 //async: false,
@@ -88,7 +88,7 @@ $(function () {
                 
             }];
             $.ajaxLoading(obj);
-        }
+        },
     }
     concatUsAdvise.init()
 

@@ -20,8 +20,8 @@ $(function () {
     },
     init: function () {
       var that = this;
-      that.event()
-      that.getData()
+      that.event();
+      that.getData();
     },
     getData: function (t) {
       var that = this;
@@ -33,8 +33,8 @@ $(function () {
         },
         callbackDone: function (json) {
 
-          json = json.data.pageList
-          console.log(json)
+          json = json.data.pageList;
+          console.log(json);
 
           var tplm = $("#dataLists").html();
           var template = Handlebars.compile(tplm);
@@ -49,5 +49,5 @@ $(function () {
 
     }
   }
-  somePage.init()
+  somePage.init();
 })

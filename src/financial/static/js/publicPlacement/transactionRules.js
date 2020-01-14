@@ -32,18 +32,18 @@ $(function () {
           fundCode: splitUrl['fundCode']
         },
         callbackDone: function (json) {
-          json = json.data
+          json = json.data;
           var tplm = $("#dataLists").html();
           var template = Handlebars.compile(tplm);
           json.fundPurchaseFeeRate.detailList.forEach(function(n){
-            n.status = n.feeCalcMed === "2" ? 1 : 0
+            n.status = n.feeCalcMed === "2" ? 1 : 0;
           });
           json.fundRedeemFeeRate.detailList.forEach(function(n){
-            n.status = n.feeCalcMed === "2" ? 1 : 0
+            n.status = n.feeCalcMed === "2" ? 1 : 0;
           });
           json.tradeLimitList.forEach(function(n){
             if (n.fundBusinCode === "022") {
-              json.tradeLimitList = [n]
+              json.tradeLimitList = [n];
             }
           });
           var html = template(json);
@@ -66,7 +66,7 @@ $(function () {
 
   }
   /*调用*/
-  regard.init()
+  regard.init();
 })
 
 

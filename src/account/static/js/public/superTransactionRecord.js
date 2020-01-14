@@ -416,7 +416,7 @@ $(function() {
                 // pathdata 是 每个详情页 都需要传的参数
                 var pathdata = site_url.publicTradeDetail_url + '?applyId=' + applyId + '&fundCombination=' + fundCombination
                 + '&fundCode=' + fundCode + '&fundBusinCode=' + fundBusinCode + '&allotType=' + allotType
-                + '&Fixbusinflag=' + fixbusinflag + '&fundType='+ fundType
+                + '&fixbusinflag=' + fixbusinflag + '&fundType='+ fundType
                 if (allotType == 3) {
                     window.location.href = pathdata + '&shares=' + shares + '&fundName=' + new Base64().encode(fundName)
                         + '&applyDate=' + applyDate + '&autoBuyDesc=' + new Base64().encode(autoBuyDesc);

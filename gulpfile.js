@@ -218,8 +218,8 @@ gulp.task('proxyTask', function() {
                     // target: 'https://app.htjf4.com',
                     // target: 'http://172.16.187.129:8080',//李亚楠
                     // target: 'http://192.168.50.254:8085',
-                    target: 'https://app.chtfundtest.com',
-                    // target:"https://app.haomaojf.com",
+                    // target: 'https://app.chtfundtest.com',
+                    target:"https://app.haomaojf.com",
                     changeOrigin: true,
                     secure: false,
                 }),
@@ -228,8 +228,8 @@ gulp.task('proxyTask', function() {
                     // target: 'https://h5.htjf4.com',
                     //  target: 'http://172.16.187.129:8080',//李亚楠
                     // target: 'http://172.16.187.164:8081',
-                    target: 'https://h5.chtfundtest.com',
-                    // target:"https://h5.haomaojf.com",
+                    // target: 'https://h5.chtfundtest.com',
+                    target:"https://h5.haomaojf.com",
                     changeOrigin: true,
                     secure: false,
                 }),
@@ -1143,7 +1143,7 @@ gulp.task('html', function(cb) {
             }
             else if( options.env == 4){
                 //生产
-                dcDomain = 'https://dc.chtwm.com';
+                dcDomain = 'https://dcnew.chtwm.com';
             }
 
             fileCon = fileCon.replace('@dcDomain', dcDomain );
