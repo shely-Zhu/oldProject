@@ -40,13 +40,13 @@ $(function(){
                     if(json.data.content && json.data.content!= '') {
                         that.$e.contentWrap.html(json.data.content); 
                     } else {
-                        that.$e.noDataCon.show()
-                        that.$e.contentWrap.hide()
+                        that.$e.noDataCon.show();
+                        that.$e.contentWrap.hide();
                     }
                 },
                 callbackNoData: function(json) {
-                    that.$e.noDataCon.show()
-                    that.$e.contentWrap.hide()
+                    that.$e.noDataCon.show();
+                    that.$e.contentWrap.hide();
                 },
                 callbackFail: function(json) {
                     tipAction(json.message);
