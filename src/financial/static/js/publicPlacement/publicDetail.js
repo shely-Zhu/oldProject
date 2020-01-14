@@ -26,6 +26,9 @@ Handlebars.registerHelper("if_than_0", function (value, options) {
 $(function () {
     var fundCode
     var regard = {
+        $e: {
+            netLoading: $('.netLoading'), //数据loading
+        },
         gV: {
             fundBusinCode:'022',
             json: {},
@@ -91,7 +94,6 @@ $(function () {
             // 请求页面数据
             var obj = [{
                 url: site_url.newfundDetails_api,
-                
                 data: {
                     fundCode: splitUrl['fundCode'],
                     // fundCode:"000847",
@@ -195,7 +197,6 @@ $(function () {
                         $(".footer .buy_btn").addClass("disable").html("暂不可售");
                         $(".footer .fixed_investement_btn").attr("disabled",true).css({"display":"none"});
                    }
-                  
                 },
                 callbackNoData:function(json){
 					tipAction(json.message);
@@ -297,7 +298,8 @@ $(function () {
                 htmdEvt: 'publicDetail_10'
             });
             //月 季 本年 一年 成立以来
-            mui("body").on('mdClick', ".lineWrap .tab span ", function (e) {
+            mui("body").on('mdClick', ".lineWrap .time", function (e) {
+                that.$e.netLoading.show();
                 if(that.gV.type==1){
                     $("#line1").show()
                     $(".noDataHintEcharts").hide()
@@ -305,10 +307,13 @@ $(function () {
                     $("#line2").show()
                     $(".noDataHintEcharts").hide()     
                 }
+
                 $(this).addClass('active').siblings().removeClass('active');
+
                 var time = Number($(this).attr('time'));
                 var myDate = new Date();
                 var end = myDate.getFullYear()+'-'+ parseInt(myDate.getMonth()+1)+'-'+myDate.getDate();
+
                 that.gV.time = time;
                 if (time) {
                     that.getData2(that.gV.type, time);
@@ -362,12 +367,14 @@ $(function () {
             },{
                 htmdEvt: 'publicDetail_14'
             });
-
         },
         //收藏管理--判断是否被收藏
         getFundCollectionInit: function () {
             var that = this;
             var deviceId ;
+
+            that.$e.netLoading.show();
+
             if(splitUrl['deviceId']){
                 if(splitUrl['deviceId'].includes("cookie")){
                     deviceId = splitUrl['deviceId'].split("cookie")[0];
@@ -469,22 +476,27 @@ $(function () {
             //判断是否已经有数据了，有的话不再请求接口
             if( time == '' && that.gV['echartsData'].sinceNow.date && that.gV['echartsData'].sinceNow.date.length){
                 // 成立至今
+                that.$e.netLoading.hide();
                 that.drawLine( type, that.gV['echartsData'].sinceNow );
                 return false;
             } else if( time == 1 && that.gV['echartsData'].oneMonth.date && that.gV['echartsData'].oneMonth.date.length){
                 //月
+                that.$e.netLoading.hide();
                 that.drawLine( type, that.gV['echartsData'].oneMonth );
                 return false;
             } else if( time == 3 && that.gV['echartsData'].threeMonth.date && that.gV['echartsData'].threeMonth.date.length ){
                 // 季
+                that.$e.netLoading.hide();
                 that.drawLine( type, that.gV['echartsData'].threeMonth );
                 return false;
             } else if( time == 6 && that.gV['echartsData'].sixMonth.date && that.gV['echartsData'].sixMonth.date.length){
                 //半年
+                that.$e.netLoading.hide();
                 that.drawLine( type, that.gV['echartsData'].sixMonth );
                 return false;
             } else if( time == 12 && that.gV['echartsData'].oneYear.date && that.gV['echartsData'].oneYear.date.length){
                 //一年
+                that.$e.netLoading.hide();
                 that.drawLine( type, that.gV['echartsData'].oneYear );
                 return false;
             }
@@ -498,6 +510,9 @@ $(function () {
                 seven: [], //存放折线图七日年化  单位净值
                 big: [],//存放折线图万份收益  累计净值
             }
+
+            that.$e.netLoading.show();
+
             // 请求页面数据
             var obj = [{
                 url: site_url.prfFundNetWorthTrendChart_api,
