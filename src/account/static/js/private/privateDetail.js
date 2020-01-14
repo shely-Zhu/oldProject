@@ -363,6 +363,7 @@ $(function() {
 				$("#qrnhLine").removeClass("hide");
 				$(".noDataHintEcharts").addClass("hide");
 				var chartId = $('#qrnhLine')[0],
+					tooltipUnit = '%',
 					xAxisData = data.profitThoudDate,
 					seriesData = data.sevenIncomeRate;
 			} else if( type == 'wfsy'){
@@ -370,6 +371,7 @@ $(function() {
 				$("#wfsyLine").removeClass("hide");
 				$(".noDataHintEcharts").addClass("hide");
 				var chartId = $('#wfsyLine')[0],
+					tooltipUnit = '',
 					xAxisData = data.profitThoudDate,
 					seriesData = data.profitThoudValue;
 			} else if( type == 'dwjz'){
@@ -377,6 +379,7 @@ $(function() {
 				$("#dwjzLine").removeClass("hide");
 				$(".noDataHintEcharts").addClass("hide");
 				var chartId = $('#dwjzLine')[0],
+					tooltipUnit = '%',
 					xAxisData = data.assetsDate,
 					seriesData = data.unitAssets;
 			} else if( type == 'ljjz'){
@@ -384,6 +387,7 @@ $(function() {
 				$("#ljjzLine").removeClass("hide");
 				$(".noDataHintEcharts").addClass("hide");
 				var chartId = $('#ljjzLine')[0],
+					tooltipUnit = '%',
 					xAxisData = data.assetsDate,
 					seriesData = data.accumulativeAssets;
 			}
@@ -391,7 +395,7 @@ $(function() {
 			myChart.setOption({
 			    tooltip: {
 			    	trigger: 'axis',
-			    	formatter: '<p style="font-size:0.36rem;color: #DAB57C;">{c}%</p><p style="font-size:0.24rem;color:#4A4A4A">{b}</p>',
+			    	formatter: '<p style="font-size:0.36rem;color: #DAB57C;">{c}'+ tooltipUnit +'</p><p style="font-size:0.24rem;color:#4A4A4A">{b}</p>',
 			    	backgroundColor: 'rgba(218,181,124, 0.1)',
 			    	// renderMode : 'richText', 
 			    	extraCssText: [7, 15, 15, 15],
