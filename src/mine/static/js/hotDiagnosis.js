@@ -33,7 +33,7 @@ $(function() {
         },
         init: function() {
             var that = this;
-            that.beforeFunc();
+            //that.beforeFunc();
             that.initMui(); // 兼容下面函数调用
             that.events();
         },
