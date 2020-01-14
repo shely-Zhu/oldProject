@@ -29,7 +29,7 @@ $(function() {
             var that = this;
             this.getTitle();
             that.initMui();
-            this.events()
+            this.events();
         },
         getTitle: function() {
             var mesType = Number(this.gV.mesType);
