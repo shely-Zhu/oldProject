@@ -554,7 +554,7 @@ $(function() {
             
             mui("body").on("mdClick", ".addOtherFund_content .comfirmButtom .addOtherTrue", function() {
                 var fundCode = $(".fundCode_input").val();
-                var dataPick = $(".dataPick")[0].textContent;
+                var dataPick = $(".dataPick")[0].textContent=='请选择'?'':$(".dataPick")[0].textContent;
                 var money = $(".money_input").val();
                 var obj = {
                     "fundCode": fundCode,
