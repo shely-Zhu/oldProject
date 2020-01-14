@@ -145,7 +145,7 @@ $(function() {
                         // 涨跌幅
                         $('.priceLimit').removeClass('hide');
                         // 单位净值  跟产品经理确认，这里展示后台返回的数据
-                        if (jsonData.unitNetValue == null || jsonData.unitNetValue == "" || jsonData.unitNetValue == undefined) {
+                        if (jsonData.unitNetValue == null || jsonData.unitNetValue == "" || jsonData.unitNetValue == undefined || jsonData.unitNetValue == '--') {
                             $('.netValue').html('--')
                         } else {
                             $('.netValue').html(jsonData.unitNetValue);
@@ -184,7 +184,7 @@ $(function() {
                     // 一句话产品详情
                     $('.introduction').html(jsonData.productLightspot);
                     // 净值日期 非空判断
-                    if (jsonData.netValueDate == null || jsonData.netValueDate == "" || jsonData.netValueDate == undefined) {
+                    if (jsonData.netValueDate == null || jsonData.netValueDate == "" || jsonData.netValueDate == undefined || jsonData.netValueDate == '--') {
                         $('.netValueDate').html('--');
                     } else {
                         if(jsonData.incomeModeJF == '2'){
