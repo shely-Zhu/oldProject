@@ -199,8 +199,8 @@ $(function() {
                 },
                 callbackNoData: function() {
                     //没有数据时展示暂无数据
-                    $(".list").hide()
-                    $(".title").hide()
+                    $(".list").hide();
+                    $(".title").hide();
                     that.getElements.listLoading.hide();
                     that.getElements.noData.show();
                     $(".br").css("display", "none");
@@ -217,7 +217,7 @@ $(function() {
                 needLogin: true,
                 needLoading: false,
                 callbackDone: function(json) {
-                    console.log(json.data)
+                    console.log(json.data);
                     var jsonData = json.data.list,
                         pageList = jsonData;
                         that.getElements.noData.hide()
@@ -368,9 +368,9 @@ $(function() {
                 var $this = $(this);
                 if($this.attr("externalUrl")){
                     if($this.attr("externalUrl").indexOf("?") != -1) {
-                        window.location.href = $this.attr("externalUrl") + "&isHtOuterLinkUniqueIdentification=true"
+                        window.location.href = $this.attr("externalUrl") + "&isHtOuterLinkUniqueIdentification=true";
                     } else{
-                        window.location.href = $this.attr("externalUrl") + "?isHtOuterLinkUniqueIdentification=true"
+                        window.location.href = $this.attr("externalUrl") + "?isHtOuterLinkUniqueIdentification=true";
                     }
                 }else{
                     window.location.href = site_url.articleTemplate_url + "?id=" + $this.attr('id') + '&articleBelong=' + $this.attr('articleBelong');

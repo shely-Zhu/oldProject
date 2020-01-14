@@ -62,7 +62,7 @@ $(function() {
                     id: i,
                     content: wrap_html
                 })
-            })
+            });
             var obj = {
                 wrapper: $('.myAsset'), //存放整个组件的区域
                 needNavAction: false,
@@ -83,7 +83,7 @@ $(function() {
                     //并请求第一次数据
                     that.initMui(t);
                 }
-            }
+            };
             $.tabScroll(obj);
             //此时所有切换区域的内容都是空的
             //设置切换区域的高度
@@ -96,9 +96,9 @@ $(function() {
                 that.htmlHeight = windowHeight - $('.nav-wrapper').height();
                 console.log('距顶部距离：' + that.gV.listToTop);
                 that.highHeight = windowHeight - that.gV.listToTop;
-            }
+            };
             // 为实现滚动区域滚动到顶部，定位，添加遮罩层
-            $('.scroll_mask').css('top', that.gV.listToTop)
+            $('.scroll_mask').css('top', that.gV.listToTop);
         },
         initMui: function($id) { //$id   就是滑动区域的 id 节点
             var that = this;
@@ -154,7 +154,7 @@ $(function() {
                             }
                         })(i);
                         that.gV.lazyClassArr.push("lazyload" + json.data[i].sonModelType)
-                    }
+                    };
                     //拼模板，初始化左右滑动mui组件
                     that.beforeFunc();
                     //初始化第一屏区域的上拉加载
@@ -162,11 +162,11 @@ $(function() {
                 },
                 callbackNoData:function(){
                     //没有数据时展示暂无数据
-                    $(".list").hide()
-                    $(".title").hide()
+                    $(".list").hide();
+                    $(".title").hide();
                     that.getElements.listLoading.hide();
                     that.getElements.noData.show();
-                    $(".br").css("display", "none")
+                    $(".br").css("display", "none");
                 },
                 callbackFail: function(json) {
                     tipAction(json.message);
@@ -187,7 +187,7 @@ $(function() {
                 needLogin: true,
                 needLoading: false,
                 callbackDone: function(json) {
-                    console.log(json.data)
+                    console.log(json.data);
                     var jsonData = that.dealData(json.data.list),
                         pageList = jsonData;
                     if (!$.util.objIsEmpty(pageList)) {
@@ -245,14 +245,14 @@ $(function() {
                             $id.find('.contentWrapper .mui-table-view-cell').html(that.html);
                             for(var i = 0 ; i < that.gV.lazyClassArr.length; i++) {
                                 $("." + that.gV.lazyClassArr[i]).lazyload()
-                            }
-                            alwaysAjax($('#' + w + ' .mui-table-view-cell'), s, 2)
+                            };
+                            alwaysAjax($('#' + w + ' .mui-table-view-cell'), s, 2);
                         } else {
                             $id.find('.contentWrapper .mui-table-view-cell').append(that.html);
                             for(var i = 0 ; i < that.gV.lazyClassArr.length; i++) {
                                 $("." + that.gV.lazyClassArr[i]).lazyload()
-                            }
-                            alwaysAjax($('#' + w + ' .mui-table-view-cell'), s, 2)
+                            };
+                            alwaysAjax($('#' + w + ' .mui-table-view-cell'), s, 2);
                         }
                         //获取当前展示的tab的索引
                         var index = $('#slider .tab-scroll-wrap .mui-active').index(),
@@ -322,30 +322,30 @@ $(function() {
             mui("body").on('mdClick', '.roomItem' , function(){
                 if($(this).attr("externalUrl")){
                     if($(this).attr("externalUrl").indexOf("?") != -1) {
-                        window.location.href = $(this).attr("externalUrl") + "&isHtOuterLinkUniqueIdentification=true"
+                        window.location.href = $(this).attr("externalUrl") + "&isHtOuterLinkUniqueIdentification=true";
                     } else{
-                        window.location.href = $(this).attr("externalUrl") + "?isHtOuterLinkUniqueIdentification=true"
+                        window.location.href = $(this).attr("externalUrl") + "?isHtOuterLinkUniqueIdentification=true";
                     }
                 }else{
-                    var id = $(this).attr("id")
-                    var articleBelong = $(this).attr("articleBelong")
-                    window.location.href = site_url.articleTemplate_url + '?id=' + id + '&articleBelong=' + articleBelong
+                    var id = $(this).attr("id");
+                    var articleBelong = $(this).attr("articleBelong");
+                    window.location.href = site_url.articleTemplate_url + '?id=' + id + '&articleBelong=' + articleBelong;
                 }
             },{
                 'htmdEvt': 'fortune_10'
-            })
+            });
             // 知识讲堂跳转到详情页
             mui("body").on('mdClick', '.knowledgeItem' , function(){
                 if($(this).attr("externalUrl")){
                     if($(this).attr("externalUrl").indexOf("?") != -1) {
-                        window.location.href = $(this).attr("externalUrl") + "&isHtOuterLinkUniqueIdentification=true"
+                        window.location.href = $(this).attr("externalUrl") + "&isHtOuterLinkUniqueIdentification=true";
                     } else{
-                        window.location.href = $(this).attr("externalUrl") + "?isHtOuterLinkUniqueIdentification=true"
+                        window.location.href = $(this).attr("externalUrl") + "?isHtOuterLinkUniqueIdentification=true";
                     }
                 }else{
-                    var id = $(this).attr("id")
-                    var articleBelong = $(this).attr("articleBelong")
-                    window.location.href = site_url.articleTemplate_url + '?id=' + id + '&articleBelong=' + articleBelong
+                    var id = $(this).attr("id");
+                    var articleBelong = $(this).attr("articleBelong");
+                    window.location.href = site_url.articleTemplate_url + '?id=' + id + '&articleBelong=' + articleBelong;
                 }
             },{
                 'htmdEvt': 'fortune_11'
