@@ -426,7 +426,7 @@ $(function () {
                     //认购状态
                     $('.trade_status_area .trade_status_desc').eq(1).html("等待基金成立确认认购份额");//第二步左边名称
                     $('.trade_status_area .trade_status_desc').eq(2).html("预计查看确认");//第三步左边名称
-                    $('.trade_status_area .trade_status_date').eq(1).html("已基金公司公告为准");//第二步右边描述
+                    $('.trade_status_area .trade_status_date').eq(1).html("以基金公司公告为准");//第二步右边描述
                     $('.trade_status_area .trade_status_date').eq(2).html("基金成立次日");//第三步右边描述
                 } else {
                     $('.trade_status_area .trade_status_date').eq(1).html(model.estimateConfirmDate + ' 24:00前');//预计份额确认时间

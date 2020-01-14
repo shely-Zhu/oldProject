@@ -1023,14 +1023,7 @@ gulp.task("webpack", ['jsCpd', 'changePath', 'commonHtml', 'jsImgRev'], function
 
         plugins.webpack(webpackConfig),
 
-        plugins.replacePro({
-            '/allServerResources/include/js/vendor/pdf/pdf.worker.js': prefix + '/allServerResources/include/js/vendor/pdf/pdf.worker.js',
-            // placeholderFuncName: '__prefix'
-        }),
-
-        plugins.replacePro(imgRev_1),
-
-        plugins.replacePro(imgRev_2),
+        
 
         //添加changeLocalHistory、eruda和CustomEventIeFile的文件内容
         through.obj(function(file, enc, cb) {
@@ -1044,6 +1037,16 @@ gulp.task("webpack", ['jsCpd', 'changePath', 'commonHtml', 'jsImgRev'], function
             this.push(file);
             cb()
         }),
+
+
+        plugins.replacePro({
+            '/allServerResources/include/js/vendor/pdf/pdf.worker.js': prefix + '/allServerResources/include/js/vendor/pdf/pdf.worker.js',
+            // placeholderFuncName: '__prefix'
+        }),
+
+        plugins.replacePro(imgRev_1),
+
+        plugins.replacePro(imgRev_2),
 
         //预上线环境时，去掉Log并压缩
         plugins.if(options.env === '3' || options.env === '4', plugins.removelogs()),
