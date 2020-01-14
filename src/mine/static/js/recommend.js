@@ -82,6 +82,7 @@ $(function() {
                 needLogin: true,
                 callbackDone: function(json) {
                     var jsonData = json.data;
+                    debugger
                     that.setting.customerNo = jsonData.customerNo;
                 },
                     
@@ -229,7 +230,6 @@ $(function() {
                 existMain = data.existMain;
                 advisor = data.advisor;
                 that.getElements.existMain=existMain;
-                that.setting.customerNo=data.customerNo
             if (existMain == 0 && advisor.length > 1) {
                 $('.recommendLcsText').html("您的理财师：")
                 //无专属且理财师多于1位默认展示一个
