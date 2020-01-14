@@ -74,7 +74,7 @@ $(function() {
                     } else {
                         // 购买费率
                         $('.purchaseRate').html(jsonData.purchaseRate + '%');
-                        $('.discountRate').html(jsonData.discount / 100 + '%');
+                        $('.discountRate').html((jsonData.discountRate / 100).toFixed(2) + '%');
                     }
                     // 认购起点
                     $(".buyStart").html(jsonData.tradeLimitList[0].minValue);
