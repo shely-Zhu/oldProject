@@ -285,17 +285,16 @@ $(function() {
                 data: {
                     "pageCurrent": that.gV.pageCurrent,
                     "pageSize": that.gV.pageSize,
-
                 },
                 needDataEmpty: true,
                 callbackDone: function(json) {
                     var data = json.data.holdShareList;
                     if (!json.data) {
                        // window.location.href = site_url.noAccountHoldShare_url
-                          that.$e.noDataContent.show()
-                          that.$e.noData.show()
-                          that.$e.contentListBox.hide()
-                          that.gV.checkClick = false;
+                        that.$e.noDataContent.show()
+                        that.$e.noData.show()
+                        that.$e.contentListBox.hide()
+                        that.gV.checkClick = false;
                     } else {
                         if (json.data.holdShareList.length == 0) {
                             that.$e.noDataContent.show()
@@ -403,7 +402,6 @@ $(function() {
                         })
                         newArr[newArr.length - 1].val = newArr[newArr.length - 1].val + num;
                         console.log("898", newArr)
-
                         newArr.forEach(function(item) {
                             var type = item.key;
                             if (type == "stockAssetRatio") {
@@ -457,7 +455,6 @@ $(function() {
                         // $("#assets-box .otherAssetRatio .shape").css({'width':Number(data.otherAssetRatio)/100*assets_width + 'px',
                         // 'background':'linear-gradient(to left,#FBE2BD,#D69549)'});
                     }
-
                 }
             }]
             $.ajaxLoading(obj);

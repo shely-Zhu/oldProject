@@ -217,12 +217,14 @@ var splitUrl = require('./components/splitUrl.js')();
                                 })
                                 return false;
                             } else if (obj.dataType == 'jsonp' && data.status == '4007') {
+                                $('.netLoading').hide();
                                 // sso接口未登录，需跳转
                                 manualTriggerLogin.locationFunc(data);
                                 //防止window.location.href在执行完请求里的所有代码之后再跳转
                                 throw 'jump login';
                                 return false;
                             } else if (data.status == '4007') {
+                                $('.netLoading').hide();
                                 // 其他黑名单接口未登录，跳转data.data
                                 manualTriggerLogin.locationFunc(data);
                                 //防止window.location.href在执行完请求里的所有代码之后再跳转

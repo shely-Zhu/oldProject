@@ -22,7 +22,7 @@ $(function() {
         },
         init: function() {
             var that = this;
-            that.getData()
+            that.getData();
             that.events();
         },
 

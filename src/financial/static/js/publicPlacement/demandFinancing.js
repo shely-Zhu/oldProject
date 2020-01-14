@@ -7,7 +7,7 @@
  * @FilePath: \htjf-app\src\financial\static\js\publicPlacement\demandFinancing.js
  */
 require('@pathCommonBase/base.js');
-require('@pathCommonJsCom/tabScroll.js')
+require('@pathCommonJsCom/tabScroll.js');
 require('@pathCommonJs/ajaxLoading.js');
 var generateTemplate = require('@pathCommonJsComBus/generateTemplate.js');
 var splitUrl = require('@pathCommonJs/components/splitUrl.js')();
@@ -37,23 +37,23 @@ $(function(){
                      var data = json.data;
                      var annYldRatDataList;
                      if(json.status == '0000'){
-                        that.$e.fundValue.html(data.enableAssetsStr)
+                        that.$e.fundValue.html(data.enableAssetsStr);
                         that.gv.list = data.list;
                         fundCodeList=[];
                         that.gv.list.forEach(function(item){
                             item.currentAmountStr = item.currentAmount.toFixed(2);
                             item.currentShareStr = item.currentShare.toFixed(2);
                             item.enableShareStr = item.enableShare.toFixed(2);
-                            fundCodeList.push(item.fundCode)
+                            fundCodeList.push(item.fundCode);
                         });
                         if(fundCodeList.length>0){
-                            that.newfundDetails(fundCodeList)
+                            that.newfundDetails(fundCodeList);
                         }
                         that.gv.list.forEach(function(item){
                             var _fundCode = item.fundCode;
                             that.gv.newfundDetailsDataList.forEach(function(itemlist){
                                    if(itemlist.trdCode == _fundCode){
-                                      item.annYldRat = itemlist.annYldRat
+                                      item.annYldRat = itemlist.annYldRat;
                                    }
                             })
                         })
@@ -75,7 +75,7 @@ $(function(){
                 callbackDone:function(json){
                     var data = json.data;
                     if(json.status == '0000'){
-                        that.gv.newfundDetailsDataList = json.data
+                        that.gv.newfundDetailsDataList = json.data;
                     }
                 }
             }];
@@ -85,23 +85,23 @@ $(function(){
         
          webinit: function () {
             var that = this;
-            $(".listLoading").show()
-            that.queryFundTransferAssets()
-            that.event()
+            $(".listLoading").show();
+            that.queryFundTransferAssets();
+            that.event();
          },
          event:function(){
             var that = this;
 			mui("body").on('mdClick','.cashItem',function(e){
-                var data = $(this).attr('data')
-                var cash = $(this).attr("cash")
+                var data = $(this).attr('data');
+                var cash = $(this).attr("cash");
                 var index = $(this).index();
                 if(cash == "false"){
                      //跳往基金详情页
                        window.location.href = site_url.pofPublicDetail_url + 
-                      '?fundCode=' + $(this).attr('fundCode') + '&fundType=' + $(this).attr('fundType') + '&deviceId=' + splitUrl['deviceId']
+                      '?fundCode=' + $(this).attr('fundCode') + '&fundType=' + $(this).attr('fundType') + '&deviceId=' + splitUrl['deviceId'];
                 }else if(cash == "true"){
                     //超宝详情
-                    window.location.href=site_url.superStreasureDetail_url + '?fundCode=' + $(this).attr('fundCode')
+                    window.location.href=site_url.superStreasureDetail_url + '?fundCode=' + $(this).attr('fundCode');
                 }
                // if(Number(data) > 0){
                  //   that.getData($(this).attr('fundCode'))

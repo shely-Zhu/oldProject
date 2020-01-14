@@ -178,5 +178,5 @@ $(function() {
         },
     }
     /*调用*/
-    newFundDetail.init()
+    newFundDetail.init();
 })

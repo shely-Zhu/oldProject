@@ -87,11 +87,11 @@ $(function () {
 			that.events();
 			if(that.gV.type == 'add'){
 				that.getData();
-				$("#HeadBarpathName").html('定投')
+				$("#HeadBarpathName").html('定投');
 			}
 			if(that.gV.type == 'edit'){
 				that.getDetails();
-				$("#HeadBarpathName").html('定投')
+				$("#HeadBarpathName").html('定投');
 			}
 			
 			that.getAgreeUrl();
@@ -134,9 +134,9 @@ $(function () {
 						var discount = 0 ; //折扣率
 						var newRate = ''; //折扣后的费率
 						var discountMount = 0; //折扣费
-						var feeCalcMed = ''
+						var feeCalcMed = '';
 						if(Number(val) == 0){
-							str = '0.00' + '元'
+							str = '0.00' + '元';
 						}else{
 							for (var i = 0; i < data.length; i++) {
 								if(Number(data[i].minFare) > 0){
@@ -153,24 +153,24 @@ $(function () {
 								}
 							};
 							if(feeCalcMed == '1'){
-								str = rate + '元'
+								str = rate + '元';
 							}else{
 								
 								if(discount == 1){
-									str = value + '元' +'(' + (rate*100).toFixed(2) + '%)'
+									str = value + '元' +'(' + (rate*100).toFixed(2) + '%)';
 								}else{
-									newRate = rate * discount*100
+									newRate = rate * discount*100;
 									// value = (Number(val)*Number(newRate)/100).toFixed(2)  // 折扣后的费用
 									// value2 = (Number(val)*Number(rate)).toFixed(2)   // 折扣前的费用
-									value = (Number(val)*(1-1/(1 + Number(newRate)/100))).toFixed(2)
-									value2 = (Number(val)*(1-1/(1 + rate))).toFixed(2)
-									discountMount = (Number(value2) - Number(value)).toFixed(2)
-									str = value + '元&nbsp;' + '(<span class="line-rate">' + (rate*100).toFixed(2) + '%</span>&nbsp;' + newRate.toFixed(2) + '%)省<span class="discount">' + discountMount + '</span>元'
+									value = (Number(val)*(1-1/(1 + Number(newRate)/100))).toFixed(2);
+									value2 = (Number(val)*(1-1/(1 + rate))).toFixed(2);
+									discountMount = (Number(value2) - Number(value)).toFixed(2);
+									str = value + '元&nbsp;' + '(<span class="line-rate">' + (rate*100).toFixed(2) + '%</span>&nbsp;' + newRate.toFixed(2) + '%)省<span class="discount">' + discountMount + '</span>元';
 								}
 							}
 						}
 						
-						that.$el.CostEstimateNum.html(str)
+						that.$el.CostEstimateNum.html(str);
 						
 					}
                   
@@ -192,29 +192,29 @@ $(function () {
 				callbackDone: function (json) {
 					if (json.status == '0000' || json.status == '4000') {
 						var data = json.data;
-						$("#loading").hide()
-						that.$el.fundName.html(data.secuSht)
-						that.$el.fundCode.html(data.trdCode)
-						that.gV.fundName = data.secuSht
-						that.gV.fundCode = data.trdCode
-						var tradeLimitList2 = []
-						that.$el.transformInput.attr('placeholder',data.tradeLimitAmount)
+						$("#loading").hide();
+						that.$el.fundName.html(data.secuSht);
+						that.$el.fundCode.html(data.trdCode);
+						that.gV.fundName = data.secuSht;
+						that.gV.fundCode = data.trdCode;
+						var tradeLimitList2 = [];
+						that.$el.transformInput.attr('placeholder',data.tradeLimitAmount);
 						for (var index = 0; index < data.tradeLimitList.length; index++) {
 							if(that.gV.fundBusinCode ==  data.tradeLimitList[index].fundBusinCode){
-								tradeLimitList2.push(data.tradeLimitList[index])
+								tradeLimitList2.push(data.tradeLimitList[index]);
 							}
 						}
 						for (var i = 0; i < tradeLimitList2.length; i++) {
 							if(i + 1 == tradeLimitList2.length){
-								that.$el.transformInput.attr('placeholder',Number(tradeLimitList2[i].minValue).toFixed(0) +"元起")
-								that.$el.transformInput.attr('min',Number(tradeLimitList2[i].minValue).toFixed(0))
-								that.$el.transformInput.attr('max',Number(tradeLimitList2[i].maxValue).toFixed(0))
-								that.gV.minValue =   Number(tradeLimitList2[i].minValue).toFixed(0)  // 起投金额
-								that.gV.maxValue = Number(tradeLimitList2[i].maxValue).toFixed(0)   // 最大金额
+								that.$el.transformInput.attr('placeholder',Number(tradeLimitList2[i].minValue).toFixed(0) +"元起");
+								that.$el.transformInput.attr('min',Number(tradeLimitList2[i].minValue).toFixed(0));
+								that.$el.transformInput.attr('max',Number(tradeLimitList2[i].maxValue).toFixed(0));
+								that.gV.minValue =   Number(tradeLimitList2[i].minValue).toFixed(0);  // 起投金额
+								that.gV.maxValue = Number(tradeLimitList2[i].maxValue).toFixed(0);   // 最大金额
 							}
 							
 						}
-						that.getRate(that.gV.minValue)
+						that.getRate(that.gV.minValue);
 						
 					}
                   
@@ -237,26 +237,26 @@ $(function () {
 				callbackDone: function (json) {
 					if (json.status == '0000' || json.status == '4000') {
 						var data = json.data;
-						$("#loading").hide()
-						that.$el.fundName.html(data.fundName)
-						that.$el.fundCode.html(data.fundCode)
-						that.gV.fundName = data.fundName
-						that.gV.fundCode = data.fundCode
-						that.gV.balance = data.balance
-						that.gV.tradeAcco = data.tradeAcco
-						that.gV.bankNo = data.bankNo 
-						that.gV.bankAccount = data.bankAccount
-						that.gV.bankAccountMask = data.bankAccountMask
-						that.gV.bankAccountSecret = data.bankAccountSecret
-						that.gV.fixedPeriodMask = data.fixedPeriodMask
-						that.gV.shares = data.shares
-						that.gV.expiryDate = data.expiryDate
-						that.$el.cycleDate.html(data.fixedPeriodMask)
-						that.$el.transformInput.val(data.balance)
-						that.getLimitData(data.fundCode)
+						$("#loading").hide();
+						that.$el.fundName.html(data.fundName);
+						that.$el.fundCode.html(data.fundCode);
+						that.gV.fundName = data.fundName;
+						that.gV.fundCode = data.fundCode;
+						that.gV.balance = data.balance;
+						that.gV.tradeAcco = data.tradeAcco;
+						that.gV.bankNo = data.bankNo;
+						that.gV.bankAccount = data.bankAccount;
+						that.gV.bankAccountMask = data.bankAccountMask;
+						that.gV.bankAccountSecret = data.bankAccountSecret;
+						that.gV.fixedPeriodMask = data.fixedPeriodMask;
+						that.gV.shares = data.shares;
+						that.gV.expiryDate = data.expiryDate;
+						that.$el.cycleDate.html(data.fixedPeriodMask);
+						that.$el.transformInput.val(data.balance);
+						that.getLimitData(data.fundCode);
 						that.getNextCutPayment();
 						that.getRate(data.balance);
-						that.getBankCard('0',false)
+						that.getBankCard('0',false);
 					}
                   
                 },
@@ -279,19 +279,19 @@ $(function () {
 					if (json.status == '0000' || json.status == '4000') {
 						var data = json.data;
 						var tradeLimitList2 = []
-						that.$el.transformInput.attr('placeholder',data.tradeLimitAmount)
+						that.$el.transformInput.attr('placeholder',data.tradeLimitAmount);
 						for (var index = 0; index < data.tradeLimitList.length; index++) {
 							if(that.gV.fundBusinCode ==  data.tradeLimitList[index].fundBusinCode){
-								tradeLimitList2.push(data.tradeLimitList[index])
+								tradeLimitList2.push(data.tradeLimitList[index]);
 							}
 						}
 						for (var i = 0; i < tradeLimitList2.length; i++) {
 							if(i + 1 == tradeLimitList2.length){
-								that.$el.transformInput.attr('placeholder',tradeLimitList2[i].minValue)
-								that.$el.transformInput.attr('min',Number(tradeLimitList2[i].minValue).toFixed(0))
-								that.$el.transformInput.attr('max',Number(tradeLimitList2[i].maxValue).toFixed(0))
-								that.gV.minValue =   Number(tradeLimitList2[i].minValue).toFixed(0)  // 起投金额
-								that.gV.maxValue = Number(tradeLimitList2[i].maxValue).toFixed(0)   // 最大金额
+								that.$el.transformInput.attr('placeholder',tradeLimitList2[i].minValue);
+								that.$el.transformInput.attr('min',Number(tradeLimitList2[i].minValue).toFixed(0));
+								that.$el.transformInput.attr('max',Number(tradeLimitList2[i].maxValue).toFixed(0));
+								that.gV.minValue =   Number(tradeLimitList2[i].minValue).toFixed(0);  // 起投金额
+								that.gV.maxValue = Number(tradeLimitList2[i].maxValue).toFixed(0);   // 最大金额
 							}
 						}
 					}
@@ -317,21 +317,21 @@ $(function () {
 						var data = [] ;
 						data = json.data.pageList;
 						data.forEach(function(element) {
-							element.after4Num = element.bankAccountMask.substr(element.bankAccountMask.length -4)
-							element.singleNum_w = Number(element.singleNum)/10000 + '万'
-							element.oneDayNum_w = Number(element.oneDayNum)/10000 + '万'
+							element.after4Num = element.bankAccountMask.substr(element.bankAccountMask.length -4);
+							element.singleNum_w = Number(element.singleNum)/10000 + '万';
+							element.oneDayNum_w = Number(element.oneDayNum)/10000 + '万';
 						});
 						if(that.gV.type == 'add'){
 							generateTemplate(data, that.$el.popupUl, that.$el.bankListTemplate,true);
-							$("#loading").hide()
-							$('.popup').css('display','block')
-						    that.gV.doubleClickStatus = true
+							$("#loading").hide();
+							$('.popup').css('display','block');
+						    that.gV.doubleClickStatus = true;
 						}else{
 							if(type){
 								generateTemplate(data, that.$el.popupUl, that.$el.bankListTemplate,true);
-								$("#loading").hide()
-								$('.popup').css('display','block')
-								that.gV.doubleClickStatus = true
+								$("#loading").hide();
+								$('.popup').css('display','block');
+								that.gV.doubleClickStatus = true;
 							}else{
 								for (var index = 0; index < data.length; index++) {
 									if(that.gV.bankAccountSecret == data[index].bankAccountSecret){
@@ -341,10 +341,10 @@ $(function () {
 										that.gV.bankAccount = data[index].bankAccount;
 										that.gV.bankAccountMask = data[index].bankAccountMask;
 										that.gV.bankAccountSecret = data[index].bankAccountSecret;
-										that.gV.capitalMode = data[index].capitalMode
-										that.gV.singleNum = data[index].singleNum
-										var after4Num = data[index].after4Num
-										var bankData = []
+										that.gV.capitalMode = data[index].capitalMode;
+										that.gV.singleNum = data[index].singleNum;
+										var after4Num = data[index].after4Num;
+										var bankData = [];
 										bankData.push({
 											bankThumbnailUrl:data[index].bankThumbnailUrl,
 											bankName:data[index].bankName,
@@ -367,8 +367,8 @@ $(function () {
                   
 				},
 				callbackNoData:function(json){
-					$('.popup').css('display','block')
-					that.gV.doubleClickStatus = true
+					$('.popup').css('display','block');
+					that.gV.doubleClickStatus = true;
 					generateTemplate("", that.$el.popupUl, that.$el.bankListTemplate,true);
 				}
 
@@ -391,16 +391,16 @@ $(function () {
                 callbackDone: function(json) {
 					if(json.status == '0000'){
 						// 将列表插入到页面上
-						var data = [] ;
+						var data = [];
 						data = json.data;
 						data.forEach(function(element){
 							if(element.materialType == '1'){
-								that.$el.contract.attr('datalink',element.linkAddress)
-								that.$el.contract.attr('type','1')
+								that.$el.contract.attr('datalink',element.linkAddress);
+								that.$el.contract.attr('type','1');
 							}
 							if(element.materialType == '2'){
-								that.$el.recruiting.attr('datalink',element.linkAddress)
-								that.$el.recruiting.attr('type','2')
+								that.$el.recruiting.attr('datalink',element.linkAddress);
+								that.$el.recruiting.attr('type','2');
 							}
 						});
 						
@@ -468,9 +468,9 @@ $(function () {
 				needDataEmpty: true,
 				callbackDone: function(json) {
 					$(".elasticButtons").hide();
-					var data = [] ;
+					var data = [];
 					data = json.data;
-					console.log('data',data)
+					console.log('data',data);
 					if(json.status == '0000'){
 						//window.location.href = site_url.pofCastSurelyDetails_url + '?scheduledProtocolId=' + data.scheduledProtocolId ;
 						window.location.href = site_url.surelyResultShot_url + '?scheduledProtocolId=' + data.scheduledProtocolId +"&applyDate="+data.applyDate;
@@ -485,38 +485,38 @@ $(function () {
 						 //密码错误
 						 $(".popup-password").show();
 						 $(".elasticButtons.error1").show();
-						 that.$el.elasticTxt.html(json.message)
+						 that.$el.elasticTxt.html(json.message);
 					 }else if(json.status == 'POF0192' || json.status == 'POF1353'){
 							 //密码锁定
 						 $(".popup-password").show();
 						 $(".elasticButtons.error2").show();
-						 that.$el.elasticTxt.html(json.message)
+						 that.$el.elasticTxt.html(json.message);
 					 }else if(json.status == 'POF1101' || json.status == 'POF1907' || json.status == 'POF1152' || json.status == 'POF3123'
 					 || json.status == 'POF4609' || json.status == 'POF7453' || json.status == 'POF7457' || json.status == 'POF9020'
 					 || json.status == 'POF9036'){
 						 //余额不足
 						 $(".popup-password").show();
 						 $(".elasticButtons.error2").show();
-						 that.$el.elasticTxt.html(json.message)
+						 that.$el.elasticTxt.html(json.message);
 					 }else if(json.status == 'POF0103'){
 						 //基金状态[停止交易],不能做[赎回]交易
 						 $(".popup-password").show();
 						 $(".elasticButtons.error2").show();
-						 that.$el.elasticTxt.html(json.message)
+						 that.$el.elasticTxt.html(json.message);
 					 }else if(json.status == 'POF1217'){
 						 //是代表账号锁定 弹后台msg框
 						 $(".popup-password").show();
 						 $(".elasticButtons.error3").show();
-						 that.$el.elasticTxt.html(json.message)
+						 that.$el.elasticTxt.html(json.message);
 					 }else if(json.status == 'POF1857'){
 						 //提示单日单账户限额
 						 $(".popup-password").show();
 						 $(".elasticButtons.error3").show();
-						 that.$el.elasticTxt.html(json.message)
+						 that.$el.elasticTxt.html(json.message);
 					 }else{
 						 $(".popup-password").show();
 						 $(".elasticButtons.error3").show();
-						 that.$el.elasticTxt.html(json.message)
+						 that.$el.elasticTxt.html(json.message);
 					 }
 				}
 
@@ -526,7 +526,7 @@ $(function () {
 		//校验密码   ---edit
 		checkPassword_edit: function(val) {
 			var that = regulatory;
-			regulatory.gV.password = val
+			regulatory.gV.password = val;
 			var obj = [{ 
 				url: site_url.pofFixedChange_api,
 				data: {
@@ -559,7 +559,7 @@ $(function () {
 					if(json.status == '0000'){
 					   // window.location.href = site_url.pofCastSurelyDetails_url + '?scheduledProtocolId=' + data.scheduledProtocolId ;
 					   //跳我的定投计划
-					   window.location.href = site_url.myInvestmentPlan_url
+					   window.location.href = site_url.myInvestmentPlan_url;
 					}
 				},
 				callbackNoData:function(json){
@@ -571,38 +571,38 @@ $(function () {
 						 //密码错误
 						 $(".popup-password").show();
 						 $(".elasticButtons.error1").show();
-						 that.$el.elasticTxt.html(json.message)
+						 that.$el.elasticTxt.html(json.message);
 					 }else if(json.status == 'POF0192' || json.status == 'POF1353'){
 							 //密码锁定
 						 $(".popup-password").show();
 						 $(".elasticButtons.error2").show();
-						 that.$el.elasticTxt.html(json.message)
+						 that.$el.elasticTxt.html(json.message);
 					 }else if(json.status == 'POF1101' || json.status == 'POF1907' || json.status == 'POF1152' || json.status == 'POF3123'
 					 || json.status == 'POF4609' || json.status == 'POF7453' || json.status == 'POF7457' || json.status == 'POF9020'
 					 || json.status == 'POF9036'){
 						 //余额不足
 						 $(".popup-password").show();
 						 $(".elasticButtons.error2").show();
-						 that.$el.elasticTxt.html(json.message)
+						 that.$el.elasticTxt.html(json.message);
 					 }else if(json.status == 'POF0103'){
 						 //基金状态[停止交易],不能做[赎回]交易
 						 $(".popup-password").show();
 						 $(".elasticButtons.error2").show();
-						 that.$el.elasticTxt.html(json.message)
+						 that.$el.elasticTxt.html(json.message);
 					 }else if(json.status == 'POF1217'){
 						 //是代表账号锁定 弹后台msg框
 						 $(".popup-password").show();
 						 $(".elasticButtons.error3").show();
-						 that.$el.elasticTxt.html(json.message)
+						 that.$el.elasticTxt.html(json.message);
 					 }else if(json.status == 'POF1857'){
 						 //提示单日单账户限额
 						 $(".popup-password").show();
 						 $(".elasticButtons.error3").show();
-						 that.$el.elasticTxt.html(json.message)
+						 that.$el.elasticTxt.html(json.message);
 					 }else{
 						 $(".popup-password").show();
 						 $(".elasticButtons.error3").show();
-						 that.$el.elasticTxt.html(json.message)
+						 that.$el.elasticTxt.html(json.message);
 					 }
 				}
 
@@ -620,47 +620,47 @@ $(function () {
 			deductingDayDate = that.$el.cycleDate.html().split(" ")[1];
 			if(deductingCycleDate == '每周' || deductingCycleDate == '每两周'){
 				if(deductingCycleDate == '每周'){
-					deductingCycle = 'week'
-					that.gV.protocolPeriodUnit = '1'
-					that.gV.tradePeriod = '1'
+					deductingCycle = 'week';
+					that.gV.protocolPeriodUnit = '1';
+					that.gV.tradePeriod = '1';
 				}else{
-					deductingCycle = 'doubleWeek'
-					that.gV.protocolPeriodUnit = '1'
-					that.gV.tradePeriod = '2'
+					deductingCycle = 'doubleWeek';
+					that.gV.protocolPeriodUnit = '1';
+					that.gV.tradePeriod = '2';
 				}
 				if(deductingDayDate.includes('一')){
-					deductingDay = 1
+					deductingDay = 1;
 				}
 				if(deductingDayDate.includes('二')){
-					deductingDay = 2
+					deductingDay = 2;
 				}
 				if(deductingDayDate.includes('三')){
-					deductingDay = 3
+					deductingDay = 3;
 				}
 				if(deductingDayDate.includes('四')){
-					deductingDay = 4
+					deductingDay = 4;
 				}
 				if(deductingDayDate.includes('五')){
-					deductingDay = 5
+					deductingDay = 5;
 				}
 				if(deductingDayDate.includes('六')){
-					deductingDay = 6
+					deductingDay = 6;
 				}
 				if(deductingDayDate.includes('日')){
-					deductingDay = 0
+					deductingDay = 0;
 				}
 			};
 			if(deductingCycleDate.includes('每月')){
 				deductingCycle = 'month';
-				that.gV.protocolPeriodUnit = '0'
-				that.gV.tradePeriod = '1'
-				deductingDay = Number(deductingDayDate.split('日')[0])
+				that.gV.protocolPeriodUnit = '0';
+				that.gV.tradePeriod = '1';
+				deductingDay = Number(deductingDayDate.split('日')[0]);
 			}
 			if(deductingCycleDate.includes('每日')){
 				deductingCycle = 'day';
-				that.gV.protocolPeriodUnit = '2'
-				that.gV.tradePeriod = '1'
-				deductingDay = 0
+				that.gV.protocolPeriodUnit = '2';
+				that.gV.tradePeriod = '1';
+				deductingDay = 0;
 			}
 			var obj = [{ 
 				url: site_url.pofFixedDeductDay_api,
@@ -674,7 +674,7 @@ $(function () {
 					if(json.status == '0000'){
 						var data = json.data;
 						$(".deductDay").show();
-						that.$el.nextDeductingDay.html(data.nextDeductingDay)
+						that.$el.nextDeductingDay.html(data.nextDeductingDay);
 						that.gV.nextDeductingDayFromate = data.nextDeductingDayFromate;
 						that.gV.nextDeductingDay = data.nextDeductingDay;
 						that.gV.dayInWeek = data.dayInWeek;
@@ -836,7 +836,7 @@ $(function () {
 				text: '每日',
 			}]
 			if(that.gV.type == 'add'){
-				that.getNextCutPayment()
+				that.getNextCutPayment();
 			}
 			
 			/** 下面三个事件： 银行卡列表出现/隐藏 **/
@@ -844,14 +844,14 @@ $(function () {
 				if(that.gV.type == 'edit'){
 					return
 				}
-				$(".imgc").hide()
-				$(".iimg").show()
-				that.gV.payType = $(this).attr('pay-type')
-				var useEnv = $(this).attr('pay-type')
-				$("#loading").show()
+				$(".imgc").hide();
+				$(".iimg").show();
+				that.gV.payType = $(this).attr('pay-type');
+				var useEnv = $(this).attr('pay-type');
+				$("#loading").show();
 				$(this).find(".imgc").show();
 				$(this).find(".iimg").hide();
-				that.getBankCard(useEnv,true)
+				that.getBankCard(useEnv,true);
 			}, {
 				htmdEvt: 'ordinarySetThrow_01'
 			}) 
@@ -863,22 +863,22 @@ $(function () {
 			// })
 			$(window).resize(function() {//解决键盘抬起将确认按钮顶起问题
 				if(that.gV.clientHeight>document.documentElement.clientHeight) {//键盘抬起将按钮隐藏
-					$(".btn_box").hide()
+					$(".btn_box").hide();
 				} else {//键盘消失将按钮显示
-					$(".btn_box").show()
+					$(".btn_box").show();
 				}
 			});
 
 			mui("body").on('mdClick','.popup-close',function(){
-				$('.popup').css('display','none')
-				$('.popup-password').css('display','none')
+				$('.popup').css('display','none');
+				$('.popup-password').css('display','none');
 			}, {
 				htmdEvt: 'ordinarySetThrow_02'
 			}) 
 
 			mui("body").on('mdClick','.popup-mask',function(){
-				$('.popup').css('display','none')
-				$('.popup-password').css('display','none')
+				$('.popup').css('display','none');
+				$('.popup-password').css('display','none');
 			}, {
 				htmdEvt: 'ordinarySetThrow_03'
 			}) 
@@ -893,20 +893,20 @@ $(function () {
 			$("#transformInput").on('input propertychange',function(){
 				that.gV.balance = Number($(this).val()).toFixed(2);
 				if($(this).val().includes(".") && $(this).val().split(".")[1].length >2){
-					tipAction('只能输入两位小数')
+					tipAction('只能输入两位小数');
 					return
 				}
 				if($(this).val()!="" && $(".item2 .iconfont").hasClass("check")){
 					that.$el.confirmBtn.removeAttr("disabled");
 				}else{
-					that.$el.confirmBtn.attr('disabled',true)
+					that.$el.confirmBtn.attr('disabled',true);
 				}
 				that.getRate($(this).val());
 			})
 			//清除输入框数字
 			mui("body").on('mdClick','.deleteNum',function(){
-				$('.transformInput').val(null)
-				that.$el.confirmBtn.attr('disabled',true)
+				$('.transformInput').val(null);
+				that.$el.confirmBtn.attr('disabled',true);
 			}, {
 				htmdEvt: 'ordinarySetThrow_05'
 			}) ;
@@ -914,17 +914,17 @@ $(function () {
 			//选中银行卡
 			mui("body").on('mdClick','.bank-li',function(){
 				$(".bank-li .true").hide();
-				$(this).find(".true").show()
+				$(this).find(".true").show();
 				that.gV.bankName = $(this).attr('bankName');
 				that.gV.bankNo = $(this).attr('bankNo');
 				that.gV.tradeAcco = $(this).attr('tradeAcco');
 				that.gV.bankAccount = $(this).attr('bankAccount');
 				that.gV.bankAccountMask = $(this).attr('bankAccountMask');
-				that.gV.capitalMode = $(this).attr('capitalMode')
-				that.gV.singleNum =  $(this).attr('singleNum')
-				that.gV.bankAccountSecret = $(this).attr('bankAccountSecret')
-				var after4Num = $(this).attr('after4Num')
-				var data = []
+				that.gV.capitalMode = $(this).attr('capitalMode');
+				that.gV.singleNum =  $(this).attr('singleNum');
+				that.gV.bankAccountSecret = $(this).attr('bankAccountSecret');
+				var after4Num = $(this).attr('after4Num');
+				var data = [];
 				data.push({
 					bankThumbnailUrl:$(this).attr('bankThumbnailUrl'),
 					bankName:$(this).attr('bankName'),
@@ -937,7 +937,7 @@ $(function () {
 				});
 				generateTemplate(data, that.$el.onlinepay, that.$el.bankListCheckTemplate,true);
 				setTimeout(function(){
-					$('.popup').css('display','none')
+					$('.popup').css('display','none');
 				},500)
 			}, {
 				htmdEvt: 'ordinarySetThrow_06'
@@ -947,7 +947,7 @@ $(function () {
 			mui("body").on("mdClick", ".item2 .iconfont", function (e) {
 				if ($(this).hasClass("check")) {
 					$(this).removeClass("check").html('&#xe668;');
-					that.$el.confirmBtn.attr('disabled',true)
+					that.$el.confirmBtn.attr('disabled',true);
                 } else {
 					$(this).addClass("check").html('&#xe669;');
 					that.$el.confirmBtn.removeAttr("disabled");
@@ -958,24 +958,24 @@ $(function () {
 			
 			//确定
 			mui("body").on("mdClick",'.btn_box .btn',function(){
-				$(".pwd-input").val('')
+				$(".pwd-input").val('');
                 $(".fake-box input").val('');
 				if(!!that.gV.minValue){
 					if(Number(that.gV.balance) < Number(that.gV.minValue)){
-						tipAction('最小买入金额不能低于' + that.gV.minValue + '元')
+						tipAction('最小买入金额不能低于' + that.gV.minValue + '元');
 						return
 					}
 				}
 				if(!!that.gV.maxValue){
 					if(Number(that.gV.balance) > Number(that.gV.maxValue)){
-						tipAction('最大买入金额不能超过' + that.gV.maxValue + '元')
+						tipAction('最大买入金额不能超过' + that.gV.maxValue + '元');
 						return
 					}
 				}
 				
 				if(!!that.gV.bankAccountSecret){
 					if(Number(that.gV.balance) > Number(that.gV.singleNum)){
-						tipAction('单笔金额不能超过' + that.gV.singleNum + '元')
+						tipAction('单笔金额不能超过' + that.gV.singleNum + '元');
 						return
 					}
 					that.$el.confirmBtn.attr('disabled',true)
@@ -991,40 +991,40 @@ $(function () {
 			}) ;
 			//  ---《公募基金风险揭示及售前告知书》
 			mui("body").on('mdClick','.setGoUrl',function(){
-				window.location.href = site_url.superContent_url + '?id=47'
+				window.location.href = site_url.superContent_url + '?id=47';
 			}, {
 				htmdEvt: 'ordinarySetThrow_09'
 			}) ;
 			mui("body").on('mdClick','.setGoUrl_1',function(){
-				window.location.href = site_url.superContent_url + '?id=63'
+				window.location.href = site_url.superContent_url + '?id=63';
 			},{
 				htmdEvt: 'ordinarySetThrow_21'
 			})
 			//  ---忘记密码
 			mui("body").on('mdClick','#passwordWrap .forgetP',function(){
 				//跳往原生页面去修改密码
-				window.location.href = site_url.pofForgotPassword_url
+				window.location.href = site_url.pofForgotPassword_url;
 			}, {
 				htmdEvt: 'ordinarySetThrow_10'
 			}) ;
 			//密码校验不通过   ---取消
 			mui("body").on('mdClick','.elasticCel',function(){
-				$('#passwordWrap').css('display','none')
-				$('.popup-password').css('display','none')
+				$('#passwordWrap').css('display','none');
+				$('.popup-password').css('display','none');
 			}, {
 				htmdEvt: 'ordinarySetThrow_11'
 			}) ;
 			//密码校验不通过   ---忘记密码
 			mui("body").on('mdClick','.error1 .elasticCel',function(){
 				//跳往原生页面去修改密码
-				window.location.href = site_url.pofForgotPassword_url
+				window.location.href = site_url.pofForgotPassword_url;
 			}, {
 				htmdEvt: 'ordinarySetThrow_12'
 			}) ;
 			//密码校验不通过   ---重新输入
 			mui("body").on('mdClick','.error1 .elasticYes',function(){
-				$('.popup-password').css('display','none')
-				$(".pwd-input").val('')
+				$('.popup-password').css('display','none');
+				$(".pwd-input").val('');
 				$(".fake-box input").val('');
 			}, {
 				htmdEvt: 'ordinarySetThrow_13'
@@ -1032,14 +1032,14 @@ $(function () {
 			//密码校验不通过   ---找回密码
 			mui("body").on('mdClick','.error2 .elasticYes',function(){
 				//跳往原生页面去修改密码
-				window.location.href = site_url.pofForgotPassword_url
+				window.location.href = site_url.pofForgotPassword_url;
 			}, {
 				htmdEvt: 'ordinarySetThrow_14'
 			}) ;
 			//密码校验不通过   ---重新输入
 			mui("body").on('mdClick','.error3 .elasticYes',function(){
-				$('.popup-password').css('display','none')
-				$(".pwd-input").val('')
+				$('.popup-password').css('display','none');
+				$(".pwd-input").val('');
 				$(".fake-box input").val('');
 			}, {
 				htmdEvt: 'ordinarySetThrow_15'
@@ -1070,11 +1070,11 @@ $(function () {
 			}) ;
 			//  ---《基金合同》《招募说明书》
 			mui("body").on('mdClick','.goPreview',function(){
-				var link = $(this).attr('datalink')
-				var links=link.split("?")
-			    var fileNames=links[0].substring(links[0].lastIndexOf('.'))
-				var typInfo = $(this).attr('type') == '1' ? '基金合同' : '招募说明书'
-				window.location.href = link +'&fileName=' + new Base64().encode(typInfo+fileNames) 
+				var link = $(this).attr('datalink');
+				var links=link.split("?");
+			    var fileNames=links[0].substring(links[0].lastIndexOf('.'));
+				var typInfo = $(this).attr('type') == '1' ? '基金合同' : '招募说明书';
+				window.location.href = link +'&fileName=' + new Base64().encode(typInfo+fileNames); 
 			}, {
 				htmdEvt: 'ordinarySetThrow_17'
 			}) ;
@@ -1085,9 +1085,9 @@ $(function () {
 				var o = e.target || e.srcElement;//当前点击对象
 					if (o != document.getElementById("transformInput")) {
 						//隐藏键盘操作
-						$("#transformInput").blur()
+						$("#transformInput").blur();
 					}else{
-						$("#transformInput").focus()
+						$("#transformInput").focus();
 					}
 			}, {
 				htmdEvt: 'ordinarySetThrow_18'

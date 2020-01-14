@@ -115,14 +115,14 @@ $(function() {
                     callbackDone: function(json) {
                         console.log('我是内容', json);
                         var data = json.data.financialerList;
-                        console.log(data)
+                        console.log(data);
                         that.$e.listLoading.hide();
                         if (json.data.matchedFinancialer == '0' && that.gV.startPage == 1) {
                             t.endPullupToRefresh(true);
                             that.$e.activityListDataBox.hide();
                             that.$e.activityListDataNoBox.show();
                             //that.getNoData();
-                            that.getRecommend(data)
+                            that.getRecommend(data);
                             return false;
                         }
                         that.$e.activityListDataBox.show();
@@ -153,10 +153,10 @@ $(function() {
                                     el.isPass == "Y" ? el.isPass = 1 : el.isPass = 0
                                 })
                                 // 将列表插入到页面上
-                            generateTemplate(data, that.$e.recordList, that.$e.starFinancialPlannerListTemplateId)
+                            generateTemplate(data, that.$e.recordList, that.$e.starFinancialPlannerListTemplateId);
                                 //无缝滚动
                             alwaysAjax($(".recordList"), null, 2);
-                            $(".lazyload").lazyload()
+                            $(".lazyload").lazyload();
 
                         }, 200)
 
@@ -173,8 +173,8 @@ $(function() {
             //推荐列表
             getRecommend: function(data) {
                 var that = this;
-                $('.activityNoListBox').show()
-                $('.activityNoList').show()
+                $('.activityNoListBox').show();
+                $('.activityNoList').show();
 
                 var topHeitgh = $('#activitySearch').height();
                 var noBox = $('.activityNoListBox').height();
@@ -192,7 +192,7 @@ $(function() {
                     //去掉mui-pull-bottom-pocket的mui-hidden
                     $('.contentWrapper').find('.mui-pull-bottom-pocket').removeClass('mui-hidden');
                     // 将列表插入到页面上
-                    generateTemplate(data, $('.activityNoListBox2'), $('#starFinancialPlannerList-template'), true)
+                    generateTemplate(data, $('.activityNoListBox2'), $('#starFinancialPlannerList-template'), true);
                         // 第一个调仓记录默认展开
                     $('.recordList').find('ul').eq(0).find('.mui-collapse').addClass('mui-active');
                 }, 200)
@@ -234,7 +234,7 @@ $(function() {
                                 //去掉mui-pull-bottom-pocket的mui-hidden
                                 $('.contentWrapper').find('.mui-pull-bottom-pocket').removeClass('mui-hidden');
                                 // 将列表插入到页面上
-                                generateTemplate(data, $('.activityNoListBox2'), $('#starFinancialPlannerList-template'))
+                                generateTemplate(data, $('.activityNoListBox2'), $('#starFinancialPlannerList-template'));
                                     // 第一个调仓记录默认展开
                                 $('.recordList').find('ul').eq(0).find('.mui-collapse').addClass('mui-active');
                             }, 200)
@@ -307,7 +307,7 @@ $(function() {
                         });
                     },
                     callbackFail: function(json) {
-                        console.log(json.message)
+                        console.log(json.message);
                         tipAction(json.message);
                     }
                 }];
@@ -337,7 +337,7 @@ $(function() {
                         that.initMui();
                     },
                     callbackFail: function(json) {
-                        console.log(json.message)
+                        console.log(json.message);
                         tipAction(json.message);
                     }
                 }];
@@ -360,14 +360,14 @@ $(function() {
                     var txt = $(this).text();
                     var code = $(this).attr('data-code');
                     var parentId = $(this).attr('data-parentId');
-                    $('.activityNoListBox').hide()
-                    $('.activityNoList').hide()
+                    $('.activityNoListBox').hide();
+                    $('.activityNoList').hide();
                     $('#activityDataBox').show();
                     $('#cityListBox').hide();
                     $('#loading').show();
                     $('.recordList').html('');
                     if (txt.split('').reverse().join('').charAt(0) == '市') {
-                        txt = txt.substring(0, txt.length - 1)
+                        txt = txt.substring(0, txt.length - 1);
                     }
                     $('#locationCity').text(txt);
                     $('#locationCity').attr({
@@ -407,13 +407,13 @@ $(function() {
                 //点击活动列表跳转
                 mui('body').on('mdClick', '.mui-card', function() {
                     $('#mui-input-clear').blur();
-                    var financialerId = $(this).attr("code")
-                    var starFinancialPlannerName=$(this).attr("name")
+                    var financialerId = $(this).attr("code");
+                    var starFinancialPlannerName=$(this).attr("name");
                   
                         // 登陆状态下先判断该用户是否绑定过理财师，未登录状态下直接跳转开户页面
                         // 先判断该用户是否绑定过理财师
                     if (that.gV.FinancialerClickFlag) {
-                        that.gV.FinancialerClickFlag = false
+                        that.gV.FinancialerClickFlag = false;
                         var obj = [{
                             url: site_url.queryMyFinancialerList_api,
                             data: {},
@@ -433,7 +433,7 @@ $(function() {
                                         yesTxt: '明白了',
                                         htmdEvtYes: 'starFinancialPlannerList_10',
                                         callback: function() {
-                                            that.gV.FinancialerClickFlag = true
+                                            that.gV.FinancialerClickFlag = true;
                                         },
                                         // callbackCel: function() {
                                         //     that.gV.FinancialerClickFlag = true 
@@ -453,10 +453,10 @@ $(function() {
                                         htmdEvtCel: 'starFinancialPlannerList_13',
                                         callback: function() {
                                             // 点击立即绑定跳转验证用户身份页面
-                                            window.location.href = site_url.bindFinancialer_url + '?financialerId=' + financialerId + '&type=1&name='+starFinancialPlannerName
+                                            window.location.href = site_url.bindFinancialer_url + '?financialerId=' + financialerId + '&type=1&name='+starFinancialPlannerName;
                                         },
                                         callbackCel: function() {
-                                            that.gV.FinancialerClickFlag = true
+                                            that.gV.FinancialerClickFlag = true;
                                         }
                                     });
                                 }
@@ -474,16 +474,16 @@ $(function() {
                                     htmdEvtCel: 'starFinancialPlannerList_15',
                                     callback: function() {
                                         // 点击立即绑定跳转验证用户身份页面
-                                        window.location.href = site_url.bindFinancialer_url + '?financialerId=' + financialerId + '&type=1&name='+starFinancialPlannerName
+                                        window.location.href = site_url.bindFinancialer_url + '?financialerId=' + financialerId + '&type=1&name='+starFinancialPlannerName;
                                     },
                                     callbackCel: function() {
-                                        that.gV.FinancialerClickFlag = true
+                                        that.gV.FinancialerClickFlag = true;
                                     }
                                 });
                             },
                             callbackFail: function(data) {
-                                that.gV.FinancialerClickFlag = true
-                                tipAction(data.message)
+                                that.gV.FinancialerClickFlag = true;
+                                tipAction(data.message);
                             }
                         }];
                         $.ajaxLoading(obj);
@@ -499,29 +499,29 @@ $(function() {
                     // $(this).attr('htmdEvt','starFinancia_search')
                     $('.recordList').html('');
                     // $('#loading').show();
-                    $(".activityCityBox").hide()
-                    $(".Cutof").show()
+                    $(".activityCityBox").hide();
+                    $(".Cutof").show();
                     that.gV.startPage = 1;
-                    console.log($('.mui-input-clear').val())
+                    console.log($('.mui-input-clear').val());
                     setTimeout(function() {
                         that.initMui();
                     }, 400)
                     mui('.contentWrapper').pullRefresh().scrollTo(0, 0, 100);
                 });
                 $(".activitySearchInput input").focus(function() {
-                    $(".activityListDataBox").hide()
-                    $(".activityCityBox").hide()
-                    $(".Cutof").show()
+                    $(".activityListDataBox").hide();
+                    $(".activityCityBox").hide();
+                    $(".Cutof").show();
                 })
                 mui('body').on('mdClick', '.Cutof', function() {
                         // $(".Cutof").click(function(){
-                        $(".activityListDataBox").show()
-                        $(".activityCityBox").show()
-                        $(".Cutof").hide()
-                        $(".mui-input-clear").attr("placeholder", "")
+                        $(".activityListDataBox").show();
+                        $(".activityCityBox").show();
+                        $(".Cutof").hide();
+                        $(".mui-input-clear").attr("placeholder", "");
                         if ($(".mui-input-clear").val() != "") {
-                            $(".mui-input-clear").val("")
-                            $(".mui-input-clear").attr("placeholder", "请输入理财师工号或姓名")
+                            $(".mui-input-clear").val("");
+                            $(".mui-input-clear").attr("placeholder", "请输入理财师工号或姓名");
 
                         }
                         that.initMui();

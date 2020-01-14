@@ -33,17 +33,17 @@ $(function() {
 		init: function() {	
 			var that = this;
 
-			that.initMui(".list", ".contentWrapper")
+			that.initMui(".list", ".contentWrapper");
 
-            that.events()
+            that.events();
 		},
 
         dealTime: function(data) {
             $.each(data, function(a, b) {
                 if(b.articleTimeStr && b.articleTimeStr!= '') {
-                    b.articleTimeStr = b.articleTimeStr.split(" ")[0].split("-")[1] + "." + b.articleTimeStr.split(" ")[0].split("-")[2]
+                    b.articleTimeStr = b.articleTimeStr.split(" ")[0].split("-")[1] + "." + b.articleTimeStr.split(" ")[0].split("-")[2];
                 } else {
-                    b.articleTimeStr = ""
+                    b.articleTimeStr = "";
                 }
             })
             return data;
@@ -114,16 +114,16 @@ $(function() {
             var that=this
             // 列表页跳转到详情页
 			mui("body").on('mdClick', '.knownItem' , function(){
-                var $this = $(this)
+                var $this = $(this);
                 if($this.attr("externalUrl")){
                     if($this.attr("externalUrl").indexOf("?") != -1) {
-                        window.location.href = $this.attr("externalUrl") + "&isHtOuterLinkUniqueIdentification=true"
+                        window.location.href = $this.attr("externalUrl") + "&isHtOuterLinkUniqueIdentification=true";
                     } else{
-                        window.location.href = $this.attr("externalUrl") + "?isHtOuterLinkUniqueIdentification=true"
+                        window.location.href = $this.attr("externalUrl") + "?isHtOuterLinkUniqueIdentification=true";
                     }
                 }else{
-                    var id = $this.attr("id")
-                    window.location.href = site_url.articleTemplate_url + '?id=' + id + '&articleBelong=5'
+                    var id = $this.attr("id");
+                    window.location.href = site_url.articleTemplate_url + '?id=' + id + '&articleBelong=5';
                 }
                 
             },{
