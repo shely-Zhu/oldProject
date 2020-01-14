@@ -197,7 +197,7 @@ $(function() {
                     //之所以这么做是因为后台程龙代码做转发的时候banner配置的路径只转发了wap和apps的，无法转发apppof的，所以前端暂时控制
                     if (splitUrl()['type'] == "publicOffering") { //是apppof
 
-                        $(".pubLocal").eq(i).attr("href", "/financial/views/publicPlacement/publicDetail.html?fundCode" + el.productCode + "&fundType=" + el.pofType);
+                        $(".pubLocal").eq(i).attr("href", "/financial/views/publicPlacement/publicDetail.html?fundCode=" + el.productCode + "&fundType=" + el.pofType);
 
                     } else if (splitUrl()['type'] == "privatePlacement") {
 
@@ -211,7 +211,7 @@ $(function() {
 
                     } else { //type=publicOffering和wap的域名的时候的跳转路径
 
-                        $(".pubLocal").eq(i).attr("href", "/financial/views/publicPlacement/publicDetail.html?fundCode" + el.productCode + "&fundType=" + el.pofType);
+                        $(".pubLocal").eq(i).attr("href", "/financial/views/publicPlacement/publicDetail.html?fundCode=" + el.productCode + "&fundType=" + el.pofType);
                     }
                 });
 
