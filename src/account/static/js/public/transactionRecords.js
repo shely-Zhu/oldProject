@@ -155,7 +155,7 @@ $(function () {
                 callbackDone: function (json) {
                     var data;
                     if (!json.data.pageList || json.data.pageList.length == 0) { // 没有记录不展示
-                        $('.list').find('.mui-pull-bottom-pocket').addClass('mui-hidden');
+                        //$('.list').find('.mui-pull-bottom-pocket').addClass('mui-hidden');
                         $('.list').addClass('noMove');
                         that.gV.pageNum = 1
                         t.endPullupToRefresh(true);
@@ -215,27 +215,29 @@ $(function () {
                         that.gV.pageNum++;
                         // 将交易记录列表插入到页面上
                         generateTemplate(data, that.$e.recordListWraperBoxId, that.$e.recordListTemplateId);
-                        // alwaysAjax($('#list .mui-table-view-cell'), "#list .contentWrapper", 2);
+                        alwaysAjax($('.mui-table-view-cell'), ".contentWrapper", 2);
                     }, 200)
                 },
                 callbackFail: function (json) {
-
-                    $('.list').find('.mui-pull-bottom-pocket').addClass('mui-hidden');
+                    if(that.gV.pageNum == 1) {
+                        that.$e.listLoading.hide();
+                        $('.list').find('.mui-pull-bottom-pocket').addClass('mui-hidden');
+                    }
                     $('.list').addClass('noMove');
-                    that.gV.pageNum = 1
+                    //that.gV.pageNum = 1
                     t.endPullupToRefresh(true);
-                    that.$e.listLoading.hide();
                     tipAction(json.message);
-
                 },
                 callbackNoData: function (json) {
-                    $('.list').find('.mui-pull-bottom-pocket').addClass('mui-hidden');
+                    //$('.list').find('.mui-pull-bottom-pocket').addClass('mui-hidden');
                     $('.list').addClass('noMove');
-                    that.gV.pageNum = 1
+                    //that.gV.pageNum = 1
                     t.endPullupToRefresh(true);
-                    that.$e.listLoading.hide();
-                    that.$e.noData.show();
-
+                    if(that.gV.pageNum == 1) {
+                        that.$e.listLoading.hide();
+                        that.$e.noData.show();
+                        $('.list').find('.mui-pull-bottom-pocket').addClass('mui-hidden');
+                    }
                 },
 
             }];
@@ -279,7 +281,7 @@ $(function () {
         events: function() {
             var that = this;
             // 筛选分类的点击事件
-            alwaysAjax();
+            //alwaysAjax();
             mui("body").on('mdClick', '.searchItem', function () {
                 if ($(this).is('.searchItemActive')) {
                     $(this).removeClass("searchItemActive").siblings('.searchItem').removeClass('searchItemActive');
@@ -304,7 +306,7 @@ $(function () {
             })
             // 筛选列表内容的点击事件
             mui("body").on('mdClick', '.detailItem', function () {
-
+                that.gV.pageNum = 1
                 var detailId = $(this).attr("detailId")
                 var searchType = $(this).attr("searchType")
                 var data = $(this).attr("data")
@@ -337,10 +339,9 @@ $(function () {
 
                 // 再次重置上拉加载
                 mui('.contentWrapper').pullRefresh().refresh(true);
-                that.gV.pageNum = 1
                 //清空列表
                 $('#recordListWraper').find('div').remove()
-                $('.list').find('.mui-pull-bottom-pocket').removeClass('mui-hidden');
+                //$('.list').find('.mui-pull-bottom-pocket').removeClass('mui-hidden');
                 //重新初始化
                 that.initMui(that.gV.ajaxdata);
                 mui('.contentWrapper').pullRefresh().scrollTo(0, 0, 0)
