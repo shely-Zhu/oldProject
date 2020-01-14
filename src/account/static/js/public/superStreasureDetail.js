@@ -475,7 +475,7 @@ $(function() {
             })
                 //点击收益明细
             mui("body").on('mdClick', '.addLi', function(e) {
-                window.location.href = site_url.returnsDetail_url + "?fundCode=" + that.gL.fundCode;
+                window.location.href = site_url.returnsDetail_url + "?fundCode=" + that.gL.fundCode + "&isSuper=1";
             }, {
                 'htmdEvt': 'superStreasureDetail_5'
             })
