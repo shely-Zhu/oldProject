@@ -100,6 +100,7 @@ $(function() {
                     // projectId:"35940",
                 },
                 contentTypeSearch: true,
+                needLogin: true,
                 callbackDone: function(json) {
                     var jsonData = json.data;
                     that.data.fundDetailObj = jsonData;
@@ -431,6 +432,7 @@ $(function() {
                     hmac: "", //预留的加密信息     
                     params: {}
                 },
+                needLogin: true,
                 // async: false, //同步
                 needDataEmpty: false, //需要判断data是否为空
                 callbackDone: function(json) {
