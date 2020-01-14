@@ -96,6 +96,7 @@ $(function() {
                 needDataEmpty: true,
                 callbackDone: function(json) {
                     if (json.status == '0000') {
+                        debugger
                         if (that.gV.payType == '0') {
                             $('#loading').hide();
                             $(".resultTop").hide();
