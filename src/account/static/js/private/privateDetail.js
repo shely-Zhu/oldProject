@@ -715,7 +715,7 @@ $(function() {
 				'htmdEvt': "privateDetail_3"
 			})
             // 历史明细点击跳转
-            mui("body").on('mdClick', '#historyDetailBtn', function() {
+            mui("body").on('mdClick', '#historyDetailBtn, .historyDetailArrow', function() {
             	window.location.href = site_url.historyDetail_url + '?projectId=' + that.data.projectId;
             }, {
 				'htmdEvt': 'privateDetail_4'
