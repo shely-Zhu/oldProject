@@ -124,6 +124,7 @@ var splitUrl = require('./components/splitUrl.js')();
                 formData: false, //判断是否需要使用formData上传
                 loginNotJump: false, //判断40007后是否需要跳转到登录页面，true--不跳转, false---跳转
                 callbackLoginFunc: function() {}, //如果未登录不需要跳转，执行此函数
+                callbackLoginBack: function(){}, //去了app登录之后再回来当前的webview做的操作，如按钮变为可点击
                 appRisk: false, //当需要与app交互时
             };
 
@@ -218,15 +219,25 @@ var splitUrl = require('./components/splitUrl.js')();
                                 return false;
                             } else if (obj.dataType == 'jsonp' && data.status == '4007') {
                                 $('.netLoading').hide();
+
+                                //去了app登录之后再回来当前的webview做的操作，如按钮变为可点击
+                                obj.callbackLoginBack();
+
                                 // sso接口未登录，需跳转
                                 manualTriggerLogin.locationFunc(data);
+
                                 //防止window.location.href在执行完请求里的所有代码之后再跳转
                                 throw 'jump login';
                                 return false;
                             } else if (data.status == '4007') {
                                 $('.netLoading').hide();
+
+                                //去了app登录之后再回来当前的webview做的操作，如按钮变为可点击
+                                obj.callbackLoginBack();
+
                                 // 其他黑名单接口未登录，跳转data.data
                                 manualTriggerLogin.locationFunc(data);
+
                                 //防止window.location.href在执行完请求里的所有代码之后再跳转
                                 throw 'jump login';
                                 return false;
