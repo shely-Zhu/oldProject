@@ -286,7 +286,7 @@ $(function() {
                     "pageCurrent": that.gV.pageCurrent,
                     "pageSize": that.gV.pageSize,
                 },
-                needDataEmpty: false,
+                needDataEmpty: true,
                 callbackDone: function(json) {
                     var data = json.data.holdShareList;
                     if (!json.data) {

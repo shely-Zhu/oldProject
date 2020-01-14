@@ -22,11 +22,36 @@
 		<div class="riskTitle">您的风险承受能力</div>
 		<div class="riskType">***</div>
 		<!-- <img class="images" src=""></img> -->
-		<div class="images"><img src="" alt=""></div>
+		<div class="images">
+			<!-- <img src="" alt=""> -->
+		</div>
 		<div class="riskContent">------</div>
 
 		
 	</div>
+
+
+	<script id="img_template" type="text/x-handlebars-template">
+	
+		    {{#if riskImg_1}}
+		    <img src="/intelligentInvestment/static/img/1.png" alt="">
+		    {{/if}}
+		    {{#if riskImg_2}}
+		    <img src="/intelligentInvestment/static/img/2.png" alt="">
+		    {{/if}}
+		    {{#if riskImg_3}}
+		    <img src="/intelligentInvestment/static/img/3.png" alt="">
+		    {{/if}}
+		    {{#if riskImg_4}}
+		    <img src="/intelligentInvestment/static/img/4.png" alt="">
+		    {{/if}}
+		    {{#if riskImg_5}}
+		    <img src="/intelligentInvestment/static/img/5.png" alt="">
+		    {{/if}}
+		
+	</script>
+
+
 	@@include('../../common/views/button/buyNowBtn.html',{"arr":[ {"className": "bottom developPlans", "txt": "暂不可售"} ]})
 
 	 @@include('@pathInclude/views/footer.html')

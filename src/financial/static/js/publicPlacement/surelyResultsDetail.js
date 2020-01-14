@@ -89,8 +89,10 @@ $(function() {
                     applyId: that.gV.applyId,
                     fundCode: that.gV.fundCode,
                     fundBusinCode: that.gV.fundBusinCode,
+                    fixbusinflag: splitUrl['fixbusinflag'],
+                    isMoneyBuyPub: that.gV.flag == 'buy'? '1': '',
                 },
-                //async: false,
+                //async: false, 
                 needDataEmpty: true,
                 callbackDone: function(json) {
                     if (json.status == '0000') {
@@ -152,9 +154,9 @@ $(function() {
                             
                             if (json.data.secondFundName && json.data.secondFundCode){
                                 //是货基购基
-                                $('.normalBuyArea').hide();
-                                $('.fundBuyArea').show();
-                                $('.fundBuyName').html(json.data.secondFundName);
+                                $('.normalArea').hide();
+                                $('.fundArea').show();
+                                $('.fundTransName').html(json.data.secondFundName);
                             }
                         }
                         if (that.gV.payType == '1') { // 买入汇款支付
@@ -194,9 +196,6 @@ $(function() {
                 },
 
             }];
-            if (decodeURI(splitUrl['bugFundName']) != "false") {
-               obj[0].data.isMoneyBuyPub = "1";
-            }
 
             $.ajaxLoading(obj);
         },

@@ -9,10 +9,16 @@
 * accountType  客户类型  0-机构 1-个人
 *
 * url 认证成功跳转页面
-* 
+
+* @author zhangyanping  2020-01-12
+* 添加组件的埋点的相关的代码
+* htmdEvt 代表埋点的属性，如当前页面只引用该组件一次，则htmdEvt的值为当前页面名，若多次引用，则需区分引用的场景，传入不同的值
+*
+*
+* judgeCompanyFlag // true 需判断机构不可转入或买入或定投 false 机构可转入或买入或定投
 */
 
-module.exports = function(fundCode, url) {
+module.exports = function(fundCode, url, judgeCompanyFlag,htmdEvt) {
 	var auth = {
 		$e:{
             
@@ -48,8 +54,24 @@ module.exports = function(fundCode, url) {
                     var data = json.data
                     that.gV.accountType = data.accountType
                     that.gV.userStatus = data.investFavour
-                    // 获取用户各审核情况，共5条
-        			that.initAuth();
+                    // true 判断机构可不可操作买入等按钮
+                    if(judgeCompanyFlag) {
+                    	if(that.gV.accountType == 1) {
+                    		that.initAuth();
+                    	} else {
+                    		$.elasticLayer({
+					            id: "tip",
+					            title: '提示',
+					            p: '<p>暂不支持机构客户进行交易</p>',
+					            zIndex: 100,
+					            hideCelButton: true,
+					            yesTxt: '明白了'
+					        });
+                    	}
+                    } else {
+                    	// 获取用户各审核情况，共5条
+                    	that.initAuth();
+                    }
                 },
                 callbackNoData:function(json){
 					tipAction(json.message);
@@ -296,7 +318,7 @@ module.exports = function(fundCode, url) {
 						break;
 				}
 			},{
-				'htmdEvt': 'optionalPublicDetail_14'
+				'htmdEvt': htmdEvt + '_001'
 			});
 				//一键认证
 			mui("body").on('mdClick', ".tips .tips-btn", function (e) {
@@ -375,7 +397,7 @@ module.exports = function(fundCode, url) {
 						break;
 				}
 			},{
-				'htmdEvt': 'optionalPublicDetail_15'
+				'htmdEvt': htmdEvt + '_002'
 			});
         	//风险等级匹配失败
 			mui("body").on("mdClick",".isRiskMatchBox_cancel",function(){
@@ -383,7 +405,7 @@ module.exports = function(fundCode, url) {
 				$(".isRiskMatchBox").hide();
 			  // that.gV.isRiskMatchBox.hide();
 			},{
-				'htmdEvt': 'optionalPublicDetail_12'
+				'htmdEvt': htmdEvt + '_003'
 			})
 			//风险等级匹配失败结果跳转
 			mui("body").on("mdClick",".isRiskMatchResult",function(){
@@ -407,37 +429,40 @@ module.exports = function(fundCode, url) {
                     window.location.href = site_url.completeInfoEditModify_url
                 }
 			},{
-				'htmdEvt': 'optionalPublicDetail_13'
+				'htmdEvt': htmdEvt + '_004'
 			})
         	//风测等级匹配成功
         	mui("body").on('mdClick',".isRiskMatchBox_match",function(){
 				var type = that.gV.singleaAuthenType;
 				$(".isRiskMatch_mask").hide();
 				$(".isRiskMatchBox").hide();
-				if(!that.gV.isWealthAccountStatus||that.gV.accountType == 0|| that.gV.accountType == 2){
+				if(!that.gV.isWealthAccountStatus){
 					//未开通账户
 					return false
 				}
 				window.location.href = url
-				/*if(type == "into"){
-					//买入一键认证
-					window.location.href = site_url.fundTransformIn_url+"?fundCode="+that.data.fundCode+"&noReload=1";
-			   }else if(type == "investement"){
-					//定投一键认证
-					window.location.href = site_url.ordinarySetThrow_url+"?fundCode="+that.data.fundCode+'&type=add';			
-			   }*/
+				
 			},{
-				'htmdEvt': 'optionalPublicDetail_11'
+				'htmdEvt': htmdEvt + '_005'
 			})
         	// 点击弹窗或关闭按钮隐藏
             var  maskheight =  window.innerHeight - $('.tips-content').height();
             $('.tips-mask').height(maskheight)
-			$('body').on('tap', '.icontips-close', function () {
+            mui("body").on('mdClick',".icontips-close",function(){
 				$('.tips').css('display', 'none')
-			})
-			$('body').on('tap', '.tips-mask', function () {
+            },{
+            	'htmdEvt': htmdEvt + '_006'
+            })
+            mui("body").on('mdClick',".tips-mask",function(){
 				$('.tips').css('display', 'none')
-			})
+            },{
+            	'htmdEvt': htmdEvt + '_007'
+            })
+			// $('body').on('tap', '.icontips-close', function () {
+			// })
+			// $('body').on('tap', '.tips-mask', function () {
+			// 	$('.tips').css('display', 'none')
+			// })
 		},
 	}
 	auth.init();

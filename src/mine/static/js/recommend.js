@@ -53,6 +53,8 @@ $(function() {
             if( $('html').height() < wHeight ){
                 $('html').height( wHeight );
             }
+            //获取用户信息
+            this.getUserInfor();
 
             // 页面所处位置判断，逻辑处理
             that.judgePageLocation();
@@ -65,6 +67,26 @@ $(function() {
 
             //绑定事件
             that.events();
+        },
+        // 先请求接口，获取客户比那好
+        getUserInfor:function(){
+            var that = this;
+            var userObj = [{
+                url: site_url.queryUserBaseInfo_api,
+                data: {
+                    hmac: "", //预留的加密信息     
+                    params: { //请求的参数信息
+                    }
+                },
+                async: false,
+                needLogin: true,
+                callbackDone: function(json) {
+                    var jsonData = json.data;
+                    that.setting.customerNo = jsonData.customerNo;
+                },
+                    
+            }]
+            $.ajaxLoading(userObj);
         },
         /**
          * [judgePageLocation 页面所处位置判断--微信，app中对应逻辑处理]

@@ -62,7 +62,7 @@ $(function() {
   getDataLabels: function(t) {
     var that = this;
     var obj = [{ // 系统调仓记录列表
-        url: site_url.queryReourceList_api,
+        url: site_url.queryReourceListNew_api,
         data: {
           "projectId":that.gV.projectId,//项目编号
           //"projectId":"21970",//项目编号

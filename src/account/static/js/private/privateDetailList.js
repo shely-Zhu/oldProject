@@ -309,7 +309,7 @@ $(function() {
 
                             //判断当前ul高度
                             debugger
-                            var ulHeight = $list.find(".mui-table-view").height() 
+                            var ulHeight = $list.find(".mui-table-view").height()
                             if (ulHeight < that.htmlHeight) {
 
                                 $list.height(that.highHeight).addClass('setHeight').addClass('noMove');
@@ -361,11 +361,11 @@ $(function() {
                     t.endPullupToRefresh(false);
 
                     //没有数据
-                    if(that.gV.ajaxArr[that.gV.current_index].pageNum == 1) {
+                    if (that.gV.ajaxArr[that.gV.current_index].pageNum == 1) {
                         $id.find('.mui-scroll .mui-table-view-cell').html(that.getElements.noData.clone(false)).addClass('noCon');
                         //$id.find('.mui-scroll .list').html(that.getElements.noData.clone(false)).addClass('noCon');
                         $id.find('.noData').show();
-                    } 
+                    }
 
                     setTimeout(function() {
                         that.getElements.listLoading.hide();
@@ -446,8 +446,8 @@ $(function() {
                             hideCelButton: false,
                             zIndex: 100,
                             yesButtonPosition: 'left',
-                            htmdEvtYes:'privateDetailList_8',
-                            htmdEvtCel:'privateDetailList_9',
+                            htmdEvtYes: 'privateDetailList_8',
+                            htmdEvtCel: 'privateDetailList_9',
                             callback: function(t) {
 
                             },
@@ -463,8 +463,8 @@ $(function() {
                             celTxt: '取消',
                             hideCelButton: false,
                             zIndex: 100,
-                            htmdEvtYes:'privateDetailList_10',
-                            htmdEvtCel:'privateDetailList_11',
+                            htmdEvtYes: 'privateDetailList_10',
+                            htmdEvtCel: 'privateDetailList_11',
                             callback: function(t) {
 
                             },
@@ -477,8 +477,8 @@ $(function() {
                             celTxt: '取消',
                             hideCelButton: false,
                             zIndex: 100,
-                            htmdEvtYes:'privateDetailList_12',
-                            htmdEvtCel:'privateDetailList_13',
+                            htmdEvtYes: 'privateDetailList_12',
+                            htmdEvtCel: 'privateDetailList_13',
                             callback: function(t) {
                                 var obj = [{
                                     url: site_url.fundReserveCancel_api,
@@ -512,28 +512,17 @@ $(function() {
                 }, {
                     'htmdEvt': 'privateDetailList_3'
                 })
-                // 点击我明白了
-                // mui("body").on('mdClick', '.tipContainer .buttonOne', function(e) {
-                //         $('.mask').hide();
-                //         $('#tipConOne').hide();
-                //         var conText = $(this).siblings('tipContent').html;
-                //         that.openTipConOne(conText);
-
-            //     }, {
-            //         'htmdEvt': 'privateDetailList_4'
-            //     })
-            //点击状态文字出现弹框
+                //点击状态文字出现弹框
             mui("body").on('mdClick', '.openTip', function(e) {
                     event.stopPropagation();
-                    $('.mask').show();
                     $('#tipConOne').show();
-                    var conText = $(this).siblings('tipContent').html;
+                    var conText = $(this).siblings('.tipContent').html();
                     var obj = {
                         p: '<p>' + conText + '</p>',
                         yesTxt: '我明白了',
                         hideCelButton: true,
                         zIndex: 100,
-                        htmdEvtYes:'privateDetailList_14',
+                        htmdEvtYes: 'privateDetailList_14',
                         callback: function(t) {
 
                         },

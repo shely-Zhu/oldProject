@@ -11,6 +11,8 @@ require('@pathCommonBase/base.js');
 //ajax调用
 require('@pathCommonJs/ajaxLoading.js');
 require('@pathCommonCom/elasticLayer/transOutRule/transOutRule.js');
+//引入弹出层
+require('@pathCommonCom/elasticLayer/elasticLayer/elasticLayer.js');
 require('@pathCommonJs/components/elasticLayerTypeTwo.js');
 var splitUrl = require('@pathCommonJs/components/splitUrl.js')();
 var generateTemplate = require('@pathCommonJsComBus/generateTemplate.js');
@@ -42,6 +44,7 @@ $(function () {
 			popupTitle:$(".popup .bank-title"),  //银行卡弹窗标题
 		},
 		gV: { // 全局变量
+			identityType:"",//证件类型
 			fundBusinCode: '022',
 			fundStatus: '', //基金状态
 			balance: 0, //发生金额
@@ -87,8 +90,14 @@ $(function () {
                 data: {
                 },
                 callbackDone: function (json) {
+<<<<<<< HEAD
                     var data = json.data;
                     that.gV.accountType = data.accountType;
+=======
+                    var data = json.data
+                    that.gV.accountType = data.accountType
+                    that.gV.identityType = data.identityType
+>>>>>>> 2783ee01d199344b506f5bad6b0dabf0b0a10016
                 }
             }]
             $.ajaxLoading(obj);
@@ -315,8 +324,10 @@ $(function () {
 				callbackDone: function(json) {
 					if(json.status == '0000'){
 						payPass(that.checkPassword);
+						that.$el.confirmBtn.removeAttr("disabled");
 					}else{
 						tipAction(json.message);
+						that.$el.confirmBtn.removeAttr("disabled");
 					}
 
 				},
@@ -354,10 +365,14 @@ $(function () {
 					if(json.status == '0000'){
 						if(!!that.gV.bugFundName){
 							window.location.href = site_url.pofSurelyResultsDetail_url + '?applyId=' + data.allotNo + '&fundBusinCode=' +
-							data.fundBusinCode + "&fundCode=" + that.gV.fundCode + "&payType=" +that.gV.payType + '&flag=buy'+'&bugFundName='+encodeURI(that.gV.bugFundName);
+							data.fundBusinCode + "&fundCode=" + that.gV.fundCode + "&payType=" +that.gV.payType + '&flag=buy'+'&bugFundName='+encodeURI(that.gV.bugFundName)+'&fixbusinflag='+data.fixbusinflag;
 						}else{
 							window.location.href = site_url.pofSurelyResultsDetail_url + '?applyId=' + data.allotNo + '&fundBusinCode=' +
+<<<<<<< HEAD
 							data.fundBusinCode + "&fundCode=" + that.gV.fundCode + "&payType=" +that.gV.payType + '&flag=buy'+'&bugFundName=false';
+=======
+							data.fundBusinCode + "&fundCode=" + that.gV.fundCode + "&payType=" +that.gV.payType + '&flag=buy'+'&bugFundName=false'+'&fixbusinflag='+data.fixbusinflag;
+>>>>>>> 2783ee01d199344b506f5bad6b0dabf0b0a10016
 						}
 
 					}
@@ -627,6 +642,7 @@ $(function () {
 
 			//确定
 			mui("body").on('mdClick','.btn_box .btn',function(){
+<<<<<<< HEAD
 				if($("#transformInput").val().includes(".") && $("#transformInput").val().split(".")[1].length >2){
 					tipAction('只能输入两位小数');
 					return
@@ -664,6 +680,47 @@ $(function () {
 					tipAction("请选择银行卡！");
 					return
 				}
+=======
+				// if($("#transformInput").val().includes(".") && $("#transformInput").val().split(".")[1].length >2){
+				// 	tipAction('只能输入两位小数')
+				// 	return
+				// }
+
+				// if(!!that.gV.minValue){
+				// 	if(Number(that.gV.balance) < Number(that.gV.minValue)){
+				// 		tipAction('最小买入金额不能低于' + that.gV.minValue + '元')
+				// 		return
+				// 	}
+				// }
+				// if(!!that.gV.maxValue){//最大买入都校验
+				// 	if(Number(that.gV.balance) > Number(that.gV.maxValue)){
+				// 		tipAction('最大买入金额不能超过' + that.gV.maxValue + '元')
+				// 		return
+				// 	}
+				// }
+				// if(!!that.gV.bankAccountSecret){
+				// 	if(that.gV.payType == "0"){//在线支付校验单笔金额。转账汇款不校验
+				// 		if(that.gV.fundOrBank == '2'){
+				// 			if(Number(that.gV.balance) > Number(that.gV.enableAmount)){
+				// 				tipAction('单笔金额不能超过' + that.gV.enableAmount + '元')
+				// 				return
+				// 			}
+				// 		}else{
+				// 			if(Number(that.gV.balance) > Number(that.gV.singleNum)){
+				// 				tipAction('单笔金额不能超过' + that.gV.singleNum + '元')
+				// 				return
+				// 			}
+				// 		}
+				// 	}
+				// 	that.$el.confirmBtn.attr('disabled',true)
+				// 	that.checkPayType()
+				// }else{
+				// 	//未选择银行卡提示信息
+				// 	tipAction("请选择银行卡！");
+				// 	return
+				// }
+				that.checkPayType()
+>>>>>>> 2783ee01d199344b506f5bad6b0dabf0b0a10016
 			}, {
 				htmdEvt: 'fundTransformIn_08'
 			}) ;
@@ -723,11 +780,24 @@ $(function () {
 			}) ;
 			//添加银行卡 -- 跳往原生
 			mui("body").on('mdClick','.popup-last',function(){
-				//判断是否是在线支付
-				var isonline = that.gV.payType==0?"?supportOnline=true":"";
-				//跳往原生页面去修改密码
-				if(that.gV.doubleClickStatus){
-                    window.location.href = site_url.pofAddBankCard_url+isonline;
+				if(that.gV.identityType != "0"){//非身份证认证客户添加银行卡需要提示
+					$.elasticLayer({
+			            id: "tip",
+			            title: '尊敬的客户',
+			            p: '<p>非身份证件客户如需添加银行卡，请联系您的理财师或拨打客服电话：400-8980-618</p>',
+			            zIndex: 10000,
+			            hideCelButton: true,
+			            yesTxt: '明白了'
+			        });
+//			        return false
+				}else{
+					//判断是否是在线支付
+					var isonline = that.gV.payType==0?"?supportOnline=true":""
+					//跳往原生页面去修改密码
+					if(that.gV.doubleClickStatus){
+	                    window.location.href = site_url.pofAddBankCard_url+isonline
+					}
+					
 				}
 
 			}, {

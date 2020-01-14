@@ -177,6 +177,16 @@ var clickList = {
 	"cashManagement_04" : { type:'click', evtid: 'cashManagement_04', topic: '现金管理-了解现金管理', info: ''} ,
 	"cashManagement_05" : { type:'click', evtid: 'cashManagement_05', topic: '现金管理-认证', info: ''} ,
 	"cashManagement_06" : { type:'click', evtid: 'cashManagement_06', topic: '现金管理-一键认证', info: ''} ,
+	"cashManagement_07" : { type:'click', evtid: 'cashManagement_07', topic: '现金管理-转入账户冻结判断', info: ''} ,
+	"cashManagement_08" : { type:'click', evtid: 'cashManagement_08', topic: '现金管理-转出账户冻结判断', info: ''} ,
+	// 现金管理 账户冻结逻辑的判断埋点
+	"cashManagement_001":{ type:'click', evtid: 'cashManagement_001', topic: '现金管理-认证', info: ''},
+	"cashManagement_002":{ type:'click', evtid: 'cashManagement_002', topic: '现金管理-一键认证', info: ''},
+	"cashManagement_003":{ type:'click', evtid: 'cashManagement_003', topic: '现金管理-风险等级匹配失败', info: ''},
+	"cashManagement_004":{ type:'click', evtid: 'cashManagement_004', topic: '现金管理-风险等级匹配失败结果跳转', info: ''},
+	"cashManagement_005":{ type:'click', evtid: 'cashManagement_005', topic: '现金管理-风测等级匹配成功', info: ''},
+	"cashManagement_006":{ type:'click', evtid: 'cashManagement_006', topic: '现金管理_点击弹窗', info: ''},
+	"cashManagement_007":{ type:'click', evtid: 'cashManagement_007', topic: '现金管理_关闭按钮隐藏', info: ''},
 	//现金转入  cashTransformIn.html
 	"cashTransformIn_01" : { type:'click', evtid: 'cashTransformIn_01', topic: '现金转入-打开银行卡列表', info: ''} ,
 	"cashTransformIn_02" : { type:'click', evtid: 'cashTransformIn_02', topic: '现金转入-关闭银行卡列表', info: ''} ,
@@ -259,11 +269,18 @@ var clickList = {
 	"newFundDetail_1" : { type:'click', evtid: 'newFundDetail_1', topic: '新发基金-基金经理', info: ''} ,
 	"newFundDetail_2" : { type:'click', evtid: 'newFundDetail_2', topic: '新发基金-基金公司', info: ''} ,
 	"newFundDetail_3" : { type:'click', evtid: 'newFundDetail_3', topic: '新发基金-立即购买', info: ''} ,
-	"newFundDetail_4" : { type:'click', evtid: 'newFundDetail_4', topic: '新发基金-风测等级匹配成功', info: ''} ,
-	"newFundDetail_5" : { type:'click', evtid: 'newFundDetail_5', topic: '新发基金-风险等级匹配失败', info: ''} ,
-	"newFundDetail_6" : { type:'click', evtid: 'newFundDetail_6', topic: '新发基金-风险等级匹配失败结果跳转', info: ''} ,
-	"newFundDetail_7" : { type:'click', evtid: 'newFundDetail_7', topic: '新发基金-认证', info: ''} ,
-	"newFundDetail_8" : { type:'click', evtid: 'newFundDetail_8', topic: '新发基金-一键认证', info: ''} ,
+	"newFundDetail_4" : { type:'click', evtid: 'newFundDetail_4', topic: '新发基金-买入账户判断', info: ''} ,
+	// 账户冻结逻辑判断
+	"newFundDetail_001":{ type:'click', evtid: 'newFundDetail_001', topic: '新发基金-认证', info: ''},
+	"newFundDetail_002":{ type:'click', evtid: 'newFundDetail_002', topic: '新发基金-一键认证', info: ''},
+	"newFundDetail_003":{ type:'click', evtid: 'newFundDetail_003', topic: '新发基金-风险等级匹配失败', info: ''},
+	"newFundDetail_004":{ type:'click', evtid: 'newFundDetail_004', topic: '新发基金-风险等级匹配失败结果跳转', info: ''},
+	"newFundDetail_005":{ type:'click', evtid: 'newFundDetail_005', topic: '新发基金-风测等级匹配成功', info: ''},
+	"newFundDetail_006":{ type:'click', evtid: 'newFundDetail_006', topic: '新发基金_点击弹窗', info: ''},
+	"newFundDetail_007":{ type:'click', evtid: 'newFundDetail_007', topic: '新发基金_关闭按钮隐藏', info: ''},
+
+
+
 	// 组件弹层的点击事件
 	//定投
 	"ordinarySetThrow_01" : { type:'click', evtid: 'ordinarySetThrow_01', topic: '定投-打开银行卡列表', info: ''} ,
@@ -345,8 +362,8 @@ var clickList = {
 	//fortuneFlowKnown.html
 	"fortune_09" : { type:'click', evtid: 'fortune_09', topic: '早知道列表', info: ''} ,
 	//fortuneClassroom.html
-	"fortune_10" : { type:'click', evtid: 'fortune_10', topic: '财富讲堂列表', info: ''} ,
-	"fortune_11" : { type:'click', evtid: 'fortune_11', topic: '财富讲堂详情tab', info: ''},
+	"fortune_10" : { type:'click', evtid: 'fortune_10', topic: '财富讲堂-大咖直播列表点击', info: ''} ,
+	"fortune_11" : { type:'click', evtid: 'fortune_11', topic: '财富讲堂-知识讲堂列表点击', info: ''},
 	//wealthResearch.html
 	"fortune_12":{ type:'click', evtid: 'fortune_12', topic: '财富研究详情tab', info: ''} ,
 	//understandHT.html
@@ -405,6 +422,27 @@ var clickList = {
 	// 组件弹层的点击事件
 	"publicAssets_11":{ type:'click', evtid: 'publicAssets_11', topic: '公募资产_筛选银行卡', info: ''},
 	"publicAssets_12":{ type:'click', evtid: 'publicAssets_12', topic: '公募资产_银行卡列表点击', info: ''},
+
+
+	// 公募资产详情的逻辑判断添加相关埋点
+	"publicAssets_cash_001":{ type:'click', evtid: 'publicAssets_cash_001', topic: '公募现金宝详情页_认证', info: ''},
+	"publicAssets_cash_002":{ type:'click', evtid: 'publicAssets_cash_002', topic: '公募现金宝详情页_一键认证', info: ''},
+	"publicAssets_cash_003":{ type:'click', evtid: 'publicAssets_cash_003', topic: '公募现金宝详情页_风险等级匹配失败', info: ''},
+	"publicAssets_cash_004":{ type:'click', evtid: 'publicAssets_cash_004', topic: '公募现金宝详情页_风险等级匹配失败结果跳转', info: ''},
+	"publicAssets_cash_005":{ type:'click', evtid: 'publicAssets_cash_005', topic: '公募现金宝详情页_风测等级匹配成功', info: ''},
+	"publicAssets_cash_006":{ type:'click', evtid: 'publicAssets_cash_006', topic: '公募现金宝详情页_点击弹窗', info: ''},
+	"publicAssets_cash_007":{ type:'click', evtid: 'publicAssets_cash_007', topic: '公募现金宝详情页_关闭按钮隐藏', info: ''},
+
+	"publicAssets_001":{ type:'click', evtid: 'publicAssets_001', topic: '公募资产_认证', info: ''},
+	"publicAssets_002":{ type:'click', evtid: 'publicAssets_002', topic: '公募资产_一键认证', info: ''},
+	"publicAssets_003":{ type:'click', evtid: 'publicAssets_003', topic: '公募资产_风险等级匹配失败', info: ''},
+	"publicAssets_004":{ type:'click', evtid: 'publicAssets_004', topic: '公募资产_风险等级匹配失败结果跳转', info: ''},
+	"publicAssets_005":{ type:'click', evtid: 'publicAssets_005', topic: '公募资产_风测等级匹配成功', info: ''},
+	"publicAssets_006":{ type:'click', evtid: 'publicAssets_006', topic: '公募资产_点击弹窗', info: ''},
+	"publicAssets_007":{ type:'click', evtid: 'publicAssets_007', topic: '公募资产_关闭按钮隐藏', info: ''},
+
+
+
 
 	// privateDetail.html
 	"privateDetail_0":{ type:'click', evtid: 'privateDetail_0', topic: '私募资产详情_详情的展开与收起', info: ''},
@@ -492,6 +530,31 @@ var clickList = {
 	"optionalPublicDetail_13":{ type:'click', evtid: 'optionalPublicDetail_13', topic: '公募自选资产详情页_风险等级匹配失败结果跳转', info: ''},
 	"optionalPublicDetail_14":{ type:'click', evtid: 'optionalPublicDetail_14', topic: '公募自选资产详情页_认证', info: ''},
 	"optionalPublicDetail_15":{ type:'click', evtid: 'optionalPublicDetail_15', topic: '公募自选资产详情页_一键认证', info: ''},
+	"optionalPublicDetail_16":{ type:'click', evtid: 'optionalPublicDetail_16', topic: '公募自选资产详情页_赎回判断', info: ''},
+	"optionalPublicDetail_17":{ type:'click', evtid: 'optionalPublicDetail_17', topic: '公募自选资产详情页_买入判断', info: ''},
+	"optionalPublicDetail_18":{ type:'click', evtid: 'optionalPublicDetail_18', topic: '公募自选资产详情页_定投判断', info: ''},
+
+	// 公募资产详情的定投逻辑判断添加相关埋点
+	"publicDetail_fixed_001":{ type:'click', evtid: 'publicDetail_fixed_001', topic: '公募资产详情_认证', info: ''},
+	"publicDetail_fixed_002":{ type:'click', evtid: 'publicDetail_fixed_002', topic: '公募资产详情_一键认证', info: ''},
+	"publicDetail_fixed_003":{ type:'click', evtid: 'publicDetail_fixed_003', topic: '公募资产详情_风险等级匹配失败', info: ''},
+	"publicDetail_fixed_004":{ type:'click', evtid: 'publicDetail_fixed_004', topic: '公募资产详情_风险等级匹配失败结果跳转', info: ''},
+	"publicDetail_fixed_005":{ type:'click', evtid: 'publicDetail_fixed_005', topic: '公募资产详情_风测等级匹配成功', info: ''},
+	"publicDetail_fixed_006":{ type:'click', evtid: 'publicDetail_fixed_006', topic: '公募资产详情_点击弹窗', info: ''},
+	"publicDetail_fixed_007":{ type:'click', evtid: 'publicDetail_fixed_007', topic: '公募资产详情_关闭按钮隐藏', info: ''},
+
+
+	// 公募资产详情的买入逻辑判断添加相关埋点
+	"publicDetail_buy_001":{ type:'click', evtid: 'publicDetail_buy_001', topic: '公募资产详情_认证', info: ''},
+	"publicDetail_buy_002":{ type:'click', evtid: 'publicDetail_buy_002', topic: '公募资产详情_一键认证', info: ''},
+	"publicDetail_buy_003":{ type:'click', evtid: 'publicDetail_buy_003', topic: '公募资产详情_风险等级匹配失败', info: ''},
+	"publicDetail_buy_004":{ type:'click', evtid: 'publicDetail_buy_004', topic: '公募资产详情_风险等级匹配失败结果跳转', info: ''},
+	"publicDetail_buy_005":{ type:'click', evtid: 'publicDetail_buy_005', topic: '公募资产详情_风测等级匹配成功', info: ''},
+	"publicDetail_buy_006":{ type:'click', evtid: 'publicDetail_buy_006', topic: '公募资产详情_点击弹窗', info: ''},
+	"publicDetail_buy_007":{ type:'click', evtid: 'publicDetail_buy_007', topic: '公募资产详情_关闭按钮隐藏', info: ''},
+
+
+
 
 	"superRecord_0":{ type:'click', evtid: 'superRecord_0', topic: '超宝基金产品-交易记录_列表点击', info: ''},
 	
@@ -501,6 +564,17 @@ var clickList = {
 	"superStreasureDetail_3":{ type:'click', evtid: 'superStreasureDetail_3', topic: '自选公募-超宝详情_点击转入跳转', info: ''},
 	"superStreasureDetail_4":{ type:'click', evtid: 'superStreasureDetail_4', topic: '自选公募-超宝详情_点击历史记录', info: ''},
 	"superStreasureDetail_5":{ type:'click', evtid: 'superStreasureDetail_5', topic: '自选公募-超宝详情_收益明细', info: ''},
+	"superStreasureDetail_6":{ type:'click', evtid: 'superStreasureDetail_6', topic: '自选公募-超宝详情_转出账户判断', info: ''},
+	"superStreasureDetail_7":{ type:'click', evtid: 'superStreasureDetail_7', topic: '自选公募-超宝详情_转入账户判断', info: ''},
+	// 超宝详情的逻辑判断添加相关埋点
+	"superStreasureDetail_001":{ type:'click', evtid: 'superStreasureDetail_001', topic: '自选公募-超宝详情_认证', info: ''},
+	"superStreasureDetail_002":{ type:'click', evtid: 'superStreasureDetail_002', topic: '自选公募-超宝详情_一键认证', info: ''},
+	"superStreasureDetail_003":{ type:'click', evtid: 'superStreasureDetail_003', topic: '自选公募-超宝详情_风险等级匹配失败', info: ''},
+	"superStreasureDetail_004":{ type:'click', evtid: 'superStreasureDetail_004', topic: '自选公募-超宝详情_风险等级匹配失败结果跳转', info: ''},
+	"superStreasureDetail_005":{ type:'click', evtid: 'superStreasureDetail_005', topic: '自选公募-超宝详情_风测等级匹配成功', info: ''},
+	"superStreasureDetail_006":{ type:'click', evtid: 'superStreasureDetail_006', topic: '自选公募-超宝详情_点击弹窗', info: ''},
+	"superStreasureDetail_007":{ type:'click', evtid: 'superStreasureDetail_007', topic: '自选公募-超宝详情_关闭按钮隐藏', info: ''},
+
 
 	"transactionRecords_0":{ type:'click', evtid: 'transactionRecords_0', topic: '自选公募-交易记录_筛选分类的点击事件', info: ''},
 	"transactionRecords_1":{ type:'click', evtid: 'transactionRecords_1', topic: '自选公募-交易记录_筛选列表内容的点击事件', info: ''},

@@ -206,7 +206,7 @@ $(function() {
                     $("#passwordWrap").hide();
                     if (res.status == '0000') {
                         window.location.href = site_url.pofSurelyResultsDetail_url + '?applyId=' + data.allotNo + '&fundBusinCode=' +
-                            "024" + "&fundCode=" + regulatory.gV.dataList.fundCode + '&flag=redemption';
+                            "024" + "&fundCode=" + regulatory.gV.dataList.fundCode + '&flag=redemption' + '&fixbusinflag=' + data.fixbusinflag;
                     } else {
                         $('.elasticLayer.transOutRule').show()
                         $(".elasticContent").html(res.message);
@@ -249,6 +249,10 @@ $(function() {
             }, {
                 htmdEvt: 'redemptionBuy_01'
             })
+            
+	        $(".msecond-one").on("blur", function() {
+				    window.scrollTo(0, 0);//ios回滚到顶部
+			})
 
             mui("body").on('mdClick', '.popup-close', function() {
                 $('.popup').css('display', 'none');
