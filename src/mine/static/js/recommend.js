@@ -202,10 +202,11 @@ $(function() {
                 that.dealManagerLogic(data);
             }, function() {
                 //设置立即邀请好友的按钮状态为不可点
-                $('.btnButton .txt').addClass('disable').attr('disabled', 'disabled');
+                // $('.btnButton .txt').addClass('disable').attr('disabled', 'disabled');
             }, function() {
                 // 没有理财师，生成包含客户信息的二维码
                 // 同步请求加密接口，拿到加密信息,通知app,生成二维码
+                // $('.btnButton .txt').removeClass('disable').removeAttr('disabled', false);
                 that.generateShareLink();
             })
 

@@ -676,7 +676,7 @@ var monthReportDetail = {
 	events: function(){  //绑定事件
 		var that = this;
 		mui("body").on('mdClick', '.consult' , function(){
-
+			$('.btns .save').addClass("btn_grey").attr('disabled',true);
 			that.getElements.productName = $(this).attr('productName');
 			// 获取理财师
 			var obj = [{
@@ -733,7 +733,10 @@ var monthReportDetail = {
 							
 							},
 							callbackFail: function(json){
-								
+								$('.btns .save').addClass("btn_grey").attr('disabled',true);
+							},
+							callbackLoginBack:function(){
+								$('.btns .save').addClass("btn_grey").attr('disabled',true);
 							},
 						}]
 						$.ajaxLoading(contentObj);
