@@ -18,7 +18,7 @@ var data = Mock.mock({
     message: '成功',
     data: {
         "totalCount": "8",
-        "pageList|0": [{
+        "pageList|5": [{
             "recomTypeNumber":"12345", // 推荐类型编号
             "fundCode":"54321", // 基金代码
             "fundName":"基金名称1", // 基金名称

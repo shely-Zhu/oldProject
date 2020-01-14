@@ -28,12 +28,12 @@ $(function() {
         },
         gV: {
             pageCurrent: 1, //当前页码，默认为1
-            pageSize: 10,
+            pageSize: 15,
             search: false, // 搜索
         },
         init: function() {
             var that = this;
-            that.beforeFunc();
+            //that.beforeFunc();
             that.initMui(); // 兼容下面函数调用
             that.events();
         },

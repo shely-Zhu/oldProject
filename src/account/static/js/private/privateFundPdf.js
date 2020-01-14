@@ -178,7 +178,7 @@ $(function(){
 	                        
 	                    },      
 	                }
-            		$.elasticLayer(objNo)
+            		$.elasticLayer(objNo);
             	}
             },{
                 'htmdEvt': 'privateFundPdf_0'
