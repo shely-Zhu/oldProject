@@ -503,7 +503,6 @@ $(function() {
             // });
             // 购买日期选择
             mui("body").on("mdClick", ".addOtherFund_content .mui-icon-arrowright,.addOtherFund_content .dataPick,#dataPickDec", function() {
-                debugger
                 if($('.addOtherFund_content .dataPick').text() =='请选择'||$('.addOtherFund_content .dataPick').text()==''){
                     $('.addOtherFund_content .dataPick').text('请选择');
                     if($('body').find('.mui-dtpicker').length==0){
