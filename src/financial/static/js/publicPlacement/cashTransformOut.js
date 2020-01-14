@@ -92,7 +92,7 @@ $(function () {
 			that.cashListWiki();
 			that.pofCashLimit();
 			if(splitUrl['productName']) {
-				that.gv.productName = new Base64().decode(splitUrl['productName'])
+				that.gv.productName = new Base64().decode(splitUrl['productName']);
 			}
 		},
 
@@ -260,7 +260,7 @@ $(function () {
 					$(".transformInput").attr("maxlength",data.dailyMaxLimit);
 				}
 			}]
-			$.ajaxLoading(obj)
+			$.ajaxLoading(obj);
 		},
 		//查询转出规则信息
 		findProtocolContentRule:function(id){
@@ -273,17 +273,17 @@ $(function () {
 			   },
 			   needDataEmpty:true,
 			   callbackDone:function(res){
-				   console.log("999",res)
+				   console.log("999",res);
 				   var html = res.data.content;
 				   if(res.status == "0000"){
-					$('.elasticLayer.transOutRule').show()
+					$('.elasticLayer.transOutRule').show();
 					   $(".elasticContent").html(html);
 				   }else{
 					$(".elasticContent").html("规则查询失败");
 				   }
 			   }
 		   }];
-		   $.ajaxLoading(obj)
+		   $.ajaxLoading(obj);
 
 		},
 		events: function () {
@@ -291,19 +291,19 @@ $(function () {
 
 			/** 下面三个事件： 银行卡列表出现/隐藏 **/
 			mui("body").on('mdClick','.onright',function(){
-				$('.popup').css('display','block')
+				$('.popup').css('display','block');
 			}, {
 				htmdEvt: 'cashTransformOut_01'
 			}) 
 
 			mui("body").on('mdClick','.popup-close',function(){
-				$('.popup').css('display','none')
+				$('.popup').css('display','none');
 			}, {
 				htmdEvt: 'cashTransformOut_02'
 			}) 
 
 			mui("body").on('mdClick','.popup-mask',function(){
-				$('.popup').css('display','none')
+				$('.popup').css('display','none');
 			}, {
 				htmdEvt: 'cashTransformOut_03'
 			}) 
@@ -326,7 +326,7 @@ $(function () {
 			   
 			   that.$e.el_defaultBankName[0].textContent = $(this).attr("bankName");
 			   that.$e.el_defaultBankImgUrl.attr("src",$(this).attr("bankLogoUrl"));
-			   that.$e.el_defaultBankCode[0].textContent = $(this).attr("carNum")
+			   that.$e.el_defaultBankCode[0].textContent = $(this).attr("carNum");
 			}, {
 				htmdEvt: 'cashTransformOut_04'
 			})
@@ -362,14 +362,14 @@ $(function () {
 				that.gv.ruleId = $(this).attr("ruleId");
 				var id = $(this).attr("ruleId");
 				//that.findProtocolContentRule(id);
-				window.location.href = site_url.superContent_url + '?id='+id+ '&financial=true'
+				window.location.href = site_url.superContent_url + '?id='+id+ '&financial=true';
 			},{
 				htmdEvt: 'cashTransformOut_07'
 			}) 
 
 			//点击同意协议
 			mui('body').on('mdClick','.item2 .iconfont',function(){
-				$("#transformInput").blur()
+				$("#transformInput").blur();
 			//that.$e.iconCheck.on('mdClick', function() {
 				var val =$(".msecond input")[0].value;
 				that.gv.transformMoney = val;
@@ -377,7 +377,7 @@ $(function () {
 
 					//$(".checkMessage").css({"display":"block"});
 					//$(".checkMessage").html("转出金额超过最大额度")
-					tipAction("转出金额超过最大额度"+that.gv.transformTotalMoney+"元")
+					tipAction("转出金额超过最大额度"+that.gv.transformTotalMoney+"元");
 					return
 				}else{		
 					$(".checkMessage").css({"display":"none"}); 
@@ -385,7 +385,7 @@ $(function () {
 				
                 if ($(this).hasClass("check")) {
 					$(this).removeClass("check").html('&#xe668;');
-					that.$e.confirmBtn.attr('disabled',true)
+					that.$e.confirmBtn.attr('disabled',true);
 					//if(that.gv.transformMoney!=""){
 					//	that.$e.confirmBtn.removeAttr("disabled");
 					//}else{
@@ -396,7 +396,7 @@ $(function () {
 					if(that.gv.transformMoney!=""){
 						that.$e.confirmBtn.removeAttr("disabled");
 					}else{
-						that.$e.confirmBtn.attr('disabled',true)
+						that.$e.confirmBtn.attr('disabled',true);
 					}
 					
                 }
@@ -411,16 +411,16 @@ $(function () {
 				if( parseFloat( that.gv.transformTotalMoney)< parseFloat( that.gv.transformMoney) ){
 					//$(".checkMessage").css({"display":"block"});
 					//$(".checkMessage").html("转出金额超过最大额度")
-					tipAction("转出金额超过最大额度"+that.gv.transformTotalMoney+"元")
+					tipAction("转出金额超过最大额度"+that.gv.transformTotalMoney+"元");
 					return
 				}else{		
 					$(".checkMessage").css({"display":"none"}); 
 				}
 				if($(this)[0].value == ""){
-					that.$e.confirmBtn.attr('disabled',true)
+					that.$e.confirmBtn.attr('disabled',true);
 				}else{
 					if($(".item2 .iconfont").hasClass("check")){
-						that.$e.confirmBtn.removeAttr("disabled")
+						that.$e.confirmBtn.removeAttr("disabled");
 					}else{
 						that.$e.confirmBtn.attr('disabled',true);
 					}
@@ -433,17 +433,17 @@ $(function () {
 				var val =$(".msecond input")[0].value;
 				that.gv.transformMoney = val;
 				if(parseFloat(that.gv.transformMoney) < 0.01) {
-					tipAction("转出金额最小值为0.01元")
+					tipAction("转出金额最小值为0.01元");
 					return
 				}else if(parseFloat(that.gv.transformMoney)>that.gv.dailyOnceMaxLimit){
 					//$(".checkMessage").css({"display":"block"});
 					//$(".checkMessage").html("转出金额超过单笔最高限额");
-					tipAction("转出金额超过单笔最高限额"+that.gv.dailyOnceMaxLimit + "元")
+					tipAction("转出金额超过单笔最高限额"+that.gv.dailyOnceMaxLimit + "元");
 					return 
 				}else{
 					$(".checkMessage").css({"display":"none"});
 				}
-				$(".pwd-input").val('')
+				$(".pwd-input").val('');
                 $(".fake-box input").val('');
 				$(".msecond input").blur();
 				$("#passwordWrap").show();
@@ -455,11 +455,11 @@ $(function () {
 			//转出全部
 			mui('body').on('mdClick','.tranoutAllMoney',function(){ 
 			//$(".tranoutAllMoney").on('click',function(){
-				$("#transformInput").blur()
+				$("#transformInput").blur();
 				$(".msecond input").val(that.gv.transformTotalMoney);
-				that.gv.transformMoney = that.gv.transformTotalMoney
+				that.gv.transformMoney = that.gv.transformTotalMoney;
 				if($(".item2 .iconfont").hasClass("check")){
-					that.$e.confirmBtn.removeAttr("disabled")
+					that.$e.confirmBtn.removeAttr("disabled");
 				}else{
 					that.$e.confirmBtn.attr('disabled',true);
 				}
@@ -472,12 +472,12 @@ $(function () {
 				$(".msecond input").val("");
 				that.gv.transformMoney = "";
 				$(".item2 .iconfont").removeClass("check").html('&#xe668;');
-				that.$e.confirmBtn.attr('disabled',true)
+				that.$e.confirmBtn.attr('disabled',true);
 			}, {
 				htmdEvt: 'cashTransformOut_12'
 			})
 			mui('body').on('mdClick','.elasticLayer.transOutRule .elasticButtons',function(){
-				$('.elasticLayer.transOutRule').hide()
+				$('.elasticLayer.transOutRule').hide();
 			}, {
 				htmdEvt: 'cashTransformOut_10'
 			}) 
@@ -485,7 +485,7 @@ $(function () {
 			mui('body').on('mdClick','.explain .tranTime',function(){
 				var type = $(this).attr("type");
 				if(type == "fast"){
-					tipAction("部分银行不支持2小时快速到账")
+					tipAction("部分银行不支持2小时快速到账");
 				}
 				//var id = $(this).children().attr("ruleId");
 				//that.gv.ruleId = id;
@@ -496,11 +496,11 @@ $(function () {
 			}) 
 			//阅读规则
 			mui('body').on('mdClick','.file .agreementRule',function(){
-				$("#transformInput").blur()
+				$("#transformInput").blur();
 				that.gv.ruleId = $(this).attr("ruleId");
 				var id = $(this).attr("ruleId");
 				//that.findProtocolContentRule(id);
-				window.location.href = site_url.superContent_url + '?id='+id+ '&financial=true'
+				window.location.href = site_url.superContent_url + '?id='+id+ '&financial=true';
 			},{
 				htmdEvt: 'cashTransformOut_14'
 			})

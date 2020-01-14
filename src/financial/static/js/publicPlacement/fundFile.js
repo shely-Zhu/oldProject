@@ -67,17 +67,17 @@ $(function () {
         //页面初始化函数
         init: function () {
             var that = this;
-            that.events()
+            that.events();
             that.$e.listLoading.show();
-            that.getData()
-            that.getData2()
+            that.getData();
+            that.getData2();
             // that.getData3()
             // that.getData4()
         },
         initMui: function(type) {
             var that = this;
-            var w = '.tplBox' + type
-            var s = '.tplBox' + type + ' .contentWrapper'
+            var w = '.tplBox' + type;
+            var s = '.tplBox' + type + ' .contentWrapper';
             var height = windowHeight - $(".tabsBox").height() - $(".HeadBarConfigBox").height();
             if (!$('.tplBox'+type+' .list').hasClass('setHeight')) {
                 $('.tplBox'+type+' .list').height(height).addClass('setHeight');
@@ -91,9 +91,9 @@ $(function () {
                         callback: function() {
                             //执行ajax请求
                             if(type == 3) {
-                                that.getData3(this)
+                                that.getData3(this);
                             } else if (type == 4) {
-                                that.getData4(this)
+                                that.getData4(this);
                             }
                         }
                     }
@@ -120,10 +120,10 @@ $(function () {
         drawCircle: function() {
             var that = this;
             var pieChart = echarts.init($('.circle')[0]);
-            var optionData = []
-            var pieData = that.gV.pieData
+            var optionData = [];
+            var pieData = that.gV.pieData;
             pieData.forEach(function(n){
-                optionData.push(n.name)
+                optionData.push(n.name);
             })
             // 指定图表的配置项和数据
             option = {
@@ -140,7 +140,7 @@ $(function () {
                     formatter: function (name) {
                         for (var i = 0; i < pieData.length; i++) {
                             if (name === pieData[i].name) {
-                                return " {title|" + name + "}  {value|" + pieData[i].value + "%}"
+                                return " {title|" + name + "}  {value|" + pieData[i].value + "%}";
                             }
                         }
                     },
@@ -236,23 +236,23 @@ $(function () {
                     fundCode: splitUrl['fundCode'] ? splitUrl['fundCode'] : '000847'
                 },
                 callbackDone: function (json) {
-                    json = json.data
+                    json = json.data;
                     that.$e.listLoading.hide();
                     var tplm = $("#dataLists1").html();
                     var template = Handlebars.compile(tplm);
-                    json.assetValue = (json.assetValue / 100000000).toFixed(2)
+                    json.assetValue = (json.assetValue / 100000000).toFixed(2);
                     var html = template(json);
                     $(".tplBox1").html(html);
                 },
                 callbackNoData:function(json){
                     that.$e.emptyBox.show();
                     that.$e.listLoading.hide();
-                    $(".tplBox1").hide()
+                    $(".tplBox1").hide();
 				},
 				callbackFail:function(json){
                     that.$e.emptyBox.show();
                     that.$e.listLoading.hide();
-                    $(".tplBox1").hide()
+                    $(".tplBox1").hide();
 				},
             }];
             $.ajaxLoading(obj1);
@@ -267,9 +267,9 @@ $(function () {
                 callbackDone: function (json) {
 
                     json = json.data
-                    var pieData = []
+                    var pieData = [];
                     json.assetAllocation.forEach(function(n, i){
-                        var item
+                        var item;
                         item = {
                             name: n.assetTypeName,
                             value: n.assetAllocationRatio,
@@ -288,27 +288,27 @@ $(function () {
                                 itemStyle: that.gV.itemStyle2,
                             }
                         }
-                        pieData.push(item)
-                        console.log(pieData)
+                        pieData.push(item);
+                        console.log(pieData);
                     })
                     that.gV.pieData = pieData;
                     that.gV.pieData.forEach(function (item,index) {
-                        item.value = Number(item.value)
+                        item.value = Number(item.value);
                     })
 
                     var tplm = $("#dataLists2").html();
                     var template = Handlebars.compile(tplm);
-                    json.assetValue = (json.assetValue / 100000000).toFixed(2)
+                    json.assetValue = (json.assetValue / 100000000).toFixed(2);
                     var html = template(json);
                     $(".tplBox2").html(html);
                 },
                 callbackNoData:function(json){
                     that.$e.emptyBox.show();
-                    $(".tplBox2").hide()
+                    $(".tplBox2").hide();
 				},
 				callbackFail:function(json){
                     that.$e.emptyBox.show();
-                    $(".tplBox2").hide()
+                    $(".tplBox2").hide();
 				},
             }];
             $.ajaxLoading(obj2);
@@ -330,7 +330,7 @@ $(function () {
                             if (that.gV.pageCurrent3 == 1) { //第一页时
                                 if (data.length == 0) {
                                     // 暂无数据显示
-                                    $(".tplBox3 list").hide()
+                                    $(".tplBox3 list").hide();
                                     $('.tplBox3').html(that.$e.emptyBox.clone(false)).addClass('noCon');
                                     $('.tplBox3').find(".noData").show();
                                     return false;
@@ -349,7 +349,7 @@ $(function () {
                         that.gV.pageCurrent3++;
                         // 将消息列表插入到页面上
                         generateTemplate(data, that.$e.tplBox3Wrapper, that.$e.template3);
-                        that.alwaysAjax(that.$e.tplBox3Wrapper, $('.tplBox3 .contentWrapper'))
+                        that.alwaysAjax(that.$e.tplBox3Wrapper, $('.tplBox3 .contentWrapper'));
                     }, 200)
                     /*that.gV.tplBox3HasData = true
                     json = json.data.pageList
@@ -360,24 +360,24 @@ $(function () {
                     $(".tplBox3").html(html);*/
                 },
                 callbackNoData:function(json){
-                    that.gV.tplBox3HasData = true
+                    that.gV.tplBox3HasData = true;
                     if(that.gV.pageCurrent3 == 1) {
                         $('.tplBox3').html(that.$e.emptyBox.clone(false)).addClass('noCon');
                         $('.tplBox3').find(".noData").show();
-                        var height=$("body").height() - $(".HeadBarConfigBox").height() -  $(".tabsBox").height() -30
-                        $('.tplBox3').height(height)
+                        var height=$("body").height() - $(".HeadBarConfigBox").height() -  $(".tabsBox").height() -30;
+                        $('.tplBox3').height(height);
                         that.$e.listLoading.hide();
                         $(".tplBox3 .list").hide();
                         // $(".panel3").css("background", "none")
                     }
 				},
 				callbackFail:function(json){
-                    that.gV.tplBox3HasData = true
+                    that.gV.tplBox3HasData = true;
                     if(that.gV.pageCurrent3 == 1) {
                         $('.tplBox3').html(that.$e.emptyBox.clone(false)).addClass('noCon');
                         $('.tplBox3').find(".noData").show();
                         that.$e.listLoading.hide();
-                        $(".tplBox3 .list").hide()
+                        $(".tplBox3 .list").hide();
                         // $(".panel3").css("background", "none")
                     }
 				},
@@ -401,7 +401,7 @@ $(function () {
                             if (that.gV.pageCurrent4 == 1) { //第一页时
                                 if (data.length == 0) {
                                     // 暂无数据显示
-                                    $(".tplBox4 list").hide()
+                                    $(".tplBox4 list").hide();
                                     $('.tplBox4').html(that.$e.emptyBox.clone(false)).addClass('noCon');
                                     $('.tplBox4').find(".noData").show();
                                     return false;
@@ -420,7 +420,7 @@ $(function () {
                         that.gV.pageCurrent4++;
                         // 将消息列表插入到页面上
                         generateTemplate(data, that.$e.tplBox4Wrapper, that.$e.template4);
-                        that.alwaysAjax(that.$e.tplBox4Wrapper, $('.tplBox4 .contentWrapper'))
+                        that.alwaysAjax(that.$e.tplBox4Wrapper, $('.tplBox4 .contentWrapper'));
                     }, 200)
                     /*that.gV.tplBox4HasData = true
                     json = json.data.pageList
@@ -431,23 +431,23 @@ $(function () {
                     $(".tplBox4").html(html);*/
                 },
                 callbackNoData:function(json){
-                    that.gV.tplBox4HasData = true
-                    if(that.gV.pageCurrent4 == 1) {
-                        $('.tplBox4').html(that.$e.emptyBox.clone(false)).addClass('noCon');
-                        $('.tplBox4').find(".noData").show();
-                        that.$e.listLoading.hide();
-                        $(".tplBox4 .list").hide()
-                        $(".panel4").css("background", "none")
-                    }
-				},
-				callbackFail:function(json){
-                    that.gV.tplBox4HasData = true
+                    that.gV.tplBox4HasData = true;
                     if(that.gV.pageCurrent4 == 1) {
                         $('.tplBox4').html(that.$e.emptyBox.clone(false)).addClass('noCon');
                         $('.tplBox4').find(".noData").show();
                         that.$e.listLoading.hide();
                         $(".tplBox4 .list").hide();
-                        $(".panel4").css("background", "none")
+                        $(".panel4").css("background", "none");
+                    }
+				},
+				callbackFail:function(json){
+                    that.gV.tplBox4HasData = true;
+                    if(that.gV.pageCurrent4 == 1) {
+                        $('.tplBox4').html(that.$e.emptyBox.clone(false)).addClass('noCon');
+                        $('.tplBox4').find(".noData").show();
+                        that.$e.listLoading.hide();
+                        $(".tplBox4 .list").hide();
+                        $(".panel4").css("background", "none");
                     }
 				},
             }];
@@ -461,9 +461,9 @@ $(function () {
                     // $el.parent().height()    滚动内容高度
                     // Math.abs($el.offset().top-（window.screen.height - $el.parent().parent().parent().height()) // 滚动高度
                     // 滚动高度 + 滚动容器高度 = 滚动内容高度
-                    var barTop = window.screen.height - $el.parent().parent().parent().height()
-                    var scrollTop = Math.abs($el.offset().top-barTop)
-                    var diff = $el.parent().height() - $el.parent().parent().parent().height() - scrollTop
+                    var barTop = window.screen.height - $el.parent().parent().parent().height();
+                    var scrollTop = Math.abs($el.offset().top-barTop);
+                    var diff = $el.parent().height() - $el.parent().parent().parent().height() - scrollTop;
                     // 当滚动距离距离最底部还剩500时，加载下一页
                     if(diff <= 500) { 
                         if( ! $el.find('.mui-pull-caption-nomore').length ){
@@ -484,7 +484,7 @@ $(function () {
                 $(this).addClass('active').siblings().removeClass('active');
                 $(".wrap>.panel").eq($(this).index()).addClass('active').siblings().removeClass('active');
                 if ($(this).index() == 1) {
-                    that.drawCircle()
+                    that.drawCircle();
                 }
                 if ($(this).index() == 2) {
                     if (that.gV.tplBox3HasData) {
@@ -506,12 +506,12 @@ $(function () {
 			});
             //基金公告跳转
             mui("body").on('mdClick', '.tplBox4 .content', function () {
-                var fileName=''
-                var link = $(this).attr('linkRul')
-                fileName=link.split("?")
-                fileName=fileName[0].substring(fileName[0].lastIndexOf('.'))
-                var typInfo = $(this).attr('typInfo')
-				window.location.href = link + '&fileName=' + new Base64().encode(typInfo+fileName) 
+                var fileName='';
+                var link = $(this).attr('linkRul');
+                fileName=link.split("?");
+                fileName=fileName[0].substring(fileName[0].lastIndexOf('.'));
+                var typInfo = $(this).attr('typInfo');
+				window.location.href = link + '&fileName=' + new Base64().encode(typInfo+fileName);
             }, {
 				htmdEvt: 'fundFile_02'
 			})
