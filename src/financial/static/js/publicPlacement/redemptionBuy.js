@@ -249,6 +249,10 @@ $(function() {
             }, {
                 htmdEvt: 'redemptionBuy_01'
             })
+            
+	        $(".msecond-one").on("blur", function() {
+				    window.scrollTo(0, 0);//ios回滚到顶部
+			})
 
             mui("body").on('mdClick', '.popup-close', function() {
                 $('.popup').css('display', 'none')
