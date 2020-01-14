@@ -503,6 +503,7 @@ $(function() {
             // });
             // 购买日期选择
             mui("body").on("mdClick", ".addOtherFund_content .mui-icon-arrowright,.addOtherFund_content .dataPick,#dataPickDec", function() {
+                debugger
                 if($('.addOtherFund_content .dataPick').text() =='请选择'||$('.addOtherFund_content .dataPick').text()==''){
                     $('.addOtherFund_content .dataPick').text('请选择');
                     if($('body').find('.mui-dtpicker').length==0){
@@ -788,7 +789,15 @@ $(function() {
 
             //新增其他新建添加按钮
             mui("body").on("mdClick", ".addOtherFundcodeBox .mui-icon-plusempty", function() {
-                // $('.popup').css('display', 'block')
+                //弹框前初始化一下
+                $(".addOtherFund_content .fundCode_input").val('');
+                $(".addOtherFund_content .money_input").val('');
+                //初始化时间选择控件
+                $("#dataPickDec").show();
+                $(".dataPick")[0].textContent = "";
+                $('.mui-dtpicker').remove();
+                $('.mui-backdrop').remove();
+
                 $(".addOtherFund").show()
                 $(".addOtherFund_content").show()
                 $(".popup_true").attr("type", "addOtherFund");
