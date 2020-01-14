@@ -74,14 +74,19 @@ $(function() {
                         $('.membershipDetailsContentBox h2').text(name);
                         $('.membershipDetailsContentBox p').html(text);
                         $(".tel").attr("href", "tel:" + commonSetting.serverPhone).html(commonSetting.serverPhone)
-                        $('.linkBtnBox a').attr('onclick','setGoUrl( "'+link+'", "detailsUnderstandingDetails_01")')
+                        if(link){
+                            $('.linkBtnBox').show()
+                            $('.linkBtnBox a').attr('onclick','setGoUrl( "'+link+'", "detailsUnderstandingDetails_01")')
+                        }else{
+                            $('.linkBtnBox').hide()
+                        }
+                       
                     },
                 }
             });
         },
         //获取会员权益详情
         getMembershipDetailsData: function() {
-            debugger
             var that = this;
             var obj = [{
                 url: site_url.findBenefitByLevel_api,
