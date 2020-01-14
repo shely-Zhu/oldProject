@@ -76,8 +76,8 @@ $(function() {
                         callbackDone: function(json) {     
                             var data = json.data.pageList;
                             if(that.gV.aP.pageNo == 1 && data.length == 0) {
-                                $(".list").css("display", "none")
-                                that.getElements.noData.show()
+                                $(".list").css("display", "none");
+                                that.getElements.noData.show();
                             } else {
                                 def && def.resolve( data, that.gV.aP.pageNo);
                                 that.gV.aP.pageNo++;
@@ -85,7 +85,7 @@ $(function() {
                         },
                         callbackNoData: function( json ){  
                             if(that.gV.aP.pageNo == 1) {
-                                $(".list").css("display", "none")
+                                $(".list").css("display", "none");
                             }
                             def && def.reject( json, that.gV.aP.pageNo );
                         },

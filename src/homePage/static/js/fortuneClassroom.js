@@ -348,22 +348,7 @@ $(function() {
                     window.location.href = site_url.articleTemplate_url + '?id=' + id + '&articleBelong=' + articleBelong
                 }
             },{
-                'htmdEvt': 'fortune_10'
-            });
-            mui("body").on('mdClick', '.roomItem' , function(){
-                if($(this).attr("externalUrl")){
-                    if($(this).attr("externalUrl").indexOf("?") != -1) {
-                        window.location.href = $(this).attr("externalUrl") + "&isHtOuterLinkUniqueIdentification=true"
-                    } else{
-                        window.location.href = $(this).attr("externalUrl") + "?isHtOuterLinkUniqueIdentification=true"
-                    }
-                }else{
-                    var id = $(this).attr("id")
-                    var articleBelong = $(this).attr("articleBelong")
-                    window.location.href = site_url.articleTemplate_url + '?id=' + id + '&articleBelong=' + articleBelong
-                }
-            },{
-                'htmdEvt': 'fortune_10'
+                'htmdEvt': 'fortune_11'
             });
         }
     };

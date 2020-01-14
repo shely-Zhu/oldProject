@@ -24,8 +24,8 @@ $(function () {
     },
     init: function () {
       var that = this;
-      that.event()
-      that.getData()
+      that.event();
+      that.getData();
     },
     getData: function (t) {
       var that = this;
@@ -36,8 +36,8 @@ $(function () {
         },
         callbackDone: function (json) {
 
-          json = json.data
-          console.log(json)
+          json = json.data;
+          console.log(json);
           var tplm = $("#dataLists").html();
           var template = Handlebars.compile(tplm);
           //对电话传真号码有多个做数据重构
@@ -48,10 +48,10 @@ $(function () {
               var obj = {
                 "faxNoListChild":json.faxNo.split(",")[i]
               }
-              faxNolist.push(obj)
+              faxNolist.push(obj);
             }
           }else{
-            faxNolist.push({"faxNoListChild":json.faxNo})
+            faxNolist.push({"faxNoListChild":json.faxNo});
           }
 
           if(json.telephoneNo.split(",").length>1){
@@ -59,10 +59,10 @@ $(function () {
               var obj = {
                 "telephoneNoListChild":json.telephoneNo.split(",")[i]
               }
-              telephoneNoList.push(obj)
+              telephoneNoList.push(obj);
             }
           }else{
-            telephoneNoList.push({"telephoneNoListChild":json.telephoneNo})
+            telephoneNoList.push({"telephoneNoListChild":json.telephoneNo});
           }
           json.faxNolist = faxNolist;
           json.telephoneNoList = telephoneNoList;
@@ -104,7 +104,7 @@ $(function () {
 
         },
         callbackNoData: function() {
-          that.$e.noData.show()
+          that.$e.noData.show();
         }
       }];
       $.ajaxLoading(obj);
@@ -113,5 +113,5 @@ $(function () {
 
     }
   }
-  somePage.init()
+  somePage.init();
 })

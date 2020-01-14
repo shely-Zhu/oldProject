@@ -90,6 +90,7 @@ var splitUrl = require('./components/splitUrl.js')();
         ajaxLoading: function(param) {
 
             //请求次数 页面每次发一个ajax请求，次数+1，当次数为0的时候再隐藏遮罩层
+            //逻辑错误 本期废弃掉 后期优化的时候可以将涉及此逻辑的地方干掉
             var requestCount = 0;
             var needLoading = true;
             var timerStart = false;//30秒的定时器是否开启 为了防止特殊情况接口时间太长 开启一个30秒的定时器 30秒后允许点击headBar
@@ -216,12 +217,14 @@ var splitUrl = require('./components/splitUrl.js')();
                                 })
                                 return false;
                             } else if (obj.dataType == 'jsonp' && data.status == '4007') {
+                                $('.netLoading').hide();
                                 // sso接口未登录，需跳转
                                 manualTriggerLogin.locationFunc(data);
                                 //防止window.location.href在执行完请求里的所有代码之后再跳转
                                 throw 'jump login';
                                 return false;
                             } else if (data.status == '4007') {
+                                $('.netLoading').hide();
                                 // 其他黑名单接口未登录，跳转data.data
                                 manualTriggerLogin.locationFunc(data);
                                 //防止window.location.href在执行完请求里的所有代码之后再跳转
@@ -292,7 +295,6 @@ var splitUrl = require('./components/splitUrl.js')();
 
                 //循环obj数组
                 $.each(obj, function(i, el) {
-
                     //发送请求前，先判断是否需要显示遮罩
                     needLoading = el.needLoading;
                     if (needLoading) {
@@ -348,9 +350,9 @@ var splitUrl = require('./components/splitUrl.js')();
                         if (needLoading) {
                             requestCount -= 1;
                             console.log('fail: ' + param.url + "----" + requestCount);
-                            if (requestCount == 0){
+                            // if (requestCount == 0){
                                 $('.netLoading').hide();//数据请求成功 遮罩隐藏
-                            }
+                            // }
                         }
                         
 
@@ -368,9 +370,9 @@ var splitUrl = require('./components/splitUrl.js')();
                             requestCount -= 1;
                             console.log('done: ' + param.url + "----" + requestCount);
                         }
-                        if (requestCount == 0){
+                        // if (requestCount == 0){
                             $('.netLoading').hide();//数据请求成功 遮罩隐藏
-                        }
+                        // }
                     })
             }
 
