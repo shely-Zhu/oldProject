@@ -494,7 +494,7 @@ $(function() {
             }, {
                 'htmdEvt': 'fortune_02'
             })
-            mui("body").on("tap", '.interpreter', function() {
+            mui("body").on("mdClick", '.interpreter', function() {
                 if ($(this).attr("externalUrl")) {
                     if ($(this).attr("externalUrl").indexOf("?") != -1) {
                         window.location.href = $(this).attr("externalUrl") + "&isHtOuterLinkUniqueIdentification=true"
@@ -505,6 +505,8 @@ $(function() {
                     window.location.href = site_url.articleTemplate_url + '?id=' + $(this).attr("id") + '&articleBelong=' + $(this).attr("articleBelong")
                 }
 
+            },{
+                'htmdEvt': 'fortune_13'
             })
         }
     };
