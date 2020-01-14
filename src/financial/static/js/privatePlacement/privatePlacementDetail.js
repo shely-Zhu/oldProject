@@ -948,7 +948,7 @@ $(function() {
                 contentTypeSearch: true,
                 needLogin: true, //需要判断是否登陆
                 callbackDone: function(json) { //成功后执行的函数
-                	$(".netLoading").hide();
+                    $(".netLoading").hide();
                     that.data.canClick = true; //变为可点击
                     var jsonData = json.data,
                         notice = "",
@@ -1031,7 +1031,7 @@ $(function() {
                                 $.elasticLayer(obj);
 
                             } else if(v.conditionType == "3" && that.data.custType != "1"){//完善信息和税收声明未完成时，机构客户不支持线上完善资料
-                            	$("#tips-wrap").hide();
+                                $("#tips-wrap").hide();
                                 var obj = {
                                     title: '尊敬的客户',
                                     id: 'realOrg2',
@@ -1067,7 +1067,7 @@ $(function() {
                                 };
                                 $.elasticLayer(obj)
                             } else if(isCompOri && that.data.custType != "1"){//完善信息和税收声明未完成时，机构客户不支持线上完善资料
-                            	$("#tips-wrap").hide();
+                                $("#tips-wrap").hide();
                                 var obj = {
                                     title: '尊敬的客户',
                                     id: 'realOrg2',
@@ -1100,11 +1100,11 @@ $(function() {
                             needLoading: true,
                             needLogin: true, //需要判断是否登陆
                             callbackDone: function(json) { //成功后执行的函数
-                            	
+                                
                                 that.data.canClick = true; //变为可点击
                                 var data = json.data[0],
                                     noticeObj = data;
-									if(!!isRiskPopup && !!isPopup){//如果不匹配 isPopup是弹出售前告知书 isRiskPopup弹出风险期限
+                                    if(!!isRiskPopup && !!isPopup){//如果不匹配 isPopup是弹出售前告知书 isRiskPopup弹出风险期限
                                         objElasticLayer = {
                                             title: '',
                                             id: 'sellPop',
@@ -1126,10 +1126,10 @@ $(function() {
                                                     htmdEvtCel:'privatePlacementDetail_27',  // 埋点取消按钮属性
                                                     zIndex: 1200,
                                                     callback: function(t) {
-                                                    	var isEle = "";
-                                                    	if(that.data.fundDetailObj.isElecContract == "1"){
-                                                    		isEle = "electronicContract"
-                                                    	}else{
+                                                        var isEle = "";
+                                                        if(that.data.fundDetailObj.isElecContract == "1"){
+                                                            isEle = "electronicContract"
+                                                        }else{
                                                             isEle = "ordinaryProducts"
                                                         }
                                                         window.location.href = site_url.downloadNew_api + "?filePath=" + noticeObj.fileUrl + "&fileName=" + new Base64().encode(noticeObj.fileName) + "&groupName=" +
@@ -1141,7 +1141,7 @@ $(function() {
                                             },
                                         };
                                     }else if(!!isRiskPopup && !isPopup){
-                                    	objElasticLayer = {
+                                        objElasticLayer = {
                                             title: '尊敬的客户',
                                             id: 'sellPop',
                                             p: '<p class="" style="font-weight:bold;text-align:center">您风险测评中所选计划投资期限少于产品期限存在匹配风险，请确认是否继续购买</p>',
@@ -1151,11 +1151,11 @@ $(function() {
                                             htmdEvtCel:'privatePlacementDetail_29',  // 埋点取消按钮属性
                                             zIndex: 1200,
                                             callback: function(t) {
-                                            	that.nextStep();//跳转到对应链接
+                                                that.nextStep();//跳转到对应链接
                                             },
                                        };
-									}else if(!isRiskPopup && !!isPopup){
-								        var objElasticLayer = {
+                                    }else if(!isRiskPopup && !!isPopup){
+                                        var objElasticLayer = {
                                             title: '尊敬的客户',
                                             id: 'sellPop',
                                             p: '<p class="" style="font-weight:bold;text-align:center">你选择的产品与您现在的风险承受能力相匹配</p>' + 
@@ -1166,19 +1166,19 @@ $(function() {
                                             htmdEvtCel:'privatePlacementDetail_31',  // 埋点取消按钮属性
                                             zIndex: 1200,
                                             callback: function(t) {
-                                            	var isEle = "";
-                                            	if(that.data.fundDetailObj.isElecContract == "1"){
-                                            		isEle = "electronicContract"
-                                            	}else{
-                                            		isEle = "ordinaryProducts"
-                                            	}
+                                                var isEle = "";
+                                                if(that.data.fundDetailObj.isElecContract == "1"){
+                                                    isEle = "electronicContract"
+                                                }else{
+                                                    isEle = "ordinaryProducts"
+                                                }
                                                 window.location.href = site_url.downloadNew_api + "?filePath=" + noticeObj.fileUrl + "&fileName=" + new Base64().encode(noticeObj.fileName) + "&groupName=" +
                                                 noticeObj.groupName + "&show=1&readComplete=true&showDownload=false&fundCode=" + that.$e.projectId + "&isAllowAppend=" +
                                                 that.data.fundDetailObj.isAllowAppend + '&accreditedInvestor=' + that.data.accreditedInvestor + '&businessType=' + isEle;
                                             },
                                         };
 //                                      $.elasticLayer(objPop) 
-									}
+                                    }
                                     $.elasticLayer(objElasticLayer);
                                 if (!singleaAuthen) { //如果v.show都是0，则不展示预约框,跳转到相应链接
                                     $("#tips-wrap").hide();
@@ -1452,7 +1452,7 @@ $(function() {
             mui("body").on('mdClick', '.buyButton', function() {
                 if (that.data.canClick) { //防重复点击
                     if (that.data.buyFreeze == "1" && that.data.lawFreezeStatus == "1") { //如果禁止买入且司法冻结，首先提示
-                    	that.data.canClick = true;//这里必须改成true，否则取消后按钮不生效了。
+                        that.data.canClick = true;//这里必须改成true，否则取消后按钮不生效了。
                         var obj = {
                             title: '温馨提示',
                             id: 'buyFreeze',
@@ -1467,7 +1467,7 @@ $(function() {
                         };
                         $.elasticLayer(obj)
                     } else {
-                    	that.data.canClick = false;
+                        that.data.canClick = false;
                         that.getConditionsOfOrder(); //获取预约条件
 
                     }

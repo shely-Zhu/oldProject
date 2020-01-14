@@ -71,7 +71,7 @@ $(function() {
             var that = this;
 
             var obj = [{
-                url: site_url.query_api, //搜索接口
+                url: site_url.queryFundDiagnosis_api, //搜索接口
                 data: {
                     "pageCurrent": that.gV.pageCurrent,
                     "pageSize": 10,
@@ -130,7 +130,7 @@ $(function() {
                         if( $('.list').hasClass('refresh') ){
                             //当前为重新搜索，模板结构需要html进去
                             generateTemplate(dataList, that.$e.hotFundList, that.$e.fundListTemp,true);
-                            alwaysAjax($('.mui-table-view-cell'));
+                            alwaysAjax($('.mui-table-view-cell'), null, 2);
                             //去掉list的refresh class
                             $('.list').removeClass('refresh');
 
@@ -142,7 +142,7 @@ $(function() {
                             $('.branchBody').find('.contentWrapper .mui-table-view-cell .mui-card').append(that.html);  
 
                             generateTemplate(dataList, that.$e.hotFundList, that.$e.fundListTemp);
-                            alwaysAjax($('.mui-table-view-cell'));
+                            alwaysAjax($('.mui-table-view-cell'), null, 2);
                         }
 
                         //去掉mui-pull-bottom-pocket的mui-hidden
@@ -161,8 +161,10 @@ $(function() {
                     that.$e.listLoading.hide()
                     t.endPullupToRefresh(true);
 
-                    $(".list").css("display", "none");
-                    that.$e.noData.show()    
+                    if(that.gV.pageCurrent == 1) {
+                        $(".list").css("display", "none");
+                        that.$e.noData.show() 
+                    }
                     //隐藏回到顶部按钮
                     $('.goTopBtn').hide();
 

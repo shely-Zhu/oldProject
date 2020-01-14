@@ -111,7 +111,6 @@ function getLocalIp() {
     for (var devName in osNet) {
         var iface = osNet[devName];
         for (var i = 0; i < iface.length; i++) {
-            debugger
             var alias = iface[i];
             if (alias.family === 'IPv4' && (devName == '本地连接' || devName == '以太网' || devName == "WLAN" || devName == '无线网络连接' || devName == '本地连接 2')) {
                 console.log('当前本地ip：' + alias.address);
@@ -223,8 +222,8 @@ gulp.task('proxyTask', function() {
                     // target: 'https://app.htjf4.com',
                     // target: 'http://172.16.187.129:8080',//李亚楠
                     // target: 'http://192.168.50.254:8085',
-                    target: 'https://app.chtfundtest.com',
-                    // target:"https://app.haomaojf.com",
+                    // target: 'https://app.chtfundtest.com',
+                    target:"https://app.haomaojf.com",
                     changeOrigin: true,
                     secure: false,
                 }),
@@ -233,8 +232,8 @@ gulp.task('proxyTask', function() {
                     // target: 'https://h5.htjf4.com',
                     //  target: 'http://172.16.187.129:8080',//李亚楠
                     // target: 'http://172.16.187.164:8081',
-                    target: 'https://h5.chtfundtest.com',
-                    // target:"https://h5.haomaojf.com",
+                    // target: 'https://h5.chtfundtest.com',
+                    target:"https://h5.haomaojf.com",
                     changeOrigin: true,
                     secure: false,
                 }),
@@ -1023,14 +1022,7 @@ gulp.task("webpack", ['jsCpd', 'changePath', 'commonHtml', 'jsImgRev'], function
 
         plugins.webpack(webpackConfig),
 
-        plugins.replacePro({
-            '/allServerResources/include/js/vendor/pdf/pdf.worker.js': prefix + '/allServerResources/include/js/vendor/pdf/pdf.worker.js',
-            // placeholderFuncName: '__prefix'
-        }),
-
-        plugins.replacePro(imgRev_1),
-
-        plugins.replacePro(imgRev_2),
+        
 
         //添加changeLocalHistory、eruda和CustomEventIeFile的文件内容
         through.obj(function(file, enc, cb) {
@@ -1044,6 +1036,16 @@ gulp.task("webpack", ['jsCpd', 'changePath', 'commonHtml', 'jsImgRev'], function
             this.push(file);
             cb()
         }),
+
+
+        plugins.replacePro({
+            '/allServerResources/include/js/vendor/pdf/pdf.worker.js': prefix + '/allServerResources/include/js/vendor/pdf/pdf.worker.js',
+            // placeholderFuncName: '__prefix'
+        }),
+
+        plugins.replacePro(imgRev_1),
+
+        plugins.replacePro(imgRev_2),
 
         //预上线环境时，去掉Log并压缩
         plugins.if(options.env === '3' || options.env === '4', plugins.removelogs()),

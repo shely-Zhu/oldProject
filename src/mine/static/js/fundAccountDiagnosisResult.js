@@ -503,7 +503,6 @@ $(function() {
             // });
             // 购买日期选择
             mui("body").on("mdClick", ".addOtherFund_content .mui-icon-arrowright,.addOtherFund_content .dataPick,#dataPickDec", function() {
-                debugger
                 if($('.addOtherFund_content .dataPick').text() =='请选择'||$('.addOtherFund_content .dataPick').text()==''){
                     $('.addOtherFund_content .dataPick').text('请选择');
                     if($('body').find('.mui-dtpicker').length==0){
@@ -555,7 +554,7 @@ $(function() {
             
             mui("body").on("mdClick", ".addOtherFund_content .comfirmButtom .addOtherTrue", function() {
                 var fundCode = $(".fundCode_input").val();
-                var dataPick = $(".dataPick")[0].textContent;
+                var dataPick = $(".dataPick")[0].textContent=='请选择'?'':$(".dataPick")[0].textContent;
                 var money = $(".money_input").val();
                 var obj = {
                     "fundCode": fundCode,
