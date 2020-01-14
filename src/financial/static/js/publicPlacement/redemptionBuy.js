@@ -201,6 +201,9 @@ $(function() {
                 url: site_url.redemptionPay_api,
                 data: param,
                 needDataEmpty: true,
+                callbackLoginBack: function() {
+                    $(".confirmeDemptionPay").removeAttr("disabled");
+                },
                 callbackDone: function(res) {
                     var data = res.data;
                     $("#passwordWrap").hide();
@@ -222,7 +225,8 @@ $(function() {
                     $("#passwordWrap").hide();
                     tipAction(json.message);
                     $(".confirmeDemptionPay").removeAttr("disabled");
-                }
+                },
+
             }];
             $.ajaxLoading(obj);
         },
