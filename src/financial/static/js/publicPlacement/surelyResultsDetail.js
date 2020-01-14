@@ -120,8 +120,8 @@ $(function() {
                                     }
                                 }
                                 that.$el.applyTimeBuy.html(json.data.originalDate);
-                                that.$el.shareTimeBuy.html(json.data.estimateConfirmDate + "&nbsp; 24:00前");
-                                that.$el.earningsTimeBuy.html(json.data.estimateArrivalDate + "&nbsp; 24:00前");
+                                that.$el.shareTimeBuy.html(json.data.estimateConfirmDate? json.data.estimateConfirmDate: '-- ' + "&nbsp; 24:00前");
+                                that.$el.earningsTimeBuy.html(json.data.estimateArrivalDate? json.data.estimateArrivalDate: '-- ' + "&nbsp; 24:00前");
                                 if (decodeURI(splitUrl['bugFundName']) != "false") {
                                     that.$el.buyFundName[0].textContent = decodeURI(splitUrl['bugFundName']);
                                 }
@@ -147,8 +147,8 @@ $(function() {
                                     }
                                 }
                                 that.$el.applyTimeRedemption.html(json.data.originalDate);
-                                that.$el.shareTimeRedemption.html(json.data.estimateConfirmDate + ' 24:00前');
-                                that.$el.earningsTimeRedemption.html(json.data.estimateArrivalDate + ' 24:00前');
+                                that.$el.shareTimeRedemption.html(json.data.estimateConfirmDate? json.data.estimateConfirmDate: '-- ' + ' 24:00前');
+                                that.$el.earningsTimeRedemption.html(json.data.estimateArrivalDate? json.data.estimateArrivalDate: '-- ' + ' 24:00前');
                                 that.$el.payTypeRedemption.html('赎回方式')
                             }
                             
