@@ -85,8 +85,8 @@ $(function () {
         events: function (targetUrl) {
             var that = this;
             mui("body").on('mdClick','.con',function(e){
-                var src=$(this).attr("href")
-                window.location.href=src
+                var src=$(this).attr("href");
+                window.location.href=src;
             }, {
                 'htmdEvt': 'seeSign_0'
             })
