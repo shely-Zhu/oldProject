@@ -73,7 +73,7 @@ $(function() {
                 $('#HeadBarpathName').attr("data", '已完成交易').html('已完成交易');
                 that.gV.type = 1;
                 // 判断是否存在未确认的客户行为确认单
-                that.judgeToBeConfirmedSheet()
+                that.judgeToBeConfirmedSheet();
             } else if (splitUrl['type'] == 'toBeConfirmed') {
                 $('.hopper').hide();
                 $('#HeadBarpathName').attr("data", '待确认交易').html('待确认交易');
@@ -121,14 +121,14 @@ $(function() {
                 },
                 contentTypeSearch: true,
                 callbackDone: function(json) {
-                    var jsonData = json.data[0] || []
+                    var jsonData = json.data[0] || [];
                     if (jsonData.length != 0) {
-                        $(".hopper").hide()
-                        $(".covering").hide()
-                        var fileName = jsonData.storageFileName
-                        var filePath = jsonData.storageFilePath
-                        var groupName = jsonData.storageGroupName
-                        var ordernum = jsonData.ordernum
+                        $(".hopper").hide();
+                        $(".covering").hide();
+                        var fileName = jsonData.storageFileName;
+                        var filePath = jsonData.storageFilePath;
+                        var groupName = jsonData.storageGroupName;
+                        var ordernum = jsonData.ordernum;
                         var obj = {
                             title: '温馨提示',
                             p: '<p>您预约的' + jsonData.storageRelName + '产品已经为您生成客户行为确认单，请您查看并确认</p>',
@@ -144,7 +144,7 @@ $(function() {
                                 }
                             }
                         };
-                        $.elasticLayer(obj)
+                        $.elasticLayer(obj);
                     }
                 },
                 callbackFail: function() {
@@ -198,12 +198,12 @@ $(function() {
                         //去掉mui-pull-bottom-pocket的mui-hidden
                         $('.contentWrapper').find('.mui-pull-bottom-pocket').removeClass('mui-hidden');
                         // 将列表插入到页面上
-                        transcationTem(data, that.getElements.contentWrap, that.getElements.transTemp, type)
+                        transcationTem(data, that.getElements.contentWrap, that.getElements.transTemp, type);
                     }, 300)
                 },
                 callbackNoData: function() {
                     if (that.gV.aP.pageNum == 1) {
-                        $(".list").hide()
+                        $(".list").hide();
                         that.getElements.noData.show();
                     }
 
@@ -218,14 +218,14 @@ $(function() {
             mui("body").on('mdClick', '.hopper', function(e) {
                 $('.mask').show();
                 $('.hopperCon').show();
-                $(".covering").show()
+                $(".covering").show();
 
             }, {
                 'htmdEvt': 'tobeConfirmTransaction_0'
             })
             mui("body").on('mdClick', '.covering', function(e) {
                     $('.hopperCon').hide();
-                    $(".covering").hide()
+                    $(".covering").hide();
 
                 }, {
                     'htmdEvt': 'tobeConfirmTransaction_14'
@@ -280,7 +280,7 @@ $(function() {
 
                             }
                         };
-                        $.elasticLayer(obj)
+                        $.elasticLayer(obj);
 
 
                     } else if (type == 'assignee') {
@@ -296,7 +296,7 @@ $(function() {
 
                             },
                         };
-                        $.elasticLayer(obj)
+                        $.elasticLayer(obj);
                     } else if (type == 'appointment') {
                         var obj = {
                             p: '<p>您确定要取消预约吗？</p>',
@@ -335,7 +335,7 @@ $(function() {
                                 $.ajaxLoading(obj);
                             },
                         };
-                        $.elasticLayer(obj)
+                        $.elasticLayer(obj);
                     }
 
 
@@ -402,7 +402,7 @@ $(function() {
                 // 点击每一条进入详情
             mui("body").on('mdClick', '.transList', function(e) {
                 var proId = $(this).attr('data-projectid');
-                window.location.href = site_url.privatePlacementDetail_url + '?projectId=' + proId
+                window.location.href = site_url.privatePlacementDetail_url + '?projectId=' + proId;
             }, {
                 'htmdEvt': 'tobeConfirmTransaction_6'
             })
