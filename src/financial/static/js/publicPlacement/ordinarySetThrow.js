@@ -978,13 +978,8 @@ $(function () {
 						tipAction('单笔金额不能超过' + that.gV.singleNum + '元');
 						return
 					}
-<<<<<<< HEAD
-					that.checkPayType();
-					
-=======
 					that.$el.confirmBtn.attr('disabled',true)
 					that.checkPayType()
->>>>>>> 2783ee01d199344b506f5bad6b0dabf0b0a10016
 				}else{
 					//未选择银行卡提示信息
 					tipAction("请选择银行卡！");
