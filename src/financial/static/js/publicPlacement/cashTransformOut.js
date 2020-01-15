@@ -341,12 +341,12 @@ $(function () {
 				   that.gv.operationType = "1";
 				   $(".explain .left").eq(0).show();
 				   $(".explain .left").eq(1).hide();
-				   $('.typeDetailMoney').show()
+				   $('.typeDetailMoney').show();
 			   }else if(type == 'common'){
 				that.gv.operationType = "0";
 				$(".explain .left").eq(1).show();
 				$(".explain .left").eq(0).hide();
-				$('.typeDetailMoney').hide()
+				$('.typeDetailMoney').hide();
 			   }
 			}, {
 				htmdEvt: 'cashTransformOut_05'
