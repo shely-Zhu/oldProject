@@ -14,35 +14,20 @@ mui.init({
 //监听按钮的点击动作
 mui("body").on('tap', '.goTopBtn', function() {
 
-    $(this).siblings('.contentWrap')[0].style.webkitTransform = "translate3d(0px, 0px, 0px) translateZ(0px)";
-    $(this).siblings('.contentWrap')[0].style.webkitTransform = '2500ms';
-
-
-    // if ($(this).siblings('.form-wrap').length) {
-    //     //基金公告页面
-    //     $(this).siblings('.form-wrap')[0].style.webkitTransform = "translate3d(0px, 0px, 0px) translateZ(0px)";
-    //     $(this).siblings('.form-wrap')[0].style.webkitTransform = '2500ms';
-
-    // } else if ($(this).parents('.payMX').find('.contentWrapper').length) {
-    //     //公募交易明细页面
-    //     $(this).siblings('.contentWrapper')[0].style.webkitTransform = "translate3d(0px, 0px, 0px) translateZ(0px)";
-    //     $(this).siblings('.contentWrapper')[0].style.webkitTransform = '2500ms';
-
-    // } else if ($(this).parents('.payTheme').length) {
-    //     //我的账户 accountMerge.html页面
-    //     $(this).siblings('.scrollList')[0].style.webkitTransform = "translate3d(0px, 0px, 0px) translateZ(0px)";
-    //     $(this).siblings('.scrollList')[0].style.webkitTransform = '2500ms';
-    // } else if ($(this).siblings('.contentWrap').length) {
-    //     //我的账户 已确认交易，待确认交易
-    //     $(this).siblings('.contentWrap')[0].style.webkitTransform = "translate3d(0px, 0px, 0px) translateZ(0px)";
-    //     $(this).siblings('.contentWrap')[0].style.webkitTransform = '2500ms';
-    // } else {
-    //     //其他页面
-    //     $(this).siblings('.mui-table-view')[0].style.webkitTransform = "translate3d(0px, 0px, 0px) translateZ(0px)";
-    //     $(this).siblings('.mui-table-view')[0].style.webkitTransform = '2500ms';
-    // }
-
-
+    if ($(this).siblings('.form-wrap').length) {
+        //基金公告页面
+        $(this).siblings('.form-wrap')[0].style.webkitTransform = "translate3d(0px, 0px, 0px) translateZ(0px)";
+        $(this).siblings('.form-wrap')[0].style.webkitTransform = '2500ms';
+    } else if ($(this).siblings('.contentWrap').length) {
+        $(this).siblings('.contentWrap')[0].style.webkitTransform = "translate3d(0px, 0px, 0px) translateZ(0px)";
+        $(this).siblings('.contentWrap')[0].style.webkitTransform = '2500ms';
+    } else if ($(this).siblings('.contentWrapper').length) {
+        $(this).siblings('.contentWrapper')[0].style.webkitTransform = "translate3d(0px, 0px, 0px) translateZ(0px)";
+        $(this).siblings('.contentWrapper')[0].style.webkitTransform = '2500ms';
+    }else {
+        $(this).siblings('.mui-table-view')[0].style.webkitTransform = "translate3d(0px, 0px, 0px) translateZ(0px)";
+        $(this).siblings('.mui-table-view')[0].style.webkitTransform = '2500ms';
+    }
 
     $(this).hide();
 });

@@ -70,6 +70,7 @@ $(function () {
 			accountType:null,   //客户类型  0-机构 1-个人
 			doubleClickStatus:false,
 			buyFundCode:"",  // 在线支付选货币基金的基金代码
+			clickFlag:true
 		},
 		webinit: function () {
 			var that = this;
@@ -755,13 +756,20 @@ $(function () {
 //			        return false
 				}else{
 					//判断是否是在线支付
+					if(that.gV.clickFlag){
+					that.gV.clickFlag = false;
 					var isonline = that.gV.payType==0?"?supportOnline=true":""
 					//跳往原生页面去修改密码
 					if(that.gV.doubleClickStatus){
+						//定时器
+						setTimeout(function(){ 
+							that.gV.clickFlag = true
+						}, 500);
 	                    window.location.href = site_url.pofAddBankCard_url+isonline
 					}
 					
 				}
+			}
 
 			}, {
 				htmdEvt: 'fundTransformIn_16'
