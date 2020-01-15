@@ -665,14 +665,14 @@ $(function() {
                     $("#qrnhLine").addClass("hide");
                     $("#wfsyLine").addClass("hide");
                     $(".noDataHintEcharts").removeClass("hide");
-                    $(".lineWrap").hide();
+                    // $(".lineWrap").hide();
                 },
                 callbackFail: function(json) {
                     that.data.echartsClickFlag = false;
                     $("#qrnhLine").addClass("hide");
                     $("#wfsyLine").addClass("hide");
                     $(".noDataHintEcharts").removeClass("hide");
-                    $(".lineWrap").hide();
+                    // $(".lineWrap").hide();
 
                 }
             }];
@@ -764,7 +764,8 @@ $(function() {
                     axisLabel: {
                         show: true,
                         color: '#9B9B9B', //这里用参数代替了
-                        margin: 20
+                        margin: 20,
+                        padding:[0,14,0,4],
                     },
                     axisTick: {
                         show: false
