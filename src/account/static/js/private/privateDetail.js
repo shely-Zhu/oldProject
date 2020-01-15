@@ -272,7 +272,11 @@ $(function() {
                     $("#qrnhLine").addClass("hide");
                     $("#wfsyLine").addClass("hide");
                     $(".noDataHintEcharts").removeClass("hide");
-                }
+				},
+				//如果没有登陆 去登录页面 变成可点击
+				callbackLoginBack: function(){
+					 that.data.echartsClickFlag = false;
+				}
 			}];
 			$.ajaxLoading(obj);
 		},
