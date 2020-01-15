@@ -383,7 +383,7 @@ $(function() {
 				$("#dwjzLine").removeClass("hide");
 				$(".noDataHintEcharts").addClass("hide");
 				var chartId = $('#dwjzLine')[0],
-					tooltipUnit = '%',
+					tooltipUnit = '',
 					xAxisData = data.assetsDate,
 					seriesData = data.unitAssets;
 			} else if( type == 'ljjz'){
@@ -391,7 +391,7 @@ $(function() {
 				$("#ljjzLine").removeClass("hide");
 				$(".noDataHintEcharts").addClass("hide");
 				var chartId = $('#ljjzLine')[0],
-					tooltipUnit = '%',
+					tooltipUnit = '',
 					xAxisData = data.assetsDate,
 					seriesData = data.accumulativeAssets;
 			}
@@ -474,8 +474,12 @@ $(function() {
 			    	},
 			    	type : 'value',
  					axisLabel: {                   
-						formatter: function (value, index) {           
-							return value.toFixed(4);      
+						formatter: function (value, index) {  
+							if(type == 'qrnh') {
+								return value.toFixed(4) + '%';      
+							} else {
+								return value.toFixed(4);
+							}       
 						}                
 					}
 			    },

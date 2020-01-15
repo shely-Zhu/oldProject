@@ -698,6 +698,7 @@ $(function() {
                 $(".rightTitle").removeClass("hide");
                 $(".priceLimit").addClass("hide");
                 var chartId = $('#qrnhLine')[0],
+                    tooltipUnit = '%',
                     xAxisData = data.profitThoudDate,
                     seriesData = data.sevenIncomeRate;
             } else if (type == 'wfsy') {
@@ -705,6 +706,7 @@ $(function() {
                 $("#wfsyLine").removeClass("hide");
                 $(".noDataHintEcharts").addClass("hide");
                 var chartId = $('#wfsyLine')[0],
+                    tooltipUnit = '',
                     xAxisData = data.profitThoudDate,
                     seriesData = data.sevenIncomeRate;
             }
@@ -713,7 +715,7 @@ $(function() {
             myChart.setOption({
                 tooltip: {
                     trigger: 'axis',
-                    formatter: '<p style="font-size:0.36rem;color: #DAB57C;">{c}%</p><p style="font-size:0.24rem;color:#4A4A4A">{b}</p>',
+                    formatter: '<p style="font-size:0.36rem;color: #DAB57C;">{c}'+ tooltipUnit +'</p><p style="font-size:0.24rem;color:#4A4A4A">{b}</p>',
                     backgroundColor: 'rgba(218,181,124, 0.1)',
                     // renderMode : 'richText',
                     extraCssText: [7, 15, 15, 15],
@@ -789,9 +791,14 @@ $(function() {
                         formatter: '{value}%',
                     },
                     type : 'value',
-                    axisLabel: {
-                        formatter: function (value, index) {
-                            return value.toFixed(4) + '%';
+
+                    axisLabel: {                   
+                        formatter: function (value, index) {  
+                            if(type == 'qrnh') {
+                                return value.toFixed(4) + '%'; 
+                            } else {
+                                return value.toFixed(4);      
+                            }      
                         },
                         color:"#9B9B9B"
                     }
