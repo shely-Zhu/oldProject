@@ -53,7 +53,7 @@ $(function () {
 			capitalMode: '', //资金方式
 			payType: '0',   //支付方式（0、在线支付 1、汇款支付）
 			bankName: '',  // 银行名称
-			
+			clickFlag:true,
 			password: "",
 			
 			identityType:"",//证件类型
@@ -1068,17 +1068,20 @@ $(function () {
 			            yesTxt: '明白了'
 			       })
 				}else{
-					//判断是否是在线支付
-					if(!$(".popup-last").attr("clickTrue") == true){
-						$(".popup-last").attr("clickTrue","true")
+					if(that.gV.clickFlag){
+						that.gV.clickFlag = false;
+						//判断是否是在线支付
 						var isonline = that.gV.payType==0?"?supportOnline=true":""
 						//跳往原生页面去修改密码
 						if(that.gV.doubleClickStatus){
+							//定时器
+							setTimeout(function(){ 
+								that.gV.clickFlag = true
+							}, 500);
 							window.location.href = site_url.pofAddBankCard_url+isonline
-							$(".popup-last").attr("clickTrue","false")
 						}
 					}
-					
+						
 				}
 			}, {
 				htmdEvt: 'ordinarySetThrow_16'

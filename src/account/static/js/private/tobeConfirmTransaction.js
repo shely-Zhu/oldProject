@@ -49,7 +49,11 @@ $(function() {
         },
         html: '', //存放生成的html
         init: function() { //初始化函数
-
+            var wHeight = window.screen.height;
+            //处理7p 8p页面初始底部白条
+            if( $('html').height() < wHeight ){
+                $('html').height( wHeight );
+            }
             var that = this;
             //初始化第一屏区域的上拉加载
             that.initMui();
