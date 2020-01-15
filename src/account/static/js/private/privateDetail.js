@@ -272,7 +272,11 @@ $(function() {
                     $("#qrnhLine").addClass("hide");
                     $("#wfsyLine").addClass("hide");
                     $(".noDataHintEcharts").removeClass("hide");
-                }
+				},
+				//如果没有登陆 去登录页面 变成可点击
+				callbackLoginBack: function(){
+					 that.data.echartsClickFlag = false;
+				}
 			}];
 			$.ajaxLoading(obj);
 		},
@@ -379,7 +383,7 @@ $(function() {
 				$("#dwjzLine").removeClass("hide");
 				$(".noDataHintEcharts").addClass("hide");
 				var chartId = $('#dwjzLine')[0],
-					tooltipUnit = '%',
+					tooltipUnit = '',
 					xAxisData = data.assetsDate,
 					seriesData = data.unitAssets;
 			} else if( type == 'ljjz'){
@@ -387,7 +391,7 @@ $(function() {
 				$("#ljjzLine").removeClass("hide");
 				$(".noDataHintEcharts").addClass("hide");
 				var chartId = $('#ljjzLine')[0],
-					tooltipUnit = '%',
+					tooltipUnit = '',
 					xAxisData = data.assetsDate,
 					seriesData = data.accumulativeAssets;
 			}
@@ -470,8 +474,12 @@ $(function() {
 			    	},
 			    	type : 'value',
  					axisLabel: {                   
-						formatter: function (value, index) {           
-							return value.toFixed(4);      
+						formatter: function (value, index) {  
+							if(type == 'qrnh') {
+								return value.toFixed(4) + '%';      
+							} else {
+								return value.toFixed(4);
+							}       
 						}                
 					}
 			    },
@@ -715,7 +723,7 @@ $(function() {
 				'htmdEvt': "privateDetail_3"
 			})
             // 历史明细点击跳转
-            mui("body").on('mdClick', '#historyDetailBtn', function() {
+            mui("body").on('mdClick', '#historyDetailBtn, .historyDetailArrow', function() {
             	window.location.href = site_url.historyDetail_url + '?projectId=' + that.data.projectId;
             }, {
 				'htmdEvt': 'privateDetail_4'

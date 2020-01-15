@@ -547,25 +547,25 @@ $(function() {
             var that = this;
             var fundCode = splitUrl['fundCode'];
             // 基金经理
-            mui("body").on('mdClick', ".fundManager", function(e) {
+            mui("body").on('mdClick', ".fundManagerCon", function(e) {
                 if (that.gV.json.fundManager != "") {
-                    window.location.href = site_url.pofFundManager_url + '?fundCode=' + fundCode;
+                    window.location.href = site_url.pofFundManager_url + '?fundCode=' + fundCode + '&appNewWebView=1';
                 }
             }, {
                 htmdEvt: 'publicDetail_01'
             });
 
             // 基金公司
-            mui("body").on('mdClick', ".fundCompany", function(e) {
+            mui("body").on('mdClick', ".fundCompanyCon", function(e) {
                 if (that.gV.json.fmcComName != "") {
-                    window.location.href = site_url.pofFundCompany_url + '?fundComId=' + that.fundComId;
+                    window.location.href = site_url.pofFundCompany_url + '?fundComId=' + that.fundComId + '&appNewWebView=1';
                 }
             }, {
                 htmdEvt: 'publicDetail_02'
             });
 
             // 基金档案
-            mui("body").on('mdClick', ".fundFile", function(e) {
+            mui("body").on('mdClick', ".fundFileCon", function(e) {
                 window.location.href = site_url.pofFundFile_url + '?secuId=' + that.secuId + '&fundCode=' + fundCode;
             }, {
                 htmdEvt: 'publicDetail_03'
