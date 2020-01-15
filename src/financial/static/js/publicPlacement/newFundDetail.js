@@ -47,9 +47,9 @@ $(function() {
                     var jsonData = json.data;
                     //当前时间
                     var nowDate = new Date();
-                    var endDate = new Date(jsonData.issEndDt);
+                    var endDate = new Date(jsonData.issEndDt + ' 23:59:59');
                     var totalSeconds = parseInt((endDate - nowDate) / 1000); // 当前时间与募集截止日的日期相比
-                    var issBgnDt = new Date(jsonData.issBgnDt);
+                    var issBgnDt = new Date(jsonData.issBgnDt + ' 00:00:00');
                     var timeDiff = parseInt((issBgnDt - nowDate) / 1000); // 当前时间与募集起始日的日期相比
                     // 基金简称 + 基金编码
                     $("#HeadBarpathName").html("<span>" + jsonData.secuSht + "</span>" + "</br><span class='secuId'>" + jsonData.trdCode + "</span>");
@@ -59,7 +59,7 @@ $(function() {
                     // 新发基金倒计时
 
                     if (totalSeconds > 0) {
-                        that.TimeDown(jsonData.issEndDt);
+                        that.TimeDown(endDate);
                         that.getElements.productStatus = 0;
                     } else if (totalSeconds <= 0 && jsonData.issBgnDt || timeDiff > 0) {
                         $('.subscriptionTime').html('<span>00</span>天<span>00</span>小时<span>00</span>分<span>00</span>秒');
