@@ -42,6 +42,7 @@ $(function() {
                     var data = json.data.pageList;
                     for (var i = 0; i < data.length; i++) {
                         if (data[i].fixState == 'H') {
+                            data[i].fixStateStr = "已终止"
                             that.gV.dataList.push(data[i])
                         }
                     }
