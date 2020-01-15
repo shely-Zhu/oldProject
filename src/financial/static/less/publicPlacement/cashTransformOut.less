@@ -20,15 +20,25 @@
 
 @import url('@pathCommonCom/elasticLayer/transOutRule/transOutRule.less');
 @import url("@pathCommonLessCom/payPassword.less");
+html{
+    height: 100%;
+    position: relative;
+}
 body{
     background: @F7FAFD;
+    height: 100%;
 }
 
 .container{
     width: 100%;
     height:100%;
     background-color: @F7FAFD;
-    padding-bottom: 1rem;
+    padding-bottom: .3rem;
+    display: flex;
+    flex-direction: column;
+    .flex1{
+        flex: 1;
+    }
     .br{
         border-top:1px solid @e0e0e0;
         position: fixed;
@@ -568,10 +578,10 @@ body{
       line-height: .98rem;
       text-align: center;
       letter-spacing: 2px;
-      bottom: 0.3rem;
-      position: fixed;
-      left: 0.3rem;
-      right: 0.3rem;
+    //   bottom: 0.3rem;
+    //   position: fixed;
+    //   left: 0.3rem;
+    //   right: 0.3rem;
       width: 90%;
   }
   .checkMessage{
