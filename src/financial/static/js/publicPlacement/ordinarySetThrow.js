@@ -95,6 +95,7 @@ $(function () {
 			}
 			
 			that.getAgreeUrl();
+			that.getUserInfo();
 		},
 		// 获取客户类型
         getUserInfo: function () {
@@ -1068,10 +1069,14 @@ $(function () {
 			       })
 				}else{
 					//判断是否是在线支付
-					var isonline = that.gV.payType==0?"?supportOnline=true":""
-					//跳往原生页面去修改密码
-					if(that.gV.doubleClickStatus){
-	                    window.location.href = site_url.pofAddBankCard_url+isonline
+					if(!$(".popup-last").attr("clickTrue") == true){
+						$(".popup-last").attr("clickTrue","true")
+						var isonline = that.gV.payType==0?"?supportOnline=true":""
+						//跳往原生页面去修改密码
+						if(that.gV.doubleClickStatus){
+							window.location.href = site_url.pofAddBankCard_url+isonline
+							$(".popup-last").attr("clickTrue","false")
+						}
 					}
 					
 				}
