@@ -676,8 +676,8 @@ $(function () {
 				 			}
 				 		}
 				 	}
-				 	that.$el.confirmBtn.attr('disabled',true)
-				 	that.checkPayType()
+//				 	that.$el.confirmBtn.attr('disabled',true)
+//				 	that.checkPayType()
 				 }else{
 				 	//未选择银行卡提示信息
 				 	tipAction("请选择银行卡！");
