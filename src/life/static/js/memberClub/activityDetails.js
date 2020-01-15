@@ -92,7 +92,7 @@ $(function() {
                         //报名时间
                         that.$e.startTimeOrendTime.html(data.actStartDateStr + '-' + data.actEndDateStr);
                         //活动介绍
-                        that.$e.actIntroduce.html($(data.actIntroduce));
+                        that.$e.actIntroduce.html(data.actIntroduce);
                         $(".lazyload").lazyload()
 
                     }
