@@ -188,7 +188,7 @@ $(function() {
 
             // 请求微信分享内容接口
             that.generateAjaxObj(site_url.findContentByCategory_api, wxData, function(data) {
-                debugger
+                // debugger
                 // 将数据存储起来，待一会生成链接使用，为性能，提前请求接口
                 var data = data.pageList[0];
 
