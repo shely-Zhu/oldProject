@@ -258,6 +258,9 @@ $(function() {
             mui('body').on('mdClick', '.clickli', function(e) {
                 var actType = $(this).attr('data-actType');
                 var actId = $(this).attr('data-actId');
+                if(!actType){//如果值为空，则无法跳转
+                	return false;
+                }
                 window.location.href = site_url.activityDetails_url + '?actType=' + actType + '&' + 'actId=' + actId+'&isNeedLogin=1';
             }, {
                 htmdEvt: 'activityEnrolment_03'
