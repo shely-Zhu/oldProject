@@ -113,11 +113,16 @@
                     {{else}}
                         <div class="text_green position_g show_item">{{incomeMask}}</div>
                     {{/if_than_0}}
-                    {{#if_than_0 addupIncome}}
-                        <div class="text_red position_h show_item">+{{addupIncomeMask}}</div>
+
+                    {{!  按赵丹提的问题，这里应该改为holdIncome的字段}}
+
+                    {{#if_than_0 holdIncome}}
+                        <div class="text_red position_h show_item">+{{holdIncomeMask}}</div>
                     {{else}}
-                        <div class="text_green position_h show_item">{{addupIncomeMask}}</div>
+                        <div class="text_green position_h show_item">{{holdIncomeMask}}</div>
                     {{/if_than_0}}
+
+
                     {{#if myTip}}
                         <div class="tip">{{myTip}}</div>
                     {{/if}}
