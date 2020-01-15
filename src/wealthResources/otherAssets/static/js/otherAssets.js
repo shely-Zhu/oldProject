@@ -2,7 +2,7 @@
  * @page: 其他资产(定融定投)
  * @Author: peicc
  * @Date:   2019-11
- * @Last Modified by:
+ * @Last Modified by:   songxiaoyu
  * @description:
  * 2019-9-10 待确认资产添加
  */
@@ -436,7 +436,7 @@ $(function() {
 
                 if ($("#move_" + index + " .noData").length) {
                     //已经暂无数据了
-                    // $('body').css('transform', 'translate3d(0px, 0px, 0px) translateZ(0px)');
+                    $('body').css('transform', 'translate3d(0px, 0px, 0px) translateZ(0px)');
 
                     $('#slider .mui-slider-item').each(function(i, el) {
                         if (i != index) {
@@ -468,11 +468,13 @@ $(function() {
                     $('body').css('transform', transformUl);
 
                     var t = $('.nav-wrapper')[0].getBoundingClientRect().top;
-                    if (t < 0) {
+
+                    if (t <= 10) {
                         $('.nav-wrapper').addClass('nav_fixed');
-                        // $('body').css('transform', 'translate3d(0px, -201px, 0px) translateZ(0px)');
+                        $('body').css('transform', 'translate3d(0px, -238px, 0px) translateZ(0px)');
                         move = false;
                     }
+
                 } else if (!move && (e.detail.lastY > -30 && e.detail.lastY != 0)) { // 等于0是tab切换
                     $('.nav-wrapper').removeClass('nav_fixed');
                 }
@@ -484,7 +486,7 @@ $(function() {
 
                         var transformNum = trans.substring(2, trans.indexOf('px'));
 
-                        if (Number(transformNum) > -201) {
+                        if (Number(transformNum) > -238) {
                             // 切换tab
 
                             $('body').css('transform', transformUl);
