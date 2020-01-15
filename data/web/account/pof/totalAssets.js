@@ -14,8 +14,8 @@ var mymessage = Mock.mock(
         "assetTotalMask":"288,681.47",
         "cashDetails":[
             {
-                "addupIncome":"11.10",
-                "addupIncomeMask":"11.10",
+                "addupIncome":"11111.10",
+                "addupIncomeMask":"111111.10",
                 "addupIncomeRat":"0.00",
                 "annYldRat":"2.141",
                 "fundCode":"004865",
@@ -40,7 +40,7 @@ var mymessage = Mock.mock(
         "fundDetailList":[
             {
                 "addupIncome":"2949.61",
-                "addupIncomeMask":"2,949.61",
+                "addupIncomeMask":"2111,949.61",
                 "addupIncomeRat":"147.26%",
                 "bankAccount":"9d8d62630a446923ebb5d7fe25f39eb6924c1fac353615657249e1625da409e6",
                 "bankAccountMask":"621226****5181",
