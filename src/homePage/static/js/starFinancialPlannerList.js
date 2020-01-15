@@ -193,6 +193,9 @@ $(function() {
                     $('.contentWrapper').find('.mui-pull-bottom-pocket').removeClass('mui-hidden');
                     // 将列表插入到页面上
                     generateTemplate(data, $('.activityNoListBox2'), $('#starFinancialPlannerList-template'), true);
+
+                    $(".lazyload").lazyload();
+                    
                         // 第一个调仓记录默认展开
                     $('.recordList').find('ul').eq(0).find('.mui-collapse').addClass('mui-active');
                 }, 200)

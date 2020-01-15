@@ -68,7 +68,7 @@ var pdfModel={
 	pdfModel:function(accessoryName,url){
 		var that = this;
 
-        var url = site_url.downloadFile_api+'?name=' + new Base64().encode(accessoryName) + "&show=0&url="+url;
+        var url = site_url.frontendMountDownload_api+'?name=' + new Base64().encode(accessoryName) + "&show=0&url="+url;
         // 将pdf流转为canvas
         var pdfjsLib = window['pdfjs-dist/build/pdf'];
         
