@@ -434,7 +434,7 @@ $(function() {
                 'htmdEvt': 'fortune_13'
             })
             // 财富学院的banner的跳转  需判断是否跳转到外部链接
-            mui("body").on("mdClick", '.mui-slider-item div', function() {
+            mui("body").on("mdClick", '.banner .mui-slider-item div', function() {
 
                 var $this = $(this);
 
