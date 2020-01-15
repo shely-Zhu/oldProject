@@ -676,7 +676,7 @@ var monthReportDetail = {
 	events: function(){  //绑定事件
 		var that = this;
 		mui("body").on('mdClick', '.consult' , function(){
-
+			$(this).addClass("btn_grey").attr('disable',true);
 			that.getElements.productName = $(this).attr('productName');
 			// 获取理财师
 			var obj = [{
@@ -726,14 +726,14 @@ var monthReportDetail = {
 							needLogin: true, //需要判断登录情况
 							needDataEmpty: false,//不需要判断data是否为空
 							callbackDone: function(json){
-								$(".contactNow").hide();
-								$(".mask").hide();
-								$(".btns .error-tip").html('');
-								$('.btns .save').removeClass("btn_grey").attr('disabled',false);
+								$(this).addClass("btn_grey").attr('disable',false);
 							
 							},
 							callbackFail: function(json){
-								
+								$(this).addClass("btn_grey").attr('disable',false);
+							},
+							callbackLoginBack:function(){
+								$(this).addClass("btn_grey").attr('disable',false);
 							},
 						}]
 						$.ajaxLoading(contentObj);

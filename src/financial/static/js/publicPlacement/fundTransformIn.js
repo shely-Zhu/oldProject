@@ -316,6 +316,9 @@ $(function () {
 				},
 				//async: false,
 				needDataEmpty: true,
+				callbackLoginBack:function(json){
+					that.$el.confirmBtn.removeAttr("disabled");
+				},
 				callbackDone: function(json) {
 					if(json.status == '0000'){
 						payPass(that.checkPassword);
@@ -326,6 +329,14 @@ $(function () {
 					}
 
 				},
+				callbackNoData:function(json){
+					tipAction(json.message);
+					that.$el.confirmBtn.removeAttr("disabled");					
+                },
+                callbackFail:function(json){
+					tipAction(json.message);
+					that.$el.confirmBtn.removeAttr("disabled");
+                }
 
 			}];
 			$.ajaxLoading(obj);
@@ -671,6 +682,7 @@ $(function () {
 				// 	tipAction("请选择银行卡！");
 				// 	return
 				// }
+                that.$el.confirmBtn.attr('disabled',true)
 				that.checkPayType()
 			}, {
 				htmdEvt: 'fundTransformIn_08'

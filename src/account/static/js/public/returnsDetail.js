@@ -31,7 +31,13 @@ $(function() {
         //初始化mui的上拉加载
         initMui: function() {
             var that = this;
-            var height = windowHeight - $(".title").height() - $(".topTitle").height()-$(".messageTitle").height();
+            var height = windowHeight;
+            if (splitUrl['isSuper']){
+                //是超宝页面进来的
+                $(".messageTitle").hide();
+            } else {
+                height -= $(".title").height() - $(".topTitle").height()-$(".messageTitle").height();
+            }
             if (!$('.list').hasClass('setHeight')) {
                 $('.list').height(height).addClass('setHeight');
             }

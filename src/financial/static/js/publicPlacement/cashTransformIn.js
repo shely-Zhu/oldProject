@@ -187,6 +187,9 @@ $(function () {
 				},
 				//async: false,
 				needDataEmpty: true,
+				callbackLoginBack:function(json){
+					that.$el.confirmBtn.removeAttr("disabled");
+				},
 				callbackDone: function(json) {
 					if(json.status == '0000'){
 						payPass(that.checkPassword);
