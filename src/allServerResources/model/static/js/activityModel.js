@@ -196,7 +196,7 @@ $(function() {
                         domainName = '';
                     }
 
-                    if(window.location.hostname.indexOf('h5.') != -1){
+                    if(window.location.hostname.indexOf('h5.') != -1 || window.location.hostname.indexOf('h5test.') != -1){
                         //如果域名用的是私募的apps.chtfund.com但是参数type=publicOffering前端需要将详情页定位到app的公募的域名上面去
                         //之所以这么做是因为后台程龙代码做转发的时候banner配置的路径只转发了wap和apps的，无法转发apppof的，所以前端暂时控制
                         if (splitUrl()['type'] == "publicOffering") { //是apppof
