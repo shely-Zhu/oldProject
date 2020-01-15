@@ -6,7 +6,7 @@
  */ -->
 
 <!DOCTYPE html>
-<html lang="en">    
+<html lang="en">
 
 <head>
     @@include('@pathInclude/views/meta.html')
@@ -20,8 +20,7 @@
         @@include('@pathCommonViews/headBarConfig.html',{"pathName":"买入"})
         <div class="br"></div>
         <div class="title">
-            <span class="fundName"></span>
-            &nbsp;
+            <span class="fundName"></span> &nbsp;
             <span class="fundCode"></span>
         </div>
         <div class="warnInfo">
@@ -31,28 +30,28 @@
         <div class="money">
             <div class="mfirst">
                 <div class="mfirst-one">买入金额</div>
-                <div class="mfirst-two">
-                    <span>交易规则</span> 
-                    <a href="javaScript:;" class="iconfont iconone goRule">&#xe67d;</a>
+                <div class="mfirst-two goRule">
+                    <span>交易规则</span>
+                    <a href="javaScript:;" class="iconfont iconone ">&#xe67d;</a>
                 </div>
             </div>
             <div class="msecond">
-            	<span class="msecond-one">￥</span>
+                <span class="msecond-one">￥</span>
                 <input class="transformInput" id="transformInput" type="number" />
                 <a href="javaScript:;" class="deleteNum">
                     <img src="/financial/static/img/icon_delete@2x.png" alt="">
                 </a>
             </div>
             <div class="pay">
-                 <p class="CostEstimate">
-                     <span>费用估算：</span>
-                     <span class="num">-</span>
-                 </p>
-                 <p class="payConfirm payConfirm-f">
+                <p class="CostEstimate">
+                    <span>费用估算：</span>
+                    <span class="num">-</span>
+                </p>
+                <p class="payConfirm payConfirm-f">
                     <span>购买确认日：</span>
                     <span class="date"></span>
-                 </p>
-                 <p class="brforre15 brforre15-f">
+                </p>
+                <p class="brforre15 brforre15-f">
                     <span>15点之后的交易申请将作为</span>
                     <span class="date"></span>
                     <span>的申请</span>
@@ -76,9 +75,9 @@
                     </div>
                     <div class="onright-left-two">单笔限额5万，单日限额10万</div> -->
                 </div>
-               
+
             </div>
-            
+
         </div>
         <div class="remittance paymoney" pay-type="1">
             <div class="ff">汇款支付</div>
@@ -93,8 +92,8 @@
                     </div>
                     <div class="onright-left-two">单笔限额5万，单日限额10万</div> -->
                 </div>
-                
-                
+
+
             </div>
         </div>
         <script id="bankListCheck-template" type="text/x-handlebars-template">
@@ -127,21 +126,21 @@
             <div>
                 <span class="file">
                     <a href="javascript:;" class="item2"><span class="iconfont">&#xe668;</span><span>已阅读并同意</span></a>
-                    <a href="javascript:;" class="setGoUrl">《公募基金风险揭示及售前告知书》、</a>
-                    <a href="javascript:;" class="raskBook">《风险揭示函》、</a>
-                    <a href="javascript:;" class="contract goPreview">《基金合同》</a>、
-                    <a href="javascript:;" class="recruiting goPreview">《招募说明书》</a>
+                <a href="javascript:;" class="setGoUrl">《公募基金风险揭示及售前告知书》、</a>
+                <a href="javascript:;" class="raskBook">《风险揭示函》、</a>
+                <a href="javascript:;" class="contract goPreview">《基金合同》</a>、
+                <a href="javascript:;" class="recruiting goPreview">《招募说明书》</a>
                 </span>
-                
+
             </div>
         </div>
         <div class="btn_box">
             <button class="btn" type="button" disabled>
                     确定
             </button>
-            
+
         </div>
-        
+
     </section>
 
     <!-- 银行卡弹窗 -->
@@ -160,8 +159,8 @@
                 </ul>
                 <script id="bankList-template" type="text/x-handlebars-template">
                     {{#each this}}
-                    <li class="popup-li bank-li" fundOrBank="1" useEnv="{{useEnv}}" capitalMode="{{capitalMode}}" bankThumbnailUrl="{{bankThumbnailUrl}}" tradeAcco="{{tradeAcco}}" bankName="{{bankName}}" bankNo="{{bankNo}}" singleNum="{{singleNum}}"
-                    oneDayNum="{{oneDayNum}}" bankAccountSecret="{{bankAccountSecret}}" after4Num="{{after4Num}}" singleNum="{{singleNum}}">
+                    <li class="popup-li bank-li" fundOrBank="1" useEnv="{{useEnv}}" capitalMode="{{capitalMode}}" bankThumbnailUrl="{{bankThumbnailUrl}}" tradeAcco="{{tradeAcco}}" bankName="{{bankName}}" bankNo="{{bankNo}}" singleNum="{{singleNum}}" oneDayNum="{{oneDayNum}}"
+                        bankAccountSecret="{{bankAccountSecret}}" after4Num="{{after4Num}}" singleNum="{{singleNum}}">
                         <img class="bank-img" src="{{bankThumbnailUrl}}" alt="">
                         <div class="div">
                             <div class="bank-name">{{bankName}}({{after4Num}})</div>
@@ -179,23 +178,23 @@
                     </li>
                 </script>
                 <ul class="popup-ul2">
-                
+
                 </ul>
                 <script id="bankList-template2" type="text/x-handlebars-template">
                     {{#each this}}
-                        <li class="popup-li bank-li" fundOrBank="2" useEnv="{{useEnv}}" capitalMode="{{capitalMode}}" tradeAcco="{{tradeAcco}}" bankName="{{bankName}}" bankNo="{{bankNo}}" 
-                        bankAccoutEncrypt="{{bankAccoutEncrypt}}" after4Num="{{after4Num}}" enableAmount="{{enableAmount}}" fundName="{{fundName}}" fundAccount="{{fundAccount}}" fundCode="{{fundCode}}">
-                            <!-- <img class="bank-img" src="" alt=""> -->
-                            <div class="div">
-                                <div class="bank-fundName">{{fundName}}</div>
-                                <div class="bank-name">{{bankName}}({{after4Num}})</div>
-                                <div class="enableAmount"> 
-                                    <span class="title">可用金额</span>
-                                    <span class="amount">{{enableAmount}}元</span>
-                                </div>
+                    <li class="popup-li bank-li" fundOrBank="2" useEnv="{{useEnv}}" capitalMode="{{capitalMode}}" tradeAcco="{{tradeAcco}}" bankName="{{bankName}}" bankNo="{{bankNo}}" bankAccoutEncrypt="{{bankAccoutEncrypt}}" after4Num="{{after4Num}}" enableAmount="{{enableAmount}}"
+                        fundName="{{fundName}}" fundAccount="{{fundAccount}}" fundCode="{{fundCode}}">
+                        <!-- <img class="bank-img" src="" alt=""> -->
+                        <div class="div">
+                            <div class="bank-fundName">{{fundName}}</div>
+                            <div class="bank-name">{{bankName}}({{after4Num}})</div>
+                            <div class="enableAmount">
+                                <span class="title">可用金额</span>
+                                <span class="amount">{{enableAmount}}元</span>
                             </div>
-                            <img class="true" src="/common/img/account_icon_check@2x.png" alt="">
-                        </li>
+                        </div>
+                        <img class="true" src="/common/img/account_icon_check@2x.png" alt="">
+                    </li>
                     {{/each}}
                 </script>
             </div>
@@ -205,28 +204,27 @@
     <!-- 校验密码弹窗 -->
     <div class="popup-password">
         <div class="elasticMid">
-               <div class="elasticTxt">
-               </div>
-               <div  class="elasticButtons error1">
-                    <button class="elasticCel" type="button">忘记密码</button>
-                    <button class="elasticYes" type="button">重新输入</button>
-               </div>
-               <div  class="elasticButtons error2">
-                    <button class="elasticCel" type="button">取消</button>
-                    <button class="elasticYes" type="button">找回密码</button>
-               </div>
-               <div  class="elasticButtons error3">
-                    <button class="elasticCel" type="button">取消</button>
-                    <button class="elasticYes" type="button">重试</button>
-               </div>
+            <div class="elasticTxt">
+            </div>
+            <div class="elasticButtons error1">
+                <button class="elasticCel" type="button">忘记密码</button>
+                <button class="elasticYes" type="button">重新输入</button>
+            </div>
+            <div class="elasticButtons error2">
+                <button class="elasticCel" type="button">取消</button>
+                <button class="elasticYes" type="button">找回密码</button>
+            </div>
+            <div class="elasticButtons error3">
+                <button class="elasticCel" type="button">取消</button>
+                <button class="elasticYes" type="button">重试</button>
+            </div>
         </div>
     </div>
-     @@include('@pathCommonViews/payPassword.html')
-     <!-- 转出规则 -->
-     @@include('@pathCommonCom/elasticLayer/transOutRule/transOutRule.html')
- 
-     @@include('@pathInclude/views/footer.html')
-     <script src="/financial/static/js/publicPlacement/fundTransformIn.js"></script>
-     <!-- <script src="/account/static/js/public/payPassword.js"></script> -->
- </body>
- </html>
+    @@include('@pathCommonViews/payPassword.html')
+    <!-- 转出规则 -->
+    @@include('@pathCommonCom/elasticLayer/transOutRule/transOutRule.html') @@include('@pathInclude/views/footer.html')
+    <script src="/financial/static/js/publicPlacement/fundTransformIn.js"></script>
+    <!-- <script src="/account/static/js/public/payPassword.js"></script> -->
+</body>
+
+</html>
