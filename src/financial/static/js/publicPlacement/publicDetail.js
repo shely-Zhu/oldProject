@@ -566,7 +566,7 @@ $(function() {
 
             // 基金档案
             mui("body").on('mdClick', ".fundFileCon", function(e) {
-                window.location.href = site_url.pofFundFile_url + '?secuId=' + that.secuId + '&fundCode=' + fundCode;
+                window.location.href = site_url.pofFundFile_url + '?secuId=' + that.secuId + '&fundCode=' + fundCode + '&appNewWebView=1';;
             }, {
                 htmdEvt: 'publicDetail_03'
             });

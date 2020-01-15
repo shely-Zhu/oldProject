@@ -31,7 +31,7 @@
                     <div class="h_profit_value show_item">0.00</div>
                 </div>
                 <div class="second_h_profit_box fl">
-                    <p class="h_profit">持有总收益(元)</p>
+                    <p class="h_profit">累计总收益(元)</p>
                     <p class="h_profit_value show_item">0.00</p>
                 </div>
             </div>
@@ -113,11 +113,16 @@
                     {{else}}
                         <div class="text_green position_g show_item">{{incomeMask}}</div>
                     {{/if_than_0}}
-                    {{#if_than_0 addupIncome}}
-                        <div class="text_red position_h show_item">+{{addupIncomeMask}}</div>
+
+                    {{!  按赵丹提的问题，这里应该改为holdIncome的字段}}
+
+                    {{#if_than_0 holdIncome}}
+                        <div class="text_red position_h show_item">+{{holdIncomeMask}}</div>
                     {{else}}
-                        <div class="text_green position_h show_item">{{addupIncomeMask}}</div>
+                        <div class="text_green position_h show_item">{{holdIncomeMask}}</div>
                     {{/if_than_0}}
+
+
                     {{#if myTip}}
                         <div class="tip">{{myTip}}</div>
                     {{/if}}
