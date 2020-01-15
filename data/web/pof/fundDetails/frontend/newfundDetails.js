@@ -70,7 +70,7 @@ var data = Mock.mock({
         "fundConfirmDate":"2018-04-18", //份额确认日期
         "fundEarnDate":"2018-04-19", //查看盈亏日期
         "issBgnDt":"2018-04-08",//募集起始日期
-        "issEndDt":"2020-08-08",//募集截止日期
+        "issEndDt":"2020-01-16",//募集截止日期
 		"endDtBefore":"2018-08-07",//募集截止日期的上一个工作日
         "applyDate":"2018-07-12",//申请日期
         "purchaseConfirmDay":"2",// 申购确认天数
