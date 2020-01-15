@@ -6,8 +6,8 @@
  *  @description: js可以更换版本，但是html是分享出去的链接，不能变;
  *                 关闭弹层按钮，fixed定位在ios，app中会随着屏幕滚动，所以提出来
  * 
- * @Last Modified by: sunfuping
- * @Last Modified time: 2019-12-30 19:13:34
+ * @Last Modified by:   songxiaoyu
+ * @Last Modified time: 2018-07-30 15:38:48
  * @description: 推荐有礼大改版
  */
 
@@ -220,25 +220,22 @@ $(function() {
                 shareUrl = '', // 分享出去链接
                 existMain = data.existMain,
                 advisor = data.advisor;
-                
-            if (advisor.length > 0) {
-                // if(existMain == 0 ){//感觉判断有问题默认展示一个的话，展示就可以了
-                    $('.recommendLcsText').html("您的理财师：")
-                    //无专属且理财师多于1位默认展示一个
-                    $('.manager_show').html(advisor[0].codeName + advisor[0].empNo)
-                    that.generateShareLink(advisor[0].empNo);
-                // }
-                that.list=advisor
-                // debugger
-                generateTemplate(advisor,that.getElements.popupUl, that.getElements.bankListTemplate,true);
-                $('.recommendLcs').css('pointer-events','')
-                $('.choosePlanner').show()
-                $('.choose').show()
-                // $(".popup").show();
-            }else if( advisor.length == 0){
-                $('.recommendLcs').html('')
-                $('.choosePlanner').hide()
-            }else{
+            if (existMain == 0 && advisor.length > 1) {
+                //无专属且理财师多于1位
+
+                //显示理财师选择
+                that.getElements.manager_choose_wrap.show();
+                // that.getElements.qrcode_wrap.hide();
+                $('.lcs').css('visibility', 'visible');
+
+                //循环数据
+                $.each(advisor, function(i, el) {
+                    that.list.push({
+                        text: '<span>' + el.codeName + '</span><span>' + el.empNo + '</span>',
+                        value: el.empNo
+                    })
+                })
+            } else {
                 // 有专属理财师或者只有一位普通理财师
                 $('.manager_show_wrap .manager_show').html(advisor[0].codeName + advisor[0].empNo)
                 that.getElements.manager_show_wrap.show();
