@@ -167,7 +167,7 @@ if (options.env === '0') {
     host.zip_name = 'ht_pre_production';
 
     //test时不加cdn域名，正常是要加的，所以注释掉
-    // prefix = '';
+    prefix = '';
 
 } else if (options.env === '4') {
     //生产的包进ht_production
