@@ -458,6 +458,12 @@ $(function () {
                         //2秒后刷新页面
                         window.location.reload()
                     }, 2000);
+	            },
+	            callbackFail:function(json){
+//	            	tipAction(json.msg);
+	            	tipAction(json.message);
+	            	$(".pwd-input").val('');
+					$(".fake-box input").val('');
 	            }
 	        }];
 	        $.ajaxLoading(obj);
