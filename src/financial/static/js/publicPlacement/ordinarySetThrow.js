@@ -95,6 +95,7 @@ $(function () {
 			}
 			
 			that.getAgreeUrl();
+			that.getUserInfo();
 		},
 		// 获取客户类型
         getUserInfo: function () {
