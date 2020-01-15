@@ -16,6 +16,7 @@
  <body>
     @@include('@pathCommonCom/loading/listLoading.html')
      <section class="container">
+        <div class="flex1">
         @@include('@pathCommonViews/headBarConfig.html',{"pathName":"转出"}) 
         <div class="br"></div>
         <div class="title" id="transformProductName"></div>
@@ -30,7 +31,7 @@
         </div>
 
         <div class="typeDetail">
-        	<p>*单笔最高限额<span class="dailyOnceMaxLimitWan">1万</span>，单日最高<span class="dailyMaxLimitWan">50万</span>，单日最多<span class="dailyTimesMaxLimit">10</span>笔</p>
+        	<p class="typeDetailMoney">*单笔最高限额<span class="dailyOnceMaxLimitWan">1万</span>，单日最高<span class="dailyMaxLimitWan">50万</span>，单日最多<span class="dailyTimesMaxLimit">10</span>笔</p>
         	<p>*赎回金额将按照原路返回到您所付款的银行卡</p>
         </div>
 
@@ -96,6 +97,7 @@
                 </div>
             </div>
             <div class="checkMessage">超出最大转出金额额</div>
+        </div> 
             <button class="conformButton confirmeDemptionPay"  disabled>确定</button>
 
 

@@ -45,6 +45,8 @@ module.exports = function(url,title,size) {
 
             var that = this;
 
+            console.log(that.$e.audio);
+
             that.$e.audio.src = url;//音频路径
             that.$e.audioDisc.html(title);//视频标题
             that.$e.audioSize.html(size);//视频大小
