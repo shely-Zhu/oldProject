@@ -1022,7 +1022,7 @@ gulp.task("webpack", ['jsCpd', 'changePath', 'commonHtml', 'jsImgRev'], function
 
         plugins.webpack(webpackConfig),
 
-        
+
 
         //添加changeLocalHistory、eruda和CustomEventIeFile的文件内容
         through.obj(function(file, enc, cb) {
