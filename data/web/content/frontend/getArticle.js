@@ -9,18 +9,18 @@ var data = Mock.mock({
     "articleTimeStr": "11:34",//音频播放时间
     "author": "purpleZhao",//作者
     "buttonLabel": "立即转入现金管理",//按钮文案
-    "content": "<p><img src='http://172.16.163.99:85/group2/M00/02/8D/rBCjRF35zPSAHSXOAF_MBbT3-sk084.png'/><img src='http://172.16.163.99:85/group2/M00/02/88/rBCjRF26j3-AaxveAAFKebrcAVE531.jpg'/></p>",
+    "content": "",
     "createId": "H023512",
     "createName": "",
     "createTime": 1573085434000,
     "createTimeStr": "2019-11-07 08:10:34",
     "externalUrl": "",
     "h5Title": "模板页面",//模板title
-    "h5Type": "1",//模板类型
+    "h5Type": "2",//模板类型
     "id": 8,
     "imageAttachId": 56,
     "imageAttachName": "",
-    "imageAttachUrl": "http://172.16.163.99:85/group2/M00/02/88/rBCjRF26j3-AaxveAAFKebrcAVE531.jpg",//在线图片路劲
+    //"imageAttachUrl": "http://172.16.163.99:85/group2/M00/02/88/rBCjRF26j3-AaxveAAFKebrcAVE531.jpg",//在线图片路劲
     "intro": "kaixuan3",
     "isDelete": 0,
     "isUse": 1,
