@@ -115,6 +115,8 @@ $(function() {
     
                         var data = json.data;
                         window.document.title = data.name;
+
+                        $('#HeadBarpathName').html(data.name)
     
                         if (data.isCheckLogin == "1" && data.isCheckRisk == "0") { //需要登录不需要判断风测
                             $.userCheck(false, function() {
