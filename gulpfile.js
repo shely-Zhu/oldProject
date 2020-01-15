@@ -166,16 +166,16 @@ if (options.env === '0') {
     host.path = 'ht_pre_production/';
     host.zip_name = 'ht_pre_production';
 
-    //不加cdn域名
-    prefix = '';
+    //test时不加cdn域名，正常是要加的，所以注释掉
+    // prefix = '';
 
 } else if (options.env === '4') {
     //生产的包进ht_production
     host.path = 'ht_production/';
     host.zip_name = 'ht_production';
 
-    //不加cdn域名
-    prefix = '';
+    //test时不加cdn域名，正常是要加的，所以注释掉
+    // prefix = '';
 
 } else if (options.env === '5') {
     //生产的包进ht_production
@@ -1146,7 +1146,8 @@ gulp.task('html', function(cb) {
                 dcDomain = 'https://dc.uata.haomalljf.com';
             } else if (options.env == 4) {
                 //生产
-                dcDomain = 'https://dcnew.chtwm.com';
+                // dcDomain = 'https://dcnew.chtwm.com';
+                dcDomain = 'https://dc.chtwm.com';
             }
 
             fileCon = fileCon.replace('@dcDomain', dcDomain);
