@@ -19,7 +19,7 @@ var data = Mock.mock({
     "data": {
         "pageList|10":[
             {
-                "fixState|1": ["A", "P"],
+                "fixState|1": ["H", "P"],
                 fixedBalance: "1002.00",
                 fixedBalanceMask: "1,002.00",
                 fixedDay: "2019-12-19",

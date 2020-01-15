@@ -400,7 +400,7 @@ $(function() {
                 },
                 callbackFail: function(json) { //失败后执行的函数
                    tipAction(json.message);
-          //that.data.canClick = true; //变为可点击
+          that.data.canClick = true; //变为可点击
       
                 },
                 callbackNoData:function(argument) {
@@ -475,7 +475,7 @@ $(function() {
             })
                 //点击收益明细
             mui("body").on('mdClick', '.addLi', function(e) {
-                window.location.href = site_url.returnsDetail_url + "?fundCode=" + that.gL.fundCode;
+                window.location.href = site_url.returnsDetail_url + "?fundCode=" + that.gL.fundCode + "&isSuper=1";
             }, {
                 'htmdEvt': 'superStreasureDetail_5'
             })

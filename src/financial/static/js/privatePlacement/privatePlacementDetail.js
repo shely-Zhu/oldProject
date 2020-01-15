@@ -1,8 +1,8 @@
 /*
 //  私募基金产品详情
-//  @author zhangyanping 2019-11-25 
+//  @author zhangyanping 2019-11-25
 
-    update:chentiancheng 2020-01-08 
+    update:chentiancheng 2020-01-08
     删除司法冻结文案
 
     updata :caoqihai 2020-1-8
@@ -60,7 +60,7 @@ $(function() {
             productName: "", //产品名称
             isRiskEndure: '', // 是否风险测评 0-否 1-是
             endurePubIsold: '', // 公募风险评测是否过期 0:否 1:是
-            endurePriIsold: '', // 私募风险测评是否过期0:否 1:是 
+            endurePriIsold: '', // 私募风险测评是否过期0:否 1:是
             isSatisfied:'',  //合格投资者认证是否满足，需要给app携带
             isOpenWealth:"1",//是否开通财富账户。0未开通，1已开通
             qrnhWfsy: {
@@ -107,9 +107,11 @@ $(function() {
                     var projectLableHtml, projectLableHtmlList;
                     var businessCompareReferenceMin = jsonData.businessCompareReferenceMin,
                         businessCompareReferenceMax = jsonData.businessCompareReferenceMax;
-                    // 根据收益分配方式区分 0固收 1浮收普通 2浮收稳裕 
+                    // 根据收益分配方式区分 0固收 1浮收普通 2浮收稳裕
                     console.log(that.data.incomeModeJF,jsonData.incomeModeJF)
                     that.data.incomeModeJF = jsonData.incomeModeJF;
+                    //默认隐藏
+                    $(".tipIcon").hide()
                     if (jsonData.incomeModeJF == '0') {
                         // 头部不同的展示
                         $('.fixedIncome').removeClass('hide');
@@ -144,7 +146,10 @@ $(function() {
                         $("#wfsyLine").removeClass("hide");
                         // 涨跌幅
                         $('.priceLimit').removeClass('hide');
-                        // 单位净值  跟产品经理确认，这里展示后台返回的数据
+
+                        // 单位净值  跟产品经理确认，这里展示后台返回的数据  产品肖金凤说页面展示的是净值时展示小问号提示按钮
+                        $(".tipIcon").show()
+
                         if (jsonData.unitNetValue == null || jsonData.unitNetValue == "" || jsonData.unitNetValue == undefined || jsonData.unitNetValue == '--') {
                             $('.netValue').html('--')
                         } else {
@@ -221,9 +226,9 @@ $(function() {
                     }
                     //0 债权投资;1 证券投资（二级市场）;2 股权投资;3 海外投资;4 其他
                     if (jsonData.investDirect == "2" || jsonData.investDirect == "4") { // 债权投资、股权投资、其他服务不展示
-                        that.getElements.tipIcon.hide();
+                        // that.getElements.tipIcon.hide();
                     } else if (jsonData.investDirect == "0" || jsonData.investDirect == "1" || jsonData.investDirect == "3") { // 海外投资  （证券投资）二级市场展示
-                        that.getElements.tipIcon.show();
+                        // that.getElements.tipIcon.show();
                         var productModule = 'netValueCycleAPP';
                         that.queryProductImage(productModule);
                     };
@@ -303,7 +308,7 @@ $(function() {
                     }
 
 
-                    // 交易须知  
+                    // 交易须知
                     if( !jsonData.buyRate && !jsonData.managementFee && !jsonData.trusteeFee){
                         $('.productRateHeader').hide();
                     }else{
@@ -429,7 +434,7 @@ $(function() {
             }, {
                 url: site_url.queryUserAuthInfo_api,
                 data: {
-                    hmac: "", //预留的加密信息     
+                    hmac: "", //预留的加密信息
                     params: {}
                 },
                 needLogin: true,
@@ -437,7 +442,7 @@ $(function() {
                 needDataEmpty: false, //需要判断data是否为空
                 callbackDone: function(json) {
                     var jsonData = json.data;
-                    that.data.custType = jsonData.accountType; // 客户类型【0.机构 1.个人】 
+                    that.data.custType = jsonData.accountType; // 客户类型【0.机构 1.个人】
                     that.data.buyFreeze = jsonData.buyFreeze; // 是否冻结买入：0-否；1-是；
                     that.data.lawFreezeStatus = jsonData.lawFreezeStatus; // 是否司法冻结：0-否；1-是；
                     that.data.isRiskEndure = jsonData.isRiskEndure; // 是否风险测评 0-否 1-是
@@ -474,13 +479,13 @@ $(function() {
                                 el.bool = true;
                             }
                         })
-                        
+
                         var tplm = $("#prvLevel").html();
                         var template = Handlebars.compile(tplm);
                         $(".performance").html(template(json.data));
                     }
-                    
-                    
+
+
                 },
                 callbackNoData: function(json) {
                     // tipAction(json.message);
@@ -585,7 +590,7 @@ $(function() {
             if( !!that.getElements.priceLimitArr[num] ){
                 $(".priceLimit span").html( that.getElements.priceLimitArr[num] );
             }
-            
+
             if (num == 0 && that.data['dwjzljjz'].oneMonth.profitThoudDate && that.data['dwjzljjz'].oneMonth.profitThoudDate.length) {
                 //请求的是近一个月的数据
                 that.drawLine(type, that.data['dwjzljjz'].oneMonth);
@@ -615,7 +620,7 @@ $(function() {
                 url: site_url.queryHistoryNetValue_api,
                 data: {
                     projectId: splitUrl['projectId'],
-                    profitRange: num 
+                    profitRange: num
                 },
                 needLogin: true,
                 callbackDone: function(json) {
@@ -685,7 +690,7 @@ $(function() {
             if( data.profitThoudDate.length == 1 ){
                 that.getElements.symboltype = 'circle';
             }
-            
+
             if (type == 'qrnh') {
                 //画的是七日年化折线图
                 $("#qrnhLine").removeClass("hide");
@@ -710,7 +715,7 @@ $(function() {
                     trigger: 'axis',
                     formatter: '<p style="font-size:0.36rem;color: #DAB57C;">{c}%</p><p style="font-size:0.24rem;color:#4A4A4A">{b}</p>',
                     backgroundColor: 'rgba(218,181,124, 0.1)',
-                    // renderMode : 'richText', 
+                    // renderMode : 'richText',
                     extraCssText: [7, 15, 15, 15],
                     textStyle: {
                         color: '#FADFBB'
@@ -784,11 +789,11 @@ $(function() {
                         formatter: '{value}%',
                     },
                     type : 'value',
-                    axisLabel: {                   
-                        formatter: function (value, index) {           
-                            return value.toFixed(4) + '%';      
+                    axisLabel: {
+                        formatter: function (value, index) {
+                            return value.toFixed(4) + '%';
                         },
-                        color:"#9B9B9B"               
+                        color:"#9B9B9B"
                     }
                 },
                 series: [{
@@ -920,7 +925,7 @@ $(function() {
                 jumpUrl = site_url.chooseQualifiedInvestor_url + "?isOpenAcc=" + that.data.isOpenWealth;
             } else if (v.conditionJump == 7) { //跳转到合格投资者结果页面
                 jumpUrl = site_url.qualifiedInvestorResult_url;
-            }else if (v.conditionJump == 8) { //信息查看（修改证件有效期） 
+            }else if (v.conditionJump == 8) { //信息查看（修改证件有效期）
                 jumpUrl = site_url.completeInfoEditModify_url;
             }else if (v.conditionJump == 9) { //跳转到普通风测
                 jumpUrl = site_url.riskAppraisal_url + '?type=private';
@@ -1009,7 +1014,7 @@ $(function() {
                                         htmdEvtCel:'privatePlacementDetail_15',  // 埋点取消按钮属性
                                         zIndex: 6001,
                                         callback: function(t) {
-                                            window.location.href =that.$e.realLi.eq(0).find(".tips-li-right").attr("jumpUrl")  
+                                            window.location.href =that.$e.realLi.eq(0).find(".tips-li-right").attr("jumpUrl")
                                         }
                                     };
                                     $.elasticLayer(obj);
@@ -1100,7 +1105,7 @@ $(function() {
                             needLoading: true,
                             needLogin: true, //需要判断是否登陆
                             callbackDone: function(json) { //成功后执行的函数
-                                
+
                                 that.data.canClick = true; //变为可点击
                                 var data = json.data[0],
                                     noticeObj = data;
@@ -1118,7 +1123,7 @@ $(function() {
                                                 var obj = {
                                                     title: '',
                                                     id: 'sellPop',
-                                                    p: '<p class="" style="font-weight:bold;text-align:center">你选择的产品与您现在的风险承受能力相匹配</p>' + 
+                                                    p: '<p class="" style="font-weight:bold;text-align:center">你选择的产品与您现在的风险承受能力相匹配</p>' +
                                                             '<p class="">请您认真阅读' + noticeObj.fileName + that.data.productName + '并确认后继续购买该产品</p>',
                                                     yesTxt: '去阅读',
                                                     celTxt: '取消',
@@ -1137,7 +1142,7 @@ $(function() {
                                                         that.data.fundDetailObj.isAllowAppend + '&accreditedInvestor=' + that.data.accreditedInvestor + '&businessType=' + isEle;
                                                     },
                                                 };
-                                                $.elasticLayer(obj) 
+                                                $.elasticLayer(obj)
                                             },
                                         };
                                     }else if(!!isRiskPopup && !isPopup){
@@ -1158,7 +1163,7 @@ $(function() {
                                         var objElasticLayer = {
                                             title: '尊敬的客户',
                                             id: 'sellPop',
-                                            p: '<p class="" style="font-weight:bold;text-align:center">你选择的产品与您现在的风险承受能力相匹配</p>' + 
+                                            p: '<p class="" style="font-weight:bold;text-align:center">你选择的产品与您现在的风险承受能力相匹配</p>' +
                                                     '<p class="">请您认真阅读' + noticeObj.fileName + that.data.productName + '并确认后继续购买该产品</p>',
                                             yesTxt: '去阅读',
                                             celTxt: '取消',
@@ -1177,7 +1182,7 @@ $(function() {
                                                 that.data.fundDetailObj.isAllowAppend + '&accreditedInvestor=' + that.data.accreditedInvestor + '&businessType=' + isEle;
                                             },
                                         };
-//                                      $.elasticLayer(objPop) 
+//                                      $.elasticLayer(objPop)
                                     }
                                     $.elasticLayer(objElasticLayer);
                                 if (!singleaAuthen) { //如果v.show都是0，则不展示预约框,跳转到相应链接
@@ -1193,7 +1198,7 @@ $(function() {
                         }];
                         $.ajaxLoading(ReourceListobj);
                     } else if (!singleaAuthen) { //如果不弹框且没有显示认证五步款则有以下步骤
-                        
+
                         that.nextStep();
                     }
 
@@ -1319,7 +1324,7 @@ $(function() {
             if (that.data.fundDetailObj.isElecContract == "1") { //电子合同逻辑
                 if (that.data.fundDetailObj.isAllowAppend == "1") { //追加商品参数fundCode,
                     //跳转到追加商品链接
-                    if (that.data.custType == "1") { //客户类型【0.机构 1.个人】 
+                    if (that.data.custType == "1") { //客户类型【0.机构 1.个人】
                         //跳转到电子合同追加页面
                         window.location.href = site_url.orderLimit_url + "?fundCode=" + that.$e.projectId + "&isAllowAppend=" +
                             that.data.fundDetailObj.isAllowAppend + '&isSatisfied=' + that.data.isSatisfied;
@@ -1330,7 +1335,7 @@ $(function() {
                     }
                 } else { //预约
                     //跳转到预约产品链接
-                    if (that.data.custType == "1") { //客户类型【0.机构 1.个人】 
+                    if (that.data.custType == "1") { //客户类型【0.机构 1.个人】
                         //跳转到电子合同预约页面
                         window.location.href = site_url.orderLimit_url + "?fundCode=" + that.$e.projectId + "&isAllowAppend=" +
                             that.data.fundDetailObj.isAllowAppend + '&isSatisfied=' + that.data.isSatisfied;

@@ -16,7 +16,7 @@ $(function() {
             shareTimePBuy: $(".resultTopTwo .buy-result .shareTimeP"), //开始计算收益流程
             earningsTimePBuy: $(".resultTopTwo .buy-result .earningsTimeP"), //第一笔收益到账流程
             applyTimeBuy: $(".resultTopTwo .buy-result .applyTime .laber-right"), //申请时间
-            shareTimeBuy: $(".resultTopTwo .buy-result .shareTime .laber-right"), //预计确认时间
+            shareTimeBuy: $(".resultTopTwo .buy-result .shareTime .laber-right"), //预计确认份额时间
             earningsTimeBuy: $(".resultTopTwo .buy-result .earningsTime .laber-right"), //预计查看收益时间
             fundNameBuy: $(".listWrap .buy-result .fundName"), //基金名称
             fundCodeBuy: $(".listWrap .buy-result .fundCode"), //基金代码
@@ -120,8 +120,8 @@ $(function() {
                                     }
                                 }
                                 that.$el.applyTimeBuy.html(json.data.originalDate);
-                                that.$el.shareTimeBuy.html(json.data.estimateConfirmDate? json.data.estimateConfirmDate: '-- ' + "&nbsp; 24:00前");
-                                that.$el.earningsTimeBuy.html(json.data.estimateArrivalDate? json.data.estimateArrivalDate: '-- ' + "&nbsp; 24:00前");
+                                that.$el.shareTimeBuy.html(json.data.estimateConfirmDate? json.data.estimateConfirmDate + "&nbsp; 24:00前": '-- ');
+                                that.$el.earningsTimeBuy.html(json.data.estimateArrivalDate? json.data.estimateArrivalDate + "&nbsp; 24:00前": '-- ');
                                 if (decodeURI(splitUrl['bugFundName']) != "false") {
                                     that.$el.buyFundName[0].textContent = decodeURI(splitUrl['bugFundName']);
                                 }
@@ -147,8 +147,8 @@ $(function() {
                                     }
                                 }
                                 that.$el.applyTimeRedemption.html(json.data.originalDate);
-                                that.$el.shareTimeRedemption.html(json.data.estimateConfirmDate? json.data.estimateConfirmDate: '-- ' + ' 24:00前');
-                                that.$el.earningsTimeRedemption.html(json.data.estimateArrivalDate? json.data.estimateArrivalDate: '-- ' + ' 24:00前');
+                                that.$el.shareTimeRedemption.html(json.data.estimateConfirmDate? json.data.estimateConfirmDate  + ' 24:00前': '-- ');
+                                that.$el.earningsTimeRedemption.html(json.data.estimateArrivalDate? json.data.estimateArrivalDate  + ' 24:00前': '-- ');
                                 that.$el.payTypeRedemption.html('赎回方式')
                             }
                             
