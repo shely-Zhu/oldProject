@@ -25,7 +25,10 @@ var data = Mock.mock({
         actEndDateStr: '2019-06-30',
         actIntroduce: '通过邀请客户参加高端红酒活动，从而为客户带来不一样的活动体验并对公司留下深刻印象，品尝全酒宴，满足客户体验，增加客户与理财师交流，对于客户增信、签单有很大的促进作用11', //活动介绍
         signUpFlag: false, //是否已经报名：false-未报名，true-已报名
-        actStatus: 1
+        actStatus: 1,
+        domainIP: "http://172.16.163.99:85/",
+        htjfGeneralizeImgUrl: "M00/02/39/rBCjQl4O9KCAY0NfAABjYRRYimg003.jpg",
+        htjfGeneralizeImgUrlPrex: "group1/",
 
     }
 

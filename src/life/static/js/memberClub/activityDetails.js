@@ -75,7 +75,11 @@ $(function() {
                             $('.activityBottomBox').show();
                         }
                         //金服展示图片
-                        that.$e.bgimg.attr("data-original", data.domainIP + data.htjfGeneralizeImgUrlPrex + data.htjfGeneralizeImgUrl);
+                        if(!data.htjfGeneralizeImgUrl || data.htjfGeneralizeImgUrl === null || data.htjfGeneralizeImgUrl === "") {
+                            that.$e.bgimg.attr("data-original", "/common/img/noDataImg.png");
+                        } else{
+                            that.$e.bgimg.attr("data-original", data.domainIP + data.htjfGeneralizeImgUrlPrex + data.htjfGeneralizeImgUrl).parent().height("4.7rem");
+                        };
                         //活动名称
                         that.$e.actName.text(data.actName);
                         //活动地点

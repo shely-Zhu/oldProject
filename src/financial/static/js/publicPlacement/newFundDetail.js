@@ -47,9 +47,14 @@ $(function() {
                     var jsonData = json.data;
                     //当前时间
                     var nowDate = new Date();
-                    var endDate = new Date(jsonData.issEndDt + ' 23:59:59');
+                    // var endDate = new Date(jsonData.issEndDt + ' 23:59:59');
+                    var numTimer = jsonData.issEndDt + ' 23:59:59';
+                    // 字符串转时间的方法
+                    var endDate = new Date(Date.parse(numTimer.replace(/-/g, "/")));
                     var totalSeconds = parseInt((endDate - nowDate) / 1000); // 当前时间与募集截止日的日期相比
-                    var issBgnDt = new Date(jsonData.issBgnDt + ' 00:00:00');
+                    // var issBgnDt = new Date(jsonData.issBgnDt + ' 00:00:00');
+                    var issBgnDtTime = jsonData.issBgnDt + ' 00:00:00';
+                    var issBgnDt = new Date(Date.parse(issBgnDtTime.replace(/-/g, "/")))
                     var timeDiff = parseInt((issBgnDt - nowDate) / 1000); // 当前时间与募集起始日的日期相比
                     // 基金简称 + 基金编码
                     $("#HeadBarpathName").html("<span>" + jsonData.secuSht + "</span>" + "</br><span class='secuId'>" + jsonData.trdCode + "</span>");
