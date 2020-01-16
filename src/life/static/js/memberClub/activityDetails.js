@@ -78,7 +78,7 @@ $(function() {
                         if(!data.htjfGeneralizeImgUrl || data.htjfGeneralizeImgUrl === null || data.htjfGeneralizeImgUrl === "") {
                             that.$e.bgimg.attr("data-original", "/common/img/noDataImg.png");
                         } else{
-                            that.$e.bgimg.attr("data-original", data.domainIP + data.htjfGeneralizeImgUrlPrex + data.htjfGeneralizeImgUrl).parent().height("4.7rem");
+                            that.$e.bgimg.attr("data-original", data.domainIP + data.htjfGeneralizeImgUrlPrex + data.htjfGeneralizeImgUrl);
                         };
                         //活动名称
                         that.$e.actName.text(data.actName);
