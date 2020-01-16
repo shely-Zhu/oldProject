@@ -1010,7 +1010,7 @@ $(function() {
                         }
                         //对应的条件认证到哪里
                         that.$e.realLi.eq(e * 1).find(".tips-li-right").on('click', function() {
-                            if($(this).attr('conditionJump')!=that.$e.realLi.eq(0).find(".tips-li-right").attr("conditionJump")&&that.$e.realLi.eq(0).find(".tips-li-right").attr("conditionType")==1&&that.$e.realLi.eq(2).find(".tips-li-right").attr("conditionjump")!=8&&that.$e.realLi.eq(2).find(".tips-li-right").attr("conditiontype")!=3){
+                            if($(this).attr('conditionJump')!=that.$e.realLi.eq(0).find(".tips-li-right").attr("conditionJump")&&that.$e.realLi.eq(0).find(".tips-li-right").attr("conditionType")==1&&that.$e.realLi.eq(2).find(".tips-li-right").attr("conditionjump")!=8){
                                     // $("#tips-wrap").hide();
                                     var obj = {
                                         title: '尊敬的客户',
