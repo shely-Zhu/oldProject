@@ -177,7 +177,16 @@ if (options.env === '0') {
     //test时不加cdn域名，正常是要加的，所以注释掉
     // prefix = '';
 
-} else if (options.env === '5') {
+}
+else if (options.env === '4_gray') {
+    //生产灰度，包进ht_production
+    host.path = 'ht_production/';
+    host.zip_name = 'ht_production';
+
+    //不加cdn域名
+    prefix = '';
+} 
+else if (options.env === '5') {
     //生产的包进ht_production
     host.path = 'dist/';
 
@@ -222,9 +231,9 @@ gulp.task('proxyTask', function() {
                     // target: 'https://app.htjf4.com',
                     // target: 'http://172.16.187.129:8080',//李亚楠
                     // target: 'http://192.168.50.254:8085',
-                    target: 'https://app.chtfundtest.com',
+                    // target: 'https://app.chtfundtest.com',
                     // target:"https://app.haomaojf.com",
-                    // target: "https://app.chtfund.com",
+                    target: "https://app.chtfund.com",
                     changeOrigin: true,
                     secure: false,
                 }),
@@ -233,9 +242,9 @@ gulp.task('proxyTask', function() {
                     // target: 'https://h5.htjf4.com',
                     //  target: 'http://172.16.187.129:8080',//李亚楠
                     // target: 'http://172.16.187.164:8081',
-                    target: 'https://h5.chtfundtest.com',
+                    // target: 'https://h5.chtfundtest.com',
                     // target:"https://h5.haomaojf.com",
-                    // target: "https://h5.chtfund.com",
+                    target: "https://h5.chtfund.com",
                     changeOrigin: true,
                     secure: false,
                 }),
@@ -626,7 +635,7 @@ gulp.task("cssToHost", function() {
 
     //预上线/线上环境时，压缩css
     //设置这两个参数，防止去掉浏览器前缀和z-index值的变化
-    .pipe(plugins.if(options.env === '3' || options.env === '4', plugins.cssnano({ autoprefixer: false, zindex: false })))
+    .pipe(plugins.if(options.env === '3' || options.env === '4' || options.env === '4_gray', plugins.cssnano({ autoprefixer: false, zindex: false })))
 
     //修改当前文件的路径，将less替换为css
     .pipe(
@@ -670,7 +679,7 @@ gulp.task("includeCss", function() {
     return gulp.src(includeCssSrc)
 
     //也加上压缩处理
-    .pipe(plugins.if(options.env === '3' || options.env === '4', plugins.cssnano({ autoprefixer: false, zindex: false })))
+    .pipe(plugins.if(options.env === '3' || options.env === '4' || options.env === '4_gray', plugins.cssnano({ autoprefixer: false, zindex: false })))
         .pipe(gulp.dest(host.path))
 })
 
@@ -726,7 +735,7 @@ gulp.task("allServerResourcesInclude", function() {
         })
     )
 
-    .pipe(plugins.if(options.env === '3' || options.env === '4', plugins.uglify({ //压缩
+    .pipe(plugins.if(options.env === '3' || options.env === '4' || options.env === '4_gray', plugins.uglify({ //压缩
         mangle: false, //类型：Boolean 默认：true 是否修改变量名
         compress: false, //类型：Boolean 默认：true 是否完全压缩
         output: {
@@ -829,7 +838,7 @@ gulp.task("includeJs", ['htmd', 'allServerResourcesInclude'], function() {
         })
     )
 
-    .pipe(plugins.if(options.env === '3' || options.env === '4', plugins.uglify({ //压缩
+    .pipe(plugins.if(options.env === '3' || options.env === '4' || options.env === '4_gray', plugins.uglify({ //压缩
             mangle: false, //类型：Boolean 默认：true 是否修改变量名
             compress: false, //类型：Boolean 默认：true 是否完全压缩
             output: {
@@ -1050,8 +1059,8 @@ gulp.task("webpack", ['jsCpd', 'changePath', 'commonHtml', 'jsImgRev'], function
         plugins.replacePro(imgRev_2),
 
         //预上线环境时，去掉Log并压缩
-        plugins.if(options.env === '3' || options.env === '4', plugins.removelogs()),
-        plugins.if(options.env === '3' || options.env === '4', plugins.uglify({ //压缩
+        plugins.if(options.env === '3' || options.env === '4' || options.env === '4_gray', plugins.removelogs()),
+        plugins.if(options.env === '3' || options.env === '4' || options.env === '4_gray', plugins.uglify({ //压缩
             mangle: false, //类型：Boolean 默认：true 是否修改变量名
             compress: false
         })),
@@ -1144,7 +1153,7 @@ gulp.task('html', function(cb) {
             } else if (options.env == 3) {
                 //预生产
                 dcDomain = 'https://dc.uata.haomalljf.com';
-            } else if (options.env == 4) {
+            } else if (options.env == 4 || options.env === '4_gray') {
                 //生产
                 // dcDomain = 'https://dcnew.chtwm.com';
                 dcDomain = 'https://dc.chtwm.com';
@@ -1316,7 +1325,16 @@ gulp.task('rootEnv', function() {
 
                             //替换真正的env和envOrigin变量，是根据root.js文件中第一行注释的//截取内容的，所以
                             //root.js中，envOrigin那一句后面，一定要有//的注释。。。。。
-                            fileCon = 'var env = ' + options.env + ';\n' + 'var envOrigin = ' + i + ';\n' +
+                            //
+                            //判断4_gray，重置为4
+                                
+                            var oEnv = options.env;
+
+                            if( oEnv == '4_gray'){
+                                oEnv = 4;
+                            }
+
+                            fileCon = 'var env = ' + oEnv + ';\n' + 'var envOrigin = ' + i + ';\n' +
                                 fileCon.substring(fileCon.indexOf('window'));
 
                             file.contents = new Buffer(fileCon);
