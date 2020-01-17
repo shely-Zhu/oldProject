@@ -917,6 +917,7 @@ $(function() {
 			     //认证
 			mui("body").on('mdClick', ".tips-li .tips-li-right", function (e) {
 				var type = $(this).parent().index()
+				$("#tips-wrap").hide()
 				switch (type) {
 					case 0:   //开通账户
 					if(that.gV.accountType == 0|| that.gV.accountType == 2){
@@ -996,6 +997,7 @@ $(function() {
 				//一键认证
 			mui("body").on('mdClick', ".tips .tips-btn", function (e) {
 				var key = that.data.singleaAuthenPath;
+				$("#tips-wrap").hide()
 				switch (key) {
 					case "isWealthAccount":   //开通账户
 					if(that.gV.accountType == 0|| that.gV.accountType == 2){
