@@ -17,8 +17,6 @@ if (!window.mdCallBack){
 		//mdValue 原生的数据 json格式
 		var pcParam = JSON.parse(mdValue);
 	
-		pcParam.cn = splitUrl['cn'] ? splitUrl['cn'] : '';
-	
 		var mdObj = {
 			pf: 1, //pf参数，表示当前项目
 			type: "app",  //pc/app/wap
