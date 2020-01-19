@@ -290,7 +290,7 @@ $(function() {
                     $(".listOnefund").css({ "display": "none" });
                     $(".listOneCar").css({ "display": "flex" });
                     $(".maxMoneyContent").css({ "display": "block" });
-                    that.gV.targetfundcode = that.gV.dataList.fundCode;
+                    that.gV.targetfundcode = '';
                     $(this).siblings().find(".radioCheckItemImg").css({ "display": "none" });
                 } else if (type == 'fund') {
                     // $(".carContent li").attr("checkStatu","off");
@@ -321,6 +321,7 @@ $(function() {
             //点击全部，初始化最大赎回额度
             mui("body").on('mdClick', '.forAll', function() {
                 $(".msecond .msecond-one")[0].value = that.gV.dataList.enableShares;
+                that.gV.nowRedempShare = that.gV.dataList.enableShares;
                 if (that.gV.dataList.enableShares) {
                     that.getElements.confirmBtn.removeAttr('disabled');
                 } 
