@@ -290,7 +290,7 @@ $(function() {
                     $(".listOnefund").css({ "display": "none" });
                     $(".listOneCar").css({ "display": "flex" });
                     $(".maxMoneyContent").css({ "display": "block" });
-                    that.gV.targetfundcode = that.gV.dataList.fundCode;
+                    that.gV.targetfundcode = '';
                     $(this).siblings().find(".radioCheckItemImg").css({ "display": "none" });
                 } else if (type == 'fund') {
                     // $(".carContent li").attr("checkStatu","off");
