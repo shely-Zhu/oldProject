@@ -820,7 +820,8 @@ $(function() {
             })
      
             mui("body").on("mdClick",".elasticButtons",function(){
-                window.location.href = site_url.applyHistory_url 
+                // window.location.href = site_url.applyHistory_url 
+                location.href = "javascript:history.go(-1)";
             }, {
                 'htmdEvt': 'fundAccountDiagnosisResult_10'
             } )
