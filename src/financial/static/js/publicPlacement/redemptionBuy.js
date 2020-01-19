@@ -321,6 +321,7 @@ $(function() {
             //点击全部，初始化最大赎回额度
             mui("body").on('mdClick', '.forAll', function() {
                 $(".msecond .msecond-one")[0].value = that.gV.dataList.enableShares;
+                that.gV.nowRedempShare = that.gV.dataList.enableShares;
                 if (that.gV.dataList.enableShares) {
                     that.getElements.confirmBtn.removeAttr('disabled');
                 } 
