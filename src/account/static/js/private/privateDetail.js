@@ -332,9 +332,9 @@ $(function() {
 			    	var jsonData = json.data.pageList;
 			    	//拼数据
 			       	$.each( jsonData, function(i, el){
-			       		newData.unitAssets.push( el.unitNetValue);
-			       		newData.assetsDate.push( el.netValueDate);
-			       		newData.accumulativeAssets.push( el.accuNetValue);
+			       		newData.unitAssets.unshift( el.unitNetValue);
+			       		newData.assetsDate.unshift( el.netValueDate);
+			       		newData.accumulativeAssets.unshift( el.accuNetValue);
 					   })
 			       	switch(Number(num)) {
 			       		case 0: that.data['dwjzljjz'].oneMonth = newData;break;
