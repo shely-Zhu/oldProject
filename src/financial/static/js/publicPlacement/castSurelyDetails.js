@@ -103,10 +103,6 @@ $(function() {
                         var template = Handlebars.compile(tplm);
                         var tradeRecord = json.tradeRecord;
                         json.tradeRecordStutas = tradeRecord.length > 0 ? 1 : 0;
-                        tradeRecord.forEach(function(n) {
-                            n.tradeTime = n.tradeTime.split(" ")[0];
-                            n.status = n.status === "1" ? 1 : 0;
-                        });
                         if (json.tradeRecord.length > 0) {
                             for (var i = 0; i < json.tradeRecord.length; i++) {
                                 if (json.tradeRecord[i].status == "1") {
@@ -118,6 +114,10 @@ $(function() {
                                 }
                             }
                         }
+                        tradeRecord.forEach(function(n) {
+                            n.tradeTime = n.tradeTime.split(" ")[0];
+                            n.status = n.status === "1" || n.status === "3" ? 1 : 0;
+                        });
                         var html = template(json);
                         $(".tplBox").html(html);
 
