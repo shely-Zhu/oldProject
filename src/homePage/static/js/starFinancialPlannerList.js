@@ -367,6 +367,7 @@ $(function() {
                     $('.activityNoList').hide();
                     $('#activityDataBox').show();
                     $('#cityListBox').hide();
+                    $(".mui-input-clear").attr("placeholder", "");
                     $('#loading').show();
                     $('.recordList').html('');
                     if (txt.split('').reverse().join('').charAt(0) == '市') {
