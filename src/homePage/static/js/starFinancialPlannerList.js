@@ -104,7 +104,7 @@ $(function() {
                     url: site_url.queryFinancialer_api,
                     // url:'http://172.16.187.164:8081/web/marketing/activity/getActivitiesList',
                     data: {
-                        code: $.trim($('.mui-input-clear').val().replace(/'/g, '')),
+                        code: $.trim($('#mui-input-clear').val().replace(/'/g, '')),
                         cityName: cityName,
                         "pageNum": that.gV.startPage, //非必须，默认为1
                         "pageSize": that.gV.pageSize //非必须，默认为10
