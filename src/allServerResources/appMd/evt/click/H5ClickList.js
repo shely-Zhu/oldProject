@@ -335,7 +335,7 @@ var clickList = {
 	"redemptionBuy_09" : { type:'click', evtid: 'redemptionBuy_09', topic: '赎回-点击同意协议', info: ''} ,
 	"redemptionBuy_10" : { type:'click', evtid: 'redemptionBuy_10', topic: '赎回-忘记密码跳转', info: ''} ,
 	"redemptionBuy_11" : { type:'click', evtid: 'redemptionBuy_11', topic: '赎回-明白了', info: ''} ,
-	"redemptionBuy_12" : { type:'click', evtid: 'redemptionBuy_12', topic: '赎回-明白了', info: ''} ,
+	"redemptionBuy_12" : { type:'click', evtid: 'redemptionBuy_12', topic: '赎回-忘记密码跳转', info: ''} ,
 	//转入结果  surelyResults.html
 	"surelyResults_01" : { type:'click', evtid: 'surelyResults_01', topic: '定投结果-跳往现金宝管理页面', info: ''} ,
 	//买入结果  surelyResultsDetail.html
@@ -481,7 +481,7 @@ var clickList = {
 	"privateDetailList_11":{ type:'click', evtid: 'privateDetailList_11', topic: '取消受让申请_取消', info: ''},
 	"privateDetailList_12":{ type:'click', evtid: 'privateDetailList_12', topic: '取消预约_确定', info: ''},
 	"privateDetailList_13":{ type:'click', evtid: 'privateDetailList_13', topic: '取消预约_取消', info: ''},
-	"privateDetailList_14":{ type:'click', evtid: 'privateDetailList_14', topic: '取消预约_取消', info: ''},
+	"privateDetailList_14":{ type:'click', evtid: 'privateDetailList_14', topic: '取消预约_我明白了', info: ''},
 
 	// privateFundPdf.html
 	"privateFundPdf_0":{ type:'click', evtid: 'privateFundPdf_0', topic: '私募基金确认书_点击下载', info: ''},
