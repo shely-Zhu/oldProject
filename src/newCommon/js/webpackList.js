@@ -406,4 +406,6 @@ module.exports = {
     './account/static/js/private/privateTransactionRules': "./src/account/static/js/private/privateTransactionRules.js",
     //私募详情列表页
     './account/static/js/private/privateDetailList': "./src/account/static/js/private/privateDetailList.js",
+     //视频医生
+    './life/static/js/videoDoctor/videoDoctor': "./src/life/static/js/videoDoctor/videoDoctor.js",
 }

@@ -627,6 +627,8 @@ var clickList = {
 	"activityDetails_22":{ type:'click', evtid: 'activityDetails_22', topic: '不可重复报名_我知道了', info: ''},
 	"activityDetails_23":{ type:'click', evtid: 'activityDetails_23', topic: '服务器异常_我明白了', info: ''},
 	"activityDetails_24":{ type:'click', evtid: 'activityDetails_24', topic: '温馨提示_我明白了', info: ''},
+	"videoDoctor_01":{ type:'click', evtid: 'videoDoctor_01', topic: '视频医生_点击查看病例', info: ''},
+	"videoDoctor_02":{ type:'click', evtid: 'videoDoctor_02', topic: '视频医生_点击立即呼叫医生', info: ''},
 
     // 返回按钮
     "goBackButton":{ type:'click', evtid: 'goBackButton', topic: '返回按钮', info: ''},

@@ -1,0 +1,33 @@
+<!-- 视频医生 
+ @author yanruiting 2020-02-06
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	@@include('@pathInclude/views/meta.html') 
+	<link rel="stylesheet" href="/life/static/css/videoDoctor.css">  
+	<title>视频医生</title>
+</head>
+<body>
+  <!-- @@include('@pathCommonCom/loading/listLoading.html') -->
+  @@include('@pathCommonViews/headBarConfig.html',{"bgColors":"#2C3E77,#273971","showType":"0","pathName":"视频医生"}) 
+  <div class="doctorTop">
+    <img src="/life/static/img/banner@2x.png" alt="">
+    <div class="noDredgeDesc hide">
+      <p class="descBlue toCustomer"></p> 
+      <p class="descBlue linkFinancialer"></p>
+    </div>
+    <div class="callDoctor hide"></div>
+  </div>
+
+  <div class="transverseLineCon">
+    <div class="transverseLine"></div>
+  </div>
+
+  <div class="doctorBottom"></div>
+
+
+	@@include('@pathInclude/views/footer.html')
+  <script src="/life/static/js/videoDoctor/videoDoctor.js"></script>
+</body>
+</html>
