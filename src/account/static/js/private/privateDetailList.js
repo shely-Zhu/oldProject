@@ -559,7 +559,7 @@ $(function() {
                     } else if (type == 'toView') { //详情
                         window.location.href = site_url.privatePlacementDetail_url + '?projectId=' + proId;
                     } else if (type == 'toVideo') { //视频双录
-                        window.location.href = site_url.realVideoTranscribe_url + '?type=toBeConfirmed';
+                        window.location.href = site_url.realVideoTranscribe_url + '?type=toBeConfirmed&projectId=' + proId;
                     } else if (type == 'toDown') { //下载电子合同
 
                     } else if (type == 'reAppointment') { //重新预约
