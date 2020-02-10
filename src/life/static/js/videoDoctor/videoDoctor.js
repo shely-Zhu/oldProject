@@ -16,35 +16,57 @@ $(function(){
 		//页面初始化函数
 		init:function(){  
             // 判断客户等级是否满足条件（是否开通和缓服务，是否过期）  
-            this.judgeCustomerCondition()     
+            this.judgeCustomerCondition();
+            // 获取医生服务内容
+            this.getDoctorServiceContent()   
             this.events();
         },
         showViewCase: function() {
-        	$(".rightBtn").html("查看病例")
-        	$(".rightBtn").show()
+        	$(".rightBtn").html("查看病例");
+        	$(".rightBtn").show();
+        },
+        getDoctorServiceContent: function() {
+            var that = this;
+            var obj = [{
+                url: site_url.getArticle_api,
+                data: {
+                    id: 1, // 还未定
+                    articleBelong: 11, // 暂定
+                    applyType: 0, //0代表H5
+                },
+                needDataEmpty: true,
+                needLoading: true,
+                callbackDone: function(json) {
+                    var resData = json.data;
+                    $('.doctorBottom').html(resData.content);
+                },
+                callbackNoData: function(json) {
+
+                }
+            }];
+            $.ajaxLoading(obj);
         },
         // 获取用户是否开通和缓服务
         judgeCustomerCondition:function() {
             var that = this;
-        	var that=this;
             var obj=[{
                 url: site_url.checkVideoDoctor_api,
                 data:{},
                 needLogin: true, //需要判断登录是否过期
                 callbackDone: function(json) {
-                    var isConform = json.data.isConform // 1:满足，2：不满足，3：已过期
+                    var isConform = json.data.isConform; // 1:满足，2：不满足，3：已过期
                     if(isConform == 1) {
                         //显示标题栏右上角查看病例按钮
-                        that.showViewCase()
-                        $(".callDoctor").removeClass('hide')
+                        that.showViewCase();
+                        $(".callDoctor").removeClass('hide');
                     } else if (isConform == 2) {
-                        $(".noDredgeDesc").removeClass('hide')
-                        $(".noDredgeDesc>.toCustomer").html("很抱歉，您还没有开通此服务")
-                        $(".noDredgeDesc>.linkFinancialer").html("可联系您的理财师咨询开通方式")
+                        $(".noDredgeDesc").removeClass('hide');
+                        $(".noDredgeDesc>.toCustomer").html("很抱歉，您还没有开通此服务");
+                        $(".noDredgeDesc>.linkFinancialer").html("可联系您的理财师咨询开通方式");
                     } else if (isConform == 3) {
                         $(".noDredgeDesc").removeClass('hide')
-                        $(".noDredgeDesc>.toCustomer").html("很抱歉，您的视频医生服务已过期")
-                        $(".noDredgeDesc>.linkFinancialer").html("可联系您的理财师咨询继续服务方式")
+                        $(".noDredgeDesc>.toCustomer").html("很抱歉，您的视频医生服务已过期");
+                        $(".noDredgeDesc>.linkFinancialer").html("可联系您的理财师咨询继续服务方式");
                     }             
                 }
             }];                        
