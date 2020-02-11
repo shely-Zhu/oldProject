@@ -57,8 +57,7 @@ $(function() {
                         needDataEmpty: true,
                         needLoading: false,
                         callbackDone: function(json) {     
-                            //两个接口的回参结构不一样 区分一下
-                            var data = (splitUrl['isSuper']? json.data.list: json.data.pageList) ||[];
+                            var data = json.data.pageList;
                             if(that.gV.pageCurrent == 1 && data.length == 0) {
                                 $(".list").css("display", "none")
                                 that.$e.noData.show()
