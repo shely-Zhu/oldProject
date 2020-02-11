@@ -63,7 +63,7 @@ var prvMar = {
                         var ele = {};
 
                         ele.type = that.setting.navAllList[x];
-                        ele.code = x;
+                        ele.num = x;
 
                         that.setting.navList.push(ele);
                     });
@@ -190,7 +190,7 @@ var prvMar = {
         fileType = that.getFileType();
 
         obj = [{ //获取产品列表
-            url: site_url.prvReource_api, //私募产品列表  queryReourceList.action
+            url: site_url.queryReourceListNew_api, //私募产品列表  queryReourceListNew.action
             // data: {
             // hmac: "", //预留的加密信息 非必填项
             data: { //请求的参数信息
@@ -266,7 +266,7 @@ var prvMar = {
     },
     getFileType: function () { //获取标签编号
         var that = this;
-        that.status.current_label = that.getElements.midContent.find('.nav-wrapper .mui-control-item.mui-active').attr('code');
+        that.status.current_label = that.getElements.midContent.find('.nav-wrapper .mui-control-item.mui-active').attr('num');
         return that.setting.ajaxParamList[that.status.current_label];
     },
     events: function () {
