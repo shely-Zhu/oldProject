@@ -12,7 +12,7 @@ var data=Mock.mock({
 	msg:"success", 
 	data: { 
 		customerNo: 123,
-		isConform: 1 // 1:满足，2：不满足，3：已过期
+		isConform: 1 // 1:开通，2：未开通，3：已过期
 	}, 
 });
 

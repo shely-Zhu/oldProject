@@ -18,7 +18,7 @@ $(function(){
             // 判断客户等级是否满足条件（是否开通和缓服务，是否过期）  
             this.judgeCustomerCondition();
             // 获取医生服务内容
-            this.getDoctorServiceContent()   
+            this.getDoctorServiceContent();   
             this.events();
         },
         showViewCase: function() {
@@ -30,8 +30,8 @@ $(function(){
             var obj = [{
                 url: site_url.getArticle_api,
                 data: {
-                    id: 1, // 还未定
-                    articleBelong: 11, // 暂定
+                    id: 103, 
+                    articleBelong: 15,
                     applyType: 0, //0代表H5
                 },
                 needDataEmpty: true,
@@ -54,7 +54,7 @@ $(function(){
                 data:{},
                 needLogin: true, //需要判断登录是否过期
                 callbackDone: function(json) {
-                    var isConform = json.data.isConform; // 1:满足，2：不满足，3：已过期
+                    var isConform = json.data.isConform; // 1:开通，2：未开通，3：已过期
                     if(isConform == 1) {
                         //显示标题栏右上角查看病例按钮
                         that.showViewCase();
