@@ -14,11 +14,11 @@ var data=Mock.mock({
 	
 	{
 	
-	"todayIncome":"30.89",//每日收益
+	"todayIncome":"-22.22",//每日收益
 	
-	"todayIncomeMask":"0.00",//每日收益千分位显示
+	"todayIncomeMask":"-22.22",//每日收益千分位显示
 	
-	"belongdate":"2017-02-19",//收益日期 
+	"belongdate":"2020-02-19",//收益日期 
 	
 	},
 	
