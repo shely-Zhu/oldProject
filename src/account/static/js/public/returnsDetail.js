@@ -47,7 +47,8 @@ $(function() {
                 template: that.$e.adjustmentTemp, 
                 callback: function(def, t){
                     var obj = [{
-                        url: site_url.queryIncomeList_api,
+                        //现金宝和普通基金接口不同 但是入参一样 这里区分一下
+                        url: splitUrl['isSuper']? site_url.cashQueryIncomeList_api:site_url.queryIncomeList_api,
                         data: {
                             "pageCurrent": that.gV.pageCurrent, //非必须，默认为1
                             "pageSize": that.gV.pageSize,//非必须，默认为10

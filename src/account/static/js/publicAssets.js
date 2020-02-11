@@ -229,7 +229,13 @@ $(function() {
             //点击持仓列表的感叹号 进入交易明细明细
             mui("body").on('mdClick', '.position_tip', function(e) {
                 //跳转到收益明细
-                window.location.href = site_url.returnsDetail_url + '?fundCode=' + $(this).attr('data-fundcode');
+                var id = $(this).parent().parent().parent().parent().attr("id");
+                var url = site_url.returnsDetail_url + '?fundCode=' + $(this).attr('data-fundcode');
+                if (id == "cashPageLists") {
+                    //现金宝 拼上标识
+                    url = url + '&isSuper=1'
+                }
+                window.location.href = url;
                 return false;
             }, {
                 'htmdEvt': 'publicAssets_3'
