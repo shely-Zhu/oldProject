@@ -57,7 +57,7 @@ $(function() {
                         needDataEmpty: true,
                         needLoading: false,
                         callbackDone: function(json) {     
-                            var data = json.data.pageList;
+                            var data = json.data.pageList ||[];
                             if(that.gV.pageCurrent == 1 && data.length == 0) {
                                 $(".list").css("display", "none")
                                 that.$e.noData.show()
