@@ -13,6 +13,9 @@ $(function(){
 		$e:{
 			
 		},
+        gV: {
+            customerNo: '' // 客户编号
+        },
 		//页面初始化函数
 		init:function(){  
             // 判断客户等级是否满足条件（是否开通和缓服务，是否过期）  
@@ -55,6 +58,7 @@ $(function(){
                 needLogin: true, //需要判断登录是否过期
                 callbackDone: function(json) {
                     var isConform = json.data.isConform; // 1:开通，2：未开通，3：已过期
+                    that.gV.customerNo = json.data.customerNo
                     if(isConform == 1) {
                         //显示标题栏右上角查看病例按钮
                         that.showViewCase();
@@ -76,13 +80,13 @@ $(function(){
             var that = this;
             // 点击查看病例按钮app拦截调取第三方
             mui("body").on('mdClick', '.rightBtn' , function(){
-                window.location.href = site_url.caseList_url;
+                window.location.href = site_url.caseList_url + '?customerNo=' + that.gV.customerNo;
             },{
                 'htmdEvt': 'videoDoctor_01'
             });
             // 点击呼叫医生app拦截调取第三方
             mui("body").on('mdClick', '.callDoctor' , function(){
-                window.location.href = site_url.callDoctor_url;
+                window.location.href = site_url.callDoctor_url + '?customerNo=' + that.gV.customerNo;
             },{
                 'htmdEvt': 'videoDoctor_02'
             });
