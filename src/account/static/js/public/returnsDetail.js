@@ -47,7 +47,8 @@ $(function() {
                 template: that.$e.adjustmentTemp, 
                 callback: function(def, t){
                     var obj = [{
-                        url: site_url.queryIncomeList_api,
+                        //现金宝和普通基金接口不同 但是入参一样 这里区分一下
+                        url: splitUrl['isSuper']? site_url.cashQueryIncomeList_api:site_url.queryIncomeList_api,
                         data: {
                             "pageCurrent": that.gV.pageCurrent, //非必须，默认为1
                             "pageSize": that.gV.pageSize,//非必须，默认为10
@@ -56,7 +57,8 @@ $(function() {
                         needDataEmpty: true,
                         needLoading: false,
                         callbackDone: function(json) {     
-                            var data = json.data.pageList ||[];
+                            //两个接口的回参结构不一样 区分一下
+                            var data = (splitUrl['isSuper']? json.data.list: json.data.pageList) ||[];
                             if(that.gV.pageCurrent == 1 && data.length == 0) {
                                 $(".list").css("display", "none")
                                 that.$e.noData.show()
