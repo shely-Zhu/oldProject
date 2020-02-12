@@ -18,6 +18,8 @@ $(function(){
         },
 		//页面初始化函数
 		init:function(){  
+            // 获取banner图地址
+            this.getBanner();
             // 判断客户等级是否满足条件（是否开通和缓服务，是否过期）  
             this.judgeCustomerCondition();
             // 获取医生服务内容
@@ -28,14 +30,40 @@ $(function(){
         	$(".rightBtn").html("查看病例");
         	$(".rightBtn").show();
         },
+        getBanner: function() {
+            var that = this;
+            var obj = [{
+                url: site_url.getArticle_api,
+                data: {
+                    articleBelong: 4,
+                    applyType: 1, //0代表H5
+                },
+                needDataEmpty: true,
+                needLoading: true,
+                callbackDone: function(json) {
+                    var content = json.data.content;
+                    if(content == '') {
+                        $('.bannerCon').html('<img src="/life/static/img/banner@2x.png" alt="">');
+                    } else {
+                        $('.bannerCon').html(content);
+                    }
+                },
+                callbackNoData: function(json) {
+                    $('.bannerCon').html('<img src="/life/static/img/banner@2x.png" alt="">');
+                },
+                callbackFail: function(json) {
+                    $('.bannerCon').html('<img src="/life/static/img/banner@2x.png" alt="">');
+                }
+            }];
+            $.ajaxLoading(obj);
+        },
         getDoctorServiceContent: function() {
             var that = this;
             var obj = [{
                 url: site_url.getArticle_api,
                 data: {
-                    id: 103, 
-                    articleBelong: 15,
-                    applyType: 0, //0代表H5
+                    articleBelong: 5,
+                    applyType: 1, //0代表H5
                 },
                 needDataEmpty: true,
                 needLoading: true,

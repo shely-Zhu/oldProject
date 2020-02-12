@@ -16,16 +16,17 @@ body {
 
 .doctorTop {
 	position: relative;
-	&>img {
-		width: 100%;
-		height: auto;
-	}
-	&>.noDredgeDesc {
-		font-size: .26rem;
-		line-height: .4rem;
-		text-align: center;
-		.descBlue {
-			color: #0E246C;
+	.bannerWrapper {
+		position: relative;
+		.bannerCon {
+			img {
+				width: 100%;
+			}
+		}
+		&>img {
+			width: 100%;
+			position: absolute;
+			bottom: 0;
 		}
 	}
 	&>.callDoctor {
@@ -35,15 +36,30 @@ body {
 		background: url("/life/static/img/ljhjys@2x.png") no-repeat;
 		background-size: 100% 100%;
 		position: absolute;
-		bottom: -.1rem;
+		bottom: 0;
 		left: 0;
 		right: 0;
+	}	
+}
+
+.noDredgeDesc {
+	font-size: .26rem;
+	line-height: .4rem;
+	text-align: center;
+	.descBlue {
+		color: #0E246C;
 	}
 }
 
 .transverseLineCon {
-	padding: .4rem .3rem .3rem;
+	padding: .4rem .3rem 0;
 	.transverseLine {
 		border-top: 1px solid #E7E9ED;
+	}
+}
+
+.doctorBottom {
+	img {
+		width: 100%;
 	}
 }
