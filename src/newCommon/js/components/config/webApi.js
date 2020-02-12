@@ -387,5 +387,6 @@ module.exports = function() {
     this.findProtocolContentRule_api = http_url.web_url + '/content/frontend/findProtocolContent'; //转出规则查询
 
     this.queryFundTransferAssets_api = http_url.web_url + '/account/queryFundTransferAssets' //查询活期理财列表
+    this.checkVideoDoctor_api = http_url.web_url + '/account/checkVideoDoctor' //查询用户是否满足视频医生条件
 
 };
