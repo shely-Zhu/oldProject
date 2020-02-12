@@ -36,7 +36,7 @@ $(function(){
                 url: site_url.getArticle_api,
                 data: {
                     articleBelong: 4,
-                    applyType: 1, //0代表H5
+                    applyType: 1,
                 },
                 needDataEmpty: true,
                 needLoading: true,
@@ -63,7 +63,7 @@ $(function(){
                 url: site_url.getArticle_api,
                 data: {
                     articleBelong: 5,
-                    applyType: 1, //0代表H5
+                    applyType: 1,
                 },
                 needDataEmpty: true,
                 needLoading: true,
