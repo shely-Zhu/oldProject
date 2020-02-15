@@ -1,0 +1,65 @@
+/**
+* 视频医生
+* @author yanruiting 2020-02-06
+*/
+@import url('@pathCommonLess/components/iconfont.less');
+@import url("@pathCommonLess/color.less");
+@import url("@pathCommonLessCom/headBarConfig.less");
+@import url("@pathCommonCom/tipAction/tipAction.less");
+
+body {
+	background: #fff;
+}
+.hide {
+	display: none;
+}
+
+.doctorTop {
+	position: relative;
+	.bannerWrapper {
+		position: relative;
+		.bannerCon {
+			img {
+				width: 100%;
+			}
+		}
+		&>img {
+			width: 100%;
+			position: absolute;
+			bottom: 0;
+		}
+	}
+	&>.callDoctor {
+		width: 2.86rem;
+		height: 1rem;
+		margin: auto;
+		background: url("/life/static/img/ljhjys@2x.png") no-repeat;
+		background-size: 100% 100%;
+		position: absolute;
+		bottom: 0;
+		left: 0;
+		right: 0;
+	}	
+}
+
+.noDredgeDesc {
+	font-size: .26rem;
+	line-height: .4rem;
+	text-align: center;
+	.descBlue {
+		color: #0E246C;
+	}
+}
+
+.transverseLineCon {
+	padding: .4rem .3rem 0;
+	.transverseLine {
+		border-top: 1px solid #E7E9ED;
+	}
+}
+
+.doctorBottom {
+	img {
+		width: 100%;
+	}
+}

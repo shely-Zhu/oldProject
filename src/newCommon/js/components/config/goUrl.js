@@ -576,7 +576,10 @@ module.exports = function() {
     // 新发基金详情页
     this.newFundDetail_url = go_url.no_url + '/financial/views/publicPlacement/newFundDetail.html';
 
-
+    // 呼叫医生页面
+    this.callDoctor_url = go_url.no_url + ' /life/views/videoDoctor/callDoctor.html';
+    // 病例列表页面
+    this.caseList_url = go_url.no_url + ' /life/views/videoDoctor/caseList.html';
 
 
 };
