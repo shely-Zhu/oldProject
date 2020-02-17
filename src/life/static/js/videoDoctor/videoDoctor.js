@@ -27,7 +27,7 @@ $(function(){
             this.events();
         },
         showViewCase: function() {
-        	$(".rightBtn").html("查看病例");
+        	$(".rightBtn").html("查看病历");
         	$(".rightBtn").show();
         },
         getBanner: function() {
