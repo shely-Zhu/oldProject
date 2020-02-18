@@ -112,7 +112,7 @@ function getLocalIp() {
         var iface = osNet[devName];
         for (var i = 0; i < iface.length; i++) {
             var alias = iface[i];
-            if (alias.family === 'IPv4' && (devName == '本地连接' || devName == '以太网' || devName == "WLAN" || devName == '无线网络连接' || devName == '本地连接 2')) {
+            if (alias.family === 'IPv4' && (devName == '本地连接' || devName == '以太网' || devName == "WLAN" || devName == '无线网络连接' || devName == '本地连接 2' || devName == 'en0')) {
                 console.log('当前本地ip：' + alias.address);
                 return alias.address;
             }
