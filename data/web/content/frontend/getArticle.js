@@ -9,7 +9,7 @@ var data = Mock.mock({
     "articleTimeStr": "11:34",//音频播放时间
     "author": "purpleZhao",//作者
     "buttonLabel": "立即转入现金管理",//按钮文案
-    "content": "",
+    "content": "333333333",
     "createId": "H023512",
     "createName": "",
     "createTime": 1573085434000,
