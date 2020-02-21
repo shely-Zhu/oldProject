@@ -135,6 +135,11 @@
             <div class="toDetail blueBgButton" type="toVideostatus" data-projectid="{{projectId}}" data-projectname="{{projectName}}" data-firstorappend="{{firstOrAppend}}" data-reserveid="{{reserveId}}">视频双录</div>-->
             {{/if}}
             <!-- 功能按钮 -->
+            <!-- 视频双录按钮 -->
+            {{#if assignVideo}}
+            <div class="toDetail blueBgButton marginR" type="toVideo" data-projectid="{{projectId}}" data-projectname="{{projectName}}" data-firstorappend="{{firstOrAppend}}" data-reserveid="{{reserveId}}">视频双录</div>
+            {{/if}}
+            <!-- 视频双录按钮 -->
             <!-- 取消预约按钮 -->
             {{#if appointmentCancel}}
             <div class="cancelBtn goldBorderButton" data-type="appointment" data-projectid="{{projectId}}" data-reserveid="{{reserveId}}">取消预约</div>
