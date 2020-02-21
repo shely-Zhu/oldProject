@@ -93,12 +93,12 @@ $(function(){
                         $(".callDoctor").removeClass('hide');
                     } else if (isConform == 2) {
                         $(".noDredgeDesc").removeClass('hide');
-                        $(".noDredgeDesc>.toCustomer").html("很抱歉，您还没有开通此服务");
-                        $(".noDredgeDesc>.linkFinancialer").html("可联系您的理财师咨询开通方式");
+                        $(".noDredgeDesc>.toCustomer").html(json.data.failureMsg);
+                        /*$(".noDredgeDesc>.linkFinancialer").html("可联系您的理财师咨询开通方式");*/
                     } else if (isConform == 3) {
                         $(".noDredgeDesc").removeClass('hide')
-                        $(".noDredgeDesc>.toCustomer").html("很抱歉，您的视频医生服务已过期");
-                        $(".noDredgeDesc>.linkFinancialer").html("可联系您的理财师咨询继续服务方式");
+                        $(".noDredgeDesc>.toCustomer").html(json.data.failureMsg);
+                        /*$(".noDredgeDesc>.linkFinancialer").html("可联系您的理财师咨询继续服务方式");*/
                     }             
                 }
             }];                        
