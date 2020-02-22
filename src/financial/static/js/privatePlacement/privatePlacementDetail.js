@@ -587,7 +587,11 @@ $(function() {
                 profitThoudDate: [], //存放折线图净值日期
             }
 
-            if( !!that.getElements.priceLimitArr[num] ){
+            // 当涨跌幅返回空时，隐藏涨跌幅
+            if( that.getElements.priceLimitArr[num] == ''){
+                $(".priceLimit").addClass("hide");
+            } else {
+                $(".priceLimit").removeClass("hide");
                 $(".priceLimit span").html( that.getElements.priceLimitArr[num] );
             }
 
@@ -628,8 +632,13 @@ $(function() {
 
                     var unitNetChangePercent = jsonData.pageList[0].unitNetChangePercent;
 
-                    //显示到页面上
-                    $(".priceLimit span").html(unitNetChangePercent);
+                    //当涨跌幅返回不为空时显示到页面上，为空则隐藏
+                    if(unitNetChangePercent == '') {
+                        $(".priceLimit").addClass("hide");
+                    } else {
+                        $(".priceLimit").removeClass("hide");
+                        $(".priceLimit span").html(unitNetChangePercent);
+                    }
 
                     //保存各个时段涨跌幅数据
                     that.getElements.priceLimitArr[num] = unitNetChangePercent;
