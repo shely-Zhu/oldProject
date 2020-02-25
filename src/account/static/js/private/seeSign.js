@@ -58,10 +58,10 @@ $(function () {
                           var groupName = el.groupName?el.groupName:""
                           if (el.contracturl.indexOf(".pdf") != -1) {
                               el.line = true; //线上可预览
-                              el.href = site_url.mountDownload_api + "?url=" + new Base64().encode(el.contracturl) + "&name=" + new Base64().encode(el.modulename) + "&show=1&showDownload=true";
+                              el.href = site_url.mountDownload_api + "?url=" + el.contracturl + "&name=" + new Base64().encode(el.modulename) + "&show=1&showDownload=true";
                           } else {
                               el.line = false; //需下载
-                              el.href = site_url.mountDownload_api + "?url=" + new Base64().encode(el.contracturl) + "&name=" + new Base64().encode(el.modulename);
+                              el.href = site_url.mountDownload_api + "?url=" + el.contracturl + "&name=" + new Base64().encode(el.modulename);
                           }
                         })
                     }
