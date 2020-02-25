@@ -10,7 +10,7 @@
     <!---------- 申购状态 ---------->
     <!-- 待确认的预约明细=已确认的申购 -->
     {{#if businessType01}}
-    <!----- 已确认 预约成功 预约撤销 预约过期  预约失败----->
+    <!----- 已确认 预约成功 预约撤销 预约过期  预约失败 排队成功 到账中 已到账 ----->
     {{#if isConfirmTrans}}
     <!-- 预约成功 -->
     {{#if businessTypeSucc}}
@@ -34,6 +34,13 @@
             </div>
         </div>
         <!-- 金额 -->
+        <!-- 查看合同按钮 -->
+        {{#if appointmentToSee}}
+        <div class="toolCon clearfix">
+            <div class="toDetail blueBgButton" type="toSee" data-projectid="{{projectId}}" data-reserveid="{{reserveId}}">查看合同</div>
+        </div>
+        {{/if}}
+        <!-- 查看合同按钮 -->
         {{#if businessType0}}
         <!-- 认购图片 -->
         <div class="typeImg rg"></div>
@@ -46,7 +53,7 @@
     </div>
     <!-- 预约成功 -->
     {{else}}
-    <!-- 预约撤销 预约过期  预约失败 -->
+    <!-- 预约撤销 预约过期  预约失败 排队成功 到账中 已到账 -->
     <div class="transList" data-projectid="{{projectId}}">
         {{#if leftTopStatusDesc}}
         <div class="statusTip">{{leftTopStatusDesc}}</div>
@@ -70,6 +77,13 @@
             </div>
         </div>
         <!-- 金额 -->
+        <!-- 查看合同按钮 -->
+        {{#if appointmentToSee}}
+        <div class="toolCon clearfix">
+            <div class="toDetail blueBgButton" type="toSee" data-projectid="{{projectId}}" data-reserveid="{{reserveId}}">查看合同</div>
+        </div>
+        {{/if}}
+        <!-- 查看合同按钮 -->
         <!-- 预约图片 -->
         <div class="typeImg yy"></div>
         <!-- 预约图片 -->
