@@ -238,26 +238,36 @@ $(function() {
                 needLogin: true,
                 needLoading: false,
                 callbackDone: function(json) {
-                    var jsonData = json.data,
+                    try {
+                        var jsonData = json.data,
                         pageList = jsonData.pageList;
-
+                    } catch(err){
+                        tipAction("1" + err);
+                    }
+                    
                     if (!$.util.objIsEmpty(pageList)) {
+                        try {
+                            jsonData.already = that.gV.current_index == 0 ? 1 : 0;
+                            jsonData.tobe = that.gV.current_index == 1 ? 1 : 0;
+                            //待确认资产的到账状态 0未到账 1确认中 2部分到账 3足额到账 4超额到账 (3 4用黄色背景 其他情况用灰蓝色)
+                            jsonData.accountStatus34 = ((jsonData.accountStatus == 3) || (jsonData.accountStatus == 4)) ? true : false; //其他资产未到账
+                            var list_html = that.gV.list_template(jsonData);
+                        } catch(err){
+                            tipAction("2" + err);
+                        }
 
-                        jsonData.already = that.gV.current_index == 0 ? 1 : 0;
-                        jsonData.tobe = that.gV.current_index == 1 ? 1 : 0;
-                        //待确认资产的到账状态 0未到账 1确认中 2部分到账 3足额到账 4超额到账 (3 4用黄色背景 其他情况用灰蓝色)
-                        jsonData.accountStatus34 = ((jsonData.accountStatus == 3) || (jsonData.accountStatus == 4)) ? true : false; //其他资产未到账
-                        var list_html = that.gV.list_template(jsonData);
-
-                        //设置这两参数，在initMui()中使用
-                        //判断是否显示没有更多了等逻辑，以及插入新数据
-                        that.listLength = pageList.length;
-                        that.html = list_html;
-
-                        //重设当前页码
-                        if (!$.util.objIsEmpty(pageList)) {
-                            //设置每个ajax传参数据中的当前页码
-                            that.gV.ajaxArr[that.gV.current_index].pageNo++;
+                        try {
+                            //设置这两参数，在initMui()中使用
+                            //判断是否显示没有更多了等逻辑，以及插入新数据
+                            that.listLength = pageList.length;
+                            that.html = list_html;
+                            //重设当前页码
+                            if (!$.util.objIsEmpty(pageList)) {
+                                //设置每个ajax传参数据中的当前页码
+                                that.gV.ajaxArr[that.gV.current_index].pageNo++;
+                            }
+                        } catch(err){
+                            tipAction("3" + err);
                         }
                     } else {
                         //没有数据
@@ -310,34 +320,42 @@ $(function() {
                             t.endPullupToRefresh(false);
                         }
 
-                        $id.find('.contentWrapper .mui-pull-bottom-pocket').removeClass('mui-hidden');
+                        try {
+                            $id.find('.contentWrapper .mui-pull-bottom-pocket').removeClass('mui-hidden');
 
-                        if (that.gV.ajaxArr[that.gV.current_index].pageNo == 1) {
-                            //第一屏
-                            $id.find('.contentWrapper .mui-table-view-cell').html(that.html);
-                        } else {
-                            $id.find('.contentWrapper .mui-table-view-cell').append(that.html);
-                        }
-
-                        //获取当前展示的tab的索引
-                        var index = $('#slider .tab-scroll-wrap .mui-active').index(),
-                            $list = $("#move_" + index + " .list");
-
-                        if (!$list.hasClass('setHeight')) {
-
-                            //$('.list').each( function( i, el){
-
-                            //判断当前ul高度
-                            var ulHeight = $list.find(".mui-table-view").height();
-
-                            if (ulHeight < that.htmlHeight) {
-
-                                $list.height(that.highHeight).addClass('setHeight').addClass('noMove');
+                            if (that.gV.ajaxArr[that.gV.current_index].pageNo == 1) {
+                                //第一屏
+                                $id.find('.contentWrapper .mui-table-view-cell').html(that.html);
                             } else {
-                                $list.height(that.htmlHeight).addClass('setHeight');
+                                $id.find('.contentWrapper .mui-table-view-cell').append(that.html);
                             }
+                        } catch(err){
+                            tipAction("4" + err);
+                        }
+                        
+                        try {
+                            //获取当前展示的tab的索引
+                            var index = $('#slider .tab-scroll-wrap .mui-active').index(),
+                                $list = $("#move_" + index + " .list");
 
-                            //})
+                            if (!$list.hasClass('setHeight')) {
+
+                                //$('.list').each( function( i, el){
+
+                                //判断当前ul高度
+                                var ulHeight = $list.find(".mui-table-view").height();
+
+                                if (ulHeight < that.htmlHeight) {
+
+                                    $list.height(that.highHeight).addClass('setHeight').addClass('noMove');
+                                } else {
+                                    $list.height(that.htmlHeight).addClass('setHeight');
+                                }
+
+                                //})
+                            }
+                        } catch(err){
+                            tipAction("5" + err);
                         }
 
                         //隐藏loading
