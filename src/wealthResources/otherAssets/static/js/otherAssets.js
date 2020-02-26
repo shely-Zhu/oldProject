@@ -240,9 +240,9 @@ $(function() {
                 callbackDone: function(json) {
                     try {
                         var jsonData = json.data,
-                        pageList = jsonData.pageList;
+                        pageList === jsonData.pageList;
                     } catch(err){
-                        tipAction("1" + err);
+                        tipAction("1" + err.stack);
                     }
                     
                     if (!$.util.objIsEmpty(pageList)) {
@@ -253,7 +253,7 @@ $(function() {
                             jsonData.accountStatus34 = ((jsonData.accountStatus == 3) || (jsonData.accountStatus == 4)) ? true : false; //其他资产未到账
                             var list_html = that.gV.list_template(jsonData);
                         } catch(err){
-                            tipAction("2" + err);
+                            tipAction("2" + err.stack);
                         }
 
                         try {
@@ -267,7 +267,7 @@ $(function() {
                                 that.gV.ajaxArr[that.gV.current_index].pageNo++;
                             }
                         } catch(err){
-                            tipAction("3" + err);
+                            tipAction("3" + err.stack);
                         }
                     } else {
                         //没有数据
@@ -330,7 +330,7 @@ $(function() {
                                 $id.find('.contentWrapper .mui-table-view-cell').append(that.html);
                             }
                         } catch(err){
-                            tipAction("4" + err);
+                            tipAction("4" + err.stack);
                         }
                         
                         try {
@@ -355,7 +355,7 @@ $(function() {
                                 //})
                             }
                         } catch(err){
-                            tipAction("5" + err);
+                            tipAction("5" + err.stack);
                         }
 
                         //隐藏loading
