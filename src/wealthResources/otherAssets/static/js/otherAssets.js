@@ -246,7 +246,7 @@ $(function() {
                         jsonData.already = that.gV.current_index == 0 ? 1 : 0;
                         jsonData.tobe = that.gV.current_index == 1 ? 1 : 0;
                         //待确认资产的到账状态 0未到账 1确认中 2部分到账 3足额到账 4超额到账 (3 4用黄色背景 其他情况用灰蓝色)
-                        jsonData.accountStatus34 = (jsonData.accountStatus == 3) || (jsonData.accountStatus == 4); //其他资产未到账
+                        jsonData.accountStatus344 = ((jsonData.accountStatus == 3) || (jsonData.accountStatus == 4)) ? true : false; //其他资产未到账
                         var list_html = that.gV.list_template(jsonData);
 
                         //设置这两参数，在initMui()中使用
