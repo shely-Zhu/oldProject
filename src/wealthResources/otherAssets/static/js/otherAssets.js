@@ -240,7 +240,7 @@ $(function() {
                 callbackDone: function(json) {
                     try {
                         var jsonData = json.data,
-                        pageList === jsonData.pageList;
+                        pageList = jsonData.pageList;
                     } catch(err){
                         tipAction("1" + err.stack);
                     }
