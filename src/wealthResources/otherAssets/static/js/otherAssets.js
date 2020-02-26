@@ -149,7 +149,7 @@ $(function() {
                 that.gV.navHeight = that.gV.listToTop - that.gV.navToTop;
                 that.height = windowHeight - that.gV.listToTop;
 
-                that.htmlHeight = $('html').height() - $('.nav-wrapper').height();
+                that.htmlHeight = $('html').height() - $('.nav-wrapper').height() - $(".banner").height();
 
 
                 console.log('距顶部距离：' + that.gV.listToTop);
