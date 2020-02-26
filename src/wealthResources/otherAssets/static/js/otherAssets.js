@@ -66,9 +66,6 @@ $(function() {
             //拼模板，初始化左右滑动mui组件
             that.beforeFunc();
 
-            //初始化第一屏区域的上拉加载
-            that.initMui($('#scroll1'));
-
             that.getData();
 
             //事件监听
@@ -181,6 +178,8 @@ $(function() {
 
             // 为实现滚动区域滚动到顶部，定位，添加遮罩层
             $('.scroll_mask').css('top', that.gV.listToTop)
+            //初始化第一屏区域的上拉加载
+            that.initMui($('#scroll1'));
         },
 
         initMui: function($id) {
@@ -241,86 +240,76 @@ $(function() {
                     try {
                         var jsonData = json.data,
                         pageList = jsonData.pageList;
-                    } catch(err){
-                        tipAction("1" + err.stack);
-                    }
-                    
-                    if (!$.util.objIsEmpty(pageList)) {
-                        try {
+
+                        if (!$.util.objIsEmpty(pageList)) {
+
                             jsonData.already = that.gV.current_index == 0 ? 1 : 0;
                             jsonData.tobe = that.gV.current_index == 1 ? 1 : 0;
                             //待确认资产的到账状态 0未到账 1确认中 2部分到账 3足额到账 4超额到账 (3 4用黄色背景 其他情况用灰蓝色)
                             jsonData.accountStatus34 = ((jsonData.accountStatus == 3) || (jsonData.accountStatus == 4)) ? true : false; //其他资产未到账
                             var list_html = that.gV.list_template(jsonData);
-                        } catch(err){
-                            tipAction("2" + err.stack);
-                        }
 
-                        try {
                             //设置这两参数，在initMui()中使用
                             //判断是否显示没有更多了等逻辑，以及插入新数据
                             that.listLength = pageList.length;
                             that.html = list_html;
+
                             //重设当前页码
                             if (!$.util.objIsEmpty(pageList)) {
                                 //设置每个ajax传参数据中的当前页码
                                 that.gV.ajaxArr[that.gV.current_index].pageNo++;
                             }
-                        } catch(err){
-                            tipAction("3" + err.stack);
+                        } else {
+                            //没有数据
+                            that.listLength = 0;
+                            that.html = '';
                         }
-                    } else {
-                        //没有数据
-                        that.listLength = 0;
-                        that.html = '';
-                    }
 
-                    //有数据
-                    setTimeout(function() {
+                        //有数据
+                        setTimeout(function() {
 
-                        if (that.listLength < that.gV.aP.pageSize) {
+                            if (that.listLength < that.gV.aP.pageSize) {
 
-                            if (that.gV.ajaxArr[that.gV.current_index].pageNo == 1) {
-                                //第一页时
-                                if (that.listLength == 0) {
-                                    //没有数据
-                                    $id.find('.list').html(that.getElements.noData.clone(false)).addClass('noCon');
-                                    $id.find('.noData').show();
+                                if (that.gV.ajaxArr[that.gV.current_index].pageNo == 1) {
+                                    //第一页时
+                                    if (that.listLength == 0) {
+                                        //没有数据
+                                        $id.find('.list').html(that.getElements.noData.clone(false)).addClass('noCon');
+                                        $id.find('.noData').show();
 
-                                    //隐藏loading，调试接口时需要去掉
-                                    setTimeout(function() {
-                                        that.getElements.listLoading.hide();
-                                    }, 100);
-                                    t.endPullupToRefresh(true);
+                                        //隐藏loading，调试接口时需要去掉
+                                        setTimeout(function() {
+                                            that.getElements.listLoading.hide();
+                                        }, 100);
+                                        t.endPullupToRefresh(true);
 
-                                    //获取当前展示的tab的索引
-                                    var index = $('#slider .tab-scroll-wrap .mui-active').index(),
-                                        $list = $("#move_" + index + " .list");
+                                        //获取当前展示的tab的索引
+                                        var index = $('#slider .tab-scroll-wrap .mui-active').index(),
+                                            $list = $("#move_" + index + " .list");
 
-                                    $list.height(that.highHeight).addClass('noMove');
+                                        $list.height(that.highHeight).addClass('noMove');
 
-                                    // if( $("#move_"+index+" .noData").length ){
-                                    //     //已经暂无数据了
-                                    //     $('html').addClass('hidden');
-                                    // }
-                                    // else{
-                                    //     $('html').removeClass('hidden');
-                                    // }
+                                        // if( $("#move_"+index+" .noData").length ){
+                                        //     //已经暂无数据了
+                                        //     $('html').addClass('hidden');
+                                        // }
+                                        // else{
+                                        //     $('html').removeClass('hidden');
+                                        // }
 
-                                    return false;
+                                        return false;
+                                    } else {
+                                        //有数据，没有更多了
+                                        t.endPullupToRefresh(true);
+                                    }
                                 } else {
-                                    //有数据，没有更多了
+                                    //其他页，没有更多了
                                     t.endPullupToRefresh(true);
                                 }
                             } else {
-                                //其他页，没有更多了
-                                t.endPullupToRefresh(true);
+                                t.endPullupToRefresh(false);
                             }
-                        } else {
-                            t.endPullupToRefresh(false);
-                        }
 
-                        try {
                             $id.find('.contentWrapper .mui-pull-bottom-pocket').removeClass('mui-hidden');
 
                             if (that.gV.ajaxArr[that.gV.current_index].pageNo == 1) {
@@ -329,11 +318,7 @@ $(function() {
                             } else {
                                 $id.find('.contentWrapper .mui-table-view-cell').append(that.html);
                             }
-                        } catch(err){
-                            tipAction("4" + err.stack);
-                        }
-                        
-                        try {
+
                             //获取当前展示的tab的索引
                             var index = $('#slider .tab-scroll-wrap .mui-active').index(),
                                 $list = $("#move_" + index + " .list");
@@ -354,19 +339,17 @@ $(function() {
 
                                 //})
                             }
-                        } catch(err){
-                            tipAction("5" + err.stack);
-                        }
 
-                        //隐藏loading
-                        setTimeout(function() {
-                            that.getElements.listLoading.hide();
-                        }, 100);
+                            //隐藏loading
+                            setTimeout(function() {
+                                that.getElements.listLoading.hide();
+                            }, 100);
 
-                    }, 200)
-
-
-
+                        }, 200) 
+                    } catch(err) {
+                        tipAction(err.stack)
+                    }
+                    
                 },
                 callbackFail: function(json) {
                     //请求失败，
