@@ -334,7 +334,7 @@ $(function() {
 
                                 $list.height(that.highHeight).addClass('setHeight').addClass('noMove');
                             } else {
-                                $list.height(that.highHeight).addClass('setHeight');
+                                $list.height(that.htmlHeight).addClass('setHeight');
                             }
 
                             //})
