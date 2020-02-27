@@ -38,15 +38,11 @@ $(function() {
 
         },
         gV: { //一些设置
-            navList: [ //导航
-                { type: '持有资产', num: '0' },
-                { type: '待确认资产', num: '1' },
-            ],
             aP: {
                 pageNo: 1,
                 pageSize: 10,
             },
-            current_index: 1, //tab切换
+            current_index: 0, //tab切换，请求接口设置
             list_template: '', //列表的模板，生成后存放在这里
             ajaxArr: [], //存放每一个ajax请求的传参数据
             // 存放ajax请求地址  已持仓  待确认
@@ -101,17 +97,19 @@ $(function() {
                 needLoading: false,
                 callbackDone: function(json) {
                     var jsonData = json.data,
-                        pageList = jsonData.pageList;
+                        pageList = jsonData.pageList,
+                        ele = '';
                         
                     that.gV.stateIcon = false;
                     document.getElementById('loadBox').style.display = 'none';
 
                     if (!$.util.objIsEmpty(pageList)) {
-                        // todo 判断是待确认还是已完成
-                        jsonData.already = false;
-                        jsonData.tobe = true;
-                        debugger;
-                        generateTemplate(jsonData, that.getElements.myAsset, that.getElements.listTemp);
+                        // todo 判断是待确认还是已完成,pageNo变化
+                        debugger
+                        jsonData.already = that.gV.current_index == 0 ? 1 : 0;
+                        ele = that.getElements.myAsset.find('ul').eq(that.gV.current_index);
+                        
+                        generateTemplate(jsonData, ele, that.getElements.listTemp);
                     } else {
                         //没有数据
                         
@@ -157,8 +155,12 @@ $(function() {
                     $('#tabBox').removeClass('fixed');
                 }
             })
-
-           
+            // tab栏
+            mui("body").on('tap', '#tabBox .tabTag', function(e) {
+                $(this).addClass('active').siblings().removeClass('active');
+                that.gV.current_index = Number($(this).attr('num'));
+                $('.myAsset_'+that.gV.current_index).show();
+            })
 
             // 头部文案提示(金钱展示隐藏)
             mui("body").on('tap', '.j_icon', function(e) {
@@ -183,6 +185,7 @@ $(function() {
                 $('.mask').hide();
                 $('.tipContainer').hide();
             })
+            
         }
     };
     data.init();

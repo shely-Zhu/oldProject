@@ -40,7 +40,7 @@
      background: @F7FAFD;
  
      // 其他资产
-     .banner {
+    .banner {
          position: relative;
          width: 100%;
          height: 4.3rem;
@@ -116,244 +116,268 @@
              }
  
          }
-     }
- 
-     // 遮罩层
-     .scroll_mask {
-         width: 100%;
-         height: 60rem;
-         background: @c005;
-         opacity: 0;
-         position: absolute;
-         top: 38%;
-         z-index: 3;
-     }
- 
- 
-     .nav_fixed {
-         position: static;
-         top: 0;
-         left: 0;
-         z-index: 4;
-         background: @c005;
-     }
- 
-     // 其他资产列表
-     .myAsset {
-        .datalist {
-            margin: 0.3rem auto 0;
-            color: @c002;
-            background: @c005;
-            padding: 0.4rem 0.3rem;
-            .proName{
-            
-                .proNameBefore{
-                    width: 0.06rem;
-                    height: 0.26rem;
-                    background:linear-gradient(180deg,rgba(252,192,158,1) 0%,rgba(213,141,101,1) 100%);
-                    border-radius:0.04rem;
-                    float: left;
-                    margin-top: 0.03rem;
-                    margin-right: 0.2rem;
-                }
-                .proNameCon{
-                    font-size: 0.28rem;
-                    line-height: 0.32rem;
-                    font-weight: 600;
-                    color: @272727;
-                    float: left;
-                    width: 90%;
-                }
-                .proNameAfter{
-                    width: 0.2rem;
-                    height: 0.2rem;
-                    background: url("/common/img/arrow.png");
-                    background-size: 100% 100%;
-                    margin-top: 0.03rem;
-                    float: right;
-                }
-                .iconfont {
-                    font-size: .25rem;
-                }
+    }
+
+    #tabBox {
+        color: @3c3c3c;
+        padding-top: 0;
+        height: 0.84rem;
+        background-color: @F7FAFD;
+        word-spacing: -5px;
+        width:100%;
+
+        span{
+            width:50%;
+            display: inline-block;
+            font-size: 0.32rem;
+            line-height: 0.84rem;
+            padding:0;
+            text-align: center;
+        }
+
+
+        span.active {
+            color: @272727;
+            position: relative;
+            border: none;
+            font-weight: 600;
+
+            &:after {
+                position: absolute;
+                height: 0.06rem;
+                bottom: 0rem;
+                left: 50%;
+                margin-left: -0.75rem;
+                content: '';
+                width: 1.5rem;
+                background: @D58D65;
+                border-radius: 1rem;
             }
-            .fundCon{
-                margin-left: 0.1rem;
-                margin-top: 0.4rem;
-                p{
-                    font-size: 0.24rem;
-                    color: @9B9B9B;
-                    margin-bottom: 0.12rem;
-                }
-                .fundCenter{
-                    line-height: 0.4rem;
-                    .money{
-                        font-size: 0.32rem;
-                        color: @272727;
-                        margin-right: 0.4rem;
-                        float: left;
-                        min-width: 2rem;
-                    }
-                    .date{
-                        font-size: 0.26rem;
-                        color: @818181;
-                        float: left;
-                    }
-                    .tip{
-                        width: 1.4rem;
-                        height: 0.38rem;
-                        line-height: 0.38rem;
-                        border-radius: 0.04rem;
-                        font-size: 0.24rem;
-                        text-align: center;
-                        float: right;
-                    }
-                    .tip.all{
-                        background:linear-gradient(220deg,rgba(245,236,213,1) 0%,rgba(248,234,201,1) 100%);
-                        color: @C4925E;
-                    }
-                    .tip.part{
-                        background:rgba(227,232,241,1);
-                        color: @9B9B9B;
-                    }
-                }
+
+        }
+    }
+ 
+    
+     
+ 
+ 
+    .nav_fixed {
+        position: static;
+        top: 0;
+        left: 0;
+        z-index: 4;
+        background: @c005;
+    }
+ 
+    // 其他资产列表
+    .myAsset {
+    .datalist {
+        margin: 0.3rem auto 0;
+        color: @c002;
+        background: @c005;
+        padding: 0.4rem 0.3rem;
+        .proName{
+        
+            .proNameBefore{
+                width: 0.06rem;
+                height: 0.26rem;
+                background:linear-gradient(180deg,rgba(252,192,158,1) 0%,rgba(213,141,101,1) 100%);
+                border-radius:0.04rem;
+                float: left;
+                margin-top: 0.03rem;
+                margin-right: 0.2rem;
             }
-            .haveFundCon{
-                margin-top: 0.5rem;
-                margin-left: 0.2rem;
-                p{
-                    color: @9B9B9B;
-                    font-size: 0.24rem;
-                    margin-bottom: 0.15rem;
-                }
-                span{
+            .proNameCon{
+                font-size: 0.28rem;
+                line-height: 0.32rem;
+                font-weight: 600;
+                color: @272727;
+                float: left;
+                width: 90%;
+            }
+            .proNameAfter{
+                width: 0.2rem;
+                height: 0.2rem;
+                background: url("/common/img/arrow.png");
+                background-size: 100% 100%;
+                margin-top: 0.03rem;
+                float: right;
+            }
+            .iconfont {
+                font-size: .25rem;
+            }
+        }
+        .fundCon{
+            margin-left: 0.1rem;
+            margin-top: 0.4rem;
+            p{
+                font-size: 0.24rem;
+                color: @9B9B9B;
+                margin-bottom: 0.12rem;
+            }
+            .fundCenter{
+                line-height: 0.4rem;
+                .money{
+                    font-size: 0.32rem;
                     color: @272727;
-                    font-size: 0.26rem;
-                }
-                .total{
-                    width: 32%;
-                }
-                .interestRate{
-                    width: 20%;
-                }
-                .term{
-                    width: 20%;
+                    margin-right: 0.4rem;
+                    float: left;
+                    min-width: 2rem;
                 }
                 .date{
-                    width: 25%;
+                    font-size: 0.26rem;
+                    color: @818181;
+                    float: left;
+                }
+                .tip{
+                    width: 1.4rem;
+                    height: 0.38rem;
+                    line-height: 0.38rem;
+                    border-radius: 0.04rem;
+                    font-size: 0.24rem;
+                    text-align: center;
+                    float: right;
+                }
+                .tip.all{
+                    background:linear-gradient(220deg,rgba(245,236,213,1) 0%,rgba(248,234,201,1) 100%);
+                    color: @C4925E;
+                }
+                .tip.part{
+                    background:rgba(227,232,241,1);
+                    color: @9B9B9B;
                 }
             }
         }
- 
- 
- 
-     }
-     .mask{
-         width: 100%;
-         height: 100%;
-         position: fixed;
-         top: 0;
-         left: 0;
-         opacity: 0.6;
-         background: #000000;
-         z-index: 9;
-         display: none;
-     }
-     // 淡黄色背景弹框
-     .tipContainer{
-         width: 5.4rem;
-         height: 5.7rem;
-         background-image: linear-gradient(220deg, #F5ECD5 0%, #F0DFBA 100%);
-         border-radius: 0.14rem;
-         position: fixed;
-         top: 3.8rem;
-         left: 50%;
-         margin-left: -2.7rem;
-         display: none;
-         z-index: 10;
-         // 弹框标题
-         .titleText{
-             font-size: 0.32rem;
-             color: @272727;
-             letter-spacing: 0;
-             text-align: center;
-             line-height: 0.45rem;
-             font-weight: bold;
-             margin: 0.43rem 0.4rem 0.3rem;
-         }
-         // 弹框提示内容
-         .tipCon{
-             font-size: 0.26rem;
-             color: @272727;
-             text-align: left;
-             line-height: 0.45rem;
-             margin: 0 0.4rem 0.4rem;
-         }
-         //淡黄色背景只有一个按钮
-         .buttonOne{
-             height: 1rem;
-             background: #FDF3DD;
-             border-bottom-left-radius: 0.14rem;
-             border-bottom-right-radius: 0.14rem;
-             font-size: 0.34rem;
-             position: absolute;
-             bottom: 0;
-             width: 100%;
-             color: @272727;
-             text-align: center;
-             line-height: 1rem;
-         }
-         
-         
-     }
-     .contentWrapper {
-         height: 100%;
-     }
- 
-     // 向上按钮，返回顶部
-     .upTop {
-         position: fixed;
-         bottom: 2.3rem;
-         right: 0.3rem;
-         width: 0.7rem;
-         height: 0.7rem;
-         border-radius: 1.35rem;
-         background: rgba(51, 51, 51, 0.85);
- 
-         // background: @c002;
-         // opacity: 0.85;
-         span {
-             display: block;
-             text-align: center;
-             margin-top: 0.35rem;
-             font-size: 1.8rem;
-             color: @c005;
-         }
- 
-         &.chtwm-upTop {
-             bottom: 4.5rem;
-         }
-     }
- 
-     //iscroll上拉加载重置
-     #pullUp {
-         line-height: 2.8rem;
-         padding: 0;
- 
-         span {
-             display: inline-block;
-             vertical-align: middle;
-         }
-     }
- 
-     .openOrClose {
-         .bind {
-             margin-bottom: 2rem;
-         }
-     }
- 
-     /**
- *   无数据区域的样式
-  */
+        .haveFundCon{
+            margin-top: 0.5rem;
+            margin-left: 0.2rem;
+            p{
+                color: @9B9B9B;
+                font-size: 0.24rem;
+                margin-bottom: 0.15rem;
+            }
+            span{
+                color: @272727;
+                font-size: 0.26rem;
+            }
+            .total{
+                width: 32%;
+            }
+            .interestRate{
+                width: 20%;
+            }
+            .term{
+                width: 20%;
+            }
+            .date{
+                width: 25%;
+            }
+        }
+    }
+    }
+    .mask{
+        width: 100%;
+        height: 100%;
+        position: fixed;
+        top: 0;
+        left: 0;
+        opacity: 0.6;
+        background: #000000;
+        z-index: 9;
+        display: none;
+    }
+    // 淡黄色背景弹框
+    .tipContainer{
+        width: 5.4rem;
+        height: 5.7rem;
+        background-image: linear-gradient(220deg, #F5ECD5 0%, #F0DFBA 100%);
+        border-radius: 0.14rem;
+        position: fixed;
+        top: 3.8rem;
+        left: 50%;
+        margin-left: -2.7rem;
+        display: none;
+        z-index: 10;
+        // 弹框标题
+        .titleText{
+            font-size: 0.32rem;
+            color: @272727;
+            letter-spacing: 0;
+            text-align: center;
+            line-height: 0.45rem;
+            font-weight: bold;
+            margin: 0.43rem 0.4rem 0.3rem;
+        }
+        // 弹框提示内容
+        .tipCon{
+            font-size: 0.26rem;
+            color: @272727;
+            text-align: left;
+            line-height: 0.45rem;
+            margin: 0 0.4rem 0.4rem;
+        }
+        //淡黄色背景只有一个按钮
+        .buttonOne{
+            height: 1rem;
+            background: #FDF3DD;
+            border-bottom-left-radius: 0.14rem;
+            border-bottom-right-radius: 0.14rem;
+            font-size: 0.34rem;
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+            color: @272727;
+            text-align: center;
+            line-height: 1rem;
+        }
+        
+        
+    }
+    .contentWrapper {
+        height: 100%;
+    }
+
+    // 向上按钮，返回顶部
+    .upTop {
+        position: fixed;
+        bottom: 2.3rem;
+        right: 0.3rem;
+        width: 0.7rem;
+        height: 0.7rem;
+        border-radius: 1.35rem;
+        background: rgba(51, 51, 51, 0.85);
+
+        // background: @c002;
+        // opacity: 0.85;
+        span {
+            display: block;
+            text-align: center;
+            margin-top: 0.35rem;
+            font-size: 1.8rem;
+            color: @c005;
+        }
+
+        &.chtwm-upTop {
+            bottom: 4.5rem;
+        }
+    }
+
+    //iscroll上拉加载重置
+    #pullUp {
+        line-height: 2.8rem;
+        padding: 0;
+
+        span {
+            display: inline-block;
+            vertical-align: middle;
+        }
+    }
+
+    .openOrClose {
+        .bind {
+            margin-bottom: 2rem;
+        }
+    }
  }
  .HeadBarConfigBox{
      z-index: 8;
@@ -432,7 +456,4 @@
     position: fixed;
     left: 0px;
     top: 1.28rem;
-}
-#tabBox {
-    background: red;
 }

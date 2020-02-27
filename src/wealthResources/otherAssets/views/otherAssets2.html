@@ -35,13 +35,14 @@
             </ul>
         </div>
         <div id="tabBox">
-            <span>
-                    持有资产
-            </span>
-            <span>待确认资产</span>
+            <span class="tabTag active" num="0">持有资产</span>
+            <span class="tabTag" num="1">待确认资产</span>
         </div>
         <div class="myAsset">
-            <!-- 列表数据 -->
+            <!-- 持有资产 -->
+            <ul></ul>
+            <!-- 待确认 -->
+            <ul></ul>
         </div>
         <div id="loadBox" style="background:#333; height: 30px; display: none;"></div>
         <div class="mask"></div>
@@ -55,9 +56,9 @@
         @@include('@pathNewCommonViews/noDataImg.html',{"tipText":"暂无数据"})
     </section>
     <script id="second-template" type="text/x-handlebars-template">
-        {{! 左侧页面列表}} 
         {{#if already}} 
         {{#each pageList}}
+        {{! 已完成}} 
         <div class="datalist" fundCode="{{fundCode}}">
             <div class="proName clearfix">
                 <span class="proNameBefore"></span>
@@ -84,9 +85,10 @@
                 </div>
             </div>
         </div>
-        {{/each}} {{/if}} 
-        {{#if tobe}} 
+        {{/each}}
+        {{else}} 
         {{#each pageList}}
+        {{! 待确认}} 
         <div class="datalist" fundCode="{{fundCode}}">
             <div class="proName clearfix">
                 <span class="proNameBefore"></span>
@@ -112,8 +114,8 @@
                 </div>
             </div>
         </div>
-
-        {{/each}} {{/if}}
+       {{/each}} 
+       {{/if}}
     </script>
     @@include('@pathNewInclude/views/footer.html') 
     <script src="/wealthResources/otherAssets/static/js/otherAssets2.js"></script>
