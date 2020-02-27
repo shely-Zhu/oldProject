@@ -21,7 +21,7 @@ var mymessage = Mock.mock({
             "transAmount": "16.25", // 到账金额
             "transAmountMask": "16.25", // 到账金额 千分位
             "transAmountMask": "16.25", // 到账金额 千分位
-            "accountStatus": "45.000.00", // 到账状态
+            "accountStatus": "true", // 到账状态
             "transDate": "45.000.00", // 到账时间
             "transDate": "45.000.00", // 到账时间
             "transDateStr": "20.75" // 到账时间 yyyy-MM-dd格式

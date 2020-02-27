@@ -77,11 +77,9 @@ $(function() {
             var scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
             var clientHeight = document.documentElement.clientHeight;
             var allHeight = document.body.scrollHeight;
-            console.log(scrollTop, clientHeight, allHeight); 
+            // console.log(scrollTop, clientHeight, allHeight); 
             if ((scrollTop + clientHeight > allHeight - 10) && that.gV.isGetData[that.gV.tabIndex]) { // 
-                console.log(111, that.gV.stateIcon[that.gV.tabIndex]);
                 if( !that.gV.stateIcon[that.gV.tabIndex]) {
-                    console.log(11)
                     that.gV.stateIcon[that.gV.tabIndex] = true;
                     // 上拉显示加载中样式
                     that.dealLoading(2)
@@ -102,6 +100,7 @@ $(function() {
                     var jsonData = json.data,
                         pageList = jsonData.pageList,
                         ele = '';
+                        
                     that.dealLoading(0)
 
                     if (!$.util.objIsEmpty(pageList)) { // 数据不为空
