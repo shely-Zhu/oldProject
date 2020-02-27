@@ -39,14 +39,13 @@ $(function() {
         gV: { //一些设置
             current_index: 0, //tab切换，请求接口设置
             firstTime:true, // 第一次切换
+            isGetData:true,
             ajaxArr: [{
                 pageNo: 1,
                 pageSize: 10,
-
             },{
                 pageNo: 1,
                 pageSize: 10,
-
             }], //存放每一个ajax请求的传参数据
             // 存放ajax请求地址  已持仓  待确认
             siteUrlArr: [site_url.queryAssetsDetailByPages_api, site_url.getJJSInTransitAssets_api],
@@ -79,7 +78,7 @@ $(function() {
             var clientHeight = document.documentElement.clientHeight;
             var allHeight = document.body.scrollHeight;
             console.log(scrollTop, clientHeight, allHeight); 
-            if (scrollTop + clientHeight > allHeight - 10) {
+            if ((scrollTop + clientHeight > allHeight - 10) ) { // 
                 console.log(111, that.gV.stateIcon);
                 if( !that.gV.stateIcon) {
                     console.log(11)
@@ -87,7 +86,7 @@ $(function() {
                     // 上拉显示加载中样式
                     that.dealLoading(2)
                     that.getListData();
-
+                    that.gV.ajaxArr[that.gV.current_index].pageNo++;
                 }
             }
         },
@@ -122,6 +121,12 @@ $(function() {
                         generateTemplate(jsonData, ele, that.getElements.listTemp);
 
                         that.gV.ajaxArr[that.gV.current_index].pageNo++;
+                        // 返回数据小于请求条数，则提示用户没有更多了，否则提示用户上拉加载数据
+                        if(pageList.length < that.gV.ajaxArr[that.gV.current_index].pageSize) {
+                            that.dealLoading(3)
+                        } else {
+                            that.dealLoading(1)
+                        }
                     } else {
                         // 当第一页数据为空时，则显示暂无数据，否则提示用户没有更多了
                         if(that.gV.ajaxArr[that.gV.current_index].pageNo == 1) {
@@ -205,11 +210,17 @@ $(function() {
             // tab栏
             mui("body").on('tap', '#tabBox .tabTag', function(e) {
                 $(this).addClass('active').siblings().removeClass('active');
+                debugger;
+
+                that.gV.isGetData = false;
 
                 // 切换时滑动到顶部
                 var location = document.getElementById('tabBox').getBoundingClientRect().top;
-                console.log('-----',location)
-                $(window).scrollTop(location)
+                // console.log('-----',location)
+                $(window).scrollTop(0);
+                // $('body').css('transform', 'translate3d(0px, 0px, 0px) translateZ(0px)');
+
+                that.gV.isGetData = true;
 
                 // 显示隐藏
                 that.gV.current_index = Number($(this).attr('num'));
@@ -217,6 +228,7 @@ $(function() {
 
                 if(that.gV.firstTime){
                     that.getListData();
+                    that.gV.ajaxArr[that.gV.current_index].pageNo++;
                     that.gV.firstTime = false;
                 }
             })
