@@ -152,14 +152,14 @@ $(function() {
                 that.gV.navHeight = that.gV.listToTop - that.gV.navToTop;
                 that.height = windowHeight - that.gV.listToTop;
 
-                that.htmlHeight = $('html').height() - $('.nav-wrapper').height();
+                that.htmlHeight = windowHeight - $('.nav-wrapper').height();
 
 
                 console.log('距顶部距离：' + that.gV.listToTop);
 
                 //that.highHeight = windowHeight-that.gV.navHeight;
 
-                that.highHeight = $('html').height() - that.gV.listToTop;
+                that.highHeight = windowHeight - that.gV.listToTop;
             }
 
             // if (!$('.list').hasClass('setHeight')) {
