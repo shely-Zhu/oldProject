@@ -1,0 +1,122 @@
+<!-- 
+@page 其他资产
+@author peicongcong 2019-11-15 
+-->
+<!doctype html>
+<html lang="en">
+
+<head>
+    @@include('@pathNewInclude/views/meta.html')
+    <link rel="stylesheet" href="/wealthResources/otherAssets/static/css/otherAssets2.css">
+    <title>其他资产</title>
+</head>
+
+<body>
+
+    @@include('@pathNewCommonCom/loading/listLoading.html')
+    @@include('@pathNewCommonViews/headBarConfig.html',{"pathName":"其他资产","bgColors":"#3E3C3C,#3E3C3C","showType":"1"})
+    <!-- @@include('@pathNewCommonViews/load.html') -->
+    <section class="container">
+        <div class="banner">
+            <div class="bannerTop clearfix">
+                <div class="sum fl"><span class="j_text">其他总资产(元)</span><span class="j_icon"></span></div>
+                <div class="assetsBtn fr">资产组成说明</div>
+            </div>
+            <div class="totalM">--</div>
+            <ul class="mui-row jjs_type">
+                <li class="mui-col-sm-6 mui-col-xs-6 j_left">
+                    <span>持有金额(元)</span>
+                    <span class="j_already">--</span>
+                </li>
+                <li class="mui-col-sm-6 mui-col-xs-6">
+                    <span>待确认金额(元)</span>
+                    <span class="j_tobe">--</span>
+                </li>
+            </ul>
+        </div>
+        <div id="tabBox">
+            <span>
+                    持有资产
+            </span>
+            <span>待确认资产</span>
+        </div>
+        <div class="myAsset">
+            <!-- 列表数据 -->
+        </div>
+        <div id="loadBox" style="background:#333; height: 30px; display: none;"></div>
+        <div class="mask"></div>
+        <div class="tipContainer">
+            <h2 class="titleText">其他资产组成说明</h2>
+            <p class="tipCon">其他总资产是指已成立确认的资产加上您的待确认资产。</p>
+            <p class="tipCon">待确认资产是指您的在途资产，产品成立后将归入已确认资产。</p>
+            <div class="buttonOne">我明白了</div>
+        </div>
+        <!-- 暂无数据 -->
+        @@include('@pathNewCommonViews/noDataImg.html',{"tipText":"暂无数据"})
+    </section>
+    <script id="second-template" type="text/x-handlebars-template">
+        {{! 左侧页面列表}} 
+        {{#if already}} 
+        {{#each pageList}}
+        <div class="datalist" fundCode="{{fundCode}}">
+            <div class="proName clearfix">
+                <span class="proNameBefore"></span>
+                <span class="proNameCon fl">{{projectName}}</span>
+                <span class="iconfont fr">&#xe636;</span>
+                <!-- <span class="proNameAfter"></span> -->
+            </div>
+            <div class="haveFundCon clearfix">
+                <div class="total fl">
+                    <p>总资产(元)</p>
+                    <span>{{balanceStr}}</span>
+                </div>
+                <div class="interestRate fl">
+                    <p>票面利率</p>
+                    <span>{{profit}}%</span>
+                </div>
+                <div class="term fl">
+                    <p>产品期限</p>
+                    <span>{{deadLine}}</span>
+                </div>
+                <div class="date fl">
+                    <p>成立日期</p>
+                    <span>{{establishDateStr}}</span>
+                </div>
+            </div>
+        </div>
+        {{/each}} {{/if}} 
+        {{#if tobe}} 
+        {{#each pageList}}
+        <div class="datalist" fundCode="{{fundCode}}">
+            <div class="proName clearfix">
+                <span class="proNameBefore"></span>
+                <p class="proNameCon">{{projectName}}</p>
+                <span class="iconfont fr">&#xe636;</span>
+                <!-- <span class="proNameAfter"></span> -->
+            </div>
+            <div class="fundCon clearfix">
+                <p>到账金额(元)</p>
+                <div class="fundCenter clearfix">
+                    <span class="money">{{transAmountMask}}</span>
+                    <span class="date">{{transDateStr}}</span>
+                </div>
+            </div>
+            <div class="fundCon">
+                <p>预约金额(元)</p>
+                <div class="fundCenter clearfix">
+                    <span class="money">{{besAmountMask}}</span>
+                    <span class="date">{{besTimeStr}}</span> {{#if accountStatus34}}
+                    <span class="tip all">{{accountStatusStr}}</span> {{else}}
+                    <span class="tip part">{{accountStatusStr}}</span> {{/if}}
+
+                </div>
+            </div>
+        </div>
+
+        {{/each}} {{/if}}
+    </script>
+    @@include('@pathNewInclude/views/footer.html') 
+    <script src="/wealthResources/otherAssets/static/js/otherAssets2.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,438 @@
+/*
+ * @page: 其他资产
+ * @Author: peicongcong
+ * @Date:   2019-11-15songxiaoyu
+ * @description:
+ */
+
+ @import url("@pathNewInclude/css/mui.min.css");
+ @import url("@pathNewCommonLess/mui/resetMUI.less");
+ @import url("@pathNewCommonLess/color.less");
+ @import url("@pathNewCommonLess/reset.less");
+ 
+ @import url("@pathNewCommonLess/chtwm.less");
+ @import url("@pathNewCommonLess/app.less");
+ @import url("@pathNewCommonLessCom/againEnter.less");
+ @import url("@pathNewCommonLessCom/alertBox.less");
+ @import url("@pathNewCommonLessCom/tabScroll.less");
+ 
+ //回到顶部的样式
+ @import url("@pathNewCommonLessCom/goTopMui.less");
+ @import url("@pathNewCommonLess/components/elasticLayerTypeFive.less");
+ @import url("@pathNewCommonLessCom/noDataImg.less");
+ @import url("@pathNewCommonLessCom/headBarConfig.less");
+ 
+ html {
+     height: 100%;
+ }
+ .fl{
+     float: left;
+ }
+ .fr{
+     float: right;
+ }
+ body,.mui-content{
+     background: @F7FAFD !important;
+ }
+ .container {
+     height: 100%;
+     width: 100%;
+     background: @F7FAFD;
+ 
+     // 其他资产
+     .banner {
+         position: relative;
+         width: 100%;
+         height: 4.3rem;
+         background: url("/wealthResources/otherAssets/static/img/banner.png");
+         background-size: 100% 100%;
+ 
+         .bannerTop {
+             color: @F7DDCF;
+             margin: 0 0.3rem;
+             padding-top: 1.54rem;
+             .sum {
+                 
+                 font-size: 0.26rem;
+                 .j_icon {
+                     width: 0.36rem;
+                     height: 0.36rem;
+                     margin-left: 0.2rem;
+                     background: url("/common/img/eyesee.png");
+                     background-size: 100% 100%;
+                     display: inline-block;
+                     vertical-align: middle;
+                 }
+                 .j_icon.eyecose{
+                     background: url("/common/img/eyeclose.png");
+                     background-size: 100% 100%;
+                 }
+                 
+             }
+             .assetsBtn{
+                 width: 1.5rem;
+                 height: 0.4rem;
+                 background: rgba(255, 255, 255, 0.1);
+                 border-radius: 0.25rem;
+                 font-size: 0.2rem;
+                 text-align: center;
+                 color: @c005;
+                 opacity: 0.8;
+                 line-height: 0.4rem;
+             }
+             
+         }
+         //金额
+         .totalM{
+             font-size: 0.68rem;
+             line-height: 0.8rem;
+             margin: 0.1rem 0.3rem 0.22rem;
+             font-weight:bold;
+             color:rgba(153,81,0,1);
+             background:linear-gradient(360deg, rgba(186,140,112,1) 0%, rgba(244,210,192,1) 100%);
+             -webkit-background-clip:text;
+             -webkit-text-fill-color:transparent;
+         }
+         // 已持仓
+         .jjs_type {
+             margin: 0 0.3rem;
+             li {
+                 span {
+                     display: block;
+                     color: @c005;
+                     opacity: 0.7;
+                     font-size: 0.26rem;
+                     &:first-child {
+                         padding-bottom: 0.1rem;
+                     }
+                 }
+             }
+ 
+             .j_already,
+             .j_tobe {
+                 font-size: 0.38rem;
+                 opacity: 1;
+                 color: @c005;
+             }
+ 
+         }
+     }
+ 
+     // 遮罩层
+     .scroll_mask {
+         width: 100%;
+         height: 60rem;
+         background: @c005;
+         opacity: 0;
+         position: absolute;
+         top: 38%;
+         z-index: 3;
+     }
+ 
+ 
+     .nav_fixed {
+         position: static;
+         top: 0;
+         left: 0;
+         z-index: 4;
+         background: @c005;
+     }
+ 
+     // 其他资产列表
+     .myAsset {
+        .datalist {
+            margin: 0.3rem auto 0;
+            color: @c002;
+            background: @c005;
+            padding: 0.4rem 0.3rem;
+            .proName{
+            
+                .proNameBefore{
+                    width: 0.06rem;
+                    height: 0.26rem;
+                    background:linear-gradient(180deg,rgba(252,192,158,1) 0%,rgba(213,141,101,1) 100%);
+                    border-radius:0.04rem;
+                    float: left;
+                    margin-top: 0.03rem;
+                    margin-right: 0.2rem;
+                }
+                .proNameCon{
+                    font-size: 0.28rem;
+                    line-height: 0.32rem;
+                    font-weight: 600;
+                    color: @272727;
+                    float: left;
+                    width: 90%;
+                }
+                .proNameAfter{
+                    width: 0.2rem;
+                    height: 0.2rem;
+                    background: url("/common/img/arrow.png");
+                    background-size: 100% 100%;
+                    margin-top: 0.03rem;
+                    float: right;
+                }
+                .iconfont {
+                    font-size: .25rem;
+                }
+            }
+            .fundCon{
+                margin-left: 0.1rem;
+                margin-top: 0.4rem;
+                p{
+                    font-size: 0.24rem;
+                    color: @9B9B9B;
+                    margin-bottom: 0.12rem;
+                }
+                .fundCenter{
+                    line-height: 0.4rem;
+                    .money{
+                        font-size: 0.32rem;
+                        color: @272727;
+                        margin-right: 0.4rem;
+                        float: left;
+                        min-width: 2rem;
+                    }
+                    .date{
+                        font-size: 0.26rem;
+                        color: @818181;
+                        float: left;
+                    }
+                    .tip{
+                        width: 1.4rem;
+                        height: 0.38rem;
+                        line-height: 0.38rem;
+                        border-radius: 0.04rem;
+                        font-size: 0.24rem;
+                        text-align: center;
+                        float: right;
+                    }
+                    .tip.all{
+                        background:linear-gradient(220deg,rgba(245,236,213,1) 0%,rgba(248,234,201,1) 100%);
+                        color: @C4925E;
+                    }
+                    .tip.part{
+                        background:rgba(227,232,241,1);
+                        color: @9B9B9B;
+                    }
+                }
+            }
+            .haveFundCon{
+                margin-top: 0.5rem;
+                margin-left: 0.2rem;
+                p{
+                    color: @9B9B9B;
+                    font-size: 0.24rem;
+                    margin-bottom: 0.15rem;
+                }
+                span{
+                    color: @272727;
+                    font-size: 0.26rem;
+                }
+                .total{
+                    width: 32%;
+                }
+                .interestRate{
+                    width: 20%;
+                }
+                .term{
+                    width: 20%;
+                }
+                .date{
+                    width: 25%;
+                }
+            }
+        }
+ 
+ 
+ 
+     }
+     .mask{
+         width: 100%;
+         height: 100%;
+         position: fixed;
+         top: 0;
+         left: 0;
+         opacity: 0.6;
+         background: #000000;
+         z-index: 9;
+         display: none;
+     }
+     // 淡黄色背景弹框
+     .tipContainer{
+         width: 5.4rem;
+         height: 5.7rem;
+         background-image: linear-gradient(220deg, #F5ECD5 0%, #F0DFBA 100%);
+         border-radius: 0.14rem;
+         position: fixed;
+         top: 3.8rem;
+         left: 50%;
+         margin-left: -2.7rem;
+         display: none;
+         z-index: 10;
+         // 弹框标题
+         .titleText{
+             font-size: 0.32rem;
+             color: @272727;
+             letter-spacing: 0;
+             text-align: center;
+             line-height: 0.45rem;
+             font-weight: bold;
+             margin: 0.43rem 0.4rem 0.3rem;
+         }
+         // 弹框提示内容
+         .tipCon{
+             font-size: 0.26rem;
+             color: @272727;
+             text-align: left;
+             line-height: 0.45rem;
+             margin: 0 0.4rem 0.4rem;
+         }
+         //淡黄色背景只有一个按钮
+         .buttonOne{
+             height: 1rem;
+             background: #FDF3DD;
+             border-bottom-left-radius: 0.14rem;
+             border-bottom-right-radius: 0.14rem;
+             font-size: 0.34rem;
+             position: absolute;
+             bottom: 0;
+             width: 100%;
+             color: @272727;
+             text-align: center;
+             line-height: 1rem;
+         }
+         
+         
+     }
+     .contentWrapper {
+         height: 100%;
+     }
+ 
+     // 向上按钮，返回顶部
+     .upTop {
+         position: fixed;
+         bottom: 2.3rem;
+         right: 0.3rem;
+         width: 0.7rem;
+         height: 0.7rem;
+         border-radius: 1.35rem;
+         background: rgba(51, 51, 51, 0.85);
+ 
+         // background: @c002;
+         // opacity: 0.85;
+         span {
+             display: block;
+             text-align: center;
+             margin-top: 0.35rem;
+             font-size: 1.8rem;
+             color: @c005;
+         }
+ 
+         &.chtwm-upTop {
+             bottom: 4.5rem;
+         }
+     }
+ 
+     //iscroll上拉加载重置
+     #pullUp {
+         line-height: 2.8rem;
+         padding: 0;
+ 
+         span {
+             display: inline-block;
+             vertical-align: middle;
+         }
+     }
+ 
+     .openOrClose {
+         .bind {
+             margin-bottom: 2rem;
+         }
+     }
+ 
+     /**
+ *   无数据区域的样式
+  */
+ }
+ .HeadBarConfigBox{
+     z-index: 8;
+ }
+ .fixedHead{
+     position: fixed;
+     top: 0;
+     left: 0;
+     width: 100%;
+     height: 0.88rem;
+     display: none;
+ }
+ .mask{
+     width: 100%;
+     height: 100%;
+     position: fixed;
+     top: 0;
+     left: 0;
+     opacity: 0.6;
+     background: #000000;
+     z-index: 9;
+     display: none;
+ }
+ // 淡黄色背景弹框
+ .tipContainer{
+     width: 5.4rem;
+     height: 5.7rem;
+     background-image: linear-gradient(220deg, #F5ECD5 0%, #F0DFBA 100%);
+     border-radius: 0.14rem;
+     position: fixed;
+     top: 3.8rem;
+     left: 50%;
+     margin-left: -2.7rem;
+     display: none;
+     z-index: 10;
+     // 弹框标题
+     .titleText{
+         font-size: 0.32rem;
+         color: @272727;
+         letter-spacing: 0;
+         text-align: center;
+         line-height: 0.45rem;
+         font-weight: bold;
+         margin: 0.43rem 0.4rem 0.3rem;
+     }
+     // 弹框提示内容
+     .tipCon{
+         font-size: 0.26rem;
+         color: @272727;
+         text-align: left;
+         line-height: 0.45rem;
+         margin: 0 0.4rem 0.4rem;
+     }
+     //淡黄色背景只有一个按钮
+     .buttonOne{
+         height: 1rem;
+         background: #FDF3DD;
+         border-bottom-left-radius: 0.14rem;
+         border-bottom-right-radius: 0.14rem;
+         font-size: 0.34rem;
+         position: absolute;
+         bottom: 0;
+         width: 100%;
+         color: @272727;
+         text-align: center;
+         line-height: 1rem;
+     }
+     
+     .without{
+         padding-top: 2rem !important;
+     }
+     
+     
+ }
+ .fixed {
+    position: fixed;
+    left: 0px;
+    top: 1.28rem;
+}
+#tabBox {
+    background: red;
+}

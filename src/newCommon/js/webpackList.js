@@ -273,6 +273,7 @@ module.exports = {
     './account/static/js/informationDisclosure': "./src/account/static/js/informationDisclosure.js",
     //其他资产
     './wealthResources/otherAssets/static/js/otherAssets': './src/wealthResources/otherAssets/static/js/otherAssets.js',
+    './wealthResources/otherAssets/static/js/otherAssets2': './src/wealthResources/otherAssets/static/js/otherAssets2.js',
     //待确认交易
     './account/static/js/private/tobeConfirmTransaction': './src/account/static/js/private/tobeConfirmTransaction.js',
     //收益分配明细
