@@ -128,10 +128,10 @@ $(function() {
                         }
                     } else {
                         // 当第一页数据为空时，则显示暂无数据，否则提示用户没有更多了
-                        if(that.gV.ajaxArr[that.gV.tabIndex].pageNo == 1) {
-                            ele = that.getElements.myAsset.find('ul').eq(that.gV.tabIndex).find(".ulCon");
-                            ele.html($(".noData").clone(false)).addClass('noCon');
-                            ele.find(".noData").show()
+                        if(that.gV.ajaxArr[that.gV.current_index].pageNo == 1) {
+                            ele = that.getElements.myAsset.find('ul').eq(that.gV.current_index);
+                            ele.html($(".noData").clone(false));
+                            ele.find(".noData").eq(0).show()
                         } else {
                             that.dealLoading(3)
                         }
@@ -143,11 +143,10 @@ $(function() {
                 },
                 callbackNoData: function(json) {
                     // 当第一页数据为空时，则显示暂无数据，否则提示用户没有更多了
-                    if(that.gV.ajaxArr[that.gV.tabIndex].pageNo == 1) {
-                        debugger
-                        var ele = that.getElements.myAsset.find('ul').eq(that.gV.tabIndex);
-                        ele.html($(".noData").clone(false)).addClass('noCon');
-                        ele.find(".noData").show()
+                    if(that.gV.ajaxArr[that.gV.current_index].pageNo == 1) {
+                        var ele = that.getElements.myAsset.find('ul').eq(that.gV.current_index);
+                        ele.html($(".noData").clone(false));
+                        ele.find(".noData").eq(0).show()
                     } else {
                         that.dealLoading(3)
                     }

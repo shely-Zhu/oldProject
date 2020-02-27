@@ -12,7 +12,7 @@ var mymessage = Mock.mock({
     data: {
         "totalInTransitAsset": '200000', // 在途资产汇总
         "totalInTransitAssetMask": '200,00', // 在途资产汇总 千分位
-        "pageList|3": [{
+        "pageList|1": [{
             "projectName": "（DZ银杏40号）恒天财富隐裕26号私募投资基金（第三十六次开放）", // 项目名称
             "besTime": "50.55", // 预约时间
             "besTimeStr": "-----", // 预约时间 yyyy-MM-dd格式
