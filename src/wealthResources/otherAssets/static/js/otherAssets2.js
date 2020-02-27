@@ -37,9 +37,10 @@ $(function() {
             listTemp: $('#second-template'), // 列表
         },
         gV: { //一些设置
-            current_index: 0, //tab切换，请求接口设置
+            tabIndex: 0, //tab切换，请求接口设置
             firstTime:true, // 第一次切换
-            isGetData:true,
+            isGetData:[true,true],// 是否可以请求接口，只有上拉显示更多才可以请求接口
+            stateIcon: [false,false], // 上拉加载
             ajaxArr: [{
                 pageNo: 1,
                 pageSize: 10,
@@ -58,7 +59,6 @@ $(function() {
             jjsTotalAssetMask: null,
             jjsHoldAssetMask: null,
             jjsInTransitAssetMask: null,
-            stateIcon: false,
         },
         html: '', //存放生成的html
         init: function() { //初始化函数
@@ -78,15 +78,14 @@ $(function() {
             var clientHeight = document.documentElement.clientHeight;
             var allHeight = document.body.scrollHeight;
             console.log(scrollTop, clientHeight, allHeight); 
-            if ((scrollTop + clientHeight > allHeight - 10) ) { // 
-                console.log(111, that.gV.stateIcon);
-                if( !that.gV.stateIcon) {
+            if ((scrollTop + clientHeight > allHeight - 10) && that.gV.isGetData[that.gV.tabIndex]) { // 
+                console.log(111, that.gV.stateIcon[that.gV.tabIndex]);
+                if( !that.gV.stateIcon[that.gV.tabIndex]) {
                     console.log(11)
-                    that.gV.stateIcon = true;
+                    that.gV.stateIcon[that.gV.tabIndex] = true;
                     // 上拉显示加载中样式
                     that.dealLoading(2)
                     that.getListData();
-                    that.gV.ajaxArr[that.gV.current_index].pageNo++;
                 }
             }
         },
@@ -95,8 +94,8 @@ $(function() {
 
             //获取产品列表
             var obj = [{
-                url: that.gV.siteUrlArr[that.gV.current_index],
-                data: that.gV.ajaxArr[that.gV.current_index],
+                url: that.gV.siteUrlArr[that.gV.tabIndex],
+                data: that.gV.ajaxArr[that.gV.tabIndex],
                 needLogin: true,
                 needLoading: false,
                 callbackDone: function(json) {
@@ -107,30 +106,30 @@ $(function() {
 
                     if (!$.util.objIsEmpty(pageList)) { // 数据不为空
                         // 返回数据小于请求条数，则提示用户没有更多了，否则提示用户上拉加载数据
-                        if(pageList.length < that.gV.ajaxArr[that.gV.current_index].pageSize) {
+                        if(pageList.length < that.gV.ajaxArr[that.gV.tabIndex].pageSize) {
                             that.dealLoading(3)
-                            that.gV.stateIcon = true;
+                            that.gV.stateIcon[that.gV.tabIndex] = true;
                         } else {
                             that.dealLoading(1)
-                            that.gV.stateIcon = false;
+                            that.gV.stateIcon[that.gV.tabIndex] = false;
                         }
                         // todo 判断是待确认还是已完成,pageNo变化
-                        jsonData.already = that.gV.current_index == 0 ? 1 : 0;
-                        ele = that.getElements.myAsset.find('ul').eq(that.gV.current_index).find(".ulCon");
+                        jsonData.already = that.gV.tabIndex == 0 ? 1 : 0;
+                        ele = that.getElements.myAsset.find('ul').eq(that.gV.tabIndex).find(".ulCon");
                         
                         generateTemplate(jsonData, ele, that.getElements.listTemp);
 
-                        that.gV.ajaxArr[that.gV.current_index].pageNo++;
+                        that.gV.ajaxArr[that.gV.tabIndex].pageNo++;
                         // 返回数据小于请求条数，则提示用户没有更多了，否则提示用户上拉加载数据
-                        if(pageList.length < that.gV.ajaxArr[that.gV.current_index].pageSize) {
+                        if(pageList.length < that.gV.ajaxArr[that.gV.tabIndex].pageSize) {
                             that.dealLoading(3)
                         } else {
                             that.dealLoading(1)
                         }
                     } else {
                         // 当第一页数据为空时，则显示暂无数据，否则提示用户没有更多了
-                        if(that.gV.ajaxArr[that.gV.current_index].pageNo == 1) {
-                            ele = that.getElements.myAsset.find('ul').eq(that.gV.current_index).find(".ulCon");
+                        if(that.gV.ajaxArr[that.gV.tabIndex].pageNo == 1) {
+                            ele = that.getElements.myAsset.find('ul').eq(that.gV.tabIndex).find(".ulCon");
                             ele.html($(".noData").clone(false)).addClass('noCon');
                             ele.find(".noData").show()
                         } else {
@@ -144,9 +143,9 @@ $(function() {
                 },
                 callbackNoData: function(json) {
                     // 当第一页数据为空时，则显示暂无数据，否则提示用户没有更多了
-                    if(that.gV.ajaxArr[that.gV.current_index].pageNo == 1) {
+                    if(that.gV.ajaxArr[that.gV.tabIndex].pageNo == 1) {
                         debugger
-                        var ele = that.getElements.myAsset.find('ul').eq(that.gV.current_index);
+                        var ele = that.getElements.myAsset.find('ul').eq(that.gV.tabIndex);
                         ele.html($(".noData").clone(false)).addClass('noCon');
                         ele.find(".noData").show()
                     } else {
@@ -174,24 +173,28 @@ $(function() {
             $.ajaxLoading(obj);
         },
         dealLoading: function(type) { // type 0 隐藏提示语 1 上拉显示更多 2 拼命加载中 3 没有更多了
-            var that = this
-            var ele = that.getElements.myAsset.find('ul').eq(that.gV.current_index)
+            var that = this;
+            var ele = that.getElements.myAsset.find('ul').eq(that.gV.tabIndex);
             if(type == 0) {
                 ele.find(".mui-pull-bottom-pocket").removeClass("mui-visibility") 
                 ele.find(".mui-pull-loading").addClass("mui-hidden")
                 ele.find(".mui-pull-caption").html("上拉显示更多")
+                that.gV.isGetData[that.gV.tabIndex] = false;
             } else if (type == 1) {
                 ele.find(".mui-pull-bottom-pocket").addClass("mui-visibility")
                 ele.find(".mui-pull-loading").removeClass("mui-hidden").addClass("mui-visibility")
                 ele.find(".mui-pull-caption").html("上拉显示更多")
+                that.gV.isGetData[that.gV.tabIndex] = true; // 只用这种状态可以请求接口
             } else if (type == 2) {
                 ele.find(".mui-pull-bottom-pocket").addClass("mui-visibility")
                 ele.find(".mui-pull-loading").removeClass("mui-hidden").addClass("mui-visibility")
                 ele.find(".mui-pull-caption").html("拼命加载中")
+                that.gV.isGetData[that.gV.tabIndex] = false;
             } else if (type == 3) {
                 ele.find(".mui-pull-bottom-pocket").addClass("mui-visibility")
                 ele.find(".mui-pull-loading").addClass("mui-hidden")
                 ele.find(".mui-pull-caption").html("没有更多了")
+                that.gV.isGetData[that.gV.tabIndex] = false;
             }
         },
         events: function() { //绑定事件
@@ -210,25 +213,17 @@ $(function() {
             // tab栏
             mui("body").on('tap', '#tabBox .tabTag', function(e) {
                 $(this).addClass('active').siblings().removeClass('active');
-                debugger;
-
-                that.gV.isGetData = false;
 
                 // 切换时滑动到顶部
-                var location = document.getElementById('tabBox').getBoundingClientRect().top;
-                // console.log('-----',location)
                 $(window).scrollTop(0);
-                // $('body').css('transform', 'translate3d(0px, 0px, 0px) translateZ(0px)');
-
-                that.gV.isGetData = true;
 
                 // 显示隐藏
-                that.gV.current_index = Number($(this).attr('num'));
-                that.getElements.myAsset.find('ul').eq(that.gV.current_index).show().siblings().hide();
+                that.gV.tabIndex = Number($(this).attr('num'));
+                that.getElements.myAsset.find('ul').eq(that.gV.tabIndex).show().siblings().hide();
 
                 if(that.gV.firstTime){
+                    that.dealLoading(2)
                     that.getListData();
-                    that.gV.ajaxArr[that.gV.current_index].pageNo++;
                     that.gV.firstTime = false;
                 }
             })
