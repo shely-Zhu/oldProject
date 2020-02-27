@@ -31,10 +31,10 @@ var mymessage = Mock.mock({
                 //     "profit":9.9,
                 //     "projectName":"华泰融创晟融3号定向投资工具（中植新能源）（三次开放）"
                 // }
-            ]
-            // "pageList":[]
+        ]
+            
     },
     "message": "操作成功！",
-    "status": "0000"
+    "status": "1000"
 });
 module.exports = mymessage;

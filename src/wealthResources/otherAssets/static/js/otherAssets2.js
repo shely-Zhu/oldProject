@@ -81,7 +81,8 @@ $(function() {
             console.log(scrollTop, clientHeight, allHeight); 
             if (scrollTop + clientHeight > allHeight - 10) {
                 console.log(111, that.gV.stateIcon);
-                if( !that.gV.stateIcon ) {
+                if( !that.gV.stateIcon) {
+                    console.log(11)
                     that.gV.stateIcon = true;
                     // 上拉显示加载中样式
                     that.dealLoading(2)
@@ -103,28 +104,33 @@ $(function() {
                     var jsonData = json.data,
                         pageList = jsonData.pageList,
                         ele = '';
-                        
-                    that.gV.stateIcon = false;
                     that.dealLoading(0)
 
                     if (!$.util.objIsEmpty(pageList)) { // 数据不为空
+                        // 返回数据小于请求条数，则提示用户没有更多了，否则提示用户上拉加载数据
+                        if(pageList.length < that.gV.ajaxArr[that.gV.current_index].pageSize) {
+                            that.dealLoading(3)
+                            that.gV.stateIcon = true;
+                        } else {
+                            that.dealLoading(1)
+                            that.gV.stateIcon = false;
+                        }
                         // todo 判断是待确认还是已完成,pageNo变化
                         jsonData.already = that.gV.current_index == 0 ? 1 : 0;
-                        ele = that.getElements.myAsset.find('ul').eq(that.gV.current_index);
+                        ele = that.getElements.myAsset.find('ul').eq(that.gV.current_index).find(".ulCon");
                         
                         generateTemplate(jsonData, ele, that.getElements.listTemp);
 
                         that.gV.ajaxArr[that.gV.current_index].pageNo++;
-                        
-                        // 返回数据小于请求条数，则提示用户没有更多了，否则提示用户上拉加载数据
-                        if(pageList.length < that.gV.aP.pageSize) {
-                            that.dealLoading(3)
-                        } else {
-                            that.dealLoading(1)
-                        }
                     } else {
                         // 当第一页数据为空时，则显示暂无数据，否则提示用户没有更多了
-                        
+                        if(that.gV.ajaxArr[that.gV.current_index].pageNo == 1) {
+                            ele = that.getElements.myAsset.find('ul').eq(that.gV.current_index).find(".ulCon");
+                            ele.html($(".noData").clone(false)).addClass('noCon');
+                            ele.find(".noData").show()
+                        } else {
+                            that.dealLoading(3)
+                        }
                     }
                 },
                 callbackFail: function(json) {
@@ -133,7 +139,14 @@ $(function() {
                 },
                 callbackNoData: function(json) {
                     // 当第一页数据为空时，则显示暂无数据，否则提示用户没有更多了
-                    that.dealLoading(3)
+                    if(that.gV.ajaxArr[that.gV.current_index].pageNo == 1) {
+                        debugger
+                        var ele = that.getElements.myAsset.find('ul').eq(that.gV.current_index);
+                        ele.html($(".noData").clone(false)).addClass('noCon');
+                        ele.find(".noData").show()
+                    } else {
+                        that.dealLoading(3)
+                    }
                 }
             }]
             $.ajaxLoading(obj);
@@ -156,22 +169,24 @@ $(function() {
             $.ajaxLoading(obj);
         },
         dealLoading: function(type) { // type 0 隐藏提示语 1 上拉显示更多 2 拼命加载中 3 没有更多了
+            var that = this
+            var ele = that.getElements.myAsset.find('ul').eq(that.gV.current_index)
             if(type == 0) {
-                $(".mui-pull-bottom-pocket").removeClass("mui-visibility") 
-                $(".mui-pull-loading").addClass("mui-hidden")
-                $(".mui-pull-caption").html("上拉显示更多")
+                ele.find(".mui-pull-bottom-pocket").removeClass("mui-visibility") 
+                ele.find(".mui-pull-loading").addClass("mui-hidden")
+                ele.find(".mui-pull-caption").html("上拉显示更多")
             } else if (type == 1) {
-                $(".mui-pull-bottom-pocket").addClass("mui-visibility")
-                $(".mui-pull-loading").removeClass("mui-hidden").addClass("mui-visibility")
-                $(".mui-pull-caption").html("上拉显示更多")
+                ele.find(".mui-pull-bottom-pocket").addClass("mui-visibility")
+                ele.find(".mui-pull-loading").removeClass("mui-hidden").addClass("mui-visibility")
+                ele.find(".mui-pull-caption").html("上拉显示更多")
             } else if (type == 2) {
-                $(".mui-pull-bottom-pocket").addClass("mui-visibility")
-                $(".mui-pull-loading").removeClass("mui-hidden").addClass("mui-visibility")
-                $(".mui-pull-caption").html("拼命加载中")
+                ele.find(".mui-pull-bottom-pocket").addClass("mui-visibility")
+                ele.find(".mui-pull-loading").removeClass("mui-hidden").addClass("mui-visibility")
+                ele.find(".mui-pull-caption").html("拼命加载中")
             } else if (type == 3) {
-                $(".mui-pull-bottom-pocket").addClass("mui-visibility")
-                $(".mui-pull-loading").addClass("mui-hidden")
-                $(".mui-pull-caption").html("没有更多了")
+                ele.find(".mui-pull-bottom-pocket").addClass("mui-visibility")
+                ele.find(".mui-pull-loading").addClass("mui-hidden")
+                ele.find(".mui-pull-caption").html("没有更多了")
             }
         },
         events: function() { //绑定事件
