@@ -130,9 +130,9 @@ $(function() {
                     } else {
                         // 当第一页数据为空时，则显示暂无数据，否则提示用户没有更多了
                         if(that.gV.ajaxArr[that.gV.current_index].pageNo == 1) {
-                            ele = that.getElements.myAsset.find('ul').eq(that.gV.current_index).find(".ulCon");
-                            ele.html($(".noData").clone(false)).addClass('noCon');
-                            ele.find(".noData").show()
+                            ele = that.getElements.myAsset.find('ul').eq(that.gV.current_index);
+                            ele.html($(".noData").clone(false));
+                            ele.find(".noData").eq(0).show()
                         } else {
                             that.dealLoading(3)
                         }
@@ -145,10 +145,9 @@ $(function() {
                 callbackNoData: function(json) {
                     // 当第一页数据为空时，则显示暂无数据，否则提示用户没有更多了
                     if(that.gV.ajaxArr[that.gV.current_index].pageNo == 1) {
-                        debugger
                         var ele = that.getElements.myAsset.find('ul').eq(that.gV.current_index);
-                        ele.html($(".noData").clone(false)).addClass('noCon');
-                        ele.find(".noData").show()
+                        ele.html($(".noData").clone(false));
+                        ele.find(".noData").eq(0).show()
                     } else {
                         that.dealLoading(3)
                     }
@@ -210,7 +209,6 @@ $(function() {
             // tab栏
             mui("body").on('tap', '#tabBox .tabTag', function(e) {
                 $(this).addClass('active').siblings().removeClass('active');
-                debugger;
 
                 that.gV.isGetData = false;
 
