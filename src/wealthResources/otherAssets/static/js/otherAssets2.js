@@ -35,16 +35,19 @@ $(function() {
             listLoading: $('.listLoading'), //所有数据区域，第一次加载的loading结构
             myAsset:$('.myAsset'),
             listTemp: $('#second-template'), // 列表
-
         },
         gV: { //一些设置
-            aP: {
+            current_index: 0, //tab切换，请求接口设置
+            firstTime:true, // 第一次切换
+            ajaxArr: [{
                 pageNo: 1,
                 pageSize: 10,
-            },
-            current_index: 0, //tab切换，请求接口设置
-            list_template: '', //列表的模板，生成后存放在这里
-            ajaxArr: [], //存放每一个ajax请求的传参数据
+
+            },{
+                pageNo: 1,
+                pageSize: 10,
+
+            }], //存放每一个ajax请求的传参数据
             // 存放ajax请求地址  已持仓  待确认
             siteUrlArr: [site_url.queryAssetsDetailByPages_api, site_url.getJJSInTransitAssets_api],
             listToTop: '', // 滑动区域距离顶部距离
@@ -81,6 +84,7 @@ $(function() {
                 if( !that.gV.stateIcon ) {
                     that.gV.stateIcon = true;
                     document.getElementById('loadBox').style.display = 'block';
+                    
                     that.getListData();
 
                 }
@@ -110,6 +114,8 @@ $(function() {
                         ele = that.getElements.myAsset.find('ul').eq(that.gV.current_index);
                         
                         generateTemplate(jsonData, ele, that.getElements.listTemp);
+
+                        that.gV.ajaxArr[that.gV.current_index].pageNo++;
                     } else {
                         //没有数据
                         
@@ -158,8 +164,20 @@ $(function() {
             // tab栏
             mui("body").on('tap', '#tabBox .tabTag', function(e) {
                 $(this).addClass('active').siblings().removeClass('active');
+
+                // 切换时滑动到顶部
+                var location = document.getElementById('tabBox').getBoundingClientRect().top;
+                console.log('-----',location)
+                $(window).scrollTop(location)
+
+                // 显示隐藏
                 that.gV.current_index = Number($(this).attr('num'));
-                $('.myAsset_'+that.gV.current_index).show();
+                that.getElements.myAsset.find('ul').eq(that.gV.current_index).show().siblings().hide();
+
+                if(that.gV.firstTime){
+                    that.getListData();
+                    that.gV.firstTime = false;
+                }
             })
 
             // 头部文案提示(金钱展示隐藏)
