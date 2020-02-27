@@ -471,7 +471,7 @@ $(function() {
 
                     if (t <= 10) {
                         $('.nav-wrapper').addClass('nav_fixed');
-                        $('body').css('transform', 'translate3d(0px, -238px, 0px) translateZ(0px)');
+                        $('body').css('transform', 'translate3d(0px, -208px, 0px) translateZ(0px)');
                         move = false;
                     }
 
