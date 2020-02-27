@@ -138,7 +138,7 @@ $(function () {
 						that.$el.fundName.html(data.secuSht);
 						that.$el.fundCode.html(data.trdCode);
 						that.$el.payConfirmDate.html(data.fundConfirmDate);
-						that.$el.brforre15Date.html(data.g2gafter15tradeDate);
+						that.$el.brforre15Date.html(data.after15tradeDate);
 						that.gV.fundName = data.secuSht;
 						that.gV.fundCode = data.trdCode;
 						if(!!data.discount){
