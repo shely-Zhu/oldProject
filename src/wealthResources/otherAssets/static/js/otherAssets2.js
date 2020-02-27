@@ -83,8 +83,8 @@ $(function() {
                 console.log(111, that.gV.stateIcon);
                 if( !that.gV.stateIcon ) {
                     that.gV.stateIcon = true;
-                    document.getElementById('loadBox').style.display = 'block';
-                    
+                    // 上拉显示加载中样式
+                    that.dealLoading(2)
                     that.getListData();
 
                 }
@@ -105,28 +105,35 @@ $(function() {
                         ele = '';
                         
                     that.gV.stateIcon = false;
-                    document.getElementById('loadBox').style.display = 'none';
+                    that.dealLoading(0)
 
-                    if (!$.util.objIsEmpty(pageList)) {
+                    if (!$.util.objIsEmpty(pageList)) { // 数据不为空
                         // todo 判断是待确认还是已完成,pageNo变化
-                        debugger
                         jsonData.already = that.gV.current_index == 0 ? 1 : 0;
                         ele = that.getElements.myAsset.find('ul').eq(that.gV.current_index);
                         
                         generateTemplate(jsonData, ele, that.getElements.listTemp);
 
                         that.gV.ajaxArr[that.gV.current_index].pageNo++;
+                        
+                        // 返回数据小于请求条数，则提示用户没有更多了，否则提示用户上拉加载数据
+                        if(pageList.length < that.gV.aP.pageSize) {
+                            that.dealLoading(3)
+                        } else {
+                            that.dealLoading(1)
+                        }
                     } else {
-                        //没有数据
+                        // 当第一页数据为空时，则显示暂无数据，否则提示用户没有更多了
                         
                     }
                 },
                 callbackFail: function(json) {
-                    
+                    // 请求失败隐藏上拉加载提示语
+                    that.dealLoading(0)
                 },
                 callbackNoData: function(json) {
-
-                    
+                    // 当第一页数据为空时，则显示暂无数据，否则提示用户没有更多了
+                    that.dealLoading(3)
                 }
             }]
             $.ajaxLoading(obj);
@@ -147,6 +154,25 @@ $(function() {
                 },
             }];
             $.ajaxLoading(obj);
+        },
+        dealLoading: function(type) { // type 0 隐藏提示语 1 上拉显示更多 2 拼命加载中 3 没有更多了
+            if(type == 0) {
+                $(".mui-pull-bottom-pocket").removeClass("mui-visibility") 
+                $(".mui-pull-loading").addClass("mui-hidden")
+                $(".mui-pull-caption").html("上拉显示更多")
+            } else if (type == 1) {
+                $(".mui-pull-bottom-pocket").addClass("mui-visibility")
+                $(".mui-pull-loading").removeClass("mui-hidden").addClass("mui-visibility")
+                $(".mui-pull-caption").html("上拉显示更多")
+            } else if (type == 2) {
+                $(".mui-pull-bottom-pocket").addClass("mui-visibility")
+                $(".mui-pull-loading").removeClass("mui-hidden").addClass("mui-visibility")
+                $(".mui-pull-caption").html("拼命加载中")
+            } else if (type == 3) {
+                $(".mui-pull-bottom-pocket").addClass("mui-visibility")
+                $(".mui-pull-loading").addClass("mui-hidden")
+                $(".mui-pull-caption").html("没有更多了")
+            }
         },
         events: function() { //绑定事件
             var that = this;
