@@ -13,7 +13,7 @@ var mymessage = Mock.mock({
             "totalCount": 20,
             "totalPages": 15
         },
-        "pageList|10": [{
+        "pageList|5": [{
                     "balance": 1000000,
                     "deadLine": "12月",
                     "establishDate": 1528905600000,
@@ -31,8 +31,8 @@ var mymessage = Mock.mock({
                 //     "profit":9.9,
                 //     "projectName":"华泰融创晟融3号定向投资工具（中植新能源）（三次开放）"
                 // }
-            ]
-            // "pageList":[]
+        ]
+            
     },
     "message": "操作成功！",
     "status": "0000"

@@ -7,7 +7,7 @@
 
 <head>
     @@include('@pathNewInclude/views/meta.html')
-    <link rel="stylesheet" href="/wealthResources/otherAssets/static/css/otherAssets.css">
+    <link rel="stylesheet" href="/wealthResources/otherAssets/static/css/otherAssets2.css">
     <title>其他资产</title>
 </head>
 
@@ -34,31 +34,9 @@
                 </li>
             </ul>
         </div>
-        <div id="tabBox">
-            <span class="tabTag active" num="0">持有资产</span>
-            <span class="tabTag" num="1">待确认资产</span>
-        </div>
-        <div class="myAsset">
-            <!-- 持有资产 -->
-            <ul>
-                <div class="ulCon"></div>
-                <div class="mui-pull-bottom-pocket mui-block">
-                    <div class="mui-pull">
-                        <div class="mui-pull-loading mui-icon mui-spinner mui-hidden"></div>
-                        <div class="mui-pull-caption mui-pull-caption-down">上拉显示更多</div>
-                    </div>
-                </div>  
-            </ul>
-            <!-- 待确认 -->
-            <ul>
-                <div class="ulCon"></div>
-                <div class="mui-pull-bottom-pocket mui-block">
-                    <div class="mui-pull">
-                        <div class="mui-pull-loading mui-icon mui-spinner mui-hidden"></div>
-                        <div class="mui-pull-caption mui-pull-caption-down">上拉显示更多</div>
-                    </div>
-                </div>
-            </ul>
+        <!-- <div class="scroll_mask"></div> -->
+        <div class="mui-content  myAsset">
+            <!-- 放置页面内容 -->
         </div>
         <div class="mask"></div>
         <div class="tipContainer">
@@ -70,10 +48,27 @@
         <!-- 暂无数据 -->
         @@include('@pathNewCommonViews/noDataImg.html',{"tipText":"暂无数据"})
     </section>
+    <script id="first-template" type="text/x-handlebars-template">
+        {{! 列表 内容 使用mui的上拉加载}}
+        <div class="list">
+            {{! list是包裹上拉加载区域的，在js中计算当前页面中的list高度，不能超出一屏}} {{! 初始化上拉加载区域，使用contentWrapper class}} {{! contentWrapper 需要添加样式，具体见less文件}}
+            <div class="contentWrapper">
+
+                <ul class="mui-table-view">
+                    <li class="mui-table-view-cell">
+                        {{! 所有内容 需要放在这个li里，且里面不能再用Li元素}} {{{content}}}
+
+                    </li>
+                </ul>
+
+                <!-- 返回顶部 -->
+                @@include('@pathNewCommonViews/goTop.html')
+
+            </div>
+        </div>
+    </script>
     <script id="second-template" type="text/x-handlebars-template">
-        {{#if already}} 
-        {{#each pageList}}
-        {{! 已完成}} 
+        {{! 左侧页面列表}} {{#if already}} {{#each pageList}}
         <div class="datalist" fundCode="{{fundCode}}">
             <div class="proName clearfix">
                 <span class="proNameBefore"></span>
@@ -100,10 +95,7 @@
                 </div>
             </div>
         </div>
-        {{/each}}
-        {{else}} 
-        {{#each pageList}}
-        {{! 待确认}} 
+        {{/each}} {{/if}} {{#if tobe}} {{#each pageList}}
         <div class="datalist" fundCode="{{fundCode}}">
             <div class="proName clearfix">
                 <span class="proNameBefore"></span>
@@ -129,11 +121,11 @@
                 </div>
             </div>
         </div>
-       {{/each}} 
-       {{/if}}
+
+        {{/each}} {{/if}}
     </script>
     @@include('@pathNewInclude/views/footer.html') 
-    <script src="/wealthResources/otherAssets/static/js/otherAssets.js"></script>
+    <script src="/wealthResources/otherAssets/static/js/otherAssets2.js"></script>
 </body>
 
 </html>

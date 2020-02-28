@@ -657,9 +657,12 @@ var clickList = {
 
 	"wealthResearch_01":{ type:'click', evtid: 'wealthResearch_01', topic: '财富学院4', info: ''},
 	
-	
-	
-
+	// 其他资产
+	"otherAssets_0":{ type:'click', evtid: 'otherAssets_0', topic: '其他资产-tab切换', info: ''},
+	"otherAssets_1":{ type:'click', evtid: 'otherAssets_1', topic: '其他资产-隐藏金额', info: ''},
+	"otherAssets_2":{ type:'click', evtid: 'otherAssets_2', topic: '其他资产-显示金额', info: ''},
+	"otherAssets_3":{ type:'click', evtid: 'otherAssets_3', topic: '其他资产-点击资产组成说明', info: ''},
+	"otherAssets_4":{ type:'click', evtid: 'otherAssets_4', topic: '其他资产-关闭资产组成说明', info: ''},
 	
 }
 
