@@ -59,6 +59,7 @@ $(function() {
             jjsTotalAssetMask: null,
             jjsHoldAssetMask: null,
             jjsInTransitAssetMask: null,
+            canClick: false // 待确认资产按钮是否可点击 true 可点击 false 不可点击
         },
         html: '', //存放生成的html
         init: function() { //初始化函数
@@ -78,7 +79,7 @@ $(function() {
             var clientHeight = document.documentElement.clientHeight;
             var allHeight = document.body.scrollHeight;
             // console.log(scrollTop, clientHeight, allHeight); 
-            if ((scrollTop + clientHeight > allHeight - 10) && that.gV.isGetData[that.gV.tabIndex]) { // 
+            if ((scrollTop + clientHeight > allHeight - 20) && that.gV.isGetData[that.gV.tabIndex]) { // 
                 if( !that.gV.stateIcon[that.gV.tabIndex]) {
                     that.gV.stateIcon[that.gV.tabIndex] = true;
                     // 上拉显示加载中样式
@@ -97,6 +98,7 @@ $(function() {
                 needLogin: true,
                 needLoading: false,
                 callbackDone: function(json) {
+                    that.gV.canClick = true
                     var jsonData = json.data,
                         pageList = jsonData.pageList,
                         ele = '';
@@ -139,8 +141,10 @@ $(function() {
                 callbackFail: function(json) {
                     // 请求失败隐藏上拉加载提示语
                     that.dealLoading(0)
+                    that.gV.canClick = true
                 },
                 callbackNoData: function(json) {
+                    that.gV.canClick = true
                     // 当第一页数据为空时，则显示暂无数据，否则提示用户没有更多了
                     if(that.gV.ajaxArr[that.gV.tabIndex].pageNo == 1) {
                         var ele = that.getElements.myAsset.find('ul').eq(that.gV.tabIndex);
@@ -210,19 +214,21 @@ $(function() {
             })
             // tab栏
             mui("body").on('tap', '#tabBox .tabTag', function(e) {
-                $(this).addClass('active').siblings().removeClass('active');
+                if(that.gV.canClick) {
+                    $(this).addClass('active').siblings().removeClass('active');
 
-                // 切换时滑动到顶部
-                $(window).scrollTop(0);
+                    // 切换时滑动到顶部
+                    $(window).scrollTop(0);
 
-                // 显示隐藏
-                that.gV.tabIndex = Number($(this).attr('num'));
-                that.getElements.myAsset.find('ul').eq(that.gV.tabIndex).show().siblings().hide();
+                    // 显示隐藏
+                    that.gV.tabIndex = Number($(this).attr('num'));
+                    that.getElements.myAsset.find('ul').eq(that.gV.tabIndex).show().siblings().hide();
 
-                if(that.gV.firstTime){
-                    that.dealLoading(2)
-                    that.getListData();
-                    that.gV.firstTime = false;
+                    if(that.gV.firstTime){
+                        that.dealLoading(2)
+                        that.getListData();
+                        that.gV.firstTime = false;
+                    }
                 }
             },{
                 'htmdEvt': 'otherAssets_0'
