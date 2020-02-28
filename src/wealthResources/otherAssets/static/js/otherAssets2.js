@@ -224,6 +224,8 @@ $(function() {
                     that.getListData();
                     that.gV.firstTime = false;
                 }
+            },{
+                'htmdEvt': 'otherAssets_0'
             })
 
             // 头部文案提示(金钱展示隐藏)
@@ -232,22 +234,30 @@ $(function() {
                 data.gV.jAlready.html('****');
                 data.gV.jTobe.html('****');
                 $(this).addClass('eyecose');
+            },{
+                'htmdEvt': 'otherAssets_1'
             })
             mui("body").on('tap', '.eyecose', function(e) {
                 data.gV.totalCount.html(data.gV.jjsTotalAssetMask);
                 data.gV.jAlready.html('+' + data.gV.jjsHoldAssetMask);
                 data.gV.jTobe.html(data.gV.jjsInTransitAssetMask);
                 $(this).removeClass('eyecose');
+            },{
+                'htmdEvt': 'otherAssets_2'
             })
                 //打开资产组成说明
             mui("body").on('tap', '.assetsBtn', function(e) {
                 $('.mask').show();
                 $('.tipContainer').show();
+            },{
+                'htmdEvt': 'otherAssets_3'
             })
                 //关闭资产组成说明
             mui("body").on('tap', '.buttonOne', function(e) {
                 $('.mask').hide();
                 $('.tipContainer').hide();
+            },{
+                'htmdEvt': 'otherAssets_4'
             })
             
         }
