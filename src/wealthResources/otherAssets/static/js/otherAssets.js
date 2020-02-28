@@ -79,7 +79,7 @@ $(function() {
             var clientHeight = document.documentElement.clientHeight;
             var allHeight = document.body.scrollHeight;
             // console.log(scrollTop, clientHeight, allHeight); 
-            if ((scrollTop + clientHeight > allHeight - 20) && that.gV.isGetData[that.gV.tabIndex]) { // 
+            if ((scrollTop + clientHeight > allHeight - 100) && that.gV.isGetData[that.gV.tabIndex]) { // 
                 if( !that.gV.stateIcon[that.gV.tabIndex]) {
                     that.gV.stateIcon[that.gV.tabIndex] = true;
                     // 上拉显示加载中样式
