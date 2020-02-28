@@ -271,7 +271,7 @@ var pathList = {
 
 	/********************************* life end ***************************************/
 	"/allServerResources/model/views/articleTemplate.html" : { evtid: '36', topic: '活动模板', info: ''} ,
-
+	"/wealthResources/otherAssets/views/otherAssets.html" :{ evtid: 'otherAssets', topic: '其他资产', info: ''} ,
 }
 
 
