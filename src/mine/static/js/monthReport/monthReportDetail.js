@@ -122,6 +122,7 @@ var monthReportDetail = {
 					that.getElements.month = month;
 					that.getMonthDateRange(year,month);
 				} else{
+					that.getElements.month = month;
 					that.getMonthDateRange(year,month);
 				}
 				that.queryInvestProdHoldShareList();
