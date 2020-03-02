@@ -306,6 +306,10 @@ var monthReportDetail = {
 				that.pieChartDataDetail = [];
 
 				var lastMonth = Number(that.getElements.month)-1;
+				if( lastMonth  == '0'){
+					lastMonth = 12;
+				} 
+				debugger
 
 				if ( data.monthHoldShareList.length) {
 					//有数据
