@@ -309,7 +309,6 @@ var monthReportDetail = {
 				if( lastMonth  == '0'){
 					lastMonth = 12;
 				} 
-				debugger
 
 				if ( data.monthHoldShareList.length) {
 					//有数据
