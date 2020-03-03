@@ -99,7 +99,7 @@ $(function() {
                     needDataEmpty: true,
                     callbackDone: function(json) {
                         if (!json.data.activityVoPageInfo && that.gV.startPage == 1) {
-                            var topHeitgh = $('#activitySearch').height() - $(".tabCon").height();
+                            var topHeitgh = $('#activitySearch').height() + $(".tabCon").height();
                             var height = windowHeight - topHeitgh;
                             $('.activityListDataNoBox').height(height);
                             t.endPullupToRefresh(true);
@@ -132,7 +132,7 @@ $(function() {
                                 if (that.gV.startPage == 1) { //第一页时
                                     if (data.length == 0) {
                                         // 暂无数据显示
-                                        var topHeitgh = $('#activitySearch').height() - $(".tabCon").height();
+                                        var topHeitgh = $('#activitySearch').height() + $(".tabCon").height();
                             var height = windowHeight - topHeitgh;
                             $('.activityListDataNoBox').height(height);
                             t.endPullupToRefresh(true);
@@ -173,7 +173,7 @@ $(function() {
                     },
                     callbackNoData: function(json) {
                         if (!json.data.activityVoPageInfo && that.gV.startPage == 1) {
-                            var topHeitgh = $('#activitySearch').height() - $(".tabCon").height();
+                            var topHeitgh = $('#activitySearch').height() + $(".tabCon").height();
                             var height = windowHeight - topHeitgh;
                             $('.activityListDataNoBox').height(height);
                             t.endPullupToRefresh(true);
@@ -196,7 +196,7 @@ $(function() {
             //无数据获取列表
             getNoData: function(data) {
                 var that = this;
-                var topHeitgh = $('#activitySearch').height() - $(".tabCon").height();
+                var topHeitgh = $('#activitySearch').height() + $(".tabCon").height();
                 var noBox = $('.activityNoListBox').height();
                 var height = windowHeight - topHeitgh - noBox;
 
