@@ -18,6 +18,7 @@ var pOver = Mock.mock({
                 "accountNameMask": "**民", //银行户名加星
                 "bankNo": "005", //银行代码
                 "bankAccount": "6217000010067046220", //银行账号
+                "bankAccountSecret": "6217000010067046220", //银行账号
                 "bankAccountMask": "**** **** **** 6220", //银行账号加星
                 "bankName": "建设银行", //所属银行名称
                 "isPub": "2",

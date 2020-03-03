@@ -10,7 +10,7 @@ var data = Mock.mock({
     hmac:"", //预留字段
     msg: "success",
     code:"",//错误码
-    status: "0000",
+    status: "POF1186",
     data: {
         "applyDate":"2016-10-11",//申请日期
 		"allotNo":"20161010000701",//申请编号
