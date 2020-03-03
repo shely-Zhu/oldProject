@@ -20,6 +20,7 @@
         @@include('@pathCommonViews/headBarConfig.html',{"pathName":"活动详情"})
         <div class="bgBox">
             <img id="bgimg" class="lazyload" src="/common/img/placeholderImg.png" data-original="" alt="">
+            <span class="livePlayback" style="display:none">观看回放</span>
         </div>
 
         <div class="activityDetailsBox">
@@ -29,10 +30,15 @@
                     <p><i class="locationIcon"></i><span>活动举办城市:</span></p>
                     <p class="city"></p>
                 </div>
-                <div class="activityDetailsDivBox">
+                <div class="activityDetailsDivBox notOnline">
                     <p><i class="activityTimeIcon"></i><span>活动报名时间:</span></p>
                     <p class="startTimeOrendTime"></p>
                 </div>
+                <div class="activityDetailsDivBox online hideBox">
+                        <p><i class="activityTimeIcon"></i><span>直播时间:</span></p>
+                        <p class="startTimeOrendTime"></p>
+                </div>
+
             </div>
             <div class="activityIntroduceBox">
                 <h4>活动介绍</h4>
@@ -66,15 +72,40 @@
             <!-- 邮寄提示 -->
             <div class="postTip">*请您保持手机畅通，我们工作人员将与您联系并给您邮寄奖品，谢谢您的参与*</div>
             <!-- 分享按钮 -->
-            <div class="shareBtn goldRedBgButton toShare">分享给好友</div>
+            <div class="hideBox">
+                <div class="successBoxButton">
+                    <div class="shareBtn goldRedBgButton toLink">确定</div>
+                    <div class="shareBtn goldRedBgButton toShareStyle toShare">分享</div>
+                </div>
+            </div>
+           
+            <div class="shareBtn goldRedBgButton toShare hideBtn">分享给好友</div>
             <!-- 查看奖励 -->
             <a href="javascript:void(0);" class="seePrize rewards">查看奖励></a>
         </div>
         <span class="iconfont closeBtn">&#xe637;</span>
     </div>
     <!-- 老带新实物奖品弹框 -->
-
-
+    <!-- 老带新有视频直播弹框 -->
+    <div class="successMidCon" id="oldToNewOnline" >
+        <div class="successBox">
+            <!-- 标题 -->
+            <div class="successTit">恭喜您已报名成功</div>
+            <!-- 奖品名称 -->
+            <div class="prizeName mt1">恭喜您获得<span>京东100元购物卡</span></div>
+            <!-- 分享按钮 -->
+            <div class="hideBox">
+                <div class="successBoxButton">
+                    <div class="shareBtn goldRedBgButton linkInfo  mr10">进入直播间</div>
+                    <div class="shareBtn goldRedBgButton toShareStyle  toShare">分享</div>
+                </div>
+            </div>
+            <!-- 查看奖励 -->
+            <a href="javascript:void(0);" class="seePrize rewards hideBtn">查看奖励></a>
+        </div>
+        <span class="iconfont closeBtn">&#xe637;</span>
+    </div>
+    <!-- 老带新有视频直播弹框 -->
     <!-- 老带新电子奖品弹框 -->
     <div class="successMidCon" id="oldToNewPrizedz">
         <div class="successBox">
@@ -89,7 +120,13 @@
                 <span></span>
             </div>
             <!-- 分享按钮 -->
-            <div class="shareBtn goldRedBgButton toShare">分享给好友</div>
+            <div class="hideBox">
+                <div class="successBoxButton">
+                        <div class="shareBtn goldRedBgButton toLink">确定</div>
+                        <div class="shareBtn goldRedBgButton toShareStyle toShare">分享</div>
+                </div>
+            </div>    
+            <div class="shareBtn goldRedBgButton toShare hideBtn">分享给好友</div>
             <!-- 查看奖励 -->
             <a href="javascript:void(0);" class="seePrize rewards">查看奖励></a>
         </div>
@@ -104,7 +141,13 @@
             <!-- 成功提示内容 -->
             <div class="shareCon">邀请好友，将有机会获得奖励</div>
             <!-- 分享按钮 -->
-            <div class="shareBtn goldRedBgButton toShare">分享给好友</div>
+            <div class="hideBox">
+                <div class="successBoxButton">
+                        <div class="shareBtn goldRedBgButton toLink">确定</div>
+                        <div class="shareBtn goldRedBgButton toShareStyle toShare">分享</div>
+                </div>
+            </div>
+            <div class="shareBtn goldRedBgButton toShare hideBtn">分享给好友</div>
         </div>
         <span class="iconfont closeBtn">&#xe637;</span>
     </div>
@@ -123,7 +166,13 @@
                 <span></span>
             </div>
             <!-- 分享按钮 -->
-            <div class="shareBtn goldRedBgButton toShare">分享给好友</div>
+            <div class="hideBox">
+                <div class="successBoxButton">
+                        <div class="shareBtn goldRedBgButton toLink">确定</div>
+                        <div class="shareBtn goldRedBgButton toShareStyle toShare">分享</div>
+                </div>
+            </div>
+            <div class="shareBtn goldRedBgButton toShare hideBtn">分享给好友</div>
         </div>
         <span class="iconfont closeBtn">&#xe637;</span>
     </div>
@@ -138,7 +187,13 @@
             <!-- 邮寄提示 -->
             <div class="postTip">*请您保持手机畅通，我们工作人员将与您联系并给您邮寄奖品，谢谢您的参与*</div>
             <!-- 分享按钮 -->
-            <div class="shareBtn goldRedBgButton rewards">查看奖励</div>
+            <div class="hideBox">
+                <div class="successBoxButton">
+                        <div class="shareBtn goldRedBgButton toLink">确定</div>
+                        <div class="shareBtn goldRedBgButton toShareStyle rewards">查看奖励</div>
+                </div>
+            </div>
+            <div class="shareBtn goldRedBgButton rewards hideBtn">查看奖励</div>
         </div>
         <span class="iconfont closeBtn">&#xe637;</span>
     </div>
@@ -151,7 +206,13 @@
             <!-- 成功提示内容 -->
             <div class="prizeName">恭喜您获得<span>京东100元购物卡</span></div>
             <!-- 分享按钮 -->
-            <div class="shareBtn goldRedBgButton rewards">查看奖励</div>
+            <div class="shareBtn goldRedBgButton rewards hideBtn">查看奖励</div>
+            <div class="hideBox">
+                <div class="successBoxButton">
+                        <div class="shareBtn goldRedBgButton toLink">确定</div>
+                        <div class="shareBtn goldRedBgButton toShareStyle rewards">查看奖励</div>
+                </div>
+            </div>
         </div>
         <span class="iconfont closeBtn">&#xe637;</span>
     </div>
@@ -164,8 +225,14 @@
             <!-- 成功提示内容 -->
             <div class="successContent">稍后您的理财师将会与您沟通具体活动事宜，请保持手机畅通</div>
             <!-- 分享按钮 -->
-            <div class="shareBtn goldRedBgButton knowBtn">我知道了</div>
-        </div>
+            <div class="hideBox">
+            <div class="successBoxButton">
+                    <div class="shareBtn goldRedBgButton toLink">确定</div>
+                    <div class="shareBtn goldRedBgButton toShareStyle knowBtn">我知道了</div>
+            </div>
+            </div>
+        <div class="shareBtn goldRedBgButton knowBtn hideBtn">我知道了</div>   
+    </div>
         <span class="iconfont closeBtn">&#xe637;</span>
     </div>
     <!-- 非老带新无奖品 -->
