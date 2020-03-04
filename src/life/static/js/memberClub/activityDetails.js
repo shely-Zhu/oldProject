@@ -263,7 +263,11 @@ $(function() {
                             }
 
                         }
-
+                        mui('body').on('mdClick', '.toLink', function() {
+                            window.location.href=site_url.thirdpartyLinks_url+"?jumpLinks="+$(this).attr('url')+"&type='activityDetails'"
+                        }, {
+                            htmdEvt: 'activityDetails_3'
+                        });
 
                     },
                     callbackFail: function(data) {
@@ -640,10 +644,6 @@ $(function() {
                     $('.mask').hide();
                 }, {
                     htmdEvt: 'activityDetails_3'
-                });
-                //弹框去直播
-                $(".toLink").on("click",function(){
-                    window.location.href=site_url.thirdpartyLinks_url+"?jumpLinks="+$(this).attr('url')+"&type='activityDetails'", //跳转到绑定理财师页面
                 });
                 //关闭大弹框
                 mui('body').on('mdClick', '.closeBtn', function() {
