@@ -17,12 +17,14 @@
                 {{/if}}
             </div>
             <div class="activityListBottomBox">
-                    <h5>{{actName}}</h5>
-                    {{#if isLive}}
-                    <p><i>直播时间</i>{{actPlayTimeMark}}</p>
-                    {{else}}
+                <h5>{{actName}}</h5>
+                {{#if isLive}}
+                <p><i>直播时间</i>{{actPlayTimeMark}}</p>
+                {{else}}
+                    {{#if actStartDate}}
                     <p><i>活动报名时间</i>{{actStartDate}}至{{actEndDate}}</p>
                     {{/if}}
+                {{/if}}
             </div>
         </div>
     {{/each}}
