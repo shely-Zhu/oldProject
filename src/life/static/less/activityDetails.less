@@ -35,6 +35,17 @@ header{
     .bgBox{
         height: 3.8rem;
         overflow: hidden;
+        position: relative;
+        .livePlayback{
+            position: absolute;
+            right: 0.3rem;
+            top: 0.3rem;
+            color:#a67848;
+            border: 1px solid #cea073;  
+            background: #ffffff;
+            padding: .09rem .14rem;
+            border-radius: 0.04rem;
+        }
     }
     img{
         width: 100%;
@@ -373,6 +384,13 @@ header{
         line-height: 0.78rem;
         margin: 0 auto 0.32rem;
     }
+    //分享按钮 白底灰字
+    .toShareStyle{
+        background: #fff;
+        color: #B57E45;
+        border: 1px solid #B57E45;
+        width: 1.92rem;
+    }
     //查看奖励
     .seePrize{
         display: block;
@@ -388,6 +406,19 @@ header{
         bottom: -0.6rem;
         left: 50%;
         margin-left: -0.26rem;
+    }
+    .successBoxButton{
+        display: flex;
+        padding: 0 .3rem;
+        .shareBtn{
+            width: 1.9rem;
+        }
+    }
+    .mr10{
+        margin-right: .1rem;
+    }
+    .mt1{
+        height: 1.8rem;
     }
 }
 //中型弹框
@@ -445,3 +476,6 @@ header{
 // .blueBgButton{
 //     background: rgba(30,48,104,1);
 // }
+.hideBox{
+    display: none;
+}

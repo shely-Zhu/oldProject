@@ -81,20 +81,62 @@ $(function() {
                             that.$e.bgimg.attr("data-original", data.domainIP + data.htjfGeneralizeImgUrlPrex + data.htjfGeneralizeImgUrl);
                         };
                         //活动名称
-                        that.$e.actName.text(data.actName);
-                        //活动地点
-                        if (data.actProvince) {
-                            that.$e.city.text(data.actProvince);
-                            //判断市
-                            if(data.actProvince!==data.actCity){
-                                that.$e.city.text(data.actProvince+data.actCity);  
+                        //v4.3.0
+                        //判断城市为空的时候不展示城市
+                        if(data.actCity){
+                            that.$e.actName.text(data.actName);
+                            //活动地点
+                            if (data.actProvince) {
+                                that.$e.city.text(data.actProvince);
+                                //判断市
+                                if(data.actProvince!==data.actCity){
+                                    that.$e.city.text(data.actProvince+data.actCity);  
+                                }
+                            } 
+                            else {
+                                that.$e.city.text(data.actCity);
                             }
-                        } 
-                        else {
-                            that.$e.city.text(data.actCity);
+                        }else{
+                            //没有城市的时候整个不展示
+                            $('.city').parent().hide()
                         }
+                        
                         //报名时间
-                        that.$e.startTimeOrendTime.html(data.actStartDateStr + '-' + data.actEndDateStr);
+                        //判断直播时间
+                        if(data.actForm==0){
+                            $(".online").find(".startTimeOrendTime").html(data.actPlayStartTim + '-' + data.actPlayEndTime);
+                        }else{
+                            $(".notOnline").find(".startTimeOrendTime").html(data.actStartDateStr + '-' + data.actEndDateStr);
+                        }
+                        //是否回放视频
+                        if(data.isPlayback){
+                            $(".livePlayback").css("display","block")
+                        }
+                        if(data.signUpFlag&&data.successPage){
+                            var yesText;
+                            if(data.actForm==0){
+                                yesText='进入直播间'
+                            }else{
+                                yesText='确定'
+                            }
+
+                            //需要风测
+                            var obj = {
+                                title: '温馨提示', //如果不传，默认不显示标题
+                                p: '<p>' + "您已报名参加本活动" + '</p>',
+                                yesTxt: yesText,
+                                hideCelButton: true,
+                                zIndex: 100,
+                                needYesHref: true, //是否需要把确定按钮改成a标签，默认false
+                                yesHref: site_url.thirdpartyLinks_url+"?jumpLinks="+data.successPage+"&type='activityDetails'", //跳转到绑定理财师页面
+                                htmdEvtYes:'activityDetails_8',  // 埋点确定按钮属性
+                                callback: function(t) {
+
+                                },
+                            };
+                            $.elasticLayer(obj)
+                        }
+                        
                         //活动介绍
                         that.$e.actIntroduce.html(data.actIntroduce);
                         $(".lazyload").lazyload()
@@ -189,30 +231,30 @@ $(function() {
                                     //是老带新
                                     if (data.data.brandPrizeVo.isHave == 0) {
                                         //没有奖品
-                                        that.successNoConNewOpen(successTitle);
+                                        that.successNoConNewOpen(successTitle,data.data.url,data.data.actForm);
                                     } else if (data.data.brandPrizeVo.isHave == 1) {
                                         //有奖品
                                         if (data.data.brandPrizeVo.prizeType == 1) {
                                             //实物
-                                            that.successSwConNewOpen(successTitle, data.data.brandPrizeVo.prizeName);
+                                            that.successSwConNewOpen(successTitle, data.data.brandPrizeVo.prizeName,data.data.url,data.data.actForm);
                                         } else if (data.data.brandPrizeVo.prizeType == 2) {
                                             //虚拟
-                                            that.successDzConNewOpen(successTitle, data.data.brandPrizeVo.prizeName);
+                                            that.successDzConNewOpen(successTitle, data.data.brandPrizeVo.prizeName,data.data.url,data.data.actForm);
                                         }
                                     }
                                 } else {
                                     //非老带新
                                     if (data.data.brandPrizeVo.isHave == 0) {
                                         //没有奖品
-                                        that.successNoConOpen(successTitle);
+                                        that.successNoConOpen(successTitle,data.data.url,data.data.actForm);
                                     } else if (data.data.brandPrizeVo.isHave == 1) {
                                         //有奖品
                                         if (data.data.brandPrizeVo.prizeType == 1) {
                                             //实物
-                                            that.successSwConOpen(successTitle, data.data.brandPrizeVo.prizeName);
+                                            that.successSwConOpen(successTitle, data.data.brandPrizeVo.prizeName,data.data.url,data.data.actForm);
                                         } else if (data.data.brandPrizeVo.prizeType == 2) {
                                             //虚拟
-                                            that.successDzConOpen(successTitle, data.data.brandPrizeVo.prizeName);
+                                            that.successDzConOpen(successTitle, data.data.brandPrizeVo.prizeName,data.data.url,data.data.actForm);
                                         }
                                     }
                                 }
@@ -221,7 +263,11 @@ $(function() {
                             }
 
                         }
-
+                        mui('body').on('mdClick', '.toLink', function() {
+                            window.location.href=site_url.thirdpartyLinks_url+"?jumpLinks="+$(this).attr('url')+"&type='activityDetails'"
+                        }, {
+                            htmdEvt: 'activityDetails_3'
+                        });
 
                     },
                     callbackFail: function(data) {
@@ -443,7 +489,17 @@ $(function() {
                 $.ajaxLoading(obj);
             },
             //老带新实物奖品弹框--prizeName奖品名称successTit成功提示
-            successSwConNewOpen: function(successTit, prizeName) {
+            successSwConNewOpen: function(successTit, prizeName,url,actForm) {
+                if(url){
+                    //有url
+                    $('#oldToNewPrizesw').find(".hideBox").removeClass()
+                    $('#oldToNewPrizesw').find(".hideBtn").hide()
+                    $('#oldToNewPrizesw').find(".toLink").attr('url',url)
+                    //直播
+                    if(actForm==0){
+                        $('#oldToNewPrizesw').find(".toLink").html('进入直播间')
+                    }
+                }
                 if (successTit) {
                     $('#oldToNewPrizesw').find('.successTit').html(successTit);
                 }
@@ -452,7 +508,17 @@ $(function() {
                 $('.mask').show();
             },
             //老带新电子奖品弹框--prizeName奖品名称successTit成功提示
-            successDzConNewOpen: function(successTit, prizeName) {
+            successDzConNewOpen: function(successTit, prizeName,url,actForm) {
+                if(url){
+                    //有url
+                    $('#oldToNewPrizedz').find(".hideBox").removeClass()
+                    $('#oldToNewPrizedz').find(".hideBtn").hide()
+                    $('#oldToNewPrizedz').find(".toLink").attr('url',url)
+                    //直播
+                    if(actForm==0){
+                        $('#oldToNewPrizedz').find(".toLink").html('进入直播间')
+                    }
+                }
                 if (successTit) {
                     $('#oldToNewPrizedz').find('.successTit').html(successTit);
                 }
@@ -461,7 +527,17 @@ $(function() {
                 $('.mask').show();
             },
             //老带新无奖品弹框--successTit成功提示
-            successNoConNewOpen: function(successTit) {
+            successNoConNewOpen: function(successTit,url,actForm) {
+                if(url){
+                    //有url
+                    $('#oldToNewNoPrize').find(".hideBox").removeClass()
+                    $('#oldToNewNoPrize').find(".hideBtn").hide()
+                    $('#oldToNewNoPrize').find(".toLink").attr('url',url)
+                    //直播
+                    if(actForm==0){
+                        $('#oldToNewNoPrize').find(".toLink").html('进入直播间')
+                    }
+                }
                 if (successTit) {
                     $('#oldToNewNoPrize').find('.successTit').html(successTit);
                 }
@@ -475,7 +551,17 @@ $(function() {
                 $('.mask').show();
             },
             //非老带新实物奖品弹框--prizeName奖品名称successTit成功提示
-            successSwConOpen: function(successTit, prizeName) {
+            successSwConOpen: function(successTit, prizeName,url,actForm) {
+                if(url){
+                    //有url
+                    $('#notOldToNewPrizesw').find(".hideBox").removeClass()
+                    $('#notOldToNewPrizesw').find(".hideBtn").hide()
+                    $('#notOldToNewPrizesw').find(".toLink").attr('url',url)
+                    //直播
+                    if(actForm==0){
+                        $('#notOldToNewPrizesw').find(".toLink").html('进入直播间')
+                    }
+                }
                 if (successTit) {
                     $('#notOldToNewPrizesw').find('.successTit').html(successTit);
                 }
@@ -484,7 +570,17 @@ $(function() {
                 $('.mask').show();
             },
             //非老带新电子奖品弹框--prizeName奖品名称successTit成功提示
-            successDzConOpen: function(successTit, prizeName) {
+            successDzConOpen: function(successTit, prizeName,url,actForm) {
+                if(url){
+                    //有url
+                    $('#notOldToNewPrizedz').find(".hideBox").removeClass()
+                    $('#notOldToNewPrizedz').find(".hideBtn").hide()
+                    $('#notOldToNewPrizedz').find(".toLink").attr('url',url)
+                    //直播
+                    if(actForm==0){
+                        $('#notOldToNewPrizedz').find(".toLink").html('进入直播间')
+                    }
+                }
                 if (successTit) {
                     $('#notOldToNewPrizedz').find('.successTit').html(successTit);
                 }
@@ -493,13 +589,31 @@ $(function() {
                 $('.mask').show();
             },
             //非老带新无奖品弹框--successTit成功提示
-            successNoConOpen: function(successTit) {
+            successNoConOpen: function(successTit,url,actForm) {
+                if(url){
+                    //有url
+                    $('#notOldToNewNoPrize').find(".hideBox").removeClass()
+                    $('#notOldToNewNoPrize').find(".hideBtn").hide()
+                    $('#notOldToNewNoPrize').find(".toLink").attr('url',url)
+                    //直播
+                    if(actForm==0){
+                        $('#notOldToNewNoPrize').find(".toLink").html('进入直播间')
+                    }
+                }
                 if (successTit) {
                     $('#notOldToNewNoPrize').find('.successTit').html(successTit);
                 }
                 $('#notOldToNewNoPrize').show();
                 $('.mask').show();
             },
+            // //老带新并且是否有无直播地址
+            // oldToNewOnlineOpen(successTit){
+            //     if (successTit) {
+            //         $('#oldToNewOnline').find('.successTit').html(successTit);
+            //     }
+            //     $('#oldToNewOnline').show();
+            //     $('.mask').show();
+            // },
             //操作事件
             events: function() {
                 var that = this;

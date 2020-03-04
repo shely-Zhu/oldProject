@@ -48,7 +48,7 @@ $(function() {
             //初始化mui的上拉加载
             initMui: function() {
                 var that = this;
-                var topHeitgh = $('#activitySearch').height() + $(".tabCon").height();
+                var topHeitgh = $('#activitySearch').height();
                 var height = windowHeight - topHeitgh;
 
                 if (!$('.list').hasClass('setHeight')) {
@@ -83,8 +83,6 @@ $(function() {
             //有数据获取列表
             getData: function(t) {
                 var that = this;
-                // 获取搜索活动的状态值
-                var actStatus = $(".tab.active").index()
                 var obj = [{ // 系统调仓记录列表
                     url: site_url.getActivitiesList_api,
                     needLogin: false,
@@ -94,12 +92,12 @@ $(function() {
                         pageSize: that.gV.pageSize,
                         actName: that.gV.actName,
                         actConductCity: that.gV.actCityName, //活动城市编号
-                        actStatus: actStatus
+
                     },
                     needDataEmpty: true,
                     callbackDone: function(json) {
                         if (!json.data.activityVoPageInfo && that.gV.startPage == 1) {
-                            var topHeitgh = $('#activitySearch').height() + $(".tabCon").height();
+                            var topHeitgh = $('#activitySearch').height();
                             var height = windowHeight - topHeitgh;
                             $('.activityListDataNoBox').height(height);
                             t.endPullupToRefresh(true);
@@ -132,7 +130,7 @@ $(function() {
                                 if (that.gV.startPage == 1) { //第一页时
                                     if (data.length == 0) {
                                         // 暂无数据显示
-                                        var topHeitgh = $('#activitySearch').height() + $(".tabCon").height();
+                                        var topHeitgh = $('#activitySearch').height();
                             var height = windowHeight - topHeitgh;
                             $('.activityListDataNoBox').height(height);
                             t.endPullupToRefresh(true);
@@ -159,8 +157,6 @@ $(function() {
                             for (var i = 0; i < list.length; i++) {
                                 list[i].actStartDate = list[i].actStartDate ? moment(list[i].actStartDate).format('MM月DD日') : '';
                                 list[i].actEndDate = list[i].actEndDate ? moment(list[i].actEndDate).format('MM月DD日') : '';
-                                list[i].isLive = list[i].actForm == 0 ? true : false // 是否为直播形式
-                                list[i].isPlayback = list[i].isPlayback == 1 ? true : false // 是否可回放观看
                             }
                             // 将列表插入到页面上
                             generateTemplate(list, that.$e.recordList, that.$e.activityListTemp)
@@ -171,21 +167,13 @@ $(function() {
                     },
                     callbackNoData: function(json) {
                         if (!json.data.activityVoPageInfo && that.gV.startPage == 1) {
-                            var topHeitgh = $('#activitySearch').height() + $(".tabCon").height();
+                            var topHeitgh = $('#activitySearch').height();
                             var height = windowHeight - topHeitgh;
                             $('.activityListDataNoBox').height(height);
                             t.endPullupToRefresh(true);
                             that.$e.activityListDataBox.hide();
                             that.$e.activityListDataNoBox.show();
-                            $('.activityNoListBox2').html('');
-                            var noList = [{
-                                id: json.data.defaultRecommend.id,
-                                actType: json.data.defaultRecommend.linkType,
-                                actId: json.data.defaultRecommend.id,
-                                actImgUrl: json.data.defaultRecommend.filePath,
-                                // actName: json.data.defaultRecommend.title
-                            }];
-                            that.getNoData(noList);
+                            that.getNoData();
                         }
                     }
                 }];
@@ -194,7 +182,7 @@ $(function() {
             //无数据获取列表
             getNoData: function(data) {
                 var that = this;
-                var topHeitgh = $('#activitySearch').height() + $(".tabCon").height();
+                var topHeitgh = $('#activitySearch').height();
                 var noBox = $('.activityNoListBox').height();
                 var height = windowHeight - topHeitgh - noBox;
 
@@ -301,25 +289,9 @@ $(function() {
                 }];
                 $.ajaxLoading(obj);
             },
-            // 重置列表加载提示语
-            resetLoadingHint: function() {
-                $(".mui-pull>.mui-pull-loading").removeClass('mui-hidden');
-                $(".mui-pull>.mui-pull-caption").removeClass('mui-pull-caption-nomore').addClass('mui-pull-caption-refresh').html("拼命加载中");
-            },
             //操作事件
             events: function() {
                 var that = this;
-                //tab切换搜索
-                mui('body').on('mdClick', '.tabCon>.tab', function() {
-                    $(this).addClass("active").siblings().removeClass('active');
-                    that.resetLoadingHint();
-                    $('.recordList').html('');
-                    that.gV.startPage = 1;
-                    that.initMui();
-                    mui('.contentWrapper').pullRefresh().scrollTo(0, 0, 100);
-                }, {
-                    htmdEvt: 'activityList_9'
-                });
                 //点击定位文字弹出定位选择
                 mui('#activityDataBox').on('mdClick', '.activityCityBox', function() {
                     $('#activityDataBox').hide();
@@ -343,7 +315,7 @@ $(function() {
                         'data-name': name,
                         'data-parentId': parentId
                     })
-                    that.resetLoadingHint();
+
                     that.gV.actCityName = name;
                     that.gV.startPage = 1;
                     that.initMui();
@@ -409,7 +381,6 @@ $(function() {
                 //搜索框输入触发查询数据
                 mui('#activitySearch').on('keyup', '.activitySearchInput input', function() {
                     $('.recordList').html('');
-                    that.resetLoadingHint();
                     that.gV.actName = $(this).val();
                     that.gV.startPage = 1;
                     that.initMui();
@@ -421,7 +392,6 @@ $(function() {
                 //清除搜索框触发查询数据
                 mui('#activitySearch').on('mdClick', '.mui-icon-clear', function() {
                     $('.recordList').html('');
-                    that.resetLoadingHint();
                     that.gV.startPage = 1;
                     that.initMui();
                     mui('.contentWrapper').pullRefresh().scrollTo(0, 0, 100);

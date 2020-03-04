@@ -67,7 +67,7 @@ body{
             top: 0;
         }
         .mui-placeholder{
-            font-size: .26rem;
+            font-size: 14px;
             position: absolute;
             z-index: 1;
             top: 0;
@@ -131,35 +131,6 @@ body{
     }
 }
 
-.tabCon {
-    width: 100%;
-    display: flex;
-    height: .8rem;
-    .tab {
-        flex: 1;
-        font-size: .28rem;
-        color: #9b9b9b;
-        height: .8rem;
-        line-height: .8rem;
-        text-align: center;
-        position: relative;
-        &.active {
-            color: #272727;
-            &:after {
-                position: absolute;
-                height: 0.06rem;
-                bottom: 0rem;
-                left: 50%;
-                margin-left: -.25rem;
-                content: '';
-                width: .5rem;
-                background: linear-gradient(to right, #6C83C9 0%, #061D6A 100%);
-                border-radius: .03rem;
-            }
-        }
-    }
-}
-
 #activityList{
     height: 100%;
     .mui-table-view{
@@ -219,19 +190,6 @@ body{
                 bottom: .4rem;
                 font-style: normal;
             }
-            .replayBtn {
-                position: absolute;
-                width: 1.18rem;
-                height: .37rem;
-                line-height: .37rem;
-                background: #fbfcfd;
-                color: #a67848;
-                font-size: .24rem;
-                right: .2rem;
-                top: .2rem;
-                text-align: center;
-                border-radius: .04rem;
-            }
         }
         .activityListBottomBox{
             padding:.15rem  .3rem;
@@ -257,6 +215,7 @@ body{
                 i{
                     display: inline-block;
                     font-style: normal;
+                    width: 1.61rem;
                     height: .36rem;
                     text-align: center;
                     line-height: .36rem;
@@ -267,7 +226,6 @@ body{
                     font-size: .24rem;
                     color: @976026;
                     letter-spacing: 0;
-                    padding: 0 .12rem;
                 }
             }
         }
