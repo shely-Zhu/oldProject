@@ -112,6 +112,30 @@ $(function() {
                         if(data.isPlayback){
                             $(".livePlayback").css("display","block")
                         }
+                        if(data.signUpFlag&&data.successPage){
+                            var yesText;
+                            if(data.actForm==0){
+                                yesText='进入直播间'
+                            }else{
+                                yesText='确定'
+                            }
+
+                            //需要风测
+                            var obj = {
+                                title: '温馨提示', //如果不传，默认不显示标题
+                                p: '<p>' + "您已报名参加本活动" + '</p>',
+                                yesTxt: yesText,
+                                hideCelButton: true,
+                                zIndex: 100,
+                                needYesHref: true, //是否需要把确定按钮改成a标签，默认false
+                                yesHref: site_url.thirdpartyLinks_url+"?jumpLinks="+data.successPage+"&type='activityDetails'", //跳转到绑定理财师页面
+                                htmdEvtYes:'activityDetails_8',  // 埋点确定按钮属性
+                                callback: function(t) {
+
+                                },
+                            };
+                            $.elasticLayer(obj)
+                        }
                         
                         //活动介绍
                         that.$e.actIntroduce.html(data.actIntroduce);
@@ -619,8 +643,7 @@ $(function() {
                 });
                 //弹框去直播
                 $(".toLink").on("click",function(){
-                 
-
+                    window.location.href=site_url.thirdpartyLinks_url+"?jumpLinks="+$(this).attr('url')+"&type='activityDetails'", //跳转到绑定理财师页面
                 });
                 //关闭大弹框
                 mui('body').on('mdClick', '.closeBtn', function() {

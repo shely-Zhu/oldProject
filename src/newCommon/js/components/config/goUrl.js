@@ -580,6 +580,8 @@ module.exports = function() {
     this.callDoctor_url = go_url.no_url + ' /life/views/videoDoctor/callDoctor.html';
     // 病例列表页面
     this.caseList_url = go_url.no_url + ' /life/views/videoDoctor/caseList.html';
+    //活动报名跳转直播连接
+    this.thirdpartyLinks_url = go_url.no_url + ' /allServerResources/views/thirdpartyLinks.html';
 
 
 };
