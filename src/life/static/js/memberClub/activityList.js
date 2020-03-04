@@ -317,6 +317,8 @@ $(function() {
                     that.gV.startPage = 1;
                     that.initMui();
                     mui('.contentWrapper').pullRefresh().scrollTo(0, 0, 100);
+                }, {
+                    htmdEvt: 'activityList_9'
                 });
                 //点击定位文字弹出定位选择
                 mui('#activityDataBox').on('mdClick', '.activityCityBox', function() {
