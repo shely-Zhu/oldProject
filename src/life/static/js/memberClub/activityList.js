@@ -71,13 +71,13 @@ $(function() {
                 //init后需要执行ready函数，才能够初始化出来
                 mui.ready(function() {
                     //隐藏当前的加载中loading
-                    if (!$('.activityList').hasClass('hasPullUp')) {
-                        $('.activityList').find('.mui-pull-bottom-pocket').addClass('mui-hidden');
+                    if (!$('.activityListDataBox .list').hasClass('hasPullUp')) {
+                        $('.activityListDataBox .list').find('.mui-pull-bottom-pocket').addClass('mui-hidden');
                     }
                     //这一句初始化并第一次执行mui上拉加载的callback函数
                     mui('.contentWrapper').pullRefresh().pullupLoading();
                     //为$id添加hasPullUp  class
-                    $('.activityList').addClass('hasPullUp');
+                    $('.activityListDataBox .list').addClass('hasPullUp');
                 });
             },
             //有数据获取列表
@@ -202,11 +202,11 @@ $(function() {
                     $('.activityNoList').height(height);
                 }
                 //隐藏当前的加载中loading
-                if (!$('.activityList').hasClass('hasPullUp')) {
-                    $('.activityList').find('.mui-pull-bottom-pocket').addClass('mui-hidden');
+                if (!$('.activityListDataBox .list').hasClass('hasPullUp')) {
+                    $('.activityListDataBox .list').find('.mui-pull-bottom-pocket').addClass('mui-hidden');
                 }
                 //为$id添加hasPullUp  class
-                $('.activityList').addClass('hasPullUp');
+                $('.activityListDataBox .list').addClass('hasPullUp');
                 setTimeout(function() {
                     //去掉mui-pull-bottom-pocket的mui-hidden
                     $('.contentWrapper').find('.mui-pull-bottom-pocket').removeClass('mui-hidden');
@@ -220,7 +220,7 @@ $(function() {
             //将城市定位模板加载
             getCityListData: function() {
                 //为$id添加hasPullUp  class
-                $('.activityList').addClass('hasPullUp');
+                $('.activityListDataBox .list').addClass('hasPullUp');
                 setTimeout(function() {
                     //去掉mui-pull-bottom-pocket的mui-hidden
                     $('.contentWrapper').find('.mui-pull-bottom-pocket').removeClass('mui-hidden');

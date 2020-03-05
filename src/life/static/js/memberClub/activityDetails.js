@@ -104,7 +104,9 @@ $(function() {
                         //报名时间
                         //判断直播时间
                         if(data.actForm==0){
-                            $(".online").find(".startTimeOrendTime").html(data.actPlayStartTim + '-' + data.actPlayEndTime);
+                            $(".online").find(".startTimeOrendTime").html(data.actPlayTimeMark);
+                            $(".online").show();
+                            $(".notOnline").hide();
                         }else{
                             $(".notOnline").find(".startTimeOrendTime").html(data.actStartDateStr + '-' + data.actEndDateStr);
                         }
@@ -263,12 +265,7 @@ $(function() {
                             }
 
                         }
-                        mui('body').on('mdClick', '.toLink', function() {
-                            window.location.href=site_url.thirdpartyLinks_url+"?jumpLinks="+$(this).attr('url')+"&type='activityDetails'"
-                        }, {
-                            htmdEvt: 'activityDetails_3'
-                        });
-
+                        that.events();
                     },
                     callbackFail: function(data) {
                         $('.activityBottomBtnBox').removeClass('disabled');
@@ -670,7 +667,13 @@ $(function() {
                     window.location.href = site_url.rewards_url;
                 },{
                     htmdEvt: 'activityDetails_7'
-                })
+                });
+                //跳转直播
+                mui('body').on('mdClick', '.toLink', function() {
+                    window.location.href=site_url.thirdpartyLinks_url+"?jumpLinks="+$(this).attr('url')+"&type='activityDetails'"
+                }, {
+                    htmdEvt: 'activityDetails_3'
+                });
             }
         }
         //调用初始化函数
