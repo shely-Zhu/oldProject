@@ -104,7 +104,7 @@ $(function() {
                         //报名时间
                         //判断直播时间
                         if(data.actForm==0){
-                            $(".online").find(".startTimeOrendTime").html(data.actPlayStartTim + '-' + data.actPlayEndTime);
+                            $(".online").find(".startTimeOrendTime").html(data.actPlayTimeMark);
                             $(".online").show();
                             $(".notOnline").hide();
                         }else{
