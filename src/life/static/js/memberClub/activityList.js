@@ -409,14 +409,19 @@ $(function() {
                     htmdEvt: 'activityList_4'
                 });
                 //搜索框输入触发查询数据
+                var timer = 0
                 mui('#activitySearch').on('keyup', '.activitySearchInput input', function() {
-                    console.log("删除触发")
-                    $('.recordList').html('');
+                    clearTimeout(timer)
+                    timer = setTimeout(function(){
+                        $('.recordList').html('');
                     that.resetLoadingHint();
                     that.gV.actName = $(this).val();
                     that.gV.startPage = 1;
-                    that.getData(that.gV.aThis);
+                    // that.initMui()
+                    // that.getData(that.gV.aThis);
                     mui('.contentWrapper').pullRefresh().scrollTo(0, 0, 100);
+                    },300)
+                    
                 }, {
                     htmdEvt: 'activityList_5'
                 });
