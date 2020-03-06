@@ -109,17 +109,20 @@ var monthReportDetail = {
 
 				var year = now.substring(0,4);
 				var month = now.substring(5,7);
-				that.getElements.month = month;
+				// that.getElements.month = Number(month);
 				var dayTime = json.reportTime;
 				if(dayTime.indexOf('年') != -1) {
 					year = dayTime.split('年')[0];
 					month = dayTime.split('年')[1].split('月')[0];
+					that.getElements.month = month;
 					that.getMonthDateRange(year,month);
 				} else if(dayTime.indexOf('-') != -1) {
 					year = dayTime.split('-')[0];
 					month = dayTime.split('-')[1].split('-')[0];
+					that.getElements.month = month;
 					that.getMonthDateRange(year,month);
 				} else{
+					that.getElements.month = month;
 					that.getMonthDateRange(year,month);
 				}
 				that.queryInvestProdHoldShareList();
@@ -304,6 +307,9 @@ var monthReportDetail = {
 				that.pieChartDataDetail = [];
 
 				var lastMonth = Number(that.getElements.month)-1;
+				if( lastMonth  == '0'){
+					lastMonth = 12;
+				} 
 
 				if ( data.monthHoldShareList.length) {
 					//有数据
