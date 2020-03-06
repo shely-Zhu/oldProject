@@ -65,12 +65,22 @@ $(function() {
                     needLogin: that.gV.isNeedLogin,
                     callbackDone: function(json) {
                         var data = json.data;
-                        if (data.actStatus == 2) {
+                        if(data.actStatus == 0) {
+                            $('.activityBottomBox a').html('敬请期待');
+                            $('.activityBottomBtnBox').hide();
+                            $('.activityBottomBox').show();
+                        } else if (data.actStatus == 1) { // 进行中的活动已报名
+                            if (data.signUpFlag) {
+                                $('.activityBottomBox a').html('已报名');
+                                $('.activityBottomBtnBox').hide();
+                                $('.activityBottomBox').show();
+                            }
+                        } else if (data.actStatus == 2) {
                             $('.activityBottomBox a').html('已结束');
                             $('.activityBottomBtnBox').hide();
                             $('.activityBottomBox').show();
-                        } else if (data.signUpFlag) {
-                            $('.activityBottomBox a').html('已报名');
+                        } else if (data.actStatus == 3) {
+                            $('.activityBottomBox a').html('已删除');
                             $('.activityBottomBtnBox').hide();
                             $('.activityBottomBox').show();
                         }
