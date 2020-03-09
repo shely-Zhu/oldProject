@@ -680,7 +680,8 @@ $(function() {
                 });
                 //跳转直播
                 mui('body').on('mdClick', '.toLink', function() {
-                    window.location.href=site_url.thirdpartyLinks_url+"?jumpLinks="+$(this).attr('url')+"&type='activityDetails'"
+                    window.location.href = $(this).attr('url') + "?isHtOuterLinkUniqueIdentification=true";
+                    
                 }, {
                     htmdEvt: 'activityDetails_3'
                 });

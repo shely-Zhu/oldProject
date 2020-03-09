@@ -36,6 +36,7 @@ $(function() {
                 actName: $('.activitySearchInput input').val(), //活动名称
                 actProvinceNO: $('#locationCity').attr('data-parentid'), //活动省份编号
                 actCityName: $('#locationCity').attr('data-name'), //活动城市编号
+                aThis: null,
             },
             //初始化
             init: function() {
@@ -63,6 +64,7 @@ $(function() {
                             contentrefresh: '拼命加载中',
                             contentnomore: '暂无更多内容', //可选，请求完毕若没有更多数据时显示的提醒内容；
                             callback: function() {
+                                that.gV.aThis = this;
                                 that.getData(this);
                             }
                         }
@@ -92,7 +94,7 @@ $(function() {
                     data: {
                         startPage: that.gV.startPage,
                         pageSize: that.gV.pageSize,
-                        actName: that.gV.actName,
+                        actName: $('.activitySearchInput input').val(),
                         actConductCity: that.gV.actCityName, //活动城市编号
                         actStatus: actStatus
                     },
@@ -407,13 +409,19 @@ $(function() {
                     htmdEvt: 'activityList_4'
                 });
                 //搜索框输入触发查询数据
+                var timer = 0
                 mui('#activitySearch').on('keyup', '.activitySearchInput input', function() {
-                    $('.recordList').html('');
+                    clearTimeout(timer)
+                    timer = setTimeout(function(){
+                        $('.recordList').html('');
                     that.resetLoadingHint();
                     that.gV.actName = $(this).val();
                     that.gV.startPage = 1;
-                    that.initMui();
+                    // that.initMui()
+                    // that.getData(that.gV.aThis);
                     mui('.contentWrapper').pullRefresh().scrollTo(0, 0, 100);
+                    },300)
+                    
                 }, {
                     htmdEvt: 'activityList_5'
                 });
