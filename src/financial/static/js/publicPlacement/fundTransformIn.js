@@ -211,11 +211,11 @@ $(function () {
 						generateTemplate(data, that.$el.popupUl, that.$el.bankListTemplate,true);
 						if(that.gV.payType == '0'){
 							$(".bank-pay").show();
-							$(".onright-left-two").show();
+//							$(".onright-left-two").show();
 							$(".onright-left").removeClass("onright-left-one-one");
 						} else if(that.gV.payType == '1') {
 							$(".bank-pay").hide();
-							$(".onright-left-two").hide();
+//							$(".onright-left-two").hide();
 							$(".onright-left").addClass("onright-left-one-one");
 						}
 						if(useEnv == '1'){//转账汇款隐藏限额。
@@ -499,7 +499,7 @@ $(function () {
 				that.gV.payType = $(this).attr('pay-type');
 				if(that.gV.payType == '0'){
 					$(".bank-pay").show();
-					$(".onright-left-two").show();
+//					$(".onright-left-two").show();
 					$(".onright-left").removeClass("onright-left-one-one");
 					if(that.gV.accountType === 0 || that.gV.accountType === 2){
 						tipAction('机构客户暂不支持在线支付');
@@ -507,7 +507,7 @@ $(function () {
 					}
 				}else  if(that.gV.payType == '1') {
 					$(".bank-pay").hide();
-					$(".onright-left-two").hide();
+//					$(".onright-left-two").hide();
 					$(".onright-left").addClass("onright-left-one-one");
 				}
 				var useEnv = $(this).attr('pay-type');
@@ -519,14 +519,14 @@ $(function () {
 			}, {
 				htmdEvt: 'fundTransformIn_01'
 			})
-
+			//点击关闭关闭选择银行卡弹框
 			mui("body").on('mdClick','.popup-close',function(){
 				$('.popup').css('display','none');
 				$('.popup-password').css('display','none');
 			}, {
 				htmdEvt: 'fundTransformIn_02'
 			})
-
+			//点击空白区域关闭选择银行卡弹框
 			mui("body").on('mdClick','.popup-mask',function(){
 				$('.popup').css('display','none');
 				$('.popup-password').css('display','none');
