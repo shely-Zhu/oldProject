@@ -258,7 +258,7 @@ $(function() {
                                     //非老带新
                                     if (data.data.brandPrizeVo.isHave == 0) {
                                         //没有奖品
-                                        that.successNoConOpen(successTitle,data.data.url,data.data.actForm);
+                                        that.successNoConOpen(successTitle,data.data.url,data.data.actForm,1);
                                     } else if (data.data.brandPrizeVo.isHave == 1) {
                                         //有奖品
                                         if (data.data.brandPrizeVo.prizeType == 1) {
@@ -596,7 +596,7 @@ $(function() {
                 $('.mask').show();
             },
             //非老带新无奖品弹框--successTit成功提示
-            successNoConOpen: function(successTit,url,actForm) {
+            successNoConOpen: function(successTit,url,actForm,type) {
                 if(url){
                     //有url
                     $('#notOldToNewNoPrize').find(".hideBox").removeClass()
@@ -609,6 +609,9 @@ $(function() {
                 }
                 if (successTit) {
                     $('#notOldToNewNoPrize').find('.successTit').html(successTit);
+                }
+                if(type){
+                    $('#notOldToNewNoPrize').find(".successContent").html("尊享专业服务和会员权益，更多精彩尽在恒天财富APP！")
                 }
                 $('#notOldToNewNoPrize').show();
                 $('.mask').show();
