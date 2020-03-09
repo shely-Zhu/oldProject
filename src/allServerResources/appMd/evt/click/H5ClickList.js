@@ -600,6 +600,7 @@ var clickList = {
 	"activityList_6":{ type:'click', evtid: 'activityList_6', topic: '清除搜索框触发查询数据', info: ''},
 	"activityList_7":{ type:'click', evtid: 'activityList_7', topic: '点击搜索框触发选中', info: ''},
 	"activityList_8":{ type:'click', evtid: 'activityList_8', topic: '城市头部返回', info: ''},
+	"activityList_9":{ type:'click', evtid: 'activityList_9', topic: '活动列表-tab切换', info: ''},
 	// activityDetails.html
 	"activityDetails_0":{ type:'click', evtid: 'activityDetails_0', topic: '返回按钮事件', info: ''},
 	"activityDetails_1":{ type:'click', evtid: 'activityDetails_1', topic: '立即报名方法', info: ''},

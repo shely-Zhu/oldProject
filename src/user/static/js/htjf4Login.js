@@ -113,7 +113,8 @@ $(function() {
                     callbackDone: function(json) {
                         if (splitUrl['redirectUrl']) {
                             //跳转到来之前的url
-                            window.location.href = splitUrl['redirectUrl'];
+                            // window.location.href = splitUrl['redirectUrl'];
+                            window.location.href = window.location.href.split("redirectUrl=")[1]
                         } else if (splitUrl['originUrl']) {
                             //跳转到来之前的url
                             window.location.href = splitUrl['originUrl'];

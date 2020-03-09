@@ -253,6 +253,7 @@ module.exports = {
 
     //会员俱乐部
     './life/static/js/memberClub/activityList': "./src/life/static/js/memberClub/activityList.js",
+    './life/static/js/memberClub/activityListOld': "./src/life/static/js/memberClub/activityListOld.js",
     //会员俱乐部-暂无数据mine
 
     './life/static/js/memberClub/activityNoList': "./src/life/static/js/memberClub/activityNoList.js",

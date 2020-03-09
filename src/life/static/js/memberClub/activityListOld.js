@@ -36,7 +36,6 @@ $(function() {
                 actName: $('.activitySearchInput input').val(), //活动名称
                 actProvinceNO: $('#locationCity').attr('data-parentid'), //活动省份编号
                 actCityName: $('#locationCity').attr('data-name'), //活动城市编号
-                aThis: null,
             },
             //初始化
             init: function() {
@@ -49,7 +48,7 @@ $(function() {
             //初始化mui的上拉加载
             initMui: function() {
                 var that = this;
-                var topHeitgh = $('#activitySearch').height() + $(".tabCon").height();
+                var topHeitgh = $('#activitySearch').height();
                 var height = windowHeight - topHeitgh;
 
                 if (!$('.list').hasClass('setHeight')) {
@@ -64,7 +63,6 @@ $(function() {
                             contentrefresh: '拼命加载中',
                             contentnomore: '暂无更多内容', //可选，请求完毕若没有更多数据时显示的提醒内容；
                             callback: function() {
-                                that.gV.aThis = this;
                                 that.getData(this);
                             }
                         }
@@ -73,20 +71,18 @@ $(function() {
                 //init后需要执行ready函数，才能够初始化出来
                 mui.ready(function() {
                     //隐藏当前的加载中loading
-                    if (!$('.activityListDataBox .list').hasClass('hasPullUp')) {
-                        $('.activityListDataBox .list').find('.mui-pull-bottom-pocket').addClass('mui-hidden');
+                    if (!$('.activityList').hasClass('hasPullUp')) {
+                        $('.activityList').find('.mui-pull-bottom-pocket').addClass('mui-hidden');
                     }
                     //这一句初始化并第一次执行mui上拉加载的callback函数
                     mui('.contentWrapper').pullRefresh().pullupLoading();
                     //为$id添加hasPullUp  class
-                    $('.activityListDataBox .list').addClass('hasPullUp');
+                    $('.activityList').addClass('hasPullUp');
                 });
             },
             //有数据获取列表
             getData: function(t) {
                 var that = this;
-                // 获取搜索活动的状态值
-                var actStatus = $(".tab.active").index()
                 var obj = [{ // 系统调仓记录列表
                     url: site_url.getActivitiesList_api,
                     needLogin: false,
@@ -94,14 +90,14 @@ $(function() {
                     data: {
                         startPage: that.gV.startPage,
                         pageSize: that.gV.pageSize,
-                        actName: $('.activitySearchInput input').val(),
+                        actName: that.gV.actName,
                         actConductCity: that.gV.actCityName, //活动城市编号
-                        actStatus: actStatus
+
                     },
                     needDataEmpty: true,
                     callbackDone: function(json) {
                         if (!json.data.activityVoPageInfo && that.gV.startPage == 1) {
-                            var topHeitgh = $('#activitySearch').height() + $(".tabCon").height();
+                            var topHeitgh = $('#activitySearch').height();
                             var height = windowHeight - topHeitgh;
                             $('.activityListDataNoBox').height(height);
                             t.endPullupToRefresh(true);
@@ -134,7 +130,7 @@ $(function() {
                                 if (that.gV.startPage == 1) { //第一页时
                                     if (data.length == 0) {
                                         // 暂无数据显示
-                                        var topHeitgh = $('#activitySearch').height() + $(".tabCon").height();
+                                        var topHeitgh = $('#activitySearch').height();
                             var height = windowHeight - topHeitgh;
                             $('.activityListDataNoBox').height(height);
                             t.endPullupToRefresh(true);
@@ -161,8 +157,6 @@ $(function() {
                             for (var i = 0; i < list.length; i++) {
                                 list[i].actStartDate = list[i].actStartDate ? moment(list[i].actStartDate).format('MM月DD日') : '';
                                 list[i].actEndDate = list[i].actEndDate ? moment(list[i].actEndDate).format('MM月DD日') : '';
-                                list[i].isLive = list[i].actForm == 0 ? true : false // 是否为直播形式
-                                list[i].isPlayback = list[i].isPlayback == 1 ? true : false // 是否可回放观看
                             }
                             // 将列表插入到页面上
                             generateTemplate(list, that.$e.recordList, that.$e.activityListTemp)
@@ -173,21 +167,13 @@ $(function() {
                     },
                     callbackNoData: function(json) {
                         if (!json.data.activityVoPageInfo && that.gV.startPage == 1) {
-                            var topHeitgh = $('#activitySearch').height() + $(".tabCon").height();
+                            var topHeitgh = $('#activitySearch').height();
                             var height = windowHeight - topHeitgh;
                             $('.activityListDataNoBox').height(height);
                             t.endPullupToRefresh(true);
                             that.$e.activityListDataBox.hide();
                             that.$e.activityListDataNoBox.show();
-                            $('.activityNoListBox2').html('');
-                            var noList = [{
-                                id: json.data.defaultRecommend.id,
-                                actType: json.data.defaultRecommend.linkType,
-                                actId: json.data.defaultRecommend.id,
-                                actImgUrl: json.data.defaultRecommend.filePath,
-                                // actName: json.data.defaultRecommend.title
-                            }];
-                            that.getNoData(noList);
+                            that.getNoData();
                         }
                     }
                 }];
@@ -196,7 +182,7 @@ $(function() {
             //无数据获取列表
             getNoData: function(data) {
                 var that = this;
-                var topHeitgh = $('#activitySearch').height() + $(".tabCon").height();
+                var topHeitgh = $('#activitySearch').height();
                 var noBox = $('.activityNoListBox').height();
                 var height = windowHeight - topHeitgh - noBox;
 
@@ -204,11 +190,11 @@ $(function() {
                     $('.activityNoList').height(height);
                 }
                 //隐藏当前的加载中loading
-                if (!$('.activityListDataBox .list').hasClass('hasPullUp')) {
-                    $('.activityListDataBox .list').find('.mui-pull-bottom-pocket').addClass('mui-hidden');
+                if (!$('.activityList').hasClass('hasPullUp')) {
+                    $('.activityList').find('.mui-pull-bottom-pocket').addClass('mui-hidden');
                 }
                 //为$id添加hasPullUp  class
-                $('.activityListDataBox .list').addClass('hasPullUp');
+                $('.activityList').addClass('hasPullUp');
                 setTimeout(function() {
                     //去掉mui-pull-bottom-pocket的mui-hidden
                     $('.contentWrapper').find('.mui-pull-bottom-pocket').removeClass('mui-hidden');
@@ -222,7 +208,7 @@ $(function() {
             //将城市定位模板加载
             getCityListData: function() {
                 //为$id添加hasPullUp  class
-                $('.activityListDataBox .list').addClass('hasPullUp');
+                $('.activityList').addClass('hasPullUp');
                 setTimeout(function() {
                     //去掉mui-pull-bottom-pocket的mui-hidden
                     $('.contentWrapper').find('.mui-pull-bottom-pocket').removeClass('mui-hidden');
@@ -303,25 +289,9 @@ $(function() {
                 }];
                 $.ajaxLoading(obj);
             },
-            // 重置列表加载提示语
-            resetLoadingHint: function() {
-                $(".mui-pull>.mui-pull-loading").removeClass('mui-hidden');
-                $(".mui-pull>.mui-pull-caption").removeClass('mui-pull-caption-nomore').addClass('mui-pull-caption-refresh').html("拼命加载中");
-            },
             //操作事件
             events: function() {
                 var that = this;
-                //tab切换搜索
-                mui('body').on('mdClick', '.tabCon>.tab', function() {
-                    $(this).addClass("active").siblings().removeClass('active');
-                    that.resetLoadingHint();
-                    $('.recordList').html('');
-                    that.gV.startPage = 1;
-                    that.initMui();
-                    mui('.contentWrapper').pullRefresh().scrollTo(0, 0, 100);
-                }, {
-                    htmdEvt: 'activityList_9'
-                });
                 //点击定位文字弹出定位选择
                 mui('#activityDataBox').on('mdClick', '.activityCityBox', function() {
                     $('#activityDataBox').hide();
@@ -345,7 +315,7 @@ $(function() {
                         'data-name': name,
                         'data-parentId': parentId
                     })
-                    that.resetLoadingHint();
+
                     that.gV.actCityName = name;
                     that.gV.startPage = 1;
                     that.initMui();
@@ -404,24 +374,17 @@ $(function() {
                 mui('body').on('mdClick', '.mui-card', function() {
                     var actType = $(this).children('a').attr('data-actType');
                     var actId = $(this).children('a').attr('data-actId');
-                    window.location.href = site_url.activityDetails_url + '?actType=' + actType + '&' + 'actId=' + actId + '&isNeedLogin=0&appNewWebView=1';
+                    window.location.href = site_url.activityDetails_url + '?actType=' + actType + '&' + 'actId=' + actId + '&isNeedLogin=0';
                 }, {
                     htmdEvt: 'activityList_4'
                 });
                 //搜索框输入触发查询数据
-                var timer = 0
                 mui('#activitySearch').on('keyup', '.activitySearchInput input', function() {
-                    clearTimeout(timer)
-                    timer = setTimeout(function(){
-                        $('.recordList').html('');
-                    that.resetLoadingHint();
+                    $('.recordList').html('');
                     that.gV.actName = $(this).val();
                     that.gV.startPage = 1;
-                    // that.initMui()
-                    // that.getData(that.gV.aThis);
+                    that.initMui();
                     mui('.contentWrapper').pullRefresh().scrollTo(0, 0, 100);
-                    },300)
-                    
                 }, {
                     htmdEvt: 'activityList_5'
                 });
@@ -429,7 +392,6 @@ $(function() {
                 //清除搜索框触发查询数据
                 mui('#activitySearch').on('mdClick', '.mui-icon-clear', function() {
                     $('.recordList').html('');
-                    that.resetLoadingHint();
                     that.gV.startPage = 1;
                     that.initMui();
                     mui('.contentWrapper').pullRefresh().scrollTo(0, 0, 100);
