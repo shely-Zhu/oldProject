@@ -21,6 +21,7 @@ var pOver = Mock.mock({
                 "bankAccountMask": "**** **** **** 6220", //银行账号加星
                 "bankName": "建设银行", //所属银行名称
                 "isPub": "2",
+                "bankAccountSecret":'123123',
                 "tradeAcco": "10000015", //交易账号
                 "capitalMode": "M", //资金方式
                 "singleNum": "1000000", //单笔限额数值
