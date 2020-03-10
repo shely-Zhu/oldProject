@@ -132,18 +132,17 @@ $(function() {
                                 yesText='确定'
                             }
 
-                            //需要风测
+                            //已报名
                             var obj = {
                                 title: '温馨提示', //如果不传，默认不显示标题
                                 p: '<p>' + "您已报名参加本活动" + '</p>',
                                 yesTxt: yesText,
                                 hideCelButton: true,
                                 zIndex: 100,
-                                needYesHref: true, //是否需要把确定按钮改成a标签，默认false
-                                yesHref: data.successPage + "?isHtOuterLinkUniqueIdentification=true", //跳转到绑定理财师页面
                                 htmdEvtYes:'activityDetails_8',  // 埋点确定按钮属性
+                                isClose:false,
                                 callback: function(t) {
-
+                                    window.location.href=data.successPage + "?isHtOuterLinkUniqueIdentification=true"
                                 },
                             };
                             $.elasticLayer(obj)

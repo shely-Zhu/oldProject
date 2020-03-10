@@ -78,6 +78,7 @@
 
                     htmdEvtYes:'',  // 埋点确定按钮属性
                     htmdEvtCel:'',  // 埋点取消按钮属性
+                    isClose:true,
                 }
 
                 this.options = $.extend({}, this.defaults, opts)
@@ -222,7 +223,9 @@
                         //调用的是callback回调函数
                         window._submitMd && window._submitMd( 3, that.options.htmdEvtYes );
                         that.options.callback(that);
-                        $(this).parents('.elasticLayer').hide();
+                        if(that.options.isClose){
+                            $(this).parents('.elasticLayer').hide();
+                        }
                     })
                 },
 
