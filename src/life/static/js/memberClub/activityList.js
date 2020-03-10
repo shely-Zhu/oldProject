@@ -145,10 +145,14 @@ $(function() {
 
                                     } else { // 没有更多数据了
                                         t.endPullupToRefresh(true);
+                                        $("#activityList .mui-pull-bottom-pocket").find(".mui-pull-loading").addClass("mui-hidden")
+                                        $("#activityList .mui-pull-bottom-pocket").find(".mui-pull-caption").removeClass("mui-pull-caption-refresh").addClass('mui-pull-caption-nomore').html("没有更多了");
                                     }
                                 } else {
                                     //其他页-没有更多数据
                                     t.endPullupToRefresh(true);
+                                    $("#activityList .mui-pull-bottom-pocket").find(".mui-pull-loading").addClass("mui-hidden")
+                                        $("#activityList .mui-pull-bottom-pocket").find(".mui-pull-caption").removeClass("mui-pull-caption-refresh").addClass('mui-pull-caption-nomore').html("没有更多了");
                                 }
                             } else { // 还有更多数据
                                 t.endPullupToRefresh(false);
