@@ -521,6 +521,12 @@ $(function () {
 			})
 			//点击关闭关闭选择银行卡弹框
 			mui("body").on('mdClick','.popup-close',function(){
+				//解决点击在线支付后没有选择银行卡直接关闭或空白区域关闭支付方式却发生变化引起的转账汇款也有限制限额的问题
+				if(that.gV.payType == "0"){
+					that.gV.payType = "1"
+				}else if(that.gV.payType == "1"){
+					that.gV.payType = "0"
+				}
 				$('.popup').css('display','none');
 				$('.popup-password').css('display','none');
 			}, {
@@ -528,6 +534,12 @@ $(function () {
 			})
 			//点击空白区域关闭选择银行卡弹框
 			mui("body").on('mdClick','.popup-mask',function(){
+				//解决点击在线支付后没有选择银行卡直接关闭或空白区域关闭支付方式却发生变化引起的转账汇款也有限制限额的问题
+				if(that.gV.payType == "0"){
+					that.gV.payType = "1"
+				}else if(that.gV.payType == "1"){
+					that.gV.payType = "0"
+				}
 				$('.popup').css('display','none');
 				$('.popup-password').css('display','none');
 			}, {
