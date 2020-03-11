@@ -437,7 +437,7 @@ $(function () {
 				if(parseFloat(that.gv.transformMoney) < 0.01) {
 					tipAction("转出金额最小值为0.01元");
 					return
-				}else if(parseFloat(that.gv.transformMoney)>that.gv.dailyOnceMaxLimit){
+				}else if(parseFloat(that.gv.transformMoney)>that.gv.dailyOnceMaxLimit && that.gv.operationType == '1'){
 					//$(".checkMessage").css({"display":"block"});
 					//$(".checkMessage").html("转出金额超过单笔最高限额");
 					tipAction("转出金额超过单笔最高限额"+that.gv.dailyOnceMaxLimit + "元");
