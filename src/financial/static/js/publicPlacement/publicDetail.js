@@ -100,7 +100,6 @@ $(function() {
                     // fundCode:"000847",
                 },
                 callbackDone: function(json) {
-                    debugger
                     that.fundComId = json.data.fmcComId ? json.data.fmcComId : 'gz04tVwXga';
                     that.secuId = json.data.secuId ? json.data.secuId : '000846.OF';
                     that.chiName = json.data.chiName ? json.data.chiName : '中融货币市场基金';
