@@ -109,6 +109,24 @@
 				<div class="wrap">
 					<!-- 基本信息 start -->
 					<div class="panel panel1 active">
+						<!-- 视频直播 -->
+						<div class="videoOnline">
+								<div class="clearfix titleWrap typeNo5Wrap">
+										<span class="title qrnh activeLine videoTitle">相关视频</span>
+										<div class="firstVideoBox">
+											<img class="firstVideo" src="/common/img/lazyImgList.png"/>
+											<h3 class="firstVideoTitle"><span class="firstVideoTitleText">我是基金名称国成资产坤石5号私募投资基金</span><i class="iconfont">&#xe636;</i> </h3>
+											<p>
+												<span>主讲嘉宾：<i class="firstVideoSpeaker"></i></span>
+												<span>时长:<i class="firstVideoDuration"></i></span>
+											</p>
+										</div>
+										<div class="VideoList" id="VideoList">
+											
+										</div>
+								</div>
+						</div>
+						<!-- 视频直播 -->
 						<!-- 私募基金产品详情折线图 -->
 						<div class="lineWrap hide">
 							<div class="clearfix titleWrap typeNo5Wrap">
@@ -353,7 +371,21 @@
 					<!--{{/if}}-->
 		{{/each}}
 	</script>
-
+<!-- 视频列表 -->
+	<script id="VideoList-template" type="text/x-handlebars-template">
+		{{#each this}}
+			<div class="VideoListBox">
+					<div class="VideoListImg">
+						<img class="firstVideo" src="{{videoCoverUrl}}"/>
+					</div>
+					<div class="VideoListText">
+						<p class="videoListTitle">{{videoName}}</p>
+						<p class="videoAnthor">主讲嘉宾：{{videoSpeaker}}</p>
+					</div>
+			</div>			
+		{{/each}}
+	</script>
+<!-- 视频列表 -->
 	<script id="prvLevel" type="text/x-handlebars-template">
 	  {{! 左侧页面列表}}
 		{{#each this}}

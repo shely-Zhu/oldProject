@@ -34,6 +34,7 @@ $(function() {
             projectId: splitUrl['projectId'],
             adjustmentTemp: $('#wrap-template'), // 最新调仓模板
             conditionTemplate: $('#condition-template'), // 最新调仓模板
+            VideoListTemplate:$("#VideoList-template"),//视频模板
             realLi: $('#real-condition>li'), // 条件下的五条
             lineType: '',
         },
@@ -88,6 +89,7 @@ $(function() {
             that.getData();
             // 查询产品亮点
             that.queryProductImage();
+            that.queryProjectVedioList();
             that.events();
         },
         getData: function() {
@@ -490,6 +492,36 @@ $(function() {
                 callbackNoData: function(json) {
                     // tipAction(json.message);
                     $(".performanceComparison").hide();
+                }
+            }];
+            $.ajaxLoading(obj);
+
+        },
+        //视频列表
+        queryProjectVedioList:function(){
+            var that = this;
+            var obj = [{
+                url: site_url.queryProjectVedioList_api,
+                data: {
+                    projectId: that.$e.projectId,
+                },
+                contentTypeSearch:true,
+                needLogin: true,
+                callbackDone: function(json) {
+                    var tplm = $("#VideoList-template").html();
+                    var template = Handlebars.compile(tplm);
+                    $(".VideoList").html(template(json.data));
+                    $(".firstVideoBox").find(".firstVideo").attr("src",json.data[0].videoCoverUrl)
+                    $(".firstVideoBox").find(".firstVideoTitleText").html(json.data[0].videoName)
+                    $(".firstVideoBox").find(".firstVideoSpeaker").html(json.data[0].videoSpeaker)
+                    $(".firstVideoBox").find(".firstVideoDuration").html(json.data[0].videoDuration)
+                    
+
+                },
+                callbackNoData: function(json) {
+                    // tipAction(json.message);
+                    // $(".performanceComparison").hide();
+                    $(".videoOnline").hide();
                 }
             }];
             $.ajaxLoading(obj);
