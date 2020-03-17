@@ -619,3 +619,82 @@ html{
 	opacity: 0.5 !important;
 }
 
+.videoOnline{
+	padding: .29rem .3rem .3rem .4rem;
+	background: #FFFFFF;
+	.videoTitle{
+		font-size:.32rem;
+		margin-bottom: .5rem;
+		font-weight: bold;
+		display: inline-block;
+	}
+	.firstVideoBox{
+		padding-bottom: .4rem;
+		border-bottom: 1px solid #E7E9ED;
+		.firstVideo{
+			width: 100%;
+			height: 2.7rem;
+		}
+		.firstVideoTitle{
+			font-size: .32rem;
+			color: #272727;
+			margin-bottom: .32rem;
+			margin-top: .42rem;
+			font-weight: bold;
+			display: flex;
+			line-height: .31rem;
+			.firstVideoTitleText{
+				width: 90%;
+				overflow: hidden;
+				text-overflow:ellipsis;
+				white-space: nowrap;
+				margin-right: .27rem;
+			}
+		}
+
+	}
+	.VideoList{
+		display: flex;
+		flex-wrap: wrap;
+		padding-top: .4rem;
+		.VideoListBox{
+			width: 48%;
+			margin-bottom: .4rem;
+			.VideoListImg{
+				img{
+					width: 100%;
+					height: 1.3rem;
+				}
+			}
+			.VideoListText{
+				.videoListTitle{
+					display: -webkit-box;
+					-webkit-line-clamp: 2;    
+					-webkit-box-orient: vertical;
+					overflow: hidden;
+					color: #272727;
+					font-size: .26rem;
+					margin-bottom: .32rem;
+					font-weight: bold;
+					margin-top: .31rem;
+				}
+				.videoAnthor{
+					color: #9B9B9B;
+					font-size:.24rem;
+				}	
+			}
+		}
+		.VideoListBox:nth-child(2n){
+			margin-left:.2rem;
+		}
+		.VideoListBox:first-child{
+			display: none;
+		}
+		
+	}
+	
+	
+	
+	
+}
+
