@@ -395,6 +395,19 @@ $(function() {
             }]
             $.ajaxLoading(obj);
         },
+        signContract: function(reserveId, proId, projectName, isAllowAppend, isPubToPri) {
+            var obj = [{
+                url: site_url.JumpForSignElec_api,
+                data: {
+                    "reserveId": reserveId
+                },
+                callbackDone: function(json) {
+                    var status = json.data;
+                    window.location.href = site_url.elecThirdStep_url + '?reserveId=' + reserveId + '&projectId=' + proId + '&projectName=' + projectName + '&isAllowAppend=' + isAllowAppend + '&isPubToPri=' + isPubToPri + '&status=' + status;
+                },
+            }];
+            $.ajaxLoading(obj);
+        },
         events: function() { //绑定事件
             var that = this;
 
@@ -544,7 +557,7 @@ $(function() {
                     var isQualified = $(this).attr('data-isqualified'); //是否满足合格投资者
                     var isPubToPri = $(this).attr('data-ispubtopri'); //是否公转私
                     if(type == 'toConfirm') {
-                        privateAuthenticationProcess(proId)
+                        privateAuthenticationProcess(proId, isPubToPri)
                     } else if (type == 'toCertif') { //去合格投资者认证
                         if (isElec == 0) {
                             //非电子合同
@@ -554,7 +567,7 @@ $(function() {
                             window.location.href = site_url.elecSecondStep_url + '?reserveId=' + reserveId + '&projectId=' + proId + '&projectName=' + projectName + '&isAllowAppend=' + isAllowAppend + '&isPubToPri=' + isPubToPri;
                         }
                     } else if (type == 'toSign') { //去签合同
-                        window.location.href = site_url.elecThirdStep_url + '?reserveId=' + reserveId + '&projectId=' + proId + '&projectName=' + projectName + '&isAllowAppend=' + isAllowAppend + '&isPubToPri=' + isPubToPri;
+                        that.signContract(reserveId, proId, projectName, isAllowAppend, isPubToPri);
                     } else if (type == 'toSee') { //查看合同
                         window.location.href = site_url.seeSign_url + '?reserveId=' + reserveId;
                     } else if (type == 'toUploadM') { //去上传汇款凭证

@@ -134,7 +134,7 @@
 
             <!-- 功能按钮 -->
             {{#if appointmentAffirm}}
-            <div class="toDetail blueBgButton" type="toConfirm" data-projectid="{{projectId}}" data-reserveid="{{reserveId}}">立即确认</div>
+            <div class="toDetail blueBgButton" type="toConfirm" data-projectid="{{projectId}}" data-reserveid="{{reserveId}}" data-projectname="{{projectName}}" data-ispubtopri="{{paymentType}}">立即确认</div>
             {{else if appointmentToAuthentication}}
             <div class="toDetail blueBgButton" type="toCertif" data-type="{{isForElec}}" data-projectid="{{projectId}}" data-projectname="{{projectName}}" data-firstorappend="{{firstOrAppend}}" data-reserveid="{{reserveId}}" data-isqualified="{{isQualified}}" data-ispubtopri="{{paymentType}}">合格投资者</div>
             {{else if appointmentToSign}}

@@ -1,24 +1,13 @@
 /**  
 * @Page:  私募一键认证弹框
 * @Author: 闫瑞婷  
-* @Date:   2020-01-08
+* @Date:   2020-03-17
 * 参数：
-* type: info 买入
-* fundCode 基金编号
-* userStatus 为空则是新用户   为0普通投资者  为1专业投资者
-* accountType  客户类型  0-机构 1-个人
-*
-* url 认证成功跳转页面
-
-* @author zhangyanping  2020-01-12
-* 添加组件的埋点的相关的代码
-* htmdEvt 代表埋点的属性，如当前页面只引用该组件一次，则htmdEvt的值为当前页面名，若多次引用，则需区分引用的场景，传入不同的值
-*
-*
-* judgeCompanyFlag // true 需判断机构不可转入或买入或定投 false 机构可转入或买入或定投
+* projectId: 项目id
+* isPubToPri 是否公转私
 */
 
-module.exports = function(projectId) {
+module.exports = function(projectId, isPubToPri) {
     var privateAuth = {
         $e:{
             realLi: $('#real-condition>li'), // 条件下的五条
@@ -262,8 +251,13 @@ module.exports = function(projectId) {
                             })
                         });
                     } else {
+                        isPopup = jsonData[3].isPopup; //是否弹出售前告知书。售前告知书与风险等级匹配一起提示
+                        that.data.isSatisfied = jsonData[4].isSatisfied;//合格投资者认证是否满足，需要给app携带
+                        if(jsonData.length > 5 && jsonData[5].isPopup) {
+                            isRiskPopup = jsonData[5].isPopup
+                        }
                         // 四个条件都满足则跳转短信认证页面
-                        window.location.href = 'https://www.baidu.com/'
+                        window.location.href = site_url.SMSVerification_url + '?projectId=' + projectId + '&accountType=' + that.data.custType + '&isPopup=' + isPopup + '&isRiskPopup=' + isRiskPopup + '&accreditedInvestor=' + that.data.accreditedInvestor + '&isSatisfied=' + that.data.isSatisfied + '&isPubToPri=' + isPubToPri;
                     }
                 },
                 callbackFail: function(json) { //失败后执行的函数

@@ -97,6 +97,7 @@ module.exports = function() {
     this.prvReource_api = http_url.web_url + '/pef/queryReourceList'; //产品材料接口
     this.recommend_api = http_url.web_url + '/pef/frontend/findRecommand'; //私募首页--产品推荐
     this.collect_info_api = http_url.web_url + '/pef/getRaiseInfo'; //查询产品募集信息
+    this.JumpForSignElec_api = http_url.web_url + '/pef/JumpForSignElec'; //查询产品募集信息
     /*-------------------私募相关 end ------------------------------*/
 
 
@@ -386,7 +387,10 @@ module.exports = function() {
     this.getCashTreasureLimitInfo_api = http_url.web_url + '/pof/cash/forntend/getCashTreasureLimitInfo' //转出份额限定 单日等
     this.findProtocolContentRule_api = http_url.web_url + '/content/frontend/findProtocolContent'; //转出规则查询
 
-    this.queryFundTransferAssets_api = http_url.web_url + '/account/queryFundTransferAssets' //查询活期理财列表
-    this.checkVideoDoctor_api = http_url.web_url + '/account/checkVideoDoctor' //查询用户是否满足视频医生条件
+    this.queryFundTransferAssets_api = http_url.web_url + '/account/queryFundTransferAssets'; //查询活期理财列表
+    this.checkVideoDoctor_api = http_url.web_url + '/account/checkVideoDoctor'; //查询用户是否满足视频医生条件
+    this.messageCertSend_api = http_url.web_url + '/account/frontend/messageCertSend'; //发送短信验证码
+    this.voiceMsgVerify_api = http_url.web_url + '/account/frontend/voiceMsgVerify'; //发送语音验证码
+    this.phoneCodeCheckout_api = http_url.web_url + '/account/frontend/phoneCodeCheckout'; //验证手机验证码
 
 };

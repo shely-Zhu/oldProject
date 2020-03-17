@@ -1,0 +1,33 @@
+<!-- /*
+ * @page:产品档案
+ * @Author: wangjiajia
+ */ -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    @@include('@pathInclude/views/meta.html')
+    <link rel="stylesheet" href="/account/static/css/SMSVerification.css">
+    <title>短信验证</title>
+<body>
+    @@include('@pathCommonViews/headBarConfig.html',{"bgColors":"#2C3E77,#273971","showType":"0","pathName":"短信验证"})
+    @@include('@pathCommonCom/loading/listLoading.html')
+
+    <div class="codeCon">
+        <div class="hintCon">为了确保您的账户安全需确认是否是本人操作</div>
+        <div class="phoneCon">
+        	<div class="phoneNumCon">--</div>
+        	<div class="phoneCodeCon">
+        		<div class="phoneCode">
+        			<input type="number" class="phoneCodeNum" placeholder="请输入验证码">
+        		</div>
+        		<div class="phoneCodeHint">获取验证码</div>
+        	</div>
+        </div>
+        <div class="voicePhoneCode">收不到验证码, <span class="voicePhoneCodeGet">获取语音验证码</span></div>
+        <div class="blueBgButton affirmBtn">确认</div>
+    </div>
+
+    @@include('@pathInclude/views/footer.html')
+    <script src="/account/static/js/SMSVerification.js"></script>
+</body>
+</html>
