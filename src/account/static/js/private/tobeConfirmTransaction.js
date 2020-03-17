@@ -217,8 +217,9 @@ $(function() {
                     "reserveId": reserveId
                 },
                 callbackDone: function(json) {
-                    var status = json.data;
-                    window.location.href = site_url.elecThirdStep_url + '?reserveId=' + reserveId + '&projectId=' + proId + '&projectName=' + projectName + '&isAllowAppend=' + isAllowAppend + '&isPubToPri=' + isPubToPri + '&status=' + status;
+                    var status = json.data.nextStep; // 下一步骤
+                    var isVideo = json.data.isVideo; // 是否需要视频双录  0否 1是
+                    window.location.href = site_url.elecThirdStep_url + '?reserveId=' + reserveId + '&projectId=' + proId + '&projectName=' + projectName + '&isAllowAppend=' + isAllowAppend + '&isPubToPri=' + isPubToPri + '&status=' + status + '&isVideo=' + isVideo;
                 },
             }];
             $.ajaxLoading(obj);

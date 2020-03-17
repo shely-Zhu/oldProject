@@ -77,7 +77,7 @@ $(function() {
             }]
             $.ajaxLoading(obj);
         },
-        judgeRisk: function() {
+        judgeRisk: function(phoneCode) {
             var that = this;
             var isPopup = that.gV.isPopup; //弹框售前告知书 
             var isRiskPopup = that.gV.isRiskPopup; //产品期限不符弹框
@@ -119,7 +119,7 @@ $(function() {
                                         callback: function(t) {
                                             window.location.href = site_url.downloadNew_api + "?filePath=" + noticeObj.fileUrl + "&fileName=" + new Base64().encode(noticeObj.fileName) + "&groupName=" +
                                             noticeObj.groupName + "&show=1&readComplete=true&showDownload=false&fundCode=" + that.gV.projectId + "&isAllowAppend=" +
-                                            that.gV.isAllowAppend + '&accreditedInvestor=' + that.gV.accreditedInvestor + '&businessType=confirmation';
+                                            that.gV.isAllowAppend + '&accreditedInvestor=' + that.gV.accreditedInvestor + '&businessType=confirmation&phoneCode=' + phoneCode;;
                                         },
                                     };
                                     $.elasticLayer(obj)
@@ -138,9 +138,9 @@ $(function() {
                                 callback: function(t) {
                                     // 根据电子非电子订单跳转不同页面
                                     if(that.gV.isElecContract == 1) { // 电子
-                                        window.location.href = site_url.confirmationEle_url + '?projectId=' + that.gV.projectId + '&projectName=' + that.gV.projectName + '&reserveId=' + that.gV.reserveId + '&isAllowAppend=' + that.gV.isAllowAppend + '&isPubToPri=' + that.gV.isPubToPri + '&isSatisfied=' + that.gV.isSatisfied
+                                        window.location.href = site_url.confirmationEle_url + '?projectId=' + that.gV.projectId + '&projectName=' + that.gV.projectName + '&reserveId=' + that.gV.reserveId + '&isAllowAppend=' + that.gV.isAllowAppend + '&isPubToPri=' + that.gV.isPubToPri + '&isSatisfied=' + that.gV.isSatisfied + '&phoneCode=' + phoneCode; 
                                     } else { // 非电子
-                                        window.location.href = site_url.confirmation_url + '?projectId=' + that.gV.projectId + '&projectName=' + that.gV.projectName + '&reserveId=' + that.gV.reserveId
+                                        window.location.href = site_url.confirmation_url + '?projectId=' + that.gV.projectId + '&projectName=' + that.gV.projectName + '&reserveId=' + that.gV.reserveId + '&phoneCode=' + phoneCode;
                                     }
                                 },
                            };
@@ -158,7 +158,7 @@ $(function() {
                                 callback: function(t) {
                                     window.location.href = site_url.downloadNew_api + "?filePath=" + noticeObj.fileUrl + "&fileName=" + new Base64().encode(noticeObj.fileName) + "&groupName=" +
                                     noticeObj.groupName + "&show=1&readComplete=true&showDownload=false&fundCode=" + that.gV.projectId + "&isAllowAppend=" +
-                                    that.data.fundDetailObj.isAllowAppend + '&accreditedInvestor=' + that.data.accreditedInvestor + '&businessType=confirmation';
+                                    that.data.fundDetailObj.isAllowAppend + '&accreditedInvestor=' + that.data.accreditedInvestor + '&businessType=confirmation&phoneCode=' + phoneCode;;
                                 },
                             };
                         }
@@ -187,9 +187,9 @@ $(function() {
             } else { // 用户是私募专业投资者，产品有合投限制，产品的合投限制是私募合格投资者则不展示提示弹框
                 // 根据电子非电子直接跳转客户确认页面
                 if(that.gV.isElecContract == 1) { // 电子
-                    window.location.href = site_url.confirmationEle_url + '?projectId=' + that.gV.projectId + '&projectName=' + that.gV.projectName + '&reserveId=' + that.gV.reserveId + '&isAllowAppend=' + that.gV.isAllowAppend + '&isPubToPri=' + that.gV.isPubToPri + '&isSatisfied=' + that.gV.isSatisfied
+                    window.location.href = site_url.confirmationEle_url + '?projectId=' + that.gV.projectId + '&projectName=' + that.gV.projectName + '&reserveId=' + that.gV.reserveId + '&isAllowAppend=' + that.gV.isAllowAppend + '&isPubToPri=' + that.gV.isPubToPri + '&isSatisfied=' + that.gV.isSatisfied + '&phoneCode=' + phoneCode;
                 } else { // 非电子
-                    window.location.href = site_url.confirmation_url + '?projectId=' + that.gV.projectId + '&projectName=' + that.gV.projectName + '&reserveId=' + that.gV.reserveId
+                    window.location.href = site_url.confirmation_url + '?projectId=' + that.gV.projectId + '&projectName=' + that.gV.projectName + '&reserveId=' + that.gV.reserveId + '&phoneCode=' + phoneCode;
                 }
             }
         },
@@ -211,7 +211,7 @@ $(function() {
                         },
                         callbackDone: function (json) {
                             // 验证码发送成功后进去售前告知书的判断
-                            that.judgeRisk()
+                            that.judgeRisk(phoneCode)
                         },
                     }]
                     $.ajaxLoading(obj);
