@@ -395,20 +395,6 @@ $(function() {
             }]
             $.ajaxLoading(obj);
         },
-        signContract: function(reserveId, proId, projectName, isAllowAppend, isPubToPri) {
-            var obj = [{
-                url: site_url.JumpForSignElec_api,
-                data: {
-                    "reserveId": reserveId
-                },
-                callbackDone: function(json) {
-                    var status = json.data.nextStep; // 下一步骤
-                    var isVideo = json.data.isVideo; // 是否需要视频双录  0否 1是
-                    window.location.href = site_url.elecThirdStep_url + '?reserveId=' + reserveId + '&projectId=' + proId + '&projectName=' + projectName + '&isAllowAppend=' + isAllowAppend + '&isPubToPri=' + isPubToPri + '&status=' + status + '&isVideo=' + isVideo;
-                },
-            }];
-            $.ajaxLoading(obj);
-        },
         events: function() { //绑定事件
             var that = this;
 
@@ -568,7 +554,7 @@ $(function() {
                             window.location.href = site_url.elecSecondStep_url + '?reserveId=' + reserveId + '&projectId=' + proId + '&projectName=' + projectName + '&isAllowAppend=' + isAllowAppend + '&isPubToPri=' + isPubToPri;
                         }
                     } else if (type == 'toSign') { //去签合同
-                        that.signContract(reserveId, proId, projectName, isAllowAppend, isPubToPri);
+                        window.location.href = site_url.elecThirdStep_url + '?reserveId=' + reserveId + '&projectId=' + proId + '&projectName=' + projectName + '&isAllowAppend=' + isAllowAppend + '&isPubToPri=' + isPubToPri;
                     } else if (type == 'toSee') { //查看合同
                         window.location.href = site_url.seeSign_url + '?reserveId=' + reserveId;
                     } else if (type == 'toUploadM') { //去上传汇款凭证

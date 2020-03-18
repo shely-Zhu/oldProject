@@ -29,6 +29,7 @@ $(function() {
             projectName: '',
             timer: null,
             countDown: 60,
+            voiceCodeFlag: true,
         },
         init: function() {
             var that = this;
@@ -51,7 +52,7 @@ $(function() {
                 needLogin: true,
                 callbackDone: function(json) {
                     var jsonData = json.data;
-                    that.gV.projectName = jsonData.projectName;
+                    that.gV.projectName = jsonData.productName;
                     that.gV.isElecContract = jsonData.isElecContract;
                     that.gV.isAllowAppend = jsonData.isAllowAppend;
                     that.gV.reserveId = jsonData.reserveId;
@@ -70,9 +71,8 @@ $(function() {
                 callbackDone: function (json) {
                     var data = json.data;
                     that.gV.phoneNum = data.phone;
-                    var phoneS = String(data.phone);
-                    var phone = phoneS.replace(phoneS.substring(3,7), "****")
-                    $(".phoneNumCon").html(phone);
+                    that.gV.phoneNumEncrypt = data.linkPhoneEncrypt;
+                    $(".phoneNumCon").html(data.phone);
                 }
             }]
             $.ajaxLoading(obj);
@@ -117,13 +117,24 @@ $(function() {
                                         htmdEvtCel:'privatePlacementDetail_27',  // 埋点取消按钮属性
                                         zIndex: 1200,
                                         callback: function(t) {
+                                            if(that.gV.isElecContract == 1) { // 电子
+                                                var businessType = 'confirmation';
+                                            } else {
+                                                var businessType = 'confirmationNoele';
+                                            }
                                             window.location.href = site_url.downloadNew_api + "?filePath=" + noticeObj.fileUrl + "&fileName=" + new Base64().encode(noticeObj.fileName) + "&groupName=" +
                                             noticeObj.groupName + "&show=1&readComplete=true&showDownload=false&fundCode=" + that.gV.projectId + "&isAllowAppend=" +
-                                            that.gV.isAllowAppend + '&accreditedInvestor=' + that.gV.accreditedInvestor + '&businessType=confirmation&phoneCode=' + phoneCode;;
+                                            that.gV.isAllowAppend + '&accreditedInvestor=' + that.gV.accreditedInvestor + '&businessType='+ businessType +'&phoneCode=' + phoneCode + '&projectName=' + that.gV.projectName;
                                         },
+                                        callbackCel: function() {
+                                            location.href = "javascript:history.go(-1)";
+                                        }
                                     };
                                     $.elasticLayer(obj)
                                 },
+                                callbackCel: function() { // 放弃返回到上一页
+                                    location.href = "javascript:history.go(-1)";
+                                }
                             };
                         }else if(!!isRiskPopup && !isPopup){ // 展示产品期限弹框，继续购买后直接进入预约确认页面
                             var objElasticLayer = {
@@ -143,6 +154,9 @@ $(function() {
                                         window.location.href = site_url.confirmation_url + '?projectId=' + that.gV.projectId + '&projectName=' + that.gV.projectName + '&reserveId=' + that.gV.reserveId + '&phoneCode=' + phoneCode;
                                     }
                                 },
+                                callbackCel: function() { // 放弃返回到上一页
+                                    location.href = "javascript:history.go(-1)";
+                                }
                            };
                         }else if(!isRiskPopup && !!isPopup){
                             var objElasticLayer = {
@@ -156,10 +170,18 @@ $(function() {
                                 htmdEvtCel:'privatePlacementDetail_31',  // 埋点取消按钮属性
                                 zIndex: 1200,
                                 callback: function(t) {
+                                    if(that.gV.isElecContract == 1) { // 电子
+                                        var businessType = 'confirmation';
+                                    } else {
+                                        var businessType = 'confirmationNoele';
+                                    }
                                     window.location.href = site_url.downloadNew_api + "?filePath=" + noticeObj.fileUrl + "&fileName=" + new Base64().encode(noticeObj.fileName) + "&groupName=" +
                                     noticeObj.groupName + "&show=1&readComplete=true&showDownload=false&fundCode=" + that.gV.projectId + "&isAllowAppend=" +
-                                    that.data.fundDetailObj.isAllowAppend + '&accreditedInvestor=' + that.data.accreditedInvestor + '&businessType=confirmation&phoneCode=' + phoneCode;;
+                                    that.data.fundDetailObj.isAllowAppend + '&accreditedInvestor=' + that.data.accreditedInvestor + '&businessType='+ businessType +'&phoneCode=' + phoneCode + '&projectName=' + that.gV.projectName;
                                 },
+                                callbackCel: function() { // 放弃返回到上一页
+                                    location.href = "javascript:history.go(-1)";
+                                }
                             };
                         }
                         $.elasticLayer(objElasticLayer);
@@ -204,12 +226,13 @@ $(function() {
                     var obj = [{
                         url: site_url.phoneCodeCheckout_api,
                         data: {
-                            phone: that.gV.phoneNum,
-                            type: '17',
+                            phone: that.gV.phoneNumEncrypt,
+                            code: phoneCode,
                             accountType: that.gV.accountType,
-                            projectName: that.gV.projectName,
+                            verifyType: '17',
                         },
                         callbackDone: function (json) {
+                            debugger
                             // 验证码发送成功后进去售前告知书的判断
                             that.judgeRisk(phoneCode)
                         },
@@ -225,7 +248,7 @@ $(function() {
                     var obj = [{
                         url: site_url.messageCertSend_api,
                         data: {
-                            phone: that.gV.phoneNum,
+                            phone: that.gV.phoneNumEncrypt,
                             type: '17',
                             accountType: that.gV.accountType,
                             projectName: that.gV.projectName,
@@ -241,7 +264,7 @@ $(function() {
                                     return;
                                 } else {
                                     that.gV.countDown--;
-                                    $(".phoneCodeHint").html("重新获取(" + that.gV.countDown + ')’');
+                                    $(".phoneCodeHint").html("重新获取(" + that.gV.countDown + '’)');
                                 }
                             }, 1000)
                         },
@@ -256,19 +279,25 @@ $(function() {
             })
             // 获取语音验证码
             mui("body").on('mdClick', '.voicePhoneCodeGet', function(e) {
-                if(!that.gV.timer) {
+                if(that.gV.voiceCodeFlag) {
+                    that.gV.voiceCodeFlag = false;
                     var obj = [{
                         url: site_url.voiceMsgVerify_api,
                         data: {
-                            phone: that.gV.phoneNum,
+                            phone: that.gV.phoneNumEncrypt,
                             type: '17',
                             accountType: that.gV.accountType,
                             projectName: that.gV.projectName,
                         },
                         callbackDone: function (json) {
+                            that.gV.voiceCodeFlag = true;
                             tipAction("语音验证码已获取，请注意来电接听！")
                         },
+                        callbackNoData: function () {
+                            that.gV.voiceCodeFlag = true;
+                        },
                         callbackNoData: function() {
+                            that.gV.voiceCodeFlag = true;
                             tipAction('获取语音验证码失败')
                         }
                     }]
