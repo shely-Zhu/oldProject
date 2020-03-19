@@ -410,4 +410,6 @@ module.exports = {
     './account/static/js/private/privateDetailList': "./src/account/static/js/private/privateDetailList.js",
      //视频医生
     './life/static/js/videoDoctor/videoDoctor': "./src/life/static/js/videoDoctor/videoDoctor.js",
+    // 短信验证
+    './account/static/js/SMSVerification': "./src/account/static/js/SMSVerification.js",
 }
