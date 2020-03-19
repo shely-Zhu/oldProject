@@ -597,8 +597,7 @@ $(function() {
 	    		}
 	    		//产品期限
 				var period = '';
-				debugger
-	    		if(jsonData.prodTerm) { // 投资期
+	    		if(jsonData.prodTerm) { 
 	    			period +=jsonData.prodTerm;
 	    		}
 	    		
