@@ -48,9 +48,9 @@ module.exports = function($el, imgArr, time, bool, notLoop) {
     }
 
     $.each(imgArr, function(i, el) {
-
+        debugger
         imgHtml += '<div class="mui-slider-item" style="height:100%;">' +
-            '<div href="' + imgArr[imgArr.length - 1].linkUrl + '" style="height:100%;" externalUrl="'+ imgArr[imgArr.length - 1].externalUrl +'">' +
+            '<div href="' + el.externalUrl + '" style="height:100%;" externalUrl="'+ el.externalUrl +'">' +
             '<img src="' + el.imgUrl + '" style="height:100%;">' +
             '</div></div>';
         //点
