@@ -102,8 +102,8 @@ $(function() {
                                 p: '<p class="" style="font-weight:bold;text-align:center">您风险测评中所选计划投资期限少于产品期限存在匹配风险，请确认是否继续购买</p>',
                                 yesTxt: '继续',
                                 celTxt: '放弃',
-                                htmdEvtYes:'privatePlacementDetail_24',  // 埋点确定按钮属性
-                                htmdEvtCel:'privatePlacementDetail_25',  // 埋点取消按钮属性
+                                htmdEvtYes:'SMSVerification_0',  // 埋点确定按钮属性
+                                htmdEvtCel:'SMSVerification_1',  // 埋点取消按钮属性
                                 zIndex: 1200,
                                 callback: function(t) {
                                     var obj = {
@@ -113,8 +113,8 @@ $(function() {
                                                 '<p class="">请您认真阅读' + noticeObj.fileName + that.gV.productName + '并确认后继续购买该产品</p>',
                                         yesTxt: '去阅读',
                                         celTxt: '取消',
-                                        htmdEvtYes:'privatePlacementDetail_26',  // 埋点确定按钮属性
-                                        htmdEvtCel:'privatePlacementDetail_27',  // 埋点取消按钮属性
+                                        htmdEvtYes:'SMSVerification_2',  // 埋点确定按钮属性
+                                        htmdEvtCel:'SMSVerification_3',  // 埋点取消按钮属性
                                         zIndex: 1200,
                                         callback: function(t) {
                                             if(that.gV.isElecContract == 1) { // 电子
@@ -143,8 +143,8 @@ $(function() {
                                 p: '<p class="" style="font-weight:bold;text-align:center">您风险测评中所选计划投资期限少于产品期限存在匹配风险，请确认是否继续购买</p>',
                                 yesTxt: '继续',
                                 celTxt: '放弃',
-                                htmdEvtYes:'privatePlacementDetail_28',  // 埋点确定按钮属性
-                                htmdEvtCel:'privatePlacementDetail_29',  // 埋点取消按钮属性
+                                htmdEvtYes:'SMSVerification_0',  // 埋点确定按钮属性
+                                htmdEvtCel:'SMSVerification_1',  // 埋点取消按钮属性
                                 zIndex: 1200,
                                 callback: function(t) {
                                     // 根据电子非电子订单跳转不同页面
@@ -163,11 +163,11 @@ $(function() {
                                 title: '尊敬的客户',
                                 id: 'sellPop',
                                 p: '<p class="" style="font-weight:bold;text-align:center">你选择的产品与您现在的风险承受能力相匹配</p>' +
-                                        '<p class="">请您认真阅读' + noticeObj.fileName + that.data.productName + '并确认后继续购买该产品</p>',
+                                        '<p class="">请您认真阅读' + noticeObj.fileName + that.gV.productName + '并确认后继续购买该产品</p>',
                                 yesTxt: '去阅读',
                                 celTxt: '取消',
-                                htmdEvtYes:'privatePlacementDetail_30',  // 埋点确定按钮属性
-                                htmdEvtCel:'privatePlacementDetail_31',  // 埋点取消按钮属性
+                                htmdEvtYes:'SMSVerification_4',  // 埋点确定按钮属性
+                                htmdEvtCel:'SMSVerification_5',  // 埋点取消按钮属性
                                 zIndex: 1200,
                                 callback: function(t) {
                                     if(that.gV.isElecContract == 1) { // 电子
@@ -177,7 +177,7 @@ $(function() {
                                     }
                                     window.location.href = site_url.downloadNew_api + "?filePath=" + noticeObj.fileUrl + "&fileName=" + new Base64().encode(noticeObj.fileName) + "&groupName=" +
                                     noticeObj.groupName + "&show=1&readComplete=true&showDownload=false&fundCode=" + that.gV.projectId + "&isAllowAppend=" +
-                                    that.data.fundDetailObj.isAllowAppend + '&accreditedInvestor=' + that.data.accreditedInvestor + '&businessType='+ businessType +'&phoneCode=' + phoneCode + '&projectName=' + that.gV.projectName;
+                                    that.gV.isAllowAppend + '&accreditedInvestor=' + that.gV.accreditedInvestor + '&businessType='+ businessType +'&phoneCode=' + phoneCode + '&projectName=' + that.gV.projectName;
                                 },
                                 callbackCel: function() { // 放弃返回到上一页
                                     location.href = "javascript:history.go(-1)";
@@ -193,9 +193,11 @@ $(function() {
                             id: 'sellPop',
                             p: '<p>售前风险告知书内容未显示，请联系您的理财师或拨打客服热线：400-8980-618进行咨询！</p>',
                             yesTxt: '确定',
+                            htmdEvtYes:'SMSVerification_6',  // 埋点确定按钮属性
+                            hideCelButton: true,
                             zIndex: 1200,
                             callback: function(t) {
-                                
+                                location.href = "javascript:history.go(-1)";
                             },
                         };
                         $.elasticLayer(layer);
@@ -247,7 +249,7 @@ $(function() {
                     $.ajaxLoading(obj);
                 }
             }, {
-                'htmdEvt': 'SMSVerification_0'
+                'htmdEvt': 'SMSVerification_7'
             })
             // 获取短信验证码
             mui("body").on('mdClick', '.phoneCodeHint', function(e) {
@@ -282,7 +284,7 @@ $(function() {
                     $.ajaxLoading(obj);
                 }
             }, {
-                'htmdEvt': 'SMSVerification_0'
+                'htmdEvt': 'SMSVerification_8'
             })
             // 获取语音验证码
             mui("body").on('mdClick', '.voicePhoneCodeGet', function(e) {
@@ -292,6 +294,8 @@ $(function() {
                         title: '尊敬的客户',
                         id: 'sellPop',
                         p: '<p>是否通过手机号'+ that.gV.phoneNum +'接收语言验证码？</p>',
+                        htmdEvtYes:'SMSVerification_10',  // 埋点确定按钮属性
+                        htmdEvtCel:'SMSVerification_11',  // 埋点取消按钮属性
                         yesTxt: '确定',
                         zIndex: 1200,
                         callback: function(t) {
@@ -325,7 +329,7 @@ $(function() {
                     
                 }
             }, {
-                'htmdEvt': 'SMSVerification_0'
+                'htmdEvt': 'SMSVerification_9'
             })
         },
     };

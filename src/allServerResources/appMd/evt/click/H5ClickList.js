@@ -510,6 +510,23 @@ var clickList = {
 	"tobeConfirmTransaction_13":{ type:'click', evtid: 'tobeConfirmTransaction_13', topic: '待确认交易_我知道了', info: ''},
 	"tobeConfirmTransaction_14":{ type:'click', evtid: 'tobeConfirmTransaction_14', topic: '已确认交易_未确认行为确认单_立即查看', info: ''},
 
+	// 确认逻辑中涉及的点击事件
+	"tobeConfirmTransaction_15" : { type:'click', evtid: 'tobeConfirmTransaction_15', topic: '待确认交易-账户冻结提示_确定', info: ''} ,
+	"tobeConfirmTransaction_16" : { type:'click', evtid: 'tobeConfirmTransaction_16', topic: '待确认交易-开通恒天账户_确定', info: ''} ,
+	"tobeConfirmTransaction_17" : { type:'click', evtid: 'tobeConfirmTransaction_17', topic: '待确认交易-开通恒天账户_取消', info: ''} ,
+	"tobeConfirmTransaction_18" : { type:'click', evtid: 'tobeConfirmTransaction_18', topic: '待确认交易-机构_线下开户_确定', info: ''} ,
+	"tobeConfirmTransaction_19" : { type:'click', evtid: 'tobeConfirmTransaction_19', topic: '待确认交易-机构_线下开户_取消', info: ''} ,
+	"tobeConfirmTransaction_20" : { type:'click', evtid: 'tobeConfirmTransaction_20', topic: '待确认交易-机构客户完善资料_确定', info: ''} ,
+	"tobeConfirmTransaction_21" : { type:'click', evtid: 'tobeConfirmTransaction_21', topic: '待确认交易-机构客户完善资料_取消', info: ''} ,
+	"tobeConfirmTransaction_22" : { type:'click', evtid: 'tobeConfirmTransaction_22', topic: '待确认交易-未认证跳转', info: ''} ,
+	"tobeConfirmTransaction_23" : { type:'click', evtid: 'tobeConfirmTransaction_23', topic: '待确认交易-一键认证', info: ''} ,
+	"tobeConfirmTransaction_24" : { type:'click', evtid: 'tobeConfirmTransaction_24', topic: '待确认交易-机构开户联系理财师_线下开户_确定', info: ''} ,
+	"tobeConfirmTransaction_25" : { type:'click', evtid: 'tobeConfirmTransaction_25', topic: '待确认交易-机构开户联系理财师_线下开户_取消', info: ''} ,
+	"tobeConfirmTransaction_26" : { type:'click', evtid: 'tobeConfirmTransaction_26', topic: '待确认交易-机构开户联系理财师_联系理财师_确定', info: ''} ,
+	"tobeConfirmTransaction_27" : { type:'click', evtid: 'tobeConfirmTransaction_27', topic: '待确认交易-机构开户联系理财师_联系理财师_取消', info: ''} ,
+	"tobeConfirmTransaction_28" : { type:'click', evtid: 'tobeConfirmTransaction_28', topic: '待确认交易-点击一键认证隐藏弹框', info: ''} ,
+	"tobeConfirmTransaction_29" : { type:'click', evtid: 'tobeConfirmTransaction_29', topic: '待确认交易-点击遮罩层隐藏一键认证弹框', info: ''} ,
+
 	"cashTreasure_0":{ type:'click', evtid: 'cashTreasure_0', topic: '现金宝详情_展开收起按钮点击', info: ''},
 	"cashTreasure_1":{ type:'click', evtid: 'cashTreasure_1', topic: '现金宝详情_折线图中月份点击', info: ''},
 	"cashTreasure_2":{ type:'click', evtid: 'cashTreasure_2', topic: '现金宝详情_折线图点击七日年化/万份收益切换区域', info: ''},
@@ -665,6 +682,19 @@ var clickList = {
 	"otherAssets_3":{ type:'click', evtid: 'otherAssets_3', topic: '其他资产-点击资产组成说明', info: ''},
 	"otherAssets_4":{ type:'click', evtid: 'otherAssets_4', topic: '其他资产-关闭资产组成说明', info: ''},
 	
+	// 短信验证
+	"SMSVerification_0" : { type:'click', evtid: 'SMSVerification_0', topic: '短信验证-投资期限少于产品期限_继续', info: ''} ,
+	"SMSVerification_1" : { type:'click', evtid: 'SMSVerification_1', topic: '短信验证-投资期限少于产品期限_放弃', info: ''} ,
+	"SMSVerification_2" : { type:'click', evtid: 'SMSVerification_2', topic: '短信验证-售前告知书_去阅读', info: ''} ,
+	"SMSVerification_3" : { type:'click', evtid: 'SMSVerification_3', topic: '短信验证-售前告知书_取消', info: ''} ,
+	"SMSVerification_4" : { type:'click', evtid: 'SMSVerification_4', topic: '短信验证-产品与风险承受能力相匹配_确定', info: ''} ,
+	"SMSVerification_5" : { type:'click', evtid: 'SMSVerification_5', topic: '短信验证-产品与风险承受能力相匹配_取消', info: ''} ,
+	"SMSVerification_6" : { type:'click', evtid: 'SMSVerification_6', topic: '短信验证-告知书内容未展示联系理顾-确定', info: ''} ,
+	"SMSVerification_7" : { type:'click', evtid: 'SMSVerification_7', topic: '短信验证-验证短信验证码是否正确', info: ''} ,
+	"SMSVerification_8" : { type:'click', evtid: 'SMSVerification_8', topic: '短信验证-获取短信验证码', info: ''} ,
+	"SMSVerification_9" : { type:'click', evtid: 'SMSVerification_9', topic: '短信验证-获取语音验证码', info: ''} ,
+	"SMSVerification_10" : { type:'click', evtid: 'SMSVerification_10', topic: '短信验证-获取语音验证码用户提示-确定', info: ''} ,
+	"SMSVerification_11" : { type:'click', evtid: 'SMSVerification_11', topic: '短信验证-获取语音验证码用户提示-取消', info: ''} ,
 }
 
 module.exports = clickList;

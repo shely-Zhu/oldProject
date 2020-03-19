@@ -36,7 +36,7 @@ module.exports = function(projectId, isPubToPri) {
                         id: 'buyFreeze',
                         p: '因司法原因该账户被冻结，请联系客服咨询！客服电话：400-8980-618',
                         yesTxt: '确认',
-                        htmdEvtYes:'privatePlacementDetail_32',  // 埋点确定按钮属性
+                        htmdEvtYes:'tobeConfirmTransaction_15',  // 埋点确定按钮属性
                         hideCelButton: true, //为true时隐藏cel按钮，仅使用yes按钮的所有属性
                         zIndex: 100,
                         callback: function(t) {
@@ -77,7 +77,7 @@ module.exports = function(projectId, isPubToPri) {
                             id: 'buyFreeze',
                             p: '因司法原因该账户被冻结，请联系客服咨询！客服电话：400-8980-618',
                             yesTxt: '确认',
-                            htmdEvtYes:'privatePlacementDetail_32',  // 埋点确定按钮属性
+                            htmdEvtYes:'tobeConfirmTransaction_15',  // 埋点确定按钮属性
                             hideCelButton: true, //为true时隐藏cel按钮，仅使用yes按钮的所有属性
                             zIndex: 100,
                             callback: function(t) {
@@ -168,8 +168,8 @@ module.exports = function(projectId, isPubToPri) {
                                             p: '请您先开通恒天账户',
                                             yesTxt: '确认',
                                             celTxt: "取消",
-                                            htmdEvtYes:'privatePlacementDetail_14',  // 埋点确定按钮属性
-                                            htmdEvtCel:'privatePlacementDetail_15',  // 埋点取消按钮属性
+                                            htmdEvtYes:'tobeConfirmTransaction_16',  // 埋点确定按钮属性
+                                            htmdEvtCel:'tobeConfirmTransaction_17',  // 埋点取消按钮属性
                                             zIndex: 6001,
                                             callback: function(t) {
                                                 window.location.href =that.$e.realLi.eq(0).find(".tips-li-right").attr("jumpUrl")
@@ -186,8 +186,8 @@ module.exports = function(projectId, isPubToPri) {
                                         p: '机构客户需联系您的理财师，进行线下开户',
                                         yesTxt: '确认',
                                         celTxt: "取消",
-                                        htmdEvtYes:'privatePlacementDetail_16',  // 埋点确定按钮属性
-                                        htmdEvtCel:'privatePlacementDetail_17',  // 埋点取消按钮属性
+                                        htmdEvtYes:'tobeConfirmTransaction_18',  // 埋点确定按钮属性
+                                        htmdEvtCel:'tobeConfirmTransaction_19',  // 埋点取消按钮属性
                                         zIndex: 100,
                                         callback: function(t) {}
                                     };
@@ -201,8 +201,8 @@ module.exports = function(projectId, isPubToPri) {
                                         p: '机构客户完善资料请联系您的理财师',
                                         yesTxt: '确认',
                                         celTxt: "取消",
-                                        htmdEvtYes:'privatePlacementDetail_18',  // 埋点确定按钮属性
-                                        htmdEvtCel:'privatePlacementDetail_19',  // 埋点取消按钮属性
+                                        htmdEvtYes:'tobeConfirmTransaction_20',  // 埋点确定按钮属性
+                                        htmdEvtCel:'tobeConfirmTransaction_21',  // 埋点取消按钮属性
                                         zIndex: 100,
                                         callback: function(t) {}
                                     };
@@ -211,7 +211,7 @@ module.exports = function(projectId, isPubToPri) {
                                     window.location.href = jumpUrl;
                                 }
                                 $("#tips-wrap").hide();//点击跳转关闭弹窗
-                                window._submitMd && window._submitMd( 3, 'privatePlacementDetail_12' );
+                                window._submitMd && window._submitMd( 3, 'tobeConfirmTransaction_22' );
                             })
                                 //一键认证调往哪里
                             mui("body").on('mdClick', '.tips-btn', function() {
@@ -223,8 +223,8 @@ module.exports = function(projectId, isPubToPri) {
                                         p: '机构客户需联系您的理财师，进行线下开户',
                                         yesTxt: '确认',
                                         celTxt: "取消",
-                                        htmdEvtYes:'privatePlacementDetail_20',  // 埋点确定按钮属性
-                                        htmdEvtCel:'privatePlacementDetail_21',  // 埋点取消按钮属性
+                                        htmdEvtYes:'tobeConfirmTransaction_24',  // 埋点确定按钮属性
+                                        htmdEvtCel:'tobeConfirmTransaction_25',  // 埋点取消按钮属性
                                         zIndex: 100,
                                         callback: function(t) {}
                                     };
@@ -237,8 +237,8 @@ module.exports = function(projectId, isPubToPri) {
                                         p: '机构客户完善资料请联系您的理财师',
                                         yesTxt: '确认',
                                         celTxt: "取消",
-                                        htmdEvtYes:'privatePlacementDetail_22',  // 埋点确定按钮属性
-                                        htmdEvtCel:'privatePlacementDetail_23',  // 埋点取消按钮属性
+                                        htmdEvtYes:'tobeConfirmTransaction_26',  // 埋点确定按钮属性
+                                        htmdEvtCel:'tobeConfirmTransaction_27',  // 埋点取消按钮属性
                                         zIndex: 100,
                                         callback: function(t) {}
                                     };
@@ -247,7 +247,7 @@ module.exports = function(projectId, isPubToPri) {
                                     window.location.href = singleaAuthenPath;//
                                 }
                             }, {
-                                htmdEvt: 'privatePlacementDetail_13'
+                                htmdEvt: 'tobeConfirmTransaction_23'
                             })
                         });
                     } else {
@@ -309,13 +309,16 @@ module.exports = function(projectId, isPubToPri) {
 
             $('.tips-mask').height(maskheight)
 
-            // 弹窗 隐藏
-            $('body').on('tap', '.icontips-close', function () {
-                $('.tips').css('display', 'none')
+            // 点击关闭按钮隐藏一键认证弹框
+            mui("body").on('mdClick','.icontips-close',function(e){
+                $('.tips').css('display', 'none');
+            }, {
+                'htmdEvt': 'tobeConfirmTransaction_28'
             })
-
-            $('body').on('tap', '.tips-mask', function () {
-                $('.tips').css('display', 'none')
+            mui("body").on('mdClick','.tips-mask',function(e){
+                $('.tips').css('display', 'none');
+            }, {
+                'htmdEvt': 'tobeConfirmTransaction_29'
             })
         },
     }
