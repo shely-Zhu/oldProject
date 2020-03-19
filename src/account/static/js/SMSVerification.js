@@ -206,7 +206,9 @@ $(function() {
                     }
                 }];
                 $.ajaxLoading(ReourceListobj);
-            } else { // 用户是私募专业投资者，产品有合投限制，产品的合投限制是私募合格投资者则不展示提示弹框
+            } else { 
+                // 客户为专业投资者，短信验证通过且投资期限与产品期限匹配后，不弹出阅读售前告知书弹框
+                // 客户为资管专业投资者，短信验证通过且投资期限与产品期限匹配后，不弹出阅读售前告知书弹框
                 // 根据电子非电子直接跳转客户确认页面
                 if(that.gV.isElecContract == 1) { // 电子
                     window.location.href = site_url.confirmationEle_url + '?projectId=' + that.gV.projectId + '&projectName=' + that.gV.projectName + '&reserveId=' + that.gV.reserveId + '&isAllowAppend=' + that.gV.isAllowAppend + '&isPubToPri=' + that.gV.isPubToPri + '&isSatisfied=' + that.gV.isSatisfied + '&phoneCode=' + phoneCode;
@@ -232,10 +234,15 @@ $(function() {
                             verifyType: '17',
                         },
                         callbackDone: function (json) {
-                            debugger
                             // 验证码发送成功后进去售前告知书的判断
                             that.judgeRisk(phoneCode)
                         },
+                        callbackNoData: function () {
+                            tipAction('短信验证码不正确');
+                        },
+                        callbackFail: function () {
+                            tipAction('短信验证码不正确');
+                        }
                     }]
                     $.ajaxLoading(obj);
                 }
@@ -269,7 +276,7 @@ $(function() {
                             }, 1000)
                         },
                         callbackNoData: function() {
-                            tipAction('发送手机验证码失败')
+                            tipAction('发送手机验证码失败');
                         }
                     }]
                     $.ajaxLoading(obj);
@@ -281,27 +288,41 @@ $(function() {
             mui("body").on('mdClick', '.voicePhoneCodeGet', function(e) {
                 if(that.gV.voiceCodeFlag) {
                     that.gV.voiceCodeFlag = false;
-                    var obj = [{
-                        url: site_url.voiceMsgVerify_api,
-                        data: {
-                            phone: that.gV.phoneNumEncrypt,
-                            type: '17',
-                            accountType: that.gV.accountType,
-                            projectName: that.gV.projectName,
+                    var layer = {
+                        title: '尊敬的客户',
+                        id: 'sellPop',
+                        p: '<p>是否通过手机号'+ that.gV.phoneNum +'接收语言验证码？</p>',
+                        yesTxt: '确定',
+                        zIndex: 1200,
+                        callback: function(t) {
+                            var obj = [{
+                                url: site_url.voiceMsgVerify_api,
+                                data: {
+                                    phone: that.gV.phoneNumEncrypt,
+                                    type: '17',
+                                    accountType: that.gV.accountType,
+                                    projectName: that.gV.projectName,
+                                },
+                                callbackDone: function (json) {
+                                    that.gV.voiceCodeFlag = true;
+                                    tipAction("语音验证码已获取，请注意来电接听！")
+                                },
+                                callbackNoData: function () {
+                                    that.gV.voiceCodeFlag = true;
+                                },
+                                callbackNoData: function() {
+                                    that.gV.voiceCodeFlag = true;
+                                    tipAction('获取语音验证码失败')
+                                }
+                            }]
+                            $.ajaxLoading(obj);
                         },
-                        callbackDone: function (json) {
+                        callbackCel: function() {
                             that.gV.voiceCodeFlag = true;
-                            tipAction("语音验证码已获取，请注意来电接听！")
-                        },
-                        callbackNoData: function () {
-                            that.gV.voiceCodeFlag = true;
-                        },
-                        callbackNoData: function() {
-                            that.gV.voiceCodeFlag = true;
-                            tipAction('获取语音验证码失败')
                         }
-                    }]
-                    $.ajaxLoading(obj);
+                    };
+                    $.elasticLayer(layer);
+                    
                 }
             }, {
                 'htmdEvt': 'SMSVerification_0'
