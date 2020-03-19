@@ -36,10 +36,19 @@ module.exports = function($el, imgArr, time, bool, notLoop) {
     } else {
         // mui在轮播的时候，如果要循环，需要在开始重复插入最后一条
         imgHtml = '<div class="mui-slider-group mui-slider-loop" style="height:100%;">';
-        imgHtml += '<div class="mui-slider-item mui-slider-item-duplicate">' +
-            '<a href="' + imgArr[imgArr.length - 1].linkUrl + '" style="height:100%;">' +
-            '<img src="' + imgArr[imgArr.length - 1].imgUrl + '" style="height:100%;"></a></div>';
+        if(imgArr[imgArr.length - 1].externalUrl){
+            imgHtml += '<div class="mui-slider-item mui-slider-item-duplicate">' +
+            '<div href="' + el.linkUrl + '" style="height:100%;" externalUrl="'+ el.externalUrl +'">' +
+            '<img src="' + el.imgUrl + '" style="height:100%;">' +
+            '</div></div>';     
+        }else{
+            imgHtml += '<div class="mui-slider-item mui-slider-item-duplicate">' +
+            '<div href="' + el.linkUrl + '" style="height:100%;">' +
+            '<img src="' + el.imgUrl + '" style="height:100%;">' +
+            '</div></div>';
     }
+        }
+        
     //点结构
     if (showDot) {
         var dotHtml = '<div class="mui-slider-indicator">';
@@ -48,20 +57,34 @@ module.exports = function($el, imgArr, time, bool, notLoop) {
     }
 
     $.each(imgArr, function(i, el) {
-
-        imgHtml += '<div class="mui-slider-item" style="height:100%;">' +
-            '<div href="' + imgArr[imgArr.length - 1].linkUrl + '" style="height:100%;" externalUrl="'+ imgArr[imgArr.length - 1].externalUrl +'">' +
+        if(el.externalUrl){
+            imgHtml += '<div class="mui-slider-item" style="height:100%;">' +
+            '<div href="' + el.linkUrl + '" style="height:100%;" externalUrl="'+ el.externalUrl +'">' +
             '<img src="' + el.imgUrl + '" style="height:100%;">' +
             '</div></div>';
+        }else{
+            imgHtml += '<div class="mui-slider-item" style="height:100%;">' +
+            '<div href="' + el.linkUrl + '" style="height:100%;">' +
+            '<img src="' + el.imgUrl + '" style="height:100%;">' +
+            '</div></div>';
+        }
+      
         //点
         dotHtml += '<div class="mui-indicator"></div>';
     })
 
     if (!notLoop) {
         // mui在轮播的时候，如果要循环，需要在最后重复插入第一条
-        imgHtml += '<div class="mui-slider-item mui-slider-item-duplicate">' +
-            '<div href="' + imgArr[imgArr.length - 1].linkUrl + '" style="height:100%;" externalUrl="'+ imgArr[imgArr.length - 1].externalUrl +'">' +
+        if(imgArr[0].externalUrl){
+            imgHtml += '<div class="mui-slider-item mui-slider-item-duplicate">' +
+            '<div href="' + imgArr[0].linkUrl + '" style="height:100%;" externalUrl="'+ imgArr[0].externalUrl +'">' +
             '<img src="' + imgArr[0].imgUrl + '" style="height:100%;"></div></div>';
+        }else{
+            imgHtml += '<div class="mui-slider-item mui-slider-item-duplicate">' +
+            '<div href="' + imgArr[0].linkUrl + '" style="height:100%;">' +
+            '<img src="' + imgArr[0].imgUrl + '" style="height:100%;"></div></div>';
+        }
+        
     }
 
     imgHtml += '</div>';
