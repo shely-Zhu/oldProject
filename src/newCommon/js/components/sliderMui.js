@@ -38,13 +38,13 @@ module.exports = function($el, imgArr, time, bool, notLoop) {
         imgHtml = '<div class="mui-slider-group mui-slider-loop" style="height:100%;">';
         if(imgArr[imgArr.length - 1].externalUrl){
             imgHtml += '<div class="mui-slider-item mui-slider-item-duplicate">' +
-            '<div href="' + el.linkUrl + '" style="height:100%;" externalUrl="'+ el.externalUrl +'">' +
-            '<img src="' + el.imgUrl + '" style="height:100%;">' +
+            '<div href="' + imgArr[imgArr.length - 1].linkUrl + '" style="height:100%;" externalUrl="'+ imgArr[imgArr.length - 1].externalUrl +'">' +
+            '<img src="' + imgArr[imgArr.length - 1].imgUrl + '" style="height:100%;">' +
             '</div></div>';     
         }else{
             imgHtml += '<div class="mui-slider-item mui-slider-item-duplicate">' +
-            '<div href="' + el.linkUrl + '" style="height:100%;">' +
-            '<img src="' + el.imgUrl + '" style="height:100%;">' +
+            '<div href="' + imgArr[imgArr.length - 1].linkUrl + '" style="height:100%;">' +
+            '<img src="' + imgArr[imgArr.length - 1].imgUrl + '" style="height:100%;">' +
             '</div></div>';
     }
         }
