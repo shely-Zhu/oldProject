@@ -66,7 +66,7 @@ $(function() {
                     var imgArr = [];
 
                     $.each(json.data.bannerList, function(i, el) {
-                        imgArr.push({ imgUrl: el.imageUrlShowOnline, linkUrl: el.linkUrl,externalUrl:el.externalUrl });
+                        imgArr.push({ imgUrl: el.imageUrlShowOnline, linkUrl: el.linkUrl,externalUrl:el.externalUrl,linkType:el.linkType });
                     });
                     Slider($('.banner'), imgArr);
                 }
@@ -433,10 +433,12 @@ $(function() {
                 'htmdEvt': 'fortune_13'
             })
             // 财富学院的banner的跳转  需判断是否跳转到外部链接
+            //当有externalUrl的时候先跳转externalUrl配置的连接
+            //当linkType为1（外部链接）的时候跳转外链否则跳转内置文章模板
             mui("body").on("mdClick", '.banner .mui-slider-item div', function() {
 
                 var $this = $(this);
-
+                debugger
                 if ($this.attr("externalUrl")) {
                     if ($(this).attr("externalUrl").indexOf("?") != -1) {
                         window.location.href = $(this).attr("externalUrl") + "&isHtOuterLinkUniqueIdentification=true";
@@ -444,7 +446,11 @@ $(function() {
                         window.location.href = $(this).attr("externalUrl") + "?isHtOuterLinkUniqueIdentification=true";
                     }
                 } else {
-                    window.location.href = $this.attr("href");
+                    if($this.attr("linkType") == 1){
+                        window.location.href = $this.attr("href") + "?isHtOuterLinkUniqueIdentification=true";
+                    }else{
+                        window.location.href = $this.attr("href");
+                    }
                 }
 
             },{

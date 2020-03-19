@@ -38,12 +38,12 @@ module.exports = function($el, imgArr, time, bool, notLoop) {
         imgHtml = '<div class="mui-slider-group mui-slider-loop" style="height:100%;">';
         if(imgArr[imgArr.length - 1].externalUrl){
             imgHtml += '<div class="mui-slider-item mui-slider-item-duplicate">' +
-            '<div href="' + imgArr[imgArr.length - 1].linkUrl + '" style="height:100%;" externalUrl="'+ imgArr[imgArr.length - 1].externalUrl +'">' +
+            '<div href="' + imgArr[imgArr.length - 1].linkUrl + '" style="height:100%;" linkType="'+imgArr[imgArr.length - 1].linkType+'"  externalUrl="'+ imgArr[imgArr.length - 1].externalUrl +'">' +
             '<img src="' + imgArr[imgArr.length - 1].imgUrl + '" style="height:100%;">' +
             '</div></div>';     
         }else{
             imgHtml += '<div class="mui-slider-item mui-slider-item-duplicate">' +
-            '<div href="' + imgArr[imgArr.length - 1].linkUrl + '" style="height:100%;">' +
+            '<div href="' + imgArr[imgArr.length - 1].linkUrl + '" style="height:100%;" linkType="'+imgArr[imgArr.length - 1].linkType+'">' +
             '<img src="' + imgArr[imgArr.length - 1].imgUrl + '" style="height:100%;">' +
             '</div></div>';
     }
@@ -59,12 +59,12 @@ module.exports = function($el, imgArr, time, bool, notLoop) {
     $.each(imgArr, function(i, el) {
         if(el.externalUrl){
             imgHtml += '<div class="mui-slider-item" style="height:100%;">' +
-            '<div href="' + el.linkUrl + '" style="height:100%;" externalUrl="'+ el.externalUrl +'">' +
+            '<div href="' + el.linkUrl + '" style="height:100%;" linkType="'+el.linkType+'" externalUrl="'+ el.externalUrl +'">' +
             '<img src="' + el.imgUrl + '" style="height:100%;">' +
             '</div></div>';
         }else{
             imgHtml += '<div class="mui-slider-item" style="height:100%;">' +
-            '<div href="' + el.linkUrl + '" style="height:100%;">' +
+            '<div href="' + el.linkUrl + '" style="height:100%;" linkType="'+el.linkType+'">' +
             '<img src="' + el.imgUrl + '" style="height:100%;">' +
             '</div></div>';
         }
@@ -77,11 +77,11 @@ module.exports = function($el, imgArr, time, bool, notLoop) {
         // mui在轮播的时候，如果要循环，需要在最后重复插入第一条
         if(imgArr[0].externalUrl){
             imgHtml += '<div class="mui-slider-item mui-slider-item-duplicate">' +
-            '<div href="' + imgArr[0].linkUrl + '" style="height:100%;" externalUrl="'+ imgArr[0].externalUrl +'">' +
+            '<div href="' + imgArr[0].linkUrl + '" style="height:100%;" linkType="'+imgArr[0].linkType+'" externalUrl="'+ imgArr[0].externalUrl +'">' +
             '<img src="' + imgArr[0].imgUrl + '" style="height:100%;"></div></div>';
         }else{
             imgHtml += '<div class="mui-slider-item mui-slider-item-duplicate">' +
-            '<div href="' + imgArr[0].linkUrl + '" style="height:100%;">' +
+            '<div href="' + imgArr[0].linkUrl + '" style="height:100%;" linkType="'+imgArr[0].linkType+'">' +
             '<img src="' + imgArr[0].imgUrl + '" style="height:100%;"></div></div>';
         }
         
