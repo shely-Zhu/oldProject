@@ -115,10 +115,9 @@
 										<span class="title qrnh activeLine videoTitle">相关视频</span>
 										<div class="firstVideoBox">
 											<img class="firstVideo" src="/common/img/lazyImgList.png"/>
-											<h3 class="firstVideoTitle"><span class="firstVideoTitleText">我是基金名称国成资产坤石5号私募投资基金</span><i class="iconfont">&#xe636;</i> </h3>
-											<p>
+											<h3 class="firstVideoTitle"><span class="firstVideoTitleText"></span><i class="iconfont">&#xe636;</i> </h3>
+											<p class="firstVideoDetil">
 												<span>主讲嘉宾：<i class="firstVideoSpeaker"></i></span>
-												<span>时长:<i class="firstVideoDuration"></i></span>
 											</p>
 										</div>
 										<div class="VideoList" id="VideoList">
@@ -243,10 +242,6 @@
 									</ul>
 									<ul class="mui-row establishment">
 										<li class="mui-col-sm-4 mui-col-xs-4">预计成立日期</li>
-										<li class="changgeRight mui-col-sm-8 mui-col-xs-8"></li>
-									</ul>
-									<ul class="mui-row isVideo">
-										<li class="mui-col-sm-4 mui-col-xs-4">是否需要面签</li>
 										<li class="changgeRight mui-col-sm-8 mui-col-xs-8"></li>
 									</ul>
 									<ul class="mui-row clientType">
@@ -374,7 +369,7 @@
 <!-- 视频列表 -->
 	<script id="VideoList-template" type="text/x-handlebars-template">
 		{{#each this}}
-			<div class="VideoListBox">
+			<div class="VideoListBox" videoId={{videoId}}>
 					<div class="VideoListImg">
 						<img class="firstVideo" src="{{videoCoverUrl}}"/>
 					</div>

@@ -424,6 +424,11 @@ module.exports = function() {
     this.pofFundCompany_url = go_url.no_url + '/financial/views/publicPlacement/fundCompany.html';
     //私募产品详情
     this.privatePlacementDetail_url = go_url.no_url + '/financial/views/privatePlacement/privatePlacementDetail.html';
+    //私募产品详情视频跳转
+    this.privatePlacementDetailJumpVideo_url = go_url.no_url + '/financial/views/privatePlacement/privatePlacementDetailJumpVideo.html';
+    //私募产品详情身份证上传
+    this.privatePlacementDetailRealIdcard_url = go_url.no_url + '/mine/views/realName/privatePlacementDetailRealIdcard.html';
+    
 
     // 公募基金详情
     this.pofPublicDetail_url = go_url.no_url + '/financial/views/publicPlacement/publicDetail.html';
