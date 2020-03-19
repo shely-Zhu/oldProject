@@ -48,7 +48,6 @@ module.exports = function($el, imgArr, time, bool, notLoop) {
     }
 
     $.each(imgArr, function(i, el) {
-        debugger
         if(el.externalUrl){
             imgHtml += '<div class="mui-slider-item" style="height:100%;">' +
             '<div href="' + el.linkUrl + '" style="height:100%;" externalUrl="'+ el.externalUrl +'">' +
