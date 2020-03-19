@@ -163,7 +163,7 @@ $(function() {
                                 title: '尊敬的客户',
                                 id: 'sellPop',
                                 p: '<p class="" style="font-weight:bold;text-align:center">你选择的产品与您现在的风险承受能力相匹配</p>' +
-                                        '<p class="">请您认真阅读' + noticeObj.fileName + that.data.productName + '并确认后继续购买该产品</p>',
+                                        '<p class="">请您认真阅读' + noticeObj.fileName + that.gV.productName + '并确认后继续购买该产品</p>',
                                 yesTxt: '去阅读',
                                 celTxt: '取消',
                                 htmdEvtYes:'privatePlacementDetail_30',  // 埋点确定按钮属性
@@ -177,7 +177,7 @@ $(function() {
                                     }
                                     window.location.href = site_url.downloadNew_api + "?filePath=" + noticeObj.fileUrl + "&fileName=" + new Base64().encode(noticeObj.fileName) + "&groupName=" +
                                     noticeObj.groupName + "&show=1&readComplete=true&showDownload=false&fundCode=" + that.gV.projectId + "&isAllowAppend=" +
-                                    that.data.fundDetailObj.isAllowAppend + '&accreditedInvestor=' + that.data.accreditedInvestor + '&businessType='+ businessType +'&phoneCode=' + phoneCode + '&projectName=' + that.gV.projectName;
+                                    that.gV.isAllowAppend + '&accreditedInvestor=' + that.gV.accreditedInvestor + '&businessType='+ businessType +'&phoneCode=' + phoneCode + '&projectName=' + that.gV.projectName;
                                 },
                                 callbackCel: function() { // 放弃返回到上一页
                                     location.href = "javascript:history.go(-1)";
