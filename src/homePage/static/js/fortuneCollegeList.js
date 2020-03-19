@@ -438,7 +438,6 @@ $(function() {
             mui("body").on("mdClick", '.banner .mui-slider-item div', function() {
 
                 var $this = $(this);
-                debugger
                 if ($this.attr("externalUrl")) {
                     if ($(this).attr("externalUrl").indexOf("?") != -1) {
                         window.location.href = $(this).attr("externalUrl") + "&isHtOuterLinkUniqueIdentification=true";
