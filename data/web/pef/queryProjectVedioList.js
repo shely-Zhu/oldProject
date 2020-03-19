@@ -12,33 +12,49 @@ var data=Mock.mock({
 	"message": "处理成功！", 
 	"data":[  
 		{
-		"videoName": "我1是基金名称国成资产的坤石5号私募投资基金...",//上限金额（单位：万）
-		"videoCoverUrl": "/common/img/lazyImgList.png",//下限金额（单位：万）
-		"videoSpeaker": "7.2",//收益率【百分比】
-		"videoDuration": "A",//受益级别【类似A,B,C,D.】
-		"videoId": "",//受益级别名称
-		},
-		{
-		"videoName": "我2是基金名称国成资产的坤石5号私募投资基金+2",//上限金额（单位：万）
-		"videoCoverUrl": "/common/img/lazyImgList.png",//下限金额（单位：万）
-		"videoSpeaker": "7.2",//收益率【百分比】
-		"videoDuration": "A",//受益级别【类似A,B,C,D.】
-		"videoId": "",//受益级别名称
-		},
-		{
-		"videoName": "我3是基金名称国成资产的坤石5号私募投资基金+3",//上限金额（单位：万）
-		"videoCoverUrl": "/common/img/lazyImgList.png",//下限金额（单位：万）
-		"videoSpeaker": "7.2",//收益率【百分比】
-		"videoDuration": "A",//受益级别【类似A,B,C,D.】
-		"videoId": "",//受益级别名称
-		},
-		{
-		"videoName": "我是基金名称国成资产的坤石5号私募投资基金",//上限金额（单位：万）
-		"videoCoverUrl": "/common/img/lazyImgList.png",//下限金额（单位：万）
-		"videoSpeaker": "7.2",//收益率【百分比】
-		"videoDuration": "A",//受益级别【类似A,B,C,D.】
-		"videoId": "",//受益级别名称
-		},
+            "videoCoverUrl": "http://livet.v114.com/data/attachment/20200217/1581922658250.jpg",
+            "videoDuration": "",
+            "videoId": "104244",
+            "videoName": "测试111",
+            "videoSpeaker": "郎咸平"
+        },
+        {
+            "videoCoverUrl": "http://livet.v114.com/data/attachment/20200212/1581470246355.jpg",
+            "videoDuration": "",
+            "videoId": "104242",
+            "videoName": "恒天千象一期私募证券投资基金2",
+            "videoSpeaker": "黄达"
+        },
+        {
+            "videoCoverUrl": "http://livet.v114.com/data/attachment/20200214/1581667652445.jpg",
+            "videoDuration": "",
+            "videoId": "2932",
+            "videoName": "测试-丰年国防军工产业基金改改东西",
+            "videoSpeaker": "潘耀荣"
+        },
+        {
+            "videoCoverUrl": "http://livet.v114.com/data/attachment/20200214/1581667652445.jpg",
+            "videoDuration": "",
+            "videoId": "2932",
+            "videoName": "测试-丰年国防军工产业基金改改东西",
+            "videoSpeaker": "潘耀荣"
+		}
+		,
+        {
+            "videoCoverUrl": "http://livet.v114.com/data/attachment/20200214/1581667652445.jpg",
+            "videoDuration": "",
+            "videoId": "2932",
+            "videoName": "测试-丰年国防军工产业基金改改东西",
+            "videoSpeaker": "潘耀荣"
+		}
+		,
+        {
+            "videoCoverUrl": "http://livet.v114.com/data/attachment/20200214/1581667652445.jpg",
+            "videoDuration": "",
+            "videoId": "2932",
+            "videoName": "测试-丰年国防军工产业基金改改东西",
+            "videoSpeaker": "潘耀荣"
+        }
 		
 	]
 });

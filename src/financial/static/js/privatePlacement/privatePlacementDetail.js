@@ -205,7 +205,7 @@ $(function() {
                     // 起投金额
                     $('.investmentAmountNum').html(jsonData.investStart + '万');
                     // 产品期限
-                    $('.productDeadlineNum').html(jsonData.projectTerm + jsonData.projectTermUnit);
+                    $('.productDeadlineNum').html(jsonData.projectTerm);
                     // 预约资质
                     if(jsonData.orderCondition && jsonData.orderCondition!='') {
                         $('.appointment span').html(jsonData.orderCondition);
@@ -357,14 +357,6 @@ $(function() {
                     } else {
                         $('.establishment').hide();
                     }
-                    // 是否需要面签
-                    if (jsonData.isVideo == 0) {
-                        $('.isVideo .changgeRight').html('否');
-                    } else if (jsonData.isVideo == 1) {
-                        $('.isVideo .changgeRight').html('是');
-                    } else {
-                        $('.isVideo').hide();
-                    }
                     // 允许购买客户类型
                     if (jsonData.customerType == 0) {
                         $('.clientType .changgeRight').html('机构');
@@ -514,9 +506,7 @@ $(function() {
                     $(".firstVideoBox").find(".firstVideo").attr("src",json.data[0].videoCoverUrl)
                     $(".firstVideoBox").find(".firstVideoTitleText").html(json.data[0].videoName)
                     $(".firstVideoBox").find(".firstVideoSpeaker").html(json.data[0].videoSpeaker)
-                    $(".firstVideoBox").find(".firstVideoDuration").html(json.data[0].videoDuration)
-                    
-
+                    $(".firstVideoBox").attr("videoId",json.data[0].videoId)
                 },
                 callbackNoData: function(json) {
                     // tipAction(json.message);
@@ -978,7 +968,10 @@ $(function() {
                 jumpUrl = site_url.completeInfoEditModify_url;
             }else if (v.conditionJump == 9) { //跳转到普通风测
                 jumpUrl = site_url.riskAppraisal_url + '?type=private';
-            }else if (v.conditionJump == 11) { //跳转到进身份证上传页面
+            }else if(v.conditionJump == 10){//跳转到进身份证上传页面无开户流程
+                jumpUrl = realIdcard_url + "?type=alone";
+            }
+            else if (v.conditionJump == 11) { //跳转到进身份证上传页面
                 jumpUrl = site_url.realIdcard_url;
             } else if (v.conditionJump == 12) { //跳转到人脸识别页面
                 jumpUrl = site_url.realFaceCheck_url;
@@ -1584,6 +1577,21 @@ $(function() {
             },{
                 htmdEvt: 'privatePlacementDetail_11'
             })
+            //视频
+            mui("body").on('mdClick', '.firstVideoBox', function() {
+                window.location.href = site_url.privatePlacementDetailJumpVideo_url+"?cid=" + $(this).attr("videoId")              
+
+            },{
+                htmdEvt: 'privatePlacementDetail_12'
+            });
+            //视频列表
+            mui("body").on('mdClick', '.VideoListBox', function() {
+                window.location.href = site_url.privatePlacementDetailJumpVideo_url+"?cid=" + $(this).attr("videoId")
+
+            },{
+                htmdEvt: 'privatePlacementDetail_13'
+            });
+            
         }
     };
     privatePlacementDetail.init();

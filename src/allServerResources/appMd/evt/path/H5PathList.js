@@ -268,6 +268,7 @@ var pathList = {
 	"/life/views/memberClub/activityList.html": { evtid: 'activityList', topic: '会员俱乐部-活动列表', info: ''} ,
 	"/life/views/memberClub/activityDetails.html": { evtid: 'activityDetails', topic: '会员俱乐部-活动列表', info: ''} ,
 	"/life/views/videoDoctor/videoDoctor.html": { evtid: 'videoDoctor', topic: '视频医生', info: ''} ,
+	"/account/views/SMSVerification.html": { evtid: 'SMSVerification', topic: '短信验证', info: ''} ,
 
 	/********************************* life end ***************************************/
 	"/allServerResources/model/views/articleTemplate.html" : { evtid: '36', topic: '活动模板', info: ''} ,

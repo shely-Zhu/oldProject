@@ -596,24 +596,12 @@ $(function() {
 	    			$('.type_3 .clr').html( jsonData.setupDate);
 	    		}
 	    		//产品期限
-	    		var period = '';
-	    		if(jsonData.investPeriod && jsonData.investPeriod!= '') { // 投资期
-	    			period += jsonData.investPeriod + jsonData.prodTerm + "（投资期）";
+				var period = '';
+				debugger
+	    		if(jsonData.prodTerm) { // 投资期
+	    			period +=jsonData.prodTerm;
 	    		}
-	    		if(jsonData.quitPeriod && jsonData.quitPeriod!= '') { // 退出期
-	    			if(period == '') {
-	    				period += jsonData.quitPeriod + jsonData.prodTerm + "（退出期）";
-	    			} else {
-	    				period = period + "+" + jsonData.quitPeriod + jsonData.prodTerm + "（退出期）";
-	    			}
-	    		}
-	    		if(jsonData.delayPeriod && jsonData.delayPeriod!= '') { // 延长期
-	    			if(period == '') {
-	    				period += jsonData.delayPeriod + jsonData.prodTerm + "（延长期）";
-	    			} else {
-	    				period = period + "+" + jsonData.delayPeriod + jsonData.prodTerm + "（延长期）";
-	    			}
-	    		}
+	    		
 	    		if(period == '') {
 	    			$('.type_3 .cpqx').parent().parent().remove();
 	    		} else {
