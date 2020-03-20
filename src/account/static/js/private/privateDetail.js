@@ -128,7 +128,8 @@ $(function() {
 			    callbackDone: function(json) {
 			    	that.data.imgUrl = json.data.imgUrl?json.data.imgUrl:'';
 			    	if(json.data.introduction && json.data.introduction!='') {
-			    		that.data.redeemRule = json.data.introduction.replace(/\r\n/g,"").split("=====");
+			    		var introduction = json.data.introduction.replace(/\s*/g,""); // 去掉字符串中空格，防止匹配出错
+			    		that.data.redeemRule = introduction.replace(/\r\n/g,"").split("=====");
 				    	// 判断是否有快速赎回规则
 				    	if(that.data.redeemRule.indexOf("快赎规则") !== -1) {
 				    		that.setRedeemRule(1);
@@ -138,8 +139,15 @@ $(function() {
 				    		$("#redeemNav .normal").addClass("active");
 			    		}
 			    	} else {
-			    		$(".dealRegMid").css("display", "none");
+			    		// 未返回数据时，，只展示普通赎回
+			    		$("#redeemNav .quick").css("display", "none").removeClass('active');
+				    	$("#redeemNav .normal").addClass("active");
 			    	}
+			    },
+			    callbackNoData: function() {
+			    	// 未返回数据时，，只展示普通赎回
+			    	$("#redeemNav .quick").css("display", "none").removeClass('active');
+				    $("#redeemNav .normal").addClass("active");
 			    }
 			}];
 			$.ajaxLoading(obj);	

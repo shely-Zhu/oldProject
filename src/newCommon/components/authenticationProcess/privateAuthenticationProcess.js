@@ -26,30 +26,8 @@ module.exports = function(projectId, isPubToPri) {
         },
         init: function() {
             var that = this;
-            // 判断是否有用户数据,没有则请求
-            if(!!that.data.custType && !!that.data.buyFreeze && !!that.data.lawFreezeStatus) {
-                // 判断买入冻结以及司法冻结
-                if (that.data.buyFreeze == "1" && that.data.lawFreezeStatus == "1") { //如果禁止买入且司法冻结，首先提示
-                    $(".netLoading").hide()
-                    var obj = {
-                        title: '温馨提示',
-                        id: 'buyFreeze',
-                        p: '因司法原因该账户被冻结，请联系客服咨询！客服电话：400-8980-618',
-                        yesTxt: '确认',
-                        htmdEvtYes:'tobeConfirmTransaction_15',  // 埋点确定按钮属性
-                        hideCelButton: true, //为true时隐藏cel按钮，仅使用yes按钮的所有属性
-                        zIndex: 100,
-                        callback: function(t) {
-
-                        },
-                    };
-                    $.elasticLayer(obj)
-                } else {
-                    that.getConditionsOfOrder()
-                }
-            } else {
-                that.getUserInfo();
-            }
+            // 获取用户信息（用户类型，冻结状态等）
+            that.getUserInfo();
             that.events();
         },
         getUserInfo: function() {
