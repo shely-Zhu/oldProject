@@ -1,13 +1,20 @@
 /**  
-* @Page:  私募一键认证弹框
+* @Page:  私募一键认证条件框展示逻辑
 * @Author: 闫瑞婷  
 * @Date:   2020-03-17
 * 参数：
+* type: 1 客户预约确认 2 私募产品预约
 * projectId: 项目id
-* isPubToPri 是否公转私
+* isPubToPri 是否公转私(客户预约确认时需要传)
+* projectName 项目名称（私募产品预约时需要传）
+* isElecContract 是否是电子合同产品【0.否 1.是】 （私募产品预约时需要传）
+* isAllowAppend // 是否可以进行追加操作【0.否 1.是】 （私募产品预约时需要传）
+* htmdEvt 代表埋点的属性，如当前页面只引用该组件一次，则htmdEvt的值为当前页面名，若多次引用，则需区分引用的场景，传入不同的值
 */
 
-module.exports = function(projectId, isPubToPri) {
+var judgeRiskHint = require('@pathCommonCom/authenticationProcess/judgeRiskHint.js');
+
+module.exports = function(type, projectId, isPubToPri, htmdEvt, projectName, isElecContract, isAllowAppend) {
     var privateAuth = {
         $e:{
             realLi: $('#real-condition>li'), // 条件下的五条
@@ -55,7 +62,7 @@ module.exports = function(projectId, isPubToPri) {
                             id: 'buyFreeze',
                             p: '因司法原因该账户被冻结，请联系客服咨询！客服电话：400-8980-618',
                             yesTxt: '确认',
-                            htmdEvtYes:'tobeConfirmTransaction_15',  // 埋点确定按钮属性
+                            htmdEvtYes: htmdEvt + '_0001',  // 埋点确定按钮属性
                             hideCelButton: true, //为true时隐藏cel按钮，仅使用yes按钮的所有属性
                             zIndex: 100,
                             callback: function(t) {
@@ -146,8 +153,8 @@ module.exports = function(projectId, isPubToPri) {
                                             p: '请您先开通恒天账户',
                                             yesTxt: '确认',
                                             celTxt: "取消",
-                                            htmdEvtYes:'tobeConfirmTransaction_16',  // 埋点确定按钮属性
-                                            htmdEvtCel:'tobeConfirmTransaction_17',  // 埋点取消按钮属性
+                                            htmdEvtYes: htmdEvt + '_0002',  // 埋点确定按钮属性
+                                            htmdEvtCel: htmdEvt + '_0003',  // 埋点取消按钮属性
                                             zIndex: 6001,
                                             callback: function(t) {
                                                 window.location.href =that.$e.realLi.eq(0).find(".tips-li-right").attr("jumpUrl")
@@ -164,8 +171,8 @@ module.exports = function(projectId, isPubToPri) {
                                         p: '机构客户需联系您的理财师，进行线下开户',
                                         yesTxt: '确认',
                                         celTxt: "取消",
-                                        htmdEvtYes:'tobeConfirmTransaction_18',  // 埋点确定按钮属性
-                                        htmdEvtCel:'tobeConfirmTransaction_19',  // 埋点取消按钮属性
+                                        htmdEvtYes: htmdEvt + '_0004',  // 埋点确定按钮属性
+                                        htmdEvtCel: htmdEvt + '_0005',  // 埋点取消按钮属性
                                         zIndex: 100,
                                         callback: function(t) {}
                                     };
@@ -179,8 +186,8 @@ module.exports = function(projectId, isPubToPri) {
                                         p: '机构客户完善资料请联系您的理财师',
                                         yesTxt: '确认',
                                         celTxt: "取消",
-                                        htmdEvtYes:'tobeConfirmTransaction_20',  // 埋点确定按钮属性
-                                        htmdEvtCel:'tobeConfirmTransaction_21',  // 埋点取消按钮属性
+                                        htmdEvtYes:htmdEvt + '_0006',  // 埋点确定按钮属性
+                                        htmdEvtCel:htmdEvt + '_0007',  // 埋点取消按钮属性
                                         zIndex: 100,
                                         callback: function(t) {}
                                     };
@@ -189,7 +196,7 @@ module.exports = function(projectId, isPubToPri) {
                                     window.location.href = jumpUrl;
                                 }
                                 $("#tips-wrap").hide();//点击跳转关闭弹窗
-                                window._submitMd && window._submitMd( 3, 'tobeConfirmTransaction_22' );
+                                window._submitMd && window._submitMd( 3, htmdEvt + '_0008' );
                             })
                                 //一键认证调往哪里
                             mui("body").on('mdClick', '.tips-btn', function() {
@@ -201,8 +208,8 @@ module.exports = function(projectId, isPubToPri) {
                                         p: '机构客户需联系您的理财师，进行线下开户',
                                         yesTxt: '确认',
                                         celTxt: "取消",
-                                        htmdEvtYes:'tobeConfirmTransaction_24',  // 埋点确定按钮属性
-                                        htmdEvtCel:'tobeConfirmTransaction_25',  // 埋点取消按钮属性
+                                        htmdEvtYes:htmdEvt + '_0009',  // 埋点确定按钮属性
+                                        htmdEvtCel:htmdEvt + '_0010',  // 埋点取消按钮属性
                                         zIndex: 100,
                                         callback: function(t) {}
                                     };
@@ -215,8 +222,8 @@ module.exports = function(projectId, isPubToPri) {
                                         p: '机构客户完善资料请联系您的理财师',
                                         yesTxt: '确认',
                                         celTxt: "取消",
-                                        htmdEvtYes:'tobeConfirmTransaction_26',  // 埋点确定按钮属性
-                                        htmdEvtCel:'tobeConfirmTransaction_27',  // 埋点取消按钮属性
+                                        htmdEvtYes:htmdEvt + '_0011',  // 埋点确定按钮属性
+                                        htmdEvtCel:htmdEvt + '_0012',  // 埋点取消按钮属性
                                         zIndex: 100,
                                         callback: function(t) {}
                                     };
@@ -225,7 +232,7 @@ module.exports = function(projectId, isPubToPri) {
                                     window.location.href = singleaAuthenPath;//
                                 }
                             }, {
-                                htmdEvt: 'tobeConfirmTransaction_23'
+                                htmdEvt: htmdEvt + '_0013'
                             })
                         });
                     } else {
@@ -234,8 +241,13 @@ module.exports = function(projectId, isPubToPri) {
                         if(jsonData.length > 5 && jsonData[5].isPopup) {
                             isRiskPopup = jsonData[5].isPopup
                         }
-                        // 四个条件都满足则跳转短信认证页面
-                        window.location.href = site_url.SMSVerification_url + '?projectId=' + projectId + '&accountType=' + that.data.custType + '&isPopup=' + isPopup + '&isRiskPopup=' + isRiskPopup + '&accreditedInvestor=' + that.data.accreditedInvestor + '&isSatisfied=' + that.data.isSatisfied + '&isPubToPri=' + isPubToPri;
+                        if(type == 1) {
+                            // 四个条件都满足则跳转短信认证页面
+                            window.location.href = site_url.SMSVerification_url + '?projectId=' + projectId + '&accountType=' + that.data.custType + '&isPopup=' + isPopup + '&isRiskPopup=' + isRiskPopup + '&accreditedInvestor=' + that.data.accreditedInvestor + '&isSatisfied=' + that.data.isSatisfied + '&isPubToPri=' + isPubToPri;
+                        } else if (type == 2) {
+                            // 当不展示一键认证弹框时，看是否需要弹出售前告知书或产品期限匹配弹框
+                            judgeRiskHint(2, projectId, projectName, isPopup, isRiskPopup, isElecContract, isAllowAppend, that.data.isSatisfied, that.data.accreditedInvestor, that.data.accountType, "privatePlacementDetail");
+                        }
                     }
                 },
                 callbackFail: function(json) { //失败后执行的函数
@@ -291,12 +303,12 @@ module.exports = function(projectId, isPubToPri) {
             mui("body").on('mdClick','.icontips-close',function(e){
                 $('.tips').css('display', 'none');
             }, {
-                'htmdEvt': 'tobeConfirmTransaction_28'
+                'htmdEvt': htmdEvt + '_0014'
             })
             mui("body").on('mdClick','.tips-mask',function(e){
                 $('.tips').css('display', 'none');
             }, {
-                'htmdEvt': 'tobeConfirmTransaction_29'
+                'htmdEvt': htmdEvt + '_0015'
             })
         },
     }

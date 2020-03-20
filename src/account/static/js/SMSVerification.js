@@ -1,18 +1,14 @@
 /*
- * @page: 公募自选总资产
- * @Author: shiyunrui
- * @Date:   2019-11-19
- * @description:
- * 公募持仓页面
- * update:chentiancheng 2020-01-08
- * @description:
- * 新增事件clickEvent方法
+ * @page: 短信验证
+ * @Author: yanruiting
+ * @Date:   2020-03-20
  */
 
 require('@pathCommonBase/base.js');
 require('@pathCommonJs/ajaxLoading.js');
 require('@pathCommonCom/elasticLayer/elasticLayer/elasticLayer.js');
 var splitUrl = require('@pathCommonJs/components/splitUrl.js')();
+var judgeRiskHint = require('@pathCommonCom/authenticationProcess/judgeRiskHint.js');
 
 $(function() {
 
@@ -237,7 +233,8 @@ $(function() {
                         },
                         callbackDone: function (json) {
                             // 验证码发送成功后进去售前告知书的判断
-                            that.judgeRisk(phoneCode)
+                            judgeRiskHint(1, that.gV.projectId, that.gV.projectName, that.gV.isPopup, that.gV.isRiskPopup, that.gV.isElecContract, that.gV.isAllowAppend, that.gV.isSatisfied, that.gV.accreditedInvestor, that.gV.accountType, "SMSVerification", phoneCode, that.gV.reserveId, that.gV.isPubToPri);
+                            //that.judgeRisk(phoneCode)
                         },
                         callbackNoData: function () {
                             tipAction('短信验证码不正确');

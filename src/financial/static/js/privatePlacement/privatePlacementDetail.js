@@ -18,13 +18,11 @@ require('@pathCommonJs/ajaxLoading.js');
 
 // require('@pathCommonJsCom/headBarConfig.js');
 
-require('@pathCommonJs/components/authenticationProcess.js');
-
 var splitUrl = require('@pathCommonJs/components/splitUrl.js')();
 var generateTemplate = require('@pathCommonJsComBus/generateTemplate.js');
 //引入弹出层
 require('@pathCommonCom/elasticLayer/elasticLayer/elasticLayer.js');
-
+var privateAuthenticationProcess = require('@pathCommonCom/authenticationProcess/privateAuthenticationProcess.js');
 var moment = require('moment');
 
 $(function() {
@@ -1500,7 +1498,8 @@ $(function() {
 
             // 立即预约
             mui("body").on('mdClick', '.buyButton', function() {
-                if (that.data.canClick) { //防重复点击
+                privateAuthenticationProcess(2, that.$e.projectId, null, "privatePlacementDetail", that.data.productName, that.data.fundDetailObj.isElecContract, that.data.fundDetailObj.isAllowAppend);
+                /*if (that.data.canClick) { //防重复点击
                     if (that.data.buyFreeze == "1" && that.data.lawFreezeStatus == "1") { //如果禁止买入且司法冻结，首先提示
                         that.data.canClick = true;//这里必须改成true，否则取消后按钮不生效了。
                         var obj = {
@@ -1524,7 +1523,7 @@ $(function() {
 
                 } else {
                     return false;
-                }
+                }*/
             }, {
                 htmdEvt: 'privatePlacementDetail_06'
             });
