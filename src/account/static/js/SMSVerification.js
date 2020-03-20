@@ -1,18 +1,14 @@
 /*
- * @page: 公募自选总资产
- * @Author: shiyunrui
- * @Date:   2019-11-19
- * @description:
- * 公募持仓页面
- * update:chentiancheng 2020-01-08
- * @description:
- * 新增事件clickEvent方法
+ * @page: 短信验证
+ * @Author: yanruiting
+ * @Date:   2020-03-20
  */
 
 require('@pathCommonBase/base.js');
 require('@pathCommonJs/ajaxLoading.js');
 require('@pathCommonCom/elasticLayer/elasticLayer/elasticLayer.js');
 var splitUrl = require('@pathCommonJs/components/splitUrl.js')();
+var judgeRiskHint = require('@pathCommonCom/authenticationProcess/judgeRiskHint.js');
 
 $(function() {
 
@@ -237,7 +233,24 @@ $(function() {
                         },
                         callbackDone: function (json) {
                             // 验证码发送成功后进去售前告知书的判断
-                            that.judgeRisk(phoneCode)
+                            var obj = {
+                                type: 1,
+                                projectId: that.gV.projectId,
+                                projectName: that.gV.projectName,
+                                isPopup: that.gV.isPopup,
+                                isRiskPopup: that.gV.isRiskPopup,
+                                isElecContract: that.gV.isElecContract,
+                                isAllowAppend: that.gV.isAllowAppend,
+                                isSatisfied: that.gV.isSatisfied,
+                                accreditedInvestor: that.gV.accreditedInvestor,
+                                htmdEvt: "SMSVerification",
+                                custType: that.gV.accountType,
+                                phoneCode: phoneCode,
+                                reserveId: that.gV.reserveId,
+                                isPubToPri: that.gV.isPubToPri
+                            }
+                            judgeRiskHint(obj);
+                            //that.judgeRisk(phoneCode)
                         },
                         callbackNoData: function () {
                             tipAction('短信验证码不正确');
