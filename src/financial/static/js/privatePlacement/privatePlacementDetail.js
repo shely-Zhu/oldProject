@@ -502,15 +502,24 @@ $(function() {
                 callbackDone: function(json) {
                     var tplm = $("#VideoList-template").html();
                     var template = Handlebars.compile(tplm);
-                    $(".VideoList").html(template(json.data));
-                    $(".firstVideoBox").find(".firstVideo").attr("src",json.data[0].videoCoverUrl)
-                    $(".firstVideoBox").find(".firstVideoTitleText").html(json.data[0].videoName)
-                    $(".firstVideoBox").find(".firstVideoSpeaker").html(json.data[0].videoSpeaker)
-                    $(".firstVideoBox").attr("videoId",json.data[0].videoId)
+                    //排除数据为空数组情况
+                    if(json.data.length>0){
+                        $(".VideoList").html(template(json.data));
+                        $(".firstVideoBox").find(".firstVideo").attr("src",json.data[0].videoCoverUrl)
+                        $(".firstVideoBox").find(".firstVideoTitleText").html(json.data[0].videoName)
+                        $(".firstVideoBox").find(".firstVideoSpeaker").html(json.data[0].videoSpeaker)
+                        $(".firstVideoBox").attr("videoId",json.data[0].videoId)
+                    }else{
+                        $(".videoOnline").hide();
+                    }
+                   
                 },
                 callbackNoData: function(json) {
                     // tipAction(json.message);
                     // $(".performanceComparison").hide();
+                    $(".videoOnline").hide();
+                },
+                callbackFail:function(json){
                     $(".videoOnline").hide();
                 }
             }];
@@ -969,7 +978,7 @@ $(function() {
             }else if (v.conditionJump == 9) { //跳转到普通风测
                 jumpUrl = site_url.riskAppraisal_url + '?type=private';
             }else if(v.conditionJump == 10){//跳转到进身份证上传页面无开户流程
-                jumpUrl = realIdcard_url + "?type=alone";
+                jumpUrl = site_url.realIdcard_url + "?type=alone";
             }
             else if (v.conditionJump == 11) { //跳转到进身份证上传页面
                 jumpUrl = site_url.realIdcard_url;
