@@ -502,11 +502,17 @@ $(function() {
                 callbackDone: function(json) {
                     var tplm = $("#VideoList-template").html();
                     var template = Handlebars.compile(tplm);
-                    $(".VideoList").html(template(json.data));
-                    $(".firstVideoBox").find(".firstVideo").attr("src",json.data[0].videoCoverUrl)
-                    $(".firstVideoBox").find(".firstVideoTitleText").html(json.data[0].videoName)
-                    $(".firstVideoBox").find(".firstVideoSpeaker").html(json.data[0].videoSpeaker)
-                    $(".firstVideoBox").attr("videoId",json.data[0].videoId)
+                    //排除数据为空数组情况
+                    if(json.data.length>0){
+                        $(".VideoList").html(template(json.data));
+                        $(".firstVideoBox").find(".firstVideo").attr("src",json.data[0].videoCoverUrl)
+                        $(".firstVideoBox").find(".firstVideoTitleText").html(json.data[0].videoName)
+                        $(".firstVideoBox").find(".firstVideoSpeaker").html(json.data[0].videoSpeaker)
+                        $(".firstVideoBox").attr("videoId",json.data[0].videoId)
+                    }else{
+                        $(".videoOnline").hide();
+                    }
+                   
                 },
                 callbackNoData: function(json) {
                     // tipAction(json.message);
