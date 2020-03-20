@@ -187,6 +187,15 @@ var clickList = {
 	"privatePlacementDetail_0014" : { type:'click', evtid: 'privatePlacementDetail_0014', topic: '私募基金产品详情-点击一键认证隐藏弹框', info: ''} ,
 	"privatePlacementDetail_0015" : { type:'click', evtid: 'privatePlacementDetail_0015', topic: '私募基金产品详情-点击遮罩层隐藏一键认证弹框', info: ''} ,
 
+	// 售前告知书组件弹框
+	"privatePlacementDetail_a1" : { type:'click', evtid: 'privatePlacementDetail_a1', topic: '私募基金产品详情-投资期限少于产品期限_继续', info: ''} ,
+	"privatePlacementDetail_a2" : { type:'click', evtid: 'privatePlacementDetail_a2', topic: '私募基金产品详情-投资期限少于产品期限_放弃', info: ''} ,
+	"privatePlacementDetail_a3" : { type:'click', evtid: 'privatePlacementDetail_a3', topic: '私募基金产品详情-售前告知书_去阅读', info: ''} ,
+	"privatePlacementDetail_a4" : { type:'click', evtid: 'privatePlacementDetail_a4', topic: '私募基金产品详情-售前告知书_取消', info: ''} ,
+	"privatePlacementDetail_a5" : { type:'click', evtid: 'privatePlacementDetail_a5', topic: '私募基金产品详情-产品与风险承受能力相匹配_确定', info: ''} ,
+	"privatePlacementDetail_a6" : { type:'click', evtid: 'privatePlacementDetail_a6', topic: '私募基金产品详情-产品与风险承受能力相匹配_取消', info: ''} ,
+	"privatePlacementDetail_a7" : { type:'click', evtid: 'privatePlacementDetail_a7', topic: '私募基金产品详情-告知书内容未展示联系理顾-确定', info: ''} ,
+
 	//现金管理  cashManagement.html
 	"cashManagement_01" : { type:'click', evtid: 'cashManagement_01', topic: '现金管理-现金宝详情', info: ''} ,
 	"cashManagement_02" : { type:'click', evtid: 'cashManagement_02', topic: '现金管理-转入', info: ''} ,
@@ -717,13 +726,13 @@ var clickList = {
 	"otherAssets_4":{ type:'click', evtid: 'otherAssets_4', topic: '其他资产-关闭资产组成说明', info: ''},
 	
 	// 短信验证
-	"SMSVerification_a1" : { type:'click', evtid: 'SMSVerification_0', topic: '短信验证-投资期限少于产品期限_继续', info: ''} ,
-	"SMSVerification_a2" : { type:'click', evtid: 'SMSVerification_1', topic: '短信验证-投资期限少于产品期限_放弃', info: ''} ,
-	"SMSVerification_a3" : { type:'click', evtid: 'SMSVerification_2', topic: '短信验证-售前告知书_去阅读', info: ''} ,
-	"SMSVerification_a4" : { type:'click', evtid: 'SMSVerification_3', topic: '短信验证-售前告知书_取消', info: ''} ,
-	"SMSVerification_a5" : { type:'click', evtid: 'SMSVerification_4', topic: '短信验证-产品与风险承受能力相匹配_确定', info: ''} ,
-	"SMSVerification_a6" : { type:'click', evtid: 'SMSVerification_5', topic: '短信验证-产品与风险承受能力相匹配_取消', info: ''} ,
-	"SMSVerification_a7" : { type:'click', evtid: 'SMSVerification_6', topic: '短信验证-告知书内容未展示联系理顾-确定', info: ''} ,
+	"SMSVerification_a1" : { type:'click', evtid: 'SMSVerification_a1', topic: '短信验证-投资期限少于产品期限_继续', info: ''} ,
+	"SMSVerification_a2" : { type:'click', evtid: 'SMSVerification_a2', topic: '短信验证-投资期限少于产品期限_放弃', info: ''} ,
+	"SMSVerification_a3" : { type:'click', evtid: 'SMSVerification_a3', topic: '短信验证-售前告知书_去阅读', info: ''} ,
+	"SMSVerification_a4" : { type:'click', evtid: 'SMSVerification_a4', topic: '短信验证-售前告知书_取消', info: ''} ,
+	"SMSVerification_a5" : { type:'click', evtid: 'SMSVerification_a5', topic: '短信验证-产品与风险承受能力相匹配_确定', info: ''} ,
+	"SMSVerification_a6" : { type:'click', evtid: 'SMSVerification_a6', topic: '短信验证-产品与风险承受能力相匹配_取消', info: ''} ,
+	"SMSVerification_a7" : { type:'click', evtid: 'SMSVerification_a7', topic: '短信验证-告知书内容未展示联系理顾-确定', info: ''} ,
 	"SMSVerification_7" : { type:'click', evtid: 'SMSVerification_7', topic: '短信验证-验证短信验证码是否正确', info: ''} ,
 	"SMSVerification_8" : { type:'click', evtid: 'SMSVerification_8', topic: '短信验证-获取短信验证码', info: ''} ,
 	"SMSVerification_9" : { type:'click', evtid: 'SMSVerification_9', topic: '短信验证-获取语音验证码', info: ''} ,
