@@ -373,7 +373,13 @@ $(function() {
                     var isQualified = $(this).attr('data-isqualified'); //是否满足合格投资者
                     var isPubToPri = $(this).attr('data-ispubtopri'); //是否公转私
                     if(type == 'toConfirm') {
-                        privateAuthenticationProcess(1, proId, isPubToPri, "tobeConfirmTransaction");
+                        var params = {
+                            type: 1,
+                            projectId: proId,
+                            isPubToPri: isPubToPri,
+                            htmdEvt: "tobeConfirmTransaction"
+                        }
+                        privateAuthenticationProcess(params);
                     } else if (type == 'toCertif') { //去合格投资者认证
                         if (isElec == 0) {
                             //非电子合同

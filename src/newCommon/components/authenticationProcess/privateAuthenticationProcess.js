@@ -14,7 +14,18 @@
 
 var judgeRiskHint = require('@pathCommonCom/authenticationProcess/judgeRiskHint.js');
 
-module.exports = function(type, projectId, isPubToPri, htmdEvt, projectName, isElecContract, isAllowAppend) {
+module.exports = function(params) {
+    var type = params.type;
+    var projectId = params.projectId;
+    if(params.isPubToPri) {
+        var isPubToPri = params.isPubToPri;
+    }
+    var htmdEvt = params.htmdEvt;
+    if(params.projectName) {
+        var projectName = params.projectName;
+        var isElecContract = params.isElecContract;
+        var isAllowAppend = params.isAllowAppend;
+    }
     var privateAuth = {
         $e:{
             realLi: $('#real-condition>li'), // 条件下的五条
@@ -246,7 +257,19 @@ module.exports = function(type, projectId, isPubToPri, htmdEvt, projectName, isE
                             window.location.href = site_url.SMSVerification_url + '?projectId=' + projectId + '&accountType=' + that.data.custType + '&isPopup=' + isPopup + '&isRiskPopup=' + isRiskPopup + '&accreditedInvestor=' + that.data.accreditedInvestor + '&isSatisfied=' + that.data.isSatisfied + '&isPubToPri=' + isPubToPri;
                         } else if (type == 2) {
                             // 当不展示一键认证弹框时，看是否需要弹出售前告知书或产品期限匹配弹框
-                            judgeRiskHint(2, projectId, projectName, isPopup, isRiskPopup, isElecContract, isAllowAppend, that.data.isSatisfied, that.data.accreditedInvestor, that.data.accountType, "privatePlacementDetail");
+                            var obj = {
+                                type: 2,
+                                projectId: projectId,
+                                projectName: projectName,
+                                isPopup: isPopup,
+                                isRiskPopup: isRiskPopup,
+                                isElecContract: isElecContract,
+                                isAllowAppend: isAllowAppend,
+                                isSatisfied: that.data.isSatisfied,
+                                accreditedInvestor: that.data.accreditedInvestor,
+                                htmdEvt: "privatePlacementDetail"
+                            }
+                            judgeRiskHint(obj);
                         }
                     }
                 },

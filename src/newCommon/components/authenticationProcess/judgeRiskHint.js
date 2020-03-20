@@ -19,7 +19,25 @@
 * isPubToPri // 是否公转私 （客户预约确认时需要传）
 */
 
-module.exports = function(type, projectId, projectName, isPopup, isRiskPopup, isElecContract, isAllowAppend, isSatisfied, accreditedInvestor, htmdEvt, custType, phoneCode, reserveId, isPubToPri) {
+module.exports = function(params) {
+	var type = params.type;
+	var projectId = params.projectId;
+	var projectName = params.projectName;
+	var isPopup = params.isPopup;
+	var isRiskPopup = params.isRiskPopup;
+	var isElecContract = params.isElecContract;
+	var isAllowAppend = params.isAllowAppend;
+	var isSatisfied = params.isSatisfied;
+	var accreditedInvestor = params.accreditedInvestor;
+	var htmdEvt = params.htmdEvt;
+	if(params.custType) {
+		var custType = params.custType;
+	}
+	if(params.phoneCode) {
+		var phoneCode = params.phoneCode;
+		var reserveId = params.reserveId;
+		var isPubToPri = params.isPubToPri;
+	}
 	var judge = {
 		$e:{
             
@@ -79,7 +97,7 @@ module.exports = function(type, projectId, projectName, isPopup, isRiskPopup, is
                                         	if(type == 1) {
 	                                            window.location.href = site_url.downloadNew_api + "?filePath=" + noticeObj.fileUrl + "&fileName=" + new Base64().encode(noticeObj.fileName) + "&groupName=" +
 	                                            noticeObj.groupName + "&show=1&readComplete=true&showDownload=false&fundCode=" + projectId + "&isAllowAppend=" +
-	                                            isAllowAppend + '&accreditedInvestor=' + accreditedInvestor + '&businessType='+ businessType +'&phoneCode=' + phoneCode + '&projectName=' + projectName + '&isPubToPri=' + isPubToPri;
+	                                            isAllowAppend + '&accreditedInvestor=' + accreditedInvestor + '&businessType='+ businessType +'&phoneCode=' + phoneCode + '&projectName=' + projectName + '&isPubToPri=' + isPubToPri + '&isSatisfied=' + isSatisfied;
                                         	} else if (type == 2) {
                                                 window.location.href = site_url.downloadNew_api + "?filePath=" + noticeObj.fileUrl + "&fileName=" + new Base64().encode(noticeObj.fileName) + "&groupName=" +
                                                 noticeObj.groupName + "&show=1&readComplete=true&showDownload=false&fundCode=" + projectId + "&isAllowAppend=" +
@@ -150,7 +168,7 @@ module.exports = function(type, projectId, projectName, isPopup, isRiskPopup, is
                                 	if(type == 1) {
                                         window.location.href = site_url.downloadNew_api + "?filePath=" + noticeObj.fileUrl + "&fileName=" + new Base64().encode(noticeObj.fileName) + "&groupName=" +
                                         noticeObj.groupName + "&show=1&readComplete=true&showDownload=false&fundCode=" + projectId + "&isAllowAppend=" +
-                                        isAllowAppend + '&accreditedInvestor=' + accreditedInvestor + '&businessType='+ businessType +'&phoneCode=' + phoneCode + '&projectName=' + projectName + '&isPubToPri=' + isPubToPri;
+                                        isAllowAppend + '&accreditedInvestor=' + accreditedInvestor + '&businessType='+ businessType +'&phoneCode=' + phoneCode + '&projectName=' + projectName + '&isPubToPri=' + isPubToPri + '&isSatisfied=' + isSatisfied;
                                 	} else if (type == 2) {
                                         window.location.href = site_url.downloadNew_api + "?filePath=" + noticeObj.fileUrl + "&fileName=" + new Base64().encode(noticeObj.fileName) + "&groupName=" +
                                         noticeObj.groupName + "&show=1&readComplete=true&showDownload=false&fundCode=" + projectId + "&isAllowAppend=" +

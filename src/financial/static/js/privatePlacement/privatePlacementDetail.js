@@ -1504,7 +1504,15 @@ $(function() {
 
             // 立即预约
             mui("body").on('mdClick', '.buyButton', function() {
-                privateAuthenticationProcess(2, that.$e.projectId, null, "privatePlacementDetail", that.data.productName, that.data.fundDetailObj.isElecContract, that.data.fundDetailObj.isAllowAppend);
+                var params = {
+                    type: 2,
+                    projectId: that.$e.projectId,
+                    htmdEvt: "privatePlacementDetail",
+                    projectName: that.data.productName,
+                    isElecContract: that.data.fundDetailObj.isElecContract,
+                    isAllowAppend: that.data.fundDetailObj.isAllowAppend
+                }
+                privateAuthenticationProcess(params);
                 /*if (that.data.canClick) { //防重复点击
                     if (that.data.buyFreeze == "1" && that.data.lawFreezeStatus == "1") { //如果禁止买入且司法冻结，首先提示
                         that.data.canClick = true;//这里必须改成true，否则取消后按钮不生效了。
