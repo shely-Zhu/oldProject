@@ -154,8 +154,8 @@ module.exports = function(params) {
                                         '<p class="">请您认真阅读' + noticeObj.fileName + projectName + '并确认后继续购买该产品</p>',
                                 yesTxt: '去阅读',
                                 celTxt: '取消',
-                                htmdEvtYes: htmdEvt + '_a7',  // 埋点确定按钮属性
-                                htmdEvtCel: htmdEvt + '_a8',  // 埋点取消按钮属性
+                                htmdEvtYes: htmdEvt + '_a3',  // 埋点确定按钮属性
+                                htmdEvtCel: htmdEvt + '_a4',  // 埋点取消按钮属性
                                 zIndex: 1200,
                                 callback: function(t) {
                                     if(isElecContract == 1) { // 电子
@@ -191,7 +191,7 @@ module.exports = function(params) {
                             id: 'sellPop',
                             p: '<p>售前风险告知书内容未显示，请联系您的理财师或拨打客服热线：400-8980-618进行咨询！</p>',
                             yesTxt: '确定',
-                            htmdEvtYes: htmdEvt + '_a9',  // 埋点确定按钮属性
+                            htmdEvtYes: htmdEvt + '_a7',  // 埋点确定按钮属性
                             hideCelButton: true,
                             zIndex: 1200,
                             callback: function(t) {

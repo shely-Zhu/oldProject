@@ -219,8 +219,8 @@ module.exports = function(params) {
                                         p: '机构客户需联系您的理财师，进行线下开户',
                                         yesTxt: '确认',
                                         celTxt: "取消",
-                                        htmdEvtYes:htmdEvt + '_0009',  // 埋点确定按钮属性
-                                        htmdEvtCel:htmdEvt + '_0010',  // 埋点取消按钮属性
+                                        htmdEvtYes:htmdEvt + '_0010',  // 埋点确定按钮属性
+                                        htmdEvtCel:htmdEvt + '_0011',  // 埋点取消按钮属性
                                         zIndex: 100,
                                         callback: function(t) {}
                                     };
@@ -233,8 +233,8 @@ module.exports = function(params) {
                                         p: '机构客户完善资料请联系您的理财师',
                                         yesTxt: '确认',
                                         celTxt: "取消",
-                                        htmdEvtYes:htmdEvt + '_0011',  // 埋点确定按钮属性
-                                        htmdEvtCel:htmdEvt + '_0012',  // 埋点取消按钮属性
+                                        htmdEvtYes:htmdEvt + '_0012',  // 埋点确定按钮属性
+                                        htmdEvtCel:htmdEvt + '_0013',  // 埋点取消按钮属性
                                         zIndex: 100,
                                         callback: function(t) {}
                                     };
@@ -243,7 +243,7 @@ module.exports = function(params) {
                                     window.location.href = singleaAuthenPath;//
                                 }
                             }, {
-                                htmdEvt: htmdEvt + '_0013'
+                                htmdEvt: htmdEvt + '_0009'
                             })
                         });
                     } else {
