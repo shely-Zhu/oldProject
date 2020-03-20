@@ -62,9 +62,9 @@ module.exports = function(data, $ele, $id, type) {
                 if (operationNoList[j] == '13' || operationNoList[j] == '14' || operationNoList[j] == '15') {
                     data[i].assignVideo = true; //展示视频双录按钮13 视频面签坐席14 视频面签状态15 视频面签开启
                 }
-//              if (operationNoList[j] == '14') {
-//                  data[i].assignVideoStatus = true; //展示视频双录面签状态按钮
-//              }
+                if (operationNoList[j] == '16') {
+                    data[i].appointmentAffirm = true; //展示立即确认按钮（客户预约确认入口）
+                }
                 if (operationNoList[j] == '21') {
                     data[i].assignCancel = true; //展示取消转让按钮
                 }

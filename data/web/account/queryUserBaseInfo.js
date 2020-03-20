@@ -22,7 +22,7 @@ var data = Mock.mock({
         "identityTypeDesc|1": ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "A", "B", "C", "D"], //证件类型翻译【参照备注】------------certTypeDesc
         'identityNo|1': ["15210****0000000000", "12340****000444"], //证件号【加*】-----maskCertNo
         'email|1': ["2222@124.com", "234234234@ee.com"], //邮箱地址
-        'phone|1': ["111****111", '33****4555'], //联系人手机号【加*】------linkPhone
+        'phone|1': ["1118562111", '3385624555'], //联系人手机号【加*】------linkPhone
         'address|1': ["sdfsdfsf未发生大幅度", '撒打发斯蒂芬事发地点时发的发斯蒂芬阿斯蒂芬', "asdfasdfsdf是法师打发斯蒂芬"], //联系地址----------linkAddress
         "orgContractName|1": ["sdf", "234"], //机构联系人---------organLinkMan
         "ticket": ['SDER'], //私募跳转公募信息解密口令

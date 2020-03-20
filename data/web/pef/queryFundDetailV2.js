@@ -18,6 +18,7 @@ var data = Mock.mock({
 		"formatIssuanceSize": "1000",  //产品发行规模（千分位）（单位：万）
 		"investStart": "100",//个人起投金额（单位：万）
 		"investAdd":"100",  // 个人追加起投金额（单位：万）
+		"term":"12+1+2",
 		"projectTerm": "12",//产品期限（单位：个月）
 		"projectTermUnit": "个月",//产品期限单位：个月
 		"projectUpTime": "2016/01/12",//募集开始日期【yyyy/MM/dd】
