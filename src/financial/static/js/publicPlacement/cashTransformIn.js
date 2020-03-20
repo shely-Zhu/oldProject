@@ -444,8 +444,9 @@ $(function () {
 			}) ;
 			//密码校验不通过   ---取消
 			mui("body").on('mdClick','.elasticCel',function(){
-				$(".pwd-input").val('');
-				$(".fake-box input").val('');
+//				$(".pwd-input").val('');
+//				$(".fake-box input").val('');
+				$.util.clearPasswords();//清空交易密码
 				$('#passwordWrap').css('display','none');
 				$('.popup-password').css('display','none');
 				
@@ -461,8 +462,9 @@ $(function () {
 			}) ;
 			//密码校验不通过   ---重新输入
 			mui("body").on('mdClick','.error1 .elasticYes',function(){
-				$(".pwd-input").val('');
-				$(".fake-box input").val('');
+//				$(".pwd-input").val('');
+//				$(".fake-box input").val('');
+				$.util.clearPasswords();//清空交易密码
 				$('.popup-password').css('display','none');
 			}, {
 				htmdEvt: 'cashTransformIn_13'
@@ -476,8 +478,9 @@ $(function () {
 			}) ;
 			//密码校验不通过   ---重新输入
 			mui("body").on('mdClick','.error3 .elasticYes',function(){
-				$(".pwd-input").val('');
-				$(".fake-box input").val('');
+//				$(".pwd-input").val('');
+//				$(".fake-box input").val('');
+				$.util.clearPasswords();//清空交易密码
 				$('.popup-password').css('display','none');
 			}, {
 				htmdEvt: 'cashTransformIn_15'

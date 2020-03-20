@@ -969,8 +969,9 @@ $(function () {
 			
 			//确定
 			mui("body").on("mdClick",'.btn_box .btn',function(){
-				$(".pwd-input").val('');
-                $(".fake-box input").val('');
+//				$(".pwd-input").val('');
+//              $(".fake-box input").val('');
+				$.util.clearPasswords();//清空交易密码
 				if(!!that.gV.minValue){
 					if(Number(that.gV.balance) < Number(that.gV.minValue)){
 						tipAction('最小买入金额不能低于' + that.gV.minValue + '元');
@@ -1035,8 +1036,9 @@ $(function () {
 			//密码校验不通过   ---重新输入
 			mui("body").on('mdClick','.error1 .elasticYes',function(){
 				$('.popup-password').css('display','none');
-				$(".pwd-input").val('');
-				$(".fake-box input").val('');
+//				$(".pwd-input").val('');
+//				$(".fake-box input").val('');
+				$.util.clearPasswords();//清空交易密码
 			}, {
 				htmdEvt: 'ordinarySetThrow_13'
 			}) ;
@@ -1050,8 +1052,9 @@ $(function () {
 			//密码校验不通过   ---重新输入
 			mui("body").on('mdClick','.error3 .elasticYes',function(){
 				$('.popup-password').css('display','none');
-				$(".pwd-input").val('');
-				$(".fake-box input").val('');
+//				$(".pwd-input").val('');
+//				$(".fake-box input").val('');
+				$.util.clearPasswords();//清空交易密码
 			}, {
 				htmdEvt: 'ordinarySetThrow_15'
 			}) ;
