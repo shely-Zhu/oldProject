@@ -51,6 +51,7 @@ module.exports = function(params) {
         },
         // 售前告知书及产品期限提示框展示逻辑
         judgeRiskHint: function() {
+            var that = this;
         	if (!!isPopup) { //如果弹出售前告知书或期限不符弹框
                 //发送ajax请求
                 var ReourceListobj = [{
