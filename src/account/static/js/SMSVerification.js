@@ -73,148 +73,6 @@ $(function() {
             }]
             $.ajaxLoading(obj);
         },
-        judgeRisk: function(phoneCode) {
-            var that = this;
-            var isPopup = that.gV.isPopup; //弹框售前告知书 
-            var isRiskPopup = that.gV.isRiskPopup; //产品期限不符弹框
-            if (!!isPopup) { //如果弹出售前告知书或期限不符弹框
-                //发送ajax请求
-                var ReourceListobj = [{
-                    url: site_url.queryReourceListNew_api,
-                    data: {
-                        projectId: that.gV.projectId,
-                        fileType: isPopup
-                    },
-                    contentTypeSearch: false,
-                    needLoading: true,
-                    needLogin: true, //需要判断是否登陆
-                    callbackDone: function(json) { //成功后执行的函数
-                        var data = json.data[0],
-                            noticeObj = data;
-                        if(!!isRiskPopup && !!isPopup){ // 产品期限风险弹框与售前告知书都展示
-                            var objElasticLayer = {
-                                title: '尊敬的客户',
-                                id: 'sellPop',
-                                p: '<p class="" style="font-weight:bold;text-align:center">您风险测评中所选计划投资期限少于产品期限存在匹配风险，请确认是否继续购买</p>',
-                                yesTxt: '继续',
-                                celTxt: '放弃',
-                                htmdEvtYes:'SMSVerification_0',  // 埋点确定按钮属性
-                                htmdEvtCel:'SMSVerification_1',  // 埋点取消按钮属性
-                                zIndex: 1200,
-                                callback: function(t) {
-                                    var obj = {
-                                        title: '尊敬的客户',
-                                        id: 'sellPop',
-                                        p: '<p class="" style="font-weight:bold;text-align:center">你选择的产品与您现在的风险承受能力相匹配</p>' +
-                                                '<p class="">请您认真阅读' + noticeObj.fileName + that.gV.productName + '并确认后继续购买该产品</p>',
-                                        yesTxt: '去阅读',
-                                        celTxt: '取消',
-                                        htmdEvtYes:'SMSVerification_2',  // 埋点确定按钮属性
-                                        htmdEvtCel:'SMSVerification_3',  // 埋点取消按钮属性
-                                        zIndex: 1200,
-                                        callback: function(t) {
-                                            if(that.gV.isElecContract == 1) { // 电子
-                                                var businessType = 'confirmation';
-                                            } else {
-                                                var businessType = 'confirmationNoele';
-                                            }
-                                            window.location.href = site_url.downloadNew_api + "?filePath=" + noticeObj.fileUrl + "&fileName=" + new Base64().encode(noticeObj.fileName) + "&groupName=" +
-                                            noticeObj.groupName + "&show=1&readComplete=true&showDownload=false&fundCode=" + that.gV.projectId + "&isAllowAppend=" +
-                                            that.gV.isAllowAppend + '&accreditedInvestor=' + that.gV.accreditedInvestor + '&businessType='+ businessType +'&phoneCode=' + phoneCode + '&projectName=' + that.gV.projectName;
-                                        },
-                                        callbackCel: function() {
-                                            location.href = "javascript:history.go(-1)";
-                                        }
-                                    };
-                                    $.elasticLayer(obj)
-                                },
-                                callbackCel: function() { // 放弃返回到上一页
-                                    location.href = "javascript:history.go(-1)";
-                                }
-                            };
-                        }else if(!!isRiskPopup && !isPopup){ // 展示产品期限弹框，继续购买后直接进入预约确认页面
-                            var objElasticLayer = {
-                                title: '尊敬的客户',
-                                id: 'sellPop',
-                                p: '<p class="" style="font-weight:bold;text-align:center">您风险测评中所选计划投资期限少于产品期限存在匹配风险，请确认是否继续购买</p>',
-                                yesTxt: '继续',
-                                celTxt: '放弃',
-                                htmdEvtYes:'SMSVerification_0',  // 埋点确定按钮属性
-                                htmdEvtCel:'SMSVerification_1',  // 埋点取消按钮属性
-                                zIndex: 1200,
-                                callback: function(t) {
-                                    // 根据电子非电子订单跳转不同页面
-                                    if(that.gV.isElecContract == 1) { // 电子
-                                        window.location.href = site_url.confirmationEle_url + '?projectId=' + that.gV.projectId + '&projectName=' + that.gV.projectName + '&reserveId=' + that.gV.reserveId + '&isAllowAppend=' + that.gV.isAllowAppend + '&isPubToPri=' + that.gV.isPubToPri + '&isSatisfied=' + that.gV.isSatisfied + '&phoneCode=' + phoneCode; 
-                                    } else { // 非电子
-                                        window.location.href = site_url.confirmation_url + '?projectId=' + that.gV.projectId + '&projectName=' + that.gV.projectName + '&reserveId=' + that.gV.reserveId + '&phoneCode=' + phoneCode;
-                                    }
-                                },
-                                callbackCel: function() { // 放弃返回到上一页
-                                    location.href = "javascript:history.go(-1)";
-                                }
-                           };
-                        }else if(!isRiskPopup && !!isPopup){
-                            var objElasticLayer = {
-                                title: '尊敬的客户',
-                                id: 'sellPop',
-                                p: '<p class="" style="font-weight:bold;text-align:center">你选择的产品与您现在的风险承受能力相匹配</p>' +
-                                        '<p class="">请您认真阅读' + noticeObj.fileName + that.gV.productName + '并确认后继续购买该产品</p>',
-                                yesTxt: '去阅读',
-                                celTxt: '取消',
-                                htmdEvtYes:'SMSVerification_4',  // 埋点确定按钮属性
-                                htmdEvtCel:'SMSVerification_5',  // 埋点取消按钮属性
-                                zIndex: 1200,
-                                callback: function(t) {
-                                    if(that.gV.isElecContract == 1) { // 电子
-                                        var businessType = 'confirmation';
-                                    } else {
-                                        var businessType = 'confirmationNoele';
-                                    }
-                                    window.location.href = site_url.downloadNew_api + "?filePath=" + noticeObj.fileUrl + "&fileName=" + new Base64().encode(noticeObj.fileName) + "&groupName=" +
-                                    noticeObj.groupName + "&show=1&readComplete=true&showDownload=false&fundCode=" + that.gV.projectId + "&isAllowAppend=" +
-                                    that.gV.isAllowAppend + '&accreditedInvestor=' + that.gV.accreditedInvestor + '&businessType='+ businessType +'&phoneCode=' + phoneCode + '&projectName=' + that.gV.projectName;
-                                },
-                                callbackCel: function() { // 放弃返回到上一页
-                                    location.href = "javascript:history.go(-1)";
-                                }
-                            };
-                        }
-                        $.elasticLayer(objElasticLayer);
-                    },
-                    callbackNoData: function() {
-                        $(".netLoading").hide();
-                        var layer = {
-                            title: '尊敬的客户',
-                            id: 'sellPop',
-                            p: '<p>售前风险告知书内容未显示，请联系您的理财师或拨打客服热线：400-8980-618进行咨询！</p>',
-                            yesTxt: '确定',
-                            htmdEvtYes:'SMSVerification_6',  // 埋点确定按钮属性
-                            hideCelButton: true,
-                            zIndex: 1200,
-                            callback: function(t) {
-                                location.href = "javascript:history.go(-1)";
-                            },
-                        };
-                        $.elasticLayer(layer);
-                    },
-                    callbackFail: function(json) { //失败后执行的函数
-                        tipAction(json.message);
-                        $(".netLoading").hide();
-                    }
-                }];
-                $.ajaxLoading(ReourceListobj);
-            } else { 
-                // 客户为专业投资者，短信验证通过且投资期限与产品期限匹配后，不弹出阅读售前告知书弹框
-                // 客户为资管专业投资者，短信验证通过且投资期限与产品期限匹配后，不弹出阅读售前告知书弹框
-                // 根据电子非电子直接跳转客户确认页面
-                if(that.gV.isElecContract == 1) { // 电子
-                    window.location.href = site_url.confirmationEle_url + '?projectId=' + that.gV.projectId + '&projectName=' + that.gV.projectName + '&reserveId=' + that.gV.reserveId + '&isAllowAppend=' + that.gV.isAllowAppend + '&isPubToPri=' + that.gV.isPubToPri + '&isSatisfied=' + that.gV.isSatisfied + '&phoneCode=' + phoneCode;
-                } else { // 非电子
-                    window.location.href = site_url.confirmation_url + '?projectId=' + that.gV.projectId + '&projectName=' + that.gV.projectName + '&reserveId=' + that.gV.reserveId + '&phoneCode=' + phoneCode;
-                }
-            }
-        },
         events: function() { //绑定事件
             var that = this;
             // 验证手机验证码是否正确
@@ -229,7 +87,7 @@ $(function() {
                             phone: that.gV.phoneNumEncrypt,
                             code: phoneCode,
                             accountType: that.gV.accountType,
-                            verifyType: '17',
+                            verifyType: '25',
                         },
                         callbackDone: function (json) {
                             // 验证码发送成功后进去售前告知书的判断
@@ -250,7 +108,6 @@ $(function() {
                                 isPubToPri: that.gV.isPubToPri
                             }
                             judgeRiskHint(obj);
-                            //that.judgeRisk(phoneCode)
                         },
                         callbackNoData: function () {
                             tipAction('短信验证码不正确');
@@ -262,7 +119,7 @@ $(function() {
                     $.ajaxLoading(obj);
                 }
             }, {
-                'htmdEvt': 'SMSVerification_7'
+                'htmdEvt': 'SMSVerification_1'
             })
             // 获取短信验证码
             mui("body").on('mdClick', '.phoneCodeHint', function(e) {
@@ -271,7 +128,7 @@ $(function() {
                         url: site_url.messageCertSend_api,
                         data: {
                             phone: that.gV.phoneNumEncrypt,
-                            type: '17',
+                            type: '25',
                             accountType: that.gV.accountType,
                             projectName: that.gV.projectName,
                         },
@@ -297,7 +154,7 @@ $(function() {
                     $.ajaxLoading(obj);
                 }
             }, {
-                'htmdEvt': 'SMSVerification_8'
+                'htmdEvt': 'SMSVerification_2'
             })
             // 获取语音验证码
             mui("body").on('mdClick', '.voicePhoneCodeGet', function(e) {
@@ -307,8 +164,8 @@ $(function() {
                         title: '尊敬的客户',
                         id: 'sellPop',
                         p: '<p>是否通过手机号'+ that.gV.phoneNum +'接收语言验证码？</p>',
-                        htmdEvtYes:'SMSVerification_10',  // 埋点确定按钮属性
-                        htmdEvtCel:'SMSVerification_11',  // 埋点取消按钮属性
+                        htmdEvtYes:'SMSVerification_4',  // 埋点确定按钮属性
+                        htmdEvtCel:'SMSVerification_5',  // 埋点取消按钮属性
                         yesTxt: '确定',
                         zIndex: 1200,
                         callback: function(t) {
@@ -316,7 +173,7 @@ $(function() {
                                 url: site_url.voiceMsgVerify_api,
                                 data: {
                                     phone: that.gV.phoneNumEncrypt,
-                                    type: '17',
+                                    type: '25',
                                     accountType: that.gV.accountType,
                                     projectName: that.gV.projectName,
                                 },
@@ -342,7 +199,7 @@ $(function() {
                     
                 }
             }, {
-                'htmdEvt': 'SMSVerification_9'
+                'htmdEvt': 'SMSVerification_3'
             })
         },
     };
