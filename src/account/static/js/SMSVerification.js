@@ -87,7 +87,7 @@ $(function() {
                             phone: that.gV.phoneNumEncrypt,
                             code: phoneCode,
                             accountType: that.gV.accountType,
-                            verifyType: '17',
+                            verifyType: '25',
                         },
                         callbackDone: function (json) {
                             // 验证码发送成功后进去售前告知书的判断
@@ -128,7 +128,7 @@ $(function() {
                         url: site_url.messageCertSend_api,
                         data: {
                             phone: that.gV.phoneNumEncrypt,
-                            type: '17',
+                            type: '25',
                             accountType: that.gV.accountType,
                             projectName: that.gV.projectName,
                         },
@@ -173,7 +173,7 @@ $(function() {
                                 url: site_url.voiceMsgVerify_api,
                                 data: {
                                     phone: that.gV.phoneNumEncrypt,
-                                    type: '17',
+                                    type: '25',
                                     accountType: that.gV.accountType,
                                     projectName: that.gV.projectName,
                                 },
