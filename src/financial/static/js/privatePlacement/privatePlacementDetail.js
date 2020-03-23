@@ -990,7 +990,7 @@ $(function() {
             return jumpUrl;
         },
         // 客户预约产品所需条件
-        getConditionsOfOrder: function() {
+        /*getConditionsOfOrder: function() {
             var that = this;
 
             //发送ajax请求
@@ -1265,7 +1265,7 @@ $(function() {
             }];
             $.ajaxLoading(obj);
 
-        },
+        },*/
         queryReourceListByLabel: function() { //根据标签号查询产品材料
             var that = this;
             var labels = '0,1,2,3,4,5'
