@@ -267,7 +267,8 @@ module.exports = function(params) {
                                 isAllowAppend: isAllowAppend,
                                 isSatisfied: that.data.isSatisfied,
                                 accreditedInvestor: that.data.accreditedInvestor,
-                                htmdEvt: "privatePlacementDetail"
+                                htmdEvt: "privatePlacementDetail",
+                                custType: that.data.custType
                             }
                             judgeRiskHint(obj);
                         }

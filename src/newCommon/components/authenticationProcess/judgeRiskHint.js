@@ -119,35 +119,7 @@ module.exports = function(params) {
                                 	}
                                 }
                             };
-                        }else if(!!isRiskPopup && !isPopup){ // 展示产品期限弹框，继续购买后直接进入预约确认页面
-                            var objElasticLayer = {
-                                title: '尊敬的客户',
-                                id: 'sellPop',
-                                p: '<p class="" style="font-weight:bold;text-align:center">您风险测评中所选计划投资期限少于产品期限存在匹配风险，请确认是否继续购买</p>',
-                                yesTxt: '继续',
-                                celTxt: '放弃',
-                                htmdEvtYes: htmdEvt + '_a5',  // 埋点确定按钮属性
-                                htmdEvtCel: htmdEvt + '_a6',  // 埋点取消按钮属性
-                                zIndex: 1200,
-                                callback: function(t) {
-                                	if(type == 1) {
-                                		// 根据电子非电子订单跳转不同页面
-	                                    if(isElecContract == 1) { // 电子
-	                                        window.location.href = site_url.confirmationEle_url + '?projectId=' + projectId + '&projectName=' + projectName + '&reserveId=' + reserveId + '&isAllowAppend=' + isAllowAppend + '&isPubToPri=' + isPubToPri + '&isSatisfied=' + isSatisfied + '&phoneCode=' + phoneCode; 
-	                                    } else { // 非电子
-	                                        window.location.href = site_url.confirmation_url + '?projectId=' + projectId + '&projectName=' + projectName + '&reserveId=' + reserveId + '&phoneCode=' + phoneCode;
-	                                    }
-                                	} else if (type == 2) {
-                                		that.nextStep();
-                                	}
-                                },
-                                callbackCel: function() { // 预约确认点击放弃返回到上一页
-                                    if(type == 1) {
-                                    	location.href = "javascript:history.go(-1)";
-                                	}
-                                }
-                           };
-                        }else if(!isRiskPopup && !!isPopup){
+                        } else if(!isRiskPopup && !!isPopup){
                             var objElasticLayer = {
                                 title: '尊敬的客户',
                                 id: 'sellPop',
@@ -209,6 +181,35 @@ module.exports = function(params) {
                     }
                 }];
                 $.ajaxLoading(ReourceListobj);
+            } else if (!!isRiskPopup) {
+                var objElasticLayer = {
+                    title: '尊敬的客户',
+                    id: 'sellPop',
+                    p: '<p class="" style="font-weight:bold;text-align:center">您风险测评中所选计划投资期限少于产品期限存在匹配风险，请确认是否继续购买</p>',
+                    yesTxt: '继续',
+                    celTxt: '放弃',
+                    htmdEvtYes: htmdEvt + '_a5',  // 埋点确定按钮属性
+                    htmdEvtCel: htmdEvt + '_a6',  // 埋点取消按钮属性
+                    zIndex: 1200,
+                    callback: function(t) {
+                        if(type == 1) {
+                            // 根据电子非电子订单跳转不同页面
+                            if(isElecContract == 1) { // 电子
+                                window.location.href = site_url.confirmationEle_url + '?projectId=' + projectId + '&projectName=' + projectName + '&reserveId=' + reserveId + '&isAllowAppend=' + isAllowAppend + '&isPubToPri=' + isPubToPri + '&isSatisfied=' + isSatisfied + '&phoneCode=' + phoneCode; 
+                            } else { // 非电子
+                                window.location.href = site_url.confirmation_url + '?projectId=' + projectId + '&projectName=' + projectName + '&reserveId=' + reserveId + '&phoneCode=' + phoneCode;
+                            }
+                        } else if (type == 2) {
+                            that.nextStep();
+                        }
+                    },
+                    callbackCel: function() { // 预约确认点击放弃返回到上一页
+                        if(type == 1) {
+                            location.href = "javascript:history.go(-1)";
+                        }
+                    }
+                };
+                $.elasticLayer(objElasticLayer);
             } else {
                 // 客户为专业投资者，短信验证通过且投资期限与产品期限匹配后，不弹出阅读售前告知书弹框
                 // 客户为资管专业投资者，短信验证通过且投资期限与产品期限匹配后，不弹出阅读售前告知书弹框

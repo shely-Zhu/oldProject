@@ -133,7 +133,8 @@ $(function() {
                             projectName: that.gV.projectName,
                         },
                         callbackDone: function (json) {
-                            tipAction("短信验证码已发送，请查收")
+                            tipAction("短信验证码已发送，请查收");
+                            $(".voicePhoneCode").show();
                             that.gV.timer = setInterval(function() {
                                 if (that.gV.countDown == 0) {
                                     $(".phoneCodeHint").html("获取验证码");
@@ -149,6 +150,7 @@ $(function() {
                         },
                         callbackNoData: function() {
                             tipAction('发送手机验证码失败');
+                            $(".voicePhoneCode").show();
                         }
                     }]
                     $.ajaxLoading(obj);
