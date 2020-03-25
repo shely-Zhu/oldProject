@@ -1149,9 +1149,13 @@ $(function() {
                                                     zIndex: 1200,
                                                     callback: function(t) {
                                                         var isEle = "";
-                                                        if(that.data.fundDetailObj.isElecContract == "1"){
-                                                            isEle = "electronicContract"
-                                                        }else{
+                                                        if(that.data.custType == 1) {
+                                                            if(that.data.fundDetailObj.isElecContract == "1"){
+                                                                isEle = "electronicContract"
+                                                            }else{
+                                                                isEle = "ordinaryProducts"
+                                                            }
+                                                        } else { // 机构用户预约电子产品走非电子流程
                                                             isEle = "ordinaryProducts"
                                                         }
                                                         window.location.href = site_url.downloadNew_api + "?filePath=" + noticeObj.fileUrl + "&fileName=" + new Base64().encode(noticeObj.fileName) + "&groupName=" +
@@ -1189,9 +1193,13 @@ $(function() {
                                             zIndex: 1200,
                                             callback: function(t) {
                                                 var isEle = "";
-                                                if(that.data.fundDetailObj.isElecContract == "1"){
-                                                    isEle = "electronicContract"
-                                                }else{
+                                                if(that.data.custType == 1) {
+                                                    if(that.data.fundDetailObj.isElecContract == "1"){
+                                                        isEle = "electronicContract"
+                                                    }else{
+                                                        isEle = "ordinaryProducts"
+                                                    }
+                                                } else { // 机构用户预约电子产品走非电子流程
                                                     isEle = "ordinaryProducts"
                                                 }
                                                 window.location.href = site_url.downloadNew_api + "?filePath=" + noticeObj.fileUrl + "&fileName=" + new Base64().encode(noticeObj.fileName) + "&groupName=" +
