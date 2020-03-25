@@ -377,7 +377,8 @@ $(function() {
                             type: 1,
                             projectId: proId,
                             isPubToPri: isPubToPri,
-                            htmdEvt: "tobeConfirmTransaction"
+                            htmdEvt: "tobeConfirmTransaction",
+                            reserveId: reserveId
                         }
                         privateAuthenticationProcess(params);
                     } else if (type == 'toCertif') { //去合格投资者认证
