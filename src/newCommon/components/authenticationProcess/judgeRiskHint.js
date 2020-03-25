@@ -195,6 +195,7 @@ module.exports = function(params) {
                 }
             }
         },
+        // 点击去阅读后的跳转逻辑
         readSaleNotice: function(noticeObj) {
             if(custType == 1) {
                 if(isElecContract == 1) { // 电子
