@@ -308,6 +308,8 @@ module.exports = function(params) {
                 jumpUrl = site_url.completeInfoEditModify_url;
             }else if (v.conditionJump == 9) { //跳转到普通风测
                 jumpUrl = site_url.riskAppraisal_url + '?type=private';
+            }else if(v.conditionJump == 10){//跳转到进身份证上传页面无开户流程
+                jumpUrl = site_url.realIdcard_url + "?type=alone";
             }else if (v.conditionJump == 11) { //跳转到进身份证上传页面
                 jumpUrl = site_url.realIdcard_url;
             } else if (v.conditionJump == 12) { //跳转到人脸识别页面
