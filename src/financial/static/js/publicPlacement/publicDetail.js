@@ -76,9 +76,6 @@ $(function() {
         init: function() {
             var that = this;
             that.getData(); // 获取基金详情
-            that.getFundCollectionInit() //收藏管理--判断是否被收藏
-            that.getData1();
-            that.getData2('1', 1); // 获取echarts数据
             that.events();
             // that.getData1(); // 查询基金的历史收益（货币基金）/历史净值（普通基金）
             $('.tips').hide()
@@ -153,9 +150,9 @@ $(function() {
                     }
 
                     $(".tplBox").html(html);
-//                  that.getFundCollectionInit() //收藏管理--判断是否被收藏
-//                  that.getData1();
-//                  that.getData2('1', 1); // 获取echarts数据
+                 that.getFundCollectionInit() //收藏管理--判断是否被收藏
+                 that.getData1();
+                 that.getData2('1', 1); // 获取echarts数据
                     var historyStr = that.fundType ? '<div class="item_name">日期</div><div class="item_name">七日年化</div><div class="item_name">万份收益(元)</div>' : '<div class="item_name">日期</div><div class="item_name">单位净值</div><div class="item_name">累计净值</div><div class="item_name">日涨幅</div>'
                     $('.history_area >.history_item').html(historyStr);
 
