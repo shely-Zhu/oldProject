@@ -212,7 +212,7 @@ module.exports = function(params) {
             if(type == 1) {
                 window.location.href = site_url.downloadNew_api + "?filePath=" + noticeObj.fileUrl + "&fileName=" + new Base64().encode(noticeObj.fileName) + "&groupName=" +
                 noticeObj.groupName + "&show=1&readComplete=true&showDownload=false&fundCode=" + projectId + "&isAllowAppend=" +
-                isAllowAppend + '&accreditedInvestor=' + accreditedInvestor + '&businessType='+ businessType +'&phoneCode=' + phoneCode + '&projectName=' + projectName + '&isPubToPri=' + isPubToPri + '&isSatisfied=' + isSatisfied;
+                isAllowAppend + '&accreditedInvestor=' + accreditedInvestor + '&businessType='+ businessType +'&phoneCode=' + phoneCode + '&projectName=' + projectName + '&isPubToPri=' + isPubToPri + '&isSatisfied=' + isSatisfied + '&reserveId=' + reserveId;
             } else if (type == 2) {
                 window.location.href = site_url.downloadNew_api + "?filePath=" + noticeObj.fileUrl + "&fileName=" + new Base64().encode(noticeObj.fileName) + "&groupName=" +
                 noticeObj.groupName + "&show=1&readComplete=true&showDownload=false&fundCode=" + projectId + "&isAllowAppend=" +
