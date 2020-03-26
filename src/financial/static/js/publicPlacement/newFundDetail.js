@@ -48,7 +48,7 @@ $(function() {
                     //当前时间
                     var nowDate = new Date();
                     // var endDate = new Date(jsonData.issEndDt + ' 23:59:59');
-                    var numTimer = jsonData.issEndDt + ' 23:59:59';
+                    var numTimer = jsonData.issEndDt + ' 15:00:00';//截止15点，基金购买时间
                     // 字符串转时间的方法
                     var endDate = new Date(Date.parse(numTimer.replace(/-/g, "/")));
                     var totalSeconds = parseInt((endDate - nowDate) / 1000); // 当前时间与募集截止日的日期相比
