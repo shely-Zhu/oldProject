@@ -55,6 +55,8 @@ $(function() {
             singleaAuthenType: "", //认证类型  买入into  定投 investement
             isHighAgeStatus: true, //投资者年龄默认小于60的状态为true  大于就位false
             discountStatus: "", //有无费率
+            fundStatus:"",//基金状态
+            supportFixedFlag:"",//
             echartsData: {
                 oneMonth: {},
                 threeMonth: {},
@@ -98,7 +100,6 @@ $(function() {
                     // fundCode:"000847",
                 },
                 callbackDone: function(json) {
-
                     that.fundComId = json.data.fmcComId ? json.data.fmcComId : 'gz04tVwXga';
                     that.secuId = json.data.secuId ? json.data.secuId : '000846.OF';
                     that.chiName = json.data.chiName ? json.data.chiName : '中融货币市场基金';
@@ -131,6 +132,8 @@ $(function() {
                     that.gV.json.fundType = that.fundType
                     that.gV.invTypCom = json.data.invTypCom
                     that.gV.secuSht = json.data.secuSht
+                    that.gV.fundStatus= json.data.fundStatus
+                    that.gV.supportFixedFlag=json.data.supportFixedFlag
                     //test
                     // that.gV.json.tradeLimitFlag2 = true
                     if (that.gV.json.tradeLimitFlag == "1") {
@@ -147,9 +150,9 @@ $(function() {
                     }
 
                     $(".tplBox").html(html);
-                    that.getFundCollectionInit() //收藏管理--判断是否被收藏
-                    that.getData1();
-                    that.getData2('1', 1); // 获取echarts数据
+                 that.getFundCollectionInit() //收藏管理--判断是否被收藏
+                 that.getData1();
+                 that.getData2('1', 1); // 获取echarts数据
                     var historyStr = that.fundType ? '<div class="item_name">日期</div><div class="item_name">七日年化</div><div class="item_name">万份收益(元)</div>' : '<div class="item_name">日期</div><div class="item_name">单位净值</div><div class="item_name">累计净值</div><div class="item_name">日涨幅</div>'
                     $('.history_area >.history_item').html(historyStr);
 
@@ -166,15 +169,15 @@ $(function() {
                         }
                     });
                     $("#HeadBarpathName").html("<span>" + that.gV.json.secuSht + "</span>" + "</br><span>" + that.gV.json.trdCode + "</span>");
-                    var saleFee = json.data.fundPurchaseFeeRate.detailList[0].fundFeeRate;
-                    var discount = Number(json.data.fundPurchaseFeeRate.detailList[0].fundFeeRate.split("%")[0]) * json.data.discount / 100 + '%'
-                    if (that.gV.discountStatus) {
-                        $(".divider-top").html(json.data.purSt + '、' + json.data.redemSt + '、' + '买入费率' + '(<span class="line-rate">' + saleFee + '</span>' + ' <span class="discount">' + discount + '</span>)')
-                    } else {
-                        $(".divider-top").html(json.data.purSt + '、' + json.data.redemSt + '、' + '买入费率' + '(<span>' + saleFee + '</span>)')
+                    if(json.data.fundPurchaseFeeRate.detailList.length>0){
+                        var saleFee = json.data.fundPurchaseFeeRate.detailList[0].fundFeeRate;
+                        var discount = Number(json.data.fundPurchaseFeeRate.detailList[0].fundFeeRate.split("%")[0]) * json.data.discount / 100 + '%'
+                        if (that.gV.discountStatus) {
+                            $(".divider-top").html(json.data.purSt + '、' + json.data.redemSt + '、' + '买入费率' + '(<span class="line-rate">' + saleFee + '</span>' + ' <span class="discount">' + discount + '</span>)')
+                        } else {
+                            $(".divider-top").html(json.data.purSt + '、' + json.data.redemSt + '、' + '买入费率' + '(<span>' + saleFee + '</span>)')
+                        }
                     }
-
-
                     //定投按钮的展示问题
                     var supportFixedFlag = that.gV.json.supportFixedFlag;
                     if (supportFixedFlag == true) {

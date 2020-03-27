@@ -161,17 +161,17 @@
                     <div class="text_gray position_c">金额(元)</div>
                     <div class="text_gray position_d">昨日收益(元)</div>
                     <div class="position_tip" data-fundcode={{fundCode}}></div>
-                    <div class="text_gray position_e">持有收益(元)</div>
+                    <div class="text_gray position_e">累计收益(元)</div>
                     <div class="text_black position_f show_item">{{totalMoneyMask}}</div>
                     {{#if_than_0 income}}
                         <div class="text_red position_g show_item">+{{incomeMask}}</div>
                     {{else}}
                         <div class="text_green position_g show_item">{{incomeMask}}</div>
                     {{/if_than_0}}
-                    {{#if_than_0 holdIncome}}
-                        <div class="text_red position_h show_item">+{{holdIncomeMask}}</div>
+                    {{#if_than_0 addupIncomeMask}}
+                        <div class="text_red position_h show_item">+{{addupIncomeMask}}</div>
                     {{else}}
-                        <div class="text_green position_h show_item">{{holdIncomeMask}}</div>
+                        <div class="text_green position_h show_item">{{addupIncomeMask}}</div>
                     {{/if_than_0}}
                     <!-- todo 需要判断字段来是否显示 -->
                     {{#if isBuyFlag}}

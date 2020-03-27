@@ -21,7 +21,8 @@ $(function() {
             isRiskPopup: splitUrl['isRiskPopup'], // 风险期限匹配
             accreditedInvestor: splitUrl['accreditedInvestor'], //合格投资者【空-未做过】【0-未通过】【1-已通过】【2-已过期】
             isSatisfied: splitUrl['isSatisfied'], // 合格投资者认证是否满足，需要给app携带
-            isPubToPri: splitUrl['isPubToPri'], // 是否公转私
+            isPubToPri: splitUrl['isPubToPri'], // 是否公转私 
+            reserveId: splitUrl['reserveId'], // 预约id
             projectName: '',
             timer: null,
             countDown: 60,
@@ -51,7 +52,6 @@ $(function() {
                     that.gV.projectName = jsonData.productName;
                     that.gV.isElecContract = jsonData.isElecContract;
                     that.gV.isAllowAppend = jsonData.isAllowAppend;
-                    that.gV.reserveId = jsonData.reserveId;
                     that.gV.productName = jsonData.productName;
                 }
             }]

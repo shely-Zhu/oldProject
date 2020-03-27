@@ -445,8 +445,9 @@ $(function () {
 				}else{
 					$(".checkMessage").css({"display":"none"});
 				}
-				$(".pwd-input").val('');
-                $(".fake-box input").val('');
+//				$(".pwd-input").val('');
+//              $(".fake-box input").val('');
+				$.util.clearPasswords();//清空交易密码
 				$(".msecond input").blur();
 				$("#passwordWrap").show();
 				payPass(that.cancelOrder)

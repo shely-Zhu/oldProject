@@ -88,22 +88,7 @@ module.exports = function(params) {
                                         htmdEvtCel: htmdEvt + '_a4',  // 埋点取消按钮属性
                                         zIndex: 1200,
                                         callback: function(t) {
-                                        	if(isElecContract == 1) { // 电子
-                                                var businessType = 'confirmation';
-                                                var isEle = "electronicContract";
-                                            } else {
-                                                var businessType = 'confirmationNoele';
-                                                var isEle = "ordinaryProducts";
-                                            }
-                                        	if(type == 1) {
-	                                            window.location.href = site_url.downloadNew_api + "?filePath=" + noticeObj.fileUrl + "&fileName=" + new Base64().encode(noticeObj.fileName) + "&groupName=" +
-	                                            noticeObj.groupName + "&show=1&readComplete=true&showDownload=false&fundCode=" + projectId + "&isAllowAppend=" +
-	                                            isAllowAppend + '&accreditedInvestor=' + accreditedInvestor + '&businessType='+ businessType +'&phoneCode=' + phoneCode + '&projectName=' + projectName + '&isPubToPri=' + isPubToPri + '&isSatisfied=' + isSatisfied;
-                                        	} else if (type == 2) {
-                                                window.location.href = site_url.downloadNew_api + "?filePath=" + noticeObj.fileUrl + "&fileName=" + new Base64().encode(noticeObj.fileName) + "&groupName=" +
-                                                noticeObj.groupName + "&show=1&readComplete=true&showDownload=false&fundCode=" + projectId + "&isAllowAppend=" +
-                                                isAllowAppend + '&accreditedInvestor=' + accreditedInvestor + '&businessType=' + isEle;
-                                        	}
+                                        	that.readSaleNotice(noticeObj);
                                         },
                                         callbackCel: function() {
                                         	if(type == 1) {
@@ -131,22 +116,7 @@ module.exports = function(params) {
                                 htmdEvtCel: htmdEvt + '_a4',  // 埋点取消按钮属性
                                 zIndex: 1200,
                                 callback: function(t) {
-                                    if(isElecContract == 1) { // 电子
-                                        var businessType = 'confirmation';
-                                        var isEle = "electronicContract";
-                                    } else {
-                                        var businessType = 'confirmationNoele';
-                                        var isEle = "ordinaryProducts";
-                                    }
-                                	if(type == 1) {
-                                        window.location.href = site_url.downloadNew_api + "?filePath=" + noticeObj.fileUrl + "&fileName=" + new Base64().encode(noticeObj.fileName) + "&groupName=" +
-                                        noticeObj.groupName + "&show=1&readComplete=true&showDownload=false&fundCode=" + projectId + "&isAllowAppend=" +
-                                        isAllowAppend + '&accreditedInvestor=' + accreditedInvestor + '&businessType='+ businessType +'&phoneCode=' + phoneCode + '&projectName=' + projectName + '&isPubToPri=' + isPubToPri + '&isSatisfied=' + isSatisfied;
-                                	} else if (type == 2) {
-                                        window.location.href = site_url.downloadNew_api + "?filePath=" + noticeObj.fileUrl + "&fileName=" + new Base64().encode(noticeObj.fileName) + "&groupName=" +
-                                        noticeObj.groupName + "&show=1&readComplete=true&showDownload=false&fundCode=" + projectId + "&isAllowAppend=" +
-                                        isAllowAppend + '&accreditedInvestor=' + accreditedInvestor + '&businessType=' + isEle;
-                                	}
+                                    that.readSaleNotice(noticeObj);
                                 },
                                 callbackCel: function() { // 放弃返回到上一页
                                     if(type == 1) {
@@ -192,16 +162,7 @@ module.exports = function(params) {
                     htmdEvtCel: htmdEvt + '_a6',  // 埋点取消按钮属性
                     zIndex: 1200,
                     callback: function(t) {
-                        if(type == 1) {
-                            // 根据电子非电子订单跳转不同页面
-                            if(isElecContract == 1) { // 电子
-                                window.location.href = site_url.confirmationEle_url + '?projectId=' + projectId + '&projectName=' + projectName + '&reserveId=' + reserveId + '&isAllowAppend=' + isAllowAppend + '&isPubToPri=' + isPubToPri + '&isSatisfied=' + isSatisfied + '&phoneCode=' + phoneCode; 
-                            } else { // 非电子
-                                window.location.href = site_url.confirmation_url + '?projectId=' + projectId + '&projectName=' + projectName + '&reserveId=' + reserveId + '&phoneCode=' + phoneCode;
-                            }
-                        } else if (type == 2) {
-                            that.nextStep();
-                        }
+                        that.nextStep();
                     },
                     callbackCel: function() { // 预约确认点击放弃返回到上一页
                         if(type == 1) {
@@ -211,36 +172,62 @@ module.exports = function(params) {
                 };
                 $.elasticLayer(objElasticLayer);
             } else {
-                // 客户为专业投资者，短信验证通过且投资期限与产品期限匹配后，不弹出阅读售前告知书弹框
-                // 客户为资管专业投资者，短信验证通过且投资期限与产品期限匹配后，不弹出阅读售前告知书弹框
-                // 根据电子非电子直接跳转客户确认页面
-                if(type == 1) {
-	                if(isElecContract == 1) { // 电子
-	                    window.location.href = site_url.confirmationEle_url + '?projectId=' + projectId + '&projectName=' + projectName + '&reserveId=' + reserveId + '&isAllowAppend=' + isAllowAppend + '&isPubToPri=' + isPubToPri + '&isSatisfied=' + isSatisfied + '&phoneCode=' + phoneCode;
-	                } else { // 非电子
-	                    window.location.href = site_url.confirmation_url + '?projectId=' + projectId + '&projectName=' + projectName + '&reserveId=' + reserveId + '&phoneCode=' + phoneCode;
-	                }	
-                } else if (type == 2) {
-                	that.nextStep();
-                }
+                that.nextStep();
             }
         },
-        //私募预约 满足条件的跳转路径
+        // 点击去阅读后的跳转逻辑
+        readSaleNotice: function(noticeObj) {
+            if(custType == 1) {
+                if(isElecContract == 1) { // 电子
+                    var businessType = 'confirmation';
+                    var isEle = "electronicContract";
+                } else {
+                    var businessType = 'confirmationNoele';
+                    var isEle = "ordinaryProducts";
+                }
+            } else { // 机构用户预约电子产品（或确认预约电子产品）走非电子流程
+                var businessType = 'confirmationNoele';
+                var isEle = "ordinaryProducts";
+            }
+            if(type == 1) {
+                window.location.href = site_url.downloadNew_api + "?filePath=" + noticeObj.fileUrl + "&fileName=" + new Base64().encode(noticeObj.fileName) + "&groupName=" +
+                noticeObj.groupName + "&show=1&readComplete=true&showDownload=false&fundCode=" + projectId + "&isAllowAppend=" +
+                isAllowAppend + '&accreditedInvestor=' + accreditedInvestor + '&businessType='+ businessType +'&phoneCode=' + phoneCode + '&projectName=' + projectName + '&isPubToPri=' + isPubToPri + '&isSatisfied=' + isSatisfied + '&reserveId=' + reserveId;
+            } else if (type == 2) {
+                window.location.href = site_url.downloadNew_api + "?filePath=" + noticeObj.fileUrl + "&fileName=" + new Base64().encode(noticeObj.fileName) + "&groupName=" +
+                noticeObj.groupName + "&show=1&readComplete=true&showDownload=false&fundCode=" + projectId + "&isAllowAppend=" +
+                isAllowAppend + '&accreditedInvestor=' + accreditedInvestor + '&businessType=' + isEle;
+            }
+        },
+        // 满足条件后的跳转逻辑
         nextStep: function() {
             var that = this;
-            if (isElecContract == "1") { //电子合同逻辑
-                if (custType == "1") { //客户类型【0.机构 1.个人】
-                    //跳转到电子合同预约页面
-                    window.location.href = site_url.orderLimit_url + "?fundCode=" + projectId + "&isAllowAppend=" +
-                        isAllowAppend + '&isSatisfied=' + isSatisfied;
-                } else {
-                    //跳转到普通预约
+            // 客户为资管专业投资者，短信验证通过且投资期限与产品期限匹配后，不弹出阅读售前告知书弹框 
+            if(type == 1) { // 预约确认
+                if(custType == 1) {
+                    if(isElecContract == 1) { // 电子
+                        window.location.href = site_url.confirmationEle_url + '?projectId=' + projectId + '&projectName=' + projectName + '&reserveId=' + reserveId + '&isAllowAppend=' + isAllowAppend + '&isPubToPri=' + isPubToPri + '&isSatisfied=' + isSatisfied + '&phoneCode=' + phoneCode;
+                    } else { // 非电子
+                        window.location.href = site_url.confirmation_url + '?projectId=' + projectId + '&projectName=' + projectName + '&reserveId=' + reserveId + '&phoneCode=' + phoneCode;
+                    }
+                } else { // 机构用户不管预约什么产品都走非电子流程
+                    window.location.href = site_url.confirmation_url + '?projectId=' + projectId + '&projectName=' + projectName + '&reserveId=' + reserveId + '&phoneCode=' + phoneCode;
+                }   
+            } else if (type == 2) { // 私募预约
+                if (isElecContract == "1") { //电子合同逻辑
+                    if (custType == "1") { //客户类型【0.机构 1.个人】
+                        //跳转到电子合同预约页面
+                        window.location.href = site_url.orderLimit_url + "?fundCode=" + projectId + "&isAllowAppend=" +
+                            isAllowAppend + '&isSatisfied=' + isSatisfied;
+                    } else {
+                        //跳转到普通预约
+                        window.location.href = site_url.registration_url + "?fundCode=" + projectId + "&isAllowAppend=" +
+                            isAllowAppend;
+                    }
+                } else { //非电子合同
                     window.location.href = site_url.registration_url + "?fundCode=" + projectId + "&isAllowAppend=" +
                         isAllowAppend;
                 }
-            } else { //非电子合同
-                window.location.href = site_url.registration_url + "?fundCode=" + projectId + "&isAllowAppend=" +
-                    isAllowAppend;
             }
         },
         events: function () {

@@ -507,6 +507,7 @@ $(function() {
                         $(".firstVideoBox").find(".firstVideoTitleText").html(json.data[0].videoName)
                         $(".firstVideoBox").find(".firstVideoSpeaker").html(json.data[0].videoSpeaker)
                         $(".firstVideoBox").attr("videoId",json.data[0].videoId)
+                        $(".videoOnline").show();
                     }else{
                         $(".videoOnline").hide();
                     }

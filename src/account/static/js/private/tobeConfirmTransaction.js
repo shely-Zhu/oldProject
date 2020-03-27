@@ -377,7 +377,8 @@ $(function() {
                             type: 1,
                             projectId: proId,
                             isPubToPri: isPubToPri,
-                            htmdEvt: "tobeConfirmTransaction"
+                            htmdEvt: "tobeConfirmTransaction",
+                            reserveId: reserveId
                         }
                         privateAuthenticationProcess(params);
                     } else if (type == 'toCertif') { //去合格投资者认证
@@ -397,7 +398,7 @@ $(function() {
                     } else if (type == 'toView') { //详情
                         window.location.href = site_url.privatePlacementDetail_url + '?projectId=' + proId;
                     } else if (type == 'toVideo') { //视频双录
-                        window.location.href = site_url.realVideoTranscribe_url + '?type=toBeConfirmed&projectId=' + proId;
+                        window.location.href = site_url.realVideoTranscribe_url + '?type=toBeConfirmed&projectId=' + proId + '&reserveId=' + reserveId;
                     } else if (type == 'reAppointment') { //重新预约
 
                     }

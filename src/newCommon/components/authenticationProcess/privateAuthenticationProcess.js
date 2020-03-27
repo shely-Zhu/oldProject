@@ -6,6 +6,7 @@
 * type: 1 客户预约确认 2 私募产品预约
 * projectId: 项目id
 * isPubToPri 是否公转私(客户预约确认时需要传)
+* reserveId 预约id(客户预约确认时需要传)
 * projectName 项目名称（私募产品预约时需要传）
 * isElecContract 是否是电子合同产品【0.否 1.是】 （私募产品预约时需要传）
 * isAllowAppend // 是否可以进行追加操作【0.否 1.是】 （私募产品预约时需要传）
@@ -19,6 +20,7 @@ module.exports = function(params) {
     var projectId = params.projectId;
     if(params.isPubToPri) {
         var isPubToPri = params.isPubToPri;
+        var reserveId = params.reserveId;
     }
     var htmdEvt = params.htmdEvt;
     if(params.projectName) {
@@ -254,7 +256,7 @@ module.exports = function(params) {
                         }
                         if(type == 1) {
                             // 四个条件都满足则跳转短信认证页面
-                            window.location.href = site_url.SMSVerification_url + '?projectId=' + projectId + '&accountType=' + that.data.custType + '&isPopup=' + isPopup + '&isRiskPopup=' + isRiskPopup + '&accreditedInvestor=' + that.data.accreditedInvestor + '&isSatisfied=' + that.data.isSatisfied + '&isPubToPri=' + isPubToPri;
+                            window.location.href = site_url.SMSVerification_url + '?projectId=' + projectId + '&accountType=' + that.data.custType + '&isPopup=' + isPopup + '&isRiskPopup=' + isRiskPopup + '&accreditedInvestor=' + that.data.accreditedInvestor + '&isSatisfied=' + that.data.isSatisfied + '&isPubToPri=' + isPubToPri + '&reserveId=' + reserveId;
                         } else if (type == 2) {
                             // 当不展示一键认证弹框时，看是否需要弹出售前告知书或产品期限匹配弹框
                             var obj = {
@@ -306,6 +308,8 @@ module.exports = function(params) {
                 jumpUrl = site_url.completeInfoEditModify_url;
             }else if (v.conditionJump == 9) { //跳转到普通风测
                 jumpUrl = site_url.riskAppraisal_url + '?type=private';
+            }else if(v.conditionJump == 10){//跳转到进身份证上传页面无开户流程
+                jumpUrl = site_url.realIdcard_url + "?type=alone";
             }else if (v.conditionJump == 11) { //跳转到进身份证上传页面
                 jumpUrl = site_url.realIdcard_url;
             } else if (v.conditionJump == 12) { //跳转到人脸识别页面
