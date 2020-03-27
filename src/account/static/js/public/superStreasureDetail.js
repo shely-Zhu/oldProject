@@ -236,7 +236,7 @@ $(function() {
                         $('.footerBtnLeft').css('pointer-events','auto');//按钮禁止点击
                     }
                     $(".incomeMask").text(data.incomeMask ? data.incomeMask : "--")
-                    $(".addupIncomeMask").text(data.holdIncome ? data.holdIncome : "--")
+                    $(".addupIncomeMask").text(data.addupIncomeMask ? data.addupIncomeMask : "--")
                     $("#HeadBarpathName").text(data.fundName ? data.fundName : "--")
                     $(".titleTwo").text(data.fundCode ? data.fundCode : "--")
                     $(".totalM").css({ "background": "linear-gradient(360deg, rgba(186,140,112,1) 0%, rgba(244,210,192,1) 100%)", "-webkit-background-clip": "text", "-webkit-text-fill-color": "transparent" })
