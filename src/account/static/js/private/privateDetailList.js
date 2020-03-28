@@ -555,7 +555,7 @@ $(function() {
                     } else if (type == 'toCertif') { //去合格投资者认证
                         if (isElec == 0) {
                             //非电子合同
-                            window.location.href = site_url.notElecSecondStep_url + '?isQualified=' + isQualified + '&projectName=' + projectName;
+                            window.location.href = site_url.notElecSecondStep_url + '?isQualified=' + isQualified + '&projectName=' + projectName + '&projectId=' + proId;
                         } else if (isElec == 1) {
                             //电子合同跳转
                             window.location.href = site_url.elecSecondStep_url + '?reserveId=' + reserveId + '&projectId=' + proId + '&projectName=' + projectName + '&isAllowAppend=' + isAllowAppend + '&isPubToPri=' + isPubToPri;
