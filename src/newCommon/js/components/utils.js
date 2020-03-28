@@ -9,7 +9,10 @@ $.extend($, {
 
 
         currentHref: window.location.href, //当前页面地址
-
+		clearPasswords : function(){//清空密码输入框内容
+			$(".pwd-input").val('');
+			$(".fake-box input").val('')
+		},
         objIsEmpty: function(data) {
             //判断一个对象是否为空对象
             function isObjEmpty(obj) {

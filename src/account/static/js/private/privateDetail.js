@@ -128,7 +128,8 @@ $(function() {
 			    callbackDone: function(json) {
 			    	that.data.imgUrl = json.data.imgUrl?json.data.imgUrl:'';
 			    	if(json.data.introduction && json.data.introduction!='') {
-			    		that.data.redeemRule = json.data.introduction.replace(/\r\n/g,"").split("=====");
+			    		var introduction = json.data.introduction.replace(/\s*/g,""); // 去掉字符串中空格，防止匹配出错
+			    		that.data.redeemRule = introduction.replace(/\r\n/g,"").split("=====");
 				    	// 判断是否有快速赎回规则
 				    	if(that.data.redeemRule.indexOf("快赎规则") !== -1) {
 				    		that.setRedeemRule(1);
@@ -138,8 +139,15 @@ $(function() {
 				    		$("#redeemNav .normal").addClass("active");
 			    		}
 			    	} else {
-			    		$(".dealRegMid").css("display", "none");
+			    		// 未返回数据时，，只展示普通赎回
+			    		$("#redeemNav .quick").css("display", "none").removeClass('active');
+				    	$("#redeemNav .normal").addClass("active");
 			    	}
+			    },
+			    callbackNoData: function() {
+			    	// 未返回数据时，，只展示普通赎回
+			    	$("#redeemNav .quick").css("display", "none").removeClass('active');
+				    $("#redeemNav .normal").addClass("active");
 			    }
 			}];
 			$.ajaxLoading(obj);	
@@ -596,24 +604,11 @@ $(function() {
 	    			$('.type_3 .clr').html( jsonData.setupDate);
 	    		}
 	    		//产品期限
-	    		var period = '';
-	    		if(jsonData.investPeriod && jsonData.investPeriod!= '') { // 投资期
-	    			period += jsonData.investPeriod + jsonData.prodTerm + "（投资期）";
+				var period = '';
+	    		if(jsonData.prodTerm) { 
+	    			period +=jsonData.prodTerm;
 	    		}
-	    		if(jsonData.quitPeriod && jsonData.quitPeriod!= '') { // 退出期
-	    			if(period == '') {
-	    				period += jsonData.quitPeriod + jsonData.prodTerm + "（退出期）";
-	    			} else {
-	    				period = period + "+" + jsonData.quitPeriod + jsonData.prodTerm + "（退出期）";
-	    			}
-	    		}
-	    		if(jsonData.delayPeriod && jsonData.delayPeriod!= '') { // 延长期
-	    			if(period == '') {
-	    				period += jsonData.delayPeriod + jsonData.prodTerm + "（延长期）";
-	    			} else {
-	    				period = period + "+" + jsonData.delayPeriod + jsonData.prodTerm + "（延长期）";
-	    			}
-	    		}
+	    		
 	    		if(period == '') {
 	    			$('.type_3 .cpqx').parent().parent().remove();
 	    		} else {

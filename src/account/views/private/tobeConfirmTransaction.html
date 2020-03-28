@@ -76,7 +76,9 @@
     </div>
 </body>
 <!-- 公共模板 -->
-@@include('@pathCommonCom/account/transcationTem.html') @@include('@pathInclude/views/footer.html')
+@@include('@pathCommonViews/authenticationProcess.html',{"pathTitle":"确认预约前，请完成以下认证"})
+@@include('@pathCommonCom/account/transcationTem.html')
+@@include('@pathInclude/views/footer.html')
 <!-- 添加埋点 -->
 <script src="/account/static/js/private/tobeConfirmTransaction.js"></script>
 

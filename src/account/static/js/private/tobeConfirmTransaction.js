@@ -12,13 +12,6 @@ require('@pathCommonBase/base.js');
 require('@pathCommonJs/ajaxLoading.js');
 
 require('@pathCommonCom/elasticLayer/elasticLayer/elasticLayer.js');
-
-
-
-//下拉加载更多
-// require('@pathCommonJs/scrollFullPage.js');
-// 切换
-
 require('@pathCommonJsCom/goTopMui.js');
 
 //黑色提示条的显示和隐藏
@@ -26,6 +19,7 @@ var splitUrl = require('@pathCommonJs/components/splitUrl.js')();
 var transcationTem = require('@pathCommonJsCom/account/transcationTem.js');
 var alwaysAjax = require('@pathCommonJs/components/alwaysAjax.js');
 var setCookie = require('@pathNewCommonJsCom/setCookie.js');
+var privateAuthenticationProcess = require('@pathCommonCom/authenticationProcess/privateAuthenticationProcess.js');
 
 $(function() {
     var data = {
@@ -378,7 +372,16 @@ $(function() {
                     var projectName = $(this).attr('data-projectname'); //项目名称
                     var isQualified = $(this).attr('data-isqualified'); //是否满足合格投资者
                     var isPubToPri = $(this).attr('data-ispubtopri'); //是否公转私
-                    if (type == 'toCertif') { //去合格投资者认证
+                    if(type == 'toConfirm') {
+                        var params = {
+                            type: 1,
+                            projectId: proId,
+                            isPubToPri: isPubToPri,
+                            htmdEvt: "tobeConfirmTransaction",
+                            reserveId: reserveId
+                        }
+                        privateAuthenticationProcess(params);
+                    } else if (type == 'toCertif') { //去合格投资者认证
                         if (isElec == 0) {
                             //非电子合同
                             window.location.href = site_url.notElecSecondStep_url + '?isQualified=' + isQualified + '&projectName=' + projectName + '&projectId=' + proId;
@@ -395,7 +398,7 @@ $(function() {
                     } else if (type == 'toView') { //详情
                         window.location.href = site_url.privatePlacementDetail_url + '?projectId=' + proId;
                     } else if (type == 'toVideo') { //视频双录
-                        window.location.href = site_url.realVideoTranscribe_url + '?type=toBeConfirmed&projectId=' + proId;
+                        window.location.href = site_url.realVideoTranscribe_url + '?type=toBeConfirmed&projectId=' + proId + '&reserveId=' + reserveId;
                     } else if (type == 'reAppointment') { //重新预约
 
                     }

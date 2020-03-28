@@ -46,7 +46,8 @@ var fixScroll = function(num,oHeight){//ios浏览器需要滚动
 		var IOSversion = navigator.userAgent.match(/os\s+(\d+)/i)[1] - 0;//获取iOS的系统版本号
 		var isIOS = !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/); //iOS终端
 		if (isIOS && IOSversion <= "11") {
-			document.querySelectorById('#passwordWrap').scroll(0,1000)//iphonex可以滚动到顶部，新版本ios11以上
+//			document.querySelectorById('#passwordWrap').scroll(0,1000)//iphonex可以滚动到顶部，新版本ios11以上
+			document.getElementById('passwordWrap').scroll(0,1000)//iphonex可以滚动到顶部，新版本ios11以上
 		}else{
 			window.scrollTo(0, 1000);//滚动到可是区域 普通iphone可以滚动到可是区域。老版本
 		}

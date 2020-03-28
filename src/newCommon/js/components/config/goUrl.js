@@ -424,6 +424,11 @@ module.exports = function() {
     this.pofFundCompany_url = go_url.no_url + '/financial/views/publicPlacement/fundCompany.html';
     //私募产品详情
     this.privatePlacementDetail_url = go_url.no_url + '/financial/views/privatePlacement/privatePlacementDetail.html';
+    //私募产品详情视频跳转
+    this.privatePlacementDetailJumpVideo_url = go_url.no_url + '/financial/views/privatePlacement/privatePlacementDetailJumpVideo.html';
+    //私募产品详情身份证上传
+    this.privatePlacementDetailRealIdcard_url = go_url.no_url + '/mine/views/realName/privatePlacementDetailRealIdcard.html';
+    
 
     // 公募基金详情
     this.pofPublicDetail_url = go_url.no_url + '/financial/views/publicPlacement/publicDetail.html';
@@ -465,6 +470,8 @@ module.exports = function() {
     this.privateFundPdf_url = go_url.no_url + '/account/views/private/privateFundPdf.html';
     // 私募交易规则
     this.privateTransactionRules_url = go_url.no_url + '/account/views/private/privateTransactionRules.html';
+    //短信认证
+    this.SMSVerification_url = go_url.no_url + '/account/views/SMSVerification.html';
     // 公募交易规则
     // this.transactionRules_url = go_url.no_url + '/financial/views/publicPlacement/transactionRules.html';
     //基金公司
@@ -580,6 +587,10 @@ module.exports = function() {
     this.callDoctor_url = go_url.no_url + ' /life/views/videoDoctor/callDoctor.html';
     // 病例列表页面
     this.caseList_url = go_url.no_url + ' /life/views/videoDoctor/caseList.html';
+    // 预约确认页面（电子合同）
+    this.confirmationEle_url = go_url.no_url + '/account/views/confirmationEle.html';
+    // 预约确认页面（非电子合同）
+    this.confirmation_url = go_url.no_url + '/account/views/confirmation.html';
 
 
 };

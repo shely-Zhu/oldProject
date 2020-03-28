@@ -462,8 +462,9 @@ $(function () {
 	            callbackFail:function(json){
 //	            	tipAction(json.msg);
 	            	tipAction(json.message);
-	            	$(".pwd-input").val('');
-					$(".fake-box input").val('');
+//	            	$(".pwd-input").val('');
+//					$(".fake-box input").val('');
+					$.util.clearPasswords();//清空交易密码
 	            }
 	        }];
 	        $.ajaxLoading(obj);
