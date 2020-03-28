@@ -242,6 +242,7 @@ module.exports = function(params) {
                                     };
                                     $.elasticLayer(obj);
                                 } else {
+                                    $("#tips-wrap").hide();
                                     window.location.href = singleaAuthenPath;//
                                 }
                             }, {
