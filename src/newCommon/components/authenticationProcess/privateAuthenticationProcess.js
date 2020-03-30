@@ -38,7 +38,7 @@ module.exports = function(params) {
             isRiskEndure: '', // 是否风险测评 0-否 1-是
             endurePubIsold: '', // 公募风险评测是否过期 0:否 1:是
             endurePriIsold: '', // 私募风险测评是否过期0:否 1:是
-            isSatisfied:'',  //合格投资者认证是否满足，需要给app携带
+            isSatisfied:'',  //是否满足策略限制 0:否 1:是
             isOpenWealth:"1",//是否开通财富账户。0未开通，1已开通 
         },
         gV: {
@@ -131,7 +131,7 @@ module.exports = function(params) {
                             if (v.conditionType == 1 && !v.isSatisfied) { //财富账户是否开通，需要给app携带，0未开通，1开通
                                 that.data.isOpenWealth = 0;
                             }
-                            if (v.conditionType == 5 && v.isSatisfied) { //合格投资者认证是否满足，需要给app携带
+                            if (v.conditionType == 5 && v.isSatisfied) { //合格投资者认证是否满足策略限制，需要给app携带
                                 that.data.isSatisfied = v.isSatisfied;
                             }
                             if (v.conditionType == 6 && !!v.isPopup) { //是否弹出期限不符弹框
@@ -251,7 +251,7 @@ module.exports = function(params) {
                         });
                     } else {
                         isPopup = jsonData[3].isPopup; //是否弹出售前告知书。售前告知书与风险等级匹配一起提示
-                        that.data.isSatisfied = jsonData[4].isSatisfied;//合格投资者认证是否满足，需要给app携带
+                        that.data.isSatisfied = jsonData[4].isSatisfied;//合格投资者认证是否满足策略限制，需要给app携带
                         if(jsonData.length > 5 && jsonData[5].isPopup) {
                             isRiskPopup = jsonData[5].isPopup
                         }
