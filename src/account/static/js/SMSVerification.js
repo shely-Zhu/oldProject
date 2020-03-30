@@ -23,7 +23,9 @@ $(function() {
             isSatisfied: splitUrl['isSatisfied'], // 合格投资者认证是否满足，需要给app携带
             isPubToPri: splitUrl['isPubToPri'], // 是否公转私 
             reserveId: splitUrl['reserveId'], // 预约id
-            projectName: '',
+            projectName: '', // 项目名称
+            isElecContract: splitUrl['isElecContract'], // 是否是电子合同 0否 1是
+            isAllowAppend: splitUrl['isAllowAppend'], // 是否追加 0否1是
             timer: null,
             countDown: 60,
             voiceCodeFlag: true,
@@ -34,28 +36,9 @@ $(function() {
             if(that.gV.timer) {
                 clearInterval(that.gV.timer);
             }
-            that.getProjectDetail(); // 获取项目详细信息
+            that.gV.projectName = new Base64().decode(splitUrl['projectName']);
             that.getUserPhone(); // 获取用户手机号
             that.events();
-        },
-        getProjectDetail: function() {
-            var that = this;
-            var obj = [{
-                url: site_url.queryFundDetailV2_api,
-                data: {
-                    projectId: that.gV.projectId,
-                },
-                contentTypeSearch: true,
-                needLogin: true,
-                callbackDone: function(json) {
-                    var jsonData = json.data;
-                    that.gV.projectName = jsonData.productName;
-                    that.gV.isElecContract = jsonData.isElecContract;
-                    that.gV.isAllowAppend = jsonData.isAllowAppend;
-                    that.gV.productName = jsonData.productName;
-                }
-            }]
-            $.ajaxLoading(obj);
         },
         getUserPhone: function() {
             var that = this;

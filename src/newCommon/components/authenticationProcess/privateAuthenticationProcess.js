@@ -7,9 +7,9 @@
 * projectId: 项目id
 * isPubToPri 是否公转私(客户预约确认时需要传)
 * reserveId 预约id(客户预约确认时需要传)
-* projectName 项目名称（私募产品预约时需要传）
-* isElecContract 是否是电子合同产品【0.否 1.是】 （私募产品预约时需要传）
-* isAllowAppend // 是否可以进行追加操作【0.否 1.是】 （私募产品预约时需要传）
+* projectName 项目名称
+* isElecContract 是否是电子合同产品【0.否 1.是】
+* isAllowAppend // 是否可以进行追加操作【0.否 1.是】
 * htmdEvt 代表埋点的属性，如当前页面只引用该组件一次，则htmdEvt的值为当前页面名，若多次引用，则需区分引用的场景，传入不同的值
 */
 
@@ -23,11 +23,9 @@ module.exports = function(params) {
         var reserveId = params.reserveId;
     }
     var htmdEvt = params.htmdEvt;
-    if(params.projectName) {
-        var projectName = params.projectName;
-        var isElecContract = params.isElecContract;
-        var isAllowAppend = params.isAllowAppend;
-    }
+    var projectName = params.projectName;
+    var isElecContract = params.isElecContract;
+    var isAllowAppend = params.isAllowAppend;
     var privateAuth = {
         $e:{
             realLi: $('#real-condition>li'), // 条件下的五条
@@ -257,7 +255,7 @@ module.exports = function(params) {
                         }
                         if(type == 1) {
                             // 四个条件都满足则跳转短信认证页面
-                            window.location.href = site_url.SMSVerification_url + '?projectId=' + projectId + '&accountType=' + that.data.custType + '&isPopup=' + isPopup + '&isRiskPopup=' + isRiskPopup + '&accreditedInvestor=' + that.data.accreditedInvestor + '&isSatisfied=' + that.data.isSatisfied + '&isPubToPri=' + isPubToPri + '&reserveId=' + reserveId;
+                            window.location.href = site_url.SMSVerification_url + '?projectId=' + projectId + '&accountType=' + that.data.custType + '&isPopup=' + isPopup + '&isRiskPopup=' + isRiskPopup + '&accreditedInvestor=' + that.data.accreditedInvestor + '&isSatisfied=' + that.data.isSatisfied + '&isPubToPri=' + isPubToPri + '&reserveId=' + reserveId + '&projectName=' + new Base64().encode(projectName) + '&isElecContract=' + isElecContract + '&isAllowAppend=' + isAllowAppend;
                         } else if (type == 2) {
                             // 当不展示一键认证弹框时，看是否需要弹出售前告知书或产品期限匹配弹框
                             var obj = {
