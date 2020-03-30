@@ -10,7 +10,7 @@
 * isRiskPopup // 产品期限不符弹框 为""则不展示
 * isElecContract //  是否是电子合同产品【0.否 1.是】
 * isAllowAppend // 是否可以进行追加操作【0.否 1.是】
-* isSatisfied // 合格投资者认证是否满足，需要给app携带
+* isSatisfied // 合格投资者认证是否满足产品策略限制，【0.否 1.是】，需要给app携带
 * accreditedInvestor 合格投资者【空-未做过】【0-未通过】【1-已通过】【2-已过期】
 * htmdEvt 代表埋点的属性，如当前页面只引用该组件一次，则htmdEvt的值为当前页面名，若多次引用，则需区分引用的场景，传入不同的值
 * custType // 客户类型 1 个人 (预约私募产品时需要传)
