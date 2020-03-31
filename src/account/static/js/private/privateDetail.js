@@ -132,22 +132,21 @@ $(function() {
 			    		that.data.redeemRule = introduction.replace(/\r\n/g,"").split("=====");
 				    	// 判断是否有快速赎回规则
 				    	if(that.data.redeemRule.indexOf("快赎规则") !== -1) {
+				    		$("#redeemNav .quick").css("display", "inline-block!important");
+				    		$("#redeemNav .quick").addClass('active').siblings().removeClass('active');
 				    		that.setRedeemRule(1);
 				    	} else {  // 只有普通赎回规则
 				    		that.setRedeemRule(2);
-				    		$("#redeemNav .quick").css("display", "none").removeClass('active');
-				    		$("#redeemNav .normal").addClass("active");
+				    		$("#redeemNav .normal").addClass("active").siblings().removeClass('active');
 			    		}
 			    	} else {
 			    		// 未返回数据时，，只展示普通赎回
-			    		$("#redeemNav .quick").css("display", "none").removeClass('active');
-				    	$("#redeemNav .normal").addClass("active");
+			    		$("#redeemNav .normal").addClass("active").siblings().removeClass('active');
 			    	}
 			    },
 			    callbackNoData: function() {
 			    	// 未返回数据时，，只展示普通赎回
-			    	$("#redeemNav .quick").css("display", "none").removeClass('active');
-				    $("#redeemNav .normal").addClass("active");
+			    	$("#redeemNav .normal").addClass("active").siblings().removeClass('active');
 			    }
 			}];
 			$.ajaxLoading(obj);	
