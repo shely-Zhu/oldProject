@@ -36,7 +36,7 @@ module.exports = function(params) {
             isRiskEndure: '', // 是否风险测评 0-否 1-是
             endurePubIsold: '', // 公募风险评测是否过期 0:否 1:是
             endurePriIsold: '', // 私募风险测评是否过期0:否 1:是
-            isSatisfied:'',  //是否满足策略限制 0:否 1:是
+            isSatisfied:'',  // 0 （开启策略限制并不满足） 1 （未开启策略限制或开启策略限制并满足）
             isOpenWealth:"1",//是否开通财富账户。0未开通，1已开通 
         },
         gV: {
