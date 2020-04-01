@@ -36,7 +36,7 @@ module.exports = function(params) {
             isRiskEndure: '', // 是否风险测评 0-否 1-是
             endurePubIsold: '', // 公募风险评测是否过期 0:否 1:是
             endurePriIsold: '', // 私募风险测评是否过期0:否 1:是
-            isSatisfied:'',  //是否满足策略限制 0:否 1:是
+            isSatisfied:'',  // 0 （开启策略限制并不满足） 1 （未开启策略限制或开启策略限制并满足）
             isOpenWealth:"1",//是否开通财富账户。0未开通，1已开通 
         },
         gV: {
@@ -64,8 +64,7 @@ module.exports = function(params) {
                     that.data.buyFreeze = jsonData.buyFreeze; // 是否冻结买入：0-否；1-是；
                     that.data.lawFreezeStatus = jsonData.lawFreezeStatus; // 是否司法冻结：0-否；1-是；
                     that.data.isRiskEndure = jsonData.isRiskEndure; // 是否风险测评 0-否 1-是
-                    that.data.accreditedInvestor = jsonData.accreditedInvestor;   //合格投资者【空-未做过】【0-未通过】【1-已通过】【2-已过期】
-                    
+
                     if (that.data.buyFreeze == "1" && that.data.lawFreezeStatus == "1") { //如果禁止买入且司法冻结，首先提示
                         $(".netLoading").hide();
                         var obj = {
@@ -255,7 +254,7 @@ module.exports = function(params) {
                         }
                         if(type == 1) {
                             // 四个条件都满足则跳转短信认证页面
-                            window.location.href = site_url.SMSVerification_url + '?projectId=' + projectId + '&accountType=' + that.data.custType + '&isPopup=' + isPopup + '&isRiskPopup=' + isRiskPopup + '&accreditedInvestor=' + that.data.accreditedInvestor + '&isSatisfied=' + that.data.isSatisfied + '&isPubToPri=' + isPubToPri + '&reserveId=' + reserveId + '&projectName=' + new Base64().encode(projectName) + '&isElecContract=' + isElecContract + '&isAllowAppend=' + isAllowAppend;
+                            window.location.href = site_url.SMSVerification_url + '?projectId=' + projectId + '&accountType=' + that.data.custType + '&isPopup=' + isPopup + '&isRiskPopup=' + isRiskPopup + '&isSatisfied=' + that.data.isSatisfied + '&isPubToPri=' + isPubToPri + '&reserveId=' + reserveId + '&projectName=' + new Base64().encode(projectName) + '&isElecContract=' + isElecContract + '&isAllowAppend=' + isAllowAppend;
                         } else if (type == 2) {
                             // 当不展示一键认证弹框时，看是否需要弹出售前告知书或产品期限匹配弹框
                             var obj = {
@@ -267,7 +266,6 @@ module.exports = function(params) {
                                 isElecContract: isElecContract,
                                 isAllowAppend: isAllowAppend,
                                 isSatisfied: that.data.isSatisfied,
-                                accreditedInvestor: that.data.accreditedInvestor,
                                 htmdEvt: "privatePlacementDetail",
                                 custType: that.data.custType
                             }
