@@ -262,6 +262,7 @@ $(function() {
             //取消受让、取消预约、取消转让
             mui("body").on('mdClick', '.cancelBtn', function(e) {
                     event.stopPropagation();
+                    var cancelBtn = $(this);
                     var type = $(this).attr('data-type');
                     var reserveId = $(this).attr('data-reserveid');
                     var proId = $(this).attr('data-projectid');
@@ -315,14 +316,15 @@ $(function() {
                                     callbackDone: function(json) {
                                         var data;
                                         if (json.status == '0000') {
-                                            // 重置上拉加载
-                                            mui('.contentWrapper').pullRefresh().refresh(true);
+                                            // 取消预约成功后删除该条交易
+                                            cancelBtn.parent().parent().remove();
+                                            /*mui('.contentWrapper').pullRefresh().refresh(true);
                                             that.gV.aP.pageNum = 1;
                                             that.getElements.contentWrap.html('');
                                             //重新初始化
                                             that.getElements.listLoading.show();
                                             that.getData(that.gV.aThis);
-                                            mui('.contentWrapper').pullRefresh().scrollTo(0, 0, 0);
+                                            mui('.contentWrapper').pullRefresh().scrollTo(0, 0, 0);*/
                                         }
                                     },
                                     callbackNoData: function() {
