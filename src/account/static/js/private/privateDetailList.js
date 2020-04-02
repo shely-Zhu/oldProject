@@ -419,6 +419,9 @@ $(function() {
                     $('#scroll2 .contentWrapper li').html('');
                     //重新初始化
                     that.initMui($('#scroll2'));
+                    // 初始化加载提示内容
+                    $(".mui-pull>.mui-pull-loading").removeClass('mui-hidden');
+                $(".mui-pull>.mui-pull-caption").removeClass('mui-pull-caption-nomore').addClass('mui-pull-caption-refresh').html("拼命加载中");
                     mui('#scroll2 .contentWrapper').pullRefresh().scrollTo(0, 0, 0);
                 }, {
                     'htmdEvt': 'privateDetailList_1'
@@ -433,6 +436,7 @@ $(function() {
                 //取消受让、取消预约、取消转让
             mui("body").on('mdClick', '.cancelBtn', function(e) {
                     event.stopPropagation();
+                    var cancelBtn = $(this);
                     var type = $(this).attr('data-type');
                     var id = $(this).attr('data-id');
                     var reserveId = $(this).attr('data-reserveid');
@@ -489,11 +493,8 @@ $(function() {
                                     callbackDone: function(json) {
                                         var data;
                                         if (json.status == '0000') {
-                                            that.gV.ajaxArr[0].pageNum = 1;
-                                            $('#scroll1 .contentWrapper li').html('');
-                                            //重新初始化
-                                            that.initMui($('#scroll1'));
-                                            mui('#scroll1 .contentWrapper').pullRefresh().scrollTo(0, 0, 0);
+                                            // 取消预约成功后删除该条交易
+                                            cancelBtn.parent().parent().remove();
                                         }
                                     },
                                     callbackNoData: function() {
