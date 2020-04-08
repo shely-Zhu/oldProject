@@ -718,6 +718,8 @@ var clickList = {
 	"SMSVerification_a5" : { type:'click', evtid: 'SMSVerification_a5', topic: '短信验证-产品与风险承受能力相匹配_确定', info: ''} ,
 	"SMSVerification_a6" : { type:'click', evtid: 'SMSVerification_a6', topic: '短信验证-产品与风险承受能力相匹配_取消', info: ''} ,
 	"SMSVerification_a7" : { type:'click', evtid: 'SMSVerification_a7', topic: '短信验证-告知书内容未展示联系理顾-确定', info: ''} ,
+
+	"fortune_wealthTab" : { type:'click', evtid: 'fortune_wealthTab', topic: '公募产品交易记录-tab点击', info: ''} ,
 }
 
 module.exports = clickList;

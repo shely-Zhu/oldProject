@@ -209,10 +209,10 @@ $(function() {
                 // mui(s).pullRefresh().disablePullupToRefresh()
             });
                 //无缝滚动
-            setTimeout(function() {
+            /*setTimeout(function() {
                 //无缝滚动
                 alwaysAjax($('#' + w + ' .mui-table-view-cell'), s, 2)
-            }, 1000)
+            }, 1000)*/
             // mui('.mui-slider').slider().stopped = true;
         },
         getData: function($id, t) { // 获取产品数据的公用ajax方法;$id为各区域的 scroll+num id
@@ -298,8 +298,10 @@ $(function() {
                         if (that.gV.ajaxArr[that.gV.current_index].pageCurrent == 1) {
                             //第一屏
                             $id.find('.contentWrapper .mui-table-view-cell').html(that.html);
+                            alwaysAjax($('#' + w + ' .mui-table-view-cell'), s, 2);
                         } else {
                             $id.find('.contentWrapper .mui-table-view-cell').append(that.html);
+                            alwaysAjax($('#' + w + ' .mui-table-view-cell'), s, 2);
                         }
 
                         //获取当前展示的tab的索引
