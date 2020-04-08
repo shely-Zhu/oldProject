@@ -230,7 +230,7 @@ $(function () {
                         //     } 
                         // })
                         
-                        that.gV.fixStateNum  = data.length;
+                        that.gV.fixStateNum  = json.data.totalCount;
                         
                         if (that.gV.fixStateNum > 0) {
                             //展示已终止的定投数量
