@@ -170,7 +170,7 @@ $(function() {
             // $('#slider .tab-scroll-wrap .mui-control-item').eq(that.gV.current_index).click()
             w = $id.attr('id'),  //获取节点的 id
                 s = '#' + w + ' .contentWrapper';  //id 拼接 查出content区域
-
+            that.s = s;
             mui.init({
                 pullRefresh: {
                     container: s,
@@ -247,6 +247,8 @@ $(function() {
                         that.listLength = 0;
                         that.html = '';
                     }
+
+                    mui(that.s).pullRefresh().pullupLoading();
 
                     //有数据
                     setTimeout(function() {
@@ -433,13 +435,13 @@ $(function() {
     };
     data.init();
       //添加埋点待定这样
-    function attr(name, attribute, value) {
+    /*function attr(name, attribute, value) {
         name.attr(attribute, value)
     }
-    /*setTimeout(() => {
-        attr($('#slider .tab-scroll-wrap .mui-control-item'), 'htmdEvt', 'fortune_wealthTab')
-    }, 1000)*/
-    setTimeout(function() {
+    setTimeout(() => {
         attr($('#slider .tab-scroll-wrap .mui-control-item'), 'htmdEvt', 'fortune_wealthTab')
     }, 1000)
+    setTimeout(function() {
+        attr($('#slider .tab-scroll-wrap .mui-control-item'), 'htmdEvt', 'fortune_wealthTab')
+    }, 1000)*/
 });
