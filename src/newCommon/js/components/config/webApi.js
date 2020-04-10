@@ -53,6 +53,8 @@ module.exports = function() {
     this.getJJSAssets_api = http_url.web_url + '/account/jjs/getJJSAssets';
     // jjs持仓明细查询
     this.queryAssetsDetailByPages_api = http_url.web_url + '/account/jjs/queryAssetsDetailByPages'
+    // 持仓报告 by zhubingshuai
+    this.getWeeklyPositionInfo_api = http_url.web_url + '/account/weeklyposition/weeklypositionInfo'
 
 
     /*-------------------账户相关 end ------------------------------*/

@@ -1,0 +1,232 @@
+/*
+ * @page: 其他资产
+ * @Author: 朱丙帅
+ * @Date:   2019-11-19
+ * @description:
+ */
+
+@import url("@pathCommonLess/mui/resetMUI.less");
+
+@import url("@pathCommonLess/chtwm.less");
+@import url("@pathCommonLess/app.less");
+@import url("@pathCommonLessCom/tabScroll.less");
+@import url("@pathCommonCom/button/button.less");
+
+//回到顶部的样式
+@import url("@pathCommonLessCom/goTopMui.less");
+//@import url("@pathCommonLess/components/elasticLayerTypeFive.less");
+@import url("@pathCommonCom/elasticLayer/elasticLayer/elasticLayer.less");
+@import url("@pathCommonLessCom/headBarConfig.less");
+@import url("@pathCommonCom/noData/noData.less");
+@import url("@pathCommonLessCom/authenticationProcess.less");
+html {
+    height: 100%;
+}
+.fl{
+    float: left;
+}
+.fr{
+    float: right;
+}
+.tc{
+    text-align: center;
+}
+.jf{
+    justify-content: flex-end
+}
+.bgWhite {
+    background: @c005;
+}
+.more{
+    color:#364D97;
+    font-size: .28rem;
+    display: flex;
+    align-items: center;
+    .j_icon {
+        width: 0.36rem;
+        height: 0.36rem;
+        // margin-left: 0.2rem;
+        background: url("/account/static/img/account_icon_arrow_right_grey.png");
+        background-size: 100% 100%;
+        display: inline-block;
+        vertical-align: middle;
+    }
+}
+body,.mui-content{
+    background: @F7FAFD !important;
+    height: 100%;
+}
+.HeadBarConfigBox{
+    background: transparent;
+}
+.hide{
+    display: none;
+}
+.header_bar_sub{
+    display: block;
+    font-size: .24rem;
+    margin-top: -.5rem;
+}
+.container {
+    height: 100%;
+    width: 100%;
+    background: @F7FAFD;
+
+    // 持仓周报
+    .banner {
+        position: relative;
+        width: 100%;
+        height: 4.9rem;
+        background: url("/account/static/img/public_account_bg.png");
+        background-size: 100% 100%;
+        padding: 0 0.28rem;
+
+        .bannerTop {
+            color: @F7DDCF;
+            padding-top: 1.54rem;
+            .sum {
+                font-size: 0.26rem;
+            }
+        }
+       
+        //最新市值(元)
+        .be_confirmed_amount {
+            margin-top:.3rem;
+            width: 100%;
+            .title {
+                font-size: 0.24rem;
+                color: @FFFFFF;
+                margin-top: 0.08rem;
+            }
+            .value {
+                font-size: 0.68rem;
+                margin-top: .19rem;
+                color: #EDC99B;
+            }
+        }
+        //昨日总收益(元)
+        .first_h_profit_box {
+            width: 100%;
+            margin-top:0.23rem;
+            .h_profit {
+                font-size: 0.24rem;
+                color: @FFFFFF;
+                margin-top: 0.08rem;
+            }
+            .h_profit_value {
+                font-size: 0.4rem;
+                color: #EDC99B;
+                margin-top: 0.1rem;
+            }
+        }
+        
+    }
+    // title
+    .title_content{
+        padding: 0.33rem 0.25rem;
+        display: flex;
+        justify-content:space-between; 
+        font-weight:400;
+        border-bottom: 0.01rem solid @c004;
+        background:@c005;
+        .liLeft{                  
+            color:@272727;
+            font-size:0.32rem;
+            font-weight: 600
+        }
+        .liRight{
+            color:@9B9B9B;
+            width: 4.37rem;
+            text-align: right;
+        }
+    }
+    
+    // 证券市场
+    .content_block{
+        margin-bottom: .3rem;
+        // 文字内容
+        .text_content{
+            padding: .23rem .3rem;
+            font-size: .28rem;
+            color:#272727;
+            .sub_title{
+                font-size:.28rem;
+                font-weight: 600;
+                margin-bottom: .14rem;
+                margin-top: .14rem;
+            }
+            .text{
+                line-height: .4rem;
+                overflow: hidden;
+                text-overflow: ellipsis;
+                display: -webkit-box;
+                -webkit-line-clamp: 3;
+                -webkit-box-orient: vertical;
+            }
+        }
+        // 图表
+        .chart_content{
+            padding-top:.3rem
+        }
+        // 带分割线
+        .common_container{
+            border-bottom: 0.01rem solid @c004;
+            padding-bottom: .3rem;
+            &:last-child{
+                border-bottom: 0;
+                padding-bottom: 0;
+            }
+        }
+    }
+    .last_child{
+        margin-bottom: 0;
+    }
+    // 图片块
+    .image_content{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-top: .3rem;
+        position: relative;
+        height: 2.7rem;
+        .image{
+            border-radius: .06rem;
+            position: relative;
+            height: 2.7rem;
+        }
+        .play_icon{
+            position: absolute;
+            width:.88rem;
+            height:.88rem;
+            background: url("/account/static/img/bofang.png");
+            background-size: 100% 100%;
+            display: inline-block;
+            vertical-align: middle;
+        }
+        .title_bg{
+            position: absolute;
+            top:0;
+            left:0;
+            padding: 0.05rem .26rem;
+            font-size: .25rem;
+            color: #061D6A;
+            background:linear-gradient(139deg,rgba(251,226,189,1) 0%,rgba(246,194,134,1) 100%);
+            border-radius:0 0 .18rem 0;
+        }
+
+    }
+    //分隔段
+    .divider {
+        width: 100%;
+        height: 0.3rem;
+        background-color: @F7FAFD;
+    }
+    footer{
+        height: 0.5rem;
+        line-height: 0.5rem;
+        text-align: center;
+        font-size: .24rem;
+        font-family:PingFangSC-Regular,PingFang SC;
+        font-weight:400;
+    }
+}

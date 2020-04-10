@@ -1,0 +1,136 @@
+<!-- 
+@page 公募资产
+@author zhubingshuai 2020-04-09
+-->
+<!doctype html>
+<html lang="en">
+
+    <head>
+        @@include('@pathInclude/views/meta.html')
+        <link rel="stylesheet" href="/account/static/css/weeklyPosition.css">
+        <title>客户持仓周报-证券投资</title>
+    </head>
+
+<body>
+    <!-- @@include('@pathCommonViews/authenticationProcess.html',{"pathTitle":"购买现金宝产品前，请完成以下认证"}) -->
+    @@include('@pathCommonViews/headBarConfig.html',{"pathName":"客户持仓周报-证券投资<span>dfdfd</span>","bgColors":"#23356D,#23356D","showType":"1"})
+    <section class="container">
+        <!-- 头部信息 -->
+        <div class="banner">
+            <div class="bannerTop clearfix">
+                <div class="sum tc">
+                    <span class="j_text">“恒天财富，您的高端财富管理专家”</span>
+                </div>
+            </div>
+            <!-- 最新市值(元) -->
+            <div class="be_confirmed_amount">
+                <div class="value tc show_item">33,331,634.87</div>
+                <div class="title tc">最新市值(元)</div>
+            </div>
+            <!-- 昨日总收益(元) -->
+            <div class="first_h_profit_box">
+                <div class="h_profit_value tc show_item">31,357,883.95</div>
+                <div class="h_profit tc">昨日总收益(元)</div>
+            </div>
+        </div>
+        <div class="divider"></div>
+         <!-- 市值构成 -->
+         <div class="title_content bgWhite">
+            <div class="liLeft">市值构成(元)</div>
+        </div>
+         <div class="content_block bgWhite">
+            柱状图
+        </div>
+        <!-- <div class="divider"></div> -->
+        <!-- 证券市场观点 -->
+        <div class="title_content bgWhite">
+            <div class="liLeft fl">证券市场观点</div>
+            <span class="more fr">查看更多
+                <!-- <span class="j_icon mui-icon mui-icon-arrowright" style=""></span> -->
+                <span class="j_icon"></span></span>
+        </div>
+        <div class="content_block bgWhite">
+            <div class="text_content">
+                <div class="text">
+                    受全球瘟疫数据恶化、油价暴跌拖累，3月9日-3月12日期间A股各大指数较前一周反弹之后，低开低走并不同成都收跌【上证指数】周度跌幅-4.85%。数较前一周数较前一周
+                </div>
+            </div>
+        </div>
+        <!-- <div class="divider"></div> -->
+        <!-- 证券产品观点 -->
+        <div class="title_content bgWhite">
+            <div class="liLeft">证券产品观点</div>
+        </div>
+        <div class="content_block bgWhite">
+            <div class="text_content">
+                <div class="common_container">
+                    <div class="sub_title">华润元大景泰A</div>
+                    <div class="text">
+                        证券是多种经济权益凭证的统称，也指专门的种类产品，是用来证明券票持有人享有的某种特定权益的法律凭证。 [1] 主要包括资本证券、货币证券和商品证券等。狭义上的证券主要指的是证券市
+                        <span class="more jf">查看更多<span class="j_icon"></span></span>
+                    </div>
+                </div>
+                <div class="common_container">
+                    <div class="chart_content">
+                        折线图
+                    </div>
+                </div>
+                <div class="common_container">
+                    <div class="image_content">
+                        <img src="/account/static/img/default.png" class="image" />
+                        <span class="play_icon"></span>
+                        <span class="title_bg">私募联线回放</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- <div class="divider"></div> -->
+        <div class="content_block last_child bgWhite">
+            <div class="text_content">
+                <div class="common_container">
+                    <div class="sub_title">华润元大景泰A</div>
+                    <div class="text">
+                        证券是多种经济权益凭证的统称，也指专门的种类产品，是用来证明券票持有人享有的某种特定权益的法律凭证。 [1] 主要包括资本证券、货币证券和商品证券等。狭义上的证券主要指的是证券市
+                        <span class="more jf">查看更多<span class="j_icon"></span></span>
+                    </div>
+                </div>
+                <div class="common_container">
+                    <div class="chart_content">
+                        折线图
+                    </div>
+                </div>
+                <div class="common_container">
+                    <div class="image_content">
+                        <img src="/account/static/img/default.png" class="image" />
+                        <span class="play_icon"></span>
+                        <span class="title_bg">私募联线回放</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <footer class="hide">
+            暂无更多数据
+        </footer>
+
+
+        <!-- 加载中loading -->
+        @@include('@pathCommonCom/loading/listLoading.html')
+        <!-- 暂无数据 -->
+        @@include('@pathCommonCom/noData/noData.html', {"tipText": "暂无数据"})
+
+
+    </section>
+
+  
+
+  
+    
+    <!-- 添加埋点 -->
+    @@include('@pathInclude/views/footer.html')
+
+    <script src="/allServerResources/include/js/vendor/echarts/echarts.min.js"></script>
+    <script src="/account/static/js/weeklyPosition.js"></script>
+</body>
+
+</html>
