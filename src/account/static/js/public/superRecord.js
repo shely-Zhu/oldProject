@@ -259,6 +259,14 @@ $(function() {
                         that.html = '';
                     }
 
+                    $id.find('.contentWrapper .mui-pull-bottom-pocket').removeClass('mui-hidden');
+                    if (that.gV.ajaxArr[that.gV.current_index].pageCurrent == 1) {
+                        //第一屏
+                        $id.find('.contentWrapper .mui-table-view-cell').html(that.html);
+                    } else {
+                        $id.find('.contentWrapper .mui-table-view-cell').append(that.html);
+                    }
+
                     //有数据
                     setTimeout(function() {
                         //that.listLength  是上面ajax 请求完数据  赋值的 长度 作为判断的依据
@@ -305,13 +313,6 @@ $(function() {
                             t.endPullupToRefresh(false);
                         }
                         console.log(that.gV.ajaxArr)
-                        $id.find('.contentWrapper .mui-pull-bottom-pocket').removeClass('mui-hidden');
-                        if (that.gV.ajaxArr[that.gV.current_index].pageCurrent == 1) {
-                            //第一屏
-                            $id.find('.contentWrapper .mui-table-view-cell').html(that.html);
-                        } else {
-                            $id.find('.contentWrapper .mui-table-view-cell').append(that.html);
-                        }
 
                         //获取当前展示的tab的索引
                         var index = $('#slider .tab-scroll-wrap .mui-active').index(),
