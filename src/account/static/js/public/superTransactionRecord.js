@@ -170,7 +170,6 @@ $(function() {
             // $('#slider .tab-scroll-wrap .mui-control-item').eq(that.gV.current_index).click()
             w = $id.attr('id'),  //获取节点的 id
                 s = '#' + w + ' .contentWrapper';  //id 拼接 查出content区域
-            that.s = s;
             mui.init({
                 pullRefresh: {
                     container: s,
@@ -248,7 +247,15 @@ $(function() {
                         that.html = '';
                     }
 
-                    mui(that.s).pullRefresh().pullupLoading();
+                    $id.find('.contentWrapper .mui-pull-bottom-pocket').removeClass('mui-hidden');
+                    if (that.gV.ajaxArr[that.gV.current_index].pageCurrent == 1) {
+                        //第一屏
+                        $id.find('.contentWrapper .mui-table-view-cell').html(that.html);
+                        alwaysAjax($('#' + w + ' .mui-table-view-cell'), s, 2);
+                    } else {
+                        $id.find('.contentWrapper .mui-table-view-cell').append(that.html);
+                        alwaysAjax($('#' + w + ' .mui-table-view-cell'), s, 2);
+                    }
 
                     //有数据
                     setTimeout(function() {
@@ -294,16 +301,6 @@ $(function() {
                             }
                         } else {
                             t.endPullupToRefresh(false);
-                        }
-
-                        $id.find('.contentWrapper .mui-pull-bottom-pocket').removeClass('mui-hidden');
-                        if (that.gV.ajaxArr[that.gV.current_index].pageCurrent == 1) {
-                            //第一屏
-                            $id.find('.contentWrapper .mui-table-view-cell').html(that.html);
-                            alwaysAjax($('#' + w + ' .mui-table-view-cell'), s, 2);
-                        } else {
-                            $id.find('.contentWrapper .mui-table-view-cell').append(that.html);
-                            alwaysAjax($('#' + w + ' .mui-table-view-cell'), s, 2);
                         }
 
                         //获取当前展示的tab的索引
