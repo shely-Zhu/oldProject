@@ -40,6 +40,8 @@ var data = Mock.mock({
         "totalNetValue":"4.54",//累计净值
         "totalNetValueDate":"2019-11-19",//累计净值日期
         "redemptionOpenFrequency":"132%",//赎回开放频率
+        "supportJfRedeem" : "1",
+        "notSupportJfRedeemMsg" : "该产品暂时不支持线上赎回",
         "tradeRecordFlag":"1",//是否有交易明细(0否1是)
         "incomeAssignFlag":"1",//是否有收益分配明细(0否1是)
         "fundConfirmDealFalg":"1",//是否有基金确认书(0否1是)

@@ -27,6 +27,7 @@ $(function() {
 			projectType : splitUrl['projectType'],
 			projectId: splitUrl['projectId'],
 			isAllowRedemption: splitUrl['isAllowRedemption'],
+			// notRedemptionTxt: splitUrl['notRedemptionTxt'],
 			ecFileName: '',
 			ecFileUrl: '',
 			groupName: '',
@@ -105,6 +106,8 @@ $(function() {
 				$(".midContent").css("padding-bottom", "0");
 				$(".footer").css("display", "none");
 			}
+			
+			
 			//获取页面初始数据
 			that.getData();
 			//事件绑定
@@ -198,7 +201,15 @@ $(function() {
 			    	that.data.ecFileName = jsonData.ecFileName?jsonData.ecFileName:'';
 			    	that.data.ecFileUrl = jsonData.ecFileUrl?jsonData.ecFileUrl:'';
 			    	that.data.groupName = jsonData.groupName?jsonData.groupName:'';
-			    	that.data.redemptionOpenFrequency = jsonData.redemptionOpenFrequency?jsonData.redemptionOpenFrequency:'';
+					that.data.redemptionOpenFrequency = jsonData.redemptionOpenFrequency?jsonData.redemptionOpenFrequency:'';
+					//是否显示可赎回文案
+					debugger
+					if(jsonData.supportJfRedeem) {
+						$(".notRedemptionBox").css("display", "block");
+						$(".notRedemptionTxt").html(jsonData.notSupportJfRedeemMsg);
+					} else {
+						$(".notRedemptionBox").css("display", "none");
+					}
 			    	//请求其他接口
 			    	if( (that.data.projectType == 0) || (that.data.projectType == 1) ){ 
 			    		//稳金类项目，请求七日年化/万份收益折线图

@@ -191,10 +191,15 @@ body{
 			background: @c005;
 			margin-bottom: 0.3rem;
 			padding: .13rem 0.4rem;
+			.notRedemptionBox{
+				display: none;
+			}
 			.openDiv{
 				position: relative;
+				padding: 0.1rem 0;
 				.num{
 					font-size: 0.3rem;
+					font-weight: bold;
 					color: @4A4A4A;
 				}
 				.txt{
@@ -203,6 +208,12 @@ body{
 					color: @9B9B9B;
 					margin-bottom: 0.04rem;
 				}
+			}
+			.notRedemption{
+				padding: 0.1rem 0;
+				background: linear-gradient(90deg, #FFF7EA 0%, #FFF 100%);
+				color: #BB8E5F;
+				margin-bottom: .3rem;
 			}
 		}
 		.type_0 {

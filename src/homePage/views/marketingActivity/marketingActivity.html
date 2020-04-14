@@ -1,0 +1,96 @@
+<!-- /**
+ * @Page:  市场活动
+ * @Author: 成天成
+ * @Date:   2020-04-14
+ *
+ */ -->
+
+ <!DOCTYPE html>
+ <html lang="en">
+ <head>
+     @@include('@pathInclude/views/meta.html')
+     <link rel="stylesheet" href="/homePage/static/css/fortuneCollegeList.css">
+     <!-- <link rel="stylesheet" href="/homePage/static/css/wealthResearch.css"> -->
+     <title>市场活动</title>
+ </head>
+ <body>
+     <!--没有数据显示图标-->
+     @@include('@pathCommonCom/noData/noData.html', {"tipText": "暂无数据"})
+     <!--列表加载显示图标-->
+     @@include('@pathCommonCom/loading/listLoading.html')
+     <div class="boxA">
+          @@include('@pathCommonViews/headBarConfig.html',{"bgColors":"#384A81,#2A3C70","showType":"1","pathName":"市场活动"})
+          <div class="list">
+               <div class="wrapper">
+                    <div class="banner">
+                    </div>
+                    <div class="container">
+                         <!-- 暂无数据 -->
+                         @@include('@pathCommonCom/noData/noData.html', {"tipText": "暂无数据"})
+                         <!-- 加载中loading -->
+                         @@include('@pathCommonCom/loading/listLoading.html')
+                         @@include('@pathCommonViews/headBarConfig.html',{"pathName":"财富讲堂"})
+                         <div class="br"></div>
+                         <div class="mui-content  myAsset">
+                             <!-- 放置页面内容 -->
+                         </div>
+                     </div>
+                    <div class="hotWords tabContent hide">
+                         <div class="title">
+
+                         </div>
+                         
+                    </div>
+               </div>
+          </div>
+     </div>
+     <!-- 财富研究 -->
+     <script id="tabContent-template" type="text/x-handlebars-template">
+          <h2>{{modelName}}</h2>
+     </script>
+     
+     <script id="first-template" type="text/x-handlebars-template">
+          {{! 列表 内容 使用mui的上拉加载}}
+          <div class="list">
+              {{! list是包裹上拉加载区域的，在js中计算当前页面中的list高度，不能超出一屏}} {{! 初始化上拉加载区域，使用contentWrapper class}} {{! contentWrapper 需要添加样式，具体见less文件}}
+              <div class="contentWrapper">
+                  <ul class="mui-table-view">
+                      <li class="mui-table-view-cell">
+                          {{! 所有内容 需要放在这个li里，且里面不能再用Li元素}} {{{content}}}
+                      </li>
+                  </ul>
+                  <!-- 返回顶部 -->
+                  @@include('@pathCommonViews/goTop.html')
+              </div>
+          </div>
+      </script>
+  
+      <script id="second-template" type="text/x-handlebars-template">
+          {{! 左侧页面列表}} 
+          {{#each this}}
+          {{#if isLive}}
+              <div class="roomItem item" id="{{id}}" articleBelong="{{articleBelong}}" externalUrl="{{externalUrl}}">
+                  <div class="roomVideo">
+                      <img class="articalImg {{lazyClass}}" src="/common/img/lazyImgList.png" data-original="{{imageUrlShowOnline}}" alt="">
+                      <img class="play" src="/common/img/bofang@2x.png" alt="">
+                  </div>
+                  <div class="roomTitle">{{title}}</div>
+                  <div class="roomContent">{{intro}}</div>
+              </div>
+          {{else}}
+              <div class="knowledgeItem" id="{{id}}" articleBelong="{{articleBelong}}" externalUrl="{{externalUrl}}">
+                  
+                      <img class="{{lazyClass}}" src="/common/img/lazyImgList.png" data-original="{{imageUrlShowOnline}}" alt="">
+                  
+                  <div class="roomTitle">{{title}}</div>
+                  <div class="roomContent">{{intro}}</div>
+             </div>
+          {{/if}}
+          {{/each}}
+      </script>
+     @@include('@pathInclude/views/footer.html')
+
+     <script src="/homePage/static/js/marketingActivity.js"></script>
+
+ </body>
+ </html>

@@ -410,4 +410,7 @@ module.exports = {
     './life/static/js/videoDoctor/videoDoctor': "./src/life/static/js/videoDoctor/videoDoctor.js",
     // 短信验证
     './account/static/js/SMSVerification': "./src/account/static/js/SMSVerification.js",
+    //市场活动
+    './homePage/static/js/marketingActivity': './src/homePage/static/js/marketingActivity.js',
+
 }
