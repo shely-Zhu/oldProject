@@ -1,0 +1,498 @@
+/**
+* 
+* @author liliang 2019-11-25
+*/
+@import url("@pathCommonLess/mui/resetMUI.less");
+@import url("@pathCommonLessCom/alertBox.less");
+@import url("@pathCommonLessCom/headBarConfig.less");
+
+@import url("@pathCommonLessCom/sliderMui.less");
+@import url("@pathCommonLess/mui/resetMUI.less");
+
+@import url("@pathCommonLessCom/tabScroll.less");
+@import url("@pathCommonCom/noData/noData.less");
+
+//回到顶部的样式
+@import url("@pathCommonLessCom/goTopMui.less");
+@import url("@pathCommonCom/elasticLayer/elasticLayer/elasticLayer.less");
+.hide {
+	display: none;
+}
+body {
+	background: #F7FAFD;
+}
+.boxA{
+	.banner{
+		position: relative;
+		.mui-slider-indicator .mui-indicator{
+			width:0.08rem !important;
+			height:0.08rem !important;
+			background:rgba(255,255,255,0.5) !important;
+		}
+		.mui-slider-indicator{
+			bottom:0.3rem !important;
+		}
+		.mui-slider-indicator .mui-indicator.mui-active{
+			width: 0.16rem !important;
+			height:0.08rem !important;
+			background:@FFFFFF !important;
+		}
+	}
+	.hotWords{
+		padding:0.3rem;
+		background:@FFFFFF;
+		margin-bottom:0.3rem;
+		.title {
+			display:-webkit-box;
+			margin-bottom:0.3rem;
+			h2{
+				color:@272727;
+				font-size:0.38rem;
+				font-weight: 800;
+				-webkit-box-flex:1;
+			}
+			p{
+				a{
+					color:@9B9B9B;
+					font-size:0.28rem;
+					margin-right: 0.1rem;	
+				}
+				-webkit-box-flex:1;
+				text-align: right;
+				line-height:0.6rem;
+				i{
+					color:@9B9B9B;
+					font-size:0.2rem;
+					line-height:0.5rem;
+				}
+			}
+		}
+		.broadcast{
+			margin-top:-0.2rem;
+			font-size:0.28rem;
+			margin-bottom:0.3rem;
+			.getColor{
+				color:@272727;
+				font-weight: 600;
+			}
+			strong{
+				color:@061D6A;
+			}
+			span{
+				color:@9B9B9B;
+				border-left:2px solid @272727;
+				padding-left:0.14rem;
+				display:inline-block;
+				margin-right:0.04rem;
+				line-height:0.3rem;
+			};
+		}
+		.content{
+			background:@F3F5F7;
+			padding:0.16rem 0.3rem 0.16rem 0.3rem;
+			border-radius: 8px;
+			.con-t{
+				display:-webkit-box;
+				span{
+					background-image: linear-gradient(to right, @FBE2BD ,@F6C286);
+					padding:0.02rem 0.06rem 0.03rem 0.06rem;
+					color:@4F5365;
+					font-size:0.24rem;
+					display: block;
+				}
+				b{
+					-webkit-box-flex:1;
+					padding-left:0.2rem;
+					color:@272727;
+					font-size:0.28rem;
+				}
+			}
+			.con-b{
+				color:@272727;
+				font-size:0.24rem;
+				// line-height:100%;
+				margin-top:0.15rem;
+				display:-webkit-box;
+				.span-l{
+					width:1.04rem;
+					text-align: right;	
+					display: block;
+				}
+				.span-r{
+					-webkit-box-flex:1;
+					display: block;
+					padding-left:0.2rem;
+				}
+			}
+		}
+	}
+	.fortuneVideo{
+		.fortuneList{
+			ul li{
+				margin-bottom:0.3rem;
+				position: relative;
+				img{
+					border-radius: 0.16rem;
+				}
+				p{
+					border-bottom-left-radius: .16rem;
+					border-bottom-right-radius: .16rem;
+					i{
+						margin-right:0.1rem;
+						img{
+							width:0.46rem;
+						   height:0.46rem;
+						   display: inline-block;
+						   vertical-align:middle;
+						   margin-top:-0.06rem;
+						}
+					}
+					position: absolute;;
+					left:0;
+					bottom:0;
+					background:rgba(35,35,35,0.6);
+					color:@FFFFFF;
+					font-size:0.28rem;
+					width:100%;
+					padding:0.15rem 0.3rem 0.14rem 0.3rem;
+					overflow: hidden;
+					text-overflow:ellipsis;
+					white-space: nowrap;
+				}
+			}
+		}
+	}
+	.forumImg{
+		display: none;
+		&:nth-child(1) {
+			display:block;
+		}
+		div{
+			.mui-scroll-wrapper{
+				height:3.75rem !important;
+				width:100% !important;
+			}
+		   .mui-scroll-wrapper img{
+				height:2.7rem !important;
+				width:6.3rem !important;
+			}
+			.mui-control-item{
+				padding:0 !important;
+			}
+		   .mui-card{
+				padding-left:0 !important;
+			}
+			.mui-control-item{
+				padding-right:0.3rem !important;
+			}
+			.conten{
+				img{
+					border-radius: .16rem;
+				}
+			}
+			.conten .con{
+                width: 6.3rem;
+
+				h4{
+					color:#272727;
+					font-size:0.32rem;
+					text-align: left;
+					line-height:0.45rem;;
+					margin-top:0.2rem;
+					margin-bottom:0.1rem;
+					font-weight: bold;
+				}
+				p{
+					color:#272727;
+					font-size:0.26rem;
+					text-align: left;
+					line-height: 0.28rem;
+				}
+
+                h4,p{
+                    overflow: hidden;
+                    text-overflow:ellipsis;
+                    white-space: nowrap;
+
+                }
+			}
+		}
+	}
+	.tabContent{
+		.title{
+			margin-bottom:0.1rem;
+		}
+		.tab{
+			.tab-t{
+				margin-bottom:0.3rem;
+				margin-top:-0.2rem;
+				ol{
+					display:-webkit-box;
+					li{
+						-webkit-box-flex:1;
+						line-height:0.7rem;
+						color:@9B9B9B;
+						font-size:0.28rem;
+						text-align: center;
+						a{
+							padding-bottom:0.2rem;
+						}
+						.active{
+							color:@272727;
+							font-weight: bold;
+							font-size:0.28rem;
+							border-bottom:2px solid @061D6A;
+						}
+					}
+				}
+			}
+			.tab-b{
+				.container{
+					.mui-table-view-cell:after{
+						background:@FFFFFF !important;
+					}
+					width: 100%;
+					height:100%;
+					background-color: @c005;
+					.br{
+						height: 1px;
+						background: @e0e0e0;
+					}
+						.mui-content{
+							background-color: @c005;
+						}
+					// 遮罩层
+					.scroll_mask {
+						width: 100%;
+						height: 60rem;
+						background: @c005;
+						opacity: 0;
+						position: absolute;
+						top: 38%;
+						z-index: 3;
+					}
+				
+				
+					.nav_fixed {
+						position: static;
+						top: 0;
+						left: 0;
+						z-index: 4;
+						background: @c005;
+					}
+				
+				
+					// 其他资产列表
+					.myAsset {
+						// nav重置
+						.mui-slider .mui-segmented-control.mui-scroll-wrapper {
+							background: none;
+							box-shadow: none;
+							color: @9B9B9B;
+							padding-top: 0;
+							height: 0.8rem;
+							background-color: @c005;
+							margin-bottom: .3rem;
+							.mui-scroll .mui-control-item{
+								font-size: 0.28rem;
+								line-height: 0.8rem;
+								padding:0;
+								font-family:PingFangSC-Semibold,PingFang SC;
+								font-weight:400;
+								text-align: center;
+							}
+							.mui-scroll .mui-control-item.mui-active {
+								color: @272727;
+								position: relative;
+								border: none;
+				                font-weight: 600;
+								&:after {
+									position: absolute;
+									height: 0.06rem;
+									bottom: 0rem;
+									left: 50%;
+									margin-left: -.5rem;
+									content: '';
+									width: 1rem;
+									background: linear-gradient(to right, @6C83C9 0%, @061D6A 100%);
+									border-radius: .03rem;
+								}
+				
+							}
+						}
+				
+						.mui-table-view-cell {
+							padding: 0;
+
+							//重置mui列表点击重置底色变色问题
+							&.mui-active{
+								background-color: #fff;	
+							}
+						}
+				
+						.list {
+							width: 100%;
+				
+							.datalist {
+								background: @c005;
+								padding: .28rem .3rem .31rem;
+								border-bottom: 1px solid @E7E9ED;
+								.first{
+									display: flex;
+									justify-content: space-between;
+									.tit{
+										color: @272727;
+										height:.4rem;
+										font-size:.28rem;
+										font-family:PingFangSC-Medium,PingFang SC;
+										font-weight:500;
+										line-height:.4rem;
+									}
+									.mon{
+										height:.45rem;
+										font-size:.32rem;
+										font-family:DIN-Medium,DIN;
+										font-weight:500;
+										color:@272727;
+										line-height:.36rem;
+									}
+								}
+								.second{
+									display: flex;
+									justify-content: space-between;
+									.tim{
+										height:.33rem;
+										font-size:.24rem;
+										font-family:PingFangSC-Regular,PingFang SC;
+										font-weight:400;
+										color:@9B9B9B;
+										line-height:.33rem;
+									}
+									.sta{
+										height:.34rem;
+										font-size:.24rem;
+										font-family:PingFangSC-Regular,PingFang SC;
+										font-weight:400;
+										color:@9B9B9B;
+										line-height:.33rem;
+									}
+								}
+							}
+						}
+				
+				
+				
+					}
+					.mask{
+						width: 100%;
+						height: 100%;
+						position: fixed;
+						top: 0;
+						left: 0;
+						opacity: 0.6;
+						background: #000000;
+						z-index: 9;
+						display: none;
+					}
+				
+					.contentWrapper {
+						height: 100%;
+					}
+				
+					// 向上按钮，返回顶部
+					.upTop {
+						position: fixed;
+						bottom: 2.3rem;
+						right: 0.3rem;
+						width: 0.7rem;
+						height: 0.7rem;
+						border-radius: 1.35rem;
+						background: rgba(51, 51, 51, 0.85);
+				
+						// background: @c002;
+						// opacity: 0.85;
+						span {
+							display: block;
+							text-align: center;
+							margin-top: 0.35rem;
+							font-size: 1.8rem;
+							color: @c005;
+						}
+				
+						&.chtwm-upTop {
+							bottom: 4.5rem;
+						}
+					}
+				
+					//iscroll上拉加载重置
+					#pullUp {
+						line-height: 2.8rem;
+						padding: 0;
+				
+						span {
+							display: inline-block;
+							vertical-align: middle;
+						}
+					}
+				
+					.openOrClose {
+						.bind {
+							margin-bottom: 2rem;
+						}
+					}
+				
+					
+					
+				}
+				.list_item{
+					position: relative;
+					border-radius: 0.16rem;
+					margin-bottom:0.3rem;
+					padding: .05rem;
+					.list_itemL{
+						position: absolute;
+						left:0.27rem;
+						top:0.35rem;
+						width:5.2rem;
+						p{
+							color:@FFFFFF;
+							font-size:0.38rem;
+							margin-bottom:0.1rem;
+						}
+						span{
+							color:@FFFFFF;
+							opacity: 0.8;
+						}
+					}
+					.list_itemR{
+						img{
+							width:100%;
+							display: block;
+							border-radius: .16rem;	
+						}
+					}
+				}			
+			}
+		}
+	}
+}
+.boxA .fortuneVideo .fortuneList ul li p{
+	font-weight: 600;
+}
+.mui-segmented-control.mui-scroll-wrapper .mui-scroll{
+	height: 100%;
+	a{
+		display: inline-block;
+		height: 100%;
+	}
+}
+.forumList{
+	height: 3.7rem;
+}
+.without{
+    padding-top: 1.3rem;
+}
+
+.mui-segmented-control.mui-segmented-control-inverted .mui-control-item.mui-active{
+	border: none !important;
+}

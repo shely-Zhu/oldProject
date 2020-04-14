@@ -88,7 +88,7 @@ $(function() {
                 //     }
                 // },
                 {
-                    url: site_url.getSecuProdViews_api, //产品list
+                    url: site_url.getSecuProdViews_api, //产品list接口
                     needLogin: true, //需要判断是否登陆
                     // needLoading: false, // 接口请求完不隐藏loading
                     // needDataEmpty: false,

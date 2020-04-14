@@ -410,8 +410,13 @@ module.exports = {
     './life/static/js/videoDoctor/videoDoctor': "./src/life/static/js/videoDoctor/videoDoctor.js",
     // 短信验证
     './account/static/js/SMSVerification': "./src/account/static/js/SMSVerification.js",
+
     // 持仓周报 by zhubingshuai
     './account/static/js/weeklyPosition': "./src/account/static/js/weeklyPosition.js",
     // 持仓周报产品说明 by zhubingshuai
     './allServerResources/model/static/js/informationTemplate': "./src/allServerResources/model/static/js/informationTemplate.js",
+    //市场活动
+    './homePage/static/js/marketingActivity': './src/homePage/static/js/marketingActivity.js',
+
+
 }
