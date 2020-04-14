@@ -215,7 +215,7 @@ $(function() {
             that.$e.netLoading.show();
 
             if (splitUrl['deviceId']) {
-                if (splitUrl['deviceId'].includes("cookie")) {
+                if (splitUrl['deviceId'].indexOf("cookie")!=-1) {
                     deviceId = splitUrl['deviceId'].split("cookie")[0];
                 } else {
                     deviceId = splitUrl['deviceId'];
@@ -244,7 +244,8 @@ $(function() {
             var that = this;
             var deviceId;
             if (splitUrl['deviceId']) {
-                if (splitUrl['deviceId'].includes("cookie")) {
+                
+                if (splitUrl['deviceId'].indexOf("cookie")) {
                     deviceId = splitUrl['deviceId'].split("cookie")[0];
                 } else {
                     deviceId = splitUrl['deviceId'];
