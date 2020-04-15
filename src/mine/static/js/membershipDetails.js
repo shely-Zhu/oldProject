@@ -76,7 +76,7 @@ $(function() {
                         $(".tel").attr("href", "tel:" + commonSetting.serverPhone).html(commonSetting.serverPhone)
                         if(link){
                             $('.linkBtnBox').show()
-                            $('.linkBtnBox a').attr('onclick','setGoUrl( "'+link+'", "detailsUnderstandingDetails_01")')
+                            $('.linkBtnBox a').attr('onclick','setGoUrl( "'+link+'", "detailsUnderstandingDetails_01", this)')
                         }else{
                             $('.linkBtnBox').hide()
                         }

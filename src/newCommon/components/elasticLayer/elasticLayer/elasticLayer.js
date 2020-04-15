@@ -208,7 +208,7 @@
                     that.$cel.on('click', function() {
                         //关闭按钮事件即隐藏当前弹层
                         $(this).parents('.elasticLayer').hide();
-                        window._submitMd && window._submitMd( 3, that.options.htmdEvtCel);
+                        window._submitMd && window._submitMd( 3, that.options.htmdEvtCel, $(this));
                         that.options.callbackCel(that);
 
                     })
@@ -221,7 +221,7 @@
                     var that = this;
                     that.$yes.on('click', function() {
                         //调用的是callback回调函数
-                        window._submitMd && window._submitMd( 3, that.options.htmdEvtYes );
+                        window._submitMd && window._submitMd( 3, that.options.htmdEvtYes, $(this) );
                         that.options.callback(that);
                         if(that.options.isClose){
                             $(this).parents('.elasticLayer').hide();
