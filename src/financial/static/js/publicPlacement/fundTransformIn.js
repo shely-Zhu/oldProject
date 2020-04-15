@@ -555,7 +555,7 @@ $(function () {
 
 			$("#transformInput").on('input propertychange',function(){
 				that.gV.balance = Number($(this).val()).toFixed(2);
-				if($(this).val().includes(".") && $(this).val().split(".")[1].length >2){
+				if($(this).val().indexOf(".")!='-1' && $(this).val().split(".")[1].length >2){
 					tipAction('只能输入两位小数');
 					return
 				}
@@ -657,7 +657,7 @@ $(function () {
 
 			//确定
 			mui("body").on('mdClick','.btn_box .btn',function(){
-				 if($("#transformInput").val().includes(".") && $("#transformInput").val().split(".")[1].length >2){
+				 if($("#transformInput").val().indexOf(".")!='-1' && $("#transformInput").val().split(".")[1].length >2){
 				 	tipAction('只能输入两位小数')
 				 	return
 				 }
