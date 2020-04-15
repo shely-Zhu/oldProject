@@ -91,9 +91,6 @@ h5Info = function(href, type, htmdEvt, eTarget){
 		// 公募产品详情 基金编号_基金名称
 		} else if ( href.indexOf('/financial/views/publicPlacement/publicDetail.html') != -1 ){
 			h5_info = getQueryString("fundCode") + '_' + ( document.querySelector('#HeadBarpathName').children[0] ? document.querySelector('#HeadBarpathName').children[0].innerHTML : '' );
-		// 会员活动详情 活动id_活动名称
-		} else if ( href.indexOf('/life/views/memberClub/activityDetails.html') != -1 ){
-			h5_info = getQueryString("actId") + '_' + ( document.querySelector('.actName') ? document.querySelector('.actName').innerHTML : '' );
 		}
 	}
 
