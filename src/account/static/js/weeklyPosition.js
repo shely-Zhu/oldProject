@@ -102,15 +102,9 @@ $(function() {
                             "second": [-220, 182, -191],
                             "position": true
 
-                        },{
-                            "xArr": ['周一', '周二', '周三'],
-                            "first": [120, 132, 101],
-                            "second": [-220, 182, -191],
-                            "position": true
-
                         }]
-                        var flag = drawArr[drawArr.length]["position"]
-                        num = drawArr.length
+                        var flag = drawArr["position"]
+                        num = 0
                         console.log(flag ? 1:0)
                         // jsonData.prodList.forEach((item, v)=>{
                         //     // console.log(item);
