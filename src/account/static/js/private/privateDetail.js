@@ -203,7 +203,6 @@ $(function() {
 			    	that.data.groupName = jsonData.groupName?jsonData.groupName:'';
 					that.data.redemptionOpenFrequency = jsonData.redemptionOpenFrequency?jsonData.redemptionOpenFrequency:'';
 					//是否显示可赎回文案
-					debugger
 					if(jsonData.supportJfRedeem) {
 						$(".notRedemptionBox").css("display", "block");
 						$(".notRedemptionTxt").html(jsonData.notSupportJfRedeemMsg);
