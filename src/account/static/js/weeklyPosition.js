@@ -117,6 +117,7 @@ $(function() {
                         // });
                         
                         for(var i = 0; i < jsonData.prodList.length; i++){
+                            
                             var prodPerformanceList = jsonData.prodList[i].prodPerformanceList
                             for ( var v = 0; v < prodPerformanceList.length; v++){
                                 if (prodPerformanceList[v].profitLossPercentage.indexOf("+") != -1) {
@@ -146,30 +147,31 @@ $(function() {
                     }
                 }
             ];
+            $(".lazyload").lazyload();
             $.ajaxLoading(obj);
         },
         //所有点击事件
 		event: function(){
-            var that = this;
+            // var that = this;
             // 市场观点more事件
 			mui("body").on('mdClick', '.viewpoint_more', function() {
                 window.location.href = site_url.articleTemplate_url + '?id=&articleBelong=30&&applyType=0';
              }, {
-                 // 'htmdEvt': 'privateDetail_0'
+                 'htmdEvt': 'viewpointMore_0'
              })
 			// 产品观点more事件
 			mui("body").on('mdClick', '.product_more', function() {
                var projectCode = $(this).attr("data-fundCode")
-               console.log(projectCode)
+            //    console.log(projectCode)
                window.location.href = site_url.informationTemplate_url + '?viewpoint=0&projectCode=' + projectCode;
             }, {
-				// 'htmdEvt': 'privateDetail_0'
+				'htmdEvt': 'productViewPoint_0'
             })
             // 播放器
              mui("body").on('mdClick', '.image_content' , function(){
                 window.location.href = site_url.privatePlacementDetailJumpVideo_url+"?cid=" + $(this).attr("videoId") 
             },{
-                // 'htmdEvt': 'fortune_10'
+                'htmdEvt': 'weeklyPositionProductPlay_0'
             });
             
 		},

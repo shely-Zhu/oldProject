@@ -38,7 +38,6 @@ module.exports = function(lineChartData,num,noData,tip, $e) {
     var second = lineChartData[num]["second"];
     var third = lineChartData[num]["third"];
     var flag = lineChartData[num]["position"];
-    console.log(flag,"flag", first)
     var name = tip;
 
     var option = {
@@ -49,7 +48,7 @@ module.exports = function(lineChartData,num,noData,tip, $e) {
             formatter: function(params) {
                 var data = params[0];
                 if (flag){
-                    return data["value"] + '%' + '<br/>' + data["name"]
+                    return '<span style="color:#364D97; font-size:.36rem">' +data["value"] + '% </span>' + '<br/>' + data["name"]
                 }
                 return '日期：' + data["name"] + '<br/>' + data["seriesName"] + '：' + data["value"] + '%'
             },
@@ -70,8 +69,10 @@ module.exports = function(lineChartData,num,noData,tip, $e) {
             containLabel: true,
             x:5,
             y:30,
-            x2:30,
-            y2:30,
+            // x2:30,
+            // y2:30,
+            x2: flag ? 0 : 30,
+            y2: flag ? 0 : 30,
             borderWidth:0//此处去掉那个白色边框
         },
         xAxis: [{
