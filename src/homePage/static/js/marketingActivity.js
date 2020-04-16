@@ -28,7 +28,6 @@ $(function() {
             list_template: '', //列表的模板，生成后存放在这里
             ajaxArr: [], //存放每一个ajax请求的传参数据
             // 存放ajax请求地址  已持仓  待确认
-            siteUrlArr: [site_url.queryFortuneArticleList_api, site_url.queryFortuneArticleList_api, site_url.queryFortuneArticleList_api, site_url.queryFortuneArticleList_api],
             listToTop: '', // 滑动区域距离顶部距离
             navToTop: '', // 滑动nav距离顶部距离
             navHeight: '', // nav高度
@@ -154,7 +153,6 @@ $(function() {
                         $('.tabContent').removeClass("hide");
                         that.gV.navList = [];
                         listData = json.data.list;
-                        console.log('我是财富研究', listData);
                         modelData = json.data.modelVO;
                         for (var i = 0; i < json.data.list.length; i++) {
                             (function(i) {
@@ -190,7 +188,7 @@ $(function() {
             var obj = [{
                 url: site_url.queryFortuneCollegeSec_api,
                 data: {
-                    type: "31", //类型财富研究
+                    type: "31", //类型市场活动
                 },
                 needLogin: true,
                 needLoading: true,
