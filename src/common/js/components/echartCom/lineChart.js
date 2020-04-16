@@ -27,6 +27,7 @@ require('zrender/lib/vml/vml');*/
  * @return {[type]}               [description]
  */
 module.exports = function(lineChartData,num,noData,tip, $e) {
+    debugger
     var ele = $e || $('.chartWrapper');
     var myChart = echarts.init(ele[0]);
 
@@ -38,8 +39,6 @@ module.exports = function(lineChartData,num,noData,tip, $e) {
     var second = lineChartData[num]["second"];
     var third = lineChartData[num]["third"];
     var name = tip;
-    var flag = lineChartData[num]["position"];
-    console.log(flag,"flag", first)
 
     var option = {
 
@@ -48,9 +47,6 @@ module.exports = function(lineChartData,num,noData,tip, $e) {
             // formatter: "日期：{b} <br/>{a}: {c}%",
             formatter: function(params) {
                 var data = params[0];
-                if (flag){
-                    return data["value"] + '%' + '<br/>' + data["seriesName"]
-                }
                 // console.log(data,"data")
                 return '日期：' + data["name"] + '<br/>' + data["seriesName"] + '：' + data["value"] + '%'
             },
@@ -144,8 +140,7 @@ module.exports = function(lineChartData,num,noData,tip, $e) {
             //clipOverflow: false,
             lineStyle: {
                 normal: {
-                    // color: '#fb685c'
-                    color: flag ? 'red' : '#fb685c'
+                    color: '#fb685c'
                 }
             },
             itemStyle: {
@@ -162,8 +157,7 @@ module.exports = function(lineChartData,num,noData,tip, $e) {
             //clipOverflow: false,
             lineStyle: {
                 normal: {
-                    // color: '#60b0e0'
-                    color: flag ? 'green' : '#60b0e0'
+                    color: '#60b0e0'
                 }
             },
             itemStyle: {

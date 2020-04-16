@@ -54,11 +54,11 @@ module.exports = function() {
     // jjs持仓明细查询
     this.queryAssetsDetailByPages_api = http_url.web_url + '/account/jjs/queryAssetsDetailByPages'
     // 持仓报告 by zhubingshuai
-    this.getWeeklyPosition_api = http_url.web_url + '/account/weeklyposition/weeklyposition'
+    this.getWeeklyPosition_api = http_url.web_url + '/account/weeklyposition'
     // 持仓周报产品信息 by zhubingshuai
-    this.getInformationWeeklyPosition_api = http_url.web_url + '/account/weeklyposition/informationWeeklyPosition'
+    this.getProdViewsDetail_api = http_url.web_url + '/account/prodViewsDetail'
     // 持仓周报之产品list by zhubingshuai
-    this.getSecuProdViews_api = http_url.web_url + '/account/weeklyposition/secuProdViews'
+    this.getSecuProdViews_api = http_url.web_url + '/account/secuProdViews'
     
 
 

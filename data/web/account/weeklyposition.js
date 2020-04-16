@@ -20,13 +20,13 @@ var mymessage = Mock.mock({
          "updateDate": "updateDate",
          "list":[
             {
-                 "projectName":  "华润元大景泰A",// 产品名称
-                 "marketValueRatio":"60",
+                 "productName":  "华润元大景泰A",// 产品名称
+                 "marketValueRatio":"100",
                  "price":"66,666.52"
             },
             {
                "productName":  "华润元大景泰A",// 产品名称
-               "marketValueRatio":"60",
+               "marketValueRatio":"80",
                "price":"66,666.52"
           }
          ]
