@@ -1,10 +1,5 @@
-//  财富讲堂
-// @author liliang 2019-11-20 
-/*
-
-update chentiancheng 2020年1月9日23:58:11
-
-*/
+//  市场活动
+// @author 陈天成 2020-04-13 
 
 require('@pathCommonBase/base.js');
 require('@pathCommonJsCom/utils.js');
@@ -48,7 +43,6 @@ $(function() {
 
             that.getTabsListData(); //获取tabs标签
             that.getDataBanner();
-            that.getFortuneForum();
             //事件监听
             that.events();
         },
@@ -57,7 +51,7 @@ $(function() {
             var obj = [{
                 url: site_url.queryBanner_api,
                 data: {
-                    type: "25"
+                    type: "31"
                 },
                 needDataEmpty: true,
                 callbackDone: function(json) {
@@ -67,46 +61,6 @@ $(function() {
                         imgArr.push({ imgUrl: el.imageUrlShowOnline, linkUrl: el.linkUrl,externalUrl:el.externalUrl,linkType:el.linkType });
                     });
                     Slider($('.banner'), imgArr);
-                }
-            }]
-            $.ajaxLoading(obj);
-        },
-
-        //财富讲堂
-        getFortuneForum: function() {
-            var that = this;
-            var obj = [{
-                url: site_url.queryFortuneCollegeSec_api,
-                data: {
-                    type: "28", //类型财富讲堂
-                },
-                needDataEmpty: true,
-                callbackDone: function(json) {
-                    if (json.data && json.data.list && json.data.list.length > 0) {
-                        $(".forum").removeClass('hide');
-                        listData = json.data.list;
-                        console.log(listData);
-                        modelData = json.data.modelVO;
-                        var listTitle = [];
-                        var listContent = [];
-                        for (var i = 0; i < listData.length; i++) {
-                            listTitle.push({ sonModelName: listData[i].sonModelName })
-                            listContent.push({ listContent: listData[i].list })
-                        };
-                        console.log('我是listtitle', listTitle);
-                        console.log('我是listContent', listContent);
-                        generateTemplate(modelData, $('.forum .title'), $('#forum-template'));
-                        generateTemplate(listTitle, $('.broadcast'), $('#forumTitle'));
-                        generateTemplate(listContent, $('.forumList'), $('#forumContent'));
-                        $(".lazyload").lazyload();
-                        setTimeout(function() {
-                            $('.broadcast').find('.bigspan').eq(0).addClass('getColor');
-                            $('.broadcast').find('.bigspan').eq(0).css({ "paddingLeft": 0, "borderLeft": 'none' });
-                        }, 100);
-                        mui('.mui-scroll-wrapper').scroll({
-                            deceleration: 0.0005 //flick 减速系数，系数越大，滚动速度越慢，滚动距离越小，默认值0.0006 
-                        });
-                    }
                 }
             }]
             $.ajaxLoading(obj);
@@ -160,10 +114,7 @@ $(function() {
 
                         return false;
                     }
-
-                    //没有hasPullUp class，表示没有初始化，调用initMui，进行初始化
                     //并请求第一次数据
-                    // that.initMui(t);
                     that.getData(t);
                 }
             };
@@ -189,19 +140,13 @@ $(function() {
             // 为实现滚动区域滚动到顶部，定位，添加遮罩层
             $('.scroll_mask').css('top', that.gV.listToTop)
         },
-
-        initMui: function($id) { //$id   就是滑动区域的 id 节点
-
-            that.getData($id);
-
-        },
         // 财富研究
         getTabsListData: function(t) {
             var that = this;
             var obj = [{
                 url: site_url.queryFortuneCollegeSec_api,
                 data: {
-                    type: 29
+                    type: 31
                 },
                 needDataEmpty: true,
                 callbackDone: function(json) {
@@ -223,9 +168,7 @@ $(function() {
                         generateTemplate(modelData, $('.tabContent .title'), $('#tabContent-template'));
                         //拼模板，初始化左右滑动mui组件
                         that.beforeFunc();
-
                         //初始化第一屏区域的上拉加载
-                        // that.initMui($('#scroll1'));
                         that.getData($('#scroll1'));
                     }
                 }
@@ -247,7 +190,7 @@ $(function() {
             var obj = [{
                 url: site_url.queryFortuneCollegeSec_api,
                 data: {
-                    type: "29", //类型财富研究
+                    type: "31", //类型财富研究
                 },
                 needLogin: true,
                 needLoading: true,
@@ -272,16 +215,11 @@ $(function() {
 
 
                     $id.find('.contentWrapper .mui-pull-bottom-pocket').removeClass('mui-hidden');
-                        // if (that.gV.ajaxArr[that.gV.current_index].pageCurrent == 1) {
                     //第一屏
                     $id.find('.contentWrapper .mui-table-view-cell').html(that.html);
-                    // } else {
-                    //     $id.find('.contentWrapper .mui-table-view-cell').append(that.html);
-                    // }
-
                     //获取当前展示的tab的索引
-                    var index = $('#slider .tab-scroll-wrap .mui-active').index(),
-                        $list = $("#move_" + index + " .list");
+                    // var index = $('#slider .tab-scroll-wrap .mui-active').index(),
+                    //     $list = $("#move_" + index + " .list");
 
                     //隐藏loading
                     setTimeout(function() {
@@ -297,7 +235,7 @@ $(function() {
                     //显示错误提示
                     tipAction(json.message);
 
-                    t.endPullupToRefresh(false);
+                    // t.endPullupToRefresh(false);
                     $('.contentWrapper').find('.mui-pull-bottom-pocket').removeClass('mui-hidden');
 
                     //隐藏loading，调试接口时需要去掉
@@ -306,7 +244,7 @@ $(function() {
                     }, 100);
                 },
                 callbackNoData: function(json) {
-                    t.endPullupToRefresh(false);
+                    // t.endPullupToRefresh(false);
 
                     //没有数据
                     if (that.gV.ajaxArr[that.gV.current_index].pageCurrent == 1) {

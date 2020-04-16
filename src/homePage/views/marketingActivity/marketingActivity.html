@@ -1,7 +1,7 @@
 <!-- /**
  * @Page:  市场活动
- * @Author: 成天成
- * @Date:   2020-04-14
+ * @Author: 陈天成
+ * @Date:   2020-04-13
  *
  */ -->
 
@@ -9,7 +9,7 @@
  <html lang="en">
  <head>
      @@include('@pathInclude/views/meta.html')
-     <link rel="stylesheet" href="/homePage/static/css/fortuneCollegeList.css">
+     <link rel="stylesheet" href="/homePage/static/css/marketingActivity.css">
      <!-- <link rel="stylesheet" href="/homePage/static/css/wealthResearch.css"> -->
      <title>市场活动</title>
  </head>
@@ -24,70 +24,61 @@
                <div class="wrapper">
                     <div class="banner">
                     </div>
-                    <div class="container">
-                         <!-- 暂无数据 -->
-                         @@include('@pathCommonCom/noData/noData.html', {"tipText": "暂无数据"})
-                         <!-- 加载中loading -->
-                         @@include('@pathCommonCom/loading/listLoading.html')
-                         @@include('@pathCommonViews/headBarConfig.html',{"pathName":"财富讲堂"})
-                         <div class="br"></div>
-                         <div class="mui-content  myAsset">
-                             <!-- 放置页面内容 -->
-                         </div>
-                     </div>
                     <div class="hotWords tabContent hide">
                          <div class="title">
 
                          </div>
-                         
+                         <div class="tab">
+                              <div class="tab-b">
+                                   <div class="container">
+                                        <div class="mui-content  myAsset">
+                                            <!-- 放置页面内容 -->
+                                        </div>
+                                        <!-- 加载中loading -->
+                                        @@include('@pathCommonCom/loading/listLoading.html')
+                                    </div>
+                              </div>
+                         </div>
                     </div>
                </div>
           </div>
      </div>
+
+     <script id="first-template" type="text/x-handlebars-template">
+     {{! 列表 内容 使用mui的上拉加载}}
+     <div class="list">
+          {{! list是包裹上拉加载区域的，在js中计算当前页面中的list高度，不能超出一屏}} {{! 初始化上拉加载区域，使用contentWrapper class}} {{! contentWrapper 需要添加样式，具体见less文件}}
+          <div class="contentWrapper">
+
+               <ul class="mui-table-view">
+                    <li class="mui-table-view-cell">
+                         {{! 所有内容 需要放在这个li里，且里面不能再用Li元素}} {{{content}}}
+
+                    </li>
+               </ul>
+
+               <!-- 返回顶部 -->
+               <!-- @@include('@pathCommonViews/goTop.html') -->
+
+          </div>
+     </div>
+     </script>
+     <script id="second-template" type="text/x-handlebars-template">
+     {{! 左侧页面列表}} {{#each this}}
+     <div class="list_item clearfix" id='{{id}}' articleBelong='{{articleBelong}}' applyType='{{applyType}}' externalUrl='{{externalUrl}}'>
+          <div class="list_itemR" ><img class="lazyload" src="/common/img/lazyImgList.png" data-original="{{imageUrlShowOnline}}"></div>
+     </div>
+
+     {{/each}}
+     </script>
+
+     @@include('@pathCommonViews/goTop.html')
      <!-- 财富研究 -->
      <script id="tabContent-template" type="text/x-handlebars-template">
           <h2>{{modelName}}</h2>
+          <!-- <p><a href="javascript:void(0);" onclick="setGoUrl('{{modelUrl}}', 'fortune_06')" >查看全部研究</a><i class="iconfont">&#xe636;</i></p> -->
      </script>
-     
-     <script id="first-template" type="text/x-handlebars-template">
-          {{! 列表 内容 使用mui的上拉加载}}
-          <div class="list">
-              {{! list是包裹上拉加载区域的，在js中计算当前页面中的list高度，不能超出一屏}} {{! 初始化上拉加载区域，使用contentWrapper class}} {{! contentWrapper 需要添加样式，具体见less文件}}
-              <div class="contentWrapper">
-                  <ul class="mui-table-view">
-                      <li class="mui-table-view-cell">
-                          {{! 所有内容 需要放在这个li里，且里面不能再用Li元素}} {{{content}}}
-                      </li>
-                  </ul>
-                  <!-- 返回顶部 -->
-                  @@include('@pathCommonViews/goTop.html')
-              </div>
-          </div>
-      </script>
-  
-      <script id="second-template" type="text/x-handlebars-template">
-          {{! 左侧页面列表}} 
-          {{#each this}}
-          {{#if isLive}}
-              <div class="roomItem item" id="{{id}}" articleBelong="{{articleBelong}}" externalUrl="{{externalUrl}}">
-                  <div class="roomVideo">
-                      <img class="articalImg {{lazyClass}}" src="/common/img/lazyImgList.png" data-original="{{imageUrlShowOnline}}" alt="">
-                      <img class="play" src="/common/img/bofang@2x.png" alt="">
-                  </div>
-                  <div class="roomTitle">{{title}}</div>
-                  <div class="roomContent">{{intro}}</div>
-              </div>
-          {{else}}
-              <div class="knowledgeItem" id="{{id}}" articleBelong="{{articleBelong}}" externalUrl="{{externalUrl}}">
-                  
-                      <img class="{{lazyClass}}" src="/common/img/lazyImgList.png" data-original="{{imageUrlShowOnline}}" alt="">
-                  
-                  <div class="roomTitle">{{title}}</div>
-                  <div class="roomContent">{{intro}}</div>
-             </div>
-          {{/if}}
-          {{/each}}
-      </script>
+
      @@include('@pathInclude/views/footer.html')
 
      <script src="/homePage/static/js/marketingActivity.js"></script>
