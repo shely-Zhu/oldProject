@@ -37,6 +37,8 @@ module.exports = function(lineChartData,num,noData,tip, $e) {
     var first = lineChartData[num]["first"];
     var second = lineChartData[num]["second"];
     var third = lineChartData[num]["third"];
+    var flag = lineChartData[num]["position"];
+    console.log(flag,"flag", first)
     var name = tip;
 
     var option = {
@@ -46,6 +48,9 @@ module.exports = function(lineChartData,num,noData,tip, $e) {
             // formatter: "日期：{b} <br/>{a}: {c}%",
             formatter: function(params) {
                 var data = params[0];
+                if (flag){
+                    return data["value"] + '%' + '<br/>' + data["name"]
+                }
                 return '日期：' + data["name"] + '<br/>' + data["seriesName"] + '：' + data["value"] + '%'
             },
             backgroundColor: 'rgba(229,229,229,0.6)',
@@ -138,7 +143,8 @@ module.exports = function(lineChartData,num,noData,tip, $e) {
             //clipOverflow: false,
             lineStyle: {
                 normal: {
-                    color: '#fb685c'
+                    // color: '#fb685c'
+                    color: flag ? 'red' : '#fb685c'
                 }
             },
             itemStyle: {
@@ -155,7 +161,8 @@ module.exports = function(lineChartData,num,noData,tip, $e) {
             //clipOverflow: false,
             lineStyle: {
                 normal: {
-                    color: '#60b0e0'
+                    // color: '#60b0e0'
+                    color: flag ? 'grey' : '#60b0e0'
                 }
             },
             itemStyle: {

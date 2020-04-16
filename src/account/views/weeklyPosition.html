@@ -45,7 +45,7 @@
         </div>
          <div class="content_block bgWhite">
             <!-- 市值构成(元) -->
-            <div class="text_content" id="marketCapitalList">
+            <div class="text_content marketCapitalList" id="marketCapitalList">
                 <!-- <div class="bar_wrap">
                     <div class="bar_body">
                         <div class="bar_progressbar">
@@ -77,15 +77,14 @@
         <div class="title_content bgWhite">
             <div class="liLeft">证券产品观点</div>
         </div>
-        <div class="list" id="newsList"></div>
-        <div class="dd_line" id="dd_line" style="width:6rem; height:8rem">折线图</div>
+        <div class="list newsList" id="newsList"></div>
 
         <div class="footer-tip">
             温馨提示：以上数据仅供参考，具体以实际到账为准。
         </div>
-        <footer class="hide">
+        <!-- <footer class="hide">
             暂无更多数据
-        </footer>
+        </footer> -->
        
         <!-- 加载中loading -->
         @@include('@pathCommonCom/loading/listLoading.html')
@@ -99,7 +98,7 @@
         <div class="bar_wrap">
             <div class="bar_body">
                 <div class="bar_progressbar">
-                    <span style="width:80%" ></span>
+                    <span style="width:0%" ></span>
                 </div>
                 <div class="bar_num">{{price}}</div>
             </div>
@@ -117,7 +116,7 @@
                     <div class="sub_title">{{productName}}</div>
                     <div class="text">
                         {{productViewpoint}}
-                        <span class="more jf product_more" data-fundCode="123">查看更多<span class="j_icon"></span></span>
+                        <span class="more jf product_more" data-fundCode={{projectCode}}>查看更多<span class="j_icon"></span></span>
                     </div>
                 </div>
                 <div class="common_container">
@@ -126,19 +125,10 @@
                             <span class="dd_line_title">盈亏走势图 :</span>
                             <span>
                                 <span class="dd_legend dd_red">本产品 
-                                    {{#if_than_0 positionRatio}}
-                                        <span class="text_red show_item">+444</span>
-                                    {{else}}
-                                        <span class="text_green show_item">-4444</span>
-                                    {{/if_than_0}}
+                                    <span class="text_red show_item">{{prodPerformanceList.profitLossPercentage}}</span>
                                 </span>
                                 <span class="dd_legend dd_grey">沪深300 
-                                    <!-- <span style="color:#77CE6D">-9.98%</span> -->
-                                    {{#if_than_0 positionRatio}}
-                                        <span class="text_red show_item">+5566</span>
-                                    {{else}}
-                                        <span class="text_green show_item">-6655</span>
-                                    {{/if_than_0}}
+                                    <span class="text_green show_item">{{prodPerformanceList.hs300PerformancePercent}}</span>   
                                 </span>
                             </span>
                         </div>

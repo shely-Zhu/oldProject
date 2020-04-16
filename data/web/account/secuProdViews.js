@@ -19,7 +19,8 @@ var mymessage = Mock.mock({
                  "productViewpoint": "证券是多种经济权益凭证的统称，也指专门的种类产品，是用来证明券票持有人享有的某种特定权益的法律凭证。 [1] 主要包括资本证券、货币证券和商品证券等。狭义上的证券主要指的是证券市…", //产品介绍
                  "prodPerformanceList":[
                       {
-                           "profitLossPercentage":"profitLossPercentage"
+                           "profitLossPercentage": "+5555%",
+                           "hs300PerformancePercent": "-559%"
                       }
                  ],
                  "pefConnectionList":{
@@ -32,7 +33,8 @@ var mymessage = Mock.mock({
                "productViewpoint": "证券是多种经济权益凭证的统称，也指专门的种类产品，是用来证明券票持有人享有的某种特定权益的法律凭证。 [1] 主要包括资本证券、货币证券和商品证券等。狭义上的证券主要指的是证券市…", //产品介绍
                "prodPerformanceList":[
                     {
-                         "profitLossPercentage":"profitLossPercentage"
+                         "profitLossPercentage": "+5555%",
+                         "hs300PerformancePercent": "-559%"
                     }
                ],
                "pefConnectionList":{
