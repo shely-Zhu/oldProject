@@ -50,7 +50,7 @@ $(function() {
             var obj = [{
                 url: site_url.queryBanner_api,
                 data: {
-                    type: "31"
+                    type: "32"
                 },
                 needDataEmpty: true,
                 callbackDone: function(json) {

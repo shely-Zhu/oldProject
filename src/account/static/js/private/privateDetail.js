@@ -203,7 +203,7 @@ $(function() {
 			    	that.data.groupName = jsonData.groupName?jsonData.groupName:'';
 					that.data.redemptionOpenFrequency = jsonData.redemptionOpenFrequency?jsonData.redemptionOpenFrequency:'';
 					//是否显示可赎回文案
-					if(jsonData.supportJfRedeem) {
+					if(jsonData.supportJfRedeem == 0) {
 						$(".notRedemptionBox").css("display", "block");
 						$(".notRedemptionTxt").html(jsonData.notSupportJfRedeemMsg);
 					} else {
