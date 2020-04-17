@@ -113,6 +113,33 @@ $(function() {
                     console.log(that.data.incomeModeJF,jsonData.incomeModeJF)
                     that.data.incomeModeJF = jsonData.incomeModeJF;
                     that.data.productRiskLevel = jsonData.productRiskLevel
+                    //用户等级不匹配
+                    debugger
+                    if(that.data.riskRank<that.data.productRiskLevel){
+                        var obj = {
+                            title: '提示',
+                            id: 'tipIcon',
+                            p: '访问失败，您查看产品的风险等级与您可承受风险等级不匹配',
+                            yesTxt: '知道了',
+                            zIndex: 100,
+                            hideCelButton: true, //为true时隐藏cel按钮，仅使用yes按钮的所有属性
+                            callback: function(t) {
+
+                                if (window.isAndroid) {
+                                    //这个是安卓操作系统
+                                    window.jsObj.backNative();
+                                }
+                                // window.isIOS是在root文件中定义的变量
+                                if (window.isIOS) {
+                                    //这个是ios操作系统
+                                    // window.webkit.messageHandlers.backNative.postMessage(JSON.stringify({ "type": "backNative" }));
+                                    window.webkit.messageHandlers.backNative.postMessage("backNative" );
+                                }
+                                t.hide();     
+                            },
+                        };
+                        $.elasticLayer(obj);
+                    }
                     //默认隐藏
                     $(".tipIcon").hide()
                     if (jsonData.incomeModeJF == '0') {
@@ -445,33 +472,6 @@ $(function() {
                     that.data.riskRank = jsonData.riskRank
                     if (that.data.isRiskEndure == 0) {
                         window.location.href = site_url.riskAppraisal_url + '?type=private';
-                    }
-                    //用户等级不匹配
-                
-                    if(that.data.riskRank<that.data.productRiskLevel){
-                        var obj = {
-                            title: '提示',
-                            id: 'tipIcon',
-                            p: '访问失败，您查看产品的风险等级与您可承受风险等级不匹配',
-                            yesTxt: '知道了',
-                            zIndex: 100,
-                            hideCelButton: true, //为true时隐藏cel按钮，仅使用yes按钮的所有属性
-                            callback: function(t) {
-
-                                if (window.isAndroid) {
-                                    //这个是安卓操作系统
-                                    window.jsObj.backNative();
-                                }
-                                // window.isIOS是在root文件中定义的变量
-                                if (window.isIOS) {
-                                    //这个是ios操作系统
-                                    // window.webkit.messageHandlers.backNative.postMessage(JSON.stringify({ "type": "backNative" }));
-                                    window.webkit.messageHandlers.backNative.postMessage("backNative" );
-                                }
-                                t.hide();     
-                            },
-                        };
-                        $.elasticLayer(obj);
                     }
 
 
