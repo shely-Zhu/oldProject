@@ -11,6 +11,7 @@ require('@pathCommonJs/ajaxLoading.js');
 var setCookie = require('@pathCommonJsCom/setCookie.js');
 var frozenAccount = require('@pathCommonJs/components/frozenAccount.js');
 require('@pathCommonCom/elasticLayer/elasticLayer/elasticLayer.js');
+var splitUrl = require('@pathCommonJs/components/splitUrl.js')();
 var generateTemplate = require('@pathCommonJsComBus/generateTemplate.js');
 var lineChart = require('@pathCommonJsCom/echartCom/lineChart.js');
 
@@ -42,6 +43,7 @@ $(function() {
         },
         init: function() {
             var that = this;
+            console.log(splitUrl['customerNo'])
             that.getData(); // 获取持仓周报信息
             that.event(); // 点击事件处理
         },

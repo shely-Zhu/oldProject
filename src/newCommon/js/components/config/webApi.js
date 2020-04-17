@@ -54,7 +54,7 @@ module.exports = function() {
     // jjs持仓明细查询
     this.queryAssetsDetailByPages_api = http_url.web_url + '/account/jjs/queryAssetsDetailByPages'
     // 持仓报告 by zhubingshuai
-    this.getWeeklyPosition_api = http_url.web_url + '/account/weeklyposition'
+    this.getWeeklyPosition_api = http_url.web_url + '/account/weeklyPosition'
     // 持仓周报产品信息 by zhubingshuai
     this.getProdViewsDetail_api = http_url.web_url + '/account/prodViewsDetail'
     // 持仓周报之产品list by zhubingshuai
