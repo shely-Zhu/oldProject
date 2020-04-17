@@ -624,6 +624,12 @@ var clickList = {
 	"superTransactionRecord_0":{ evtid: 'superTransactionRecord_0', topic: '现金宝-交易记录_点击列表跳转', info: ''},
 
 	"seeSign_0": { evtid: 'seeSign_0', topic: '查看已签署材料-点击查看pdf', info: ''},
+
+	// 持仓周报 by zhubingshuai
+	"viewpointMore_0":{ evtid: 'viewpointMore_0', topic: '市场观点', info: ''},
+	"productViewPoint_0":{ evtid: 'productViewPoint_0', topic: '产品观点', info: ''},
+	"weeklyPositionProductPlay_0":{ evtid: 'weeklyPositionProductPlay_0', topic: '产品视频播放', info: ''},
+
 	/************************************** account end *************************************************/
 
 
