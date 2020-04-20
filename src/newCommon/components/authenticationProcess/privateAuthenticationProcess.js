@@ -206,7 +206,7 @@ module.exports = function(params) {
                                     window.location.href = jumpUrl;
                                 }
                                 $("#tips-wrap").hide();//点击跳转关闭弹窗
-                                window._submitMd && window._submitMd( 3, htmdEvt + '_0008', $(this) );
+                                window._submitMd && window._submitMd( 3, htmdEvt + '_0008', this );
                             })
                                 //一键认证调往哪里
                             mui("body").on('mdClick', '.tips-btn', function() {
