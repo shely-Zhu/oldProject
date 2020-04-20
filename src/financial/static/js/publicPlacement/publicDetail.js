@@ -200,6 +200,12 @@ $(function() {
                         $(".footer .buy_btn").addClass("disable").html("暂不可售");
                         $(".footer .fixed_investement_btn").attr("disabled", true).css({ "display": "none" });
                     }
+                    //风险等级颜色
+                    if(json.data.riskLevel  == 4){
+                        $(".type_1").css("color","#FFA562")
+                    }else if(json.data.riskLevel == 5){
+                        $(".type_1").css("color","#F52323")
+                    }
                 },
                 callbackNoData: function(json) {
                     tipAction(json.message);

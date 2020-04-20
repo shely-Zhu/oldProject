@@ -74,6 +74,21 @@ h5Info = function(href, type, htmdEvt, eTarget){
 					h5_info = "/allServerResources/model/views/articleTemplate.html?id=" + $e.attr("id") + '&articleBelong=' + $e.attr("articleBelong");
 				}
 			}
+		// 私募资产详情页
+		} else if ( href.indexOf('/account/views/private/privateDetail.html' ) != -1) {
+			h5_info = getQueryString("projectId") + '_' + ( document.querySelector('#HeadBarpathName') ? document.querySelector('#HeadBarpathName').innerHTML : '' );
+		// 私募产品详情 项目id_项目名称
+		} else if ( href.indexOf('/financial/views/privatePlacement/privatePlacementDetail.html') != -1 ){
+			h5_info = getQueryString("projectId") + '_' + ( document.querySelector('.productNameTip') ? document.querySelector('.productNameTip').innerHTML : '' );
+		// 现金宝详情 基金编号_基金名称
+		} else if ( href.indexOf('/account/views/public/superStreasureDetail.html') != -1 ){
+			h5_info = getQueryString("fundCode") + '_' + ( document.querySelector('#HeadBarpathName') ? document.querySelector('#HeadBarpathName').innerHTML : '' );
+		// 公募持仓基金详情 基金编号_基金名称
+		} else if ( href.indexOf('/account/views/public/optionalPublicDetail.html') != -1 ){
+			h5_info = getQueryString("fundCode") + '_' + ( document.querySelector('#HeadBarpathName') ? document.querySelector('#HeadBarpathName').innerHTML : '' );
+		// 公募产品详情 基金编号_基金名称
+		} else if ( href.indexOf('/financial/views/publicPlacement/publicDetail.html') != -1 ){
+			h5_info = getQueryString("fundCode") + '_' + ( document.querySelector('#HeadBarpathName').children[0] ? document.querySelector('#HeadBarpathName').children[0].innerHTML : '' );
 		}
 	} else {// 非点击情况（页面加载和退出）自定义埋点info
 		// 私募资产详情 项目id_项目名称
