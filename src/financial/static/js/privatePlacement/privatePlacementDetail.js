@@ -114,7 +114,6 @@ $(function() {
                     that.data.incomeModeJF = jsonData.incomeModeJF;
                     that.data.productRiskLevel = jsonData.productRiskLevel
                     //用户等级不匹配
-                    debugger
                     if(that.data.riskRank<that.data.productRiskLevel){
                         var obj = {
                             title: '提示',
