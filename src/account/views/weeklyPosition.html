@@ -28,12 +28,12 @@
             </div>
             <!-- 最新市值(元) -->
             <div class="be_confirmed_amount">
-                <div class="value tc show_item amount_value">33,331,634.87</div>
+                <div class="value tc show_item amount_value">0.00</div>
                 <div class="title tc">最新市值(元)</div>
             </div>
             <!-- 昨日总收益(元) -->
             <div class="first_h_profit_box">
-                <div class="h_profit_value tc show_item">31,357,883.95</div>
+                <div class="h_profit_value tc show_item">0.00</div>
                 <div class="h_profit tc">昨日总收益(元)</div>
             </div>
         </div>
@@ -59,7 +59,7 @@
         </div>
         <!-- <div class="divider"></div> -->
         <!-- 证券市场观点 -->
-        <div class="title_content bgWhite">
+        <div class="title_content bgWhite view_point_div">
             <div class="liLeft fl">证券市场观点</div>
             <span class="more fr viewpoint_more">查看更多
                 <!-- <span class="j_icon mui-icon mui-icon-arrowright" style=""></span> -->
@@ -100,9 +100,9 @@
                 <div class="bar_progressbar">
                     <span style="width:0%" ></span>
                 </div>
-                <div class="bar_num">{{price}}</div>
+                <div class="bar_num">{{marketValueRatio}}</div>
             </div>
-            <div class="bar_text">{{productName}}</div>
+            <div class="bar_text">{{projectName}}</div>
         </div>
         {{/each}} 
     </script>
@@ -113,22 +113,22 @@
         <div class="content_block bgWhite">
             <div class="text_content">
                 <div class="common_container">
-                    <div class="sub_title">{{productName}}</div>
+                    <div class="sub_title">{{projectName}}</div>
                     <div class="text">
                         {{productViewpoint}}
                         <span class="more jf product_more" data-fundCode={{projectCode}}>查看更多<span class="j_icon"></span></span>
                     </div>
                 </div>
-                <div class="common_container">
+                <div class="common_container line_chart_div">
                     <div class="chart_content">
                         <div class="dd_line_legend">
                             <span class="dd_line_title">盈亏走势图 :</span>
                             <span>
                                 <span class="dd_legend dd_red">本产品 
-                                    <span class="text_red show_item">{{prodPerformanceList.profitLossPercentage}}</span>
+                                    <span class="show_item">{{profitLossPercentageLast}}</span>
                                 </span>
                                 <span class="dd_legend dd_grey">沪深300 
-                                    <span class="text_green show_item">{{prodPerformanceList.hs300PerformancePercent}}</span>   
+                                    <span class="show_item">{{hs300PerformancePercentLast}}</span>   
                                 </span>
                             </span>
                         </div>
@@ -137,13 +137,16 @@
                         <!-- <div class="dd_lineNodata">暂无数据</div> -->
                     </div>
                 </div>
-                <div class="common_container">
-                    <div class="image_content" videoId={{pefConnectionList.videoId}}>
-                        <img src="/account/static/img/default.png" class="image lazyload" data-original="{{videoCoverUrl}}"/>
-                        <span class="play_icon"></span>
-                        <span class="title_bg"><span>私募联线回放</span></span>
+
+                    <div class="common_container video_url_div">
+                        <div class="image_content" videoId={{pefConnectionList.videoId}}>
+                            <img src="{{videoCoverUrl}}" class="image lazyload" data-original="{{videoCoverUrl}}"/>
+                            <span class="play_icon"></span>
+                            <span class="title_bg"><span>私募联线回放</span></span>
+                        </div>
                     </div>
-                </div>
+
+                    
             </div>
         </div>
         {{/each}} 

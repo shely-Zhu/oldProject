@@ -44,8 +44,8 @@ $(function() {
                 },
                 callbackDone: function (json) {
                     var jsonData = json.data
-                    that.$e.textBody.text(jsonData.productViewpoint)
                     that.$e.subTitle.text(jsonData.productName)
+                    that.$e.textBody.text(jsonData.productViewpoint)
                 },
                 callbackNoData: function () {
                     // $('.without.noData').show();

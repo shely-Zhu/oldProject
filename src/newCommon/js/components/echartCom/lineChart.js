@@ -38,6 +38,28 @@ module.exports = function(lineChartData,num,noData,tip, $e) {
     var second = lineChartData[num]["second"];
     var third = lineChartData[num]["third"];
     var flag = lineChartData[num]["position"];
+    var axisLabelInt = 0
+    if (flag && xArr.length != 0) {
+        if( xArr.length % 2 == 0 ){
+            // 6:4 4:2 2:0
+            if (xArr.length == 2) {
+                axisLabelInt = 0 
+            } else if (xArr.length == 4) {
+                axisLabelInt = 2
+            } else {
+                axisLabelInt = 4
+            }
+          }else{
+           //  7:2 5:3 3:0
+           if (xArr.length == 3 || xArr.length == 1) {
+            axisLabelInt = 0
+           }  else if (xArr.length == 5) {
+            axisLabelInt = 3
+           } else {
+            axisLabelInt = 2
+           }
+        }   
+    } 
     var name = tip;
 
     var option = {
@@ -79,10 +101,17 @@ module.exports = function(lineChartData,num,noData,tip, $e) {
             //position:'bottom',
             type: 'category',
             data: xArr,
-            axisLabel: {
+            axisLabel: flag ? {
                 //show: false,
                 //interval:Math.ceil(xArr.length / 3),
-                interval: xArr.length - 2,
+                interval: axisLabelInt,
+                // margin: 14,
+                textStyle: {
+                    color: '#7d7c7d'
+                },
+            } : {
+                //show: false,
+                //interval:Math.ceil(xArr.length / 3),
                 margin: 14,
                 textStyle: {
                     color: '#7d7c7d'

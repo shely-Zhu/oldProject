@@ -12,25 +12,48 @@ var mymessage = Mock.mock({
     "status": 0,
     "code": "CS0000",
     "msg": "处理成功！",
-    "data":{
-         "period":"3月9日-3月13日",
-         "marketValue": "33,331,634.87",
-         "totalShare": "31,357,883.95",
-         "marketView": "marketView",
-         "updateDate": "updateDate",
-         "list":[
-            {
-                 "productName":  "华润元大景泰A",// 产品名称
-                 "marketValueRatio":"100",
-                 "price":"66,666.52"
-            },
-            {
-               "productName":  "华润元大景泰A",// 产品名称
-               "marketValueRatio":"80",
-               "price":"66,666.52"
+    "data": {
+          "marketList": [
+          {
+               "marketValueRatio": "83.00%",
+               "projectName": "K1403"
+          },
+          {
+               "marketValueRatio": "100.00%",
+               "projectName": "勿动旭霞01(1)(2)(1)(1)(1)(1)(1)(1)"
+          },
+          {
+               "marketValueRatio": "83.00%",
+               "projectName": "K1403"
+          },
+          {
+               "marketValueRatio": "83.00%",
+               "projectName": "K1403"
+          },
+          {
+               "marketValueRatio": "76.00%",
+               "projectName": "勿动旭霞01(1)(2)(1)(1)(1)(1)"
+          },
+          {
+               "marketValueRatio": "76.00%",
+               "projectName": "勿动旭霞01(1)(2)(1)(1)(1)(1)"
+          },
+          {
+               "marketValueRatio": "100.00%",
+               "projectName": "罗全部简称"
+          },
+          {
+               "marketValueRatio": "100.00%",
+               "projectName": "0917_01K"
           }
-         ]
-	}
+          ],
+          "marketValue": 65950000.00,
+          "marketView": "市场观点市场观点市场观点市场观点",
+          "period": "04月06日-04月10日",
+          "totalShare": 59030000.00,
+          "updateDate": ""
+     },
+
     
 });
 module.exports=mymessage;

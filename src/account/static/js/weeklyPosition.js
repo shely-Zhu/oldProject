@@ -8,8 +8,8 @@
 
 require('@pathCommonBase/base.js');
 require('@pathCommonJs/ajaxLoading.js');
-var setCookie = require('@pathCommonJsCom/setCookie.js');
-var frozenAccount = require('@pathCommonJs/components/frozenAccount.js');
+// var setCookie = require('@pathCommonJsCom/setCookie.js');
+// var frozenAccount = require('@pathCommonJs/components/frozenAccount.js');
 require('@pathCommonCom/elasticLayer/elasticLayer/elasticLayer.js');
 var splitUrl = require('@pathCommonJs/components/splitUrl.js')();
 var generateTemplate = require('@pathCommonJsComBus/generateTemplate.js');
@@ -30,12 +30,7 @@ $(function() {
         },
         gV: { // 全局变量
             data: '', //请求到的总资产data
-            isShowInfo: true, //是否展示信息 默认展示
-            listLoading: $('.listLoading'), //所有数据区域，第一次加载的loading结构
-            list_template: '', //列表的模板，生成后存放在这里
-            noData: [
-                []
-            ], //保存画图数据
+            isShowInfo: true, //是否展示信息 默认展示           
             drawArr: {
                 1: {}
             }, //保存画图数据
@@ -43,7 +38,6 @@ $(function() {
         },
         init: function() {
             var that = this;
-            console.log(splitUrl['customerNo'])
             that.getData(); // 获取持仓周报信息
             that.event(); // 点击事件处理
         },
@@ -55,28 +49,38 @@ $(function() {
                     needLogin: true, //需要判断是否登陆
                     needLoading: false, // 接口请求完不隐藏loading
                     data: {
-                        customerNo: splitUrl['customerNo'] || "" // 客户编号
+                        customerNo: Number(splitUrl['customerNo']) || "" // 客户编号
                     },
                     callbackDone: function(json) { //成功后执行的函数
                         var jsonData = json.data
+                        var marketList = jsonData.marketList
                           // 市值构成 start
-                          generateTemplate(jsonData.list, that.$e.marketList, that.$e.marketTemplate);
+                          generateTemplate(marketList, that.$e.marketList, that.$e.marketTemplate);
                            // 市值构成 end
+                        //    view_point_div
                           
                           // 市场观点
-                        //   $('.get_marketView').html(jsonData.marketView)
-                        //   jsonData.list.forEach((item,v)=>{
-                        //     $(".bar_progressbar span").eq(v).css({'width':item.marketValueRatio+"%"})
-                        //   })
-                        for(var i = 0; i < jsonData.list.length; i++){
-                            $(".bar_progressbar span").eq(i).css({'width':jsonData.list[i].marketValueRatio+"%"})
+                        for(var i = 0; i < marketList.length; i++){
+                            $(".bar_progressbar span").eq(i).css({'width':marketList[i].marketValueRatio})
                         }
                         // var test2 = '客户持仓周报-证券投资'
                         $("#HeadBarpathName").html("<span>客户持仓周报-证券投资</span>" + "</br><span>" + jsonData.period + "</span>");
                         // 最新市值(元)
-                        $('.amount_value').html(jsonData.marketValue ? jsonData.marketValue : '--' );
+                        $('.amount_value').html(jsonData.marketValue ? jsonData.marketValue + ".00" : '--' );
                         //昨日总收益(元)
-                        $('.h_profit_value').html(jsonData.totalShare ? jsonData.totalShare : '--');
+                        $('.h_profit_value').html(jsonData.totalShare ? jsonData.totalShare + ".00" : '--');
+                        // get_marketView
+                        // 截取字符串,多出来的字符...显示
+                        var tempmarketView = ''
+                        if (jsonData.marketView.length <= 95) {
+                            tempmarketView = jsonData.marketView
+                            $('.viewpoint_more').addClass("hide");
+                        } else {
+                            tempmarketView = jsonData.marketView.substr(0,95) + "..."
+                        }
+                        $(".get_marketView").html(jsonData.marketView)
+                        
+
                     }
                 },
                 {
@@ -85,10 +89,18 @@ $(function() {
                     // needLoading: false, // 接口请求完不隐藏loading
                     // needDataEmpty: false,
                     data: {
-                        customerNo: splitUrl['customerNo'] || "" // 客户编号
+                        customerNo: Number(splitUrl['customerNo']) || "" // 客户编号
                     },
                     callbackDone: function (json) {
-                        var jsonData = json.data, num = 0 // 获取数据
+                        var jsonData = json.data // 获取数据
+                        // Handlebars.registerHelper('if_even', function(value, options) {
+                        //     // console.log(value.length)
+                        //     if(value == '' || value) {
+                        //         return false
+                        //     } else {
+                        //         return options.inverse(this);
+                        //     }
+                        // });
                         var tpl   =  $("#listTemplate").html();
                         // 预编译模板
                         var template = Handlebars.compile(tpl);
@@ -96,49 +108,66 @@ $(function() {
                         var html = template(jsonData.prodList);
                         // 插入模板到指定位置
                         $("#newsList").html(html); 
-
-                        // generateTemplate(jsonData.list, $($(""))that.$e.productList, that.$e.listTemplate);                       
-                        var drawArr = [{
-                            "xArr": ['周一', '周二', '周三'],
-                            "first": [120, 132, 101],
-                            "second": [-220, 182, -191],
-                            "position": true
-
-                        }]
-                        var flag = drawArr["position"]
-                        num = 0
-                        console.log(flag ? 1:0)
-                        // jsonData.prodList.forEach((item, v)=>{
-                        //     // console.log(item);
-                        //     if (item.productViewpoint.length <= 95) {
-                        //         item.productViewpoint = item.productViewpoint
-                        //     } else {
-                        //         item.productViewpoint = item.productViewpoint.substr(0,95)+"..."
-                        //     }
-                        //     lineChart(drawArr, num, that.gV.noData, '基金收益率', $($(".dd_line"))[v]);
-                        // });
+                        // 使用generateTemplate，echarts报错
+                        // generateTemplate(jsonData.list, $($(""))that.$e.productList, that.$e.listTemplate); 
                         
                         for(var i = 0; i < jsonData.prodList.length; i++){
-                            
                             var prodPerformanceList = jsonData.prodList[i].prodPerformanceList
+                            var xArr = [], first = [], second = [], drawArr = []
+                            // 摘数据重组成折线图数据
                             for ( var v = 0; v < prodPerformanceList.length; v++){
-                                if (prodPerformanceList[v].profitLossPercentage.indexOf("+") != -1) {
-                                    $(".dd_red span").eq(i).addClass("text_red").html(prodPerformanceList[v].profitLossPercentage)
-                                } else {
-                                    $(".dd_red span").eq(i).addClass("text_green").html(prodPerformanceList[v].profitLossPercentage)
+                                xArr.push(prodPerformanceList[v].profitLossDate)
+                                first.push(prodPerformanceList[v].profitLossPercentage)
+                                second.push(prodPerformanceList[v].hs300PerformancePercent)
+                                var tempObj = {
+                                    "xArr": xArr,//时间
+                                    "first": first,//本产品
+                                    "second": second,//沪深300
+                                    "position": true
                                 }
-                                if (prodPerformanceList[v].hs300PerformancePercent.indexOf("+") != -1) {
-                                    $(".dd_grey span").eq(i).addClass("text_red").html(prodPerformanceList[v].hs300PerformancePercent)
-                                } else {
-                                    $(".dd_grey span").eq(i).addClass("text_green").html(prodPerformanceList[v].hs300PerformancePercent)
-                                }
+                                drawArr.push(tempObj)
                             }
+                            // 本产品数据显示
+                            if (jsonData.prodList[i].profitLossPercentageLast.length != 0) {
+                                if (jsonData.prodList[i].profitLossPercentageLast.indexOf("-") != -1) {
+                                    $(".dd_red span").eq(i).addClass("text_green").html(jsonData.prodList[i].profitLossPercentageLast)
+                                } else {
+                                    $(".dd_red span").eq(i).addClass("text_red").html("+" + jsonData.prodList[i].profitLossPercentageLast)
+                                }
+                            } else {
+                                $(".dd_red").eq(i).addClass("hide")
+                            }
+                            // 300统计数据显示
+                            if (jsonData.prodList[i].hs300PerformancePercentLast.length != 0) {
+                                if (jsonData.prodList[i].hs300PerformancePercentLast.indexOf("-") != -1) {
+                                    $(".dd_grey span").eq(i).addClass("text_green").html(jsonData.prodList[i].hs300PerformancePercentLast)
+                                } else {
+                                    $(".dd_grey span").eq(i).addClass("text_red").html("+" + jsonData.prodList[i].hs300PerformancePercentLast)
+                                }
+                            } else {
+                                $(".dd_grey").eq(i).addClass("hide")
+                            }
+                            
+                            // 截取字符串,多出来的字符...显示
                             if (jsonData.prodList[i].productViewpoint.length <= 95) {
                                 jsonData.prodList[i].productViewpoint = jsonData.prodList[i].productViewpoint
+                                $('.product_more').eq(i).addClass("hide")
                             } else {
                                 jsonData.prodList[i].productViewpoint = jsonData.prodList[i].productViewpoint.substr(0,95) + "..."
                             }
-                            lineChart(drawArr, num, that.gV.noData, '', $($(".dd_line")[i]));
+
+                            // 如果本产品为空不显示折线图
+                            if (drawArr[i].first.length != 0){
+                                lineChart(drawArr, i, that.gV.noData, '', $($(".dd_line")[i]));
+                            } else {
+                                $(".line_chart_div").eq(i).addClass("hide")
+                            }
+
+                            // 联线是否显示
+                            if (jsonData.prodList[i].pefConnectionList.length==0) {
+                                $(".video_url_div").eq(i).addClass("hide")
+                            }
+
                         }
                     },
                     callbackFail: function(json) {
