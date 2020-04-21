@@ -64,7 +64,7 @@ h5Info = function(href, type, htmdEvt, eTarget){
 				}
 			}
 		//财富研究列表页文章点击
-		} else if( href.indexOf('/homePage/views/fortuneCollege/fortuneClassroom.html') != -1){
+		} else if( href.indexOf('/homePage/views/fortuneCollege/wealthResearch.html') != -1){
 			if( htmdEvt == 'wealthResearch_01'){
 				// 外链
 				if ($e.attr("externalUrl")) {
