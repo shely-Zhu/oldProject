@@ -63,7 +63,9 @@
             <div class="liLeft fl">证券市场观点</div>
             <span class="more fr viewpoint_more">查看更多
                 <!-- <span class="j_icon mui-icon mui-icon-arrowright" style=""></span> -->
-                <span class="j_icon"></span></span>
+                <span class="iconfont">&#xe68c;</span>
+                <!-- <span class="j_icon"></span> -->
+            </span>
         </div>
         <div class="content_block bgWhite">
             <div class="text_content">
@@ -100,7 +102,7 @@
                 <div class="bar_progressbar">
                     <span style="width:0%" ></span>
                 </div>
-                <div class="bar_num">{{marketValueRatio}}</div>
+                <div class="bar_num">{{marketValue}}</div>
             </div>
             <div class="bar_text">{{projectName}}</div>
         </div>
@@ -115,8 +117,11 @@
                 <div class="common_container">
                     <div class="sub_title">{{projectName}}</div>
                     <div class="text">
-                        {{productViewpoint}}
-                        <span class="more jf product_more" data-fundCode={{projectCode}}>查看更多<span class="j_icon"></span></span>
+                        <span class="text_productViewpoint">{{productViewpoint}}</span>
+                        <span class="more jf product_more" data-fundCode={{projectCode}}>查看更多
+                            <span class="iconfont">&#xe68c;</span>
+                            <!-- <span class="j_icon"></span> -->
+                        </span>
                     </div>
                 </div>
                 <div class="common_container line_chart_div">
@@ -138,15 +143,15 @@
                     </div>
                 </div>
 
+                {{#each pefConnectionList}}                
                     <div class="common_container video_url_div">
-                        <div class="image_content" videoId={{pefConnectionList.videoId}}>
+                        <div class="image_content" videoId={{videoId}}>
                             <img src="{{videoCoverUrl}}" class="image lazyload" data-original="{{videoCoverUrl}}"/>
                             <span class="play_icon"></span>
                             <span class="title_bg"><span>私募联线回放</span></span>
                         </div>
                     </div>
-
-                    
+                {{/each}}  
             </div>
         </div>
         {{/each}} 

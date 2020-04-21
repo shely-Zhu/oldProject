@@ -91,10 +91,10 @@ module.exports = function(lineChartData,num,noData,tip, $e) {
             containLabel: true,
             x:5,
             y:30,
-            // x2:30,
-            // y2:30,
-            x2: flag ? 0 : 30,
-            y2: flag ? 0 : 30,
+            x2:30,
+            y2:30,
+            // x2: flag ? 0 : 30,
+            // y2: flag ? 0 : 30,
             borderWidth:0//此处去掉那个白色边框
         },
         xAxis: [{
@@ -105,7 +105,7 @@ module.exports = function(lineChartData,num,noData,tip, $e) {
                 //show: false,
                 //interval:Math.ceil(xArr.length / 3),
                 interval: axisLabelInt,
-                // margin: 14,
+                margin: 14,
                 textStyle: {
                     color: '#7d7c7d'
                 },
