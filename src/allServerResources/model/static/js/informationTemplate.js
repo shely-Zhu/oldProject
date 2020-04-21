@@ -32,7 +32,6 @@ $(function() {
             } else {
                 $("#HeadBarpathName").html("<span>证券产品观点</span>");
             }
-            // console.log(splitUrl['projectId'])
         },
         getData: function () { // 获取标签
             var that = this;
@@ -44,7 +43,9 @@ $(function() {
                 },
                 callbackDone: function (json) {
                     var jsonData = json.data
-                    that.$e.subTitle.text(jsonData.productName)
+                    // console.log(jsonData.data.productName)
+                    // console.log(jsonData.productName)
+                    that.$e.subTitle.text(jsonData.projectShortname)
                     that.$e.textBody.text(jsonData.productViewpoint)
                 },
                 callbackNoData: function () {

@@ -1,5 +1,5 @@
 /*
- * @page: 其他资产
+ * @page: 持仓周报
  * @Author: 朱丙帅
  * @Date:   2019-11-19
  * @description:
@@ -42,6 +42,10 @@ html {
     font-size: .28rem;
     display: flex;
     align-items: center;
+    i{
+        color: @868e9e;
+        margin-left: -0.07rem
+    }
     .j_icon {
         width: 0.36rem;
         height: 0.36rem;
@@ -50,6 +54,7 @@ html {
         background-size: 100% 100%;
         display: inline-block;
         vertical-align: middle;
+        
     }
 }
 body,.mui-content{
@@ -264,9 +269,8 @@ body,.mui-content{
                 align-items: center;
             }
             .bar_progressbar{
-                flex:1; 
                 margin-right:.2rem;
-                // width:80%;
+                flex: 0 0 5.6rem;
                 span{
                     background:linear-gradient(119deg,rgba(247,198,146,1) 0%,rgba(183,123,61,1) 100%);
                     border-radius:0px 99px 100px 0px;
@@ -277,7 +281,7 @@ body,.mui-content{
             .bar_num{
                 color:#834A08;
                 font-size:.24rem;
-                // width: 20%;
+                flex:1; 
                 text-align: right;
             }
             .bar_text{

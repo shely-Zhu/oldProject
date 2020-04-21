@@ -119,7 +119,7 @@ $(function() {
                                     if (jsonData.prodList[i].profitLossPercentageLast.indexOf("-") != -1) {
                                         $(".dd_red span").eq(i).addClass("text_green").html(jsonData.prodList[i].profitLossPercentageLast)
                                     } else {
-                                        $(".dd_red span").eq(i).addClass("text_red").html("+" + jsonData.prodList[i].profitLossPercentageLast)
+                                        $(".dd_red span").eq(i).addClass("text_red").html(jsonData.prodList[i].profitLossPercentageLast)
                                     }
                                 } else {
                                     $(".dd_red").eq(i).addClass("hide")
@@ -130,18 +130,18 @@ $(function() {
                                     if (jsonData.prodList[i].hs300PerformancePercentLast.indexOf("-") != -1) {
                                         $(".dd_grey span").eq(i).addClass("text_green").html(jsonData.prodList[i].hs300PerformancePercentLast)
                                     } else {
-                                        $(".dd_grey span").eq(i).addClass("text_red").html("+" + jsonData.prodList[i].hs300PerformancePercentLast)
+                                        $(".dd_grey span").eq(i).addClass("text_red").html(jsonData.prodList[i].hs300PerformancePercentLast)
                                     }
                                 } else {
                                     $(".dd_grey").eq(i).addClass("hide")
                                 }
                             
                             // 截取字符串,多出来的字符...显示
-                            if (jsonData.prodList[i].productViewpoint.length <= 95) {
+                            if (jsonData.prodList[i].productViewpoint.length <= 85) {
                                 jsonData.prodList[i].productViewpoint = jsonData.prodList[i].productViewpoint
                                 $('.product_more').eq(i).addClass("hide")
                             } else {
-                                jsonData.prodList[i].productViewpoint = jsonData.prodList[i].productViewpoint.substr(0,95) + "..."
+                                jsonData.prodList[i].productViewpoint = jsonData.prodList[i].productViewpoint.substr(0,85) + "..."
                             }
                             $(".text_productViewpoint").eq(i).html(jsonData.prodList[i].productViewpoint)
                             // 如果本产品为空不显示折线图

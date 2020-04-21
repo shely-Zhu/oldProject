@@ -25,7 +25,7 @@ var mymessage = Mock.mock({
                 }
              ],
              "profitLossPercentageLast": "-5.88%",
-             "hs300PerformancePercentLast":'8.33%',
+             "hs300PerformancePercentLast":'+8.33%',
              "prodPerformanceList": [
                  {
                      "hs300PerformanceDate": "",

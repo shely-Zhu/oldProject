@@ -46,7 +46,7 @@ var mymessage = Mock.mock({
           },
           {
                "marketValueRatio": "100.00%",
-               "marketValue": "123",
+               "marketValue": "66,666.52",
                "projectName": "罗全部简称"
           },
           {
