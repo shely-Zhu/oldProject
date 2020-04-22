@@ -591,6 +591,15 @@ module.exports = function() {
     this.confirmationEle_url = go_url.no_url + '/account/views/confirmationEle.html';
     // 预约确认页面（非电子合同）
     this.confirmation_url = go_url.no_url + '/account/views/confirmation.html';
+    //市场活动
+    this.marketingActivity_url = go_url.no_url + '/homePage/views/marketingActivity/marketingActivity.html';
+
+    
+
+     // 持仓周报 by zhubingshuai
+     this.weeklyPosition_url = go_url.no_url + '/account/views/weeklyPosition.html';
+     // 产品观点 by zhubingshuai
+     this.informationTemplate_url = go_url.no_url + '/allServerResources/model/views/informationTemplate.html';
 
 
 };

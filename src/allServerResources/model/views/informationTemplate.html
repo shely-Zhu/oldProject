@@ -1,0 +1,33 @@
+<!--/**
+ * 信息披露
+ * @author  zhubingshuai 2020-04-09
+ */-->
+
+ <!doctype html>
+ <html lang="en">
+ <head>
+	@@include('@pathInclude/views/meta.html')
+	 <link rel="stylesheet" href="/allServerResources/model/static/css/informationTemplate.css">
+	   <title>证券市场观点</title> 
+ </head>
+ <body>
+	 <!-- 加载中loading -->
+	@@include('@pathCommonCom/loading/listLoading.html')
+ 
+	 <!-- 暂无数据 -->
+	@@include('@pathCommonCom/noData/noData.html', {"tipText": "暂无数据"})
+ 
+	@@include('@pathCommonViews/headBarConfig.html',{"pathName":"证券市场观点"})
+ 
+	 <div class="mui-content midContent prvMart"> 
+		 <!-- 放置页面内容 -->
+		 <div class="text_content bgWhite">
+			<div class="sub_title">--</div>
+			<div class="text text_body">--
+			</div>
+		 </div>
+	 </div>	
+ 
+	   @@include('@pathInclude/views/footer.html')  
+		 <script src="/allServerResources/model/static/js/informationTemplate.js"></script>
+ </body>

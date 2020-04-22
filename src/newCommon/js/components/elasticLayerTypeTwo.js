@@ -141,7 +141,7 @@
                 celEvent: function() {
                     var that = this;
                     that.$close.on('click', function() {
-                        window._submitMd && window._submitMd( 3, that.options.htmdEvtYes );
+                        window._submitMd && window._submitMd( 3, that.options.htmdEvtYes, this );
                         that.options.callback(that);
                         //关闭按钮事件即隐藏当前弹层
                         if (that.options.isHide) {

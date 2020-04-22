@@ -271,7 +271,7 @@ var pathList = {
 	"/account/views/SMSVerification.html": { evtid: 'SMSVerification', topic: '短信验证', info: ''} ,
 
 	/********************************* life end ***************************************/
-	"/allServerResources/model/views/articleTemplate.html" : { evtid: '36', topic: '活动模板', info: ''} ,
+	"/allServerResources/model/views/articleTemplate.html" : { evtid: 'articleTemplate', topic: '活动模板', info: ''} ,
 	"/wealthResources/otherAssets/views/otherAssets.html" :{ evtid: 'otherAssets', topic: '其他资产', info: ''} ,
 }
 
