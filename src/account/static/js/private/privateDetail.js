@@ -441,9 +441,9 @@ $(function() {
 			    	}
 			    },
 			    grid:{
-			    	top: '10%',
+					top: '10%',
 			    	left: '5%',
-			    	right: '10%',
+			    	right: '8%',
 			    	bottom: '10%',
 			    	containLabel: true
 			    },
