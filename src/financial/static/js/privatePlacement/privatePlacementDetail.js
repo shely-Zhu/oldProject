@@ -788,7 +788,7 @@ $(function() {
                 },
                 grid:{
 			    	top: '10%',
-			    	left: '4%',
+			    	left: '3%',
 			    	right: '10%',
 			    	bottom: '10%',
 			    	containLabel: true
