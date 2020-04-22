@@ -442,26 +442,30 @@ $(function() {
 			    },
 			    grid:{
 			    	top: '10%',
-			    	left: '5%',
-			    	right: '5%',
+			    	left: '4%',
+			    	right: '11%',
 			    	bottom: '10%',
 			    	containLabel: true
 			    },
 			    xAxis: {
 			    	type: 'category',
-			        data: xAxisData,
+					data: xAxisData,
+					// align:"right",
 			        axisLine: {
 			        	lineStyle: {
 			        		color: '#FADFBB'
 			        	}
 			        },
 			        axisLabel: {
-                        show: true,
+						show: true,
+                        showMaxLabel: true,
+						// padding:[0,0,0,4],
                         color: '#9B9B9B',   //这里用参数代替了
                         margin: 20
                     },
 			        axisTick: {
-			        	show: false
+						show: false,
+						length:4
 			        }
 			    },
 			    yAxis: {
