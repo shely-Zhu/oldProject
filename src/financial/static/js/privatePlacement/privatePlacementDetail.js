@@ -786,32 +786,32 @@ $(function() {
                         }
                     }
                 },
-                grid: {
-                    top: '10%',
-                    left: '5%',
-                    right: '5%',
-                    bottom: '10%',
-                    containLabel: true
-                },
-                xAxis: {
-                    type: 'category',
-                    data: xAxisData,
-                    axisLine: {
-                        lineStyle: {
-                            color: '#FADFBB',
-                            width:0.5 //横网格线粗细
-                        }
+                grid:{
+			    	top: '10%',
+			    	left: '4%',
+			    	right: '10%',
+			    	bottom: '10%',
+			    	containLabel: true
+			    },
+			    xAxis: {
+			    	type: 'category',
+					data: xAxisData,
+			        axisLine: {
+			        	lineStyle: {
+			        		color: '#FADFBB'
+			        	}
+			        },
+			        axisLabel: {
+						show: true,
+                        showMaxLabel: true,
+                        color: '#9B9B9B',   //这里用参数代替了
+                        margin: 20
                     },
-                    axisLabel: {
-                        show: true,
-                        color: '#9B9B9B', //这里用参数代替了
-                        margin: 20,
-                        padding:[0,14,0,4],
-                    },
-                    axisTick: {
-                        show: false
-                    }
-                },
+			        axisTick: {
+						show: false,
+						length:4
+			        }
+			    },
                 yAxis: {
                     axisTick: {
                         show: false
