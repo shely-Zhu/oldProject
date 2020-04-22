@@ -442,8 +442,8 @@ $(function() {
 			    },
 			    grid:{
 			    	top: '10%',
-			    	left: '4%',
-			    	right: '11%',
+			    	left: '5%',
+			    	right: '10%',
 			    	bottom: '10%',
 			    	containLabel: true
 			    },
