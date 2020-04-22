@@ -789,7 +789,7 @@ $(function() {
                 grid:{
 			    	top: '10%',
 			    	left: '0%',
-			    	right: '10%',
+			    	right: '9%',
 			    	bottom: '10%',
 			    	containLabel: true
 			    },
