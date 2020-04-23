@@ -69,7 +69,8 @@ $(function() {
             userStatus: "", // 为空则是新用户   为0普通投资者  为1专业投资者
             investorStatus: '' // 投资者状态
         },
-        fundType: splitUrl['fundType'] == '10300' || splitUrl['fundType'] == '10800' || splitUrl['fundType'] == '04'  ? 1 : 0, //10300 或者10800或者3（3的时候是从活期理财页面跳转过来的时候带过来的是3）货币基金类型，其余为普通基金类型
+        // fundType: splitUrl['fundType'] == '10300' || splitUrl['fundType'] == '10800' || splitUrl['fundType'] == '04'  ? 1 : 0, //10300 或者10800或者3（3的时候是从活期理财页面跳转过来的时候带过来的是3）货币基金类型，其余为普通基金类型
+        fundType:'', //10300 或者10800或者3（3的时候是从活期理财页面跳转过来的时候带过来的是3）货币基金类型，其余为普通基金类型
         fundComId: '', //基金公司ID
         secuId: '', // 基金编码
         chiName: '', // 基金名称
@@ -105,7 +106,8 @@ $(function() {
                     that.chiName = json.data.chiName ? json.data.chiName : '中融货币市场基金';
 
                     that.gV.json = json.data;
-                    that.gV.json.fundType = that.fundType;
+                    that.fundType = json.data.invTypCom == '10300' || json.data.invTypCom == '10300'  ? 1 : 0 ;
+                    that.gV.json.fundType = that.fundType
                     that.gV.json.chgRat1d = that.gV.json.chgRat1d.toFixed(2);
                     if (that.gV.json.chgRat1d > 0) {
                         that.gV.json.chgRat1d_s = '+' + Number(that.gV.json.chgRat1d).toFixed(2)
@@ -129,7 +131,6 @@ $(function() {
                     if (that.gV.json.trDate) {
                         that.gV.json.trDate = that.gV.json.trDate.slice(5)
                     }
-                    that.gV.json.fundType = that.fundType
                     that.gV.invTypCom = json.data.invTypCom
                     that.gV.secuSht = json.data.secuSht
                     that.gV.fundStatus= json.data.fundStatus
