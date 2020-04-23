@@ -106,7 +106,7 @@ $(function() {
                     that.chiName = json.data.chiName ? json.data.chiName : '中融货币市场基金';
 
                     that.gV.json = json.data;
-                    that.fundType = json.data.invTypCom == '10300' || json.data.invTypCom == '10300'  ? 1 : 0 ;
+                    that.fundType = json.data.invTypCom == '10300' || json.data.invTypCom == '10800'  ? 1 : 0 ;
                     that.gV.json.fundType = that.fundType
                     that.gV.json.chgRat1d = that.gV.json.chgRat1d.toFixed(2);
                     if (that.gV.json.chgRat1d > 0) {
