@@ -33,6 +33,7 @@ module.exports = function(lineChartData,num,noData,tip, $e) {
     var showData = true;
 
     var xArr = lineChartData[num].xArr;
+    console.log(xArr.length)
     // 累计净值
     var first = lineChartData[num]["first"];
     var second = lineChartData[num]["second"];
@@ -50,16 +51,17 @@ module.exports = function(lineChartData,num,noData,tip, $e) {
                 axisLabelInt = 4
             }
           }else{
-           //  7:2 5:3 3:0
+           //  7:2 5:1 3:0
            if (xArr.length == 3 || xArr.length == 1) {
             axisLabelInt = 0
            }  else if (xArr.length == 5) {
-            axisLabelInt = 3
+            axisLabelInt = 1
            } else {
             axisLabelInt = 2
            }
         }   
     } 
+    console.log(axisLabelInt)
     var name = tip;
 
     var option = {
@@ -103,7 +105,7 @@ module.exports = function(lineChartData,num,noData,tip, $e) {
             data: xArr,
             axisLabel: flag ? {
                 //show: false,
-                //interval:Math.ceil(xArr.length / 3),
+                // interval:4,
                 interval: axisLabelInt,
                 margin: 14,
                 textStyle: {
@@ -140,12 +142,13 @@ module.exports = function(lineChartData,num,noData,tip, $e) {
             min: "dataMin",
             axisLine: {
                 lineStyle: {
-                    color: '#eee'
+                    color: '#eee',
                 }
             },
             splitLine: {
                 lineStyle: {
                     color: '#eee'
+                    // type: flag ? 'dashed' : "solid"
                 }
             },
             axisLabel: {
@@ -174,7 +177,7 @@ module.exports = function(lineChartData,num,noData,tip, $e) {
             lineStyle: {
                 normal: {
                     // color: '#fb685c'
-                    color: flag ? 'red' : '#fb685c'
+                    color: '#fb685c'
                 }
             },
             itemStyle: {
@@ -192,7 +195,7 @@ module.exports = function(lineChartData,num,noData,tip, $e) {
             lineStyle: {
                 normal: {
                     // color: '#60b0e0'
-                    color: flag ? 'grey' : '#60b0e0'
+                    color: flag ? '#131364' : '#60b0e0'
                 }
             },
             itemStyle: {

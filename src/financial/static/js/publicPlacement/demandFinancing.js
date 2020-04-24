@@ -5,6 +5,9 @@
  * @LastEditors  : Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \htjf-app\src\financial\static\js\publicPlacement\demandFinancing.js
+ * updater chentiancheng
+ * 2020年4月24日11:20:39
+ * 删除fundType入参
  */
 require('@pathCommonBase/base.js');
 require('@pathCommonJsCom/tabScroll.js');
@@ -98,7 +101,7 @@ $(function(){
                 if(cash == "false"){
                      //跳往基金详情页
                        window.location.href = site_url.pofPublicDetail_url + 
-                      '?fundCode=' + $(this).attr('fundCode') + '&fundType=' + $(this).attr('fundType') + '&deviceId=' + splitUrl['deviceId'];
+                      '?fundCode=' + $(this).attr('fundCode') + '&deviceId=' + splitUrl['deviceId'];
                 }else if(cash == "true"){
                     //超宝详情
                     window.location.href=site_url.superStreasureDetail_url + '?fundCode=' + $(this).attr('fundCode');

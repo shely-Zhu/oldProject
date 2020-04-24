@@ -21,10 +21,10 @@ $(function() {
 
     var somePage = {
         $e: {
-            marketList: $('.marketCapitalList'), // 市值列表
+            marketList: $('#marketCapitalList'), // 市值列表
             marketTemplate: $('#marketTemplate'), // 市值构成temp
-            productList: $('.newsList'), // 产品列表
-            listTemplate: $('#listTemplate'), // 产品temp
+            // productList: $('.newsList'), // 产品列表
+            // listTemplate: $('#listTemplate'), // 产品temp
             listLoading: $('.listLoading'), //所有数据区域，第一次加载的loading结构
             noData: $('.noData'), //没有数据的结构
         },
@@ -49,36 +49,36 @@ $(function() {
                     needLogin: true, //需要判断是否登陆
                     needLoading: false, // 接口请求完不隐藏loading
                     data:{},
-                    // data: {
-                    //     customerNo: Number(splitUrl['customerNo']) || "" // 客户编号
-                    // },
                     callbackDone: function(json) { //成功后执行的函数
                         var jsonData = json.data
                         var marketList = jsonData.marketList
-                          // 市值构成 start
-                          generateTemplate(marketList, that.$e.marketList, that.$e.marketTemplate);
-                           // 市值构成 end
-                        //    view_point_div
-                          // 市场观点
+                        generateTemplate(marketList, that.$e.marketList, that.$e.marketTemplate);
+                        // 市场观点
                         for(var i = 0; i < marketList.length; i++){
-                            $(".bar_progressbar span").eq(i).css({'width':marketList[i].marketValueRatio})
+                            var tempValue = parseFloat(marketList[i].marketValueRatio)
+                            mui($(".bar_progressbar").eq(i)).progressbar({progress:tempValue}).show();
                         }
-                        // var test2 = '客户持仓周报-证券投资'
-                        $("#HeadBarpathName").html("<span>客户持仓周报-证券投资</span>" + "</br><span>" + jsonData.period + "</span>");
+
                         // 最新市值(元)
-                        $('.amount_value').html(jsonData.marketValue ? jsonData.marketValue + ".00" : '--' );
+                        $('.amount_value').html(jsonData.marketValue ? jsonData.marketValue : '--' );
                         //昨日总收益(元)
-                        $('.h_profit_value').html(jsonData.totalShare ? jsonData.totalShare + ".00" : '--');
-                        // get_marketView
+                        $('.h_profit_value').html(jsonData.totalShare ? jsonData.totalShare : '--');
+                        $(".j_date").html(jsonData.period ? jsonData.period : '--')
+                        
                         // 截取字符串,多出来的字符...显示
                         var tempmarketView = ''
-                        if (jsonData.marketView.length <= 95) {
-                            tempmarketView = jsonData.marketView
-                            $('.viewpoint_more').addClass("hide");
+                        if (jsonData.marketView.length !== 0) {
+                            if (jsonData.marketView.length <= 90) {
+                                tempmarketView = jsonData.marketView
+                                $('.viewpoint_more').addClass("hide");
+                            } else {
+                                tempmarketView = jsonData.marketView.substr(0,90) + "..."
+                            }
+                            $(".get_marketView").html(tempmarketView)
                         } else {
-                            tempmarketView = jsonData.marketView.substr(0,95) + "..."
+                            // $(".j_market_p").addClass("hide");
                         }
-                        $(".get_marketView").html(jsonData.marketView)
+                       
                     }
                 },
                 {
@@ -102,24 +102,36 @@ $(function() {
                             var prodPerformanceList = jsonData.prodList[i].prodPerformanceList
                             var xArr = [], first = [], second = [], drawArr = []
                             // 摘数据重组成折线图数据
-                            for ( var v = 0; v < prodPerformanceList.length; v++){
-                                xArr.push(prodPerformanceList[v].profitLossDate)
-                                first.push(prodPerformanceList[v].profitLossPercentage)
-                                second.push(prodPerformanceList[v].hs300PerformancePercent)
-                                var tempObj = {
-                                    "xArr": xArr,//时间
-                                    "first": first,//本产品
-                                    "second": second,//沪深300
-                                    "position": true
+                            if (prodPerformanceList.length <= 2) {
+                                for ( var v = 0; v < prodPerformanceList.length; v++){
+                                    xArr.push(prodPerformanceList[v].profitLossDate)
+                                    first.push(prodPerformanceList[v].profitLossPercentage)
+                                    second.push(prodPerformanceList[v].hs300PerformancePercent)
+                                    var tempObj = {
+                                        "xArr": xArr,//时间
+                                        "first": first,//本产品
+                                        "second": second,//沪深300
+                                        "position": true
+                                    }
+                                    drawArr.push(tempObj)
                                 }
-                                drawArr.push(tempObj)
+                                // 如果本产品为空不显示折线图
+                                if (drawArr[i].first.length != 0){
+                                    lineChart(drawArr, i, that.gV.noData, '', $($(".dd_line")[i]));
+                                } else {
+                                    $(".line_chart_wrap").eq(i).addClass("hide")
+                                }
+
+                            } else {
+                                $(".line_chart_wrap").eq(i).addClass("hide")
                             }
+                            
                             // 本产品数据显示
                                 if (jsonData.prodList[i].profitLossPercentageLast.length != 0) {
                                     if (jsonData.prodList[i].profitLossPercentageLast.indexOf("-") != -1) {
                                         $(".dd_red span").eq(i).addClass("text_green").html(jsonData.prodList[i].profitLossPercentageLast)
                                     } else {
-                                        $(".dd_red span").eq(i).addClass("text_red").html(jsonData.prodList[i].profitLossPercentageLast)
+                                        $(".dd_red span").eq(i).addClass("text_green").html("+" + jsonData.prodList[i].profitLossPercentageLast)
                                     }
                                 } else {
                                     $(".dd_red").eq(i).addClass("hide")
@@ -130,30 +142,24 @@ $(function() {
                                     if (jsonData.prodList[i].hs300PerformancePercentLast.indexOf("-") != -1) {
                                         $(".dd_grey span").eq(i).addClass("text_green").html(jsonData.prodList[i].hs300PerformancePercentLast)
                                     } else {
-                                        $(".dd_grey span").eq(i).addClass("text_red").html(jsonData.prodList[i].hs300PerformancePercentLast)
+                                        $(".dd_grey span").eq(i).addClass("text_green").html("+" + jsonData.prodList[i].hs300PerformancePercentLast)
                                     }
                                 } else {
                                     $(".dd_grey").eq(i).addClass("hide")
                                 }
                             
                             // 截取字符串,多出来的字符...显示
-                            if (jsonData.prodList[i].productViewpoint.length <= 85) {
+                            if (jsonData.prodList[i].productViewpoint.length <= 90) {
                                 jsonData.prodList[i].productViewpoint = jsonData.prodList[i].productViewpoint
                                 $('.product_more').eq(i).addClass("hide")
                             } else {
-                                jsonData.prodList[i].productViewpoint = jsonData.prodList[i].productViewpoint.substr(0,85) + "..."
+                                jsonData.prodList[i].productViewpoint = jsonData.prodList[i].productViewpoint.substr(0,90) + "..."
                             }
                             $(".text_productViewpoint").eq(i).html(jsonData.prodList[i].productViewpoint)
-                            // 如果本产品为空不显示折线图
-                            if (drawArr[i].first.length != 0){
-                                lineChart(drawArr, i, that.gV.noData, '', $($(".dd_line")[i]));
-                            } else {
-                                $(".line_chart_div").eq(i).addClass("hide")
-                            }
-
+                            
                             // 联线是否显示
                             if (jsonData.prodList[i].pefConnectionList.length == 0) {
-                                $(".video_url_div").eq(i).addClass("hide")
+                                $(".video_body").eq(i).addClass("hide")
                             }
                         }
                     },
@@ -180,14 +186,12 @@ $(function() {
 			// 产品观点more事件
 			mui("body").on('mdClick', '.product_more', function() {
                var projectCode = $(this).attr("data-fundCode")
-            //    console.log(projectCode)
-               window.location.href = site_url.informationTemplate_url + '?viewpoint=0&projectCode=' + projectCode;
+                window.location.href = site_url.informationTemplate_url + '?viewpoint=0&projectCode=' + projectCode;
             }, {
-				'htmdEvt': 'productViewPoint_0'
+                'htmdEvt': 'productViewPoint_0'
             })
             // 播放器
              mui("body").on('mdClick', '.image_content' , function(){
-                 console.log($(this).attr("videoId"))
                 window.location.href = site_url.privatePlacementDetailJumpVideo_url+"?cid=" + $(this).attr("videoId")
             },{
                 'htmdEvt': 'weeklyPositionProductPlay_0'
