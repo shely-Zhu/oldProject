@@ -119,24 +119,25 @@ $(function() {
                             var obj = {
                                 title: '提示',
                                 id: 'tipIcon',
-                                p: '访问失败，您查看产品的风险等级与您可承受风险等级不匹配',
-                                yesTxt: '知道了',
+                                p: '<p>您的风险测评等级与该产品风险等级不匹配，请您查看与您风险测评等级相匹配的产品</p><p>如果您近期个人信息已发生变化，请您根据实际情况重新测评</p>',
+                                yesTxt: '重新测评',
+                                celTxt: '其他产品',
+                                hideCelButton: false,
                                 zIndex: 100,
-                                hideCelButton: true, //为true时隐藏cel按钮，仅使用yes按钮的所有属性
                                 callback: function(t) {
-                                    
+                                    window.location.href = site_url.riskAppraisal_url + '?type=private';
+                                },
+                                callbackCel: function() {
                                     if (window.isAndroid) {
                                         //这个是安卓操作系统
                                         window.jsObj.backNative();
                                     }
-                                    // window.isIOS是在root文件中定义的变量
                                     if (window.isIOS) {
                                         //这个是ios操作系统
-                                        // window.webkit.messageHandlers.backNative.postMessage(JSON.stringify({ "type": "backNative" }));
                                         window.webkit.messageHandlers.backNative.postMessage("backNative" );
                                     }
-                                    t.hide();     
-                                },
+                                    t.hide();  
+                                }
                             };
                             $.elasticLayer(obj);
                         }
