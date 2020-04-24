@@ -5,6 +5,10 @@
  * 页面进来数据是从session中拿，所以需要先到自选公募持仓详情页(account/views/publicAssets.html)点某条数据，将数据存到session中，再到这个页面才会有数据
  * projectType: 
  * 0：货币（对应type_1)  1：非货币 
+ * updater
+ * chentiancheng
+ * 2020年4月24日10:21:24
+ * 删除公募详情入参fundType
  */
 
 
@@ -865,7 +869,7 @@ $(function() {
             })
 //			头部详情跳转
 			mui("body").on('mdClick', '#customerService', function() {
-				window.location.href = site_url.pofPublicDetail_url + "?fundCode=" + that.data.fundCode + "&fundType=" + that.data.projectType;
+				window.location.href = site_url.pofPublicDetail_url + "?fundCode=" + that.data.fundCode ;
 			},{
                 'htmdEvt': 'optionalPublicDetail_7'
             })

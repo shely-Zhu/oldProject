@@ -1,6 +1,9 @@
 /**
  * 我的定投_定投详情 js
  * @author 蔡文琦  2019-11-23
+ * updater chentiancheng 
+ * 2020年4月24日11:18:10
+ * 删除fundType入参
  */
 require('@pathCommonBase/base.js');
 

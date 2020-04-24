@@ -804,7 +804,8 @@ $(function() {
 				            htmdEvtYes:'privateDetail_14',  // 埋点确定按钮属性
 				            htmdEvtCel:'privateDetail_15',  // 埋点取消按钮属性
 				            callback: function() {
-				            	var type = that.data.projectType==0?1:2
+				            	var type = that.data.projectType==0?1:2;
+				            	that.data.redeemClickFlag = true;
 								window.location.href = site_url.privateRedeem_url + '?projectId=' + that.data.projectId + '&redeemPartion=' + that.data.redeemPartion + '&type=' + type;
 				            },
 				            callbackCel: function() {
