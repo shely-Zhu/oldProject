@@ -9,6 +9,9 @@
 * 如果articleBelong也就是归属只有一个。那么只需要传articleBelong即可。id为空也可以。有值传过来也可以。
 * articleBelong为后台配置该条信息对应的articleBelong
 * applyType不需要传
+* updater chentiancheng
+* 2020年4月24日10:36:18
+* 删除公募详情入参fundType  
 */
 
 require('@pathCommonBase/base.js');
@@ -184,7 +187,7 @@ $(function () {
 
                 } else if (that.recomTypes == "2") {
 
-                    window.location.href = site_url.pofPublicDetail_url + "?fundCode=" + that.gV.fundCode + "&fundType=10300";//货币型普通基金
+                    window.location.href = site_url.pofPublicDetail_url + "?fundCode=" + that.gV.fundCode;//货币型普通基金
 
                 } else if (that.recomTypes == "3") {//私募产品详情页
 

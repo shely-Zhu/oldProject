@@ -3,7 +3,7 @@
  *
  * @author shiyunrui 20191123
  * update:chentiancheng
- * 2020年1月11日21:03:10
+ * 2020年4月24日10:07:17
  * 具体可以参考 privateDetail.js
  *
  */
@@ -69,8 +69,7 @@ $(function() {
             userStatus: "", // 为空则是新用户   为0普通投资者  为1专业投资者
             investorStatus: '' // 投资者状态
         },
-        // fundType: splitUrl['fundType'] == '10300' || splitUrl['fundType'] == '10800' || splitUrl['fundType'] == '04'  ? 1 : 0, //10300 或者10800或者3（3的时候是从活期理财页面跳转过来的时候带过来的是3）货币基金类型，其余为普通基金类型
-        fundType:'', //10300 或者10800或者3（3的时候是从活期理财页面跳转过来的时候带过来的是3）货币基金类型，其余为普通基金类型
+        fundType:'', //基金类型，已改为从接口获取字段currencyFlag:货币基金标记：1.是；0.否 v4.5.0
         fundComId: '', //基金公司ID
         secuId: '', // 基金编码
         chiName: '', // 基金名称
@@ -106,7 +105,7 @@ $(function() {
                     that.chiName = json.data.chiName ? json.data.chiName : '中融货币市场基金';
 
                     that.gV.json = json.data;
-                    that.fundType = json.data.currencyFlag; //货币基金标记：true，是；false：否
+                    that.fundType = json.data.currencyFlag; //货币基金标记：1，是；0：否
                     that.gV.json.fundType = that.fundType
                     that.gV.json.chgRat1d = that.gV.json.chgRat1d.toFixed(2);
                     if (that.gV.json.chgRat1d > 0) {
