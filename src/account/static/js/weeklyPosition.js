@@ -102,18 +102,30 @@ $(function() {
                             var prodPerformanceList = jsonData.prodList[i].prodPerformanceList
                             var xArr = [], first = [], second = [], drawArr = []
                             // 摘数据重组成折线图数据
-                            for ( var v = 0; v < prodPerformanceList.length; v++){
-                                xArr.push(prodPerformanceList[v].profitLossDate)
-                                first.push(prodPerformanceList[v].profitLossPercentage)
-                                second.push(prodPerformanceList[v].hs300PerformancePercent)
-                                var tempObj = {
-                                    "xArr": xArr,//时间
-                                    "first": first,//本产品
-                                    "second": second,//沪深300
-                                    "position": true
+                            if (prodPerformanceList.length <= 2) {
+                                for ( var v = 0; v < prodPerformanceList.length; v++){
+                                    xArr.push(prodPerformanceList[v].profitLossDate)
+                                    first.push(prodPerformanceList[v].profitLossPercentage)
+                                    second.push(prodPerformanceList[v].hs300PerformancePercent)
+                                    var tempObj = {
+                                        "xArr": xArr,//时间
+                                        "first": first,//本产品
+                                        "second": second,//沪深300
+                                        "position": true
+                                    }
+                                    drawArr.push(tempObj)
                                 }
-                                drawArr.push(tempObj)
+                                // 如果本产品为空不显示折线图
+                                if (drawArr[i].first.length != 0){
+                                    lineChart(drawArr, i, that.gV.noData, '', $($(".dd_line")[i]));
+                                } else {
+                                    $(".line_chart_wrap").eq(i).addClass("hide")
+                                }
+
+                            } else {
+                                $(".line_chart_wrap").eq(i).addClass("hide")
                             }
+                            
                             // 本产品数据显示
                                 if (jsonData.prodList[i].profitLossPercentageLast.length != 0) {
                                     if (jsonData.prodList[i].profitLossPercentageLast.indexOf("-") != -1) {
@@ -144,12 +156,7 @@ $(function() {
                                 jsonData.prodList[i].productViewpoint = jsonData.prodList[i].productViewpoint.substr(0,90) + "..."
                             }
                             $(".text_productViewpoint").eq(i).html(jsonData.prodList[i].productViewpoint)
-                            // 如果本产品为空不显示折线图
-                            if (drawArr[i].first.length != 0){
-                                lineChart(drawArr, i, that.gV.noData, '', $($(".dd_line")[i]));
-                            } else {
-                                $(".line_chart_wrap").eq(i).addClass("hide")
-                            }
+                            
                             // 联线是否显示
                             if (jsonData.prodList[i].pefConnectionList.length == 0) {
                                 $(".video_body").eq(i).addClass("hide")
