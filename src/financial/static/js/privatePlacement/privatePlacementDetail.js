@@ -17,6 +17,7 @@ require('@pathCommonBase/base.js');
 require('@pathCommonJs/ajaxLoading.js');
 
 // require('@pathCommonJsCom/headBarConfig.js');
+var goBack = require('@pathCommonJsCom/goBack.js');
 
 var splitUrl = require('@pathCommonJs/components/splitUrl.js')();
 var generateTemplate = require('@pathCommonJsComBus/generateTemplate.js');
@@ -124,19 +125,12 @@ $(function() {
                                 celTxt: '其他产品',
                                 hideCelButton: false,
                                 zIndex: 100,
+                                celIsHide:false,
                                 callback: function(t) {
                                     window.location.href = site_url.riskAppraisal_url + '?type=private';
                                 },
                                 callbackCel: function() {
-                                    if (window.isAndroid) {
-                                        //这个是安卓操作系统
-                                        window.jsObj.backNative();
-                                    }
-                                    if (window.isIOS) {
-                                        //这个是ios操作系统
-                                        window.webkit.messageHandlers.backNative.postMessage("backNative" );
-                                    }
-                                    t.hide();  
+                                    goBack()
                                 }
                             };
                             $.elasticLayer(obj);
