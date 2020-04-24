@@ -25,7 +25,7 @@ var mymessage = Mock.mock({
                 }
              ],
              "profitLossPercentageLast": "-5.88%",
-             "hs300PerformancePercentLast":'+8.33%',
+             "hs300PerformancePercentLast":'8.33%',
              "prodPerformanceList": [
                  {
                      "hs300PerformanceDate": "",
@@ -111,7 +111,7 @@ var mymessage = Mock.mock({
                  }
              ],
              "profitLossPercentageLast": "-5.88%",
-             "hs300PerformancePercentLast":'+5.88%',
+             "hs300PerformancePercentLast":'5.88%',
              "productViewpoint": "证券是多种经济权益凭证的统称，也指专门的种类产品，是用来证明券票持有人享有的某种特定权益的法律凭证。 [1] 主要包括资本证券、货币证券和商品证券等。狭义上的证券主要指的是证券主要包括资本证券、货币证券和商品证券等。狭义上的证券主要指的是证券",
              "projectCode": 20301,
              "projectName": "v114"

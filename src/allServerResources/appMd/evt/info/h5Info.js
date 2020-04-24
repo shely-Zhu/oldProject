@@ -89,6 +89,16 @@ h5Info = function(href, type, htmdEvt, eTarget){
 		// 公募产品详情 基金编号_基金名称
 		} else if ( href.indexOf('/financial/views/publicPlacement/publicDetail.html') != -1 ){
 			h5_info = getQueryString("fundCode") + '_' + ( document.querySelector('#HeadBarpathName').children[0] ? document.querySelector('#HeadBarpathName').children[0].innerHTML : '' );
+		} else if (href.indexOf('/account/views/weeklyPosition.html') != -1) {
+			// add by zhubingshuai
+			// 当个产品观点
+			if( htmdEvt == 'productViewPoint_0'){
+				h5_info = "/allServerResources/model/views/informationTemplate.html?viewpoint=0&projectCode=" + $e.attr("projectCode");
+			}
+			// 单个视频ID
+			if( htmdEvt == 'weeklyPositionProductPlay_0'){
+				h5_info = "/financial/views/privatePlacement/privatePlacementDetailJumpVideo.html?cid=" + $e.attr("videoId");
+			}
 		}
 	} else {// 非点击情况（页面加载和退出）自定义埋点info
 		// 私募资产详情 项目id_项目名称
