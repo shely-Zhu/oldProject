@@ -56,7 +56,7 @@ var mymessage = Mock.mock({
           }
           ],
           "marketValue": "565,950,000.00",
-          "marketView": "证券是多种经济权益凭证的统称，也指专门的种类产品，是用来证明券票持有人享有的某种特定",
+          "marketView": "",
           "period": "04月06日-04月10日",
           "totalShare": "31,357,888,395.00",
           "updateDate": ""

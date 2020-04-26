@@ -24,13 +24,13 @@ var mymessage = Mock.mock({
                     "videoSpeaker": "黄达"
                 }
              ],
-             "profitLossPercentageLast": "-5.88%",
-             "hs300PerformancePercentLast":'8.33%',
+             "profitLossPercentageLast": "-5.88",
+             "hs300PerformancePercentLast":'8.33',
              "prodPerformanceList": [
                  {
                      "hs300PerformanceDate": "",
                      "hs300PerformancePercent": "-5.88",
-                     "profitLossDate": "2020/03/13",
+                     "profitLossDate": "03/13",
                      "profitLossPercentage": "12.50"
                  }
              ],
@@ -52,36 +52,36 @@ var mymessage = Mock.mock({
                  {
                      "hs300PerformanceDate": "",
                      "hs300PerformancePercent": "-5.88",
-                     "profitLossDate": "2020/03/13",
+                     "profitLossDate": "03/13",
                      "profitLossPercentage": "12.50"
                  },
                  {
                      "hs300PerformanceDate": "",
                      "hs300PerformancePercent": "-6.21",
-                     "profitLossDate": "2020/03/20",
+                     "profitLossDate": "03/20",
                      "profitLossPercentage": "11.11"
                  },
                  {
                      "hs300PerformanceDate": "",
                      "hs300PerformancePercent": "1.56",
-                     "profitLossDate": "2020/03/27",
+                     "profitLossDate": "03/27",
                      "profitLossPercentage": "10.00"
                  },
                  {
                      "hs300PerformanceDate": "",
                      "hs300PerformancePercent": "0.09",
-                     "profitLossDate": "2020/04/03",
+                     "profitLossDate": "04/03",
                      "profitLossPercentage": "9.09"
                  },
                  {
                      "hs300PerformanceDate": "",
                      "hs300PerformancePercent": "0.9",
-                     "profitLossDate": "2020/04/10",
+                     "profitLossDate": "04/10",
                      "profitLossPercentage": "8.33"
                  }
              ],
-             "profitLossPercentageLast": "-5.88%",
-             "hs300PerformancePercentLast":'5.88%',
+             "profitLossPercentageLast": "-5.88",
+             "hs300PerformancePercentLast":'5.88',
              "productViewpoint": "证券是多种经济权益凭证的统称，也指专门的种类产品，是用来证明券票持有人享有的某种特定权益的法律凭证。 [1] 主要包括资本证券、货币证券和商品证券等。狭义上的证券主要指的是证券主要包括资本证券、货币证券和商品证券等。狭义上的证券主要指的是证券",
              "projectCode": 20301,
              "projectName": "v114"
