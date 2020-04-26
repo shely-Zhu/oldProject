@@ -68,15 +68,15 @@ $(function() {
                         // 截取字符串,多出来的字符...显示
                         var tempmarketView = ''
                         if (jsonData.marketView.length !== 0) {
-                            if (jsonData.marketView.length <= 90) {
+                            if (jsonData.marketView.length <= 85) {
                                 tempmarketView = jsonData.marketView
                                 $('.viewpoint_more').addClass("hide");
                             } else {
-                                tempmarketView = jsonData.marketView.substr(0,90) + "..."
+                                tempmarketView = jsonData.marketView.substr(0,85) + "..."
                             }
                             $(".get_marketView").html(tempmarketView)
                         } else {
-                            // $(".j_market_p").addClass("hide");
+                            $(".j_market_p").addClass("hide");
                         }
                        
                     }
@@ -129,9 +129,9 @@ $(function() {
                             // 本产品数据显示
                                 if (jsonData.prodList[i].profitLossPercentageLast.length != 0) {
                                     if (jsonData.prodList[i].profitLossPercentageLast.indexOf("-") != -1) {
-                                        $(".dd_red span").eq(i).addClass("text_green").html(jsonData.prodList[i].profitLossPercentageLast)
+                                        $(".dd_red span").eq(i).addClass("text_green").html(jsonData.prodList[i].profitLossPercentageLast + "%")
                                     } else {
-                                        $(".dd_red span").eq(i).addClass("text_green").html("+" + jsonData.prodList[i].profitLossPercentageLast)
+                                        $(".dd_red span").eq(i).addClass("text_red").html("+" + jsonData.prodList[i].profitLossPercentageLast + "%")
                                     }
                                 } else {
                                     $(".dd_red").eq(i).addClass("hide")
@@ -140,20 +140,20 @@ $(function() {
                             // 300统计数据显示
                                 if (jsonData.prodList[i].hs300PerformancePercentLast.length != 0) {
                                     if (jsonData.prodList[i].hs300PerformancePercentLast.indexOf("-") != -1) {
-                                        $(".dd_grey span").eq(i).addClass("text_green").html(jsonData.prodList[i].hs300PerformancePercentLast)
+                                        $(".dd_grey span").eq(i).addClass("text_green").html(jsonData.prodList[i].hs300PerformancePercentLast + "%")
                                     } else {
-                                        $(".dd_grey span").eq(i).addClass("text_green").html("+" + jsonData.prodList[i].hs300PerformancePercentLast)
+                                        $(".dd_grey span").eq(i).addClass("text_red").html("+" + jsonData.prodList[i].hs300PerformancePercentLast + "%")
                                     }
                                 } else {
                                     $(".dd_grey").eq(i).addClass("hide")
                                 }
                             
                             // 截取字符串,多出来的字符...显示
-                            if (jsonData.prodList[i].productViewpoint.length <= 90) {
+                            if (jsonData.prodList[i].productViewpoint.length <= 85) {
                                 jsonData.prodList[i].productViewpoint = jsonData.prodList[i].productViewpoint
                                 $('.product_more').eq(i).addClass("hide")
                             } else {
-                                jsonData.prodList[i].productViewpoint = jsonData.prodList[i].productViewpoint.substr(0,90) + "..."
+                                jsonData.prodList[i].productViewpoint = jsonData.prodList[i].productViewpoint.substr(0,85) + "..."
                             }
                             $(".text_productViewpoint").eq(i).html(jsonData.prodList[i].productViewpoint)
                             
