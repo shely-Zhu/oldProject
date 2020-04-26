@@ -102,7 +102,7 @@ $(function() {
                             var prodPerformanceList = jsonData.prodList[i].prodPerformanceList
                             var xArr = [], first = [], second = [], drawArr = []
                             // 摘数据重组成折线图数据
-                            if (prodPerformanceList.length <= 2) {
+                            if (prodPerformanceList.length >= 2) {
                                 for ( var v = 0; v < prodPerformanceList.length; v++){
                                     xArr.push(prodPerformanceList[v].profitLossDate)
                                     first.push(prodPerformanceList[v].profitLossPercentage)
