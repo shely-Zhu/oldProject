@@ -72,7 +72,7 @@ module.exports = function(lineChartData,num,noData,tip, $e) {
             formatter: function(params) {
                 var data = params[0];
                 if (flag){
-                    return '<span style="color:#364D97; font-size:.36rem">' +data["value"] + '% </span>' + '<br/>' + data["name"]
+                    return '<span style="color:#364D97; font-size:.36rem">' +data["value"] + '% </span>' + '<br/> <span style="font-size:.24rem">' + data["name"] + '</span>'
                 }
                 return '日期：' + data["name"] + '<br/>' + data["seriesName"] + '：' + data["value"] + '%'
             },
@@ -92,11 +92,11 @@ module.exports = function(lineChartData,num,noData,tip, $e) {
             right: "5px",*/
             containLabel: true,
             x:5,
-            y:30,
-            x2:30,
-            y2:30,
-            // x2: flag ? 0 : 30,
-            // y2: flag ? 0 : 30,
+            y: flag ? 20 : 30,
+            // x2:30,
+            // y2:30,
+            x2: flag ? 15 : 30,
+            y2: flag ? 15 : 30,
             borderWidth:0//此处去掉那个白色边框
         },
         xAxis: [{
@@ -109,7 +109,8 @@ module.exports = function(lineChartData,num,noData,tip, $e) {
                 interval: axisLabelInt,
                 margin: 14,
                 textStyle: {
-                    color: '#7d7c7d'
+                    color: '#7d7c7d',
+                    fontSize: 10 
                 },
             } : {
                 //show: false,
@@ -152,7 +153,10 @@ module.exports = function(lineChartData,num,noData,tip, $e) {
                 }
             },
             axisLabel: {
-                textStyle: {
+                textStyle: flag ? {
+                    color: '#7d7c7d',
+                    fontSize: 10
+                } : {
                     color: '#7d7c7d'
                 },
                 formatter: function(value, index) {
@@ -177,7 +181,7 @@ module.exports = function(lineChartData,num,noData,tip, $e) {
             lineStyle: {
                 normal: {
                     // color: '#fb685c'
-                    color: '#fb685c'
+                    color: flag ? '#e8cf8c' :'#fb685c'
                 }
             },
             itemStyle: {

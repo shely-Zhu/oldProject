@@ -212,6 +212,7 @@ body,.mui-content{
             margin-top: 0.37rem;
             .market_chart_item{
                 margin-bottom: .4rem;
+                overflow: hidden;
                 &:last-child{
                     margin-bottom: 0;
                 }
@@ -292,7 +293,9 @@ body,.mui-content{
                 .dd_line{
                     width: 100%;
                     height: 4rem;
-                    overflow: hidden;
+                    margin-right: -.3rem;
+                    margin-left: -.1rem
+                    // overflow: hidden;
                 }
                 .dd_line_legend{
                     font-size: .24rem;
@@ -321,7 +324,7 @@ body,.mui-content{
                             margin-left: 0.09rem
                         }
                         .text_red {
-                            color: #EE9577;
+                            color: red;
                             font-size: 0.24rem;
                         }
                         .text_green {
@@ -331,7 +334,7 @@ body,.mui-content{
                     }
                     .dd_red {
                         &:before{
-                            background: #fb685c;
+                            background: #e8cf8c;
                         }
                     }
                     .dd_grey {
