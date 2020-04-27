@@ -57,6 +57,7 @@ $(function(){
             var that = this;
             //跳转到各类通知页面 mesType 0系统通知，1产品公告，2活动通知，3交易动态 
             mui("body").on('mdClick', '.noticeItem' , function(){
+                window._submitMd && window._submitMd('2' , window.location.pathname);
                 window.location.href = site_url.systemInforms_url + '?mesType=' + $(this).attr('mesType');
             },{
                 'htmdEvt': 'notice_00'
