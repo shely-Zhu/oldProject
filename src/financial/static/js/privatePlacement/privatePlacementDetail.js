@@ -114,9 +114,9 @@ $(function() {
                     console.log(that.data.incomeModeJF,jsonData.incomeModeJF)
                     that.data.incomeModeJF = jsonData.incomeModeJF;
                     that.data.productRiskLevel = jsonData.productRiskLevel
-                    //用户等级不匹配 防止接口加载缓慢数据无返回就判断，加上超时调用方法
+                    //用户等级不匹配 防止接口加载缓慢数据无返回就判断，加上超时调用方法  riskRank风测过期接口返回为6,无法拦截
                     setTimeout(function(){
-                        if(that.data.riskRank<that.data.productRiskLevel){
+                        if((that.data.riskRank<that.data.productRiskLevel)||that.data.riskRank == '6'){
                             var obj = {
                                 title: '提示',
                                 id: 'tipIcon',

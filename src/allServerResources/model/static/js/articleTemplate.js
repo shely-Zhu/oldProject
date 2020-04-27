@@ -78,10 +78,10 @@ $(function () {
                     if (!!resData.h5Title) {//标题
                         that.$e.HeadBarpathName.text(resData.h5Title);
                     }
-
                     //设置边距
                     that.$e.contentWrap.css({
-                        "padding":".5rem .5rem 0"
+                        "padding":".5rem .5rem 0",
+                        "line-height" : "0.54rem",
                     })
 
                     //富文本内容
@@ -107,6 +107,12 @@ $(function () {
 
                             "padding": "0"
                         })
+                        if (splitUrl['articleBelong'] == 30) {
+                            that.$e.contentWrap.css({
+                                "padding":".5rem .5rem 0",
+                                "line-height" : "0.54rem",
+                            })
+                        }
 
                     }else if(resData.h5Type == "2") {
                         // 含有标题时才展示该区域
@@ -129,7 +135,6 @@ $(function () {
                     
                     }else if (resData.h5Type == "3") {//产品推荐
                         //内容去边距不留白
-
                         if(resData.buttonLabel){
                             that.$e.contentWrap.css({
                                 "padding": "0",
@@ -143,6 +148,14 @@ $(function () {
 
                             that.recomTypes = resData.recomTypes;
                         }
+                        
+                        if (splitUrl['articleBelong'] == 30) {
+                            that.$e.contentWrap.css({
+                                "padding":".5rem .5rem 0",
+                                "line-height" : "0.54rem",
+                            })
+                        }
+                        
                         
                     }
 
