@@ -27,6 +27,7 @@ require('zrender/lib/vml/vml');*/
  * @return {[type]}               [description]
  */
 module.exports = function(lineChartData,num,noData,tip, $e) {
+    debugger
     var ele = $e || $('.chartWrapper');
     var myChart = echarts.init(ele[0]);
 
@@ -46,6 +47,7 @@ module.exports = function(lineChartData,num,noData,tip, $e) {
             // formatter: "日期：{b} <br/>{a}: {c}%",
             formatter: function(params) {
                 var data = params[0];
+                // console.log(data,"data")
                 return '日期：' + data["name"] + '<br/>' + data["seriesName"] + '：' + data["value"] + '%'
             },
             backgroundColor: 'rgba(229,229,229,0.6)',
@@ -76,7 +78,7 @@ module.exports = function(lineChartData,num,noData,tip, $e) {
             axisLabel: {
                 //show: false,
                 //interval:Math.ceil(xArr.length / 3),
-                interval: xArr.length - 2,
+                // interval: xArr.length - 2,
                 margin: 14,
                 textStyle: {
                     color: '#7d7c7d'

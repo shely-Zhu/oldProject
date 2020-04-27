@@ -33,7 +33,7 @@ var data = Mock.mock({
         "orgAuth": 0,
         "outdateFreezeStatus": 0,
         "pu2prState": 0,
-        "riskRank": "1",
+        "riskRank": "5",
         "riskRankName": "保守型",
         "saleFreeze": 0
     },

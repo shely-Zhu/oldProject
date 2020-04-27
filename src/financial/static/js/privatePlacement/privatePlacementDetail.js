@@ -17,6 +17,7 @@ require('@pathCommonBase/base.js');
 require('@pathCommonJs/ajaxLoading.js');
 
 // require('@pathCommonJsCom/headBarConfig.js');
+var goBack = require('@pathCommonJsCom/goBack.js');
 
 var splitUrl = require('@pathCommonJs/components/splitUrl.js')();
 var generateTemplate = require('@pathCommonJsComBus/generateTemplate.js');
@@ -62,6 +63,8 @@ $(function() {
             endurePriIsold: '', // 私募风险测评是否过期0:否 1:是
             isSatisfied:'',  //0 （开启策略限制并不满足） 1 （未开启策略限制或开启策略限制并满足）
             isOpenWealth:"1",//是否开通财富账户。0未开通，1已开通
+            productRiskLevel:"",//产品等级
+            riskRank:"",//用户等级
             qrnhWfsy: {
                 oneMonth: {},
                 threeMonth: {},
@@ -110,6 +113,29 @@ $(function() {
                     // 根据收益分配方式区分 0固收 1浮收普通 2浮收稳裕
                     console.log(that.data.incomeModeJF,jsonData.incomeModeJF)
                     that.data.incomeModeJF = jsonData.incomeModeJF;
+                    that.data.productRiskLevel = jsonData.productRiskLevel
+                    //用户等级不匹配 防止接口加载缓慢数据无返回就判断，加上超时调用方法  riskRank风测过期接口返回为6,无法拦截
+                    setTimeout(function(){
+                        if((that.data.riskRank<that.data.productRiskLevel)||that.data.riskRank == '6'){
+                            var obj = {
+                                title: '提示',
+                                id: 'tipIcon',
+                                p: '<p>您的风险测评等级与该产品风险等级不匹配，请您查看与您风险测评等级相匹配的产品</p><p>如果您近期个人信息已发生变化，请您根据实际情况重新测评</p>',
+                                yesTxt: '重新测评',
+                                celTxt: '其他产品',
+                                hideCelButton: false,
+                                zIndex: 100,
+                                celIsHide:false,
+                                callback: function(t) {
+                                    window.location.href = site_url.riskAppraisal_url + '?type=private';
+                                },
+                                callbackCel: function() {
+                                    goBack()
+                                }
+                            };
+                            $.elasticLayer(obj);
+                        }
+                    },300)
                     //默认隐藏
                     $(".tipIcon").hide()
                     if (jsonData.incomeModeJF == '0') {
@@ -439,6 +465,7 @@ $(function() {
                     that.data.lawFreezeStatus = jsonData.lawFreezeStatus; // 是否司法冻结：0-否；1-是；
                     that.data.isRiskEndure = jsonData.isRiskEndure; // 是否风险测评 0-否 1-是
                     that.data.accreditedInvestor = jsonData.accreditedInvestor;   //合格投资者【空-未做过】【0-未通过】【1-已通过】【2-已过期】
+                    that.data.riskRank = jsonData.riskRank
                     if (that.data.isRiskEndure == 0) {
                         window.location.href = site_url.riskAppraisal_url + '?type=private';
                     }

@@ -61,7 +61,7 @@ var data = Mock.mock({
         "salesFee":"",//销售费率
         "unitYld":0,//每万份基金单位当日收益
         "annYldRat":0,//最近7日折算年收益率
-        "riskLevel":"3",//基金风险等级
+        "riskLevel":"4",//基金风险等级
         "riskLevelName":"中等风险",//基金风险等级名称
         "fundStatus":"0",//基金状态
         "purchaseRate":"1.5",//购买费率
@@ -83,7 +83,8 @@ var data = Mock.mock({
 		"g2gnowConfirmDate":"2018-04-19", //公转公前自然日时间的 确认日期
 		"after15tradeDate":"2018-04-19", //当前自然日15点之后 所属交易日 
 		"g2gafter15tradeDate":"2018-04-19", //公转公当前自然日15点之后 所属交易日
-        "before15confirmDate":"yyyy-MM-dd",  //15点之前的确认日期 
+        "before15confirmDate":"yyyy-MM-dd",  //15点之前的确认日期
+        "currencyFlag":1,//货币基金标记：1.是；0.否
         "fundPurchaseFeeRate": {//基金认/申购费率信息
 			"totalCount":0,
 			"operationType":null,

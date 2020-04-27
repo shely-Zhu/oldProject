@@ -26,6 +26,9 @@
     fundName  分红产品
     applyDate  分红时间
     autoBuyDesc  分红方式说明
+ *  updater chentiancheng
+    2020年4月24日10:23:12
+    删除公募详情入参fundType  
     
  */
 
@@ -70,7 +73,7 @@ $(function () {
                     window.location.href = site_url.superStreasureDetail_url + '?fundCode=' + splitUrl()["fundCode"];
                 } else {
                     //去普通基金详情页
-                    window.location.href = site_url.pofPublicDetail_url + '?fundCode=' + splitUrl()["fundCode"]+'&fundType='+splitUrl()["fundType"];
+                    window.location.href = site_url.pofPublicDetail_url + '?fundCode=' + splitUrl()["fundCode"];
                 }
             },{
                 'htmdEvt': 'publicTradeDetail_0'
@@ -95,7 +98,7 @@ $(function () {
                     window.location.href = site_url.superStreasureDetail_url + '?fundCode=' + splitUrl()["fundCode"];
                 } else {
                     //去普通基金详情页
-                    window.location.href = site_url.pofPublicDetail_url + '?fundCode=' + splitUrl()["fundCode"]+'&fundType='+splitUrl()["fundType"];
+                    window.location.href = site_url.pofPublicDetail_url + '?fundCode=' + splitUrl()["fundCode"];
                 }
                 // window.location.href = site_url.productPublicDetail_url + '?fundCode=' + splitUrl()["fundCode"];
                 //window.location.href = site_url.pofPublicDetail_url + '?fundCode=' + splitUrl()["fundCode"]+'&fundType='+splitUrl()["fundType"];

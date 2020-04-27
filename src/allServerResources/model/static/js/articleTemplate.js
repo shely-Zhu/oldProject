@@ -9,6 +9,9 @@
 * 如果articleBelong也就是归属只有一个。那么只需要传articleBelong即可。id为空也可以。有值传过来也可以。
 * articleBelong为后台配置该条信息对应的articleBelong
 * applyType不需要传
+* updater chentiancheng
+* 2020年4月24日10:36:18
+* 删除公募详情入参fundType  
 */
 
 require('@pathCommonBase/base.js');
@@ -75,10 +78,10 @@ $(function () {
                     if (!!resData.h5Title) {//标题
                         that.$e.HeadBarpathName.text(resData.h5Title);
                     }
-
                     //设置边距
                     that.$e.contentWrap.css({
-                        "padding":".5rem .5rem 0"
+                        "padding":".5rem .5rem 0",
+                        "line-height" : "0.54rem",
                     })
 
                     //富文本内容
@@ -104,6 +107,12 @@ $(function () {
 
                             "padding": "0"
                         })
+                        if (splitUrl['articleBelong'] == 30) {
+                            that.$e.contentWrap.css({
+                                "padding":".5rem .5rem 0",
+                                "line-height" : "0.54rem",
+                            })
+                        }
 
                     }else if(resData.h5Type == "2") {
                         // 含有标题时才展示该区域
@@ -126,7 +135,6 @@ $(function () {
                     
                     }else if (resData.h5Type == "3") {//产品推荐
                         //内容去边距不留白
-
                         if(resData.buttonLabel){
                             that.$e.contentWrap.css({
                                 "padding": "0",
@@ -140,6 +148,14 @@ $(function () {
 
                             that.recomTypes = resData.recomTypes;
                         }
+                        
+                        if (splitUrl['articleBelong'] == 30) {
+                            that.$e.contentWrap.css({
+                                "padding":".5rem .5rem 0",
+                                "line-height" : "0.54rem",
+                            })
+                        }
+                        
                         
                     }
 
@@ -184,7 +200,7 @@ $(function () {
 
                 } else if (that.recomTypes == "2") {
 
-                    window.location.href = site_url.pofPublicDetail_url + "?fundCode=" + that.gV.fundCode + "&fundType=10300";//货币型普通基金
+                    window.location.href = site_url.pofPublicDetail_url + "?fundCode=" + that.gV.fundCode;//货币型普通基金
 
                 } else if (that.recomTypes == "3") {//私募产品详情页
 

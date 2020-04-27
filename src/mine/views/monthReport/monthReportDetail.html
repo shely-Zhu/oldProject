@@ -310,7 +310,7 @@
 							{{!-- 私募 --}}
 							{{#if flag2}}
 								<!-- <a class="btn_order" href="/financial/views/privatePlacement/privatePlacementDetail.html?projectId={{productId}}:;" htmdEvt="monthReportDetail_immediateAppointment">立即预约</a> -->
-								<a href="javascript:void(0);" class="btn_order" onclick="setGoUrl( site_url.privatePlacementDetail_url+'?projectId={{productId}}', 'monthReportDetail_03')">立即预约</a>
+								<a href="javascript:void(0);" class="btn_order" onclick="setGoUrl( site_url.privatePlacementDetail_url+'?projectId={{productId}}', 'monthReportDetail_03', this)">立即预约</a>
 							{{/if}}
 							{{!-- 其他 --}}
 							{{#if flag1}}
@@ -319,7 +319,7 @@
 							{{!-- 公募 --}}
 							{{#if flag3}}
 								<!-- <a class="btn_order publicBuy" href="/financial/views/publicPlacement/publicDetail.html?fundCode={{productId}}" htmdEvt="monthReportDetail_immediateBuy">立即购买</a> -->
-								<a href="javascript:void(0);" class="btn_order publicBuy" onclick="setGoUrl( site_url.pofPublicDetail_url+'?fundCode={{productId}}', 'monthReportDetail_05')" >立即购买</a>
+								<a href="javascript:void(0);" class="btn_order publicBuy" onclick="setGoUrl( site_url.pofPublicDetail_url+'?fundCode={{productId}}', 'monthReportDetail_05', this)" >立即购买</a>
 							{{/if}}
 						</li>
 					{{/each}}

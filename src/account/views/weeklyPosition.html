@@ -1,0 +1,155 @@
+<!-- 
+@page 公募资产
+@author zhubingshuai 2020-04-09
+-->
+<!doctype html>
+<html lang="en">
+
+    <head>
+        @@include('@pathInclude/views/meta.html')
+        <link rel="stylesheet" href="/account/static/css/weeklyPosition.css">
+        <title>客户持仓周报-证券投资</title>
+    </head>
+
+<body>
+    <div class="publicDetail ">
+		<!-- @@include('@pathCommonViews/headBarConfig.html',{"pathName":"","bgColors":"#22346D,#031349","showType":"1"}) -->
+		<div class="tplBox"></div>
+	</div>
+    <!-- @@include('@pathCommonViews/authenticationProcess.html',{"pathTitle":"购买现金宝产品前，请完成以下认证"}) -->
+    @@include('@pathCommonViews/headBarConfig.html',{"pathName":"","showType":"1"})
+    <section class="container">
+        <!-- 头部信息 -->
+        <div class="banner">
+            <div class="bannerTop clearfix">
+                <div class="title_image">
+                    <span class="title_i"></span>
+                    <span class="sub_title_i"></span>
+                </div>
+                <div class="title_text">
+                    <span class="j_text">“恒天财富，您的高端财富管理专家”</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="wp_body">
+            <!-- 时间+市值 -->
+            <div class="market_value_date">
+                <div class="market_value_date_wrap">
+                    <div class="date"><span class="date_icon"></span>
+                        <span class="j_date">--</span>
+                    </div>
+                    <div class="sum tc">
+                        <div class="name">最新市值(元)</div>
+                        <div class="value amount_value">0.00</div>
+                    </div>
+                    <div class="principal clearfix">
+                        <span class="title fl">认购本金(元)</span>
+                        <span class="value fr h_profit_value">0.00</span>
+                    </div>
+                </div>
+            </div>
+            <!-- 市值构成 -->
+            <div class="market_body">
+                <div class="big_title"><span></span>市值构成(元)</div>
+                <!-- 市值构成图表list -->
+                <div class="market_chart_list" id="marketCapitalList"></div>
+            </div>
+            <!-- 证券市场观点 -->
+            <div class="bgWhite viewpoint_container">
+                 <!-- 证券市场观点 开始 -->
+                 <div class="j_market_p">
+                    <div class="big_title"><span class="market_p_icon"></span>证券市场观点</div>
+                    <div class="marting_info bgLightBlue">
+                        <div class="info_text">
+                            <span class="get_marketView"></span>
+                            <span class="more jf viewpoint_more" data-fundCode={{projectCode}}>查看更多</span>
+                            <!-- 新经济最新浮盈14.87%，最右侧显示上周五，例：3月28日更新的周报，显示：03-20；最右侧显示15个数据点中最早的日期；整个横坐标平分，显示最多海市个纵坐标：显示百分比，总共显示.32%。涨跌 -->
+                        </div>
+                    </div>
+                 </div>
+                <!-- 证券产品观点 开始 -->
+                <div class="big_title"><span class="product_p_icon"></span>证券产品观点</div>
+                <!-- 产品title -->
+                <div class="list newsList" id="newsList"></div>
+                <!-- 温馨提示 -->
+                <div class="footer-tip" >温馨提示：以上数据仅供参考，具体以实际到账为准。</div>
+            </div>
+        </div>
+        <!-- 加载中loading -->
+        @@include('@pathCommonCom/loading/listLoading.html')
+        <!-- 暂无数据 -->
+        @@include('@pathCommonCom/noData/noData.html', {"tipText": "暂无数据"})
+    </section>
+
+     <!-- 市值构成list -->
+     <script id="marketTemplate" type="text/x-handlebars-template">
+        {{#each this}}
+        <div class="market_chart_item">
+            <div class="title_value clearfix">
+                <span class="title fl">{{projectName}}</span>
+                <span class="value fr">+{{marketValue}}</span>
+            </div>
+            <!-- 图表 -->
+            <div class="mui-progressbar bar_progressbar">
+                <span></span>
+            </div>
+        </div>
+        {{/each}} 
+    </script>
+  
+    <!-- 产品list -->
+    <script id="listTemplate" type="text/x-handlebars-template">
+        {{#each this}}
+        <div class="sub_title">{{projectName}}</div>
+                <!-- 产品相关数据 -->
+                <div class="product_info bgLightBlue">
+                    <!-- 产品简介 -->
+                    <div class="info_text">
+                        <span class="text_productViewpoint"></span>
+                        <span class="more jf product_more" data-fundCode={{projectCode}}>查看更多</span>
+                        <!-- 新经济最新浮盈14.87%，最右侧显示上周五，例：3月28日更新的周报，显示：03-20；最右侧显示15个数据点中最早的日期；整个横坐标平分，显示最多海市个纵坐标：显示百分比，总共显示.32%。涨跌 -->
+                    </div>
+                    <!-- 产品业绩走势 -->
+                    <div class="line_chart_wrap">
+                        <div class="line_chart_title">产品业绩走势</div>
+                        <div class="line_chart_body bgWhite">
+                            <div class="dd_line_legend">
+                                <span>
+                                    <span class="dd_legend dd_red">本产品 
+                                        <span class="show_item">{{profitLossPercentageLast}}</span>
+                                    </span>
+                                    <span class="dd_legend dd_grey">沪深300 
+                                        <span class="show_item">{{hs300PerformancePercentLast}}</span>   
+                                    </span>
+                                </span>
+                            </div>
+                        <div class="dd_line"></div>
+                        </div>
+                    </div>
+                    <!-- 私募联线回放 开始 -->
+                    <div class="video_body">
+                        <div class="image_title">
+                            私募联线回放
+                        </div>
+                        <!-- 播放图片 -->
+                        {{#each pefConnectionList}}
+                            <div class="image_content" videoId={{videoId}}>
+                                <img src="{{videoCoverUrl}}" class="image lazyload" data-original="{{videoCoverUrl}}"/>
+                                <span class="play_icon"></span>
+                                <!-- <i class="play_icon iconfont">&#xe68e;</i> -->
+                            </div>
+                        {{/each}}
+                    </div>
+                </div>
+        {{/each}} 
+    </script>
+    <!-- 添加埋点 -->
+    @@include('@pathInclude/views/footer.html')
+    <!--<script src="https://echarts.baidu.com/build/dist/echarts.js"></script>-->
+    <script src="https://cdn.bootcss.com/echarts/4.2.1-rc1/echarts.min.js"></script>
+    <!-- <script src="/common/js/components/echartCom/echarts.min.js"></script> -->
+    <script src="/account/static/js/weeklyPosition.js"></script>
+</body>
+
+</html>

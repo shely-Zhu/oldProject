@@ -70,7 +70,7 @@
                     callbackCel: $.noop, //取消按钮的回调函数，默认为空
                     needCelHref: false, //是否需要把取消按钮改成a标签，默认false
                     celHref: 'javascript:;', //取消按钮a链接的默认href
-
+                    celIsHide:true,//点击返回按钮是否关闭弹窗 默认关闭
                     iconTxt: '', //icon的值
                     iconType: 'green', //icon的颜色
                     
@@ -207,8 +207,10 @@
                     var that = this;
                     that.$cel.on('click', function() {
                         //关闭按钮事件即隐藏当前弹层
-                        $(this).parents('.elasticLayer').hide();
-                        window._submitMd && window._submitMd( 3, that.options.htmdEvtCel);
+                        if(that.options.celIsHide){
+                            $(this).parents('.elasticLayer').hide();
+                        }
+                        window._submitMd && window._submitMd( 3, that.options.htmdEvtCel, this);
                         that.options.callbackCel(that);
 
                     })
@@ -221,7 +223,7 @@
                     var that = this;
                     that.$yes.on('click', function() {
                         //调用的是callback回调函数
-                        window._submitMd && window._submitMd( 3, that.options.htmdEvtYes );
+                        window._submitMd && window._submitMd( 3, that.options.htmdEvtYes, this );
                         that.options.callback(that);
                         if(that.options.isClose){
                             $(this).parents('.elasticLayer').hide();

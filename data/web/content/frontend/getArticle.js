@@ -9,14 +9,14 @@ var data = Mock.mock({
     "articleTimeStr": "11:34",//音频播放时间
     "author": "purpleZhao",//作者
     "buttonLabel": "立即转入现金管理",//按钮文案
-    "content": "333333333",
+    "content": "证券是多种经济权益凭证的统称，也指专门的种类产品，是用来证明券票持有人享有的某种特定权益的法律凭证。证券是多种经济权益凭证的统称，也指专门的种类产品，是用来证明券票持有人享有的某种特定权益的法律凭证。",
     "createId": "H023512",
     "createName": "",
     "createTime": 1573085434000,
     "createTimeStr": "2019-11-07 08:10:34",
     "externalUrl": "",
     "h5Title": "模板页面",//模板title
-    "h5Type": "2",//模板类型
+    "h5Type": "1",//模板类型
     "id": 8,
     "imageAttachId": 56,
     "imageAttachName": "",
