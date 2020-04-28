@@ -121,11 +121,11 @@ $(function() {
                                 if (drawArr[i] && drawArr[i].first.length != 0){
                                     lineChart(drawArr, i, that.gV.noData, '', $($(".dd_line")[i]));
                                 } else {
-                                    $(".line_chart_wrap").eq(i).addClass('hide').hide()
+                                    $(".line_chart_wrap").eq(i).addClass('hide')
                                 }
 
                             } else {
-                                $(".line_chart_wrap").eq(i).addClass('hide').hide()
+                                $(".line_chart_wrap").eq(i).addClass('hide')
                             }
                             // 本产品数据显示
                             if (jsonData.prodList[i].profitLossPercentageLast.length != 0) {
@@ -135,7 +135,7 @@ $(function() {
                                     $(".dd_red span").eq(i).addClass("text_red").html("+" + jsonData.prodList[i].profitLossPercentageLast + "%")
                                 }
                             } else {
-                                $(".dd_red").eq(i).addClass("hide").hide()
+                                $(".dd_red").eq(i).addClass("hide")
                             }
                            
                             // 300统计数据显示
@@ -146,29 +146,31 @@ $(function() {
                                     $(".dd_grey span").eq(i).addClass("text_red").html("+" + jsonData.prodList[i].hs300PerformancePercentLast + "%")
                                 }
                             } else {
-                                $(".dd_grey").eq(i).addClass("hide").hide()
+                                $(".dd_grey").eq(i).addClass("hide")
                             }
                             
                             // 是否显示产品观点
-                            if (jsonData.prodList[i].productViewpoint && jsonData.prodList[i].productViewpoint.length != 0) {
+                            // console.log(jsonData.prodList[i].productViewpoint.length)
+                           
                                 // 截取字符串,多出来的字符...显示
-                                if (jsonData.prodList[i].productViewpoint.length <= 85) {
-                                    jsonData.prodList[i].productViewpoint = jsonData.prodList[i].productViewpoint
-                                    $('.product_more').eq(i).addClass("hide")
-                                } else {
-                                    jsonData.prodList[i].productViewpoint = jsonData.prodList[i].productViewpoint.substr(0,85) + "..."
-                                }
-                                $(".text_productViewpoint").eq(i).html(jsonData.prodList[i].productViewpoint)
+                            if (jsonData.prodList[i].productViewpoint.length <= 85) {
+                                jsonData.prodList[i].productViewpoint = jsonData.prodList[i].productViewpoint
+                                $('.product_more').eq(i).addClass("hide")
                             } else {
-                                $('.info_text').eq(i).addClass('hide')
+                                jsonData.prodList[i].productViewpoint = jsonData.prodList[i].productViewpoint.substr(0,85) + "..."
+                            }
+                            $(".text_productViewpoint").eq(i).html(jsonData.prodList[i].productViewpoint)
+                            // 产品观点是否显示
+                            if (jsonData.prodList[i].productViewpoint.length == 0) {
+                                $('.j_products_view_point').eq(i).addClass('hide')
                             }
                             // 联线是否显示
                             if (jsonData.prodList[i].pefConnectionList.length == 0) {
                                 $(".video_body").eq(i).addClass("hide")
                             }
                             // 如果没有折线图，没有产品说明，没有私募回放就隐藏这个产品
-                            if ($('.info_text').eq(i).hasClass('hide') && $('.line_chart_wrap').eq(i).hasClass('hide') && $('.video_body').eq(i).hasClass('hide')){
-                                $('.j_list_body').eq(i).addClass('hide').hide()
+                            if ($('.j_products_view_point').eq(i).hasClass('hide') && $('.line_chart_wrap').eq(i).hasClass('hide') && $('.video_body').eq(i).hasClass('hide')){
+                                $('.j_list_body').eq(i).addClass('hide')
                             }
                         }
                     },

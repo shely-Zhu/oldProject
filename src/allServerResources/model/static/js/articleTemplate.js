@@ -82,7 +82,12 @@ $(function () {
                     that.$e.contentWrap.css({
                         "padding":".5rem .5rem 0",
                         "line-height" : "0.54rem",
+                        "font-size" : "0.28rem",
+                        "color" : "#4E4E4E"
                     })
+                    if (splitUrl['articleBelong'] == 30 && splitUrl['applyType'] == 0) {
+                        $('#video_wrapper').hide()
+                    }
 
                     //富文本内容
                     that.$e.contentWrap.html(resData.content);
@@ -111,6 +116,8 @@ $(function () {
                             that.$e.contentWrap.css({
                                 "padding":".5rem .5rem 0",
                                 "line-height" : "0.54rem",
+                                "font-size" : "0.28rem",
+                                "color" : "#4E4E4E"
                             })
                         }
 
@@ -153,6 +160,8 @@ $(function () {
                             that.$e.contentWrap.css({
                                 "padding":".5rem .5rem 0",
                                 "line-height" : "0.54rem",
+                                "font-size" : "0.28rem",
+                                "color" : "#4E4E4E"
                             })
                         }
                         
