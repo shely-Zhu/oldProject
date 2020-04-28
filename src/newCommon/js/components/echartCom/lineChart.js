@@ -33,7 +33,7 @@ module.exports = function(lineChartData,num,noData,tip, $e) {
     var showData = true;
 
     var xArr = lineChartData[num].xArr;
-    console.log(xArr.length)
+    // console.log(xArr.length)
     // 累计净值
     var first = lineChartData[num]["first"];
     var second = lineChartData[num]["second"];
@@ -61,7 +61,6 @@ module.exports = function(lineChartData,num,noData,tip, $e) {
            }
         }   
     } 
-    console.log(axisLabelInt)
     var name = tip;
 
     var option = {
@@ -92,10 +91,10 @@ module.exports = function(lineChartData,num,noData,tip, $e) {
             right: "5px",*/
             containLabel: true,
             x:5,
-            y: flag ? 20 : 30,
+            y: flag ? 25 : 30,
             // x2:30,
             // y2:30,
-            x2: flag ? 15 : 30,
+            x2: flag ? 0 : 30,
             y2: flag ? 15 : 30,
             borderWidth:0//此处去掉那个白色边框
         },
