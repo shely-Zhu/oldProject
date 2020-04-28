@@ -53,10 +53,7 @@ var mymessage = Mock.mock({
 			"projectName": "明汯价值成长1期7号"
 		}, {
 			"hs300PerformancePercentLast": "-5.05",
-			"pefConnectionList": [{
-                "videoCoverUrl": 'fff',
-                "videoId": 'wwww'
-            }],
+			"pefConnectionList": [],
 			"prodPerformanceList": [{
 				"hs300PerformanceDate": "",
 				"hs300PerformancePercent": "-5.05",
@@ -147,16 +144,13 @@ var mymessage = Mock.mock({
 				"profitLossDate": "03-13",
 				"profitLossPercentage": "-6.34"
 			}],
-			"productViewpoint": "基金利益受多项因素影响，包括证券市场价格波动、投资操作水平、国家政策变化等，基金既有盈利的可能，亦存在亏损的可能。根据相关法律法规规定，管理人不对基金的投资者做出保证本金及其收益的承诺。",
+			"productViewpoint": "",
 			"profitLossPercentageLast": "-6.34",
 			"projectCode": 24554,
 			"projectName": "凯丰宏观策略16-7号"
 		}, {
 			"hs300PerformancePercentLast": "-5.88",
-			"pefConnectionList": [{
-                "videoCoverUrl":"videoCoverUrl",
-                "videoId":"videoId"
-            }],
+			"pefConnectionList": [],
 			"prodPerformanceList": [{
 				"hs300PerformanceDate": "",
 				"hs300PerformancePercent": "0",
@@ -189,7 +183,7 @@ var mymessage = Mock.mock({
 				"profitLossPercentage": "-6.31"
 			}],
 			"productViewpoint": "基金利益受多项因素影响，包括证券市场价格波动、投资操作水平、国家政策变化等，基金既有盈利的可能，亦存在亏损的可能。根据相关法律法规规定，管理人不对基金的投资者做出保证本金及其收益的承诺。",
-			"profitLossPercentageLast": "+6.31",
+			"profitLossPercentageLast": "-6.31",
 			"projectCode": 24229,
 			"projectName": "重阳金享6号"
 		}]

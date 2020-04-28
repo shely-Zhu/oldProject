@@ -173,7 +173,7 @@ module.exports = function(lineChartData,num,noData,tip, $e) {
         series: [{
             name: name,
             type: 'line',
-            smooth: true,
+            smooth: flag ? false : true,
             data: first,
             symbol: 'none',
             //clipOverflow: false,
@@ -191,7 +191,7 @@ module.exports = function(lineChartData,num,noData,tip, $e) {
         },{
             name: name,
             type: 'line',
-            smooth: true,
+            smooth: flag ? false : true,
             data: second,
             symbol: 'none',
             //clipOverflow: false,
@@ -209,7 +209,7 @@ module.exports = function(lineChartData,num,noData,tip, $e) {
         },{
             name: name,
             type: 'line',
-            smooth: true,
+            smooth: flag ? false : true,
             data: third,
             symbol: 'none',
             //clipOverflow: false,
