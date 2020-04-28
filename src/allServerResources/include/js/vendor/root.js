@@ -119,7 +119,7 @@ var mock_server = "http://localIp:8088", //前端本地开发时，接口调用�
     // 营销活动
     recommend_test = "https://172.16.162.190:8011",
     // recommend_haomaojf = "https://wx.uata.haomalljf.com/api/brand/index.html?activityId=qwJ0pXBGtwHBxJaeUOAq%2Bw%3D%3D&channel=3",
-    recommend_haomaojf = 'https://wx.chtwm.com/api/brand/index.html?activityId=pWhA5xJTKF4Zfst%2B9ycHqQ%3D%3D&channel=3';
+    recommend_haomaojf = 'http://wx.uata.haomalljf.com/online/views/index.html?activityId=197fdbd0e40ceecaa94e2631a08e7955&channel=3&flage=1';
     recommend_online = 'https://wx.chtwm.com/api/brand/index.html?activityId=pWhA5xJTKF4Zfst%2B9ycHqQ%3D%3D&channel=3';
     // recommend_online = "https://wx.chtwm.com/api/brand/index.html?activityId=pWhA5xJTKF4Zfst%2B9ycHqQ%3D%3D&channel=3";
 
