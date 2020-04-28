@@ -16,7 +16,7 @@ var data = Mock.mock({
     "createTimeStr": "2019-11-07 08:10:34",
     "externalUrl": "",
     "h5Title": "模板页面",//模板title
-    "h5Type": "1",//模板类型
+    "h5Type": "2",//模板类型
     "id": 8,
     "imageAttachId": 56,
     "imageAttachName": "",

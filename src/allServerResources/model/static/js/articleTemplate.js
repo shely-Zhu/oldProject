@@ -85,6 +85,9 @@ $(function () {
                         "font-size" : "0.28rem",
                         "color" : "#4E4E4E"
                     })
+                    if (splitUrl['articleBelong'] == 30 && splitUrl['applyType'] == 0) {
+                        $('#video_wrapper').hide()
+                    }
 
                     //富文本内容
                     that.$e.contentWrap.html(resData.content);
