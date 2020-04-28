@@ -262,8 +262,12 @@ $(function() {
         generateShareLink: function(num,sharingType) {
             var that = this;
                     //拼分享出去的链接
-
-                   var shareUrl = site_url.marketCampaign_url + '&shareCustomerNo=' + that.setting.customerNo + '&shareEmpCode=' + num;
+					if(!!num){//有值
+						var shareUrl = site_url.marketCampaign_url + '&shareCustomerNo=' + that.setting.customerNo + '&shareEmpCode=' + num;
+					}else{//无值
+						var shareUrl = site_url.marketCampaign_url + '&shareCustomerNo=' + that.setting.customerNo;
+					}
+					
                    that.setting.shareUrl=shareUrl
                         // 生成二维码
                     that.generateQrcode(shareUrl)
