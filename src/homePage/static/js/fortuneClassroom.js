@@ -19,7 +19,7 @@ $(function() {
         gV: { //一些设置
             navList: [], // 导航
             aP: {
-                pageCurrent: 1,
+                pageNo: 1,
                 pageSize: 10
             },
             current_index: 0, //左右滑动区域的索引
@@ -55,7 +55,7 @@ $(function() {
             $.each(that.gV.navList, function(i, el) {
                 that.gV.ajaxArr[i] = {
                     articleBelong: el.num, //请求类型
-                    pageCurrent: that.gV.aP.pageCurrent, //当前第几页(默认为1) 非必填项, 默认设置成第一页
+                    pageNo: that.gV.aP.pageNo, //当前第几页(默认为1) 非必填项, 默认设置成第一页
                     pageSize: that.gV.aP.pageSize, //每页显示几条数据(默认10) 非必填项， 默认设置成20
                 }
                 contentArr.push({
@@ -200,7 +200,7 @@ $(function() {
                         //重设当前页码
                         if (!$.util.objIsEmpty(pageList)) {
                             //设置每个ajax传参数据中的当前页码
-                            that.gV.ajaxArr[that.gV.current_index].pageCurrent++;
+                            that.gV.ajaxArr[that.gV.current_index].pageNo++;
                         }
                     } else {
                         //没有数据
@@ -212,7 +212,7 @@ $(function() {
                         //that.listLength  是上面ajax 请求完数据  赋值的 长度 作为判断的依据
                         //that.gV.aP.pageSize  是  gV  里面设置的 
                         if (that.listLength < that.gV.aP.pageSize) {
-                            if (that.gV.ajaxArr[that.gV.current_index].pageCurrent == 1) {
+                            if (that.gV.ajaxArr[that.gV.current_index].pageNo == 1) {
                                 //第一页时
                                 if (that.listLength == 0) {
                                     //没有数据
@@ -240,7 +240,7 @@ $(function() {
                             t.endPullupToRefresh(false);
                         }
                         $id.find('.contentWrapper .mui-pull-bottom-pocket').removeClass('mui-hidden');
-                        if (that.gV.ajaxArr[that.gV.current_index].pageCurrent == 1) {
+                        if (that.gV.ajaxArr[that.gV.current_index].pageNo == 1) {
                             //第一屏
                             $id.find('.contentWrapper .mui-table-view-cell').html(that.html);
                             for(var i = 0 ; i < that.gV.lazyClassArr.length; i++) {
@@ -290,7 +290,7 @@ $(function() {
                 callbackNoData: function(json) {
                     t.endPullupToRefresh(false);
                     //没有数据
-                    if(that.gV.ajaxArr[that.gV.current_index].pageCurrent == 1) {
+                    if(that.gV.ajaxArr[that.gV.current_index].pageNo == 1) {
                         $id.find('.mui-scroll .list').html(that.getElements.noData.clone(false)).addClass('noCon');
                         $id.find('.noData').show();
                     }
