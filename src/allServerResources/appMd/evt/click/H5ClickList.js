@@ -400,6 +400,9 @@ var clickList = {
 	"starFinancialPlannerList_15":{ evtid: 'starFinancialPlannerList_15', topic: '绑定理财师_取消', info: ''} ,
 
 	"starFinancialPlannerList_16":{ evtid: 'starFinancialPlannerList_16', topic: '输入理财师工号或姓名_取消', info: ''} ,
+	// marketingActivity.html
+	"marketingActivity_01":{ evtid: 'marketingActivity_01', topic: '市场活动_文章详情跳转', info: ''} ,
+	"marketingActivity_02":{ evtid: 'marketingActivity_02', topic: '市场活动_banner跳转', info: ''} ,
 
 /********************************************************homePage  end ***********************************************************/ 
 
@@ -626,9 +629,9 @@ var clickList = {
 	"seeSign_0": { evtid: 'seeSign_0', topic: '查看已签署材料-点击查看pdf', info: ''},
 
 	// 持仓周报 by zhubingshuai
-	"viewpointMore_0":{ evtid: 'viewpointMore_0', topic: '市场观点', info: ''},
-	"productViewPoint_0":{ evtid: 'productViewPoint_0', topic: '产品观点', info: ''},
-	"weeklyPositionProductPlay_0":{ evtid: 'weeklyPositionProductPlay_0', topic: '产品视频播放', info: ''},
+	"weeklyPosition_0":{ evtid: 'weeklyPosition_0', topic: '市场观点', info: ''},
+	"weeklyPosition_1":{ evtid: 'weeklyPosition_1', topic: '产品观点', info: ''},
+	"weeklyPosition_2":{ evtid: 'weeklyPosition_2', topic: '产品视频播放', info: ''},
 
 	/************************************** account end *************************************************/
 

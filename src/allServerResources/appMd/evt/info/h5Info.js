@@ -92,11 +92,11 @@ h5Info = function(href, type, htmdEvt, eTarget){
 		} else if (href.indexOf('/account/views/weeklyPosition.html') != -1) {
 			// add by zhubingshuai
 			// 当个产品观点
-			if( htmdEvt == 'productViewPoint_0'){
+			if( htmdEvt == 'weeklyPosition_1'){
 				h5_info = "/allServerResources/model/views/informationTemplate.html?viewpoint=0&projectCode=" + $e.attr("projectCode");
 			}
 			// 单个视频ID
-			if( htmdEvt == 'weeklyPositionProductPlay_0'){
+			if( htmdEvt == 'weeklyPosition_2'){
 				h5_info = "/financial/views/privatePlacement/privatePlacementDetailJumpVideo.html?cid=" + $e.attr("videoId");
 			}
 		}
