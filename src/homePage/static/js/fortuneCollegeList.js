@@ -114,7 +114,7 @@ $(function() {
                         // 将列表插入到页面上
                         generateTemplate(modelData, $('.fortuneVideo .title'), $('#fortuneCf-template'));
                         generateTemplate(articleData, $('.fortuneVideo ul'), $('#video-template'));
-                        $(".lazyload").lazyload();
+                        $(".lazyload").lazyload().removeClass("lazyload");
                     }
                 }
             }]
@@ -146,7 +146,7 @@ $(function() {
                         generateTemplate(modelData, $('.forum .title'), $('#forum-template'));
                         generateTemplate(listTitle, $('.broadcast'), $('#forumTitle'));
                         generateTemplate(listContent, $('.forumList'), $('#forumContent'));
-                        $(".lazyload").lazyload();
+                        $(".lazyload").lazyload().removeClass("lazyload");
                         setTimeout(function() {
                             $('.broadcast').find('.bigspan').eq(0).addClass('getColor');
                             $('.broadcast').find('.bigspan').eq(0).css({ "paddingLeft": 0, "borderLeft": 'none' });
@@ -334,7 +334,7 @@ $(function() {
                     //隐藏loading
                     setTimeout(function() {
                         that.getElements.listLoading.hide();
-                        $('.lazyload').lazyload();
+                        $(".lazyload").lazyload().removeClass("lazyload");
 
                     }, 100);
                 },
