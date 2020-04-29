@@ -192,20 +192,20 @@ $(function() {
 			mui("body").on('mdClick', '.viewpoint_more', function() {
                 window.location.href = site_url.articleTemplate_url + '?id=null&articleBelong=30&applyType=0';
              }, {
-                 'htmdEvt': 'viewpointMore_0'
+                 'htmdEvt': 'weeklyPosition_0'
              })
 			// 产品观点more事件
 			mui("body").on('mdClick', '.product_more', function() {
                var projectCode = $(this).attr("data-fundCode")
                 window.location.href = site_url.informationTemplate_url + '?viewpoint=0&projectCode=' + projectCode;
             }, {
-                'htmdEvt': 'productViewPoint_0'
+                'htmdEvt': 'weeklyPosition_1'
             })
             // 播放器
              mui("body").on('mdClick', '.image_content' , function(){
                 window.location.href = site_url.privatePlacementDetailJumpVideo_url+"?cid=" + $(this).attr("videoId")
             },{
-                'htmdEvt': 'weeklyPositionProductPlay_0'
+                'htmdEvt': 'weeklyPosition_2'
             });
             
 		},

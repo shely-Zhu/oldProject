@@ -260,7 +260,8 @@ var pathList = {
 	"/account/views/public/superStreasureDetail.html" :{ evtid: 'superStreasureDetail', topic: '自选公募-超宝详情', info: ''} ,
 	"/account/views/public/superTransactionRecord.html" :{ evtid: 'superTransactionRecord', topic: '超宝-交易记录', info: ''} ,
 	"/account/views/public/transactionRecords.html" :{ evtid: 'transactionRecords', topic: '自选公募-交易记录', info: ''} ,
-
+	// by zhubingshuai
+	"/account/views/weeklyPosition.html" :{ evtid: 'weeklyPosition', topic: '持仓周报', info: ''} ,
 	/*********************************account end ***************************************/
 
 	/********************************* life start***************************************/
