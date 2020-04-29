@@ -290,7 +290,7 @@ $(function() {
                     window.location.href = site_url.articleTemplate_url + '?id=' + id + '&articleBelong=' + articleBelong;
                 }
             }, {
-                'htmdEvt': 'fortune_07'
+                'htmdEvt': 'marketingActivity_01'
             })
             mui("body").on('mdClick', '.whereGo', function() {
                 if ($(this).attr("externalUrl")) {
@@ -341,7 +341,7 @@ $(function() {
                 }
 
             },{
-                'htmdEvt': 'fortune_14'
+                'htmdEvt': 'marketingActivity_02'
             })
         }
     };

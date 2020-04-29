@@ -38,8 +38,10 @@ module.exports = function(lineChartData,num,noData,tip, $e) {
     var first = lineChartData[num]["first"];
     var second = lineChartData[num]["second"];
     var third = lineChartData[num]["third"];
-    var flag = lineChartData[num]["position"];
-    var axisLabelInt = 0
+    var flag = false, axisLabelInt = 0;
+    if (lineChartData[num]["position"]) {
+        flag = lineChartData[num]["position"]
+    }
     if (flag && xArr.length != 0) {
         if( xArr.length % 2 == 0 ){
             // 6:4 4:2 2:0
