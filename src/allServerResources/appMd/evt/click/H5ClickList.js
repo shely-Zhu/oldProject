@@ -400,6 +400,9 @@ var clickList = {
 	"starFinancialPlannerList_15":{ evtid: 'starFinancialPlannerList_15', topic: '绑定理财师_取消', info: ''} ,
 
 	"starFinancialPlannerList_16":{ evtid: 'starFinancialPlannerList_16', topic: '输入理财师工号或姓名_取消', info: ''} ,
+	// marketingActivity.html
+	"marketingActivity_01":{ evtid: 'marketingActivity_01', topic: '市场活动_文章详情跳转', info: ''} ,
+	"marketingActivity_02":{ evtid: 'marketingActivity_02', topic: '市场活动_banner跳转', info: ''} ,
 
 /********************************************************homePage  end ***********************************************************/ 
 

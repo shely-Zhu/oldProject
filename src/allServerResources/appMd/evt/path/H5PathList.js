@@ -212,6 +212,7 @@ var pathList = {
 	"/homePage/views/notice/noticeDetail.html" :{ evtid: 'noticeDetail', topic: '消息中心通知详情', info: ''} ,
 	"/homePage/views/notice/systemInforms.html" :{ evtid: 'systemInforms', topic: '消息中心系统通知', info: ''} ,
 	"/homePage/views/starFinancialPlannerList/starFinancialPlannerList.html" :{ evtid: 'starFinancialPlannerList', topic: '明星理财师', info: ''} ,
+	"/homePage/views/marketingActivity/marketingActivity.html" :{ evtid: 'marketingActivity', topic: '市场活动首页', info: ''} ,
 	//financial
 	"/financial/views/privatePlacement/privatePlacementDetail.html" :{ evtid: 'privatePlacementDetail', topic: '私募基金产品详情', info: ''} ,
 	"/financial/views/publicPlacement/cashManagement.html" :{ evtid: 'cashManagement.html', topic: '现金管理', info: ''} ,
