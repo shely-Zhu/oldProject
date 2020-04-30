@@ -601,6 +601,7 @@ $(function() {
     		   	$('.type_2 .clr').html( jsonData.setupDate?jsonData.setupDate:'--');
     		   	//到期日
     		   	$('.type_2 .dqr').html( jsonData.endDate ? jsonData.endDate : '--' );
+    		   	that.data.redeemPartion = jsonData.allowRedemptionShare;
 	    	} else if( that.data.projectType == 3){ //股权类	    		
 	    		//认购金额
 	    		$('#type3TotalM').html( jsonData.buyAmount ? jsonData.buyAmount : '--' );
@@ -627,6 +628,7 @@ $(function() {
 	    		} else {
 	    			$('.type_3 .cpqx').html( period);
 	    		}
+	    		that.data.redeemPartion = jsonData.allowRedemptionShare;
 	    	} else if( that.data.projectType == 4){ //证券类   		
 	    		//当前市值
 	    		$('#type4TotalM').html( jsonData.capitalisation ? jsonData.capitalisation : '--'  );
