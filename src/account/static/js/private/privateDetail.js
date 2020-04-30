@@ -55,9 +55,9 @@ $(function() {
 			var that = this;
 			var wHeight = window.screen.height;
 			//处理7p 8p页面初始底部白条
-			/*if( $('html').height() < wHeight ){
+			if( $('html').height() < wHeight ){
 				$('html').height( wHeight );
-			}*/
+			}
 			if( that.data.projectType == 0 ){ 
 				//稳金类
 				$('.type_0').show();
