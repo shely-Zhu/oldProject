@@ -472,7 +472,7 @@ $(function() {
                                 type: 'auto',
                                 businessType: 'activityShare', //业务类型
                                 title: that.$e.actName.text(),
-                                des: '邀请好友，分享精彩',
+                                des: '新老朋友，共享精彩',
                                 link: data,
                                 img: that.$e.bgimg.attr("data-original"),
                             }
