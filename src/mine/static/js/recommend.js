@@ -278,7 +278,7 @@ $(function() {
                         'type': type,     // auto 原生自己分享框  wechatMoments 朋友圈   friends 朋友
                         'businessType': 'ldx',   //life,业务类型
                         'title': that.setting.weixinConf.title?that.setting.weixinConf.title:"",    //标题
-                        'des':'邀请好友，分享精彩',   //简介
+                        'des':'新老朋友，共享精彩',   //简介
                         'link': that.setting.shareUrl?that.setting.shareUrl:'',   //链接
                         'img':that.setting.weixinConf.imageUrlApp?that.setting.weixinConf.imageUrlApp:"",   // 图标
                     }
