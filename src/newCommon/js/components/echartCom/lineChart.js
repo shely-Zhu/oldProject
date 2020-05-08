@@ -73,7 +73,7 @@ module.exports = function(lineChartData,num,noData,tip, $e) {
             formatter: function(params) {
                 var data = params[0];
                 if (flag){
-                    return '<span style="color:#364D97; font-size:.36rem">' +data["value"] + '% </span>' + '<br/> <span style="font-size:.24rem">' + data["name"] + '</span>'
+                    return '<span style="color:#e8cf8c; font-size:.36rem">' +data["value"] + '% </span>' + '<br/> <span style="font-size:.24rem">' + data["name"] + '</span>'
                 }
                 return '日期：' + data["name"] + '<br/>' + data["seriesName"] + '：' + data["value"] + '%'
             },
