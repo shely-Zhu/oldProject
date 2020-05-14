@@ -9,7 +9,10 @@
  * 例如
  * @@include('@pathCommonViews/headBarConfig.html',{"pathName":"自选公募","bgColors":"#23356D,#23356D","showType":"1","serviceType":"1"})
  * 
- * 
+ * 头部右侧
+ * 右侧没有内容：serviceType:0
+ * 右侧在线客服：serviceType:1,iconStype:'@@iconStype'-默认值
+ * 自定义配置：serviceType:1，iconStype:'文字或者icon编码'，跳转逻辑在业务代码里写
  * 
  */
 require('../../../include/js/vendor/zepto/fx.js');
@@ -159,16 +162,16 @@ $(function() {
     }, {
         htmdEvt: 'goBackButton'
     });
-    if ($headBarConfigBox.attr('serviceType') == '1') { //如果图标显示
-    //跳转客服页面  app进行拦截
+
+    if ($headBarConfigBox.attr('serviceType') == '1' && !!$headBarConfigBox.attr('iconStype') && $headBarConfigBox.attr('iconStype') == "@@iconStype") { 
+        //在线客服跳转,app拦截
         mui("body").on('mdClick', '#customerService', function() {
             window.location.href = site_url.onlineCustomerTransfer_url;
         }, {
             htmdEvt: 'customerService'
         });
     } else if($headBarConfigBox.attr('doneType') == '1' && window.location.href.indexOf('surelyResultShot.html') != -1) {
-        // 定投详情
-        // doneType == 1 完成按钮
+        // 定投详情 doneType == 1 完成按钮--不建议这样用，请参照optionalPublicDetail页面使用
         mui("body").on('mdClick', '#customerService', function() {
             window.location.href = site_url.pofCastSurelyDetails_url + "?scheduledProtocolId=" +splitUrl["scheduledProtocolId"];
         }, {
