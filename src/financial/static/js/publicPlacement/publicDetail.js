@@ -449,7 +449,7 @@ $(function() {
                     textStyle: {
                         color: '#5B83FF'
                     },
-                    confine: true,
+                    confine: false,
                     axisPointer: {
                         type: 'line',
                         lineStyle: {

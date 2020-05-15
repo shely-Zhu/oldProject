@@ -265,7 +265,7 @@ $(function() {
 			    	textStyle: {
 			    		color:  '#677EC4'
 			    	},
-			    	confine: true,
+			    	confine: false,
 			    	axisPointer: {
 			    		type: 'line',
 			    		lineStyle: {
