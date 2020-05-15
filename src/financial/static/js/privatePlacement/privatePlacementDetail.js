@@ -1255,15 +1255,22 @@ $(function() {
 
             // 立即预约
             mui("body").on('mdClick', '.buyButton', function() {
-                var params = {
-                    type: 2,
-                    projectId: that.$e.projectId,
-                    htmdEvt: "privatePlacementDetail",
-                    projectName: that.data.productName,
-                    isElecContract: that.data.fundDetailObj.isElecContract,
-                    isAllowAppend: that.data.fundDetailObj.isAllowAppend
+                if(that.data.canClick){
+                    that.data.canClick = false;
+                    console.log('点击事件');
+                    var params = {
+                        type: 2,
+                        projectId: that.$e.projectId,
+                        htmdEvt: "privatePlacementDetail",
+                        projectName: that.data.productName,
+                        isElecContract: that.data.fundDetailObj.isElecContract,
+                        isAllowAppend: that.data.fundDetailObj.isAllowAppend
+                    }
+                    privateAuthenticationProcess(params);
+                    setTimeout(function(){
+                        that.data.canClick = true;
+                    },2000)
                 }
-                privateAuthenticationProcess(params);
             }, {
                 htmdEvt: 'privatePlacementDetail_06'
             });
