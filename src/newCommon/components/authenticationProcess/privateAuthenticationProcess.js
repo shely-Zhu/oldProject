@@ -31,6 +31,7 @@ module.exports = function(params) {
             realLi: $('#real-condition>li'), // 条件下的五条
         },
         data: {
+            canClick: true, //是否可点击
             custType: "", //客户类型
             buyFreeze: "", //是否买入冻结
             isRiskEndure: '', // 是否风险测评 0-否 1-是
@@ -203,7 +204,16 @@ module.exports = function(params) {
                                     };
                                     $.elasticLayer(obj);
                                 }else {
-                                    window.location.href = jumpUrl;
+                                    // console.log(that.data.canClick)
+                                    if(that.data.canClick){
+                                        that.data.canClick = false;
+                                        console.log('点击事件');
+                                        window.location.href = jumpUrl;
+                                        setTimeout(function(){
+                                            that.data.canClick = true;
+                                        },2000)
+                                    }
+                                    
                                 }
                                 $("#tips-wrap").hide();//点击跳转关闭弹窗
                                 window._submitMd && window._submitMd( 3, htmdEvt + '_0008', this );
