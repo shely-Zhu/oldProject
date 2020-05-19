@@ -417,6 +417,19 @@ $(function() {
 					xAxisData = data.assetsDate,
 					seriesData = data.accumulativeAssets;
 			}
+			var maxNum = seriesData[0],
+				minNum = seriesData[0];
+				for( var j = 0 ; j < seriesData.length; j++) {
+					if(seriesData[j] > maxNum) {
+						maxNum = seriesData[j]
+					}
+				}
+				for( var m = 0 ; m < seriesData.length; m++) {
+					if(seriesData[m] < minNum) {
+						minNum = seriesData[m]
+					}
+				}
+				console.log("minNum: "+minNum+"maxNum: "+maxNum)
 			var myChart = echarts.init( chartId );
 			myChart.setOption({
 			    tooltip: {
@@ -481,7 +494,10 @@ $(function() {
 			    yAxis: {
 			    	axisTick:{
 			    		show: false
-			    	},
+					},
+					max:maxNum,
+					min:minNum,
+					interval: (Number(maxNum) - Number(minNum))/5,
 			    	axisLine: {
 			    		show: false,
 			    		lineStyle: {
