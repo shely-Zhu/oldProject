@@ -214,6 +214,7 @@ module.exports = function() {
     this.getTotalAssetsCash_api = http_url.web_url + '/account/pof/cash/getTotalAssetsCash';
     // 超宝详情页面--现金宝
     this.getAssetsCashInfo_api = http_url.web_url + '/account/pof/cash/getAssetsCashInfo';
+    this.getCheckInterviewRisk = http_url.web_url + '/account/positions/checkInterviewRisk';
     /*------------------- 消息中心 end ------------------------------*/
 
     this.assetsDetail_api = http_url.web_url + '/account/positions/assetsDetail'; // 资产详情
