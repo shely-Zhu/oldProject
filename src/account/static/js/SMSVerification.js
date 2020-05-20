@@ -14,6 +14,7 @@ $(function() {
 
     var somePage = {
         gV: { // 全局变量
+        	system:"",//系统判断，2：安卓，3：IOS
             phoneNum: '',
             projectId: splitUrl['projectId'], // 项目id
             accountType: splitUrl['accountType'], // 用户类型
@@ -38,7 +39,22 @@ $(function() {
             }
             that.gV.projectName = new Base64().decode(splitUrl['projectName']);
             that.getUserPhone(); // 获取用户手机号
+            that.judgeSystem();//判断系统
             that.events();
+        },
+        judgeSystem: function(){
+        	var that = this;
+        	var u = navigator.userAgent, app = navigator.appVersion;
+		    var isAndroid = u.indexOf('Android') > -1 || u.indexOf('Linux') > -1; //g
+		    var isIOS = !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/); //ios终端
+		    if (isAndroid) {
+		       //这个是安卓操作系统
+		       that.gV.system = 2
+		    }
+		    if (isIOS) {
+		　　　　	//这个是ios操作系统
+				that.gV.system = 3
+		    }
         },
         getUserPhone: function() {
             var that = this;
@@ -71,6 +87,7 @@ $(function() {
                             code: phoneCode,
                             accountType: that.gV.accountType,
                             verifyType: '25',
+                            channelType:that.gV.system
                         },
                         callbackDone: function (json) {
                             // 验证码发送成功后进去售前告知书的判断
@@ -114,6 +131,7 @@ $(function() {
                             type: '25',
                             accountType: that.gV.accountType,
                             projectName: that.gV.projectName,
+                            channelType:that.gV.system
                         },
                         callbackDone: function (json) {
                             tipAction("短信验证码已发送，请查收");
@@ -161,6 +179,7 @@ $(function() {
                                     type: '25',
                                     accountType: that.gV.accountType,
                                     projectName: that.gV.projectName,
+                                    channelType:that.gV.system
                                 },
                                 callbackDone: function (json) {
                                     that.gV.voiceCodeFlag = true;
