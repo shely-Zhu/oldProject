@@ -601,10 +601,20 @@ $(function() {
                                             callback: function(t) {},
                                         };
                                         $.elasticLayer(obj);
+                                    } else {
+                                        var obj = {
+                                            // title: messageArr[1], //如果不传，默认不显示标题
+                                            p: '<p>' + message + '</p>',
+                                            yesTxt: '我知道了',
+                                            hideCelButton: true,
+                                            zIndex: 100,
+                                            htmdEvtYes: 'privateDetailList_11',
+                                            callback: function(t) {},
+                                        };
+                                        $.elasticLayer(obj);
                                     }
                                 }
-                            },
-                            callbackNoData: function(json) {}
+                            }
                         }]
                         $.ajaxLoading(obj);
                     } else if (type == 'toDown') { //下载电子合同

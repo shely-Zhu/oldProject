@@ -779,12 +779,12 @@ $(function() {
             var maxNum = seriesData[0],
                 minNum = seriesData[0];
             for( var j = 0 ; j < seriesData.length; j++) {
-                if(seriesData[j] > maxNum) {
+                if(parseFloat(seriesData[j]) > parseFloat(maxNum)) {
                     maxNum = seriesData[j]
                 }
             }
             for( var m = 0 ; m < seriesData.length; m++) {
-                if(seriesData[m] < minNum) {
+                if(parseFloat(seriesData[m]) < parseFloat(minNum)) {
                     minNum = seriesData[m]
                 }
             }
