@@ -232,8 +232,8 @@ gulp.task('proxyTask', function() {
                     // target: 'http://172.16.187.129:8080',//李亚楠
                     // target: 'http://192.168.50.254:8085',
                     target: 'https://app.chtfundtest.com', //测试
-                    // target:"https://app.haomaojf.com",
-                    // target: "https://app.chtfund.com",
+                    // target:"https://app.haomaojf.com", //预生产
+                    // target: "https://app.chtfund.com", //生产
                     changeOrigin: true,
                     secure: false,
                 }),
@@ -243,8 +243,8 @@ gulp.task('proxyTask', function() {
                     //  target: 'http://172.16.187.129:8080',//李亚楠
                     // target: 'http://172.16.187.164:8081',
                     target: 'https://h5.chtfundtest.com',//测试
-                    // target:"https://h5.haomaojf.com",
-                    // target: "https://h5.chtfund.com",
+                    // target:"https://h5.haomaojf.com", //预生产
+                    // target: "https://h5.chtfund.com", //生产
                     changeOrigin: true,
                     secure: false,
                 }),

@@ -335,7 +335,8 @@ $(function() {
                                 $.elasticLayer(obj) 
                             }
                             
-                        } else if (data.status == "20005") {
+                        } 
+                        else if (data.status == "20005") {
                             //需要进行合格投资者信息认证
                             var obj = {
                                 title: '温馨提示', //如果不传，默认不显示标题
@@ -350,6 +351,25 @@ $(function() {
                                 yesHref:  site_url.riskAppraisal_url+"?type=private", //
                                 htmdEvtYes:'activityDetails_16',  // 埋点确定按钮属性
                                 htmdEvtCel:'activityDetails_17',  // 埋点取消按钮属性
+                                callback: function(t) {
+
+                                },
+                            };
+                            $.elasticLayer(obj)
+                        } else if (data.status == "20017") {
+                            // 路演活动，客户风险等级不满足 by zhubingshuai
+                            var obj = {
+                                title: '很抱歉', //如果不传，默认不显示标题
+                                p: '<p style="text-align:left">本次活动相关产品或服务与您的风险承受能力不匹配，应进行充分的风险评估，再做出投资决定，是否继续参加活动？</br></br>'+
+                                '当您的风险承担能力或财务状况发生重大变化时，请您重新进行测评。</p>',
+                                yesTxt: '重新测评',
+                                celTxt: '取消报名',
+                                hideCelButton: false,
+                                zIndex: 100,
+                                needYesHref: true, //是否需要把确定按钮改成a标签，默认false
+                                yesHref:  site_url.riskAppraisal_url+"?type=private", //
+                                htmdEvtYes:'activityDetails_25',  // 埋点确定按钮属性
+                                htmdEvtCel:'activityDetails_26',  // 埋点取消按钮属性
                                 callback: function(t) {
 
                                 },

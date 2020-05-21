@@ -45,7 +45,7 @@ var data = Mock.mock(
                 "leftBottomStatusDesc":"待理财师确认",
                 "leftTopStatus":"0",
                 "leftTopStatusDesc":"待确认",
-                "operationNo":"2,15",
+                "operationNo":"2,16",
                 "paymentType":0,
                 "productId":17666,
                 "projectId":32057,
