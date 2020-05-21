@@ -238,13 +238,13 @@ $(function() {
 				var maxNum = seriesData[0],
 					minNum = seriesData[0];
 				for( var j = 0 ; j < seriesData.length; j++) {
-						if(seriesData[j] > maxNum) {
-							maxNum = seriesData[j]
-						}
+					if(parseFloat(seriesData[j]) > parseFloat(maxNum)) {
+						maxNum = seriesData[j]
+					}
 				}
 				for( var m = 0 ; m < seriesData.length; m++) {
-					if(seriesData[m] < minNum) {
-							minNum = seriesData[m]
+					if(parseFloat(seriesData[m]) < parseFloat(minNum)) {
+						minNum = seriesData[m]
 					}
 				}
 				var myChart = echarts.init( chartId,{},{width:$(".qrnhLine").width(),height:$(".qrnhLine").height()} );
@@ -264,13 +264,13 @@ $(function() {
 				var maxNum = seriesData[0],
 					minNum = seriesData[0];
 					for( var j = 0 ; j < seriesData.length; j++) {
-							if(seriesData[j] > maxNum) {
-								maxNum = seriesData[j]
-							}
+						if(parseFloat(seriesData[j]) > parseFloat(maxNum)) {
+							maxNum = seriesData[j]
+						}
 					}
 					for( var m = 0 ; m < seriesData.length; m++) {
-						if(seriesData[m] < minNum) {
-								minNum = seriesData[m]
+						if(parseFloat(seriesData[m]) < parseFloat(minNum)) {
+							minNum = seriesData[m]
 						}
 					}
 				var myChart = echarts.init( chartId,{},{width:$(".wfsyLine").width(),height:$(".wfsyLine").height()} );

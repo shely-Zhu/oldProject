@@ -383,7 +383,9 @@ $(function() {
 			//判断有多少数据 只有一个值时 symbol 为circle 多组值时 symbol为 none
 			if(data.assetsDate && data.assetsDate.length == 1 ){
 				that.data.symboltype = 'circle';
-			}			
+			} else {
+				that.data.symboltype = 'none';
+			}		
 			if( type == 'qrnh'){
 				//画的是七日年化折线图
 				$("#qrnhLine").removeClass("hide");
@@ -420,16 +422,15 @@ $(function() {
 			var maxNum = seriesData[0],
 				minNum = seriesData[0];
 				for( var j = 0 ; j < seriesData.length; j++) {
-					if(seriesData[j] > maxNum) {
+					if(parseFloat(seriesData[j]) > parseFloat(maxNum)) {
 						maxNum = seriesData[j]
 					}
 				}
 				for( var m = 0 ; m < seriesData.length; m++) {
-					if(seriesData[m] < minNum) {
+					if(parseFloat(seriesData[m]) < parseFloat(minNum)) {
 						minNum = seriesData[m]
 					}
 				}
-				console.log("minNum: "+minNum+"maxNum: "+maxNum)
 			var myChart = echarts.init( chartId );
 			myChart.setOption({
 			    tooltip: {
@@ -495,6 +496,7 @@ $(function() {
 			    	axisTick:{
 			    		show: false
 					},
+					min: 'dataMin',
 					max:maxNum,
 					min:minNum,
 					interval: (Number(maxNum) - Number(minNum))/5,
