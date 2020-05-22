@@ -800,7 +800,7 @@ $(function() {
                     textStyle: {
                         color: '#FADFBB'
                     },
-                    confine: true,
+                    confine: false,
                     axisPointer: {
                         type: 'line',
                         lineStyle: {
