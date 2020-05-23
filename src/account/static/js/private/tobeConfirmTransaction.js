@@ -403,7 +403,48 @@ $(function() {
                     } else if (type == 'toView') { //详情
                         window.location.href = site_url.privatePlacementDetail_url + '?projectId=' + proId;
                     } else if (type == 'toVideo') { //视频双录
-                        window.location.href = site_url.realVideoTranscribe_url + '?type=toBeConfirmed&projectId=' + proId + '&reserveId=' + reserveId;
+                        var obj = [{
+                            url: site_url.getCheckInterviewRisk, //调用第几个接口
+                            data: {
+                                projectId: proId, //活动类型
+                            }, //传调用参数
+                            needLogin: true,
+                            needLoading: false,
+                            contentTypeSearch: true,
+                            callbackDone: function(json) {
+                                window.location.href = site_url.realVideoTranscribe_url + '?type=toBeConfirmed&projectId=' + proId + '&reserveId=' + reserveId;
+                            },
+                            callbackFail: function(json) {
+                                var message = json.message, messageArr = [];                                
+                                if (json.status == '4000') {
+                                    if (message.indexOf('|') != -1) {
+                                        messageArr = message.split("|")
+                                        var obj = {
+                                            title: messageArr[1], //如果不传，默认不显示标题
+                                            p: '<p>' + messageArr[0] + '</p>',
+                                            yesTxt: '我知道了',
+                                            hideCelButton: true,
+                                            zIndex: 100,
+                                            htmdEvtYes: 'privateDetailList_10',
+                                            callback: function(t) {},
+                                        };
+                                        $.elasticLayer(obj);
+                                    } else {
+                                        var obj = {
+                                            // title: messageArr[1], //如果不传，默认不显示标题
+                                            p: '<p>' + message + '</p>',
+                                            yesTxt: '我知道了',
+                                            hideCelButton: true,
+                                            zIndex: 100,
+                                            htmdEvtYes: 'privateDetailList_11',
+                                            callback: function(t) {},
+                                        };
+                                        $.elasticLayer(obj);
+                                    }
+                                }
+                            }
+                        }]
+                        $.ajaxLoading(obj);
                     } else if (type == 'reAppointment') { //重新预约
 
                     }
