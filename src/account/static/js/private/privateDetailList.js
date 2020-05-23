@@ -581,10 +581,9 @@ $(function() {
                             }, //传调用参数
                             needLogin: true,
                             needLoading: false,
+                            contentTypeSearch: true,
                             callbackDone: function(json) {
-                                if (json.status == '0000') {
-                                    window.location.href = site_url.realVideoTranscribe_url + '?type=toBeConfirmed&projectId=' + proId + '&reserveId=' + reserveId;
-                                }
+                                window.location.href = site_url.realVideoTranscribe_url + '?type=toBeConfirmed&projectId=' + proId + '&reserveId=' + reserveId;
                             },
                             callbackFail: function(json) {
                                 var message = json.message, messageArr = [];                                
