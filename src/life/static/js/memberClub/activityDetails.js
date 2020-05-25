@@ -360,33 +360,20 @@ $(function() {
                             $.elasticLayer(obj)
                         } else if (data.status == "20017") {
                             // 路演活动，客户风险等级不满足 by zhubingshuai
-                            var obj = [{
-                                url: site_url.getContent_api, // 接口变动下
-                                data: {
-                                    contentBelong: 72, //活动类型
-                                }, //传调用参数
-                                needLogin: true,
-                                needLoading: false,
-                                // contentTypeSearch: true,
-                                callbackDone: function(json) {
-                                    console.log(json)
-                                    var obj = {
-                                        title: '很抱歉', //如果不传，默认不显示标题
-                                        p: '<p>' + json.data.descr + '</p>',
-                                        yesTxt: '重新测评',
-                                        celTxt: '取消报名',
-                                        hideCelButton: false,
-                                        zIndex: 100,
-                                        needYesHref: true, //是否需要把确定按钮改成a标签，默认false
-                                        yesHref:  site_url.riskAppraisal_url+"?type=private", //
-                                        htmdEvtYes:'activityDetails_25',  // 埋点确定按钮属性
-                                        htmdEvtCel:'activityDetails_26',  // 埋点取消按钮属性
-                                        callback: function(t) {},
-                                    };
-                                    $.elasticLayer(obj)
-                                }
-                            }]
-                            $.ajaxLoading(obj);
+                            var obj = {
+                                title: '很抱歉', //如果不传，默认不显示标题
+                                p: '<p>' + data.message + '</p>',
+                                yesTxt: '重新测评',
+                                celTxt: '取消报名',
+                                hideCelButton: false,
+                                zIndex: 100,
+                                needYesHref: true, //是否需要把确定按钮改成a标签，默认false
+                                yesHref:  site_url.riskAppraisal_url+"?type=private", //
+                                htmdEvtYes:'activityDetails_25',  // 埋点确定按钮属性
+                                htmdEvtCel:'activityDetails_26',  // 埋点取消按钮属性
+                                callback: function(t) {},
+                            };
+                            $.elasticLayer(obj)
                         }
                          else if (data.status == "20011"||data.status == "20016") {
                             //客户未成交
