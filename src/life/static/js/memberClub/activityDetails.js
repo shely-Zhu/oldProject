@@ -528,6 +528,8 @@ $(function() {
             },
             //老带新实物奖品弹框--prizeName奖品名称successTit成功提示
             successSwConNewOpen: function(successTit, prizeName,url,actForm) {
+                $('#oldToNewPrizesw').show();
+                $('.mask').show();
                 if(url){
                     //有url
                     $('#oldToNewPrizesw').find(".hideBox").removeClass()
@@ -542,11 +544,11 @@ $(function() {
                     $('#oldToNewPrizesw').find('.successTit').html(successTit);
                 }
                 $('#oldToNewPrizesw').find('.prizeName span').html(prizeName);
-                $('#oldToNewPrizesw').show();
-                $('.mask').show();
             },
             //老带新电子奖品弹框--prizeName奖品名称successTit成功提示
             successDzConNewOpen: function(successTit, prizeName,url,actForm) {
+                $('#oldToNewPrizedz').show();
+                $('.mask').show();
                 if(url){
                     //有url
                     $('#oldToNewPrizedz').find(".hideBox").removeClass()
@@ -561,11 +563,11 @@ $(function() {
                     $('#oldToNewPrizedz').find('.successTit').html(successTit);
                 }
                 $('#oldToNewPrizedz').find('.prizeName span').html(prizeName);
-                $('#oldToNewPrizedz').show();
-                $('.mask').show();
             },
             //老带新无奖品弹框--successTit成功提示
             successNoConNewOpen: function(successTit,url,actForm) {
+                $('#oldToNewNoPrize').show();
+                $('.mask').show();
                 if(url){
                     //有url
                     $('#oldToNewNoPrize').find(".hideBox").removeClass()
@@ -579,8 +581,6 @@ $(function() {
                 if (successTit) {
                     $('#oldToNewNoPrize').find('.successTit').html(successTit);
                 }
-                $('#oldToNewNoPrize').show();
-                $('.mask').show();
             },
             //老带新提示弹框
             oldToNewTip: function(content) {
@@ -590,6 +590,8 @@ $(function() {
             },
             //非老带新实物奖品弹框--prizeName奖品名称successTit成功提示
             successSwConOpen: function(successTit, prizeName,url,actForm) {
+                $('#notOldToNewPrizesw').show();
+                $('.mask').show();
                 if(url){
                     //有url
                     $('#notOldToNewPrizesw').find(".hideBox").removeClass()
@@ -604,11 +606,11 @@ $(function() {
                     $('#notOldToNewPrizesw').find('.successTit').html(successTit);
                 }
                 $('#notOldToNewPrizesw').find('.prizeName span').html(prizeName);
-                $('#notOldToNewPrizesw').show();
-                $('.mask').show();
             },
             //非老带新电子奖品弹框--prizeName奖品名称successTit成功提示
             successDzConOpen: function(successTit, prizeName,url,actForm) {
+                $('#notOldToNewPrizedz').show();
+                $('.mask').show();
                 if(url){
                     //有url
                     $('#notOldToNewPrizedz').find(".hideBox").removeClass()
@@ -623,11 +625,11 @@ $(function() {
                     $('#notOldToNewPrizedz').find('.successTit').html(successTit);
                 }
                 $('#notOldToNewPrizedz').find('.prizeName span').html(prizeName);
-                $('#notOldToNewPrizedz').show();
-                $('.mask').show();
             },
             //非老带新无奖品弹框--successTit成功提示
             successNoConOpen: function(successTit,url,actForm,type) {
+                $('#notOldToNewNoPrize').show();
+                $('.mask').show();
                 if(url){
                     //有url
                     $('#notOldToNewNoPrize').find(".hideBox").removeClass()
@@ -644,8 +646,6 @@ $(function() {
                 if(type){
                     $('#notOldToNewNoPrize').find(".successContent").html("尊享专业服务和会员权益，更多精彩尽在恒天财富APP！")
                 }
-                $('#notOldToNewNoPrize').show();
-                $('.mask').show();
             },
             // //老带新并且是否有无直播地址
             // oldToNewOnlineOpen(successTit){
