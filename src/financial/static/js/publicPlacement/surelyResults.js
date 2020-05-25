@@ -101,6 +101,7 @@ $(function() {
                                 that.$e.payTypeInto.html('在线支付');
                             }
                             if (that.gV.flag == 'out') { // 转出
+                                $('.succedTextqqqq').html('预计' + data.estimateDateStr + ' ' + data.estimateTimeStr)
                                 $("#HeadBarpathName").html('转出结果');
                                 $(".cashInto").hide();
                                 $(".cashOut").show();
@@ -116,8 +117,10 @@ $(function() {
                                 if (that.gV.outType == 'common') {
                                     that.$e.toTimeOut.html(data.estimateDateStr + '&nbsp;24:00 前'); //普通转出
                                 } else {
-                                    that.$e.toTimeOut.html(data.estimateTimeStr + '&nbsp;24:00 前'); //快速转出
+                                    // that.$e.toTimeOut.html(data.estimateTimeStr + '&nbsp;24:00 前'); //快速转出
+                                    that.$e.toTimeOut.html('预计' + data.estimateDateStr + ' ' + data.estimateTimeStr); //快速转出
                                 }
+                                
 
                                 that.$e.fundNameOut.html(data.paymentGainsDayStr);
                                 that.$e.fundCodeOut.html(data.fundName);
