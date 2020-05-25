@@ -138,6 +138,7 @@ module.exports = function() {
     this.getDetailActivity_api = http_url.web_url + '/marketing/frontend/getDetailActivity'; //会员俱乐部-活动详情
     this.activityApply_api = http_url.web_url + '/marketing/activityApply'; //会员俱乐部-立即报名
     this.shareInfo_api = http_url.web_url + '/marketing/frontend/shareInfo'; //会员俱乐部-分享给好友
+    this.getContent_api = http_url.web_url + '/content/frontend/getContent'; //获取返回风测不符内容
 
     /*-------------------生活-会员俱乐部 end ------------------------------*/
     /*-------------------银杏研究相关 ------------------------------*/
