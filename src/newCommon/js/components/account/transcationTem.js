@@ -38,6 +38,8 @@ module.exports = function(data, $ele, $id, type) {
         operationNoStr = data[i].operationNo;
         if (operationNoStr) {
             operationNoList = operationNoStr.split(',');
+        } else {
+            operationNoList = [];
         }
         if (operationNoList && operationNoList.length > 0) {
             for (var j = 0; j < operationNoList.length; j++) {
