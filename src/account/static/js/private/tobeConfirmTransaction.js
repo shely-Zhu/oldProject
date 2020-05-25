@@ -425,7 +425,7 @@ $(function() {
                                             yesTxt: '我知道了',
                                             hideCelButton: true,
                                             zIndex: 100,
-                                            htmdEvtYes: 'privateDetailList_10',
+                                            htmdEvtYes: 'tobeConfirmTransaction_15',
                                             callback: function(t) {},
                                         };
                                         $.elasticLayer(obj);
@@ -436,7 +436,7 @@ $(function() {
                                             yesTxt: '我知道了',
                                             hideCelButton: true,
                                             zIndex: 100,
-                                            htmdEvtYes: 'privateDetailList_11',
+                                            htmdEvtYes: 'tobeConfirmTransaction_16',
                                             callback: function(t) {},
                                         };
                                         $.elasticLayer(obj);

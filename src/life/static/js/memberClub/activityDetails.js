@@ -279,23 +279,25 @@ $(function() {
                     callbackFail: function(data) {
                         $('.activityBottomBtnBox').removeClass('disabled');
                         if (data.status == "20003") {
-                            //需要风测
-                            var obj = {
-                                title: '温馨提示', //如果不传，默认不显示标题
-                                p: '<p>' + data.message + '</p>',
-                                yesTxt: '风险测评',
-                                celTxt: '取消',
-                                hideCelButton: false,
-                                zIndex: 100,
-                                needYesHref: true, //是否需要把确定按钮改成a标签，默认false
-                                yesHref: site_url.riskAppraisal_url+"?type=private", //确定按钮a链接的默认href
-                                htmdEvtYes:'activityDetails_10',  // 埋点确定按钮属性
-                                htmdEvtCel:'activityDetails_11',  // 埋点取消按钮属性
-                                callback: function(t) {
+                            window.location.href = site_url.riskAppraisal_url + "?type=private"
 
-                                },
-                            };
-                            $.elasticLayer(obj)
+                            //需要风测 修改直接跳转到风测结果页，by zhubingshuai 2020/05/25
+                            // var obj = {
+                            //     title: '温馨提示', //如果不传，默认不显示标题
+                            //     p: '<p>' + data.message + '</p>',
+                            //     yesTxt: '风险测评',
+                            //     celTxt: '取消',
+                            //     hideCelButton: false,
+                            //     zIndex: 100,
+                            //     needYesHref: true, //是否需要把确定按钮改成a标签，默认false
+                            //     yesHref: site_url.riskAppraisal_url+"?type=private", //确定按钮a链接的默认href
+                            //     htmdEvtYes:'activityDetails_10',  // 埋点确定按钮属性
+                            //     htmdEvtCel:'activityDetails_11',  // 埋点取消按钮属性
+                            //     callback: function(t) {
+
+                            //     },
+                            // };
+                            // $.elasticLayer(obj)
                         } else if (data.status == "20010") {
                             if(!that.gV.idnoCheckflag){
                                 //需要进行合格投资者信息认证
@@ -358,23 +360,33 @@ $(function() {
                             $.elasticLayer(obj)
                         } else if (data.status == "20017") {
                             // 路演活动，客户风险等级不满足 by zhubingshuai
-                            var obj = {
-                                title: '很抱歉', //如果不传，默认不显示标题
-                                p: '<p style="text-align:left">本次活动相关产品或服务与您的风险承受能力不匹配，应进行充分的风险评估，再做出投资决定，是否继续参加活动？</br></br>'+
-                                '当您的风险承担能力或财务状况发生重大变化时，请您重新进行测评。</p>',
-                                yesTxt: '重新测评',
-                                celTxt: '取消报名',
-                                hideCelButton: false,
-                                zIndex: 100,
-                                needYesHref: true, //是否需要把确定按钮改成a标签，默认false
-                                yesHref:  site_url.riskAppraisal_url+"?type=private", //
-                                htmdEvtYes:'activityDetails_25',  // 埋点确定按钮属性
-                                htmdEvtCel:'activityDetails_26',  // 埋点取消按钮属性
-                                callback: function(t) {
-
-                                },
-                            };
-                            $.elasticLayer(obj)
+                            var obj = [{
+                                url: site_url.getContent_api, // 接口变动下
+                                data: {
+                                    contentBelong: 72, //活动类型
+                                }, //传调用参数
+                                needLogin: true,
+                                needLoading: false,
+                                // contentTypeSearch: true,
+                                callbackDone: function(json) {
+                                    console.log(json)
+                                    var obj = {
+                                        title: '很抱歉', //如果不传，默认不显示标题
+                                        p: '<p>' + json.data.descr + '</p>',
+                                        yesTxt: '重新测评',
+                                        celTxt: '取消报名',
+                                        hideCelButton: false,
+                                        zIndex: 100,
+                                        needYesHref: true, //是否需要把确定按钮改成a标签，默认false
+                                        yesHref:  site_url.riskAppraisal_url+"?type=private", //
+                                        htmdEvtYes:'activityDetails_25',  // 埋点确定按钮属性
+                                        htmdEvtCel:'activityDetails_26',  // 埋点取消按钮属性
+                                        callback: function(t) {},
+                                    };
+                                    $.elasticLayer(obj)
+                                }
+                            }]
+                            $.ajaxLoading(obj);
                         }
                          else if (data.status == "20011"||data.status == "20016") {
                             //客户未成交
