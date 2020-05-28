@@ -64,8 +64,9 @@ body{
             border-radius: .2rem;
             min-height: 7.84rem;
             margin: .7rem auto .92rem;
+            position: relative;
             .membershipDetailsContentBox_next{
-                padding: .7rem .35rem .6rem .35rem;
+                padding: 0 .35rem .6rem .35rem;
                 img{
                     width: auto;
                     max-width: 100%;
@@ -74,8 +75,9 @@ body{
                     display: inline;
                     margin: .4rem 0;
                     font-size: 0.44rem;
-                    line-height: 0.8rem;
-                    margin-top: 0.1rem;
+                    height: 1.94rem;
+                    line-height: 1.94rem;
+                    // margin-top: 0.1rem;
                     color:rgba(39,39,39,1);
                     background:linear-gradient(239deg, rgba(187,142,95,1) 0%, rgba(108,69,23,1) 100%);
                     -webkit-background-clip:text;
@@ -89,19 +91,25 @@ body{
                     color: @272727;
                     text-align: justify;
                     line-height: .5rem;
-                    margin: .4rem 0 .5rem 0;
+                    // margin: .4rem 0 .5rem 0;
                 }
-                span{
-                    &.title{
+               
+                .title{
                         font-family: PingFangSC-Regular;
                         font-size: .24rem;
                         color: @9B9B9B;
                         text-align: center;
                         display: block;
                         margin-bottom: .1rem;
-                    }
                 }
-                &>a.tel{
+                .title-tel{
+                    position: absolute;
+                    bottom: 0;
+                    left: .66rem;
+                    height: 2.27rem
+                }
+                
+                .tel{
                     font-family: PingFangSC-Regular;
                     font-size: .24rem;
                     color: @BE894D;
@@ -110,16 +118,17 @@ body{
                 }
                 .linkBtnBox{
                     text-align: center;
-                    margin-top: .86rem;
+                    margin-top: .16rem;
                     height: .8rem;
                     position: relative;
                     a{
-                        position: absolute;
-                        left: 50%;
-                        top: 0;
+                        // position: absolute;
+                        // left: 50%;
+                        // top: 0;
                         width: 4.1rem;
                         height: .8rem;
-                        margin-left: -2.05rem;
+                        display: inline-block;
+                        // margin-left: -2.05rem;
                         //background-image: linear-gradient(-135deg, @F1CDA8 0%, @B57E45 100%);
                         border-radius: .04rem;
                         font-family: PingFangSC-Regular;
@@ -159,9 +168,9 @@ body{
     }
 }
 .show-swiper .swiper-slide .goods {
-	width: 1.4rem;
-	height: 1.4rem;
-	line-height: 1.4rem;
+	width: 1.65rem;
+	height: 1.65rem;
+	line-height: 1.6rem;
 	text-align: center;
 	color: @c009;
     font-size: .24rem;
@@ -179,8 +188,8 @@ body{
     }
     p{
         position: absolute;
-        width: 1.4rem;
-        height: 1.4rem;
+        width: 1.65rem;
+        height: 1.65rem;
         left: 0;
         top: 0;
         font-family: PingFangSC-Regular;
