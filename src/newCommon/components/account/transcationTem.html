@@ -53,11 +53,8 @@
     </div>
     <!-- 预约成功 -->
     {{else}}
-    <!-- 预约撤销 预约过期  预约失败 排队成功 到账中 已到账 -->
+    <!-- 预约撤销 预约过期  预约失败 -->
     <div class="transList" data-projectid="{{projectId}}">
-        {{#if leftTopStatusDesc}}
-        <div class="statusTip">{{leftTopStatusDesc}}</div>
-        {{/if}}
         <!-- 名称 -->
         <div class="listName mt30">{{projectName}}</div>
         <!-- 名称 -->
@@ -84,9 +81,19 @@
         </div>
         {{/if}}
         <!-- 查看合同按钮 -->
-        <!-- 预约图片 -->
-        <div class="typeImg yy"></div>
-        <!-- 预约图片 -->
+        {{#if businessTypeCancel}}
+        <!-- 预约撤单图片 -->
+        <div class="typeImg yycd"></div>
+        <!-- 预约撤销图片 -->
+        {{else if businessTypeOverdue}}
+        <!-- 预约过期图片 -->
+        <div class="typeImg yygq"></div>
+        <!-- 预约过期图片 -->
+        {{else if businessTypeFail}}
+        <!-- 预约失败图片 -->
+        <div class="typeImg yysb"></div>
+        <!-- 预约失败图片 -->
+        {{/if}}
     </div>
     <!-- 预约撤销 预约过期  预约失败 -->
     {{/if}} {{/if}}
@@ -194,7 +201,11 @@
         </div>
         <!-- 金额 -->
         <!-- 赎回图片 -->
+        {{#if businessTypeForceRedeem}}
+        <div class="typeImg qzsh"></div>
+        {{else}}
         <div class="typeImg sh"></div>
+        {{/if}}
         <!-- 赎回图片 -->
     </div>
     <!---------- 赎回状态 ---------->

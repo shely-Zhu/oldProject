@@ -235,6 +235,18 @@ $(function() {
 						//画的是七日年化折线图
 					    var seriesData = data.sevenIncomeRate;
 					}
+				var maxNum = seriesData[0],
+					minNum = seriesData[0];
+				for( var j = 0 ; j < seriesData.length; j++) {
+					if(parseFloat(seriesData[j]) > parseFloat(maxNum)) {
+						maxNum = seriesData[j]
+					}
+				}
+				for( var m = 0 ; m < seriesData.length; m++) {
+					if(parseFloat(seriesData[m]) < parseFloat(minNum)) {
+						minNum = seriesData[m]
+					}
+				}
 				var myChart = echarts.init( chartId,{},{width:$(".qrnhLine").width(),height:$(".qrnhLine").height()} );
 			} else if( type == 'wfsy'){
 				//画的是万份收益折线图
@@ -247,14 +259,26 @@ $(function() {
 						var seriesData = data.unitYldValue;
 					}else{//货币基金
 						//画的是万份受益折线图
-					    var seriesData = data.profitThoudValue;
+						var seriesData = data.profitThoudValue;
+					}
+				var maxNum = seriesData[0],
+					minNum = seriesData[0];
+					for( var j = 0 ; j < seriesData.length; j++) {
+						if(parseFloat(seriesData[j]) > parseFloat(maxNum)) {
+							maxNum = seriesData[j]
+						}
+					}
+					for( var m = 0 ; m < seriesData.length; m++) {
+						if(parseFloat(seriesData[m]) < parseFloat(minNum)) {
+							minNum = seriesData[m]
+						}
 					}
 				var myChart = echarts.init( chartId,{},{width:$(".wfsyLine").width(),height:$(".wfsyLine").height()} );
 			}
+			// console.log("minNum"+minNum+"maxNum:"+maxNum)
 			
 			// {width:$(".line_area").width(),height:$(".line_area").height()}
 			// var myChart = echarts.init( chartId,{},{width:$(".lineDraw").width(),height:$(".lineDraw").height()} );
-			
 			myChart.setOption({
 			    tooltip: {
 			    	trigger: 'axis',
@@ -265,7 +289,7 @@ $(function() {
 			    	textStyle: {
 			    		color:  '#677EC4'
 			    	},
-			    	confine: true,
+			    	confine: false,
 			    	axisPointer: {
 			    		type: 'line',
 			    		lineStyle: {
@@ -317,7 +341,10 @@ $(function() {
 			    	},
 			    	axisLine: {
 			    		show: false
-			    	},
+					},
+					max:maxNum,
+					min:minNum,
+					interval: (Number(maxNum) - Number(minNum))/5,
 			    	splitLine:{
 			    		lineStyle: {
 			    			color: '#FADFBB'

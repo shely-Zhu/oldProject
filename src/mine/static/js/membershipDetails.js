@@ -36,7 +36,7 @@ $(function() {
             //获取滑动图片的起始位置
             var xPX = 100 * ($('body').width() / 750) * 0.5;
             //获取每个滑动图片的外边距
-            var marW = 100 * ($('body').width() / 750) * 0.56;
+            var marW = 100 * ($('body').width() / 750) * 0.8;
             swiperShow = new Swiper(".show-swiper", {
                 slidesPerView: "auto", //
                 watchSlidesProgress: !0,
@@ -100,11 +100,7 @@ $(function() {
                     generateTemplate(data, that.$e.membershipDetailsSilderBox, that.$e.membershipDetailsListTemplateId);
                     that.swiperInit(parseInt(that.gV.index), json.data.length);
                     // $(".lazyload").lazyload()
-                },
-                callbackNoData: function(json) {
-                    console.log(json)
                 }
-
             }];
             $.ajaxLoading(obj);
         },

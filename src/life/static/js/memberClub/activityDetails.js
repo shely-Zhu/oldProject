@@ -279,23 +279,25 @@ $(function() {
                     callbackFail: function(data) {
                         $('.activityBottomBtnBox').removeClass('disabled');
                         if (data.status == "20003") {
-                            //需要风测
-                            var obj = {
-                                title: '温馨提示', //如果不传，默认不显示标题
-                                p: '<p>' + data.message + '</p>',
-                                yesTxt: '风险测评',
-                                celTxt: '取消',
-                                hideCelButton: false,
-                                zIndex: 100,
-                                needYesHref: true, //是否需要把确定按钮改成a标签，默认false
-                                yesHref: site_url.riskAppraisal_url+"?type=private", //确定按钮a链接的默认href
-                                htmdEvtYes:'activityDetails_10',  // 埋点确定按钮属性
-                                htmdEvtCel:'activityDetails_11',  // 埋点取消按钮属性
-                                callback: function(t) {
+                            window.location.href = site_url.riskAppraisal_url + "?type=private"
 
-                                },
-                            };
-                            $.elasticLayer(obj)
+                            //需要风测 修改直接跳转到风测结果页，by zhubingshuai 2020/05/25
+                            // var obj = {
+                            //     title: '温馨提示', //如果不传，默认不显示标题
+                            //     p: '<p>' + data.message + '</p>',
+                            //     yesTxt: '风险测评',
+                            //     celTxt: '取消',
+                            //     hideCelButton: false,
+                            //     zIndex: 100,
+                            //     needYesHref: true, //是否需要把确定按钮改成a标签，默认false
+                            //     yesHref: site_url.riskAppraisal_url+"?type=private", //确定按钮a链接的默认href
+                            //     htmdEvtYes:'activityDetails_10',  // 埋点确定按钮属性
+                            //     htmdEvtCel:'activityDetails_11',  // 埋点取消按钮属性
+                            //     callback: function(t) {
+
+                            //     },
+                            // };
+                            // $.elasticLayer(obj)
                         } else if (data.status == "20010") {
                             if(!that.gV.idnoCheckflag){
                                 //需要进行合格投资者信息认证
@@ -335,7 +337,8 @@ $(function() {
                                 $.elasticLayer(obj) 
                             }
                             
-                        } else if (data.status == "20005") {
+                        } 
+                        else if (data.status == "20005") {
                             //需要进行合格投资者信息认证
                             var obj = {
                                 title: '温馨提示', //如果不传，默认不显示标题
@@ -353,6 +356,22 @@ $(function() {
                                 callback: function(t) {
 
                                 },
+                            };
+                            $.elasticLayer(obj)
+                        } else if (data.status == "20017") {
+                            // 路演活动，客户风险等级不满足 by zhubingshuai
+                            var obj = {
+                                title: '很抱歉', //如果不传，默认不显示标题
+                                p: '<p>' + data.message + '</p>',
+                                yesTxt: '重新测评',
+                                celTxt: '取消报名',
+                                hideCelButton: false,
+                                zIndex: 100,
+                                needYesHref: true, //是否需要把确定按钮改成a标签，默认false
+                                yesHref:  site_url.riskAppraisal_url+"?type=private", //
+                                htmdEvtYes:'activityDetails_25',  // 埋点确定按钮属性
+                                htmdEvtCel:'activityDetails_26',  // 埋点取消按钮属性
+                                callback: function(t) {},
                             };
                             $.elasticLayer(obj)
                         }
@@ -496,6 +515,8 @@ $(function() {
             },
             //老带新实物奖品弹框--prizeName奖品名称successTit成功提示
             successSwConNewOpen: function(successTit, prizeName,url,actForm) {
+                $('#oldToNewPrizesw').show();
+                $('.mask').show();
                 if(url){
                     //有url
                     $('#oldToNewPrizesw').find(".hideBox").removeClass()
@@ -510,11 +531,11 @@ $(function() {
                     $('#oldToNewPrizesw').find('.successTit').html(successTit);
                 }
                 $('#oldToNewPrizesw').find('.prizeName span').html(prizeName);
-                $('#oldToNewPrizesw').show();
-                $('.mask').show();
             },
             //老带新电子奖品弹框--prizeName奖品名称successTit成功提示
             successDzConNewOpen: function(successTit, prizeName,url,actForm) {
+                $('#oldToNewPrizedz').show();
+                $('.mask').show();
                 if(url){
                     //有url
                     $('#oldToNewPrizedz').find(".hideBox").removeClass()
@@ -529,11 +550,11 @@ $(function() {
                     $('#oldToNewPrizedz').find('.successTit').html(successTit);
                 }
                 $('#oldToNewPrizedz').find('.prizeName span').html(prizeName);
-                $('#oldToNewPrizedz').show();
-                $('.mask').show();
             },
             //老带新无奖品弹框--successTit成功提示
             successNoConNewOpen: function(successTit,url,actForm) {
+                $('#oldToNewNoPrize').show();
+                $('.mask').show();
                 if(url){
                     //有url
                     $('#oldToNewNoPrize').find(".hideBox").removeClass()
@@ -547,8 +568,6 @@ $(function() {
                 if (successTit) {
                     $('#oldToNewNoPrize').find('.successTit').html(successTit);
                 }
-                $('#oldToNewNoPrize').show();
-                $('.mask').show();
             },
             //老带新提示弹框
             oldToNewTip: function(content) {
@@ -558,6 +577,8 @@ $(function() {
             },
             //非老带新实物奖品弹框--prizeName奖品名称successTit成功提示
             successSwConOpen: function(successTit, prizeName,url,actForm) {
+                $('#notOldToNewPrizesw').show();
+                $('.mask').show();
                 if(url){
                     //有url
                     $('#notOldToNewPrizesw').find(".hideBox").removeClass()
@@ -572,11 +593,11 @@ $(function() {
                     $('#notOldToNewPrizesw').find('.successTit').html(successTit);
                 }
                 $('#notOldToNewPrizesw').find('.prizeName span').html(prizeName);
-                $('#notOldToNewPrizesw').show();
-                $('.mask').show();
             },
             //非老带新电子奖品弹框--prizeName奖品名称successTit成功提示
             successDzConOpen: function(successTit, prizeName,url,actForm) {
+                $('#notOldToNewPrizedz').show();
+                $('.mask').show();
                 if(url){
                     //有url
                     $('#notOldToNewPrizedz').find(".hideBox").removeClass()
@@ -591,11 +612,11 @@ $(function() {
                     $('#notOldToNewPrizedz').find('.successTit').html(successTit);
                 }
                 $('#notOldToNewPrizedz').find('.prizeName span').html(prizeName);
-                $('#notOldToNewPrizedz').show();
-                $('.mask').show();
             },
             //非老带新无奖品弹框--successTit成功提示
             successNoConOpen: function(successTit,url,actForm,type) {
+                $('#notOldToNewNoPrize').show();
+                $('.mask').show();
                 if(url){
                     //有url
                     $('#notOldToNewNoPrize').find(".hideBox").removeClass()
@@ -612,8 +633,6 @@ $(function() {
                 if(type){
                     $('#notOldToNewNoPrize').find(".successContent").html("尊享专业服务和会员权益，更多精彩尽在恒天财富APP！")
                 }
-                $('#notOldToNewNoPrize').show();
-                $('.mask').show();
             },
             // //老带新并且是否有无直播地址
             // oldToNewOnlineOpen(successTit){

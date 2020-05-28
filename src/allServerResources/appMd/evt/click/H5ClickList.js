@@ -490,6 +490,8 @@ var clickList = {
 	"privateDetailList_12":{ evtid: 'privateDetailList_12', topic: '取消预约_确定', info: ''},
 	"privateDetailList_13":{ evtid: 'privateDetailList_13', topic: '取消预约_取消', info: ''},
 	"privateDetailList_14":{ evtid: 'privateDetailList_14', topic: '取消预约_我明白了', info: ''},
+	"privateDetailList_15":{ evtid: 'privateDetailList_15', topic: '风险测评级别不符_我知道了', info: ''},
+	"privateDetailList_16":{ evtid: 'privateDetailList_16', topic: '处理失败_我知道了', info: ''},
 
 	// 确认逻辑中涉及的点击事件
 	"privateDetailList_0001" : { evtid: 'privateDetailList_0001', topic: '待确认交易-账户冻结提示_确定', info: ''} ,
@@ -534,6 +536,8 @@ var clickList = {
 	"tobeConfirmTransaction_12":{ evtid: 'tobeConfirmTransaction_12', topic: '待确认交易_取消预约_取消', info: ''},
 	"tobeConfirmTransaction_13":{ evtid: 'tobeConfirmTransaction_13', topic: '待确认交易_我知道了', info: ''},
 	"tobeConfirmTransaction_14":{ evtid: 'tobeConfirmTransaction_14', topic: '已确认交易_未确认行为确认单_立即查看', info: ''},
+	"tobeConfirmTransaction_15":{ evtid: 'tobeConfirmTransaction_15', topic: '风险不匹配_我知道了', info: ''},
+	"tobeConfirmTransaction_16":{ evtid: 'tobeConfirmTransaction_16', topic: '接口处理失败_我知道了', info: ''},
 
 	// 确认逻辑中涉及的点击事件
 	"tobeConfirmTransaction_0001" : { evtid: 'tobeConfirmTransaction_0001', topic: '待确认交易-账户冻结提示_确定', info: ''} ,

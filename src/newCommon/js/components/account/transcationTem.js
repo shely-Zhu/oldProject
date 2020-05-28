@@ -32,6 +32,9 @@ module.exports = function(data, $ele, $id, type) {
         data[i].businessType0 = data[i].businessType == 0 && (data[i].leftTopStatus == 5) ? 1 : 0; //认购
         data[i].businessType1 = data[i].businessType == 1 && (data[i].leftTopStatus == 5) ? 1 : 0; //申购
         data[i].businessTypeSucc = data[i].leftTopStatus == 5 ? 1 : 0; //申购
+        data[i].businessTypeCancel = (data[i].businessType == 0 || data[i].businessType == 1) && (data[i].leftTopStatus == 21) ? 1 : 0; //预约撤单
+        data[i].businessTypeOverdue = (data[i].businessType == 0 || data[i].businessType == 1) && (data[i].leftTopStatus == 22) ? 1 : 0; //预约过期
+        data[i].businessTypeFail = (data[i].businessType == 0 || data[i].businessType == 1) && (data[i].leftTopStatus == 23) ? 1 : 0; //预约失败
         //待确认的预约
 
         // 按钮的字段
@@ -90,6 +93,8 @@ module.exports = function(data, $ele, $id, type) {
         data[i].appointmentFailed = data[i].leftBottomStatus == 19 ? 1 : 0; //合同审核失败
         //赎回
         data[i].businessTypeRedeem = (data[i].businessType == 2) || (data[i].businessType == 9) || (data[i].businessType == 8) ? 1 : 0;
+        // 强制赎回
+        data[i].businessTypeForceRedeem = (data[i].businessType == 9) || (data[i].businessType == 8) ? 1 : 0;
         //分红
         data[i].businessTypeBonus = data[i].businessType == 7 ? 1 : 0;
         //已完成的预约

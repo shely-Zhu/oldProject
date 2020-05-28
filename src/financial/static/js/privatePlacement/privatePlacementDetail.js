@@ -776,7 +776,19 @@ $(function() {
                     xAxisData = data.profitThoudDate,
                     seriesData = data.sevenIncomeRate;
             }
-
+            var maxNum = seriesData[0],
+                minNum = seriesData[0];
+            for( var j = 0 ; j < seriesData.length; j++) {
+                if(parseFloat(seriesData[j]) > parseFloat(maxNum)) {
+                    maxNum = seriesData[j]
+                }
+            }
+            for( var m = 0 ; m < seriesData.length; m++) {
+                if(parseFloat(seriesData[m]) < parseFloat(minNum)) {
+                    minNum = seriesData[m]
+                }
+            }
+            // console.log("minNum"+s+"maxNum:"+maxNum)
             var myChart = echarts.init(chartId);
             myChart.setOption({
                 tooltip: {
@@ -788,7 +800,7 @@ $(function() {
                     textStyle: {
                         color: '#FADFBB'
                     },
-                    confine: true,
+                    confine: false,
                     axisPointer: {
                         type: 'line',
                         lineStyle: {
@@ -843,6 +855,9 @@ $(function() {
                     axisTick: {
                         show: false
                     },
+                    max:maxNum,
+					min:minNum,
+					interval: (Number(maxNum) - Number(minNum))/5,
                     axisLine: {
                         show: false
                     },
