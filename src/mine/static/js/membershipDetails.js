@@ -36,7 +36,7 @@ $(function() {
             //获取滑动图片的起始位置
             var xPX = 100 * ($('body').width() / 750) * 0.5;
             //获取每个滑动图片的外边距
-            var marW = 100 * ($('body').width() / 750) * 0.8;
+            var marW = 100 * ($('body').width() / 750) * 0.55;
             swiperShow = new Swiper(".show-swiper", {
                 slidesPerView: "auto", //
                 watchSlidesProgress: !0,
